@@ -1,5 +1,5 @@
-#ifndef OPENNT_STAGE_NTRTL_H
-#define OPENNT_STAGE_NTRTL_H
+#ifndef STAGE_NTRTL_H
+#define STAGE_NTRTL_H
 
 #include <nt.h>
 

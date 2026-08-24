@@ -3,23 +3,23 @@
 #include <windows.h>
 
 #include "opennt-bop/ingress/dem_direct_session.h"
-#include "adapter-softpc/bx_ntvdm_host_handle_manager.h"
+#include "adapter-softpc/host_handle_manager.h"
 #include "opennt-bop/opennt_ccpu_sas_facade.h"
 #include "opennt-bop/ingress/redir_native_session.h"
-BOOLEAN bx_ntvdm_vr_initialized_provider(VOID);
+BOOLEAN runtime_vr_initialized_provider(VOID);
 #include "opennt-bop/ingress/redir_v2_generic_ud_bridge.h"
 
-_Static_assert(sizeof(bx_ntvdm_ccpu_sas_call) == sizeof(bx_ntvdm_demhndl_call),
+_Static_assert(sizeof(runtime_ccpu_sas_call) == sizeof(runtime_demhndl_call),
     "the generic CCPU/SAS facade must not create a second call frame");
 
-static void make_event(struct bx_ntvdm_generic_ud_event_v1 *event, uint8_t service)
+static void make_event(struct runtime_generic_ud_event_v1 *event, uint8_t service)
 {
     memset(event, 0, sizeof(*event));
-    event->magic = BX_NTVDM_GENERIC_UD_EVENT_V1_MAGIC;
-    event->abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
+    event->magic = RUNTIME_GENERIC_UD_EVENT_V1_MAGIC;
+    event->abi_version = RUNTIME_GENERIC_UD_EVENT_V1_VERSION;
     event->struct_bytes = sizeof(*event);
     event->vector = 6u;
-    event->execution_mode = BX_NTVDM_CPU_EXECUTION_REAL;
+    event->execution_mode = RUNTIME_CPU_EXECUTION_REAL;
     event->fault_rip = 0x2400u;
     event->eip = 0x2400u;
     event->window_bytes = 4u;
@@ -29,10 +29,10 @@ static void make_event(struct bx_ntvdm_generic_ud_event_v1 *event, uint8_t servi
     event->window[3] = service;
 }
 
-static int expect(struct bx_ntvdm_generic_ud_outcome_v1 *outcome, int carry,
+static int expect(struct runtime_generic_ud_outcome_v1 *outcome, int carry,
     uint16_t ax)
 {
-    return outcome->disposition == BX_NTVDM_GENERIC_UD_RESUME &&
+    return outcome->disposition == RUNTIME_GENERIC_UD_RESUME &&
         outcome->resume_rip == 0x2404u &&
         ((outcome->eflags_values & 1u) != 0u) == carry &&
         (outcome->gpr16_write_mask & 1u) != 0u &&
@@ -61,16 +61,16 @@ static uint16_t get16(const uint8_t *bytes)
 { return (uint16_t)(bytes[0] | ((uint16_t)bytes[1] << 8)); }
 
 typedef struct mailslot_fixture_state {
-    bx_ntvdm_host_handle_manager *handles;
+    runtime_host_handle_manager *handles;
     uint8_t memory[2048];
 } mailslot_fixture_state;
 
 static int fixture_publish(void *state, HANDLE handle, uint32_t *token, DWORD *error)
-{ return bx_ntvdm_host_handle_manager_publish(((mailslot_fixture_state *)state)->handles, handle, BX_NTVDM_HOST_HANDLE_OWNED, token, error); }
+{ return runtime_host_handle_manager_publish(((mailslot_fixture_state *)state)->handles, handle, RUNTIME_HOST_HANDLE_OWNED, token, error); }
 static int fixture_lookup(void *state, uint32_t token, HANDLE *handle)
-{ return bx_ntvdm_host_handle_manager_lookup_handle(((mailslot_fixture_state *)state)->handles, token, handle); }
+{ return runtime_host_handle_manager_lookup_handle(((mailslot_fixture_state *)state)->handles, token, handle); }
 static int fixture_release(void *state, uint32_t token, DWORD *error)
-{ return bx_ntvdm_host_handle_manager_release(((mailslot_fixture_state *)state)->handles, token, error); }
+{ return runtime_host_handle_manager_release(((mailslot_fixture_state *)state)->handles, token, error); }
 static int fixture_attr(void *state, uint8_t drive, const wchar_t *path, DWORD *value, DWORD *error)
 { (void)state; (void)drive; (void)path; if (value) *value = 0u; if (error) *error = ERROR_FILE_NOT_FOUND; return 0; }
 static int fixture_set_attr(void *state, uint8_t drive, const wchar_t *path, DWORD value, DWORD *error)
@@ -84,30 +84,30 @@ static int mailslot_regression(void)
 {
     uint16_t mailslot_handle, second_mailslot_handle;
     mailslot_fixture_state state;
-    bx_ntvdm_dem_direct_context direct;
-    bx_ntvdm_redir_native_session session;
-    struct bx_ntvdm_generic_ud_event_v1 event;
-    struct bx_ntvdm_generic_ud_outcome_v1 outcome;
+    runtime_dem_direct_context direct;
+    runtime_redir_native_session session;
+    struct runtime_generic_ud_event_v1 event;
+    struct runtime_generic_ud_outcome_v1 outcome;
     const char name[] = "\\MAILSLOT\\ntdos64-t251-s4";
     static const uint8_t message[] = { 'b', 'x', '-', 'v', 'd', 'm' };
     memset(&state, 0, sizeof(state));
-    state.handles = bx_ntvdm_host_handle_manager_session();
-    if (!bx_ntvdm_host_handle_manager_initialize(state.handles)) return 0;
+    state.handles = runtime_host_handle_manager_session();
+    if (!runtime_host_handle_manager_initialize(state.handles)) return 0;
     memcpy(state.memory + 0x100u, name, sizeof(name));
     memset(&direct, 0, sizeof(direct));
-    direct.magic = BX_NTVDM_DEM_DIRECT_CONTEXT_MAGIC;
-    direct.abi_version = BX_NTVDM_DEM_DIRECT_CONTEXT_VERSION;
+    direct.magic = RUNTIME_DEM_DIRECT_CONTEXT_MAGIC;
+    direct.abi_version = RUNTIME_DEM_DIRECT_CONTEXT_VERSION;
     direct.struct_bytes = sizeof(direct); direct.state = &state;
     direct.publish_handle = fixture_publish; direct.lookup_handle = fixture_lookup;
     direct.release_handle = fixture_release; direct.query_attributes = fixture_attr;
     direct.set_attributes = fixture_set_attr;
-    if (!bx_ntvdm_redir_native_session_initialize(&session, &direct, &state,
-            fixture_read, fixture_write) || !bx_ntvdm_redir_native_session_bind(&session)) return 0;
+    if (!runtime_redir_native_session_initialize(&session, &direct, &state,
+            fixture_read, fixture_write) || !runtime_redir_native_session_bind(&session)) return 0;
     /* 57:00 requires the original VDD/CCPU/DLC/ICA composition.  It must
      * fail explicitly rather than restore the former artificial loaded bit;
      * the synchronous source-mirrored helper paths below are independent. */
     make_event(&event, 0x00u);
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+    if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 0;
     /* `namepipe.asm` passes BP:BX as an opaque 32-bit token and DS:SI as the
      * packed descriptor.  The original `int5c.asm` later consumes 57:26;
@@ -142,12 +142,12 @@ static int mailslot_regression(void)
         make_event(&event, 0x23u);
         event.eax = 0x0086u; event.ebx = token & 0xffffu; event.ebp = token >> 16;
         event.ds = 0x0010u; event.esi = 0x0200u;
-        if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 0u)) {
+        if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 0u)) {
             CloseHandle(server); return 0;
         }
         for (spins = 0u; spins < 100u; ++spins) {
             make_event(&event, 0x26u);
-            if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome)) { CloseHandle(server); return 0; }
+            if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome)) { CloseHandle(server); return 0; }
             if ((outcome.eflags_values & 1u) != 0u) break;
             Sleep(1u);
         }
@@ -165,14 +165,14 @@ static int mailslot_regression(void)
     make_event(&event, 0x0bu);
     event.eax = 0x0042u; event.ebx = 64u; event.ecx = 64u;
     event.ds = 0x0010u; event.esi = 0u; event.es = 0x0020u; event.edi = 0x0004u;
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+    if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         !expect(&outcome, 0, outcome.gpr16_values[0]) || outcome.gpr16_values[0] == 0u) return 0;
     /* DIVERGENCE(BOP-DIV-058): the session-owned host-handle map allocates
      * opaque tokens across owners, so follow the returned token rather than
      * the original private mailslot bitmap's first value. */
     mailslot_handle = outcome.gpr16_values[0];
     make_event(&event, 0x0au); event.ebx = mailslot_handle;
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 64u)) return 0;
+    if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 64u)) return 0;
     /* DosWriteMailslotStruct = timeout dword + 16:16 source buffer. */
     state.memory[0x200u] = 0u; state.memory[0x201u] = 0u;
     state.memory[0x202u] = 0u; state.memory[0x203u] = 0u;
@@ -181,69 +181,69 @@ static int mailslot_regression(void)
     memcpy(state.memory + 0x300u, message, sizeof(message));
     make_event(&event, 0x0eu); event.ds = 0x0010u; event.esi = 0u;
     event.es = 0x0020u; event.edi = 0u; event.ecx = sizeof(message);
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 0u)) return 0;
+    if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 0u)) return 0;
     make_event(&event, 0x0cu); event.ebx = mailslot_handle; event.es = 0x0010u; event.edi = 0x0400u;
     /* The original `vrmslot.c` explicitly declines DOS mailslot peek: the
      * Win32 mailslot API has no non-destructive read.  Do not retain the
      * former source-derived peek cache as a second provider. */
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+    if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         !expect(&outcome, 1, ERROR_NOT_SUPPORTED)) return 0;
     make_event(&event, 0x0du); event.ebx = mailslot_handle; event.es = 0x0010u; event.edi = 0x0420u;
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, sizeof(message)) ||
+    if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, sizeof(message)) ||
         memcmp(state.memory + 0x520u, message, sizeof(message)) != 0) return 0;
     make_event(&event, 0x09u); event.eax = 0x0042u; event.ebx = mailslot_handle;
     /* The original body returns ES:DI/DX but does not stage AX. */
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
-        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME || outcome.resume_rip != 0x2404u ||
+    if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+        outcome.disposition != RUNTIME_GENERIC_UD_RESUME || outcome.resume_rip != 0x2404u ||
         (outcome.eflags_values & 1u) != 0u || (outcome.gpr16_write_mask & 1u) != 0u ||
         outcome.gpr16_values[2] != 0u || outcome.gpr16_values[7] != 4u ||
         (outcome.segment_write_mask & 1u) == 0u || outcome.segment_values[0] != 0x0020u) return 0;
     make_event(&event, 0x0bu);
     event.eax = 0x0042u; event.ebx = 64u; event.ecx = 64u;
     event.ds = 0x0010u; event.esi = 0u; event.es = 0x0020u; event.edi = 4u;
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+    if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         !expect(&outcome, 0, outcome.gpr16_values[0]) || outcome.gpr16_values[0] == 0u ||
         outcome.gpr16_values[0] == mailslot_handle) return 0;
     second_mailslot_handle = outcome.gpr16_values[0];
     make_event(&event, 0x0fu); event.eax = 0x0042u;
     /* OpenNT's VrTerminateMailslots is a cleanup helper: it resumes with CF
      * clear but does not manufacture an AX result. */
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
-        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME || outcome.resume_rip != 0x2404u ||
+    if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+        outcome.disposition != RUNTIME_GENERIC_UD_RESUME || outcome.resume_rip != 0x2404u ||
         (outcome.eflags_values & 1u) != 0u || (outcome.gpr16_write_mask & 1u) != 0u) return 0;
     make_event(&event, 0x0au); event.ebx = second_mailslot_handle;
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+    if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         (outcome.eflags_values & 1u) == 0u || outcome.gpr16_values[0] != ERROR_INVALID_HANDLE) return 0;
-    bx_ntvdm_redir_native_session_unbind(&session);
-    bx_ntvdm_host_handle_manager_reset(state.handles);
+    runtime_redir_native_session_unbind(&session);
+    runtime_host_handle_manager_reset(state.handles);
     return 1;
 }
 #endif
 
 int main(void)
 {
-    bx_ntvdm_dem_direct_host_session host;
-    bx_ntvdm_redir_native_session session;
-    struct bx_ntvdm_generic_ud_event_v1 event;
-    struct bx_ntvdm_generic_ud_outcome_v1 outcome;
+    runtime_dem_direct_host_session host;
+    runtime_redir_native_session session;
+    struct runtime_generic_ud_event_v1 event;
+    struct runtime_generic_ud_outcome_v1 outcome;
     HANDLE server = INVALID_HANDLE_VALUE, client = INVALID_HANDLE_VALUE;
     DWORD transferred = 0u, error = 0u;
     char bytes[8] = {0};
     char pipe_name[] = "\\\\localhost\\PIPE\\ntdos64-t251-s3";
 
-    if (!bx_ntvdm_dem_direct_host_session_initialize(&host) ||
-        !bx_ntvdm_redir_native_session_initialize(&session,
-            bx_ntvdm_dem_direct_host_session_context(&host), &host,
-            bx_ntvdm_dem_direct_host_session_guest_read,
-            bx_ntvdm_dem_direct_host_session_guest_write) ||
-        !bx_ntvdm_redir_native_session_bind(&session)) return 1;
+    if (!runtime_dem_direct_host_session_initialize(&host) ||
+        !runtime_redir_native_session_initialize(&session,
+            runtime_dem_direct_host_session_context(&host), &host,
+            runtime_dem_direct_host_session_guest_read,
+            runtime_dem_direct_host_session_guest_write) ||
+        !runtime_redir_native_session_bind(&session)) return 1;
     make_event(&event, 0x02u);
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+    if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 2;
     make_event(&event, 0x00u);
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+    if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         !expect(&outcome, 1, ERROR_INVALID_FUNCTION) ||
-        bx_ntvdm_vr_initialized_provider()) return 3;
+        runtime_vr_initialized_provider()) return 3;
     server = CreateNamedPipeW(L"\\\\.\\pipe\\ntdos64-t251-s3", PIPE_ACCESS_DUPLEX,
         PIPE_TYPE_BYTE | PIPE_READMODE_BYTE | PIPE_WAIT, 1u, 64u, 64u, 0u, NULL);
     if (server == INVALID_HANDLE_VALUE) return 4;
@@ -265,20 +265,20 @@ int main(void)
     CloseHandle(client); client = INVALID_HANDLE_VALUE;
     CloseHandle(server); server = INVALID_HANDLE_VALUE;
     make_event(&event, 0x20u);
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+    if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 6;
     make_event(&event, 0x23u);
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+    if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 9;
     make_event(&event, 0x24u);
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+    if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 10;
     make_event(&event, 0x01u);
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+    if (!runtime_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         !expect(&outcome, 1, ERROR_INVALID_FUNCTION) ||
-        bx_ntvdm_vr_initialized_provider()) return 7;
-    bx_ntvdm_redir_native_session_unbind(&session);
-    bx_ntvdm_dem_direct_host_session_reset(&host);
+        runtime_vr_initialized_provider()) return 7;
+    runtime_redir_native_session_unbind(&session);
+    runtime_dem_direct_host_session_reset(&host);
     if (!named_pipe_helper_regression()) return 11;
     puts("T263 S9 Redirector: unavailable lifecycle and synchronous pipe helper paths pass");
     return 0;

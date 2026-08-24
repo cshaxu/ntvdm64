@@ -18,17 +18,17 @@
  * algorithm, so scope the diagnostic compatibility to this translation unit. */
 #pragma warning(disable: 4131 4101)
 
-#define BX_NTVDM_COMMAND_REDIR_ADMITTED_SLICE 1
-#define BX_NTVDM_COMMAND_REDIR_ADMIT_PIPE 1
+#define RUNTIME_COMMAND_REDIR_ADMITTED_SLICE 1
+#define RUNTIME_COMMAND_REDIR_ADMIT_PIPE 1
 
-#if defined(BX_NTVDM_COMMAND_REDIR_ADMIT_PIPE)
+#if defined(RUNTIME_COMMAND_REDIR_ADMIT_PIPE)
 
 #define CMDREDIR_DEBUG	1
 
 PPIPE_INPUT   cmdPipeList = NULL;
 #endif
 
-#if defined(BX_NTVDM_COMMAND_REDIR_ADMIT_PIPE)
+#if defined(RUNTIME_COMMAND_REDIR_ADMIT_PIPE)
 
 BOOL cmdCheckCopyForRedirection (pRdrInfo)
 PREDIRCOMPLETE_INFO pRdrInfo;
@@ -254,7 +254,7 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 
     iStdHandle = getCX();
     /* Divergence: AX:BX is a checked session token, rather than a host pointer. */
-    pRdrInfo = bx_ntvdm_command_misc_redirection_from_guest(
+    pRdrInfo = runtime_command_misc_redirection_from_guest(
         ((ULONG)getAX() << 16) + (ULONG)getBX());
     if (pRdrInfo == NULL) { setCF(1); return; }
 
@@ -269,10 +269,10 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 		    setCF(1);
 		    return;
 		}
-		if (!bx_ntvdm_command_misc_publish_handle(pRdrInfo->ri_hStdInFile)) { setCF(1); return; }
+		if (!runtime_command_misc_publish_handle(pRdrInfo->ri_hStdInFile)) { setCF(1); return; }
 	    }
 	    else {
-		if (!bx_ntvdm_command_misc_publish_handle(pRdrInfo->ri_hStdIn)) { setCF(1); return; }
+		if (!runtime_command_misc_publish_handle(pRdrInfo->ri_hStdIn)) { setCF(1); return; }
 	    }
 	    break;
 
@@ -284,7 +284,7 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 		    setCF(1);
 		    return;
 		}
-		if (!bx_ntvdm_command_misc_publish_handle(pRdrInfo->ri_hStdOutFile)) { setCF(1); return; }
+		if (!runtime_command_misc_publish_handle(pRdrInfo->ri_hStdOutFile)) { setCF(1); return; }
 
 	    }
 	    else {
@@ -293,7 +293,7 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 		// inherit the 32 bit handle of lpt1, so the ouput will
 		// directly go to the LPT1 and a DOS TSR/APP hooking int17
 		// wont see this printing. Is this a big deal???
-		if (!bx_ntvdm_command_misc_publish_handle(pRdrInfo->ri_hStdOut)) { setCF(1); return; }
+		if (!runtime_command_misc_publish_handle(pRdrInfo->ri_hStdOut)) { setCF(1); return; }
 	    }
 	    break;
 
@@ -301,7 +301,7 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 
             if (pRdrInfo->ri_hStdErr == pRdrInfo->ri_hStdOut
                               && pRdrInfo->ri_hStdOutFile != 0) {
-                if (!bx_ntvdm_command_misc_publish_handle(pRdrInfo->ri_hStdOutFile)) { setCF(1); return; }
+                if (!runtime_command_misc_publish_handle(pRdrInfo->ri_hStdOutFile)) { setCF(1); return; }
                 pRdrInfo->ri_hStdErrFile = pRdrInfo->ri_hStdOutFile;
 		break;
 	    }
@@ -313,10 +313,10 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 		    setCF(1);
 		    return;
 		}
-                if (!bx_ntvdm_command_misc_publish_handle(pRdrInfo->ri_hStdErrFile)) { setCF(1); return; }
+                if (!runtime_command_misc_publish_handle(pRdrInfo->ri_hStdErrFile)) { setCF(1); return; }
 	    }
 	    else {
-                if (!bx_ntvdm_command_misc_publish_handle(pRdrInfo->ri_hStdErr)) { setCF(1); return; }
+                if (!runtime_command_misc_publish_handle(pRdrInfo->ri_hStdErr)) { setCF(1); return; }
 	    }
 	    break;
     }
@@ -326,7 +326,7 @@ PREDIRCOMPLETE_INFO pRdrInfo;
     return;
 }
 
-#if defined(BX_NTVDM_COMMAND_REDIR_ADMIT_PIPE)
+#if defined(RUNTIME_COMMAND_REDIR_ADMIT_PIPE)
 
 BOOL cmdHandleStdOutErrWithPipe(
     PREDIRCOMPLETE_INFO pRdrInfo,

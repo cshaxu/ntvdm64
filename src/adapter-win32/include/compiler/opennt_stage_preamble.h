@@ -1,7 +1,7 @@
 /* Staging-only compilation preamble. The OpenNT DEM headers assume the
  * historical build environment has already established Win32 base types. */
-#ifndef OPENNT_STAGE_PREAMBLE_H
-#define OPENNT_STAGE_PREAMBLE_H
+#ifndef STAGE_PREAMBLE_H
+#define STAGE_PREAMBLE_H
 
 #include <windows.h>
 #include <winioctl.h>

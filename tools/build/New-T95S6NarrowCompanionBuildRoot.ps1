@@ -59,9 +59,9 @@ if (Test-Path -LiteralPath $staleMainObject) { throw 'Failed to remove stale bui
 $adapterSources = @(
     'startup_session_environment.c',
     'startup_session.c',
-    'bx_ntvdm_cpu_state_abi.c',
-    'bx_ntvdm_guest_range.c',
-    'bx_ntvdm_guest_write_abi.c',
+    'cpu_state_abi.c',
+    'guest_range.c',
+    'guest_write_abi.c',
     'startup_plan_abi.c'
 )
 $cliSources = @('byob_profile.c', 'byob_identity.c', 'byob_image.c')

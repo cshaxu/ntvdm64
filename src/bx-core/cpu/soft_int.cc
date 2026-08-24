@@ -25,16 +25,16 @@
 #define LOG_THIS BX_CPU_THIS_PTR
 /* DIVERGENCE(BX-CORE-DIV-003): retained default-off copied software-interrupt observation. */
 
-#ifndef BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
-#define BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION 0
+#ifndef RUNTIME_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
+#define RUNTIME_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION 0
 #endif
 
-#if BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
-#include "adapter-softpc/bx_ntvdm_software_interrupt_observation_v1.h"
-#define BX_NTVDM_RECORD_SOFTWARE_INTERRUPT(vector_value) do { \
+#if RUNTIME_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
+#include "adapter-softpc/software_interrupt_observation.h"
+#define RUNTIME_RECORD_SOFTWARE_INTERRUPT(vector_value) do { \
   if (BX_CPU_THIS_PTR real_mode() || BX_CPU_THIS_PTR v8086_mode()) { \
-    struct bx_ntvdm_software_interrupt_observation_v1_record record; \
-    record.version = BX_NTVDM_SOFTWARE_INTERRUPT_OBSERVATION_V1_VERSION; \
+    struct runtime_software_interrupt_observation_v1_record record; \
+    record.version = RUNTIME_SOFTWARE_INTERRUPT_OBSERVATION_V1_VERSION; \
     record.cpu_id = BX_CPU_ID; \
     record.sequence = BX_CPU_THIS_PTR icount; \
     record.rip = RIP; \
@@ -48,11 +48,11 @@
     record.vector = (Bit8u)(vector_value); \
     record.execution_mode = BX_CPU_THIS_PTR real_mode() ? 1u : 3u; \
     record.reserved0 = 0u; \
-    bx_ntvdm_mantle_software_interrupt_observation_v1_record(&record); \
+    runtime_mantle_software_interrupt_observation_v1_record(&record); \
   } \
 } while (0)
 #else
-#define BX_NTVDM_RECORD_SOFTWARE_INTERRUPT(vector_value) do { } while (0)
+#define RUNTIME_RECORD_SOFTWARE_INTERRUPT(vector_value) do { } while (0)
 #endif
 
 BX_INSF_TYPE BX_CPP_AttrRegparmN(1) BX_CPU_C::BOUND_GwMa(bxInstruction_c *i)
@@ -172,7 +172,7 @@ BX_INSF_TYPE BX_CPP_AttrRegparmN(1) BX_CPU_C::INT_Ib(bxInstruction_c *i)
   BX_CPU_THIS_PTR show_flag |= Flag_softint;
 #endif
 
-  BX_NTVDM_RECORD_SOFTWARE_INTERRUPT(vector);
+  RUNTIME_RECORD_SOFTWARE_INTERRUPT(vector);
 
   interrupt(vector, BX_SOFTWARE_INTERRUPT, 0, 0);
 

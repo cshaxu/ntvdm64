@@ -3,16 +3,16 @@
 #include <limits.h>
 #include <stdlib.h>
 
-static const CHAR bx_ntvdm_empty_multisz[2] = { '\0', '\0' };
+static const CHAR runtime_empty_multisz[2] = { '\0', '\0' };
 
-PWCHAR bx_ntvdm_command_environment_snapshot_session(
-    const bx_ntvdm_command_misc_session *session)
+PWCHAR runtime_command_environment_snapshot_session(
+    const runtime_command_misc_session *session)
 {
-    const CHAR *source = bx_ntvdm_empty_multisz;
-    uint32_t bytes = sizeof(bx_ntvdm_empty_multisz);
+    const CHAR *source = runtime_empty_multisz;
+    uint32_t bytes = sizeof(runtime_empty_multisz);
     int characters;
     PWCHAR snapshot;
-    if (session != NULL && bx_ntvdm_command_misc_session_valid(session) &&
+    if (session != NULL && runtime_command_misc_session_valid(session) &&
         session->command_source_environment != NULL &&
         session->command_source_environment_bytes >= 2u) {
         source = session->command_source_environment;
@@ -29,12 +29,12 @@ PWCHAR bx_ntvdm_command_environment_snapshot_session(
     return snapshot;
 }
 
-PWCHAR bx_ntvdm_command_environment_snapshot(void)
+PWCHAR runtime_command_environment_snapshot(void)
 {
-    return bx_ntvdm_command_environment_snapshot_session(
-        bx_ntvdm_command_misc_active_session());
+    return runtime_command_environment_snapshot_session(
+        runtime_command_misc_active_session());
 }
-void bx_ntvdm_command_environment_free_snapshot(PWCHAR snapshot) { free(snapshot); }
+void runtime_command_environment_free_snapshot(PWCHAR snapshot) { free(snapshot); }
 
 BOOL fSeparateWow;
 CHAR comspec[] = "COMSPEC=";
@@ -45,6 +45,6 @@ DWORD cchVDMEnv32;
 
 int RcMessageBox(UINT error, PVOID first, PVOID second, UINT flags)
 {
-    return bx_ntvdm_opennt_rc_message_box(error, (CHAR *)first,
+    return runtime_opennt_rc_message_box(error, (CHAR *)first,
         (CHAR *)second, (ULONG)flags);
 }

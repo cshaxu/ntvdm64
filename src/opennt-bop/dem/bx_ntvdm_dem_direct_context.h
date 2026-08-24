@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_OPENNT_BOP_DEM_DIRECT_CONTEXT_H
-#define BX_NTVDM_OPENNT_BOP_DEM_DIRECT_CONTEXT_H
+#ifndef RUNTIME_OPENNT_BOP_DEM_DIRECT_CONTEXT_H
+#define RUNTIME_OPENNT_BOP_DEM_DIRECT_CONTEXT_H
 
 /*
  * Direct-only DEM host-composition seam.
@@ -12,7 +12,7 @@
 #include <stdint.h>
 #include <windows.h>
 
-typedef struct bx_ntvdm_dem_direct_context {
+typedef struct runtime_dem_direct_context {
     uint32_t magic;
     uint32_t abi_version;
     uint32_t struct_bytes;
@@ -26,12 +26,12 @@ typedef struct bx_ntvdm_dem_direct_context {
         const wchar_t *relative_path, DWORD *attributes_out, DWORD *error_out);
     int (*set_attributes)(void *state, uint8_t drive,
         const wchar_t *relative_path, DWORD attributes, DWORD *error_out);
-} bx_ntvdm_dem_direct_context;
+} runtime_dem_direct_context;
 
-#define BX_NTVDM_DEM_DIRECT_CONTEXT_MAGIC 0x42584443u
-#define BX_NTVDM_DEM_DIRECT_CONTEXT_VERSION 1u
+#define RUNTIME_DEM_DIRECT_CONTEXT_MAGIC 0x42584443u
+#define RUNTIME_DEM_DIRECT_CONTEXT_VERSION 1u
 
-int bx_ntvdm_dem_direct_context_valid(
-    const bx_ntvdm_dem_direct_context *context);
+int runtime_dem_direct_context_valid(
+    const runtime_dem_direct_context *context);
 
 #endif

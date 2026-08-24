@@ -1,11 +1,11 @@
 #include "bx_ntvdm_dem_direct_context.h"
 
-int bx_ntvdm_dem_direct_context_valid(
-    const bx_ntvdm_dem_direct_context *context)
+int runtime_dem_direct_context_valid(
+    const runtime_dem_direct_context *context)
 {
     return context != 0 &&
-        context->magic == BX_NTVDM_DEM_DIRECT_CONTEXT_MAGIC &&
-        context->abi_version == BX_NTVDM_DEM_DIRECT_CONTEXT_VERSION &&
+        context->magic == RUNTIME_DEM_DIRECT_CONTEXT_MAGIC &&
+        context->abi_version == RUNTIME_DEM_DIRECT_CONTEXT_VERSION &&
         context->struct_bytes == sizeof(*context) && context->reserved0 == 0u &&
         context->state != 0 && context->publish_handle != 0 &&
         context->lookup_handle != 0 &&

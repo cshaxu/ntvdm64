@@ -8,40 +8,40 @@
 
 #include <string.h>
 
-typedef struct bx_ntvdm_dem_v2_runtime_session {
-    bx_ntvdm_dem_direct_host_session host;
-    bx_ntvdm_dem_native_session native;
-    bx_ntvdm_redir_native_session redir;
+typedef struct runtime_dem_v2_runtime_session {
+    runtime_dem_direct_host_session host;
+    runtime_dem_native_session native;
+    runtime_redir_native_session redir;
     int bound;
-} bx_ntvdm_dem_v2_runtime_session;
+} runtime_dem_v2_runtime_session;
 
-static bx_ntvdm_dem_v2_runtime_session runtime;
+static runtime_dem_v2_runtime_session runtime;
 
-void bx_ntvdm_dem_v2_runtime_session_reset(void)
+void runtime_dem_v2_runtime_session_reset(void)
 {
     if (runtime.bound) {
-        bx_ntvdm_redir_native_session_unbind(&runtime.redir);
-        bx_ntvdm_dem_native_session_unbind(&runtime.native);
+        runtime_redir_native_session_unbind(&runtime.redir);
+        runtime_dem_native_session_unbind(&runtime.native);
     }
-    bx_ntvdm_dem_direct_host_session_reset(&runtime.host);
+    runtime_dem_direct_host_session_reset(&runtime.host);
     memset(&runtime, 0, sizeof(runtime));
 }
 
-int bx_ntvdm_dem_v2_runtime_session_bind(void)
+int runtime_dem_v2_runtime_session_bind(void)
 {
-    bx_ntvdm_dem_v2_runtime_session_reset();
-    if (!bx_ntvdm_dem_direct_host_session_initialize(&runtime.host) ||
-        !bx_ntvdm_dem_native_session_initialize(&runtime.native,
-            bx_ntvdm_dem_direct_host_session_context(&runtime.host),
-            &runtime.host, bx_ntvdm_dem_direct_host_session_guest_read,
-            bx_ntvdm_dem_direct_host_session_guest_write) ||
-        !bx_ntvdm_dem_native_session_bind(&runtime.native) ||
-        !bx_ntvdm_redir_native_session_initialize(&runtime.redir,
-            bx_ntvdm_dem_direct_host_session_context(&runtime.host),
-            &runtime.host, bx_ntvdm_dem_direct_host_session_guest_read,
-            bx_ntvdm_dem_direct_host_session_guest_write) ||
-        !bx_ntvdm_redir_native_session_bind(&runtime.redir)) {
-        bx_ntvdm_dem_v2_runtime_session_reset();
+    runtime_dem_v2_runtime_session_reset();
+    if (!runtime_dem_direct_host_session_initialize(&runtime.host) ||
+        !runtime_dem_native_session_initialize(&runtime.native,
+            runtime_dem_direct_host_session_context(&runtime.host),
+            &runtime.host, runtime_dem_direct_host_session_guest_read,
+            runtime_dem_direct_host_session_guest_write) ||
+        !runtime_dem_native_session_bind(&runtime.native) ||
+        !runtime_redir_native_session_initialize(&runtime.redir,
+            runtime_dem_direct_host_session_context(&runtime.host),
+            &runtime.host, runtime_dem_direct_host_session_guest_read,
+            runtime_dem_direct_host_session_guest_write) ||
+        !runtime_redir_native_session_bind(&runtime.redir)) {
+        runtime_dem_v2_runtime_session_reset();
         return 0;
     }
     runtime.bound = 1;

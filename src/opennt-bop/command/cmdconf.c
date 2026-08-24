@@ -509,7 +509,7 @@ void ExpandConfigFiles(BOOLEAN bConfig)
           */
 
            // write shell=....
-        bootstrapCommand = bx_ntvdm_command_config_bootstrap_command();
+        bootstrapCommand = runtime_command_config_bootstrap_command();
         if (bootstrapCommand != NULL) {
             /* DIVERGENCE(BOP-DIV-001): NT4's installed command interpreter lived at
              * %SystemRoot%\\System32\\command.com.  The standalone CLI

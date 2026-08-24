@@ -43,7 +43,7 @@ HANDLE CreateFileOem(LPSTR name, DWORD access, DWORD share,
     DWORD conversion_error = wide == NULL ? GetLastError() : ERROR_SUCCESS;
     DWORD first_error = ERROR_SUCCESS, retry_error = ERROR_SUCCESS;
     if (wide == NULL) {
-        bx_ntvdm_demfile_create_observation_v1_record(NULL, access, share,
+        runtime_demfile_create_observation_v1_record(NULL, access, share,
             creation, flags, conversion_error, first_error, retry_error);
         return INVALID_HANDLE_VALUE;
     }
@@ -57,7 +57,7 @@ HANDLE CreateFileOem(LPSTR name, DWORD access, DWORD share,
         result = CreateFileW(wide, access, share, security, creation, flags, template_file);
         if (result == INVALID_HANDLE_VALUE) retry_error = GetLastError();
     }
-    bx_ntvdm_demfile_create_observation_v1_record(wide, access, share,
+    runtime_demfile_create_observation_v1_record(wide, access, share,
         creation, flags, conversion_error, first_error, retry_error);
     free(wide);
     return result;

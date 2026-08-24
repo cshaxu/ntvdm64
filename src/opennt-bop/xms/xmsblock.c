@@ -185,7 +185,7 @@ VOID xmsMoveBlock (VOID)
      * across the adapter boundary.  The shim reads the unchanged 12-byte
      * SS:BP descriptor through checked RAM and performs the same forward-copy
      * operation through the named mechanical RAM owner. */
-    setAX(bx_ntvdm_xms_move_block_from_guest(getSS(), getBP()) ? 1 : 0);
+    setAX(runtime_xms_move_block_from_guest(getSS(), getBP()) ? 1 : 0);
     return;
 }
 

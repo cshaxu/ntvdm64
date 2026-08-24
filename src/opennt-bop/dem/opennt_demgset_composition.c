@@ -24,10 +24,10 @@ void demGetDPBList(void);
 /* Direct composition uses the real Win32 clock API.  A scoped test writer is
  * intentionally opt-in and exists only to avoid mutating the host clock in a
  * local fixture; it is not a mutation-profile backend. */
-static __declspec(thread) bx_ntvdm_demgset_clock_writer g_clock_writer;
-BOOL bx_ntvdm_demgset_set_local_time(const SYSTEMTIME *time)
+static __declspec(thread) runtime_demgset_clock_writer g_clock_writer;
+BOOL runtime_demgset_set_local_time(const SYSTEMTIME *time)
 { return g_clock_writer != NULL ? g_clock_writer(time) : SetLocalTime(time); }
-void bx_ntvdm_demgset_set_clock_writer(bx_ntvdm_demgset_clock_writer writer)
+void runtime_demgset_set_clock_writer(runtime_demgset_clock_writer writer)
 { g_clock_writer = writer; }
 
 /* demGetBDS/demGetBPB are now owned by the directly imported OpenNT
@@ -40,18 +40,18 @@ void bx_ntvdm_demgset_set_clock_writer(bx_ntvdm_demgset_clock_writer writer)
  * preserved DOS far-pointer word pair and current PDB value on later calls. */
 static __declspec(thread) ULONG g_dta_location;
 static __declspec(thread) USHORT g_current_pdb;
-static __declspec(thread) bx_ntvdm_demhndl_extended_error g_extended_error;
+static __declspec(thread) runtime_demhndl_extended_error g_extended_error;
 
-int bx_ntvdm_demgset_register_dta(USHORT ds, USHORT dta_offset,
+int runtime_demgset_register_dta(USHORT ds, USHORT dta_offset,
     USHORT pdb_offset, USHORT error_offset, USHORT wow_offset)
 {
     ULONG dta_location;
     USHORT current_pdb;
     (void)error_offset;
     (void)wow_offset;
-    if (!bx_ntvdm_demhndl_copy_guest(ds, dta_offset, &dta_location,
+    if (!runtime_demhndl_copy_guest(ds, dta_offset, &dta_location,
             sizeof(dta_location)) ||
-        !bx_ntvdm_demhndl_copy_guest(ds, pdb_offset, &current_pdb,
+        !runtime_demhndl_copy_guest(ds, pdb_offset, &current_pdb,
             sizeof(current_pdb))) {
         SetLastError(ERROR_INVALID_ADDRESS);
         return 0;
@@ -65,10 +65,10 @@ int bx_ntvdm_demgset_register_dta(USHORT ds, USHORT dta_offset,
     return 1;
 }
 
-int bx_ntvdm_demgset_invoke(bx_ntvdm_demhndl_call *call)
+int runtime_demgset_invoke(runtime_demhndl_call *call)
 {
     void (*body)(void) = NULL;
-    if (!bx_ntvdm_demhndl_call_valid(call)) return 0;
+    if (!runtime_demhndl_call_valid(call)) return 0;
     switch (call->service) {
     case 0x0du: body = demGetBootDrive; break;
     case 0x0eu: body = demGetDriveFreeSpace; break;
@@ -85,5 +85,5 @@ int bx_ntvdm_demgset_invoke(bx_ntvdm_demhndl_call *call)
     case 0x46u: body = demGetDPBList; break;
     default: return 0;
     }
-    return bx_ntvdm_demhndl_invoke_body(call, body);
+    return runtime_demhndl_invoke_body(call, body);
 }

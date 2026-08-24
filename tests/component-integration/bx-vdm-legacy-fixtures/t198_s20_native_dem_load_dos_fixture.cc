@@ -1,5 +1,5 @@
 #include "bochs.h"
-#include "adapter-softpc/bx_ntvdm_finite_run.h"
+#include "adapter-softpc/finite_run.h"
 #include "bx-vdm/bx_ntvdm_boot_namespace_composition_v1.h"
 
 #include <string.h>
@@ -21,8 +21,8 @@ int main()
   byob_image command = { command_bytes, sizeof(command_bytes) };
   byob_image target = { target_bytes, sizeof(target_bytes) };
   byob_profile_selection profile;
-  bx_ntvdm_boot_namespace_composition_v1 composition;
-  static bx_ntvdm_finite_run_request request;
+  runtime_boot_namespace_composition_v1 composition;
+  static runtime_finite_run_request request;
   unsigned status;
 
   memset(&profile, 0, sizeof(profile));
@@ -43,16 +43,16 @@ int main()
     profile.config_metadata.attributes = profile.autoexec_metadata.attributes = 0x20;
   profile.command_metadata.dos_date = profile.target_metadata.dos_date =
     profile.config_metadata.dos_date = profile.autoexec_metadata.dos_date = 1;
-  if (!bx_ntvdm_boot_namespace_composition_v1_initialize(&composition,
+  if (!runtime_boot_namespace_composition_v1_initialize(&composition,
       &ntdos, &command, &target, 0, &profile) ||
-      !bx_ntvdm_boot_namespace_composition_v1_bind(&composition)) return 1;
-  request.request_version = BX_NTVDM_FINITE_RUN_REQUEST_VERSION;
+      !runtime_boot_namespace_composition_v1_bind(&composition)) return 1;
+  request.request_version = RUNTIME_FINITE_RUN_REQUEST_VERSION;
   memcpy(request.entry_bytes, bytes, sizeof(bytes)); request.entry_byte_count = sizeof(bytes);
   request.entry_physical_address = 0x1000; request.entry_cs = 0x0100;
   request.entry_eip = 0; request.instruction_tick_budget = 64;
   request.ips = 1000000;
   request.preserve_physical_address = 0; request.preserve_byte_count = 0;
-  status = (unsigned)bx_ntvdm_run_finite_bare_bytes(&request);
-  bx_ntvdm_boot_namespace_composition_v1_unbind(&composition);
+  status = (unsigned)runtime_run_finite_bare_bytes(&request);
+  runtime_boot_namespace_composition_v1_unbind(&composition);
   return (int)status;
 }

@@ -10,9 +10,9 @@
 /* OpenNT source: src/opennt/base/mvdm/dos/command/cmdexec.c.
  * Divergence: the admitted binary classifier uses the narrow COMMAND binary
  * shim for the unavailable CCPU/SAS/RTL include closure. */
-#define BX_NTVDM_COMMAND_EXEC_ADMIT_CHECK_BINARY 1
-#define BX_NTVDM_COMMAND_EXEC_ADMIT_LIFECYCLE 1
-#define BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE 1
+#define RUNTIME_COMMAND_EXEC_ADMIT_CHECK_BINARY 1
+#define RUNTIME_COMMAND_EXEC_ADMIT_LIFECYCLE 1
+#define RUNTIME_COMMAND_EXEC_ADMITTED_SLICE 1
 #include "opennt_command_composition.h"
 
 //*****************************************************************************
@@ -28,7 +28,7 @@
 //
 //*****************************************************************************
 
-#if defined(BX_NTVDM_COMMAND_EXEC_ADMIT_CHECK_BINARY) || !defined(BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE)
+#if defined(RUNTIME_COMMAND_EXEC_ADMIT_CHECK_BINARY) || !defined(RUNTIME_COMMAND_EXEC_ADMITTED_SLICE)
 BOOL IsWowAppRunnable(LPSTR lpAppName)
 {
     BOOL Result = TRUE;
@@ -255,10 +255,10 @@ VOID cmdCheckBinary (VOID)
      * base pointer.  The checked session retains the original guest SCSINFO
      * address, so recover the equivalent guest address without host-pointer
      * arithmetic. */
-    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+    usTemp = (USHORT)(runtime_command_binary_scs_address(
         offsetof(SCSINFO, SCS_ComSpec)) >> 4);
     setDS(usTemp);
-    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+    usTemp = (USHORT)(runtime_command_binary_scs_address(
         offsetof(SCSINFO, SCS_ComSpec)) & 0x0fu);
     setDX((usTemp));
 
@@ -290,17 +290,17 @@ VOID cmdCheckBinary (VOID)
         STOREDWORD(pSCSInfo->SCS_ParamBlock.pFCB2,0);
     }
 
-    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+    usTemp = (USHORT)(runtime_command_binary_scs_address(
         offsetof(SCSINFO, SCS_CmdTail)) & 0x0fu);
     STOREWORD(pSCSInfo->SCS_ParamBlock.OffCmdTail,usTemp);
-    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+    usTemp = (USHORT)(runtime_command_binary_scs_address(
         offsetof(SCSINFO, SCS_CmdTail)) >> 4);
     STOREWORD(pSCSInfo->SCS_ParamBlock.SegCmdTail,usTemp);
 
-    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+    usTemp = (USHORT)(runtime_command_binary_scs_address(
         offsetof(SCSINFO, SCS_ParamBlock)) >> 4);
     setES (usTemp);
-    usTemp = (USHORT)(bx_ntvdm_command_binary_scs_address(
+    usTemp = (USHORT)(runtime_command_binary_scs_address(
         offsetof(SCSINFO, SCS_ParamBlock)) & 0x0fu);
     setBX (usTemp);
 
@@ -310,7 +310,7 @@ VOID cmdCheckBinary (VOID)
 
 #endif /* BX_NTVDM_COMMAND_EXEC_ADMIT_CHECK_BINARY */
 
-#if !defined(BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE) || defined(BX_NTVDM_COMMAND_EXEC_ADMIT_LIFECYCLE)
+#if !defined(RUNTIME_COMMAND_EXEC_ADMITTED_SLICE) || defined(RUNTIME_COMMAND_EXEC_ADMIT_LIFECYCLE)
 #define MAX_DIR 68
 
 VOID cmdCreateProcess ( VOID )
@@ -352,7 +352,7 @@ VOID cmdCreateProcess ( VOID )
     /* DIVERGENCE (T236 S2): original code temporarily installs three
      * guest-derived handles process-wide. Preserve its order, but bind them
      * only to the child through the active session's opaque handle table. */
-    Status = bx_ntvdm_command_worker_prepare_startup(&StartupInfo);
+    Status = runtime_command_worker_prepare_startup(&StartupInfo);
 
     /*
      *  Warning, pEnv32 currently points to an ansi environment.
@@ -386,7 +386,7 @@ VOID cmdCreateProcess ( VOID )
 	    /* DIVERGENCE (T236 S2): source arguments are ANSI. The narrow shim
 	     * selects public CreateProcessA explicitly and records only the session
 	     * result needed to diagnose the detached worker boundary. */
-	    Status = bx_ntvdm_command_create_process (
+	    Status = runtime_command_create_process (
                            NULL,
                            (LPTSTR)pCommand32,
                            NULL,
@@ -405,7 +405,7 @@ VOID cmdCreateProcess ( VOID )
         dwExitCode32 = GetLastError ();
 
     if (Status) {
-	bx_ntvdm_command_worker_attach_process(ProcessInformation.hProcess);
+	runtime_command_worker_attach_process(ProcessInformation.hProcess);
 	ResumeThread (ProcessInformation.hThread);
         WaitForSingleObject(ProcessInformation.hProcess, (DWORD)-1);
         GetExitCodeProcess (ProcessInformation.hProcess, &dwExitCode32);
@@ -413,7 +413,7 @@ VOID cmdCreateProcess ( VOID )
 	CloseHandle (ProcessInformation.hThread);
     }
 
-    bx_ntvdm_command_worker_finish(Status, dwExitCode32);
+    runtime_command_worker_finish(Status, dwExitCode32);
 
     if (Env_A.Buffer)
 	RtlFreeAnsiString(&Env_A);
@@ -431,7 +431,7 @@ VOID cmdCreateProcess ( VOID )
     return;
 }
 
-#if !defined(BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE)
+#if !defined(RUNTIME_COMMAND_EXEC_ADMITTED_SLICE)
 VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
 {
 
@@ -497,22 +497,22 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
 
 #endif /* worker admission */
 
-#if defined(BX_NTVDM_COMMAND_EXEC_ADMIT_LIFECYCLE) || !defined(BX_NTVDM_COMMAND_EXEC_ADMITTED_SLICE)
+#if defined(RUNTIME_COMMAND_EXEC_ADMIT_LIFECYCLE) || !defined(RUNTIME_COMMAND_EXEC_ADMITTED_SLICE)
 /* DIVERGENCE (T236 S2): retain OpenNT's detached-worker topology.  CCPU and
  * its private BaseSrv transport are replaced only by a fixed bx-vdm pending
  * continuation: copied inputs and opaque stream IDs are session-owned, while
  * the child worker remains the original cmdCreateProcess body. */
 VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
 {
-    bx_ntvdm_command_misc_session *Session = bx_ntvdm_command_misc_active_session();
+    runtime_command_misc_session *Session = runtime_command_misc_active_session();
 
     /* A pending BOP intentionally re-enters at the original instruction. Do
      * not create a second child: first observe the worker, then resume the
      * original post-CreateThread GetNextVDMCommand/return sequence below. */
-    if (Session != NULL && bx_ntvdm_command_worker_reentry_pending()) {
-        if (!bx_ntvdm_command_worker_complete()) {
+    if (Session != NULL && runtime_command_worker_reentry_pending()) {
+        if (!runtime_command_worker_complete()) {
             if (GetLastError() == ERROR_IO_INCOMPLETE)
-                (void)bx_ntvdm_command_misc_set_pending();
+                (void)runtime_command_misc_set_pending();
             else {
                 setCF(0);
                 setAL((UCHAR)GetLastError());
@@ -531,7 +531,7 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
     fSoftpcRedirectionOnShellOut = fSoftpcRedirection;
     fBlock = TRUE;
 
-    if (!bx_ntvdm_command_worker_begin(pCmd32, pEnv32)) {
+    if (!runtime_command_worker_begin(pCmd32, pEnv32)) {
         setCF(0);
         setAL((UCHAR)GetLastError());
         nt_resume_event_thread();
@@ -541,7 +541,7 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
                          (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))-1);
         return;
     }
-    (void)bx_ntvdm_command_misc_set_pending();
+    (void)runtime_command_misc_set_pending();
     return;
 
 WorkerComplete:
@@ -632,7 +632,7 @@ VOID cmdExec (VOID)
      * BOP instruction, whose first pass has already converted the tail CR to
      * NUL.  Preserve source ordering by routing only that recorded pending
      * re-entry to cmdExec32 before the original one-shot tail scan. */
-    if (bx_ntvdm_command_worker_reentry_pending()) {
+    if (runtime_command_worker_reentry_pending()) {
         cmdExec32(NULL, NULL);
         return;
     }
@@ -723,7 +723,7 @@ PREDIRCOMPLETE_INFO pRdrInfo;
     // Check for any copying needed for redirection
     /* DIVERGENCE(BOP-DIV-011): BX:CX is a historical 32-bit guest redirection token, not
      * a host pointer on x86/x64. */
-    pRdrInfo = bx_ntvdm_command_misc_redirection_from_guest(
+    pRdrInfo = runtime_command_misc_redirection_from_guest(
         ((ULONG)getBX() << 16) + (ULONG)getCX());
 
     if (cmdCheckCopyForRedirection (pRdrInfo) == FALSE)

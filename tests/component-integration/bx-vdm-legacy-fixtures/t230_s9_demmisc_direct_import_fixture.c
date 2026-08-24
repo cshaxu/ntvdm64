@@ -28,41 +28,41 @@ static int read_guest(void *state, uint32_t address, uint8_t *buffer, uint32_t b
 static int write_guest(void *state, uint32_t address, const uint8_t *buffer, uint32_t bytes)
 { fixture_context *c = (fixture_context *)state; if (c == NULL || address > sizeof(c->guest) || bytes > sizeof(c->guest) - address) return 0; memcpy(c->guest + address, buffer, bytes); return 1; }
 
-static void reset_cpu(bx_ntvdm_cpu_state_v1 *cpu)
-{ bx_ntvdm_cpu_state_v1_initialize(cpu, BX_NTVDM_CPU_EXECUTION_REAL); cpu->ds = 0x100u; cpu->es = 0x100u; }
+static void reset_cpu(runtime_cpu_state_v1 *cpu)
+{ runtime_cpu_state_v1_initialize(cpu, RUNTIME_CPU_EXECUTION_REAL); cpu->ds = 0x100u; cpu->es = 0x100u; }
 
-static int invoke(fixture_context *state, bx_ntvdm_dem_direct_context *direct,
-    bx_ntvdm_exception_event_v1 *event, bx_ntvdm_cpu_state_v1 *cpu,
-    bx_ntvdm_cpu_result_v2 *result, uint32_t service)
+static int invoke(fixture_context *state, runtime_dem_direct_context *direct,
+    runtime_exception_event_v1 *event, runtime_cpu_state_v1 *cpu,
+    runtime_cpu_result_v2 *result, uint32_t service)
 {
-    bx_ntvdm_demhndl_call call;
+    runtime_demhndl_call call;
     memset(&call, 0, sizeof(call));
-    call.magic = BX_NTVDM_DEMHNDL_CALL_MAGIC;
-    call.abi_version = BX_NTVDM_DEMHNDL_CALL_VERSION;
+    call.magic = RUNTIME_DEMHNDL_CALL_MAGIC;
+    call.abi_version = RUNTIME_DEMHNDL_CALL_VERSION;
     call.struct_bytes = sizeof(call); call.service = service; call.direct = direct;
     call.boundary = event; call.cpu = cpu; call.result = result;
     call.guest_state = state; call.guest_read = read_guest; call.guest_write = write_guest;
-    return bx_ntvdm_demdisp_invoke(&call) && bx_ntvdm_cpu_result_v2_valid(result);
+    return runtime_demdisp_invoke(&call) && runtime_cpu_result_v2_valid(result);
 }
 
 int main(void)
 {
-    fixture_context state; bx_ntvdm_dem_direct_context direct;
-    bx_ntvdm_exception_event_v1 event; bx_ntvdm_cpu_state_v1 cpu;
-    bx_ntvdm_cpu_result_v2 result; char temp[MAX_PATH], directory[MAX_PATH];
+    fixture_context state; runtime_dem_direct_context direct;
+    runtime_exception_event_v1 event; runtime_cpu_state_v1 cpu;
+    runtime_cpu_result_v2 result; char temp[MAX_PATH], directory[MAX_PATH];
     char dos_path[MAX_PATH + 14]; uint8_t payload[20000]; HANDLE file;
     DWORD written; WORD fd_access = 0x55aau; size_t index;
 
     memset(&state, 0, sizeof(state)); memset(&direct, 0, sizeof(direct));
-    direct.magic = BX_NTVDM_DEM_DIRECT_CONTEXT_MAGIC;
-    direct.abi_version = BX_NTVDM_DEM_DIRECT_CONTEXT_VERSION;
+    direct.magic = RUNTIME_DEM_DIRECT_CONTEXT_MAGIC;
+    direct.abi_version = RUNTIME_DEM_DIRECT_CONTEXT_VERSION;
     direct.struct_bytes = sizeof(direct); direct.state = &state;
     direct.publish_handle = publish; direct.lookup_handle = lookup; direct.release_handle = release;
     direct.query_attributes = attr_get; direct.set_attributes = attr_set;
-    memset(&event, 0, sizeof(event)); event.magic = BX_NTVDM_EXCEPTION_ABI_MAGIC;
-    event.abi_version = BX_NTVDM_EXCEPTION_ABI_VERSION; event.struct_bytes = sizeof(event);
-    event.kind = BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION; event.fault_rip = 0x1000u;
-    if (!bx_ntvdm_dem_direct_context_valid(&direct) || !GetTempPathA(MAX_PATH, temp) ||
+    memset(&event, 0, sizeof(event)); event.magic = RUNTIME_EXCEPTION_ABI_MAGIC;
+    event.abi_version = RUNTIME_EXCEPTION_ABI_VERSION; event.struct_bytes = sizeof(event);
+    event.kind = RUNTIME_EXCEPTION_EVENT_CPU_EXCEPTION; event.fault_rip = 0x1000u;
+    if (!runtime_dem_direct_context_valid(&direct) || !GetTempPathA(MAX_PATH, temp) ||
         !GetTempFileNameA(temp, "s9", 0u, directory) || !DeleteFileA(directory) ||
         !CreateDirectoryA(directory, NULL) ||
         sprintf_s(dos_path, sizeof(dos_path), "%s\\ntdos.sys", directory) < 0) return 1;
@@ -78,11 +78,11 @@ int main(void)
     strcpy_s(pszDefaultDOSDirectory, MAX_PATH + 14u, directory);
     reset_cpu(&cpu); cpu.edi = 0x2000u;
     if (!invoke(&state, &direct, &event, &cpu, &result, 0x11u) ||
-        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.disposition != RUNTIME_CPU_RESULT_V2_RESUME ||
         memcmp(state.guest + 0x20000u, payload, sizeof(payload)) != 0) return 4;
     pszDefaultDOSDirectory = NULL; /* Original body freed it but cannot clear this global. */
 
-    bx_ntvdm_demmisc_bind_fd_access(&fd_access);
+    runtime_demmisc_bind_fd_access(&fd_access);
     reset_cpu(&cpu);
     if (!invoke(&state, &direct, &event, &cpu, &result, 0x23u) || fd_access != 0u) return 5;
 
@@ -101,7 +101,7 @@ int main(void)
     reset_cpu(&cpu); if (!invoke(&state, &direct, &event, &cpu, &result, 0x3bu) ||
         (result.cpu_delta.gpr16_values[0] & 0xffu) != 0u) return 13;
     reset_cpu(&cpu); if (!invoke(&state, &direct, &event, &cpu, &result, 0x3eu) ||
-        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME) return 14;
+        result.disposition != RUNTIME_CPU_RESULT_V2_RESUME) return 14;
     VDMForWOW = TRUE; reset_cpu(&cpu);
     if (!invoke(&state, &direct, &event, &cpu, &result, 0x3eu) ||
         (result.cpu_delta.gpr16_values[0] & 0xffu) != 255u) return 15;
@@ -109,14 +109,14 @@ int main(void)
 
     /* Original demExitVDM reports then terminates.  The shim expresses that
      * non-returning lifecycle effect through the typed controlled-stop ABI. */
-    bx_ntvdm_opennt_error_dialog_fixture_suppress(TRUE);
+    runtime_opennt_error_dialog_fixture_suppress(TRUE);
     reset_cpu(&cpu);
     if (!invoke(&state, &direct, &event, &cpu, &result, 0x3du) ||
-        result.disposition != BX_NTVDM_CPU_RESULT_V2_STOP ||
-        bx_ntvdm_opennt_error_dialog_fixture_last_error() != ED_BADSYSFILE ||
-        bx_ntvdm_opennt_error_dialog_fixture_count() == 0u) return 17;
-    bx_ntvdm_opennt_error_dialog_fixture_suppress(FALSE);
-    VDMForWOW = FALSE; bx_ntvdm_demmisc_bind_fd_access(NULL);
+        result.disposition != RUNTIME_CPU_RESULT_V2_STOP ||
+        runtime_opennt_error_dialog_fixture_last_error() != ED_BADSYSFILE ||
+        runtime_opennt_error_dialog_fixture_count() == 0u) return 17;
+    runtime_opennt_error_dialog_fixture_suppress(FALSE);
+    VDMForWOW = FALSE; runtime_demmisc_bind_fd_access(NULL);
     DeleteFileA(dos_path); RemoveDirectoryA(directory);
     puts("T230 S9 direct OpenNT demmisc import: all lifecycle, loader and diagnostic service bodies verified");
     return 0;

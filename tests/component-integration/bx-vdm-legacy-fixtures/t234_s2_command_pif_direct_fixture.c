@@ -28,11 +28,11 @@ int main(void)
     const CHAR target_bytes[] = { 0x90, 0xc3 };
     DWORD directory_bytes;
 
-    bx_ntvdm_opennt_error_dialog_fixture_suppress(TRUE);
-    if (bx_ntvdm_command_pif_parser_message_box(0x2468u, "", "",
+    runtime_opennt_error_dialog_fixture_suppress(TRUE);
+    if (runtime_command_pif_parser_message_box(0x2468u, "", "",
             RMB_ABORT | RMB_RETRY | RMB_IGNORE | RMB_ICON_STOP) != RMB_ABORT ||
-        bx_ntvdm_opennt_error_dialog_fixture_last_error() != 0x2468u) return 6;
-    bx_ntvdm_opennt_error_dialog_fixture_suppress(FALSE);
+        runtime_opennt_error_dialog_fixture_last_error() != 0x2468u) return 6;
+    runtime_opennt_error_dialog_fixture_suppress(FALSE);
 
     directory_bytes = GetTempPathA((DWORD)sizeof(directory), directory);
     if (directory_bytes == 0u || directory_bytes >= sizeof(directory) ||
@@ -98,7 +98,7 @@ int main(void)
     free(parsed.CmdLine);
     free(parsed.StartDir);
     free(parsed.StartFile);
-    if (!bx_ntvdm_command_pif_select_config_files(pif_path, selected_config,
+    if (!runtime_command_pif_select_config_files(pif_path, selected_config,
             selected_autoexec) || strcmp(selected_config, config_path) != 0 ||
         strcmp(selected_autoexec, autoexec_path) != 0) return 5;
     DeleteFileA(pif_path);

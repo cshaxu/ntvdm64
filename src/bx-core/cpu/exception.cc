@@ -26,22 +26,22 @@
 #define LOG_THIS BX_CPU_THIS_PTR
 /* DIVERGENCE(BX-CORE-DIV-001,BX-UD-001): retained real/V86 guard and copied #UD mechanical seam. */
 
-#ifndef BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE
-#define BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE 0
+#ifndef RUNTIME_ENABLE_MANTLE_UD_BRIDGE
+#define RUNTIME_ENABLE_MANTLE_UD_BRIDGE 0
 #endif
 
-#ifndef BX_NTVDM_ENABLE_MANTLE_FIRST_FAULT_OBSERVER
-#define BX_NTVDM_ENABLE_MANTLE_FIRST_FAULT_OBSERVER 0
+#ifndef RUNTIME_ENABLE_MANTLE_FIRST_FAULT_OBSERVER
+#define RUNTIME_ENABLE_MANTLE_FIRST_FAULT_OBSERVER 0
 #endif
 
-#if BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE
+#if RUNTIME_ENABLE_MANTLE_UD_BRIDGE
 /* DIVERGENCE (BX-UD-001): the adopted #UD hook exchanges only its copied
  * mechanical record with adapter-bop; no selector or provider enters core. */
-#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-bop/generic_ud_bridge.h"
 #endif
 
-#if BX_NTVDM_ENABLE_MANTLE_FIRST_FAULT_OBSERVER
-#include "adapter-softpc/bx_ntvdm_first_fault_observation_v1.h"
+#if RUNTIME_ENABLE_MANTLE_FIRST_FAULT_OBSERVER
+#include "adapter-softpc/first_fault_observation.h"
 #endif
 
 
@@ -844,22 +844,22 @@ struct BxExceptionInfo exceptions_info[BX_CPU_HANDLED_EXCEPTIONS] = {
 // trap:       override exception class to TRAP
 void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
 {
-#if BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE
-  bx_ntvdm_generic_ud_event_v1 mantle_event;
-  bx_ntvdm_generic_ud_outcome_v1 mantle_outcome;
-  bx_ntvdm_generic_ud_outcome_v2 mantle_context_outcome;
+#if RUNTIME_ENABLE_MANTLE_UD_BRIDGE
+  runtime_generic_ud_event_v1 mantle_event;
+  runtime_generic_ud_outcome_v1 mantle_outcome;
+  runtime_generic_ud_outcome_v2 mantle_context_outcome;
 #endif
-#if BX_NTVDM_ENABLE_MANTLE_FIRST_FAULT_OBSERVER
-  bx_ntvdm_first_fault_observation_v1 first_fault_event;
+#if RUNTIME_ENABLE_MANTLE_FIRST_FAULT_OBSERVER
+  runtime_first_fault_observation_v1 first_fault_event;
 #endif
 
   BX_INSTR_EXCEPTION(BX_CPU_ID, vector, error_code);
 
-#if BX_NTVDM_ENABLE_MANTLE_FIRST_FAULT_OBSERVER
+#if RUNTIME_ENABLE_MANTLE_FIRST_FAULT_OBSERVER
   if (vector != BX_UD_EXCEPTION) {
     memset(&first_fault_event, 0, sizeof(first_fault_event));
-    first_fault_event.magic = BX_NTVDM_FIRST_FAULT_OBSERVATION_V1_MAGIC;
-    first_fault_event.abi_version = BX_NTVDM_FIRST_FAULT_OBSERVATION_V1_VERSION;
+    first_fault_event.magic = RUNTIME_FIRST_FAULT_OBSERVATION_V1_MAGIC;
+    first_fault_event.abi_version = RUNTIME_FIRST_FAULT_OBSERVATION_V1_VERSION;
     first_fault_event.struct_bytes = sizeof(first_fault_event);
     first_fault_event.cpu_id = BX_CPU_ID;
     first_fault_event.vector = vector;
@@ -878,7 +878,7 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
     first_fault_event.ss = BX_CPU_THIS_PTR sregs[BX_SEG_REG_SS].selector.value;
     first_fault_event.fs = BX_CPU_THIS_PTR sregs[BX_SEG_REG_FS].selector.value;
     first_fault_event.gs = BX_CPU_THIS_PTR sregs[BX_SEG_REG_GS].selector.value;
-    if (bx_ntvdm_mantle_first_fault_observation_v1(&first_fault_event)) {
+    if (runtime_mantle_first_fault_observation_v1(&first_fault_event)) {
       bx_pc_system.kill_bochs_request = 1;
       BX_CPU_THIS_PTR async_event |= BX_ASYNC_EVENT_STOP_TRACE;
       longjmp(BX_CPU_THIS_PTR jmp_buf_env, 1);
@@ -886,11 +886,11 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
   }
 #endif
 
-#if BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE
+#if RUNTIME_ENABLE_MANTLE_UD_BRIDGE
   if (vector == BX_UD_EXCEPTION) {
     memset(&mantle_event, 0, sizeof(mantle_event));
-    mantle_event.magic = BX_NTVDM_GENERIC_UD_EVENT_V1_MAGIC;
-    mantle_event.abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
+    mantle_event.magic = RUNTIME_GENERIC_UD_EVENT_V1_MAGIC;
+    mantle_event.abi_version = RUNTIME_GENERIC_UD_EVENT_V1_VERSION;
     mantle_event.struct_bytes = sizeof(mantle_event);
     mantle_event.cpu_id = BX_CPU_ID;
     mantle_event.vector = vector;
@@ -911,38 +911,38 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
     bx_address offset = BX_CPU_THIS_PTR prev_rip + BX_CPU_THIS_PTR eipPageBias;
     if (BX_CPU_THIS_PTR eipFetchPtr != 0 && offset < BX_CPU_THIS_PTR eipPageWindowSize) {
       unsigned available = BX_CPU_THIS_PTR eipPageWindowSize - offset;
-      mantle_event.window_bytes = available > BX_NTVDM_GENERIC_UD_WINDOW_BYTES ?
-        BX_NTVDM_GENERIC_UD_WINDOW_BYTES : available;
+      mantle_event.window_bytes = available > RUNTIME_GENERIC_UD_WINDOW_BYTES ?
+        RUNTIME_GENERIC_UD_WINDOW_BYTES : available;
       memcpy(mantle_event.window, BX_CPU_THIS_PTR eipFetchPtr + offset,
         mantle_event.window_bytes);
     }
     memset(&mantle_context_outcome, 0, sizeof(mantle_context_outcome));
-    if (bx_ntvdm_mantle_generic_ud_bridge_v2(&mantle_event,
+    if (runtime_mantle_generic_ud_bridge_v2(&mantle_event,
           &mantle_context_outcome) &&
         mantle_context_outcome.abi_version ==
-          BX_NTVDM_GENERIC_UD_OUTCOME_V2_VERSION &&
-        mantle_context_outcome.disposition == BX_NTVDM_GENERIC_UD_RESUME &&
+          RUNTIME_GENERIC_UD_OUTCOME_V2_VERSION &&
+        mantle_context_outcome.disposition == RUNTIME_GENERIC_UD_RESUME &&
         mantle_context_outcome.gpr32_write_mask <= 0xffu &&
         mantle_context_outcome.segment_write_mask <= 0x3fu &&
         (mantle_context_outcome.eflags_write_mask &
-          ~BX_NTVDM_GENERIC_UD_EFLAGS_WRITE_MASK) == 0u &&
+          ~RUNTIME_GENERIC_UD_EFLAGS_WRITE_MASK) == 0u &&
         (mantle_context_outcome.context_mode ==
-          BX_NTVDM_GENERIC_UD_CONTEXT_UNCHANGED ||
+          RUNTIME_GENERIC_UD_CONTEXT_UNCHANGED ||
          mantle_context_outcome.context_mode ==
-          BX_NTVDM_GENERIC_UD_CONTEXT_REAL ||
+          RUNTIME_GENERIC_UD_CONTEXT_REAL ||
          mantle_context_outcome.context_mode ==
-          BX_NTVDM_GENERIC_UD_CONTEXT_PROTECTED)) {
+          RUNTIME_GENERIC_UD_CONTEXT_PROTECTED)) {
       bx_address context_cr0 = BX_CPU_THIS_PTR read_CR0();
       if (mantle_context_outcome.context_mode ==
-          BX_NTVDM_GENERIC_UD_CONTEXT_REAL)
+          RUNTIME_GENERIC_UD_CONTEXT_REAL)
         context_cr0 &= ~1u;
       else if (mantle_context_outcome.context_mode ==
-          BX_NTVDM_GENERIC_UD_CONTEXT_PROTECTED)
+          RUNTIME_GENERIC_UD_CONTEXT_PROTECTED)
         context_cr0 |= 1u;
       if (mantle_context_outcome.context_mode ==
-          BX_NTVDM_GENERIC_UD_CONTEXT_UNCHANGED ||
+          RUNTIME_GENERIC_UD_CONTEXT_UNCHANGED ||
           BX_CPU_THIS_PTR SetCR0(context_cr0)) {
-        for (unsigned reg = 0; reg < BX_NTVDM_GENERIC_UD_GPR32_COUNT; ++reg) {
+        for (unsigned reg = 0; reg < RUNTIME_GENERIC_UD_GPR32_COUNT; ++reg) {
           if ((mantle_context_outcome.gpr32_write_mask & (1u << reg)) != 0u)
             BX_CPU_THIS_PTR set_reg32(reg, mantle_context_outcome.gpr32_values[reg]);
         }
@@ -970,15 +970,15 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
       }
     }
     memset(&mantle_outcome, 0, sizeof(mantle_outcome));
-    if (bx_ntvdm_mantle_generic_ud_bridge_v1(&mantle_event, &mantle_outcome) &&
-        mantle_outcome.abi_version == BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION &&
-        (mantle_outcome.disposition == BX_NTVDM_GENERIC_UD_RESUME ||
-         mantle_outcome.disposition == BX_NTVDM_GENERIC_UD_STOP ||
-         mantle_outcome.disposition == BX_NTVDM_GENERIC_UD_PENDING)) {
-      if (mantle_outcome.disposition == BX_NTVDM_GENERIC_UD_STOP) {
+    if (runtime_mantle_generic_ud_bridge_v1(&mantle_event, &mantle_outcome) &&
+        mantle_outcome.abi_version == RUNTIME_GENERIC_UD_EVENT_V1_VERSION &&
+        (mantle_outcome.disposition == RUNTIME_GENERIC_UD_RESUME ||
+         mantle_outcome.disposition == RUNTIME_GENERIC_UD_STOP ||
+         mantle_outcome.disposition == RUNTIME_GENERIC_UD_PENDING)) {
+      if (mantle_outcome.disposition == RUNTIME_GENERIC_UD_STOP) {
         /* Record only the accepted generic outcome, immediately before the
          * existing mechanical stop transfer. */
-        bx_ntvdm_mantle_generic_ud_stop_observation_mark();
+        runtime_mantle_generic_ud_stop_observation_mark();
         bx_pc_system.kill_bochs_request = 1;
         /* cpu_loop tests the finite stop latch only while servicing an
          * asynchronous event after this longjmp.  Request that native check
@@ -986,16 +986,16 @@ void BX_CPU_C::exception(unsigned vector, Bit16u error_code)
         BX_CPU_THIS_PTR async_event |= BX_ASYNC_EVENT_STOP_TRACE;
         longjmp(BX_CPU_THIS_PTR jmp_buf_env, 1);
       }
-      if (mantle_outcome.disposition == BX_NTVDM_GENERIC_UD_PENDING) {
+      if (mantle_outcome.disposition == RUNTIME_GENERIC_UD_PENDING) {
         /* This is a selector-blind retained-machine suspend.  Keep RIP and
          * register state untouched so a later controlled execute re-enters
          * the exact same faulting instruction. */
-        bx_ntvdm_mantle_generic_ud_pending_observation_mark();
+        runtime_mantle_generic_ud_pending_observation_mark();
         bx_pc_system.kill_bochs_request = 1;
         BX_CPU_THIS_PTR async_event |= BX_ASYNC_EVENT_STOP_TRACE;
         longjmp(BX_CPU_THIS_PTR jmp_buf_env, 1);
       }
-      for (unsigned reg = 0; reg < BX_NTVDM_GENERIC_UD_GPR16_COUNT; ++reg) {
+      for (unsigned reg = 0; reg < RUNTIME_GENERIC_UD_GPR16_COUNT; ++reg) {
         if ((mantle_outcome.gpr16_write_mask & (1u << reg)) != 0u)
           BX_CPU_THIS_PTR set_reg16(reg, mantle_outcome.gpr16_values[reg]);
       }

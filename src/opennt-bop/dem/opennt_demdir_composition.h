@@ -1,5 +1,5 @@
-#ifndef NTDOS64_OPENNT_DEMDIR_COMPOSITION_H
-#define NTDOS64_OPENNT_DEMDIR_COMPOSITION_H
+#ifndef APP_OPENNT_DEMDIR_COMPOSITION_H
+#define APP_OPENNT_DEMDIR_COMPOSITION_H
 
 /* Compatibility surface for directly imported OpenNT demdir.c.  It reuses
  * the demfile/demhndl mechanical ABI and adds only the original directory
@@ -16,14 +16,14 @@ typedef struct CURDIR_LIST {
 } CDS, *PCDS;
 #pragma pack(pop)
 
-enum bx_ntvdm_demdir_service {
-    BX_NTVDM_DEMDIR_CREATE = 0x04u,
-    BX_NTVDM_DEMDIR_DELETE = 0x06u,
-    BX_NTVDM_DEMDIR_QUERY_CURRENT = 0x13u,
-    BX_NTVDM_DEMDIR_SET_CURRENT = 0x18u
+enum runtime_demdir_service {
+    RUNTIME_DEMDIR_CREATE = 0x04u,
+    RUNTIME_DEMDIR_DELETE = 0x06u,
+    RUNTIME_DEMDIR_QUERY_CURRENT = 0x13u,
+    RUNTIME_DEMDIR_SET_CURRENT = 0x18u
 };
 
 BOOL SetEnvironmentVariableOem(LPSTR, LPSTR);
-int bx_ntvdm_demdir_invoke(bx_ntvdm_demhndl_call *call);
+int runtime_demdir_invoke(runtime_demhndl_call *call);
 
 #endif

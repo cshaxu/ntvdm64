@@ -12,9 +12,9 @@
 static word sp_int15_handler_off;
 static word sp_int15_handler_seg;
 
-int bx_ntvdm_softpc_int15_watch_source_begin(void)
+int runtime_softpc_int15_watch_source_begin(void)
 {
-    return bx_ntvdm_softpc_int15_watch_state_load(&sp_int15_handler_off,
+    return runtime_softpc_int15_watch_state_load(&sp_int15_handler_off,
         &sp_int15_handler_seg);
 }
 
@@ -40,13 +40,13 @@ void UpdateKbdInt15(word Seg,word Off)
     sp_int15_handler_seg = Seg;
 }
 
-int bx_ntvdm_softpc_int15_watch_source_end(void)
+int runtime_softpc_int15_watch_source_end(void)
 {
-    return bx_ntvdm_softpc_int15_watch_state_store(sp_int15_handler_off,
+    return runtime_softpc_int15_watch_state_store(sp_int15_handler_off,
         sp_int15_handler_seg);
 }
 
-void bx_ntvdm_softpc_int15_watch_source_reset(void)
+void runtime_softpc_int15_watch_source_reset(void)
 {
     sp_int15_handler_off = sp_int15_handler_seg = 0;
 }

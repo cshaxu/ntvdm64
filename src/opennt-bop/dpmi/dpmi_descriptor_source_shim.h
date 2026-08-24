@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_OPENNT_BOP_DPMI_DESCRIPTOR_SOURCE_SHIM_H
-#define BX_NTVDM_OPENNT_BOP_DPMI_DESCRIPTOR_SOURCE_SHIM_H
+#ifndef RUNTIME_OPENNT_BOP_DPMI_DESCRIPTOR_SOURCE_SHIM_H
+#define RUNTIME_OPENNT_BOP_DPMI_DESCRIPTOR_SOURCE_SHIM_H
 
 /* DIVERGENCE(BOP-DIV-067): OpenNT's 486 DPMI owner installed descriptors in the
  * NT4 host process LDT.  The modern source boundary instead copies exactly
@@ -53,29 +53,29 @@ _Static_assert(sizeof(LDT_ENTRY) == 8u,
 #define TRUE 1
 #define FALSE 0
 #define DBG 0
-#define BX_NTVDM_DPMI_DESCRIPTOR_MAX_ENTRIES 512u
+#define RUNTIME_DPMI_DESCRIPTOR_MAX_ENTRIES 512u
 
 /* Keep the original source spellings inside its translation unit, but do not
  * export generic SoftPC register helper names into the combined bx-vdm link. */
-#define getAX bx_ntvdm_dpmi_getAX
-#define getBX bx_ntvdm_dpmi_getBX
-#define getCX bx_ntvdm_dpmi_getCX
-#define getES bx_ntvdm_dpmi_getES
-#define setAX bx_ntvdm_dpmi_setAX
-#define DpmiSetX86Descriptor bx_ntvdm_dpmi_set_x86_descriptor
+#define getAX runtime_dpmi_getAX
+#define getBX runtime_dpmi_getBX
+#define getCX runtime_dpmi_getCX
+#define getES runtime_dpmi_getES
+#define setAX runtime_dpmi_setAX
+#define DpmiSetX86Descriptor runtime_dpmi_set_x86_descriptor
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-USHORT bx_ntvdm_dpmi_getAX(VOID);
-USHORT bx_ntvdm_dpmi_getBX(VOID);
-USHORT bx_ntvdm_dpmi_getCX(VOID);
-USHORT bx_ntvdm_dpmi_getES(VOID);
-VOID bx_ntvdm_dpmi_setAX(USHORT value);
-BOOL bx_ntvdm_dpmi_set_x86_descriptor(LDT_ENTRY *descriptors, USHORT registerAX,
+USHORT runtime_dpmi_getAX(VOID);
+USHORT runtime_dpmi_getBX(VOID);
+USHORT runtime_dpmi_getCX(VOID);
+USHORT runtime_dpmi_getES(VOID);
+VOID runtime_dpmi_setAX(USHORT value);
+BOOL runtime_dpmi_set_x86_descriptor(LDT_ENTRY *descriptors, USHORT registerAX,
   USHORT registerCX);
-BOOL bx_ntvdm_dpmi_descriptor_source_acquire(LDT_ENTRY *descriptors,
+BOOL runtime_dpmi_descriptor_source_acquire(LDT_ENTRY *descriptors,
   USHORT registerCX);
 VOID DpmiSetDescriptorEntry(VOID);
 

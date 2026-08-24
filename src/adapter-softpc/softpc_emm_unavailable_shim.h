@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_BOP_SHIM_SOFTPC_EMM_UNAVAILABLE_SHIM_H
-#define BX_NTVDM_BOP_SHIM_SOFTPC_EMM_UNAVAILABLE_SHIM_H
+#ifndef RUNTIME_BOP_SHIM_SOFTPC_EMM_UNAVAILABLE_SHIM_H
+#define RUNTIME_BOP_SHIM_SOFTPC_EMM_UNAVAILABLE_SHIM_H
 
 #include <stdint.h>
 
@@ -13,19 +13,19 @@ typedef uint16_t word;
  * the exact no-pages result only.  It carries copied register values and no
  * guest pointer, Bochs object, or persistent host handle.
  */
-int bx_ntvdm_softpc_emm_unavailable_begin(uint16_t ds, uint16_t dx,
+int runtime_softpc_emm_unavailable_begin(uint16_t ds, uint16_t dx,
     uint16_t *result_bx);
-int bx_ntvdm_softpc_emm_unavailable_end(uint16_t *result_bx);
-word bx_ntvdm_softpc_emm_get_ds(void);
-word bx_ntvdm_softpc_emm_get_dx(void);
-short bx_ntvdm_softpc_emm_get_total_pages(void);
-void bx_ntvdm_softpc_emm_set_bx(word value);
-void bx_ntvdm_softpc_emm_dma_lim_setup(void);
+int runtime_softpc_emm_unavailable_end(uint16_t *result_bx);
+word runtime_softpc_emm_get_ds(void);
+word runtime_softpc_emm_get_dx(void);
+short runtime_softpc_emm_get_total_pages(void);
+void runtime_softpc_emm_set_bx(word value);
+void runtime_softpc_emm_dma_lim_setup(void);
 
-#define getDS bx_ntvdm_softpc_emm_get_ds
-#define getDX bx_ntvdm_softpc_emm_get_dx
-#define get_total_pages bx_ntvdm_softpc_emm_get_total_pages
-#define setBX bx_ntvdm_softpc_emm_set_bx
-#define dma_lim_setup bx_ntvdm_softpc_emm_dma_lim_setup
+#define getDS runtime_softpc_emm_get_ds
+#define getDX runtime_softpc_emm_get_dx
+#define get_total_pages runtime_softpc_emm_get_total_pages
+#define setBX runtime_softpc_emm_set_bx
+#define dma_lim_setup runtime_softpc_emm_dma_lim_setup
 
 #endif

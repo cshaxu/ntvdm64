@@ -2,8 +2,8 @@
 #include <string.h>
 void t198_s121_dem_lifecycle_ledger_v1_reset(struct t198_s121_dem_lifecycle_ledger_v1 *ledger) { if (ledger) memset(ledger,0,sizeof(*ledger)); }
 void t198_s121_dem_lifecycle_ledger_v1_record(struct t198_s121_dem_lifecycle_ledger_v1 *ledger,
- const struct bx_ntvdm_generic_ud_event_v1 *event,const struct bx_ntvdm_generic_ud_outcome_v1 *outcome,int accepted,
- const bx_ntvdm_boot_namespace_diagnostic_v1 *d) {
+ const struct runtime_generic_ud_event_v1 *event,const struct runtime_generic_ud_outcome_v1 *outcome,int accepted,
+ const runtime_boot_namespace_diagnostic_v1 *d) {
  struct t198_s121_dem_lifecycle_entry_v1 *e; uint8_t s;
  if(!ledger||!event||!d||ledger->count>=T198_S121_DEM_LIFECYCLE_LEDGER_CAPACITY||event->window_bytes<4u||event->window[0]!=0xc4u||event->window[1]!=0xc4u||event->window[2]!=0x50u) return;
  s=event->window[3]; if(s!=0x12u&&s!=0x02u&&s!=0x42u)return;

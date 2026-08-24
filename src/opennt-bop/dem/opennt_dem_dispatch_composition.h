@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_BOP_SHIM_DEMDISP_SHIM_H
-#define BX_NTVDM_BOP_SHIM_DEMDISP_SHIM_H
+#ifndef RUNTIME_BOP_SHIM_DEMDISP_SHIM_H
+#define RUNTIME_BOP_SHIM_DEMDISP_SHIM_H
 
 /* Compatibility surface for the directly imported OpenNT source
  * src/opennt/base/mvdm/dos/dem/demdisp.c.  Its original dem.h/softpc.h
@@ -45,8 +45,8 @@ BOOL DemDispatch(ULONG iSvc);
 /* The adapter calls this only after its higher-level BOP route has selected
  * the OpenNT DEM family.  The wrapper binds a typed checked-RAM call and then
  * invokes the original DemDispatch table unchanged. */
-int bx_ntvdm_demdisp_invoke(bx_ntvdm_demhndl_call *call);
-size_t bx_ntvdm_demdisp_service_count(void);
-PFNSVC bx_ntvdm_demdisp_handler_at(uint8_t service);
+int runtime_demdisp_invoke(runtime_demhndl_call *call);
+size_t runtime_demdisp_service_count(void);
+PFNSVC runtime_demdisp_handler_at(uint8_t service);
 
 #endif

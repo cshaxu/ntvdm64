@@ -5,8 +5,8 @@
  * the CRT first and remove only those spelling rewrites; this header supplies
  * no error table, clock, idle, or lifecycle implementation.
  */
-#ifndef NTDOS64_OPENNT_NT_UNIX_CRT_COMPAT_H
-#define NTDOS64_OPENNT_NT_UNIX_CRT_COMPAT_H
+#ifndef APP_OPENNT_NT_UNIX_CRT_COMPAT_H
+#define APP_OPENNT_NT_UNIX_CRT_COMPAT_H
 
 #include <stdlib.h>
 #include <time.h>

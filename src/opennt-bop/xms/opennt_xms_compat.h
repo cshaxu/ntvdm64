@@ -1,5 +1,5 @@
-#ifndef NTDOS64_OPENNT_BOP_XMS_COMPAT_H
-#define NTDOS64_OPENNT_BOP_XMS_COMPAT_H
+#ifndef APP_OPENNT_BOP_XMS_COMPAT_H
+#define APP_OPENNT_BOP_XMS_COMPAT_H
 
 /* Compatibility surface for the directly mirrored OpenNT XMS sources.
  * DIVERGENCE(BOP-DIV-024..031): private NT4 product headers are unavailable;
@@ -11,7 +11,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "adapter-softpc/bx_ntvdm_exception_abi.h"
+#include "adapter-softpc/exception_abi.h"
 #include "adapter-softpc/opennt_xms_softpc_facade.h"
 
 typedef uint8_t BYTE;
@@ -32,25 +32,25 @@ typedef struct _XMSUMB_ {
     struct _XMSUMB_ *Next;
 } XMSUMB, *PXMSUMB;
 
-typedef struct bx_ntvdm_xms_call {
+typedef struct runtime_xms_call {
     uint32_t magic, abi_version, struct_bytes, service;
-    const bx_ntvdm_exception_event_v1 *boundary;
-    const bx_ntvdm_cpu_state_v1 *cpu;
-    bx_ntvdm_cpu_result_v2 *result;
+    const runtime_exception_event_v1 *boundary;
+    const runtime_cpu_state_v1 *cpu;
+    runtime_cpu_result_v2 *result;
     void *guest_state;
-    bx_ntvdm_xms_guest_read_fn guest_read;
-    bx_ntvdm_xms_guest_write_fn guest_write;
-} bx_ntvdm_xms_call;
+    runtime_xms_guest_read_fn guest_read;
+    runtime_xms_guest_write_fn guest_write;
+} runtime_xms_call;
 
-#define BX_NTVDM_XMS_CALL_MAGIC 0x4258584du
-#define BX_NTVDM_XMS_CALL_VERSION 1u
+#define RUNTIME_XMS_CALL_MAGIC 0x4258584du
+#define RUNTIME_XMS_CALL_VERSION 1u
 
-int bx_ntvdm_xms_call_valid(const bx_ntvdm_xms_call *call);
-int bx_ntvdm_xms_initialize(void);
-int bx_ntvdm_xms_invoke(bx_ntvdm_xms_call *call);
+int runtime_xms_call_valid(const runtime_xms_call *call);
+int runtime_xms_initialize(void);
+int runtime_xms_invoke(runtime_xms_call *call);
 
-int bx_ntvdm_xms_configure_memory_kib(ULONG kib);
-void bx_ntvdm_xms_reset(void);
+int runtime_xms_configure_memory_kib(ULONG kib);
+void runtime_xms_reset(void);
 void UpdateKbdInt15(WORD segment, WORD offset);
 
 /* Original services and package initializer. */
@@ -74,27 +74,27 @@ extern PVOID ExtMemSA;
 #ifndef STATUS_UNSUCCESSFUL
 #define STATUS_UNSUCCESSFUL ((NTSTATUS)0xC0000001L)
 #endif
-PVOID SAInitialize(ULONG base, ULONG bytes, bx_ntvdm_xms_commit_fn commit,
-    bx_ntvdm_xms_commit_fn decommit, bx_ntvdm_xms_move_fn move);
+PVOID SAInitialize(ULONG base, ULONG bytes, runtime_xms_commit_fn commit,
+    runtime_xms_commit_fn decommit, runtime_xms_move_fn move);
 BOOL SAAllocate(PVOID allocation, ULONG bytes, PULONG address);
 BOOL SAFree(PVOID allocation, ULONG bytes, ULONG address);
 BOOL SAReallocate(PVOID allocation, ULONG old_bytes, ULONG old_address,
     ULONG new_bytes, PULONG new_address);
 BOOL SAQueryFree(PVOID allocation, PULONG total, PULONG largest);
-#define getAX() bx_ntvdm_xms_get_ax()
-#define getBX() bx_ntvdm_xms_get_bx()
-#define getCX() bx_ntvdm_xms_get_cx()
-#define getDX() bx_ntvdm_xms_get_dx()
-#define getBP() bx_ntvdm_xms_get_bp()
-#define getSS() bx_ntvdm_xms_get_ss()
-#define getCS() bx_ntvdm_xms_get_cs()
-#define setAX(value) bx_ntvdm_xms_set_ax(value)
-#define setBX(value) bx_ntvdm_xms_set_bx(value)
-#define setBL(value) bx_ntvdm_xms_set_bl(value)
-#define setCX(value) bx_ntvdm_xms_set_cx(value)
-#define setDX(value) bx_ntvdm_xms_set_dx(value)
-#define setCF(value) bx_ntvdm_xms_set_cf(value)
-#define GetVDMAddr(segment, offset) bx_ntvdm_xms_get_vdm_addr(segment, offset)
+#define getAX() runtime_xms_get_ax()
+#define getBX() runtime_xms_get_bx()
+#define getCX() runtime_xms_get_cx()
+#define getDX() runtime_xms_get_dx()
+#define getBP() runtime_xms_get_bp()
+#define getSS() runtime_xms_get_ss()
+#define getCS() runtime_xms_get_cs()
+#define setAX(value) runtime_xms_set_ax(value)
+#define setBX(value) runtime_xms_set_bx(value)
+#define setBL(value) runtime_xms_set_bl(value)
+#define setCX(value) runtime_xms_set_cx(value)
+#define setDX(value) runtime_xms_set_dx(value)
+#define setCF(value) runtime_xms_set_cf(value)
+#define GetVDMAddr(segment, offset) runtime_xms_get_vdm_addr(segment, offset)
 #define DbgPrint(...) ((void)0)
 #define ASSERT(value) ((void)0)
 

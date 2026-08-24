@@ -37,12 +37,12 @@
 // 0xf0000 - 0xfffff    Upper BIOS Area (64K)
 //
 
-#ifndef BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
-#define BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION 0
+#ifndef RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+#define RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION 0
 #endif
 
-#if BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
-#include "adapter-softpc/bx_ntvdm_physical_write_observation_v1.h"
+#if RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+#include "adapter-softpc/physical_write_observation.h"
 #endif
 
 void BX_MEM_C::writePhysicalPage(BX_CPU_C *cpu, bx_phy_address addr, unsigned len, void *data)
@@ -66,8 +66,8 @@ void BX_MEM_C::writePhysicalPage(BX_CPU_C *cpu, bx_phy_address addr, unsigned le
 #endif
 
   if (cpu != NULL) {
-#if BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
-    bx_ntvdm_physical_write_observation_v1_record((uint64_t)a20addr,
+#if RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+    runtime_physical_write_observation_v1_record((uint64_t)a20addr,
       (uint32_t)len, data, cpu->get_icount(), (uint64_t)cpu->prev_rip,
       (uint64_t)cpu->sregs[BX_SEG_REG_CS].cache.u.segment.base,
       cpu->sregs[BX_SEG_REG_CS].selector.value,

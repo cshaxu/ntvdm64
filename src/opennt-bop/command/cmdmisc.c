@@ -15,18 +15,18 @@
  * excluded at translation-unit scope rather than replaced with stubs.  Their
  * original source bodies, order and comments remain here for later COMMAND
  * owner-package admission. */
-#define BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE 1
-#define BX_NTVDM_COMMAND_MISC_ADMIT_SET_INFO 1
-#define BX_NTVDM_COMMAND_MISC_ADMIT_SAVE_WORLD 1
-#define BX_NTVDM_COMMAND_MISC_ADMIT_INIT_CONSOLE 1
-#define BX_NTVDM_COMMAND_MISC_ADMIT_START_INFO 1
-#define BX_NTVDM_COMMAND_MISC_ADMIT_GET_NEXT 1
-#define BX_NTVDM_COMMAND_MISC_ADMIT_SET_DIRECTORIES 1
-#define BX_NTVDM_COMMAND_MISC_ADMIT_UPDATE_DIRECTORIES 1
-#define BX_NTVDM_COMMAND_MISC_ADMIT_MAP_CODE_PAGE 1
+#define RUNTIME_COMMAND_MISC_ADMITTED_SLICE 1
+#define RUNTIME_COMMAND_MISC_ADMIT_SET_INFO 1
+#define RUNTIME_COMMAND_MISC_ADMIT_SAVE_WORLD 1
+#define RUNTIME_COMMAND_MISC_ADMIT_INIT_CONSOLE 1
+#define RUNTIME_COMMAND_MISC_ADMIT_START_INFO 1
+#define RUNTIME_COMMAND_MISC_ADMIT_GET_NEXT 1
+#define RUNTIME_COMMAND_MISC_ADMIT_SET_DIRECTORIES 1
+#define RUNTIME_COMMAND_MISC_ADMIT_UPDATE_DIRECTORIES 1
+#define RUNTIME_COMMAND_MISC_ADMIT_MAP_CODE_PAGE 1
 #include "opennt_command_composition.h"
 
-#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_GET_NEXT) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
+#if defined(RUNTIME_COMMAND_MISC_ADMIT_GET_NEXT) || !defined(RUNTIME_COMMAND_MISC_ADMITTED_SLICE)
 VOID GetWowKernelCmdLine(VOID);
 extern ULONG fSeparateWow;
 
@@ -152,7 +152,7 @@ char    CmdLine[MAX_PATH];
         /* DIVERGENCE(BOP-DIV-014): pRdrInfo is a 32-bit guest token in the original
          * CMDINFO record.  Resolve it through the typed session table rather
          * than casting it to a host pointer on x86/x64. */
-        pRdrInfo = bx_ntvdm_command_misc_redirection_from_guest(pCMDInfo->pRdrInfo);
+        pRdrInfo = runtime_command_misc_redirection_from_guest(pCMDInfo->pRdrInfo);
         if (cmdCheckCopyForRedirection (pRdrInfo) == FALSE)
             VDMInfo.ErrorCode = ERROR_NOT_ENOUGH_MEMORY;
     }
@@ -370,7 +370,7 @@ char    CmdLine[MAX_PATH];
     pRdrInfo = cmdCheckStandardHandles (&VDMInfo,&pCMDInfo->bStdHandles);
     /* DIVERGENCE(BOP-DIV-016): retain the original CMDINFO slot but publish a fixed guest
      * token; an x64 host HANDLE/pointer never crosses this 32-bit field. */
-    pCMDInfo->pRdrInfo = bx_ntvdm_command_misc_redirection_token(pRdrInfo);
+    pCMDInfo->pRdrInfo = runtime_command_misc_redirection_token(pRdrInfo);
 
     // Tell DOS that it has to invalidate the CDSs
     *pSCS_ToSync = (CHAR)-1; /* DIVERGENCE(BOP-DIV-017): same 8-bit 0xff without x64 warning. */
@@ -379,7 +379,7 @@ char    CmdLine[MAX_PATH];
     return;
 }
 
-#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_GET_NEXT)
+#if defined(RUNTIME_COMMAND_MISC_ADMIT_GET_NEXT)
 /* The directly imported cmdGetNextCmd body above is the admitted S7 slice.
  * GetWowKernelCmdLine below retains the historical separate-WOW product
  * composition and is deliberately not pulled into the CLI command source. */
@@ -611,7 +611,7 @@ UINT  DriveType;
  *  EXIT  - None
  */
 
-#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_SET_INFO) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
+#if defined(RUNTIME_COMMAND_MISC_ADMIT_SET_INFO) || !defined(RUNTIME_COMMAND_MISC_ADMITTED_SLICE)
 VOID cmdSetInfo (VOID)
 {
 
@@ -626,7 +626,7 @@ VOID cmdSetInfo (VOID)
 }
 #endif /* BX_NTVDM_COMMAND_MISC_ADMIT_SET_INFO */
 
-#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_SET_DIRECTORIES) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
+#if defined(RUNTIME_COMMAND_MISC_ADMIT_SET_DIRECTORIES) || !defined(RUNTIME_COMMAND_MISC_ADMITTED_SLICE)
 VOID cmdSetDirectories (PCHAR lpszzEnv, VDMINFO * pVdmInfo)
 {
 LPSTR   lpszVal;
@@ -687,7 +687,7 @@ LPSTR   lpszCS;
 }
 
 
-#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_SAVE_WORLD) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
+#if defined(RUNTIME_COMMAND_MISC_ADMIT_SAVE_WORLD) || !defined(RUNTIME_COMMAND_MISC_ADMITTED_SLICE)
 VOID cmdSaveWorld (VOID)
 {
 #ifdef CHECK_IT_LATER
@@ -764,7 +764,7 @@ DWORD   dwBytesWritten;
  *
  */
 
-#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_INIT_CONSOLE) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
+#if defined(RUNTIME_COMMAND_MISC_ADMIT_INIT_CONSOLE) || !defined(RUNTIME_COMMAND_MISC_ADMITTED_SLICE)
 VOID cmdInitConsole (VOID)
 {
     if (fConOutput == FALSE) {
@@ -775,7 +775,7 @@ VOID cmdInitConsole (VOID)
 }
 #endif /* BX_NTVDM_COMMAND_MISC_ADMIT_INIT_CONSOLE */
 
-#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_MAP_CODE_PAGE) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
+#if defined(RUNTIME_COMMAND_MISC_ADMIT_MAP_CODE_PAGE) || !defined(RUNTIME_COMMAND_MISC_ADMITTED_SLICE)
 /* cmdMapCodePage - Map the Win32 Code page to DOS code page
  */
 
@@ -790,7 +790,7 @@ USHORT cmdMapCodePage (ULONG CodePage)
 
 #endif /* BX_NTVDM_COMMAND_MISC_ADMIT_MAP_CODE_PAGE || !BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE */
 
-#if !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
+#if !defined(RUNTIME_COMMAND_MISC_ADMITTED_SLICE)
 /* GetWOWShortCutInfo - returns the startupinf.reserved field of
  *                      vdminfo for the first wow task.
  *
@@ -817,7 +817,7 @@ BOOL GetWOWShortCutInfo (PULONG Bufsize, PVOID Buf)
 }
 #endif /* !BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE */
 
-#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_UPDATE_DIRECTORIES) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
+#if defined(RUNTIME_COMMAND_MISC_ADMIT_UPDATE_DIRECTORIES) || !defined(RUNTIME_COMMAND_MISC_ADMITTED_SLICE)
 VOID cmdUpdateCurrentDirectories(BYTE CurDrive)
 {
     DWORD cchRemain, cchCurDir;
@@ -935,7 +935,7 @@ VOID cmdUpdateCurrentDirectories(BYTE CurDrive)
  *         Client (AL) = 1 if started with new console
  */
 
-#if defined(BX_NTVDM_COMMAND_MISC_ADMIT_START_INFO) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
+#if defined(RUNTIME_COMMAND_MISC_ADMIT_START_INFO) || !defined(RUNTIME_COMMAND_MISC_ADMITTED_SLICE)
 VOID cmdGetStartInfo (VOID)
 {
     setAL((BYTE) (DosSessionId ? 1 : 0));

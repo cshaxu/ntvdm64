@@ -9,7 +9,7 @@
 #include "startup_selection.h"
 #include "config.h"
 #include "byob_target_selection.h"
-#include "byob_launch_plan_v2.h"
+#include "byob_launch_plan.h"
 
 typedef enum image_kind {
     IMAGE_KIND_UNKNOWN,
@@ -370,7 +370,7 @@ int wmain(void)
     image_kind kind;
     wchar_t full_path[MAX_PATH];
     wchar_t launch_plan[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
-    ntdos64_startup_selection selection;
+    app_startup_selection selection;
     byob_launch_plan_v2 launch;
     DWORD path_length;
     int result;
@@ -444,7 +444,7 @@ int wmain(void)
                 L"%ls", wcsrchr(full_path, L'\\') != NULL ? wcsrchr(full_path, L'\\') + 1u : full_path) < 0 ||
             (selection.declared_targets[0].component = selection.target,
              selection.declared_targets[0].placement = selection.target_placement, 0) ||
-            !ntdos64_bundle_load_sibling(product_root, dos_root, wow16_root, config_source,
+            !app_bundle_load_sibling(product_root, dos_root, wow16_root, config_source,
                 autoexec_source) || !byob_launch_plan_v2_from_arguments(&launch, &selection,
                 argc - target_index - 1, argv + target_index + 1) ||
             !byob_launch_plan_v2_to_environment(&launch, launch_plan)) {

@@ -3,8 +3,8 @@
  * Field order and prototypes come from the retained OpenNT ntrtl.h input.
  * This file supplies no clock policy or implementation.
  */
-#ifndef NTDOS64_OPENNT_SYSTEM_NT_TIME_COMPAT_H
-#define NTDOS64_OPENNT_SYSTEM_NT_TIME_COMPAT_H
+#ifndef APP_OPENNT_SYSTEM_NT_TIME_COMPAT_H
+#define APP_OPENNT_SYSTEM_NT_TIME_COMPAT_H
 
 /* OpenNT public/sdk/inc/ntdef.h defines CSHORT as short. */
 typedef short CSHORT;

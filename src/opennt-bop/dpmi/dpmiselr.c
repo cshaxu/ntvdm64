@@ -97,7 +97,7 @@ Return Value:
 
 {
     LDT_ENTRY *Descriptors;
-    LDT_ENTRY DescriptorBuffer[BX_NTVDM_DPMI_DESCRIPTOR_MAX_ENTRIES];
+    LDT_ENTRY DescriptorBuffer[RUNTIME_DPMI_DESCRIPTOR_MAX_ENTRIES];
     USHORT i;
     ULONG  Base;
     ULONG Limit;
@@ -114,7 +114,7 @@ Return Value:
      * contract through a bounded selector-blind read rather than an NT4 raw
      * `Sim32GetVDMPointer`.  The loop and its limit repair below are intact. */
     Descriptors = DescriptorBuffer;
-    if (!bx_ntvdm_dpmi_descriptor_source_acquire(Descriptors, registerCX)) {
+    if (!runtime_dpmi_descriptor_source_acquire(Descriptors, registerCX)) {
         return;
     }
     for (i = 0; i < registerCX; i++) {

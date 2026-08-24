@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_BOP_SHIM_DEM_COMMON_SHIM_H
-#define BX_NTVDM_BOP_SHIM_DEM_COMMON_SHIM_H
+#ifndef RUNTIME_BOP_SHIM_DEM_COMMON_SHIM_H
+#define RUNTIME_BOP_SHIM_DEM_COMMON_SHIM_H
 
 /* Historical include surface for directly imported dem.c.  It contains
  * declarations/constants only; lifecycle policy remains in the imported

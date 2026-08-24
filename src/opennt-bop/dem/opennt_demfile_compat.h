@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_BOP_SHIM_DEMFILE_SHIM_H
-#define BX_NTVDM_BOP_SHIM_DEMFILE_SHIM_H
+#ifndef RUNTIME_BOP_SHIM_DEMFILE_SHIM_H
+#define RUNTIME_BOP_SHIM_DEMFILE_SHIM_H
 
 /* Compatibility boundary for the directly imported OpenNT files
  * src/opennt/base/mvdm/dos/dem/demfile.c and demlabel.c.  demfile shares the
@@ -35,14 +35,14 @@ typedef struct _DOSSF { WORD SFCount; ULONG SFLink; DOSSFT SFTable[1]; } DOSSF, 
 typedef struct _DOSPDB { ULONG PDB_JFN_Pointer; WORD PDB_JFN_Length; } DOSPDB, *PDOSPDB;
 extern PUSHORT pusCurrentPDB;
 
-enum bx_ntvdm_demfile_service {
-    BX_NTVDM_DEMFILE_CHMOD = 0x01u,
-    BX_NTVDM_DEMFILE_CREATE = 0x03u,
-    BX_NTVDM_DEMFILE_DELETE = 0x05u,
-    BX_NTVDM_DEMFILE_OPEN = 0x12u,
-    BX_NTVDM_DEMFILE_RENAME = 0x17u,
-    BX_NTVDM_DEMFILE_CREATE_NEW = 0x22u,
-    BX_NTVDM_DEMFILE_CHECK_PATH = 0x44u
+enum runtime_demfile_service {
+    RUNTIME_DEMFILE_CHMOD = 0x01u,
+    RUNTIME_DEMFILE_CREATE = 0x03u,
+    RUNTIME_DEMFILE_DELETE = 0x05u,
+    RUNTIME_DEMFILE_OPEN = 0x12u,
+    RUNTIME_DEMFILE_RENAME = 0x17u,
+    RUNTIME_DEMFILE_CREATE_NEW = 0x22u,
+    RUNTIME_DEMFILE_CHECK_PATH = 0x44u
 };
 
 USHORT demCreateLabel(BYTE, LPSTR);

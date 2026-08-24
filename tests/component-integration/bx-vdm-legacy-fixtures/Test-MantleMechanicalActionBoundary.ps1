@@ -1,8 +1,8 @@
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
-$sourcePath = Join-Path $repositoryRoot 'src/bx-mantle/bx_ntvdm_mechanical_action_v1.cc'
-$headerPath = Join-Path $repositoryRoot 'src/bx-mantle/bx_ntvdm_mechanical_action_v1.h'
+$sourcePath = Join-Path $repositoryRoot 'src/bx-mantle/mechanical_action.cc'
+$headerPath = Join-Path $repositoryRoot 'src/bx-mantle/mechanical_action.h'
 $source = Get-Content -LiteralPath $sourcePath -Raw
 $header = Get-Content -LiteralPath $headerPath -Raw
 

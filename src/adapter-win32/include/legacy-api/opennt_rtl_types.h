@@ -1,5 +1,5 @@
-#ifndef NTDOS64_OPENNT_RTL_TYPES_H
-#define NTDOS64_OPENNT_RTL_TYPES_H
+#ifndef APP_OPENNT_RTL_TYPES_H
+#define APP_OPENNT_RTL_TYPES_H
 
 /* Exact host-private OpenNT counted-string ABI.  These records may contain
  * native pointers and are never guest-visible or asynchronous payloads. */

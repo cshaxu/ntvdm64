@@ -2,9 +2,13 @@
 
 ## Current Work
 
-**Active: M0 T264 S3 — adapter filename normalization.** S2 completed the 42
-`app`/`session` Git renames and formal Ninja closure; this packet now renames
-the remaining 77 project-authored adapter files and repairs direct consumers.
+**Active: M0 T264 S5 — implementation-version and private-identifier
+normalization.** Owner direction adds `v1` and `v2` to the prohibited
+project-code filename markers and requires non-semantic product/backend/OpenNT
+identifier prefixes to be removed; S4 remains evidence for the already-complete
+product/backend filename-prefix sweep. The source edits are complete; formal
+Ninja validation is currently blocked by the independent Bochs `FLOAT128`
+macro versus current Windows SDK `winnt.h` collision recorded in S5 evidence.
 
 ## Active Packet
 
@@ -71,6 +75,67 @@ no work. See the S1/S2 inventory evidence.
 | Exit Criteria | The scoped scan is clean, formal Ninja reaches no-work after completion, and historical headers remain unchanged. |
 | Original Owner Request | “app, session, adapter-* 这些组件。清理”. |
 | Similar-Issue Sweep | Adapter headers, formal source lists, direct component-integration fixtures and imported MVDM/SoftPC headers. |
+
+**S3 closure:** all 77 project-owned adapter paths were moved with `git mv` and
+217 live path consumers were updated without source symbol or ABI changes. The
+fresh formal graph at `build/M0-T264-S3/r001` compiled to completion and a
+final dry run had no work. See the S1/S2/S3 inventory evidence.
+
+### M0 T264 S4 — filename normalization closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T264 S4`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | T264/S1 inventory plus completed S2 and S3 under the owner-approved cleanup task. |
+| Objective | Prove that the in-scope production component roots contain no prohibited project/backend filename prefix and that their live consumers no longer name a moved path. |
+| Non-goals | No test-directory or historical-evidence mass rename; no original mirror/overlay filename or content change beyond an unavoidable consumer include-path update; no ABI/behavior change. |
+| Reference Baseline | [S1/S2/S3 inventory](etc/evidence/m0-t264-s1-project-code-filename-inventory-001.md), formal Ninja manifests, and committed Git rename set. |
+| Files And ABI Surface | In-scope component roots, direct consumers, closure evidence/status/history/document inventory; no ABI. |
+| Applicable Rules | T264 proposal, source identity, component boundaries, documentation and closure rules. |
+| Verification | Recursive basename scan; stale moved-path scan over live source/test/build inputs; formal Ninja no-work check; governance and diff checks. |
+| Expected Markers | Zero prohibited basenames in project-authored in-scope component code and zero live reference to a moved filename. |
+| Stop Conditions | A matching path is an unclassified live source input, a consumer cannot be updated without semantics changing, or a mirror filename would need renaming. |
+| Exit Criteria | The T264 inventory is closed with scoped zero results, formal build evidence passes, unrelated historical matches are classified, and the reviewed result is committed/pushed. |
+| Original Owner Request | “app, session, adapter-* 这些组件。清理”. |
+| Similar-Issue Sweep | Build manifests, source-list JSON, test includes, generated graph inputs and imported-interface exclusions. |
+
+**S4 closure:** the final recursive component scan found zero
+prohibited basenames in the five in-scope production roots. The 77 staged
+adapter historical basenames had zero live reference under `src`, `tests`, or
+`tools/build`. The previously recorded S2 and S3 formal Ninja roots both end
+at no-work dry runs after their completed builds. Documentation governance and
+`git diff --check` pass. The later owner-directed `_v1`/`_v2` sweep reopens
+T264 as S5; it does not invalidate the S4 product/backend-prefix result.
+
+### M0 T264 S5 — implementation-version filename normalization
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T264 S5`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner direction: “本T任务还有一个忘了说了，增加: 文件名里面有v1 v2这玩意的也清理干净”. |
+| Objective | Remove standalone `_v1`/`_v2` filename segments, then classify and remove non-semantic project/backend/OpenNT source-provenance identifier prefixes from all in-scope project-authored production code and repair direct consumers. |
+| Non-goals | No source-symbol change where an identifier actually names DOS/VDM guest semantics, Bochs/register mechanics, an OpenNT provider/guest contract, a public configuration contract, or a preserved historical interface; no function-contract, ABI, behavior, component-directory, mirror, overlay, historical-interface, or test-directory rename. |
+| Reference Baseline | T264 proposal and S1/S4 inventory; the 70-row versioned-filename scan and source token disposition audit. |
+| Files And ABI Surface | `src/app`, `src/session`, `src/adapter-bop`, top-level project-owned `src/adapter-softpc`, their direct consumers, and closure evidence only; private project identifiers and filename paths, no ABI. |
+| Applicable Rules | `git mv`, component ownership, source-identity exclusions, production-only component rule, and no semantic rewrite. |
+| Verification | Scoped recursive basename scan; stale old-path scan; identifier disposition audit; fresh formal Ninja closure; documentation governance and `git diff --check`. |
+| Expected Markers | Zero standalone `v1` or `v2` filename segments; no non-semantic project/backend/OpenNT source-provenance prefix remains in scoped private identifiers; and zero live direct reference to moved versioned paths. |
+| Stop Conditions | A destination collision, imported-source identity ambiguity, or a consumer that requires a semantic change rather than an exact path replacement. |
+| Exit Criteria | All 70 inventoried paths are Git moves; non-semantic identifier prefixes are removed with direct consumers repaired; excluded historical headers remain unchanged; each retained lexical term has an auditable semantic disposition; and stated checks pass. |
+| Original Owner Request | “文件名里面有v1 v2这玩意的也清理干净”. |
+| Similar-Issue Sweep | Filename-only version suffixes versus actual source symbols, fixture target names, source-list JSON, and retained historical interface paths. |
+
+**S5 P1 result:** all 70 in-scope `_v1`/`_v2` filenames were refined with
+`git mv`, and the exact source/test/build path consumers were repaired. The
+reviewed non-semantic private `bx_ntvdm_*`, `ntdos64_*`, and source-provenance
+`opennt_*` identifier families were normalized while strings/comments,
+original-interface names, DOS/VDM/Bochs mechanics, and OpenNT contract-facing
+facades were retained. A synchronous formal Ninja attempt reached the genuine
+compiler boundary but is blocked before project-owned targets complete by the
+pre-existing `FLOAT128` macro collision in Bochs FPU source when the current
+Windows SDK's `winnt.h` is present. It is not acceptable to call T264 closed
+until the owner decides whether that toolchain/core issue is separately
+admitted. See the S5 evidence update.
 
 ### M0 T263 S9 — OpenNT-host three-file original-body recovery
 

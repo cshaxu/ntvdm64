@@ -1,6 +1,6 @@
-#include "adapter-softpc/bx_ntvdm_machine_stage_v1.h"
+#include "adapter-softpc/machine_stage.h"
 #include "opennt-bop/ingress/opennt_bop_route.h"
-#include "adapter-softpc/bx_ntvdm_mechanical_action_v1.h"
+#include "adapter-softpc/mechanical_action.h"
 #include "opennt-bop/ingress/opennt_bop_route.h"
 #include "opennt-bop/ingress/softpc_mouse_vector_v2_generic_ud_bridge.h"
 #include "opennt-bop/ingress/opennt_bop_route.h"
@@ -10,16 +10,16 @@
 #include <string.h>
 #include "opennt-bop/ingress/opennt_bop_route.h"
 
-extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
-    const struct bx_ntvdm_generic_ud_event_v1 *event,
-    struct bx_ntvdm_generic_ud_outcome_v1 *outcome);
+extern "C" int runtime_mantle_generic_ud_bridge_v1(
+    const struct runtime_generic_ud_event_v1 *event,
+    struct runtime_generic_ud_outcome_v1 *outcome);
 
-static void write_action(struct bx_ntvdm_mechanical_action_v1 *action,
+static void write_action(struct runtime_mechanical_action_v1 *action,
     uint32_t id, uint64_t address, uint8_t value)
 {
-    bx_ntvdm_mechanical_action_v1_clear(action);
+    runtime_mechanical_action_v1_clear(action);
     action->action_id = id;
-    action->kind = BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;
+    action->kind = RUNTIME_MECHANICAL_ACTION_V1_WRITE;
     action->range_count = 1u;
     action->payload_bytes = 1u;
     action->ranges[0].physical_address = address;
@@ -29,21 +29,21 @@ static void write_action(struct bx_ntvdm_mechanical_action_v1 *action,
 
 static int begin_stage(void)
 {
-    struct bx_ntvdm_machine_stage_v1_request request;
-    bx_ntvdm_machine_stage_v1_request_clear(&request);
+    struct runtime_machine_stage_v1_request request;
+    runtime_machine_stage_v1_request_clear(&request);
     write_action(&request.initial_state_action, 1u, 0x40u, 0u);
     write_action(&request.startup_action, 2u, 0x100u, 0xf4u);
     request.preserved_state_address = 0x40u;
     request.preserved_state_bytes = 1u;
-    return bx_ntvdm_machine_stage_v1_begin(&request) ==
-        BX_NTVDM_MACHINE_STAGE_V1_OK;
+    return runtime_machine_stage_v1_begin(&request) ==
+        RUNTIME_MACHINE_STAGE_V1_OK;
 }
 
-static void initialize(struct bx_ntvdm_generic_ud_event_v1 *event)
+static void initialize(struct runtime_generic_ud_event_v1 *event)
 {
     memset(event, 0, sizeof(*event));
-    event->magic = BX_NTVDM_GENERIC_UD_EVENT_V1_MAGIC;
-    event->abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
+    event->magic = RUNTIME_GENERIC_UD_EVENT_V1_MAGIC;
+    event->abi_version = RUNTIME_GENERIC_UD_EVENT_V1_VERSION;
     event->struct_bytes = sizeof(*event);
     event->vector = 6u;
     event->execution_mode = 1u;
@@ -59,41 +59,41 @@ static void initialize(struct bx_ntvdm_generic_ud_event_v1 *event)
 
 int main()
 {
-    if (!bx_ntvdm_bop_ingress_v1_bind(bx_ntvdm_opennt_bop_route_dispatch_v1, 0)) return 90;
-    struct bx_ntvdm_generic_ud_event_v1 event;
-    struct bx_ntvdm_generic_ud_outcome_v1 outcome;
+    if (!runtime_bop_ingress_v1_bind(runtime_opennt_bop_route_dispatch_v1, 0)) return 90;
+    struct runtime_generic_ud_event_v1 event;
+    struct runtime_generic_ud_outcome_v1 outcome;
     const uint8_t table[4] = { 0x34u, 0x12u, 0x78u, 0x56u };
     uint8_t observed[4] = { 0u, 0u, 0u, 0u };
 
-    if (!begin_stage() || !bx_ntvdm_mantle_checked_ram_write_v1(0x2010u,
+    if (!begin_stage() || !runtime_mantle_checked_ram_write_v1(0x2010u,
             table, sizeof(table))) return 1;
     initialize(&event);
-    if (!bx_ntvdm_softpc_mouse_vector_v2_generic_ud_recognizes(&event) ||
-        !bx_ntvdm_softpc_mouse_vector_v2_generic_ud_dispatch(&event,
-            &outcome) || outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
+    if (!runtime_softpc_mouse_vector_v2_generic_ud_recognizes(&event) ||
+        !runtime_softpc_mouse_vector_v2_generic_ud_dispatch(&event,
+            &outcome) || outcome.disposition != RUNTIME_GENERIC_UD_RESUME ||
         outcome.resume_rip != UINT64_C(0x78ce) ||
         outcome.gpr16_write_mask != 0u || outcome.eflags_write_mask != 0u ||
-        !bx_ntvdm_mantle_checked_ram_read_v1(0xccu, observed,
+        !runtime_mantle_checked_ram_read_v1(0xccu, observed,
             sizeof(observed)) || memcmp(observed, table, sizeof(table)) != 0)
         return 2;
     memset(observed, 0, sizeof(observed));
-    if (!bx_ntvdm_mantle_checked_ram_write_v1(0xccu, observed,
-            sizeof(observed)) || !bx_ntvdm_mantle_generic_ud_bridge_v1(&event,
-            &outcome) || outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME ||
-        !bx_ntvdm_mantle_checked_ram_read_v1(0xccu, observed,
+    if (!runtime_mantle_checked_ram_write_v1(0xccu, observed,
+            sizeof(observed)) || !runtime_mantle_generic_ud_bridge_v1(&event,
+            &outcome) || outcome.disposition != RUNTIME_GENERIC_UD_RESUME ||
+        !runtime_mantle_checked_ram_read_v1(0xccu, observed,
             sizeof(observed)) || memcmp(observed, table, sizeof(table)) != 0)
         return 3;
     event.window[2] = 0xc9u;
-    if (bx_ntvdm_softpc_mouse_vector_v2_generic_ud_recognizes(&event) ||
-        bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 4;
+    if (runtime_softpc_mouse_vector_v2_generic_ud_recognizes(&event) ||
+        runtime_mantle_generic_ud_bridge_v1(&event, &outcome)) return 4;
     event.window[2] = 0xb8u;
-    if (bx_ntvdm_softpc_mouse_vector_v2_generic_ud_recognizes(&event) ||
-        bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 5;
+    if (runtime_softpc_mouse_vector_v2_generic_ud_recognizes(&event) ||
+        runtime_mantle_generic_ud_bridge_v1(&event, &outcome)) return 5;
     event.window[2] = 0xc8u;
     event.cs = UINT16_C(0xffff);
     event.ebx = UINT32_C(0xffff);
-    if (bx_ntvdm_softpc_mouse_vector_v2_generic_ud_dispatch(&event,
+    if (runtime_softpc_mouse_vector_v2_generic_ud_dispatch(&event,
             &outcome)) return 6;
-    return bx_ntvdm_machine_stage_v1_reset() == BX_NTVDM_MACHINE_STAGE_V1_OK ?
+    return runtime_machine_stage_v1_reset() == RUNTIME_MACHINE_STAGE_V1_OK ?
         0 : 7;
 }

@@ -1,10 +1,10 @@
 #include "bochs.h"
-#include "adapter-softpc/bx_ntvdm_cpu_state_abi.h"
-#include "adapter-softpc/bx_ntvdm_a20_capability_v1.h"
-#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-softpc/cpu_state_abi.h"
+#include "adapter-softpc/a20_capability.h"
+#include "adapter-bop/generic_ud_bridge.h"
 #include "opennt-bop/ingress/opennt_bop_route.h"
-#include "adapter-softpc/bx_ntvdm_machine_stage_v1.h"
-#include "adapter-softpc/bx_ntvdm_ivt_watch_v1.h"
+#include "adapter-softpc/machine_stage.h"
+#include "adapter-softpc/ivt_watch.h"
 
 extern "C" {
 #include "opennt-bop/ingress/xms_v2_runtime_session.h"
@@ -14,25 +14,25 @@ extern "C" {
 
 static int a20_enabled(unsigned expected)
 {
-  bx_ntvdm_a20_capability_request_v1 request = {
-    BX_NTVDM_A20_CAPABILITY_V1_VERSION, BX_NTVDM_A20_CAPABILITY_QUERY, 0 };
-  bx_ntvdm_a20_capability_result_v1 result;
-  bx_ntvdm_a20_capability_v1_dispatch(&request, &result);
-  return result.status == BX_NTVDM_A20_CAPABILITY_OK &&
+  runtime_a20_capability_request_v1 request = {
+    RUNTIME_A20_CAPABILITY_V1_VERSION, RUNTIME_A20_CAPABILITY_QUERY, 0 };
+  runtime_a20_capability_result_v1 result;
+  runtime_a20_capability_v1_dispatch(&request, &result);
+  return result.status == RUNTIME_A20_CAPABILITY_OK &&
     result.enabled == expected;
 }
 
 static int invoke_xms(unsigned service, unsigned ax, unsigned bx,
   unsigned expected_gpr16_mask, unsigned expected_ax)
 {
-  bx_ntvdm_generic_ud_event_v1 event;
-  bx_ntvdm_generic_ud_outcome_v1 outcome;
+  runtime_generic_ud_event_v1 event;
+  runtime_generic_ud_outcome_v1 outcome;
   memset(&event, 0, sizeof(event));
-  event.magic = BX_NTVDM_GENERIC_UD_EVENT_V1_MAGIC;
-  event.abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
+  event.magic = RUNTIME_GENERIC_UD_EVENT_V1_MAGIC;
+  event.abi_version = RUNTIME_GENERIC_UD_EVENT_V1_VERSION;
   event.struct_bytes = sizeof(event);
   event.vector = 6u;
-  event.execution_mode = BX_NTVDM_CPU_EXECUTION_REAL;
+  event.execution_mode = RUNTIME_CPU_EXECUTION_REAL;
   event.fault_rip = UINT64_C(0x2a00);
   event.window_bytes = 4u;
   event.window[0] = 0xc4u;
@@ -42,8 +42,8 @@ static int invoke_xms(unsigned service, unsigned ax, unsigned bx,
   event.eax = ax;
   event.ebx = bx;
   memset(&outcome, 0, sizeof(outcome));
-  return !(bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome) &&
-    outcome.disposition == BX_NTVDM_GENERIC_UD_RESUME &&
+  return !(runtime_mantle_generic_ud_bridge_v1(&event, &outcome) &&
+    outcome.disposition == RUNTIME_GENERIC_UD_RESUME &&
     outcome.resume_rip == UINT64_C(0x2a04) &&
     outcome.gpr16_write_mask == expected_gpr16_mask &&
     outcome.gpr16_values[0] == expected_ax);
@@ -51,21 +51,21 @@ static int invoke_xms(unsigned service, unsigned ax, unsigned bx,
 
 int main()
 {
-    if (!bx_ntvdm_bop_ingress_v1_bind(bx_ntvdm_opennt_bop_route_dispatch_v1, 0)) return 90;
-  bx_ntvdm_machine_stage_v1_request machine_request;
+    if (!runtime_bop_ingress_v1_bind(runtime_opennt_bop_route_dispatch_v1, 0)) return 90;
+  runtime_machine_stage_v1_request machine_request;
   uint8_t zero = 0u;
-  bx_ntvdm_machine_stage_v1_request_clear(&machine_request);
-  bx_ntvdm_mechanical_action_v1_clear(&machine_request.initial_state_action);
+  runtime_machine_stage_v1_request_clear(&machine_request);
+  runtime_mechanical_action_v1_clear(&machine_request.initial_state_action);
   machine_request.initial_state_action.action_id = 1u;
-  machine_request.initial_state_action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;
+  machine_request.initial_state_action.kind = RUNTIME_MECHANICAL_ACTION_V1_WRITE;
   machine_request.initial_state_action.range_count = 1u;
   machine_request.initial_state_action.payload_bytes = 1u;
   machine_request.initial_state_action.ranges[0].physical_address = 0x2010u;
   machine_request.initial_state_action.ranges[0].byte_count = 1u;
   machine_request.initial_state_action.payload[0] = zero;
-  bx_ntvdm_mechanical_action_v1_clear(&machine_request.startup_action);
+  runtime_mechanical_action_v1_clear(&machine_request.startup_action);
   machine_request.startup_action.action_id = 2u;
-  machine_request.startup_action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;
+  machine_request.startup_action.kind = RUNTIME_MECHANICAL_ACTION_V1_WRITE;
   machine_request.startup_action.range_count = 1u;
   machine_request.startup_action.payload_bytes = 1u;
   machine_request.startup_action.ranges[0].physical_address = 0x2000u;
@@ -75,10 +75,10 @@ int main()
   machine_request.preserved_state_bytes = 1u;
   machine_request.ivt_watch_enabled = 1u;
   machine_request.ivt_watch_vector = 0x15u;
-  if (!bx_ntvdm_machine_stage_v1_request_valid(&machine_request) ||
-      bx_ntvdm_machine_stage_v1_begin(&machine_request) != BX_NTVDM_MACHINE_STAGE_V1_OK)
+  if (!runtime_machine_stage_v1_request_valid(&machine_request) ||
+      runtime_machine_stage_v1_begin(&machine_request) != RUNTIME_MACHINE_STAGE_V1_OK)
     return 1;
-  if (!bx_ntvdm_xms_v2_runtime_session_bind(8192u)) return 2;
+  if (!runtime_xms_v2_runtime_session_bind(8192u)) return 2;
 
   /* The imported xmsmisc.c body calls the direct keybd_io.c fragment before
    * setting CX.  With the sampled IVT15 pair still 0000:0000, the first call
@@ -87,13 +87,13 @@ int main()
   if (invoke_xms(9u, 0x4567u, 0u, 2u, 0u) != 0) return 13;
   {
     uint16_t offset = 0u, segment = 0u;
-    if (!bx_ntvdm_ivt_watch_v1_copy_expected(0x15u, &offset, &segment) ||
+    if (!runtime_ivt_watch_v1_copy_expected(0x15u, &offset, &segment) ||
         offset != 0x4567u || segment != 0u) return 14;
   }
   if (invoke_xms(9u, 0x1234u, 0u, 2u, 0u) != 0) return 15;
   {
     uint16_t offset = 1u, segment = 1u;
-    if (!bx_ntvdm_ivt_watch_v1_copy_expected(0x15u, &offset, &segment) ||
+    if (!runtime_ivt_watch_v1_copy_expected(0x15u, &offset, &segment) ||
         offset != 0u || segment != 0u) return 16;
   }
 
@@ -132,6 +132,6 @@ int main()
   }
   if (invoke_xms(0u, 2u, 0u, 1u | 8u, 0u) != 0 || !a20_enabled(0u)) return 7;
 
-  bx_ntvdm_xms_v2_runtime_session_reset();
-  return bx_ntvdm_machine_stage_v1_reset() == BX_NTVDM_MACHINE_STAGE_V1_OK ? 0 : 8;
+  runtime_xms_v2_runtime_session_reset();
+  return runtime_machine_stage_v1_reset() == RUNTIME_MACHINE_STAGE_V1_OK ? 0 : 8;
 }

@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_HOST_SERVICE_CONTRACT_H
-#define BX_NTVDM_HOST_SERVICE_CONTRACT_H
+#ifndef RUNTIME_HOST_SERVICE_CONTRACT_H
+#define RUNTIME_HOST_SERVICE_CONTRACT_H
 
 #include <stdint.h>
 
@@ -10,16 +10,16 @@
  * composition dependency.  The retained `_v1` suffix denotes the frozen wire
  * layout, not a provider implementation selection.
  */
-typedef enum bx_ntvdm_host_service_family_v1 {
-    BX_NTVDM_HOST_SERVICE_FAMILY_NONE = 0,
-    BX_NTVDM_HOST_SERVICE_FAMILY_DEM = 1,
-    BX_NTVDM_HOST_SERVICE_FAMILY_COMMAND = 2
-} bx_ntvdm_host_service_family_v1;
+typedef enum runtime_host_service_family_v1 {
+    RUNTIME_HOST_SERVICE_FAMILY_NONE = 0,
+    RUNTIME_HOST_SERVICE_FAMILY_DEM = 1,
+    RUNTIME_HOST_SERVICE_FAMILY_COMMAND = 2
+} runtime_host_service_family_v1;
 
-typedef struct bx_ntvdm_host_service_request_v1 {
+typedef struct runtime_host_service_request_v1 {
     uint8_t selector;
     uint8_t service;
     uint16_t family;
-} bx_ntvdm_host_service_request_v1;
+} runtime_host_service_request_v1;
 
 #endif

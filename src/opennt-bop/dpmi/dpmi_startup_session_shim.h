@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_OPENNT_BOP_DPMI_STARTUP_SESSION_SHIM_H
-#define BX_NTVDM_OPENNT_BOP_DPMI_STARTUP_SESSION_SHIM_H
+#ifndef RUNTIME_OPENNT_BOP_DPMI_STARTUP_SESSION_SHIM_H
+#define RUNTIME_OPENNT_BOP_DPMI_STARTUP_SESSION_SHIM_H
 
 /*
  * T257 S3 source-derived seam for OpenNT dpmi32.c's DpmiInitDosx,
@@ -12,20 +12,20 @@
 
 #include <stdint.h>
 
-#include "adapter-softpc/bx_ntvdm_cpu_state_abi.h"
+#include "adapter-softpc/cpu_state_abi.h"
 
-#define BX_NTVDM_DPMI_STARTUP_SESSION_MAGIC UINT32_C(0x42584453)
-#define BX_NTVDM_DPMI_STARTUP_SESSION_VERSION UINT32_C(1)
-#define BX_NTVDM_DPMI_STARTUP_SESSION_SHARED_DATA_BYTES UINT32_C(58)
+#define RUNTIME_DPMI_STARTUP_SESSION_MAGIC UINT32_C(0x42584453)
+#define RUNTIME_DPMI_STARTUP_SESSION_VERSION UINT32_C(1)
+#define RUNTIME_DPMI_STARTUP_SESSION_SHARED_DATA_BYTES UINT32_C(58)
 
-enum bx_ntvdm_dpmi_startup_session_status {
-  BX_NTVDM_DPMI_STARTUP_SESSION_OK = 0u,
-  BX_NTVDM_DPMI_STARTUP_SESSION_REJECTED_INPUT,
-  BX_NTVDM_DPMI_STARTUP_SESSION_REJECTED_CPU_MODE,
-  BX_NTVDM_DPMI_STARTUP_SESSION_GUEST_READ_FAILED
+enum runtime_dpmi_startup_session_status {
+  RUNTIME_DPMI_STARTUP_SESSION_OK = 0u,
+  RUNTIME_DPMI_STARTUP_SESSION_REJECTED_INPUT,
+  RUNTIME_DPMI_STARTUP_SESSION_REJECTED_CPU_MODE,
+  RUNTIME_DPMI_STARTUP_SESSION_GUEST_READ_FAILED
 };
 
-struct bx_ntvdm_dpmi_startup_session {
+struct runtime_dpmi_startup_session {
   uint32_t magic;
   uint32_t abi_version;
   uint32_t struct_bytes;
@@ -61,36 +61,36 @@ struct bx_ntvdm_dpmi_startup_session {
 extern "C" {
 #endif
 
-void bx_ntvdm_dpmi_startup_session_clear(
-  struct bx_ntvdm_dpmi_startup_session *session);
-int bx_ntvdm_dpmi_startup_session_valid(
-  const struct bx_ntvdm_dpmi_startup_session *session);
-uint32_t bx_ntvdm_dpmi_startup_session_initialize_dosx(
-  struct bx_ntvdm_dpmi_startup_session *session, uint32_t shared_data_linear);
-uint32_t bx_ntvdm_dpmi_startup_session_initialize_app(
-  struct bx_ntvdm_dpmi_startup_session *session,
-  const bx_ntvdm_cpu_state_v1 *cpu_state, uint32_t current_dta_linear);
-uint32_t bx_ntvdm_dpmi_startup_session_publish_selector_table(
-  struct bx_ntvdm_dpmi_startup_session *session, uint32_t selector_table_linear);
+void runtime_dpmi_startup_session_clear(
+  struct runtime_dpmi_startup_session *session);
+int runtime_dpmi_startup_session_valid(
+  const struct runtime_dpmi_startup_session *session);
+uint32_t runtime_dpmi_startup_session_initialize_dosx(
+  struct runtime_dpmi_startup_session *session, uint32_t shared_data_linear);
+uint32_t runtime_dpmi_startup_session_initialize_app(
+  struct runtime_dpmi_startup_session *session,
+  const runtime_cpu_state_v1 *cpu_state, uint32_t current_dta_linear);
+uint32_t runtime_dpmi_startup_session_publish_selector_table(
+  struct runtime_dpmi_startup_session *session, uint32_t selector_table_linear);
 
-void bx_ntvdm_dpmi_startup_session_runtime_reset(void);
-int bx_ntvdm_dpmi_startup_session_runtime_stage_dosx(uint32_t shared_data_linear);
-int bx_ntvdm_dpmi_startup_session_runtime_stage_app(
-  const bx_ntvdm_cpu_state_v1 *cpu_state, uint32_t current_dta_linear);
-int bx_ntvdm_dpmi_startup_session_runtime_stage_selector_table(
+void runtime_dpmi_startup_session_runtime_reset(void);
+int runtime_dpmi_startup_session_runtime_stage_dosx(uint32_t shared_data_linear);
+int runtime_dpmi_startup_session_runtime_stage_app(
+  const runtime_cpu_state_v1 *cpu_state, uint32_t current_dta_linear);
+int runtime_dpmi_startup_session_runtime_stage_selector_table(
   uint32_t selector_table_linear);
-int bx_ntvdm_dpmi_startup_session_runtime_stage_dispatch(
-  const bx_ntvdm_cpu_state_v1 *cpu_state, uint32_t index);
-int bx_ntvdm_dpmi_startup_session_runtime_take_dispatch(uint32_t *index);
-int bx_ntvdm_dpmi_startup_session_runtime_copy_cpu(
-  bx_ntvdm_cpu_state_v1 *cpu_state);
-void bx_ntvdm_dpmi_startup_session_runtime_set_ax(uint16_t value);
-void bx_ntvdm_dpmi_startup_session_runtime_advance_ip(uint32_t bytes);
-void bx_ntvdm_dpmi_startup_session_runtime_initialize_dosx(void);
-void bx_ntvdm_dpmi_startup_session_runtime_initialize_app(void);
-void bx_ntvdm_dpmi_startup_session_runtime_publish_selector_table(void);
-const struct bx_ntvdm_dpmi_startup_session *
-  bx_ntvdm_dpmi_startup_session_runtime_current(void);
+int runtime_dpmi_startup_session_runtime_stage_dispatch(
+  const runtime_cpu_state_v1 *cpu_state, uint32_t index);
+int runtime_dpmi_startup_session_runtime_take_dispatch(uint32_t *index);
+int runtime_dpmi_startup_session_runtime_copy_cpu(
+  runtime_cpu_state_v1 *cpu_state);
+void runtime_dpmi_startup_session_runtime_set_ax(uint16_t value);
+void runtime_dpmi_startup_session_runtime_advance_ip(uint32_t bytes);
+void runtime_dpmi_startup_session_runtime_initialize_dosx(void);
+void runtime_dpmi_startup_session_runtime_initialize_app(void);
+void runtime_dpmi_startup_session_runtime_publish_selector_table(void);
+const struct runtime_dpmi_startup_session *
+  runtime_dpmi_startup_session_runtime_current(void);
 
 #ifdef __cplusplus
 }

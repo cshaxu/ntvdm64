@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_BOP_SHIM_OPENNT_RTL_COMPAT_H
-#define BX_NTVDM_BOP_SHIM_OPENNT_RTL_COMPAT_H
+#ifndef RUNTIME_BOP_SHIM_OPENNT_RTL_COMPAT_H
+#define RUNTIME_BOP_SHIM_OPENNT_RTL_COMPAT_H
 
 /*
  * Canonical HOST-07 declaration surface for directly imported OpenNT bodies.
@@ -16,24 +16,24 @@
 
 #if defined(__cplusplus)
 extern "C" {
-#define BX_NTVDM_OPENNT_RTL_STATIC_ASSERT(condition, message) \
+#define RUNTIME_OPENNT_RTL_STATIC_ASSERT(condition, message) \
     static_assert((condition), message)
 #else
-#define BX_NTVDM_OPENNT_RTL_STATIC_ASSERT(condition, message) \
+#define RUNTIME_OPENNT_RTL_STATIC_ASSERT(condition, message) \
     _Static_assert((condition), message)
 #endif
 
 /* The following layout checks document the x86/x64 host boundary.  The
  * counted-string records carry native pointers and are valid only inside a
  * synchronous host facade; they must never be copied into guest memory. */
-BX_NTVDM_OPENNT_RTL_STATIC_ASSERT(sizeof(USHORT) == 2u, "OpenNT counted-string length width");
-BX_NTVDM_OPENNT_RTL_STATIC_ASSERT(offsetof(ANSI_STRING, Length) == 0u,
+RUNTIME_OPENNT_RTL_STATIC_ASSERT(sizeof(USHORT) == 2u, "OpenNT counted-string length width");
+RUNTIME_OPENNT_RTL_STATIC_ASSERT(offsetof(ANSI_STRING, Length) == 0u,
     "OpenNT ANSI_STRING Length offset");
-BX_NTVDM_OPENNT_RTL_STATIC_ASSERT(offsetof(ANSI_STRING, MaximumLength) == sizeof(USHORT),
+RUNTIME_OPENNT_RTL_STATIC_ASSERT(offsetof(ANSI_STRING, MaximumLength) == sizeof(USHORT),
     "OpenNT ANSI_STRING MaximumLength offset");
-BX_NTVDM_OPENNT_RTL_STATIC_ASSERT(offsetof(UNICODE_STRING, Length) == 0u,
+RUNTIME_OPENNT_RTL_STATIC_ASSERT(offsetof(UNICODE_STRING, Length) == 0u,
     "OpenNT UNICODE_STRING Length offset");
-BX_NTVDM_OPENNT_RTL_STATIC_ASSERT(offsetof(UNICODE_STRING, MaximumLength) == sizeof(USHORT),
+RUNTIME_OPENNT_RTL_STATIC_ASSERT(offsetof(UNICODE_STRING, MaximumLength) == sizeof(USHORT),
     "OpenNT UNICODE_STRING MaximumLength offset");
 
 void RtlInitAnsiString(PANSI_STRING destination, const CHAR *source);
@@ -59,6 +59,6 @@ ULONG RtlNtStatusToDosError(NTSTATUS status);
 }
 #endif
 
-#undef BX_NTVDM_OPENNT_RTL_STATIC_ASSERT
+#undef RUNTIME_OPENNT_RTL_STATIC_ASSERT
 
 #endif

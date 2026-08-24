@@ -24,25 +24,25 @@ static int guest_write(void *state, uint32_t address, const uint8_t *buffer, uin
     return 1;
 }
 
-static void initialize_event(bx_ntvdm_exception_event_v1 *event)
+static void initialize_event(runtime_exception_event_v1 *event)
 {
     memset(event, 0, sizeof(*event));
-    event->magic = BX_NTVDM_EXCEPTION_ABI_MAGIC;
-    event->abi_version = BX_NTVDM_EXCEPTION_ABI_VERSION;
+    event->magic = RUNTIME_EXCEPTION_ABI_MAGIC;
+    event->abi_version = RUNTIME_EXCEPTION_ABI_VERSION;
     event->struct_bytes = sizeof(*event);
-    event->kind = BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION;
+    event->kind = RUNTIME_EXCEPTION_EVENT_CPU_EXCEPTION;
     event->vector = 6u;
     event->fault_rip = 0x500u;
 }
 
-static int invoke(fixture_context *context, bx_ntvdm_exception_event_v1 *event,
-    bx_ntvdm_cpu_state_v1 *cpu, bx_ntvdm_cpu_result_v2 *result,
-    bx_ntvdm_command_misc_session *session, uint32_t service)
+static int invoke(fixture_context *context, runtime_exception_event_v1 *event,
+    runtime_cpu_state_v1 *cpu, runtime_cpu_result_v2 *result,
+    runtime_command_misc_session *session, uint32_t service)
 {
-    bx_ntvdm_command_misc_call call;
+    runtime_command_misc_call call;
     memset(&call, 0, sizeof(call));
-    call.magic = BX_NTVDM_COMMAND_MISC_CALL_MAGIC;
-    call.abi_version = BX_NTVDM_COMMAND_MISC_CALL_VERSION;
+    call.magic = RUNTIME_COMMAND_MISC_CALL_MAGIC;
+    call.abi_version = RUNTIME_COMMAND_MISC_CALL_VERSION;
     call.struct_bytes = sizeof(call);
     call.service = service;
     call.boundary = event;
@@ -52,7 +52,7 @@ static int invoke(fixture_context *context, bx_ntvdm_exception_event_v1 *event,
     call.guest_read = guest_read;
     call.guest_write = guest_write;
     call.session = session;
-    return bx_ntvdm_command_misc_invoke(&call);
+    return runtime_command_misc_invoke(&call);
 }
 
 static int write_text_file(const CHAR *path, const CHAR *text)
@@ -92,10 +92,10 @@ static int multisz_contains(const CHAR *strings, const CHAR *needle)
 int main(void)
 {
     fixture_context context;
-    bx_ntvdm_exception_event_v1 event;
-    bx_ntvdm_cpu_state_v1 cpu;
-    bx_ntvdm_cpu_result_v2 result;
-    bx_ntvdm_command_misc_session session;
+    runtime_exception_event_v1 event;
+    runtime_cpu_state_v1 cpu;
+    runtime_cpu_result_v2 result;
+    runtime_command_misc_session session;
     CHAR directory[MAX_PATH], config_path[MAX_PATH], autoexec_path[MAX_PATH];
     CHAR text[4096];
     CHAR too_long[65u];
@@ -112,22 +112,22 @@ int main(void)
 
     memset(&context, 0, sizeof(context));
     initialize_event(&event);
-    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL);
-    bx_ntvdm_command_misc_session_initialize(&session);
-    bx_ntvdm_command_config_set_inputs(&session, config_path, autoexec_path);
+    runtime_cpu_state_v1_initialize(&cpu, RUNTIME_CPU_EXECUTION_REAL);
+    runtime_command_misc_session_initialize(&session);
+    runtime_command_config_set_inputs(&session, config_path, autoexec_path);
     memset(too_long, 'X', sizeof(too_long) - 1u);
     too_long[sizeof(too_long) - 1u] = '\0';
-    if (bx_ntvdm_command_config_set_bootstrap_command(&session, too_long) ||
-        bx_ntvdm_command_config_set_bootstrap_command(&session,
+    if (runtime_command_config_set_bootstrap_command(&session, too_long) ||
+        runtime_command_config_set_bootstrap_command(&session,
             "O:\\NTDOS64\\DOS ROOT\\COMMAND.COM")) return 2;
-    if (!bx_ntvdm_command_config_set_bootstrap_command(&session,
+    if (!runtime_command_config_set_bootstrap_command(&session,
             "O:\\NTDOS64\\DOS\\COMMAND.COM")) return 2;
     cpu.ds = 0x100u;
     cpu.edx = 0x100u;
 
     if (!invoke(&context, &event, &cpu, &result, &session,
-            BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS) ||
-        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+            RUNTIME_COMMAND_MISC_GET_CONFIG_SYS) ||
+        result.disposition != RUNTIME_CPU_RESULT_V2_RESUME ||
         !read_text_file((CHAR *)context.guest + 0x1100u, text, sizeof(text)) ||
         strstr(text, "country=999") != NULL || strstr(text, "device=keep.sys") == NULL ||
         strstr(text, "shell=O:\\NTDOS64\\DOS\\COMMAND.COM /p") == NULL ||
@@ -135,18 +135,18 @@ int main(void)
 
     memset(context.guest + 0x1100u, 0, 64u);
     if (!invoke(&context, &event, &cpu, &result, &session,
-            BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT) ||
-        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+            RUNTIME_COMMAND_MISC_GET_AUTOEXEC_BAT) ||
+        result.disposition != RUNTIME_CPU_RESULT_V2_RESUME ||
         !read_text_file((CHAR *)context.guest + 0x1100u, text, sizeof(text)) ||
         strstr(text, "PROMPT $P$G") == NULL || strstr(text, "PATH=C:\\TOOLS") == NULL ||
         strstr(text, "SET FOO=BAR") == NULL || lpszzcmdEnv16 == NULL ||
         !multisz_contains(lpszzcmdEnv16, "PROMPT") ||
         !multisz_contains(lpszzcmdEnv16, "FOO")) return 4;
 
-    bx_ntvdm_command_config_set_inputs(&session, "Z:\\does-not-exist\\config.nt", autoexec_path);
+    runtime_command_config_set_inputs(&session, "Z:\\does-not-exist\\config.nt", autoexec_path);
     if (!invoke(&context, &event, &cpu, &result, &session,
-            BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS) ||
-        result.disposition != BX_NTVDM_CPU_RESULT_V2_STOP) return 5;
+            RUNTIME_COMMAND_MISC_GET_CONFIG_SYS) ||
+        result.disposition != RUNTIME_CPU_RESULT_V2_STOP) return 5;
 
     DeleteConfigFiles();
     free(lpszzcmdEnv16); lpszzcmdEnv16 = NULL;

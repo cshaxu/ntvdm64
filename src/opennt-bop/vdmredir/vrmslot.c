@@ -69,7 +69,7 @@ VrMakeMailslot(
     /* DIVERGENCE(BOP-DIV-062): OpenNT dereferenced a flat SAS guest pointer.
      * This composition retains the source body while copying the ASCIZ name
      * through the existing bounded CCPU/SAS facade. */
-    if (!bx_ntvdm_demhndl_copy_guest_oem_string(getDS(), getSI(), NameBuffer,
+    if (!runtime_demhndl_copy_guest_oem_string(getDS(), getSI(), NameBuffer,
             sizeof(NameBuffer))) { SET_ERROR(ERROR_INVALID_ADDRESS); return; }
     lpName = NameBuffer;
     NameLength = (DWORD)strlen(lpName);
@@ -85,7 +85,7 @@ VrMakeMailslot(
     }
     /* DIVERGENCE(BOP-DIV-063): replace OpenNT's private pre-allocated
      * Handle16 bitmap with the sole session-owned opaque handle mapper. */
-    if (!bx_ntvdm_demhndl_publish_handle_token(Handle32, &token) || token > UINT16_MAX) {
+    if (!runtime_demhndl_publish_handle_token(Handle32, &token) || token > UINT16_MAX) {
         if (token != 0u) (void)VrpCloseMailslotHandle((WORD)token, Handle32);
         else CloseHandle(Handle32);
         VrpFreeMailslotStructure(ptr); SET_ERROR(ERROR_PATH_NOT_FOUND); return;
@@ -169,7 +169,7 @@ Return Value:
     /* DIVERGENCE(BOP-DIV-065): OpenNT obtained Name through a flat SAS
      * pointer.  Preserve the source body and its call order after copying the
      * bounded ASCIZ input through the existing CCPU/SAS facade. */
-    if (!bx_ntvdm_demhndl_copy_guest_oem_string(getDS(), getSI(), NameBuffer,
+    if (!runtime_demhndl_copy_guest_oem_string(getDS(), getSI(), NameBuffer,
             sizeof(NameBuffer))) { SET_ERROR(ERROR_INVALID_ADDRESS); return; }
     Name = NameBuffer;
 
@@ -428,7 +428,7 @@ VrpIsMailslotName(
 }
 
 static void VrpReleaseMailslot(PVR_MAILSLOT_INFO ptr, void *state,
-    bx_ntvdm_vrmslot_release_fn release)
+    runtime_vrmslot_release_fn release)
 {
     DWORD ignored_error;
     if (ptr == NULL) return;
@@ -440,7 +440,7 @@ static void VrpReleaseMailslot(PVR_MAILSLOT_INFO ptr, void *state,
 }
 
 void VrpRemoveProcessMailslotsWithRelease(WORD dos_pdb, void *state,
-    bx_ntvdm_vrmslot_release_fn release)
+    runtime_vrmslot_release_fn release)
 {
     PVR_MAILSLOT_INFO ptr = MailslotInfoList, previous = NULL;
     while (ptr != NULL) {
@@ -462,7 +462,7 @@ void VrpRemoveProcessMailslots(WORD dos_pdb)
     VrpRemoveProcessMailslotsWithRelease(dos_pdb, NULL, NULL);
 }
 
-void VrpResetMailslots(void *state, bx_ntvdm_vrmslot_release_fn release)
+void VrpResetMailslots(void *state, runtime_vrmslot_release_fn release)
 {
     PVR_MAILSLOT_INFO ptr = MailslotInfoList;
     MailslotInfoList = NULL;
@@ -502,7 +502,7 @@ Return Value:
 /* DIVERGENCE(BOP-DIV-060): the source helper receives its PDB from the
  * original NetResetEnvironment caller.  The BOP route carries that same
  * 16-bit value in AX, copied by the existing selector-owned frame bridge. */
-void bx_ntvdm_vrmslot_terminate_bop_body(void)
+void runtime_vrmslot_terminate_bop_body(void)
 {
     VrTerminateMailslots(getAX());
 }

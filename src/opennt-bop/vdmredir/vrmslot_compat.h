@@ -1,5 +1,5 @@
-#ifndef NTDOS64_OPENNT_BOP_VDMREDIR_VRMSLOT_COMPAT_H
-#define NTDOS64_OPENNT_BOP_VDMREDIR_VRMSLOT_COMPAT_H
+#ifndef APP_OPENNT_BOP_VDMREDIR_VRMSLOT_COMPAT_H
+#define APP_OPENNT_BOP_VDMREDIR_VRMSLOT_COMPAT_H
 
 /*
  * Compatibility include for directly retained VDMREDIR mailslot bodies.
@@ -13,14 +13,14 @@
 #include "opennt-host/vdmredir/vrputil.h"
 
 #define SET_ERROR(err) { setAX((WORD)(err)); setCF(1); }
-#define setES(value) bx_ntvdm_ccpu_sas_set_es(value)
+#define setES(value) runtime_ccpu_sas_set_es(value)
 /* DIVERGENCE(BOP-DIV-059): OpenNT's record carries a raw process HANDLE;
  * the standalone composition carries only its opaque manager token.  Retain
  * the original close call shape while the existing CCPU/SAS facade releases
  * the matching mapped handle. */
 #define VrpCloseMailslotHandle(token, handle) \
-    ((void)bx_ntvdm_ccpu_sas_get_handle(0u, (token)), \
-     bx_ntvdm_ccpu_sas_close_handle((handle)))
+    ((void)runtime_ccpu_sas_get_handle(0u, (token)), \
+     runtime_ccpu_sas_close_handle((handle)))
 
 #define MAILSLOT_PREFIX "\\MAILSLOT\\"
 #define MAILSLOT_PREFIX_LENGTH (sizeof(MAILSLOT_PREFIX) - 1u)
@@ -29,7 +29,7 @@
 #define HANDLE_FUNCTION_FAILED INVALID_HANDLE_VALUE
 #undef GetVDMAddr
 #define GetVDMAddr(segment, offset) \
-    bx_ntvdm_ccpu_sas_get_vdm_addr((USHORT)(segment), (USHORT)(offset))
+    runtime_ccpu_sas_get_vdm_addr((USHORT)(segment), (USHORT)(offset))
 #define POINTER_FROM_WORDS(segment, offset) GetVDMAddr((segment), (offset))
 #define LPSTR_FROM_WORDS(segment, offset) ((LPSTR)POINTER_FROM_WORDS((segment), (offset)))
 #define READ_FAR_POINTER(address) \
@@ -64,7 +64,7 @@ typedef struct _VR_MAILSLOT_INFO {
     CHAR Name[2];
 } VR_MAILSLOT_INFO;
 
-typedef int (*bx_ntvdm_vrmslot_release_fn)(void *state, uint32_t token,
+typedef int (*runtime_vrmslot_release_fn)(void *state, uint32_t token,
     DWORD *error_out);
 
 PVR_MAILSLOT_INFO VrpAllocateMailslotStructure(DWORD name_length);
@@ -75,8 +75,8 @@ PVR_MAILSLOT_INFO VrpMapMailslotHandle16(WORD handle16);
 PVR_MAILSLOT_INFO VrpMapMailslotName(LPSTR name);
 void VrpRemoveProcessMailslots(WORD dos_pdb);
 void VrpRemoveProcessMailslotsWithRelease(WORD dos_pdb, void *state,
-    bx_ntvdm_vrmslot_release_fn release);
-void VrpResetMailslots(void *state, bx_ntvdm_vrmslot_release_fn release);
+    runtime_vrmslot_release_fn release);
+void VrpResetMailslots(void *state, runtime_vrmslot_release_fn release);
 void VrpMakeLocalMailslotName(LPSTR buffer, LPSTR name);
 BOOL VrpIsMailslotName(LPSTR name);
 
@@ -87,6 +87,6 @@ void VrWriteMailslot(void);
 void VrGetMailslotInfo(void);
 void VrDeleteMailslot(void);
 void VrTerminateMailslots(WORD DosPdb);
-void bx_ntvdm_vrmslot_terminate_bop_body(void);
+void runtime_vrmslot_terminate_bop_body(void);
 
 #endif

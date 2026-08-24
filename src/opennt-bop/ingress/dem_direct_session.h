@@ -1,30 +1,30 @@
-#ifndef BX_NTVDM_OPENNT_BOP_DEM_DIRECT_HOST_SESSION_H
-#define BX_NTVDM_OPENNT_BOP_DEM_DIRECT_HOST_SESSION_H
+#ifndef RUNTIME_OPENNT_BOP_DEM_DIRECT_HOST_SESSION_H
+#define RUNTIME_OPENNT_BOP_DEM_DIRECT_HOST_SESSION_H
 
 #include "opennt-bop/dem/bx_ntvdm_dem_direct_context.h"
-#include "bx_ntvdm_host_handle_manager.h"
+#include "host_handle_manager.h"
 
-#define BX_NTVDM_DEM_DIRECT_HOST_SESSION_MAGIC 0x42584448u
-#define BX_NTVDM_DEM_DIRECT_HOST_SESSION_VERSION 1u
+#define RUNTIME_DEM_DIRECT_HOST_SESSION_MAGIC 0x42584448u
+#define RUNTIME_DEM_DIRECT_HOST_SESSION_VERSION 1u
 
-typedef struct bx_ntvdm_dem_direct_host_session {
+typedef struct runtime_dem_direct_host_session {
     uint32_t magic, abi_version, struct_bytes, bound;
-    bx_ntvdm_host_handle_manager *handles;
-    bx_ntvdm_dem_direct_context context;
-} bx_ntvdm_dem_direct_host_session;
+    runtime_host_handle_manager *handles;
+    runtime_dem_direct_context context;
+} runtime_dem_direct_host_session;
 
-int bx_ntvdm_dem_direct_host_session_initialize(
-    bx_ntvdm_dem_direct_host_session *session);
-void bx_ntvdm_dem_direct_host_session_reset(
-    bx_ntvdm_dem_direct_host_session *session);
-bx_ntvdm_dem_direct_context *bx_ntvdm_dem_direct_host_session_context(
-    bx_ntvdm_dem_direct_host_session *session);
+int runtime_dem_direct_host_session_initialize(
+    runtime_dem_direct_host_session *session);
+void runtime_dem_direct_host_session_reset(
+    runtime_dem_direct_host_session *session);
+runtime_dem_direct_context *runtime_dem_direct_host_session_context(
+    runtime_dem_direct_host_session *session);
 
 /* These callbacks are intentionally exported only as a Direct DEM session
  * seam.  They transport checked ordinary RAM and no BOP/service identity. */
-int bx_ntvdm_dem_direct_host_session_guest_read(void *state,
+int runtime_dem_direct_host_session_guest_read(void *state,
     uint32_t address, uint8_t *bytes, uint32_t byte_count);
-int bx_ntvdm_dem_direct_host_session_guest_write(void *state,
+int runtime_dem_direct_host_session_guest_write(void *state,
     uint32_t address, const uint8_t *bytes, uint32_t byte_count);
 
 #endif

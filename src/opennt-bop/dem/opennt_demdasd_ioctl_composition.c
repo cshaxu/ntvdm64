@@ -28,19 +28,19 @@ WORD int13h_vector_seg;
 WORD int13h_caller_off;
 WORD int13h_caller_seg;
 
-typedef struct bx_ntvdm_demdasd_cpu_shadow {
+typedef struct runtime_demdasd_cpu_shadow {
     USHORT cs;
     USHORT ip;
-} bx_ntvdm_demdasd_cpu_shadow;
+} runtime_demdasd_cpu_shadow;
 
-static __declspec(thread) bx_ntvdm_demdasd_cpu_shadow g_cpu_shadow;
+static __declspec(thread) runtime_demdasd_cpu_shadow g_cpu_shadow;
 
 /* Directly shaped from OpenNT softpc.new/host/src/nt_fdisk.c.  Keep its
  * physical-drive table, PDB ownership and handle lifecycle intact.  The
  * documented divergence is public Win32 volume/geometry queries in place of
  * NT4's private Nt* entry points. */
 #define FDISK_IDLE_PERIOD 30u
-typedef struct bx_ntvdm_opennt_fdisk_data {
+typedef struct runtime_opennt_fdisk_data {
     BYTE drive, idle_counter;
     CHAR drive_letter;
     BOOLEAN auto_locked;
@@ -50,9 +50,9 @@ typedef struct bx_ntvdm_opennt_fdisk_data {
     DWORD sectors_per_track, bytes_per_sector, align_factor;
     USHORT owner_pdb;
     CHAR device_name[9];
-} bx_ntvdm_opennt_fdisk_data;
+} runtime_opennt_fdisk_data;
 
-static bx_ntvdm_opennt_fdisk_data *fdisk_data_table;
+static runtime_opennt_fdisk_data *fdisk_data_table;
 static BYTE number_of_fdisk;
 static DWORD max_align_factor, cur_align_factor;
 static WORD fdisk_open_count;
@@ -61,16 +61,16 @@ static int g_dasd_initialized;
 extern PUSHORT pusCurrentPDB;
 extern WORD *pFDAccess;
 
-USHORT bx_ntvdm_demdasd_get_cs(void) { return g_cpu_shadow.cs; }
-USHORT bx_ntvdm_demdasd_get_ip(void) { return g_cpu_shadow.ip; }
-int bx_ntvdm_demdasd_get_cf(void) { return bx_ntvdm_demhndl_get_cf(); }
-USHORT bx_ntvdm_demdasd_get_ah(void) { return bx_ntvdm_demhndl_get_ah(); }
-void bx_ntvdm_demdasd_set_cs(USHORT value) { g_cpu_shadow.cs = value; }
-void bx_ntvdm_demdasd_set_ip(USHORT value) { g_cpu_shadow.ip = value; }
-void bx_ntvdm_demdasd_set_es(USHORT value) { bx_ntvdm_demhndl_set_es(value); }
-void bx_ntvdm_demdasd_set_ah(USHORT value) { bx_ntvdm_demhndl_set_ah(value); }
+USHORT runtime_demdasd_get_cs(void) { return g_cpu_shadow.cs; }
+USHORT runtime_demdasd_get_ip(void) { return g_cpu_shadow.ip; }
+int runtime_demdasd_get_cf(void) { return runtime_demhndl_get_cf(); }
+USHORT runtime_demdasd_get_ah(void) { return runtime_demhndl_get_ah(); }
+void runtime_demdasd_set_cs(USHORT value) { g_cpu_shadow.cs = value; }
+void runtime_demdasd_set_ip(USHORT value) { g_cpu_shadow.ip = value; }
+void runtime_demdasd_set_es(USHORT value) { runtime_demhndl_set_es(value); }
+void runtime_demdasd_set_ah(USHORT value) { runtime_demhndl_set_ah(value); }
 
-void bx_ntvdm_demdasd_host_simulate(void)
+void runtime_demdasd_host_simulate(void)
 {
     /* DIVERGENCE(BOP-DIV-046): recursive SoftPC execution has no bounded
      * Bochs equivalent at this source call boundary. */
@@ -79,18 +79,18 @@ void bx_ntvdm_demdasd_host_simulate(void)
      * copied result ABI intentionally cannot mutate selectors/IP, so fail
      * this unavailable mechanism explicitly instead of fabricating I/O. */
     SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
-    bx_ntvdm_demhndl_set_ah(BIOS_INVALID_FUNCTION);
-    bx_ntvdm_demhndl_set_cf(1);
+    runtime_demhndl_set_ah(BIOS_INVALID_FUNCTION);
+    runtime_demhndl_set_cf(1);
 }
 
-void diskette_io(void) { bx_ntvdm_demdasd_host_simulate(); }
+void diskette_io(void) { runtime_demdasd_host_simulate(); }
 
 void sas_loadw(DWORD address, WORD *value)
 {
     /* Original source: src/opennt/base/mvdm/dos/dem/demdasd.c reads IVT words
      * through SAS.  Translate that finite real-mode address through the same
      * checked guest span used by all imported DEM callers. */
-    if (value == NULL || !bx_ntvdm_demhndl_copy_guest((USHORT)(address >> 4),
+    if (value == NULL || !runtime_demhndl_copy_guest((USHORT)(address >> 4),
             (USHORT)(address & 0x0fu), value, sizeof(*value))) {
         if (value != NULL) *value = 0u;
         SetLastError(ERROR_INVALID_ADDRESS);
@@ -118,7 +118,7 @@ BOOL nt_fdisk_init(BYTE drive, PBPB bpb, PDISK_GEOMETRY geometry)
 {
     CHAR root[] = "A:\\";
     CHAR volume[] = "\\\\.\\A:";
-    bx_ntvdm_opennt_fdisk_data *data;
+    runtime_opennt_fdisk_data *data;
     HANDLE handle;
     DWORD bytes;
     DWORD spc, bps, free_clusters, total_clusters;
@@ -152,7 +152,7 @@ BOOL nt_fdisk_init(BYTE drive, PBPB bpb, PDISK_GEOMETRY geometry)
      * fixed volumes can be NTFS/ReFS.  The existing OpenNT BPB contract is
      * populated from public Win32 geometry/free-space data, then its original
      * BDS/read/write/verify logic remains untouched in demdasd.c. */
-    data = (bx_ntvdm_opennt_fdisk_data *)realloc(fdisk_data_table,
+    data = (runtime_opennt_fdisk_data *)realloc(fdisk_data_table,
         (number_of_fdisk + 1u) * sizeof(*data));
     if (data == NULL) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
     fdisk_data_table = data;
@@ -176,7 +176,7 @@ BOOL nt_fdisk_init(BYTE drive, PBPB bpb, PDISK_GEOMETRY geometry)
     return TRUE;
 }
 
-static bx_ntvdm_opennt_fdisk_data *get_fdisk_data(BYTE drive)
+static runtime_opennt_fdisk_data *get_fdisk_data(BYTE drive)
 {
     BYTE index;
     for (index = 0u; index < number_of_fdisk; ++index)
@@ -184,7 +184,7 @@ static bx_ntvdm_opennt_fdisk_data *get_fdisk_data(BYTE drive)
     SetLastError(ERROR_INVALID_DRIVE); return NULL;
 }
 
-static BOOL close_fdisk(bx_ntvdm_opennt_fdisk_data *data)
+static BOOL close_fdisk(runtime_opennt_fdisk_data *data)
 {
     if (data == NULL) return FALSE;
     if (data->fdisk_fd != INVALID_HANDLE_VALUE) {
@@ -196,7 +196,7 @@ static BOOL close_fdisk(bx_ntvdm_opennt_fdisk_data *data)
     return TRUE;
 }
 
-static BOOL get_fdisk_handle(bx_ntvdm_opennt_fdisk_data *data, USHORT pdb,
+static BOOL get_fdisk_handle(runtime_opennt_fdisk_data *data, USHORT pdb,
     BOOL auto_lock)
 {
     DWORD access, share;
@@ -233,16 +233,16 @@ static ULONG disk_transfer(HANDLE handle, PLARGE_INTEGER offset, ULONG size,
 }
 
 ULONG nt_fdisk_read(BYTE drive, PLARGE_INTEGER offset, ULONG size, PBYTE buffer)
-{ bx_ntvdm_opennt_fdisk_data *d = get_fdisk_data(drive); return d != NULL &&
+{ runtime_opennt_fdisk_data *d = get_fdisk_data(drive); return d != NULL &&
     get_fdisk_handle(d, pusCurrentPDB != NULL ? *pusCurrentPDB : 0u, FALSE) ?
     disk_transfer(d->fdisk_fd, offset, size, buffer, FALSE) : 0u; }
 ULONG nt_fdisk_write(BYTE drive, PLARGE_INTEGER offset, ULONG size, PBYTE buffer)
-{ bx_ntvdm_opennt_fdisk_data *d = get_fdisk_data(drive); return d != NULL &&
+{ runtime_opennt_fdisk_data *d = get_fdisk_data(drive); return d != NULL &&
     get_fdisk_handle(d, pusCurrentPDB != NULL ? *pusCurrentPDB : 0u, TRUE) ?
     disk_transfer(d->fdisk_fd, offset, size, buffer, TRUE) : 0u; }
 BOOL nt_fdisk_verify(BYTE drive, PLARGE_INTEGER offset, ULONG size)
 {
-    bx_ntvdm_opennt_fdisk_data *d; DWORD bytes;
+    runtime_opennt_fdisk_data *d; DWORD bytes;
     VERIFY_INFORMATION info;
     d = get_fdisk_data(drive);
     if (d == NULL || offset == NULL || !get_fdisk_handle(d,
@@ -259,7 +259,7 @@ void fdisk_heart_beat(void)
      * participate, and each source-owned access resets its countdown. */
     if (fdisk_open_count == 0u) return;
     for (index = 0u; index < number_of_fdisk; ++index) {
-        bx_ntvdm_opennt_fdisk_data *data = &fdisk_data_table[index];
+        runtime_opennt_fdisk_data *data = &fdisk_data_table[index];
         if (data->fdisk_fd != INVALID_HANDLE_VALUE && data->idle_counter != 0u &&
             --data->idle_counter == 0u) close_fdisk(data);
     }
@@ -270,7 +270,7 @@ void FdiskTerminatePDB(USHORT pdb)
     BYTE index;
     if (fdisk_open_count == 0u) return;
     for (index = 0u; index < number_of_fdisk; ++index) {
-        bx_ntvdm_opennt_fdisk_data *data = &fdisk_data_table[index];
+        runtime_opennt_fdisk_data *data = &fdisk_data_table[index];
         if (data->fdisk_fd != INVALID_HANDLE_VALUE &&
             (pdb == 0u || data->owner_pdb == pdb)) close_fdisk(data);
     }
@@ -278,11 +278,11 @@ void FdiskTerminatePDB(USHORT pdb)
 
 void HostFdiskReset(void) { FdiskTerminatePDB(0u); }
 
-int bx_ntvdm_demdasd_ioctl_invoke(bx_ntvdm_demhndl_call *call)
+int runtime_demdasd_ioctl_invoke(runtime_demhndl_call *call)
 {
     void (*body)(void) = NULL;
 
-    if (!bx_ntvdm_demhndl_call_valid(call)) return 0;
+    if (!runtime_demhndl_call_valid(call)) return 0;
     switch (call->service) {
     case 0x21u:
         /* OpenNT demIOCTL performs this range check only under DBG.  The
@@ -305,7 +305,7 @@ int bx_ntvdm_demdasd_ioctl_invoke(bx_ntvdm_demhndl_call *call)
      * SoftPC BIOS path.  This direct host-volume composition admits only its
      * fixed-disk half; retain the original demFdiskInit owner verbatim. */
     if (!g_dasd_initialized) { demFdiskInit(); g_dasd_initialized = 1; }
-    if (!bx_ntvdm_demhndl_invoke_body(call, body)) return 0;
+    if (!runtime_demhndl_invoke_body(call, body)) return 0;
     memset(&g_cpu_shadow, 0, sizeof(g_cpu_shadow));
     return 1;
 }

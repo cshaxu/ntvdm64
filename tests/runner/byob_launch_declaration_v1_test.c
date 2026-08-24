@@ -1,4 +1,4 @@
-#include "byob_launch_declaration_v1.h"
+#include "byob_launch_declaration.h"
 
 #include <stdio.h>
 #include <string.h>

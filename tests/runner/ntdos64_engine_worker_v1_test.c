@@ -1,5 +1,5 @@
-#include "engine_worker_v1.h"
-#include "bx_ntvdm_cancellation_controller_v1.h"
+#include "engine_worker.h"
+#include "cancellation_controller.h"
 
 #include <string.h>
 
@@ -7,24 +7,24 @@ static volatile LONG engine_started;
 static volatile LONG cancellation_calls;
 static int cancellation_mode;
 
-int bx_ntvdm_engine_run_v1(const struct bx_ntvdm_engine_request_v1 *request,
-    struct bx_ntvdm_engine_result_v1 *result)
+int runtime_engine_run_v1(const struct runtime_engine_request_v1 *request,
+    struct runtime_engine_result_v1 *result)
 {
-    if (!bx_ntvdm_engine_request_v1_valid(request)) return 0;
+    if (!runtime_engine_request_v1_valid(request)) return 0;
     InterlockedExchange(&engine_started, 1);
     if (cancellation_mode) {
         while (InterlockedCompareExchange(&cancellation_calls, 0, 0) == 0) Sleep(1u);
-        return bx_ntvdm_engine_result_v1_set(result,
-            BX_NTVDM_ENGINE_TERMINAL_V1_HOST_CANCELLATION,
-            BX_NTVDM_CANCELLATION_V1_USER_REQUEST);
+        return runtime_engine_result_v1_set(result,
+            RUNTIME_ENGINE_TERMINAL_V1_HOST_CANCELLATION,
+            RUNTIME_CANCELLATION_V1_USER_REQUEST);
     }
-    return bx_ntvdm_engine_result_v1_set(result,
-        BX_NTVDM_ENGINE_TERMINAL_V1_EXECUTION_BUDGET, 77u);
+    return runtime_engine_result_v1_set(result,
+        RUNTIME_ENGINE_TERMINAL_V1_EXECUTION_BUDGET, 77u);
 }
 
-int bx_ntvdm_engine_request_cancellation_v1(uint32_t reason)
+int runtime_engine_request_cancellation_v1(uint32_t reason)
 {
-    if (!cancellation_mode || reason != BX_NTVDM_CANCELLATION_V1_USER_REQUEST ||
+    if (!cancellation_mode || reason != RUNTIME_CANCELLATION_V1_USER_REQUEST ||
         InterlockedCompareExchange(&engine_started, 0, 0) == 0) return 0;
     return InterlockedIncrement(&cancellation_calls) == 1;
 }
@@ -36,9 +36,9 @@ static void descriptor_set(uint16_t *out, const char *text, uint32_t *chars)
     *chars = index;
 }
 
-static void request_set(struct bx_ntvdm_engine_request_v1 *request)
+static void request_set(struct runtime_engine_request_v1 *request)
 {
-    bx_ntvdm_engine_request_v1_clear(request);
+    runtime_engine_request_v1_clear(request);
     descriptor_set(request->profile_descriptor, "profile", &request->profile_descriptor_chars);
     descriptor_set(request->root_descriptor, "root", &request->root_descriptor_chars);
     descriptor_set(request->launch_descriptor, "launch", &request->launch_descriptor_chars);
@@ -47,8 +47,8 @@ static void request_set(struct bx_ntvdm_engine_request_v1 *request)
 
 int main(void)
 {
-    struct bx_ntvdm_engine_request_v1 request;
-    struct bx_ntvdm_engine_result_v1 result;
+    struct runtime_engine_request_v1 request;
+    struct runtime_engine_result_v1 result;
     HANDLE event;
     uint32_t cancellation_accepted;
     request_set(&request);
@@ -58,22 +58,22 @@ int main(void)
     cancellation_mode = 0;
     engine_started = 0;
     cancellation_calls = 0;
-    if (!ntdos64_engine_worker_v1_run(&request, event, &result,
+    if (!app_engine_worker_v1_run(&request, event, &result,
             &cancellation_accepted) || cancellation_accepted != 0u ||
-        result.terminal_kind != BX_NTVDM_ENGINE_TERMINAL_V1_EXECUTION_BUDGET ||
+        result.terminal_kind != RUNTIME_ENGINE_TERMINAL_V1_EXECUTION_BUDGET ||
         result.detail_code != 77u || cancellation_calls != 0) return 2;
 
     if (!SetEvent(event)) return 3;
     cancellation_mode = 1;
     engine_started = 0;
     cancellation_calls = 0;
-    if (!ntdos64_engine_worker_v1_run(&request, event, &result,
+    if (!app_engine_worker_v1_run(&request, event, &result,
             &cancellation_accepted) || cancellation_accepted != 1u ||
         cancellation_calls != 1 ||
-        result.terminal_kind != BX_NTVDM_ENGINE_TERMINAL_V1_HOST_CANCELLATION ||
-        result.detail_code != BX_NTVDM_CANCELLATION_V1_USER_REQUEST) return 4;
+        result.terminal_kind != RUNTIME_ENGINE_TERMINAL_V1_HOST_CANCELLATION ||
+        result.detail_code != RUNTIME_CANCELLATION_V1_USER_REQUEST) return 4;
     CloseHandle(event);
-    if (ntdos64_engine_worker_v1_run(&request, NULL, &result,
+    if (app_engine_worker_v1_run(&request, NULL, &result,
             &cancellation_accepted)) return 5;
     return 0;
 }

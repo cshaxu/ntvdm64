@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_BOP_SHIM_SOFTPC_INT15_WATCH_SHIM_H
-#define BX_NTVDM_BOP_SHIM_SOFTPC_INT15_WATCH_SHIM_H
+#ifndef RUNTIME_BOP_SHIM_SOFTPC_INT15_WATCH_SHIM_H
+#define RUNTIME_BOP_SHIM_SOFTPC_INT15_WATCH_SHIM_H
 
 #include <stdint.h>
 
@@ -19,9 +19,9 @@ typedef WORD word;
 
 /* The direct fragment retains the historical SAS load shape.  This adapter
  * declaration is deliberately narrower than a general SAS interface. */
-void bx_ntvdm_softpc_int15_sas_loadw(uint32_t address, word *value);
-#define sas_loadw bx_ntvdm_softpc_int15_sas_loadw
-int bx_ntvdm_softpc_int15_watch_state_load(word *offset, word *segment);
-int bx_ntvdm_softpc_int15_watch_state_store(word offset, word segment);
+void runtime_softpc_int15_sas_loadw(uint32_t address, word *value);
+#define sas_loadw runtime_softpc_int15_sas_loadw
+int runtime_softpc_int15_watch_state_load(word *offset, word *segment);
+int runtime_softpc_int15_watch_state_store(word offset, word segment);
 
 #endif

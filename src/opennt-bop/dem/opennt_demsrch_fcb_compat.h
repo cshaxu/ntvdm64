@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_BOP_SHIM_DEMSRCH_FCB_SHIM_H
-#define BX_NTVDM_BOP_SHIM_DEMSRCH_FCB_SHIM_H
+#ifndef RUNTIME_BOP_SHIM_DEMSRCH_FCB_SHIM_H
+#define RUNTIME_BOP_SHIM_DEMSRCH_FCB_SHIM_H
 
 /* Common compatibility entrypoint for directly imported OpenNT demsrch.c and
  * demfcb.c.  This deliberately starts with the already-proven DEM mechanical
@@ -64,7 +64,7 @@ typedef struct _SRCHBUF { UCHAR uchDriveNumber; CHAR FileName[8]; CHAR FileExt[3
 #ifndef STOREDWORD
 #define STOREDWORD(destination, source) ((destination) = (DWORD)(source))
 #endif
-#define BX_NTVDM_DEMSEARCH_REFERENCE(find_id) ((DWORD)(find_id))
+#define RUNTIME_DEMSEARCH_REFERENCE(find_id) ((DWORD)(find_id))
 #define InitializeListHead(list_head) do { (list_head)->Flink = (list_head); (list_head)->Blink = (list_head); } while (0)
 #define IsListEmpty(list_head) ((list_head)->Flink == (list_head))
 #define InsertHeadList(list_head, entry) do { PLIST_ENTRY const bx_next = (list_head)->Flink; (entry)->Flink = bx_next; (entry)->Blink = (list_head); bx_next->Blink = (entry); (list_head)->Flink = (entry); } while (0)

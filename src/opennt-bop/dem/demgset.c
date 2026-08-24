@@ -518,7 +518,7 @@ SYSTEMTIME TimeDate;
      * default still calls SetLocalTime, but this named host seam permits a
      * non-mutating fixture writer so source-register/result semantics can be
      * tested without changing the developer machine clock. */
-    if(bx_ntvdm_demgset_set_local_time(&TimeDate) || GetLastError() == ERROR_PRIVILEGE_NOT_HELD)
+    if(runtime_demgset_set_local_time(&TimeDate) || GetLastError() == ERROR_PRIVILEGE_NOT_HELD)
         setAL(0);
     else
         setAL(0xff);
@@ -547,7 +547,7 @@ SYSTEMTIME TimeDate;
     TimeDate.wSecond       = (WORD)getDH();
     TimeDate.wMilliseconds = (WORD)getDL()*10;
     /* See demSetDate: same Direct default and fixture-only host seam. */
-    if (bx_ntvdm_demgset_set_local_time(&TimeDate) || GetLastError() == ERROR_PRIVILEGE_NOT_HELD)
+    if (runtime_demgset_set_local_time(&TimeDate) || GetLastError() == ERROR_PRIVILEGE_NOT_HELD)
 	setAL(0);
     else
 	setAL(0xff);
@@ -572,7 +572,7 @@ VOID demSetDTALocation (VOID)
      * bx-vdm shim preserves the same DS:AX/DX/CX/SI registration contract in
      * session-owned typed storage, reading guest values through the checked
      * call boundary rather than retaining SAS aliases. */
-    (void)bx_ntvdm_demgset_register_dta(getDS(), getAX(), getDX(), getCX(),
+    (void)runtime_demgset_register_dta(getDS(), getAX(), getDX(), getCX(),
         getSI());
 }
 

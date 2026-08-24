@@ -2,23 +2,23 @@
 #include "iodev/iodev.h"
 #include "bx-mantle/pc_system.h"
 #include "bx-mantle/minimal_machine.h"
-#include "adapter-softpc/bx_ntvdm_port_action_v1.h"
-#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-softpc/port_action.h"
+#include "adapter-bop/generic_ud_bridge.h"
 
-extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
-  const struct bx_ntvdm_generic_ud_event_v1 *,
-  struct bx_ntvdm_generic_ud_outcome_v1 *)
+extern "C" int runtime_mantle_generic_ud_bridge_v1(
+  const struct runtime_generic_ud_event_v1 *,
+  struct runtime_generic_ud_outcome_v1 *)
 { return 0; }
 
-static int read8(struct bx_ntvdm_port_action_v1 *a, uint16_t port)
-{ bx_ntvdm_port_action_v1_initialize(a); a->kind=BX_NTVDM_PORT_ACTION_V1_READ8; a->port=port; return bx_ntvdm_mantle_execute_port_action_v1(a); }
-static int write8(struct bx_ntvdm_port_action_v1 *a, uint16_t port, uint8_t value)
-{ bx_ntvdm_port_action_v1_initialize(a); a->kind=BX_NTVDM_PORT_ACTION_V1_WRITE8; a->port=port; a->value=value; return bx_ntvdm_mantle_execute_port_action_v1(a); }
+static int read8(struct runtime_port_action_v1 *a, uint16_t port)
+{ runtime_port_action_v1_initialize(a); a->kind=RUNTIME_PORT_ACTION_V1_READ8; a->port=port; return runtime_mantle_execute_port_action_v1(a); }
+static int write8(struct runtime_port_action_v1 *a, uint16_t port, uint8_t value)
+{ runtime_port_action_v1_initialize(a); a->kind=RUNTIME_PORT_ACTION_V1_WRITE8; a->port=port; a->value=value; return runtime_mantle_execute_port_action_v1(a); }
 
 static int exercise(void)
 {
   bx_mantle_minimal_machine_c machine;
-  struct bx_ntvdm_port_action_v1 a;
+  struct runtime_port_action_v1 a;
   if (machine.initialize(0x200000, 0x200000) != BX_MANTLE_MINIMAL_MACHINE_OK) return 1;
   if (read8(&a, 0x64u)) return 2;
   bx_pc_system.initialize(1000000u);

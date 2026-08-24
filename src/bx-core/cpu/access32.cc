@@ -27,23 +27,23 @@
 #define LOG_THIS BX_CPU_THIS_PTR
 /* DIVERGENCE(BX-CORE-DIV-001,BX-CORE-DIV-002): retained segment profile and default-off observation guards. */
 
-#ifndef BX_NTVDM_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
-#define BX_NTVDM_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER 0
+#ifndef RUNTIME_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
+#define RUNTIME_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER 0
 #endif
 
-#if BX_NTVDM_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
-#include "adapter-softpc/bx_ntvdm_segment_access_observation_v1.h"
+#if RUNTIME_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
+#include "adapter-softpc/segment_access_observation.h"
 
-static void bx_ntvdm_observe_virtual_word_failure(unsigned segment_index,
+static void runtime_observe_virtual_word_failure(unsigned segment_index,
   const bx_segment_reg_t *segment, Bit32u offset, Bit32u branch_kind)
 {
-  bx_ntvdm_segment_access_observation_v1 event;
+  runtime_segment_access_observation_v1 event;
   memset(&event, 0, sizeof(event));
-  event.magic = BX_NTVDM_SEGMENT_ACCESS_OBSERVATION_V1_MAGIC;
-  event.abi_version = BX_NTVDM_SEGMENT_ACCESS_OBSERVATION_V1_VERSION;
+  event.magic = RUNTIME_SEGMENT_ACCESS_OBSERVATION_V1_MAGIC;
+  event.abi_version = RUNTIME_SEGMENT_ACCESS_OBSERVATION_V1_VERSION;
   event.struct_bytes = sizeof(event);
   event.cpu_id = BX_CPU_ID;
-  event.access_kind = BX_NTVDM_SEGMENT_ACCESS_KIND_V1_READ_WORD;
+  event.access_kind = RUNTIME_SEGMENT_ACCESS_KIND_V1_READ_WORD;
   event.branch_kind = branch_kind;
   event.segment_index = segment_index;
   event.width = 2u;
@@ -51,7 +51,7 @@ static void bx_ntvdm_observe_virtual_word_failure(unsigned segment_index,
   event.limit_scaled = segment->cache.u.segment.limit_scaled;
   event.cache_valid = segment->cache.valid;
   event.segment_selector = segment->selector.value;
-  (void) bx_ntvdm_mantle_segment_access_observation_v1(&event);
+  (void) runtime_mantle_segment_access_observation_v1(&event);
 }
 #endif
 
@@ -575,18 +575,18 @@ accessOK:
     }
     else {
       BX_ERROR(("read_virtual_word_32(): segment limit violation"));
-#if BX_NTVDM_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
-      bx_ntvdm_observe_virtual_word_failure(s, seg, offset,
-        BX_NTVDM_SEGMENT_ACCESS_BRANCH_V1_DIRECT_LIMIT);
+#if RUNTIME_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
+      runtime_observe_virtual_word_failure(s, seg, offset,
+        RUNTIME_SEGMENT_ACCESS_BRANCH_V1_DIRECT_LIMIT);
 #endif
       exception(int_number(s), 0);
     }
   }
 
   if (!read_virtual_checks(seg, offset, 2)) {
-#if BX_NTVDM_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
-    bx_ntvdm_observe_virtual_word_failure(s, seg, offset,
-      BX_NTVDM_SEGMENT_ACCESS_BRANCH_V1_READ_CHECK);
+#if RUNTIME_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
+    runtime_observe_virtual_word_failure(s, seg, offset,
+      RUNTIME_SEGMENT_ACCESS_BRANCH_V1_READ_CHECK);
 #endif
     exception(int_number(s), 0);
   }

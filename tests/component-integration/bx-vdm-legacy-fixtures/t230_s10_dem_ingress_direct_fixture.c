@@ -13,31 +13,31 @@ static int guest_write(void *s,uint32_t a,const uint8_t *b,uint32_t n) { fixture
 
 int main(void)
 {
-    fixture_context state={{0}}; bx_ntvdm_dem_direct_context direct;
-    bx_ntvdm_exception_event_v1 event; bx_ntvdm_cpu_state_v1 cpu;
-    bx_ntvdm_cpu_result_v2 result; bx_ntvdm_demhndl_call call;
-    bx_ntvdm_instruction_window_v1 window;
-    memset(&direct,0,sizeof(direct)); direct.magic=BX_NTVDM_DEM_DIRECT_CONTEXT_MAGIC;
-    direct.abi_version=BX_NTVDM_DEM_DIRECT_CONTEXT_VERSION; direct.struct_bytes=sizeof(direct);
+    fixture_context state={{0}}; runtime_dem_direct_context direct;
+    runtime_exception_event_v1 event; runtime_cpu_state_v1 cpu;
+    runtime_cpu_result_v2 result; runtime_demhndl_call call;
+    runtime_instruction_window_v1 window;
+    memset(&direct,0,sizeof(direct)); direct.magic=RUNTIME_DEM_DIRECT_CONTEXT_MAGIC;
+    direct.abi_version=RUNTIME_DEM_DIRECT_CONTEXT_VERSION; direct.struct_bytes=sizeof(direct);
     direct.state=&state; direct.publish_handle=publish_handle; direct.lookup_handle=lookup_handle;
     direct.release_handle=release_handle; direct.query_attributes=query_attributes; direct.set_attributes=set_attributes;
-    memset(&event,0,sizeof(event)); event.magic=BX_NTVDM_EXCEPTION_ABI_MAGIC;
-    event.abi_version=BX_NTVDM_EXCEPTION_ABI_VERSION; event.struct_bytes=sizeof(event);
-    event.kind=BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION; event.fault_rip=0x2000u;
-    bx_ntvdm_cpu_state_v1_initialize(&cpu,BX_NTVDM_CPU_EXECUTION_REAL);
-    memset(&call,0,sizeof(call)); call.magic=BX_NTVDM_DEMHNDL_CALL_MAGIC;
-    call.abi_version=BX_NTVDM_DEMHNDL_CALL_VERSION; call.struct_bytes=sizeof(call);
+    memset(&event,0,sizeof(event)); event.magic=RUNTIME_EXCEPTION_ABI_MAGIC;
+    event.abi_version=RUNTIME_EXCEPTION_ABI_VERSION; event.struct_bytes=sizeof(event);
+    event.kind=RUNTIME_EXCEPTION_EVENT_CPU_EXCEPTION; event.fault_rip=0x2000u;
+    runtime_cpu_state_v1_initialize(&cpu,RUNTIME_CPU_EXECUTION_REAL);
+    memset(&call,0,sizeof(call)); call.magic=RUNTIME_DEMHNDL_CALL_MAGIC;
+    call.abi_version=RUNTIME_DEMHNDL_CALL_VERSION; call.struct_bytes=sizeof(call);
     call.service=0x1fu; call.direct=&direct; call.boundary=&event; call.cpu=&cpu;
     call.result=&result; call.guest_state=&state; call.guest_read=guest_read; call.guest_write=guest_write;
-    bx_ntvdm_instruction_window_v1_capture(&window,(const uint8_t[]){0xc4u,0xc4u,0x50u,0x1fu},4u);
-    if(!bx_ntvdm_dem_ingress_dispatch(&window,&call)||CurrentISVC!=0x1fu||
-       result.disposition!=BX_NTVDM_CPU_RESULT_V2_RESUME||result.resume_rip!=event.fault_rip+4u||
-       (result.eflags_values&BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF)!=0u)return 1;
-    bx_ntvdm_instruction_window_v1_capture(&window,(const uint8_t[]){0xc4u,0xc4u,0x54u,0x1fu},4u);
-    if(bx_ntvdm_dem_ingress_dispatch(&window,&call))return 2;
-    bx_ntvdm_instruction_window_v1_capture(&window,(const uint8_t[]){0xc4u,0xc4u,0x50u},3u);
-    if(bx_ntvdm_dem_ingress_dispatch(&window,&call))return 3;
-    bx_ntvdm_instruction_window_v1_capture(&window,(const uint8_t[]){0xc4u,0xc4u,0x50u,0x49u},4u);
-    if(bx_ntvdm_dem_ingress_dispatch(&window,&call))return 4;
+    runtime_instruction_window_v1_capture(&window,(const uint8_t[]){0xc4u,0xc4u,0x50u,0x1fu},4u);
+    if(!runtime_dem_ingress_dispatch(&window,&call)||CurrentISVC!=0x1fu||
+       result.disposition!=RUNTIME_CPU_RESULT_V2_RESUME||result.resume_rip!=event.fault_rip+4u||
+       (result.eflags_values&RUNTIME_CPU_RESULT_V2_EFLAGS_CF)!=0u)return 1;
+    runtime_instruction_window_v1_capture(&window,(const uint8_t[]){0xc4u,0xc4u,0x54u,0x1fu},4u);
+    if(runtime_dem_ingress_dispatch(&window,&call))return 2;
+    runtime_instruction_window_v1_capture(&window,(const uint8_t[]){0xc4u,0xc4u,0x50u},3u);
+    if(runtime_dem_ingress_dispatch(&window,&call))return 3;
+    runtime_instruction_window_v1_capture(&window,(const uint8_t[]){0xc4u,0xc4u,0x50u,0x49u},4u);
+    if(runtime_dem_ingress_dispatch(&window,&call))return 4;
     puts("T230 S10 direct DEM ingress: 50:xx dispatch is bounded and v1-free"); return 0;
 }

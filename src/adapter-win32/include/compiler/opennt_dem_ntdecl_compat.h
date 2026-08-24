@@ -8,8 +8,8 @@
  * ntioapi.h, ntobapi.h, and ntpsapi.h. This header supplies declarations only;
  * it implements no host operation and is never part of a runtime target.
  */
-#ifndef OPENNT_DEM_NTDECL_COMPAT_H
-#define OPENNT_DEM_NTDECL_COMPAT_H
+#ifndef DEM_NTDECL_COMPAT_H
+#define DEM_NTDECL_COMPAT_H
 
 #ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x0500
@@ -33,7 +33,7 @@
  * modern standalone SDK closure has no such header, so retain the spelling
  * adaptation locally instead of making this imported DEM declaration bridge
  * depend on a missing CRT include. */
-#define OPENNT_STAGE_VDM_TYPES 1
+#define STAGE_VDM_TYPES 1
 #include "vdm.h"
 
 /* OpenNT crt/excpt.h maps these legacy spellings to MS SEH keywords. */

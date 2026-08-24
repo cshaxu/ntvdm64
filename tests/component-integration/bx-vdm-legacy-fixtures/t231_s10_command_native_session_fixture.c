@@ -4,15 +4,15 @@
 #include "opennt-bop/ingress/command_v2_generic_ud_bridge.h"
 #include "opennt-bop/ingress/command_native_session.h"
 
-static void event_initialize(struct bx_ntvdm_generic_ud_event_v1 *event,
+static void event_initialize(struct runtime_generic_ud_event_v1 *event,
     uint8_t service)
 {
     memset(event, 0, sizeof(*event));
-    event->magic = BX_NTVDM_GENERIC_UD_EVENT_V1_MAGIC;
-    event->abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
+    event->magic = RUNTIME_GENERIC_UD_EVENT_V1_MAGIC;
+    event->abi_version = RUNTIME_GENERIC_UD_EVENT_V1_VERSION;
     event->struct_bytes = sizeof(*event);
     event->vector = 6u;
-    event->execution_mode = BX_NTVDM_CPU_EXECUTION_REAL;
+    event->execution_mode = RUNTIME_CPU_EXECUTION_REAL;
     event->fault_rip = 0x2800u;
     event->eip = 0x2800u;
     event->window_bytes = 4u;
@@ -22,23 +22,23 @@ static void event_initialize(struct bx_ntvdm_generic_ud_event_v1 *event,
 
 int main(void)
 {
-    bx_ntvdm_command_native_session session;
-    struct bx_ntvdm_generic_ud_event_v1 event;
-    struct bx_ntvdm_generic_ud_outcome_v1 outcome;
+    runtime_command_native_session session;
+    struct runtime_generic_ud_event_v1 event;
+    struct runtime_generic_ud_outcome_v1 outcome;
 
-    if (!bx_ntvdm_command_native_session_initialize(&session) ||
-        !bx_ntvdm_command_native_session_bind(&session)) return 1;
+    if (!runtime_command_native_session_initialize(&session) ||
+        !runtime_command_native_session_bind(&session)) return 1;
     event_initialize(&event, 0u);
     memset(&outcome, 0, sizeof(outcome));
-    if (!bx_ntvdm_command_v2_generic_ud_dispatch(&event, &outcome) ||
-        outcome.disposition != BX_NTVDM_GENERIC_UD_STOP ||
+    if (!runtime_command_v2_generic_ud_dispatch(&event, &outcome) ||
+        outcome.disposition != RUNTIME_GENERIC_UD_STOP ||
         outcome.resume_rip != 0u) return 2;
     event_initialize(&event, 17u);
-    if (bx_ntvdm_command_v2_generic_ud_recognizes(&event) ||
-        bx_ntvdm_command_v2_generic_ud_dispatch(&event, &outcome)) return 3;
-    bx_ntvdm_command_native_session_unbind(&session);
+    if (runtime_command_v2_generic_ud_recognizes(&event) ||
+        runtime_command_v2_generic_ud_dispatch(&event, &outcome)) return 3;
+    runtime_command_native_session_unbind(&session);
     event_initialize(&event, 0u);
-    if (bx_ntvdm_command_v2_generic_ud_dispatch(&event, &outcome)) return 4;
+    if (runtime_command_v2_generic_ud_dispatch(&event, &outcome)) return 4;
     puts("T231 v2 COMMAND session owns 54:00 without a v1 fallback");
     return 0;
 }

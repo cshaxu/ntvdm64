@@ -1,5 +1,5 @@
-#ifndef NTDOS64_OPENNT_DEMGSET_COMPOSITION_H
-#define NTDOS64_OPENNT_DEMGSET_COMPOSITION_H
+#ifndef APP_OPENNT_DEMGSET_COMPOSITION_H
+#define APP_OPENNT_DEMGSET_COMPOSITION_H
 
 /* Project-owned composition for the directly imported OpenNT demgset.c body. */
 #include "opennt-bop/dem/opennt_demgset_compat.h"

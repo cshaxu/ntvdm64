@@ -71,3 +71,61 @@ work. The scoped filename scan found zero remaining prohibited basenames below
 `src/app` and `src/session`. Retained old-path occurrences are confined to
 historical probes, historical manifests, or disposable build output and are
 not live S2 consumers.
+
+## S3 result
+
+All 77 approved `adapter-bop` and top-level project-owned `adapter-softpc`
+paths were moved with `git mv`. Complete filename-with-extension replacement
+updated 217 direct consumers in live source, tests and build input. This
+included required include-path substitutions in a small number of Bochs and
+OpenNT mirror files; it did not rename those mirror files or alter their
+algorithms, symbols, ABI, or source-owned semantics. A fresh formal graph at
+`build/M0-T264-S3/r001` compiled to completion and a final dry run emitted no
+work. The scoped production filename scan is clean; retained matching paths
+are excluded historical interface inputs or non-component historical evidence.
+
+## S4 result
+
+The final recursive scan of `src/app`, `src/session`, `src/adapter-bop`,
+`src/adapter-softpc`, and `src/adapter-win32` found **zero** code basenames
+containing `ntdos64`, `ntvdm64`, `bx`, or `bochs`. The 77 old adapter basenames
+from the staged Git rename set produced **zero** direct references under live
+`src`, `tests`, and `tools/build` inputs. The same scan intentionally excludes
+the retained `adapter-softpc/include/mvdm/**` and
+`adapter-softpc/include/softpc.new/**` historical interface inputs and all
+mirror/overlay roots.
+
+The S2 and S3 fresh formal-Ninja roots had already compiled to completion; a
+subsequent dry run for each reported no work. Documentation governance and
+`git diff --check` also pass. This closes the S4 filename-only migration:
+no source symbol, ABI, behavioral, mirror-filename, or overlay change was
+made in S2-S4. T264 was later reopened as S5 by owner direction.
+
+## S5 P1 result — versioned filenames and private identifiers
+
+Owner direction added standalone `v1`/`v2` filename segments to the prohibited
+markers and required non-semantic project/backend/OpenNT identifier prefixes to
+be reviewed rather than blindly retained.
+
+- All 70 scoped `_v1`/`_v2` production filenames were moved with `git mv`.
+  Their exact direct source/test/build filename consumers have zero remaining
+  old-path references.
+- The private `bx_ntvdm_*`/`BX_NTVDM_*` and `ntdos64_*`/`NTDOS64_*` code
+  families were normalized to owner-neutral private names, including the
+  former project-branded session types, constants, and cancellation test macro.
+- OpenNT provenance prefixes were removed where they identified only private
+  routing/helpers. Names remain where they identify an OpenNT-compatible
+  facade, RTL/legacy API surface, or preserved provider contract; those are
+  semantic compatibility names. DOS/VDM names remain only for guest semantics
+  or a preserved historical interface, and `BX_*` names only for actual Bochs
+  machine mechanics. Strings/comments and original-mirror include paths were
+  not changed by the identifier sweep.
+
+The fresh formal graph at `build/M0-T264-S5/r001` reaches MSVC, but its
+synchronously waited Ninja run fails before a T264-owned target completes:
+original Bochs FPU sources define `FLOAT128`, and current Windows SDK
+`winnt.h` subsequently macro-expands its own `typedef ... FLOAT128`, producing
+MSVC C4430 in `src/bx-core/fpu/{f2xm1,fpatan}.cc`. The disposable captured
+external log is under that build root. This is genuine formal-build blocking
+evidence, not a dry-run result; S5 and T264 therefore remain open pending an
+owner-approved Bochs/toolchain repair packet.

@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_OPENNT_BOP_DPMI_STARTUP_SOURCE_SHIM_H
-#define BX_NTVDM_OPENNT_BOP_DPMI_STARTUP_SOURCE_SHIM_H
+#ifndef RUNTIME_OPENNT_BOP_DPMI_STARTUP_SOURCE_SHIM_H
+#define RUNTIME_OPENNT_BOP_DPMI_STARTUP_SOURCE_SHIM_H
 
 /* DIVERGENCE(BOP-DIV-068): this is the smallest modern compilation closure for
  * the exact-copy OpenNT dpmi32.c startup/table subset.  It supplies types and
@@ -26,33 +26,33 @@ typedef DWORD *PDWORD16;
 #define DPMI_DISPATCH_ENTRY 12u
 #define DBGTRACE(type, first, second, third) ((void)0)
 
-void bx_ntvdm_dpmi_startup_source_deferred(void);
-void bx_ntvdm_dpmi_startup_source_note_illegal(uint32_t index);
+void runtime_dpmi_startup_source_deferred(void);
+void runtime_dpmi_startup_source_note_illegal(uint32_t index);
 
 /* Function bodies outside the admitted S3 startup/table group remain a
  * source-shaped deferred terminal until their owner subpackage is composed. */
-#define DpmiSetDescriptorEntry bx_ntvdm_dpmi_startup_source_deferred
-#define switch_to_protected_mode bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiSetProtectedmodeInterrupt bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiGetFastBopEntry bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiXlatInt21Call bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiAllocateXmem bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiFreeXmem bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiReallocateXmem bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiSetFaultHandler bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiGetMemoryInfo bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiDpmiInUse bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiDpmiNoLongerInUse bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiSetDebugRegisters bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiFreeAppXmem bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiPassPmStackInfo bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiVcdPmSvcCall32 bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiFreeAllXmem bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiIntHandlerIret16 bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiIntHandlerIret32 bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiFaultHandlerIret16 bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiFaultHandlerIret32 bx_ntvdm_dpmi_startup_source_deferred
-#define DpmiUnhandledExceptionHandler bx_ntvdm_dpmi_startup_source_deferred
+#define DpmiSetDescriptorEntry runtime_dpmi_startup_source_deferred
+#define switch_to_protected_mode runtime_dpmi_startup_source_deferred
+#define DpmiSetProtectedmodeInterrupt runtime_dpmi_startup_source_deferred
+#define DpmiGetFastBopEntry runtime_dpmi_startup_source_deferred
+#define DpmiXlatInt21Call runtime_dpmi_startup_source_deferred
+#define DpmiAllocateXmem runtime_dpmi_startup_source_deferred
+#define DpmiFreeXmem runtime_dpmi_startup_source_deferred
+#define DpmiReallocateXmem runtime_dpmi_startup_source_deferred
+#define DpmiSetFaultHandler runtime_dpmi_startup_source_deferred
+#define DpmiGetMemoryInfo runtime_dpmi_startup_source_deferred
+#define DpmiDpmiInUse runtime_dpmi_startup_source_deferred
+#define DpmiDpmiNoLongerInUse runtime_dpmi_startup_source_deferred
+#define DpmiSetDebugRegisters runtime_dpmi_startup_source_deferred
+#define DpmiFreeAppXmem runtime_dpmi_startup_source_deferred
+#define DpmiPassPmStackInfo runtime_dpmi_startup_source_deferred
+#define DpmiVcdPmSvcCall32 runtime_dpmi_startup_source_deferred
+#define DpmiFreeAllXmem runtime_dpmi_startup_source_deferred
+#define DpmiIntHandlerIret16 runtime_dpmi_startup_source_deferred
+#define DpmiIntHandlerIret32 runtime_dpmi_startup_source_deferred
+#define DpmiFaultHandlerIret16 runtime_dpmi_startup_source_deferred
+#define DpmiFaultHandlerIret32 runtime_dpmi_startup_source_deferred
+#define DpmiUnhandledExceptionHandler runtime_dpmi_startup_source_deferred
 
 #ifdef __cplusplus
 extern "C" {
@@ -62,11 +62,11 @@ VOID DpmiInitDosx(VOID);
 VOID DpmiInitApp(VOID);
 VOID DpmiPassTableAddress(VOID);
 
-int bx_ntvdm_dpmi_startup_source_take_dispatch(ULONG *index);
-void bx_ntvdm_dpmi_startup_source_advance_ip(uint32_t bytes);
-void bx_ntvdm_dpmi_startup_source_initialize_dosx(void);
-void bx_ntvdm_dpmi_startup_source_initialize_app(void);
-void bx_ntvdm_dpmi_startup_source_publish_selector_table(void);
+int runtime_dpmi_startup_source_take_dispatch(ULONG *index);
+void runtime_dpmi_startup_source_advance_ip(uint32_t bytes);
+void runtime_dpmi_startup_source_initialize_dosx(void);
+void runtime_dpmi_startup_source_initialize_app(void);
+void runtime_dpmi_startup_source_publish_selector_table(void);
 
 #ifdef __cplusplus
 }

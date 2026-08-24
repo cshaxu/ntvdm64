@@ -42,7 +42,7 @@ typedef enum _VdmServiceClass {
 } VDMSERVICECLASS, *PVDMSERVICECLASS;
 
 
-#if defined (_NTDEF_) || defined(OPENNT_STAGE_VDM_TYPES)
+#if defined (_NTDEF_) || defined(STAGE_VDM_TYPES)
 
 NTSTATUS
 NtVdmControl(
@@ -321,7 +321,7 @@ typedef struct _VDMSET_INT21_HANDLER_DATA {
         BOOLEAN     Gate32;
 }VDMSET_INT21_HANDLER_DATA, *PVDMSET_INT21_HANDLER_DATA;
 
-#if defined (_NTDEF_) || defined(OPENNT_STAGE_VDM_TYPES)
+#if defined (_NTDEF_) || defined(STAGE_VDM_TYPES)
 NTSTATUS
 NtVdmControl(
     IN VDMSERVICECLASS Service,

@@ -3,29 +3,29 @@
 
 #include "opennt-bop/dem/opennt_demmisc_compat.h"
 #include "byob_image.h"
-#include "byob_launch_plan_v2.h"
+#include "byob_launch_plan.h"
 #include "byob_profile.h"
 #include "config.h"
-#include "bx_ntvdm_cpu_state_abi.h"
-#include "bx_ntvdm_guest_write_abi.h"
-#include "initial_state_catalog_v1.h"
+#include "cpu_state_abi.h"
+#include "guest_write_abi.h"
+#include "initial_state_catalog.h"
 #include "startup_plan_abi.h"
 
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
 
-typedef struct bx_ntvdm_dem_v2_startup {
+typedef struct runtime_dem_v2_startup {
     byob_image ntio, ntdos, command, target;
-    bx_ntvdm_initial_state_v1 initial_state;
+    runtime_initial_state_v1 initial_state;
     byob_launch_plan_v2 launch;
     char command_application[MAX_PATH + 1u];
     char bootstrap_command_path[64u];
     uint16_t command_drive;
     int installed;
-} bx_ntvdm_dem_v2_startup;
+} runtime_dem_v2_startup;
 
-static bx_ntvdm_dem_v2_startup runtime;
+static runtime_dem_v2_startup runtime;
 
 static int descriptor_to_wide(const uint16_t *source, uint32_t chars,
     wchar_t *destination, uint32_t capacity)
@@ -110,20 +110,20 @@ static int configure_bootstrap_command(const wchar_t *root)
         strchr(runtime.bootstrap_command_path, ' ') == NULL;
 }
 
-void bx_ntvdm_dem_v2_startup_reset(void)
+void runtime_dem_v2_startup_reset(void)
 {
     byob_image_release(&runtime.ntio);
     byob_image_release(&runtime.ntdos);
     byob_image_release(&runtime.command);
     byob_image_release(&runtime.target);
-    bx_ntvdm_initial_state_v1_clear(&runtime.initial_state);
-    bx_ntvdm_spckbd_handoff_v2_display_state_reset();
+    runtime_initial_state_v1_clear(&runtime.initial_state);
+    runtime_spckbd_handoff_v2_display_state_reset();
     memset(&runtime, 0, sizeof(runtime));
     free(pszDefaultDOSDirectory);
     pszDefaultDOSDirectory = NULL;
 }
 
-int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
+int runtime_dem_v2_startup_install(const uint16_t *profile_input,
     uint32_t profile_chars, const uint16_t *root_input, uint32_t root_chars,
     const uint16_t *launch, uint32_t launch_chars, uint32_t mutation_mode)
 {
@@ -136,7 +136,7 @@ int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
     if (mutation_mode != 1u || launch_chars == 0u ||
         !descriptor_to_wide(profile_input, profile_chars, profile, 261u) ||
         !descriptor_to_wide(root_input, root_chars, root, 261u) ||
-        !ntdos64_bundle_load_roots(root, config_source, autoexec_source) ||
+        !app_bundle_load_roots(root, config_source, autoexec_source) ||
         (memset(&selection, 0, sizeof(selection)), 0) ||
         swprintf(selection.ntio.file_name, 64u, L"NTIO.SYS") < 0 ||
         swprintf(selection.ntdos.file_name, 64u, L"NTDOS.SYS") < 0 ||
@@ -155,24 +155,24 @@ int bx_ntvdm_dem_v2_startup_install(const uint16_t *profile_input,
         !configure_opennt_dos_directory(root, &selection) ||
         !configure_bootstrap_command(root) ||
         !configure_command_source(launch, launch_chars, &selection)) {
-        bx_ntvdm_dem_v2_startup_reset();
+        runtime_dem_v2_startup_reset();
         return 0;
     }
-    bx_ntvdm_initial_state_v1_clear(&runtime.initial_state);
+    runtime_initial_state_v1_clear(&runtime.initial_state);
     if (selection.has_machine_external_initial_state != 0u &&
-        !bx_ntvdm_initial_state_catalog_v1_select(
+        !runtime_initial_state_catalog_v1_select(
             (const uint16_t *)selection.machine_external_initial_state_evidence_sha256,
             64u, &runtime.initial_state)) {
-        bx_ntvdm_dem_v2_startup_reset();
+        runtime_dem_v2_startup_reset();
         return 0;
     }
     runtime.installed = 1;
-    bx_ntvdm_spckbd_handoff_v2_display_state_set(
+    runtime_spckbd_handoff_v2_display_state_set(
         (uint8_t)selection.guest_display_state);
     return 1;
 }
 
-int bx_ntvdm_dem_v2_startup_copy_bootstrap_command(char *command_path,
+int runtime_dem_v2_startup_copy_bootstrap_command(char *command_path,
     uint32_t command_path_capacity)
 {
     size_t bytes;
@@ -184,7 +184,7 @@ int bx_ntvdm_dem_v2_startup_copy_bootstrap_command(char *command_path,
     return 1;
 }
 
-int bx_ntvdm_dem_v2_startup_copy_command_source(char *application,
+int runtime_dem_v2_startup_copy_command_source(char *application,
     uint32_t application_capacity, char *tail, uint32_t tail_capacity,
     uint16_t *drive, uint16_t *code_page)
 {
@@ -207,44 +207,44 @@ int bx_ntvdm_dem_v2_startup_copy_command_source(char *application,
     return 1;
 }
 
-static int startup_plan(bx_ntvdm_startup_plan_v1 *plan,
+static int startup_plan(runtime_startup_plan_v1 *plan,
     const uint8_t **payload, uint64_t *payload_bytes)
 {
-    bx_ntvdm_cpu_state_v1 entry;
-    bx_ntvdm_guest_write_v1 write;
+    runtime_cpu_state_v1 entry;
+    runtime_guest_write_v1 write;
     if (!runtime.installed || plan == NULL || payload == NULL ||
         payload_bytes == NULL || runtime.ntio.bytes == NULL ||
         runtime.ntio.byte_count == 0u) return 0;
-    bx_ntvdm_cpu_state_v1_initialize(&entry, BX_NTVDM_CPU_EXECUTION_REAL);
+    runtime_cpu_state_v1_initialize(&entry, RUNTIME_CPU_EXECUTION_REAL);
     entry.cs = 0x70u;
-    bx_ntvdm_guest_write_v1_initialize(&write, 0x700u,
+    runtime_guest_write_v1_initialize(&write, 0x700u,
         (uint64_t)runtime.ntio.byte_count, 0u);
-    bx_ntvdm_startup_plan_v1_initialize(plan, &write, &entry, 0x714u, 4u);
-    if (!bx_ntvdm_startup_plan_v1_preflight(plan, UINT64_C(0x100000),
+    runtime_startup_plan_v1_initialize(plan, &write, &entry, 0x714u, 4u);
+    if (!runtime_startup_plan_v1_preflight(plan, UINT64_C(0x100000),
             (uint64_t)runtime.ntio.byte_count)) return 0;
     *payload = runtime.ntio.bytes;
     *payload_bytes = (uint64_t)runtime.ntio.byte_count;
     return 1;
 }
 
-int bx_ntvdm_dem_v2_startup_prepare_machine_stage_request(
-    struct bx_ntvdm_machine_stage_v1_request *request)
+int runtime_dem_v2_startup_prepare_machine_stage_request(
+    struct runtime_machine_stage_v1_request *request)
 {
-    bx_ntvdm_startup_plan_v1 plan;
+    runtime_startup_plan_v1 plan;
     const uint8_t *payload;
     uint64_t payload_bytes;
     if (request == NULL || !startup_plan(&plan, &payload, &payload_bytes) ||
-        payload_bytes > BX_NTVDM_MECHANICAL_ACTION_V1_MAX_BYTES) return 0;
-    bx_ntvdm_machine_stage_v1_request_clear(request);
+        payload_bytes > RUNTIME_MECHANICAL_ACTION_V1_MAX_BYTES) return 0;
+    runtime_machine_stage_v1_request_clear(request);
     if (runtime.initial_state.range_count != 0u &&
-        !bx_ntvdm_initial_state_action_v1_prepare(&runtime.initial_state,
+        !runtime_initial_state_action_v1_prepare(&runtime.initial_state,
             &request->initial_state_action)) return 0;
     /* This is the selector-blind mantle ABI initializer.  Request clear owns
      * the enclosing record only; each embedded action still needs its fixed
      * ABI identity before the copied OpenNT NTIO bytes are assigned. */
-    bx_ntvdm_mechanical_action_v1_clear(&request->startup_action);
+    runtime_mechanical_action_v1_clear(&request->startup_action);
     request->startup_action.action_id = 2u;
-    request->startup_action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;
+    request->startup_action.kind = RUNTIME_MECHANICAL_ACTION_V1_WRITE;
     request->startup_action.range_count = 1u;
     request->startup_action.payload_bytes = (uint32_t)payload_bytes;
     request->startup_action.ranges[0].physical_address = plan.payload_write.guest_physical_address;
@@ -256,23 +256,23 @@ int bx_ntvdm_dem_v2_startup_prepare_machine_stage_request(
      * use of this selector-blind watch remains in bx-vdm. */
     request->ivt_watch_enabled = 1u;
     request->ivt_watch_vector = 0x15u;
-    return bx_ntvdm_machine_stage_v1_request_valid(request);
+    return runtime_machine_stage_v1_request_valid(request);
 }
 
-int bx_ntvdm_dem_v2_startup_prepare_machine_stage_entry(
-    struct bx_ntvdm_machine_stage_v1_entry *entry)
+int runtime_dem_v2_startup_prepare_machine_stage_entry(
+    struct runtime_machine_stage_v1_entry *entry)
 {
-    bx_ntvdm_startup_plan_v1 plan;
+    runtime_startup_plan_v1 plan;
     const uint8_t *payload;
     uint64_t payload_bytes;
     if (entry == NULL || !startup_plan(&plan, &payload, &payload_bytes)) return 0;
-    bx_ntvdm_machine_stage_v1_entry_clear(entry);
+    runtime_machine_stage_v1_entry_clear(entry);
     entry->cs = plan.entry_cpu.cs;
     entry->eip = plan.entry_cpu.eip;
-    return bx_ntvdm_machine_stage_v1_entry_valid(entry);
+    return runtime_machine_stage_v1_entry_valid(entry);
 }
 
-int bx_ntvdm_dem_v2_startup_copy_ordinary_terminal(void)
+int runtime_dem_v2_startup_copy_ordinary_terminal(void)
 {
     /* COMMAND ownership is deliberately outside T230.  No legacy COMMAND
      * state is consulted merely to classify a Direct DEM terminal. */

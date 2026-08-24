@@ -6,8 +6,8 @@
 #include <wchar.h>
 #include <wctype.h>
 
-#define BX_NTVDM_STATUS_NO_MEMORY ((NTSTATUS)0xc0000017L)
-#define BX_NTVDM_STATUS_INVALID_PARAMETER ((NTSTATUS)0xc000000dL)
+#define RUNTIME_STATUS_NO_MEMORY ((NTSTATUS)0xc0000017L)
+#define RUNTIME_STATUS_INVALID_PARAMETER ((NTSTATUS)0xc000000dL)
 
 /* DIVERGENCE(WIN32-DIV-004): OpenNT linked these RTL entry points from the
  * NT4 host composition.  The standalone build keeps their source-visible
@@ -66,16 +66,16 @@ void RtlFreeUnicodeString(PUNICODE_STRING string) { if (string != NULL) { free(s
 
 static size_t multisz_wchars(const WCHAR *s) { size_t n = 0u; if (s == NULL) return 0u; while (s[n] != L'\0' || s[n + 1u] != L'\0') ++n; return n + 2u; }
 static int name_compare(const WCHAR *a, size_t an, const WCHAR *b, size_t bn) { size_t i; for (i = 0u; i < an && i < bn; ++i) { WCHAR x = (WCHAR)towupper(a[i]), y = (WCHAR)towupper(b[i]); if (x != y) return x < y ? -1 : 1; } return an == bn ? 0 : (an < bn ? -1 : 1); }
-NTSTATUS RtlCreateEnvironment(BOOLEAN clone_current, PVOID *environment) { PWCHAR value; (void)clone_current; if (environment == NULL) return BX_NTVDM_STATUS_INVALID_PARAMETER; value = (PWCHAR)calloc(2u, sizeof(WCHAR)); if (value == NULL) return BX_NTVDM_STATUS_NO_MEMORY; *environment = value; return 0; }
+NTSTATUS RtlCreateEnvironment(BOOLEAN clone_current, PVOID *environment) { PWCHAR value; (void)clone_current; if (environment == NULL) return RUNTIME_STATUS_INVALID_PARAMETER; value = (PWCHAR)calloc(2u, sizeof(WCHAR)); if (value == NULL) return RUNTIME_STATUS_NO_MEMORY; *environment = value; return 0; }
 void RtlDestroyEnvironment(PVOID environment) { free(environment); }
 NTSTATUS RtlSetEnvironmentVariable(PVOID *environment, const PUNICODE_STRING name, const PUNICODE_STRING value) {
     PWCHAR source, replacement; size_t total, name_chars, value_chars, cursor, output; int emitted = 0;
-    if (environment == NULL || *environment == NULL || name == NULL || name->Buffer == NULL || (name->Length % sizeof(WCHAR)) != 0u) return BX_NTVDM_STATUS_INVALID_PARAMETER;
-    name_chars = name->Length / sizeof(WCHAR); if (name_chars == 0u || (value != NULL && (value->Buffer == NULL || (value->Length % sizeof(WCHAR)) != 0u))) return BX_NTVDM_STATUS_INVALID_PARAMETER;
+    if (environment == NULL || *environment == NULL || name == NULL || name->Buffer == NULL || (name->Length % sizeof(WCHAR)) != 0u) return RUNTIME_STATUS_INVALID_PARAMETER;
+    name_chars = name->Length / sizeof(WCHAR); if (name_chars == 0u || (value != NULL && (value->Buffer == NULL || (value->Length % sizeof(WCHAR)) != 0u))) return RUNTIME_STATUS_INVALID_PARAMETER;
     value_chars = value == NULL ? 0u : value->Length / sizeof(WCHAR); source = (PWCHAR)*environment; total = multisz_wchars(source);
-    if (total < 2u || total > (USHRT_MAX / sizeof(WCHAR))) return BX_NTVDM_STATUS_INVALID_PARAMETER;
-    if (total + (value == NULL ? 0u : name_chars + value_chars + 1u) > (USHRT_MAX / sizeof(WCHAR))) return BX_NTVDM_STATUS_NO_MEMORY;
-    replacement = (PWCHAR)calloc(total + (value == NULL ? 0u : name_chars + value_chars + 1u), sizeof(WCHAR)); if (replacement == NULL) return BX_NTVDM_STATUS_NO_MEMORY;
+    if (total < 2u || total > (USHRT_MAX / sizeof(WCHAR))) return RUNTIME_STATUS_INVALID_PARAMETER;
+    if (total + (value == NULL ? 0u : name_chars + value_chars + 1u) > (USHRT_MAX / sizeof(WCHAR))) return RUNTIME_STATUS_NO_MEMORY;
+    replacement = (PWCHAR)calloc(total + (value == NULL ? 0u : name_chars + value_chars + 1u), sizeof(WCHAR)); if (replacement == NULL) return RUNTIME_STATUS_NO_MEMORY;
     cursor = output = 0u;
     while (cursor + 1u < total && source[cursor] != L'\0') {
         WCHAR *entry = source + cursor; WCHAR *equals = wcschr(entry + (entry[0] == L'=' ? 1u : 0u), L'='); size_t chars = wcslen(entry); size_t entry_name = equals == NULL ? chars : (size_t)(equals - entry); int compare = name_compare(name->Buffer, name_chars, entry, entry_name);

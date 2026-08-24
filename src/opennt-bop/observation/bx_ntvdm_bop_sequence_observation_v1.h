@@ -1,18 +1,18 @@
-#ifndef BX_NTVDM_BOP_SEQUENCE_OBSERVATION_V1_H
-#define BX_NTVDM_BOP_SEQUENCE_OBSERVATION_V1_H
+#ifndef RUNTIME_BOP_SEQUENCE_OBSERVATION_V1_H
+#define RUNTIME_BOP_SEQUENCE_OBSERVATION_V1_H
 
 #include <stdint.h>
 
-#include "bx_ntvdm_generic_ud_bridge.h"
+#include "generic_ud_bridge.h"
 
-#define BX_NTVDM_BOP_SEQUENCE_OBSERVATION_V1_MAGIC UINT32_C(0x4258534f)
-#define BX_NTVDM_BOP_SEQUENCE_OBSERVATION_V1_VERSION UINT32_C(2)
-#define BX_NTVDM_BOP_SEQUENCE_OBSERVATION_V1_MAX_RECORDS 128u
+#define RUNTIME_BOP_SEQUENCE_OBSERVATION_V1_MAGIC UINT32_C(0x4258534f)
+#define RUNTIME_BOP_SEQUENCE_OBSERVATION_V1_VERSION UINT32_C(2)
+#define RUNTIME_BOP_SEQUENCE_OBSERVATION_V1_MAX_RECORDS 128u
 
 /* Default-off copied sequence of reached C4 C4 instructions. It records
  * accepted and declined invocations alike, with a fixed-width pre-dispatch
  * CPU snapshot only; it carries no guest-memory data, provider identity, or semantic interpretation. */
-struct bx_ntvdm_bop_sequence_observation_record_v1 {
+struct runtime_bop_sequence_observation_record_v1 {
     uint16_t cs;
     uint16_t reserved0;
     uint32_t eip;
@@ -25,26 +25,26 @@ struct bx_ntvdm_bop_sequence_observation_record_v1 {
     uint16_t reserved1;
 };
 
-struct bx_ntvdm_bop_sequence_observation_v1 {
+struct runtime_bop_sequence_observation_v1 {
     uint32_t magic;
     uint32_t abi_version;
     uint32_t struct_bytes;
     uint32_t record_count;
     uint32_t overflowed;
-    struct bx_ntvdm_bop_sequence_observation_record_v1
-        records[BX_NTVDM_BOP_SEQUENCE_OBSERVATION_V1_MAX_RECORDS];
+    struct runtime_bop_sequence_observation_record_v1
+        records[RUNTIME_BOP_SEQUENCE_OBSERVATION_V1_MAX_RECORDS];
 };
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void bx_ntvdm_bop_sequence_observation_v1_enable(uint32_t enabled);
-int bx_ntvdm_bop_sequence_observation_v1_copy(
-    struct bx_ntvdm_bop_sequence_observation_v1 *value);
-void bx_ntvdm_bop_sequence_observation_v1_consider(
-    const struct bx_ntvdm_generic_ud_event_v1 *event,
-    const struct bx_ntvdm_generic_ud_outcome_v1 *outcome);
+void runtime_bop_sequence_observation_v1_enable(uint32_t enabled);
+int runtime_bop_sequence_observation_v1_copy(
+    struct runtime_bop_sequence_observation_v1 *value);
+void runtime_bop_sequence_observation_v1_consider(
+    const struct runtime_generic_ud_event_v1 *event,
+    const struct runtime_generic_ud_outcome_v1 *outcome);
 
 #ifdef __cplusplus
 }

@@ -8,21 +8,21 @@
 /////////////////////////////////////////////////////////////////////////
 
 #include "bochs.h"
-#include "adapter-softpc/bx_ntvdm_finite_run.h"
-#include "adapter-softpc/bx_ntvdm_first_fault_observation_v1.h"
-#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-softpc/finite_run.h"
+#include "adapter-softpc/first_fault_observation.h"
+#include "adapter-bop/generic_ud_bridge.h"
 #include "bx-mantle/minimal_machine.h"
 #include "bx-core/cpu/cpu.h"
 
 #include <string.h>
 
-extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
-  const struct bx_ntvdm_generic_ud_event_v1 *event,
-  struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
+extern "C" int runtime_mantle_generic_ud_bridge_v1(
+  const struct runtime_generic_ud_event_v1 *event,
+  struct runtime_generic_ud_outcome_v1 *outcome)
 {
   if (event == 0 || outcome == 0 || event->vector != 6u) return 0;
-  outcome->abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
-  outcome->disposition = BX_NTVDM_GENERIC_UD_STOP;
+  outcome->abi_version = RUNTIME_GENERIC_UD_EVENT_V1_VERSION;
+  outcome->disposition = RUNTIME_GENERIC_UD_STOP;
   return 1;
 }
 
@@ -67,13 +67,13 @@ int main(void)
     0xa3, 0xf6, 0xff,             // mov [fff6h],ax
     0x0f, 0x0b                    // ud2: fixture-only controlled stop
   };
-  bx_ntvdm_finite_run_request request;
-  bx_ntvdm_finite_run_terminal_snapshot terminal;
-  bx_ntvdm_first_fault_observation_v1 fault;
-  bx_ntvdm_finite_run_status status;
+  runtime_finite_run_request request;
+  runtime_finite_run_terminal_snapshot terminal;
+  runtime_first_fault_observation_v1 fault;
+  runtime_finite_run_status status;
 
   memset(&request, 0, sizeof(request));
-  request.request_version = BX_NTVDM_FINITE_RUN_REQUEST_VERSION;
+  request.request_version = RUNTIME_FINITE_RUN_REQUEST_VERSION;
   memcpy(request.entry_bytes, disabled_code, sizeof(disabled_code));
   request.entry_byte_count = sizeof(disabled_code);
   request.entry_physical_address = 0xe000u;
@@ -81,15 +81,15 @@ int main(void)
   request.instruction_tick_budget = 64u;
   request.ips = 1u;
   request.stop_on_first_fault_fixture = 1u;
-  status = bx_ntvdm_run_finite_bare_bytes(&request);
-  if (status != BX_NTVDM_FINITE_RUN_COMPLETED_FIRST_FAULT_STOP ||
-      !bx_ntvdm_mantle_first_fault_observation_observed()) return 1;
+  status = runtime_run_finite_bare_bytes(&request);
+  if (status != RUNTIME_FINITE_RUN_COMPLETED_FIRST_FAULT_STOP ||
+      !runtime_mantle_first_fault_observation_observed()) return 1;
   memset(&fault, 0, sizeof(fault));
-  if (!bx_ntvdm_mantle_first_fault_observation_copy(&fault) ||
+  if (!runtime_mantle_first_fault_observation_copy(&fault) ||
       fault.vector != 13u || fault.cs != 0x0e00u || fault.eip != 0u) return 2;
 
   memset(&request, 0, sizeof(request));
-  request.request_version = BX_NTVDM_FINITE_RUN_REQUEST_VERSION;
+  request.request_version = RUNTIME_FINITE_RUN_REQUEST_VERSION;
   memcpy(request.entry_bytes, enabled_code, sizeof(enabled_code));
   request.entry_byte_count = sizeof(enabled_code);
   request.entry_physical_address = 0xe000u;
@@ -98,9 +98,9 @@ int main(void)
   request.ips = 1u;
   request.enable_realmode_segment_limit_compatibility = 1u;
   request.capture_terminal_snapshot = 1u;
-  if (!bx_ntvdm_finite_run_terminal_snapshot_configure_ordinary_range(
+  if (!runtime_finite_run_terminal_snapshot_configure_ordinary_range(
       0xffe0u, 34u)) return 3;
-  status = bx_ntvdm_run_finite_bare_bytes(&request);
+  status = runtime_run_finite_bare_bytes(&request);
   {
     static const Bit8u expected[] = {
       /* EndInit-equivalent STD/REP MOVSB result at 0810h, copied here. */
@@ -111,8 +111,8 @@ int main(void)
       0x56, 0x34, 0x12, 0x34, 0x12, 0x78, 0x9a, 0xbc, 0x12
     };
     unsigned index;
-    if (status != BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP) return 40;
-    if (!bx_ntvdm_finite_run_terminal_snapshot_get(&terminal)) return 41;
+    if (status != RUNTIME_FINITE_RUN_COMPLETED_UD_STOP) return 40;
+    if (!runtime_finite_run_terminal_snapshot_get(&terminal)) return 41;
     if (terminal.captured_byte_count != sizeof(expected)) return 42;
     for (index = 0; index < sizeof(expected); ++index) {
       if (terminal.captured_bytes[index] != expected[index]) return 43 + index;
@@ -126,10 +126,10 @@ int main(void)
     static const Bit8u fetch_control_target[] = {
       0xb8, 0x78, 0x56, 0xa3, 0xf4, 0xff, 0x0f, 0x0b
     };
-    static bx_ntvdm_mechanical_action_v1 target_write;
+    static runtime_mechanical_action_v1 target_write;
 
-    bx_ntvdm_mechanical_action_v1_clear(&target_write);
-    target_write.kind = BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;
+    runtime_mechanical_action_v1_clear(&target_write);
+    target_write.kind = RUNTIME_MECHANICAL_ACTION_V1_WRITE;
     target_write.action_id = 1u;
     target_write.range_count = 1u;
     target_write.payload_bytes = sizeof(fetch_control_target);
@@ -139,7 +139,7 @@ int main(void)
       sizeof(fetch_control_target));
 
     memset(&request, 0, sizeof(request));
-    request.request_version = BX_NTVDM_FINITE_RUN_REQUEST_VERSION;
+    request.request_version = RUNTIME_FINITE_RUN_REQUEST_VERSION;
     memcpy(request.entry_bytes, fetch_control_entry,
       sizeof(fetch_control_entry));
     request.entry_byte_count = sizeof(fetch_control_entry);
@@ -151,21 +151,21 @@ int main(void)
     request.stop_on_first_fault_fixture = 1u;
     request.has_preentry_action = 1u;
     request.preentry_action = target_write;
-    status = bx_ntvdm_run_finite_bare_bytes(&request);
-    if (status != BX_NTVDM_FINITE_RUN_COMPLETED_FIRST_FAULT_STOP ||
-        !bx_ntvdm_mantle_first_fault_observation_observed()) return 5;
+    status = runtime_run_finite_bare_bytes(&request);
+    if (status != RUNTIME_FINITE_RUN_COMPLETED_FIRST_FAULT_STOP ||
+        !runtime_mantle_first_fault_observation_observed()) return 5;
     memset(&fault, 0, sizeof(fault));
-    if (!bx_ntvdm_mantle_first_fault_observation_copy(&fault) ||
+    if (!runtime_mantle_first_fault_observation_copy(&fault) ||
         fault.vector != 13u || fault.cs != 0u || fault.eip != 0xfff0u) return 6;
 
     request.stop_on_first_fault_fixture = 0u;
     request.enable_realmode_segment_limit_compatibility = 1u;
     request.capture_terminal_snapshot = 1u;
-    if (!bx_ntvdm_finite_run_terminal_snapshot_configure_ordinary_range(
+    if (!runtime_finite_run_terminal_snapshot_configure_ordinary_range(
         0xfff4u, 2u)) return 7;
-    status = bx_ntvdm_run_finite_bare_bytes(&request);
-    if (status != BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP ||
-        !bx_ntvdm_finite_run_terminal_snapshot_get(&terminal) ||
+    status = runtime_run_finite_bare_bytes(&request);
+    if (status != RUNTIME_FINITE_RUN_COMPLETED_UD_STOP ||
+        !runtime_finite_run_terminal_snapshot_get(&terminal) ||
         terminal.cs != 0u || terminal.eip != 0x10008u ||
         terminal.captured_byte_count != 2u ||
         terminal.captured_bytes[0] != 0x78u ||

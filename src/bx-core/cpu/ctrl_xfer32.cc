@@ -25,16 +25,16 @@
 #define LOG_THIS BX_CPU_THIS_PTR
 /* DIVERGENCE(BX-CORE-DIV-001,BX-CORE-DIV-004): retained real/V86 transfer checks and default-off IRET observation. */
 
-#ifndef BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
-#define BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION 0
+#ifndef RUNTIME_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
+#define RUNTIME_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION 0
 #endif
 
-#if BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
-#include "adapter-softpc/bx_ntvdm_interrupt_return_observation_v1.h"
-#define BX_NTVDM_RECORD_INTERRUPT_RETURN(width_value) do { \
+#if RUNTIME_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
+#include "adapter-softpc/interrupt_return_observation.h"
+#define RUNTIME_RECORD_INTERRUPT_RETURN(width_value) do { \
   if (BX_CPU_THIS_PTR real_mode() || BX_CPU_THIS_PTR v8086_mode()) { \
-    struct bx_ntvdm_interrupt_return_observation_v1_record record; \
-    record.version = BX_NTVDM_INTERRUPT_RETURN_OBSERVATION_V1_VERSION; \
+    struct runtime_interrupt_return_observation_v1_record record; \
+    record.version = RUNTIME_INTERRUPT_RETURN_OBSERVATION_V1_VERSION; \
     record.cpu_id = BX_CPU_ID; \
     record.sequence = BX_CPU_THIS_PTR icount; \
     record.rip = RIP; \
@@ -48,11 +48,11 @@
     record.execution_mode = BX_CPU_THIS_PTR real_mode() ? 1u : 3u; \
     record.operand_width = (Bit8u)(width_value); \
     record.reserved0 = 0u; \
-    bx_ntvdm_mantle_interrupt_return_observation_v1_record(&record); \
+    runtime_mantle_interrupt_return_observation_v1_record(&record); \
   } \
 } while (0)
 #else
-#define BX_NTVDM_RECORD_INTERRUPT_RETURN(width_value) do { } while (0)
+#define RUNTIME_RECORD_INTERRUPT_RETURN(width_value) do { } while (0)
 #endif
 
 #if BX_CPU_LEVEL >= 3
@@ -655,7 +655,7 @@ BX_INSF_TYPE BX_CPP_AttrRegparmN(1) BX_CPU_C::IRET32(bxInstruction_c *i)
   }
 
   RSP_COMMIT;
-  BX_NTVDM_RECORD_INTERRUPT_RETURN(32u);
+  RUNTIME_RECORD_INTERRUPT_RETURN(32u);
 
 done:
 

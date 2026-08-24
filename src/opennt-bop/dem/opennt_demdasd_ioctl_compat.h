@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_BOP_SHIM_DEMDASD_IOCTL_SHIM_H
-#define BX_NTVDM_BOP_SHIM_DEMDASD_IOCTL_SHIM_H
+#ifndef RUNTIME_BOP_SHIM_DEMDASD_IOCTL_SHIM_H
+#define RUNTIME_BOP_SHIM_DEMDASD_IOCTL_SHIM_H
 
 /* Compatibility boundary for directly imported OpenNT demdasd.c/demioctl.c.
  * It starts with the proven register/guest-memory/drive layout surface;
@@ -30,15 +30,15 @@ UCHAR demGetPhysicalDriveType(UCHAR drive);
  * historical SoftPC recursive executor.  They are declared at this adapter
  * seam so the original body remains intact; the future Bochs-backed bridge
  * is deliberately independent of selector/service routing. */
-USHORT bx_ntvdm_demdasd_get_cs(void);
-USHORT bx_ntvdm_demdasd_get_ip(void);
-int bx_ntvdm_demdasd_get_cf(void);
-USHORT bx_ntvdm_demdasd_get_ah(void);
-void bx_ntvdm_demdasd_set_cs(USHORT value);
-void bx_ntvdm_demdasd_set_ip(USHORT value);
-void bx_ntvdm_demdasd_set_es(USHORT value);
-void bx_ntvdm_demdasd_set_ah(USHORT value);
-void bx_ntvdm_demdasd_host_simulate(void);
+USHORT runtime_demdasd_get_cs(void);
+USHORT runtime_demdasd_get_ip(void);
+int runtime_demdasd_get_cf(void);
+USHORT runtime_demdasd_get_ah(void);
+void runtime_demdasd_set_cs(USHORT value);
+void runtime_demdasd_set_ip(USHORT value);
+void runtime_demdasd_set_es(USHORT value);
+void runtime_demdasd_set_ah(USHORT value);
+void runtime_demdasd_host_simulate(void);
 void diskette_io(void);
 /* Directly retained `nt_fdisk.c` host lifecycle.  The imported DEM reset and
  * process-termination owners use these spellings; no machine behavior is
@@ -47,7 +47,7 @@ void fdisk_heart_beat(void);
 void FdiskTerminatePDB(USHORT pdb);
 void HostFdiskReset(void);
 
-int bx_ntvdm_demdasd_ioctl_invoke(bx_ntvdm_demhndl_call *call);
+int runtime_demdasd_ioctl_invoke(runtime_demhndl_call *call);
 
 /* demhndl_shim exports the common CCPU spelling for other imported DEM
  * bodies.  DASD owns a separate local CS:IP staging pair around the original
@@ -57,15 +57,15 @@ int bx_ntvdm_demdasd_ioctl_invoke(bx_ntvdm_demhndl_call *call);
 #undef getCF
 #undef setCS
 #undef setIP
-#define getCS() bx_ntvdm_demdasd_get_cs()
-#define getIP() bx_ntvdm_demdasd_get_ip()
-#define getCF() bx_ntvdm_demdasd_get_cf()
-#define getAH() bx_ntvdm_demdasd_get_ah()
-#define setCS(value) bx_ntvdm_demdasd_set_cs(value)
-#define setIP(value) bx_ntvdm_demdasd_set_ip(value)
-#define setES(value) bx_ntvdm_demdasd_set_es(value)
-#define setAH(value) bx_ntvdm_demdasd_set_ah(value)
-#define host_simulate() bx_ntvdm_demdasd_host_simulate()
+#define getCS() runtime_demdasd_get_cs()
+#define getIP() runtime_demdasd_get_ip()
+#define getCF() runtime_demdasd_get_cf()
+#define getAH() runtime_demdasd_get_ah()
+#define setCS(value) runtime_demdasd_set_cs(value)
+#define setIP(value) runtime_demdasd_set_ip(value)
+#define setES(value) runtime_demdasd_set_es(value)
+#define setAH(value) runtime_demdasd_set_ah(value)
+#define host_simulate() runtime_demdasd_host_simulate()
 
 /* This identifier shadow is present in the original imported source. */
 #pragma warning(disable:4459)

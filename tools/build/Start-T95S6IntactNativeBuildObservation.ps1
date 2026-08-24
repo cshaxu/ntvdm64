@@ -1,4 +1,4 @@
-﻿[CmdletBinding()]
+[CmdletBinding()]
 param(
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
@@ -34,7 +34,7 @@ if errorlevel 1 goto record
 cd /d "$build"
 nmake.exe /f ntdos64-native-container.mak ntdos64-native-container.exe > "$logPath" 2>&1
 :record
-set "NTDOS64_EXITCODE=%ERRORLEVEL%"
+set "APP_EXITCODE=%ERRORLEVEL%"
 > "$exitTemp" echo %NTDOS64_EXITCODE%
 move /y "$exitTemp" "$exitPath" >nul
 exit /b %NTDOS64_EXITCODE%

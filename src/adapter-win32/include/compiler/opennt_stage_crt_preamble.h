@@ -3,8 +3,8 @@
  * retain their historical declarations for host aliases such as getenv, so
  * each original compilation unit must establish its own CRT-header order.
  */
-#ifndef OPENNT_STAGE_CRT_PREAMBLE_H
-#define OPENNT_STAGE_CRT_PREAMBLE_H
+#ifndef STAGE_CRT_PREAMBLE_H
+#define STAGE_CRT_PREAMBLE_H
 
 /*
  * The modern user-mode SDK supplies LIST_ENTRY but not the legacy NT list

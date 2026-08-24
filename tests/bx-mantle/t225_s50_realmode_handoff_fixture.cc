@@ -10,7 +10,7 @@
 /////////////////////////////////////////////////////////////////////////
 
 #include "bochs.h"
-#include "adapter-softpc/bx_ntvdm_finite_run.h"
+#include "adapter-softpc/finite_run.h"
 
 #include <string.h>
 
@@ -47,12 +47,12 @@ int main()
   static const Bit8u expected_result[] = {
     0xef, 0xbe, 0x00, 0x40, 0x00, 0x40, 0x00, 0x30, 0xfe, 0xff
   };
-  bx_ntvdm_finite_run_request request;
-  bx_ntvdm_finite_run_terminal_snapshot terminal;
-  bx_ntvdm_finite_run_status status;
+  runtime_finite_run_request request;
+  runtime_finite_run_terminal_snapshot terminal;
+  runtime_finite_run_status status;
 
   memset(&request, 0, sizeof(request));
-  request.request_version = BX_NTVDM_FINITE_RUN_REQUEST_VERSION;
+  request.request_version = RUNTIME_FINITE_RUN_REQUEST_VERSION;
   memcpy(request.entry_bytes, transfer, sizeof(transfer));
   request.entry_byte_count = sizeof(transfer);
   request.entry_physical_address = 0x10000;
@@ -61,9 +61,9 @@ int main()
   request.instruction_tick_budget = 64;
   request.ips = 1000000;
   request.has_preentry_action = 1;
-  bx_ntvdm_mechanical_action_v1_clear(&request.preentry_action);
+  runtime_mechanical_action_v1_clear(&request.preentry_action);
   request.preentry_action.action_id = 1;
-  request.preentry_action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;
+  request.preentry_action.kind = RUNTIME_MECHANICAL_ACTION_V1_WRITE;
   request.preentry_action.range_count = 1;
   request.preentry_action.payload_bytes = sizeof(child);
   request.preentry_action.ranges[0].physical_address = 0x22320;
@@ -71,27 +71,27 @@ int main()
   memcpy(request.preentry_action.payload, child, sizeof(child));
   request.capture_terminal_snapshot = 1;
 
-  if (!bx_ntvdm_finite_run_terminal_snapshot_configure_ordinary_range(
+  if (!runtime_finite_run_terminal_snapshot_configure_ordinary_range(
         0x3fffa, sizeof(expected_stack))) return 1;
-  status = bx_ntvdm_run_finite_bare_bytes(&request);
-  if (status != BX_NTVDM_FINITE_RUN_COMPLETED_BUDGET ||
-      !bx_ntvdm_finite_run_terminal_snapshot_get(&terminal) ||
+  status = runtime_run_finite_bare_bytes(&request);
+  if (status != RUNTIME_FINITE_RUN_COMPLETED_BUDGET ||
+      !runtime_finite_run_terminal_snapshot_get(&terminal) ||
       terminal.cs != 0x2222 || terminal.eip != 0x118 ||
       terminal.captured_byte_count != sizeof(expected_stack) ||
       memcmp(terminal.captured_bytes, expected_stack, sizeof(expected_stack)))
     return 2;
 
-  if (!bx_ntvdm_finite_run_terminal_snapshot_configure_ordinary_range(
+  if (!runtime_finite_run_terminal_snapshot_configure_ordinary_range(
         0x40200, sizeof(expected_result))) return 3;
-  status = bx_ntvdm_run_finite_bare_bytes(&request);
-  if (status != BX_NTVDM_FINITE_RUN_COMPLETED_BUDGET ||
-      !bx_ntvdm_finite_run_terminal_snapshot_get(&terminal) ||
+  status = runtime_run_finite_bare_bytes(&request);
+  if (status != RUNTIME_FINITE_RUN_COMPLETED_BUDGET ||
+      !runtime_finite_run_terminal_snapshot_get(&terminal) ||
       terminal.captured_byte_count != sizeof(expected_result) ||
       memcmp(terminal.captured_bytes, expected_result, sizeof(expected_result)))
     return 4;
 
   request.entry_physical_address = 0x100000;
   request.entry_byte_count = 1;
-  return bx_ntvdm_run_finite_bare_bytes(&request) ==
-    BX_NTVDM_FINITE_RUN_REJECTED_INPUT ? 0 : 5;
+  return runtime_run_finite_bare_bytes(&request) ==
+    RUNTIME_FINITE_RUN_REJECTED_INPUT ? 0 : 5;
 }

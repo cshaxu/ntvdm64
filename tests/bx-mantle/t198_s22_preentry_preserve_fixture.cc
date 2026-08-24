@@ -6,7 +6,7 @@
  */
 
 #include "bochs.h"
-#include "adapter-softpc/bx_ntvdm_finite_run.h"
+#include "adapter-softpc/finite_run.h"
 
 #include <string.h>
 
@@ -22,7 +22,7 @@ int main()
     0xf4,                         /* hlt: preserved bytes were restored */
     0x0f, 0x0b                    /* ud2: preservation failed */
   };
-  static bx_ntvdm_finite_run_request request;
+  static runtime_finite_run_request request;
   int status;
 
   memset(image, 0, sizeof(image));
@@ -32,7 +32,7 @@ int main()
   image[0x16] = 0x3c;
   image[0x17] = 0xc3;
 
-  request.request_version = BX_NTVDM_FINITE_RUN_REQUEST_VERSION;
+  request.request_version = RUNTIME_FINITE_RUN_REQUEST_VERSION;
   memcpy(request.entry_bytes, image, sizeof(image));
   request.entry_byte_count = sizeof(image);
   request.entry_physical_address = 0x700;
@@ -42,13 +42,13 @@ int main()
   request.ips = 1000000;
   request.preserve_physical_address = 0x714;
   request.preserve_byte_count = 4;
-  status = (int) bx_ntvdm_run_finite_bare_bytes(&request);
-  if (status != BX_NTVDM_FINITE_RUN_COMPLETED_BUDGET) return status + 1;
+  status = (int) runtime_run_finite_bare_bytes(&request);
+  if (status != RUNTIME_FINITE_RUN_COMPLETED_BUDGET) return status + 1;
 
   /* Validation occurs before the machine is initialized or any RAM is
    * copied.  This range cannot fit in the fixed ordinary-RAM aperture. */
   request.entry_physical_address = 0xfffff;
   request.entry_byte_count = 2;
-  status = (int) bx_ntvdm_run_finite_bare_bytes(&request);
-  return status == BX_NTVDM_FINITE_RUN_REJECTED_INPUT ? 0 : status + 16;
+  status = (int) runtime_run_finite_bare_bytes(&request);
+  return status == RUNTIME_FINITE_RUN_REJECTED_INPUT ? 0 : status + 16;
 }

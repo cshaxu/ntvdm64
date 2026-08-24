@@ -40,7 +40,7 @@ static int wide_multisz_has_prefix(const WCHAR *strings, size_t characters,
 
 int main(void)
 {
-    bx_ntvdm_command_misc_session session;
+    runtime_command_misc_session session;
     VDMENVBLK block;
     ANSI_STRING transformed;
     CHAR source[1536];
@@ -59,8 +59,8 @@ int main(void)
     memcpy(source + path_bytes + sizeof("PATH=") + 1300u,
         "WINDIR=C:\\WINDOWS", sizeof("WINDIR=C:\\WINDOWS"));
 
-    bx_ntvdm_command_misc_session_initialize(&session);
-    if (!bx_ntvdm_command_misc_session_set_command_environment(&session, source,
+    runtime_command_misc_session_initialize(&session);
+    if (!runtime_command_misc_session_set_command_environment(&session, source,
             (uint32_t)(path_bytes + sizeof("PATH=") + 1300u +
                 sizeof("WINDIR=C:\\WINDOWS") + 1u)) ||
         session.command_source_environment_bytes <= 1024u ||
@@ -68,12 +68,12 @@ int main(void)
         !multisz_has_prefix(session.command_source_environment,
             session.command_source_environment_bytes, "PATH=")) return 1;
 
-    snapshot = bx_ntvdm_command_environment_snapshot_session(&session);
+    snapshot = runtime_command_environment_snapshot_session(&session);
     if (snapshot == NULL || !wide_multisz_has_prefix(snapshot,
             session.command_source_environment_bytes, L"COMSPEC=C:\\STALE.COM") ||
         !wide_multisz_has_prefix(snapshot,
             session.command_source_environment_bytes, L"PATH=")) return 10;
-    bx_ntvdm_command_environment_free_snapshot(snapshot);
+    runtime_command_environment_free_snapshot(snapshot);
 
     memset(&transformed, 0, sizeof(transformed));
     if (!cmdXformEnvironment(dos_environment, &transformed) ||
@@ -110,7 +110,7 @@ int main(void)
     free(block.lpszzEnv);
     free(lpszzcmdEnv16); lpszzcmdEnv16 = NULL;
     free(lpszzVDMEnv32); lpszzVDMEnv32 = NULL; cchVDMEnv32 = 0u;
-    bx_ntvdm_command_misc_session_dispose(&session);
+    runtime_command_misc_session_dispose(&session);
     puts("T234 S2 OpenNT dynamic COMMAND environment composition verified");
     return 0;
 }

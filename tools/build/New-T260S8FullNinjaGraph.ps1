@@ -65,7 +65,7 @@ $requiredPlatformLibraries = @('advapi32.lib', 'comctl32.lib', 'gdi32.lib', 'ntd
 if ($InstructionHistoryDiagnostic -or $InstructionHistoryProvenanceDiagnostic) {
     $mantle = @($manifest.modules | Where-Object { $_.name -eq 'bx-mantle' })
     if ($mantle.Count -ne 1) { throw 'Diagnostic graph requires one bx-mantle module.' }
-    $mantle[0].sources = @($mantle[0].sources) + 'src/bx-mantle/bx_ntvdm_instruction_history.cc'
+    $mantle[0].sources = @($mantle[0].sources) + 'src/bx-mantle/instruction_history.cc'
 }
 if ($manifest.schema -ne 'ntdos64.t260.s8.component-manifest.v1' -or $manifest.architecture -ne 'x64' -or $manifest.runtimeLibrary -ne '/MT') {
     throw 'Unsupported T260 S8 component manifest.'

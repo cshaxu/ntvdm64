@@ -66,7 +66,7 @@ VOID  xmsInitUMB(VOID)
 	    // convert linear address to paragraphs segment
 	    /* DIVERGENCE (T237): `Address` is host-private on x64.  The mantle
 	     * seam supplies only its declared 20-bit guest-linear projection. */
-	    xmsUMBNew->Segment = bx_ntvdm_xms_linear_to_segment(Address);
+	    xmsUMBNew->Segment = runtime_xms_linear_to_segment(Address);
 	    xmsUMBNew->Owner = 0;
 	    if (xmsUMBHead == NULL) {
 		xmsUMBHead = xmsUMBNew;
@@ -120,7 +120,7 @@ ULONG	Size
     WORD    Segment;
 
     /* DIVERGENCE (T237): see xmsInitUMB's host-pointer projection note. */
-    Segment = bx_ntvdm_xms_linear_to_segment(Address);
+    Segment = runtime_xms_linear_to_segment(Address);
     Size >>= 4;
 
     xmsUMB = xmsUMBNew = xmsUMBHead;

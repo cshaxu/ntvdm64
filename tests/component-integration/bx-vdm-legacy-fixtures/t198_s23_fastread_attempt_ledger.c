@@ -10,8 +10,8 @@ void t198_s23_fastread_attempt_ledger_v1_reset(
 
 void t198_s23_fastread_attempt_ledger_v1_record(
     struct t198_s23_fastread_attempt_ledger_v1 *ledger,
-    const struct bx_ntvdm_generic_ud_event_v1 *event,
-    const struct bx_ntvdm_generic_ud_outcome_v1 *outcome, int accepted)
+    const struct runtime_generic_ud_event_v1 *event,
+    const struct runtime_generic_ud_outcome_v1 *outcome, int accepted)
 {
     struct t198_s23_fastread_attempt_v1 *entry;
     if (ledger == 0 || event == 0 || ledger->count >= T198_S23_FASTREAD_ATTEMPT_LEDGER_CAPACITY ||

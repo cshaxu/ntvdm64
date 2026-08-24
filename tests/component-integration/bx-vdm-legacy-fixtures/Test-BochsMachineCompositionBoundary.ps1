@@ -13,7 +13,7 @@ if (-not (Test-Path -LiteralPath $exception -PathType Leaf)) {
     throw "Missing seam file: $exception"
 }
 $text = Get-Content -LiteralPath $exception -Raw
-$adapter = Get-Content (Join-Path $RepositoryRoot 'src\bx-vdm\bx_ntvdm_machine_composition_v2.c') -Raw
+$adapter = Get-Content (Join-Path $RepositoryRoot 'src\bx-vdm\machine_composition.c') -Raw
 if ($text -notmatch '#ifndef BX_NTVDM_ENABLE_MACHINE_COMPOSITION\s*\r?\n#define BX_NTVDM_ENABLE_MACHINE_COMPOSITION 0') {
     throw 'Machine-composition seam is not default-off.'
 }

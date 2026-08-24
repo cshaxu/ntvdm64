@@ -1,5 +1,5 @@
-#ifndef NTDOS64_OPENNT_DEM_OEM_FACADE_H
-#define NTDOS64_OPENNT_DEM_OEM_FACADE_H
+#ifndef APP_OPENNT_DEM_OEM_FACADE_H
+#define APP_OPENNT_DEM_OEM_FACADE_H
 
 /* Same-shaped public-Win32 replacement for the OEM directory calls reached
  * by OpenNT DOS/DEM providers.  Provider sequencing and DOS error mapping

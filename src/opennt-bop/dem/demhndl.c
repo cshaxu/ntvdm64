@@ -72,7 +72,7 @@ USHORT  usDX,usCX;
      * CloseHandle(hFile).  The direct shim must additionally retire the
      * opaque AX:BP token so native-width host handles cannot become stale
      * guest values on either x86 or x64. */
-    if (bx_ntvdm_demhndl_close_handle (hFile) == FALSE){
+    if (runtime_demhndl_close_handle (hFile) == FALSE){
         demClientError(hFile, (CHAR)-1);
         return;
     }

@@ -4,7 +4,7 @@
 
 #include "opennt_demfile_composition.h"
 /* Project-only static binding for the original DLL-import pointer shape. */
-BOOLEAN bx_ntvdm_vr_initialized_provider(VOID);
+BOOLEAN runtime_vr_initialized_provider(VOID);
 
 void demChMod(void);
 void demCreate(void);
@@ -23,7 +23,7 @@ BOOL LoadVdmRedir(void)
     /* DIVERGENCE(BOP-DIV-051): original NTVDM populated this DLL import
      * pointer after LoadLibrary.  The static provider keeps the exact source
      * indirection while binding it to the re-rooted VDMREDIR owner. */
-    VrInitialized = (BOOL (*)(VOID))bx_ntvdm_vr_initialized_provider;
+    VrInitialized = (BOOL (*)(VOID))runtime_vr_initialized_provider;
     /* DIVERGENCE(BOP-DIV-089): loading the historical VDMREDIR DLL also
      * initialized VDD/ICA/NetBIOS/DLC state.  The direct static query is
      * retained, but no successful LoadVdmRedir result is possible until that
@@ -41,22 +41,22 @@ void *Sim32GetVDMPointer(ULONG address, ULONG bytes, int protect)
     return NULL;
 }
 
-BOOL bx_ntvdm_demfile_publish_handle(HANDLE file)
-{ return bx_ntvdm_demhndl_publish_handle(file); }
+BOOL runtime_demfile_publish_handle(HANDLE file)
+{ return runtime_demhndl_publish_handle(file); }
 
-int bx_ntvdm_demfile_invoke(bx_ntvdm_demhndl_call *call)
+int runtime_demfile_invoke(runtime_demhndl_call *call)
 {
     void (*body)(void) = NULL;
     if (call == NULL) return 0;
     switch (call->service) {
-    case BX_NTVDM_DEMFILE_CHMOD: body = demChMod; break;
-    case BX_NTVDM_DEMFILE_CREATE: body = demCreate; break;
-    case BX_NTVDM_DEMFILE_DELETE: body = demDelete; break;
-    case BX_NTVDM_DEMFILE_OPEN: body = demOpen; break;
-    case BX_NTVDM_DEMFILE_RENAME: body = demRename; break;
-    case BX_NTVDM_DEMFILE_CREATE_NEW: body = demCreateNew; break;
-    case BX_NTVDM_DEMFILE_CHECK_PATH: body = demCheckPath; break;
+    case RUNTIME_DEMFILE_CHMOD: body = demChMod; break;
+    case RUNTIME_DEMFILE_CREATE: body = demCreate; break;
+    case RUNTIME_DEMFILE_DELETE: body = demDelete; break;
+    case RUNTIME_DEMFILE_OPEN: body = demOpen; break;
+    case RUNTIME_DEMFILE_RENAME: body = demRename; break;
+    case RUNTIME_DEMFILE_CREATE_NEW: body = demCreateNew; break;
+    case RUNTIME_DEMFILE_CHECK_PATH: body = demCheckPath; break;
     default: return 0;
     }
-    return bx_ntvdm_demhndl_invoke_body(call, body);
+    return runtime_demhndl_invoke_body(call, body);
 }

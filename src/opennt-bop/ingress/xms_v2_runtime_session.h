@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_BOP_XMS_V2_RUNTIME_SESSION_H
-#define BX_NTVDM_BOP_XMS_V2_RUNTIME_SESSION_H
+#ifndef RUNTIME_BOP_XMS_V2_RUNTIME_SESSION_H
+#define RUNTIME_BOP_XMS_V2_RUNTIME_SESSION_H
 
 /* This session binds the original XMS package only after the mantle has
  * admitted the matching whole-machine capacity: OpenNT config.c uses
@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 
-int bx_ntvdm_xms_v2_runtime_session_bind(uint32_t xms_memory_kib);
-void bx_ntvdm_xms_v2_runtime_session_reset(void);
+int runtime_xms_v2_runtime_session_bind(uint32_t xms_memory_kib);
+void runtime_xms_v2_runtime_session_reset(void);
 
 #endif

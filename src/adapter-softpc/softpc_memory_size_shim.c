@@ -1,8 +1,8 @@
 #include "softpc_memory_size_shim.h"
 
-#include "adapter-softpc/bx_ntvdm_mechanical_action_v1.h"
+#include "adapter-softpc/mechanical_action.h"
 
-struct bx_ntvdm_softpc_memory_size_call {
+struct runtime_softpc_memory_size_call {
     uint16_t ax;
     uint32_t active;
     uint32_t failed;
@@ -10,9 +10,9 @@ struct bx_ntvdm_softpc_memory_size_call {
 
 /* BOP handling is synchronous.  This is a per-thread shim context, never a
  * guest pointer or a Bochs object, and it cannot outlive the bridge call. */
-static __declspec(thread) struct bx_ntvdm_softpc_memory_size_call g_call;
+static __declspec(thread) struct runtime_softpc_memory_size_call g_call;
 
-int bx_ntvdm_softpc_memory_size_begin(uint16_t *result_ax)
+int runtime_softpc_memory_size_begin(uint16_t *result_ax)
 {
     if (result_ax == 0 || g_call.active != 0u) return 0;
     g_call.ax = 0u;
@@ -21,7 +21,7 @@ int bx_ntvdm_softpc_memory_size_begin(uint16_t *result_ax)
     return 1;
 }
 
-int bx_ntvdm_softpc_memory_size_end(uint16_t *result_ax)
+int runtime_softpc_memory_size_end(uint16_t *result_ax)
 {
     if (result_ax == 0 || g_call.active == 0u) return 0;
     *result_ax = g_call.ax;
@@ -29,19 +29,19 @@ int bx_ntvdm_softpc_memory_size_end(uint16_t *result_ax)
     return g_call.failed == 0u;
 }
 
-void bx_ntvdm_softpc_memory_size_sas_loadw(uint32_t address, word *value)
+void runtime_softpc_memory_size_sas_loadw(uint32_t address, word *value)
 {
     uint8_t bytes[2];
     if (g_call.active == 0u || value == 0 ||
-        address != BX_NTVDM_SOFTPC_MEMORY_VAR ||
-        !bx_ntvdm_mantle_checked_ram_read_v1(address, bytes, sizeof(bytes))) {
+        address != RUNTIME_SOFTPC_MEMORY_VAR ||
+        !runtime_mantle_checked_ram_read_v1(address, bytes, sizeof(bytes))) {
         g_call.failed = 1u;
         return;
     }
     *value = (word)((uint16_t)bytes[0] | ((uint16_t)bytes[1] << 8));
 }
 
-void bx_ntvdm_softpc_memory_size_setAX(word value)
+void runtime_softpc_memory_size_setAX(word value)
 {
     if (g_call.active == 0u) {
         g_call.failed = 1u;

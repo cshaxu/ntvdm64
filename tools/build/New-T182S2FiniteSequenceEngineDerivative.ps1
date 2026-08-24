@@ -1,4 +1,4 @@
-﻿[CmdletBinding()]
+[CmdletBinding()]
 param(
     [string]$RepositoryRoot = '',
     [string]$MachineRoot = '',
@@ -38,7 +38,7 @@ if ($sourceManifest.adapterSources.Count -ne 67 -or $sourceManifest.cliSources.C
     throw 'Retained manifest does not have the expected 67 adapter plus four CLI base closure.'
 }
 $adapterSources = @($sourceManifest.adapterSources | ForEach-Object { [string]$_.name })
-$cliSources = @($sourceManifest.cliSources | ForEach-Object { [string]$_.name }) + 'byob_launch_plan_v2.c'
+$cliSources = @($sourceManifest.cliSources | ForEach-Object { [string]$_.name }) + 'byob_launch_plan.c'
 if (($adapterSources | Sort-Object -Unique).Count -ne 67 -or
     ($cliSources | Sort-Object -Unique).Count -ne 5) {
     throw 'T182 source closure is not exactly 67 adapter plus five CLI units.'

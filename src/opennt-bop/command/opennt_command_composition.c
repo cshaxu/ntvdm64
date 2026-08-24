@@ -61,8 +61,8 @@ DWORD cchCurrentDirectories;
 
 #pragma warning(push)
 #pragma warning(disable: 4324) /* jmp_buf has platform-required alignment; this private stack record never crosses an ABI. */
-typedef struct bx_ntvdm_command_misc_active_call {
-    bx_ntvdm_command_misc_call *call;
+typedef struct runtime_command_misc_active_call {
+    runtime_command_misc_call *call;
     uint8_t *guest_buffer;
     uint32_t guest_address;
     uint32_t guest_bytes;
@@ -76,15 +76,15 @@ typedef struct bx_ntvdm_command_misc_active_call {
     uint32_t guest_bytes3;
     HANDLE local_child_job;
     jmp_buf terminal_exit;
-} bx_ntvdm_command_misc_active_call;
+} runtime_command_misc_active_call;
 #pragma warning(pop)
 
-static __declspec(thread) bx_ntvdm_command_misc_active_call *g_active_call;
+static __declspec(thread) runtime_command_misc_active_call *g_active_call;
 /* The product currently admits exactly one session.  This host-private
  * binding gives the imported worker a scoped session without retaining the
  * active BOP call, a guest pointer, or a raw HANDLE in its continuation. */
-static bx_ntvdm_command_misc_session *g_pending_session;
-static __declspec(thread) bx_ntvdm_command_misc_session *g_worker_session;
+static runtime_command_misc_session *g_pending_session;
+static __declspec(thread) runtime_command_misc_session *g_worker_session;
 static CHAR g_test_system_directory[MAX_PATH + 1];
 static const CHAR g_empty_environment[2] = { '\0', '\0' };
 
@@ -93,7 +93,7 @@ static uint32_t real_mode_address(USHORT segment, USHORT offset)
     return ((uint32_t)segment << 4) + (uint32_t)offset;
 }
 
-static int copy_guest_multisz(bx_ntvdm_command_misc_active_call *active,
+static int copy_guest_multisz(runtime_command_misc_active_call *active,
     uint32_t address, uint8_t **buffer_out, uint32_t *bytes_out)
 {
     uint8_t *buffer;
@@ -128,47 +128,47 @@ static int copy_guest_multisz(bx_ntvdm_command_misc_active_call *active,
 static int set_ax(USHORT value)
 {
     return g_active_call != NULL &&
-        bx_ntvdm_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta,
+        runtime_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta,
             0u, value);
 }
 
-void bx_ntvdm_command_misc_session_initialize(bx_ntvdm_command_misc_session *session)
+void runtime_command_misc_session_initialize(runtime_command_misc_session *session)
 {
     if (session == NULL) return;
     memset(session, 0, sizeof(*session));
-    session->magic = BX_NTVDM_COMMAND_MISC_SESSION_MAGIC;
-    session->abi_version = BX_NTVDM_COMMAND_MISC_SESSION_VERSION;
+    session->magic = RUNTIME_COMMAND_MISC_SESSION_MAGIC;
+    session->abi_version = RUNTIME_COMMAND_MISC_SESSION_VERSION;
     session->struct_bytes = sizeof(*session);
-    session->handles = bx_ntvdm_host_handle_manager_session();
-    (void)bx_ntvdm_host_handle_manager_initialize(session->handles);
+    session->handles = runtime_host_handle_manager_session();
+    (void)runtime_host_handle_manager_initialize(session->handles);
 }
 
-void bx_ntvdm_command_misc_session_dispose(bx_ntvdm_command_misc_session *session)
+void runtime_command_misc_session_dispose(runtime_command_misc_session *session)
 {
     int cancelled = 0;
-    if (!bx_ntvdm_command_misc_session_valid(session)) return;
+    if (!runtime_command_misc_session_valid(session)) return;
     if (session == g_pending_session) {
         HANDLE job = INVALID_HANDLE_VALUE;
         HANDLE worker = INVALID_HANDLE_VALUE;
-        if (session->pending.state == BX_NTVDM_COMMAND_LOCAL_CHILD_PENDING) {
+        if (session->pending.state == RUNTIME_COMMAND_LOCAL_CHILD_PENDING) {
             /* A dispose can race CreateProcess.  Record intent in the fixed
              * continuation so worker_attach_process terminates a job which
              * is published after this point. */
             session->pending.cancel_requested = 1u;
             cancelled = 1;
             if (session->pending.job_token != 0u &&
-                bx_ntvdm_host_handle_manager_lookup_handle(session->handles,
+                runtime_host_handle_manager_lookup_handle(session->handles,
                     session->pending.job_token, &job))
                 (void)TerminateJobObject(job, ERROR_CANCELLED);
         }
         if (session->pending.worker_token != 0u &&
-            bx_ntvdm_host_handle_manager_lookup_handle(session->handles,
+            runtime_host_handle_manager_lookup_handle(session->handles,
                 session->pending.worker_token, &worker))
             (void)WaitForSingleObject(worker, INFINITE);
         if (cancelled) {
-            session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_CANCELLED;
+            session->local_child_state = RUNTIME_COMMAND_LOCAL_CHILD_CANCELLED;
             session->local_child_error = ERROR_CANCELLED;
-            session->pending.state = BX_NTVDM_COMMAND_LOCAL_CHILD_CANCELLED;
+            session->pending.state = RUNTIME_COMMAND_LOCAL_CHILD_CANCELLED;
         }
         g_pending_session = NULL;
     }
@@ -181,7 +181,7 @@ void bx_ntvdm_command_misc_session_dispose(bx_ntvdm_command_misc_session *sessio
     session->command_source_vdm_environment_bytes = 0u;
     session->command_source_current_directories = NULL;
     session->command_source_current_directories_bytes = 0u;
-    bx_ntvdm_host_handle_manager_reset(session->handles);
+    runtime_host_handle_manager_reset(session->handles);
 }
 
 static int replace_environment(CHAR **destination, uint32_t *destination_bytes,
@@ -200,20 +200,20 @@ static int replace_environment(CHAR **destination, uint32_t *destination_bytes,
     return 1;
 }
 
-int bx_ntvdm_command_misc_session_valid(const bx_ntvdm_command_misc_session *session)
+int runtime_command_misc_session_valid(const runtime_command_misc_session *session)
 {
-    return session != NULL && session->magic == BX_NTVDM_COMMAND_MISC_SESSION_MAGIC &&
-        session->abi_version == BX_NTVDM_COMMAND_MISC_SESSION_VERSION &&
+    return session != NULL && session->magic == RUNTIME_COMMAND_MISC_SESSION_MAGIC &&
+        session->abi_version == RUNTIME_COMMAND_MISC_SESSION_VERSION &&
         session->struct_bytes == sizeof(*session) &&
-        bx_ntvdm_host_handle_manager_valid(session->handles);
+        runtime_host_handle_manager_valid(session->handles);
 }
 
-int bx_ntvdm_command_misc_session_set_command_source(
-    bx_ntvdm_command_misc_session *session, const CHAR *application,
+int runtime_command_misc_session_set_command_source(
+    runtime_command_misc_session *session, const CHAR *application,
     const CHAR *tail, USHORT drive, USHORT code_page)
 {
     size_t application_bytes, tail_bytes;
-    if (!bx_ntvdm_command_misc_session_valid(session) || application == NULL ||
+    if (!runtime_command_misc_session_valid(session) || application == NULL ||
         tail == NULL || session->command_source_ready != 0u) return 0;
     application_bytes = strlen(application);
     tail_bytes = strlen(tail);
@@ -227,18 +227,18 @@ int bx_ntvdm_command_misc_session_set_command_source(
     return 1;
 }
 
-int bx_ntvdm_command_misc_session_set_command_environment(
-    bx_ntvdm_command_misc_session *session, const CHAR *environment,
+int runtime_command_misc_session_set_command_environment(
+    runtime_command_misc_session *session, const CHAR *environment,
     uint32_t bytes)
 {
-    if (!bx_ntvdm_command_misc_session_valid(session)) return 0;
+    if (!runtime_command_misc_session_valid(session)) return 0;
     return replace_environment(&session->command_source_environment,
         &session->command_source_environment_bytes, environment, bytes);
 }
 
 BOOL GetNextVDMCommand(PVDMINFO vdm_info)
 {
-    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    runtime_command_misc_session *session = runtime_command_misc_active_session();
     size_t application_bytes, tail_bytes;
     if (vdm_info == NULL || session == NULL)
         return FALSE;
@@ -302,7 +302,7 @@ void host_lpt_flush_initialize(void)
 BOOL SetVDMCurrentDirectories(ULONG current_directory_bytes,
     LPSTR current_directories)
 {
-    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    runtime_command_misc_session *session = runtime_command_misc_active_session();
     /* DIVERGENCE(BOP-DIV-035): OpenNT's client stub sends these bytes to BaseSrv/CSR for a
      * console-bound VDM.  That NT4 product service is not independently
      * composable in the CLI; retain its copied multisz publication contract in
@@ -317,13 +317,13 @@ void cmdPushExitInConsoleBuffer(void)
     /* No host-console injection is admitted. Preserve a visible session
      * notification instead of silently claiming that the historical console
      * buffer operation happened. */
-    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    runtime_command_misc_session *session = runtime_command_misc_active_session();
     if (session != NULL) session->local_child_console_notification = 1u;
 }
 
 void nt_std_handle_notification(BOOL enabled)
 {
-    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    runtime_command_misc_session *session = runtime_command_misc_active_session();
     /* OpenNT nt_msscs.c stores stdoutRedirected before its optional X86GFX
      * fullscreen work.  The latter is bx-mantle display ownership; retain the
      * former as session state so COMMAND's original call ordering remains
@@ -335,12 +335,12 @@ void nt_std_handle_notification(BOOL enabled)
 }
 void nt_block_event_thread(int block)
 {
-    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    runtime_command_misc_session *session = runtime_command_misc_active_session();
     if (session != NULL) session->local_child_events_blocked = block ? 2u : 1u;
 }
 void nt_resume_event_thread(void)
 {
-    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    runtime_command_misc_session *session = runtime_command_misc_active_session();
     if (session != NULL) session->local_child_events_blocked = 0u;
 }
 void GetWowKernelCmdLine(void)
@@ -355,17 +355,17 @@ void GetWowKernelCmdLine(void)
      * OpenNT WOW16 owner package. */
     TerminateVDM();
 }
-ULONG bx_ntvdm_command_misc_redirection_token(PREDIRCOMPLETE_INFO info)
-{ return info == NULL ? 0u : bx_ntvdm_command_misc_active_session()->redirection_token; }
+ULONG runtime_command_misc_redirection_token(PREDIRCOMPLETE_INFO info)
+{ return info == NULL ? 0u : runtime_command_misc_active_session()->redirection_token; }
 
-BOOL bx_ntvdm_command_worker_prepare_startup(STARTUPINFO *startup)
+BOOL runtime_command_worker_prepare_startup(STARTUPINFO *startup)
 {
-    bx_ntvdm_command_misc_session *session;
+    runtime_command_misc_session *session;
     uint32_t index;
     uint32_t explicit_streams = 0u;
     HANDLE *targets[3];
     if (startup == NULL ||
-        (session = bx_ntvdm_command_misc_active_session()) == NULL) return FALSE;
+        (session = runtime_command_misc_active_session()) == NULL) return FALSE;
     targets[0] = &startup->hStdError;
     targets[1] = &startup->hStdOutput;
     targets[2] = &startup->hStdInput;
@@ -374,7 +374,7 @@ BOOL bx_ntvdm_command_worker_prepare_startup(STARTUPINFO *startup)
         if (token == UINT32_MAX) continue;
         /* DIVERGENCE (T236 S2): retain OpenNT's three-handle ordering but bind
          * endpoints to this child only. SetStdHandle would alter the CLI. */
-        if (token == 0u || !bx_ntvdm_host_handle_manager_lookup_handle(
+        if (token == 0u || !runtime_host_handle_manager_lookup_handle(
                 session->handles, token, targets[index])) {
             SetLastError(ERROR_INVALID_HANDLE);
             return FALSE;
@@ -388,12 +388,12 @@ BOOL bx_ntvdm_command_worker_prepare_startup(STARTUPINFO *startup)
     return TRUE;
 }
 
-BOOL bx_ntvdm_command_create_process(LPCSTR application, LPSTR command,
+BOOL runtime_command_create_process(LPCSTR application, LPSTR command,
     LPSECURITY_ATTRIBUTES process_attributes, LPSECURITY_ATTRIBUTES thread_attributes,
     BOOL inherit_handles, DWORD creation_flags, LPVOID environment, LPCSTR current_directory,
     LPSTARTUPINFOA startup, LPPROCESS_INFORMATION process_information)
 {
-    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    runtime_command_misc_session *session = runtime_command_misc_active_session();
     const CHAR *entry = (const CHAR *)environment;
     uint32_t environment_bytes = 0u;
     uint32_t environment_flags = 0u;
@@ -402,13 +402,13 @@ BOOL bx_ntvdm_command_create_process(LPCSTR application, LPSTR command,
         session->create_process_attempted = 1u;
         session->create_process_last_error = ERROR_SUCCESS;
         if (entry != NULL) {
-            while (environment_bytes < BX_NTVDM_COMMAND_CONTINUATION_ENV_MAX) {
+            while (environment_bytes < RUNTIME_COMMAND_CONTINUATION_ENV_MAX) {
                 size_t entry_bytes = strlen(entry);
                 if (entry_bytes == 0u) {
                     ++environment_bytes;
                     break;
                 }
-                if (entry_bytes >= BX_NTVDM_COMMAND_CONTINUATION_ENV_MAX - environment_bytes)
+                if (entry_bytes >= RUNTIME_COMMAND_CONTINUATION_ENV_MAX - environment_bytes)
                     break;
                 if (_strnicmp(entry, "COMSPEC=", 8u) == 0) environment_flags |= 0x01u;
                 if (_strnicmp(entry, "SystemRoot=", 11u) == 0) environment_flags |= 0x02u;
@@ -431,16 +431,16 @@ BOOL bx_ntvdm_command_create_process(LPCSTR application, LPSTR command,
     return created;
 }
 
-void bx_ntvdm_command_worker_attach_process(HANDLE process)
+void runtime_command_worker_attach_process(HANDLE process)
 {
-    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    runtime_command_misc_session *session = runtime_command_misc_active_session();
     HANDLE job;
     DWORD error = ERROR_NOT_ENOUGH_MEMORY;
     if (session == NULL || process == NULL || process == INVALID_HANDLE_VALUE) return;
     job = CreateJobObjectA(NULL, NULL);
     if (job != NULL && AssignProcessToJobObject(job, process) &&
-        bx_ntvdm_host_handle_manager_publish(session->handles, job,
-            BX_NTVDM_HOST_HANDLE_OWNED, &session->pending.job_token, &error)) {
+        runtime_host_handle_manager_publish(session->handles, job,
+            RUNTIME_HOST_HANDLE_OWNED, &session->pending.job_token, &error)) {
         if (session->pending.cancel_requested != 0u)
             (void)TerminateJobObject(job, ERROR_CANCELLED);
         return;
@@ -448,24 +448,24 @@ void bx_ntvdm_command_worker_attach_process(HANDLE process)
     if (job != NULL) CloseHandle(job);
 }
 
-void bx_ntvdm_command_worker_finish(BOOL child_created, DWORD exit_code)
+void runtime_command_worker_finish(BOOL child_created, DWORD exit_code)
 {
-    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    runtime_command_misc_session *session = runtime_command_misc_active_session();
     HANDLE event = INVALID_HANDLE_VALUE;
     DWORD ignored;
     if (session == NULL) return;
     if (session->pending.job_token != 0u) {
-        (void)bx_ntvdm_host_handle_manager_release(session->handles,
+        (void)runtime_host_handle_manager_release(session->handles,
             session->pending.job_token, &ignored);
         session->pending.job_token = 0u;
     }
     session->local_child_exit_code = exit_code;
     session->local_child_error = exit_code;
     session->local_child_state = child_created ?
-        BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED : BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+        RUNTIME_COMMAND_LOCAL_CHILD_COMPLETED : RUNTIME_COMMAND_LOCAL_CHILD_FAILED;
     session->pending.state = session->local_child_state;
     if (session->pending.completion_event_token != 0u &&
-        bx_ntvdm_host_handle_manager_lookup_handle(session->handles,
+        runtime_host_handle_manager_lookup_handle(session->handles,
             session->pending.completion_event_token, &event))
         (void)SetEvent(event);
 }
@@ -475,7 +475,7 @@ static int copy_pending_environment(CHAR *destination, uint32_t *bytes_out,
 {
     uint32_t index;
     if (destination == NULL || bytes_out == NULL || source == NULL) return 0;
-    for (index = 1u; index < BX_NTVDM_COMMAND_CONTINUATION_ENV_MAX; ++index) {
+    for (index = 1u; index < RUNTIME_COMMAND_CONTINUATION_ENV_MAX; ++index) {
         destination[index - 1u] = source[index - 1u];
         if (source[index - 1u] == '\0' && source[index] == '\0') {
             destination[index] = '\0';
@@ -486,7 +486,7 @@ static int copy_pending_environment(CHAR *destination, uint32_t *bytes_out,
     return 0;
 }
 
-static int snapshot_host_environment(bx_ntvdm_command_misc_session *session)
+static int snapshot_host_environment(runtime_command_misc_session *session)
 {
     LPCH source;
     uint32_t bytes = 0u;
@@ -494,7 +494,7 @@ static int snapshot_host_environment(bx_ntvdm_command_misc_session *session)
     source = GetEnvironmentStringsA();
     if (source == NULL) return 0;
     for (;;) {
-        if (bytes >= BX_NTVDM_COMMAND_CONTINUATION_ENV_MAX) {
+        if (bytes >= RUNTIME_COMMAND_CONTINUATION_ENV_MAX) {
             FreeEnvironmentStringsA(source);
             return 0;
         }
@@ -516,9 +516,9 @@ static int snapshot_host_environment(bx_ntvdm_command_misc_session *session)
     return 1;
 }
 
-BOOL bx_ntvdm_command_worker_begin(PCHAR command, PCHAR environment)
+BOOL runtime_command_worker_begin(PCHAR command, PCHAR environment)
 {
-    bx_ntvdm_command_misc_session *session;
+    runtime_command_misc_session *session;
     uint32_t tokens[3] = { UINT32_MAX, UINT32_MAX, UINT32_MAX };
     uint32_t address, index, command_bytes;
     HANDLE event, worker;
@@ -526,7 +526,7 @@ BOOL bx_ntvdm_command_worker_begin(PCHAR command, PCHAR environment)
     if (g_active_call == NULL || command == NULL || environment == NULL ||
         (session = g_active_call->call->session) == NULL ||
         g_pending_session != NULL ||
-        session->pending.state == BX_NTVDM_COMMAND_LOCAL_CHILD_PENDING) return FALSE;
+        session->pending.state == RUNTIME_COMMAND_LOCAL_CHILD_PENDING) return FALSE;
     command_bytes = (uint32_t)strlen(command) + 1u;
     if (command_bytes == 0u || command_bytes > sizeof(session->pending.command)) {
         SetLastError(ERROR_BAD_ENVIRONMENT);
@@ -548,41 +548,41 @@ BOOL bx_ntvdm_command_worker_begin(PCHAR command, PCHAR environment)
         SetLastError(ERROR_NOT_ENOUGH_MEMORY);
         return FALSE;
     }
-    if (g_active_call->call->service == BX_NTVDM_COMMAND_MISC_EXEC) {
+    if (g_active_call->call->service == RUNTIME_COMMAND_MISC_EXEC) {
         address = real_mode_address(g_active_call->call->cpu->ss,
             (USHORT)g_active_call->call->cpu->ebp);
         if (address > 0x100000u - sizeof(tokens) ||
             !g_active_call->call->guest_read(g_active_call->call->guest_state, address,
                 (uint8_t *)tokens, sizeof(tokens))) {
             SetLastError(ERROR_INVALID_HANDLE);
-            session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+            session->local_child_state = RUNTIME_COMMAND_LOCAL_CHILD_FAILED;
             session->local_child_error = ERROR_INVALID_HANDLE;
-            session->pending.state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+            session->pending.state = RUNTIME_COMMAND_LOCAL_CHILD_FAILED;
             session->pending.error = ERROR_INVALID_HANDLE;
             return FALSE;
         }
         for (index = 0u; index < 3u; ++index) {
             HANDLE unused;
             if (tokens[index] != UINT32_MAX && (tokens[index] == 0u ||
-                !bx_ntvdm_host_handle_manager_lookup_handle(session->handles,
+                !runtime_host_handle_manager_lookup_handle(session->handles,
                     tokens[index], &unused))) {
                 SetLastError(ERROR_INVALID_HANDLE);
-                session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+                session->local_child_state = RUNTIME_COMMAND_LOCAL_CHILD_FAILED;
                 session->local_child_error = ERROR_INVALID_HANDLE;
-                session->pending.state = BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+                session->pending.state = RUNTIME_COMMAND_LOCAL_CHILD_FAILED;
                 session->pending.error = ERROR_INVALID_HANDLE;
                 return FALSE;
             }
         }
     }
-    session->pending.state = BX_NTVDM_COMMAND_LOCAL_CHILD_PENDING;
+    session->pending.state = RUNTIME_COMMAND_LOCAL_CHILD_PENDING;
     session->pending.service = g_active_call->call->service;
     session->pending.command_bytes = command_bytes;
     memcpy(session->pending.command, command, command_bytes);
     memcpy(session->pending.standard_handle_tokens, tokens, sizeof(tokens));
     event = CreateEventA(NULL, TRUE, FALSE, NULL);
-    if (event == NULL || !bx_ntvdm_host_handle_manager_publish(session->handles,
-            event, BX_NTVDM_HOST_HANDLE_OWNED,
+    if (event == NULL || !runtime_host_handle_manager_publish(session->handles,
+            event, RUNTIME_HOST_HANDLE_OWNED,
             &session->pending.completion_event_token, &error)) {
         if (event != NULL) CloseHandle(event);
         memset(&session->pending, 0, sizeof(session->pending));
@@ -590,17 +590,17 @@ BOOL bx_ntvdm_command_worker_begin(PCHAR command, PCHAR environment)
         return FALSE;
     }
     g_pending_session = session;
-    session->local_child_state = BX_NTVDM_COMMAND_LOCAL_CHILD_PENDING;
+    session->local_child_state = RUNTIME_COMMAND_LOCAL_CHILD_PENDING;
     session->local_child_error = ERROR_SUCCESS;
-    worker = CreateThread(NULL, 0u, bx_ntvdm_command_worker_thread, NULL, 0u, NULL);
-    if (worker == NULL || !bx_ntvdm_host_handle_manager_publish(session->handles,
-            worker, BX_NTVDM_HOST_HANDLE_OWNED, &session->pending.worker_token,
+    worker = CreateThread(NULL, 0u, runtime_command_worker_thread, NULL, 0u, NULL);
+    if (worker == NULL || !runtime_host_handle_manager_publish(session->handles,
+            worker, RUNTIME_HOST_HANDLE_OWNED, &session->pending.worker_token,
             &error)) {
         if (worker != NULL) {
             (void)WaitForSingleObject(worker, INFINITE);
             CloseHandle(worker);
         }
-        (void)bx_ntvdm_host_handle_manager_release(session->handles,
+        (void)runtime_host_handle_manager_release(session->handles,
             session->pending.completion_event_token, &error);
         memset(&session->pending, 0, sizeof(session->pending));
         g_pending_session = NULL;
@@ -610,7 +610,7 @@ BOOL bx_ntvdm_command_worker_begin(PCHAR command, PCHAR environment)
     return TRUE;
 }
 
-DWORD WINAPI bx_ntvdm_command_worker_thread(LPVOID ignored)
+DWORD WINAPI runtime_command_worker_thread(LPVOID ignored)
 {
     (void)ignored;
     g_worker_session = g_pending_session;
@@ -622,17 +622,17 @@ DWORD WINAPI bx_ntvdm_command_worker_thread(LPVOID ignored)
     return 0u;
 }
 
-BOOL bx_ntvdm_command_worker_complete(void)
+BOOL runtime_command_worker_complete(void)
 {
-    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    runtime_command_misc_session *session = runtime_command_misc_active_session();
     HANDLE worker;
     DWORD ignored;
     if (session == NULL || session != g_pending_session ||
-        (session->pending.state != BX_NTVDM_COMMAND_LOCAL_CHILD_PENDING &&
-         session->pending.state != BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED &&
-         session->pending.state != BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED) ||
+        (session->pending.state != RUNTIME_COMMAND_LOCAL_CHILD_PENDING &&
+         session->pending.state != RUNTIME_COMMAND_LOCAL_CHILD_COMPLETED &&
+         session->pending.state != RUNTIME_COMMAND_LOCAL_CHILD_FAILED) ||
         session->pending.worker_token == 0u ||
-        !bx_ntvdm_host_handle_manager_lookup_handle(session->handles,
+        !runtime_host_handle_manager_lookup_handle(session->handles,
             session->pending.worker_token, &worker)) {
         SetLastError(ERROR_INVALID_STATE);
         return FALSE;
@@ -641,156 +641,156 @@ BOOL bx_ntvdm_command_worker_complete(void)
         SetLastError(ERROR_IO_INCOMPLETE);
         return FALSE;
     }
-    (void)bx_ntvdm_host_handle_manager_release(session->handles,
+    (void)runtime_host_handle_manager_release(session->handles,
         session->pending.worker_token, &ignored);
     session->pending.worker_token = 0u;
     if (session->pending.completion_event_token != 0u) {
-        (void)bx_ntvdm_host_handle_manager_release(session->handles,
+        (void)runtime_host_handle_manager_release(session->handles,
             session->pending.completion_event_token, &ignored);
         session->pending.completion_event_token = 0u;
     }
     g_pending_session = NULL;
-    return session->pending.state == BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED ||
-        session->pending.state == BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED;
+    return session->pending.state == RUNTIME_COMMAND_LOCAL_CHILD_COMPLETED ||
+        session->pending.state == RUNTIME_COMMAND_LOCAL_CHILD_FAILED;
 }
 
-BOOL bx_ntvdm_command_worker_reentry_pending(void)
+BOOL runtime_command_worker_reentry_pending(void)
 {
-    bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
+    runtime_command_misc_session *session = runtime_command_misc_active_session();
     /* A completed record is historical state until a worker token still owns
      * the pending continuation.  cmdExec32 releases that token as it consumes
      * the exact BOP re-entry; a later 54:08 is a fresh request, not a replay. */
     return session != NULL && session->pending.worker_token != 0u &&
         (session->pending.state ==
-        BX_NTVDM_COMMAND_LOCAL_CHILD_PENDING || session->pending.state ==
-        BX_NTVDM_COMMAND_LOCAL_CHILD_COMPLETED || session->pending.state ==
-        BX_NTVDM_COMMAND_LOCAL_CHILD_FAILED);
+        RUNTIME_COMMAND_LOCAL_CHILD_PENDING || session->pending.state ==
+        RUNTIME_COMMAND_LOCAL_CHILD_COMPLETED || session->pending.state ==
+        RUNTIME_COMMAND_LOCAL_CHILD_FAILED);
 }
 
-BOOL bx_ntvdm_command_misc_set_pending(void)
+BOOL runtime_command_misc_set_pending(void)
 {
-    return g_active_call != NULL && bx_ntvdm_cpu_result_v2_pending(
+    return g_active_call != NULL && runtime_cpu_result_v2_pending(
         g_active_call->call->result);
 }
 
-static int validate_comspec_input(const bx_ntvdm_command_misc_call *call)
+static int validate_comspec_input(const runtime_command_misc_call *call)
 {
     uint8_t value;
     uint32_t address;
     uint32_t index;
     if (call == NULL) return 0;
     address = real_mode_address(call->cpu->ds, (USHORT)call->cpu->edx);
-    if (address > 0x100000u - (BX_NTVDM_COMMAND_MISC_COMSPEC_MAX + 1u))
+    if (address > 0x100000u - (RUNTIME_COMMAND_MISC_COMSPEC_MAX + 1u))
         return 0;
-    for (index = 0u; index <= BX_NTVDM_COMMAND_MISC_COMSPEC_MAX; ++index) {
+    for (index = 0u; index <= RUNTIME_COMMAND_MISC_COMSPEC_MAX; ++index) {
         if (!call->guest_read(call->guest_state, address + index, &value, 1u)) return 0;
         if (value == 0u) return 1;
     }
     return 0;
 }
 
-int bx_ntvdm_command_misc_call_valid(const bx_ntvdm_command_misc_call *call)
+int runtime_command_misc_call_valid(const runtime_command_misc_call *call)
 {
-    return call != NULL && call->magic == BX_NTVDM_COMMAND_MISC_CALL_MAGIC &&
-        call->abi_version == BX_NTVDM_COMMAND_MISC_CALL_VERSION &&
+    return call != NULL && call->magic == RUNTIME_COMMAND_MISC_CALL_MAGIC &&
+        call->abi_version == RUNTIME_COMMAND_MISC_CALL_VERSION &&
         call->struct_bytes == sizeof(*call) &&
-         (call->service == BX_NTVDM_COMMAND_MISC_EXIT ||
-          call->service == BX_NTVDM_COMMAND_MISC_GET_NEXT ||
-          call->service == BX_NTVDM_COMMAND_MISC_COMSPEC ||
-         call->service == BX_NTVDM_COMMAND_MISC_SAVE_WORLD ||
-         call->service == BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR ||
-         call->service == BX_NTVDM_COMMAND_MISC_SET_INFO ||
-         call->service == BX_NTVDM_COMMAND_MISC_INIT_CONSOLE ||
-         call->service == BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS ||
-         call->service == BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT ||
-          call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT ||
-          call->service == BX_NTVDM_COMMAND_MISC_CHECK_BINARY ||
-          call->service == BX_NTVDM_COMMAND_MISC_EXEC ||
-          call->service == BX_NTVDM_COMMAND_MISC_EXEC_COMSPEC32 ||
-          call->service == BX_NTVDM_COMMAND_MISC_RETURN_EXIT_CODE ||
-         call->service == BX_NTVDM_COMMAND_MISC_GET_INIT_ENVIRONMENT ||
-         call->service == BX_NTVDM_COMMAND_MISC_GET_START_INFO ||
+         (call->service == RUNTIME_COMMAND_MISC_EXIT ||
+          call->service == RUNTIME_COMMAND_MISC_GET_NEXT ||
+          call->service == RUNTIME_COMMAND_MISC_COMSPEC ||
+         call->service == RUNTIME_COMMAND_MISC_SAVE_WORLD ||
+         call->service == RUNTIME_COMMAND_MISC_GET_CURRENT_DIR ||
+         call->service == RUNTIME_COMMAND_MISC_SET_INFO ||
+         call->service == RUNTIME_COMMAND_MISC_INIT_CONSOLE ||
+         call->service == RUNTIME_COMMAND_MISC_GET_CONFIG_SYS ||
+         call->service == RUNTIME_COMMAND_MISC_GET_AUTOEXEC_BAT ||
+          call->service == RUNTIME_COMMAND_MISC_GET_KBD_LAYOUT ||
+          call->service == RUNTIME_COMMAND_MISC_CHECK_BINARY ||
+          call->service == RUNTIME_COMMAND_MISC_EXEC ||
+          call->service == RUNTIME_COMMAND_MISC_EXEC_COMSPEC32 ||
+          call->service == RUNTIME_COMMAND_MISC_RETURN_EXIT_CODE ||
+         call->service == RUNTIME_COMMAND_MISC_GET_INIT_ENVIRONMENT ||
+         call->service == RUNTIME_COMMAND_MISC_GET_START_INFO ||
          call->service == 0x06u) &&
-        call->boundary != NULL && bx_ntvdm_exception_event_v1_valid(call->boundary) &&
-        call->cpu != NULL && bx_ntvdm_cpu_state_v1_valid(call->cpu) &&
-        call->cpu->execution_mode == BX_NTVDM_CPU_EXECUTION_REAL &&
+        call->boundary != NULL && runtime_exception_event_v1_valid(call->boundary) &&
+        call->cpu != NULL && runtime_cpu_state_v1_valid(call->cpu) &&
+        call->cpu->execution_mode == RUNTIME_CPU_EXECUTION_REAL &&
         call->result != NULL && call->guest_read != NULL && call->guest_write != NULL &&
-         ((call->service != BX_NTVDM_COMMAND_MISC_SET_INFO &&
-           call->service != BX_NTVDM_COMMAND_MISC_GET_NEXT &&
-          call->service != BX_NTVDM_COMMAND_MISC_EXEC &&
-          call->service != BX_NTVDM_COMMAND_MISC_EXEC_COMSPEC32 &&
-          call->service != BX_NTVDM_COMMAND_MISC_RETURN_EXIT_CODE &&
-          call->service != BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS &&
-          call->service != BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT) ||
-         bx_ntvdm_command_misc_session_valid(call->session));
+         ((call->service != RUNTIME_COMMAND_MISC_SET_INFO &&
+           call->service != RUNTIME_COMMAND_MISC_GET_NEXT &&
+          call->service != RUNTIME_COMMAND_MISC_EXEC &&
+          call->service != RUNTIME_COMMAND_MISC_EXEC_COMSPEC32 &&
+          call->service != RUNTIME_COMMAND_MISC_RETURN_EXIT_CODE &&
+          call->service != RUNTIME_COMMAND_MISC_GET_CONFIG_SYS &&
+          call->service != RUNTIME_COMMAND_MISC_GET_AUTOEXEC_BAT) ||
+         runtime_command_misc_session_valid(call->session));
 }
 
-USHORT bx_ntvdm_command_misc_get_dx(void) { return (USHORT)g_active_call->call->cpu->edx; }
-USHORT bx_ntvdm_command_misc_get_bx(void) { return (USHORT)g_active_call->call->cpu->ebx; }
-USHORT bx_ntvdm_command_misc_get_cx(void) { return (USHORT)g_active_call->call->cpu->ecx; }
-USHORT bx_ntvdm_command_misc_get_si(void) { return (USHORT)g_active_call->call->cpu->esi; }
-USHORT bx_ntvdm_command_misc_get_ds(void) { return g_active_call->call->cpu->ds; }
-USHORT bx_ntvdm_command_misc_get_es(void) { return g_active_call->call->cpu->es; }
-USHORT bx_ntvdm_command_misc_get_ss(void) { return g_active_call->call->cpu->ss; }
-USHORT bx_ntvdm_command_misc_get_bp(void) { return (USHORT)g_active_call->call->cpu->ebp; }
-USHORT bx_ntvdm_command_misc_get_ax(void) { return (USHORT)g_active_call->call->cpu->eax; }
-UCHAR bx_ntvdm_command_misc_get_al(void) { return (UCHAR)(g_active_call->call->cpu->eax & 0xffu); }
-UCHAR bx_ntvdm_command_misc_get_ah(void) { return (UCHAR)((g_active_call->call->cpu->eax >> 8u) & 0xffu); }
-void bx_ntvdm_command_misc_set_ax(USHORT value) { (void)set_ax(value); }
-void bx_ntvdm_command_misc_set_al(USHORT value)
-{ bx_ntvdm_command_misc_set_ax((USHORT)((bx_ntvdm_command_misc_get_ax() & 0xff00u) | (value & 0xffu))); }
-void bx_ntvdm_command_misc_set_cf(int value)
-{ (void)bx_ntvdm_cpu_result_v2_set_cf(g_active_call->call->result, value); }
-void bx_ntvdm_command_misc_set_dx(USHORT value)
-{ (void)bx_ntvdm_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta, 2u, value); }
-void bx_ntvdm_command_misc_set_bx(USHORT value)
-{ (void)bx_ntvdm_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta, 3u, value); }
-void bx_ntvdm_command_misc_set_cx(USHORT value)
-{ (void)bx_ntvdm_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta, 1u, value); }
-void bx_ntvdm_command_misc_set_ds(USHORT value)
-{ (void)bx_ntvdm_cpu_delta_v1_set_segment(&g_active_call->call->result->cpu_delta, 3u, value); }
-void bx_ntvdm_command_misc_set_es(USHORT value)
-{ (void)bx_ntvdm_cpu_delta_v1_set_segment(&g_active_call->call->result->cpu_delta, 0u, value); }
+USHORT runtime_command_misc_get_dx(void) { return (USHORT)g_active_call->call->cpu->edx; }
+USHORT runtime_command_misc_get_bx(void) { return (USHORT)g_active_call->call->cpu->ebx; }
+USHORT runtime_command_misc_get_cx(void) { return (USHORT)g_active_call->call->cpu->ecx; }
+USHORT runtime_command_misc_get_si(void) { return (USHORT)g_active_call->call->cpu->esi; }
+USHORT runtime_command_misc_get_ds(void) { return g_active_call->call->cpu->ds; }
+USHORT runtime_command_misc_get_es(void) { return g_active_call->call->cpu->es; }
+USHORT runtime_command_misc_get_ss(void) { return g_active_call->call->cpu->ss; }
+USHORT runtime_command_misc_get_bp(void) { return (USHORT)g_active_call->call->cpu->ebp; }
+USHORT runtime_command_misc_get_ax(void) { return (USHORT)g_active_call->call->cpu->eax; }
+UCHAR runtime_command_misc_get_al(void) { return (UCHAR)(g_active_call->call->cpu->eax & 0xffu); }
+UCHAR runtime_command_misc_get_ah(void) { return (UCHAR)((g_active_call->call->cpu->eax >> 8u) & 0xffu); }
+void runtime_command_misc_set_ax(USHORT value) { (void)set_ax(value); }
+void runtime_command_misc_set_al(USHORT value)
+{ runtime_command_misc_set_ax((USHORT)((runtime_command_misc_get_ax() & 0xff00u) | (value & 0xffu))); }
+void runtime_command_misc_set_cf(int value)
+{ (void)runtime_cpu_result_v2_set_cf(g_active_call->call->result, value); }
+void runtime_command_misc_set_dx(USHORT value)
+{ (void)runtime_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta, 2u, value); }
+void runtime_command_misc_set_bx(USHORT value)
+{ (void)runtime_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta, 3u, value); }
+void runtime_command_misc_set_cx(USHORT value)
+{ (void)runtime_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta, 1u, value); }
+void runtime_command_misc_set_ds(USHORT value)
+{ (void)runtime_cpu_delta_v1_set_segment(&g_active_call->call->result->cpu_delta, 3u, value); }
+void runtime_command_misc_set_es(USHORT value)
+{ (void)runtime_cpu_delta_v1_set_segment(&g_active_call->call->result->cpu_delta, 0u, value); }
 
-bx_ntvdm_command_misc_session *bx_ntvdm_command_misc_active_session(void)
+runtime_command_misc_session *runtime_command_misc_active_session(void)
 {
     return g_active_call != NULL ? g_active_call->call->session :
         g_worker_session;
 }
 
-PREDIRCOMPLETE_INFO bx_ntvdm_command_misc_redirection_from_guest(uint32_t token)
+PREDIRCOMPLETE_INFO runtime_command_misc_redirection_from_guest(uint32_t token)
 {
-    bx_ntvdm_command_misc_session *session;
+    runtime_command_misc_session *session;
     if (g_active_call == NULL || (session = g_active_call->call->session) == NULL ||
         token == 0u || token != session->redirection_token) return NULL;
     return &session->redirection_info;
 }
 
-int bx_ntvdm_command_misc_publish_handle(HANDLE handle)
+int runtime_command_misc_publish_handle(HANDLE handle)
 {
-    bx_ntvdm_command_misc_session *session;
+    runtime_command_misc_session *session;
     uint32_t guest_handle;
     DWORD error;
     if (g_active_call == NULL || (session = g_active_call->call->session) == NULL ||
-        !bx_ntvdm_host_handle_manager_publish(session->handles, handle,
-            BX_NTVDM_HOST_HANDLE_BORROWED, &guest_handle, &error)) return 0;
+        !runtime_host_handle_manager_publish(session->handles, handle,
+            RUNTIME_HOST_HANDLE_BORROWED, &guest_handle, &error)) return 0;
     /* The original guest ABI is BX:CX. Preserve it as a fixed-width token,
      * never as a truncated host HANDLE. */
-    bx_ntvdm_command_misc_set_cx((USHORT)guest_handle);
-    bx_ntvdm_command_misc_set_bx((USHORT)(guest_handle >> 16u));
+    runtime_command_misc_set_cx((USHORT)guest_handle);
+    runtime_command_misc_set_bx((USHORT)(guest_handle >> 16u));
     return 1;
 }
 
 void RcErrorDialogBox(UINT error, PVOID first, PVOID second)
 {
-    bx_ntvdm_opennt_rc_error_dialog(error, (CHAR *)first, (CHAR *)second);
+    runtime_opennt_rc_error_dialog(error, (CHAR *)first, (CHAR *)second);
 }
 void TerminateVDM(void)
 {
     /* OpenNT's terminal path does not return.  The typed composition models
      * that directly as a controlled stop instead of resuming after an error. */
     if (g_active_call != NULL) {
-        (void)bx_ntvdm_cpu_result_v2_stop(g_active_call->call->result);
+        (void)runtime_cpu_result_v2_stop(g_active_call->call->result);
         longjmp(g_active_call->terminal_exit, 1);
     }
 }
@@ -800,7 +800,7 @@ void nt_init_event_thread(void)
         g_active_call->call->session->console_initialized = 1u;
 }
 
-UINT bx_ntvdm_command_misc_get_system_directory(LPSTR buffer, UINT bytes)
+UINT runtime_command_misc_get_system_directory(LPSTR buffer, UINT bytes)
 {
     if (g_test_system_directory[0] != '\0') {
         size_t length = strlen(g_test_system_directory);
@@ -812,7 +812,7 @@ UINT bx_ntvdm_command_misc_get_system_directory(LPSTR buffer, UINT bytes)
     return GetSystemDirectoryA(buffer, bytes);
 }
 
-DWORD bx_ntvdm_command_misc_get_environment_variable(LPSTR name,
+DWORD runtime_command_misc_get_environment_variable(LPSTR name,
     LPSTR buffer, DWORD bytes)
 {
     DWORD result;
@@ -828,7 +828,7 @@ DWORD bx_ntvdm_command_misc_get_environment_variable(LPSTR name,
         return 0u;
     return result;
 }
-void bx_ntvdm_command_misc_set_test_system_directory(const CHAR *path)
+void runtime_command_misc_set_test_system_directory(const CHAR *path)
 {
     if (path == NULL) { g_test_system_directory[0] = '\0'; return; }
     strncpy(g_test_system_directory, path, MAX_PATH);
@@ -845,16 +845,16 @@ BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR name)
     return GetKeyboardLayoutNameA(name);
 }
 
-LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
+LPVOID runtime_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
 {
-    bx_ntvdm_command_misc_active_call *active = g_active_call;
+    runtime_command_misc_active_call *active = g_active_call;
     uint32_t bytes;
     uint32_t index;
     if (active == NULL) return NULL;
-    if (active->call->service == BX_NTVDM_COMMAND_MISC_EXEC ||
-        active->call->service == BX_NTVDM_COMMAND_MISC_EXEC_COMSPEC32) {
+    if (active->call->service == RUNTIME_COMMAND_MISC_EXEC ||
+        active->call->service == RUNTIME_COMMAND_MISC_EXEC_COMSPEC32) {
         uint32_t address = real_mode_address(segment, offset);
-        uint32_t maximum = active->call->service == BX_NTVDM_COMMAND_MISC_EXEC &&
+        uint32_t maximum = active->call->service == RUNTIME_COMMAND_MISC_EXEC &&
             segment == active->call->cpu->ds && offset == (USHORT)active->call->cpu->esi ? 124u : USHRT_MAX;
         uint8_t **buffer = active->guest_buffer == NULL ? &active->guest_buffer : &active->guest_buffer2;
         uint32_t *buffer_address = active->guest_buffer == NULL ? &active->guest_address : &active->guest_address2;
@@ -874,7 +874,7 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
         *buffer_bytes = maximum;
         return *buffer;
     }
-    if (active->call->service == BX_NTVDM_COMMAND_MISC_GET_NEXT) {
+    if (active->call->service == RUNTIME_COMMAND_MISC_GET_NEXT) {
         CMDINFO *info;
         uint32_t address = real_mode_address(segment, offset);
         uint8_t **buffer;
@@ -914,7 +914,7 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
         *buffer_bytes = bytes;
         return *buffer;
     }
-    if (active->call->service == BX_NTVDM_COMMAND_MISC_CHECK_BINARY) {
+    if (active->call->service == RUNTIME_COMMAND_MISC_CHECK_BINARY) {
         uint32_t address = real_mode_address(segment, offset);
         uint32_t binary_bytes = active->guest_bytes == 0u ? MAX_PATH :
             active->guest_bytes == MAX_PATH ? sizeof(PARAMBLOCK) : 129u;
@@ -930,7 +930,7 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
         } else if (active->guest_bytes == MAX_PATH) active->guest_bytes = MAX_PATH + 1u;
         return *buffer;
     }
-    if (active->call->service == BX_NTVDM_COMMAND_MISC_GET_INIT_ENVIRONMENT) {
+    if (active->call->service == RUNTIME_COMMAND_MISC_GET_INIT_ENVIRONMENT) {
         uint32_t requested = (uint32_t)(USHORT)active->call->cpu->ebx << 4;
         active->guest_address = real_mode_address(segment, offset);
         if (active->guest_address > 0x100000u ||
@@ -942,7 +942,7 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
         active->write_back = 1u;
         return active->guest_buffer;
     }
-    if (active->call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT) {
+    if (active->call->service == RUNTIME_COMMAND_MISC_GET_KBD_LAYOUT) {
         uint32_t keyboard_bytes = active->guest_buffer == NULL ? 128u : 300u;
         uint8_t **buffer = active->guest_buffer == NULL ? &active->guest_buffer : &active->guest_buffer2;
         uint32_t *address = active->guest_buffer == NULL ? &active->guest_address : &active->guest_address2;
@@ -955,8 +955,8 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
         return *buffer;
     }
     active->guest_address = real_mode_address(segment, offset);
-    if (active->call->service == BX_NTVDM_COMMAND_MISC_SET_INFO) {
-        bx_ntvdm_command_misc_session *session = active->call->session;
+    if (active->call->service == RUNTIME_COMMAND_MISC_SET_INFO) {
+        runtime_command_misc_session *session = active->call->session;
         if (active->guest_address > 0x100000u - sizeof(SCSINFO)) return NULL;
         if (active->guest_bytes == 0u) {
             if (!active->call->guest_read(active->call->guest_state,
@@ -986,18 +986,18 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
         return NULL;
     }
     if (active->guest_buffer != NULL) return NULL;
-    bytes = active->call->service == BX_NTVDM_COMMAND_MISC_COMSPEC ?
-        BX_NTVDM_COMMAND_MISC_COMSPEC_MAX + 1u :
-        (active->call->service == BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS ||
-         active->call->service == BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT) ?
-        64u : BX_NTVDM_COMMAND_MISC_CURRENT_DIR_BYTES;
+    bytes = active->call->service == RUNTIME_COMMAND_MISC_COMSPEC ?
+        RUNTIME_COMMAND_MISC_COMSPEC_MAX + 1u :
+        (active->call->service == RUNTIME_COMMAND_MISC_GET_CONFIG_SYS ||
+         active->call->service == RUNTIME_COMMAND_MISC_GET_AUTOEXEC_BAT) ?
+        64u : RUNTIME_COMMAND_MISC_CURRENT_DIR_BYTES;
     if (active->guest_address > 0x100000u - bytes) return NULL;
     active->guest_buffer = (uint8_t *)calloc(bytes, 1u);
     if (active->guest_buffer == NULL) return NULL;
     active->guest_bytes = bytes;
-    active->write_back = active->call->service == BX_NTVDM_COMMAND_MISC_GET_CURRENT_DIR ||
-        active->call->service == BX_NTVDM_COMMAND_MISC_GET_CONFIG_SYS ||
-        active->call->service == BX_NTVDM_COMMAND_MISC_GET_AUTOEXEC_BAT;
+    active->write_back = active->call->service == RUNTIME_COMMAND_MISC_GET_CURRENT_DIR ||
+        active->call->service == RUNTIME_COMMAND_MISC_GET_CONFIG_SYS ||
+        active->call->service == RUNTIME_COMMAND_MISC_GET_AUTOEXEC_BAT;
     if (active->write_back) return active->guest_buffer;
     for (index = 0u; index < bytes; ++index) {
         if (!active->call->guest_read(active->call->guest_state,
@@ -1018,7 +1018,7 @@ UINT GetDriveTypeOem(LPSTR root)
 DWORD GetEnvironmentVariableOem(LPSTR name, LPSTR buffer, DWORD bytes)
 {
     CHAR ansi_name[4];
-    CHAR ansi_value[BX_NTVDM_COMMAND_MISC_CURRENT_DIR_BYTES];
+    CHAR ansi_value[RUNTIME_COMMAND_MISC_CURRENT_DIR_BYTES];
     DWORD result;
     if (name == NULL || buffer == NULL || bytes == 0u ||
         !OemToCharBuffA(name, ansi_name, (DWORD)(strlen(name) + 1u))) return 0u;
@@ -1034,7 +1034,7 @@ DWORD GetEnvironmentVariableOem(LPSTR name, LPSTR buffer, DWORD bytes)
 BOOL SetEnvironmentVariableOem(LPSTR name, LPSTR value)
 {
     CHAR ansi_name[4];
-    CHAR ansi_value[BX_NTVDM_COMMAND_MISC_CURRENT_DIR_BYTES];
+    CHAR ansi_value[RUNTIME_COMMAND_MISC_CURRENT_DIR_BYTES];
     if (name == NULL || !OemToCharBuffA(name, ansi_name, (DWORD)(strlen(name) + 1u)))
         return FALSE;
     if (value == NULL) return SetEnvironmentVariableA(ansi_name, NULL);
@@ -1042,17 +1042,17 @@ BOOL SetEnvironmentVariableOem(LPSTR name, LPSTR value)
     return SetEnvironmentVariableA(ansi_name, ansi_value);
 }
 
-int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
+int runtime_command_misc_invoke(runtime_command_misc_call *call)
 {
-    bx_ntvdm_command_misc_active_call active;
-    if (!bx_ntvdm_command_misc_call_valid(call) || g_active_call != NULL ||
+    runtime_command_misc_active_call active;
+    if (!runtime_command_misc_call_valid(call) || g_active_call != NULL ||
         call->boundary->fault_rip > UINT64_MAX - 4u || call->service >= 17u)
         return 0;
-    if (call->service == BX_NTVDM_COMMAND_MISC_COMSPEC &&
+    if (call->service == RUNTIME_COMMAND_MISC_COMSPEC &&
         !validate_comspec_input(call)) return 0;
     memset(&active, 0, sizeof(active));
     IsFirstCall = call->first_call ? TRUE : FALSE;
-    IsRepeatCall = call->service == BX_NTVDM_COMMAND_MISC_GET_NEXT && call->session != NULL &&
+    IsRepeatCall = call->service == RUNTIME_COMMAND_MISC_GET_NEXT && call->session != NULL &&
         call->session->command_source_repeat_pending != 0u;
     DosEnvCreated = IsRepeatCall;
     IsFirstVDM = TRUE;
@@ -1074,12 +1074,12 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
     DosSessionId = call->session != NULL ? call->session->dos_session_id : 0u;
     memset(lpszComSpec, 0, sizeof(lpszComSpec));
     cbComSpec = 0u;
-    if (call->service != BX_NTVDM_COMMAND_MISC_COMSPEC && call->session != NULL) {
+    if (call->service != RUNTIME_COMMAND_MISC_COMSPEC && call->session != NULL) {
         memcpy(lpszComSpec, call->session->comspec, sizeof(lpszComSpec));
         cbComSpec = call->session->comspec_bytes;
     }
-    bx_ntvdm_cpu_result_v2_pass_through(call->result);
-    if (!bx_ntvdm_cpu_result_v2_resume(call->result, call->boundary->fault_rip + 4u))
+    runtime_cpu_result_v2_pass_through(call->result);
+    if (!runtime_cpu_result_v2_resume(call->result, call->boundary->fault_rip + 4u))
         return 0;
     active.call = call;
     g_active_call = &active;
@@ -1097,12 +1097,12 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
         g_active_call = NULL;
         return 0;
     }
-    if (call->service == BX_NTVDM_COMMAND_MISC_EXEC && active.guest_buffer != NULL &&
+    if (call->service == RUNTIME_COMMAND_MISC_EXEC && active.guest_buffer != NULL &&
         !call->guest_write(call->guest_state, active.guest_address,
             active.guest_buffer, active.guest_bytes)) {
         free(active.guest_buffer); free(active.guest_buffer2); g_active_call = NULL; return 0;
     }
-    if (call->service == BX_NTVDM_COMMAND_MISC_GET_NEXT && call->session != NULL) {
+    if (call->service == RUNTIME_COMMAND_MISC_GET_NEXT && call->session != NULL) {
         call->session->command_source_repeat_pending = IsRepeatCall ? 1u : 0u;
         if (IsRepeatCall && cmdVDMEnvBlk.lpszzEnv != NULL && cmdVDMEnvBlk.cchEnv >= 2u) {
             if (!replace_environment(&call->session->command_source_vdm_environment,
@@ -1117,7 +1117,7 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
             cmdVDMEnvBlk.lpszzEnv = NULL;
         }
     }
-    if (call->service == BX_NTVDM_COMMAND_MISC_GET_NEXT &&
+    if (call->service == RUNTIME_COMMAND_MISC_GET_NEXT &&
         ((active.guest_buffer != NULL && !call->guest_write(call->guest_state,
              active.guest_address, active.guest_buffer, active.guest_bytes)) ||
          (active.guest_buffer2 != NULL && !call->guest_write(call->guest_state,
@@ -1133,18 +1133,18 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
         free(active.guest_buffer); free(active.guest_buffer2); free(active.guest_buffer3);
         free(active.guest_buffer4); g_active_call = NULL; return 0;
     }
-    if (call->service == BX_NTVDM_COMMAND_MISC_CHECK_BINARY && call->session != NULL &&
+    if (call->service == RUNTIME_COMMAND_MISC_CHECK_BINARY && call->session != NULL &&
         call->session->scs_info_address != 0u &&
         !call->guest_write(call->guest_state, call->session->scs_info_address,
             (const uint8_t *)&call->session->scs_info, sizeof(call->session->scs_info))) {
         free(active.guest_buffer); free(active.guest_buffer2); free(active.guest_buffer3); free(active.guest_buffer4);
         g_active_call = NULL; return 0;
     }
-    if (call->service == BX_NTVDM_COMMAND_MISC_COMSPEC && call->session != NULL) {
+    if (call->service == RUNTIME_COMMAND_MISC_COMSPEC && call->session != NULL) {
         memcpy(call->session->comspec, lpszComSpec, sizeof(lpszComSpec));
         call->session->comspec_bytes = cbComSpec;
     }
-    if (call->service == BX_NTVDM_COMMAND_MISC_GET_INIT_ENVIRONMENT) {
+    if (call->service == RUNTIME_COMMAND_MISC_GET_INIT_ENVIRONMENT) {
         uint32_t index;
         /* cmdenv.c receives only a segment pointer.  Recover the exact
          * multi-string extent it populated so a successful bounded request
@@ -1158,7 +1158,7 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
             }
         }
     }
-    if (call->service == BX_NTVDM_COMMAND_MISC_SET_INFO && active.guest_bytes != 3u) {
+    if (call->service == RUNTIME_COMMAND_MISC_SET_INFO && active.guest_bytes != 3u) {
         g_active_call = NULL;
         return 0;
     }
@@ -1167,7 +1167,7 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
             active.guest_buffer, active.guest_bytes)) {
         free(active.guest_buffer); g_active_call = NULL; return 0;
     }
-    if (call->service == BX_NTVDM_COMMAND_MISC_GET_KBD_LAYOUT &&
+    if (call->service == RUNTIME_COMMAND_MISC_GET_KBD_LAYOUT &&
         ((active.guest_buffer != NULL && !call->guest_write(call->guest_state, active.guest_address, active.guest_buffer, active.guest_bytes)) ||
          (active.guest_buffer2 != NULL && !call->guest_write(call->guest_state, active.guest_address2, active.guest_buffer2, active.guest_bytes2)))) {
         free(active.guest_buffer); free(active.guest_buffer2); g_active_call = NULL; return 0;
@@ -1177,5 +1177,5 @@ int bx_ntvdm_command_misc_invoke(bx_ntvdm_command_misc_call *call)
     free(active.guest_buffer3);
     free(active.guest_buffer4);
     g_active_call = NULL;
-    return bx_ntvdm_cpu_result_v2_valid(call->result);
+    return runtime_cpu_result_v2_valid(call->result);
 }

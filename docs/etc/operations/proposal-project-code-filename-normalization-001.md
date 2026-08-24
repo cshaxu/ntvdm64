@@ -3,11 +3,12 @@
 ## Objective
 
 Normalize project-authored and mechanical-adaptation code filenames so that
-component directory ownership, rather than a filename prefix, identifies the
-project, machine backend, or historical subsystem. The product is `ntvdm64`;
-neither `ntdos64` nor `ntvdm64` is an admissible project-code filename prefix.
-Likewise, `bx` and `bochs` are not admissible filenames outside component
-directory names that already establish their ownership.
+component directory ownership, rather than a filename prefix or provisional
+implementation-version suffix, identifies the project, machine backend, or
+historical subsystem. The product is `ntvdm64`; neither `ntdos64` nor
+`ntvdm64` is an admissible project-code filename prefix. Likewise, `bx`,
+`bochs`, `_v1`, and `_v2` are not admissible project-code filename markers
+outside component directory names that already establish ownership.
 
 ## Scope
 
@@ -39,6 +40,7 @@ name.
 | S2 | Rename `app` and `session` code, repair references and run focused formal targets. | No in-scope `app`/`session` filename retains a prohibited prefix; references resolve. |
 | S3 | Rename all remaining admitted mechanical-adaptation code and fixture names, repair graph/document references, and remove obsolete paths. | No in-scope production or fixture filename retains a prohibited prefix; no stale include/build reference remains. |
 | S4 | Complete cross-root source/build/document scan and formal graph verification. | The manifest is closed, each rename is `git mv`-traceable, focused targets pass, and governance/diff checks pass. |
+| S5 | Remove remaining `_v1` / `_v2` implementation-version filename markers, then classify and remove non-semantic project/backend/source-provenance identifier prefixes from in-scope production code and repair exact consumers. | No in-scope project-owned code basename contains a prohibited product/backend/source-provenance marker or standalone `v1`/`v2` filename segment; each remaining DOS/VDM/Bochs/OpenNT lexical identifier has a source-semantic or upstream-interface disposition; direct consumers resolve without an ABI or behavior rewrite. |
 
 ## Non-goals
 
@@ -47,6 +49,9 @@ name.
 - No mass rename of historical evidence, external sources, release artifacts,
   or provenance references.
 - No change to any original-code mirror or overlay content.
+- No blind removal of DOS/VDM/Bochs/OpenNT terms from identifiers that name
+  actual guest, machine, register, provider, or preserved upstream-interface
+  semantics.
 
 ## Admission evidence
 

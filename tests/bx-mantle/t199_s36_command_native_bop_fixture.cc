@@ -1,5 +1,5 @@
 #include "bochs.h"
-#include "adapter-softpc/bx_ntvdm_finite_run.h"
+#include "adapter-softpc/finite_run.h"
 #include "bx-vdm/bx_ntvdm_boot_namespace_composition_v1.h"
 #include <string.h>
 
@@ -36,17 +36,17 @@ int main()
   byob_image command = { command_bytes, sizeof(command_bytes) };
   byob_image target = { target_bytes, sizeof(target_bytes) };
   byob_profile_selection profile;
-  bx_ntvdm_boot_namespace_composition_v1 composition;
-  bx_ntvdm_finite_run_request request;
-  bx_ntvdm_finite_run_status status;
+  runtime_boot_namespace_composition_v1 composition;
+  runtime_finite_run_request request;
+  runtime_finite_run_status status;
 
   profile_initialize(&profile);
-  if (!bx_ntvdm_boot_namespace_composition_v1_initialize(&composition,
+  if (!runtime_boot_namespace_composition_v1_initialize(&composition,
       &ntdos, &command, &target, 0, &profile) ||
-      !bx_ntvdm_boot_namespace_composition_v1_bind(&composition)) return 1;
+      !runtime_boot_namespace_composition_v1_bind(&composition)) return 1;
 
   memset(&request, 0, sizeof(request));
-  request.request_version = BX_NTVDM_FINITE_RUN_REQUEST_VERSION;
+  request.request_version = RUNTIME_FINITE_RUN_REQUEST_VERSION;
   request.entry_bytes[0] = 0xc4u;
   request.entry_bytes[1] = 0xc4u;
   request.entry_bytes[2] = 0x54u;
@@ -57,8 +57,8 @@ int main()
   request.entry_eip = 0u;
   request.instruction_tick_budget = 64u;
   request.ips = 1000000u;
-  status = bx_ntvdm_run_finite_bare_bytes(&request);
-  bx_ntvdm_boot_namespace_composition_v1_unbind(&composition);
-  return status == BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP ? 0 :
+  status = runtime_run_finite_bare_bytes(&request);
+  runtime_boot_namespace_composition_v1_unbind(&composition);
+  return status == RUNTIME_FINITE_RUN_COMPLETED_UD_STOP ? 0 :
     20 + (int)status;
 }

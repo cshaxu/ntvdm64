@@ -29,12 +29,12 @@ void kb_setup_vectors(void)
     * table.  The first profile consumes only one field; validate the same
     * guard before its sole guest write so malformed input cannot commit a
     * partial state update. */
-   if (!bx_ntvdm_spckbd_table_word(KIO_VERSION, &version) ||
+   if (!runtime_spckbd_table_word(KIO_VERSION, &version) ||
        version != getAX() ||
-       !bx_ntvdm_spckbd_table_word(KIO_USE_HOST_INT10, &useHostInt10) ||
+       !runtime_spckbd_table_word(KIO_USE_HOST_INT10, &useHostInt10) ||
        (uint32_t)KbdSeg > UINT32_MAX / 16u ||
        ((uint32_t)KbdSeg << 4) > UINT32_MAX - (uint32_t)useHostInt10) {
-       bx_ntvdm_spckbd_handoff_fail();
+       runtime_spckbd_handoff_fail();
        return;
    }
 
@@ -49,7 +49,7 @@ void kb_setup_vectors(void)
 void MS_bop_F(void)
 {
     kb_setup_vectors();
-    if (bx_ntvdm_spckbd_handoff_failed()) return;
+    if (runtime_spckbd_handoff_failed()) return;
 
     /* DIVERGENCE (T243 S2): AddrIretBopTable, ICA restart and event-thread
      * release are monitor/product-shell responsibilities. Native mantle

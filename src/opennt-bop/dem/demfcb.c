@@ -359,7 +359,7 @@ HANDLE	hFile;
      * resolved AX:SI from a session token, so release that same token while
      * preserving the original CloseHandle failure branch.  Original source:
      * base/mvdm/dos/dem/demfcb.c. */
-    if (bx_ntvdm_demhndl_close_handle(hFile) == FALSE){
+    if (runtime_demhndl_close_handle(hFile) == FALSE){
 
 	demClientError(hFile, (CHAR)-1);
 	return;
@@ -722,7 +722,7 @@ SECURITY_ATTRIBUTES sa;
      * remain host-private, so preserve the same two-register guest contract
      * through the shared Direct session token seam instead of truncating it.
      * Original source: base/mvdm/dos/dem/demfcb.c. */
-    if (!bx_ntvdm_demhndl_publish_handle(hFile)) {
+    if (!runtime_demhndl_publish_handle(hFile)) {
         demClientError(hFile, (CHAR)-1);
         CloseHandle(hFile);
         return;

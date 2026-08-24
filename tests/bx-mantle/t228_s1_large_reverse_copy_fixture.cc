@@ -1,17 +1,17 @@
 #include "bochs.h"
-#include "adapter-softpc/bx_ntvdm_finite_run.h"
-#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-softpc/finite_run.h"
+#include "adapter-bop/generic_ud_bridge.h"
 
 #include <string.h>
 
-extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
-  const struct bx_ntvdm_generic_ud_event_v1 *event,
-  struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
+extern "C" int runtime_mantle_generic_ud_bridge_v1(
+  const struct runtime_generic_ud_event_v1 *event,
+  struct runtime_generic_ud_outcome_v1 *outcome)
 {
   if (event == 0 || outcome == 0 || event->vector != 6u) return 0;
   memset(outcome, 0, sizeof(*outcome));
-  outcome->abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
-  outcome->disposition = BX_NTVDM_GENERIC_UD_STOP;
+  outcome->abi_version = RUNTIME_GENERIC_UD_EVENT_V1_VERSION;
+  outcome->disposition = RUNTIME_GENERIC_UD_STOP;
   return 1;
 }
 
@@ -27,18 +27,18 @@ int main(void)
     0x26u, 0xffu, 0x1eu, 0xf0u, 0x95u,     /* call far [es:95f0h] */
     0x0fu, 0x0bu                          /* fixture-only ud2 */
   };
-  static struct bx_ntvdm_finite_run_request request;
+  static struct runtime_finite_run_request request;
   static const Bit8u expected[] = {
     0xa5u, 0xa5u, 0xa5u, 0xa5u, 0xa5u, 0xa5u, 0xa5u, 0xa5u,
     0x93u, 0x01u, 0x41u, 0x00u,
     0xa5u, 0xa5u, 0xa5u, 0xa5u, 0xa5u, 0xa5u, 0xa5u, 0xa5u
   };
-  struct bx_ntvdm_finite_run_terminal_snapshot terminal;
-  struct bx_ntvdm_mechanical_action_v1 action;
+  struct runtime_finite_run_terminal_snapshot terminal;
+  struct runtime_mechanical_action_v1 action;
   unsigned index;
 
   memset(&request, 0, sizeof(request));
-  request.request_version = BX_NTVDM_FINITE_RUN_REQUEST_VERSION;
+  request.request_version = RUNTIME_FINITE_RUN_REQUEST_VERSION;
   memset(request.entry_bytes, 0xa5, 0xc5d0u);
   memcpy(request.entry_bytes, code, sizeof(code));
   request.entry_bytes[0x95f0u] = 0x93u;
@@ -51,8 +51,8 @@ int main(void)
   request.instruction_tick_budget = 64u;
   request.ips = 1u;
   request.enable_realmode_segment_limit_compatibility = 1u;
-  bx_ntvdm_mechanical_action_v1_clear(&action);
-  action.kind = BX_NTVDM_MECHANICAL_ACTION_V1_WRITE;
+  runtime_mechanical_action_v1_clear(&action);
+  action.kind = RUNTIME_MECHANICAL_ACTION_V1_WRITE;
   action.action_id = 1u;
   action.range_count = 1u;
   action.payload_bytes = 1u;
@@ -62,11 +62,11 @@ int main(void)
   request.has_preentry_action = 1u;
   request.preentry_action = action;
   request.capture_terminal_snapshot = 1u;
-  if (!bx_ntvdm_finite_run_terminal_snapshot_configure_ordinary_range(
+  if (!runtime_finite_run_terminal_snapshot_configure_ordinary_range(
       0x395e8u, sizeof(expected))) return 1;
-  if (bx_ntvdm_run_finite_bare_bytes(&request) !=
-      BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP) return 2;
-  if (!bx_ntvdm_finite_run_terminal_snapshot_get(&terminal) ||
+  if (runtime_run_finite_bare_bytes(&request) !=
+      RUNTIME_FINITE_RUN_COMPLETED_UD_STOP) return 2;
+  if (!runtime_finite_run_terminal_snapshot_get(&terminal) ||
       terminal.captured_byte_count != sizeof(expected) ||
       terminal.captured_physical_address != 0x395e8u) return 3;
   for (index = 0u; index < sizeof(expected); ++index)

@@ -314,7 +314,7 @@ DWORD demFileFindFirst (
                 pFFindEntry = SearchFile(wcFile, SearchAttr, NULL, NULL);
                 if (pFFindEntry) {
                     STOREDWORD(pDta->FFindRef,
-                                BX_NTVDM_DEMSEARCH_REFERENCE(pFFindEntry->FFindId));
+                                RUNTIME_DEMSEARCH_REFERENCE(pFFindEntry->FFindId));
                     STOREDWORD(pDta->FFindId,pFFindEntry->FFindId);
                     }
                 }
@@ -353,7 +353,7 @@ DWORD demFileFindFirst (
 
     if (pFFindEntry) {
         STOREDWORD(pDta->FFindRef,
-                    BX_NTVDM_DEMSEARCH_REFERENCE(pFFindEntry->FFindId));
+                    RUNTIME_DEMSEARCH_REFERENCE(pFFindEntry->FFindId));
         STOREDWORD(pDta->FFindId,pFFindEntry->FFindId);
         }
 
@@ -438,7 +438,7 @@ DWORD demFileFindNext (
     pFFindEntry = GetFFindEntryByFindId(FETCHDWORD(pDta->FFindId));
     if (!pFFindEntry ||
         FETCHDWORD(pDta->FFindRef) !=
-            BX_NTVDM_DEMSEARCH_REFERENCE(pFFindEntry->FFindId) )
+            RUNTIME_DEMSEARCH_REFERENCE(pFFindEntry->FFindId) )
       {
         STOREDWORD(pDta->FFindId,0);
         STOREDWORD(pDta->FFindRef,0);
@@ -558,7 +558,7 @@ VOID demFindFirstFCB (VOID)
 
     if (pFFindEntry) {
         STOREDWORD(pDirEnt->FFindRef,
-                    BX_NTVDM_DEMSEARCH_REFERENCE(pFFindEntry->FFindId));
+                    RUNTIME_DEMSEARCH_REFERENCE(pFFindEntry->FFindId));
         STOREDWORD(pDirEnt->FFindId,pFFindEntry->FFindId);
         }
 
@@ -605,12 +605,12 @@ VOID demFindNextFCB (VOID)
     pFFindEntry = GetFFindEntryByFindId(FETCHDWORD(pDirEnt->FFindId));
     if (!pFFindEntry ||
         FETCHDWORD(pDirEnt->FFindRef) !=
-            BX_NTVDM_DEMSEARCH_REFERENCE(pFFindEntry->FFindId) ||
+            RUNTIME_DEMSEARCH_REFERENCE(pFFindEntry->FFindId) ||
         getDL() == ATTR_VOLUME_ID )
       {
         if (pFFindEntry &&
             FETCHDWORD(pDirEnt->FFindRef) !=
-                BX_NTVDM_DEMSEARCH_REFERENCE(pFFindEntry->FFindId))
+                RUNTIME_DEMSEARCH_REFERENCE(pFFindEntry->FFindId))
           {
             FreeFFindEntry(pFFindEntry);
             }

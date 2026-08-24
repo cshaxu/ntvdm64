@@ -1,35 +1,35 @@
 #include "softpc_printer_openclose_v2_generic_ud_bridge.h"
 #include "adapter-softpc/softpc_printer_openclose_shim.h"
-#include "bx_ntvdm_cpu_state_abi.h"
+#include "cpu_state_abi.h"
 
 #include <string.h>
 
 void printer_io(void);
 
-int bx_ntvdm_softpc_printer_openclose_v2_generic_ud_recognizes(
-    const struct bx_ntvdm_generic_ud_event_v1 *event)
+int runtime_softpc_printer_openclose_v2_generic_ud_recognizes(
+    const struct runtime_generic_ud_event_v1 *event)
 {
-    return event != 0 && event->magic == BX_NTVDM_GENERIC_UD_EVENT_V1_MAGIC &&
-        event->abi_version == BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION &&
+    return event != 0 && event->magic == RUNTIME_GENERIC_UD_EVENT_V1_MAGIC &&
+        event->abi_version == RUNTIME_GENERIC_UD_EVENT_V1_VERSION &&
         event->struct_bytes == sizeof(*event) && event->vector == 6u &&
-        event->execution_mode == BX_NTVDM_CPU_EXECUTION_REAL &&
+        event->execution_mode == RUNTIME_CPU_EXECUTION_REAL &&
         event->window_bytes >= 3u && event->window[0] == 0xc4u &&
         event->window[1] == 0xc4u && event->window[2] == 0x17u;
 }
 
-int bx_ntvdm_softpc_printer_openclose_v2_generic_ud_dispatch(
-    const struct bx_ntvdm_generic_ud_event_v1 *event,
-    struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
+int runtime_softpc_printer_openclose_v2_generic_ud_dispatch(
+    const struct runtime_generic_ud_event_v1 *event,
+    struct runtime_generic_ud_outcome_v1 *outcome)
 {
-    if (!bx_ntvdm_softpc_printer_openclose_v2_generic_ud_recognizes(event) ||
+    if (!runtime_softpc_printer_openclose_v2_generic_ud_recognizes(event) ||
         outcome == 0 || event->fault_rip > UINT64_MAX - 3u ||
-        !bx_ntvdm_softpc_printer_openclose_begin((uint16_t)event->esi,
+        !runtime_softpc_printer_openclose_begin((uint16_t)event->esi,
             (uint16_t)event->edx)) return 0;
     printer_io();
-    if (!bx_ntvdm_softpc_printer_openclose_end()) return 0;
+    if (!runtime_softpc_printer_openclose_end()) return 0;
     memset(outcome, 0, sizeof(*outcome));
-    outcome->abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
-    outcome->disposition = BX_NTVDM_GENERIC_UD_RESUME;
+    outcome->abi_version = RUNTIME_GENERIC_UD_EVENT_V1_VERSION;
+    outcome->disposition = RUNTIME_GENERIC_UD_RESUME;
     outcome->resume_rip = event->fault_rip + 3u;
     return 1;
 }

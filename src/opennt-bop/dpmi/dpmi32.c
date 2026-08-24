@@ -95,10 +95,10 @@ Return Value:
      * A later bounded ingress stages the already-copied selector byte; this
      * keeps the original table dispatch/one-byte IP advance ordering without
      * exporting an NT4 guest pointer. */
-    if (!bx_ntvdm_dpmi_startup_source_take_dispatch(&Index)) {
+    if (!runtime_dpmi_startup_source_take_dispatch(&Index)) {
         return;
     }
-    bx_ntvdm_dpmi_startup_source_advance_ip(1u); // take care of subfn.
+    runtime_dpmi_startup_source_advance_ip(1u); // take care of subfn.
 
     DBGTRACE(DPMI_DISPATCH_ENTRY, Index, 0, 0);
 
@@ -137,7 +137,7 @@ Return Value:
 {
    /* DIVERGENCE(BOP-DIV-075): retain the table's invalid-service terminal but
     * do not import NT4 debugger/window output plumbing. */
-   bx_ntvdm_dpmi_startup_source_note_illegal(Index);
+   runtime_dpmi_startup_source_note_illegal(Index);
 }
 
 VOID
@@ -165,7 +165,7 @@ Return Value:
     /* DIVERGENCE(BOP-DIV-076): original field order is retained by the named
      * session seam, but pointer-valued Sim32GetVDMPointer results become
      * checked fixed-width guest-linear values. */
-    bx_ntvdm_dpmi_startup_source_initialize_dosx();
+    runtime_dpmi_startup_source_initialize_dosx();
 
 }
 
@@ -200,7 +200,7 @@ Notes:
     /* DIVERGENCE(BOP-DIV-077): preserve `AX & DPMI_32BIT` and startup frame
      * record ordering through the staged copied CPU/frame request.  NT4's
      * VdmTib/SS:SP pointer translation is unavailable and is not recreated. */
-    bx_ntvdm_dpmi_startup_source_initialize_app();
+    runtime_dpmi_startup_source_initialize_app();
 }
 VOID DpmiPassTableAddress(
     VOID
@@ -226,6 +226,6 @@ Return Value:
     /* DIVERGENCE(BOP-DIV-078): retain only the source's selGDT publication
      * event.  Native Bochs owns descriptor tables; no `Ldt`/`IntelBase` host
      * address or copied descriptor cache is created. */
-    bx_ntvdm_dpmi_startup_source_publish_selector_table();
+    runtime_dpmi_startup_source_publish_selector_table();
 
 }

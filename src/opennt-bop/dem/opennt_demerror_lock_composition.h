@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_BOP_SHIM_DEMERROR_LOCK_SHIM_H
-#define BX_NTVDM_BOP_SHIM_DEMERROR_LOCK_SHIM_H
+#ifndef RUNTIME_BOP_SHIM_DEMERROR_LOCK_SHIM_H
+#define RUNTIME_BOP_SHIM_DEMERROR_LOCK_SHIM_H
 
 /* Compatibility surface for directly imported OpenNT demerror.c/demlock.c.
  * Diagnostics determine each missing historic binding before it is admitted. */
@@ -26,31 +26,31 @@ VOID demClientError(HANDLE file, CHAR drive);
 ULONG demClientErrorEx(HANDLE file, CHAR drive, BOOL set_registers);
 VOID demSaveHardErrInfo(VOID);
 VOID demRestoreHardErrInfo(VOID);
-#define GetVDMAddr(segment, offset) bx_ntvdm_demerror_get_vdm_addr(segment, offset)
+#define GetVDMAddr(segment, offset) runtime_demerror_get_vdm_addr(segment, offset)
 #define GETULONG(hi, lo) ((DWORD)((((DWORD)(USHORT)(hi)) << 16) | (USHORT)(lo)))
 /* demRestoreHardErrInfo restores these before it invokes the original
  * demdisp.c handler.  They are copied selector values in the existing typed
  * result ABI, never host pointers or descriptor-cache state. */
 #undef setDS
 #undef setES
-#define setDS(value) bx_ntvdm_demhndl_set_ds(value)
-#define setES(value) bx_ntvdm_demhndl_set_es(value)
+#define setDS(value) runtime_demhndl_set_ds(value)
+#define setES(value) runtime_demhndl_set_es(value)
 #define SVC_DEMLASTSVC 0x49u
 
 /* Declared by the original NT native runtime; modern SDK headers do not
  * expose all of these historical helpers through winternl.h. */
-NTSTATUS bx_ntvdm_demerror_append_unicode(PUNICODE_STRING, PCWSTR);
-NTSTATUS bx_ntvdm_demerror_open_symbolic_link(PHANDLE, ULONG,
+NTSTATUS runtime_demerror_append_unicode(PUNICODE_STRING, PCWSTR);
+NTSTATUS runtime_demerror_open_symbolic_link(PHANDLE, ULONG,
     POBJECT_ATTRIBUTES);
-NTSTATUS bx_ntvdm_demerror_query_symbolic_link(HANDLE, PUNICODE_STRING,
+NTSTATUS runtime_demerror_query_symbolic_link(HANDLE, PUNICODE_STRING,
     PULONG);
-BOOLEAN bx_ntvdm_demerror_equal_unicode(const UNICODE_STRING *,
+BOOLEAN runtime_demerror_equal_unicode(const UNICODE_STRING *,
     const UNICODE_STRING *, BOOLEAN);
-#define RtlAppendUnicodeToString bx_ntvdm_demerror_append_unicode
-#define NtOpenSymbolicLinkObject bx_ntvdm_demerror_open_symbolic_link
-#define NtQuerySymbolicLinkObject bx_ntvdm_demerror_query_symbolic_link
-#define RtlEqualUnicodeString bx_ntvdm_demerror_equal_unicode
-LPVOID bx_ntvdm_demerror_get_vdm_addr(USHORT segment, USHORT offset);
-void bx_ntvdm_demerror_flush_hard_error(void);
+#define RtlAppendUnicodeToString runtime_demerror_append_unicode
+#define NtOpenSymbolicLinkObject runtime_demerror_open_symbolic_link
+#define NtQuerySymbolicLinkObject runtime_demerror_query_symbolic_link
+#define RtlEqualUnicodeString runtime_demerror_equal_unicode
+LPVOID runtime_demerror_get_vdm_addr(USHORT segment, USHORT offset);
+void runtime_demerror_flush_hard_error(void);
 
 #endif

@@ -1,24 +1,24 @@
-#include "adapter-softpc/bx_ntvdm_finite_run.h"
-#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
-#include "adapter-softpc/bx_ntvdm_interrupt_return_observation_v1.h"
+#include "adapter-softpc/finite_run.h"
+#include "adapter-bop/generic_ud_bridge.h"
+#include "adapter-softpc/interrupt_return_observation.h"
 
 #include <string.h>
 
-extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
-  const struct bx_ntvdm_generic_ud_event_v1 *event,
-  struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
+extern "C" int runtime_mantle_generic_ud_bridge_v1(
+  const struct runtime_generic_ud_event_v1 *event,
+  struct runtime_generic_ud_outcome_v1 *outcome)
 {
   if (event == 0 || outcome == 0 || event->vector != 6u) return 0;
-  outcome->abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
-  outcome->disposition = BX_NTVDM_GENERIC_UD_STOP;
-  bx_ntvdm_mantle_generic_ud_stop_observation_mark();
+  outcome->abi_version = RUNTIME_GENERIC_UD_EVENT_V1_VERSION;
+  outcome->disposition = RUNTIME_GENERIC_UD_STOP;
+  runtime_mantle_generic_ud_stop_observation_mark();
   return 1;
 }
 
-static void initialize_request(struct bx_ntvdm_finite_run_request *request)
+static void initialize_request(struct runtime_finite_run_request *request)
 {
   memset(request, 0, sizeof(*request));
-  request->request_version = BX_NTVDM_FINITE_RUN_REQUEST_VERSION;
+  request->request_version = RUNTIME_FINITE_RUN_REQUEST_VERSION;
   request->entry_physical_address = 0u;
   request->entry_cs = 0u;
   request->instruction_tick_budget = 128u;
@@ -27,9 +27,9 @@ static void initialize_request(struct bx_ntvdm_finite_run_request *request)
 
 static int exercise_real_iret16(void)
 {
-  struct bx_ntvdm_finite_run_request request;
-  struct bx_ntvdm_interrupt_return_observation_v1_record record;
-  bx_ntvdm_finite_run_status status;
+  struct runtime_finite_run_request request;
+  struct runtime_interrupt_return_observation_v1_record record;
+  runtime_finite_run_status status;
 
   initialize_request(&request);
   request.entry_bytes[0x80] = 0x10u; request.entry_bytes[0x81] = 0x01u;
@@ -43,18 +43,18 @@ static int exercise_real_iret16(void)
   request.entry_byte_count = 0x111u;
   request.entry_eip = 0x100u;
 
-  if (!bx_ntvdm_mantle_interrupt_return_observation_v1_configure(0u)) return 1;
-  status = bx_ntvdm_run_finite_bare_bytes(&request);
-  if (status != BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP ||
-      bx_ntvdm_mantle_interrupt_return_observation_v1_count() != 0u) return 2;
+  if (!runtime_mantle_interrupt_return_observation_v1_configure(0u)) return 1;
+  status = runtime_run_finite_bare_bytes(&request);
+  if (status != RUNTIME_FINITE_RUN_COMPLETED_UD_STOP ||
+      runtime_mantle_interrupt_return_observation_v1_count() != 0u) return 2;
 
-  if (!bx_ntvdm_mantle_interrupt_return_observation_v1_configure(8u)) return 3;
-  status = bx_ntvdm_run_finite_bare_bytes(&request);
-  if (status != BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP ||
-      bx_ntvdm_mantle_interrupt_return_observation_v1_count() != 1u) return 4;
+  if (!runtime_mantle_interrupt_return_observation_v1_configure(8u)) return 3;
+  status = runtime_run_finite_bare_bytes(&request);
+  if (status != RUNTIME_FINITE_RUN_COMPLETED_UD_STOP ||
+      runtime_mantle_interrupt_return_observation_v1_count() != 1u) return 4;
   memset(&record, 0, sizeof(record));
-  if (!bx_ntvdm_mantle_interrupt_return_observation_v1_get(0u, &record) ||
-      record.version != BX_NTVDM_INTERRUPT_RETURN_OBSERVATION_V1_VERSION ||
+  if (!runtime_mantle_interrupt_return_observation_v1_get(0u, &record) ||
+      record.version != RUNTIME_INTERRUPT_RETURN_OBSERVATION_V1_VERSION ||
       record.execution_mode != 1u || record.operand_width != 16u ||
       record.cs != 0u || record.rip != 0x108u ||
       record.ax != 0x1234u || record.bx != 0x5678u) return 5;
@@ -63,9 +63,9 @@ static int exercise_real_iret16(void)
 
 static int exercise_real_iret32(void)
 {
-  struct bx_ntvdm_finite_run_request request;
-  struct bx_ntvdm_interrupt_return_observation_v1_record record;
-  bx_ntvdm_finite_run_status status;
+  struct runtime_finite_run_request request;
+  struct runtime_interrupt_return_observation_v1_record record;
+  runtime_finite_run_status status;
 
   initialize_request(&request);
   /* Set a 16-bit real-mode stack, construct a 32-bit IRET frame, then 66 CF. */
@@ -87,12 +87,12 @@ static int exercise_real_iret32(void)
   request.entry_byte_count = 0x202u;
   request.entry_eip = 0x100u;
 
-  if (!bx_ntvdm_mantle_interrupt_return_observation_v1_configure(8u)) return 1;
-  status = bx_ntvdm_run_finite_bare_bytes(&request);
-  if (status != BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP ||
-      bx_ntvdm_mantle_interrupt_return_observation_v1_count() != 1u) return 2;
+  if (!runtime_mantle_interrupt_return_observation_v1_configure(8u)) return 1;
+  status = runtime_run_finite_bare_bytes(&request);
+  if (status != RUNTIME_FINITE_RUN_COMPLETED_UD_STOP ||
+      runtime_mantle_interrupt_return_observation_v1_count() != 1u) return 2;
   memset(&record, 0, sizeof(record));
-  if (!bx_ntvdm_mantle_interrupt_return_observation_v1_get(0u, &record) ||
+  if (!runtime_mantle_interrupt_return_observation_v1_get(0u, &record) ||
       record.execution_mode != 1u || record.operand_width != 32u ||
       record.cs != 0u || record.rip != 0x200u ||
       record.ax != 0x1234u || record.bx != 0x5678u) return 3;
@@ -101,8 +101,8 @@ static int exercise_real_iret32(void)
 
 static int exercise_protected_mode_negative(void)
 {
-  struct bx_ntvdm_finite_run_request request;
-  bx_ntvdm_finite_run_status status;
+  struct runtime_finite_run_request request;
+  runtime_finite_run_status status;
 
   initialize_request(&request);
   request.entry_bytes[0x100] = 0xfau;
@@ -144,32 +144,32 @@ static int exercise_protected_mode_negative(void)
   request.entry_byte_count = 0x608u;
   request.entry_eip = 0x100u;
 
-  if (!bx_ntvdm_mantle_interrupt_return_observation_v1_configure(8u)) return 1;
-  status = bx_ntvdm_run_finite_bare_bytes(&request);
-  if (status != BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP) return 2;
-  return bx_ntvdm_mantle_interrupt_return_observation_v1_count() == 0u ? 0 : 3;
+  if (!runtime_mantle_interrupt_return_observation_v1_configure(8u)) return 1;
+  status = runtime_run_finite_bare_bytes(&request);
+  if (status != RUNTIME_FINITE_RUN_COMPLETED_UD_STOP) return 2;
+  return runtime_mantle_interrupt_return_observation_v1_count() == 0u ? 0 : 3;
 }
 
 static int exercise_ring(void)
 {
-  struct bx_ntvdm_interrupt_return_observation_v1_record record;
+  struct runtime_interrupt_return_observation_v1_record record;
   uint32_t index;
-  if (!bx_ntvdm_mantle_interrupt_return_observation_v1_configure(3u)) return 1;
+  if (!runtime_mantle_interrupt_return_observation_v1_configure(3u)) return 1;
   memset(&record, 0, sizeof(record));
-  record.version = BX_NTVDM_INTERRUPT_RETURN_OBSERVATION_V1_VERSION;
+  record.version = RUNTIME_INTERRUPT_RETURN_OBSERVATION_V1_VERSION;
   for (index = 0u; index != 5u; ++index) {
     record.sequence = index;
     record.operand_width = (uint8_t)(16u + index);
-    bx_ntvdm_mantle_interrupt_return_observation_v1_record(&record);
+    runtime_mantle_interrupt_return_observation_v1_record(&record);
   }
-  if (bx_ntvdm_mantle_interrupt_return_observation_v1_count() != 3u) return 2;
+  if (runtime_mantle_interrupt_return_observation_v1_count() != 3u) return 2;
   for (index = 0u; index != 3u; ++index) {
     memset(&record, 0, sizeof(record));
-    if (!bx_ntvdm_mantle_interrupt_return_observation_v1_get(index, &record) ||
+    if (!runtime_mantle_interrupt_return_observation_v1_get(index, &record) ||
         record.sequence != index + 2u || record.operand_width != 18u + index) return 3;
   }
-  bx_ntvdm_mantle_interrupt_return_observation_v1_reset();
-  return bx_ntvdm_mantle_interrupt_return_observation_v1_count() == 0u ? 0 : 4;
+  runtime_mantle_interrupt_return_observation_v1_reset();
+  return runtime_mantle_interrupt_return_observation_v1_count() == 0u ? 0 : 4;
 }
 
 int main(void)

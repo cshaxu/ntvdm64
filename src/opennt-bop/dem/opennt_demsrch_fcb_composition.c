@@ -41,7 +41,7 @@ void HostTerminatePDB(USHORT pdb)
     FdiskTerminatePDB(pdb);
 }
 
-int bx_ntvdm_demsrch_fcb_invoke(bx_ntvdm_demhndl_call *call)
+int runtime_demsrch_fcb_invoke(runtime_demhndl_call *call)
 {
     void (*body)(void) = NULL;
 
@@ -62,5 +62,5 @@ int bx_ntvdm_demsrch_fcb_invoke(bx_ntvdm_demhndl_call *call)
     case 0x3cu: body = demTerminatePDB; break;
     default: return 0;
     }
-    return bx_ntvdm_demhndl_invoke_body(call, body);
+    return runtime_demhndl_invoke_body(call, body);
 }

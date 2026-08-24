@@ -12,10 +12,10 @@
  * narrow COMMAND environment shim rather than the historical CCPU/SAS/RTL
  * product include closure.  The original body retains all filtering, OEM
  * conversion, buffer-size and result rules. */
-#define BX_NTVDM_COMMAND_ENV_ADMIT_INIT_ENV 1
-#define BX_NTVDM_COMMAND_ENV_ADMIT_DYNAMIC 1
-#define BX_NTVDM_COMMAND_ENV_ADMIT_XFORM 1
-#define BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE 1
+#define RUNTIME_COMMAND_ENV_ADMIT_INIT_ENV 1
+#define RUNTIME_COMMAND_ENV_ADMIT_DYNAMIC 1
+#define RUNTIME_COMMAND_ENV_ADMIT_XFORM 1
+#define RUNTIME_COMMAND_ENV_ADMITTED_SLICE 1
 #include "opennt_command_composition.h"
 
 #define VDM_ENV_INC_SIZE    512
@@ -23,7 +23,7 @@
 CHAR windir[] = "windir";
 extern BOOL fSeparateWow;
 
-#if defined(BX_NTVDM_COMMAND_ENV_ADMIT_XFORM) || !defined(BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE)
+#if defined(RUNTIME_COMMAND_ENV_ADMIT_XFORM) || !defined(RUNTIME_COMMAND_ENV_ADMITTED_SLICE)
 
 // Transform the given DOS environment to 32bits environment.
 // WARNING!! The environment block we passed to 32bits must be in sort order.
@@ -50,7 +50,7 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
      * materializes an equivalent private Unicode multisz.  The original
      * filtering, RtlSetEnvironmentVariable ordering, and OEM conversion
      * below remain unchanged. */
-    CurEnv = bx_ntvdm_command_environment_snapshot();
+    CurEnv = runtime_command_environment_snapshot();
     if (CurEnv == NULL)
 	return FALSE;
     pwch = CurEnv;
@@ -61,7 +61,7 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
     // plus 2  to include the last two NULL chars
     CurEnvCopy = malloc((pwch - CurEnv + 2) * sizeof(WCHAR));
     if (!CurEnvCopy) {
-	bx_ntvdm_command_environment_free_snapshot(CurEnv);
+	runtime_command_environment_free_snapshot(CurEnv);
 	return FALSE;
     }
 
@@ -69,7 +69,7 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
     // it. The environment can be changed by any threads in the process
     // thus is not safe to walk through without a local copy
     RtlMoveMemory(CurEnvCopy, CurEnv, (pwch - CurEnv + 2) * sizeof(WCHAR));
-    bx_ntvdm_command_environment_free_snapshot(CurEnv);
+    runtime_command_environment_free_snapshot(CurEnv);
 
     // create a new environment block. We don't want to change
     // any currnt process environment variables, instead, we are
@@ -215,7 +215,7 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
  *	  (BX) > given size, (BX) has the required size
  */
 
-#if defined(BX_NTVDM_COMMAND_ENV_ADMIT_INIT_ENV) || !defined(BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE)
+#if defined(RUNTIME_COMMAND_ENV_ADMIT_INIT_ENV) || !defined(RUNTIME_COMMAND_ENV_ADMITTED_SLICE)
 VOID cmdGetInitEnvironment(VOID)
 {
     /* Defined initial state for modern analysis; original control flow assigns
@@ -393,7 +393,7 @@ WARINING !!! The changes made by applications through directly manipulation
 	     in command.com environment segment will be lost.
 
 **/
-#if defined(BX_NTVDM_COMMAND_ENV_ADMIT_DYNAMIC) || !defined(BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE)
+#if defined(RUNTIME_COMMAND_ENV_ADMIT_DYNAMIC) || !defined(RUNTIME_COMMAND_ENV_ADMITTED_SLICE)
 BOOL cmdCreateVDMEnvironment(
 PVDMENVBLK  pVDMEnvBlk
 )

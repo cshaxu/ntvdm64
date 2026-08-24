@@ -18,7 +18,7 @@ void memory_size()
      * Return the memory size in AX.  This is read in from the BIOS, as
      * certain applications can write to this area.
      */
-    sas_loadw(BX_NTVDM_SOFTPC_MEMORY_VAR, &memory_size);
+    sas_loadw(RUNTIME_SOFTPC_MEMORY_VAR, &memory_size);
     
     setAX(memory_size);
 }

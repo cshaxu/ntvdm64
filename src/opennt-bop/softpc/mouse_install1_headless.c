@@ -16,21 +16,21 @@
 
 static void mouse_install1(void)
 {
-    bx_ntvdm_softpc_mouse_word MOUSE_IO_INTERRUPT_OFFSET;
-    bx_ntvdm_softpc_mouse_word MOUSE_IO_INTERRUPT_SEGMENT;
+    runtime_softpc_mouse_word MOUSE_IO_INTERRUPT_OFFSET;
+    runtime_softpc_mouse_word MOUSE_IO_INTERRUPT_SEGMENT;
 
     /* Original MONITOR ordering starts by decoding the resident driver's
      * CS:BX mio_table.  This headless profile retains only its first entry:
      * offset/segment for the INT 33h service entry. */
-    if (!bx_ntvdm_softpc_mouse_vector_load_table_word(0u,
+    if (!runtime_softpc_mouse_vector_load_table_word(0u,
             &MOUSE_IO_INTERRUPT_OFFSET) ||
-        !bx_ntvdm_softpc_mouse_vector_load_table_word(2u,
+        !runtime_softpc_mouse_vector_load_table_word(2u,
             &MOUSE_IO_INTERRUPT_SEGMENT)) return;
 
     /* Original NTVDM mouse_install1 eventually publishes these two words at
      * int_addr(0x33).  The shim emits one checked four-byte IVT update. */
     (void)int_addr(0x33);
-    (void)bx_ntvdm_softpc_mouse_vector_store_int33(
+    (void)runtime_softpc_mouse_vector_store_int33(
         MOUSE_IO_INTERRUPT_OFFSET, MOUSE_IO_INTERRUPT_SEGMENT);
 }
 

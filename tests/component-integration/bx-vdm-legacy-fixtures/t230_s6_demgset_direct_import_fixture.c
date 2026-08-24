@@ -7,7 +7,7 @@
 /* The fixture crosses the already-imported search owner after DTA
  * registration, but it deliberately imports only the S6 compatibility
  * surface so the two original-layout headers remain independently owned. */
-int bx_ntvdm_demsrch_fcb_invoke(bx_ntvdm_demhndl_call *call);
+int runtime_demsrch_fcb_invoke(runtime_demhndl_call *call);
 
 typedef struct fixture_context { uint8_t guest[0x30000]; } fixture_context;
 
@@ -25,29 +25,29 @@ static int read_guest(void *s, uint32_t a, uint8_t *b, uint32_t n)
 { fixture_context *c = s; if (!c || a > sizeof(c->guest) || n > sizeof(c->guest) - a) return 0; memcpy(b, c->guest + a, n); return 1; }
 static int write_guest(void *s, uint32_t a, const uint8_t *b, uint32_t n)
 { fixture_context *c = s; if (!c || a > sizeof(c->guest) || n > sizeof(c->guest) - a) return 0; memcpy(c->guest + a, b, n); return 1; }
-static int invoke(fixture_context *s, bx_ntvdm_dem_direct_context *d,
-    bx_ntvdm_exception_event_v1 *e, bx_ntvdm_cpu_state_v1 *cpu,
-    bx_ntvdm_cpu_result_v2 *r, uint32_t service, int search)
-{ bx_ntvdm_demhndl_call c; (void)search; memset(&c, 0, sizeof(c)); c.magic=BX_NTVDM_DEMHNDL_CALL_MAGIC; c.abi_version=BX_NTVDM_DEMHNDL_CALL_VERSION; c.struct_bytes=sizeof(c); c.service=service; c.direct=d; c.boundary=e; c.cpu=cpu; c.result=r; c.guest_state=s; c.guest_read=read_guest; c.guest_write=write_guest; return bx_ntvdm_demdisp_invoke(&c) && r->disposition==BX_NTVDM_CPU_RESULT_V2_RESUME; }
-static void reset_cpu(bx_ntvdm_cpu_state_v1 *c)
-{ bx_ntvdm_cpu_state_v1_initialize(c, BX_NTVDM_CPU_EXECUTION_REAL); c->ds=0x100u; c->es=0x100u; }
-static int carry(const bx_ntvdm_cpu_result_v2 *r)
-{ return (r->eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u; }
+static int invoke(fixture_context *s, runtime_dem_direct_context *d,
+    runtime_exception_event_v1 *e, runtime_cpu_state_v1 *cpu,
+    runtime_cpu_result_v2 *r, uint32_t service, int search)
+{ runtime_demhndl_call c; (void)search; memset(&c, 0, sizeof(c)); c.magic=RUNTIME_DEMHNDL_CALL_MAGIC; c.abi_version=RUNTIME_DEMHNDL_CALL_VERSION; c.struct_bytes=sizeof(c); c.service=service; c.direct=d; c.boundary=e; c.cpu=cpu; c.result=r; c.guest_state=s; c.guest_read=read_guest; c.guest_write=write_guest; return runtime_demdisp_invoke(&c) && r->disposition==RUNTIME_CPU_RESULT_V2_RESUME; }
+static void reset_cpu(runtime_cpu_state_v1 *c)
+{ runtime_cpu_state_v1_initialize(c, RUNTIME_CPU_EXECUTION_REAL); c->ds=0x100u; c->es=0x100u; }
+static int carry(const runtime_cpu_result_v2 *r)
+{ return (r->eflags_values & RUNTIME_CPU_RESULT_V2_EFLAGS_CF) != 0u; }
 static SYSTEMTIME written_time;
 static BOOL fake_clock_writer(const SYSTEMTIME *time)
 { if (time == NULL) return FALSE; written_time = *time; return TRUE; }
 
 int main(void)
 {
-    fixture_context state; bx_ntvdm_dem_direct_context direct;
-    bx_ntvdm_exception_event_v1 event; bx_ntvdm_cpu_state_v1 cpu;
-    bx_ntvdm_cpu_result_v2 result; ULONG far_dta = 0x02000000u;
+    fixture_context state; runtime_dem_direct_context direct;
+    runtime_exception_event_v1 event; runtime_cpu_state_v1 cpu;
+    runtime_cpu_result_v2 result; ULONG far_dta = 0x02000000u;
     USHORT pdb = 0x50u; char directory[MAX_PATH], file[MAX_PATH], pattern[MAX_PATH], old_directory[MAX_PATH];
     HANDLE seed; DWORD bytes;
     memset(&state,0,sizeof(state)); memset(&direct,0,sizeof(direct));
-    direct.magic=BX_NTVDM_DEM_DIRECT_CONTEXT_MAGIC; direct.abi_version=BX_NTVDM_DEM_DIRECT_CONTEXT_VERSION; direct.struct_bytes=sizeof(direct); direct.state=&state; direct.publish_handle=publish; direct.lookup_handle=lookup; direct.release_handle=release; direct.query_attributes=attr_get; direct.set_attributes=attr_set;
-    memset(&event,0,sizeof(event)); event.magic=BX_NTVDM_EXCEPTION_ABI_MAGIC; event.abi_version=BX_NTVDM_EXCEPTION_ABI_VERSION; event.struct_bytes=sizeof(event); event.kind=BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION; event.fault_rip=0x1000u;
-    if (!bx_ntvdm_dem_direct_context_valid(&direct)) return 1;
+    direct.magic=RUNTIME_DEM_DIRECT_CONTEXT_MAGIC; direct.abi_version=RUNTIME_DEM_DIRECT_CONTEXT_VERSION; direct.struct_bytes=sizeof(direct); direct.state=&state; direct.publish_handle=publish; direct.lookup_handle=lookup; direct.release_handle=release; direct.query_attributes=attr_get; direct.set_attributes=attr_set;
+    memset(&event,0,sizeof(event)); event.magic=RUNTIME_EXCEPTION_ABI_MAGIC; event.abi_version=RUNTIME_EXCEPTION_ABI_VERSION; event.struct_bytes=sizeof(event); event.kind=RUNTIME_EXCEPTION_EVENT_CPU_EXCEPTION; event.fault_rip=0x1000u;
+    if (!runtime_dem_direct_context_valid(&direct)) return 1;
     memcpy(state.guest+0x1000u,&far_dta,sizeof(far_dta)); memcpy(state.guest+0x1100u,&pdb,sizeof(pdb));
     reset_cpu(&cpu); cpu.eax=0u; cpu.edx=0x100u; cpu.ecx=0x200u; cpu.esi=0x300u;
     if (!invoke(&state,&direct,&event,&cpu,&result,0x1bu,0) || carry(&result)) return 2;
@@ -61,7 +61,7 @@ int main(void)
     memset(state.guest + 0x1900u, 0, 33u); reset_cpu(&cpu); cpu.eax=2u; cpu.edi=0x900u;
     if (!invoke(&state,&direct,&event,&cpu,&result,0x25u,0) || carry(&result) || state.guest[0x1900u+3u]==0u) {
         fprintf(stderr, "dpb: invoke=%u cf=%u ax=%u sector-lo=%u last=%lu\n",
-            result.disposition == BX_NTVDM_CPU_RESULT_V2_RESUME, carry(&result),
+            result.disposition == RUNTIME_CPU_RESULT_V2_RESUME, carry(&result),
             result.cpu_delta.gpr16_values[0], state.guest[0x1900u+3u],
             (unsigned long)GetLastError());
         return 9;
@@ -74,12 +74,12 @@ int main(void)
     memcpy(state.guest+0x1f00u,old_directory,strlen(old_directory)+1u); reset_cpu(&cpu); cpu.esi=0xf00u; cpu.edx=(uint8_t)(toupper((unsigned char)old_directory[0])-'A');
     if (!invoke(&state,&direct,&event,&cpu,&result,0x1au,0) || carry(&result)) {
         fprintf(stderr, "default-drive: invoke=%u cf=%u ax=%u path=%s last=%lu\n",
-            result.disposition == BX_NTVDM_CPU_RESULT_V2_RESUME, carry(&result),
+            result.disposition == RUNTIME_CPU_RESULT_V2_RESUME, carry(&result),
             result.cpu_delta.gpr16_values[0], old_directory,
             (unsigned long)GetLastError());
         return 13;
     }
-    bx_ntvdm_demgset_set_clock_writer(fake_clock_writer);
+    runtime_demgset_set_clock_writer(fake_clock_writer);
     reset_cpu(&cpu); cpu.ecx=1999u; cpu.edx=0x031cu;
     if (!invoke(&state,&direct,&event,&cpu,&result,0x19u,0) ||
         (result.cpu_delta.gpr16_values[0]&0xffu)!=0u || written_time.wYear!=1999u ||
@@ -88,14 +88,14 @@ int main(void)
     if (!invoke(&state,&direct,&event,&cpu,&result,0x1cu,0) ||
         (result.cpu_delta.gpr16_values[0]&0xffu)!=0u || written_time.wHour!=23u ||
         written_time.wMinute!=58u || written_time.wSecond!=45u || written_time.wMilliseconds!=500u) return 15;
-    bx_ntvdm_demgset_set_clock_writer(NULL);
+    runtime_demgset_set_clock_writer(NULL);
     /* GetTempFileName consumes the historical three-character prefix. */
     if (!GetTempPathA(MAX_PATH,directory) || GetTempFileNameA(directory,"gset",0u,file)==0u || sprintf_s(pattern,sizeof(pattern),"%sgse*.tmp",directory)<0) return 16;
     seed=CreateFileA(file,GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL); if(seed==INVALID_HANDLE_VALUE||!WriteFile(seed,"x",1u,&bytes,NULL)||bytes!=1u)return 16; CloseHandle(seed);
     memcpy(state.guest+0x1400u,pattern,strlen(pattern)+1u); reset_cpu(&cpu); cpu.edx=0x400u;
     if (!invoke(&state,&direct,&event,&cpu,&result,0x09u,1) || carry(&result) || state.guest[0x2000u+30u]==0u) {
         fprintf(stderr, "find-first: invoke=%u cf=%u ax=%u dta-name=%u last=%lu\n",
-            result.disposition == BX_NTVDM_CPU_RESULT_V2_RESUME,
+            result.disposition == RUNTIME_CPU_RESULT_V2_RESUME,
             carry(&result), result.cpu_delta.gpr16_values[0],
             state.guest[0x2000u+30u], (unsigned long)GetLastError());
         return 17;

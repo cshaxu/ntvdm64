@@ -1,5 +1,5 @@
-#ifndef NTDOS64_OPENNT_DEM_GSET_FACADE_H
-#define NTDOS64_OPENNT_DEM_GSET_FACADE_H
+#ifndef APP_OPENNT_DEM_GSET_FACADE_H
+#define APP_OPENNT_DEM_GSET_FACADE_H
 
 /* Same-shaped public-Win32 replacement for reached OpenNT DEM global-setting
  * host calls.  Drive admission and BOP service meaning are outside this ABI. */

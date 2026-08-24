@@ -17,17 +17,17 @@ static __declspec(thread) UINT g_count;
 static __declspec(thread) int g_direct_access_fixture_reply;
 static __declspec(thread) UINT g_direct_access_prompt_count;
 static __declspec(thread) DWORD g_direct_access_category_bits;
-static __declspec(thread) enum bx_ntvdm_opennt_direct_access_choice_v1
-    g_direct_access_last_choice = BX_NTVDM_OPENNT_DIRECT_ACCESS_CHOICE_V1_IGNORE;
+static __declspec(thread) enum runtime_opennt_direct_access_choice_v1
+    g_direct_access_last_choice = RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_V1_IGNORE;
 
-#define BX_NTVDM_RMB_ABORT 1u
-#define BX_NTVDM_RMB_RETRY 2u
-#define BX_NTVDM_RMB_IGNORE 4u
-#define BX_NTVDM_RMB_ICON_INFO 8u
-#define BX_NTVDM_RMB_ICON_BANG 16u
-#define BX_NTVDM_RMB_ICON_STOP 32u
-#define BX_NTVDM_RMB_ICON_WHAT 64u
-#define BX_NTVDM_RMB_EDIT 128u
+#define RUNTIME_RMB_ABORT 1u
+#define RUNTIME_RMB_RETRY 2u
+#define RUNTIME_RMB_IGNORE 4u
+#define RUNTIME_RMB_ICON_INFO 8u
+#define RUNTIME_RMB_ICON_BANG 16u
+#define RUNTIME_RMB_ICON_STOP 32u
+#define RUNTIME_RMB_ICON_WHAT 64u
+#define RUNTIME_RMB_EDIT 128u
 
 static size_t append_oem_message(CHAR *destination, size_t capacity,
     const CHAR *source)
@@ -63,7 +63,7 @@ static void compose_message(UINT error, CHAR *first, CHAR *second,
     }
 }
 
-void bx_ntvdm_opennt_rc_error_dialog(UINT error, CHAR *first, CHAR *second)
+void runtime_opennt_rc_error_dialog(UINT error, CHAR *first, CHAR *second)
 {
     CHAR message[MAX_PATH * 4u];
     compose_message(error, first, second, message, sizeof(message));
@@ -73,7 +73,7 @@ void bx_ntvdm_opennt_rc_error_dialog(UINT error, CHAR *first, CHAR *second)
         (void)MessageBoxA(NULL, message, "NTDOS64", MB_OK | MB_ICONSTOP);
 }
 
-int bx_ntvdm_opennt_rc_message_box(UINT error, CHAR *first, CHAR *second,
+int runtime_opennt_rc_message_box(UINT error, CHAR *first, CHAR *second,
     ULONG flags)
 {
     CHAR message[MAX_PATH * 4u];
@@ -86,28 +86,28 @@ int bx_ntvdm_opennt_rc_message_box(UINT error, CHAR *first, CHAR *second,
      * A public MessageBox has no equivalent control.  Keep its call shape and
      * deterministic terminal reply rather than silently pretending it edited
      * msg2; the PIF edit route stays explicitly deferred to its owner. */
-    if (flags & BX_NTVDM_RMB_EDIT) return (int)BX_NTVDM_RMB_ABORT;
-    if ((flags & (BX_NTVDM_RMB_ABORT | BX_NTVDM_RMB_RETRY |
-            BX_NTVDM_RMB_IGNORE)) == (BX_NTVDM_RMB_ABORT |
-            BX_NTVDM_RMB_RETRY | BX_NTVDM_RMB_IGNORE)) style |= MB_ABORTRETRYIGNORE;
-    else if ((flags & (BX_NTVDM_RMB_ABORT | BX_NTVDM_RMB_IGNORE)) ==
-            (BX_NTVDM_RMB_ABORT | BX_NTVDM_RMB_IGNORE)) style |= MB_OKCANCEL;
-    else if (flags & BX_NTVDM_RMB_RETRY) style |= MB_RETRYCANCEL;
-    if (flags & BX_NTVDM_RMB_ICON_BANG) style |= MB_ICONWARNING;
-    else if (flags & BX_NTVDM_RMB_ICON_INFO) style |= MB_ICONINFORMATION;
-    else if (flags & BX_NTVDM_RMB_ICON_WHAT) style |= MB_ICONQUESTION;
+    if (flags & RUNTIME_RMB_EDIT) return (int)RUNTIME_RMB_ABORT;
+    if ((flags & (RUNTIME_RMB_ABORT | RUNTIME_RMB_RETRY |
+            RUNTIME_RMB_IGNORE)) == (RUNTIME_RMB_ABORT |
+            RUNTIME_RMB_RETRY | RUNTIME_RMB_IGNORE)) style |= MB_ABORTRETRYIGNORE;
+    else if ((flags & (RUNTIME_RMB_ABORT | RUNTIME_RMB_IGNORE)) ==
+            (RUNTIME_RMB_ABORT | RUNTIME_RMB_IGNORE)) style |= MB_OKCANCEL;
+    else if (flags & RUNTIME_RMB_RETRY) style |= MB_RETRYCANCEL;
+    if (flags & RUNTIME_RMB_ICON_BANG) style |= MB_ICONWARNING;
+    else if (flags & RUNTIME_RMB_ICON_INFO) style |= MB_ICONINFORMATION;
+    else if (flags & RUNTIME_RMB_ICON_WHAT) style |= MB_ICONQUESTION;
     else style |= MB_ICONSTOP;
-    if (g_fixture_suppress) return (int)BX_NTVDM_RMB_ABORT;
+    if (g_fixture_suppress) return (int)RUNTIME_RMB_ABORT;
     reply = MessageBoxA(NULL, message, "NTDOS64", style);
     if (reply == IDIGNORE ||
-        ((flags & (BX_NTVDM_RMB_ABORT | BX_NTVDM_RMB_IGNORE)) ==
-            (BX_NTVDM_RMB_ABORT | BX_NTVDM_RMB_IGNORE) && reply == IDCANCEL))
-        return (int)BX_NTVDM_RMB_IGNORE;
-    if (reply == IDRETRY) return (int)BX_NTVDM_RMB_RETRY;
-    return (int)BX_NTVDM_RMB_ABORT;
+        ((flags & (RUNTIME_RMB_ABORT | RUNTIME_RMB_IGNORE)) ==
+            (RUNTIME_RMB_ABORT | RUNTIME_RMB_IGNORE) && reply == IDCANCEL))
+        return (int)RUNTIME_RMB_IGNORE;
+    if (reply == IDRETRY) return (int)RUNTIME_RMB_RETRY;
+    return (int)RUNTIME_RMB_ABORT;
 }
 
-int bx_ntvdm_opennt_direct_access_dialog(const CHAR *message)
+int runtime_opennt_direct_access_dialog(const CHAR *message)
 {
     int reply;
     ++g_direct_access_prompt_count;
@@ -118,16 +118,16 @@ int bx_ntvdm_opennt_direct_access_dialog(const CHAR *message)
             "NTDOS64 unsupported DOS operation", MB_ABORTRETRYIGNORE | MB_ICONSTOP);
     }
     g_direct_access_last_choice = reply == IDIGNORE ?
-        BX_NTVDM_OPENNT_DIRECT_ACCESS_CHOICE_V1_IGNORE :
-        BX_NTVDM_OPENNT_DIRECT_ACCESS_CHOICE_V1_TERMINATE;
-    return g_direct_access_last_choice == BX_NTVDM_OPENNT_DIRECT_ACCESS_CHOICE_V1_IGNORE ?
+        RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_V1_IGNORE :
+        RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_V1_TERMINATE;
+    return g_direct_access_last_choice == RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_V1_IGNORE ?
         IDIGNORE : IDABORT;
 }
 
-enum bx_ntvdm_opennt_direct_access_choice_v1
-bx_ntvdm_opennt_direct_access_last_choice(void)
+enum runtime_opennt_direct_access_choice_v1
+runtime_opennt_direct_access_last_choice(void)
 { return g_direct_access_last_choice; }
-int bx_ntvdm_opennt_direct_access_category_should_prompt(ULONG category)
+int runtime_opennt_direct_access_category_should_prompt(ULONG category)
 {
     DWORD bit;
     if (category >= 32u) return 1;
@@ -136,11 +136,11 @@ int bx_ntvdm_opennt_direct_access_category_should_prompt(ULONG category)
     g_direct_access_category_bits |= bit;
     return 1;
 }
-DWORD bx_ntvdm_opennt_direct_access_category_bits_get(void)
+DWORD runtime_opennt_direct_access_category_bits_get(void)
 { return g_direct_access_category_bits; }
-void bx_ntvdm_opennt_direct_access_category_bits_set(DWORD bits)
+void runtime_opennt_direct_access_category_bits_set(DWORD bits)
 { g_direct_access_category_bits = bits; }
-int bx_ntvdm_opennt_direct_access_load_string(UINT resource_id, CHAR *buffer,
+int runtime_opennt_direct_access_load_string(UINT resource_id, CHAR *buffer,
     UINT capacity)
 {
     const CHAR *text;
@@ -161,23 +161,23 @@ int bx_ntvdm_opennt_direct_access_load_string(UINT resource_id, CHAR *buffer,
     (void)strncpy_s(buffer, capacity, text, _TRUNCATE);
     return (int)strlen(buffer);
 }
-const CHAR *bx_ntvdm_opennt_direct_access_fallback_message(void)
+const CHAR *runtime_opennt_direct_access_fallback_message(void)
 { return "NTVDM direct-access error"; }
-void bx_ntvdm_opennt_direct_access_reset_thread(void)
+void runtime_opennt_direct_access_reset_thread(void)
 {
     g_direct_access_fixture_reply = 0;
     g_direct_access_prompt_count = 0u;
     g_direct_access_category_bits = 0u;
-    g_direct_access_last_choice = BX_NTVDM_OPENNT_DIRECT_ACCESS_CHOICE_V1_IGNORE;
+    g_direct_access_last_choice = RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_V1_IGNORE;
 }
-UINT bx_ntvdm_opennt_direct_access_prompt_count(void)
+UINT runtime_opennt_direct_access_prompt_count(void)
 { return g_direct_access_prompt_count; }
 
-void bx_ntvdm_opennt_error_dialog_fixture_suppress(BOOL suppress)
+void runtime_opennt_error_dialog_fixture_suppress(BOOL suppress)
 { g_fixture_suppress = suppress; }
-UINT bx_ntvdm_opennt_error_dialog_fixture_last_error(void)
+UINT runtime_opennt_error_dialog_fixture_last_error(void)
 { return g_last_error; }
-UINT bx_ntvdm_opennt_error_dialog_fixture_count(void)
+UINT runtime_opennt_error_dialog_fixture_count(void)
 { return g_count; }
-void bx_ntvdm_opennt_direct_access_fixture_reply_set(int reply)
+void runtime_opennt_direct_access_fixture_reply_set(int reply)
 { g_direct_access_fixture_reply = reply; }

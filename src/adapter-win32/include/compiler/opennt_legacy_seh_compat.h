@@ -5,8 +5,8 @@
  * bridge must not pre-include OpenNT's crt/excpt.h because modern nt.h then
  * imports a second, incompatible exception declaration set.
  */
-#ifndef NTDOS64_OPENNT_LEGACY_SEH_COMPAT_H
-#define NTDOS64_OPENNT_LEGACY_SEH_COMPAT_H
+#ifndef APP_OPENNT_LEGACY_SEH_COMPAT_H
+#define APP_OPENNT_LEGACY_SEH_COMPAT_H
 
 #ifndef try
 #define try __try

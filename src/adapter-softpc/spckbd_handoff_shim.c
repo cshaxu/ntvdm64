@@ -1,15 +1,15 @@
 #include "spckbd_handoff_shim.h"
 
-#include "adapter-softpc/bx_ntvdm_mechanical_action_v1.h"
+#include "adapter-softpc/mechanical_action.h"
 
 #include <string.h>
 
-typedef struct bx_ntvdm_spckbd_handoff_call {
+typedef struct runtime_spckbd_handoff_call {
     uint16_t cs, ds, si, ax;
     uint8_t screen_state, active, failed, cf;
-} bx_ntvdm_spckbd_handoff_call;
+} runtime_spckbd_handoff_call;
 
-static __declspec(thread) bx_ntvdm_spckbd_handoff_call g_call;
+static __declspec(thread) runtime_spckbd_handoff_call g_call;
 
 static int real_address(uint16_t segment, uint16_t offset, uint32_t bytes,
     uint32_t *address)
@@ -21,7 +21,7 @@ static int real_address(uint16_t segment, uint16_t offset, uint32_t bytes,
     return 1;
 }
 
-int bx_ntvdm_spckbd_handoff_begin(uint16_t cs, uint16_t ds, uint16_t si,
+int runtime_spckbd_handoff_begin(uint16_t cs, uint16_t ds, uint16_t si,
     uint16_t ax, uint8_t screen_state)
 {
     if (g_call.active != 0u || ax != 0xbeefu || screen_state != 2u) return 0;
@@ -31,14 +31,14 @@ int bx_ntvdm_spckbd_handoff_begin(uint16_t cs, uint16_t ds, uint16_t si,
     return 1;
 }
 
-int bx_ntvdm_spckbd_handoff_end(void)
+int runtime_spckbd_handoff_end(void)
 {
     int ok = g_call.active != 0u && g_call.failed == 0u && g_call.cf == 1u;
     memset(&g_call, 0, sizeof(g_call));
     return ok;
 }
 
-void bx_ntvdm_spckbd_handoff_reset(void)
+void runtime_spckbd_handoff_reset(void)
 {
     memset(&g_call, 0, sizeof(g_call));
 }
@@ -49,7 +49,7 @@ word getSI(void) { return g_call.si; }
 word getAX(void) { return g_call.ax; }
 uint8_t getNtScreenState(void) { return g_call.screen_state; }
 
-int bx_ntvdm_spckbd_table_word(uint16_t index, word *value)
+int runtime_spckbd_table_word(uint16_t index, word *value)
 {
     uint32_t address;
     uint8_t bytes[2];
@@ -57,7 +57,7 @@ int bx_ntvdm_spckbd_table_word(uint16_t index, word *value)
         g_call.si > UINT16_MAX - index * 2u ||
         !real_address(g_call.cs, (uint16_t)(g_call.si + index * 2u),
             sizeof(bytes), &address) ||
-        !bx_ntvdm_mantle_checked_ram_read_v1(address, bytes, sizeof(bytes))) {
+        !runtime_mantle_checked_ram_read_v1(address, bytes, sizeof(bytes))) {
         g_call.failed = 1u;
         return 0;
     }
@@ -67,10 +67,10 @@ int bx_ntvdm_spckbd_table_word(uint16_t index, word *value)
 
 void sas_store_no_check(uint32_t address, uint8_t value)
 {
-    if (g_call.active == 0u || !bx_ntvdm_mantle_checked_ram_write_v1(address,
+    if (g_call.active == 0u || !runtime_mantle_checked_ram_write_v1(address,
             &value, 1u)) g_call.failed = 1u;
 }
 
-void bx_ntvdm_spckbd_handoff_fail(void) { if (g_call.active != 0u) g_call.failed = 1u; }
-int bx_ntvdm_spckbd_handoff_failed(void) { return g_call.failed != 0u; }
+void runtime_spckbd_handoff_fail(void) { if (g_call.active != 0u) g_call.failed = 1u; }
+int runtime_spckbd_handoff_failed(void) { return g_call.failed != 0u; }
 void setCF(uint16_t value) { if (g_call.active != 0u) g_call.cf = value == 1u; }

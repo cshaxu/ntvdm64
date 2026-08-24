@@ -321,7 +321,7 @@ errorReturn:
     /* OpenNT source: demfile.c published its 32-bit HANDLE directly in
      * AX:BP. The CLI composition uses a session-local opaque token so an
      * x64 host HANDLE never crosses the guest ABI. */
-    if (!bx_ntvdm_demfile_publish_handle(hFile)) {
+    if (!runtime_demfile_publish_handle(hFile)) {
         /* OpenNT only split a 32-bit HANDLE into AX:BP.  A modern session
          * must be able to reject opaque-token publication without exposing a
          * host pointer; retain its normal demClientError/CF failure route. */
@@ -730,7 +730,7 @@ DWORD   dwLastError;
     setCX ((USHORT)dwFileSize);
     setBX ((USHORT)(dwFileSize >> 16 ));
     /* See the same OpenNT HANDLE-to-token divergence in demOpen above. */
-    if (!bx_ntvdm_demfile_publish_handle(hFile)) {
+    if (!runtime_demfile_publish_handle(hFile)) {
         /* See demOpen's OpenNT HANDLE-to-token publication divergence. */
         CloseHandle(hFile);
         demClientError(INVALID_HANDLE_VALUE, *lpFileName);

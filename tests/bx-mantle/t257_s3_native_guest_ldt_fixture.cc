@@ -1,23 +1,23 @@
-#include "adapter-softpc/bx_ntvdm_finite_run.h"
-#include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
+#include "adapter-softpc/finite_run.h"
+#include "adapter-bop/generic_ud_bridge.h"
 
 #include <string.h>
 
-extern "C" int bx_ntvdm_mantle_generic_ud_bridge_v1(
-  const struct bx_ntvdm_generic_ud_event_v1 *event,
-  struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
+extern "C" int runtime_mantle_generic_ud_bridge_v1(
+  const struct runtime_generic_ud_event_v1 *event,
+  struct runtime_generic_ud_outcome_v1 *outcome)
 {
   if (event == 0 || outcome == 0 || event->vector != 6u) return 0;
-  outcome->abi_version = BX_NTVDM_GENERIC_UD_EVENT_V1_VERSION;
-  outcome->disposition = BX_NTVDM_GENERIC_UD_STOP;
-  bx_ntvdm_mantle_generic_ud_stop_observation_mark();
+  outcome->abi_version = RUNTIME_GENERIC_UD_EVENT_V1_VERSION;
+  outcome->disposition = RUNTIME_GENERIC_UD_STOP;
+  runtime_mantle_generic_ud_stop_observation_mark();
   return 1;
 }
 
-static void initialize_request(struct bx_ntvdm_finite_run_request *request)
+static void initialize_request(struct runtime_finite_run_request *request)
 {
   memset(request, 0, sizeof(*request));
-  request->request_version = BX_NTVDM_FINITE_RUN_REQUEST_VERSION;
+  request->request_version = RUNTIME_FINITE_RUN_REQUEST_VERSION;
   request->entry_physical_address = 0u;
   request->entry_cs = 0u;
   request->entry_eip = 0x100u;
@@ -28,8 +28,8 @@ static void initialize_request(struct bx_ntvdm_finite_run_request *request)
 
 int main(void)
 {
-  struct bx_ntvdm_finite_run_request request;
-  bx_ntvdm_finite_run_status status;
+  struct runtime_finite_run_request request;
+  runtime_finite_run_status status;
 
   initialize_request(&request);
   /* Real-mode setup: load a guest-memory GDT, enter PE, far-jump to code. */
@@ -73,6 +73,6 @@ int main(void)
   request.entry_bytes[0x708] = 0xffu; request.entry_bytes[0x709] = 0xffu;
   request.entry_bytes[0x70d] = 0x92u;
 
-  status = bx_ntvdm_run_finite_bare_bytes(&request);
-  return status == BX_NTVDM_FINITE_RUN_COMPLETED_UD_STOP ? 0 : 1;
+  status = runtime_run_finite_bare_bytes(&request);
+  return status == RUNTIME_FINITE_RUN_COMPLETED_UD_STOP ? 0 : 1;
 }

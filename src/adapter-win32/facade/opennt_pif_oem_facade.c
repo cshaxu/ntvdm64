@@ -24,7 +24,7 @@ static BOOL ansi_to_oem(LPCSTR source, LPSTR destination, DWORD destination_byte
         CharToOemBuffA(source, destination, (DWORD)bytes);
 }
 
-DWORD bx_ntvdm_command_pif_expand_environment_strings_oem(LPCSTR source,
+DWORD runtime_command_pif_expand_environment_strings_oem(LPCSTR source,
     LPSTR destination, DWORD destination_bytes)
 {
     CHAR ansi_source[MAX_PATH + 1u];
@@ -38,7 +38,7 @@ DWORD bx_ntvdm_command_pif_expand_environment_strings_oem(LPCSTR source,
     return result;
 }
 
-DWORD bx_ntvdm_command_pif_get_full_path_name_oem(LPCSTR source,
+DWORD runtime_command_pif_get_full_path_name_oem(LPCSTR source,
     DWORD destination_bytes, LPSTR destination, LPSTR *file_part)
 {
     CHAR ansi_source[MAX_PATH + 1u];
@@ -55,7 +55,7 @@ DWORD bx_ntvdm_command_pif_get_full_path_name_oem(LPCSTR source,
     return result;
 }
 
-DWORD bx_ntvdm_command_pif_get_short_path_name_oem(LPCSTR source,
+DWORD runtime_command_pif_get_short_path_name_oem(LPCSTR source,
     LPSTR destination, DWORD destination_bytes)
 {
     CHAR ansi_source[MAX_PATH + 1u];
@@ -69,7 +69,7 @@ DWORD bx_ntvdm_command_pif_get_short_path_name_oem(LPCSTR source,
     return result;
 }
 
-DWORD bx_ntvdm_command_pif_search_path_oem(LPCSTR path, LPCSTR file_name,
+DWORD runtime_command_pif_search_path_oem(LPCSTR path, LPCSTR file_name,
     LPCSTR extension, DWORD destination_bytes, LPSTR destination,
     LPSTR *file_part)
 {
@@ -93,7 +93,7 @@ DWORD bx_ntvdm_command_pif_search_path_oem(LPCSTR path, LPCSTR file_name,
     return result;
 }
 
-BOOL bx_ntvdm_command_pif_set_console_title_oem(LPCSTR title)
+BOOL runtime_command_pif_set_console_title_oem(LPCSTR title)
 {
     CHAR ansi_title[MAX_PATH + 1u];
     return oem_to_ansi(title, ansi_title, (DWORD)sizeof(ansi_title)) &&

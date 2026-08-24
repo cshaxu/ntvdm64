@@ -1,8 +1,8 @@
 $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
-$headerPath = Join-Path $repositoryRoot 'src/bx-mantle/bx_ntvdm_finite_run.h'
-$sourcePath = Join-Path $repositoryRoot 'src/bx-mantle/bx_ntvdm_finite_run.cc'
+$headerPath = Join-Path $repositoryRoot 'src/bx-mantle/finite_run.h'
+$sourcePath = Join-Path $repositoryRoot 'src/bx-mantle/finite_run.cc'
 $toolPath = Join-Path $repositoryRoot 'tools/probe/Invoke-T198S3FiniteNativeRunProbe.ps1'
 foreach ($path in @($headerPath, $sourcePath, $toolPath)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing T198 S3 input: $path" }

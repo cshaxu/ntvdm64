@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_BOP_SHIM_DEMGSET_SHIM_H
-#define BX_NTVDM_BOP_SHIM_DEMGSET_SHIM_H
+#ifndef RUNTIME_BOP_SHIM_DEMGSET_SHIM_H
+#define RUNTIME_BOP_SHIM_DEMGSET_SHIM_H
 
 /*
  * Compatibility boundary for the directly imported OpenNT file
@@ -56,7 +56,7 @@ typedef struct _DOSWOWDATA {
 /* Exact OpenNT demdata.c type: this points to a 32-bit guest FAR address,
  * not to a host pointer. */
 extern ULONG UNALIGNED *pulDTALocation;
-typedef bx_ntvdm_demhndl_extended_error *PDEMEXTERR;
+typedef runtime_demhndl_extended_error *PDEMEXTERR;
 
 UINT GetDriveTypeOem(LPSTR root);
 PBDS demGetBDS(BYTE drive);
@@ -64,13 +64,13 @@ BOOL demGetBPB(PBDS bds);
 BOOL demGetDiskFreeSpace(BYTE drive, WORD *bytes_per_sector,
     WORD *sectors_per_cluster, WORD *total_clusters, WORD *free_clusters);
 BOOL GetMediaId(CHAR drive, PVOLINFO info);
-typedef BOOL (*bx_ntvdm_demgset_clock_writer)(const SYSTEMTIME *time);
-BOOL bx_ntvdm_demgset_set_local_time(const SYSTEMTIME *time);
-void bx_ntvdm_demgset_set_clock_writer(bx_ntvdm_demgset_clock_writer writer);
+typedef BOOL (*runtime_demgset_clock_writer)(const SYSTEMTIME *time);
+BOOL runtime_demgset_set_local_time(const SYSTEMTIME *time);
+void runtime_demgset_set_clock_writer(runtime_demgset_clock_writer writer);
 /* The direct OpenNT body selects services through opennt-bop composition.
  * The stable DTA registration surface remains declared here for sibling DEM
  * host capability headers without a reverse BOP include. */
-int bx_ntvdm_demgset_register_dta(USHORT ds, USHORT dta_offset,
+int runtime_demgset_register_dta(USHORT ds, USHORT dta_offset,
     USHORT pdb_offset, USHORT error_offset, USHORT wow_offset);
 
 #pragma warning(disable:4057 4101 4131 4244 4305 4311 4312 4554 4706 4996)

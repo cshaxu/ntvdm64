@@ -12,19 +12,19 @@ static int write_guest(void *state, uint32_t address, const uint8_t *buffer, uin
 { fixture_context *context = (fixture_context *)state; if (context == NULL || address > sizeof(context->guest) || bytes > sizeof(context->guest) - address) return 0; memcpy(context->guest + address, buffer, bytes); return 1; }
 static int write_exact(HANDLE file, const void *data, DWORD bytes)
 { DWORD written = 0u; return WriteFile(file, data, bytes, &written, NULL) && written == bytes; }
-static void event_initialize(bx_ntvdm_exception_event_v1 *event)
-{ memset(event, 0, sizeof(*event)); event->magic = BX_NTVDM_EXCEPTION_ABI_MAGIC; event->abi_version = BX_NTVDM_EXCEPTION_ABI_VERSION; event->struct_bytes = sizeof(*event); event->kind = BX_NTVDM_EXCEPTION_EVENT_CPU_EXCEPTION; event->vector = 6u; event->fault_rip = 0x500u; }
-static int invoke(fixture_context *context, bx_ntvdm_exception_event_v1 *event,
-    bx_ntvdm_cpu_state_v1 *cpu, bx_ntvdm_cpu_result_v2 *result,
-    bx_ntvdm_command_misc_session *session, uint32_t first_call, uint32_t vdm_for_wow)
-{ bx_ntvdm_command_misc_call call; memset(&call, 0, sizeof(call)); call.magic = BX_NTVDM_COMMAND_MISC_CALL_MAGIC; call.abi_version = BX_NTVDM_COMMAND_MISC_CALL_VERSION; call.struct_bytes = sizeof(call); call.service = BX_NTVDM_COMMAND_MISC_GET_NEXT; call.boundary = event; call.cpu = cpu; call.result = result; call.guest_state = context; call.guest_read = read_guest; call.guest_write = write_guest; call.session = session; call.first_call = first_call; call.vdm_for_wow = vdm_for_wow; return bx_ntvdm_command_misc_invoke(&call); }
+static void event_initialize(runtime_exception_event_v1 *event)
+{ memset(event, 0, sizeof(*event)); event->magic = RUNTIME_EXCEPTION_ABI_MAGIC; event->abi_version = RUNTIME_EXCEPTION_ABI_VERSION; event->struct_bytes = sizeof(*event); event->kind = RUNTIME_EXCEPTION_EVENT_CPU_EXCEPTION; event->vector = 6u; event->fault_rip = 0x500u; }
+static int invoke(fixture_context *context, runtime_exception_event_v1 *event,
+    runtime_cpu_state_v1 *cpu, runtime_cpu_result_v2 *result,
+    runtime_command_misc_session *session, uint32_t first_call, uint32_t vdm_for_wow)
+{ runtime_command_misc_call call; memset(&call, 0, sizeof(call)); call.magic = RUNTIME_COMMAND_MISC_CALL_MAGIC; call.abi_version = RUNTIME_COMMAND_MISC_CALL_VERSION; call.struct_bytes = sizeof(call); call.service = RUNTIME_COMMAND_MISC_GET_NEXT; call.boundary = event; call.cpu = cpu; call.result = result; call.guest_state = context; call.guest_read = read_guest; call.guest_write = write_guest; call.session = session; call.first_call = first_call; call.vdm_for_wow = vdm_for_wow; return runtime_command_misc_invoke(&call); }
 static int has_prefix(const CHAR *strings, uint32_t bytes, const CHAR *prefix)
 { const CHAR *cursor = strings, *end = strings + bytes; size_t prefix_bytes = strlen(prefix); while (cursor < end && *cursor != '\0') { size_t current_bytes = strlen(cursor) + 1u; if (current_bytes > (size_t)(end - cursor)) return 0; if (strncmp(cursor, prefix, prefix_bytes) == 0) return 1; cursor += current_bytes; } return 0; }
 
 int main(void)
 {
-    fixture_context context; bx_ntvdm_exception_event_v1 event; bx_ntvdm_cpu_state_v1 cpu;
-    bx_ntvdm_cpu_result_v2 result; bx_ntvdm_command_misc_session session, retry_session, batch_session, pif_session; CMDINFO *info;
+    fixture_context context; runtime_exception_event_v1 event; runtime_cpu_state_v1 cpu;
+    runtime_cpu_result_v2 result; runtime_command_misc_session session, retry_session, batch_session, pif_session; CMDINFO *info;
     uint32_t info_address = 0x1000u, command_address = 0x4000u, app_address = 0x5000u, required_environment;
     CHAR large_environment[1400];
     CHAR directory[MAX_PATH + 1u], pif_path[MAX_PATH + 1u], pif_target[MAX_PATH + 1u];
@@ -32,16 +32,16 @@ int main(void)
     STDPIF standard_pif; PIFEXTHDR extension_header, nt_extension_header;
     WNTPIF31 nt_extension; HANDLE pif_file; DWORD directory_bytes;
     memset(&context, 0, sizeof(context)); event_initialize(&event);
-    bx_ntvdm_cpu_state_v1_initialize(&cpu, BX_NTVDM_CPU_EXECUTION_REAL); cpu.ds = 0x100u;
-    bx_ntvdm_command_misc_session_initialize(&session);
-    if (!bx_ntvdm_command_misc_session_set_command_source(&session,
+    runtime_cpu_state_v1_initialize(&cpu, RUNTIME_CPU_EXECUTION_REAL); cpu.ds = 0x100u;
+    runtime_command_misc_session_initialize(&session);
+    if (!runtime_command_misc_session_set_command_source(&session,
             "C:\\TOOLS\\HELLO.COM", "-x", 2u, 1252u)) { fprintf(stderr, "source\n"); return 1; }
     info = (CMDINFO *)(context.guest + info_address); info->EnvSeg = 0x300u; info->EnvSize = 0x100u;
     info->CmdLineSeg = 0x400u; info->CmdLineOff = 0u; info->CmdLineSize = 128u;
     info->ExecPathSeg = 0x500u; info->ExecPathOff = 0u; info->ExecPathSize = 128u;
     if (!invoke(&context, &event, &cpu, &result, &session, 1u, 0u) ||
-        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
-        (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
+        result.disposition != RUNTIME_CPU_RESULT_V2_RESUME ||
+        (result.eflags_values & RUNTIME_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         result.resume_rip != event.fault_rip + 4u) { fprintf(stderr, "first\n"); return 2; }
     info = (CMDINFO *)(context.guest + info_address);
     if (info->ExecExtType != COM_EXTENTION || info->ExecPathSize != 19u ||
@@ -51,16 +51,16 @@ int main(void)
         strcmp((CHAR *)context.guest + command_address + 2u, "HELLO -x\r\n") != 0 ||
         session.command_source_delivered != 1u) { fprintf(stderr, "result ext=%u path=%u drive=%u cp=%u app=%s cnt=%u line=%s delivered=%u\n", info->ExecExtType, info->ExecPathSize, info->CurDrive, info->CodePage, context.guest + app_address, context.guest[command_address + 1u], context.guest + command_address + 2u, session.command_source_delivered); return 3; }
     if (!invoke(&context, &event, &cpu, &result, &session, 0u, 0u) ||
-        result.disposition != BX_NTVDM_CPU_RESULT_V2_STOP) { fprintf(stderr, "terminal\n"); return 4; }
-    bx_ntvdm_command_misc_session_initialize(&batch_session);
+        result.disposition != RUNTIME_CPU_RESULT_V2_STOP) { fprintf(stderr, "terminal\n"); return 4; }
+    runtime_command_misc_session_initialize(&batch_session);
     memset(&context, 0, sizeof(context));
-    if (!bx_ntvdm_command_misc_session_set_command_source(&batch_session,
+    if (!runtime_command_misc_session_set_command_source(&batch_session,
             "C:\\TOOLS\\START.BAT", "/q", 2u, 1252u)) return 5;
     info = (CMDINFO *)(context.guest + info_address); info->EnvSeg = 0x300u; info->EnvSize = 0x100u;
     info->CmdLineSeg = 0x400u; info->CmdLineSize = 128u;
     info->ExecPathSeg = 0x500u; info->ExecPathSize = 128u;
     if (!invoke(&context, &event, &cpu, &result, &batch_session, 1u, 0u) ||
-        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+        result.disposition != RUNTIME_CPU_RESULT_V2_RESUME ||
         info->ExecExtType != BAT_EXTENTION ||
         strcmp((CHAR *)context.guest + app_address, "C:\\TOOLS\\START.BAT") != 0 ||
         strcmp((CHAR *)context.guest + command_address + 2u, "START /q\r\n") != 0 ||
@@ -94,55 +94,55 @@ int main(void)
         !write_exact(pif_file, &extension_header, sizeof(extension_header)) ||
         !write_exact(pif_file, &nt_extension_header, sizeof(nt_extension_header)) ||
         !write_exact(pif_file, &nt_extension, sizeof(nt_extension))) return 6;
-    CloseHandle(pif_file); memset(&context, 0, sizeof(context)); bx_ntvdm_command_misc_session_initialize(&pif_session); DosSessionId = 1u;
-    if (!bx_ntvdm_command_misc_session_set_command_source(&pif_session, pif_path, "", 2u, 1252u)) return 6;
+    CloseHandle(pif_file); memset(&context, 0, sizeof(context)); runtime_command_misc_session_initialize(&pif_session); DosSessionId = 1u;
+    if (!runtime_command_misc_session_set_command_source(&pif_session, pif_path, "", 2u, 1252u)) return 6;
     info = (CMDINFO *)(context.guest + info_address); info->EnvSeg = 0x300u; info->EnvSize = 0x100u;
     info->CmdLineSeg = 0x400u; info->CmdLineSize = 128u; info->ExecPathSeg = 0x500u; info->ExecPathSize = 128u;
     /* On the first VDM call OpenNT consumes PIF metadata pre-populated by its
      * console host; this standalone source fixture supplies only a pathname.
      * Preserve the original result (PIF remains the submitted executable) and
      * leave parser/metadata expansion to the dedicated T234 PIF fixture. */
-    if (!invoke(&context, &event, &cpu, &result, &pif_session, 1u, 0u) || result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
+    if (!invoke(&context, &event, &cpu, &result, &pif_session, 1u, 0u) || result.disposition != RUNTIME_CPU_RESULT_V2_RESUME ||
         info->ExecExtType != UNKNOWN_EXTENTION || _stricmp((CHAR *)context.guest + app_address, pif_path) != 0 ||
         pif_session.command_source_delivered != 1u) return 7;
-    bx_ntvdm_command_misc_session_dispose(&pif_session); DeleteFileA(pif_path); DeleteFileA(pif_target);
-    bx_ntvdm_command_misc_session_initialize(&retry_session);
+    runtime_command_misc_session_dispose(&pif_session); DeleteFileA(pif_path); DeleteFileA(pif_target);
+    runtime_command_misc_session_initialize(&retry_session);
     memset(large_environment, 0, sizeof(large_environment));
     memcpy(large_environment, "FOO=", 4u); memset(large_environment + 4u, 'E', 1300u);
-    if (!bx_ntvdm_command_misc_session_set_command_source(&retry_session,
+    if (!runtime_command_misc_session_set_command_source(&retry_session,
             "C:\\TOOLS\\RETRY.EXE", "", 2u, 932u) ||
-        !bx_ntvdm_command_misc_session_set_command_environment(&retry_session,
+        !runtime_command_misc_session_set_command_environment(&retry_session,
             large_environment, 1306u)) return 8;
     memset(&context, 0, sizeof(context));
     info = (CMDINFO *)(context.guest + info_address); info->EnvSeg = 0x300u; info->EnvSize = 4u;
     info->CmdLineSeg = 0x400u; info->CmdLineSize = 128u;
     info->ExecPathSeg = 0x500u; info->ExecPathSize = 128u;
     if (!invoke(&context, &event, &cpu, &result, &retry_session, 0u, 0u) ||
-        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
-        (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) == 0u ||
+        result.disposition != RUNTIME_CPU_RESULT_V2_RESUME ||
+        (result.eflags_values & RUNTIME_CPU_RESULT_V2_EFLAGS_CF) == 0u ||
         result.cpu_delta.gpr16_values[0] <= 1024u || retry_session.command_source_repeat_pending == 0u ||
         retry_session.command_source_delivered != 0u) return 6;
     required_environment = result.cpu_delta.gpr16_values[0];
     info->EnvSize = (USHORT)required_environment;
     if (!invoke(&context, &event, &cpu, &result, &retry_session, 0u, 0u) ||
-        result.disposition != BX_NTVDM_CPU_RESULT_V2_RESUME ||
-        (result.eflags_values & BX_NTVDM_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
+        result.disposition != RUNTIME_CPU_RESULT_V2_RESUME ||
+        (result.eflags_values & RUNTIME_CPU_RESULT_V2_EFLAGS_CF) != 0u ||
         retry_session.command_source_repeat_pending != 0u || retry_session.command_source_delivered != 1u ||
         info->CodePage != 932u ||
         strcmp((CHAR *)context.guest + app_address, "C:\\TOOLS\\RETRY.EXE") != 0 ||
         !has_prefix((CHAR *)context.guest + 0x3000u, required_environment, "FOO=")) return 9;
     memset(&context, 0, sizeof(context));
     if (!invoke(&context, &event, &cpu, &result, &retry_session, 0u, 1u) ||
-        result.disposition != BX_NTVDM_CPU_RESULT_V2_STOP ||
+        result.disposition != RUNTIME_CPU_RESULT_V2_STOP ||
         result.resume_rip != 0u || retry_session.command_source_delivered != 1u) {
         fprintf(stderr, "WOW unavailable disposition=%u rip=%llx delivered=%u\\n",
             result.disposition, (unsigned long long)result.resume_rip,
             retry_session.command_source_delivered);
         return 10;
     }
-    bx_ntvdm_command_misc_session_dispose(&session);
-    bx_ntvdm_command_misc_session_dispose(&retry_session);
-    bx_ntvdm_command_misc_session_dispose(&batch_session);
+    runtime_command_misc_session_dispose(&session);
+    runtime_command_misc_session_dispose(&retry_session);
+    runtime_command_misc_session_dispose(&batch_session);
     puts("T231 S7 direct OpenNT cmdGetNextCmd local handoff/retry plus explicit VDMForWOW unavailable stop verified");
     return 0;
 }

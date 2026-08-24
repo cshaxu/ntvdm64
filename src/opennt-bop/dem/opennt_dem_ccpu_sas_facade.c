@@ -8,8 +8,8 @@
  */
 
 #include "opennt_dem_ccpu_sas_facade.h"
-BOOLEAN bx_ntvdm_vr_initialized_provider(VOID);
-#include "bx_ntvdm_guest_pointer_manager.h"
+BOOLEAN runtime_vr_initialized_provider(VOID);
+#include "guest_pointer_manager.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -29,22 +29,22 @@ void demPipeFileEOF(void);
  * crosses the fixed bx-vdm ABI. */
 #pragma warning(push)
 #pragma warning(disable: 4324)
-typedef struct bx_ntvdm_demhndl_active_call {
-    bx_ntvdm_demhndl_call *call;
+typedef struct runtime_demhndl_active_call {
+    runtime_demhndl_call *call;
     /* Imported DEM bodies can restore registers and immediately consume the
      * restored values (notably demRetry -> apfnSVC[]).  Keep the bounded
      * copied CPU state mutable inside this call while emitting only the
      * existing typed low-16/segment result delta. */
-    bx_ntvdm_cpu_state_v1 cpu;
+    runtime_cpu_state_v1 cpu;
     uint32_t handle_token;
     uint32_t guest_address;
     uint32_t guest_bytes;
     uint8_t *guest_buffer;
-    bx_ntvdm_guest_pointer_lease *guest_buffer_lease;
+    runtime_guest_pointer_lease *guest_buffer_lease;
     uint8_t *path_buffers[4];
     uint32_t path_buffer_count;
-    struct { const bx_ntvdm_demhndl_guest_span *span;
-        bx_ntvdm_guest_pointer_lease *lease; uint8_t *buffer; } spans[8];
+    struct { const runtime_demhndl_guest_span *span;
+        runtime_guest_pointer_lease *lease; uint8_t *buffer; } spans[8];
     uint32_t span_count;
     int transfer_from_guest;
     int flush_guest_buffer_on_return;
@@ -59,18 +59,18 @@ typedef struct bx_ntvdm_demhndl_active_call {
     uint32_t dasd_mapping_count;
     int loader_mode;
     jmp_buf terminate_jump;
-} bx_ntvdm_demhndl_active_call;
+} runtime_demhndl_active_call;
 #pragma warning(pop)
 
-static __declspec(thread) bx_ntvdm_demhndl_active_call *g_active_call;
-static __declspec(thread) bx_ntvdm_demhndl_extended_error g_extended_error;
-static __declspec(thread) bx_ntvdm_demhndl_post_body_hook g_post_body_hook;
-__declspec(thread) bx_ntvdm_demhndl_extended_error *pExtendedError;
+static __declspec(thread) runtime_demhndl_active_call *g_active_call;
+static __declspec(thread) runtime_demhndl_extended_error g_extended_error;
+static __declspec(thread) runtime_demhndl_post_body_hook g_post_body_hook;
+__declspec(thread) runtime_demhndl_extended_error *pExtendedError;
 
-void bx_ntvdm_demhndl_set_post_body_hook(bx_ntvdm_demhndl_post_body_hook hook)
+void runtime_demhndl_set_post_body_hook(runtime_demhndl_post_body_hook hook)
 { g_post_body_hook = hook; }
 
-static bx_ntvdm_demhndl_active_call *active_call(void)
+static runtime_demhndl_active_call *active_call(void)
 {
     return g_active_call;
 }
@@ -91,17 +91,17 @@ static int is_demfcb_path_service(uint32_t service)
         service == 0x2du || service == 0x31u;
 }
 
-static LPVOID acquire_guest_span(bx_ntvdm_demhndl_active_call *active,
+static LPVOID acquire_guest_span(runtime_demhndl_active_call *active,
     uint32_t bytes, int flush_on_return)
 {
     if (active == NULL || active->call == NULL || active->guest_buffer != NULL)
         return NULL;
     active->guest_bytes = bytes;
-    if (!bx_ntvdm_guest_pointer_manager_acquire_real_mode(
-            bx_ntvdm_guest_pointer_manager_session(),
+    if (!runtime_guest_pointer_manager_acquire_real_mode(
+            runtime_guest_pointer_manager_session(),
             (USHORT)(active->guest_address >> 4),
             (USHORT)(active->guest_address & 0x0fu), bytes,
-            BX_NTVDM_GUEST_POINTER_READ | BX_NTVDM_GUEST_POINTER_WRITE,
+            RUNTIME_GUEST_POINTER_READ | RUNTIME_GUEST_POINTER_WRITE,
             &active->guest_buffer_lease, (void **)&active->guest_buffer)) {
         SetLastError(ERROR_INVALID_ADDRESS); return NULL;
     }
@@ -109,25 +109,25 @@ static LPVOID acquire_guest_span(bx_ntvdm_demhndl_active_call *active,
     return active->guest_buffer;
 }
 
-static LPVOID acquire_fixed_guest_span(bx_ntvdm_demhndl_active_call *active,
+static LPVOID acquire_fixed_guest_span(runtime_demhndl_active_call *active,
     uint32_t bytes)
 {
     return acquire_guest_span(active, bytes, 1);
 }
 
-static LPVOID acquire_declared_span(bx_ntvdm_demhndl_active_call *active,
+static LPVOID acquire_declared_span(runtime_demhndl_active_call *active,
     USHORT segment, USHORT offset)
 {
     uint32_t i, slot;
     if (!active || !active->call) return NULL;
     for (i = 0; i < active->call->guest_span_count; ++i) {
-        const bx_ntvdm_demhndl_guest_span *span = &active->call->guest_spans[i];
+        const runtime_demhndl_guest_span *span = &active->call->guest_spans[i];
         if (span->segment != segment || span->offset != offset) continue;
         slot = active->span_count;
         if (slot >= 8u || span->bytes == 0u ||
-            !bx_ntvdm_guest_pointer_manager_acquire_real_mode(
-                bx_ntvdm_guest_pointer_manager_session(), segment, offset, span->bytes,
-                BX_NTVDM_GUEST_POINTER_READ | BX_NTVDM_GUEST_POINTER_WRITE,
+            !runtime_guest_pointer_manager_acquire_real_mode(
+                runtime_guest_pointer_manager_session(), segment, offset, span->bytes,
+                RUNTIME_GUEST_POINTER_READ | RUNTIME_GUEST_POINTER_WRITE,
                 &active->spans[slot].lease, (void **)&active->spans[slot].buffer)) return NULL;
         active->spans[slot].span = span; active->span_count++;
         return active->spans[slot].buffer;
@@ -135,7 +135,7 @@ static LPVOID acquire_declared_span(bx_ntvdm_demhndl_active_call *active,
     return NULL;
 }
 
-static LPVOID acquire_dasd_payload_span(bx_ntvdm_demhndl_active_call *active,
+static LPVOID acquire_dasd_payload_span(runtime_demhndl_active_call *active,
     uint32_t address, uint32_t bytes)
 {
     uint32_t index;
@@ -159,7 +159,7 @@ static uint16_t packed_u16(const uint8_t *bytes, uint32_t offset)
     return (uint16_t)((uint16_t)bytes[offset] | ((uint16_t)bytes[offset + 1u] << 8));
 }
 
-static uint32_t dasd_mapping_bytes(bx_ntvdm_demhndl_active_call *active)
+static uint32_t dasd_mapping_bytes(runtime_demhndl_active_call *active)
 {
     uint32_t service, mapping;
     uint16_t sectors;
@@ -168,10 +168,10 @@ static uint32_t dasd_mapping_bytes(bx_ntvdm_demhndl_active_call *active)
     mapping = active->dasd_mapping_count++;
     if (service == 0x29u || service == 0x2au) {
         if (mapping == 0u) {
-            if (bx_ntvdm_demhndl_get_cx() == 0xffffu) return 10u; /* DISKIO */
-            return (uint32_t)bx_ntvdm_demhndl_get_cx() * 512u;
+            if (runtime_demhndl_get_cx() == 0xffffu) return 10u; /* DISKIO */
+            return (uint32_t)runtime_demhndl_get_cx() * 512u;
         }
-        if (mapping == 1u && bx_ntvdm_demhndl_get_cx() == 0xffffu &&
+        if (mapping == 1u && runtime_demhndl_get_cx() == 0xffffu &&
             active->guest_buffer != NULL && active->guest_bytes == 10u) {
             sectors = packed_u16(active->guest_buffer, 4u);
             return (uint32_t)sectors * 512u;
@@ -180,7 +180,7 @@ static uint32_t dasd_mapping_bytes(bx_ntvdm_demhndl_active_call *active)
     }
     if (service != 0x21u) return 0u;
     if (mapping == 0u) {
-        switch (bx_ntvdm_demhndl_get_cl()) {
+        switch (runtime_demhndl_get_cl()) {
         case 0x40u: case 0x60u: return 32u; /* DEVICEPARAMETERS */
         case 0x41u: case 0x61u: return 13u; /* RW_BLOCK */
         case 0x42u: case 0x62u: return 5u;  /* FMT_BLOCK */
@@ -191,7 +191,7 @@ static uint32_t dasd_mapping_bytes(bx_ntvdm_demhndl_active_call *active)
     }
     if (mapping == 1u && active->guest_buffer != NULL &&
         active->guest_bytes == 13u &&
-        (bx_ntvdm_demhndl_get_cl() == 0x41u || bx_ntvdm_demhndl_get_cl() == 0x61u)) {
+        (runtime_demhndl_get_cl() == 0x41u || runtime_demhndl_get_cl() == 0x61u)) {
         sectors = packed_u16(active->guest_buffer, 7u);
         return (uint32_t)sectors * 512u;
     }
@@ -243,7 +243,7 @@ static uint32_t demgset_fixed_guest_bytes(uint32_t service)
     }
 }
 
-static LPVOID acquire_guest_oem_path(bx_ntvdm_demhndl_active_call *active,
+static LPVOID acquire_guest_oem_path(runtime_demhndl_active_call *active,
     uint32_t address)
 {
     uint8_t *buffer;
@@ -276,7 +276,7 @@ static LPVOID acquire_guest_oem_path(bx_ntvdm_demhndl_active_call *active,
 
 static int set_register(uint32_t register_index, USHORT value)
 {
-    bx_ntvdm_demhndl_active_call *active = active_call();
+    runtime_demhndl_active_call *active = active_call();
     uint32_t *target = NULL;
     if (active == 0 || active->call == 0) return 0;
     switch (register_index) {
@@ -291,13 +291,13 @@ static int set_register(uint32_t register_index, USHORT value)
     default: return 0;
     }
     *target = (*target & 0xffff0000u) | value;
-    return bx_ntvdm_cpu_delta_v1_set_gpr16(&active->call->result->cpu_delta,
+    return runtime_cpu_delta_v1_set_gpr16(&active->call->result->cpu_delta,
         register_index, value);
 }
 
 static int set_segment(uint32_t segment_index, USHORT value)
 {
-    bx_ntvdm_demhndl_active_call *active = active_call();
+    runtime_demhndl_active_call *active = active_call();
     USHORT *target = NULL;
     if (active == 0 || active->call == 0) return 0;
     /* Bochs sregs[] order, carried unchanged by the generic-UD record. */
@@ -311,54 +311,54 @@ static int set_segment(uint32_t segment_index, USHORT value)
     default: return 0;
     }
     *target = value;
-    return bx_ntvdm_cpu_delta_v1_set_segment(&active->call->result->cpu_delta,
+    return runtime_cpu_delta_v1_set_segment(&active->call->result->cpu_delta,
         segment_index, value);
 }
 
-int bx_ntvdm_demhndl_call_valid(const bx_ntvdm_demhndl_call *call)
+int runtime_demhndl_call_valid(const runtime_demhndl_call *call)
 {
-    return call != 0 && call->magic == BX_NTVDM_DEMHNDL_CALL_MAGIC &&
-        call->abi_version == BX_NTVDM_DEMHNDL_CALL_VERSION &&
+    return call != 0 && call->magic == RUNTIME_DEMHNDL_CALL_MAGIC &&
+        call->abi_version == RUNTIME_DEMHNDL_CALL_VERSION &&
         call->struct_bytes == sizeof(*call) && call->direct != 0 &&
-        bx_ntvdm_dem_direct_context_valid(call->direct) &&
-        call->boundary != 0 && bx_ntvdm_exception_event_v1_valid(call->boundary) &&
-        call->cpu != 0 && bx_ntvdm_cpu_state_v1_valid(call->cpu) &&
-        call->cpu->execution_mode == BX_NTVDM_CPU_EXECUTION_REAL &&
+        runtime_dem_direct_context_valid(call->direct) &&
+        call->boundary != 0 && runtime_exception_event_v1_valid(call->boundary) &&
+        call->cpu != 0 && runtime_cpu_state_v1_valid(call->cpu) &&
+        call->cpu->execution_mode == RUNTIME_CPU_EXECUTION_REAL &&
         call->result != 0 && call->guest_read != 0 && call->guest_write != 0;
 }
 
-USHORT bx_ntvdm_demhndl_get_ax(void) { return low16(active_call()->cpu.eax); }
-USHORT bx_ntvdm_demhndl_get_bx(void) { return low16(active_call()->cpu.ebx); }
-USHORT bx_ntvdm_demhndl_get_cx(void) { return low16(active_call()->cpu.ecx); }
-USHORT bx_ntvdm_demhndl_get_dx(void) { return low16(active_call()->cpu.edx); }
-USHORT bx_ntvdm_demhndl_get_si(void) { return low16(active_call()->cpu.esi); }
-USHORT bx_ntvdm_demhndl_get_di(void) { return low16(active_call()->cpu.edi); }
-USHORT bx_ntvdm_demhndl_get_bp(void) { return low16(active_call()->cpu.ebp); }
-USHORT bx_ntvdm_demhndl_get_ds(void) { return active_call()->cpu.ds; }
-USHORT bx_ntvdm_demhndl_get_es(void) { return active_call()->cpu.es; }
-USHORT bx_ntvdm_demhndl_get_cs(void) { return active_call()->cpu.cs; }
-USHORT bx_ntvdm_demhndl_get_ip(void) { return (USHORT)active_call()->cpu.eip; }
-USHORT bx_ntvdm_demhndl_get_al(void) { return (USHORT)(active_call()->cpu.eax & 0xffu); }
-USHORT bx_ntvdm_demhndl_get_cl(void) { return (USHORT)(active_call()->cpu.ecx & 0xffu); }
-USHORT bx_ntvdm_demhndl_get_ch(void) { return (USHORT)((active_call()->cpu.ecx >> 8) & 0xffu); }
-USHORT bx_ntvdm_demhndl_get_bl(void) { return (USHORT)(active_call()->cpu.ebx & 0xffu); }
-USHORT bx_ntvdm_demhndl_get_dh(void) { return (USHORT)((active_call()->cpu.edx >> 8) & 0xffu); }
-USHORT bx_ntvdm_demhndl_get_dl(void) { return (USHORT)(active_call()->cpu.edx & 0xffu); }
-USHORT bx_ntvdm_demhndl_get_ah(void) { return (USHORT)((active_call()->cpu.eax >> 8) & 0xffu); }
-int bx_ntvdm_demhndl_get_zf(void) { return (active_call()->cpu.eflags & 0x40u) != 0u; }
-int bx_ntvdm_demhndl_get_cf(void) { return (active_call()->cpu.eflags & 0x01u) != 0u; }
-void bx_ntvdm_demhndl_set_ax(USHORT value) { (void)set_register(0u, value); }
-void bx_ntvdm_demhndl_set_al(USHORT value)
-{ bx_ntvdm_demhndl_set_ax((USHORT)((bx_ntvdm_demhndl_get_ax() & 0xff00u) | (value & 0xffu))); }
-void bx_ntvdm_demhndl_set_ah(USHORT value)
-{ bx_ntvdm_demhndl_set_ax((USHORT)((bx_ntvdm_demhndl_get_ax() & 0x00ffu) | ((value & 0xffu) << 8))); }
-void bx_ntvdm_demhndl_set_bx(USHORT value) { (void)set_register(3u, value); }
-void bx_ntvdm_demhndl_set_bl(USHORT value)
-{ bx_ntvdm_demhndl_set_bx((USHORT)((bx_ntvdm_demhndl_get_bx() & 0xff00u) | (value & 0xffu))); }
-void bx_ntvdm_demhndl_set_bp(USHORT value) { (void)set_register(5u, value); }
-void bx_ntvdm_demhndl_set_ds(USHORT value) { (void)set_segment(3u, value); }
-void bx_ntvdm_demhndl_set_es(USHORT value) { (void)set_segment(0u, value); }
-void bx_ntvdm_demhndl_set_cs(USHORT value)
+USHORT runtime_demhndl_get_ax(void) { return low16(active_call()->cpu.eax); }
+USHORT runtime_demhndl_get_bx(void) { return low16(active_call()->cpu.ebx); }
+USHORT runtime_demhndl_get_cx(void) { return low16(active_call()->cpu.ecx); }
+USHORT runtime_demhndl_get_dx(void) { return low16(active_call()->cpu.edx); }
+USHORT runtime_demhndl_get_si(void) { return low16(active_call()->cpu.esi); }
+USHORT runtime_demhndl_get_di(void) { return low16(active_call()->cpu.edi); }
+USHORT runtime_demhndl_get_bp(void) { return low16(active_call()->cpu.ebp); }
+USHORT runtime_demhndl_get_ds(void) { return active_call()->cpu.ds; }
+USHORT runtime_demhndl_get_es(void) { return active_call()->cpu.es; }
+USHORT runtime_demhndl_get_cs(void) { return active_call()->cpu.cs; }
+USHORT runtime_demhndl_get_ip(void) { return (USHORT)active_call()->cpu.eip; }
+USHORT runtime_demhndl_get_al(void) { return (USHORT)(active_call()->cpu.eax & 0xffu); }
+USHORT runtime_demhndl_get_cl(void) { return (USHORT)(active_call()->cpu.ecx & 0xffu); }
+USHORT runtime_demhndl_get_ch(void) { return (USHORT)((active_call()->cpu.ecx >> 8) & 0xffu); }
+USHORT runtime_demhndl_get_bl(void) { return (USHORT)(active_call()->cpu.ebx & 0xffu); }
+USHORT runtime_demhndl_get_dh(void) { return (USHORT)((active_call()->cpu.edx >> 8) & 0xffu); }
+USHORT runtime_demhndl_get_dl(void) { return (USHORT)(active_call()->cpu.edx & 0xffu); }
+USHORT runtime_demhndl_get_ah(void) { return (USHORT)((active_call()->cpu.eax >> 8) & 0xffu); }
+int runtime_demhndl_get_zf(void) { return (active_call()->cpu.eflags & 0x40u) != 0u; }
+int runtime_demhndl_get_cf(void) { return (active_call()->cpu.eflags & 0x01u) != 0u; }
+void runtime_demhndl_set_ax(USHORT value) { (void)set_register(0u, value); }
+void runtime_demhndl_set_al(USHORT value)
+{ runtime_demhndl_set_ax((USHORT)((runtime_demhndl_get_ax() & 0xff00u) | (value & 0xffu))); }
+void runtime_demhndl_set_ah(USHORT value)
+{ runtime_demhndl_set_ax((USHORT)((runtime_demhndl_get_ax() & 0x00ffu) | ((value & 0xffu) << 8))); }
+void runtime_demhndl_set_bx(USHORT value) { (void)set_register(3u, value); }
+void runtime_demhndl_set_bl(USHORT value)
+{ runtime_demhndl_set_bx((USHORT)((runtime_demhndl_get_bx() & 0xff00u) | (value & 0xffu))); }
+void runtime_demhndl_set_bp(USHORT value) { (void)set_register(5u, value); }
+void runtime_demhndl_set_ds(USHORT value) { (void)set_segment(3u, value); }
+void runtime_demhndl_set_es(USHORT value) { (void)set_segment(0u, value); }
+void runtime_demhndl_set_cs(USHORT value)
 {
     /* DIVERGENCE(BOP-DIV-066): a BOP completion cannot replace its outer
      * continuation CS:IP.  Preserve the historical accessor against the
@@ -366,7 +366,7 @@ void bx_ntvdm_demhndl_set_cs(USHORT value)
      * consume this copied value through a typed mechanical request. */
     if (active_call() != NULL) active_call()->cpu.cs = value;
 }
-void bx_ntvdm_demhndl_set_ip(USHORT value)
+void runtime_demhndl_set_ip(USHORT value)
 {
     if (active_call() != NULL)
         active_call()->cpu.eip = (active_call()->cpu.eip & 0xffff0000u) | value;
@@ -374,38 +374,38 @@ void bx_ntvdm_demhndl_set_ip(USHORT value)
 /* The copied-result GPR numbering is Bochs AX,CX,DX,BX,SP,BP,SI,DI; keep
  * the historical helper spellings at this neutral boundary rather than make
  * imported DEM code depend on Bochs headers. */
-void bx_ntvdm_demhndl_set_cx(USHORT value) { (void)set_register(1u, value); }
-void bx_ntvdm_demhndl_set_cl(USHORT value)
-{ bx_ntvdm_demhndl_set_cx((USHORT)((bx_ntvdm_demhndl_get_cx() & 0xff00u) | (value & 0xffu))); }
-void bx_ntvdm_demhndl_set_ch(USHORT value)
-{ bx_ntvdm_demhndl_set_cx((USHORT)((bx_ntvdm_demhndl_get_cx() & 0x00ffu) | ((value & 0xffu) << 8))); }
-void bx_ntvdm_demhndl_set_dx(USHORT value) { (void)set_register(2u, value); }
-void bx_ntvdm_demhndl_set_dl(USHORT value)
-{ bx_ntvdm_demhndl_set_dx((USHORT)((bx_ntvdm_demhndl_get_dx() & 0xff00u) | (value & 0xffu))); }
-void bx_ntvdm_demhndl_set_dh(USHORT value)
-{ bx_ntvdm_demhndl_set_dx((USHORT)((bx_ntvdm_demhndl_get_dx() & 0x00ffu) | ((value & 0xffu) << 8))); }
-void bx_ntvdm_demhndl_set_si(USHORT value) { (void)set_register(6u, value); }
-void bx_ntvdm_demhndl_set_di(USHORT value) { (void)set_register(7u, value); }
-void bx_ntvdm_demhndl_set_cf(int value)
+void runtime_demhndl_set_cx(USHORT value) { (void)set_register(1u, value); }
+void runtime_demhndl_set_cl(USHORT value)
+{ runtime_demhndl_set_cx((USHORT)((runtime_demhndl_get_cx() & 0xff00u) | (value & 0xffu))); }
+void runtime_demhndl_set_ch(USHORT value)
+{ runtime_demhndl_set_cx((USHORT)((runtime_demhndl_get_cx() & 0x00ffu) | ((value & 0xffu) << 8))); }
+void runtime_demhndl_set_dx(USHORT value) { (void)set_register(2u, value); }
+void runtime_demhndl_set_dl(USHORT value)
+{ runtime_demhndl_set_dx((USHORT)((runtime_demhndl_get_dx() & 0xff00u) | (value & 0xffu))); }
+void runtime_demhndl_set_dh(USHORT value)
+{ runtime_demhndl_set_dx((USHORT)((runtime_demhndl_get_dx() & 0x00ffu) | ((value & 0xffu) << 8))); }
+void runtime_demhndl_set_si(USHORT value) { (void)set_register(6u, value); }
+void runtime_demhndl_set_di(USHORT value) { (void)set_register(7u, value); }
+void runtime_demhndl_set_cf(int value)
 {
-    bx_ntvdm_demhndl_active_call *active = active_call();
+    runtime_demhndl_active_call *active = active_call();
     if (active == NULL) return;
     if (value) active->cpu.eflags |= 0x01u;
     else active->cpu.eflags &= ~0x01u;
-    (void)bx_ntvdm_cpu_result_v2_set_cf(active->call->result, value);
+    (void)runtime_cpu_result_v2_set_cf(active->call->result, value);
 }
-void bx_ntvdm_demhndl_set_zf(int value)
+void runtime_demhndl_set_zf(int value)
 {
-    bx_ntvdm_demhndl_active_call *active = active_call();
+    runtime_demhndl_active_call *active = active_call();
     if (active == NULL) return;
     if (value) active->cpu.eflags |= 0x40u;
     else active->cpu.eflags &= ~0x40u;
-    (void)bx_ntvdm_cpu_result_v2_set_zf(active->call->result, value);
+    (void)runtime_cpu_result_v2_set_zf(active->call->result, value);
 }
 
-HANDLE bx_ntvdm_demhndl_get_handle(USHORT high, USHORT low)
+HANDLE runtime_demhndl_get_handle(USHORT high, USHORT low)
 {
-    bx_ntvdm_demhndl_active_call *active = active_call();
+    runtime_demhndl_active_call *active = active_call();
     HANDLE handle = NULL;
     uint32_t token;
 
@@ -423,9 +423,9 @@ HANDLE bx_ntvdm_demhndl_get_handle(USHORT high, USHORT low)
     return handle;
 }
 
-BOOL bx_ntvdm_demhndl_close_handle(HANDLE file)
+BOOL runtime_demhndl_close_handle(HANDLE file)
 {
-    bx_ntvdm_demhndl_active_call *active = active_call();
+    runtime_demhndl_active_call *active = active_call();
     DWORD error = ERROR_INVALID_HANDLE;
     (void)file;
     if (active == 0 || active->call == 0 || active->handle_token == 0u ||
@@ -437,9 +437,9 @@ BOOL bx_ntvdm_demhndl_close_handle(HANDLE file)
     return TRUE;
 }
 
-BOOL bx_ntvdm_demhndl_publish_handle(HANDLE file)
+BOOL runtime_demhndl_publish_handle(HANDLE file)
 {
-    bx_ntvdm_demhndl_active_call *active = active_call();
+    runtime_demhndl_active_call *active = active_call();
     DWORD error = ERROR_INVALID_HANDLE;
     uint32_t token = 0u;
     if (active == NULL || active->call == NULL || file == INVALID_HANDLE_VALUE ||
@@ -448,14 +448,14 @@ BOOL bx_ntvdm_demhndl_publish_handle(HANDLE file)
         SetLastError(error);
         return FALSE;
     }
-    bx_ntvdm_demhndl_set_ax((USHORT)(token >> 16));
-    bx_ntvdm_demhndl_set_bp((USHORT)token);
+    runtime_demhndl_set_ax((USHORT)(token >> 16));
+    runtime_demhndl_set_bp((USHORT)token);
     return TRUE;
 }
 
-BOOL bx_ntvdm_demhndl_publish_handle_token(HANDLE file, uint32_t *token_out)
+BOOL runtime_demhndl_publish_handle_token(HANDLE file, uint32_t *token_out)
 {
-    bx_ntvdm_demhndl_active_call *active = active_call();
+    runtime_demhndl_active_call *active = active_call();
     DWORD error = ERROR_INVALID_HANDLE;
     uint32_t token = 0u;
     if (token_out == NULL || active == NULL || active->call == NULL ||
@@ -468,9 +468,9 @@ BOOL bx_ntvdm_demhndl_publish_handle_token(HANDLE file, uint32_t *token_out)
     return TRUE;
 }
 
-LPVOID bx_ntvdm_demhndl_get_vdm_addr(USHORT segment, USHORT offset)
+LPVOID runtime_demhndl_get_vdm_addr(USHORT segment, USHORT offset)
 {
-    bx_ntvdm_demhndl_active_call *active = active_call();
+    runtime_demhndl_active_call *active = active_call();
     uint32_t bytes;
 
     if (active == 0 || active->call == 0) return NULL;
@@ -536,7 +536,7 @@ LPVOID bx_ntvdm_demhndl_get_vdm_addr(USHORT segment, USHORT offset)
     bytes = demgset_fixed_guest_bytes(active->call->service);
     if (bytes != 0u)
         return acquire_fixed_guest_span(active, bytes);
-    bytes = bx_ntvdm_demhndl_get_cx();
+    bytes = runtime_demhndl_get_cx();
     /* Sim32GetVDMPointer historically returns a mutable backing span.  The
      * session's guest-memory mapping-manager instance supplies that exact
      * bounded bounce lease; the
@@ -544,23 +544,23 @@ LPVOID bx_ntvdm_demhndl_get_vdm_addr(USHORT segment, USHORT offset)
     return acquire_guest_span(active, bytes, 0);
 }
 
-int bx_ntvdm_demhndl_copy_guest(USHORT segment, USHORT offset, void *buffer,
+int runtime_demhndl_copy_guest(USHORT segment, USHORT offset, void *buffer,
     uint32_t bytes)
 {
-    bx_ntvdm_demhndl_active_call *active = active_call();
+    runtime_demhndl_active_call *active = active_call();
     if (active == NULL || active->call == NULL || buffer == NULL ||
         active->call->guest_read == NULL) return 0;
     return active->call->guest_read(active->call->guest_state,
         real_mode_address(segment, offset), (uint8_t *)buffer, bytes);
 }
 
-int bx_ntvdm_demhndl_copy_guest_oem_string(USHORT segment, USHORT offset,
+int runtime_demhndl_copy_guest_oem_string(USHORT segment, USHORT offset,
     CHAR *buffer, uint32_t capacity)
 {
     uint32_t index;
     if (buffer == NULL || capacity < 2u) return 0;
     for (index = 0u; index < capacity; ++index) {
-        if (!bx_ntvdm_demhndl_copy_guest(segment, (USHORT)(offset + index),
+        if (!runtime_demhndl_copy_guest(segment, (USHORT)(offset + index),
                 buffer + index, 1u)) return 0;
         if (buffer[index] == '\0') return 1;
     }
@@ -568,25 +568,25 @@ int bx_ntvdm_demhndl_copy_guest_oem_string(USHORT segment, USHORT offset,
     return 0;
 }
 
-uint32_t bx_ntvdm_demhndl_current_service(void)
+uint32_t runtime_demhndl_current_service(void)
 {
-    bx_ntvdm_demhndl_active_call *active = active_call();
+    runtime_demhndl_active_call *active = active_call();
     return active != NULL && active->call != NULL ? active->call->service : UINT32_MAX;
 }
 
-int bx_ntvdm_demhndl_write_guest(USHORT segment, USHORT offset,
+int runtime_demhndl_write_guest(USHORT segment, USHORT offset,
     const void *buffer, uint32_t bytes)
 {
-    bx_ntvdm_demhndl_active_call *active = active_call();
+    runtime_demhndl_active_call *active = active_call();
     if (active == NULL || active->call == NULL || buffer == NULL ||
         active->call->guest_write == NULL) return 0;
     return active->call->guest_write(active->call->guest_state,
         real_mode_address(segment, offset), (const uint8_t *)buffer, bytes);
 }
 
-int bx_ntvdm_demhndl_loader_write(const void *buffer, uint32_t bytes)
+int runtime_demhndl_loader_write(const void *buffer, uint32_t bytes)
 {
-    bx_ntvdm_demhndl_active_call *active = active_call();
+    runtime_demhndl_active_call *active = active_call();
     uintptr_t base, cursor;
     uint32_t offset;
 
@@ -601,18 +601,18 @@ int bx_ntvdm_demhndl_loader_write(const void *buffer, uint32_t bytes)
         active->guest_address + offset, (const uint8_t *)buffer, bytes);
 }
 
-void bx_ntvdm_demhndl_terminate(void)
+void runtime_demhndl_terminate(void)
 {
-    bx_ntvdm_demhndl_active_call *active = active_call();
+    runtime_demhndl_active_call *active = active_call();
     if (active == NULL || active->call == NULL) return;
-    (void)bx_ntvdm_cpu_result_v2_stop(active->call->result);
+    (void)runtime_cpu_result_v2_stop(active->call->result);
     longjmp(active->terminate_jump, 1);
 }
 
-void bx_ntvdm_demhndl_flush_vdm_pointer(ULONG far_pointer, USHORT bytes,
+void runtime_demhndl_flush_vdm_pointer(ULONG far_pointer, USHORT bytes,
     PBYTE pointer, BOOL write_back)
 {
-    bx_ntvdm_demhndl_active_call *active = active_call();
+    runtime_demhndl_active_call *active = active_call();
     (void)far_pointer; (void)write_back;
     if (active != 0 && active->call != 0 && !active->transfer_from_guest &&
         pointer != NULL && bytes != 0u && !active->call->guest_write(
@@ -620,17 +620,17 @@ void bx_ntvdm_demhndl_flush_vdm_pointer(ULONG far_pointer, USHORT bytes,
         SetLastError(ERROR_INVALID_ADDRESS);
 }
 
-void bx_ntvdm_demhndl_free_vdm_pointer(ULONG far_pointer, USHORT bytes,
+void runtime_demhndl_free_vdm_pointer(ULONG far_pointer, USHORT bytes,
     PBYTE pointer, BOOL write_back)
 {
-    bx_ntvdm_demhndl_active_call *active = active_call();
+    runtime_demhndl_active_call *active = active_call();
     (void)far_pointer; (void)bytes; (void)write_back;
     if (active != 0 && pointer == active->guest_buffer &&
         active->guest_buffer_lease != NULL) {
         /* The original caller flushed first.  Retire only the synchronous
          * lease: a second write-back would change the source ordering. */
-        (void)bx_ntvdm_guest_pointer_manager_release(
-            bx_ntvdm_guest_pointer_manager_session(),
+        (void)runtime_guest_pointer_manager_release(
+            runtime_guest_pointer_manager_session(),
             active->guest_buffer_lease, 0);
         active->guest_buffer_lease = NULL;
         active->guest_buffer = NULL;
@@ -640,33 +640,33 @@ void bx_ntvdm_demhndl_free_vdm_pointer(ULONG far_pointer, USHORT bytes,
     }
 }
 
-int IsVdmRedirLoaded(void) { return bx_ntvdm_vr_initialized_provider(); }
-int bx_ntvdm_demhndl_invoke_body(bx_ntvdm_demhndl_call *call,
+int IsVdmRedirLoaded(void) { return runtime_vr_initialized_provider(); }
+int runtime_demhndl_invoke_body(runtime_demhndl_call *call,
     void (*body)(void))
 {
-    return bx_ntvdm_demhndl_invoke_body_with_resume(call, body, 4u);
+    return runtime_demhndl_invoke_body_with_resume(call, body, 4u);
 }
 
-int bx_ntvdm_demhndl_invoke_body_with_resume(bx_ntvdm_demhndl_call *call,
+int runtime_demhndl_invoke_body_with_resume(runtime_demhndl_call *call,
     void (*body)(void), uint32_t resume_bytes)
 {
-    bx_ntvdm_demhndl_active_call active;
+    runtime_demhndl_active_call active;
 
-    if (!bx_ntvdm_demhndl_call_valid(call) || body == NULL || g_active_call != NULL ||
+    if (!runtime_demhndl_call_valid(call) || body == NULL || g_active_call != NULL ||
         (resume_bytes != 3u && resume_bytes != 4u) ||
         call->boundary->fault_rip > UINT64_MAX - resume_bytes) return 0;
     memset(&active, 0, sizeof(active));
     active.call = call;
     active.cpu = *call->cpu;
-    active.transfer_from_guest = call->service == BX_NTVDM_DEMHNDL_WRITE;
+    active.transfer_from_guest = call->service == RUNTIME_DEMHNDL_WRITE;
     memset(&g_extended_error, 0, sizeof(g_extended_error));
     pExtendedError = &g_extended_error;
-    bx_ntvdm_cpu_result_v2_pass_through(call->result);
-    if (!bx_ntvdm_cpu_result_v2_resume(call->result,
+    runtime_cpu_result_v2_pass_through(call->result);
+    if (!runtime_cpu_result_v2_resume(call->result,
             call->boundary->fault_rip + resume_bytes))
         return 0;
-    if (!bx_ntvdm_guest_pointer_manager_begin(
-            bx_ntvdm_guest_pointer_manager_session(), call->guest_state,
+    if (!runtime_guest_pointer_manager_begin(
+            runtime_guest_pointer_manager_session(), call->guest_state,
             call->guest_read, call->guest_write)) return 0;
     g_active_call = &active;
     if (setjmp(active.terminate_jump) == 0)
@@ -682,8 +682,8 @@ int bx_ntvdm_demhndl_invoke_body_with_resume(bx_ntvdm_demhndl_call *call,
             active.guest_buffer, active.guest_bytes))
         SetLastError(ERROR_INVALID_ADDRESS);
     if (active.guest_buffer_lease != NULL) {
-        if (!bx_ntvdm_guest_pointer_manager_release(
-                bx_ntvdm_guest_pointer_manager_session(),
+        if (!runtime_guest_pointer_manager_release(
+                runtime_guest_pointer_manager_session(),
                 active.guest_buffer_lease,
                 is_demdir_cds_service(call->service) || active.flush_guest_buffer_on_return))
             SetLastError(ERROR_INVALID_ADDRESS);
@@ -701,35 +701,35 @@ int bx_ntvdm_demhndl_invoke_body_with_resume(bx_ntvdm_demhndl_call *call,
         free(active.path_buffers[--active.path_buffer_count]);
     while (active.span_count != 0u) {
         uint32_t i = --active.span_count;
-        (void)bx_ntvdm_guest_pointer_manager_release(
-            bx_ntvdm_guest_pointer_manager_session(), active.spans[i].lease,
+        (void)runtime_guest_pointer_manager_release(
+            runtime_guest_pointer_manager_session(), active.spans[i].lease,
             active.spans[i].span->write_back != 0u);
     }
-    bx_ntvdm_guest_pointer_manager_end(bx_ntvdm_guest_pointer_manager_session());
+    runtime_guest_pointer_manager_end(runtime_guest_pointer_manager_session());
     g_active_call = NULL;
-    return bx_ntvdm_cpu_result_v2_valid(call->result);
+    return runtime_cpu_result_v2_valid(call->result);
 }
 
-int bx_ntvdm_demhndl_invoke(bx_ntvdm_demhndl_call *call)
+int runtime_demhndl_invoke(runtime_demhndl_call *call)
 {
     void (*service)(void) = NULL;
 
-    if (!bx_ntvdm_demhndl_call_valid(call)) return 0;
+    if (!runtime_demhndl_call_valid(call)) return 0;
     switch (call->service) {
-    case BX_NTVDM_DEMHNDL_CHG_FILE_PTR: service = demChgFilePtr; break;
-    case BX_NTVDM_DEMHNDL_CLOSE: service = demClose; break;
-    case BX_NTVDM_DEMHNDL_FILE_TIMES: service = demFileTimes; break;
-    case BX_NTVDM_DEMHNDL_READ: service = demRead; break;
-    case BX_NTVDM_DEMHNDL_WRITE: service = demWrite; break;
-    case BX_NTVDM_DEMHNDL_COMMIT: service = demCommit; break;
-    case BX_NTVDM_DEMHNDL_PIPE_DATA_EOF: service = demPipeFileDataEOF; break;
-    case BX_NTVDM_DEMHNDL_PIPE_EOF: service = demPipeFileEOF; break;
+    case RUNTIME_DEMHNDL_CHG_FILE_PTR: service = demChgFilePtr; break;
+    case RUNTIME_DEMHNDL_CLOSE: service = demClose; break;
+    case RUNTIME_DEMHNDL_FILE_TIMES: service = demFileTimes; break;
+    case RUNTIME_DEMHNDL_READ: service = demRead; break;
+    case RUNTIME_DEMHNDL_WRITE: service = demWrite; break;
+    case RUNTIME_DEMHNDL_COMMIT: service = demCommit; break;
+    case RUNTIME_DEMHNDL_PIPE_DATA_EOF: service = demPipeFileDataEOF; break;
+    case RUNTIME_DEMHNDL_PIPE_EOF: service = demPipeFileEOF; break;
     default: return 0;
     }
-    return bx_ntvdm_demhndl_invoke_body(call, service);
+    return runtime_demhndl_invoke_body(call, service);
 }
 
-int bx_ntvdm_demhndl_invoke_fast_read(bx_ntvdm_demhndl_call *call)
+int runtime_demhndl_invoke_fast_read(runtime_demhndl_call *call)
 {
     /* OpenNT source map: handle.asm's non-pipe x86 FastOrSlow branch emits
      * SVC_DEMFASTREAD (42h), while the available demdisp.c table has only the
@@ -737,6 +737,6 @@ int bx_ntvdm_demhndl_invoke_fast_read(bx_ntvdm_demhndl_call *call)
      * exists in the admitted tree.  Its caller ABI is byte-for-byte the
      * imported demRead ABI, so reuse the original body through the smallest
      * CCPU/SAS replacement rather than fabricate a second read provider. */
-    if (!bx_ntvdm_demhndl_call_valid(call) || call->service != 0x42u) return 0;
-    return bx_ntvdm_demhndl_invoke_body(call, demRead);
+    if (!runtime_demhndl_call_valid(call) || call->service != 0x42u) return 0;
+    return runtime_demhndl_invoke_body(call, demRead);
 }

@@ -2,8 +2,8 @@
 #include <string.h>
 int main(void) {
     struct t198_s23_fastread_attempt_ledger_v1 ledger;
-    struct bx_ntvdm_generic_ud_event_v1 event;
-    struct bx_ntvdm_generic_ud_outcome_v1 outcome;
+    struct runtime_generic_ud_event_v1 event;
+    struct runtime_generic_ud_outcome_v1 outcome;
     struct t198_s23_fastread_attempt_v1 entry;
     unsigned i;
     memset(&event,0,sizeof(event)); memset(&outcome,0,sizeof(outcome));
@@ -12,7 +12,7 @@ int main(void) {
     t198_s23_fastread_attempt_ledger_v1_record(&ledger,&event,&outcome,0); if(ledger.count) return 1;
     event.window[3]=0x42u; event.cs=0x32u; event.eip=0x6351u; event.eax=0x4e53u; event.ebp=0x4005u; event.ecx=0x20u;
     t198_s23_fastread_attempt_ledger_v1_record(&ledger,&event,&outcome,0);
-    outcome.disposition=BX_NTVDM_GENERIC_UD_RESUME; outcome.resume_rip=0x6355u; outcome.gpr16_write_mask=1u; outcome.gpr16_values[0]=13u; outcome.eflags_write_mask=1u;
+    outcome.disposition=RUNTIME_GENERIC_UD_RESUME; outcome.resume_rip=0x6355u; outcome.gpr16_write_mask=1u; outcome.gpr16_values[0]=13u; outcome.eflags_write_mask=1u;
     event.eip=0x7000u; t198_s23_fastread_attempt_ledger_v1_record(&ledger,&event,&outcome,1);
     if(ledger.count!=2u || !t198_s23_fastread_attempt_ledger_v1_get(&ledger,0,&entry) || entry.accepted || entry.eip!=0x6351u || entry.ax) return 2;
     if(!t198_s23_fastread_attempt_ledger_v1_get(&ledger,1,&entry) || !entry.accepted || entry.eip!=0x7000u || entry.ax!=13u || entry.resume_rip!=0x6355u) return 3;

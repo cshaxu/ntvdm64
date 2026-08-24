@@ -11,7 +11,7 @@ static int child_path(const wchar_t *root, const wchar_t *name,
         GetFileAttributesW(output) != INVALID_FILE_ATTRIBUTES;
 }
 
-int ntdos64_bundle_load_roots(const wchar_t *dos_root,
+int app_bundle_load_roots(const wchar_t *dos_root,
     wchar_t config_source[MAX_PATH], wchar_t autoexec_source[MAX_PATH])
 {
     wchar_t required[MAX_PATH];
@@ -27,7 +27,7 @@ int ntdos64_bundle_load_roots(const wchar_t *dos_root,
         child_path(dos_root, L"AUTOEXEC.NT", autoexec_source);
 }
 
-int ntdos64_bundle_load_sibling(wchar_t product_root[MAX_PATH],
+int app_bundle_load_sibling(wchar_t product_root[MAX_PATH],
     wchar_t dos_root[MAX_PATH], wchar_t wow16_root[MAX_PATH],
     wchar_t config_source[MAX_PATH], wchar_t autoexec_source[MAX_PATH])
 {
@@ -42,5 +42,5 @@ int ntdos64_bundle_load_sibling(wchar_t product_root[MAX_PATH],
     if (swprintf(dos_root, MAX_PATH, L"%ls\\dos", product_root) < 0 ||
         swprintf(wow16_root, MAX_PATH, L"%ls\\wow16", product_root) < 0 ||
         GetFileAttributesW(wow16_root) == INVALID_FILE_ATTRIBUTES) return 0;
-    return ntdos64_bundle_load_roots(dos_root, config_source, autoexec_source);
+    return app_bundle_load_roots(dos_root, config_source, autoexec_source);
 }

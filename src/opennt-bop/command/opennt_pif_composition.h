@@ -1,5 +1,5 @@
-#ifndef NTDOS64_OPENNT_PIF_COMPOSITION_H
-#define NTDOS64_OPENNT_PIF_COMPOSITION_H
+#ifndef APP_OPENNT_PIF_COMPOSITION_H
+#define APP_OPENNT_PIF_COMPOSITION_H
 
 /* Smallest modern host-capability seam for the directly imported COMMAND PIF
  * owner and the directly included OpenNT nt_pif.c parser.  It deliberately
@@ -44,22 +44,22 @@ BOOL GetPIFData(PIF_DATA *data, char *pif_name);
 /* `nt_pif.c`'s original allocation/error loop calls this exact adapter
  * spelling. It delegates to the shared OpenNT-shaped dialog facade rather
  * than making parser-local retry policy. */
-int bx_ntvdm_command_pif_parser_message_box(UINT error, CHAR *first,
+int runtime_command_pif_parser_message_box(UINT error, CHAR *first,
     CHAR *second, ULONG options);
 /* Execute the unmodified nt_pif.c CONFIG/AUTOEXEC selection while the
  * startup PIF is still the initial host input. */
-BOOL bx_ntvdm_command_pif_select_config_files(char *pif_name,
+BOOL runtime_command_pif_select_config_files(char *pif_name,
     char *config_path, char *autoexec_path);
 DWORD GetFileAttributesOem(LPSTR name);
 BOOL SetCurrentDirectoryOem(LPSTR name);
 
-#define ExpandEnvironmentStringsOem bx_ntvdm_command_pif_expand_environment_strings_oem
-#define GetFullPathNameOem bx_ntvdm_command_pif_get_full_path_name_oem
-#define GetShortPathNameOem bx_ntvdm_command_pif_get_short_path_name_oem
-#define SearchPathOem bx_ntvdm_command_pif_search_path_oem
+#define ExpandEnvironmentStringsOem runtime_command_pif_expand_environment_strings_oem
+#define GetFullPathNameOem runtime_command_pif_get_full_path_name_oem
+#define GetShortPathNameOem runtime_command_pif_get_short_path_name_oem
+#define SearchPathOem runtime_command_pif_search_path_oem
 #ifdef SetConsoleTitle
 #undef SetConsoleTitle
 #endif
-#define SetConsoleTitle bx_ntvdm_command_pif_set_console_title_oem
+#define SetConsoleTitle runtime_command_pif_set_console_title_oem
 
 #endif

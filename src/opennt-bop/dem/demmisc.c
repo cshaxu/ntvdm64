@@ -194,7 +194,7 @@ DWORD	BytesRead;
 	 * pointer arithmetic assumes the historical 32-bit host address space.
 	 * Keep the original chunk loop and use the neutral shim for x86/x64-safe
 	 * advancement of this already checked loader bounce pointer. */
-	pbLoadAddr = bx_ntvdm_demmisc_advance_loader_pointer(pbLoadAddr, BytesRead);
+	pbLoadAddr = runtime_demmisc_advance_loader_pointer(pbLoadAddr, BytesRead);
 
     }
 

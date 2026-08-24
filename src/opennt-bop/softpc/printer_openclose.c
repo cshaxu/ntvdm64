@@ -18,18 +18,18 @@ static void printer_bop_openclose(int func)
 {
     int adapter;
 
-    adapter = bx_ntvdm_softpc_printer_get_dx() % NUM_PARALLEL_PORTS;
+    adapter = runtime_softpc_printer_get_dx() % NUM_PARALLEL_PORTS;
 
     /* Original `printer_bop_openclose`: func must be 1 (open) or 2 (close). */
     if (func == 1)
-        bx_ntvdm_softpc_printer_host_lpt_dos_open(adapter);
+        runtime_softpc_printer_host_lpt_dos_open(adapter);
     else
-        bx_ntvdm_softpc_printer_host_lpt_dos_close(adapter);
+        runtime_softpc_printer_host_lpt_dos_close(adapter);
 }
 
 void printer_io(void)
 {
-    int bopsubfunction = bx_ntvdm_softpc_printer_get_si();
+    int bopsubfunction = runtime_softpc_printer_get_si();
 
     switch (bopsubfunction) {
         case 1:
@@ -38,7 +38,7 @@ void printer_io(void)
             printer_bop_openclose(bopsubfunction);
             return;
         default:
-            bx_ntvdm_softpc_printer_unsupported();
+            runtime_softpc_printer_unsupported();
             return;
     }
 }
