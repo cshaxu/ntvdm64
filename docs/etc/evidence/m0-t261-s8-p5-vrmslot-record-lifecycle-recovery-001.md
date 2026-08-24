@@ -43,6 +43,15 @@ record unlinking and ES:DI/DX restoration. `BOP-DIV-061` replaces only the
 original private bitmap release with retirement through the same opaque manager
 that owns the record's native handle.
 
+`VrMakeMailslot` is directly retained as the next source body. It preserves
+the original validation, record allocation, local `\\.\\MAILSLOT` name
+formation, `CreateMailslot`, `GetMailslotInfo` fallback and record-link order.
+`BOP-DIV-062` replaces only the old flat SAS ASCIZ pointer with a bounded copy
+through the existing CCPU/SAS facade. `BOP-DIV-063` replaces only pre-creation
+private bitmap reservation with publication through the one session-owned
+opaque handle mapper after native creation succeeds. Thus no second mapper,
+CPU frame or Redirector adapter was introduced.
+
 ## Verification
 
 Fresh outside-sandbox MSVC x64 `/MT`, CPU5/P-MMX Ninja graph:
@@ -65,11 +74,22 @@ ES:DI/DX values.
 The fresh `r012` graph added the re-rooted `vrputil.c`, completed **314/314**
 actions and reran the same fixture successfully.
 
+After `VrMakeMailslot` recovery, incremental r012 rebuilt the affected formal
+objects and linked the fixture successfully:
+
+```text
+ninja -C build/t261/s8-r012 -j 4 bin/t251-s3-redir-ingress-fixture.exe
+T251 S4 Redirector: typed selector-57 lifecycle and mailslot owner group pass
+```
+
 ## Boundary
 
 This recovers the original record lifetime, information, delete and simple
 termination bodies, not every original `Vr*` function body. The guest-frame
 copy, checked guest-RAM copy and public Win32 calls remain in the BOP-owned
 composition file until each individual source body can be routed through the
-existing `adapter-softpc` CCPU/SAS facade. No new BOP, adapter, mapper or
-Bochs behavior is introduced.
+existing `adapter-softpc` CCPU/SAS facade. `VrReadMailslot` requires its
+output span to be leased at the record's recovered message size; `VrWriteMailslot`
+requires a descriptor span plus an independent source-buffer span. Neither may
+reuse `CX` as a guessed generic span. No new BOP, adapter, mapper or Bochs
+behavior is introduced.

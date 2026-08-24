@@ -422,49 +422,6 @@ static void set_gpr16(struct bx_ntvdm_generic_ud_outcome_v1 *outcome,
     outcome->gpr16_values[index] = value;
 }
 
-static int mailslot_make(const struct bx_ntvdm_generic_ud_event_v1 *event,
-    struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
-{
-    char oem[260]; wchar_t name[260]; HANDLE host; DWORD error = ERROR_INVALID_HANDLE;
-    uint32_t token = 0u, name_length;
-    PVR_MAILSLOT_INFO record;
-    if (!read_oem_string(word_at(event->ds), word_at(event->esi), oem, sizeof(oem)) ||
-        !local_mailslot_name(oem, name, sizeof(name) / sizeof(name[0]))) {
-        resume_with_error(event, outcome, GetLastError()); return 1;
-    }
-    name_length = (uint32_t)strlen(oem);
-    if (name_length <= 10u) { resume_with_error(event, outcome, ERROR_PATH_NOT_FOUND); return 1; }
-    record = VrpAllocateMailslotStructure(name_length - 10u);
-    if (record == NULL) { resume_with_error(event, outcome, ERROR_PATH_NOT_FOUND); return 1; }
-    host = CreateMailslotW(name, (DWORD)word_at(event->ebx),
-        MAILSLOT_WAIT_FOREVER, NULL);
-    if (host == INVALID_HANDLE_VALUE ||
-        !g_active_session->direct->publish_handle(g_active_session->direct->state,
-            host, &token, &error) || token > UINT16_MAX) {
-        if (host != INVALID_HANDLE_VALUE && token != 0u)
-            (void)g_active_session->direct->release_handle(
-                g_active_session->direct->state, token, &error);
-        else if (host != INVALID_HANDLE_VALUE) CloseHandle(host);
-        VrpFreeMailslotStructure(record);
-        resume_with_error(event, outcome, host == INVALID_HANDLE_VALUE ? GetLastError() : error);
-        return 1;
-    }
-    record->DosPdb = word_at(event->eax);
-    record->Handle16 = (WORD)token;
-    record->Handle32 = host;
-    record->BufferAddress.Selector = word_at(event->es);
-    record->BufferAddress.Offset = word_at(event->edi);
-    record->Selector = word_at(event->edx);
-    if (!GetMailslotInfo(host, &record->MessageSize, NULL, NULL, NULL))
-        record->MessageSize = word_at(event->ecx);
-    record->NameLength = name_length - 10u;
-    memcpy(record->Name, oem + 10u, record->NameLength + 1u);
-    VrpLinkMailslotStructure(record);
-    resume_success(event, outcome);
-    set_gpr16(outcome, 0u, record->Handle16);
-    return 1;
-}
-
 static int mailslot_get_record(const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome,
     PVR_MAILSLOT_INFO *out_record, HANDLE *out_host)
@@ -593,7 +550,8 @@ static int dispatch_service(uint8_t service,
         return 1;
     case 0x0bu: /* SVC_RDRMAKEMAILSLOT */
         if (g_active_session->loaded == 0u) { resume_with_error(event, outcome, ERROR_INVALID_FUNCTION); return 1; }
-        return mailslot_make(event, outcome);
+        return bx_ntvdm_redir_native_session_invoke_scoped_body(event, outcome,
+            VrMakeMailslot, 4u);
     case 0x09u: /* SVC_RDRDELETEMAILSLOT */
         if (g_active_session->loaded == 0u) { resume_with_error(event, outcome, ERROR_INVALID_FUNCTION); return 1; }
         return bx_ntvdm_redir_native_session_invoke_scoped_body(event, outcome,

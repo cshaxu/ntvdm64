@@ -430,6 +430,21 @@ BOOL bx_ntvdm_demhndl_publish_handle(HANDLE file)
     return TRUE;
 }
 
+BOOL bx_ntvdm_demhndl_publish_handle_token(HANDLE file, uint32_t *token_out)
+{
+    bx_ntvdm_demhndl_active_call *active = active_call();
+    DWORD error = ERROR_INVALID_HANDLE;
+    uint32_t token = 0u;
+    if (token_out == NULL || active == NULL || active->call == NULL ||
+        file == INVALID_HANDLE_VALUE || !active->call->direct->publish_handle(
+            active->call->direct->state, file, &token, &error) || token == 0u) {
+        SetLastError(error);
+        return FALSE;
+    }
+    *token_out = token;
+    return TRUE;
+}
+
 LPVOID bx_ntvdm_demhndl_get_vdm_addr(USHORT segment, USHORT offset)
 {
     bx_ntvdm_demhndl_active_call *active = active_call();
@@ -510,6 +525,20 @@ int bx_ntvdm_demhndl_copy_guest(USHORT segment, USHORT offset, void *buffer,
         active->call->guest_read == NULL) return 0;
     return active->call->guest_read(active->call->guest_state,
         real_mode_address(segment, offset), (uint8_t *)buffer, bytes);
+}
+
+int bx_ntvdm_demhndl_copy_guest_oem_string(USHORT segment, USHORT offset,
+    CHAR *buffer, uint32_t capacity)
+{
+    uint32_t index;
+    if (buffer == NULL || capacity < 2u) return 0;
+    for (index = 0u; index < capacity; ++index) {
+        if (!bx_ntvdm_demhndl_copy_guest(segment, (USHORT)(offset + index),
+                buffer + index, 1u)) return 0;
+        if (buffer[index] == '\0') return 1;
+    }
+    SetLastError(ERROR_BUFFER_OVERFLOW);
+    return 0;
 }
 
 uint32_t bx_ntvdm_demhndl_current_service(void)

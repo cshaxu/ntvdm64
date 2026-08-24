@@ -147,6 +147,8 @@ HANDLE bx_ntvdm_demhndl_get_handle(USHORT high, USHORT low);
 LPVOID bx_ntvdm_demhndl_get_vdm_addr(USHORT segment, USHORT offset);
 int bx_ntvdm_demhndl_copy_guest(USHORT segment, USHORT offset, void *buffer,
     uint32_t bytes);
+int bx_ntvdm_demhndl_copy_guest_oem_string(USHORT segment, USHORT offset,
+    CHAR *buffer, uint32_t capacity);
 /* A directly imported owner that retains a historical guest address across
  * calls may use these bounded context operations.  They remain checked RAM
  * transport, not a DOS or BOP dispatcher. */
@@ -174,6 +176,7 @@ void bx_ntvdm_demhndl_free_vdm_pointer(ULONG far_pointer, USHORT bytes,
 void demClientError(HANDLE file, CHAR drive);
 BOOL bx_ntvdm_demhndl_close_handle(HANDLE file);
 BOOL bx_ntvdm_demhndl_publish_handle(HANDLE file);
+BOOL bx_ntvdm_demhndl_publish_handle_token(HANDLE file, uint32_t *token_out);
 
 #define getAX() bx_ntvdm_demhndl_get_ax()
 #define getBX() bx_ntvdm_demhndl_get_bx()

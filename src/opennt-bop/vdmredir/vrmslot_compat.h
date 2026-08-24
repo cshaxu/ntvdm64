@@ -22,6 +22,12 @@
     ((void)bx_ntvdm_ccpu_sas_get_handle(0u, (token)), \
      bx_ntvdm_ccpu_sas_close_handle((handle)))
 
+#define MAILSLOT_PREFIX "\\MAILSLOT\\"
+#define MAILSLOT_PREFIX_LENGTH (sizeof(MAILSLOT_PREFIX) - 1u)
+#define LOCAL_MAILSLOT_PREFIX "\\\\."
+#define LOCAL_MAILSLOT_NAMELEN MAX_PATH
+#define HANDLE_FUNCTION_FAILED INVALID_HANDLE_VALUE
+
 typedef unsigned short SELECTOR;
 typedef struct {
     unsigned short Offset;
@@ -54,8 +60,10 @@ void VrpRemoveProcessMailslots(WORD dos_pdb);
 void VrpRemoveProcessMailslotsWithRelease(WORD dos_pdb, void *state,
     bx_ntvdm_vrmslot_release_fn release);
 void VrpResetMailslots(void *state, bx_ntvdm_vrmslot_release_fn release);
+void VrpMakeLocalMailslotName(LPSTR buffer, LPSTR name);
 
 void VrPeekMailslot(void);
+void VrMakeMailslot(void);
 void VrGetMailslotInfo(void);
 void VrDeleteMailslot(void);
 void VrTerminateMailslots(WORD DosPdb);

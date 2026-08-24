@@ -49,6 +49,58 @@ Return Value:
     SET_ERROR(ERROR_NOT_SUPPORTED);
 }
 
+/* Directly retained OpenNT VrMakeMailslot body.  Its original ordering,
+ * record layout and failure convention are preserved below. */
+VOID
+VrMakeMailslot(
+    VOID
+    )
+{
+    PVR_MAILSLOT_INFO ptr;
+    WORD Handle16;
+    HANDLE Handle32;
+    DWORD NameLength;
+    CHAR NameBuffer[MAX_PATH + 1u];
+    LPSTR lpName;
+    CHAR LocalMailslot[LOCAL_MAILSLOT_NAMELEN + 1u];
+    BOOL Ok;
+    uint32_t token = 0u;
+
+    /* DIVERGENCE(BOP-DIV-062): OpenNT dereferenced a flat SAS guest pointer.
+     * This composition retains the source body while copying the ASCIZ name
+     * through the existing bounded CCPU/SAS facade. */
+    if (!bx_ntvdm_demhndl_copy_guest_oem_string(getDS(), getSI(), NameBuffer,
+            sizeof(NameBuffer))) { SET_ERROR(ERROR_INVALID_ADDRESS); return; }
+    lpName = NameBuffer;
+    NameLength = (DWORD)strlen(lpName);
+    if (NameLength <= MAILSLOT_PREFIX_LENGTH) { SET_ERROR(ERROR_PATH_NOT_FOUND); return; }
+    NameLength -= MAILSLOT_PREFIX_LENGTH;
+    if ((ptr = VrpAllocateMailslotStructure(NameLength)) == NULL) {
+        SET_ERROR(ERROR_PATH_NOT_FOUND); return;
+    }
+    VrpMakeLocalMailslotName(LocalMailslot, lpName);
+    Handle32 = CreateMailslotA(LocalMailslot, (DWORD)getBX(), 0, NULL);
+    if (Handle32 == HANDLE_FUNCTION_FAILED) {
+        SET_ERROR(VrpMapLastError()); VrpFreeMailslotStructure(ptr); return;
+    }
+    /* DIVERGENCE(BOP-DIV-063): replace OpenNT's private pre-allocated
+     * Handle16 bitmap with the sole session-owned opaque handle mapper. */
+    if (!bx_ntvdm_demhndl_publish_handle_token(Handle32, &token) || token > UINT16_MAX) {
+        if (token != 0u) (void)VrpCloseMailslotHandle((WORD)token, Handle32);
+        else CloseHandle(Handle32);
+        VrpFreeMailslotStructure(ptr); SET_ERROR(ERROR_PATH_NOT_FOUND); return;
+    }
+    Handle16 = (WORD)token;
+    ptr->DosPdb = getAX(); ptr->Handle16 = Handle16; ptr->Handle32 = Handle32;
+    ptr->BufferAddress.Offset = getDI(); ptr->BufferAddress.Selector = getES();
+    ptr->Selector = getDX();
+    Ok = GetMailslotInfo(Handle32, &ptr->MessageSize, NULL, NULL, NULL);
+    if (!Ok) ptr->MessageSize = getCX();
+    ptr->NameLength = NameLength;
+    strcpy_s(ptr->Name, (size_t)NameLength + 1u, lpName + MAILSLOT_PREFIX_LENGTH);
+    VrpLinkMailslotStructure(ptr); setAX(Handle16); setCF(0);
+}
+
 VOID
 VrGetMailslotInfo(
     VOID
@@ -218,6 +270,15 @@ PVR_MAILSLOT_INFO VrpMapMailslotName(LPSTR name)
         if (ptr->NameLength == name_length &&
             _stricmp(ptr->Name, name + MAILSLOT_PREFIX_LENGTH) == 0) break;
     return ptr;
+}
+
+void VrpMakeLocalMailslotName(LPSTR buffer, LPSTR name)
+{
+    if (buffer != NULL && name != NULL &&
+        !_strnicmp(name, MAILSLOT_PREFIX, MAILSLOT_PREFIX_LENGTH)) {
+        strcpy_s(buffer, LOCAL_MAILSLOT_NAMELEN + 1u, LOCAL_MAILSLOT_PREFIX);
+        strcat_s(buffer, LOCAL_MAILSLOT_NAMELEN + 1u, name);
+    }
 }
 
 static void VrpReleaseMailslot(PVR_MAILSLOT_INFO ptr, void *state,

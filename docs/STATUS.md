@@ -70,11 +70,15 @@ The retained `VrTerminateMailslots` body now also closes the PDB-owned record
 cleanup with the original no-AX-write result; its copied-frame/token divergence
 is `BOP-DIV-059`.  `VrGetMailslotInfo` now uses its original body, backed by
 the re-rooted original `opennt-host/vdmredir/vrputil.c`; fresh r012 completed
-314/314 actions and the Redirector fixture passes. The remaining
-Make/Read/Write *source bodies* are still pending individual CCPU/SAS-facade
-recovery. `VrDeleteMailslot` is now also direct, retaining original PDB,
+314/314 actions and the Redirector fixture passes. `VrDeleteMailslot` is now also direct, retaining original PDB,
 ES:DI/DX and no-AX-write behavior; `BOP-DIV-061` replaces only its obsolete
-private handle-bitmap release.
+private handle-bitmap release. `VrMakeMailslot` now also retains its original
+allocation, creation and record-link order; `BOP-DIV-062` copies its ASCIZ
+input through the existing bounded CCPU/SAS facade and `BOP-DIV-063` replaces
+only the obsolete private handle bitmap with the shared session mapper.
+Incremental formal r012 rebuilt and passed. `VrReadMailslot` and
+`VrWriteMailslot` remain pending: each requires multiple independently bounded
+guest spans and must not guess them from `CX`.
 
 ### M0 T261 S7 — closed: dependency-free session owner split
 
