@@ -55,6 +55,10 @@ not return the caller's source pointer as an optimization.
 - native-session teardown calls `VrUninitialize` even when the guest did not
   first issue service `57:01`, so the original owner list cannot survive a
   session reset;
+- the Redirector focused fixture now opens, adds, queries, reads/writes, and
+  removes a named-pipe metadata record in the source order rather than using
+  `GetNamedPipeInfo` as an out-of-band recognition shortcut; its MSVC object
+  compiles under `/W4 /WX`.
 - fresh `r006` MSVC targeted objects passed:
   `vrnmpipe.c`, `opennt_demfile_composition.c`,
   `redir_native_session.c`, and `opennt_dem_ccpu_sas_facade.c`;

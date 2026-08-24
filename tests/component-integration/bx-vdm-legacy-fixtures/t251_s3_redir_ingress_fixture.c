@@ -180,6 +180,7 @@ int main(void)
     HANDLE server = INVALID_HANDLE_VALUE, client = INVALID_HANDLE_VALUE;
     DWORD transferred = 0u, error = 0u;
     char bytes[8] = {0};
+    char pipe_name[] = "\\\\localhost\\PIPE\\ntdos64-t251-s3";
 
     if (!bx_ntvdm_dem_direct_host_session_initialize(&host) ||
         !bx_ntvdm_redir_native_session_initialize(&session,
@@ -200,13 +201,15 @@ int main(void)
         0u, NULL, OPEN_EXISTING, 0u, NULL);
     if (client == INVALID_HANDLE_VALUE ||
         (ConnectNamedPipe(server, NULL) == FALSE && GetLastError() != ERROR_PIPE_CONNECTED) ||
+        !VrAddOpenNamedPipeInfo(client, pipe_name) ||
         !VrIsNamedPipeHandle(client) ||
         !VrWriteNamedPipe(client, (LPBYTE)"ok", 2u, &transferred) || transferred != 2u ||
         !ReadFile(server, bytes, 2u, &transferred, NULL) || transferred != 2u ||
         memcmp(bytes, "ok", 2u) != 0 ||
         !WriteFile(server, "go", 2u, &transferred, NULL) || transferred != 2u ||
-        !VrReadNamedPipe(client, bytes, 2u, &transferred, &error) ||
+        !VrReadNamedPipe(client, (LPBYTE)bytes, 2u, &transferred, &error) ||
         transferred != 2u || error != ERROR_SUCCESS || memcmp(bytes, "go", 2u) != 0) return 5;
+    if (!VrRemoveOpenNamedPipeInfo(client)) return 5;
     CloseHandle(client); client = INVALID_HANDLE_VALUE;
     CloseHandle(server); server = INVALID_HANDLE_VALUE;
     make_event(&event, 0x20u);
