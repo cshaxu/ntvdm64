@@ -61,6 +61,10 @@ S4 P1 has completed the function-level DEM host boundary map: it separates
 source-visible host APIs, BOP composition, adapter-softpc mechanics and
 unavailable VDD/FDC paths, and fixes the dependency order before any source
 move; see the [DEM boundary map](etc/evidence/m0-t261-s4-p1-dem-host-boundary-map-001.md).
+S4 P2 has split the independent DEM directory group: its source-body invoke
+now belongs to `opennt-bop`, same-named OEM directory calls belong to
+`adapter-win32`, and fresh r010 formal build plus the direct-import fixture
+pass; see the [DEM directory split](etc/evidence/m0-t261-s4-p2-demdir-owner-split-001.md).
 
 ## Previous Active Packet — M0 T260
 

@@ -16,7 +16,8 @@
 #include <winternl.h>
 #include <winioctl.h>
 #include "adapter-win32/include/compiler/opennt_dem_ntdecl_compat.h"
-#include "demdir_shim.h"
+#include "demfile_shim.h"
+#include "adapter-win32/include/legacy-api/opennt_dem_oem_facade.h"
 #include "dem_drive_policy_shim.h"
 /* Direct source mirror: shared exact DASD/IOCTL layout and constants. */
 #include "opennt-bop/dem/demdasd.h"

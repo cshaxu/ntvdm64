@@ -12,8 +12,10 @@
 
 /* OpenNT source: src/opennt/base/mvdm/dos/dem/demdir.c.  The historical
  * DEM/SoftPC/OEM include closure is unavailable to the standalone CLI;
- * demdir_shim.h supplies only its named ABI and OEM capability declarations. */
-#include "../../opennt-host/dem/demdir_shim.h"
+ * DIVERGENCE(BOP-DIV-038): the unavailable historical DEM/SoftPC/OEM include
+ * closure is split into the source-shaped BOP composition and adapter-win32
+ * OEM facade, without changing the imported provider body. */
+#include "opennt_demdir_composition.h"
 
 /* demCreateDir - Create a directory
  *

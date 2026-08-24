@@ -2,7 +2,7 @@
 #include <string.h>
 #include <windows.h>
 #include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
-#include "opennt-host/dem/demdir_shim.h"
+#include "opennt-bop/dem/opennt_demdir_composition.h"
 
 typedef struct context { uint8_t guest[0x20000]; } context;
 static int publish(void *s,HANDLE h,uint32_t*t,DWORD*e){(void)s;(void)h;if(t)*t=1;if(e)*e=0;return 1;}

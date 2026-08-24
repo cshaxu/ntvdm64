@@ -237,7 +237,8 @@
       "sources": [
         "src/adapter-win32/facade/opennt_error_dialog_facade.c",
         "src/adapter-win32/facade/opennt_rtl_compat.c",
-        "src/adapter-win32/facade/opennt_pif_oem_facade.c"
+        "src/adapter-win32/facade/opennt_pif_oem_facade.c",
+        "src/adapter-win32/facade/opennt_dem_oem_facade.c"
       ]
     },
     {
@@ -246,7 +247,6 @@
         "src/opennt-host/dem/bx_ntvdm_host_drive_policy.c",
         "src/opennt-host/dem/bx_ntvdm_host_namespace.c",
         "src/opennt-host/dem/demdasd_ioctl_shim.c",
-        "src/opennt-host/dem/demdir_shim.c",
         "src/opennt-host/dem/demerror_lock_shim.c",
         "src/opennt-host/dem/demfile_shim.c",
         "src/opennt-host/dem/demgset_shim.c",
@@ -275,6 +275,7 @@
         "src/opennt-bop/dem/demdasd.c",
         "src/opennt-bop/dem/demdata.c",
         "src/opennt-bop/dem/demdir.c",
+        "src/opennt-bop/dem/opennt_demdir_composition.c",
         "src/opennt-bop/dem/demdisp.c",
         "src/opennt-bop/dem/opennt_dem_dispatch_composition.c",
         "src/opennt-bop/dem/demerror.c",
