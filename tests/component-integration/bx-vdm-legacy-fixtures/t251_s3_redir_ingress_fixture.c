@@ -39,6 +39,17 @@ static int expect(struct bx_ntvdm_generic_ud_outcome_v1 *outcome, int carry,
         outcome->gpr16_values[0] == ax;
 }
 
+static int named_pipe_helper_regression(void)
+{
+    char converted[64];
+    char name[] = "\\\\remote/PIPE/name";
+    if (!VrIsNamedPipeName("\\\\remote\\PIPE\\name") ||
+        VrIsNamedPipeName("\\MAILSLOT\\name")) return 0;
+    if (VrConvertLocalNtPipeName(converted, name) != converted ||
+        strcmp(converted, "\\\\remote\\PIPE\\name") != 0) return 0;
+    return 1;
+}
+
 static void put32(uint8_t *bytes, uint32_t value)
 { bytes[0] = (uint8_t)value; bytes[1] = (uint8_t)(value >> 8); bytes[2] = (uint8_t)(value >> 16); bytes[3] = (uint8_t)(value >> 24); }
 static uint16_t get16(const uint8_t *bytes)
@@ -257,6 +268,7 @@ int main(void)
     bx_ntvdm_redir_native_session_unbind(&session);
     bx_ntvdm_dem_direct_host_session_reset(&host);
     if (!mailslot_regression()) return 8;
+    if (!named_pipe_helper_regression()) return 11;
     puts("T251 S4 Redirector: typed selector-57 lifecycle and mailslot owner group pass");
     return 0;
 }

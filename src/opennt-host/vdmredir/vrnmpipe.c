@@ -11,6 +11,14 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* OpenNT imported these private product-header spellings.  They are local to
+ * the recovered source unit, rather than being exported into other OpenNT
+ * translation units. */
+#define IS_ASCII_PATH_SEPARATOR(ch) (((ch) == '/') || ((ch) == '\\'))
+#define LOCAL_DEVICE_PREFIX "\\\\."
+#define ARGUMENT_PRESENT(value) ((value) != NULL)
+#define ASSERT(value) ((void)0)
+
 typedef struct _OPEN_NAMED_PIPE_INFO {
     struct _OPEN_NAMED_PIPE_INFO *Next;
     HANDLE Handle;
@@ -78,15 +86,34 @@ VOID VrTerminateNamedPipes(VOID)
 
 BOOL VrIsNamedPipeName(LPSTR Name)
 {
-    int CharCount = 0;
-    if (Name == NULL || (*Name != '\\' && *Name != '/')) return FALSE;
-    ++Name;
-    if (*Name != '\\' && *Name != '/') return FALSE;
-    ++Name;
-    while (*Name && *Name != '\\' && *Name != '/') { ++Name; ++CharCount; }
-    if (!CharCount || !*Name) return FALSE;
-    ++Name;
-    return _strnicmp(Name, "PIPE", 4) == 0 && (Name[4] == '\\' || Name[4] == '/');
+    int CharCount;
+
+    if (IS_ASCII_PATH_SEPARATOR(*Name)) {
+        ++Name;
+        if (IS_ASCII_PATH_SEPARATOR(*Name)) {
+            ++Name;
+            CharCount = 0;
+            while (*Name && !IS_ASCII_PATH_SEPARATOR(*Name)) {
+                ++Name;
+                ++CharCount;
+            }
+            if (!CharCount || !*Name) {
+                return FALSE;
+            }
+            ++Name;
+        } else {
+            return FALSE;
+        }
+
+        if (!_strnicmp(Name, "PIPE", 4)) {
+            Name += 4;
+            if (IS_ASCII_PATH_SEPARATOR(*Name)) {
+                return TRUE;
+            }
+        }
+    }
+
+    return FALSE;
 }
 
 BOOL VrAddOpenNamedPipeInfo(HANDLE Handle, LPSTR lpFileName)
@@ -175,39 +202,58 @@ BOOL VrWriteNamedPipe(HANDLE Handle, LPBYTE Buffer, DWORD Buflen,
 
 LPSTR VrConvertLocalNtPipeName(LPSTR Buffer, LPSTR Name)
 {
-    DWORD prefix_length, pipe_length;
-    LPSTR pipe_name;
-    static CHAR this_computer_name[MAX_COMPUTERNAME_LENGTH + 1u];
-    static DWORD this_computer_name_length = 0xffffffffu;
-    BOOL mapped = FALSE;
-    if (Name == NULL || Name[0] == '\0' || Name[1] == '\0') {
-        SetLastError(ERROR_BAD_PATHNAME);
-        return NULL;
+    DWORD prefixLength;
+    DWORD pipeLength;
+    LPSTR pipeName;
+    static char ThisComputerName[MAX_COMPUTERNAME_LENGTH + 1] = {0};
+    static DWORD ThisComputerNameLength = 0xffffffff;
+    BOOLEAN mapped = FALSE;
+
+    ASSERT(Name);
+    ASSERT(IS_ASCII_PATH_SEPARATOR(Name[0]) && IS_ASCII_PATH_SEPARATOR(Name[1]));
+
+    if (ThisComputerNameLength == 0xffffffff) {
+        ThisComputerNameLength = sizeof(ThisComputerName);
+        if (!GetComputerName((LPTSTR)&ThisComputerName, &ThisComputerNameLength)) {
+            ThisComputerNameLength = 0;
+        }
     }
-    if (this_computer_name_length == 0xffffffffu) {
-        this_computer_name_length = (DWORD)sizeof(this_computer_name);
-        if (!GetComputerNameA(this_computer_name, &this_computer_name_length))
-            this_computer_name_length = 0u;
+
+    if (!ARGUMENT_PRESENT(Buffer)) {
+        Buffer = (LPSTR)LocalAlloc(LMEM_FIXED, strlen(Name) + 1);
     }
-    if (Buffer == NULL) Buffer = (LPSTR)LocalAlloc(LMEM_FIXED, strlen(Name) + 1u);
-    if (Buffer == NULL) return NULL;
-    pipe_name = strchr(Name + 2, '\\');
-    if (pipe_name == NULL) pipe_name = strchr(Name + 2, '/');
-    if (pipe_name == NULL) { SetLastError(ERROR_BAD_PATHNAME); return NULL; }
-    pipe_length = (DWORD)strlen(pipe_name);
-    prefix_length = (DWORD)(pipe_name - Name);
-    if (this_computer_name_length != 0u &&
-        prefix_length - 2u == this_computer_name_length &&
-        _strnicmp(this_computer_name, Name + 2, this_computer_name_length) == 0) {
-        strcpy(Buffer, "\\\\.");
-        mapped = TRUE;
+
+    if (Buffer) {
+        pipeName = strchr(Name + 2, '\\');
+        if (!pipeName) {
+            pipeName = strchr(Name + 2, '/');
+        }
+        ASSERT(pipeName);
+        pipeLength = (DWORD)strlen(pipeName);
+        /* DIVERGENCE(HOST-DIV-020): OpenNT narrowed two flat pointers to
+         * DWORD before subtracting, assigned `strlen` directly to DWORD, and
+         * used assignment-as-condition. Preserve their values while using
+         * defined x86/x64 arithmetic and warning-clean source spelling. */
+        prefixLength = (DWORD)(pipeName - Name);
+        if (ThisComputerNameLength && (prefixLength - 2 == ThisComputerNameLength)) {
+            if (!_strnicmp(ThisComputerName, &Name[2], ThisComputerNameLength)) {
+                strcpy(Buffer, LOCAL_DEVICE_PREFIX);
+                mapped = TRUE;
+            }
+        }
+        if (!mapped) {
+            strncpy(Buffer, Name, prefixLength);
+            Buffer[prefixLength] = 0;
+        }
+        strcat(Buffer, pipeName);
+
+        do {
+            if ((pipeName = strchr(Buffer, '/')) != NULL) {
+                *pipeName++ = '\\';
+            }
+        } while (pipeName);
+        (void)pipeLength;
     }
-    if (!mapped) {
-        strncpy(Buffer, Name, prefix_length);
-        Buffer[prefix_length] = '\0';
-    }
-    strcat(Buffer, pipe_name);
-    while ((pipe_name = strchr(Buffer, '/')) != NULL) *pipe_name = '\\';
-    (void)pipe_length;
+
     return Buffer;
 }
