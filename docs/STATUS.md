@@ -2,21 +2,25 @@
 
 ## Current Work
 
-**Active: M0 T261 S8** — adapter production-root cleanup. This succeeds the
-closed S7 session split; no S8 implementation is part of the S7 closure.
+**Active: M0 T261 S8** — owner-directed OpenNT-host source-fidelity closure.
+It supersedes the formerly planned adapter-residue cleanup, which is deferred
+to S9; S8 restores original owner packages and removes the listed shims.
 
 ## Active Packet
 
-### M0 T261 S8 — adapter production-root cleanup
+### M0 T261 S8 — OpenNT-host original-source exception closure
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T261 S8`, Ordinary Mode with a single-person dual-role review. |
-| Objective | Remove selector-aware observation and fixture-only residue from adapter production roots, without moving OpenNT provider semantics into any adapter. |
-| Non-goals | No new BOP enablement, provider semantic rewrite, Win32 or Bochs behavior change, generic adapter, or session-contract expansion. |
-| Reference Baseline | Closed T261/S7 session foundation and its explicit residual-owner inventory. |
-| Exit Criteria | Each retained adapter production file has a selector-blind mechanical/facade owner or is relocated to its named OpenNT/fixture owner; formal graph and focused regression pass. |
-| Admission | This is the next approved T261 sequence item. Its implementation is deliberately outside S7's commit. |
+| Objective | Replace every currently admitted non-original `opennt-host` exception by its original OpenNT owner body and the smallest same-shaped existing adapter; remove the obsolete drive-filter feature and delete the replaced shims. |
+| Scope | Delete include/exclude-drive policy; use the original DEM source path in place of the project namespace; delete the misplaced DEM policy facade; migrate XMS machine mechanics to `adapter-softpc`; import reached VDMREDIR units; import `nt_error.c`; then delete `namespace`, `xms`, `redir`, and top-level shim files as their declared replacements take over. |
+| Non-goals | No new BOP family/service, no Bochs semantic change, no new specialized or generic adapter, no virtual boot drive, and no recreation of an NT4 CSR/BaseSrv/CCPU product shell. |
+| Reference Baseline | Closed T261/S7 session foundation; `refs/opennt/base/mvdm/dos/dem/`, `vdmredir/`, `xms.486/`, and `softpc.new/host/src/nt_error.c`; the S1/S2 host source-truth ledger. |
+| Required Direction | Original BOP meaning stays in `opennt-bop`; original host VDMREDIR/`nt_error.c` bodies belong in re-rooted `opennt-host`; unavailable historical Win32 calls use `adapter-win32`; A20/IVT/RAM/SoftPC mechanics use `adapter-softpc`; neutral lifecycle uses `session`; `app` remains composition owner. |
+| Verification | Per-file replacement ledger; original path/name/hash or statement-level divergence proof; route/use-site and negative old-path scans; focused DEM/XMS/Redirector/top-level tests; formal Ninja closure; `git diff --check`; documentation governance. |
+| Exit Criteria | No include/exclude-drive policy remains; all host drives use the OpenNT-compatible default projection; the named namespace/XMS/Redirector/top-level shims and misplaced header are gone; original providers and only declared existing-adapter seams are linked and tested; every imported edit is README-registered. |
+| Admission | Owner explicitly directed this reprioritization and source replacement. The former adapter-root cleanup is deferred intact to S9. |
 
 ### M0 T261 S7 — closed: dependency-free session owner split
 
@@ -45,7 +49,7 @@ closed S7 session split; no S8 implementation is part of the S7 closure.
 | Non-goals | No `src/session` implementation, source move, BOP/provider change, Bochs change, adapter semantic migration, Ninja module addition, or test behavior change. |
 | Verification | [S6 governance evidence](etc/evidence/m0-t261-s6-architecture-contract-consistency-001.md); authority cross-read, targeted terminology/dependency scan, documentation inventory regeneration, documentation-governance verification and `git diff --check`. |
 | Exit Criteria | Architecture, goal, coding and rules agree on the ten-component target; S7 is the sole active implementation packet for `session`; no current build claim is inflated; and the follow-on cleanup has an explicit S owner. |
-| Follow-on | S7 implements only dependency-free `session`; S8 removes selector-aware observation and fixture-only product residue from adapter roots before later XMS/Redirector/top-level recovery. |
+| Follow-on | S7 implements only dependency-free `session`; S8 performs the owner-directed OpenNT-host source replacement; the former adapter-root cleanup is deferred to S9. |
 
 ### M0 T261 S5 — closed: adapter-bop generic ingress ownership split
 

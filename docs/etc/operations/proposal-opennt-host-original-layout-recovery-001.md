@@ -44,9 +44,56 @@ source or dependency must be added to that audit before it enters an S.
 | S5 | Split the selector-blind copied-frame ingress from `opennt-bop` into `adapter-bop`, preserving OpenNT selector/service routing in `opennt-bop`. | `adapter-bop` owns the generic typed ingress/completion ABI; it names no selector, service family, DOS/WOW algorithm or provider, and `opennt-bop` no longer owns generic machine-event mechanics. |
 | S6 | Reconcile the ten-component target across architecture, goal, coding, rules and the active-packet terminology. Do not move implementation. | Component count, current build-module count, mapping ownership, adapter terminology and S follow-on ownership are internally consistent. |
 | S7 | Split the dependency-free per-VDM `session` foundation out of current composition/adapter state. Move only neutral lifecycle, resource/token, capability-registration, completion/event and teardown ownership; keep `app` as instance owner and retain all OpenNT/BOP/Win32/Bochs meaning in its existing owner. | `session` has no product-component dependency or service vocabulary; all extracted state has an exact former/new-owner map; no component calls upward into `app` to obtain session state. |
-| S8 | Remove selector-aware BOP/NTDOS/COMMAND observation and fixture-only residue from adapter production roots; relocate source-owned interpretation to `opennt-bop` and generic test hooks to `tests/` without altering provider behavior. | `adapter-bop` and `adapter-softpc` are selector/service/family/DOS/WOW blind in production code; component roots contain no fixture-only provider. |
-| S9 | Resolve XMS, Redirector, top-level and configuration support with the same rule. | No generic `xms/`, `redir/`, `top_level/` or `config/` shim remains unclassified. |
-| S10 | Repair manifest/includes/tests, delete superseded host shims, run formal Ninja closure and audit source/README exception one-to-one. | All production `opennt-host` paths meet the re-rooted-original or explicit-exception rule. |
+| S8 | Restore the admitted non-original `opennt-host` exceptions through original OpenNT owner packages. Remove the drive-filter product feature; make original DEM, VDMREDIR and `nt_error.c` paths the providers; move XMS mechanics to `adapter-softpc`; and delete the superseded host shims. | The S8 disposition ledger is empty: every listed file is either byte-identical/re-rooted original source or has been deleted after its declared original/adaptor replacement passes focused tests. |
+| S9 | Remove selector-aware BOP/NTDOS/COMMAND observation and fixture-only residue from adapter production roots; relocate source-owned interpretation to `opennt-bop` and generic test hooks to `tests/` without altering provider behavior. | `adapter-bop` and `adapter-softpc` are selector/service/family/DOS/WOW blind in production code; component roots contain no fixture-only provider. |
+| S10 | Resolve remaining configuration support and any later-discovered host source-truth row not owned by S8, using the same rule. | No generic configuration or unclassified host shim remains. |
+| S11 | Repair manifest/includes/tests, run formal Ninja closure and audit source/README exception one-to-one. | All production `opennt-host` paths meet the re-rooted-original or explicit-exception rule. |
+
+## S8 owner-directed exception disposition
+
+S8 is the real source-fidelity closure for the currently admitted non-original
+`opennt-host` production files. It is not permission to retain a working
+source-derived replacement merely because it has a fixture.
+
+1. **Remove drive filtering entirely.** Delete the CLI/environment
+   include/exclude-drive policy, its masks, capture helpers, tests and all
+   dependent policy branches. The OpenNT-compatible default is that all
+   present host drives are projected; no private boot volume or fallback drive
+   is introduced by this removal.
+2. **Replace `dem/bx_ntvdm_host_namespace.{c,h}`.** The original DEM bodies
+   (`dos/dem/demdir.c`, `demfile.c`, `demsrch.c`, `demfcb.c` and their reached
+   companions) remain the source owner in `opennt-bop`. S8 must replace the
+   project-authored namespace provider with their original call sequence plus
+   only same-shaped `adapter-win32`/`adapter-softpc` seams where source audit
+   proves one is required, then delete the namespace files.
+3. **Delete `dem/opennt_dem_drive_policy_facade.h`.** It is a misplaced,
+   unused BOP-composition declaration; its implementation is already owned by
+   `opennt-bop/dem`. It has no replacement or migration target.
+4. **Move XMS mechanics out of `opennt-host`.** Split
+   `xms/xms_shim.{c,h}` by reached original interface: A20, IVT, checked RAM
+   and historical pointer-call mechanics become same-shaped `adapter-softpc`
+   implementations; the original `xms.486` algorithm/body remains in
+   `opennt-bop/xms`. Delete both host shim files once the original callers and
+   their focused XMS tests use the new seam.
+5. **Replace `redir/redir_session_shim.{c,h}` with the original VDMREDIR
+   package.** Import only the reached original owner units from
+   `base/mvdm/vdmredir/` (including the reached dispatcher, initialization,
+   named-pipe and mailslot units and headers) under re-rooted
+   `opennt-host/vdmredir/` paths. Preserve their call/record/failure structure;
+   use existing `adapter-win32`, `adapter-softpc` and `session` contracts for
+   unavailable dependencies. Do not create `adapter-redir`. Delete the shim
+   and its self-authored pipe/mailslot implementation after replacement.
+6. **Replace `top_level/top_level_nosupport_shim.{c,h}` with original
+   `softpc.new/host/src/nt_error.c`.** Re-root that source and its reached
+   headers in `opennt-host`; retain `host_direct_access_error` ordering and
+   per-thread duplicate suppression. A public modern dialog or controlled-stop
+   seam belongs in `adapter-win32`/`session` only where the original NT4
+   UI/CSR dependency cannot compose. Delete the shim afterward.
+
+No S8 item may add `adapter-redir`, `adapter-vdd`, `adapter-debugger`,
+`adapter-wow`, `adapter-common`, `adapter-host` or `compat`. Each imported
+body edit requires a statement-local `DIVERGENCE:` and one README exception
+row; each deleted file needs a replacement/use-site and negative old-path scan.
 
 ## Target layout rule
 
