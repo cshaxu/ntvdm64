@@ -2,9 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T265 S2 — Bochs production-root rename.** S1 governance closed
-in `ff2d0d70`; S2 performs only the approved `git mv` root rename and exact
-consumer/build-reference repair, without behavior expansion.
+**Active: M0 T265 S3 — adapter-Bochs provenance migration.** S1 governance
+closed in `ff2d0d70`; S2 root migration closed in `d67c130b`. S3 now returns
+upstream Bochs material to the mirror boundary while retaining only
+project-authored, Bochs-only assembly in `adapter-bochs`.
 
 ## Active Packet
 
@@ -58,6 +59,26 @@ source, formal build inputs and support-header references use
 production roots.  Fresh `build/M0-T265-S2/r001` completed its final 471-step Ninja
 closure with exit `0` and 81 linked executables.  See
 [S2 evidence](etc/evidence/m0-t265-s2-bochs-production-root-rename-001.md).
+
+### M0 T265 S3 — adapter-Bochs provenance migration
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T265 S3`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner-approved T265 proposal S3 after S2 closure. |
+| Objective | Classify every `adapter-bochs` source by pinned Bochs provenance and return upstream-original, true-subset or same-shaped material to its upstream-relative `bochs-core` path or to `bochs-core-overlay` when the mirror rule requires it. |
+| Non-goals | No new CPU/device/BOP/OpenNT/Win32 semantics, no generic compatibility layer, and no change to the app-only entry rule for `adapter-bochs`. |
+| Reference Baseline | T265 proposal S3, pinned Bochs 2.6 baseline, `adapter-bochs` source inventory and T265/S2 build closure. |
+| Files And ABI Surface | `adapter-bochs`, affected `bochs-core`/`bochs-core-overlay` paths, formal manifest, provenance ledger, README exception register and focused fixtures; existing mechanical ABI only. |
+| Applicable Rules | Mirror identity/subset/divergence rules; private-overlay rule; `adapter-bochs` Bochs-only vocabulary; source-first provenance and formal-build closure. |
+| Verification | File-by-file baseline comparison, destination collision check, include/link edge scan, README/`DIVERGENCE:` review, focused formal Ninja closure, governance and `git diff --check`. |
+| Expected Markers | Every retained adapter file is self-authored Bochs assembly; every moved file has an upstream-relative mirror or private-overlay disposition and recorded provenance. |
+| Asset Needs | Existing pinned Bochs reference, current component manifest and no new external import. |
+| Reporting Requirements | Report each file disposition, all subset/modified markers, retained self-authored assembly, and any deferred overlay move. |
+| Stop Conditions | A file needs non-Bochs vocabulary, an overlay would need an external consumer, provenance cannot be established, or behavior expansion is required. |
+| Exit Criteria | `adapter-bochs` contains only self-authored Bochs-only assembly; moved mirror/overlay files and all required registration/build edges are verified. |
+| Original Owner Request | “S3. adapter-bochs里面的原版镜像和镜像修改送入 bochs-core 和bochs-core-overlay”. |
+| Similar-Issue Sweep | Root-level Bochs files, `iodev`/`gui` origin material, true subsets, source list ownership, and accidental direct consumers of a private overlay. |
 
 ### M0 T264 S1 — project code filename inventory
 
