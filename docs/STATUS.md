@@ -2,11 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T263 S2 — OpenNT `bin86` guest-package admission.** This packet
-adds the complete original guest companion package with source identity and
-hash evidence, without asserting any new runtime behavior.
+**Active: M0 T263 S3 — OpenNT SoftPC firmware/ROM initial mirror.** This
+packet admits only the original `bios` and `roms` packages as opaque source
+inputs; it does not enable or recreate the historical SoftPC product shell.
 
 ## Active Packet
+
+### M0 T263 S3 — OpenNT SoftPC firmware/ROM initial mirror
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T263 S3`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | T263 proposal S3; owner approved `softpc.new/bios` and `roms` as the new component's first package boundary. |
+| Objective | Import and source-verify the original firmware/ROM source/input packages below `opennt-softpc`. |
+| Non-goals | No historical SoftPC runtime, Bochs change, adapter behavior, BIOS activation, default load, static library or formal-build edge. |
+| Reference Baseline | `O:\\repos.external\\opennt\\base\\mvdm\\softpc.new`, Git `5c5b979e`; T263/S1 census. |
+| Files And ABI Surface | 27 `bios` and 8 `roms` source/input files, component README, S3 evidence and status only; no host ABI. |
+| Applicable Rules | Source policy, original mirror zero-difference/README register rule and Bochs/OpenNT hard boundary. |
+| Verification | Recursive same-relative-path count plus SHA-256 equality for all 35 files; no local divergence. |
+| Expected Markers | 35 exact files, zero local exceptions and zero Ninja graph expansion. |
+| Asset Needs | Pinned OpenNT source root and Git provenance. |
+| Reporting Requirements | State source package counts, opaque-input boundary and absence of a machine-runtime assertion. |
+| Stop Conditions | Hash/path mismatch, unregistered source change, machine semantic change, `bx-mantle` OpenNT dependency or default link admission pauses the packet. |
+| Exit Criteria | Both complete original packages are exact, README/evidence agree and architecture boundary remains unchanged. |
+| Original Owner Request | “`softpc.new/bios`、`roms`：属于机器固件/装配输入…应该放在 opennt-softpc 模块。” |
+| Similar-Issue Sweep | Firmware mistaken for an emulator, default BIOS activation, OpenNT naming leaked into mantle/core and build-input provenance drift. |
+
+**S3 P1 completed:** 27 `bios` plus 8 `roms` files were copied
+source-identically and recursively SHA-256 verified. See the [admission
+evidence](etc/evidence/m0-t263-s3-opennt-softpc-firmware-rom-admission-001.md).
 
 ### M0 T263 S2 — OpenNT `bin86` guest-package admission
 
