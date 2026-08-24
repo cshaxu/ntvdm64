@@ -57,6 +57,10 @@ S3 P9 has now completed fresh formal root `r009` (458 Ninja edges), confirmed
 the PIF/COMMAND-focused fixtures and recorded the two unrelated DASD/Redirector
 fixture limitations without treating either as passing evidence; see the
 [formal layout closure](etc/evidence/m0-t261-s3-p9-formal-layout-closure-001.md).
+S4 P1 has completed the function-level DEM host boundary map: it separates
+source-visible host APIs, BOP composition, adapter-softpc mechanics and
+unavailable VDD/FDC paths, and fixes the dependency order before any source
+move; see the [DEM boundary map](etc/evidence/m0-t261-s4-p1-dem-host-boundary-map-001.md).
 
 ## Previous Active Packet — M0 T260
 
