@@ -49,6 +49,57 @@ Return Value:
     SET_ERROR(ERROR_NOT_SUPPORTED);
 }
 
+VOID
+VrGetMailslotInfo(
+    VOID
+    )
+
+/*++
+
+Routine Description:
+
+    Performs DosMailslotInfo request on behalf of VDM redir.
+
+Arguments:
+
+    None. All arguments are extracted from 16-bit context descriptor.
+
+Return Value:
+
+    None. Returns values in VDM Ax and Flags registers.
+
+--*/
+
+{
+    PVR_MAILSLOT_INFO ptr;
+    DWORD MaxMessageSize, NextSize, MessageCount;
+    BOOL Ok;
+
+    if ((ptr = VrpMapMailslotHandle16(getBX())) == NULL) {
+        SET_ERROR(ERROR_INVALID_HANDLE);
+    } else {
+        Ok = GetMailslotInfo(ptr->Handle32,
+                              &MaxMessageSize,
+                              &NextSize,
+                              &MessageCount,
+                              NULL);
+        if (!Ok) {
+            SET_ERROR(VrpMapLastError());
+        } else {
+            setAX((WORD)MaxMessageSize);
+            setBX((WORD)MaxMessageSize);
+            if (NextSize == MAILSLOT_NO_MESSAGE) {
+                setCX(0);
+            } else {
+                setCX((WORD)NextSize);
+            }
+            setDX(0);
+            setSI((WORD)MessageCount);
+            setCF(0);
+        }
+    }
+}
+
 /* The following list primitives retain the original vrmslot.c record order,
  * list traversal and process cleanup ownership.  DIVERGENCE(BOP-DIV-058):
  * original Handle16Bitmap allocation is replaced by the one session-owned

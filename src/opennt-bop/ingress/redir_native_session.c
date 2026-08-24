@@ -485,25 +485,6 @@ static int mailslot_delete(const struct bx_ntvdm_generic_ud_event_v1 *event,
     return 1;
 }
 
-static int mailslot_info(const struct bx_ntvdm_generic_ud_event_v1 *event,
-    struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
-{
-    PVR_MAILSLOT_INFO record = VrpMapMailslotHandle16(word_at(event->ebx));
-    HANDLE host; DWORD maximum, next, count, timeout;
-    if (record == NULL || !g_active_session->direct->lookup_handle(
-            g_active_session->direct->state, record->Handle16, &host) ||
-        !GetMailslotInfo(host, &maximum, &next, &count, &timeout)) {
-        resume_with_error(event, outcome, record == NULL ? ERROR_INVALID_HANDLE : GetLastError()); return 1;
-    }
-    resume_success(event, outcome);
-    set_gpr16(outcome, 0u, (uint16_t)maximum);
-    set_gpr16(outcome, 3u, (uint16_t)maximum);
-    set_gpr16(outcome, 1u, next == MAILSLOT_NO_MESSAGE ? 0u : (uint16_t)next);
-    set_gpr16(outcome, 2u, 0u);
-    set_gpr16(outcome, 6u, (uint16_t)count);
-    return 1;
-}
-
 static int mailslot_get_record(const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome,
     PVR_MAILSLOT_INFO *out_record, HANDLE *out_host)
@@ -638,7 +619,8 @@ static int dispatch_service(uint8_t service,
         return mailslot_delete(event, outcome);
     case 0x0au: /* SVC_RDRGETMAILSLOTINFO */
         if (g_active_session->loaded == 0u) { resume_with_error(event, outcome, ERROR_INVALID_FUNCTION); return 1; }
-        return mailslot_info(event, outcome);
+        return bx_ntvdm_redir_native_session_invoke_scoped_body(event, outcome,
+            VrGetMailslotInfo, 4u);
     case 0x0cu: /* SVC_RDRPEEKMAILSLOT */
         if (g_active_session->loaded == 0u) { resume_with_error(event, outcome, ERROR_INVALID_FUNCTION); return 1; }
         return bx_ntvdm_redir_native_session_invoke_scoped_body(event, outcome,

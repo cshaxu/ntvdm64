@@ -10,6 +10,7 @@
 #include <windows.h>
 
 #include "adapter-softpc/opennt_ccpu_sas_facade.h"
+#include "opennt-host/vdmredir/vrputil_compat.h"
 
 #define SET_ERROR(err) { setAX((WORD)(err)); setCF(1); }
 /* DIVERGENCE(BOP-DIV-059): OpenNT's record carries a raw process HANDLE;
@@ -54,6 +55,7 @@ void VrpRemoveProcessMailslotsWithRelease(WORD dos_pdb, void *state,
 void VrpResetMailslots(void *state, bx_ntvdm_vrmslot_release_fn release);
 
 void VrPeekMailslot(void);
+void VrGetMailslotInfo(void);
 void VrTerminateMailslots(WORD DosPdb);
 void bx_ntvdm_vrmslot_terminate_bop_body(void);
 
