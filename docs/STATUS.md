@@ -2,14 +2,80 @@
 
 ## Current Work
 
-**Active: M0 T261 S9** — adapter production-root semantic-residue cleanup.
-S8 is closed: the admitted OpenNT-host source exceptions are re-rooted,
-replaced or explicitly registered; S9 now removes selector-aware and
-fixture-only residue from mechanical adapter production roots.
+**Active: M0 T261 S11** — final OpenNT-host manifest, include and exception
+closure. All technical exit checks are complete; this packet remains active
+until the owner selects and admits the next Queue candidate, because the
+documentation gate requires one active `M/T/S` packet.
 
 ## Active Packet
 
-### M0 T261 S9 — adapter production-root semantic-residue cleanup
+### M0 T261 S11 — final OpenNT-host manifest, include and exception closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T261 S11`, Ordinary Mode with a single-person dual-role review. |
+| Objective | Prove that the final production `opennt-host` layout, public includes, static-library manifest and local exception register are coherent as one original-source-first build closure. |
+| Scope | `src/opennt-host`, its README, current consumers/includes, component manifest/Ninja graph, all reached focused fixtures and S1/S8/S10 evidence. |
+| Non-goals | No new host provider/BOP capability, no configuration or machine feature, no Bochs change, no import merely to increase source count, and no VDD/CSR/WOW product-shell recovery. |
+| Required Direction | Each `opennt-host` production body is either re-rooted original OpenNT source or carries one statement-level README exception. The formal manifest may compile only the admitted reached host bodies; exact retained originals remain production source but are not falsely claimed as reached. |
+| Verification | One-to-one source/README divergence audit, include/old-path/manifest scan, full existing-Ninja graph execution, direct host fixtures and explicit classification of cross-owner fixture tails, documentation governance and `git diff --check`. |
+| Exit Criteria | All production `opennt-host` paths meet the re-rooted-original or explicit-exception rule; manifest/includes/tests agree; no generic or unclassified host shim remains; the formal graph passes; direct host portions pass or a later `opennt-bop`/machine tail is explicitly separated. |
+| Admission | T261 proposal S11, after S10 residual-source closure. |
+
+**S11 P2 completed:** the formal graph executed all pending
+affected compile/link work and ended with `ninja -n all` reporting no work;
+the final closure compiled no `bx-core` source. Documentation governance,
+component-manifest, production-tree and generic-UD boundary gates pass. The
+technical-closure record distinguishes the two remaining cross-owner fixture
+tails from host-layout evidence: [T261 technical closure](etc/evidence/m0-t261-s11-final-technical-closure-20260824.md).
+
+**S11 P1 completed:** the final one-to-one audit finds three byte-identical
+re-rooted PIF files; four reached original host C bodies; three include-only
+same-shaped compatibility declarations; and exactly the README-registered
+`HOST-DIV-012..023` edits. The refreshed formal graph compiles no `bx-core`
+source. PIF and BOP59 fixtures pass; the Redirector mailslot (`exit=8`) and
+configuration DASD/FDC (`exit=2`) fixture tails are explicitly classified as
+separate `opennt-bop`/machine work, not host closure. See the
+[S11 audit](etc/evidence/m0-t261-s11-opennt-host-final-manifest-exception-audit-001.md).
+
+### M0 T261 S10 — closed: configuration and residual host-source-truth closure
+
+S10 proves that no configuration or unclassified host shim remains. Its
+reached `UMBNotify` fragment preserves the original no-op ABI with one
+registered `/W4 /WX` adjustment; it does not represent UMB allocation or a
+machine feature. See the [S10 audit](etc/evidence/m0-t261-s10-configuration-residual-source-truth-audit-001.md).
+
+### M0 T261 S10 — historical packet
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T261 S10`, Ordinary Mode with a single-person dual-role review. |
+| Objective | Close the proposal's residual configuration and later-discovered host-source-truth check without enabling a new provider or recreating a product shell. |
+| Scope | The S1/S2 host ledger, `src/opennt-host`, the reached configuration-complete `UMBNotify` fragment and its BOP-owned caller, README exception registration, formal build manifest and focused fixture. |
+| Non-goals | No UMB allocator, FDC/DASD, VDD/ICA/CSR product shell, new BOP enablement, Bochs change, or generic configuration adapter. |
+| Required Direction | Configuration route meaning remains in `opennt-bop`; the original empty `UMBNotify` body must remain source-identifiable and must not be presented as UMB allocation/device setup. Host-only source rows use the same four-rung disposition as S8. |
+| Verification | Full current host-tree/manifest scan, source comparison with `nt_umb.c`, direct caller review, focused configuration fixture, refreshed formal Ninja target, documentation governance and `git diff --check`. |
+| Exit Criteria | No generic configuration or unclassified host shim remains; every discovered row has a direct original path, statement-level registered divergence, declared adapter seam, or explicit later-owner disposition. |
+| Admission | T261 proposal S10, following S9 closure. |
+
+**S10 P1 completed:** the residual host-tree and configuration audit finds
+eleven live `opennt-host` files, no generic configuration root or `*_shim`
+path, and only the README-registered `HOST-DIV-012..023` source edits. The
+reached `UMBNotify(UCHAR)` fragment now preserves its original signature and
+empty result with the sole MSVC `/W4 /WX` `(void)code` adjustment
+(`BOP-DIV-081`). The incrementally rebuilt configuration fixture reproduces
+its prior `exit=2`: its later original `demDasdInit` invokes the explicitly
+unimplemented FDC/INT13 owner. That cross-owner tail is not a configuration
+or host-layout success claim. See the [S10 audit](etc/evidence/m0-t261-s10-configuration-residual-source-truth-audit-001.md).
+
+### M0 T261 S9 — closed: adapter production-root semantic-residue cleanup
+
+S9 moved every admitted source-owned INT06/DEM/DPMI/BOP interpretation to
+`opennt-bop`, deleted fixture-only production providers, and left both
+mechanical adapter roots selector/service/family/DOS/WOW blind. Its final
+evidence is the [S9 residue closure audit](etc/evidence/m0-t261-s9-final-adapter-residue-closure-001.md).
+
+### M0 T261 S9 — historical packet
 
 | Field | Record |
 | --- | --- |

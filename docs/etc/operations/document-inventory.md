@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2241 |
+| Documentation records | 2245 |
 | --- | --- |
-| Generated UTC | 2026-08-24T15:53:55Z |
+| Generated UTC | 2026-08-24T16:12:10Z |
 
 ## Entries
 
@@ -190,6 +190,9 @@ content-divergent entries.
 | etc/evidence/m0-t260-s6-host-win32-layout-migration-001.md | indexed supporting material | fe60f223518cb10e421f0bba5261ff03bb5a9c7039f7655f80e0613cdd90c12f |
 | etc/evidence/m0-t260-s7-softpc-adapter-layout-migration-001.md | indexed supporting material | 8d3969c6458316b1c8feeaaabdf20852cfebb78d49407fc1f2d01080b86d1cbd |
 | etc/evidence/m0-t260-s8-component-layout-build-closure-001.md | indexed supporting material | 060c841e2a4ddf82955ba7a7f037d069b11b500227a7955981dd5cc7f98aeb7e |
+| etc/evidence/m0-t261-s10-configuration-residual-source-truth-audit-001.md | indexed supporting material | 3e0a02e6321803c57ccafb1afcd7b7af5fa991491dc9b3e2c7e49d07eaadba20 |
+| etc/evidence/m0-t261-s11-final-technical-closure-20260824.md | indexed supporting material | 1587210999aae0d6480faef987d709d15559ca8a2587edb3ac016d6ed5a4474e |
+| etc/evidence/m0-t261-s11-opennt-host-final-manifest-exception-audit-001.md | indexed supporting material | 4acf748dbf0aad3d100aa00b62a25e8cd06c2b730e96d14e27c2f4785cdad429 |
 | etc/evidence/m0-t261-s3-p1-pif-original-re-root-001.md | indexed supporting material | 6cb3190b1a1bd05d96e42601f995878897c3499fa79c6e794e328d19165eacf3 |
 | etc/evidence/m0-t261-s3-p2-pif-owner-separation-001.md | indexed supporting material | 699c21c85a66efe011dd59b0b6b089d1c41a9d759145acc6ed836eb22baa8beb |
 | etc/evidence/m0-t261-s3-p3-command-session-ingress-rehome-001.md | indexed supporting material | f400cbd77568e77043f5651319afe5653237b3b5d5de8ca10f11e57ed80d3523 |
@@ -219,6 +222,7 @@ content-divergent entries.
 | etc/evidence/m0-t261-s8-p5-vrmslot-record-lifecycle-recovery-001.md | indexed supporting material | 4ec62d52dfc5b96c6685897d0f5d48305af8b00e20beb4b5bcb364099d570562 |
 | etc/evidence/m0-t261-s8-p6-vdmredir-host-body-disposition-001.md | indexed supporting material | 18291046bb0a3b7c2d3d1855dbe6851d6bcde8d15bc30e93fa4101ad52f655ad |
 | etc/evidence/m0-t261-s9-adapter-residue-owner-map-001.md | indexed supporting material | 8cca1fc57cd65fc7efae40e778e0d4ad069399af7534efaa8310f7dbc265cfbc |
+| etc/evidence/m0-t261-s9-final-adapter-residue-closure-001.md | indexed supporting material | ef5fc0635b137fb9b027eb984382b6e6821f76c423ae2d806c781b1df0ea2090 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -2255,7 +2259,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | e9f991fdf5c735017a717bb0f6f4aa562ff2b8f3ae3d846742e66ea4f5ba50e1 |
+| STATUS.md | principal control document | 80059942b91d11578d94bca92bf8a0e2bb0ec0a4ac16cdc4921abb6a2377e25a |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

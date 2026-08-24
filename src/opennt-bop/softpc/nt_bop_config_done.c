@@ -5,7 +5,7 @@
 #include "opennt-bop/dem/opennt_dem_ccpu_sas_facade.h"
 
 void demDasdInit(void);
-void UMBNotify(unsigned long base);
+void UMBNotify(unsigned char code);
 
 void MS_bop_E(void)
 {
