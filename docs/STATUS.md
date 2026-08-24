@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T261 S3** — PIF/COMMAND original-layout recovery.
+**Active: M0 T261 S4** — DEM host-support original-layout recovery.
 
 ## Active Packet
 
-### M0 T261 S3 — PIF/COMMAND original-layout recovery
+### M0 T261 S4 — DEM host-support original-layout recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T261 S3`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | T261/S2 source-recovery ledger closed in commit `6c0313a8`; owner approved T261 implementation. |
-| Objective | Re-root the direct OpenNT PIF source unchanged, isolate its exact include closure, and move or rename PIF/COMMAND composition and compatibility surfaces according to the binding ledger without changing BOP behavior. |
-| Non-goals | No COMMAND service enablement, lifecycle/worker redesign, PIF algorithm rewrite, new host policy, guest/Bochs change, or global source-tree import. |
-| Reference Baseline | T261/S1 and T261/S2 ledgers; `softpc.new/host/{src/nt_pif.c,inc/{nt_pif.h,nt_uis.h}}`; `dos/command/{cmdpif.c,cmdmisc.c,cmdexec.c}`; T260 formal manifest. |
-| Files And ABI Surface | PIF triplet, parser composition, PIF OEM/config facade, COMMAND binary/environment/misc/native-session seams, their include paths and static-library inputs. |
-| Applicable Rules | Direct original body unchanged; every imported-body edit has `DIVERGENCE`; adapter-win32 owns legacy Win32/NTDLL shape; adapter-softpc owns mapping/mechanics; BOP/app own session/route meaning. |
-| Verification | SHA-256 after move; include-root and manifest audit; focused PIF/COMMAND fixture link/run where unchanged; formal Ninja closure; diff and documentation governance. |
-| Expected Markers | `softpc.new/host/src/nt_pif.c` and `inc/{nt_pif.h,nt_uis.h}` retain original bytes; no PIF composition file masquerades as an original source; each moved seam preserves its source-shaped ABI. |
-| Asset Needs | Existing PIF/COMMAND fixtures, formal Ninja generator/manifest, OpenNT source tree and current adapter headers. |
-| Reporting Requirements | Exact rename map, source hash evidence, target component ownership, preserved ABI/failure behavior, any divergence/exception and build result. |
-| Stop Conditions | A PIF header/layout collision requires a semantic rewrite, a public facade changes original error/order, or a move creates a cross-owner cycle. Pause that row and record the reason. |
-| Exit Criteria | The PIF direct source triplet is re-rooted and compiled through its exact include path; PIF/COMMAND non-original surfaces have a named final owner or exception; old generic names in the completed PIF slice are deleted; formal closure passes. |
-| Original Owner Request | “准入开始实施”。 |
-| Similar-Issue Sweep | All PIF headers/types/globals, COMMAND BOP callers, OEM/path/error facades, static manifest entries, tests and README divergence rows. |
+| Identifier Mode | `M0 T261 S4`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | T261/S3 is closed by the formal layout evidence; the owner-approved T261 proposal admits its next DEM owner-recovery sequence. |
+| Objective | Recover or relocate DEM host support by original source owner while preserving host-file API shape, error order, opaque-handle mapping and guest-memory lease contracts. |
+| Non-goals | No new DEM BOP enablement, redirector protocol completion, DASD/FDC implementation, new mutation policy, guest/Bochs change, or source-provider redesign. |
+| Reference Baseline | T261/S1 source truth, T261/S2 binding ledger rows for `dem/*`, T230 direct-source mirrors, T232 shared handle manager and T261/S3 formal root. |
+| Files And ABI Surface | `opennt-host/dem/*`, direct OpenNT `dem*.c` callers in `opennt-bop/dem`, their host file/directory/error/handle declaration seams, and their adapter-win32/adapter-softpc includes. |
+| Applicable Rules | Original source and call shape first; every imported-body edit has `DIVERGENCE`; adapter-win32 owns historical public API facades; adapter-softpc owns mapping/mechanics; no component may depend upward on BOP routing. |
+| Verification | Per-group original-source/ABI/failure ledger, component-direction scan, focused DEM fixtures, fresh formal Ninja build, `git diff --check` and documentation governance. |
+| Expected Markers | Each surviving host file has a direct original path or named source-derived exception; no generic DEM shim remains merely because it combines BOP state with host capability; original source callers preserve failure order. |
+| Asset Needs | Existing OpenNT DEM mirror/reference sources, adapter interfaces, shared mapping manager, focused fixtures and formal Ninja generator. |
+| Reporting Requirements | Exact caller/function map, retained original interface/layout/order, extracted adapter boundary, source divergence/exception, focused result and any deferred machine/Redirector owner. |
+| Stop Conditions | A split requires BOP service interpretation in `opennt-host`, a host component call upward into `opennt-bop`, a second mapping/handle manager, or a semantic rewrite of an imported body. Pause that group and record the dependency. |
+| Exit Criteria | Every DEM host-support file has moved to an original-owner path, a declared adapter, BOP composition, or an explicit source-derived host exception; no reverse dependency is introduced; all repaired consumers build and declared focused tests pass or retain an owner-specific limitation. |
+| Original Owner Request | “实施opennt-host组件的原生化”。 |
+| Similar-Issue Sweep | DEM file/dir/gset/handle/error/search/DASD seams, VDD/debug/FDC exceptions, Redirector cross-calls, app and fixture include paths, static manifest and component README rows. |
 
 **Current progress:** S1 closed in `25f817ad`; S2 P1 closed in `6c0313a8`
 with a 47/47 recovery ledger. S3 P1 has re-rooted the byte-identical PIF
@@ -53,6 +53,10 @@ S3 P7 has similarly moved the XMS native `#UD` session to `opennt-bop/ingress`;
 fresh `r007` compiles it and passes component gates; see [XMS session evidence](etc/evidence/m0-t261-s3-p7-xms-session-owner-rehome-001.md).
 S3 P8 has moved the source-parity configuration-complete `UMBNotify` unit to
 `opennt-bop/softpc`; r008 compiles it with component gates passing; see [configuration-complete evidence](etc/evidence/m0-t261-s3-p8-config-complete-owner-rehome-001.md).
+S3 P9 has now completed fresh formal root `r009` (458 Ninja edges), confirmed
+the PIF/COMMAND-focused fixtures and recorded the two unrelated DASD/Redirector
+fixture limitations without treating either as passing evidence; see the
+[formal layout closure](etc/evidence/m0-t261-s3-p9-formal-layout-closure-001.md).
 
 ## Previous Active Packet — M0 T260
 
