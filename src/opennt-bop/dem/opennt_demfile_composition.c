@@ -3,7 +3,7 @@
  * Redirector protocol stays in its lower host-capability owner. */
 
 #include "opennt_demfile_composition.h"
-#include "opennt-host/redir/redir_session_shim.h"
+#include "opennt-host/vdmredir/vrnmpipe_compat.h"
 
 void demChMod(void);
 void demCreate(void);
@@ -15,12 +15,8 @@ void demCheckPath(void);
 
 BOOL LoadVdmRedir(void)
 {
-    return bx_ntvdm_redir_load();
+    return VrInitialize();
 }
-LPSTR VrConvertLocalNtPipeName(LPSTR existing, LPSTR name)
-{ return bx_ntvdm_redir_convert_local_nt_pipe_name(existing, name); }
-void VrAddOpenNamedPipeInfo(HANDLE file, LPSTR name)
-{ (void)bx_ntvdm_redir_add_open_named_pipe_info(file, name); }
 
 void *Sim32GetVDMPointer(ULONG address, ULONG bytes, int protect)
 {

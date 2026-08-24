@@ -8,7 +8,7 @@
  */
 
 #include "opennt_dem_ccpu_sas_facade.h"
-#include "opennt-host/redir/redir_session_shim.h"
+#include "opennt-host/vdmredir/vrnmpipe_compat.h"
 #include "bx_ntvdm_guest_pointer_manager.h"
 
 #include <stdlib.h>
@@ -584,13 +584,7 @@ void bx_ntvdm_demhndl_free_vdm_pointer(ULONG far_pointer, USHORT bytes,
     }
 }
 
-int IsVdmRedirLoaded(void) { return bx_ntvdm_redir_loaded(); }
-void VrRemoveOpenNamedPipeInfo(HANDLE file) { (void)bx_ntvdm_redir_remove_open_named_pipe_info(file); }
-int VrIsNamedPipeHandle(HANDLE file) { return bx_ntvdm_redir_is_named_pipe_handle(file); }
-int VrReadNamedPipe(HANDLE file, LPVOID buffer, DWORD count, DWORD *read_out, DWORD *error_out)
-{ return bx_ntvdm_redir_read_named_pipe(file, buffer, count, read_out, error_out); }
-int VrWriteNamedPipe(HANDLE file, LPVOID buffer, DWORD count, DWORD *written_out)
-{ return bx_ntvdm_redir_write_named_pipe(file, buffer, count, written_out); }
+int IsVdmRedirLoaded(void) { return VrInitialized(); }
 int bx_ntvdm_demhndl_invoke_body(bx_ntvdm_demhndl_call *call,
     void (*body)(void))
 {

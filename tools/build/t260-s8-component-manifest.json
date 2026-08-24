@@ -263,7 +263,7 @@
     {
       "name": "opennt-host",
       "sources": [
-        "src/opennt-host/redir/redir_session_shim.c",
+        "src/opennt-host/vdmredir/vrnmpipe.c",
         "src/opennt-host/softpc.new/host/src/nt_error.c"
       ]
     },
@@ -340,6 +340,7 @@
         "src/opennt-bop/ingress/dem_v2_runtime_session.c",
         "src/opennt-bop/ingress/dem_v2_startup_composition.c",
         "src/opennt-bop/ingress/redir_v2_generic_ud_bridge.c",
+        "src/opennt-bop/ingress/redir_native_session.c",
         "src/opennt-bop/ingress/softpc_emm_unavailable_v2_generic_ud_bridge.c",
         "src/opennt-bop/ingress/softpc_machine_interrupt_v2_generic_ud_bridge.c",
         "src/opennt-bop/ingress/softpc_memory_size_v2_generic_ud_bridge.c",

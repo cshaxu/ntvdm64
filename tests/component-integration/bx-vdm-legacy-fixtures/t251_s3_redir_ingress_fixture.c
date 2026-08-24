@@ -4,7 +4,8 @@
 
 #include "opennt-bop/ingress/dem_direct_session.h"
 #include "adapter-softpc/bx_ntvdm_host_handle_manager.h"
-#include "opennt-host/redir/redir_session_shim.h"
+#include "opennt-bop/ingress/redir_native_session.h"
+#include "opennt-host/vdmredir/vrnmpipe_compat.h"
 #include "opennt-bop/ingress/redir_v2_generic_ud_bridge.h"
 
 static void make_event(struct bx_ntvdm_generic_ud_event_v1 *event, uint8_t service)
@@ -191,7 +192,7 @@ int main(void)
         !expect(&outcome, 1, ERROR_INVALID_FUNCTION)) return 2;
     make_event(&event, 0x00u);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
-        !expect(&outcome, 0, 0u) || !bx_ntvdm_redir_loaded()) return 3;
+        !expect(&outcome, 0, 0u) || !VrInitialized()) return 3;
     server = CreateNamedPipeW(L"\\\\.\\pipe\\ntdos64-t251-s3", PIPE_ACCESS_DUPLEX,
         PIPE_TYPE_BYTE | PIPE_READMODE_BYTE | PIPE_WAIT, 1u, 64u, 64u, 0u, NULL);
     if (server == INVALID_HANDLE_VALUE) return 4;
@@ -199,12 +200,12 @@ int main(void)
         0u, NULL, OPEN_EXISTING, 0u, NULL);
     if (client == INVALID_HANDLE_VALUE ||
         (ConnectNamedPipe(server, NULL) == FALSE && GetLastError() != ERROR_PIPE_CONNECTED) ||
-        !bx_ntvdm_redir_is_named_pipe_handle(client) ||
-        !bx_ntvdm_redir_write_named_pipe(client, "ok", 2u, &transferred) || transferred != 2u ||
+        !VrIsNamedPipeHandle(client) ||
+        !VrWriteNamedPipe(client, (LPBYTE)"ok", 2u, &transferred) || transferred != 2u ||
         !ReadFile(server, bytes, 2u, &transferred, NULL) || transferred != 2u ||
         memcmp(bytes, "ok", 2u) != 0 ||
         !WriteFile(server, "go", 2u, &transferred, NULL) || transferred != 2u ||
-        !bx_ntvdm_redir_read_named_pipe(client, bytes, 2u, &transferred, &error) ||
+        !VrReadNamedPipe(client, bytes, 2u, &transferred, &error) ||
         transferred != 2u || error != ERROR_SUCCESS || memcmp(bytes, "go", 2u) != 0) return 5;
     CloseHandle(client); client = INVALID_HANDLE_VALUE;
     CloseHandle(server); server = INVALID_HANDLE_VALUE;
@@ -219,7 +220,7 @@ int main(void)
         !expect(&outcome, 1, ERROR_INVALID_HANDLE)) return 10;
     make_event(&event, 0x01u);
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
-        !expect(&outcome, 0, 0u) || bx_ntvdm_redir_loaded()) return 7;
+        !expect(&outcome, 0, 0u) || VrInitialized()) return 7;
     bx_ntvdm_redir_native_session_unbind(&session);
     bx_ntvdm_dem_direct_host_session_reset(&host);
     if (!mailslot_regression()) return 8;

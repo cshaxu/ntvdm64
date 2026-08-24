@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_BOP_SHIM_REDIR_SESSION_SHIM_H
-#define BX_NTVDM_BOP_SHIM_REDIR_SESSION_SHIM_H
+#ifndef BX_NTVDM_OPENNT_BOP_REDIR_NATIVE_SESSION_H
+#define BX_NTVDM_OPENNT_BOP_REDIR_NATIVE_SESSION_H
 
 /*
  * Session owner for the historical VDMREDIR composition boundary.
@@ -36,18 +36,5 @@ void bx_ntvdm_redir_native_session_unbind(bx_ntvdm_redir_native_session *session
 int bx_ntvdm_redir_native_session_dispatch(
     const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome);
-
-/* Imported DEM files retain these historical helper names.  They route to
- * this provider; they never establish per-DEM Redirector state. */
-BOOL bx_ntvdm_redir_load(void);
-LPSTR bx_ntvdm_redir_convert_local_nt_pipe_name(LPSTR existing, LPSTR name);
-BOOL bx_ntvdm_redir_add_open_named_pipe_info(HANDLE file, LPSTR name);
-BOOL bx_ntvdm_redir_remove_open_named_pipe_info(HANDLE file);
-int bx_ntvdm_redir_is_named_pipe_handle(HANDLE file);
-int bx_ntvdm_redir_read_named_pipe(HANDLE file, LPVOID buffer, DWORD count,
-    DWORD *read_out, DWORD *error_out);
-int bx_ntvdm_redir_write_named_pipe(HANDLE file, LPVOID buffer, DWORD count,
-    DWORD *written_out);
-int bx_ntvdm_redir_loaded(void);
 
 #endif

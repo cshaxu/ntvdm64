@@ -1,4 +1,4 @@
-#include "redir_session_shim.h"
+#include "redir_native_session.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -6,6 +6,7 @@
 #include <intrin.h>
 
 #include "adapter-softpc/bx_ntvdm_physical_irq_v1.h"
+#include "opennt-host/vdmredir/vrnmpipe_compat.h"
 
 /* This is intentionally not a replacement VDMREDIR.DLL.  The provider body
  * was not recovered with OpenNT; the admitted first group supplies the
@@ -232,7 +233,7 @@ static int start_async_pipe(const struct bx_ntvdm_generic_ud_event_v1 *event,
     token = ((uint32_t)(uint16_t)event->ebx) | ((uint32_t)(uint16_t)event->ebp << 16);
     if (token == 0u || !g_active_session->direct->lookup_handle(
             g_active_session->direct->state, token, &original) ||
-        !bx_ntvdm_redir_is_named_pipe_handle(original)) {
+        !VrIsNamedPipeHandle(original)) {
         resume_with_error(event, outcome, ERROR_INVALID_HANDLE); return 1;
     }
     record = allocate_async_pipe();
@@ -654,11 +655,13 @@ int bx_ntvdm_redir_native_session_dispatch(
     service = event->window[3];
     switch (service) {
     case 0x00u: /* SVC_RDRINITIALIZE */
+        (void)VrInitialize();
         g_active_session->loaded = 1u;
         resume_success(event, outcome);
         return 1;
     case 0x01u: /* SVC_RDRUNINITIALIZE */
         reset_mailslots();
+        VrUninitialize();
         g_active_session->loaded = 0u;
         g_active_session->mode = 0u;
         resume_success(event, outcome);
@@ -712,102 +715,4 @@ int bx_ntvdm_redir_native_session_dispatch(
         resume_with_error(event, outcome, ERROR_INVALID_FUNCTION);
         return 1;
     }
-}
-
-int bx_ntvdm_redir_loaded(void)
-{
-    return session_valid(g_active_session) && g_active_session->bound != 0u &&
-        g_active_session->loaded != 0u;
-}
-
-BOOL bx_ntvdm_redir_load(void)
-{
-    /* The original DEM source requested VDMREDIR lazily.  The CLI has one
-     * pre-bound provider rather than LoadLibrary; this merely admits that
-     * source path and preserves a failure if the session is not available. */
-    if (!session_valid(g_active_session) || g_active_session->bound == 0u) {
-        SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
-        return FALSE;
-    }
-    g_active_session->loaded = 1u;
-    return TRUE;
-}
-
-LPSTR bx_ntvdm_redir_convert_local_nt_pipe_name(LPSTR existing, LPSTR name)
-{
-    const char *pipe, *tail;
-    size_t tail_bytes, bytes;
-    LPSTR result;
-    if (name == NULL || !bx_ntvdm_redir_loaded()) {
-        SetLastError(ERROR_INVALID_FUNCTION);
-        return NULL;
-    }
-    /* Accept the original local UNC spelling and construct the public Win32
-     * local-pipe spelling.  This replaces only VDMREDIR's absent allocation
-     * helper; source demfile still owns recognition/open/error ordering. */
-    pipe = strstr(name, "\\PIPE\\");
-    if (pipe == NULL) { SetLastError(ERROR_BAD_PATHNAME); return NULL; }
-    tail = pipe + 6u;
-    tail_bytes = strlen(tail) + 1u;
-    bytes = 9u + tail_bytes; /* \\\\.\\PIPE\\ plus the NUL-terminated tail. */
-    if (existing != NULL && strlen(existing) + 1u >= bytes) {
-        memmove(existing + 9u, tail, tail_bytes);
-        memcpy(existing, "\\\\.\\PIPE\\", 9u);
-        return existing;
-    }
-    result = (LPSTR)LocalAlloc(LMEM_FIXED, bytes);
-    if (result == NULL) return NULL;
-    memcpy(result, "\\\\.\\PIPE\\", 9u);
-    memcpy(result + 9u, tail, tail_bytes);
-    return result;
-}
-
-BOOL bx_ntvdm_redir_add_open_named_pipe_info(HANDLE file, LPSTR name)
-{
-    (void)name;
-    if (!bx_ntvdm_redir_loaded() || file == NULL || file == INVALID_HANDLE_VALUE) {
-        SetLastError(ERROR_INVALID_HANDLE);
-        return FALSE;
-    }
-    return TRUE;
-}
-
-BOOL bx_ntvdm_redir_remove_open_named_pipe_info(HANDLE file)
-{
-    (void)file;
-    return bx_ntvdm_redir_loaded() ? TRUE : FALSE;
-}
-
-int bx_ntvdm_redir_is_named_pipe_handle(HANDLE file)
-{
-    DWORD flags;
-    if (!bx_ntvdm_redir_loaded() || file == NULL || file == INVALID_HANDLE_VALUE)
-        return 0;
-    return GetNamedPipeInfo(file, &flags, NULL, NULL, NULL) ? 1 : 0;
-}
-
-int bx_ntvdm_redir_read_named_pipe(HANDLE file, LPVOID buffer, DWORD count,
-    DWORD *read_out, DWORD *error_out)
-{
-    DWORD read = 0u;
-    BOOL ok;
-    if (read_out != NULL) *read_out = 0u;
-    if (error_out != NULL) *error_out = ERROR_INVALID_FUNCTION;
-    if (!bx_ntvdm_redir_is_named_pipe_handle(file)) { SetLastError(ERROR_INVALID_HANDLE); return 0; }
-    ok = ReadFile(file, buffer, count, &read, NULL);
-    if (read_out != NULL) *read_out = read;
-    if (error_out != NULL) *error_out = ok ? ERROR_SUCCESS : GetLastError();
-    return ok ? 1 : 0;
-}
-
-int bx_ntvdm_redir_write_named_pipe(HANDLE file, LPVOID buffer, DWORD count,
-    DWORD *written_out)
-{
-    DWORD written = 0u;
-    BOOL ok;
-    if (written_out != NULL) *written_out = 0u;
-    if (!bx_ntvdm_redir_is_named_pipe_handle(file)) { SetLastError(ERROR_INVALID_HANDLE); return 0; }
-    ok = WriteFile(file, buffer, count, &written, NULL);
-    if (written_out != NULL) *written_out = written;
-    return ok ? 1 : 0;
 }

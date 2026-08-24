@@ -6,12 +6,10 @@
  * binds it to the existing scoped CCPU/SAS-compatible call record. */
 #include "opennt-bop/dem/opennt_demfile_compat.h"
 #include "adapter-win32/include/legacy-api/opennt_dem_file_oem_facade.h"
-#include "opennt-host/redir/redir_session_shim.h"
+#include "opennt-host/vdmredir/vrnmpipe_compat.h"
 
 int bx_ntvdm_demfile_invoke(bx_ntvdm_demhndl_call *call);
 BOOL bx_ntvdm_demfile_publish_handle(HANDLE file);
 void *Sim32GetVDMPointer(ULONG address, ULONG bytes, int protect);
-LPSTR VrConvertLocalNtPipeName(LPSTR existing, LPSTR name);
-void VrAddOpenNamedPipeInfo(HANDLE file, LPSTR name);
 
 #endif

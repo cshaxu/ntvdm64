@@ -40,6 +40,14 @@ product-shell divergences are registered in `opennt-host/README.md`.  Fresh
 formal Ninja root `r004` completed 467/467 edges and the BOP 59 focused fixture
 passed; see the [P3 `nt_error` evidence](etc/evidence/m0-t261-s8-p3-nt-error-original-owner-recovery-001.md).
 
+**S8 P4 progress:** Redirector selector/session composition has left
+`opennt-host`; the reached original VDMREDIR named-pipe helper surface is
+re-rooted under `opennt-host/vdmredir/`.  Targeted MSVC objects pass.  The
+historical VDD/ICA/DLC and DOS-mailslot product dependencies remain explicitly
+owned by the original units rather than being misrepresented as a direct host
+import; a fresh uncontended full Ninja graph is still required.  See the
+[P4 VDMREDIR owner-split evidence](etc/evidence/m0-t261-s8-p4-vdmredir-owner-split-001.md).
+
 ### M0 T261 S7 — closed: dependency-free session owner split
 
 | Field | Record |

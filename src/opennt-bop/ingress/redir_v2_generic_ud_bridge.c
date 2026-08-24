@@ -1,5 +1,5 @@
 #include "redir_v2_generic_ud_bridge.h"
-#include "opennt-host/redir/redir_session_shim.h"
+#include "opennt-bop/ingress/redir_native_session.h"
 
 int bx_ntvdm_redir_v2_generic_ud_recognizes(
     const struct bx_ntvdm_generic_ud_event_v1 *event)

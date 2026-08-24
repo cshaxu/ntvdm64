@@ -17,6 +17,7 @@
 #include "adapter-softpc/bx_ntvdm_cpu_result_v2.h"
 #include "adapter-softpc/bx_ntvdm_cpu_state_abi.h"
 #include "adapter-softpc/bx_ntvdm_exception_abi.h"
+#include "opennt-host/vdmredir/vrnmpipe_compat.h"
 
 typedef uint16_t USHORT;
 typedef uint16_t WORD;
@@ -218,12 +219,6 @@ BOOL bx_ntvdm_demhndl_publish_handle(HANDLE file);
     bx_ntvdm_demhndl_free_vdm_pointer(far_pointer, bytes, pointer, write_back)
 
 int IsVdmRedirLoaded(void);
-void VrRemoveOpenNamedPipeInfo(HANDLE file);
-int VrIsNamedPipeHandle(HANDLE file);
-int VrReadNamedPipe(HANDLE file, LPVOID buffer, DWORD count,
-    DWORD *read_out, DWORD *error_out);
-int VrWriteNamedPipe(HANDLE file, LPVOID buffer, DWORD count,
-    DWORD *written_out);
 int cmdPipeFileDataEOF(HANDLE file, BOOL *eof_out);
 int cmdPipeFileEOF(HANDLE file);
 void demPrintMsg(ULONG message);
