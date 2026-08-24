@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "adapter-softpc/bx_ntvdm_dem_open_observation_v1.h"
+#include "opennt-bop/observation/bx_ntvdm_dem_open_observation_v1.h"
 
 typedef struct { uint8_t bytes[0x100000u]; } ram_t;
 

@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "adapter-softpc/bx_ntvdm_command_bootstrap_observation_v1.h"
+#include "opennt-bop/observation/bx_ntvdm_command_bootstrap_observation_v1.h"
 
 typedef struct fixture_ram { uint8_t bytes[0x100000u]; } fixture_ram;
 

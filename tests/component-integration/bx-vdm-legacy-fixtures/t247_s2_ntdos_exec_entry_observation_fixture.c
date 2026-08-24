@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "adapter-softpc/bx_ntvdm_ntdos_exec_entry_observation_v1.h"
+#include "opennt-bop/observation/bx_ntvdm_ntdos_exec_entry_observation_v1.h"
 
 static uint8_t ram[UINT32_C(0x100000)];
 

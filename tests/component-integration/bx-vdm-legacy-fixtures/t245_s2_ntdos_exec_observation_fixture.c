@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "bx_ntvdm_ntdos_exec_observation_v1.h"
+#include "opennt-bop/observation/bx_ntvdm_ntdos_exec_observation_v1.h"
 
 static void put_u16(uint8_t *value, uint16_t word)
 {

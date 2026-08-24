@@ -23,12 +23,12 @@
 #include "top_level_nosupport_v2_generic_ud_bridge.h"
 #include "xms_v2_generic_ud_bridge.h"
 #include "redir_v2_generic_ud_bridge.h"
-#include "adapter-softpc/bx_ntvdm_bop_sequence_observation_v1.h"
-#include "adapter-softpc/bx_ntvdm_command_bootstrap_observation_v1.h"
-#include "adapter-softpc/bx_ntvdm_command_current_dir_observation_v1.h"
-#include "adapter-softpc/bx_ntvdm_dem_open_observation_v1.h"
-#include "adapter-softpc/bx_ntvdm_ntdos_exec_entry_observation_v1.h"
-#include "adapter-softpc/bx_ntvdm_generic_ud_sequence_observation_v1.h"
+#include "opennt-bop/observation/bx_ntvdm_bop_sequence_observation_v1.h"
+#include "opennt-bop/observation/bx_ntvdm_command_bootstrap_observation_v1.h"
+#include "opennt-bop/observation/bx_ntvdm_command_current_dir_observation_v1.h"
+#include "opennt-bop/observation/bx_ntvdm_dem_open_observation_v1.h"
+#include "opennt-bop/observation/bx_ntvdm_ntdos_exec_entry_observation_v1.h"
+#include "opennt-bop/observation/bx_ntvdm_generic_ud_sequence_observation_v1.h"
 #include "adapter-softpc/bx_ntvdm_mechanical_action_v1.h"
 
 /* This adapter-owned observation calls the existing opaque, checked RAM

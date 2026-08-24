@@ -1,5 +1,5 @@
 #include <string.h>
-#include "adapter-softpc/bx_ntvdm_command_current_dir_observation_v1.h"
+#include "opennt-bop/observation/bx_ntvdm_command_current_dir_observation_v1.h"
 typedef struct { uint8_t bytes[0x100000u]; } ram_t;
 static int read_guest(void *state, uint64_t address, uint8_t *bytes, uint32_t count)
 { ram_t *ram = (ram_t *)state; if (!ram || !bytes || address > sizeof(ram->bytes) || count > sizeof(ram->bytes) - (uint32_t)address) return 0; memcpy(bytes, ram->bytes + (uint32_t)address, count); return 1; }

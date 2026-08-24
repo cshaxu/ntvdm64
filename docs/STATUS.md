@@ -22,6 +22,19 @@ fixture-only residue from mechanical adapter production roots.
 | Exit Criteria | No adapter production root owns selector/service/family/DOS/WOW interpretation or a fixture-only provider; all moved interfaces retain their prior fixed-width mechanical contract. |
 | Admission | T261 proposal S9, after S8 final audit. |
 
+**S9 P1 completed:** a complete source/consumer owner map is recorded in the
+[S9 adapter-residue map](etc/evidence/m0-t261-s9-adapter-residue-owner-map-001.md).
+It separates eight BOP-family observation pairs for path-only re-rooting,
+three fixture-only observations for production deletion, the DEM/DPMI
+source-interpretation splits, and the retained mechanical ABI closure.
+
+**S9 P2 completed:** the eight selector-aware BOP/COMMAND/DEM/NTDOS
+observation pairs now live under `opennt-bop/observation`; their route, CLI,
+Win32-facade and fixture includes plus formal manifest ownership moved with
+them without an ABI or behavior change. A fresh immutable `s9-r001` formal
+Ninja graph completed its build. The next P handles only fixture-only
+production residue, not the DEM/DPMI semantic split.
+
 ### M0 T261 S8 — closed: OpenNT-host original-source exception closure
 
 S8 restored every admitted host exception through its original owner body or
