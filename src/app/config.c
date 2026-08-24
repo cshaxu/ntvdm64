@@ -1,4 +1,4 @@
-#include "config.h"
+#include "bundle_config.h"
 
 #include <windows.h>
 #include <wchar.h>

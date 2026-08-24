@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2274 |
+| Documentation records | 2275 |
 | --- | --- |
-| Generated UTC | 2026-08-24T22:14:51Z |
+| Generated UTC | 2026-08-24T22:37:08Z |
 
 ## Entries
 
@@ -243,7 +243,7 @@ content-divergent entries.
 | etc/evidence/m0-t263-s8-p3-focused-host-mirror-fixture-001.md | indexed supporting material | 8d0ad8f47b1959b78e9589b3c2a1c7e649a5090f8047dd18f5baa420315d928d |
 | etc/evidence/m0-t263-s8-p4-mirror-layout-and-reached-dependency-audit-001.md | indexed supporting material | 2ed128a1d9eb49fc7c4184d287dc9136488f27de9d7e33a760efbfeb0b4502cf |
 | etc/evidence/m0-t263-s9-three-file-original-body-recovery-ledger-001.md | indexed supporting material | 114fda046ae5cdcca8d94e4c4a5440c97113e9fa8dbe7ef403988b1287226f43 |
-| etc/evidence/m0-t264-s1-project-code-filename-inventory-001.md | indexed supporting material | 968bd63cc09bed4a4137753132844aa2515e7749a206f22d36dcd6a83d6a6376 |
+| etc/evidence/m0-t264-s1-project-code-filename-inventory-001.md | indexed supporting material | 50262bf383306601488941ad18eb2f8ad2a6a43929f4c271ccb59e3bf37e3712 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -515,7 +515,7 @@ content-divergent entries.
 | etc/operations/proposal-opennt-xms-owner-package-completion-001.md | indexed supporting material | 4379d6d7dc01969e310c6b7715611fd582e041a0ab4b3e909bc6c88eba92ca6f |
 | etc/operations/proposal-original-component-mirror-conformance-001.md | indexed supporting material | faa3f9df4ede9fbc8c66144d7c3b9dedc7b8e41d1ede15997d93c82e29e9f1c1 |
 | etc/operations/proposal-overlay-mutation-capability-completion-001.md | indexed supporting material | f7ffebc5d2e99ecef44e029526afbaddbcce02d05d66819e544d02d2ce929cff |
-| etc/operations/proposal-project-code-filename-normalization-001.md | indexed supporting material | 8633f285e40a9f49f137e89c87d9c4dc97ae1d57e066936ea9a5585a0758b4eb |
+| etc/operations/proposal-project-code-filename-normalization-001.md | indexed supporting material | 8a42536533fd68114f575dc49f3d02213778a8ecb6e80e8cc797d2f70df2382a |
 | etc/operations/proposal-selector-blind-guest-async-completion-delivery-001.md | indexed supporting material | 3453f27990bb707109bb81db1ebbe029e3a937f3af1deb174b172f7f86780e5a |
 | etc/operations/proposal-selector-blind-protected-mode-substrate-001.md | indexed supporting material | 6353218f86907661b1dc72bb4a20067ef08f6c8e59be33e65e084a2a8b8b5598 |
 | etc/operations/proposal-selector-blind-realmode-continuity-001.md | indexed supporting material | bbdb1afc13e62af3bed756e3a22afd51e166d6662d0dfd6ff2f13512ce4a8ac9 |
@@ -2003,6 +2003,7 @@ content-divergent entries.
 | history/m0-t261-closure-20260824.md | closed task history | bb39cda4ef541a775e66eb87eedfa4f030cb786f50049f407d237aab95659973 |
 | history/m0-t262-closure-20260824.md | closed task history | 949a13be1ebac37a04402ea29a4ed6363d0818b50fb22c0b8ac4bcc05d3f5e72 |
 | history/m0-t263-closure-20260824.md | closed task history | d779bbe35857494e07035030ba954780fff59e6940ff6f516eea443dc6c85a9d |
+| history/m0-t264-closure-20260824.md | closed task history | 767b8c010cc2c03834b9bbda16a492c149a07593e8024fc4b1a31b01ab56f2ff |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -2162,7 +2163,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | fbfa3a202453ef9a31c0549310ff6ce96d822ac85e2cbbfb6a9c6c032e516f0c |
-| QUEUE.md | principal control document | c431ceef4728bac462075b1052f198f305d6d549add61156d434aa43cc900b67 |
+| QUEUE.md | principal control document | 68bca5c5d9d98dacb7130d275053939e76904a46c47250413ccbf631b1e11685 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -2288,7 +2289,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | f4fb3006bf835ab131fb43b14277eba280e6d400a6509ae0274050f65aff0086 |
+| STATUS.md | principal control document | a3f1cbd8117d1ce5b0a4636548e6b04035f1c8a82db2d05a02f59a1c6fa6692f |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

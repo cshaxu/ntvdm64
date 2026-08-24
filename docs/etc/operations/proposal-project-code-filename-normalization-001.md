@@ -40,7 +40,7 @@ name.
 | S2 | Rename `app` and `session` code, repair references and run focused formal targets. | No in-scope `app`/`session` filename retains a prohibited prefix; references resolve. |
 | S3 | Rename all remaining admitted mechanical-adaptation code and fixture names, repair graph/document references, and remove obsolete paths. | No in-scope production or fixture filename retains a prohibited prefix; no stale include/build reference remains. |
 | S4 | Complete cross-root source/build/document scan and formal graph verification. | The manifest is closed, each rename is `git mv`-traceable, focused targets pass, and governance/diff checks pass. |
-| S5 | Remove remaining `_v1` / `_v2` implementation-version filename markers, then classify and remove non-semantic project/backend/source-provenance identifier prefixes from in-scope production code and repair exact consumers. | No in-scope project-owned code basename contains a prohibited product/backend/source-provenance marker or standalone `v1`/`v2` filename segment; each remaining DOS/VDM/Bochs/OpenNT lexical identifier has a source-semantic or upstream-interface disposition; direct consumers resolve without an ABI or behavior rewrite. |
+| S5 | Remove remaining `_v1` / `_v2` implementation-version filename markers, then classify and remove non-semantic project/backend/source-provenance identifier prefixes from in-scope production code and repair exact consumers. | Closed: no in-scope project-owned code basename contains a prohibited product/backend/source-provenance marker or standalone `v1`/`v2` filename segment; the app-local `config.h` collision found by the full graph was repaired as `bundle_config.h`; and the final graph reported no work. |
 
 ## Non-goals
 

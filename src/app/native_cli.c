@@ -14,7 +14,7 @@
 #include "segment_access_observation.h"
 #include "byob_launch_plan.h"
 #include "byob_target_selection.h"
-#include "config.h"
+#include "bundle_config.h"
 #include "dos_safe_alias.h"
 #include "lifecycle.h"
 #include "console_cancellation.h"

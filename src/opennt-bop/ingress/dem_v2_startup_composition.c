@@ -5,7 +5,7 @@
 #include "byob_image.h"
 #include "byob_launch_plan.h"
 #include "byob_profile.h"
-#include "config.h"
+#include "app/bundle_config.h"
 #include "cpu_state_abi.h"
 #include "guest_write_abi.h"
 #include "initial_state_catalog.h"

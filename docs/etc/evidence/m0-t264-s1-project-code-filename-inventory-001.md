@@ -121,11 +121,26 @@ be reviewed rather than blindly retained.
   machine mechanics. Strings/comments and original-mirror include paths were
   not changed by the identifier sweep.
 
-The fresh formal graph at `build/M0-T264-S5/r001` reaches MSVC, but its
-synchronously waited Ninja run fails before a T264-owned target completes:
-original Bochs FPU sources define `FLOAT128`, and current Windows SDK
-`winnt.h` subsequently macro-expands its own `typedef ... FLOAT128`, producing
-MSVC C4430 in `src/bx-core/fpu/{f2xm1,fpatan}.cc`. The disposable captured
-external log is under that build root. This is genuine formal-build blocking
-evidence, not a dry-run result; S5 and T264 therefore remain open pending an
-owner-approved Bochs/toolchain repair packet.
+The first S5 formal run reported MSVC C4430 in
+`src/bx-core/fpu/{f2xm1,fpatan}.cc`, where the original Bochs `FLOAT128`
+compile-time feature macro collided with the current Windows SDK type. That
+diagnosis was incomplete: T264 had renamed the app-private header
+`ntdos64_config.h` to the overly generic `src/app/config.h`. Bochs SoftFloat
+uses `#include <config.h>`; because the formal graph searches `src/app` before
+the Bochs source root, it loaded the app header, which includes `windows.h`.
+
+## S5 P2 result — config-header collision repair and full formal closure
+
+`src/app/config.h` was moved with `git mv` to the neutral owner-local
+`src/app/bundle_config.h`. Its three app consumers and the one direct
+`opennt-bop` startup-composition consumer now name `bundle_config.h` exactly.
+This is a filename-only correction: no API, ABI or runtime behavior changed.
+
+The external formal Ninja root `build/M0-T264-S5/r001` then compiled the
+complete graph incrementally through all remaining compile, archive and link
+edges, producing 81 executable targets. A final external
+`ninja -C build/M0-T264-S5/r001 -n` reported `ninja: no work to do.`
+Documentation governance and `git diff --check` passed. The former S2/S3
+claims that their partial local Ninja output constituted full closure are
+superseded by this actual full-graph evidence; they remain valid only as
+filename-move records. T264 is therefore closed.

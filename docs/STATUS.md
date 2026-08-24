@@ -2,13 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T264 S5 — implementation-version and private-identifier
-normalization.** Owner direction adds `v1` and `v2` to the prohibited
-project-code filename markers and requires non-semantic product/backend/OpenNT
-identifier prefixes to be removed; S4 remains evidence for the already-complete
-product/backend filename-prefix sweep. The source edits are complete; formal
-Ninja validation is currently blocked by the independent Bochs `FLOAT128`
-macro versus current Windows SDK `winnt.h` collision recorded in S5 evidence.
+**Active: M0 T264 S5 — closure delivery.** All technical exit criteria are
+met: the filename/identifier sweep, collision repair, full formal graph and
+no-work verification are recorded below. This packet remains active only
+through its required reviewed commit/push; the next candidate requires owner
+admission from the ordered queue.
 
 ## Active Packet
 
@@ -133,9 +131,13 @@ original-interface names, DOS/VDM/Bochs mechanics, and OpenNT contract-facing
 facades were retained. A synchronous formal Ninja attempt reached the genuine
 compiler boundary but is blocked before project-owned targets complete by the
 pre-existing `FLOAT128` macro collision in Bochs FPU source when the current
-Windows SDK's `winnt.h` is present. It is not acceptable to call T264 closed
-until the owner decides whether that toolchain/core issue is separately
-admitted. See the S5 evidence update.
+Windows SDK's `winnt.h` is present. This preliminary diagnosis was corrected
+by S5 P2: the collision was caused by T264's newly generic app-local
+`config.h` shadowing Bochs's generated `<config.h>` in the global include
+search order. `config.h` was renamed to `bundle_config.h`, the one non-app
+consumer was repaired, and the fresh formal graph completed before a final
+`ninja -n` reported no work. See the S5 evidence update and the T264 closure
+record.
 
 ### M0 T263 S9 — OpenNT-host three-file original-body recovery
 

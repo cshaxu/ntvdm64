@@ -7,7 +7,7 @@
 #include <wctype.h>
 
 #include "startup_selection.h"
-#include "config.h"
+#include "bundle_config.h"
 #include "byob_target_selection.h"
 #include "byob_launch_plan.h"
 
