@@ -1,6 +1,6 @@
 #include "opennt_int06_provider_v1.h"
 
-/* Source-derived state machine for OpenNT illegalp.c:79-134 and
+/* DIVERGENCE(BOP-DIV-080): source-derived state machine for OpenNT illegalp.c:79-134 and
  * unexp_nt.c:50-99.  It exposes copied operations only; execution belongs to
  * the typed machine seam and the selector belongs to bx-vdm. */
 enum {

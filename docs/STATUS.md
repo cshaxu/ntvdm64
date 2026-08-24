@@ -64,6 +64,14 @@ cancellation fixture now supplies its own v1 callback. Its separate
 `BX_NTVDM_CANCELLATION_TESTING` session-library variant is not falsely added
 to the ordinary formal graph and remains a later test-governance item.
 
+**S9 P5c completed:** the source-derived OpenNT INT 06 provider and its
+`02h`/`06h` dispatcher now live in `opennt-bop`, leaving
+`adapter-softpc` with typed RAM/port mechanics only. Its focused provider and
+ingress fixtures pass; the final ingress rebuild took two cached Ninja edges,
+not a Bochs rebuild. The final ownership scan accepts only historical ABI
+headers, source-provenance/negative-boundary comments and selector-blind
+same-shaped facades beneath adapter production roots.
+
 ### M0 T261 S8 — closed: OpenNT-host original-source exception closure
 
 S8 restored every admitted host exception through its original owner body or

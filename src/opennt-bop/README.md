@@ -115,6 +115,7 @@ comment. Historic overlays are evidence only and are recorded in
 | `BOP-DIV-077` | `DpmiInitApp` obtains an NT4 VdmTib/SS:SP startup frame. | That private host stack translation is unavailable. | Retain AX/DPMI startup ordering through a staged copied CPU/frame request. | `dpmi/dpmi32.c` |
 | `BOP-DIV-078` | `DpmiPassTableAddress` publishes NT4 host LDT/IntelBase addresses. | Bochs owns descriptor tables and exports no such host address. | Preserve only the selector-table publication event as a fixed guest-linear value. | `dpmi/dpmi32.c` |
 | `BOP-DIV-079` | `dpmiselr.c` uses the historical eight-byte LDT selector record. | Native x64 alignment would enlarge the compatibility record and alter its original selector stride. | Pack the source-facing record to eight bytes and assert that ABI at compile time. | `dpmi/dpmi_descriptor_source_shim.h` |
+| `BOP-DIV-080` | `illegalp.c` / `unexp_nt.c` execute the historical INT 06 handling sequence against CCPU/SAS and physical ports. | The original CCPU worker cannot be linked to Bochs directly. | Retain the source operation order as copied RAM/port actions; selector decoding is owned by the adjacent BOP ingress dispatcher. | `softpc/opennt_int06_provider_v1.c`, `ingress/bx_ntvdm_startup_machine_interrupt_v1.c` |
 
 The migration evidence is
 [`m0-t260-s5-opennt-bop-layout-migration-001.md`](../../docs/etc/evidence/m0-t260-s5-opennt-bop-layout-migration-001.md).

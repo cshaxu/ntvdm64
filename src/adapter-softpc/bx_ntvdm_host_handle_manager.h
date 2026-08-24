@@ -2,19 +2,18 @@
 #define BX_NTVDM_BOP_SHIM_HOST_HANDLE_MANAGER_H
 
 /*
- * Session-owned host-handle representation for the modern BOP composition.
+ * Session-owned host-handle representation for a modern composition.
  *
  * BX-VDM-001 is the registered adapter ABI divergence: the original NT4
  * service composition could place a 32-bit HANDLE in guest register pairs;
  * x86/x64 modern hosts instead use this opaque guest-ID representation.
  *
- * OpenNT's 16-bit callers reserve two registers for a 32-bit NT HANDLE.  A
- * contemporary x64 HANDLE cannot use that representation.  This manager is
+ * A legacy 16-bit caller may reserve two registers for a 32-bit native handle.
+ * A contemporary x64 HANDLE cannot use that representation. This manager is
  * the only adapter-owned representation bridge: guest-visible values are
  * opaque 32-bit IDs, while the native HANDLE remains host-private. Zero is
- * invalid and UINT32_MAX is reserved for the historical COMMAND default
- * standard-handle sentinel.
- * It is not a DOS JFN/SFT implementation and has no BOP/service knowledge.
+ * invalid and UINT32_MAX is reserved for a caller-defined sentinel.
+ * It does not interpret any guest file-handle or service protocol.
  */
 
 #include "bx_ntvdm_guest_pointer_manager.h"

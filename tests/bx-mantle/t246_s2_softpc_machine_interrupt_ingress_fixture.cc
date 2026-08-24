@@ -1,5 +1,6 @@
 #include "bochs.h"
 #include "adapter-softpc/bx_ntvdm_cpu_state_abi.h"
+#include "adapter-softpc/bx_ntvdm_port_action_v1.h"
 #include "adapter-bop/bx_ntvdm_generic_ud_bridge.h"
 #include "opennt-bop/ingress/opennt_bop_route.h"
 #include "bx-mantle/minimal_machine.h"
@@ -31,6 +32,7 @@ int main(void)
 
   if (machine.initialize(0x200000u, 0x200000u) != BX_MANTLE_MINIMAL_MACHINE_OK)
     return 1;
+  bx_ntvdm_port_action_v1_set_lifecycle_active(1u);
   if (!bx_mem.copy_to_ordinary_ram(0xb79u, sizeof(frame), frame)) return 2;
 
   initialize_event(&event, 0x06u);
@@ -65,5 +67,6 @@ int main(void)
   initialize_event(&event, 0x07u);
   memset(&outcome, 0, sizeof(outcome));
   if (bx_ntvdm_mantle_generic_ud_bridge_v1(&event, &outcome)) return 9;
+  bx_ntvdm_port_action_v1_set_lifecycle_active(0u);
   return machine.cleanup() == BX_MANTLE_MINIMAL_MACHINE_OK ? 0 : 10;
 }

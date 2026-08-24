@@ -109,6 +109,25 @@ remains a later test-governance item. Generic STOP/PENDING result observation
 remains in production because it is the selector-blind CPU-to-machine stop
 contract, not a provider or test injector.
 
+## P5c completion result
+
+The final source scan classifies imported `include/` trees as retained ABI
+closure and the XMS/SoftPC facades as same-shaped mechanical seams. The one
+live source-owned remainder, the OpenNT INT 06 operation state machine and
+its real-mode `02h`/`06h` selector dispatcher, now lives under
+`opennt-bop/softpc` and `opennt-bop/ingress`. `adapter-softpc` receives only
+its typed RAM/port requests. The focused provider fixture and the ingress
+fixture both pass after the ingress fixture explicitly activates the ordinary
+machine port-action lifecycle; its earlier exit `3` was that missing fixture
+precondition, not a provider regression. Ninja rebuilt only the fixture
+object and executable for this final check.
+
+The residual semantic-token hits in adapter production roots are either
+negative boundary statements (for example, "no selector/service meaning"),
+the retained historical ABI headers under `include/`, or source-provenance
+comments on selector-blind same-shaped facades. No live adapter source decodes
+a BOP selector/service/family or invokes an OpenNT provider by such identity.
+
 ## Explicitly retained adapter-softpc content
 
 Historical `include/mvdm` and `include/softpc.new` headers remain only as the
