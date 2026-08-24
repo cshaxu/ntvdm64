@@ -2,37 +2,36 @@
 
 ## Current Work
 
-**Active: M0 T261 S2** — OpenNT host function-level source/ABI recovery map.
+**Active: M0 T261 S3** — PIF/COMMAND original-layout recovery.
 
 ## Active Packet
 
-### M0 T261 S2 — OpenNT host function-level source/ABI recovery map
+### M0 T261 S3 — PIF/COMMAND original-layout recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T261 S2`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | Owner approved implementation after reviewing the T261/S1 source-truth audit. |
-| Objective | Prove, at function/ABI/failure-path level, the first usable source-recovery rung and final component/path for every non-identical `opennt-host` production file. |
-| Non-goals | No source move, BOP enablement, semantic provider rewrite, guest or Bochs change, or recreated NT4 product shell. |
-| Reference Baseline | T261/S1 source-truth audit, `refs/opennt`, T259 interface catalog, current formal manifest and all eight component contracts. |
-| Files And ABI Surface | The 47 non-identical host files; their functions, declarations, original callers/callees, layouts, ordering, failure paths, adapter dependencies and final component/path. |
-| Applicable Rules | Mandatory four-rung recovery ledger; re-rooted-original layout rule; one mapping manager; adapter ownership; BOP route ownership; no generic `*_shim` final category. |
-| Verification | Source/call-site comparison against `refs/opennt`; include and formal-manifest inspection; one row per live source/header; documentation governance and independent review. |
-| Expected Markers | A binding recovery ledger with original path/call, retained contract, unavailable dependency, first usable rung, final owner/path, divergence/exception requirement and migration/delete result. |
-| Asset Needs | Current host tree, `refs/opennt`, T259 catalog, T260 formal manifest and component READMEs. |
-| Reporting Requirements | Exact source and caller evidence, ABI/failure semantics, target owner/path, direct/facade/exception result and confidence for every non-identical file. |
-| Stop Conditions | A body cannot be attributed to a source path, a move crosses owner boundaries ambiguously, or a proposed recovery changes behavior; record it and pause that row rather than guessing. |
-| Exit Criteria | Every S1 non-identical row has a source-first, function-level disposition and no generic shim remains unresolved; S3/S4/S5 may execute without rediscovering ownership. |
+| Identifier Mode | `M0 T261 S3`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | T261/S2 source-recovery ledger closed in commit `6c0313a8`; owner approved T261 implementation. |
+| Objective | Re-root the direct OpenNT PIF source unchanged, isolate its exact include closure, and move or rename PIF/COMMAND composition and compatibility surfaces according to the binding ledger without changing BOP behavior. |
+| Non-goals | No COMMAND service enablement, lifecycle/worker redesign, PIF algorithm rewrite, new host policy, guest/Bochs change, or global source-tree import. |
+| Reference Baseline | T261/S1 and T261/S2 ledgers; `softpc.new/host/{src/nt_pif.c,inc/{nt_pif.h,nt_uis.h}}`; `dos/command/{cmdpif.c,cmdmisc.c,cmdexec.c}`; T260 formal manifest. |
+| Files And ABI Surface | PIF triplet, parser composition, PIF OEM/config facade, COMMAND binary/environment/misc/native-session seams, their include paths and static-library inputs. |
+| Applicable Rules | Direct original body unchanged; every imported-body edit has `DIVERGENCE`; adapter-win32 owns legacy Win32/NTDLL shape; adapter-softpc owns mapping/mechanics; BOP/app own session/route meaning. |
+| Verification | SHA-256 after move; include-root and manifest audit; focused PIF/COMMAND fixture link/run where unchanged; formal Ninja closure; diff and documentation governance. |
+| Expected Markers | `softpc.new/host/src/nt_pif.c` and `inc/{nt_pif.h,nt_uis.h}` retain original bytes; no PIF composition file masquerades as an original source; each moved seam preserves its source-shaped ABI. |
+| Asset Needs | Existing PIF/COMMAND fixtures, formal Ninja generator/manifest, OpenNT source tree and current adapter headers. |
+| Reporting Requirements | Exact rename map, source hash evidence, target component ownership, preserved ABI/failure behavior, any divergence/exception and build result. |
+| Stop Conditions | A PIF header/layout collision requires a semantic rewrite, a public facade changes original error/order, or a move creates a cross-owner cycle. Pause that row and record the reason. |
+| Exit Criteria | The PIF direct source triplet is re-rooted and compiled through its exact include path; PIF/COMMAND non-original surfaces have a named final owner or exception; old generic names in the completed PIF slice are deleted; formal closure passes. |
 | Original Owner Request | “准入开始实施”。 |
-| Similar-Issue Sweep | All `*_shim.*`, `*_session.*`, `bx_ntvdm_*`, direct imports, their `refs/opennt` candidates, formal Ninja module inputs and component boundary headers. |
+| Similar-Issue Sweep | All PIF headers/types/globals, COMMAND BOP callers, OEM/path/error facades, static manifest entries, tests and README divergence rows. |
 
-**Current progress:** S1 is closed in commit `25f817ad`. S2 P1 has completed
-the [function-recovery ledger](etc/operations/m0-t261-s2-opennt-host-function-recovery-ledger-001.md):
-all 47 non-identical files are covered, with original caller/provider evidence,
-unavailable dependency, retained failure rule and binding final owner/path.
-The ledger coverage check reports 47/47. No source layout or behavior has
-changed. The next delivery may admit S3's PIF/COMMAND move only against this
-ledger.
+**Current progress:** S1 closed in `25f817ad`; S2 P1 closed in `6c0313a8`
+with a 47/47 recovery ledger. S3 P1 has re-rooted the byte-identical PIF
+triplet and compiled the parser object through its new exact include path; see
+[PIF evidence](etc/evidence/m0-t261-s3-p1-pif-original-re-root-001.md). The
+full-graph run root was interrupted externally and is explicitly non-evidence;
+S3 will use a fresh root for formal closure. No provider behavior has changed.
 
 ## Previous Active Packet — M0 T260
 

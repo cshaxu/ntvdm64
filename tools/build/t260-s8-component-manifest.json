@@ -15,6 +15,7 @@
     "src/adapter-softpc",
     "src/adapter-win32",
     "src/opennt-host",
+    "src/opennt-host/softpc.new/host/inc",
     "src/opennt-bop",
     "src/bx-mantle",
     "src/bx-core",

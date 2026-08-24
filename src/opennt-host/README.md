@@ -36,7 +36,7 @@ departure from an identified OpenNT definition marked in code as
 | `HOST-DIV-008` | DEM asks the debugger console for guest-visible input. | That needs a debugger-owned input lifecycle. | Preserve the boundary as an explicit deferred no-op. | `dem/demmisc_shim.c:76` |
 | `HOST-DIV-009` | DEM resets host floppy hardware. | FDC/DMA/CMOS is a machine owner responsibility. | Do not report a fabricated reset. | `dem/demmisc_shim.c:87` |
 | `HOST-DIV-010` | FCB search terminates VDD user hooks. | The private VDD callback broker is absent. | Preserve the boundary as an explicit deferred no-op. | `dem/demsrch_fcb_shim.c:64` |
-| `HOST-DIV-011` | `nt_pif.c` is composed from the historical global host tree. | That global tree is not a production component. | Compile its unchanged body inside the COMMAND owner closure. | `command/command_opennt_pif_parser.c:33`, `command/nt_pif.c`, `command/nt_pif.h`, `command/nt_uis.h` |
+| `HOST-DIV-011` | `nt_pif.c` is composed from the historical global host tree. | Its `PIF_DATA` layout is not identical to COMMAND's copied `cmdpif.h` layout, so linking the historical global directly would cross incompatible declarations. | Keep `nt_pif.c` and its headers byte-identical at their re-rooted `softpc.new/host` paths; a separately named COMMAND composition bridge translates only the layout-identical result and does not replace parser logic. | `command/command_opennt_pif_parser.c:33`, `softpc.new/host/src/nt_pif.c`, `softpc.new/host/inc/nt_pif.h`, `softpc.new/host/inc/nt_uis.h` |
 
 The pre-T260 PIF original and other uncompiled historical inputs are evidence,
 not a second provider. They reside under `docs/etc/legacy_code/opennt-host/`.
