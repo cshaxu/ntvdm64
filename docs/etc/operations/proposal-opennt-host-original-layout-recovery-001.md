@@ -76,11 +76,12 @@ source-derived replacement merely because it has a fixture.
    `opennt-bop/xms`. Delete both host shim files once the original callers and
    their focused XMS tests use the new seam.
 5. **Replace `redir/redir_session_shim.{c,h}` with the original VDMREDIR
-   package.** Import only the reached original owner units from
-   `base/mvdm/vdmredir/` (including the reached dispatcher, initialization,
-   named-pipe and mailslot units and headers) under re-rooted
-   `opennt-host/vdmredir/` paths. Preserve their call/record/failure structure;
-   use existing `adapter-win32`, `adapter-softpc` and `session` contracts for
+   package.** Import only reached original owner units from
+   `base/mvdm/vdmredir/`.  Re-root host-only named-pipe/init helpers below
+   `opennt-host/vdmredir/`; re-root selector dispatch and guest-register/
+   mailslot BOP bodies below `opennt-bop/vdmredir/`, because those units retain
+   BOP service meaning. Preserve their call/record/failure structure; use
+   existing `adapter-win32`, `adapter-softpc` and `session` contracts for
    unavailable dependencies. Do not create `adapter-redir`. Delete the shim
    and its self-authored pipe/mailslot implementation after replacement.
 6. **Replace `top_level/top_level_nosupport_shim.{c,h}` with original

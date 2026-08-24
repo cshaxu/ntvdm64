@@ -50,6 +50,13 @@ than being misrepresented as a direct host import; the selector/session
 composition remains in `opennt-bop`.  See the [P4 VDMREDIR owner-split
 evidence](etc/evidence/m0-t261-s8-p4-vdmredir-owner-split-001.md).
 
+**S8 P5 active:** P4 does not close the original VDMREDIR dispatcher or
+mailslot bodies.  The source-owner intake places `vrdisp.c` and the
+guest-facing portion of `vrmslot.c` in `opennt-bop/vdmredir/`, with only their
+mechanical and modern-API seams below the declared adapters.  Its recovery
+order and explicit limitations are recorded in the [P5 VDMREDIR
+intake](etc/evidence/m0-t261-s8-p5-vdmredir-source-owner-intake-001.md).
+
 ### M0 T261 S7 — closed: dependency-free session owner split
 
 | Field | Record |

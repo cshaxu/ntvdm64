@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2234 |
+| Documentation records | 2235 |
 | --- | --- |
-| Generated UTC | 2026-08-24T08:42:58Z |
+| Generated UTC | 2026-08-24T08:51:33Z |
 
 ## Entries
 
@@ -213,6 +213,7 @@ content-divergent entries.
 | etc/evidence/m0-t261-s8-p2-xms-softpc-owner-split-001.md | indexed supporting material | 8363a3f4cbfda8a265a706d9c5e325f8a43a037c26970afde8e9dfecd21e0415 |
 | etc/evidence/m0-t261-s8-p3-nt-error-original-owner-recovery-001.md | indexed supporting material | e352de5f1f8dac7e2c49852e6ce3f37cea80f1002b83a21482b0dcf12d5a0800 |
 | etc/evidence/m0-t261-s8-p4-vdmredir-owner-split-001.md | indexed supporting material | 10629a6d3294a8b04dd0bbb49026cca82fe31d43441934c05b1cf760a81f767e |
+| etc/evidence/m0-t261-s8-p5-vdmredir-source-owner-intake-001.md | indexed supporting material | 422aa9d09e8199d2e37238c7fef79f0319d9433a333288b3a44954c791a7070b |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
 | etc/evidence/t225-s11-bounded-native-cli-run-control-result-001.md | indexed supporting material | e674398557a3dfdb415ecf9a27a88deb862ebe09c3a5e41920b76ce7d660239e |
@@ -474,7 +475,7 @@ content-divergent entries.
 | etc/operations/proposal-opennt-dem-owner-package-completion-001.md | indexed supporting material | 98af7bbe7a84fc28585c3076d6761b25e8b33d3dbe67350d986f0f58cd7edaa5 |
 | etc/operations/proposal-opennt-dpmi-owner-package-completion-001.md | indexed supporting material | a8ab4af95d86a744bd37c52b672248ebba19372aede58726af169ede1d3245a3 |
 | etc/operations/proposal-opennt-guest-sft-opaque-handle-publication-001.md | indexed supporting material | d82bbb255bd3c7d2b70c8bc55ad105141e837455232d248f367d60369ac8a96f |
-| etc/operations/proposal-opennt-host-original-layout-recovery-001.md | indexed supporting material | 866557fbd2d3b3e462d08d5d9a2b030ecd0cd5b02bac06dfd9e936af37976da6 |
+| etc/operations/proposal-opennt-host-original-layout-recovery-001.md | indexed supporting material | eeda0fe86b24778329cab0d1b4a17744ee74d77a4f191c840eedb0eda8b1d9dd |
 | etc/operations/proposal-opennt-redirector-owner-package-completion-001.md | indexed supporting material | a94a8dfb72d0625f20e0152dacab24b4aca3862f4d8960290201eeb361e1b129 |
 | etc/operations/proposal-opennt-wow16-owner-package-completion-001.md | indexed supporting material | a041c10705221c3d6512f3935749c1c345e1c08304828ffe5d30c72fb8f6c8c7 |
 | etc/operations/proposal-opennt-xms-owner-package-completion-001.md | indexed supporting material | 4379d6d7dc01969e310c6b7715611fd582e041a0ab4b3e909bc6c88eba92ca6f |
@@ -2248,7 +2249,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 5520d630bb63a25eb9cf541583a5d4780022bbce9c59a30130c6c1aff207739c |
+| STATUS.md | principal control document | 54687157b8d2426147fcbcfb4e7e013a2f250d712a8be524314a83c863946623 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |
