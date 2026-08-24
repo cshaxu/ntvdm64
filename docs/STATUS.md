@@ -2,11 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T263 S3 — OpenNT SoftPC firmware/ROM initial mirror.** This
-packet admits only the original `bios` and `roms` packages as opaque source
-inputs; it does not enable or recreate the historical SoftPC product shell.
+**Active: M0 T263 S4 — OpenNT reusable utility-package decision.** This
+packet admits only the complete original `suballoc` package, and leaves mixed
+`vdmutils` products with their actual guest/host owners.
 
 ## Active Packet
+
+### M0 T263 S4 — OpenNT reusable utility-package decision
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T263 S4`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | T263 proposal S4; MVDM census identifies `suballoc` as a reusable original utility and rejects a bulk `vdmutils` move. |
+| Objective | Import the complete source-identical `suballoc` package into `opennt-utils` and record its original consumers and deferred compilation boundary. |
+| Non-goals | No new allocator, modern replacement, XMS/DPMI implementation, static library, default link or mixed `vdmutils` import. |
+| Reference Baseline | `O:\\repos.external\\opennt\\base\\mvdm\\suballoc`, Git `5c5b979e`; T263/S1 census. |
+| Files And ABI Surface | Eight original utility files, component README, S4 evidence and status; no product ABI. |
+| Applicable Rules | Source policy, source-first utility ownership, original mirror zero-difference rule and no generic common root. |
+| Verification | Same-relative-path count plus SHA-256 equality for all eight files; source consumer scan; no Ninja graph change. |
+| Expected Markers | Eight exact files; zero exceptions; `xms.486`/`dpmi32` recorded as future original consumers. |
+| Asset Needs | Pinned OpenNT source root and Git provenance. |
+| Reporting Requirements | Record the exact split decision for `vdmutils` as well as `suballoc` provenance. |
+| Stop Conditions | Any utility without a named original consumer, mixed-product bulk import, local edit or build/link expansion pauses the packet. |
+| Exit Criteria | `suballoc` is exact and indexed; `vdmutils` has explicit per-product disposition; no substitute allocator is introduced. |
+| Original Owner Request | “`suballoc`、`vdmutils`：历史辅助库和独立工具…缺少一个 opennt-utils 的组件。” |
+| Similar-Issue Sweep | Generic common-code growth, XMS/DPMI semantics moved into utilities, inferred runtime link and mixed guest/host product ownership. |
+
+**S4 P1 completed:** all eight `suballoc` files are source-identical and
+SHA-256 verified; mixed `vdmutils` remains explicitly split. See the
+[admission evidence](etc/evidence/m0-t263-s4-opennt-utils-suballoc-admission-001.md).
 
 ### M0 T263 S3 — OpenNT SoftPC firmware/ROM initial mirror
 
