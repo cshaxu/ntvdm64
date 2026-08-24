@@ -27,6 +27,12 @@ monotonic opaque token; a token is range-checked before it enters a mailslot
 record.  This prevents a second handle allocator while preserving the original
 record/lifecycle ownership.
 
+The no-guest-buffer `VrTerminateMailslots` body is also now directly retained.
+Its original cleanup ordering is unchanged; `BOP-DIV-059` resolves the
+record's token with the existing CCPU/SAS handle facade, while `BOP-DIV-060`
+supplies the same PDB value from the copied `AX` frame.  Unlike the old
+composition route, this body does not fabricate an `AX=0` result.
+
 ## Verification
 
 Fresh outside-sandbox MSVC x64 `/MT`, CPU5/P-MMX Ninja graph:
@@ -41,11 +47,14 @@ The fixture covers create, information query, write, original `57:0C`
 `ERROR_NOT_SUPPORTED` peek, read, delete, second create, process termination
 and invalid-token failure.  It consumes returned opaque IDs rather than
 assuming the original private allocator's first/reused numerical values.
+It also proves that `57:0F` resumes with clear CF and leaves AX unwritten, as
+the retained OpenNT cleanup helper does.
 
 ## Boundary
 
-This recovers the original record lifetime, not every original `Vr*` function
-body.  The guest-frame copy, checked guest-RAM copy and public Win32 calls
-remain in the BOP-owned composition file until each individual source body can
-be routed through the existing `adapter-softpc` CCPU/SAS facade.  No new BOP,
-adapter, mapper or Bochs behavior is introduced.
+This recovers the original record lifetime and the simple termination body,
+not every original `Vr*` function body.  The guest-frame copy, checked
+guest-RAM copy and public Win32 calls remain in the BOP-owned composition file
+until each individual source body can be routed through the existing
+`adapter-softpc` CCPU/SAS facade.  No new BOP, adapter, mapper or Bochs
+behavior is introduced.

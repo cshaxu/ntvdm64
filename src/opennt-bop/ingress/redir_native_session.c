@@ -598,10 +598,8 @@ static int mailslot_write(const struct bx_ntvdm_generic_ud_event_v1 *event,
 static int mailslot_terminate(const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
 {
-    VrpRemoveProcessMailslots(word_at(event->eax), g_active_session->direct->state,
-        g_active_session->direct->release_handle);
-    resume_success(event, outcome);
-    return 1;
+    return bx_ntvdm_redir_native_session_invoke_scoped_body(event, outcome,
+        bx_ntvdm_vrmslot_terminate_bop_body, 4u);
 }
 
 static int dispatch_service(uint8_t service,

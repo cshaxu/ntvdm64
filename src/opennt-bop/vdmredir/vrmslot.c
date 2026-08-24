@@ -124,10 +124,12 @@ static void VrpReleaseMailslot(PVR_MAILSLOT_INFO ptr, void *state,
     if (ptr == NULL) return;
     if (release != NULL)
         (void)release(state, (uint32_t)ptr->Handle16, &ignored_error);
+    else
+        (void)VrpCloseMailslotHandle(ptr->Handle16, ptr->Handle32);
     VrpFreeMailslotStructure(ptr);
 }
 
-void VrpRemoveProcessMailslots(WORD dos_pdb, void *state,
+void VrpRemoveProcessMailslotsWithRelease(WORD dos_pdb, void *state,
     bx_ntvdm_vrmslot_release_fn release)
 {
     PVR_MAILSLOT_INFO ptr = MailslotInfoList, previous = NULL;
@@ -145,6 +147,11 @@ void VrpRemoveProcessMailslots(WORD dos_pdb, void *state,
     }
 }
 
+void VrpRemoveProcessMailslots(WORD dos_pdb)
+{
+    VrpRemoveProcessMailslotsWithRelease(dos_pdb, NULL, NULL);
+}
+
 void VrpResetMailslots(void *state, bx_ntvdm_vrmslot_release_fn release)
 {
     PVR_MAILSLOT_INFO ptr = MailslotInfoList;
@@ -155,4 +162,37 @@ void VrpResetMailslots(void *state, bx_ntvdm_vrmslot_release_fn release)
         VrpReleaseMailslot(ptr, state, release);
         ptr = next;
     }
+}
+
+VOID
+VrTerminateMailslots(
+    IN WORD DosPdb
+    )
+
+/*++
+
+Routine Description:
+
+    Removes local mailslots owned by a terminating DOS process.
+
+Arguments:
+
+    DosPdb - 16-bit segment identifier of the terminating DOS process.
+
+Return Value:
+
+    None.
+
+--*/
+
+{
+    VrpRemoveProcessMailslots(DosPdb);
+}
+
+/* DIVERGENCE(BOP-DIV-060): the source helper receives its PDB from the
+ * original NetResetEnvironment caller.  The BOP route carries that same
+ * 16-bit value in AX, copied by the existing selector-owned frame bridge. */
+void bx_ntvdm_vrmslot_terminate_bop_body(void)
+{
+    VrTerminateMailslots(getAX());
 }

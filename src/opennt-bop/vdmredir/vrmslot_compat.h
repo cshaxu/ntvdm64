@@ -12,6 +12,13 @@
 #include "adapter-softpc/opennt_ccpu_sas_facade.h"
 
 #define SET_ERROR(err) { setAX((WORD)(err)); setCF(1); }
+/* DIVERGENCE(BOP-DIV-059): OpenNT's record carries a raw process HANDLE;
+ * the standalone composition carries only its opaque manager token.  Retain
+ * the original close call shape while the existing CCPU/SAS facade releases
+ * the matching mapped handle. */
+#define VrpCloseMailslotHandle(token, handle) \
+    ((void)bx_ntvdm_ccpu_sas_get_handle(0u, (token)), \
+     bx_ntvdm_ccpu_sas_close_handle((handle)))
 
 typedef unsigned short SELECTOR;
 typedef struct {
@@ -41,10 +48,13 @@ void VrpLinkMailslotStructure(PVR_MAILSLOT_INFO record);
 PVR_MAILSLOT_INFO VrpUnlinkMailslotStructure(WORD handle16);
 PVR_MAILSLOT_INFO VrpMapMailslotHandle16(WORD handle16);
 PVR_MAILSLOT_INFO VrpMapMailslotName(LPSTR name);
-void VrpRemoveProcessMailslots(WORD dos_pdb, void *state,
+void VrpRemoveProcessMailslots(WORD dos_pdb);
+void VrpRemoveProcessMailslotsWithRelease(WORD dos_pdb, void *state,
     bx_ntvdm_vrmslot_release_fn release);
 void VrpResetMailslots(void *state, bx_ntvdm_vrmslot_release_fn release);
 
 void VrPeekMailslot(void);
+void VrTerminateMailslots(WORD DosPdb);
+void bx_ntvdm_vrmslot_terminate_bop_body(void);
 
 #endif

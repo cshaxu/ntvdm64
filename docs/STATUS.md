@@ -66,8 +66,10 @@ replace the former fixed array.  `BOP-DIV-058` retains the one session-owned
 opaque handle map rather than duplicating OpenNT's private bitmap; the focused
 r011 lifecycle fixture passes.  See the [P5 lifecycle
 evidence](etc/evidence/m0-t261-s8-p5-vrmslot-record-lifecycle-recovery-001.md).
-The remaining Make/Delete/Info/Read/Write/Terminate *source bodies* are still
-pending individual CCPU/SAS-facade recovery.
+The retained `VrTerminateMailslots` body now also closes the PDB-owned record
+cleanup with the original no-AX-write result; its copied-frame/token divergence
+is `BOP-DIV-059`.  The remaining Make/Delete/Info/Read/Write *source bodies*
+are still pending individual CCPU/SAS-facade recovery.
 
 ### M0 T261 S7 — closed: dependency-free session owner split
 

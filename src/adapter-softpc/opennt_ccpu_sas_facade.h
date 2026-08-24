@@ -37,5 +37,7 @@ typedef bx_ntvdm_demhndl_call bx_ntvdm_ccpu_sas_call;
 #define bx_ntvdm_ccpu_sas_get_vdm_addr bx_ntvdm_demhndl_get_vdm_addr
 #define bx_ntvdm_ccpu_sas_copy_guest bx_ntvdm_demhndl_copy_guest
 #define bx_ntvdm_ccpu_sas_write_guest bx_ntvdm_demhndl_write_guest
+#define bx_ntvdm_ccpu_sas_get_handle bx_ntvdm_demhndl_get_handle
+#define bx_ntvdm_ccpu_sas_close_handle bx_ntvdm_demhndl_close_handle
 
 #endif

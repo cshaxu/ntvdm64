@@ -181,7 +181,11 @@ static int mailslot_regression(void)
         outcome.gpr16_values[0] == mailslot_handle) return 0;
     second_mailslot_handle = outcome.gpr16_values[0];
     make_event(&event, 0x0fu); event.eax = 0x0042u;
-    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) || !expect(&outcome, 0, 0u)) return 0;
+    /* OpenNT's VrTerminateMailslots is a cleanup helper: it resumes with CF
+     * clear but does not manufacture an AX result. */
+    if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
+        outcome.disposition != BX_NTVDM_GENERIC_UD_RESUME || outcome.resume_rip != 0x2404u ||
+        (outcome.eflags_values & 1u) != 0u || (outcome.gpr16_write_mask & 1u) != 0u) return 0;
     make_event(&event, 0x0au); event.ebx = second_mailslot_handle;
     if (!bx_ntvdm_redir_v2_generic_ud_dispatch(&event, &outcome) ||
         (outcome.eflags_values & 1u) == 0u || outcome.gpr16_values[0] != ERROR_INVALID_HANDLE) return 0;
