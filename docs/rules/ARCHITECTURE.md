@@ -50,7 +50,12 @@
     exception record; convenience or a local trace result is never sufficient.
 15. The target source owners are exactly `bx-core`, `bx-mantle`,
     `opennt-guest`, `opennt-host`, `opennt-bop`, `adapter-bop`,
-    `adapter-softpc`, `adapter-win32`, `session`, and `app`. `session` is a
+    `adapter-softpc`, `adapter-win32`, `session`, and `app`. The original-code
+    owners are exactly `bx-core`, `opennt-guest`, `opennt-bop`, and
+    `opennt-host`, each with a component README exception register. The
+    mechanical-adaptation owners are exactly `bx-mantle`, `adapter-bop`,
+    `adapter-softpc`, and `adapter-win32`; the project-composition owners are
+    exactly `app` and `session`. `session` is a
     dependency-free per-VDM foundation: it owns neutral lifecycle, resource/
     token registry, capability registration, completion/event state and
     teardown, but has no BOP, DOS/WOW, VDD, Redirector, Win32 or Bochs

@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 2229 |
 | --- | --- |
-| Generated UTC | 2026-08-24T06:17:58Z |
+| Generated UTC | 2026-08-24T06:24:25Z |
 
 ## Entries
 
@@ -65,9 +65,9 @@ content-divergent entries.
 | design/ADAPTER-STARTUP-FIRMWARE-SNAPSHOT.md | retained pre-governance evidence | 3153c9a36e43d8efc1234879d4c8f76f83dc3a61a766ecdceaa8da6e7f410e45 |
 | design/ADAPTER-STARTUP-SNAPSHOT-EVIDENCE-EXPORT.md | retained pre-governance evidence | 744618843058cbcf0c9074019f755ebdb573be5a9b33ff454da224537edd0cbd |
 | design/ADAPTER-TWO-PHASE-GUEST-READ.md | retained pre-governance evidence | d1898c127b918240c3ce7eb32ed2efc04caf11f04b5a061060d4c2a0254c1861 |
-| design/ARCHITECTURE.md | current design authority | 8bebd08fd7138332a1d0bb83ca8f8dc9b0db84eb0815691352500e36f0b490bc |
+| design/ARCHITECTURE.md | current design authority | a1298fa860545995d7286503a6a0ab5bf79ac07d8e3f4e2f2cd5b00986e2e563 |
 | design/BOCHS-MACHINE-COMPOSITION.md | retained pre-governance evidence | 3d55ee174e229e89da3ab9f31e65ebbd832a1f48c4f2eb487ce48dc25043703f |
-| design/CODING.md | current design authority | 3f4359c91d41067998c93a55aa05e2e8283f335ee8bbeeee4a3468e5495e8808 |
+| design/CODING.md | current design authority | 6f86e30ff0dc632b0d5f80f096e51abab2adc83087722215a6b263a50d02860c |
 | design/GOAL.md | current design authority | 8fb4133f683bd2a209c22badd2c62ad7f3bd641974a0591bfb0732ea7df18f78 |
 | design/HOST-NAMESPACE-CAPABILITY.md | retained pre-governance evidence | d8f6df52c8bdc9527526d14756c05465136571bfbd90ee17f5798c766c256bd5 |
 | design/ROADMAP.md | current design authority | f5ea2a1374680d8388f8418aa513ec3d396c35f5d92989441f1c20a7b6679cc2 |
@@ -2215,8 +2215,8 @@ content-divergent entries.
 | research/softpc-source-matrix/NT4-V86-PRODUCT-ORACLE-AUDIT.md | retained pre-governance evidence | 0cc622520f5e900d78a3f6ff1f425c4a3cfda670e29a66f89d221ccdbcb4d893 |
 | RESET-TRACE-STATUS.md | retained pre-governance evidence | dd0ce777cf9399cf4438ddf618a720b33e4ca2d5e21df66b16a8aeeb9eae55bb |
 | ROI-DRIVEN-EXECUTION-ROADMAP.md | retained pre-governance evidence | 89fe2b2d62f7f3e46bd183e7cb7ee0a637ecfe68d41450cfe0383ae3bfbfa660 |
-| rules/ARCHITECTURE.md | current rule authority | 045f1066d51f641277bab5c18971a7b4f993f86ab0a17e18bc4776499f9b2fb1 |
-| rules/CODING.md | current rule authority | 00d1c6746553760f43fbc4085664506e499bec328135f578bf9851e059d985c6 |
+| rules/ARCHITECTURE.md | current rule authority | e1420c35d8a8cb40339f92443f8462645684302c888f7c8056b1c526507d4d95 |
+| rules/CODING.md | current rule authority | 91f5c695ea4e512426d916deb1c5b7d995370299209bf58efd4af77b1ff1ea93 |
 | rules/DOCUMENT.md | current rule authority | 9f55864347f265afe78af803a67df10bfa20fb273fca6594803c8e64c4a4cbda |
 | rules/EXECUTION.md | current rule authority | 66b3cee027ec91537c1f131a0131098799d00d06e33d1ddf926c330582b82c5b |
 | S1-HISTORICAL-HOST-CLOSURE.md | retained pre-governance evidence | 0796b7bf5f0a780fbd7a989938474045ed2d3aa2a6b68b8697605393bd2e1bb8 |

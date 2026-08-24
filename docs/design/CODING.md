@@ -1,5 +1,19 @@
 # Source Layout
 
+The ten production components are classified before any file move or new
+source is admitted:
+
+- **Original code, with component README exception registers:** `bx-core`,
+  `opennt-guest`, `opennt-bop`, `opennt-host`.
+- **Mechanical adaptation:** `bx-mantle`, `adapter-bop`, `adapter-softpc`,
+  `adapter-win32`.
+- **Project composition:** `app`, `session`.
+
+This classification is an ownership boundary, not an include shortcut:
+`adapter-bop` transports opaque machine events to the declared OpenNT BOP
+route, while `bx-core` remains BOP/OpenNT-blind. `session` remains neutral and
+dependency-free even though it is project-authored composition code.
+
 ```text
 src/
   bx-core/                adopted Bochs CPU, memory and exception mechanics

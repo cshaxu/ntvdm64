@@ -105,6 +105,14 @@
   precedent for new code. Do not move a file across these owners as an
   incidental feature change; the admitted reorganization package inventories
   it and uses `git mv` whenever ownership is pure.
+- The only original-code components are `bx-core`, `opennt-guest`,
+  `opennt-bop`, and `opennt-host`; every imported-body change is individually
+  registered in that component's README and marked `DIVERGENCE:` locally.
+  `bx-mantle`, `adapter-bop`, `adapter-softpc`, and `adapter-win32` are
+  mechanical-adaptation components. `app` and `session` are project-authored
+  composition components, but `session` remains dependency-free and neutral.
+  `adapter-bop` may transfer an opaque machine event only: `bx-core` must not
+  identify a BOP or call an OpenNT route directly.
 - Keep imported OpenNT mirrors recognizable. Preserve source names, interfaces,
   data structures and ordering, and annotate each required edited expression
   with `DIVERGENCE:`. A replacement of an unavailable Win32, CCPU or SoftPC

@@ -6,11 +6,18 @@ NTDOS64 is a composition of an adopted guest machine, OpenNT source mirrors,
 and a modern contained host. Its design objective is to preserve each layer's
 native responsibility rather than recreate one layer inside another. The
 product has ten named source components; a source file has exactly one of
-these owners. Four are source mirrors directly comparable to their upstream tree
-after re-rooting: `bx-core`, `opennt-guest`, `opennt-host`, and `opennt-bop`.
-The other six are self-authored composition, adaptation, or neutral-runtime
-components: `bx-mantle`, `adapter-bop`, `adapter-softpc`, `adapter-win32`,
-`session`, and `app`.
+these owners. They form three responsibility strata:
+
+- **Original code:** `bx-core`, `opennt-guest`, `opennt-bop`, and `opennt-host`
+  are source mirrors directly comparable to upstream after re-rooting. Every
+  necessary modification is a registered exception in that component's
+  `README.md` and carries a local `DIVERGENCE:` marker.
+- **Mechanical adaptation:** `bx-mantle`, `adapter-bop`, `adapter-softpc`, and
+  `adapter-win32` bridge only named machine or host interface contracts; they
+  do not become alternate OpenNT providers.
+- **Project composition:** `app` performs CLI entry and final assembly;
+  `session` is the dependency-free neutral lifecycle foundation shared by the
+  components. It is foundational, not an upward product layer.
 
 Each component root is production-only. Immutable upstream comparison copies,
 uncompiled experimental mirrors, examples, fixtures and retained overlays are
@@ -57,12 +64,13 @@ adapter-win32 -> session                  (registered session endpoint only)
 ```
 
 `adapter-bop` is the sole generic BOP ingress boundary. It receives a copied,
-typed, finite machine event and a session-limited call context supplied by
-`session`; invokes the `app`-bound route callback that exposes an OpenNT BOP
-entry; and returns a typed resume, pending, or
+typed, finite opaque machine event through the mechanical boundary and a
+session-limited call context supplied by `session`; invokes the `app`-bound
+route callback that exposes an OpenNT BOP entry; and returns a typed resume, pending, or
 controlled-stop outcome. It does not implement a provider or interpret a
 selector family. Selector/service meaning, dispatch order, provider choice,
-and documented failure behavior remain in `opennt-bop`.
+and documented failure behavior remain in `opennt-bop`. `bx-core` never calls
+or recognizes `opennt-bop`, BOP, DOS, or OpenNT terminology.
 
 `adapter-softpc` preserves the reached historical SoftPC/CCPU/SAS interface
 spelling, parameters, calling convention and observable mechanical result
