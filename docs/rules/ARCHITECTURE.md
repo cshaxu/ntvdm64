@@ -41,21 +41,21 @@
     signature/call shape in the compatibility facade whenever possible; a new
     shaped boundary requires rule 12's exception and may expose only the
     state required by the reached call.
-14. Intrusion is minimized independently for adopted Bochs `bx-core` and
+14. Intrusion is minimized independently for adopted Bochs `bochs-core` and
     imported OpenNT mirrors (`opennt-guest`, `opennt-bop`, `opennt-host`,
     `opennt-softpc`, `opennt-utils`, and
     tracked BOP-dependencies). Prefer an `adapter-softpc`, `adapter-win32`, or
     `opennt-host` same-shaped facade that preserves the original call shape.
-    An edit to `bx-core` or imported OpenNT source requires a source-proven
+    An edit to `bochs-core` or imported OpenNT source requires a source-proven
     necessity, the smallest feasible diff, and the component's divergence or
     exception record; convenience or a local trace result is never sufficient.
-15. The target source owners are exactly `bx-core`, `bx-mantle`,
+15. The target source owners are exactly `bochs-core`, `adapter-bochs`,
     `opennt-guest`, `opennt-host`, `opennt-bop`, `opennt-softpc`,
     `opennt-utils`, `adapter-bop`,
     `adapter-softpc`, `adapter-win32`, `session`, and `app`. The original-code
-    owners are exactly `bx-core`, `opennt-guest`, `opennt-bop`, `opennt-host`,
+    owners are exactly `bochs-core`, `opennt-guest`, `opennt-bop`, `opennt-host`,
     `opennt-softpc`, and `opennt-utils`, each with a component README exception register. The
-    mechanical-adaptation owners are exactly `bx-mantle`, `adapter-bop`,
+    mechanical-adaptation owners are exactly `adapter-bochs`, `adapter-bop`,
     `adapter-softpc`, and `adapter-win32`; the project-composition owners are
     exactly `app` and `session`. `session` is a
     dependency-free per-VDM foundation: it owns neutral lifecycle, resource/
@@ -66,7 +66,7 @@
     on the declared `session` contract rather than call upward into `app`.
     Dependencies flow from `app`
     through `adapter-bop`'s typed, selector-blind ingress and declared OpenNT/adapter
-    contracts to `bx-mantle` and then `bx-core`; `opennt-guest` is a guest-image
+    contracts to `adapter-bochs` and then `bochs-core`; `opennt-guest` is a guest-image
     input and does not become a host-provider library. `opennt-bop` alone owns
     BOP source meaning. `adapter-bop` is selector-blind copied-frame transport,
     while `adapter-softpc` is selector-blind, same-shaped
@@ -76,11 +76,18 @@
     owner-specific adapter is allowed only after source/ABI audit proves that
     the original owner plus `session`, `adapter-win32`, `adapter-softpc`, and
     `adapter-bop` cannot preserve the required contract.
-16. The local-intrusion registers are component-owned. `bx-core/README.md`,
+16. The local-intrusion registers are component-owned. `bochs-core/README.md`,
     `opennt-guest/README.md`, `opennt-bop/README.md`, `opennt-host/README.md`,
     `opennt-softpc/README.md`, and `opennt-utils/README.md`
     record every edit to their imported source and every source-derived component.
     `opennt-bop` mirror edits additionally retain the original call form and mark
-    each changed expression with `DIVERGENCE:`. `bx-mantle` may crop and compose
+    each changed expression with `DIVERGENCE:`. `adapter-bochs` may crop and compose
     native Bochs mechanisms but may not acquire OpenNT, DOS, VDM, WOW or Win32
     meaning.
+17. `app` is the sole production caller of `adapter-bochs`; `adapter-bochs` is
+    the sole production caller of `bochs-core`. `adapter-softpc` reaches an
+    admitted machine operation only through an opaque endpoint installed by
+    `app` in `session`; it may not add a direct Bochs edge. Each `*-overlay`
+    is private to its matching native mirror: only that mirror may include,
+    link or invoke the overlay. No overlay may expose a component ABI or be
+    directly consumed by app, adapters, session, fixtures or another mirror.

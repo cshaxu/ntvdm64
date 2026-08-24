@@ -55,6 +55,6 @@ build graph.
 
 ## Admission evidence
 
-This proposal is required by the owner direction defining S1--S5. It is an
-unnumbered candidate until selected and admitted as the sole numeric T/S
-packet in `docs/STATUS.md`.
+Owner admitted this proposal as **M0 T265 S1** on 2026-08-24. S1 is limited
+to authority and dependency governance; source movement starts only after its
+separate closure and the next admitted S packet.

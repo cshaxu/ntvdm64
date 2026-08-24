@@ -8,12 +8,12 @@ native responsibility rather than recreate one layer inside another. The
 product has twelve named source components; a source file has exactly one of
 these owners. They form three responsibility strata:
 
-- **Original code:** `bx-core`, `opennt-guest`, `opennt-bop`, `opennt-host`,
+- **Original code:** `bochs-core`, `opennt-guest`, `opennt-bop`, `opennt-host`,
   `opennt-softpc`, and `opennt-utils`
   are source mirrors directly comparable to upstream after re-rooting. Every
   necessary modification is a registered exception in that component's
   `README.md` and carries a local `DIVERGENCE:` marker.
-- **Mechanical adaptation:** `bx-mantle`, `adapter-bop`, `adapter-softpc`, and
+- **Mechanical adaptation:** `adapter-bochs`, `adapter-bop`, `adapter-softpc`, and
   `adapter-win32` bridge only named machine or host interface contracts; they
   do not become alternate OpenNT providers.
 - **Project composition:** `app` performs CLI entry and final assembly;
@@ -31,8 +31,8 @@ marked `DIVERGENCE:` and individually registered by its component README.
 
 | Component | Owns | Does not own |
 | --- | --- | --- |
-| `bx-core` | Adopted Bochs CPU/decode, memory, exceptions, and admitted no-device mechanics | VDM/guest-service interpretation, OpenNT/DOS/WOW semantics, host policy, or compatibility-provider selection |
-| Bochs mantle (`src/bx-mantle`) | Minimal native Bochs lifecycle composition: SIM/logging/no-device time state and assembly of admitted core mechanics | VDM, BOP, OpenNT, DOS, host policy, GUI, plugins, or unadmitted PC devices |
+| `bochs-core` | Adopted Bochs CPU/decode, memory, exceptions, and admitted no-device mechanics | VDM/guest-service interpretation, OpenNT/DOS/WOW semantics, host policy, or compatibility-provider selection |
+| `adapter-bochs` | Minimal native Bochs lifecycle composition: SIM/logging/no-device time state and assembly of admitted core mechanics | VDM, BOP, OpenNT, DOS, host policy, GUI, plugins, or unadmitted PC devices |
 | `opennt-guest` | OpenNT DOS and WOW16 guest source and its immutable guest-image inputs | Host service dispatch, host Win32 capability, or machine mechanics |
 | `opennt-host` | Re-rooted, independently composable original OpenNT host-capability components | BOP routing, machine mechanics, guest algorithms, or unmarked project-authored helpers |
 | `opennt-softpc` | Original OpenNT SoftPC firmware, ROM and machine-contract source/input packages after provenance admission | Bochs CPU/device operation, BOP routing, or an independently invented machine layer |
@@ -52,14 +52,14 @@ app
   -> session                              (creates, owns and drives one instance)
   -> opennt-guest                         (guest-image input)
   -> opennt-softpc                        (selects admitted opaque firmware/ROM inputs)
-  -> bx-mantle -> bx-core
+  -> adapter-bochs -> bochs-core
   -> adapter-bop -> opennt-bop
   -> installs adapter-softpc's opaque machine-event callback to adapter-bop
 opennt-bop
   -> opennt-host
   -> opennt-utils                         (only for an admitted original utility contract)
   -> adapter-win32
-  -> adapter-softpc -> bx-mantle -> bx-core
+  -> adapter-softpc -> session -> app-bound opaque machine endpoint
   -> session                              (declared neutral lifecycle/resource contract)
 opennt-host -> adapter-win32
 opennt-host -> adapter-softpc
@@ -75,7 +75,7 @@ session-limited call context supplied by `session`; invokes the `app`-bound
 route callback that exposes an OpenNT BOP entry; and returns a typed resume, pending, or
 controlled-stop outcome. It does not implement a provider or interpret a
 selector family. Selector/service meaning, dispatch order, provider choice,
-and documented failure behavior remain in `opennt-bop`. `bx-core` never calls
+and documented failure behavior remain in `opennt-bop`. `bochs-core` never calls
 or recognizes `opennt-bop`, BOP, DOS, or OpenNT terminology.
 
 `adapter-softpc` preserves the reached historical SoftPC/CCPU/SAS interface
@@ -120,10 +120,10 @@ CRT may enter this in-process composition.
 
 ## Boundary Invariants
 
-- Machine mechanics stay in the Bochs core. `adapter-softpc` may request bounded mechanical
-  operations through typed contracts but does not reproduce CPU, memory,
+- Machine mechanics stay in `bochs-core`. `adapter-softpc` may request bounded mechanical
+  operations through an app-bound opaque endpoint but does not reproduce CPU, memory,
   firmware, interrupt, or device algorithms.
-- The mantle is Bochs-internal assembly only. It reuses native Bochs code and
+- `adapter-bochs` is Bochs-internal assembly only. It reuses native Bochs code and
   data structures, extracting only product-shell paths that prevent independent
   minimal operation. It has no VDM or guest meaning.
 - Guest and host-service meaning stays outside Bochs. `opennt-bop` owns the
@@ -169,12 +169,12 @@ Dependencies point inward through declared contracts:
 ```text
 app -> opennt-guest
 app -> opennt-softpc                      (opaque source/input selection only)
-app -> bx-mantle -> bx-core
+app -> adapter-bochs -> bochs-core
 app -> session
 app -> adapter-bop -> opennt-bop -> opennt-host
 opennt-bop -> opennt-utils                (declared original utility contract only)
 opennt-bop -> adapter-win32
-opennt-bop -> adapter-softpc -> bx-mantle -> bx-core
+opennt-bop -> adapter-softpc -> session
 opennt-bop -> session                       (neutral declared contract)
 opennt-host -> adapter-win32                  (declared Win32 facade only)
 opennt-host -> adapter-softpc                 (declared SoftPC/CCPU facade only)
@@ -189,10 +189,25 @@ component-specific provider. Components may use only its declared neutral
 contract; they may not import `app` to obtain session state. `app` composition
 is the sole instance owner and wiring point. No component may reverse these
 directions by importing another component's private execution state. In
-particular, the Bochs core and mantle remain
+particular, `bochs-core` and `adapter-bochs` remain
 reusable as a guest machine; `adapter-softpc` remains a mechanical boundary; and
 the original OpenNT BOP and host ownership remains visible rather than being
 absorbed by either adapter.
+
+## Bochs And Overlay Privacy
+
+`app` is the only production component that directly calls `adapter-bochs`.
+`adapter-bochs` is the only production component that directly calls
+`bochs-core`. OpenNT-facing code, including `adapter-softpc`, reaches admitted
+machine operations only through an opaque endpoint registered by `app` in the
+neutral `session` contract; it never links directly to either Bochs component.
+
+Each `*-overlay` is private implementation detail of its identically rooted
+native mirror. Only `bochs-core` may call `bochs-core-overlay`; only
+`opennt-host` may call `opennt-host-overlay`; the same rule applies to every
+future native-mirror/overlay pair. An overlay has no external public ABI and
+may not be called, included, or linked by `app`, adapters, session, fixtures,
+or another mirror.
 
 ## Adapter Admission
 

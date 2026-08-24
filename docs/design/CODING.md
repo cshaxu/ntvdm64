@@ -3,22 +3,22 @@
 The twelve production components are classified before any file move or new
 source is admitted:
 
-- **Original code, with component README exception registers:** `bx-core`,
+- **Original code, with component README exception registers:** `bochs-core`,
   `opennt-guest`, `opennt-bop`, `opennt-host`, `opennt-softpc`,
   `opennt-utils`.
-- **Mechanical adaptation:** `bx-mantle`, `adapter-bop`, `adapter-softpc`,
+- **Mechanical adaptation:** `adapter-bochs`, `adapter-bop`, `adapter-softpc`,
   `adapter-win32`.
 - **Project composition:** `app`, `session`.
 
 This classification is an ownership boundary, not an include shortcut:
 `adapter-bop` transports opaque machine events to the declared OpenNT BOP
-route, while `bx-core` remains BOP/OpenNT-blind. `session` remains neutral and
+route, while `bochs-core` remains BOP/OpenNT-blind. `session` remains neutral and
 dependency-free even though it is project-authored composition code.
 
 ```text
 src/
-  bx-core/                adopted Bochs CPU, memory and exception mechanics
-  bx-mantle/              project-owned native Bochs lifecycle composition
+  bochs-core/             adopted Bochs CPU, memory and exception mechanics
+  adapter-bochs/          project-owned native Bochs lifecycle composition
   opennt-guest/           imported OpenNT DOS/WOW source and guest-image inputs
   opennt-host/            imported OpenNT host-capability components
   opennt-bop/             minimal-change OpenNT BOP source mirrors
@@ -43,7 +43,7 @@ tests/
   adapter-softpc/         same-shaped SoftPC/CCPU facade fixtures
   session/                neutral lifecycle/resource/event fixtures
   component-integration/  multi-component composition fixtures
-  bx-mantle/              Bochs-machine assembly fixtures
+  adapter-bochs/          Bochs-machine assembly fixtures
   legacy/opennt/          retained non-product historical fixture/archive inputs
 tools/                    tracked tools, arranged by declared responsibility
   build/                  build/publish entry points
@@ -59,13 +59,19 @@ artifacts/                only explicitly requested reports and formal releases
   reports/<task>/         explicitly requested human-readable reports
 ```
 
-`src/bx-core/` is adopted third-party Bochs material. Preserve upstream layout,
+`src/bochs-core/` is adopted third-party Bochs material. Preserve upstream layout,
 notices and source identity. Its `README.md` is the complete local-intrusion
 register: every modification records upstream identity, necessity, exception
-identifier and focused verification. `src/bx-mantle/` is project-owned,
+identifier and focused verification. `src/adapter-bochs/` is project-owned,
 Bochs-internal lifecycle assembly; it may use native Bochs structures but has
 no OpenNT, DOS, VDM, WOW or Win32 meaning. It is a deliberately cropped Bochs
 product assembly layer, not an adopted-source exception surface.
+
+Only `app` may directly include, link, or call `adapter-bochs`; only
+`adapter-bochs` may directly include, link, or call `bochs-core`. A
+component-specific `*-overlay` is private to the matching original mirror:
+only that mirror may include, link, or call it. Overlays are not fixture,
+adapter, session, or app inputs and expose no public component surface.
 
 `src/opennt-guest/` contains the original DOS/WOW guest sources and guest-image
 inputs. Original prebuilt OpenNT images are the default packaging input;
@@ -88,8 +94,8 @@ product code in a production component.
 
 `src/opennt-softpc/` contains admitted original OpenNT SoftPC firmware, ROM
 and machine-contract inputs. It is neither a second machine runtime nor a
-dependency from `bx-mantle`: `app` may select opaque admitted bytes for the
-mechanical loader, while `bx-mantle` remains OpenNT-blind. `src/opennt-utils/`
+dependency from `adapter-bochs`: `app` may select opaque admitted bytes for the
+mechanical loader, while `adapter-bochs` remains OpenNT-blind. `src/opennt-utils/`
 contains only selected original utility packages with a named original caller;
 it is not a generic common-code root. Both components preserve upstream
 relative paths after re-rooting and maintain a README exception register.
@@ -125,7 +131,7 @@ semantics of the components it assembles. This is an internal research
 repository: distribution/license review is deferred until a release is
 considered.
 
-`src/bx-core` is the manifest-verified local Bochs 2.6 adoption from
+`src/bochs-core` is the manifest-verified local Bochs 2.6 adoption from
 `O:\repos.external\bochs-2.6-compat\bochs-2.6`; its pinned full imported tree
 is under `refs/bochs/`. The unadmitted Bochs 3.0 snapshot was removed and is
 not a runtime input. Any source exception below the imported tree is registered in
@@ -144,7 +150,7 @@ when an admitted original caller requires it. A component skeleton never
 creates an empty library merely to satisfy the diagram.
 than a host library. All current modern runtime sources below `src/app/`, `src/session/`, `src/adapter-softpc/`,
 `src/adapter-win32/`, `src/opennt-host/`, `src/opennt-bop/`,
-`src/adapter-bop/`, `src/bx-mantle/`, and the admitted `src/bx-core/` closure build with MSVC x64
+`src/adapter-bop/`, `src/adapter-bochs/`, and the admitted `src/bochs-core/` closure build with MSVC x64
 and the static `/MT` CRT. Generated build artifacts record the compiler,
 target architecture and CRT. MinGW artifacts are retained evidence only and
 cannot be linked into the x64 runtime process.

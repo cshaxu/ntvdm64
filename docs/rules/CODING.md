@@ -84,8 +84,8 @@
   target inputs, outputs, owner and whether it may create a disposable
   `build/` tree. Do not place generated output beside a tool. Existing
   top-level tools are migration debt, not a precedent.
-- Keep adopted Bochs upstream files and license notices intact under `src/bx-core/`.
-  Put Bochs-only project code in `src/bx-mantle/`; place every other project
+- Keep adopted Bochs upstream files and license notices intact under `src/bochs-core/`.
+  Put Bochs-only project code in `src/adapter-bochs/`; place every other project
   source in its declared target owner rather than the transitional legacy tree.
   Any exception is an explicit patch
   with upstream path/revision, rationale and focused test, registered in
@@ -94,7 +94,7 @@
   cannot solve the problem. Distribution review is deferred until a release is
   considered.
 - Place each source file in its named target component: Bochs mechanics in
-  `bx-core`; Bochs-only native assembly in `bx-mantle`; guest image source in
+  `bochs-core`; Bochs-only native assembly in `adapter-bochs`; guest image source in
   `opennt-guest`; independently composable OpenNT host capability in
   `opennt-host`; original SoftPC firmware/ROM/machine-contract inputs in
   `opennt-softpc`; selected original reusable utility packages in
@@ -107,13 +107,13 @@
   precedent for new code. Do not move a file across these owners as an
   incidental feature change; the admitted reorganization package inventories
   it and uses `git mv` whenever ownership is pure.
-- The only original-code components are `bx-core`, `opennt-guest`,
+- The only original-code components are `bochs-core`, `opennt-guest`,
   `opennt-bop`, `opennt-host`, `opennt-softpc`, and `opennt-utils`; every imported-body change is individually
   registered in that component's README and marked `DIVERGENCE:` locally.
-  `bx-mantle`, `adapter-bop`, `adapter-softpc`, and `adapter-win32` are
+  `adapter-bochs`, `adapter-bop`, `adapter-softpc`, and `adapter-win32` are
   mechanical-adaptation components. `app` and `session` are project-authored
   composition components, but `session` remains dependency-free and neutral.
-  `adapter-bop` may transfer an opaque machine event only: `bx-core` must not
+  `adapter-bop` may transfer an opaque machine event only: `bochs-core` must not
   identify a BOP or call an OpenNT route directly.
 - **Mirror-component review standard.** Every production file in an
   original-code mirror component has exactly one of the following audited
@@ -142,21 +142,27 @@
   the mirror component, even if its public function signatures remain the
   same. Move the entire differing implementation to the corresponding path
   below a dedicated component-specific `*-overlay/` root (for example
-  `src/bx-core-overlay/cpu/...`) and leave only the smallest declared call
+  `src/bochs-core-overlay/cpu/...`) and leave only the smallest declared call
   boundary in the mirror. Record the measured baseline, changed-line count,
   percentage, overlay path and call boundary in the mirror README exception
   register. Do not evade this rule by declaring an artificial subset that
   removes interdependent retained logic.
 
   A mirror file may not hide new semantics. If an added semantic intrusion
-  (for example a `bx-core` CPU/RAM mechanical interface) requires more than
+  (for example a `bochs-core` CPU/RAM mechanical interface) requires more than
   three executable lines at its actual insertion point, move that added logic
   out of the mirror into a dedicated component-specific overlay (for example
-  `bx-core-overlay`) and make the mirror call the overlay through the smallest
+  `bochs-core-overlay`) and make the mirror call the overlay through the smallest
   declared boundary. The mirror insertion remains a locally marked and
   README-registered exception. An overlay does not exempt its call site from
   the source-first ladder, architecture admission, focused test, or intrusion
   register; it must not become a generic `compat`/`common` container.
+- A `*-overlay` is called only by the corresponding native mirror, never by a
+  different component or test. It has no standalone public include/link ABI.
+  `app` is the only production caller of `adapter-bochs`; `adapter-bochs` is
+  the only production caller of `bochs-core`. Any OpenNT-facing machine call
+  uses the neutral, app-installed opaque endpoint instead of a direct Bochs
+  component dependency.
 - Keep imported OpenNT mirrors recognizable. Preserve source names, interfaces,
   data structures and ordering, and annotate each required edited expression
   with `DIVERGENCE:`. A replacement of an unavailable Win32, CCPU or SoftPC

@@ -2,13 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T264 S5 — closure delivery.** All technical exit criteria are
-met: the filename/identifier sweep, collision repair, full formal graph and
-no-work verification are recorded below. This packet remains active only
-through its required reviewed commit/push; the next candidate requires owner
-admission from the ordered queue.
+**Active: M0 T265 S1 — Bochs component identity and dependency governance.**
+Owner admitted the queue-leading Bochs component identity and mirror-overlay
+convergence package. S1 changes authorities and task records only; it does not
+move or modify production source.
 
 ## Active Packet
+
+### M0 T265 S1 — Bochs component identity and dependency governance
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T265 S1`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner: “准入。” following the approved queue brief for Bochs component identity and mirror-overlay convergence. |
+| Objective | Make the component rename, directed dependency rules, and private-overlay ownership rules authoritative before any source-tree move. |
+| Non-goals | No `git mv`, source edit, Bochs/OpenNT behavior change, feature admission, or formal build execution. |
+| Reference Baseline | [Bochs convergence proposal](etc/operations/proposal-bochs-component-identity-overlay-convergence-001.md), completed T264 closure, current component roots, and the mirror-component review standard. |
+| Files And ABI Surface | Architecture/coding/rule authorities, queue, proposal, status, evidence and documentation inventory only; no runtime ABI. |
+| Applicable Rules | Task admission and closure; component ownership; mirror/overlay review; source-first and document governance rules. |
+| Verification | Cross-authority terminology/dependency scan, proposal consistency review, documentation governance, and `git diff --check`. |
+| Expected Markers | Only `app` calls `adapter-bochs`; only `adapter-bochs` calls `bochs-core`; only a native mirror calls its own overlay. |
+| Asset Needs | Existing component-layout evidence and source-tree ownership registers; no external source import. |
+| Reporting Requirements | State exact renamed component names, permitted directed edges, overlay privacy, and every deferred source move. |
+| Stop Conditions | An authority implies a prohibited reverse/direct dependency, a source move becomes necessary to state policy, or an overlay needs a generic/shared consumer. |
+| Exit Criteria | All listed authorities and proposal agree on final names/directions; queue no longer contains the admitted candidate; no source move exists in the S1 diff. |
+| Original Owner Request | “新增队列最优先T任务，包含以下S任务：S1. 治理文档：组件改名：bx-mantle => adapter-bochs，… bx-core => bochs-core，… `*-overlay` 组件仅允许被它的原生镜像组件调用。” |
+| Similar-Issue Sweep | Old component names in authorities, direct core consumers, overlay reachability, and accidental OpenNT/Win32 vocabulary in the assembly component. |
 
 ### M0 T264 S1 — project code filename inventory
 
