@@ -3,7 +3,7 @@
 #include <string.h>
 #include <wchar.h>
 
-#include "opennt-host/command/command_misc_shim.h"
+#include "opennt-bop/command/opennt_command_composition.h"
 
 extern BOOL fSeparateWow;
 

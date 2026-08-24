@@ -17,20 +17,18 @@ the explicitly declared OpenNT host ABI consumed by `opennt-bop` and `app`.
 
 ## Production layout and local divergence register
 
-The live source is grouped by the OpenNT owner that composes it:
-`command/`, `dem/`, `xms/`, `redir/`, `top_level/` and `config/`.  The
-former generic `capability/` staging directory is not a product category.
+The live source is grouped by the OpenNT owner that composes it.  Direct host
+imports retain their original `softpc.new/host/...` path; remaining recovery
+work is grouped under `dem/`, `xms/`, `redir/`, `top_level/` and `config/`.
+COMMAND BOP/session composition is intentionally owned by `opennt-bop`, not
+this component.  The former generic `capability/` staging directory is not a
+product category.
 Every source-derived provider remains in its owner group, with each necessary
 departure from an identified OpenNT definition marked in code as
 `DIVERGENCE:` and registered below.
 
 | ID | Original definition purpose | Divergence reason | Replacement implementation | Production file(s) |
 | --- | --- | --- | --- | --- |
-| `HOST-DIV-001` | COMMAND uses `RtlNtStatusToDosError` directly from NT4 `ntdll`. | Direct historical import is not a stable application contract. | Resolve the same-named modern export once through `adapter-win32`. | `command/command_binary_shim.c:78` |
-| `HOST-DIV-002` | `nt_lpt.c` clears its parallel-port open state. | This composition has no admitted LPT queue/controller model. | Do nothing; never claim a controller flush occurred. | `command/command_misc_shim.c:297` |
-| `HOST-DIV-003` | COMMAND publishes console bytes through BaseSrv/CSR. | The NT4 product service is not independently composable. | Retain the copied multisz session-publication contract. | `command/command_misc_shim.c:307` |
-| `HOST-DIV-004` | COMMAND probes a legacy 1 KiB DOS environment span. | That was an old adapter limit, not the provider contract. | Read the exact bounded multisz extent. | `command/command_misc_shim.c:866` |
-| `HOST-DIV-005` | COMMAND materializes SAS pointers. | Raw/aliased host access is unsafe. | Use bounded copied spans with alias rejection. | `command/command_misc_shim.c:908` |
 | `HOST-DIV-006` | DEM creates a VDD user hook. | It requires the NT4 VDD broker. | Preserve the call boundary as an explicit deferred no-op. | `dem/demmisc_shim.c:60` |
 | `HOST-DIV-007` | DEM emits VDD/debugger module notifications. | They are not DOS loader actions and their receiver is unavailable. | Preserve the boundary as an explicit deferred no-op. | `dem/demmisc_shim.c:66` |
 | `HOST-DIV-008` | DEM asks the debugger console for guest-visible input. | That needs a debugger-owned input lifecycle. | Preserve the boundary as an explicit deferred no-op. | `dem/demmisc_shim.c:76` |

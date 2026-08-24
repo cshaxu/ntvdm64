@@ -3,7 +3,7 @@
  * command.lib/SoftPC process-environment closure; the OpenNT transformation
  * algorithm remains in cmdenv.c. */
 
-#include "command_misc_shim.h"
+#include "opennt_command_composition.h"
 
 #include <stdlib.h>
 #include <string.h>

@@ -8,9 +8,9 @@
 
 /* OpenNT source: src/opennt/base/mvdm/dos/command/cmdkeyb.c.
  * Divergence: the historical CCPU/SoftPC include closure is unavailable to
- * the standalone CLI.  command_misc_shim.h exposes only the original
+ * the standalone CLI.  opennt_command_composition.h exposes only the original
  * register, checked guest-buffer and console capability spellings. */
-#include "../../opennt-host/command/command_misc_shim.h"
+#include "opennt_command_composition.h"
 #include "cmdkeyb.h"
 
 CHAR szPrev[5] = "US";

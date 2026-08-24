@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_BOP_SHIM_COMMAND_MISC_SHIM_H
-#define BX_NTVDM_BOP_SHIM_COMMAND_MISC_SHIM_H
+#ifndef BX_NTVDM_OPENNT_BOP_COMMAND_COMPOSITION_H
+#define BX_NTVDM_OPENNT_BOP_COMMAND_COMPOSITION_H
 
 #include "adapter-win32/facade/opennt_error_dialog_facade.h"
 

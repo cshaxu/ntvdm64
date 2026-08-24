@@ -6,7 +6,7 @@
  * dem_native_session_shim: the mantle never receives a selector, a service,
  * or an OpenNT COMMAND type. */
 
-#include "opennt-host/command/command_misc_shim.h"
+#include "opennt-bop/command/opennt_command_composition.h"
 #include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
 
 #define BX_NTVDM_COMMAND_NATIVE_SESSION_MAGIC 0x4258434eu

@@ -1,4 +1,4 @@
-#include "command_misc_shim.h"
+#include "opennt_command_composition.h"
 #include "opennt-host/dem/dem_drive_policy_shim.h"
 
 #include <setjmp.h>
@@ -294,7 +294,7 @@ BOOL GetNextVDMCommand(PVDMINFO vdm_info)
 
 void host_lpt_flush_initialize(void)
 {
-    /* DIVERGENCE(HOST-DIV-002): nt_lpt.c clears the per-port dos_opened bits.  No LPT
+    /* DIVERGENCE(BOP-DIV-034): nt_lpt.c clears the per-port dos_opened bits.  No LPT
      * flush queue/port state is admitted in this composition, so creating a
      * private parallel-port model here would cross the machine boundary.
      * The reached void call is deliberately a visible no-effect until the
@@ -304,7 +304,7 @@ BOOL SetVDMCurrentDirectories(ULONG current_directory_bytes,
     LPSTR current_directories)
 {
     bx_ntvdm_command_misc_session *session = bx_ntvdm_command_misc_active_session();
-    /* DIVERGENCE(HOST-DIV-003): OpenNT's client stub sends these bytes to BaseSrv/CSR for a
+    /* DIVERGENCE(BOP-DIV-035): OpenNT's client stub sends these bytes to BaseSrv/CSR for a
      * console-bound VDM.  That NT4 product service is not independently
      * composable in the CLI; retain its copied multisz publication contract in
      * the active session instead. */
@@ -863,7 +863,7 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
         if (*buffer != NULL || (maximum == 124u && address > 0x100000u - maximum)) return NULL;
         *buffer_address = address;
         if (maximum != 124u) {
-            /* DIVERGENCE(HOST-DIV-004): the old 1 KiB probe was an adapter limit, not an
+            /* DIVERGENCE(BOP-DIV-036): the old 1 KiB probe was an adapter limit, not an
              * OpenNT environment contract.  Read a bounded DOS multisz and
              * retain only its exact copied extent for the CLI backend. */
             if (!copy_guest_multisz(active, address, buffer, buffer_bytes)) return NULL;
@@ -905,7 +905,7 @@ LPVOID bx_ntvdm_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
             buffer = &active->guest_buffer4; buffer_address = &active->guest_address3;
             buffer_bytes = &active->guest_bytes3;
         } else return NULL;
-        /* DIVERGENCE(HOST-DIV-005): each historical SAS pointer is materialized as a
+        /* DIVERGENCE(BOP-DIV-037): each historical SAS pointer is materialized as a
          * bounded copied span.  This preserves cmdmisc.c's pointer order but
          * rejects an alias or an unbounded real-mode address. */
         if (bytes == 0u || address > 0x100000u - bytes || *buffer != NULL) return NULL;

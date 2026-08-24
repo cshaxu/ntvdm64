@@ -1,4 +1,4 @@
-#include "command_misc_shim.h"
+#include "opennt_command_composition.h"
 
 BOOL DontCheckDosBinaryType;
 BOOL IsFirstWOWCheckBinary = TRUE;
@@ -75,7 +75,7 @@ ULONG RtlNtStatusToDosError(NTSTATUS status)
     static bx_ntvdm_rtl_ntstatus_to_dos_error_fn native_converter;
     static int native_converter_probed;
 
-    /* DIVERGENCE(HOST-DIV-001): the imported OpenNT caller directly linked ntdll's
+    /* DIVERGENCE(BOP-DIV-033): the imported OpenNT caller directly linked ntdll's
      * RtlNtStatusToDosError.  The standalone target owns the same-shaped
      * facade, so resolve the current OS export once and preserve the original
      * status-to-Win32/DOS conversion instead of collapsing every failure to

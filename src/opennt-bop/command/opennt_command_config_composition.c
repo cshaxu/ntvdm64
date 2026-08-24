@@ -5,7 +5,7 @@
  * the same source-selected input/default/failure contract with public Win32
  * conversion APIs.  It does not parse CONFIG.SYS or AUTOEXEC.BAT. */
 
-#include "command_misc_shim.h"
+#include "opennt_command_composition.h"
 
 #include <stdlib.h>
 #include <string.h>

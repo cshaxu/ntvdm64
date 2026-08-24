@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "opennt-host/command/command_misc_shim.h"
+#include "opennt-bop/command/opennt_command_composition.h"
 
 typedef struct fixture_context { uint8_t guest[0x10000]; } fixture_context;
 

@@ -38,6 +38,10 @@ S3 P3 has additionally moved the COMMAND native session state machine from
 `opennt-host` to `opennt-bop/ingress`, compiled its exact object in fresh
 `r003`, and passed the component-manifest and production-tree gates; see
 [session-ingress evidence](etc/evidence/m0-t261-s3-p3-command-session-ingress-rehome-001.md).
+S3 P4 has moved the remaining project-owned COMMAND composition sources to
+`opennt-bop/command`; fresh `r004` builds all five moved objects and the full
+`opennt-bop` static library.  The remaining `opennt-host` COMMAND input is
+only the unchanged PIF triplet; see [composition-owner evidence](etc/evidence/m0-t261-s3-p4-command-composition-owner-rehome-001.md).
 
 ## Previous Active Packet — M0 T260
 

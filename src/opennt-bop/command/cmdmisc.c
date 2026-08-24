@@ -9,7 +9,7 @@
 /* OpenNT source: src/opennt/base/mvdm/dos/command/cmdmisc.c.
  *
  * Divergence: this first admitted slice is built without the retired NT4
- * CCPU/SAS, VDD and PIF product composition.  command_misc_shim.h supplies
+ * CCPU/SAS, VDD and PIF product composition.  opennt_command_composition.h supplies
  * the original register spellings, bounded guest spans, OEM environment API
  * and Direct host-drive capability only.  The unadmitted routines below are
  * excluded at translation-unit scope rather than replaced with stubs.  Their
@@ -24,7 +24,7 @@
 #define BX_NTVDM_COMMAND_MISC_ADMIT_SET_DIRECTORIES 1
 #define BX_NTVDM_COMMAND_MISC_ADMIT_UPDATE_DIRECTORIES 1
 #define BX_NTVDM_COMMAND_MISC_ADMIT_MAP_CODE_PAGE 1
-#include "../../opennt-host/command/command_misc_shim.h"
+#include "opennt_command_composition.h"
 
 #if defined(BX_NTVDM_COMMAND_MISC_ADMIT_GET_NEXT) || !defined(BX_NTVDM_COMMAND_MISC_ADMITTED_SLICE)
 VOID GetWowKernelCmdLine(VOID);
