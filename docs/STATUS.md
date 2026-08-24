@@ -34,6 +34,10 @@ full-graph run root was interrupted externally and is explicitly non-evidence;
 S3 P2 has moved the parser layout bridge to `opennt-bop` and its OEM Win32
 facade to `adapter-win32`; both moved objects compile in fresh `r002`. S3 will
 use that fresh root for later formal closure. No provider behavior has changed.
+S3 P3 has additionally moved the COMMAND native session state machine from
+`opennt-host` to `opennt-bop/ingress`, compiled its exact object in fresh
+`r003`, and passed the component-manifest and production-tree gates; see
+[session-ingress evidence](etc/evidence/m0-t261-s3-p3-command-session-ingress-rehome-001.md).
 
 ## Previous Active Packet — M0 T260
 

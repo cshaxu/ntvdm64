@@ -2,7 +2,7 @@
 #include "cpu/cpu.h"
 #include "adapter-softpc/bx_ntvdm_machine_stage_v1.h"
 extern "C" {
-#include "opennt-host/command/command_native_session_shim.h"
+#include "opennt-bop/ingress/command_native_session.h"
 }
 
 #include <string.h>

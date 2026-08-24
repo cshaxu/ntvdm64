@@ -2,7 +2,7 @@
 
 #include "dem_v2_startup_composition.h"
 #include "opennt-bop/command/opennt_pif_composition.h"
-#include "opennt-host/command/command_native_session_shim.h"
+#include "opennt-bop/ingress/command_native_session.h"
 
 #include <string.h>
 
