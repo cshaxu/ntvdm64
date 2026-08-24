@@ -119,12 +119,23 @@ BOOL VrReadNamedPipe(HANDLE Handle, LPBYTE Buffer, DWORD Buflen,
     if (!success) {
         error = GetLastError();
         if (error == ERROR_IO_PENDING) {
-            success = WaitForSingleObject(overlap.hEvent, INFINITE) == WAIT_OBJECT_0;
-            if (success) success = GetOverlappedResult(Handle, &overlap, &transferred, FALSE);
-            error = success ? NO_ERROR : GetLastError();
+            error = WaitForSingleObject(overlap.hEvent, INFINITE);
+            if (error == 0xffffffffu) {
+                error = GetLastError();
+            } else {
+                success = error == WAIT_OBJECT_0;
+            }
         } else if (error == ERROR_MORE_DATA) success = TRUE;
     }
+    if (success) {
+        success = GetOverlappedResult(Handle, &overlap, &transferred, FALSE);
+        error = success ? NO_ERROR : GetLastError();
+        if (error == ERROR_MORE_DATA) success = TRUE;
+    }
     CloseHandle(overlap.hEvent);
+    /* DIVERGENCE: the original WAIT_TIMEOUT branch closes the native handle
+     * and removes its VDMREDIR record.  This handle is session-manager owned
+     * here, so only its owner may close it during bounded teardown. */
     if (success && error == NO_ERROR && transferred == 0u) { error = ERROR_NO_DATA; success = FALSE; }
     if (BytesRead) *BytesRead = transferred;
     if (Error) *Error = error;

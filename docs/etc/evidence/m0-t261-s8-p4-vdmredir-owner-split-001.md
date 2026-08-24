@@ -34,6 +34,11 @@ not return the caller's source pointer as an optimization.
 is opportunistic and the intercept returns `TRUE` even for an ordinary handle;
 the close path must not gain a new Redirector-specific failure.
 
+The synchronous read path now retains original overlapped issue → wait →
+`GetOverlappedResult` → `ERROR_MORE_DATA`/no-data classification. Its only
+additional divergence is `HOST-DIV-016`: a timeout cannot close an opaque
+session-owned native handle from inside the source provider.
+
 ## Recovery ladder
 
 1. Direct compile of the complete historical units was examined first.
