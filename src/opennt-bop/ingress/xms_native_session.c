@@ -1,6 +1,6 @@
 #include "xms_native_session.h"
 
-#include "opennt-host/xms/xms_shim.h"
+#include "opennt-bop/xms/opennt_xms_compat.h"
 #include "adapter-softpc/bx_ntvdm_mechanical_action_v1.h"
 
 #include <string.h>

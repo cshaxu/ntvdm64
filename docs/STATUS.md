@@ -28,6 +28,12 @@ DEM paths now directly query present host drives; the unrelated configuration-
 complete fixture remains a separately recorded `exit=2` limitation.  See the
 [P1 removal evidence](etc/evidence/m0-t261-s8-p1-host-namespace-drive-policy-removal-001.md).
 
+**S8 P2 progress:** XMS source package lifecycle and `52:xx` route composition
+now live in `opennt-bop`; its reached CCPU/SAS/A20/IVT/checked-RAM mechanics
+are a selector-blind same-shaped `adapter-softpc` facade.  Fresh formal Ninja
+root `r003` completed 467/467 edges and both XMS focused fixtures passed; see
+the [P2 owner-split evidence](etc/evidence/m0-t261-s8-p2-xms-softpc-owner-split-001.md).
+
 ### M0 T261 S7 — closed: dependency-free session owner split
 
 | Field | Record |

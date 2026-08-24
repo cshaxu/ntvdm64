@@ -1,6 +1,6 @@
 #include "xms_v2_generic_ud_bridge.h"
 #include "opennt-bop/ingress/xms_native_session.h"
-#include "opennt-host/xms/xms_shim.h"
+#include "opennt-bop/xms/opennt_xms_compat.h"
 
 int bx_ntvdm_xms_v2_generic_ud_recognizes(
     const struct bx_ntvdm_generic_ud_event_v1 *event)

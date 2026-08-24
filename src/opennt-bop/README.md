@@ -60,14 +60,14 @@ comment. Historic overlays are evidence only and are recorded in
 | `BOP-DIV-021` | `cmdpif.c` assigns a bounded command path size. | The destination retains a 16-bit original ABI. | Explicitly convert the bounded original value. | `command/cmdpif.c:264` |
 | `BOP-DIV-022` | `cmdredir.c` uses K&R forms and diagnostic locals. | `/W4 /WX` diagnoses them. | Preserve semantic body while applying only warning-clean declarations. | `command/cmdredir.c:15` |
 | `BOP-DIV-023` | `mem_size.c` includes Insignia/CPU/SAS product headers. | They are not a standalone modern closure. | Use the narrow SoftPC memory-size facade. | `softpc/mem_size.c:4` |
-| `BOP-DIV-024` | `suballcp.h` imports private NT headers. | They are unavailable outside NT4 composition. | Use `xms_shim.h` only. | `xms/suballcp.h:2` |
-| `BOP-DIV-025` | `suballoc.c` imports private NT headers. | They are unavailable outside NT4 composition. | Use `xms_shim.h` only. | `xms/suballoc.c:2` |
-| `BOP-DIV-026` | `xms.c` imports XMS/SoftPC/SAS/private NT headers. | The historical product closure is absent. | Use the fixed XMS shim boundary. | `xms/xms.c:2` |
-| `BOP-DIV-027` | `xmsa20.c` imports XMS/SoftPC/SAS/private NT headers. | The historical product closure is absent. | Use the fixed XMS shim boundary. | `xms/xmsa20.c:2` |
-| `BOP-DIV-028` | `xmsblock.c` imports XMS/SoftPC/SAS/private NT headers. | The historical product closure is absent. | Use the fixed XMS shim boundary. | `xms/xmsblock.c:2` |
-| `BOP-DIV-029` | `xmsdisp.c` imports XMS/SoftPC/SAS/private NT headers. | The historical product closure is absent. | Use the fixed XMS shim boundary. | `xms/xmsdisp.c:2` |
-| `BOP-DIV-030` | `xmsmisc.c` imports XMS/SoftPC/SAS/private NT headers. | The historical product closure is absent. | Use the fixed XMS shim boundary. | `xms/xmsmisc.c:2` |
-| `BOP-DIV-031` | `xmsumb.c` imports XMS/SoftPC/SAS/private NT headers. | The historical product closure is absent. | Use the fixed XMS shim boundary. | `xms/xmsumb.c:2` |
+| `BOP-DIV-024` | `suballcp.h` imports private NT headers. | They are unavailable outside NT4 composition. | Use `opennt_xms_compat.h` plus the same-shaped `adapter-softpc` facade. | `xms/suballcp.h:2` |
+| `BOP-DIV-025` | `suballoc.c` imports private NT headers. | They are unavailable outside NT4 composition. | Use `opennt_xms_compat.h` plus the same-shaped `adapter-softpc` facade. | `xms/suballoc.c:2` |
+| `BOP-DIV-026` | `xms.c` imports XMS/SoftPC/SAS/private NT headers. | The historical product closure is absent. | Use the local XMS compatibility header and `adapter-softpc` machine facade. | `xms/xms.c:2` |
+| `BOP-DIV-027` | `xmsa20.c` imports XMS/SoftPC/SAS/private NT headers. | The historical product closure is absent. | Use the local XMS compatibility header and `adapter-softpc` machine facade. | `xms/xmsa20.c:2` |
+| `BOP-DIV-028` | `xmsblock.c` imports XMS/SoftPC/SAS/private NT headers. | The historical product closure is absent. | Use the local XMS compatibility header and `adapter-softpc` machine facade. | `xms/xmsblock.c:2` |
+| `BOP-DIV-029` | `xmsdisp.c` imports XMS/SoftPC/SAS/private NT headers. | The historical product closure is absent. | Use the local XMS compatibility header and `adapter-softpc` machine facade. | `xms/xmsdisp.c:2` |
+| `BOP-DIV-030` | `xmsmisc.c` imports XMS/SoftPC/SAS/private NT headers. | The historical product closure is absent. | Use the local XMS compatibility header and `adapter-softpc` machine facade. | `xms/xmsmisc.c:2` |
+| `BOP-DIV-031` | `xmsumb.c` imports XMS/SoftPC/SAS/private NT headers. | The historical product closure is absent. | Use the local XMS compatibility header and `adapter-softpc` machine facade. | `xms/xmsumb.c:2` |
 | `BOP-DIV-032` | `nt_pif.c` and COMMAND's `cmdpif.h` expose different historical `PIF_DATA` definitions. | Direct linking would cross incompatible layouts. | Keep the host parser source unchanged and translate only its compatible result through a separately named BOP composition unit. | `command/opennt_pif_composition.c:33`, `command/opennt_pif_composition.h` |
 | `BOP-DIV-034` | COMMAND flushes historical LPT open state. | No LPT controller model is admitted. | Preserve a no-controller outcome rather than claiming a flush. | `command/opennt_command_composition.c:297` |
 | `BOP-DIV-035` | COMMAND publishes console bytes through BaseSrv/CSR. | The NT4 product broker is absent. | Retain the session publication boundary. | `command/opennt_command_composition.c:307` |

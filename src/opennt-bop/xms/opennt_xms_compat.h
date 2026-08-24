@@ -2,18 +2,17 @@
 #define BX_NTVDM_BOP_SHIM_XMS_SHIM_H
 
 /* Compatibility surface for the directly mirrored OpenNT XMS sources.
- * It replaces their CCPU/SAS/private-NT product shell with one scoped,
- * fixed-width call.  It is not an XMS dispatcher, allocator, UMB manager or
- * BIOS implementation. */
+ * DIVERGENCE(BOP-DIV-024..031): private NT4 product headers are unavailable;
+ * reached SoftPC/CCPU/SAS calls retain their source-shaped spelling through
+ * adapter-softpc.  BOP route, dispatch and package lifecycle remain here. */
 
 #include <windows.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
 
-#include "adapter-softpc/bx_ntvdm_cpu_result_v2.h"
-#include "adapter-softpc/bx_ntvdm_cpu_state_abi.h"
 #include "adapter-softpc/bx_ntvdm_exception_abi.h"
+#include "adapter-softpc/opennt_xms_softpc_facade.h"
 
 typedef uint8_t BYTE;
 typedef uint16_t USHORT;
@@ -33,11 +32,6 @@ typedef struct _XMSUMB_ {
     struct _XMSUMB_ *Next;
 } XMSUMB, *PXMSUMB;
 
-typedef int (*bx_ntvdm_xms_guest_read_fn)(void *state, uint32_t address,
-    uint8_t *buffer, uint32_t bytes);
-typedef int (*bx_ntvdm_xms_guest_write_fn)(void *state, uint32_t address,
-    const uint8_t *buffer, uint32_t bytes);
-
 typedef struct bx_ntvdm_xms_call {
     uint32_t magic, abi_version, struct_bytes, service;
     const bx_ntvdm_exception_event_v1 *boundary;
@@ -55,31 +49,8 @@ int bx_ntvdm_xms_call_valid(const bx_ntvdm_xms_call *call);
 int bx_ntvdm_xms_initialize(void);
 int bx_ntvdm_xms_invoke(bx_ntvdm_xms_call *call);
 
-USHORT bx_ntvdm_xms_get_ax(void); USHORT bx_ntvdm_xms_get_bx(void);
-USHORT bx_ntvdm_xms_get_cx(void); USHORT bx_ntvdm_xms_get_dx(void);
-USHORT bx_ntvdm_xms_get_bp(void); USHORT bx_ntvdm_xms_get_ss(void);
-USHORT bx_ntvdm_xms_get_cs(void);
-void bx_ntvdm_xms_set_ax(USHORT value); void bx_ntvdm_xms_set_bx(USHORT value);
-void bx_ntvdm_xms_set_bl(USHORT value); void bx_ntvdm_xms_set_cx(USHORT value);
-void bx_ntvdm_xms_set_dx(USHORT value); void bx_ntvdm_xms_set_cf(int value);
-PVOID bx_ntvdm_xms_get_vdm_addr(USHORT segment, USHORT offset);
-/* The historical source retained a host pointer returned by GetVDMAddr.
- * The modern boundary retains only a checked, fixed-width guest address. */
-int bx_ntvdm_xms_bind_himem_a20_state(USHORT segment, USHORT offset);
-void bx_ntvdm_xms_write_himem_a20_state(BYTE value);
-void bx_ntvdm_xms_clear_himem_a20_state(void);
-int bx_ntvdm_xms_copy_physical(uint32_t source, uint32_t destination,
-    uint32_t bytes);
-int bx_ntvdm_xms_move_block_from_guest(USHORT segment, USHORT offset);
-WORD bx_ntvdm_xms_linear_to_segment(PVOID address);
 int bx_ntvdm_xms_configure_memory_kib(ULONG kib);
 void bx_ntvdm_xms_reset(void);
-void bx_ntvdm_xms_a20_set(int enabled);
-int bx_ntvdm_xms_a20_enabled(void);
-int bx_ntvdm_xms_a20_available(void);
-void sas_enable_20_bit_wrapping(void);
-void sas_disable_20_bit_wrapping(void);
-BOOL sas_twenty_bit_wrapping_enabled(void);
 void UpdateKbdInt15(WORD segment, WORD offset);
 
 /* Original services and package initializer. */
@@ -96,13 +67,7 @@ VOID xmsInsertUMB(PVOID address, ULONG bytes);
 extern ULONG xmsMemorySize;
 extern PVOID ExtMemSA;
 
-/* The original suballocator remains the policy implementation.  These
- * declarations are deliberately source-shaped; its backing callbacks are
- * supplied by a later named mantle seam. */
-typedef NTSTATUS (*bx_ntvdm_xms_commit_fn)(ULONG base, ULONG bytes);
-typedef VOID (*bx_ntvdm_xms_move_fn)(ULONG destination, ULONG source, ULONG bytes);
-typedef bx_ntvdm_xms_commit_fn PSACOMMITROUTINE;
-typedef bx_ntvdm_xms_move_fn PSAMEMORYMOVEROUTINE;
+/* The original suballocator remains the policy implementation. */
 #ifndef STATUS_SUCCESS
 #define STATUS_SUCCESS ((NTSTATUS)0x00000000L)
 #endif
@@ -116,12 +81,6 @@ BOOL SAFree(PVOID allocation, ULONG bytes, ULONG address);
 BOOL SAReallocate(PVOID allocation, ULONG old_bytes, ULONG old_address,
     ULONG new_bytes, PULONG new_address);
 BOOL SAQueryFree(PVOID allocation, PULONG total, PULONG largest);
-NTSTATUS xmsCommitBlock(ULONG base, ULONG bytes);
-NTSTATUS xmsDecommitBlock(ULONG base, ULONG bytes);
-VOID xmsMoveMemory(ULONG destination, ULONG source, ULONG count);
-
-BOOL ReserveUMB(ULONG owner, PVOID *address, PULONG bytes);
-
 #define getAX() bx_ntvdm_xms_get_ax()
 #define getBX() bx_ntvdm_xms_get_bx()
 #define getCX() bx_ntvdm_xms_get_cx()

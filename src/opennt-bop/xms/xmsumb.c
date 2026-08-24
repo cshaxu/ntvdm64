@@ -1,9 +1,9 @@
 /* Direct source mirror of src/opennt/base/mvdm/xms.486/xmsumb.c.
  * DIVERGENCE(BOP-DIV-031): historical xms/SoftPC/SAS/private-NT headers are replaced only
- * by the fixed bx-vdm compatibility surface in xms_shim.h.  Service order
+ * by the fixed adapter-softpc compatibility surface.  Service order
  * and original function bodies remain below; each later code divergence is
  * documented at its exact point. */
-#include "../../opennt-host/xms/xms_shim.h"
+#include "opennt_xms_compat.h"
 
 
 /*++
@@ -35,7 +35,8 @@ Revision History:
 
 --*/
 /* DIVERGENCE (T237): the original SoftPC include supplied raw SAS access.
- * xms_shim.h supplies only the fixed-width, checked replacement boundary. */
+ * opennt_xms_compat.h supplies only the fixed-width, checked replacement
+ * boundary through adapter-softpc. */
 
 
 

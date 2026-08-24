@@ -1,6 +1,6 @@
 #include "xms_v2_runtime_session.h"
 
-#include "opennt-host/xms/xms_shim.h"
+#include "opennt-bop/xms/opennt_xms_compat.h"
 #include "opennt-bop/ingress/xms_native_session.h"
 
 #include <string.h>

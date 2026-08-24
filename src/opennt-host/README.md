@@ -19,7 +19,7 @@ the explicitly declared OpenNT host ABI consumed by `opennt-bop` and `app`.
 
 The live source is grouped by the OpenNT owner that composes it.  Direct host
 imports retain their original `softpc.new/host/...` path; remaining recovery
-work is grouped under `dem/`, `xms/`, `redir/`, `top_level/` and `config/`.
+work is grouped under `dem/`, `redir/`, `top_level/` and `config/`.
 COMMAND BOP/session composition is intentionally owned by `opennt-bop`, not
 this component.  The former generic `capability/` staging directory is not a
 product category.

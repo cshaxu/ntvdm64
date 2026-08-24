@@ -1,5 +1,6 @@
 /* Direct source mirror of src/opennt/base/mvdm/suballoc/suballcp.h.
- * DIVERGENCE(BOP-DIV-024): historical NT header composition is replaced only by xms_shim.h;
+ * DIVERGENCE(BOP-DIV-024): historical NT header composition is replaced only by
+ * opennt_xms_compat.h plus the same-shaped adapter-softpc facade;
  * original suballocator policy and structure order remain below. */
 /*++
 
@@ -22,7 +23,7 @@ Revision History:
 
 
 --*/
-#include "../../opennt-host/xms/xms_shim.h"
+#include "opennt_xms_compat.h"
 
 /* OpenNT suballoc.h: the declared i386 XMS provider commits in 4 KiB units.
  * The original public header arrived through the removed NT product include

@@ -1,5 +1,6 @@
 /* Direct source mirror of src/opennt/base/mvdm/suballoc/suballoc.c.
- * DIVERGENCE(BOP-DIV-025): historical NT header composition is replaced only by xms_shim.h;
+ * DIVERGENCE(BOP-DIV-025): historical NT header composition is replaced only by
+ * opennt_xms_compat.h plus the same-shaped adapter-softpc facade;
  * original suballocator policy and structure order remain below. */
 /*++
 

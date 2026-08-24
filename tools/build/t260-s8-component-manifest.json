@@ -208,6 +208,7 @@
         "src/adapter-softpc/bx_ntvdm_multi_write_abi.c",
         "src/adapter-softpc/bx_ntvdm_multi_write_transaction.c",
         "src/adapter-softpc/opennt_dem_ccpu_sas_facade.c",
+        "src/adapter-softpc/opennt_xms_softpc_facade.c",
         "src/adapter-softpc/bx_ntvdm_normal_return_observation_v1.c",
         "src/adapter-softpc/bx_ntvdm_normal_terminal_sequence_observation_v1.c",
         "src/adapter-softpc/bx_ntvdm_ntdos_exec_entry_observation_v1.c",
@@ -263,8 +264,7 @@
       "name": "opennt-host",
       "sources": [
         "src/opennt-host/redir/redir_session_shim.c",
-        "src/opennt-host/top_level/top_level_nosupport_shim.c",
-        "src/opennt-host/xms/xms_shim.c"
+        "src/opennt-host/top_level/top_level_nosupport_shim.c"
       ]
     },
     {
@@ -316,6 +316,7 @@
         "src/opennt-bop/softpc/tape_io.c",
         "src/opennt-bop/softpc/update_kbd_int15.c",
         "src/opennt-bop/xms/suballoc.c",
+        "src/opennt-bop/xms/opennt_xms_composition.c",
         "src/opennt-bop/xms/xms.c",
         "src/opennt-bop/xms/xmsa20.c",
         "src/opennt-bop/xms/xmsblock.c",
