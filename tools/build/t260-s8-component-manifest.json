@@ -264,6 +264,7 @@
       "name": "opennt-host",
       "sources": [
         "src/opennt-host/vdmredir/vrnmpipe.c",
+        "src/opennt-host/vdmredir/vrinit.c",
         "src/opennt-host/softpc.new/host/src/nt_error.c"
       ]
     },

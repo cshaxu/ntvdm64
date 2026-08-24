@@ -30,6 +30,10 @@ Its `OPEN_NAMED_PIPE_INFO` now preserves the original record fields
 tail-insertion/removal behavior.  This makes later `VrGetNamedPipeInfo`
 recovery consume the same metadata rather than a project-specific list shape.
 
+The original initialization owner is separately re-rooted as `vrinit.c`:
+`VrInitialized`, `VrInitialize`, and `VrUninitialize` retain their historical
+`BOOLEAN` signatures and call the original named-pipe termination boundary.
+
 `VrConvertLocalNtPipeName` also retains the original allocation/copy ordering:
 it returns an allocated/copy-normalized buffer for remote UNC names, maps only
 the local computer name to `\\.`, and canonicalizes forward slashes.  It does

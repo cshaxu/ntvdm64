@@ -19,7 +19,6 @@ typedef struct _OPEN_NAMED_PIPE_INFO {
     CHAR Name[2];
 } OPEN_NAMED_PIPE_INFO, *POPEN_NAMED_PIPE_INFO;
 
-static BOOL IsVrInitialized;
 static POPEN_NAMED_PIPE_INFO OpenNamedPipeInfoList;
 static POPEN_NAMED_PIPE_INFO LastOpenNamedPipeInfo;
 
@@ -71,13 +70,10 @@ static BOOL VrpRemoveOpenNamedPipeInfo(HANDLE Handle)
     return FALSE;
 }
 
-BOOL VrInitialized(void) { return IsVrInitialized; }
-BOOL VrInitialize(void) { IsVrInitialized = TRUE; return TRUE; }
-VOID VrUninitialize(void)
+VOID VrTerminateNamedPipes(VOID)
 {
     while (OpenNamedPipeInfoList != NULL)
         (void)VrpRemoveOpenNamedPipeInfo(OpenNamedPipeInfoList->Handle);
-    IsVrInitialized = FALSE;
 }
 
 BOOL VrIsNamedPipeName(LPSTR Name)

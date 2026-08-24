@@ -9,9 +9,10 @@
  * the existing session-owned handle manager. */
 #include <windows.h>
 
-BOOL VrInitialized(void);
-BOOL VrInitialize(void);
+BOOLEAN VrInitialized(void);
+BOOLEAN VrInitialize(void);
 VOID VrUninitialize(void);
+VOID VrTerminateNamedPipes(VOID);
 BOOL VrAddOpenNamedPipeInfo(HANDLE Handle, LPSTR lpFileName);
 BOOL VrRemoveOpenNamedPipeInfo(HANDLE Handle);
 BOOL VrIsNamedPipeHandle(HANDLE Handle);
