@@ -17,6 +17,8 @@
  * protocol layouts are recovered as later owner groups. */
 
 static bx_ntvdm_redir_native_session *g_active_session;
+static __declspec(thread) const bx_ntvdm_demhndl_guest_span *g_scoped_spans;
+static __declspec(thread) uint32_t g_scoped_span_count;
 
 static void resume_with_error(const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome, DWORD error);
@@ -444,7 +446,7 @@ static int mailslot_query(HANDLE host, DWORD *next, DWORD *count)
     return GetMailslotInfo(host, &maximum, next, count, &timeout) != 0;
 }
 
-static int mailslot_read(const struct bx_ntvdm_generic_ud_event_v1 *event,
+int bx_ntvdm_legacy_mailslot_read_rehost(const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
 {
     PVR_MAILSLOT_INFO record;
@@ -520,6 +522,18 @@ static int mailslot_terminate(const struct bx_ntvdm_generic_ud_event_v1 *event,
         bx_ntvdm_vrmslot_terminate_bop_body, 4u);
 }
 
+static int invoke_mailslot_span(const struct bx_ntvdm_generic_ud_event_v1 *event,
+    struct bx_ntvdm_generic_ud_outcome_v1 *outcome, void (*body)(void),
+    const bx_ntvdm_demhndl_guest_span *span)
+{
+    int handled;
+    if (g_scoped_spans != NULL || span == NULL) return 0;
+    g_scoped_spans = span; g_scoped_span_count = 1u;
+    handled = bx_ntvdm_redir_native_session_invoke_scoped_body(event, outcome, body, 4u);
+    g_scoped_spans = NULL; g_scoped_span_count = 0u;
+    return handled;
+}
+
 static int dispatch_service(uint8_t service,
     const struct bx_ntvdm_generic_ud_event_v1 *event,
     struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
@@ -566,7 +580,12 @@ static int dispatch_service(uint8_t service,
             VrPeekMailslot, 4u);
     case 0x0du: /* SVC_RDRREADMAILSLOT */
         if (g_active_session->loaded == 0u) { resume_with_error(event, outcome, ERROR_INVALID_FUNCTION); return 1; }
-        return mailslot_read(event, outcome);
+        { PVR_MAILSLOT_INFO record = VrpMapMailslotHandle16(word_at(event->ebx));
+          bx_ntvdm_demhndl_guest_span span;
+          if (record == NULL) { resume_with_error(event, outcome, ERROR_INVALID_HANDLE); return 1; }
+          span.segment = word_at(event->es); span.offset = word_at(event->edi);
+          span.bytes = record->MessageSize; span.write_back = 1u;
+          return invoke_mailslot_span(event, outcome, VrReadMailslot, &span); }
     case 0x0eu: /* SVC_RDRWRITEMAILSLOT */
         if (g_active_session->loaded == 0u) { resume_with_error(event, outcome, ERROR_INVALID_FUNCTION); return 1; }
         return mailslot_write(event, outcome);
@@ -634,6 +653,8 @@ int bx_ntvdm_redir_native_session_invoke_scoped_body(
     call.guest_state = g_active_session->guest_state;
     call.guest_read = g_active_session->guest_read;
     call.guest_write = g_active_session->guest_write;
+    call.guest_spans = g_scoped_spans;
+    call.guest_span_count = g_scoped_span_count;
     return bx_ntvdm_ccpu_sas_invoke_body_with_resume(&call, body, resume_bytes) &&
         copy_outcome(&result, outcome);
 }

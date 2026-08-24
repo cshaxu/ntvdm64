@@ -102,6 +102,41 @@ VrMakeMailslot(
 }
 
 VOID
+VrReadMailslot(
+    VOID
+    )
+{
+    PVR_MAILSLOT_INFO ptr;
+    HANDLE Handle;
+    DWORD BytesRead, NextSize;
+    BOOL Ok;
+    if ((ptr = VrpMapMailslotHandle16(getBX())) == NULL) {
+        SET_ERROR(ERROR_INVALID_HANDLE);
+    } else {
+        Handle = ptr->Handle32;
+        if (!SetMailslotInfo(Handle, MAKE_DWORD(getDX(), getCX()))) {
+            SET_ERROR(VrpMapLastError());
+        } else {
+            /* DIVERGENCE(BOP-DIV-064): original flat SAS output pointer is
+             * the declared checked MessageSize lease supplied by its caller. */
+            Ok = ReadFile(Handle, POINTER_FROM_WORDS(getES(), getDI()),
+                ptr->MessageSize, &BytesRead, NULL);
+            if (!Ok) {
+                SET_ERROR(VrpMapLastError());
+            } else {
+                setAX((WORD)BytesRead);
+                NextSize = MAILSLOT_NO_MESSAGE;
+                Ok = GetMailslotInfo(Handle, NULL, &NextSize, NULL, NULL);
+                if (NextSize == MAILSLOT_NO_MESSAGE) setCX(0);
+                else setCX((WORD)NextSize);
+                setDX(0);
+                setCF(0);
+            }
+        }
+    }
+}
+
+VOID
 VrGetMailslotInfo(
     VOID
     )

@@ -99,6 +99,7 @@ comment. Historic overlays are evidence only and are recorded in
 | `BOP-DIV-061` | `VrDeleteMailslot` returns its private 16-bit ID to `VrpFreeHandle16` after closing the raw record handle. | The product's sole opaque manager owns the token allocation and retirement. | The retained close boundary releases the same token; no private bitmap release remains. | `vdmredir/vrmslot.c:143` |
 | `BOP-DIV-062` | `VrMakeMailslot` obtains its ASCIZ name by dereferencing an NT4 flat SAS pointer. | A guest pointer may not escape the copied modern CCPU/SAS call. | Copy the bounded input through the existing facade before the retained source ordering continues. | `vdmredir/vrmslot.c` |
 | `BOP-DIV-063` | `VrMakeMailslot` reserves an ID in its private bitmap before creating a native mailslot. | The product permits only its one session-owned opaque handle manager. | Publish the successfully-created handle through that manager, retaining the original 16-bit result and all following record initialization. | `vdmredir/vrmslot.c` |
+| `BOP-DIV-064` | `VrReadMailslot` passes an NT4 flat SAS output pointer to `ReadFile`. | Guest memory must not escape the modern CCPU/SAS boundary. | The selector-owning caller declares the recovered record's exact message span; adapter-softpc maps it through the existing call-local mapper and writes it back on lease release. | `vdmredir/vrmslot.c`, `ingress/redir_native_session.c` |
 
 The migration evidence is
 [`m0-t260-s5-opennt-bop-layout-migration-001.md`](../../docs/etc/evidence/m0-t260-s5-opennt-bop-layout-migration-001.md).

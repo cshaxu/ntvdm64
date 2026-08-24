@@ -82,6 +82,12 @@ ninja -C build/t261/s8-r012 -j 4 bin/t251-s3-redir-ingress-fixture.exe
 T251 S4 Redirector: typed selector-57 lifecycle and mailslot owner group pass
 ```
 
+`VrReadMailslot` now also uses its original `SetMailslotInfo` → `ReadFile` →
+`GetMailslotInfo` ordering. `BOP-DIV-064` declares its recovered record-sized
+`ES:DI` output as one call-local, checked mapper lease and writes it back only
+on normal completion. The mapper contract remains selector-blind; the
+Redirector caller alone derives the size from `VR_MAILSLOT_INFO`.
+
 ## Boundary
 
 This recovers the original record lifetime, information, delete and simple

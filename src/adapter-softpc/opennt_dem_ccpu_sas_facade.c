@@ -43,6 +43,9 @@ typedef struct bx_ntvdm_demhndl_active_call {
     bx_ntvdm_guest_pointer_lease *guest_buffer_lease;
     uint8_t *path_buffers[4];
     uint32_t path_buffer_count;
+    struct { const bx_ntvdm_demhndl_guest_span *span;
+        bx_ntvdm_guest_pointer_lease *lease; uint8_t *buffer; } spans[8];
+    uint32_t span_count;
     int transfer_from_guest;
     int flush_guest_buffer_on_return;
     /* OpenNT DASD paths may map a small packed request plus one sector
@@ -110,6 +113,26 @@ static LPVOID acquire_fixed_guest_span(bx_ntvdm_demhndl_active_call *active,
     uint32_t bytes)
 {
     return acquire_guest_span(active, bytes, 1);
+}
+
+static LPVOID acquire_declared_span(bx_ntvdm_demhndl_active_call *active,
+    USHORT segment, USHORT offset)
+{
+    uint32_t i, slot;
+    if (!active || !active->call) return NULL;
+    for (i = 0; i < active->call->guest_span_count; ++i) {
+        const bx_ntvdm_demhndl_guest_span *span = &active->call->guest_spans[i];
+        if (span->segment != segment || span->offset != offset) continue;
+        slot = active->span_count;
+        if (slot >= 8u || span->bytes == 0u ||
+            !bx_ntvdm_guest_pointer_manager_acquire_real_mode(
+                bx_ntvdm_guest_pointer_manager_session(), segment, offset, span->bytes,
+                BX_NTVDM_GUEST_POINTER_READ | BX_NTVDM_GUEST_POINTER_WRITE,
+                &active->spans[slot].lease, (void **)&active->spans[slot].buffer)) return NULL;
+        active->spans[slot].span = span; active->span_count++;
+        return active->spans[slot].buffer;
+    }
+    return NULL;
 }
 
 static LPVOID acquire_dasd_payload_span(bx_ntvdm_demhndl_active_call *active,
@@ -452,6 +475,10 @@ LPVOID bx_ntvdm_demhndl_get_vdm_addr(USHORT segment, USHORT offset)
 
     if (active == 0 || active->call == 0) return NULL;
     active->guest_address = real_mode_address(segment, offset);
+    if (active->call->guest_span_count != 0u) {
+        LPVOID pointer = acquire_declared_span(active, segment, offset);
+        if (pointer != NULL) return pointer;
+    }
     if (active->call->service == 0x21u || active->call->service == 0x29u ||
         active->call->service == 0x2au) {
         bytes = dasd_mapping_bytes(active);
@@ -672,6 +699,12 @@ int bx_ntvdm_demhndl_invoke_body_with_resume(bx_ntvdm_demhndl_call *call,
     }
     while (active.path_buffer_count != 0u)
         free(active.path_buffers[--active.path_buffer_count]);
+    while (active.span_count != 0u) {
+        uint32_t i = --active.span_count;
+        (void)bx_ntvdm_guest_pointer_manager_release(
+            bx_ntvdm_guest_pointer_manager_session(), active.spans[i].lease,
+            active.spans[i].span->write_back != 0u);
+    }
     bx_ntvdm_guest_pointer_manager_end(bx_ntvdm_guest_pointer_manager_session());
     g_active_call = NULL;
     return bx_ntvdm_cpu_result_v2_valid(call->result);

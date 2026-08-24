@@ -27,6 +27,8 @@
 #define LOCAL_MAILSLOT_PREFIX "\\\\."
 #define LOCAL_MAILSLOT_NAMELEN MAX_PATH
 #define HANDLE_FUNCTION_FAILED INVALID_HANDLE_VALUE
+#define POINTER_FROM_WORDS(segment, offset) GetVDMAddr((segment), (offset))
+#define MAKE_DWORD(high, low) (((DWORD)(high) << 16) | (WORD)(low))
 
 typedef unsigned short SELECTOR;
 typedef struct {
@@ -64,6 +66,7 @@ void VrpMakeLocalMailslotName(LPSTR buffer, LPSTR name);
 
 void VrPeekMailslot(void);
 void VrMakeMailslot(void);
+void VrReadMailslot(void);
 void VrGetMailslotInfo(void);
 void VrDeleteMailslot(void);
 void VrTerminateMailslots(WORD DosPdb);

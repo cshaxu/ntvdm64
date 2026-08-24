@@ -58,6 +58,10 @@ typedef int (*bx_ntvdm_demhndl_guest_write_fn)(void *state,
 typedef int (*bx_ntvdm_demhndl_pipe_data_eof_fn)(void *state, HANDLE file,
     BOOL *eof_out);
 typedef int (*bx_ntvdm_demhndl_pipe_eof_fn)(void *state, HANDLE file);
+typedef struct bx_ntvdm_demhndl_guest_span {
+    USHORT segment, offset;
+    uint32_t bytes, write_back;
+} bx_ntvdm_demhndl_guest_span;
 
 typedef struct bx_ntvdm_demhndl_call {
     uint32_t magic;
@@ -71,6 +75,8 @@ typedef struct bx_ntvdm_demhndl_call {
     void *guest_state;
     bx_ntvdm_demhndl_guest_read_fn guest_read;
     bx_ntvdm_demhndl_guest_write_fn guest_write;
+    const bx_ntvdm_demhndl_guest_span *guest_spans;
+    uint32_t guest_span_count;
     void *pipe_state;
     bx_ntvdm_demhndl_pipe_data_eof_fn pipe_data_eof;
     bx_ntvdm_demhndl_pipe_eof_fn pipe_eof;
