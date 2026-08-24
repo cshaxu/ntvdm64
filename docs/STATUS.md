@@ -2,11 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T262 S3 — opennt-guest zero-difference mirror closure.** This
-packet closes the sole versioning gap found by T262/S1 without modifying guest
-source or artifacts.
+**Active: M0 T262 S4 — opennt-host subset and minimal-edit closure.** This
+packet verifies that every retained host subset/edit has a local marker and
+one README index row.
 
 ## Active Packet
+
+### M0 T262 S4 — opennt-host subset and minimal-edit closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T262 S4`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | T262 proposal S4; T262/S1 identified four original-host subsets/minimal edits and 13 existing HOST-DIV rows. |
+| Objective | Prove one-to-one code-marker/README coverage for every non-exact `opennt-host` file, while retaining exact files byte-identical and excluding non-mirror additions. |
+| Non-goals | No provider behavior, BOP route, Win32 facade, SoftPC seam or historical source expansion. |
+| Reference Baseline | T261/S12 header closure, T262/S1 ledger, `refs/opennt` source paths, and `opennt-host/README.md`. |
+| Files And ABI Surface | `nt_error.c`, `vrinit.c`, `vrnmpipe.c`, `vrputil.c`, exact host headers/bodies, README and evidence/status only. |
+| Applicable Rules | Reachable original subsets retain original order; each omitted/replaced expression has local `DIVERGENCE(<ID>)`; each ID has exactly one README row. |
+| Verification | Hash exact files; enumerate marker IDs per subset; compare every README HOST-DIV ID to source; negative scan for non-mirror files/compat headers; focused host fixtures remain linked. |
+| Expected Markers | Seven exact files, four subset/edit files, 13 matching HOST-DIV entries, and zero non-mirror host files. |
+| Asset Needs | Current host mirror, original OpenNT files and existing S12 fixture graph. |
+| Reporting Requirements | Report one-to-one marker/index result and preserve any unresolved source span as a later owner dependency rather than silently omitting it. |
+| Stop Conditions | A README ID lacks a local marker, a local marker lacks a README row, or a subset contains an unmarked project-authored branch. |
+| Exit Criteria | All host subset/edit deviations are locally marked/indexed and exact files remain hash-identical. |
+| Original Owner Request | “所有子集文件或者少部分修改的点位，需要在本文件中加入注释，并且README.md提供该例外的索引。” |
+| Similar-Issue Sweep | `*_compat` names, static-DLL selectors, TLS/dialog state, VDMREDIR lifecycle, private-header replacements and test-only declarations. |
+
+**S4 P1 completed:** exact-host hashes, subset marker IDs, README IDs and
+production-tree inventory agree one-to-one. See the [S4
+closure](etc/evidence/m0-t262-s4-opennt-host-subset-marker-closure-001.md).
 
 ### M0 T262 S3 — opennt-guest zero-difference mirror closure
 
