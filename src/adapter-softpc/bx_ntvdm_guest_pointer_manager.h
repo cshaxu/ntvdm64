@@ -5,6 +5,8 @@
  * an active OpenNT call: never guest state, an ABI field, a HANDLE or a
  * bx-core/bx-mantle object. */
 #include <stdint.h>
+
+#include "session/ntdos64_session_v1.h"
 #include <windows.h>
 
 #define BX_NTVDM_GUEST_POINTER_MANAGER_MAX_LEASES 8u
@@ -68,11 +70,14 @@ void bx_ntvdm_guest_pointer_manager_initialize(bx_ntvdm_guest_pointer_manager *m
 bx_ntvdm_guest_pointer_manager *bx_ntvdm_guest_pointer_manager_session(void);
 bx_ntvdm_guest_pointer_manager *bx_ntvdm_guest_pointer_manager_session_host_handle(void);
 bx_ntvdm_guest_pointer_manager *bx_ntvdm_guest_pointer_manager_session_data(void);
-/* Outer bx-vdm session lifecycle only: retire every lease and release the
+/* Active session lifecycle only: retire every lease and release the
  * session's host-handle and opaque-data entries.  Family shims must not
  * manufacture a replacement registry or use this to reset another owner
- * mid-call. */
+ * mid-call.  `session` owns the registration identity; this component owns
+ * only the three mapping-manager implementations. */
 void bx_ntvdm_session_mapping_registry_reset(void);
+int bx_ntvdm_session_mapping_registry_bind(
+    const ntdos64_session_v1 *session);
 int bx_ntvdm_guest_pointer_manager_begin(bx_ntvdm_guest_pointer_manager *manager,
     void *guest_state, bx_ntvdm_guest_pointer_read_fn read, bx_ntvdm_guest_pointer_write_fn write);
 void bx_ntvdm_guest_pointer_manager_end(bx_ntvdm_guest_pointer_manager *manager);

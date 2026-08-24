@@ -9,31 +9,19 @@
 #ifndef BX_NTVDM_CANCELLATION_CONTROLLER_V1_H
 #define BX_NTVDM_CANCELLATION_CONTROLLER_V1_H
 
-#include <stdint.h>
+#include "session/ntdos64_session_cancellation_v1.h"
 
-enum bx_ntvdm_cancellation_reason_v1 {
-  BX_NTVDM_CANCELLATION_V1_NONE = 0u,
-  BX_NTVDM_CANCELLATION_V1_USER_REQUEST = 1u
-};
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-int bx_ntvdm_cancellation_controller_v1_activate(void);
-void bx_ntvdm_cancellation_controller_v1_deactivate(void);
-int bx_ntvdm_cancellation_controller_v1_request(uint32_t reason);
-uint32_t bx_ntvdm_cancellation_controller_v1_requested_reason(void);
-
+/* Compatibility spelling retained for existing mechanical callers.  The
+ * state itself is session-owned and has no SoftPC/CCPU semantics. */
+#define BX_NTVDM_CANCELLATION_V1_NONE NTDOS64_SESSION_CANCELLATION_V1_NONE
+#define BX_NTVDM_CANCELLATION_V1_USER_REQUEST NTDOS64_SESSION_CANCELLATION_V1_USER_REQUEST
+#define bx_ntvdm_cancellation_controller_v1_activate ntdos64_session_cancellation_v1_activate
+#define bx_ntvdm_cancellation_controller_v1_deactivate ntdos64_session_cancellation_v1_deactivate
+#define bx_ntvdm_cancellation_controller_v1_request ntdos64_session_cancellation_v1_request
+#define bx_ntvdm_cancellation_controller_v1_requested_reason ntdos64_session_cancellation_v1_requested_reason
 #if defined(BX_NTVDM_CANCELLATION_TESTING)
-/* Fixture-only copied poll witness. It is omitted from every production
- * compile and carries no guest or host state. */
-void bx_ntvdm_cancellation_controller_v1_test_poll_mark(void);
-uint32_t bx_ntvdm_cancellation_controller_v1_test_poll_count(void);
-#endif
-
-#ifdef __cplusplus
-}
+#define bx_ntvdm_cancellation_controller_v1_test_poll_mark ntdos64_session_cancellation_v1_test_poll_mark
+#define bx_ntvdm_cancellation_controller_v1_test_poll_count ntdos64_session_cancellation_v1_test_poll_count
 #endif
 
 #endif

@@ -1,6 +1,6 @@
 #include "ntdos64_engine_worker_v1.h"
 
-#include "bx_ntvdm_cancellation_controller_v1.h"
+#include "session/ntdos64_session_cancellation_v1.h"
 
 #include <string.h>
 
@@ -46,7 +46,7 @@ int ntdos64_engine_worker_v1_run(const struct bx_ntvdm_engine_request_v1 *reques
             return 0;
         }
         if (!cancellation_accepted && bx_ntvdm_engine_request_cancellation_v1(
-            BX_NTVDM_CANCELLATION_V1_USER_REQUEST)) cancellation_accepted = 1u;
+            NTDOS64_SESSION_CANCELLATION_V1_USER_REQUEST)) cancellation_accepted = 1u;
         /* A manual-reset event remains signaled.  Once the typed request has
          * been accepted, wait only for the owned worker's joined result.  If
          * it was already inactive, the next wait observes worker completion. */

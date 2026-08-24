@@ -106,9 +106,8 @@ the product layout. Historical OpenNT reference material remains under
 inputs.
 
 The target layout has ten source components. The current formal graph has
-eight linkable host-side modules; `opennt-guest` is a guest-image input rather
-than a host library, and `session` joins that graph only when its admitted S7
-implementation exists. All current modern runtime sources below `src/app/`, `src/adapter-softpc/`,
+nine linkable host-side modules; `opennt-guest` is a guest-image input rather
+than a host library. All current modern runtime sources below `src/app/`, `src/session/`, `src/adapter-softpc/`,
 `src/adapter-win32/`, `src/opennt-host/`, `src/opennt-bop/`,
 `src/adapter-bop/`, `src/bx-mantle/`, and the admitted `src/bx-core/` closure build with MSVC x64
 and the static `/MT` CRT. Generated build artifacts record the compiler,

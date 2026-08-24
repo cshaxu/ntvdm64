@@ -12,6 +12,7 @@
   "includeRoots": [
     "src",
     "src/app",
+    "src/session",
     "src/adapter-bop",
     "src/adapter-softpc",
     "src/adapter-win32",
@@ -180,7 +181,6 @@
         "src/adapter-softpc/bx_ntvdm_a20_capability_v1.cc",
         "src/adapter-softpc/bx_ntvdm_bop_sequence_observation_v1.c",
         "src/adapter-softpc/bx_ntvdm_bulk_result_transaction.c",
-        "src/adapter-softpc/bx_ntvdm_cancellation_controller_v1.cc",
         "src/adapter-softpc/bx_ntvdm_command_bootstrap_observation_v1.c",
         "src/adapter-softpc/bx_ntvdm_command_current_dir_observation_v1.c",
         "src/adapter-softpc/bx_ntvdm_cpu_delta_abi.c",
@@ -231,6 +231,13 @@
         "src/adapter-softpc/softpc_printer_openclose_shim.c",
         "src/adapter-softpc/softpc_tape_io_shim.c",
         "src/adapter-softpc/spckbd_handoff_shim.c"
+      ]
+    },
+    {
+      "name": "session",
+      "sources": [
+        "src/session/ntdos64_session_v1.c",
+        "src/session/ntdos64_session_cancellation_v1.cc"
       ]
     },
     {
@@ -377,6 +384,15 @@
   },
   "fixtures": [
     {
+      "name": "t261-s7-session-fixture",
+      "source": "tests/session/t261_s7_session_fixture.c",
+      "libraries": [
+        "session",
+        "adapter-softpc"
+      ],
+      "platformLibraries": []
+    },
+    {
       "name": "t261-s5-bop-ingress-fixture",
       "source": "tests/adapter-bop/t261_s5_bop_ingress_fixture.c",
       "libraries": [
@@ -393,6 +409,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -408,6 +425,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -423,6 +441,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -438,6 +457,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -453,6 +473,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -468,6 +489,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -483,6 +505,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -498,6 +521,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -513,6 +537,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -528,6 +553,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -546,6 +572,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -563,6 +590,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -580,6 +608,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -597,6 +626,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -614,6 +644,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -631,6 +662,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -648,6 +680,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -665,6 +698,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -682,6 +716,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -699,6 +734,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -716,6 +752,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -731,6 +768,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -752,6 +790,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -767,6 +806,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -782,6 +822,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -803,6 +844,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -821,6 +863,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -839,6 +882,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -865,6 +909,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -889,6 +934,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -910,6 +956,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -934,6 +981,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -955,6 +1003,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -976,6 +1025,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -997,6 +1047,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1018,6 +1069,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1039,6 +1091,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1063,6 +1116,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1078,6 +1132,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1093,6 +1148,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1108,6 +1164,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1123,6 +1180,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1138,6 +1196,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1153,6 +1212,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1168,6 +1228,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1183,6 +1244,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1198,6 +1260,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1213,6 +1276,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1228,6 +1292,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1249,6 +1314,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1270,6 +1336,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1289,6 +1356,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1308,6 +1376,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1327,6 +1396,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1346,6 +1416,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1365,6 +1436,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1384,6 +1456,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1403,6 +1476,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1422,6 +1496,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1441,6 +1516,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1460,6 +1536,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1479,6 +1556,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1503,6 +1581,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1529,6 +1608,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1548,6 +1628,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1574,6 +1655,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1600,6 +1682,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1624,6 +1707,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1650,6 +1734,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1676,6 +1761,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1702,6 +1788,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1728,6 +1815,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1754,6 +1842,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1778,6 +1867,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1795,6 +1885,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1810,6 +1901,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1827,6 +1919,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1842,6 +1935,7 @@
         "opennt-host",
         "adapter-win32",
         "adapter-softpc",
+        "session",
         "bx-mantle",
         "bx-core",
         "adapter-bop"
@@ -1858,6 +1952,7 @@
       "opennt-host",
       "adapter-win32",
       "adapter-softpc",
+      "session",
       "bx-mantle",
       "bx-core",
       "adapter-bop"

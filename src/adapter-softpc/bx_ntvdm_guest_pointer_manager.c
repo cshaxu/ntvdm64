@@ -6,6 +6,7 @@
 
 static bx_ntvdm_session_mapping_registry g_session_registry;
 static int g_session_registry_ready;
+static uint32_t g_session_identity;
 
 static void bx_ntvdm_guest_pointer_manager_configure(
     bx_ntvdm_guest_pointer_manager *manager, uint32_t instance_kind)
@@ -65,6 +66,20 @@ void bx_ntvdm_session_mapping_registry_reset(void)
     bx_ntvdm_guest_pointer_manager_end(&g_session_registry.guest_memory_manager);
     bx_ntvdm_host_handle_manager_reset(&g_session_registry.host_handle_manager);
     bx_ntvdm_session_data_reset(&g_session_registry.session_data_manager);
+    g_session_identity = 0u;
+}
+
+int bx_ntvdm_session_mapping_registry_bind(
+    const ntdos64_session_v1 *session)
+{
+    if (!ntdos64_session_v1_valid(session) ||
+        session->state != NTDOS64_SESSION_V1_ACTIVE || session->identity == 0u)
+        return 0;
+    bx_ntvdm_guest_pointer_manager_ensure_session();
+    if (g_session_identity != 0u &&
+        g_session_identity != session->identity) return 0;
+    g_session_identity = session->identity;
+    return 1;
 }
 
 int bx_ntvdm_guest_pointer_manager_begin(bx_ntvdm_guest_pointer_manager *manager,
