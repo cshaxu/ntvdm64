@@ -9,6 +9,12 @@
 
 static BOOLEAN IsVrInitialized = FALSE;
 
+/* DIVERGENCE(HOST-DIV-017): OpenNT exported VrInitialized from a separate
+ * VDMREDIR DLL.  The static program preserves that original import shape in
+ * opennt-bop, so the provider body needs a private link name. */
+/* DIVERGENCE(HOST-DIV-017): OpenNT exported VrInitialized from a separate
+ * VDMREDIR DLL.  The static program preserves that original import shape in
+ * opennt-bop, so the provider body needs a private link name. */
 BOOLEAN bx_ntvdm_vr_initialized_provider(VOID)
 {
     return IsVrInitialized;

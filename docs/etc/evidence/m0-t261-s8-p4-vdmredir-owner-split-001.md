@@ -37,6 +37,7 @@ At the static-link boundary the directly imported DEM files retain their
 original `VrInitialized` function-pointer call shape; one BOP composition
 definition binds it after `LoadVdmRedir`, replacing only the historical DLL
 loader/link boundary.
+`HOST-DIV-017` records the corresponding private static-provider link name.
 
 `VrConvertLocalNtPipeName` also retains the original allocation/copy ordering:
 it returns an allocated/copy-normalized buffer for remote UNC names, maps only
