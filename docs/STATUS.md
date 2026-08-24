@@ -35,6 +35,12 @@ them without an ABI or behavior change. A fresh immutable `s9-r001` formal
 Ninja graph completed its build. The next P handles only fixture-only
 production residue, not the DEM/DPMI semantic split.
 
+**S9 P3 completed:** the three observation implementations used solely by
+their own isolated fixtures (`normal_return`, `normal_terminal_sequence` and
+`terminal`) have been removed from production, manifest and obsolete fixture
+inputs. The direct engine fixture now asserts only the machine-engine terminal
+contract it actually owns; it no longer introduces BOP observation state.
+
 ### M0 T261 S8 — closed: OpenNT-host original-source exception closure
 
 S8 restored every admitted host exception through its original owner body or

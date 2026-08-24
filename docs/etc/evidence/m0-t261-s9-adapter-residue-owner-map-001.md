@@ -38,6 +38,10 @@ their focused tests may retain a local test helper copy if still useful.
 - `bx_ntvdm_normal_terminal_sequence_observation_v1.{c,h}`
 - `bx_ntvdm_terminal_observation_v1.{c,h}`
 
+P3 completed this disposition by deleting the three production pairs and
+their isolated tests.  The former direct-engine fixture now validates only its
+machine terminal result, not a BOP observer's private static state.
+
 ### Split source-owned BOP interpretation from mechanical aliases
 
 - `bx_ntvdm_dem_direct_context.{c,h}` and
