@@ -2,7 +2,7 @@
 #include <string.h>
 
 #include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
-#include "opennt-host/dem/demsrch_fcb_shim.h"
+#include "opennt-bop/dem/opennt_demsrch_fcb_composition.h"
 #include "adapter-softpc/bx_ntvdm_host_handle_manager.h"
 
 typedef struct fixture_context { uint8_t guest[0x20000]; bx_ntvdm_host_handle_manager *handles; } fixture_context;

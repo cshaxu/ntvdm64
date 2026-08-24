@@ -73,6 +73,10 @@ S4 P4 has split DEM global-setting service composition/DTA state from the
 same-shaped public-Win32 host queries while retaining host drive admission;
 fresh r012 completes 460 Ninja edges and the direct `demgset` fixture passes;
 see the [DEM global-setting split](etc/evidence/m0-t261-s4-p4-demgset-owner-split-001.md).
+S4 P5 has split DEM search/FCB BOP composition and historical find/NT facade;
+the removed invasive `NtVdmControl` remains explicit `STATUS_NOT_IMPLEMENTED`
+for the imported fallback. Fresh r013 completes 461 Ninja edges and the
+direct search/FCB fixture passes; see the [DEM search split](etc/evidence/m0-t261-s4-p5-demsrch-fcb-owner-split-001.md).
 
 ## Previous Active Packet — M0 T260
 

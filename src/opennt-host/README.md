@@ -33,7 +33,6 @@ departure from an identified OpenNT definition marked in code as
 | `HOST-DIV-007` | DEM emits VDD/debugger module notifications. | They are not DOS loader actions and their receiver is unavailable. | Preserve the boundary as an explicit deferred no-op. | `dem/demmisc_shim.c:66` |
 | `HOST-DIV-008` | DEM asks the debugger console for guest-visible input. | That needs a debugger-owned input lifecycle. | Preserve the boundary as an explicit deferred no-op. | `dem/demmisc_shim.c:76` |
 | `HOST-DIV-009` | DEM resets host floppy hardware. | FDC/DMA/CMOS is a machine owner responsibility. | Do not report a fabricated reset. | `dem/demmisc_shim.c:87` |
-| `HOST-DIV-010` | FCB search terminates VDD user hooks. | The private VDD callback broker is absent. | Preserve the boundary as an explicit deferred no-op. | `dem/demsrch_fcb_shim.c:64` |
 
 The pre-T260 PIF original and other uncompiled historical inputs are evidence,
 not a second provider. They reside under `docs/etc/legacy_code/opennt-host/`.

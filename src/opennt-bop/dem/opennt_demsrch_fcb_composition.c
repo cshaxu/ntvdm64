@@ -1,13 +1,10 @@
-/* Neutral host-composition seam for the directly imported OpenNT
+/* Project-owned BOP composition seam for the directly imported OpenNT
  * base/mvdm/dos/dem/demsrch.c and demfcb.c owner package.  It supplies only
  * the historical OEM Win32 entrypoints and the common scoped CCPU/SAS call
  * replacement; pathname matching, FCB state and all search ordering remain
  * in the imported translation units. */
 
-#include "demsrch_fcb_shim.h"
-
-#include <stdlib.h>
-#include <string.h>
+#include "opennt_demsrch_fcb_composition.h"
 
 void demFindFirst(void);
 void demFindFirstFCB(void);
@@ -32,36 +29,7 @@ void FdiskTerminatePDB(USHORT pdb);
  * same first-call state; session wiring will own later transitions. */
 BOOL IsFirstCall = TRUE;
 
-static LPSTR ansi_copy(LPCSTR oem)
-{
-    size_t bytes;
-    LPSTR ansi;
-
-    if (oem == NULL) { SetLastError(ERROR_INVALID_PARAMETER); return NULL; }
-    bytes = strlen(oem) + 1u;
-    if (bytes > MAX_PATH + 1u) { SetLastError(ERROR_BUFFER_OVERFLOW); return NULL; }
-    ansi = (LPSTR)malloc(bytes);
-    if (ansi == NULL) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return NULL; }
-    if (!OemToCharBuffA(oem, ansi, (DWORD)bytes)) { free(ansi); return NULL; }
-    return ansi;
-}
-
-HANDLE FindFirstFileOem(LPSTR name, LPWIN32_FIND_DATAA data)
-{
-    LPSTR ansi = ansi_copy(name);
-    HANDLE find;
-    if (ansi == NULL) return INVALID_HANDLE_VALUE;
-    find = FindFirstFileA(ansi, data);
-    free(ansi);
-    return find;
-}
-
-BOOL FindNextFileOem(HANDLE find, LPWIN32_FIND_DATAA data)
-{
-    return FindNextFileA(find, data);
-}
-
-/* DIVERGENCE(HOST-DIV-010): nt_msscs.c:VDDTerminateUserHook walks the private VDD user-hook
+/* DIVERGENCE(BOP-DIV-041): nt_msscs.c:VDDTerminateUserHook walks the private VDD user-hook
  * list. The CLI does not recreate the VDD callback broker; do not report a
  * fabricated callback completion. */
 void VDDTerminateUserHook(USHORT pdb) { (void)pdb; }
@@ -71,18 +39,6 @@ void HostTerminatePDB(USHORT pdb)
      * The floppy half remains the explicit FDC/DMA/CMOS unavailable owner;
      * retain the directly composable FDISK half in its original second slot. */
     FdiskTerminatePDB(pdb);
-}
-
-/* RtlProcessHeap was an OpenNT-era exported helper.  The current public
- * process heap has the same role for the imported RtlAllocate/FreeHeap calls.
- * NtVdmControl is a removed invasive-host capability: returning the native
- * unavailable status preserves demsrch.c's ordinary slow-reset fallback. */
-PVOID NTAPI RtlProcessHeap(VOID) { return GetProcessHeap(); }
-NTSTATUS NtVdmControl(VDMSERVICECLASS service, PVOID data)
-{
-    (void)service;
-    (void)data;
-    return STATUS_NOT_IMPLEMENTED;
 }
 
 int bx_ntvdm_demsrch_fcb_invoke(bx_ntvdm_demhndl_call *call)

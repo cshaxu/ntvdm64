@@ -27,6 +27,7 @@
  * value macro is source-local DOS open-mode vocabulary, whereas winternl.h
  * uses ACCESS_MASK as an NT declaration type. */
 #include "demfile_shim.h"
+#include "adapter-win32/include/legacy-api/opennt_dem_search_facade.h"
 
 /* Verbatim layout source: base/mvdm/dos/dem/dosdef.h. */
 #define ATTR_READ_ONLY 0x1
@@ -70,8 +71,6 @@ typedef struct _SRCHBUF { UCHAR uchDriveNumber; CHAR FileName[8]; CHAR FileExt[3
 #define RemoveEntryList(entry) (((entry)->Blink->Flink = (entry)->Flink), ((entry)->Flink->Blink = (entry)->Blink), TRUE)
 extern ULONG UNALIGNED *pulDTALocation;
 
-HANDLE FindFirstFileOem(LPSTR name, LPWIN32_FIND_DATAA data);
-BOOL FindNextFileOem(HANDLE find, LPWIN32_FIND_DATAA data);
 USHORT demDeleteLabel(BYTE drive);
 VOID demFCBCommon(ULONG create_directive);
 BOOL demGetMiscInfo(HANDLE file, LPWORD time_out, LPWORD date_out,
@@ -81,9 +80,6 @@ BOOL demGetMiscInfo(HANDLE file, LPWORD time_out, LPWORD date_out,
  * definitions and order remain in the directly imported files. */
 DWORD demFileFindFirst(PVOID dta, LPSTR file, USHORT attributes);
 DWORD demFileFindNext(PVOID dta);
-void VDDTerminateUserHook(USHORT pdb);
-void HostTerminatePDB(USHORT pdb);
-int bx_ntvdm_demsrch_fcb_invoke(bx_ntvdm_demhndl_call *call);
 
 NTSYSAPI BOOLEAN NTAPI RtlCreateUnicodeString(PUNICODE_STRING destination,
     PCWSTR source);

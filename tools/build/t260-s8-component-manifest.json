@@ -240,7 +240,8 @@
         "src/adapter-win32/facade/opennt_pif_oem_facade.c",
         "src/adapter-win32/facade/opennt_dem_oem_facade.c",
         "src/adapter-win32/facade/opennt_dem_file_oem_facade.c",
-        "src/adapter-win32/facade/opennt_dem_gset_facade.c"
+        "src/adapter-win32/facade/opennt_dem_gset_facade.c",
+        "src/adapter-win32/facade/opennt_dem_search_facade.c"
       ]
     },
     {
@@ -252,7 +253,6 @@
         "src/opennt-host/dem/demerror_lock_shim.c",
         "src/opennt-host/dem/demhndl_shim.c",
         "src/opennt-host/dem/demmisc_shim.c",
-        "src/opennt-host/dem/demsrch_fcb_shim.c",
         "src/opennt-host/redir/redir_session_shim.c",
         "src/opennt-host/top_level/top_level_nosupport_shim.c",
         "src/opennt-host/xms/xms_shim.c"
@@ -291,6 +291,7 @@
         "src/opennt-bop/dem/demmisc.c",
         "src/opennt-bop/dem/demmsg.c",
         "src/opennt-bop/dem/demsrch.c",
+        "src/opennt-bop/dem/opennt_demsrch_fcb_composition.c",
         "src/opennt-bop/dpmi/dpmi32.c",
         "src/opennt-bop/dpmi/dpmiselr.c",
         "src/opennt-bop/softpc/emm_fncs.c",
