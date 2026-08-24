@@ -112,7 +112,7 @@ BOOL VrIsNamedPipeHandle(HANDLE Handle) { return VrpGetOpenNamedPipeInfo(Handle)
 BOOL VrReadNamedPipe(HANDLE Handle, LPBYTE Buffer, DWORD Buflen,
     LPDWORD BytesRead, LPDWORD Error)
 {
-    /* DIVERGENCE: OpenNT also registers this OVERLAPPED record with the
+    /* DIVERGENCE(HOST-DIV-015): OpenNT also registers this OVERLAPPED record with the
      * NTVDM VDD cancellation list.  That product-global list has no public
      * modern counterpart; the bounded session ingress owns cancellation and
      * never exposes this native pointer beyond the synchronous call. */
@@ -143,7 +143,7 @@ BOOL VrReadNamedPipe(HANDLE Handle, LPBYTE Buffer, DWORD Buflen,
         if (error == ERROR_MORE_DATA) success = TRUE;
     }
     CloseHandle(overlap.hEvent);
-    /* DIVERGENCE: the original WAIT_TIMEOUT branch closes the native handle
+    /* DIVERGENCE(HOST-DIV-016): the original WAIT_TIMEOUT branch closes the native handle
      * and removes its VDMREDIR record.  This handle is session-manager owned
      * here, so only its owner may close it during bounded teardown. */
     if (success && error == NO_ERROR && transferred == 0u) { error = ERROR_NO_DATA; success = FALSE; }
