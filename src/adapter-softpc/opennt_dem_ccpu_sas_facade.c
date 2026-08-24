@@ -7,7 +7,7 @@
  * not dispatch BOPs or implement DEM service semantics.
  */
 
-#include "demhndl_shim.h"
+#include "opennt_dem_ccpu_sas_facade.h"
 #include "opennt-host/redir/redir_session_shim.h"
 #include "bx_ntvdm_guest_pointer_manager.h"
 
@@ -61,7 +61,11 @@ typedef struct bx_ntvdm_demhndl_active_call {
 
 static __declspec(thread) bx_ntvdm_demhndl_active_call *g_active_call;
 static __declspec(thread) bx_ntvdm_demhndl_extended_error g_extended_error;
+static __declspec(thread) bx_ntvdm_demhndl_post_body_hook g_post_body_hook;
 __declspec(thread) bx_ntvdm_demhndl_extended_error *pExtendedError;
+
+void bx_ntvdm_demhndl_set_post_body_hook(bx_ntvdm_demhndl_post_body_hook hook)
+{ g_post_body_hook = hook; }
 
 static bx_ntvdm_demhndl_active_call *active_call(void)
 {
@@ -620,7 +624,7 @@ int bx_ntvdm_demhndl_invoke_body_with_resume(bx_ntvdm_demhndl_call *call,
     /* demerror.c is the only imported owner that intentionally retains the
      * VHE address across calls.  Its shim flushes that fixed guest layout
      * while this checked-call context is still live. */
-    bx_ntvdm_demerror_flush_hard_error();
+    if (g_post_body_hook != NULL) g_post_body_hook();
     if (active.guest_buffer_lease == NULL &&
         (is_demdir_cds_service(call->service) || active.flush_guest_buffer_on_return) &&
         active.guest_buffer != NULL &&

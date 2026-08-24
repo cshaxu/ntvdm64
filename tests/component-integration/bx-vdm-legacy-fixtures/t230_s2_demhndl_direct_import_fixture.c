@@ -3,7 +3,7 @@
 #include <windows.h>
 
 #include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
-#include "opennt-host/dem/demhndl_shim.h"
+#include "adapter-softpc/opennt_dem_ccpu_sas_facade.h"
 #include "opennt-bop/ingress/dem_ingress_shim.h"
 
 typedef struct fixture_context {

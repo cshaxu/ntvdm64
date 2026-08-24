@@ -7,6 +7,7 @@ src/
   opennt-guest/           imported OpenNT DOS/WOW source and guest-image inputs
   opennt-host/            imported OpenNT host-capability components
   opennt-bop/             minimal-change OpenNT BOP source mirrors
+  adapter-bop/            copied-frame BOP ingress and typed completion transfer
   adapter-softpc/         source-shaped Bochs-backed SoftPC/CCPU compatibility
   adapter-win32/          source-shaped modern Win32 compatibility facades
   app/                    ntvdm64 CLI and final component composition
@@ -53,10 +54,11 @@ artifact is unavailable. Its `README.md` records every guest-source divergence
 and its exception identifier; the expected normal count is zero.
 
 `src/opennt-host/` contains independently composable original OpenNT
-host-capability components plus only the source-derived component needed where
-a historical capability cannot run on the modern host. Its `README.md` records
-the source identity, divergence, replacement reason and exception identifier
-for both changed original and newly authored capability components.
+host-capability components. Its production files preserve their original
+relative paths and filenames after re-rooting. A modern-host repair remains
+local to its corresponding original unit, carries a `DIVERGENCE:` comment, and
+is recorded in the component exception register; an invented helper cannot
+pose as an upstream mirror file.
 
 `src/opennt-bop/` contains OpenNT BOP mirror files. Preserve their original
 function names, parameters, data layout, control flow and observable failure
@@ -70,6 +72,11 @@ fixture merely for comparison: such material belongs in
 `docs/etc/legacy_code/` (or `tests/` for test code). Live imported production
 files are arranged by their original OpenNT owner family rather than by generic
 staging labels such as `original`, `mirror` or `overlay`.
+`src/adapter-bop/` is project-authored and owns only copied typed frame ingress
+and typed resume/pending/controlled-stop transfer to the exposed OpenNT BOP
+entry. It cannot implement a BOP provider, interpret a selector family, or
+own host capability policy. Generic ingress, session composition and
+project-specific routing must not be placed in `src/opennt-bop/`.
 `src/adapter-win32/` owns source-shaped implementations of unavailable Win32
 interfaces using public modern Win32 APIs. `src/adapter-softpc/` owns only
 same-shaped SoftPC/CCPU-to-Bochs mechanical adaptation; it never owns BOP or
@@ -92,7 +99,7 @@ inputs.
 
 All current modern runtime sources below `src/app/`, `src/adapter-softpc/`,
 `src/adapter-win32/`, `src/opennt-host/`, `src/opennt-bop/`,
-`src/bx-mantle/`, and the admitted `src/bx-core/` closure build with MSVC x64
+`src/adapter-bop/`, `src/bx-mantle/`, and the admitted `src/bx-core/` closure build with MSVC x64
 and the static `/MT` CRT. Generated build artifacts record the compiler,
 target architecture and CRT. MinGW artifacts are retained evidence only and
 cannot be linked into the x64 runtime process.

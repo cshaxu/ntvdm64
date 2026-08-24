@@ -1,5 +1,5 @@
-#ifndef BX_NTVDM_BOP_SHIM_DEMHNDL_SHIM_H
-#define BX_NTVDM_BOP_SHIM_DEMHNDL_SHIM_H
+#ifndef BX_NTVDM_OPENNT_DEM_CCPU_SAS_FACADE_H
+#define BX_NTVDM_OPENNT_DEM_CCPU_SAS_FACADE_H
 
 /*
  * Compatibility boundary for the directly imported OpenNT file
@@ -159,7 +159,11 @@ void bx_ntvdm_demhndl_terminate(void);
 int bx_ntvdm_demhndl_loader_write(const void *buffer, uint32_t bytes);
 /* Optional fixed-layout completion hook implemented by the demerror shim.
  * It is a no-op unless that original owner has retained VHE state. */
-void bx_ntvdm_demerror_flush_hard_error(void);
+/* Selector-blind completion hook for a source body that retains a bounded
+ * guest layout across the call.  It is installed by BOP composition at
+ * runtime; adapter-softpc never names a DEM service or provider. */
+typedef void (*bx_ntvdm_demhndl_post_body_hook)(void);
+void bx_ntvdm_demhndl_set_post_body_hook(bx_ntvdm_demhndl_post_body_hook hook);
 void bx_ntvdm_demhndl_flush_vdm_pointer(ULONG far_pointer, USHORT bytes,
     PBYTE pointer, BOOL write_back);
 void bx_ntvdm_demhndl_free_vdm_pointer(ULONG far_pointer, USHORT bytes,

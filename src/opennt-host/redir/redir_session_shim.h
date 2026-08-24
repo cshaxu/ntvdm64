@@ -10,7 +10,7 @@
  * while selector 57 sees only copied CPU state and checked guest RAM.
  */
 
-#include "opennt-host/dem/demhndl_shim.h"
+#include "adapter-softpc/opennt_dem_ccpu_sas_facade.h"
 #include "adapter-softpc/bx_ntvdm_generic_ud_bridge.h"
 
 #define BX_NTVDM_REDIR_NATIVE_SESSION_MAGIC 0x42585244u

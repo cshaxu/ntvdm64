@@ -77,6 +77,10 @@ S4 P5 has split DEM search/FCB BOP composition and historical find/NT facade;
 the removed invasive `NtVdmControl` remains explicit `STATUS_NOT_IMPLEMENTED`
 for the imported fallback. Fresh r013 completes 461 Ninja edges and the
 direct search/FCB fixture passes; see the [DEM search split](etc/evidence/m0-t261-s4-p5-demsrch-fcb-owner-split-001.md).
+S4 P6 has moved the common DEM CCPU/SAS frame, mapping and handle facade to
+`adapter-softpc`; a generic post-body hook removes its former direct demerror
+link. Fresh r014 completes 461 Ninja edges and focused handle/error fixtures
+pass; see the [CCPU/SAS migration](etc/evidence/m0-t261-s4-p6-dem-ccpu-sas-facade-migration-001.md).
 
 ## Previous Active Packet — M0 T260
 

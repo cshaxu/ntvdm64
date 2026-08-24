@@ -14,7 +14,11 @@ int bx_ntvdm_demdisp_invoke(bx_ntvdm_demhndl_call *call)
     if (!bx_ntvdm_demhndl_call_valid(call) || call->service >= SVC_DEMLASTSVC ||
         g_demdisp_call != 0) return 0;
     g_demdisp_call = call;
+    /* The source-shaped mechanical facade remains selector blind.  This
+     * composition installs the only retained cross-call guest-layout flush. */
+    bx_ntvdm_demhndl_set_post_body_hook(bx_ntvdm_demerror_flush_hard_error);
     result = bx_ntvdm_demhndl_invoke_body(call, bx_ntvdm_demdisp_invoke_original);
+    bx_ntvdm_demhndl_set_post_body_hook(0);
     g_demdisp_call = 0;
     return result;
 }
