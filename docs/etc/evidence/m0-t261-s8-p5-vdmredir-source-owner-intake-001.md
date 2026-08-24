@@ -37,6 +37,16 @@ selector/session composition before S8 can claim source-fidelity closure?
    `opennt-bop/ingress/redir_native_session.c` only after source-shaped local
    regression proves their replacement.
 
+## First mechanical prerequisite
+
+`adapter-softpc/opennt_ccpu_sas_facade.h` now exposes a neutral alias surface
+over the existing call-scoped CCPU/SAS implementation.  It introduces neither
+a second call record nor a second guest-pointer/handle mapping manager.  The
+Redirector fixture statically verifies the alias has the identical call-frame
+size and passes its existing lifecycle regression.  This is only a mechanical
+precondition; it does not claim that either original `vrdisp.c` or
+`vrmslot.c` is composed yet.
+
 ## Non-conclusion
 
 The passing P4 fixture proves only the re-rooted named-pipe helper lifecycle
