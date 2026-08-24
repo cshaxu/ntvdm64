@@ -402,21 +402,6 @@ static int guest_write_bytes(uint16_t segment, uint16_t offset,
     return 1;
 }
 
-static int local_mailslot_name(const char *oem, wchar_t *wide, uint32_t capacity)
-{
-    const char *suffix;
-    char local[260];
-    int chars;
-    if (oem == NULL || wide == NULL || capacity == 0u) return 0;
-    suffix = strstr(oem, "\\MAILSLOT\\");
-    if (suffix == NULL) { SetLastError(ERROR_BAD_PATHNAME); return 0; }
-    if (sprintf_s(local, sizeof(local), "\\\\.\\mailslot\\%s", suffix + 10u) < 0) {
-        SetLastError(ERROR_BUFFER_OVERFLOW); return 0;
-    }
-    chars = MultiByteToWideChar(CP_OEMCP, 0, local, -1, wide, (int)capacity);
-    return chars > 0;
-}
-
 static void set_gpr16(struct bx_ntvdm_generic_ud_outcome_v1 *outcome,
     uint32_t index, uint16_t value)
 {
@@ -476,42 +461,6 @@ int bx_ntvdm_legacy_mailslot_read_rehost(const struct bx_ntvdm_generic_ud_event_
     set_gpr16(outcome, 0u, (uint16_t)read);
     set_gpr16(outcome, 1u, next == MAILSLOT_NO_MESSAGE ? 0u : (uint16_t)next);
     set_gpr16(outcome, 2u, 0u); /* DOS mailslot priority */
-    return 1;
-}
-
-static int mailslot_write(const struct bx_ntvdm_generic_ud_event_v1 *event,
-    struct bx_ntvdm_generic_ud_outcome_v1 *outcome)
-{
-    uint8_t descriptor[8];
-    uint16_t buffer_offset, buffer_segment;
-    uint32_t count = word_at(event->ecx);
-    char oem[260]; wchar_t name[260]; HANDLE host; DWORD written;
-    if (!read_oem_string(word_at(event->ds), word_at(event->esi), oem, sizeof(oem)) ||
-        !local_mailslot_name(oem, name, sizeof(name) / sizeof(name[0])) ||
-        !guest_read_bytes(word_at(event->es), word_at(event->edi), descriptor,
-            sizeof(descriptor))) {
-        resume_with_error(event, outcome, GetLastError()); return 1;
-    }
-    buffer_offset = (uint16_t)(descriptor[4] | ((uint16_t)descriptor[5] << 8));
-    buffer_segment = (uint16_t)(descriptor[6] | ((uint16_t)descriptor[7] << 8));
-    if (count > UINT16_MAX) { resume_with_error(event, outcome, ERROR_INVALID_PARAMETER); return 1; }
-    host = CreateFileW(name, GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
-        NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (host == INVALID_HANDLE_VALUE) {
-        resume_with_error(event, outcome, GetLastError()); return 1;
-    }
-    {
-        uint8_t *bytes = count == 0u ? NULL : (uint8_t *)malloc(count);
-        if ((count != 0u && bytes == NULL) ||
-            (count != 0u && !guest_read_bytes(buffer_segment, buffer_offset, bytes, count)) ||
-            !WriteFile(host, bytes, count, &written, NULL) || written != count) {
-            DWORD error = bytes == NULL && count != 0u ? ERROR_NOT_ENOUGH_MEMORY : GetLastError();
-            free(bytes); CloseHandle(host); resume_with_error(event, outcome, error); return 1;
-        }
-        free(bytes);
-    }
-    CloseHandle(host);
-    resume_success(event, outcome);
     return 1;
 }
 
@@ -588,7 +537,16 @@ static int dispatch_service(uint8_t service,
           return invoke_mailslot_spans(event, outcome, VrReadMailslot, &span, 1u); }
     case 0x0eu: /* SVC_RDRWRITEMAILSLOT */
         if (g_active_session->loaded == 0u) { resume_with_error(event, outcome, ERROR_INVALID_FUNCTION); return 1; }
-        return mailslot_write(event, outcome);
+        { uint8_t descriptor[sizeof(struct DosWriteMailslotStruct)];
+          bx_ntvdm_demhndl_guest_span spans[2];
+          if (!guest_read_bytes(word_at(event->es), word_at(event->edi), descriptor,
+              sizeof(descriptor))) { resume_with_error(event, outcome, GetLastError()); return 1; }
+          spans[0].segment = word_at(event->es); spans[0].offset = word_at(event->edi);
+          spans[0].bytes = sizeof(descriptor); spans[0].write_back = 0u;
+          spans[1].segment = (uint16_t)(descriptor[6] | ((uint16_t)descriptor[7] << 8));
+          spans[1].offset = (uint16_t)(descriptor[4] | ((uint16_t)descriptor[5] << 8));
+          spans[1].bytes = word_at(event->ecx); spans[1].write_back = 0u;
+          return invoke_mailslot_spans(event, outcome, VrWriteMailslot, spans, 2u); }
     case 0x0fu: /* SVC_RDRTERMINATE / NetResetEnvironment */
         if (g_active_session->loaded == 0u) { resume_with_error(event, outcome, ERROR_INVALID_FUNCTION); return 1; }
         return mailslot_terminate(event, outcome);

@@ -137,6 +137,84 @@ VrReadMailslot(
 }
 
 VOID
+VrWriteMailslot(
+    VOID
+    )
+
+/*++
+
+Routine Description:
+
+    Performs DosWriteMailslot request on behalf of VDM redir.
+
+Arguments:
+
+    None. All arguments are extracted from 16-bit context descriptor.
+
+Return Value:
+
+    None. Returns values in VDM Ax and Flags registers.
+
+--*/
+
+{
+    LPSTR Name;
+    HANDLE Handle;
+    BOOL Ok;
+    DWORD BytesWritten;
+    CHAR LocalMailslotName[LOCAL_MAILSLOT_NAMELEN + 1u];
+    struct DosWriteMailslotStruct *StructurePointer;
+    CHAR NameBuffer[MAX_PATH + 1u];
+
+    /* DIVERGENCE(BOP-DIV-065): OpenNT obtained Name through a flat SAS
+     * pointer.  Preserve the source body and its call order after copying the
+     * bounded ASCIZ input through the existing CCPU/SAS facade. */
+    if (!bx_ntvdm_demhndl_copy_guest_oem_string(getDS(), getSI(), NameBuffer,
+            sizeof(NameBuffer))) { SET_ERROR(ERROR_INVALID_ADDRESS); return; }
+    Name = NameBuffer;
+
+    if (!VrpIsMailslotName(Name)) {
+        SET_ERROR(ERROR_PATH_NOT_FOUND);
+    }
+    if (!IS_ASCII_PATH_SEPARATOR(Name[1])) {
+        strcpy(LocalMailslotName, LOCAL_MAILSLOT_PREFIX);
+        strcat(LocalMailslotName, Name);
+        Name = LocalMailslotName;
+    }
+
+    Handle = CreateFile(Name,
+                        GENERIC_WRITE,
+                        FILE_SHARE_WRITE | FILE_SHARE_READ,
+                        NULL,
+                        OPEN_EXISTING,
+                        FILE_ATTRIBUTE_NORMAL,
+                        NULL
+                        );
+    if (Handle == HANDLE_FUNCTION_FAILED) {
+        SET_ERROR(VrpMapLastError());
+    } else {
+        StructurePointer = (struct DosWriteMailslotStruct *)
+                                POINTER_FROM_WORDS(getES(), getDI());
+
+        Ok = SetMailslotInfo(Handle, READ_DWORD(&StructurePointer->DWMS_Timeout));
+
+        Ok = WriteFile(Handle,
+                        READ_FAR_POINTER(&StructurePointer->DWMS_Buffer),
+                        (DWORD)getCX(),
+                        &BytesWritten,
+                        NULL
+                        );
+        if (!Ok) {
+            SET_ERROR(VrpMapLastError());
+        } else {
+            setCF(0);
+        }
+        CloseHandle(Handle);
+    }
+}
+
+
+VOID
 VrGetMailslotInfo(
     VOID
     )
@@ -314,6 +392,39 @@ void VrpMakeLocalMailslotName(LPSTR buffer, LPSTR name)
         strcpy_s(buffer, LOCAL_MAILSLOT_NAMELEN + 1u, LOCAL_MAILSLOT_PREFIX);
         strcat_s(buffer, LOCAL_MAILSLOT_NAMELEN + 1u, name);
     }
+}
+
+BOOL
+VrpIsMailslotName(
+    IN LPSTR Name
+    )
+{
+    int CharCount;
+
+    if (IS_ASCII_PATH_SEPARATOR(*Name)) {
+        ++Name;
+        if (IS_ASCII_PATH_SEPARATOR(*Name)) {
+            ++Name;
+            CharCount = 0;
+            while (*Name && !IS_ASCII_PATH_SEPARATOR(*Name)) {
+                ++Name;
+                ++CharCount;
+            }
+            if (!CharCount || !*Name) {
+                return FALSE;
+            }
+            ++Name;
+        }
+
+        if (!_strnicmp(Name, "MAILSLOT", 8)) {
+            Name += 8;
+            if (IS_ASCII_PATH_SEPARATOR(*Name)) {
+                return TRUE;
+            }
+        }
+    }
+
+    return FALSE;
 }
 
 static void VrpReleaseMailslot(PVR_MAILSLOT_INFO ptr, void *state,

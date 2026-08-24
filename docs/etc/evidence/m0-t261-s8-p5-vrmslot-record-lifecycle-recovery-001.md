@@ -88,14 +88,31 @@ T251 S4 Redirector: typed selector-57 lifecycle and mailslot owner group pass
 on normal completion. The mapper contract remains selector-blind; the
 Redirector caller alone derives the size from `VR_MAILSLOT_INFO`.
 
+`VrWriteMailslot` now likewise uses the original validation → local-name
+formation → `CreateFile` → `SetMailslotInfo` → `WriteFile` → close sequence.
+The selector-owning ingress reads exactly the eight-byte
+`DosWriteMailslotStruct` solely to declare its descriptor and payload leases;
+the recovered source body still reads both through its original CCPU/SAS call
+shape. `BOP-DIV-065` replaces only the historical flat-SAS ASCIZ name access
+with a bounded copy. The former hand-written `mailslot_write` provider and its
+local name conversion have been deleted.
+
+Incremental formal `r012` rebuilt `vrmslot.c` and the ingress, relinked the
+fixture, and its direct execution exited successfully:
+
+```text
+ninja -C build/t261/s8-r012 -j 4 bin/t251-s3-redir-ingress-fixture.exe
+T251 S4 Redirector: typed selector-57 lifecycle and mailslot owner group pass
+```
+
 ## Boundary
 
 This recovers the original record lifetime, information, delete and simple
 termination bodies, not every original `Vr*` function body. The guest-frame
 copy, checked guest-RAM copy and public Win32 calls remain in the BOP-owned
 composition file until each individual source body can be routed through the
-existing `adapter-softpc` CCPU/SAS facade. `VrReadMailslot` requires its
-output span to be leased at the record's recovered message size; `VrWriteMailslot`
-requires a descriptor span plus an independent source-buffer span. Neither may
+existing `adapter-softpc` CCPU/SAS facade. `VrReadMailslot` leases its output
+at the record's recovered message size. `VrWriteMailslot` declares its
+eight-byte descriptor and independently addressed source buffer; it does not
 reuse `CX` as a guessed generic span. No new BOP, adapter, mapper or Bochs
 behavior is introduced.

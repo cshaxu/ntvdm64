@@ -27,7 +27,15 @@
 #define LOCAL_MAILSLOT_PREFIX "\\\\."
 #define LOCAL_MAILSLOT_NAMELEN MAX_PATH
 #define HANDLE_FUNCTION_FAILED INVALID_HANDLE_VALUE
+#undef GetVDMAddr
+#define GetVDMAddr(segment, offset) \
+    bx_ntvdm_ccpu_sas_get_vdm_addr((USHORT)(segment), (USHORT)(offset))
 #define POINTER_FROM_WORDS(segment, offset) GetVDMAddr((segment), (offset))
+#define LPSTR_FROM_WORDS(segment, offset) ((LPSTR)POINTER_FROM_WORDS((segment), (offset)))
+#define READ_FAR_POINTER(address) \
+    ((LPVOID)POINTER_FROM_WORDS((address)->Selector, (address)->Offset))
+#define READ_DWORD(address) (*((const DWORD *)(address)))
+#define IS_ASCII_PATH_SEPARATOR(ch) (((ch) == '/') || ((ch) == '\\'))
 #define MAKE_DWORD(high, low) (((DWORD)(high) << 16) | (WORD)(low))
 
 typedef unsigned short SELECTOR;
@@ -35,6 +43,13 @@ typedef struct {
     unsigned short Offset;
     SELECTOR Selector;
 } ADDRESS16;
+
+#pragma pack(push, 1)
+struct DosWriteMailslotStruct {
+    DWORD DWMS_Timeout;
+    ADDRESS16 DWMS_Buffer;
+};
+#pragma pack(pop)
 
 typedef struct _VR_MAILSLOT_INFO *PVR_MAILSLOT_INFO;
 typedef struct _VR_MAILSLOT_INFO {
@@ -63,10 +78,12 @@ void VrpRemoveProcessMailslotsWithRelease(WORD dos_pdb, void *state,
     bx_ntvdm_vrmslot_release_fn release);
 void VrpResetMailslots(void *state, bx_ntvdm_vrmslot_release_fn release);
 void VrpMakeLocalMailslotName(LPSTR buffer, LPSTR name);
+BOOL VrpIsMailslotName(LPSTR name);
 
 void VrPeekMailslot(void);
 void VrMakeMailslot(void);
 void VrReadMailslot(void);
+void VrWriteMailslot(void);
 void VrGetMailslotInfo(void);
 void VrDeleteMailslot(void);
 void VrTerminateMailslots(WORD DosPdb);

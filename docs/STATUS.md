@@ -76,9 +76,15 @@ private handle-bitmap release. `VrMakeMailslot` now also retains its original
 allocation, creation and record-link order; `BOP-DIV-062` copies its ASCIZ
 input through the existing bounded CCPU/SAS facade and `BOP-DIV-063` replaces
 only the obsolete private handle bitmap with the shared session mapper.
-Incremental formal r012 rebuilt and passed. `VrReadMailslot` and
-`VrWriteMailslot` remain pending: each requires multiple independently bounded
-guest spans and must not guess them from `CX`.
+Incremental formal r012 rebuilt and passed. `VrReadMailslot` now retains its
+original `SetMailslotInfo` → `ReadFile` → `GetMailslotInfo` ordering through a
+record-sized output lease. `VrWriteMailslot` now retains its original
+validation → local-name formation → `CreateFile` → `SetMailslotInfo` →
+`WriteFile` → close ordering; its composition predeclares only the exact
+eight-byte descriptor and independently addressed source span. The former
+hand-written write provider is deleted, and r012 compiles, links and executes
+the Redirector fixture successfully. See the [P5 lifecycle
+evidence](etc/evidence/m0-t261-s8-p5-vrmslot-record-lifecycle-recovery-001.md).
 
 ### M0 T261 S7 — closed: dependency-free session owner split
 
