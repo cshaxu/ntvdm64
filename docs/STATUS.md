@@ -2,9 +2,10 @@
 
 ## Current Work
 
-**No active numeric packet.** M0 T261 is closed: its S12 correction replaces
-the three project-authored OpenNT-host compatibility headers with exact
-original mirrors and completes the last admitted host-layout closure.
+**Active: M0 T261 S12 — closure record awaiting the owner's next task
+admission.** M0 T261 is technically closed: its S12 correction replaces the
+three project-authored OpenNT-host compatibility headers with exact original
+mirrors and completes the last admitted host-layout closure.
 
 ## Active Packet
 
