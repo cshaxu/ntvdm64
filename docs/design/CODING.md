@@ -1,10 +1,11 @@
 # Source Layout
 
-The ten production components are classified before any file move or new
+The twelve production components are classified before any file move or new
 source is admitted:
 
 - **Original code, with component README exception registers:** `bx-core`,
-  `opennt-guest`, `opennt-bop`, `opennt-host`.
+  `opennt-guest`, `opennt-bop`, `opennt-host`, `opennt-softpc`,
+  `opennt-utils`.
 - **Mechanical adaptation:** `bx-mantle`, `adapter-bop`, `adapter-softpc`,
   `adapter-win32`.
 - **Project composition:** `app`, `session`.
@@ -21,6 +22,8 @@ src/
   opennt-guest/           imported OpenNT DOS/WOW source and guest-image inputs
   opennt-host/            imported OpenNT host-capability components
   opennt-bop/             minimal-change OpenNT BOP source mirrors
+  opennt-softpc/          imported OpenNT SoftPC firmware/ROM/machine-contract inputs
+  opennt-utils/           imported reusable OpenNT utility packages
   adapter-bop/            copied-frame BOP ingress and typed completion transfer
   adapter-softpc/         source-shaped Bochs-backed SoftPC/CCPU compatibility
   adapter-win32/          source-shaped modern Win32 compatibility facades
@@ -48,6 +51,7 @@ tools/                    tracked tools, arranged by declared responsibility
   import/                 admitted source/input acquisition helpers
   probe/                  diagnostic tools (their output never lives here)
   historical/             retained historical tool closures
+  opennt/                 admitted original OpenNT build-tool closures
 build/<task>/<run>/       ignored, disposable compiler/linker and debug output
 docs/etc/                 Git-tracked evidence, operational records and research
 artifacts/                only explicitly requested reports and formal releases
@@ -75,6 +79,14 @@ relative paths and filenames after re-rooting. A modern-host repair remains
 local to its corresponding original unit, carries a `DIVERGENCE:` comment, and
 is recorded in the component exception register; an invented helper cannot
 pose as an upstream mirror file.
+
+`src/opennt-softpc/` contains admitted original OpenNT SoftPC firmware, ROM
+and machine-contract inputs. It is neither a second machine runtime nor a
+dependency from `bx-mantle`: `app` may select opaque admitted bytes for the
+mechanical loader, while `bx-mantle` remains OpenNT-blind. `src/opennt-utils/`
+contains only selected original utility packages with a named original caller;
+it is not a generic common-code root. Both components preserve upstream
+relative paths after re-rooting and maintain a README exception register.
 
 `src/opennt-bop/` contains OpenNT BOP mirror files. Preserve their original
 function names, parameters, data layout, control flow and observable failure
@@ -119,8 +131,11 @@ the product layout. Historical OpenNT reference material remains under
 `tests/legacy/opennt/`. These roots are not product, formal-build or runtime
 inputs.
 
-The target layout has ten source components. The current formal graph has
-nine linkable host-side modules; `opennt-guest` is a guest-image input rather
+The target layout has twelve source components. The current formal graph has
+nine linkable host-side modules; `opennt-guest` and `opennt-softpc` are input
+rather than host libraries, while `opennt-utils` gains a formal library only
+when an admitted original caller requires it. A component skeleton never
+creates an empty library merely to satisfy the diagram.
 than a host library. All current modern runtime sources below `src/app/`, `src/session/`, `src/adapter-softpc/`,
 `src/adapter-win32/`, `src/opennt-host/`, `src/opennt-bop/`,
 `src/adapter-bop/`, `src/bx-mantle/`, and the admitted `src/bx-core/` closure build with MSVC x64

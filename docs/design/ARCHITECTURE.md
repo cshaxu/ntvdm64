@@ -5,10 +5,11 @@
 NTDOS64 is a composition of an adopted guest machine, OpenNT source mirrors,
 and a modern contained host. Its design objective is to preserve each layer's
 native responsibility rather than recreate one layer inside another. The
-product has ten named source components; a source file has exactly one of
+product has twelve named source components; a source file has exactly one of
 these owners. They form three responsibility strata:
 
-- **Original code:** `bx-core`, `opennt-guest`, `opennt-bop`, and `opennt-host`
+- **Original code:** `bx-core`, `opennt-guest`, `opennt-bop`, `opennt-host`,
+  `opennt-softpc`, and `opennt-utils`
   are source mirrors directly comparable to upstream after re-rooting. Every
   necessary modification is a registered exception in that component's
   `README.md` and carries a local `DIVERGENCE:` marker.
@@ -34,6 +35,8 @@ marked `DIVERGENCE:` and individually registered by its component README.
 | Bochs mantle (`src/bx-mantle`) | Minimal native Bochs lifecycle composition: SIM/logging/no-device time state and assembly of admitted core mechanics | VDM, BOP, OpenNT, DOS, host policy, GUI, plugins, or unadmitted PC devices |
 | `opennt-guest` | OpenNT DOS and WOW16 guest source and its immutable guest-image inputs | Host service dispatch, host Win32 capability, or machine mechanics |
 | `opennt-host` | Re-rooted, independently composable original OpenNT host-capability components | BOP routing, machine mechanics, guest algorithms, or unmarked project-authored helpers |
+| `opennt-softpc` | Original OpenNT SoftPC firmware, ROM and machine-contract source/input packages after provenance admission | Bochs CPU/device operation, BOP routing, or an independently invented machine layer |
+| `opennt-utils` | Selected reusable original OpenNT utility packages that are neither a guest image, BOP provider, host product package nor machine contract | Generic project helpers, BOP routing, host-product policy, or guest execution semantics |
 | `adapter-bop` | Copied-frame, selector-blind transition between a typed Bochs machine event and an OpenNT BOP entry, including typed resume/pending/controlled-stop completion | BOP provider logic, selector-family meaning, DOS/WOW algorithms, or host-capability policy |
 | `opennt-bop` | Minimal-change mirrors of the original OpenNT BOP providers and their original interface, parameter and failure contracts | Bochs mechanics, modern Win32 reconstruction, or product entry composition |
 | `adapter-softpc` | Source-shaped Bochs-backed implementation of reached historical SoftPC/CCPU interfaces: original spelling, parameters, ABI and observable mechanical semantics | BOP selector/service meaning, DOS/WOW algorithms, or host capability policy |
@@ -48,16 +51,19 @@ marked `DIVERGENCE:` and individually registered by its component README.
 app
   -> session                              (creates, owns and drives one instance)
   -> opennt-guest                         (guest-image input)
+  -> opennt-softpc                        (selects admitted opaque firmware/ROM inputs)
   -> bx-mantle -> bx-core
   -> adapter-bop -> opennt-bop
   -> installs adapter-softpc's opaque machine-event callback to adapter-bop
 opennt-bop
   -> opennt-host
+  -> opennt-utils                         (only for an admitted original utility contract)
   -> adapter-win32
   -> adapter-softpc -> bx-mantle -> bx-core
   -> session                              (declared neutral lifecycle/resource contract)
 opennt-host -> adapter-win32
 opennt-host -> adapter-softpc
+opennt-host -> opennt-utils               (only for an admitted original utility contract)
 opennt-host -> session                    (declared neutral lifecycle/resource contract)
 adapter-bop -> session                    (event/completion context only)
 adapter-win32 -> session                  (registered session endpoint only)
@@ -162,15 +168,18 @@ Dependencies point inward through declared contracts:
 
 ```text
 app -> opennt-guest
+app -> opennt-softpc                      (opaque source/input selection only)
 app -> bx-mantle -> bx-core
 app -> session
 app -> adapter-bop -> opennt-bop -> opennt-host
+opennt-bop -> opennt-utils                (declared original utility contract only)
 opennt-bop -> adapter-win32
 opennt-bop -> adapter-softpc -> bx-mantle -> bx-core
 opennt-bop -> session                       (neutral declared contract)
 opennt-host -> adapter-win32                  (declared Win32 facade only)
 opennt-host -> adapter-softpc                 (declared SoftPC/CCPU facade only)
 opennt-host -> session                        (neutral declared contract)
+opennt-host -> opennt-utils                  (declared original utility contract only)
 adapter-bop -> session                        (neutral event/completion contract)
 adapter-win32 -> session                      (neutral endpoint contract)
 ```
@@ -187,7 +196,8 @@ absorbed by either adapter.
 
 ## Adapter Admission
 
-The six self-authored components are the intended normal boundary set. Do not
+The six original-code components, four mechanical-adaptation components and
+two project-composition components are the intended normal boundary set. Do not
 introduce a generic `compat`, `common`, or catch-all adapter merely to avoid an
 ownership decision.
 

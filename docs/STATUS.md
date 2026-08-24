@@ -2,12 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T262 S5 — cross-component final mirror audit and formal-build
-regression.** This final packet repeats every component identity/index check
-after the owner-approved guest binary/object import, then records the formal
-Ninja closure without widening any component's source semantics.
+**Active: M0 T263 S1 — OpenNT MVDM owner/provenance census and component-root
+admission.** This packet establishes the twelve-component ownership model and
+the three new production-only roots before any MVDM source body is imported.
 
 ## Active Packet
+
+### M0 T263 S1 — OpenNT MVDM owner/provenance census and component-root admission
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T263 S1`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner approved the addition of complete `opennt-guest`, `opennt-softpc`, `opennt-utils` and `tools/opennt` recovery, following the MVDM ownership discussion. |
+| Objective | Establish a reproducible owner/provenance census, ratify the 12-component architecture and create empty production-only roots with local exception registers. |
+| Non-goals | No wholesale MVDM import, BOP implementation, Bochs semantic change, guest behavior change or default Ninja-link expansion. |
+| Reference Baseline | `O:\\repos.external\\opennt` Git `5c5b979e`; OpenNT-4.5 Git `98bd914d2`; source policy; T262 mirror closure. |
+| Files And ABI Surface | Architecture/coding rules, T263 proposal/evidence, new component/tool READMEs and status only; no product ABI. |
+| Applicable Rules | Source-first recovery, original mirror/README exception rules, production-only component roots and formal-build hygiene. |
+| Verification | 24-package MVDM census, source identity check, component owner scan, documentation governance and scoped diff checks. |
+| Expected Markers | Six original-code component READMEs; 12 named component owners; zero source bodies admitted by skeleton creation. |
+| Asset Needs | Pinned OpenNT and OpenNT-4.5 comparison trees and Git provenance. |
+| Reporting Requirements | Record every top-level MVDM package's owner/disposition and identify the next per-package import steps. |
+| Stop Conditions | An import without unique owner/provenance, an unregistered mirror divergence, a generic catch-all component, or a new default link dependency pauses the packet. |
+| Exit Criteria | Census/evidence, proposal, architecture/rule updates and empty roots agree; every future import has an explicit packet and owner. |
+| Original Owner Request | “建立 opennt-guest 完整组件、opennt-softpc、opennt-utils 组件，并做好 tools/opennt 工具增补。” |
+| Similar-Issue Sweep | Misowned `mvdm` files, firmware mistaken for a second emulator, utility catch-all growth, host-extension auto-linking and historical tools leaking into runtime. |
+
+**S1 P1 in progress:** MVDM provenance census and the component/tool skeleton
+are being established under
+`docs/etc/evidence/m0-t263-s1-mvdm-owner-provenance-census-001.md`.
 
 ### M0 T262 S5 — cross-component final mirror audit and formal-build regression
 

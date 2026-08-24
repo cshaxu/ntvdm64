@@ -96,7 +96,9 @@
 - Place each source file in its named target component: Bochs mechanics in
   `bx-core`; Bochs-only native assembly in `bx-mantle`; guest image source in
   `opennt-guest`; independently composable OpenNT host capability in
-  `opennt-host`; OpenNT BOP mirrors in `opennt-bop`; unavailable public-Win32
+  `opennt-host`; original SoftPC firmware/ROM/machine-contract inputs in
+  `opennt-softpc`; selected original reusable utility packages in
+  `opennt-utils`; OpenNT BOP mirrors in `opennt-bop`; unavailable public-Win32
   facades in `adapter-win32`; selector-blind copied-frame BOP ingress and
   typed completion in `adapter-bop`; bounded same-shaped SoftPC/CCPU recovery
   in `adapter-softpc`; dependency-free per-VDM lifecycle/resource/event state
@@ -106,7 +108,7 @@
   incidental feature change; the admitted reorganization package inventories
   it and uses `git mv` whenever ownership is pure.
 - The only original-code components are `bx-core`, `opennt-guest`,
-  `opennt-bop`, and `opennt-host`; every imported-body change is individually
+  `opennt-bop`, `opennt-host`, `opennt-softpc`, and `opennt-utils`; every imported-body change is individually
   registered in that component's README and marked `DIVERGENCE:` locally.
   `bx-mantle`, `adapter-bop`, `adapter-softpc`, and `adapter-win32` are
   mechanical-adaptation components. `app` and `session` are project-authored

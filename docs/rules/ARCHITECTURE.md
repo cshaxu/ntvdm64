@@ -42,17 +42,19 @@
     shaped boundary requires rule 12's exception and may expose only the
     state required by the reached call.
 14. Intrusion is minimized independently for adopted Bochs `bx-core` and
-    imported OpenNT mirrors (`opennt-guest`, `opennt-bop`, `opennt-host`, and
+    imported OpenNT mirrors (`opennt-guest`, `opennt-bop`, `opennt-host`,
+    `opennt-softpc`, `opennt-utils`, and
     tracked BOP-dependencies). Prefer an `adapter-softpc`, `adapter-win32`, or
     `opennt-host` same-shaped facade that preserves the original call shape.
     An edit to `bx-core` or imported OpenNT source requires a source-proven
     necessity, the smallest feasible diff, and the component's divergence or
     exception record; convenience or a local trace result is never sufficient.
 15. The target source owners are exactly `bx-core`, `bx-mantle`,
-    `opennt-guest`, `opennt-host`, `opennt-bop`, `adapter-bop`,
+    `opennt-guest`, `opennt-host`, `opennt-bop`, `opennt-softpc`,
+    `opennt-utils`, `adapter-bop`,
     `adapter-softpc`, `adapter-win32`, `session`, and `app`. The original-code
-    owners are exactly `bx-core`, `opennt-guest`, `opennt-bop`, and
-    `opennt-host`, each with a component README exception register. The
+    owners are exactly `bx-core`, `opennt-guest`, `opennt-bop`, `opennt-host`,
+    `opennt-softpc`, and `opennt-utils`, each with a component README exception register. The
     mechanical-adaptation owners are exactly `bx-mantle`, `adapter-bop`,
     `adapter-softpc`, and `adapter-win32`; the project-composition owners are
     exactly `app` and `session`. `session` is a
@@ -75,7 +77,8 @@
     the original owner plus `session`, `adapter-win32`, `adapter-softpc`, and
     `adapter-bop` cannot preserve the required contract.
 16. The local-intrusion registers are component-owned. `bx-core/README.md`,
-    `opennt-guest/README.md`, `opennt-bop/README.md`, and `opennt-host/README.md`
+    `opennt-guest/README.md`, `opennt-bop/README.md`, `opennt-host/README.md`,
+    `opennt-softpc/README.md`, and `opennt-utils/README.md`
     record every edit to their imported source and every source-derived component.
     `opennt-bop` mirror edits additionally retain the original call form and mark
     each changed expression with `DIVERGENCE:`. `bx-mantle` may crop and compose

@@ -4,7 +4,9 @@ Deliver an independently buildable, non-invasive command-line NT 4-era DOS envir
 
 The target product separation is: `bx-core` (adopted machine), `bx-mantle`
 (Bochs-only assembly), `opennt-guest` (DOS/WOW guest images), `opennt-host`
-(host capabilities), `opennt-bop` (BOP source mirrors), `adapter-softpc`
+(host capabilities), `opennt-bop` (BOP source mirrors), `opennt-softpc`
+(original SoftPC firmware/ROM and machine-contract inputs), `opennt-utils`
+(selected original utility packages), `adapter-softpc`
 (Bochs-backed SoftPC/CCPU interface recovery), `adapter-win32` (unavailable
 Win32 compatibility), `adapter-bop` (selector-blind copied-frame BOP
 ingress/completion), and
