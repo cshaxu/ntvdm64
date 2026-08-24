@@ -14,16 +14,19 @@
 typedef struct _OPEN_NAMED_PIPE_INFO {
     struct _OPEN_NAMED_PIPE_INFO *Next;
     HANDLE Handle;
-    LPSTR Name;
+    DWORD NameLength;
+    WORD DosPdb;
+    CHAR Name[2];
 } OPEN_NAMED_PIPE_INFO, *POPEN_NAMED_PIPE_INFO;
 
 static BOOL IsVrInitialized;
-static POPEN_NAMED_PIPE_INFO OpenNamedPipeInfo;
+static POPEN_NAMED_PIPE_INFO OpenNamedPipeInfoList;
+static POPEN_NAMED_PIPE_INFO LastOpenNamedPipeInfo;
 
 static POPEN_NAMED_PIPE_INFO VrpGetOpenNamedPipeInfo(HANDLE Handle)
 {
     POPEN_NAMED_PIPE_INFO ptr;
-    for (ptr = OpenNamedPipeInfo; ptr != NULL; ptr = ptr->Next) {
+    for (ptr = OpenNamedPipeInfoList; ptr != NULL; ptr = ptr->Next) {
         if (ptr->Handle == Handle) return ptr;
     }
     return NULL;
@@ -31,32 +34,38 @@ static POPEN_NAMED_PIPE_INFO VrpGetOpenNamedPipeInfo(HANDLE Handle)
 
 static BOOL VrpAddOpenNamedPipeInfo(HANDLE Handle, LPSTR Name)
 {
-    size_t bytes;
+    DWORD NameLength;
     POPEN_NAMED_PIPE_INFO ptr;
     if (VrpGetOpenNamedPipeInfo(Handle) != NULL) return TRUE;
-    ptr = (POPEN_NAMED_PIPE_INFO)calloc(1u, sizeof(*ptr));
+    NameLength = (DWORD)strlen(Name) + 1u;
+    ptr = (POPEN_NAMED_PIPE_INFO)LocalAlloc(LMEM_FIXED,
+        sizeof(OPEN_NAMED_PIPE_INFO) + NameLength);
     if (ptr == NULL) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
-    bytes = strlen(Name) + 1u;
-    ptr->Name = (LPSTR)LocalAlloc(LMEM_FIXED, bytes);
-    if (ptr->Name == NULL) { free(ptr); SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
-    memcpy(ptr->Name, Name, bytes);
+    ptr->Next = NULL;
     ptr->Handle = Handle;
-    ptr->Next = OpenNamedPipeInfo;
-    OpenNamedPipeInfo = ptr;
+    ptr->NameLength = NameLength;
+    strcpy(ptr->Name, Name);
+    if (LastOpenNamedPipeInfo == NULL) {
+        OpenNamedPipeInfoList = ptr;
+    } else {
+        LastOpenNamedPipeInfo->Next = ptr;
+    }
+    LastOpenNamedPipeInfo = ptr;
     return TRUE;
 }
 
 static BOOL VrpRemoveOpenNamedPipeInfo(HANDLE Handle)
 {
-    POPEN_NAMED_PIPE_INFO *link = &OpenNamedPipeInfo;
+    POPEN_NAMED_PIPE_INFO *link = &OpenNamedPipeInfoList, previous = NULL;
     while (*link != NULL) {
         POPEN_NAMED_PIPE_INFO ptr = *link;
         if (ptr->Handle == Handle) {
             *link = ptr->Next;
-            LocalFree(ptr->Name);
-            free(ptr);
+            if (LastOpenNamedPipeInfo == ptr) LastOpenNamedPipeInfo = previous;
+            LocalFree(ptr);
             return TRUE;
         }
+        previous = ptr;
         link = &ptr->Next;
     }
     return FALSE;
@@ -66,7 +75,8 @@ BOOL VrInitialized(void) { return IsVrInitialized; }
 BOOL VrInitialize(void) { IsVrInitialized = TRUE; return TRUE; }
 VOID VrUninitialize(void)
 {
-    while (OpenNamedPipeInfo != NULL) (void)VrpRemoveOpenNamedPipeInfo(OpenNamedPipeInfo->Handle);
+    while (OpenNamedPipeInfoList != NULL)
+        (void)VrpRemoveOpenNamedPipeInfo(OpenNamedPipeInfoList->Handle);
     IsVrInitialized = FALSE;
 }
 
