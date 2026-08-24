@@ -256,7 +256,6 @@
         "src/opennt-host/dem/demsrch_fcb_shim.c",
         "src/opennt-host/redir/redir_session_shim.c",
         "src/opennt-host/top_level/top_level_nosupport_shim.c",
-        "src/opennt-host/xms/xms_native_session_shim.c",
         "src/opennt-host/xms/xms_shim.c"
       ]
     },
@@ -318,6 +317,7 @@
         "src/opennt-bop/ingress/dem_ingress_shim.c",
         "src/opennt-bop/ingress/dem_direct_session.c",
         "src/opennt-bop/ingress/dem_native_session.c",
+        "src/opennt-bop/ingress/xms_native_session.c",
         "src/opennt-bop/ingress/dem_v2_composition_bridge.c",
         "src/opennt-bop/ingress/dem_v2_generic_ud_bridge.c",
         "src/opennt-bop/ingress/dem_v2_runtime_session.c",

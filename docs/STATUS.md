@@ -49,6 +49,8 @@ dynamic-environment fixtures; see [RTL-facade evidence](etc/evidence/m0-t261-s3-
 S3 P6 has moved DEM session and dispatcher composition to `opennt-bop`; fresh
 `r006` compiles its production and affected fixture objects while retaining
 host drive/namespace capability in `opennt-host`; see [DEM composition evidence](etc/evidence/m0-t261-s3-p6-dem-composition-owner-rehome-001.md).
+S3 P7 has similarly moved the XMS native `#UD` session to `opennt-bop/ingress`;
+fresh `r007` compiles it and passes component gates; see [XMS session evidence](etc/evidence/m0-t261-s3-p7-xms-session-owner-rehome-001.md).
 
 ## Previous Active Packet — M0 T260
 

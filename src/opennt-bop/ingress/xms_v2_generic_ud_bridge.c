@@ -1,5 +1,5 @@
 #include "xms_v2_generic_ud_bridge.h"
-#include "opennt-host/xms/xms_native_session_shim.h"
+#include "opennt-bop/ingress/xms_native_session.h"
 #include "opennt-host/xms/xms_shim.h"
 
 int bx_ntvdm_xms_v2_generic_ud_recognizes(
