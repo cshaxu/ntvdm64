@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T270 S5 — Opennt-softpc mirror reconciliation.** Bring one mirror component at a time to the current source-identity, divergence-register and private-overlay standard; audit OpenNT SoftPC firmware/ROM/machine-contract mirror inputs without changing machine capability or behavior.
+**Active: M0 T270 S6 — Opennt-utils mirror reconciliation.** Bring one mirror component at a time to the current source-identity, divergence-register and private-overlay standard; audit selected OpenNT utility packages without admitting a new utility runtime consumer.
 
 ## Active Packet
 
-### M0 T270 S5 — Opennt-softpc mirror reconciliation
+### M0 T270 S6 — Opennt-utils mirror reconciliation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T270 S5`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | S4 closes through a complete BOP source disposition ledger, zero external BOP-overlay consumers, and passing formal/focused verification; the T270 sequence admits its next single-component packet. |
-| Objective | Reconcile `opennt-softpc` and any matching private SoftPC overlay so every selected firmware, ROM or machine-contract source input has a valid mirror/overlay disposition without changing machine capability or behavior. |
-| Non-goals | No machine feature enablement, device/BIOS behavior change, BOP/provider work, new OpenNT source expansion, or change to another mirror component. |
-| Scope | `opennt-softpc`, its private overlay if present, README/register, formal source list, focused firmware/machine-contract fixtures and S5 evidence. |
-| Verification | Recompute selected-original identity; measure changed files; reconcile DIVERGENCE/README/central records; scan overlay consumers and cross-component source-body ownership; run focused fixture and formal Ninja checks. |
-| Exit Criteria | Every SoftPC mirror source is exact, a registered permitted subset/same-shaped modification, or a minimal marked boundary to its private overlay; no SoftPC overlay has an external consumer and no machine capability changes. |
-| Reference Baseline | T270 proposal, current SoftPC component README, source-policy selection records, formal Ninja manifest and firmware/machine fixture inventory. |
-| Files And ABI Surface | Source ownership and private implementation boundaries only; existing machine/firmware contracts are frozen. |
-| Applicable Rules | Mirror-component review standard, original-code ownership, private-overlay rule, machine ownership, source policy, build hygiene and documentation governance. |
-| Expected Markers | Complete per-file disposition ledger, local/README exception reconciliation and no new public interface. |
-| Asset Needs | Current checkout, selected local OpenNT SoftPC source roots, formal manifest and existing machine fixtures. |
-| Reporting Requirements | State source counts/dispositions, exception IDs, external-consumer result, fixture/build result and excluded unreachable packages. |
-| Stop Conditions | A change needs machine behavior, device enablement, a selected original is ambiguous, an overlay has an external consumer, a delta cannot meet the mirror rule, or a public ABI change is required. |
-| Similar-Issue Sweep | SoftPC source/overlay roots, includes, formal sources, component README/register and focused firmware/machine fixture sources. |
+| Identifier Mode | `M0 T270 S6`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | S5 closes through exact source identity for every retained SoftPC input and a successful current inventory-consumer verification; the T270 sequence admits its final single-component packet. |
+| Objective | Reconcile `opennt-utils` and any matching private utility overlay so every selected reusable OpenNT utility input has a valid mirror/overlay disposition without admitting a runtime utility consumer. |
+| Non-goals | No new utility package, no utility build/link/runtime admission, BOP/provider/machine behavior change, source expansion, or change to another mirror component. |
+| Scope | `opennt-utils`, its private overlay if present, README/register, current source inputs, non-link disposition evidence and S6 evidence. |
+| Verification | Recompute selected-original identity; measure changed files; reconcile DIVERGENCE/README/central records; scan overlay consumers and current build manifests; verify no utility source enters a formal link. |
+| Exit Criteria | Every utility mirror source is exact, a registered permitted subset/same-shaped modification, or a minimal marked boundary to its private overlay; no utility overlay has an external consumer and no utility source enters a formal runtime link. |
+| Reference Baseline | T270 proposal, current utility component README, source-policy selection records, formal manifest and utility-owner evidence. |
+| Files And ABI Surface | Source ownership and private implementation boundaries only; no runtime ABI or library target is added. |
+| Applicable Rules | Mirror-component review standard, original-code ownership, private-overlay rule, source policy, build hygiene and documentation governance. |
+| Expected Markers | Complete per-file disposition ledger, local/README exception reconciliation and explicit non-link result. |
+| Asset Needs | Current checkout, selected local OpenNT utility source root, formal manifest and current source-owner records. |
+| Reporting Requirements | State source counts/dispositions, exception IDs, external-consumer result, formal-link result and excluded utility packages. |
+| Stop Conditions | A source needs a new runtime consumer, a selected original is ambiguous, an overlay has an external consumer, a delta cannot meet the mirror rule, or a public ABI change is required. |
+| Similar-Issue Sweep | Utility source/overlay roots, current build manifests, include consumers, component README/register and source-owner records. |
 | Original Owner Request | “请你现在以新的T任务治理清楚，每个S任务治理一个镜像组件。” |
 
 **T270 plan:** S1 `bochs-core`; S2 `opennt-guest`; S3 `opennt-host`; S4 `opennt-bop`; S5 `opennt-softpc`; S6 `opennt-utils`. Each S is independently source-audited and may repair only that component and its private overlay.
@@ -97,6 +97,17 @@ the remaining 118 BOP-owner route/observation/composition files are explicitly
 not claimed as mirrors. All six overlay consumers are their matching mirror
 translation units; external consumers are zero. See
 [P6 ledger](etc/evidence/m0-t270-s4-p6-opennt-bop-complete-disposition-ledger-001.md).
+
+**S5 P1 checkpoint:** all 37 `opennt-softpc` production inputs are byte-identical
+to their selected OpenNT source/input. This corrects the historical 35-input
+admission count by including the already-present re-rooted `bios.c` and
+`bios.h`; no SoftPC source change or overlay is involved. See
+[P1 ledger](etc/evidence/m0-t270-s5-p1-opennt-softpc-source-identity-ledger-001.md).
+
+**S5 closure:** the current inventory consumer reads the re-rooted BIOS source
+pair and emits its inventory in a fresh disposable run; all 37 component inputs
+remain exact and `opennt-softpc-overlay` does not exist. No machine or firmware
+behavior changed.
 ## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition

@@ -1,10 +1,12 @@
 # opennt-softpc
 
 Original OpenNT SoftPC firmware, ROM and machine-contract source/input
-packages. The source-identical initial admission is the 27-file
-`base/mvdm/softpc.new/bios/` and 8-file `base/mvdm/softpc.new/roms/` families.
-Their source identity and per-package boundary are recorded in
-`docs/etc/evidence/m0-t263-s3-opennt-softpc-firmware-rom-admission-001.md`.
+packages. The source-identical admission is 37 production inputs: the 27-file
+`base/mvdm/softpc.new/bios/` family, its selected `base/bios/bios.c` and
+`base/inc/bios.h` inputs re-rooted here, and the 8-file
+`base/mvdm/softpc.new/roms/` family. The current complete identity ledger is
+`docs/etc/evidence/m0-t270-s5-p1-opennt-softpc-source-identity-ledger-001.md`;
+the earlier T263 admission record remains historical supporting evidence.
 
 This component is not a second emulator.  Bochs mechanics remain in `bochs-core`
 and `adapter-bochs`; same-shaped reached SoftPC/CCPU calls are provided only by
