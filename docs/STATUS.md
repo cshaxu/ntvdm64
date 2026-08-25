@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T270 S3 — Opennt-host mirror reconciliation.** Bring one mirror component at a time to the current source-identity, divergence-register and private-overlay standard; independently recheck the OpenNT host mirror, its private binding reachability and exception identity.
+**Active: M0 T270 S4 — Opennt-bop mirror reconciliation.** Bring one mirror component at a time to the current source-identity, divergence-register and private-overlay standard; audit OpenNT BOP mirror bodies and private BOP overlay ownership without changing BOP behavior.
 
 ## Active Packet
 
-### M0 T270 S3 — Opennt-host mirror reconciliation
+### M0 T270 S4 — Opennt-bop mirror reconciliation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T270 S3`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | S2 is closed by its source-identity and staging evidence; the T270 sequence admits its next single-component packet. |
-| Objective | Independently recheck the final `opennt-host` source identity, private binding reachability, local/README exception identity and source-body ownership after the T260 component migration. |
-| Non-goals | No new host capability, no Win32 API replacement, no BOP provider change, no OpenNT source expansion and no change to another mirror component. |
-| Scope | `opennt-host`, `opennt-host-overlay`, their READMEs/exception register, formal source list, focused host mirror fixture and S3 evidence. |
-| Verification | Recompute selected-original identity and same-shaped deltas; scan overlay consumers and adapter edges; reconcile local markers, READMEs and central register; run focused fixture plus formal Ninja/governance checks. |
-| Exit Criteria | Every host mirror file is exact, registered true subset, registered same-shaped modification below the 50-percent limit, or calls only its matching private overlay; no external overlay consumer or unclassified non-mirror production body remains. |
-| Reference Baseline | T269 final conformance record, current host/overlay READMEs, T260 ownership manifest, current formal Ninja manifest and `proposal-mirror-component-conformance-reconciliation-001.md`. |
-| Files And ABI Surface | Source ownership and private internal bindings only. Existing host capability ABI may not change. |
-| Applicable Rules | Mirror-component review standard, source policy, original-code ownership, private-overlay rule, host/Win32 boundary, build hygiene and documentation governance. |
-| Expected Markers | Correct local `DIVERGENCE:`/README entries for every retained host difference, measured source ledger and no new public ABI. |
-| Asset Needs | Current checkout, selected local OpenNT original source roots, current formal manifest and host fixture. |
-| Reporting Requirements | State exact/changed/overlay counts, each exception ID, external-consumer result, fixture/build result and every excluded historical source. |
-| Stop Conditions | A file needs a new semantic host capability, an overlay has an external consumer, a delta exceeds the mirror rule, a selected original is ambiguous, or an ABI change is needed. |
-| Similar-Issue Sweep | Host source/overlay roots, component READMEs, exception register, Ninja source list, adapter include edges and host mirror fixture. |
+| Identifier Mode | `M0 T270 S4`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | S3 closes through its P1/P2 threshold evidence and passing incremental formal build; the T270 sequence admits its next single-component packet. |
+| Objective | Reconcile `opennt-bop` and any matching private BOP overlay so every selected BOP source body has a valid mirror/overlay disposition without changing a selector, provider, service result or failure rule. |
+| Non-goals | No BOP implementation, route/provider behavior change, new host capability, OpenNT source expansion or change to another mirror component. |
+| Scope | `opennt-bop`, its private overlay if present, README/register, formal source list, focused BOP mirror fixtures and S4 evidence. |
+| Verification | Recompute selected-original identity; measure changed files; reconcile DIVERGENCE/README/central records; scan overlay consumers and cross-component source-body ownership; run focused fixture and formal Ninja checks. |
+| Exit Criteria | Every BOP mirror source is exact, a registered permitted subset/same-shaped modification, or a minimal marked boundary to its private overlay; no BOP overlay has an external consumer and no route/provider semantics changed. |
+| Reference Baseline | T270 proposal, current BOP component README, source-policy selection records, formal Ninja manifest and BOP fixture inventory. |
+| Files And ABI Surface | Source ownership and private implementation boundaries only; existing BOP ABI and routes are frozen. |
+| Applicable Rules | Mirror-component review standard, original-code ownership, private-overlay rule, BOP ownership, source policy, build hygiene and documentation governance. |
+| Expected Markers | Complete per-file disposition ledger, local/README exception reconciliation and no new public interface. |
+| Asset Needs | Current checkout, selected local OpenNT source roots, formal manifest and existing BOP fixtures. |
+| Reporting Requirements | State source counts/dispositions, exception IDs, external-consumer result, fixture/build result and excluded unreachable packages. |
+| Stop Conditions | A change needs semantic BOP/provider work, a selected original is ambiguous, an overlay has an external consumer, a delta cannot meet the mirror rule, or a public ABI change is required. |
+| Similar-Issue Sweep | BOP source/overlay roots, includes, formal sources, component README/register, provider composition files and focused fixture sources. |
 | Original Owner Request | “请你现在以新的T任务治理清楚，每个S任务治理一个镜像组件。” |
 
 **T270 plan:** S1 `bochs-core`; S2 `opennt-guest`; S3 `opennt-host`; S4 `opennt-bop`; S5 `opennt-softpc`; S6 `opennt-utils`. Each S is independently source-audited and may repair only that component and its private overlay.
@@ -52,8 +52,8 @@ staging/provenance verification passes. The old source-build recipe root is
 recorded as a separate cross-component tool closure, not a guest divergence;
 see [S2 evidence](etc/evidence/m0-t270-s2-opennt-guest-mirror-closure-001.md).
 
-**S3 P1/P2 checkpoint:** six selected host originals are exact and four are
-marked divergences.  The three former over-threshold true subsets
+**S3 closure:** six selected host originals are exact and four are marked
+divergences. The three former over-threshold true subsets
 (`nt_error.c`, `vrinit.c`, `vrnmpipe.c`) have moved into the matching private
 overlay; same-signature mirror boundaries and the incremental formal
 81-edge Ninja/host fixture pass.  See
