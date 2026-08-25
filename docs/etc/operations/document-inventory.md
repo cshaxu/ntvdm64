@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 2283 |
 | --- | --- |
-| Generated UTC | 2026-08-25T05:02:02Z |
+| Generated UTC | 2026-08-25T05:09:13Z |
 
 ## Entries
 
@@ -498,7 +498,7 @@ content-divergent entries.
 | etc/operations/opennt-bop-host-service-plane-recovery-candidate.md | indexed supporting material | 643385cb4d3c61e70583d59ae2eb6dab5284e07f647bdd47da8575aa0ffbfadf |
 | etc/operations/opennt-bop-implementation-tracker-001.md | indexed supporting material | 11d4a0cd06dc670513084704cd78aa4625d039cf3fbde55194d6d66ef7bd947e |
 | etc/operations/policy/source-policy.md | indexed supporting material | dad0d8add2eaad5fcd62822fbe677c9a675ea20890053f64cb7b9034d5ae018d |
-| etc/operations/proposal-bochs-component-identity-overlay-convergence-001.md | indexed supporting material | cfad589506c798d5ccc8a863c0ebd1534cf05ea2410547926c98f8368eff487e |
+| etc/operations/proposal-bochs-component-identity-overlay-convergence-001.md | indexed supporting material | ac4de17a933c62d6b6adc1971345c6fe4e58860453fd894608553f2bdd6974c8 |
 | etc/operations/proposal-bop-cross-family-completion-audit-001.md | indexed supporting material | 9c9b4be74905b5b809db640e08f6c829a6708e49077819ff68b09a5071c4c0a1 |
 | etc/operations/proposal-bop-external-compatibility-machine-closure-001.md | indexed supporting material | 0419a8e3b1b6bcf53b5e2be4c050aa662704cfa4765cc7e7bb88111768be453e |
 | etc/operations/proposal-bop-internal-dependency-closure-001.md | indexed supporting material | a30f2c280f8e2d25e4037483c93a1d66799a85383cacb6af868ad18c0e5aabee |
@@ -2011,7 +2011,7 @@ content-divergent entries.
 | history/m0-t262-closure-20260824.md | closed task history | 949a13be1ebac37a04402ea29a4ed6363d0818b50fb22c0b8ac4bcc05d3f5e72 |
 | history/m0-t263-closure-20260824.md | closed task history | d779bbe35857494e07035030ba954780fff59e6940ff6f516eea443dc6c85a9d |
 | history/m0-t264-closure-20260824.md | closed task history | 767b8c010cc2c03834b9bbda16a492c149a07593e8024fc4b1a31b01ab56f2ff |
-| history/m0-t265-closure-20260824.md | closed task history | 892d858fc73b8898e8dc335c0837576e12f4749258ca0bbc4409a73ec3c9df5c |
+| history/m0-t265-closure-20260824.md | closed task history | f1546cab8b3c92d69b0aff809aded8e0cf171f0950ccfe6cbcf2ac48c910db10 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -2297,7 +2297,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | b561777ccef0b3940dfb6f2b3aa0598239c8b24fe4e33884cd8127eed9a4ee0c |
+| STATUS.md | principal control document | e65026e9b605702e1012816446bc19d708cc13c49470e16cd2399ed84d612ede |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

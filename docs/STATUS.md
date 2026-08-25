@@ -2,7 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T265 S7 — bochs-core retained-diff consolidation.** Reduce remaining non-essential mirror diff by moving duplicated observer scaffolding and, if verified, the non-product keyboard creation body to the private Bochs overlay; retain required CPU decision points and valid source subsets.
+**Active: M0 T265 S7 — administrative closure hold.** The S1--S7 scope is
+complete and historically closed; this identifier remains only because the
+current governance gate requires exactly one active packet until the owner
+admits a successor. The next candidate in [QUEUE.md](QUEUE.md) remains
+unadmitted.
 
 ## Active Packet
 
@@ -177,6 +181,14 @@ component directly includes `bochs-core-overlay`.
 | Similar-Issue Sweep | Repeated feature-gate macros, observer no-op bodies, keyboard creation/teardown split, stale README exception descriptions, and hidden overlay consumers. |
 
 **S7 closure:** duplicated default-off observer gate/no-op scaffolding is private `bochs-core-overlay` code, and the private keyboard lifecycle now owns both creation and teardown. Fresh formal MSVC x64 `/MT` libraries and the opaque-ingress plus two-round headless-8042 fixtures pass; see [S7 evidence](etc/evidence/m0-t265-s7-bochs-core-retained-diff-consolidation-001.md).
+
+**T265 closure:** the S1--S7 package is closed. `adapter-bochs` is now
+Bochs-only assembly; `bochs-core` retains only upstream-relative source names
+and smallest registered boundaries to its private overlay; and `opennt-host`
+has no oversized self-authored product-binding body. The closure makes no BOP
+feature, provider, or continuous guest-runtime claim. See the
+[T265 closure record](history/m0-t265-closure-20260824.md). No successor is
+admitted by this closure.
 
 
 | Field | Record |

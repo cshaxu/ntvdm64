@@ -75,3 +75,10 @@ build graph.
 Owner admitted this proposal as **M0 T265 S1** on 2026-08-24. S1 is limited
 to authority and dependency governance; source movement starts only after its
 separate closure and the next admitted S packet.
+
+## Closure
+
+M0 T265 completed S1--S7 on 2026-08-24. The historical closure is recorded in
+[docs/history/m0-t265-closure-20260824.md](../../history/m0-t265-closure-20260824.md).
+It closes only the identity, ownership and mirror/overlay convergence scope;
+it does not admit a successor or claim a BOP/provider or guest-runtime result.
