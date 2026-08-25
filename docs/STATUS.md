@@ -66,6 +66,13 @@ same-signature mirror boundaries, the incremental formal 82-edge Ninja graph
 and their focused fixtures pass.  The remaining BOP source/route owner audit
 continues; see
 [P1 evidence](etc/evidence/m0-t270-s4-p1-softpc-bop-overlay-rehome-001.md).
+
+**S4 P2 checkpoint:** the wholly source-derived Redirector copied-frame
+dispatcher moved from `opennt-bop/vdmredir/vrdisp.c` to the matching private
+overlay behind the same dispatcher ABI. The incremental formal 80-edge Ninja
+graph and focused Redirector fixture pass; the remaining multi-entry
+over-threshold BOP bodies remain under audit. See
+[P2 evidence](etc/evidence/m0-t270-s4-p2-redir-dispatcher-overlay-rehome-001.md).
 ## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition
