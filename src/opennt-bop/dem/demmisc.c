@@ -7,7 +7,7 @@
  *  Sudeepb 31-Mar-1991 Created
  */
 
-/* Divergence from src/opennt/base/mvdm/dos/dem/demmisc.c: its historical
+/* DIVERGENCE(BOP-DIV-092): from src/opennt/base/mvdm/dos/dem/demmisc.c, its historical
  * headers bind CCPU/SAS, SoftPC devices, debugger/VDD products and VDM
  * termination.  Preserve the original body below and obtain only that ABI
  * surface from the neutral bx-vdm compatibility seam. */
@@ -190,7 +190,7 @@ DWORD	BytesRead;
 	if (!ReadFile(hfile, pbLoadAddr, 16384, &BytesRead, NULL)) {
 	    TerminateVDM();
 	}
-	/* Divergence from src/opennt/base/mvdm/dos/dem/demmisc.c: its ULONG
+	/* DIVERGENCE(BOP-DIV-094): from src/opennt/base/mvdm/dos/dem/demmisc.c, its ULONG
 	 * pointer arithmetic assumes the historical 32-bit host address space.
 	 * Keep the original chunk loop and use the neutral shim for x86/x64-safe
 	 * advancement of this already checked loader bounce pointer. */
@@ -202,7 +202,7 @@ DWORD	BytesRead;
 
     if (!IsDebuggee()) {
         free(pszDefaultDOSDirectory);
-        /* bx-vdm lifetime seam: the Direct CLI composition owns this imported
+        /* DIVERGENCE(BOP-DIV-094): the session lifetime seam owns this imported
          * dem.c global across a reusable engine session.  The original NT
          * process teardown did not re-enter the owner after this free; clear
          * it here so session reset cannot double-free after a real 50:11. */
@@ -429,7 +429,7 @@ VOID demSystemSymbolOp(VOID)
 
         if (pszDefaultDOSDirectory != NULL) {
             free(pszDefaultDOSDirectory);
-            /* See demLoadDos above: preserve the original cleanup order but
+            /* DIVERGENCE(BOP-DIV-094): preserve the original cleanup order but
              * make repeated Direct-session reset safe on modern hosts. */
             pszDefaultDOSDirectory = NULL;
         }

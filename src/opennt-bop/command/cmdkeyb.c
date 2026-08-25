@@ -6,8 +6,8 @@
  *  YST 14-Jan_1993 Created
  */
 
-/* OpenNT source: src/opennt/base/mvdm/dos/command/cmdkeyb.c.
- * Divergence: the historical CCPU/SoftPC include closure is unavailable to
+/* DIVERGENCE(BOP-DIV-093): OpenNT source: src/opennt/base/mvdm/dos/command/cmdkeyb.c.
+ * The historical CCPU/SoftPC include closure is unavailable to
  * the standalone CLI.  opennt_command_composition.h exposes only the original
  * register, checked guest-buffer and console capability spellings. */
 #include "opennt_command_composition.h"
@@ -69,7 +69,7 @@ VOID cmdGetKbdLayout( VOID )
   DWORD  cbData;
   OFSTRUCT  ofstr;
 
-  /* Divergence: this old local was retained by the imported source but was
+  /* DIVERGENCE(BOP-DIV-093): this old local was retained by the imported source but was
    * unused even in the historical implementation; modern /W4 diagnoses it. */
   (void)ofstr;
 
@@ -119,7 +119,7 @@ VOID cmdGetKbdLayout( VOID )
 				szKeybCode,
 				NULL,
 				&dwType,
-				(LPBYTE)szBuf,
+				/* DIVERGENCE(BOP-DIV-093): preserve byte-buffer ABI on modern headers. */ (LPBYTE)szBuf,
 				&cbData);
 
   RegCloseKey(hKey);
@@ -145,7 +145,7 @@ VOID cmdGetKbdLayout( VOID )
 			     szKeybCode,
 			     NULL,
 			     &dwType,
-				 (LPBYTE)szNewKbdID,
+					 /* DIVERGENCE(BOP-DIV-093): preserve byte-buffer ABI on modern headers. */ (LPBYTE)szNewKbdID,
 			     &cbData
 			     ) != ERROR_SUCCESS)
 	    szNewKbdID[0] = '\0';
@@ -227,7 +227,7 @@ VOID cmdGetKbdLayout( VOID )
         szDir,              // System directory
 	KEYBOARD_SYS	    // keyboard.sys
 	);
-    /* Divergence: the original declaration predates modern size_t warnings;
+    /* DIVERGENCE(BOP-DIV-093): the original declaration predates modern size_t warnings;
      * `szAutoLine` is fixed at 300 bytes, so this retains the INT contract. */
     iSize = (INT)strlen(szAutoLine);
     if (szNewKbdID[0] != '\0') {

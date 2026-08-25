@@ -4,7 +4,7 @@
  *
  * Sudeepb 31-Mar-1991 Created
  */
-/* Divergence: this original conditional precedes its historical headers.
+/* DIVERGENCE(BOP-DIV-095): this original conditional precedes its historical headers.
  * The standalone graph must project the original DEM debug compilation
  * condition here so the source-owned demPrintMsg body is emitted. */
 #ifndef DBG
@@ -12,8 +12,8 @@
 #endif
 #if DBG
 
-/* Direct import from src/opennt/base/mvdm/dos/dem/demmsg.c.
- * Divergence: the historical demmsg.h/dem.h include closure is supplied by
+/* DIVERGENCE(BOP-DIV-092): direct import from src/opennt/base/mvdm/dos/dem/demmsg.c.
+ * The historical demmsg.h/dem.h include closure is supplied by
  * opennt_dem_common_compat.h; no message selection or debug-output logic is replaced. */
 #include <stdio.h>
 #include "opennt_dem_common_compat.h"

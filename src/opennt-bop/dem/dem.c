@@ -4,8 +4,8 @@
  *  Sudeepb 09-Apr-1991 Craeted
  */
 
-/* Direct import from src/opennt/base/mvdm/dos/dem/dem.c.
- * Divergence: the historical io.h/dem.h closure is unavailable outside the
+/* DIVERGENCE(BOP-DIV-092): direct import from src/opennt/base/mvdm/dos/dem/dem.c.
+ * The historical io.h/dem.h closure is unavailable outside the
  * NTVDM product shell; opennt_dem_common_compat.h supplies only its declarations and
  * exact diagnostic constants. */
 #include "opennt_dem_common_compat.h"

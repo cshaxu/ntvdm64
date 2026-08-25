@@ -6,7 +6,7 @@
  *  Revision 24-Mar-1993 added fdisk support
  */
 
-/* Direct import from src/opennt/base/mvdm/dos/dem/demdasd.c.  Its original
+/* DIVERGENCE(BOP-DIV-092): direct import from src/opennt/base/mvdm/dos/dem/demdasd.c.  Its original
  * SoftPC/SAS/raw-device headers are supplied only as named ABI seams. */
 #include "opennt_demdasd_ioctl_compat.h"
 

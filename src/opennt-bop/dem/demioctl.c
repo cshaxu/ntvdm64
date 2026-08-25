@@ -8,7 +8,8 @@
  *
  */
 
-/* Direct import from src/opennt/base/mvdm/dos/dem/demioctl.c. */
+/* DIVERGENCE(BOP-DIV-092): direct import from src/opennt/base/mvdm/dos/dem/demioctl.c;
+ * the historical DEM/SoftPC include closure is supplied by the declared ABI seam. */
 #include "opennt_demdasd_ioctl_compat.h"
 
 PFNSVC	apfnSVCIoctl [] = {

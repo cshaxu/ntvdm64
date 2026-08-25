@@ -7,7 +7,7 @@
  * Sudeepb 07-Aug-1992 Created
  */
 
-/* Divergence from src/opennt/base/mvdm/dos/dem/demlock.c: replace the
+/* DIVERGENCE(BOP-DIV-092): from src/opennt/base/mvdm/dos/dem/demlock.c, replace the
  * historical CCPU/SAS product headers with the neutral ABI-only shim. */
 #include "opennt_demerror_lock_composition.h"
 

@@ -9,7 +9,7 @@
  *  Sudeepb 27-Nov-1991 Created
  */
 
-/* Divergence from src/opennt/base/mvdm/dos/dem/demerror.c: the historical
+/* DIVERGENCE(BOP-DIV-092): from src/opennt/base/mvdm/dos/dem/demerror.c, the historical
  * dem/softpc headers bind CCPU, SAS and the NTVDM product shell.  Keep the
  * original body below intact and obtain only that ABI surface from this
  * neutral bx-vdm compatibility seam. */
