@@ -166,9 +166,6 @@ function Get-HeaderDisposition([string]$Path) {
     $d = Get-SourceDisposition $Path ''
     if ($d[0] -ne 'UNCLASSIFIED') { return $d }
     $p = $Path.Replace('\', '/')
-    if ($p -like 'refs/bochs/*') {
-        return @('bx-core', 'pinned Bochs 2.6 reference header', 'retain-reference', 'S3', 'adopted Bochs include input')
-    }
     if ($p -like 'src/opennt/base/mvdm/softpc.new/*') {
         return @('adapter-softpc', 'imported SoftPC/CCPU header', 'git mv', 'S7', 'same-shaped SoftPC/CCPU interface input')
     }

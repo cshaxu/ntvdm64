@@ -2,6 +2,3 @@
 # repository root.  artifacts/ is deliberately not ignored: anything retained
 # there is an admitted, reviewable repository artifact.
 /build/
-
-# External comparison/import checkouts live under refs/.
-refs/

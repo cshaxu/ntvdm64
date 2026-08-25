@@ -1,0 +1,301 @@
+{
+  "schema": "ntdos64.t266.s4.historical-consumer-archive.v1",
+  "purpose": "Immutable record of refs-dependent historical executable retirement and default-disabled fixture re-rooting.",
+  "sourceRoots": [
+    "refs/archive/reconstruction",
+    "refs/bochs"
+  ],
+  "entryCount": 41,
+  "retainedTestFixtureCount": 7,
+  "retiredNonExecutableEvidenceCount": 34,
+  "archiveReportInputDisposition": "No standalone report was present below refs/archive/reconstruction; its seven source inputs moved to tests/legacy. This manifest and its companion report are the owner-approved T266 archive report.",
+  "entries": [
+    {
+      "source_path": "tests/component-integration/bx-vdm-legacy-fixtures/Test-BochsBuildIsolationBoundary.ps1",
+      "destination_path": "docs/etc/legacy_code/tests/bx-vdm-legacy-fixtures/Test-BochsBuildIsolationBoundary.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 695,
+      "sha256": "3ef6db53215179991b8fa682b6b7dc2f4d47d10a649eeb9193a054610684c360"
+    },
+    {
+      "source_path": "tools/probe/Invoke-T198S93SourceBuiltNormalReturnFixturePrepare.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/probe/Invoke-T198S93SourceBuiltNormalReturnFixturePrepare.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 5595,
+      "sha256": "4f1f0760ed4d9ef8340d3f77216ecbdafcffda5a9265ae49dc80680617c37613"
+    },
+    {
+      "source_path": "tools/probe/Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/probe/Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 8096,
+      "sha256": "a7659b64ea8e3de7f3de8915ea0e0c289b514cd4299a0860cdf2784680a6010b"
+    },
+    {
+      "source_path": "tools/probe/Invoke-T200S14DirectCompositionProbe.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/probe/Invoke-T200S14DirectCompositionProbe.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 6066,
+      "sha256": "0c42d0d88a59cb8f2c9350b2a524d6d00925443e4991895c8e98c1f8e0a5f9ad"
+    },
+    {
+      "source_path": "tools/probe/Invoke-T200S16DirectStartupPlanProbe.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/probe/Invoke-T200S16DirectStartupPlanProbe.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 5570,
+      "sha256": "136c1d5d7aa80f5c54182ea55465c7b2cfb5cef48174e1c44b2abcfc9d612969"
+    },
+    {
+      "source_path": "tools/probe/Invoke-T200S21InitialStatePublicationProbe.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/probe/Invoke-T200S21InitialStatePublicationProbe.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 4571,
+      "sha256": "e530eb38d674e865756b364a5d1453a9b2cee6f569fb707f21d659ca015329b6"
+    },
+    {
+      "source_path": "tools/probe/Invoke-T200S22EngineMachineStageProbe.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/probe/Invoke-T200S22EngineMachineStageProbe.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 7360,
+      "sha256": "a7699edaeb88e41495d18f35af3882502dc9a371c40adf5f753226874344e2f6"
+    },
+    {
+      "source_path": "tools/probe/Invoke-T200S22MachineStageProbe.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/probe/Invoke-T200S22MachineStageProbe.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 3883,
+      "sha256": "d8bf11d2d4f539652e0b6db856a3928e444908924105f28498f1260ef0dc43c6"
+    },
+    {
+      "source_path": "tools/probe/Invoke-T200S27NativeCliProbe.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/probe/Invoke-T200S27NativeCliProbe.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 6406,
+      "sha256": "69677c8bed7899e75102b49f0c342f21a81d52473f9e59973e974e095a13aa4a"
+    },
+    {
+      "source_path": "tools/probe/Invoke-T212S5MechanicalCancellationProbe.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/probe/Invoke-T212S5MechanicalCancellationProbe.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 3699,
+      "sha256": "16680eea3b2cba22ff7960f1e8120a84c2447019e542b942f62ddfc529d2f89d"
+    },
+    {
+      "source_path": "tools/probe/Invoke-T214S3CompositionOwnerFixture.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/probe/Invoke-T214S3CompositionOwnerFixture.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 6314,
+      "sha256": "e47a1177140cdf2a70d0fcb32d08a609a2d411f64fcdbdb3c77fbc6a297d9933"
+    },
+    {
+      "source_path": "tools/probe/Invoke-T220S5SourceCompositionClosure.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/probe/Invoke-T220S5SourceCompositionClosure.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 6491,
+      "sha256": "7df4106705f4418a194b40942a37f54995197ca8af7e44ac94d9980651f0398b"
+    },
+    {
+      "source_path": "tools/probe/Invoke-T225S6FourImageProfileFixture.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/probe/Invoke-T225S6FourImageProfileFixture.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 5674,
+      "sha256": "b63e41733076216ec214f89a2e9227efe9b80de299cd733cd6ff07d653c93536"
+    },
+    {
+      "source_path": "refs/archive/reconstruction/SOURCE-MANIFEST.json",
+      "destination_path": "tests/legacy/reconstruction/SOURCE-MANIFEST.json",
+      "disposition": "retained-default-disabled-test-fixture",
+      "bytes": 3349,
+      "sha256": "b590805edf8d7c2168052e61f7644dda39b56a277ad6c41a83f7995a11723b48"
+    },
+    {
+      "source_path": "refs/archive/reconstruction/monitor/reconstructed_monitor_s4.c",
+      "destination_path": "tests/legacy/reconstruction/monitor/reconstructed_monitor_s4.c",
+      "disposition": "retained-default-disabled-test-fixture",
+      "bytes": 50134,
+      "sha256": "bd855106fb62e780188fd308fc6b646d324f58c3698ac3e15d1f5456ff7a025a"
+    },
+    {
+      "source_path": "refs/archive/reconstruction/monitor/reconstructed_monitor_s4.h",
+      "destination_path": "tests/legacy/reconstruction/monitor/reconstructed_monitor_s4.h",
+      "disposition": "retained-default-disabled-test-fixture",
+      "bytes": 3635,
+      "sha256": "b4cf0f3f59d032eee0f825269310a19ba03fa71c40578faa9ae303b030ba5eca"
+    },
+    {
+      "source_path": "refs/archive/reconstruction/transport/historical_transport_v2.h",
+      "destination_path": "tests/legacy/reconstruction/transport/historical_transport_v2.h",
+      "disposition": "retained-default-disabled-test-fixture",
+      "bytes": 2134,
+      "sha256": "5089ba0d3e05906ed948639cf7e3ce182a756d4cf8854512fd39bacc9a1b1884"
+    },
+    {
+      "source_path": "refs/archive/reconstruction/transport/shared_aperture_v1.h",
+      "destination_path": "tests/legacy/reconstruction/transport/shared_aperture_v1.h",
+      "disposition": "retained-default-disabled-test-fixture",
+      "bytes": 837,
+      "sha256": "28916fdc5b4f663407f6339233b78767abcc8f42afdedbe77244afa94a14d9a0"
+    },
+    {
+      "source_path": "tools/probe/Invoke-T198S89CurrentCompositionNativeProbe.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/probe/Invoke-T198S89CurrentCompositionNativeProbe.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 6644,
+      "sha256": "9c8a68ee7d9c7bd9180856a76710ae64385b55bf64d640ffe295ec140156df51"
+    },
+    {
+      "source_path": "refs/archive/reconstruction/video/reconstructed_cvidc_video_tail.c",
+      "destination_path": "tests/legacy/reconstruction/video/reconstructed_cvidc_video_tail.c",
+      "disposition": "retained-default-disabled-test-fixture",
+      "bytes": 800,
+      "sha256": "9e926da3eb54e3a9ba881ac0dc018711cc369261e0531545b56ca92b4a1bf3e1"
+    },
+    {
+      "source_path": "tools/probe/Invoke-T198S83SpcKbdLifecycleProbe.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/probe/Invoke-T198S83SpcKbdLifecycleProbe.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 4101,
+      "sha256": "57079ae053b43a6909b3f2d29ec994c93d8b32b4f80ad4685109fb555a06dd4f"
+    },
+    {
+      "source_path": "tools/probe/Invoke-T198S3FiniteNativeRunProbe.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/probe/Invoke-T198S3FiniteNativeRunProbe.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 13454,
+      "sha256": "7cc668349f05818b6ff9b0b768e29e8c8fae4006a69325f8d5d601f08edd46c3"
+    },
+    {
+      "source_path": "tests/component-integration/bx-vdm-legacy-fixtures/Test-BochsDeferredStartupPlanBoundary.ps1",
+      "destination_path": "docs/etc/legacy_code/tests/bx-vdm-legacy-fixtures/Test-BochsDeferredStartupPlanBoundary.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 2802,
+      "sha256": "83e94d6704638e4b4ad0bd70d4e07ce5306353caa4d4f17735a219a89bd24fb1"
+    },
+    {
+      "source_path": "tests/component-integration/bx-vdm-legacy-fixtures/Test-BochsEmptyPortSpaceObjectBoundary.ps1",
+      "destination_path": "docs/etc/legacy_code/tests/bx-vdm-legacy-fixtures/Test-BochsEmptyPortSpaceObjectBoundary.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 1858,
+      "sha256": "2c4abd923097905ce7c69eb38aaa81b7641ef038dc8ed75fa2c75bdbf9b64ca7"
+    },
+    {
+      "source_path": "tests/component-integration/bx-vdm-legacy-fixtures/Test-BochsFmtLlLexicalBoundary.ps1",
+      "destination_path": "docs/etc/legacy_code/tests/bx-vdm-legacy-fixtures/Test-BochsFmtLlLexicalBoundary.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 4131,
+      "sha256": "6f9f1d279a81f79224eb2d991df25edec7ba54dca96c4d2c2080c95629f0b4f8"
+    },
+    {
+      "source_path": "tests/component-integration/bx-vdm-legacy-fixtures/Test-BochsIntrusionRegister.ps1",
+      "destination_path": "docs/etc/legacy_code/tests/bx-vdm-legacy-fixtures/Test-BochsIntrusionRegister.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 1163,
+      "sha256": "86bf972650fbdb30ace88588bf1bb4dd419fa3ff3261ba6b52eb926a87e7303b"
+    },
+    {
+      "source_path": "tests/component-integration/bx-vdm-legacy-fixtures/Test-BochsStartupTransactionBoundary.ps1",
+      "destination_path": "docs/etc/legacy_code/tests/bx-vdm-legacy-fixtures/Test-BochsStartupTransactionBoundary.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 1818,
+      "sha256": "3676616289b8ee6a667f0c833abcb14b4fbd3729a8026a744e9751292945e1b9"
+    },
+    {
+      "source_path": "tests/component-integration/bx-vdm-legacy-fixtures/Test-T104DeferredCurrentAdapterDerivative.ps1",
+      "destination_path": "docs/etc/legacy_code/tests/bx-vdm-legacy-fixtures/Test-T104DeferredCurrentAdapterDerivative.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 1164,
+      "sha256": "3a36345d15d00b90a89d5acb9e6ddb8dd247227a2ac902e2b3fc47bb13269982"
+    },
+    {
+      "source_path": "tools/build/Build-T197S6MinimalSimObject.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/build/Build-T197S6MinimalSimObject.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 2556,
+      "sha256": "131fe5bcebe9c4a477960cd600b9b7f50f6ae7e29630f8fb8ea5e593c0a252d9"
+    },
+    {
+      "source_path": "tools/build/New-T95S6IntactNativeBuildRoot.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/build/New-T95S6IntactNativeBuildRoot.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 5573,
+      "sha256": "89f5205b31a10c37d9b28c16a5333ced827c511589d0ab75aabae31ae135a7ba"
+    },
+    {
+      "source_path": "tools/build/New-T95S6IntactNativeTupleManifest.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/build/New-T95S6IntactNativeTupleManifest.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 4768,
+      "sha256": "651f0dca35e804354fce01839df108cae7148ee614dd18be4925ecb968920cff"
+    },
+    {
+      "source_path": "tools/build/New-T95S6MSVCNativeContainerBuildRoot.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/build/New-T95S6MSVCNativeContainerBuildRoot.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 6174,
+      "sha256": "5da986e73b7fc2c5214d54324357aea7f53aa1e8c47c6ed40cb8eee9aee09fc0"
+    },
+    {
+      "source_path": "tools/build/New-T95S6NarrowCompanionBuildRoot.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/build/New-T95S6NarrowCompanionBuildRoot.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 6361,
+      "sha256": "4b0b67c409c4a3192965926d709c9c943f7e26e1089cebbea387841da806494e"
+    },
+    {
+      "source_path": "tools/build/New-T95S6NativeContainerManifest.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/build/New-T95S6NativeContainerManifest.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 6556,
+      "sha256": "98b5735d39fbe6966263c0b1aa37ece74cc868965859268330934f383b3fa8f6"
+    },
+    {
+      "source_path": "tools/historical/pre-t260/build/Build-Bochs26Minimal.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/historical/pre-t260/build/Build-Bochs26Minimal.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 5200,
+      "sha256": "635957c4478ffba1d1ac6ce05c1caab351c1c2f8514eb863d1fc3068b3089503"
+    },
+    {
+      "source_path": "tools/historical/pre-t260/probe/Invoke-T212S6NativeCliCancellationProbe.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/historical/pre-t260/probe/Invoke-T212S6NativeCliCancellationProbe.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 3826,
+      "sha256": "9afde614a5104aed6034b1415622415d74a08ca503efc3efda103b8030ce4c23"
+    },
+    {
+      "source_path": "tools/historical/t225-s7/t225-s7-full-module-manifest.json",
+      "destination_path": "docs/etc/legacy_code/tools/historical/t225-s7/t225-s7-full-module-manifest.json",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 42652,
+      "sha256": "c774420149d6f00a9ebdc7287bc8340bba99a292459575d485bd9599361dd947"
+    },
+    {
+      "source_path": "tools/import/Import-Bochs26.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/import/Import-Bochs26.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 3484,
+      "sha256": "32a4b37096cd6e708218c0fcc2a441c28be7c3d325d84141e50e2b649be9e1f9"
+    },
+    {
+      "source_path": "tools/probe/Invoke-T198S103FastReadObservationFixturePrepare.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/probe/Invoke-T198S103FastReadObservationFixturePrepare.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 2656,
+      "sha256": "0d560224a4addb33c4f39b2740a86920d1a5faa8212a64f00be6b649788a6ad9"
+    },
+    {
+      "source_path": "tools/probe/Invoke-T198S48NtioCleanRebuildProbe.ps1",
+      "destination_path": "docs/etc/legacy_code/tools/probe/Invoke-T198S48NtioCleanRebuildProbe.ps1.txt",
+      "disposition": "retired-nonexecutable-legacy-evidence",
+      "bytes": 9381,
+      "sha256": "7f7312e4577b7cd32f01edc19a70a6129101f8d105abcb9c20480c543d768a0c"
+    },
+    {
+      "source_path": "refs/archive/reconstruction/video/reconstructed_cvidc_video_tail.h",
+      "destination_path": "tests/legacy/reconstruction/video/reconstructed_cvidc_video_tail.h",
+      "disposition": "retained-default-disabled-test-fixture",
+      "bytes": 168,
+      "sha256": "6b0d3d35b2b21e57cfaada02401904ba3943bdc364cb59e0c2c44cc023b16ba9"
+    }
+  ]
+}

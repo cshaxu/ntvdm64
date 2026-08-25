@@ -1,1 +1,0 @@
-char FARPRIVATE ChUpperFromChExt(char);

@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T266 S4 — historical consumer retirement and research-report archive.** Retire or re-root the remaining tracked historical-only build/probe/test consumers and place only approved immutable research reports under `artifacts/research/` with manifest evidence.
+**Active: M0 T266 S5 — repository-local `refs` removal and zero-reference closure.** Delete the retired local snapshots only after zero-live-consumer verification, then prove named-source formal closure without them.
 
 ## Active Packet
 
@@ -89,6 +89,29 @@
 | Exit Criteria | Every S4 ledger row has a verified re-root/retirement/archive disposition; no tracked executable historical consumer reads `refs/`; artifact archive evidence is complete; S5 has no ambiguous residual consumer. |
 | Original Owner Request | “单人双角色模式执行任务：消灭refs，实现src闭包和artifacts报告归档。” |
 | Similar-Issue Sweep | CMake, all `tools/` subtrees, tests, fixture preparation, historical manifests, import utilities, report generators, `.gitignore` and docs/report links. |
+**S4 closure:** 41 historical inputs have a source/destination/hash disposition: 7 fixture inputs now live under `tests/legacy/reconstruction/`, and 34 former executable scripts/manifests are non-executable `docs/etc/legacy_code` evidence. The archive report/manifest is under `artifacts/research/`. Global CMake and a retained fixture have documented, pre-existing non-refs stale-name failures; neither is claimed passing. See [S4 evidence](etc/evidence/m0-t266-s4-historical-consumer-retirement-001.md).
+
+### M0 T266 S5 — repository-local `refs` removal and zero-reference closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T266 S5`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Completed T266/S4 and the owner-approved source-closure objective. |
+| Objective | Remove the repository-local `refs/` tree and its configuration treatment after proving every remaining executable/build/configuration consumer has a named local owner or S4 retirement record. |
+| Non-goals | No source semantic rewrite, no historical fixture repair, no change to immutable documentation provenance, and no claim that unrelated global CMake stale paths now build. |
+| Reference Baseline | T266 S1 consumer ledger; S2/S3/S4 closure evidence; current tracked path/reference scan; formal Ninja graph and source policy. |
+| Files And ABI Surface | `refs/` tracked content removal, `.gitignore`, any remaining live literal consumer, Status, zero-reference evidence and documentation inventory. No runtime ABI. |
+| Applicable Rules | Execution closure, source policy, build/output hygiene, artifact archive policy and documentation governance. |
+| Verification | Pre-delete tracked consumer scan; exact Git removal; post-delete zero-reference scans separated into live code/config versus immutable docs provenance; repository-local formal Ninja closure and focused current fixture checks; governance/diff checks. |
+| Expected Markers | No `refs/` directory; no tracked executable/configuration/include/build input names that path; only classified immutable provenance text may retain the token `refs/`. |
+| Asset Needs | Current owned source roots, S1 ledger, formal Ninja generator/manifest and S2/S3/S4 evidence. No external fetch. |
+| Reporting Requirements | Record deleted root count/bytes, each permitted textual provenance exception, all verification commands/results, and every unrelated failure separately. |
+| Stop Conditions | A live consumer remains, a delete target is not the exact repository `refs/` root, a formal path reads external source, or a required artifact/provenance record is missing. |
+| Exit Criteria | `refs/` is absent; live-zero-reference scan and repository-local formal Ninja/current fixtures pass; permitted documentation provenance is enumerated; docs/artifact manifests and final T266 closure evidence are complete. |
+| Original Owner Request | “单人双角色模式执行任务：消灭refs，实现src闭包和artifacts报告归档。” |
+| Similar-Issue Sweep | Git ignore/configuration, CMake, formal Ninja, `tools/`, `tests/`, component READMEs, archive manifests, root documentation and repository directory scan. |
+**S5 / T266 closure:** The exact local `refs/` root is absent: 1,887 tracked files (30,364,329 bytes) were removed, followed by checked cleanup of untracked residue. Current source/tool/configuration scans have no `refs/` input; only enumerated immutable provenance text remains. Fresh formal Ninja r001 dry-run resolves 485 owned local edges. See [S5 evidence](etc/evidence/m0-t266-s5-refs-removal-zero-reference-001.md).
+
 ### M0 T265 S1 — Bochs component identity and dependency governance
 
 | Field | Record |
