@@ -48,6 +48,12 @@ clear without leaving a COMMAND composition implementation. The remaining
 historical host API owner map, including the required future `adapter-win32`
 VDM API migration, is recorded in [S3 P3 evidence](etc/evidence/m0-t271-s3-command-host-api-owner-map-001.md).
 
+**S3 P4:** the remaining temporary COMMAND composition now has a complete
+per-block final-owner disposition. The next implementation order is neutral
+session payload ownership, same-shaped VDM API recovery in `adapter-win32`,
+reached OpenNT host subsets, host-child lifecycle, then the generic frame
+transaction. See [S3 P4 disposition](etc/evidence/m0-t271-s3-p4-command-composition-owner-disposition-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored
