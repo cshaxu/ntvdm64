@@ -2,121 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T270 S6 — Opennt-utils mirror reconciliation (administrative closeout).** All T270 implementation work is complete and recorded below; this retained packet exists only because the current governance gate requires an M/T/S active-packet form until the owner selects the next queued package.
+**Active: M0 T271 S1 — OpenNT BOP non-mirror composition extraction.**
 
 ## Active Packet
 
-### M0 T270 S6 — Opennt-utils mirror reconciliation (administrative closeout)
+### M0 T271 S1 — OpenNT BOP non-mirror composition extraction
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T270 S6`, Ordinary Mode with a single-person dual-role review; implementation complete, awaiting owner selection of the next T. |
-| Admission And Approval | S5 closes through exact source identity for every retained SoftPC input and a successful current inventory-consumer verification; the T270 sequence admits its final single-component packet. |
-| Objective | Reconcile `opennt-utils` and any matching private utility overlay so every selected reusable OpenNT utility input has a valid mirror/overlay disposition without admitting a runtime utility consumer. |
-| Non-goals | No new utility package, no utility build/link/runtime admission, BOP/provider/machine behavior change, source expansion, or change to another mirror component. |
-| Scope | `opennt-utils`, its private overlay if present, README/register, current source inputs, non-link disposition evidence and S6 evidence. |
-| Verification | Recompute selected-original identity; measure changed files; reconcile DIVERGENCE/README/central records; scan overlay consumers and current build manifests; verify no utility source enters a formal link. |
-| Exit Criteria | Every utility mirror source is exact, a registered permitted subset/same-shaped modification, or a minimal marked boundary to its private overlay; no utility overlay has an external consumer and no utility source enters a formal runtime link. |
-| Reference Baseline | T270 proposal, current utility component README, source-policy selection records, formal manifest and utility-owner evidence. |
-| Files And ABI Surface | Source ownership and private implementation boundaries only; no runtime ABI or library target is added. |
-| Applicable Rules | Mirror-component review standard, original-code ownership, private-overlay rule, source policy, build hygiene and documentation governance. |
-| Expected Markers | Complete per-file disposition ledger, local/README exception reconciliation and explicit non-link result. |
-| Asset Needs | Current checkout, selected local OpenNT utility source root, formal manifest and current source-owner records. |
-| Reporting Requirements | State source counts/dispositions, exception IDs, external-consumer result, formal-link result and excluded utility packages. |
-| Stop Conditions | A source needs a new runtime consumer, a selected original is ambiguous, an overlay has an external consumer, a delta cannot meet the mirror rule, or a public ABI change is required. |
-| Similar-Issue Sweep | Utility source/overlay roots, current build manifests, include consumers, component README/register and source-owner records. |
-| Original Owner Request | “请你现在以新的T任务治理清楚，每个S任务治理一个镜像组件。” |
+| Identifier Mode | `M0 T271 S1`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner-approved after the source audit established that the current BOP component contains 53 original/low-delta inputs, six overlay bodies and 118 project-authored route/observation/composition inputs. |
+| Objective | Extract all non-mirror BOP composition from `opennt-bop` to its proper owner, without moving selector/service interpretation into `adapter-bop`; prepare the original dispatcher/provider recovery of DEM, COMMAND and XMS. |
+| Non-goals | No new selector/service outcome, no DPMI/WOW/Redirector/VDD/debugger recovery, no new Bochs semantics, and no trace-led leaf handler. |
+| Scope | `opennt-bop/{ingress,observation}` and source-derived composition/bridge/session files; their destination owners, manifests, tests and component registers. |
+| Verification | Per-file original/provenance/owner ledger; include/link scan; selector-blind `adapter-bop` review; no project observation or generic bridge remains in the mirror root; focused moved-boundary tests, formal Ninja closure, governance and `git diff --check`. |
+| Exit Criteria | Every in-scope non-mirror file has one owner disposition (move, delete as superseded, or retain temporarily with cited original-recovery boundary); no destination violates component vocabulary; the resulting S2 DEM baseline is explicit. |
+| Reference Baseline | [T271 proposal](etc/operations/proposal-opennt-bop-original-dispatcher-provider-recovery-001.md), OpenNT `softpc.new/host/src/nt_bop.c`, T270/S4 disposition ledger and the live BOP tracker. |
+| Files And ABI Surface | Ownership/link boundaries only. The generic ingress remains one opaque event/result ABI; no selector-specific public ABI is added. |
+| Applicable Rules | Source policy, source-first ladder, mirror-component standard, adapter/session boundaries, production-only roots, build hygiene and documentation governance. |
+| Expected Markers | Original-source span/owner ledger; zero observation files in `opennt-bop`; no selector vocabulary in `adapter-bop`; corresponding README/DIVERGENCE reconciliation. |
+| Asset Needs | Current checkout, pinned local OpenNT MVDM source, current Ninja manifest and focused BOP fixtures. |
+| Reporting Requirements | Report every moved/deleted/retained file, original source evidence, destination owner, surviving temporary debt, build/test results and why any overlay remains. |
+| Stop Conditions | A proposed destination must interpret a selector, a historical dependency has no same-shaped adapter/failure disposition, a needed original body is ambiguous, a public ABI changes, or a move alters provider behavior. |
+| Similar-Issue Sweep | All `*_composition`, `*_session`, `*_bridge`, `*_compat`, source-derived route, ingress and observation inputs; build manifests; includes; component READMEs and BOP tracker rows. |
+| Original Owner Request | “当前T任务应当准入…把不属于opennt-bop的内容送进其他组件；处理 DEM、COMMAND、XMS；收口审计。” |
 
-**T270 plan:** S1 `bochs-core`; S2 `opennt-guest`; S3 `opennt-host`; S4 `opennt-bop`; S5 `opennt-softpc`; S6 `opennt-utils`. Each S is independently source-audited and may repair only that component and its private overlay.
-
-**S1 closure:** the imported finite port-space body moved from
-`adapter-bochs` to the private `bochs-core-overlay`, and marker/register gaps
-in the `iodev`/SIM surfaces were repaired. The focused native-PIC source
-fixture passes; a fresh formal graph compiled the moved overlay object, but
-the first disposable graph was interrupted by an archive lock and execution
-environment termination. It was retired rather than reused. See
-[P1 evidence](etc/evidence/m0-t270-s1-p1-bochs-port-space-owner-rehome-001.md).
-
-Normalized comparison against the pinned Bochs 2.6
-baseline finds 177 exact and 28 registered changed production files; no
-external overlay consumer or imported Bochs source body remains in
-`adapter-bochs`.  The per-file disposition and compression decision are in
-[P2 evidence](etc/evidence/m0-t270-s1-p2-bochs-mirror-disposition-ledger-001.md).
-The fresh external 486-edge Ninja graph and focused native-PIC/checked-RAM
-fixtures pass; see
-[P3 evidence](etc/evidence/m0-t270-s1-p3-bochs-formal-build-closure-001.md).
-
-**S2 closure:** every one of the 730 production `opennt-guest` files is
-byte-identical to a selected original, and the current 113-artifact bundle
-staging/provenance verification passes. The old source-build recipe root is
-recorded as a separate cross-component tool closure, not a guest divergence;
-see [S2 evidence](etc/evidence/m0-t270-s2-opennt-guest-mirror-closure-001.md).
-
-**S3 closure:** six selected host originals are exact and four are marked
-divergences. The three former over-threshold true subsets
-(`nt_error.c`, `vrinit.c`, `vrnmpipe.c`) have moved into the matching private
-overlay; same-signature mirror boundaries and the incremental formal
-81-edge Ninja/host fixture pass.  See
-[P1 evidence](etc/evidence/m0-t270-s3-opennt-host-threshold-audit-001.md)
-and [P2 evidence](etc/evidence/m0-t270-s3-p2-opennt-host-overlay-rehome-001.md).
-
-**S4 P1 checkpoint:** the three over-threshold SoftPC BIOS fragments
-`mem_size.c`, `tape_io.c` and `emm_fncs.c` moved into `opennt-bop-overlay`;
-same-signature mirror boundaries, the incremental formal 82-edge Ninja graph
-and their focused fixtures pass.  The remaining BOP source/route owner audit
-continues; see
-[P1 evidence](etc/evidence/m0-t270-s4-p1-softpc-bop-overlay-rehome-001.md).
-
-**S4 P2 checkpoint:** the wholly source-derived Redirector copied-frame
-dispatcher moved from `opennt-bop/vdmredir/vrdisp.c` to the matching private
-overlay behind the same dispatcher ABI. The incremental formal 80-edge Ninja
-graph and focused Redirector fixture pass; the remaining multi-entry
-over-threshold BOP bodies remain under audit. See
-[P2 evidence](etc/evidence/m0-t270-s4-p2-redir-dispatcher-overlay-rehome-001.md).
-
-**S4 P3 checkpoint:** the 99.2-percent-divergent retained DEM dispatcher body
-now resides in `opennt-bop-overlay` while its mirror translation unit preserves
-the original single linkage for shared DEM dispatch globals. The formal Ninja
-graph is current and the focused 73-slot imported-dispatch fixture passes; see
-[P3 evidence](etc/evidence/m0-t270-s4-p3-dem-dispatch-overlay-rehome-001.md).
-
-**S4 P4 checkpoint:** the 113.3-percent-divergent VDMREDIR mailslot rehost now
-resides in `opennt-bop-overlay` behind a single mirror linkage boundary, so its
-private record/list state remains single-instance. A rebuilt formal Ninja graph
-and focused Redirector fixture pass; see [P4 evidence](etc/evidence/m0-t270-s4-p4-vdmredir-mailslot-overlay-rehome-001.md).
-
-**S4 P5 checkpoint:** the remaining low-delta direct BOP mirror bodies now
-have locally indexed `DIVERGENCE(BOP-DIV-...)` markers and corresponding README
-rows. The formal graph rebuilt their objects and the focused COMMAND keyboard
-and DEM runtime fixtures pass; see [P5 evidence](etc/evidence/m0-t270-s4-p5-low-delta-marker-register-reconciliation-001.md).
-
-**S4 closure:** all 177 `opennt-bop` production inputs have a per-file
-disposition. The 53 selected-original inputs are exact or below threshold, six
-over-threshold source-derived bodies are private overlay implementations, and
-the remaining 118 BOP-owner route/observation/composition files are explicitly
-not claimed as mirrors. All six overlay consumers are their matching mirror
-translation units; external consumers are zero. See
-[P6 ledger](etc/evidence/m0-t270-s4-p6-opennt-bop-complete-disposition-ledger-001.md).
-
-**S5 P1 checkpoint:** all 37 `opennt-softpc` production inputs are byte-identical
-to their selected OpenNT source/input. This corrects the historical 35-input
-admission count by including the already-present re-rooted `bios.c` and
-`bios.h`; no SoftPC source change or overlay is involved. See
-[P1 ledger](etc/evidence/m0-t270-s5-p1-opennt-softpc-source-identity-ledger-001.md).
-
-**S5 closure:** the current inventory consumer reads the re-rooted BIOS source
-pair and emits its inventory in a fresh disposable run; all 37 component inputs
-remain exact and `opennt-softpc-overlay` does not exist. No machine or firmware
-behavior changed.
-
-**S6 closure:** all eight retained `opennt-utils/suballoc` inputs are exact
-selected OpenNT files, no utility overlay exists, and no current formal source
-or build manifest consumes the package. See
-[P1 ledger](etc/evidence/m0-t270-s6-p1-opennt-utils-source-identity-nonlink-ledger-001.md).
-
-**T270 closure:** all six mirror components have completed their single-owner
-S packet. The scope, evidence and deferred behavioral work are recorded in
-[T270 history](history/m0-t270-closure-20260825.md).
+**T271 plan:** S1 non-mirror composition extraction; S2 DEM original package
+recovery; S3 COMMAND original package recovery; S4 XMS original package
+recovery; S5 whole-component mirror/source-recovery closure.  Only S1 is
+active.  T270 remains closed in [its history](history/m0-t270-closure-20260825.md).
 ## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition
