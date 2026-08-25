@@ -1,12 +1,9 @@
 #include <stdint.h>
-#include "opennt-bop/ingress/opennt_bop_route.h"
 #include <string.h>
-#include "opennt-bop/ingress/opennt_bop_route.h"
 
 #include "opennt-bop/ingress/softpc_printer_openclose_generic_ud_bridge.h"
 #include "opennt-bop/ingress/opennt_bop_route.h"
 #include "adapter-softpc/softpc_printer_openclose_shim.h"
-#include "opennt-bop/ingress/opennt_bop_route.h"
 
 int runtime_machine_generic_ud_bridge(
     const struct runtime_generic_ud_event *event,
@@ -63,5 +60,12 @@ int main(void)
     event.fault_rip = UINT64_MAX - 2u;
     if (runtime_softpc_printer_openclose_generic_ud_dispatch(&event,
             &outcome)) return 5;
+    if (!runtime_softpc_printer_openclose_begin(0u, 0u)) return 6;
+    runtime_softpc_printer_host_lpt_dos_open(0);
+    runtime_softpc_printer_host_lpt_dos_open(2);
+    host_lpt_flush_initialize();
+    if (!runtime_softpc_printer_dos_open_copy(0u, &opened) || opened != 0u ||
+        !runtime_softpc_printer_dos_open_copy(2u, &opened) || opened != 0u ||
+        !runtime_softpc_printer_openclose_end()) return 7;
     return 0;
 }

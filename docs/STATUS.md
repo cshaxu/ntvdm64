@@ -42,6 +42,12 @@ composition recovery is still active; see [S3 P1 evidence](etc/evidence/m0-t271-
 now belong to `adapter-win32`, not the OpenNT BOP mirror; focused direct and
 native COMMAND fixtures pass. See [S3 P2 evidence](etc/evidence/m0-t271-s3-p2-command-win32-facade-extraction-001.md).
 
+**S3 P3:** `host_lpt_flush_initialize` now belongs to selector-blind
+`adapter-softpc`, preserving OpenNT `nt_lpt.c`'s reached three-port state
+clear without leaving a COMMAND composition implementation. The remaining
+historical host API owner map, including the required future `adapter-win32`
+VDM API migration, is recorded in [S3 P3 evidence](etc/evidence/m0-t271-s3-command-host-api-owner-map-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

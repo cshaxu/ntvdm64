@@ -58,6 +58,14 @@ void runtime_softpc_printer_host_lpt_dos_close(int adapter)
     g_dos_open[adapter] = 0u;
 }
 
+void host_lpt_flush_initialize(void)
+{
+    /* OpenNT nt_lpt.c clears only HOST_LPT::dos_opened for every parallel
+     * port. This facade owns the equivalent three-port mechanical state; it
+     * deliberately does not open, close, or invent an LPT device. */
+    memset(g_dos_open, 0, sizeof(g_dos_open));
+}
+
 void runtime_softpc_printer_unsupported(void)
 {
     if (g_call.active != 0u) g_call.unsupported = 1u;

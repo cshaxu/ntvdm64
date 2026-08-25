@@ -3,6 +3,7 @@
 
 #include "adapter-win32/facade/opennt_error_dialog_facade.h"
 #include "adapter-win32/facade/opennt_command_oem_facade.h"
+#include "adapter-softpc/softpc_printer_openclose_shim.h"
 
 /* Compatibility surface for the directly imported OpenNT file
  * src/opennt/base/mvdm/dos/command/cmdmisc.c.  It is deliberately a scoped
@@ -370,7 +371,6 @@ void nt_init_event_thread(void);
 DWORD runtime_command_misc_get_environment_variable(LPSTR name,
     LPSTR buffer, DWORD bytes);
 BOOL GetNextVDMCommand(PVDMINFO vdm_info);
-void host_lpt_flush_initialize(void);
 void cmdUpdateCurrentDirectories(BYTE current_drive);
 BOOL SetVDMCurrentDirectories(ULONG current_directory_bytes,
     LPSTR current_directories);
