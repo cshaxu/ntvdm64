@@ -73,6 +73,12 @@ overlay behind the same dispatcher ABI. The incremental formal 80-edge Ninja
 graph and focused Redirector fixture pass; the remaining multi-entry
 over-threshold BOP bodies remain under audit. See
 [P2 evidence](etc/evidence/m0-t270-s4-p2-redir-dispatcher-overlay-rehome-001.md).
+
+**S4 P3 checkpoint:** the 99.2-percent-divergent retained DEM dispatcher body
+now resides in `opennt-bop-overlay` while its mirror translation unit preserves
+the original single linkage for shared DEM dispatch globals. The formal Ninja
+graph is current and the focused 73-slot imported-dispatch fixture passes; see
+[P3 evidence](etc/evidence/m0-t270-s4-p3-dem-dispatch-overlay-rehome-001.md).
 ## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition
