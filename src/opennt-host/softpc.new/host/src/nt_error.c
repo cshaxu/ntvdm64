@@ -24,6 +24,13 @@
  *
  */
 
+/* DIVERGENCE(HOST-DIV-027): this true subset retains only the original
+ * host_direct_access_error path.  The deleted general SoftPC error handler,
+ * dialog-window procedures, WOW error box and product reset/timer plumbing
+ * are separate NT4 product-shell blocks and have no admitted caller in this
+ * host component.  The retained function's original failure decision remains
+ * below and uses the private same-shaped bindings declared above. */
+
 DWORD TlsDirectError;
 //
 // Called directly from C or via bop. Type checked against global 'DirectError'

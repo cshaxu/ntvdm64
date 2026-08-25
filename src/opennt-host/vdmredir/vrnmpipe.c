@@ -79,6 +79,13 @@ Revision History:
 
 --*/
 
+/* DIVERGENCE(HOST-DIV-028): this true subset omits the original named-pipe
+ * information/state/transact/call/wait handlers and all asynchronous I/O,
+ * interrupt, termination and cancellation machinery.  The retained open,
+ * synchronous read/write and pathname/list helpers are a complete independent
+ * block; no current host-library consumer references an omitted export.  BOP
+ * entry disposition for the omitted services remains owned by opennt-bop. */
+
 #include <windows.h>
 #include <ntrtl.h>
 

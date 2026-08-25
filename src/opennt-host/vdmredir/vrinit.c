@@ -34,7 +34,10 @@ Revision History:
 /* DIVERGENCE(HOST-DIV-017): private static-provider link binding. */
 #include "opennt-host-overlay/vdmredir/vrinit_bindings.h"
 /* DIVERGENCE(HOST-DIV-022): this reached provider-only subset crops the
- * original VrInitialize/VrUninitialize NT4 VDD/NetBIOS/DLC product shell. */
+ * original VrInitialize/VrUninitialize, interrupt/async-completion and
+ * suspend/resume-hook NT4 VDD/NetBIOS/DLC/ICA product shell.  No retained
+ * provider calls those independent routines; their 57:xx admission remains
+ * explicitly declined by the OpenNT-BOP owner. */
 
 //
 // data
