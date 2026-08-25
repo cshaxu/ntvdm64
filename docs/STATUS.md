@@ -2,15 +2,15 @@
 
 ## Current Work
 
-**Active: M0 T270 S6 — Opennt-utils mirror reconciliation.** Bring one mirror component at a time to the current source-identity, divergence-register and private-overlay standard; audit selected OpenNT utility packages without admitting a new utility runtime consumer.
+**Active: M0 T270 S6 — Opennt-utils mirror reconciliation (administrative closeout).** All T270 implementation work is complete and recorded below; this retained packet exists only because the current governance gate requires an M/T/S active-packet form until the owner selects the next queued package.
 
 ## Active Packet
 
-### M0 T270 S6 — Opennt-utils mirror reconciliation
+### M0 T270 S6 — Opennt-utils mirror reconciliation (administrative closeout)
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T270 S6`, Ordinary Mode with a single-person dual-role review. |
+| Identifier Mode | `M0 T270 S6`, Ordinary Mode with a single-person dual-role review; implementation complete, awaiting owner selection of the next T. |
 | Admission And Approval | S5 closes through exact source identity for every retained SoftPC input and a successful current inventory-consumer verification; the T270 sequence admits its final single-component packet. |
 | Objective | Reconcile `opennt-utils` and any matching private utility overlay so every selected reusable OpenNT utility input has a valid mirror/overlay disposition without admitting a runtime utility consumer. |
 | Non-goals | No new utility package, no utility build/link/runtime admission, BOP/provider/machine behavior change, source expansion, or change to another mirror component. |
@@ -108,6 +108,15 @@ admission count by including the already-present re-rooted `bios.c` and
 pair and emits its inventory in a fresh disposable run; all 37 component inputs
 remain exact and `opennt-softpc-overlay` does not exist. No machine or firmware
 behavior changed.
+
+**S6 closure:** all eight retained `opennt-utils/suballoc` inputs are exact
+selected OpenNT files, no utility overlay exists, and no current formal source
+or build manifest consumes the package. See
+[P1 ledger](etc/evidence/m0-t270-s6-p1-opennt-utils-source-identity-nonlink-ledger-001.md).
+
+**T270 closure:** all six mirror components have completed their single-owner
+S packet. The scope, evidence and deferred behavioral work are recorded in
+[T270 history](history/m0-t270-closure-20260825.md).
 ## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition
