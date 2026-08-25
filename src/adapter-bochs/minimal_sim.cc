@@ -19,7 +19,7 @@ bx_list_c *root_param = NULL;
 
 // CPU5/Pentium-MMX has the original legacy local-APIC identity shape.  The
 // historical product derives these globals from its broader CPUID parameter
-// tree; the finite mantle has no xAPIC-capable model to select.
+// tree; the finite machine has no xAPIC-capable model to select.
 Bit32u apic_id_mask = 0x0f;
 bx_bool simulate_xapic = 0;
 
@@ -43,9 +43,9 @@ static bx_param_c *runtime_find_param(const char *from, bx_param_c *base)
   return runtime_find_param(separator + 1, child);
 }
 
-class bx_mantle_minimal_sim_c : public bx_simulator_interface_c {
+class bx_machine_minimal_sim_c : public bx_simulator_interface_c {
 public:
-  bx_mantle_minimal_sim_c() { is_sim_thread_func = NULL; }
+  bx_machine_minimal_sim_c() { is_sim_thread_func = NULL; }
 
   virtual bx_param_c *get_param(const char *pname, bx_param_c *base = NULL)
   {
@@ -88,28 +88,28 @@ public:
   virtual bx_list_c *get_bochs_root() { return root_param; }
 };
 
-static bx_mantle_minimal_sim_c *bx_mantle_minimal_sim = NULL;
+static bx_machine_minimal_sim_c *bx_machine_minimal_sim = NULL;
 
-bx_mantle_minimal_sim_status bx_mantle_minimal_sim_initialize(void)
+bx_machine_minimal_sim_status bx_machine_minimal_sim_initialize(void)
 {
 #if BX_CPU_LEVEL != 5 || BX_SUPPORT_X86_64
-  return BX_MANTLE_MINIMAL_SIM_PROFILE_CONFIGURATION_UNSUPPORTED;
+  return BX_MACHINE_MINIMAL_SIM_PROFILE_CONFIGURATION_UNSUPPORTED;
 #else
-  if (SIM != NULL && SIM != bx_mantle_minimal_sim) {
-    return BX_MANTLE_MINIMAL_SIM_ALREADY_BOUND;
+  if (SIM != NULL && SIM != bx_machine_minimal_sim) {
+    return BX_MACHINE_MINIMAL_SIM_ALREADY_BOUND;
   }
 
   if (SIM != NULL) {
     bx_param_bool_c *reset = SIM->get_param_bool(BXPN_RESET_ON_TRIPLE_FAULT);
     return (reset != NULL && reset->get() == 0)
-      ? BX_MANTLE_MINIMAL_SIM_OK
-      : BX_MANTLE_MINIMAL_SIM_RESET_PARAM_NOT_FALSE;
+      ? BX_MACHINE_MINIMAL_SIM_OK
+      : BX_MACHINE_MINIMAL_SIM_RESET_PARAM_NOT_FALSE;
   }
 
   siminterface_log = new logfunctions();
   siminterface_log->put("minimal_sim", "CTRL");
-  bx_mantle_minimal_sim = new bx_mantle_minimal_sim_c();
-  SIM = bx_mantle_minimal_sim;
+  bx_machine_minimal_sim = new bx_machine_minimal_sim_c();
+  SIM = bx_machine_minimal_sim;
   root_param = new bx_list_c(NULL, "bochs", "minimal Bochs parameter root");
 
   bx_list_c *cpu = new bx_list_c(root_param, "cpu", "CPU Options");
@@ -133,11 +133,11 @@ bx_mantle_minimal_sim_status bx_mantle_minimal_sim_initialize(void)
 
   bx_param_bool_c *reset = SIM->get_param_bool(BXPN_RESET_ON_TRIPLE_FAULT);
   if (root_param->get_size() != 1 || cpu->get_size() != 4) {
-    return BX_MANTLE_MINIMAL_SIM_CPU_LAYOUT_INVALID;
+    return BX_MACHINE_MINIMAL_SIM_CPU_LAYOUT_INVALID;
   }
   if (reset == NULL || reset->get() != 0) {
-    return BX_MANTLE_MINIMAL_SIM_RESET_PARAM_NOT_FALSE;
+    return BX_MACHINE_MINIMAL_SIM_RESET_PARAM_NOT_FALSE;
   }
-  return BX_MANTLE_MINIMAL_SIM_OK;
+  return BX_MACHINE_MINIMAL_SIM_OK;
 #endif
 }

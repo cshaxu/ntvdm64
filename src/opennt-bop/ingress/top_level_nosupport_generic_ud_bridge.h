@@ -1,0 +1,14 @@
+#ifndef RUNTIME_BOP_TOP_LEVEL_NOSUPPORT_GENERIC_UD_BRIDGE_H
+#define RUNTIME_BOP_TOP_LEVEL_NOSUPPORT_GENERIC_UD_BRIDGE_H
+
+#include "adapter-bop/generic_ud_bridge.h"
+
+/* OpenNT source: softpc.new/host/src/nt_bop.c:MS_bop_9.  This is a
+ * top-level adapter route; the machine sees only its opaque generic event. */
+int runtime_top_level_nosupport_generic_ud_recognizes(
+    const struct runtime_generic_ud_event *event);
+int runtime_top_level_nosupport_generic_ud_dispatch(
+    const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome);
+
+#endif

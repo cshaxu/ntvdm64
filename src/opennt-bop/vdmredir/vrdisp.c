@@ -1,8 +1,8 @@
 /* Re-rooted from OpenNT base/mvdm/vdmredir/vrdisp.c. */
 #include <windows.h>
 #include "vrdisp_compat.h"
-static __declspec(thread) const struct runtime_generic_ud_event_v1 *VrEvent;
-static __declspec(thread) struct runtime_generic_ud_outcome_v1 *VrOutcome;
+static __declspec(thread) const struct runtime_generic_ud_event *VrEvent;
+static __declspec(thread) struct runtime_generic_ud_outcome *VrOutcome;
 static __declspec(thread) runtime_vr_dispatch_body_fn VrBody;
 /* DIVERGENCE(BOP-DIV-056): original dispatch uses the product-global CCPU
  * frame; the standalone call binds one copied frame callback synchronously. */
@@ -23,4 +23,4 @@ VR_SERVICE(VrDefineMacro,44) VR_SERVICE(VrBreakMacro,45) VR_SERVICE(VrNetService
 VR_SERVICE(VrEoiAndDismissInterrupt,48) VR_SERVICE(VrCheckPmNetbiosAnr,49)
 VOID (*VrDispatchTable[])(VOID)={VrInitialize,VrUninitialize,VrGetNamedPipeInfo,VrGetNamedPipeHandleState,VrSetNamedPipeHandleState,VrPeekNamedPipe,VrTransactNamedPipe,VrCallNamedPipe,VrWaitNamedPipe,VrDeleteMailslot,VrGetMailslotInfo,VrMakeMailslot,VrPeekMailslot,VrReadMailslot,VrWriteMailslot,VrTerminateDosProcess,VrNetTransactApi,VrNetRemoteApi,VrNetNullTransactApi,VrNetServerEnum,VrNetUseAdd,VrNetUseDel,VrNetUseEnum,VrNetUseGetInfo,VrNetWkstaGetInfo,VrNetWkstaSetInfo,VrNetMessageBufferSend,VrGetCDNames,VrGetComputerName,VrGetUserName,VrGetDomainName,VrGetLogonServer,VrNetHandleGetInfo,VrNetHandleSetInfo,VrNetGetDCName,VrReadWriteAsyncNmPipe,VrReadWriteAsyncNmPipeWrite,VrNetbios5c,VrHandleAsyncCompletion,VrDlc5cHandler,VrVdmWindowInit,VrReturnAssignMode,VrSetAssignMode,VrGetAssignListEntry,VrDefineMacro,VrBreakMacro,VrNetServiceControl,VrDismissInterrupt,VrEoiAndDismissInterrupt,VrCheckPmNetbiosAnr};
 BOOL VrDispatch(ULONG SvcCode) { if (SvcCode >= sizeof(VrDispatchTable)/sizeof(VrDispatchTable[0])) return FALSE; VrDispatchTable[SvcCode](); return TRUE; }
-int runtime_vr_dispatch_with_frame(uint8_t service,const struct runtime_generic_ud_event_v1 *event,struct runtime_generic_ud_outcome_v1 *outcome,runtime_vr_dispatch_body_fn body) { int handled; if (!event || !outcome || !body || VrBody) return 0; VrEvent=event; VrOutcome=outcome; VrBody=body; handled=VrDispatch(service); VrBody=NULL; VrEvent=NULL; VrOutcome=NULL; return handled; }
+int runtime_vr_dispatch_with_frame(uint8_t service,const struct runtime_generic_ud_event *event,struct runtime_generic_ud_outcome *outcome,runtime_vr_dispatch_body_fn body) { int handled; if (!event || !outcome || !body || VrBody) return 0; VrEvent=event; VrOutcome=outcome; VrBody=body; handled=VrDispatch(service); VrBody=NULL; VrEvent=NULL; VrOutcome=NULL; return handled; }

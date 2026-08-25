@@ -1,5 +1,5 @@
 {
-  "schema": "ntdos64-reconstruction-source-manifest-v1",
+  "schema": "runner-reconstruction-source-manifest-v1",
   "component": "Independent default-disabled reconstruction mechanics",
   "research_restriction": "Default-disabled research code. It is not linked into the formal runtime and does not implement BIOS, BOP/SVC dispatch, DEM, DOS, PC/AT devices, or host policy.",
   "authority": "docs/S3-RECONSTRUCTED-MONITOR-SEMANTICS.md, docs/S4-RECONSTRUCTION-ADMISSION.md, and docs/R1-GENERIC-VIDEO-RECONSTRUCTION-ADMISSION.md",
@@ -55,19 +55,19 @@
       "bytes": 3314
     },
     {
-      "path": "../../tests/historical_transport_v2_layout_test.c",
+      "path": "transport/historical_transport_layout_test.c",
       "kind": "default-disabled-cross-bitness-layout-test",
       "sha256": "66B388D90C1428A5FEADA4988E94A6110403960596E938A3346F89B250A0192E",
       "bytes": 1918
     },
     {
-      "path": "../../tests/historical_transport_v2_pipe_test.c",
+      "path": "transport/historical_transport_pipe_test.c",
       "kind": "default-disabled-unadmitted-cross-process-fixture",
       "sha256": "4D77231A54582C714D83544C224D80E4BA6F3AE1710A4FDB8D7F60805F7873FC",
       "bytes": 3057
     },
     {
-      "path": "../../tests/shared_aperture_v1_host_fixture.c",
+      "path": "transport/shared_aperture_host_fixture.c",
       "kind": "default-disabled-cross-bitness-shared-backing-fixture",
       "sha256": "499D0D1E7724E41062307F4FC3A0CC5950AF99D23FCAEAE0B8F160F1FD612D5D",
       "bytes": 3368

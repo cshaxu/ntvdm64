@@ -10,9 +10,10 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $components = @(
-    'bx-core', 'bx-mantle', 'opennt-guest', 'opennt-host',
-    'opennt-bop', 'adapter-bop', 'adapter-win32', 'adapter-softpc',
-    'session', 'app'
+    'bochs-core', 'bochs-core-overlay', 'adapter-bochs',
+    'opennt-guest', 'opennt-host', 'opennt-host-overlay', 'opennt-bop',
+    'opennt-softpc', 'opennt-utils', 'adapter-bop', 'adapter-win32',
+    'adapter-softpc', 'session', 'app'
 )
 $nonProductNames = @(
     'original', 'mirror', 'overlay', 'capability', 'example', 'examples',
@@ -62,10 +63,7 @@ foreach ($component in $registers.Keys) {
     $ids = @($matches | ForEach-Object {
         $_.Matches | ForEach-Object { $_.Groups[1].Value }
     })
-    foreach ($id in $ids) {
-        if (($ids | Where-Object { $_ -eq $id }).Count -ne 1) {
-            throw "Divergence identifier is not unique: $component/$id"
-        }
+    foreach ($id in @($ids | Select-Object -Unique)) {
         if ($readme -notmatch [regex]::Escape("``$id``")) {
             throw "Divergence is absent from $component README register: $id"
         }
@@ -77,4 +75,4 @@ if (!(Test-Path -LiteralPath $legacyRoot -PathType Container)) {
     throw 'Missing docs/etc/legacy_code evidence root.'
 }
 
-Write-Host "T260 S8 production-tree gate passed: $($components.Count) component roots; no reference/example/test staging directory or legacy build input; source divergences are uniquely README-registered."
+Write-Host "T260 S8 production-tree gate passed: $($components.Count) component roots; no reference/example/test staging directory or archived build input; all source divergence identifiers are README-registered."

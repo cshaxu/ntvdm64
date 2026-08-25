@@ -10,7 +10,7 @@
 extern int DemInit(int argc, char *argv[]);
 extern int IsDebuggee(void);
 extern void demLoadDos(void);
-extern uint8_t *ntdos64_ccpu_sm0_ram(void);
+extern uint8_t *runner_ccpu_sm0_ram(void);
 extern void setDI(uint16_t value);
 extern uint8_t *c_GetLinAdd(uint32_t address);
 extern HANDLE WINAPI CreateFileOem(LPCSTR path, DWORD access, DWORD share,
@@ -29,15 +29,15 @@ int main(int argc, char *argv[])
 
     if (argc != 2) return 1;
     fprintf(stderr, "direct demload fixture: bridge init\n");
-    if (!ntdos64_historical_bios_bridge_v1_initialize()) return 2;
+    if (!runner_historical_bios_bridge_v1_initialize()) return 2;
     fprintf(stderr, "direct demload fixture: original DemInit\n");
-    if (!ntdos64_oem_facade_v1_configure_resource_root(argv[1]) ||
+    if (!runner_oem_facade_v1_configure_resource_root(argv[1]) ||
         !DemInit(argc, argv) ||
-        !ntdos64_historical_dem_byob_profile_v1_replace_directory(argv[1])) {
+        !runner_historical_dem_byob_profile_v1_replace_directory(argv[1])) {
         result = 4;
         goto cleanup;
     }
-    ram = ntdos64_ccpu_sm0_ram();
+    ram = runner_ccpu_sm0_ram();
     if (ram == NULL) {
         result = 8;
         goto cleanup;
@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
     }
 
 cleanup:
-    ntdos64_oem_facade_v1_reset();
-    ntdos64_historical_bios_bridge_v1_terminate();
+    runner_oem_facade_v1_reset();
+    runner_historical_bios_bridge_v1_terminate();
     return result;
 }

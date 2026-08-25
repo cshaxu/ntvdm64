@@ -10,7 +10,7 @@ with implicit concatenation or DPB-specific branches.
 ## Admitted v1 contract
 
 The adapter returns one fixed-size transaction containing up to 64 opaque
-`guest_write_v1` descriptors, one contiguous adapter-owned payload, the copied
+`runtime_guest_write` descriptors, one contiguous adapter-owned payload, the copied
 boundary identity, and a v2 CPU result. The ABI contains no service ID,
 pointer, Bochs object, segment or host handle. Every descriptor must have a
 non-zero range, non-overlapping payload offset and no range overlap; a
@@ -58,7 +58,7 @@ at most 52 descriptors and 156 payload bytes. The generic ABI therefore has a
 payload upper bound from each descriptor; preflight requires the supplied
 payload length to match it.
 
-`bx_ntvdm_host_session_v1` treats this as a distinct pending-operation kind.
+`session-local host context` treats this as a distinct pending-operation kind.
 It binds the complete transaction and borrowed same-island payload to the
 copied boundary, allows exactly one matching take, and clears it on either
 take or mismatch. This remains adapter-only: no Bochs consumer is implemented

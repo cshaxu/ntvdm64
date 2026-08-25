@@ -57,7 +57,7 @@ int runtime_spckbd_table_word(uint16_t index, word *value)
         g_call.si > UINT16_MAX - index * 2u ||
         !real_address(g_call.cs, (uint16_t)(g_call.si + index * 2u),
             sizeof(bytes), &address) ||
-        !runtime_mantle_checked_ram_read_v1(address, bytes, sizeof(bytes))) {
+        !runtime_machine_checked_ram_read(address, bytes, sizeof(bytes))) {
         g_call.failed = 1u;
         return 0;
     }
@@ -67,7 +67,7 @@ int runtime_spckbd_table_word(uint16_t index, word *value)
 
 void sas_store_no_check(uint32_t address, uint8_t value)
 {
-    if (g_call.active == 0u || !runtime_mantle_checked_ram_write_v1(address,
+    if (g_call.active == 0u || !runtime_machine_checked_ram_write(address,
             &value, 1u)) g_call.failed = 1u;
 }
 

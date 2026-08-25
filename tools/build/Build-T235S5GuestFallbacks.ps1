@@ -44,5 +44,5 @@ foreach ($name in $expected.Keys) {
     $file = Join-Path $result $name
     if (!(Test-Path -LiteralPath $file) -or (Get-Sha256 $file) -ne $expected[$name]) { throw "Source-built identity mismatch: $file" }
 }
-[ordered]@{ schema='ntdos64.t235.s5.guest-fallbacks.v1'; origin='source-built'; outputs=@($expected.Keys | Sort-Object | ForEach-Object { [ordered]@{ file=$_; sha256=$expected[$_] } }) } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $result 'manifest.json') -Encoding utf8
+[ordered]@{ schema='runner.t235.s5.guest-fallbacks.v1'; origin='source-built'; outputs=@($expected.Keys | Sort-Object | ForEach-Object { [ordered]@{ file=$_; sha256=$expected[$_] } }) } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $result 'manifest.json') -Encoding utf8
 Write-Host "OpenNT source-built fallbacks completed: $result"

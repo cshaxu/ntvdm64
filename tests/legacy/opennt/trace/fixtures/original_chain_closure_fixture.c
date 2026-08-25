@@ -4,9 +4,9 @@
  */
 #include <stdint.h>
 
-typedef void (*ntdos64_bop_handler)(void);
+typedef void (*runner_bop_handler)(void);
 
-extern ntdos64_bop_handler BIOS[];
+extern runner_bop_handler BIOS[];
 extern void MS_bop_0(void);
 extern void DemDispatch(uint8_t command);
 

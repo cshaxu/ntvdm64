@@ -5,7 +5,7 @@
 #include <string.h>
 
 static struct runtime_dpmi_startup_session runtime_session;
-static runtime_cpu_state_v1 runtime_cpu;
+static runtime_cpu_state runtime_cpu;
 static uint32_t runtime_shared_data_linear;
 static uint32_t runtime_current_dta_linear;
 static uint32_t runtime_selector_table_linear;
@@ -48,7 +48,7 @@ uint32_t runtime_dpmi_startup_session_initialize_dosx(
   uint8_t shared[RUNTIME_DPMI_STARTUP_SESSION_SHARED_DATA_BYTES];
   if (!runtime_dpmi_startup_session_valid(session) || shared_data_linear == 0u)
     return RUNTIME_DPMI_STARTUP_SESSION_REJECTED_INPUT;
-  if (!runtime_mantle_checked_ram_read_v1(shared_data_linear, shared, sizeof(shared)))
+  if (!runtime_machine_checked_ram_read(shared_data_linear, shared, sizeof(shared)))
     return RUNTIME_DPMI_STARTUP_SESSION_GUEST_READ_FAILED;
 
   /* DIVERGENCE(BOP-DIV-069): this is DpmiInitDosx's original field order, but
@@ -78,10 +78,10 @@ uint32_t runtime_dpmi_startup_session_initialize_dosx(
 
 uint32_t runtime_dpmi_startup_session_initialize_app(
   struct runtime_dpmi_startup_session *session,
-  const runtime_cpu_state_v1 *cpu_state, uint32_t current_dta_linear)
+  const runtime_cpu_state *cpu_state, uint32_t current_dta_linear)
 {
   if (!runtime_dpmi_startup_session_valid(session) ||
-      !runtime_cpu_state_v1_valid(cpu_state) ||
+      !runtime_cpu_state_valid(cpu_state) ||
       cpu_state->execution_mode != RUNTIME_CPU_EXECUTION_PROTECTED)
     return RUNTIME_DPMI_STARTUP_SESSION_REJECTED_CPU_MODE;
   /* DpmiInitApp keeps only bit zero of AX and captures the DTA/PSP values
@@ -123,10 +123,10 @@ int runtime_dpmi_startup_session_runtime_stage_dosx(uint32_t shared_data_linear)
 }
 
 int runtime_dpmi_startup_session_runtime_stage_app(
-  const runtime_cpu_state_v1 *cpu_state, uint32_t current_dta_linear)
+  const runtime_cpu_state *cpu_state, uint32_t current_dta_linear)
 {
   if (!runtime_dpmi_startup_session_valid(&runtime_session) ||
-      !runtime_cpu_state_v1_valid(cpu_state)) return 0;
+      !runtime_cpu_state_valid(cpu_state)) return 0;
   runtime_cpu = *cpu_state;
   runtime_current_dta_linear = current_dta_linear;
   return 1;
@@ -142,7 +142,7 @@ int runtime_dpmi_startup_session_runtime_stage_selector_table(
 }
 
 int runtime_dpmi_startup_session_runtime_stage_dispatch(
-  const runtime_cpu_state_v1 *cpu_state, uint32_t index)
+  const runtime_cpu_state *cpu_state, uint32_t index)
 {
   if (!runtime_dpmi_startup_session_runtime_stage_app(cpu_state, 0u) ||
       index >= 25u) return 0;
@@ -161,10 +161,10 @@ int runtime_dpmi_startup_session_runtime_take_dispatch(uint32_t *index)
 }
 
 int runtime_dpmi_startup_session_runtime_copy_cpu(
-  runtime_cpu_state_v1 *cpu_state)
+  runtime_cpu_state *cpu_state)
 {
   if (cpu_state == 0 || !runtime_dpmi_startup_session_valid(&runtime_session) ||
-      !runtime_cpu_state_v1_valid(&runtime_cpu)) return 0;
+      !runtime_cpu_state_valid(&runtime_cpu)) return 0;
   *cpu_state = runtime_cpu;
   return 1;
 }

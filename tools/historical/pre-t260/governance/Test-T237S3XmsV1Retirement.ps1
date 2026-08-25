@@ -22,8 +22,8 @@ $retiredPaths = @(
     'src/bx-vdm/bx_ntvdm_xms_dpmi_plane_v1.h',
     'tests/bx-vdm/bx_ntvdm_xms_package_session_v1_test.c',
     'tests/bx-vdm/bx_ntvdm_xms_dpmi_plane_v1_test.c',
-    'tests/bx-mantle/t199_s31_xms_native_fixture.cc',
-    'tests/bx-mantle/t199_s35_native_bop_composition_fixture.cc'
+    'tests/bx-machine/t199_s31_xms_native_fixture.cc',
+    'tests/bx-machine/t199_s35_native_bop_composition_fixture.cc'
 )
 foreach ($relative in $retiredPaths) {
     Require -Condition (!(Test-Path -LiteralPath (Join-Path $RepositoryRoot $relative))) `

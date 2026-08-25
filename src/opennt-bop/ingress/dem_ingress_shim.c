@@ -1,10 +1,10 @@
 #include "dem_ingress_shim.h"
 
 int runtime_dem_ingress_dispatch(
-    const runtime_instruction_window_v1 *window,
+    const runtime_instruction_window *window,
     runtime_demhndl_call *call)
 {
-    if (!runtime_instruction_window_v1_valid(window) ||
+    if (!runtime_instruction_window_valid(window) ||
         !runtime_demhndl_call_valid(call) || window->valid_bytes < 4u ||
         window->bytes[0] != 0xc4u || window->bytes[1] != 0xc4u ||
         window->bytes[2] != 0x50u || call->service != window->bytes[3] ||

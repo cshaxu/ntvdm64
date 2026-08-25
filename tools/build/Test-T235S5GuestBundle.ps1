@@ -12,7 +12,7 @@ $output = (Resolve-Path -LiteralPath $OutputRoot).Path
 $manifestPath = Join-Path $output 'guest-bundle-manifest.json'
 if (!(Test-Path -LiteralPath $manifestPath)) { throw "Bundle manifest missing: $manifestPath" }
 $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
-if ($manifest.schema -ne 'ntdos64.t235.s5.guest-bundle.v1' -or @($manifest.unresolvedFallbacks).Count -ne 0) {
+if ($manifest.schema -ne 'runner.t235.s5.guest-bundle.v1' -or @($manifest.unresolvedFallbacks).Count -ne 0) {
     throw 'Bundle manifest is incomplete or has an unexpected schema.'
 }
 foreach ($entry in $manifest.entries) {

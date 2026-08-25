@@ -32,7 +32,7 @@ Require (($engine -match 'bx_ntvdm_dem_v2_runtime_session_bind\(\)') -and ($engi
 Require (!(Test-Path -LiteralPath $legacyPath -PathType Leaf)) 'Retired v1 bridge remains in the product tree.'
 
 [ordered]@{
-    schema = 'ntdos64.t230.s15.v2-dem-route-precedence.v1'
+    schema = 'runner.t230.s15.v2-dem-route-precedence.v1'
     formalManifestAdmitsBopV1 = $false
     v2EntryMentionsBopV1 = $false
     engineBindsV2Session = $true

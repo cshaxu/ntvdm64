@@ -1,22 +1,22 @@
-#ifndef NTDOS64_HISTORICAL_TRANSPORT_V2_H
-#define NTDOS64_HISTORICAL_TRANSPORT_V2_H
+#ifndef RUNNER_HISTORICAL_TRANSPORT_V2_H
+#define RUNNER_HISTORICAL_TRANSPORT_V2_H
 
 #include <stdint.h>
 
-#define NTDOS64_HISTORICAL_TRANSPORT_V2_MAGIC 0x3254484eu
-#define NTDOS64_HISTORICAL_TRANSPORT_V2_ABI 2u
+#define RUNNER_HISTORICAL_TRANSPORT_V2_MAGIC 0x3254484eu
+#define RUNNER_HISTORICAL_TRANSPORT_V2_ABI 2u
 
-typedef enum ntdos64_historical_transport_v2_disposition {
-    NTDOS64_HISTORICAL_TRANSPORT_V2_COMPLETED = 0u,
-    NTDOS64_HISTORICAL_TRANSPORT_V2_INVALID_RECORD = 1u,
-    NTDOS64_HISTORICAL_TRANSPORT_V2_NOT_INITIALIZED = 2u,
-    NTDOS64_HISTORICAL_TRANSPORT_V2_UNSUPPORTED = 3u,
-    NTDOS64_HISTORICAL_TRANSPORT_V2_SEQUENCE_ERROR = 4u,
-    NTDOS64_HISTORICAL_TRANSPORT_V2_SESSION_ERROR = 5u,
-    NTDOS64_HISTORICAL_TRANSPORT_V2_HISTORICAL_FAILURE = 6u
-} ntdos64_historical_transport_v2_disposition;
+typedef enum runner_historical_transport_v2_disposition {
+    RUNNER_HISTORICAL_TRANSPORT_V2_COMPLETED = 0u,
+    RUNNER_HISTORICAL_TRANSPORT_V2_INVALID_RECORD = 1u,
+    RUNNER_HISTORICAL_TRANSPORT_V2_NOT_INITIALIZED = 2u,
+    RUNNER_HISTORICAL_TRANSPORT_V2_UNSUPPORTED = 3u,
+    RUNNER_HISTORICAL_TRANSPORT_V2_SEQUENCE_ERROR = 4u,
+    RUNNER_HISTORICAL_TRANSPORT_V2_SESSION_ERROR = 5u,
+    RUNNER_HISTORICAL_TRANSPORT_V2_HISTORICAL_FAILURE = 6u
+} runner_historical_transport_v2_disposition;
 
-typedef struct ntdos64_historical_transport_v2_state {
+typedef struct runner_historical_transport_v2_state {
     uint32_t eax;
     uint32_t ebx;
     uint32_t ecx;
@@ -31,9 +31,9 @@ typedef struct ntdos64_historical_transport_v2_state {
     uint16_t ss;
     uint16_t ip;
     uint16_t flags;
-} ntdos64_historical_transport_v2_state;
+} runner_historical_transport_v2_state;
 
-typedef struct ntdos64_historical_transport_v2_request {
+typedef struct runner_historical_transport_v2_request {
     uint32_t magic;
     uint32_t abi_version;
     uint32_t struct_bytes;
@@ -42,10 +42,10 @@ typedef struct ntdos64_historical_transport_v2_request {
     uint8_t selector;
     uint8_t service_byte;
     uint16_t reserved;
-    ntdos64_historical_transport_v2_state state;
-} ntdos64_historical_transport_v2_request;
+    runner_historical_transport_v2_state state;
+} runner_historical_transport_v2_request;
 
-typedef struct ntdos64_historical_transport_v2_response {
+typedef struct runner_historical_transport_v2_response {
     uint32_t magic;
     uint32_t abi_version;
     uint32_t struct_bytes;
@@ -53,14 +53,14 @@ typedef struct ntdos64_historical_transport_v2_response {
     uint32_t sequence;
     uint32_t disposition;
     uint32_t event_flags;
-    ntdos64_historical_transport_v2_state state;
-} ntdos64_historical_transport_v2_response;
+    runner_historical_transport_v2_state state;
+} runner_historical_transport_v2_response;
 
-_Static_assert(sizeof(ntdos64_historical_transport_v2_state) == 44u,
+_Static_assert(sizeof(runner_historical_transport_v2_state) == 44u,
     "v2 state layout must remain cross-transport stable");
-_Static_assert(sizeof(ntdos64_historical_transport_v2_request) == 68u,
+_Static_assert(sizeof(runner_historical_transport_v2_request) == 68u,
     "v2 request layout must remain cross-transport stable");
-_Static_assert(sizeof(ntdos64_historical_transport_v2_response) == 72u,
+_Static_assert(sizeof(runner_historical_transport_v2_response) == 72u,
     "v2 response layout must remain cross-transport stable");
 
 #endif

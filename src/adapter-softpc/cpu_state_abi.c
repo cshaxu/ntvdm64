@@ -9,7 +9,7 @@ static int runtime_cpu_execution_mode_valid(uint32_t execution_mode)
         execution_mode == RUNTIME_CPU_EXECUTION_V8086;
 }
 
-void runtime_cpu_state_v1_initialize(runtime_cpu_state_v1 *state,
+void runtime_cpu_state_initialize(runtime_cpu_state *state,
     uint32_t execution_mode)
 {
     if (state == 0) return;
@@ -20,7 +20,7 @@ void runtime_cpu_state_v1_initialize(runtime_cpu_state_v1 *state,
     state->execution_mode = execution_mode;
 }
 
-int runtime_cpu_state_v1_valid(const runtime_cpu_state_v1 *state)
+int runtime_cpu_state_valid(const runtime_cpu_state *state)
 {
     return state != 0 && state->magic == RUNTIME_CPU_STATE_ABI_MAGIC &&
         state->abi_version == RUNTIME_CPU_STATE_ABI_VERSION &&

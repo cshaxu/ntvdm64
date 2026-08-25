@@ -69,21 +69,21 @@ uint32_t runtime_dpmi_startup_session_initialize_dosx(
   struct runtime_dpmi_startup_session *session, uint32_t shared_data_linear);
 uint32_t runtime_dpmi_startup_session_initialize_app(
   struct runtime_dpmi_startup_session *session,
-  const runtime_cpu_state_v1 *cpu_state, uint32_t current_dta_linear);
+  const runtime_cpu_state *cpu_state, uint32_t current_dta_linear);
 uint32_t runtime_dpmi_startup_session_publish_selector_table(
   struct runtime_dpmi_startup_session *session, uint32_t selector_table_linear);
 
 void runtime_dpmi_startup_session_runtime_reset(void);
 int runtime_dpmi_startup_session_runtime_stage_dosx(uint32_t shared_data_linear);
 int runtime_dpmi_startup_session_runtime_stage_app(
-  const runtime_cpu_state_v1 *cpu_state, uint32_t current_dta_linear);
+  const runtime_cpu_state *cpu_state, uint32_t current_dta_linear);
 int runtime_dpmi_startup_session_runtime_stage_selector_table(
   uint32_t selector_table_linear);
 int runtime_dpmi_startup_session_runtime_stage_dispatch(
-  const runtime_cpu_state_v1 *cpu_state, uint32_t index);
+  const runtime_cpu_state *cpu_state, uint32_t index);
 int runtime_dpmi_startup_session_runtime_take_dispatch(uint32_t *index);
 int runtime_dpmi_startup_session_runtime_copy_cpu(
-  runtime_cpu_state_v1 *cpu_state);
+  runtime_cpu_state *cpu_state);
 void runtime_dpmi_startup_session_runtime_set_ax(uint16_t value);
 void runtime_dpmi_startup_session_runtime_advance_ip(uint32_t bytes);
 void runtime_dpmi_startup_session_runtime_initialize_dosx(void);

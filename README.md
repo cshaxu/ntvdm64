@@ -1,4 +1,4 @@
-# ntdos64-run
+# runner-run
 
 ## Documentation Governance
 
@@ -8,7 +8,7 @@ with the [project goal](docs/design/GOAL.md), then read the
 and [current status](docs/STATUS.md). Existing research and build records are
 retained through the [governance migration inventory](docs/etc/operations/governance-migration.md).
 
-`ntdos64-run` is an owned, non-invasive Windows research CLI. Its default
+`runner-run` is an owned, non-invasive Windows research CLI. Its default
 build, runtime, and binary have no dependency on `ntvdm64`, Bochs, PCjs, or
 any other external execution implementation. The active engineering objective
 is to repair and compose the OpenNT SoftPC/CCPU path itself. Other codebases
@@ -18,8 +18,8 @@ they are never a runtime, link, build, or acceptance dependency.
 ## Commands
 
 ```text
-ntdos64-run.exe target.exe [arguments...]
-ntdos64-run.exe --engine C:\path\to\byob-engine.exe target.exe [arguments...]
+runner-run.exe target.exe [arguments...]
+runner-run.exe --engine C:\path\to\byob-engine.exe target.exe [arguments...]
 ```
 
 The CLI reads only the executable headers. PE32 and PE32+ targets are started

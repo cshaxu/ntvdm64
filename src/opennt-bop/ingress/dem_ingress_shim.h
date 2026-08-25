@@ -12,7 +12,7 @@
 /* A non-DEM window, incomplete BOP, mismatched service, or invalid call is
  * declined without modifying the supplied result. */
 int runtime_dem_ingress_dispatch(
-    const runtime_instruction_window_v1 *window,
+    const runtime_instruction_window *window,
     runtime_demhndl_call *call);
 
 #endif

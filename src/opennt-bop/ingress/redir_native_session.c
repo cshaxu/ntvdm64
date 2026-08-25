@@ -23,29 +23,29 @@ static runtime_redir_native_session *g_active_session;
 static __declspec(thread) const runtime_demhndl_guest_span *g_scoped_spans;
 static __declspec(thread) uint32_t g_scoped_span_count;
 
-static void resume_with_error(const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome, DWORD error);
-static void resume_success(const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome);
+static void resume_with_error(const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome, DWORD error);
+static void resume_success(const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome);
 static int guest_read_bytes(uint16_t segment, uint16_t offset, uint8_t *bytes,
     uint32_t count);
 static int guest_write_bytes(uint16_t segment, uint16_t offset,
     const uint8_t *bytes, uint32_t count);
-static void set_gpr16(struct runtime_generic_ud_outcome_v1 *outcome,
+static void set_gpr16(struct runtime_generic_ud_outcome *outcome,
     uint32_t index, uint16_t value);
 
-static int event_valid(const struct runtime_generic_ud_event_v1 *event)
+static int event_valid(const struct runtime_generic_ud_event *event)
 {
-    return event != NULL && event->magic == RUNTIME_GENERIC_UD_EVENT_V1_MAGIC &&
-        event->abi_version == RUNTIME_GENERIC_UD_EVENT_V1_VERSION &&
+    return event != NULL && event->magic == RUNTIME_GENERIC_UD_EVENT_MAGIC &&
+        event->abi_version == RUNTIME_GENERIC_UD_EVENT_VERSION &&
         event->struct_bytes == sizeof(*event) && event->vector == 6u &&
         event->window_bytes <= RUNTIME_GENERIC_UD_WINDOW_BYTES;
 }
 
-static void copy_cpu(const struct runtime_generic_ud_event_v1 *source,
-    runtime_cpu_state_v1 *target)
+static void copy_cpu(const struct runtime_generic_ud_event *source,
+    runtime_cpu_state *target)
 {
-    runtime_cpu_state_v1_initialize(target, source->execution_mode);
+    runtime_cpu_state_initialize(target, source->execution_mode);
     target->eax = source->eax; target->ebx = source->ebx; target->ecx = source->ecx;
     target->edx = source->edx; target->esi = source->esi; target->edi = source->edi;
     target->ebp = source->ebp; target->esp = source->esp; target->eip = source->eip;
@@ -54,14 +54,14 @@ static void copy_cpu(const struct runtime_generic_ud_event_v1 *source,
     target->gs = source->gs;
 }
 
-static int copy_outcome(const runtime_cpu_result_v2 *result,
-    struct runtime_generic_ud_outcome_v1 *outcome)
+static int copy_outcome(const runtime_cpu_result *result,
+    struct runtime_generic_ud_outcome *outcome)
 {
-    if (!runtime_cpu_result_v2_valid(result) || outcome == NULL ||
-        result->disposition == RUNTIME_CPU_RESULT_V2_PASS_THROUGH) return 0;
+    if (!runtime_cpu_result_valid(result) || outcome == NULL ||
+        result->disposition == RUNTIME_CPU_RESULT_PASS_THROUGH) return 0;
     memset(outcome, 0, sizeof(*outcome));
-    outcome->abi_version = RUNTIME_GENERIC_UD_EVENT_V1_VERSION;
-    outcome->disposition = result->disposition == RUNTIME_CPU_RESULT_V2_RESUME ?
+    outcome->abi_version = RUNTIME_GENERIC_UD_EVENT_VERSION;
+    outcome->disposition = result->disposition == RUNTIME_CPU_RESULT_RESUME ?
         RUNTIME_GENERIC_UD_RESUME : RUNTIME_GENERIC_UD_STOP;
     outcome->resume_rip = result->resume_rip;
     outcome->gpr16_write_mask = result->cpu_delta.gpr16_write_mask;
@@ -199,7 +199,7 @@ static DWORD WINAPI async_pipe_worker(void *opaque)
     _InterlockedExchange(&record->state, RUNTIME_REDIR_ASYNC_COMPLETE);
     /* This is only a thread-safe physical-line publication.  The CPU timer
      * owns the later native PIC mutation and guest int5c owns continuation. */
-    (void)runtime_mantle_post_physical_irq_v1(14u);
+    (void)runtime_machine_post_physical_irq(14u);
     return 0u;
 }
 
@@ -232,8 +232,8 @@ static void release_async_pipe(runtime_redir_async_pipe_record *record)
     _InterlockedExchange(&record->state, RUNTIME_REDIR_ASYNC_FREE);
 }
 
-static int start_async_pipe(const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome, int write)
+static int start_async_pipe(const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome, int write)
 {
     uint8_t descriptor[24]; uint32_t descriptor_bytes = 20u, token;
     HANDLE original, duplicate = INVALID_HANDLE_VALUE;
@@ -295,8 +295,8 @@ static int start_async_pipe(const struct runtime_generic_ud_event_v1 *event,
     return 1;
 }
 
-static int deliver_async_pipe(const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome)
+static int deliver_async_pipe(const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome)
 {
     uint32_t index; runtime_redir_async_pipe_record *chosen = NULL;
     uint32_t serial = UINT32_MAX; uint8_t result[2];
@@ -336,11 +336,11 @@ static int deliver_async_pipe(const struct runtime_generic_ud_event_v1 *event,
     return 1;
 }
 
-static void resume_with_error(const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome, DWORD error)
+static void resume_with_error(const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome, DWORD error)
 {
     memset(outcome, 0, sizeof(*outcome));
-    outcome->abi_version = RUNTIME_GENERIC_UD_EVENT_V1_VERSION;
+    outcome->abi_version = RUNTIME_GENERIC_UD_EVENT_VERSION;
     outcome->disposition = RUNTIME_GENERIC_UD_RESUME;
     outcome->resume_rip = event->fault_rip + 4u;
     outcome->gpr16_write_mask = 1u;
@@ -349,11 +349,11 @@ static void resume_with_error(const struct runtime_generic_ud_event_v1 *event,
     outcome->eflags_values = event->eflags | 1u;
 }
 
-static void resume_success(const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome)
+static void resume_success(const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome)
 {
     memset(outcome, 0, sizeof(*outcome));
-    outcome->abi_version = RUNTIME_GENERIC_UD_EVENT_V1_VERSION;
+    outcome->abi_version = RUNTIME_GENERIC_UD_EVENT_VERSION;
     outcome->disposition = RUNTIME_GENERIC_UD_RESUME;
     outcome->resume_rip = event->fault_rip + 4u;
     outcome->gpr16_write_mask = 1u;
@@ -404,15 +404,15 @@ static int guest_write_bytes(uint16_t segment, uint16_t offset,
     return 1;
 }
 
-static void set_gpr16(struct runtime_generic_ud_outcome_v1 *outcome,
+static void set_gpr16(struct runtime_generic_ud_outcome *outcome,
     uint32_t index, uint16_t value)
 {
     outcome->gpr16_write_mask |= (1u << index);
     outcome->gpr16_values[index] = value;
 }
 
-static int mailslot_get_record(const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome,
+static int mailslot_get_record(const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome,
     PVR_MAILSLOT_INFO *out_record, HANDLE *out_host)
 {
     PVR_MAILSLOT_INFO record = VrpMapMailslotHandle16(word_at(event->ebx));
@@ -433,8 +433,8 @@ static int mailslot_query(HANDLE host, DWORD *next, DWORD *count)
     return GetMailslotInfo(host, &maximum, next, count, &timeout) != 0;
 }
 
-int runtime_legacy_mailslot_read_rehost(const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome)
+int runtime_mailslot_read_rehost(const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome)
 {
     PVR_MAILSLOT_INFO record;
     HANDLE host;
@@ -466,15 +466,15 @@ int runtime_legacy_mailslot_read_rehost(const struct runtime_generic_ud_event_v1
     return 1;
 }
 
-static int mailslot_terminate(const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome)
+static int mailslot_terminate(const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome)
 {
     return runtime_redir_native_session_invoke_scoped_body(event, outcome,
         runtime_vrmslot_terminate_bop_body, 4u);
 }
 
-static int invoke_mailslot_spans(const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome, void (*body)(void),
+static int invoke_mailslot_spans(const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome, void (*body)(void),
     const runtime_demhndl_guest_span *spans, uint32_t count)
 {
     int handled;
@@ -486,8 +486,8 @@ static int invoke_mailslot_spans(const struct runtime_generic_ud_event_v1 *event
 }
 
 static int dispatch_service(uint8_t service,
-    const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome)
+    const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome)
 {
     switch (service) {
     case 0x00u: /* SVC_RDRINITIALIZE */
@@ -570,8 +570,8 @@ static int dispatch_service(uint8_t service,
 }
 
 int runtime_redir_native_session_dispatch(
-    const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome)
+    const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome)
 {
     if (!session_valid(g_active_session) || g_active_session->bound == 0u ||
         event == NULL || outcome == NULL || event->window_bytes < 4u ||
@@ -581,13 +581,13 @@ int runtime_redir_native_session_dispatch(
 }
 
 int runtime_redir_native_session_invoke_scoped_body(
-    const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome, void (*body)(void),
+    const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome, void (*body)(void),
     uint32_t resume_bytes)
 {
-    runtime_exception_event_v1 boundary;
-    runtime_cpu_state_v1 cpu;
-    runtime_cpu_result_v2 result;
+    runtime_exception_event boundary;
+    runtime_cpu_state cpu;
+    runtime_cpu_result result;
     runtime_ccpu_sas_call call;
 
     if (!session_valid(g_active_session) || g_active_session->bound == 0u ||

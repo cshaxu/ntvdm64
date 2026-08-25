@@ -1,0 +1,3 @@
+#include <stdio.h>
+#include "multi_write_transaction.h"
+int main(void){runtime_exception_event e={RUNTIME_EXCEPTION_ABI_MAGIC,1,sizeof(e),RUNTIME_EXCEPTION_EVENT_CPU_EXCEPTION,0,6,0,0,0x100};runtime_cpu_state c;runtime_multi_write_transaction t;runtime_cpu_state_initialize(&c,RUNTIME_CPU_EXECUTION_REAL);runtime_multi_write_transaction_initialize(&t,&e,&c);if(!runtime_multi_write_add(&t.writes,0x200,2,0))return 1;t.writes.payload_bytes=2;if(!runtime_cpu_result_resume(&t.result,0x104)||!runtime_multi_write_transaction_preflight(&t,0x100000,2))return 2;runtime_cpu_result_pass_through(&t.result);if(runtime_multi_write_transaction_preflight(&t,0x100000,2))return 3;puts("runtime multi-write transaction: atomic boundary contract verified");return 0;}

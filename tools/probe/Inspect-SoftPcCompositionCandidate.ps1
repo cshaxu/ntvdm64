@@ -73,7 +73,7 @@ $watchSummary = foreach ($symbol in $watchSymbols) {
 }
 
 $record = [pscustomobject]@{
-    Schema = 'ntdos64.softpc-composition-candidate.v1'
+    Schema = 'runner.softpc-composition-candidate.v1'
     InspectedAtUtc = [DateTime]::UtcNow.ToString('o')
     Candidate = [pscustomobject]@{
         Path = $candidate.FullName
@@ -90,7 +90,7 @@ $record = [pscustomobject]@{
     UndefinedSymbols = @($undefinedSymbols)
     TextHits = @($textHits)
     WatchSymbols = @($watchSummary)
-    Admission = 'Inspection only. This record does not admit the candidate to src/opennt, CMake, a fixture, or runtime.'
+    Admission = 'Inspection only. This record does not admit the candidate to an OpenNT component, CMake, a fixture, or runtime.'
 }
 
 $stem = [IO.Path]::GetFileNameWithoutExtension($candidate.Name)
@@ -132,7 +132,7 @@ if ($textHits.Count) {
     foreach ($hit in $textHits) { $lines.Add("- line $($hit.Line): ``$($hit.Text)``") }
 }
 $lines.Add('')
-$lines.Add('Next step: assess this record against `docs/R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md`; do not copy the candidate into `src/opennt` before that review.')
+$lines.Add('Next step: perform the documented source-policy review; do not copy the candidate into an OpenNT component before that review.')
 $lines | Set-Content -LiteralPath $markdownPath -Encoding utf8
 
 [pscustomobject]@{

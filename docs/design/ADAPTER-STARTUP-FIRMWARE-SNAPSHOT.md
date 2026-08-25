@@ -55,7 +55,7 @@ memory directly.
 ## ABI Direction
 
 Do not mutate the existing single-range observation transaction v1. Add a
-separate fixed-size `startup_snapshot_transaction_v1` with:
+separate fixed-size `runtime_startup_snapshot_transaction` with:
 
 - ABI header and zero flags;
 - one copied `#UD` event and CPU snapshot;
@@ -96,8 +96,8 @@ contract remains stable and independently testable.
 ## r17 Fixture Declaration
 
 `Invoke-Bochs26NativeResetFixture.ps1 -StockFirmwareStartupSnapshotProbe`
-selects the custom `ntdos64-observation-fixture.exe` target, explicitly boots
+selects the custom `runner-observation-fixture.exe` target, explicitly boots
 the same neutral floppy, and supplies exactly the four ranges above through
 the BYOB profile. It expects only the opaque
-`ntdos64 adapter snapshot copied digest=...` log predicate before the bounded
+`runner adapter snapshot copied digest=...` log predicate before the bounded
 benchmark stop. The fixture does not preload NTIO or add a target command.

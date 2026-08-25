@@ -110,7 +110,7 @@ $rows = foreach ($entry in $inventory) {
     } elseif ($selector -eq 0x52) {
         $prefix = 'generic-ud-bridge -> native-bop-composition -> xms-package-session'
         if (In-Set $service @(0,1,2,3,4,5,10,11)) {
-            $route = "$prefix -> mantle A20/extended-memory mechanical capability"
+            $route = "$prefix -> machine A20/extended-memory mechanical capability"
             $relation = 'changed'
             $shim = 'post-T200 XMS session expanded to move/page-size/free-query in addition to A20/allocation'
         } else { $route = "$prefix -> typed controlled stop (UMB/INT15 prerequisites unadmitted)"; $fallback = 'explicit non-successful XMS package outcome' }

@@ -3,8 +3,8 @@
 #include <string.h>
 #include "demdasd.h"
 
-#define NTDOS64_MEDIA_MAX_DRIVES 26
-#define NTDOS64_BOOT_SECTOR_SIZE 512
+#define RUNNER_MEDIA_MAX_DRIVES 26
+#define RUNNER_BOOT_SECTOR_SIZE 512
 
 typedef struct {
     HANDLE handle;
@@ -13,16 +13,16 @@ typedef struct {
     DISK_GEOMETRY geometry;
     BOOL writable;
     BOOL configured;
-} NTDOS64_IMAGE;
+} RUNNER_IMAGE;
 
-static NTDOS64_IMAGE configured[NTDOS64_MEDIA_MAX_DRIVES];
-static BYTE physical[NTDOS64_MEDIA_MAX_DRIVES];
+static RUNNER_IMAGE configured[RUNNER_MEDIA_MAX_DRIVES];
+static BYTE physical[RUNNER_MEDIA_MAX_DRIVES];
 static BYTE physical_count;
 
 /* Wrapper/session teardown only; original DEM does not call this helper. */
-VOID ntdos64_media_reset(VOID) {
+VOID runner_media_reset(VOID) {
     BYTE drive;
-    for (drive = 0; drive < NTDOS64_MEDIA_MAX_DRIVES; ++drive) {
+    for (drive = 0; drive < RUNNER_MEDIA_MAX_DRIVES; ++drive) {
         if (configured[drive].configured) CloseHandle(configured[drive].handle);
     }
     ZeroMemory(configured, sizeof(configured));
@@ -30,7 +30,7 @@ VOID ntdos64_media_reset(VOID) {
     physical_count = 0;
 }
 
-static BOOL range_ok(const NTDOS64_IMAGE *image, const LARGE_INTEGER *offset, ULONG size) {
+static BOOL range_ok(const RUNNER_IMAGE *image, const LARGE_INTEGER *offset, ULONG size) {
     ULONGLONG start;
     if (offset == NULL || offset->QuadPart < 0) return FALSE;
     start = (ULONGLONG)offset->QuadPart;
@@ -38,21 +38,21 @@ static BOOL range_ok(const NTDOS64_IMAGE *image, const LARGE_INTEGER *offset, UL
         (ULONGLONG)size <= (ULONGLONG)image->length.QuadPart - start;
 }
 
-static NTDOS64_IMAGE *image_for_physical(BYTE drive) {
+static RUNNER_IMAGE *image_for_physical(BYTE drive) {
     if (drive >= physical_count) return NULL;
     return &configured[physical[drive]];
 }
 
 /* Future wrapper-only setup API. A DOS request never supplies this path. */
-BOOL ntdos64_media_configure_fdisk_image(BYTE logical_drive, LPCSTR path, BOOL writable) {
-    NTDOS64_IMAGE *image;
-    BYTE sector[NTDOS64_BOOT_SECTOR_SIZE];
+BOOL runner_media_configure_fdisk_image(BYTE logical_drive, LPCSTR path, BOOL writable) {
+    RUNNER_IMAGE *image;
+    BYTE sector[RUNNER_BOOT_SECTOR_SIZE];
     DWORD read;
     LARGE_INTEGER zero;
     DWORD attributes;
     HANDLE handle;
 
-    if (logical_drive >= NTDOS64_MEDIA_MAX_DRIVES || path == NULL || !*path ||
+    if (logical_drive >= RUNNER_MEDIA_MAX_DRIVES || path == NULL || !*path ||
         strncmp(path, "\\\\.\\", 4) == 0) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
@@ -85,8 +85,8 @@ BOOL ntdos64_media_configure_fdisk_image(BYTE logical_drive, LPCSTR path, BOOL w
 }
 
 BOOL nt_fdisk_init(BYTE logical_drive, PBPB bpb, PDISK_GEOMETRY geometry) {
-    NTDOS64_IMAGE *image;
-    if (logical_drive >= NTDOS64_MEDIA_MAX_DRIVES || bpb == NULL || geometry == NULL || physical_count == NTDOS64_MEDIA_MAX_DRIVES) {
+    RUNNER_IMAGE *image;
+    if (logical_drive >= RUNNER_MEDIA_MAX_DRIVES || bpb == NULL || geometry == NULL || physical_count == RUNNER_MEDIA_MAX_DRIVES) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     image = &configured[logical_drive];
@@ -97,7 +97,7 @@ BOOL nt_fdisk_init(BYTE logical_drive, PBPB bpb, PDISK_GEOMETRY geometry) {
 }
 
 static ULONG transfer(BYTE drive, PLARGE_INTEGER offset, ULONG size, PBYTE buffer, BOOL write) {
-    NTDOS64_IMAGE *image = image_for_physical(drive);
+    RUNNER_IMAGE *image = image_for_physical(drive);
     DWORD completed;
     if (image == NULL || buffer == NULL || !range_ok(image, offset, size) || (write && !image->writable)) {
         SetLastError(write && image != NULL && !image->writable ? ERROR_ACCESS_DENIED : ERROR_SECTOR_NOT_FOUND); return 0;
@@ -109,5 +109,5 @@ static ULONG transfer(BYTE drive, PLARGE_INTEGER offset, ULONG size, PBYTE buffe
 
 ULONG nt_fdisk_read(BYTE drive, PLARGE_INTEGER offset, ULONG size, PBYTE buffer) { return transfer(drive, offset, size, buffer, FALSE); }
 ULONG nt_fdisk_write(BYTE drive, PLARGE_INTEGER offset, ULONG size, PBYTE buffer) { return transfer(drive, offset, size, buffer, TRUE); }
-BOOL nt_fdisk_verify(BYTE drive, PLARGE_INTEGER offset, ULONG size) { NTDOS64_IMAGE *image = image_for_physical(drive); if (image == NULL || !range_ok(image, offset, size)) { SetLastError(ERROR_SECTOR_NOT_FOUND); return FALSE; } return TRUE; }
+BOOL nt_fdisk_verify(BYTE drive, PLARGE_INTEGER offset, ULONG size) { RUNNER_IMAGE *image = image_for_physical(drive); if (image == NULL || !range_ok(image, offset, size)) { SetLastError(ERROR_SECTOR_NOT_FOUND); return FALSE; } return TRUE; }
 BOOL nt_fdisk_close(BYTE drive) { return image_for_physical(drive) != NULL; }

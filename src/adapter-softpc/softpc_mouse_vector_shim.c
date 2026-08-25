@@ -50,7 +50,7 @@ int runtime_softpc_mouse_vector_load_table_word(uint16_t byte_offset,
         g_call.bx > UINT16_MAX - byte_offset ||
         !real_address(g_call.cs, (uint16_t)(g_call.bx + byte_offset),
             sizeof(bytes), &address) ||
-        !runtime_mantle_checked_ram_read_v1(address, bytes, sizeof(bytes))) {
+        !runtime_machine_checked_ram_read(address, bytes, sizeof(bytes))) {
         g_call.failed = 1u;
         return 0;
     }
@@ -69,7 +69,7 @@ int runtime_softpc_mouse_vector_store_int33(
     vector[1] = (uint8_t)(offset >> 8);
     vector[2] = (uint8_t)segment;
     vector[3] = (uint8_t)(segment >> 8);
-    if (!runtime_mantle_checked_ram_write_v1(0xccu, vector,
+    if (!runtime_machine_checked_ram_write(0xccu, vector,
             sizeof(vector))) {
         g_call.failed = 1u;
         return 0;

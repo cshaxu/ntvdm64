@@ -18,11 +18,11 @@ int runtime_opennt_direct_access_dialog(const CHAR *message);
 /* The original host owner returns void.  The composition boundary observes
  * the public-dialog choice here, where the modern Win32 implementation owns
  * it, rather than extending an imported OpenNT header with project state. */
-enum runtime_opennt_direct_access_choice_v1 {
-    RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_V1_IGNORE = 1,
-    RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_V1_TERMINATE = 2
+enum runtime_opennt_direct_access_choice {
+    RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_IGNORE = 1,
+    RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_TERMINATE = 2
 };
-enum runtime_opennt_direct_access_choice_v1
+enum runtime_opennt_direct_access_choice
 runtime_opennt_direct_access_last_choice(void);
 int runtime_opennt_direct_access_category_should_prompt(ULONG category);
 DWORD runtime_opennt_direct_access_category_bits_get(void);

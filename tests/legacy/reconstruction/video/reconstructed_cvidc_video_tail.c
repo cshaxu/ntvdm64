@@ -7,7 +7,7 @@ extern void setWritePointers(void);
 extern void setReadPointers(IUH readset);
 extern void setMarkPointers(IUH markset);
 
-int ntdos64_reconstructed_cvidc_video_tail_initialize(void)
+int runner_reconstructed_cvidc_video_tail_initialize(void)
 {
     /* The 0--77 prefix is supplied by the separately compiled original vglfunc.c. */
     if ((Video.setWritePointers != NULL && Video.setWritePointers != setWritePointers) ||

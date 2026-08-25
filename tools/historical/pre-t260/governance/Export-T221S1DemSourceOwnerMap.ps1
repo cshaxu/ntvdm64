@@ -57,7 +57,7 @@ $output = [IO.Path]::GetFullPath($OutputPath)
 $parent = Split-Path -Parent $output
 if (-not (Test-Path -LiteralPath $parent)) { New-Item -ItemType Directory -Path $parent | Out-Null }
 [ordered]@{
-    schema = 'ntdos64.t221.s1.dem-source-owner-map.v1'
+    schema = 'runner.t221.s1.dem-source-owner-map.v1'
     generatedUtc = [DateTime]::UtcNow.ToString('o')
     sourceRoot = 'src/opennt/base/mvdm/dos/dem'
     sourceCount = $sourceFiles.Count

@@ -29,9 +29,9 @@ static int append_u64(char **cursor, size_t *remaining, uint64_t value)
     return 1;
 }
 
-int runtime_startup_snapshot_evidence_v1_write(
+int runtime_startup_snapshot_evidence_write(
     const wchar_t *byob_root, const wchar_t *file_name,
-    const runtime_startup_snapshot_transaction_v1 *transaction,
+    const runtime_startup_snapshot_transaction *transaction,
     const uint8_t *output, uint64_t output_bytes, uint64_t digest)
 {
     wchar_t path[MAX_PATH], temporary[MAX_PATH];
@@ -45,7 +45,7 @@ int runtime_startup_snapshot_evidence_v1_write(
 
     if (byob_root == 0 || *byob_root == L'\0' ||
         !byob_component_name_safe(file_name) || transaction == 0 || output == 0 ||
-        !runtime_startup_snapshot_transaction_v1_preflight(transaction,
+        !runtime_startup_snapshot_transaction_preflight(transaction,
             UINT64_C(0x100000), output_bytes) ||
         wcslen(byob_root) + wcslen(file_name) + 6u > MAX_PATH) return 0;
     swprintf(path, MAX_PATH, L"%ls%ls%ls", byob_root,
@@ -58,7 +58,7 @@ int runtime_startup_snapshot_evidence_v1_write(
     cursor = record;
     remaining = capacity;
     if (!append_text(&cursor, &remaining,
-        "{\"schema\":\"ntdos64-startup-snapshot-evidence-v1\",\"boundary\":{\"vector\":" ) ||
+        "{\"schema\":\"ntvdm64-startup-snapshot-evidence\",\"boundary\":{\"vector\":" ) ||
         !append_u64(&cursor, &remaining, transaction->boundary.vector) ||
         !append_text(&cursor, &remaining, ",\"fault_rip\":") ||
         !append_u64(&cursor, &remaining, transaction->boundary.fault_rip) ||
@@ -70,7 +70,7 @@ int runtime_startup_snapshot_evidence_v1_write(
         !append_u64(&cursor, &remaining, transaction->cpu_before.cs) ||
         !append_text(&cursor, &remaining, "},\"ranges\":[")) goto done;
     for (index = 0u; index < transaction->range_count; ++index) {
-        const runtime_startup_snapshot_range_v1 *range = &transaction->ranges[index];
+        const runtime_startup_snapshot_range *range = &transaction->ranges[index];
         uint64_t byte_index;
         if ((index != 0u && !append_text(&cursor, &remaining, ",")) ||
             !append_text(&cursor, &remaining, "{\"id\":") ||

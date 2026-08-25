@@ -9,7 +9,7 @@ extern void c_cpu_init(void);
 extern void c_cpu_terminate(void);
 extern void sas_init(uint32_t size);
 extern void sas_term(void);
-extern unsigned long ntdos64_ccpu_sm0_unexpected_calls(void);
+extern unsigned long runner_ccpu_sm0_unexpected_calls(void);
 extern int DemDispatch(unsigned long service);
 extern uint8_t getAL(void);
 extern uint8_t getDH(void);
@@ -28,7 +28,7 @@ int main(void) {
         getDL() == 0u || getDL() > 31u || getCX() < 1980u) {
         result |= 2;
     }
-    if (ntdos64_ccpu_sm0_unexpected_calls() != 0) {
+    if (runner_ccpu_sm0_unexpected_calls() != 0) {
         result |= 4;
     }
     c_cpu_terminate();

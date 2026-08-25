@@ -75,7 +75,7 @@ and no subsequent capability is admitted by this result alone.
 The C11 action ABI, extended single-pending-operation session test, and the
 focused `DemSetDTALocation` test pass. The r20 private native container
 incrementally rebuilt `cpu/exception.o`, the DTA service and adapter runtime,
-then linked `ntdos64-observation-fixture.exe`; no complete `bochs.exe` build
+then linked `runner-observation-fixture.exe`; no complete `bochs.exe` build
 was run. Its bounded source-built NTIO trace records accepted `50:1b` at
 `9346:7484` with `next=7488`, followed by the next unhandled source boundary
 `50:32` at `9346:7490`. That is runtime evidence for this narrow registration

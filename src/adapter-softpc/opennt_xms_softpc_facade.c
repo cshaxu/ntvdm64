@@ -8,7 +8,7 @@
 
 typedef struct runtime_xms_active_context {
     runtime_xms_softpc_context context;
-    runtime_cpu_state_v1 cpu;
+    runtime_cpu_state cpu;
 } runtime_xms_active_context;
 
 static __declspec(thread) runtime_xms_active_context *g_active_context;
@@ -38,14 +38,14 @@ static void set_gpr(uint32_t index, USHORT value)
     default: return;
     }
     *target = (*target & 0xffff0000u) | value;
-    (void)runtime_cpu_delta_v1_set_gpr16(&active->context.result->cpu_delta,
+    (void)runtime_cpu_delta_set_gpr16(&active->context.result->cpu_delta,
         index, value);
 }
 
 int runtime_xms_softpc_context_valid(const runtime_xms_softpc_context *context)
 {
     return context != NULL && context->cpu != NULL &&
-        runtime_cpu_state_v1_valid(context->cpu) &&
+        runtime_cpu_state_valid(context->cpu) &&
         context->cpu->execution_mode == RUNTIME_CPU_EXECUTION_REAL &&
         context->result != NULL && context->guest_read != NULL &&
         context->guest_write != NULL;
@@ -82,7 +82,7 @@ void runtime_xms_set_bl(USHORT value)
 void runtime_xms_set_cx(USHORT value) { set_gpr(1u, value); }
 void runtime_xms_set_dx(USHORT value) { set_gpr(2u, value); }
 void runtime_xms_set_cf(int value)
-{ (void)runtime_cpu_result_v2_set_cf(active_context()->context.result, value); }
+{ (void)runtime_cpu_result_set_cf(active_context()->context.result, value); }
 
 PVOID runtime_xms_get_vdm_addr(USHORT segment, USHORT offset)
 {
@@ -162,7 +162,7 @@ int runtime_xms_move_block_from_guest(USHORT segment, USHORT offset)
 WORD runtime_xms_linear_to_segment(PVOID address)
 {
     (void)address;
-    return 0u; /* Current mantle has no admitted UMB map. */
+    return 0u; /* Current machine has no admitted UMB map. */
 }
 
 static int range_readable(uint32_t address, uint32_t bytes)
@@ -198,31 +198,31 @@ BOOL ReserveUMB(ULONG owner, PVOID *address, PULONG bytes)
 
 void runtime_xms_a20_set(int enabled)
 {
-    struct runtime_a20_capability_request_v1 request = {0};
-    struct runtime_a20_capability_result_v1 result = {0};
-    request.version = RUNTIME_A20_CAPABILITY_V1_VERSION;
+    struct runtime_a20_capability_request request = {0};
+    struct runtime_a20_capability_result result = {0};
+    request.version = RUNTIME_A20_CAPABILITY_VERSION;
     request.operation = RUNTIME_A20_CAPABILITY_SET;
     request.requested_enabled = enabled ? 1u : 0u;
-    runtime_a20_capability_v1_dispatch(&request, &result);
+    runtime_a20_capability_dispatch(&request, &result);
 }
 
 int runtime_xms_a20_enabled(void)
 {
-    struct runtime_a20_capability_request_v1 request = {0};
-    struct runtime_a20_capability_result_v1 result = {0};
-    request.version = RUNTIME_A20_CAPABILITY_V1_VERSION;
+    struct runtime_a20_capability_request request = {0};
+    struct runtime_a20_capability_result result = {0};
+    request.version = RUNTIME_A20_CAPABILITY_VERSION;
     request.operation = RUNTIME_A20_CAPABILITY_QUERY;
-    runtime_a20_capability_v1_dispatch(&request, &result);
+    runtime_a20_capability_dispatch(&request, &result);
     return result.status == RUNTIME_A20_CAPABILITY_OK && result.enabled != 0u;
 }
 
 int runtime_xms_a20_available(void)
 {
-    struct runtime_a20_capability_request_v1 request = {0};
-    struct runtime_a20_capability_result_v1 result = {0};
-    request.version = RUNTIME_A20_CAPABILITY_V1_VERSION;
+    struct runtime_a20_capability_request request = {0};
+    struct runtime_a20_capability_result result = {0};
+    request.version = RUNTIME_A20_CAPABILITY_VERSION;
     request.operation = RUNTIME_A20_CAPABILITY_QUERY;
-    runtime_a20_capability_v1_dispatch(&request, &result);
+    runtime_a20_capability_dispatch(&request, &result);
     return result.status == RUNTIME_A20_CAPABILITY_OK;
 }
 
@@ -240,9 +240,9 @@ void runtime_softpc_int15_sas_loadw(uint32_t address, WORD *value)
 }
 
 int runtime_softpc_int15_watch_state_load(WORD *offset, WORD *segment)
-{ return runtime_ivt_watch_v1_copy_expected(0x15u, offset, segment); }
+{ return runtime_ivt_watch_copy_expected(0x15u, offset, segment); }
 int runtime_softpc_int15_watch_state_store(WORD offset, WORD segment)
-{ return runtime_ivt_watch_v1_store_expected(0x15u, offset, segment); }
+{ return runtime_ivt_watch_store_expected(0x15u, offset, segment); }
 
 void sas_enable_20_bit_wrapping(void) { runtime_xms_a20_set(0); }
 void sas_disable_20_bit_wrapping(void) { runtime_xms_a20_set(1); }

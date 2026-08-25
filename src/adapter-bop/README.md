@@ -15,4 +15,4 @@ code, not an imported OpenNT mirror.
 
 | ID | Original definition purpose | Divergence reason | Replacement implementation | Production file(s) |
 | --- | --- | --- | --- | --- |
-| `ADAPTER-BOP-001` | NT4 connected BOP dispatch directly to its product host. | The modern component graph must not make Bochs or its generic CPU entry selector-aware. | A same-runtime, `app`-owned route binding forwards only the copied event and typed outcome; the route remains in `opennt-bop`. | `bop_ingress_v1.c`, `bop_ingress_v1.h` |
+| `ADAPTER-BOP-001` | NT4 connected BOP dispatch directly to its product host. | The modern component graph must not make Bochs or its generic CPU entry selector-aware. | A same-runtime, `app`-owned route binding forwards only the copied event and typed outcome; the route remains in `opennt-bop`. | `bop_ingress.c`, `bop_ingress.h` |

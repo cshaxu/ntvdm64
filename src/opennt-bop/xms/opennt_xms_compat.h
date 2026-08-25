@@ -34,9 +34,9 @@ typedef struct _XMSUMB_ {
 
 typedef struct runtime_xms_call {
     uint32_t magic, abi_version, struct_bytes, service;
-    const runtime_exception_event_v1 *boundary;
-    const runtime_cpu_state_v1 *cpu;
-    runtime_cpu_result_v2 *result;
+    const runtime_exception_event *boundary;
+    const runtime_cpu_state *cpu;
+    runtime_cpu_result *result;
     void *guest_state;
     runtime_xms_guest_read_fn guest_read;
     runtime_xms_guest_write_fn guest_write;

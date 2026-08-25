@@ -3,7 +3,7 @@
 
 extern void c_cpu_init(void);
 extern void c_cpu_terminate(void);
-extern unsigned long ntdos64_ccpu_host_unexpected_calls(void);
+extern unsigned long runner_ccpu_host_unexpected_calls(void);
 extern uint16_t c_getAX(void);
 extern uint16_t c_getDX(void);
 extern uint16_t c_getSTATUS(void);
@@ -20,7 +20,7 @@ extern void setZF(uint32_t value);
 
 int main(void) {
     c_cpu_init();
-    if (ntdos64_ccpu_host_unexpected_calls() != 0) return 5;
+    if (runner_ccpu_host_unexpected_calls() != 0) return 5;
     if (getAX() != 0 || getDX() != 0x0303 || getDS() != 0 || getES() != 0) return 1;
 
     setAX(0x1234);

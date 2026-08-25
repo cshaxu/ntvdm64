@@ -29,7 +29,7 @@ foreach ($item in $items) {
     if ((Get-Item -LiteralPath $destination).Length -ne $item.bytes -or (Get-Sha256 $destination) -ne $item.sha256) { throw "Copied S48 identity mismatch for $($item.role)" }
 }
 $profile = [ordered]@{
-    schema='ntdos64-byob-profile-v8'; profile='nt4-en-us-cli-stream-v8'; architecture='x86'; locale='en-US'; compatibility_group='t225-s48-guest-exec-lifecycle-ledger'
+    schema='runner-byob-profile-v8'; profile='nt4-en-us-cli-stream-v8'; architecture='x86'; locale='en-US'; compatibility_group='t225-s48-guest-exec-lifecycle-ledger'
     components=@($items | ForEach-Object { [ordered]@{role=$_.role;file_name=$_.file;required=$true;bytes=$_.bytes;sha256=$_.sha256;version=$null} })
     features=@(); owner_note='T225 S48 source-built whole-lifecycle ledger fixture; TARGET.EXE is a byte-identical profile alias for source-built SHARE.EXE.'
     guest_command_placement=[ordered]@{path='\COMMAND.COM';drive_index=2}
@@ -41,5 +41,5 @@ $profile = [ordered]@{
 [IO.File]::WriteAllText((Join-Path $output 'profile.json'), (($profile | ConvertTo-Json -Depth 8) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 [IO.File]::WriteAllText((Join-Path $output 'fixture-config.nt'), "files=20`r`n", [Text.UTF8Encoding]::new($false))
 [IO.File]::WriteAllText((Join-Path $output 'fixture-autoexec.nt'), '', [Text.UTF8Encoding]::new($false))
-[ordered]@{schema='ntdos64.t225.s48.guest-exec-lifecycle-ledger-inputs.v1';classification='primary-original-toolchain-source-built';sourceRoot=$root;inputs=$items;targetAlias=[ordered]@{source_role='share';source_name='SHARE.EXE';profile_name='TARGET.EXE';content_changed=$false};allowedUse=@('T225 S48 bounded Direct/Readonly whole-lifecycle ledger observation');forbiddenUse=@('reference fallback','default runtime discovery','release packaging','BOP semantic expansion','Overlay selection','Virtual selection')} | ConvertTo-Json -Depth 7 | ForEach-Object { [IO.File]::WriteAllText((Join-Path $output 'guest-exec-lifecycle-ledger-inputs-manifest.json'), $_ + [Environment]::NewLine, [Text.UTF8Encoding]::new($false)) }
+[ordered]@{schema='runner.t225.s48.guest-exec-lifecycle-ledger-inputs.v1';classification='primary-original-toolchain-source-built';sourceRoot=$root;inputs=$items;targetAlias=[ordered]@{source_role='share';source_name='SHARE.EXE';profile_name='TARGET.EXE';content_changed=$false};allowedUse=@('T225 S48 bounded Direct/Readonly whole-lifecycle ledger observation');forbiddenUse=@('reference fallback','default runtime discovery','release packaging','BOP semantic expansion','Overlay selection','Virtual selection')} | ConvertTo-Json -Depth 7 | ForEach-Object { [IO.File]::WriteAllText((Join-Path $output 'guest-exec-lifecycle-ledger-inputs-manifest.json'), $_ + [Environment]::NewLine, [Text.UTF8Encoding]::new($false)) }
 Write-Host "Staged source-built T225 S48 guest lifecycle-ledger fixture inputs: $output"

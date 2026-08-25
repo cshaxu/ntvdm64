@@ -26,7 +26,7 @@ New-Item -ItemType Directory -Force -Path $build, (Join-Path $build 'obj') | Out
 $compiler = & cmd.exe /d /s /c ('call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && (cl.exe /Bv 2>&1 & exit /b 0)') 2>&1
 if ($LASTEXITCODE -ne 0) { throw 'Unable to query MSVC identity.' }
 $module = [ordered]@{
-    schema = 'ntdos64.t225.s7.ninja-module-manifest.v1'
+    schema = 'runner.t225.s7.ninja-module-manifest.v1'
     architecture = 'x64'
     runtimeLibrary = '/MT'
     cpuConfiguration = 'CPU5/Pentium-MMX, non-x86-64'
@@ -34,7 +34,7 @@ $module = [ordered]@{
     modules = @(
         [ordered]@{ name = 'bx-vdm'; sources = @('src/bx-vdm/bx_ntvdm_cpu_state_abi.c'); disposition = 'admitted focused source closure' },
         [ordered]@{ name = 'bx-core'; sources = @(); disposition = 'awaiting extraction from audited CPU5 seed manifest' },
-        [ordered]@{ name = 'bx-mantle'; sources = @(); disposition = 'awaiting extraction from audited CPU5 seed manifest' },
+        [ordered]@{ name = 'bx-machine'; sources = @(); disposition = 'awaiting extraction from audited CPU5 seed manifest' },
         [ordered]@{ name = 'opennt-host'; sources = @(); disposition = 'awaiting independently composable provider closure' },
         [ordered]@{ name = 'cli'; sources = @(); disposition = 'awaiting CLI target admission' }
     )
@@ -89,5 +89,5 @@ $graph = @(
     'default bx-vdm-cpu-state-abi-fixture.exe'
 )
 $graph | Set-Content -LiteralPath (Join-Path $build 'build.ninja') -Encoding ascii
-[ordered]@{ schema = 'ntdos64.t225.s7.ninja-graph.v1'; buildRoot = $build; manifest = 'module-manifest.json'; configurationSha256 = $configurationHash; graph = 'build.ninja'; executor = $ninja.Source; architecture = 'x64'; runtimeLibrary = '/MT'; deps = 'msvc'; showIncludes = $true; fixture = 'bx-vdm-cpu-state-abi-fixture.exe'; formalCacheExecutor = 'Ninja'; customCacheDisposition = 'P1 evidence only' } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $build 't225-s7-ninja-graph.json') -Encoding utf8
+[ordered]@{ schema = 'runner.t225.s7.ninja-graph.v1'; buildRoot = $build; manifest = 'module-manifest.json'; configurationSha256 = $configurationHash; graph = 'build.ninja'; executor = $ninja.Source; architecture = 'x64'; runtimeLibrary = '/MT'; deps = 'msvc'; showIncludes = $true; fixture = 'bx-vdm-cpu-state-abi-fixture.exe'; formalCacheExecutor = 'Ninja'; customCacheDisposition = 'P1 evidence only' } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $build 't225-s7-ninja-graph.json') -Encoding utf8
 Write-Host "Generated T225 S7 Ninja graph: $build"

@@ -7,18 +7,14 @@
 #include "cpu.h"
 #include "bochs-core-overlay/cpu/opaque_callback_private.h"
 
-#ifndef RUNTIME_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
-#if defined(BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION)
-#define RUNTIME_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
-#else
-#define RUNTIME_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION 0
-#endif
+#ifndef RUNTIME_ENABLE_MACHINE_INTERRUPT_RETURN_OBSERVATION
+#define RUNTIME_ENABLE_MACHINE_INTERRUPT_RETURN_OBSERVATION 0
 #endif
 
 enum { BOCHS_CORE_OVERLAY_INTERRUPT_RETURN_VERSION = 1u,
   BOCHS_CORE_OVERLAY_INTERRUPT_RETURN_TAG = 0x42584952u };
 
-struct bochs_core_overlay_interrupt_return_v1 {
+struct bochs_core_overlay_interrupt_return {
   Bit32u version, cpu_id;
   Bit64u sequence, rip;
   Bit32u eflags, sp;
@@ -30,9 +26,9 @@ struct bochs_core_overlay_interrupt_return_v1 {
 
 void BX_CPU_C::overlay_observe_interrupt_return(unsigned width)
 {
-#if RUNTIME_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
+#if RUNTIME_ENABLE_MACHINE_INTERRUPT_RETURN_OBSERVATION
   if (real_mode() || v8086_mode()) {
-    bochs_core_overlay_interrupt_return_v1 record;
+    bochs_core_overlay_interrupt_return record;
     memset(&record, 0, sizeof(record));
     record.version = BOCHS_CORE_OVERLAY_INTERRUPT_RETURN_VERSION;
     record.cpu_id = bx_cpuid;
@@ -48,7 +44,7 @@ void BX_CPU_C::overlay_observe_interrupt_return(unsigned width)
     record.execution_mode = real_mode() ? 1u : 3u;
     record.operand_width = (Bit8u)width;
     record.opaque_tag = BOCHS_CORE_OVERLAY_INTERRUPT_RETURN_TAG;
-    (void)bochs_core_overlay_opaque_callback_v1_invoke(&record, sizeof(record), 0, 0);
+    (void)bochs_core_overlay_opaque_callback_invoke(&record, sizeof(record), 0, 0);
   }
 #else
   (void)width;

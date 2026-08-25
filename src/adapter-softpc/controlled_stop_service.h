@@ -4,10 +4,10 @@
 #include "cpu_result.h"
 #include "exception_abi.h"
 
-int runtime_controlled_stop_service_v1_dispatch(
-    const runtime_exception_event_v1 *event,
-    const runtime_cpu_state_v1 *cpu,
-    const runtime_instruction_window_v1 *window,
-    runtime_cpu_result_v2 *result);
+int runtime_controlled_stop_service_dispatch(
+    const runtime_exception_event *event,
+    const runtime_cpu_state *cpu,
+    const runtime_instruction_window *window,
+    runtime_cpu_result *result);
 
 #endif

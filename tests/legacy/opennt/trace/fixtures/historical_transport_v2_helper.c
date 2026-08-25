@@ -22,8 +22,8 @@ int main(int argc, char **argv)
     HANDLE pipe;
     char *end = NULL;
     unsigned long token;
-    ntdos64_historical_transport_v2_request request;
-    ntdos64_historical_transport_v2_response response;
+    runner_historical_transport_v2_request request;
+    runner_historical_transport_v2_response response;
     int result = 1;
 
     if (argc != 5 || strcmp(argv[1], "--pipe") != 0 ||
@@ -33,19 +33,19 @@ int main(int argc, char **argv)
     pipe = CreateFileA(argv[2], GENERIC_READ | GENERIC_WRITE, 0, NULL,
         OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (pipe == INVALID_HANDLE_VALUE) return 4;
-    if (!ntdos64_historical_bios_bridge_v2_initialize()) {
+    if (!runner_historical_bios_bridge_v2_initialize()) {
         CloseHandle(pipe);
         return 5;
     }
     if (!read_exact(pipe, &request, (DWORD)sizeof(request))) goto cleanup;
-    if (!ntdos64_historical_bios_bridge_v2_invoke(&request, &response, (uint32_t)token)) {
+    if (!runner_historical_bios_bridge_v2_invoke(&request, &response, (uint32_t)token)) {
         goto cleanup;
     }
     if (!write_exact(pipe, &response, (DWORD)sizeof(response))) goto cleanup;
     result = 0;
 
 cleanup:
-    ntdos64_historical_bios_bridge_v2_terminate();
+    runner_historical_bios_bridge_v2_terminate();
     CloseHandle(pipe);
     return result;
 }

@@ -18,8 +18,8 @@ extern void c_cpu_terminate(void);
 extern void c_cpu_simulate(void);
 extern void sas_init(uint32_t size);
 extern void sas_term(void);
-extern uint8_t *ntdos64_ccpu_sm0_ram(void);
-extern unsigned long ntdos64_ccpu_sm0_unexpected_calls(void);
+extern uint8_t *runner_ccpu_sm0_ram(void);
+extern unsigned long runner_ccpu_sm0_unexpected_calls(void);
 extern void setCS(uint16_t value);
 extern void setDS(uint16_t value);
 extern void setIP(uint16_t value);
@@ -39,7 +39,7 @@ int main(void) {
 
     sas_init(2u * 1024u * 1024u);
     c_cpu_init();
-    ram = ntdos64_ccpu_sm0_ram();
+    ram = runner_ccpu_sm0_ram();
     if (ram == NULL) {
         return 1;
     }
@@ -59,7 +59,7 @@ int main(void) {
         getDL() == 0u || getDL() > 31u || getCX() < 1980u) {
         result |= 4;
     }
-    if (ntdos64_ccpu_sm0_unexpected_calls() != 0) {
+    if (runner_ccpu_sm0_unexpected_calls() != 0) {
         result |= 8;
     }
 

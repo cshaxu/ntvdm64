@@ -22,6 +22,6 @@ $compile = 'call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && cl.exe /nologo /
 if ($LASTEXITCODE -ne 0) { throw "T202 S2 DEM boot-drive compilation failed: $LASTEXITCODE" }
 & $exe 2>&1 | Tee-Object -FilePath (Join-Path $build 'run.log')
 $runExit = $LASTEXITCODE
-[ordered]@{ schema='ntdos64.t202.s2.dem-boot-drive.v2'; architecture='x64'; runtimeLibrary='/MT'; hostIo=$false; guestExecution=$false; runExitCode=$runExit; passed=($runExit -eq 0) } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $build 't202-s2-dem-boot-drive.json') -Encoding utf8
+[ordered]@{ schema='runner.t202.s2.dem-boot-drive.v2'; architecture='x64'; runtimeLibrary='/MT'; hostIo=$false; guestExecution=$false; runExitCode=$runExit; passed=($runExit -eq 0) } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $build 't202-s2-dem-boot-drive.json') -Encoding utf8
 if ($runExit -ne 0) { throw "T202 S2 DEM boot-drive fixture failed: $runExit" }
 Write-Host "T202 S2 DEM boot-drive probe passed: $build"

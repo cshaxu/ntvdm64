@@ -11,16 +11,16 @@ extern void illegal_op_int(void);
 #define RUNTIME_MACHINE_TLS _Thread_local
 #endif
 
-static RUNTIME_MACHINE_TLS const runtime_machine_mechanics_v1
+static RUNTIME_MACHINE_TLS const runtime_machine_mechanics
     *runtime_machine_active_mechanics;
 static RUNTIME_MACHINE_TLS int runtime_machine_failed;
 
-void runtime_machine_mechanics_v1_initialize(
-    runtime_machine_mechanics_v1 *mechanics)
+void runtime_machine_mechanics_initialize(
+    runtime_machine_mechanics *mechanics)
 {
     if (mechanics == 0) return;
-    mechanics->magic = RUNTIME_MACHINE_MECHANICS_V1_MAGIC;
-    mechanics->abi_version = RUNTIME_MACHINE_MECHANICS_V1_VERSION;
+    mechanics->magic = RUNTIME_MACHINE_MECHANICS_MAGIC;
+    mechanics->abi_version = RUNTIME_MACHINE_MECHANICS_VERSION;
     mechanics->struct_bytes = sizeof(*mechanics);
     mechanics->opaque = 0;
     mechanics->read8 = 0;
@@ -34,11 +34,11 @@ void runtime_machine_mechanics_v1_initialize(
     mechanics->reserved0 = 0u;
 }
 
-int runtime_machine_mechanics_v1_valid(
-    const runtime_machine_mechanics_v1 *mechanics)
+int runtime_machine_mechanics_valid(
+    const runtime_machine_mechanics *mechanics)
 {
-    return mechanics != 0 && mechanics->magic == RUNTIME_MACHINE_MECHANICS_V1_MAGIC &&
-        mechanics->abi_version == RUNTIME_MACHINE_MECHANICS_V1_VERSION &&
+    return mechanics != 0 && mechanics->magic == RUNTIME_MACHINE_MECHANICS_MAGIC &&
+        mechanics->abi_version == RUNTIME_MACHINE_MECHANICS_VERSION &&
         mechanics->struct_bytes == sizeof(*mechanics) && mechanics->read8 != 0 &&
         mechanics->write8 != 0 && mechanics->store8 != 0 &&
         mechanics->reserved0 == 0u;
@@ -116,10 +116,10 @@ short host_error(int error_number, int options, char *message)
 }
 
 #if RUNTIME_ENABLE_MACHINE_COMPOSITION
-static int runtime_machine_composition_v2_execute(
-    const runtime_machine_mechanics_v1 *mechanics, void (*handler)(void))
+static int runtime_machine_composition_execute(
+    const runtime_machine_mechanics *mechanics, void (*handler)(void))
 {
-    if (!runtime_machine_mechanics_v1_valid(mechanics) || handler == 0 ||
+    if (!runtime_machine_mechanics_valid(mechanics) || handler == 0 ||
         runtime_machine_active_mechanics != 0) return 0;
     runtime_machine_active_mechanics = mechanics;
     runtime_machine_failed = 0;
@@ -129,34 +129,34 @@ static int runtime_machine_composition_v2_execute(
 }
 #endif
 
-int runtime_machine_composition_v2_dispatch(
-    const runtime_exception_event_v1 *event,
-    const runtime_cpu_state_v1 *cpu_before,
-    const runtime_instruction_window_v1 *window,
-    const runtime_machine_mechanics_v1 *mechanics,
-    runtime_cpu_result_v2 *result)
+int runtime_machine_composition_dispatch(
+    const runtime_exception_event *event,
+    const runtime_cpu_state *cpu_before,
+    const runtime_instruction_window *window,
+    const runtime_machine_mechanics *mechanics,
+    runtime_cpu_result *result)
 {
     if (result == 0 || event == 0 || cpu_before == 0 || window == 0 ||
-        !runtime_exception_event_v1_valid(event) ||
-        !runtime_cpu_state_v1_valid(cpu_before) ||
-        !runtime_instruction_window_v1_valid(window) ||
-        !runtime_machine_mechanics_v1_valid(mechanics)) return 0;
-    runtime_cpu_result_v2_pass_through(result);
+        !runtime_exception_event_valid(event) ||
+        !runtime_cpu_state_valid(cpu_before) ||
+        !runtime_instruction_window_valid(window) ||
+        !runtime_machine_mechanics_valid(mechanics)) return 0;
+    runtime_cpu_result_pass_through(result);
 #if RUNTIME_ENABLE_MACHINE_COMPOSITION
     if (event->kind != RUNTIME_EXCEPTION_EVENT_CPU_EXCEPTION ||
         event->vector != 6u || window->valid_bytes < 3u ||
         window->bytes[0] != 0xc4u || window->bytes[1] != 0xc4u) return 1;
-    if (event->fault_rip > UINT64_MAX - 3u) return runtime_cpu_result_v2_stop(result);
+    if (event->fault_rip > UINT64_MAX - 3u) return runtime_cpu_result_stop(result);
     if (window->bytes[2] == 0x02u) {
-        if (!runtime_machine_composition_v2_execute(mechanics, unexpected_int))
-            return runtime_cpu_result_v2_stop(result);
+        if (!runtime_machine_composition_execute(mechanics, unexpected_int))
+            return runtime_cpu_result_stop(result);
     } else if (window->bytes[2] == 0x06u) {
         if (mechanics->load8 == 0 || mechanics->report == 0 ||
             mechanics->execution_mode != RUNTIME_CPU_EXECUTION_REAL ||
-            !runtime_machine_composition_v2_execute(mechanics, illegal_op_int))
-            return runtime_cpu_result_v2_stop(result);
+            !runtime_machine_composition_execute(mechanics, illegal_op_int))
+            return runtime_cpu_result_stop(result);
     } else return 1;
-    return runtime_cpu_result_v2_resume(result, event->fault_rip + 3u);
+    return runtime_cpu_result_resume(result, event->fault_rip + 3u);
 #else
     (void)event; (void)cpu_before; (void)window; (void)mechanics;
     return 1;

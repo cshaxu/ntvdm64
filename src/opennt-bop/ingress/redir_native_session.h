@@ -34,15 +34,15 @@ int runtime_redir_native_session_bind(runtime_redir_native_session *session);
 void runtime_redir_native_session_unbind(runtime_redir_native_session *session);
 
 int runtime_redir_native_session_dispatch(
-    const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome);
+    const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome);
 
 /* Invoke one imported VDMREDIR body through the one established CCPU/SAS
  * mechanical facade.  This is BOP composition only: service meaning remains
  * at the caller and the facade remains selector-blind. */
 int runtime_redir_native_session_invoke_scoped_body(
-    const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome, void (*body)(void),
+    const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome, void (*body)(void),
     uint32_t resume_bytes);
 
 #endif

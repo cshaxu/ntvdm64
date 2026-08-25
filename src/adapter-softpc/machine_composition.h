@@ -1,5 +1,5 @@
-#ifndef RUNTIME_MACHINE_COMPOSITION_V2_H
-#define RUNTIME_MACHINE_COMPOSITION_V2_H
+#ifndef RUNTIME_MACHINE_COMPOSITION_H
+#define RUNTIME_MACHINE_COMPOSITION_H
 
 #include <stdint.h>
 
@@ -8,56 +8,56 @@
 #include "exception_abi.h"
 #include "instruction_window_abi.h"
 
-#define RUNTIME_MACHINE_MECHANICS_V1_MAGIC 0x424D4D32u
-#define RUNTIME_MACHINE_MECHANICS_V1_VERSION 1u
+#define RUNTIME_MACHINE_MECHANICS_MAGIC 0x424D4D32u
+#define RUNTIME_MACHINE_MECHANICS_VERSION 1u
 
 /* A synchronous native capability supplied by the engine.  It is opaque to
  * the adapter, valid only for one call, and neither selects a provider nor
  * crosses into a persisted guest/host ABI. */
-typedef int (*runtime_machine_mechanics_v1_read8)(void *opaque,
+typedef int (*runtime_machine_mechanics_read8)(void *opaque,
     uint16_t port, uint8_t *value);
-typedef int (*runtime_machine_mechanics_v1_write8)(void *opaque,
+typedef int (*runtime_machine_mechanics_write8)(void *opaque,
     uint16_t port, uint8_t value);
-typedef int (*runtime_machine_mechanics_v1_store8)(void *opaque,
+typedef int (*runtime_machine_mechanics_store8)(void *opaque,
     uint32_t address, uint8_t value);
-typedef int (*runtime_machine_mechanics_v1_load8)(void *opaque,
+typedef int (*runtime_machine_mechanics_load8)(void *opaque,
     uint32_t address, uint8_t *value);
-typedef void (*runtime_machine_mechanics_v1_report)(void *opaque,
+typedef void (*runtime_machine_mechanics_report)(void *opaque,
     uint32_t error_number, uint32_t options, const char *message);
 
-typedef struct runtime_machine_mechanics_v1 {
+typedef struct runtime_machine_mechanics {
     uint32_t magic, abi_version, struct_bytes;
     void *opaque;
-    runtime_machine_mechanics_v1_read8 read8;
-    runtime_machine_mechanics_v1_write8 write8;
-    runtime_machine_mechanics_v1_store8 store8;
-    runtime_machine_mechanics_v1_load8 load8;
-    runtime_machine_mechanics_v1_report report;
+    runtime_machine_mechanics_read8 read8;
+    runtime_machine_mechanics_write8 write8;
+    runtime_machine_mechanics_store8 store8;
+    runtime_machine_mechanics_load8 load8;
+    runtime_machine_mechanics_report report;
     uint32_t execution_mode;
     uint32_t esp;
     uint16_t ss;
     uint16_t reserved0;
-} runtime_machine_mechanics_v1;
+} runtime_machine_mechanics;
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void runtime_machine_mechanics_v1_initialize(
-    runtime_machine_mechanics_v1 *mechanics);
-int runtime_machine_mechanics_v1_valid(
-    const runtime_machine_mechanics_v1 *mechanics);
+void runtime_machine_mechanics_initialize(
+    runtime_machine_mechanics *mechanics);
+int runtime_machine_mechanics_valid(
+    const runtime_machine_mechanics *mechanics);
 
 /* Adapter-owned classification and original-handler invocation.  It returns
  * a generic result only: pass-through when this plane declines, resume when a
  * selected original handler completes, and controlled stop on no admitted
  * typed recovery. */
-int runtime_machine_composition_v2_dispatch(
-    const runtime_exception_event_v1 *event,
-    const runtime_cpu_state_v1 *cpu_before,
-    const runtime_instruction_window_v1 *window,
-    const runtime_machine_mechanics_v1 *mechanics,
-    runtime_cpu_result_v2 *result);
+int runtime_machine_composition_dispatch(
+    const runtime_exception_event *event,
+    const runtime_cpu_state *cpu_before,
+    const runtime_instruction_window *window,
+    const runtime_machine_mechanics *mechanics,
+    runtime_cpu_result *result);
 
 /* Compatibility imports consumed only by the separately compiled original
  * handler islands during the synchronous mechanics transaction. */

@@ -1,7 +1,7 @@
 /* DIVERGENCE(WIN32-DIV-005): OpenNT DEM called OEM host exports supplied by
  * the NTVDM product host.  Retain their original names, parameters and Win32
  * last-error behavior through public OEM/ANSI APIs. */
-#include "adapter-win32/include/legacy-api/opennt_dem_oem_facade.h"
+#include "adapter-win32/include/opennt-api/opennt_dem_oem_facade.h"
 
 #include <stdlib.h>
 #include <string.h>

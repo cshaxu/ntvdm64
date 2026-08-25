@@ -182,7 +182,7 @@ static int environment_name_compare(const wchar_t *entry, const wchar_t *name)
     return *name == L'\0' ? 0 : 1;
 }
 
-/* The adapter runtime is in the engine process, not in this runner. Keep the
+/* The adapter runtime is in the engine process, not in this application. Keep the
  * selected resources immutable to this invocation by constructing a child-only
  * environment. This does not expose guest payloads or add a Bochs option. */
 static wchar_t *build_adapter_environment(const wchar_t *profile,
@@ -192,9 +192,9 @@ static wchar_t *build_adapter_environment(const wchar_t *profile,
 {
     /* CreateProcess requires its Unicode environment block sorted by name. */
     static const wchar_t *const names[] = {
-        L"NTDOS64_ADAPTER_LAUNCH_PLAN", L"NTDOS64_ADAPTER_PROFILE",
-        L"NTDOS64_ADAPTER_ROOT", L"NTDOS64_MUTATION_MODE",
-        L"NTDOS64_STARTUP_AUTOEXEC_SOURCE", L"NTDOS64_STARTUP_CONFIG_SOURCE"
+        L"NTVDM64_ADAPTER_LAUNCH_PLAN", L"NTVDM64_ADAPTER_PROFILE",
+        L"NTVDM64_ADAPTER_ROOT", L"NTVDM64_MUTATION_MODE",
+        L"NTVDM64_STARTUP_AUTOEXEC_SOURCE", L"NTVDM64_STARTUP_CONFIG_SOURCE"
     };
     const wchar_t *values[] = { launch_plan, profile, root, mutation_mode,
         autoexec_source != NULL ? autoexec_source : L"",
@@ -321,7 +321,7 @@ static int run_process(int argc, wchar_t **argv, const wchar_t *adapter_profile,
         CREATE_NEW_PROCESS_GROUP | (environment != NULL ? CREATE_UNICODE_ENVIRONMENT : 0u),
         environment, NULL,
         &startup, &process)) {
-        fwprintf(stderr, L"ntdos64-run: CreateProcessW failed for %ls (%lu)\n",
+        fwprintf(stderr, L"ntvdm64-run: CreateProcessW failed for %ls (%lu)\n",
             argv[0], GetLastError());
         CloseHandle(eof_input);
         SetConsoleCtrlHandler(handle_console_control, FALSE);
@@ -338,7 +338,7 @@ static int run_process(int argc, wchar_t **argv, const wchar_t *adapter_profile,
     waits[1] = cancellation_event;
     wait_result = WaitForMultipleObjects(2u, waits, FALSE, INFINITE);
     if (wait_result == WAIT_OBJECT_0 + 1u) {
-        /* The runner created this process group; cancellation has no broader
+        /* The application created this process group; cancellation has no broader
          * process, console-server, registry, or system configuration effect. */
         TerminateProcess(process.hProcess, STATUS_CONTROL_C_EXIT);
         WaitForSingleObject(process.hProcess, INFINITE);
@@ -369,14 +369,14 @@ int wmain(void)
     int target_index = 1;
     image_kind kind;
     wchar_t full_path[MAX_PATH];
-    wchar_t launch_plan[BYOB_LAUNCH_PLAN_V2_ENV_CHARS];
+    wchar_t launch_plan[BYOB_LAUNCH_PLAN_ENV_CHARS];
     app_startup_selection selection;
-    byob_launch_plan_v2 launch;
+    byob_launch_plan launch;
     DWORD path_length;
     int result;
 
     if (argv == NULL || argc < 2) {
-        fwprintf(stderr, L"usage: ntvdm64-0235 [--mutation-mode direct|readonly] [--engine engine.exe [--bochs ntdos64-bochs.exe]] target [args...]\n");
+        fwprintf(stderr, L"usage: ntvdm64 [--mutation-mode direct|readonly] [--engine engine.exe [--bochs machine.exe]] target [args...]\n");
         if (argv != NULL) LocalFree(argv);
         return 2;
     }
@@ -398,24 +398,24 @@ int wmain(void)
             has_mutation_mode = 1;
             target_index += 2;
         } else {
-            fwprintf(stderr, L"ntdos64-run: invalid option\n");
+            fwprintf(stderr, L"ntvdm64-run: invalid option\n");
             LocalFree(argv);
             return 2;
         }
     }
     if (target_index >= argc) {
-        fwprintf(stderr, L"ntdos64-run: target is required\n");
+        fwprintf(stderr, L"ntvdm64-run: target is required\n");
         LocalFree(argv);
         return 2;
     }
     if (bochs != NULL && engine == NULL) {
-        fwprintf(stderr, L"ntdos64-run: --bochs requires --engine\n");
+        fwprintf(stderr, L"ntvdm64-run: --bochs requires --engine\n");
         LocalFree(argv);
         return 2;
     }
     path_length = GetFullPathNameW(argv[target_index], MAX_PATH, full_path, NULL);
     if (path_length == 0u || path_length >= MAX_PATH) {
-        fwprintf(stderr, L"ntdos64-run: cannot resolve target path\n");
+        fwprintf(stderr, L"ntvdm64-run: cannot resolve target path\n");
         LocalFree(argv);
         return 2;
     }
@@ -423,7 +423,7 @@ int wmain(void)
     kind = classify_image(full_path);
     if (kind == IMAGE_KIND_PE32 || kind == IMAGE_KIND_PE64) {
         if (bochs != NULL || has_mutation_mode) {
-            fwprintf(stderr, L"ntdos64-run: DOS configuration options require an explicit DOS engine\n");
+            fwprintf(stderr, L"ntvdm64-run: DOS configuration options require an explicit DOS engine\n");
             result = 2;
         } else {
             result = run_process(argc - target_index, argv + target_index, NULL, NULL, NULL, NULL, NULL, NULL);
@@ -445,10 +445,10 @@ int wmain(void)
             (selection.declared_targets[0].component = selection.target,
              selection.declared_targets[0].placement = selection.target_placement, 0) ||
             !app_bundle_load_sibling(product_root, dos_root, wow16_root, config_source,
-                autoexec_source) || !byob_launch_plan_v2_from_arguments(&launch, &selection,
+                autoexec_source) || !byob_launch_plan_from_arguments(&launch, &selection,
                 argc - target_index - 1, argv + target_index + 1) ||
-            !byob_launch_plan_v2_to_environment(&launch, launch_plan)) {
-            fwprintf(stderr, L"ntvdm64-0235: sibling dos/wow16 bundle validation failed\n");
+            !byob_launch_plan_to_environment(&launch, launch_plan)) {
+            fwprintf(stderr, L"ntvdm64: sibling dos/wow16 bundle validation failed\n");
             result = 3;
         }
         else {
@@ -463,7 +463,7 @@ int wmain(void)
                 engine_argv[3] = L"--wow16-root";
                 engine_argv[4] = wow16_root;
                 if (bochs != NULL) {
-                    /* This remains runner-to-shim metadata. A native Bochs
+                    /* This remains application-to-shim metadata. A native Bochs
                      * parser never receives a BYOB option or the bundle path. */
                     engine_argv[5] = L"--bochs";
                     engine_argv[6] = (wchar_t *)bochs;
@@ -482,13 +482,13 @@ int wmain(void)
         /* BAT/PIF are now valid COMMAND initial inputs, but the copied session
          * record is owned by the explicit DOS engine.  The CLI still neither
          * parses their bytes nor falls back to a host launch. */
-        fwprintf(stderr, L"ntvdm64-0235: COMMAND initial input requires an explicit engine\n");
+        fwprintf(stderr, L"ntvdm64: COMMAND initial input requires an explicit engine\n");
         result = 3;
     } else if (kind == IMAGE_KIND_NE) {
-        fwprintf(stderr, L"ntdos64-run: NE targets require an unavailable Win16/WOW host path\n");
+        fwprintf(stderr, L"ntvdm64-run: NE targets require an unavailable Win16/WOW host path\n");
         result = 3;
     } else {
-        fwprintf(stderr, L"ntdos64-run: target requires an explicit DOS engine\n");
+        fwprintf(stderr, L"ntvdm64-run: target requires an explicit DOS engine\n");
         result = 3;
     }
     LocalFree(argv);

@@ -15,19 +15,19 @@ enum runtime_cpu_execution_mode {
 /* Copied x86 state at one declared instruction boundary. Selectors are values
  * only: descriptor caches, page tables, mappings and host pointers remain
  * native-backend owned. */
-typedef struct runtime_cpu_state_v1 {
+typedef struct runtime_cpu_state {
     uint32_t magic, abi_version, struct_bytes, execution_mode;
     uint32_t eax, ebx, ecx, edx, esi, edi, ebp, esp, eip, eflags;
     uint16_t cs, ds, es, ss, fs, gs;
     uint32_t reserved0;
-} runtime_cpu_state_v1;
+} runtime_cpu_state;
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-void runtime_cpu_state_v1_initialize(runtime_cpu_state_v1 *state,
+void runtime_cpu_state_initialize(runtime_cpu_state *state,
     uint32_t execution_mode);
-int runtime_cpu_state_v1_valid(const runtime_cpu_state_v1 *state);
+int runtime_cpu_state_valid(const runtime_cpu_state *state);
 #ifdef __cplusplus
 }
 #endif

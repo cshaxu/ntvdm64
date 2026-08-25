@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////
 //
-// Finite bare-byte execution mechanic owned entirely by the native mantle.
+// Finite bare-byte execution mechanic owned entirely by the native machine.
 //
 /////////////////////////////////////////////////////////////////////////
 
@@ -38,7 +38,7 @@ static void runtime_finite_run_stop(void *opaque)
   runtime_finite_run_stop_state *state =
     (runtime_finite_run_stop_state *) opaque;
   state->fired = 1;
-  machine_facade_v1_request_cpu_stop();
+  machine_facade_request_cpu_stop();
 }
 
 /* The finite machine exposes exactly one MiB of ordinary RAM.  Keep this
@@ -53,9 +53,9 @@ static int runtime_finite_run_ordinary_range_is_valid(
 
 static void runtime_finite_run_adapter_lifecycle_stop(void)
 {
-  runtime_port_action_v1_set_lifecycle_active(0u);
-  runtime_protected_range_action_v1_set_lifecycle_active(0u);
-  runtime_a20_capability_v1_set_lifecycle_active(0u);
+  runtime_port_action_set_lifecycle_active(0u);
+  runtime_protected_range_action_set_lifecycle_active(0u);
+  runtime_a20_capability_set_lifecycle_active(0u);
 }
 
 int runtime_finite_run_terminal_snapshot_configure_ordinary_range(
@@ -88,7 +88,7 @@ runtime_finite_run_status runtime_run_finite_bare_bytes(
       request->instruction_tick_budget == 0 ||
       request->ips == 0 || request->preserve_byte_count > sizeof(preserved) ||
       (request->has_preentry_action &&
-       !runtime_mechanical_action_v1_valid(&request->preentry_action)) ||
+       !runtime_mechanical_action_valid(&request->preentry_action)) ||
       (request->preserve_byte_count != 0 &&
        !runtime_finite_run_ordinary_range_is_valid(
          request->preserve_physical_address, request->preserve_byte_count)) ||
@@ -103,74 +103,74 @@ runtime_finite_run_status runtime_run_finite_bare_bytes(
   terminal_capture_physical_address = 0;
   terminal_capture_byte_count = 0;
 
-  if (!machine_facade_v1_machine_begin(0x100000u, 0x100000u)) {
+  if (!machine_facade_machine_begin(0x100000u, 0x100000u)) {
     return RUNTIME_FINITE_RUN_MACHINE_ERROR;
   }
-  runtime_a20_capability_v1_set_lifecycle_active(1u);
-  runtime_protected_range_action_v1_set_lifecycle_active(1u);
-  runtime_port_action_v1_set_lifecycle_active(1u);
+  runtime_a20_capability_set_lifecycle_active(1u);
+  runtime_protected_range_action_set_lifecycle_active(1u);
+  runtime_port_action_set_lifecycle_active(1u);
 
-  if (!machine_facade_v1_set_realmode_segment_limit_compatibility(
+  if (!machine_facade_set_realmode_segment_limit_compatibility(
       request->enable_realmode_segment_limit_compatibility)) {
     runtime_finite_run_adapter_lifecycle_stop();
-    machine_facade_v1_machine_cleanup();
+    machine_facade_machine_cleanup();
     return RUNTIME_FINITE_RUN_MACHINE_ERROR;
   }
 
   if (request->has_preentry_action) {
-    struct runtime_mechanical_action_v1 action = request->preentry_action;
-    if (!runtime_mantle_execute_mechanical_action_v1(&action)) {
+    struct runtime_mechanical_action action = request->preentry_action;
+    if (!runtime_machine_execute_mechanical_action(&action)) {
       runtime_finite_run_adapter_lifecycle_stop();
-      machine_facade_v1_machine_cleanup();
+      machine_facade_machine_cleanup();
       return RUNTIME_FINITE_RUN_REJECTED_INPUT;
     }
   }
 
   if (request->preserve_byte_count != 0 &&
-      !machine_facade_v1_memory_read(request->preserve_physical_address,
+      !machine_facade_memory_read(request->preserve_physical_address,
         request->preserve_byte_count, preserved)) {
     runtime_finite_run_adapter_lifecycle_stop();
-    machine_facade_v1_machine_cleanup();
+    machine_facade_machine_cleanup();
     return RUNTIME_FINITE_RUN_REJECTED_INPUT;
   }
-  if (!machine_facade_v1_memory_write(request->entry_physical_address,
+  if (!machine_facade_memory_write(request->entry_physical_address,
       request->entry_byte_count, request->entry_bytes)) {
     runtime_finite_run_adapter_lifecycle_stop();
-      machine_facade_v1_machine_cleanup();
+      machine_facade_machine_cleanup();
     return RUNTIME_FINITE_RUN_REJECTED_INPUT;
   }
   if (request->preserve_byte_count != 0 &&
-      !machine_facade_v1_memory_write(request->preserve_physical_address,
+      !machine_facade_memory_write(request->preserve_physical_address,
         request->preserve_byte_count, preserved)) {
     runtime_finite_run_adapter_lifecycle_stop();
-    machine_facade_v1_machine_cleanup();
+    machine_facade_machine_cleanup();
     return RUNTIME_FINITE_RUN_MACHINE_ERROR;
   }
-  machine_facade_v1_initialize_timing(request->ips);
-  machine_facade_v1_apply_real_mode_entry(request->entry_cs, request->entry_eip);
+  machine_facade_initialize_timing(request->ips);
+  machine_facade_apply_real_mode_entry(request->entry_cs, request->entry_eip);
   stop_state.fired = 0;
-  if (!machine_facade_v1_register_timer(&stop_state, runtime_finite_run_stop,
+  if (!machine_facade_register_timer(&stop_state, runtime_finite_run_stop,
       request->instruction_tick_budget, 0u, 1u, &stop_timer)) {
     runtime_finite_run_adapter_lifecycle_stop();
-    machine_facade_v1_machine_cleanup();
+    machine_facade_machine_cleanup();
     return RUNTIME_FINITE_RUN_MACHINE_ERROR;
   }
 
-  runtime_mantle_first_fault_observation_fixture_stop(request->stop_on_first_fault_fixture);
-  runtime_mantle_generic_ud_stop_observation_reset();
-  machine_facade_v1_cpu_loop();
+  runtime_machine_first_fault_observation_fixture_stop(request->stop_on_first_fault_fixture);
+  runtime_machine_generic_ud_stop_observation_reset();
+  machine_facade_cpu_loop();
   if (request->capture_terminal_snapshot) {
-    if (!machine_facade_v1_copy_real_mode_entry(&terminal_snapshot.cs,
+    if (!machine_facade_copy_real_mode_entry(&terminal_snapshot.cs,
         &terminal_snapshot.eip)) {
       runtime_finite_run_adapter_lifecycle_stop();
-      machine_facade_v1_machine_cleanup();
+      machine_facade_machine_cleanup();
       return RUNTIME_FINITE_RUN_MACHINE_ERROR;
     }
     if (terminal_capture_count != 0) {
-      if (!machine_facade_v1_memory_read(terminal_capture_address,
+      if (!machine_facade_memory_read(terminal_capture_address,
           terminal_capture_count, terminal_snapshot.captured_bytes)) {
         runtime_finite_run_adapter_lifecycle_stop();
-        machine_facade_v1_machine_cleanup();
+        machine_facade_machine_cleanup();
         return RUNTIME_FINITE_RUN_MACHINE_ERROR;
       }
       terminal_snapshot.captured_physical_address = terminal_capture_address;
@@ -178,19 +178,19 @@ runtime_finite_run_status runtime_run_finite_bare_bytes(
     }
     terminal_snapshot.valid = 1;
   }
-  runtime_mantle_first_fault_observation_fixture_stop(0);
+  runtime_machine_first_fault_observation_fixture_stop(0);
   /* A bridge STOP may return before the finite watchdog fires.  The native
    * timer contract requires explicit deactivation before unregistration. */
-  machine_facade_v1_deactivate_timer((uint32_t)stop_timer);
-  machine_facade_v1_unregister_timer((uint32_t)stop_timer);
+  machine_facade_deactivate_timer((uint32_t)stop_timer);
+  machine_facade_unregister_timer((uint32_t)stop_timer);
   runtime_finite_run_adapter_lifecycle_stop();
-  if (!machine_facade_v1_machine_cleanup()) {
+  if (!machine_facade_machine_cleanup()) {
     return RUNTIME_FINITE_RUN_MACHINE_ERROR;
   }
-  if (runtime_mantle_generic_ud_stop_observed()) {
+  if (runtime_machine_generic_ud_stop_observed()) {
     return RUNTIME_FINITE_RUN_COMPLETED_UD_STOP;
   }
-  if (runtime_mantle_first_fault_observation_observed()) {
+  if (runtime_machine_first_fault_observation_observed()) {
     return RUNTIME_FINITE_RUN_COMPLETED_FIRST_FAULT_STOP;
   }
   return stop_state.fired ? RUNTIME_FINITE_RUN_COMPLETED_BUDGET :

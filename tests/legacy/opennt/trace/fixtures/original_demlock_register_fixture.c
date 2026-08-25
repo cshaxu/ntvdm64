@@ -10,7 +10,7 @@
 extern void c_cpu_init(void);
 extern void c_cpu_terminate(void);
 extern uint16_t c_getCF(void);
-extern unsigned long ntdos64_ccpu_sm0_unexpected_calls(void);
+extern unsigned long runner_ccpu_sm0_unexpected_calls(void);
 extern void demLockOper(void);
 extern void setAX(uint16_t value);
 extern void setBP(uint16_t value);
@@ -58,7 +58,7 @@ int main(void) {
     if (file == INVALID_HANDLE_VALUE) { DeleteFileA(filename); return 3; }
 
     c_cpu_init();
-    if (ntdos64_ccpu_sm0_unexpected_calls() != 0) result = 4;
+    if (runner_ccpu_sm0_unexpected_calls() != 0) result = 4;
     if (result == 0) {
         set_lock_arguments(file, 0);
         demLockOper();
@@ -69,7 +69,7 @@ int main(void) {
         demLockOper();
         if (c_getCF() != 0) result = 6;
     }
-    if (result == 0 && ntdos64_ccpu_sm0_unexpected_calls() != 0) result = 7;
+    if (result == 0 && runner_ccpu_sm0_unexpected_calls() != 0) result = 7;
 
     c_cpu_terminate();
     CloseHandle(file);

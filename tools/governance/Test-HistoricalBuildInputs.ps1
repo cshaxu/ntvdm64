@@ -1,4 +1,4 @@
-﻿param(
+param(
     [Parameter(Mandatory = $true)][string]$MinNtArchive,
     [Parameter(Mandatory = $true)][string]$OldSourceArchive,
     [Parameter(Mandatory = $true)][string]$IsolatedBuildRoot
@@ -21,7 +21,7 @@ function Get-InputRecord([string]$Name, [string]$Path) {
 }
 
 $result = [ordered]@{
-    contract = "ntdos64-historical-build-inputs-v1"
+    contract = "runner-historical-build-inputs-v1"
     projectRoot = $projectRoot
     isolatedBuildRoot = $buildRoot
     buildRootOutsideProject = -not $buildRoot.StartsWith($projectRoot, [System.StringComparison]::OrdinalIgnoreCase)

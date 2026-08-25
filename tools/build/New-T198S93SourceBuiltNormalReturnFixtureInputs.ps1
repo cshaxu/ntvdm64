@@ -44,7 +44,7 @@ Write-Array (Join-Path $output 'command_bytes.cc') 't198_s93_command_bytes' $com
 Write-Array (Join-Path $output 'share_bytes.cc') 't198_s93_share_bytes' $share 'SHARE.EXE'
 
 @{
-    schema = 'ntdos64.t198.s93.source-built-normal-return-inputs.v1'
+    schema = 'runner.t198.s93.source-built-normal-return-inputs.v1'
     inputs = @(
         @{ role = 'command'; source = $commandPath; bytes = 50384; sha256 = $commandHash; symbol = 't198_s93_command_bytes' },
         @{ role = 'target'; source = $sharePath; bytes = 882; sha256 = $shareHash; symbol = 't198_s93_share_bytes' }

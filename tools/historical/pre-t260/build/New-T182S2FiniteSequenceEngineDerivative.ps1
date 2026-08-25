@@ -29,7 +29,7 @@ function Copy-Verified([string]$Source, [string]$Destination) {
 }
 
 $expectedBinary = '8758F4335CB32B4FB97688ED3860E8B0C9E86D8155E6AA316E54F346177E8BFA'
-if ((Get-Sha256 (Join-Path $machine 'ntdos64-t98-current-adapter.exe')) -ne $expectedBinary) {
+if ((Get-Sha256 (Join-Path $machine 'runner-t98-current-adapter.exe')) -ne $expectedBinary) {
     throw 'Machine root is not the retained T177 native-POST/machine-composition image.'
 }
 $sourceManifestPath = Join-Path $machine 't98-s1-current-adapter-engine-derivative.json'
@@ -49,7 +49,7 @@ if ($LASTEXITCODE -gt 7) { throw "Machine copy failed: $LASTEXITCODE" }
 New-Item -ItemType Directory -Path (Join-Path $build 'adapter'), (Join-Path $build 'cli') -Force | Out-Null
 
 $manifest = [ordered]@{
-    schema = 'ntdos64.t182.s2.finite-sequence-engine-derivative.v1'
+    schema = 'runner.t182.s2.finite-sequence-engine-derivative.v1'
     mode = 'generator-only-no-compiler-linker-archive-or-executable-invocation'
     machineRoot = $machine
     machineBinarySha256 = $expectedBinary
@@ -97,16 +97,16 @@ foreach ($object in $objects) {
     $make += ''
 }
 $make += @(
-    ('ntdos64-t182-finite-sequence.exe: $(ADAPTER_OBJS)'),
-    "`tlink /nologo /subsystem:console /incremental:no /opt:ref /map:ntdos64-t182-finite-sequence.map /out:`$@ `$(BX_OBJS) `$(SIMX86_OBJS) main.o cpu\exception.o iodev/libiodev.a iodev/hdimage/libhdimage.a iodev/usb/libusb.a iodev/network/libnetwork.a iodev/sound/libsound.a cpu/libcpu.a cpu/cpudb/libcpudb.a memory/libmemory.a gui/libgui.a `$(DISASM_LIB) `$(FPU_LIB) `$(GUI_LINK_OPTS) `$(MCH_LINK_FLAGS) `$(SIMX86_LINK_FLAGS) `$(READLINE_LIB) `$(EXTRA_LINK_OPTS) `$(LIBS) machine\bx_ntvdm_machine_bop_v1.obj machine\unexp_nt.c.obj machine\illegalp.c.obj vcruntime.lib `$(ADAPTER_OBJS) kernel32.lib bcrypt.lib",''
+    ('runner-t182-finite-sequence.exe: $(ADAPTER_OBJS)'),
+    "`tlink /nologo /subsystem:console /incremental:no /opt:ref /map:runner-t182-finite-sequence.map /out:`$@ `$(BX_OBJS) `$(SIMX86_OBJS) main.o cpu\exception.o iodev/libiodev.a iodev/hdimage/libhdimage.a iodev/usb/libusb.a iodev/network/libnetwork.a iodev/sound/libsound.a cpu/libcpu.a cpu/cpudb/libcpudb.a memory/libmemory.a gui/libgui.a `$(DISASM_LIB) `$(FPU_LIB) `$(GUI_LINK_OPTS) `$(MCH_LINK_FLAGS) `$(SIMX86_LINK_FLAGS) `$(READLINE_LIB) `$(EXTRA_LINK_OPTS) `$(LIBS) machine\bx_ntvdm_machine_bop_v1.obj machine\unexp_nt.c.obj machine\illegalp.c.obj vcruntime.lib `$(ADAPTER_OBJS) kernel32.lib bcrypt.lib",''
 )
-$shim = Join-Path $build 'ntdos64-t182-finite-sequence.mak'
+$shim = Join-Path $build 'runner-t182-finite-sequence.mak'
 [IO.File]::WriteAllText($shim, ($make -join "`r`n"), [Text.UTF8Encoding]::new($false))
 $shimText = Get-Content -LiteralPath $shim -Raw
 if (($shimText | Select-String -AllMatches -Pattern '(^|\r?\n)(main\.o|cpu\\exception\.o):').Matches.Count -ne 0) {
     throw 'T182 makefile unexpectedly rebuilds a Bochs object.'
 }
-if ($shimText -match '(?m)^ntdos64-t182-finite-sequence\.exe:.*(?:libcpu|libiodev|libmemory|libgui)') {
+if ($shimText -match '(?m)^runner-t182-finite-sequence\.exe:.*(?:libcpu|libiodev|libmemory|libgui)') {
     throw 'T182 makefile unexpectedly makes a Bochs archive a prerequisite.'
 }
 $objectRuleCount = [regex]::Matches($shimText, '(?m)^.*\.obj: .*\.c\r?$').Count
@@ -115,7 +115,7 @@ if ($shimText -notmatch [regex]::Escape('cli\byob_launch_plan_v2.obj') -or
     throw 'T182 makefile does not contain the exact 72-object current closure.'
 }
 $manifest.shimSha256 = Get-Sha256 $shim
-$manifest.permittedBuild = 'nmake /f ntdos64-t182-finite-sequence.mak ntdos64-t182-finite-sequence.exe'
+$manifest.permittedBuild = 'nmake /f runner-t182-finite-sequence.mak runner-t182-finite-sequence.exe'
 [IO.File]::WriteAllText((Join-Path $build 't182-s2-finite-sequence-engine-derivative.json'),
     ($manifest | ConvertTo-Json -Depth 7), [Text.UTF8Encoding]::new($false))
 Write-Host "Prepared fresh T182 S2 finite-sequence derivative: $build"

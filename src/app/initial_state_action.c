@@ -2,19 +2,19 @@
 
 #include <string.h>
 
-int runtime_initial_state_action_v1_prepare(
-    const runtime_initial_state_v1 *state,
-    struct runtime_mechanical_action_v1 *action)
+int runtime_initial_state_action_prepare(
+    const runtime_initial_state *state,
+    struct runtime_mechanical_action *action)
 {
     uint32_t index;
 
     if (state == 0 || action == 0 ||
-        !runtime_initial_state_v1_admitted(state, UINT64_C(0x100000)))
+        !runtime_initial_state_admitted(state, UINT64_C(0x100000)))
         return 0;
 
-    runtime_mechanical_action_v1_clear(action);
+    runtime_mechanical_action_clear(action);
     action->action_id = 1u;
-    action->kind = RUNTIME_MECHANICAL_ACTION_V1_WRITE;
+    action->kind = RUNTIME_MECHANICAL_ACTION_WRITE;
     action->range_count = state->range_count;
     action->payload_bytes = state->payload_bytes;
     for (index = 0u; index < state->range_count; ++index) {
@@ -26,5 +26,5 @@ int runtime_initial_state_action_v1_prepare(
             (uint32_t) state->ranges[index].payload_offset;
     }
     memcpy(action->payload, state->payload, state->payload_bytes);
-    return runtime_mechanical_action_v1_valid(action);
+    return runtime_mechanical_action_valid(action);
 }

@@ -9,17 +9,17 @@
 #include <setjmp.h>
 #include <stdlib.h>
 
-#ifndef NTDOS64_HOST_APPLINIT_TRACE_STOP_STAGE
-#define NTDOS64_HOST_APPLINIT_TRACE_STOP_STAGE 11
+#ifndef RUNNER_HOST_APPLINIT_TRACE_STOP_STAGE
+#define RUNNER_HOST_APPLINIT_TRACE_STOP_STAGE 11
 #endif
 
 extern void host_applInit(int argc, char **argv);
 
 static jmp_buf host_applinit_stop_environment;
 static int host_applinit_stop_reason;
-static int host_applinit_stop_stage = NTDOS64_HOST_APPLINIT_TRACE_STOP_STAGE;
+static int host_applinit_stop_stage = RUNNER_HOST_APPLINIT_TRACE_STOP_STAGE;
 
-void ntdos64_host_applinit_trace_checkpoint(int stage) {
+void runner_host_applinit_trace_checkpoint(int stage) {
     if (stage == host_applinit_stop_stage) {
         host_applinit_stop_reason = stage;
         longjmp(host_applinit_stop_environment, stage);

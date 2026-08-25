@@ -5,7 +5,7 @@
  * owner and the directly included OpenNT nt_pif.c parser.  It deliberately
  * supplies no PIF policy or parser: those remain original OpenNT code. */
 #include "opennt-bop/command/opennt_command_composition.h"
-#include "adapter-win32/include/legacy-api/opennt_pif_oem_facade.h"
+#include "adapter-win32/include/opennt-api/opennt_pif_oem_facade.h"
 #include "adapter-win32/facade/opennt_error_dialog_facade.h"
 
 #ifndef SUBSYS_DOS

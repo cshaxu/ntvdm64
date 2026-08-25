@@ -4,7 +4,7 @@
 
 #include "guest_range.h"
 
-void runtime_guest_write_v1_initialize(runtime_guest_write_v1 *write,
+void runtime_guest_write_initialize(runtime_guest_write *write,
     uint64_t guest_physical_address, uint64_t byte_count,
     uint64_t payload_offset)
 {
@@ -18,7 +18,7 @@ void runtime_guest_write_v1_initialize(runtime_guest_write_v1 *write,
     write->payload_offset = payload_offset;
 }
 
-int runtime_guest_write_v1_preflight(const runtime_guest_write_v1 *write,
+int runtime_guest_write_preflight(const runtime_guest_write *write,
     uint64_t aperture_bytes, uint64_t payload_bytes)
 {
     runtime_guest_range range;

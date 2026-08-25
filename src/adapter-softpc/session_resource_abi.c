@@ -2,8 +2,8 @@
 
 #include <string.h>
 
-void runtime_session_resources_v1_initialize(
-    runtime_session_resources_v1 *resources)
+void runtime_session_resources_initialize(
+    runtime_session_resources *resources)
 {
     if (resources == 0) return;
     memset(resources, 0, sizeof(*resources));
@@ -12,8 +12,8 @@ void runtime_session_resources_v1_initialize(
     resources->struct_bytes = sizeof(*resources);
 }
 
-int runtime_session_resources_v1_valid(
-    const runtime_session_resources_v1 *resources)
+int runtime_session_resources_valid(
+    const runtime_session_resources *resources)
 {
     unsigned int index;
     uint32_t expected_kind;

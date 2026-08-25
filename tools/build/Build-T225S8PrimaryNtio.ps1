@@ -19,7 +19,7 @@ if (-not $build.StartsWith($buildBase + [IO.Path]::DirectorySeparatorChar, [Stri
 }
 if (Test-Path -LiteralPath $build) { throw "Refusing to overwrite existing build root: $build" }
 
-$sourceMvdm = Join-Path $repository 'src\opennt\base\mvdm'
+$sourceMvdm = Join-Path $repository 'src\opennt-guest\base\mvdm'
 $toolsRoot = Join-Path $repository 'tools\historical\opennt-4.5'
 $runner = Join-Path $repository 'tools\build\Invoke-DosBoxBatchWithCompletion.ps1'
 foreach ($path in @($sourceMvdm, (Join-Path $toolsRoot 'masm.exe'), (Join-Path $toolsRoot 'link16.exe'), (Join-Path $toolsRoot 'buildidx.exe'), (Join-Path $toolsRoot 'nosrvbld.exe'), (Join-Path $toolsRoot 'reloc.exe'), $runner)) {
@@ -71,9 +71,9 @@ $expectedHash = 'cfc8be16576bb6acd16bb8fc9b2d9a080f544bbfdd2d2d2df07ed908b3ab493
 if ((Get-Item -LiteralPath $output).Length -ne 33792 -or (Get-Sha256 $output) -ne $expectedHash) { throw "Primary NTIO identity mismatch: $output" }
 
 $manifest = [ordered]@{
-    schema = 'ntdos64.t225.s8.ntio-primary-source-build.v1'
+    schema = 'ntvdm64.t225.s8.ntio-primary-source-build.v1'
     classification = 'primary-original-toolchain-source-built'
-    source = [ordered]@{ managedRoot = 'src/opennt'; upstreamRevision = '5c5b979ec08c17d3ca2eb70e8aad62d26515d01c'; guestSourceTransforms = @() }
+    source = [ordered]@{ managedRoot = 'src/opennt-guest'; upstreamRevision = '5c5b979ec08c17d3ca2eb70e8aad62d26515d01c'; guestSourceTransforms = @() }
     tools = [ordered]@{ masm = Get-Sha256 (Join-Path $toolsRoot 'masm.exe'); link16 = Get-Sha256 (Join-Path $toolsRoot 'link16.exe'); buildidx = Get-Sha256 (Join-Path $toolsRoot 'buildidx.exe'); nosrvbld = Get-Sha256 (Join-Path $toolsRoot 'nosrvbld.exe'); reloc = Get-Sha256 (Join-Path $toolsRoot 'reloc.exe') }
     modules = $modules
     output = [ordered]@{ relativePath = 'base/mvdm/dos/v86/doskrnl/bios/NTIO.SYS'; bytes = 33792; sha256 = $expectedHash }

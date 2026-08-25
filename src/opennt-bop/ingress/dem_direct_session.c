@@ -76,14 +76,14 @@ int runtime_dem_direct_host_session_guest_read(void *state,
     uint32_t address, uint8_t *bytes, uint32_t byte_count)
 {
     return valid((runtime_dem_direct_host_session *)state) &&
-        runtime_mantle_checked_ram_read_v1(address, bytes, byte_count);
+        runtime_machine_checked_ram_read(address, bytes, byte_count);
 }
 
 int runtime_dem_direct_host_session_guest_write(void *state,
     uint32_t address, const uint8_t *bytes, uint32_t byte_count)
 {
     return valid((runtime_dem_direct_host_session *)state) &&
-        runtime_mantle_checked_ram_write_v1(address, bytes, byte_count);
+        runtime_machine_checked_ram_write(address, bytes, byte_count);
 }
 
 int runtime_dem_direct_host_session_initialize(

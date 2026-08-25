@@ -8,15 +8,15 @@
  */
 #include <stdint.h>
 
-typedef void (*ntdos64_bios_entry)(void);
+typedef void (*runner_bios_entry)(void);
 
-extern ntdos64_bios_entry BIOS[];
+extern runner_bios_entry BIOS[];
 extern void c_cpu_init(void);
 extern void c_cpu_terminate(void);
 extern void sas_init(uint32_t size);
 extern void sas_term(void);
-extern uint8_t *ntdos64_ccpu_sm0_ram(void);
-extern unsigned long ntdos64_ccpu_sm0_unexpected_calls(void);
+extern uint8_t *runner_ccpu_sm0_ram(void);
+extern unsigned long runner_ccpu_sm0_unexpected_calls(void);
 extern void setCS(uint16_t value);
 extern void setIP(uint16_t value);
 extern uint16_t getIP(void);
@@ -32,7 +32,7 @@ int main(void)
 
     sas_init(2u * 1024u * 1024u);
     c_cpu_init();
-    ram = ntdos64_ccpu_sm0_ram();
+    ram = runner_ccpu_sm0_ram();
     if (ram == 0 || BIOS[0x50u] == 0) {
         result = 1;
         goto cleanup;
@@ -50,7 +50,7 @@ int main(void)
         getDL() == 0u || getDL() > 31u || getCX() < 1980u) {
         result |= 4;
     }
-    if (ntdos64_ccpu_sm0_unexpected_calls() != 0u) {
+    if (runner_ccpu_sm0_unexpected_calls() != 0u) {
         result |= 8;
     }
 

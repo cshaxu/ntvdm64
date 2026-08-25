@@ -12,7 +12,7 @@ $expected=@((0..72|%{'BOP-DEM-50-{0:X2}'-f $_})+(0..16|%{'BOP-COMMAND-54-{0:X2}'
 $actual=@($rows.Id|Sort-Object -Unique)
 if($rows.Count -ne 321 -or $actual.Count -ne 321 -or (Compare-Object $actual $expected)){throw "Td S2 P7 requires 321 unique rows; rows=$($rows.Count), ids=$($actual.Count)"}
 foreach($row in $rows){
- if($row.D -eq 'registered-exception'){@([regex]::Matches($row.E,'BX-(?:VDM|ABI|MANTLE)-\d{3}')|%{$_.Value})|%{if(-not $register.Contains($_)){throw "Missing exception: $_"}}}
+ if($row.D -eq 'registered-exception'){@([regex]::Matches($row.E,'BX-(?:VDM|ABI|MACHINE)-\d{3}')|%{$_.Value})|%{if(-not $register.Contains($_)){throw "Missing exception: $_"}}}
  if($row.D -eq 'migration-debt' -and -not $row.M.Contains('migrate-facade')){throw "Missing migration: $($row.Id)"}
  if($row.D -eq 'deferred' -and -not $row.M.Contains('deferred-owner-package')){throw "Missing owner: $($row.Id)"}
 }

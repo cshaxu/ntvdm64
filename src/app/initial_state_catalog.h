@@ -1,5 +1,5 @@
-#ifndef RUNTIME_INITIAL_STATE_CATALOG_V1_H
-#define RUNTIME_INITIAL_STATE_CATALOG_V1_H
+#ifndef RUNTIME_INITIAL_STATE_CATALOG_H
+#define RUNTIME_INITIAL_STATE_CATALOG_H
 
 #include <stdint.h>
 #include "initial_state_abi.h"
@@ -8,8 +8,8 @@
 extern "C" {
 #endif
 
-int runtime_initial_state_catalog_v1_select(const uint16_t *digest,
-    uint32_t chars, runtime_initial_state_v1 *out);
+int runtime_initial_state_catalog_select(const uint16_t *digest,
+    uint32_t chars, runtime_initial_state *out);
 
 #ifdef __cplusplus
 }

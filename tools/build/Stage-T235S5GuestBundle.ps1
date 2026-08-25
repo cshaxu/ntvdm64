@@ -121,7 +121,7 @@ if ($SourceBuildRoot) {
 }
 
 $manifest = [ordered]@{
-    schema = 'ntdos64.t235.s5.guest-bundle.v1'
+    schema = 'runner.t235.s5.guest-bundle.v1'
     layout = [ordered]@{ dos = 'dos'; wow16 = 'wow16'; root = 'executable sibling directory' }
     sourcePolicy = 'original OpenNT prebuilt payload first; source-built only when no original payload exists'
     unresolvedFallbacks = $unresolvedFallbacks

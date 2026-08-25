@@ -52,7 +52,7 @@ void MS_bop_F(void)
     if (runtime_spckbd_handoff_failed()) return;
 
     /* DIVERGENCE (T243 S2): AddrIretBopTable, ICA restart and event-thread
-     * release are monitor/product-shell responsibilities. Native mantle
+     * release are monitor/product-shell responsibilities. Native machine
      * lifecycle is already active; no guest IRQ is injected here. */
     setCF(1);
 }

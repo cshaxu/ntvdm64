@@ -9,12 +9,12 @@ static int historical_bridge_transport(
     const reconstructed_monitor_bridge_request *request,
     reconstructed_monitor_bridge_response *response)
 {
-    ntdos64_historical_bios_bridge_v1_request historical_request;
-    ntdos64_historical_bios_bridge_v1_response historical_response;
+    runner_historical_bios_bridge_v1_request historical_request;
+    runner_historical_bios_bridge_v1_response historical_response;
 
     (void)context;
     memset(&historical_request, 0, sizeof(historical_request));
-    historical_request.abi_version = NTDOS64_HISTORICAL_BIOS_BRIDGE_V1_ABI;
+    historical_request.abi_version = RUNNER_HISTORICAL_BIOS_BRIDGE_V1_ABI;
     historical_request.struct_bytes = (uint32_t)sizeof(historical_request);
     historical_request.selector = request->selector;
     historical_request.service_byte = request->next_byte;
@@ -24,8 +24,8 @@ static int historical_bridge_transport(
     historical_request.cs = request->state.cs;
     historical_request.ip = request->state.ip;
 
-    if (!ntdos64_historical_bios_bridge_v1_invoke(&historical_request, &historical_response) ||
-        historical_response.disposition != NTDOS64_HISTORICAL_BIOS_BRIDGE_V1_COMPLETED) {
+    if (!runner_historical_bios_bridge_v1_invoke(&historical_request, &historical_response) ||
+        historical_response.disposition != RUNNER_HISTORICAL_BIOS_BRIDGE_V1_COMPLETED) {
         return 0;
     }
     response->write_mask = RECONSTRUCTED_MONITOR_BRIDGE_WRITE_AX |
@@ -46,7 +46,7 @@ int main(void)
     reconstructed_monitor_state state;
     int result = 0;
 
-    if (!ntdos64_historical_bios_bridge_v1_initialize()) {
+    if (!runner_historical_bios_bridge_v1_initialize()) {
         return 1;
     }
     if (reconstructed_monitor_monitor_initialize(&monitor, ram, sizeof(ram),
@@ -70,6 +70,6 @@ int main(void)
     }
 
 cleanup:
-    ntdos64_historical_bios_bridge_v1_terminate();
+    runner_historical_bios_bridge_v1_terminate();
     return result;
 }

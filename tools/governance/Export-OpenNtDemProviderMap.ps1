@@ -21,7 +21,7 @@ function Get-Sha256([string]$Path) { (Get-FileHash -LiteralPath $Path -Algorithm
 function Get-Relative([string]$Path) { $Path.Substring($repository.Length + 1).Replace('\', '/') }
 
 $providerMap = Get-Content -Raw -LiteralPath $providerMapPath | ConvertFrom-Json
-if ($providerMap.schema -ne 'ntdos64.opennt-bop-provider-module-map.v1') {
+if ($providerMap.schema -ne 'runner.opennt-bop-provider-module-map.v1') {
     throw "Unexpected provider-map schema: $($providerMap.schema)"
 }
 $dem = @($providerMap.service_families | Where-Object { $_.selector_name -eq 'BOP_DOS' })
@@ -67,7 +67,7 @@ foreach ($service in $dem[0].services) {
 }
 
 $record = [ordered]@{
-    schema = 'ntdos64.opennt-dem-provider-map.v1'
+    schema = 'runner.opennt-dem-provider-map.v1'
     provider_map_sha256 = Get-Sha256 $providerMapPath
     interpretation = 'Static source-closure map only. source-pending-composition does not assert a linkable provider or enabled guest behavior.'
     services = $services

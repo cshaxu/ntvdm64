@@ -9,11 +9,11 @@ static int ranges_overlap(const runtime_guest_range *left,
         right->address < left->address + left->length;
 }
 
-void runtime_startup_snapshot_transaction_v1_initialize(
-    runtime_startup_snapshot_transaction_v1 *transaction,
-    const runtime_exception_event_v1 *boundary,
-    const runtime_cpu_state_v1 *cpu_before,
-    const runtime_startup_snapshot_range_v1 *ranges, uint32_t range_count)
+void runtime_startup_snapshot_transaction_initialize(
+    runtime_startup_snapshot_transaction *transaction,
+    const runtime_exception_event *boundary,
+    const runtime_cpu_state *cpu_before,
+    const runtime_startup_snapshot_range *ranges, uint32_t range_count)
 {
     uint32_t index;
     uint64_t output_bytes = 0u;
@@ -26,7 +26,7 @@ void runtime_startup_snapshot_transaction_v1_initialize(
     if (boundary != 0) transaction->boundary = *boundary;
     if (cpu_before != 0) transaction->cpu_before = *cpu_before;
     if (ranges == 0 || range_count == 0u ||
-        range_count > RUNTIME_STARTUP_SNAPSHOT_V1_MAX_RANGES) return;
+        range_count > RUNTIME_STARTUP_SNAPSHOT_MAX_RANGES) return;
     for (index = 0u; index < range_count; ++index) {
         if (UINT64_MAX - output_bytes < ranges[index].guest_read.length) return;
         transaction->ranges[index] = ranges[index];
@@ -36,8 +36,8 @@ void runtime_startup_snapshot_transaction_v1_initialize(
     transaction->output_bytes = output_bytes;
 }
 
-int runtime_startup_snapshot_transaction_v1_preflight(
-    const runtime_startup_snapshot_transaction_v1 *transaction,
+int runtime_startup_snapshot_transaction_preflight(
+    const runtime_startup_snapshot_transaction *transaction,
     uint64_t aperture_bytes, uint64_t output_capacity)
 {
     uint32_t index;
@@ -50,12 +50,12 @@ int runtime_startup_snapshot_transaction_v1_preflight(
         transaction->struct_bytes != sizeof(*transaction) ||
         transaction->flags != 0u || transaction->reserved0 != 0u ||
         transaction->range_count == 0u ||
-        transaction->range_count > RUNTIME_STARTUP_SNAPSHOT_V1_MAX_RANGES ||
-        !runtime_exception_event_v1_valid(&transaction->boundary) ||
+        transaction->range_count > RUNTIME_STARTUP_SNAPSHOT_MAX_RANGES ||
+        !runtime_exception_event_valid(&transaction->boundary) ||
         transaction->boundary.vector != 6u ||
-        !runtime_cpu_state_v1_valid(&transaction->cpu_before)) return 0;
+        !runtime_cpu_state_valid(&transaction->cpu_before)) return 0;
     for (index = 0u; index < transaction->range_count; ++index) {
-        const runtime_startup_snapshot_range_v1 *range = &transaction->ranges[index];
+        const runtime_startup_snapshot_range *range = &transaction->ranges[index];
         if (range->id == 0u || range->flags != 0u ||
             range->guest_read.length == 0u ||
             !runtime_guest_range_within(aperture_bytes, &range->guest_read) ||

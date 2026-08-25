@@ -73,7 +73,7 @@ foreach ($source in $sources) {
     }
 }
 $record = [ordered]@{
-    schema = 'ntdos64.t95-s6.startup-session-msvc-object-audit.v1'
+    schema = 'runner.t95-s6.startup-session-msvc-object-audit.v1'
     analysisRoot = $analysis
     compilerCommand = 'BuildTools VsDevCmd x86 then cl /nologo /c /MT /W3 /DWIN32 /Iadapter /Icli'
     sourceManifest = $manifest

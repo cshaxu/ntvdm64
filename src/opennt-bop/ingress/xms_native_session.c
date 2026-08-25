@@ -42,18 +42,18 @@ void runtime_xms_native_session_unbind(runtime_xms_native_session *session)
     if (session_valid(session)) session->bound = 0u;
 }
 
-static int event_valid(const struct runtime_generic_ud_event_v1 *event)
+static int event_valid(const struct runtime_generic_ud_event *event)
 {
-    return event != NULL && event->magic == RUNTIME_GENERIC_UD_EVENT_V1_MAGIC &&
-        event->abi_version == RUNTIME_GENERIC_UD_EVENT_V1_VERSION &&
+    return event != NULL && event->magic == RUNTIME_GENERIC_UD_EVENT_MAGIC &&
+        event->abi_version == RUNTIME_GENERIC_UD_EVENT_VERSION &&
         event->struct_bytes == sizeof(*event) && event->vector == 6u &&
         event->window_bytes >= 4u;
 }
 
-static void copy_cpu(const struct runtime_generic_ud_event_v1 *source,
-    runtime_cpu_state_v1 *target)
+static void copy_cpu(const struct runtime_generic_ud_event *source,
+    runtime_cpu_state *target)
 {
-    runtime_cpu_state_v1_initialize(target, source->execution_mode);
+    runtime_cpu_state_initialize(target, source->execution_mode);
     target->eax = source->eax; target->ebx = source->ebx; target->ecx = source->ecx;
     target->edx = source->edx; target->esi = source->esi; target->edi = source->edi;
     target->ebp = source->ebp; target->esp = source->esp; target->eip = source->eip;
@@ -66,24 +66,24 @@ static int guest_read(void *state, uint32_t address, uint8_t *bytes,
     uint32_t byte_count)
 {
     return session_valid((runtime_xms_native_session *)state) &&
-        runtime_mantle_checked_ram_read_v1(address, bytes, byte_count);
+        runtime_machine_checked_ram_read(address, bytes, byte_count);
 }
 
 static int guest_write(void *state, uint32_t address, const uint8_t *bytes,
     uint32_t byte_count)
 {
     return session_valid((runtime_xms_native_session *)state) &&
-        runtime_mantle_checked_ram_write_v1(address, bytes, byte_count);
+        runtime_machine_checked_ram_write(address, bytes, byte_count);
 }
 
-static int copy_outcome(const runtime_cpu_result_v2 *result,
-    struct runtime_generic_ud_outcome_v1 *outcome)
+static int copy_outcome(const runtime_cpu_result *result,
+    struct runtime_generic_ud_outcome *outcome)
 {
-    if (!runtime_cpu_result_v2_valid(result) || outcome == NULL ||
-        result->disposition == RUNTIME_CPU_RESULT_V2_PASS_THROUGH) return 0;
+    if (!runtime_cpu_result_valid(result) || outcome == NULL ||
+        result->disposition == RUNTIME_CPU_RESULT_PASS_THROUGH) return 0;
     memset(outcome, 0, sizeof(*outcome));
-    outcome->abi_version = RUNTIME_GENERIC_UD_EVENT_V1_VERSION;
-    outcome->disposition = result->disposition == RUNTIME_CPU_RESULT_V2_RESUME ?
+    outcome->abi_version = RUNTIME_GENERIC_UD_EVENT_VERSION;
+    outcome->disposition = result->disposition == RUNTIME_CPU_RESULT_RESUME ?
         RUNTIME_GENERIC_UD_RESUME : RUNTIME_GENERIC_UD_STOP;
     outcome->resume_rip = result->resume_rip;
     outcome->gpr16_write_mask = result->cpu_delta.gpr16_write_mask;
@@ -98,12 +98,12 @@ static int copy_outcome(const runtime_cpu_result_v2 *result,
 }
 
 int runtime_xms_native_session_dispatch(
-    const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome)
+    const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome)
 {
-    runtime_exception_event_v1 boundary;
-    runtime_cpu_state_v1 cpu;
-    runtime_cpu_result_v2 result;
+    runtime_exception_event boundary;
+    runtime_cpu_state cpu;
+    runtime_cpu_result result;
     runtime_xms_call call;
     if (!session_valid(g_active_session) || g_active_session->bound == 0u ||
         !event_valid(event) || outcome == NULL) return 0;

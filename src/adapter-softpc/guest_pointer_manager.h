@@ -77,7 +77,7 @@ runtime_guest_pointer_manager *runtime_guest_pointer_manager_session_data(void);
  * only the three mapping-manager implementations. */
 void runtime_session_mapping_registry_reset(void);
 int runtime_session_mapping_registry_bind(
-    const app_session_v1 *session);
+    const app_session *session);
 int runtime_guest_pointer_manager_begin(runtime_guest_pointer_manager *manager,
     void *guest_state, runtime_guest_pointer_read_fn read, runtime_guest_pointer_write_fn write);
 void runtime_guest_pointer_manager_end(runtime_guest_pointer_manager *manager);

@@ -27,7 +27,7 @@ int wmain(int argc, wchar_t **argv)
 
     if (argc != 3) return 2;
     aperture_bytes = wcstoul(argv[2], NULL, 10);
-    if (aperture_bytes < NTDOS64_SHARED_APERTURE_V1_MINIMUM_BYTES) return 3;
+    if (aperture_bytes < RUNNER_SHARED_APERTURE_V1_MINIMUM_BYTES) return 3;
     mapping = OpenFileMappingW(FILE_MAP_READ | FILE_MAP_WRITE, FALSE, argv[1]);
     if (mapping == NULL) return 4;
     view = MapViewOfFile(mapping, FILE_MAP_READ | FILE_MAP_WRITE, 0u, 0u, aperture_bytes);
@@ -35,17 +35,17 @@ int wmain(int argc, wchar_t **argv)
         CloseHandle(mapping);
         return 5;
     }
-    if (read_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_MAGIC) !=
-            NTDOS64_SHARED_APERTURE_V1_MAGIC ||
-        read_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_VERSION) !=
-            NTDOS64_SHARED_APERTURE_V1_VERSION ||
-        read_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_BYTES) != aperture_bytes ||
-        read_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_HOST_READY) != 1u ||
-        read_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_HOST_PROBE) != 0x13579bdfu) {
+    if (read_u32(view, RUNNER_SHARED_APERTURE_V1_OFFSET_MAGIC) !=
+            RUNNER_SHARED_APERTURE_V1_MAGIC ||
+        read_u32(view, RUNNER_SHARED_APERTURE_V1_OFFSET_VERSION) !=
+            RUNNER_SHARED_APERTURE_V1_VERSION ||
+        read_u32(view, RUNNER_SHARED_APERTURE_V1_OFFSET_BYTES) != aperture_bytes ||
+        read_u32(view, RUNNER_SHARED_APERTURE_V1_OFFSET_HOST_READY) != 1u ||
+        read_u32(view, RUNNER_SHARED_APERTURE_V1_OFFSET_HOST_PROBE) != 0x13579bdfu) {
         goto cleanup;
     }
-    write_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_HELPER_PROBE, 0x2468ace0u);
-    write_u32(view, NTDOS64_SHARED_APERTURE_V1_OFFSET_HELPER_READY, 1u);
+    write_u32(view, RUNNER_SHARED_APERTURE_V1_OFFSET_HELPER_PROBE, 0x2468ace0u);
+    write_u32(view, RUNNER_SHARED_APERTURE_V1_OFFSET_HELPER_READY, 1u);
     result = 0;
 
 cleanup:

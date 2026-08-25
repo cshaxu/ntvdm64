@@ -628,7 +628,7 @@ VOID cmdExec (VOID)
     CHAR Buffer[MAX_PATH];
 
     /* DIVERGENCE (T236 S2): the historical CCPU suspension returns through
-     * cmdExec32 after the worker finishes.  The finite mantle re-enters the
+     * cmdExec32 after the worker finishes.  The finite machine re-enters the
      * BOP instruction, whose first pass has already converted the tail CR to
      * NUL.  Preserve source ordering by routing only that recorded pending
      * re-entry to cmdExec32 before the original one-shot tail scan. */

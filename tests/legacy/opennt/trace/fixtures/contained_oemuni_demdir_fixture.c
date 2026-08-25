@@ -10,8 +10,8 @@
 #define INVALID_FILE_ATTRIBUTES ((DWORD)-1)
 #endif
 
-BOOL ntdos64_oemuni_configure_root(LPCSTR);
-VOID ntdos64_oemuni_reset(VOID);
+BOOL runner_oemuni_configure_root(LPCSTR);
+VOID runner_oemuni_reset(VOID);
 VOID demCreateDir(VOID);
 VOID demDeleteDir(VOID);
 VOID demSetCurrentDir(VOID);
@@ -60,7 +60,7 @@ int main(void) {
 
     if (!GetTempPathA(MAX_PATH, temp) || !GetTempFileNameA(temp, "nod", 0, root)) return 1;
     if (!DeleteFileA(root) || !CreateDirectoryA(root, NULL)) return 2;
-    if (!ntdos64_oemuni_configure_root(root)) { RemoveDirectoryA(root); return 3; }
+    if (!runner_oemuni_configure_root(root)) { RemoveDirectoryA(root); return 3; }
 
     reset_fixture("C:\\created");
     demCreateDir();
@@ -79,12 +79,12 @@ int main(void) {
     demCreateDir();
     if (fixture_error_drive != 'C') goto failure;
 
-    ntdos64_oemuni_reset();
+    runner_oemuni_reset();
     if (!RemoveDirectoryA(root)) return 4;
     return 0;
 
 failure:
-    ntdos64_oemuni_reset();
+    runner_oemuni_reset();
     RemoveDirectoryA(root);
     return 5;
 }

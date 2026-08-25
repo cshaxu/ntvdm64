@@ -34,7 +34,7 @@ void runtime_softpc_memory_size_sas_loadw(uint32_t address, word *value)
     uint8_t bytes[2];
     if (g_call.active == 0u || value == 0 ||
         address != RUNTIME_SOFTPC_MEMORY_VAR ||
-        !runtime_mantle_checked_ram_read_v1(address, bytes, sizeof(bytes))) {
+        !runtime_machine_checked_ram_read(address, bytes, sizeof(bytes))) {
         g_call.failed = 1u;
         return;
     }

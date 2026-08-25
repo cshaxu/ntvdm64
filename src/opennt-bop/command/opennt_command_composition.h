@@ -292,9 +292,9 @@ typedef struct runtime_command_misc_call {
     uint32_t abi_version;
     uint32_t struct_bytes;
     uint32_t service;
-    const runtime_exception_event_v1 *boundary;
-    const runtime_cpu_state_v1 *cpu;
-    runtime_cpu_result_v2 *result;
+    const runtime_exception_event *boundary;
+    const runtime_cpu_state *cpu;
+    runtime_cpu_result *result;
     void *guest_state;
     runtime_command_misc_guest_read_fn guest_read;
     runtime_command_misc_guest_write_fn guest_write;

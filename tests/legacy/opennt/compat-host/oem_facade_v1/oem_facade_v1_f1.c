@@ -3,16 +3,16 @@
 
 #include "oem_facade_v1.h"
 
-#define NTDOS64_OEM_FACADE_V1_PATH_CAPACITY 32768u
+#define RUNNER_OEM_FACADE_V1_PATH_CAPACITY 32768u
 
 #ifndef INVALID_FILE_ATTRIBUTES
 #define INVALID_FILE_ATTRIBUTES ((DWORD)-1)
 #endif
 
-static WCHAR ntdos64_oem_facade_v1_root[NTDOS64_OEM_FACADE_V1_PATH_CAPACITY];
-static DWORD ntdos64_oem_facade_v1_root_length;
+static WCHAR runner_oem_facade_v1_root[RUNNER_OEM_FACADE_V1_PATH_CAPACITY];
+static DWORD runner_oem_facade_v1_root_length;
 
-static WCHAR *ntdos64_oem_facade_v1_to_wide(LPCSTR text)
+static WCHAR *runner_oem_facade_v1_to_wide(LPCSTR text)
 {
     int length;
     WCHAR *result;
@@ -38,39 +38,39 @@ static WCHAR *ntdos64_oem_facade_v1_to_wide(LPCSTR text)
     return result;
 }
 
-static BOOL ntdos64_oem_facade_v1_is_below_root(LPCWSTR path)
+static BOOL runner_oem_facade_v1_is_below_root(LPCWSTR path)
 {
     WCHAR next;
 
-    if (ntdos64_oem_facade_v1_root_length == 0 ||
-        _wcsnicmp(path, ntdos64_oem_facade_v1_root,
-                  ntdos64_oem_facade_v1_root_length) != 0) {
+    if (runner_oem_facade_v1_root_length == 0 ||
+        _wcsnicmp(path, runner_oem_facade_v1_root,
+                  runner_oem_facade_v1_root_length) != 0) {
         return FALSE;
     }
-    next = path[ntdos64_oem_facade_v1_root_length];
+    next = path[runner_oem_facade_v1_root_length];
     return next == L'\0' || next == L'\\';
 }
 
-static WCHAR *ntdos64_oem_facade_v1_map_path(LPCSTR path)
+static WCHAR *runner_oem_facade_v1_map_path(LPCSTR path)
 {
     WCHAR *input;
     WCHAR *result;
     DWORD length;
 
-    input = ntdos64_oem_facade_v1_to_wide(path);
+    input = runner_oem_facade_v1_to_wide(path);
     if (input == NULL) return NULL;
     result = HeapAlloc(GetProcessHeap(), 0,
-                       NTDOS64_OEM_FACADE_V1_PATH_CAPACITY * sizeof(WCHAR));
+                       RUNNER_OEM_FACADE_V1_PATH_CAPACITY * sizeof(WCHAR));
     if (result == NULL) {
         HeapFree(GetProcessHeap(), 0, input);
         SetLastError(ERROR_NOT_ENOUGH_MEMORY);
         return NULL;
     }
-    length = GetFullPathNameW(input, NTDOS64_OEM_FACADE_V1_PATH_CAPACITY,
+    length = GetFullPathNameW(input, RUNNER_OEM_FACADE_V1_PATH_CAPACITY,
                               result, NULL);
     HeapFree(GetProcessHeap(), 0, input);
-    if (length == 0 || length >= NTDOS64_OEM_FACADE_V1_PATH_CAPACITY ||
-        !ntdos64_oem_facade_v1_is_below_root(result)) {
+    if (length == 0 || length >= RUNNER_OEM_FACADE_V1_PATH_CAPACITY ||
+        !runner_oem_facade_v1_is_below_root(result)) {
         HeapFree(GetProcessHeap(), 0, result);
         SetLastError(ERROR_ACCESS_DENIED);
         return NULL;
@@ -78,46 +78,46 @@ static WCHAR *ntdos64_oem_facade_v1_map_path(LPCSTR path)
     return result;
 }
 
-BOOL WINAPI ntdos64_oem_facade_v1_configure_resource_root(LPCSTR path)
+BOOL WINAPI runner_oem_facade_v1_configure_resource_root(LPCSTR path)
 {
     WCHAR *input;
     DWORD length;
     DWORD attributes;
 
-    ntdos64_oem_facade_v1_reset();
-    input = ntdos64_oem_facade_v1_to_wide(path);
+    runner_oem_facade_v1_reset();
+    input = runner_oem_facade_v1_to_wide(path);
     if (input == NULL) return FALSE;
-    length = GetFullPathNameW(input, NTDOS64_OEM_FACADE_V1_PATH_CAPACITY,
-                              ntdos64_oem_facade_v1_root, NULL);
+    length = GetFullPathNameW(input, RUNNER_OEM_FACADE_V1_PATH_CAPACITY,
+                              runner_oem_facade_v1_root, NULL);
     HeapFree(GetProcessHeap(), 0, input);
-    if (length == 0 || length >= NTDOS64_OEM_FACADE_V1_PATH_CAPACITY) {
-        ntdos64_oem_facade_v1_reset();
+    if (length == 0 || length >= RUNNER_OEM_FACADE_V1_PATH_CAPACITY) {
+        runner_oem_facade_v1_reset();
         return FALSE;
     }
-    while (length > 3 && ntdos64_oem_facade_v1_root[length - 1] == L'\\') {
-        ntdos64_oem_facade_v1_root[--length] = L'\0';
+    while (length > 3 && runner_oem_facade_v1_root[length - 1] == L'\\') {
+        runner_oem_facade_v1_root[--length] = L'\0';
     }
-    attributes = GetFileAttributesW(ntdos64_oem_facade_v1_root);
+    attributes = GetFileAttributesW(runner_oem_facade_v1_root);
     if (attributes == INVALID_FILE_ATTRIBUTES ||
         (attributes & FILE_ATTRIBUTE_DIRECTORY) == 0) {
-        ntdos64_oem_facade_v1_reset();
+        runner_oem_facade_v1_reset();
         return FALSE;
     }
-    ntdos64_oem_facade_v1_root_length = length;
+    runner_oem_facade_v1_root_length = length;
     return TRUE;
 }
 
-VOID WINAPI ntdos64_oem_facade_v1_reset(void)
+VOID WINAPI runner_oem_facade_v1_reset(void)
 {
-    ntdos64_oem_facade_v1_root[0] = L'\0';
-    ntdos64_oem_facade_v1_root_length = 0;
+    runner_oem_facade_v1_root[0] = L'\0';
+    runner_oem_facade_v1_root_length = 0;
 }
 
 HANDLE WINAPI CreateFileOem(LPCSTR path, DWORD access, DWORD share,
                             LPSECURITY_ATTRIBUTES security, DWORD disposition,
                             DWORD flags, HANDLE template_file)
 {
-    WCHAR *mapped = ntdos64_oem_facade_v1_map_path(path);
+    WCHAR *mapped = runner_oem_facade_v1_map_path(path);
     HANDLE result;
 
     if (mapped == NULL) return INVALID_HANDLE_VALUE;

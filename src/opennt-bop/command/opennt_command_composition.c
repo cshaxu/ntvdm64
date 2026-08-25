@@ -128,7 +128,7 @@ static int copy_guest_multisz(runtime_command_misc_active_call *active,
 static int set_ax(USHORT value)
 {
     return g_active_call != NULL &&
-        runtime_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta,
+        runtime_cpu_delta_set_gpr16(&g_active_call->call->result->cpu_delta,
             0u, value);
 }
 
@@ -669,7 +669,7 @@ BOOL runtime_command_worker_reentry_pending(void)
 
 BOOL runtime_command_misc_set_pending(void)
 {
-    return g_active_call != NULL && runtime_cpu_result_v2_pending(
+    return g_active_call != NULL && runtime_cpu_result_pending(
         g_active_call->call->result);
 }
 
@@ -711,8 +711,8 @@ int runtime_command_misc_call_valid(const runtime_command_misc_call *call)
          call->service == RUNTIME_COMMAND_MISC_GET_INIT_ENVIRONMENT ||
          call->service == RUNTIME_COMMAND_MISC_GET_START_INFO ||
          call->service == 0x06u) &&
-        call->boundary != NULL && runtime_exception_event_v1_valid(call->boundary) &&
-        call->cpu != NULL && runtime_cpu_state_v1_valid(call->cpu) &&
+        call->boundary != NULL && runtime_exception_event_valid(call->boundary) &&
+        call->cpu != NULL && runtime_cpu_state_valid(call->cpu) &&
         call->cpu->execution_mode == RUNTIME_CPU_EXECUTION_REAL &&
         call->result != NULL && call->guest_read != NULL && call->guest_write != NULL &&
          ((call->service != RUNTIME_COMMAND_MISC_SET_INFO &&
@@ -740,17 +740,17 @@ void runtime_command_misc_set_ax(USHORT value) { (void)set_ax(value); }
 void runtime_command_misc_set_al(USHORT value)
 { runtime_command_misc_set_ax((USHORT)((runtime_command_misc_get_ax() & 0xff00u) | (value & 0xffu))); }
 void runtime_command_misc_set_cf(int value)
-{ (void)runtime_cpu_result_v2_set_cf(g_active_call->call->result, value); }
+{ (void)runtime_cpu_result_set_cf(g_active_call->call->result, value); }
 void runtime_command_misc_set_dx(USHORT value)
-{ (void)runtime_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta, 2u, value); }
+{ (void)runtime_cpu_delta_set_gpr16(&g_active_call->call->result->cpu_delta, 2u, value); }
 void runtime_command_misc_set_bx(USHORT value)
-{ (void)runtime_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta, 3u, value); }
+{ (void)runtime_cpu_delta_set_gpr16(&g_active_call->call->result->cpu_delta, 3u, value); }
 void runtime_command_misc_set_cx(USHORT value)
-{ (void)runtime_cpu_delta_v1_set_gpr16(&g_active_call->call->result->cpu_delta, 1u, value); }
+{ (void)runtime_cpu_delta_set_gpr16(&g_active_call->call->result->cpu_delta, 1u, value); }
 void runtime_command_misc_set_ds(USHORT value)
-{ (void)runtime_cpu_delta_v1_set_segment(&g_active_call->call->result->cpu_delta, 3u, value); }
+{ (void)runtime_cpu_delta_set_segment(&g_active_call->call->result->cpu_delta, 3u, value); }
 void runtime_command_misc_set_es(USHORT value)
-{ (void)runtime_cpu_delta_v1_set_segment(&g_active_call->call->result->cpu_delta, 0u, value); }
+{ (void)runtime_cpu_delta_set_segment(&g_active_call->call->result->cpu_delta, 0u, value); }
 
 runtime_command_misc_session *runtime_command_misc_active_session(void)
 {
@@ -790,7 +790,7 @@ void TerminateVDM(void)
     /* OpenNT's terminal path does not return.  The typed composition models
      * that directly as a controlled stop instead of resuming after an error. */
     if (g_active_call != NULL) {
-        (void)runtime_cpu_result_v2_stop(g_active_call->call->result);
+        (void)runtime_cpu_result_stop(g_active_call->call->result);
         longjmp(g_active_call->terminal_exit, 1);
     }
 }
@@ -1078,8 +1078,8 @@ int runtime_command_misc_invoke(runtime_command_misc_call *call)
         memcpy(lpszComSpec, call->session->comspec, sizeof(lpszComSpec));
         cbComSpec = call->session->comspec_bytes;
     }
-    runtime_cpu_result_v2_pass_through(call->result);
-    if (!runtime_cpu_result_v2_resume(call->result, call->boundary->fault_rip + 4u))
+    runtime_cpu_result_pass_through(call->result);
+    if (!runtime_cpu_result_resume(call->result, call->boundary->fault_rip + 4u))
         return 0;
     active.call = call;
     g_active_call = &active;
@@ -1177,5 +1177,5 @@ int runtime_command_misc_invoke(runtime_command_misc_call *call)
     free(active.guest_buffer3);
     free(active.guest_buffer4);
     g_active_call = NULL;
-    return runtime_cpu_result_v2_valid(call->result);
+    return runtime_cpu_result_valid(call->result);
 }

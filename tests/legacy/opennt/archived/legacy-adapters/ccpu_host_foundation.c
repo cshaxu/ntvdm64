@@ -14,7 +14,7 @@ static unsigned long ccpu_unexpected_calls;
  * fixture never executes a BOP. The zero table supplies no handler or policy. */
 void (*BIOS[256])(void);
 
-unsigned long ntdos64_ccpu_host_unexpected_calls(void) {
+unsigned long runner_ccpu_host_unexpected_calls(void) {
     return ccpu_unexpected_calls;
 }
 

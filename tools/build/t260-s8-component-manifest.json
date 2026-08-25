@@ -1,12 +1,12 @@
 {
-  "schema": "ntdos64.t260.s8.component-manifest.v1",
+  "schema": "runner.t260.s8.component-manifest.v1",
   "origin": "Generated from the frozen T225 source list after live T260 owner resolution.",
   "architecture": "x64",
   "runtimeLibrary": "/MT",
   "cpuConfiguration": "CPU5/Pentium-MMX, non-x86-64",
   "configProjection": {
     "tool": "tools/build/Project-BochsConfig.ps1",
-    "projection": "tools/build/t197-s6-cpu5-mantle-config-projection.json",
+    "projection": "tools/build/t197-s6-cpu5-machine-config-projection.json",
     "source": "src/bochs-core/config.h"
   },
   "includeRoots": [
@@ -29,7 +29,7 @@
     "src/adapter-softpc/include/softpc.new/base/inc",
     "src/adapter-softpc/include/softpc.new/host/inc",
     "src/adapter-win32/include/compiler",
-    "src/adapter-win32/include/legacy-api"
+    "src/adapter-win32/include/opennt-api"
   ],
   "modules": [
     {
@@ -268,14 +268,14 @@
     {
       "name": "opennt-bop",
       "sources": [
-        "src/opennt-bop/observation/bx_ntvdm_bop_sequence_observation_v1.c",
-        "src/opennt-bop/observation/bx_ntvdm_command_bootstrap_observation_v1.c",
-        "src/opennt-bop/observation/bx_ntvdm_command_current_dir_observation_v1.c",
-        "src/opennt-bop/observation/bx_ntvdm_dem_open_observation_v1.c",
-        "src/opennt-bop/observation/bx_ntvdm_demfile_create_observation_v1.c",
-        "src/opennt-bop/observation/bx_ntvdm_generic_ud_sequence_observation_v1.c",
-        "src/opennt-bop/observation/bx_ntvdm_ntdos_exec_observation_v1.c",
-        "src/opennt-bop/observation/bx_ntvdm_ntdos_exec_entry_observation_v1.c",
+        "src/opennt-bop/observation/bop_sequence_observation.c",
+        "src/opennt-bop/observation/command_bootstrap_observation.c",
+        "src/opennt-bop/observation/command_current_dir_observation.c",
+        "src/opennt-bop/observation/dem_open_observation.c",
+        "src/opennt-bop/observation/demfile_create_observation.c",
+        "src/opennt-bop/observation/generic_ud_sequence_observation.c",
+        "src/opennt-bop/observation/ntdos_exec_observation.c",
+        "src/opennt-bop/observation/ntdos_exec_entry_observation.c",
         "src/opennt-bop/command/cmdconf.c",
         "src/opennt-bop/command/cmddisp.c",
         "src/opennt-bop/command/cmdenv.c",
@@ -287,7 +287,7 @@
         "src/opennt-bop/command/opennt_pif_composition.c",
         "src/opennt-bop/command/cmdredir.c",
         "src/opennt-bop/dem/dem.c",
-        "src/opennt-bop/dem/bx_ntvdm_dem_direct_context.c",
+        "src/opennt-bop/dem/dem_direct_context.c",
         "src/opennt-bop/dem/demdasd.c",
         "src/opennt-bop/dem/opennt_demdasd_ioctl_composition.c",
         "src/opennt-bop/dem/demdata.c",
@@ -334,38 +334,38 @@
         "src/opennt-bop/xms/xmsdisp.c",
         "src/opennt-bop/xms/xmsmisc.c",
         "src/opennt-bop/xms/xmsumb.c",
-        "src/opennt-bop/ingress/command_v2_generic_ud_bridge.c",
-        "src/opennt-bop/ingress/bx_ntvdm_startup_machine_interrupt_v1.c",
+        "src/opennt-bop/ingress/command_generic_ud_bridge.c",
+        "src/opennt-bop/ingress/startup_machine_interrupt.c",
         "src/opennt-bop/ingress/command_native_session.c",
-        "src/opennt-bop/ingress/command_v2_runtime_session.c",
+        "src/opennt-bop/ingress/command_runtime_session.c",
         "src/opennt-bop/command/opennt_command_binary_composition.c",
         "src/opennt-bop/command/opennt_command_config_composition.c",
         "src/opennt-bop/command/opennt_command_environment_composition.c",
         "src/opennt-bop/command/opennt_command_composition.c",
-        "src/opennt-bop/ingress/config_complete_v2_generic_ud_bridge.c",
+        "src/opennt-bop/ingress/config_complete_generic_ud_bridge.c",
         "src/opennt-bop/ingress/dem_ingress_shim.c",
         "src/opennt-bop/ingress/dem_direct_session.c",
         "src/opennt-bop/ingress/dem_native_session.c",
         "src/opennt-bop/ingress/xms_native_session.c",
         "src/opennt-bop/ingress/opennt_bop_route.c",
-        "src/opennt-bop/ingress/dem_v2_generic_ud_bridge.c",
-        "src/opennt-bop/ingress/dem_v2_runtime_session.c",
-        "src/opennt-bop/ingress/dem_v2_startup_composition.c",
-          "src/opennt-bop/ingress/redir_v2_generic_ud_bridge.c",
+        "src/opennt-bop/ingress/dem_generic_ud_bridge.c",
+        "src/opennt-bop/ingress/dem_runtime_session.c",
+        "src/opennt-bop/ingress/dem_startup_composition.c",
+          "src/opennt-bop/ingress/redir_generic_ud_bridge.c",
           "src/opennt-bop/ingress/redir_native_session.c",
           "src/opennt-bop/vdmredir/vrdisp.c",
           "src/opennt-bop/vdmredir/vrmslot.c",
-          "src/opennt-bop/ingress/softpc_emm_unavailable_v2_generic_ud_bridge.c",
-        "src/opennt-bop/ingress/softpc_machine_interrupt_v2_generic_ud_bridge.c",
-        "src/opennt-bop/softpc/opennt_int06_provider_v1.c",
-        "src/opennt-bop/ingress/softpc_memory_size_v2_generic_ud_bridge.c",
-        "src/opennt-bop/ingress/softpc_mouse_vector_v2_generic_ud_bridge.c",
-        "src/opennt-bop/ingress/softpc_printer_openclose_v2_generic_ud_bridge.c",
-        "src/opennt-bop/ingress/softpc_tape_io_v2_generic_ud_bridge.c",
-        "src/opennt-bop/ingress/spckbd_handoff_v2_generic_ud_bridge.c",
-        "src/opennt-bop/ingress/top_level_nosupport_v2_generic_ud_bridge.c",
-        "src/opennt-bop/ingress/xms_v2_generic_ud_bridge.c",
-        "src/opennt-bop/ingress/xms_v2_runtime_session.c"
+          "src/opennt-bop/ingress/softpc_emm_unavailable_generic_ud_bridge.c",
+        "src/opennt-bop/ingress/softpc_machine_interrupt_generic_ud_bridge.c",
+        "src/opennt-bop/softpc/opennt_int06_provider.c",
+        "src/opennt-bop/ingress/softpc_memory_size_generic_ud_bridge.c",
+        "src/opennt-bop/ingress/softpc_mouse_vector_generic_ud_bridge.c",
+        "src/opennt-bop/ingress/softpc_printer_openclose_generic_ud_bridge.c",
+        "src/opennt-bop/ingress/softpc_tape_io_generic_ud_bridge.c",
+        "src/opennt-bop/ingress/spckbd_handoff_generic_ud_bridge.c",
+        "src/opennt-bop/ingress/top_level_nosupport_generic_ud_bridge.c",
+        "src/opennt-bop/ingress/xms_generic_ud_bridge.c",
+        "src/opennt-bop/ingress/xms_runtime_session.c"
       ]
     },
     {
@@ -426,7 +426,7 @@
     },
     {
       "name": "t258-s1-guest-pointer-manager-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t258-s1-guest-pointer-manager-fixture.c",
+      "source": "tests/component-integration/fixtures/t258-s1-guest-pointer-manager-fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -442,9 +442,9 @@
     },
     {
       "name": "t255-s2-generic-context-resume-fixture",
-      "source": "tests/bx-mantle/t255_s2_generic_context_resume_fixture.cc",
+      "source": "tests/adapter-bochs/t255_s2_generic_context_resume_fixture.cc",
       "supportSources": [
-        "tests/bx-mantle/support/t255_s2_generic_ud_context_fixture_bridge.cc"
+        "tests/adapter-bochs/support/t255_s2_generic_ud_context_fixture_bridge.cc"
       ],
       "libraries": [
         "app",
@@ -461,7 +461,7 @@
     },
     {
       "name": "t256-s6-guest-memory-geometry-fixture",
-      "source": "tests/bx-mantle/t256_s6_guest_memory_geometry_fixture.cc",
+      "source": "tests/adapter-bochs/t256_s6_guest_memory_geometry_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -477,7 +477,7 @@
     },
     {
       "name": "t256-s8-ordinary-ram-reservation-fixture",
-      "source": "tests/bx-mantle/t256_s8_ordinary_ram_reservation_fixture.cc",
+      "source": "tests/adapter-bochs/t256_s8_ordinary_ram_reservation_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -493,7 +493,7 @@
     },
     {
       "name": "t256-s10-xmem-record-adapter-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t256_s10_xmem_record_adapter_fixture.cc",
+      "source": "tests/component-integration/fixtures/t256_s10_xmem_record_adapter_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -509,7 +509,7 @@
     },
     {
       "name": "t257-s3-dpmi-startup-session-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t257_s3_dpmi_startup_session_fixture.cc",
+      "source": "tests/component-integration/fixtures/t257_s3_dpmi_startup_session_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -525,7 +525,7 @@
     },
     {
       "name": "t257-s3-native-guest-ldt-fixture",
-      "source": "tests/bx-mantle/t257_s3_native_guest_ldt_fixture.cc",
+      "source": "tests/adapter-bochs/t257_s3_native_guest_ldt_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -541,7 +541,7 @@
     },
     {
       "name": "t257-s3-dpmi-descriptor-source-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t257_s3_dpmi_descriptor_source_fixture.c",
+      "source": "tests/component-integration/fixtures/t257_s3_dpmi_descriptor_source_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -557,7 +557,7 @@
     },
     {
       "name": "t256-s6-engine-geometry-contract-fixture",
-      "source": "tests/bx-mantle/bx_ntvdm_engine_contract_v1_test.c",
+      "source": "tests/adapter-bochs/engine_contract_test.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -573,7 +573,7 @@
     },
     {
       "name": "t253-s2-physical-irq-fixture",
-      "source": "tests/bx-mantle/t253_s2_physical_irq_fixture.cc",
+      "source": "tests/adapter-bochs/t253_s2_physical_irq_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -610,7 +610,7 @@
     },
     {
       "name": "t245-s21-oem-create-file-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t245_s21_oem_create_file_fixture.c",
+      "source": "tests/component-integration/fixtures/t245_s21_oem_create_file_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -628,7 +628,7 @@
     },
     {
       "name": "t245-s18-dem-open-observation-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t245_s18_dem_open_observation_fixture.c",
+      "source": "tests/component-integration/fixtures/t245_s18_dem_open_observation_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -646,7 +646,7 @@
     },
     {
       "name": "t245-s17-command-current-dir-observation-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t245_s17_command_current_dir_observation_fixture.c",
+      "source": "tests/component-integration/fixtures/t245_s17_command_current_dir_observation_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -664,7 +664,7 @@
     },
     {
       "name": "t245-s14-command-bootstrap-observation-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t245_s14_command_bootstrap_observation_fixture.c",
+      "source": "tests/component-integration/fixtures/t245_s14_command_bootstrap_observation_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -682,7 +682,7 @@
     },
     {
       "name": "t245-s11-config-complete-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t245_s11_config_complete_fixture.c",
+      "source": "tests/component-integration/fixtures/t245_s11_config_complete_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -700,7 +700,7 @@
     },
     {
       "name": "t245-s7-printer-openclose-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t245_s7_printer_openclose_fixture.c",
+      "source": "tests/component-integration/fixtures/t245_s7_printer_openclose_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -718,7 +718,7 @@
     },
     {
       "name": "t245-s5-headless-mouse-vector-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t245_s5_headless_mouse_vector_fixture.cc",
+      "source": "tests/component-integration/fixtures/t245_s5_headless_mouse_vector_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -736,7 +736,7 @@
     },
     {
       "name": "t245-s3-softpc-emm-unavailable-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t245_s3_softpc_emm_unavailable_fixture.c",
+      "source": "tests/component-integration/fixtures/t245_s3_softpc_emm_unavailable_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -754,7 +754,7 @@
     },
     {
       "name": "t247-s2-ntdos-exec-entry-observation-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t247_s2_ntdos_exec_entry_observation_fixture.c",
+      "source": "tests/component-integration/fixtures/t247_s2_ntdos_exec_entry_observation_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -770,7 +770,7 @@
     },
     {
       "name": "t251-s3-redir-ingress-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t251_s3_redir_ingress_fixture.c",
+      "source": "tests/component-integration/fixtures/t251_s3_redir_ingress_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -792,7 +792,7 @@
     },
     {
       "name": "t245-s2-ntdos-exec-observation-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t245_s2_ntdos_exec_observation_fixture.c",
+      "source": "tests/component-integration/fixtures/t245_s2_ntdos_exec_observation_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -808,7 +808,7 @@
     },
     {
       "name": "t240-s2-softpc-memory-size-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t240_s2_softpc_memory_size_fixture.c",
+      "source": "tests/component-integration/fixtures/t240_s2_softpc_memory_size_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -824,7 +824,7 @@
     },
     {
       "name": "t237-s5-bop-nosupport-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t237_s5_bop_nosupport_fixture.c",
+      "source": "tests/component-integration/fixtures/t237_s5_bop_nosupport_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -846,7 +846,7 @@
     },
     {
       "name": "t237-s3-xms-a20-source-mirror-fixture",
-      "source": "tests/bx-mantle/t237_s3_xms_a20_source_mirror_fixture.cc",
+      "source": "tests/adapter-bochs/t237_s3_xms_a20_source_mirror_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -865,7 +865,7 @@
     },
     {
       "name": "t237-s2-xms-source-mirror-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t237_s2_xms_source_mirror_fixture.c",
+      "source": "tests/component-integration/fixtures/t237_s2_xms_source_mirror_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -883,8 +883,8 @@
       ]
     },
     {
-      "name": "t230-s15-v2-runtime-session-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t230_s15_v2_runtime_session_fixture.c",
+      "name": "dem-runtime-session-fixture",
+      "source": "tests/component-integration/fixtures/dem_runtime_session_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -911,7 +911,7 @@
     },
     {
       "name": "t230-s15-direct-host-session-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t230_s15_direct_host_session_fixture.c",
+      "source": "tests/component-integration/fixtures/t230_s15_direct_host_session_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -936,7 +936,7 @@
     },
     {
       "name": "t232-s1-host-handle-manager-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t232-s1-host-handle-manager-fixture.c",
+      "source": "tests/component-integration/fixtures/t232-s1-host-handle-manager-fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -958,7 +958,7 @@
     },
     {
       "name": "t230-s15-checked-ram-fixture",
-      "source": "tests/bx-mantle/t230_s15_checked_ram_fixture.cc",
+      "source": "tests/adapter-bochs/t230_s15_checked_ram_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -983,7 +983,7 @@
     },
     {
       "name": "t230-s6-demgset-direct-import-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t230_s6_demgset_direct_import_fixture.c",
+      "source": "tests/component-integration/fixtures/t230_s6_demgset_direct_import_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1005,7 +1005,7 @@
     },
     {
       "name": "t230-s5-demsrch-fcb-direct-import-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t230_s5_demsrch_fcb_direct_import_fixture.c",
+      "source": "tests/component-integration/fixtures/t230_s5_demsrch_fcb_direct_import_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1027,7 +1027,7 @@
     },
     {
       "name": "t230-s4-demdir-direct-import-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t230_s4_demdir_direct_import_fixture.c",
+      "source": "tests/component-integration/fixtures/t230_s4_demdir_direct_import_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1049,7 +1049,7 @@
     },
     {
       "name": "t230-s3-demfile-direct-import-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t230_s3_demfile_direct_import_fixture.c",
+      "source": "tests/component-integration/fixtures/t230_s3_demfile_direct_import_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1071,7 +1071,7 @@
     },
     {
       "name": "t230-s2-demhndl-direct-import-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t230_s2_demhndl_direct_import_fixture.c",
+      "source": "tests/component-integration/fixtures/t230_s2_demhndl_direct_import_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1093,7 +1093,7 @@
     },
     {
       "name": "t225-s50-realmode-handoff-fixture",
-      "source": "tests/bx-mantle/t225_s50_realmode_handoff_fixture.cc",
+      "source": "tests/adapter-bochs/t225_s50_realmode_handoff_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1118,7 +1118,7 @@
     },
     {
       "name": "t225-s23-opennt-int06-provider-fixture",
-      "source": "tests/adapter-softpc/opennt_int06_provider_v1_test.c",
+      "source": "tests/adapter-softpc/opennt_int06_provider_test.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1134,7 +1134,7 @@
     },
     {
       "name": "t249-s3-physical-write-observation-fixture",
-      "source": "tests/bx-mantle/t249_s3_physical_write_observation_fixture.cc",
+      "source": "tests/adapter-bochs/t249_s3_physical_write_observation_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1150,7 +1150,7 @@
     },
     {
       "name": "t225-s23-ram-preflight-fixture",
-      "source": "tests/bx-mantle/t225_s23_ram_preflight_fixture.cc",
+      "source": "tests/adapter-bochs/t225_s23_ram_preflight_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1166,7 +1166,7 @@
     },
     {
       "name": "t225-s23-native-pic-lifecycle-fixture",
-      "source": "tests/bx-mantle/t225_s23_native_pic_lifecycle_fixture.cc",
+      "source": "tests/adapter-bochs/t225_s23_native_pic_lifecycle_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1181,8 +1181,8 @@
       "platformLibraries": []
     },
     {
-      "name": "t225-s40-mantle-watchdog-normal-loop-fixture",
-      "source": "tests/bx-mantle/t225_s40_mantle_watchdog_normal_loop_fixture.cc",
+      "name": "t225-s40-machine-watchdog-normal-loop-fixture",
+      "source": "tests/adapter-bochs/t225_s40_machine_watchdog_normal_loop_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1198,7 +1198,7 @@
     },
     {
       "name": "t228-s1-budget-terminal-position-fixture",
-      "source": "tests/bx-mantle/t228_s1_budget_terminal_position_fixture.cc",
+      "source": "tests/adapter-bochs/t228_s1_budget_terminal_position_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1214,7 +1214,7 @@
     },
     {
       "name": "t228-s1-large-reverse-copy-fixture",
-      "source": "tests/bx-mantle/t228_s1_large_reverse_copy_fixture.cc",
+      "source": "tests/adapter-bochs/t228_s1_large_reverse_copy_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1230,7 +1230,7 @@
     },
     {
       "name": "t228-s1-software-interrupt-observation-fixture",
-      "source": "tests/bx-mantle/t228_s1_software_interrupt_observation_fixture.cc",
+      "source": "tests/adapter-bochs/t228_s1_software_interrupt_observation_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1246,7 +1246,7 @@
     },
     {
       "name": "t228-s1-interrupt-return-observation-fixture",
-      "source": "tests/bx-mantle/t228_s1_interrupt_return_observation_fixture.cc",
+      "source": "tests/adapter-bochs/t228_s1_interrupt_return_observation_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1262,7 +1262,7 @@
     },
     {
       "name": "t225-s30-segment-access-observation-fixture",
-      "source": "tests/bx-mantle/t225_s30_segment_access_observation_fixture.cc",
+      "source": "tests/adapter-bochs/t225_s30_segment_access_observation_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1278,7 +1278,7 @@
     },
     {
       "name": "t225-s56-realmode-segment-limit-compatibility-fixture",
-      "source": "tests/bx-mantle/t225_s56_realmode_segment_limit_compatibility_fixture.cc",
+      "source": "tests/adapter-bochs/t225_s56_realmode_segment_limit_compatibility_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1294,7 +1294,7 @@
     },
     {
       "name": "t231-s2-command-misc-direct-import-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t231_s2_command_misc_direct_import_fixture.c",
+      "source": "tests/component-integration/fixtures/t231_s2_command_misc_direct_import_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1316,7 +1316,7 @@
     },
     {
       "name": "t231-s3-command-misc-registration-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t231_s3_command_misc_registration_fixture.c",
+      "source": "tests/component-integration/fixtures/t231_s3_command_misc_registration_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1338,7 +1338,7 @@
     },
     {
       "name": "t231-s4-command-console-keyboard-direct-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t231_s4_command_console_keyboard_direct_fixture.c",
+      "source": "tests/component-integration/fixtures/t231_s4_command_console_keyboard_direct_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1358,7 +1358,7 @@
     },
     {
       "name": "t231-s5-command-start-info-direct-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t231_s5_command_start_info_direct_fixture.c",
+      "source": "tests/component-integration/fixtures/t231_s5_command_start_info_direct_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1378,7 +1378,7 @@
     },
     {
       "name": "t231-s5-command-config-direct-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t231_s5_command_config_direct_fixture.c",
+      "source": "tests/component-integration/fixtures/t231_s5_command_config_direct_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1398,7 +1398,7 @@
     },
     {
       "name": "t231-s5-command-init-environment-direct-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t231_s5_command_init_environment_direct_fixture.c",
+      "source": "tests/component-integration/fixtures/t231_s5_command_init_environment_direct_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1418,7 +1418,7 @@
     },
     {
       "name": "t234-s2-command-dynamic-environment-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t234_s2_command_dynamic_environment_fixture.c",
+      "source": "tests/component-integration/fixtures/t234_s2_command_dynamic_environment_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1438,7 +1438,7 @@
     },
     {
       "name": "t234-s2-command-set-directories-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t234_s2_command_set_directories_fixture.c",
+      "source": "tests/component-integration/fixtures/t234_s2_command_set_directories_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1458,7 +1458,7 @@
     },
     {
       "name": "t231-s6-command-check-binary-direct-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t231_s6_command_check_binary_direct_fixture.c",
+      "source": "tests/component-integration/fixtures/t231_s6_command_check_binary_direct_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1478,7 +1478,7 @@
     },
     {
       "name": "t231-s7-command-get-next-direct-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t231_s7_command_get_next_direct_fixture.c",
+      "source": "tests/component-integration/fixtures/t231_s7_command_get_next_direct_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1498,7 +1498,7 @@
     },
     {
       "name": "t234-s2-command-pif-direct-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t234_s2_command_pif_direct_fixture.c",
+      "source": "tests/component-integration/fixtures/t234_s2_command_pif_direct_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1518,7 +1518,7 @@
     },
     {
       "name": "t231-s8-command-lifecycle-direct-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t231_s8_command_lifecycle_direct_fixture.c",
+      "source": "tests/component-integration/fixtures/t231_s8_command_lifecycle_direct_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1538,7 +1538,7 @@
     },
     {
       "name": "t236-s1-command-local-child-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t236_s1_command_local_child_fixture.c",
+      "source": "tests/component-integration/fixtures/t236_s1_command_local_child_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1558,7 +1558,7 @@
     },
     {
       "name": "t236-s2-machine-pending-fixture",
-      "source": "tests/bx-mantle/t236_s2_machine_pending_fixture.cc",
+      "source": "tests/adapter-bochs/t236_s2_machine_pending_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1583,7 +1583,7 @@
     },
     {
       "name": "t236-s2-native-cmdexec32-fixture",
-      "source": "tests/bx-mantle/t236_s2_native_cmdexec32_fixture.cc",
+      "source": "tests/adapter-bochs/t236_s2_native_cmdexec32_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1610,7 +1610,7 @@
     },
     {
       "name": "t231-s9-command-exit-direct-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t231_s9_command_exit_direct_fixture.c",
+      "source": "tests/component-integration/fixtures/t231_s9_command_exit_direct_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1630,7 +1630,7 @@
     },
     {
       "name": "t230-s7-demdasd-ioctl-direct-import-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t230_s7_demdasd_ioctl_direct_import_fixture.c",
+      "source": "tests/component-integration/fixtures/t230_s7_demdasd_ioctl_direct_import_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1657,7 +1657,7 @@
     },
     {
       "name": "t236-s4-ntfdisk-readonly-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t236_s4_ntfdisk_readonly_fixture.c",
+      "source": "tests/component-integration/fixtures/t236_s4_ntfdisk_readonly_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1684,7 +1684,7 @@
     },
     {
       "name": "t231-s10-command-native-session-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t231_s10_command_native_session_fixture.c",
+      "source": "tests/component-integration/fixtures/t231_s10_command_native_session_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1709,7 +1709,7 @@
     },
     {
       "name": "t230-s8-demerror-lock-direct-import-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t230_s8_demerror_lock_direct_import_fixture.c",
+      "source": "tests/component-integration/fixtures/t230_s8_demerror_lock_direct_import_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1736,7 +1736,7 @@
     },
     {
       "name": "t230-s9-demmisc-direct-import-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t230_s9_demmisc_direct_import_fixture.c",
+      "source": "tests/component-integration/fixtures/t230_s9_demmisc_direct_import_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1763,7 +1763,7 @@
     },
     {
       "name": "t230-s10-demdisp-direct-import-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t230_s10_demdisp_direct_import_fixture.c",
+      "source": "tests/component-integration/fixtures/t230_s10_demdisp_direct_import_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1790,7 +1790,7 @@
     },
     {
       "name": "t230-s10-dem-ingress-direct-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t230_s10_dem_ingress_direct_fixture.c",
+      "source": "tests/component-integration/fixtures/t230_s10_dem_ingress_direct_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1817,7 +1817,7 @@
     },
     {
       "name": "t230-s10-dem-native-session-direct-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t230_s10_dem_native_session_direct_fixture.c",
+      "source": "tests/component-integration/fixtures/t230_s10_dem_native_session_direct_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1843,8 +1843,8 @@
       ]
     },
     {
-      "name": "t226-s4-a20-mantle-fixture",
-      "source": "tests/bx-mantle/t199_s22_a20_capability_fixture.cc",
+      "name": "t226-s4-a20-machine-fixture",
+      "source": "tests/adapter-bochs/t199_s22_a20_capability_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1869,7 +1869,7 @@
     },
     {
       "name": "t242-s2-machine-stage-reset-fixture",
-      "source": "tests/bx-mantle/t200_s22_machine_stage_fixture.cc",
+      "source": "tests/adapter-bochs/t200_s22_machine_stage_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1887,7 +1887,7 @@
     },
     {
       "name": "t242-s3-softpc-tape-io-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t242_s3_softpc_tape_io_fixture.c",
+      "source": "tests/component-integration/fixtures/t242_s3_softpc_tape_io_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1903,7 +1903,7 @@
     },
     {
       "name": "t246-s2-softpc-machine-interrupt-ingress-fixture",
-      "source": "tests/bx-mantle/t246_s2_softpc_machine_interrupt_ingress_fixture.cc",
+      "source": "tests/adapter-bochs/t246_s2_softpc_machine_interrupt_ingress_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1921,7 +1921,7 @@
     },
     {
       "name": "t244-s2-headless-8042-lifecycle-fixture",
-      "source": "tests/bx-mantle/t244_s2_headless_8042_lifecycle_fixture.cc",
+      "source": "tests/adapter-bochs/t244_s2_headless_8042_lifecycle_fixture.cc",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1937,7 +1937,7 @@
     },
     {
       "name": "t243-s2-spckbd-handoff-fixture",
-      "source": "tests/component-integration/bx-vdm-legacy-fixtures/t243_s2_spckbd_handoff_fixture.c",
+      "source": "tests/component-integration/fixtures/t243_s2_spckbd_handoff_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1953,7 +1953,7 @@
     }
   ],
   "targets": {
-    "name": "ntdos64-native",
+    "name": "ntvdm64",
     "source": "src/app/native_cli.c",
     "libraries": [
       "app",

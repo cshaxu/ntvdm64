@@ -6,7 +6,7 @@ lifecycle.
 
 It may depend on `bochs-core` only. It must not contain or import OpenNT, DOS,
 VDM, WOW, BOP, SoftPC/CCPU or Win32 semantics. T260 S3 moved all former
-`bx_ntvdm_*` bridge, finite-run, observation and machine-session files to
+the former project-prefixed bridge, finite-run, observation and machine-session files to
 `adapter-softpc`; the retained interfaces use neutral Bochs-native names.
 
 The static library name is `adapter-bochs`. `app` and `adapter-softpc` may

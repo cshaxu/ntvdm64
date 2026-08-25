@@ -1,6 +1,6 @@
-#ifndef NTDOS64_RECONSTRUCTED_CVIDC_VIDEO_TAIL_H
-#define NTDOS64_RECONSTRUCTED_CVIDC_VIDEO_TAIL_H
+#ifndef RUNNER_RECONSTRUCTED_CVIDC_VIDEO_TAIL_H
+#define RUNNER_RECONSTRUCTED_CVIDC_VIDEO_TAIL_H
 
-int ntdos64_reconstructed_cvidc_video_tail_initialize(void);
+int runner_reconstructed_cvidc_video_tail_initialize(void);
 
 #endif

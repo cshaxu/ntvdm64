@@ -8,7 +8,7 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 $root = [IO.Path]::GetFullPath($RepositoryRoot)
-$temporary = Join-Path ([IO.Path]::GetTempPath()) ('ntdos64-t225-s57-' + [guid]::NewGuid().ToString('N') + '.json')
+$temporary = Join-Path ([IO.Path]::GetTempPath()) ('runner-t225-s57-' + [guid]::NewGuid().ToString('N') + '.json')
 
 function Number([object]$value) {
     if ($null -eq $value) { return -1 }
@@ -33,7 +33,7 @@ function Get-BoundRoute([string]$selector, [int]$service) {
         '51' { return 'generic-UD bridge -> boot composition -> top-level facade -> typed stop; WOW host composition absent' }
         '52' {
             if ($service -in @(0, 1, 2, 3, 4, 5, 10, 11)) {
-                return 'generic-UD bridge -> native composition -> XMS package session -> mantle-backed A20/extended-memory seam'
+                return 'generic-UD bridge -> native composition -> XMS package session -> machine-backed A20/extended-memory seam'
             }
             return 'generic-UD bridge -> native composition -> XMS package session -> typed stop for unadmitted UMB/INT15 mechanics'
         }
@@ -63,8 +63,8 @@ function Get-BoundRoute([string]$selector, [int]$service) {
 
 function Get-RecoveryRung([string]$selector, [int]$service) {
     switch ($selector) {
-        '50' { if ((Is-Dem-Noop $service)) { return 'rung-1 original no-op retained' }; return 'rung-2 original owner contract through checked bx-vdm seam; detailed ABI/failure closure pending' }
-        '54' { return 'rung-2 original owner contract through checked bx-vdm session seam; detailed ABI/failure closure pending' }
+        '50' { if ((Is-Dem-Noop $service)) { return 'rung-1 original no-op retained' }; return 'rung-2 original owner contract through checked adapter-softpc seam; detailed ABI/failure closure pending' }
+        '54' { return 'rung-2 original owner contract through checked adapter-softpc session seam; detailed ABI/failure closure pending' }
         '57' { return 'rung-2 source-derived original unavailable contract' }
         '52' { return 'rung-2 original XMS ownership through admitted mechanical seam, or source-proven deferred stop' }
         '53' { return 'rung-2 source-proven deferred protected-mode composition' }
@@ -140,7 +140,7 @@ try {
     $parent = Split-Path -Parent $output
     if (!(Test-Path -LiteralPath $parent)) { New-Item -ItemType Directory -Path $parent | Out-Null }
     [ordered]@{
-        schema = 'ntdos64.t225.s57.bop-owner-package-profile-ledger.v1'
+        schema = 'runner.t225.s57.bop-owner-package-profile-ledger.v1'
         sourceInventorySchema = $source.schema
         sourceEntryCount = $source.sourceCount
         entries = $rows

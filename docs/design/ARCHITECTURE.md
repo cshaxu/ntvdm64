@@ -2,7 +2,7 @@
 
 ## Architectural Goal
 
-NTDOS64 is a composition of an adopted guest machine, OpenNT source mirrors,
+RUNNER is a composition of an adopted guest machine, OpenNT source mirrors,
 and a modern contained host. Its design objective is to preserve each layer's
 native responsibility rather than recreate one layer inside another. The
 product has twelve named source components; a source file has exactly one of
@@ -114,7 +114,7 @@ but these remain distinct resource kinds: a guest address is never a Windows
 `HANDLE`, and a native pointer is never a guest-visible token.
 
 The first runtime process is MSVC x64 throughout: `app`, adapters, OpenNT host
-composition, mantle and adopted Bochs core share one static CRT. The
+composition, machine and adopted Bochs core share one static CRT. The
 invocation shell is an outer product boundary, not a semantic architecture
 layer. The guest CPU architecture is an
 emulation property, not a host-process property; CPU5/Pentium-MMX guest code

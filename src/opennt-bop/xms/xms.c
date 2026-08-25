@@ -37,7 +37,7 @@ BOOL XMSInit (int argc, char *argv[])
 
     /* DIVERGENCE (T237): the original DLL initializer accepted loader
      * arguments and carried a non-i386 VDM allocator branch.  This provider
-     * is always composed against the declared checked-RAM mantle seam; no
+     * is always composed against the declared checked-RAM machine seam; no
      * private VDM virtual-memory API is present. */
     (void)argc;
     (void)argv;

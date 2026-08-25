@@ -3,21 +3,21 @@
 
 static uint32_t runtime_a20_capability_lifecycle_active;
 
-void runtime_a20_capability_v1_set_lifecycle_active(uint32_t active)
+void runtime_a20_capability_set_lifecycle_active(uint32_t active)
 {
   runtime_a20_capability_lifecycle_active = active == 1u ? 1u : 0u;
 }
 
-void runtime_a20_capability_v1_dispatch(
-  const struct runtime_a20_capability_request_v1 *request,
-  struct runtime_a20_capability_result_v1 *result)
+void runtime_a20_capability_dispatch(
+  const struct runtime_a20_capability_request *request,
+  struct runtime_a20_capability_result *result)
 {
   if (result == 0) return;
   result->status = RUNTIME_A20_CAPABILITY_REJECTED_LIFECYCLE;
   result->enabled = 0u;
   if (!runtime_a20_capability_lifecycle_active) return;
-  if (!machine_facade_v1_get_a20(&result->enabled)) return;
-  if (request == 0 || request->version != RUNTIME_A20_CAPABILITY_V1_VERSION) {
+  if (!machine_facade_get_a20(&result->enabled)) return;
+  if (request == 0 || request->version != RUNTIME_A20_CAPABILITY_VERSION) {
     result->status = RUNTIME_A20_CAPABILITY_REJECTED_VERSION;
     return;
   }
@@ -33,7 +33,7 @@ void runtime_a20_capability_v1_dispatch(
     result->status = RUNTIME_A20_CAPABILITY_REJECTED_VALUE;
     return;
   }
-  if (!machine_facade_v1_set_a20(request->requested_enabled) ||
-      !machine_facade_v1_get_a20(&result->enabled)) return;
+  if (!machine_facade_set_a20(request->requested_enabled) ||
+      !machine_facade_get_a20(&result->enabled)) return;
   result->status = RUNTIME_A20_CAPABILITY_OK;
 }

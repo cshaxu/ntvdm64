@@ -89,7 +89,7 @@ function Get-CurrentCompositionState([string]$selector, $service) {
         '51' { return 'bound typed stop through top-level facade; WOW composition absent' }
         '52' {
             if ($number -in @(0, 2, 3, 5, 11)) {
-                return 'bound partial mantle-backed XMS implementation; full source ABI/failure review pending'
+                return 'bound partial machine-backed XMS implementation; full source ABI/failure review pending'
             }
             return 'bound typed stop; XMS component deferred'
         }
@@ -334,7 +334,7 @@ $output = [IO.Path]::GetFullPath($OutputPath)
 $parent = Split-Path -Parent $output
 if (-not (Test-Path -LiteralPath $parent)) { New-Item -ItemType Directory -Path $parent | Out-Null }
 [ordered]@{
-    schema = 'ntdos64.t200.s31.opennt-bop-source-inventory.v2'
+    schema = 'runner.t200.s31.opennt-bop-source-inventory.v2'
     generatedUtc = [DateTime]::UtcNow.ToString('o')
     sourceCount = $seeded.Count
     selectorCounts = [ordered]@{

@@ -5,38 +5,38 @@
 //
 /////////////////////////////////////////////////////////////////////////
 
-#ifndef BX_MANTLE_MINIMAL_MACHINE_H
-#define BX_MANTLE_MINIMAL_MACHINE_H
+#ifndef BX_MACHINE_MINIMAL_MACHINE_H
+#define BX_MACHINE_MINIMAL_MACHINE_H
 
 class bx_pic_c;
 
-enum bx_mantle_minimal_machine_status {
-  BX_MANTLE_MINIMAL_MACHINE_OK = 0,
-  BX_MANTLE_MINIMAL_MACHINE_ALREADY_ATTEMPTED,
-  BX_MANTLE_MINIMAL_MACHINE_SIM_FAILED,
-  BX_MANTLE_MINIMAL_MACHINE_MEMORY_FAILED,
-  BX_MANTLE_MINIMAL_MACHINE_PORT_SPACE_FAILED,
-  BX_MANTLE_MINIMAL_MACHINE_PIC_FAILED,
-  BX_MANTLE_MINIMAL_MACHINE_KEYBOARD_FAILED,
-  BX_MANTLE_MINIMAL_MACHINE_KEYBOARD_CLEANUP_FAILED,
-  BX_MANTLE_MINIMAL_MACHINE_PIC_CLEANUP_FAILED,
-  BX_MANTLE_MINIMAL_MACHINE_PORT_SPACE_CLEANUP_FAILED,
-  BX_MANTLE_MINIMAL_MACHINE_CPU_CONFIGURATION_FAILED
+enum adapter_bochs_minimal_machine_status {
+  BX_MACHINE_MINIMAL_MACHINE_OK = 0,
+  BX_MACHINE_MINIMAL_MACHINE_ALREADY_ATTEMPTED,
+  BX_MACHINE_MINIMAL_MACHINE_SIM_FAILED,
+  BX_MACHINE_MINIMAL_MACHINE_MEMORY_FAILED,
+  BX_MACHINE_MINIMAL_MACHINE_PORT_SPACE_FAILED,
+  BX_MACHINE_MINIMAL_MACHINE_PIC_FAILED,
+  BX_MACHINE_MINIMAL_MACHINE_KEYBOARD_FAILED,
+  BX_MACHINE_MINIMAL_MACHINE_KEYBOARD_CLEANUP_FAILED,
+  BX_MACHINE_MINIMAL_MACHINE_PIC_CLEANUP_FAILED,
+  BX_MACHINE_MINIMAL_MACHINE_PORT_SPACE_CLEANUP_FAILED,
+  BX_MACHINE_MINIMAL_MACHINE_CPU_CONFIGURATION_FAILED
 };
 
 // This C++-only owner exposes neither original-object pointers nor an ABI.
 // SIM lifetime is intentionally the fixture process lifetime.
-class bx_mantle_minimal_machine_c {
+class adapter_bochs_minimal_machine_c {
 public:
-  bx_mantle_minimal_machine_c();
+  adapter_bochs_minimal_machine_c();
 
-  bx_mantle_minimal_machine_status initialize(Bit64u guest, Bit64u host);
+  adapter_bochs_minimal_machine_status initialize(Bit64u guest, Bit64u host);
   // Compose the selector-blind 8042 only after the caller has initialized
   // the native PC timer base for its selected IPS.
-  bx_mantle_minimal_machine_status compose_headless_8042(void);
-  bx_mantle_minimal_machine_status cleanup(void);
+  adapter_bochs_minimal_machine_status compose_headless_8042(void);
+  adapter_bochs_minimal_machine_status cleanup(void);
 
-  // Private mantle lifecycle control for the CPU compatibility gate.
+  // Private machine lifecycle control for the CPU compatibility gate.
   // It is valid only after initialize and before cleanup.
   bx_bool set_realmode_segment_limit_compatibility(bx_bool enabled);
   bx_bool realmode_segment_limit_compatibility_active(void);

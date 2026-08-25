@@ -5,11 +5,11 @@
 #include "historical_dem_byob_profile_v1.h"
 #include "oem_facade_v1.h"
 
-typedef void (*ntdos64_bios_entry)(void);
+typedef void (*runner_bios_entry)(void);
 
-extern ntdos64_bios_entry BIOS[];
+extern runner_bios_entry BIOS[];
 extern int DemInit(int argc, char *argv[]);
-extern uint8_t *ntdos64_ccpu_sm0_ram(void);
+extern uint8_t *runner_ccpu_sm0_ram(void);
 extern void setCS(uint16_t value);
 extern void setIP(uint16_t value);
 extern void setDI(uint16_t value);
@@ -22,16 +22,16 @@ int main(int argc, char *argv[])
 
     if (argc != 2) return 1;
     fprintf(stderr, "demload fixture: bridge init\n");
-    if (!ntdos64_historical_bios_bridge_v1_initialize()) return 2;
+    if (!runner_historical_bios_bridge_v1_initialize()) return 2;
     fprintf(stderr, "demload fixture: original DemInit\n");
-    if (!ntdos64_oem_facade_v1_configure_resource_root(argv[1]) ||
+    if (!runner_oem_facade_v1_configure_resource_root(argv[1]) ||
         !DemInit(argc, argv) ||
-        !ntdos64_historical_dem_byob_profile_v1_replace_directory(argv[1])) {
+        !runner_historical_dem_byob_profile_v1_replace_directory(argv[1])) {
         result = 4;
         goto cleanup;
     }
     fprintf(stderr, "demload fixture: historical state\n");
-    ram = ntdos64_ccpu_sm0_ram();
+    ram = runner_ccpu_sm0_ram();
     if (ram == NULL) {
         result = 8;
         goto cleanup;
@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
     }
 
 cleanup:
-    ntdos64_oem_facade_v1_reset();
-    ntdos64_historical_bios_bridge_v1_terminate();
+    runner_oem_facade_v1_reset();
+    runner_historical_bios_bridge_v1_terminate();
     return result;
 }

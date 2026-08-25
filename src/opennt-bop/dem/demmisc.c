@@ -205,7 +205,7 @@ DWORD	BytesRead;
         /* bx-vdm lifetime seam: the Direct CLI composition owns this imported
          * dem.c global across a reusable engine session.  The original NT
          * process teardown did not re-enter the owner after this free; clear
-         * it here so v2 reset cannot double-free after a real 50:11. */
+         * it here so session reset cannot double-free after a real 50:11. */
         pszDefaultDOSDirectory = NULL;
     }
     return;

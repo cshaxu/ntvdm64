@@ -12,7 +12,7 @@
  */
 
 #include <stddef.h>
-#include "adapter-win32/include/legacy-api/opennt_rtl_types.h"
+#include "adapter-win32/include/opennt-api/opennt_rtl_types.h"
 
 #if defined(__cplusplus)
 extern "C" {

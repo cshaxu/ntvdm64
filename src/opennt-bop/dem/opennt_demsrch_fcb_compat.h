@@ -27,7 +27,7 @@
  * value macro is source-local DOS open-mode vocabulary, whereas winternl.h
  * uses ACCESS_MASK as an NT declaration type. */
 #include "opennt_demfile_compat.h"
-#include "adapter-win32/include/legacy-api/opennt_dem_search_facade.h"
+#include "adapter-win32/include/opennt-api/opennt_dem_search_facade.h"
 
 /* Verbatim layout source: base/mvdm/dos/dem/dosdef.h. */
 #define ATTR_READ_ONLY 0x1

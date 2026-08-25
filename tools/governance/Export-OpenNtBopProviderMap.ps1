@@ -37,7 +37,7 @@ function Read-DispatchTable([string]$RelativePath, [string]$StartPattern) {
 }
 
 $inventory = Get-Content -Raw -LiteralPath $inventoryPath | ConvertFrom-Json
-if ($inventory.schema -ne 'ntdos64.opennt-bop-inventory.v1') { throw "Unexpected inventory schema: $($inventory.schema)" }
+if ($inventory.schema -ne 'runner.opennt-bop-inventory.v1') { throw "Unexpected inventory schema: $($inventory.schema)" }
 
 $tables = [ordered]@{
     BOP_DOS = Read-DispatchTable 'docs\etc\legacy_code\opennt-bop\original\dos\dem\demdisp.c' '^\s*PFNSVC\s+apfnSVC\s*\[\]\s*='
@@ -109,7 +109,7 @@ foreach ($selector in $inventory.top_level_selectors) {
 }
 
 $record = [ordered]@{
-    schema = 'ntdos64.opennt-bop-provider-module-map.v1'; inventory_json_sha256 = Get-Sha256 $inventoryPath
+    schema = 'runner.opennt-bop-provider-module-map.v1'; inventory_json_sha256 = Get-Sha256 $inventoryPath
     interpretation = 'Original source mapping only. mapped-not-enabled never implies a linkable provider, adapter support, or guest-visible success.'
     provider_order = @('original-composable', 'original-with-contained-cli-capability', 'source-derived-after-evidenced-blocker', 'original-failure-or-deferred')
     top_level_selectors = $topLevel

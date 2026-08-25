@@ -107,7 +107,7 @@
   precedent for new code. Do not move a file across these owners as an
   incidental feature change; the admitted reorganization package inventories
   it and uses `git mv` whenever ownership is pure.
-- The only original-code components are `bochs-core`, `opennt-guest`,
+- Reserve `legacy` for an archived historical-record path, an immutable external`r`n  spelling, or prose that identifies a historical platform/API. It must not`r`n  label a current production ABI, component, fixture, build target, or active`r`n  compatibility facade merely because that code was renamed from an earlier`r`n  local revision. Use a neutral semantic name instead; a retained external`r`n  spelling is registered as an upstream-identity exception.`r`n- The only original-code components are `bochs-core`, `opennt-guest`,
   `opennt-bop`, `opennt-host`, `opennt-softpc`, and `opennt-utils`; every imported-body change is individually
   registered in that component's README and marked `DIVERGENCE:` locally.
   `adapter-bochs`, `adapter-bop`, `adapter-softpc`, and `adapter-win32` are

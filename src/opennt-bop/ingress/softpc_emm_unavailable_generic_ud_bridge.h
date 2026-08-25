@@ -1,0 +1,12 @@
+#ifndef RUNTIME_SOFTPC_EMM_UNAVAILABLE_GENERIC_UD_BRIDGE_H
+#define RUNTIME_SOFTPC_EMM_UNAVAILABLE_GENERIC_UD_BRIDGE_H
+
+#include "adapter-bop/generic_ud_bridge.h"
+
+int runtime_softpc_emm_unavailable_generic_ud_recognizes(
+    const struct runtime_generic_ud_event *event);
+int runtime_softpc_emm_unavailable_generic_ud_dispatch(
+    const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome);
+
+#endif

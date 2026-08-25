@@ -104,8 +104,7 @@ an entry in the Bochs/OpenNT intrusion register.
 `byob-profile-test`, `bx-ntvdm-machine-profile-abi-test`, and
 `bx-ntvdm-adapter-runtime-test` pass in
 `artifacts/build/current/adapter-cli-r1`. r14 also explicitly compiles the
-changed `byob_profile.o`, `bx_ntvdm_machine_profile_abi.o`, and
-`bx_ntvdm_adapter_runtime.o` inside its private Bochs build copy. None of
+the corresponding profile and composition objects inside its private build copy. None of
 these results reads guest memory or executes the fixture through Bochs.
 
 The subsequent same-version execution evidence is

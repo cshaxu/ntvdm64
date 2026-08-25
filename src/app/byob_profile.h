@@ -42,7 +42,7 @@ typedef struct byob_machine_startup_snapshot_trigger_descriptor {
     uint32_t resume_bytes;
 } byob_machine_startup_snapshot_trigger_descriptor;
 
-/* Closed v1 native-startup rendezvous.  This is a profile declaration, not a
+/* Closed native-startup rendezvous.  This is a profile declaration, not a
  * general exception or guest-service interface. */
 typedef struct byob_machine_startup_handoff_descriptor {
     uint32_t exception_vector;
@@ -57,7 +57,7 @@ typedef struct byob_host_drive_inventory_descriptor {
     uint8_t types[BYOB_PROFILE_DRIVE_SLOT_COUNT];
 } byob_host_drive_inventory_descriptor;
 
-/* v2 guest-composition metadata.  This is a DOS identity, never a local
+/* guest-composition metadata.  This is a DOS identity, never a local
  * pathname: the adapter receives immutable selected bytes separately. */
 typedef struct byob_guest_artifact_placement_descriptor {
     wchar_t path[BYOB_PROFILE_GUEST_PATH_MAX_CHARS];
@@ -67,8 +67,8 @@ typedef struct byob_guest_artifact_placement_descriptor {
 /* These are profile-selected, adapter-materialized resources.  They never
  * name a host file and are intentionally a closed set for the first profile. */
 typedef enum byob_guest_boot_file_materialization {
-    BYOB_GUEST_BOOT_FILE_MINIMAL_COMMENT_V1 = 1,
-    BYOB_GUEST_BOOT_FILE_EMPTY_V1 = 2
+    BYOB_GUEST_BOOT_FILE_MINIMAL_COMMENT = 1,
+    BYOB_GUEST_BOOT_FILE_EMPTY = 2
 } byob_guest_boot_file_materialization;
 
 typedef struct byob_guest_boot_file_descriptor {
@@ -89,7 +89,7 @@ typedef struct byob_guest_dos_metadata_descriptor {
  * closed guest-composition value, not a user-facing host console setting. */
 typedef enum byob_guest_display_state {
     BYOB_GUEST_DISPLAY_STATE_NONE = 0,
-    BYOB_GUEST_DISPLAY_STATE_STREAM_IO_V1 = 2
+    BYOB_GUEST_DISPLAY_STATE_STREAM_IO = 2
 } byob_guest_display_state;
 
 /* A fixed guest command sequence is profile data, not a host queue.  The

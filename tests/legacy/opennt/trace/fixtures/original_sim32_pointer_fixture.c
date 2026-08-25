@@ -10,8 +10,8 @@ extern void c_cpu_init(void);
 extern void c_cpu_terminate(void);
 extern void sas_init(uint32_t size);
 extern void sas_term(void);
-extern uint8_t *ntdos64_ccpu_sm0_ram(void);
-extern unsigned long ntdos64_ccpu_sm0_unexpected_calls(void);
+extern uint8_t *runner_ccpu_sm0_ram(void);
+extern unsigned long runner_ccpu_sm0_unexpected_calls(void);
 extern uint8_t *c_GetLinAdd(uint32_t address);
 extern uint8_t *Sim32pGetVDMPointer(uint32_t address, uint8_t protected_mode);
 
@@ -23,7 +23,7 @@ int main(void) {
 
     sas_init(2u * 1024u * 1024u);
     c_cpu_init();
-    ram = ntdos64_ccpu_sm0_ram();
+    ram = runner_ccpu_sm0_ram();
     if (ram == NULL) {
         return 1;
     }
@@ -41,7 +41,7 @@ int main(void) {
     if (pointer != ram + 3 || pointer == NULL || *pointer != 0xa5u) {
         result |= 8;
     }
-    if (ntdos64_ccpu_sm0_unexpected_calls() != 0) {
+    if (runner_ccpu_sm0_unexpected_calls() != 0) {
         result |= 16;
     }
     c_cpu_terminate();

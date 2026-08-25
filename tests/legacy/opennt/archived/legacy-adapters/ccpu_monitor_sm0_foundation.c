@@ -21,11 +21,11 @@ extern uint8_t *Start_of_M_area;
 void (*BIOS[256])(void);
 #endif
 
-unsigned long ntdos64_ccpu_sm0_unexpected_calls(void) {
+unsigned long runner_ccpu_sm0_unexpected_calls(void) {
     return sm0_unexpected_calls;
 }
 
-uint8_t *ntdos64_ccpu_sm0_ram(void) {
+uint8_t *runner_ccpu_sm0_ram(void) {
 #ifdef CCPU_SM0_USE_HISTORICAL_SAS
     return Start_of_M_area;
 #else

@@ -1,7 +1,7 @@
 /* DIVERGENCE(WIN32-DIV-003): OpenNT nt_pif.c calls historical OEM helper
  * exports in the NTVDM product host.  Retain their parameters and return
  * rules behind this facade, implemented with public OEM/ANSI Win32 APIs. */
-#include "adapter-win32/include/legacy-api/opennt_pif_oem_facade.h"
+#include "adapter-win32/include/opennt-api/opennt_pif_oem_facade.h"
 
 #include <stdlib.h>
 #include <string.h>

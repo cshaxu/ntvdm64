@@ -16,13 +16,13 @@ static int pipe_round_trip(void)
     DWORD bytes = 0u;
     DWORD error = ERROR_SUCCESS;
     char read_buffer[4] = { 0 };
-    char pipe_name[] = "\\\\localhost\\PIPE\\ntdos64-t263-s8";
+    char pipe_name[] = "\\\\localhost\\PIPE\\runner-t263-s8";
 
-    server = CreateNamedPipeW(L"\\\\.\\pipe\\ntdos64-t263-s8",
+    server = CreateNamedPipeW(L"\\\\.\\pipe\\runner-t263-s8",
         PIPE_ACCESS_DUPLEX, PIPE_TYPE_BYTE | PIPE_READMODE_BYTE | PIPE_WAIT,
         1u, 64u, 64u, 0u, NULL);
     if (server == INVALID_HANDLE_VALUE) return 0;
-    client = CreateFileW(L"\\\\.\\pipe\\ntdos64-t263-s8",
+    client = CreateFileW(L"\\\\.\\pipe\\runner-t263-s8",
         GENERIC_READ | GENERIC_WRITE, 0u, NULL, OPEN_EXISTING,
         FILE_FLAG_OVERLAPPED, NULL);
     if (client == INVALID_HANDLE_VALUE ||

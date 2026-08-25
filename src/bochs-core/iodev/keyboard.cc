@@ -84,8 +84,8 @@ bx_keyb_c::bx_keyb_c()
 
 bx_keyb_c::~bx_keyb_c()
 {
-  // BX-MANTLE-091: this adopted, headless controller is owned by the
-  // mantle factory.  The original runtime-parameter registrations are not
+  // BX-MACHINE-091: this adopted, headless controller is owned by the
+  // machine factory.  The original runtime-parameter registrations are not
   // composed, so there are no SIM handlers or parameter-tree nodes to undo.
   if (pastebuf != NULL) {
     delete [] pastebuf;
@@ -119,7 +119,7 @@ void bx_keyb_c::init(void)
   BX_DEBUG(("Init $Id: keyboard.cc 11346 2012-08-19 08:16:20Z vruppert $"));
   Bit32u   i;
 
-  // BX-MANTLE-091: the existing native PIC does not need the upstream
+  // BX-MACHINE-091: the existing native PIC does not need the upstream
   // product device-registry annotation to carry IRQ1.
 
   DEV_register_ioread_handler(this, read_handler,
@@ -130,7 +130,7 @@ void bx_keyb_c::init(void)
                                       0x0060, "8042 Keyboard controller", 1);
   DEV_register_iowrite_handler(this, write_handler,
                                       0x0064, "8042 Keyboard controller", 1);
-  // BX-MANTLE-091: Bochs' default controller serial cadence is kept as the
+  // BX-MACHINE-091: Bochs' default controller serial cadence is kept as the
   // fixed 1-usec native machine timing.  The historical GUI/SIM parameter
   // surface is deliberately absent from this headless composition.
   BX_KEY_THIS timer_handle = bx_pc_system.register_timer(this, timer_handler,
@@ -213,7 +213,7 @@ void bx_keyb_c::reset(unsigned type)
 
 void bx_keyb_c::register_state(void)
 {
-  // BX-MANTLE-091: no product snapshot/configuration tree is composed.
+  // BX-MACHINE-091: no product snapshot/configuration tree is composed.
   // The headless lifecycle is process-local and has no restore contract.
   return;
 #if 0
@@ -293,13 +293,13 @@ void bx_keyb_c::register_state(void)
 
 void bx_keyb_c::after_restore_state(void)
 {
-  // BX-MANTLE-091: restoration previously only repainted product GUI LEDs.
+  // BX-MACHINE-091: restoration previously only repainted product GUI LEDs.
 }
 
 Bit64s bx_keyb_c::kbd_param_handler(bx_param_c *param, int set, Bit64s val)
 {
   UNUSED(param); UNUSED(set);
-  // BX-MANTLE-091: no runtime parameter surface is installed.
+  // BX-MACHINE-091: no runtime parameter surface is installed.
   return val;
 }
 
@@ -493,13 +493,13 @@ void bx_keyb_c::write(Bit32u address, Bit32u value, unsigned io_len)
             }
             break;
           case 0xd4: // Write to mouse
-            // BX-MANTLE-091: this composition has no auxiliary device.
+            // BX-MACHINE-091: this composition has no auxiliary device.
             // Do not fabricate an ACK, queue or IRQ12; leave the guest's
             // original controller-timeout/error branch observable.
             break;
 
           case 0xd3: // write mouse output buffer
-            // BX-MANTLE-091: reject synthetic auxiliary output for the same
+            // BX-MACHINE-091: reject synthetic auxiliary output for the same
             // no-mouse contract; ordinary keyboard output remains 0xd2.
             break;
 
@@ -712,7 +712,7 @@ void bx_keyb_c::write(Bit32u address, Bit32u value, unsigned io_len)
 // chars require a shift or other modifier.
 void bx_keyb_c::service_paste_buf()
 {
-  // BX-MANTLE-091: clipboard/paste is a Bochs host-input product feature.
+  // BX-MACHINE-091: clipboard/paste is a Bochs host-input product feature.
   return;
 }
 #if 0
@@ -758,7 +758,7 @@ void bx_keyb_c::service_paste_buf()
 void bx_keyb_c::paste_bytes(Bit8u *bytes, Bit32s length)
 {
   UNUSED(bytes); UNUSED(length);
-  // BX-MANTLE-091: no host paste endpoint is composed in this machine.
+  // BX-MACHINE-091: no host paste endpoint is composed in this machine.
   return;
 }
 #if 0
@@ -778,7 +778,7 @@ void bx_keyb_c::paste_bytes(Bit8u *bytes, Bit32s length)
 void bx_keyb_c::gen_scancode(Bit32u key)
 {
   UNUSED(key);
-  // BX-MANTLE-091: host key injection is deliberately unavailable.
+  // BX-MACHINE-091: host key injection is deliberately unavailable.
   return;
 }
 #if 0
@@ -1028,7 +1028,7 @@ void bx_keyb_c::kbd_ctrl_to_kbd(Bit8u value)
     BX_KEY_THIS s.kbd_internal_buffer.led_status = value;
     BX_DEBUG(("LED status set to %02x",
       (unsigned) BX_KEY_THIS s.kbd_internal_buffer.led_status));
-    // BX-MANTLE-091: retain protocol ACK/order, omit product GUI LEDs.
+    // BX-MACHINE-091: retain protocol ACK/order, omit product GUI LEDs.
     kbd_enQ(0xFA); // send ACK %%%
     return;
   }
@@ -1086,7 +1086,7 @@ void bx_keyb_c::kbd_ctrl_to_kbd(Bit8u value)
       // XT sends nothing, AT sends ACK
       // MFII with translation sends ACK+ABh+41h
       // MFII without translation sends ACK+ABh+83h
-      // BX-MANTLE-091: use Bochs' upstream MF default without exposing the
+      // BX-MACHINE-091: use Bochs' upstream MF default without exposing the
       // product configuration tree.  The response ordering remains original.
       kbd_enQ(0xFA);
       kbd_enQ(0xAB);

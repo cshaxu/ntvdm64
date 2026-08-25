@@ -4,36 +4,36 @@
 
 #include <string.h>
 
-struct app_engine_worker_v1_context {
-    struct runtime_engine_request_v1 request;
-    struct runtime_engine_result_v1 result;
+struct app_engine_worker_context {
+    struct runtime_engine_request request;
+    struct runtime_engine_result result;
     int run_ok;
 };
 
-static DWORD WINAPI app_engine_worker_v1_main(void *parameter)
+static DWORD WINAPI app_engine_worker_main(void *parameter)
 {
-    struct app_engine_worker_v1_context *context =
-        (struct app_engine_worker_v1_context *)parameter;
-    context->run_ok = runtime_engine_run_v1(&context->request, &context->result);
+    struct app_engine_worker_context *context =
+        (struct app_engine_worker_context *)parameter;
+    context->run_ok = runtime_engine_run(&context->request, &context->result);
     return 0u;
 }
 
-int app_engine_worker_v1_run(const struct runtime_engine_request_v1 *request,
-    HANDLE cancellation_event, struct runtime_engine_result_v1 *result_out,
+int app_engine_worker_run(const struct runtime_engine_request *request,
+    HANDLE cancellation_event, struct runtime_engine_result *result_out,
     uint32_t *cancellation_accepted_out)
 {
-    struct app_engine_worker_v1_context context;
+    struct app_engine_worker_context context;
     HANDLE worker;
     HANDLE waits[2];
     DWORD waited;
     uint32_t cancellation_accepted = 0u;
 
     if (request == NULL || cancellation_event == NULL || result_out == NULL ||
-        cancellation_accepted_out == NULL || !runtime_engine_request_v1_valid(request)) return 0;
+        cancellation_accepted_out == NULL || !runtime_engine_request_valid(request)) return 0;
     memset(&context, 0, sizeof(context));
     context.request = *request;
-    runtime_engine_result_v1_clear(&context.result);
-    worker = CreateThread(NULL, 0u, app_engine_worker_v1_main, &context, 0u, NULL);
+    runtime_engine_result_clear(&context.result);
+    worker = CreateThread(NULL, 0u, app_engine_worker_main, &context, 0u, NULL);
     if (worker == NULL) return 0;
     waits[0] = worker;
     waits[1] = cancellation_event;
@@ -45,8 +45,8 @@ int app_engine_worker_v1_run(const struct runtime_engine_request_v1 *request,
             CloseHandle(worker);
             return 0;
         }
-        if (!cancellation_accepted && runtime_engine_request_cancellation_v1(
-            APP_SESSION_CANCELLATION_V1_USER_REQUEST)) cancellation_accepted = 1u;
+        if (!cancellation_accepted && runtime_engine_request_cancellation(
+            APP_SESSION_CANCELLATION_USER_REQUEST)) cancellation_accepted = 1u;
         /* A manual-reset event remains signaled.  Once the typed request has
          * been accepted, wait only for the owned worker's joined result.  If
          * it was already inactive, the next wait observes worker completion. */
@@ -61,7 +61,7 @@ int app_engine_worker_v1_run(const struct runtime_engine_request_v1 *request,
         Sleep(1u);
     }
     CloseHandle(worker);
-    if (!context.run_ok || !runtime_engine_result_v1_valid(&context.result)) return 0;
+    if (!context.run_ok || !runtime_engine_result_valid(&context.result)) return 0;
     *result_out = context.result;
     *cancellation_accepted_out = cancellation_accepted;
     return 1;

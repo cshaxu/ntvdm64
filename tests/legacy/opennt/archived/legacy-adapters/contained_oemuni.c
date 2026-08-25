@@ -4,8 +4,8 @@
 #include <wchar.h>
 #include "oemuni.h"
 
-#define NTDOS64_OEM_PATH_CAPACITY 32768
-#define NTDOS64_OEM_ENV_SLOTS 32
+#define RUNNER_OEM_PATH_CAPACITY 32768
+#define RUNNER_OEM_ENV_SLOTS 32
 #ifndef WC_NO_BEST_FIT_CHARS
 #define WC_NO_BEST_FIT_CHARS 0x00000400
 #endif
@@ -16,12 +16,12 @@
 typedef struct {
     BOOL used;
     char name[128];
-    char value[NTDOS64_OEM_PATH_CAPACITY];
-} NTDOS64_OEM_ENV;
+    char value[RUNNER_OEM_PATH_CAPACITY];
+} RUNNER_OEM_ENV;
 
-static WCHAR roots[26][NTDOS64_OEM_PATH_CAPACITY];
+static WCHAR roots[26][RUNNER_OEM_PATH_CAPACITY];
 static DWORD root_lengths[26];
-static NTDOS64_OEM_ENV environment[NTDOS64_OEM_ENV_SLOTS];
+static RUNNER_OEM_ENV environment[RUNNER_OEM_ENV_SLOTS];
 
 static WCHAR *oem_to_wide(LPCSTR text) {
     int length;
@@ -72,7 +72,7 @@ static BOOL has_reparse_component(LPWSTR path, DWORD root_length) {
 }
 
 /* Wrapper/session setup. The supplied DOS drive maps to one host directory. */
-BOOL ntdos64_oemuni_configure_drive_root(CHAR drive, LPCSTR path) {
+BOOL runner_oemuni_configure_drive_root(CHAR drive, LPCSTR path) {
     WCHAR *wide = oem_to_wide(path);
     DWORD length;
     DWORD index;
@@ -81,9 +81,9 @@ BOOL ntdos64_oemuni_configure_drive_root(CHAR drive, LPCSTR path) {
     if (drive < 'A' || drive > 'Z') { if (wide) HeapFree(GetProcessHeap(), 0, wide); SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     index = drive - 'A'; root = roots[index];
     if (wide == NULL) return FALSE;
-    length = GetFullPathNameW(wide, NTDOS64_OEM_PATH_CAPACITY, root, NULL);
+    length = GetFullPathNameW(wide, RUNNER_OEM_PATH_CAPACITY, root, NULL);
     HeapFree(GetProcessHeap(), 0, wide);
-    if (length == 0 || length >= NTDOS64_OEM_PATH_CAPACITY ||
+    if (length == 0 || length >= RUNNER_OEM_PATH_CAPACITY ||
         (GetFileAttributesW(root) & (FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_REPARSE_POINT)) != FILE_ATTRIBUTE_DIRECTORY) {
         root_lengths[index] = 0; return FALSE;
     }
@@ -93,9 +93,9 @@ BOOL ntdos64_oemuni_configure_drive_root(CHAR drive, LPCSTR path) {
     return TRUE;
 }
 
-BOOL ntdos64_oemuni_configure_root(LPCSTR path) { return ntdos64_oemuni_configure_drive_root('C', path); }
+BOOL runner_oemuni_configure_root(LPCSTR path) { return runner_oemuni_configure_drive_root('C', path); }
 
-VOID ntdos64_oemuni_reset(VOID) {
+VOID runner_oemuni_reset(VOID) {
     ZeroMemory(roots, sizeof(roots));
     ZeroMemory(root_lengths, sizeof(root_lengths));
     ZeroMemory(environment, sizeof(environment));
@@ -104,7 +104,7 @@ VOID ntdos64_oemuni_reset(VOID) {
 static WCHAR *contained_path(LPCSTR path) {
     WCHAR *input = oem_to_wide(path);
     WCHAR *candidate;
-    WCHAR normalized[NTDOS64_OEM_PATH_CAPACITY];
+    WCHAR normalized[RUNNER_OEM_PATH_CAPACITY];
     WCHAR *suffix;
     WCHAR *root;
     DWORD root_length;
@@ -123,14 +123,14 @@ static WCHAR *contained_path(LPCSTR path) {
     if (root_length == 0 || input[0] == L'\\' || input[0] == L'/') {
         HeapFree(GetProcessHeap(), 0, input); SetLastError(ERROR_ACCESS_DENIED); return NULL;
     }
-    candidate = (WCHAR *)HeapAlloc(GetProcessHeap(), 0, NTDOS64_OEM_PATH_CAPACITY * sizeof(WCHAR));
+    candidate = (WCHAR *)HeapAlloc(GetProcessHeap(), 0, RUNNER_OEM_PATH_CAPACITY * sizeof(WCHAR));
     if (candidate == NULL) { HeapFree(GetProcessHeap(), 0, input); SetLastError(ERROR_NOT_ENOUGH_MEMORY); return NULL; }
-    if (swprintf(candidate, NTDOS64_OEM_PATH_CAPACITY, L"%ls\\%ls", root, suffix) < 0) {
+    if (swprintf(candidate, RUNNER_OEM_PATH_CAPACITY, L"%ls\\%ls", root, suffix) < 0) {
         HeapFree(GetProcessHeap(), 0, input); HeapFree(GetProcessHeap(), 0, candidate); SetLastError(ERROR_FILENAME_EXCED_RANGE); return NULL;
     }
     HeapFree(GetProcessHeap(), 0, input);
-    length = GetFullPathNameW(candidate, NTDOS64_OEM_PATH_CAPACITY, normalized, NULL);
-    if (length == 0 || length >= NTDOS64_OEM_PATH_CAPACITY || !has_root_prefix(normalized, root, root_length) || has_reparse_component(normalized, root_length)) {
+    length = GetFullPathNameW(candidate, RUNNER_OEM_PATH_CAPACITY, normalized, NULL);
+    if (length == 0 || length >= RUNNER_OEM_PATH_CAPACITY || !has_root_prefix(normalized, root, root_length) || has_reparse_component(normalized, root_length)) {
         HeapFree(GetProcessHeap(), 0, candidate); SetLastError(ERROR_ACCESS_DENIED); return NULL;
     }
     memcpy(candidate, normalized, ((SIZE_T)length + 1) * sizeof(WCHAR));
@@ -226,9 +226,9 @@ VOID APIENTRY OutputDebugStringOem(LPCSTR text) { WCHAR *wide = oem_to_wide(text
 BOOL WINAPI GetComputerNameOem(LPSTR name, LPDWORD size) { UNREFERENCED_PARAMETER(name); UNREFERENCED_PARAMETER(size); SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return FALSE; }
 BOOL WINAPI RemoveFontResourceOem(LPSTR path) { UNREFERENCED_PARAMETER(path); SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return FALSE; }
 
-static NTDOS64_OEM_ENV *environment_slot(LPSTR name, BOOL create) {
-    DWORD i; NTDOS64_OEM_ENV *free_slot = NULL;
-    for (i = 0; i < NTDOS64_OEM_ENV_SLOTS; ++i) {
+static RUNNER_OEM_ENV *environment_slot(LPSTR name, BOOL create) {
+    DWORD i; RUNNER_OEM_ENV *free_slot = NULL;
+    for (i = 0; i < RUNNER_OEM_ENV_SLOTS; ++i) {
         if (environment[i].used && strcmp(environment[i].name, name) == 0) return &environment[i];
         if (!environment[i].used && free_slot == NULL) free_slot = &environment[i];
     }
@@ -237,7 +237,7 @@ static NTDOS64_OEM_ENV *environment_slot(LPSTR name, BOOL create) {
 }
 
 BOOL WINAPI SetEnvironmentVariableOem(LPSTR name, LPSTR value) {
-    NTDOS64_OEM_ENV *slot;
+    RUNNER_OEM_ENV *slot;
     if (name == NULL || !*name) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     slot = environment_slot(name, value != NULL);
     if (value == NULL) { if (slot) ZeroMemory(slot, sizeof(*slot)); return TRUE; }
@@ -246,7 +246,7 @@ BOOL WINAPI SetEnvironmentVariableOem(LPSTR name, LPSTR value) {
 }
 
 DWORD WINAPI GetEnvironmentVariableOem(LPSTR name, LPSTR output, DWORD capacity) {
-    NTDOS64_OEM_ENV *slot = environment_slot(name, FALSE); DWORD length;
+    RUNNER_OEM_ENV *slot = environment_slot(name, FALSE); DWORD length;
     if (slot == NULL) { SetLastError(ERROR_ENVVAR_NOT_FOUND); return 0; }
     length = (DWORD)strlen(slot->value);
     if (capacity == 0 || output == NULL) return length + 1;

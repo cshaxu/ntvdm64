@@ -5,11 +5,11 @@
 #include "historical_bios_bridge_v1.h"
 #include "demdasd.h"
 
-typedef void (*ntdos64_bios_entry)(void);
+typedef void (*runner_bios_entry)(void);
 
-extern ntdos64_bios_entry BIOS[];
+extern runner_bios_entry BIOS[];
 extern int DemInit(int argc, char *argv[]);
-extern uint8_t *ntdos64_ccpu_sm0_ram(void);
+extern uint8_t *runner_ccpu_sm0_ram(void);
 extern uint8_t *c_GetLinAdd(uint32_t address);
 extern void setBP(uint16_t value);
 extern void setCS(uint16_t value);
@@ -19,19 +19,19 @@ extern uint16_t getBP(void);
 extern uint16_t getIP(void);
 extern uint8_t PhysicalDriveTypes[26];
 
-typedef LONG (WINAPI *ntdos64_vectored_exception_handler)(
+typedef LONG (WINAPI *runner_vectored_exception_handler)(
     EXCEPTION_POINTERS *exception_pointers);
 extern PVOID WINAPI AddVectoredExceptionHandler(
     ULONG first_handler,
-    ntdos64_vectored_exception_handler handler);
+    runner_vectored_exception_handler handler);
 extern ULONG WINAPI RemoveVectoredExceptionHandler(PVOID handle);
 
 enum {
-    ntdos64_dpb_segment = 0x0200u,
-    ntdos64_dpb_offset = 0x0010u
+    runner_dpb_segment = 0x0200u,
+    runner_dpb_offset = 0x0010u
 };
 
-static LONG WINAPI ntdos64_demgetdpblist_trace_exception(
+static LONG WINAPI runner_demgetdpblist_trace_exception(
     EXCEPTION_POINTERS *exception_pointers)
 {
     DWORD written;
@@ -59,16 +59,16 @@ int main(int argc, char *argv[])
     PVOID exception_handler;
 
     exception_handler = AddVectoredExceptionHandler(1u,
-        ntdos64_demgetdpblist_trace_exception);
+        runner_demgetdpblist_trace_exception);
     if (exception_handler == NULL) return 1;
-    if (!ntdos64_historical_bios_bridge_v1_initialize()) return 2;
+    if (!runner_historical_bios_bridge_v1_initialize()) return 2;
     if (!DemInit(argc, argv)) {
         result = 3;
         goto cleanup;
     }
 
-    ram = ntdos64_ccpu_sm0_ram();
-    dpb = (DPB *)c_GetLinAdd((ntdos64_dpb_segment << 4) + ntdos64_dpb_offset);
+    ram = runner_ccpu_sm0_ram();
+    dpb = (DPB *)c_GetLinAdd((runner_dpb_segment << 4) + runner_dpb_offset);
     if (ram == NULL || dpb == NULL) {
         result = 4;
         goto cleanup;
@@ -83,8 +83,8 @@ int main(int argc, char *argv[])
         goto cleanup;
     }
 
-    setES(ntdos64_dpb_segment);
-    setBP(ntdos64_dpb_offset);
+    setES(runner_dpb_segment);
+    setBP(runner_dpb_offset);
     setIP(0x0478u);
     ram[0x0b78u] = 0x46u;
     BIOS[0x50u]();
@@ -107,8 +107,8 @@ int main(int argc, char *argv[])
                 }
             }
             expected_next = has_next ?
-                (((uint32_t)ntdos64_dpb_segment << 16) |
-                 (ntdos64_dpb_offset + (uint16_t)((count + 1u) * sizeof(DPB)))) :
+                (((uint32_t)runner_dpb_segment << 16) |
+                 (runner_dpb_offset + (uint16_t)((count + 1u) * sizeof(DPB)))) :
                 0xffffffffu;
             if (dpb[count].Next != (PDPB)(uintptr_t)expected_next) {
                 fprintf(stderr,
@@ -123,7 +123,7 @@ int main(int argc, char *argv[])
     }
 
     if (count == 0u || getIP() != 0x0479u ||
-        getBP() != ntdos64_dpb_offset + count * sizeof(DPB) ||
+        getBP() != runner_dpb_offset + count * sizeof(DPB) ||
         dpb[count - 1u].Next != (PDPB)(uintptr_t)0xffffffffu) {
         result = 8;
         goto cleanup;
@@ -133,7 +133,7 @@ int main(int argc, char *argv[])
             getIP(), count, getBP(), (unsigned int)sizeof(DPB));
 
 cleanup:
-    ntdos64_historical_bios_bridge_v1_terminate();
+    runner_historical_bios_bridge_v1_terminate();
     RemoveVectoredExceptionHandler(exception_handler);
     return result;
 }

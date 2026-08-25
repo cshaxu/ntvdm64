@@ -11,12 +11,12 @@
 #include <intrin.h>
 #endif
 
-typedef enum ntdos64_ccpu_sas_vector_slot {
-    NTDOS64_CCPU_SAS_VECTOR_TOUCH = 1,
-    NTDOS64_CCPU_SAS_VECTOR_VIRTUALISE_INSTRUCTION = 2
-} ntdos64_ccpu_sas_vector_slot;
+typedef enum runner_ccpu_sas_vector_slot {
+    RUNNER_CCPU_SAS_VECTOR_TOUCH = 1,
+    RUNNER_CCPU_SAS_VECTOR_VIRTUALISE_INSTRUCTION = 2
+} runner_ccpu_sas_vector_slot;
 
-typedef struct ntdos64_ccpu_sas_vector_trace {
+typedef struct runner_ccpu_sas_vector_trace {
     uint32_t sequence;
     uint32_t slot;
     uint32_t first;
@@ -24,9 +24,9 @@ typedef struct ntdos64_ccpu_sas_vector_trace {
     uint32_t third;
     uint32_t fourth;
     uintptr_t return_address;
-} ntdos64_ccpu_sas_vector_trace;
+} runner_ccpu_sas_vector_trace;
 
-static ntdos64_ccpu_sas_vector_trace last_trace;
+static runner_ccpu_sas_vector_trace last_trace;
 static uint32_t trace_sequence;
 
 static uintptr_t ccpu_sas_vector_return_address(void) {
@@ -39,7 +39,7 @@ static uintptr_t ccpu_sas_vector_return_address(void) {
 #endif
 }
 
-static void ccpu_sas_vector_stop(ntdos64_ccpu_sas_vector_slot slot,
+static void ccpu_sas_vector_stop(runner_ccpu_sas_vector_slot slot,
                                  uint32_t first, uint32_t second,
                                  uint32_t third, uint32_t fourth,
                                  uintptr_t return_address) {
@@ -61,7 +61,7 @@ static void ccpu_sas_vector_stop(ntdos64_ccpu_sas_vector_slot slot,
 }
 
 uint8_t *c_sas_touch(uint32_t address, uint32_t length) {
-    ccpu_sas_vector_stop(NTDOS64_CCPU_SAS_VECTOR_TOUCH, address, length, 0, 0,
+    ccpu_sas_vector_stop(RUNNER_CCPU_SAS_VECTOR_TOUCH, address, length, 0, 0,
                          ccpu_sas_vector_return_address());
     return 0;
 }
@@ -69,7 +69,7 @@ uint8_t *c_sas_touch(uint32_t address, uint32_t length) {
 uint32_t c_VirtualiseInstruction(uint32_t eip_in_rom, uint16_t size,
                                  uint32_t linear_address_or_port,
                                  uint32_t data_in) {
-    ccpu_sas_vector_stop(NTDOS64_CCPU_SAS_VECTOR_VIRTUALISE_INSTRUCTION,
+    ccpu_sas_vector_stop(RUNNER_CCPU_SAS_VECTOR_VIRTUALISE_INSTRUCTION,
                          eip_in_rom, size, linear_address_or_port, data_in,
                          ccpu_sas_vector_return_address());
     return 0;

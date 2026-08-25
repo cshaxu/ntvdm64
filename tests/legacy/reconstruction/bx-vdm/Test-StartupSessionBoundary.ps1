@@ -10,7 +10,7 @@ foreach ($term in @('byob_image.h', 'startup_plan_abi.h')) {
 foreach ($term in @('byob_profile_validate_file_select', 'byob_image_load_exact', 'byob_image_release', '0x700u', '0x714u', 'entry.cs = 0x70u')) {
     if (-not $source.Contains($term)) { throw "Missing required startup-session control: $term" }
 }
-$environmentRequired = @('GetEnvironmentVariableW', 'NTDOS64_ADAPTER_PROFILE', 'NTDOS64_ADAPTER_ROOT', 'bx_ntvdm_startup_session_v1_install', 'bx_ntvdm_startup_session_v1_prepare_ntio_plan')
+$environmentRequired = @('GetEnvironmentVariableW', 'RUNNER_ADAPTER_PROFILE', 'RUNNER_ADAPTER_ROOT', 'bx_ntvdm_startup_session_v1_install', 'bx_ntvdm_startup_session_v1_prepare_ntio_plan')
 foreach ($term in $environmentRequired) {
     if (-not $environmentSource.Contains($term)) { throw "Missing required startup-session environment control: $term" }
 }

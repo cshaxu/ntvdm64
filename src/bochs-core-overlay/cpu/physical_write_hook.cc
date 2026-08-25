@@ -7,7 +7,7 @@
 #include "cpu.h"
 #include "bochs-core-overlay/cpu/opaque_callback_private.h"
 
-struct bochs_core_overlay_physical_write_v1 {
+struct bochs_core_overlay_physical_write {
   Bit32u magic, abi_version, struct_bytes, valid;
   Bit64u physical_address;
   Bit32u byte_count, captured_bytes;
@@ -20,8 +20,8 @@ struct bochs_core_overlay_physical_write_v1 {
 void BX_CPU_C::overlay_observe_physical_write(Bit64u address, unsigned count,
   const void *bytes)
 {
-#if defined(BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION) && BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
-  bochs_core_overlay_physical_write_v1 event;
+#if defined(RUNTIME_ENABLE_MACHINE_PHYSICAL_WRITE_OBSERVATION) && RUNTIME_ENABLE_MACHINE_PHYSICAL_WRITE_OBSERVATION
+  bochs_core_overlay_physical_write event;
   unsigned copied = count > 8u ? 8u : count;
   memset(&event, 0, sizeof(event));
   event.magic=0x42505731u; event.abi_version=1u; event.struct_bytes=sizeof(event)-sizeof(event.opaque_tag);
@@ -31,7 +31,7 @@ void BX_CPU_C::overlay_observe_physical_write(Bit64u address, unsigned count,
   event.cs=sregs[BX_SEG_REG_CS].selector.value; event.ss=sregs[BX_SEG_REG_SS].selector.value;
   event.sp=get_reg16(BX_16BIT_REG_SP); event.opaque_tag=0x42585057u;
   if (bytes != 0 && copied != 0) memcpy(event.bytes, bytes, copied);
-  (void)bochs_core_overlay_opaque_callback_v1_invoke(&event,sizeof(event),0,0);
+  (void)bochs_core_overlay_opaque_callback_invoke(&event,sizeof(event),0,0);
 #else
   (void)address; (void)count; (void)bytes;
 #endif

@@ -2,7 +2,7 @@
  * import.  Original source: src/opennt/base/mvdm/dos/dem/demgset.c.
  *
  * The direct wrappers deliberately call the corresponding user-mode Win32
- * APIs.  They do not create a virtual drive model or carry legacy-v1 policy.
+ * APIs.  They do not create a virtual drive model or carry retired mutation policy.
  */
 
 #include "opennt_demgset_composition.h"

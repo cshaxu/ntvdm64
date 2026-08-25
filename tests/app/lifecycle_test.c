@@ -1,0 +1,55 @@
+#include "lifecycle.h"
+
+int main(void)
+{
+    struct app_lifecycle_policy policy;
+    struct app_lifecycle_audit audit;
+    struct runtime_engine_result engine;
+    uint32_t kind;
+
+    app_lifecycle_policy_clear(&policy);
+    policy.instruction_tick_budget = UINT64_C(1000);
+    if (!app_lifecycle_policy_valid(&policy)) return 1;
+    policy.cancellation_request = 2u;
+    if (app_lifecycle_policy_valid(&policy)) return 2;
+    policy.cancellation_request = APP_LIFECYCLE_CANCELLATION_REQUESTED;
+    if (!app_lifecycle_policy_valid(&policy)) return 3;
+    policy.reserved0 = 1u;
+    if (app_lifecycle_policy_valid(&policy)) return 4;
+    policy.reserved0 = 0u;
+
+    runtime_engine_result_clear(&engine);
+    for (kind = RUNTIME_ENGINE_TERMINAL_REJECTED_REQUEST;
+         kind <= RUNTIME_ENGINE_TERMINAL_HOST_CANCELLATION; ++kind) {
+        if (!runtime_engine_result_set(&engine, kind, kind + 10u) ||
+            !app_lifecycle_classify(&policy, &engine, &audit) ||
+            !app_lifecycle_audit_valid(&audit) ||
+            audit.cancellation_request != APP_LIFECYCLE_CANCELLATION_REQUESTED ||
+            audit.engine_terminal_kind != kind || audit.engine_detail_code != kind + 10u)
+            return (int)(20u + kind);
+        if (kind == RUNTIME_ENGINE_TERMINAL_CONTROLLED_GUEST_TERMINAL &&
+            audit.lifecycle_terminal != APP_LIFECYCLE_TERMINAL_CONTROLLED_GUEST_TERMINAL)
+            return 40;
+        if (kind == RUNTIME_ENGINE_TERMINAL_ORDINARY_GUEST_COMPLETION &&
+            audit.lifecycle_terminal != APP_LIFECYCLE_TERMINAL_ORDINARY_GUEST_COMPLETION)
+            return 41;
+        if (kind == RUNTIME_ENGINE_TERMINAL_HOST_CANCELLATION &&
+            audit.lifecycle_terminal != APP_LIFECYCLE_TERMINAL_HOST_CANCELLATION)
+            return 42;
+    }
+    if (!runtime_engine_result_set(&engine,
+        RUNTIME_ENGINE_TERMINAL_CONTROLLED_GUEST_TERMINAL, 0u) ||
+        !app_lifecycle_classify(&policy, &engine, &audit) ||
+        audit.lifecycle_terminal == APP_LIFECYCLE_TERMINAL_HOST_CANCELLATION)
+        return 43;
+    engine.reserved0 = 1u;
+    if (app_lifecycle_classify(&policy, &engine, &audit) ||
+        audit.lifecycle_terminal != APP_LIFECYCLE_TERMINAL_INVALID_ENGINE_RESULT ||
+        !app_lifecycle_audit_valid(&audit)) return 44;
+    engine.reserved0 = 0u;
+    policy.instruction_tick_budget = 0u;
+    if (app_lifecycle_classify(&policy, &engine, &audit) ||
+        audit.lifecycle_terminal != APP_LIFECYCLE_TERMINAL_REJECTED_POLICY ||
+        !app_lifecycle_audit_valid(&audit)) return 45;
+    return 0;
+}

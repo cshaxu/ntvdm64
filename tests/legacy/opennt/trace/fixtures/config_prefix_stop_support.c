@@ -14,53 +14,53 @@ HANDLE hWndConsole = NULL;
 ULONG xmsMemorySize = 0;
 #endif
 
-jmp_buf ntdos64_config_prefix_stop_environment;
+jmp_buf runner_config_prefix_stop_environment;
 static int config_prefix_stop_reason;
 
-int ntdos64_config_prefix_stop_reason(void) {
+int runner_config_prefix_stop_reason(void) {
     return config_prefix_stop_reason;
 }
 
 static void config_prefix_stop(int reason) {
     config_prefix_stop_reason = reason;
-    longjmp(ntdos64_config_prefix_stop_environment, reason);
+    longjmp(runner_config_prefix_stop_environment, reason);
 }
 
-#ifdef NTDOS64_RESET_TRACE
-#ifndef NTDOS64_RESET_TRACE_STOP_STAGE
-#define NTDOS64_RESET_TRACE_STOP_STAGE 1
+#ifdef RUNNER_RESET_TRACE
+#ifndef RUNNER_RESET_TRACE_STOP_STAGE
+#define RUNNER_RESET_TRACE_STOP_STAGE 1
 #endif
-void ntdos64_reset_trace_checkpoint(int stage) {
-    if (stage == NTDOS64_RESET_TRACE_STOP_STAGE)
+void runner_reset_trace_checkpoint(int stage) {
+    if (stage == RUNNER_RESET_TRACE_STOP_STAGE)
         config_prefix_stop(100 + stage);
 }
 #endif
 
-#ifdef NTDOS64_CPU_INIT_TRACE
-#ifndef NTDOS64_CPU_INIT_TRACE_STOP_STAGE
-#define NTDOS64_CPU_INIT_TRACE_STOP_STAGE 1
+#ifdef RUNNER_CPU_INIT_TRACE
+#ifndef RUNNER_CPU_INIT_TRACE_STOP_STAGE
+#define RUNNER_CPU_INIT_TRACE_STOP_STAGE 1
 #endif
-void ntdos64_cpu_init_trace_checkpoint(int stage) {
-    if (stage == NTDOS64_CPU_INIT_TRACE_STOP_STAGE)
+void runner_cpu_init_trace_checkpoint(int stage) {
+    if (stage == RUNNER_CPU_INIT_TRACE_STOP_STAGE)
         config_prefix_stop(120 + stage);
 }
 #endif
 
-#ifdef NTDOS64_SAS_SINGLE_WRITE_TRACE
-void ntdos64_sas_single_write_trace_stop(void) {
+#ifdef RUNNER_SAS_SINGLE_WRITE_TRACE
+void runner_sas_single_write_trace_stop(void) {
     config_prefix_stop(130);
 }
 #endif
 
-void ntdos64_config_prefix_unexpected(int reason) {
+void runner_config_prefix_unexpected(int reason) {
     config_prefix_stop(reason);
 }
 
-#ifdef NTDOS64_STARTUP_PREFIX_TRACE
-void ntdos64_startup_prefix_trace_checkpoint(int stage) {
+#ifdef RUNNER_STARTUP_PREFIX_TRACE
+void runner_startup_prefix_trace_checkpoint(int stage) {
     char value[16];
     DWORD length = GetEnvironmentVariableA(
-        "NTDOS64_STARTUP_PREFIX_TRACE_STOP_STAGE", value, sizeof(value));
+        "RUNNER_STARTUP_PREFIX_TRACE_STOP_STAGE", value, sizeof(value));
 
     if (length != 0 && length < sizeof(value) && atoi(value) == stage)
         config_prefix_stop(140 + stage);
@@ -124,13 +124,13 @@ void host_block_timer(void) { config_prefix_stop(13); }
 void host_release_timer(void) { config_prefix_stop(14); }
 #ifdef CONFIG_PREFIX_TRACE_SESSION_INIT
 DWORD TlsDirectError;
-void ntdos64_session_trace_io_init(void) { config_prefix_stop(22); }
-void ntdos64_session_trace_after_io_init(void) { config_prefix_stop(36); }
-void ntdos64_session_trace_after_reset(void) { config_prefix_stop(37); }
-void ntdos64_session_trace_before_reset(void) { config_prefix_stop(38); }
-#ifdef NTDOS64_SESSION_TRACE_VINT
-void ntdos64_session_trace_vint_checkpoint(int stage) {
-    if (stage == NTDOS64_SESSION_TRACE_VINT_STOP_STAGE)
+void runner_session_trace_io_init(void) { config_prefix_stop(22); }
+void runner_session_trace_after_io_init(void) { config_prefix_stop(36); }
+void runner_session_trace_after_reset(void) { config_prefix_stop(37); }
+void runner_session_trace_before_reset(void) { config_prefix_stop(38); }
+#ifdef RUNNER_SESSION_TRACE_VINT
+void runner_session_trace_vint_checkpoint(int stage) {
+    if (stage == RUNNER_SESSION_TRACE_VINT_STOP_STAGE)
         config_prefix_stop(40 + stage);
 }
 #endif

@@ -1,5 +1,5 @@
 {
-    "schema":  "ntdos64-historical-tool-manifest-v1",
+    "schema":  "runner-historical-tool-manifest-v1",
     "component":  "MS-DOS 6 QuickBASIC 4.5 TL historical toolchain",
     "source_root":  "D:\\home\\repos.hobby\\ms-dos-6\\45\\tl",
     "license_status":  "Historical Microsoft tool input; research-only. No redistribution authorization is asserted.",

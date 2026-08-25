@@ -20,8 +20,8 @@ $build = [IO.Path]::GetFullPath($BuildRoot)
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 $ninja = Get-Command ninja -ErrorAction Stop
 $runnerSources = @(
-    'src/cli/ntdos64_run.c',
-    'src/cli/ntdos64_config.c',
+    'src/cli/runner_run.c',
+    'src/cli/runner_config.c',
     'src/cli/byob_identity.c',
     'src/cli/byob_target_selection.c',
     'src/cli/byob_launch_declaration_v1.c',
@@ -39,14 +39,14 @@ foreach ($input in @($vs, $probeSource) + $runnerSources) {
 
 New-Item -ItemType Directory -Force -Path $build, (Join-Path $build 'obj') | Out-Null
 $environment = Join-Path $build 'msvc-x64-mt.cmd'
-@('@echo off', 'set "NTDOS64_NINJA_CALLER_CWD=%CD%"',
+@('@echo off', 'set "RUNNER_NINJA_CALLER_CWD=%CD%"',
   ('call "' + $vs + '" -arch=x64 -host_arch=x64 >nul'),
   'if errorlevel 1 exit /b %errorlevel%',
-  'cd /d "%NTDOS64_NINJA_CALLER_CWD%"', '%*') |
+  'cd /d "%RUNNER_NINJA_CALLER_CWD%"', '%*') |
     Set-Content -LiteralPath $environment -Encoding ascii
 
 $manifest = [ordered]@{
-    schema = 'ntdos64.t235.s1.runner-ninja-graph.v1'
+    schema = 'runner.t235.s1.runner-ninja-graph.v1'
     task = 'M0 T235 S1'
     sourceRoot = $root
     buildRoot = $build

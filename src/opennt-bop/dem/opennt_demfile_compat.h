@@ -8,7 +8,7 @@
  * synthetic CPU interface. */
 
 #include "opennt_dem_ccpu_sas_facade.h"
-#include "adapter-win32/include/legacy-api/opennt_dem_file_oem_facade.h"
+#include "adapter-win32/include/opennt-api/opennt_dem_file_oem_facade.h"
 
 #include <stdio.h>
 #include <stdlib.h>

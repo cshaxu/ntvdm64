@@ -6,7 +6,7 @@
  * owner's OEM host calls plus its packed CDS guest layout. */
 
 #include "opennt-bop/dem/opennt_demfile_compat.h"
-#include "adapter-win32/include/legacy-api/opennt_dem_oem_facade.h"
+#include "adapter-win32/include/opennt-api/opennt_dem_oem_facade.h"
 
 #pragma pack(push, 1)
 typedef struct CURDIR_LIST {

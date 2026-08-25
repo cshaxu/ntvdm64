@@ -2,7 +2,7 @@
 #define RUNTIME_BOP_SHIM_DEM_NATIVE_SESSION_SHIM_H
 
 /* Adapter-owned session bridge for the direct OpenNT DEM dispatcher.  It
- * consumes only the mantle's copied generic-UD record; native memory access
+ * consumes only the machine's copied generic-UD record; native memory access
  * is supplied as checked callbacks by the composition owner. */
 
 #include "opennt-bop/ingress/dem_ingress_shim.h"
@@ -27,18 +27,18 @@ int runtime_dem_native_session_bind(runtime_dem_native_session *session);
 void runtime_dem_native_session_unbind(runtime_dem_native_session *session);
 
 /* Converts a copied generic #UD event into the direct DEM call ABI.  It
- * declines every non-DEM BOP and never installs a global mantle bridge. */
+ * declines every non-DEM BOP and never installs a global machine bridge. */
 int runtime_dem_native_session_dispatch(
-    const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome);
+    const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome);
 
 /* A source-owner bridge may use this only after it has recognized its own
  * non-DEM BOP.  This helper contributes no selector or service meaning: it
  * scopes a copied CPU state around one imported source body and returns its
  * typed three- or four-byte resume result. */
 int runtime_dem_native_session_invoke_scoped_body(
-    const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome, void (*body)(void),
+    const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome, void (*body)(void),
     uint32_t resume_bytes);
 
 #endif

@@ -8,7 +8,7 @@
 static bochs_core_overlay_opaque_callback_t callback_slot;
 static void *callback_context;
 
-int bochs_core_overlay_opaque_callback_v1_bind(
+int bochs_core_overlay_opaque_callback_bind(
   bochs_core_overlay_opaque_callback_t callback, void *context)
 {
   if (callback == 0 || callback_slot != 0) return 0;
@@ -17,13 +17,13 @@ int bochs_core_overlay_opaque_callback_v1_bind(
   return 1;
 }
 
-void bochs_core_overlay_opaque_callback_v1_unbind(void)
+void bochs_core_overlay_opaque_callback_unbind(void)
 {
   callback_slot = 0;
   callback_context = 0;
 }
 
-int bochs_core_overlay_opaque_callback_v1_invoke(
+int bochs_core_overlay_opaque_callback_invoke(
   const void *event, unsigned event_bytes, void *outcome,
   unsigned outcome_bytes)
 {

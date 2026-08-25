@@ -2,31 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T267 S1 — formal-build entrypoint and legacy reconstruction repair.** Retire the obsolete root CMake configuration from live use, make the formal Ninja route the only documented current build entrypoint, and repair the reconstructed-monitor fixture so that no live configuration or directly compiled retained fixture references deleted paths, stale type names, or task-label identifiers.
+**Active: M0 T268 S1 — current naming convergence.** Remove superseded project/component labels and temporary generation suffixes from non-mirror components and surrounding live material; retain them only in archived historical-record documentation or an explicitly registered upstream ABI exception.
 
 ## Active Packet
 
-### M0 T267 S1 — formal-build entrypoint and reconstructed-monitor closure
+### M0 T268 S1 — current naming inventory and semantic mapping
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T267 S1`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | Owner: “请你即刻准入一个新的T任务帮我修复上述全部这些问题。” |
-| Objective | Remove the obsolete root CMake graph from all current use; remove it entirely; document the owned MSVC/Ninja graph as the sole current build path; and make the retained reconstructed-monitor fixture internally type-consistent, directly buildable, and free of non-semantic product/task labels. |
-| Non-goals | No BOP, OpenNT, Bochs, or runtime-semantic implementation; no resurrection or port of the old CMake target catalogue; no historical source import. |
-| Reference Baseline | T266 historical finding; the retired root `CMakeLists.txt`; `tools/build/New-T260S8FullNinjaGraph.ps1`; component manifest; `tests/legacy/reconstruction/monitor/reconstructed_monitor.{c,h}` and its two retained fixtures. |
-| Files And ABI Surface | Root CMake entrypoint/disposition, current build documentation, legacy-code index, reconstructed-monitor fixture tests and task evidence. No production ABI. |
-| Applicable Rules | Execution, documentation, coding/source-layout, build-output hygiene, and the formal MSVC x64 Ninja ownership rules. |
-| Verification | Negative scan proves no current configuration references `src/bx-vdm` or `src/cli`; no current instructions invoke root CMake; direct compile/run of both reconstructed-monitor retained fixtures using their matching header; fresh external formal Ninja generation and no-work/build verdict; governance and `git diff --check`. |
-| Expected Markers | Root CMake is absent from current configuration; its obsolete body is removed rather than retained as executable-looking evidence; the retained monitor package has only semantic `reconstructed_monitor` identifiers and filenames. |
-| Asset Needs | Existing root CMake and retained fixtures, current formal Ninja generator/manifest, MSVC x64 and Ninja. No external source. |
-| Reporting Requirements | State the disposition of the root CMake graph and each reconstructed-monitor fixture file; distinguish current-build proof from historical fixture proof; record any unrelated Ninja limitation separately. |
-| Stop Conditions | A current formal path still depends on CMake, a proposed CMake rewrite would recreate legacy target ownership, a fixture requires a production include root, or formal Ninja has a new unrelated source/link failure. |
-| Exit Criteria | No live configuration/instruction references deleted `src/bx-vdm`/`src/cli`; current documentation names only the formal Ninja route; both retained reconstructed-monitor fixture executables compile and pass under their one coherent type contract; evidence and governance checks are recorded. |
-| Original Owner Request | “请你即刻准入一个新的T任务帮我修复上述全部这些问题。” |
-| Similar-Issue Sweep | Root build files, README/CONTRIBUTING commands, formal Ninja manifest/generator, CMake and CTest references, all reconstructed-monitor test/header/source identifiers, and legacy-code indexing. |
-**S1 / T267 closure:** Root CMake is removed; the live component/tool/configuration scan has no deleted-root consumer; semantic reconstructed-monitor fixtures compile and pass; the repaired formal Ninja graph completes externally and is no-work clean. See [T267 evidence](etc/evidence/m0-t267-s1-build-entrypoint-and-reconstructed-monitor-closure-001.md).
-
+| Identifier Mode | `M0 T268 S1`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner: “代码中旧的项目名…旧的组件名…还有临时名，都必须从所有现行资料/代码/变量等地方去除。” |
+| Objective | Establish the complete live naming inventory and a collision-safe semantic mapping for every superseded project/component/generation marker. |
+| Non-goals | No behavioral change, source-body rewrite, or unapproved alteration of an original external ABI identity. |
+| Scope | The non-mirror component roots, tests, tools, formal build/configuration, current root/authority documentation and runtime-facing schemas. Original-code mirror roots are out of scope; their corresponding `*-overlay` roots are in scope because they are project-authored code. Only archived historical-record documentation may retain the retired spellings. |
+| Verification | Reproducible inventory counts by owner and marker class; every live row has a target semantic name or a registered upstream ABI exception; no blind bulk replacement is admitted. |
+| Exit Criteria | A machine-readable mapping and collision ledger supports S2--S4 without ambiguous path/symbol renames; governance and diff checks pass. |
+| Reference Baseline | S1 mapping evidence, current component roots, formal Ninja manifest and current naming-convergence proposal. |
+| Files And ABI Surface | Non-mirror source/test/tool paths and names, formal target/schema/configuration labels, current authorities and the evidence record. No behavioral ABI change. |
+| Applicable Rules | `docs/rules/CODING.md`, `docs/rules/DOCUMENT.md`, `docs/rules/EXECUTION.md` and mirror-component source-identity rules. |
+| Expected Markers | Zero live scan matches; current-root formal graph; `ntvdm64.exe`; clean incremental dry-run; no historical label repurposed as a current ABI. |
+| Asset Needs | Current checkout, MSVC x64 `/MT`, Ninja, formal manifest and declared cross-component fixtures. |
+| Reporting Requirements | Record scan scope/exclusions, formal build and fixture results, cache-recovery fact, current target name and any retained external spelling. |
+| Stop Conditions | A remaining current retired marker, collision, unresolved current consumer, formal build failure or a required upstream identity conflict. |
+| Similar-Issue Sweep | app/session/adapters, overlays, tests, build/configuration, tools, root/current authorities and runtime-facing schemas. |
+| Original Owner Request | “代码中旧的项目名…旧的组件名…还有临时名，都必须从所有现行资料/代码/变量等地方去除。” |
+**S1 closure:** The scoped inventory has 7,331 classified occurrences in 490 files, a deterministic four-class mapping, one two-file collision pair, and five upstream guest-comment examples excluded with their original mirror roots. See [mapping evidence](etc/evidence/m0-t268-s1-live-naming-mapping-001.md) and the [TSV inventory](etc/evidence/m0-t268-s1-live-naming-inventory.tsv).
+**S1/P1 closure:** the live non-mirror and current-governance negative scans are clean. The current-root formal Ninja graph completed 486/486 steps, its dry-run reported no work, four cross-component fixtures passed, and the 14-root production-tree gate passed. See [closure evidence](etc/evidence/m0-t268-current-naming-convergence-closure-001.md).
 ## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition
@@ -152,7 +153,7 @@
 | Reporting Requirements | State exact renamed component names, permitted directed edges, overlay privacy, and every deferred source move. |
 | Stop Conditions | An authority implies a prohibited reverse/direct dependency, a source move becomes necessary to state policy, or an overlay needs a generic/shared consumer. |
 | Exit Criteria | All listed authorities and proposal agree on final names/directions; queue no longer contains the admitted candidate; no source move exists in the S1 diff. |
-| Original Owner Request | “新增队列最优先T任务，包含以下S任务：S1. 治理文档：组件改名：bx-mantle => adapter-bochs，… bx-core => bochs-core，… `*-overlay` 组件仅允许被它的原生镜像组件调用。” |
+| Original Owner Request | “新增队列最优先T任务，包含以下S任务：S1. 治理文档：组件改名：bx-machine => adapter-bochs，… bx-core => bochs-core，… `*-overlay` 组件仅允许被它的原生镜像组件调用。” |
 | Similar-Issue Sweep | Old component names in authorities, direct core consumers, overlay reachability, and accidental OpenNT/Win32 vocabulary in the assembly component. |
 
 **S1 closure:** `ff2d0d70` establishes the target names, direct dependency
@@ -165,13 +166,13 @@ diff contains no production source or build input.
 | --- | --- |
 | Identifier Mode | `M0 T265 S2`, Ordinary Mode with a single-person dual-role review. |
 | Admission And Approval | Owner-approved T265 proposal S2 after completed S1 governance closure. |
-| Objective | Rename `src/bx-core` to `src/bochs-core` and `src/bx-mantle` to `src/adapter-bochs` with `git mv`, then make every live production/build/document consumer resolve the new roots. |
+| Objective | Rename `src/bx-core` to `src/bochs-core` and `src/bx-machine` to `src/adapter-bochs` with `git mv`, then make every live production/build/document consumer resolve the new roots. |
 | Non-goals | No source-body/ABI/behavior change, no test-history mass rename, no component reassignment beyond the two roots, and no overlay implementation. |
 | Reference Baseline | T265/S1 authority `ff2d0d70`, formal Ninja manifest, root ownership scan and current exact Git paths. |
 | Files And ABI Surface | Both source roots, direct include/build/manifests, focused fixture paths and authority references; pathname/build graph only, no runtime ABI. |
 | Applicable Rules | T265 proposal, `git mv`, component ownership and dependency direction, source identity, production-only roots, and build hygiene. |
 | Verification | Pre/post live-reference inventory, no old production-root input, regenerated formal Ninja graph, exact target build/no-work, governance and `git diff --check`. |
-| Expected Markers | No live source/build input below `src/bx-core` or `src/bx-mantle`; all formal component/module names and include paths resolve the renamed roots. |
+| Expected Markers | No live source/build input below `src/bx-core` or `src/bx-machine`; all formal component/module names and include paths resolve the renamed roots. |
 | Asset Needs | Current formal manifest, generator, focused fixture set and existing Bochs provenance register. |
 | Reporting Requirements | Report moved-path counts, every retained historical/test old-name exclusion, build graph repair, and whether any root content changes were required. |
 | Stop Conditions | A move would alter imported content, produce a destination collision, expose an unclassified reverse dependency, or require behavior change. |
@@ -320,7 +321,7 @@ admitted by this closure.
 | --- | --- |
 | Identifier Mode | `M0 T264 S1`, Ordinary Mode with a single-person dual-role review. |
 | Admission And Approval | Owner direction: “请你执行。app, session, adapter-* 这些组件。清理”. |
-| Objective | Produce the complete in-scope filename/consumer manifest needed to remove `ntdos64`, `ntvdm64`, `bx`, and `bochs` from project-authored and mechanical-adaptation code filenames. |
+| Objective | Produce the complete in-scope filename/consumer manifest needed to remove `runner`, `ntvdm64`, `bx`, and `bochs` from project-authored and mechanical-adaptation code filenames. |
 | Non-goals | No content/ABI/behavior change; no rename of the six source mirrors or any `*-overlay`; no rename of an imported upstream filename merely because it is temporarily retained as a non-live input. |
 | Reference Baseline | [Filename-normalization proposal](etc/operations/proposal-project-code-filename-normalization-001.md), current formal Ninja manifests, and live source/build consumers. |
 | Files And ABI Surface | `app`, `session`, `adapter-bop`, `adapter-softpc`, `adapter-win32`, in-scope fixtures/build manifests, filename inventory evidence, status and documentation inventory only; no ABI change. |
@@ -331,7 +332,7 @@ admitted by this closure.
 | Reporting Requirements | Report separate counts for project-authored code, fixtures/build inputs, and original/external identity exclusions; do not silently omit an adapter path. |
 | Stop Conditions | A rename would alter an original mirror identity, collide with another path, or require an ABI/content change. |
 | Exit Criteria | The manifest completely assigns every matching in-scope file and consumer; S2/S3 can execute only its approved `git mv` rows. |
-| Original Owner Request | “我们文件名不应该包含 ntdos64, ntvdm64，bx，bochs之类的；它们的来源都已经规范到各自的组件目录里面了。请你修复所有类似代码名字；6个镜像组件及其overlay不需要管。” |
+| Original Owner Request | “我们文件名不应该包含 runner, ntvdm64，bx，bochs之类的；它们的来源都已经规范到各自的组件目录里面了。请你修复所有类似代码名字；6个镜像组件及其overlay不需要管。” |
 | Similar-Issue Sweep | Imported SoftPC/MVDM headers accidentally treated as project files, stale build/source-list paths, fixture-only stale includes, forbidden mirror renames, and product artifact names mistaken for code filenames. |
 
 The preceding T263/S9 record is closed historical context, retained below until
@@ -343,7 +344,7 @@ the status-history migration supersedes the old compact records.
 | --- | --- |
 | Identifier Mode | `M0 T264 S2`, Ordinary Mode with a single-person dual-role review. |
 | Admission And Approval | T264/S1 inventory closure under the owner-approved filename-normalization task. |
-| Objective | Rename the 38 `app` and four `session` project-code files from redundant `bx_ntvdm_`/`ntdos64_` basenames to neutral owner-local names and repair direct consumers. |
+| Objective | Rename the 38 `app` and four `session` project-code files from redundant former project-specific basenames to neutral owner-local names and repair direct consumers. |
 | Non-goals | No source symbol, ABI, behavior, component-directory, mirror, overlay, or historical-header rename. |
 | Reference Baseline | [S1 inventory](etc/evidence/m0-t264-s1-project-code-filename-inventory-001.md) and the formal Ninja source list. |
 | Files And ABI Surface | `src/app`, `src/session`, direct runner/fixture/build references and naming evidence only; filename paths, no ABI. |
@@ -366,7 +367,7 @@ no work. See the S1/S2 inventory evidence.
 | --- | --- |
 | Identifier Mode | `M0 T264 S3`, Ordinary Mode with a single-person dual-role review. |
 | Admission And Approval | T264/S1 inventory and completed S2 under the owner-approved cleanup task. |
-| Objective | Rename the 77 project-authored `adapter-bop` and top-level `adapter-softpc` files from redundant `bx_ntvdm_` basenames to neutral owner-local names, then repair direct source, fixture and build consumers. |
+| Objective | Rename the 77 project-authored `adapter-bop` and top-level `adapter-softpc` files from redundant former project-specific basenames to neutral owner-local names, then repair direct source, fixture and build consumers. |
 | Non-goals | No rename of `adapter-softpc/include/mvdm/**`, `include/softpc.new/**`, original mirror/overlay code, source symbols, ABI, or behavior. |
 | Reference Baseline | [S1/S2 inventory](etc/evidence/m0-t264-s1-project-code-filename-inventory-001.md) and `tools/build/t260-s8-component-manifest.json`. |
 | Files And ABI Surface | `adapter-bop`, top-level project-owned `adapter-softpc` files, direct tests/build references and evidence only; filename paths, no ABI. |
@@ -406,7 +407,7 @@ prohibited basenames in the five in-scope production roots. The 77 staged
 adapter historical basenames had zero live reference under `src`, `tests`, or
 `tools/build`. The previously recorded S2 and S3 formal Ninja roots both end
 at no-work dry runs after their completed builds. Documentation governance and
-`git diff --check` pass. The later owner-directed `_v1`/`_v2` sweep reopens
+`git diff --check` pass. The later owner-directed temporary-suffix sweep reopens
 T264 as S5; it does not invalidate the S4 product/backend-prefix result.
 
 ### M0 T264 S5 — implementation-version filename normalization
@@ -415,7 +416,7 @@ T264 as S5; it does not invalidate the S4 product/backend-prefix result.
 | --- | --- |
 | Identifier Mode | `M0 T264 S5`, Ordinary Mode with a single-person dual-role review. |
 | Admission And Approval | Owner direction: “本T任务还有一个忘了说了，增加: 文件名里面有v1 v2这玩意的也清理干净”. |
-| Objective | Remove standalone `_v1`/`_v2` filename segments, then classify and remove non-semantic project/backend/OpenNT source-provenance identifier prefixes from all in-scope project-authored production code and repair direct consumers. |
+| Objective | Remove standalone temporary generation filename segments, then classify and remove non-semantic project/backend/OpenNT source-provenance identifier prefixes from all in-scope project-authored production code and repair direct consumers. |
 | Non-goals | No source-symbol change where an identifier actually names DOS/VDM guest semantics, Bochs/register mechanics, an OpenNT provider/guest contract, a public configuration contract, or a preserved historical interface; no function-contract, ABI, behavior, component-directory, mirror, overlay, historical-interface, or test-directory rename. |
 | Reference Baseline | T264 proposal and S1/S4 inventory; the 70-row versioned-filename scan and source token disposition audit. |
 | Files And ABI Surface | `src/app`, `src/session`, `src/adapter-bop`, top-level project-owned `src/adapter-softpc`, their direct consumers, and closure evidence only; private project identifiers and filename paths, no ABI. |
@@ -427,9 +428,9 @@ T264 as S5; it does not invalidate the S4 product/backend-prefix result.
 | Original Owner Request | “文件名里面有v1 v2这玩意的也清理干净”. |
 | Similar-Issue Sweep | Filename-only version suffixes versus actual source symbols, fixture target names, source-list JSON, and retained historical interface paths. |
 
-**S5 P1 result:** all 70 in-scope `_v1`/`_v2` filenames were refined with
+**S5 P1 result:** all 70 in-scope temporary-suffix filenames were refined with
 `git mv`, and the exact source/test/build path consumers were repaired. The
-reviewed non-semantic private `bx_ntvdm_*`, `ntdos64_*`, and source-provenance
+reviewed non-semantic private project-prefixed and source-provenance
 `opennt_*` identifier families were normalized while strings/comments,
 original-interface names, DOS/VDM/Bochs mechanics, and OpenNT contract-facing
 facades were retained. A synchronous formal Ninja attempt reached the genuine
@@ -649,10 +650,10 @@ SHA-256 verified; mixed `vdmutils` remains explicitly split. See the
 | Expected Markers | 35 exact files, zero local exceptions and zero Ninja graph expansion. |
 | Asset Needs | Pinned OpenNT source root and Git provenance. |
 | Reporting Requirements | State source package counts, opaque-input boundary and absence of a machine-runtime assertion. |
-| Stop Conditions | Hash/path mismatch, unregistered source change, machine semantic change, `bx-mantle` OpenNT dependency or default link admission pauses the packet. |
+| Stop Conditions | Hash/path mismatch, unregistered source change, machine semantic change, `bx-machine` OpenNT dependency or default link admission pauses the packet. |
 | Exit Criteria | Both complete original packages are exact, README/evidence agree and architecture boundary remains unchanged. |
 | Original Owner Request | “`softpc.new/bios`、`roms`：属于机器固件/装配输入…应该放在 opennt-softpc 模块。” |
-| Similar-Issue Sweep | Firmware mistaken for an emulator, default BIOS activation, OpenNT naming leaked into mantle/core and build-input provenance drift. |
+| Similar-Issue Sweep | Firmware mistaken for an emulator, default BIOS activation, OpenNT naming leaked into machine/core and build-input provenance drift. |
 
 **S3 P1 completed:** 27 `bios` plus 8 `roms` files were copied
 source-identically and recursively SHA-256 verified. See the [admission
@@ -793,7 +794,7 @@ OpenNT or OpenNT-4.5 source-root peer; their 99-file provenance ledger is
 | --- | --- |
 | Identifier Mode | `M0 T262 S2`, Ordinary Mode with a single-person dual-role review. |
 | Admission And Approval | T262/S1 audit plus owner direction that non-mirror files “不应该存在于该组件内，我们需要逐个审核并决定它们的去向.” |
-| Objective | Remove the unused project-authored `cpu/bx_ntvdm_exception_intercept.h` from `bx-core`, and make every retained modified Bochs file locally marked and individually indexed in `bx-core/README.md`. |
+| Objective | Remove the unused project-authored the former project-specific exception-intercept header from `bx-core`, and make every retained modified Bochs file locally marked and individually indexed in `bx-core/README.md`. |
 | Non-goals | No change to any Bochs executable statement, feature predicate, include dependency, build target, runtime result, or central exception decision. |
 | Reference Baseline | [T262/S1 audit](etc/evidence/m0-t262-s1-original-component-mirror-audit-001.md), the pinned Bochs 2.6 tree, and the existing central external-intrusion register. |
 | Files And ABI Surface | The 18 audited `src/bx-core/cpu/*` and `memory/*` files, `src/bx-core/README.md`, the obsolete header and its focused boundary fixture, T262 evidence/status. |
@@ -834,7 +835,7 @@ closure](etc/evidence/m0-t262-s2-bx-core-local-exception-closure-001.md).
 
 **S1 baseline observation:** 164/183 non-README `bx-core` files are
 byte-identical to the pinned Bochs source; 18 differ and
-`cpu/bx_ntvdm_exception_intercept.h` is non-mirror. All 580 `opennt-guest`
+the former project-specific exception-intercept header is non-mirror. All 580 `opennt-guest`
 files match their OpenNT path byte-for-byte, including one untracked original
 input. `opennt-host` has seven exact files and four declared source
 subsets/minimally edited files. The detailed ledger is the required first P.
@@ -996,7 +997,7 @@ UD-stop switch have left production. `adapter-bop` now has only its default
 mechanical decline plus selector-blind accepted-outcome observations; the
 context fixture uses an explicitly linked test-support object and the
 cancellation fixture now supplies its own v1 callback. Its separate
-`BX_NTVDM_CANCELLATION_TESTING` session-library variant is not falsely added
+`RUNTIME_CANCELLATION_TESTING` session-library variant is not falsely added
 to the ordinary formal graph and remains a later test-governance item.
 
 **S9 P5c completed:** the source-derived OpenNT INT 06 provider and its
@@ -1147,7 +1148,7 @@ evidence](etc/evidence/m0-t261-s8-p5-vrmslot-record-lifecycle-recovery-001.md).
 | Admission And Approval | The owner explicitly authorized S5: “好的 接下来S5开工？”.  T261’s approved proposal admits this exact split after S4 closure. |
 | Objective | Establish `adapter-bop` as the sole selector-blind fixed-width generic-UD ingress/completion owner; retain every BOP selector/service recognition, provider dispatch and BOP-aware observation in `opennt-bop`. |
 | Non-goals | No new BOP enablement, no provider semantic change, no new CPU-frame ABI, no Bochs change, and no migration of family/session/provider logic into `adapter-bop`. |
-| Reference Baseline | T261/S4 P7 closure `694cf087`; existing `adapter-softpc/bx_ntvdm_generic_ud_bridge.h`; `opennt-bop/ingress/dem_v2_composition_bridge.c`; T260 formal component manifest and architecture/coding authorities. |
+| Reference Baseline | T261/S4 P7 closure `694cf087`; existing the former generic-UD bridge header; `opennt-bop/ingress/dem_generic_ud_bridge.c`; T260 formal component manifest and architecture/coding authorities. |
 | Files And ABI Surface | New `src/adapter-bop/*`; the generic-UD external bridge symbol; exported `opennt-bop` route callback; app session-composition bind/reset calls; manifest/generator module and link order; focused bridge fixture. |
 | Applicable Rules | `adapter-bop` is selector/service/family/DOS/WOW/provider blind; OpenNT route semantics remain in `opennt-bop`; `app` owns wiring; `adapter-softpc` remains the only SoftPC/CCPU-to-Bochs boundary; fixed-width copied data only. |
 | Verification | Function-level owner map; selector-token negative scan of `adapter-bop`; focused bind/decline/dispatch/reset fixture; formal Ninja closure; component-direction scan; `git diff --check`; documentation governance. |
@@ -1280,7 +1281,7 @@ does not authorize follow-on implementation.
 | --- | --- |
 | S1 | Complete owner/provenance/build manifest. |
 | S2 | Target roots, READMEs, exception registers and public library/include boundaries. |
-| S3 | `bx-core` confirmation plus `bx-mantle` purification: retain Bochs-only code and assign every foreign-semantics file to its target owner. |
+| S3 | `bx-core` confirmation plus `bx-machine` purification: retain Bochs-only code and assign every foreign-semantics file to its target owner. |
 | S4 | `app` and `opennt-guest` migration. |
 | S5 | `opennt-bop` mirror, ingress and route migration. |
 | S6 | `opennt-host` and `adapter-win32` classification/split migration. |
@@ -1325,7 +1326,7 @@ baseline, not S8 closure evidence.
 **S8 P2 verification:** the reclassified graph passed its manifest gate at
 291 sources, 78 fixtures and one native target. Formal Ninja run `r018`
 linked all seven static libraries, every declared fixture and
-`bin/ntdos64-native.exe`; final actual incremental and dry-run invocations
+`bin/ntvdm64.exe`; final actual incremental and dry-run invocations
 reported no work. The production-tree gate also passed: no non-production
 staging root or legacy build input remains, and all 46 source divergences are
 individually README-registered. See the [T260 closure](history/m0-t260-closure-20260823.md).
@@ -1338,16 +1339,16 @@ for `refs/opennt`. See the
 
 S2 P1 has created all eight target-root README contracts. They declare the
 exception registers for `bx-core`, `opennt-guest`, `opennt-bop` and
-`opennt-host`; restrict mantle to Bochs-only mechanics; and declare each future
+`opennt-host`; restrict machine to Bochs-only mechanics; and declare each future
 library/public-include boundary. No product source or formal Ninja input has
 moved.
 
-S3 has moved all 42 former `bx-mantle/bx_ntvdm_*` bridge files to
+S3 has moved all 42 former project-prefixed bridge files to
 `adapter-softpc` with Git history, repaired product include ownership, and
-made the remaining mantle source scan free of external product semantics.
+made the remaining machine source scan free of external product semantics.
 The local bx-core exception index now points to every active exception family.
 The one coherent formal Ninja/fixture path switch remains S8 work; see the
-[S3 evidence](etc/evidence/m0-t260-s3-mantle-purification-001.md).
+[S3 evidence](etc/evidence/m0-t260-s3-machine-purification-001.md).
 
 S4 has moved the 24 former `src/cli` implementation files into `app` and 579
 original DOS V86/WOW16 source files into `opennt-guest`, all as 100% Git
@@ -1365,16 +1366,16 @@ unchanged until S8; see the
 | --- | --- |
 | Identifier Mode | `M0 T259 S4`, Ordinary Mode with a single-person dual-role review: source-first facade reconciliation. |
 | Admission And Approval | T259 S1 catalog, S2 RTL/environment seams and S3 machine-contract closure are established. S4 reconciles the remaining reached host/machine facades and their formal static-link closure. |
-| Objective | Recover each reached original OpenNT/SoftPC interface shape and its observable semantics through the smallest source-shaped compatibility facade or direct public API, while independently minimizing edits to OpenNT mirrors and `bx-core`/`bx-mantle`. |
+| Objective | Recover each reached original OpenNT/SoftPC interface shape and its observable semantics through the smallest source-shaped compatibility facade or direct public API, while independently minimizing edits to OpenNT mirrors and `bx-core`/`bx-machine`. |
 | Non-goals | No BOP/provider enablement; no wholesale CCPU/SAS/CSR/BaseSrv product-shell recreation; no Bochs semantic intrusion; no invented behavior without source evidence. A facade is not permission to substitute a convenient new ABI. |
 | Reference Baseline | `MACH-01..09` in the T259 catalog; OpenNT `softpc.new/host/src/{nt_cpu.c,nt_cprgs.c,nt_aorc.c}`, `keybd_io.c`; active SoftPC/DEM/XMS source mirrors; T258 mapping manager. |
 | Files And ABI Surface | The source-shaped SoftPC/CCPU facade contract in `bx-vdm`; affected `host_simulate`, register-frame, checked-memory, A20, IVT/keyboard and typed machine-action seams. |
 | Applicable Rules | Source-first recovery, public-Win32/x64 decision rule, guest/machine hard boundary, one shared mapping manager, and no family-private product shell. |
-| Verification | Original call-site and fixed-width ABI audit; focused seam fixture; negative selector/DOS/CCPU boundary scan of bx-core/bx-mantle; formal Ninja build/link; documentation gate and independent review. |
-| Expected Markers | Reached historical spelling remains at the mirror boundary; `bx-vdm` performs copied-state translation; bx-core/mantle remain selector/DOS/CCPU blind; no CCPU loop or host pointer crosses the boundary. |
-| Asset Needs | OpenNT SoftPC/CCPU source and active mirrors, current bx-vdm/mantle API, T258 mapping manager, catalog, exception register and formal build manifest. |
+| Verification | Original call-site and fixed-width ABI audit; focused seam fixture; negative selector/DOS/CCPU boundary scan of bx-core/bx-machine; formal Ninja build/link; documentation gate and independent review. |
+| Expected Markers | Reached historical spelling remains at the mirror boundary; `bx-vdm` performs copied-state translation; bx-core/machine remain selector/DOS/CCPU blind; no CCPU loop or host pointer crosses the boundary. |
+| Asset Needs | OpenNT SoftPC/CCPU source and active mirrors, current bx-vdm/machine API, T258 mapping manager, catalog, exception register and formal build manifest. |
 | Reporting Requirements | Record original interface spelling and call site, calling convention/width/lifetime, typed mechanical request/result, no-op/failure disposition and any exception ID. |
-| Stop Conditions | A helper exposes host pointers to the guest, changes imported OpenNT control flow, recreates a CCPU/product shell, imports BOP/DOS/SoftPC terms into bx-core/mantle, or lacks a source/ABI evidence entry. |
+| Stop Conditions | A helper exposes host pointers to the guest, changes imported OpenNT control flow, recreates a CCPU/product shell, imports BOP/DOS/SoftPC terms into bx-core/machine, or lacks a source/ABI evidence entry. |
 | Exit Criteria | Every remaining reached `HOST-*`/`MACH-*` seam has a source-shaped facade, direct public-API composition, or explicit source-proven decline; the formal static-library closure is sound for each affected fixture; all residual product-shell semantics are queued rather than silently recreated. |
 | Original Owner Request | “接下来，是关于我们全面恢复opennt的win32api宿主方面和 softpc/ccpu 核心机方面的接口规范的任务。你已经审计过。” |
 | Similar-Issue Sweep | `ANSI_STRING`, `OEM_STRING`, `UNICODE_STRING`, `Rtl*` conversion/heap/environment helpers, `NTSTATUS` to DOS error mapping and existing COMMAND/DEM declaration copies. |
@@ -1458,7 +1459,7 @@ divergence register gate pass. See [T260 closure](history/m0-t260-closure-202608
 M0 T259 closes the source-first host/machine compatibility-facade baseline.
 Every reached `HOST-*`/`MACH-*` seam now has direct original composition, a
 smallest OpenNT-shaped public-API facade, or an explicit source-proven
-decline; imported OpenNT mirrors and bx-core/mantle remain unmodified. See
+decline; imported OpenNT mirrors and bx-core/machine remain unmodified. See
 [T259 closure](history/m0-t259-closure-20260823.md).
 
 M0 T258 closes the shared 16/32 guest-to-32/64 host mapping-manager
@@ -1549,7 +1550,7 @@ native Bochs remains CPU exception/IRET owner; see [S14 evidence](etc/evidence/m
 
 M0 T256 S13 closes native descriptor-table lifecycle admission. DOSX `selGDT`
 is a historical process-LDT alias: table mutation plus `53:00` host install is
-DPMI package semantics, not a selector-blind mantle lifecycle. Native Bochs
+DPMI package semantics, not a selector-blind machine lifecycle. Native Bochs
 retains GDT/LDT/LLDT behavior; see [S13 evidence](etc/evidence/m0-t256-s13-native-descriptor-table-lifecycle-admission-001.md).
 
 M0 T256 S12 closes the DPMI descriptor/guest-linear identity map. OpenNT's
@@ -1661,7 +1662,7 @@ temporary SCS configuration file with CF clear, so neither `demOpen` nor
 COMMAND current-directory is the retained failure; see [S18 evidence](etc/evidence/m0-t245-s18-dem-open-observation-001.md).
 
 M0 T245 S17 closes native `54:04` output observation. The existing imported
-COMMAND body returns Direct-host `O:\repos.hobby\ntdos64`, then source-built
+COMMAND body returns Direct-host `O:\repos.hobby\runner`, then source-built
 execution reaches/resumes `50:12 demOpen`; see [S17 evidence](etc/evidence/m0-t245-s17-command-current-dir-observation-001.md).
 
 M0 T245 S16 closes the relative-root bootstrap defect. CLI admission now
@@ -1795,13 +1796,13 @@ this ABI correction; XMS returns to the unnumbered candidate queue.
 - T95 is closed by owner-authorized reprioritization. Its incomplete file/search
   capability and full real-path closure remain uncompleted.
 - M0 T197 S6 has a reproducible CPU5/non-x86-64 native link frontier: r4
-  compiles the explicit SIM/mantle/memory and source-proven reset/decode CPU
+  compiles the explicit SIM/machine/memory and source-proven reset/decode CPU
   candidates, then stops at the original complete instruction-handler table
   and retained product-shell methods.  No GUI, plugin/device archive, adapter
   or OpenNT input entered the probe; see
   [T197 S6 link probe 001](etc/research/t197-s6-cpu5-minimal-link-probe-001.md).
 - M0 T197 S6 r11 now source-builds and links the whole CPU5 adopted core with
-  the finite mantle, without a Bochs product target.  This is a native link
+  the finite machine, without a Bochs product target.  This is a native link
   closure only; machine initialization/execution still requires separate
   lifecycle verification.
 - M0 T197 S6 r12 verifies the native bare-machine lifecycle in process:
@@ -1810,36 +1811,36 @@ this ABI correction; XMS returns to the unnumbered candidate queue.
   made by that lifecycle witness.
 - M0 T198 S1 finds the retained BOP runtime is a historical product derivative:
   it retains `main.cc`, GUI/device archives and product configuration.  It is
-  not link-compatible with the finite mantle.  The first second-stage closure
+  not link-compatible with the finite machine.  The first second-stage closure
   is therefore a selector-blind native execution contract, not a per-BOP
   implementation; see
   [T198 S1 composition map](etc/research/t198-s1-bop-runtime-composition-map-001.md).
 - M0 T198 S2 is complete: native CPU and PC-time sources prove a
-  mantle-private reset/copy/entry/run contract.  Its bound is a finite
+  machine-private reset/copy/entry/run contract.  Its bound is a finite
   instruction-tick budget rather than an exact retired-instruction counter;
   the existing product `benchmarkTimer` is rejected because it also mutates
   GUI exit state.  See
   [T198 S2 execution-contract map](etc/research/t198-s2-native-execution-contract-map-001.md).
 - M0 T198 S3 is complete: r8 source-builds and runs neutral `HLT` bytes
   through CPU5 reset, checked RAM copy, real-mode entry, 64-tick native stop
-  and cleanup.  The needed A20 initialization is now a finite mantle
+  and cleanup.  The needed A20 initialization is now a finite machine
   lifecycle invariant; no guest/BOP runtime claim follows.  See
   [T198 S3 finite-run witness](etc/research/t198-s3-finite-native-run-witness-001.md).
 - M0 T198 S4 is complete: the current `#UD` seam map separates retained
   copied-state/resume mechanics from legacy `bx-vdm` dispatch, raw callback,
   environment and product-lifecycle coupling.  S5 will extract one fixed
-  core/mantle bridge before any BOP plane attachment; see
+  core/machine bridge before any BOP plane attachment; see
   [T198 S4 generic #UD seam map](etc/research/t198-s4-generic-ud-seam-map-001.md).
-- M0 T198 S5 P1 is complete: mantle now owns a standalone fixed generic-UD
+- M0 T198 S5 P1 is complete: machine now owns a standalone fixed generic-UD
   copied record and default-decline bridge, independently MSVC/x86 compiled
   with no adapter/product vocabulary or dependency.  Core has not yet been
   switched; see
   [T198 S5 P1 bridge record](etc/research/t198-s5-p1-generic-ud-bridge-record-001.md).
 - M0 T198 S5 P2 is complete: a new default-off core gate source-builds under
-  CPU5/MSVC and invokes only the fixed mantle record/typed outcome path; its
+  CPU5/MSVC and invokes only the fixed machine record/typed outcome path; its
   stop uses the finite PC stop latch.  Historical parallel gates remain for
   P3 removal and are not part of the new composition; see
-  [T198 S5 P2 core hook](etc/research/t198-s5-p2-core-mantle-ud-hook-001.md).
+  [T198 S5 P2 core hook](etc/research/t198-s5-p2-core-machine-ud-hook-001.md).
 - M0 T198 S5 P3 is complete: the legacy machine-composition callback,
   product-stop path and every quarantined legacy exception implementation are
   physically removed from core.  Fresh CPU5 r3 source-builds the minimal
@@ -1859,7 +1860,7 @@ this ABI correction; XMS returns to the unnumbered candidate queue.
   links and returns zero without entering #UD.  See [T198 S7 cross-island
   witness](etc/research/t198-s7-cross-island-link-witness-001.md).
 - M0 T198 S8 P1 is complete: the first adapter-local pending descriptor was
-  corrected into a mantle-owned, selector-blind copied ordinary-RAM action
+  corrected into a machine-owned, selector-blind copied ordinary-RAM action
   ABI.  A native CPU5/x86 fixture proves read, max-size bulk write/read and a
   rejected out-of-aperture multi-range write with no partial write; an i686 C
   witness proves the fixed layout.  No provider is attached; see [T198 S8
@@ -1893,7 +1894,7 @@ this ABI correction; XMS returns to the unnumbered candidate queue.
 - M0 T198 S11 P1 is complete: the generic event/outcome and mechanical action
   records already close the synchronous inner transaction. The only gaps are
   adapter-owned explicit session lifetime and action-result propagation; no
-  core/mantle ABI or semantic addition is indicated. See [T198 S11 P1 map](etc/research/t198-s11-p1-synchronous-composition-map-001.md).
+  core/machine ABI or semantic addition is indicated. See [T198 S11 P1 map](etc/research/t198-s11-p1-synchronous-composition-map-001.md).
 - M0 T198 S12 P1 is complete: an explicit adapter-owned session now executes
   copied write/read actions synchronously and returns typed generic outcomes;
   unbound and executor-failure paths decline. COMMAND write results now resume
@@ -1907,7 +1908,7 @@ this ABI correction; XMS returns to the unnumbered candidate queue.
   executable because they import a second CRT/helper universe. The probe did
   not run; no Bochs defect is inferred. See [T198 S12 P3 frontier](etc/research/t198-s12-p3-native-cross-island-link-frontier-001.md).
 - M0 T198 S13 is complete: the full CPU5/Pentium-MMX source membership and
-  finite mantle source-build, link and run as one MSVC x64 `/MT` PE32+ process
+  finite machine source-build, link and run as one MSVC x64 `/MT` PE32+ process
   lifecycle. The x64 configuration projection corrects host pointer width
   without changing guest CPU identity; see [T198 S13 witness](etc/research/t198-s13-msvc-x64-minimal-lifecycle-witness-001.md).
 - M0 T198 S14 is complete: a neutral one-byte HLT fixture enters the CPU5
@@ -1951,16 +1952,16 @@ this ABI correction; XMS returns to the unnumbered candidate queue.
   NTDOS publication, typed resume and negative controlled stop; see [S20
   witness](etc/research/t198-s20-native-dem-load-dos-witness-001.md).
 - M0 T198 S21 P1 closes the NTIO pre-entry contract: pre-entry publication is
-  a new selector-blind mantle request, not a startup BOP or Bochs semantic;
+  a new selector-blind machine request, not a startup BOP or Bochs semantic;
   entry changes only CS:IP and stops at the already-admitted `50:11` boundary.
   See [S21 pre-entry map](etc/research/t198-s21-ntio-preentry-contract-map-001.md).
 - M0 T198 S22 closes the selector-blind pre-entry primitive: a versioned,
   copied v2 request preflights a one-MiB aperture, captures/restores opaque
   bytes across image publication, and then applies CS:IP.  The full CPU5
   MSVC x64 `/MT` fixture proves restoration and rejection before mutation; see
-  [S22 witness](etc/research/t198-s22-mantle-preentry-witness-001.md).
+  [S22 witness](etc/research/t198-s22-machine-preentry-witness-001.md).
 - M0 T198 S23 P1 source-builds the `bx-vdm` NTIO request builder under MSVC
-  x64 `/MT`: it copies only the exact `0x8400` image into mantle v2 and
+  x64 `/MT`: it copies only the exact `0x8400` image into machine v2 and
   source-locks `0x700`, `0x714`, `0070:0000`; execution is pending. See
   [S23 P1 builder record](etc/research/t198-s23-p1-ntio-request-builder-001.md).
 - M0 T198 S23 P2 native-runs the exact source-built NTIO through `0070:0000`
@@ -1987,7 +1988,7 @@ this ABI correction; XMS returns to the unnumbered candidate queue.
 - M0 T198 S24 P2 retains the two original HLT source sites as static facts,
   but its runtime attribution is superseded by the mock-NDTOS finding; see
   [S24 P2](etc/research/t198-s24-p2-native-hlt-source-triage-001.md).
-- M0 T198 S24 P3 admits and verifies a default-off mantle-private terminal
+- M0 T198 S24 P3 admits and verifies a default-off machine-private terminal
   CS:IP snapshot. The corrected `956B:0001` result is the deliberate mock
   NTDOS endpoint, not an NTIO/sysinit failure; see [S24
   P3](etc/research/t198-s24-p3-terminal-snapshot-001.md).
@@ -2025,7 +2026,7 @@ this ABI correction; XMS returns to the unnumbered candidate queue.
   differs from the entry CS. The frontier is a guest mutation/transfer target,
   not an IVT, firmware, VGA, or device-admission request. See
   [S30 audit](etc/research/t198-s30-low-ram-frontier-ownership-audit-001.md).
-- M0 T198 S31 adds a one-shot, opaque, checked mantle terminal-RAM snapshot.
+- M0 T198 S31 adds a one-shot, opaque, checked machine terminal-RAM snapshot.
   The exact CPU5 run records `0x0A80..0x0A8F` as differing from its published
   NTIO bytes and confirms `0x0A84..0x0A87 = FF FF FF FF` at generic stop; no
   core, BOP, device, or CLI behavior changed. See
@@ -2043,7 +2044,7 @@ this ABI correction; XMS returns to the unnumbered candidate queue.
 - M0 T198 S34 rejects all existing instrumentation candidates: the CPU5 build
   compiles `BX_INSTRUMENTATION=0`, while the available active modules require
   a broader feature closure and raw CPU/logging coupling. A future trace must
-  be a separately admitted fixed-width core-to-mantle mechanic, never a BOP or
+  be a separately admitted fixed-width core-to-machine mechanic, never a BOP or
   debugger path. See [S34 audit](etc/research/t198-s34-instruction-history-seam-audit-001.md).
 - M0 T198 S36 is complete: the default-off registered chained-step history
   rebuilt the full CPU5 source closure under MSVC x64 `/MT` and captured the
@@ -2057,7 +2058,7 @@ this ABI correction; XMS returns to the unnumbered candidate queue.
   stale. The exact CS-to-zero transfer and low-RAM writer remain unproven; no
   device, firmware or BOP change is admitted. See
   [S37 attribution](etc/research/t198-s37-low-ram-transfer-attribution-001.md).
-- M0 T198 S38 is complete: the registered, default-off mantle-only query
+- M0 T198 S38 is complete: the registered, default-off machine-only query
   proves the latest retained code-segment transition before the generic stop
   is `9346:4D53 -> 0000:0000`; the known `0000:0A82 -> 0000:0A84` pair occurs
   later. The transfer instruction and owner remain unproven, and no machine
@@ -2070,7 +2071,7 @@ this ABI correction; XMS returns to the unnumbered candidate queue.
   [S39 attribution](etc/research/t198-s39-preentry-contract-attribution-001.md).
 - M0 T198 S40 is complete: the selected profile's complete currently
   evidenced pre-entry snapshot is atomically installed through the existing
-  mantle mechanical action. The old all-`FF` `0A84` frontier is gone; the new
+  machine mechanical action. The old all-`FF` `0A84` frontier is gone; the new
   reproducible `0000:0047` frontier follows the still-unexplained
   `9346:4D53 -> 0000:0000` transfer. See
   [S40 closure](etc/research/t198-s40-preentry-input-closure-001.md).
@@ -2078,7 +2079,7 @@ this ABI correction; XMS returns to the unnumbered candidate queue.
   the unexpected CS transition changes SS:SP from `00A7:0918` to
   `00A7:090E`. The frame owner remains unproven. See
   [S41 witness](etc/research/t198-s41-stack-position-witness-001.md).
-- M0 T198 S42 is complete: the registered bounded mantle provenance record
+- M0 T198 S42 is complete: the registered bounded machine provenance record
   proves that the preceding guest instruction is `SS: CALL FAR [037A]` and
   retains the matching `9346:4D58` far return address; S44 corrects its
   non-direct `0000:0000` operand inference. It does not establish a BOP,

@@ -1,7 +1,7 @@
 {
     "SchemaVersion":  1,
     "Toolchain":  "MS-DOS 4.00 TOOLS",
-    "UpstreamPath":  "D:\\home\\repos\\ntdos64\\toolchain-probe\\reference\\msdos4\\v4.0\\src\\TOOLS",
+    "UpstreamPath":  "D:\\home\\repos\\runner\\toolchain-probe\\reference\\msdos4\\v4.0\\src\\TOOLS",
     "FileCount":  81,
     "ByteCount":  2838384,
     "Files":  [

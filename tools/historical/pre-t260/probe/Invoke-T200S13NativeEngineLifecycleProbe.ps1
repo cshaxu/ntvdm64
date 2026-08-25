@@ -12,20 +12,20 @@ $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\To
 if (-not (Test-Path -LiteralPath $vs)) { throw "Missing MSVC environment: $vs" }
 $contract = Join-Path $root 'src\bx-vdm\bx_ntvdm_engine_contract_v1.c'
 $entry = Join-Path $root 'src\bx-vdm\bx_ntvdm_engine_run_v1.c'
-$test = Join-Path $root 'tests\bx-mantle\bx_ntvdm_engine_run_v1_test.c'
+$test = Join-Path $root 'tests\bx-machine\bx_ntvdm_engine_run_v1_test.c'
 $exe = Join-Path $build 't200-s13-native-engine-lifecycle.exe'
 $command = 'call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && cl.exe /nologo /TC /std:c11 /W4 /WX /MT /I "' +
-    (Join-Path $root 'src\bx-mantle') + '" /I "' + (Join-Path $root 'src\bx-vdm') +
+    (Join-Path $root 'src\bx-machine') + '" /I "' + (Join-Path $root 'src\bx-vdm') +
     '" /Fe:"' + $exe + '" "' + $contract + '" "' + $entry + '" "' + $test + '"'
 & cmd.exe /d /s /c $command 2>&1 | Tee-Object -LiteralPath (Join-Path $build 'compile.log')
 if ($LASTEXITCODE -ne 0) { throw "T200 S13 compile failed: $LASTEXITCODE" }
 & $exe 2>&1 | Tee-Object -LiteralPath (Join-Path $build 'run.log')
 $runExit = $LASTEXITCODE
 $record = [ordered]@{
-    schema = 'ntdos64.t200.s13.native-engine-lifecycle.v1'
+    schema = 'runner.t200.s13.native-engine-lifecycle.v1'
     architecture = 'x64'
     runtimeLibrary = '/MT'
-    sourceClosure = @('src/bx-mantle/bx_ntvdm_engine_contract_v1.c', 'src/bx-mantle/bx_ntvdm_engine_run_v1.c', 'tests/bx-mantle/bx_ntvdm_engine_run_v1_test.c')
+    sourceClosure = @('src/bx-machine/bx_ntvdm_engine_contract_v1.c', 'src/bx-machine/bx_ntvdm_engine_run_v1.c', 'tests/bx-machine/bx_ntvdm_engine_run_v1_test.c')
     seam = 'bx_ntvdm_composition_runtime_v1_install_from_engine_request/reset (test substitute)'
     forbiddenDependencies = @('bochs.h', 'src/bx-core', 'guest execution')
     runExitCode = $runExit

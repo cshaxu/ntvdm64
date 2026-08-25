@@ -2,7 +2,7 @@
  * invasive NtVdmControl product interface.  Preserve source-facing spelling:
  * OEM enumeration maps to public Win32, and removed NtVdmControl returns its
  * explicit native unavailable status so the original fallback remains live. */
-#include "adapter-win32/include/legacy-api/opennt_dem_search_facade.h"
+#include "adapter-win32/include/opennt-api/opennt_dem_search_facade.h"
 #include <stdlib.h>
 #include <string.h>
 

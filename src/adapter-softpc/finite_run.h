@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////
 //
-// Finite bare-byte execution mechanic owned entirely by the native mantle.
+// Finite bare-byte execution mechanic owned entirely by the native machine.
 // This is a C++-private fixture interface, not a cross-component or CLI ABI.
 //
 /////////////////////////////////////////////////////////////////////////
@@ -43,13 +43,13 @@ struct runtime_finite_run_request {
   uint64_t instruction_tick_budget;
   uint32_t ips;
   uint32_t stop_on_first_fault_fixture;
-  /* Test-only mantle selection of the default-off CPU compatibility gate. */
+  /* Test-only machine selection of the default-off CPU compatibility gate. */
   uint32_t enable_realmode_segment_limit_compatibility;
   /* Optional fixed copied ordinary-RAM action executed before any preserved
    * range is captured or entry bytes are placed.  Its content remains opaque
-   * to this private mantle request. */
+   * to this private machine request. */
   uint32_t has_preentry_action;
-  struct runtime_mechanical_action_v1 preentry_action;
+  struct runtime_mechanical_action preentry_action;
   /* Optional opaque range captured before entry_bytes are published and
    * restored immediately afterwards.  This is a machine-only preservation
    * mechanic; its address and bytes have no guest-service meaning here. */
@@ -60,11 +60,11 @@ struct runtime_finite_run_request {
 };
 
 // The request carries copied fixed-width data only; the byte sequence is
-// opaque to mantle.
+// opaque to machine.
 runtime_finite_run_status runtime_run_finite_bare_bytes(
   const runtime_finite_run_request *request);
 
-/* This private mantle query copies no more than the state already held by
+/* This private machine query copies no more than the state already held by
  * CPU0 after a finite loop returns.  It does not expose a CPU object. */
 void runtime_finite_run_terminal_snapshot_clear(void);
 int runtime_finite_run_terminal_snapshot_get(

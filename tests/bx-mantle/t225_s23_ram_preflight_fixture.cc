@@ -1,7 +1,0 @@
-#include "bochs.h"
-#include "adapter-bochs/minimal_machine.h"
-#include "adapter-softpc/mechanical_action.h"
-#include "adapter-bop/generic_ud_bridge.h"
-extern "C" int runtime_mantle_generic_ud_bridge_v1(const struct runtime_generic_ud_event_v1 *, struct runtime_generic_ud_outcome_v1 *) { return 0; }
-static void a(struct runtime_mechanical_action_v1 *x, uint32_t k, uint64_t p, uint8_t v) { runtime_mechanical_action_v1_clear(x); x->action_id=1; x->kind=k; x->range_count=1; x->payload_bytes=1; x->ranges[0].physical_address=p; x->ranges[0].byte_count=1; x->payload[0]=v; }
-int main() { bx_mantle_minimal_machine_c m; struct runtime_mechanical_action_v1 x; Bit8u b=0; a(&x,RUNTIME_MECHANICAL_ACTION_V1_PREFLIGHT_WRITE,0x100,0xa5); if(runtime_mantle_execute_mechanical_action_v1(&x))return 1; if(m.initialize(0x200000,0x200000)!=BX_MANTLE_MINIMAL_MACHINE_OK)return 2; a(&x,RUNTIME_MECHANICAL_ACTION_V1_WRITE,0x100,0x5a); if(!runtime_mantle_execute_mechanical_action_v1(&x))return 3; a(&x,RUNTIME_MECHANICAL_ACTION_V1_PREFLIGHT_WRITE,0x100,0xa5); if(!runtime_mantle_execute_mechanical_action_v1(&x)||!bx_mem.copy_from_ordinary_ram(0x100,1,&b)||b!=0x5a)return 4; a(&x,RUNTIME_MECHANICAL_ACTION_V1_PREFLIGHT_WRITE,0x200000,0xa5); if(runtime_mantle_execute_mechanical_action_v1(&x)||!bx_mem.copy_from_ordinary_ram(0x100,1,&b)||b!=0x5a)return 5; return m.cleanup()==BX_MANTLE_MINIMAL_MACHINE_OK?0:6; }

@@ -14,17 +14,17 @@ static BOOL direct_cli_configured;
 static BOOL direct_cli_first_vdm;
 static BOOL direct_cli_pif_request_seen;
 
-void ntdos64_direct_cli_transport_end(void) {
+void runner_direct_cli_transport_end(void) {
     memset(direct_cli_pif_path, 0, sizeof(direct_cli_pif_path));
     direct_cli_configured = FALSE;
     direct_cli_first_vdm = FALSE;
     direct_cli_pif_request_seen = FALSE;
 }
 
-BOOL ntdos64_direct_cli_transport_begin(const char *pif_path, BOOL first_vdm) {
+BOOL runner_direct_cli_transport_begin(const char *pif_path, BOOL first_vdm) {
     size_t path_length;
 
-    ntdos64_direct_cli_transport_end();
+    runner_direct_cli_transport_end();
     if (pif_path == NULL) {
         return FALSE;
     }

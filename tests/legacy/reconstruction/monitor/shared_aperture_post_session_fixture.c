@@ -35,7 +35,7 @@ int wmain(int argc, wchar_t **argv)
 
     if (argc != 2) return 2;
     if (swprintf(mapping_name, sizeof(mapping_name) / sizeof(mapping_name[0]),
-        L"Local\\ntdos64-s4-sas-%lu-%lu", (unsigned long)GetCurrentProcessId(),
+        L"Local\\runner-s4-sas-%lu-%lu", (unsigned long)GetCurrentProcessId(),
         (unsigned long)GetTickCount()) < 0) return 3;
     mapping = CreateFileMappingW(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0u,
         aperture_bytes, mapping_name);

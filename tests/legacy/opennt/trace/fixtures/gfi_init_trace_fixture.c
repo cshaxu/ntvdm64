@@ -5,7 +5,7 @@
 
 extern void gfi_init(void);
 
-#ifndef NTDOS64_GFI_USE_HISTORICAL_HOST_RUNTIME
+#ifndef RUNNER_GFI_USE_HISTORICAL_HOST_RUNTIME
 static int runtime_set_calls;
 static UTINY runtime_set_what;
 static SHORT runtime_set_value;
@@ -26,7 +26,7 @@ int main(void)
 {
     gfi_init();
 
-#ifdef NTDOS64_GFI_USE_HISTORICAL_HOST_RUNTIME
+#ifdef RUNNER_GFI_USE_HISTORICAL_HOST_RUNTIME
     return 0;
 #else
     return runtime_set_calls == 1 &&

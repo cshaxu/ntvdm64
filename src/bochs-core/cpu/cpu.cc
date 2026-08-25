@@ -54,13 +54,13 @@ static unsigned iCacheMisses=0;
 int BX_CPU_C::overlay_bind_opaque_callback(bx_cpu_opaque_callback_t callback,
   void *context)
 {
-  return bochs_core_overlay_opaque_callback_v1_bind(
+  return bochs_core_overlay_opaque_callback_bind(
     (bochs_core_overlay_opaque_callback_t)callback, context);
 }
 
 void BX_CPU_C::overlay_unbind_opaque_callback(void)
 {
-  bochs_core_overlay_opaque_callback_v1_unbind();
+  bochs_core_overlay_opaque_callback_unbind();
 }
 
 void BX_CPU_C::cpu_loop(void)

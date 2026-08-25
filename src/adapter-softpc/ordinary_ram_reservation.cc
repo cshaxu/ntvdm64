@@ -3,35 +3,35 @@
 
 #include <string.h>
 
-struct runtime_ordinary_ram_reservation_v1_record {
+struct runtime_ordinary_ram_reservation_record {
   uint32_t opaque_id;
   uint32_t address;
   uint32_t byte_count;
 };
 
-static uint32_t runtime_ordinary_ram_reservation_v1_lifecycle_active;
-static uint32_t runtime_ordinary_ram_reservation_v1_base;
-static uint32_t runtime_ordinary_ram_reservation_v1_bytes;
-static uint32_t runtime_ordinary_ram_reservation_v1_next_id;
-static struct runtime_ordinary_ram_reservation_v1_record
-  runtime_ordinary_ram_reservation_v1_records[
-    RUNTIME_ORDINARY_RAM_RESERVATION_V1_MAX_RECORDS];
+static uint32_t runtime_ordinary_ram_reservation_lifecycle_active;
+static uint32_t runtime_ordinary_ram_reservation_base;
+static uint32_t runtime_ordinary_ram_reservation_bytes;
+static uint32_t runtime_ordinary_ram_reservation_next_id;
+static struct runtime_ordinary_ram_reservation_record
+  runtime_ordinary_ram_reservation_records[
+    RUNTIME_ORDINARY_RAM_RESERVATION_MAX_RECORDS];
 
-static void runtime_ordinary_ram_reservation_v1_reset_state(void)
+static void runtime_ordinary_ram_reservation_reset_state(void)
 {
-  runtime_ordinary_ram_reservation_v1_base = 0u;
-  runtime_ordinary_ram_reservation_v1_bytes = 0u;
-  runtime_ordinary_ram_reservation_v1_next_id = 1u;
-  memset(runtime_ordinary_ram_reservation_v1_records, 0,
-    sizeof(runtime_ordinary_ram_reservation_v1_records));
+  runtime_ordinary_ram_reservation_base = 0u;
+  runtime_ordinary_ram_reservation_bytes = 0u;
+  runtime_ordinary_ram_reservation_next_id = 1u;
+  memset(runtime_ordinary_ram_reservation_records, 0,
+    sizeof(runtime_ordinary_ram_reservation_records));
 }
 
-static int runtime_ordinary_ram_reservation_v1_power_of_two(uint32_t value)
+static int runtime_ordinary_ram_reservation_power_of_two(uint32_t value)
 {
   return value != 0u && (value & (value - 1u)) == 0u;
 }
 
-static int runtime_ordinary_ram_reservation_v1_interval_valid(uint64_t base,
+static int runtime_ordinary_ram_reservation_interval_valid(uint64_t base,
   uint64_t bytes)
 {
   return (base == 0u && bytes == 0u) ||
@@ -41,110 +41,110 @@ static int runtime_ordinary_ram_reservation_v1_interval_valid(uint64_t base,
      base + bytes > base && base + bytes <= UINT64_C(0x1000000));
 }
 
-static int runtime_ordinary_ram_reservation_v1_span_ordinary(uint32_t address,
+static int runtime_ordinary_ram_reservation_span_ordinary(uint32_t address,
   uint32_t byte_count)
 {
   return byte_count != 0u && (uint64_t) address + byte_count <= UINT64_C(0x100000000) &&
-    machine_facade_v1_memory_readable(address, byte_count) &&
-    machine_facade_v1_memory_writable(address, byte_count);
+    machine_facade_memory_readable(address, byte_count) &&
+    machine_facade_memory_writable(address, byte_count);
 }
 
-extern "C" void runtime_ordinary_ram_reservation_v1_clear(
-  struct runtime_ordinary_ram_reservation_v1 *action)
+extern "C" void runtime_ordinary_ram_reservation_clear(
+  struct runtime_ordinary_ram_reservation *action)
 {
   if (action == 0) return;
   memset(action, 0, sizeof(*action));
-  action->magic = RUNTIME_ORDINARY_RAM_RESERVATION_V1_MAGIC;
-  action->abi_version = RUNTIME_ORDINARY_RAM_RESERVATION_V1_VERSION;
+  action->magic = RUNTIME_ORDINARY_RAM_RESERVATION_MAGIC;
+  action->abi_version = RUNTIME_ORDINARY_RAM_RESERVATION_VERSION;
   action->struct_bytes = sizeof(*action);
-  action->status = RUNTIME_ORDINARY_RAM_RESERVATION_V1_REJECTED_INPUT;
+  action->status = RUNTIME_ORDINARY_RAM_RESERVATION_REJECTED_INPUT;
 }
 
-extern "C" int runtime_ordinary_ram_reservation_v1_valid(
-  const struct runtime_ordinary_ram_reservation_v1 *action)
+extern "C" int runtime_ordinary_ram_reservation_valid(
+  const struct runtime_ordinary_ram_reservation *action)
 {
-  if (action == 0 || action->magic != RUNTIME_ORDINARY_RAM_RESERVATION_V1_MAGIC ||
-      action->abi_version != RUNTIME_ORDINARY_RAM_RESERVATION_V1_VERSION ||
+  if (action == 0 || action->magic != RUNTIME_ORDINARY_RAM_RESERVATION_MAGIC ||
+      action->abi_version != RUNTIME_ORDINARY_RAM_RESERVATION_VERSION ||
       action->struct_bytes != sizeof(*action)) return 0;
-  if (action->kind == RUNTIME_ORDINARY_RAM_RESERVATION_V1_ALLOCATE)
+  if (action->kind == RUNTIME_ORDINARY_RAM_RESERVATION_ALLOCATE)
     return action->byte_count != 0u &&
-      action->alignment_bytes >= RUNTIME_ORDINARY_RAM_RESERVATION_V1_MIN_ALIGNMENT &&
-      action->alignment_bytes <= RUNTIME_ORDINARY_RAM_RESERVATION_V1_MAX_ALIGNMENT &&
-      runtime_ordinary_ram_reservation_v1_power_of_two(action->alignment_bytes) &&
+      action->alignment_bytes >= RUNTIME_ORDINARY_RAM_RESERVATION_MIN_ALIGNMENT &&
+      action->alignment_bytes <= RUNTIME_ORDINARY_RAM_RESERVATION_MAX_ALIGNMENT &&
+      runtime_ordinary_ram_reservation_power_of_two(action->alignment_bytes) &&
       action->opaque_id == 0u && action->address == 0u;
-  return action->kind == RUNTIME_ORDINARY_RAM_RESERVATION_V1_RELEASE &&
+  return action->kind == RUNTIME_ORDINARY_RAM_RESERVATION_RELEASE &&
     action->byte_count == 0u && action->alignment_bytes == 0u &&
     action->opaque_id != 0u && action->address == 0u;
 }
 
-extern "C" uint32_t runtime_ordinary_ram_reservation_v1_configure(
+extern "C" uint32_t runtime_ordinary_ram_reservation_configure(
   uint64_t base, uint64_t bytes)
 {
-  if (runtime_ordinary_ram_reservation_v1_lifecycle_active)
-    return RUNTIME_ORDINARY_RAM_RESERVATION_V1_REJECTED_LIFECYCLE;
-  runtime_ordinary_ram_reservation_v1_reset_state();
-  if (!runtime_ordinary_ram_reservation_v1_interval_valid(base, bytes))
-    return RUNTIME_ORDINARY_RAM_RESERVATION_V1_REJECTED_CONFIGURATION;
-  if (bytes != 0u && !runtime_ordinary_ram_reservation_v1_span_ordinary(
+  if (runtime_ordinary_ram_reservation_lifecycle_active)
+    return RUNTIME_ORDINARY_RAM_RESERVATION_REJECTED_LIFECYCLE;
+  runtime_ordinary_ram_reservation_reset_state();
+  if (!runtime_ordinary_ram_reservation_interval_valid(base, bytes))
+    return RUNTIME_ORDINARY_RAM_RESERVATION_REJECTED_CONFIGURATION;
+  if (bytes != 0u && !runtime_ordinary_ram_reservation_span_ordinary(
       (uint32_t) base, (uint32_t) bytes))
-    return RUNTIME_ORDINARY_RAM_RESERVATION_V1_REJECTED_MEMORY;
-  runtime_ordinary_ram_reservation_v1_base = (uint32_t) base;
-  runtime_ordinary_ram_reservation_v1_bytes = (uint32_t) bytes;
-  return RUNTIME_ORDINARY_RAM_RESERVATION_V1_OK;
+    return RUNTIME_ORDINARY_RAM_RESERVATION_REJECTED_MEMORY;
+  runtime_ordinary_ram_reservation_base = (uint32_t) base;
+  runtime_ordinary_ram_reservation_bytes = (uint32_t) bytes;
+  return RUNTIME_ORDINARY_RAM_RESERVATION_OK;
 }
 
-extern "C" void runtime_ordinary_ram_reservation_v1_set_lifecycle_active(
+extern "C" void runtime_ordinary_ram_reservation_set_lifecycle_active(
   uint32_t active)
 {
-  runtime_ordinary_ram_reservation_v1_lifecycle_active = active == 1u ? 1u : 0u;
-  if (!runtime_ordinary_ram_reservation_v1_lifecycle_active)
-    runtime_ordinary_ram_reservation_v1_reset_state();
+  runtime_ordinary_ram_reservation_lifecycle_active = active == 1u ? 1u : 0u;
+  if (!runtime_ordinary_ram_reservation_lifecycle_active)
+    runtime_ordinary_ram_reservation_reset_state();
 }
 
-extern "C" uint32_t runtime_mantle_execute_ordinary_ram_reservation_v1(
-  struct runtime_ordinary_ram_reservation_v1 *action)
+extern "C" uint32_t runtime_machine_execute_ordinary_ram_reservation(
+  struct runtime_ordinary_ram_reservation *action)
 {
   uint32_t index;
-  if (action == 0 || !runtime_ordinary_ram_reservation_v1_valid(action))
-    return RUNTIME_ORDINARY_RAM_RESERVATION_V1_REJECTED_INPUT;
-  action->status = RUNTIME_ORDINARY_RAM_RESERVATION_V1_REJECTED_LIFECYCLE;
-  if (!runtime_ordinary_ram_reservation_v1_lifecycle_active) return action->status;
-  if (runtime_ordinary_ram_reservation_v1_bytes == 0u) {
-    action->status = RUNTIME_ORDINARY_RAM_RESERVATION_V1_REJECTED_CONFIGURATION;
+  if (action == 0 || !runtime_ordinary_ram_reservation_valid(action))
+    return RUNTIME_ORDINARY_RAM_RESERVATION_REJECTED_INPUT;
+  action->status = RUNTIME_ORDINARY_RAM_RESERVATION_REJECTED_LIFECYCLE;
+  if (!runtime_ordinary_ram_reservation_lifecycle_active) return action->status;
+  if (runtime_ordinary_ram_reservation_bytes == 0u) {
+    action->status = RUNTIME_ORDINARY_RAM_RESERVATION_REJECTED_CONFIGURATION;
     return action->status;
   }
-  if (action->kind == RUNTIME_ORDINARY_RAM_RESERVATION_V1_RELEASE) {
-    for (index = 0u; index < RUNTIME_ORDINARY_RAM_RESERVATION_V1_MAX_RECORDS; ++index) {
-      if (runtime_ordinary_ram_reservation_v1_records[index].opaque_id == action->opaque_id) {
-        memset(&runtime_ordinary_ram_reservation_v1_records[index], 0,
-          sizeof(runtime_ordinary_ram_reservation_v1_records[index]));
-        action->status = RUNTIME_ORDINARY_RAM_RESERVATION_V1_OK;
+  if (action->kind == RUNTIME_ORDINARY_RAM_RESERVATION_RELEASE) {
+    for (index = 0u; index < RUNTIME_ORDINARY_RAM_RESERVATION_MAX_RECORDS; ++index) {
+      if (runtime_ordinary_ram_reservation_records[index].opaque_id == action->opaque_id) {
+        memset(&runtime_ordinary_ram_reservation_records[index], 0,
+          sizeof(runtime_ordinary_ram_reservation_records[index]));
+        action->status = RUNTIME_ORDINARY_RAM_RESERVATION_OK;
         return action->status;
       }
     }
-    action->status = RUNTIME_ORDINARY_RAM_RESERVATION_V1_REJECTED_ID;
+    action->status = RUNTIME_ORDINARY_RAM_RESERVATION_REJECTED_ID;
     return action->status;
   }
   {
-    uint64_t limit = (uint64_t) runtime_ordinary_ram_reservation_v1_base +
-      runtime_ordinary_ram_reservation_v1_bytes;
-    uint64_t candidate = ((uint64_t) runtime_ordinary_ram_reservation_v1_base +
+    uint64_t limit = (uint64_t) runtime_ordinary_ram_reservation_base +
+      runtime_ordinary_ram_reservation_bytes;
+    uint64_t candidate = ((uint64_t) runtime_ordinary_ram_reservation_base +
       action->alignment_bytes - 1u) & ~(uint64_t)(action->alignment_bytes - 1u);
-    uint32_t free_index = RUNTIME_ORDINARY_RAM_RESERVATION_V1_MAX_RECORDS;
-    for (index = 0u; index < RUNTIME_ORDINARY_RAM_RESERVATION_V1_MAX_RECORDS; ++index)
-      if (runtime_ordinary_ram_reservation_v1_records[index].opaque_id == 0u) {
+    uint32_t free_index = RUNTIME_ORDINARY_RAM_RESERVATION_MAX_RECORDS;
+    for (index = 0u; index < RUNTIME_ORDINARY_RAM_RESERVATION_MAX_RECORDS; ++index)
+      if (runtime_ordinary_ram_reservation_records[index].opaque_id == 0u) {
         free_index = index; break;
       }
-    if (free_index == RUNTIME_ORDINARY_RAM_RESERVATION_V1_MAX_RECORDS) {
-      action->status = RUNTIME_ORDINARY_RAM_RESERVATION_V1_REJECTED_CAPACITY;
+    if (free_index == RUNTIME_ORDINARY_RAM_RESERVATION_MAX_RECORDS) {
+      action->status = RUNTIME_ORDINARY_RAM_RESERVATION_REJECTED_CAPACITY;
       return action->status;
     }
     for (;;) {
       int moved = 0;
       if (candidate + action->byte_count > limit) break;
-      for (index = 0u; index < RUNTIME_ORDINARY_RAM_RESERVATION_V1_MAX_RECORDS; ++index) {
-        const struct runtime_ordinary_ram_reservation_v1_record *record =
-          &runtime_ordinary_ram_reservation_v1_records[index];
+      for (index = 0u; index < RUNTIME_ORDINARY_RAM_RESERVATION_MAX_RECORDS; ++index) {
+        const struct runtime_ordinary_ram_reservation_record *record =
+          &runtime_ordinary_ram_reservation_records[index];
         if (record->opaque_id != 0u && candidate < (uint64_t)record->address + record->byte_count &&
             (uint64_t)record->address < candidate + action->byte_count) {
           candidate = ((uint64_t)record->address + record->byte_count +
@@ -153,24 +153,24 @@ extern "C" uint32_t runtime_mantle_execute_ordinary_ram_reservation_v1(
         }
       }
       if (!moved) {
-        if (!runtime_ordinary_ram_reservation_v1_span_ordinary((uint32_t)candidate,
+        if (!runtime_ordinary_ram_reservation_span_ordinary((uint32_t)candidate,
             action->byte_count)) {
-          action->status = RUNTIME_ORDINARY_RAM_RESERVATION_V1_REJECTED_MEMORY;
+          action->status = RUNTIME_ORDINARY_RAM_RESERVATION_REJECTED_MEMORY;
           return action->status;
         }
-        if (runtime_ordinary_ram_reservation_v1_next_id == 0u)
-          runtime_ordinary_ram_reservation_v1_next_id = 1u;
-        runtime_ordinary_ram_reservation_v1_records[free_index].opaque_id =
-          runtime_ordinary_ram_reservation_v1_next_id++;
-        runtime_ordinary_ram_reservation_v1_records[free_index].address = (uint32_t)candidate;
-        runtime_ordinary_ram_reservation_v1_records[free_index].byte_count = action->byte_count;
-        action->opaque_id = runtime_ordinary_ram_reservation_v1_records[free_index].opaque_id;
+        if (runtime_ordinary_ram_reservation_next_id == 0u)
+          runtime_ordinary_ram_reservation_next_id = 1u;
+        runtime_ordinary_ram_reservation_records[free_index].opaque_id =
+          runtime_ordinary_ram_reservation_next_id++;
+        runtime_ordinary_ram_reservation_records[free_index].address = (uint32_t)candidate;
+        runtime_ordinary_ram_reservation_records[free_index].byte_count = action->byte_count;
+        action->opaque_id = runtime_ordinary_ram_reservation_records[free_index].opaque_id;
         action->address = (uint32_t)candidate;
-        action->status = RUNTIME_ORDINARY_RAM_RESERVATION_V1_OK;
+        action->status = RUNTIME_ORDINARY_RAM_RESERVATION_OK;
         return action->status;
       }
     }
   }
-  action->status = RUNTIME_ORDINARY_RAM_RESERVATION_V1_REJECTED_CAPACITY;
+  action->status = RUNTIME_ORDINARY_RAM_RESERVATION_REJECTED_CAPACITY;
   return action->status;
 }

@@ -40,8 +40,8 @@ Require ($source -notmatch '#include "softpc\.h"') 'dpmiselr revives the old Sof
 Require ($sourceCode -notmatch 'Sim32GetVDMPointer') 'dpmiselr retains a raw historical guest-pointer call.'
 Require ($sourceCode -notmatch 'NtSetLdtEntries|NtSetInformationProcess|ProcessLdtInformation') 'dpmiselr retains a process-LDT import.'
 Require ($source -match '(?s)#ifndef i386\s+            FlatAddress\[') 'The historical non-486 FlatAddress cache is not excluded from the selected branch.'
-Require ($shim -match 'bx_ntvdm_mantle_execute_protected_range_action_v1') 'Descriptor input does not use the selector-blind protected-range action.'
-Require ($shim -match 'bx_ntvdm_mantle_checked_ram_write_v1') 'Descriptor publication does not use checked guest RAM.'
+Require ($shim -match 'bx_ntvdm_machine_execute_protected_range_action_v1') 'Descriptor input does not use the selector-blind protected-range action.'
+Require ($shim -match 'bx_ntvdm_machine_checked_ram_write_v1') 'Descriptor publication does not use checked guest RAM.'
 Require ($shimCode -notmatch 'NtSetLdtEntries|NtSetInformationProcess|ProcessLdtInformation|Sim32GetVDMPointer|FlatAddress|IntelBase') 'Descriptor seam contains a refused NT4 descriptor import or cache.'
 
 Write-Host 'T257 S3 DPMI descriptor boundary: PASS (source order, bounded guest table seam, no process LDT).'

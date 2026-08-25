@@ -55,7 +55,7 @@ if ((Get-Item -LiteralPath $output).Length -ne 4768 -or
 }
 
 $manifest = [ordered]@{
-    schema = 'ntdos64.t235.s5.himem-fallback.v1'
+    schema = 'runner.t235.s5.himem-fallback.v1'
     origin = 'source-built'
     source = 'src/opennt/base/mvdm/dos/v86/dev/himem'
     tools = @('tools/historical/opennt-4.5/masm.exe','tools/historical/opennt-4.5/link16.exe',

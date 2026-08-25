@@ -22,6 +22,6 @@ $compile = 'call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && cl.exe /nologo /
 if ($LASTEXITCODE -ne 0) { throw "T202 S4 root-relative open compilation failed: $LASTEXITCODE" }
 & $exe 2>&1 | Tee-Object -FilePath (Join-Path $build 'run.log')
 $runExit = $LASTEXITCODE
-[ordered]@{ schema='ntdos64.t202.s4.host-namespace-open.v1'; architecture='x64'; runtimeLibrary='/MT'; hostIo=$true; guestExecution=$false; runExitCode=$runExit; passed=($runExit -eq 0) } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $build 't202-s4-host-namespace-open.json') -Encoding utf8
+[ordered]@{ schema='runner.t202.s4.host-namespace-open.v1'; architecture='x64'; runtimeLibrary='/MT'; hostIo=$true; guestExecution=$false; runExitCode=$runExit; passed=($runExit -eq 0) } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $build 't202-s4-host-namespace-open.json') -Encoding utf8
 if ($runExit -ne 0) { throw "T202 S4 root-relative open probe failed: $runExit" }
 Write-Host "T202 S4 root-relative open probe passed: $build"

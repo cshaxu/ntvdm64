@@ -9,7 +9,7 @@ static int runtime_multi_write_ranges_overlap(uint64_t first_address,
         second_address < first_address + first_bytes;
 }
 
-void runtime_multi_write_v1_initialize(runtime_multi_write_v1 *value)
+void runtime_multi_write_initialize(runtime_multi_write *value)
 {
     if (value == 0)
         return;
@@ -19,7 +19,7 @@ void runtime_multi_write_v1_initialize(runtime_multi_write_v1 *value)
     value->struct_bytes = sizeof(*value);
 }
 
-int runtime_multi_write_v1_add(runtime_multi_write_v1 *value,
+int runtime_multi_write_add(runtime_multi_write *value,
     uint64_t address, uint64_t bytes, uint64_t payload_offset)
 {
     uint64_t payload_end;
@@ -31,7 +31,7 @@ int runtime_multi_write_v1_add(runtime_multi_write_v1 *value,
     payload_end = payload_offset + bytes;
     if (payload_end > RUNTIME_MULTI_WRITE_MAX_PAYLOAD)
         return 0;
-    runtime_guest_write_v1_initialize(&value->writes[value->write_count],
+    runtime_guest_write_initialize(&value->writes[value->write_count],
         address, bytes, payload_offset);
     ++value->write_count;
     if (payload_end > value->payload_bytes)
@@ -39,7 +39,7 @@ int runtime_multi_write_v1_add(runtime_multi_write_v1 *value,
     return 1;
 }
 
-int runtime_multi_write_v1_preflight(const runtime_multi_write_v1 *value,
+int runtime_multi_write_preflight(const runtime_multi_write *value,
     uint64_t aperture_bytes, uint64_t payload_bytes)
 {
     uint32_t index;
@@ -53,13 +53,13 @@ int runtime_multi_write_v1_preflight(const runtime_multi_write_v1 *value,
         payload_bytes > RUNTIME_MULTI_WRITE_MAX_PAYLOAD)
         return 0;
     for (index = 0u; index < value->write_count; ++index) {
-        const runtime_guest_write_v1 *write = &value->writes[index];
+        const runtime_guest_write *write = &value->writes[index];
 
-        if (!runtime_guest_write_v1_preflight(write, aperture_bytes,
+        if (!runtime_guest_write_preflight(write, aperture_bytes,
                 payload_bytes))
             return 0;
         for (prior_index = 0u; prior_index < index; ++prior_index) {
-            const runtime_guest_write_v1 *prior =
+            const runtime_guest_write *prior =
                 &value->writes[prior_index];
 
             if (runtime_multi_write_ranges_overlap(

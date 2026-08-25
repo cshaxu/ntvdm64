@@ -12,4 +12,4 @@ objects directly.
 
 It may compose `opennt-guest`, `opennt-bop`, `opennt-host`, `adapter-bop`,
 `adapter-win32` and `adapter-softpc`, but does not implement their semantics. Its final executable
-target is `ntdos64-native`; no component may import `app`.
+target is `ntvdm64`; no component may import `app`.

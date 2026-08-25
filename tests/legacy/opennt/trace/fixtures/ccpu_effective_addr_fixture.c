@@ -4,11 +4,11 @@
 extern uint32_t c_effective_addr(uint16_t segment, uint32_t offset);
 extern uint32_t effective_addr(uint16_t segment, uint16_t offset);
 
-typedef struct _NTDOS64_CCPU_DESCRIPTOR {
+typedef struct _RUNNER_CCPU_DESCRIPTOR {
     uint32_t base;
     uint32_t limit;
     uint16_t ar;
-} NTDOS64_CCPU_DESCRIPTOR;
+} RUNNER_CCPU_DESCRIPTOR;
 
 static int protected_mode;
 static int virtual_8086_mode;
@@ -17,8 +17,8 @@ static uint32_t gdt_limit;
 static uint32_t ldt_base;
 static uint32_t ldt_limit;
 static uint16_t ldt_selector;
-static NTDOS64_CCPU_DESCRIPTOR gdt_entry;
-static NTDOS64_CCPU_DESCRIPTOR ldt_entry;
+static RUNNER_CCPU_DESCRIPTOR gdt_entry;
+static RUNNER_CCPU_DESCRIPTOR ldt_entry;
 
 int c_getPE(void) { return protected_mode; }
 int c_getVM(void) { return virtual_8086_mode; }
@@ -43,7 +43,7 @@ int selector_outside_table(uint16_t selector, uint32_t *descriptor_address) {
 }
 
 void read_descriptor_linear(uint32_t address,
-                            NTDOS64_CCPU_DESCRIPTOR *descriptor) {
+                            RUNNER_CCPU_DESCRIPTOR *descriptor) {
     if (address == gdt_base + 8) {
         *descriptor = gdt_entry;
     } else if (address == ldt_base + 8) {

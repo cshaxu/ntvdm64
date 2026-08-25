@@ -23,8 +23,8 @@ int runtime_xms_call_valid(const runtime_xms_call *call)
     return call != NULL && call->magic == RUNTIME_XMS_CALL_MAGIC &&
         call->abi_version == RUNTIME_XMS_CALL_VERSION &&
         call->struct_bytes == sizeof(*call) && call->service < XMS_LASTSVC &&
-        call->boundary != NULL && runtime_exception_event_v1_valid(call->boundary) &&
-        call->cpu != NULL && runtime_cpu_state_v1_valid(call->cpu) &&
+        call->boundary != NULL && runtime_exception_event_valid(call->boundary) &&
+        call->cpu != NULL && runtime_cpu_state_valid(call->cpu) &&
         call->cpu->execution_mode == RUNTIME_CPU_EXECUTION_REAL &&
         call->result != NULL && call->guest_read != NULL && call->guest_write != NULL;
 }
@@ -78,8 +78,8 @@ int runtime_xms_invoke(runtime_xms_call *call)
     context.guest_state = call->guest_state;
     context.guest_read = call->guest_read;
     context.guest_write = call->guest_write;
-    runtime_cpu_result_v2_pass_through(call->result);
-    if (!runtime_cpu_result_v2_resume(call->result, call->boundary->fault_rip + 4u) ||
+    runtime_cpu_result_pass_through(call->result);
+    if (!runtime_cpu_result_resume(call->result, call->boundary->fault_rip + 4u) ||
         !runtime_xms_softpc_context_begin(&context)) return 0;
     if (call->service == 6u && !runtime_xms_bind_himem_a20_state(
             low16(call->cpu->eax), low16(call->cpu->ebx))) {
@@ -94,5 +94,5 @@ int runtime_xms_invoke(runtime_xms_call *call)
     if (call->service == 9u && !runtime_softpc_int15_watch_source_end())
         invoked = 0;
     runtime_xms_softpc_context_end();
-    return invoked && runtime_cpu_result_v2_valid(call->result);
+    return invoked && runtime_cpu_result_valid(call->result);
 }

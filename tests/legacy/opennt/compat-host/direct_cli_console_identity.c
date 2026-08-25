@@ -4,6 +4,6 @@
  */
 #include <windows.h>
 
-ULONG ntdos64_legacy_console_identity(void) {
+ULONG runner_console_identity(void) {
     return GetCurrentProcessId();
 }

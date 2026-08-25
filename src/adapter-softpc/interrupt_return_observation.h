@@ -1,12 +1,12 @@
-#ifndef RUNTIME_INTERRUPT_RETURN_OBSERVATION_V1_H
-#define RUNTIME_INTERRUPT_RETURN_OBSERVATION_V1_H
+#ifndef RUNTIME_INTERRUPT_RETURN_OBSERVATION_H
+#define RUNTIME_INTERRUPT_RETURN_OBSERVATION_H
 
 #include <stdint.h>
 
-#define RUNTIME_INTERRUPT_RETURN_OBSERVATION_V1_VERSION 1u
-#define RUNTIME_INTERRUPT_RETURN_OBSERVATION_V1_CAPACITY_MAX 64u
+#define RUNTIME_INTERRUPT_RETURN_OBSERVATION_VERSION 1u
+#define RUNTIME_INTERRUPT_RETURN_OBSERVATION_CAPACITY_MAX 64u
 
-struct runtime_interrupt_return_observation_v1_record {
+struct runtime_interrupt_return_observation_record {
   uint32_t version;
   uint32_t cpu_id;
   uint64_t sequence;
@@ -30,13 +30,13 @@ struct runtime_interrupt_return_observation_v1_record {
 extern "C" {
 #endif
 
-int runtime_mantle_interrupt_return_observation_v1_configure(uint32_t capacity);
-void runtime_mantle_interrupt_return_observation_v1_reset(void);
-void runtime_mantle_interrupt_return_observation_v1_record(
-  const struct runtime_interrupt_return_observation_v1_record *record);
-uint32_t runtime_mantle_interrupt_return_observation_v1_count(void);
-int runtime_mantle_interrupt_return_observation_v1_get(uint32_t index,
-  struct runtime_interrupt_return_observation_v1_record *record);
+int runtime_machine_interrupt_return_observation_configure(uint32_t capacity);
+void runtime_machine_interrupt_return_observation_reset(void);
+void runtime_machine_interrupt_return_observation_record(
+  const struct runtime_interrupt_return_observation_record *record);
+uint32_t runtime_machine_interrupt_return_observation_count(void);
+int runtime_machine_interrupt_return_observation_get(uint32_t index,
+  struct runtime_interrupt_return_observation_record *record);
 
 #ifdef __cplusplus
 }

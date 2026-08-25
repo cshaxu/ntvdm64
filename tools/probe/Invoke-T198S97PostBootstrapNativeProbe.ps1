@@ -1,4 +1,4 @@
-﻿param(
+param(
     [string]$RepositoryRoot = '',
     [Parameter(Mandatory = $true)][string]$BuildRoot
 )
@@ -35,7 +35,7 @@ if ($record.runs -ne 1) {
     throw "S97 requires exactly one guest run; inner record reports $($record.runs)"
 }
 [ordered]@{
-    schema = 'ntdos64.t198.s97.post-bootstrap-native-probe.v1'
+    schema = 'runner.t198.s97.post-bootstrap-native-probe.v1'
     reusedHarness = 'tools/probe/Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1'
     inputContract = 'S93 exact source-built COMMAND.COM/SHARE.EXE and v7 profile'
     currentCompositionManifest = 'tools/build/t198-s50-bx-vdm-composition-manifest.json'

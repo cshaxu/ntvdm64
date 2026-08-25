@@ -53,7 +53,7 @@ foreach ($input in $inputs) {
 }
 
 $profile = [ordered]@{
-    schema = 'ntdos64-byob-profile-v8'
+    schema = 'runner-byob-profile-v8'
     profile = 'nt4-en-us-cli-stream-v8'
     architecture = 'x86'
     locale = 'en-US'
@@ -82,7 +82,7 @@ $profileJson = $profile | ConvertTo-Json -Depth 8
 [IO.File]::WriteAllText((Join-Path $output 'fixture-autoexec.nt'), '', [Text.UTF8Encoding]::new($false))
 
 [ordered]@{
-    schema = 'ntdos64.t225.s6.reference-guest-inputs.v1'
+    schema = 'runner.t225.s6.reference-guest-inputs.v1'
     classification = 'approved-reference-binary-research-input'
     sourceTree = $source
     sourceRevision = $revision

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2296 |
+| Documentation records | 2300 |
 | --- | --- |
-| Generated UTC | 2026-08-25T14:56:52Z |
+| Generated UTC | 2026-08-25T17:36:11Z |
 
 ## Entries
 
@@ -58,21 +58,21 @@ content-divergent entries.
 | DEMGETDPBLIST-GUEST-MEMORY-CONTRACT.md | retained pre-governance evidence | 8fedaf430859e0162f7c8b72ab42220e2d38ff96297a20493f2a111bea79eefa |
 | DEMGETDRIVES-CONTAINED-NAMESPACE-CONTRACT.md | retained pre-governance evidence | 6388add939543a216af4f2a31578920d8c3e58348a7b9c77cd8ce68bceae4fcb |
 | DEM-READ-GUEST-MEMORY-BRIDGE-ADMISSION.md | retained pre-governance evidence | 5790fa0ea67152f47e58d0f13baf11c1176353ca27c949dedeb980fd9a5a6ceb |
-| design/ADAPTER-ATOMIC-MULTI-WRITE.md | retained pre-governance evidence | 5b05268cbef43449c565281ba00a41fa21545cd1aacd6b6664c09b99a0d1db5f |
+| design/ADAPTER-ATOMIC-MULTI-WRITE.md | retained pre-governance evidence | db750789132823732883dcae555d8df39068290a0ac8cae07b721a4d25e20ca3 |
 | design/ADAPTER-BULK-RESULT.md | retained pre-governance evidence | b440dcc1cacc22054ac34016235184735348547dbf8093ad0df1c0eb3a125dc6 |
 | design/ADAPTER-HOST-SERVICE-PLANE.md | retained pre-governance evidence | 243b24758b9dcbc8cf4298ba5a2328aa7c69e635ad07ff2567db6db118ed45ca |
-| design/ADAPTER-PASSIVE-OBSERVATION-TRIGGER.md | retained pre-governance evidence | c99dbbc8ba95c3821aace5cf20aaa9427306c8639b4eebf7b56151109b288b79 |
-| design/ADAPTER-STARTUP-FIRMWARE-SNAPSHOT.md | retained pre-governance evidence | 3153c9a36e43d8efc1234879d4c8f76f83dc3a61a766ecdceaa8da6e7f410e45 |
+| design/ADAPTER-PASSIVE-OBSERVATION-TRIGGER.md | retained pre-governance evidence | 94a4f4a06015be20aae1c31f3501d6bc12adffc1393c3215f3c2765463bca1c6 |
+| design/ADAPTER-STARTUP-FIRMWARE-SNAPSHOT.md | retained pre-governance evidence | e53c4d8b5f849bfbdf779622750076211dfd4a1ed75cb97888777ad65a18e7b0 |
 | design/ADAPTER-STARTUP-SNAPSHOT-EVIDENCE-EXPORT.md | retained pre-governance evidence | 744618843058cbcf0c9074019f755ebdb573be5a9b33ff454da224537edd0cbd |
-| design/ADAPTER-TWO-PHASE-GUEST-READ.md | retained pre-governance evidence | d1898c127b918240c3ce7eb32ed2efc04caf11f04b5a061060d4c2a0254c1861 |
-| design/ARCHITECTURE.md | current design authority | ba56cffb388d725966e03a05e9a32d766cb258cc25003cb21782db166553ef65 |
+| design/ADAPTER-TWO-PHASE-GUEST-READ.md | retained pre-governance evidence | 4332f15018aa65bb5bd372768ec80683654d73dafb4c7cf1ea485ed9ff972028 |
+| design/ARCHITECTURE.md | current design authority | a99f47004f47e1025652140b4452afc0adb3b59799fd20d1ca65219af10a0c20 |
 | design/BOCHS-MACHINE-COMPOSITION.md | retained pre-governance evidence | 3d55ee174e229e89da3ab9f31e65ebbd832a1f48c4f2eb487ce48dc25043703f |
 | design/CODING.md | current design authority | 548d491c98c63b4a9851dda75fa26a8e78f2c17989a2b46eb3bc4546fdbecc13 |
 | design/GOAL.md | current design authority | b7e0eb85952f02719e4b12675b47356187e5097f1c5a21be55bac127dae4e760 |
 | design/HOST-NAMESPACE-CAPABILITY.md | retained pre-governance evidence | d8f6df52c8bdc9527526d14756c05465136571bfbd90ee17f5798c766c256bd5 |
 | design/ROADMAP.md | current design authority | f5ea2a1374680d8388f8418aa513ec3d396c35f5d92989441f1c20a7b6679cc2 |
 | design/STOCK-FIRMWARE-STARTUP-PROBE.md | retained pre-governance evidence | 2f5c8b2de1329fa7c500552229840dcf9c5c5b780aeb73797a84a004e79088c0 |
-| design/UI.md | current design authority | abfc0cc66e9e889e854a7370d0dd9ad694348d6692b0f8bcfdbbd93979d16760 |
+| design/UI.md | current design authority | 30dcf1c30910692bc751618473c5c172c7a34362079406bd49f3af9b254f6178 |
 | documentation-standard.md | retained pre-governance evidence | 7e4f90ac0b3a49bc727c118666638bf0200592b24053bad7a847888aa57fe7c3 |
 | DOS-FILE-OPEN-EXEC-CONTAINMENT-LEDGER.md | retained pre-governance evidence | 55d3f05f92320ff0e412da20ba82c373b3ed368984800b4eb635ad5556f2194a |
 | DOSINIT-POST-DPB-DEPENDENCY-LEDGER.md | retained pre-governance evidence | b6fdc918f079fa97f8772d8cd20e95c5cfe24a802987e64f4135f799ddf4f5e8 |
@@ -257,6 +257,9 @@ content-divergent entries.
 | etc/evidence/m0-t266-s4-historical-consumer-retirement-001.md | indexed supporting material | 29cef27fc62c11fae0f5feaa90cda88ce182767840720dc409f742bfa7dd091a |
 | etc/evidence/m0-t266-s5-refs-removal-zero-reference-001.md | indexed supporting material | a09de7a8a5237879cac4113085d82353a02920bef8cb20f15e799ec7923a65b5 |
 | etc/evidence/m0-t267-s1-build-entrypoint-and-reconstructed-monitor-closure-001.md | indexed supporting material | 034524a539724e5232083a22ae5cd56b39f4c106e422bf6e7f42f4f0f78a8715 |
+| etc/evidence/m0-t268-current-naming-convergence-closure-001.md | indexed supporting material | a50abf8ae70997764003b7707b961a819d748a7f70c6f98258bb0a1493791427 |
+| etc/evidence/m0-t268-s1-live-naming-inventory.tsv | indexed supporting material | 94da9095848c754220a0086f219541849771fa6bdc5bd4961a3ab82a8a6e65f7 |
+| etc/evidence/m0-t268-s1-live-naming-mapping-001.md | indexed supporting material | aa0e123e797157745fd69d855180f032caefabba5e77cad2fa47c183b67d2a40 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -496,7 +499,7 @@ content-divergent entries.
 | etc/operations/m0-t259-s2-opennt-rtl-abi-facade-plan-001.md | indexed supporting material | 6975399ea97591926089c797df7653b751882cca8e3b946017e3cd83ece21259 |
 | etc/operations/m0-t259-s3-softpc-ccpu-bochs-mechanical-contract-001.md | indexed supporting material | 9433986a1665a5f9f2412c31cbff2ebcb59fd14c4cf87c9f0fbc82c8bc430d95 |
 | etc/operations/m0-t260-s1-owner-manifest-baseline-001.md | indexed supporting material | 5a841f759498a20a4170e680a148e36b64a47ae3f7dbcb1e771ff636b0ceb30a |
-| etc/operations/m0-t260-s1-owner-provenance-build-manifest.tsv | indexed supporting material | 1974b8ff831cdf68cfc6296e1d5287a7ea23f5fb006cec8fbf334ac6c609eb16 |
+| etc/operations/m0-t260-s1-owner-provenance-build-manifest.tsv | indexed supporting material | 9ed29855471515acf23174cda8fc997d28560704973397252e6f22698d23eef1 |
 | etc/operations/m0-t261-s1-opennt-host-source-truth-audit-001.md | indexed supporting material | 0f9b3483262ca5973c9cc8524b99d7fd71525e543400fe684fcae27355d47ec5 |
 | etc/operations/m0-t261-s2-opennt-host-function-recovery-ledger-001.md | indexed supporting material | 413639b7612b9ac4e50351845f8bfbab318c9e29359065b0ec95543cc4db5bdc |
 | etc/operations/m0-t266-s1-refs-consumer-disposition.tsv | indexed supporting material | 3a4a9818df64f37b8f80971180302feb363b3ef9b36c0f2fe9e206b73fed6e65 |
@@ -516,6 +519,7 @@ content-divergent entries.
 | etc/operations/proposal-bx-machine-bios-selector-owner-package-completion-001.md | indexed supporting material | a9c457aa97b42a430cf28713d9fd29ff64094ad9c8d493c3d8e405bd401b31a4 |
 | etc/operations/proposal-bx-vdm-pending-bop-session-lifecycle-001.md | indexed supporting material | b3c5072c395c22475973085e337d757366b49e1769c3fb81fde9c12a38f7adf2 |
 | etc/operations/proposal-cli-run-entry-and-opennt-pif-handoff-001.md | indexed supporting material | 472164739c7fe38ba4ccb20c64a0b72c13aa81d8df972786371c50c762c8393a |
+| etc/operations/proposal-current-naming-convergence-001.md | indexed supporting material | 214c6356a2a52f218e4d128d1598f7b6956e6bddc397db8b597d56bff63d7e23 |
 | etc/operations/proposal-dos-wow16-complete-source-build-closure-001.md | indexed supporting material | 142a93fef99ec618565c294f911416b78836dc14591e962a70fe716e45de8fcc |
 | etc/operations/proposal-formal-build-entrypoint-and-reconstructed-monitor-fixture-repair-001.md | indexed supporting material | 8c20c430a033b448bf3de92e21f8ba32760c80fae225b5c0fa14ab4cc0814b8f |
 | etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md | indexed supporting material | e4a8f60209eda2a1ff3858641aca0f343b670174f224a6799e0b1dbec3f2f7df |
@@ -2283,7 +2287,7 @@ content-divergent entries.
 | RESET-TRACE-STATUS.md | retained pre-governance evidence | dd0ce777cf9399cf4438ddf618a720b33e4ca2d5e21df66b16a8aeeb9eae55bb |
 | ROI-DRIVEN-EXECUTION-ROADMAP.md | retained pre-governance evidence | 89fe2b2d62f7f3e46bd183e7cb7ee0a637ecfe68d41450cfe0383ae3bfbfa660 |
 | rules/ARCHITECTURE.md | current rule authority | 8a9d9ee3e1f83a3533d9fa8782b1a1de45e87a3452893bf8f1e77e4195f74922 |
-| rules/CODING.md | current rule authority | bba8ed7ce0912fe474a889377c6d8bca4dc93b4aff23ae60cd95cd88a03c2d51 |
+| rules/CODING.md | current rule authority | 217475f7f0ef79976f2caf5ffeb4e1470460c1de70efde888e30080d2881b98e |
 | rules/DOCUMENT.md | current rule authority | 9f55864347f265afe78af803a67df10bfa20fb273fca6594803c8e64c4a4cbda |
 | rules/EXECUTION.md | current rule authority | 5f0149dff78677432bd232ca9ff64ed3d0cf57030dafdbad41aff7f280f2ae7c |
 | S1-HISTORICAL-HOST-CLOSURE.md | retained pre-governance evidence | 0796b7bf5f0a780fbd7a989938474045ed2d3aa2a6b68b8697605393bd2e1bb8 |
@@ -2310,7 +2314,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 7def96fffdfbc9780472c6f240ad1d9c3379bfd3b1f206fb613e0dcc368dbd44 |
+| STATUS.md | principal control document | b47ab0b4d0b1951fdbba6c3a42ac9c08501faaa0e507d8c15acd65793e9b3ad3 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

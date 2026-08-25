@@ -7,7 +7,7 @@ foreach ($forbidden in @('BOP_CATALOG_LISTENER', 'bx_ntvdm_bop_catalog',
     if ($bochs.Contains($forbidden)) { throw "Bochs retains BOP observation: $forbidden" }
 }
 foreach ($required in @('bx_ntvdm_bop_catalog_v1_observe',
-        'ntdos64 adapter bop observed', 'selector=%02x', 'service-state=%u',
+        'runner adapter bop observed', 'selector=%02x', 'service-state=%u',
         'cpu_before->eax', 'cpu_before->esp')) {
     if (-not $adapter.Contains($required)) { throw "Missing adapter observation element: $required" }
 }

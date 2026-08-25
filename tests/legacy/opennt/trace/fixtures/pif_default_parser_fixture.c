@@ -5,7 +5,7 @@
 #include "pif.h"
 #include "nt_pif.h"
 
-extern unsigned long ntdos64_pif_fixture_unexpected_callbacks(void);
+extern unsigned long runner_pif_fixture_unexpected_callbacks(void);
 
 ULONG DosSessionId = 0;
 
@@ -50,7 +50,7 @@ int main(void) {
                data.xmsdes != DEFAULTXMSLMT ||
                data.idledetect != DEFAULTIDLETM || data.reskey != 0 ||
                data.ShortMod != 0 || data.ShortScan != 0 ||
-               ntdos64_pif_fixture_unexpected_callbacks() != 0) {
+               runner_pif_fixture_unexpected_callbacks() != 0) {
         result = 5;
     } else {
         result = 0;

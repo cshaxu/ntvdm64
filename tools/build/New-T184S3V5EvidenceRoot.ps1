@@ -1,4 +1,4 @@
-﻿[CmdletBinding()]
+[CmdletBinding()]
 param(
     [string]$RepositoryRoot = '',
     [Parameter(Mandatory = $true)][string]$EvidenceRoot
@@ -41,7 +41,7 @@ $metadata = [ordered]@{
     autoexec=[ordered]@{attributes=32;dos_time=5;dos_date=37}
 }
 $profile = [ordered]@{
-    schema='ntdos64-byob-profile-v5'; profile='nt4-en-us-command-smoke-v5'; architecture='x86'; locale='en-US'
+    schema='runner-byob-profile-v5'; profile='nt4-en-us-command-smoke-v5'; architecture='x86'; locale='en-US'
     compatibility_group='t184-v5-finite-sequence'; components=$components; features=@(); owner_note=$null
     guest_command_placement=[ordered]@{drive_index=2;path='\COMMAND.COM'}
     guest_boot_files=[ordered]@{config=[ordered]@{path='\CONFIG.SYS';materialization='minimal-comment-v1'};autoexec=[ordered]@{path='\AUTOEXEC.BAT';materialization='empty-v1'}}

@@ -1,4 +1,4 @@
-﻿param(
+param(
     [string]$SourceRoot = 'D:\home\repos.hobby\ms-dos-6\45\tl',
     [string]$DestinationRoot = (Join-Path (Split-Path -Parent $PSScriptRoot) 'historical\msdos6-qb45')
 )
@@ -33,7 +33,7 @@ foreach ($set in $sets) {
 }
 
 [ordered]@{
-    schema = 'ntdos64-historical-tool-manifest-v1'
+    schema = 'runner-historical-tool-manifest-v1'
     component = 'MS-DOS 6 QuickBASIC 4.5 TL historical toolchain'
     source_root = $sourceRoot
     license_status = 'Historical Microsoft tool input; research-only. No redistribution authorization is asserted.'

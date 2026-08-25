@@ -127,12 +127,12 @@ static int copy_path(wchar_t destination[MAX_PATH], const wchar_t *source)
     return 1;
 }
 
-void app_dos_safe_alias_v1_clear(struct app_dos_safe_alias_v1 *value)
+void app_dos_safe_alias_clear(struct app_dos_safe_alias *value)
 {
     if (value != NULL) memset(value, 0, sizeof(*value));
 }
 
-void app_dos_safe_alias_v1_release(struct app_dos_safe_alias_v1 *value)
+void app_dos_safe_alias_release(struct app_dos_safe_alias *value)
 {
     if (value == NULL) return;
     /* RemoveDirectoryW removes the link itself, never its target.  A failed
@@ -140,18 +140,18 @@ void app_dos_safe_alias_v1_release(struct app_dos_safe_alias_v1 *value)
      * into a guest filesystem operation. */
     if (value->owns_alias != 0u && value->admitted_root[0] != L'\0')
         (void)RemoveDirectoryW(value->admitted_root);
-    app_dos_safe_alias_v1_clear(value);
+    app_dos_safe_alias_clear(value);
 }
 
-int app_dos_safe_alias_v1_admit(const wchar_t *root,
-    uint32_t maximum_oem_chars, struct app_dos_safe_alias_v1 *value)
+int app_dos_safe_alias_admit(const wchar_t *root,
+    uint32_t maximum_oem_chars, struct app_dos_safe_alias *value)
 {
     wchar_t short_root[MAX_PATH], temporary[MAX_PATH], short_temporary[MAX_PATH];
     wchar_t candidate[MAX_PATH];
     DWORD chars;
     if (root == NULL || value == NULL || maximum_oem_chars == 0u ||
         GetFileAttributesW(root) == INVALID_FILE_ATTRIBUTES) return 0;
-    app_dos_safe_alias_v1_clear(value);
+    app_dos_safe_alias_clear(value);
     chars = GetShortPathNameW(root, short_root, MAX_PATH);
     if (chars != 0u && chars < MAX_PATH &&
         dos_83_path(short_root, maximum_oem_chars))

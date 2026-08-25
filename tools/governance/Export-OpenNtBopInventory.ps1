@@ -153,7 +153,7 @@ $sourceManifest = @($sourcePaths.GetEnumerator() | ForEach-Object {
     [ordered]@{ role = $_.Key; path = $_.Value.Substring($repository.Length + 1).Replace('\', '/'); sha256 = Get-Sha256 $_.Value }
 })
 $record = [ordered]@{
-    schema = 'ntdos64.opennt-bop-inventory.v1'
+    schema = 'runner.opennt-bop-inventory.v1'
     source_tree = 'src-owned OpenNT selected inputs'
     source_manifest = $sourceManifest
     selector_instruction = [ordered]@{ bytes = @('c4','c4','selector'); base_bytes = 3; family_service_byte = 4 }

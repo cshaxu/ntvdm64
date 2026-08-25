@@ -20,6 +20,6 @@ $command = 'call "' + $vs + '" -arch=x64 -host_arch=x64 >nul && cl.exe /nologo /
 if ($LASTEXITCODE -ne 0) { throw "T200 S18 compile failed: $LASTEXITCODE" }
 & $exe 2>&1 | Tee-Object -FilePath (Join-Path $build 'run.log')
 $runExit = $LASTEXITCODE
-([ordered]@{ schema='ntdos64.t200.s18.initial-state-abi.v1'; architecture='x64'; runtimeLibrary='/MT'; machineInitialized=$false; guestExecution=$false; runExitCode=$runExit; passed=($runExit -eq 0) }) | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $build 't200-s18-initial-state-abi.json') -Encoding utf8
+([ordered]@{ schema='runner.t200.s18.initial-state-abi.v1'; architecture='x64'; runtimeLibrary='/MT'; machineInitialized=$false; guestExecution=$false; runExitCode=$runExit; passed=($runExit -eq 0) }) | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $build 't200-s18-initial-state-abi.json') -Encoding utf8
 if ($runExit -ne 0) { throw "T200 S18 fixture failed: $runExit" }
 Write-Host "T200 S18 initial-state ABI probe passed: $build"

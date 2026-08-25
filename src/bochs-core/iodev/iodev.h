@@ -542,7 +542,7 @@ public:
   unsigned bulkIOQuantumsTransferred;
 
 private:
-  friend class bx_mantle_minimal_machine_c;
+  friend class adapter_bochs_minimal_machine_c;
 
   // BX-IO-025: no-device port-space ownership.
   bx_bool init_empty_port_space(void);

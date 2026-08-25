@@ -42,7 +42,7 @@ foreach ($item in $items) {
     Copy-Item -LiteralPath (Join-Path $root ($item.stage_root.Replace('/','\') + '\' + $item.relative)) -Destination (Join-Path $output $item.file)
 }
 $profile = [ordered]@{
-    schema='ntdos64-byob-profile-v8'; profile='nt4-en-us-cli-stream-v8'; architecture='x86'; locale='en-US'; compatibility_group='t225-s6-reference-identity-fixture'
+    schema='runner-byob-profile-v8'; profile='nt4-en-us-cli-stream-v8'; architecture='x86'; locale='en-US'; compatibility_group='t225-s6-reference-identity-fixture'
     components=@($items | ForEach-Object { [ordered]@{role=$_.role;file_name=$_.file;required=$true;bytes=$_.bytes;sha256=$_.sha256;version=$null} })
     features=@(); owner_note='Primary original-toolchain source-built sequence; never substitute with reference-tree provenance.'
     guest_command_placement=[ordered]@{path='\COMMAND.COM';drive_index=2}
@@ -54,5 +54,5 @@ $profile = [ordered]@{
 [IO.File]::WriteAllText((Join-Path $output 'profile.json'), (($profile | ConvertTo-Json -Depth 8) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 [IO.File]::WriteAllText((Join-Path $output 'fixture-config.nt'), "files=20`r`n", [Text.UTF8Encoding]::new($false))
 [IO.File]::WriteAllText((Join-Path $output 'fixture-autoexec.nt'), '', [Text.UTF8Encoding]::new($false))
-[ordered]@{schema='ntdos64.t225.s8.primary-source-built-inputs.v1';classification='primary-original-toolchain-source-built';sourceRoot=$root;inputs=$items;allowedUse=@('T225 S8 fixture installation cross-validation');forbiddenUse=@('reference fallback','default runtime discovery','release packaging','guest trace')} | ConvertTo-Json -Depth 7 | ForEach-Object { [IO.File]::WriteAllText((Join-Path $output 'primary-source-built-manifest.json'), $_ + [Environment]::NewLine, [Text.UTF8Encoding]::new($false)) }
+[ordered]@{schema='runner.t225.s8.primary-source-built-inputs.v1';classification='primary-original-toolchain-source-built';sourceRoot=$root;inputs=$items;allowedUse=@('T225 S8 fixture installation cross-validation');forbiddenUse=@('reference fallback','default runtime discovery','release packaging','guest trace')} | ConvertTo-Json -Depth 7 | ForEach-Object { [IO.File]::WriteAllText((Join-Path $output 'primary-source-built-manifest.json'), $_ + [Environment]::NewLine, [Text.UTF8Encoding]::new($false)) }
 Write-Host "Staged primary source-built T225 S8 inputs: $output"

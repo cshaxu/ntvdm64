@@ -11,14 +11,14 @@
 
 #include <stdint.h>
 
-#define RUNTIME_INSTRUCTION_HISTORY_V1_VERSION 1u
-#define RUNTIME_INSTRUCTION_HISTORY_V1_CAPACITY_MAX 16u
-#define RUNTIME_INSTRUCTION_HISTORY_V1_CS_TRANSITION_CAPACITY_MAX 16u
-#define RUNTIME_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES 15u
-#define RUNTIME_INSTRUCTION_HISTORY_V1_SUCCESSOR_BYTES 15u
-#define RUNTIME_INSTRUCTION_HISTORY_V1_STACK_BYTES 10u
+#define RUNTIME_INSTRUCTION_HISTORY_VERSION 1u
+#define RUNTIME_INSTRUCTION_HISTORY_CAPACITY_MAX 16u
+#define RUNTIME_INSTRUCTION_HISTORY_CS_TRANSITION_CAPACITY_MAX 16u
+#define RUNTIME_INSTRUCTION_HISTORY_PREDECESSOR_BYTES 15u
+#define RUNTIME_INSTRUCTION_HISTORY_SUCCESSOR_BYTES 15u
+#define RUNTIME_INSTRUCTION_HISTORY_STACK_BYTES 10u
 
-struct runtime_instruction_history_record_v1 {
+struct runtime_instruction_history_record {
   uint32_t version;
   uint32_t cpu_id;
   uint64_t sequence;
@@ -30,23 +30,23 @@ struct runtime_instruction_history_record_v1 {
   uint16_t reserved0;
 };
 
-struct runtime_instruction_history_transition_v1 {
-  struct runtime_instruction_history_record_v1 previous;
-  struct runtime_instruction_history_record_v1 current;
+struct runtime_instruction_history_transition {
+  struct runtime_instruction_history_record previous;
+  struct runtime_instruction_history_record current;
 };
 
-struct runtime_instruction_history_transition_history_v1 {
+struct runtime_instruction_history_transition_history {
   uint32_t count;
   uint32_t reserved0;
-  struct runtime_instruction_history_transition_v1
-    transitions[RUNTIME_INSTRUCTION_HISTORY_V1_CS_TRANSITION_CAPACITY_MAX];
+  struct runtime_instruction_history_transition
+    transitions[RUNTIME_INSTRUCTION_HISTORY_CS_TRANSITION_CAPACITY_MAX];
 };
 
-struct runtime_instruction_history_provenance_v1 {
-  struct runtime_instruction_history_transition_v1 transition;
-  uint8_t predecessor_bytes[RUNTIME_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES];
-  uint8_t successor_bytes[RUNTIME_INSTRUCTION_HISTORY_V1_SUCCESSOR_BYTES];
-  uint8_t stack_bytes[RUNTIME_INSTRUCTION_HISTORY_V1_STACK_BYTES];
+struct runtime_instruction_history_provenance {
+  struct runtime_instruction_history_transition transition;
+  uint8_t predecessor_bytes[RUNTIME_INSTRUCTION_HISTORY_PREDECESSOR_BYTES];
+  uint8_t successor_bytes[RUNTIME_INSTRUCTION_HISTORY_SUCCESSOR_BYTES];
+  uint8_t stack_bytes[RUNTIME_INSTRUCTION_HISTORY_STACK_BYTES];
   uint8_t predecessor_valid;
   uint8_t successor_valid;
   uint8_t stack_valid;
@@ -57,20 +57,20 @@ struct runtime_instruction_history_provenance_v1 {
 extern "C" {
 #endif
 
-int runtime_mantle_instruction_history_v1_configure(uint32_t capacity);
-void runtime_mantle_instruction_history_v1_reset(void);
-void runtime_mantle_instruction_history_v1_record(
-  const struct runtime_instruction_history_record_v1 *record);
-uint32_t runtime_mantle_instruction_history_v1_count(void);
-int runtime_mantle_instruction_history_v1_get(uint32_t index,
-  struct runtime_instruction_history_record_v1 *record);
-int runtime_mantle_instruction_history_v1_get_latest_cs_transition(
-  struct runtime_instruction_history_transition_v1 *transition);
-uint32_t runtime_mantle_instruction_history_v1_cs_transition_count(void);
-int runtime_mantle_instruction_history_v1_get_cs_transition(uint32_t index,
-  struct runtime_instruction_history_transition_v1 *transition);
-int runtime_mantle_instruction_history_v1_get_latest_cs_provenance(
-  struct runtime_instruction_history_provenance_v1 *provenance);
+int runtime_machine_instruction_history_configure(uint32_t capacity);
+void runtime_machine_instruction_history_reset(void);
+void runtime_machine_instruction_history_record(
+  const struct runtime_instruction_history_record *record);
+uint32_t runtime_machine_instruction_history_count(void);
+int runtime_machine_instruction_history_get(uint32_t index,
+  struct runtime_instruction_history_record *record);
+int runtime_machine_instruction_history_get_latest_cs_transition(
+  struct runtime_instruction_history_transition *transition);
+uint32_t runtime_machine_instruction_history_cs_transition_count(void);
+int runtime_machine_instruction_history_get_cs_transition(uint32_t index,
+  struct runtime_instruction_history_transition *transition);
+int runtime_machine_instruction_history_get_latest_cs_provenance(
+  struct runtime_instruction_history_provenance *provenance);
 
 #ifdef __cplusplus
 }

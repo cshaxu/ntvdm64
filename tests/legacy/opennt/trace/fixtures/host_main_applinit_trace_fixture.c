@@ -9,15 +9,15 @@
 #include <string.h>
 #include <windows.h>
 
-#ifndef NTDOS64_HOST_APPLINIT_TRACE_STOP_STAGE
-#define NTDOS64_HOST_APPLINIT_TRACE_STOP_STAGE 17
+#ifndef RUNNER_HOST_APPLINIT_TRACE_STOP_STAGE
+#define RUNNER_HOST_APPLINIT_TRACE_STOP_STAGE 17
 #endif
 
 extern int host_main(int argc, char **argv);
 
 static jmp_buf host_main_applinit_stop_environment;
 static int host_main_applinit_stop_reason;
-static int host_main_applinit_stop_stage = NTDOS64_HOST_APPLINIT_TRACE_STOP_STAGE;
+static int host_main_applinit_stop_stage = RUNNER_HOST_APPLINIT_TRACE_STOP_STAGE;
 
 static LONG WINAPI host_main_applinit_trace_exception_filter(
     EXCEPTION_POINTERS *exception_pointers) {
@@ -62,7 +62,7 @@ static LONG WINAPI host_main_applinit_trace_exception_filter(
     return EXCEPTION_CONTINUE_SEARCH;
 }
 
-void ntdos64_host_applinit_trace_checkpoint(int stage) {
+void runner_host_applinit_trace_checkpoint(int stage) {
     if (stage == host_main_applinit_stop_stage) {
         host_main_applinit_stop_reason = stage;
         longjmp(host_main_applinit_stop_environment, stage);

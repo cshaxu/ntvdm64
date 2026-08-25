@@ -57,7 +57,7 @@ function Resolve-T260LivePath([string]$Path) {
 
     $prefixes = @(
         @('src/cli/', 'src/app/'),
-        @('src/bx-mantle/bx_ntvdm_', 'src/adapter-softpc/bx_ntvdm_'),
+        @('src/bx-machine/bx_ntvdm_', 'src/adapter-softpc/bx_ntvdm_'),
         @('src/opennt/base/mvdm/dos/v86/', 'src/opennt-guest/dos-v86/'),
         @('src/opennt/base/mvdm/wow16/', 'src/opennt-guest/wow16/'),
         @('src/bx-vdm/bop/opennt/dem/', 'src/opennt-bop/dem/'),
@@ -122,12 +122,12 @@ function Get-SourceDisposition([string]$Path, [string]$CurrentModule) {
     if ($p -like 'src/opennt/base/mvdm/dos/dem/*' -or $p -like 'src/opennt/base/mvdm/dos/command/*' -or $p -like 'src/opennt/base/mvdm/xms.486/*' -or $p -like 'src/opennt/base/mvdm/dpmi*/*') {
         return @('opennt-bop', 'imported OpenNT BOP/provider mirror', 'git mv', 'S5', 'host BOP dispatcher/provider source; never guest image input')
     }
-    if ($p -like 'src/bx-mantle/*') {
+    if ($p -like 'src/bx-machine/*') {
         $name = [System.IO.Path]::GetFileName($p)
         if ($name -in @('logio.cc', 'paramtree.cc', 'paramtree.h', 'pc_system.cc', 'pc_system.h', 'pic.cc', 'pic.h', 'keyboard.cc', 'keyboard.h', 'scancodes.cc', 'scancodes.h', 'minimal_port_space.cc', 'minimal_product_shell.cc')) {
-            return @('bx-mantle', 'project-authored Bochs-only assembly', 'retain', 'S3', 'candidate native Bochs-only source; S3 semantic scan required')
+            return @('bx-machine', 'project-authored Bochs-only assembly', 'retain', 'S3', 'candidate native Bochs-only source; S3 semantic scan required')
         }
-        return @('adapter-softpc', 'project-authored legacy machine boundary', 'git mv', 'S3', 'candidate foreign-semantic mantle source; retain in mantle only if S3 proves Bochs-only')
+        return @('adapter-softpc', 'project-authored legacy machine boundary', 'git mv', 'S3', 'candidate foreign-semantic machine source; retain in machine only if S3 proves Bochs-only')
     }
     if ($p -like 'src/bx-vdm/bop/opennt/*') {
         return @('opennt-bop', 'imported OpenNT BOP mirror', 'git mv', 'S5', 'original BOP/provider mirror')
@@ -191,9 +191,9 @@ function Get-FixtureDisposition($Fixture) {
     if ($p -like 'tests/opennt/*') {
         return @('opennt-host', 'OpenNT host component fixture', 'git mv', 'S8', 'host-capability provider fixture')
     }
-    if ($p -like 'tests/bx-mantle/*') {
-        if ($name -match 'native_pic|mantle_watchdog|budget_terminal|large_reverse|software_interrupt|interrupt_return|segment_access|headless_8042') {
-            return @('bx-mantle', 'Bochs-only mantle fixture', 'git mv', 'S8', 'tests pure mantle/core mechanics')
+    if ($p -like 'tests/bx-machine/*') {
+        if ($name -match 'native_pic|machine_watchdog|budget_terminal|large_reverse|software_interrupt|interrupt_return|segment_access|headless_8042') {
+            return @('bx-machine', 'Bochs-only machine fixture', 'git mv', 'S8', 'tests pure machine/core mechanics')
         }
         return @('adapter-softpc', 'SoftPC/CCPU adapter fixture', 'git mv', 'S8', 'tests a VDM-facing or legacy-machine contract')
     }
@@ -274,7 +274,7 @@ while ($pending.Count -gt 0) {
     }
 }
 
-foreach ($legacyRoot in @('src/bx-core', 'src/bx-mantle', 'src/bx-vdm', 'src/cli', 'src/opennt', 'src/app', 'src/adapter-softpc', 'src/adapter-win32', 'src/opennt-bop', 'src/opennt-guest', 'src/opennt-host')) {
+foreach ($legacyRoot in @('src/bx-core', 'src/bx-machine', 'src/bx-vdm', 'src/cli', 'src/opennt', 'src/app', 'src/adapter-softpc', 'src/adapter-win32', 'src/opennt-bop', 'src/opennt-guest', 'src/opennt-host')) {
     $legacyFullPath = Join-Path $root $legacyRoot
     if (-not (Test-Path -LiteralPath $legacyFullPath)) { continue }
     Get-ChildItem -LiteralPath $legacyFullPath -Recurse -File | ForEach-Object {

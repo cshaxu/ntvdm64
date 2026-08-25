@@ -70,10 +70,10 @@ void runtime_session_mapping_registry_reset(void)
 }
 
 int runtime_session_mapping_registry_bind(
-    const app_session_v1 *session)
+    const app_session *session)
 {
-    if (!app_session_v1_valid(session) ||
-        session->state != APP_SESSION_V1_ACTIVE || session->identity == 0u)
+    if (!app_session_valid(session) ||
+        session->state != APP_SESSION_ACTIVE || session->identity == 0u)
         return 0;
     runtime_guest_pointer_manager_ensure_session();
     if (g_session_identity != 0u &&

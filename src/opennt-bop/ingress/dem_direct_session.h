@@ -1,7 +1,7 @@
 #ifndef RUNTIME_OPENNT_BOP_DEM_DIRECT_HOST_SESSION_H
 #define RUNTIME_OPENNT_BOP_DEM_DIRECT_HOST_SESSION_H
 
-#include "opennt-bop/dem/bx_ntvdm_dem_direct_context.h"
+#include "opennt-bop/dem/dem_direct_context.h"
 #include "host_handle_manager.h"
 
 #define RUNTIME_DEM_DIRECT_HOST_SESSION_MAGIC 0x42584448u

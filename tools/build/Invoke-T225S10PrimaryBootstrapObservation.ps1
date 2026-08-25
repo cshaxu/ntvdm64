@@ -21,10 +21,10 @@ foreach ($mode in @('direct','readonly')) {
     $stdout = Join-Path $run ($mode + '.stdout.log')
     $stderr = Join-Path $run ($mode + '.stderr.log')
     $arguments = '--byob-profile "' + (Join-Path $input 'profile.json') + '" --byob-root "' + $input + '" --mutation-mode ' + $mode + ' "' + (Join-Path $input 'TARGET.EXE') + '"'
-    $oldConfig = [Environment]::GetEnvironmentVariable('NTDOS64_STARTUP_CONFIG_SOURCE','Process')
-    $oldAutoexec = [Environment]::GetEnvironmentVariable('NTDOS64_STARTUP_AUTOEXEC_SOURCE','Process')
-    [Environment]::SetEnvironmentVariable('NTDOS64_STARTUP_CONFIG_SOURCE',(Join-Path $input 'fixture-config.nt'),'Process')
-    [Environment]::SetEnvironmentVariable('NTDOS64_STARTUP_AUTOEXEC_SOURCE',(Join-Path $input 'fixture-autoexec.nt'),'Process')
+    $oldConfig = [Environment]::GetEnvironmentVariable('NTVDM64_STARTUP_CONFIG_SOURCE','Process')
+    $oldAutoexec = [Environment]::GetEnvironmentVariable('NTVDM64_STARTUP_AUTOEXEC_SOURCE','Process')
+    [Environment]::SetEnvironmentVariable('NTVDM64_STARTUP_CONFIG_SOURCE',(Join-Path $input 'fixture-config.nt'),'Process')
+    [Environment]::SetEnvironmentVariable('NTVDM64_STARTUP_AUTOEXEC_SOURCE',(Join-Path $input 'fixture-autoexec.nt'),'Process')
     try {
         $started = [DateTime]::UtcNow
         $process = Start-Process -FilePath $exe -ArgumentList $arguments -RedirectStandardOutput $stdout -RedirectStandardError $stderr -NoNewWindow -PassThru
@@ -36,10 +36,10 @@ foreach ($mode in @('direct','readonly')) {
         $process.Dispose()
     }
     finally {
-        [Environment]::SetEnvironmentVariable('NTDOS64_STARTUP_CONFIG_SOURCE',$oldConfig,'Process')
-        [Environment]::SetEnvironmentVariable('NTDOS64_STARTUP_AUTOEXEC_SOURCE',$oldAutoexec,'Process')
+        [Environment]::SetEnvironmentVariable('NTVDM64_STARTUP_CONFIG_SOURCE',$oldConfig,'Process')
+        [Environment]::SetEnvironmentVariable('NTVDM64_STARTUP_AUTOEXEC_SOURCE',$oldAutoexec,'Process')
     }
 }
 
-[ordered]@{schema='ntdos64.t225.s10.primary-bootstrap-observation.v1';nativeExecutable=[ordered]@{path=$exe;sha256=(Hash $exe)};inputRoot=$input;inputManifestSha256=(Hash (Join-Path $input 'primary-bootstrap-manifest.json'));watchdogSeconds=$WatchdogSeconds;runs=$records} | ConvertTo-Json -Depth 7 | ForEach-Object { [IO.File]::WriteAllText((Join-Path $run 'observation.json'),$_+[Environment]::NewLine,[Text.UTF8Encoding]::new($false)) }
+[ordered]@{schema='runner.t225.s10.primary-bootstrap-observation.v1';nativeExecutable=[ordered]@{path=$exe;sha256=(Hash $exe)};inputRoot=$input;inputManifestSha256=(Hash (Join-Path $input 'primary-bootstrap-manifest.json'));watchdogSeconds=$WatchdogSeconds;runs=$records} | ConvertTo-Json -Depth 7 | ForEach-Object { [IO.File]::WriteAllText((Join-Path $run 'observation.json'),$_+[Environment]::NewLine,[Text.UTF8Encoding]::new($false)) }
 Write-Host "Recorded T225 S10 Direct/Readonly primary bootstrap observation: $run"

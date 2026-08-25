@@ -10,10 +10,10 @@ typedef int (*bochs_core_overlay_opaque_callback_t)(void *context,
   const void *event, unsigned event_bytes, void *outcome, unsigned outcome_bytes);
 
 
-int bochs_core_overlay_opaque_callback_v1_bind(
+int bochs_core_overlay_opaque_callback_bind(
   bochs_core_overlay_opaque_callback_t callback, void *context);
-void bochs_core_overlay_opaque_callback_v1_unbind(void);
-int bochs_core_overlay_opaque_callback_v1_invoke(
+void bochs_core_overlay_opaque_callback_unbind(void);
+int bochs_core_overlay_opaque_callback_invoke(
   const void *event, unsigned event_bytes, void *outcome,
   unsigned outcome_bytes);
 

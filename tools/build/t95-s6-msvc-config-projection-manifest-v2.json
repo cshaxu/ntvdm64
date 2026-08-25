@@ -49,7 +49,7 @@
     { "name": "BX_SUPPORT_SOUNDLOW", "oldValue": "1", "newValue": "0", "classification": "deny" }
   ],
   "additions": [
-    { "name": "BX_NTVDM_ENABLE_EXCEPTION_INTERCEPT", "expectedSource": "<absent>", "newValue": "0", "classification": "default-off registered seam" },
+    { "name": "RUNTIME_ENABLE_EXCEPTION_INTERCEPT", "expectedSource": "<absent>", "newValue": "0", "classification": "default-off registered seam" },
     { "name": "FMT_LL", "expectedSource": "<absent>", "newValue": "\"I64\"", "classification": "MSVC format-token platform omission" }
   ],
   "derivedAssertions": [

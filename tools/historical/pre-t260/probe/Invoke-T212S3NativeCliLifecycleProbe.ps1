@@ -1,4 +1,4 @@
-﻿param(
+param(
     [Parameter(Mandatory = $true)][string]$RepositoryRoot,
     [Parameter(Mandatory = $true)][string]$BuildRoot,
     [Parameter(Mandatory = $true)][string]$CompositionBuildRoot
@@ -9,7 +9,7 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $build = [IO.Path]::GetFullPath($BuildRoot)
 & (Join-Path $root 'tools\probe\Invoke-T200S27NativeCliProbe.ps1') `
     -RepositoryRoot $root -BuildRoot $build -CompositionBuildRoot $CompositionBuildRoot `
-    -AdditionalCliSources @('src\cli\ntdos64_lifecycle_v1.c') -ExpectedRunExitCode 3
+    -AdditionalCliSources @('src\cli\runner_lifecycle_v1.c') -ExpectedRunExitCode 3
 $baseRecord = Get-Content -LiteralPath (Join-Path $build 't200-s27-native-cli.json') -Raw | ConvertFrom-Json
 if (-not $baseRecord.passed -or $baseRecord.runExitCode -ne 3 -or
     $baseRecord.expectedRunExitCode -ne 3) {
@@ -20,10 +20,10 @@ if ($runLog -notmatch 'terminal=.+lifecycle=.+presentation=.+cancellation=') {
     throw 'T212 S3 native CLI did not emit lifecycle classification fields'
 }
 $record = [ordered]@{
-    schema = 'ntdos64.t212.s3.native-cli-lifecycle.v1'
+    schema = 'runner.t212.s3.native-cli-lifecycle.v1'
     architecture = 'x64'
     runtimeLibrary = '/MT'
-    sourceClosure = @('src/cli/ntdos64_native_cli.c', 'src/cli/ntdos64_lifecycle_v1.[hc]', 'existing current composition objects')
+    sourceClosure = @('src/cli/runner_native_cli.c', 'src/cli/runner_lifecycle_v1.[hc]', 'existing current composition objects')
     engineAbiChanged = $false
     bochsChanged = $false
     runExitCode = 3

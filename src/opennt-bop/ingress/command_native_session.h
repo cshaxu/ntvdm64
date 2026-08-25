@@ -1,9 +1,9 @@
 #ifndef RUNTIME_BOP_SHIM_COMMAND_NATIVE_SESSION_SHIM_H
 #define RUNTIME_BOP_SHIM_COMMAND_NATIVE_SESSION_SHIM_H
 
-/* Adapter-owned bridge from the mantle's copied generic-UD record to the
+/* Adapter-owned bridge from the machine's copied generic-UD record to the
  * directly imported OpenNT COMMAND bodies.  This is deliberately parallel to
- * dem_native_session: the mantle never receives a selector, a service,
+ * dem_native_session: the machine never receives a selector, a service,
  * or an OpenNT COMMAND type. */
 
 #include "opennt-bop/command/opennt_command_composition.h"
@@ -25,7 +25,7 @@ void runtime_command_native_session_unbind(
     runtime_command_native_session *session);
 
 int runtime_command_native_session_dispatch(
-    const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome);
+    const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome);
 
 #endif

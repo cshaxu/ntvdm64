@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////
 //
 // Finite no-product companions required by original Bochs types retained in
-// the native mantle.  They deliberately provide no GUI, device, plugin or
+// the native machine.  They deliberately provide no GUI, device, plugin or
 // interactive configuration lifecycle.
 //
 /////////////////////////////////////////////////////////////////////////
@@ -17,7 +17,7 @@ bx_gui_c *bx_gui = NULL;
 
 int bx_atexit(void)
 {
-  // The minimal mantle owns no product resource that requires the historical
+  // The minimal machine owns no product resource that requires the historical
   // `main.cc` teardown sequence.  logfunctions::fatal exits immediately
   // after this return.
   return 0;

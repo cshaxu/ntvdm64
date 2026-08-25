@@ -13,19 +13,19 @@ function Require([bool]$Condition, [string]$Message) {
 
 $manifestPath = Join-Path $RepositoryRoot 'tools\build\t225-s7-full-module-manifest.json'
 $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
-$mantle = @($manifest.modules | Where-Object { $_.name -eq 'bx-mantle' })
+$machine = @($manifest.modules | Where-Object { $_.name -eq 'bx-machine' })
 $core = @($manifest.modules | Where-Object { $_.name -eq 'bx-core' })
 $vdm = @($manifest.modules | Where-Object { $_.name -eq 'bx-vdm' })
-Require ($mantle.Count -eq 1 -and $core.Count -eq 1 -and $vdm.Count -eq 1) 'Formal manifest module identities are incomplete.'
+Require ($machine.Count -eq 1 -and $core.Count -eq 1 -and $vdm.Count -eq 1) 'Formal manifest module identities are incomplete.'
 
-$mantleSources = @($mantle[0].sources)
+$machineSources = @($machine[0].sources)
 $coreSources = @($core[0].sources)
 $vdmSources = @($vdm[0].sources)
 foreach ($forbidden in @(
-    'src/bx-mantle/bx_ntvdm_engine_contract_v1.c',
-    'src/bx-mantle/bx_ntvdm_engine_run_v1.c',
-    'src/bx-mantle/bx_ntvdm_extended_memory_v1.cc')) {
-    Require ($mantleSources -notcontains $forbidden) "Formal mantle closure retains retired composition input: $forbidden"
+    'src/bx-machine/bx_ntvdm_engine_contract_v1.c',
+    'src/bx-machine/bx_ntvdm_engine_run_v1.c',
+    'src/bx-machine/bx_ntvdm_extended_memory_v1.cc')) {
+    Require ($machineSources -notcontains $forbidden) "Formal machine closure retains retired composition input: $forbidden"
 }
 foreach ($required in @(
     'src/bx-vdm/bx_ntvdm_engine_contract_v1.c',
@@ -34,7 +34,7 @@ foreach ($required in @(
 }
 
 $forbiddenPattern = '(?i)\bbop\b|dem_v2|command_v2|xms_|\bumb\b|\bcomspec\b|\bntdos\b'
-foreach ($relative in @($mantleSources + $coreSources)) {
+foreach ($relative in @($machineSources + $coreSources)) {
     $path = Join-Path $RepositoryRoot $relative
     Require (Test-Path -LiteralPath $path -PathType Leaf) "Formal machine source is missing: $relative"
     $match = Select-String -LiteralPath $path -Pattern $forbiddenPattern
@@ -42,10 +42,10 @@ foreach ($relative in @($mantleSources + $coreSources)) {
 }
 
 [ordered]@{
-    schema = 'ntdos64.t237.s4.machine-semantic-boundary.v1'
-    formalMantleCompositionInputs = $false
-    formalMantleAllocatorPolicy = $false
+    schema = 'runner.t237.s4.machine-semantic-boundary.v1'
+    formalMachineCompositionInputs = $false
+    formalMachineAllocatorPolicy = $false
     formalVdmOwnsEngineComposition = $true
-    coreAndMantleContainBopOrServiceVocabulary = $false
+    coreAndMachineContainBopOrServiceVocabulary = $false
     result = 'pass'
 } | ConvertTo-Json -Depth 4

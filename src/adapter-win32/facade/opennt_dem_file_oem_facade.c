@@ -1,8 +1,8 @@
 /* DIVERGENCE(WIN32-DIV-006): OpenNT DEM received these OEM exports from the
  * NTVDM product host.  Preserve their names, parameters, conversion and
  * last-error contract using only public Win32 APIs and call-local storage. */
-#include "adapter-win32/include/legacy-api/opennt_dem_file_oem_facade.h"
-#include "opennt-bop/observation/bx_ntvdm_demfile_create_observation_v1.h"
+#include "adapter-win32/include/opennt-api/opennt_dem_file_oem_facade.h"
+#include "opennt-bop/observation/demfile_create_observation.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -43,7 +43,7 @@ HANDLE CreateFileOem(LPSTR name, DWORD access, DWORD share,
     DWORD conversion_error = wide == NULL ? GetLastError() : ERROR_SUCCESS;
     DWORD first_error = ERROR_SUCCESS, retry_error = ERROR_SUCCESS;
     if (wide == NULL) {
-        runtime_demfile_create_observation_v1_record(NULL, access, share,
+        runtime_demfile_create_observation_record(NULL, access, share,
             creation, flags, conversion_error, first_error, retry_error);
         return INVALID_HANDLE_VALUE;
     }
@@ -57,7 +57,7 @@ HANDLE CreateFileOem(LPSTR name, DWORD access, DWORD share,
         result = CreateFileW(wide, access, share, security, creation, flags, template_file);
         if (result == INVALID_HANDLE_VALUE) retry_error = GetLastError();
     }
-    runtime_demfile_create_observation_v1_record(wide, access, share,
+    runtime_demfile_create_observation_record(wide, access, share,
         creation, flags, conversion_error, first_error, retry_error);
     free(wide);
     return result;

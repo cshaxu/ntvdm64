@@ -35,7 +35,7 @@ typedef struct runtime_demhndl_active_call {
      * restored values (notably demRetry -> apfnSVC[]).  Keep the bounded
      * copied CPU state mutable inside this call while emitting only the
      * existing typed low-16/segment result delta. */
-    runtime_cpu_state_v1 cpu;
+    runtime_cpu_state cpu;
     uint32_t handle_token;
     uint32_t guest_address;
     uint32_t guest_bytes;
@@ -291,7 +291,7 @@ static int set_register(uint32_t register_index, USHORT value)
     default: return 0;
     }
     *target = (*target & 0xffff0000u) | value;
-    return runtime_cpu_delta_v1_set_gpr16(&active->call->result->cpu_delta,
+    return runtime_cpu_delta_set_gpr16(&active->call->result->cpu_delta,
         register_index, value);
 }
 
@@ -311,7 +311,7 @@ static int set_segment(uint32_t segment_index, USHORT value)
     default: return 0;
     }
     *target = value;
-    return runtime_cpu_delta_v1_set_segment(&active->call->result->cpu_delta,
+    return runtime_cpu_delta_set_segment(&active->call->result->cpu_delta,
         segment_index, value);
 }
 
@@ -321,8 +321,8 @@ int runtime_demhndl_call_valid(const runtime_demhndl_call *call)
         call->abi_version == RUNTIME_DEMHNDL_CALL_VERSION &&
         call->struct_bytes == sizeof(*call) && call->direct != 0 &&
         runtime_dem_direct_context_valid(call->direct) &&
-        call->boundary != 0 && runtime_exception_event_v1_valid(call->boundary) &&
-        call->cpu != 0 && runtime_cpu_state_v1_valid(call->cpu) &&
+        call->boundary != 0 && runtime_exception_event_valid(call->boundary) &&
+        call->cpu != 0 && runtime_cpu_state_valid(call->cpu) &&
         call->cpu->execution_mode == RUNTIME_CPU_EXECUTION_REAL &&
         call->result != 0 && call->guest_read != 0 && call->guest_write != 0;
 }
@@ -392,7 +392,7 @@ void runtime_demhndl_set_cf(int value)
     if (active == NULL) return;
     if (value) active->cpu.eflags |= 0x01u;
     else active->cpu.eflags &= ~0x01u;
-    (void)runtime_cpu_result_v2_set_cf(active->call->result, value);
+    (void)runtime_cpu_result_set_cf(active->call->result, value);
 }
 void runtime_demhndl_set_zf(int value)
 {
@@ -400,7 +400,7 @@ void runtime_demhndl_set_zf(int value)
     if (active == NULL) return;
     if (value) active->cpu.eflags |= 0x40u;
     else active->cpu.eflags &= ~0x40u;
-    (void)runtime_cpu_result_v2_set_zf(active->call->result, value);
+    (void)runtime_cpu_result_set_zf(active->call->result, value);
 }
 
 HANDLE runtime_demhndl_get_handle(USHORT high, USHORT low)
@@ -605,7 +605,7 @@ void runtime_demhndl_terminate(void)
 {
     runtime_demhndl_active_call *active = active_call();
     if (active == NULL || active->call == NULL) return;
-    (void)runtime_cpu_result_v2_stop(active->call->result);
+    (void)runtime_cpu_result_stop(active->call->result);
     longjmp(active->terminate_jump, 1);
 }
 
@@ -661,8 +661,8 @@ int runtime_demhndl_invoke_body_with_resume(runtime_demhndl_call *call,
     active.transfer_from_guest = call->service == RUNTIME_DEMHNDL_WRITE;
     memset(&g_extended_error, 0, sizeof(g_extended_error));
     pExtendedError = &g_extended_error;
-    runtime_cpu_result_v2_pass_through(call->result);
-    if (!runtime_cpu_result_v2_resume(call->result,
+    runtime_cpu_result_pass_through(call->result);
+    if (!runtime_cpu_result_resume(call->result,
             call->boundary->fault_rip + resume_bytes))
         return 0;
     if (!runtime_guest_pointer_manager_begin(
@@ -707,7 +707,7 @@ int runtime_demhndl_invoke_body_with_resume(runtime_demhndl_call *call,
     }
     runtime_guest_pointer_manager_end(runtime_guest_pointer_manager_session());
     g_active_call = NULL;
-    return runtime_cpu_result_v2_valid(call->result);
+    return runtime_cpu_result_valid(call->result);
 }
 
 int runtime_demhndl_invoke(runtime_demhndl_call *call)

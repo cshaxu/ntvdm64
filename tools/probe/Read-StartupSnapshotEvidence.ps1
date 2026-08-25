@@ -15,7 +15,7 @@ function Read-LittleEndianWord([string]$hex, [int]$offset) {
 }
 
 $record = Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json
-Require ($record.schema -eq 'ntdos64-startup-snapshot-evidence-v1') 'unexpected snapshot evidence schema'
+Require ($record.schema -eq 'runner-startup-snapshot-evidence-v1') 'unexpected snapshot evidence schema'
 Require ($record.boundary.vector -eq 6 -and $record.boundary.fault_rip -eq 0x7c00) 'unexpected neutral-boundary identity'
 Require ($record.cpu.mode -eq 1 -and $record.cpu.cs -eq 0 -and $record.cpu.eip -eq 0x7c00) 'unexpected CPU snapshot identity'
 Require ($record.ranges.Count -eq 3) 'expected exactly three declared ranges'

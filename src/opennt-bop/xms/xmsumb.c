@@ -64,7 +64,7 @@ VOID  xmsInitUMB(VOID)
 	    // convert size in bytes to paragraphs
 	    xmsUMBNew->Size = (WORD) (Size >> 4);
 	    // convert linear address to paragraphs segment
-	    /* DIVERGENCE (T237): `Address` is host-private on x64.  The mantle
+	    /* DIVERGENCE (T237): `Address` is host-private on x64.  The machine
 	     * seam supplies only its declared 20-bit guest-linear projection. */
 	    xmsUMBNew->Segment = runtime_xms_linear_to_segment(Address);
 	    xmsUMBNew->Owner = 0;

@@ -7,13 +7,13 @@
  *
  * This header intentionally exposes the historical helper spellings used by
  * that file.  Its implementation is a per-call adapter context; it is not a
- * provider, dispatcher, or legacy-v1 compatibility layer.
+ * provider, dispatcher, or retired compatibility layer.
  */
 
 #include <windows.h>
 #include <stdint.h>
 
-#include "bx_ntvdm_dem_direct_context.h"
+#include "dem_direct_context.h"
 #include "adapter-softpc/cpu_result.h"
 #include "adapter-softpc/cpu_state_abi.h"
 #include "adapter-softpc/exception_abi.h"
@@ -72,9 +72,9 @@ typedef struct runtime_demhndl_call {
     uint32_t struct_bytes;
     uint32_t service;
     runtime_dem_direct_context *direct;
-    const runtime_exception_event_v1 *boundary;
-    const runtime_cpu_state_v1 *cpu;
-    runtime_cpu_result_v2 *result;
+    const runtime_exception_event *boundary;
+    const runtime_cpu_state *cpu;
+    runtime_cpu_result *result;
     void *guest_state;
     runtime_demhndl_guest_read_fn guest_read;
     runtime_demhndl_guest_write_fn guest_write;

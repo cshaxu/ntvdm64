@@ -53,7 +53,7 @@ $stderr = ''
 $arguments = @('--engine', $enginePath, '--bochs', $bochsPath,
     '--byob-profile', $profilePath, '--byob-root', $rootPath, $targetPath)
 $inputRecord = [ordered]@{
-    schema = 'ntdos64.cli-native-controlled-stop-inputs.v1'
+    schema = 'runner.cli-native-controlled-stop-inputs.v1'
     runner = [ordered]@{ path = $runnerPath; sha256 = (Get-FileHash -LiteralPath $runnerPath -Algorithm SHA256).Hash }
     engine = [ordered]@{ path = $enginePath; sha256 = (Get-FileHash -LiteralPath $enginePath -Algorithm SHA256).Hash }
     profile = [ordered]@{ path = $profilePath; sha256 = (Get-FileHash -LiteralPath $profilePath -Algorithm SHA256).Hash }
@@ -99,7 +99,7 @@ try {
 
 $combined = $stdout + "`n" + $stderr
 $result = [ordered]@{
-    schema = 'ntdos64.cli-native-controlled-stop-observation.v1'
+    schema = 'runner.cli-native-controlled-stop-observation.v1'
     startedUtc = $started.ToString('o')
     elapsedMilliseconds = [int](([DateTime]::UtcNow - $started).TotalMilliseconds)
     watchdogSeconds = $WatchdogSeconds

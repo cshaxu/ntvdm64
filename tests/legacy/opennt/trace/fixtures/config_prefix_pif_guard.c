@@ -5,7 +5,7 @@
  */
 #include <windows.h>
 
-extern void ntdos64_config_prefix_unexpected(int reason);
+extern void runner_config_prefix_unexpected(int reason);
 
 #ifndef CONFIG_PREFIX_USE_HISTORICAL_PIF_FASTPASTE
 BOOL bPifFastPaste = TRUE;
@@ -16,7 +16,7 @@ DWORD WINAPI ExpandEnvironmentStringsOem(LPCSTR source, LPSTR destination,
     (void)source;
     (void)destination;
     (void)destination_size;
-    ntdos64_config_prefix_unexpected(16);
+    runner_config_prefix_unexpected(16);
     return 0;
 }
 
@@ -26,6 +26,6 @@ int RcMessageBox(UINT message_id, CHAR *message_1, CHAR *message_2,
     (void)message_1;
     (void)message_2;
     (void)options;
-    ntdos64_config_prefix_unexpected(17);
+    runner_config_prefix_unexpected(17);
     return 0;
 }

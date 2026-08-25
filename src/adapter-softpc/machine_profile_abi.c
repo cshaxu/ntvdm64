@@ -2,8 +2,8 @@
 
 #include <string.h>
 
-void runtime_machine_profile_v1_initialize(
-    runtime_machine_profile_v1 *profile)
+void runtime_machine_profile_initialize(
+    runtime_machine_profile *profile)
 {
     if (profile == 0) return;
     memset(profile, 0, sizeof(*profile));
@@ -12,8 +12,8 @@ void runtime_machine_profile_v1_initialize(
     profile->struct_bytes = sizeof(*profile);
 }
 
-int runtime_machine_profile_v1_set_observation(
-    runtime_machine_profile_v1 *profile, uint32_t id,
+int runtime_machine_profile_set_observation(
+    runtime_machine_profile *profile, uint32_t id,
     const runtime_guest_range *guest_read)
 {
     uint32_t index;
@@ -26,7 +26,7 @@ int runtime_machine_profile_v1_set_observation(
     for (index = 0u; index < profile->observation_count; ++index) {
         if (profile->observations[index].id == id) return 0;
     }
-    if (profile->observation_count >= RUNTIME_MACHINE_PROFILE_V1_MAX_OBSERVATIONS)
+    if (profile->observation_count >= RUNTIME_MACHINE_PROFILE_MAX_OBSERVATIONS)
         return 0;
     index = profile->observation_count++;
     profile->observations[index].id = id;
@@ -35,8 +35,8 @@ int runtime_machine_profile_v1_set_observation(
     return 1;
 }
 
-int runtime_machine_profile_v1_set_neutral_ud2_trigger(
-    runtime_machine_profile_v1 *profile, uint32_t observation_id)
+int runtime_machine_profile_set_neutral_ud2_trigger(
+    runtime_machine_profile *profile, uint32_t observation_id)
 {
     uint32_t index;
     if (profile == 0 || observation_id == 0u ||
@@ -60,13 +60,13 @@ int runtime_machine_profile_v1_set_neutral_ud2_trigger(
     return 0;
 }
 
-int runtime_machine_profile_v1_set_neutral_ud2_snapshot_trigger(
-    runtime_machine_profile_v1 *profile, const uint32_t *observation_ids,
+int runtime_machine_profile_set_neutral_ud2_snapshot_trigger(
+    runtime_machine_profile *profile, const uint32_t *observation_ids,
     uint32_t observation_count)
 {
     uint32_t index;
     if (profile == 0 || observation_ids == 0 || observation_count == 0u ||
-        observation_count > RUNTIME_MACHINE_PROFILE_V1_MAX_OBSERVATIONS ||
+        observation_count > RUNTIME_MACHINE_PROFILE_MAX_OBSERVATIONS ||
         profile->magic != RUNTIME_MACHINE_PROFILE_ABI_MAGIC ||
         profile->abi_version != RUNTIME_MACHINE_PROFILE_ABI_VERSION ||
         profile->struct_bytes != sizeof(*profile) || profile->flags != 0u ||
@@ -95,8 +95,8 @@ int runtime_machine_profile_v1_set_neutral_ud2_snapshot_trigger(
     return 1;
 }
 
-int runtime_machine_profile_v1_valid(
-    const runtime_machine_profile_v1 *profile, uint64_t aperture_bytes)
+int runtime_machine_profile_valid(
+    const runtime_machine_profile *profile, uint64_t aperture_bytes)
 {
     uint32_t index;
     uint32_t prior;
@@ -104,10 +104,10 @@ int runtime_machine_profile_v1_valid(
         profile->abi_version != RUNTIME_MACHINE_PROFILE_ABI_VERSION ||
         profile->struct_bytes != sizeof(*profile) || profile->flags != 0u ||
         profile->reserved0 != 0u || profile->observation_count == 0u ||
-        profile->observation_count > RUNTIME_MACHINE_PROFILE_V1_MAX_OBSERVATIONS)
+        profile->observation_count > RUNTIME_MACHINE_PROFILE_MAX_OBSERVATIONS)
         return 0;
     for (index = 0u; index < profile->observation_count; ++index) {
-        const runtime_machine_observation_v1 *observation =
+        const runtime_machine_observation *observation =
             &profile->observations[index];
         if (observation->id == 0u || observation->flags != 0u ||
             observation->guest_read.length == 0u ||
@@ -137,7 +137,7 @@ int runtime_machine_profile_v1_valid(
             if (!found) return 0;
         } else {
             if (profile->snapshot_trigger_count >
-                RUNTIME_MACHINE_PROFILE_V1_MAX_OBSERVATIONS) return 0;
+                RUNTIME_MACHINE_PROFILE_MAX_OBSERVATIONS) return 0;
             for (index = 0u; index < profile->snapshot_trigger_count; ++index) {
                 uint32_t other;
                 found = 0;
@@ -159,7 +159,7 @@ int runtime_machine_profile_v1_valid(
         profile->trigger_instruction_bytes[0] != 0u ||
         profile->trigger_instruction_bytes[1] != 0u) return 0;
     else {
-        for (index = 0u; index < RUNTIME_MACHINE_PROFILE_V1_MAX_OBSERVATIONS;
+        for (index = 0u; index < RUNTIME_MACHINE_PROFILE_MAX_OBSERVATIONS;
             ++index) {
             if (profile->snapshot_trigger_ids[index] != 0u) return 0;
         }
@@ -167,23 +167,23 @@ int runtime_machine_profile_v1_valid(
     return 1;
 }
 
-int runtime_machine_profile_v1_prepare_neutral_ud2_snapshot_trigger(
-    const runtime_machine_profile_v1 *profile,
-    const runtime_exception_event_v1 *boundary,
-    const runtime_cpu_state_v1 *cpu_before,
-    const runtime_instruction_window_v1 *window,
+int runtime_machine_profile_prepare_neutral_ud2_snapshot_trigger(
+    const runtime_machine_profile *profile,
+    const runtime_exception_event *boundary,
+    const runtime_cpu_state *cpu_before,
+    const runtime_instruction_window *window,
     uint64_t aperture_bytes,
-    runtime_startup_snapshot_transaction_v1 *transaction,
+    runtime_startup_snapshot_transaction *transaction,
     uint64_t *resume_rip)
 {
-    runtime_startup_snapshot_range_v1 ranges[
-        RUNTIME_MACHINE_PROFILE_V1_MAX_OBSERVATIONS];
+    runtime_startup_snapshot_range ranges[
+        RUNTIME_MACHINE_PROFILE_MAX_OBSERVATIONS];
     uint32_t index;
     if (profile == 0 || window == 0 || transaction == 0 || resume_rip == 0 ||
-        !runtime_machine_profile_v1_valid(profile, aperture_bytes) ||
+        !runtime_machine_profile_valid(profile, aperture_bytes) ||
         profile->snapshot_trigger_count == 0u || boundary == 0 ||
         boundary->vector != profile->trigger_exception_vector ||
-        !runtime_instruction_window_v1_valid(window) ||
+        !runtime_instruction_window_valid(window) ||
         window->valid_bytes < profile->trigger_instruction_length ||
         memcmp(window->bytes, profile->trigger_instruction_bytes,
             profile->trigger_instruction_length) != 0 ||
@@ -201,55 +201,55 @@ int runtime_machine_profile_v1_prepare_neutral_ud2_snapshot_trigger(
         ranges[index].flags = 0u;
         ranges[index].guest_read = profile->observations[observation_index].guest_read;
     }
-    runtime_startup_snapshot_transaction_v1_initialize(transaction, boundary,
+    runtime_startup_snapshot_transaction_initialize(transaction, boundary,
         cpu_before, ranges, profile->snapshot_trigger_count);
-    if (!runtime_startup_snapshot_transaction_v1_preflight(transaction,
+    if (!runtime_startup_snapshot_transaction_preflight(transaction,
         aperture_bytes, transaction->output_bytes)) return 0;
     *resume_rip = boundary->fault_rip + profile->trigger_resume_bytes;
     return 1;
 }
 
-int runtime_machine_profile_v1_prepare_observation(
-    const runtime_machine_profile_v1 *profile, uint32_t id,
-    const runtime_exception_event_v1 *boundary,
-    const runtime_cpu_state_v1 *cpu_before,
+int runtime_machine_profile_prepare_observation(
+    const runtime_machine_profile *profile, uint32_t id,
+    const runtime_exception_event *boundary,
+    const runtime_cpu_state *cpu_before,
     uint64_t aperture_bytes,
-    runtime_observation_transaction_v1 *transaction)
+    runtime_observation_transaction *transaction)
 {
     uint32_t index;
     if (transaction == 0 || id == 0u ||
-        !runtime_machine_profile_v1_valid(profile, aperture_bytes)) return 0;
+        !runtime_machine_profile_valid(profile, aperture_bytes)) return 0;
     for (index = 0u; index < profile->observation_count; ++index) {
         if (profile->observations[index].id == id) {
-            runtime_observation_transaction_v1_initialize(transaction, boundary,
+            runtime_observation_transaction_initialize(transaction, boundary,
                 cpu_before, &profile->observations[index].guest_read);
-            return runtime_observation_transaction_v1_preflight(transaction,
+            return runtime_observation_transaction_preflight(transaction,
                 aperture_bytes, profile->observations[index].guest_read.length);
         }
     }
     return 0;
 }
 
-int runtime_machine_profile_v1_prepare_neutral_ud2_trigger(
-    const runtime_machine_profile_v1 *profile,
-    const runtime_exception_event_v1 *boundary,
-    const runtime_cpu_state_v1 *cpu_before,
-    const runtime_instruction_window_v1 *window,
+int runtime_machine_profile_prepare_neutral_ud2_trigger(
+    const runtime_machine_profile *profile,
+    const runtime_exception_event *boundary,
+    const runtime_cpu_state *cpu_before,
+    const runtime_instruction_window *window,
     uint64_t aperture_bytes,
-    runtime_observation_transaction_v1 *transaction,
+    runtime_observation_transaction *transaction,
     uint64_t *resume_rip)
 {
     if (profile == 0 || window == 0 || transaction == 0 || resume_rip == 0 ||
-        !runtime_machine_profile_v1_valid(profile, aperture_bytes) ||
+        !runtime_machine_profile_valid(profile, aperture_bytes) ||
         profile->trigger_observation_id == 0u || boundary == 0 ||
         boundary->vector != profile->trigger_exception_vector ||
-        !runtime_instruction_window_v1_valid(window) ||
+        !runtime_instruction_window_valid(window) ||
         window->valid_bytes < profile->trigger_instruction_length ||
         memcmp(window->bytes, profile->trigger_instruction_bytes,
             profile->trigger_instruction_length) != 0 ||
         boundary->fault_rip > UINT64_MAX - profile->trigger_resume_bytes)
         return 0;
-    if (!runtime_machine_profile_v1_prepare_observation(profile,
+    if (!runtime_machine_profile_prepare_observation(profile,
             profile->trigger_observation_id, boundary, cpu_before,
             aperture_bytes, transaction)) return 0;
     *resume_rip = boundary->fault_rip + profile->trigger_resume_bytes;

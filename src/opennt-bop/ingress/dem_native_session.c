@@ -48,18 +48,18 @@ void runtime_dem_native_session_unbind(runtime_dem_native_session *session)
     if (session_valid(session)) session->bound = 0u;
 }
 
-static int event_valid(const struct runtime_generic_ud_event_v1 *event)
+static int event_valid(const struct runtime_generic_ud_event *event)
 {
-    return event != NULL && event->magic == RUNTIME_GENERIC_UD_EVENT_V1_MAGIC &&
-        event->abi_version == RUNTIME_GENERIC_UD_EVENT_V1_VERSION &&
+    return event != NULL && event->magic == RUNTIME_GENERIC_UD_EVENT_MAGIC &&
+        event->abi_version == RUNTIME_GENERIC_UD_EVENT_VERSION &&
         event->struct_bytes == sizeof(*event) && event->vector == 6u &&
         event->window_bytes <= RUNTIME_GENERIC_UD_WINDOW_BYTES;
 }
 
-static void copy_cpu(const struct runtime_generic_ud_event_v1 *source,
-    runtime_cpu_state_v1 *target)
+static void copy_cpu(const struct runtime_generic_ud_event *source,
+    runtime_cpu_state *target)
 {
-    runtime_cpu_state_v1_initialize(target, source->execution_mode);
+    runtime_cpu_state_initialize(target, source->execution_mode);
     target->eax = source->eax; target->ebx = source->ebx; target->ecx = source->ecx;
     target->edx = source->edx; target->esi = source->esi; target->edi = source->edi;
     target->ebp = source->ebp; target->esp = source->esp; target->eip = source->eip;
@@ -68,14 +68,14 @@ static void copy_cpu(const struct runtime_generic_ud_event_v1 *source,
     target->gs = source->gs;
 }
 
-static int copy_outcome(const runtime_cpu_result_v2 *result,
-    struct runtime_generic_ud_outcome_v1 *outcome)
+static int copy_outcome(const runtime_cpu_result *result,
+    struct runtime_generic_ud_outcome *outcome)
 {
-    if (!runtime_cpu_result_v2_valid(result) || outcome == NULL ||
-        result->disposition == RUNTIME_CPU_RESULT_V2_PASS_THROUGH) return 0;
+    if (!runtime_cpu_result_valid(result) || outcome == NULL ||
+        result->disposition == RUNTIME_CPU_RESULT_PASS_THROUGH) return 0;
     memset(outcome, 0, sizeof(*outcome));
-    outcome->abi_version = RUNTIME_GENERIC_UD_EVENT_V1_VERSION;
-    outcome->disposition = result->disposition == RUNTIME_CPU_RESULT_V2_RESUME ?
+    outcome->abi_version = RUNTIME_GENERIC_UD_EVENT_VERSION;
+    outcome->disposition = result->disposition == RUNTIME_CPU_RESULT_RESUME ?
         RUNTIME_GENERIC_UD_RESUME : RUNTIME_GENERIC_UD_STOP;
     outcome->resume_rip = result->resume_rip;
     outcome->gpr16_write_mask = result->cpu_delta.gpr16_write_mask;
@@ -90,13 +90,13 @@ static int copy_outcome(const runtime_cpu_result_v2 *result,
 }
 
 int runtime_dem_native_session_dispatch(
-    const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome)
+    const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome)
 {
-    runtime_exception_event_v1 boundary;
-    runtime_cpu_state_v1 cpu;
-    runtime_instruction_window_v1 window;
-    runtime_cpu_result_v2 result;
+    runtime_exception_event boundary;
+    runtime_cpu_state cpu;
+    runtime_instruction_window window;
+    runtime_cpu_result result;
     runtime_demhndl_call call;
     if (!session_valid(g_active_session) || g_active_session->bound == 0u ||
         !event_valid(event) || outcome == NULL) return 0;
@@ -108,7 +108,7 @@ int runtime_dem_native_session_dispatch(
     boundary.cpu_id = event->cpu_id; boundary.vector = event->vector;
     boundary.error_code = event->error_code; boundary.fault_rip = event->fault_rip;
     copy_cpu(event, &cpu);
-    runtime_instruction_window_v1_capture(&window, event->window, event->window_bytes);
+    runtime_instruction_window_capture(&window, event->window, event->window_bytes);
     memset(&call, 0, sizeof(call));
     call.magic = RUNTIME_DEMHNDL_CALL_MAGIC;
     call.abi_version = RUNTIME_DEMHNDL_CALL_VERSION;
@@ -122,13 +122,13 @@ int runtime_dem_native_session_dispatch(
 }
 
 int runtime_dem_native_session_invoke_scoped_body(
-    const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome, void (*body)(void),
+    const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome, void (*body)(void),
     uint32_t resume_bytes)
 {
-    runtime_exception_event_v1 boundary;
-    runtime_cpu_state_v1 cpu;
-    runtime_cpu_result_v2 result;
+    runtime_exception_event boundary;
+    runtime_cpu_state cpu;
+    runtime_cpu_result result;
     runtime_demhndl_call call;
     if (!session_valid(g_active_session) || g_active_session->bound == 0u ||
         !event_valid(event) || outcome == NULL || body == NULL ||

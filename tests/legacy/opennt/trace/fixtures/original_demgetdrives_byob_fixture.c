@@ -4,11 +4,11 @@
 
 #include "historical_bios_bridge_v1.h"
 
-typedef void (*ntdos64_bios_entry)(void);
+typedef void (*runner_bios_entry)(void);
 
-extern ntdos64_bios_entry BIOS[];
+extern runner_bios_entry BIOS[];
 extern int DemInit(int argc, char *argv[]);
-extern uint8_t *ntdos64_ccpu_sm0_ram(void);
+extern uint8_t *runner_ccpu_sm0_ram(void);
 extern void setCS(uint16_t value);
 extern void setIP(uint16_t value);
 extern uint16_t getAX(void);
@@ -19,14 +19,14 @@ extern uint16_t nDrives;
 extern char IsAPresent;
 extern char IsBPresent;
 
-typedef LONG (WINAPI *ntdos64_vectored_exception_handler)(
+typedef LONG (WINAPI *runner_vectored_exception_handler)(
     EXCEPTION_POINTERS *exception_pointers);
 extern PVOID WINAPI AddVectoredExceptionHandler(
     ULONG first_handler,
-    ntdos64_vectored_exception_handler handler);
+    runner_vectored_exception_handler handler);
 extern ULONG WINAPI RemoveVectoredExceptionHandler(PVOID handle);
 
-static LONG WINAPI ntdos64_demgetdrives_trace_exception(
+static LONG WINAPI runner_demgetdrives_trace_exception(
     EXCEPTION_POINTERS *exception_pointers)
 {
     char line[192];
@@ -58,16 +58,16 @@ int main(int argc, char *argv[])
 
     fprintf(stderr, "demgetdrives fixture: bridge init\n");
     exception_handler = AddVectoredExceptionHandler(1u,
-        ntdos64_demgetdrives_trace_exception);
+        runner_demgetdrives_trace_exception);
     if (exception_handler == NULL) return 1;
-    if (!ntdos64_historical_bios_bridge_v1_initialize()) return 2;
+    if (!runner_historical_bios_bridge_v1_initialize()) return 2;
     fprintf(stderr, "demgetdrives fixture: original DemInit\n");
     if (!DemInit(argc, argv)) {
         result = 4;
         goto cleanup;
     }
 
-    ram = ntdos64_ccpu_sm0_ram();
+    ram = runner_ccpu_sm0_ram();
     if (ram == NULL) {
         result = 8;
         goto cleanup;
@@ -95,7 +95,7 @@ int main(int argc, char *argv[])
     }
 
 cleanup:
-    ntdos64_historical_bios_bridge_v1_terminate();
+    runner_historical_bios_bridge_v1_terminate();
     RemoveVectoredExceptionHandler(exception_handler);
     return result;
 }

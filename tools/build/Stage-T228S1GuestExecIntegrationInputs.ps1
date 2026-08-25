@@ -29,7 +29,7 @@ foreach ($item in $items) {
     if ((Get-Item -LiteralPath $destination).Length -ne $item.bytes -or (Get-Sha256 $destination) -ne $item.sha256) { throw "Copied T228 identity mismatch for $($item.role)" }
 }
 $profile = [ordered]@{
-    schema='ntdos64-byob-profile-v8'; profile='nt4-en-us-cli-stream-v8'; architecture='x86'; locale='en-US'; compatibility_group='t228-s1-guest-exec-integration'
+    schema='runner-byob-profile-v8'; profile='nt4-en-us-cli-stream-v8'; architecture='x86'; locale='en-US'; compatibility_group='t228-s1-guest-exec-integration'
     components=@($items | ForEach-Object { [ordered]@{role=$_.role;file_name=$_.file;required=$true;bytes=$_.bytes;sha256=$_.sha256;version=$null} })
     features=@(); owner_note='T228 S1 source-built multi-program integration fixture; TARGET.EXE is a byte-identical profile alias for source-built SHARE.EXE.'
     guest_command_placement=[ordered]@{path='\COMMAND.COM';drive_index=2}
@@ -41,5 +41,5 @@ $profile = [ordered]@{
 [IO.File]::WriteAllText((Join-Path $output 'profile.json'), (($profile | ConvertTo-Json -Depth 8) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 [IO.File]::WriteAllText((Join-Path $output 'fixture-config.nt'), "files=20`r`n", [Text.UTF8Encoding]::new($false))
 [IO.File]::WriteAllText((Join-Path $output 'fixture-autoexec.nt'), '', [Text.UTF8Encoding]::new($false))
-[ordered]@{schema='ntdos64.t228.s1.guest-exec-integration-inputs.v1';classification='primary-original-toolchain-source-built';sourceRoot=$root;inputs=$items;targetAlias=[ordered]@{source_role='share';source_name='SHARE.EXE';profile_name='TARGET.EXE';content_changed=$false};allowedUse=@('T228 S1 bounded Direct/Readonly post-handoff integration observation');forbiddenUse=@('reference fallback','default runtime discovery','release packaging','BOP semantic expansion','Overlay selection','Virtual selection')} | ConvertTo-Json -Depth 7 | ForEach-Object { [IO.File]::WriteAllText((Join-Path $output 'guest-exec-lifecycle-ledger-inputs-manifest.json'), $_ + [Environment]::NewLine, [Text.UTF8Encoding]::new($false)) }
+[ordered]@{schema='runner.t228.s1.guest-exec-integration-inputs.v1';classification='primary-original-toolchain-source-built';sourceRoot=$root;inputs=$items;targetAlias=[ordered]@{source_role='share';source_name='SHARE.EXE';profile_name='TARGET.EXE';content_changed=$false};allowedUse=@('T228 S1 bounded Direct/Readonly post-handoff integration observation');forbiddenUse=@('reference fallback','default runtime discovery','release packaging','BOP semantic expansion','Overlay selection','Virtual selection')} | ConvertTo-Json -Depth 7 | ForEach-Object { [IO.File]::WriteAllText((Join-Path $output 'guest-exec-lifecycle-ledger-inputs-manifest.json'), $_ + [Environment]::NewLine, [Text.UTF8Encoding]::new($false)) }
 Write-Host "Staged source-built T228 S1 guest integration fixture inputs: $output"

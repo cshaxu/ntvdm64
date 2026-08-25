@@ -17,8 +17,8 @@ static __declspec(thread) UINT g_count;
 static __declspec(thread) int g_direct_access_fixture_reply;
 static __declspec(thread) UINT g_direct_access_prompt_count;
 static __declspec(thread) DWORD g_direct_access_category_bits;
-static __declspec(thread) enum runtime_opennt_direct_access_choice_v1
-    g_direct_access_last_choice = RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_V1_IGNORE;
+static __declspec(thread) enum runtime_opennt_direct_access_choice
+    g_direct_access_last_choice = RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_IGNORE;
 
 #define RUNTIME_RMB_ABORT 1u
 #define RUNTIME_RMB_RETRY 2u
@@ -70,7 +70,7 @@ void runtime_opennt_rc_error_dialog(UINT error, CHAR *first, CHAR *second)
     g_last_error = error;
     ++g_count;
     if (!g_fixture_suppress)
-        (void)MessageBoxA(NULL, message, "NTDOS64", MB_OK | MB_ICONSTOP);
+        (void)MessageBoxA(NULL, message, "NTVDM64", MB_OK | MB_ICONSTOP);
 }
 
 int runtime_opennt_rc_message_box(UINT error, CHAR *first, CHAR *second,
@@ -98,7 +98,7 @@ int runtime_opennt_rc_message_box(UINT error, CHAR *first, CHAR *second,
     else if (flags & RUNTIME_RMB_ICON_WHAT) style |= MB_ICONQUESTION;
     else style |= MB_ICONSTOP;
     if (g_fixture_suppress) return (int)RUNTIME_RMB_ABORT;
-    reply = MessageBoxA(NULL, message, "NTDOS64", style);
+    reply = MessageBoxA(NULL, message, "NTVDM64", style);
     if (reply == IDIGNORE ||
         ((flags & (RUNTIME_RMB_ABORT | RUNTIME_RMB_IGNORE)) ==
             (RUNTIME_RMB_ABORT | RUNTIME_RMB_IGNORE) && reply == IDCANCEL))
@@ -115,16 +115,16 @@ int runtime_opennt_direct_access_dialog(const CHAR *message)
         reply = g_direct_access_fixture_reply;
     } else {
         reply = MessageBoxA(NULL, message == NULL ? "NTVDM direct access error" : message,
-            "NTDOS64 unsupported DOS operation", MB_ABORTRETRYIGNORE | MB_ICONSTOP);
+            "NTVDM64 unsupported DOS operation", MB_ABORTRETRYIGNORE | MB_ICONSTOP);
     }
     g_direct_access_last_choice = reply == IDIGNORE ?
-        RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_V1_IGNORE :
-        RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_V1_TERMINATE;
-    return g_direct_access_last_choice == RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_V1_IGNORE ?
+        RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_IGNORE :
+        RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_TERMINATE;
+    return g_direct_access_last_choice == RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_IGNORE ?
         IDIGNORE : IDABORT;
 }
 
-enum runtime_opennt_direct_access_choice_v1
+enum runtime_opennt_direct_access_choice
 runtime_opennt_direct_access_last_choice(void)
 { return g_direct_access_last_choice; }
 int runtime_opennt_direct_access_category_should_prompt(ULONG category)
@@ -168,7 +168,7 @@ void runtime_opennt_direct_access_reset_thread(void)
     g_direct_access_fixture_reply = 0;
     g_direct_access_prompt_count = 0u;
     g_direct_access_category_bits = 0u;
-    g_direct_access_last_choice = RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_V1_IGNORE;
+    g_direct_access_last_choice = RUNTIME_OPENNT_DIRECT_ACCESS_CHOICE_IGNORE;
 }
 UINT runtime_opennt_direct_access_prompt_count(void)
 { return g_direct_access_prompt_count; }

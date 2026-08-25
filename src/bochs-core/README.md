@@ -37,7 +37,7 @@ No new core modification is admitted without both records.
 
 The canonical detailed register is
 [`adapter-external-intrusion-exceptions.md`](../../docs/etc/research/adapter-external-intrusion-exceptions.md).
-The S3 rename of `native_port_is_registered` is a mantle-local neutralization
+The S3 rename of `native_port_is_registered` is a machine-local neutralization
 of a project-specific name; its declaration remains in the adopted `iodev.h`
 surface and is covered by `BX-IO-025`.
 

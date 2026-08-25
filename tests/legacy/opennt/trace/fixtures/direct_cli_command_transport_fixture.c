@@ -4,8 +4,8 @@
 
 #include "vdmapi.h"
 
-extern void ntdos64_direct_cli_transport_end(void);
-extern BOOL ntdos64_direct_cli_transport_begin(const char *pif_path,
+extern void runner_direct_cli_transport_end(void);
+extern BOOL runner_direct_cli_transport_begin(const char *pif_path,
                                                BOOL first_vdm);
 
 static void clear_info(VDMINFO *info, char *buffer, USHORT buffer_length) {
@@ -21,9 +21,9 @@ int main(void) {
     char buffer[sizeof(path)];
     char snapshot[sizeof(buffer)];
 
-    ntdos64_direct_cli_transport_end();
+    runner_direct_cli_transport_end();
     if (GetNextVDMCommand(NULL)) return 1;
-    if (!ntdos64_direct_cli_transport_begin(path, TRUE)) return 2;
+    if (!runner_direct_cli_transport_begin(path, TRUE)) return 2;
     if (!GetNextVDMCommand(NULL)) return 3;
 
     memset(buffer, 0x5a, sizeof(buffer));
@@ -40,8 +40,8 @@ int main(void) {
     if (GetNextVDMCommand(&info)) return 8;
     if (memcmp(buffer, snapshot, sizeof(buffer)) != 0) return 9;
 
-    ntdos64_direct_cli_transport_end();
-    if (!ntdos64_direct_cli_transport_begin(path, FALSE)) return 10;
+    runner_direct_cli_transport_end();
+    if (!runner_direct_cli_transport_begin(path, FALSE)) return 10;
     if (GetNextVDMCommand(NULL)) return 11;
     clear_info(&info, buffer, sizeof(buffer));
     info.VDMState = ASKING_FOR_WOW_BINARY;

@@ -12,20 +12,12 @@
 #include "iodev/iodev.h"
 #include "bochs-core-overlay/cpu/opaque_callback_private.h"
 
-#ifndef RUNTIME_ENABLE_MANTLE_UD_BRIDGE
-#if defined(BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE)
-#define RUNTIME_ENABLE_MANTLE_UD_BRIDGE BX_NTVDM_ENABLE_MANTLE_UD_BRIDGE
-#else
-#define RUNTIME_ENABLE_MANTLE_UD_BRIDGE 0
-#endif
+#ifndef RUNTIME_ENABLE_MACHINE_UD_BRIDGE
+#define RUNTIME_ENABLE_MACHINE_UD_BRIDGE 0
 #endif
 
-#ifndef RUNTIME_ENABLE_MANTLE_FIRST_FAULT_OBSERVER
-#if defined(BX_NTVDM_ENABLE_MANTLE_FIRST_FAULT_OBSERVER)
-#define RUNTIME_ENABLE_MANTLE_FIRST_FAULT_OBSERVER BX_NTVDM_ENABLE_MANTLE_FIRST_FAULT_OBSERVER
-#else
-#define RUNTIME_ENABLE_MANTLE_FIRST_FAULT_OBSERVER 0
-#endif
+#ifndef RUNTIME_ENABLE_MACHINE_FIRST_FAULT_OBSERVER
+#define RUNTIME_ENABLE_MACHINE_FIRST_FAULT_OBSERVER 0
 #endif
 
 enum {
@@ -34,7 +26,7 @@ enum {
   BOCHS_CORE_OVERLAY_GENERIC_UD_WINDOW_BYTES = 15u,
   BOCHS_CORE_OVERLAY_GENERIC_UD_GPR16_COUNT = 8u,
   BOCHS_CORE_OVERLAY_GENERIC_UD_GPR32_COUNT = 8u,
-  BOCHS_CORE_OVERLAY_GENERIC_UD_OUTCOME_V2_VERSION = 2u,
+  BOCHS_CORE_OVERLAY_GENERIC_UD_OUTCOME_VERSION = 2u,
   BOCHS_CORE_OVERLAY_GENERIC_UD_EFLAGS_WRITE_MASK = 0x003f7fd5u,
   BOCHS_CORE_OVERLAY_GENERIC_UD_PASS_THROUGH = 0u,
   BOCHS_CORE_OVERLAY_GENERIC_UD_RESUME = 1u,
@@ -49,7 +41,7 @@ enum {
 
 /* These private records intentionally retain the fixed byte layout used by
  * the composed callback.  They neither name nor include an adapter. */
-struct bochs_core_overlay_generic_ud_event_v1 {
+struct bochs_core_overlay_generic_ud_event {
   Bit32u magic, abi_version, struct_bytes, cpu_id;
   Bit32u vector, error_code, execution_mode, reserved0;
   Bit64u fault_rip;
@@ -60,7 +52,9 @@ struct bochs_core_overlay_generic_ud_event_v1 {
   Bit8u reserved1;
 };
 
-struct bochs_core_overlay_generic_ud_outcome_v1 {
+/* The 16-bit resume record and the context-changing 32-bit record are
+ * distinct current ABI shapes; neither is a deprecated compatibility path. */
+struct bochs_core_overlay_generic_ud_result16 {
   Bit32u abi_version, disposition;
   Bit64u resume_rip;
   Bit32u gpr16_write_mask;
@@ -70,7 +64,7 @@ struct bochs_core_overlay_generic_ud_outcome_v1 {
   Bit32u eflags_write_mask, eflags_values;
 };
 
-struct bochs_core_overlay_generic_ud_outcome_v2 {
+struct bochs_core_overlay_generic_ud_outcome {
   Bit32u abi_version, disposition;
   Bit64u resume_rip;
   Bit32u gpr32_write_mask;
@@ -81,7 +75,7 @@ struct bochs_core_overlay_generic_ud_outcome_v2 {
   Bit32u context_mode, reserved0;
 };
 
-struct bochs_core_overlay_first_fault_v1 {
+struct bochs_core_overlay_first_fault {
   Bit32u magic, abi_version, struct_bytes, cpu_id;
   Bit32u vector, error_code, execution_mode, reserved0;
   Bit64u fault_rip;
@@ -90,7 +84,7 @@ struct bochs_core_overlay_first_fault_v1 {
 };
 
 static void bochs_core_overlay_copy_exception_state(BX_CPU_C *cpu,
-  bochs_core_overlay_generic_ud_event_v1 *event, unsigned vector,
+  bochs_core_overlay_generic_ud_event *event, unsigned vector,
   Bit16u error_code)
 {
   memset(event, 0, sizeof(*event));
@@ -122,16 +116,16 @@ static void bochs_core_overlay_copy_exception_state(BX_CPU_C *cpu,
 
 int BX_CPU_C::overlay_handle_exception(unsigned vector, Bit16u error_code)
 {
-#if RUNTIME_ENABLE_MANTLE_FIRST_FAULT_OBSERVER
+#if RUNTIME_ENABLE_MACHINE_FIRST_FAULT_OBSERVER
   if (vector != BX_UD_EXCEPTION) {
-    bochs_core_overlay_first_fault_v1 event;
-    bochs_core_overlay_generic_ud_event_v1 common;
+    bochs_core_overlay_first_fault event;
+    bochs_core_overlay_generic_ud_event common;
     bochs_core_overlay_copy_exception_state(this, &common, vector, error_code);
     memcpy(&event, &common, sizeof(event));
     event.magic = BOCHS_CORE_OVERLAY_FIRST_FAULT_MAGIC;
     event.abi_version = BOCHS_CORE_OVERLAY_FIRST_FAULT_VERSION;
     event.struct_bytes = sizeof(event);
-    if (bochs_core_overlay_opaque_callback_v1_invoke(&event, sizeof(event), 0, 0)) {
+    if (bochs_core_overlay_opaque_callback_invoke(&event, sizeof(event), 0, 0)) {
       bx_pc_system.kill_bochs_request = 1;
       BX_CPU_THIS_PTR async_event |= BX_ASYNC_EVENT_STOP_TRACE;
       longjmp(BX_CPU_THIS_PTR jmp_buf_env, 1);
@@ -139,11 +133,11 @@ int BX_CPU_C::overlay_handle_exception(unsigned vector, Bit16u error_code)
   }
 #endif
 
-#if RUNTIME_ENABLE_MANTLE_UD_BRIDGE
+#if RUNTIME_ENABLE_MACHINE_UD_BRIDGE
   if (vector == BX_UD_EXCEPTION) {
-    bochs_core_overlay_generic_ud_event_v1 event;
-    bochs_core_overlay_generic_ud_outcome_v2 context_outcome;
-    bochs_core_overlay_generic_ud_outcome_v1 outcome;
+    bochs_core_overlay_generic_ud_event event;
+    bochs_core_overlay_generic_ud_outcome context_outcome;
+    bochs_core_overlay_generic_ud_result16 outcome;
     bochs_core_overlay_copy_exception_state(this, &event, vector, error_code);
     bx_address offset = BX_CPU_THIS_PTR prev_rip + BX_CPU_THIS_PTR eipPageBias;
     if (BX_CPU_THIS_PTR eipFetchPtr != 0 && offset < BX_CPU_THIS_PTR eipPageWindowSize) {
@@ -154,9 +148,9 @@ int BX_CPU_C::overlay_handle_exception(unsigned vector, Bit16u error_code)
     }
 
     memset(&context_outcome, 0, sizeof(context_outcome));
-    if (bochs_core_overlay_opaque_callback_v1_invoke(&event, sizeof(event),
+    if (bochs_core_overlay_opaque_callback_invoke(&event, sizeof(event),
           &context_outcome, sizeof(context_outcome)) &&
-        context_outcome.abi_version == BOCHS_CORE_OVERLAY_GENERIC_UD_OUTCOME_V2_VERSION &&
+        context_outcome.abi_version == BOCHS_CORE_OVERLAY_GENERIC_UD_OUTCOME_VERSION &&
         context_outcome.disposition == BOCHS_CORE_OVERLAY_GENERIC_UD_RESUME &&
         context_outcome.gpr32_write_mask <= 0xffu &&
         context_outcome.segment_write_mask <= 0x3fu &&
@@ -197,7 +191,7 @@ int BX_CPU_C::overlay_handle_exception(unsigned vector, Bit16u error_code)
     }
 
     memset(&outcome, 0, sizeof(outcome));
-    if (bochs_core_overlay_opaque_callback_v1_invoke(&event, sizeof(event),
+    if (bochs_core_overlay_opaque_callback_invoke(&event, sizeof(event),
           &outcome, sizeof(outcome)) &&
         outcome.abi_version == BOCHS_CORE_OVERLAY_GENERIC_UD_EVENT_VERSION &&
         (outcome.disposition == BOCHS_CORE_OVERLAY_GENERIC_UD_RESUME ||

@@ -19,7 +19,7 @@
 
 bx_devices_c bx_devices;
 
-// BX-MANTLE-065-BEGIN
+// BX-MACHINE-065-BEGIN
 // Original no-device object lifetime and port dispatch, separated from the
 // full product/device lifecycle in iodev/devices.cc.
 bx_devices_c::bx_devices_c()
@@ -80,7 +80,7 @@ void bx_devices_c::init_stubs()
   pluginNetModCtl = &stubNetModCtl;
 #endif
 }
-// BX-MANTLE-065-END
+// BX-MACHINE-065-END
 
 // BX-IO-025-BEGIN
 bx_bool bx_devices_c::init_empty_port_space(void)
@@ -205,7 +205,7 @@ bx_bool bx_devices_c::cleanup_empty_port_space(void)
   return 1;
 }
 
-// BX-MANTLE-082-BEGIN
+// BX-MACHINE-082-BEGIN
 // Original per-port registration and cleanup used by the one native PIC.
 bx_bool bx_devices_c::register_io_read_handler(void *this_ptr, bx_read_handler_t f,
                                                Bit32u addr, const char *name, Bit8u mask)
@@ -390,7 +390,7 @@ bx_bool bx_devices_c::unregister_io_write_handler(void *this_ptr, bx_write_handl
   }
   return 1;
 }
-// BX-MANTLE-082-END
+// BX-MACHINE-082-END
 
 // BX-IO-025: fixed-width external callers need to distinguish a native
 // registered device endpoint from the retained original default handler.
@@ -404,7 +404,7 @@ bx_bool bx_devices_c::native_port_is_registered(Bit16u addr, bx_bool write) cons
     read_port_to_handler[addr] != &io_read_handlers;
 }
 
-// BX-MANTLE-065-DISPATCH-BEGIN
+// BX-MACHINE-065-DISPATCH-BEGIN
 Bit32u BX_CPP_AttrRegparmN(2)
 bx_devices_c::inp(Bit16u addr, unsigned io_len)
 {
@@ -448,5 +448,5 @@ bx_devices_c::outp(Bit16u addr, Bit32u value, unsigned io_len)
     BX_ERROR(("write to port 0x%04x with len %d ignored", addr, io_len));
   }
 }
-// BX-MANTLE-065-DISPATCH-END
+// BX-MACHINE-065-DISPATCH-END
 // BX-IO-025-END

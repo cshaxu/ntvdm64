@@ -19,8 +19,8 @@ typedef int (*runtime_xms_guest_write_fn)(void *state, uint32_t address,
     const uint8_t *buffer, uint32_t bytes);
 
 typedef struct runtime_xms_softpc_context {
-    const runtime_cpu_state_v1 *cpu;
-    runtime_cpu_result_v2 *result;
+    const runtime_cpu_state *cpu;
+    runtime_cpu_result *result;
     void *guest_state;
     runtime_xms_guest_read_fn guest_read;
     runtime_xms_guest_write_fn guest_write;

@@ -17,8 +17,8 @@
 #include <winioctl.h>
 #include "adapter-win32/include/compiler/opennt_dem_ntdecl_compat.h"
 #include "opennt_demfile_compat.h"
-#include "adapter-win32/include/legacy-api/opennt_dem_oem_facade.h"
-#include "adapter-win32/include/legacy-api/opennt_dem_gset_facade.h"
+#include "adapter-win32/include/opennt-api/opennt_dem_oem_facade.h"
+#include "adapter-win32/include/opennt-api/opennt_dem_gset_facade.h"
 /* Direct source mirror: shared exact DASD/IOCTL layout and constants. */
 #include "opennt-bop/dem/demdasd.h"
 

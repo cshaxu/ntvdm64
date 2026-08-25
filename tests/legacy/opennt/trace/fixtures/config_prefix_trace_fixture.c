@@ -8,7 +8,7 @@
 #include "pif.h"
 
 extern void config(void);
-#ifdef NTDOS64_SESSION_TRACE_SAS_SNAPSHOT
+#ifdef RUNNER_SESSION_TRACE_SAS_SNAPSHOT
 extern unsigned char *Start_of_M_area;
 extern unsigned long c_sas_memory_size(void);
 extern unsigned int c_sas_memory_type(unsigned long address);
@@ -25,33 +25,33 @@ static void trace_sas_snapshot(const char *phase) {
             c_sas_memory_type(0xa0000UL));
 }
 #endif
-#ifdef NTDOS64_SESSION_TRACE_GFI_INIT
+#ifdef RUNNER_SESSION_TRACE_GFI_INIT
 extern void gfi_init(void);
 #endif
-#ifdef NTDOS64_SESSION_TRACE_ICA_INIT
+#ifdef RUNNER_SESSION_TRACE_ICA_INIT
 extern void InitializeIcaLock(void);
 #endif
-#ifdef NTDOS64_SESSION_TRACE_TIMER_INIT
+#ifdef RUNNER_SESSION_TRACE_TIMER_INIT
 extern void TimerInit(void);
 #endif
-#ifdef NTDOS64_SESSION_TRACE_CPU_INIT
+#ifdef RUNNER_SESSION_TRACE_CPU_INIT
 extern void c_cpu_init(void);
 #endif
-#ifdef NTDOS64_SESSION_TRACE_CVIDC_WORKSPACE_INIT
+#ifdef RUNNER_SESSION_TRACE_CVIDC_WORKSPACE_INIT
 extern unsigned long setup_global_data_ptr(void);
 extern void setup_vga_globals(void);
 #endif
-#ifdef NTDOS64_SAS_SINGLE_WRITE_TRACE
+#ifdef RUNNER_SAS_SINGLE_WRITE_TRACE
 extern void c_sas_store(unsigned long address, unsigned char value);
 extern void c_sas_fills(unsigned long address, unsigned char value,
                         unsigned long length);
-extern void ntdos64_sas_single_write_trace_stop(void);
+extern void runner_sas_single_write_trace_stop(void);
 #endif
-extern jmp_buf ntdos64_config_prefix_stop_environment;
-extern int ntdos64_config_prefix_stop_reason(void);
-extern BOOL ntdos64_direct_cli_transport_begin(const char *pif_path,
+extern jmp_buf runner_config_prefix_stop_environment;
+extern int runner_config_prefix_stop_reason(void);
+extern BOOL runner_direct_cli_transport_begin(const char *pif_path,
                                                BOOL first_vdm);
-extern void ntdos64_direct_cli_transport_end(void);
+extern void runner_direct_cli_transport_end(void);
 
 static LONG WINAPI config_prefix_trace_exception_filter(
     EXCEPTION_POINTERS *exception_pointers) {
@@ -116,16 +116,16 @@ static LONG WINAPI config_prefix_trace_exception_filter(
     }
     return EXCEPTION_CONTINUE_SEARCH;
 }
-#ifdef NTDOS64_STARTUP_PREFIX_TRACE
-extern void ntdos64_startup_prefix_trace_checkpoint(int stage);
-#define NTDOS64_STARTUP_PREFIX_STAGE(stage) \
-    ntdos64_startup_prefix_trace_checkpoint(stage)
+#ifdef RUNNER_STARTUP_PREFIX_TRACE
+extern void runner_startup_prefix_trace_checkpoint(int stage);
+#define RUNNER_STARTUP_PREFIX_STAGE(stage) \
+    runner_startup_prefix_trace_checkpoint(stage)
 #else
-#define NTDOS64_STARTUP_PREFIX_STAGE(stage) ((void)0)
+#define RUNNER_STARTUP_PREFIX_STAGE(stage) ((void)0)
 #endif
 #ifdef CONFIG_PREFIX_TRACE_SAS_INIT
 extern void sas_term(void);
-extern uint8_t *ntdos64_ccpu_sm0_ram(void);
+extern uint8_t *runner_ccpu_sm0_ram(void);
 #endif
 #ifdef CONFIG_PREFIX_TRACE_SESSION_INIT
 extern int InitialiseDosEmulation(int argc, char **argv);
@@ -172,48 +172,48 @@ int main(void) {
     SetUnhandledExceptionFilter(config_prefix_trace_exception_filter);
     if (!create_minimal_pif(pif_name, sizeof(pif_name))) return 1;
     GetConsoleTitleA(prior_title, sizeof(prior_title));
-    if (!ntdos64_direct_cli_transport_begin(pif_name, TRUE)) {
+    if (!runner_direct_cli_transport_begin(pif_name, TRUE)) {
         DeleteFileA(pif_name);
         return 2;
     }
 
-    stop_result = setjmp(ntdos64_config_prefix_stop_environment);
+    stop_result = setjmp(runner_config_prefix_stop_environment);
     if (stop_result == 0) {
-        NTDOS64_STARTUP_PREFIX_STAGE(1);
-#ifdef NTDOS64_SESSION_TRACE_TIMER_INIT
+        RUNNER_STARTUP_PREFIX_STAGE(1);
+#ifdef RUNNER_SESSION_TRACE_TIMER_INIT
         /* obj.vdm/ntvdm.c performs this original pre-host_main step. */
         TimerInit();
 #endif
-#ifdef NTDOS64_SESSION_TRACE_ICA_INIT
+#ifdef RUNNER_SESSION_TRACE_ICA_INIT
         InitializeIcaLock();
 #endif
-#ifdef NTDOS64_SESSION_TRACE_GFI_INIT
+#ifdef RUNNER_SESSION_TRACE_GFI_INIT
         gfi_init();
 #endif
-        NTDOS64_STARTUP_PREFIX_STAGE(2);
+        RUNNER_STARTUP_PREFIX_STAGE(2);
         config();
-#ifdef NTDOS64_SESSION_TRACE_SAS_SNAPSHOT
+#ifdef RUNNER_SESSION_TRACE_SAS_SNAPSHOT
         trace_sas_snapshot("after-config");
 #endif
-        NTDOS64_STARTUP_PREFIX_STAGE(3);
+        RUNNER_STARTUP_PREFIX_STAGE(3);
 #if defined(CONFIG_PREFIX_TRACE_SESSION_INIT)
-#ifdef NTDOS64_SESSION_TRACE_CPU_INIT
+#ifdef RUNNER_SESSION_TRACE_CPU_INIT
         c_cpu_init();
 #endif
-#ifdef NTDOS64_SESSION_TRACE_SAS_SNAPSHOT
+#ifdef RUNNER_SESSION_TRACE_SAS_SNAPSHOT
         trace_sas_snapshot("after-cpu-init");
 #endif
-#ifdef NTDOS64_SESSION_TRACE_CVIDC_WORKSPACE_INIT
+#ifdef RUNNER_SESSION_TRACE_CVIDC_WORKSPACE_INIT
         /* Preserve base/support/main.c's original post-cpu_init ordering. */
         (void)setup_global_data_ptr();
         setup_vga_globals();
 #endif
-        NTDOS64_STARTUP_PREFIX_STAGE(4);
-#ifdef NTDOS64_SAS_SINGLE_WRITE_TRACE
+        RUNNER_STARTUP_PREFIX_STAGE(4);
+#ifdef RUNNER_SAS_SINGLE_WRITE_TRACE
         c_sas_store(0, 0);
         c_sas_store(0x9ffffUL, 0);
         c_sas_fills(0, 0, 640UL * 1024UL);
-        ntdos64_sas_single_write_trace_stop();
+        runner_sas_single_write_trace_stop();
 #endif
         InitialiseDosEmulation(0, NULL);
         result = 3;
@@ -224,51 +224,51 @@ int main(void) {
         result = 3;
 #endif
     } else {
-#ifdef NTDOS64_TRACE_PRINT_STOP_REASON
+#ifdef RUNNER_TRACE_PRINT_STOP_REASON
         fprintf(stderr, "trace-stop result=%d reason=%d\n", stop_result,
-                ntdos64_config_prefix_stop_reason());
+                runner_config_prefix_stop_reason());
 #endif
-#ifdef NTDOS64_STARTUP_PREFIX_TRACE
+#ifdef RUNNER_STARTUP_PREFIX_TRACE
         if ((stop_result < 141 || stop_result > 144) ||
-            ntdos64_config_prefix_stop_reason() != stop_result) {
+            runner_config_prefix_stop_reason() != stop_result) {
             result = 4;
         } else {
             result = 0;
         }
 #else
         if (stop_result !=
-#if defined(NTDOS64_SAS_SINGLE_WRITE_TRACE)
-               130 || ntdos64_config_prefix_stop_reason() != 130) {
-#elif defined(NTDOS64_RESET_TRACE)
-               (100 + NTDOS64_RESET_TRACE_STOP_STAGE) ||
-               ntdos64_config_prefix_stop_reason() !=
-               (100 + NTDOS64_RESET_TRACE_STOP_STAGE)) {
+#if defined(RUNNER_SAS_SINGLE_WRITE_TRACE)
+               130 || runner_config_prefix_stop_reason() != 130) {
+#elif defined(RUNNER_RESET_TRACE)
+               (100 + RUNNER_RESET_TRACE_STOP_STAGE) ||
+               runner_config_prefix_stop_reason() !=
+               (100 + RUNNER_RESET_TRACE_STOP_STAGE)) {
 #elif defined(CONFIG_PREFIX_TRACE_SESSION_VINT)
-               (40 + NTDOS64_SESSION_TRACE_VINT_STOP_STAGE) ||
-               ntdos64_config_prefix_stop_reason() !=
-               (40 + NTDOS64_SESSION_TRACE_VINT_STOP_STAGE)) {
+               (40 + RUNNER_SESSION_TRACE_VINT_STOP_STAGE) ||
+               runner_config_prefix_stop_reason() !=
+               (40 + RUNNER_SESSION_TRACE_VINT_STOP_STAGE)) {
 #elif defined(CONFIG_PREFIX_TRACE_SESSION_BEFORE_RESET)
-               38 || ntdos64_config_prefix_stop_reason() != 38) {
-#elif defined(NTDOS64_CPU_INIT_TRACE)
-               (120 + NTDOS64_CPU_INIT_TRACE_STOP_STAGE) ||
-               ntdos64_config_prefix_stop_reason() !=
-               (120 + NTDOS64_CPU_INIT_TRACE_STOP_STAGE)) {
+               38 || runner_config_prefix_stop_reason() != 38) {
+#elif defined(RUNNER_CPU_INIT_TRACE)
+               (120 + RUNNER_CPU_INIT_TRACE_STOP_STAGE) ||
+               runner_config_prefix_stop_reason() !=
+               (120 + RUNNER_CPU_INIT_TRACE_STOP_STAGE)) {
 #elif defined(CONFIG_PREFIX_TRACE_SESSION_AFTER_RESET)
-               37 || ntdos64_config_prefix_stop_reason() != 37) {
+               37 || runner_config_prefix_stop_reason() != 37) {
 #elif defined(CONFIG_PREFIX_TRACE_SESSION_AFTER_IO)
-               36 || ntdos64_config_prefix_stop_reason() != 36) {
+               36 || runner_config_prefix_stop_reason() != 36) {
 #elif defined(CONFIG_PREFIX_TRACE_SESSION_INIT)
-               22 || ntdos64_config_prefix_stop_reason() != 22) {
+               22 || runner_config_prefix_stop_reason() != 22) {
 #elif defined(CONFIG_PREFIX_TRACE_ORIGINAL_GFI)
-               18 || ntdos64_config_prefix_stop_reason() != 18) {
+               18 || runner_config_prefix_stop_reason() != 18) {
 #elif defined(CONFIG_PREFIX_TRACE_ORIGINAL_UMB)
-               7 || ntdos64_config_prefix_stop_reason() != 7) {
+               7 || runner_config_prefix_stop_reason() != 7) {
 #elif defined(CONFIG_PREFIX_TRACE_POST_CPU40)
-               6 || ntdos64_config_prefix_stop_reason() != 6) {
+               6 || runner_config_prefix_stop_reason() != 6) {
 #elif defined(CONFIG_PREFIX_TRACE_SAS_INIT)
-               5 || ntdos64_config_prefix_stop_reason() != 5) {
+               5 || runner_config_prefix_stop_reason() != 5) {
 #else
-               1 || ntdos64_config_prefix_stop_reason() != 1) {
+               1 || runner_config_prefix_stop_reason() != 1) {
 #endif
             result = 4;
         } else {
@@ -284,13 +284,13 @@ int main(void) {
         (stop_result >= 121 && stop_result <= 122) ||
         /* Stages 1/2 stop before config() and therefore before sas_init(). */
         (stop_result >= 143 && stop_result <= 144) || stop_result == 130) sas_term();
-    if (result == 0 && ntdos64_ccpu_sm0_ram() != NULL) result = 8;
+    if (result == 0 && runner_ccpu_sm0_ram() != NULL) result = 8;
 #endif
 
     SetConsoleTitleA(prior_title);
     GetConsoleTitleA(restored_title, sizeof(restored_title));
     if (result == 0 && strcmp(prior_title, restored_title) != 0) result = 5;
-    ntdos64_direct_cli_transport_end();
+    runner_direct_cli_transport_end();
     if (!DeleteFileA(pif_name) && result == 0) result = 6;
     if (result == 0 && GetFileAttributesA(pif_name) != (DWORD)-1)
         result = 7;

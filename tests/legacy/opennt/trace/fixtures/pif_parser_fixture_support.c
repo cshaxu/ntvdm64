@@ -26,6 +26,6 @@ int RcMessageBox(UINT message_id, CHAR *message_1, CHAR *message_2,
     return 0;
 }
 
-unsigned long ntdos64_pif_fixture_unexpected_callbacks(void) {
+unsigned long runner_pif_fixture_unexpected_callbacks(void) {
     return unexpected_pif_callback_count;
 }

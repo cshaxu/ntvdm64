@@ -5,7 +5,7 @@
 
 extern char *pszDefaultDOSDirectory;
 
-int __cdecl ntdos64_historical_dem_byob_profile_v1_replace_directory(const char *directory)
+int __cdecl runner_historical_dem_byob_profile_v1_replace_directory(const char *directory)
 {
     char *replacement;
     size_t length;

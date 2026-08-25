@@ -15,7 +15,7 @@ $build = [IO.Path]::GetFullPath($BuildRoot)
 if (-not $build.StartsWith($buildBase + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) { throw "BuildRoot must remain below ${buildBase}: $build" }
 if (Test-Path -LiteralPath $build) { throw "Refusing to overwrite existing build root: $build" }
 
-$sourceMvdm = Join-Path $repository 'src\opennt\base\mvdm'
+$sourceMvdm = Join-Path $repository 'src\opennt-guest\base\mvdm'
 $tools = Join-Path $repository 'tools\historical\opennt-4.5'
 $runner = Join-Path $repository 'tools\build\Invoke-DosBoxBatchWithCompletion.ps1'
 foreach ($path in @($sourceMvdm, (Join-Path $tools 'buildmsg.exe'), (Join-Path $tools 'masm.exe'), (Join-Path $tools 'link16.exe'), (Join-Path $tools 'reloc.exe'), $runner)) { if (-not (Test-Path -LiteralPath $path)) { throw "Required primary COMMAND input missing: $path" } }
@@ -55,9 +55,9 @@ $expectedHash = '908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c4
 if (-not (Test-Path -LiteralPath $output) -or (Get-Item -LiteralPath $output).Length -ne 50384 -or (Get-Sha256 $output) -ne $expectedHash) { throw "Primary COMMAND identity mismatch: $output" }
 
 $manifest = [ordered]@{
-    schema = 'ntdos64.t225.s8.command-primary-source-build.v1'
+    schema = 'ntvdm64.t225.s8.command-primary-source-build.v1'
     classification = 'primary-original-toolchain-source-built'
-    source = [ordered]@{ managedRoot = 'src/opennt'; upstreamRevision = '5c5b979ec08c17d3ca2eb70e8aad62d26515d01c'; guestSourceTransforms = @() }
+    source = [ordered]@{ managedRoot = 'src/opennt-guest'; upstreamRevision = '5c5b979ec08c17d3ca2eb70e8aad62d26515d01c'; guestSourceTransforms = @() }
     tools = [ordered]@{ buildmsg = Get-Sha256 (Join-Path $tools 'buildmsg.exe'); masm = Get-Sha256 (Join-Path $tools 'masm.exe'); link16 = Get-Sha256 (Join-Path $tools 'link16.exe'); reloc = Get-Sha256 (Join-Path $tools 'reloc.exe') }
     modules = $modules
     output = [ordered]@{ relativePath = 'base/mvdm/dos/v86/cmd/command/COMMAND.COM'; bytes = 50384; sha256 = $expectedHash }

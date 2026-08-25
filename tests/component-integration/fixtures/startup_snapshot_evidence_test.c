@@ -1,0 +1,44 @@
+#include <windows.h>
+#include <string.h>
+
+#include "startup_snapshot_evidence.h"
+
+int main(void)
+{
+    wchar_t root[MAX_PATH], path[MAX_PATH];
+    HANDLE file;
+    DWORD read = 0u;
+    char text[1024] = { 0 };
+    runtime_exception_event event;
+    runtime_cpu_state state;
+    runtime_startup_snapshot_range ranges[2] = {
+        { 1u, 0u, { 64u, 2u } }, { 2u, 0u, { 1812u, 1u } }
+    };
+    runtime_startup_snapshot_transaction transaction;
+    const uint8_t output[] = { 0x12u, 0x34u, 0x56u };
+    memset(&event, 0, sizeof(event));
+    event.magic = RUNTIME_EXCEPTION_ABI_MAGIC;
+    event.abi_version = RUNTIME_EXCEPTION_ABI_VERSION;
+    event.struct_bytes = sizeof(event);
+    event.kind = RUNTIME_EXCEPTION_EVENT_CPU_EXCEPTION;
+    event.vector = 6u; event.fault_rip = 0x7c00u;
+    runtime_cpu_state_initialize(&state, RUNTIME_CPU_EXECUTION_REAL);
+    state.eip = 0x7c00u; state.cs = 0u;
+    runtime_startup_snapshot_transaction_initialize(&transaction, &event,
+        &state, ranges, 2u);
+    if (GetTempPathW(MAX_PATH, root) == 0 || GetTempFileNameW(root, L"n64", 0u, root) == 0 ||
+        !DeleteFileW(root) || !CreateDirectoryW(root, 0) ||
+        !runtime_startup_snapshot_evidence_write(root, L"evidence.json",
+            &transaction, output, sizeof(output), UINT64_C(0x1122334455667788)) ||
+        runtime_startup_snapshot_evidence_write(root, L"..\\bad.json",
+            &transaction, output, sizeof(output), 0u)) return 1;
+    swprintf(path, MAX_PATH, L"%ls\\evidence.json", root);
+    file = CreateFileW(path, GENERIC_READ, 0, 0, OPEN_EXISTING, 0, 0);
+    if (file == INVALID_HANDLE_VALUE || !ReadFile(file, text, sizeof(text) - 1u, &read, 0)) return 2;
+    CloseHandle(file);
+    DeleteFileW(path); RemoveDirectoryW(root);
+    return strstr(text, "ntvdm64-startup-snapshot-evidence") == 0 ||
+        strstr(text, "\"bytes_hex\":\"1234\"") == 0 ||
+        strstr(text, "\"bytes_hex\":\"56\"") == 0 ||
+        strstr(text, "1122334455667788") == 0;
+}

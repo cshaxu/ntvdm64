@@ -15,7 +15,7 @@ int runtime_xms_native_session_initialize(
 int runtime_xms_native_session_bind(runtime_xms_native_session *session);
 void runtime_xms_native_session_unbind(runtime_xms_native_session *session);
 int runtime_xms_native_session_dispatch(
-    const struct runtime_generic_ud_event_v1 *event,
-    struct runtime_generic_ud_outcome_v1 *outcome);
+    const struct runtime_generic_ud_event *event,
+    struct runtime_generic_ud_outcome *outcome);
 
 #endif
