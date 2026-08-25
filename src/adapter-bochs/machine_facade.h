@@ -8,6 +8,12 @@ extern "C" {
 #endif
 
 typedef void (*machine_facade_v1_timer_callback)(void *opaque);
+typedef int (*machine_facade_v1_opaque_callback)(void *context,
+    const void *event, unsigned event_bytes, void *outcome, unsigned outcome_bytes);
+
+int machine_facade_v1_bind_opaque_callback(
+    machine_facade_v1_opaque_callback callback, void *context);
+void machine_facade_v1_unbind_opaque_callback(void);
 
 int machine_facade_v1_get_a20(uint32_t *enabled);
 int machine_facade_v1_set_a20(uint32_t enabled);

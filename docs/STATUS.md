@@ -117,6 +117,8 @@ component directly includes `bochs-core-overlay`.
 | Original Owner Request | “S4. 按照镜像组件审计规则，把bochs-core里面的大幅度修改部分，送进 bochs-core-overlay”. |
 | Similar-Issue Sweep | CPU #UD/observer paths, memory helpers, real-mode entry/profile, PIC/keyboard lifecycle bridges, build-root redirects and overlay privacy. |
 
+**S4 closure:** all admitted oversized Bochs bodies now live in private `bochs-core-overlay`: #UD/first-fault, SIM-free checked RAM, real/V86 entry/profile, and all admitted copied observers. `bochs-core` has no direct external include; the overlay has no external consumer; `adapter-softpc` has no direct Bochs type/header/global import. Formal changed-object and library links pass, and physical-write, checked-RAM, RAM-preflight and opaque-BOP-ingress fixtures exit zero. The known generic-context diagnostic exit 2 remains non-pass evidence. See the [S4 overlay audit](etc/evidence/m0-t265-s4-bochs-core-overlay-audit-001.md).
+
 ### M0 T264 S1 — project code filename inventory
 
 | Field | Record |

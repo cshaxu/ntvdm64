@@ -28,11 +28,11 @@
 #include <setjmp.h>
 
 #ifndef RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+#if defined(BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION)
+#define RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+#else
 #define RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION 0
 #endif
-
-#if RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
-#include "adapter-softpc/physical_write_observation.h"
 #endif
 
 // <TAG-DEFINES-DECODE-START>
@@ -533,17 +533,11 @@ BOCHSAPI extern BX_CPU_C   bx_cpu;
 
 // notify internal debugger/instrumentation about memory access
 #if RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
-#define RUNTIME_OBSERVE_LIN_MEMORY_WRITE(paddr, size, rw, dataptr) {                  \
-  if ((rw) == BX_WRITE) {                                                               \
-    runtime_physical_write_observation_v1_record((uint64_t)(paddr),                  \
-      (uint32_t)(size), (dataptr), (uint64_t)BX_CPU_THIS_PTR get_icount(),             \
-      (uint64_t)BX_CPU_THIS_PTR prev_rip,                                               \
-      (uint64_t)BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].cache.u.segment.base,             \
-      BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value,                             \
-      BX_CPU_THIS_PTR sregs[BX_SEG_REG_SS].selector.value,                             \
-      BX_CPU_THIS_PTR get_reg16(BX_16BIT_REG_SP));                                      \
-  }                                                                                      \
-}
+#define RUNTIME_OBSERVE_LIN_MEMORY_WRITE(paddr, size, rw, dataptr) do {                \
+  if ((rw) == BX_WRITE)                                                                 \
+    BX_CPU_THIS_PTR overlay_observe_physical_write((Bit64u)(paddr),                    \
+      (unsigned)(size), (dataptr));                                                     \
+} while (0)
 #else
 #define RUNTIME_OBSERVE_LIN_MEMORY_WRITE(paddr, size, rw, dataptr) ((void)0)
 #endif
@@ -928,12 +922,25 @@ public: // for now...
   // state outside CS:RIP. Callers own validation and lifecycle policy.
   void apply_real_mode_entry(Bit16u cs, Bit32u eip);
 
+  void overlay_initialize_realmode_profile(void);
   // Default-off real/V86 segment-span compatibility gate.  The CPU retains
   // native protected-mode behavior.
   void set_realmode_segment_limit_compatibility(bx_bool enabled);
   BX_CPP_INLINE bx_bool realmode_segment_limit_compatibility_active(void);
 
+  /* DIVERGENCE(BX-UD-002): one private overlay exception hook.  The mirror
+   * supplies no event fields, provider identity or guest-service meaning. */
+  int overlay_handle_exception(unsigned vector, Bit16u error_code);
+
+  void overlay_observe_segment_access(unsigned segment_index,
+    const bx_segment_reg_t *segment, Bit32u offset, Bit32u branch_kind);
+
   unsigned bx_cpuid;
+  void overlay_observe_interrupt_return(unsigned width);
+  void overlay_observe_software_interrupt(unsigned vector);
+  void overlay_observe_instruction_history(void);
+  void overlay_observe_physical_write(Bit64u address, unsigned count,
+    const void *bytes);
 
 #if BX_CPU_LEVEL >= 4
   bx_cpuid_t *cpuid;

@@ -34,24 +34,15 @@ typedef void BX_INSF_TYPE;
 #if BX_SUPPORT_HANDLERS_CHAINING_SPEEDUPS
 
 #ifndef RUNTIME_ENABLE_MANTLE_INSTRUCTION_HISTORY
+#if defined(BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY)
+#define RUNTIME_ENABLE_MANTLE_INSTRUCTION_HISTORY BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
+#else
 #define RUNTIME_ENABLE_MANTLE_INSTRUCTION_HISTORY 0
+#endif
 #endif
 
 #if RUNTIME_ENABLE_MANTLE_INSTRUCTION_HISTORY
-#include "adapter-softpc/instruction_history.h"
-#define RUNTIME_RECORD_INSTRUCTION_HISTORY() do { \
-  runtime_instruction_history_record_v1 runtime_history_record; \
-  runtime_history_record.version = RUNTIME_INSTRUCTION_HISTORY_V1_VERSION; \
-  runtime_history_record.cpu_id = BX_CPU_ID; \
-  runtime_history_record.sequence = BX_CPU_THIS_PTR icount; \
-  runtime_history_record.rip = BX_CPU_THIS_PTR prev_rip; \
-  runtime_history_record.cs = BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value; \
-  runtime_history_record.ss = BX_CPU_THIS_PTR sregs[BX_SEG_REG_SS].selector.value; \
-  runtime_history_record.sp = SP; \
-  runtime_history_record.bp = BP; \
-  runtime_history_record.reserved0 = 0; \
-  runtime_mantle_instruction_history_v1_record(&runtime_history_record); \
-} while (0)
+#define RUNTIME_RECORD_INSTRUCTION_HISTORY() BX_CPU_THIS_PTR overlay_observe_instruction_history()
 #else
 #define RUNTIME_RECORD_INSTRUCTION_HISTORY() do { } while (0)
 #endif

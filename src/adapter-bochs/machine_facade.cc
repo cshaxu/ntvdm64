@@ -1,11 +1,24 @@
 #include "bochs.h"
 #include "bochs-core/memory/memory.h"
 #include "bochs-core/cpu/cpu.h"
+#include "bochs-core/cpu/opaque_callback.h"
 #include "bochs-core/pc_system.h"
 #include "machine_facade.h"
 #include "minimal_machine.h"
 
 static bx_mantle_minimal_machine_c *machine_facade_machine;
+
+extern "C" int machine_facade_v1_bind_opaque_callback(
+  machine_facade_v1_opaque_callback callback, void *context)
+{
+  return bochs_core_opaque_callback_v1_bind(
+    (bochs_core_opaque_callback_v1) callback, context);
+}
+
+extern "C" void machine_facade_v1_unbind_opaque_callback(void)
+{
+  bochs_core_opaque_callback_v1_unbind();
+}
 
 extern "C" int machine_facade_v1_get_a20(uint32_t *enabled)
 {

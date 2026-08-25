@@ -3,12 +3,23 @@
 #include "bochs-core/memory/memory.h"
 #include "adapter-bochs/minimal_machine.h"
 #include "adapter-softpc/physical_write_observation.h"
+#include "adapter-bochs/machine_facade.h"
 
-extern "C" int runtime_mantle_generic_ud_bridge_v1(
-  const struct runtime_generic_ud_event_v1 *,
-  struct runtime_generic_ud_outcome_v1 *)
-{ return 0; }
-
+static int observe_physical_write(void *, const void *event, unsigned event_bytes,
+  void *, unsigned)
+{
+  const struct runtime_physical_write_observation_v1 *record;
+  uint32_t tag;
+  if (event == 0 || event_bytes != sizeof(*record) + sizeof(tag)) return 0;
+  record = (const struct runtime_physical_write_observation_v1 *)event;
+  memcpy(&tag, (const uint8_t *)event + sizeof(*record), sizeof(tag));
+  if (record->magic != RUNTIME_PHYSICAL_WRITE_OBSERVATION_V1_MAGIC ||
+      tag != 0x42585057u) return 0;
+  runtime_physical_write_observation_v1_record(record->physical_address,
+    record->byte_count, record->bytes, record->sequence, record->rip,
+    record->cs_base, record->cs, record->ss, record->sp);
+  return 1;
+}
 int main()
 {
   bx_mantle_minimal_machine_c machine;
@@ -16,6 +27,7 @@ int main()
   Bit8u first = 0x5a, second[2] = {0xa5, 0x3c}, actual[2] = {0, 0};
 
   runtime_physical_write_observation_v1_reset();
+  if (!machine_facade_v1_bind_opaque_callback(observe_physical_write, 0)) return 10;
   if (runtime_physical_write_observation_v1_configure(0x200u, 0u) ||
       runtime_physical_write_observation_v1_copy(&value)) return 1;
   if (machine.initialize(0x200000u, 0x200000u) != BX_MANTLE_MINIMAL_MACHINE_OK)
@@ -50,5 +62,6 @@ int main()
       value.physical_address != 0x301u || value.bytes[0] != second[0]) return 7;
   runtime_physical_write_observation_v1_reset();
   if (runtime_physical_write_observation_v1_copy(&value)) return 8;
+  machine_facade_v1_unbind_opaque_callback();
   return machine.cleanup() == BX_MANTLE_MINIMAL_MACHINE_OK ? 0 : 9;
 }

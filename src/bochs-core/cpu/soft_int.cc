@@ -26,31 +26,15 @@
 /* DIVERGENCE(BX-CORE-DIV-003): retained default-off copied software-interrupt observation. */
 
 #ifndef RUNTIME_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
+#if defined(BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION)
+#define RUNTIME_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
+#else
 #define RUNTIME_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION 0
+#endif
 #endif
 
 #if RUNTIME_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
-#include "adapter-softpc/software_interrupt_observation.h"
-#define RUNTIME_RECORD_SOFTWARE_INTERRUPT(vector_value) do { \
-  if (BX_CPU_THIS_PTR real_mode() || BX_CPU_THIS_PTR v8086_mode()) { \
-    struct runtime_software_interrupt_observation_v1_record record; \
-    record.version = RUNTIME_SOFTWARE_INTERRUPT_OBSERVATION_V1_VERSION; \
-    record.cpu_id = BX_CPU_ID; \
-    record.sequence = BX_CPU_THIS_PTR icount; \
-    record.rip = RIP; \
-    record.eflags = BX_CPU_THIS_PTR read_eflags(); \
-    record.cs = BX_CPU_THIS_PTR sregs[BX_SEG_REG_CS].selector.value; \
-    record.ss = BX_CPU_THIS_PTR sregs[BX_SEG_REG_SS].selector.value; \
-    record.sp = SP; \
-    record.ax = AX; record.bx = BX; record.cx = CX; record.dx = DX; \
-    record.ds = BX_CPU_THIS_PTR sregs[BX_SEG_REG_DS].selector.value; \
-    record.es = BX_CPU_THIS_PTR sregs[BX_SEG_REG_ES].selector.value; \
-    record.vector = (Bit8u)(vector_value); \
-    record.execution_mode = BX_CPU_THIS_PTR real_mode() ? 1u : 3u; \
-    record.reserved0 = 0u; \
-    runtime_mantle_software_interrupt_observation_v1_record(&record); \
-  } \
-} while (0)
+#define RUNTIME_RECORD_SOFTWARE_INTERRUPT(vector_value) BX_CPU_THIS_PTR overlay_observe_software_interrupt((vector_value))
 #else
 #define RUNTIME_RECORD_SOFTWARE_INTERRUPT(vector_value) do { } while (0)
 #endif

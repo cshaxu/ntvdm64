@@ -18,6 +18,9 @@ typedef int (*runtime_bop_route_v1)(
 int runtime_bop_ingress_v1_bind(runtime_bop_route_v1 route, void *context);
 void runtime_bop_ingress_v1_unbind(void);
 int runtime_bop_ingress_v1_bound(void);
+int runtime_bop_ingress_v1_opaque_callback(void *context,
+    const void *event, unsigned event_bytes, void *outcome,
+    unsigned outcome_bytes);
 
 #ifdef __cplusplus
 }

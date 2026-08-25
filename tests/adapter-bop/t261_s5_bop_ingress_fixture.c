@@ -35,6 +35,11 @@ int main(void)
     if (!runtime_mantle_generic_ud_bridge_v1(&event, &outcome) || calls != 1 ||
         outcome.disposition != RUNTIME_GENERIC_UD_RESUME ||
         outcome.resume_rip != 0x1003u) return 3;
+    memset(&outcome, 0, sizeof(outcome));
+    if (!runtime_bop_ingress_v1_opaque_callback(0, &event, sizeof(event),
+            &outcome, sizeof(outcome)) || calls != 2 ||
+        outcome.disposition != RUNTIME_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x1003u) return 5;
     runtime_bop_ingress_v1_unbind();
     return !runtime_bop_ingress_v1_bound() &&
         !runtime_mantle_generic_ud_bridge_v1(&event, &outcome) ? 0 : 4;

@@ -38,11 +38,11 @@
 //
 
 #ifndef RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+#if defined(BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION)
+#define RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
+#else
 #define RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION 0
 #endif
-
-#if RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
-#include "adapter-softpc/physical_write_observation.h"
 #endif
 
 void BX_MEM_C::writePhysicalPage(BX_CPU_C *cpu, bx_phy_address addr, unsigned len, void *data)
@@ -67,12 +67,7 @@ void BX_MEM_C::writePhysicalPage(BX_CPU_C *cpu, bx_phy_address addr, unsigned le
 
   if (cpu != NULL) {
 #if RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
-    runtime_physical_write_observation_v1_record((uint64_t)a20addr,
-      (uint32_t)len, data, cpu->get_icount(), (uint64_t)cpu->prev_rip,
-      (uint64_t)cpu->sregs[BX_SEG_REG_CS].cache.u.segment.base,
-      cpu->sregs[BX_SEG_REG_CS].selector.value,
-      cpu->sregs[BX_SEG_REG_SS].selector.value,
-      cpu->get_reg16(BX_16BIT_REG_SP));
+    cpu->overlay_observe_physical_write((Bit64u)a20addr, len, data);
 #endif
 #if BX_SUPPORT_IODEBUG
     bx_devices.pluginIODebug->mem_write(cpu, a20addr, len, data);

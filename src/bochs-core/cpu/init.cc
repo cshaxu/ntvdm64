@@ -45,8 +45,8 @@ BX_CPU_C::BX_CPU_C(unsigned id): bx_cpuid(id)
   put(logname, name);
 
   isa_extensions_bitmask = BX_SUPPORT_FPU ? BX_ISA_X87 : 0;
+  overlay_initialize_realmode_profile();
   cpu_extensions_bitmask = 0;
-  realmode_segment_limit_compatibility = 0;
 #if BX_SUPPORT_VMX
   vmx_extensions_bitmask = 0;
 #endif
@@ -55,28 +55,6 @@ BX_CPU_C::BX_CPU_C(unsigned id): bx_cpuid(id)
 #endif
 }
 
-void BX_CPU_C::set_realmode_segment_limit_compatibility(bx_bool enabled)
-{
-  realmode_segment_limit_compatibility = enabled ? 1 : 0;
-}
-
-void BX_CPU_C::apply_real_mode_state(Bit32u eax, Bit32u ebx, Bit32u ecx, Bit32u edx,
-  Bit32u esi, Bit32u edi, Bit32u ebp, Bit32u esp, Bit32u eip, Bit32u eflags,
-  Bit16u cs, Bit16u ds, Bit16u es, Bit16u ss, Bit16u fs, Bit16u gs)
-{
-  EAX=eax; EBX=ebx; ECX=ecx; EDX=edx; ESI=esi; EDI=edi; EBP=ebp; ESP=esp;
-  load_seg_reg(&sregs[BX_SEG_REG_CS], cs); load_seg_reg(&sregs[BX_SEG_REG_DS], ds);
-  load_seg_reg(&sregs[BX_SEG_REG_ES], es); load_seg_reg(&sregs[BX_SEG_REG_SS], ss);
-  load_seg_reg(&sregs[BX_SEG_REG_FS], fs); load_seg_reg(&sregs[BX_SEG_REG_GS], gs);
-  RIP=eip; setEFlags(eflags);
-}
-
-void BX_CPU_C::apply_real_mode_entry(Bit16u cs, Bit32u eip)
-{
-  load_seg_reg(&sregs[BX_SEG_REG_CS], cs);
-  RIP=eip;
-  invalidate_prefetch_q();
-}
 
 #if BX_WITH_WX
 
