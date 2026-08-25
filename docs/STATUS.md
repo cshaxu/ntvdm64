@@ -44,6 +44,13 @@ the cross-component source-body include without creating a new PIF ABI. The
 direct PIF and host fixtures passed after a 486/486 formal build; the separate
 COMMAND lifecycle fixture did not progress and is recorded as non-S3 evidence.
 See [S3 owner-edge evidence](etc/evidence/m0-t269-s3-opennt-host-pif-owner-edge-001.md).
+
+**S4 / T269 closure:** final audit records six exact host mirrors, four
+registered source-shaped mirrors and three private binding fragments, with no
+external overlay consumer or cross-component host-body include. Formal Ninja
+is incrementally clean and both focused PIF/host fixtures pass. The detailed
+conformance record is [T269 S4 evidence](etc/evidence/m0-t269-s4-opennt-host-final-conformance-001.md);
+the closed-task record is [T269 history](history/m0-t269-closure-20260825.md).
 ## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition
