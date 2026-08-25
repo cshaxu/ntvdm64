@@ -24,6 +24,13 @@ and MAP/SYM companions are retained at the same relative paths below
 artifacts. Their per-file OpenNT/OpenNT-4.5 source paths and hashes are recorded in
 `docs/etc/evidence/m0-t262-s3-opennt-guest-binary-import-001.md`.
 
+T270/S2 independently rechecked the complete production component: 676
+`dos-v86` files, 2 WOW16 include files, 42 system-font files and 10 `bin86`
+files are all byte-identical to their selected original roots. There is no
+guest overlay and no locally authored production source. The identity and
+current 113-artifact staging result are recorded in
+`docs/etc/evidence/m0-t270-s2-opennt-guest-mirror-closure-001.md`.
+
 This component is guest content, never an in-process host provider library.
 It may communicate with host behavior only through the guest's original
 instruction/BOP/interrupt contracts.
