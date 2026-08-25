@@ -2,10 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T265 S4 — bochs-core mirror/overlay convergence.** S1 governance
-closed in `ff2d0d70`; S2 root migration closed in `d67c130b`; S3 provenance
-migration returned adopted Bochs material to mirror/overlay ownership and left
-only project-authored, Bochs-only assembly in `adapter-bochs`.
+**Active: M0 T265 S5 — opennt-host mirror/overlay convergence.** S5 implementation and closure evidence are complete; this remains the current governed packet until its verified closure commit is recorded.
 
 ## Active Packet
 
@@ -118,6 +115,25 @@ component directly includes `bochs-core-overlay`.
 | Similar-Issue Sweep | CPU #UD/observer paths, memory helpers, real-mode entry/profile, PIC/keyboard lifecycle bridges, build-root redirects and overlay privacy. |
 
 **S4 closure:** all admitted oversized Bochs bodies now live in private `bochs-core-overlay`: #UD/first-fault, SIM-free checked RAM, real/V86 entry/profile, and all admitted copied observers. `bochs-core` has no direct external include; the overlay has no external consumer; `adapter-softpc` has no direct Bochs type/header/global import. Formal changed-object and library links pass, and physical-write, checked-RAM, RAM-preflight and opaque-BOP-ingress fixtures exit zero. The known generic-context diagnostic exit 2 remains non-pass evidence. See the [S4 overlay audit](etc/evidence/m0-t265-s4-bochs-core-overlay-audit-001.md).
+
+### M0 T265 S5 — opennt-host mirror/overlay convergence
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T265 S5`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner-approved T265 implementation; S4 is closed and S5 is the next approved packet in the admitted proposal. |
+| Objective | Audit every differing `opennt-host` mirror file against its pinned OpenNT baseline; move only an oversized new semantic body to private `opennt-host-overlay`, while retaining valid original subsets and same-shaped minimal edits. |
+| Non-goals | No BOP enablement, provider expansion, Win32/Redirector/WOW recovery, or removal of valid original source merely to improve a diff statistic. |
+| Reference Baseline | T265 proposal S5, `refs/opennt`, current `opennt-host` README register and T262/T263 host evidence. |
+| Files And ABI Surface | `opennt-host`, a possible private `opennt-host-overlay`, README/register, formal manifest and existing host-focused fixture only. |
+| Applicable Rules | Mirror subset/modification/overlay standard; source recovery ladder; no generic compatibility owner; overlay privacy. |
+| Verification | Per-file source comparison, `DIVERGENCE`/README correspondence, source-first disposition, manifest closure, focused host fixture, governance and `git diff --check`. |
+| Expected Markers | Every host file is exact original, valid true subset, same-shaped minimal modification, or a smallest mirror call boundary to its own private overlay. |
+| Stop Conditions | A move changes reached host behavior, requires a new generic facade, loses original control/failure semantics, or would create an overlay consumer outside `opennt-host`. |
+| Exit Criteria | Complete host ledger and README register show no oversized self-authored body remains in `opennt-host`; any overlay is private; formal focused evidence passes. |
+| Original Owner Request | “S5. 按照镜像组件审计规则，把 opennt-host 里面的大幅度修改部分，送进 opennt-host-overlay”. |
+| Similar-Issue Sweep | Original path identity, cropped product-shell blocks, header locations, adapter boundaries, link names, direct Bochs access and false source-derived providers. |
+**S5 closure:** seven host files remain byte-identical OpenNT sources; four are registered source-shaped subsets/minimal edits. Three previously oversized NT4 product-binding declaration blocks are now private `opennt-host-overlay` fragments, with no external consumer. Formal Ninja compiled the changed host objects and `t263-s8-opennt-host-mirror-fixture.exe` linked and exited zero. See the [S5 audit](etc/evidence/m0-t265-s5-opennt-host-overlay-audit-001.md).
 
 ### M0 T264 S1 — project code filename inventory
 

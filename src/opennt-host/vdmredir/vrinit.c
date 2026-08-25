@@ -31,11 +31,10 @@ Revision History:
 
 #include <windows.h>
 
-/* DIVERGENCE(HOST-DIV-017): OpenNT exports this function from a separately
- * loaded VDMREDIR DLL. The statically composed importer retains the original
- * function-pointer ABI, so only the emitted provider symbol is privately
- * renamed; the retained source spelling below is unchanged. */
-#define VrInitialized runtime_vr_initialized_provider
+/* DIVERGENCE(HOST-DIV-017): private static-provider link binding. */
+#include "opennt-host-overlay/vdmredir/vrinit_bindings.h"
+/* DIVERGENCE(HOST-DIV-022): this reached provider-only subset crops the
+ * original VrInitialize/VrUninitialize NT4 VDD/NetBIOS/DLC product shell. */
 
 //
 // data

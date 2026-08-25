@@ -51,3 +51,14 @@ departure from an identified OpenNT definition marked in code as
 
 The pre-T260 PIF original and other uncompiled historical inputs are evidence,
 not a second provider. They reside under `docs/etc/legacy_code/opennt-host/`.
+## T265 S5 private-overlay disposition
+
+The following registered exceptions retain only a one-include boundary in the
+OpenNT mirror; their previously in-file multi-line binding/declaration blocks
+now live in `opennt-host-overlay`, which has no external consumer.
+
+| IDs | Private overlay fragment | Mirror boundary |
+| --- | --- | --- |
+| `HOST-DIV-012`, `HOST-DIV-014` | `../opennt-host-overlay/softpc.new/host/src/nt_error_bindings.h` | `softpc.new/host/src/nt_error.c` |
+| `HOST-DIV-017` | `../opennt-host-overlay/vdmredir/vrinit_bindings.h` | `vdmredir/vrinit.c` |
+| `HOST-DIV-024`, `HOST-DIV-025` | `../opennt-host-overlay/vdmredir/vrnmpipe_product_seams.h` | `vdmredir/vrnmpipe.c` |

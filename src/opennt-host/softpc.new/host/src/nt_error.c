@@ -4,7 +4,8 @@
 
 #include "nt_uis.h"
 #include "host_rrr.h"
-#include "adapter-win32/facade/opennt_error_dialog_facade.h"
+/* DIVERGENCE(HOST-DIV-012,HOST-DIV-014): private same-shaped NT4 product bindings. */
+#include "opennt-host-overlay/softpc.new/host/src/nt_error_bindings.h"
 /*
  * SoftPC Revision 2.0
  *
@@ -22,27 +23,6 @@
  *                    Quit, Reset, Continue, Setup
  *
  */
-
-/* DIVERGENCE(HOST-DIV-012): the original NTVDM TLS index is product-global
- * state. Preserve its TlsGetValue/TlsSetValue call shape through the
- * session-resettable adapter-owned per-thread category bits. */
-#define TlsGetValue(index) ((LPVOID)(ULONG_PTR) \
-    runtime_opennt_direct_access_category_bits_get())
-#define TlsSetValue(index, value) \
-    runtime_opennt_direct_access_category_bits_set((DWORD)(ULONG_PTR)(value))
-
-/* DIVERGENCE(HOST-DIV-014): the private NTVDM resource table and dialog
- * product shell are unavailable to an unpack-and-run process. Keep the
- * original LoadString/ErrorDialogBox expressions and map only those calls to
- * the same-shaped public-Win32 facade. */
-#ifdef LoadString
-#undef LoadString
-#endif
-#define LoadString(module, id, buffer, count) \
-    runtime_opennt_direct_access_load_string((id), (buffer), (count))
-#define ErrorDialogBox(message, edit, options) \
-    runtime_opennt_direct_access_dialog((message))
-#define szDoomMsg runtime_opennt_direct_access_fallback_message()
 
 DWORD TlsDirectError;
 //

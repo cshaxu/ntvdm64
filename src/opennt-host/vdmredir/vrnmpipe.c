@@ -79,50 +79,16 @@ Revision History:
 
 --*/
 
-/* DIVERGENCE(HOST-DIV-024): the original provider selected DLL exports
- * through VDMREDIR_DLL. The recovered host body is statically linked, so
- * retain the original header and select only that provider declaration branch. */
 #include <windows.h>
 #include <ntrtl.h>
-#define VDMREDIR_DLL
+
+/* DIVERGENCE(HOST-DIV-024,HOST-DIV-025): private static-provider/product manifests. */
+#include "opennt-host-overlay/vdmredir/vrnmpipe_product_seams.h"
 #include "opennt-host/inc/vrnmpipe.h"
 
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-
-/* DIVERGENCE(HOST-DIV-025): broad NT4 CCPU/VDM headers also declare
- * unconnected async Redirector and raw guest-pointer product services. The
- * retained synchronous source blocks require only these original pure manifests. */
-#define IS_ASCII_PATH_SEPARATOR(ch) (((ch) == '/') || ((ch) == '\\'))
-#define LOCAL_DEVICE_PREFIX "\\\\."
-#define ARGUMENT_PRESENT(value) ((value) != NULL)
-#define ASSERT(value) ((void)0)
-#define ROUND_UP_COUNT(count, alignment) \
-    (((count) + ((alignment) - 1u)) & ~((alignment) - 1u))
-//
-// manifests
-//
-
-//#define NAMED_PIPE_TIMEOUT  300000  // 5 minutes
-#define NAMED_PIPE_TIMEOUT  INFINITE
-
-//
-// private data types
-//
-
-//
-// OVERLAPPED_PIPE_IO - retains the original local layout used by synchronous
-// ReadFile/WriteFile overlapped operations.  Its VDD cancellation ownership is
-// explicitly not admitted; see HOST-DIV-015 at the original call sites.
-//
-
-typedef struct _OVERLAPPED_PIPE_IO {
-    struct _OVERLAPPED_PIPE_IO* Next;
-    DWORD Thread;
-    BOOL Cancelled;
-    OVERLAPPED Overlapped;
-} OVERLAPPED_PIPE_IO, *POVERLAPPED_PIPE_IO;
 #undef PRIVATE
 #define PRIVATE /* static */            // actually, want to see routines in FREE build
 PRIVATE
