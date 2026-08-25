@@ -25,6 +25,7 @@
 | Exit Criteria | No live configuration/instruction references deleted `src/bx-vdm`/`src/cli`; current documentation names only the formal Ninja route; both retained reconstructed-monitor fixture executables compile and pass under their one coherent type contract; evidence and governance checks are recorded. |
 | Original Owner Request | “请你即刻准入一个新的T任务帮我修复上述全部这些问题。” |
 | Similar-Issue Sweep | Root build files, README/CONTRIBUTING commands, formal Ninja manifest/generator, CMake and CTest references, all reconstructed-monitor test/header/source identifiers, and legacy-code indexing. |
+**S1 / T267 closure:** Root CMake is removed; the live component/tool/configuration scan has no deleted-root consumer; semantic reconstructed-monitor fixtures compile and pass; the repaired formal Ninja graph completes externally and is no-work clean. See [T267 evidence](etc/evidence/m0-t267-s1-build-entrypoint-and-reconstructed-monitor-closure-001.md).
 
 ## Closed Packet Archive
 

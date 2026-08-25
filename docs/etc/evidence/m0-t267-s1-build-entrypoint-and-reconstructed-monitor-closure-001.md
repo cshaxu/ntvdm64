@@ -29,12 +29,16 @@ against its own declared contract?
 5. The active source/tool/test scan, excluding indexed historical records,
    finds no `src/bx-vdm` or `src/cli` consumer. It also finds no
    `app_s4_`, `ntdos64_s4_`, or monitor filename carrying `s4`.
-6. Fresh external formal Ninja generation succeeds and its 485-edge dry run resolves`n   owned current component inputs. The required full sequential Ninja execution`n   is running outside the sandbox to avoid the prior parallel MSVC output-pipe`n   failure; it is not yet claimed as a completed source-build verdict.
+6. Fresh external formal Ninja generation succeeds and its 485-edge dry run
+   resolves owned current component inputs. A full sequential external build
+   first exposed one missing `adapter-softpc/instruction_history.cc` graph input
+   at the final application link. The generator was corrected, the 81 affected
+   edges were rebuilt, and both `ninja -j1` and the following no-work invocation
+   pass.
 
 ## Interpretation
 
 The stale CMake and mismatched reconstructed-monitor contract are closed.
-The current formal build graph is independent of the retired roots. The
-parallel Ninja/MSVC pipe failure needs a serialized external execution check
-before this task can claim a full formal build pass; it does not recreate a
-CMake or old-path dependency.
+The current formal build graph is independent of the retired roots and now has a
+full external source-build and no-work verdict. The corrected input is a build-
+graph closure repair; it does not recreate a CMake or old-path dependency.

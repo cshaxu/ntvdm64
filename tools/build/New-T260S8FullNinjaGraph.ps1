@@ -62,11 +62,11 @@ foreach ($input in @($manifestPath, $vs, (Join-Path $root 'tools\build\Project-B
 }
 $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
 $requiredPlatformLibraries = @('advapi32.lib', 'comctl32.lib', 'gdi32.lib', 'ntdll.lib')
-if ($InstructionHistoryDiagnostic -or $InstructionHistoryProvenanceDiagnostic) {
-    $softpc = @($manifest.modules | Where-Object { $_.name -eq 'adapter-softpc' })
-    if ($softpc.Count -ne 1) { throw 'Diagnostic graph requires one adapter-softpc module.' }
-    $softpc[0].sources = @($softpc[0].sources) + 'src/adapter-softpc/instruction_history.cc'
-}
+# The app callback uses this selector-blind storage in every graph. Diagnostic
+# switches enable observation only; they do not own the implementation object.
+$softpc = @($manifest.modules | Where-Object { $_.name -eq 'adapter-softpc' })
+if ($softpc.Count -ne 1) { throw 'Formal graph requires one adapter-softpc module.' }
+$softpc[0].sources = @($softpc[0].sources) + 'src/adapter-softpc/instruction_history.cc'
 if ($manifest.schema -ne 'ntdos64.t260.s8.component-manifest.v1' -or $manifest.architecture -ne 'x64' -or $manifest.runtimeLibrary -ne '/MT') {
     throw 'Unsupported T260 S8 component manifest.'
 }
