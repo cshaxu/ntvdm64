@@ -25,19 +25,7 @@
 #define LOG_THIS BX_CPU_THIS_PTR
 /* DIVERGENCE(BX-CORE-DIV-003): retained default-off copied software-interrupt observation. */
 
-#ifndef RUNTIME_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
-#if defined(BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION)
-#define RUNTIME_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION BX_NTVDM_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
-#else
-#define RUNTIME_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION 0
-#endif
-#endif
-
-#if RUNTIME_ENABLE_MANTLE_SOFTWARE_INTERRUPT_OBSERVATION
-#define RUNTIME_RECORD_SOFTWARE_INTERRUPT(vector_value) BX_CPU_THIS_PTR overlay_observe_software_interrupt((vector_value))
-#else
-#define RUNTIME_RECORD_SOFTWARE_INTERRUPT(vector_value) do { } while (0)
-#endif
+#include "bochs-core-overlay/cpu/observation_gates.h"
 
 BX_INSF_TYPE BX_CPP_AttrRegparmN(1) BX_CPU_C::BOUND_GwMa(bxInstruction_c *i)
 {

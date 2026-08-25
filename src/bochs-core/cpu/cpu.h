@@ -32,13 +32,7 @@ typedef int (*bx_cpu_opaque_callback_t)(void *context, const void *event,
 
 #include <setjmp.h>
 
-#ifndef RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
-#if defined(BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION)
-#define RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
-#else
-#define RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION 0
-#endif
-#endif
+#include "bochs-core-overlay/cpu/observation_gates.h"
 
 // <TAG-DEFINES-DECODE-START>
 // segment register encoding
@@ -537,16 +531,6 @@ BOCHSAPI extern BX_CPU_C   bx_cpu;
 #endif
 
 // notify internal debugger/instrumentation about memory access
-#if RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
-#define RUNTIME_OBSERVE_LIN_MEMORY_WRITE(paddr, size, rw, dataptr) do {                \
-  if ((rw) == BX_WRITE)                                                                 \
-    BX_CPU_THIS_PTR overlay_observe_physical_write((Bit64u)(paddr),                    \
-      (unsigned)(size), (dataptr));                                                     \
-} while (0)
-#else
-#define RUNTIME_OBSERVE_LIN_MEMORY_WRITE(paddr, size, rw, dataptr) ((void)0)
-#endif
-
 #define BX_NOTIFY_LIN_MEMORY_ACCESS(laddr, paddr, size, pl, rw, dataptr) {              \
   BX_INSTR_LIN_ACCESS(BX_CPU_ID, (laddr), (paddr), (size), (rw));                       \
   BX_DBG_LIN_MEMORY_ACCESS(BX_CPU_ID, (laddr), (paddr), (size), (pl), (rw), (dataptr)); \

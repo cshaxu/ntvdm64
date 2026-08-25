@@ -58,19 +58,15 @@
 bx_keyb_c *theKeyboard = NULL;
 
 /* DIVERGENCE(BX-MACH-027): preserve the upstream plugin entry shape while
- * routing its non-product headless lifecycle to the private overlay. */
+ * routing the non-product headless lifecycle to the private overlay. */
+extern bx_bool bochs_core_overlay_keyboard_headless_create(plugin_t *plugin,
+  plugintype_t type, int argc, char *argv[]);
 extern bx_bool bochs_core_overlay_keyboard_headless_destroy(void);
 
 int libkeyboard_LTX_plugin_init(plugin_t *plugin, plugintype_t type, int argc,
   char *argv[])
 {
-  if (theKeyboard != NULL || bx_devices.pluginKeyboard != &bx_devices.stubKeyboard)
-    return 1;
-  theKeyboard = new bx_keyb_c();
-  if (theKeyboard == NULL) return 1;
-  bx_devices.pluginKeyboard = theKeyboard;
-  theKeyboard->init();
-  return 0;
+  return bochs_core_overlay_keyboard_headless_create(plugin, type, argc, argv) ? 0 : 1;
 }
 
 void libkeyboard_LTX_plugin_fini(void)

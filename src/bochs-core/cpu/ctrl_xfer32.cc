@@ -25,19 +25,7 @@
 #define LOG_THIS BX_CPU_THIS_PTR
 /* DIVERGENCE(BX-CORE-DIV-001,BX-CORE-DIV-004): retained real/V86 transfer checks and default-off IRET observation. */
 
-#ifndef RUNTIME_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
-#if defined(BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION)
-#define RUNTIME_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION BX_NTVDM_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
-#else
-#define RUNTIME_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION 0
-#endif
-#endif
-
-#if RUNTIME_ENABLE_MANTLE_INTERRUPT_RETURN_OBSERVATION
-#define RUNTIME_RECORD_INTERRUPT_RETURN(width_value) BX_CPU_THIS_PTR overlay_observe_interrupt_return((width_value))
-#else
-#define RUNTIME_RECORD_INTERRUPT_RETURN(width_value) do { } while (0)
-#endif
+#include "bochs-core-overlay/cpu/observation_gates.h"
 
 #if BX_CPU_LEVEL >= 3
 

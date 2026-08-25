@@ -33,19 +33,7 @@ typedef void BX_INSF_TYPE;
 
 #if BX_SUPPORT_HANDLERS_CHAINING_SPEEDUPS
 
-#ifndef RUNTIME_ENABLE_MANTLE_INSTRUCTION_HISTORY
-#if defined(BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY)
-#define RUNTIME_ENABLE_MANTLE_INSTRUCTION_HISTORY BX_NTVDM_ENABLE_MANTLE_INSTRUCTION_HISTORY
-#else
-#define RUNTIME_ENABLE_MANTLE_INSTRUCTION_HISTORY 0
-#endif
-#endif
-
-#if RUNTIME_ENABLE_MANTLE_INSTRUCTION_HISTORY
-#define RUNTIME_RECORD_INSTRUCTION_HISTORY() BX_CPU_THIS_PTR overlay_observe_instruction_history()
-#else
-#define RUNTIME_RECORD_INSTRUCTION_HISTORY() do { } while (0)
-#endif
+#include "bochs-core-overlay/cpu/observation_gates.h"
 
 #define BX_SYNC_TIME_IF_SINGLE_PROCESSOR(allowed_delta) {                     \
   if (BX_SMP_PROCESSORS == 1) {                                               \

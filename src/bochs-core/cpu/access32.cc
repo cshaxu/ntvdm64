@@ -27,13 +27,7 @@
 #define LOG_THIS BX_CPU_THIS_PTR
 /* DIVERGENCE(BX-CORE-DIV-001,BX-CORE-DIV-002): retained segment profile and default-off observation guards. */
 
-#ifndef RUNTIME_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
-#if defined(BX_NTVDM_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER)
-#define RUNTIME_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER BX_NTVDM_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
-#else
-#define RUNTIME_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER 0
-#endif
-#endif
+#include "bochs-core-overlay/cpu/observation_gates.h"
 
   void BX_CPP_AttrRegparmN(3)
 BX_CPU_C::write_virtual_byte_32(unsigned s, Bit32u offset, Bit8u data)
@@ -555,17 +549,13 @@ accessOK:
     }
     else {
       BX_ERROR(("read_virtual_word_32(): segment limit violation"));
-#if RUNTIME_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
-      BX_CPU_THIS_PTR overlay_observe_segment_access(s, seg, offset, 1u);
-#endif
+      RUNTIME_RECORD_SEGMENT_ACCESS(s, seg, offset, 1u);
       exception(int_number(s), 0);
     }
   }
 
   if (!read_virtual_checks(seg, offset, 2)) {
-#if RUNTIME_ENABLE_MANTLE_SEGMENT_ACCESS_OBSERVER
-    BX_CPU_THIS_PTR overlay_observe_segment_access(s, seg, offset, 2u);
-#endif
+    RUNTIME_RECORD_SEGMENT_ACCESS(s, seg, offset, 2u);
     exception(int_number(s), 0);
   }
   goto accessOK;

@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T265 S6 — bochs-core bridge-file retirement.** Retire the four self-authored bridge files that were incorrectly retained inside the Bochs mirror, without changing admitted machine behavior.
+**Active: M0 T265 S7 — bochs-core retained-diff consolidation.** Reduce remaining non-essential mirror diff by moving duplicated observer scaffolding and, if verified, the non-product keyboard creation body to the private Bochs overlay; retain required CPU decision points and valid source subsets.
 
 ## Active Packet
 
@@ -157,6 +157,27 @@ component directly includes `bochs-core-overlay`.
 
 **S6 closure:** `bochs-core` no longer contains self-authored bridge source files. The formal Ninja `bochs-core` and `adapter-bochs` libraries build; opaque BOP ingress and the corrected two-round native 8042 lifecycle fixture exit zero. See the [S6 evidence](etc/evidence/m0-t265-s6-bochs-core-bridge-file-retirement-001.md).
 ### M0 T264 S1 — project code filename inventory
+
+### M0 T265 S7 — bochs-core retained-diff consolidation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T265 S7`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner-approved after the complete post-S6 Bochs 2.6 baseline audit. |
+| Objective | Move duplicated default-off observer gates/macros into `bochs-core-overlay`; re-evaluate the keyboard creation boundary with the existing two-round lifecycle fixture; retain only required minimal core decisions, declarations and valid true subsets. |
+| Non-goals | No guest/BOP/OpenNT semantics, no CPU or device expansion, no restoration of Bochs SIM/GUI/plugin product shell, no generic overlay interface, and no removal of required real/V86, #UD, RAM, PIC or lifecycle mechanics merely to improve a statistic. |
+| Reference Baseline | Pinned `O:\repos.external\bochs-2.6-compat\bochs-2.6`, the S6 closure, the retained-diff audit, and the T265 proposal S7. |
+| Files And ABI Surface | Existing adopted CPU/memory observer call sites, private overlay gate header and keyboard lifecycle body, formal manifest, README/register, and existing focused observer/8042 fixtures only. No public ABI is added. |
+| Applicable Rules | Mirror identity/subset/divergence rule; native-mirror-only overlay rule; Bochs-only vocabulary; source-first recovery; no behavior expansion. |
+| Verification | Baseline numstat before/after; direct-overlay-consumer scan; `DIVERGENCE`/README consistency; formal Ninja changed-library build; physical-write/opaque-ingress and two-round headless-8042 fixture execution; governance and `git diff --check`. |
+| Expected Markers | Observer call sites no longer define local gates; any keyboard creation boundary in `keyboard.cc` is one marked call; overlay owns all moved bodies and has no external consumer. |
+| Stop Conditions | Extraction changes a reached machine result, requires SIM/GUI/plugin facilities, produces a non-core overlay consumer, or cannot preserve the existing fixture lifecycle. |
+| Exit Criteria | All duplicated observer scaffolding is private-overlay code; keyboard extraction is either formally verified or retained with a documented source/fixture reason; every remaining core hunk is classified, marked and README-registered; stated checks pass. |
+| Original Owner Request | “支持，批准进入S任务实施以上方案，目标是进一步减少不必要的diff，送入overlay”. |
+| Similar-Issue Sweep | Repeated feature-gate macros, observer no-op bodies, keyboard creation/teardown split, stale README exception descriptions, and hidden overlay consumers. |
+
+**S7 closure:** duplicated default-off observer gate/no-op scaffolding is private `bochs-core-overlay` code, and the private keyboard lifecycle now owns both creation and teardown. Fresh formal MSVC x64 `/MT` libraries and the opaque-ingress plus two-round headless-8042 fixtures pass; see [S7 evidence](etc/evidence/m0-t265-s7-bochs-core-retained-diff-consolidation-001.md).
+
 
 | Field | Record |
 | --- | --- |

@@ -7,6 +7,18 @@
 
 extern bx_keyb_c *theKeyboard;
 
+bx_bool bochs_core_overlay_keyboard_headless_create(plugin_t *plugin,
+  plugintype_t type, int argc, char *argv[])
+{
+  UNUSED(plugin); UNUSED(type); UNUSED(argc); UNUSED(argv);
+  if (theKeyboard != NULL || bx_devices.pluginKeyboard != &bx_devices.stubKeyboard) return 0;
+  theKeyboard = new bx_keyb_c();
+  if (theKeyboard == NULL) return 0;
+  bx_devices.pluginKeyboard = theKeyboard;
+  theKeyboard->init();
+  return 1;
+}
+
 bx_bool bochs_core_overlay_keyboard_headless_destroy(void)
 {
   if (theKeyboard == NULL || bx_devices.pluginKeyboard != theKeyboard) return 0;

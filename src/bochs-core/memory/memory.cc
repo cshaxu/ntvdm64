@@ -37,13 +37,7 @@
 // 0xf0000 - 0xfffff    Upper BIOS Area (64K)
 //
 
-#ifndef RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
-#if defined(BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION)
-#define RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION BX_NTVDM_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
-#else
-#define RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION 0
-#endif
-#endif
+#include "bochs-core-overlay/cpu/observation_gates.h"
 
 void BX_MEM_C::writePhysicalPage(BX_CPU_C *cpu, bx_phy_address addr, unsigned len, void *data)
 {
@@ -66,9 +60,7 @@ void BX_MEM_C::writePhysicalPage(BX_CPU_C *cpu, bx_phy_address addr, unsigned le
 #endif
 
   if (cpu != NULL) {
-#if RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
-    cpu->overlay_observe_physical_write((Bit64u)a20addr, len, data);
-#endif
+    RUNTIME_OBSERVE_PHYSICAL_WRITE(cpu, a20addr, len, data);
 #if BX_SUPPORT_IODEBUG
     bx_devices.pluginIODebug->mem_write(cpu, a20addr, len, data);
 #endif
