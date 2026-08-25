@@ -77,6 +77,11 @@ int main()
   machine_request.preserved_state_bytes = 1u;
   machine_request.ivt_watch_enabled = 1u;
   machine_request.ivt_watch_vector = 0x15u;
+  if (!runtime_machine_binding_v1_bind_memory(
+      machine_facade_v1_memory_readable,
+      machine_facade_v1_memory_writable,
+      machine_facade_v1_memory_read,
+      machine_facade_v1_memory_write)) return 18;
   if (!runtime_machine_stage_v1_request_valid(&machine_request) ||
       runtime_machine_stage_v1_begin(&machine_request) != RUNTIME_MACHINE_STAGE_V1_OK)
     return 1;
@@ -138,5 +143,6 @@ int main()
 
   runtime_xms_v2_runtime_session_reset();
   runtime_machine_binding_v1_unbind_a20();
+  runtime_machine_binding_v1_unbind_memory();
   return runtime_machine_stage_v1_reset() == RUNTIME_MACHINE_STAGE_V1_OK ? 0 : 8;
 }

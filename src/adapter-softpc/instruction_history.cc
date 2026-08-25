@@ -4,8 +4,8 @@
 //
 /////////////////////////////////////////////////////////////////////////
 
-#include "bochs.h"
 #include "instruction_history.h"
+#include "machine_binding.h"
 #include <string.h>
 
 #ifndef RUNTIME_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
@@ -13,7 +13,6 @@
 #endif
 
 #if RUNTIME_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
-#include "bochs-core/memory/memory.h"
 #endif
 
 static struct runtime_instruction_history_record_v1
@@ -37,12 +36,12 @@ static struct runtime_instruction_history_provenance_v1
   runtime_instruction_history_latest_cs_provenance;
 static unsigned runtime_instruction_history_latest_cs_provenance_valid;
 
-static bx_bool runtime_instruction_history_real_address(uint16_t segment,
-  uint16_t offset, uint32_t byte_count, bx_phy_address *address)
+static int runtime_instruction_history_real_address(uint16_t segment,
+  uint16_t offset, uint32_t byte_count, uint64_t *address)
 {
-  Bit32u value;
+  uint32_t value;
   if (!address || byte_count == 0u) return 0;
-  value = ((Bit32u)segment << 4) + offset;
+  value = ((uint32_t)segment << 4) + offset;
   if (value > 0x100000u - byte_count) return 0;
   *address = value;
   return 1;
@@ -101,7 +100,7 @@ void runtime_mantle_instruction_history_v1_record(
         RUNTIME_INSTRUCTION_HISTORY_V1_CS_TRANSITION_CAPACITY_MAX)
       runtime_instruction_history_cs_transition_count_value++;
 #if RUNTIME_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
-    bx_phy_address predecessor_address, successor_address, stack_address;
+    uint64_t predecessor_address, successor_address, stack_address;
     memset(&runtime_instruction_history_latest_cs_provenance, 0,
       sizeof(runtime_instruction_history_latest_cs_provenance));
     runtime_instruction_history_latest_cs_provenance.transition =
@@ -110,7 +109,7 @@ void runtime_mantle_instruction_history_v1_record(
         runtime_instruction_history_last_record.cs,
         (uint16_t)runtime_instruction_history_last_record.rip,
         RUNTIME_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES,
-        &predecessor_address) && bx_mem.copy_from_ordinary_ram(
+        &predecessor_address) && runtime_machine_binding_v1_memory_read(
           predecessor_address, RUNTIME_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES,
           runtime_instruction_history_latest_cs_provenance.predecessor_bytes)) {
       runtime_instruction_history_latest_cs_provenance.predecessor_valid = 1u;
@@ -118,14 +117,14 @@ void runtime_mantle_instruction_history_v1_record(
     if (runtime_instruction_history_real_address(record->cs,
         (uint16_t)record->rip,
         RUNTIME_INSTRUCTION_HISTORY_V1_SUCCESSOR_BYTES,
-        &successor_address) && bx_mem.copy_from_ordinary_ram(
+        &successor_address) && runtime_machine_binding_v1_memory_read(
           successor_address, RUNTIME_INSTRUCTION_HISTORY_V1_SUCCESSOR_BYTES,
           runtime_instruction_history_latest_cs_provenance.successor_bytes)) {
       runtime_instruction_history_latest_cs_provenance.successor_valid = 1u;
     }
     if (runtime_instruction_history_real_address(record->ss, record->sp,
         RUNTIME_INSTRUCTION_HISTORY_V1_STACK_BYTES, &stack_address) &&
-        bx_mem.copy_from_ordinary_ram(stack_address,
+        runtime_machine_binding_v1_memory_read(stack_address,
           RUNTIME_INSTRUCTION_HISTORY_V1_STACK_BYTES,
           runtime_instruction_history_latest_cs_provenance.stack_bytes)) {
       runtime_instruction_history_latest_cs_provenance.stack_valid = 1u;

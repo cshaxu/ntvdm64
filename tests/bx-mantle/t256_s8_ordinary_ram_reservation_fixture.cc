@@ -1,5 +1,7 @@
 #include "bochs.h"
 #include "adapter-bop/generic_ud_bridge.h"
+#include "adapter-bochs/machine_facade.h"
+#include "adapter-softpc/machine_binding.h"
 #include "adapter-softpc/machine_stage.h"
 #include "adapter-softpc/ordinary_ram_reservation.h"
 
@@ -53,6 +55,12 @@ int main(void)
   struct runtime_ordinary_ram_reservation_v1 first, second, release, reused;
   Bit8u value = 0x5au, observed = 0u;
 
+  if (!runtime_machine_binding_v1_bind_memory(
+      machine_facade_v1_memory_readable,
+      machine_facade_v1_memory_writable,
+      machine_facade_v1_memory_read,
+      machine_facade_v1_memory_write)) return 14;
+
   runtime_ordinary_ram_reservation_v1_clear(&first);
   first.kind = RUNTIME_ORDINARY_RAM_RESERVATION_V1_ALLOCATE;
   first.byte_count = 0x1000u;
@@ -92,5 +100,6 @@ int main(void)
   reused.alignment_bytes = 0x1000u;
   if (runtime_mantle_execute_ordinary_ram_reservation_v1(&reused) !=
       RUNTIME_ORDINARY_RAM_RESERVATION_V1_REJECTED_LIFECYCLE) return 13;
+  runtime_machine_binding_v1_unbind_memory();
   return 0;
 }

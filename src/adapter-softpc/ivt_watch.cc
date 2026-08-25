@@ -1,7 +1,6 @@
-#include "bochs.h"
-#include "bochs-core/memory/memory.h"
 #include "ivt_watch.h"
 #include "machine_stage.h"
+#include "machine_binding.h"
 
 #include <string.h>
 
@@ -27,8 +26,8 @@ extern "C" int runtime_ivt_watch_v1_read_current(uint32_t vector,
   if (!runtime_machine_stage_v1_active() || !runtime_ivt_watch_v1_vector_valid(vector) ||
       offset == 0 || segment == 0) return 0;
   address = (uint64_t)vector * 4u;
-  if (!bx_mem.ordinary_ram_readable(address, sizeof(bytes)) ||
-      !bx_mem.copy_from_ordinary_ram(address, sizeof(bytes), bytes)) return 0;
+  if (!runtime_machine_binding_v1_memory_readable(address, sizeof(bytes)) ||
+      !runtime_machine_binding_v1_memory_read(address, sizeof(bytes), bytes)) return 0;
   *offset = (uint16_t)((uint16_t)bytes[0] | ((uint16_t)bytes[1] << 8));
   *segment = (uint16_t)((uint16_t)bytes[2] | ((uint16_t)bytes[3] << 8));
   return 1;

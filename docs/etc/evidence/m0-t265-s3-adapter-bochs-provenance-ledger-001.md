@@ -87,3 +87,18 @@ The formal graph rebuilt the 91 affected actions successfully.  Both
 `no work`.  The wider `t255-s2-generic-context-resume-fixture` observed exit
 `2` in this run; it is not used as evidence for this A20 seam and remains in
 the later CPU/protected-range migration set.
+
+### Ordinary-RAM seam
+
+The same binding owns checked ordinary-RAM range/read/write operations.
+`mechanical_action.cc`, `ordinary_ram_reservation.cc`, `ivt_watch.cc`, and
+the opt-in provenance branch of `instruction_history.cc` no longer import a
+Bochs header or use `bx_mem`.  `machine_facade` is the sole owner of the
+native memory calls; `app` binds and session-teardown unbinds all four
+primitive callbacks together with A20.
+
+The `t256-s8-ordinary-ram-reservation-fixture` and the existing XMS A20
+source-mirror fixture both exited `0`; the formal Ninja dry run again reported
+`no work`.  The remaining direct-edge set is exactly `finite_run.cc`,
+`machine_stage.cc`, and `protected_range_action.cc`; those need the final
+CPU/timer callback group rather than another memory exception.

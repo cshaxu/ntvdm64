@@ -36,6 +36,13 @@ int runtime_engine_run_v1(const struct runtime_engine_request_v1 *request,
             machine_facade_v1_set_a20) ||
         !app_session_v1_register_teardown(&session,
             runtime_machine_binding_v1_unbind_a20) ||
+        !runtime_machine_binding_v1_bind_memory(
+            machine_facade_v1_memory_readable,
+            machine_facade_v1_memory_writable,
+            machine_facade_v1_memory_read,
+            machine_facade_v1_memory_write) ||
+        !app_session_v1_register_teardown(&session,
+            runtime_machine_binding_v1_unbind_memory) ||
         !runtime_session_mapping_registry_bind(&session)) {
         app_session_v1_reset(&session);
         return runtime_engine_result_v1_set(result,

@@ -1,6 +1,5 @@
-#include "bochs.h"
-#include "bochs-core/memory/memory.h"
 #include "ordinary_ram_reservation.h"
+#include "machine_binding.h"
 
 #include <string.h>
 
@@ -46,8 +45,8 @@ static int runtime_ordinary_ram_reservation_v1_span_ordinary(uint32_t address,
   uint32_t byte_count)
 {
   return byte_count != 0u && (uint64_t) address + byte_count <= UINT64_C(0x100000000) &&
-    bx_mem.ordinary_ram_readable((bx_phy_address) address, byte_count) &&
-    bx_mem.ordinary_ram_writable((bx_phy_address) address, byte_count);
+    runtime_machine_binding_v1_memory_readable(address, byte_count) &&
+    runtime_machine_binding_v1_memory_writable(address, byte_count);
 }
 
 extern "C" void runtime_ordinary_ram_reservation_v1_clear(
