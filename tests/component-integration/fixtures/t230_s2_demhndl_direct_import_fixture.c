@@ -4,7 +4,6 @@
 
 #include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
 #include "opennt-bop/dem/opennt_dem_ccpu_sas_facade.h"
-#include "opennt-bop/ingress/dem_ingress_shim.h"
 
 typedef struct fixture_context {
     HANDLE handle;
@@ -159,8 +158,6 @@ static int invoke_fast_read(fixture_context *state,
     runtime_cpu_state *cpu, runtime_cpu_result *result)
 {
     runtime_demhndl_call call;
-    runtime_instruction_window window;
-    static const uint8_t instruction[] = {0xc4u, 0xc4u, 0x50u, 0x42u};
     memset(&call, 0, sizeof(call));
     call.magic = RUNTIME_DEMHNDL_CALL_MAGIC;
     call.abi_version = RUNTIME_DEMHNDL_CALL_VERSION;
@@ -173,9 +170,7 @@ static int invoke_fast_read(fixture_context *state,
     call.guest_state = state;
     call.guest_read = guest_read;
     call.guest_write = guest_write;
-    runtime_instruction_window_capture(&window, instruction,
-        (uint32_t)sizeof(instruction));
-    return runtime_dem_ingress_dispatch(&window, &call) &&
+    return runtime_demhndl_invoke_fast_read(&call) &&
         result->disposition == RUNTIME_CPU_RESULT_RESUME &&
         result->resume_rip == event->fault_rip + 4u;
 }

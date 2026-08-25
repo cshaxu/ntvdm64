@@ -1,4 +1,5 @@
 #include "dem_native_session.h"
+#include "opennt-bop/dem/nt_bop_dem.h"
 
 #include <string.h>
 
@@ -95,7 +96,6 @@ int runtime_dem_native_session_dispatch(
 {
     runtime_exception_event boundary;
     runtime_cpu_state cpu;
-    runtime_instruction_window window;
     runtime_cpu_result result;
     runtime_demhndl_call call;
     if (!session_valid(g_active_session) || g_active_session->bound == 0u ||
@@ -108,17 +108,32 @@ int runtime_dem_native_session_dispatch(
     boundary.cpu_id = event->cpu_id; boundary.vector = event->vector;
     boundary.error_code = event->error_code; boundary.fault_rip = event->fault_rip;
     copy_cpu(event, &cpu);
-    runtime_instruction_window_capture(&window, event->window, event->window_bytes);
+    if (event->window_bytes < 4u || event->window[0] != 0xc4u ||
+        event->window[1] != 0xc4u || event->window[2] != 0x50u ||
+        event->eip > UINT64_MAX - 3u) return 0;
     memset(&call, 0, sizeof(call));
     call.magic = RUNTIME_DEMHNDL_CALL_MAGIC;
     call.abi_version = RUNTIME_DEMHNDL_CALL_VERSION;
     call.struct_bytes = sizeof(call);
-    call.service = window.valid_bytes >= 4u ? window.bytes[3] : 0u;
+    /* MS_bop_0 itself reads the service byte at staged CS:IP and invokes the
+     * original DemDispatch table.  This copied byte is only the bounded
+     * mapping descriptor needed by the same-shaped SAS facade. */
+    call.service = event->window[3];
     call.direct = g_active_session->direct; call.boundary = &boundary;
     call.cpu = &cpu; call.result = &result; call.guest_state = g_active_session->guest_state;
     call.guest_read = g_active_session->guest_read;
     call.guest_write = g_active_session->guest_write;
-    return runtime_dem_ingress_dispatch(&window, &call) && copy_outcome(&result, outcome);
+    /* DIVERGENCE(BOP-DIV-098): the admitted x86 FastOrSlow caller uses
+     * 50:42 although the visible OpenNT table slot is a no-op.  No historical
+     * worker is available; retain the previously-approved source-derived
+     * demRead-body seam for this exact service.  All other DEM services enter
+     * the imported MS_bop_0 body below. */
+    if (call.service == 0x42u)
+        return runtime_demhndl_invoke_fast_read(&call) &&
+            copy_outcome(&result, outcome);
+    cpu.eip += 3u;
+    return runtime_demhndl_invoke_body_with_resume(&call, MS_bop_0, 4u) &&
+        copy_outcome(&result, outcome);
 }
 
 int runtime_dem_native_session_invoke_scoped_body(

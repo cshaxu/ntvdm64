@@ -2,35 +2,46 @@
 
 ## Current Work
 
-**Active: M0 T271 S2 — OpenNT DEM original dispatcher/provider recovery.**
+**Active: M0 T271 S3 — OpenNT COMMAND original dispatcher/provider recovery.**
 
 ## Active Packet
 
-### M0 T271 S2 — OpenNT DEM original dispatcher/provider recovery
+### M0 T271 S3 — OpenNT COMMAND original dispatcher/provider recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T271 S2`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | Owner-approved T271 plan; S1 closure is recorded in `history/m0-t271-s1-closure-20260825.md`. |
-| Objective | Replace the frozen project-authored DEM entry/session/dispatch composition with the original OpenNT DEM package's dispatcher, globals, provider ordering and source-proven failure paths. |
-| Non-goals | No COMMAND/XMS implementation, no DPMI/WOW/Redirector/VDD/debugger recovery, no new Bochs semantics, and no trace-led leaf handler. |
-| Scope | Original DEM `dem.c`, `demdata.c`, `demdisp.c` and reached provider bodies; current DEM bridge/session/composition boundaries; required same-shaped `adapter-softpc`, `adapter-win32`, `opennt-host` and session facades; DEM fixtures, manifests and tracker/evidence. |
-| Verification | Original source/ABI/failure map; 73-slot service table/order comparison; direct/failure fixture matrix; no app dependency inside the recovered DEM route; formal Ninja closure, governance and `git diff --check`. |
-| Exit Criteria | `MS_bop_0` enters source-shaped `DemDispatch`; imported source owns service-table/global ordering; every unavailable historical dependency has one same-shaped adapter or original failure disposition; no project-defined DEM dispatcher remains. |
-| Reference Baseline | T271 proposal, S1 owner ledger, OpenNT `nt_bop.c` and selected original DEM sources, T270/S4 disposition ledger and live BOP tracker. |
-| Files And ABI Surface | DEM service/global/failure ownership only. The generic ingress remains one opaque event/result ABI; no selector-specific public ABI is added. |
+| Identifier Mode | `M0 T271 S3`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner-approved T271 plan; S2 closure is recorded in `history/m0-t271-s2-closure-20260825.md`. |
+| Objective | Replace the frozen project-authored COMMAND entry/session/dispatch composition with the original OpenNT COMMAND package's dispatcher, globals, provider ordering and source-proven failure paths. |
+| Non-goals | No XMS implementation, no DPMI/WOW/Redirector/VDD/debugger recovery, no new Bochs semantics, and no trace-led leaf handler. |
+| Scope | Original COMMAND `cmd.c`, `cmddata.c`, `cmddisp.c` and reached provider bodies; current COMMAND bridge/session/composition boundaries; required same-shaped `adapter-softpc`, `adapter-win32`, `opennt-host` and session facades; COMMAND fixtures, manifests and tracker/evidence. |
+| Verification | Original source/ABI/failure map; complete COMMAND service table/order comparison; direct/failure fixture matrix; no app dependency inside the recovered COMMAND route; formal Ninja closure, governance and `git diff --check`. |
+| Exit Criteria | `MS_bop_4` enters source-shaped COMMAND dispatch; imported source owns service-table/global ordering; every unavailable historical dependency has one same-shaped adapter or original failure disposition; no project-defined COMMAND dispatcher remains. |
+| Reference Baseline | T271 proposal, S1/S2 closures, OpenNT `nt_bop.c` and selected original COMMAND sources, T270/S4 disposition ledger and live BOP tracker. |
+| Files And ABI Surface | COMMAND service/global/failure ownership only. The generic ingress remains one opaque event/result ABI; no selector-specific public ABI is added. |
 | Applicable Rules | Source policy, source-first ladder, mirror-component standard, adapter/session boundaries, production-only roots, build hygiene and documentation governance. |
-| Expected Markers | `MS_bop_0` enters source-shaped `DemDispatch`; original service table/order is active; every unavailable dependency has a same-shaped adapter or original failure disposition; no project-defined DEM dispatcher remains. |
-| Asset Needs | Pinned local OpenNT MVDM DEM sources, S1 owner ledger, existing DEM fixtures, formal Ninja manifest and public Win32/SoftPC adapter surfaces. |
-| Reporting Requirements | Identify each imported source path and divergence; distinguish original body, true subset, same-shaped facade and deferred terminal; report all 73 service dispositions and focused test results. |
-| Stop Conditions | Original DEM source/order is ambiguous, a source body needs an unapproved host/machine semantic, a proposed seam changes a public ABI or failure result, or work would consume a non-DEM owner package. |
-| Similar-Issue Sweep | DEM dispatcher globals/data, all `dem*.c` direct imports, provider registration, VDMREDIR import binding, CCPU/SAS calls, OEM/Win32 facades, fixture coverage and README divergence entries. |
-| Original Owner Request | “处理 dem；尽可能按照原始 OpenNT 代码最小修改接入。” |
+| Expected Markers | `MS_bop_4` enters source-shaped COMMAND dispatch; original service table/order is active; every unavailable dependency has a same-shaped adapter or original failure disposition; no project-defined COMMAND dispatcher remains. |
+| Asset Needs | Pinned local OpenNT MVDM COMMAND sources, S1/S2 ledgers, existing COMMAND fixtures, formal Ninja manifest and public Win32/SoftPC adapter surfaces. |
+| Reporting Requirements | Identify each imported source path and divergence; distinguish original body, true subset, same-shaped facade and deferred terminal; report all COMMAND service dispositions and focused test results. |
+| Stop Conditions | Original COMMAND source/order is ambiguous, a source body needs an unapproved host/machine semantic, a proposed seam changes a public ABI or failure result, or work would consume a non-COMMAND owner package. |
+| Similar-Issue Sweep | COMMAND dispatcher globals/data, all `cmd*.c` direct imports, provider registration, CCPU/SAS calls, OEM/Win32 facades, fixture coverage and README divergence entries. |
+| Original Owner Request | “处理 command；尽可能按照原始 OpenNT 代码最小修改接入。” |
 
 **T271 plan:** S1 non-mirror composition extraction (closed); S2 DEM original
-package recovery (active); S3 COMMAND original package recovery; S4 XMS
+package recovery (closed); S3 COMMAND original package recovery (active); S4 XMS
 original package recovery; S5 whole-component mirror/source-recovery closure.
 T270 remains closed in [its history](history/m0-t270-closure-20260825.md).
+
+**S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
+into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
+byte and calls the original `DemDispatch` table.  The former project-authored
+DEM ingress and its fixture are archived evidence. Fresh formal Ninja links
+the complete graph; original-entry, original-table, checked-RAM, direct-host,
+runtime-session and DEM provider fixtures pass. The retained DASD/IOCTL
+direct-import fixture times out in its host-volume exercise and is recorded as
+a machine/device-owner limitation, not passing dispatcher evidence. See the
+[S2 closure](history/m0-t271-s2-closure-20260825.md).
+
 ## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition

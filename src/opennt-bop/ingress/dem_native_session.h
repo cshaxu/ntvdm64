@@ -5,7 +5,7 @@
  * consumes only the machine's copied generic-UD record; native memory access
  * is supplied as checked callbacks by the composition owner. */
 
-#include "opennt-bop/ingress/dem_ingress_shim.h"
+#include "opennt-bop/dem/opennt_dem_ccpu_sas_facade.h"
 #include "adapter-bop/generic_ud_bridge.h"
 
 #define RUNTIME_DEM_NATIVE_SESSION_MAGIC 0x4258444eu

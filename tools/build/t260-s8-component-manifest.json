@@ -206,6 +206,7 @@
         "src/adapter-softpc/guest_read_action.c",
         "src/adapter-softpc/guest_write_abi.c",
         "src/adapter-softpc/host_handle_manager.c",
+        "src/adapter-softpc/idle_shim.c",
         "src/adapter-softpc/instruction_window_abi.c",
         "src/adapter-softpc/interrupt_return_observation.cc",
         "src/adapter-softpc/ivt_watch.cc",
@@ -274,7 +275,6 @@
         "src/opennt-bop/ingress/command_native_session.c",
         "src/opennt-bop/ingress/command_runtime_session.c",
         "src/opennt-bop/ingress/config_complete_generic_ud_bridge.c",
-        "src/opennt-bop/ingress/dem_ingress_shim.c",
         "src/opennt-bop/ingress/dem_direct_session.c",
         "src/opennt-bop/ingress/dem_native_session.c",
         "src/opennt-bop/ingress/xms_native_session.c",
@@ -303,6 +303,7 @@
         "src/opennt-bop/command/opennt_pif_composition.c",
         "src/opennt-bop/command/cmdredir.c",
         "src/opennt-bop/dem/dem.c",
+        "src/opennt-bop/dem/nt_bop_dem.c",
         "src/opennt-bop/dem/dem_direct_context.c",
         "src/opennt-bop/dem/demdasd.c",
         "src/opennt-bop/dem/opennt_demdasd_ioctl_composition.c",
@@ -1764,33 +1765,6 @@
     {
       "name": "t230-s10-demdisp-direct-import-fixture",
       "source": "tests/component-integration/fixtures/t230_s10_demdisp_direct_import_fixture.c",
-      "libraries": [
-        "app",
-        "opennt-bop",
-        "opennt-host",
-        "adapter-win32",
-        "adapter-softpc",
-        "session",
-        "adapter-bochs",
-        "bochs-core",
-        "adapter-bop"
-      ],
-      "platformLibraries": [
-        "libcmt.lib",
-        "libvcruntime.lib",
-        "libucrt.lib",
-        "legacy_stdio_definitions.lib",
-        "kernel32.lib",
-        "advapi32.lib",
-        "gdi32.lib",
-        "bcrypt.lib",
-        "ntdll.lib",
-        "user32.lib"
-      ]
-    },
-    {
-      "name": "t230-s10-dem-ingress-direct-fixture",
-      "source": "tests/component-integration/fixtures/t230_s10_dem_ingress_direct_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",

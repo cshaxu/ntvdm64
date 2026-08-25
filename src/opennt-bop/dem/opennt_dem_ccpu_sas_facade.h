@@ -154,6 +154,11 @@ void runtime_demhndl_set_cf(int value);
 void runtime_demhndl_set_zf(int value);
 HANDLE runtime_demhndl_get_handle(USHORT high, USHORT low);
 LPVOID runtime_demhndl_get_vdm_addr(USHORT segment, USHORT offset);
+/* Same-shaped Sim32 access used by the imported NT BOP body.  The
+ * historical macro accepts a packed SEG:OFF value and a byte count; this call
+ * retains that shape while leasing only that bounded span. */
+UCHAR *runtime_demhndl_sim32_get_vdm_pointer(ULONG address, ULONG bytes,
+    BOOL protect);
 int runtime_demhndl_copy_guest(USHORT segment, USHORT offset, void *buffer,
     uint32_t bytes);
 int runtime_demhndl_copy_guest_oem_string(USHORT segment, USHORT offset,

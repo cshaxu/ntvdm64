@@ -4,13 +4,15 @@
 #include "opennt-bop/ingress/opennt_bop_route.h"
 
 #include "opennt-bop/ingress/dem_native_session.h"
+#include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
+#include "opennt-bop/dem/nt_bop_dem.h"
 #include "opennt-bop/ingress/opennt_bop_route.h"
 #include "opennt-bop/ingress/dem_direct_session.h"
 #include "opennt-bop/ingress/opennt_bop_route.h"
 #include "opennt-bop/ingress/dem_generic_ud_bridge.h"
 #include "opennt-bop/ingress/opennt_bop_route.h"
 
-typedef struct fixture_state { uint8_t bytes[32]; } fixture_state;
+typedef struct fixture_state { uint8_t bytes[0x2500]; } fixture_state;
 
 static int publish(void *s,HANDLE h,uint32_t *t,DWORD *e) { (void)s;(void)h;if(t)*t=0u;if(e)*e=ERROR_INVALID_HANDLE;return 0; }
 static int lookup(void *s,uint32_t t,HANDLE *h) { (void)s;(void)t;if(h)*h=INVALID_HANDLE_VALUE;return 0; }
@@ -35,27 +37,41 @@ static void event_initialize(struct runtime_generic_ud_event *event,
 
 int main(void)
 {
+    static const uint8_t dem_bop[] = { 0xc4u, 0xc4u, 0x50u, 0x1fu };
     if (!runtime_bop_ingress_bind(runtime_opennt_bop_route_dispatch, 0)) return 90;
     fixture_state state={{0}}; runtime_dem_direct_host_session host;
     runtime_dem_native_session session; struct runtime_generic_ud_event event;
     struct runtime_generic_ud_outcome outcome;
     (void)state; (void)publish; (void)lookup; (void)release; (void)query; (void)set;
+    memcpy(state.bytes + 0x2400u, dem_bop, sizeof(dem_bop));
     if(!runtime_dem_direct_host_session_initialize(&host) ||
        !runtime_dem_native_session_initialize(&session,
-           runtime_dem_direct_host_session_context(&host), &host,
-           runtime_dem_direct_host_session_guest_read,
-           runtime_dem_direct_host_session_guest_write) ||
+           runtime_dem_direct_host_session_context(&host), &state,
+           read_guest, write_guest) ||
        !runtime_dem_native_session_bind(&session)) return 1;
     event_initialize(&event,0x50u,0x1fu); memset(&outcome,0,sizeof(outcome));
+    event.eip = 0x2403u;
+    if (!runtime_dem_native_session_invoke_scoped_body(&event, &outcome,
+            MS_bop_0, 4u) || CurrentISVC != 0x1fu) return 11;
+    event.eip = 0x2400u;
+    memset(&outcome, 0, sizeof(outcome));
+    if (!runtime_dem_generic_ud_recognizes(&event)) return 6;
+    if (!runtime_dem_native_session_dispatch(&event,&outcome)) return 7;
+    if (outcome.disposition != RUNTIME_GENERIC_UD_RESUME ||
+        outcome.resume_rip != 0x2404u ||
+        (outcome.eflags_values & RUNTIME_CPU_RESULT_EFLAGS_CF) != 0u) {
+        return 8;
+    }
+    memset(&outcome, 0, sizeof(outcome));
     if(!runtime_machine_generic_ud_bridge(&event,&outcome) ||
        outcome.disposition!=RUNTIME_GENERIC_UD_RESUME || outcome.resume_rip!=0x2404u ||
-       (outcome.eflags_values&RUNTIME_CPU_RESULT_EFLAGS_CF)!=0u) return 2;
+       (outcome.eflags_values&RUNTIME_CPU_RESULT_EFLAGS_CF)!=0u) return 9;
     event_initialize(&event,0x54u,0x1fu);
     if(runtime_machine_generic_ud_bridge(&event,&outcome)) return 3;
     runtime_dem_native_session_unbind(&session);
     runtime_dem_direct_host_session_reset(&host);
     event_initialize(&event,0x50u,0x1fu);
     if(runtime_machine_generic_ud_bridge(&event,&outcome)) return 4;
-    puts("T230 Direct DEM v2 composition: copied #UD reaches original dispatcher without v1 fallback");
+    puts("T271 S2 DEM: copied #UD enters original MS_bop_0 then DemDispatch");
     return 0;
 }

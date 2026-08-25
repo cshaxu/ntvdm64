@@ -544,6 +544,25 @@ LPVOID runtime_demhndl_get_vdm_addr(USHORT segment, USHORT offset)
     return acquire_guest_span(active, bytes, 0);
 }
 
+UCHAR *runtime_demhndl_sim32_get_vdm_pointer(ULONG address, ULONG bytes,
+    BOOL protect)
+{
+    runtime_demhndl_active_call *active = active_call();
+    USHORT segment = (USHORT)(address >> 16);
+    USHORT offset = (USHORT)address;
+    (void)protect;
+    if (active == NULL || active->call == NULL || bytes == 0u) {
+        SetLastError(ERROR_INVALID_ADDRESS);
+        return NULL;
+    }
+    /* DIVERGENCE(BOP-DIV-097): OpenNT's Sim32pGetVDMPointer returned an
+     * unbounded SAS alias.  The active source call instead leases precisely
+     * the requested span, keeping the pointer synchronous and confined to
+     * the imported body. */
+    active->guest_address = real_mode_address(segment, offset);
+    return (UCHAR *)acquire_guest_span(active, (uint32_t)bytes, 0);
+}
+
 int runtime_demhndl_copy_guest(USHORT segment, USHORT offset, void *buffer,
     uint32_t bytes)
 {
