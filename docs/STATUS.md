@@ -51,6 +51,13 @@ byte-identical to a selected original, and the current 113-artifact bundle
 staging/provenance verification passes. The old source-build recipe root is
 recorded as a separate cross-component tool closure, not a guest divergence;
 see [S2 evidence](etc/evidence/m0-t270-s2-opennt-guest-mirror-closure-001.md).
+
+**S3 P1 checkpoint:** six selected host originals are exact and four are
+marked divergences, but `nt_error.c`, `vrinit.c` and `vrnmpipe.c` exceed the
+current 50-percent mirror threshold despite their existing focused fixture
+passing.  S3 remains active to move their retained bodies behind minimal
+same-signature mirror boundaries; see
+[P1 evidence](etc/evidence/m0-t270-s3-opennt-host-threshold-audit-001.md).
 ## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition
