@@ -128,6 +128,7 @@
 
 enum {
 #define bx_define_cpudb(model) bx_cpudb_##model,
+/* DIVERGENCE(BX-BUILD-003): component-root include redirect only. */
 #include "bochs-core/cpudb.h"
   bx_cpudb_model_last
 };
@@ -433,6 +434,7 @@ typedef struct {
   } u;
 } BxEvent;
 
+/* DIVERGENCE(BX-BUILD-003): component-root include redirect only. */
 #include "bochs-core/gui/paramtree.h"
 
 // These are the different start modes.

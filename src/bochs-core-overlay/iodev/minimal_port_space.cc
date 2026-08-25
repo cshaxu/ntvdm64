@@ -13,6 +13,12 @@
 //
 /////////////////////////////////////////////////////////////////////////
 
+/* DIVERGENCE(BX-IO-025,BX-IO-029,BX-IO-030,BX-MACH-065,BX-MACH-082):
+ * this private Bochs-only overlay composes the finite no-device port-space.
+ * It retains the original bx_devices lifetime, default-handler, registration
+ * and dispatch bodies omitted from the product-shell subset of
+ * bochs-core/iodev/devices.cc, plus bounded empty-space lifecycle mechanics.
+ * It is compiled solely into bochs-core and exposes no component ABI. */
 #include "iodev.h"
 
 #define LOG_THIS bx_devices.

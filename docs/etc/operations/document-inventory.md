@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2307 |
+| Documentation records | 2308 |
 | --- | --- |
-| Generated UTC | 2026-08-25T19:17:15Z |
+| Generated UTC | 2026-08-25T19:44:22Z |
 
 ## Entries
 
@@ -264,6 +264,7 @@ content-divergent entries.
 | etc/evidence/m0-t269-s2-opennt-host-marker-boundary-closure-001.md | indexed supporting material | 3207f29ea0c56fc3966360efd7267b5e4c5df312f56cb0e26aa800cbe69f8859 |
 | etc/evidence/m0-t269-s3-opennt-host-pif-owner-edge-001.md | indexed supporting material | 7bc1a5d7d82fbc44ac811e3c72f74ade9a787eaadbdd9fb06a6c754710d19604 |
 | etc/evidence/m0-t269-s4-opennt-host-final-conformance-001.md | indexed supporting material | e7a98b109d193921e19237980a3cf913cea20cfd4520fbbf3d31f2b5a43580de |
+| etc/evidence/m0-t270-s1-p1-bochs-port-space-owner-rehome-001.md | indexed supporting material | 6aa8059af1c6167dfb5472797790b6d3045ec8e1d6b6e57d1042e00935f11206 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -575,7 +576,7 @@ content-divergent entries.
 | etc/README.md | indexed supporting material | 65d87b7f6427d8306015c1e02749080ab49b3ae4be09257ce22679ef4bdb0d93 |
 | etc/research/adapter-bios-selector-map-v1.md | indexed supporting material | dfa75c5450c2dd7ed39e08c4d4db37fdf4e4d13ec5bcd3ec7f773ac7af79ae66 |
 | etc/research/adapter-bop-selector-probe-v1.md | indexed supporting material | f9311e4717ad1a44dbc0fbd6fc4f2a09ec86aa20e02b110787c5145a03a9f4c8 |
-| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | 62dfa193607c3051f566d97fb5d22bd9e0514c27a311bf622a9a61d551bb17b8 |
+| etc/research/adapter-external-intrusion-exceptions.md | indexed supporting material | a2bfd1dca5b9e1a517a8f639031a315567ead062eded38101ef45eda9b5e2d39 |
 | etc/research/adapter-host-service-catalog-v1.md | indexed supporting material | 78286fabca48a2066f7296c6e35e6c5ed5f7b55c54bebe2453e798963df294e5 |
 | etc/research/adapter-host-service-plane-v1.md | indexed supporting material | cece5c837bb222ff7301d70db2381d942c55723d49bb0b762c7b46edf2d9eaf8 |
 | etc/research/adapter-host-session-v1.md | indexed supporting material | c7a4ea4e1476f4a87001ed9a9e3ee7ff9f36a39597da45cbd8664cf89c4310fd |
@@ -2321,7 +2322,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 2d3165f59aaaaa4639f4fb1d8ca0c323028dfba4cfbe4f52dbeea4e6083adbca |
+| STATUS.md | principal control document | 116d7637c890e2f2a64e3ea3227cc576114d957339257f8757ece88c3b26a96d |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

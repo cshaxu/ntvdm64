@@ -7,7 +7,7 @@ $picHeader = Join-Path $repositoryRoot 'src/bochs-core/iodev/pic.h'
 $picSource = Join-Path $repositoryRoot 'src/bochs-core/iodev/pic.cc'
 $picAssembly = Join-Path $repositoryRoot 'src/adapter-bochs/minimal_pic.cc'
 $picOverlay = Join-Path $repositoryRoot 'src/bochs-core-overlay/iodev/pic_lifecycle.cc'
-$portSource = Join-Path $repositoryRoot 'src/adapter-bochs/minimal_port_space.cc'
+$portSource = Join-Path $repositoryRoot 'src/bochs-core-overlay/iodev/minimal_port_space.cc'
 foreach ($path in @($machineHeader, $machineSource, $picHeader, $picSource, $picAssembly, $picOverlay, $portSource)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing native PIC boundary input: $path" }
 }

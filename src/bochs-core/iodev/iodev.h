@@ -29,7 +29,9 @@
 #include "plugin.h"
 #include "param_names.h"
 
-class bx_ntvdm_minimal_machine_c;
+/* DIVERGENCE(BX-IO-025): forward declaration for the Bochs-only minimal
+ * machine friendship seam; it does not expose a product-component type. */
+class adapter_bochs_minimal_machine_c;
 
 /* number of IRQ lines supported.  In an ISA PC there are two
    PIC chips cascaded together.  each has 8 IRQ lines, so there
@@ -446,6 +448,7 @@ public:
   bx_bool unregister_irq(unsigned irq, const char *name);
   Bit32u inp(Bit16u addr, unsigned io_len) BX_CPP_AttrRegparmN(2);
   void   outp(Bit16u addr, Bit32u value, unsigned io_len) BX_CPP_AttrRegparmN(3);
+  /* DIVERGENCE(BX-IO-025): bounded minimal-machine port query. */
   bx_bool native_port_is_registered(Bit16u addr, bx_bool write) const;
 
   void register_removable_keyboard(void *dev, bx_keyb_enq_t keyb_enq);
@@ -542,9 +545,10 @@ public:
   unsigned bulkIOQuantumsTransferred;
 
 private:
+  /* DIVERGENCE(BX-IO-025): Bochs-only minimal-machine lifecycle seam. */
   friend class adapter_bochs_minimal_machine_c;
 
-  // BX-IO-025: no-device port-space ownership.
+  /* DIVERGENCE(BX-IO-025): private finite port-space lifecycle. */
   bx_bool init_empty_port_space(void);
   bx_bool cleanup_empty_port_space(void);
 

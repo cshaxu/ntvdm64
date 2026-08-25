@@ -36,8 +36,11 @@
  */
 #define BASE_MEMORY_IN_K  640
 
-
-
+/* DIVERGENCE(BX-IO-025,BX-IO-029,BX-IO-030,BX-MACH-065,BX-MACH-082): this
+ * product-shell subset omits original bx_devices lifetime, default-port
+ * handler, registration and dispatch bodies. The matching private overlay
+ * owns the finite no-device composition; this mirror has no adapter/OpenNT
+ * dependency. */
 
 void bx_devices_c::init(BX_MEM_C *newmem)
 {

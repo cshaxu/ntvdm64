@@ -174,7 +174,8 @@
         "src/bochs-core/iodev/pic.cc",
         "src/bochs-core/iodev/keyboard.cc",
         "src/bochs-core-overlay/iodev/pic_lifecycle.cc",
-        "src/bochs-core-overlay/iodev/keyboard_lifecycle.cc"
+        "src/bochs-core-overlay/iodev/keyboard_lifecycle.cc",
+        "src/bochs-core-overlay/iodev/minimal_port_space.cc"
       ]
     },
     {
@@ -184,7 +185,6 @@
         "src/adapter-bochs/machine_facade.cc",
         "src/adapter-bochs/minimal_machine.cc",
         "src/adapter-bochs/minimal_pic.cc",
-        "src/adapter-bochs/minimal_port_space.cc",
         "src/adapter-bochs/minimal_product_shell.cc",
         "src/adapter-bochs/minimal_sim.cc"
       ]

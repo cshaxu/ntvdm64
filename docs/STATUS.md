@@ -28,6 +28,14 @@
 | Original Owner Request | “请你现在以新的T任务治理清楚，每个S任务治理一个镜像组件。” |
 
 **T270 plan:** S1 `bochs-core`; S2 `opennt-guest`; S3 `opennt-host`; S4 `opennt-bop`; S5 `opennt-softpc`; S6 `opennt-utils`. Each S is independently source-audited and may repair only that component and its private overlay.
+
+**S1 P1 checkpoint:** the imported finite port-space body moved from
+`adapter-bochs` to the private `bochs-core-overlay`, and marker/register gaps
+in the `iodev`/SIM surfaces were repaired. The focused native-PIC source
+fixture passes; a fresh formal graph compiled the moved overlay object, but
+full Ninja completion remains pending after a disposable archive lock and
+execution-environment termination. See
+[P1 evidence](etc/evidence/m0-t270-s1-p1-bochs-port-space-owner-rehome-001.md).
 ## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition

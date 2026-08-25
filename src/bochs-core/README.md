@@ -58,11 +58,13 @@ authorize additional Bochs semantics.
 | `BX-EXEC-016` | One constructor call and typed declarations only; private overlay owns real-mode profile initialization, entry setters and fetch invalidation. | `cpu/init.cc`, `cpu/cpu.h`, `../bochs-core-overlay/cpu/realmode_profile.cc` |
 | `BX-BUILD-002` | Re-rooted FPU include spelling only; no declaration or behavior change. | `cpu/i387.h` |
 | `BX-BUILD-002` | MSVC token-separation spelling for the original `FMT_LL` hex format; no format or runtime behavior change. | `gui/paramtree.cc` |
+| `BX-BUILD-003` | Component-root include redirects only; declarations and behavior remain upstream Bochs. | `bochs.h`, `gui/siminterface.h` |
 | `BX-MACH-023` | True-subset PC-system mirror omits the original full product-shell `Reset` and `exit` methods; the bounded Bochs-only lifecycle is assembled outside the mirror. | `pc_system.cc` |
 | `BX-MACH-024` | One-call PIC teardown boundary delegates finite port unregistration to the private `bochs-core-overlay`; no non-core component imports the overlay. | `iodev/pic.h`, `iodev/pic.cc` |
 | `BX-MACH-025` | True-subset PIC destructor omits removal of a product-tree node that this finite composition never creates. | `iodev/pic.cc` |
 | `BX-MACH-026` | True-subset PIC mirror omits unreachable plugin-registration entry points; minimal Bochs assembly owns the one fixed PIC instance. | `iodev/pic.cc` |
 | `BX-MACH-027` | The same-shaped original keyboard plugin lifecycle retains only a minimal create/destroy delegation; both non-product lifecycle bodies are private to the overlay because the original plugin/SIM/GUI product shell is not composed. | `iodev/keyboard.{cc,h}`, `../bochs-core-overlay/iodev/keyboard_lifecycle.cc` |
+| `BX-IO-025`, `BX-IO-029`, `BX-IO-030`, `BX-MACH-065`, `BX-MACH-082` | The full product-shell device source is a true subset; all omitted original port lifetime/default-handler/dispatch bodies and the bounded no-device lifecycle live privately in the overlay. | `iodev/{devices.cc,iodev.h}`, `../bochs-core-overlay/iodev/minimal_port_space.cc` |
 | `BX-MEM-007`, `BX-MEM-010`, `BX-MEM-020`, `BX-CORE-DIV-006` | Checked ordinary/backing-RAM copy/read/preflight declarations; private overlay owns all bodies. | `memory/memory.h`, `../bochs-core-overlay/memory/checked_ram.cc` |
 | `BX-MEM-024` | SIM-free reset-window memory declaration and minimal-machine friendship; private overlay owns the allocation body. | `memory/memory.h`, `../bochs-core-overlay/memory/minimal_memory.cc` |
 
