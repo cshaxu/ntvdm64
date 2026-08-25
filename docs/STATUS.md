@@ -2,13 +2,30 @@
 
 ## Current Work
 
-**Active: M0 T265 S7 — administrative closure hold.** The S1--S7 scope is
-complete and historically closed; this identifier remains only because the
-current governance gate requires exactly one active packet until the owner
-admits a successor. The next candidate in [QUEUE.md](QUEUE.md) remains
-unadmitted.
+**Active: M0 T266 S1 — repository-local source-closure inventory and disposition.** Establish the complete live `refs/` consumer ledger, the owned destination for every reachable input, and the evidence/archive treatment required before any `refs/` removal.
 
 ## Active Packet
+
+### M0 T266 S1 — repository-local `refs` consumer inventory and disposition
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T266 S1`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner objective: “执行T任务：消灭refs，实现src闭包和artifacts报告归档。” The owner-selected first queue package is admitted as T266; its former unnumbered row is removed from Queue. |
+| Objective | Produce the exhaustive, reproducible ledger of every live `refs/` build, configuration, include, tool, probe, test, source and report consumer; assign each one an owned destination or an explicit deletion/archive disposition without changing runtime semantics. |
+| Non-goals | No premature `refs/` deletion; no wholesale import of dormant OpenNT/Bochs trees; no BOP/provider/machine feature; no historical source alteration; no build result claimed before the later migration packets. |
+| Reference Baseline | [source-closure proposal](etc/operations/proposal-repository-local-source-closure-refs-retirement-001.md), M0 T265 closure, the current formal Ninja graph, all tracked `refs/` path references, and the source policy. |
+| Files And ABI Surface | Status, Queue, the T266 proposal, a machine-readable consumer/disposition manifest, source-closure evidence and documentation inventory only. No production ABI in S1. |
+| Applicable Rules | Execution and documentation closure, source policy, mirror-component standard, build-output hygiene, component ownership and no external formal dependency. |
+| Verification | Tracked-file and formal-manifest scans; every row has consumer class, exact source path, owner destination, disposition and S-packet; independent count/reachability review; documentation governance and `git diff --check`. |
+| Expected Markers | No ambiguous live consumer; every reachable Bochs input maps to `bochs-core`/`adapter-bochs`, OpenNT input to its named component, tool to `tools/`, fixture to `tests/`, and retained report only to `artifacts/research/`. |
+| Asset Needs | Existing local `refs/` snapshots for read-only inventory, current owned component roots, tracked build/test/tool sources and formal Ninja generator. No new external import. |
+| Reporting Requirements | Separate live, dormant historical, provenance-only and archive/report rows; state exact file counts and migration order; identify blockers and do not call a documentation reference a runtime dependency. |
+| Stop Conditions | A reachable input has no valid owner, a proposed move would violate mirror provenance, a binary lacks approval/manifest, a formal path is not reproducible, or deletion would remove an unarchived required report. |
+| Exit Criteria | The manifest covers every live `refs/` consumer and all eight snapshot roots, gives a non-destructive disposition/order for each, and its evidence is internally consistent. |
+| Original Owner Request | “执行T任务：消灭refs，实现src闭包和artifacts报告归档。” |
+| Similar-Issue Sweep | CMake/Ninja generators, configuration projections, `tools/build`, `tools/probe`, `tools/governance`, tests, component READMEs, literal source provenance comments, `.gitignore`, and archived report inputs. |
+**S1 closure:** the consumer ledger covers 49 tracked non-document consumers and all eight local `refs/` snapshot roots. It separates live formal/build/configuration input from retained historical provenance and assigns every live path to S2, S3 or S4 before S5 may remove the tree. See the [S1 ledger](etc/evidence/m0-t266-s1-refs-consumer-disposition-001.md) and [machine-readable disposition](etc/operations/m0-t266-s1-refs-consumer-disposition.tsv).
 
 ### M0 T265 S1 — Bochs component identity and dependency governance
 

@@ -1,0 +1,50 @@
+consumer_path	consumer_class	refs_root_or_path	current_reachability	owned_destination_or_disposition	packet
+CMakeLists.txt	default-disabled CMake fixture	archive	tracked	move reconstructed monitor/transport inputs to tests/legacy and repair CMake	S4
+README.md	documentation provenance	ntvdmx64-derived	tracked	retain textual external provenance; no live path	S5
+RESEARCH-PROJECT.md	documentation provenance	ntvdmx64,ntvdmx64-derived,opennt	tracked	retain textual external provenance; no live path	S5
+src/opennt-bop/README.md	production source provenance comment	opennt	tracked	rewrite to named OpenNT component relative source path	S3
+src/opennt-bop/vdmredir/vrmslot.c	production source provenance comment	opennt	tracked	rewrite to named OpenNT component relative source path	S3
+tests/bx-ntvdm-minimal-machine-boundary.ps1	test/fixture input	bochs	tracked	re-root Bochs input to src/bochs-core or retire historical fixture	S2/S4
+tests/bx-ntvdm-minimal-mechanics-boundary.ps1	test/fixture input	bochs	tracked	re-root Bochs input to src/bochs-core or retire historical fixture	S2/S4
+tests/component-integration/bx-vdm-legacy-fixtures/Test-BochsBuildIsolationBoundary.ps1	test/fixture input	bochs	tracked	re-root Bochs input to src/bochs-core or retire historical fixture	S2/S4
+tests/component-integration/bx-vdm-legacy-fixtures/Test-BochsDeferredStartupPlanBoundary.ps1	test/fixture input	bochs	tracked	re-root Bochs input to src/bochs-core or retire historical fixture	S2/S4
+tests/component-integration/bx-vdm-legacy-fixtures/Test-BochsEmptyPortSpaceObjectBoundary.ps1	test/fixture input	bochs	tracked	re-root Bochs input to src/bochs-core or retire historical fixture	S2/S4
+tests/component-integration/bx-vdm-legacy-fixtures/Test-BochsFmtLlLexicalBoundary.ps1	test/fixture input	bochs	tracked	re-root Bochs input to src/bochs-core or retire historical fixture	S2/S4
+tests/component-integration/bx-vdm-legacy-fixtures/Test-BochsIntrusionRegister.ps1	test/fixture input	bochs	tracked	re-root Bochs input to src/bochs-core or retire historical fixture	S2/S4
+tests/component-integration/bx-vdm-legacy-fixtures/Test-BochsStartupTransactionBoundary.ps1	test/fixture input	bochs	tracked	re-root Bochs input to src/bochs-core or retire historical fixture	S2/S4
+tests/component-integration/bx-vdm-legacy-fixtures/Test-T104DeferredCurrentAdapterDerivative.ps1	test/fixture input	bochs	tracked	re-root Bochs input to src/bochs-core or retire historical fixture	S2/S4
+tools/build/Build-T197S6MinimalSimObject.ps1	retained pre-T260 build tool	bochs	tracked	tools/historical or docs/etc/legacy_code; not a live build path	S4
+tools/build/New-T260S8FullNinjaGraph.ps1	formal Ninja/config input	bochs	tracked	src/bochs-core/config.h and src/bochs-core include roots	S2
+tools/build/New-T95S6IntactNativeBuildRoot.ps1	retained pre-T260 build tool	bochs	tracked	tools/historical or docs/etc/legacy_code; not a live build path	S4
+tools/build/New-T95S6IntactNativeTupleManifest.ps1	retained pre-T260 build tool	bochs	tracked	tools/historical or docs/etc/legacy_code; not a live build path	S4
+tools/build/New-T95S6MSVCNativeContainerBuildRoot.ps1	retained pre-T260 build tool	bochs	tracked	tools/historical or docs/etc/legacy_code; not a live build path	S4
+tools/build/New-T95S6NarrowCompanionBuildRoot.ps1	retained pre-T260 build tool	bochs	tracked	tools/historical or docs/etc/legacy_code; not a live build path	S4
+tools/build/New-T95S6NativeContainerManifest.ps1	retained pre-T260 build tool	bochs	tracked	tools/historical or docs/etc/legacy_code; not a live build path	S4
+tools/build/Project-BochsConfig.ps1	formal Ninja/config input	bochs	tracked	src/bochs-core/config.h and src/bochs-core include roots	S2
+tools/build/Stage-T235S5GuestBundle.ps1	guest staging input	opennt	tracked	src/opennt-guest retained binary/source root	S3
+tools/build/t260-s8-component-manifest.json	formal Ninja/config input	bochs	tracked	src/bochs-core/config.h and src/bochs-core include roots	S2
+tools/governance/Export-OpenNtBopInventory.ps1	current governance/source inventory	opennt	tracked	named src/opennt-* owner roots plus current source-closure manifest	S3
+tools/governance/Export-OpenNtBopProviderMap.ps1	current governance/source inventory	opennt	tracked	named src/opennt-* owner roots plus current source-closure manifest	S3
+tools/governance/Export-OpenNtDemProviderMap.ps1	current governance/source inventory	opennt	tracked	named src/opennt-* owner roots plus current source-closure manifest	S3
+tools/governance/Export-T260S1OwnerManifest.ps1	current governance/source inventory	bochs,opennt	tracked	named src/opennt-* owner roots plus current source-closure manifest	S3
+tools/historical/pre-t260/build/Build-Bochs26Minimal.ps1	retained historical tool	bochs	tracked	docs/etc/legacy_code (non-executable evidence) or delete	S4
+tools/historical/pre-t260/probe/Invoke-T212S6NativeCliCancellationProbe.ps1	retained historical tool	bochs	tracked	docs/etc/legacy_code (non-executable evidence) or delete	S4
+tools/historical/t225-s7/t225-s7-full-module-manifest.json	retained historical tool	bochs	tracked	docs/etc/legacy_code (non-executable evidence) or delete	S4
+tools/import/Import-Bochs26.ps1	import pipeline	archive,bochs	tracked	src/bochs-core direct import target; archive outside repository	S2/S5
+tools/probe/Invoke-T198S103FastReadObservationFixturePrepare.ps1	historical-tool-or-probe	bochs	tracked	move to docs/etc/legacy_code or delete after report disposition	S4
+tools/probe/Invoke-T198S3FiniteNativeRunProbe.ps1	historical-tool-or-probe	bochs	tracked	move to docs/etc/legacy_code or delete after report disposition	S4
+tools/probe/Invoke-T198S48NtioCleanRebuildProbe.ps1	historical-tool-or-probe	bochs	tracked	move to docs/etc/legacy_code or delete after report disposition	S4
+tools/probe/Invoke-T198S83SpcKbdLifecycleProbe.ps1	historical-tool-or-probe	bochs	tracked	move to docs/etc/legacy_code or delete after report disposition	S4
+tools/probe/Invoke-T198S89CurrentCompositionNativeProbe.ps1	historical-tool-or-probe	bochs	tracked	move to docs/etc/legacy_code or delete after report disposition	S4
+tools/probe/Invoke-T198S93SourceBuiltNormalReturnFixturePrepare.ps1	historical-tool-or-probe	bochs	tracked	move to docs/etc/legacy_code or delete after report disposition	S4
+tools/probe/Invoke-T198S94SourceBuiltNormalReturnNativeProbe.ps1	historical-tool-or-probe	bochs	tracked	move to docs/etc/legacy_code or delete after report disposition	S4
+tools/probe/Invoke-T200S14DirectCompositionProbe.ps1	historical-tool-or-probe	bochs	tracked	move to docs/etc/legacy_code or delete after report disposition	S4
+tools/probe/Invoke-T200S16DirectStartupPlanProbe.ps1	historical-tool-or-probe	bochs	tracked	move to docs/etc/legacy_code or delete after report disposition	S4
+tools/probe/Invoke-T200S21InitialStatePublicationProbe.ps1	historical-tool-or-probe	bochs	tracked	move to docs/etc/legacy_code or delete after report disposition	S4
+tools/probe/Invoke-T200S22EngineMachineStageProbe.ps1	historical-tool-or-probe	bochs	tracked	move to docs/etc/legacy_code or delete after report disposition	S4
+tools/probe/Invoke-T200S22MachineStageProbe.ps1	historical-tool-or-probe	bochs	tracked	move to docs/etc/legacy_code or delete after report disposition	S4
+tools/probe/Invoke-T200S27NativeCliProbe.ps1	historical-tool-or-probe	bochs	tracked	move to docs/etc/legacy_code or delete after report disposition	S4
+tools/probe/Invoke-T212S5MechanicalCancellationProbe.ps1	historical-tool-or-probe	bochs	tracked	move to docs/etc/legacy_code or delete after report disposition	S4
+tools/probe/Invoke-T214S3CompositionOwnerFixture.ps1	historical-tool-or-probe	bochs	tracked	move to docs/etc/legacy_code or delete after report disposition	S4
+tools/probe/Invoke-T220S5SourceCompositionClosure.ps1	historical-tool-or-probe	bochs	tracked	move to docs/etc/legacy_code or delete after report disposition	S4
+tools/probe/Invoke-T225S6FourImageProfileFixture.ps1	historical-tool-or-probe	bochs	tracked	move to docs/etc/legacy_code or delete after report disposition	S4
