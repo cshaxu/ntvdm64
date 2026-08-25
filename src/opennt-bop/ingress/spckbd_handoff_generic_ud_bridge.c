@@ -7,19 +7,6 @@
 
 void MS_bop_F(void);
 
-static __declspec(thread) uint8_t g_display_state;
-
-void runtime_spckbd_handoff_display_state_set(uint8_t state)
-{
-    g_display_state = state == 2u ? state : 0u;
-}
-
-void runtime_spckbd_handoff_display_state_reset(void)
-{
-    g_display_state = 0u;
-    runtime_spckbd_handoff_reset();
-}
-
 int runtime_spckbd_handoff_generic_ud_recognizes(
     const struct runtime_generic_ud_event *event)
 {
@@ -39,7 +26,8 @@ int runtime_spckbd_handoff_generic_ud_dispatch(
     if (!runtime_spckbd_handoff_generic_ud_recognizes(event) ||
         outcome == 0 || event->fault_rip > UINT64_MAX - 3u ||
         !runtime_spckbd_handoff_begin(event->cs, event->ds,
-            (uint16_t)event->esi, (uint16_t)event->eax, g_display_state)) return 0;
+            (uint16_t)event->esi, (uint16_t)event->eax,
+            runtime_spckbd_handoff_display_state())) return 0;
     MS_bop_F();
     if (!runtime_spckbd_handoff_end()) return 0;
     memset(outcome, 0, sizeof(*outcome));

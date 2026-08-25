@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "opennt-bop/observation/command_bootstrap_observation.h"
+#include "app/observation/command_bootstrap_observation.h"
 
 typedef struct fixture_ram { uint8_t bytes[0x100000u]; } fixture_ram;
 
@@ -15,7 +15,7 @@ static int read_guest(void *state, uint64_t address, uint8_t *bytes, uint32_t co
 
 int main(void)
 {
-    fixture_ram ram;
+    static fixture_ram ram;
     struct runtime_generic_ud_event event;
     struct runtime_generic_ud_outcome outcome;
     struct runtime_command_bootstrap_observation observation;

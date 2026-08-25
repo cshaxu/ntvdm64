@@ -2,7 +2,7 @@
  * NTVDM product host.  Preserve their names, parameters, conversion and
  * last-error contract using only public Win32 APIs and call-local storage. */
 #include "adapter-win32/include/opennt-api/opennt_dem_file_oem_facade.h"
-#include "opennt-bop/observation/demfile_create_observation.h"
+#include "demfile_create_observation.h"
 
 #include <stdlib.h>
 #include <string.h>

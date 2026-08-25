@@ -8,7 +8,4 @@ int runtime_spckbd_handoff_generic_ud_recognizes(
 int runtime_spckbd_handoff_generic_ud_dispatch(
     const struct runtime_generic_ud_event *event,
     struct runtime_generic_ud_outcome *outcome);
-void runtime_spckbd_handoff_display_state_set(uint8_t state);
-void runtime_spckbd_handoff_display_state_reset(void);
-
 #endif

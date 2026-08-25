@@ -1,7 +1,7 @@
 #include "engine_contract.h"
 #include "machine_engine.h"
 #include "opennt-bop/ingress/dem_runtime_session.h"
-#include "opennt-bop/ingress/dem_startup_composition.h"
+#include "app/startup_composition.h"
 #include "opennt-bop/ingress/command_runtime_session.h"
 #include "bop_composition.h"
 #include "adapter-softpc/guest_pointer_manager.h"
@@ -66,7 +66,7 @@ int runtime_engine_run(const struct runtime_engine_request *request,
        Bind the Direct OpenNT DEM session before any machine stage exists;
        its checked-RAM callbacks can succeed only while that stage is active. */
     if (!runtime_dem_runtime_session_bind() ||
-        !runtime_command_runtime_session_bind_from_startup()) {
+        !runtime_dem_startup_bind_command_runtime_session()) {
         runtime_command_runtime_session_reset();
         runtime_dem_runtime_session_reset();
         runtime_opennt_direct_access_reset_thread();

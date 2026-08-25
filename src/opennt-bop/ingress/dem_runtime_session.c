@@ -1,6 +1,4 @@
 #include "dem_runtime_session.h"
-#include "dem_startup_composition.h"
-
 #include "opennt-bop/ingress/dem_direct_session.h"
 #include "opennt-bop/dem/opennt_demdasd_ioctl_compat.h"
 #include "opennt-bop/ingress/dem_native_session.h"

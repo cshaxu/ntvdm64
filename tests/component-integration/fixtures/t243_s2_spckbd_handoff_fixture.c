@@ -2,6 +2,7 @@
 #include <string.h>
 
 #include "opennt-bop/ingress/spckbd_handoff_generic_ud_bridge.h"
+#include "adapter-softpc/spckbd_handoff_shim.h"
 #include "cpu_state_abi.h"
 
 static unsigned char ram[0x100000];
@@ -67,7 +68,7 @@ int main(void)
     if (runtime_spckbd_handoff_generic_ud_recognizes(&event)) return 4;
     event.execution_mode = RUNTIME_CPU_EXECUTION_REAL; event.eax = 0xbeeu;
     if (runtime_spckbd_handoff_generic_ud_recognizes(&event)) return 5;
-    runtime_spckbd_handoff_display_state_reset();
+    runtime_spckbd_handoff_reset();
     puts("T243 S2 source-shaped BOP 5F STREAM_IO handoff passes");
     return 0;
 }

@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#include "cpu_state_abi.h"
+#include "adapter-softpc/cpu_state_abi.h"
 #include "adapter-bop/generic_ud_bridge.h"
 
 #define RUNTIME_DEM_OPEN_OBSERVATION_MAGIC UINT32_C(0x4258444f)

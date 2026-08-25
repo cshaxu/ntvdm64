@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#include "generic_ud_bridge.h"
+#include "adapter-bop/generic_ud_bridge.h"
 
 #define RUNTIME_BOP_SEQUENCE_OBSERVATION_MAGIC UINT32_C(0x4258534f)
 #define RUNTIME_BOP_SEQUENCE_OBSERVATION_VERSION UINT32_C(2)

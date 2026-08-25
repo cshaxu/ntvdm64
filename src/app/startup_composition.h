@@ -1,5 +1,5 @@
-#ifndef RUNTIME_BOP_DEM_STARTUP_COMPOSITION_H
-#define RUNTIME_BOP_DEM_STARTUP_COMPOSITION_H
+#ifndef RUNTIME_APP_STARTUP_COMPOSITION_H
+#define RUNTIME_APP_STARTUP_COMPOSITION_H
 
 #include <stdint.h>
 
@@ -28,5 +28,6 @@ int runtime_dem_startup_copy_command_source(char *application,
  * form which OpenNT cmdconf's SHELL= producer can pass to guest sysconf. */
 int runtime_dem_startup_copy_bootstrap_command(char *command_path,
     uint32_t command_path_capacity);
+int runtime_dem_startup_bind_command_runtime_session(void);
 
 #endif

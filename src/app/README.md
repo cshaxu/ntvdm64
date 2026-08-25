@@ -10,6 +10,16 @@ child-engine launch environment, cancellation, exit status and diagnostics.
 They must not implement guest DOS/BOP semantics or manipulate Bochs CPU/RAM
 objects directly.
 
+`observation/` is default-off CLI diagnostics only. `bop_composition` wraps
+the BOP route after it returns in order to record an already-produced typed
+outcome; it neither recognizes a selector nor changes guest state. Selector
+and service interpretation remains in `opennt-bop`.
+
+`startup_composition` owns only app-selected guest images, launch declaration
+and machine-stage assembly. It supplies copied launch values to the temporary
+OpenNT provider session through declared calls; it does not interpret BOP
+selectors or services.
+
 It may compose `opennt-guest`, `opennt-bop`, `opennt-host`, `adapter-bop`,
 `adapter-win32` and `adapter-softpc`, but does not implement their semantics. Its final executable
 target is `ntvdm64`; no component may import `app`.

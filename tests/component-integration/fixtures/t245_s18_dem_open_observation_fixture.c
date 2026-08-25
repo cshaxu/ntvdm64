@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "opennt-bop/observation/dem_open_observation.h"
+#include "app/observation/dem_open_observation.h"
 
 typedef struct { uint8_t bytes[0x100000u]; } ram_t;
 

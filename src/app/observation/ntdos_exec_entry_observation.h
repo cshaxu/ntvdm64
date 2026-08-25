@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#include "cpu_state_abi.h"
+#include "adapter-softpc/cpu_state_abi.h"
 #include "ntdos_exec_observation.h"
 #include "adapter-bop/generic_ud_bridge.h"
 

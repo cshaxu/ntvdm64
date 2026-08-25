@@ -22,6 +22,18 @@ OpenNT-derived source. They are not comparison-only source trees. Any
 unreachable historical declaration is externalized to `docs/etc/legacy_code/`
 rather than retained merely as reference material.
 
+`facade/demfile_create_observation.*` is a default-off diagnostic published
+beside the file facade which produces it. It does not implement a DEM service
+or alter a file operation; `app` alone renders the recorded observation.
+
+`facade/demfile_create_observation.*` is a default-off diagnostic published
+beside the file facade which produces it. It does not implement a DEM service
+or alter a file operation; `app` alone renders the recorded observation.
+
+`facade/demfile_create_observation.*` is a default-off diagnostic published
+beside the file facade which produces it.  It does not implement a DEM service
+or alter a file operation; `app` alone renders the recorded observation.
+
 | ID | Original definition purpose | Divergence reason | Replacement implementation | Production file(s) |
 | --- | --- | --- | --- | --- |
 | `WIN32-DIV-001` | The NTVDM resource DLL/string table supplies hard-error text. | That resource closure is not a composable CLI input. | Use the resource ID in the same terminal host-notification contract. | `facade/opennt_error_dialog_facade.c:54` |

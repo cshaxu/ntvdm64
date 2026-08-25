@@ -27,8 +27,9 @@ unavailable.
 
 ## Boundaries
 
-- `adapter-bop` keeps only selector-blind copied-frame ingress and typed
-  completion.  It may not recognize a BOP selector/service or own an OpenNT
+- `adapter-bop` keeps only copied-frame BOP-entry ingress and typed
+  completion. It may recognize the mechanical entry envelope needed to enter
+  `opennt-bop`, but may not interpret a selector/service or own an OpenNT
   provider.
 - `adapter-softpc` owns same-shaped CCPU/SAS/SoftPC facades that turn an
   original machine-facing call into bounded Bochs mechanics through
@@ -48,10 +49,13 @@ unavailable.
 
 Inventory every production file under `opennt-bop/ingress` and
 `opennt-bop/observation`, plus all `*_composition`, `*_session`, `*_bridge`,
-`*_compat` and source-derived route files.  Rehome each item to its unique
-owner, or delete it when superseded by the source-first recovery below.  Do
-not move selector recognition into `adapter-bop`; replace it only through an
-original-shaped dispatcher in a subsequent S.  Restore missing directly
+`*_compat` and source-derived route files. Rehome diagnostics and top-level
+composition to their unique owner, or delete them when superseded by the
+source-first recovery below. A current selector/service bridge cannot move to
+`adapter-bop`: it remains temporarily in `opennt-bop`, frozen with an exact
+original-dispatcher replacement packet, until the matching S replaces it.
+Do not move selector recognition into `adapter-bop`; replace it only through
+an original-shaped dispatcher in a subsequent S. Restore missing directly
 needed original headers/data units where they are an actual input to an
 admitted package.
 

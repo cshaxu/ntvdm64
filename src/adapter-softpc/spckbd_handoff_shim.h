@@ -11,6 +11,8 @@ int runtime_spckbd_handoff_begin(uint16_t cs, uint16_t ds, uint16_t si,
     uint16_t ax, uint8_t screen_state);
 int runtime_spckbd_handoff_end(void);
 void runtime_spckbd_handoff_reset(void);
+void runtime_spckbd_handoff_display_state_set(uint8_t state);
+uint8_t runtime_spckbd_handoff_display_state(void);
 
 word getCS(void);
 word getDS(void);

@@ -10,6 +10,17 @@ typedef struct runtime_spckbd_handoff_call {
 } runtime_spckbd_handoff_call;
 
 static __declspec(thread) runtime_spckbd_handoff_call g_call;
+static __declspec(thread) uint8_t g_display_state;
+
+void runtime_spckbd_handoff_display_state_set(uint8_t state)
+{
+    g_display_state = state == 2u ? state : 0u;
+}
+
+uint8_t runtime_spckbd_handoff_display_state(void)
+{
+    return g_display_state;
+}
 
 static int real_address(uint16_t segment, uint16_t offset, uint32_t bytes,
     uint32_t *address)
@@ -41,6 +52,7 @@ int runtime_spckbd_handoff_end(void)
 void runtime_spckbd_handoff_reset(void)
 {
     memset(&g_call, 0, sizeof(g_call));
+    g_display_state = 0u;
 }
 
 word getCS(void) { return g_call.cs; }

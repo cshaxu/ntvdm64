@@ -28,3 +28,4 @@ header relationships. Non-linkable historical overlays are evidence under
 | --- | --- | --- | --- | --- |
 | `SOFTPC-DIV-001` | Historical SAS/CPU macros use process-global names. | Independently imported owner modules collide on those names. | Private aliases retain the mirror spelling while binding to a call-local mechanical record. | `softpc_memory_size_shim.h:16` |
 | `SOFTPC-DIV-002` | Historical CPU register macros use process-global names. | They cannot safely represent a bounded session call on modern hosts. | Private aliases bind to the synchronous copied-state record with no pointer retention. | `softpc_tape_io_shim.h:15` |
+| `SOFTPC-DIV-003` | The reached keyboard handoff expects a mutable display-state source alongside CCPU/SAS accessors. | The BOP route must not own machine-facing state. | Keep the per-thread display-state value in the same SoftPC compatibility call boundary. | `spckbd_handoff_shim.{c,h}` |

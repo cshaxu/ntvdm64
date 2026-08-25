@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "opennt-bop/observation/ntdos_exec_entry_observation.h"
+#include "app/observation/ntdos_exec_entry_observation.h"
 
 static uint8_t ram[UINT32_C(0x100000)];
 
