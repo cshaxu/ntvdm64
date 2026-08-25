@@ -79,6 +79,11 @@ now resides in `opennt-bop-overlay` while its mirror translation unit preserves
 the original single linkage for shared DEM dispatch globals. The formal Ninja
 graph is current and the focused 73-slot imported-dispatch fixture passes; see
 [P3 evidence](etc/evidence/m0-t270-s4-p3-dem-dispatch-overlay-rehome-001.md).
+
+**S4 P4 checkpoint:** the 113.3-percent-divergent VDMREDIR mailslot rehost now
+resides in `opennt-bop-overlay` behind a single mirror linkage boundary, so its
+private record/list state remains single-instance. A rebuilt formal Ninja graph
+and focused Redirector fixture pass; see [P4 evidence](etc/evidence/m0-t270-s4-p4-vdmredir-mailslot-overlay-rehome-001.md).
 ## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition
