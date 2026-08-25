@@ -59,6 +59,13 @@ overlay; same-signature mirror boundaries and the incremental formal
 81-edge Ninja/host fixture pass.  See
 [P1 evidence](etc/evidence/m0-t270-s3-opennt-host-threshold-audit-001.md)
 and [P2 evidence](etc/evidence/m0-t270-s3-p2-opennt-host-overlay-rehome-001.md).
+
+**S4 P1 checkpoint:** the three over-threshold SoftPC BIOS fragments
+`mem_size.c`, `tape_io.c` and `emm_fncs.c` moved into `opennt-bop-overlay`;
+same-signature mirror boundaries, the incremental formal 82-edge Ninja graph
+and their focused fixtures pass.  The remaining BOP source/route owner audit
+continues; see
+[P1 evidence](etc/evidence/m0-t270-s4-p1-softpc-bop-overlay-rehome-001.md).
 ## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition

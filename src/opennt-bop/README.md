@@ -61,7 +61,7 @@ comment. Historic overlays are evidence only and are recorded in
 | `BOP-DIV-020` | `cmdpif.c` assigns a `MAX_PATH` length to a 16-bit CMDINFO field. | Modern compilation requires a visible narrowing boundary. | Explicitly convert the bounded original value. | `command/cmdpif.c:231` |
 | `BOP-DIV-021` | `cmdpif.c` assigns a bounded command path size. | The destination retains a 16-bit original ABI. | Explicitly convert the bounded original value. | `command/cmdpif.c:264` |
 | `BOP-DIV-022` | `cmdredir.c` uses K&R forms and diagnostic locals. | `/W4 /WX` diagnoses them. | Preserve semantic body while applying only warning-clean declarations. | `command/cmdredir.c:15` |
-| `BOP-DIV-023` | `mem_size.c` includes Insignia/CPU/SAS product headers. | They are not a standalone modern closure. | Use the narrow SoftPC memory-size facade. | `softpc/mem_size.c:4` |
+| `BOP-DIV-023` | `mem_size.c` includes Insignia/CPU/SAS product headers. | They are not a standalone modern closure, and the reached one-function subset exceeds the mirror threshold. | The matching mirror keeps the same `memory_size` entry; the source subset and narrow SoftPC memory-size facade are private overlay code. | `softpc/mem_size.c`, `../opennt-bop-overlay/softpc/mem_size.c` |
 | `BOP-DIV-024` | `suballcp.h` imports private NT headers. | They are unavailable outside NT4 composition. | Use `opennt_xms_compat.h` plus the same-shaped `adapter-softpc` facade. | `xms/suballcp.h:2` |
 | `BOP-DIV-025` | `suballoc.c` imports private NT headers. | They are unavailable outside NT4 composition. | Use `opennt_xms_compat.h` plus the same-shaped `adapter-softpc` facade. | `xms/suballoc.c:2` |
 | `BOP-DIV-026` | `xms.c` imports XMS/SoftPC/SAS/private NT headers. | The historical product closure is absent. | Use the local XMS compatibility header and `adapter-softpc` machine facade. | `xms/xms.c:2` |
@@ -117,7 +117,7 @@ comment. Historic overlays are evidence only and are recorded in
 | `BOP-DIV-077` | `DpmiInitApp` obtains an NT4 VdmTib/SS:SP startup frame. | That private host stack translation is unavailable. | Retain AX/DPMI startup ordering through a staged copied CPU/frame request. | `dpmi/dpmi32.c` |
 | `BOP-DIV-078` | `DpmiPassTableAddress` publishes NT4 host LDT/IntelBase addresses. | Bochs owns descriptor tables and exports no such host address. | Preserve only the selector-table publication event as a fixed guest-linear value. | `dpmi/dpmi32.c` |
 | `BOP-DIV-079` | `dpmiselr.c` uses the historical eight-byte LDT selector record. | Native x64 alignment would enlarge the compatibility record and alter its original selector stride. | Pack the source-facing record to eight bytes and assert that ABI at compile time. | `dpmi/dpmi_descriptor_source_shim.h` |
-| `BOP-DIV-080` | `illegalp.c` / `unexp_nt.c` execute the historical INT 06 handling sequence against CCPU/SAS and physical ports. | The original CCPU worker cannot be linked to Bochs directly. | Retain the source operation order as copied RAM/port actions; selector decoding is owned by the adjacent BOP ingress dispatcher. | `softpc/opennt_int06_provider.c`, `ingress/startup_machine_interrupt.c` |
+| `BOP-DIV-080` | Historical SoftPC BIOS entries require unavailable product-shell facilities. | The original CCPU worker cannot be linked to Bochs directly, and the reached `cassette_io`/`emm_init` source fragments exceed the mirror threshold. | Retain the source operation order as private overlay bodies behind same-signature mirror entries; selector decoding remains owned by the BOP routing layer. | `softpc/{tape_io.c,emm_fncs.c}`, `../opennt-bop-overlay/softpc/{tape_io.c,emm_fncs.c}`, `softpc/opennt_int06_provider.c`, `ingress/startup_machine_interrupt.c` |
 | `BOP-DIV-081` | `softpc.new/host/src/nt_umb.c` defines the reached `UMBNotify(UCHAR)` notification as an empty return. | The full `nt_umb.c` unit also owns an unavailable UMB allocator/product configuration shell and cannot enter the bounded BOP composition; MSVC `/W4 /WX` rejects its deliberately unread parameter. | Retain the original signature and empty result in an explicitly identified fragment, adding only `(void)code`; do not infer allocation or device behavior. | `softpc/opennt_config_complete_composition.c`, `softpc/nt_bop_config_done.c` |
 | `BOP-DIV-087` | OpenNT resolves the VDMREDIR provider through a dynamically loaded DLL import surface. | The admitted one-process composition statically links the recovered provider. | Keep the original provider declarations in the exact `vrnmpipe.h`; place only the project-private static binding declarations in the owning ingress translation unit. | `ingress/redir_native_session.c` |
 | `BOP-DIV-088` | OpenNT VDMREDIR services 00/01 enter `VrInitialize`/`VrUninitialize`, whose success path composes VDD hooks, CCPU guest-state writes, NetBIOS/DLC and ICA lifecycle. | The current copied-frame composition has not admitted that complete substrate. | Return the existing API-style invalid-function result for both services; do not mark the session loaded or fabricate a successful initialization. | `ingress/redir_native_session.c` |
@@ -125,3 +125,11 @@ comment. Historic overlays are evidence only and are recorded in
 
 The migration evidence is
 [`m0-t260-s5-opennt-bop-layout-migration-001.md`](../../docs/etc/evidence/m0-t260-s5-opennt-bop-layout-migration-001.md).
+
+## Private-overlay disposition
+
+`opennt-bop-overlay` is private to this mirror component.  It contains only
+registered source subsets or implementation fragments whose retained body
+would otherwise exceed the mirror threshold.  Each `opennt-bop` boundary
+retains its original exported name, parameters and result; no other component
+may include the overlay directly.
