@@ -1,5 +1,8 @@
 
 
+/* DIVERGENCE(BOP-DIV-096): the original packed DOS disk I/O structures rely
+ * on the historical build-wide packing state.  Declare the same one-byte
+ * packing locally so their guest-visible layout stays identical on x86/x64. */
 #pragma pack(1)
 
 #define MAX_FLOPPY_TYPE     5
