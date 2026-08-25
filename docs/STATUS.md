@@ -2,47 +2,49 @@
 
 ## Current Work
 
-**Active: M0 T270 S1 — Bochs-core mirror and overlay reconciliation.** Bring one mirror component at a time to the current source-identity, divergence-register and private-overlay standard; start with the remaining Bochs-core ownership and diff-compression defects.
+**Active: M0 T270 S2 — Opennt-guest mirror reconciliation.** Bring one mirror component at a time to the current source-identity, divergence-register and private-overlay standard; audit selected OpenNT guest source and staged artifact ownership without changing guest behavior.
 
 ## Active Packet
 
-### M0 T270 S1 — Bochs-core mirror and overlay reconciliation
+### M0 T270 S2 — Opennt-guest mirror reconciliation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T270 S1`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | Owner-directed new T: “每个 S 任务治理一个镜像组件”; T269 is closed by its existing final conformance record. |
-| Objective | Reconcile `bochs-core` and `bochs-core-overlay` so every production file has one valid mirror/overlay disposition and all original Bochs bodies are owned by the correct side of the boundary. |
-| Non-goals | No new CPU, device, BOP, OpenNT, SoftPC, CLI or guest behavior; no feature enablement; no broad Bochs import; no change to another mirror component. |
-| Scope | `bochs-core`, `bochs-core-overlay`, `adapter-bochs` provenance/owner edges, their READMEs, intrusion register, formal manifest, focused tests and S1 evidence. |
-| Verification | Recompute normalized source identities against pinned Bochs 2.6; measure every changed retained file; reconcile local marker, README and central exception register; scan overlay consumers and original-body ownership; external formal Ninja build and focused boundary fixtures; governance and diff checks. |
-| Exit Criteria | Every Bochs-core unit is exact, registered true subset, registered same-shaped modification, or a minimal marked call/declaration boundary to private overlay; `adapter-bochs` retains no imported Bochs body; no overlay has an external consumer; source/register/build evidence agrees. |
-| Reference Baseline | `m0-t265-s4-bochs-core-overlay-audit-001.md`, pinned Bochs 2.6, current component READMEs, intrusion register, T269 closure and `proposal-mirror-component-conformance-reconciliation-001.md`. |
-| Files And ABI Surface | Source ownership and private internal boundaries only. Existing public adapter-bochs mechanical ABI may not change without re-admission. |
-| Applicable Rules | Mirror-component review standard, original-code ownership, private-overlay rule, Bochs selector blindness, source policy, build hygiene and documentation governance. |
-| Expected Markers | Corrected `DIVERGENCE:`/README entries for every retained Bochs difference; a source-body disposition for minimal port space; one measured per-file ledger; no new public ABI. |
-| Asset Needs | Current checkout, `O:/repos.external/bochs-2.6-compat/bochs-2.6`, formal Ninja generator, existing Bochs fixtures and current exception register. |
-| Reporting Requirements | State exact/changed/overlay counts, each moved or retained body, measured diff compression, all exception IDs, build/fixture result and any unconnected machine-product omission. |
-| Stop Conditions | A proposed move changes Bochs behavior, needs a new adapter/OpenNT semantic edge, exceeds the private-overlay model, exposes an unregistered external overlay consumer, or requires a new public ABI. |
-| Similar-Issue Sweep | All Bochs core headers/sources, overlay units, adapter-bochs machine assembly, formal source lists, tests and central/local exception records. |
+| Identifier Mode | `M0 T270 S2`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | S1 is closed by its P1--P3 evidence; the T270 sequence admits its next single-component packet. |
+| Objective | Reconcile `opennt-guest` and any matching private guest overlay so each selected OpenNT guest source and staged artifact has one valid mirror/overlay/provenance disposition. |
+| Non-goals | No guest source reconstruction, no DOS/WOW feature change, no BOP/provider change, no artifact substitution, and no change to another mirror component. |
+| Scope | `opennt-guest`, its README/register, selected source/artifact manifests, guest staging inputs, focused guest identity checks and S2 evidence. |
+| Verification | Recompute selected-original identity against the pinned OpenNT inputs; classify source/artifact/controlled-import rows; reconcile local marker and README; scan for non-mirror production material; run focused staging/identity checks plus governance and diff checks. |
+| Exit Criteria | Every selected guest source is exact, registered true subset, registered same-shaped modification below the 50-percent limit, or has a matching private overlay; every staged artifact has immutable original provenance; no unclassified production material remains. |
+| Reference Baseline | T266/S3 guest identity ledger, T269 guest audit records, current `opennt-guest` README/manifests and `proposal-mirror-component-conformance-reconciliation-001.md`. |
+| Files And ABI Surface | Guest source/artifact ownership and documentation only. No guest or host ABI change. |
+| Applicable Rules | Mirror-component review standard, original-code ownership, source/asset policy, staged-artifact provenance, build hygiene and documentation governance. |
+| Expected Markers | Per-source local `DIVERGENCE:` markers and README entries only where selected originals differ; immutable selected-artifact provenance records; no new runtime surface. |
+| Asset Needs | Current checkout, named local selected OpenNT original trees, guest-staging manifest/tool and existing guest identity evidence. |
+| Reporting Requirements | State exact/changed/subset/overlay/artifact counts, each exception ID, every non-mirror disposition, focused verification result and exclusions. |
+| Stop Conditions | A source has no selected original or provenance, an artifact is not immutable/authorized, a change would alter guest behavior, a non-mirror production file lacks an owner, or a divergence exceeds the mirror rule. |
+| Similar-Issue Sweep | Guest source and binary trees, staging manifests/tools, source-selection ledger, READMEs, exception register and guest-focused tests. |
 | Original Owner Request | “请你现在以新的T任务治理清楚，每个S任务治理一个镜像组件。” |
 
 **T270 plan:** S1 `bochs-core`; S2 `opennt-guest`; S3 `opennt-host`; S4 `opennt-bop`; S5 `opennt-softpc`; S6 `opennt-utils`. Each S is independently source-audited and may repair only that component and its private overlay.
 
-**S1 P1 checkpoint:** the imported finite port-space body moved from
+**S1 closure:** the imported finite port-space body moved from
 `adapter-bochs` to the private `bochs-core-overlay`, and marker/register gaps
 in the `iodev`/SIM surfaces were repaired. The focused native-PIC source
 fixture passes; a fresh formal graph compiled the moved overlay object, but
-full Ninja completion remains pending after a disposable archive lock and
-execution-environment termination. See
+the first disposable graph was interrupted by an archive lock and execution
+environment termination. It was retired rather than reused. See
 [P1 evidence](etc/evidence/m0-t270-s1-p1-bochs-port-space-owner-rehome-001.md).
 
-**S1 P2 checkpoint:** normalized comparison against the pinned Bochs 2.6
+Normalized comparison against the pinned Bochs 2.6
 baseline finds 177 exact and 28 registered changed production files; no
 external overlay consumer or imported Bochs source body remains in
 `adapter-bochs`.  The per-file disposition and compression decision are in
 [P2 evidence](etc/evidence/m0-t270-s1-p2-bochs-mirror-disposition-ledger-001.md).
-Full formal Ninja completion remains a closure requirement.
+The fresh external 486-edge Ninja graph and focused native-PIC/checked-RAM
+fixtures pass; see
+[P3 evidence](etc/evidence/m0-t270-s1-p3-bochs-formal-build-closure-001.md).
 ## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition

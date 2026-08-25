@@ -66,9 +66,9 @@ corresponding new executable bodies are in the private overlay.  This audit
 therefore admits no additional move without changing the established private
 Bochs interface or reintroducing omitted product-shell facilities.
 
-## Verification state
+## Verification state at P2
 
 - The focused native-PIC boundary fixture passed in P1.
 - The fresh formal Ninja graph compiled the moved port-space overlay object.
-- A clean full formal Ninja completion remains required for S1 closure; the
-  prior disposable graph must not be treated as a pass, as recorded in P1.
+- P3 is responsible for fresh formal Ninja and executable-fixture closure;
+  the interrupted P1 disposable graph is not treated as a pass.
