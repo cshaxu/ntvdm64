@@ -1,4 +1,8 @@
-# Proposal — OpenNT BOP mirror and overlay convergence
+# Superseded Proposal — OpenNT BOP mirror and overlay convergence
+
+This candidate is subsumed by **M0 T270 S4**, within the owner-directed
+mirror-component conformance reconciliation task. It remains as evidence of
+the prior BOP-specific scope and must not be admitted independently.
 
 ## Objective
 

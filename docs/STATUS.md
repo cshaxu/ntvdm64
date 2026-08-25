@@ -2,55 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T269 S4 — OpenNT-host final mirror/overlay closure.** Reconcile final production ownership, source identity, private-overlay reachability and focused route/build evidence before closing the host-convergence task.
+**Active: M0 T270 S1 — Bochs-core mirror and overlay reconciliation.** Bring one mirror component at a time to the current source-identity, divergence-register and private-overlay standard; start with the remaining Bochs-core ownership and diff-compression defects.
 
 ## Active Packet
 
-### M0 T269 S4 — OpenNT-host final mirror/overlay closure
+### M0 T270 S1 — Bochs-core mirror and overlay reconciliation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T269 S4`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | Owner-approved T269; S1--S3 have completed the source baseline, marker/register repair and sole PIF owner-edge transfer. |
-| Objective | Prove the final `opennt-host` production tree contains only compliant OpenNT mirror material plus private overlay bindings, with complete source/register/consumer/build evidence. |
-| Non-goals | No new host/BOP ability, no new original package import, no expansion of the synchronous Redirector provider, no repair of unrelated COMMAND lifecycle tests and no runtime completion claim. |
-| Scope | Final `opennt-host` and `opennt-host-overlay` tree, host/BOP owner boundary scan, READMEs, proposal, evidence, formal Ninja manifest/current build root and focused fixtures. |
-| Verification | Recompute full file baseline/disposition, source-marker/README reconciliation, direct overlay consumer scan, cross-component C-body scan, formal Ninja no-work dry-run, focused host and PIF fixtures, governance and diff checks. |
-| Exit Criteria | Every host production unit is exact, registered subset/same-shaped modification or private overlay; no unowned source body/cross-component C include/external overlay consumer remains; current focused checks pass and T269 closure evidence is complete. |
-| Reference Baseline | T269/S1--S3 evidence, selected OpenNT revision, host/BOP/overlay READMEs, component manifest and T269 proposal. |
-| Files And ABI Surface | Verification evidence and governance records only unless a scan exposes a pre-existing ownership violation; no planned public ABI change. |
-| Applicable Rules | Mirror-component standard, component/overlay ownership, source policy, execution/build hygiene and documentation governance. |
-| Expected Markers | Ten source units with a unique disposition, three private overlay fragments with no external consumer, no cross-component C body include and formal current build closure. |
-| Asset Needs | Current checkout, selected local OpenNT tree, formal T269 build roots and focused fixtures. |
-| Reporting Requirements | State exact counts/dispositions, all permitted exceptions, focused test outcomes, separate unrelated limitation and final task follow-up. |
-| Stop Conditions | A unregistered changed body, source hash mismatch, private overlay external consumer, remaining C-body cross edge, or required semantic change. |
-| Similar-Issue Sweep | Host headers/sources, overlay bindings, BOP PIF boundary, build manifest, target library graph, source/include paths, README register and prior evidence claims. |
-| Original Owner Request | “单人模式实施opennt-host组件合规化。” |
+| Identifier Mode | `M0 T270 S1`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner-directed new T: “每个 S 任务治理一个镜像组件”; T269 is closed by its existing final conformance record. |
+| Objective | Reconcile `bochs-core` and `bochs-core-overlay` so every production file has one valid mirror/overlay disposition and all original Bochs bodies are owned by the correct side of the boundary. |
+| Non-goals | No new CPU, device, BOP, OpenNT, SoftPC, CLI or guest behavior; no feature enablement; no broad Bochs import; no change to another mirror component. |
+| Scope | `bochs-core`, `bochs-core-overlay`, `adapter-bochs` provenance/owner edges, their READMEs, intrusion register, formal manifest, focused tests and S1 evidence. |
+| Verification | Recompute normalized source identities against pinned Bochs 2.6; measure every changed retained file; reconcile local marker, README and central exception register; scan overlay consumers and original-body ownership; external formal Ninja build and focused boundary fixtures; governance and diff checks. |
+| Exit Criteria | Every Bochs-core unit is exact, registered true subset, registered same-shaped modification, or a minimal marked call/declaration boundary to private overlay; `adapter-bochs` retains no imported Bochs body; no overlay has an external consumer; source/register/build evidence agrees. |
+| Reference Baseline | `m0-t265-s4-bochs-core-overlay-audit-001.md`, pinned Bochs 2.6, current component READMEs, intrusion register, T269 closure and `proposal-mirror-component-conformance-reconciliation-001.md`. |
+| Files And ABI Surface | Source ownership and private internal boundaries only. Existing public adapter-bochs mechanical ABI may not change without re-admission. |
+| Applicable Rules | Mirror-component review standard, original-code ownership, private-overlay rule, Bochs selector blindness, source policy, build hygiene and documentation governance. |
+| Expected Markers | Corrected `DIVERGENCE:`/README entries for every retained Bochs difference; a source-body disposition for minimal port space; one measured per-file ledger; no new public ABI. |
+| Asset Needs | Current checkout, `O:/repos.external/bochs-2.6-compat/bochs-2.6`, formal Ninja generator, existing Bochs fixtures and current exception register. |
+| Reporting Requirements | State exact/changed/overlay counts, each moved or retained body, measured diff compression, all exception IDs, build/fixture result and any unconnected machine-product omission. |
+| Stop Conditions | A proposed move changes Bochs behavior, needs a new adapter/OpenNT semantic edge, exceeds the private-overlay model, exposes an unregistered external overlay consumer, or requires a new public ABI. |
+| Similar-Issue Sweep | All Bochs core headers/sources, overlay units, adapter-bochs machine assembly, formal source lists, tests and central/local exception records. |
+| Original Owner Request | “请你现在以新的T任务治理清楚，每个S任务治理一个镜像组件。” |
 
-**S1 closure:** all eleven OpenNT host units have a selected revision/path/hash
-and disposition; the three overlay fragments have an explicit private-binding
-role. Seven host units are exact originals; four are source-shaped subsets or
-minimal modifications. S2 owns their marker/register precision, while S3 owns
-the separately identified `nt_pif.c` cross-component textual inclusion. See
-[S1 baseline evidence](etc/evidence/m0-t269-s1-opennt-host-baseline-disposition-001.md).
-
-**S2 closure:** all changed host subsets now have source-local crop/expression
-markers and corresponding README entries. The formal graph rebuilt 486/486,
-the host mirror fixture passed, and the repaired Ninja cache reports no
-incremental work. See [S2 closure evidence](etc/evidence/m0-t269-s2-opennt-host-marker-boundary-closure-001.md).
-
-**S3 closure:** exact `nt_pif.c` moved to its sole COMMAND/BOP owner, removing
-the cross-component source-body include without creating a new PIF ABI. The
-direct PIF and host fixtures passed after a 486/486 formal build; the separate
-COMMAND lifecycle fixture did not progress and is recorded as non-S3 evidence.
-See [S3 owner-edge evidence](etc/evidence/m0-t269-s3-opennt-host-pif-owner-edge-001.md).
-
-**S4 / T269 closure:** final audit records six exact host mirrors, four
-registered source-shaped mirrors and three private binding fragments, with no
-external overlay consumer or cross-component host-body include. Formal Ninja
-is incrementally clean and both focused PIF/host fixtures pass. The detailed
-conformance record is [T269 S4 evidence](etc/evidence/m0-t269-s4-opennt-host-final-conformance-001.md);
-the closed-task record is [T269 history](history/m0-t269-closure-20260825.md).
+**T270 plan:** S1 `bochs-core`; S2 `opennt-guest`; S3 `opennt-host`; S4 `opennt-bop`; S5 `opennt-softpc`; S6 `opennt-utils`. Each S is independently source-audited and may repair only that component and its private overlay.
 ## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition
