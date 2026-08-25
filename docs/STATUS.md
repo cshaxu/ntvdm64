@@ -32,6 +32,12 @@ package recovery (closed); S3 COMMAND original package recovery (active); S4 XMS
 original package recovery; S5 whole-component mirror/source-recovery closure.
 T270 remains closed in [its history](history/m0-t270-closure-20260825.md).
 
+**S3 progress:** P1 restores the reached OpenNT `MS_bop_4` entry, `cmddata.c`
+globals and `CMDInit` as true source subsets. The native fixture writes an
+actual `C4 C4 54 00` instruction to checked RAM and proves source entry into
+the original 17-slot `CmdDispatch` table. Remaining COMMAND provider/session
+composition recovery is still active; see [S3 P1 evidence](etc/evidence/m0-t271-s3-p1-command-entry-globals-recovery-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

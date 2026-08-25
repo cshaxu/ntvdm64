@@ -167,6 +167,7 @@ typedef struct _SCSINFO {
 #define RUNTIME_COMMAND_MISC_CURRENT_DIR_BYTES (MAXIMUM_VDM_CURRENT_DIR + 3u)
 #define RUNTIME_COMMAND_CONTINUATION_COMMAND_MAX 256u
 #define RUNTIME_COMMAND_CONTINUATION_ENV_MAX 65535u
+#define MAX_SHORTCUT_SIZE 128u
 
 /* Fixed-width, session-owned continuation.  It stores only copied OpenNT
  * inputs and opaque IDs; every native HANDLE remains in `handles`. */
@@ -308,8 +309,11 @@ typedef struct runtime_command_misc_call {
 
 int runtime_command_misc_call_valid(const runtime_command_misc_call *call);
 int runtime_command_misc_invoke(runtime_command_misc_call *call);
+int runtime_command_misc_invoke_body(runtime_command_misc_call *call,
+    void (*body)(void));
 
 /* Original COMMAND service entries retained by cmddisp.c's table. */
+BOOL CmdDispatch(ULONG service);
 void cmdExitVDM(void); void cmdGetNextCmd(void); void cmdComSpec(void);
 void cmdCreateProcess(void);
 void cmdSaveWorld(void); void cmdGetCurrentDir(void); void cmdSetInfo(void);
@@ -327,6 +331,8 @@ USHORT runtime_command_misc_get_es(void);
 USHORT runtime_command_misc_get_ss(void);
 USHORT runtime_command_misc_get_bp(void);
 USHORT runtime_command_misc_get_ax(void);
+USHORT runtime_command_misc_get_cs(void);
+USHORT runtime_command_misc_get_ip(void);
 UCHAR runtime_command_misc_get_al(void);
 UCHAR runtime_command_misc_get_ah(void);
 void runtime_command_misc_set_ax(USHORT value);
@@ -337,6 +343,10 @@ void runtime_command_misc_set_bx(USHORT value);
 void runtime_command_misc_set_cx(USHORT value);
 void runtime_command_misc_set_ds(USHORT value);
 void runtime_command_misc_set_es(USHORT value);
+void runtime_command_misc_set_ip(USHORT value);
+void runtime_command_misc_sas_load(ULONG address, UCHAR *target);
+BOOL runtime_command_misc_dispatch_source_command(ULONG service);
+BOOL runtime_command_misc_dispatch_source_command(ULONG service);
 runtime_command_misc_session *runtime_command_misc_active_session(void);
 PREDIRCOMPLETE_INFO runtime_command_misc_redirection_from_guest(uint32_t token);
 int runtime_command_misc_publish_handle(HANDLE handle);
@@ -468,7 +478,7 @@ extern WORD Exe32ActiveCount;
 extern USHORT nDrives;
 extern VDMINFO VDMInfo;
 extern VDMENVBLK cmdVDMEnvBlk;
-extern CHAR cmdHomeDirectory[MAX_PATH + 1u];
+extern CHAR cmdHomeDirectory[];
 extern CHAR chDefaultDrive;
 extern DWORD dwExitCode32;
 extern BOOL fSoftpcRedirectionOnShellOut;

@@ -37,11 +37,6 @@ PWCHAR runtime_command_environment_snapshot(void)
 void runtime_command_environment_free_snapshot(PWCHAR snapshot) { free(snapshot); }
 
 BOOL fSeparateWow;
-CHAR comspec[] = "COMSPEC=";
-CHAR *lpszzInitEnvironment;
-WORD cchInitEnvironment;
-CHAR *lpszzVDMEnv32;
-DWORD cchVDMEnv32;
 
 int RcMessageBox(UINT error, PVOID first, PVOID second, UINT flags)
 {

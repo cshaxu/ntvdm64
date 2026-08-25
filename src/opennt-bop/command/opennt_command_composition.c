@@ -22,42 +22,14 @@ void cmdReturnExitCode(void);
 void cmdExitVDM(void);
 BOOL CmdDispatch(ULONG service);
 
-CHAR lpszComSpec[64 + 8];
-USHORT cbComSpec;
-BOOL IsFirstCall;
 BOOL VDMForWOW;
-PSCSINFO pSCSInfo;
-PCHAR pSCS_ToSync;
-BYTE *pIsDosBinary;
 WORD *pFDAccess;
 BOOL bPifFastPaste;
 ULONG DosSessionId;
-BOOL fSoftpcRedirection;
-BOOL IsRepeatCall;
-BOOL DosEnvCreated;
-BOOL IsFirstVDM;
-BOOL fBlock;
-WORD Exe32ActiveCount;
 USHORT nDrives;
-VDMINFO VDMInfo;
-VDMENVBLK cmdVDMEnvBlk;
-CHAR cmdHomeDirectory[MAX_PATH + 1];
 PIF_DATA pfdata;
 UINT VdmExitCode;
-DWORD dwExitCode32;
-/* cmddata.c owns these source globals. The full translation unit cannot enter
- * while this shim provides its remaining historical product globals, so retain
- * just the direct worker inputs until cmddata recovery is separately admitted. */
-PCHAR pCommand32;
-PCHAR pEnv32;
-CHAR chDefaultDrive;
-BOOL fSoftpcRedirectionOnShellOut;
 ULONG CntrlHandlerState;
-/* OpenNT cmddata.c owns these scratch globals.  cmddata.c itself is not a
- * composable COMMAND input here; retain the exact storage contract in the
- * session shim so the directly admitted cmdmisc.c body remains unchanged. */
-CHAR *lpszzCurrentDirectories;
-DWORD cchCurrentDirectories;
 
 #pragma warning(push)
 #pragma warning(disable: 4324) /* jmp_buf has platform-required alignment; this private stack record never crosses an ABI. */
@@ -734,6 +706,8 @@ USHORT runtime_command_misc_get_es(void) { return g_active_call->call->cpu->es; 
 USHORT runtime_command_misc_get_ss(void) { return g_active_call->call->cpu->ss; }
 USHORT runtime_command_misc_get_bp(void) { return (USHORT)g_active_call->call->cpu->ebp; }
 USHORT runtime_command_misc_get_ax(void) { return (USHORT)g_active_call->call->cpu->eax; }
+USHORT runtime_command_misc_get_cs(void) { return g_active_call->call->cpu->cs; }
+USHORT runtime_command_misc_get_ip(void) { return (USHORT)g_active_call->call->cpu->eip; }
 UCHAR runtime_command_misc_get_al(void) { return (UCHAR)(g_active_call->call->cpu->eax & 0xffu); }
 UCHAR runtime_command_misc_get_ah(void) { return (UCHAR)((g_active_call->call->cpu->eax >> 8u) & 0xffu); }
 void runtime_command_misc_set_ax(USHORT value) { (void)set_ax(value); }
@@ -751,6 +725,33 @@ void runtime_command_misc_set_ds(USHORT value)
 { (void)runtime_cpu_delta_set_segment(&g_active_call->call->result->cpu_delta, 3u, value); }
 void runtime_command_misc_set_es(USHORT value)
 { (void)runtime_cpu_delta_set_segment(&g_active_call->call->result->cpu_delta, 0u, value); }
+void runtime_command_misc_set_ip(USHORT value)
+{
+    /* The source body advances its staged CCPU IP. The outer Bochs resume is
+     * already represented by the fixed typed result set by this invocation. */
+    if (g_active_call != NULL)
+        ((runtime_cpu_state *)g_active_call->call->cpu)->eip = value;
+}
+void runtime_command_misc_sas_load(ULONG address, UCHAR *target)
+{
+    if (g_active_call == NULL || target == NULL || address >= 0x100000u ||
+        !g_active_call->call->guest_read(g_active_call->call->guest_state,
+            address, target, 1u)) {
+        if (target != NULL) *target = 0xffu;
+    }
+}
+BOOL runtime_command_misc_dispatch_source_command(ULONG service)
+{
+    /* Retail cmddisp.c checks its table bound only in DBG builds. Preserve
+     * the source dispatch table, but reject an unreadable/out-of-range staged
+     * service at the modern checked-memory boundary before it can index it. */
+    if (g_active_call == NULL || service >= 17u) {
+        if (g_active_call != NULL) runtime_command_misc_set_cf(1);
+        return FALSE;
+    }
+    g_active_call->call->service = service;
+    return CmdDispatch(service);
+}
 
 runtime_command_misc_session *runtime_command_misc_active_session(void)
 {
@@ -1042,7 +1043,8 @@ BOOL SetEnvironmentVariableOem(LPSTR name, LPSTR value)
     return SetEnvironmentVariableA(ansi_name, ansi_value);
 }
 
-int runtime_command_misc_invoke(runtime_command_misc_call *call)
+static int runtime_command_misc_invoke_internal(runtime_command_misc_call *call,
+    void (*body)(void))
 {
     runtime_command_misc_active_call active;
     if (!runtime_command_misc_call_valid(call) || g_active_call != NULL ||
@@ -1093,7 +1095,8 @@ int runtime_command_misc_invoke(runtime_command_misc_call *call)
      * an adapter-owned service recognizer.  The preceding range guard is the
      * required modern boundary check because the retail body checked this
      * index only in DBG builds. */
-    if (setjmp(active.terminal_exit) == 0 && !CmdDispatch(call->service)) {
+    if (setjmp(active.terminal_exit) == 0 &&
+        (body != NULL ? (body(), 0) : !CmdDispatch(call->service))) {
         g_active_call = NULL;
         return 0;
     }
@@ -1178,4 +1181,15 @@ int runtime_command_misc_invoke(runtime_command_misc_call *call)
     free(active.guest_buffer4);
     g_active_call = NULL;
     return runtime_cpu_result_valid(call->result);
+}
+
+int runtime_command_misc_invoke(runtime_command_misc_call *call)
+{
+    return runtime_command_misc_invoke_internal(call, NULL);
+}
+
+int runtime_command_misc_invoke_body(runtime_command_misc_call *call,
+    void (*body)(void))
+{
+    return body != NULL ? runtime_command_misc_invoke_internal(call, body) : 0;
 }

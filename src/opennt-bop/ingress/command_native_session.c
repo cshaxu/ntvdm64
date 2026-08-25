@@ -1,6 +1,7 @@
 #include "command_native_session.h"
 
 #include "adapter-softpc/mechanical_action.h"
+#include "opennt-bop/command/nt_bop_command.h"
 
 #include <string.h>
 
@@ -126,10 +127,17 @@ int runtime_command_native_session_dispatch(
     call.magic = RUNTIME_COMMAND_MISC_CALL_MAGIC;
     call.abi_version = RUNTIME_COMMAND_MISC_CALL_VERSION;
     call.struct_bytes = sizeof(call);
-    call.service = event->window_bytes >= 4u ? event->window[3] : 0u;
+    if (event->window_bytes < 4u || event->window[0] != 0xc4u ||
+        event->window[1] != 0xc4u || event->window[2] != 0x54u ||
+        event->eip > UINT64_MAX - 3u) return 0;
+    /* MS_bop_4 reads the service byte at the staged CS:IP. This value only
+     * describes the bounded callback/post-body record. */
+    call.service = event->window[3];
     call.boundary = &boundary; call.cpu = &cpu; call.result = &result;
     call.guest_state = g_active_session; call.guest_read = guest_read;
     call.guest_write = guest_write; call.session = &g_active_session->direct;
     call.first_call = 1u;
-    return runtime_command_misc_invoke(&call) && copy_outcome(&result, outcome);
+    cpu.eip += 3u;
+    return runtime_command_misc_invoke_body(&call, MS_bop_4) &&
+        copy_outcome(&result, outcome);
 }

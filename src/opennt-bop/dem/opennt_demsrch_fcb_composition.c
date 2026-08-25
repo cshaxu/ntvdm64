@@ -24,11 +24,6 @@ void demRenameFCB(void);
  * demdasd's unrelated macro domain merely to name the one FDISK teardown. */
 void FdiskTerminatePDB(USHORT pdb);
 
-/* OpenNT's standalone source expected this process-global lifecycle marker
- * from its historical VDM host.  A newly composed CLI session starts in the
- * same first-call state; session wiring will own later transitions. */
-BOOL IsFirstCall = TRUE;
-
 /* DIVERGENCE(BOP-DIV-053): nt_msscs.c:VDDTerminateUserHook walks the private VDD user-hook
  * list. The CLI does not recreate the VDD callback broker; do not report a
  * fabricated callback completion. */
