@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 2278 |
 | --- | --- |
-| Generated UTC | 2026-08-25T00:05:22Z |
+| Generated UTC | 2026-08-25T01:02:34Z |
 
 ## Entries
 
@@ -65,9 +65,9 @@ content-divergent entries.
 | design/ADAPTER-STARTUP-FIRMWARE-SNAPSHOT.md | retained pre-governance evidence | 3153c9a36e43d8efc1234879d4c8f76f83dc3a61a766ecdceaa8da6e7f410e45 |
 | design/ADAPTER-STARTUP-SNAPSHOT-EVIDENCE-EXPORT.md | retained pre-governance evidence | 744618843058cbcf0c9074019f755ebdb573be5a9b33ff454da224537edd0cbd |
 | design/ADAPTER-TWO-PHASE-GUEST-READ.md | retained pre-governance evidence | d1898c127b918240c3ce7eb32ed2efc04caf11f04b5a061060d4c2a0254c1861 |
-| design/ARCHITECTURE.md | current design authority | b63cab58d2c08607d9fb68530a9ca2db84492137d1139dd7b11f5acceb2ca7b7 |
+| design/ARCHITECTURE.md | current design authority | ba56cffb388d725966e03a05e9a32d766cb258cc25003cb21782db166553ef65 |
 | design/BOCHS-MACHINE-COMPOSITION.md | retained pre-governance evidence | 3d55ee174e229e89da3ab9f31e65ebbd832a1f48c4f2eb487ce48dc25043703f |
-| design/CODING.md | current design authority | e8f4c68b2b7c67f5a0948feed48278c5e063d40c05e17fd1f6daaff0bea6873f |
+| design/CODING.md | current design authority | 548d491c98c63b4a9851dda75fa26a8e78f2c17989a2b46eb3bc4546fdbecc13 |
 | design/GOAL.md | current design authority | b7e0eb85952f02719e4b12675b47356187e5097f1c5a21be55bac127dae4e760 |
 | design/HOST-NAMESPACE-CAPABILITY.md | retained pre-governance evidence | d8f6df52c8bdc9527526d14756c05465136571bfbd90ee17f5798c766c256bd5 |
 | design/ROADMAP.md | current design authority | f5ea2a1374680d8388f8418aa513ec3d396c35f5d92989441f1c20a7b6679cc2 |
@@ -246,7 +246,7 @@ content-divergent entries.
 | etc/evidence/m0-t264-s1-project-code-filename-inventory-001.md | indexed supporting material | 50262bf383306601488941ad18eb2f8ad2a6a43929f4c271ccb59e3bf37e3712 |
 | etc/evidence/m0-t265-s1-component-identity-governance-001.md | indexed supporting material | 24688e7379990c59a62a01581fcdef1b3e7f36476eef4c321c975a38833ad3cd |
 | etc/evidence/m0-t265-s2-bochs-production-root-rename-001.md | indexed supporting material | d3da7a8431a3b96dacdb4b1868cbd7710905698e7e633b8dd0922eac751b6c4a |
-| etc/evidence/m0-t265-s3-adapter-bochs-provenance-ledger-001.md | indexed supporting material | fbdc4cd7b28f3837478c565a1aba2fb497cd86a312f8df3244f0439145c87d55 |
+| etc/evidence/m0-t265-s3-adapter-bochs-provenance-ledger-001.md | indexed supporting material | 52a31f34a69715e724eab698da54a28641f90a1f659440232bd0d611f357d26a |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -494,7 +494,7 @@ content-divergent entries.
 | etc/operations/opennt-bop-host-service-plane-recovery-candidate.md | indexed supporting material | 643385cb4d3c61e70583d59ae2eb6dab5284e07f647bdd47da8575aa0ffbfadf |
 | etc/operations/opennt-bop-implementation-tracker-001.md | indexed supporting material | 11d4a0cd06dc670513084704cd78aa4625d039cf3fbde55194d6d66ef7bd947e |
 | etc/operations/policy/source-policy.md | indexed supporting material | dad0d8add2eaad5fcd62822fbe677c9a675ea20890053f64cb7b9034d5ae018d |
-| etc/operations/proposal-bochs-component-identity-overlay-convergence-001.md | indexed supporting material | 6d8f734a3d5353e389de12eddfb691d4f70b7c343a5ef71ad7fbf6390ab6dc11 |
+| etc/operations/proposal-bochs-component-identity-overlay-convergence-001.md | indexed supporting material | dce48ad64b70d1b81574fde14f6cbaa390e18eb009316fa1054c4f67c98d03c5 |
 | etc/operations/proposal-bop-cross-family-completion-audit-001.md | indexed supporting material | 9c9b4be74905b5b809db640e08f6c829a6708e49077819ff68b09a5071c4c0a1 |
 | etc/operations/proposal-bop-external-compatibility-machine-closure-001.md | indexed supporting material | 0419a8e3b1b6bcf53b5e2be4c050aa662704cfa4765cc7e7bb88111768be453e |
 | etc/operations/proposal-bop-internal-dependency-closure-001.md | indexed supporting material | a30f2c280f8e2d25e4037483c93a1d66799a85383cacb6af868ad18c0e5aabee |
@@ -2265,7 +2265,7 @@ content-divergent entries.
 | RESET-TRACE-STATUS.md | retained pre-governance evidence | dd0ce777cf9399cf4438ddf618a720b33e4ca2d5e21df66b16a8aeeb9eae55bb |
 | ROI-DRIVEN-EXECUTION-ROADMAP.md | retained pre-governance evidence | 89fe2b2d62f7f3e46bd183e7cb7ee0a637ecfe68d41450cfe0383ae3bfbfa660 |
 | rules/ARCHITECTURE.md | current rule authority | 8a9d9ee3e1f83a3533d9fa8782b1a1de45e87a3452893bf8f1e77e4195f74922 |
-| rules/CODING.md | current rule authority | 759987d676d880620c26411a930b9367e1b4c093ecd9940587e86070ce446194 |
+| rules/CODING.md | current rule authority | bba8ed7ce0912fe474a889377c6d8bca4dc93b4aff23ae60cd95cd88a03c2d51 |
 | rules/DOCUMENT.md | current rule authority | 9f55864347f265afe78af803a67df10bfa20fb273fca6594803c8e64c4a4cbda |
 | rules/EXECUTION.md | current rule authority | 5f0149dff78677432bd232ca9ff64ed3d0cf57030dafdbad41aff7f280f2ae7c |
 | S1-HISTORICAL-HOST-CLOSURE.md | retained pre-governance evidence | 0796b7bf5f0a780fbd7a989938474045ed2d3aa2a6b68b8697605393bd2e1bb8 |
@@ -2292,7 +2292,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 28bd191a3d50deb2efd007227c30b86fe5464fa050547007f4e01158b1a7bca0 |
+| STATUS.md | principal control document | 8e5cf2deeef4f3bd4cbb663ee8b4f3b1cb587bb3575ebb0947b946c44c958ad6 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

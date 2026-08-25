@@ -11,7 +11,10 @@ and composed OpenNT host mirrors.
 ## Required component contract
 
 - `adapter-bochs` is the renamed, project-authored Bochs assembly and access
-  adapter. Only `app` may call it in a production dependency graph.
+  adapter. Only `app` and `adapter-softpc` may call its declared public,
+  selector-blind, fixed-width mechanical facade in a production dependency
+  graph. `adapter-softpc` must not import a `bochs-core` header, type, object
+  or global.
 - `bochs-core` is the renamed adopted Bochs mirror. Only `adapter-bochs` may
   call it in a production dependency graph.
 - A `*-overlay` is private to its corresponding native mirror: only `<name>`
@@ -22,8 +25,8 @@ and composed OpenNT host mirrors.
   VDM, WOW, BOP, or Win32 vocabulary.
 
 The task adopts the owner-directed naming change exactly. Any future
-OpenNT-facing machine API remains `adapter-softpc` work, and must reach the
-machine through admitted `app`/session wiring rather than a forbidden direct
+OpenNT-facing machine API remains `adapter-softpc` work. It may use the
+declared `adapter-bochs` mechanical facade, but may never introduce a direct
 production edge to `bochs-core`.
 
 ## Packets
@@ -48,15 +51,14 @@ production edge to `bochs-core`.
 ## S3 required dependency repair
 
 The S3 source audit found existing direct `adapter-softpc` includes of
-`adapter-bochs` and `bochs-core` headers.  Those edges contradict the already
-admitted direction; they cannot be hidden by moving `pc_system` alone.
-Before S3 can close, its final implementation pass therefore creates an
-app/session-bound, copied-data machine callback contract.  `adapter-softpc`
-keeps the historical SoftPC/CCPU-facing interface shape but invokes the bound
-mechanical contract rather than importing Bochs objects.  `app` remains the
-only production caller of `adapter-bochs`, and `adapter-bochs` remains the
-only production caller of `bochs-core`.  This is a behavior-preserving
-dependency inversion, not a BOP or machine-feature expansion.
+`adapter-bochs` and `bochs-core` headers. The `adapter-bochs` edge is
+permitted only through its declared selector-blind, fixed-width mechanical
+facade; the `bochs-core` edge is prohibited. Before S3 can close, its final
+implementation pass routes every reached SoftPC/CCPU mechanical operation
+through that facade while retaining its historical interface shape. `app` and
+`adapter-softpc` are the only production facade consumers, and
+`adapter-bochs` remains the only production caller of `bochs-core`. This is a
+behavior-preserving dependency repair, not a BOP or machine-feature expansion.
 
 ## Verification
 

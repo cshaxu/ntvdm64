@@ -1,6 +1,6 @@
 #include "bochs.h"
 #include "iodev/iodev.h"
-#include "adapter-bochs/pc_system.h"
+#include "bochs-core/pc_system.h"
 #include "adapter-bochs/minimal_machine.h"
 #include "adapter-softpc/port_action.h"
 #include "adapter-bop/generic_ud_bridge.h"

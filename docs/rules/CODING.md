@@ -159,10 +159,10 @@
   register; it must not become a generic `compat`/`common` container.
 - A `*-overlay` is called only by the corresponding native mirror, never by a
   different component or test. It has no standalone public include/link ABI.
-  `app` is the only production caller of `adapter-bochs`; `adapter-bochs` is
-  the only production caller of `bochs-core`. Any OpenNT-facing machine call
-  uses the neutral, app-installed opaque endpoint instead of a direct Bochs
-  component dependency.
+  `app` and `adapter-softpc` are the only production callers of the declared,
+  selector-blind, fixed-width mechanical facade of `adapter-bochs`.
+  `adapter-softpc` must not include `bochs-core` or access a Bochs type, object
+  or global. `adapter-bochs` is the only production caller of `bochs-core`.
 - Keep imported OpenNT mirrors recognizable. Preserve source names, interfaces,
   data structures and ordering, and annotate each required edited expression
   with `DIVERGENCE:`. A replacement of an unavailable Win32, CCPU or SoftPC

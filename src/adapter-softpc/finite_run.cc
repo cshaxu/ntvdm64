@@ -4,32 +4,28 @@
 //
 /////////////////////////////////////////////////////////////////////////
 
-#include "bochs.h"
-#include "bochs-core/cpu/cpu.h"
-#include "bochs-core/memory/memory.h"
-#include "adapter-bochs/pc_system.h"
+#include "adapter-bochs/machine_facade.h"
 #include "finite_run.h"
 #include "generic_ud_bridge.h"
 #include "first_fault_observation.h"
-#include "adapter-bochs/minimal_machine.h"
 #include "a20_capability.h"
 #include "port_action.h"
 #include "protected_range_action.h"
 
 struct runtime_finite_run_stop_state {
-  bx_bool fired;
+  uint32_t fired;
 };
 
 static runtime_finite_run_terminal_snapshot terminal_snapshot;
-static bx_phy_address terminal_capture_physical_address;
-static Bit8u terminal_capture_byte_count;
+static uint64_t terminal_capture_physical_address;
+static uint8_t terminal_capture_byte_count;
 
 void runtime_finite_run_terminal_snapshot_clear(void)
 {
   memset(&terminal_snapshot, 0, sizeof(terminal_snapshot));
 }
 
-bx_bool runtime_finite_run_terminal_snapshot_get(
+int runtime_finite_run_terminal_snapshot_get(
   runtime_finite_run_terminal_snapshot *snapshot)
 {
   if (!snapshot || !terminal_snapshot.valid) return 0;
@@ -42,17 +38,17 @@ static void runtime_finite_run_stop(void *opaque)
   runtime_finite_run_stop_state *state =
     (runtime_finite_run_stop_state *) opaque;
   state->fired = 1;
-  bx_pc_system.kill_bochs_request = 1;
+  machine_facade_v1_request_cpu_stop();
 }
 
 /* The finite machine exposes exactly one MiB of ordinary RAM.  Keep this
  * validation beside the native copy calls so every request range is known
  * valid before the first mutable operation. */
-static bx_bool runtime_finite_run_ordinary_range_is_valid(
-  bx_phy_address physical_address, Bit64u byte_count)
+static int runtime_finite_run_ordinary_range_is_valid(
+  uint64_t physical_address, uint64_t byte_count)
 {
   return byte_count <= 0x100000 &&
-    physical_address <= (bx_phy_address) (0x100000 - byte_count);
+    physical_address <= UINT64_C(0x100000) - byte_count;
 }
 
 static void runtime_finite_run_adapter_lifecycle_stop(void)
@@ -62,8 +58,8 @@ static void runtime_finite_run_adapter_lifecycle_stop(void)
   runtime_a20_capability_v1_set_lifecycle_active(0u);
 }
 
-bx_bool runtime_finite_run_terminal_snapshot_configure_ordinary_range(
-  bx_phy_address physical_address, Bit8u byte_count)
+int runtime_finite_run_terminal_snapshot_configure_ordinary_range(
+  uint64_t physical_address, uint8_t byte_count)
 {
   terminal_capture_physical_address = 0;
   terminal_capture_byte_count = 0;
@@ -79,12 +75,11 @@ bx_bool runtime_finite_run_terminal_snapshot_configure_ordinary_range(
 runtime_finite_run_status runtime_run_finite_bare_bytes(
   const runtime_finite_run_request *request)
 {
-  bx_mantle_minimal_machine_c machine;
   runtime_finite_run_stop_state stop_state;
-  Bit8u preserved[64];
-  bx_phy_address terminal_capture_address;
-  Bit8u terminal_capture_count;
-  int stop_timer;
+  uint8_t preserved[64];
+  uint64_t terminal_capture_address;
+  uint8_t terminal_capture_count;
+  uint32_t stop_timer;
 
   if (request == 0 || request->request_version != RUNTIME_FINITE_RUN_REQUEST_VERSION ||
       request->entry_bytes == 0 ||
@@ -108,17 +103,17 @@ runtime_finite_run_status runtime_run_finite_bare_bytes(
   terminal_capture_physical_address = 0;
   terminal_capture_byte_count = 0;
 
-  if (machine.initialize(0x100000, 0x100000) != BX_MANTLE_MINIMAL_MACHINE_OK) {
+  if (!machine_facade_v1_machine_begin(0x100000u, 0x100000u)) {
     return RUNTIME_FINITE_RUN_MACHINE_ERROR;
   }
   runtime_a20_capability_v1_set_lifecycle_active(1u);
   runtime_protected_range_action_v1_set_lifecycle_active(1u);
   runtime_port_action_v1_set_lifecycle_active(1u);
 
-  if (!machine.set_realmode_segment_limit_compatibility(
+  if (!machine_facade_v1_set_realmode_segment_limit_compatibility(
       request->enable_realmode_segment_limit_compatibility)) {
     runtime_finite_run_adapter_lifecycle_stop();
-    machine.cleanup();
+    machine_facade_v1_machine_cleanup();
     return RUNTIME_FINITE_RUN_MACHINE_ERROR;
   }
 
@@ -126,54 +121,56 @@ runtime_finite_run_status runtime_run_finite_bare_bytes(
     struct runtime_mechanical_action_v1 action = request->preentry_action;
     if (!runtime_mantle_execute_mechanical_action_v1(&action)) {
       runtime_finite_run_adapter_lifecycle_stop();
-      machine.cleanup();
+      machine_facade_v1_machine_cleanup();
       return RUNTIME_FINITE_RUN_REJECTED_INPUT;
     }
   }
 
   if (request->preserve_byte_count != 0 &&
-      !bx_mem.copy_from_ordinary_ram(request->preserve_physical_address,
+      !machine_facade_v1_memory_read(request->preserve_physical_address,
         request->preserve_byte_count, preserved)) {
     runtime_finite_run_adapter_lifecycle_stop();
-    machine.cleanup();
+    machine_facade_v1_machine_cleanup();
     return RUNTIME_FINITE_RUN_REJECTED_INPUT;
   }
-  if (!bx_mem.copy_to_ordinary_ram(request->entry_physical_address,
+  if (!machine_facade_v1_memory_write(request->entry_physical_address,
       request->entry_byte_count, request->entry_bytes)) {
     runtime_finite_run_adapter_lifecycle_stop();
-    machine.cleanup();
+      machine_facade_v1_machine_cleanup();
     return RUNTIME_FINITE_RUN_REJECTED_INPUT;
   }
   if (request->preserve_byte_count != 0 &&
-      !bx_mem.copy_to_ordinary_ram(request->preserve_physical_address,
+      !machine_facade_v1_memory_write(request->preserve_physical_address,
         request->preserve_byte_count, preserved)) {
     runtime_finite_run_adapter_lifecycle_stop();
-    machine.cleanup();
+    machine_facade_v1_machine_cleanup();
     return RUNTIME_FINITE_RUN_MACHINE_ERROR;
   }
-  bx_pc_system.initialize(request->ips);
-  bx_cpu.apply_real_mode_entry(request->entry_cs, request->entry_eip);
+  machine_facade_v1_initialize_timing(request->ips);
+  machine_facade_v1_apply_real_mode_entry(request->entry_cs, request->entry_eip);
   stop_state.fired = 0;
-  stop_timer = bx_pc_system.register_timer_ticks(&stop_state,
-    runtime_finite_run_stop, request->instruction_tick_budget, 0,
-    1, "finite-run-stop");
-  if (stop_timer <= 0) {
+  if (!machine_facade_v1_register_timer(&stop_state, runtime_finite_run_stop,
+      request->instruction_tick_budget, 0u, 1u, &stop_timer)) {
     runtime_finite_run_adapter_lifecycle_stop();
-    machine.cleanup();
+    machine_facade_v1_machine_cleanup();
     return RUNTIME_FINITE_RUN_MACHINE_ERROR;
   }
 
   runtime_mantle_first_fault_observation_fixture_stop(request->stop_on_first_fault_fixture);
   runtime_mantle_generic_ud_stop_observation_reset();
-  bx_cpu.cpu_loop();
+  machine_facade_v1_cpu_loop();
   if (request->capture_terminal_snapshot) {
-    terminal_snapshot.cs = bx_cpu.sregs[BX_SEG_REG_CS].selector.value;
-    terminal_snapshot.eip = bx_cpu.get_eip();
+    if (!machine_facade_v1_copy_real_mode_entry(&terminal_snapshot.cs,
+        &terminal_snapshot.eip)) {
+      runtime_finite_run_adapter_lifecycle_stop();
+      machine_facade_v1_machine_cleanup();
+      return RUNTIME_FINITE_RUN_MACHINE_ERROR;
+    }
     if (terminal_capture_count != 0) {
-      if (!bx_mem.copy_from_ordinary_ram(terminal_capture_address,
+      if (!machine_facade_v1_memory_read(terminal_capture_address,
           terminal_capture_count, terminal_snapshot.captured_bytes)) {
         runtime_finite_run_adapter_lifecycle_stop();
-        machine.cleanup();
+        machine_facade_v1_machine_cleanup();
         return RUNTIME_FINITE_RUN_MACHINE_ERROR;
       }
       terminal_snapshot.captured_physical_address = terminal_capture_address;
@@ -184,10 +181,10 @@ runtime_finite_run_status runtime_run_finite_bare_bytes(
   runtime_mantle_first_fault_observation_fixture_stop(0);
   /* A bridge STOP may return before the finite watchdog fires.  The native
    * timer contract requires explicit deactivation before unregistration. */
-  bx_pc_system.deactivate_timer((unsigned) stop_timer);
-  bx_pc_system.unregisterTimer((unsigned) stop_timer);
+  machine_facade_v1_deactivate_timer((uint32_t)stop_timer);
+  machine_facade_v1_unregister_timer((uint32_t)stop_timer);
   runtime_finite_run_adapter_lifecycle_stop();
-  if (machine.cleanup() != BX_MANTLE_MINIMAL_MACHINE_OK) {
+  if (!machine_facade_v1_machine_cleanup()) {
     return RUNTIME_FINITE_RUN_MACHINE_ERROR;
   }
   if (runtime_mantle_generic_ud_stop_observed()) {

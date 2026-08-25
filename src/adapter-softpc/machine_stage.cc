@@ -1,14 +1,10 @@
-#include "bochs.h"
-#include "bochs-core/cpu/cpu.h"
-#include "bochs-core/memory/memory.h"
-#include "adapter-bochs/pc_system.h"
+#include "adapter-bochs/machine_facade.h"
 #include "generic_ud_bridge.h"
 #include "first_fault_observation.h"
 #include "cancellation_controller.h"
 #include "physical_irq.h"
 #include "machine_stage.h"
 #include "ivt_watch.h"
-#include "adapter-bochs/minimal_machine.h"
 #include "a20_capability.h"
 #include "ordinary_ram_reservation.h"
 #include "port_action.h"
@@ -25,7 +21,6 @@
 #define RUNTIME_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE 0
 #endif
 
-static bx_mantle_minimal_machine_c *runtime_machine_stage_machine;
 static uint32_t runtime_machine_stage_v1_terminal_position_enabled;
 static struct runtime_machine_stage_v1_terminal_position
   runtime_machine_stage_v1_terminal_position;
@@ -113,12 +108,12 @@ static void runtime_machine_stage_v1_terminal_cs_provenance_clear(void)
 }
 
 #if RUNTIME_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
-static bx_bool runtime_machine_stage_v1_real_address(uint16_t segment,
-  uint16_t offset, uint32_t bytes, bx_phy_address *address)
+static int runtime_machine_stage_v1_real_address(uint16_t segment,
+  uint16_t offset, uint32_t bytes, uint64_t *address)
 {
-  Bit32u value;
+  uint32_t value;
   if (address == 0 || bytes == 0u) return 0;
-  value = ((Bit32u) segment << 4) + offset;
+  value = ((uint32_t) segment << 4) + offset;
   if (value > 0x100000u - bytes) return 0;
   *address = value;
   return 1;
@@ -126,23 +121,21 @@ static bx_bool runtime_machine_stage_v1_real_address(uint16_t segment,
 
 static void runtime_machine_stage_v1_terminal_provenance_capture(void)
 {
-  bx_phy_address instruction_address;
-  bx_phy_address stack_address;
+  uint64_t instruction_address;
+  uint64_t stack_address;
   struct runtime_machine_stage_v1_terminal_provenance *value =
     &runtime_machine_stage_v1_terminal_provenance;
 
-  value->cs = bx_cpu.sregs[BX_SEG_REG_CS].selector.value;
-  value->ss = bx_cpu.sregs[BX_SEG_REG_SS].selector.value;
-  value->sp = bx_cpu.get_reg16(BX_16BIT_REG_SP);
-  value->eip = bx_cpu.get_eip();
+  if (!machine_facade_v1_copy_real_mode_state(&value->cs, &value->ss,
+      &value->sp, &value->eip)) return;
   if (runtime_machine_stage_v1_real_address(value->cs,
       (uint16_t) value->eip, RUNTIME_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES,
-      &instruction_address) && bx_mem.copy_from_ordinary_ram(instruction_address,
+      &instruction_address) && machine_facade_v1_memory_read(instruction_address,
       RUNTIME_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES,
       value->instruction_bytes)) value->instruction_valid = 1u;
   if (runtime_machine_stage_v1_real_address(value->ss, value->sp,
       RUNTIME_INSTRUCTION_HISTORY_V1_STACK_BYTES, &stack_address) &&
-      bx_mem.copy_from_ordinary_ram(stack_address,
+      machine_facade_v1_memory_read(stack_address,
       RUNTIME_INSTRUCTION_HISTORY_V1_STACK_BYTES,
       value->stack_bytes)) value->stack_valid = 1u;
   value->valid = 1u;
@@ -150,8 +143,8 @@ static void runtime_machine_stage_v1_terminal_provenance_capture(void)
 #endif
 
 struct runtime_machine_stage_v1_stop_state {
-  bx_bool watchdog_fired;
-  bx_bool cancellation_fired;
+  uint32_t watchdog_fired;
+  uint32_t cancellation_fired;
 };
 
 static const Bit64u runtime_machine_stage_v1_cancellation_poll_ticks = 1024u;
@@ -161,8 +154,7 @@ static void runtime_machine_stage_v1_stop(void *opaque)
   runtime_machine_stage_v1_stop_state *state =
     (runtime_machine_stage_v1_stop_state *) opaque;
   state->watchdog_fired = 1;
-  bx_pc_system.kill_bochs_request = 1;
-  bx_cpu.async_event = 1;
+  machine_facade_v1_request_cpu_stop();
 }
 
 static void runtime_machine_stage_v1_cancellation_poll(void *opaque)
@@ -175,18 +167,17 @@ static void runtime_machine_stage_v1_cancellation_poll(void *opaque)
   if (runtime_cancellation_controller_v1_requested_reason() ==
       RUNTIME_CANCELLATION_V1_NONE) return;
   state->cancellation_fired = 1;
-  bx_pc_system.kill_bochs_request = 1;
-  bx_cpu.async_event = 1;
+  machine_facade_v1_request_cpu_stop();
 }
 
-static bx_bool runtime_machine_stage_preserved_range_valid(
-  Bit64u address, Bit64u bytes)
+static int runtime_machine_stage_preserved_range_valid(
+  uint64_t address, uint64_t bytes)
 {
   return bytes != 0 && bytes <= 64u && address <= 0x100000u - bytes;
 }
 
-static bx_bool runtime_machine_stage_reservation_valid(Bit64u capacity,
-  Bit64u base, Bit64u bytes)
+static int runtime_machine_stage_reservation_valid(uint64_t capacity,
+  uint64_t base, uint64_t bytes)
 {
   return (base == 0u && bytes == 0u) ||
     (base >= 0x100000u && bytes != 0u && base % 0x10000u == 0u &&
@@ -205,10 +196,10 @@ static void runtime_machine_stage_v1_physical_irq_poll(void *opaque)
 /* Seed the fixed PC BIOS conventional-memory datum before optional external
  * bytes.  This finite stage owns 640 KiB below A0000 and publishes the
  * little-endian size as machine lifecycle state. */
-static bx_bool runtime_machine_stage_seed_conventional_memory(void)
+static int runtime_machine_stage_seed_conventional_memory(void)
 {
-  static const Bit8u conventional_kib[] = { 0x80u, 0x02u };
-  return bx_mem.copy_to_ordinary_ram(0x413u, sizeof(conventional_kib),
+  static const uint8_t conventional_kib[] = { 0x80u, 0x02u };
+  return machine_facade_v1_memory_write(0x413u, sizeof(conventional_kib),
     conventional_kib);
 }
 
@@ -258,25 +249,19 @@ extern "C" int runtime_machine_stage_v1_request_valid(
 extern "C" uint32_t runtime_machine_stage_v1_begin(
   const struct runtime_machine_stage_v1_request *request)
 {
-  Bit8u preserved[64];
+  uint8_t preserved[64];
   struct runtime_mechanical_action_v1 initial_state_action;
   struct runtime_mechanical_action_v1 startup_action;
 
   if (!runtime_machine_stage_v1_request_valid(request))
     return RUNTIME_MACHINE_STAGE_V1_REJECTED_INPUT;
-  if (runtime_machine_stage_machine != 0)
+  if (machine_facade_v1_machine_active())
     return RUNTIME_MACHINE_STAGE_V1_REJECTED_ACTIVE;
-  runtime_machine_stage_machine = new bx_mantle_minimal_machine_c;
-  if (runtime_machine_stage_machine == 0 ||
-      runtime_machine_stage_machine->initialize(request->guest_memory_bytes,
-        request->guest_memory_bytes) !=
-        BX_MANTLE_MINIMAL_MACHINE_OK) {
-    delete runtime_machine_stage_machine;
-    runtime_machine_stage_machine = 0;
+  if (!machine_facade_v1_machine_begin(request->guest_memory_bytes,
+      request->guest_memory_bytes)) {
     return RUNTIME_MACHINE_STAGE_V1_MACHINE_FAILURE;
   }
-  if (!runtime_machine_stage_machine->
-      set_realmode_segment_limit_compatibility(1u)) {
+  if (!machine_facade_v1_set_realmode_segment_limit_compatibility(1u)) {
     runtime_machine_stage_v1_reset();
     return RUNTIME_MACHINE_STAGE_V1_MACHINE_FAILURE;
   }
@@ -302,7 +287,7 @@ extern "C" uint32_t runtime_machine_stage_v1_begin(
     runtime_machine_stage_v1_reset();
     return RUNTIME_MACHINE_STAGE_V1_ACTION_FAILURE;
   }
-  if (!bx_mem.copy_from_ordinary_ram(request->preserved_state_address,
+  if (!machine_facade_v1_memory_read(request->preserved_state_address,
       request->preserved_state_bytes, preserved)) {
     runtime_machine_stage_v1_reset();
     return RUNTIME_MACHINE_STAGE_V1_PRESERVE_FAILURE;
@@ -311,7 +296,7 @@ extern "C" uint32_t runtime_machine_stage_v1_begin(
     runtime_machine_stage_v1_reset();
     return RUNTIME_MACHINE_STAGE_V1_ACTION_FAILURE;
   }
-  if (!bx_mem.copy_to_ordinary_ram(request->preserved_state_address,
+  if (!machine_facade_v1_memory_write(request->preserved_state_address,
       request->preserved_state_bytes, preserved)) {
     runtime_machine_stage_v1_reset();
     return RUNTIME_MACHINE_STAGE_V1_PRESERVE_FAILURE;
@@ -326,26 +311,22 @@ extern "C" uint32_t runtime_machine_stage_v1_begin(
 
 extern "C" uint32_t runtime_machine_stage_v1_reset(void)
 {
-  bx_mantle_minimal_machine_c *machine = runtime_machine_stage_machine;
-  runtime_machine_stage_machine = 0;
   runtime_mantle_clear_posted_physical_irqs_v1();
   runtime_ivt_watch_v1_reset();
   runtime_ordinary_ram_reservation_v1_set_lifecycle_active(0u);
   runtime_a20_capability_v1_set_lifecycle_active(0u);
   runtime_protected_range_action_v1_set_lifecycle_active(0u);
   runtime_port_action_v1_set_lifecycle_active(0u);
-  if (machine == 0) return RUNTIME_MACHINE_STAGE_V1_OK;
-  if (machine->cleanup() != BX_MANTLE_MINIMAL_MACHINE_OK) {
-    delete machine;
+  if (!machine_facade_v1_machine_active()) return RUNTIME_MACHINE_STAGE_V1_OK;
+  if (!machine_facade_v1_machine_cleanup()) {
     return RUNTIME_MACHINE_STAGE_V1_CLEANUP_FAILURE;
   }
-  delete machine;
   return RUNTIME_MACHINE_STAGE_V1_OK;
 }
 
 extern "C" int runtime_machine_stage_v1_active(void)
 {
-  return runtime_machine_stage_machine != 0;
+  return machine_facade_v1_machine_active();
 }
 
 extern "C" void runtime_machine_stage_v1_terminal_position_observation_enable(
@@ -489,22 +470,22 @@ extern "C" int runtime_machine_stage_v1_entry_valid(
 extern "C" uint32_t runtime_machine_stage_v1_arm_real_mode_entry(
   const struct runtime_machine_stage_v1_entry *entry)
 {
-  if (runtime_machine_stage_machine == 0)
+  if (!machine_facade_v1_machine_active())
     return RUNTIME_MACHINE_STAGE_V1_REJECTED_INACTIVE;
   if (!runtime_machine_stage_v1_entry_valid(entry))
     return RUNTIME_MACHINE_STAGE_V1_REJECTED_ENTRY;
-  bx_cpu.apply_real_mode_entry(entry->cs, entry->eip);
+  machine_facade_v1_apply_real_mode_entry(entry->cs, entry->eip);
   return RUNTIME_MACHINE_STAGE_V1_OK;
 }
 
 extern "C" uint32_t runtime_machine_stage_v1_copy_real_mode_entry(
   struct runtime_machine_stage_v1_entry *entry)
 {
-  if (runtime_machine_stage_machine == 0 || entry == 0)
+  if (!machine_facade_v1_machine_active() || entry == 0)
     return RUNTIME_MACHINE_STAGE_V1_REJECTED_INACTIVE;
   runtime_machine_stage_v1_entry_clear(entry);
-  entry->cs = bx_cpu.sregs[BX_SEG_REG_CS].selector.value;
-  entry->eip = bx_cpu.get_eip();
+  if (!machine_facade_v1_copy_real_mode_entry(&entry->cs, &entry->eip))
+    return RUNTIME_MACHINE_STAGE_V1_MACHINE_FAILURE;
   return RUNTIME_MACHINE_STAGE_V1_OK;
 }
 
@@ -532,47 +513,43 @@ extern "C" uint32_t runtime_machine_stage_v1_execute(
   const struct runtime_machine_stage_v1_execution_request *request)
 {
   runtime_machine_stage_v1_stop_state stop_state;
-  int stop_timer, cancellation_timer, physical_irq_timer;
+  uint32_t stop_timer, cancellation_timer, physical_irq_timer;
 
-  if (runtime_machine_stage_machine == 0)
+  if (!machine_facade_v1_machine_active())
     return RUNTIME_MACHINE_STAGE_V1_EXECUTION_REJECTED_INACTIVE;
   if (!runtime_machine_stage_v1_execution_request_valid(request))
     return RUNTIME_MACHINE_STAGE_V1_EXECUTION_REJECTED_INPUT;
   if (runtime_cancellation_controller_v1_requested_reason() !=
       RUNTIME_CANCELLATION_V1_NONE)
     return RUNTIME_MACHINE_STAGE_V1_EXECUTION_HOST_CANCELLATION;
-  bx_pc_system.initialize(request->ips);
-  if (runtime_machine_stage_machine->compose_headless_8042() !=
-      BX_MANTLE_MINIMAL_MACHINE_OK) {
+  machine_facade_v1_initialize_timing(request->ips);
+  if (!machine_facade_v1_compose_headless_8042()) {
     runtime_machine_stage_v1_reset();
     return RUNTIME_MACHINE_STAGE_V1_MACHINE_FAILURE;
   }
   stop_state.watchdog_fired = 0;
   stop_state.cancellation_fired = 0;
   runtime_mantle_clear_posted_physical_irqs_v1();
-  stop_timer = bx_pc_system.register_timer_ticks(&stop_state,
-    runtime_machine_stage_v1_stop, request->instruction_tick_budget, 0, 1,
-    "machine-stage-stop");
-  if (stop_timer <= 0)
+  if (!machine_facade_v1_register_timer(&stop_state,
+      runtime_machine_stage_v1_stop, request->instruction_tick_budget, 0u,
+      1u, &stop_timer))
     return RUNTIME_MACHINE_STAGE_V1_EXECUTION_TIMER_FAILURE;
-  cancellation_timer = bx_pc_system.register_timer_ticks(&stop_state,
-    runtime_machine_stage_v1_cancellation_poll,
-    runtime_machine_stage_v1_cancellation_poll_ticks, 1, 1,
-    "machine-stage-cancel");
-  if (cancellation_timer <= 0) {
-    bx_pc_system.deactivate_timer((unsigned) stop_timer);
-    bx_pc_system.unregisterTimer((unsigned) stop_timer);
+  if (!machine_facade_v1_register_timer(&stop_state,
+      runtime_machine_stage_v1_cancellation_poll,
+      runtime_machine_stage_v1_cancellation_poll_ticks, 1u, 1u,
+      &cancellation_timer)) {
+    machine_facade_v1_deactivate_timer(stop_timer);
+    machine_facade_v1_unregister_timer(stop_timer);
     return RUNTIME_MACHINE_STAGE_V1_EXECUTION_TIMER_FAILURE;
   }
-  physical_irq_timer = bx_pc_system.register_timer_ticks(&stop_state,
-    runtime_machine_stage_v1_physical_irq_poll,
-    runtime_machine_stage_v1_cancellation_poll_ticks, 1, 1,
-    "machine-stage-physical-irq");
-  if (physical_irq_timer <= 0) {
-    bx_pc_system.deactivate_timer((unsigned) cancellation_timer);
-    bx_pc_system.unregisterTimer((unsigned) cancellation_timer);
-    bx_pc_system.deactivate_timer((unsigned) stop_timer);
-    bx_pc_system.unregisterTimer((unsigned) stop_timer);
+  if (!machine_facade_v1_register_timer(&stop_state,
+      runtime_machine_stage_v1_physical_irq_poll,
+      runtime_machine_stage_v1_cancellation_poll_ticks, 1u, 1u,
+      &physical_irq_timer)) {
+    machine_facade_v1_deactivate_timer(cancellation_timer);
+    machine_facade_v1_unregister_timer(cancellation_timer);
+    machine_facade_v1_deactivate_timer(stop_timer);
+    machine_facade_v1_unregister_timer(stop_timer);
     return RUNTIME_MACHINE_STAGE_V1_EXECUTION_TIMER_FAILURE;
   }
   runtime_mantle_generic_ud_stop_observation_reset();
@@ -585,13 +562,13 @@ extern "C" uint32_t runtime_machine_stage_v1_execute(
 #if RUNTIME_ENABLE_MANTLE_INSTRUCTION_HISTORY
   runtime_machine_stage_v1_instruction_history_configure();
 #endif
-  bx_cpu.cpu_loop();
-  bx_pc_system.deactivate_timer((unsigned) physical_irq_timer);
-  bx_pc_system.unregisterTimer((unsigned) physical_irq_timer);
-  bx_pc_system.deactivate_timer((unsigned) cancellation_timer);
-  bx_pc_system.unregisterTimer((unsigned) cancellation_timer);
-  bx_pc_system.deactivate_timer((unsigned) stop_timer);
-  bx_pc_system.unregisterTimer((unsigned) stop_timer);
+  machine_facade_v1_cpu_loop();
+  machine_facade_v1_deactivate_timer(physical_irq_timer);
+  machine_facade_v1_unregister_timer(physical_irq_timer);
+  machine_facade_v1_deactivate_timer(cancellation_timer);
+  machine_facade_v1_unregister_timer(cancellation_timer);
+  machine_facade_v1_deactivate_timer(stop_timer);
+  machine_facade_v1_unregister_timer(stop_timer);
   /* A terminal position is a selector-blind CPU fact.  Capture it for either
    * finite watchdog expiry or the otherwise-classified cpu_loop return; this
    * observation never changes the return disposition or CPU state. */
@@ -600,9 +577,10 @@ extern "C" uint32_t runtime_machine_stage_v1_execute(
       !runtime_mantle_first_fault_observation_observed() &&
       !runtime_mantle_generic_ud_stop_observed() &&
       !runtime_mantle_generic_ud_pending_observed()) {
-    runtime_machine_stage_v1_terminal_position.cs =
-      bx_cpu.sregs[BX_SEG_REG_CS].selector.value;
-    runtime_machine_stage_v1_terminal_position.eip = bx_cpu.get_eip();
+    if (!machine_facade_v1_copy_real_mode_entry(
+        &runtime_machine_stage_v1_terminal_position.cs,
+        &runtime_machine_stage_v1_terminal_position.eip))
+      return RUNTIME_MACHINE_STAGE_V1_MACHINE_FAILURE;
     runtime_machine_stage_v1_terminal_position.valid = 1u;
   }
 #if RUNTIME_ENABLE_MANTLE_INSTRUCTION_HISTORY

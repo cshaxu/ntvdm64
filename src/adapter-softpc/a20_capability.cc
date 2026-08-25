@@ -1,5 +1,5 @@
 #include "a20_capability.h"
-#include "machine_binding.h"
+#include "adapter-bochs/machine_facade.h"
 
 static uint32_t runtime_a20_capability_lifecycle_active;
 
@@ -16,7 +16,7 @@ void runtime_a20_capability_v1_dispatch(
   result->status = RUNTIME_A20_CAPABILITY_REJECTED_LIFECYCLE;
   result->enabled = 0u;
   if (!runtime_a20_capability_lifecycle_active) return;
-  if (!runtime_machine_binding_v1_get_a20(&result->enabled)) return;
+  if (!machine_facade_v1_get_a20(&result->enabled)) return;
   if (request == 0 || request->version != RUNTIME_A20_CAPABILITY_V1_VERSION) {
     result->status = RUNTIME_A20_CAPABILITY_REJECTED_VERSION;
     return;
@@ -33,7 +33,7 @@ void runtime_a20_capability_v1_dispatch(
     result->status = RUNTIME_A20_CAPABILITY_REJECTED_VALUE;
     return;
   }
-  if (!runtime_machine_binding_v1_set_a20(request->requested_enabled) ||
-      !runtime_machine_binding_v1_get_a20(&result->enabled)) return;
+  if (!machine_facade_v1_set_a20(request->requested_enabled) ||
+      !machine_facade_v1_get_a20(&result->enabled)) return;
   result->status = RUNTIME_A20_CAPABILITY_OK;
 }

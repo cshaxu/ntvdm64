@@ -48,7 +48,7 @@
 
 #include "iodev.h"
 #include <math.h>
-#include "keyboard.h"
+#include "bochs-core/iodev/keyboard.h"
 #include "bochs-core/iodev/scancodes.h"
 
 #define LOG_THIS  theKeyboard->
@@ -56,6 +56,28 @@
 
 
 bx_keyb_c *theKeyboard = NULL;
+
+/* BX-MACH-027: private implementation called only by keyboard_bridge.cc. */
+bx_bool bochs_core_overlay_keyboard_headless_create(void)
+{
+  if (theKeyboard != NULL || bx_devices.pluginKeyboard != &bx_devices.stubKeyboard)
+    return 0;
+  theKeyboard = new bx_keyb_c();
+  if (theKeyboard == NULL) return 0;
+  bx_devices.pluginKeyboard = theKeyboard;
+  theKeyboard->init();
+  return 1;
+}
+
+bx_bool bochs_core_overlay_keyboard_headless_destroy(void)
+{
+  if (theKeyboard == NULL || bx_devices.pluginKeyboard != theKeyboard) return 0;
+  if (!theKeyboard->fini()) return 0;
+  delete theKeyboard;
+  theKeyboard = NULL;
+  bx_devices.pluginKeyboard = &bx_devices.stubKeyboard;
+  return 1;
+}
 
 bx_keyb_c::bx_keyb_c()
 {

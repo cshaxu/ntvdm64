@@ -447,7 +447,10 @@ BOCHSAPI extern Bit32u apic_id_mask;
 #define BX_RESET_HARDWARE 11
 
 #include "bochs-core/memory/memory.h"
-#include "adapter-bochs/pc_system.h"
+/* DIVERGENCE(BX-BUILD-003): component-root include redirect.  The original
+ * Bochs PC-system declaration remains an upstream mirror in bochs-core; only
+ * its project root changed during component layout convergence. */
+#include "bochs-core/pc_system.h"
 #include "gui/gui.h"
 
 /* --- EXTERNS --- */

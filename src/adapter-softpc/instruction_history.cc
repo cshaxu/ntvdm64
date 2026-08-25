@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////////////
 
 #include "instruction_history.h"
-#include "machine_binding.h"
+#include "adapter-bochs/machine_facade.h"
 #include <string.h>
 
 #ifndef RUNTIME_ENABLE_MANTLE_INSTRUCTION_HISTORY_PROVENANCE
@@ -109,7 +109,7 @@ void runtime_mantle_instruction_history_v1_record(
         runtime_instruction_history_last_record.cs,
         (uint16_t)runtime_instruction_history_last_record.rip,
         RUNTIME_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES,
-        &predecessor_address) && runtime_machine_binding_v1_memory_read(
+        &predecessor_address) && machine_facade_v1_memory_read(
           predecessor_address, RUNTIME_INSTRUCTION_HISTORY_V1_PREDECESSOR_BYTES,
           runtime_instruction_history_latest_cs_provenance.predecessor_bytes)) {
       runtime_instruction_history_latest_cs_provenance.predecessor_valid = 1u;
@@ -117,14 +117,14 @@ void runtime_mantle_instruction_history_v1_record(
     if (runtime_instruction_history_real_address(record->cs,
         (uint16_t)record->rip,
         RUNTIME_INSTRUCTION_HISTORY_V1_SUCCESSOR_BYTES,
-        &successor_address) && runtime_machine_binding_v1_memory_read(
+        &successor_address) && machine_facade_v1_memory_read(
           successor_address, RUNTIME_INSTRUCTION_HISTORY_V1_SUCCESSOR_BYTES,
           runtime_instruction_history_latest_cs_provenance.successor_bytes)) {
       runtime_instruction_history_latest_cs_provenance.successor_valid = 1u;
     }
     if (runtime_instruction_history_real_address(record->ss, record->sp,
         RUNTIME_INSTRUCTION_HISTORY_V1_STACK_BYTES, &stack_address) &&
-        runtime_machine_binding_v1_memory_read(stack_address,
+        machine_facade_v1_memory_read(stack_address,
           RUNTIME_INSTRUCTION_HISTORY_V1_STACK_BYTES,
           runtime_instruction_history_latest_cs_provenance.stack_bytes)) {
       runtime_instruction_history_latest_cs_provenance.stack_valid = 1u;

@@ -19,6 +19,8 @@
 //  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 /////////////////////////////////////////////////////////////////////////
 
+#define BX_PLUGGABLE
+
 #include "iodev.h"
 #include "pic.h"
 
@@ -26,24 +28,30 @@
 
 bx_pic_c *thePic = NULL;
 
-// BX-MANTLE-082-BEGIN
-// The original plugin wrapper owns discovery and registry side effects.  The
-// finite mantle instead owns a single fixed PIC and, for BX_USE_PIC_SMF,
-// establishes the original translation unit's private instance before init().
-bx_pic_c *bx_mantle_pic_create(void)
+extern bx_bool bochs_core_overlay_pic_fini(bx_pic_c *pic);
+
+/* DIVERGENCE(BX-MACH-026): true subset.  The original plugin entry points
+ * require Bochs' plugin registry, which is intentionally outside the finite
+ * native-machine assembly.  minimal_pic_create/destroy owns the one fixed
+ * instance without invoking these unreachable product-shell methods. */
+#if 0
+int libpic_LTX_plugin_init(plugin_t *plugin, plugintype_t type, int argc, char *argv[])
 {
-  if (thePic != NULL) return NULL;
-  thePic = new bx_pic_c();
-  return thePic;
+  if (type == PLUGTYPE_CORE) {
+    thePic = new bx_pic_c();
+    bx_devices.pluginPicDevice = thePic;
+    BX_REGISTER_DEVICE_DEVMODEL(plugin, type, thePic, BX_PLUGIN_PIC);
+    return 0; // Success
+  } else {
+    return -1;
+  }
 }
 
-void bx_mantle_pic_destroy(bx_pic_c *pic)
+void libpic_LTX_plugin_fini(void)
 {
-  if (pic != thePic) return;
   delete thePic;
-  thePic = NULL;
 }
-// BX-MANTLE-082-END
+#endif
 
 bx_pic_c::bx_pic_c(void)
 {
@@ -52,7 +60,11 @@ bx_pic_c::bx_pic_c(void)
 
 bx_pic_c::~bx_pic_c(void)
 {
+  /* DIVERGENCE(BX-MACH-025): true subset.  The finite composition never
+   * creates the original product-tree PIC node, so it has none to remove. */
+#if 0
   SIM->get_bochs_root()->remove("pic");
+#endif
   BX_DEBUG(("Exit"));
 }
 
@@ -123,24 +135,13 @@ void bx_pic_c::init(void)
 #endif
 }
 
-// BX-MANTLE-082-BEGIN
-// The original product tears down its complete port registry elsewhere.  The
-// finite mantle owns only this PIC, so it restores the original default port
-// state before the established empty-port cleanup runs.
+/* DIVERGENCE(BX-MACH-024): only the call boundary belongs to the Bochs mirror.
+ * The finite empty-port-space teardown body is private bochs-core-overlay code. */
 bx_bool bx_pic_c::fini(void)
 {
-  bx_bool ok = 1;
-  ok = bx_devices.unregister_io_read_handler(this, read_handler, 0x0020, 1) && ok;
-  ok = bx_devices.unregister_io_read_handler(this, read_handler, 0x0021, 1) && ok;
-  ok = bx_devices.unregister_io_read_handler(this, read_handler, 0x00A0, 1) && ok;
-  ok = bx_devices.unregister_io_read_handler(this, read_handler, 0x00A1, 1) && ok;
-  ok = bx_devices.unregister_io_write_handler(this, write_handler, 0x0020, 1) && ok;
-  ok = bx_devices.unregister_io_write_handler(this, write_handler, 0x0021, 1) && ok;
-  ok = bx_devices.unregister_io_write_handler(this, write_handler, 0x00A0, 1) && ok;
-  ok = bx_devices.unregister_io_write_handler(this, write_handler, 0x00A1, 1) && ok;
-  return ok;
+  return bochs_core_overlay_pic_fini(this);
 }
-// BX-MANTLE-082-END
+
 void bx_pic_c::reset(unsigned type) {}
 
 void bx_pic_c::register_state(void)

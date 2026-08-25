@@ -1,7 +1,5 @@
 #include "engine_contract.h"
 #include "machine_engine.h"
-#include "adapter-bochs/machine_facade.h"
-#include "adapter-softpc/machine_binding.h"
 #include "opennt-bop/ingress/dem_v2_runtime_session.h"
 #include "opennt-bop/ingress/dem_v2_startup_composition.h"
 #include "opennt-bop/ingress/command_v2_runtime_session.h"
@@ -32,22 +30,9 @@ int runtime_engine_run_v1(const struct runtime_engine_request_v1 *request,
             RUNTIME_ENGINE_TERMINAL_V1_REJECTED_REQUEST, 1u);
     app_session_v1_initialize(&session);
     if (!app_session_v1_activate(&session) ||
-        !runtime_machine_binding_v1_bind_a20(machine_facade_v1_get_a20,
-            machine_facade_v1_set_a20) ||
-        !app_session_v1_register_teardown(&session,
-            runtime_machine_binding_v1_unbind_a20) ||
-        !runtime_machine_binding_v1_bind_memory(
-            machine_facade_v1_memory_readable,
-            machine_facade_v1_memory_writable,
-            machine_facade_v1_memory_read,
-            machine_facade_v1_memory_write) ||
-        !app_session_v1_register_teardown(&session,
-            runtime_machine_binding_v1_unbind_memory) ||
-        !runtime_session_mapping_registry_bind(&session)) {
-        app_session_v1_reset(&session);
+        !runtime_session_mapping_registry_bind(&session))
         return runtime_engine_result_v1_set(result,
             RUNTIME_ENGINE_TERMINAL_V1_REJECTED_COMPOSITION, 7u);
-    }
     if (!app_session_v1_register_teardown(&session,
             runtime_session_mapping_registry_reset)) {
         runtime_session_mapping_registry_reset();

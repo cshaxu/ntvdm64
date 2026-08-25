@@ -43,6 +43,8 @@ public:
   virtual ~bx_keyb_c();
   // implement bx_devmodel_c interface
   virtual void init(void);
+  /* DIVERGENCE(BX-MACH-027): finite headless teardown is implemented by the
+   * private overlay, through this retained Bochs-class boundary. */
   bx_bool fini(void);
   virtual void reset(unsigned type);
   // override stubs from bx_keyb_stub_c

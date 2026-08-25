@@ -76,9 +76,12 @@ foreach ($module in @($manifest.modules)) {
         throw 'Module ownership or source list is invalid.'
     }
     foreach ($source in @($module.sources)) {
-        if ($source -notmatch '^src/(?:bochs-core|adapter-bochs|adapter-bop|adapter-softpc|adapter-win32|opennt-bop|opennt-host|session|app)/.+\.(c|cc)$' -or
+        if ($source -notmatch '^src/(?:bochs-core(?:-overlay)?|adapter-bochs|adapter-bop|adapter-softpc|adapter-win32|opennt-bop|opennt-host|session|app)/.+\.(c|cc)$' -or
             !(Test-Path -LiteralPath (Join-Path $root $source) -PathType Leaf)) {
             throw "Invalid or missing manifest source: $source"
+        }
+        if ($source -like 'src/bochs-core-overlay/*' -and $module.name -ne 'bochs-core') {
+            throw "Private bochs-core overlay source may be compiled only by bochs-core: $source"
         }
     }
 }

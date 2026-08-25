@@ -2,7 +2,7 @@ $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
 $sourcePath = Join-Path $repositoryRoot 'src/adapter-bochs/minimal_product_shell.cc'
-$pcSystemPath = Join-Path $repositoryRoot 'src/adapter-bochs/pc_system.cc'
+$pcSystemPath = Join-Path $repositoryRoot 'src/bochs-core/pc_system.cc'
 
 $source = Get-Content -LiteralPath $sourcePath -Raw
 $pcSystem = Get-Content -LiteralPath $pcSystemPath -Raw

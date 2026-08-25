@@ -67,8 +67,11 @@ Bochs-internal lifecycle assembly; it may use native Bochs structures but has
 no OpenNT, DOS, VDM, WOW or Win32 meaning. It is a deliberately cropped Bochs
 product assembly layer, not an adopted-source exception surface.
 
-Only `app` may directly include, link, or call `adapter-bochs`; only
-`adapter-bochs` may directly include, link, or call `bochs-core`. A
+Only `app` and `adapter-softpc` may directly include, link, or call the
+declared selector-blind, fixed-width mechanical facade of `adapter-bochs`;
+`adapter-softpc` may not include a `bochs-core` header or access a Bochs type,
+object or global. Only `adapter-bochs` may directly include, link, or call
+`bochs-core`. A
 component-specific `*-overlay` is private to the matching original mirror:
 only that mirror may include, link, or call it. Overlays are not fixture,
 adapter, session, or app inputs and expose no public component surface.

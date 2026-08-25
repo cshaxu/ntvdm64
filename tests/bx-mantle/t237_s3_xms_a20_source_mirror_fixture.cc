@@ -1,8 +1,6 @@
 #include "bochs.h"
 #include "adapter-softpc/cpu_state_abi.h"
 #include "adapter-softpc/a20_capability.h"
-#include "adapter-softpc/machine_binding.h"
-#include "adapter-bochs/machine_facade.h"
 #include "adapter-bop/generic_ud_bridge.h"
 #include "opennt-bop/ingress/opennt_bop_route.h"
 #include "adapter-softpc/machine_stage.h"
@@ -77,16 +75,9 @@ int main()
   machine_request.preserved_state_bytes = 1u;
   machine_request.ivt_watch_enabled = 1u;
   machine_request.ivt_watch_vector = 0x15u;
-  if (!runtime_machine_binding_v1_bind_memory(
-      machine_facade_v1_memory_readable,
-      machine_facade_v1_memory_writable,
-      machine_facade_v1_memory_read,
-      machine_facade_v1_memory_write)) return 18;
   if (!runtime_machine_stage_v1_request_valid(&machine_request) ||
       runtime_machine_stage_v1_begin(&machine_request) != RUNTIME_MACHINE_STAGE_V1_OK)
     return 1;
-  if (!runtime_machine_binding_v1_bind_a20(machine_facade_v1_get_a20,
-      machine_facade_v1_set_a20)) return 17;
   if (!runtime_xms_v2_runtime_session_bind(8192u)) return 2;
 
   /* The imported xmsmisc.c body calls the direct keybd_io.c fragment before
@@ -142,7 +133,5 @@ int main()
   if (invoke_xms(0u, 2u, 0u, 1u | 8u, 0u) != 0 || !a20_enabled(0u)) return 7;
 
   runtime_xms_v2_runtime_session_reset();
-  runtime_machine_binding_v1_unbind_a20();
-  runtime_machine_binding_v1_unbind_memory();
   return runtime_machine_stage_v1_reset() == RUNTIME_MACHINE_STAGE_V1_OK ? 0 : 8;
 }

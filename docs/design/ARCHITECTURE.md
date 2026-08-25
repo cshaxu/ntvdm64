@@ -54,12 +54,12 @@ app
   -> opennt-softpc                        (selects admitted opaque firmware/ROM inputs)
   -> adapter-bochs -> bochs-core
   -> adapter-bop -> opennt-bop
-  -> installs adapter-softpc's opaque machine-event callback to adapter-bop
+  -> registers adapter-bop's generic ingress callback with adapter-bochs
 opennt-bop
   -> opennt-host
   -> opennt-utils                         (only for an admitted original utility contract)
   -> adapter-win32
-  -> adapter-softpc -> session -> app-bound opaque machine endpoint
+  -> adapter-softpc -> adapter-bochs -> bochs-core
   -> session                              (declared neutral lifecycle/resource contract)
 opennt-host -> adapter-win32
 opennt-host -> adapter-softpc
@@ -69,23 +69,26 @@ adapter-bop -> session                    (event/completion context only)
 adapter-win32 -> session                  (registered session endpoint only)
 ```
 
-`adapter-bop` is the sole generic BOP ingress boundary. It receives a copied,
-typed, finite opaque machine event through the mechanical boundary and a
-session-limited call context supplied by `session`; invokes the `app`-bound
-route callback that exposes an OpenNT BOP entry; and returns a typed resume, pending, or
-controlled-stop outcome. It does not implement a provider or interpret a
-selector family. Selector/service meaning, dispatch order, provider choice,
-and documented failure behavior remain in `opennt-bop`. `bochs-core` never calls
-or recognizes `opennt-bop`, BOP, DOS, or OpenNT terminology.
+`adapter-bop` is the sole generic BOP ingress boundary. `app` registers its
+generic ingress callback with the public `adapter-bochs` mechanical surface.
+When a machine event occurs, `adapter-bochs` invokes that opaque, copied,
+fixed-width callback and receives only a typed resume, pending, or
+controlled-stop result. It does not include, link, name, decode, or otherwise
+recognize `adapter-bop`, BOP, OpenNT, DOS, or VDM semantics. `adapter-bop`
+forwards the finite event to `opennt-bop`; selector/service meaning, dispatch
+order, provider choice, and documented failure behavior remain there.
+`bochs-core` never calls or recognizes `opennt-bop`, BOP, DOS, or OpenNT
+terminology.
 
 `adapter-softpc` preserves the reached historical SoftPC/CCPU/SAS interface
 spelling, parameters, calling convention and observable mechanical result
-while backing it with bounded Bochs operations. It receives and returns
-versioned, fixed-width values and checked guest-memory ranges. It does not
-pass C++ objects, host pointers, CRT-owned memory, implicit handle ownership,
-or cross-architecture callbacks across that boundary. `app` installs its
-opaque machine-event callback to `adapter-bop`; this runtime callback is not a
-static dependency from the machine components back to OpenNT.
+while backing it with the declared selector-blind, fixed-width mechanical
+facade of `adapter-bochs`. It receives and returns versioned, fixed-width
+values and checked guest-memory ranges. It does not include a `bochs-core`
+header, or pass C++ objects, host pointers, CRT-owned memory, implicit handle
+ownership, or cross-architecture callbacks across that boundary. The runtime
+event callback is registered by `app`, not a static dependency from machine
+components back to OpenNT.
 
 ### Guest-Pointer Mapping
 
@@ -120,9 +123,10 @@ CRT may enter this in-process composition.
 
 ## Boundary Invariants
 
-- Machine mechanics stay in `bochs-core`. `adapter-softpc` may request bounded mechanical
-  operations through an app-bound opaque endpoint but does not reproduce CPU, memory,
-  firmware, interrupt, or device algorithms.
+- Machine mechanics stay in `bochs-core`. `adapter-softpc` may request bounded
+  mechanical operations only through the declared selector-blind,
+  fixed-width `adapter-bochs` facade; it does not include `bochs-core` or
+  reproduce CPU, memory, firmware, interrupt, or device algorithms.
 - `adapter-bochs` is Bochs-internal assembly only. It reuses native Bochs code and
   data structures, extracting only product-shell paths that prevent independent
   minimal operation. It has no VDM or guest meaning.
@@ -175,6 +179,7 @@ app -> adapter-bop -> opennt-bop -> opennt-host
 opennt-bop -> opennt-utils                (declared original utility contract only)
 opennt-bop -> adapter-win32
 opennt-bop -> adapter-softpc -> session
+adapter-softpc -> adapter-bochs           (declared selector-blind mechanical facade only)
 opennt-bop -> session                       (neutral declared contract)
 opennt-host -> adapter-win32                  (declared Win32 facade only)
 opennt-host -> adapter-softpc                 (declared SoftPC/CCPU facade only)
@@ -196,11 +201,11 @@ absorbed by either adapter.
 
 ## Bochs And Overlay Privacy
 
-`app` is the only production component that directly calls `adapter-bochs`.
-`adapter-bochs` is the only production component that directly calls
-`bochs-core`. OpenNT-facing code, including `adapter-softpc`, reaches admitted
-machine operations only through an opaque endpoint registered by `app` in the
-neutral `session` contract; it never links directly to either Bochs component.
+`app` and `adapter-softpc` are the only production components that directly
+call `adapter-bochs`. `adapter-softpc` may consume only its declared,
+selector-blind, fixed-width mechanical facade and may not import a
+`bochs-core` header, type, object or global. `adapter-bochs` is the only
+production component that directly calls `bochs-core`.
 
 Each `*-overlay` is private implementation detail of its identically rooted
 native mirror. Only `bochs-core` may call `bochs-core-overlay`; only

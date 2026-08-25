@@ -158,29 +158,31 @@
         "src/bochs-core/memory/memory.cc",
         "src/bochs-core/memory/misc_mem.cc",
         "src/bochs-core/logio.cc",
+        "src/bochs-core/pc_system.cc",
         "src/bochs-core/gui/paramtree.cc",
-        "src/bochs-core/iodev/scancodes.cc"
+        "src/bochs-core/iodev/scancodes.cc",
+        "src/bochs-core/iodev/pic.cc",
+        "src/bochs-core/iodev/keyboard_bridge.cc",
+        "src/bochs-core-overlay/iodev/pic_lifecycle.cc",
+        "src/bochs-core-overlay/iodev/keyboard_headless.cc"
       ]
     },
     {
       "name": "adapter-bochs",
       "sources": [
-        "src/adapter-bochs/keyboard.cc",
         "src/adapter-bochs/headless_8042.cc",
         "src/adapter-bochs/machine_facade.cc",
-                "src/adapter-bochs/minimal_machine.cc",
+        "src/adapter-bochs/minimal_machine.cc",
+        "src/adapter-bochs/minimal_pic.cc",
         "src/adapter-bochs/minimal_port_space.cc",
         "src/adapter-bochs/minimal_product_shell.cc",
-        "src/adapter-bochs/minimal_sim.cc",
-        "src/adapter-bochs/pc_system.cc",
-        "src/adapter-bochs/pic.cc"
+        "src/adapter-bochs/minimal_sim.cc"
       ]
     },
     {
       "name": "adapter-softpc",
       "sources": [
         "src/adapter-softpc/a20_capability.cc",
-        "src/adapter-softpc/machine_binding.c",
         "src/adapter-softpc/bulk_result_transaction.c",
         "src/adapter-softpc/cpu_delta_abi.c",
         "src/adapter-softpc/cpu_result.c",

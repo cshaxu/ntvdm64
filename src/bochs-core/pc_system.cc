@@ -181,6 +181,9 @@ void bx_pc_system_c::invlpg(bx_address addr)
     BX_CPU(i)->TLB_invlpg(addr);
 }
 
+/* DIVERGENCE(BX-MACH-023): original Reset and exit complete a full device/GUI
+ * product shell. They are omitted as whole unreachable methods; the minimal
+ * Bochs-only assembly supplies its bounded lifecycle outside this mirror. */
 Bit8u bx_pc_system_c::IAC(void)
 {
   return DEV_pic_iac();

@@ -66,6 +66,8 @@ public:
   bx_pic_c();
   virtual ~bx_pic_c();
   virtual void init(void);
+  /* DIVERGENCE(BX-MACH-024): the core retains only a one-call teardown
+   * boundary; the finite-port-space unregister body is private overlay code. */
   bx_bool fini(void);
   virtual void reset(unsigned type);
   virtual void lower_irq(unsigned irq_no);
@@ -78,6 +80,7 @@ public:
   virtual void register_state(void);
 
 private:
+  friend bx_bool bochs_core_overlay_pic_fini(bx_pic_c *pic);
   struct {
     bx_pic_t master_pic;
     bx_pic_t slave_pic;
@@ -94,9 +97,5 @@ private:
   BX_PIC_SMF void   service_slave_pic(void);
   BX_PIC_SMF void   clear_highest_interrupt(bx_pic_t *pic);
 };
-
-// BX-MANTLE-082: mantle-private fixed PIC lifecycle; no plugin registry.
-bx_pic_c *bx_mantle_pic_create(void);
-void bx_mantle_pic_destroy(bx_pic_c *pic);
 
 #endif

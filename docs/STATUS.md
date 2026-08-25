@@ -2,10 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T265 S3 — adapter-Bochs provenance migration.** S1 governance
-closed in `ff2d0d70`; S2 root migration closed in `d67c130b`. S3 now returns
-upstream Bochs material to the mirror boundary while retaining only
-project-authored, Bochs-only assembly in `adapter-bochs`.
+**Active: M0 T265 S4 — bochs-core mirror/overlay convergence.** S1 governance
+closed in `ff2d0d70`; S2 root migration closed in `d67c130b`; S3 provenance
+migration returned adopted Bochs material to mirror/overlay ownership and left
+only project-authored, Bochs-only assembly in `adapter-bochs`.
 
 ## Active Packet
 
@@ -21,7 +21,7 @@ project-authored, Bochs-only assembly in `adapter-bochs`.
 | Files And ABI Surface | Architecture/coding/rule authorities, queue, proposal, status, evidence and documentation inventory only; no runtime ABI. |
 | Applicable Rules | Task admission and closure; component ownership; mirror/overlay review; source-first and document governance rules. |
 | Verification | Cross-authority terminology/dependency scan, proposal consistency review, documentation governance, and `git diff --check`. |
-| Expected Markers | Only `app` calls `adapter-bochs`; only `adapter-bochs` calls `bochs-core`; only a native mirror calls its own overlay. |
+| Expected Markers | Only `app` and `adapter-softpc` call the declared `adapter-bochs` mechanical facade; only `adapter-bochs` calls `bochs-core`; only a native mirror calls its own overlay. |
 | Asset Needs | Existing component-layout evidence and source-tree ownership registers; no external source import. |
 | Reporting Requirements | State exact renamed component names, permitted directed edges, overlay privacy, and every deferred source move. |
 | Stop Conditions | An authority implies a prohibited reverse/direct dependency, a source move becomes necessary to state policy, or an overlay needs a generic/shared consumer. |
@@ -67,7 +67,7 @@ closure with exit `0` and 81 linked executables.  See
 | Identifier Mode | `M0 T265 S3`, Ordinary Mode with a single-person dual-role review. |
 | Admission And Approval | Owner-approved T265 proposal S3 after S2 closure. |
 | Objective | Classify every `adapter-bochs` source by pinned Bochs provenance and return upstream-original, true-subset or same-shaped material to its upstream-relative `bochs-core` path or to `bochs-core-overlay` when the mirror rule requires it. |
-| Non-goals | No new CPU/device/BOP/OpenNT/Win32 semantics, no generic compatibility layer, and no change to the app-only entry rule for `adapter-bochs`. |
+| Non-goals | No new CPU/device/BOP/OpenNT/Win32 semantics, no generic compatibility layer, and no expansion beyond the declared `adapter-softpc` mechanical-facade edge to `adapter-bochs`. |
 | Reference Baseline | T265 proposal S3, pinned Bochs 2.6 baseline, `adapter-bochs` source inventory and T265/S2 build closure. |
 | Files And ABI Surface | `adapter-bochs`, affected `bochs-core`/`bochs-core-overlay` paths, formal manifest, provenance ledger, README exception register and focused fixtures; existing mechanical ABI only. |
 | Applicable Rules | Mirror identity/subset/divergence rules; private-overlay rule; `adapter-bochs` Bochs-only vocabulary; source-first provenance and formal-build closure. |
@@ -84,10 +84,38 @@ closure with exit `0` and 81 linked executables.  See
 `iodev/scancodes.{cc,h}`, and root `logio.cc` to `bochs-core`; see the
 [provenance ledger](etc/evidence/m0-t265-s3-adapter-bochs-provenance-ledger-001.md).
 The required sweep found direct `adapter-softpc` consumption of
-`adapter-bochs`/`bochs-core` objects.  The approved S3 exit rule requires the
-following app/session-bound copied-data mechanical contract before
-`pc_system`, PIC and keyboard provenance moves can close; this is recorded in
-the proposal rather than deferred as an undocumented exception.
+`adapter-bochs`/`bochs-core` objects.  S3 permits `adapter-softpc` to consume
+the declared selector-blind, fixed-width `adapter-bochs` mechanical facade,
+but it must not import a `bochs-core` header, type, object or global.  This
+facade correction is recorded in the proposal rather than deferred as an
+undocumented exception.
+
+**S3 closure:** `adapter-bochs` now contains only self-authored Bochs-only
+assembly. P1/P2/P3 returned `paramtree`, `scancodes`, `logio`, `pc_system`,
+PIC, and keyboard ownership to the proper core/overlay boundary. The focused
+PIC and headless-8042 fixtures compile, link and run; the provenance ledger
+records each true subset and private-overlay registration. No production
+component directly includes `bochs-core-overlay`.
+
+### M0 T265 S4 — bochs-core mirror/overlay convergence
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T265 S4`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner-approved T265 proposal S4 after S3 provenance closure. |
+| Objective | Audit every differing `bochs-core` mirror file and move every over-three-executable-line semantic intrusion or over-50-percent divergence to private `bochs-core-overlay`, retaining only the smallest marked mirror boundary. |
+| Non-goals | No BOP, OpenNT, DOS, VDM, WOW, Win32, device expansion, or CPU semantic expansion. |
+| Reference Baseline | T265 proposal S4, local pinned Bochs 2.6 source, S3 provenance ledger and established mechanical fixtures. |
+| Files And ABI Surface | `bochs-core`, `bochs-core-overlay`, `adapter-bochs` only for existing assembly calls, formal manifest, per-file ledger, README exception indexes and focused fixtures. |
+| Applicable Rules | Mirror identity/subset/divergence standard; private-overlay rule; Bochs-only component vocabulary; source-first recovery and no behavior expansion. |
+| Verification | Per-file baseline measurement; direct-overlay-consumer scan; `DIVERGENCE:` and README review; focused formal Ninja builds/fixtures; governance and `git diff --check`. |
+| Expected Markers | Every non-exact core file is exact, true subset, same-shaped marked change, or a smallest core boundary to a private overlay. |
+| Asset Needs | Existing pinned Bochs baseline, S3 formal graph and current fixture set. |
+| Reporting Requirements | Record every differing file, ratio, retained core hunk, overlay location, exception ID and verification result. |
+| Stop Conditions | An overlay needs a non-core caller, a source needs non-Bochs vocabulary, a behavior expansion is required, or baseline provenance is unavailable. |
+| Exit Criteria | Complete per-file ledger and exception register prove no oversized self-authored body remains in `bochs-core`; private overlay is invoked only by core and focused formal evidence passes. |
+| Original Owner Request | “S4. 按照镜像组件审计规则，把bochs-core里面的大幅度修改部分，送进 bochs-core-overlay”. |
+| Similar-Issue Sweep | CPU #UD/observer paths, memory helpers, real-mode entry/profile, PIC/keyboard lifecycle bridges, build-root redirects and overlay privacy. |
 
 ### M0 T264 S1 — project code filename inventory
 

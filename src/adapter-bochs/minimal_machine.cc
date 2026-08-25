@@ -9,8 +9,9 @@
 #include "bochs-core/cpu/cpu.h"
 #include "bochs-core/memory/memory.h"
 #include "iodev/iodev.h"
-#include "adapter-bochs/pic.h"
-#include "adapter-bochs/pc_system.h"
+#include "bochs-core/iodev/pic.h"
+#include "adapter-bochs/minimal_pic.h"
+#include "bochs-core/pc_system.h"
 #include "adapter-bochs/minimal_sim.h"
 #include "adapter-bochs/minimal_machine.h"
 #include "adapter-bochs/headless_8042.h"
@@ -65,7 +66,7 @@ bx_mantle_minimal_machine_c::initialize(Bit64u guest, Bit64u host)
   // BX-MANTLE-082-BEGIN
   // Fixed native 8259 assembly: no plugin registry, device discovery or
   // state-registration path is entered.
-  pic = bx_mantle_pic_create();
+  pic = minimal_pic_create();
   if (pic == NULL) {
     bx_devices.cleanup_empty_port_space();
     port_space_owned = 0;
@@ -123,7 +124,7 @@ bx_mantle_minimal_machine_status bx_mantle_minimal_machine_c::cleanup(void)
       return BX_MANTLE_MINIMAL_MACHINE_PIC_CLEANUP_FAILED;
     }
     bx_devices.pluginPicDevice = &bx_devices.stubPic;
-    bx_mantle_pic_destroy(pic);
+    minimal_pic_destroy(pic);
     pic = NULL;
     pic_owned = 0;
   }
