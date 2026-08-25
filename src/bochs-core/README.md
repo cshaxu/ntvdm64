@@ -8,6 +8,16 @@ fixed copied-record declaration admitted by `BX-UD-001`. That declaration
 does not grant core any OpenNT, DOS, VDM, WOW, BOP selector/service,
 SoftPC/CCPU or Win32 policy knowledge.
 
+## Formal input closure
+
+T266/S2 imports the exact eleven Bochs 2.6 header/configuration inputs reached
+by the current formal Ninja dependency database: `bochs.h`, `config.h`,
+`osdep.h`, `plugin.h`, `extplugin.h`, `param_names.h`, `bx_debug/debug.h`,
+`gui/gui.h`, `gui/siminterface.h`, `instrument/stubs/instrument.h`, and
+`iodev/iodev.h`. They are byte-identical source mirrors, not divergences or
+new semantics; their source/destination hashes are recorded in T266/S2
+evidence. The imported `config.h` is the pinned formal CPU5 input consumed by
+the build projection, not a new Bochs product configuration.
 ## Local intrusion register
 
 Every modification to adopted Bochs source has one exception identifier.  The

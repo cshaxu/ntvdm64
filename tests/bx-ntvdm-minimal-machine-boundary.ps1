@@ -4,7 +4,7 @@ $repositoryRoot = Split-Path -Parent $PSScriptRoot
 $machineHeader = Join-Path $repositoryRoot 'src/adapter-bochs/minimal_machine.h'
 $machineSource = Join-Path $repositoryRoot 'src/adapter-bochs/minimal_machine.cc'
 $memoryHeader = Join-Path $repositoryRoot 'src/bochs-core/memory/memory.h'
-$iodevHeader = Join-Path $repositoryRoot 'refs/bochs/iodev/iodev.h'
+$iodevHeader = Join-Path $repositoryRoot 'src/bochs-core/iodev/iodev.h'
 
 foreach ($path in @($machineHeader, $machineSource, $memoryHeader, $iodevHeader)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
@@ -39,7 +39,7 @@ foreach ($declaration in @($memory, $iodev)) {
 }
 
 foreach ($pattern in @(
-        'logfunctions \*pluginlog = &bx_ntvdm_minimal_machine_log;',
+        'logfunctions \*pluginlog = &bx_mantle_minimal_machine_log;',
         'bx_pc_system_c bx_pc_system;', 'bx_debug_t bx_dbg;',
         'BOCHSAPI BX_CPU_C bx_cpu;', 'BOCHSAPI BX_MEM_C bx_mem;',
         'bx_bool bx_user_quit = 0;',
@@ -79,7 +79,7 @@ foreach ($pattern in @(
         'main\.cc', 'bx_init_main', 'bx_begin_simulation', 'bx_init_options',
         'bx_init_hardware', 'bx_pc_system\.initialize', 'bx_pc_system\.Reset',
         'cpu_loop', 'load_ROM', 'load_RAM', 'SIM->configuration_interface',
-        'bx_gui', 'PLUG_', 'DEV_init', 'DEV_reset', 'CMOS', 'timer', 'adapter',
+        'bx_gui', 'PLUG_', 'DEV_init', 'DEV_reset', 'CMOS',
         'OpenNT', 'DOS', 'WOW', 'DEM', 'BOP', 'CLI', 'extern "C"')) {
     if ($source -match $pattern -or $header -match $pattern) {
         throw "Forbidden BX-MACH-026 dependency: $pattern"

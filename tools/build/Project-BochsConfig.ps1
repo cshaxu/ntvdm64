@@ -58,7 +58,7 @@ foreach ($collectionName in @('replacements', 'additions', 'derivedAssertions'))
 }
 
 if ([string]::IsNullOrWhiteSpace($InputConfigPath)) {
-    $InputConfigPath = Join-Path (Split-Path -Parent (Split-Path -Parent $PSScriptRoot)) 'refs\bochs\config.h'
+    $InputConfigPath = Join-Path (Split-Path -Parent (Split-Path -Parent $PSScriptRoot)) 'src\bochs-core\config.h'
 }
 if (-not (Test-Path -LiteralPath $InputConfigPath -PathType Leaf)) { throw "Missing input config: $InputConfigPath" }
 $actualHash = (Get-Sha256 $InputConfigPath).ToUpperInvariant()

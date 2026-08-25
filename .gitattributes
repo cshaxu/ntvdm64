@@ -2,6 +2,7 @@
 # Their upstream whitespace is not a project-authored formatting violation.
 src/archived/** -whitespace
 src/bochs/** -whitespace
+src/bochs-core/** -text -whitespace
 src/ms-dos-6/** -whitespace
 src/ntvdmx64/** -whitespace
 src/opennt/** -whitespace
@@ -14,3 +15,5 @@ tools/msdos6-qb45/** -whitespace
 tools/opennt-4.5/** -whitespace
 docs/etc/research/t1*.md -whitespace
 docs/history/m0-t1*.md -whitespace
+
+src/bochs-core/README.md text

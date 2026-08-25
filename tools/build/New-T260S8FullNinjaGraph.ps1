@@ -111,9 +111,9 @@ New-Item -ItemType Directory -Force -Path (Join-Path $build 'obj\targets') | Out
 $projectionTool = Join-Path $root $manifest.configProjection.tool
 $projectionManifest = Join-Path $root $manifest.configProjection.projection
 if ($Refresh) {
-    & powershell.exe -ExecutionPolicy Bypass -File $projectionTool -ManifestPath $projectionManifest -AnalysisRoot (Join-Path $build 'config') -InputConfigPath (Join-Path $root 'refs\bochs\config.h') -Refresh
+    & powershell.exe -ExecutionPolicy Bypass -File $projectionTool -ManifestPath $projectionManifest -AnalysisRoot (Join-Path $build 'config') -InputConfigPath (Join-Path $root 'src\bochs-core\config.h') -Refresh
 } else {
-    & powershell.exe -ExecutionPolicy Bypass -File $projectionTool -ManifestPath $projectionManifest -AnalysisRoot (Join-Path $build 'config') -InputConfigPath (Join-Path $root 'refs\bochs\config.h')
+    & powershell.exe -ExecutionPolicy Bypass -File $projectionTool -ManifestPath $projectionManifest -AnalysisRoot (Join-Path $build 'config') -InputConfigPath (Join-Path $root 'src\bochs-core\config.h')
 }
 if ($LASTEXITCODE -ne 0) { throw 'CPU5 config projection failed.' }
 $config = Join-Path $build 'config\config.h'

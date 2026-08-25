@@ -2,10 +2,10 @@ $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
 $memoryHeader = Join-Path $repositoryRoot 'src/bochs-core/memory/memory.h'
-$memorySource = Join-Path $repositoryRoot 'src/bochs-core/memory/misc_mem.cc'
-$iodevHeader = Join-Path $repositoryRoot 'refs/bochs/iodev/iodev.h'
+$memorySource = Join-Path $repositoryRoot 'src/bochs-core-overlay/memory/minimal_memory.cc'
+$iodevHeader = Join-Path $repositoryRoot 'src/bochs-core/iodev/iodev.h'
 $portSpaceSource = Join-Path $repositoryRoot 'src/adapter-bochs/minimal_port_space.cc'
-$devicesSource = Join-Path $repositoryRoot 'refs/bochs/iodev/devices.cc'
+$devicesSource = Join-Path $repositoryRoot 'src/bochs-core/iodev/devices.cc'
 
 function Get-RegisteredBlock([string] $path, [string] $name) {
     $text = Get-Content -LiteralPath $path -Raw
@@ -27,7 +27,7 @@ foreach ($pattern in @('bx_bool init_empty_port_space\(void\);', 'bx_bool cleanu
     }
 }
 
-$memory = Get-RegisteredBlock $memorySource 'BX-MEM-024'
+$memory = Get-Content -LiteralPath $memorySource -Raw
 foreach ($pattern in @('actual_vector != NULL', 'alloc_vector_aligned', 'rom =', 'bogus =',
         'blocks = new Bit8u\*', 'memory_handlers = new struct memory_handler_struct',
         'pci_enabled = 0', 'smram_available = 0', 'smram_enable = 0',
