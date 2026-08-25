@@ -1,0 +1,58 @@
+origin_path	target_path	role	bytes	sha256
+OpenNT NT4 base/mvdm/dos/command/cmddisp.c	docs/etc/legacy_code/opennt-bop/original/dos/command/cmddisp.c	COMMAND dispatcher parse input	1348	2a906e7100da9db6f16bab91c767b149f28e63a0db2803297812a8e86d2b19d6
+OpenNT NT4 base/mvdm/dos/dem/demdisp.c	docs/etc/legacy_code/opennt-bop/original/dos/dem/demdisp.c	DEM dispatcher parse input	7273	7ea3a829e3f8aad2dfe644d101cabaff514de25909db937675fc323dfce8fe3c
+OpenNT NT4 base/mvdm/dpmi32/dpmi32.c	docs/etc/legacy_code/opennt-bop/original/dpmi32/dpmi32.c	DPMI dispatcher parse input	6674	c271daf86bdfa846c9602f74bd2a4059b98c2ad1f12676e966bcfd427ba93dca
+OpenNT NT4 base/mvdm/vdmredir/vrdisp.c	docs/etc/legacy_code/opennt-bop/original/vdmredir/vrdisp.c	Redirector dispatcher parse input	4922	030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389
+OpenNT NT4 base/mvdm/xms.486/xmsdisp.c	docs/etc/legacy_code/opennt-bop/original/xms.486/xmsdisp.c	XMS dispatcher parse input	1448	24b0fa2fe32bd7a94606d424a10b0961a9911190cb2684456af04034e04bff01
+OpenNT NT4 base/win32/winnls/fontsup/system/app852.fon	src/opennt-guest/wow16/fonts/app852.fon	current guest-stager font input	16435	ca3b89619d7c41798834f2e3da09138f1c57a391d5f963fcbef85665595358a6
+OpenNT NT4 base/win32/winnls/fontsup/system/app857.fon	src/opennt-guest/wow16/fonts/app857.fon	current guest-stager font input	16587	3b5bc4dde6a0b48f55252b94750b74c7621f4a0d8f7aff52bb49521078ce7959
+OpenNT NT4 base/win32/winnls/fontsup/system/app866.fon	src/opennt-guest/wow16/fonts/app866.fon	current guest-stager font input	16663	a782587b6adf4d698511eca99e115af79064b44429272c1c60e4ca70ef18d274
+OpenNT NT4 base/win32/winnls/fontsup/system/cga40737.fon	src/opennt-guest/wow16/fonts/cga40737.fon	current guest-stager font input	3641	c90ba5043990a30933ad7a0db2794cda3870b85b09378ae4e778579cd0ad594a
+OpenNT NT4 base/win32/winnls/fontsup/system/cga40852.fon	src/opennt-guest/wow16/fonts/cga40852.fon	current guest-stager font input	3349	d0aa5a7d2a9c6bef4d2f11d7e715df3b4fbc4e93caa141a0c1ec5ee4d92b26d6
+OpenNT NT4 base/win32/winnls/fontsup/system/cga40857.fon	src/opennt-guest/wow16/fonts/cga40857.fon	current guest-stager font input	3335	71f1c8d03809a74eee037b5a8c4598148469a4c72e8a5d3722e3515ef50a72a0
+OpenNT NT4 base/win32/winnls/fontsup/system/cga40866.fon	src/opennt-guest/wow16/fonts/cga40866.fon	current guest-stager font input	3726	8a16153551932c535c6934cb3a675f2db6691348cc3e7fffdf5f4c3075e9552e
+OpenNT NT4 base/win32/winnls/fontsup/system/cga40869.fon	src/opennt-guest/wow16/fonts/cga40869.fon	current guest-stager font input	3689	e591d52af2b5d6fde8dfd7bba0ce17d88fad8b074c9adeddd6745a1dedca8779
+OpenNT NT4 base/win32/winnls/fontsup/system/cga80737.fon	src/opennt-guest/wow16/fonts/cga80737.fon	current guest-stager font input	3075	a4fdc16ee91e64484a26a3401772c3311c506b55c8b49a2cddf77393b679d6b5
+OpenNT NT4 base/win32/winnls/fontsup/system/cga80852.fon	src/opennt-guest/wow16/fonts/cga80852.fon	current guest-stager font input	3113	0a4603adf2f1963d6b8dcfb87693a9dabfd73ee399c71b3ee088500baa68363a
+OpenNT NT4 base/win32/winnls/fontsup/system/cga80857.fon	src/opennt-guest/wow16/fonts/cga80857.fon	current guest-stager font input	2745	66bb0ea0706867d0b6d88676c9b286211b7b13c955b4c38fe6c53d41680722b5
+OpenNT NT4 base/win32/winnls/fontsup/system/cga80866.fon	src/opennt-guest/wow16/fonts/cga80866.fon	current guest-stager font input	3097	62bf8f0faf2eb756308ff5bfd35d386b36c57c04972fc4fa4f028091e15f2e5c
+OpenNT NT4 base/win32/winnls/fontsup/system/cga80869.fon	src/opennt-guest/wow16/fonts/cga80869.fon	current guest-stager font input	3111	a1f1c479b7476bf5de8a0625503a4ed9bd93b6de594b9bbd91dc6f167cd61410
+OpenNT NT4 base/win32/winnls/fontsup/system/dos737.fon	src/opennt-guest/wow16/fonts/dos737.fon	current guest-stager font input	15892	db45dee073fd4e9ea808b23066923ee7234f201213fc8b971e548acc4eb3ab28
+OpenNT NT4 base/win32/winnls/fontsup/system/dos869.fon	src/opennt-guest/wow16/fonts/dos869.fon	current guest-stager font input	16369	7a02637c46fdbcd37ae45ffac1bb4e64e211ea7d35d706f764ca90f363554548
+OpenNT NT4 base/win32/winnls/fontsup/system/ega40737.fon	src/opennt-guest/wow16/fonts/ega40737.fon	current guest-stager font input	3943	2193751df9e228eefe7b45e203940384e06d1b2f46fa50bf3922f9ec99dc8e4c
+OpenNT NT4 base/win32/winnls/fontsup/system/ega40852.fon	src/opennt-guest/wow16/fonts/ega40852.fon	current guest-stager font input	4013	224ed3deb909fddcc8f62730734989f3c957dd116d9ef8fcbb1e1454fa7e2aed
+OpenNT NT4 base/win32/winnls/fontsup/system/ega40857.fon	src/opennt-guest/wow16/fonts/ega40857.fon	current guest-stager font input	3693	0a17519ac31c85d6a30764d84a6987d08e670bc64774a55cd70c21670a0c6020
+OpenNT NT4 base/win32/winnls/fontsup/system/ega40866.fon	src/opennt-guest/wow16/fonts/ega40866.fon	current guest-stager font input	4091	4c19e883916a50dd9b8b88cb16695e4a0c0e8b5b59e83e561c03f0bf747e4e63
+OpenNT NT4 base/win32/winnls/fontsup/system/ega40869.fon	src/opennt-guest/wow16/fonts/ega40869.fon	current guest-stager font input	3943	2193751df9e228eefe7b45e203940384e06d1b2f46fa50bf3922f9ec99dc8e4c
+OpenNT NT4 base/win32/winnls/fontsup/system/ega80737.fon	src/opennt-guest/wow16/fonts/ega80737.fon	current guest-stager font input	3320	577c24b715c88a32240e0af91ad32755f589e9f274f7736aac6056cb11f495e1
+OpenNT NT4 base/win32/winnls/fontsup/system/ega80852.fon	src/opennt-guest/wow16/fonts/ega80852.fon	current guest-stager font input	3234	4cfdd7f22001f4cace10776ac2110d800e31c5a2c23737d78b46b9cfe1d86fad
+OpenNT NT4 base/win32/winnls/fontsup/system/ega80857.fon	src/opennt-guest/wow16/fonts/ega80857.fon	current guest-stager font input	2914	49e22e1c3bc9edf2026afbea5ee7b8a2cb4baf1d5b2424d2ff92c8d26fadf26e
+OpenNT NT4 base/win32/winnls/fontsup/system/ega80866.fon	src/opennt-guest/wow16/fonts/ega80866.fon	current guest-stager font input	3262	f0cafc12600590e3ae2b92dd4ab3286ad8bab6d8c6f254c3d8b11ec6367c86b9
+OpenNT NT4 base/win32/winnls/fontsup/system/ega80869.fon	src/opennt-guest/wow16/fonts/ega80869.fon	current guest-stager font input	3355	ef744037ab220fdc2b11a9f65a985cc9d6131e0a0f28ff346a7f0eda7a0bcb0a
+OpenNT NT4 base/win32/winnls/fontsup/system/sserifee.fon	src/opennt-guest/wow16/fonts/sserifee.fon	current guest-stager font input	22096	061b1ea239e3e29408a7d3bc8d6b0275b501cb8432755c8523f9647ddd4237ee
+OpenNT NT4 base/win32/winnls/fontsup/system/sserifeg.fon	src/opennt-guest/wow16/fonts/sserifeg.fon	current guest-stager font input	22080	a26dc4fc50c9b2bed73a07ed98e4ddcd26fe90395fff5baa733d4103968dd5d9
+OpenNT NT4 base/win32/winnls/fontsup/system/sserifer.fon	src/opennt-guest/wow16/fonts/sserifer.fon	current guest-stager font input	23420	183c9c62353f3af6f2d40ec8ebcb8e4ed159cf2a31bc1cfb084b8f013db16f5f
+OpenNT NT4 base/win32/winnls/fontsup/system/sserifet.fon	src/opennt-guest/wow16/fonts/sserifet.fon	current guest-stager font input	21406	e5a7dd835a05a5296947f0e0d36d0401b632a40238b18ac3794b3b8f488beecb
+OpenNT NT4 base/win32/winnls/fontsup/system/vga737.fon	src/opennt-guest/wow16/fonts/vga737.fon	current guest-stager font input	3170	e36fcd5763aff69021177a3fad66ba7b79ee889e888967bdc2fa7b6845ec4b3b
+OpenNT NT4 base/win32/winnls/fontsup/system/vga852.fon	src/opennt-guest/wow16/fonts/vga852.fon	current guest-stager font input	3317	c0a2e36b551c8c342c22406f4e4edda5b3bda9cab17b35ca40a73df078037ecd
+OpenNT NT4 base/win32/winnls/fontsup/system/vga857.fon	src/opennt-guest/wow16/fonts/vga857.fon	current guest-stager font input	2912	71f1c3ee2dfd72c8a0d5dc11f1b7f15eeaf5a4d7f9df1156a155b1680d47e3e9
+OpenNT NT4 base/win32/winnls/fontsup/system/vga866.fon	src/opennt-guest/wow16/fonts/vga866.fon	current guest-stager font input	3310	41addc4a9d416a59e9f4090edd7bd595604d77fba27867384590d35a7bbe4cef
+OpenNT NT4 base/win32/winnls/fontsup/system/vga869.fon	src/opennt-guest/wow16/fonts/vga869.fon	current guest-stager font input	3210	e2651fe72a321367aef3dce9bb27d44c92b05ac2f0b79ed647dd2235b76f581b
+OpenNT NT4 base/win32/winnls/fontsup/system/vgafixe.fon	src/opennt-guest/wow16/fonts/vgafixe.fon	current guest-stager font input	2885	55e50f6fad7d800f6018adc95f440d469864382934594bb757a1e8aa3cb0e257
+OpenNT NT4 base/win32/winnls/fontsup/system/vgafixg.fon	src/opennt-guest/wow16/fonts/vgafixg.fon	current guest-stager font input	2465	b1546c96b9a710dce5c5258522ba82178d8875f17c8046d741b3c42f36ca5ff6
+OpenNT NT4 base/win32/winnls/fontsup/system/vgafixr.fon	src/opennt-guest/wow16/fonts/vgafixr.fon	current guest-stager font input	3010	ee7a4cb553689445b9f5210fdd40c5638694a1100d0898fcfa6359c155f34f43
+OpenNT NT4 base/win32/winnls/fontsup/system/vgafixt.fon	src/opennt-guest/wow16/fonts/vgafixt.fon	current guest-stager font input	2457	1ef1dd3c452a06002da0d8a26f2851e1930cc917184455dfe302f2de6da08199
+OpenNT NT4 base/win32/winnls/fontsup/system/vgasyse.fon	src/opennt-guest/wow16/fonts/vgasyse.fon	current guest-stager font input	3152	1e132806cd260349dc68d6f21e140f8a78c53caedc9c97ea8cc2f193e9364b52
+OpenNT NT4 base/win32/winnls/fontsup/system/vgasysg.fon	src/opennt-guest/wow16/fonts/vgasysg.fon	current guest-stager font input	2796	2dd9377ea834bf604ce0b6128a7e841e042c3adc35729e625eca7d11b53837e6
+OpenNT NT4 base/win32/winnls/fontsup/system/vgasysr.fon	src/opennt-guest/wow16/fonts/vgasysr.fon	current guest-stager font input	3335	49b4a2be63c8c397e8ff7b1c85342adff4a3297ea4bfe42d6415e6849c5ba0b7
+OpenNT NT4 base/win32/winnls/fontsup/system/vgasyst.fon	src/opennt-guest/wow16/fonts/vgasyst.fon	current guest-stager font input	2755	ef6d568597e943d24d91dddebaf3024712b4420a54deb4863d2788b91aba2ebc
+OpenNT NT4 base/mvdm/inc/bop.h	src/opennt-bop/inc/bop.h	current BOP inventory selector/service declaration	2093	7b16c577f3c478ac0df9e982d727a1469352727d970b5889688880026cce97a0
+OpenNT NT4 base/mvdm/inc/BOP.INC	src/opennt-bop/inc/BOP.INC	current BOP inventory selector/service declaration	1183	a3705f225c47e53dc4e106c7362366477f2f06c33cb9bf52515ca1299556f669
+OpenNT NT4 base/mvdm/inc/cmdsvc.h	src/opennt-bop/inc/cmdsvc.h	current BOP inventory selector/service declaration	3206	c22d682422e2ac3200bdae808a5309b57a7a0402df2a3aa6199502d911ff6624
+OpenNT NT4 base/mvdm/inc/dbgsvc.h	src/opennt-bop/inc/dbgsvc.h	current BOP inventory selector/service declaration	1342	4bc3b1d40ea167e6a15a18a746bfcd79a4023248c0621f6c8e27b2c9ad684a43
+OpenNT NT4 base/mvdm/inc/dossvc.h	src/opennt-bop/inc/dossvc.h	current BOP inventory selector/service declaration	4972	82b5135e78bd3010128bd5dd54978b0e00aec0073f0a7e6b547cbe8dff08a91c
+OpenNT NT4 base/mvdm/inc/dpmi.h	src/opennt-bop/inc/dpmi.h	current BOP inventory selector/service declaration	2655	3425f64b805b8bab8086523288c8afe86eee8f183208aa863b49bb8fb962a154
+OpenNT NT4 base/mvdm/inc/rdrsvc.h	src/opennt-bop/inc/rdrsvc.h	current BOP inventory selector/service declaration	3785	c8bc9db22634adb5e3dc85d30f721e602ff1c6a28221958587d0804f8e96e45e
+OpenNT NT4 base/mvdm/inc/xmssvc.h	src/opennt-bop/inc/xmssvc.h	current BOP inventory selector/service declaration	802	e2661ecf606b903e4c3053c4e6fe8197f4f4b15dde81393fb6fd508f09bccebe
+OpenNT NT4 base/mvdm/softpc.new/base/bios/bios.c	src/opennt-softpc/bios/bios.c	current BOP inventory BIOS table/declaration	23797	a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b
+OpenNT NT4 base/mvdm/softpc.new/base/inc/bios.h	src/opennt-softpc/bios/bios.h	current BOP inventory BIOS table/declaration	9573	a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064

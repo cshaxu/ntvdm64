@@ -1,7 +1,7 @@
 /*
  * Directly retained OpenNT VDMREDIR source body.
  *
- * Original source: refs/opennt/base/mvdm/vdmredir/vrmslot.c,
+ * Original source: OpenNT NT4 base/mvdm/vdmredir/vrmslot.c,
  * VrPeekMailslot.  The full original unit is being recovered in staged
  * owner groups; this first body deliberately supersedes the former
  * source-derived peek emulation because OpenNT explicitly declines peeking

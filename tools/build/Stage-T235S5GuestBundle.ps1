@@ -29,7 +29,7 @@ function Add-Entry([System.Collections.Generic.List[object]]$Entries, [string]$K
 
 $script:repository = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $script:output = [IO.Path]::GetFullPath($OutputRoot)
-$opennt = Join-Path $script:repository 'refs\opennt'
+$opennt = Join-Path $script:repository 'src\opennt-guest'
 $script:opennt45 = 'O:\repos.external\OpenNT-4.5\nt\private\mvdm'
 if (!(Test-Path -LiteralPath $opennt)) { throw "OpenNT reference root missing: $opennt" }
 if (!(Test-Path -LiteralPath $script:opennt45)) { throw "OpenNT-4.5 product root missing: $script:opennt45" }
@@ -47,7 +47,7 @@ $unresolvedFallbacks = [System.Collections.Generic.List[object]]::new()
 $extensions = @('.sys','.com','.exe','.dll','.drv','.fon','.pif','.nt')
 
 # Preserve original prebuilt OpenNT payloads whenever they exist.
-$dosSource = Join-Path $opennt 'base\mvdm\dos\v86'
+$dosSource = Join-Path $opennt 'dos-v86'
 Get-ChildItem -LiteralPath $dosSource -Recurse -File |
     Where-Object { $extensions -contains $_.Extension.ToLowerInvariant() } |
     Sort-Object FullName | ForEach-Object {
@@ -57,7 +57,7 @@ Get-ChildItem -LiteralPath $dosSource -Recurse -File |
     }
 
 foreach ($name in @('config.nt','autoexec.nt')) {
-    Add-Entry $entries 'opennt-prebuilt' (Join-Path $dos $name.ToUpperInvariant()) (Join-Path $opennt "base\mvdm\bin86\$name")
+    Add-Entry $entries 'opennt-prebuilt' (Join-Path $dos $name.ToUpperInvariant()) (Join-Path $opennt "bin86\$name")
 }
 
 # OpenNT-4.5 provides the additional original utility payload and DOSX image.
@@ -70,10 +70,10 @@ Get-ChildItem -LiteralPath (Join-Path $script:opennt45 'dos\v86') -Recurse -File
 Add-Entry $entries 'opennt-4.5-prebuilt' (Join-Path $dos 'DOSX.EXE') (Join-Path $script:opennt45 'dpmi\486\dosx.exe')
 
 # LANMAN is a Win16 driver installed with the MVDM support set.
-Add-Entry $entries 'opennt-prebuilt' (Join-Path $wow 'LANMAN.DRV') (Join-Path $opennt 'base\mvdm\bin86\lanman.drv')
+Add-Entry $entries 'opennt-prebuilt' (Join-Path $wow 'LANMAN.DRV') (Join-Path $opennt 'bin86\lanman.drv')
 
 # WOW has genuine same-name debug/retail artifacts, so preserve source-relative layout.
-$wowSource = Join-Path $opennt 'base\mvdm\wow16'
+$wowSource = Join-Path $opennt 'wow16'
 Get-ChildItem -LiteralPath $wowSource -Recurse -File |
     Where-Object { $extensions -contains $_.Extension.ToLowerInvariant() } |
     Sort-Object FullName | ForEach-Object {
@@ -104,14 +104,6 @@ Get-ChildItem -LiteralPath (Join-Path $script:opennt45 'bin86') -File |
             Add-Entry $entries 'opennt-4.5-prebuilt' $destination $_.FullName
         }
     }
-
-# Original system bitmap fonts used by the hosted Windows/WOW set.
-$fontSource = Join-Path $opennt 'base\win32\winnls\fontsup\system'
-Get-ChildItem -LiteralPath $fontSource -File -Filter '*.fon' | Sort-Object Name | ForEach-Object {
-    $destination = Join-Path $wow (Join-Path 'fonts' $_.Name)
-    New-Item -ItemType Directory -Force -Path (Split-Path -Parent $destination) | Out-Null
-    Add-Entry $entries 'opennt-prebuilt' $destination $_.FullName
-}
 
 if ($SourceBuildRoot) {
     $sourceBuild = (Resolve-Path -LiteralPath $SourceBuildRoot).Path

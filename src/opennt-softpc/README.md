@@ -18,5 +18,7 @@ Every imported source/input modification is registered below with original
 path, source identity, exception identifier, necessity and verification. The
 expected initial count is zero. No production body differs from OpenNT.
 
+The exact `bios/bios.{c,h}` source pair is also a current BOP inventory input; T266/S3 records its source identity and local use.
+
 | ID | Original definition purpose | Divergence reason | Replacement implementation | Production file(s) |
 | --- | --- | --- | --- | --- |

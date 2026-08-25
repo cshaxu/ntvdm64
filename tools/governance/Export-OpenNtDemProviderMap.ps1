@@ -27,7 +27,7 @@ if ($providerMap.schema -ne 'ntdos64.opennt-bop-provider-module-map.v1') {
 $dem = @($providerMap.service_families | Where-Object { $_.selector_name -eq 'BOP_DOS' })
 if ($dem.Count -ne 1) { throw 'Expected exactly one BOP_DOS family.' }
 
-$demRoot = Join-Path $repository 'refs\opennt\base\mvdm\dos\dem'
+$demRoot = Join-Path $repository 'src\opennt-bop\dem'
 $definitions = @{}
 Get-ChildItem -LiteralPath $demRoot -Filter *.c -File | ForEach-Object {
     $lineNumber = 0

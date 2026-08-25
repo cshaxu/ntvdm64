@@ -14,6 +14,9 @@ retained below `bin86/`. Its ten-file source identity and per-file role are
 recorded in `docs/etc/evidence/m0-t263-s2-bin86-guest-input-admission-001.md`.
 It is an image/configuration input package, not an in-process host provider
 or an automatic runtime admission.
+The exact original system-font staging input is retained below `wow16/fonts/`.
+It preserves the source-relative OpenNT system font files used by the guest
+bundle; T266/S3 records their selected source paths and hashes.
 
 Original prebuilt DOS/V86 programs, system images, build libraries, objects
 and MAP/SYM companions are retained at the same relative paths below

@@ -40,11 +40,11 @@ $inventory = Get-Content -Raw -LiteralPath $inventoryPath | ConvertFrom-Json
 if ($inventory.schema -ne 'ntdos64.opennt-bop-inventory.v1') { throw "Unexpected inventory schema: $($inventory.schema)" }
 
 $tables = [ordered]@{
-    BOP_DOS = Read-DispatchTable 'refs\opennt\base\mvdm\dos\dem\demdisp.c' '^\s*PFNSVC\s+apfnSVC\s*\[\]\s*='
-    BOP_CMD = Read-DispatchTable 'refs\opennt\base\mvdm\dos\command\cmddisp.c' '^\s*PFNSVC\s+apfnSVCCmd\s*\[\]\s*='
-    BOP_XMS = Read-DispatchTable 'refs\opennt\base\mvdm\xms.486\xmsdisp.c' '^\s*PFNSVC\s+apfnXMSSvc\s*\[\]\s*='
-    BOP_DPMI = Read-DispatchTable 'refs\opennt\base\mvdm\dpmi32\dpmi32.c' '^\s*VOID\s*\(\*DpmiDispatchTable\['
-    BOP_REDIR = Read-DispatchTable 'refs\opennt\base\mvdm\vdmredir\vrdisp.c' '^\s*VOID\s*\(\*VrDispatchTable\[\]\)\(VOID\)\s*='
+    BOP_DOS = Read-DispatchTable 'docs\etc\legacy_code\opennt-bop\original\dos\dem\demdisp.c' '^\s*PFNSVC\s+apfnSVC\s*\[\]\s*='
+    BOP_CMD = Read-DispatchTable 'docs\etc\legacy_code\opennt-bop\original\dos\command\cmddisp.c' '^\s*PFNSVC\s+apfnSVCCmd\s*\[\]\s*='
+    BOP_XMS = Read-DispatchTable 'docs\etc\legacy_code\opennt-bop\original\xms.486\xmsdisp.c' '^\s*PFNSVC\s+apfnXMSSvc\s*\[\]\s*='
+    BOP_DPMI = Read-DispatchTable 'docs\etc\legacy_code\opennt-bop\original\dpmi32\dpmi32.c' '^\s*VOID\s*\(\*DpmiDispatchTable\['
+    BOP_REDIR = Read-DispatchTable 'docs\etc\legacy_code\opennt-bop\original\vdmredir\vrdisp.c' '^\s*VOID\s*\(\*VrDispatchTable\[\]\)\(VOID\)\s*='
 }
 
 $bindings = @{
@@ -68,7 +68,7 @@ foreach ($family in $inventory.service_families) {
         $mapRows += [ordered]@{
             name = $entry.name; value = $entry.value; definition_source = "$($entry.source):$($entry.line)"
             original_handler = if ($isSentinel) { $null } elseif ($isDebugger) { 'DBGDispatch (switch-routed)' } elseif ($null -eq $handler) { $null } else { $handler.handler }
-            handler_source = if ($isDebugger) { 'refs/opennt/base/mvdm/dbg/dbg.c:1361' } elseif ($null -eq $handler) { $null } else { "$($handler.source):$($handler.line)" }
+            handler_source = if ($isDebugger) { 'controlled-import:opennt-bop/dbg/dbg.c:1361' } elseif ($null -eq $handler) { $null } else { "$($handler.source):$($handler.line)" }
             handler_annotation = if ($null -eq $handler) { $null } else { $handler.annotation }
             dispatch_kind = if ($isSentinel) { 'dispatcher-bound-sentinel' } elseif ($isDebugger) { 'switch-routed' } else { 'function-table' }
             current_disposition = if ($isSentinel) { 'not-callable-sentinel' } else { 'mapped-not-enabled' }; provider = $null
@@ -114,7 +114,7 @@ $record = [ordered]@{
     provider_order = @('original-composable', 'original-with-contained-cli-capability', 'source-derived-after-evidenced-blocker', 'original-failure-or-deferred')
     top_level_selectors = $topLevel
     service_families = $families
-    debugger = [ordered]@{ selector_name = 'BOP_DEBUGGER'; original_entry = 'MS_bop_6 -> DBGDispatch'; source = 'refs/opennt/base/mvdm/dbg/dbg.c:1361'; host_binding = $bindings.BOP_DEBUGGER; current_disposition = 'mapped-not-enabled' }
+    debugger = [ordered]@{ selector_name = 'BOP_DEBUGGER'; original_entry = 'MS_bop_6 -> DBGDispatch'; source = 'controlled-import:opennt-bop/dbg/dbg.c:1361'; host_binding = $bindings.BOP_DEBUGGER; current_disposition = 'mapped-not-enabled' }
     softpc_bios = [ordered]@{ selector_definitions = $inventory.softpc_bios_selector_definitions; table_rows = $inventory.softpc_bios_table_rows; current_disposition = 'mapped-not-enabled'; interpretation = 'Historical BIOS[] owner symbols are retained verbatim from the input inventory; no conditional row is asserted active.' }
 }
 

@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$RepositoryRoot = '',
-    [string]$ManifestPath = 'tools/build/t225-s7-full-module-manifest.json',
+    [string]$ManifestPath = 'tools/build/t260-s8-component-manifest.json',
     [string]$OutputPath = 'docs/etc/operations/m0-t260-s1-owner-provenance-build-manifest.tsv'
 )
 
@@ -239,7 +239,7 @@ foreach ($includeRoot in $manifest.includeRoots) {
     Add-Row $includeRoot 'include-root' 'formal-include-root' 'tools/build' 'formal build include-root' 'retain/update-paths' 'S8' 'reached headers are separately enumerated; this row is a build-graph input, not a source-owner classification'
 }
 
-foreach ($toolPath in @($ManifestPath, 'tools/build/New-T225S7FullNinjaGraph.ps1')) {
+foreach ($toolPath in @($ManifestPath, 'tools/build/New-T260S8FullNinjaGraph.ps1')) {
     Add-Row $toolPath 'build-input' 'build-tool' 'tools/build' 'project-authored build tool' 'retain/update-paths' 'S8' 'formal build graph input'
 }
 
@@ -289,7 +289,7 @@ foreach ($legacyRoot in @('src/bx-core', 'src/bx-mantle', 'src/bx-vdm', 'src/cli
             return
         }
         if ($relativePath -like 'src/opennt/*') {
-            Add-Row $relativePath 'nonformal-evidence-input' 'OpenNT source import' 'refs/opennt' 'unreached imported OpenNT source' 'git mv to evidence input' 'S8' 'not a declared product input; retain immutable source provenance outside src/'
+            Add-Row $relativePath 'nonformal-evidence-input' 'OpenNT source import' 'docs/etc/legacy_code' 'unreached imported OpenNT source' 'move to legacy evidence input' 'S8' 'not a declared product input; retain immutable source provenance outside src/'
             return
         }
         Add-Row $relativePath 'nonformal-legacy-input' 'legacy source tree' $d[0] $d[1] $d[2] $d[3] ($d[4] + '; not present in formal module graph')

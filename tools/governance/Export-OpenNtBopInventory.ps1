@@ -102,16 +102,16 @@ function Parse-BiosTable([string]$Path) {
 }
 
 $sourcePaths = [ordered]@{
-    selector_c = Join-Path $repository 'refs\opennt\base\mvdm\inc\bop.h'
-    selector_asm = Join-Path $repository 'refs\opennt\base\mvdm\inc\BOP.INC'
-    dos = Join-Path $repository 'refs\opennt\base\mvdm\inc\dossvc.h'
-    command = Join-Path $repository 'refs\opennt\base\mvdm\inc\cmdsvc.h'
-    xms = Join-Path $repository 'refs\opennt\base\mvdm\inc\xmssvc.h'
-    dpmi = Join-Path $repository 'refs\opennt\base\mvdm\inc\dpmi.h'
-    redir = Join-Path $repository 'refs\opennt\base\mvdm\inc\rdrsvc.h'
-    debugger = Join-Path $repository 'refs\opennt\base\mvdm\inc\dbgsvc.h'
-    bios_definitions = Join-Path $repository 'refs\opennt\base\mvdm\softpc.new\base\inc\bios.h'
-    bios_table = Join-Path $repository 'refs\opennt\base\mvdm\softpc.new\base\bios\bios.c'
+    selector_c = Join-Path $repository 'src\opennt-bop\inc\bop.h'
+    selector_asm = Join-Path $repository 'src\opennt-bop\inc\BOP.INC'
+    dos = Join-Path $repository 'src\opennt-bop\inc\dossvc.h'
+    command = Join-Path $repository 'src\opennt-bop\inc\cmdsvc.h'
+    xms = Join-Path $repository 'src\opennt-bop\inc\xmssvc.h'
+    dpmi = Join-Path $repository 'src\opennt-bop\inc\dpmi.h'
+    redir = Join-Path $repository 'src\opennt-bop\inc\rdrsvc.h'
+    debugger = Join-Path $repository 'src\opennt-bop\inc\dbgsvc.h'
+    bios_definitions = Join-Path $repository 'src\opennt-softpc\bios\bios.h'
+    bios_table = Join-Path $repository 'src\opennt-softpc\bios\bios.c'
 }
 foreach ($path in $sourcePaths.Values) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing pinned BOP source: $path" }
@@ -154,7 +154,7 @@ $sourceManifest = @($sourcePaths.GetEnumerator() | ForEach-Object {
 })
 $record = [ordered]@{
     schema = 'ntdos64.opennt-bop-inventory.v1'
-    source_tree = 'refs/opennt/base/mvdm'
+    source_tree = 'src-owned OpenNT selected inputs'
     source_manifest = $sourceManifest
     selector_instruction = [ordered]@{ bytes = @('c4','c4','selector'); base_bytes = 3; family_service_byte = 4 }
     top_level_selectors = $selectors

@@ -26,7 +26,9 @@ public include surface is the BOP ingress/provider ABI consumed by `app`.
 Immutable originals, uncompiled mirror fragments, pre-T260 overlays and import
 manifests are evidence rather than production code. They are retained under
 `docs/etc/legacy_code/opennt-bop/`; the authoritative upstream comparison root
-remains `refs/opennt/`.
+remains the pinned external OpenNT source baseline.
+
+The exact selector/service headers consumed by current source inventories are retained under `inc/`; the complete dispatcher translations used only for governance parsing live under `docs/etc/legacy_code/opennt-bop/original/`, not in this production component. T266/S3 records their origin and hashes.
 
 ## Local divergence register
 
