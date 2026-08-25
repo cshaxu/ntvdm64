@@ -49,7 +49,7 @@ int main(void)
         strcmp((CHAR *)context.guest + app_address, "C:\\TOOLS\\HELLO.COM") != 0 ||
         context.guest[command_address + 1u] != 10u ||
         strcmp((CHAR *)context.guest + command_address + 2u, "HELLO -x\r\n") != 0 ||
-        session.command_source_delivered != 1u) { fprintf(stderr, "result ext=%u path=%u drive=%u cp=%u app=%s cnt=%u line=%s delivered=%u\n", info->ExecExtType, info->ExecPathSize, info->CurDrive, info->CodePage, context.guest + app_address, context.guest[command_address + 1u], context.guest + command_address + 2u, session.command_source_delivered); return 3; }
+        session.input.delivered != 1u) { fprintf(stderr, "result ext=%u path=%u drive=%u cp=%u app=%s cnt=%u line=%s delivered=%u\n", info->ExecExtType, info->ExecPathSize, info->CurDrive, info->CodePage, context.guest + app_address, context.guest[command_address + 1u], context.guest + command_address + 2u, session.input.delivered); return 3; }
     if (!invoke(&context, &event, &cpu, &result, &session, 0u, 0u) ||
         result.disposition != RUNTIME_CPU_RESULT_STOP) { fprintf(stderr, "terminal\n"); return 4; }
     runtime_command_misc_session_initialize(&batch_session);
@@ -64,7 +64,7 @@ int main(void)
         info->ExecExtType != BAT_EXTENTION ||
         strcmp((CHAR *)context.guest + app_address, "C:\\TOOLS\\START.BAT") != 0 ||
         strcmp((CHAR *)context.guest + command_address + 2u, "START /q\r\n") != 0 ||
-        batch_session.command_source_delivered != 1u) return 5;
+        batch_session.input.delivered != 1u) return 5;
     directory_bytes = GetTempPathA((DWORD)sizeof(directory), directory);
     if (directory_bytes == 0u || directory_bytes >= sizeof(directory) ||
         sprintf_s(pif_path, sizeof(pif_path), "%st231-s7-input.pif", directory) < 0 ||
@@ -104,7 +104,7 @@ int main(void)
      * leave parser/metadata expansion to the dedicated T234 PIF fixture. */
     if (!invoke(&context, &event, &cpu, &result, &pif_session, 1u, 0u) || result.disposition != RUNTIME_CPU_RESULT_RESUME ||
         info->ExecExtType != UNKNOWN_EXTENTION || _stricmp((CHAR *)context.guest + app_address, pif_path) != 0 ||
-        pif_session.command_source_delivered != 1u) return 7;
+        pif_session.input.delivered != 1u) return 7;
     runtime_command_misc_session_dispose(&pif_session); DeleteFileA(pif_path); DeleteFileA(pif_target);
     runtime_command_misc_session_initialize(&retry_session);
     memset(large_environment, 0, sizeof(large_environment));
@@ -120,24 +120,24 @@ int main(void)
     if (!invoke(&context, &event, &cpu, &result, &retry_session, 0u, 0u) ||
         result.disposition != RUNTIME_CPU_RESULT_RESUME ||
         (result.eflags_values & RUNTIME_CPU_RESULT_EFLAGS_CF) == 0u ||
-        result.cpu_delta.gpr16_values[0] <= 1024u || retry_session.command_source_repeat_pending == 0u ||
-        retry_session.command_source_delivered != 0u) return 6;
+        result.cpu_delta.gpr16_values[0] <= 1024u || retry_session.input.repeat_pending == 0u ||
+        retry_session.input.delivered != 0u) return 6;
     required_environment = result.cpu_delta.gpr16_values[0];
     info->EnvSize = (USHORT)required_environment;
     if (!invoke(&context, &event, &cpu, &result, &retry_session, 0u, 0u) ||
         result.disposition != RUNTIME_CPU_RESULT_RESUME ||
         (result.eflags_values & RUNTIME_CPU_RESULT_EFLAGS_CF) != 0u ||
-        retry_session.command_source_repeat_pending != 0u || retry_session.command_source_delivered != 1u ||
+        retry_session.input.repeat_pending != 0u || retry_session.input.delivered != 1u ||
         info->CodePage != 932u ||
         strcmp((CHAR *)context.guest + app_address, "C:\\TOOLS\\RETRY.EXE") != 0 ||
         !has_prefix((CHAR *)context.guest + 0x3000u, required_environment, "FOO=")) return 9;
     memset(&context, 0, sizeof(context));
     if (!invoke(&context, &event, &cpu, &result, &retry_session, 0u, 1u) ||
         result.disposition != RUNTIME_CPU_RESULT_STOP ||
-        result.resume_rip != 0u || retry_session.command_source_delivered != 1u) {
+        result.resume_rip != 0u || retry_session.input.delivered != 1u) {
         fprintf(stderr, "WOW unavailable disposition=%u rip=%llx delivered=%u\\n",
             result.disposition, (unsigned long long)result.resume_rip,
-            retry_session.command_source_delivered);
+            retry_session.input.delivered);
         return 10;
     }
     runtime_command_misc_session_dispose(&session);

@@ -63,16 +63,16 @@ int main(void)
     if (!runtime_command_misc_session_set_command_environment(&session, source,
             (uint32_t)(path_bytes + sizeof("PATH=") + 1300u +
                 sizeof("WINDIR=C:\\WINDOWS") + 1u)) ||
-        session.command_source_environment_bytes <= 1024u ||
-        session.command_source_environment == source ||
-        !multisz_has_prefix(session.command_source_environment,
-            session.command_source_environment_bytes, "PATH=")) return 1;
+        session.input.environment_bytes <= 1024u ||
+        session.input.environment == source ||
+        !multisz_has_prefix(session.input.environment,
+            session.input.environment_bytes, "PATH=")) return 1;
 
     snapshot = runtime_command_environment_snapshot_session(&session);
     if (snapshot == NULL || !wide_multisz_has_prefix(snapshot,
-            session.command_source_environment_bytes, L"COMSPEC=C:\\STALE.COM") ||
+            session.input.environment_bytes, L"COMSPEC=C:\\STALE.COM") ||
         !wide_multisz_has_prefix(snapshot,
-            session.command_source_environment_bytes, L"PATH=")) return 10;
+            session.input.environment_bytes, L"PATH=")) return 10;
     runtime_command_environment_free_snapshot(snapshot);
 
     memset(&transformed, 0, sizeof(transformed));
@@ -82,11 +82,11 @@ int main(void)
         multisz_has_prefix(transformed.Buffer, transformed.Length + 1u, "COMSPEC=")) return 11;
     RtlFreeAnsiString(&transformed);
 
-    lpszzVDMEnv32 = (CHAR *)malloc(session.command_source_environment_bytes);
+    lpszzVDMEnv32 = (CHAR *)malloc(session.input.environment_bytes);
     if (lpszzVDMEnv32 == NULL) return 2;
-    memcpy(lpszzVDMEnv32, session.command_source_environment,
-        session.command_source_environment_bytes);
-    cchVDMEnv32 = session.command_source_environment_bytes;
+    memcpy(lpszzVDMEnv32, session.input.environment,
+        session.input.environment_bytes);
+    cchVDMEnv32 = session.input.environment_bytes;
 
     memset(autoexec, 0, sizeof(autoexec));
     memcpy(autoexec, "EXPANDED", sizeof("EXPANDED"));

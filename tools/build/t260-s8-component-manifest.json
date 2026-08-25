@@ -235,6 +235,7 @@
       "name": "session",
       "sources": [
         "src/session/session.c",
+        "src/session/session_input.c",
         "src/session/session_cancellation.cc"
       ]
     },

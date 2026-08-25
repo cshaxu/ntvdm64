@@ -4,6 +4,7 @@
 #include "adapter-win32/facade/opennt_error_dialog_facade.h"
 #include "adapter-win32/facade/opennt_command_oem_facade.h"
 #include "adapter-softpc/softpc_printer_openclose_shim.h"
+#include "session/session_input.h"
 
 /* Compatibility surface for the directly imported OpenNT file
  * src/opennt/base/mvdm/dos/command/cmdmisc.c.  It is deliberately a scoped
@@ -224,23 +225,10 @@ typedef struct runtime_command_misc_session {
     SCSINFO scs_info;
     BYTE is_dos_binary;
     WORD fd_access;
-    /* Direct CLI input at the historical BaseSrv GetNextVDMCommand seam. */
-    CHAR command_source_app[MAX_PATH + 1u];
-    CHAR command_source_tail[128u];
-    USHORT command_source_drive;
-    USHORT command_source_code_page;
-    uint32_t command_source_ready;
-    uint32_t command_source_delivered;
-    uint32_t command_source_repeat_pending;
-    uint32_t command_source_environment_bytes;
-    CHAR *command_source_environment;
-    uint32_t command_source_vdm_environment_bytes;
-    CHAR *command_source_vdm_environment;
-    /* OpenNT cmdUpdateCurrentDirectories publishes this double-NUL list at
-     * the BaseSrv boundary.  The portable composition keeps that publication
-     * session-owned rather than retaining a process-global CSR dependency. */
-    uint32_t command_source_current_directories_bytes;
-    CHAR *command_source_current_directories;
+    /* The modern historical-VDM API facade reads copied input/publish state
+     * through this neutral session record; it never receives this COMMAND
+     * source object or guest state. */
+    session_input input;
     /* T236: host-child mechanics are session-local. These are fixed-width
      * observations only; a host HANDLE never enters this record or guest RAM. */
     uint32_t local_child_state;

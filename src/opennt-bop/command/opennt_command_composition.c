@@ -110,6 +110,7 @@ void runtime_command_misc_session_initialize(runtime_command_misc_session *sessi
     session->magic = RUNTIME_COMMAND_MISC_SESSION_MAGIC;
     session->abi_version = RUNTIME_COMMAND_MISC_SESSION_VERSION;
     session->struct_bytes = sizeof(*session);
+    session_input_initialize(&session->input);
     session->handles = runtime_host_handle_manager_session();
     (void)runtime_host_handle_manager_initialize(session->handles);
 }
@@ -143,32 +144,8 @@ void runtime_command_misc_session_dispose(runtime_command_misc_session *session)
         }
         g_pending_session = NULL;
     }
-    free(session->command_source_environment);
-    free(session->command_source_vdm_environment);
-    free(session->command_source_current_directories);
-    session->command_source_environment = NULL;
-    session->command_source_environment_bytes = 0u;
-    session->command_source_vdm_environment = NULL;
-    session->command_source_vdm_environment_bytes = 0u;
-    session->command_source_current_directories = NULL;
-    session->command_source_current_directories_bytes = 0u;
+    session_input_dispose(&session->input);
     runtime_host_handle_manager_reset(session->handles);
-}
-
-static int replace_environment(CHAR **destination, uint32_t *destination_bytes,
-    const CHAR *source, uint32_t bytes)
-{
-    CHAR *replacement;
-    if (destination == NULL || destination_bytes == NULL || source == NULL ||
-        bytes < 2u || bytes > USHRT_MAX || source[bytes - 2u] != '\0' ||
-        source[bytes - 1u] != '\0') return 0;
-    replacement = (CHAR *)malloc(bytes);
-    if (replacement == NULL) return 0;
-    memcpy(replacement, source, bytes);
-    free(*destination);
-    *destination = replacement;
-    *destination_bytes = bytes;
-    return 1;
 }
 
 int runtime_command_misc_session_valid(const runtime_command_misc_session *session)
@@ -176,6 +153,7 @@ int runtime_command_misc_session_valid(const runtime_command_misc_session *sessi
     return session != NULL && session->magic == RUNTIME_COMMAND_MISC_SESSION_MAGIC &&
         session->abi_version == RUNTIME_COMMAND_MISC_SESSION_VERSION &&
         session->struct_bytes == sizeof(*session) &&
+        session_input_valid(&session->input) &&
         runtime_host_handle_manager_valid(session->handles);
 }
 
@@ -183,19 +161,10 @@ int runtime_command_misc_session_set_command_source(
     runtime_command_misc_session *session, const CHAR *application,
     const CHAR *tail, USHORT drive, USHORT code_page)
 {
-    size_t application_bytes, tail_bytes;
     if (!runtime_command_misc_session_valid(session) || application == NULL ||
-        tail == NULL || session->command_source_ready != 0u) return 0;
-    application_bytes = strlen(application);
-    tail_bytes = strlen(tail);
-    if (application_bytes == 0u || application_bytes >= sizeof(session->command_source_app) ||
-        tail_bytes >= sizeof(session->command_source_tail)) return 0;
-    memcpy(session->command_source_app, application, application_bytes + 1u);
-    memcpy(session->command_source_tail, tail, tail_bytes + 1u);
-    session->command_source_drive = drive;
-    session->command_source_code_page = code_page;
-    session->command_source_ready = 1u;
-    return 1;
+        tail == NULL) return 0;
+    return session_input_set_startup(&session->input, application, tail,
+        drive, code_page);
 }
 
 int runtime_command_misc_session_set_command_environment(
@@ -203,8 +172,7 @@ int runtime_command_misc_session_set_command_environment(
     uint32_t bytes)
 {
     if (!runtime_command_misc_session_valid(session)) return 0;
-    return replace_environment(&session->command_source_environment,
-        &session->command_source_environment_bytes, environment, bytes);
+    return session_input_set_environment(&session->input, environment, bytes);
 }
 
 BOOL GetNextVDMCommand(PVDMINFO vdm_info)
@@ -227,10 +195,10 @@ BOOL GetNextVDMCommand(PVDMINFO vdm_info)
         session->local_child_reentrancy--;
         return TRUE;
     }
-    if (session->command_source_ready == 0u) return FALSE;
+    if (session->input.ready == 0u) return FALSE;
     if ((vdm_info->VDMState & ASKING_FOR_ENVIRONMENT) != 0u) {
-        uint32_t bytes = session->command_source_environment_bytes;
-        const CHAR *environment = session->command_source_environment;
+        uint32_t bytes = session->input.environment_bytes;
+        const CHAR *environment = session->input.environment;
         if (bytes == 0u || environment == NULL) {
             environment = g_empty_environment;
             bytes = sizeof(g_empty_environment);
@@ -243,22 +211,22 @@ BOOL GetNextVDMCommand(PVDMINFO vdm_info)
         vdm_info->EnviornmentSize = bytes;
         return TRUE;
     }
-    if (session->command_source_delivered != 0u || vdm_info->AppName == NULL ||
+    if (session->input.delivered != 0u || vdm_info->AppName == NULL ||
         vdm_info->CmdLine == NULL) return FALSE;
-    application_bytes = strlen(session->command_source_app) + 1u;
-    tail_bytes = strlen(session->command_source_tail);
+    application_bytes = strlen(session->input.target) + 1u;
+    tail_bytes = strlen(session->input.arguments);
     if (application_bytes > vdm_info->AppLen || tail_bytes + 2u > vdm_info->CmdSize ||
         application_bytes > USHRT_MAX || tail_bytes + 2u > USHRT_MAX) return FALSE;
-    memcpy(vdm_info->AppName, session->command_source_app, application_bytes);
-    memcpy(vdm_info->CmdLine, session->command_source_tail, tail_bytes);
+    memcpy(vdm_info->AppName, session->input.target, application_bytes);
+    memcpy(vdm_info->CmdLine, session->input.arguments, tail_bytes);
     ((CHAR *)vdm_info->CmdLine)[tail_bytes] = '\r';
     ((CHAR *)vdm_info->CmdLine)[tail_bytes + 1u] = '\n';
     ((CHAR *)vdm_info->CmdLine)[tail_bytes + 2u] = '\0';
     vdm_info->AppLen = (USHORT)application_bytes;
     vdm_info->CmdSize = (USHORT)(tail_bytes + 2u);
-    vdm_info->CurDrive = session->command_source_drive;
-    vdm_info->CodePage = session->command_source_code_page;
-    session->command_source_delivered = 1u;
+    vdm_info->CurDrive = session->input.location;
+    vdm_info->CodePage = session->input.text_code_page;
+    session->input.delivered = 1u;
     return TRUE;
 }
 
@@ -270,10 +238,8 @@ BOOL SetVDMCurrentDirectories(ULONG current_directory_bytes,
      * console-bound VDM.  That NT4 product service is not independently
      * composable in the CLI; retain its copied multisz publication contract in
      * the active session instead. */
-    return session != NULL && replace_environment(
-        &session->command_source_current_directories,
-        &session->command_source_current_directories_bytes,
-        current_directories, current_directory_bytes);
+    return session != NULL && session_input_set_published_directories(
+        &session->input, current_directories, current_directory_bytes);
 }
 void cmdPushExitInConsoleBuffer(void)
 {
@@ -470,8 +436,7 @@ static int snapshot_host_environment(runtime_command_misc_session *session)
      * NTVDM process environment. Preserve that source input as a copied,
      * session-owned public Win32 snapshot: the guest DOS multisz remains the
      * separate pEnv32 input and is never substituted for the host snapshot. */
-    if (!replace_environment(&session->command_source_environment,
-            &session->command_source_environment_bytes, source, bytes)) {
+    if (!session_input_set_environment(&session->input, source, bytes)) {
         FreeEnvironmentStringsA(source);
         return 0;
     }
@@ -993,7 +958,7 @@ static int runtime_command_misc_invoke_internal(runtime_command_misc_call *call,
     memset(&active, 0, sizeof(active));
     IsFirstCall = call->first_call ? TRUE : FALSE;
     IsRepeatCall = call->service == RUNTIME_COMMAND_MISC_GET_NEXT && call->session != NULL &&
-        call->session->command_source_repeat_pending != 0u;
+        call->session->input.repeat_pending != 0u;
     DosEnvCreated = IsRepeatCall;
     IsFirstVDM = TRUE;
     fBlock = FALSE;
@@ -1002,12 +967,12 @@ static int runtime_command_misc_invoke_internal(runtime_command_misc_call *call,
     memset(&VDMInfo, 0, sizeof(VDMInfo));
     memset(&cmdVDMEnvBlk, 0, sizeof(cmdVDMEnvBlk));
     if (IsRepeatCall) {
-        cmdVDMEnvBlk.cchEnv = call->session->command_source_vdm_environment_bytes;
-        if (cmdVDMEnvBlk.cchEnv < 2u || call->session->command_source_vdm_environment == NULL)
+        cmdVDMEnvBlk.cchEnv = call->session->input.transformed_environment_bytes;
+        if (cmdVDMEnvBlk.cchEnv < 2u || call->session->input.transformed_environment == NULL)
             return 0;
         cmdVDMEnvBlk.lpszzEnv = (CHAR *)malloc(cmdVDMEnvBlk.cchEnv);
         if (cmdVDMEnvBlk.lpszzEnv == NULL) return 0;
-        memcpy(cmdVDMEnvBlk.lpszzEnv, call->session->command_source_vdm_environment,
+        memcpy(cmdVDMEnvBlk.lpszzEnv, call->session->input.transformed_environment,
             cmdVDMEnvBlk.cchEnv);
     }
     VDMForWOW = call->vdm_for_wow ? TRUE : FALSE;
@@ -1044,10 +1009,9 @@ static int runtime_command_misc_invoke_internal(runtime_command_misc_call *call,
         free(active.guest_buffer); free(active.guest_buffer2); g_active_call = NULL; return 0;
     }
     if (call->service == RUNTIME_COMMAND_MISC_GET_NEXT && call->session != NULL) {
-        call->session->command_source_repeat_pending = IsRepeatCall ? 1u : 0u;
+        call->session->input.repeat_pending = IsRepeatCall ? 1u : 0u;
         if (IsRepeatCall && cmdVDMEnvBlk.lpszzEnv != NULL && cmdVDMEnvBlk.cchEnv >= 2u) {
-            if (!replace_environment(&call->session->command_source_vdm_environment,
-                    &call->session->command_source_vdm_environment_bytes,
+            if (!session_input_set_transformed_environment(&call->session->input,
                     cmdVDMEnvBlk.lpszzEnv, cmdVDMEnvBlk.cchEnv)) {
                 free(cmdVDMEnvBlk.lpszzEnv);
                 cmdVDMEnvBlk.lpszzEnv = NULL;

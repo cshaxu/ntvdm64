@@ -13,10 +13,10 @@ PWCHAR runtime_command_environment_snapshot_session(
     int characters;
     PWCHAR snapshot;
     if (session != NULL && runtime_command_misc_session_valid(session) &&
-        session->command_source_environment != NULL &&
-        session->command_source_environment_bytes >= 2u) {
-        source = session->command_source_environment;
-        bytes = session->command_source_environment_bytes;
+        session->input.environment != NULL &&
+        session->input.environment_bytes >= 2u) {
+        source = session->input.environment;
+        bytes = session->input.environment_bytes;
     }
     if (bytes > (uint32_t)INT_MAX || source[bytes - 2u] != '\0' ||
         source[bytes - 1u] != '\0') return NULL;

@@ -54,6 +54,12 @@ session payload ownership, same-shaped VDM API recovery in `adapter-win32`,
 reached OpenNT host subsets, host-child lifecycle, then the generic frame
 transaction. See [S3 P4 disposition](etc/evidence/m0-t271-s3-p4-command-composition-owner-disposition-001.md).
 
+**S3 P5:** copied startup/environment/directory payload lifetime is now
+neutral `session_input` state, not `opennt-bop` composition fields. Focused
+get-next, dynamic-environment and native-entry regressions pass; the next P
+moves the historical VDM API definitions themselves into `adapter-win32`.
+See [S3 P5 evidence](etc/evidence/m0-t271-s3-p5-session-input-extraction-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored
