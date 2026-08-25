@@ -2,32 +2,37 @@
 
 ## Current Work
 
-**Active: M0 T268 S1 — current naming convergence.** Remove superseded project/component labels and temporary generation suffixes from non-mirror components and surrounding live material; retain them only in archived historical-record documentation or an explicitly registered upstream ABI exception.
+**Active: M0 T269 S2 — OpenNT-host mirror and overlay boundary repair.** Repair only the source-identity register and private binding boundaries identified by S1; do not add host capability or alter a reached failure contract.
 
 ## Active Packet
 
-### M0 T268 S1 — current naming inventory and semantic mapping
+### M0 T269 S2 — OpenNT-host mirror and overlay boundary repair
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T268 S1`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | Owner: “代码中旧的项目名…旧的组件名…还有临时名，都必须从所有现行资料/代码/变量等地方去除。” |
-| Objective | Establish the complete live naming inventory and a collision-safe semantic mapping for every superseded project/component/generation marker. |
-| Non-goals | No behavioral change, source-body rewrite, or unapproved alteration of an original external ABI identity. |
-| Scope | The non-mirror component roots, tests, tools, formal build/configuration, current root/authority documentation and runtime-facing schemas. Original-code mirror roots are out of scope; their corresponding `*-overlay` roots are in scope because they are project-authored code. Only archived historical-record documentation may retain the retired spellings. |
-| Verification | Reproducible inventory counts by owner and marker class; every live row has a target semantic name or a registered upstream ABI exception; no blind bulk replacement is admitted. |
-| Exit Criteria | A machine-readable mapping and collision ledger supports S2--S4 without ambiguous path/symbol renames; governance and diff checks pass. |
-| Reference Baseline | S1 mapping evidence, current component roots, formal Ninja manifest and current naming-convergence proposal. |
-| Files And ABI Surface | Non-mirror source/test/tool paths and names, formal target/schema/configuration labels, current authorities and the evidence record. No behavioral ABI change. |
-| Applicable Rules | `docs/rules/CODING.md`, `docs/rules/DOCUMENT.md`, `docs/rules/EXECUTION.md` and mirror-component source-identity rules. |
-| Expected Markers | Zero live scan matches; current-root formal graph; `ntvdm64.exe`; clean incremental dry-run; no historical label repurposed as a current ABI. |
-| Asset Needs | Current checkout, MSVC x64 `/MT`, Ninja, formal manifest and declared cross-component fixtures. |
-| Reporting Requirements | Record scan scope/exclusions, formal build and fixture results, cache-recovery fact, current target name and any retained external spelling. |
-| Stop Conditions | A remaining current retired marker, collision, unresolved current consumer, formal build failure or a required upstream identity conflict. |
-| Similar-Issue Sweep | app/session/adapters, overlays, tests, build/configuration, tools, root/current authorities and runtime-facing schemas. |
-| Original Owner Request | “代码中旧的项目名…旧的组件名…还有临时名，都必须从所有现行资料/代码/变量等地方去除。” |
-**S1 closure:** The scoped inventory has 7,331 classified occurrences in 490 files, a deterministic four-class mapping, one two-file collision pair, and five upstream guest-comment examples excluded with their original mirror roots. See [mapping evidence](etc/evidence/m0-t268-s1-live-naming-mapping-001.md) and the [TSV inventory](etc/evidence/m0-t268-s1-live-naming-inventory.tsv).
-**S1/P1 closure:** the live non-mirror and current-governance negative scans are clean. The current-root formal Ninja graph completed 486/486 steps, its dry-run reported no work, four cross-component fixtures passed, and the 14-root production-tree gate passed. See [closure evidence](etc/evidence/m0-t268-current-naming-convergence-closure-001.md).
+| Identifier Mode | `M0 T269 S2`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner-approved T269; S1 baseline evidence admits only its enumerated four changed mirror bodies and three private binding fragments. |
+| Objective | Reconcile local crop/modified-expression markers and README entries for `nt_error.c`, `vrinit.c`, `vrnmpipe.c`, `vrputil.c` and their private bindings, preserving all reached original call and failure behavior. |
+| Non-goals | No new host capability; no Redirector async recovery; no VDD/NetBIOS/DLC/ICA product shell; no `nt_pif.c` owner-edge change; no body transfer between components. |
+| Scope | The four identified host source bodies, three `opennt-host-overlay` binding fragments, both component READMEs, targeted evidence and formal host fixture. |
+| Verification | Direct diff review against selected OpenNT paths; every deleted logical block and changed expression has one local marker/README entry; private overlay has no external implementation consumer; focused host fixture and formal host library compile; governance and diff checks. |
+| Exit Criteria | All S1-identified subset and same-shaped edits are locally traceable and README-indexed; no changed source line lacks a registered reason; current reached paths retain their prior focused result. |
+| Reference Baseline | [S1 baseline/disposition](etc/evidence/m0-t269-s1-opennt-host-baseline-disposition-001.md), selected OpenNT revision `5c5b979ec08c17d3ca2eb70e8aad62d26515d01c`, current host/overlay READMEs and T269 proposal. |
+| Files And ABI Surface | The four host bodies, private overlay fragments, their registers and host build/fixture evidence. No intended public ABI or behavior change. |
+| Applicable Rules | Execution closure, source policy, mirror-component review standard, overlay privacy, component ownership and documentation governance. |
+| Expected Markers | A source-to-register one-to-one divergence map; no silent crop; private overlay remains reachable only through its matching mirror. |
+| Asset Needs | Current checkout, selected local OpenNT source, MSVC x64 `/MT`, formal Ninja generator and host fixture. |
+| Reporting Requirements | List each retained/deleted original logical block, exact divergence ID, observed route impact, and any boundary that must transfer to S3. |
+| Stop Conditions | A crop intersects a reached retained failure path, a change needs a new capability, a private overlay gains an external caller, or a change exceeds the S1 disposition. |
+| Similar-Issue Sweep | All host source `DIVERGENCE:` markers, each host README row, overlay headers, formal source list and direct overlay include consumers. |
+| Original Owner Request | “单人模式实施opennt-host组件合规化。” |
+
+**S1 closure:** all eleven OpenNT host units have a selected revision/path/hash
+and disposition; the three overlay fragments have an explicit private-binding
+role. Seven host units are exact originals; four are source-shaped subsets or
+minimal modifications. S2 owns their marker/register precision, while S3 owns
+the separately identified `nt_pif.c` cross-component textual inclusion. See
+[S1 baseline evidence](etc/evidence/m0-t269-s1-opennt-host-baseline-disposition-001.md).
 ## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition
