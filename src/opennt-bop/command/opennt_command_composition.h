@@ -314,6 +314,7 @@ int runtime_command_misc_invoke_body(runtime_command_misc_call *call,
 
 /* Original COMMAND service entries retained by cmddisp.c's table. */
 BOOL CmdDispatch(ULONG service);
+BOOL CMDInit(int argc, char *argv[]);
 void cmdExitVDM(void); void cmdGetNextCmd(void); void cmdComSpec(void);
 void cmdCreateProcess(void);
 void cmdSaveWorld(void); void cmdGetCurrentDir(void); void cmdSetInfo(void);

@@ -25,7 +25,7 @@ int runtime_command_native_session_initialize(
     session->abi_version = RUNTIME_COMMAND_NATIVE_SESSION_VERSION;
     session->struct_bytes = sizeof(*session);
     runtime_command_misc_session_initialize(&session->direct);
-    return session_valid(session);
+    return session_valid(session) && CMDInit(0, NULL);
 }
 
 int runtime_command_native_session_bind(
