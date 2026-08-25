@@ -71,3 +71,19 @@ app/session-bound copied-data mechanical callback contract, then move the
 remaining upstream `pc_system`, keyboard and PIC material according to the
 mirror/overlay rule.  Until that is done, this ledger is P1/P2 evidence only
 and S3 is not closed.
+
+### A20 first seam
+
+`a20_capability.cc` is now removed from the direct-edge list.  Its retained
+SoftPC-facing status and result ABI calls `machine_binding.{c,h}`, which owns
+only primitive `uint32_t` function pointers.  `app/engine_run.c` binds that
+surface once per active session to `adapter-bochs/machine_facade.{cc,h}` and
+registers the unbind with the existing session teardown stack.  The facade is
+the sole source that accesses the native PC A20 line.
+
+The formal graph rebuilt the 91 affected actions successfully.  Both
+`t226-s4-a20-mantle-fixture` and
+`t237-s3-xms-a20-source-mirror-fixture` exited `0`; its final dry run was
+`no work`.  The wider `t255-s2-generic-context-resume-fixture` observed exit
+`2` in this run; it is not used as evidence for this A20 seam and remains in
+the later CPU/protected-range migration set.

@@ -167,6 +167,7 @@
       "sources": [
         "src/adapter-bochs/keyboard.cc",
         "src/adapter-bochs/headless_8042.cc",
+        "src/adapter-bochs/machine_facade.cc",
                 "src/adapter-bochs/minimal_machine.cc",
         "src/adapter-bochs/minimal_port_space.cc",
         "src/adapter-bochs/minimal_product_shell.cc",
@@ -179,6 +180,7 @@
       "name": "adapter-softpc",
       "sources": [
         "src/adapter-softpc/a20_capability.cc",
+        "src/adapter-softpc/machine_binding.c",
         "src/adapter-softpc/bulk_result_transaction.c",
         "src/adapter-softpc/cpu_delta_abi.c",
         "src/adapter-softpc/cpu_result.c",

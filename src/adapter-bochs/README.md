@@ -9,5 +9,6 @@ VDM, WOW, BOP, SoftPC/CCPU or Win32 semantics. T260 S3 moved all former
 `bx_ntvdm_*` bridge, finite-run, observation and machine-session files to
 `adapter-softpc`; the retained interfaces use neutral Bochs-native names.
 
-The static library name is `adapter-bochs`; its public include surface is
-the Bochs mechanical assembly contract consumed by `adapter-softpc` and `app`.
+The static library name is `adapter-bochs`; only `app` consumes its public
+Bochs mechanical assembly contract. `app` may bind its fixed-width callbacks
+into `adapter-softpc`, which never imports this component.

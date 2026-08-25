@@ -3,11 +3,12 @@
 Bochs-backed recovery of reached historical SoftPC, CCPU, SAS and VDM-facing
 mechanical interfaces. A recovered interface retains the original name,
 parameters, calling convention and observable mechanical semantics while using
-bounded `adapter-bochs` operations.
+an app/session-bound, fixed-width mechanical callback contract.
 
 It is selector/service blind: it does not own BOP, DOS, WOW, OpenNT host policy
-or Win32 capability. It is the only OpenNT-facing component allowed to request
-Bochs mechanics. It owns the one mapping-manager implementation. `session`
+or Win32 capability. It never imports a Bochs object/header; `app` binds the
+mechanical callback contract to `adapter-bochs`. It owns the one mapping-manager
+implementation. `session`
 owns the identity and lifecycle of its three instances (`guest_memory`,
 `host_handle`, `session_data`); this facade uses the applicable instance only
 within its admitted synchronous call boundary.
