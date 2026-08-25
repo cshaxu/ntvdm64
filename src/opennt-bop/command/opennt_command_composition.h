@@ -2,6 +2,7 @@
 #define RUNTIME_OPENNT_BOP_COMMAND_COMPOSITION_H
 
 #include "adapter-win32/facade/opennt_error_dialog_facade.h"
+#include "adapter-win32/facade/opennt_command_oem_facade.h"
 
 /* Compatibility surface for the directly imported OpenNT file
  * src/opennt/base/mvdm/dos/command/cmdmisc.c.  It is deliberately a scoped
@@ -366,8 +367,6 @@ extern BOOL fSoftpcRedirection;
 #define ASSERT(value) ((void)(value))
 LPVOID runtime_command_misc_get_vdm_addr(USHORT segment, USHORT offset);
 void nt_init_event_thread(void);
-UINT runtime_command_misc_get_system_directory(LPSTR buffer, UINT bytes);
-void runtime_command_misc_set_test_system_directory(const CHAR *path);
 DWORD runtime_command_misc_get_environment_variable(LPSTR name,
     LPSTR buffer, DWORD bytes);
 BOOL GetNextVDMCommand(PVDMINFO vdm_info);
@@ -399,9 +398,6 @@ BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR name);
 #define GetConsoleKeyboardLayoutName GetConsoleKeyboardLayoutNameA
 
 UCHAR demGetPhysicalDriveType(UCHAR drive);
-UINT GetDriveTypeOem(LPSTR root);
-DWORD GetEnvironmentVariableOem(LPSTR name, LPSTR buffer, DWORD bytes);
-BOOL SetEnvironmentVariableOem(LPSTR name, LPSTR value);
 
 /* command_config_shim.c is the smallest source-derived replacement for the
  * non-composable SoftPC/PIF/CCPU closure consumed by cmdconf.c. */

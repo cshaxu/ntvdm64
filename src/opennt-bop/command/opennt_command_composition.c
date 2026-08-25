@@ -57,7 +57,6 @@ static __declspec(thread) runtime_command_misc_active_call *g_active_call;
  * active BOP call, a guest pointer, or a raw HANDLE in its continuation. */
 static runtime_command_misc_session *g_pending_session;
 static __declspec(thread) runtime_command_misc_session *g_worker_session;
-static CHAR g_test_system_directory[MAX_PATH + 1];
 static const CHAR g_empty_environment[2] = { '\0', '\0' };
 
 static uint32_t real_mode_address(USHORT segment, USHORT offset)
@@ -801,18 +800,6 @@ void nt_init_event_thread(void)
         g_active_call->call->session->console_initialized = 1u;
 }
 
-UINT runtime_command_misc_get_system_directory(LPSTR buffer, UINT bytes)
-{
-    if (g_test_system_directory[0] != '\0') {
-        size_t length = strlen(g_test_system_directory);
-        if (buffer == NULL || bytes == 0u) return (UINT)length;
-        if (length >= bytes) return (UINT)length;
-        memcpy(buffer, g_test_system_directory, length + 1u);
-        return (UINT)length;
-    }
-    return GetSystemDirectoryA(buffer, bytes);
-}
-
 DWORD runtime_command_misc_get_environment_variable(LPSTR name,
     LPSTR buffer, DWORD bytes)
 {
@@ -829,13 +816,6 @@ DWORD runtime_command_misc_get_environment_variable(LPSTR name,
         return 0u;
     return result;
 }
-void runtime_command_misc_set_test_system_directory(const CHAR *path)
-{
-    if (path == NULL) { g_test_system_directory[0] = '\0'; return; }
-    strncpy(g_test_system_directory, path, MAX_PATH);
-    g_test_system_directory[MAX_PATH] = '\0';
-}
-
 /* OpenNT cmdkeyb.c called the old NTVDM console-composition export
  * GetConsoleKeyboardLayoutNameA.  It is not linkable from the modern public
  * Win32 import libraries.  GetKeyboardLayoutNameA is the public supported
@@ -1007,40 +987,6 @@ LPVOID runtime_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
         if (active->guest_buffer[index] == 0u) return active->guest_buffer;
     }
     return NULL;
-}
-
-UINT GetDriveTypeOem(LPSTR root)
-{
-    CHAR ansi[4];
-    if (root == NULL || !OemToCharBuffA(root, ansi, 4u)) return DRIVE_UNKNOWN;
-    return GetDriveTypeA(ansi);
-}
-
-DWORD GetEnvironmentVariableOem(LPSTR name, LPSTR buffer, DWORD bytes)
-{
-    CHAR ansi_name[4];
-    CHAR ansi_value[RUNTIME_COMMAND_MISC_CURRENT_DIR_BYTES];
-    DWORD result;
-    if (name == NULL || buffer == NULL || bytes == 0u ||
-        !OemToCharBuffA(name, ansi_name, (DWORD)(strlen(name) + 1u))) return 0u;
-    result = GetEnvironmentVariableA(ansi_name, ansi_value, (DWORD)sizeof(ansi_value));
-    if (result == 0u || result >= sizeof(ansi_value) ||
-        !CharToOemBuffA(ansi_value, buffer, result + 1u)) return result;
-    return result;
-}
-
-/* Shared OEM environment capability for the directly imported DEM and
- * COMMAND owners.  OpenNT exposed one process environment to both owners;
- * keeping the only definition here prevents test-local shim duplicates. */
-BOOL SetEnvironmentVariableOem(LPSTR name, LPSTR value)
-{
-    CHAR ansi_name[4];
-    CHAR ansi_value[RUNTIME_COMMAND_MISC_CURRENT_DIR_BYTES];
-    if (name == NULL || !OemToCharBuffA(name, ansi_name, (DWORD)(strlen(name) + 1u)))
-        return FALSE;
-    if (value == NULL) return SetEnvironmentVariableA(ansi_name, NULL);
-    if (!OemToCharBuffA(value, ansi_value, (DWORD)(strlen(value) + 1u))) return FALSE;
-    return SetEnvironmentVariableA(ansi_name, ansi_value);
 }
 
 static int runtime_command_misc_invoke_internal(runtime_command_misc_call *call,

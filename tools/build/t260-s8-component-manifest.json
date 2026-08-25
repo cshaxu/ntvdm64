@@ -249,6 +249,7 @@
       "name": "adapter-win32",
       "sources": [
         "src/adapter-win32/facade/opennt_error_dialog_facade.c",
+        "src/adapter-win32/facade/opennt_command_oem_facade.c",
         "src/adapter-win32/facade/opennt_rtl_compat.c",
         "src/adapter-win32/facade/opennt_pif_oem_facade.c",
         "src/adapter-win32/facade/opennt_dem_oem_facade.c",
