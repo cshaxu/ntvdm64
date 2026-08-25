@@ -1,20 +1,20 @@
 {
   "schema": "ntdos64-reconstruction-source-manifest-v1",
-  "component": "Independent default-disabled reconstruction mechanics admitted by S4 and R1",
-  "research_restriction": "Default-disabled research code. It is not linked into ntdos64-run and does not implement BIOS, BOP/SVC dispatch, DEM, DOS, PC/AT devices, or host policy.",
+  "component": "Independent default-disabled reconstruction mechanics",
+  "research_restriction": "Default-disabled research code. It is not linked into the formal runtime and does not implement BIOS, BOP/SVC dispatch, DEM, DOS, PC/AT devices, or host policy.",
   "authority": "docs/S3-RECONSTRUCTED-MONITOR-SEMANTICS.md, docs/S4-RECONSTRUCTION-ADMISSION.md, and docs/R1-GENERIC-VIDEO-RECONSTRUCTION-ADMISSION.md",
   "files": [
     {
-      "path": "monitor/reconstructed_monitor_s4.h",
+      "path": "monitor/reconstructed_monitor.h",
       "kind": "reconstruction-monitor-interface",
-      "sha256": "B4CF0F3F59D032EEE0F825269310A19BA03FA71C40578FAA9AE303B030BA5ECA",
-      "bytes": 3635
+      "sha256": "7AA48FD645DB5F4A3D181869CE0175D8812C623ED5528B7329EAEFAA32D06166",
+      "bytes": 4438
     },
     {
-      "path": "monitor/reconstructed_monitor_s4.c",
+      "path": "monitor/reconstructed_monitor.c",
       "kind": "reconstruction-monitor-mechanics",
-      "sha256": "BD855106FB62E780188FD308FC6B646D324F58C3698AC3E15D1F5456FF7A025A",
-      "bytes": 50134
+      "sha256": "F3A9EACF2FD039E9FFC932B041C9F9C0B571A35EAF92A1D9070FF656F4A79D41",
+      "bytes": 56236
     },
     {
       "path": "transport/historical_transport_v2.h",
@@ -43,16 +43,16 @@
   ],
   "verification_files": [
     {
-      "path": "../../tests/reconstructed_monitor_s4_test.c",
+      "path": "monitor/reconstructed_monitor_test.c",
       "kind": "default-disabled-mechanics-test",
-      "sha256": "3B5F6AE4A8FD778557562980A23F39F8E3212038A2A833E7AC3242262634017B",
-      "bytes": 34503
+      "sha256": "2105F68CC3179F1F8C6150C1658475CC353F85D30CC8B84307EC8C46D57A178D",
+      "bytes": 37503
     },
     {
-      "path": "../../tests/reconstructed_monitor_s4_ntio_strategy_fixture.c",
+      "path": "monitor/reconstructed_monitor_ntio_strategy_fixture.c",
       "kind": "default-disabled-source-built-ntio-strategy-fixture",
-      "sha256": "AB80AD47A9CD2A12180607714FADAF5C6ADFBA3AF6C38A333BCEC85E216CB771",
-      "bytes": 3163
+      "sha256": "A46ACE804383BA1B053D2F184C3E1FC23C38B1F9BCCD9F6A3C5F5AFE8DCE239F",
+      "bytes": 3314
     },
     {
       "path": "../../tests/historical_transport_v2_layout_test.c",
@@ -73,10 +73,10 @@
       "bytes": 3368
     },
     {
-      "path": "../../tests/shared_aperture_s4_post_sas_fixture.c",
-      "kind": "default-disabled-post-sas-s4-instruction-fixture",
-      "sha256": "233950BB08D54B16EF1C22B09674ACA391D643610DB9E7B75A053211F2622FE6",
-      "bytes": 3585
+      "path": "monitor/shared_aperture_post_session_fixture.c",
+      "kind": "default-disabled-post-session-instruction-fixture",
+      "sha256": "AC3FD6A39E5CCA136AC3059CE047A7F4942FDA015E3CE658E8AEBB4B74F42E07",
+      "bytes": 3682
     }
   ]
 }

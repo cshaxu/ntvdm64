@@ -34,27 +34,23 @@ The engine path is user-selected. The CLI never copies a runtime, edits the
 registry, installs a driver, injects a process, changes a system directory, or
 uses a Windows-private loader/console API.
 
-## Bounded Instrumentation (Opt-In)
+## Current Build Entrypoint
 
-The former self-authored `nvtdm` startup, BOP, DEM, IVT/BDA, and DOS probes are
-not a runtime and are not part of the default build or CLI path. They are built
-only as source references when configuring with
-`-DNTDOS64_ENABLE_TRACE_INSTRUMENTATION=ON`, through the separate
-`ntvdm-startup-reference` target. The target produces no executable and no
-library. These sources must not be offered as a BYOB engine or used to make a
-DOS program advance.
+The only current in-process build route is the manifest-driven MSVC x64 `/MT`
+Ninja graph. It owns the nine linkable runtime modules and their admitted
+fixtures; the root CMake catalogue was retired because it described deleted
+pre-component-layout paths. It has been removed; Git history and the T267 closure evidence preserve its provenance.
 
-```text
-cmake -S . -B build-trace -DNTDOS64_ENABLE_TRACE_INSTRUMENTATION=ON
-cmake --build build-trace --target ntvdm-startup-reference
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File tools/build/New-T260S8FullNinjaGraph.ps1 `
+  -RepositoryRoot (Get-Location).Path `
+  -BuildRoot build/M0-T267-S1/r001
+ninja -C build/M0-T267-S1/r001
 ```
 
-The reference target does not execute its sources. Any future standalone trace
-tool may read a local BYOB file, record a snapshot, or assert a bounded expected
-transition only. It cannot change an instruction, BOP/SVC result, DOS return,
-device response, or startup-success condition. The self-authored WHPX COM
-engine and BOP observer are subject to the same source-only boundary.
-
+Historical reconstruction probes—including the reconstructed monitor—are retained below
+`tests/legacy/reconstruction/`. They are not formal Ninja inputs, runtime
+providers, or a substitute for Bochs/OpenNT execution.
 ## Current Boundary
 
 The default build includes only the non-invasive dispatcher boundary and
@@ -69,11 +65,10 @@ fallback to system hooks.
 
 ## Source Policy
 
-The `refs/` snapshots are read-only evidence. The separately manifested
-historical research inputs in `src/opennt/` and `refs/ntvdmx64-derived/` are available
-only through default-disabled CMake gates and are not linked into this CLI.
-Their source roots, include paths, overlays, hashes, and research restrictions
-are recorded in `docs/HISTORICAL-SOURCE-INPUT-GATES.md`. Public and
+Retained historical research inputs are evidence only. They are not formal
+Ninja inputs and are not linked into this CLI. Their provenance, source roots,
+include paths, overlays, hashes, and research restrictions are recorded in
+`docs/HISTORICAL-SOURCE-INPUT-GATES.md`. Public and
 undocumented Windows APIs may be catalogued for historical compatibility
 analysis, but the primary runtime path uses documented user-mode APIs only. A
 private API cannot become a required dependency without a separate owner

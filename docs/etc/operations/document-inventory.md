@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2294 |
+| Documentation records | 2296 |
 | --- | --- |
-| Generated UTC | 2026-08-25T06:29:21Z |
+| Generated UTC | 2026-08-25T14:37:42Z |
 
 ## Entries
 
@@ -256,6 +256,7 @@ content-divergent entries.
 | etc/evidence/m0-t266-s3-opennt-input-recovery-001.md | indexed supporting material | 0bf46eb42549c3e1c4faaecb6604b9cb0eb84f93c7bba52a3e15c2b679fc817e |
 | etc/evidence/m0-t266-s4-historical-consumer-retirement-001.md | indexed supporting material | 29cef27fc62c11fae0f5feaa90cda88ce182767840720dc409f742bfa7dd091a |
 | etc/evidence/m0-t266-s5-refs-removal-zero-reference-001.md | indexed supporting material | a09de7a8a5237879cac4113085d82353a02920bef8cb20f15e799ec7923a65b5 |
+| etc/evidence/m0-t267-s1-build-entrypoint-and-reconstructed-monitor-closure-001.md | indexed supporting material | c8d900c80cae63d35cf93d693c504b8d5e4280c3939948a77b7485f4d6c0b650 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -440,7 +441,7 @@ content-divergent entries.
 | etc/evidence/td-s2-p7-full-interface-conformance-closure-001.md | indexed supporting material | 8cbd8dcd10744ef3a3bdbf3516c74600de6fca0745669e2cbfcb3fd26d7d598b |
 | etc/legacy_code/opennt-bop/command/command-import-manifest.md | indexed supporting material | 7cebfe2d0cdd7a5d0a5f212ad4f349645e5c8c5dde22df201a11499fc8382094 |
 | etc/legacy_code/opennt-bop/dpmi/dpmi-startup-import-manifest.md | indexed supporting material | 086a861fb867e5ea48791540af4f76ced9fe83a5339fb61ba2685415ba790c9b |
-| etc/legacy_code/README.md | indexed supporting material | 3b9b83c718bfb5d591e42e15d552605e08cd6ac560ea981fc32a2393d43bf392 |
+| etc/legacy_code/README.md | indexed supporting material | 686756862808140e4ea99936f41b9941fe25f2ce6c1fc105425a8d6371aca7dd |
 | etc/legacy_code/tools/historical/t225-s7/t225-s7-full-module-manifest.json | indexed supporting material | c774420149d6f00a9ebdc7287bc8340bba99a292459575d485bd9599361dd947 |
 | etc/operations/bochs-intrusion-convergence-policy.md | indexed supporting material | 0a9e60b53d021ef67e543372fee6ec835244ab48724fee3b3b33f65b067783d5 |
 | etc/operations/git-baseline-scope-20260812.md | indexed supporting material | 0eb54e634a72921ee46b69e3b319f75a82059ec28187955b5db23416db1596ec |
@@ -516,6 +517,7 @@ content-divergent entries.
 | etc/operations/proposal-bx-vdm-pending-bop-session-lifecycle-001.md | indexed supporting material | b3c5072c395c22475973085e337d757366b49e1769c3fb81fde9c12a38f7adf2 |
 | etc/operations/proposal-cli-run-entry-and-opennt-pif-handoff-001.md | indexed supporting material | 472164739c7fe38ba4ccb20c64a0b72c13aa81d8df972786371c50c762c8393a |
 | etc/operations/proposal-dos-wow16-complete-source-build-closure-001.md | indexed supporting material | 142a93fef99ec618565c294f911416b78836dc14591e962a70fe716e45de8fcc |
+| etc/operations/proposal-formal-build-entrypoint-and-reconstructed-monitor-fixture-repair-001.md | indexed supporting material | 8c20c430a033b448bf3de92e21f8ba32760c80fae225b5c0fa14ab4cc0814b8f |
 | etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md | indexed supporting material | e4a8f60209eda2a1ff3858641aca0f343b670174f224a6799e0b1dbec3f2f7df |
 | etc/operations/proposal-opennt-bop-mirror-overlay-convergence-001.md | indexed supporting material | b8dfb761b41fe5177f91b390bee1b163b3329372cc26435e4577ed4eae5fd1fa |
 | etc/operations/proposal-opennt-command-cmdexec32-full-capability-closure-001.md | indexed supporting material | 699c1f69b9145130ae0ff02783cb8e060ef30deba5ded25e9c26b4397718ad35 |
@@ -2308,7 +2310,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 912459dba35f5d93e7458bd157bdeedc77e4ca39a4e1d8dc008d26967b760b13 |
+| STATUS.md | principal control document | acae39ab9908a07e136f35793096b7c3e89cfc1b5b6daef7e10efab8cf50447d |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

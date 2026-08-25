@@ -2,12 +2,12 @@
 #include <string.h>
 
 #include "historical_bios_bridge_v1.h"
-#include "reconstructed_monitor_s4.h"
+#include "reconstructed_monitor.h"
 
 static int historical_bridge_transport(
     void *context,
-    const ntdos64_s4_bridge_request *request,
-    ntdos64_s4_bridge_response *response)
+    const reconstructed_monitor_bridge_request *request,
+    reconstructed_monitor_bridge_response *response)
 {
     ntdos64_historical_bios_bridge_v1_request historical_request;
     ntdos64_historical_bios_bridge_v1_response historical_response;
@@ -28,9 +28,9 @@ static int historical_bridge_transport(
         historical_response.disposition != NTDOS64_HISTORICAL_BIOS_BRIDGE_V1_COMPLETED) {
         return 0;
     }
-    response->write_mask = NTDOS64_S4_BRIDGE_WRITE_AX |
-        NTDOS64_S4_BRIDGE_WRITE_CX | NTDOS64_S4_BRIDGE_WRITE_DX |
-        NTDOS64_S4_BRIDGE_WRITE_CS | NTDOS64_S4_BRIDGE_WRITE_IP;
+    response->write_mask = RECONSTRUCTED_MONITOR_BRIDGE_WRITE_AX |
+        RECONSTRUCTED_MONITOR_BRIDGE_WRITE_CX | RECONSTRUCTED_MONITOR_BRIDGE_WRITE_DX |
+        RECONSTRUCTED_MONITOR_BRIDGE_WRITE_CS | RECONSTRUCTED_MONITOR_BRIDGE_WRITE_IP;
     response->ax = historical_response.ax;
     response->cx = historical_response.cx;
     response->dx = historical_response.dx;
@@ -42,25 +42,25 @@ static int historical_bridge_transport(
 int main(void)
 {
     uint8_t ram[] = {0xc4u, 0xc4u, 0x50u, 0x14u, 0xd6u, 0xfeu};
-    ntdos64_s4_monitor monitor;
-    ntdos64_s4_state state;
+    reconstructed_monitor_monitor monitor;
+    reconstructed_monitor_state state;
     int result = 0;
 
     if (!ntdos64_historical_bios_bridge_v1_initialize()) {
         return 1;
     }
-    if (ntdos64_s4_monitor_initialize(&monitor, ram, sizeof(ram),
-            historical_bridge_transport, NULL) != NTDOS64_S4_BUDGET_EXHAUSTED) {
+    if (reconstructed_monitor_monitor_initialize(&monitor, ram, sizeof(ram),
+            historical_bridge_transport, NULL) != RECONSTRUCTED_MONITOR_BUDGET_EXHAUSTED) {
         result = 2;
         goto cleanup;
     }
     monitor.state.eax = 0xc0de5a00u;
     monitor.state.ecx = 0xbeef1111u;
     monitor.state.edx = 0xabcd2222u;
-    if (ntdos64_s4_monitor_run(&monitor, 2u) != NTDOS64_S4_BOP_EXIT) {
+    if (reconstructed_monitor_monitor_run(&monitor, 2u) != RECONSTRUCTED_MONITOR_BOP_EXIT) {
         result |= 4;
     }
-    if (ntdos64_s4_monitor_get_state(&monitor, &state) != NTDOS64_S4_BUDGET_EXHAUSTED ||
+    if (reconstructed_monitor_monitor_get_state(&monitor, &state) != RECONSTRUCTED_MONITOR_BUDGET_EXHAUSTED ||
         state.ip != 6u || (state.eax & 0xffff0000u) != 0xc0de0000u ||
         (state.eax & 0xffu) > 6u || (state.edx & 0xffff0000u) != 0xabcd0000u ||
         ((state.edx >> 8) & 0xffu) == 0u || ((state.edx >> 8) & 0xffu) > 12u ||

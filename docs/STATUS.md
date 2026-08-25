@@ -2,9 +2,31 @@
 
 ## Current Work
 
-**Active: M0 T266 S5 — repository-local `refs` removal and zero-reference closure.** Delete the retired local snapshots only after zero-live-consumer verification, then prove named-source formal closure without them.
+**Active: M0 T267 S1 — formal-build entrypoint and legacy reconstruction repair.** Retire the obsolete root CMake configuration from live use, make the formal Ninja route the only documented current build entrypoint, and repair the reconstructed-monitor fixture so that no live configuration or directly compiled retained fixture references deleted paths, stale type names, or task-label identifiers.
 
 ## Active Packet
+
+### M0 T267 S1 — formal-build entrypoint and reconstructed-monitor closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T267 S1`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner: “请你即刻准入一个新的T任务帮我修复上述全部这些问题。” |
+| Objective | Remove the obsolete root CMake graph from all current use; remove it entirely; document the owned MSVC/Ninja graph as the sole current build path; and make the retained reconstructed-monitor fixture internally type-consistent, directly buildable, and free of non-semantic product/task labels. |
+| Non-goals | No BOP, OpenNT, Bochs, or runtime-semantic implementation; no resurrection or port of the old CMake target catalogue; no historical source import. |
+| Reference Baseline | T266 historical finding; the retired root `CMakeLists.txt`; `tools/build/New-T260S8FullNinjaGraph.ps1`; component manifest; `tests/legacy/reconstruction/monitor/reconstructed_monitor.{c,h}` and its two retained fixtures. |
+| Files And ABI Surface | Root CMake entrypoint/disposition, current build documentation, legacy-code index, reconstructed-monitor fixture tests and task evidence. No production ABI. |
+| Applicable Rules | Execution, documentation, coding/source-layout, build-output hygiene, and the formal MSVC x64 Ninja ownership rules. |
+| Verification | Negative scan proves no current configuration references `src/bx-vdm` or `src/cli`; no current instructions invoke root CMake; direct compile/run of both reconstructed-monitor retained fixtures using their matching header; fresh external formal Ninja generation and no-work/build verdict; governance and `git diff --check`. |
+| Expected Markers | Root CMake is absent from current configuration; its obsolete body is removed rather than retained as executable-looking evidence; the retained monitor package has only semantic `reconstructed_monitor` identifiers and filenames. |
+| Asset Needs | Existing root CMake and retained fixtures, current formal Ninja generator/manifest, MSVC x64 and Ninja. No external source. |
+| Reporting Requirements | State the disposition of the root CMake graph and each reconstructed-monitor fixture file; distinguish current-build proof from historical fixture proof; record any unrelated Ninja limitation separately. |
+| Stop Conditions | A current formal path still depends on CMake, a proposed CMake rewrite would recreate legacy target ownership, a fixture requires a production include root, or formal Ninja has a new unrelated source/link failure. |
+| Exit Criteria | No live configuration/instruction references deleted `src/bx-vdm`/`src/cli`; current documentation names only the formal Ninja route; both retained reconstructed-monitor fixture executables compile and pass under their one coherent type contract; evidence and governance checks are recorded. |
+| Original Owner Request | “请你即刻准入一个新的T任务帮我修复上述全部这些问题。” |
+| Similar-Issue Sweep | Root build files, README/CONTRIBUTING commands, formal Ninja manifest/generator, CMake and CTest references, all reconstructed-monitor test/header/source identifiers, and legacy-code indexing. |
+
+## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition
 

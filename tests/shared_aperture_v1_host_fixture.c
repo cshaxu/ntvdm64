@@ -36,7 +36,7 @@ int wmain(int argc, wchar_t **argv)
     aperture_bytes = wcsstr(argv[1], L"sas") != NULL ?
         2u * 1024u * 1024u : APP_SHARED_APERTURE_V1_MINIMUM_BYTES;
     if (swprintf(mapping_name, sizeof(mapping_name) / sizeof(mapping_name[0]),
-        L"Local\\ntdos64-s4-aperture-%lu-%lu", (unsigned long)GetCurrentProcessId(),
+        L"Local\\shared-aperture-%lu-%lu", (unsigned long)GetCurrentProcessId(),
         (unsigned long)GetTickCount()) < 0) return 3;
     mapping = CreateFileMappingW(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0u,
         aperture_bytes, mapping_name);

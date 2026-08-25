@@ -2,7 +2,7 @@
 #include <wchar.h>
 #include <windows.h>
 
-#include "reconstructed_monitor_s4.h"
+#include "reconstructed_monitor.h"
 #include "shared_aperture_v1.h"
 
 static uint32_t read_u32(const uint8_t *bytes, size_t offset)
@@ -28,8 +28,8 @@ int wmain(int argc, wchar_t **argv)
     uint8_t *view = NULL;
     STARTUPINFOW startup = {0};
     PROCESS_INFORMATION process = {0};
-    app_s4_monitor monitor;
-    app_s4_state state;
+    reconstructed_monitor_monitor monitor;
+    reconstructed_monitor_state state;
     DWORD exit_code;
     int result = 1;
 
@@ -71,14 +71,14 @@ int wmain(int argc, wchar_t **argv)
         goto cleanup;
     }
 
-    if (app_s4_monitor_initialize(&monitor, view, aperture_bytes, NULL, NULL) !=
-        APP_S4_BUDGET_EXHAUSTED) goto cleanup;
-    if (app_s4_monitor_get_state(&monitor, &state) != APP_S4_BUDGET_EXHAUSTED) goto cleanup;
+    if (reconstructed_monitor_monitor_initialize(&monitor, view, aperture_bytes, NULL, NULL) !=
+        RECONSTRUCTED_MONITOR_BUDGET_EXHAUSTED) goto cleanup;
+    if (reconstructed_monitor_monitor_get_state(&monitor, &state) != RECONSTRUCTED_MONITOR_BUDGET_EXHAUSTED) goto cleanup;
     state.cs = 0x0100u;
     state.ip = 0u;
-    if (app_s4_monitor_set_state(&monitor, &state) != APP_S4_BUDGET_EXHAUSTED ||
-        app_s4_monitor_run(&monitor, 1u) != APP_S4_BUDGET_EXHAUSTED ||
-        app_s4_monitor_get_state(&monitor, &state) != APP_S4_BUDGET_EXHAUSTED ||
+    if (reconstructed_monitor_monitor_set_state(&monitor, &state) != RECONSTRUCTED_MONITOR_BUDGET_EXHAUSTED ||
+        reconstructed_monitor_monitor_run(&monitor, 1u) != RECONSTRUCTED_MONITOR_BUDGET_EXHAUSTED ||
+        reconstructed_monitor_monitor_get_state(&monitor, &state) != RECONSTRUCTED_MONITOR_BUDGET_EXHAUSTED ||
         state.cs != 0x0100u || state.ip != 1u) goto cleanup;
     result = 0;
 

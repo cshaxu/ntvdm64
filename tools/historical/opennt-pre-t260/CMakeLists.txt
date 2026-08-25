@@ -892,9 +892,9 @@ target_link_libraries(ntdos64-opennt-original-cmdsetinfo-trace-fixture PRIVATE
 add_executable(ntdos64-opennt-reconstructed-monitor-s4-bridge-fixture EXCLUDE_FROM_ALL
     local/archived/legacy-adapters/ccpu_monitor_sm0_foundation.c
     $<TARGET_OBJECTS:ntdos64-opennt-ccpu-effective-addr-reconstruction>
-    ${CMAKE_CURRENT_SOURCE_DIR}/../reconstruction/monitor/reconstructed_monitor_s4.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../reconstruction/monitor/reconstructed_monitor.c
     local/compat/host/historical_bios_bridge_v1.c
-    local/trace/fixtures/historical_monitor_s4_bridge_fixture.c
+    local/trace/fixtures/historical_monitor_bridge_fixture.c
     $<TARGET_OBJECTS:ntdos64-opennt-register-bridge-objects>
     $<TARGET_OBJECTS:ntdos64-opennt-ccpu-ntstubs-objects>
     $<TARGET_OBJECTS:ntdos64-opennt-host-sound-objects>

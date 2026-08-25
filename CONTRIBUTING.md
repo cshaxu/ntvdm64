@@ -31,9 +31,13 @@ formal versioned executable deliverables under
 For example:
 
 ```powershell
-cmake -S . -B build/M0-T218-S1/001 -DNTDOS64_TASK_ID=M0-T218-S1
-cmake --build build/M0-T218-S1/001
+powershell.exe -ExecutionPolicy Bypass -File tools/build/New-T260S8FullNinjaGraph.ps1 `
+  -RepositoryRoot (Get-Location).Path `
+  -BuildRoot build/M0-T267-S1/r001
+ninja -C build/M0-T267-S1/r001
 ```
+
+The root CMake catalogue has been removed; it is not a supported configuration entrypoint.
 
 Do not invoke a compiler from the repository root without an explicit output
 path under `build/<task-id>/<run-id>/`; do not use `artifacts/` as a temporary build
