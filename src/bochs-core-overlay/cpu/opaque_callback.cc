@@ -5,11 +5,11 @@
 
 #include "bochs-core-overlay/cpu/opaque_callback_private.h"
 
-static bochs_core_opaque_callback_v1 callback_slot;
+static bochs_core_overlay_opaque_callback_t callback_slot;
 static void *callback_context;
 
 int bochs_core_overlay_opaque_callback_v1_bind(
-  bochs_core_opaque_callback_v1 callback, void *context)
+  bochs_core_overlay_opaque_callback_t callback, void *context)
 {
   if (callback == 0 || callback_slot != 0) return 0;
   callback_slot = callback;

@@ -83,7 +83,6 @@
         "src/bochs-core/cpu/icache.cc",
         "src/bochs-core/cpu/init.cc",
         "src/bochs-core/cpu/io.cc",
-        "src/bochs-core/cpu/opaque_callback.cc",
         "src/bochs-core-overlay/cpu/opaque_callback.cc",
         "src/bochs-core-overlay/cpu/exception_hook.cc",
         "src/bochs-core/cpu/iret.cc",
@@ -173,9 +172,9 @@
         "src/bochs-core/gui/paramtree.cc",
         "src/bochs-core/iodev/scancodes.cc",
         "src/bochs-core/iodev/pic.cc",
-        "src/bochs-core/iodev/keyboard_bridge.cc",
+        "src/bochs-core/iodev/keyboard.cc",
         "src/bochs-core-overlay/iodev/pic_lifecycle.cc",
-        "src/bochs-core-overlay/iodev/keyboard_headless.cc"
+        "src/bochs-core-overlay/iodev/keyboard_lifecycle.cc"
       ]
     },
     {

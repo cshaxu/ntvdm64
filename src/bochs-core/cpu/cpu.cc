@@ -22,6 +22,7 @@
 #define NEED_CPU_REG_SHORTCUTS 1
 #include "bochs.h"
 #include "cpu.h"
+#include "bochs-core-overlay/cpu/opaque_callback_private.h"
 #define LOG_THIS BX_CPU_THIS_PTR
 /* DIVERGENCE(BX-CORE-DIV-001,BX-CORE-DIV-003): retained segment profile and default-off instruction observation. */
 
@@ -47,6 +48,20 @@ static unsigned iCacheMisses=0;
 #define InstrICache_Stats()
 #define InstrICache_Increment(v)
 #endif
+
+/* DIVERGENCE(BX-UD-002): the adopted CPU owns this two-call transition to its
+ * private overlay; it neither decodes nor names a guest service. */
+int BX_CPU_C::overlay_bind_opaque_callback(bx_cpu_opaque_callback_t callback,
+  void *context)
+{
+  return bochs_core_overlay_opaque_callback_v1_bind(
+    (bochs_core_overlay_opaque_callback_t)callback, context);
+}
+
+void BX_CPU_C::overlay_unbind_opaque_callback(void)
+{
+  bochs_core_overlay_opaque_callback_v1_unbind();
+}
 
 void BX_CPU_C::cpu_loop(void)
 {

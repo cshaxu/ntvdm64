@@ -25,6 +25,11 @@
 /* DIVERGENCE(BX-CORE-DIV-001,BX-CORE-DIV-003,BX-EXEC-016): retained profile,
  * observation and typed mechanical-entry declarations. */
 
+/* DIVERGENCE(BX-UD-002): selector-blind fixed-width callback shape.  The
+ * registered state and all record handling remain private to the overlay. */
+typedef int (*bx_cpu_opaque_callback_t)(void *context, const void *event,
+  unsigned event_bytes, void *outcome, unsigned outcome_bytes);
+
 #include <setjmp.h>
 
 #ifndef RUNTIME_ENABLE_MANTLE_PHYSICAL_WRITE_OBSERVATION
@@ -931,6 +936,9 @@ public: // for now...
   /* DIVERGENCE(BX-UD-002): one private overlay exception hook.  The mirror
    * supplies no event fields, provider identity or guest-service meaning. */
   int overlay_handle_exception(unsigned vector, Bit16u error_code);
+  int overlay_bind_opaque_callback(bx_cpu_opaque_callback_t callback,
+    void *context);
+  void overlay_unbind_opaque_callback(void);
 
   void overlay_observe_segment_access(unsigned segment_index,
     const bx_segment_reg_t *segment, Bit32u offset, Bit32u branch_kind);

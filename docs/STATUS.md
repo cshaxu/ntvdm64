@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T265 S5 — opennt-host mirror/overlay convergence.** S5 implementation and closure evidence are complete; this remains the current governed packet until its verified closure commit is recorded.
+**Active: M0 T265 S6 — bochs-core bridge-file retirement.** Retire the four self-authored bridge files that were incorrectly retained inside the Bochs mirror, without changing admitted machine behavior.
 
 ## Active Packet
 
@@ -135,6 +135,27 @@ component directly includes `bochs-core-overlay`.
 | Similar-Issue Sweep | Original path identity, cropped product-shell blocks, header locations, adapter boundaries, link names, direct Bochs access and false source-derived providers. |
 **S5 closure:** seven host files remain byte-identical OpenNT sources; four are registered source-shaped subsets/minimal edits. Three previously oversized NT4 product-binding declaration blocks are now private `opennt-host-overlay` fragments, with no external consumer. Formal Ninja compiled the changed host objects and `t263-s8-opennt-host-mirror-fixture.exe` linked and exited zero. See the [S5 audit](etc/evidence/m0-t265-s5-opennt-host-overlay-audit-001.md).
 
+### M0 T265 S6 — bochs-core bridge-file retirement
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T265 S6`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner: “加一个S任务做好这一条”, after reviewing the four self-authored bridge files retained in `bochs-core`. |
+| Objective | Retire `cpu/opaque_callback.{h,cc}` and `iodev/keyboard_bridge.{h,cc}` from the Bochs mirror. Preserve their required minimal mechanical boundary only in existing pinned-Bochs paths; keep all self-authored state and bodies private to `bochs-core-overlay`. |
+| Non-goals | No new #UD/BOP/device behavior, no CPU or keyboard semantic expansion, no public overlay API, and no adapter/OpenNT vocabulary in `bochs-core`. |
+| Reference Baseline | Pinned `O:\repos.external\bochs-2.6-compat\bochs-2.6`, T265/S4 overlay audit, T265/S3 keyboard provenance ledger, and the T265 proposal S6. |
+| Files And ABI Surface | The four retiring bridge files; their smallest existing Bochs-file replacement boundaries; overlay-private bodies; `adapter-bochs` facade/include consumers; formal manifest and focused fixtures. |
+| Applicable Rules | Mirror component review standard; native-mirror-only overlay rule; `adapter-bochs` as sole production caller of `bochs-core`; Bochs-only vocabulary; no behavior expansion. |
+| Verification | Baseline file-presence scan proves no non-upstream production `.c/.cc/.h` remains under `bochs-core`; include/link scan proves overlay privacy and no external core consumer; changed-object Ninja build plus opaque-ingress and headless-8042 fixtures; governance and `git diff --check`. |
+| Expected Markers | The two bridge pairs are absent; callback registration and keyboard headless boundary are represented only by registered, minimal `DIVERGENCE:` points in original Bochs paths; overlay owns self-authored implementation. |
+| Asset Needs | Existing pinned Bochs baseline and existing source/fixture inputs only; no import or new product capability. |
+| Reporting Requirements | Report the exact destination original paths, each retained core hunk, deleted bridge paths, resulting non-upstream-file count, source/README exception updates, and focused verification. |
+| Stop Conditions | A replacement needs more than a minimal core boundary, makes the overlay externally callable, requires a new non-Bochs file in `bochs-core`, or changes a reached machine result. |
+| Exit Criteria | All four self-authored bridge files are removed; the production mirror contains only upstream-relative source names; retained boundaries are locally marked and README-registered; focused build/fixtures and governance checks pass. |
+| Original Owner Request | “overlay 的目的就是为了压缩 diff… opaque_callback, keyboard_bridge… 我觉得有点过分” and “加一个S任务做好这一条”. |
+| Similar-Issue Sweep | Every file under `bochs-core` absent from the pinned tree, bridge-named public headers, direct overlay consumers, manifest entries, README exception paths, and newly expanded original-file diffs. |
+
+**S6 closure:** `bochs-core` no longer contains self-authored bridge source files. The formal Ninja `bochs-core` and `adapter-bochs` libraries build; opaque BOP ingress and the corrected two-round native 8042 lifecycle fixture exit zero. See the [S6 evidence](etc/evidence/m0-t265-s6-bochs-core-bridge-file-retirement-001.md).
 ### M0 T264 S1 — project code filename inventory
 
 | Field | Record |

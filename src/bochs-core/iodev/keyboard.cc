@@ -57,26 +57,25 @@
 
 bx_keyb_c *theKeyboard = NULL;
 
-/* BX-MACH-027: private implementation called only by keyboard_bridge.cc. */
-bx_bool bochs_core_overlay_keyboard_headless_create(void)
+/* DIVERGENCE(BX-MACH-027): preserve the upstream plugin entry shape while
+ * routing its non-product headless lifecycle to the private overlay. */
+extern bx_bool bochs_core_overlay_keyboard_headless_destroy(void);
+
+int libkeyboard_LTX_plugin_init(plugin_t *plugin, plugintype_t type, int argc,
+  char *argv[])
 {
   if (theKeyboard != NULL || bx_devices.pluginKeyboard != &bx_devices.stubKeyboard)
-    return 0;
+    return 1;
   theKeyboard = new bx_keyb_c();
-  if (theKeyboard == NULL) return 0;
+  if (theKeyboard == NULL) return 1;
   bx_devices.pluginKeyboard = theKeyboard;
   theKeyboard->init();
-  return 1;
+  return 0;
 }
 
-bx_bool bochs_core_overlay_keyboard_headless_destroy(void)
+void libkeyboard_LTX_plugin_fini(void)
 {
-  if (theKeyboard == NULL || bx_devices.pluginKeyboard != theKeyboard) return 0;
-  if (!theKeyboard->fini()) return 0;
-  delete theKeyboard;
-  theKeyboard = NULL;
-  bx_devices.pluginKeyboard = &bx_devices.stubKeyboard;
-  return 1;
+  (void)bochs_core_overlay_keyboard_headless_destroy();
 }
 
 bx_keyb_c::bx_keyb_c()
@@ -207,25 +206,6 @@ void bx_keyb_c::init(void)
   // GUI LEDs, CMOS publication, default mouse attachment, paste injection
   // and SIM runtime parameters are Bochs product-shell facilities.  They are
   // intentionally not part of the selector-blind native machine.
-}
-
-/* BX-MANTLE-091: the headless factory owns the four port registrations and
- * one controller timer made by init().  Upstream product teardown normally
- * supplies this work through its broader device shell; keep the same native
- * unregister primitives local to the adopted controller before destruction. */
-bx_bool bx_keyb_c::fini(void)
-{
-  bx_bool ok = 1;
-  if (BX_KEY_THIS timer_handle != BX_NULL_TIMER_HANDLE) {
-    bx_pc_system.deactivate_timer((unsigned) BX_KEY_THIS timer_handle);
-    ok = bx_pc_system.unregisterTimer((unsigned) BX_KEY_THIS timer_handle) && ok;
-    BX_KEY_THIS timer_handle = BX_NULL_TIMER_HANDLE;
-  }
-  ok = bx_devices.unregister_io_read_handler(this, read_handler, 0x0060, 1) && ok;
-  ok = bx_devices.unregister_io_read_handler(this, read_handler, 0x0064, 1) && ok;
-  ok = bx_devices.unregister_io_write_handler(this, write_handler, 0x0060, 1) && ok;
-  ok = bx_devices.unregister_io_write_handler(this, write_handler, 0x0064, 1) && ok;
-  return ok;
 }
 
 void bx_keyb_c::reset(unsigned type)

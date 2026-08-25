@@ -44,7 +44,7 @@ authorize additional Bochs semantics.
 | `BX-CORE-DIV-002` | Default-off copied segment-access observation around the retained access checks. | `cpu/access32.cc` |
 | `BX-CORE-DIV-003` | Default-off copied instruction, software-interrupt and physical-write observations. | `cpu/cpu.cc`, `cpu/cpu.h`, `cpu/instr.h`, `cpu/soft_int.cc`, `memory/memory.cc` |
 | `BX-CORE-DIV-004` | Default-off copied interrupt-return observation. | `cpu/ctrl_xfer16.cc`, `cpu/ctrl_xfer32.cc` |
-| `BX-UD-001`, `BX-UD-002` | `exception.cc` retains one selector-blind private-overlay member call; copied record construction, validation and result application live in the private overlay. | `cpu/exception.cc`, `cpu/cpu.h`, `cpu/opaque_callback.{h,cc}` |
+| `BX-UD-001`, `BX-UD-002` | `exception.cc` retains one selector-blind private-overlay member call; copied record construction, validation and result application live in the private overlay. | `cpu/exception.cc`, `cpu/cpu.{h,cc}` |
 | `BX-EXEC-016` | One constructor call and typed declarations only; private overlay owns real-mode profile initialization, entry setters and fetch invalidation. | `cpu/init.cc`, `cpu/cpu.h`, `../bochs-core-overlay/cpu/realmode_profile.cc` |
 | `BX-BUILD-002` | Re-rooted FPU include spelling only; no declaration or behavior change. | `cpu/i387.h` |
 | `BX-BUILD-002` | MSVC token-separation spelling for the original `FMT_LL` hex format; no format or runtime behavior change. | `gui/paramtree.cc` |
@@ -52,7 +52,7 @@ authorize additional Bochs semantics.
 | `BX-MACH-024` | One-call PIC teardown boundary delegates finite port unregistration to the private `bochs-core-overlay`; no non-core component imports the overlay. | `iodev/pic.h`, `iodev/pic.cc` |
 | `BX-MACH-025` | True-subset PIC destructor omits removal of a product-tree node that this finite composition never creates. | `iodev/pic.cc` |
 | `BX-MACH-026` | True-subset PIC mirror omits unreachable plugin-registration entry points; minimal Bochs assembly owns the one fixed PIC instance. | `iodev/pic.cc` |
-| `BX-MACH-027` | The same-shaped original keyboard class declaration retains a core-owned two-call bridge to the private headless overlay because the original plugin/SIM/GUI product shell is not composed. | `iodev/keyboard.h`, `iodev/keyboard_bridge.cc` |
+| `BX-MACH-027` | The same-shaped original keyboard plugin lifecycle retains direct creation in `keyboard.cc`; its non-product teardown body is private to the overlay because the original plugin/SIM/GUI product shell is not composed. | `iodev/keyboard.{cc,h}`, `../bochs-core-overlay/iodev/keyboard_lifecycle.cc` |
 | `BX-MEM-007`, `BX-MEM-010`, `BX-MEM-020`, `BX-CORE-DIV-006` | Checked ordinary/backing-RAM copy/read/preflight declarations; private overlay owns all bodies. | `memory/memory.h`, `../bochs-core-overlay/memory/checked_ram.cc` |
 | `BX-MEM-024` | SIM-free reset-window memory declaration and minimal-machine friendship; private overlay owns the allocation body. | `memory/memory.h`, `../bochs-core-overlay/memory/minimal_memory.cc` |
 

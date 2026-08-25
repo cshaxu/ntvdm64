@@ -55,7 +55,6 @@ BX_CPU_C::BX_CPU_C(unsigned id): bx_cpuid(id)
 #endif
 }
 
-
 #if BX_WITH_WX
 
 #define IF_SEG_REG_GET(x) \

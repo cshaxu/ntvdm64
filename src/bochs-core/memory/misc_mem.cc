@@ -153,7 +153,6 @@ void BX_MEM_C::init_memory(Bit64u guest, Bit64u host)
   BX_MEM_THIS register_state();
 }
 
-
 #if BX_LARGE_RAMFILE
 void BX_MEM_C::read_block(Bit32u block)
 {

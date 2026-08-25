@@ -45,6 +45,7 @@ const char* iofunctions::getlevel(int i) const
   if (i>=0 && i<N_LOGLEV) return loglevel[i];
   else return "?";
 }
+
 const char* iofunctions::getaction(int i) const
 {
   static const char *name[] = { "ignore", "report", "ask", "fatal" };
