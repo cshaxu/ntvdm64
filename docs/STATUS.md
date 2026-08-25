@@ -36,6 +36,13 @@ fixture passes; a fresh formal graph compiled the moved overlay object, but
 full Ninja completion remains pending after a disposable archive lock and
 execution-environment termination. See
 [P1 evidence](etc/evidence/m0-t270-s1-p1-bochs-port-space-owner-rehome-001.md).
+
+**S1 P2 checkpoint:** normalized comparison against the pinned Bochs 2.6
+baseline finds 177 exact and 28 registered changed production files; no
+external overlay consumer or imported Bochs source body remains in
+`adapter-bochs`.  The per-file disposition and compression decision are in
+[P2 evidence](etc/evidence/m0-t270-s1-p2-bochs-mirror-disposition-ledger-001.md).
+Full formal Ninja completion remains a closure requirement.
 ## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition
