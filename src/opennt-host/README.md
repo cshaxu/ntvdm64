@@ -34,7 +34,7 @@ departure from an identified OpenNT definition marked in code as
 
 | ID | Original definition purpose | Divergence reason | Replacement implementation | Production file(s) |
 | --- | --- | --- | --- | --- |
-| `HOST-DIV-012` | `nt_error.c` uses the NTVDM product's `TlsDirectError` slot to suppress repeated direct-access warnings per thread. | The standalone session has no NT4 product TLS initialization. | The public-Win32 dialog facade owns the session-resettable per-thread category state; `nt_error.c` keeps the original decision point and `VOID` result. | `softpc.new/host/src/nt_error.c`, `adapter-win32/facade/opennt_error_dialog_facade.c` |
+| `HOST-DIV-012` | `nt_error.c` uses the NTVDM product's `TlsDirectError` slot to suppress repeated direct-access warnings per thread. | The standalone session has no NT4 product TLS initialization. | The public-Win32 dialog facade owns the session-resettable per-thread category state; the `opennt-host` entry preserves the original `VOID` ABI and invokes its private overlay body. | `softpc.new/host/src/nt_error.c`, `../opennt-host-overlay/softpc.new/host/src/nt_error.c`, `adapter-win32/facade/opennt_error_dialog_facade.c` |
 | `HOST-DIV-013` | `nt_error.c` shifts a direct-access category into that bitset. | An arbitrary modern guest AX must not invoke an undefined C shift. | Preserve the original 0..6 result and leave other categories observable without a bitset index, inside the state-owning facade. | `softpc.new/host/src/nt_error.c`, `adapter-win32/facade/opennt_error_dialog_facade.c` |
 | `HOST-DIV-014` | `nt_error.c` formats its prompt from private `ntvdm.exe` resources. | The NT4 resource table is not an unpack-and-run input. | Preserve the original two-`LoadString`/`sprintf` control flow through a public-Win32 resource façade supplying the reached original `D_A_*` strings; the historically absent `D_A_OLDPIF` retains the original fallback result. | `softpc.new/host/src/nt_error.c`, `adapter-win32/facade/opennt_error_dialog_facade.c` |
 | `HOST-DIV-026` | `nt_error.c` transports a `DWORD` direct-access category bit mask through `LPVOID` with 32-bit casts. | Those casts truncate or warn under the supported x64 build. | Use `ULONG_PTR` only at the two transport casts; the original `DWORD` mask and decision ordering remain unchanged. | `softpc.new/host/src/nt_error.c` |
@@ -64,6 +64,6 @@ now live in `opennt-host-overlay`, which has no external consumer.
 
 | IDs | Private overlay fragment | Mirror boundary |
 | --- | --- | --- |
-| `HOST-DIV-012`, `HOST-DIV-014` | `../opennt-host-overlay/softpc.new/host/src/nt_error_bindings.h` | `softpc.new/host/src/nt_error.c` |
-| `HOST-DIV-017` | `../opennt-host-overlay/vdmredir/vrinit_bindings.h` | `vdmredir/vrinit.c` |
-| `HOST-DIV-024`, `HOST-DIV-025` | `../opennt-host-overlay/vdmredir/vrnmpipe_product_seams.h` | `vdmredir/vrnmpipe.c` |
+| `HOST-DIV-012`, `HOST-DIV-013`, `HOST-DIV-014`, `HOST-DIV-026`, `HOST-DIV-027` | `../opennt-host-overlay/softpc.new/host/src/{nt_error.c,nt_error_bindings.h}` | `softpc.new/host/src/nt_error.c` |
+| `HOST-DIV-017`, `HOST-DIV-022` | `../opennt-host-overlay/vdmredir/{vrinit.c,vrinit_bindings.h}` | `vdmredir/vrinit.c` |
+| `HOST-DIV-015`, `HOST-DIV-016`, `HOST-DIV-020`, `HOST-DIV-023`, `HOST-DIV-024`, `HOST-DIV-025`, `HOST-DIV-028` | `../opennt-host-overlay/vdmredir/{vrnmpipe.c,vrnmpipe_product_seams.h}` | `vdmredir/vrnmpipe.c` |
