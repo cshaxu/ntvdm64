@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T269 S3 — OpenNT-host PIF owner-edge recovery.** Establish and repair the sole direct cross-component OpenNT source inclusion without changing the original PIF parser's public source identity or reached behavior.
+**Active: M0 T269 S4 — OpenNT-host final mirror/overlay closure.** Reconcile final production ownership, source identity, private-overlay reachability and focused route/build evidence before closing the host-convergence task.
 
 ## Active Packet
 
-### M0 T269 S3 — OpenNT-host PIF owner-edge recovery
+### M0 T269 S4 — OpenNT-host final mirror/overlay closure
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T269 S3`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | Owner-approved T269; S1 identifies `opennt-bop/command/opennt_pif_composition.c` directly including the exact `opennt-host/.../nt_pif.c` body. |
-| Objective | Give the original `nt_pif.c` parser exactly one component owner and one non-textual composition boundary while preserving its original names, layout, caller contract and reached parser behavior. |
-| Non-goals | No PIF feature expansion, no parser rewrite, no duplicate mirror body, no change to PIF failure rules, no BOP endpoint expansion and no unrelated host/COMMAND migration. |
-| Scope | `opennt-host/softpc.new/host/src/nt_pif.c`, its selected includes, `opennt-bop/command/opennt_pif_composition.*`, manifest/link edges, README registers, focused parser fixture and source/ABI evidence. |
-| Verification | Source/ABI map of the present direct inclusion; exact-original hash after any owner move; one implementation body; source/include scan proving no cross-component `.c` include; formal host/BOP link plus PIF fixture; governance and diff checks. |
-| Exit Criteria | The original parser has one declared owner, its consumer uses a declared function/interface boundary rather than a relative `.c` include, no duplicate production parser body remains, and focused reached behavior is unchanged. |
-| Reference Baseline | T269/S1 evidence, the exact selected OpenNT `softpc.new/host/src/nt_pif.c`, current PIF composition/divergence register and existing parser fixtures. |
-| Files And ABI Surface | Original parser owner path, PIF composition adapter/binding, build manifest and README/evidence; public behavior is unchanged. |
-| Applicable Rules | Source-first ladder, mirror source identity, component ownership, overlay privacy, OpenNT-shaped interface rule, formal build hygiene and documentation governance. |
-| Expected Markers | One exact original parser path, no `#include` of a cross-component `.c` file, documented PIF data-layout adaptation and passing parser fixture. |
-| Asset Needs | Current checkout, selected local OpenNT revision, formal Ninja graph and current PIF fixtures. |
-| Reporting Requirements | State original source identity, current versus target call shape, data-layout boundary, rejected alternatives, exact source ownership and focused result. |
-| Stop Conditions | The required boundary would rename/rewrite the original parser, needs a new unapproved public ABI, changes parser result/failure behavior, or makes a private overlay externally callable. |
-| Similar-Issue Sweep | All cross-component `.c` includes, PIF data-layout definitions, host/BOP source lists, exact body hashes, parser fixture link edges and README exception rows. |
+| Identifier Mode | `M0 T269 S4`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner-approved T269; S1--S3 have completed the source baseline, marker/register repair and sole PIF owner-edge transfer. |
+| Objective | Prove the final `opennt-host` production tree contains only compliant OpenNT mirror material plus private overlay bindings, with complete source/register/consumer/build evidence. |
+| Non-goals | No new host/BOP ability, no new original package import, no expansion of the synchronous Redirector provider, no repair of unrelated COMMAND lifecycle tests and no runtime completion claim. |
+| Scope | Final `opennt-host` and `opennt-host-overlay` tree, host/BOP owner boundary scan, READMEs, proposal, evidence, formal Ninja manifest/current build root and focused fixtures. |
+| Verification | Recompute full file baseline/disposition, source-marker/README reconciliation, direct overlay consumer scan, cross-component C-body scan, formal Ninja no-work dry-run, focused host and PIF fixtures, governance and diff checks. |
+| Exit Criteria | Every host production unit is exact, registered subset/same-shaped modification or private overlay; no unowned source body/cross-component C include/external overlay consumer remains; current focused checks pass and T269 closure evidence is complete. |
+| Reference Baseline | T269/S1--S3 evidence, selected OpenNT revision, host/BOP/overlay READMEs, component manifest and T269 proposal. |
+| Files And ABI Surface | Verification evidence and governance records only unless a scan exposes a pre-existing ownership violation; no planned public ABI change. |
+| Applicable Rules | Mirror-component standard, component/overlay ownership, source policy, execution/build hygiene and documentation governance. |
+| Expected Markers | Ten source units with a unique disposition, three private overlay fragments with no external consumer, no cross-component C body include and formal current build closure. |
+| Asset Needs | Current checkout, selected local OpenNT tree, formal T269 build roots and focused fixtures. |
+| Reporting Requirements | State exact counts/dispositions, all permitted exceptions, focused test outcomes, separate unrelated limitation and final task follow-up. |
+| Stop Conditions | A unregistered changed body, source hash mismatch, private overlay external consumer, remaining C-body cross edge, or required semantic change. |
+| Similar-Issue Sweep | Host headers/sources, overlay bindings, BOP PIF boundary, build manifest, target library graph, source/include paths, README register and prior evidence claims. |
 | Original Owner Request | “单人模式实施opennt-host组件合规化。” |
 
 **S1 closure:** all eleven OpenNT host units have a selected revision/path/hash
@@ -38,6 +38,12 @@ the separately identified `nt_pif.c` cross-component textual inclusion. See
 markers and corresponding README entries. The formal graph rebuilt 486/486,
 the host mirror fixture passed, and the repaired Ninja cache reports no
 incremental work. See [S2 closure evidence](etc/evidence/m0-t269-s2-opennt-host-marker-boundary-closure-001.md).
+
+**S3 closure:** exact `nt_pif.c` moved to its sole COMMAND/BOP owner, removing
+the cross-component source-body include without creating a new PIF ABI. The
+direct PIF and host fixtures passed after a 486/486 formal build; the separate
+COMMAND lifecycle fixture did not progress and is recorded as non-S3 evidence.
+See [S3 owner-edge evidence](etc/evidence/m0-t269-s3-opennt-host-pif-owner-edge-001.md).
 ## Closed Packet Archive
 
 ### M0 T266 S1 — repository-local `refs` consumer inventory and disposition

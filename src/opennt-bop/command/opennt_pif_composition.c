@@ -33,7 +33,7 @@
 /* DIVERGENCE(BOP-DIV-032): the original parser remains compiled verbatim,
  * but its directly composed source now lives in this owner-family production
  * closure rather than the removed NT4 global source tree. */
-#include "../../opennt-host/softpc.new/host/src/nt_pif.c"
+#include "../softpc.new/host/src/nt_pif.c"
 #pragma warning(pop)
 #undef ch_malloc
 #undef RcMessageBox

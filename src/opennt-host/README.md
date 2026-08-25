@@ -51,8 +51,11 @@ departure from an identified OpenNT definition marked in code as
 | `HOST-DIV-025` | `vrnmpipe.c` obtains a small set of path/allocation/assertion manifests from broad NT4 CCPU/VDM product headers. | Those headers would import unconnected guest-pointer, asynchronous Redirector and CCPU contracts into a synchronous host provider. | Retain only the exact pure manifests used by the reached named-pipe bodies, locally and visibly, rather than supplying empty product APIs. | `vdmredir/vrnmpipe.c` |
 | `HOST-DIV-028` | `vrnmpipe.c` contains named-pipe state/transact/call/wait services and asynchronous I/O, interrupt, termination and cancellation machinery. | The current host provider has only the independent synchronous open/read/write/path/list route; the omitted services require separate Redirector/VDD lifecycle admission. | Retain the complete synchronous block and leave omitted BOP entry disposition to `opennt-bop`; do not provide local success stubs. | `vdmredir/vrnmpipe.c` |
 
-The pre-T260 PIF original and other uncompiled historical inputs are evidence,
-not a second provider. They reside under `docs/etc/legacy_code/opennt-host/`.
+The exact OpenNT `nt_pif.c` parser was transferred to
+`opennt-bop/softpc.new/host/src/` by T269/S3 because its only current consumer
+is the COMMAND PIF translation unit and its historical `PIF_DATA` layout is
+not an independently composable host ABI. The source body remains byte-for-byte
+original; the transfer removes the former cross-component `.c` inclusion.
 ## T265 S5 private-overlay disposition
 
 The following registered exceptions retain only a one-include boundary in the
