@@ -279,6 +279,24 @@ formal DEM source-path rebuild and execution pass. Those seven headers and
 the remaining app-held selector/service composition are still active owner
 recovery work; this is not S5 closure.
 
+**S5 P16:** the two DEM root compatibility headers with no remaining app
+consumer now also live under the matching private overlay.  `DemInit` retains
+its original allocation/GetSystemDirectory flow through a same-shaped
+adapter-win32 facade, so app no longer writes the imported DEM global.  The
+root residual set is now five cross-component headers (COMMAND, XMS and
+VDMREDIR); focused formal DEM fixture rebuild and execution pass.  Tests that
+still include private overlay declarations remain an active boundary-removal
+item, so this is not S5 closure.
+
+**S5 P16:** the two DEM root compatibility headers with no remaining app
+consumer now also live under the matching private overlay.  `DemInit` retains
+its original allocation/GetSystemDirectory flow through a same-shaped
+adapter-win32 facade, so app no longer writes the imported DEM global.  The
+root residual set is now five cross-component headers (COMMAND, XMS and
+VDMREDIR); focused formal DEM fixture rebuild and execution pass.  Tests that
+still include private overlay declarations remain an active boundary-removal
+item, so this is not S5 closure.
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

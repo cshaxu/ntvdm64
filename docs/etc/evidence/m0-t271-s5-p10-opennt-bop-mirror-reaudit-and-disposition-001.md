@@ -145,8 +145,12 @@ only as registered private boundaries; focused direct-import fixtures use them
 only to compile the matching mirror source. A formal Ninja rebuild and
 execution of the DEM native-session and direct-dispatch fixtures passed.
 
-The residual mirror-root set is seven cross-component headers: COMMAND
-composition/PIF, DEM DASD/misc compatibility, VDMREDIR dispatch/mailslot
-compatibility and XMS compatibility. They cannot be moved privately because
-current production `app` code includes them. Their required disposition is API
-ownership recovery, not another path-only move.
+The residual mirror-root set was initially seven cross-component headers:
+COMMAND composition/PIF, DEM DASD/misc compatibility, VDMREDIR
+dispatch/mailslot compatibility and XMS compatibility.  P16 removed the two
+DEM entries after proving that `app` did not need the DASD surface and could
+bind `DemInit`'s original system-directory call through the same-shaped
+adapter-win32 facade.  The current residual set is five headers: COMMAND
+composition/PIF, VDMREDIR dispatch/mailslot compatibility and XMS
+compatibility.  Their required disposition is API ownership recovery, not
+another path-only move.

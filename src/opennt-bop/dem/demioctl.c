@@ -10,7 +10,7 @@
 
 /* DIVERGENCE(BOP-DIV-092): direct import from src/opennt/base/mvdm/dos/dem/demioctl.c;
  * the historical DEM/SoftPC include closure is supplied by the declared ABI seam. */
-#include "opennt_demdasd_ioctl_compat.h"
+#include "opennt-bop-overlay/dem/opennt_demdasd_ioctl_compat.h"
 
 PFNSVC	apfnSVCIoctl [] = {
     demIoctlInvalid,		// IOCTL_GET_DEVICE_INFO    0

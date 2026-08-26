@@ -8,7 +8,15 @@
 #include <stdlib.h>
 #include <windows.h>
 
-#include "opennt-bop/dem/opennt_demmisc_compat.h"
+#include "adapter-win32/facade/opennt_command_oem_facade.h"
+#include "opennt-bop-overlay/dem/opennt_demmisc_compat.h"
+
+/* DIVERGENCE(BOP-DIV-092): retain DemInit's original spelling while binding
+ * its historical installed-system directory through the same-shaped public
+ * Win32 facade. */
+#undef GetSystemDirectory
+#define GetSystemDirectory(buffer, bytes) \
+    runtime_opennt_system_directory((buffer), (bytes))
 
 /* OpenNT's DEM sources were compiled with their DBG surface available: other
  * directly imported owners call demPrintMsg unconditionally.  The current

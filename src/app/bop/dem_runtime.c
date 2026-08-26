@@ -1,10 +1,14 @@
 #include "dem_runtime.h"
 #include "app/bop/dem_host_session.h"
-#include "opennt-bop/dem/opennt_demdasd_ioctl_compat.h"
 #include "app/bop/dem_session.h"
 #include "app/bop/redir_native_session.h"
 
 #include <string.h>
+
+/* Original OpenNT DEM initialization entry. The imported source body keeps
+ * directory allocation and command-line ordering; its system-directory call
+ * is bound through adapter-win32 before this session is installed. */
+BOOL DemInit(int argc, char *argv[]);
 
 typedef struct runtime_dem_runtime_session {
     runtime_dem_direct_host_session host;
@@ -28,7 +32,8 @@ void runtime_dem_runtime_session_reset(void)
 int runtime_dem_runtime_session_bind(void)
 {
     runtime_dem_runtime_session_reset();
-    if (!runtime_dem_direct_host_session_initialize(&runtime.host) ||
+    if (!DemInit(0, NULL) ||
+        !runtime_dem_direct_host_session_initialize(&runtime.host) ||
         !runtime_dem_native_session_initialize(&runtime.native,
             runtime_dem_direct_host_session_context(&runtime.host),
             &runtime.host, runtime_dem_direct_host_session_guest_read,

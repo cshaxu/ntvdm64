@@ -8,6 +8,11 @@ DWORD GetEnvironmentVariableOem(LPSTR name, LPSTR buffer, DWORD bytes);
 BOOL SetEnvironmentVariableOem(LPSTR name, LPSTR value);
 UINT runtime_command_misc_get_system_directory(LPSTR buffer, UINT bytes);
 void runtime_command_misc_set_test_system_directory(const CHAR *path);
+/* Same-shaped system-directory compatibility is shared by imported DEM and
+ * COMMAND initialization.  The session/app composition may set an admitted
+ * bundle directory; callers retain the original GetSystemDirectory contract. */
+UINT runtime_opennt_system_directory(LPSTR buffer, UINT bytes);
+void runtime_opennt_set_system_directory(const CHAR *path);
 DWORD runtime_opennt_command_environment_variable(LPSTR name, LPSTR buffer,
     DWORD bytes);
 BOOL runtime_opennt_console_keyboard_layout_name(LPSTR name);

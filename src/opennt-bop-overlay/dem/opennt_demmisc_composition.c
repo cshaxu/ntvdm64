@@ -1,4 +1,4 @@
-#include "opennt-bop/dem/opennt_demmisc_compat.h"
+#include "opennt-bop-overlay/dem/opennt_demmisc_compat.h"
 #include "opennt-bop-overlay/dem/opennt_demfile_compat.h"
 
 /* The imported owner redirects ReadFile to the checked loader bridge.  This

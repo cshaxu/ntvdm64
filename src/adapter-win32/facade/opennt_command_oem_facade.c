@@ -35,7 +35,7 @@ BOOL SetEnvironmentVariableOem(LPSTR name, LPSTR value)
     return SetEnvironmentVariableA(ansi_name, ansi_value);
 }
 
-UINT runtime_command_misc_get_system_directory(LPSTR buffer, UINT bytes)
+UINT runtime_opennt_system_directory(LPSTR buffer, UINT bytes)
 {
     if (test_system_directory[0] != '\0') {
         size_t length = strlen(test_system_directory);
@@ -47,11 +47,21 @@ UINT runtime_command_misc_get_system_directory(LPSTR buffer, UINT bytes)
     return GetSystemDirectoryA(buffer, bytes);
 }
 
-void runtime_command_misc_set_test_system_directory(const CHAR *path)
+void runtime_opennt_set_system_directory(const CHAR *path)
 {
     if (path == NULL) { test_system_directory[0] = '\0'; return; }
     strncpy(test_system_directory, path, MAX_PATH);
     test_system_directory[MAX_PATH] = '\0';
+}
+
+UINT runtime_command_misc_get_system_directory(LPSTR buffer, UINT bytes)
+{
+    return runtime_opennt_system_directory(buffer, bytes);
+}
+
+void runtime_command_misc_set_test_system_directory(const CHAR *path)
+{
+    runtime_opennt_set_system_directory(path);
 }
 
 /* DIVERGENCE(WIN32-DIV-010): NT4 exposed hidden `=X:` drive-directory

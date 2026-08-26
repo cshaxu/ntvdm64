@@ -8,7 +8,7 @@
 
 /* DIVERGENCE(BOP-DIV-092): direct import from src/opennt/base/mvdm/dos/dem/demdasd.c.  Its original
  * SoftPC/SAS/raw-device headers are supplied only as named ABI seams. */
-#include "opennt_demdasd_ioctl_compat.h"
+#include "opennt-bop-overlay/dem/opennt_demdasd_ioctl_compat.h"
 
 PBDS	demBDS;
 BYTE	NumberOfFloppy;

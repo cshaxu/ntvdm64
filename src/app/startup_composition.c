@@ -1,7 +1,7 @@
 #include "startup_composition.h"
 
 #include "adapter-softpc/spckbd_handoff_shim.h"
-#include "opennt-bop/dem/opennt_demmisc_compat.h"
+#include "adapter-win32/facade/opennt_command_oem_facade.h"
 #include "byob_image.h"
 #include "byob_launch_plan.h"
 #include "byob_profile.h"
@@ -59,10 +59,11 @@ static int configure_opennt_dos_directory(const wchar_t *root,
         free(oem);
         return 0;
     }
-    /* Divergence from OpenNT dem.c: DemInit uses the installed Windows system
-     * directory. The unpack-and-run CLI maps that role to sibling dos\. */
-    free(pszDefaultDOSDirectory);
-    pszDefaultDOSDirectory = oem;
+    /* The imported DemInit still performs its original allocation and
+     * GetSystemDirectory call. The same-shaped facade supplies the admitted
+     * bundle directory, so app does not write a DEM source global. */
+    runtime_opennt_set_system_directory(oem);
+    free(oem);
     return 1;
 }
 
@@ -119,8 +120,7 @@ void runtime_dem_startup_reset(void)
     runtime_initial_state_clear(&runtime.initial_state);
     runtime_spckbd_handoff_reset();
     memset(&runtime, 0, sizeof(runtime));
-    free(pszDefaultDOSDirectory);
-    pszDefaultDOSDirectory = NULL;
+    runtime_opennt_set_system_directory(NULL);
 }
 
 int runtime_dem_startup_install(const uint16_t *profile_input,
