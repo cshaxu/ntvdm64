@@ -190,11 +190,19 @@ audits W2 `softpc.new` under the same source-first constraints.
 
 **T276 S12 P1:** all 998 selected `softpc.new` paths now have a provisional
 original-subpackage disposition. The baseline isolates 489 historical machine
-execution/device paths as Bochs-replacement exclusions, 59 `host/src`
-host-control candidates, 156 `base/inc` machine declaration inputs, 58
+execution/device paths as Bochs-replacement exclusions, 59 `host/src` mixed
+control/device candidates, 156 `base/inc` machine declaration inputs, 58
 firmware/ROM/data inputs and separate debugger/tool/Unix/composition inputs.
 This is a boundary ledger only: no original machine/host source, adapter ABI
 or build edge is enabled. See [T276 S12 SoftPC baseline](etc/operations/m0-t276-s12-softpc-disposition-baseline-001.md).
+
+**T276 S12 P2:** the 56 original `softpc.new/host/src` source units are now
+split by boundary rather than treated as one recoverable library: one BOP
+dispatcher, ten SoftPC/SAS facade units, five monitor/reset/event units, one
+session/worker unit, nine Win32 host-capability units, two VDD/debugger units,
+18 device bridges and ten literal-build-unobserved auxiliaries. No source or
+adapter becomes enabled; the next slice audits complete owner groups at the
+function/interface level. See [T276 S12 host/src baseline](etc/operations/m0-t276-s12-host-src-disposition-baseline-001.md).
 
 ### M0 T275 S1 — Complete interface and reuse ledger
 
