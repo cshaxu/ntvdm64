@@ -215,6 +215,11 @@ tests, and `opennt-bop/ingress` is gone. Nine focused residual fixtures pass.
 The final mirror/compatibility/overlay ledger audit remains active; this is not
 yet S5 closure. See [S5 P5 extraction](etc/evidence/m0-t271-s5-p5-mirror-root-ingress-removal-001.md).
 
+**S5 P6:** the root-level CCPU/SAS header was only a redundant alias of the
+existing DEM source facade. It is removed; focused formal Redirector rebuild
+and regression pass. The family-local compatibility/overlay ledger review
+continues. See [S5 P6 audit](etc/evidence/m0-t271-s5-p6-redundant-ccpu-sas-alias-removal-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

@@ -588,7 +588,7 @@ int runtime_redir_native_session_invoke_scoped_body(
     runtime_exception_event boundary;
     runtime_cpu_state cpu;
     runtime_cpu_result result;
-    runtime_ccpu_sas_call call;
+    runtime_demhndl_call call;
 
     if (!session_valid(g_active_session) || g_active_session->bound == 0u ||
         !event_valid(event) || outcome == NULL || body == NULL ||
@@ -602,8 +602,8 @@ int runtime_redir_native_session_invoke_scoped_body(
     boundary.error_code = event->error_code; boundary.fault_rip = event->fault_rip;
     copy_cpu(event, &cpu);
     memset(&call, 0, sizeof(call));
-    call.magic = RUNTIME_CCPU_SAS_CALL_MAGIC;
-    call.abi_version = RUNTIME_CCPU_SAS_CALL_VERSION;
+    call.magic = RUNTIME_DEMHNDL_CALL_MAGIC;
+    call.abi_version = RUNTIME_DEMHNDL_CALL_VERSION;
     call.struct_bytes = sizeof(call);
     call.service = event->window_bytes >= 4u ? event->window[3] : 0u;
     call.direct = g_active_session->direct;
@@ -613,6 +613,6 @@ int runtime_redir_native_session_invoke_scoped_body(
     call.guest_write = g_active_session->guest_write;
     call.guest_spans = g_scoped_spans;
     call.guest_span_count = g_scoped_span_count;
-    return runtime_ccpu_sas_invoke_body_with_resume(&call, body, resume_bytes) &&
+    return runtime_demhndl_invoke_body_with_resume(&call, body, resume_bytes) &&
         copy_outcome(&result, outcome);
 }

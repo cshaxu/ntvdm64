@@ -9,18 +9,18 @@
  */
 #include <windows.h>
 
-#include "opennt-bop/opennt_ccpu_sas_facade.h"
+#include "opennt-bop/dem/opennt_dem_ccpu_sas_facade.h"
 #include "opennt-host/vdmredir/vrputil.h"
 
 #define SET_ERROR(err) { setAX((WORD)(err)); setCF(1); }
-#define setES(value) runtime_ccpu_sas_set_es(value)
+#define setES(value) runtime_demhndl_set_es(value)
 /* DIVERGENCE(BOP-DIV-059): OpenNT's record carries a raw process HANDLE;
  * the standalone composition carries only its opaque manager token.  Retain
  * the original close call shape while the existing CCPU/SAS facade releases
  * the matching mapped handle. */
 #define VrpCloseMailslotHandle(token, handle) \
-    ((void)runtime_ccpu_sas_get_handle(0u, (token)), \
-     runtime_ccpu_sas_close_handle((handle)))
+    ((void)runtime_demhndl_get_handle(0u, (token)), \
+     runtime_demhndl_close_handle((handle)))
 
 #define MAILSLOT_PREFIX "\\MAILSLOT\\"
 #define MAILSLOT_PREFIX_LENGTH (sizeof(MAILSLOT_PREFIX) - 1u)
@@ -29,7 +29,7 @@
 #define HANDLE_FUNCTION_FAILED INVALID_HANDLE_VALUE
 #undef GetVDMAddr
 #define GetVDMAddr(segment, offset) \
-    runtime_ccpu_sas_get_vdm_addr((USHORT)(segment), (USHORT)(offset))
+    runtime_demhndl_get_vdm_addr((USHORT)(segment), (USHORT)(offset))
 #define POINTER_FROM_WORDS(segment, offset) GetVDMAddr((segment), (offset))
 #define LPSTR_FROM_WORDS(segment, offset) ((LPSTR)POINTER_FROM_WORDS((segment), (offset)))
 #define READ_FAR_POINTER(address) \
