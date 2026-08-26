@@ -2,9 +2,9 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T278 is closed as the exact MVDM physical
-re-root. Its authoritative record is [M0 T278 closure](history/m0-t278-closure-20260826.md).
-The next candidate remains unadmitted: Original MVDM support libraries.
+**Active: M0 T279 S1** — M0 T279 recovers the original low-dependency MVDM
+support-library closure after the physical re-root. It is Ordinary Mode with
+single-person dual-role review; no MVDM provider/BOP route is enabled by S1.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -25,12 +25,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T278 S3 — component isolation and build-input audit
+### M0 T279 S1 — original support-library ABI/build-form closure
 
-The post-move audit passed. See the
-[component isolation audit](etc/operations/m0-t278-component-isolation-audit-001.md)
-and [M0 T278 closure](history/m0-t278-closure-20260826.md). No build edge or
-runtime behavior was enabled.
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T279 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner directed single-person dual-role execution of the next dependency-ordered queue task. |
+| Objective | Audit the exact original library translation units (`oemuni/file.c`, `oemuni/process.c`, `suballoc/suballoc.c`), their original `sources` selection, headers and all required x86/x64 boundary symbols before any modern build target is enabled. |
+| Non-goals | No provider/BOP route, XMS body, MVDM tool/test product, anonymous rehost, runtime execution or guest trace. |
+| Reference Baseline | T276 W0/W1 final dispositions, T277 reviewed interface ledger, T278 physical mirror closure and original source/build files. |
+| Files And ABI Surface | S1 source-form interface ledger/audit, Status and documentation inventory. No runtime ABI changes. |
+| Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
+| Verification | Exact original source selections match `sources`; every external declaration/call from the three library units has source location, original shape, unique owner, x86/x64 disposition and failure rule; tests/tools remain excluded. |
+| Expected Markers | Two original OEM library bodies adapter-win32-bound; one suballocator body caller-bound through adapter-softpc; no additional runtime translation unit. |
+| Asset Needs | Re-rooted support mirror, original `sources`/makefiles, T276 W0/W1 records, T277 interface closure and [S1 plan](etc/operations/m0-t279-s1-support-library-abi-build-form-plan-001.md). |
+| Reporting Requirements | Exact original library source list, dependency-symbol list, adapter/mapping owner, excluded tool/test source list and build-form limits. |
+| Stop Conditions | A dependency is inferred from only a name, a new generic compatibility layer is proposed, a native pointer enters historical 32-bit storage, or a source body/build target would be enabled before closure. |
+| Exit Criteria | Reproducible source-form ledger covers all three library bodies and distinguishes all external interfaces from internal/CRT calls, with no unresolved owner. |
+| Original Owner Request | “单人双角色模式执行队列任务”。 |
+| Similar-Issue Sweep | Test versus library body, public Win32 versus NT RTL/PEB use, original source order, x86/x64 pointer representation, allocator callback ownership and stale pre-re-root include path. |
 
 ### Closed packet reference — M0 T276 S25
 
