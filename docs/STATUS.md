@@ -2,9 +2,12 @@
 
 ## Current Work
 
-**Active: M0 T274 S3** — M0 T271 remains closed by owner-directed
-exit-criterion revision; its audited residuals are recorded in its closure and
-the debt ledger, not misrepresented as completed mirror recovery.
+**No active M/T/S packet.** M0 T274/S3 is closed. T274 is paused before S4 because the
+actual repository-local WOW16 carry is materially smaller than the claimed
+complete source mirror; its exact disposition requires owner direction. M0
+T271 remains closed by owner-directed exit-criterion revision; its audited
+residuals are recorded in its closure and the debt ledger, not misrepresented
+as completed mirror recovery.
 
 The current intermission architecture is the thirteen-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -13,6 +16,11 @@ compatibility object space. Its former single candidate has been divided into
 five dependency-closed packages. The first two packages are closed and the
 third is now active; see the
 [rebootstrap program roadmap](etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md).
+
+The S4 pause is evidence-bound: the local WOW16 source tree contains 44 files,
+local `bin86` contains 10, and `build/output/wow16` contains 87 retained binary
+products, while the S1 union ledger records 1,261 WOW/bin86 source paths not
+present in that carry. See the [S4 local-inventory disposition](etc/operations/m0-t274-s4-wow16-local-inventory-disposition-001.md).
 
 ## Active Packet
 
