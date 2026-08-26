@@ -20,14 +20,17 @@ WOW, BOP, SoftPC or Win32 service meaning enters either Bochs component.
 
 ## Proposed subtasks
 
-1. **S1 — Bochs provenance and mirror import.** Import the admitted Bochs
-   baseline, compare every file and register every exact/subset/same-shaped
-   divergence and private overlay.
-2. **S2 — Mechanical lifecycle.** Recover CPU, RAM, firmware, default port
-   space, reset and bounded run/stop/resume construction solely through
-   `adapter-bochs`.
-3. **S3 — Minimal app machine shell.** Add only the composition needed to
-   create a session-owned opaque machine endpoint and destroy it deterministically.
+1. **S1 — Bochs provenance and mirror recovery.** Compare the existing
+   `src.old/bochs-core` mirror with the admitted Bochs baseline; carry forward
+   exact or registered compliant files, and register every subset,
+   same-shaped divergence and private overlay.
+2. **S2 — Mechanical lifecycle.** Audit and reuse the existing
+   `adapter-bochs` mechanics where their new owner/dependency boundary is
+   compliant; recover CPU, RAM, firmware, default port space, reset and
+   bounded run/stop/resume solely through that adapter.
+3. **S3 — Minimal app machine shell.** Reuse the existing app composition only
+   after owner review, then retain only what is needed to create a
+   session-owned opaque machine endpoint and destroy it deterministically.
 4. **S4 — Boundary and architecture verification.** Build focused machine
    fixtures on x86/x64 and prove no production consumer other than
    `adapter-bochs` calls `bochs-core`.

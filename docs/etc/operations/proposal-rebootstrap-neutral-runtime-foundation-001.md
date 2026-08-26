@@ -4,7 +4,9 @@
 
 Establish the governance and project-owned foundations needed by every later
 rebootstrap package without importing Bochs or OpenNT provider code. This is
-the first admissible rebootstrap candidate.
+the first admissible rebootstrap candidate. Existing `session` and
+project-owned `app` support code in `src.old/` are audited recovery candidates,
+not work to rewrite by default.
 
 ## Boundary
 
@@ -19,11 +21,13 @@ provider, guest-image or imported MVDM service semantics.
 1. **S1 — Owner and source manifest.** Record every production root, pinned
    baseline, package union decision, future library target, source admission
    state, `src.old` quarantine and x86/x64 build identity.
-2. **S2 — Session lifecycle.** Create dependency-neutral instance creation,
-   cancellation, teardown, resource ownership and bounded worker-context
-   binding with no hidden current-session singleton.
-3. **S3 — Compatibility object space.** Implement one mapping-manager type
-   and instantiate separate `guest_memory`, `host_resource` and
+2. **S2 — Session lifecycle.** Audit and, where compliant, carry forward the
+   existing dependency-neutral session implementation; complete instance
+   creation, cancellation, teardown, resource ownership and bounded
+   worker-context binding with no hidden current-session singleton.
+3. **S3 — Compatibility object space.** Audit and, where compliant, carry
+   forward the existing mapping-manager implementation; instantiate separate
+   `guest_memory`, `host_resource` and
    `completion_callback` tables per session. Prove monotonic allocation,
    sentinel handling, reverse lookup, stale tombstones and no reuse.
 4. **S4 — Guest-memory lease contract.** Specify and test the checked
@@ -42,7 +46,8 @@ provider, guest-image or imported MVDM service semantics.
   x86 has no identity pass-through.
 - Broker messages reject native pointers/HANDLEs, local surrogates, guest
   pointers and CRT-owned objects.
-- No source, include, build or runtime manifest uses `src.old/`.
+- No source, include, build or runtime manifest uses `src.old/`; any reused
+  file has been copied into its new owner root and recorded by disposition.
 
 ## Non-goals
 

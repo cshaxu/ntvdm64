@@ -15,15 +15,19 @@ caller and source/ABI/failure evidence.
 
 The task owns `adapter-bop`, `adapter-softpc`, `adapter-win32`,
 `adapter-vdm-monitor` and the minimum cooperative `broker` implementation.
-Adapters preserve reached original names, parameters, layouts, ordering and
-failure contracts. They do not become alternate DEM/COMMAND/XMS/DPMI providers
-or introduce Bochs knowledge into imported OpenNT source.
+Existing adapter files in `src.old/` are audited recovery candidates and may
+be copied into their corresponding new roots when their interface contract and
+dependency direction are compliant. Adapters preserve reached original names,
+parameters, layouts, ordering and failure contracts. They do not become
+alternate DEM/COMMAND/XMS/DPMI providers or introduce Bochs knowledge into
+imported OpenNT source.
 
 ## Proposed subtasks
 
-1. **S1 — Complete interface ledger.** Freeze original caller, declaration,
-   calling convention, layout, host dependency, disposition and test for each
-   reachable interface family.
+1. **S1 — Complete interface and reuse ledger.** Freeze original caller,
+   declaration, calling convention, layout, host dependency, disposition and
+   test for each reachable interface family; classify each existing adapter
+   file as copy, reference-only, split, replace or retire.
 2. **S2 — BOP transport.** Recover selector-blind copied frame ingress,
    checked transfer and typed completion with no selector/service interpretation.
 3. **S3 — SoftPC facade.** Recover reached SoftPC/CCPU/SAS calls through typed

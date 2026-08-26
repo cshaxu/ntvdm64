@@ -2,11 +2,16 @@
 
 ## Decision
 
-Rebuild `src/` from a quarantined `src.old/` into thirteen production
-components while preserving the non-invasive `ntvdm.exe` direct
+Reconstruct `src/` into thirteen production components while preserving the non-invasive `ntvdm.exe` direct
 COM/EXE/BAT/PIF launch contract. Recovery is package-led, not trace-led:
 original source, same-shaped adapter, registered private overlay, then a
 last-resort authored exception.
+
+The quarantined existing project tree is an important audited reference, not
+discarded work: existing `app`, `session`, `bochs-core` and `adapter-*` files
+may be copied into their new owner roots or used as implementation references
+after a per-file provenance, owner, dependency and architecture review.
+`src.old/` itself remains outside all formal source/build/link/runtime inputs.
 
 The current profile binds one active imported MVDM host context to each
 `ntvdm.exe` process and permits multiple processes. DOS child programs,
@@ -47,13 +52,13 @@ src/
 
 ## Canonical source union
 
-The source baselines are:
+The host and machine source baselines are:
 
 - `O:\repos.external\OpenNT\base\mvdm`;
 - `O:\repos.external\OpenNT-4.5\nt\private\mvdm`;
 - `O:\repos.external\bochs-2.6-compat\bochs-2.6`.
 
-OpenNT MVDM inputs form one canonical package-scope union. Each target-relative
+Non-guest OpenNT MVDM inputs form one canonical package-scope union. Each target-relative
 path has one selected file. Identical inputs retain dual provenance;
 one-sided inputs are included; conflicts are resolved at complete owning
 package scope using source, build, resource and artifact lineage. The rejected
@@ -65,14 +70,20 @@ Owner mapping:
   including MVDM includes, DEM, COMMAND, XMS, DPMI32, VDMREDIR, WOW32,
   VDD/debugger, `softpc.new`, SIM/monitor, utility and OEM packages;
 - `opennt-platform-abi`: exact required declarations outside MVDM;
-- `opennt-guest-dos`: DOS/V86 and guest DPMI packages and products;
-- `opennt-guest-wow16`: WOW16 packages and products;
+- `opennt-guest-dos`: the already-complete repository-local DOS/V86 and guest
+  DPMI mirror, carried forward without a second external-tree import;
+- `opennt-guest-wow16`: the already-complete repository-local WOW16 mirror,
+  likewise carried forward without a second external-tree import;
 - `tools/opennt`: historical build tools; never a runtime component.
 
-The guest roots retain selected source, resources, build descriptions, tools
-inputs, intermediates and products. Their objects/libraries never enter the
-host graph. App loads manifest-selected immutable products through
-`adapter-bochs`.
+The guest roots carry forward the complete existing mirror's source, resources,
+build descriptions, tools inputs, intermediates and products. Their
+provenance/hash inventory is preserved and audited, but they are not copied
+again from OpenNT/OpenNT-4.5 merely to recreate an already-complete mirror.
+Their objects/libraries never enter the host graph. The existing
+`build/output/dos` and `build/output/wow16` binary trees remain in place as
+prior build outputs/evidence; they are not moved into production roots. App
+loads manifest-selected immutable products through `adapter-bochs`.
 
 ## Adapter and session contracts
 
@@ -96,12 +107,13 @@ native x86/x64 layouts inside the owning adapter.
 
 ## `src.old/` policy
 
-`src.old/` is comparison evidence and never a formal source/build/link/runtime
-input. Audited project-owned app, session, broker-independent mechanics and
-Bochs foundation may be recovered only by explicit per-file disposition.
-OpenNT and Bochs mirrors come from pinned upstream baselines. Existing adapter
-and mapping-manager code is evidence that may be reintroduced only after its
-owner, width model and original caller contract pass review.
+`src.old/` is comparison/reference evidence and never a formal
+source/build/link/runtime input. Audited project-owned app, session,
+broker-independent mechanics, Bochs foundation and adapter code may be copied
+from it into their new roots only by explicit per-file disposition. OpenNT and
+Bochs mirror identity still comes from their pinned upstream baselines.
+Existing mapping-manager code is evidence that may be reintroduced only after
+its owner, width model and original caller contract pass review.
 
 ## Candidate task sequence
 

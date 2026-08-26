@@ -14,9 +14,10 @@ source packages by adding ad-hoc BOP handlers.
 ## Boundary
 
 `app` owns CLI parsing, guest-image selection, session construction, adapter
-wiring and broker connection/start. Ninja owns host dependency tracking and
-incremental library/link execution. The task tests composition and boundaries,
-not general DOS/WOW runtime continuity.
+wiring and broker connection/start. Existing app composition may be reused from
+`src.old/` only after per-file owner/dependency review. Ninja owns host
+dependency tracking and incremental library/link execution. The task tests
+composition and boundaries, not general DOS/WOW runtime continuity.
 
 ## Proposed subtasks
 
@@ -26,9 +27,10 @@ not general DOS/WOW runtime continuity.
 2. **S2 — Architecture-specific link closure.** Build admitted components and
    selected original package libraries independently for both architectures;
    prove no guest object/library or cross-architecture object enters a host link.
-3. **S3 — CLI composition.** Assemble session, broker, adapters, machine and
-   immutable guest-image manifest selection into `ntvdm.exe` without exposing
-   old source roots.
+3. **S3 — CLI composition.** Audit and reuse compliant app composition, then
+   assemble session, broker, adapters, machine and immutable guest-image
+   manifest selection into `ntvdm.exe` without exposing old source roots or
+   relocating existing `build/output/dos` or `build/output/wow16` evidence.
 4. **S4 — Boundary regressions.** Test mapping sentinels/teardown, broker wire
    rejection, monitor binding, guest load-only isolation and controlled machine
    shutdown.
