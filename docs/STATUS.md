@@ -252,6 +252,12 @@ input, serial/printer, media and resources retain only named public endpoint
 or product-owner prerequisites. No generic device adapter, source body or
 build edge is enabled; see the [P8 device-bridge baseline](etc/operations/m0-t276-s12-device-bridge-interface-baseline-001.md).
 
+**T276 S12 P9:** original `nt_bop.c`, `nt_vdd.c` and `nt_yoda.c` now have
+twelve dispatcher/VDD/debugger interface dispositions. BOP selector meaning
+remains in the OpenNT mirror, VDD requires the existing specialist adapter and
+typed machine requests, and Yoda stays debugger-profile-gated. No source or
+adapter is enabled; see the [P9 BOP/VDD/debugger baseline](etc/operations/m0-t276-s12-bop-vdd-debugger-interface-baseline-001.md).
+
 ### M0 T275 S1 — Complete interface and reuse ledger
 
 | Field | Record |
