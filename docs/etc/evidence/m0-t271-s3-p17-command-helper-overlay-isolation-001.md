@@ -16,10 +16,11 @@ paths.  The mirror paths retain only registered one-linkage `BOP-DIV-104`,
 these overlay bodies directly; original COMMAND provider files continue to
 use their unchanged declared source-facing functions.
 
-The related PIF parser composition is deliberately excluded.  `nt_pif.c` is
-an independently identifiable OpenNT host capability, not generic COMMAND
-glue.  It requires a later whole-package move to `opennt-host`; relocating it
-as a local overlay would obscure that owner correction.
+The related PIF parser composition is deliberately excluded.  P18 determines
+that the parser's shared global state and incompatible historical `PIF_DATA`
+layouts make it a COMMAND-owner-family source package in the current graph;
+the exact parser remains in the mirror while its binding moves separately to
+a matching private overlay.
 
 Verification was performed outside the sandbox after a formal Ninja relink
 in `build/M0-T271-S3/r003`:

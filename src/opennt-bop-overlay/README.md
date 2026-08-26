@@ -11,6 +11,7 @@ translation unit; no adapter, host, session or app source may include it.
 | `BOP-DIV-104` | `cmdexec.c` consumes an SCS address projection supplied by historical product-global CCPU/SAS identity. | The bounded source-derived projection is not an OpenNT mirror body. | `command/opennt_command_binary_composition.c` includes this private body only. |
 | `BOP-DIV-105` | `cmdconf.c` consumes historical product configuration and bootstrap inputs. | The one-session copied configuration binding is not an OpenNT mirror body. | `command/opennt_command_config_composition.c` includes this private body only. |
 | `BOP-DIV-106` | `cmdenv.c` consumes process environment/UI product state. | The one-session snapshot/conversion binding is not an OpenNT mirror body. | `command/opennt_command_environment_composition.c` includes this private body only. |
+| `BOP-DIV-032` | `softpc.new/host/src/nt_pif.c` parses PIF data for original COMMAND `cmdpif.c`. | Its legacy parser record and process-global state are layout-incompatible with the COMMAND caller record, and extracting it to `opennt-host` would create a host-to-BOP dependency. | The exact parser remains in the COMMAND mirror; its modern binding and same-process layout bridge are private here. | `command/opennt_pif_composition.c` includes this private body only. |
 
 | ID | Original definition purpose | Private divergence | Mirror boundary |
 | --- | --- | --- | --- |

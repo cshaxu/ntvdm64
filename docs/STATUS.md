@@ -147,8 +147,14 @@ remain green. See [S3 P16 evidence](etc/evidence/m0-t271-s3-p16-command-composit
 **S3 P17:** binary, config and environment helper bodies are now registered
 mirror-private overlays, leaving one-linkage boundaries in the COMMAND mirror.
 Config, dynamic-environment and lifecycle regressions remain green.  The PIF
-parser is explicitly held for a later whole `opennt-host` capability move,
-not misclassified as COMMAND glue. See [S3 P17 evidence](etc/evidence/m0-t271-s3-p17-command-helper-overlay-isolation-001.md).
+parser is separately audited by P18. See [S3 P17 evidence](etc/evidence/m0-t271-s3-p17-command-helper-overlay-isolation-001.md).
+
+**S3 P18:** the exact OpenNT PIF parser remains in the COMMAND owner-family
+mirror because it shares global state with `cmdpif.c` while the two historical
+`PIF_DATA` layouts are incompatible.  Its project-authored binding is now a
+registered private overlay behind the sole mirror boundary; no invalid
+`opennt-host` to COMMAND dependency was introduced.  The formal PIF parser
+fixture passes. See [S3 P18 evidence](etc/evidence/m0-t271-s3-p18-command-pif-owner-and-overlay-isolation-001.md).
 
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
