@@ -2,10 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T280 S5** — M0 T280 recovers the original host control plane and
-DEM as one source-owner package after the T279 support-library closure. It is
-Ordinary Mode with single-person dual-role review; no selector/BOP route is
-enabled merely by this planning packet.
+**No active M/T/S packet.** M0 T280 S6 closed the complete original DEM
+syntax surface as a package-wide evidence baseline.  The next packet must
+recover only a shared, source-shaped declaration/compatibility family named by
+that ledger; no selector/BOP route is enabled merely by the closed survey.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -26,7 +26,35 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S5 — reached VDM directory-control adapter
+### M0 T280 S6 — closed: whole DEM compile-surface closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T280 S6`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S5 completed and was pushed in `3cddbc0f`; the active owner goal requires a package-led, non-trace-led MVDM recovery. |
+| Objective | Derive one complete, source-proven next adapter/declaration workset from a reproducible syntax survey of all sixteen original DEM bodies. |
+| Non-goals | No body enablement/edit, provider or BOP route, private NT import, guest trace, Bochs modification, or one-off per-BOP workaround. |
+| Reference Baseline | T280 S1 workset, S4 include ledger, S5 VDM control boundary and original `dos/dem/sources`. |
+| Files And ABI Surface | S6 plan, 16-row source ledger, formal survey/verifier and Status. No product ABI is introduced. |
+| Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
+| Verification | MSVC `/Zs /MT /W4` survey for x64/x86 under a disposable run root; verify all selected bodies occur once in the ledger; review each owner/mapping disposition. |
+| Expected Markers | Whole-package source selection; original DEM build-form globals; historical NT directory/storage ABI families; explicit `adapter-softpc` guest-memory mapping boundary. |
+| Asset Needs | Existing exact host/support/platform mirrors, adapter-win32/session contracts, MSVC x86/x64 and original sources evidence. |
+| Reporting Requirements | Architecture-specific syntax outcome, exact blocker families, unique owner, host-local versus guest-numeric classification, and next package disposition. |
+| Stop Conditions | A source body is enabled from syntax success, a private NT kernel call is attempted, a new family-private mapper appears, or a compiler error is patched without whole-package classification. |
+| Exit Criteria | Both architecture surveys and the 16-row owner/mapping ledger are verified; next implementation is a bounded shared ABI package, not a trace-selected leaf. |
+| Original Owner Request | “单人双角色模式执行队列任务”。 |
+| Similar-Issue Sweep | DEM globals/precompiled header assumptions, NT directory/device declaration families, DASD boundaries, CCPU/SAS mechanics, and mapping-manager isolation. |
+
+**S6 closure:** the sixteen exact DEM bodies were syntax-surveyed on x64 and
+x86.  The source/ABI ledger reduces every observed blocker to five shared
+owner families: original DEM declaration form, one x86 SDK declaration
+collision, NT directory/device record forms, DASD public storage forms, and
+adapter-softpc guest mechanics.  Syntax-clean bodies are only original-body
+candidates—not linked providers.  The next admission must address one shared
+source-shaped compatibility package; it may not patch a trace-selected BOP.
+
+### Closed packet reference — M0 T280 S5
 
 | Field | Record |
 | --- | --- |

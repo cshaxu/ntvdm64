@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2596 |
+| Documentation records | 2599 |
 | --- | --- |
-| Generated UTC | 2026-08-26T22:56:02Z |
+| Generated UTC | 2026-08-26T23:05:18Z |
 
 ## Entries
 
@@ -768,6 +768,9 @@ content-divergent entries.
 | etc/operations/m0-t280-s4-dem-include-abi-plan-001.md | indexed supporting material | d39591fd64599f421b1b5a879dc3746c669df457a84df8425e48f0f3a3be75d7 |
 | etc/operations/m0-t280-s5-vdm-control-evidence-001.md | indexed supporting material | 7c02022076f0cdea97c265c313b13cd545abc6718edf42e6aac9471e54e0b797 |
 | etc/operations/m0-t280-s5-vdm-control-plan-001.md | indexed supporting material | 2b181f71ddb0cfd9b5b892ab66380821e7ae85e9c311864635c168542cd6648a |
+| etc/operations/m0-t280-s6-dem-compile-surface-evidence-001.md | indexed supporting material | 62a9cae2fce9cbfa51b05a1ced0e6e53dec1a09b476d980830fe044e94e3786c |
+| etc/operations/m0-t280-s6-dem-compile-surface-ledger.tsv | indexed supporting material | 3954856366bc08cdfd30bf509982db4657b9a59ed6f7ced9773f1313f16e035d |
+| etc/operations/m0-t280-s6-dem-compile-surface-plan-001.md | indexed supporting material | 5ff60dd07eb94caabce36cbf96c51f56cafaa18619f9ebda7150008498b1d0ed |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -2610,7 +2613,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 31ec98540d2bdfbbd7560326e08fa6ccc7dbe9e7dc8cc523d3609d3c8011fa3b |
+| STATUS.md | principal control document | c351c68ea23a94fef5b8bee60a14ef526c4a575c59981b6b971983f619309ceb |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |
