@@ -67,6 +67,18 @@ build and runtime claims. See [M0 T274 closure](history/m0-t274-closure-20260826
 references. It is a source-reference baseline only, not permission to copy a
 file or claim an adapter ABI. See the [P1 inventory note](etc/operations/m0-t275-s1-adapter-candidate-inventory-001.md).
 
+**S1 P2:** the original-caller ledger now freezes 11 interface dispositions:
+one BOP transport, five SoftPC/CCPU/SAS surfaces, three Win32/NTDLL surfaces,
+one VDM-monitor surface and the minimal broker boundary. It explicitly retires
+the old machine shell and project-only observation surfaces from adapter
+recovery. See the [P2 interface ledger note](etc/operations/m0-t275-s1-historical-interface-ledger-001.md).
+
+**S1 P2:** the original-caller ledger now freezes 11 interface dispositions:
+one BOP transport, five SoftPC/CCPU/SAS surfaces, three Win32/NTDLL surfaces,
+one VDM-monitor surface and the minimal broker boundary. It explicitly retires
+the old machine shell and project-only observation surfaces from adapter
+recovery. See the [P2 interface ledger note](etc/operations/m0-t275-s1-historical-interface-ledger-001.md).
+
 **S1 P1:** the reproducible recovery-candidate inventory contains 453 files:
 61 implementation candidates, 385 declaration candidates and seven supporting
 references. It is a source-reference baseline only, not permission to copy a
