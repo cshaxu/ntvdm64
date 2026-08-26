@@ -2,11 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T277 S2** — T277 expands T276's final file-level expected
+**Active: M0 T277 S3** — T277 expands T276's final file-level expected
 integration dispositions into a source-proven package, symbol, ABI and build
 closure before any MVDM provider body is enabled. It is an ordinary,
 single-person dual-role audit packet; no source body, adapter ABI, build edge
-or guest execution is admitted by S2.
+or guest execution is admitted by S3.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -27,23 +27,23 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T277 S2 — source-form reachability worklist
+### M0 T277 S3 — machine-facing source-form family audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T277 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Identifier Mode | `M0 T277 S3`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Owner admitted the queue-head objective: “**MVDM package dependency and interface-closure tracker** 单人模式实施”. |
-| Objective | Reduce the 3,697 lexical caller/declaration correlations to the exact future-host caller set, preserve excluded callers as evidence, and create a source-form worklist ordered by original package and final disposition. |
+| Objective | Audit source and provider forms for the first dependency tranche (`suballoc`, `xms.486`, `dpmi32`) and assign only source-proven machine/CRT/monitor boundary families. |
 | Non-goals | No MVDM provider/adapter implementation, source-body edit, generated build edge, Ninja run, guest execution, or inferred direct-link conclusion. |
-| Reference Baseline | T277 S1 tracker foundation (`cc322d57`), T276 final file dispositions, caller/declaration correlation evidence, architecture and source-policy authorities. |
-| Files And ABI Surface | S2 plan, generated source-form worklist/summary, corresponding verifier, Status and documentation inventory. No runtime ABI is changed. |
+| Reference Baseline | T277 S2 worklist (`e1ca986c`), original selected source forms, T276 family/interface evidence, architecture and source-policy authorities. |
+| Files And ABI Surface | S3 family evidence and a source-form disposition ledger; Status and documentation inventory. No runtime ABI is changed. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Regenerate from the committed S1 ledgers; reject any final excluded caller promoted into the worklist, any missing caller file disposition, duplicate work item or silent omission of the 3,697 correlations. |
-| Expected Markers | Exactly 325 future-host caller correlations are explicit: 286 adapter-backed, 38 overlay-required and one binding-only; 3,372 other correlations remain excluded/deferred evidence rather than disappearing. |
-| Asset Needs | [T277 proposal](etc/operations/proposal-mvdm-package-interface-closure-tracker-001.md), [S2 plan](etc/operations/m0-t277-s2-source-form-worklist-plan-001.md), [S1 evidence](etc/operations/m0-t277-s1-tracker-foundation-evidence-001.md), final disposition and interface ledgers. |
-| Reporting Requirements | Counts by caller package, caller final disposition and correlation state; all source-form review work items with stable IDs and cited original caller/declaration locations. |
+| Verification | Each family cites original caller/provider forms, preserves the required interface shape and failure rule, names one adapter or direct CRT binding, and does not activate a body. |
+| Expected Markers | XMS A20/range, DPMI CPU-frame/run/real-mode/IRET and ordinary CRT allocation families have explicit owner, mapping and successor disposition. |
+| Asset Needs | [S2 worklist](etc/operations/m0-t277-s2-source-form-worklist.tsv), original `xms.486`, `dpmi32` and `suballoc` forms, and existing T276 source-family evidence. |
+| Reporting Requirements | Exact work-item coverage, owner, ABI/form and failure disposition; unresolved items are assigned to a named successor package rather than silently deferred. |
 | Stop Conditions | An interface is assigned from filename or declaration alone, an adapter is invented without source evidence, a raw host pointer is proposed across a boundary, a second mapping manager is proposed, or a source body would be enabled. |
-| Exit Criteria | Met: the source-form worklist accounts for all 3,697 correlations without inferring ABI availability; its 325 future-host callers are uniquely identified and package-ordered; excluded/deferred correlations remain countable evidence. See [S2 evidence](etc/operations/m0-t277-s2-source-form-worklist-evidence-001.md). |
+| Exit Criteria | Every S2 work item from `suballoc`, `xms.486` and `dpmi32` is represented by a source-form family disposition; none is falsely claimed buildable or implemented. |
 | Original Owner Request | “MVDM package dependency and interface-closure tracker 单人模式实施”。 |
 | Similar-Issue Sweep | Lexical declaration ambiguity, macro/assembly non-projection, duplicate symbol spellings, package cycles, profile-excluded executors, x86/x64 ABI boundaries and false adapter ownership. |
 
