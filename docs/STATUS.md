@@ -179,6 +179,11 @@ sole session `guest_memory` mapping-manager instance with bounded leases;
 no native guest pointer survives the source call. Both formal XMS fixtures
 remain green. See [S4 P2 evidence](etc/evidence/m0-t271-s4-p2-xms-a20-mapping-manager-migration-001.md).
 
+**S4 P3:** source-unit audit classifies `xmsmemr.c` as the non-i386 RISC
+variant and `i386/xmsmem86.c` as an NT4-private host-pointer implementation;
+the existing same-shaped three-entry SoftPC facade is retained instead of
+importing either. See [S4 P3 audit](etc/evidence/m0-t271-s4-p3-xms-source-unit-admission-audit-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored
