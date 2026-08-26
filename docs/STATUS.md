@@ -59,6 +59,12 @@ pointer width correctly for each host architecture. Focused x64/x86 `/MT`
 compilation passes; no minimal-machine link or runtime result is claimed. See
 [S2 P2 configuration record](etc/operations/m0-t273-s2-p2-cpu5-host-width-config-closure-001.md).
 
+**S2 P3 closure:** the Bochs-only construction/reset/decode/RAM/empty-port
+space/timer-stop object closure now links and runs on both x64 and x86. It
+contains no `iodev/devices.cc`, product plugin, GUI, guest or OpenNT input.
+The proven bounded operation destroys its machine after the budget result, so
+resume remains the next explicit S2 boundary. See [S2 P3 link record](etc/operations/m0-t273-s2-p3-minimal-machine-link-closure-001.md).
+
 The latest closed packet remains the technical baseline below.
 
 ### M0 T271 closure — OpenNT BOP source-recovery and mirror-boundary audit

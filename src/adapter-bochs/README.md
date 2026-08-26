@@ -12,3 +12,10 @@ extraction, but must still be reviewed per file before any copy.  The audit
 records that each future adapter input may depend only on `bochs-core` and
 must not introduce OpenNT, DOS, VDM, WOW, BOP, SoftPC/CCPU or Win32 service
 semantics.
+
+## M0 T273 S2 mechanical lifecycle
+
+`bounded_run.{cc,h}` is a project-owned copied-record operation. It uses the
+recovered lifecycle facade to place opaque bytes in ordinary RAM, arm a
+real-mode entry, stop at a timer budget and release the machine. It is not a
+BOP, SoftPC/CCPU, session or service ABI.
