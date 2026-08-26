@@ -2,11 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T277 S6** — T277 expands T276's final file-level expected
+**Active: M0 T277 S7** — T277 expands T276's final file-level expected
 integration dispositions into a source-proven package, symbol, ABI and build
 closure before any MVDM provider body is enabled. It is an ordinary,
 single-person dual-role audit packet; no source body, adapter ABI, build edge
-or guest execution is admitted by S6.
+or guest execution is admitted by S7.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -27,25 +27,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T277 S6 — Redirector and WOW source-form boundary audit
+### M0 T277 S7 — global source-correlation reconciliation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T277 S6`, Ordinary Mode with single-person dual-role implementation and review. |
+| Identifier Mode | `M0 T277 S7`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Owner admitted the queue-head objective: “**MVDM package dependency and interface-closure tracker** 单人模式实施”. |
-| Objective | Audit the remaining 17 future-host correlations from original `vdmredir` and `wow32` providers, retaining source-shaped Redirector/WOW, debugger, serial and Bochs machine boundaries without enabling a body. |
+| Objective | Reconcile all 3,697 source-call correlations into one effective interface ledger: 325 source-form reviewed future-host rows and 3,372 explicit non-runtime/profile-excluded rows. Preserve the separate 4,803 lexical declarations as non-reached evidence. |
 | Non-goals | No MVDM provider/adapter implementation, source-body edit, generated build edge, Ninja run, guest execution, or inferred direct-link conclusion. |
-| Reference Baseline | T277 S2 worklist (`e1ca986c`), closed S3/S4/S5 ledgers, original `vdmredir` and `wow32` forms, T276 package evidence, architecture and source-policy authorities. |
-| Files And ABI Surface | S6 plan, generated Redirector/WOW family ledger and verifier, Status and documentation inventory. No runtime ABI is changed. |
+| Reference Baseline | T276 S5 3,697-correlation ledger; T277 S2 source-form worklist; closed S3–S6 family ledgers; current file/profile and lexical declaration ledgers. |
+| Files And ABI Surface | S7 plan, effective source-correlation ledger and verifier, package-edge reconciliation input, Status and documentation inventory. No runtime ABI is changed. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Every remaining `vdmredir`/`wow32` work item is in a source-form family with original caller/provider citations, unique owner and failure disposition. The verifier rejects a raw pointer/HANDLE path, direct host process launch, an invented machine executor or an enabled body. |
-| Expected Markers | Redirector address conversion/debug forms, WOW machine run, debugger notification, MCI debug, WOW dispatch and serial shadow/handle forms each have source-proven owners and successors. |
-| Asset Needs | [S2 worklist](etc/operations/m0-t277-s2-source-form-worklist.tsv), closed S3/S4/S5 ledgers, original `vdmredir`/`wow32` forms, T276 package evidence and [S6 plan](etc/operations/m0-t277-s6-redir-wow-source-form-boundary-plan-001.md). |
-| Reporting Requirements | Exact 17-item coverage by package/family, original caller/provider form, mapping and failure disposition; each private protocol is explicitly assigned to Redirector, WOW, debugger, session or machine successor. |
+| Verification | Every original T276 S5 correlation appears once in the effective ledger. All 325 selected work IDs join one S3–S6 source-form disposition; all remaining rows retain an explicit non-runtime/profile exclusion rather than disappearing. |
+| Expected Markers | `reviewed-future-host=325`, `non-runtime-or-profile-excluded=3372`, `lexical-only=4803`, no duplicate identity, no new direct/link/implementation claim. |
+| Asset Needs | T276 S5 unique-call ledger, [S2 worklist](etc/operations/m0-t277-s2-source-form-worklist.tsv), S3–S6 disposition ledgers, T277 file/profile/interface ledgers and [S7 plan](etc/operations/m0-t277-s7-global-source-correlation-reconciliation-plan-001.md). |
+| Reporting Requirements | Exact status counts, source family linkage, package/file disposition source and limitations; unresolved historical declarations stay visible but are not treated as reached dependencies. |
 | Stop Conditions | An interface is assigned from filename or declaration alone, an adapter is invented without source evidence, a raw host pointer is proposed across a boundary, a second mapping manager is proposed, or a source body would be enabled. |
-| Exit Criteria | Every remaining S2 `vdmredir`/`wow32` work item is represented by a source-form family disposition and none is falsely claimed buildable, linked or implemented; all 325 future-host correlations are then source-form audited. |
+| Exit Criteria | All 3,697 source correlations have one effective state, every 325 future-host row joins a reviewed source-form family, and the 4,803 lexical declarations remain separately accounted without false reachability. |
 | Original Owner Request | “MVDM package dependency and interface-closure tracker 单人模式实施”。 |
-| Similar-Issue Sweep | Redirector protocol versus local pipe, WOW cross-bitness versus raw pointer/HANDLE, debugger notification, host serial endpoint, public versus private Win32 transport, Bochs single-executor ownership and source-form ambiguity. |
+| Similar-Issue Sweep | Worklist join identity, inactive/profile-excluded caller preservation, lexical declaration ambiguity, overlay versus binding classification, source family duplication, package dependency edge evidence and false direct-build conclusions. |
 
 ### Closed packet reference — M0 T276 S25
 
