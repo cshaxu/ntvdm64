@@ -367,8 +367,7 @@
         "src/opennt-bop/command/opennt_command_composition.c",
           "src/opennt-bop/vdmredir/vrdisp.c",
           "src/opennt-bop/vdmredir/vrmslot.c",
-        "src/opennt-bop/softpc/opennt_int06_provider.c",
-        "src/opennt-bop/ingress/xms_runtime_session.c"
+        "src/opennt-bop/softpc/opennt_int06_provider.c"
       ]
     },
     {
@@ -384,6 +383,7 @@
         "src/app/engine_contract.c",
         "src/app/bop_composition.c",
         "src/app/command_session_binding.c",
+        "src/app/xms_session_binding.c",
         "src/app/startup_composition.c",
         "src/app/engine_run.c",
         "src/app/initial_state_abi.c",

@@ -1,5 +1,5 @@
-#ifndef RUNTIME_BOP_XMS_RUNTIME_SESSION_H
-#define RUNTIME_BOP_XMS_RUNTIME_SESSION_H
+#ifndef APP_XMS_SESSION_BINDING_H
+#define APP_XMS_SESSION_BINDING_H
 
 /* This session binds the original XMS package only after the machine has
  * admitted the matching whole-machine capacity: OpenNT config.c uses
@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 
-int runtime_xms_runtime_session_bind(uint32_t xms_memory_kib);
-void runtime_xms_runtime_session_reset(void);
+int app_xms_session_bind(uint32_t xms_memory_kib);
+void app_xms_session_reset(void);
 
 #endif

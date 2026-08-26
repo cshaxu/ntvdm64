@@ -1,5 +1,5 @@
 #include "opennt-bop/xms/opennt_xms_compat.h"
-#include "opennt-bop/ingress/xms_runtime_session.h"
+#include "app/xms_session_binding.h"
 #include "adapter-bop/generic_ud_bridge.h"
 #include "opennt-bop/ingress/opennt_bop_route.h"
 
@@ -144,12 +144,12 @@ int main(void)
         event.window[0] = 0xc4u; event.window[1] = 0xc4u;
         event.window[2] = 0x52u; event.window[3] = 5u;
         memset(&outcome, 0, sizeof(outcome));
-        if (!runtime_xms_runtime_session_bind(8192u) ||
+        if (!app_xms_session_bind(8192u) ||
             !runtime_machine_generic_ud_bridge(&event, &outcome) ||
             outcome.disposition != RUNTIME_GENERIC_UD_RESUME ||
             outcome.resume_rip != UINT64_C(0x2604) ||
             outcome.gpr16_values[0] != 8192u) return 12;
-        runtime_xms_runtime_session_reset();
+        app_xms_session_reset();
     }
 
     free(memory.bytes);

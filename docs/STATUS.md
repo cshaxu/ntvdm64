@@ -184,6 +184,10 @@ variant and `i386/xmsmem86.c` as an NT4-private host-pointer implementation;
 the existing same-shaped three-entry SoftPC facade is retained instead of
 importing either. See [S4 P3 audit](etc/evidence/m0-t271-s4-p3-xms-source-unit-admission-audit-001.md).
 
+**S4 P4:** non-original XMS package bind/reset lifecycle now belongs to
+`app/xms_session_binding`, not `opennt-bop/ingress`; formal XMS fixtures pass
+with it linked from `app.lib`. See [S4 P4 evidence](etc/evidence/m0-t271-s4-p4-xms-app-session-binding-extraction-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

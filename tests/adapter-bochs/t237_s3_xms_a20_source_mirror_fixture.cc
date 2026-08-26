@@ -7,7 +7,7 @@
 #include "adapter-softpc/ivt_watch.h"
 
 extern "C" {
-#include "opennt-bop/ingress/xms_runtime_session.h"
+#include "app/xms_session_binding.h"
 }
 
 #include <string.h>
@@ -78,7 +78,7 @@ int main()
   if (!runtime_machine_stage_request_valid(&machine_request) ||
       runtime_machine_stage_begin(&machine_request) != RUNTIME_MACHINE_STAGE_OK)
     return 1;
-  if (!runtime_xms_runtime_session_bind(8192u)) return 2;
+  if (!app_xms_session_bind(8192u)) return 2;
 
   /* The imported xmsmisc.c body calls the direct keybd_io.c fragment before
    * setting CX.  With the sampled IVT15 pair still 0000:0000, the first call
@@ -132,6 +132,6 @@ int main()
   }
   if (invoke_xms(0u, 2u, 0u, 1u | 8u, 0u) != 0 || !a20_enabled(0u)) return 7;
 
-  runtime_xms_runtime_session_reset();
+  app_xms_session_reset();
   return runtime_machine_stage_reset() == RUNTIME_MACHINE_STAGE_OK ? 0 : 8;
 }
