@@ -22,9 +22,10 @@ The initial role counts are:
   disks, keyboard/mouse, comms, system and base DOS units. Their execution
   ownership is Bochs; they are explicit parallel-machine exclusions, not
   candidates for an extra SoftPC core.
-- 59 original `host/src` host-control paths, plus 189 host declarations/link
-  and build inputs. These are the only large W2 host-control candidate group;
-  they require per-interface SoftPC/CCPU/SAS, Win32 and monitor review.
+- 59 original `host/src` mixed host-boundary paths, plus 189 host
+  declarations/link and build inputs. This set contains control, monitor,
+  machine, device and UI units and requires per-file SoftPC/CCPU/SAS, Win32,
+  monitor and BOP review.
 - 156 shared `base/inc` machine declarations and eight `base/support` inputs.
   They remain original source and are reviewed only through
   `adapter-softpc`—not copied into an adapter.
@@ -53,7 +54,7 @@ provisional and cannot enter a build based on this grouping alone.
 
 ## Next audit step
 
-The next S12 slice must inspect the 59 `host/src` source units and their
+The next S12 slice must inspect the 59 `host/src` paths and their
 reached interfaces as complete original owner groups. It must distinguish
 adapter-softpc, adapter-win32, adapter-vdm-monitor, adapter-bop and app
 composition edges, preserve original function shapes and register any

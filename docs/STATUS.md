@@ -204,6 +204,13 @@ session/worker unit, nine Win32 host-capability units, two VDD/debugger units,
 adapter becomes enabled; the next slice audits complete owner groups at the
 function/interface level. See [T276 S12 host/src baseline](etc/operations/m0-t276-s12-host-src-disposition-baseline-001.md).
 
+**T276 S12 P3:** all 56 `host/src` source units now have call/definition/
+boundary coverage: 7,079 lexical calls, 380 selected-definition observations
+and 37 external-boundary candidates. This is a source-review ordering aid only,
+not an ABI or reachability claim. Complete monitor/session, SoftPC facade and
+Win32 host groups are the next audit order; unobserved auxiliaries remain
+non-enabled. See [T276 S12 interface-density baseline](etc/operations/m0-t276-s12-host-src-interface-density-baseline-001.md).
+
 ### M0 T275 S1 — Complete interface and reuse ledger
 
 | Field | Record |
