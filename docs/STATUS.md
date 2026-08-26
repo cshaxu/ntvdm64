@@ -2,11 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T277 S1** — T277 expands T276's final file-level expected
+**Active: M0 T277 S2** — T277 expands T276's final file-level expected
 integration dispositions into a source-proven package, symbol, ABI and build
 closure before any MVDM provider body is enabled. It is an ordinary,
 single-person dual-role audit packet; no source body, adapter ABI, build edge
-or guest execution is admitted by S1.
+or guest execution is admitted by S2.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -27,23 +27,23 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T277 S1 — tracker foundation and evidence normalization
+### M0 T277 S2 — source-form reachability worklist
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T277 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Identifier Mode | `M0 T277 S2`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Owner admitted the queue-head objective: “**MVDM package dependency and interface-closure tracker** 单人模式实施”. |
-| Objective | Establish the authoritative five-ledger tracker, normalize T276 source/build/declaration/caller evidence into stable identities, and prove that the tracker distinguishes textual candidates from source-reached dependencies. |
+| Objective | Reduce the 3,697 lexical caller/declaration correlations to the exact future-host caller set, preserve excluded callers as evidence, and create a source-form worklist ordered by original package and final disposition. |
 | Non-goals | No MVDM provider/adapter implementation, source-body edit, generated build edge, Ninja run, guest execution, or inferred direct-link conclusion. |
-| Reference Baseline | T276 final 1,689-path expected-integration ledger; T276 S2--S5 literal build/include, declaration, caller/callee and boundary evidence; architecture and source-policy authorities. |
-| Files And ABI Surface | T277 tracker plan, five machine-readable ledger schemas/initial populations, generator/verifier tooling, Status and documentation inventory. No runtime ABI is changed. |
+| Reference Baseline | T277 S1 tracker foundation (`cc322d57`), T276 final file dispositions, caller/declaration correlation evidence, architecture and source-policy authorities. |
+| Files And ABI Surface | S2 plan, generated source-form worklist/summary, corresponding verifier, Status and documentation inventory. No runtime ABI is changed. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Regenerate each ledger deterministically from named T276 inputs; reject duplicate identities, invalid package owners, declaration-only entries represented as reached calls, or missing final-file linkage. |
-| Expected Markers | Every selected package has a stable package identity; every imported T276 candidate remains explicitly lexical/provisional until caller reachability and ABI ownership are separately established. |
-| Asset Needs | [T277 proposal](etc/operations/proposal-mvdm-package-interface-closure-tracker-001.md), [S1 plan](etc/operations/m0-t277-s1-tracker-foundation-plan-001.md), final disposition ledger, T276 S2--S5 evidence ledgers and source-union manifest. |
-| Reporting Requirements | Exact counts by ledger and package; unexpanded/source-ambiguous candidate counts; stated next S admission criterion; no implementation claim. |
+| Verification | Regenerate from the committed S1 ledgers; reject any final excluded caller promoted into the worklist, any missing caller file disposition, duplicate work item or silent omission of the 3,697 correlations. |
+| Expected Markers | Exactly 325 future-host caller correlations are explicit: 286 adapter-backed, 38 overlay-required and one binding-only; 3,372 other correlations remain excluded/deferred evidence rather than disappearing. |
+| Asset Needs | [T277 proposal](etc/operations/proposal-mvdm-package-interface-closure-tracker-001.md), [S2 plan](etc/operations/m0-t277-s2-source-form-worklist-plan-001.md), [S1 evidence](etc/operations/m0-t277-s1-tracker-foundation-evidence-001.md), final disposition and interface ledgers. |
+| Reporting Requirements | Counts by caller package, caller final disposition and correlation state; all source-form review work items with stable IDs and cited original caller/declaration locations. |
 | Stop Conditions | An interface is assigned from filename or declaration alone, an adapter is invented without source evidence, a raw host pointer is proposed across a boundary, a second mapping manager is proposed, or a source body would be enabled. |
-| Exit Criteria | Met: five ledgers have stable schemas and reproducible initial populations; each row is traceable to a T276 source/evidence record; the verifier proves identities and provisional-vs-reached separation. See [S1 evidence](etc/operations/m0-t277-s1-tracker-foundation-evidence-001.md). |
+| Exit Criteria | Met: the source-form worklist accounts for all 3,697 correlations without inferring ABI availability; its 325 future-host callers are uniquely identified and package-ordered; excluded/deferred correlations remain countable evidence. See [S2 evidence](etc/operations/m0-t277-s2-source-form-worklist-evidence-001.md). |
 | Original Owner Request | “MVDM package dependency and interface-closure tracker 单人模式实施”。 |
 | Similar-Issue Sweep | Lexical declaration ambiguity, macro/assembly non-projection, duplicate symbol spellings, package cycles, profile-excluded executors, x86/x64 ABI boundaries and false adapter ownership. |
 
