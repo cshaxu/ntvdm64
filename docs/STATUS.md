@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T274 S1** — M0 T271 remains closed by owner-directed
+**Active: M0 T274 S2** — M0 T271 remains closed by owner-directed
 exit-criterion revision; its audited residuals are recorded in its closure and
 the debt ledger, not misrepresented as completed mirror recovery.
 
@@ -32,6 +32,34 @@ focused lifecycle test passes under both MSVC x64 and Win32/x86 `/MT`.
 **T272 closure:** the neutral session/mapping/lease/broker foundation is
 complete and pushed through `d94d46ae`; its authoritative record is
 [M0 T272 closure](history/m0-t272-closure-20260826.md).
+
+### M0 T274 S2 — Platform ABI mirror audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T274 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner-approved canonical OpenNT source-supply proposal; S1 closed with the selected non-guest union ledger. |
+| Objective | Establish the smallest exact-declaration platform ABI inventory and production root needed to compile later selected MVDM host packages without inventing replacement behavior. |
+| Non-goals | No MVDM provider body import, host compilation, Win32/NTDLL replacement, adapter implementation, BOP execution, guest reimport, or guest-output relocation. |
+| Reference Baseline | S1 selected union ledger, pinned OpenNT/OpenNT-4.5 trees, source policy, mirror rules and T274 source-supply proposal. |
+| Files And ABI Surface | `opennt-platform-abi` README, exact declaration/disposition ledger, optional byte-identical upstream declarations, S2 evidence, Status and documentation inventory. No behavior-bearing source file. |
+| Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
+| Verification | Scan the selected `opennt-mvdm-host` universe for direct include/declaration needs; distinguish MVDM-local, upstream-platform, public SDK and unresolved rows; hash every imported declaration; run governance and scoped diff review. |
+| Expected Markers | Every direct external include/declaration requirement has a unique disposition, every material file is byte-identical upstream and no platform behavior is linked or authored. |
+| Asset Needs | S1 TSV ledger, both pinned external source trees, source policy and existing component ownership manifest. |
+| Reporting Requirements | State requirement cardinalities, direct versus transitive boundary, selected source path/hash, exclusions, unresolved API/declaration risks and future package consumers. |
+| Stop Conditions | A required item needs a behavior body, an ambiguous cross-generation header mix, a proprietary SDK import without source-policy approval, or an ABI source cannot be identified. |
+| Exit Criteria | A reproducible complete direct-platform ABI disposition ledger, an audited minimal `opennt-platform-abi` root and no unregistered declaration import; S5/S6 can consume it without reopening the S1 union decision. |
+| Original Owner Request | “单人双角色模式实施当前队列中的所有任务…追求结果极简主义…避免添油战术。” |
+| Similar-Issue Sweep | All selected MVDM header/include forms, platform declarations, `windows.h`/NTDLL families, internal MVDM headers, source/build descriptions, pre-existing shims and architecture-specific forms. |
+
+**S2 closure:** the reproducible direct-include ledger covers all 637 include
+forms found in 1,467 selected MVDM code inputs.  The minimal
+`opennt-platform-abi` mirror contains 22 uniquely resolved, byte-identical
+original declaration headers; its import manifest reports zero SHA-256
+mismatches on an idempotent second import.  CRT/SDK forms remain toolchain
+inputs, while same-name and generated historical forms remain explicit owner
+package rows.  See the [S2 closure evidence](etc/operations/m0-t274-s2-platform-abi-mirror-closure-001.md).
 
 ### M0 T274 S1 — Non-guest package-scope union ledger
 
