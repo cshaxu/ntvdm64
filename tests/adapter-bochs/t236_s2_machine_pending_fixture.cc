@@ -1,4 +1,6 @@
 #include "bochs.h"
+#include "adapter-bochs/machine_facade.h"
+#include "adapter-bop/bop_ingress.h"
 #include "adapter-bop/generic_ud_bridge.h"
 #include "adapter-softpc/machine_stage.h"
 
@@ -7,10 +9,11 @@
 static int fixture_pending;
 static int fixture_stop;
 
-extern "C" int runtime_machine_generic_ud_bridge(
+static int fixture_route(
   const struct runtime_generic_ud_event *event,
-  struct runtime_generic_ud_outcome *outcome)
+  struct runtime_generic_ud_outcome *outcome, void *context)
 {
+  (void)context;
   if (event == 0 || outcome == 0 || event->vector != 6u) return 0;
   outcome->abi_version = RUNTIME_GENERIC_UD_EVENT_VERSION;
   if (fixture_pending) {
@@ -68,7 +71,9 @@ static uint32_t execute(void)
 
 int main()
 {
-  if (!begin_ud_stage()) return 1;
+  if (!runtime_bop_ingress_bind(fixture_route, 0) ||
+      !machine_facade_bind_opaque_callback(
+        runtime_bop_ingress_opaque_callback, 0) || !begin_ud_stage()) return 1;
   fixture_pending = 1;
   if (execute() != RUNTIME_MACHINE_STAGE_EXECUTION_PENDING ||
       !runtime_machine_stage_active()) return 2;
@@ -79,5 +84,7 @@ int main()
   fixture_stop = 1;
   if (execute() != RUNTIME_MACHINE_STAGE_EXECUTION_CONTROLLED_STOP) return 3;
   fixture_stop = 0;
+  machine_facade_unbind_opaque_callback();
+  runtime_bop_ingress_unbind();
   return runtime_machine_stage_reset() == RUNTIME_MACHINE_STAGE_OK ? 0 : 4;
 }

@@ -2,34 +2,34 @@
 
 ## Current Work
 
-**Active: M0 T271 S3 — OpenNT COMMAND original dispatcher/provider recovery.**
+**Active: M0 T271 S4 — OpenNT XMS original dispatcher/provider recovery.**
 
 ## Active Packet
 
-### M0 T271 S3 — OpenNT COMMAND original dispatcher/provider recovery
+### M0 T271 S4 — OpenNT XMS original dispatcher/provider recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T271 S3`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | Owner-approved T271 plan; S2 closure is recorded in `history/m0-t271-s2-closure-20260825.md`. |
-| Objective | Replace the frozen project-authored COMMAND entry/session/dispatch composition with the original OpenNT COMMAND package's dispatcher, globals, provider ordering and source-proven failure paths. |
-| Non-goals | No XMS implementation, no DPMI/WOW/Redirector/VDD/debugger recovery, no new Bochs semantics, and no trace-led leaf handler. |
-| Scope | Original COMMAND `cmd.c`, `cmddata.c`, `cmddisp.c` and reached provider bodies; current COMMAND bridge/session/composition boundaries; required same-shaped `adapter-softpc`, `adapter-win32`, `opennt-host` and session facades; COMMAND fixtures, manifests and tracker/evidence. |
-| Verification | Original source/ABI/failure map; complete COMMAND service table/order comparison; direct/failure fixture matrix; no app dependency inside the recovered COMMAND route; formal Ninja closure, governance and `git diff --check`. |
-| Exit Criteria | `MS_bop_4` enters source-shaped COMMAND dispatch; imported source owns service-table/global ordering; every unavailable historical dependency has one same-shaped adapter or original failure disposition; no project-defined COMMAND dispatcher remains. |
-| Reference Baseline | T271 proposal, S1/S2 closures, OpenNT `nt_bop.c` and selected original COMMAND sources, T270/S4 disposition ledger and live BOP tracker. |
-| Files And ABI Surface | COMMAND service/global/failure ownership only. The generic ingress remains one opaque event/result ABI; no selector-specific public ABI is added. |
+| Identifier Mode | `M0 T271 S4`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner-approved T271 plan; S3 closure is recorded in `history/m0-t271-s3-closure-20260825.md`. |
+| Objective | Replace the remaining project-authored XMS entry/session/dispatch composition with the original OpenNT XMS package's dispatcher, globals, provider ordering and source-proven failure paths. |
+| Non-goals | No DPMI/WOW/Redirector/VDD/debugger recovery, no new Bochs semantics, no generic memory manager, and no trace-led leaf handler. |
+| Scope | Original `xms.486/xms.c`, `xmsdisp.c`, `xmsmemr.c`, `xms.h` and reached provider bodies; A20, memory, guest-address and session seams; XMS fixtures, manifests and tracker/evidence. |
+| Verification | Original source/ABI/failure map; complete XMS table/order comparison; direct/failure fixture matrix; one mapping-manager disposition per guest-pointer call; formal Ninja closure, governance and `git diff --check`. |
+| Exit Criteria | Original XMS dispatcher/global ordering is active; each admitted XMS service uses an original body, same-shaped seam or source-defined failure; no project-defined replacement XMS dispatcher remains. |
+| Reference Baseline | T271 proposal, S1/S2/S3 closures, OpenNT XMS package sources, current XMS tracker rows and mapping-manager policy. |
+| Files And ABI Surface | XMS service/global/failure ownership only. The generic ingress remains one opaque event/result ABI; no selector-specific public ABI is added. |
 | Applicable Rules | Source policy, source-first ladder, mirror-component standard, adapter/session boundaries, production-only roots, build hygiene and documentation governance. |
-| Expected Markers | `MS_bop_4` enters source-shaped COMMAND dispatch; original service table/order is active; every unavailable dependency has a same-shaped adapter or original failure disposition; no project-defined COMMAND dispatcher remains. |
-| Asset Needs | Pinned local OpenNT MVDM COMMAND sources, S1/S2 ledgers, existing COMMAND fixtures, formal Ninja manifest and public Win32/SoftPC adapter surfaces. |
-| Reporting Requirements | Identify each imported source path and divergence; distinguish original body, true subset, same-shaped facade and deferred terminal; report all COMMAND service dispositions and focused test results. |
-| Stop Conditions | Original COMMAND source/order is ambiguous, a source body needs an unapproved host/machine semantic, a proposed seam changes a public ABI or failure result, or work would consume a non-COMMAND owner package. |
-| Similar-Issue Sweep | COMMAND dispatcher globals/data, all `cmd*.c` direct imports, provider registration, CCPU/SAS calls, OEM/Win32 facades, fixture coverage and README divergence entries. |
-| Original Owner Request | “处理 command；尽可能按照原始 OpenNT 代码最小修改接入。” |
+| Expected Markers | Original XMS dispatcher/table ordering is active; every unavailable dependency has a same-shaped adapter or original failure disposition; no project-defined XMS dispatcher remains. |
+| Asset Needs | Pinned local OpenNT MVDM XMS sources, S1--S3 ledgers, existing XMS fixtures, mapping-manager evidence, formal Ninja manifest and declared adapter surfaces. |
+| Reporting Requirements | Identify each imported source path and divergence; distinguish original body, true subset, same-shaped facade and deferred terminal; report every XMS service disposition and focused test result. |
+| Stop Conditions | Original XMS source/order is ambiguous, a source body needs an unapproved machine semantic, a proposed seam changes a public ABI or failure result, or work would consume a non-XMS owner package. |
+| Similar-Issue Sweep | XMS dispatcher globals/data, all `xms*.c` direct imports, A20/memory/UMB seams, mapping leases, fixture coverage and README divergence entries. |
+| Original Owner Request | “处理 xms；尽可能按照原始 OpenNT 代码最小修改接入。” |
 
 **T271 plan:** S1 non-mirror composition extraction (closed); S2 DEM original
-package recovery (closed); S3 COMMAND original package recovery (active); S4 XMS
-original package recovery; S5 whole-component mirror/source-recovery closure.
+package recovery (closed); S3 COMMAND original package recovery (closed); S4 XMS
+original package recovery (active); S5 whole-component mirror/source-recovery closure.
 T270 remains closed in [its history](history/m0-t270-closure-20260825.md).
 
 **S3 progress:** P1 restores the reached OpenNT `MS_bop_4` entry, `cmddata.c`
@@ -161,6 +161,13 @@ fixture passes. See [S3 P18 evidence](etc/evidence/m0-t271-s3-p18-command-pif-ow
 names and is compiled into the app library.  Original COMMAND source entry,
 table and provider ownership remain unchanged. Formal native-session, PIF and
 final-app links pass. See [S3 P19 evidence](etc/evidence/m0-t271-s3-p19-command-app-session-binding-extraction-001.md).
+
+**S3 P20 / closure:** the full formal COMMAND source-provider matrix passes.
+Fixture-only dialog isolation and opaque callback binding were corrected
+without altering product dialogs or BOP routing. The imported `MS_bop_4` and
+17-slot COMMAND table are the active dispatcher path; remaining cross-owner
+capabilities are explicitly transferred. See [S3 P20 evidence](etc/evidence/m0-t271-s3-p20-command-final-matrix-and-fixture-composition-001.md)
+and [S3 closure](history/m0-t271-s3-closure-20260825.md).
 
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service

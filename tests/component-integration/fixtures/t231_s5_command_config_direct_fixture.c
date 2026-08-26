@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "adapter-win32/facade/opennt_error_dialog_facade.h"
 #include "opennt-bop/command/opennt_command_composition.h"
 
 typedef struct fixture_context { uint8_t guest[0x10000]; } fixture_context;
@@ -144,9 +145,18 @@ int main(void)
         !multisz_contains(lpszzcmdEnv16, "FOO")) return 4;
 
     runtime_command_config_set_inputs(&session, "Z:\\does-not-exist\\config.nt", autoexec_path);
+    /* The final assertion deliberately drives cmdconf.c's original terminal
+     * error route.  Keep the product's public Win32 dialog behavior intact;
+     * this fixture uses the facade's test-only deterministic reply so CI does
+     * not wait for interactive acknowledgement. */
+    runtime_opennt_error_dialog_fixture_suppress(TRUE);
     if (!invoke(&context, &event, &cpu, &result, &session,
             RUNTIME_COMMAND_MISC_GET_CONFIG_SYS) ||
-        result.disposition != RUNTIME_CPU_RESULT_STOP) return 5;
+        result.disposition != RUNTIME_CPU_RESULT_STOP) {
+        runtime_opennt_error_dialog_fixture_suppress(FALSE);
+        return 5;
+    }
+    runtime_opennt_error_dialog_fixture_suppress(FALSE);
 
     DeleteConfigFiles();
     free(lpszzcmdEnv16); lpszzcmdEnv16 = NULL;

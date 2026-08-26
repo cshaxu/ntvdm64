@@ -1,8 +1,11 @@
 #include "bochs.h"
 #include "cpu/cpu.h"
+#include "adapter-bochs/machine_facade.h"
+#include "adapter-bop/bop_ingress.h"
 #include "adapter-softpc/machine_stage.h"
 extern "C" {
 #include "opennt-bop/ingress/command_native_session.h"
+#include "opennt-bop/ingress/opennt_bop_route.h"
 }
 
 #include <string.h>
@@ -106,7 +109,10 @@ int main()
   runtime_command_native_session session;
   if (!begin_native_cmdexec_stage() ||
       !runtime_command_native_session_initialize(&session) ||
-      !runtime_command_native_session_bind(&session)) return 1;
+      !runtime_command_native_session_bind(&session) ||
+      !runtime_bop_ingress_bind(runtime_opennt_bop_route_dispatch, 0) ||
+      !machine_facade_bind_opaque_callback(
+        runtime_bop_ingress_opaque_callback, 0)) return 1;
   if (execute_slice() != RUNTIME_MACHINE_STAGE_EXECUTION_PENDING) return 2;
   for (attempt = 0u; attempt < 100u; ++attempt) {
     Sleep(10u);
@@ -131,6 +137,8 @@ int main()
       session.direct.pending.command);
     return 3;
   }
+  machine_facade_unbind_opaque_callback();
+  runtime_bop_ingress_unbind();
   runtime_command_native_session_unbind(&session);
   return runtime_machine_stage_reset() == RUNTIME_MACHINE_STAGE_OK ? 0 : 4;
 }
