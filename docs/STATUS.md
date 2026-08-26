@@ -129,6 +129,11 @@ the selector-blind CCPU frame context; only the original non-returning
 COMMAND convention remains locally. Redirector and WOW-specific tails retain
 their named future owner packages. See [S3 P13 evidence](etc/evidence/m0-t271-s3-p13-command-residual-owner-audit-001.md).
 
+**S3 P14:** `cmdExec32` is now a registered private same-signature overlay,
+not a large hidden rewrite inside the `cmdexec.c` mirror.  The mirror retains
+the original callers and a small explicit crop boundary; lifecycle, child and
+native-entry regressions pass after formal Ninja relink. See [S3 P14 evidence](etc/evidence/m0-t271-s3-p14-command-exec-overlay-isolation-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored
