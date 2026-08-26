@@ -28,26 +28,30 @@ cancellation, context-bearing LIFO teardown and bounded TLS bind/unbind;
 global cancellation and COMMAND input payload were not carried forward. Its
 focused lifecycle test passes under both MSVC x64 and Win32/x86 `/MT`.
 
-### M0 T272 S5 — Broker contract and host-width matrix
+**T272 closure:** the neutral session/mapping/lease/broker foundation is
+complete and pushed through `d94d46ae`; its authoritative record is
+[M0 T272 closure](history/m0-t272-closure-20260826.md).
+
+### M0 T273 S1 — Bochs provenance and mirror recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T272 S5`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Owner-approved neutral-runtime proposal; S4 checked lease closure is committed in `7aa78552`, so the final preplanned S5 is admitted. |
-| Objective | Define the versioned, fixed-width broker contract, stable cross-process identity and disconnect cleanup rules, and prove the neutral foundation under x86 and x64. |
-| Scope | `src/broker`, broker tests, the S5 audit record and status/README registration. A bounded in-memory registry verifies contract semantics only; no IPC transport is added. |
-| Non-goals | No named pipe/RPC server, no Win32 token query, no MVDM provider, no BOP, no guest pointer/HANDLE transfer and no multiple imported MVDM session claim. |
-| Verification | Fixed wire-size/value audit; registration/cross-user denial/disconnect fixture under MSVC x64 and x86 `/MT`; all S2--S5 focused tests, governance and `git diff --check`. |
-| Exit Criteria | Wire records contain only copied fixed-width values; IDs are stable/monotonic; a broker record is visible only to its authenticated user key and is removed on disconnect; both host architectures pass identical neutral behavior. |
-| Reference Baseline | [Foundation proposal](etc/operations/proposal-rebootstrap-neutral-runtime-foundation-001.md), S2--S4 closures and the absence of a reusable project-local broker implementation. |
-| Files And ABI Surface | `src/broker/wire.{c,h}`, `src/broker/broker.{c,h}`, focused fixture and audit record. No ABI conveys a pointer, HANDLE, local surrogate or guest address. |
-| Applicable Rules | Execution, architecture, coding, source policy, build hygiene and documentation governance rules. |
-| Expected Markers | Version/magic/size validation, fixed copied user key, per-user denial, monotonic ID allocation and disconnect deletion. |
-| Asset Needs | New broker root, session foundation, MSVC x64/x86 and disposable `build/M0-T272-S5/` outputs. |
-| Reporting Requirements | Document the lack of historical broker reuse, fixed-width ABI rationale, transport deferral and complete x86/x64 test matrix. |
-| Stop Conditions | Any wire field needs a native pointer/HANDLE/local identity, any cross-user route bypasses key validation, or a transport/provider semantic enters the neutral package. |
-| Similar-Issue Sweep | Existing app/session process-global state, retained pipe code, mapping identities, all broker headers and all new fixture inputs. |
-| Original Owner Request | Continue the approved rebootstrap program with minimal non-mirror components, shared mapping implementation and no source/build/runtime dependency on `src.old/`. |
+| Identifier Mode | `M0 T273 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner-approved first queue candidate, [Bochs foundation proposal](etc/operations/proposal-rebootstrap-bochs-machine-foundation-001.md); T272 is closed at `d94d46ae`. |
+| Objective | Establish the exact Bochs 2.6 baseline and a complete per-file source/mirror/overlay disposition before any Bochs source or machine code enters the new production graph. |
+| Scope | `bochs-core`, future overlay boundary, `adapter-bochs` reuse inventory, source hashes, divergence registers and audit evidence only. |
+| Non-goals | No Bochs build repair, no machine lifecycle implementation, no OpenNT/BOP/DOS/WOW/SoftPC/Win32 meaning, no app composition and no change to upstream Bochs sources. |
+| Verification | Exact baseline identity/provenance check; per-file compare of `src.old/bochs-core`; owner/dependency scan; architecture/mirror-rule review, governance and `git diff --check`. |
+| Exit Criteria | Every reusable Bochs file has exact/subset/same-shaped/overlay/defer disposition, each difference has a source baseline and exception owner, and no unreviewed old path is consumed by a formal build. |
+| Reference Baseline | Pinned `O:\repos.external\bochs-2.6-compat\bochs-2.6`, T272 closure, existing source-owner manifest and quarantined old Bochs/adaptor references. |
+| Files And ABI Surface | Audit/provenance records and component README/register only. No production Bochs or adapter ABI changes are admitted in S1. |
+| Applicable Rules | Execution, source policy, mirror-component, architecture, coding, build-hygiene and documentation rules. |
+| Expected Markers | Exact baseline hash, file-classification ledger, registered divergence IDs, and explicit `bochs-core`/`adapter-bochs` ownership boundary. |
+| Asset Needs | Pinned Bochs source tree, quarantined `src.old/bochs-core` and `src.old/adapter-bochs`, source policy and comparison tooling. |
+| Reporting Requirements | State every source-reuse/rung disposition, any ambiguity, proposed minimal overlay shape and later S2 dependencies without claiming a runnable machine. |
+| Stop Conditions | Baseline cannot be identified, a file exceeds mirror divergence limits without an overlay route, or an old implementation imports forbidden MVDM/Win32/provider semantics. |
+| Similar-Issue Sweep | Bochs core/overlay candidates, adapter-bochs candidates, old build manifests, include dependencies and exception README coverage. |
+| Original Owner Request | Rebootstrap from zero using existing app/session/Bochs/adapter files only after global provenance and owner review, while retaining a minimal source-audited Bochs machine boundary. |
 
 The latest closed packet remains the technical baseline below.
 
