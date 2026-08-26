@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2608 |
+| Documentation records | 2613 |
 | --- | --- |
-| Generated UTC | 2026-08-26T23:21:09Z |
+| Generated UTC | 2026-08-26T23:26:16Z |
 
 ## Entries
 
@@ -757,6 +757,10 @@ content-divergent entries.
 | etc/operations/m0-t279-s3-support-library-build-evidence-001.md | indexed supporting material | b31da2cbb6ce8b7d190edd8e0b7a5a8762d11b3bbb93068aae7b599c1d25c58a |
 | etc/operations/m0-t279-s3-support-library-build-plan-001.md | indexed supporting material | fcadb033cdf72b50f1ad133b3fb6fb65a1940289e61106942522e1cb97b443f5 |
 | etc/operations/m0-t280-s10-dem-ntioapi-abi-closure-plan-001.md | indexed supporting material | 452680b706d801c07365cee5ab2dc880fc4d7ae6aca8350bbfe298e5c2e95c14 |
+| etc/operations/m0-t280-s10-dem-ntioapi-abi-evidence-001.md | indexed supporting material | 73f23eb7a21ecad223f80ece4ff397ad307952db5b26981cb2c21b922a69fef5 |
+| etc/operations/m0-t280-s10-dem-ntioapi-implementation-plan-001.md | indexed supporting material | 26c13e7446c613eddd65b12bb242d6397b430e6201b2b9eeb09509a00ec8e857 |
+| etc/operations/m0-t280-s10-dem-ntioapi-reached-abi-ledger.tsv | indexed supporting material | 0427a7ca0c4960fb141e45a71d35568fbe8f6eac844b7e1fc1a00e4e0b0b395a |
+| etc/operations/m0-t280-s11-reached-ntioapi-facade-plan-001.md | indexed supporting material | 5bb1e65e2952d66f0c8b71e8ae9cda76a76884753db94f1f5775f2e000215f70 |
 | etc/operations/m0-t280-s1-host-control-dem-workset-audit-001.md | indexed supporting material | 784c0bf2fdf1272d9a62c65b590c21b5040f55a33f4f52a68013bd9dd19b9388 |
 | etc/operations/m0-t280-s1-host-control-dem-workset-ledger.tsv | indexed supporting material | c7192301f8681aa5735e4e9520634db87139e55c318a2e23eae003ac05676a6d |
 | etc/operations/m0-t280-s1-host-control-dem-workset-plan-001.md | indexed supporting material | 720c7cbb8cce103d905c673861bf84629acf4e1a85d373bffa7a12f62ef79784 |
@@ -2337,6 +2341,7 @@ content-divergent entries.
 | history/m0-t277-closure-20260826.md | closed task history | ad259849dd2f20940eab95a8fc79dead0d146408d62d981421ce653f09e0fcd4 |
 | history/m0-t278-closure-20260826.md | closed task history | 686f74d4f558f47d661391b0144ab44df2ca2c28d930d2be64b020c897e235b7 |
 | history/m0-t279-closure-20260826.md | closed task history | e271922da8369935dfa8f750feffebab8571504509f95fae906b93d10765a93c |
+| history/m0-t280-s10-closure-20260826.md | closed task history | 197fb6dae419cd72d596b9a4d79b9efa54a21c3ba34fb43d18a66b0cf4a445e5 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -2622,7 +2627,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | d620bfc42e4929ef85e16435031c813e277211a441fdb5545c0c4b779b705f33 |
+| STATUS.md | principal control document | b06fc28115f93d44f804482ac3fd21dfe4363ac3b4a5e2e0696fca77d794ce57 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |
