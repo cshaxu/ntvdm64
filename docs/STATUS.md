@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T280 S1** — M0 T280 recovers the original host control plane and
+**Active: M0 T280 S2** — M0 T280 recovers the original host control plane and
 DEM as one source-owner package after the T279 support-library closure. It is
 Ordinary Mode with single-person dual-role review; no selector/BOP route is
 enabled merely by this planning packet.
@@ -26,23 +26,23 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S1 — host-control and DEM workset admission
+### M0 T280 S2 — ingress and machine-façade declaration closure
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T280 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Queue-head Wave 2 follows closed T279. Begin with a complete source-owner workset, not a trace-selected BOP or a compile-error-driven shim. |
-| Objective | Materialise the exact original DEM and reached SoftPC host-control file/interface workset, separating adapter-backed bodies, narrow overlay prerequisites, binding-only declarations and excluded alternate executors. |
-| Non-goals | No original-body edit, BOP enablement, machine behavior change, adapter implementation, DEM service implementation, guest trace, or private NT4 product-shell rehost. |
-| Reference Baseline | T276 final DOS and SoftPC host-control dispositions, T277/S5 197-row host-control interface ledger, T279 support-library closure and Wave 2 plan. |
-| Files And ABI Surface | Generated Wave 2 workset ledger and admission plan only. No runtime ABI changes. |
+| Identifier Mode | `M0 T280 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S1 closed with 81 exact source paths in `d3a79922`. Start with the original `nt_bop.c` and CPU/SAS façade declaration/import map; do not enable a selector merely because its declaration is mapped. |
+| Objective | Produce a complete source-shaped declaration/import map for fixed BOP ingress and the historical CPU/SAS/Sim32 façade boundary, including explicit owner, same-form adapter target, mapping-manager use and unavailable outcome. |
+| Non-goals | No original-body edit, BOP enablement, machine behavior change, adapter implementation, DEM service implementation, guest trace, second executor, or private NT4 product-shell rehost. |
+| Reference Baseline | T280/S1 workset, T277/S5 host-control interface ledger, exact original `nt_bop.c`, `nt_aorc.c`, `nt_sas.c`, `sim32.c`, and the T279 support-library closure. |
+| Files And ABI Surface | Declaration/import ledger and source-evidence audit only. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Every selected `dos/dem` and `softpc.new/host/src` path has one inherited final disposition, owner/binding boundary and T280 implementation grouping; all counts reconcile to the global tracker. |
-| Expected Markers | 16 DEM adapter-backed bodies; 33 host-control adapter-backed bodies; six host-control overlay prerequisites; five binding declarations; 21 excluded paths. |
-| Asset Needs | Exact MVDM host mirror, global final-disposition ledger, T277/S5 ledger and support-library build artifacts. |
-| Reporting Requirements | Exact source counts, dependency grouping, boundary owners, overlay cases, exclusion reasons and S2 admission preconditions. |
-| Stop Conditions | A path is classified by name alone, a new adapter is proposed without source evidence, Bochs becomes BOP-aware, raw host pointers enter DOS fields, or a trace selects a leaf implementation. |
-| Exit Criteria | Reproducible Wave 2 workset is complete, count-reconciled and dependency-grouped; it makes explicit which prerequisite package/interface closure S2 must implement first. |
+| Verification | Every exposed ingress, CPU/SAS table and Sim32 transport surface has an exact source form, exclusive adapter boundary, mapping statement and implementation status; no entry directs an OpenNT source body to Bochs. |
+| Expected Markers | Original BOP dispatcher shape → `adapter-bop`; CPU/SAS/Sim32 façade → `adapter-softpc -> adapter-bochs`; session stop/UI routes explicit; six Sim32/CPU transport overlays remain not enabled. |
+| Asset Needs | Exact MVDM host mirror, T280/S1 workset, T277/S5 ledger, source headers and existing adapter/session boundaries. |
+| Reporting Requirements | Source line/range, original symbol group, one owner chain, guest/host mapping distinction, excluded successor and S3 body-import prerequisite. |
+| Stop Conditions | Any selector enters Bochs, raw host pointer crosses guest fields, mapper is used for host-local scratch pointers, a second CCPU executor appears, or a trace selects a leaf implementation. |
+| Exit Criteria | Reproducible S2 declaration/import ledger covers all mapped ingress/façade groups and is source-reviewed; it identifies which exact original source bodies can enter S3 without an invented replacement. |
 | Original Owner Request | “单人双角色模式执行队列任务”。 |
 | Similar-Issue Sweep | DEM vs COMMAND ownership, host-control executors vs façades, overlay transport seams, session/mapping boundary, known adapter ownership, and non-runtime historical product shells. |
 
