@@ -169,6 +169,11 @@ without altering product dialogs or BOP routing. The imported `MS_bop_4` and
 capabilities are explicitly transferred. See [S3 P20 evidence](etc/evidence/m0-t271-s3-p20-command-final-matrix-and-fixture-composition-001.md)
 and [S3 closure](history/m0-t271-s3-closure-20260825.md).
 
+**S4 P1:** XMS package configuration/call composition is now a registered
+private overlay behind the sole `xms/opennt_xms_composition.c` mirror boundary.
+The original 12-slot XMS table and provider bodies are unchanged; formal source
+and A20 fixtures pass. See [S4 P1 evidence](etc/evidence/m0-t271-s4-p1-xms-composition-overlay-isolation-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored
