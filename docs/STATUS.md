@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T276 S3** — Extract original textual interface declarations as
-evidence before resolving reached caller-to-interface dependencies.
+**Active: M0 T276 S4** — Extract textual caller/callee candidates from all
+selected translation units before assigning adapter or package ownership.
 
 The current intermission architecture is the seventeen-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,25 +24,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S3 — original textual interface-declaration baseline
+### M0 T276 S4 — textual caller/callee correlation baseline
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T276 S3`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | The owner approved tracker-led recovery. T276/S1 and S2 established byte-exact file identity and non-enabling original build-input evidence. |
-| Objective | Extract each lexical historical `extern` declaration found in the selected MVDM mirror into an auditable provenance ledger, without treating a declaration as a reached call or an available interface. |
-| Non-goals | No provider/adaptor implementation, source-body edit, enabled build edge, external-call resolution, function-level recovery conclusion, BOP behavior, Bochs change or guest execution. |
-| Reference Baseline | T276 S1 identity evidence, T276 S2 translation-unit/build-input/include ledgers, 23 exact package mirrors and source policy. |
-| Files And ABI Surface | Interface-recovery ledger, declaration provenance ledger, reproducible extractor/evidence, Status and documentation inventory. No runtime ABI changes. |
+| Identifier Mode | `M0 T276 S4`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | The owner approved tracker-led recovery. T276/S1–S3 establish exact file, build-input and declaration provenance but no caller/recovery decision. |
+| Objective | Extract lexical caller/callee candidates from every selected translation unit and correlate names only with the S3 declaration evidence; record unique, ambiguous and unrepresented names without inferring external reachability or interface ownership. |
+| Non-goals | No provider/adaptor implementation, source-body edit, enabled build edge, ABI/owner conclusion, BOP behavior, Bochs change or guest execution. |
+| Reference Baseline | T276 S1 identity, S2 translation-unit/build-input/include ledgers, S3 declaration candidates, 23 exact package mirrors and source policy. |
+| Files And ABI Surface | Caller/callee evidence ledger, interface-recovery tracker evidence fields, reproducible extractor/evidence, Status and documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Account for every selected declaration file; preserve file/line/raw-declaration evidence; reject duplicate candidate IDs; retain the twelve family debt rows and do not overwrite their `unexpanded` status. |
-| Expected Markers | Textual declaration candidates are `observed`; reached caller, final owner, adapter, composition and x86/x64 decisions remain `unreviewed`. |
-| Asset Needs | `opennt-mvdm-host` byte-exact mirror, T276 file/interface ledgers and PowerShell text-processing facilities. |
-| Reporting Requirements | Exact declaration-file/candidate counts, parser limitations, declarations lacking unambiguous lexical names and S4 handoff to caller-to-interface resolution. |
-| Stop Conditions | An input cannot map to a verified file-ledger row, generated evidence would infer reachability/availability from a declaration, or source modification would be needed. |
-| Exit Criteria | Reproducible declaration provenance exists for all selected headers/inc files and interface tracker retains only evidence-neutral candidate rows; evidence and review are committed/pushed. |
+| Verification | Account for all 612 selected translation units; preserve caller file/line/raw token evidence; reject duplicate call IDs; demonstrate the three lexical-correlation outcomes without assigning an owner from name matching. |
+| Expected Markers | Caller/callee candidates are `observed`; final external reachability, ABI, owner, adapter, composition and x86/x64 decisions remain `unreviewed`. |
+| Asset Needs | `opennt-mvdm-host` byte-exact mirror, T276 source/declaration ledgers and PowerShell text-processing facilities. |
+| Reporting Requirements | Exact translation-unit/call/correlation counts, parser limitations, ambiguous/unrepresented names and S5 handoff to source-level external interface review. |
+| Stop Conditions | A translation unit cannot map to a verified file row, generated evidence would infer a linkable/external call from lexical data, or source modification would be needed. |
+| Exit Criteria | Reproducible lexical caller evidence exists for all 612 translation units; the correlation report explicitly separates unknown/ambiguous names; evidence and review are committed/pushed. |
 | Original Owner Request | “好的 开始审计任务”。 |
-| Similar-Issue Sweep | Declaration-file provenance, `extern` lexical forms, multiline declarations, candidate naming, duplicate IDs and accidental reachability/availability claims. |
+| Similar-Issue Sweep | Translation-unit provenance, lexical call forms, function definitions/macros, candidate correlations, duplicate IDs and accidental external-reachability claims. |
 
 **S1 closure:** the clean source topology initially contained thirteen
 production roots and no premature production service body. The
@@ -90,6 +90,14 @@ they do not assert caller reachability, ABI availability, adapter ownership or
 buildability.  See [T276 S3 declaration evidence](etc/operations/m0-t276-s3-interface-declaration-baseline-001.md).
 The next S must resolve actual translation-unit callers against these candidates
 and record ambiguities rather than guessing a package owner.
+
+**T276 S4 closure:** every selected translation unit now has an explicit scan
+state.  The C/C++ lexical scan records 89,924 call-or-definition candidates,
+split into 4,119 unique-name, 7,099 ambiguous-name and 78,706 unrepresented
+declaration correlations; 58 assembly units are explicitly not projected into
+that model.  See [T276 S4 caller/callee evidence](etc/operations/m0-t276-s4-caller-callee-correlation-001.md).
+S5 reviews only source-proven external boundaries and preserves unresolved
+assembly/macro cases as evidence rather than inventing owners.
 
 ### M0 T275 S1 — Complete interface and reuse ledger
 
