@@ -1,5 +1,13 @@
 # Proposal: OpenNT XMS Owner-Package Completion
 
+## Supersession
+
+This retained supporting record describes the pre-rebootstrap component model
+and queue. It is not an active queue candidate. Its historical component names
+and candidate number do not govern the current source layout; see the
+[rebootstrap program roadmap](proposal-opennt-mvdm-package-mirror-rebootstrap-001.md)
+and its five queued candidates for the successor admission order.
+
 ## Purpose
 
 The XMS mirror is code-complete except `52:09`; recover its remaining original
@@ -8,7 +16,7 @@ A20, allocation/move/lock and empty-UMB failure contracts are not reopened.
 
 ## Queue relationship
 
-This is supporting owner guidance for queue candidate 2, **PC keyboard, IVT
+This was supporting owner guidance for a former queue candidate, **PC keyboard, IVT
 and INT 15h compatibility recovery**.  Its admission freezes `52:09` and the
 corresponding keyboard/INT15 dependency rows; it does not reopen the other 11
 locally closed XMS endpoints.

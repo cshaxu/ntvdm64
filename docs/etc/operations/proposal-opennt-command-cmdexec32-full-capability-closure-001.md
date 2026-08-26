@@ -24,7 +24,7 @@ that its cross-owner lifecycle has closed.
 
 ## Queue relationship
 
-This is the admission plan for queue candidate 5, **COMMAND `cmdExec32`
+This is the admission plan for queue candidate 9, **COMMAND `cmdExec32`
 full-capability composition closure**.  It is admitted only after the
 required native owner contracts are complete; candidate 10 then audits its
 integrated result against the complete tracker.

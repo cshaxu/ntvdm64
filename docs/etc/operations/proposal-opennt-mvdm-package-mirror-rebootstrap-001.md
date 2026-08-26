@@ -1,4 +1,4 @@
-# OpenNT MVDM package-mirror rebootstrap
+# OpenNT MVDM package-mirror rebootstrap program
 
 ## Decision
 
@@ -103,37 +103,33 @@ OpenNT and Bochs mirrors come from pinned upstream baselines. Existing adapter
 and mapping-manager code is evidence that may be reintroduced only after its
 owner, width model and original caller contract pass review.
 
-## Proposed subtasks
+## Candidate task sequence
 
-1. **S1 — Governance, package union and owner manifest.** Record the thirteen
-   roots, per-path OpenNT union, Bochs identity, package-to-library plan,
-   `src.old` quarantine, x86/x64 targets and acceptance scans.
-2. **S2 — Session, 32-bit compatibility space and broker contracts.** Recover
-   the single mapping-manager implementation with three typed per-session
-   instances; prove x86/x64 identical token behavior, checked guest-memory
-   leases, thread-bound monitor context, and define the versioned broker wire
-   ABI plus one-session-per-process admission.
-3. **S3 — Bochs foundation and app shell.** Restore audited `bochs-core`,
-   `adapter-bochs` and minimal app composition without importing old BOP/host
-   composition or claiming guest execution.
-4. **S4 — Platform ABI and complete guest mirrors.** Import canonical
-   `opennt-platform-abi`, DOS and WOW16 trees with provenance and load
-   manifests; prove guest objects/libraries are absent from host links.
-5. **S5 — Canonical MVDM host mirror.** Import the complete selected
-   non-guest/non-tool MVDM tree under `opennt-mvdm-host`, preserving package
-   topology and leaving unselected translation units dormant rather than
-   rewriting them.
-6. **S6 — Same-shaped adapters and broker implementation.** Recover
-   `adapter-bop`, `adapter-softpc`, `adapter-win32`, `adapter-vdm-monitor` and
-   the minimum cooperative broker registration/identity/queue/cleanup path.
-   Every entry cites an original caller and deterministic unavailable result.
-7. **S7 — Formal dual-architecture build and CLI composition.** Generate
-   Ninja graphs for MSVC x86 `/MT` and x64 `/MT`, select initial original
-   packages, verify no `src.old` input and produce a documented target
-   admission result without overstating runtime/provider closure.
-8. **S8 — Whole-tree and boundary audit.** Hash/compare mirrors, verify every
-   divergence/overlay, dependency direction, mapping/broker negative tests,
-   guest load-only isolation and publish the next package-led work order.
+This document is the program-level design authority. It is not itself an
+admissible T packet. The queue carries the following five bounded candidates
+in order:
+
+1. [Repository and neutral runtime foundation](proposal-rebootstrap-neutral-runtime-foundation-001.md)
+   establishes the owner/provenance manifest, `session`, the shared
+   mapping-manager implementation, broker wire contract and host-width tests.
+2. [Bochs machine foundation](proposal-rebootstrap-bochs-machine-foundation-001.md)
+   establishes the `bochs-core` / `adapter-bochs` mechanical closure and the
+   smallest app-owned machine shell.
+3. [Canonical OpenNT source supply](proposal-rebootstrap-opennt-source-supply-001.md)
+   imports the platform ABI, guest mirrors and selected MVDM host package
+   union without claiming provider execution.
+4. [Historical interface adapter recovery](proposal-rebootstrap-historical-interface-adapter-recovery-001.md)
+   recovers same-shaped BOP, SoftPC, Win32 and VDM-monitor interfaces plus the
+   minimum cooperative broker implementation.
+5. [Dual-architecture product composition](proposal-rebootstrap-dual-architecture-product-composition-001.md)
+   creates both formal Ninja graphs, links admitted original packages, wires
+   the CLI and performs the complete production-boundary audit.
+
+Each candidate receives its numeric T identifier only when admitted. A later
+candidate cannot silently pull an earlier candidate's unfinished work into its
+scope. The five documents divide this former eight-S outline by independently
+verifiable dependency closure; they do not split the thirteen components into
+separate component-only tasks.
 
 ## Exit criteria
 
@@ -158,8 +154,8 @@ owner, width model and original caller contract pass review.
 
 ## Non-goals
 
-This task does not complete every dormant MVDM provider, reconstruct CSRSS or
-NT4 kernel VDM, prove in-process multiple imported MVDM contexts, or claim
+The program does not complete every dormant MVDM provider, reconstruct CSRSS
+or NT4 kernel VDM, prove in-process multiple imported MVDM contexts, or claim
 full DOS/WOW execution continuity. It establishes the clean package mirrors,
 width-safe foundations and complete interface boundaries needed for later
 owner-package recovery.

@@ -1,5 +1,13 @@
 # Proposal: bx Machine, BIOS and Selector Owner-Package Completion
 
+## Supersession
+
+This retained supporting record describes the pre-rebootstrap component model
+and queue. It is not an active queue candidate. Its historical `bx-*` names
+and candidate numbers do not govern the current source layout; see the
+[rebootstrap program roadmap](proposal-opennt-mvdm-package-mirror-rebootstrap-001.md)
+and its five queued candidates for the successor admission order.
+
 ## Purpose
 
 Provide the governing plan for individually admitted BOP-reachable SoftPC/BIOS
@@ -9,7 +17,7 @@ not permission to enable those components as one product-sized machine.
 
 ## Queue relationship
 
-This is supporting admission guidance for queue candidate 1 (the reached
+This was supporting admission guidance for a former queue candidate (the reached
 keyboard/IVT `BOP-5F` handoff) and candidate 7 (remaining evidence-admitted
 PC device expansion).  The former is constrained to
 `BOP-DEPENDENCY-104` / `BOP-TOP-5F`; it is not permission to enable any other

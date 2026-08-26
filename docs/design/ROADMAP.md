@@ -9,19 +9,21 @@ as integrated verification.
 
 ## Phase 0 — MVDM package rebootstrap
 
-1. Create the thirteen production roots and canonical OpenNT/OpenNT-4.5
-   package union.
-2. Restore the Bochs mirror/mechanical boundary and complete load-only DOS/WOW
-   guest mirrors.
-3. Establish multi-instance-safe `session`, the three typed mapping-manager
-   instances and the shared x86/x64 32-bit compatibility object space.
-4. Establish the formal VDM-monitor interface family and cross-process
-   `broker` contract.
-5. Generate independent MSVC x86 and x64 Ninja graphs and prove package, guest
-   and `src.old` isolation.
+Phase 0 is five dependency-closed candidate T packages, not one implementation
+packet and not thirteen component-only packets:
 
-**Gate:** all rebootstrap proposal exit criteria pass. This phase establishes
-source and interface closure, not general guest execution.
+1. repository and neutral runtime foundation;
+2. Bochs machine foundation;
+3. canonical OpenNT source supply;
+4. historical interface adapter recovery; and
+5. dual-architecture product composition.
+
+The program authority is the [rebootstrap program roadmap](../etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md).
+Each candidate has its own proposal and can be admitted only after its stated
+predecessor closes.
+
+**Gate:** all five candidate exit criteria pass. This phase establishes source,
+interface and product-build closure, not general guest execution.
 
 ## Phase 1 — Low-dependency original owner packages
 
