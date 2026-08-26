@@ -105,10 +105,15 @@
 
 // CPU level emulation. Default level is set in the configure script.
 // BX_CPU_LEVEL defines the CPU level to emulate.
-#define BX_CPU_LEVEL 6
+// DIVERGENCE(BX-CONFIG-001): the admitted bare machine targets the
+// owner-approved CPU5/Pentium-MMX guest profile, not this generated product
+// configuration's CPU6 default.  Host build width remains independent.
+#define BX_CPU_LEVEL 5
 
 // emulate x86-64 instruction set?
-#define BX_SUPPORT_X86_64 1
+// DIVERGENCE(BX-CONFIG-001): CPU5 has no x86-64 guest execution profile.
+// This does not restrict the x86/x64 host binaries built around the machine.
+#define BX_SUPPORT_X86_64 0
 
 // emulate long physical address (>32 bit)
 #define BX_PHY_ADDRESS_LONG 1
@@ -358,7 +363,14 @@
 #define SIZEOF_UNSIGNED_INT 4
 #define SIZEOF_UNSIGNED_LONG 4
 #define SIZEOF_UNSIGNED_LONG_LONG 8
+// DIVERGENCE(BX-CONFIG-002): this generated i386 configuration hard-coded
+// pointer width.  The same CPU5 guest mirror must build safely as either an
+// x86 or x64 host process, so retain the host compiler's actual pointer width.
+#if defined(_WIN64)
+#define SIZEOF_INT_P 8
+#else
 #define SIZEOF_INT_P 4
+#endif
 
 #define BX_64BIT_CONSTANTS_USE_LL 0
 #if BX_64BIT_CONSTANTS_USE_LL

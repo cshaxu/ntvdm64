@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2383 |
+| Documentation records | 2384 |
 | --- | --- |
-| Generated UTC | 2026-08-26T07:16:58Z |
+| Generated UTC | 2026-08-26T07:26:55Z |
 
 ## Entries
 
@@ -570,6 +570,7 @@ content-divergent entries.
 | etc/operations/m0-t272-s5-broker-contract-audit-001.md | indexed supporting material | fac96ccd4d79a46221a3369dd572ca65cd99a0285aa8e16a82b89adfaebfea1a |
 | etc/operations/m0-t273-s1-bochs-recovery-audit-001.md | indexed supporting material | bddea32af2f05dbcbb6fbc0e5ab00f5c32a7a507d09bdb7e65b14184243b0385 |
 | etc/operations/m0-t273-s2-p1-bochs-source-recovery-001.md | indexed supporting material | ae24d5af553dd2dc50a5ceebacb24b7fe5fef52250c75d7f1bc181c18240a928 |
+| etc/operations/m0-t273-s2-p2-cpu5-host-width-config-closure-001.md | indexed supporting material | 19e00135d2ec0cb80020681dc77d59f37ee0b0a73502bff1c406867d7b38253b |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -2397,7 +2398,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | ba6d159610ab6da26b2957942c916a1df94efc3f4163b606bb32416daf63bf29 |
+| STATUS.md | principal control document | 27fca5cf3677058f73184219c901da6f57d35782e58309caa2745891c0d7811f |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |

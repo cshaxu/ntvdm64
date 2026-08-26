@@ -53,6 +53,12 @@ complete and pushed through `d94d46ae`; its authoritative record is
 | Similar-Issue Sweep | SIM/logging/PC-time/CPU decode/RAM/default-port-space/reset/run lifecycle, old adapter candidate dependencies and all core include edges. |
 | Original Owner Request | Rebootstrap from zero using existing app/session/Bochs/adapter files only after global provenance and owner review, while retaining a minimal source-audited Bochs machine boundary. |
 
+**S2 P2 closure:** the recovered generated Bochs configuration is now the
+owner-approved CPU5/Pentium-MMX, non-x86-64-guest profile and selects native
+pointer width correctly for each host architecture. Focused x64/x86 `/MT`
+compilation passes; no minimal-machine link or runtime result is claimed. See
+[S2 P2 configuration record](etc/operations/m0-t273-s2-p2-cpu5-host-width-config-closure-001.md).
+
 The latest closed packet remains the technical baseline below.
 
 ### M0 T271 closure — OpenNT BOP source-recovery and mirror-boundary audit
