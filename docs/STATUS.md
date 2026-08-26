@@ -240,6 +240,14 @@ external overlay consumer or unregistered divergence marker remains. The S5
 technical exit evidence is ready for owner closure; see
 [P9 final matrix](etc/evidence/m0-t271-s5-p9-final-mirror-closure-matrix-001.md).
 
+**S5 P10:** P9's source classification is corrected: the production BOP root
+still contains non-OpenNT composition/facade bodies and app still owns selector
+routing. The dormant DPMI experiment has been removed from every formal
+production/test input and archived as evidence. The whole-root re-audit gives
+each remaining custom class a unique target owner; S5 remains active until
+those moves and original-dispatcher boundary recoveries are complete. See
+[P10 re-audit](etc/evidence/m0-t271-s5-p10-opennt-bop-mirror-reaudit-and-disposition-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

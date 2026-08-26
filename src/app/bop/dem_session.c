@@ -1,5 +1,7 @@
 #include "dem_session.h"
-#include "opennt-bop/dem/nt_bop_dem.h"
+#include <windows.h>
+
+void MS_bop_0(void);
 
 #include <string.h>
 

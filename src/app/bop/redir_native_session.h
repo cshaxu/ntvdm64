@@ -10,7 +10,7 @@
  * while selector 57 sees only copied CPU state and checked guest RAM.
  */
 
-#include "opennt-bop/dem/opennt_dem_ccpu_sas_facade.h"
+#include "adapter-softpc/dem/ccpu_sas_facade.h"
 #include "adapter-bop/generic_ud_bridge.h"
 
 #define RUNTIME_REDIR_NATIVE_SESSION_MAGIC 0x42585244u

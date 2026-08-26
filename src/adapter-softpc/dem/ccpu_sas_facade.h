@@ -1,5 +1,5 @@
-#ifndef RUNTIME_OPENNT_DEM_CCPU_SAS_FACADE_H
-#define RUNTIME_OPENNT_DEM_CCPU_SAS_FACADE_H
+#ifndef RUNTIME_DEM_CCPU_SAS_FACADE_H
+#define RUNTIME_DEM_CCPU_SAS_FACADE_H
 
 /*
  * Compatibility boundary for the directly imported OpenNT file
@@ -13,7 +13,7 @@
 #include <windows.h>
 #include <stdint.h>
 
-#include "dem_direct_context.h"
+#include "adapter-softpc/dem/direct_context.h"
 #include "adapter-softpc/cpu_result.h"
 #include "adapter-softpc/cpu_state_abi.h"
 #include "adapter-softpc/exception_abi.h"

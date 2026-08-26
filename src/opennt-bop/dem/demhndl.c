@@ -16,7 +16,7 @@
  * dem.h/softpc/SAS/VdmRedir include closure is unavailable in the standalone
  * CLI composition; demhndl_shim.h supplies only those imported-file symbols
  * through the named neutral adapter boundary. */
-#include "opennt_dem_ccpu_sas_facade.h"
+#include "adapter-softpc/dem/ccpu_sas_facade.h"
 
 /* DIVERGENCE(BOP-DIV-049): static composition owns the single historical
  * VDMREDIR DLL import pointer. */

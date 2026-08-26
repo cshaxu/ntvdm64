@@ -4,7 +4,7 @@
  * families are not admitted by this DEM package.
  */
 
-#include "opennt_dem_ccpu_sas_facade.h"
+#include "adapter-softpc/dem/ccpu_sas_facade.h"
 #include "nt_bop_dem.h"
 #include "adapter-softpc/idle_shim.h"
 

@@ -7,9 +7,9 @@
  * not dispatch BOPs or implement DEM service semantics.
  */
 
-#include "opennt_dem_ccpu_sas_facade.h"
+#include "adapter-softpc/dem/ccpu_sas_facade.h"
 BOOLEAN runtime_vr_initialized_provider(VOID);
-#include "guest_pointer_manager.h"
+#include "adapter-softpc/guest_pointer_manager.h"
 
 #include <stdlib.h>
 #include <string.h>

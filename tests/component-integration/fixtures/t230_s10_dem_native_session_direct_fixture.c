@@ -5,7 +5,7 @@
 
 #include "app/bop/dem_session.h"
 #include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
-#include "opennt-bop/dem/nt_bop_dem.h"
+void MS_bop_0(void);
 #include "app/bop/route.h"
 #include "app/bop/dem_host_session.h"
 #include "app/bop/route.h"

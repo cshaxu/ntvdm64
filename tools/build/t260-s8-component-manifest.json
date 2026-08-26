@@ -198,6 +198,8 @@
         "src/adapter-softpc/cpu_delta_abi.c",
         "src/adapter-softpc/cpu_result.c",
         "src/adapter-softpc/cpu_state_abi.c",
+        "src/adapter-softpc/dem/ccpu_sas_facade.c",
+        "src/adapter-softpc/dem/direct_context.c",
         "src/adapter-softpc/exception_abi.c",
         "src/adapter-softpc/finite_run.cc",
         "src/adapter-softpc/first_fault_observation.cc",
@@ -283,7 +285,6 @@
         "src/opennt-bop/command/cmd.c",
         "src/opennt-bop/command/cmddata.c",
         "src/opennt-bop/command/cmddisp.c",
-        "src/opennt-bop/command/nt_bop_command.c",
         "src/opennt-bop/command/cmdenv.c",
         "src/opennt-bop/command/cmdexec.c",
         "src/opennt-bop/command/cmdexit.c",
@@ -293,8 +294,6 @@
         "src/opennt-bop/command/opennt_pif_composition.c",
         "src/opennt-bop/command/cmdredir.c",
         "src/opennt-bop/dem/dem.c",
-        "src/opennt-bop/dem/nt_bop_dem.c",
-        "src/opennt-bop/dem/dem_direct_context.c",
         "src/opennt-bop/dem/demdasd.c",
         "src/opennt-bop/dem/opennt_demdasd_ioctl_composition.c",
         "src/opennt-bop/dem/demdata.c",
@@ -310,7 +309,6 @@
         "src/opennt-bop/dem/demgset.c",
         "src/opennt-bop/dem/opennt_demgset_composition.c",
         "src/opennt-bop/dem/demhndl.c",
-        "src/opennt-bop/dem/opennt_dem_ccpu_sas_facade.c",
         "src/opennt-bop/dem/demioctl.c",
         "src/opennt-bop/dem/demlabel.c",
         "src/opennt-bop/dem/demlock.c",
@@ -319,11 +317,6 @@
         "src/opennt-bop/dem/demmsg.c",
         "src/opennt-bop/dem/demsrch.c",
         "src/opennt-bop/dem/opennt_demsrch_fcb_composition.c",
-        "src/opennt-bop/dpmi/dpmi32.c",
-        "src/opennt-bop/dpmi/dpmi_descriptor_source_shim.c",
-        "src/opennt-bop/dpmi/dpmi_startup_session_shim.c",
-        "src/opennt-bop/dpmi/dpmi_startup_source_shim.c",
-        "src/opennt-bop/dpmi/dpmiselr.c",
         "src/opennt-bop/softpc/emm_fncs.c",
         "src/opennt-bop/softpc/mem_size.c",
         "src/opennt-bop/softpc/nt_mouse.c",
@@ -546,40 +539,8 @@
       "platformLibraries": []
     },
     {
-      "name": "t257-s3-dpmi-startup-session-fixture",
-      "source": "tests/component-integration/fixtures/t257_s3_dpmi_startup_session_fixture.cc",
-      "libraries": [
-        "app",
-        "opennt-bop",
-        "opennt-host",
-        "adapter-win32",
-        "adapter-softpc",
-        "session",
-        "adapter-bochs",
-        "bochs-core",
-        "adapter-bop"
-      ],
-      "platformLibraries": []
-    },
-    {
       "name": "t257-s3-native-guest-ldt-fixture",
       "source": "tests/adapter-bochs/t257_s3_native_guest_ldt_fixture.cc",
-      "libraries": [
-        "app",
-        "opennt-bop",
-        "opennt-host",
-        "adapter-win32",
-        "adapter-softpc",
-        "session",
-        "adapter-bochs",
-        "bochs-core",
-        "adapter-bop"
-      ],
-      "platformLibraries": []
-    },
-    {
-      "name": "t257-s3-dpmi-descriptor-source-fixture",
-      "source": "tests/component-integration/fixtures/t257_s3_dpmi_descriptor_source_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
