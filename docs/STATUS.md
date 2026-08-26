@@ -2,10 +2,10 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T280 S6 closed the complete original DEM
-syntax surface as a package-wide evidence baseline.  The next packet must
-recover only a shared, source-shaped declaration/compatibility family named by
-that ledger; no selector/BOP route is enabled merely by the closed survey.
+**No active M/T/S packet.** M0 T280 S7 closed the source-form design for the
+five shared DEM ABI families proven by S6. The next packet may implement only
+the shared declaration/binding package identified by that ledger; no
+selector/BOP route is enabled merely by the closed design.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -26,7 +26,35 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S6 — closed: whole DEM compile-surface closure
+### M0 T280 S7 — closed: DEM shared ABI recovery design
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T280 S7`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S6 closed in `43d26f8d`; its whole-package evidence requires one source-first ABI recovery design, not a trace-selected implementation. |
+| Objective | Recover exact source/header/compile-condition evidence and one owner disposition for the five shared DEM ABI families before any declaration or adapter body is added. |
+| Non-goals | No original DEM edit/link, provider/BOP route, adapter implementation, private NT call, generic compatibility layer, guest trace or new mapping manager. |
+| Reference Baseline | T280 S4 include ledger, S5 VDM directory-control adapter, S6 compile-surface ledger/evidence, exact OpenNT `dos/dem`, `inc`, SDK and SoftPC sources. |
+| Files And ABI Surface | S7 source/consumer/shape/failure ledger, plan, Status and documentation inventory only. No product ABI is introduced. |
+| Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
+| Verification | Compare every cited spelling/form/condition with the exact original source; verify five unique owner dispositions and mapping-manager isolation; run documentation governance and diff checks. |
+| Expected Markers | `DEVL` source form, x86 `GetDiskSpaceInformationA` collision, NT directory/storage declarations, DASD storage boundary and source-proven SoftPC guest-memory operations. |
+| Asset Needs | Original OpenNT/OpenNT-4.5 source evidence, current exact mirrors, adapter-win32/session/adapter-softpc contracts and S6 source logs summarized in evidence. |
+| Reporting Requirements | Original path/line/shape, DEM consumers, architecture difference, modern availability, failure behavior, future owner and mapping disposition per family. |
+| Stop Conditions | A missing shape is guessed, a body is enabled, a host-local pointer enters a mapping manager, a private kernel VDM path is invoked, or a family-private mapper is proposed. |
+| Exit Criteria | A five-family source-first ledger identifies the smallest exact-mirror, same-shaped adapter or adapter-softpc follow-on package; no unresolved source definition remains. |
+| Original Owner Request | “单人双角色模式执行队列任务”。 |
+| Similar-Issue Sweep | Historical build macro forms, x86 public SDK name collisions, NT data-layout sources, host versus guest pointer classification, SoftPC/CCPU mechanical names and all future consumers. |
+
+**S7 closure:** five source-shaped families now have original source paths,
+historical compile conditions, consumer sets, current modern findings, unique
+future owner and mapping disposition. The next admissible implementation is
+one shared package: exact historical declaration carriers where available,
+same-shaped adapter-win32 bindings for modern collisions, and one complete
+adapter-softpc guest-memory lease surface. No original DEM translation unit is
+enabled by this closure.
+
+### Closed packet reference — M0 T280 S6
 
 | Field | Record |
 | --- | --- |
