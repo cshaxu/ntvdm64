@@ -65,6 +65,39 @@ Every reached source symbol and dependency records:
 8. final state: unreviewed, direct, adapter-pending, explicit-unavailable,
    excluded, compiled, linked, or locally verified.
 
+## Independent audit ledgers
+
+The package tracker is a coordinated set of independent, machine-readable
+ledgers. A status in one ledger cannot be inferred from another.
+
+1. **File recovery ledger** — one row for each of the 1,689 selected paths:
+   upstream selection/hash, package, file kind, mirror identity, final
+   composition class, build/profile state, divergence/exception ID and final
+   non-recovery reason where applicable. Its final class is exactly one of
+   `exact-direct`, `exact-adapter-bound`, `minimal-binding-diff` or
+   `mirror-only/profile-excluded`.
+2. **Interface recovery ledger** — one family row plus one child row for every
+   reached external function, global, callback, structure or resource
+   interface. Each child records caller and declaration, ABI/layout, direct
+   availability, unique owner, adapter requirement, semantic-exception status,
+   failure rule and focused evidence. An unexpanded family row is not a
+   completed interface audit.
+3. **Package dependency ledger** — package-to-package and package-to-interface
+   edges, including build-control inputs, source cycles, topological wave and
+   blocked successor. It establishes ordering without using a trace hit.
+4. **Build/profile ledger** — each declared x86/x64 target's original files,
+   headers, libraries, compile conditions, enabled/profile-excluded state and
+   compile/link/local-test evidence. It makes “mirrored but not linked” an
+   explicit result.
+5. **Divergence and exclusion ledger** — every `DIVERGENCE:` site, overlay,
+   same-shaped binding change, Bochs-replacement exclusion and permanently
+   unavailable NT4 product path. It records the original purpose, adapter or
+   exception ID, reason, retained failure semantics and future disposition.
+
+The initial versions of these ledgers are generated from the canonical T274
+union and T275 debt records. The tracker task expands them; it never discards
+an original file to make a count look better.
+
 ## Exit criteria
 
 - Every selected package root has a complete import/disposition record.
@@ -77,4 +110,6 @@ Every reached source symbol and dependency records:
   cycles explicitly; no future task uses trace order to choose an interface.
 - Existing 12 family debt rows are expanded into actual reached declarations
   for each selected package.
+- The five independent ledgers are regenerated from their canonical input and
+  contain no duplicate file identity, interface identity or dependency edge.
 - No provider body, adapter ABI or mirror change is enabled by this task.

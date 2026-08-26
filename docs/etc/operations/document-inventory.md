@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2418 |
+| Documentation records | 2423 |
 | --- | --- |
-| Generated UTC | 2026-08-26T15:12:36Z |
+| Generated UTC | 2026-08-26T15:18:48Z |
 
 ## Entries
 
@@ -603,6 +603,11 @@ content-divergent entries.
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
+| etc/operations/mvdm-build-profile-ledger.tsv | indexed supporting material | 54d2fe1b5f25ecd6e81940dea0b396612b0d9025d464880efd9aa40c1329713f |
+| etc/operations/mvdm-divergence-exclusion-ledger.tsv | indexed supporting material | 3209f0eb51c1d551b44ec415294dc8cb69d601064a519a8e9824ec67d577619b |
+| etc/operations/mvdm-file-recovery-ledger.tsv | indexed supporting material | 0459c58335cc0b060df6bdf907b3dab53be16dc5766e515656e328c5e871cf98 |
+| etc/operations/mvdm-interface-recovery-ledger.tsv | indexed supporting material | 09b06542333a0f7bd9acafcac47027460714ff4abb7d97767b363a19b99e975f |
+| etc/operations/mvdm-package-dependency-ledger.tsv | indexed supporting material | 6f76dbdd1ecb734b59409246a246b856954bb8f99363e8a9651860a319fc5303 |
 | etc/operations/mvdm-package-recovery-wave-plan-001.md | indexed supporting material | 20c82cfe506dcf16ffba5c9d1f480caba8cbf8c0f2ce4427eea2d042cc13b942 |
 | etc/operations/opennt-bop-host-service-plane-recovery-candidate.md | indexed supporting material | 643385cb4d3c61e70583d59ae2eb6dab5284e07f647bdd47da8575aa0ffbfadf |
 | etc/operations/opennt-bop-implementation-tracker-001.md | indexed supporting material | 11d4a0cd06dc670513084704cd78aa4625d039cf3fbde55194d6d66ef7bd947e |
@@ -619,7 +624,7 @@ content-divergent entries.
 | etc/operations/proposal-dos-wow16-complete-source-build-closure-001.md | indexed supporting material | 3da5ac3935fbee1542946e0dfedf75d841836e0e0c7151536e88f5c44854f862 |
 | etc/operations/proposal-formal-build-entrypoint-and-reconstructed-monitor-fixture-repair-001.md | indexed supporting material | 8c20c430a033b448bf3de92e21f8ba32760c80fae225b5c0fa14ab4cc0814b8f |
 | etc/operations/proposal-mirror-component-conformance-reconciliation-001.md | indexed supporting material | 228bfecf66952415d1eb97730ecc994752d286741c4754dd99c32d8fb98df6c2 |
-| etc/operations/proposal-mvdm-package-interface-closure-tracker-001.md | indexed supporting material | 9834a391067613728833682aa01c0eb3fb7a0441549d19fc2318f9b2cce5836d |
+| etc/operations/proposal-mvdm-package-interface-closure-tracker-001.md | indexed supporting material | c99944f5a51c240f839a8636129a8c806fa0865ce9912f1a7f6452cba2c8d0bb |
 | etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md | indexed supporting material | e4a8f60209eda2a1ff3858641aca0f343b670174f224a6799e0b1dbec3f2f7df |
 | etc/operations/proposal-opennt-bop-mirror-overlay-convergence-001.md | indexed supporting material | 2f2e91c7a491398ae23278766e5596002ae710113ff2bd5a1fb0577b2d9e12b2 |
 | etc/operations/proposal-opennt-bop-original-dispatcher-provider-recovery-001.md | indexed supporting material | b8808fef6cf0f7519c2103fdc8509c7f6f704846620537f59f0dd076af718e93 |

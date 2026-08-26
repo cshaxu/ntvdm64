@@ -1,0 +1,2 @@
+﻿"record_id"	"source_scope"	"original_purpose"	"disposition"	"reason"	"retained_contract"	"adapter_or_exception_id"	"final_state"	"evidence"
+"MVDM-EXCLUSION-0001"	"softpc.new/base/ccpu386/* execution bodies"	"historical SoftPC CPU execution engine"	"candidate-bochs-replacement-exclusion"	"Bochs is the sole CPU execution owner; tracker must verify each body before final exclusion."	"original headers/call shapes remain adapter-softpc evidence"	"adapter-softpc / adapter-bochs"	"unreviewed"	"docs/design/ARCHITECTURE.md"
