@@ -517,32 +517,6 @@ void nt_init_event_thread(void)
         g_active_call->call->session->console_initialized = 1u;
 }
 
-DWORD runtime_command_misc_get_environment_variable(LPSTR name,
-    LPSTR buffer, DWORD bytes)
-{
-    DWORD result;
-    if (name == NULL || buffer == NULL || bytes == 0u) return 0u;
-    result = GetEnvironmentVariableA(name, buffer, bytes);
-    if (result != 0u || name[0] != '=' || name[1] < 'A' || name[1] > 'Z' ||
-        name[2] != ':' || name[3] != '\0') return result;
-    /* There is no ambient hidden-drive environment entry. The active process
-     * directory is the only public Win32 equivalent for the source fallback. */
-    result = GetCurrentDirectoryA(bytes, buffer);
-    if (result == 0u || result >= bytes || buffer[1] != ':' ||
-        (buffer[0] != name[1] && buffer[0] != (CHAR)(name[1] + ('a' - 'A'))))
-        return 0u;
-    return result;
-}
-/* OpenNT cmdkeyb.c called the old NTVDM console-composition export
- * GetConsoleKeyboardLayoutNameA.  It is not linkable from the modern public
- * Win32 import libraries.  GetKeyboardLayoutNameA is the public supported
- * capability with the same current-layout-name result; keep this replacement
- * at the host shim and leave cmdkeyb.c's registry/failure algorithm intact. */
-BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR name)
-{
-    return GetKeyboardLayoutNameA(name);
-}
-
 LPVOID runtime_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
 {
     runtime_command_misc_active_call *active = g_active_call;

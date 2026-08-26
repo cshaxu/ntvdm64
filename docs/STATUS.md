@@ -97,6 +97,13 @@ COMMAND retains only its original entry envelope, staged service byte and
 regressions pass after a formal Ninja relink; the remaining source-shaped
 COMMAND composition blocks are still active S3 work. See [S3 P9 evidence](etc/evidence/m0-t271-s3-p9-selector-blind-frame-transaction-001.md).
 
+**S3 P10:** the last pure COMMAND Win32 helpers have moved to the existing
+same-shaped `adapter-win32` facade: hidden drive-directory environment lookup
+and the unavailable private console keyboard-layout export. Console/keyboard
+and dynamic-environment regressions pass after the formal relink. The
+remaining CCPU/SAS, copied-address, worker callback, Redirector and terminal
+blocks remain distinct active S3 owner work. See [S3 P10 evidence](etc/evidence/m0-t271-s3-p10-command-win32-facade-completion-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

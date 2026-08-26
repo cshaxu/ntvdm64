@@ -53,3 +53,29 @@ void runtime_command_misc_set_test_system_directory(const CHAR *path)
     strncpy(test_system_directory, path, MAX_PATH);
     test_system_directory[MAX_PATH] = '\0';
 }
+
+/* DIVERGENCE(WIN32-DIV-010): NT4 exposed hidden `=X:` drive-directory
+ * variables to VDM callers. Preserve the source fallback using the public
+ * process current-directory API when the modern environment lacks that entry. */
+DWORD runtime_opennt_command_environment_variable(LPSTR name, LPSTR buffer,
+    DWORD bytes)
+{
+    DWORD result;
+    if (name == NULL || buffer == NULL || bytes == 0u) return 0u;
+    result = GetEnvironmentVariableA(name, buffer, bytes);
+    if (result != 0u || name[0] != '=' || name[1] < 'A' || name[1] > 'Z' ||
+        name[2] != ':' || name[3] != '\0') return result;
+    result = GetCurrentDirectoryA(bytes, buffer);
+    if (result == 0u || result >= bytes || buffer[1] != ':' ||
+        (buffer[0] != name[1] && buffer[0] != (CHAR)(name[1] + ('a' - 'A'))))
+        return 0u;
+    return result;
+}
+
+/* DIVERGENCE(WIN32-DIV-011): the source private console export is absent
+ * from public modern import libraries. GetKeyboardLayoutNameA gives the same
+ * current-layout-name result without altering cmdkeyb.c's source algorithm. */
+BOOL runtime_opennt_console_keyboard_layout_name(LPSTR name)
+{
+    return GetKeyboardLayoutNameA(name);
+}

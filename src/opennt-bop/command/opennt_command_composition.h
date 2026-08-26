@@ -303,8 +303,6 @@ extern BOOL fSoftpcRedirection;
 #define ASSERT(value) ((void)(value))
 LPVOID runtime_command_misc_get_vdm_addr(USHORT segment, USHORT offset);
 void nt_init_event_thread(void);
-DWORD runtime_command_misc_get_environment_variable(LPSTR name,
-    LPSTR buffer, DWORD bytes);
 void cmdUpdateCurrentDirectories(BYTE current_drive);
 extern CHAR *lpszzCurrentDirectories;
 extern DWORD cchCurrentDirectories;
@@ -323,8 +321,8 @@ PREDIRCOMPLETE_INFO cmdCheckStandardHandles(PVDMINFO vdm_info,
     USHORT UNALIGNED *standard_handles);
 void demCloseAllPSPRecords(void);
 VOID cmdInitConsole(VOID);
-BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR name);
-#define GetConsoleKeyboardLayoutName GetConsoleKeyboardLayoutNameA
+#define GetConsoleKeyboardLayoutNameA runtime_opennt_console_keyboard_layout_name
+#define GetConsoleKeyboardLayoutName runtime_opennt_console_keyboard_layout_name
 
 UCHAR demGetPhysicalDriveType(UCHAR drive);
 
@@ -445,6 +443,6 @@ ULONG runtime_command_misc_redirection_token(PREDIRCOMPLETE_INFO info);
  * checked session/process-current-directory fallback. */
 #undef GetEnvironmentVariable
 #define GetEnvironmentVariable(name, buffer, bytes) \
-    runtime_command_misc_get_environment_variable((name), (buffer), (bytes))
+    runtime_opennt_command_environment_variable((name), (buffer), (bytes))
 
 #endif
