@@ -2,35 +2,40 @@
 
 ## Current Work
 
-**Active: M0 T271 S5 — OpenNT BOP mirror/source-recovery closure.**
+**No active M/T/S packet.** M0 T271 is closed by owner-directed exit-criterion
+revision; its audited residuals are recorded in its closure and the debt
+ledger, not misrepresented as completed mirror recovery.
 
 ## Active Packet
 
-### M0 T271 S5 — OpenNT BOP mirror/source-recovery closure
+There is no active packet. The latest closure is retained below as the current
+technical baseline.
+
+### M0 T271 closure — OpenNT BOP source-recovery and mirror-boundary audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T271 S5`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | Owner-approved T271 plan; S4 closure is recorded in `history/m0-t271-s4-closure-20260825.md`. |
-| Objective | Audit the complete `opennt-bop` production input against pinned OpenNT sources and remove or isolate every remaining non-mirror route, bridge, observation and session body. |
-| Non-goals | No new BOP family, no DPMI/WOW/Redirector/VDD/debugger recovery, no new Bochs semantics, and no trace-led leaf handler. |
-| Scope | `opennt-bop`, `opennt-bop-overlay`, all private include boundaries, source provenance, manifests, focused family fixtures, README divergence registers and tracker/evidence. |
-| Verification | Per-file source classification and line-ledger; external-consumer scan for every overlay; focused DEM/COMMAND/XMS matrix; formal Ninja closure, governance and `git diff --check`. |
-| Exit Criteria | Every live BOP input is exact original, true subset, minimal same-shaped modification, or a registered private overlay; no project-authored route/observation/session body remains in the mirror roots; no overlay has an external consumer. |
+| Identifier Mode | `M0 T271`, closed; all S1--S5 work was executed in Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner-approved T271 plan; final owner direction: revise the exit criterion and close the task at the audited, committed boundary. |
+| Objective | Recover the admitted DEM, COMMAND and XMS source-owner packages; audit the complete BOP root and isolate the removable non-mirror bodies, while producing an explicit disposition for residual cross-component work. |
+| Non-goals | No new BOP family, no DPMI/WOW/Redirector/VDD/debugger recovery, no new Bochs semantics, no trace-led leaf handler, and no unadmitted replacement of the remaining cross-component interfaces. |
+| Scope | `opennt-bop`, `opennt-bop-overlay`, private include boundaries, source provenance, manifests, focused family fixtures, README divergence registers, tracker/evidence and the documented residual-owner disposition. |
+| Verification | Per-file source classification and line-ledger; production external-consumer scan; focused DEM/COMMAND/XMS matrices; formal Ninja closure for committed P deliveries; governance and `git diff --check`. |
+| Exit Criteria | S1--S4 source-owner recovery is committed; S5 has audited all residual non-mirror bodies/headers, moved every safely private DEM body/header, and recorded the target owner plus a future admission path for every residual. This closure does **not** claim that all residual work is completed. |
 | Reference Baseline | T271 proposal; S1--S4 closures; pinned OpenNT sources; current BOP tracker and all component divergence registers. |
 | Files And ABI Surface | Source layout/provenance only. Existing public selector-blind ingress and provider ABI are not expanded. |
 | Applicable Rules | Source policy, source-first ladder, mirror-component standard, adapter/session boundaries, production-only roots, build hygiene and documentation governance. |
-| Expected Markers | All remaining mirror differences have a local marker/register row and private overlay boundary where required; no stale composition root survives. |
+| Expected Markers | Every reviewed non-mirror input has a local marker/register row and target-owner disposition; the eliminated `ingress` tree and moved DEM-private surfaces have no production consumer. |
 | Asset Needs | Pinned local OpenNT source tree, S1--S4 closures, component manifest, current README registers, fixtures and formal Ninja graph. |
-| Reporting Requirements | Identify every remaining non-original file/body, its target owner, source/evidence baseline, disposition and focused verification. |
-| Stop Conditions | A live body lacks source provenance, an overlay needs a public consumer, removal would change a provider failure contract, or a move crosses an unadmitted owner boundary. |
+| Reporting Requirements | Identify every remaining non-original file/body, its target owner, source/evidence baseline, disposition and focused verification; transfer remaining work without a false closure claim. |
+| Stop Conditions | A live body lacks source provenance, a move would change a provider failure contract, or a move crosses an unadmitted owner boundary. These became residual/debt records rather than implicit follow-on work. |
 | Similar-Issue Sweep | All BOP family roots, ingress, source-derived bridges, composition/session files, private overlays, manifests, tests and READMEs. |
-| Original Owner Request | “opennt-bop 应当符合镜像审计标准；附属 overlay 应当极小或消失。” |
+| Original Owner Request | “opennt-bop 应当符合镜像审计标准；附属 overlay 应当极小或消失。” Final direction: “将当前T任务修改退出条件，直接收口。” |
 
-**T271 plan:** S1 non-mirror composition extraction (closed); S2 DEM original
-package recovery (closed); S3 COMMAND original package recovery (closed); S4 XMS
-original package recovery (closed); S5 whole-component mirror/source-recovery closure (active).
-T270 remains closed in [its history](history/m0-t270-closure-20260825.md).
+**T271 result:** S1 non-mirror composition extraction, S2 DEM original package
+recovery, S3 COMMAND original package recovery, S4 XMS original package
+recovery and S5 whole-component audit/disposition are closed. The authoritative
+closure record is [M0 T271 closure](history/m0-t271-closure-20260825.md).
 
 **S3 progress:** P1 restores the reached OpenNT `MS_bop_4` entry, `cmddata.c`
 globals and `CMDInit` as true source subsets. The native fixture writes an
@@ -244,8 +249,9 @@ technical exit evidence is ready for owner closure; see
 still contains non-OpenNT composition/facade bodies and app still owns selector
 routing. The dormant DPMI experiment has been removed from every formal
 production/test input and archived as evidence. The whole-root re-audit gives
-each remaining custom class a unique target owner; S5 remains active until
-those moves and original-dispatcher boundary recoveries are complete. See
+each remaining custom class a unique target owner. The subsequent
+owner-directed closure transfers those moves and original-dispatcher boundary
+recoveries to the debt ledger rather than claiming them complete. See
 [P10 re-audit](etc/evidence/m0-t271-s5-p10-opennt-bop-mirror-reaudit-and-disposition-001.md).
 
 **S5 P11:** an attempted test-only extraction of eight DEM composition bodies
@@ -259,12 +265,13 @@ object paths.
 Their private bodies are now included only by original `cmd.c`, `cmdmisc.c`,
 `cmdconf.c`, `cmdenv.c` and `cmdpif.c` translation-unit boundaries. Refreshed
 formal DEM/COMMAND source-path links and executions pass. The non-original
-COMMAND compatibility headers remain active source-recovery work.
+COMMAND compatibility headers are recorded as transferred source-recovery
+work in the final closure.
 
 **S5 P13:** the non-original XMS composition wrapper has been deleted and its
 private body is included only by original `xms.c`. Formal XMS source-mirror
 and A20 source-mirror fixtures relink and execute successfully. The remaining
-`opennt_xms_compat.h` header is active owner-split work.
+`opennt_xms_compat.h` header is transferred owner-split work.
 
 **S5 P14:** all eight non-original DEM composition `.c` bodies now live in
 the private BOP overlay and are included solely by their original DEM source
@@ -276,26 +283,17 @@ headers requiring owner recovery, not provider/route bodies.
 eight P14 bodies below `opennt-bop-overlay`; the root now retains only seven
 project-named headers with production cross-component consumers. Focused
 formal DEM source-path rebuild and execution pass. Those seven headers and
-the remaining app-held selector/service composition are still active owner
-recovery work; this is not S5 closure.
+the remaining app-held selector/service composition are recorded as deferred
+owner-recovery work; final closure does not claim they are complete.
 
 **S5 P16:** the two DEM root compatibility headers with no remaining app
 consumer now also live under the matching private overlay.  `DemInit` retains
 its original allocation/GetSystemDirectory flow through a same-shaped
 adapter-win32 facade, so app no longer writes the imported DEM global.  The
 root residual set is now five cross-component headers (COMMAND, XMS and
-VDMREDIR); focused formal DEM fixture rebuild and execution pass.  Tests that
-still include private overlay declarations remain an active boundary-removal
-item, so this is not S5 closure.
-
-**S5 P16:** the two DEM root compatibility headers with no remaining app
-consumer now also live under the matching private overlay.  `DemInit` retains
-its original allocation/GetSystemDirectory flow through a same-shaped
-adapter-win32 facade, so app no longer writes the imported DEM global.  The
-root residual set is now five cross-component headers (COMMAND, XMS and
-VDMREDIR); focused formal DEM fixture rebuild and execution pass.  Tests that
-still include private overlay declarations remain an active boundary-removal
-item, so this is not S5 closure.
+VDMREDIR); focused formal DEM fixture rebuild and execution pass. Tests that
+still include private overlay declarations remain a deferred boundary-removal
+item; the owner-directed closure records it without claiming resolution.
 
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service

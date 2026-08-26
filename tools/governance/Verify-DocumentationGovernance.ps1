@@ -49,8 +49,13 @@ foreach ($heading in @('## Current Work', '## Active Packet', '## Current Techni
         throw "STATUS.md is missing '$heading'"
     }
 }
-if ($status -notmatch '\*\*Active:\s+M\d+\s+T\d+\s+S\d+\b') {
-    throw 'STATUS.md must identify the active packet as M<milestone> T<task> S<subtask>.'
+$hasActivePacket = $status -match '\*\*Active:\s+M\d+\s+T\d+\s+S\d+\b'
+$hasExplicitIntermission = $status -match '\*\*No active M/T/S packet\.\*\*'
+if (-not $hasActivePacket -and -not $hasExplicitIntermission) {
+    throw 'STATUS.md must identify an active M<milestone> T<task> S<subtask> packet or explicitly state that no M/T/S packet is active.'
+}
+if ($hasActivePacket -and $hasExplicitIntermission) {
+    throw 'STATUS.md cannot identify an active packet and a no-active-packet intermission simultaneously.'
 }
 $activePacketCount = [regex]::Matches($status, '(?m)^## Active Packet\s*$').Count
 if ($activePacketCount -ne 1) {

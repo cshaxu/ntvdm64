@@ -89,10 +89,12 @@ conditions, exit criteria, original request, and similar-issue sweep.
 
 `QUEUE.md` owns the ordered list of **unnumbered candidate T packages**.
 Queue priority is not approval or numeric allocation. It contains no active
-packet, S/P entry, technical baseline, or T identifier. The active T and its
+packet, S/P entry, technical baseline, or T identifier. An admitted T and its
 one active S live only in Status; any multi-S sequence is a supporting
-operation plan under etc/. After the current T closes, admit the selected
-queue candidate to Status and assign the next global T serial at that time.
+operation plan under etc/. After the current T closes, the owner may retain an
+explicit no-active-packet intermission for review; implementation resumes only
+after a selected queue candidate is admitted to Status and receives the next
+global T serial.
 A Td summary may appear in Status but never displaces the active numeric T
 packet.
 
@@ -102,7 +104,7 @@ Every T declares either Ordinary Mode or Coordinated Dual-Session Mode. In
 dual-session mode, the coordinator alone admits/replans/closes T and S work,
 reviews actual changes, and forms P commits; the executor independently
 reviews the brief, implements, gathers evidence, and reports material scope or
-risk objections. One active S exists at a time in either mode.
+risk objections. At most one active S exists at a time in either mode.
 
 Before accepting a P or closing a Td task: inspect actual worktree changes,
 re-read the original request, verify every packet requirement, run the

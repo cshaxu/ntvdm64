@@ -25,14 +25,17 @@ The binding hierarchy is M<milestone> T<task> S<subtask> P<part>.
 - **T** is an owner-approved, medium-sized package. T numbers are global,
   unpadded, strictly ascending, and assigned only at Status admission.
 - **S** is the smallest bounded implementation/review goal within the active
-  T. Exactly one S may be active.
+  T. At most one S may be active.
 - **P** is one sequential, reviewed delivery of an S: its accepted diff,
   committed revision, and pushed repository state.
 - **Td** is standalone documentation/governance work. It may use S and P but
   never allocates a numeric T or displaces the active numeric packet.
 
-The current product package is recorded only by the active packet in
-`STATUS.md` (currently M0 T176). T95's legacy r1--r23 labels remain
+The current product package, when one is admitted, is recorded only by the
+active packet in `STATUS.md`. Between an owner-directed closure and the next
+admission, Status must state explicitly that no M/T/S packet is active and
+link the latest closure/debt disposition; implementation must not proceed in
+that state. T95's legacy r1--r23 labels remain
 run/evidence iterations, not T, S, or P identifiers. Their classification and
 the Td exception are in
 [task-identifier governance](../etc/operations/task-identifier-governance.md).

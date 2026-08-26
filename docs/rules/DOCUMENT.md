@@ -16,7 +16,7 @@ contains current product decisions; `history/` contains closed task facts; and
 
 | Record | Sole role | Must not contain |
 | --- | --- | --- |
-| `STATUS.md` | One active M/T/S packet, current technical baseline, and compact active-task progress. | A backlog, multiple active S packets, or exhaustive run logs. |
+| `STATUS.md` | Zero or one active M/T/S packet, current technical baseline, and compact active-task progress. A task-intermission state must explicitly say that no packet is active and link the latest closure/debt record. | A backlog, multiple active S packets, or exhaustive run logs. |
 | `QUEUE.md` | Ordered, unnumbered candidate T packages. | Numeric T allocations, S/P entries, an active packet, or baseline. |
 | `TODO.md` | Unplanned debt, follow-ups, and deferred concerns. | Approved work or task identifiers. |
 | `history/` | Closed numeric-task facts and closure evidence. | Live plans or mutable current policy. |
