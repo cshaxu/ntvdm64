@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2382 |
+| Documentation records | 2383 |
 | --- | --- |
-| Generated UTC | 2026-08-26T07:09:14Z |
+| Generated UTC | 2026-08-26T07:13:12Z |
 
 ## Entries
 
@@ -569,6 +569,7 @@ content-divergent entries.
 | etc/operations/m0-t272-s4-guest-memory-lease-reuse-audit-001.md | indexed supporting material | 67ee1befaf05b7dbeb5f5f958ac2f12e6f0bb1934359acce58c708303d2b0657 |
 | etc/operations/m0-t272-s5-broker-contract-audit-001.md | indexed supporting material | fac96ccd4d79a46221a3369dd572ca65cd99a0285aa8e16a82b89adfaebfea1a |
 | etc/operations/m0-t273-s1-bochs-recovery-audit-001.md | indexed supporting material | bddea32af2f05dbcbb6fbc0e5ab00f5c32a7a507d09bdb7e65b14184243b0385 |
+| etc/operations/m0-t273-s2-p1-bochs-source-recovery-001.md | indexed supporting material | ae24d5af553dd2dc50a5ceebacb24b7fe5fef52250c75d7f1bc181c18240a928 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
