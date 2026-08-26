@@ -52,6 +52,12 @@ complete and pushed through `d94d46ae`; its authoritative record is
 | Original Owner Request | “已有的app, session, bochs-core和adapter-*组件，可作为参考来源，在符合大局观的前提下参考实现、或复制进入，加以利用，来节省我们的大量时间。” |
 | Similar-Issue Sweep | All current and quarantined app/session lifecycle candidates, direct Bochs includes, cancellation/worker/CLI/service vocabulary and test ownership. |
 
+**S3 closure:** current neutral `session` is retained as the previously
+audited replacement; the old app/session composition candidates are rejected
+because they carry CLI/BOP/guest/host-service semantics. The new minimal app
+shell owns only opaque machine open/teardown and passes focused x64/x86 tests.
+See [S3 shell record](etc/operations/m0-t273-s3-minimal-app-machine-shell-closure-001.md).
+
 ### M0 T273 S2 closure — Mechanical lifecycle
 
 | Field | Record |
