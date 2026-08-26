@@ -9,20 +9,20 @@
  * selectors decline until their own OpenNT-shaped package is composed here.
  */
 
-#include "opennt_bop_route.h"
-#include "dem_generic_ud_bridge.h"
-#include "command_generic_ud_bridge.h"
-#include "softpc_machine_interrupt_generic_ud_bridge.h"
-#include "softpc_memory_size_generic_ud_bridge.h"
-#include "softpc_tape_io_generic_ud_bridge.h"
-#include "softpc_emm_unavailable_generic_ud_bridge.h"
-#include "softpc_mouse_vector_generic_ud_bridge.h"
-#include "softpc_printer_openclose_generic_ud_bridge.h"
-#include "config_complete_generic_ud_bridge.h"
-#include "spckbd_handoff_generic_ud_bridge.h"
-#include "top_level_nosupport_generic_ud_bridge.h"
-#include "xms_generic_ud_bridge.h"
-#include "redir_generic_ud_bridge.h"
+#include "route.h"
+#include "app/bop/dem_entry.h"
+#include "app/bop/command_entry.h"
+#include "opennt-bop/ingress/softpc_machine_interrupt_generic_ud_bridge.h"
+#include "opennt-bop/ingress/softpc_memory_size_generic_ud_bridge.h"
+#include "opennt-bop/ingress/softpc_tape_io_generic_ud_bridge.h"
+#include "opennt-bop/ingress/softpc_emm_unavailable_generic_ud_bridge.h"
+#include "opennt-bop/ingress/softpc_mouse_vector_generic_ud_bridge.h"
+#include "opennt-bop/ingress/softpc_printer_openclose_generic_ud_bridge.h"
+#include "opennt-bop/ingress/config_complete_generic_ud_bridge.h"
+#include "opennt-bop/ingress/spckbd_handoff_generic_ud_bridge.h"
+#include "opennt-bop/ingress/top_level_nosupport_generic_ud_bridge.h"
+#include "app/bop/xms_entry.h"
+#include "opennt-bop/ingress/redir_generic_ud_bridge.h"
 
 int runtime_opennt_bop_route_dispatch(
     const struct runtime_generic_ud_event *event,

@@ -1,7 +1,7 @@
-#include "dem_runtime_session.h"
-#include "opennt-bop/ingress/dem_direct_session.h"
+#include "dem_runtime.h"
+#include "app/bop/dem_host_session.h"
 #include "opennt-bop/dem/opennt_demdasd_ioctl_compat.h"
-#include "opennt-bop/ingress/dem_native_session.h"
+#include "app/bop/dem_session.h"
 #include "opennt-bop/ingress/redir_native_session.h"
 
 #include <string.h>

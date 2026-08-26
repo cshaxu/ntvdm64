@@ -2,7 +2,7 @@
 
 #include "app/startup_composition.h"
 #include "opennt-bop/command/opennt_pif_composition.h"
-#include "opennt-bop/ingress/command_native_session.h"
+#include "app/bop/command_session.h"
 
 #include <string.h>
 

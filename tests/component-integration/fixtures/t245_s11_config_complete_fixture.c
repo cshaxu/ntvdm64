@@ -2,8 +2,8 @@
 #include <string.h>
 
 #include "opennt-bop/ingress/config_complete_generic_ud_bridge.h"
-#include "opennt-bop/ingress/dem_direct_session.h"
-#include "opennt-bop/ingress/dem_native_session.h"
+#include "app/bop/dem_host_session.h"
+#include "app/bop/dem_session.h"
 
 static int read_guest(void *state, uint32_t address, uint8_t *bytes, uint32_t count)
 { (void)state; (void)address; (void)bytes; (void)count; return 0; }

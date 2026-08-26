@@ -1,7 +1,7 @@
 #include "opennt-bop/xms/opennt_xms_compat.h"
 #include "app/xms_session_binding.h"
 #include "adapter-bop/generic_ud_bridge.h"
-#include "opennt-bop/ingress/opennt_bop_route.h"
+#include "app/bop/route.h"
 
 #include <stdlib.h>
 #include <string.h>

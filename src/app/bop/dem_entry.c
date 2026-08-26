@@ -1,5 +1,5 @@
-#include "dem_generic_ud_bridge.h"
-#include "opennt-bop/ingress/dem_native_session.h"
+#include "dem_entry.h"
+#include "app/bop/dem_session.h"
 
 int runtime_dem_generic_ud_recognizes(
     const struct runtime_generic_ud_event *event)

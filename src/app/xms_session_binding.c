@@ -1,7 +1,7 @@
 #include "xms_session_binding.h"
 
 #include "opennt-bop/xms/opennt_xms_compat.h"
-#include "opennt-bop/ingress/xms_native_session.h"
+#include "app/bop/xms_session.h"
 
 #include <string.h>
 

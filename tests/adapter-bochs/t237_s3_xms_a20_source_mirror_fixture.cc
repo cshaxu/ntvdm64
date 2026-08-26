@@ -2,7 +2,7 @@
 #include "adapter-softpc/cpu_state_abi.h"
 #include "adapter-softpc/a20_capability.h"
 #include "adapter-bop/generic_ud_bridge.h"
-#include "opennt-bop/ingress/opennt_bop_route.h"
+#include "app/bop/route.h"
 #include "adapter-softpc/machine_stage.h"
 #include "adapter-softpc/ivt_watch.h"
 

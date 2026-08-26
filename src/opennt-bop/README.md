@@ -21,7 +21,7 @@ public include surface is the BOP ingress/provider ABI consumed by `app`.
 | Directory | Contents | Modification rule |
 | --- | --- | --- |
 | `command/`, `dem/`, `xms/`, `dpmi/`, `softpc/`, `vdmredir/` | Compiled, minimal-change OpenNT provider bodies, retained in their original owner-family grouping. | Every changed statement, include or definition is marked `DIVERGENCE:` and registered below. |
-| `ingress/` | Temporary project-owned source-recovery boundary pending T271 S2--S4. | It retains selector/service ownership only until the corresponding original dispatcher package replaces it.  The selector-blind copied-frame entry is in `adapter-bop`; CLI diagnostics are composed in `app`. |
+| `ingress/` | Deferred SoftPC/firmware, Redirector and top-level source-recovery inputs. | It contains only owner packages not recoverable through the admitted DEM/COMMAND/XMS source paths.  Modern one-session BOP composition is in `app/bop/`; the copied-frame entry remains selector-blind in `adapter-bop`. |
 
 Immutable originals, uncompiled mirror fragments, pre-T260 overlays and import
 manifests are evidence rather than production code. They are retained under

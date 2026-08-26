@@ -1,16 +1,16 @@
 #include <stdio.h>
-#include "opennt-bop/ingress/opennt_bop_route.h"
+#include "app/bop/route.h"
 #include <string.h>
-#include "opennt-bop/ingress/opennt_bop_route.h"
+#include "app/bop/route.h"
 
-#include "opennt-bop/ingress/dem_native_session.h"
+#include "app/bop/dem_session.h"
 #include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
 #include "opennt-bop/dem/nt_bop_dem.h"
-#include "opennt-bop/ingress/opennt_bop_route.h"
-#include "opennt-bop/ingress/dem_direct_session.h"
-#include "opennt-bop/ingress/opennt_bop_route.h"
-#include "opennt-bop/ingress/dem_generic_ud_bridge.h"
-#include "opennt-bop/ingress/opennt_bop_route.h"
+#include "app/bop/route.h"
+#include "app/bop/dem_host_session.h"
+#include "app/bop/route.h"
+#include "app/bop/dem_entry.h"
+#include "app/bop/route.h"
 
 typedef struct fixture_state { uint8_t bytes[0x2500]; } fixture_state;
 

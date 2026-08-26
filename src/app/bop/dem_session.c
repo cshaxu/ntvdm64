@@ -1,4 +1,4 @@
-#include "dem_native_session.h"
+#include "dem_session.h"
 #include "opennt-bop/dem/nt_bop_dem.h"
 
 #include <string.h>

@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "opennt-bop/ingress/dem_runtime_session.h"
+#include "app/bop/dem_runtime.h"
 #include "adapter-bop/generic_ud_bridge.h"
 #include "adapter-softpc/machine_stage.h"
 #include "adapter-softpc/mechanical_action.h"
-#include "opennt-bop/ingress/opennt_bop_route.h"
+#include "app/bop/route.h"
 
 static void event_initialize(struct runtime_generic_ud_event *event,
     uint8_t selector, uint8_t service)

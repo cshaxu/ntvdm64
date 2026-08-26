@@ -2,7 +2,7 @@
 #include "adapter-softpc/cpu_state_abi.h"
 #include "adapter-softpc/port_action.h"
 #include "adapter-bop/generic_ud_bridge.h"
-#include "opennt-bop/ingress/opennt_bop_route.h"
+#include "app/bop/route.h"
 #include "adapter-bochs/minimal_machine.h"
 
 static void initialize_event(struct runtime_generic_ud_event *event,

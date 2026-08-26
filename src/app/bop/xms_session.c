@@ -1,4 +1,4 @@
-#include "xms_native_session.h"
+#include "xms_session.h"
 
 #include "opennt-bop/xms/opennt_xms_compat.h"
 #include "adapter-softpc/mechanical_action.h"

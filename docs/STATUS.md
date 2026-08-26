@@ -198,6 +198,12 @@ mirror root includes the private overlay.  This is structural isolation only:
 the 22 non-mirror ingress inputs remain active owner-disposition work.  See
 [S5 P2 audit](etc/evidence/m0-t271-s5-p2-overlay-consumer-and-boundary-audit-001.md).
 
+**S5 P3:** DEM, COMMAND and XMS one-session entry/context composition now
+belongs to `app/bop/`, leaving `adapter-bop` selector-blind and the imported
+provider tables unchanged.  Formal Ninja build plus the focused source-path
+fixtures pass; the non-mirror ingress inventory drops from 22 to 13 named
+deferred owner inputs.  See [S5 P3 extraction](etc/evidence/m0-t271-s5-p3-app-composition-extraction-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

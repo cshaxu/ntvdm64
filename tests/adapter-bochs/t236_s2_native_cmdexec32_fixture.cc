@@ -4,8 +4,8 @@
 #include "adapter-bop/bop_ingress.h"
 #include "adapter-softpc/machine_stage.h"
 extern "C" {
-#include "opennt-bop/ingress/command_native_session.h"
-#include "opennt-bop/ingress/opennt_bop_route.h"
+#include "app/bop/command_session.h"
+#include "app/bop/route.h"
 }
 
 #include <string.h>

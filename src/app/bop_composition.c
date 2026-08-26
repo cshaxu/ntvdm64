@@ -13,7 +13,7 @@
 #include "adapter-softpc/instruction_history.h"
 #include "adapter-softpc/physical_write_observation.h"
 #include "adapter-softpc/mechanical_action.h"
-#include "opennt-bop/ingress/opennt_bop_route.h"
+#include "app/bop/route.h"
 #include "app/observation/bop_sequence_observation.h"
 #include "app/observation/command_bootstrap_observation.h"
 #include "app/observation/command_current_dir_observation.h"

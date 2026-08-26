@@ -1,6 +1,6 @@
 #include "engine_contract.h"
 #include "machine_engine.h"
-#include "opennt-bop/ingress/dem_runtime_session.h"
+#include "app/bop/dem_runtime.h"
 #include "app/startup_composition.h"
 #include "app/command_session_binding.h"
 #include "bop_composition.h"

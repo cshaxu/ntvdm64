@@ -1,6 +1,6 @@
 #include <windows.h>
 
-#include "opennt-bop/ingress/dem_direct_session.h"
+#include "app/bop/dem_host_session.h"
 
 /* This token-lifecycle fixture has no #UD consumer.  The formal CPU core
  * expects one external generic bridge, so supply a decline-only test stub. */

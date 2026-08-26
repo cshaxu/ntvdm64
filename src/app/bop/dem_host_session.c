@@ -1,4 +1,4 @@
-#include "dem_direct_session.h"
+#include "dem_host_session.h"
 
 #include "adapter-softpc/mechanical_action.h"
 

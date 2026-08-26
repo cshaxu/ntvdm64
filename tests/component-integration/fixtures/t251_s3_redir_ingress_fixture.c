@@ -2,7 +2,7 @@
 #include <string.h>
 #include <windows.h>
 
-#include "opennt-bop/ingress/dem_direct_session.h"
+#include "app/bop/dem_host_session.h"
 #include "adapter-softpc/host_handle_manager.h"
 #include "opennt-bop/opennt_ccpu_sas_facade.h"
 #include "opennt-bop/ingress/redir_native_session.h"

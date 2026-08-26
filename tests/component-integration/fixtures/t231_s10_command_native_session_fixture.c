@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "opennt-bop/ingress/command_generic_ud_bridge.h"
-#include "opennt-bop/ingress/command_native_session.h"
+#include "app/bop/command_entry.h"
+#include "app/bop/command_session.h"
 #include "adapter-softpc/machine_stage.h"
 #include "adapter-softpc/mechanical_action.h"
 

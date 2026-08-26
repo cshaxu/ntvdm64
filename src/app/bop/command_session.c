@@ -1,4 +1,4 @@
-#include "command_native_session.h"
+#include "command_session.h"
 
 #include "adapter-bop/frame_transaction.h"
 #include "opennt-bop/command/nt_bop_command.h"
