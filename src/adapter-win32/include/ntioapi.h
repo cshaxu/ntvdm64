@@ -50,6 +50,51 @@ typedef enum _ADAPTER_FS_INFORMATION_CLASS {
 #define FileBothDirectoryInformation AdapterFileBothDirectoryInformation
 #define FileFsDeviceInformation AdapterFileFsDeviceInformation
 
+/* Exact reached OpenNT ntioapi.h constants. */
+#ifndef MAXIMUM_FILENAME_LENGTH
+#define MAXIMUM_FILENAME_LENGTH 256
+#endif
+#ifndef FILE_REMOVABLE_MEDIA
+#define FILE_REMOVABLE_MEDIA 0x00000001
+#endif
+#ifndef FILE_REMOTE_DEVICE
+#define FILE_REMOTE_DEVICE 0x00000010
+#endif
+#ifndef SYMBOLIC_LINK_QUERY
+#define SYMBOLIC_LINK_QUERY 0x0001
+#endif
+#ifndef ObjectNameInformation
+#define ObjectNameInformation 1
+#endif
+#ifndef DOS_QM
+#define DOS_QM (L'>')
+#endif
+#ifndef DOS_DOT
+#define DOS_DOT (L'"')
+#endif
+
+#ifndef STATUS_UNSUCCESSFUL
+#define STATUS_UNSUCCESSFUL ((NTSTATUS)0xC0000001L)
+#endif
+#ifndef STATUS_NO_MORE_FILES
+#define STATUS_NO_MORE_FILES ((NTSTATUS)0x80000006L)
+#endif
+#ifndef STATUS_NO_SUCH_FILE
+#define STATUS_NO_SUCH_FILE ((NTSTATUS)0xC000000FL)
+#endif
+#ifndef STATUS_BUFFER_TOO_SMALL
+#define STATUS_BUFFER_TOO_SMALL ((NTSTATUS)0xC0000023L)
+#endif
+#ifndef STATUS_OBJECT_TYPE_MISMATCH
+#define STATUS_OBJECT_TYPE_MISMATCH ((NTSTATUS)0xC0000024L)
+#endif
+#ifndef STATUS_OBJECT_NAME_NOT_FOUND
+#define STATUS_OBJECT_NAME_NOT_FOUND ((NTSTATUS)0xC0000034L)
+#endif
+#ifndef STATUS_OBJECT_PATH_NOT_FOUND
+#define STATUS_OBJECT_PATH_NOT_FOUND ((NTSTATUS)0xC000003AL)
+#endif
+
 /* DIVERGENCE: modern public headers omit these declarations even though
  * ntdll exports the historical call shapes.  Resolve at runtime so absence
  * returns STATUS_NOT_IMPLEMENTED rather than creating an unreviewed import. */

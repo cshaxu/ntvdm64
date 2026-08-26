@@ -29,6 +29,18 @@ ULONG NTAPI RtlNtStatusToDosError(NTSTATUS Status);
 VOID NTAPI RtlAcquirePebLock(VOID);
 VOID NTAPI RtlReleasePebLock(VOID);
 
+BOOLEAN NTAPI RtlCreateUnicodeString(PUNICODE_STRING DestinationString, PCWSTR SourceString);
+LONG NTAPI RtlCompareUnicodeString(PCUNICODE_STRING String1, PCUNICODE_STRING String2, BOOLEAN CaseInSensitive);
+NTSTATUS NTAPI RtlAppendUnicodeToString(PUNICODE_STRING Destination, PCWSTR Source);
+NTSTATUS NTAPI RtlUpcaseUnicodeStringToCountedOemString(POEM_STRING DestinationString, PCUNICODE_STRING SourceString, BOOLEAN AllocateDestinationString);
+
+#ifndef InitializeListHead
+#define InitializeListHead(ListHead) ((ListHead)->Flink = (ListHead)->Blink = (ListHead))
+#define IsListEmpty(ListHead) ((ListHead)->Flink == (ListHead))
+#define RemoveEntryList(Entry) { PLIST_ENTRY _blink = (Entry)->Blink; PLIST_ENTRY _flink = (Entry)->Flink; _blink->Flink = _flink; _flink->Blink = _blink; }
+#define InsertHeadList(ListHead,Entry) { PLIST_ENTRY _flink = (ListHead)->Flink; (Entry)->Flink = _flink; (Entry)->Blink = (ListHead); _flink->Blink = (Entry); (ListHead)->Flink = (Entry); }
+#endif
+
 #ifdef __cplusplus
 }
 #endif

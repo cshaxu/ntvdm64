@@ -2,9 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T280 S13** — M0 T280 now recovers the shared original NT/RTL
-object surface identified by S12. It is Ordinary Mode with single-person
-dual-role review; no selector/BOP route is enabled by this adapter packet.
+**Active: M0 T280 S14** — M0 T280 now audits the source-proven find-list
+host-resource binding needed before original DEM bodies can link. It is
+Ordinary Mode with single-person dual-role review; no provider is enabled.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -25,25 +25,31 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S13 — DEM shared NT/RTL object surface
+### M0 T280 S14 — DEM find-list identity binding audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T280 S13`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S12 closed its whole three-source x86/x64 observation and assigns the next shared historical ABI surface to adapter-win32. |
-| Objective | Recover one source-shaped NT status/object/device and reached RTL declaration/binding surface for original DEM source. |
-| Non-goals | No DEM provider link, BOP route, guest trace, source-body rewrite, new mapping manager or pointer cast. |
-| Reference Baseline | S12 ledger/evidence, exact OpenNT headers, existing adapter-win32 and session mapping design. |
-| Files And ABI Surface | Adapter-win32 NT/RTL declarations/bindings and focused x86/x64 checks; no DEM object link. |
+| Identifier Mode | `M0 T280 S14`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S13 closed the shared declaration surface on x86/x64; remaining source-proven blocker is `demsrch` persisted host identity. |
+| Objective | Design the smallest original-shaped find-list identity binding through the existing session host-resource mapper. |
+| Non-goals | No provider link, BOP route, guest trace, new mapper, raw pointer cast or guest-memory route. |
+| Reference Baseline | Original `demsrch.c`, S12 ledger, S13 closure and session mapping rules. |
+| Files And ABI Surface | Binding audit/plan and focused mapping contract only; no DEM body modification. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Exact-source declaration comparison, focused x86/x64 syntax/ABI checks, mapping isolation review and governance checks. |
-| Expected Markers | One shared source-shaped adapter package; no raw persisted host pointer and no guest mapping in adapter-win32. |
+| Verification | Original source/cast inventory, existing mapping-manager contract review and focused x86/x64 disposition checks. |
+| Expected Markers | One host-resource identity route and explicit separation from guest-memory spans. |
 | Asset Needs | Exact OpenNT `ntioapi.h`, original DEM sources, current modern SDK/ntdll declarations and existing adapter/session boundaries. |
-| Reporting Requirements | Original declaration path/form, retained call/failure contract, x86/x64 evidence and mapping disposition. |
-| Stop Conditions | A body is linked, a trace selects a leaf repair, a host pointer is cast into a 32-bit field, or a source form is inferred. |
-| Exit Criteria | Shared source-shaped surface passes focused x86/x64 checks and remaining `demsrch` identity work has a unique session/adapter disposition. |
+| Reporting Requirements | Every persisted identity cast, lifetime/teardown rule, original failure behavior and unique owner. |
+| Stop Conditions | A raw host pointer is stored in guest/MVDM state, a second mapper appears, or a body/provider is enabled. |
+| Exit Criteria | A complete source-first binding plan exists with one owner and focused positive/negative mapping proof requirements. |
 | Original Owner Request | “单人双角色模式执行队列任务”。 |
 | Similar-Issue Sweep | Directory and volume queries, object/symlink paths, status mapping, handle lifetime, x86/x64 layout, public/ntdll availability and guest-memory isolation. |
+
+### Closed packet reference — M0 T280 S13
+
+**S13 closure:** the shared NT/RTL declaration surface makes all three original
+DEM bodies syntax-clean on x86/x64; remaining host identity casts are
+explicitly transferred to S14. See [S13 closure](history/m0-t280-s13-closure-20260826.md).
 
 ### Closed packet reference — M0 T280 S12
 
