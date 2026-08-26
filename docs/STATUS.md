@@ -2,11 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T277 S8** — T277 expands T276's final file-level expected
-integration dispositions into a source-proven package, symbol, ABI and build
-closure before any MVDM provider body is enabled. It is an ordinary,
-single-person dual-role audit packet; no source body, adapter ABI, build edge
-or guest execution is admitted by S8.
+**No active M/T/S packet.** M0 T277 is closed as the source-proven MVDM
+package dependency and interface-closure tracker. Its authoritative record is
+[M0 T277 closure](history/m0-t277-closure-20260826.md). The next candidate
+remains unadmitted: MVDM runtime/support/tool/firmware physical re-root.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -27,25 +26,12 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T277 S8 — package-edge and build-profile reconciliation
+### M0 T277 S9 — end-to-end tracker closure audit
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | `M0 T277 S8`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Owner admitted the queue-head objective: “**MVDM package dependency and interface-closure tracker** 单人模式实施”. |
-| Objective | Derive exact reviewed package-to-boundary edges, source package cycles and x86/x64 build-profile admission states from the closed S7 effective correlation ledger and all 23 final file inventories. |
-| Non-goals | No MVDM provider/adapter implementation, source-body edit, generated build edge, Ninja run, guest execution, or inferred direct-link conclusion. |
-| Reference Baseline | Closed S3–S7 ledgers, T276 final file dispositions, original build descriptions and current package/profile ledger. |
-| Files And ABI Surface | S8 plan, effective package-edge/cycle/build-profile ledgers and verifier, Status and documentation inventory. No runtime ABI is changed. |
-| Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Reviewed edges aggregate exactly 325 future-host rows; each of 23 packages has one profile row; cycles are explicit and name their co-link/break rule; no profile reports compiled, linked or enabled. |
-| Expected Markers | Exact package/family/owner edge counts, explicit `dos <-> softpc.new` source cycle, 23 architecture-profile states, no inferred direct build edge. |
-| Asset Needs | [S7 effective ledger](etc/operations/m0-t277-effective-source-correlation-ledger.tsv), file recovery ledger, original build ledger, package ledger and [S8 plan](etc/operations/m0-t277-s8-package-edge-build-profile-reconciliation-plan-001.md). |
-| Reporting Requirements | Package-edge/cycle counts, wave/blocked successor, formal x86/x64 candidate/exclusion status and source evidence. |
-| Stop Conditions | An interface is assigned from filename or declaration alone, an adapter is invented without source evidence, a raw host pointer is proposed across a boundary, a second mapping manager is proposed, or a source body would be enabled. |
-| Exit Criteria | All reviewed future-host dependencies are represented by exact package/boundary edges, cycles are explicit, and every selected package has an auditable x86/x64 profile admission state without enabling a build. |
-| Original Owner Request | “MVDM package dependency and interface-closure tracker 单人模式实施”。 |
-| Similar-Issue Sweep | Package versus component ownership, source cycle versus build link cycle, firmware/guest/tool exclusion, declared adapter direction, cross-architecture object mixing and false compile/link evidence. |
+The aggregate verifier passed all S1–S8 gates and the independent-ledger
+identity joins. See the [S9 audit](etc/operations/m0-t277-tracker-closure-audit-001.md)
+and [M0 T277 closure](history/m0-t277-closure-20260826.md). No provider body,
+adapter ABI, build edge or guest execution was enabled.
 
 ### Closed packet reference — M0 T276 S25
 
