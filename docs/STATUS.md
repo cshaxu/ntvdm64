@@ -2,34 +2,34 @@
 
 ## Current Work
 
-**Active: M0 T271 S4 — OpenNT XMS original dispatcher/provider recovery.**
+**Active: M0 T271 S5 — OpenNT BOP mirror/source-recovery closure.**
 
 ## Active Packet
 
-### M0 T271 S4 — OpenNT XMS original dispatcher/provider recovery
+### M0 T271 S5 — OpenNT BOP mirror/source-recovery closure
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T271 S4`, Ordinary Mode with a single-person dual-role review. |
-| Admission And Approval | Owner-approved T271 plan; S3 closure is recorded in `history/m0-t271-s3-closure-20260825.md`. |
-| Objective | Replace the remaining project-authored XMS entry/session/dispatch composition with the original OpenNT XMS package's dispatcher, globals, provider ordering and source-proven failure paths. |
-| Non-goals | No DPMI/WOW/Redirector/VDD/debugger recovery, no new Bochs semantics, no generic memory manager, and no trace-led leaf handler. |
-| Scope | Original `xms.486/xms.c`, `xmsdisp.c`, `xmsmemr.c`, `xms.h` and reached provider bodies; A20, memory, guest-address and session seams; XMS fixtures, manifests and tracker/evidence. |
-| Verification | Original source/ABI/failure map; complete XMS table/order comparison; direct/failure fixture matrix; one mapping-manager disposition per guest-pointer call; formal Ninja closure, governance and `git diff --check`. |
-| Exit Criteria | Original XMS dispatcher/global ordering is active; each admitted XMS service uses an original body, same-shaped seam or source-defined failure; no project-defined replacement XMS dispatcher remains. |
-| Reference Baseline | T271 proposal, S1/S2/S3 closures, OpenNT XMS package sources, current XMS tracker rows and mapping-manager policy. |
-| Files And ABI Surface | XMS service/global/failure ownership only. The generic ingress remains one opaque event/result ABI; no selector-specific public ABI is added. |
+| Identifier Mode | `M0 T271 S5`, Ordinary Mode with a single-person dual-role review. |
+| Admission And Approval | Owner-approved T271 plan; S4 closure is recorded in `history/m0-t271-s4-closure-20260825.md`. |
+| Objective | Audit the complete `opennt-bop` production input against pinned OpenNT sources and remove or isolate every remaining non-mirror route, bridge, observation and session body. |
+| Non-goals | No new BOP family, no DPMI/WOW/Redirector/VDD/debugger recovery, no new Bochs semantics, and no trace-led leaf handler. |
+| Scope | `opennt-bop`, `opennt-bop-overlay`, all private include boundaries, source provenance, manifests, focused family fixtures, README divergence registers and tracker/evidence. |
+| Verification | Per-file source classification and line-ledger; external-consumer scan for every overlay; focused DEM/COMMAND/XMS matrix; formal Ninja closure, governance and `git diff --check`. |
+| Exit Criteria | Every live BOP input is exact original, true subset, minimal same-shaped modification, or a registered private overlay; no project-authored route/observation/session body remains in the mirror roots; no overlay has an external consumer. |
+| Reference Baseline | T271 proposal; S1--S4 closures; pinned OpenNT sources; current BOP tracker and all component divergence registers. |
+| Files And ABI Surface | Source layout/provenance only. Existing public selector-blind ingress and provider ABI are not expanded. |
 | Applicable Rules | Source policy, source-first ladder, mirror-component standard, adapter/session boundaries, production-only roots, build hygiene and documentation governance. |
-| Expected Markers | Original XMS dispatcher/table ordering is active; every unavailable dependency has a same-shaped adapter or original failure disposition; no project-defined XMS dispatcher remains. |
-| Asset Needs | Pinned local OpenNT MVDM XMS sources, S1--S3 ledgers, existing XMS fixtures, mapping-manager evidence, formal Ninja manifest and declared adapter surfaces. |
-| Reporting Requirements | Identify each imported source path and divergence; distinguish original body, true subset, same-shaped facade and deferred terminal; report every XMS service disposition and focused test result. |
-| Stop Conditions | Original XMS source/order is ambiguous, a source body needs an unapproved machine semantic, a proposed seam changes a public ABI or failure result, or work would consume a non-XMS owner package. |
-| Similar-Issue Sweep | XMS dispatcher globals/data, all `xms*.c` direct imports, A20/memory/UMB seams, mapping leases, fixture coverage and README divergence entries. |
-| Original Owner Request | “处理 xms；尽可能按照原始 OpenNT 代码最小修改接入。” |
+| Expected Markers | All remaining mirror differences have a local marker/register row and private overlay boundary where required; no stale composition root survives. |
+| Asset Needs | Pinned local OpenNT source tree, S1--S4 closures, component manifest, current README registers, fixtures and formal Ninja graph. |
+| Reporting Requirements | Identify every remaining non-original file/body, its target owner, source/evidence baseline, disposition and focused verification. |
+| Stop Conditions | A live body lacks source provenance, an overlay needs a public consumer, removal would change a provider failure contract, or a move crosses an unadmitted owner boundary. |
+| Similar-Issue Sweep | All BOP family roots, ingress, source-derived bridges, composition/session files, private overlays, manifests, tests and READMEs. |
+| Original Owner Request | “opennt-bop 应当符合镜像审计标准；附属 overlay 应当极小或消失。” |
 
 **T271 plan:** S1 non-mirror composition extraction (closed); S2 DEM original
 package recovery (closed); S3 COMMAND original package recovery (closed); S4 XMS
-original package recovery (active); S5 whole-component mirror/source-recovery closure.
+original package recovery (closed); S5 whole-component mirror/source-recovery closure (active).
 T270 remains closed in [its history](history/m0-t270-closure-20260825.md).
 
 **S3 progress:** P1 restores the reached OpenNT `MS_bop_4` entry, `cmddata.c`
