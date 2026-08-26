@@ -305,6 +305,14 @@ assembler bodies remain `adapter-wow` profile-gated: serial/PIC mechanics stay
 with `adapter-bochs`, VDM-memory transport with `adapter-vdm-monitor`, and no
 generic protocol or device implementation is created.
 
+**T276 S16 P1:** all five original `sim32` paths now have a non-enabled
+disposition. Its original `sources` selects no translation unit: `sim32.c` is
+a private serial-IOCTL/`sim16` WOW product shell, not the general SIM32
+facade. The historical public `Sim32Get/Set/PSZ/Free/Send` API shape is retained
+as recovery evidence for `adapter-vdm-monitor`, but every guest address must
+resolve through the one session mapping manager to checked Bochs RAM; no raw
+pointer, serial product shell or second manager is admitted.
+
 ### M0 T275 S1 — Complete interface and reuse ledger
 
 | Field | Record |
