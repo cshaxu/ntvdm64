@@ -33,6 +33,24 @@ This preference saves recovery work without turning `src.old/` into a live
 input.  The per-file disposition records the candidate examined, the selected
 destination and the reason a candidate was reused, split, or rejected.
 
+## Final expected-integration disposition
+
+The T276 audit is an end-state planning audit, not a report of what happens to
+be enabled in the current worktree. Each of the 1,689 selected MVDM paths has
+one final expected-integration disposition in the authoritative tracker:
+`direct`, `binding-only`, `adapter-backed`, `overlay-required`,
+`not-host-runtime`, `guest-only`, `firmware-only`, `tool-only` or
+`unresolved`. `unresolved` is an explicit audited deficit; it is never used to
+mean merely “currently disabled.” The package-level source/build/interface
+records remain evidence for that decision.
+
+For every final host-linked conclusion, the tracker additionally records the
+original file, final owner/link boundary, whether the mirror needs no change,
+only a binding change, or a private overlay, any named same-shaped adapter, and
+the x86/x64 mapping consequence. A package cannot be called dispositioned
+until every selected path has one such conclusion. The classification and its
+required evidence are defined in the [final disposition taxonomy](m0-t276-final-integration-disposition-taxonomy-001.md).
+
 The current profile binds one active imported MVDM host context to each
 `ntvdm.exe` process and permits multiple processes. DOS child programs,
 COMMAND re-entry and WOW16 tasks are intra-session lifecycles. Project-owned

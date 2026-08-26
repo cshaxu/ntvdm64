@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T276 S23** — Begin W8 complete `fax` package file/interface
-disposition without enabling a fax provider body.
+**Active: M0 T276 S25** — Backfill final expected-integration dispositions for
+the already package-audited MVDM roots before another package is admitted.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,25 +24,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S23 — W8 `fax` package disposition baseline
+### M0 T276 S25 — final expected-integration backfill baseline
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T276 S23`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T276/S22 is closed: all 201 `wow32` paths have exact non-enabled dispositions; 77 active C bodies are partitioned into eight source-proven subdomains, and nine reached interface families have unique boundary/mapping dispositions. The next bounded original package is the 21-path `fax` root. |
-| Objective | Classify every selected `fax` path by original driver/DLL build selection, printer/UI provider role and reached WOW32, GDI, Win32, monitor and session boundary before enabling a fax body. |
-| Non-goals | No source move/edit, fax implementation, Bochs change, adapter body, formal build edge, Ninja run or guest execution. |
-| Reference Baseline | T276/S1–S22 ledgers, exact selected `fax` mirror, source policy and architecture rules. |
-| Files And ABI Surface | W8 `fax` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
+| Identifier Mode | `M0 T276 S25`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T276/S24 is closed: every 47-path VDD sample entry is final `not-host-runtime`, not an admitted VDD provider. Earlier S11–S23 package evidence is complete but predates the final-disposition taxonomy; it must be consolidated before a new package audit. |
+| Objective | Replace process-only dispositions for every previously audited package path with one evidence-backed final expected-integration disposition in the global 1,689-row tracker. |
+| Non-goals | No source move/edit, adapter implementation, build edge, Ninja run or guest execution. Do not infer `direct` from a file being selected by a historical build. |
+| Reference Baseline | T276/S1–S24 ledgers, package baselines, final-disposition taxonomy, source policy and architecture rules. |
+| Files And ABI Surface | Global final tracker, package final-disposition evidence, Status and documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Account for all 21 selected `fax` paths; distinguish the original GDI driver from the UI DLL build and resource forms; identify actual printer, WOW32, GDI, Win32 and mapping boundaries; reject an invented standalone fax provider. |
-| Expected Markers | One provisional composition disposition per path, exact build evidence and named internal/adapter prerequisite per reached family. |
-| Asset Needs | T276/S1–S22 ledgers, exact selected `fax` mirror and [S23 plan](etc/operations/m0-t276-s23-fax-package-disposition-plan-001.md). |
-| Reporting Requirements | Exact path/source/build counts, driver/UI role, external boundary facts, mapping-manager rule and subsequent package handoff. |
+| Verification | Every path covered by S11–S23 receives one taxonomy-valid final disposition with owner/link, change, named-adapter, mapping and source-evidence fields; report counts by disposition and preserve explicit `unresolved` where evidence is insufficient. |
+| Expected Markers | No previously-audited package remains represented only by a `provisional-not-enabled` record; each final tracker row is independently traceable to original/package evidence. |
+| Asset Needs | T276/S11–S24 ledgers, [final-disposition taxonomy](etc/operations/m0-t276-final-integration-disposition-taxonomy-001.md), global tracker and [S25 plan](etc/operations/m0-t276-s25-final-disposition-backfill-plan-001.md). |
+| Reporting Requirements | Exact per-package and global final-disposition counts, unresolved rationale, adapter/mapping consequences and next package admission criterion. |
 | Stop Conditions | A path has no selected/build evidence, raw host pointers cross a boundary, a second mapping manager is proposed, a body is enabled from a trace, or classification requires invented adapter behavior. |
-| Exit Criteria | Every selected `fax` path has a reproducible provisional owner/disposition record and each actual external family is assigned to a named session or adapter boundary; no source body is enabled. |
+| Exit Criteria | All paths covered by earlier T276 package audits have a non-`unresolved` final disposition or an explicit evidence-based `unresolved` rationale; no path is left with only a current-enable state, and no source body is enabled. |
 | Original Owner Request | “好的 开始审计任务”。 |
-| Similar-Issue Sweep | GDI driver interface, printer setup/UI, WOW32 callback/structure conversion, host spooler and registry capabilities, session mapping leases and adapter-wow boundary. |
+| Similar-Issue Sweep | Historical build selection versus final product treatment, mirror change class, adapter ownership, guest/firmware/tool exclusion, legacy private product shells, x86/x64 mapping and unresolved evidence. |
 
 **S21 closure:** all 25 selected `vdmredir` paths have reproducible non-enabled
 dispositions. Fifteen selected DLL provider bodies remain one owner package;
@@ -56,6 +56,21 @@ provider subdomains, and nine source-proven interface families name their sole
 adapter/session boundary and mapping-manager rule. `gdi32p`, `user32p`, VDD,
 NT4 monitor and product-shell dependencies remain explicit historical
 requirements; no WOW body is enabled. See the [S22 subdomain baseline](etc/operations/m0-t276-s22-wow32-subdomain-baseline-001.md) and [interface-family ledger](etc/operations/m0-t276-s22-wow32-interface-family-ledger.tsv).
+
+**S23 closure:** all 21 selected `fax` paths have reproducible non-enabled
+dispositions. The one historical GDI driver and four printer-UI DLL bodies
+remain separate source products, with six explicit printer/WOW/shared-section
+interface families. Their pointer-packed NT4 shared-section layout may not
+cross x86/x64 directly: a future owner must use session mapping-manager
+identity plus copied broker records or retain a source-derived failure. See the
+[S23 fax baseline](etc/operations/m0-t276-s23-fax-disposition-baseline-001.md).
+
+**S24 closure:** all 47 selected `vdd` paths are final `not-host-runtime`.
+They are sample trees (including sample guest/host halves), not a VDD product
+provider. The source mirrors remain evidence, while `adapter-vdd` remains only
+the named boundary for a future separately audited product package. See the
+[S24 plan](etc/operations/m0-t276-s24-vdd-sample-package-disposition-plan-001.md)
+and the global [final expected-integration tracker](etc/operations/m0-t276-final-integration-disposition-ledger.tsv).
 
 **S20 closure:** all 25 selected `dpmi32` paths have reproducible non-enabled
 dispositions. Sixteen selected x86 bodies form one host-provider package; all
