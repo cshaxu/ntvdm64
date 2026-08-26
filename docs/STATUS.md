@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T273 S2** — M0 T271 remains closed by owner-directed
+**Active: M0 T273 S3** — M0 T271 remains closed by owner-directed
 exit-criterion revision; its audited residuals are recorded in its closure and
 the debt ledger, not misrepresented as completed mirror recovery.
 
@@ -32,11 +32,31 @@ focused lifecycle test passes under both MSVC x64 and Win32/x86 `/MT`.
 complete and pushed through `d94d46ae`; its authoritative record is
 [M0 T272 closure](history/m0-t272-closure-20260826.md).
 
-### M0 T273 S2 — Mechanical lifecycle
+### M0 T273 S3 — Minimal app machine shell
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T273 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Identifier Mode | `M0 T273 S3`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner-approved Bochs foundation proposal; S2 is closed in `9645cdd9`, and the proposal’s next bounded subtask is admitted. |
+| Objective | Recover the smallest existing app/session composition that can create and deterministically destroy an opaque `adapter-bochs` machine endpoint. |
+| Non-goals | No guest image loading, BOP decoding, OpenNT/DOS/WOW/SoftPC/CCPU behavior, CLI feature surface, Win32 host service, or independent machine scheduler. |
+| Reference Baseline | T272 neutral session closure; T273/S2 P4 lifecycle closure; quarantined `src.old/app` and `src.old/session` candidates; current component architecture. |
+| Files And ABI Surface | Audited `app`/`session` source candidates, their minimal opaque composition API, one focused fixture, status/evidence/README records. No Bochs object type may enter either public surface. |
+| Applicable Rules | Execution, architecture, coding, source policy, component mirror, build-hygiene and documentation rules. |
+| Verification | Per-file owner/provenance audit, dependency/vocabulary scan, focused x64/x86 fixture, `git diff --check` and documentation governance. |
+| Expected Markers | A caller-owned opaque lifecycle handle, deterministic create/destroy ordering, no `bochs-core` include outside `adapter-bochs`, and explicit rejected candidates. |
+| Asset Needs | Existing T272 session sources, audited app candidates, P4 mechanical API, MSVC x64/x86 and disposable T273 build roots. |
+| Reporting Requirements | Identify reused/copied candidates, excluded application/service semantics, machine ownership order, host-width result and remaining S4 boundary checks. |
+| Stop Conditions | Candidate requires guest/provider semantics, an app/session public ABI exposes a Bochs type, or a needed ownership source lacks provenance. |
+| Exit Criteria | A minimal app shell creates/destroys an opaque machine endpoint under both host widths; no app/session file adds Bochs/OpenNT service meaning beyond this assembly boundary. |
+| Original Owner Request | “已有的app, session, bochs-core和adapter-*组件，可作为参考来源，在符合大局观的前提下参考实现、或复制进入，加以利用，来节省我们的大量时间。” |
+| Similar-Issue Sweep | All current and quarantined app/session lifecycle candidates, direct Bochs includes, cancellation/worker/CLI/service vocabulary and test ownership. |
+
+### M0 T273 S2 closure — Mechanical lifecycle
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T273 S2`, closed; Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Owner-approved Bochs foundation proposal; S1 provenance and mirror audit is closed in `a4ad30a0`. |
 | Objective | Recover the smallest Bochs-only construction, reset, default-port-space, finite-run, stop and resume lifecycle through `adapter-bochs`. |
 | Scope | Reviewed exact/subset Bochs files, registered private overlay boundaries, audited `adapter-bochs` lifecycle candidates, focused construction/reset/budget fixtures and evidence. |
