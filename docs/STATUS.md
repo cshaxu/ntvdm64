@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T276 S15** — Begin W3 complete `sim16` package file/interface
-disposition without enabling a historical WOW simulator body.
+**Active: M0 T276 S16** — Begin W3 complete `sim32` package file/interface
+disposition without enabling a SIM32 monitor body.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,25 +24,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S15 — W3 `sim16` package disposition baseline
+### M0 T276 S16 — W3 `sim32` package disposition baseline
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T276 S15`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T276/S14 is closed: all 15 `xms.486` paths, eight source paths and eight XMS boundary families have exact non-enabled disposition. The next bounded original owner package is the eight-path `sim16` root. |
-| Objective | Classify all selected `sim16` paths by original 16-bit simulator role, build evidence and reached serial/packet/guest-memory/interrupt/WOW boundary before enabling a simulator body. |
-| Non-goals | No source move/edit, 16-bit build, WOW enablement, serial device bridge, adapter body, formal build edge, Ninja run, Bochs device change or guest execution. |
-| Reference Baseline | T276/S1–S14 ledgers, exact selected `sim16` mirror, source policy and architecture rules. |
-| Files And ABI Surface | W3 `sim16` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
+| Identifier Mode | `M0 T276 S16`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T276/S15 is closed: all eight `sim16` paths have exact non-enabled disposition and its two 16-bit host-product bodies are explicitly adapter-wow-profile-gated. The next bounded original package is the five-path `sim32` root. |
+| Objective | Classify selected `sim32` paths by original SIM32 monitor/guest-memory API role, build evidence and reached mapping/SoftPC/monitor/machine boundary before enabling a SIM32 body. |
+| Non-goals | No source move/edit, SIM32 implementation, pointer lease implementation, Bochs change, adapter body, formal build edge, Ninja run or guest execution. |
+| Reference Baseline | T276/S1–S15 ledgers, exact selected `sim32` mirror, source policy and architecture rules. |
+| Files And ABI Surface | W3 `sim32` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Account for all eight selected `sim16` paths; identify original 16-bit DLL role and serial/packet/guest-memory/interrupt/WOW dependency; reject an inference from filename or 16-bit form. |
-| Expected Markers | One provisional composition disposition per path, exact build evidence, named internal/adapter prerequisite or explicit profile exclusion per reached family. |
-| Asset Needs | T276/S1–S14 ledgers, exact selected `sim16` mirror and [S15 plan](etc/operations/m0-t276-s15-sim16-package-disposition-plan-001.md). |
-| Reporting Requirements | Exact path/source/build counts, simulator role, boundary families, profile exclusion facts and subsequent package handoff. |
-| Stop Conditions | A path has no selected/build evidence, a 16-bit DLL is mistaken for a guest image, a serial/device body is enabled from a trace, a dependency has no named owner, or classification requires invented adapter behavior. |
-| Exit Criteria | Every selected `sim16` path has a reproducible provisional owner/disposition record and each actual external family is assigned to a named existing adapter/internal owner or explicit profile exclusion; no source body is enabled. |
+| Verification | Account for all five selected `sim32` paths; identify original pointer/read/write/flush role and actual mapping/SoftPC/monitor/machine dependencies; reject a raw pointer or second manager inference. |
+| Expected Markers | One provisional composition disposition per path, exact build evidence and named internal/adapter prerequisite per reached family. |
+| Asset Needs | T276/S1–S15 ledgers, exact selected `sim32` mirror and [S16 plan](etc/operations/m0-t276-s16-sim32-package-disposition-plan-001.md). |
+| Reporting Requirements | Exact path/source/build counts, SIM32 role, mapping-boundary facts and subsequent package handoff. |
+| Stop Conditions | A path has no selected/build evidence, a raw host pointer crosses a boundary, a second mapping manager is proposed, a body is enabled from a trace, or classification requires invented adapter behavior. |
+| Exit Criteria | Every selected `sim32` path has a reproducible provisional owner/disposition record and each actual external family is assigned to the unique mapping-manager/session owner or named adapter/machine boundary; no source body is enabled. |
 | Original Owner Request | “好的 开始审计任务”。 |
-| Similar-Issue Sweep | 16-bit DLL versus guest distinction, WOW packet protocol, serial/PIC/interrupt/device use, guest-memory copy, original build descriptions and adapter-wow/adapter-vdm-monitor/adapter-bochs boundaries. |
+| Similar-Issue Sweep | SIM32 pointer leases, copy/flush/free semantics, guest descriptor/linear conversion, mapping-manager uniqueness, original build descriptions and adapter-softpc/adapter-vdm-monitor/adapter-bochs boundaries. |
 
 ### M0 T276 S11 — W0/W1 file and interface disposition baseline
 
