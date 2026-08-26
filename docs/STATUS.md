@@ -139,6 +139,11 @@ COMMAND composition to the selector-blind CCPU frame facade.  COMMAND retains
 only the source-specific `GetVDMAddr` allocation/writeback order; CCPU and
 COMMAND lifecycle regressions pass after formal Ninja relink. See [S3 P15 evidence](etc/evidence/m0-t271-s3-p15-ccpu-multisz-extraction-001.md).
 
+**S3 P16:** the remaining project-authored COMMAND composition body is now a
+mirror-private overlay behind one registered linkage boundary; no other
+component consumes it.  Formal lifecycle, child and native-entry regressions
+remain green. See [S3 P16 evidence](etc/evidence/m0-t271-s3-p16-command-composition-overlay-isolation-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

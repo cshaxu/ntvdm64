@@ -7,6 +7,7 @@ translation unit; no adapter, host, session or app source may include it.
 | ID | Original definition purpose | Private divergence | Mirror boundary |
 | --- | --- | --- | --- |
 | `BOP-DIV-102` | `cmdexec.c:cmdExec32` owns the historical CCPU worker, BaseSrv re-entry and process-wide standard-handle swap. | The bounded one-session public-Win32 worker is a same-signature replacement too large for the COMMAND mirror. | `command/cmdexec.c` includes this one private `cmdExec32` body; no other component may include it. |
+| `BOP-DIV-103` | Reached COMMAND providers share active-call, bounded pointer materialization/writeback and terminal glue that OpenNT obtained from its product-global CCPU/SAS/CSR composition. | The source-derived body has no standalone original translation unit and exceeds the mirror threshold. | `command/opennt_command_composition.c` includes this one private shared body; no other component may include it. |
 
 | ID | Original definition purpose | Private divergence | Mirror boundary |
 | --- | --- | --- | --- |
