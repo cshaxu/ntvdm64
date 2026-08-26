@@ -7,10 +7,12 @@ COM/EXE/BAT/PIF launch contract. Recovery is package-led, not trace-led:
 original source, same-shaped adapter, registered private overlay, then a
 last-resort authored exception.
 
-The quarantined existing project tree is an important audited reference, not
-discarded work: existing `app`, `session`, `bochs-core` and `adapter-*` files
-may be copied into their new owner roots or used as implementation references
-after a per-file provenance, owner, dependency and architecture review.
+The quarantined existing project tree is an important audited recovery source,
+not discarded work: existing `app`, `session`, `bochs-core` and `adapter-*`
+files must be considered before authoring a replacement and may be copied into
+their new owner roots or used as implementation references after a per-file
+provenance, owner, dependency and architecture review. This is a reuse order,
+not permission to retain `src.old/` as an input.
 `src.old/` itself remains outside all formal source/build/link/runtime inputs.
 
 The current profile binds one active imported MVDM host context to each
@@ -71,16 +73,18 @@ Owner mapping:
   VDD/debugger, `softpc.new`, SIM/monitor, utility and OEM packages;
 - `opennt-platform-abi`: exact required declarations outside MVDM;
 - `opennt-guest-dos`: the already-complete repository-local DOS/V86 and guest
-  DPMI mirror, carried forward without a second external-tree import;
+  DPMI mirror, recovered directly from the existing guest mirror without a
+  second external-tree import;
 - `opennt-guest-wow16`: the already-complete repository-local WOW16 mirror,
-  likewise carried forward without a second external-tree import;
+  recovered by the same direct route without a second external-tree import;
 - `tools/opennt`: historical build tools; never a runtime component.
 
-The guest roots carry forward the complete existing mirror's source, resources,
-build descriptions, tools inputs, intermediates and products. Their
-provenance/hash inventory is preserved and audited, but they are not copied
-again from OpenNT/OpenNT-4.5 merely to recreate an already-complete mirror.
-Their objects/libraries never enter the host graph. The existing
+The guest roots recover the complete existing guest mirror's source, resources,
+build descriptions, tools inputs, intermediates and products directly from the
+repository-local guest tree. Their provenance/hash inventory is preserved and
+audited, but they are not copied again from OpenNT/OpenNT-4.5 merely to
+recreate an already-complete mirror. Their objects/libraries never enter the
+host graph. The existing
 `build/output/dos` and `build/output/wow16` binary trees remain in place as
 prior build outputs/evidence; they are not moved into production roots. App
 loads manifest-selected immutable products through `adapter-bochs`.
@@ -128,8 +132,9 @@ in order:
    establishes the `bochs-core` / `adapter-bochs` mechanical closure and the
    smallest app-owned machine shell.
 3. [Canonical OpenNT source supply](proposal-rebootstrap-opennt-source-supply-001.md)
-   imports the platform ABI, guest mirrors and selected MVDM host package
-   union without claiming provider execution.
+   imports the platform ABI and selected non-guest MVDM host package union,
+   while directly recovering—not reimporting—the complete local DOS/WOW16
+   guest mirrors, without claiming provider execution.
 4. [Historical interface adapter recovery](proposal-rebootstrap-historical-interface-adapter-recovery-001.md)
    recovers same-shaped BOP, SoftPC, Win32 and VDM-monitor interfaces plus the
    minimum cooperative broker implementation.

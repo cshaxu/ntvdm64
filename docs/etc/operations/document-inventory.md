@@ -1,4 +1,4 @@
-# Documentation Inventory
+﻿# Documentation Inventory
 
 ## Purpose
 
@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 2383 |
 | --- | --- |
-| Generated UTC | 2026-08-26T07:13:12Z |
+| Generated UTC | 2026-08-26T07:16:58Z |
 
 ## Entries
 
@@ -55,9 +55,9 @@ content-divergent entries.
 | CORE-MANTLE-PREREQUISITE-IMPLEMENTATION-REQUEST.md | retained pre-governance evidence | 9278957975d10a17c74eb4335050333f739d2f5e4bc1bb11054e86022926281a |
 | CPU-EXECUTION-BACKEND-DECISION.md | retained pre-governance evidence | 4dc1cc844d20449edb83117c0a619dd889b339a473bbd87c58c0a735a4c4224d |
 | DEFAULT-BUILD-INSTRUMENTATION-ISOLATION.md | retained pre-governance evidence | cde7661dc0033236e9b1fee854fca8963e8d50ef7601d0c3583494d3565c89d7 |
-| DEM-READ-GUEST-MEMORY-BRIDGE-ADMISSION.md | retained pre-governance evidence | 5790fa0ea67152f47e58d0f13baf11c1176353ca27c949dedeb980fd9a5a6ceb |
 | DEMGETDPBLIST-GUEST-MEMORY-CONTRACT.md | retained pre-governance evidence | 8fedaf430859e0162f7c8b72ab42220e2d38ff96297a20493f2a111bea79eefa |
 | DEMGETDRIVES-CONTAINED-NAMESPACE-CONTRACT.md | retained pre-governance evidence | 6388add939543a216af4f2a31578920d8c3e58348a7b9c77cd8ce68bceae4fcb |
+| DEM-READ-GUEST-MEMORY-BRIDGE-ADMISSION.md | retained pre-governance evidence | 5790fa0ea67152f47e58d0f13baf11c1176353ca27c949dedeb980fd9a5a6ceb |
 | design/ADAPTER-ATOMIC-MULTI-WRITE.md | retained pre-governance evidence | db750789132823732883dcae555d8df39068290a0ac8cae07b721a4d25e20ca3 |
 | design/ADAPTER-BULK-RESULT.md | retained pre-governance evidence | b440dcc1cacc22054ac34016235184735348547dbf8093ad0df1c0eb3a125dc6 |
 | design/ADAPTER-HOST-SERVICE-PLANE.md | retained pre-governance evidence | 243b24758b9dcbc8cf4298ba5a2328aa7c69e635ad07ff2567db6db118ed45ca |
@@ -75,12 +75,12 @@ content-divergent entries.
 | design/UI.md | current design authority | 30dcf1c30910692bc751618473c5c172c7a34362079406bd49f3af9b254f6178 |
 | documentation-standard.md | retained pre-governance evidence | 7e4f90ac0b3a49bc727c118666638bf0200592b24053bad7a847888aa57fe7c3 |
 | DOS-FILE-OPEN-EXEC-CONTAINMENT-LEDGER.md | retained pre-governance evidence | 55d3f05f92320ff0e412da20ba82c373b3ed368984800b4eb635ad5556f2194a |
+| DOSINIT-POST-DPB-DEPENDENCY-LEDGER.md | retained pre-governance evidence | b6fdc918f079fa97f8772d8cd20e95c5cfe24a802987e64f4135f799ddf4f5e8 |
 | DOS-WOW16-SOURCE-CLOSURE-EVIDENCE-REGISTER.md | retained pre-governance evidence | b4c48330a66be7f75459717407c0dd76e929b54cdfe51c641f87a7364469cc0c |
 | dos-wow16-source-closure-inventory.json | retained pre-governance evidence | f0c51c6f2e97bbc94aeb6fc8bdb040c9f74ed2907c4138e0c62f832af855dc82 |
 | DOS-WOW16-SOURCE-CLOSURE-INVENTORY.md | retained pre-governance evidence | cf6c868eceabe29d8cfb05a81d01c727ca42335701ca27e824e3e25f6b1df2d4 |
 | DOS-WOW16-SOURCE-CLOSURE-RESULT.md | retained pre-governance evidence | 843f0bb11b298a6d80efca687fdf056dfdc9104026d53676c4052a216c17387c |
 | DOS-WOW16-SOURCE-CLOSURE-TASK-BRIEF.md | retained pre-governance evidence | 5ea19abcd564854c1c21c6dff2714b204303e935ca5385345a3f3e23ee0ecb85 |
-| DOSINIT-POST-DPB-DEPENDENCY-LEDGER.md | retained pre-governance evidence | b6fdc918f079fa97f8772d8cd20e95c5cfe24a802987e64f4135f799ddf4f5e8 |
 | ENGINE-CONTRACT.md | retained pre-governance evidence | d57785469d3221d45b6931f4ab0f40c2cc6f78ab4ecd8425daaa338931d7ca3c |
 | etc/bop-list.md | indexed supporting material | b1765fdd4065472efdf9be63f2e571bee3bb3dcde3fc1f3504843158038cc733 |
 | etc/evidence/m0-t240-s2-softpc-memory-size-closure-001.md | indexed supporting material | 3e0c56fab1d88442fa48813bee1d97d26bc12d4d49ff24dd5ff8c4efa179aba3 |
@@ -96,7 +96,6 @@ content-divergent entries.
 | etc/evidence/m0-t243-s2-spckbd-headless-source-recovery-001.md | indexed supporting material | 75c376a62f5228d678680abdf73a2a14da3c4bf410a6e1b48181cc6bf4a047d5 |
 | etc/evidence/m0-t244-s1-pc-keyboard-ivt-machine-audit-001.md | indexed supporting material | 39b9de7d47a643910bd8df5698eb9cdaa747db7f584c106f2b2111eccb1a6f14 |
 | etc/evidence/m0-t244-s2-headless-8042-lifecycle-closure-001.md | indexed supporting material | d40b68c098721e8cae1e4970d0306233bb808d7fbba6f9168b9b9cdc30f08712 |
-| etc/evidence/m0-t245-s1-ntdos-exec-parent-return-source-map-001.md | indexed supporting material | ebf0b9e8aabb7147664c4fa1fe399bf4cbb4c7bc7239f6e6040e6222666e401f |
 | etc/evidence/m0-t245-s10-physical-drive-and-floppy-map-001.md | indexed supporting material | 9a94e8bad021dfd6c72aaada4460ee99de5fa9983d1e4ec79266f2ac82c9b44b |
 | etc/evidence/m0-t245-s11-config-complete-closure-001.md | indexed supporting material | c9b9ea13bc22bfb3d735e18577ce379d0e191aba84e52f2b4dd8e912bc003293 |
 | etc/evidence/m0-t245-s12-command-bootstrap-path-disposition-001.md | indexed supporting material | a77172e34eb0b2a00a0053d11142015187f068d14940cfc5a1e89abcd6b431a9 |
@@ -107,10 +106,11 @@ content-divergent entries.
 | etc/evidence/m0-t245-s17-command-current-dir-observation-001.md | indexed supporting material | 05e9f1a4e11e46cc253cbad271a9556ee08b580e6779007597c2012bc3a432d9 |
 | etc/evidence/m0-t245-s18-dem-open-observation-001.md | indexed supporting material | 9b7b315487226e6f829f80054696a700131973c261556ac490146f0f6fa776ad |
 | etc/evidence/m0-t245-s19-post-config-interrupt-classification-001.md | indexed supporting material | 3df23e93f12e9820f58c16ce1aa8c139771b7fb1ea3b32c0e3fdbf2b0db897d1 |
-| etc/evidence/m0-t245-s2-ntdos-exec-observation-predecessor-001.md | indexed supporting material | 9cab8841ff28a81a842a113e37e9efb4ba448f9ccc52a2a8eb052a3860b0c7be |
+| etc/evidence/m0-t245-s1-ntdos-exec-parent-return-source-map-001.md | indexed supporting material | ebf0b9e8aabb7147664c4fa1fe399bf4cbb4c7bc7239f6e6040e6222666e401f |
 | etc/evidence/m0-t245-s20-permanent-command-dem-open-observation-001.md | indexed supporting material | 2d4617aac632b18bb6fa97200bc59aecc6fcdfacbbcc7264df3ce22a739782c9 |
 | etc/evidence/m0-t245-s21-opennt-oem-createfile-recovery-001.md | indexed supporting material | c95a1d3e09ab16bf19b0abdc3912175ba27cbbdea170b8edb6ba0ca1a49e63db |
 | etc/evidence/m0-t245-s22-dos-safe-bootstrap-alias-closure-001.md | indexed supporting material | 06dd8316272327aa5993aa2d15b754b3c63553a329c128dd19fec7367bd9fffc |
+| etc/evidence/m0-t245-s2-ntdos-exec-observation-predecessor-001.md | indexed supporting material | 9cab8841ff28a81a842a113e37e9efb4ba448f9ccc52a2a8eb052a3860b0c7be |
 | etc/evidence/m0-t245-s3-softpc-emm-unavailable-closure-001.md | indexed supporting material | 3855d9fbf00597e6523f1d1bb4ef86510c9cd49817149b2d028a841c15f2df17 |
 | etc/evidence/m0-t245-s4-headless-mouse-vector-package-map-001.md | indexed supporting material | b91bed213bd8f6253aa4101d584aa7955708af64c85b4153f5b53d1b368dd731 |
 | etc/evidence/m0-t245-s5-headless-mouse-vector-closure-001.md | indexed supporting material | 539aa6f02343e901d4f8b9fcf68e66930c3668b5b008c8f6dbd184a2d608d4b0 |
@@ -145,13 +145,13 @@ content-divergent entries.
 | etc/evidence/m0-t255-s1-protected-mode-substrate-call-map-001.md | indexed supporting material | fe4998587b5b18f38b6126321d4ddb52801cd9ae536a6436a8fc00af5487c61f |
 | etc/evidence/m0-t255-s2-generic-context-resume-closure-001.md | indexed supporting material | 7c21eda4acb02e5bf235aac00dd812eb25a5cab0af3e46b1f676013fc1246ef8 |
 | etc/evidence/m0-t255-s3-protected-substrate-admission-decision-001.md | indexed supporting material | 8612801b88d40562250be6158886efdf53abc6f688a24b71045f0a7eb0cefac5 |
-| etc/evidence/m0-t256-s1-protected-virtual-access-call-map-001.md | indexed supporting material | 57811b016c1cb356eab229bdddeff8b241a61c17d03259ebbd035a4fd41ca014 |
 | etc/evidence/m0-t256-s10-xmem-record-adapter-closure-001.md | indexed supporting material | bf2c74600dceb3329a3724b6473b435ca62e654ba6f80e34b447677faacf7745 |
 | etc/evidence/m0-t256-s11-xmem-reallocation-closure-001.md | indexed supporting material | 4eacff5f6eb3f0b140f787bd7722171191111b832718a10ce0436fc50dfdf98b |
 | etc/evidence/m0-t256-s12-dpmi-descriptor-guest-linear-identity-map-001.md | indexed supporting material | 3f1908d3372d64c19b8abae91ec63935a23fcec2bc5428edc67ee58c206b110b |
 | etc/evidence/m0-t256-s13-native-descriptor-table-lifecycle-admission-001.md | indexed supporting material | 4238d7188e398c031cfbbf8b64c32213950edeaba4ac13ca09161899ca0d8c78 |
 | etc/evidence/m0-t256-s14-protected-interrupt-fault-iret-continuity-map-001.md | indexed supporting material | 3e1859cff5bb5d9d57971b5b24237aaa7088770754e03fcd3ac709ea1ac0660c |
 | etc/evidence/m0-t256-s15-protected-substrate-closure-001.md | indexed supporting material | a701db1b99704f2936f168336bfeb6b45e02062bffb49b87ce0366086d2ec3df |
+| etc/evidence/m0-t256-s1-protected-virtual-access-call-map-001.md | indexed supporting material | 57811b016c1cb356eab229bdddeff8b241a61c17d03259ebbd035a4fd41ca014 |
 | etc/evidence/m0-t256-s2-nopaging-range-action-design-001.md | indexed supporting material | fee680777bef69d8f93fc453ca4d9506c5589da856b6801ee242630d958c82bc |
 | etc/evidence/m0-t256-s3-nopaging-range-action-closure-001.md | indexed supporting material | 58578665a462d87dcd9424eddf2b81264b2b1f38f66273688399724a1d9f91fb |
 | etc/evidence/m0-t256-s4-dpmi-guest-linear-identity-map-001.md | indexed supporting material | c16026d1dd75d5ce7b9c1d494c67882d970db3e7bee4650c45798e4931a87422 |
@@ -281,7 +281,6 @@ content-divergent entries.
 | etc/evidence/m0-t271-s1-nonmirror-owner-ledger-001.md | indexed supporting material | 5c4abeaffe0dd029f5ab21bab77cf20b6ec0aa38d7c935d422db186d8c97edaf |
 | etc/evidence/m0-t271-s2-dem-original-entry-recovery-001.md | indexed supporting material | 3f7e80d5f2356773b45525105d2e5748824920edc78aadfaed6d94a9783439bc |
 | etc/evidence/m0-t271-s3-command-host-api-owner-map-001.md | indexed supporting material | b9dec2d039f7efca18ccf96f30ade4f50dd28c08b839b041538039a2fa962fda |
-| etc/evidence/m0-t271-s3-p1-command-entry-globals-recovery-001.md | indexed supporting material | 8ce2e013d342736bed7424782459f599f6f6b9263b4e72a61fe14554be4ee6fe |
 | etc/evidence/m0-t271-s3-p10-command-win32-facade-completion-001.md | indexed supporting material | d786f028e98eab986778a25fa7808b922245f3477490e86fb1859dea1db38bec |
 | etc/evidence/m0-t271-s3-p11-command-host-event-initialization-001.md | indexed supporting material | f3acc48e864c94a212207652bc6b41eb38db754bf69913a5018cd428559511ae |
 | etc/evidence/m0-t271-s3-p12-ccpu-frame-context-extraction-001.md | indexed supporting material | 5b6c844e240d7c3efd2733e623c05957b4a56130e1a1f0a346ad98e95ddc5193 |
@@ -292,8 +291,9 @@ content-divergent entries.
 | etc/evidence/m0-t271-s3-p17-command-helper-overlay-isolation-001.md | indexed supporting material | 6a4716fbaf0095b5e3722746794cc33e2fb4974742230f7194d70afe85b76094 |
 | etc/evidence/m0-t271-s3-p18-command-pif-owner-and-overlay-isolation-001.md | indexed supporting material | b62fd83542c4a2ab489025cd6c746c0e8aa5511a8d97bb3e6721c9f1b59c46bc |
 | etc/evidence/m0-t271-s3-p19-command-app-session-binding-extraction-001.md | indexed supporting material | 466cd38f8804597ff504cc3314ca3cd05d10f346679217405164e3b4c889d502 |
-| etc/evidence/m0-t271-s3-p2-command-win32-facade-extraction-001.md | indexed supporting material | e2db04e68cf2454c2de6394609b2d0efa0b3570b3356e7fc7cb13bd6e799d2d6 |
+| etc/evidence/m0-t271-s3-p1-command-entry-globals-recovery-001.md | indexed supporting material | 8ce2e013d342736bed7424782459f599f6f6b9263b4e72a61fe14554be4ee6fe |
 | etc/evidence/m0-t271-s3-p20-command-final-matrix-and-fixture-composition-001.md | indexed supporting material | 1279b05e4a1e64b9806d4918236e528da1d5f47ffe70f7b42ddc0014476179e7 |
+| etc/evidence/m0-t271-s3-p2-command-win32-facade-extraction-001.md | indexed supporting material | e2db04e68cf2454c2de6394609b2d0efa0b3570b3356e7fc7cb13bd6e799d2d6 |
 | etc/evidence/m0-t271-s3-p4-command-composition-owner-disposition-001.md | indexed supporting material | bcdba56235a5f86df106dc82ed0343413cc467905b16ebfe92b28e61125de066 |
 | etc/evidence/m0-t271-s3-p5-session-input-extraction-001.md | indexed supporting material | 6e9c01d46f29a13de3672ad757bac4e4aa7cee5fd5bcdd88e4415a5b22a93ec7 |
 | etc/evidence/m0-t271-s3-p6-vdm-api-facade-recovery-001.md | indexed supporting material | a78bf278b5997e51da31f7662ee2bda19cda4da14f3219508f82e45459a3dbea |
@@ -305,8 +305,8 @@ content-divergent entries.
 | etc/evidence/m0-t271-s4-p2-xms-a20-mapping-manager-migration-001.md | indexed supporting material | 160c4e9099c793270cf1805b0f76376a5df6ef94cb305480abfee03cdc9e3096 |
 | etc/evidence/m0-t271-s4-p3-xms-source-unit-admission-audit-001.md | indexed supporting material | d0d70a24c41ceb56b227e3e9fbc53d63907710b2d706a510ba7a90905e073025 |
 | etc/evidence/m0-t271-s4-p4-xms-app-session-binding-extraction-001.md | indexed supporting material | 8abeaa2635832758b945efabe4a15d983e8c84b1e023ad324c1b3d7cbc33a3b1 |
-| etc/evidence/m0-t271-s5-p1-opennt-bop-production-classification-001.md | indexed supporting material | cd8772b5bb973dbf69ec88bf571629453a19da3fedd57eb858a5b5cb9d2be72d |
 | etc/evidence/m0-t271-s5-p10-opennt-bop-mirror-reaudit-and-disposition-001.md | indexed supporting material | 385b5a33b35faaa26220669251fa86accc801459bb315671738a91b7545fd702 |
+| etc/evidence/m0-t271-s5-p1-opennt-bop-production-classification-001.md | indexed supporting material | cd8772b5bb973dbf69ec88bf571629453a19da3fedd57eb858a5b5cb9d2be72d |
 | etc/evidence/m0-t271-s5-p2-overlay-consumer-and-boundary-audit-001.md | indexed supporting material | 982872a045ae5813d44bba99ff4958273f2d56b990597bda0bcc72397e9d7d74 |
 | etc/evidence/m0-t271-s5-p3-app-composition-extraction-001.md | indexed supporting material | f980a0fd354dbb5f5c7d93782badd516c65f2c0e1985ad773ed613f4410791e5 |
 | etc/evidence/m0-t271-s5-p4-config-complete-app-entry-extraction-001.md | indexed supporting material | e3bdd869b31744a31c933c18e773067cb16871e8d1f6afe86826b42313436ae5 |
@@ -417,7 +417,6 @@ content-divergent entries.
 | etc/evidence/t229-s1-dem-complete-source-abi-failure-audit-result-001.md | indexed supporting material | a926a4b8d368112f73c26cd543704f96916d79bceeaf03728cb0022fd2696ab0 |
 | etc/evidence/t229-s2-file-handle-fcb-search-conformance-ledger-001.md | indexed supporting material | 490251956a57401caf66e982c4afc2e534ffbb3fbec7a034950b4df8924ba177 |
 | etc/evidence/t229-s2-gset-drive-cwd-volume-conformance-ledger-001.md | indexed supporting material | e1683a3e9a50df1533fd13c3beccec67da15589a6b1008a9718c99a871a0c191 |
-| etc/evidence/t229-s2-p1-dem-whole-provider-direct-readonly-conformance-001.md | indexed supporting material | 8e7015badd3ab6f3ab372ba59544c65917d05ef3d3a99d4533eebdfa5a2dd65e |
 | etc/evidence/t229-s2-p10-dem-read-direct-readonly-001.md | indexed supporting material | 889b052699568de6c0f5b341ef2b585aa070ba0e165d906aca2539744b5146ff |
 | etc/evidence/t229-s2-p11-dem-commit-direct-readonly-001.md | indexed supporting material | 8f571894cfc8210450f66bf1185b2e9061456f115eb8ce2a760efa9da34f2ede |
 | etc/evidence/t229-s2-p12-dem-handle-cursor-eof-direct-readonly-001.md | indexed supporting material | 6dc727fde7aef42386b668cce160087280913489f11ff68d47d18adbf429ad06 |
@@ -428,23 +427,19 @@ content-divergent entries.
 | etc/evidence/t229-s2-p17-dem-gset-clock-mutation-direct-readonly-001.md | indexed supporting material | d13629ef9a3e81773e724503dce75d3541835f381f0f44bf6cd9baf9e1013f23 |
 | etc/evidence/t229-s2-p18-dem-gset-drive-cwd-volume-whole-group-001.md | indexed supporting material | 5774877ee2e5712d57411676db3f32e98602c58a61fb2adffabdf350ec9ff7fc |
 | etc/evidence/t229-s2-p19-dem-misc-subcontract-separation-001.md | indexed supporting material | aee4fd32b43793675ffd0b64bd46e53fa7e7cd701659e48f591ce19cf30602c4 |
-| etc/evidence/t229-s2-p2-dem-handle-readonly-enforcement-001.md | indexed supporting material | 2134dbbf4ff68d4412124616f1fb6167d69333bb54b86f47f5bd661a0af24c6c |
+| etc/evidence/t229-s2-p1-dem-whole-provider-direct-readonly-conformance-001.md | indexed supporting material | 8e7015badd3ab6f3ab372ba59544c65917d05ef3d3a99d4533eebdfa5a2dd65e |
 | etc/evidence/t229-s2-p20-dem-original-noop-owner-group-001.md | indexed supporting material | 749bca1359ee85509d90fa170fff2fbc173ce2f59044167e20d4fc2fd1b0255e |
 | etc/evidence/t229-s2-p21-dem-dasd-ioctl-owner-group-001.md | indexed supporting material | 80b2e408dc522ea540810a8c0c1333247aff608d25a5d0e3595286402250b0a7 |
 | etc/evidence/t229-s2-p22-dem-error-lock-owner-group-001.md | indexed supporting material | 3101dcc8ae9e20f87bf20ebe4d425daf618b48bf5d38d3c46c71e24929103c7d |
 | etc/evidence/t229-s2-p23-dem-disk-reset-command-composition-001.md | indexed supporting material | 658068bf1420ff1b5b9aff3083c9c5763736af1fd13506c37446af81e380313a |
 | etc/evidence/t229-s2-p24-dem-whole-package-local-code-completion-001.md | indexed supporting material | 56a450721044335c31a630cd778f8a0912fa738d909c70f75efb99fdb4e34b31 |
+| etc/evidence/t229-s2-p2-dem-handle-readonly-enforcement-001.md | indexed supporting material | 2134dbbf4ff68d4412124616f1fb6167d69333bb54b86f47f5bd661a0af24c6c |
 | etc/evidence/t229-s2-p4-dem-open-create-result-abi-correction-001.md | indexed supporting material | 7d971223bc554754b156fb3bd4badabf631eb5dff0ca38aa9d3c5a363656fb98 |
 | etc/evidence/t229-s2-p5-dem-create-direct-readonly-001.md | indexed supporting material | 24d3d5a451dccef88b9e1e01487f8986cf23a6d91515d8fd00f1a50a9effa851 |
 | etc/evidence/t229-s2-p6-dem-create-new-direct-readonly-001.md | indexed supporting material | 22505f7b5e13a186eae4a0a8f11cd2eea0c6e379ca4febe5da380efaf77a1bd0 |
 | etc/evidence/t229-s2-p7-dem-delete-direct-readonly-001.md | indexed supporting material | 06d64962801ff69cb04d658e3150765b82587786353dc941021aa24258b2844b |
 | etc/evidence/t229-s2-p8-dem-rename-direct-readonly-001.md | indexed supporting material | 148a377518db6d37b07add573ec9d0e9b8b8e43db0b9c859aa56119ec1036308 |
 | etc/evidence/t229-s2-p9-dem-chmod-direct-readonly-001.md | indexed supporting material | 609a30412820d1550d9b93023498c209c56e2e93bca476dd994985c741f31010 |
-| etc/evidence/t230-s1-bop-50-00-02-direct-parity-scope-correction-001.md | indexed supporting material | 2fafd3c798bc64422ff028d5b537c93e1957e30f819a63f577483ff3e696b748 |
-| etc/evidence/t230-s1-bop-50-00-opennt-shaped-v2-provider-evidence-001.md | indexed supporting material | 64fa3856447f854b30b9e75cb48841fddbd82998128439a191c0d3bc8a411715 |
-| etc/evidence/t230-s1-bop-50-01-opennt-shaped-v2-provider-evidence-001.md | indexed supporting material | eb70c11fb9763e1b726744beb6cb59af3768e33c512a25536193c650c4f97e52 |
-| etc/evidence/t230-s1-bop-50-02-opennt-shaped-v2-provider-evidence-001.md | indexed supporting material | 8e770c2108e8063fc29c4134d8ca8b8d60be0fa518e671e68b10826ac370c947 |
-| etc/evidence/t230-s1-p4-dem-common-foundation-witness-001.md | indexed supporting material | 0403f0a46e8c62b5bc2bb061d02acb61c41c2aec5abd553a2d62c2348eb804d8 |
 | etc/evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md | indexed supporting material | 7d032bb1543e90454680b39c562217ea5a8ff7c54a35a7324ff8713aea635ae0 |
 | etc/evidence/t230-s11-dem-73-slot-local-execution-audit-001.md | indexed supporting material | f90f81325eac30717355c4fddd18fb3e054d5415e2f5942185803bd5a965cf3d |
 | etc/evidence/t230-s12-s14-shared-demdispatch-local-matrix-001.md | indexed supporting material | 960488087f97208040d2b9e0b01240b9ef89c41baf4ac231fe2f192deb905256 |
@@ -453,6 +448,11 @@ content-divergent entries.
 | etc/evidence/t230-s15-p3-v2-direct-host-session-001.md | indexed supporting material | 98343c1a4e0cd8d64901456d690e0cd0ac9c73b9bb7f7532ea0711742587174c |
 | etc/evidence/t230-s15-p4-v2-dem-composition-entry-001.md | indexed supporting material | aa86d7b7edcacb4f1a4aa7221bacfe1498b6b0ce8eb2f8eb424addb66e844fe4 |
 | etc/evidence/t230-s16-native-direct-dem-observation-001.md | indexed supporting material | 075fc6b1ce175a41bfa77cdd5ece197cba50a91be3f3b67ed132f84024d00dad |
+| etc/evidence/t230-s1-bop-50-00-02-direct-parity-scope-correction-001.md | indexed supporting material | 2fafd3c798bc64422ff028d5b537c93e1957e30f819a63f577483ff3e696b748 |
+| etc/evidence/t230-s1-bop-50-00-opennt-shaped-v2-provider-evidence-001.md | indexed supporting material | 64fa3856447f854b30b9e75cb48841fddbd82998128439a191c0d3bc8a411715 |
+| etc/evidence/t230-s1-bop-50-01-opennt-shaped-v2-provider-evidence-001.md | indexed supporting material | eb70c11fb9763e1b726744beb6cb59af3768e33c512a25536193c650c4f97e52 |
+| etc/evidence/t230-s1-bop-50-02-opennt-shaped-v2-provider-evidence-001.md | indexed supporting material | 8e770c2108e8063fc29c4134d8ca8b8d60be0fa518e671e68b10826ac370c947 |
+| etc/evidence/t230-s1-p4-dem-common-foundation-witness-001.md | indexed supporting material | 0403f0a46e8c62b5bc2bb061d02acb61c41c2aec5abd553a2d62c2348eb804d8 |
 | etc/evidence/t230-s2-demhndl-direct-import-map-001.md | indexed supporting material | e8ea285644a24ef5c3dcad4a092e834afcd5c51a47096301a907c56a59dae145 |
 | etc/evidence/t230-s3-demfile-direct-import-map-001.md | indexed supporting material | d0910d3a8ab09887dcbc4a4e56270c8a4dc5474ce07d88a1f2f02ec3f37b5922 |
 | etc/evidence/t230-s4-demdir-direct-import-map-001.md | indexed supporting material | a28ec3ca85fbd98718fc0478c2773101d852908013e1edbadc9dd1be76de2db5 |
@@ -600,18 +600,18 @@ content-divergent entries.
 | etc/operations/proposal-opennt-host-mirror-overlay-convergence-001.md | indexed supporting material | d38de2d9de2c658e17efa69f3eb414c7488f3e181a50f3d5ac3c94a57986d28e |
 | etc/operations/proposal-opennt-host-original-layout-recovery-001.md | indexed supporting material | 9af7e168e93e0fcc55371785fa7f91cf8fd2b694f1089e3fe96c3caad56b9192 |
 | etc/operations/proposal-opennt-mvdm-owner-expansion-001.md | indexed supporting material | 2f837a6af1fe6b48f167983fe60ee285b3a7b1fa92fe243f9fd2816959614bdf |
-| etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md | indexed supporting material | d696f32d02acc05be59f63d8837847d66fe00dfb71367f38cf8f20156fc41a19 |
+| etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md | indexed supporting material | fb3b9206055510ec37255a8f0e0587547a726551c609e8cfacfa5c3caf272e02 |
 | etc/operations/proposal-opennt-redirector-owner-package-completion-001.md | indexed supporting material | a94a8dfb72d0625f20e0152dacab24b4aca3862f4d8960290201eeb361e1b129 |
 | etc/operations/proposal-opennt-wow16-owner-package-completion-001.md | indexed supporting material | cad78b521e3fd3edb645002ed7986082d45082dcbba54f153d11dc61ef65c07e |
 | etc/operations/proposal-opennt-xms-owner-package-completion-001.md | indexed supporting material | 63d5209a8032bff793219242257dd8ab637d833f66c17c969939e6a5e56d3d3d |
 | etc/operations/proposal-original-component-mirror-conformance-001.md | indexed supporting material | faa3f9df4ede9fbc8c66144d7c3b9dedc7b8e41d1ede15997d93c82e29e9f1c1 |
 | etc/operations/proposal-overlay-mutation-capability-completion-001.md | indexed supporting material | f7ffebc5d2e99ecef44e029526afbaddbcce02d05d66819e544d02d2ce929cff |
 | etc/operations/proposal-project-code-filename-normalization-001.md | indexed supporting material | 8a42536533fd68114f575dc49f3d02213778a8ecb6e80e8cc797d2f70df2382a |
-| etc/operations/proposal-rebootstrap-bochs-machine-foundation-001.md | indexed supporting material | 715cf856b0333fa7fb782b182f60a2ae2a665936e55b762e0383bc94ea516037 |
-| etc/operations/proposal-rebootstrap-dual-architecture-product-composition-001.md | indexed supporting material | e86c64a9fb9e919131d305e50b9dcdf55090fc8c0b242178986b458a2fb870eb |
-| etc/operations/proposal-rebootstrap-historical-interface-adapter-recovery-001.md | indexed supporting material | 91c9d2d7bd931f05b4d3b7940b16f7a54972c1dd24a3dd69923ecd5952526952 |
+| etc/operations/proposal-rebootstrap-bochs-machine-foundation-001.md | indexed supporting material | 8b9960658a8a271b7d5b0ebac3c435cccf9f3a136e0332266b7159a720d49be5 |
+| etc/operations/proposal-rebootstrap-dual-architecture-product-composition-001.md | indexed supporting material | 7413117ab96181ef2c17b81935cbc29140a6eb5d7540e1df4c9730fe1b1cd09f |
+| etc/operations/proposal-rebootstrap-historical-interface-adapter-recovery-001.md | indexed supporting material | 7b5221601ea274342ad27c6b9619a5fd42210ac2aa2e757845080fb6fae50c96 |
 | etc/operations/proposal-rebootstrap-neutral-runtime-foundation-001.md | indexed supporting material | 8a5ae994a7ffffe78353d72f5448be3908d767583c3e3013b24c3005bc1057ba |
-| etc/operations/proposal-rebootstrap-opennt-source-supply-001.md | indexed supporting material | 234f5e6569f817ee23f2c6afa965dbe8b702c53334378422fffc884a5856c7ad |
+| etc/operations/proposal-rebootstrap-opennt-source-supply-001.md | indexed supporting material | 719b1903a24971936ddf5926795908e838d69fe79dd02b07aa30f916eb3ae3cb |
 | etc/operations/proposal-repository-local-source-closure-refs-retirement-001.md | indexed supporting material | db10b8498c1f6525221b1cf86df8312ba90aa4a26f752601f5fd5b3608c70986 |
 | etc/operations/proposal-selector-blind-guest-async-completion-delivery-001.md | indexed supporting material | 3453f27990bb707109bb81db1ebbe029e3a937f3af1deb174b172f7f86780e5a |
 | etc/operations/proposal-selector-blind-protected-mode-substrate-001.md | indexed supporting material | 6353218f86907661b1dc72bb4a20067ef08f6c8e59be33e65e084a2a8b8b5598 |
@@ -772,20 +772,20 @@ content-divergent entries.
 | etc/research/t173-s1-declared-dos-target-return-abi-audit-001.md | indexed supporting material | 466e80a8aeffcf5bffe1623a2d28a12b1f3db8ab9bda7a2cf4553e8de9d1f5a4 |
 | etc/research/t174-s1-paired-declared-dos-lifecycle-provider-001.md | indexed supporting material | 8a17d033d106df0e7747a167afd89a13507a9a2659e7ac3f11ec708ef408f93c |
 | etc/research/t175-s1-declared-dos-lifecycle-cli-result-abi-audit-001.md | indexed supporting material | 512755c4f5a59089386e3183a43ad4fa32434c0e910afdb9d56cc42b7fc8a196 |
-| etc/research/t176-s-task-normalization-001.md | indexed supporting material | 70e3797420d207f1e003a383a1453d85fe9774946ab55e9d671289b50ffc7011 |
-| etc/research/t176-s1-normal-dos-return-fixture-audit-001.md | indexed supporting material | fb6fa91fb450ec3240f8661cb2daf3ff966179d0b71585cdb6c1c0cc2e0c4504 |
 | etc/research/t176-s13-share-lifecycle-observation-001.md | indexed supporting material | 6f399e7d177afdb555e99aeb5419cf90d913840b555b1f26d46ec212a01c0a8d |
 | etc/research/t176-s14-share-target-transfer-correlation-001.md | indexed supporting material | 9bb13493fc2ea17be747f73fb301e3b9d9e148681d4ddbfa61b72aa0dab9c00f |
 | etc/research/t176-s15-dem-pdb-termination-provider-audit-001.md | indexed supporting material | c4f76f3a24c4c795e12f01f500302d91f335a4b34354ab796ae920674bc3f9fa |
 | etc/research/t176-s16-dem-session-lifecycle-provider-contract-001.md | indexed supporting material | 559a6414832595259dae12f5ac37c53f12fed7686f93c1c6f9067a81788f736a |
 | etc/research/t176-s17-dem-session-lifecycle-provider-implementation-001.md | indexed supporting material | 39bb49eb33b816c9d63de404b183f79e70bcb29dfb5a2ab00d809604a826d057 |
 | etc/research/t176-s18-s19-dem-lifecycle-link-and-observation-001.md | indexed supporting material | 96beef32b32c0605285d6efa7614dbb163c57b3edea2c1a6c2bb92ec6b3b4a58 |
+| etc/research/t176-s1-normal-dos-return-fixture-audit-001.md | indexed supporting material | fb6fa91fb450ec3240f8661cb2daf3ff966179d0b71585cdb6c1c0cc2e0c4504 |
 | etc/research/t176-s20-post-termination-continuation-correlation-001.md | indexed supporting material | 95334d1de5c24c545e2b95e1a98683c2ec8574dbd9503b067d45ec904f1e39a7 |
 | etc/research/t176-s24-illegal-op-runtime-observation-001.md | indexed supporting material | de3b0fa1e27facffb8efe290bfcd9f0ed188d095c2a1ea715eea763832de7f78 |
 | etc/research/t176-s6-deferred-startup-rejection-source-audit-001.md | indexed supporting material | 91f05c81a759dcea9900f83ce46dff21af906ef6f774a45c73ea014756309084 |
+| etc/research/t176-s-task-normalization-001.md | indexed supporting material | 70e3797420d207f1e003a383a1453d85fe9774946ab55e9d671289b50ffc7011 |
+| etc/research/t177-s10-illegal-op-handler-island-closure-001.md | indexed supporting material | 664193652808b1534969ed0c113350d0791c3b68efca744bd92f6299ff7be773 |
 | etc/research/t177-s1-source-built-normal-return-fixture-observation-001.md | indexed supporting material | 5d535d7b9c683c8ee054ab12e26773b663d08bdb41e0ea135eacf87c6ed52be7 |
 | etc/research/t177-s1-vector-stack-predecessor-attribution-001.md | indexed supporting material | 4dbcfd66cba4c03c9101541994cc5bd1d76350f9cfd598d8428a735707aeb1c7 |
-| etc/research/t177-s10-illegal-op-handler-island-closure-001.md | indexed supporting material | 664193652808b1534969ed0c113350d0791c3b68efca744bd92f6299ff7be773 |
 | etc/research/t177-s2-native-post-machine-composition-crosscheck-001.md | indexed supporting material | ac1328bcca3eec6e8ceb2bf402a52aee2fa1cd3562a8834c4364eca828f1ae0b |
 | etc/research/t177-s3-combined-composition-admission-decision-001.md | indexed supporting material | 1d93862cf4708724715e4737bbf714d9157dd84abbffc5a659224734584089dd |
 | etc/research/t177-s4-native-post-machine-composition-observation-001.md | indexed supporting material | d14e32f8e1b481de161c7cb72256607b4af88771bf09ca1cde500635438269fe |
@@ -825,8 +825,8 @@ content-divergent entries.
 | etc/research/t187-s2-passive-bop-dx-snapshot-001.md | indexed supporting material | c958dfc6af1c1df6b77c2c8243e1a2a5acccc85bdd402e650dfd7d59f2a63116 |
 | etc/research/t187-s3-passive-listener-engine-composition-001.md | indexed supporting material | 08d7b1ed055a2ba47be068bbfd496ff8b995bf2b25ba6027786a76110e9bad41 |
 | etc/research/t187-s4-passive-listener-observation-001.md | indexed supporting material | 25847ac0be244f64b1e55ddb5445bf82a093c95433393c1fb9b6968e067b1955 |
-| etc/research/t188-s1-bop-ingress-consumer-closure-001.md | indexed supporting material | 49bc4792afd8d85fababb4bc21ad22f758a28adc33848db8d90ce5caa111fc29 |
 | etc/research/t188-s10-copied-state-observation-001.md | indexed supporting material | 375718b5636a228f60a51e5f371f22163e4f93b6d76035ac54c5e964aee5c0ce |
+| etc/research/t188-s1-bop-ingress-consumer-closure-001.md | indexed supporting material | 49bc4792afd8d85fababb4bc21ad22f758a28adc33848db8d90ce5caa111fc29 |
 | etc/research/t188-s2-v5-boot-file-predicate-fixture-001.md | indexed supporting material | 969e3c6dff2c666f4cd69f7f2a25a70bed5d32a981029f1fa4de7cea0a22e290 |
 | etc/research/t188-s3-session-observation-audit-001.md | indexed supporting material | f9649c0c4e41bb8ab24b859d557eb5f3c6334d0bc7802b5b75f5c860fd2ecee9 |
 | etc/research/t188-s4-copied-session-state-diagnostic-001.md | indexed supporting material | b2c9d645b1c094395d3b17d7f3d77bc9683bcbedb0dbc6a8359bdd90575fc535 |
@@ -851,7 +851,6 @@ content-divergent entries.
 | etc/research/t193-s1-reached-machine-selector-audit-001.md | indexed supporting material | eca84185774266196df3adfc25ca461b7981b88140558fac3a67b4c60a8bf73b |
 | etc/research/t193-s2-t190-machine-island-provenance-001.md | indexed supporting material | 6c4ae40cedbcd411b51202760db44f8acecd0e7a9ce8e30f6658bd8b0f283201 |
 | etc/research/t193-s3-machine-selector-decision-register-001.md | indexed supporting material | 3673d7fe41c8bb1f48a61f1b951ac95a88b83e4f52e3b46402dae86ccdc36f12 |
-| etc/research/t194-s1-normal-return-fixture-asset-reconciliation-001.md | indexed supporting material | ffe98b4bd301a29b9d6a278879061cbdb17059eca656671ec37859b0a5058d08 |
 | etc/research/t194-s10-one-slot-observation-input-preparation-001.md | indexed supporting material | 3e3923d92879b8c76f23edfcc741dbcad340b09614abd4d13ad664fcbda382a7 |
 | etc/research/t194-s11-one-slot-normal-return-asset-admission-001.md | indexed supporting material | ee8e464d2a5a7d5a20901d0ba897118e8564b7c8fa3784b60beba1ed32e8ab93 |
 | etc/research/t194-s12-source-built-normal-return-asset-recovery-001.md | indexed supporting material | 66ccaf6959887aaeceb8a68722a2c7efb8fab6bdb7b4aa23d1966f3de8722002 |
@@ -862,7 +861,7 @@ content-divergent entries.
 | etc/research/t194-s17-reached-dem-continuation-source-audit-001.md | indexed supporting material | 94bb49d346fd60c65e677b7f91a5905b2b6f6650bb59a2a9d8ff034ecaa9de8a |
 | etc/research/t194-s18-v6-drive-policy-capability-contract-001.md | indexed supporting material | 105701ab181914d19ea228a501d475e356036bb7fc6ae52194812067e3fb484a |
 | etc/research/t194-s19-cli-drive-snapshot-provider-integration-001.md | indexed supporting material | 35b58b8a0da8e757d392cab19b6c7ca64b774ddfdf2f7d289b3315c27a809964 |
-| etc/research/t194-s2-bootstrap-normal-return-divergence-001.md | indexed supporting material | 6a3a822dd02f93aabe008de995fc9f9ab186e6b334ff8b7228c0007419a0be7c |
+| etc/research/t194-s1-normal-return-fixture-asset-reconciliation-001.md | indexed supporting material | ffe98b4bd301a29b9d6a278879061cbdb17059eca656671ec37859b0a5058d08 |
 | etc/research/t194-s20-drive-snapshot-runtime-routing-proof-001.md | indexed supporting material | ce721cb8dbe5d30bad6afda90653b0036356786470da5906a42c483d69612951 |
 | etc/research/t194-s21-current-drive-snapshot-adapter-derivative-001.md | indexed supporting material | 1d49f5ae0b17c34afdecaf20087dca222c766224378152adccc311d89c1e7148 |
 | etc/research/t194-s22-drive-snapshot-engine-bundle-001.md | indexed supporting material | a476d9dc1f99c94a3368671e5fc6389f978d711bb27b9392f671a7a6a01dc44e |
@@ -873,7 +872,7 @@ content-divergent entries.
 | etc/research/t194-s27-dpb-snapshot-bundle-001.md | indexed supporting material | bdfa4b66e3a67b5c26a0818bfe693d6d0b32e8656b24fbe53593bc1a8bf52a29 |
 | etc/research/t194-s28-dpb-snapshot-observation-001.md | indexed supporting material | 6e575c5a2a7999033ac5cdcf1e97a1e15ad01af5e44c12acce3852a496a0a538 |
 | etc/research/t194-s29-reached-dem-ioctl-source-contract-audit-001.md | indexed supporting material | 103cf267df676230ef14888b7ecc4d4e598d12abbcca149248400b0599466d6e |
-| etc/research/t194-s3-single-target-normal-return-contract-001.md | indexed supporting material | 4ef6611830e0d0fd68d8d72b82ee2ce304ab6f3c91b5e0ad93bda83dd9eb2c8a |
+| etc/research/t194-s2-bootstrap-normal-return-divergence-001.md | indexed supporting material | 6a3a822dd02f93aabe008de995fc9f9ab186e6b334ff8b7228c0007419a0be7c |
 | etc/research/t194-s30-bop-register-observation-derivative-audit-001.md | indexed supporting material | b48477f40b7c2904201dd4f8c51d15f84b9de063aa01357a97653ebd10405d8c |
 | etc/research/t194-s31-bop-register-derivative-generator-001.md | indexed supporting material | 63b9877dcf1de87dcbdabdb675e844c46d5e8fa0210961fd0eb3347cf6aff501 |
 | etc/research/t194-s32-bop-register-derivative-build-001.md | indexed supporting material | e600e783fc70b44dd06a8e5d10fddc13e222812600acb376e35e824df1733def |
@@ -884,7 +883,7 @@ content-divergent entries.
 | etc/research/t194-s37-total-observation-record-001.md | indexed supporting material | 3fc888f8b2b6965e1efed954c6b4459f414947601d78bd34fe3bd8b876c259ea |
 | etc/research/t194-s38-dem-ioctl-metadata-composition-audit-001.md | indexed supporting material | 5b7ef12ae5b3a412505d4c8f4e93cee6befd1826abea3065482bb7d7368d8122 |
 | etc/research/t194-s39-paired-dem-ioctl-metadata-provider-source-001.md | indexed supporting material | 71c8df3ed92e7fcb4a4d103daf61146a8bca6e2014cad41712b397f60494b858 |
-| etc/research/t194-s4-single-target-command-lifecycle-implementation-001.md | indexed supporting material | 27d374b709797403b6d02f61d899c0d8b428cfbf30c3baac34c51119e31ec182 |
+| etc/research/t194-s3-single-target-normal-return-contract-001.md | indexed supporting material | 4ef6611830e0d0fd68d8d72b82ee2ce304ab6f3c91b5e0ad93bda83dd9eb2c8a |
 | etc/research/t194-s40-s41-metadata-provider-test-correction-001.md | indexed supporting material | 60b2763f0530fc14d59033dea700e888e50132fab1e1e190d8d344062068c814 |
 | etc/research/t194-s42-metadata-provider-focused-test-001.md | indexed supporting material | d9f5e459ec2cc74768741b43b3710b8461e317d1704c8abced8ff11cc40f03b3 |
 | etc/research/t194-s43-metadata-provider-engine-closure-audit-001.md | indexed supporting material | 919ffb5a57f17f895f745809d3ace40e2a3bb71935061dcc9023cb6894fcd7d0 |
@@ -894,13 +893,14 @@ content-divergent entries.
 | etc/research/t194-s47-metadata-provider-observation-admission-001.md | indexed supporting material | 62d66caeb98d49704beb6e133513742bc82a28bdde01ec6ef16eb1408d0c02c0 |
 | etc/research/t194-s48-metadata-provider-observation-001.md | indexed supporting material | b70236c1a004b915ef34e3e41b93425bca89b1d6923657caf652982be3752b13 |
 | etc/research/t194-s49-s51-deferred-native-post-composition-001.md | indexed supporting material | a311e0c96f5efe6398ec0216f60426e40c2bb7a070f78e2c37c3933a9bf09664 |
-| etc/research/t194-s5-one-slot-engine-admission-audit-001.md | indexed supporting material | aca606a76c4bc9928fa138259f71125fc280c1e297dc2f397d1512c56f0efe67 |
+| etc/research/t194-s4-single-target-command-lifecycle-implementation-001.md | indexed supporting material | 27d374b709797403b6d02f61d899c0d8b428cfbf30c3baac34c51119e31ec182 |
 | etc/research/t194-s52-deferred-observation-input-audit-001.md | indexed supporting material | d234c366e5cf6a8ca2b72e68f6b36a32d8363a3de9a15ecff76c612b8bc99c13 |
 | etc/research/t194-s53-obsolete-observation-tree-cleanup-001.md | indexed supporting material | c8c3a082e2f4d02c682715a4bbf8af575e450d0ad008fe45dd22bb88aeea898b |
 | etc/research/t194-s54-deferred-native-post-observation-001.md | indexed supporting material | 37ed721744f1bed6f0a3fdf0d8356bb7c3a22877b1867df3922fa30fa8c7e13d |
 | etc/research/t194-s55-selector-06-source-correlation-001.md | indexed supporting material | 8021a442f3b9de7e13fbd246865e28da5db8a7f345718cdb3876fa5333b1827e |
 | etc/research/t194-s56-deferred-machine-closure-generation-001.md | indexed supporting material | e6c5c8e21ef39d9ec4e562bc703f3eceabe999fbb3aba1db9c133ec51b6aecd1 |
 | etc/research/t194-s57-deferred-machine-closure-build-001.md | indexed supporting material | 6dcdd2698c93457afa5bf5285a5d7d8e0b348d17c8d6581c7b31ae35582eab4e |
+| etc/research/t194-s5-one-slot-engine-admission-audit-001.md | indexed supporting material | aca606a76c4bc9928fa138259f71125fc280c1e297dc2f397d1512c56f0efe67 |
 | etc/research/t194-s6-one-slot-adapter-composition-assembly-001.md | indexed supporting material | c5d255db3dd302de46307eff3ef07dc4762ac2e417808a715d63d4a5ebc3eafd |
 | etc/research/t194-s7-one-slot-bounded-startup-admission-audit-001.md | indexed supporting material | 0f2ea6f6f3b2dcea0f84185fef8491852991d85a7445cc574efca771fa1f0fc2 |
 | etc/research/t194-s8-one-slot-current-adapter-derivative-closure-001.md | indexed supporting material | b51c997cd203d90b0dd57d8dce6d1bc85e31015574454e9fc5e7bfc65e1a6b17 |
@@ -925,9 +925,6 @@ content-divergent entries.
 | etc/research/t197-s6-cpu5-minimal-link-probe-001.md | indexed supporting material | 116cffce53bc815a31c4528442b6415209b54daa52ba098870826625c07a8d36 |
 | etc/research/t197-s7-physical-closure-reconciliation-001.md | indexed supporting material | 3aede973d07f558843b6ba576f6ec6241eab2dec55227025460cf01641aa9d75 |
 | etc/research/t198-component-package-replan-001.md | indexed supporting material | be35909f6e3c5858f7f66984fdb875bc60cf1f96fd15b45428a7a5d15283a248 |
-| etc/research/t198-s1-bop-runtime-composition-map-001.md | indexed supporting material | 84c546f939823a69e12e6d7ee32639fd915c3d30f5bb150e6bc5d074a582c94d |
-| etc/research/t198-s10-p1-provider-plane-witness-001.md | indexed supporting material | a7dcd3b349ec9014e4e82e8a2e90761c5cee14e97dc6bc5693c06bbca10744e8 |
-| etc/research/t198-s10-p4-path-next-witness-001.md | indexed supporting material | 7afe1f1b013279372fd84025d3b15f78af0a8b754bc994570a690b21b05430ec |
 | etc/research/t198-s100-dem-handle-abi-map-001.md | indexed supporting material | be379eba63f692d578b3502063add231cdde83748b676522e200ef75c895bf9b |
 | etc/research/t198-s101-dem-handle-abi-witness-001.md | indexed supporting material | 96be87e5164cd7932602c0f9489b8380941a53aa3b33ec284d8f7c478fbfa8db |
 | etc/research/t198-s102-post-handle-abi-native-observation-001.md | indexed supporting material | 110cbf1202070a772a35789ee6e40c7b9de0b10207bb9531af41f3f919b5cce0 |
@@ -938,7 +935,8 @@ content-divergent entries.
 | etc/research/t198-s107-fastio-noop-native-observation-001.md | indexed supporting material | 2e534488c4c5ff677a2acfa05715b91a66487f2a70097b99c3924cb5bf1a1b81 |
 | etc/research/t198-s108-c000-int10-machine-owner-map-001.md | indexed supporting material | 2c3facc5a6331745889e360faf41fe1999947a0495847b16e14fcc4286ff5a2e |
 | etc/research/t198-s109-dem-fastread-contract-reconciliation-001.md | indexed supporting material | 5916dea29322cc11baeb795681d7512d7178f2646bb3278192f4ecffe5b59884 |
-| etc/research/t198-s11-p1-synchronous-composition-map-001.md | indexed supporting material | c3bb3b0c23aeff5d092f89b419bf75ba1040048fdf938218b190a4607575e616 |
+| etc/research/t198-s10-p1-provider-plane-witness-001.md | indexed supporting material | a7dcd3b349ec9014e4e82e8a2e90761c5cee14e97dc6bc5693c06bbca10744e8 |
+| etc/research/t198-s10-p4-path-next-witness-001.md | indexed supporting material | 7afe1f1b013279372fd84025d3b15f78af0a8b754bc994570a690b21b05430ec |
 | etc/research/t198-s110-fastread-provider-restoration-001.md | indexed supporting material | 22f1c8870e0ab9c84eef0ac93ac0a67624449d2128576981055527a0de51c711 |
 | etc/research/t198-s111-fastread-restored-native-observation-001.md | indexed supporting material | 2790076b027cbb3a812d0f78f507785c0db9e8d7fe05bfb81a04ec80b6aa34f4 |
 | etc/research/t198-s112-fastread-telemetry-order-map-001.md | indexed supporting material | a00891e9d6107577c574c65a13735867804ecc525ecd57bbaadbdb5e466c5592 |
@@ -948,9 +946,7 @@ content-divergent entries.
 | etc/research/t198-s116-fastread-attempt-ledger-001.md | indexed supporting material | e67945d0109c28eaee3e4f801a4e63dca9fb51bc333702478b92b7370fd60f25 |
 | etc/research/t198-s118-fastread-ledger-export-closure-001.md | indexed supporting material | e489f093c897b2ec859a5b56404a320fa49a2b8ef21364961a0123438a89ca25 |
 | etc/research/t198-s119-fastread-ledger-native-observation-001.md | indexed supporting material | 6d7f83e70a9ff05bc09b5cc365211b1da30a1864c9ae182b652169ab9aa12377 |
-| etc/research/t198-s12-p1-adapter-composition-witness-001.md | indexed supporting material | 00e53652ea1588d60d0da6dcd0d8f83217d4526e08c864ecb6e53fbdd32eb5c1 |
-| etc/research/t198-s12-p2-composed-bridge-witness-001.md | indexed supporting material | a87666de0fb44d37856140eaf0e6a2ac56bd8ecf4818959794290a52bd2ef96b |
-| etc/research/t198-s12-p3-native-cross-island-link-frontier-001.md | indexed supporting material | e3d753b80269715c54dfc24cfb7eaa35b9e0148e688adfccfde60276b7e6caa5 |
+| etc/research/t198-s11-p1-synchronous-composition-map-001.md | indexed supporting material | c3bb3b0c23aeff5d092f89b419bf75ba1040048fdf938218b190a4607575e616 |
 | etc/research/t198-s120-fastread-declined-token-lifecycle-map-001.md | indexed supporting material | 19c5bbc4156312483074ddbacebc9f60d3020cc99de9f5b1b9220c68178278c0 |
 | etc/research/t198-s121-dem-lifecycle-ledger-001.md | indexed supporting material | 2e89ed69ec50ced42dcab3a4dafacdb6552f0b8d8eda793cc87ed205b81a0efd |
 | etc/research/t198-s123-zero-byte-result-transaction-fix-001.md | indexed supporting material | c24c57059b7b922aa0e161d4abab581b02ad6903ac267650819f9fb4fa681baf |
@@ -960,11 +956,14 @@ content-divergent entries.
 | etc/research/t198-s127-command-launch-native-observation-001.md | indexed supporting material | a899285339dabf541bc97d0d2cbcf37bc5ab394ea57abf34a855a0d01486c677 |
 | etc/research/t198-s128-command-keyboard-layout-reuse-map-001.md | indexed supporting material | e47ba0dcf06a269368bc6e7200d83f981e51f6bb1c110a7d16a41bbc5ffc2eae |
 | etc/research/t198-s129-command-keyboard-layout-composition-closure-001.md | indexed supporting material | 3efb25807888f40e422f2e73c15a2b84901d26d2a07a09e40b43e3fab57da6a9 |
-| etc/research/t198-s13-msvc-x64-minimal-lifecycle-witness-001.md | indexed supporting material | 54006d23da1a1d7988c90eb13be924622cae461b1034be965bf7f91e33923d7b |
+| etc/research/t198-s12-p1-adapter-composition-witness-001.md | indexed supporting material | 00e53652ea1588d60d0da6dcd0d8f83217d4526e08c864ecb6e53fbdd32eb5c1 |
+| etc/research/t198-s12-p2-composed-bridge-witness-001.md | indexed supporting material | a87666de0fb44d37856140eaf0e6a2ac56bd8ecf4818959794290a52bd2ef96b |
+| etc/research/t198-s12-p3-native-cross-island-link-frontier-001.md | indexed supporting material | e3d753b80269715c54dfc24cfb7eaa35b9e0148e688adfccfde60276b7e6caa5 |
 | etc/research/t198-s130-post-keyboard-native-observation-001.md | indexed supporting material | 51ff5463ac76afb5ab9546dce668a011d860f4784f5531cb77953e7458482fca |
 | etc/research/t198-s131-command-current-directory-reuse-map-001.md | indexed supporting material | 011e2fb3b685a9a2366382040be7fd1f3bb7f0d6f8005835872b81cd571e5a7f |
 | etc/research/t198-s132-command-current-directory-composition-closure-001.md | indexed supporting material | d12510316c7369ad411590ce1946e81f09b20bc6164e7b7fb0595c1b95bbad1a |
 | etc/research/t198-s134-paired-command-endpoints-native-result-001.md | indexed supporting material | 46d0592a51d53a306dc3bc2063a342d0f554964e9d0b1a674753c4918f4105bd |
+| etc/research/t198-s13-msvc-x64-minimal-lifecycle-witness-001.md | indexed supporting material | 54006d23da1a1d7988c90eb13be924622cae461b1034be965bf7f91e33923d7b |
 | etc/research/t198-s14-msvc-x64-finite-hlt-witness-001.md | indexed supporting material | 1c3433f37dc121388acaf494b92a14650039251e844cf237184b2b6eb633298e |
 | etc/research/t198-s15-msvc-x64-generic-ud2-observation-001.md | indexed supporting material | 2ff061af0c825f711fed80bccbd5cd67935349b1d1607a38dfe728104f4c801a |
 | etc/research/t198-s16-msvc-x64-boot-namespace-composition-witness-001.md | indexed supporting material | a7fc9ed5d7cb814960abb0b39508b5473349b43d39869a49c73adf70fb10a598 |
@@ -975,7 +974,7 @@ content-divergent entries.
 | etc/research/t198-s18-native-dem-lifecycle-witness-001.md | indexed supporting material | f9f15361c000317cee633145404ed8179fef41ec441696e4e9b4d5fa6cdcf5fc |
 | etc/research/t198-s18-native-dta-search-witness-001.md | indexed supporting material | 2ab385bc0b2146c9bbef576cf5a85565b865efe04221700fc339a9a2325b8d35 |
 | etc/research/t198-s19-first-ntdos-guest-entry-map-001.md | indexed supporting material | 6f4674aebf1802c2cc51c4d4422b403462e30ecdae5c2a3d903eab766867cfaf |
-| etc/research/t198-s2-native-execution-contract-map-001.md | indexed supporting material | 6a4d554fe4eb5309fca9e777c2cfd84ae759f4a5f0f80441db1a5e0355096507 |
+| etc/research/t198-s1-bop-runtime-composition-map-001.md | indexed supporting material | 84c546f939823a69e12e6d7ee32639fd915c3d30f5bb150e6bc5d074a582c94d |
 | etc/research/t198-s20-native-dem-load-dos-witness-001.md | indexed supporting material | 74dfed7e930dc88e5d732042c195414a0299e3561e5df2efc049c00d32d71e8f |
 | etc/research/t198-s21-ntio-preentry-contract-map-001.md | indexed supporting material | d649809f5cc97be8beab77a08943e8656ba4a838ca2d38e240854b8a83b11b3a |
 | etc/research/t198-s22-mantle-preentry-witness-001.md | indexed supporting material | a756dbbf7028652b42441037d51cd1dafa291f41c968bbb11282f1048e1382f8 |
@@ -994,7 +993,7 @@ content-divergent entries.
 | etc/research/t198-s27-post-drive-machine-audit-001.md | indexed supporting material | cfcc324c44f0d1a65a960290da11ce1c152b42edacf050c9dc74b2d93e0104b3 |
 | etc/research/t198-s28-post-drive-generic-ud-probe-001.md | indexed supporting material | 9e1ff6f6b06940b93abe72ea0622d60f9cde67d230da50356f317cce29a74f04 |
 | etc/research/t198-s29-first-generic-ud-capture-001.md | indexed supporting material | 43c2328c13df48aa609feca06b28701c555e43cb79713cc4e0a1a5f0edd0efcc |
-| etc/research/t198-s3-finite-native-run-witness-001.md | indexed supporting material | f197ff4bf1f1d6ad401b6f79b0b2ee59949ad583622468df10e2f80efc94adcc |
+| etc/research/t198-s2-native-execution-contract-map-001.md | indexed supporting material | 6a4d554fe4eb5309fca9e777c2cfd84ae759f4a5f0f80441db1a5e0355096507 |
 | etc/research/t198-s30-low-ram-frontier-ownership-audit-001.md | indexed supporting material | a2d747b84a51c4b6e661922c23f6cd37be6c8101798f550c556b2c7a1b0538f0 |
 | etc/research/t198-s31-terminal-ram-snapshot-001.md | indexed supporting material | 842911d0b3c2e63809872ae42c51a1bd88b76293b938219634edaa32104a225c |
 | etc/research/t198-s32-first-generic-event-state-001.md | indexed supporting material | 96458ccb106b96e2957dc1877bc751f7535dae6c125f75c2a7c9d445aff7c917 |
@@ -1005,7 +1004,7 @@ content-divergent entries.
 | etc/research/t198-s37-low-ram-transfer-attribution-001.md | indexed supporting material | eb05b07b2dc1a4102a4ba2a160799b2e16e0191e8fc4bc1d8491c412b2a2c7c8 |
 | etc/research/t198-s38-cs-transition-witness-001.md | indexed supporting material | a984feacdca1e3d6550bac37b06771dbe592d5e980365003779220fbd801d339 |
 | etc/research/t198-s39-preentry-contract-attribution-001.md | indexed supporting material | 0f42adeb136087310b5b5973b14b5db5844d4a5d98ad7d1e73d39d6f86ba36ed |
-| etc/research/t198-s4-generic-ud-seam-map-001.md | indexed supporting material | d22f402ce51aa8c8ff079cd6e737e7103688f096c42f751571cb58ddb538746e |
+| etc/research/t198-s3-finite-native-run-witness-001.md | indexed supporting material | f197ff4bf1f1d6ad401b6f79b0b2ee59949ad583622468df10e2f80efc94adcc |
 | etc/research/t198-s40-preentry-input-closure-001.md | indexed supporting material | 8ee2640b5905e2551a9dea50003e9727c81426be11f652b561818de7b31a282b |
 | etc/research/t198-s41-stack-position-witness-001.md | indexed supporting material | 4ce7d0dae249f241e619b380b277fd78890cb7304f15d744a14ff124b2f099d3 |
 | etc/research/t198-s42-control-transfer-provenance-001.md | indexed supporting material | 0341d332df4bda709322f399bdbbfac0982a7cd9d38e6a65b4a9dd49c9efffa1 |
@@ -1016,10 +1015,7 @@ content-divergent entries.
 | etc/research/t198-s47-realmode-ip-width-repair-001.md | indexed supporting material | e73cee93ca39686ef6861a8c143255a850667939d6125032e9cb9927f6945d2c |
 | etc/research/t198-s48-clean-ntio-post-wrap-observation-001.md | indexed supporting material | f4b6f747933ece6676848a6fbb74575bec6f610e7282c3a83df8143728114ce6 |
 | etc/research/t198-s49-post-drive-continuation-001.md | indexed supporting material | 7ca6ecc503a57ba29a4273a33b231fd02df2230d1fb4076187b1865af2b09c69 |
-| etc/research/t198-s5-p1-generic-ud-bridge-record-001.md | indexed supporting material | 28b1dfb141e07bef1357cc6bee7cced17a1b9b243b83332bdfdfe2d37c3b3ce1 |
-| etc/research/t198-s5-p2-core-mantle-ud-hook-001.md | indexed supporting material | b9e735b0813e7be24beedd79915803d92a6c903041d6d7e98c62bb17e355fcf9 |
-| etc/research/t198-s5-p3-finite-ud-stop-witness-001.md | indexed supporting material | 9791321a04f96d18c79d00ceaadc0b8f40d58e41311531814a4c5c9a96f0814a |
-| etc/research/t198-s5-p3-physical-core-cleanup-witness-001.md | indexed supporting material | 367f22f8f2f3252a01ae866d1ab47237302b4a04a337e91d6b37339adf2c76f4 |
+| etc/research/t198-s4-generic-ud-seam-map-001.md | indexed supporting material | d22f402ce51aa8c8ff079cd6e737e7103688f096c42f751571cb58ddb538746e |
 | etc/research/t198-s50-current-composition-membership-001.md | indexed supporting material | 2586a7b0c35ed561d39a93d306912e551ac3d0174973270a497980b5b691d5d5 |
 | etc/research/t198-s51-dpb-composition-witness-001.md | indexed supporting material | 1564e4b0be09ec3b29d5c8c64310fd40b1eb426d08f5636113fc19b29f6b9b58 |
 | etc/research/t198-s52-bios15-ah88-observation-001.md | indexed supporting material | b73231989e283e05829510f39ef3c5e315a603ccde4d75148e7a0fdb4f2a640e |
@@ -1030,9 +1026,10 @@ content-divergent entries.
 | etc/research/t198-s57-ioctl-metadata-composition-witness-001.md | indexed supporting material | 7af91dc40fd727cc92d24336072edb50f85965f64ce77df00dd05e0bf7b648ea |
 | etc/research/t198-s58-fast-read-contract-audit-001.md | indexed supporting material | 7bd54acc359cfbc4e5fc6dbc99fc95759e7b4a2805deb9a43a30a9cdb696d548 |
 | etc/research/t198-s59-fast-read-composition-witness-001.md | indexed supporting material | 032f1f32602914ac330da9d3963803a568a391c16cd8bd3b674ca41fa4ba6888 |
-| etc/research/t198-s6-global-ingress-bridge-witness-001.md | indexed supporting material | aead1b4c3f38a50f9d663e522394b4f5cf12cd8d9bc8c5cc26f36422d55f0b42 |
-| etc/research/t198-s6-mantle-vdm-ingress-map-001.md | indexed supporting material | a936a4c4d5ad46bb3f97a5fce010295a46cde8f0b11fb161d3234ca7dac04db7 |
-| etc/research/t198-s6-x86-vdm-toolchain-audit-001.md | indexed supporting material | 70dd5c94e508e5cbaf29aeb6580208f2ccc724311e5ce38cea7ba215a051539e |
+| etc/research/t198-s5-p1-generic-ud-bridge-record-001.md | indexed supporting material | 28b1dfb141e07bef1357cc6bee7cced17a1b9b243b83332bdfdfe2d37c3b3ce1 |
+| etc/research/t198-s5-p2-core-mantle-ud-hook-001.md | indexed supporting material | b9e735b0813e7be24beedd79915803d92a6c903041d6d7e98c62bb17e355fcf9 |
+| etc/research/t198-s5-p3-finite-ud-stop-witness-001.md | indexed supporting material | 9791321a04f96d18c79d00ceaadc0b8f40d58e41311531814a4c5c9a96f0814a |
+| etc/research/t198-s5-p3-physical-core-cleanup-witness-001.md | indexed supporting material | 367f22f8f2f3252a01ae866d1ab47237302b4a04a337e91d6b37339adf2c76f4 |
 | etc/research/t198-s60-spckbd-handoff-audit-001.md | indexed supporting material | 37cb310a48d22e95922657b3333974d445964de4d424c16e32c540ed759b8d2d |
 | etc/research/t198-s61-spckbd-cf-fallback-witness-001.md | indexed supporting material | c247d831b5e21360a9faf3bb229f70856fbb6442d7f5d4006e5fdc010eb19f2b |
 | etc/research/t198-s62-emm-probe-audit-001.md | indexed supporting material | 44cbd969eeda12d1e992fd0f04a376c630f9b22b51f8afc71484d8b2a3bff6d4 |
@@ -1043,7 +1040,9 @@ content-divergent entries.
 | etc/research/t198-s67-printer-disabled-witness-001.md | indexed supporting material | aebedfbab30918a13e7941e613d9e698cf73b459198e7b8b8b03e610d921784a |
 | etc/research/t198-s68-config-done-notification-audit-001.md | indexed supporting material | d33fb2a0dad97785acd159eafcf536fb8c1cdb87452b7be5358da51cca24a1ae |
 | etc/research/t198-s69-config-done-nohost-witness-001.md | indexed supporting material | e0c0926aa38f8e366b60c51b49fc91c033dae57c5dd60c1607421bac9caa83ed |
-| etc/research/t198-s7-cross-island-link-witness-001.md | indexed supporting material | 62453e431386355b50ed8a6896646c970d7684e3b51c55ee582f6c307edd2f17 |
+| etc/research/t198-s6-global-ingress-bridge-witness-001.md | indexed supporting material | aead1b4c3f38a50f9d663e522394b4f5cf12cd8d9bc8c5cc26f36422d55f0b42 |
+| etc/research/t198-s6-mantle-vdm-ingress-map-001.md | indexed supporting material | a936a4c4d5ad46bb3f97a5fce010295a46cde8f0b11fb161d3234ca7dac04db7 |
+| etc/research/t198-s6-x86-vdm-toolchain-audit-001.md | indexed supporting material | 70dd5c94e508e5cbaf29aeb6580208f2ccc724311e5ce38cea7ba215a051539e |
 | etc/research/t198-s70-entry-dos-app-plane-audit-001.md | indexed supporting material | a942073ff97d5c85311fa13f9826e7552a5e501b415dcb417021cf9cb6b0cd70 |
 | etc/research/t198-s71-entry-dos-app-no-vdd-witness-001.md | indexed supporting material | b4130d80597aee419053e905eccbba631742ee0db8c4a57cf8ca96e60234b554 |
 | etc/research/t198-s72-post-entry-execution-contract-audit-001.md | indexed supporting material | 2e23121c9b8d7bf7338dfd7884bbfe820b28b20064c254dd13ed3f96df585cdb |
@@ -1055,8 +1054,7 @@ content-divergent entries.
 | etc/research/t198-s77-c000-rom-window-provenance-audit-001.md | indexed supporting material | 8670cd432acfa4e4b660c53e19067bc7a412568b98563c3f66aa1b931091c839 |
 | etc/research/t198-s78-minimum-rom-ivt-closure-map-001.md | indexed supporting material | b1cfd961dcce6f0d4be437b8cc5cfd9264178994c5cf1fce72265bf90c05be11 |
 | etc/research/t198-s79-machine-image-producer-audit-001.md | indexed supporting material | 6b380f01d34488404df793ae06e5cf96369aafb755c29878d5b67fb7bffefd1b |
-| etc/research/t198-s8-boot-namespace-provider-closure-map-001.md | indexed supporting material | 54273edc66a9eb3f9c2e7b060778e3e7a4c277cdf36e965d0215bb1b0f8fbd88 |
-| etc/research/t198-s8-mechanical-action-boundary-witness-001.md | indexed supporting material | 9da40322debe063adb90879c42316980406339c9a3315706c3b80be6869a5f53 |
+| etc/research/t198-s7-cross-island-link-witness-001.md | indexed supporting material | 62453e431386355b50ed8a6896646c970d7684e3b51c55ee582f6c307edd2f17 |
 | etc/research/t198-s80-display-mode-vector-chain-audit-001.md | indexed supporting material | bb786ba6c5cb83fccf99e6d19c2d9ac9a76de94d8a54a80887352c190b5da6d7 |
 | etc/research/t198-s81-bop5f-passive-observation-001.md | indexed supporting material | 81ee59239311b1fefe54c0975eab8a8c2b3b8e36de5e2510e7ad6ccf521d81d1 |
 | etc/research/t198-s82-spckbd-native-int10-provenance-001.md | indexed supporting material | 0ed563439650c1fa72a24c78ae58f1a5b475bb821dbd19937a91835d0ffcf6ab |
@@ -1067,7 +1065,8 @@ content-divergent entries.
 | etc/research/t198-s87-spckbd-stream-state-transaction-001.md | indexed supporting material | 85457f7f0b9261f3b86fb7fbedeb8055377be8966784c25a1ce847e3255f643c |
 | etc/research/t198-s88-profile-stream-composition-001.md | indexed supporting material | f4f6e5e39003b52e9a3230b03507a79d2e364cb087a3320db40aa38992c0019a |
 | etc/research/t198-s89-s90-native-spckbd-cs-si-closure-001.md | indexed supporting material | 2f96533fcfb09d26bbd74fe5889a56c33ab92519132d6bec5a5cd889aade4d24 |
-| etc/research/t198-s9-boot-namespace-composition-closure-map-001.md | indexed supporting material | b84080f4520eb5431a02cdc5d0ea9ce7d515ac3cdd00e33630778c72224aaaed |
+| etc/research/t198-s8-boot-namespace-provider-closure-map-001.md | indexed supporting material | 54273edc66a9eb3f9c2e7b060778e3e7a4c277cdf36e965d0215bb1b0f8fbd88 |
+| etc/research/t198-s8-mechanical-action-boundary-witness-001.md | indexed supporting material | 9da40322debe063adb90879c42316980406339c9a3315706c3b80be6869a5f53 |
 | etc/research/t198-s91-dem-exit-vdm-classification-001.md | indexed supporting material | 4f82809c9e70d9bc1f488fc4c6f5c9f67e195e074a0c72c219b37da090cfd009 |
 | etc/research/t198-s92-normal-return-candidate-prerequisite-map-001.md | indexed supporting material | 250d7abefa58689aa0bb872833f686dc38fb70b62ba6d95c2dc359b221913ef4 |
 | etc/research/t198-s93-source-built-normal-return-fixture-preparation-001.md | indexed supporting material | f8bbd8507d953aa7b3793203f1a1a591d963bbc8dc82e041a83baa559263ec29 |
@@ -1077,6 +1076,7 @@ content-divergent entries.
 | etc/research/t198-s97-post-bootstrap-native-observation-001.md | indexed supporting material | 917b4b0c3bd09cc0dceac02e59106b45a49ccaec91ffd1b8efa874880be67ed5 |
 | etc/research/t198-s98-dem-fastread-component-map-001.md | indexed supporting material | 4b34e9ea01c21102f0952b535a47db5f4b8e8dcdcf82c33592bdf0028862bd6a |
 | etc/research/t198-s99-fastread-state-correction-001.md | indexed supporting material | 9e18d78dff5425e2ed1b783e8573ed0f0702da2ff55b001e31c35478cbddf6f1 |
+| etc/research/t198-s9-boot-namespace-composition-closure-map-001.md | indexed supporting material | b84080f4520eb5431a02cdc5d0ea9ce7d515ac3cdd00e33630778c72224aaaed |
 | etc/research/t199-global-bop-state-audit-001.md | indexed supporting material | 372a3cdbeb608b04769b392b6b8427086d0dbd068cf27f73a1f15f87fc70576b |
 | etc/research/t199-global-bop-state-audit-plan-001.md | indexed supporting material | bcf1557586d381170cc7378b046f9b12ff18b5eb48a199d6228a84e80d21b17f |
 | etc/research/t199-s10-dpmi-source-abi-failure-matrix-001.md | indexed supporting material | c6e631582f36c2ddfc6eb5f03403b133f6336ada2e17290be28a027405c9484a |
@@ -1089,7 +1089,6 @@ content-divergent entries.
 | etc/research/t199-s17-top-level-grouped-disposition-001.md | indexed supporting material | 62c809b4372d6f5a9c3fb67720ce9e899a8bfc3d00a1e41a7ab973a3f4b4c77e |
 | etc/research/t199-s18-top-level-package-facade-regression-001.md | indexed supporting material | 2fc5eaa73204049aa347451d2a387594bde0e4c5bd8a5a712a1e2c8c2faa5aa9 |
 | etc/research/t199-s19-machine-bios-source-abi-owner-map-001.md | indexed supporting material | 1781a31eb34101f15c75ce91f306f5ff0511b4c80d545699623fceadd7d18fae |
-| etc/research/t199-s2-dem-source-abi-failure-matrix-001.md | indexed supporting material | c22a91e15357157a2a9335819303de63d3500a3f0d4a94beb40a0111dc061401 |
 | etc/research/t199-s20-machine-bop-facade-regression-001.md | indexed supporting material | c6a86cb21e32f1899c061c576b096174e6d04fef096bc5a563b1b412f83a2b0c |
 | etc/research/t199-s21-c1-a20-capability-admission-001.md | indexed supporting material | 23ba3af2b4d2cd46032d7d48ae24bb1f8bbfeb9953f72f0ad5cc48f2a941e1f1 |
 | etc/research/t199-s22-c1-a20-capability-regression-001.md | indexed supporting material | d702677548ee13a0422a861485f8c21d34fba7de9b265da89b3e03ab9ec664fa |
@@ -1100,7 +1099,7 @@ content-divergent entries.
 | etc/research/t199-s27-c4-protected-mode-owner-abi-failure-map-001.md | indexed supporting material | 14f39027ef9cfeb1181f65c2c00ec45678e786c4a500e0ebbb6201c605960617 |
 | etc/research/t199-s28-xms-dpmi-whole-package-reconciliation-001.md | indexed supporting material | 9dada9bcb0b09acacf1f3c0a588a35ab54d5606da7ccd5eaa166c1c79c5806d4 |
 | etc/research/t199-s29-command-package-session-regression-001.md | indexed supporting material | a9586ae420d27cdaa191586be4b020cb596350d74cfbd21ab332c087922b98fd |
-| etc/research/t199-s3-dem-whole-package-disposition-001.md | indexed supporting material | ef61251c5594f673980b1575d70bdb5f23663e14ecfab38b1ecd1de8eab4d428 |
+| etc/research/t199-s2-dem-source-abi-failure-matrix-001.md | indexed supporting material | c22a91e15357157a2a9335819303de63d3500a3f0d4a94beb40a0111dc061401 |
 | etc/research/t199-s30-dem-package-session-regression-001.md | indexed supporting material | 938cef409e384feebf60e89dc657ced69d7da071046c5799946947ce6add9cac |
 | etc/research/t199-s31-xms-package-provider-regression-001.md | indexed supporting material | 38550abcff0309d489ba239a3552b29e9c84e77ccd943482fa34da23af30d1e2 |
 | etc/research/t199-s32-dpmi-package-provider-regression-001.md | indexed supporting material | 7d5947ddd921b4bda410aab1c96fc680e5bcd981341ec0d3dca507b19408ec03 |
@@ -1133,7 +1132,7 @@ content-divergent entries.
 | etc/research/t199-s37-runtime-composition-wiring-001.md | indexed supporting material | 4692856e8e580bc7926d04b6bb47a39f9a2aaf150f4a907f26beff6ac3d8d9a6 |
 | etc/research/t199-s38-global-bop-owner-composition-ledger-001.md | indexed supporting material | eddf46111f671f7fd0eafb023593b3000463ba3c8766c8a6cb34cf08ed0eda09 |
 | etc/research/t199-s39-package-complete-native-integration-baseline-001.md | indexed supporting material | 37d14382c595c6248b80470ee208c9cbe127793e203c55425218d172918c97ce |
-| etc/research/t199-s4-dem-package-facade-regression-001.md | indexed supporting material | a9628bca44e477577f214c65108b1256822e7546eed267487068d72c37ab219b |
+| etc/research/t199-s3-dem-whole-package-disposition-001.md | indexed supporting material | ef61251c5594f673980b1575d70bdb5f23663e14ecfab38b1ecd1de8eab4d428 |
 | etc/research/t199-s40-command-entry-lifecycle-source-abi-map-001.md | indexed supporting material | f175277dbfc8ccca1bece6f0b7c23b3d32abee95df4bdaffdc88ff3d08e8fc58 |
 | etc/research/t199-s41-command-native-integration-observation-001.md | indexed supporting material | aa7f5b14dfd7e601c331c45e029162e5b866f7a5e1c835ca03c5d3ae3608292d |
 | etc/research/t199-s42-command-cmdinfo-source-abi-map-001.md | indexed supporting material | 9ad9b06514b1ed2cd318eadc97b3643b2e1f15a25256bb90b1a1002be690957d |
@@ -1144,13 +1143,13 @@ content-divergent entries.
 | etc/research/t199-s47-debugger-package-revalidation-001.md | indexed supporting material | 5ed2b1f0c0332e5ece4bcd2330da1cfb82e74b94268ca972fdff5b23c0e5ac95 |
 | etc/research/t199-s48-top-level-host-service-package-revalidation-001.md | indexed supporting material | 76989f16fba21654f00a47eecee0b14528f4b09cae057c05f0614c4d0aacc41b |
 | etc/research/t199-s49-machine-bios-package-revalidation-001.md | indexed supporting material | 7791e2cdec835d48e9b059dbb00f653b141ed1bd90fabe809f5973fb953da02b |
-| etc/research/t199-s5-command-source-abi-failure-matrix-001.md | indexed supporting material | 0058ec8ba5ea2c9f3236842ce38e532526033392b3605f2082a0fcc6f32df9d0 |
+| etc/research/t199-s4-dem-package-facade-regression-001.md | indexed supporting material | a9628bca44e477577f214c65108b1256822e7546eed267487068d72c37ab219b |
 | etc/research/t199-s50-global-bop-package-closure-audit-001.md | indexed supporting material | 6deae3884107a93a37c6e34754231ecf97a2268bb9dd3145f6669068a0510ba2 |
+| etc/research/t199-s5-command-source-abi-failure-matrix-001.md | indexed supporting material | 0058ec8ba5ea2c9f3236842ce38e532526033392b3605f2082a0fcc6f32df9d0 |
 | etc/research/t199-s6-command-whole-package-disposition-001.md | indexed supporting material | f6fd15f9c7bc30fcfce815acd0778f2b48cfac9a6ccd68e1a8a8143ec6a89441 |
 | etc/research/t199-s7-command-package-facade-regression-001.md | indexed supporting material | 517233df56c2f412b94e39aff0c58a0cbc27c21a5b7c77a89db13237d7b93923 |
 | etc/research/t199-s8-xms-source-abi-failure-matrix-001.md | indexed supporting material | cdcb461bfca3caffe8ea8c03d55b6b4ab93d5513ac708c783a5409356dbde898 |
 | etc/research/t199-s9-xms-whole-package-disposition-001.md | indexed supporting material | 2de489bc1b13f47c634a38beea439180e36378374f61030ba9bd1885280f9395 |
-| etc/research/t200-s1-native-cli-integrated-baseline-001.md | indexed supporting material | cce07c2f8c2f5187bfaa9747b2b28e81b5f06f860e8f50945983a18a3473ab3d |
 | etc/research/t200-s10-cli-terminal-owner-boundary-001.md | indexed supporting material | 3b7d88c1dbc8326184f730405fc8d639ffda003cb8c882ed50e7be6e08c7316f |
 | etc/research/t200-s11-native-engine-entry-abi-map-001.md | indexed supporting material | 00bdef2376ceab1101e1248bccc8f1fb2306022b0dbe55ffc479dfb5054c2354 |
 | etc/research/t200-s12-native-engine-contract-001.md | indexed supporting material | c472e3584f917bc08e41eea5b1e9bfc7841b1104d59abb43949819da0061eafd |
@@ -1161,7 +1160,7 @@ content-divergent entries.
 | etc/research/t200-s17-product-preentry-source-abi-map-001.md | indexed supporting material | 5eed018cb92eb587c199a72d9206f2ec2146fcd421374915b8fe54e7403152a0 |
 | etc/research/t200-s18-initial-state-declaration-abi-001.md | indexed supporting material | c573e03df019d8fb7ffc0301a0d5e08da2162d32dc014865cbb2ee9dfd586e59 |
 | etc/research/t200-s19-initial-state-evidence-binding-decision-001.md | indexed supporting material | a35ca890416ee647659cc27591b210b88b8055bb68160855956182bf50df43f3 |
-| etc/research/t200-s2-command-cmdinfo-native-frontier-diagnosis-001.md | indexed supporting material | c95451303bb329dafb9751ac2946e6a2ef4df551f26f71e4b78937b515bde848 |
+| etc/research/t200-s1-native-cli-integrated-baseline-001.md | indexed supporting material | cce07c2f8c2f5187bfaa9747b2b28e81b5f06f860e8f50945983a18a3473ab3d |
 | etc/research/t200-s20-external-initial-state-profile-closure-001.md | indexed supporting material | 0fb9be7d2de6463d1ef2400e457c12f9494a192b1a5212da133987196e2dac23 |
 | etc/research/t200-s21-initial-state-publication-closure-001.md | indexed supporting material | 0716ec688f4146cceebef251cf4c9d547a12a03aa1cabd0a5791032a892040cd |
 | etc/research/t200-s22-native-engine-machine-stage-closure-001.md | indexed supporting material | 67084a293b764fea72fc64d2d4e741a08badb047590839b5993305d3e9b69b94 |
@@ -1172,9 +1171,10 @@ content-divergent entries.
 | etc/research/t200-s27-native-cli-engine-handoff-001.md | indexed supporting material | eecc0a8acf276fb5a804cdcd3fd19ddb2dda31afa9ca47cf2f2ffc3611dbe0e3 |
 | etc/research/t200-s28-native-cli-admission-regression-001.md | indexed supporting material | 5fa51a627a520045928fd4bbd77461513a31eb2f7cf6f2602394a41c0ef1c228 |
 | etc/research/t200-s29-excluded-drive-owner-map-001.md | indexed supporting material | 8a61b8986b441f66dc01c125c4bc064eb621391e1f0003f2e0cd7f9e90c89792 |
-| etc/research/t200-s3-command-cmdinfo-observation-fixture-001.md | indexed supporting material | e2aa50e260e50e617af29105225391c72a647b075d76f52ec9e6fc22b8b7cd41 |
+| etc/research/t200-s2-command-cmdinfo-native-frontier-diagnosis-001.md | indexed supporting material | c95451303bb329dafb9751ac2946e6a2ef4df551f26f71e4b78937b515bde848 |
 | etc/research/t200-s30-real-host-capability-source-abi-map-001.md | indexed supporting material | 7e3e7c59e70c490e4e39ca8cb5d12ed6d05a00258eb64c43740be7e8aa97ef77 |
 | etc/research/t200-s31-host-integrated-bop-provider-audit-ledger-001.md | indexed supporting material | 7133de859008d43332c0c1e02d7bbe7f9721d1bfd78bbe549a2a881907e4048f |
+| etc/research/t200-s3-command-cmdinfo-observation-fixture-001.md | indexed supporting material | e2aa50e260e50e617af29105225391c72a647b075d76f52ec9e6fc22b8b7cd41 |
 | etc/research/t200-s4-command-cmdinfo-native-observation-001.md | indexed supporting material | 9a8a014afde187eb5060d38ec06a008daa0165bf6c00482b3f930f52cd59c028 |
 | etc/research/t200-s5-command-return-next-lifecycle-001.md | indexed supporting material | 9c2cb0576745e1d92b805b4a8d98c47e63ed6c95debb54c90b94f5292d847a54 |
 | etc/research/t200-s6-command-lifecycle-native-observation-001.md | indexed supporting material | 1f49f50fee99c0a767923c4a6f461459ab63baf11156276b6252c7a04bb77be3 |
@@ -1273,13 +1273,13 @@ content-divergent entries.
 | etc/research/t215-s6-startup-bop-sequence-causal-map-001.md | indexed supporting material | a1f9d5b232c3369d7c2ea80eb822ea93916cb52efceeaa8f2730ffc36b599f01 |
 | etc/research/t216-s1-guest-executable-image-visibility-map-001.md | indexed supporting material | f152b3a0c01079799a8dd41c236eb663bce13cf404db5a901796ef852a97bc4a |
 | etc/research/t216-s2-declared-image-handle-p1-001.md | indexed supporting material | 314a95592ef90f6159ce38a4db52f867541edae00d14b9f7e2246d46b4b6258c |
-| etc/research/t217-s1-command-environment-source-reuse-audit-001.md | indexed supporting material | ec07ebc9bedae11d5b0e182ce6d9b935475bbc3161ed42ec1b28ce2406e754a0 |
 | etc/research/t217-s10-sysinit-wfp-shape-observation-001.md | indexed supporting material | f59e5f1900d4c9072993440d87ac5611b9da0c84e85336186da3df5bdb0b3917 |
 | etc/research/t217-s11-command-shell-capability-disposition-001.md | indexed supporting material | ac94d65edceda178e20cf07c66c9f2f12eca876520bb85435821b8a1645da287 |
 | etc/research/t217-s12-command-shell-capability-result-001.md | indexed supporting material | 49bca4f356190857235cef2af1921e484b86ce5f7a086ed1fe2bf5cdf1903712 |
 | etc/research/t217-s13-dos-loader-exec-owner-package-map-001.md | indexed supporting material | 23286a5f17961e306986302f5855c7c72fd26f7a5ac018f04338d53136311bf0 |
 | etc/research/t217-s14-composition-stack-capacity-result-001.md | indexed supporting material | f7d2bae2d99e8b9d5e18e7bba44c06d44555e54bfe875c0336b809e7b16a82a5 |
 | etc/research/t217-s14-dem-loader-family-result-001.md | indexed supporting material | 790c40c301c00a50b5a4685e6d73dbc4443d4f3b61a6f0aa7f904fa744b4b9e6 |
+| etc/research/t217-s1-command-environment-source-reuse-audit-001.md | indexed supporting material | ec07ebc9bedae11d5b0e182ce6d9b935475bbc3161ed42ec1b28ce2406e754a0 |
 | etc/research/t217-s3-sysinit-dos-exec-whole-package-map-001.md | indexed supporting material | e18ede70cafbb434f9618f8488f1f625362d5a24420edbffa6b1cd301792ac19 |
 | etc/research/t217-s4-dem-normal-file-integration-result-001.md | indexed supporting material | 289c395b2fea5a88fa06e06c966a9902a5f370db7250d49a07789b438b5fed8e |
 | etc/research/t217-s5-dem-declared-image-namespace-identity-map-001.md | indexed supporting material | a2ee4d1e762f6439fb6d3480e64a1e9242f424b1746dd72dcb3ef4094a96153c |
@@ -1409,7 +1409,6 @@ content-divergent entries.
 | etc/research/t224-s5-command-shared-child-redirection-provider-admission-001.md | indexed supporting material | 3dce540a99784ec66f1461d87645300ef452f27cd874429aa02ec0335e94c3c9 |
 | etc/research/t225-guest-image-layout-lifecycle-correction-001.md | indexed supporting material | 6a4dd314856cb829090b37baa68952b13c66785b3991fd498170687664994451 |
 | etc/research/t225-guest-memory-ownership-lifecycle-map-001.md | indexed supporting material | c0174678f8d2b3f9cd13cb2dea093248fa6e589e8784ad436fc1979fc4038d75 |
-| etc/research/t225-s1-guest-dos-multiprogram-owner-boundary-map-001.md | indexed supporting material | 89150191019f066887b0ec774d131c75b8ec2c4ab7487f1f0ca4fe6cce34042e |
 | etc/research/t225-s10-native-run-control-observation-map-001.md | indexed supporting material | f2d931819595e84b4b6cfa6aeedaa9a5dcdec32e82f201af1a0b982502577120 |
 | etc/research/t225-s14-primary-pre-bop-continuity-source-map-001.md | indexed supporting material | cfc99198937fe7c1d0ed469d2ab57c58398f9c90efb45fa92ed251e7904feb6a |
 | etc/research/t225-s18-reached-bop-owner-package-disposition-map-001.md | indexed supporting material | 358b3a45526cb03ca23eab5e527b826e2183397229961fb31fdd146b136c1614 |
@@ -1417,7 +1416,7 @@ content-divergent entries.
 | etc/research/t225-s19-dem-full-package-route-reconciliation-001.md | indexed supporting material | 0feb91faf2595a10e0caaf10ea1055b5286ef560ee963553b36525228d080474 |
 | etc/research/t225-s19-dem-pdb-lifecycle-ordering-correction-001.md | indexed supporting material | 2c1095f326dd43a320001b741e0aa49bbfb973edc7d5f7c9b614b02066d04cca |
 | etc/research/t225-s19-legacy-runtime-route-inventory-001.md | indexed supporting material | 0a050ef9d4aceecca252250c0a97e3dafefcd5950a5101462264303b8f42e6f5 |
-| etc/research/t225-s2-dem-child-pdb-lifecycle-source-abi-failure-map-001.md | indexed supporting material | 11b658c92de1e09bdaac0f77f2424ecffde4532350ae07308e971eeed90b02e7 |
+| etc/research/t225-s1-guest-dos-multiprogram-owner-boundary-map-001.md | indexed supporting material | 89150191019f066887b0ec774d131c75b8ec2c4ab7487f1f0ca4fe6cce34042e |
 | etc/research/t225-s20-command-full-package-route-reconciliation-001.md | indexed supporting material | 62bb3fb42b03bac1e1f5e8ef56cd0ddee5d43f9cf2ff9c999b512b9385c12c06 |
 | etc/research/t225-s20-command-live-route-inventory-001.md | indexed supporting material | b93d2434f07d811d8805a184e89bcd810a422db87dde92592fce0c29e13958fc |
 | etc/research/t225-s20-command-sensitive-subfamily-source-map-001.md | indexed supporting material | d05d480213dba6bcf5ee193c36a4a3b3872614f7600b2fe3b6b5ccca5587a6c8 |
@@ -1435,7 +1434,7 @@ content-divergent entries.
 | etc/research/t225-s27-native-parent-return-gate-prerequisite-map-001.md | indexed supporting material | 84322260e760785c2e9c5d98681449bdfc556d628992ed318499fa48fae5f3c3 |
 | etc/research/t225-s28-native-segment-fault-diagnostic-source-abi-map-001.md | indexed supporting material | 5e133c73beb1434fdcde44be2db94836188e156250cfe96e33a907ce04a19726 |
 | etc/research/t225-s29-native-first-fault-source-layout-attribution-001.md | indexed supporting material | 8bce6626357cda430d07ad051d74b5b95cfd648ba6e0ce0cfa3aae4d7aad30c7 |
-| etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md | indexed supporting material | aa6c1e12611719a5df18b5be333540005a652b1ef6f31436845a766c3c50dffc |
+| etc/research/t225-s2-dem-child-pdb-lifecycle-source-abi-failure-map-001.md | indexed supporting material | 11b658c92de1e09bdaac0f77f2424ecffde4532350ae07308e971eeed90b02e7 |
 | etc/research/t225-s30-segment-access-tuple-source-abi-failure-map-001.md | indexed supporting material | f9fa458bdee641eb51409c1654a5e57294d9dadf5d30b1fd15ea02202474ea5b |
 | etc/research/t225-s31-ds-ffff-source-lifecycle-attribution-001.md | indexed supporting material | 51428d071ba26e6fd39523ba181ea5431ee0d6c8bffd8bd89635e672db5cc426 |
 | etc/research/t225-s32-bootstrap-device-header-lifecycle-source-abi-failure-map-001.md | indexed supporting material | 0e1ac110e5fefff0df5cb093091c882d789e5bb7c74368519acec60ce2447698 |
@@ -1444,7 +1443,7 @@ content-divergent entries.
 | etc/research/t225-s36-startup-machine-postreturn-component-audit-001.md | indexed supporting material | dd0b11075b96aa28c872369d02eef0ba92cbf9c1b2a69ca0b96a098933e85547 |
 | etc/research/t225-s37-command-guest-image-lifecycle-provenance-audit-001.md | indexed supporting material | b79503a67838870e45163586b442ab804c629208643030537dcce31fe3ea5ce0 |
 | etc/research/t225-s38-command-image-continuity-observation-design-001.md | indexed supporting material | 56048eef7c69563f413d76c32822c6870bbe1f266c451790ae81a3d76f272075 |
-| etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md | indexed supporting material | d4b046a32d37a5514b745a37d37a28407519ec108c794f8000e6a04821aec4ca |
+| etc/research/t225-s3-exec-file-io-source-abi-fastread-map-001.md | indexed supporting material | aa6c1e12611719a5df18b5be333540005a652b1ef6f31436845a766c3c50dffc |
 | etc/research/t225-s40-mantle-watchdog-async-stop-source-abi-map-001.md | indexed supporting material | ee3f699073a013a09428d09b9226472d2e705d871f3303f6afe184afffddfbc8 |
 | etc/research/t225-s42-exception-loop-watchdog-delivery-map-001.md | indexed supporting material | 48271afaab478b7d3ac6a63a19526c3f4f77c035df1c703dd79bcec016f780b6 |
 | etc/research/t225-s43-observed-50-36-source-attribution-001.md | indexed supporting material | d1af35d48f1a21f68238c9ae249d3e0d77eb1ee31ce17534eb1344f6f2560a94 |
@@ -1452,7 +1451,7 @@ content-divergent entries.
 | etc/research/t225-s45-source-built-guest-parent-child-return-fixture-asset-abi-map-001.md | indexed supporting material | 2a0a3dab58ebff4f26cbf80d067fea890b1db073ef35005feb3a5ebfc7043f5e |
 | etc/research/t225-s47-post-entry-guest-execution-continuity-source-abi-failure-map-001.md | indexed supporting material | a9b6015cfed56c63f4954c949c4fc79ee9d6f59bddd7183849fa5bcd68192dbb |
 | etc/research/t225-s49-post-entry-realmode-mechanical-continuity-map-001.md | indexed supporting material | cff9ccf6f97ef7a78b891672d389630abb53c1e329b14f6a38c4ef8bf09664e5 |
-| etc/research/t225-s5-minimal-native-ntio-continuity-closure-001.md | indexed supporting material | ac55ce7c542609e697d130ae3e5227557f2051385b89bbf5acaab3591218d1e6 |
+| etc/research/t225-s4-com-exec-control-flow-prerequisite-map-001.md | indexed supporting material | d4b046a32d37a5514b745a37d37a28407519ec108c794f8000e6a04821aec4ca |
 | etc/research/t225-s52-generic-limit-diagnostic-owner-reconciliation-001.md | indexed supporting material | 4a38a0d4ee55d6e8ecabe8de76e10b71055673561dffc246d20d3f2aeef3ba09 |
 | etc/research/t225-s55-bootstrap-provider-reconciliation-001.md | indexed supporting material | d0a19f59620e6723a595f35228587eb031f34d1e51b29db5e6bc328f26011ec0 |
 | etc/research/t225-s55-command-init-exec-stage-ledger-001.md | indexed supporting material | a2fa92a429af3386039b395b4d107a888066b7d9e92feaff514bc8c252fe6ce4 |
@@ -1462,6 +1461,7 @@ content-divergent entries.
 | etc/research/t225-s57-bop-owner-package-profile-reconciliation-001.md | indexed supporting material | b0ae2711dc1c0a37b00f2f36c44168537a404ee0138752e5c4956fdde715a5ce |
 | etc/research/t225-s58-bound-instruction-history-diagnostic-admission-001.md | indexed supporting material | 614c62b7300bccf7e3e0e5cff72d444a24332dbae2afc77b14320c72e0c4e4ea |
 | etc/research/t225-s58-post-bop-continuity-admission-correction-001.md | indexed supporting material | a92e1048c5c5dbe58c21060a74581c8f32d866c1133227d505ec8f9376b9eeef |
+| etc/research/t225-s5-minimal-native-ntio-continuity-closure-001.md | indexed supporting material | ac55ce7c542609e697d130ae3e5227557f2051385b89bbf5acaab3591218d1e6 |
 | etc/research/t225-s6-guest-dos-one-shot-fixture-admission-001.md | indexed supporting material | d1b4414a9f9b3e201ea367c750d59f0791f9a8a92d30349ff4caaa2d3680f2f3 |
 | etc/research/t225-s6-reference-direct-readonly-installation-result-001.md | indexed supporting material | 2a2ad3ee79ff8225d1e5de4bd809f516aff65ee9b09b2ab200b66aa9d06d5454 |
 | etc/research/t225-s7-custom-cache-retirement-001.md | indexed supporting material | 3f3fdd37d0ccf110b5d5e2b3402cb3f722fa16c34adb28477738a1833fa298e4 |
@@ -1505,12 +1505,12 @@ content-divergent entries.
 | etc/research/t95-s6-cmd-current-directory-capability-closure-001.md | indexed supporting material | af88eb3a666224ebecdcf274744d2b00a78247f39c0bb79c14332a1506cd834e |
 | etc/research/t95-s6-cmd-getconfigsys-capability-audit-001.md | indexed supporting material | 3dc78bb57aa86c0615eaa5ca1bf09a57709866f0587f8bde16ab3c230dc988d3 |
 | etc/research/t95-s6-command-guest-path-provenance-001.md | indexed supporting material | e096fb6ebbd86a8d3b056d6daf60a0634349b68fb0c2489b3f329f00e21c6e7d |
-| etc/research/t95-s6-cpu-core-compile-object-ledger.md | indexed supporting material | 063b6159b252db05fd0dff80fbd6108ec9323e232d6788cd46b90507981ffbdc |
-| etc/research/t95-s6-cpu-profile-authority-reconciliation.md | indexed supporting material | 88a7383606dc410efa64ab1618f8a6d4462654301f8fea004d01abcfa26f9b90 |
 | etc/research/t95-s6-cpu3-original-project-object-inventory-001.md | indexed supporting material | 6627779d45d8307a32592172de3017b31f2b0d8cd71395775935276004898a00 |
 | etc/research/t95-s6-cpu3-retention-proof-001.md | indexed supporting material | 6e4f7a0fd600ceebcbad63410d15397adbbd071815bac087c7e564416f8361b7 |
 | etc/research/t95-s6-cpu3-static-opcode-closure-decision.md | indexed supporting material | 5c1f2ebb5f107b08241a763404f23405baec56bbec74b39203bcf9e9baf567f2 |
 | etc/research/t95-s6-cpu3-symbol-retention-inventory-001.md | indexed supporting material | 470b2fe5b5402f90e0cc7c116456086f12646f79d3fb58dc3fca5b2f2cd430e2 |
+| etc/research/t95-s6-cpu-core-compile-object-ledger.md | indexed supporting material | 063b6159b252db05fd0dff80fbd6108ec9323e232d6788cd46b90507981ffbdc |
+| etc/research/t95-s6-cpu-profile-authority-reconciliation.md | indexed supporting material | 88a7383606dc410efa64ab1618f8a6d4462654301f8fea004d01abcfa26f9b90 |
 | etc/research/t95-s6-default-handler-registration-source-separation.md | indexed supporting material | bd049da56b0a567a87980706560dc323322125756ca4c5d16f0fa96a7d171890 |
 | etc/research/t95-s6-default-off-x87-companion-link-observation-001.md | indexed supporting material | 02ad5d0aeb75f45a274e353ca09efdd1b40e9f3601f0475dc095d0117a29b25f |
 | etc/research/t95-s6-dem-open-mode-and-path-admission-001.md | indexed supporting material | 4ed6bc1f28f913e8511160a55fde748b2d7be18a1e5b0e8ab0eb0dc70b5a396d |
@@ -1534,10 +1534,10 @@ content-divergent entries.
 | etc/research/t95-s6-minimal-port-compile-observation-002.md | indexed supporting material | f8ec6e4e73f9166f0a80c41508fa11828d33b529c61214a3caaaeb4d850c0001 |
 | etc/research/t95-s6-minimal-x86-config-link-closure-contract.md | indexed supporting material | 20b6b53dd85237cca290a37a1db1c63aa7b0a691cd3e1564df173b413dc20ee9 |
 | etc/research/t95-s6-msvc-analysis-attempt-001-rejection.md | indexed supporting material | 3d35368d8a360e8656fe969e8030520ef4ed68bb25bb8f1b7fa221ccc2810f4f |
+| etc/research/t95-s6-msvc-config-projection.md | indexed supporting material | 43329798310cd77bf7ea352717683fc4692d2b59576c9c2827d988cc8baaa17a |
 | etc/research/t95-s6-msvc-config-projection-002.md | indexed supporting material | b2389dd2ffa0e42348d6146cd783d54255410dfe747adb04fd8298d7c6f32f3b |
 | etc/research/t95-s6-msvc-config-projection-attempt-001-blocked.md | indexed supporting material | 69d5ebb2d9750da0ea763575ca7f93f6a592b5c88a4da06007b7355611d77ae0 |
 | etc/research/t95-s6-msvc-config-projection-tool-repair.md | indexed supporting material | 96d15f226d2d042c9983bcca9d326b7379d4b4d2dba87098af350c9dd6bcd69d |
-| etc/research/t95-s6-msvc-config-projection.md | indexed supporting material | 43329798310cd77bf7ea352717683fc4692d2b59576c9c2827d988cc8baaa17a |
 | etc/research/t95-s6-msvc-configure-substitution-audit-001.md | indexed supporting material | 49a766d1da02c4c39c7a88b13aece138546f863aaeec67290174a05eea5a7332 |
 | etc/research/t95-s6-msvc-format-token-projection-v2.md | indexed supporting material | 8893b99d5e2737f5a42822560f1dae8f566a7ffa48b409db6b8fe49f7cee23ff |
 | etc/research/t95-s6-msvc-native-container-build-observation-001.md | indexed supporting material | ab215e85e46054bc90942586bd75754874f32192525b1fcdbd9e6d0fc280e925 |
@@ -1581,10 +1581,10 @@ content-divergent entries.
 | etc/research/t95-s6-post-5011-mechanics-symptom-supersession-001.md | indexed supporting material | 7043c28077dca212cebbb429c36505aee81dd7230a60994d39e1c27c8adb0596 |
 | etc/research/t95-s6-post-transaction-original-owner-provenance-001.md | indexed supporting material | d02c8bf70093ce8e9a4bb0a036eb73b68ad0ca7cc711a2a8b7a4c0070ca6392e |
 | etc/research/t95-s6-r12-bop-listener-trace-001.md | indexed supporting material | fffa5457752942f00ceb7ab042d35fc0155afcdf135350cc850d30aa147e63c5 |
-| etc/research/t95-s6-r2-native-reset-controlled-stop-001.md | indexed supporting material | a68c607aaaa7efd509983ebf91588fc137afa3917e04f24d2834116eb1eb53b0 |
 | etc/research/t95-s6-r26-bios15-trace-001.md | indexed supporting material | e879ea680906cbcd4da76c83b9a9416f9aa50762b41105dd0832e946f9a210e3 |
 | etc/research/t95-s6-r27-boot-drive-trace-001.md | indexed supporting material | 674d51b78846a5341281c1a5e5649b25f557780a988810bfbdec1768d951ba6d |
 | etc/research/t95-s6-r29-cli-root-set-trace-001.md | indexed supporting material | d69f1d808e528e04877c7680db2050db5e54e1c131c68155f55d7688f3a6dfee |
+| etc/research/t95-s6-r2-native-reset-controlled-stop-001.md | indexed supporting material | a68c607aaaa7efd509983ebf91588fc137afa3917e04f24d2834116eb1eb53b0 |
 | etc/research/t95-s6-r3-real-ntio-startup-transaction-005.md | indexed supporting material | bdbc294b67107ed2795ada985a88bd43edf262c9d0def153b547492b95551f42 |
 | etc/research/t95-s6-r6-real-ntio-fault-state-006.md | indexed supporting material | 0bbe27de3cbc5da567cad30c78b280f1329609e36ff871f5af992b2a2bc95fc0 |
 | etc/research/t95-s6-rejected-owner-retention-root-trace.md | indexed supporting material | fb47a90f5cf3df914a0cbf782dd091a01806834fa40823bbf2ad24e85b7862e5 |
@@ -1652,16 +1652,16 @@ content-divergent entries.
 | etc/research/t95-s7-stack-pointer-diagnostic-rejection-001.md | indexed supporting material | 2a57e54c90ee9ebde42d86bd7b86cc88652ac9924675884fe71b2eb5a15a1777 |
 | etc/research/t95-s7-target-namespace-materialization-evidence-001.md | indexed supporting material | ac111221908ec25915f220925abe17767d1435979d0e600c8ac19d2f0342ca98 |
 | etc/research/t95-s7-top-level-5a-5f-owner-audit-001.md | indexed supporting material | 0ae8ab04fdbaa99f723b9a8986fe2eb570673ea929fee72fd24307ca75f8e7cb |
+| etc/research/t96-s10-real-path-checkpoint-001.md | indexed supporting material | af532a1ab0b9e06f28594aeb2fbc68354a444ec58898b5ea156fc79ac393637a |
 | etc/research/t96-s1-opennt-bop-provider-module-map-001.json | indexed supporting material | 3bc1c62db4f8c42d4e3c08a907242c901f47bd00314745ee3b4357a0728ce697 |
 | etc/research/t96-s1-opennt-bop-provider-module-map-001.md | indexed supporting material | 47cefa25d91652f19c774b1eace72cb3b8fdaae4f92c8b4c9c936f1c87e38a7c |
 | etc/research/t96-s1-opennt-bop-provider-module-map-generated-001.md | indexed supporting material | c9f237ac73baba6b72dd6d446d01ac63fb50754cbec59432b01ac86639f76324 |
-| etc/research/t96-s10-real-path-checkpoint-001.md | indexed supporting material | af532a1ab0b9e06f28594aeb2fbc68354a444ec58898b5ea156fc79ac393637a |
 | etc/research/t96-s2-bop-ingress-abi-001.md | indexed supporting material | 0a138ec0674feb02b3cf59c22eab0d51b07615e32edd11b8ba23571448250e8e |
 | etc/research/t96-s3-dem-component-boundaries-001.md | indexed supporting material | a5c36c52ddc84030a65ff4f3fd73a3ba32ed8fa175352dee4a2c85c98724e1b9 |
-| etc/research/t96-s3-dem-plane-abi-001.md | indexed supporting material | ecd2fd3e2d5f99e7fce38d01f21842b43b87aaeff5fdbcfb25e5207606fd5a82 |
 | etc/research/t96-s3-demdasd-source-contract-001.md | indexed supporting material | 0914bbbe45f72b318e8a564a2f81b0a154dc94a68918f48bcc74808686d95c2f |
 | etc/research/t96-s3-demgset-disposition-001.md | indexed supporting material | 45a73927b018f106c0f0a5b3da15e4f01470a84b03b814d3696d48ee6c81304e |
 | etc/research/t96-s3-demioctl-source-contract-001.md | indexed supporting material | b0299202ed0d69f6175ea827bb9fb5a5b6cbbb2baa5f211eb096d327eba9e173 |
+| etc/research/t96-s3-dem-plane-abi-001.md | indexed supporting material | ecd2fd3e2d5f99e7fce38d01f21842b43b87aaeff5fdbcfb25e5207606fd5a82 |
 | etc/research/t96-s3-opennt-dem-provider-map-001.json | indexed supporting material | 7419c58999a73ee45009b1f857228fa9badac826f1b6e7cbf676211d8cc566f9 |
 | etc/research/t96-s3-opennt-dem-provider-map-001.md | indexed supporting material | 1354af6187d3e8cd5880e8e325ac00de6b138f7f80e9b247c7f32deb05fd1d07 |
 | etc/research/t96-s3-opennt-dem-provider-map-generated-001.md | indexed supporting material | d7639ceea4e772e1a8a26b2ceb012da40b6170df2b0cedd5473d213b29282d85 |
@@ -1693,8 +1693,8 @@ content-divergent entries.
 | FIRMWARE-PROFILE-INPUT-ADMISSION-REPORT.md | retained pre-governance evidence | c1f4a17d10761f92fa00e9c3ef8e0103dc739a89e33813e5a810d6cfac3311a4 |
 | GFI-MEDIA-HOST-BOUNDARY.md | retained pre-governance evidence | f5f6ab1ae2cb338541e3a173b6a9a22316252f5ec84a03557169ba083987cebf |
 | governance/directory-reorganization.md | retained pre-governance evidence | 104b3253080a81dbb7fa7540ae4a31899e0897abaa5c7a03524ea64791ccdfaf |
-| governance/document-governance-audit-2026-08-07-followup.md | retained pre-governance evidence | 14bb69cde1af0523791cde13612056c4fab47d75addfb179d259e580468a35c3 |
 | governance/document-governance-audit-2026-08-07.md | retained pre-governance evidence | dd870cb51fc6741aa1e663a26d7a117a12fb3e0a0b8e6a3485e230cca4b34b65 |
+| governance/document-governance-audit-2026-08-07-followup.md | retained pre-governance evidence | 14bb69cde1af0523791cde13612056c4fab47d75addfb179d259e580468a35c3 |
 | governance/document-map.md | retained pre-governance evidence | aa6b38a14f9549003a46d22a2bc900008bfae90865965c1ec51a75587d226ef7 |
 | governance/softpc-first-governance-correction-2026-08-08.md | retained pre-governance evidence | 997a6d153a02d4d2afb155e7c6ebfaf9b2c257ef57d2475e14d1caadf83394f3 |
 | governance/toolchain-probe-inventory.md | retained pre-governance evidence | d7af84772e3b7b04cd39c198bf29ad8a62aa5f6eb6594caae0855f58cb2cf438 |
@@ -1703,8 +1703,8 @@ content-divergent entries.
 | HISTORICAL-BUILD-AUDIT.md | retained pre-governance evidence | 5b11e88a6077fb046318bebfdce2b2aa8283a9c15ba819600b1f98e0038679b4 |
 | HISTORICAL-COMMAND-OBJECT-BOUNDARY-AUDIT.md | retained pre-governance evidence | cdf37965623343b855660d711c68156629ec27834569902102edfa6fcfa1006f |
 | HISTORICAL-DEM-FILE-SHIM-ADMISSION.md | retained pre-governance evidence | 78890175b5db5c5eb5cbee43ddd74dc8422b137ed399476cfb4897b13ff3c755 |
-| HISTORICAL-DEM-TOKEN-BRIDGE-DESIGN.md | retained pre-governance evidence | ebe58761de20d3065be11a55172308cf180a90d255f6c7a0670fc546cfb74945 |
 | HISTORICAL-DEMLOADDOS-RESOURCE-BRIDGE-DESIGN.md | retained pre-governance evidence | 056bcbc660be019c507246d6a7f0337596ac4a1e7c9837d3f4e2043c1e11bd26 |
+| HISTORICAL-DEM-TOKEN-BRIDGE-DESIGN.md | retained pre-governance evidence | ebe58761de20d3065be11a55172308cf180a90d255f6c7a0670fc546cfb74945 |
 | HISTORICAL-FIDELITY-OVERLAY-DECISION.md | retained pre-governance evidence | 8fbd0083314194f50063ec523c18139b7d960dc9fe4fd0a916525e733bb5f12e |
 | HISTORICAL-FIRST-CUT-OVERLAY-GRANULARITY-AUDIT.md | retained pre-governance evidence | 43b55877f945df414f91da1dea648562fb9fb1c71a384f415e4a66e3c48466cf |
 | HISTORICAL-RUNTIME-RESTORATION-DECISION.md | retained pre-governance evidence | 19b5de0c440c5a77c2f44232dbc0630675a9937cb9e40244caab6f82133ca545 |
@@ -1816,7 +1816,6 @@ content-divergent entries.
 | history/m0-t196-closure-20260812.md | closed task history | 91346afc5e1c24f281695225ce03fa340cb85816204646f19816ecd71da5ccb5 |
 | history/m0-t197-closure-20260813.md | closed task history | 7686a2d784abb527eafc54b0de21d6a17dd5c9484e260ffae14ed9030e34bc78 |
 | history/m0-t198-closure-20260813.md | closed task history | 3d1189866be5ef9493403f2382cd0cd1b90c72b15e6dbb20a4bdfadd15ccd1f8 |
-| history/m0-t198-s10-closure-20260813.md | closed task history | 6442d613cf5556b1e5b9c2290d6116e67e358881e59dcd428e1f1492281e0ea3 |
 | history/m0-t198-s100-closure-20260813.md | closed task history | 546dfbd1b079d95bc8b901afcceaa88230b439f86e3f7d2788bf284456cd10aa |
 | history/m0-t198-s101-closure-20260813.md | closed task history | 4452a03e6a0ce316f2345959baf27f8dc3fbbd2a5fcb0894a7cc4de3a9227894 |
 | history/m0-t198-s102-closure-20260813.md | closed task history | 04f19cca4718c38ae5995ba949806c484a40103692b988cc7bf30a19742c21ce |
@@ -1827,7 +1826,7 @@ content-divergent entries.
 | history/m0-t198-s107-closure-20260813.md | closed task history | e257e4c224dd5a6f04952d5c46276925dd9466dfe6fd78ca6d638cc59731dc11 |
 | history/m0-t198-s108-closure-20260813.md | closed task history | 720992bca7a8c5f67e84c468fabd72908f3123373f82952fe71aa99a077d8dd3 |
 | history/m0-t198-s109-closure-20260813.md | closed task history | a5d865e0739c6c460b50677f9ad315ae975ddf1d58d607cd812378259521ab04 |
-| history/m0-t198-s11-closure-20260813.md | closed task history | 0fc96543cf213f000d5cc88750f0b2087a9b97b80ad4769ce54b2f7e6081aaf6 |
+| history/m0-t198-s10-closure-20260813.md | closed task history | 6442d613cf5556b1e5b9c2290d6116e67e358881e59dcd428e1f1492281e0ea3 |
 | history/m0-t198-s110-closure-20260813.md | closed task history | 998a54e6589f86afa1f1f4aac6c454929a9e5b176b9aae3759ba9cf8b2e200a4 |
 | history/m0-t198-s111-closure-20260813.md | closed task history | 8d3652210b8b24aed5df71d1b5542b4b2f93d3b85be73bd1e80aad2ffdf72d3f |
 | history/m0-t198-s112-closure-20260813.md | closed task history | 9d6b945c20ee754a94d911cfb523e81f9c6066e8a7aba3e9579daa5b023c28cb |
@@ -1837,7 +1836,7 @@ content-divergent entries.
 | history/m0-t198-s116-closure-20260813.md | closed task history | c2eb6143b82276485253d99d3adf694b095a250d55111b6890a6ad9234ddff38 |
 | history/m0-t198-s117-invalid-ledger-observation-20260813.md | closed task history | 32d48e12d2f9b3b738290be239d7c50c3b426d2a0d7bdf3487fb76e10f9a8349 |
 | history/m0-t198-s119-closure-20260813.md | closed task history | 5130b83b36cd4733c6539d52c8c69e96f563cbaf28851467478466bd734f417d |
-| history/m0-t198-s12-closure-20260813.md | closed task history | fad9c0f4d0bf6e588509ace12a18d96c0b5c8762c0d8e9b9d1c40f6547f4a420 |
+| history/m0-t198-s11-closure-20260813.md | closed task history | 0fc96543cf213f000d5cc88750f0b2087a9b97b80ad4769ce54b2f7e6081aaf6 |
 | history/m0-t198-s120-closure-20260813.md | closed task history | b75add48a3c506a2ff7896846f430007dd0f2898354287631c53b6cea4b1ddf7 |
 | history/m0-t198-s121-closure-20260813.md | closed task history | a5abd78b98aeb142c6767d7770dcde6daf9b3c92fc1600680cd5ae7ad6910f13 |
 | history/m0-t198-s123-closure-20260813.md | closed task history | e3dd422e705bbbddd26bc4f14bfcc5c9fd6acd752d91e5274dae5b2d0f0c502c |
@@ -1847,11 +1846,12 @@ content-divergent entries.
 | history/m0-t198-s127-closure-20260813.md | closed task history | c86865d351cea38f30971beff75efc49e2df70926c6bff4a26392d6f882627c5 |
 | history/m0-t198-s128-closure-20260813.md | closed task history | dfd4dbb866ba13cf9a05bac13b34cdd146f5113a4179e6bb8ff785bc7750563b |
 | history/m0-t198-s129-closure-20260813.md | closed task history | bdc322998ea5345ce859160fdaeef22ad3c3e0d85ec384da0b5c97f0986cd4eb |
-| history/m0-t198-s13-closure-20260813.md | closed task history | 0420f1f1b7c777477ed3fb3458e311ee6324e5b2f7542ef54f7e803d478efeb8 |
+| history/m0-t198-s12-closure-20260813.md | closed task history | fad9c0f4d0bf6e588509ace12a18d96c0b5c8762c0d8e9b9d1c40f6547f4a420 |
 | history/m0-t198-s130-closure-20260813.md | closed task history | 992098e47dc522b4317c58321bc4d50dab6088965e289c4fda24b8e6106e1842 |
 | history/m0-t198-s131-closure-20260813.md | closed task history | 0758ceff766b57ee16206d8780ab00de7bf6142bd9c3b9587d2cb08476ac147d |
 | history/m0-t198-s132-closure-20260813.md | closed task history | 22360b1c0e82e81b6bdb06847ec310124cbcb534abebe9eaca0de354487913e1 |
 | history/m0-t198-s133-withdrawal-20260813.md | closed task history | 57a07fc233088b3e166f56c3964bda9c0aabad9d2c2656b67178db16f200c1ac |
+| history/m0-t198-s13-closure-20260813.md | closed task history | 0420f1f1b7c777477ed3fb3458e311ee6324e5b2f7542ef54f7e803d478efeb8 |
 | history/m0-t198-s14-closure-20260813.md | closed task history | caa9c4d2573da0221c10c4c7cfb02ee7b592b69c118577f100f22dac92903fc9 |
 | history/m0-t198-s15-closure-20260813.md | closed task history | ace3de21ae546270091f8f41977245228a8e747a34684971098ce2a997ee9591 |
 | history/m0-t198-s16-closure-20260813.md | closed task history | d4e7c9d1e45f79d7ef15f506f8d874e9721acd17c7487d12e1eea1a8fc8a59bc |
@@ -1877,7 +1877,6 @@ content-divergent entries.
 | history/m0-t198-s47-closure-20260813.md | closed task history | fd6ec23d9c6237a0312ec479ee598f67f16c178bd862174b6ba7b49973e461c3 |
 | history/m0-t198-s78-closure-20260813.md | closed task history | 27fa507ef32e04734b8a83ba722c8487379371d29227ee0f5d59703bfafc0bd4 |
 | history/m0-t198-s79-closure-20260813.md | closed task history | 2b022d74a4e26646ff4f89e79d4e3b40b5a29960d378e8a5a6325cf16b4b9455 |
-| history/m0-t198-s8-closure-20260813.md | closed task history | 4de76e54b2097ae2100dee4d1123253cf09964d2d1a8c8b72a8db23b216b7418 |
 | history/m0-t198-s80-closure-20260813.md | closed task history | 8db08b51382a5b3b4ea5824ce2f3a2b1095a162bebfcedf5fb2de72faa2de611 |
 | history/m0-t198-s81-closure-20260813.md | closed task history | b0534f3bbdeaf0f487cc53cae789cbf64277d3e2db67ce44400fe14e1e9d2d82 |
 | history/m0-t198-s82-closure-20260813.md | closed task history | b9b3384cefa7f381ba53f8471169891f570a5831141a5e790d747be8c19e4d97 |
@@ -1887,7 +1886,7 @@ content-divergent entries.
 | history/m0-t198-s86-closure-20260813.md | closed task history | f51edf32109e6d6dca2e286316ed779b1f4ed0d16a479d0c04c2d0cb90e8a0ec |
 | history/m0-t198-s87-closure-20260813.md | closed task history | 74ade251c399dd48ae08767dfcc607c1fe7619510f96fb83ee6b7bc4f32570ef |
 | history/m0-t198-s88-closure-20260813.md | closed task history | 17341e3cc132ce142f855b606d9323ce7c17c492d0a167f53da738cc015bba55 |
-| history/m0-t198-s9-closure-20260813.md | closed task history | bbf529c2d4a30cdc105a4089a27f0a4f53f048630b8273ba3f1f065448ef0f88 |
+| history/m0-t198-s8-closure-20260813.md | closed task history | 4de76e54b2097ae2100dee4d1123253cf09964d2d1a8c8b72a8db23b216b7418 |
 | history/m0-t198-s90-closure-20260813.md | closed task history | 337bce1085b8845e8e6226f70d4b9987190b04ca3db92e504ee6ae0a8e99f6fe |
 | history/m0-t198-s91-closure-20260813.md | closed task history | ef2f472b4d4ca55feb47d1317fc6c50fbb9e8f15f5b23e6067730f402767d55e |
 | history/m0-t198-s92-closure-20260813.md | closed task history | 2d8c1da6ce371b02ac190bc58d7ada423ea506e3b4f79fe114deacdec5ab7b92 |
@@ -1898,8 +1897,8 @@ content-divergent entries.
 | history/m0-t198-s97-closure-20260813.md | closed task history | 87ecc09512eb923a156343f27f52c46ee2b90c4a3582ae98a571a667f05e4c53 |
 | history/m0-t198-s98-closure-20260813.md | closed task history | 0c9dc682611b68a58d88e62093e7fc2259dffe2f5d5fef05e234c403968bc7b1 |
 | history/m0-t198-s99-closure-20260813.md | closed task history | 14272569d2428c2cdbe8366d5a55b5ce97de126191b61c54fc9d5e1438766741 |
+| history/m0-t198-s9-closure-20260813.md | closed task history | bbf529c2d4a30cdc105a4089a27f0a4f53f048630b8273ba3f1f065448ef0f88 |
 | history/m0-t199-closure-20260814.md | closed task history | 627c3a5d71f487b68a610ca94e3ae1df8123282f91a12319fe05ef5d2a3cb59b |
-| history/m0-t199-s1-closure-20260813.md | closed task history | ec22362147c03cd32a45e25c48144022a692fb75360732761fc230b31e061435 |
 | history/m0-t199-s12-closure-20260813.md | closed task history | e849ccbf68e522c8cddc2c289043ab3ad0458aa908e41291289983fd6804b5a4 |
 | history/m0-t199-s13-closure-20260813.md | closed task history | f738a07f5340cc2a3be99d7faf71379da3a66809fb823293d4691ada40026097 |
 | history/m0-t199-s14-closure-20260813.md | closed task history | 78aa906208b27c84e344954d1c3d0faf19bd5c26218e335e8c34b1fe36193f62 |
@@ -1908,7 +1907,7 @@ content-divergent entries.
 | history/m0-t199-s17-closure-20260813.md | closed task history | 28ba1ca4ac8b10995e0243cc56ba5bf4edae2ee096eb5186a805f81fd6e95230 |
 | history/m0-t199-s18-closure-20260813.md | closed task history | 71238cc6ba451e701951f6e40e07d7813c44778159ddb43a6fc81c7224232758 |
 | history/m0-t199-s19-closure-20260813.md | closed task history | 818a25bbdb89a636b4667b3ef3a80231d755ca974acad92aac15bce44e4152cf |
-| history/m0-t199-s2-closure-20260813.md | closed task history | ffebd6f89ced0124814d0dbd0728082f19ee87d43b29825c39ebad6a94555d12 |
+| history/m0-t199-s1-closure-20260813.md | closed task history | ec22362147c03cd32a45e25c48144022a692fb75360732761fc230b31e061435 |
 | history/m0-t199-s20-closure-20260813.md | closed task history | db07b35e56984085b800f5c01e66db5fdc5ffadafbc47d9c408981f0e510b17b |
 | history/m0-t199-s21-closure-20260813.md | closed task history | 443de1731b68d6317fdaaaaeb7c226fd1a8baddd3197e360a2e19a277a7a3b93 |
 | history/m0-t199-s22-closure-20260813.md | closed task history | 8180cf9f93851eb8e26aa7d4b2b9051d0dc45b4d4f8d3add65c3b4a3a22b9244 |
@@ -1919,7 +1918,7 @@ content-divergent entries.
 | history/m0-t199-s27-closure-20260813.md | closed task history | 29686e0d3c3645af4e0fb7b78f3ab6e7bda31392e845899a746a23a6c520b4ff |
 | history/m0-t199-s28-closure-20260813.md | closed task history | 58e6adbd9c1968939de643374d333ecb4c7f94cdd12276ae3d14c74c77e597a9 |
 | history/m0-t199-s29-closure-20260813.md | closed task history | 136752857a8f1645e265c8641c787120067cea8244e90c498cd2873582ce831a |
-| history/m0-t199-s3-closure-20260813.md | closed task history | 139f4bbe96086bb2cb268d55d466ad4d607ead43961feece45898578256f19b2 |
+| history/m0-t199-s2-closure-20260813.md | closed task history | ffebd6f89ced0124814d0dbd0728082f19ee87d43b29825c39ebad6a94555d12 |
 | history/m0-t199-s30-closure-20260813.md | closed task history | e3a69db7048dce492c4cf86e844b54c719544610e397adc4e2435ca412803139 |
 | history/m0-t199-s31-closure-20260813.md | closed task history | 2485504563613c8a51d6f5bcaf7b350cce1325aa819619d289171f9ffa0eefcd |
 | history/m0-t199-s32-closure-20260813.md | closed task history | dab1834187bfbc0f8a1d47ffc8af17f9e29011b29d2d633a8b6e7c2eabd178e1 |
@@ -1928,6 +1927,7 @@ content-divergent entries.
 | history/m0-t199-s37-closure-20260814.md | closed task history | ec88cbfd492a2a2dbc1a3180ccaffd2319229b6e2d95808985c72e57bec7c6f7 |
 | history/m0-t199-s38-closure-20260814.md | closed task history | b5101e998a662f5860c07df2c5b96cc8b5cc8ce289f8516c7f6adac5021802fb |
 | history/m0-t199-s39-closure-20260814.md | closed task history | 92e06977090a47676b07653b577116941bd94424d2e76ca287bdfc684eb50e0c |
+| history/m0-t199-s3-closure-20260813.md | closed task history | 139f4bbe96086bb2cb268d55d466ad4d607ead43961feece45898578256f19b2 |
 | history/m0-t199-s40-closure-20260814.md | closed task history | 6dd3bfcf1c122995f764ac9bdefbb35f8cde0543e4109128598cb59fc2573dd6 |
 | history/m0-t199-s41-closure-20260814.md | closed task history | 62b83d7c968011133300508c1198a39c665f3a09098697b6a96fc97364f10b19 |
 | history/m0-t199-s42-closure-20260814.md | closed task history | fb307b3bb5ca4f2179d90096b3ca9c6e02ba4b11a5c41ea22e10fcb07263604f |
@@ -1939,7 +1939,6 @@ content-divergent entries.
 | history/m0-t199-s48-closure-20260814.md | closed task history | 8c2ced18c8cc7cc67f91ee0e260641fb3c30eaa174ae20d3d38928641b4d2f20 |
 | history/m0-t199-s49-closure-20260814.md | closed task history | d0ae28de296807804b0ce6616e82f0cae1d6a048c885c6211b208f29c70e3903 |
 | history/m0-t200-closure-20260814.md | closed task history | 7796b2d7e25feae51355fb8a29f760bfd15bea17d69195e2d64a4d0fcb8a1805 |
-| history/m0-t200-s1-closure-20260814.md | closed task history | 6160af1026b632479d5668ea3cd3bf2a73f76f1cdda5aba52facd03c128b41cf |
 | history/m0-t200-s10-closure-20260814.md | closed task history | b92bb4cf72c0395dc527724dec1a87c9322d321b6511bbd052575e6d22cb73a9 |
 | history/m0-t200-s11-closure-20260814.md | closed task history | f1d8f4629fb54af447ccb74c8f56e83a0638bc6b8430ae36c1cd88f2bbf3f652 |
 | history/m0-t200-s12-closure-20260814.md | closed task history | cb54983ac25a4e3472e4f09b6f007220dda0b6d5c065213d50c5da02210595ec |
@@ -1950,7 +1949,7 @@ content-divergent entries.
 | history/m0-t200-s17-closure-20260814.md | closed task history | 446f049213f3b4ee2f89e83b030723cee09be25068992522227f2cc094777284 |
 | history/m0-t200-s18-closure-20260814.md | closed task history | 8986a3210113379a698cde6cef288034e0c740e720c2a8b0a38c9b5b029bb6c1 |
 | history/m0-t200-s19-closure-20260814.md | closed task history | 20e2074ab01a42fa0b5a5d20ecedbb7c7854d62bb91c95a7430bc01b433f829a |
-| history/m0-t200-s2-closure-20260814.md | closed task history | baf6d29cb25f573dd111254dc6cb4688962f15f83154d4060338478486c14e45 |
+| history/m0-t200-s1-closure-20260814.md | closed task history | 6160af1026b632479d5668ea3cd3bf2a73f76f1cdda5aba52facd03c128b41cf |
 | history/m0-t200-s20-closure-20260814.md | closed task history | 52cc388d8fb3dcea1d313f80f2b669c8d4cff7131e251c1a8d1e340146d416c1 |
 | history/m0-t200-s21-closure-20260814.md | closed task history | 66f3bfcbc1d52ab60ab68ee574d19d6d8799310475395da698697bb17b4ed166 |
 | history/m0-t200-s22-closure-20260814.md | closed task history | ee08248a2023023bf2fd9d3035cf0f582939ad3d8183205c8d3c09e9c9600c4f |
@@ -1961,6 +1960,7 @@ content-divergent entries.
 | history/m0-t200-s27-closure-20260814.md | closed task history | 4a59a2c4508b70d8da23736e05d78e7b5500a880396120a157bf86088fdae877 |
 | history/m0-t200-s28-closure-20260814.md | closed task history | 7163c3ce6fb529ec2943dead3040e31cd3d73b3d1bbdab34ec7f05778be63c53 |
 | history/m0-t200-s29-closure-20260814.md | closed task history | 3688318413b84ed5d47296401307bad2cbdc7fc3fbe6cfd320c63e151eb03736 |
+| history/m0-t200-s2-closure-20260814.md | closed task history | baf6d29cb25f573dd111254dc6cb4688962f15f83154d4060338478486c14e45 |
 | history/m0-t200-s3-closure-20260814.md | closed task history | f8c9bc32ccda1118ca370e8e6bfd12f68f8f6b2f59334972fc7d50c80a609245 |
 | history/m0-t200-s4-closure-20260814.md | closed task history | 250aab6943b81332130973194efaf79ff110a34aaf58b758e90473e4f31c41d6 |
 | history/m0-t200-s5-closure-20260814.md | closed task history | a85d66f80d6dc0d6c2bbd206e57076a3027fc71f4b0658e59df7c4011b4fcd7a |
@@ -2118,9 +2118,9 @@ content-divergent entries.
 | history/m0-t96-s2-p1-20260811.md | closed task history | 7cea4118ee7c8c95de176bd5ee0de3f425aee60f252ac2e536444040a867c981 |
 | history/m0-t96-s2-p2-20260811.md | closed task history | 256c71f39cec0698374b2372175637e9b83b846a6c062adc496c3ef08c771bb8 |
 | history/m0-t96-s3-closure-20260811.md | closed task history | a15cc62ca21bb6128e915bc3bf71ac4f78116324e7c6ef7ec2464b98719beeb7 |
-| history/m0-t96-s3-p1-20260811.md | closed task history | 9fc618ded32dbad7ba8b517057a3afbaaec8a064062206d2baeafc3e1868187f |
 | history/m0-t96-s3-p10-20260811.md | closed task history | f6bf63e6f7cd500935413c8efcc1e14fd15e610366a92eaa61c6087d96a540f5 |
 | history/m0-t96-s3-p11-20260811.md | closed task history | 873e87d1ca9595a2b92adfe6c6bee360fcd32df332410e1a4fd307fe60b1d0a5 |
+| history/m0-t96-s3-p1-20260811.md | closed task history | 9fc618ded32dbad7ba8b517057a3afbaaec8a064062206d2baeafc3e1868187f |
 | history/m0-t96-s3-p2-20260811.md | closed task history | 02d8f05adceb07e323dc7844e183d990d32163c751e520a83956bbb395a6a365 |
 | history/m0-t96-s3-p3-20260811.md | closed task history | 4539a38f22402a0f9c530872bbbf85ece8c8945f7fa9562828132c8dd37f8ec5 |
 | history/m0-t96-s3-p5-20260811.md | closed task history | ce0e494e6d87c671d13e902f4607fa6c9647d004637b815ae31fc2b039f5164a |
@@ -2271,7 +2271,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | fbfa3a202453ef9a31c0549310ff6ce96d822ac85e2cbbfb6a9c6c032e516f0c |
-| QUEUE.md | principal control document | 2d2f51d51136581c337ba3ad07da94f2f61e4ecb060a74d6e2214eb7047aa882 |
+| QUEUE.md | principal control document | 58d812c5a821d9c95e9c52e389bf96662af2e6be38f20d7f0d12a9ef6b7d52b7 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |

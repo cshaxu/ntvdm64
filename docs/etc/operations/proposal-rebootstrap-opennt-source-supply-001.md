@@ -2,10 +2,10 @@
 
 ## Purpose
 
-Create the authoritative, package-scope OpenNT/OpenNT-4.5 non-guest source
-supply for all later recovery work, while carrying forward the already-complete
-repository-local guest mirrors as load-only inputs and avoiding premature
-provider composition.
+Create the authoritative, package-scope OpenNT/OpenNT-4.5 **non-guest** source
+supply for all later recovery work, while directly recovering the already-
+complete repository-local guest mirrors as load-only inputs and avoiding
+premature provider composition.
 
 ## Prerequisites
 
@@ -26,14 +26,16 @@ libraries. No new adapter/provider implementation belongs here.
    lineage; record retained and rejected variant hashes.
 2. **S2 — Platform ABI mirror.** Import only exact required declarations from
    outside MVDM; prohibit replacement behavior in this root.
-3. **S3 — DOS guest mirror carry-forward.** Copy the existing complete DOS/V86
-   mirror into `opennt-guest-dos` without a second external OpenNT import;
-   preserve its source/resource/build/intermediate/product inventory and add an
-   immutable guest-image manifest.
-4. **S4 — WOW16 guest mirror carry-forward.** Copy the existing complete WOW16
-   mirror into `opennt-guest-wow16` by the same route. Preserve the existing
-   `build/output/dos` and `build/output/wow16` binary trees in place as build
-   outputs/evidence rather than moving or duplicating them.
+3. **S3 — DOS guest mirror direct recovery.** Recover the already-complete
+   `src.old/opennt-guest/dos-v86` guest mirror into `opennt-guest-dos` without
+   consulting OpenNT/OpenNT-4.5 as a second copy source. Preserve its
+   source/resource/build/intermediate/product inventory and add an immutable
+   guest-image manifest.
+4. **S4 — WOW16 guest mirror direct recovery.** Recover the already-complete
+   `src.old/opennt-guest/wow16` guest mirror into `opennt-guest-wow16` by the
+   same direct route. Preserve `build/output/dos` and `build/output/wow16`
+   exactly where they are as prior build outputs/evidence: do not move, copy,
+   relink or treat them as host-build inputs.
 5. **S5 — MVDM host topology.** Import public/private headers, build topology
    and package roots under `opennt-mvdm-host` without changing dormant source
    bodies to force a build.

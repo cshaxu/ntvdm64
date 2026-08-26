@@ -14,8 +14,9 @@ source packages by adding ad-hoc BOP handlers.
 ## Boundary
 
 `app` owns CLI parsing, guest-image selection, session construction, adapter
-wiring and broker connection/start. Existing app composition may be reused from
-`src.old/` only after per-file owner/dependency review. Ninja owns host
+wiring and broker connection/start. Existing app/session composition is an
+audited recovery source and must be reused or copied after per-file
+owner/dependency review before new composition is authored. Ninja owns host
 dependency tracking and incremental library/link execution. The task tests
 composition and boundaries, not general DOS/WOW runtime continuity.
 

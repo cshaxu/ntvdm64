@@ -15,9 +15,10 @@ caller and source/ABI/failure evidence.
 
 The task owns `adapter-bop`, `adapter-softpc`, `adapter-win32`,
 `adapter-vdm-monitor` and the minimum cooperative `broker` implementation.
-Existing adapter files in `src.old/` are audited recovery candidates and may
-be copied into their corresponding new roots when their interface contract and
-dependency direction are compliant. Adapters preserve reached original names,
+Existing `adapter-*`, `app` and `session` files in `src.old/` are audited
+recovery candidates. Their compliant source must be reused or copied into the
+corresponding new root before a replacement is authored; each exception is
+recorded with its source/ABI reason. Adapters preserve reached original names,
 parameters, layouts, ordering and failure contracts. They do not become
 alternate DEM/COMMAND/XMS/DPMI providers or introduce Bochs knowledge into
 imported OpenNT source.
