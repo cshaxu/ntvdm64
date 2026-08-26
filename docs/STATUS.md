@@ -229,6 +229,14 @@ loading and VDD hooks, so it cannot be independently enabled. The ledger names
 the applicable adapter/package predecessor for every group and records no
 source or adapter enablement.
 
+**T276 S12 P6:** all ten SoftPC/SAS facade sources now have twelve
+source-span-level interface dispositions. `nt_cpu.c` CPU execution and direct
+CPU-internal paths are explicit Bochs-replacement exclusions; SIM32/SAS,
+memory, EMM and UMB paths retain their original contracts but require named
+guest-memory, physical-page, VDD or session prerequisites. Historical build
+stubs remain excluded rather than becoming default adapter bodies. No source
+or adapter is enabled.
+
 ### M0 T275 S1 — Complete interface and reuse ledger
 
 | Field | Record |
