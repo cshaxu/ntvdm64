@@ -10,6 +10,10 @@ belong to the existing `adapter-win32` COMMAND facade:
 - `runtime_opennt_console_keyboard_layout_name` replaces the unavailable
   private `GetConsoleKeyboardLayoutNameA` export with public
   `GetKeyboardLayoutNameA`, retaining `cmdkeyb.c`'s caller-side algorithm.
+- The existing error-dialog facade now directly exports the original
+  `RcErrorDialogBox(UINT, CHAR *, CHAR *)` spelling.  This preserves
+  `error.h` declarations and lets the source bodies call it without a
+  COMMAND-local forwarding wrapper.
 
 The original COMMAND-facing macro spellings remain in the composition header;
 only their declaration target changed.  The two divergences are registered as
@@ -22,6 +26,8 @@ affected closure.  Both focused executables exited zero:
   keyboard fallback/success and standard-handle-token contract verified.
 - `t234-s2-command-dynamic-environment-fixture.exe` reported its OpenNT
   dynamic COMMAND environment composition verified.
+- `t231-s5-command-config-direct-fixture.exe` reported its direct OpenNT
+  `cmdconf` config, autoexec and terminal-failure paths verified.
 
 The remaining composition code is not relabeled as Win32 facade work: its
 call-scoped CCPU/SAS facade, source-specific copied `GetVDMAddr` spans,

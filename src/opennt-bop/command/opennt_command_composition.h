@@ -296,7 +296,7 @@ VOID cmdPipeOutThread(LPVOID parameter);
 VOID cmdPipeInThread(LPVOID parameter);
 BOOL cmdPipeFileDataEOF(HANDLE file, BOOL *eof_out);
 BOOL cmdPipeFileEOF(HANDLE file);
-void RcErrorDialogBox(UINT error, PVOID first, PVOID second);
+void RcErrorDialogBox(UINT error, CHAR *first, CHAR *second);
 int RcMessageBox(UINT error, PVOID first, PVOID second, UINT flags);
 void TerminateVDM(void);
 extern BOOL fSoftpcRedirection;

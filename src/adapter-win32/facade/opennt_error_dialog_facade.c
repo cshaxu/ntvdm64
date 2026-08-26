@@ -73,6 +73,14 @@ void runtime_opennt_rc_error_dialog(UINT error, CHAR *first, CHAR *second)
         (void)MessageBoxA(NULL, message, "NTVDM64", MB_OK | MB_ICONSTOP);
 }
 
+/* Same-shaped OpenNT host export.  Provider mirrors retain their original
+ * declaration and call spelling; only the historical dialog product shell is
+ * replaced by the public Win32 implementation above. */
+void RcErrorDialogBox(UINT error, CHAR *first, CHAR *second)
+{
+    runtime_opennt_rc_error_dialog(error, first, second);
+}
+
 int runtime_opennt_rc_message_box(UINT error, CHAR *first, CHAR *second,
     ULONG flags)
 {

@@ -498,10 +498,6 @@ int runtime_command_misc_publish_handle(HANDLE handle)
     return 1;
 }
 
-void RcErrorDialogBox(UINT error, PVOID first, PVOID second)
-{
-    runtime_opennt_rc_error_dialog(error, (CHAR *)first, (CHAR *)second);
-}
 void TerminateVDM(void)
 {
     /* OpenNT's terminal path does not return.  The typed composition models
