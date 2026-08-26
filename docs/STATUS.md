@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T276 S14** — Begin W3 complete `xms.486` package file/interface
-disposition without enabling an XMS provider body.
+**Active: M0 T276 S15** — Begin W3 complete `sim16` package file/interface
+disposition without enabling a historical WOW simulator body.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,25 +24,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S14 — W3 `xms.486` package disposition baseline
+### M0 T276 S15 — W3 `sim16` package disposition baseline
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T276 S14`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T276/S13 is closed: all 40 `dos` paths, 27 source units and eight external boundary families have exact non-enabled disposition. The next bounded original owner package is the 15-path `xms.486` root. |
-| Objective | Classify all selected `xms.486` paths by original XMS service/data role, literal build evidence and reached A20/RAM/IVT/UMB/external interface families before enabling an XMS provider body. |
-| Non-goals | No source move/edit, BOP service implementation, machine-memory change, adapter ABI/body, formal build edge, Ninja run, guest image change, Bochs change, host-memory allocation or guest execution. |
-| Reference Baseline | T276/S1–S13 ledgers, exact selected `xms.486` mirror, source policy and architecture rules. |
-| Files And ABI Surface | W3 `xms.486` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
+| Identifier Mode | `M0 T276 S15`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T276/S14 is closed: all 15 `xms.486` paths, eight source paths and eight XMS boundary families have exact non-enabled disposition. The next bounded original owner package is the eight-path `sim16` root. |
+| Objective | Classify all selected `sim16` paths by original 16-bit simulator role, build evidence and reached serial/packet/guest-memory/interrupt/WOW boundary before enabling a simulator body. |
+| Non-goals | No source move/edit, 16-bit build, WOW enablement, serial device bridge, adapter body, formal build edge, Ninja run, Bochs device change or guest execution. |
+| Reference Baseline | T276/S1–S14 ledgers, exact selected `sim16` mirror, source policy and architecture rules. |
+| Files And ABI Surface | W3 `sim16` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Account for all 15 selected `xms.486` paths; identify original service/data roles and actual A20/RAM/IVT/UMB/external interface families; reject a trace-led leaf implementation. |
-| Expected Markers | One provisional composition disposition per path, exact source/build evidence, named internal/adapter prerequisite or explicit profile exclusion per reached family. |
-| Asset Needs | T276/S1–S13 ledgers, exact selected `xms.486` mirror and [S14 plan](etc/operations/m0-t276-s14-xms-package-disposition-plan-001.md). |
-| Reporting Requirements | Exact path/source/build counts, XMS role groups, memory-machine/external dependency families, unresolved ABI facts and subsequent package handoff. |
-| Stop Conditions | A path has no selected/build evidence, a source exposes a host pointer, a provider is enabled due to a trace, a dependency has no named owner, or classification requires invented adapter behavior. |
-| Exit Criteria | Every selected `xms.486` path has a reproducible provisional owner/disposition record and each actual external family is assigned to a named existing adapter/internal owner or explicit machine/profile gate; no source body is enabled. |
+| Verification | Account for all eight selected `sim16` paths; identify original 16-bit DLL role and serial/packet/guest-memory/interrupt/WOW dependency; reject an inference from filename or 16-bit form. |
+| Expected Markers | One provisional composition disposition per path, exact build evidence, named internal/adapter prerequisite or explicit profile exclusion per reached family. |
+| Asset Needs | T276/S1–S14 ledgers, exact selected `sim16` mirror and [S15 plan](etc/operations/m0-t276-s15-sim16-package-disposition-plan-001.md). |
+| Reporting Requirements | Exact path/source/build counts, simulator role, boundary families, profile exclusion facts and subsequent package handoff. |
+| Stop Conditions | A path has no selected/build evidence, a 16-bit DLL is mistaken for a guest image, a serial/device body is enabled from a trace, a dependency has no named owner, or classification requires invented adapter behavior. |
+| Exit Criteria | Every selected `sim16` path has a reproducible provisional owner/disposition record and each actual external family is assigned to a named existing adapter/internal owner or explicit profile exclusion; no source body is enabled. |
 | Original Owner Request | “好的 开始审计任务”。 |
-| Similar-Issue Sweep | XMS dispatch, A20, UMB, RAM/IVT memory seams, original build descriptions, BOP/SoftPC/Win32/session boundaries and prior partial XMS evidence. |
+| Similar-Issue Sweep | 16-bit DLL versus guest distinction, WOW packet protocol, serial/PIC/interrupt/device use, guest-memory copy, original build descriptions and adapter-wow/adapter-vdm-monitor/adapter-bochs boundaries. |
 
 ### M0 T276 S11 — W0/W1 file and interface disposition baseline
 
