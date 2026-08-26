@@ -30,10 +30,11 @@ standard, and do all previously extracted bodies now have a correct owner?
   formal library. Its sources and two fixtures are now archived outside every
   production/test build root. This is a removal of an invalid production
   claim, not a loss of source evidence.
-- After the DPMI archive, DEM CCPU/SAS extraction and wrapper fold, the live
-  root contains 90 C/H/INC inputs: 59 original-name inputs and 31 remaining
-  project-named compatibility/composition inputs. This is a reduction, not a
-  closure claim: the 31 inputs are the concrete residual owner ledger below.
+- After the DPMI archive, DEM CCPU/SAS extraction, wrapper fold and COMMAND
+  overlay-boundary recovery, the live root contains 85 C/H/INC inputs: 59
+  original-name inputs and 26 remaining project-named compatibility inputs.
+  This is a reduction, not a closure claim: the 26 inputs are the concrete
+  residual owner ledger below.
 
 ## Focused regression after the corrective moves
 
@@ -43,6 +44,9 @@ standard, and do all previously extracted bodies now have a correct owner?
   `#UD -> MS_bop_0 -> DemDispatch`.
 - `t231-s10-command-native-session-fixture.exe` passed, reporting native
   ownership of `54:00` with no v1 fallback.
+- After the COMMAND boundary fold, the same two fixtures were rebuilt and
+  executed from the refreshed formal `r004` graph with the same passing
+  results.
 - Folding the two wrapper bodies initially exposed a real macro-scope collision
   in `softpc/nt_bop.c`; the formal compiler caught it and the file now keeps
   one definition each of `MS_bop_0` and `MS_bop_4`.  This validation proves
@@ -56,11 +60,11 @@ not pass the mirror test merely because a README row exists.
 - **COMMAND source subsets:** the cropped `command/nt_bop_command.{c,h}`
   dispatcher entry has been folded into the matching original
   `softpc/nt_bop.c` mirror boundary; the superseded wrapper is retained only
-  as indexed legacy evidence. The five
-  `opennt_command_*_composition`/`opennt_pif_composition` boundaries are
-  private overlay include stubs today; their bodies are correctly private,
-  but the non-original boundary names must be replaced by narrow boundaries in
-  the original COMMAND units that consume them.
+  as indexed legacy evidence. The five former
+  `opennt_command_*_composition`/`opennt_pif_composition` include stubs have
+  now been folded into original `cmd.c`, `cmdmisc.c`, `cmdconf.c`, `cmdenv.c`
+  and `cmdpif.c` boundaries. Their overlay bodies remain private; the large
+  non-original compatibility headers are still residual owner work.
 - **DEM CCPU/SAS bridge:** `dem_direct_context.{c,h}` and
   `opennt_dem_ccpu_sas_facade.{c,h}` are project-authored copied-frame,
   guest-pointer, handle and register machinery. The generic CCPU/SAS portion

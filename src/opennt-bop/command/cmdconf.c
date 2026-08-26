@@ -652,3 +652,7 @@ void WriteFileAssert(HANDLE hFile, CHAR *pBuff, DWORD dwBytes)
       TerminateVDM();  // skip cleanup since I insist that we exit!
       }
 }
+
+/* DIVERGENCE(BOP-DIV-105): session configuration binding is private product
+ * composition, included only from this original COMMAND source boundary. */
+#include "opennt-bop-overlay/command/opennt_command_config_composition.c"

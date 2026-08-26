@@ -20,3 +20,7 @@ UINT  Len;
         cmdHomeDirectory[0] = RootDir[0];
     return TRUE;
 }
+
+/* DIVERGENCE(BOP-DIV-103): retain the source-derived COMMAND product glue as
+ * a private overlay at this original COMMAND translation-unit boundary. */
+#include "opennt-bop-overlay/command/opennt_command_composition.c"

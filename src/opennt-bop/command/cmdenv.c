@@ -758,3 +758,7 @@ DWORD	cchValue
 }
 
 #endif /* BX_NTVDM_COMMAND_ENV_ADMIT_DYNAMIC || !BX_NTVDM_COMMAND_ENV_ADMITTED_SLICE */
+
+/* DIVERGENCE(BOP-DIV-106): session environment conversion remains a private
+ * overlay at the original cmdenv.c owner boundary. */
+#include "opennt-bop-overlay/command/opennt_command_environment_composition.c"

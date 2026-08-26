@@ -291,7 +291,6 @@
         "src/opennt-bop/command/cmdkeyb.c",
         "src/opennt-bop/command/cmdmisc.c",
         "src/opennt-bop/command/cmdpif.c",
-        "src/opennt-bop/command/opennt_pif_composition.c",
         "src/opennt-bop/command/cmdredir.c",
         "src/opennt-bop/dem/dem.c",
         "src/opennt-bop/dem/demdasd.c",
@@ -332,10 +331,6 @@
         "src/opennt-bop/xms/xmsdisp.c",
         "src/opennt-bop/xms/xmsmisc.c",
         "src/opennt-bop/xms/xmsumb.c",
-        "src/opennt-bop/command/opennt_command_binary_composition.c",
-        "src/opennt-bop/command/opennt_command_config_composition.c",
-        "src/opennt-bop/command/opennt_command_environment_composition.c",
-        "src/opennt-bop/command/opennt_command_composition.c",
           "src/opennt-bop/vdmredir/vrdisp.c",
           "src/opennt-bop/vdmredir/vrmslot.c"
       ]

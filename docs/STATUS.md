@@ -255,6 +255,12 @@ dependencies and must be owner-split, not hidden under tests. The formal graph
 now also gives intentionally shared test-support sources fixture-specific
 object paths.
 
+**S5 P12:** five non-original COMMAND overlay include stubs have been deleted.
+Their private bodies are now included only by original `cmd.c`, `cmdmisc.c`,
+`cmdconf.c`, `cmdenv.c` and `cmdpif.c` translation-unit boundaries. Refreshed
+formal DEM/COMMAND source-path links and executions pass. The non-original
+COMMAND compatibility headers remain active source-recovery work.
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

@@ -942,3 +942,7 @@ VOID cmdGetStartInfo (VOID)
     return;
 }
 #endif /* BX_NTVDM_COMMAND_MISC_ADMIT_START_INFO */
+
+/* DIVERGENCE(BOP-DIV-104): bounded SCS address projection remains private
+ * overlay code at the original cmdmisc.c owner boundary. */
+#include "opennt-bop-overlay/command/opennt_command_binary_composition.c"

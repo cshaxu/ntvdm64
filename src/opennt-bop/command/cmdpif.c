@@ -294,3 +294,7 @@ CleanUpAndReturn:
     return;
 
 }
+
+/* DIVERGENCE(BOP-DIV-032): the isolated PIF layout bridge remains private
+ * overlay code at the original cmdpif.c owner boundary. */
+#include "opennt-bop-overlay/command/opennt_pif_composition.c"
