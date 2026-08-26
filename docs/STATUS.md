@@ -93,23 +93,24 @@ and record ambiguities rather than guessing a package owner.
 
 **T276 S4 closure:** every selected translation unit now has an explicit scan
 state.  The C/C++ lexical scan records 89,924 call-or-definition candidates,
-split into 4,119 unique-name, 7,099 ambiguous-name and 78,706 unrepresented
+split into 3,825 unique-name, 7,043 ambiguous-name and 79,056 unrepresented
 declaration correlations; 58 assembly units are explicitly not projected into
 that model.  See [T276 S4 caller/callee evidence](etc/operations/m0-t276-s4-caller-callee-correlation-001.md).
 S5 reviews only source-proven external boundaries and preserves unresolved
 assembly/macro cases as evidence rather than inventing owners.
 
-**T276 S5 closure:** all 4,119 S4 unique-name candidates now have a recorded
-definition/boundary disposition: 1,468 have a selected-source definition-name
-observation and 2,651 remain external-boundary candidates.  The 12,855
+**T276 S5 closure:** all 3,825 S4 unique-name candidates now have a recorded
+definition/boundary disposition: 1,470 have a selected-source definition-name
+observation and 2,355 remain external-boundary candidates.  The 12,855
 definition records include a comment-stripped K&R form and are deliberately
 lexical; they do not make a linkage claim.
 See [T276 S5 boundary evidence](etc/operations/m0-t276-s5-external-boundary-baseline-001.md).
 S6 must review the 2,546 candidates by original declaration shape and caller
 package, grouping real historical interface families before assigning owners.
 
-**T276 S6 closure:** after the K&R-aware S5 correction, 2,651 external-boundary
-calls reduce to 28 original declaration worklist rows: 25 SoftPC-shape, two
+**T276 S6 closure:** after K&R and function-pointer-aware parser corrections,
+2,355 external-boundary calls reduce to 26 original declaration worklist rows:
+23 SoftPC-shape, two
 debugger-shape and one OpenNT-host/Win32-shape review family.  See
 [T276 S6 worklist](etc/operations/m0-t276-s6-boundary-family-worklist-001.md).
 The next S reviews each original declaration and its callers before any final

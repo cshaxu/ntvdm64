@@ -23,6 +23,8 @@ foreach ($path in @($fileLedgerPath, $interfaceLedgerPath)) {
 
 function Get-CandidateName([string]$Declaration) {
     if ([string]::IsNullOrEmpty($Declaration)) { return '' }
+    $pointerName = [regex]::Match($Declaration, '\(\s*\*\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)')
+    if ($pointerName.Success) { return $pointerName.Groups[1].Value }
     $functionNames = [regex]::Matches($Declaration, '\b([A-Za-z_][A-Za-z0-9_]*)\s*\(')
     if ($functionNames.Count -gt 0) { return $functionNames[$functionNames.Count - 1].Groups[1].Value }
     $allNames = [regex]::Matches($Declaration, '\b([A-Za-z_][A-Za-z0-9_]*)\b')

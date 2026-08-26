@@ -16,9 +16,9 @@ All 612 selected translation units are accounted for. C/C++ files receive a comm
 
 ### Name-correlation outcomes
 
-- `ambiguous-declaration-name-candidate`: 7099
-- `no-selected-extern-candidate`: 78706
-- `unique-declaration-name-candidate`: 4119
+- `ambiguous-declaration-name-candidate`: 7043
+- `no-selected-extern-candidate`: 79056
+- `unique-declaration-name-candidate`: 3825
 
 ## Limits
 

@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 2438 |
 | --- | --- |
-| Generated UTC | 2026-08-26T15:49:22Z |
+| Generated UTC | 2026-08-26T15:54:00Z |
 
 ## Entries
 
@@ -606,22 +606,22 @@ content-divergent entries.
 | etc/operations/m0-t276-s2-translation-unit-build-ledger.tsv | indexed supporting material | 542cb74fca0d9d6d857b901d30d462437d819a27a399e3e798f5a664eca4328f |
 | etc/operations/m0-t276-s2-translation-unit-include-ledger.tsv | indexed supporting material | 69dff8708c39b88353a01e5f3ae39f053a7ecb928051d635072a2ea893414552 |
 | etc/operations/m0-t276-s3-interface-declaration-baseline-001.md | indexed supporting material | 82262157f7a78e1f3ebaf23439c9d54aae1bdc12765c58a1eaa7c236a9bd12b3 |
-| etc/operations/m0-t276-s3-textual-declaration-ledger.tsv | indexed supporting material | 5fbd47cf692f95cbb9e6156ee78d73ab79ab4a9fc848fe623cbfc7ae33682a80 |
-| etc/operations/m0-t276-s4-caller-callee-correlation-001.md | indexed supporting material | 62ec36aa2b53098a1094d8275749aa7474f5680417554da29840d8a2958b6135 |
-| etc/operations/m0-t276-s4-textual-call-candidate-ledger.tsv | indexed supporting material | f32d602ffc29d1ad662cd78b9ac738a7729936257e7137c631890a3e461952e3 |
+| etc/operations/m0-t276-s3-textual-declaration-ledger.tsv | indexed supporting material | 89a07e0ab08592ddc5be20b8b439da0744cb25307305e0610c5eedf9b2a357d1 |
+| etc/operations/m0-t276-s4-caller-callee-correlation-001.md | indexed supporting material | 6598ad1270b17d804a51981e7744243a47d16acfc56f42f75e589dc988a1b9de |
+| etc/operations/m0-t276-s4-textual-call-candidate-ledger.tsv | indexed supporting material | 535acde3bb911180079485511e9899621cf22d02940841ffdb3234399b996f95 |
 | etc/operations/m0-t276-s4-translation-unit-call-scan-ledger.tsv | indexed supporting material | 259186e7bf4864b5cff332622a454b56eaaad838ae532c673b2287f4729fffcd |
-| etc/operations/m0-t276-s5-external-boundary-baseline-001.md | indexed supporting material | 4bbc95662563399d37c458a871d6412e6eda7d6227e8ec1179676e671e72ae93 |
+| etc/operations/m0-t276-s5-external-boundary-baseline-001.md | indexed supporting material | 53d527a267cd213638f711c1dbe4d451d4c2cd8de03c45cf9cb6ece3786510e7 |
 | etc/operations/m0-t276-s5-selected-definition-ledger.tsv | indexed supporting material | dfd7d1dfde2bc6f652081469cd2e71256485f5838dbebce57579aec3be751416 |
-| etc/operations/m0-t276-s5-unique-call-disposition-ledger.tsv | indexed supporting material | a9540f1d33a753c582bd6d11c753ad190aaabbea6639cbc3d7716020af32be22 |
-| etc/operations/m0-t276-s6-boundary-family-worklist.tsv | indexed supporting material | 1823aec8b737bc03855c1de09424f31e498ed1bed3dae69f3e9414bef6a4d5d4 |
-| etc/operations/m0-t276-s6-boundary-family-worklist-001.md | indexed supporting material | 53289b7e81eba3ad00945764b62cb8feea19bdbe4c39aa81f2cc718bf4ce4514 |
+| etc/operations/m0-t276-s5-unique-call-disposition-ledger.tsv | indexed supporting material | ee7ec807905cc03d28ce22c3e0b64271e87d212a7b75454453c12863263b4209 |
+| etc/operations/m0-t276-s6-boundary-family-worklist.tsv | indexed supporting material | 0b5f6f5e68c52067d86fe283033dbc24bd57ace2b8f799648f4fb713b51e5c13 |
+| etc/operations/m0-t276-s6-boundary-family-worklist-001.md | indexed supporting material | dbc9f0f34a9871ee722e0e0a04f1478ab293bcacdc6bf67a89a0291964a06236 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
 | etc/operations/mvdm-build-profile-ledger.tsv | indexed supporting material | 053f98e13c39ff5e5937369139ef5eba5d9679a8179dcdc05a86fae5ec570d47 |
 | etc/operations/mvdm-divergence-exclusion-ledger.tsv | indexed supporting material | 3209f0eb51c1d551b44ec415294dc8cb69d601064a519a8e9824ec67d577619b |
 | etc/operations/mvdm-file-recovery-ledger.tsv | indexed supporting material | f17cf97b205cc9ce70435e6f69952525e9c8622bc1e74ecd3274036869d96a8c |
-| etc/operations/mvdm-interface-recovery-ledger.tsv | indexed supporting material | 2996190f8543b00515ff1ebe095779f1f62e08e1aa2e97e351e1d803189eaa44 |
+| etc/operations/mvdm-interface-recovery-ledger.tsv | indexed supporting material | dbcdeb35e73c3e09d6dad8afa1e501d7708a145b6d502d5b8fd8afdc200d8f2e |
 | etc/operations/mvdm-package-dependency-ledger.tsv | indexed supporting material | e039a102f20f9ca519b6c645bc4401f1a74ac819f39b51d336c26f3e1e248905 |
 | etc/operations/mvdm-package-recovery-wave-plan-001.md | indexed supporting material | 20c82cfe506dcf16ffba5c9d1f480caba8cbf8c0f2ce4427eea2d042cc13b942 |
 | etc/operations/opennt-bop-host-service-plane-recovery-candidate.md | indexed supporting material | 643385cb4d3c61e70583d59ae2eb6dab5284e07f647bdd47da8575aa0ffbfadf |
@@ -2452,7 +2452,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 4e699c1650338972ca21f16fcc5b4b346ccb925fa621764739c9dd23308a9c0c |
+| STATUS.md | principal control document | 44684f9d3a149e3bb3994b7caa00b45cadc04a1655ece492f022bc9ac57d92e4 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |
