@@ -113,6 +113,14 @@ the console/keyboard regression passes after the formal relink. VDD/display/
 BIOS/window/thread product-shell tails remain the existing explicit
 `HOST-DIV-030` deferral. See [S3 P11 evidence](etc/evidence/m0-t271-s3-p11-command-host-event-initialization-001.md).
 
+**S3 P12:** generic copied CCPU register access, typed result edits and
+single-byte `sas_load` now belong to the selector-blind
+`adapter-softpc` frame context, not COMMAND composition.  Original source
+call shapes remain private macros; COMMAND-specific `GetVDMAddr` allocation
+and service ordering remain under the active source-body review.  Focused
+CCPU context, direct COMMAND import and native COMMAND-entry regressions pass
+after the formal relink. See [S3 P12 evidence](etc/evidence/m0-t271-s3-p12-ccpu-frame-context-extraction-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

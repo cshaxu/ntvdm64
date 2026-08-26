@@ -25,11 +25,16 @@ a historical Win32 facade, and an OpenNT COMMAND provider from being mixed again
 
 ## Move to `adapter-softpc`
 
-- Copied CPU register getters/setters, checked guest byte/span reads and
-  writes, `GetVDMAddr` projection, `sas_load`, typed CPU result formation,
-  and first-fault/frame validation are CCPU/SAS mechanical compatibility.
-  They must be offered as source-shaped, selector-blind calls; no COMMAND
-  table, `54:xx` number or provider state may move with them.
+- Copied CPU register getters/setters and `sas_load` are CCPU/SAS mechanical
+  compatibility.  P12 has moved those generic operations into the
+  thread-scoped `ccpu_frame_context` boundary.  It carries only a borrowed
+  typed CPU/result record and checked callbacks; no COMMAND table, `54:xx`
+  number or provider state moved with it.
+- `GetVDMAddr` is not part of that generic extraction: its allocation,
+  writeback and source-service ordering are COMMAND-specific source glue and
+  remain for the remaining provider-body review.  Checked guest spans and
+  typed ingress/outcome conversion are already owned by the selector-blind
+  `adapter-bop` frame transaction (P9).
 - The completed `host_lpt_flush_initialize` extraction is the model: retain
   the original SoftPC spelling and reachable mechanical state, but keep the
   original COMMAND caller unchanged.
@@ -99,6 +104,7 @@ a historical Win32 facade, and an OpenNT COMMAND provider from being mixed again
    `opennt-host`, registering every omitted product-shell branch.
 4. Move child lifecycle into `opennt-host`; preserve `cmdexec.c`'s original
    call ordering and keep DOS EXEC/PSP parent return explicitly guest-owned.
-5. Extract the now-generic copied-frame transaction to `adapter-bop` and
-   delete the temporary composition file after COMMAND direct/native matrix
-   and formal graph pass.
+5. P9 extracted the generic copied-frame transaction to `adapter-bop`; P12
+   extracted the generic CCPU register/load facade to `adapter-softpc`.
+   The residual source-specific body blocks require their individual final
+   owner dispositions before the temporary composition can be deleted.

@@ -11,11 +11,10 @@
  * the original byte load and CS:IP sequence; the outer typed result remains
  * the only way to resume the Bochs CPU. */
 typedef UCHAR half_word;
-#define getCS() runtime_command_misc_get_cs()
-#define getIP() runtime_command_misc_get_ip()
-#define setIP(value) runtime_command_misc_set_ip((USHORT)(value))
-#define sas_load(address, target) runtime_command_misc_sas_load((address), (target))
-#define CmdDispatch(service) runtime_command_misc_dispatch_source_command((service))
+#define getCS() runtime_ccpu_get_cs()
+#define getIP() runtime_ccpu_get_ip()
+#define setIP(value) runtime_ccpu_set_ip((USHORT)(value))
+#define sas_load(address, target) runtime_ccpu_sas_load((address), (target))
 #define CmdDispatch(service) runtime_command_misc_dispatch_source_command((service))
 
 // SCS BOP

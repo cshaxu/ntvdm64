@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2340 |
+| Documentation records | 2341 |
 | --- | --- |
-| Generated UTC | 2026-08-26T01:01:36Z |
+| Generated UTC | 2026-08-26T01:11:01Z |
 
 ## Entries
 
@@ -283,9 +283,10 @@ content-divergent entries.
 | etc/evidence/m0-t271-s3-command-host-api-owner-map-001.md | indexed supporting material | b9dec2d039f7efca18ccf96f30ade4f50dd28c08b839b041538039a2fa962fda |
 | etc/evidence/m0-t271-s3-p10-command-win32-facade-completion-001.md | indexed supporting material | d786f028e98eab986778a25fa7808b922245f3477490e86fb1859dea1db38bec |
 | etc/evidence/m0-t271-s3-p11-command-host-event-initialization-001.md | indexed supporting material | f3acc48e864c94a212207652bc6b41eb38db754bf69913a5018cd428559511ae |
+| etc/evidence/m0-t271-s3-p12-ccpu-frame-context-extraction-001.md | indexed supporting material | 5b6c844e240d7c3efd2733e623c05957b4a56130e1a1f0a346ad98e95ddc5193 |
 | etc/evidence/m0-t271-s3-p1-command-entry-globals-recovery-001.md | indexed supporting material | 8ce2e013d342736bed7424782459f599f6f6b9263b4e72a61fe14554be4ee6fe |
 | etc/evidence/m0-t271-s3-p2-command-win32-facade-extraction-001.md | indexed supporting material | e2db04e68cf2454c2de6394609b2d0efa0b3570b3356e7fc7cb13bd6e799d2d6 |
-| etc/evidence/m0-t271-s3-p4-command-composition-owner-disposition-001.md | indexed supporting material | 607053e3457cb6075cfc1b97f6ec03fba5d524b0ea3ca2f156b8774b3cd1a226 |
+| etc/evidence/m0-t271-s3-p4-command-composition-owner-disposition-001.md | indexed supporting material | bcdba56235a5f86df106dc82ed0343413cc467905b16ebfe92b28e61125de066 |
 | etc/evidence/m0-t271-s3-p5-session-input-extraction-001.md | indexed supporting material | 6e9c01d46f29a13de3672ad757bac4e4aa7cee5fd5bcdd88e4415a5b22a93ec7 |
 | etc/evidence/m0-t271-s3-p6-vdm-api-facade-recovery-001.md | indexed supporting material | a78bf278b5997e51da31f7662ee2bda19cda4da14f3219508f82e45459a3dbea |
 | etc/evidence/m0-t271-s3-p7-command-host-event-recovery-001.md | indexed supporting material | c65aa42a525dfa7577831c189e5d47cbc16482209af2c4f0a003f1a2b371c481 |
@@ -2354,7 +2355,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | c5717f8d932dc214a43fd02fc857d5154ad71d495017b626c6ec05812945a925 |
+| STATUS.md | principal control document | dafb08b6c0312c7fc596d94b7d209c9da690b381d1eccb01e3238f8d542b582e |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 9c56ec335be7cc898c956c98709ff5fe555ec2b24f6bc54ececa86bd163503d6 |

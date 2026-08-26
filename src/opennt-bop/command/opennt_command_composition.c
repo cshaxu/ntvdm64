@@ -93,13 +93,6 @@ static int copy_guest_multisz(runtime_command_misc_active_call *active,
     return 0;
 }
 
-static int set_ax(USHORT value)
-{
-    return g_active_call != NULL &&
-        runtime_cpu_delta_set_gpr16(&g_active_call->call->result->cpu_delta,
-            0u, value);
-}
-
 void runtime_command_misc_session_initialize(runtime_command_misc_session *session)
 {
     if (session == NULL) return;
@@ -357,8 +350,7 @@ BOOL runtime_command_worker_reentry_pending(void)
 
 BOOL runtime_command_misc_set_pending(void)
 {
-    return g_active_call != NULL && runtime_cpu_result_pending(
-        g_active_call->call->result);
+    return g_active_call != NULL && runtime_ccpu_set_pending();
 }
 
 static int validate_comspec_input(const runtime_command_misc_call *call)
@@ -413,56 +405,13 @@ int runtime_command_misc_call_valid(const runtime_command_misc_call *call)
          runtime_command_misc_session_valid(call->session));
 }
 
-USHORT runtime_command_misc_get_dx(void) { return (USHORT)g_active_call->call->cpu->edx; }
-USHORT runtime_command_misc_get_bx(void) { return (USHORT)g_active_call->call->cpu->ebx; }
-USHORT runtime_command_misc_get_cx(void) { return (USHORT)g_active_call->call->cpu->ecx; }
-USHORT runtime_command_misc_get_si(void) { return (USHORT)g_active_call->call->cpu->esi; }
-USHORT runtime_command_misc_get_ds(void) { return g_active_call->call->cpu->ds; }
-USHORT runtime_command_misc_get_es(void) { return g_active_call->call->cpu->es; }
-USHORT runtime_command_misc_get_ss(void) { return g_active_call->call->cpu->ss; }
-USHORT runtime_command_misc_get_bp(void) { return (USHORT)g_active_call->call->cpu->ebp; }
-USHORT runtime_command_misc_get_ax(void) { return (USHORT)g_active_call->call->cpu->eax; }
-USHORT runtime_command_misc_get_cs(void) { return g_active_call->call->cpu->cs; }
-USHORT runtime_command_misc_get_ip(void) { return (USHORT)g_active_call->call->cpu->eip; }
-UCHAR runtime_command_misc_get_al(void) { return (UCHAR)(g_active_call->call->cpu->eax & 0xffu); }
-UCHAR runtime_command_misc_get_ah(void) { return (UCHAR)((g_active_call->call->cpu->eax >> 8u) & 0xffu); }
-void runtime_command_misc_set_ax(USHORT value) { (void)set_ax(value); }
-void runtime_command_misc_set_al(USHORT value)
-{ runtime_command_misc_set_ax((USHORT)((runtime_command_misc_get_ax() & 0xff00u) | (value & 0xffu))); }
-void runtime_command_misc_set_cf(int value)
-{ (void)runtime_cpu_result_set_cf(g_active_call->call->result, value); }
-void runtime_command_misc_set_dx(USHORT value)
-{ (void)runtime_cpu_delta_set_gpr16(&g_active_call->call->result->cpu_delta, 2u, value); }
-void runtime_command_misc_set_bx(USHORT value)
-{ (void)runtime_cpu_delta_set_gpr16(&g_active_call->call->result->cpu_delta, 3u, value); }
-void runtime_command_misc_set_cx(USHORT value)
-{ (void)runtime_cpu_delta_set_gpr16(&g_active_call->call->result->cpu_delta, 1u, value); }
-void runtime_command_misc_set_ds(USHORT value)
-{ (void)runtime_cpu_delta_set_segment(&g_active_call->call->result->cpu_delta, 3u, value); }
-void runtime_command_misc_set_es(USHORT value)
-{ (void)runtime_cpu_delta_set_segment(&g_active_call->call->result->cpu_delta, 0u, value); }
-void runtime_command_misc_set_ip(USHORT value)
-{
-    /* The source body advances its staged CCPU IP. The outer Bochs resume is
-     * already represented by the fixed typed result set by this invocation. */
-    if (g_active_call != NULL)
-        ((runtime_cpu_state *)g_active_call->call->cpu)->eip = value;
-}
-void runtime_command_misc_sas_load(ULONG address, UCHAR *target)
-{
-    if (g_active_call == NULL || target == NULL || address >= 0x100000u ||
-        !g_active_call->call->guest_read(g_active_call->call->guest_state,
-            address, target, 1u)) {
-        if (target != NULL) *target = 0xffu;
-    }
-}
 BOOL runtime_command_misc_dispatch_source_command(ULONG service)
 {
     /* Retail cmddisp.c checks its table bound only in DBG builds. Preserve
      * the source dispatch table, but reject an unreadable/out-of-range staged
      * service at the modern checked-memory boundary before it can index it. */
     if (g_active_call == NULL || service >= 17u) {
-        if (g_active_call != NULL) runtime_command_misc_set_cf(1);
+        if (g_active_call != NULL) runtime_ccpu_set_cf(1);
         return FALSE;
     }
     g_active_call->call->service = service;
@@ -493,8 +442,8 @@ int runtime_command_misc_publish_handle(HANDLE handle)
             RUNTIME_HOST_HANDLE_BORROWED, &guest_handle, &error)) return 0;
     /* The original guest ABI is BX:CX. Preserve it as a fixed-width token,
      * never as a truncated host HANDLE. */
-    runtime_command_misc_set_cx((USHORT)guest_handle);
-    runtime_command_misc_set_bx((USHORT)(guest_handle >> 16u));
+    runtime_ccpu_set_cx((USHORT)guest_handle);
+    runtime_ccpu_set_bx((USHORT)(guest_handle >> 16u));
     return 1;
 }
 
@@ -674,6 +623,7 @@ static int runtime_command_misc_invoke_internal(runtime_command_misc_call *call,
     void (*body)(void))
 {
     runtime_command_misc_active_call active;
+    runtime_ccpu_frame_context frame;
     if (!runtime_command_misc_call_valid(call) || g_active_call != NULL ||
         call->boundary->fault_rip > UINT64_MAX - 4u || call->service >= 17u)
         return 0;
@@ -712,6 +662,19 @@ static int runtime_command_misc_invoke_internal(runtime_command_misc_call *call,
         return 0;
     active.call = call;
     g_active_call = &active;
+    memset(&frame, 0, sizeof(frame));
+    frame.magic = RUNTIME_CCPU_FRAME_CONTEXT_MAGIC;
+    frame.abi_version = RUNTIME_CCPU_FRAME_CONTEXT_VERSION;
+    frame.struct_bytes = sizeof(frame);
+    frame.cpu = (runtime_cpu_state *)call->cpu;
+    frame.result = call->result;
+    frame.guest_state = call->guest_state;
+    frame.guest_read = call->guest_read;
+    frame.guest_write = call->guest_write;
+    if (!runtime_ccpu_frame_context_begin(&frame)) {
+        g_active_call = NULL;
+        return 0;
+    }
     if (call->session != NULL) {
         pSCSInfo = &call->session->scs_info;
         pSCS_ToSync = &call->session->scs_info.SCS_ToSync;
@@ -815,6 +778,7 @@ int runtime_command_misc_invoke(runtime_command_misc_call *call)
     if (call == NULL || (call->session != NULL &&
         !opennt_vdm_api_bind_input(&call->session->input))) return 0;
     result = runtime_command_misc_invoke_internal(call, NULL);
+    runtime_ccpu_frame_context_end();
     if (call->session != NULL) opennt_vdm_api_unbind_input(&call->session->input);
     return result;
 }
@@ -826,6 +790,7 @@ int runtime_command_misc_invoke_body(runtime_command_misc_call *call,
     if (body == NULL || call == NULL || (call->session != NULL &&
         !opennt_vdm_api_bind_input(&call->session->input))) return 0;
     result = runtime_command_misc_invoke_internal(call, body);
+    runtime_ccpu_frame_context_end();
     if (call->session != NULL) opennt_vdm_api_unbind_input(&call->session->input);
     return result;
 }

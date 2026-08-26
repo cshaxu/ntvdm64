@@ -21,6 +21,7 @@
 #include "adapter-softpc/cpu_result.h"
 #include "adapter-softpc/cpu_state_abi.h"
 #include "adapter-softpc/exception_abi.h"
+#include "adapter-softpc/ccpu_frame_context.h"
 #include "host_handle_manager.h"
 
 typedef uint16_t USHORT;
@@ -260,30 +261,6 @@ void cmdInitConsole(void); void cmdExecComspec32(void); void cmdReturnExitCode(v
 void cmdGetConfigSys(void); void cmdGetAutoexecBat(void); void cmdGetKbdLayout(void);
 void cmdGetInitEnvironment(void); void cmdGetStartInfo(void);
 
-USHORT runtime_command_misc_get_dx(void);
-USHORT runtime_command_misc_get_bx(void);
-USHORT runtime_command_misc_get_cx(void);
-USHORT runtime_command_misc_get_si(void);
-USHORT runtime_command_misc_get_ds(void);
-USHORT runtime_command_misc_get_es(void);
-USHORT runtime_command_misc_get_ss(void);
-USHORT runtime_command_misc_get_bp(void);
-USHORT runtime_command_misc_get_ax(void);
-USHORT runtime_command_misc_get_cs(void);
-USHORT runtime_command_misc_get_ip(void);
-UCHAR runtime_command_misc_get_al(void);
-UCHAR runtime_command_misc_get_ah(void);
-void runtime_command_misc_set_ax(USHORT value);
-void runtime_command_misc_set_al(USHORT value);
-void runtime_command_misc_set_cf(int value);
-void runtime_command_misc_set_dx(USHORT value);
-void runtime_command_misc_set_bx(USHORT value);
-void runtime_command_misc_set_cx(USHORT value);
-void runtime_command_misc_set_ds(USHORT value);
-void runtime_command_misc_set_es(USHORT value);
-void runtime_command_misc_set_ip(USHORT value);
-void runtime_command_misc_sas_load(ULONG address, UCHAR *target);
-BOOL runtime_command_misc_dispatch_source_command(ULONG service);
 BOOL runtime_command_misc_dispatch_source_command(ULONG service);
 runtime_command_misc_session *runtime_command_misc_active_session(void);
 PREDIRCOMPLETE_INFO runtime_command_misc_redirection_from_guest(uint32_t token);
@@ -412,25 +389,25 @@ extern BOOL DontCheckDosBinaryType;
 extern BOOL IsFirstWOWCheckBinary;
 ULONG runtime_command_misc_redirection_token(PREDIRCOMPLETE_INFO info);
 
-#define getDX() runtime_command_misc_get_dx()
-#define getBX() runtime_command_misc_get_bx()
-#define getCX() runtime_command_misc_get_cx()
-#define getSI() runtime_command_misc_get_si()
-#define getDS() runtime_command_misc_get_ds()
-#define getES() runtime_command_misc_get_es()
-#define getSS() runtime_command_misc_get_ss()
-#define getBP() runtime_command_misc_get_bp()
-#define getAL() runtime_command_misc_get_al()
-#define getAH() runtime_command_misc_get_ah()
-#define getAX() runtime_command_misc_get_ax()
-#define setAX(value) runtime_command_misc_set_ax(value)
-#define setAL(value) runtime_command_misc_set_al(value)
-#define setCF(value) runtime_command_misc_set_cf(value)
-#define setDX(value) runtime_command_misc_set_dx(value)
-#define setBX(value) runtime_command_misc_set_bx(value)
-#define setCX(value) runtime_command_misc_set_cx(value)
-#define setDS(value) runtime_command_misc_set_ds(value)
-#define setES(value) runtime_command_misc_set_es(value)
+#define getDX() runtime_ccpu_get_dx()
+#define getBX() runtime_ccpu_get_bx()
+#define getCX() runtime_ccpu_get_cx()
+#define getSI() runtime_ccpu_get_si()
+#define getDS() runtime_ccpu_get_ds()
+#define getES() runtime_ccpu_get_es()
+#define getSS() runtime_ccpu_get_ss()
+#define getBP() runtime_ccpu_get_bp()
+#define getAL() runtime_ccpu_get_al()
+#define getAH() runtime_ccpu_get_ah()
+#define getAX() runtime_ccpu_get_ax()
+#define setAX(value) runtime_ccpu_set_ax(value)
+#define setAL(value) runtime_ccpu_set_al(value)
+#define setCF(value) runtime_ccpu_set_cf(value)
+#define setDX(value) runtime_ccpu_set_dx(value)
+#define setBX(value) runtime_ccpu_set_bx(value)
+#define setCX(value) runtime_ccpu_set_cx(value)
+#define setDS(value) runtime_ccpu_set_ds(value)
+#define setES(value) runtime_ccpu_set_es(value)
 #define GetVDMAddr(segment, offset) runtime_command_misc_get_vdm_addr(segment, offset)
 /* The production default is the public Win32 system directory.  The narrow
  * test override only supplies historical KB16 fixture media; cmdkeyb.c keeps

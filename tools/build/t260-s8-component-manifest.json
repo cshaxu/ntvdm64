@@ -192,6 +192,7 @@
     {
       "name": "adapter-softpc",
       "sources": [
+        "src/adapter-softpc/ccpu_frame_context.c",
         "src/adapter-softpc/a20_capability.cc",
         "src/adapter-softpc/bulk_result_transaction.c",
         "src/adapter-softpc/cpu_delta_abi.c",
@@ -452,6 +453,14 @@
       "platformLibraries": [
         "kernel32.lib"
       ]
+    },
+    {
+      "name": "t271-s3-ccpu-frame-context-fixture",
+      "source": "tests/adapter-softpc/t271_s3_ccpu_frame_context_fixture.c",
+      "libraries": [
+        "adapter-softpc"
+      ],
+      "platformLibraries": []
     },
     {
       "name": "t258-s1-guest-pointer-manager-fixture",
