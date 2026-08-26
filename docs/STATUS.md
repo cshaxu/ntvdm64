@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T272 S4** — M0 T271 remains closed by owner-directed
+**Active: M0 T272 S5** — M0 T271 remains closed by owner-directed
 exit-criterion revision; its audited residuals are recorded in its closure and
 the debt ledger, not misrepresented as completed mirror recovery.
 
@@ -28,25 +28,25 @@ cancellation, context-bearing LIFO teardown and bounded TLS bind/unbind;
 global cancellation and COMMAND input payload were not carried forward. Its
 focused lifecycle test passes under both MSVC x64 and Win32/x86 `/MT`.
 
-### M0 T272 S4 — Guest-memory lease contract
+### M0 T272 S5 — Broker contract and host-width matrix
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T272 S4`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Owner-approved neutral-runtime proposal; S3 compatibility object space is closed in `371be986`, so this preplanned S4 contract is now admitted. |
-| Objective | Recover a neutral, synchronous and checked guest-memory lease contract that permits later adapters to use copied guest bytes without retaining a native guest pointer. |
-| Scope | `src/session`, neutral lease tests, component README/register and supporting evidence. The contract accepts caller-owned checked read/write callbacks, address/span/access, epoch and explicit release/commit. |
-| Non-goals | No real-mode segment calculation, no Bochs object, no SoftPC/CCPU facade, no BOP/OpenNT provider, no asynchronous pointer retention, no host HANDLE exposure and no broker IPC. |
-| Verification | Reuse audit, read/write/copy/commit, overflow, invalid access, stale epoch/end, teardown, x64/x86 builds, production dependency scan, governance and `git diff --check`. |
-| Exit Criteria | A session-owned lease copies bytes only through checked callbacks; it enforces address/span/access and synchronous epoch lifetime; release commits only write-authorized bytes; termination invalidates all outstanding leases. |
-| Reference Baseline | [Foundation proposal](etc/operations/proposal-rebootstrap-neutral-runtime-foundation-001.md), S3 commit `371be986`, and the reference-only old guest-pointer manager. |
-| Files And ABI Surface | `src/session/guest_memory_lease.{c,h}`, session lease accessors, focused lease fixture and audit record. The ABI is copied callback/address/span/access/epoch data only. |
+| Identifier Mode | `M0 T272 S5`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner-approved neutral-runtime proposal; S4 checked lease closure is committed in `7aa78552`, so the final preplanned S5 is admitted. |
+| Objective | Define the versioned, fixed-width broker contract, stable cross-process identity and disconnect cleanup rules, and prove the neutral foundation under x86 and x64. |
+| Scope | `src/broker`, broker tests, the S5 audit record and status/README registration. A bounded in-memory registry verifies contract semantics only; no IPC transport is added. |
+| Non-goals | No named pipe/RPC server, no Win32 token query, no MVDM provider, no BOP, no guest pointer/HANDLE transfer and no multiple imported MVDM session claim. |
+| Verification | Fixed wire-size/value audit; registration/cross-user denial/disconnect fixture under MSVC x64 and x86 `/MT`; all S2--S5 focused tests, governance and `git diff --check`. |
+| Exit Criteria | Wire records contain only copied fixed-width values; IDs are stable/monotonic; a broker record is visible only to its authenticated user key and is removed on disconnect; both host architectures pass identical neutral behavior. |
+| Reference Baseline | [Foundation proposal](etc/operations/proposal-rebootstrap-neutral-runtime-foundation-001.md), S2--S4 closures and the absence of a reusable project-local broker implementation. |
+| Files And ABI Surface | `src/broker/wire.{c,h}`, `src/broker/broker.{c,h}`, focused fixture and audit record. No ABI conveys a pointer, HANDLE, local surrogate or guest address. |
 | Applicable Rules | Execution, architecture, coding, source policy, build hygiene and documentation governance rules. |
-| Expected Markers | No Bochs/OpenNT/BOP dependency, no retained pointer after end/release, and successful architecture-identical x86/x64 focused tests. |
-| Asset Needs | Existing session/mapping source, quarantined reference-only manager, MSVC x64/x86 and disposable `build/M0-T272-S4/` outputs. |
-| Reporting Requirements | Record original-reference disposition, retained copy/commit failure semantics, test results and deferred adapter ownership. |
-| Stop Conditions | Any file has ambiguous owner/provenance, an attempted reuse imports BOP/OpenNT/Bochs semantics into S1, or the new root topology would consume `src.old/` directly. |
-| Similar-Issue Sweep | Session mappings, prior pointer/handle registries, old CCPU/SAS facades, all new source includes and focused test inputs. |
+| Expected Markers | Version/magic/size validation, fixed copied user key, per-user denial, monotonic ID allocation and disconnect deletion. |
+| Asset Needs | New broker root, session foundation, MSVC x64/x86 and disposable `build/M0-T272-S5/` outputs. |
+| Reporting Requirements | Document the lack of historical broker reuse, fixed-width ABI rationale, transport deferral and complete x86/x64 test matrix. |
+| Stop Conditions | Any wire field needs a native pointer/HANDLE/local identity, any cross-user route bypasses key validation, or a transport/provider semantic enters the neutral package. |
+| Similar-Issue Sweep | Existing app/session process-global state, retained pipe code, mapping identities, all broker headers and all new fixture inputs. |
 | Original Owner Request | Continue the approved rebootstrap program with minimal non-mirror components, shared mapping implementation and no source/build/runtime dependency on `src.old/`. |
 
 The latest closed packet remains the technical baseline below.
