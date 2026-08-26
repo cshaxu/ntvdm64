@@ -5,7 +5,7 @@
 **Active: M0 T276 S12** — Begin W2 `softpc.new` package-boundary and
 composition disposition without enabling a historical machine body.
 
-The current intermission architecture is the nineteen-component MVDM package
+The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
 project interfaces, a cross-process broker, and a shared x86/x64 32-bit
 compatibility object space. The neutral, machine, source-supply and adapter
@@ -29,8 +29,8 @@ waves after the queue-head package/symbol tracker closes.
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T276 S12`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T276/S11 is closed: all 140 W0/W1 paths, 14 source-interface families, 2,270 lexical calls and three runtime-support binding handoffs are accounted. The approved runtime/support/tool separation leaves W2 as the next source-owner boundary. |
-| Objective | Classify all selected `softpc.new` paths by original package/subpackage role, executable ownership (Bochs replacement versus recoverable host control versus firmware/input/tool), original build evidence and reached interface family before any machine body enters a build. |
+| Admission And Approval | T276/S11 is closed: all 140 W0/W1 paths, 14 source-interface families, 2,270 lexical calls and three runtime-support binding handoffs are accounted. The approved runtime/support/tool/firmware separation leaves W2 as the next source-owner boundary. |
+| Objective | Classify all selected `softpc.new` paths by original package/subpackage role, executable ownership (Bochs replacement versus recoverable host control versus separately mirrored firmware/input/tool), original build evidence and reached interface family before any machine body enters a build. |
 | Non-goals | No `softpc.new` source move, source-body edit, CPU execution enablement, Bochs change, adapter ABI implementation, formal build edge, BOP behavior or guest execution. |
 | Reference Baseline | T276 S1/S2/S5/S6/S8/S10 ledgers, exact `softpc.new` mirror, W0/W1 closure, source policy and architecture rules. |
 | Files And ABI Surface | W2 per-file/subpackage disposition ledger and evidence, Status and documentation inventory. No runtime ABI changes. |
@@ -192,7 +192,8 @@ audits W2 `softpc.new` under the same source-first constraints.
 original-subpackage disposition. The baseline isolates 489 historical machine
 execution/device paths as Bochs-replacement exclusions, 59 `host/src` mixed
 control/device candidates, 156 `base/inc` machine declaration inputs, 58
-firmware/ROM/data inputs and separate debugger/tool/Unix/composition inputs.
+firmware/ROM/data inputs assigned to the separate future `opennt-mvdm-firmware`
+mirror, plus separate debugger/tool/Unix/composition inputs.
 This is a boundary ledger only: no original machine/host source, adapter ABI
 or build edge is enabled. See [T276 S12 SoftPC baseline](etc/operations/m0-t276-s12-softpc-disposition-baseline-001.md).
 
@@ -210,6 +211,14 @@ and 37 external-boundary candidates. This is a source-review ordering aid only,
 not an ABI or reachability claim. Complete monitor/session, SoftPC facade and
 Win32 host groups are the next audit order; unobserved auxiliaries remain
 non-enabled. See [T276 S12 interface-density baseline](etc/operations/m0-t276-s12-host-src-interface-density-baseline-001.md).
+
+**T276 S12 P4:** all 58 selected original `softpc.new/base/bios`, `bios`,
+`roms` and `data` paths are now assigned to the future
+`opennt-mvdm-firmware` mirror. The component is an immutable machine-input
+carrier only: no source is compiled or linked as host runtime, no parallel
+SoftPC machine is admitted, and only a future explicit `adapter-bochs`
+manifest can select an input. The regenerated 998-row S12 ledger and verifier
+record this owner boundary.
 
 ### M0 T275 S1 — Complete interface and reuse ledger
 

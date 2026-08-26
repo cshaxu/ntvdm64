@@ -32,10 +32,10 @@ function Get-SoftpcDisposition {
         return @('historical-machine-execution-or-device', 'opennt-mvdm-host', 'bochs-replacement-profile-excluded', 'CPU/memory/device execution ownership belongs to Bochs; retain exact original source as exclusion evidence')
     }
     if ($Path -match '^softpc\.new/base/bios/') {
-        return @('historical-machine-firmware', 'opennt-mvdm-host', 'adapter-bochs-firmware-review', 'firmware/machine source; later evaluate only as an adapter-bochs firmware input, never as a parallel machine implementation')
+        return @('historical-machine-firmware', 'opennt-mvdm-firmware', 'adapter-bochs-firmware-review', 'separate firmware mirror input; later evaluate only as an adapter-bochs manifest-selected input, never as a host runtime library or parallel machine implementation')
     }
     if ($Path -match '^softpc\.new/(bios|roms|data)/') {
-        return @('firmware-rom-or-machine-data', 'opennt-mvdm-host', 'adapter-bochs-firmware-review', 'machine firmware/ROM/data input; no automatic machine or host-runtime enablement')
+        return @('firmware-rom-or-machine-data', 'opennt-mvdm-firmware', 'adapter-bochs-firmware-review', 'separate firmware mirror input; no automatic machine or host-runtime enablement')
     }
     if ($Path -match '^softpc\.new/base/support/') {
         return @('historical-machine-support', 'opennt-mvdm-host', 'adapter-softpc-review', 'machine-facing helper set; review only through original SoftPC-shaped adapter boundary')

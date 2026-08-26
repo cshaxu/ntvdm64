@@ -8,7 +8,7 @@ recreating a private NT subsystem, or requiring installation-time host
 mutation. Public Win32 APIs and ordinary host resources remain valid integration
 mechanisms.
 
-The product has nineteen production source components. A source file has one
+The product has twenty production source components. A source file has one
 owner. Original mirrors preserve upstream package identity, adapters preserve
 historical interface shape while translating mechanics, and project components
 own composition, session lifetime and cross-process coordination.
@@ -31,6 +31,10 @@ own composition, session lifetime and cross-process coordination.
   including `vdmutils/forcedos`, `graftabl`, `pifedit` and `win` resources.
   Tools may be independently built but never enter the main `ntvdm.exe` link
   graph merely because their source is available.
+- `opennt-mvdm-firmware`: the canonical original MVDM firmware-input mirror:
+  selected `softpc.new/base/bios`, `softpc.new/bios`, `softpc.new/roms` and
+  `softpc.new/data` paths. It preserves original source, ROM and data inputs
+  but is neither a host-runtime library nor a second machine executor.
 - `opennt-platform-abi`: exact original declarations and contracts outside
   MVDM required to compile imported MVDM packages. It contains no replacement
   behavior.
@@ -117,6 +121,7 @@ opennt-mvdm-host -> session                      (neutral contract only)
 adapter-bop -> adapter-softpc                    (typed mechanics only)
 adapter-win32 -> broker client                   (only for brokered historical calls)
 opennt-mvdm-tools -> opennt-mvdm-support / opennt-platform-abi  (independent tool builds only)
+opennt-mvdm-firmware -> adapter-bochs             (manifest-selected machine input only)
 ```
 
 `session` never calls a component-specific provider. `adapter-bochs` alone
@@ -134,7 +139,9 @@ OpenNT mirror.
 `opennt-mvdm-support` has no automatic inbound runtime edge: a host package
 may use it only after the package/symbol tracker records the original consumer,
 exact interface shape and binding disposition. `opennt-mvdm-tools` has no
-inbound production-runtime edge at all.
+inbound production-runtime edge at all. `opennt-mvdm-firmware` has no host
+compile or link edge; `adapter-bochs` may consume only an explicitly admitted,
+manifest-selected immutable firmware input.
 
 ## Guest and host width model
 

@@ -10,10 +10,13 @@ file-level precedence. The selected file's source path/hash and the rejected
 alternative are recorded. DOS/WOW16 guest components also retain every
 selected original source, resource, intermediate and binary product, but none
 of their objects is a host link input.
-The selected non-guest/non-tool packages remain together in the canonical
-`opennt-mvdm-host` mirror; conceptual BOP, host, SoftPC and utility categories
-do not create parallel source roots. Exact declarations required from outside
-MVDM belong to `opennt-platform-abi`.
+Selected host-runtime packages remain together in the canonical
+`opennt-mvdm-host` mirror; conceptual BOP, host and SoftPC-control categories
+do not create parallel source roots. Independent historical tools belong to
+`opennt-mvdm-tools`, shared support carriers/libraries belong to
+`opennt-mvdm-support`, and selected `softpc.new` BIOS/ROM/data inputs belong
+to `opennt-mvdm-firmware`. Exact declarations required from outside MVDM belong
+to `opennt-platform-abi`.
 Bochs 2.6, from `O:\repos.external\bochs-2.6-compat\bochs-2.6`, is the
 approved third-party guest-machine backend, subject to the pinned-import and
 source-identity requirements in `design/CODING.md` and the adoption record.

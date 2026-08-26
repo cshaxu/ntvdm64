@@ -8,6 +8,7 @@ src/
   opennt-mvdm-host/
   opennt-mvdm-support/
   opennt-mvdm-tools/
+  opennt-mvdm-firmware/
   opennt-platform-abi/
   opennt-guest-dos/
   opennt-guest-wow16/
@@ -25,7 +26,7 @@ src/
   app/
 ```
 
-The seven original mirror roots preserve selected upstream-relative paths after
+The eight original mirror roots preserve selected upstream-relative paths after
 re-rooting and maintain component README exception registers. One source
 component may generate several libraries. Production roots contain production
 inputs only; tests, examples, reference copies and historical experiments stay
@@ -43,6 +44,11 @@ material and never a source, build, link or runtime input.
 - `opennt-mvdm-tools` contains selected standalone MVDM tools and their
   resources (`vdmutils`). It is a production mirror with optional independent
   tool builds, never a main-program library.
+- `opennt-mvdm-firmware` contains selected original MVDM firmware and machine
+  input paths (`softpc.new/base/bios`, `bios`, `roms`, and `data`). It is an
+  immutable mirror input carrier, never a host-runtime library or a second
+  machine implementation; only `adapter-bochs` may consume an admitted,
+  manifest-selected input.
 - `opennt-platform-abi` contains exact declarations outside MVDM required by
   those packages; it has no implementation.
 - `opennt-guest-dos` contains the complete selected local DOS carry.

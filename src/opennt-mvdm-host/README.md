@@ -5,8 +5,9 @@ T274 S5 recovered its original package topology, headers and static resources
 byte-identically; S6 then recovered every selected original provider body and
 remaining input without changing its contents. This root remains the canonical
 audit carrier only until the approved file-identity re-root moves support
-(`dirs`, `makefil0`, `inc`, `oemuni`, `suballoc`) and standalone tool
-(`vdmutils`) paths to their dedicated mirror components. It has no locally
+(`dirs`, `makefil0`, `inc`, `oemuni`, `suballoc`), standalone tool
+(`vdmutils`), and selected `softpc.new` firmware/ROM/data paths to their
+dedicated mirror components. It has no locally
 authored provider replacement.
 
 ## Provenance

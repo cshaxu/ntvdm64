@@ -29,8 +29,9 @@ The initial role counts are:
 - 156 shared `base/inc` machine declarations and eight `base/support` inputs.
   They remain original source and are reviewed only through
   `adapter-softpc`—not copied into an adapter.
-- 58 BIOS/ROM/data and base firmware paths. They are separate
-  `adapter-bochs` firmware-input questions, never a second machine executor.
+- 58 BIOS/ROM/data and base firmware paths. They are assigned to the separate
+  `opennt-mvdm-firmware` mirror and are `adapter-bochs` firmware-input
+  questions only, never a second machine executor or host runtime library.
 - 19 debugger/disassembler inputs, seven original build-tool inputs, two Unix
   port inputs, nine historical `obj.vdm` composition paths and two build
   control paths. Each is explicitly separated rather than being mistaken for

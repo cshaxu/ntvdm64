@@ -1,4 +1,4 @@
-# Proposal: MVDM runtime/support/tool physical re-root
+# Proposal: MVDM runtime/support/tool/firmware physical re-root
 
 ## Purpose
 
@@ -13,6 +13,9 @@ union is an audit carrier, not the final component layout.
   `oemuni`, and `suballoc` paths.
 - `opennt-mvdm-tools` receives exact `vdmutils` paths, including all original
   source, headers, resources and build descriptions.
+- `opennt-mvdm-firmware` receives exact `softpc.new/base/bios`,
+  `softpc.new/bios`, `softpc.new/roms` and `softpc.new/data` paths. These are
+  immutable machine-input mirrors, never host-runtime translation units.
 
 ## Required method
 
@@ -22,8 +25,9 @@ union is an audit carrier, not the final component layout.
    missing selected path.
 4. Update formal manifests/include inputs only to preserve source discovery;
    do not add a compile, archive or link edge.
-5. Verify `opennt-mvdm-tools` has no inbound app/host runtime edge and
-   `opennt-mvdm-support` has no automatic inbound link edge.
+5. Verify `opennt-mvdm-tools` has no inbound app/host runtime edge,
+   `opennt-mvdm-support` has no automatic inbound link edge, and
+   `opennt-mvdm-firmware` has no host compile/link edge.
 
 ## Non-goals
 

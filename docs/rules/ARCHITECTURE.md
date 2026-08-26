@@ -2,6 +2,7 @@
 
 1. The production source owners are exactly `bochs-core`,
    `opennt-mvdm-host`, `opennt-mvdm-support`, `opennt-mvdm-tools`,
+   `opennt-mvdm-firmware`,
    `opennt-platform-abi`, `opennt-guest-dos`,
    `opennt-guest-wow16`, `adapter-bochs`, `adapter-bop`, `adapter-softpc`,
    `adapter-win32`, `adapter-vdm-monitor`, `adapter-redir`, `adapter-wow`,
@@ -10,7 +11,10 @@
    MVDM support carriers/libraries belong to `opennt-mvdm-support`; independent
    historical tools belong to `opennt-mvdm-tools`. A tool is never a host
    runtime dependency merely because it is independently buildable.
-   `opennt-platform-abi` contains declarations only.
+   `opennt-mvdm-firmware` owns only selected original firmware/ROM/data
+   inputs; it is neither a host-runtime library nor a machine executor and is
+   consumable only by `adapter-bochs` through an admitted immutable-input
+   manifest. `opennt-platform-abi` contains declarations only.
 3. Bochs owns CPU, memory, firmware and PC-device semantics. `adapter-bochs`
    is its only production caller and contains only Bochs mechanics.
    `adapter-softpc` reaches the machine only through typed `adapter-bochs`
@@ -111,4 +115,5 @@
 28. `opennt-mvdm-support` may be linked only after the package/symbol tracker
     records its original consumer, exact interface shape, binding owner and
     x86/x64 disposition. `opennt-mvdm-tools` may never be linked into `app` or
-    an MVDM host runtime.
+    an MVDM host runtime. `opennt-mvdm-firmware` may not be compiled or linked
+    as a host provider; it can enter only as an `adapter-bochs`-selected input.

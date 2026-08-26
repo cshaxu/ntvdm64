@@ -2,7 +2,7 @@
 
 ## Decision
 
-Reconstruct `src/` into nineteen production components while preserving the non-invasive `ntvdm.exe` direct
+Reconstruct `src/` into twenty production components while preserving the non-invasive `ntvdm.exe` direct
 COM/EXE/BAT/PIF launch contract. Recovery is package-led, not trace-led:
 original source, same-shaped adapter, registered private overlay, then a
 last-resort authored exception.
@@ -59,6 +59,7 @@ src/
   opennt-mvdm-host/
   opennt-mvdm-support/
   opennt-mvdm-tools/
+  opennt-mvdm-firmware/
   opennt-platform-abi/
   opennt-guest-dos/
   opennt-guest-wow16/
@@ -100,6 +101,10 @@ Owner mapping:
 - `opennt-mvdm-tools`: original standalone utility products/resources under
   `vdmutils`, including `forcedos`, `graftabl`, `pifedit` and `win`; these may
   be independently built but never link into the main runtime;
+- `opennt-mvdm-firmware`: original machine firmware/input packages under
+  `softpc.new/base/bios`, `softpc.new/bios`, `softpc.new/roms` and
+  `softpc.new/data`; retained as immutable selected inputs, not host runtime
+  code or a second machine implementation;
 - `opennt-platform-abi`: exact required declarations outside MVDM;
 - `opennt-guest-dos`: the already-established repository-local DOS/V86 and guest
   DPMI mirror, recovered directly from the existing guest mirror without a
@@ -179,7 +184,7 @@ or by trace hit.
 
 ## Exit criteria
 
-- `src/` contains exactly the nineteen declared roots; no transitional or
+- `src/` contains exactly the twenty declared roots; no transitional or
   stale component root is a production input.
 - Every selected original file has path/hash/provenance and a package-scope
   OpenNT/OpenNT-4.5 disposition.
