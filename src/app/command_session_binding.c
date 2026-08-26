@@ -1,5 +1,6 @@
-#include "command_runtime_session.h"
+#include "command_session_binding.h"
 
+#include "app/startup_composition.h"
 #include "opennt-bop/command/opennt_pif_composition.h"
 #include "opennt-bop/ingress/command_native_session.h"
 
@@ -32,28 +33,28 @@ static int configure_startup_config_inputs(const char *application)
     return 1;
 }
 
-void runtime_command_runtime_session_reset(void)
+void app_command_session_reset(void)
 {
     if (runtime.bound != 0u) runtime_command_native_session_unbind(&runtime);
     memset(&runtime, 0, sizeof(runtime));
 }
 
-int runtime_command_runtime_session_bind(void)
+int app_command_session_bind(void)
 {
-    runtime_command_runtime_session_reset();
+    app_command_session_reset();
     if (!runtime_command_native_session_initialize(&runtime) ||
         !runtime_command_native_session_bind(&runtime)) {
-        runtime_command_runtime_session_reset();
+        app_command_session_reset();
         return 0;
     }
     return 1;
 }
 
-int runtime_command_runtime_session_bind_from_startup(const char *application,
+int app_command_session_bind_inputs(const char *application,
     const char *tail, uint16_t drive, uint16_t code_page,
     const char *bootstrap_command)
 {
-    runtime_command_runtime_session_reset();
+    app_command_session_reset();
     if (!runtime_command_native_session_initialize(&runtime) ||
         application == NULL || tail == NULL || bootstrap_command == NULL ||
         !runtime_command_misc_session_set_command_source(&runtime.direct,
@@ -62,8 +63,23 @@ int runtime_command_runtime_session_bind_from_startup(const char *application,
             bootstrap_command) ||
         !configure_startup_config_inputs(application) ||
         !runtime_command_native_session_bind(&runtime)) {
-        runtime_command_runtime_session_reset();
+        app_command_session_reset();
         return 0;
     }
     return 1;
+}
+
+int app_command_session_bind_from_startup(void)
+{
+    char application[MAX_PATH + 1u];
+    char tail[128u];
+    char bootstrap_command[64u];
+    uint16_t drive, code_page;
+    return runtime_dem_startup_copy_command_source(application,
+            (uint32_t)sizeof(application), tail, (uint32_t)sizeof(tail),
+            &drive, &code_page) &&
+        runtime_dem_startup_copy_bootstrap_command(bootstrap_command,
+            (uint32_t)sizeof(bootstrap_command)) &&
+        app_command_session_bind_inputs(application, tail,
+            drive, code_page, bootstrap_command);
 }

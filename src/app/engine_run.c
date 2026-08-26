@@ -2,7 +2,7 @@
 #include "machine_engine.h"
 #include "opennt-bop/ingress/dem_runtime_session.h"
 #include "app/startup_composition.h"
-#include "opennt-bop/ingress/command_runtime_session.h"
+#include "app/command_session_binding.h"
 #include "bop_composition.h"
 #include "adapter-softpc/guest_pointer_manager.h"
 #include "adapter-win32/facade/opennt_error_dialog_facade.h"
@@ -66,8 +66,8 @@ int runtime_engine_run(const struct runtime_engine_request *request,
        Bind the Direct OpenNT DEM session before any machine stage exists;
        its checked-RAM callbacks can succeed only while that stage is active. */
     if (!runtime_dem_runtime_session_bind() ||
-        !runtime_dem_startup_bind_command_runtime_session()) {
-        runtime_command_runtime_session_reset();
+        !app_command_session_bind_from_startup()) {
+        app_command_session_reset();
         runtime_dem_runtime_session_reset();
         runtime_opennt_direct_access_reset_thread();
         runtime_dem_startup_reset();
@@ -78,7 +78,7 @@ int runtime_engine_run(const struct runtime_engine_request *request,
     }
     if (!runtime_dem_startup_prepare_machine_stage_request(
             &machine_stage)) {
-        runtime_command_runtime_session_reset();
+        app_command_session_reset();
         runtime_dem_runtime_session_reset();
         runtime_opennt_direct_access_reset_thread();
         runtime_dem_startup_reset();
@@ -91,7 +91,7 @@ int runtime_engine_run(const struct runtime_engine_request *request,
     machine_stage.reserved_memory_base = request->reserved_memory_base;
     machine_stage.reserved_memory_bytes = request->reserved_memory_bytes;
     if (!runtime_dem_startup_prepare_machine_stage_entry(&machine_entry)) {
-        runtime_command_runtime_session_reset();
+        app_command_session_reset();
         runtime_dem_runtime_session_reset();
         runtime_opennt_direct_access_reset_thread();
         runtime_dem_startup_reset();
@@ -105,7 +105,7 @@ int runtime_engine_run(const struct runtime_engine_request *request,
     machine_execution.instruction_tick_budget = request->instruction_tick_budget;
     if (!runtime_machine_engine_run(&machine_stage, &machine_entry,
             &machine_execution, &machine_result)) {
-        runtime_command_runtime_session_reset();
+        app_command_session_reset();
         runtime_dem_runtime_session_reset();
         runtime_dem_startup_reset();
         app_session_reset(&session);
@@ -118,7 +118,7 @@ int runtime_engine_run(const struct runtime_engine_request *request,
     if (machine_result.execution_status ==
         RUNTIME_MACHINE_STAGE_EXECUTION_CONTROLLED_STOP)
         ordinary_terminal = runtime_dem_startup_copy_ordinary_terminal();
-    runtime_command_runtime_session_reset();
+    app_command_session_reset();
     runtime_dem_runtime_session_reset();
     runtime_opennt_direct_access_reset_thread();
     runtime_dem_startup_reset();

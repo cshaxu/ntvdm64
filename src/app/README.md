@@ -20,6 +20,11 @@ and machine-stage assembly. It supplies copied launch values to the temporary
 OpenNT provider session through declared calls; it does not interpret BOP
 selectors or services.
 
+`command_session_binding` is the app-only startup binding for the recovered
+COMMAND provider.  It copies the admitted launch declaration and PIF-derived
+CONFIG/AUTOEXEC inputs before binding the provider session; OpenNT source
+dispatch and guest service semantics remain in `opennt-bop`.
+
 It may compose `opennt-guest`, `opennt-bop`, `opennt-host`, `adapter-bop`,
 `adapter-win32` and `adapter-softpc`, but does not implement their semantics. Its final executable
 target is `ntvdm64`; no component may import `app`.

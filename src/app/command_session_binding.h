@@ -1,14 +1,19 @@
-#ifndef RUNTIME_BOP_COMMAND_RUNTIME_SESSION_H
-#define RUNTIME_BOP_COMMAND_RUNTIME_SESSION_H
+#ifndef APP_COMMAND_SESSION_BINDING_H
+#define APP_COMMAND_SESSION_BINDING_H
 
 #include <stdint.h>
 
-int runtime_command_runtime_session_bind(void);
+int app_command_session_bind(void);
 /* Native engine composition binds the same session after copying the already
  * admitted launch declaration from the startup composition. */
-int runtime_command_runtime_session_bind_from_startup(const char *application,
+int app_command_session_bind_inputs(const char *application,
     const char *tail, uint16_t drive, uint16_t code_page,
     const char *bootstrap_command);
-void runtime_command_runtime_session_reset(void);
+void app_command_session_reset(void);
+
+/* App-only final composition: copy the admitted launch declaration and bind
+ * it to the recovered COMMAND provider session.  It does not decode a BOP or
+ * alter guest state. */
+int app_command_session_bind_from_startup(void);
 
 #endif

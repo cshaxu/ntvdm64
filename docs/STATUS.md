@@ -156,6 +156,12 @@ registered private overlay behind the sole mirror boundary; no invalid
 `opennt-host` to COMMAND dependency was introduced.  The formal PIF parser
 fixture passes. See [S3 P18 evidence](etc/evidence/m0-t271-s3-p18-command-pif-owner-and-overlay-isolation-001.md).
 
+**S3 P19:** app-only COMMAND startup/session binding has left
+`opennt-bop/ingress` for `app/command_session_binding`; it now has app-owned
+names and is compiled into the app library.  Original COMMAND source entry,
+table and provider ownership remain unchanged. Formal native-session, PIF and
+final-app links pass. See [S3 P19 evidence](etc/evidence/m0-t271-s3-p19-command-app-session-binding-extraction-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

@@ -2,7 +2,6 @@
 
 #include "adapter-softpc/spckbd_handoff_shim.h"
 #include "opennt-bop/dem/opennt_demmisc_compat.h"
-#include "opennt-bop/ingress/command_runtime_session.h"
 #include "byob_image.h"
 #include "byob_launch_plan.h"
 #include "byob_profile.h"
@@ -183,21 +182,6 @@ int runtime_dem_startup_copy_bootstrap_command(char *command_path,
     if (bytes > command_path_capacity) return 0;
     memcpy(command_path, runtime.bootstrap_command_path, bytes);
     return 1;
-}
-
-int runtime_dem_startup_bind_command_runtime_session(void)
-{
-    char application[MAX_PATH + 1u];
-    char tail[128u];
-    char bootstrap_command[64u];
-    uint16_t drive, code_page;
-    return runtime_dem_startup_copy_command_source(application,
-            (uint32_t)sizeof(application), tail, (uint32_t)sizeof(tail),
-            &drive, &code_page) &&
-        runtime_dem_startup_copy_bootstrap_command(bootstrap_command,
-            (uint32_t)sizeof(bootstrap_command)) &&
-        runtime_command_runtime_session_bind_from_startup(application, tail,
-            drive, code_page, bootstrap_command);
 }
 
 int runtime_dem_startup_copy_command_source(char *application,
