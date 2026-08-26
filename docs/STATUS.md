@@ -270,6 +270,21 @@ build/profile and owner prerequisite. No source or adapter is enabled.
 checks, rejects omissions/duplicates and records the W3 package-wave handoff;
 see the [host/src completion baseline](etc/operations/m0-t276-s12-host-src-completion-baseline-001.md).
 
+**T276 S13 P1:** all 40 original `dos` paths now have one package-led
+provisional disposition: 27 literal `SOURCES` translation units (16 DEM and
+11 COMMAND), five declarations, four build descriptions, one `dirs` metadata
+file and one historical test. DEM and COMMAND remain intact source-owner
+packages; no trace-selected BOP, source body or build edge is enabled. See the
+[DOS package disposition baseline](etc/operations/m0-t276-s13-dos-package-disposition-baseline-001.md).
+
+**T276 S13 P2:** the retained DOS source reaches eight named boundary families:
+BOP transport, SoftPC/SAS guest state, public Win32/NTDLL capability,
+session-owned state/identity, Redirector/pipe, VDD, OEM/NLS support and
+BIOS-style raw media/IOCTL. Every family has an existing named owner or an
+explicit Bochs-machine profile gate. The audit records later package order as
+DEM foundation/provider first, then COMMAND on its declared session and
+Redirector prerequisites; no provider is enabled.
+
 ### M0 T275 S1 — Complete interface and reuse ledger
 
 | Field | Record |
