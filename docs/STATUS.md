@@ -245,6 +245,13 @@ error and wait paths retain their original interface contracts with named
 public-binding/session gates. No source or adapter is enabled; see the
 [P7 Win32/NTDLL capability baseline](etc/operations/m0-t276-s12-win32-capability-interface-baseline-001.md).
 
+**T276 S12 P8:** all eighteen mixed device-bridge source files now have
+device-family dispositions. Historical CGA/EGA/VGA, FDC/DMA/IRQ, speaker/PPI
+and timer/PIC bodies are explicit Bochs-replacement exclusions; presentation,
+input, serial/printer, media and resources retain only named public endpoint
+or product-owner prerequisites. No generic device adapter, source body or
+build edge is enabled; see the [P8 device-bridge baseline](etc/operations/m0-t276-s12-device-bridge-interface-baseline-001.md).
+
 ### M0 T275 S1 — Complete interface and reuse ledger
 
 | Field | Record |
