@@ -2,21 +2,26 @@
 
 ## Current Work
 
-**Active: M0 T275 S2** — Complete the missing-adapter component inventory and
-freeze each specialist owner boundary before recovering any adapter ABI or
-altering any mirror source.
+**No active M/T/S packet.** M0 T275 closed after the adapter boundary inventory.
+The queue head is the MVDM package dependency and interface-closure tracker;
+no provider body or adapter ABI is active before that candidate is admitted.
 
 The current intermission architecture is the seventeen-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
 project interfaces, a cross-process broker, and a shared x86/x64 32-bit
-compatibility object space. Its former single candidate has been divided into
-five dependency-closed packages. The first two packages are closed and the
-third is now active; see the
+compatibility object space. The neutral, machine, source-supply and adapter
+inventory prerequisites are closed; package-led recovery begins only after the
+queue-head tracker is admitted. See the
 [rebootstrap program roadmap](etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md).
 
 The completed source-supply package establishes exact source availability, not
 host compilation, linking, provider enablement or guest execution. Its
 authoritative closure is [M0 T274 closure](history/m0-t274-closure-20260826.md).
+
+M0 T275 is closed as an adapter-boundary inventory. Its closure record is
+[M0 T275 closure](history/m0-t275-closure-20260826.md); its former adapter
+implementation subtasks are withdrawn and re-enter only through owner-package
+waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
@@ -105,8 +110,14 @@ inventory closes. See the [S1 closure evidence](etc/operations/m0-t275-s1-adapte
 reproducible disposition and all 61 implementation candidates are linked to
 one of the 11 original-caller interface surfaces. The matrix has no duplicate
 path, empty interface ID or empty disposition; the exact host mirror has zero
-direct Bochs reference. S2 may recover only `ADAPTER-IF-001`, the frozen
-selector-blind transport surface. See the [S1 closure evidence](etc/operations/m0-t275-s1-adapter-reuse-ledger-closure-001.md).
+direct Bochs reference. S2 may establish only the missing-interface inventory
+and its component boundaries; adapter-source recovery begins only after that
+inventory closes. See the [S1 closure evidence](etc/operations/m0-t275-s1-adapter-reuse-ledger-closure-001.md).
+
+**S2 closure:** nine adapter owner boundaries and the twelve-family
+missing-interface ledger are recorded. The detailed package/symbol tracker is
+the required successor; no adapter ABI or mirror source body was enabled. See
+the [S2 inventory](etc/operations/m0-t275-s2-specialist-adapter-inventory-001.md).
 
 **S1 P2:** the original-caller ledger now freezes 11 interface dispositions:
 one BOP transport, five SoftPC/CCPU/SAS surfaces, three Win32/NTDLL surfaces,

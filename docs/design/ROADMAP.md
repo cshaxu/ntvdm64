@@ -9,33 +9,40 @@ as integrated verification.
 
 ## Phase 0 — MVDM package rebootstrap
 
-Phase 0 is five dependency-closed candidate T packages, not one implementation
-packet and not seventeen component-only packets:
-
-1. repository and neutral runtime foundation;
-2. Bochs machine foundation;
-3. canonical OpenNT source supply;
-4. historical interface adapter recovery; and
-5. dual-architecture product composition.
+Phase 0 closes the neutral runtime, Bochs machine foundation, canonical OpenNT
+source supply and global adapter-boundary inventory. It establishes sources and
+interface owners, not provider execution. The next task is a package/symbol
+closure tracker, not a first adapter implementation.
 
 The program authority is the [rebootstrap program roadmap](../etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md).
 Each candidate has its own proposal and can be admitted only after its stated
 predecessor closes.
 
-**Gate:** all five candidate exit criteria pass. This phase establishes source,
-interface and product-build closure, not general guest execution.
+**Gate:** every selected MVDM root has provenance and every known external
+family has a named adapter owner. This phase establishes source and interface
+inventory, not product-build closure or general guest execution.
 
-## Phase 1 — Low-dependency original owner packages
+## Phase 1 — Package dependency closure and low-dependency originals
 
-Select complete original MVDM packages whose machine, monitor, Win32 and
-broker prerequisites are already closed. Compose their original translation
-units through same-shaped adapters, run family-local positive/negative tests
-and delete no historical failure semantics.
+Expand the package/symbol tracker for all 23 selected host roots, then compose
+the low-dependency `dirs`, `makefil0`, `inc`, `oemuni`, `suballoc` and
+`vdmutils` originals. No
+package starts adapter implementation until its entire reached interface set is
+owned and topologically ordered.
 
-**Gate:** each selected package is code/ABI complete in both host graphs and
-its unavailable branches are explicit.
+**Gate:** tracker rows have complete source/ABI/failure disposition and the
+support closure is code/ABI complete in both host graphs.
 
-## Phase 2 — Protected mode, Redirector, WOW and VDD dependencies
+## Phase 2 — Original host control, DEM, COMMAND and XMS
+
+Recover the reached `softpc.new/host` control plane, DEM, COMMAND local
+lifecycle and XMS packages in tracker order. Original code stays intact except
+for recorded binding changes to same-shaped adapters.
+
+**Gate:** each complete owner package passes its local x86/x64 compile, link
+and positive/negative matrix; unresolved broker or machine rows remain explicit.
+
+## Phase 3 — Monitor, protected mode, Redirector, WOW and VDD dependencies
 
 Recover DPMI, Redirector, WOW16 and VDD/debugger packages in dependency order.
 Enable Bochs features only for reached original callers. Extend the broker only
@@ -45,14 +52,14 @@ CSRSS internals.
 **Gate:** each complete owner package passes its declared local matrix before
 one integrated guest trace is used to observe behavior change.
 
-## Phase 3 — COMMAND and cross-family lifecycle
+## Phase 4 — Brokered COMMAND and cross-family lifecycle
 
 Complete original COMMAND child/return, DOS EXEC parent restoration, brokered
 `GetNextVDMCommand`, console/event and WOW lifecycle after their owners are
 available. Preserve one active imported MVDM session per process unless a
 separate reentrancy audit admits in-process multiple contexts.
 
-## Phase 4 — Integrated verification and packaging
+## Phase 5 — Integrated verification and packaging
 
 Reconcile all BOP/dependency trackers, run original and source-built guest
 image matrices, classify remaining defects by owner, and package x86/x64 host

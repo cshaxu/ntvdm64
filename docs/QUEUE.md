@@ -6,25 +6,25 @@ when the owner selects it and admits it to [STATUS.md](STATUS.md). The active
 package and its single active S are recorded only in Status; S/P planning does
 not belong here.
 
-The ordering below is dependency-driven, using the live
-[BOP tracker](etc/bop-list.md), not BOP selector or historical component
-alphabetical order. A candidate must use its `BOP-…` and
-`BOP-DEPENDENCY-…` rows as the implementation inventory. A newly discovered
-reachable OpenNT dependency must be added to that tracker before it can enter
-an admitted S.
+The ordering below is dependency-driven, using the live BOP tracker together
+with the package/symbol interface-closure tracker. A candidate must use both
+its BOP rows and its source-package dependency rows as implementation
+inventory. A newly discovered reachable OpenNT dependency must be added to the
+appropriate tracker before it can enter an admitted S.
 
 | Order | Candidate T package | Boundary | Admission evidence |
 | --- | --- | --- | --- |
-| 1 | Bochs machine foundation | Recover the source-audited `bochs-core` and its sole mechanical caller `adapter-bochs`, then prove minimal machine lifecycle on both host architectures without OpenNT/BOP/DOS semantics. | [Bochs foundation proposal](etc/operations/proposal-rebootstrap-bochs-machine-foundation-001.md): mirror, lifecycle and boundary closure. |
-| 2 | Canonical OpenNT source supply | Select the package-scope OpenNT/OpenNT-4.5 **non-guest** union; directly recover the already-complete local DOS/WOW16 mirrors without reimporting them; establish `opennt-platform-abi` and the canonical non-guest/non-tool `opennt-mvdm-host` supply. | [Source-supply proposal](etc/operations/proposal-rebootstrap-opennt-source-supply-001.md): provenance, mirror and host/guest isolation closure. |
-| 3 | Historical interface adapter recovery | Recover same-shaped BOP, SoftPC, Win32 and VDM-monitor interface families plus the minimum cooperative broker implementation for selected original callers. | [Adapter recovery proposal](etc/operations/proposal-rebootstrap-historical-interface-adapter-recovery-001.md): original-caller ledger, deterministic failure and IPC boundaries. |
-| 4 | Dual-architecture product composition | Generate formal x86/x64 Ninja graphs, link admitted original packages, compose `ntvdm.exe` and audit all thirteen production roots, guest isolation and `src.old` exclusion. | [Composition proposal](etc/operations/proposal-rebootstrap-dual-architecture-product-composition-001.md): build/link/CLI and whole-tree closure. |
-| 5 | OpenNT DPMI protected-mode owner-package recovery | Recover one declared DPMI profile only after the rebootstrap selects its original package and all protected-mode, LDT/IDT, exception/IRET and memory prerequisites have a whole-package source/ABI/failure closure. | [DPMI proposal](etc/operations/proposal-opennt-dpmi-owner-package-completion-001.md): whole-profile source/ABI/failure closure. |
-| 6 | OpenNT WOW16 owner-package recovery | Recover one bounded non-GUI WOW16 profile only after the rebootstrap imports its guest package and the needed NE guest and DPMI/COMMAND contracts exist. | [WOW16 proposal](etc/operations/proposal-opennt-wow16-owner-package-completion-001.md): owner-specific host/guest composition plan. |
-| 7 | OpenNT VDD, debugger and top-level event/console recovery | Recover debugger/VDD, console-input and top-level notification routes on top of the completed machine event/device basis; `59` is already closed and is not reopened. | [Debugger/VDD proposal](etc/operations/proposal-opennt-debugger-vdd-top-level-owner-package-completion-001.md): product-visible endpoint audit and whole-provider regression. |
-| 8 | COMMAND `cmdExec32` full-capability composition closure | Consume completed Redirector, WOW16, console/event, machine and guest EXEC contracts to restore the remaining original `cmdExec32` broker/lifecycle paths. It may not recreate CSR/BaseSrv/CCPU. | [COMMAND composition proposal](etc/operations/proposal-opennt-command-cmdexec32-full-capability-closure-001.md): source-first broker and cross-owner lifecycle ledger. |
-| 9 | BOP cross-family completion audit and integrated verification | After the selected owner packages are code/ABI complete, reconcile the entire tracker, provider disposition and source-recovery ledger; run declared cross-family integration profiles and classify residual gaps by original owner. This task does not create trace-led leaf patches. | [Cross-family audit proposal](etc/operations/proposal-bop-cross-family-completion-audit-001.md): cardinality/owner/route reconciliation, complete-package regression matrix and native integration evidence. |
-| 10 | Complete DOS/WOW16 guest-binary source-build closure | Establish a reproducible original-source build route for every staged DOS and WOW16 guest artifact, while retaining original product binaries as packaging inputs. | [DOS/WOW16 source-build proposal](etc/operations/proposal-dos-wow16-complete-source-build-closure-001.md): per-artifact original source/build/tool audit and reproducibility matrix. |
+| 1 | MVDM package dependency and interface-closure tracker | Audit all 23 selected non-guest MVDM roots to the reached-symbol level; assign every external dependency a unique adapter/internal owner and produce a dependency-topological import plan. | [Tracker proposal](etc/operations/proposal-mvdm-package-interface-closure-tracker-001.md): package/symbol/ABI/failure closure before implementation. |
+| 2 | Low-dependency original MVDM support packages | Recover original `dirs`/`makefil0` build control plus the `inc`, `oemuni`, `suballoc` and `vdmutils` support closure on both architectures. | [Wave 1](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-1-low-dependency-support-packages). |
+| 3 | Original host control plane and DEM | Recover reached `softpc.new/host` control units and the complete DEM owner package through tracker-approved BOP, SoftPC and Win32 bindings. | [Wave 2](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-2-host-control-plane-and-dem). |
+| 4 | Original COMMAND local lifecycle | Recover the local original COMMAND package; defer only tracker-proven brokered cross-process paths. | [Wave 3](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-3-command-local-lifecycle). |
+| 5 | Original XMS owner package | Recover `xms.486` through the source-shaped A20/RAM/IVT/UMB mechanical seam. | [Wave 4](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-4-xms). |
+| 6 | Original VDM monitor substrate | Recover `sim16`, `sim32`, `v86` and `ieuvddex` through the complete same-shaped monitor adapter. | [Wave 5](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-5-vdm-monitor-substrate). |
+| 7 | Original DPMI owner packages | Recover `dpmi` and `dpmi32` after their complete protected-machine dependency profile closes. | [Wave 6](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-6-dpmi). |
+| 8 | Original Redirector and brokered COMMAND extensions | Recover `vdmredir` and only its source-proven brokered COMMAND dependencies. | [Wave 7](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-7-redirector-and-brokered-command-extensions). |
+| 9 | Original WOW owner packages | Recover `wow32` and `fax` after their monitor, COMMAND and Redirector dependencies close. | [Wave 8](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-8-wow). |
+| 10 | Original VDD and debugger packages | Recover `vdd`, `bde`, `dbg`, `vdmdbg` and `vdmexts` after their machine/monitor dependencies close. | [Wave 9](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-9-vdd-and-debugger-products). |
+| 11 | Dual-architecture product composition and integrated verification | Link all admitted original package closures, audit the tracker and run declared host/guest integration profiles. | [Wave 10](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-10-product-composition-and-integrated-verification). |
 
 The external-compatibility overview remains a supporting dependency map; it is
 not itself an admissible implementation task.  Each candidate above admits

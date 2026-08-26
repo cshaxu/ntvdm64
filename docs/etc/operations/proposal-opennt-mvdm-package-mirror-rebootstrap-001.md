@@ -154,32 +154,21 @@ its owner, width model and original caller contract pass review.
 
 ## Candidate task sequence
 
-This document is the program-level design authority. It is not itself an
-admissible T packet. The queue carries the following five bounded candidates
-in order:
+The neutral runtime, Bochs foundation, canonical source supply and historical
+adapter-boundary inventory are closed program prerequisites. The next candidate
+is the [MVDM package dependency and interface-closure tracker](proposal-mvdm-package-interface-closure-tracker-001.md).
+It must close before an original host provider or adapter ABI is enabled.
 
-1. [Repository and neutral runtime foundation](proposal-rebootstrap-neutral-runtime-foundation-001.md)
-   establishes the owner/provenance manifest, `session`, the shared
-   mapping-manager implementation, broker wire contract and host-width tests.
-2. [Bochs machine foundation](proposal-rebootstrap-bochs-machine-foundation-001.md)
-   establishes the `bochs-core` / `adapter-bochs` mechanical closure and the
-   smallest app-owned machine shell.
-3. [Canonical OpenNT source supply](proposal-rebootstrap-opennt-source-supply-001.md)
-imports the platform ABI and selected non-guest MVDM host package union,
-while directly recovering—not reimporting—the established local DOS/WOW16
-   guest mirrors, without claiming provider execution.
-4. [Historical interface adapter recovery](proposal-rebootstrap-historical-interface-adapter-recovery-001.md)
-   recovers same-shaped BOP, SoftPC, Win32 and VDM-monitor interfaces plus the
-   minimum cooperative broker implementation.
-5. [Dual-architecture product composition](proposal-rebootstrap-dual-architecture-product-composition-001.md)
-   creates both formal Ninja graphs, links admitted original packages, wires
-   the CLI and performs the complete production-boundary audit.
+Thereafter the queue admits complete owner packages in the dependency order
+defined by the [MVDM recovery-wave plan](mvdm-package-recovery-wave-plan-001.md):
+low-dependency support; host control/DEM; COMMAND; XMS; monitor; DPMI;
+Redirector/brokered COMMAND; WOW; VDD/debugger; then product composition.
 
 Each candidate receives its numeric T identifier only when admitted. A later
 candidate cannot silently pull an earlier candidate's unfinished work into its
-scope. The five documents divide this former eight-S outline by independently
-verifiable dependency closure; they do not split the seventeen components into
-separate component-only tasks.
+scope. This structure imports original source first and grows an adapter only
+for a pre-recorded missing interface; it does not split work by component name
+or by trace hit.
 
 ## Exit criteria
 

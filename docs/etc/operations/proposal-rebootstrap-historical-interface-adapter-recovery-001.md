@@ -2,8 +2,9 @@
 
 ## Purpose
 
-Recover the minimum same-shaped historical interface families that let selected
-original MVDM packages compose against the new machine and supported Windows.
+This proposal is closed as the historical interface-family and specialist
+adapter inventory. It does not authorize adapter implementation: package-led
+recovery is governed by the successor package tracker and recovery-wave plan.
 
 ## Prerequisites
 
@@ -29,7 +30,7 @@ machine-facing counterpart, but preserves the one-way boundary: only
 `adapter-bochs` calls `bochs-core`; no recovered adapter imports Bochs internals
 directly.
 
-## Proposed subtasks
+## Completed subtasks
 
 1. **S1 — Complete interface and reuse ledger.** Freeze original caller,
    declaration, calling convention, layout, host dependency, disposition and
@@ -41,37 +42,20 @@ directly.
    `adapter-redir`, `adapter-wow`, `adapter-vdd` and `adapter-debugger` as
    separate source-owner boundaries; do not change an OpenNT mirror merely to
    avoid an absent interface, and do not create a generic compatibility root.
-3. **S3 — BOP transport.** Recover selector-blind copied frame ingress,
-   checked transfer and typed completion with no selector/service interpretation.
-4. **S4 — SoftPC facade.** Recover reached SoftPC/CCPU/SAS calls through typed
-   `adapter-bochs` mechanics and session mapping leases.
-5. **S5 — Win32 facade.** Recover reached unavailable Win32/NTDLL calls with
-   public APIs, retaining the original observable failure result where modern
-   Windows cannot offer the historical operation.
-6. **S6 — VDM-monitor facade.** Recover the complete same-shaped
-   `NtVdmControl`/`VDM_TIB`/V86-event/handler disposition family with bounded
-   session/thread binding.
-7. **S7 — Specialist adapter contracts.** Recover the bounded, source-shaped
-   contracts for Redirector, WOW, VDD and debugger adapters. Each retains its
-   own original package boundary; unavailable private NT4 behavior is explicit
-   and no adapter implements an alternate provider.
-8. **S8 — Cooperative broker.** Implement versioned registration, identity,
-   queue, notification, lease and disconnect cleanup using public IPC only.
-9. **S9 — Local composition matrix.** Link selected original package callers
-   against adapters and run interface-family positive/negative tests.
+The former S3--S9 implementation outline is superseded. Each named boundary is
+now recovered only alongside its original MVDM owner package, after
+[`proposal-mvdm-package-interface-closure-tracker-001.md`](proposal-mvdm-package-interface-closure-tracker-001.md)
+closes and according to
+[`mvdm-package-recovery-wave-plan-001.md`](mvdm-package-recovery-wave-plan-001.md).
 
-## Exit criteria
+## Closure criteria
 
-- Every enabled adapter entry cites an original caller and has a deterministic
-  success or unavailable/failure result.
-- `opennt-mvdm-host` does not call Bochs directly; `adapter-softpc` never
-  includes a Bochs type.
-- Broker IPC transports no local surrogate, native resource, guest pointer or
-  Bochs object.
-- Unsupported kernel/CSRSS behavior is explicit rather than emulated by a
-  hidden replacement product shell.
+- Every known historical external family has one named adapter owner and
+  original caller/declaration evidence.
+- No mirror source is modified to bypass an unassigned missing interface.
+- No generic compatibility root is introduced.
 
 ## Non-goals
 
-This task does not complete all MVDM providers, claim full child-process/DOS
-lifecycle, or recreate CSRSS/BaseSrv/CCPU.
+This closed task does not complete all MVDM providers, claim full
+child-process/DOS lifecycle, or recreate CSRSS/BaseSrv/CCPU.
