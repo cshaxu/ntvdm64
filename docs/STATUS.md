@@ -2,9 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T280 S12** — M0 T280 now observes the direct original DEM object
-surface after the closed NT I/O facade. It is Ordinary Mode with single-person
-dual-role review; no selector/BOP route is enabled by this source-form packet.
+**Active: M0 T280 S13** — M0 T280 now recovers the shared original NT/RTL
+object surface identified by S12. It is Ordinary Mode with single-person
+dual-role review; no selector/BOP route is enabled by this adapter packet.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -25,25 +25,32 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S12 — original DEM object-surface observation
+### M0 T280 S13 — DEM shared NT/RTL object surface
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T280 S12`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S11 closed its same-shaped NT I/O facade on x86/x64; this is the bounded direct-source observation it enables. |
-| Objective | Compile and classify the three original reached DEM consumers as independent x86/x64 object surfaces. |
-| Non-goals | No DEM provider link, BOP route, guest trace, source-body rewrite, raw guest pointer, mapping-manager change or private kernel call. |
-| Reference Baseline | T280 S10/S11 records, exact original DEM sources and closed adapter-win32 facade. |
-| Files And ABI Surface | Disposable object observations, source/adapter owner ledger, Status and documentation inventory only. |
+| Identifier Mode | `M0 T280 S13`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S12 closed its whole three-source x86/x64 observation and assigns the next shared historical ABI surface to adapter-win32. |
+| Objective | Recover one source-shaped NT status/object/device and reached RTL declaration/binding surface for original DEM source. |
+| Non-goals | No DEM provider link, BOP route, guest trace, source-body rewrite, new mapping manager or pointer cast. |
+| Reference Baseline | S12 ledger/evidence, exact OpenNT headers, existing adapter-win32 and session mapping design. |
+| Files And ABI Surface | Adapter-win32 NT/RTL declarations/bindings and focused x86/x64 checks; no DEM object link. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | x86/x64 MSVC `/Zs` or isolated object observations, whole three-source review, source/owner classification and governance checks. |
-| Expected Markers | Exact original source form reaches the closed facade; any remaining blocker has one source-proven adapter owner. |
+| Verification | Exact-source declaration comparison, focused x86/x64 syntax/ABI checks, mapping isolation review and governance checks. |
+| Expected Markers | One shared source-shaped adapter package; no raw persisted host pointer and no guest mapping in adapter-win32. |
 | Asset Needs | Exact OpenNT `ntioapi.h`, original DEM sources, current modern SDK/ntdll declarations and existing adapter/session boundaries. |
-| Reporting Requirements | Per-source x86/x64 result, first remaining shared dependency, original source evidence, future owner and mapping rule. |
-| Stop Conditions | A body is linked, a trace selects a leaf repair, a host pointer is mapped, or an error is patched without complete owner classification. |
-| Exit Criteria | All three sources have x86/x64 observations and every remaining blocker has a source-proven owner/disposition. |
+| Reporting Requirements | Original declaration path/form, retained call/failure contract, x86/x64 evidence and mapping disposition. |
+| Stop Conditions | A body is linked, a trace selects a leaf repair, a host pointer is cast into a 32-bit field, or a source form is inferred. |
+| Exit Criteria | Shared source-shaped surface passes focused x86/x64 checks and remaining `demsrch` identity work has a unique session/adapter disposition. |
 | Original Owner Request | “单人双角色模式执行队列任务”。 |
 | Similar-Issue Sweep | Directory and volume queries, object/symlink paths, status mapping, handle lifetime, x86/x64 layout, public/ntdll availability and guest-memory isolation. |
+
+### Closed packet reference — M0 T280 S12
+
+**S12 closure:** all three original reached DEM bodies have x86/x64 object
+observations; shared NT/RTL declarations and the distinct find-list identity
+boundary are classified without enabling a provider. See
+[S12 closure](history/m0-t280-s12-closure-20260826.md).
 
 ### Closed packet reference — M0 T280 S11
 
