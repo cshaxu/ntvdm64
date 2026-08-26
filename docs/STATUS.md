@@ -78,6 +78,13 @@ declaration/library carriers, 31 `tool-only` historical products and two
 `not-host-runtime` build-control inputs. This is a final planning conclusion,
 not a source enablement claim; see the [W0/W1 final baseline](etc/operations/m0-t276-s25-w0-w1-final-disposition-baseline-001.md).
 
+**S25 P2:** 558 conclusively classified `softpc.new` paths now have final
+dispositions: 489 Bochs-replaced executors and four profile/build-control
+inputs are `not-host-runtime`, 58 ROM/BIOS/data inputs are `firmware-only`,
+and seven historical utilities are `tool-only`. The host control, monitor,
+declaration and app-composition subdomains remain deliberately unresolved;
+see the [conclusive SoftPC baseline](etc/operations/m0-t276-s25-softpc-conclusive-final-disposition-baseline-001.md).
+
 **S20 closure:** all 25 selected `dpmi32` paths have reproducible non-enabled
 dispositions. Sixteen selected x86 bodies form one host-provider package; all
 guest addresses are constrained to the unique session mapping-manager lease or
