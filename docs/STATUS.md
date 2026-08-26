@@ -192,6 +192,12 @@ with it linked from `app.lib`. See [S4 P4 evidence](etc/evidence/m0-t271-s4-p4-x
 `ingress` sources. They are now individually grouped by source owner; none is
 silently moved into selector-blind `adapter-bop`. See [S5 P1 classification](etc/evidence/m0-t271-s5-p1-opennt-bop-production-classification-001.md).
 
+**S5 P2:** the 13 exceptional overlay bodies each have exactly one matching
+`opennt-bop` mirror include boundary; no production component outside that
+mirror root includes the private overlay.  This is structural isolation only:
+the 22 non-mirror ingress inputs remain active owner-disposition work.  See
+[S5 P2 audit](etc/evidence/m0-t271-s5-p2-overlay-consumer-and-boundary-audit-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored
