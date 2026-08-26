@@ -68,6 +68,14 @@ only neutral copied `session_input` state; it does not claim the unavailable
 NT4 BaseSrv/CSR broker.  Formal direct, dynamic-environment, native-session
 and local-child regressions pass.  See [S3 P6 evidence](etc/evidence/m0-t271-s3-p6-vdm-api-facade-recovery-001.md).
 
+**S3 P7:** reached original host entries `nt_std_handle_notification`,
+`nt_block_event_thread`, `nt_resume_event_thread` and
+`cmdPushExitInConsoleBuffer` now come from source-shaped `nt_msscs.c` /
+`nt_event.c` subsets in `opennt-host`, rather than COMMAND composition.
+Their original state ordering is active; VDD/display/BIOS/console-process
+product-shell tails are explicitly deferred and never reported as success.
+See [S3 P7 evidence](etc/evidence/m0-t271-s3-p7-command-host-event-recovery-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

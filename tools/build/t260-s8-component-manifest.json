@@ -267,7 +267,9 @@
         "src/opennt-host/vdmredir/vrnmpipe.c",
         "src/opennt-host/vdmredir/vrinit.c",
         "src/opennt-host/vdmredir/vrputil.c",
-        "src/opennt-host/softpc.new/host/src/nt_error.c"
+        "src/opennt-host/softpc.new/host/src/nt_error.c",
+        "src/opennt-host/softpc.new/host/src/nt_msscs.c",
+        "src/opennt-host/softpc.new/host/src/nt_event.c"
       ]
     },
     {

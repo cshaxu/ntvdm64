@@ -29,7 +29,6 @@ ULONG DosSessionId;
 USHORT nDrives;
 PIF_DATA pfdata;
 UINT VdmExitCode;
-ULONG CntrlHandlerState;
 
 #pragma warning(push)
 #pragma warning(disable: 4324) /* jmp_buf has platform-required alignment; this private stack record never crosses an ABI. */
@@ -110,6 +109,7 @@ void runtime_command_misc_session_initialize(runtime_command_misc_session *sessi
     session->abi_version = RUNTIME_COMMAND_MISC_SESSION_VERSION;
     session->struct_bytes = sizeof(*session);
     session_input_initialize(&session->input);
+    opennt_host_event_reset();
     session->handles = runtime_host_handle_manager_session();
     (void)runtime_host_handle_manager_initialize(session->handles);
 }
@@ -174,37 +174,6 @@ int runtime_command_misc_session_set_command_environment(
     return session_input_set_environment(&session->input, environment, bytes);
 }
 
-void cmdPushExitInConsoleBuffer(void)
-{
-    /* No host-console injection is admitted. Preserve a visible session
-     * notification instead of silently claiming that the historical console
-     * buffer operation happened. */
-    runtime_command_misc_session *session = runtime_command_misc_active_session();
-    if (session != NULL) session->local_child_console_notification = 1u;
-}
-
-void nt_std_handle_notification(BOOL enabled)
-{
-    runtime_command_misc_session *session = runtime_command_misc_active_session();
-    /* OpenNT nt_msscs.c stores stdoutRedirected before its optional X86GFX
-     * fullscreen work.  The latter is adapter-bochs display ownership; retain the
-     * former as session state so COMMAND's original call ordering remains
-     * observable without changing the CLI process console. */
-    if (session != NULL) {
-        session->local_child_stdout_redirected = enabled ? 1u : 0u;
-        ++session->local_child_std_handle_notification_count;
-    }
-}
-void nt_block_event_thread(int block)
-{
-    runtime_command_misc_session *session = runtime_command_misc_active_session();
-    if (session != NULL) session->local_child_events_blocked = block ? 2u : 1u;
-}
-void nt_resume_event_thread(void)
-{
-    runtime_command_misc_session *session = runtime_command_misc_active_session();
-    if (session != NULL) session->local_child_events_blocked = 0u;
-}
 void GetWowKernelCmdLine(void)
 {
     /* DIVERGENCE (T236 S5): the directly imported cmdGetNextCmd preserves

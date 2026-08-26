@@ -71,6 +71,7 @@ int main(void)
     runtime_cpu_state cpu;
     runtime_cpu_result result;
     runtime_command_misc_session session;
+    opennt_host_event_state host_events;
     uint32_t *standard_handles;
     uint32_t standard_token;
     DWORD error, bytes;
@@ -90,6 +91,11 @@ int main(void)
     event.fault_rip = 0x500u;
     runtime_cpu_state_initialize(&cpu, RUNTIME_CPU_EXECUTION_REAL);
     runtime_command_misc_session_initialize(&session);
+    cmdPushExitInConsoleBuffer();
+    opennt_host_event_snapshot(&host_events);
+    if (host_events.console_exit_requested != 1u ||
+        (CntrlHandlerState & CNTRL_PUSHEXIT) == 0u) return 57;
+    opennt_host_event_reset();
     host_stdin = GetStdHandle(STD_INPUT_HANDLE);
     host_stdout = GetStdHandle(STD_OUTPUT_HANDLE);
     host_stderr = GetStdHandle(STD_ERROR_HANDLE);
@@ -120,9 +126,10 @@ int main(void)
     if (session.local_child_state != RUNTIME_COMMAND_LOCAL_CHILD_COMPLETED) return 16;
     if (session.local_child_generation != 1u) return 17;
     if (session.local_child_exit_code != 37u) return 18;
-    if (session.local_child_events_blocked != 0u) return 19;
-    if (session.local_child_stdout_redirected != 1u ||
-        session.local_child_std_handle_notification_count == 0u) return 23;
+    opennt_host_event_snapshot(&host_events);
+    if (host_events.event_blocked != 0u) return 19;
+    if (host_events.stdout_redirected != 1u ||
+        host_events.std_handle_notification_count == 0u) return 23;
     if (session.input.reentry_count != 0u || session.input.reentry_peak != 1u)
         return 20;
     if (GetStdHandle(STD_INPUT_HANDLE) != host_stdin ||
@@ -152,9 +159,13 @@ int main(void)
         result.cpu_delta.gpr16_values[0] != 41u ||
         session.local_child_state != RUNTIME_COMMAND_LOCAL_CHILD_COMPLETED ||
         session.local_child_generation != 2u ||
-        session.local_child_exit_code != 41u ||
-        session.local_child_stdout_redirected != 0u ||
-        session.local_child_std_handle_notification_count < 2u) {
+        session.local_child_exit_code != 41u) {
+        SetEnvironmentVariableA("COMSPEC", old_comspec);
+        return 2;
+    }
+    opennt_host_event_snapshot(&host_events);
+    if (host_events.stdout_redirected != 0u ||
+        host_events.std_handle_notification_count < 2u) {
         SetEnvironmentVariableA("COMSPEC", old_comspec);
         return 2;
     }
@@ -168,10 +179,11 @@ int main(void)
         (result.cpu_delta.gpr16_values[0] & 0xffu) !=
             (ERROR_INVALID_HANDLE & 0xffu) ||
         session.local_child_state != RUNTIME_COMMAND_LOCAL_CHILD_FAILED ||
-        session.local_child_error != ERROR_INVALID_HANDLE ||
-        session.local_child_events_blocked != 0u) {
+        session.local_child_error != ERROR_INVALID_HANDLE) {
         return 3;
     }
+    opennt_host_event_snapshot(&host_events);
+    if (host_events.event_blocked != 0u) return 3;
 
     security.nLength = sizeof(security);
     security.lpSecurityDescriptor = NULL;
@@ -188,7 +200,8 @@ int main(void)
     if ((result.eflags_values & RUNTIME_CPU_RESULT_EFLAGS_CF) != 0u) return 52;
     if (session.local_child_state != RUNTIME_COMMAND_LOCAL_CHILD_COMPLETED) return 53;
     if (session.local_child_generation != 4u) return 54;
-    if (session.local_child_events_blocked != 0u) return 55;
+    opennt_host_event_snapshot(&host_events);
+    if (host_events.event_blocked != 0u) return 55;
     if (!runtime_host_handle_manager_release(session.handles, standard_token,
             &error)) return 56;
     CloseHandle(pipe_write);

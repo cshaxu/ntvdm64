@@ -26,8 +26,10 @@ admitted for composition. The T263/S5 bulk preservation admission was
 withdrawn by
 `docs/etc/evidence/m0-t263-s7-unconnected-host-package-withdrawal-001.md`.
 COMMAND BOP/session composition is intentionally owned by `opennt-bop`, not
-this component.  The former generic `capability/` staging directory is not a
-product category.
+this component. Reached historical host APIs from `nt_msscs.c` and
+`nt_event.c` are nevertheless owned here, retaining their original names for
+the imported COMMAND callers. The former generic `capability/` staging
+directory is not a product category.
 Every source-derived provider remains in its owner group, with each necessary
 departure from an identified OpenNT definition marked in code as
 `DIVERGENCE:` and registered below.
@@ -50,6 +52,8 @@ departure from an identified OpenNT definition marked in code as
 | `HOST-DIV-024` | `vrnmpipe.h` selects DLL-export declarations under `VDMREDIR_DLL`. | The recovered provider is statically linked, rather than loaded as the historical VDMREDIR DLL. | Define the original selector only in the static named-pipe provider/consumer translation units; retain the imported header byte-for-byte and keep project binding declarations outside it. | `inc/vrnmpipe.h`, `vdmredir/vrnmpipe.c` |
 | `HOST-DIV-025` | `vrnmpipe.c` obtains a small set of path/allocation/assertion manifests from broad NT4 CCPU/VDM product headers. | Those headers would import unconnected guest-pointer, asynchronous Redirector and CCPU contracts into a synchronous host provider. | Retain only the exact pure manifests used by the reached named-pipe bodies, locally and visibly, rather than supplying empty product APIs. | `vdmredir/vrnmpipe.c` |
 | `HOST-DIV-028` | `vrnmpipe.c` contains named-pipe state/transact/call/wait services and asynchronous I/O, interrupt, termination and cancellation machinery. | The current host provider has only the independent synchronous open/read/write/path/list route; the omitted services require separate Redirector/VDD lifecycle admission. | Retain the complete synchronous block and leave omitted BOP entry disposition to `opennt-bop`; do not provide local success stubs. | `vdmredir/vrnmpipe.c` |
+| `HOST-DIV-029` | `nt_msscs.c` records stdout redirection, then optionally changes an X86GFX mouse buffer. | The display and mouse-buffer lifecycle is not admitted in the standalone host closure. | Keep the same global assignment and record the reached non-graphical notification state; defer the display tail. | `softpc.new/host/src/nt_msscs.c`, `opennt_host_event_state.h` |
+| `HOST-DIV-030` | `nt_event.c` blocks/resumes the historical event thread and requests console-group exit. | Its VDD hooks, BIOS keyboard access, timer/device control, console window messaging and process exit depend on separately owned product shells. | Preserve original names and reached state ordering; expose an explicit host-state record rather than silently claiming the deferred console/process actions. The added state body is private overlay code. | `softpc.new/host/src/nt_event.c`, `softpc.new/host/inc/nt_event.h`, `opennt_host_event_state.h`, `../opennt-host-overlay/softpc.new/host/src/nt_event_state.c` |
 
 The exact OpenNT `nt_pif.c` parser was transferred to
 `opennt-bop/softpc.new/host/src/` by T269/S3 because its only current consumer
@@ -67,3 +71,4 @@ now live in `opennt-host-overlay`, which has no external consumer.
 | `HOST-DIV-012`, `HOST-DIV-013`, `HOST-DIV-014`, `HOST-DIV-026`, `HOST-DIV-027` | `../opennt-host-overlay/softpc.new/host/src/{nt_error.c,nt_error_bindings.h}` | `softpc.new/host/src/nt_error.c` |
 | `HOST-DIV-017`, `HOST-DIV-022` | `../opennt-host-overlay/vdmredir/{vrinit.c,vrinit_bindings.h}` | `vdmredir/vrinit.c` |
 | `HOST-DIV-015`, `HOST-DIV-016`, `HOST-DIV-020`, `HOST-DIV-023`, `HOST-DIV-024`, `HOST-DIV-025`, `HOST-DIV-028` | `../opennt-host-overlay/vdmredir/{vrnmpipe.c,vrnmpipe_product_seams.h}` | `vdmredir/vrnmpipe.c` |
+| `HOST-DIV-030` | `../opennt-host-overlay/softpc.new/host/src/nt_event_state.c` | `softpc.new/host/src/nt_event.c` |

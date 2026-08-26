@@ -5,6 +5,8 @@
 #include "adapter-win32/facade/opennt_command_oem_facade.h"
 #include "adapter-win32/facade/opennt_vdm_api_facade.h"
 #include "adapter-softpc/softpc_printer_openclose_shim.h"
+#include "opennt-host/opennt_host_event_state.h"
+#include "opennt-host/softpc.new/host/inc/nt_event.h"
 #include "session/session_input.h"
 
 /* Compatibility surface for the directly imported OpenNT file
@@ -64,7 +66,6 @@ typedef struct _RedirComplete_Info {
 } REDIRCOMPLETE_INFO, *PREDIRCOMPLETE_INFO;
 /* Exact OpenNT vdmapi.h and cmdsvc.h records used by cmdGetNextCmd.  Pointer
  * members remain host-private; guest access is always copied by this shim. */
-#define CNTRL_SHELLCOUNT         0x0000ffffu
 #ifndef CREATE_FORCEDOS
 #define CREATE_FORCEDOS          0x00000200u
 #endif
@@ -217,13 +218,6 @@ typedef struct runtime_command_misc_session {
     uint32_t local_child_generation;
     uint32_t local_child_exit_code;
     uint32_t local_child_error;
-    uint32_t local_child_events_blocked;
-    uint32_t local_child_console_notification;
-    /* OpenNT's nt_std_handle_notification records redirection state for the
-     * host console/display layer.  Retain its non-graphical state per session;
-     * no host-console mutation is implied. */
-    uint32_t local_child_stdout_redirected;
-    uint32_t local_child_std_handle_notification_count;
     uint32_t create_process_attempted;
     uint32_t create_process_last_error;
     uint32_t create_process_environment_bytes;
@@ -241,7 +235,7 @@ enum runtime_command_local_child_state {
 };
 
 #define RUNTIME_COMMAND_MISC_SESSION_MAGIC 0x42584353u
-#define RUNTIME_COMMAND_MISC_SESSION_VERSION 4u
+#define RUNTIME_COMMAND_MISC_SESSION_VERSION 5u
 
 void runtime_command_misc_session_initialize(runtime_command_misc_session *session);
 void runtime_command_misc_session_dispose(runtime_command_misc_session *session);
@@ -331,7 +325,6 @@ BOOL cmdPipeFileEOF(HANDLE file);
 void RcErrorDialogBox(UINT error, PVOID first, PVOID second);
 int RcMessageBox(UINT error, PVOID first, PVOID second, UINT flags);
 void TerminateVDM(void);
-void nt_std_handle_notification(BOOL enabled);
 extern BOOL fSoftpcRedirection;
 #define ASSERT(value) ((void)(value))
 LPVOID runtime_command_misc_get_vdm_addr(USHORT segment, USHORT offset);
@@ -354,10 +347,7 @@ void cmdCheckForPIF(PVDMINFO vdm_info);
 USHORT cmdMapCodePage(ULONG code_page);
 PREDIRCOMPLETE_INFO cmdCheckStandardHandles(PVDMINFO vdm_info,
     USHORT UNALIGNED *standard_handles);
-void cmdPushExitInConsoleBuffer(void);
 void demCloseAllPSPRecords(void);
-void nt_block_event_thread(int block);
-void nt_resume_event_thread(void);
 VOID cmdInitConsole(VOID);
 BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR name);
 #define GetConsoleKeyboardLayoutName GetConsoleKeyboardLayoutNameA
@@ -444,7 +434,6 @@ extern CHAR cmdHomeDirectory[];
 extern CHAR chDefaultDrive;
 extern DWORD dwExitCode32;
 extern BOOL fSoftpcRedirectionOnShellOut;
-extern ULONG CntrlHandlerState;
 extern PIF_DATA pfdata;
 extern UINT VdmExitCode;
 extern BOOL DontCheckDosBinaryType;
