@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T276 S5** — Separate lexical call candidates with a selected MVDM
-definition from source-proven external-boundary candidates before owner review.
+**Active: M0 T276 S6** — Group external-boundary candidates by original
+declaration family before assigning any final adapter or package owner.
 
 The current intermission architecture is the seventeen-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,23 +24,23 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S5 — selected-definition and external-boundary baseline
+### M0 T276 S6 — original declaration-family worklist
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T276 S5`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | The owner approved tracker-led recovery. T276/S1–S4 establish exact mirror, build, declaration and caller provenance, but no owner or recovery decision. |
-| Objective | Extract lexical selected-source function-definition names, then classify each uniquely declared C/C++ call candidate as locally defined by a selected MVDM source or as an external-boundary candidate requiring later source-level owner review. |
+| Identifier Mode | `M0 T276 S6`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T276/S1–S5 establish exact mirror, build, declaration, caller and external-boundary candidate provenance; no final owner or recovery decision exists yet. |
+| Objective | Aggregate all S5 external-boundary candidates by original declaration and declaration-path family; identify the prospective adapter/package review family without treating it as a final owner decision. |
 | Non-goals | No provider/adaptor implementation, source-body edit, enabled build edge, ABI/owner conclusion, BOP behavior, Bochs change or guest execution. |
-| Reference Baseline | T276 S1–S4 ledgers, 23 exact package mirrors and source policy. |
-| Files And ABI Surface | Definition and external-boundary candidate ledgers, reproducible extractor/evidence, Status and documentation inventory. No runtime ABI changes. |
+| Reference Baseline | T276 S1–S5 ledgers, 23 exact package mirrors and source policy. |
+| Files And ABI Surface | Boundary-family worklist, reproducible grouping evidence, Status and documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Account for all C/C++ translation units and all S4 unique-name call candidates; preserve original file/line evidence; reject duplicate definition/boundary IDs; distinguish selected-definition names from unresolved external-boundary candidates. |
-| Expected Markers | Definition and boundary candidates are `observed`; final external reachability, ABI, owner, adapter, composition and x86/x64 decisions remain `unreviewed`. |
-| Asset Needs | `opennt-mvdm-host` byte-exact mirror, T276 source/declaration/call ledgers and PowerShell text-processing facilities. |
-| Reporting Requirements | Exact definition/boundary counts, false-positive limitations, ambiguous/non-selected declarations and S6 handoff to source-level owner review. |
-| Stop Conditions | A C/C++ source cannot map to a verified file row, generated evidence would infer a linked provider or adapter owner, or source modification would be needed. |
-| Exit Criteria | Reproducible definition and external-boundary candidate ledgers exist; every S4 unique-name candidate has an explicit S5 disposition; evidence and review are committed/pushed. |
+| Verification | Account for all 2,546 S5 external-boundary candidates; preserve callers, declaration source and grouping rule; reject duplicate declaration worklist identities; retain all final owner fields as `unreviewed`. |
+| Expected Markers | Declaration families are `observed`; final reachability, ABI, owner, adapter, composition and x86/x64 decisions remain `unreviewed`. |
+| Asset Needs | T276 S3 declaration and S5 boundary ledgers plus source-policy adapter taxonomy. |
+| Reporting Requirements | Exact declaration/family/caller counts, unclassified paths, grouping limits and S7 handoff to original declaration/caller semantic review. |
+| Stop Conditions | A boundary cannot map to original declaration evidence, a grouping requires an invented interface, or a final owner would be inferred from pathname alone. |
+| Exit Criteria | One reproducible worklist row per reached external declaration candidate exists with all callers and a non-final review family; evidence and review are committed/pushed. |
 | Original Owner Request | “好的 开始审计任务”。 |
 | Similar-Issue Sweep | Definition provenance, C/C++ versus assembly forms, unique declaration candidates, source-call aggregation, duplicate IDs and accidental provider/owner claims. |
 
