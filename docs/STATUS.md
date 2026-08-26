@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T279 S1** — M0 T279 recovers the original low-dependency MVDM
+**Active: M0 T279 S2** — M0 T279 recovers the original low-dependency MVDM
 support-library closure after the physical re-root. It is Ordinary Mode with
 single-person dual-role review; no MVDM provider/BOP route is enabled by S1.
 
@@ -24,6 +24,24 @@ implementation subtasks are withdrawn and re-enter only through owner-package
 waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
+
+### M0 T279 S2 — same-shaped Win32/RTL binding closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T279 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S1 source-form interface closure is complete; recover only the named same-shaped adapter-win32 bindings before support-library build admission. |
+| Objective | Supply the exact reached NT4 RTL/PEB/TEB declaration and implementation surface for byte-exact `oemuni/file.c` and `oemuni/process.c`, using public modern Win32 APIs while keeping native pointers private. |
+| Non-goals | No edit to original support-library bodies, provider/BOP route, XMS operation, raw host-pointer boundary, legacy `CreateProcessOem` body currently excluded by its original `#if 0`, or guest trace. |
+| Reference Baseline | T279/S1 71-row source-form interface ledger and source-form audit. |
+| Files And ABI Surface | `adapter-win32` compatibility headers and implementation; an explicit exception record for x64-only pointer representation seams. |
+| Verification | All reached bindings have source-shaped declarations; original bodies compile against them without source edits; x64 pointer-derived output is never narrowed through `DWORD`. |
+| Stop Conditions | A binding requires a private NT kernel/CSRSS API, a native pointer crosses guest/session ABI, an original body is modified without mirror approval, or an adapter reimplements OEM provider logic. |
+| Exit Criteria | The smallest audited same-shaped facade exists, its PEB/TEB/RTL state is local to the adapter, and the source/build-island admission record distinguishes any required overlay from direct source compilation. |
+| Original Owner Request | “单人双角色模式执行队列任务”。 |
+| Similar-Issue Sweep | Counted-string allocation/free pairs, thread-local static Unicode buffer, current-directory snapshot/lock, OEM/ANSI conversion error mapping, and `SearchPathOem` x64 pointer reconstruction. |
+
+### Closed packet reference — M0 T279 S1
 
 ### M0 T279 S1 — original support-library ABI/build-form closure
 
