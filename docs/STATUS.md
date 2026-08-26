@@ -2,11 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T277 S4** — T277 expands T276's final file-level expected
+**Active: M0 T277 S5** — T277 expands T276's final file-level expected
 integration dispositions into a source-proven package, symbol, ABI and build
 closure before any MVDM provider body is enabled. It is an ordinary,
 single-person dual-role audit packet; no source body, adapter ABI, build edge
-or guest execution is admitted by S4.
+or guest execution is admitted by S5.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -27,25 +27,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T277 S4 — DOS DEM/COMMAND source-form family audit
+### M0 T277 S5 — SoftPC host-control source-form family audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T277 S4`, Ordinary Mode with single-person dual-role implementation and review. |
+| Identifier Mode | `M0 T277 S5`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Owner admitted the queue-head objective: “**MVDM package dependency and interface-closure tracker** 单人模式实施”. |
-| Objective | Audit all 73 future-host call correlations whose original caller is the complete `dos` DEM/COMMAND package; assign source-proven host, session, monitor, BOP, machine and CRT call families without enabling a provider body. |
+| Objective | Audit all 197 future-host call correlations whose original caller is `softpc.new/host/src`; assign source-proven host-control, BOP, session, monitor, Win32 and Bochs-replacement families without enabling a provider body. |
 | Non-goals | No MVDM provider/adapter implementation, source-body edit, generated build edge, Ninja run, guest execution, or inferred direct-link conclusion. |
-| Reference Baseline | T277 S2 worklist (`e1ca986c`), closed S3 machine-family evidence (`fb620352`), original selected DOS/DEM/COMMAND forms, T276 evidence, architecture and source-policy authorities. |
-| Files And ABI Surface | S4 plan, generated DOS family ledger and verifier, Status and documentation inventory. No runtime ABI is changed. |
+| Reference Baseline | T277 S2 worklist (`e1ca986c`), closed S3 machine evidence (`fb620352`), closed S4 DOS evidence (`7ab5eb97`), original `softpc.new/host/src` forms, T276 evidence, architecture and source-policy authorities. |
+| Files And ABI Surface | S5 plan, generated SoftPC host-control family ledger and verifier, Status and documentation inventory. No runtime ABI is changed. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Every `dos` work item is in one source-form family with original caller/provider citations, same-shaped owner and failure disposition. The verifier rejects missing/duplicate work, a private host pointer across a boundary, an invented direct-link conclusion, or an enabled body. |
-| Expected Markers | `TerminateVDM`, COMMAND event/pipe/console signals, DEM machine/drive paths, top-level hard-error policy, bounded machine run, CRT and environment calls each have source-proven owners and successor dispositions. |
-| Asset Needs | [S2 worklist](etc/operations/m0-t277-s2-source-form-worklist.tsv), [S3 machine ledger](etc/operations/m0-t277-s3-machine-family-disposition-ledger.tsv), original `dos/dem` and `dos/command` forms, T276 source-family evidence and [S4 plan](etc/operations/m0-t277-s4-dos-source-form-family-plan-001.md). |
-| Reporting Requirements | Exact 73-item coverage, counts by original DEM/COMMAND file and family, caller/provider form, mapping rule and failure disposition; every unresolved call names a successor package. |
+| Verification | Every `softpc.new/host/src` work item is in one source-form family with original caller/provider citations, same-shaped owner and failure disposition. The verifier rejects missing/duplicate work, a second executor, private host-pointer transfer, invented direct-link conclusion, or an enabled body. |
+| Expected Markers | Original host control, top-level BOP, serial/printer/device endpoint, mouse/display, PIC/CPU, session event, resource/configuration and CRT calls each have source-proven owners and successor dispositions. |
+| Asset Needs | [S2 worklist](etc/operations/m0-t277-s2-source-form-worklist.tsv), [S3 machine ledger](etc/operations/m0-t277-s3-machine-family-disposition-ledger.tsv), [S4 DOS ledger](etc/operations/m0-t277-s4-dos-family-disposition-ledger.tsv), original `softpc.new/host/src` forms, T276 evidence and [S5 plan](etc/operations/m0-t277-s5-softpc-host-control-family-plan-001.md). |
+| Reporting Requirements | Exact 197-item coverage, original subdomain/family counts, caller/provider form, machine/adapter/mapping rule and failure disposition; every excluded alternate executor or private product-shell branch names a successor. |
 | Stop Conditions | An interface is assigned from filename or declaration alone, an adapter is invented without source evidence, a raw host pointer is proposed across a boundary, a second mapping manager is proposed, or a source body would be enabled. |
-| Exit Criteria | Every S2 `dos` work item is represented by a source-form family disposition and none is falsely claimed buildable, linked or implemented; all 73 retained source references and any excluded product-shell branch have a named successor. |
+| Exit Criteria | Every S2 `softpc.new/host/src` work item is represented by a source-form family disposition and none is falsely claimed buildable, linked or implemented; Bochs replacement, original BOP control, host endpoint and private product-shell distinctions are explicit. |
 | Original Owner Request | “MVDM package dependency and interface-closure tracker 单人模式实施”。 |
-| Similar-Issue Sweep | DEM versus COMMAND ownership, command child lifecycle versus broker paths, console notification, host drive mutation, session-local handles, BOP ingress, machine ownership, NT4 private events, x86/x64 mapping and false direct-link conclusions. |
+| Similar-Issue Sweep | Original host-control versus second executor, BOP routing versus adapter-bop, CCPU/SAS interface shape, mouse/display/serial/printer endpoints, NT4 monitor/VDD calls, private UI/product shell, session ownership, x86/x64 mapping and false direct-link conclusions. |
 
 ### Closed packet reference — M0 T276 S25
 
