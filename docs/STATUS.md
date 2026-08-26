@@ -2,9 +2,11 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T276 is closed as the final
-expected-integration audit of all selected non-guest MVDM paths. The next
-owner-package task requires explicit admission from the dependency-driven queue.
+**Active: M0 T277 S1** — T277 expands T276's final file-level expected
+integration dispositions into a source-proven package, symbol, ABI and build
+closure before any MVDM provider body is enabled. It is an ordinary,
+single-person dual-role audit packet; no source body, adapter ABI, build edge
+or guest execution is admitted by S1.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,6 +26,28 @@ implementation subtasks are withdrawn and re-enter only through owner-package
 waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
+
+### M0 T277 S1 — tracker foundation and evidence normalization
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T277 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner admitted the queue-head objective: “**MVDM package dependency and interface-closure tracker** 单人模式实施”. |
+| Objective | Establish the authoritative five-ledger tracker, normalize T276 source/build/declaration/caller evidence into stable identities, and prove that the tracker distinguishes textual candidates from source-reached dependencies. |
+| Non-goals | No MVDM provider/adapter implementation, source-body edit, generated build edge, Ninja run, guest execution, or inferred direct-link conclusion. |
+| Reference Baseline | T276 final 1,689-path expected-integration ledger; T276 S2--S5 literal build/include, declaration, caller/callee and boundary evidence; architecture and source-policy authorities. |
+| Files And ABI Surface | T277 tracker plan, five machine-readable ledger schemas/initial populations, generator/verifier tooling, Status and documentation inventory. No runtime ABI is changed. |
+| Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
+| Verification | Regenerate each ledger deterministically from named T276 inputs; reject duplicate identities, invalid package owners, declaration-only entries represented as reached calls, or missing final-file linkage. |
+| Expected Markers | Every selected package has a stable package identity; every imported T276 candidate remains explicitly lexical/provisional until caller reachability and ABI ownership are separately established. |
+| Asset Needs | [T277 proposal](etc/operations/proposal-mvdm-package-interface-closure-tracker-001.md), [S1 plan](etc/operations/m0-t277-s1-tracker-foundation-plan-001.md), final disposition ledger, T276 S2--S5 evidence ledgers and source-union manifest. |
+| Reporting Requirements | Exact counts by ledger and package; unexpanded/source-ambiguous candidate counts; stated next S admission criterion; no implementation claim. |
+| Stop Conditions | An interface is assigned from filename or declaration alone, an adapter is invented without source evidence, a raw host pointer is proposed across a boundary, a second mapping manager is proposed, or a source body would be enabled. |
+| Exit Criteria | Met: five ledgers have stable schemas and reproducible initial populations; each row is traceable to a T276 source/evidence record; the verifier proves identities and provisional-vs-reached separation. See [S1 evidence](etc/operations/m0-t277-s1-tracker-foundation-evidence-001.md). |
+| Original Owner Request | “MVDM package dependency and interface-closure tracker 单人模式实施”。 |
+| Similar-Issue Sweep | Lexical declaration ambiguity, macro/assembly non-projection, duplicate symbol spellings, package cycles, profile-excluded executors, x86/x64 ABI boundaries and false adapter ownership. |
+
+### Closed packet reference — M0 T276 S25
 
 ### M0 T276 S25 — final expected-integration closure
 
