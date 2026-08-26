@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T276 S18** — Begin W3 complete `ieuvddex` package file/interface
-disposition without enabling an IEU/VDD extension body.
+**Active: M0 T276 S19** — Begin W6 complete `dpmi` package file/interface
+disposition without enabling a DPMI provider body.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,25 +24,31 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S18 — W3 `ieuvddex` package disposition baseline
+### M0 T276 S19 — W6 `dpmi` package disposition baseline
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T276 S18`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T276/S17 is closed: all 35 `v86` paths have exact non-enabled dispositions, split between kernel-VDM monitor, standalone product scaffold and 16-bit tool inputs. The next bounded original package is the 23-path `ieuvddex` root. |
-| Objective | Classify every selected `ieuvddex` path by its original VDD/IEU extension role, architecture-specific selection and reached monitor/session/machine boundary before enabling an IEU/VDD extension body. |
-| Non-goals | No source move/edit, IEU/VDD implementation, Bochs change, adapter body, formal build edge, Ninja run or guest execution. |
-| Reference Baseline | T276/S1–S17 ledgers, exact selected `ieuvddex` mirror, source policy and architecture rules. |
-| Files And ABI Surface | W3 `ieuvddex` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
+| Identifier Mode | `M0 T276 S19`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T276/S18 is closed: all 23 `ieuvddex` paths are debugger-product inputs, not VDD runtime; six non-x86 paths are source evidence only. The next bounded original package is the 59-path `dpmi` root. |
+| Objective | Classify every selected `dpmi` path by original provider/control/data role, build selection and reached protected-machine, monitor, session and BOP boundaries before enabling a DPMI body. |
+| Non-goals | No source move/edit, DPMI implementation, Bochs change, adapter body, formal build edge, Ninja run or guest execution. |
+| Reference Baseline | T276/S1–S18 ledgers, exact selected `dpmi` mirror, source policy and architecture rules. |
+| Files And ABI Surface | W6 `dpmi` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Account for all 23 selected `ieuvddex` paths; distinguish portable and architecture-specific VDD/IEU forms; identify actual VDM_TIB, monitor, session and machine dependencies; reject a raw host pointer, a second mapping manager or a generic VDD implementation inference. |
+| Verification | Account for all 59 selected `dpmi` paths; distinguish provider, protected-machine, control/data and build forms; identify actual monitor, SoftPC/SAS, BOP, session and machine dependencies; reject a trace-led provider or invented protected-machine semantics. |
 | Expected Markers | One provisional composition disposition per path, exact build evidence and named internal/adapter prerequisite per reached family. |
-| Asset Needs | T276/S1–S17 ledgers, exact selected `ieuvddex` mirror and [S18 plan](etc/operations/m0-t276-s18-ieuvddex-package-disposition-plan-001.md). |
-| Reporting Requirements | Exact path/source/build counts, VDD/IEU role, external boundary facts and subsequent package handoff. |
+| Asset Needs | T276/S1–S18 ledgers, exact selected `dpmi` mirror and [S19 plan](etc/operations/m0-t276-s19-dpmi-package-disposition-plan-001.md). |
+| Reporting Requirements | Exact path/source/build counts, DPMI role, external boundary facts and subsequent package handoff. |
 | Stop Conditions | A path has no selected/build evidence, raw host pointers cross a boundary, a second mapping manager is proposed, a body is enabled from a trace, or classification requires invented adapter behavior. |
-| Exit Criteria | Every selected `ieuvddex` path has a reproducible provisional owner/disposition record and each actual external family is assigned to a named session or adapter/machine boundary; no source body is enabled. |
+| Exit Criteria | Every selected `dpmi` path has a reproducible provisional owner/disposition record and each actual external family is assigned to a named session or adapter/machine boundary; no source body is enabled. |
 | Original Owner Request | “好的 开始审计任务”。 |
-| Similar-Issue Sweep | VDD/IEU portable versus architecture-specific forms, VDM_TIB/context access, event and callback forms, guest-memory mapping uniqueness, original `ntvdm.def` exports, original build descriptions and adapter-vdd/adapter-vdm-monitor/adapter-bochs boundaries. |
+| Similar-Issue Sweep | DPMI protected-mode/LDT/exception/memory forms, BOP/DOS/WOW entry references, monitor and SoftPC/SAS calls, guest-memory mapping uniqueness, original build descriptions and adapter-softpc/adapter-vdm-monitor/adapter-bop/adapter-bochs boundaries. |
+
+**S18 closure:** all 23 selected `ieuvddex` paths have reproducible non-enabled
+dispositions. The package is an NTSD/WinDbg debugger extension, not a VDD
+runtime provider: all future recovery belongs to `adapter-debugger` through a
+copied session diagnostic snapshot. Six Alpha/MIPS/PPC paths remain source
+evidence only. See the [S18 IEUVDDEx baseline](etc/operations/m0-t276-s18-ieuvddex-package-disposition-baseline-001.md).
 
 **S17 closure:** all 35 selected `v86` paths have reproducible non-enabled
 dispositions. Seven kernel-VDM monitor bodies retain same-shaped monitor API
