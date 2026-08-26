@@ -10,3 +10,7 @@ Any subsequent WOW32 disposition ledger must parse conditional build blocks and
 record all four groups separately: active bodies, deliberately inactive source,
 declarations/tables, and resource/build input.  A raw textual `SOURCES` match
 is insufficient evidence for recovery or composition.
+
+The nine inactive table-source names were checked in both canonical OpenNT and
+OpenNT-4.5 source trees. None exists in either tree. They are historical dead
+`sources` entries, not omitted mirror inputs and not future recovery work.
