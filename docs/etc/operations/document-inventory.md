@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2501 |
+| Documentation records | 2502 |
 | --- | --- |
-| Generated UTC | 2026-08-26T18:19:25Z |
+| Generated UTC | 2026-08-26T18:20:27Z |
 
 ## Entries
 
@@ -657,6 +657,7 @@ content-divergent entries.
 | etc/operations/m0-t276-s21-vdmredir-package-disposition-baseline-001.md | indexed supporting material | 3f9b32a0340d6378729e10242c570bb73ed69f6353829a78fe6ba5b1f23ed30e |
 | etc/operations/m0-t276-s21-vdmredir-package-disposition-plan-001.md | indexed supporting material | 3ed244c8ee67631848568a2c832585df265c64daddcd3c33b1a2113041b6be53 |
 | etc/operations/m0-t276-s22-wow32-build-selection-baseline-001.md | indexed supporting material | 2d96caee4a4f44ae77868efc67a6eedbe1b98f44a527f65dbad2082e1b8929b8 |
+| etc/operations/m0-t276-s22-wow32-file-disposition-ledger.tsv | indexed supporting material | 91085471ee794ca769b4d3b51a89f8cee37f2fc228802c2e2ef663dfbaff0a2c |
 | etc/operations/m0-t276-s2-build-input-include-graph-001.md | indexed supporting material | 550a64073284061d8c7638fe6e3b271f0930e95a41384640890fad047f77a70d |
 | etc/operations/m0-t276-s2-original-build-description-ledger.tsv | indexed supporting material | 44d1f5ee7c63c2b856960871603621e2052cb1c0903baf3224af41ccee725268 |
 | etc/operations/m0-t276-s2-translation-unit-build-ledger.tsv | indexed supporting material | 542cb74fca0d9d6d857b901d30d462437d819a27a399e3e798f5a664eca4328f |
