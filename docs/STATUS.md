@@ -2,8 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T276 S9** — Expand the remaining actionable original boundaries
-into package/ABI/failure-contract evidence before choosing any recovery wave.
+**Active: M0 T276 S10** — Map all selected MVDM packages to their original
+build/profile roles and prerequisite boundary families before choosing a
+recovery wave.
 
 The current intermission architecture is the seventeen-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,23 +25,23 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S9 — actionable boundary ABI and failure-contract baseline
+### M0 T276 S10 — package/profile dependency-wave baseline
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T276 S9`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T276/S1–S8 establish exact mirror, build, declaration, caller, external-boundary, source-occurrence and provider-form evidence. No provider body or adapter ABI is enabled. |
-| Objective | For each S8 row that is not an already-selected original body, record the original declaration shape, calling context, observable failure or profile guard and package-level prerequisite needed before an adapter or exclusion decision. |
-| Non-goals | No provider/adapter implementation, source-body edit, enabled build edge, final recovery wave, BOP behavior, Bochs change or guest execution. |
-| Reference Baseline | T276 S1–S8 ledgers, exact selected mirrors, source policy and upstream comparison sources. |
-| Files And ABI Surface | Actionable boundary ABI/failure ledger and evidence, Status and documentation inventory. No runtime ABI changes. |
+| Identifier Mode | `M0 T276 S10`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T276/S1–S9 establish exact mirror, build, declaration, caller, external-boundary, source-occurrence, provider-form and non-body ABI/guard evidence. No provider body or adapter ABI is enabled. |
+| Objective | Give every selected MVDM package one original role, formal build/profile disposition, predecessor interface/package set and a non-trace topological recovery-wave candidate. |
+| Non-goals | No provider/adapter implementation, source-body edit, enabled build edge, final recovery admission, BOP behavior, Bochs change or guest execution. |
+| Reference Baseline | T276 S1–S9 ledgers, original build descriptions, exact selected mirrors and source policy. |
+| Files And ABI Surface | Package/profile/wave ledger and evidence, Status and documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Account for every S8 non-body form; preserve exact declaration and call-site evidence; identify profile guards and original failure/result evidence; reject guessed ABI, owner or failure semantics. |
-| Expected Markers | Each actionable row has an ABI/failure evidence state and a package-level prerequisite. Final implementation, x86/x64 build, composition and recovery-wave decisions remain `unreviewed`. |
-| Asset Needs | T276 S3/S6/S8 ledgers plus selected exact mirrors and upstream comparison sources. |
-| Reporting Requirements | Exact actionability counts, ABI/form and failure/guard evidence, unresolved evidence limits, required package review and S10 handoff. |
-| Stop Conditions | An ABI, failure result or guard cannot be proved from source, a package boundary would be invented, or source evidence would be mistaken for runtime reachability. |
-| Exit Criteria | Every non-body S8 row has a reproducible source-derived ABI/failure/guard record and package prerequisite, enabling later wave planning without compile-error-led adapter growth. |
+| Verification | Account for all 23 selected package roots; preserve original build-control evidence and S8/S9 interface prerequisites; reject a wave selected by trace hit, lexical path order, or an invented adapter. |
+| Expected Markers | Each package has a role and profile state plus predecessor evidence. Wave labels are planning candidates, not provider enablement or build claims. |
+| Asset Needs | T276 S1/S2/S6/S8/S9 ledgers and exact selected mirrors. |
+| Reporting Requirements | Exact package/wave counts, build-role classes, internal cycles, external interface prerequisites, profile exclusions, and S11 handoff to full ledger normalization. |
+| Stop Conditions | A package role or dependency cannot be tied to source/build evidence, a cycle is hidden, or a candidate wave would require a new generic adapter. |
+| Exit Criteria | All selected package roots have a reproducible source-derived role/profile/prerequisite/wave record, and cycles or missing data are explicit. |
 | Original Owner Request | “好的 开始审计任务”。 |
 | Similar-Issue Sweep | Definition provenance, C/C++ versus assembly forms, unique declaration candidates, source-call aggregation, duplicate IDs and accidental provider/owner claims. |
 
@@ -128,6 +129,14 @@ six other no-provider forms. A case-sensitive regeneration removed the false
 `CMDRebootVDM`/`cmdRebootVDM` correlation before this closure. See [T276 S8 provider-form evidence](etc/operations/m0-t276-s8-original-provider-form-review-001.md).
 S9 records the source-derived ABI, guard and failure-contract evidence for the
 non-body forms before a recovery wave is selected.
+
+**T276 S9 closure:** all 12 non-body rows now have source-derived calling form,
+availability/guard, result/failure evidence and package prerequisite. The five
+CPU flag setters remain one CPU-status compatibility surface; the three guarded
+optional historical paths remain profile questions; the debugger globals remain
+callback bindings. See [T276 S9 ABI/failure evidence](etc/operations/m0-t276-s9-actionable-boundary-abi-failure-baseline-001.md).
+S10 derives package waves from those records, not from a guest trace or compile
+failure.
 
 ### M0 T275 S1 — Complete interface and reuse ledger
 
