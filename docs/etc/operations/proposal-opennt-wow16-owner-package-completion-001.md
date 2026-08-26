@@ -1,5 +1,11 @@
 # Proposal: OpenNT WOW16 Owner-Package Completion
 
+## Rebootstrap owner note
+
+WOW16 guest source/products remain in `opennt-guest-wow16`; WOW32 and other
+host-side MVDM packages remain within `opennt-mvdm-host`. Cross-process shared
+or separate WOW VDM command routing uses the formal broker contract.
+
 ## Purpose
 
 Recover a complete, declared WOW16 profile: source-built guest NE artifacts,
@@ -8,7 +14,7 @@ contract.  WOW16 is a target capability, not a permanent negative fixture.
 
 ## Queue relationship
 
-This is the admission plan for queue candidate 6, **OpenNT WOW16 owner-package
+This is the admission plan for queue candidate 3, **OpenNT WOW16 owner-package
 recovery**.  It may be admitted only after its NE guest, COMMAND and required
 DPMI dependency rows have a declared closure/disposition.
 ## Boundary
@@ -16,7 +22,7 @@ DPMI dependency rows have a declared closure/disposition.
 Guest NE loader/runtime and DPMI guest code remain OpenNT guest owners.
 Historical WOWEXEC/WOW32 host composition is source evidence and must be
 reused where independently composable or recovered through minimal CLI host
-capability seams.  Neither Bochs nor `bx-vdm` implements Win16 APIs.
+capability seams. Neither Bochs nor an adapter implements Win16 APIs.
 
 ## COMMAND Lifecycle Dependency
 

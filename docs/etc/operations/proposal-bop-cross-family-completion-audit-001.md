@@ -1,9 +1,15 @@
 # BOP Cross-Family Completion Audit And Integrated Verification Proposal
 
+## Rebootstrap owner note
+
+BOP families are package/library groupings within `opennt-mvdm-host`, not
+separate production source components. This audit consumes the canonical host
+mirror, adapters, session and broker ledgers established by rebootstrap.
+
 ## Purpose
 
 This candidate is admitted only after the selected dependency-driven owner
-packages in queue candidates 1 through 9 have their declared
+packages in preceding queue candidates have their declared
 code/ABI-complete or source-proven unavailable disposition. It is a closure
 audit and integration task, not another implementation family.
 

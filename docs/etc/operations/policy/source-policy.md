@@ -10,6 +10,10 @@ file-level precedence. The selected file's source path/hash and the rejected
 alternative are recorded. DOS/WOW16 guest components also retain every
 selected original source, resource, intermediate and binary product, but none
 of their objects is a host link input.
+The selected non-guest/non-tool packages remain together in the canonical
+`opennt-mvdm-host` mirror; conceptual BOP, host, SoftPC and utility categories
+do not create parallel source roots. Exact declarations required from outside
+MVDM belong to `opennt-platform-abi`.
 Bochs 2.6, from `O:\repos.external\bochs-2.6-compat\bochs-2.6`, is the
 approved third-party guest-machine backend, subject to the pinned-import and
 source-identity requirements in `design/CODING.md` and the adoption record.
@@ -50,6 +54,11 @@ Every imported-source divergence records the exact unavailable
 dependency and why the facade cannot express it. Owner-approved product
 requirements may explicitly constrain this order. Prefer isolated adapters and
 build shims to editing historical code.
+
+Opaque host identity uses the same session-owned 32-bit surrogate path on x86
+and x64; native-value identity pass-through is forbidden. Numeric data is not
+tokenized. Cross-process broker messages use separate fixed-width broker IDs
+and never contain a local surrogate, native resource or guest pointer.
 
 User-approved binary research artifacts must live below `artifacts/`, include
 a source/role/hash/size/redistribution manifest, and remain outside source,

@@ -1,5 +1,12 @@
 # DOS/WOW16 Complete Source-Build Closure Proposal
 
+## Rebootstrap owner note
+
+The canonical selected DOS and WOW16 trees are complete load-only guest mirrors
+under `opennt-guest-dos` and `opennt-guest-wow16`. Their objects and libraries
+never enter either x86 or x64 host link; source-build results are alternative
+manifested guest products only.
+
 ## Decision Requested
 
 Admit one future owner package which establishes an independently reproducible

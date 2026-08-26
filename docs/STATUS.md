@@ -6,6 +6,12 @@
 revision; its audited residuals are recorded in its closure and the debt
 ledger, not misrepresented as completed mirror recovery.
 
+The current intermission architecture is the thirteen-component MVDM package
+rebootstrap: one active imported MVDM session per process, multi-instance-safe
+project interfaces, a cross-process broker, and a shared x86/x64 32-bit
+compatibility object space. It is a queued design decision, not an active or
+implemented packet; see the queue-first rebootstrap proposal.
+
 ## Active Packet
 
 There is no active packet. The latest closure is retained below as the current

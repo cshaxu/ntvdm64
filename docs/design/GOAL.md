@@ -1,103 +1,45 @@
 # Project Goal
 
-> **Current rebootstrap goal.** This section supersedes the transition-era
-> component list below. The current source model has twelve components:
-> `bochs-core`, `opennt-mvdm-host`, `opennt-platform-abi`,
-> `opennt-guest-dos`, `opennt-guest-wow16`, `adapter-bochs`, `adapter-bop`,
-> `adapter-softpc`, `adapter-win32`, `adapter-vdm-monitor`, `session`, and
-> `app`.
+Deliver a self-contained, non-invasive `ntvdm.exe` CLI for modern 32-bit and
+64-bit Windows hosts. It directly launches admitted DOS `.com`, `.exe`, `.bat`
+and `.pif` targets and later bounded WOW16 workloads. It may use public Win32
+APIs and ordinary host resources, but never requires replacement Windows
+files, a rebuilt kernel/private subsystem, or installation-time host mutation.
 
-The product is a self-contained, non-invasive `ntvdm.exe` CLI. It can use
-public Win32 APIs and ordinary host resources but never needs replaced Windows
-files, a rebuilt kernel/private subsystem, or installation-time mutation.
-OpenNT recovery is source-first: import the canonical package union, preserve
-the original interface shape through the smallest adapter, use a registered
-mirror overlay only when necessary, and author new behavior last.
+OpenNT and Bochs recovery is source-first:
 
-`opennt-mvdm-host` is the one canonical non-guest/non-tool MVDM host mirror;
-it replaces separate BOP, host, SoftPC and utility source components.
-`opennt-platform-abi` supplies exact external OpenNT declarations. DOS/V86 and
-WOW16 are complete but load-only guest mirrors, never host link inputs.
-`adapter-vdm-monitor` is a formal same-shaped user-mode monitor boundary from
-the start; it records deterministic unavailable outcomes instead of claiming
-to recreate NT4 kernel VDM or CSRSS.
+1. compose the canonical original source package unchanged;
+2. preserve the reached historical interface, layout, ordering and failure
+   contract through the smallest same-shaped adapter;
+3. use a registered mirror-private overlay only when an adapter cannot make
+   the original unit composable;
+4. author new behavior only under a recorded last-resort exception.
 
-## Superseded transition-era goal record
+The thirteen-component architecture keeps one canonical non-guest/non-tool
+`opennt-mvdm-host` mirror, exact `opennt-platform-abi`, complete load-only DOS
+and WOW16 guest mirrors, Bochs core and five adapters, neutral `session`,
+cross-process `broker`, and final `app` composition.
 
-Deliver an independently buildable, non-invasive command-line NT 4-era DOS environment. OpenNT NT4 remains the normative source for the guest operating environment: NTDOS/DOS utilities, WOW16, and the historically observed NTVDM service contracts. Bochs 2.6 is the selected guest-machine backend: it owns x86 execution, PC memory, firmware and emulated-device mechanics.
+The current execution profile is one active MVDM session per `ntvdm.exe`
+process, with multiple processes allowed concurrently. A session must support
+the original in-guest DOS/COMMAND/WOW task and parent/child lifecycle. All
+project-owned interfaces are multi-instance-safe so future in-process multiple
+sessions do not require an ABI redesign; imported MVDM process-global state is
+made reentrant only after a dedicated original-source audit.
 
-The stable user experience is a CLI `ntvdm.exe` that directly accepts a DOS
-program or command target, including `.com`, `.exe`, `.bat` and admitted `.pif`
-launches.  `app` owns argument admission, image selection and session startup;
-the original DOS/COMMAND/WOW16 and OpenNT host packages retain execution,
-environment, process-return and provider semantics.  A source-layout restart
-may not replace this contract with a bespoke launcher or a different runtime
-interaction model.
+On both x86 and x64 hosts, imported MVDM code observes a controlled 32-bit
+compatibility object space. Session-owned typed mapping-manager instances
+associate 32-bit surrogate identities with native HANDLE/pointer-sized
+resources, while guest pointers use checked synchronous memory leases. This
+keeps 64-bit implementation details out of original MVDM control flow and
+prevents x86 builds from relying on accidental native-value identity.
 
-The target product separation is: `bochs-core` (adopted machine), `adapter-bochs`
-(Bochs-only assembly), `opennt-abi` (shared original VDM declarations),
-`opennt-guest-dos` (complete canonical DOS guest source/artifact mirror),
-`opennt-guest-wow16` (complete canonical WOW16 guest source/artifact mirror),
-`opennt-host` (host capabilities), `opennt-bop` (BOP source mirrors),
-`opennt-softpc` (original SoftPC firmware/ROM and machine-contract inputs),
-`opennt-utils` (selected original utility packages), `adapter-softpc`
-(Bochs-backed SoftPC/CCPU interface recovery), `adapter-win32` (unavailable
-Win32 compatibility), `adapter-bop` (selector-blind copied-frame BOP
-ingress/completion), and
-`app` (CLI and final composition), and `session` (the dependency-free
-per-VDM lifecycle, neutral resource and event foundation). `app` owns
-composition and creates the session; `session` is not another composition
-layer. This separation exists to make maximal
-original-source reuse and minimal source intrusion mechanically enforceable.
-The two guest mirrors are never linked into the host process: `app` selects an
-original guest binary through a manifest and loads it into the Bochs machine.
-All OpenNT mirrors are one canonical path-wise union selected from the pinned
-OpenNT and OpenNT-4.5 MVDM baselines; conflicting paths are resolved once at
-complete-package scope rather than retained as parallel product editions.
+The broker recovers only required cross-process VDM registration, identity,
+command-queue, notification and cleanup contracts using public IPC. It does
+not recreate CSRSS or the NT4 kernel and never transports local native
+resources or guest pointers.
 
-The recovery objective is to restore the complete original NTVDM behavior as
-quickly as evidence permits with the smallest possible OpenNT source diff.
-Original OpenNT translation units and complete source packages are the default
-implementation.  Where the original SoftPC/CCPU or historical Win32/NTDLL
-implementation is unavailable, the replacement first preserves the original
-function name, parameters, calling convention, returned layout, ordering and
-failure behavior; `adapter-softpc` backs that interface with Bochs mechanics,
-and `adapter-win32` backs it with modern public Win32 APIs.  A newly shaped
-interface or free-standing replacement is a last-resort registered exception,
-not a normal recovery technique.
-
-The immediate goal is not to recover the unavailable NT4 x86 V86/CCPU product composition. It is to establish a small, auditable Bochs-to-OpenNT boundary and use it to run the first contained NT4 EN-US DOS profile. No claim about WOW16, broad device compatibility, or a retail-compatible `ntvdm.exe` follows from that first slice.
-
-The modern runtime target is one MSVC x64 `/MT` host process. This constrains
-the command-line invocation shell, `adapter-softpc`, `adapter-bochs`, and adopted Bochs
-core to one C/C++ ABI and CRT. It does not alter the emulated CPU: the first guest profile remains
-CPU5/Pentium-MMX. Historical OpenNT source remains on its evidenced historical
-toolchain path and is not made a modern runtime-link input merely to achieve
-toolchain uniformity.
-
-The runtime boundary is deliberately hard: Bochs never implements DOS, DEM,
-COMMAND, WOW, or host-service BOP semantics; OpenNT never supplies CPU
-interpretation, PC firmware, or emulated-device semantics. A separately
-bounded machine-composition component may route an individually admitted
-historical **machine** BOP to Bochs-owned mechanics, but it is neither a
-SoftPC backend nor a general BOP implementation. The cross-boundary contracts
-are versioned and documented in `etc/research/bochs-26-backend-adoption.md`.
-
-## Bochs Rewrite Stop Rule
-
-The selected backend is an adoption, not a rewrite project. Narrow,
-evidence-backed lifecycle and controlled-execution shims are allowed only to
-make the declared M0 contract callable without the historical Bochs product
-shell. Work must stop for user direction before changing or replacing the
-Bochs CPU decoder, instruction-handler semantics, virtual/physical memory
-subsystem, generic device framework, or firmware behavior in order to make
-the design work. Accumulating such changes is treated as a Bochs rewrite even
-if each change is small in isolation.
-
-Bochs is admitted deny-by-default. A feature may enter only when a declared
-first-profile OpenNT caller requires it, its owner and boundary effect are
-recorded, and a focused negative test proves that its absence remains the
-default. Convenience, feature parity, or upstream availability is not an
-admission reason. The objective is to preserve OpenNT's original service
-ownership, layouts, order and failure behavior—not to replace it with Bochs
-or adapter policy.
+Success means reproducible source and artifact provenance, a manifest-driven
+x86/x64 build, auditable package selection, minimal imported-source diffs,
+bounded one-session execution, explicit unsupported behavior, and a stable
+path to original multi-process and intra-session semantics.

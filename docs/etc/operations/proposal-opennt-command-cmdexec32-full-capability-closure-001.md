@@ -1,5 +1,12 @@
 # Proposal: BOP Post-Code-Complete Dependency And Lifecycle Closure
 
+## Rebootstrap owner note
+
+COMMAND remains an original package/library family inside
+`opennt-mvdm-host`. `GetNextVDMCommand` cross-process acquisition is recovered
+through the same-shaped host facade and the formal broker; local child/session
+state remains session-owned and local surrogate IDs never cross IPC.
+
 ## Purpose
 
 After all prerequisite BOP owner packages are code-complete, close the
@@ -17,7 +24,7 @@ that its cross-owner lifecycle has closed.
 
 ## Queue relationship
 
-This is the admission plan for queue candidate 9, **COMMAND `cmdExec32`
+This is the admission plan for queue candidate 5, **COMMAND `cmdExec32`
 full-capability composition closure**.  It is admitted only after the
 required native owner contracts are complete; candidate 10 then audits its
 integrated result against the complete tracker.
