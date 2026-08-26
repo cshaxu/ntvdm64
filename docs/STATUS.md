@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T276 S21** — Begin W7 complete `vdmredir` package file/interface
-disposition without enabling a Redirector provider body.
+**Active: M0 T276 S22** — Begin W8 complete `wow32` package file/interface
+disposition without enabling a WOW provider body.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,25 +24,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S21 — W7 `vdmredir` package disposition baseline
+### M0 T276 S22 — W8 `wow32` package disposition baseline
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T276 S21`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T276/S20 is closed: all 25 `dpmi32` paths have exact non-enabled dispositions, with 16 selected x86 provider bodies requiring the unique session mapping-manager boundary. The next bounded original package is the 25-path `vdmredir` root. |
-| Objective | Classify every selected `vdmredir` path by original Redirector protocol/provider role, build selection and reached COMMAND/DEM/session/Win32 boundary before enabling a Redirector body. |
-| Non-goals | No source move/edit, Redirector implementation, Bochs change, adapter body, formal build edge, Ninja run or guest execution. |
-| Reference Baseline | T276/S1–S20 ledgers, exact selected `vdmredir` mirror, source policy and architecture rules. |
-| Files And ABI Surface | W7 `vdmredir` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
+| Identifier Mode | `M0 T276 S22`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T276/S21 is closed: all 25 `vdmredir` paths have exact non-enabled dispositions, with fifteen selected protocol-provider bodies remaining one original owner package. The next bounded original package is the 201-path `wow32` root. |
+| Objective | Classify every selected `wow32` path by condition-aware original build selection, original thunk/provider subdomain and reached Windows, SoftPC, monitor and session boundary before enabling a WOW body. |
+| Non-goals | No source move/edit, WOW implementation, Bochs change, adapter body, formal build edge, Ninja run or guest execution. |
+| Reference Baseline | T276/S1–S21 ledgers, exact selected `wow32` mirror, source policy and architecture rules. |
+| Files And ABI Surface | W8 `wow32` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Account for all 25 selected `vdmredir` paths; distinguish redirector protocol, provider/data and build forms; identify actual DEM/COMMAND/session/Win32 boundaries; reject a standalone redirector rewrite. |
-| Expected Markers | One provisional composition disposition per path, exact build evidence and named internal/adapter prerequisite per reached family. |
-| Asset Needs | T276/S1–S20 ledgers, exact selected `vdmredir` mirror and [S21 plan](etc/operations/m0-t276-s21-vdmredir-package-disposition-plan-001.md). |
-| Reporting Requirements | Exact path/source/build counts, Redirector role, external boundary facts and subsequent package handoff. |
+| Verification | Account for all 201 selected `wow32` paths; distinguish active and `!IF 0` source selection, declaration/table and build forms; identify actual thunk, USER/GDI, shell/media and historical-host boundaries; reject an invented standalone WOW rewrite. |
+| Expected Markers | One provisional composition disposition per path, exact build evidence, original subdomain and named internal/adapter prerequisite per reached family. |
+| Asset Needs | T276/S1–S21 ledgers, exact selected `wow32` mirror, [S22 build-selection baseline](etc/operations/m0-t276-s22-wow32-build-selection-baseline-001.md) and [S22 plan](etc/operations/m0-t276-s22-wow32-package-disposition-plan-001.md). |
+| Reporting Requirements | Exact path/source/build counts, active WOW subdomain, external boundary facts, mapping-manager rule and subsequent package handoff. |
 | Stop Conditions | A path has no selected/build evidence, raw host pointers cross a boundary, a second mapping manager is proposed, a body is enabled from a trace, or classification requires invented adapter behavior. |
-| Exit Criteria | Every selected `vdmredir` path has a reproducible provisional owner/disposition record and each actual external family is assigned to a named session or adapter boundary; no source body is enabled. |
+| Exit Criteria | Every selected `wow32` path has a reproducible provisional owner/disposition record and each actual external family is assigned to a named session or adapter boundary; no source body is enabled. |
 | Original Owner Request | “好的 开始审计任务”。 |
-| Similar-Issue Sweep | Redirector protocol/transport, DOS file/handle semantics, COMMAND child I/O, host Win32/network calls, session lifecycle and adapter-redir boundary. |
+| Similar-Issue Sweep | 16/32 thunk and callback frame semantics, GDI/USER private API coupling, guest-memory mapping leases, opaque handle translation, shell/media/printing, session lifecycle and adapter-wow boundary. |
 
 **S21 closure:** all 25 selected `vdmredir` paths have reproducible non-enabled
 dispositions. Fifteen selected DLL provider bodies remain one owner package;
