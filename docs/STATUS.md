@@ -2,9 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T274 S6** — M0 T271 remains closed by owner-directed
-exit-criterion revision; its audited residuals are recorded in its closure and
-the debt ledger, not misrepresented as completed mirror recovery.
+**No active M/T/S packet.** M0 T274 is closed by its verified source-supply
+exit criteria. The next ordered candidate remains Historical interface adapter
+recovery; it requires separate owner admission before implementation.
 
 The current intermission architecture is the thirteen-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -14,9 +14,9 @@ five dependency-closed packages. The first two packages are closed and the
 third is now active; see the
 [rebootstrap program roadmap](etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md).
 
-S4 recovers the local WOW16/bin86 carry and inventories retained output
-products only. It does not compile, supplement, or make a completeness claim
-about external source paths. See the [S4 local-inventory disposition](etc/operations/m0-t274-s4-wow16-local-inventory-disposition-001.md).
+The completed source-supply package establishes exact source availability, not
+host compilation, linking, provider enablement or guest execution. Its
+authoritative closure is [M0 T274 closure](history/m0-t274-closure-20260826.md).
 
 ## Active Packet
 
@@ -36,6 +36,11 @@ focused lifecycle test passes under both MSVC x64 and Win32/x86 `/MT`.
 **T272 closure:** the neutral session/mapping/lease/broker foundation is
 complete and pushed through `d94d46ae`; its authoritative record is
 [M0 T272 closure](history/m0-t272-closure-20260826.md).
+
+**T274 closure:** the canonical platform ABI, local DOS/WOW16 guest carries,
+and all selected MVDM host inputs are exact and hash-verified. This establishes
+source supply only; later adapter/composition packets retain all behavior,
+build and runtime claims. See [M0 T274 closure](history/m0-t274-closure-20260826.md).
 
 ### M0 T274 S6 — MVDM host package source recovery
 
