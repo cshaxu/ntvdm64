@@ -1,0 +1,58 @@
+#ifndef ADAPTER_BOCHS_MACHINE_LIFECYCLE_H
+#define ADAPTER_BOCHS_MACHINE_LIFECYCLE_H
+
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#define ADAPTER_BOCHS_MACHINE_LIFECYCLE_VERSION UINT32_C(1)
+#define ADAPTER_BOCHS_MACHINE_LIFECYCLE_MAX_BYTES UINT32_C(65536)
+
+enum adapter_bochs_machine_lifecycle_status {
+    ADAPTER_BOCHS_MACHINE_LIFECYCLE_OK = 0,
+    ADAPTER_BOCHS_MACHINE_LIFECYCLE_BUDGET,
+    ADAPTER_BOCHS_MACHINE_LIFECYCLE_REJECTED_INPUT,
+    ADAPTER_BOCHS_MACHINE_LIFECYCLE_REJECTED_INACTIVE,
+    ADAPTER_BOCHS_MACHINE_LIFECYCLE_REJECTED_ACTIVE,
+    ADAPTER_BOCHS_MACHINE_LIFECYCLE_MACHINE_FAILURE,
+    ADAPTER_BOCHS_MACHINE_LIFECYCLE_UNEXPECTED_RETURN
+};
+
+/* All input is copied before the CPU is entered.  This interface carries
+ * machine bytes and real-mode state only; it has no guest service meaning. */
+struct adapter_bochs_machine_lifecycle_configuration {
+    uint32_t version;
+    uint32_t ips;
+    uint64_t guest_memory_bytes;
+    uint64_t host_memory_bytes;
+};
+
+struct adapter_bochs_machine_lifecycle_load {
+    uint32_t version;
+    uint64_t physical_address;
+    uint32_t byte_count;
+    uint16_t cs;
+    uint16_t reserved0;
+    uint32_t eip;
+    uint8_t bytes[ADAPTER_BOCHS_MACHINE_LIFECYCLE_MAX_BYTES];
+};
+
+enum adapter_bochs_machine_lifecycle_status
+adapter_bochs_machine_lifecycle_create(
+    const struct adapter_bochs_machine_lifecycle_configuration *configuration);
+enum adapter_bochs_machine_lifecycle_status
+adapter_bochs_machine_lifecycle_load_realmode(
+    const struct adapter_bochs_machine_lifecycle_load *load);
+enum adapter_bochs_machine_lifecycle_status
+adapter_bochs_machine_lifecycle_run_budget(uint64_t tick_budget);
+enum adapter_bochs_machine_lifecycle_status
+adapter_bochs_machine_lifecycle_destroy(void);
+int adapter_bochs_machine_lifecycle_active(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

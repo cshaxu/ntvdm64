@@ -43,6 +43,9 @@ int machine_facade_copy_real_mode_entry(uint16_t *cs, uint32_t *eip);
 int machine_facade_copy_real_mode_state(uint16_t *cs, uint16_t *ss,
     uint16_t *sp, uint32_t *eip);
 void machine_facade_request_cpu_stop(void);
+/* Clears only a previous adapter-owned finite-run stop request.  This does
+ * not alter CPU registers, guest memory, devices, or pending interrupts. */
+int machine_facade_prepare_cpu_resume(void);
 void machine_facade_cpu_loop(void);
 int machine_facade_register_timer(void *opaque,
     machine_facade_timer_callback callback, uint64_t ticks,

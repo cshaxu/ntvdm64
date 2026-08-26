@@ -65,6 +65,12 @@ contains no `iodev/devices.cc`, product plugin, GUI, guest or OpenNT input.
 The proven bounded operation destroys its machine after the budget result, so
 resume remains the next explicit S2 boundary. See [S2 P3 link record](etc/operations/m0-t273-s2-p3-minimal-machine-link-closure-001.md).
 
+**S2 P4 closure:** a retained opaque machine can now complete two native
+finite-budget runs without reconstruction, then destroy cleanly, under both
+MSVC x64 and Win32/x86 `/MT`. The old broad runtime stage was audited but not
+copied; only its selector-blind construction/resume skeleton is admitted. See
+[S2 P4 lifecycle record](etc/operations/m0-t273-s2-p4-resumable-machine-lifecycle-closure-001.md).
+
 The latest closed packet remains the technical baseline below.
 
 ### M0 T271 closure — OpenNT BOP source-recovery and mirror-boundary audit

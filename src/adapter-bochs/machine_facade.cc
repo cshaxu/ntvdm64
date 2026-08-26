@@ -170,6 +170,15 @@ extern "C" void machine_facade_request_cpu_stop(void)
   bx_cpu.async_event = 1;
 }
 
+extern "C" int machine_facade_prepare_cpu_resume(void)
+{
+  if (machine_facade_machine == 0) return 0;
+  /* The finite-run timer is adapter-owned.  CPU event handling clears the
+   * asynchronous indication after this stop latch is released. */
+  bx_pc_system.kill_bochs_request = 0;
+  return 1;
+}
+
 extern "C" void machine_facade_cpu_loop(void)
 {
   bx_cpu.cpu_loop();

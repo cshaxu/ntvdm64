@@ -19,3 +19,15 @@ semantics.
 recovered lifecycle facade to place opaque bytes in ordinary RAM, arm a
 real-mode entry, stop at a timer budget and release the machine. It is not a
 BOP, SoftPC/CCPU, session or service ABI.
+
+`machine_lifecycle.{cc,h}` is the reusable lower-level form of that same
+mechanical boundary. It owns one opaque native machine at a time and exposes
+only create, copied real-mode load, finite budget run, active query and
+destroy. A finite stop clears only the adapter-owned Bochs stop latch before
+the next run; it neither resets nor recreates CPU/RAM state.
+
+`machine_lifecycle.{cc,h}` is the reusable lower-level form of that same
+mechanical boundary. It owns one opaque native machine at a time and exposes
+only create, copied real-mode load, finite budget run, active query and
+destroy. A finite stop clears only the adapter-owned Bochs stop latch before
+the next run; it neither resets nor recreates CPU/RAM state.
