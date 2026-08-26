@@ -8,5 +8,7 @@ $allowed = 'direct','binding-only','adapter-backed','overlay-required','not-host
 if ($rows.Count -ne 1689) { throw "Expected 1689 final-disposition rows, found $($rows.Count)." }
 if (@($rows | Group-Object source_path | Where-Object Count -ne 1).Count) { throw 'Every selected MVDM path needs one final-disposition row.' }
 if (@($rows | Where-Object {$allowed -notcontains $_.final_disposition}).Count) { throw 'A final-disposition row has an invalid classification.' }
+if (@($rows | Where-Object {$_.final_disposition -eq 'unresolved'}).Count) { throw 'T276 S25 closure requires every selected MVDM path to have a final non-unresolved disposition.' }
 if (@($rows | Where-Object {[string]::IsNullOrWhiteSpace($_.final_owner_or_link_boundary) -or [string]::IsNullOrWhiteSpace($_.final_change_class) -or [string]::IsNullOrWhiteSpace($_.named_adapter) -or [string]::IsNullOrWhiteSpace($_.mapping_implication) -or [string]::IsNullOrWhiteSpace($_.final_evidence)}).Count) { throw 'Every final-disposition row needs owner, change, adapter, mapping and evidence fields.' }
+if (@($rows | Where-Object {$_.final_audit_state -ne 'final-disposition-audited; not implemented'}).Count) { throw 'T276 S25 closure requires every selected MVDM path to have the final audited state.' }
 Write-Output "T276 final expected-integration tracker verification passed: $($rows.Count) rows."

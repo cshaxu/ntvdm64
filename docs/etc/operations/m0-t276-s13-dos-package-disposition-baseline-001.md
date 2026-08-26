@@ -4,7 +4,7 @@
 
 The selected original `dos` root contains exactly 40 paths. Twenty-seven are
 literal historical `SOURCES` translation units: sixteen DEM and eleven
-COMMAND. The remaining paths are five declarations, four original build
+COMMAND. The remaining paths are seven declarations, four original build
 descriptions, the original `dirs` metadata, and the historical test batch.
 The generated per-file ledger records one owner and one non-enabled
 composition disposition for every path. The companion interface ledger records

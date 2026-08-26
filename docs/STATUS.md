@@ -2,8 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T276 S25** — Backfill final expected-integration dispositions for
-the already package-audited MVDM roots before another package is admitted.
+**No active M/T/S packet.** M0 T276 is closed as the final
+expected-integration audit of all selected non-guest MVDM paths. The next
+owner-package task requires explicit admission from the dependency-driven queue.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,23 +25,23 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S25 — final expected-integration backfill baseline
+### M0 T276 S25 — final expected-integration closure
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T276 S25`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T276/S24 is closed: every 47-path VDD sample entry is final `not-host-runtime`, not an admitted VDD provider. Earlier S11–S23 package evidence is complete but predates the final-disposition taxonomy; it must be consolidated before a new package audit. |
-| Objective | Replace process-only dispositions for every previously audited package path with one evidence-backed final expected-integration disposition in the global 1,689-row tracker. |
+| Admission And Approval | T276/S24 is closed: every 47-path VDD sample entry is final `not-host-runtime`, not an admitted VDD provider. Earlier S11–S23 package evidence was consolidated by S25. |
+| Objective | Replace process-only dispositions for every previously audited package path with one evidence-backed final expected-integration disposition in the global 1,689-row tracker. **Closed.** |
 | Non-goals | No source move/edit, adapter implementation, build edge, Ninja run or guest execution. Do not infer `direct` from a file being selected by a historical build. |
 | Reference Baseline | T276/S1–S24 ledgers, package baselines, final-disposition taxonomy, source policy and architecture rules. |
 | Files And ABI Surface | Global final tracker, package final-disposition evidence, Status and documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Every path covered by S11–S23 receives one taxonomy-valid final disposition with owner/link, change, named-adapter, mapping and source-evidence fields; report counts by disposition and preserve explicit `unresolved` where evidence is insufficient. |
+| Verification | All 1,689 paths have one taxonomy-valid, non-`unresolved` final disposition with owner/link, change, named-adapter, mapping and source-evidence fields. The closure verifier reruns every package gate. |
 | Expected Markers | No previously-audited package remains represented only by a `provisional-not-enabled` record; each final tracker row is independently traceable to original/package evidence. |
 | Asset Needs | T276/S11–S24 ledgers, [final-disposition taxonomy](etc/operations/m0-t276-final-integration-disposition-taxonomy-001.md), global tracker and [S25 plan](etc/operations/m0-t276-s25-final-disposition-backfill-plan-001.md). |
-| Reporting Requirements | Exact per-package and global final-disposition counts, unresolved rationale, adapter/mapping consequences and next package admission criterion. |
+| Reporting Requirements | Exact per-package and global final-disposition counts, adapter/mapping consequences and next package admission criterion. |
 | Stop Conditions | A path has no selected/build evidence, raw host pointers cross a boundary, a second mapping manager is proposed, a body is enabled from a trace, or classification requires invented adapter behavior. |
-| Exit Criteria | All paths covered by earlier T276 package audits have a non-`unresolved` final disposition or an explicit evidence-based `unresolved` rationale; no path is left with only a current-enable state, and no source body is enabled. |
+| Exit Criteria | Met: all selected paths have a non-`unresolved` final disposition; no path is left with only a current-enable state, and no source body is enabled. See [M0 T276 closure](history/m0-t276-closure-20260826.md). |
 | Original Owner Request | “好的 开始审计任务”。 |
 | Similar-Issue Sweep | Historical build selection versus final product treatment, mirror change class, adapter ownership, guest/firmware/tool exclusion, legacy private product shells, x86/x64 mapping and unresolved evidence. |
 
@@ -101,6 +102,23 @@ private serial peer/product-shell bodies are `not-host-runtime`; `sim32.h`
 and the SIM16 declaration forms are `binding-only` evidence for specialised
 monitor/WOW adapters, never a second mapping manager or serial machine.
 See the [SIM final baseline](etc/operations/m0-t276-s25-sim-final-disposition-baseline-001.md).
+
+**S25 P6:** all 23 `ieuvddex/*` paths are `not-host-runtime`: they are the
+historical NTSD/WinDbg extension product, not a VDD or app host provider. A
+future same-shaped debugger feature has one `adapter-debugger` boundary and
+uses copied session diagnostic snapshots; see the
+[IEUVDDEx final baseline](etc/operations/m0-t276-s25-ieuvddex-final-disposition-baseline-001.md).
+
+**S25 P7:** all 35 `v86/*` paths now have final dispositions: old kernel VDM
+monitor and standalone `ntvdm.exe` scaffold sources are `not-host-runtime`,
+nine declaration forms are `binding-only`, and the independent quit utility
+is `tool-only`. See the [V86 final baseline](etc/operations/m0-t276-s25-v86-final-disposition-baseline-001.md).
+
+**S25 P8:** all 25 `vdmredir/*` paths now have final dispositions: 15 original
+provider bodies are `adapter-backed`, six protocol declarations are
+`binding-only`, and four DLL build/export inputs are `not-host-runtime`. The
+package remains one original provider under `adapter-redir`, not a file-system
+shim; see the [Redirector final baseline](etc/operations/m0-t276-s25-vdmredir-final-disposition-baseline-001.md).
 
 **S20 closure:** all 25 selected `dpmi32` paths have reproducible non-enabled
 dispositions. Sixteen selected x86 bodies form one host-provider package; all
@@ -355,7 +373,7 @@ see the [host/src completion baseline](etc/operations/m0-t276-s12-host-src-compl
 
 **T276 S13 P1:** all 40 original `dos` paths now have one package-led
 provisional disposition: 27 literal `SOURCES` translation units (16 DEM and
-11 COMMAND), five declarations, four build descriptions, one `dirs` metadata
+11 COMMAND), seven declarations, four build descriptions, one `dirs` metadata
 file and one historical test. DEM and COMMAND remain intact source-owner
 packages; no trace-selected BOP, source body or build edge is enabled. See the
 [DOS package disposition baseline](etc/operations/m0-t276-s13-dos-package-disposition-baseline-001.md).
@@ -3308,3 +3326,77 @@ this ABI correction; XMS returns to the unnumbered candidate queue.
 | M0 T198 S134 | One native observation stopped at `54:01`, not `54:04`; it is non-closure evidence only. |
 | M0 T198 | Closed by owner-directed reprioritization; it does not claim complete BOP, COMMAND or runtime closure. |
 | M0 Td S1 P1--P3 | Documentation governance remains one active S in Status, T-only Queue, indexed supporting evidence, and a hash-verified full-document inventory. |
+
+**S25 P9:** all 25 `dpmi32/*` paths now have final dispositions: the 16
+original x86 DPMI host-provider bodies are `adapter-backed`, five private
+declaration forms are `binding-only`, and two RISC-only bodies plus two build
+descriptions are `not-host-runtime`. The original 32-bit pointer-shaped
+contracts bind only to the session `guest_memory` mapping-manager instance and
+the `adapter-softpc -> adapter-bochs` mechanical path; see the [DPMI32 final
+baseline](etc/operations/m0-t276-s25-dpmi32-final-disposition-baseline-001.md).
+
+**S25 P10:** all 40 `dos/*` paths now have final dispositions: all 27 original
+DEM/COMMAND provider bodies are `adapter-backed`, seven declaration carriers
+are `binding-only`, and package build/test metadata is `not-host-runtime`.
+Recovery remains whole original DEM and COMMAND provider packages—not
+trace-selected services—through the named BOP, SoftPC, Win32, session and
+Redirector boundaries; see the [DOS final baseline](etc/operations/m0-t276-s25-dos-final-disposition-baseline-001.md).
+
+**S25 P11:** all 21 `fax/*` paths now have final dispositions: the four
+original user-mode WOWFAXUI providers are `adapter-backed`, four declarations
+are `binding-only`, and the private CSRSS/GDI driver plus all product/build
+resources are `not-host-runtime`. The UI package keeps its original flow while
+`adapter-wow`, `adapter-win32` and session copied broker records replace only
+the private shared-section transport; see the [FAX final baseline](etc/operations/m0-t276-s25-fax-final-disposition-baseline-001.md).
+
+**S25 P12:** all 47 `bde`, `dbg`, `vdmdbg` and `vdmexts` paths are `tool-only`:
+they are independent original NTSD/WinDbg extensions, debug-support library or
+debugging-support DLL, never a main host-runtime library. Their remote-process,
+symbol and fixed-image-address logic remains byte-exact evidence for a future,
+separately admitted debugger-tool package; see the [debugger-tools final baseline](etc/operations/m0-t276-s25-debugger-tools-final-disposition-baseline-001.md).
+
+**S25 P13:** all 339 selected `softpc.new` declaration carriers are
+`binding-only`. They retain the original interface shapes for source-parity
+MVDM bodies and same-shaped adapters but never authorize a second SoftPC
+executor or a direct Bochs-object dependency; see the [SoftPC declaration final baseline](etc/operations/m0-t276-s25-softpc-declarations-final-disposition-baseline-001.md).
+
+**S25 P14:** the 25 remaining `softpc.new` build/resource rows now have final
+dispositions: debugger/disassembler inputs are `tool-only`, while standalone
+SoftPC/NTVDM launch, link and resource inputs are `not-host-runtime` because
+`app` owns final composition. No source body is enabled; see the [SoftPC resource final baseline](etc/operations/m0-t276-s25-softpc-resources-final-disposition-baseline-001.md).
+
+**S25 P15:** the twelve original `softpc.new` debugger/disassembler source
+bodies are `tool-only`; the two historical `obj.vdm` standalone product-entry
+sources are `not-host-runtime`, with `app` owning final composition. Remaining
+machine/control sources stay under their source-span owner evidence rather than
+being inferred from a directory name; see the [SoftPC tool/product-source final baseline](etc/operations/m0-t276-s25-softpc-tool-source-final-disposition-baseline-001.md).
+
+**S25 P16:** `softpc.new/base/support/get_env.c` is an `adapter-backed`
+original environment helper. The other five support bodies are
+`not-host-runtime`: they own an alternate IO table, CPU/register state, BIOS
+timer or standalone SoftPC lifecycle and would create a second executor beside
+Bochs; see the [SoftPC support-source final baseline](etc/operations/m0-t276-s25-softpc-support-source-final-disposition-baseline-001.md).
+
+**S25 P17:** the 18 original SoftPC device bridge bodies now have final owner
+dispositions: ten native video/FDC/DMA/timer/PIC/PPI-sound executors are
+`not-host-runtime` because Bochs owns those devices; eight host
+endpoint/control providers are `adapter-backed` through public host capability
+and typed `adapter-bochs` operations. See the [SoftPC device-source final baseline](etc/operations/m0-t276-s25-softpc-device-source-final-disposition-baseline-001.md).
+
+**S25 P18:** the remaining 38 `softpc.new/host/src` control bodies have final
+dispositions: 25 original monitor/BOP/session/host-capability providers are
+`adapter-backed`; six mixed CPU/RAM/page/section control bodies are
+`overlay-required`; and seven alternate-executor/profile/product-shell bodies
+are `not-host-runtime`. No source is enabled by the audit; see the [SoftPC control-source final baseline](etc/operations/m0-t276-s25-softpc-control-source-final-disposition-baseline-001.md).
+
+**S25 P19:** the initial WOW32 carrier split is final: all 105 declaration
+carriers are `binding-only`, while eight condition-unselected source files and
+eleven build/resource inputs are `not-host-runtime`. The remaining 77 active
+original provider bodies stay grouped by their eight original subdomains for
+the next package decision; see the [WOW32 carrier final baseline](etc/operations/m0-t276-s25-wow32-carrier-final-disposition-baseline-001.md).
+
+**S25 P20:** all 77 active WOW32 provider bodies now have final dispositions:
+61 private frame/message/GDI/kernel-session/USER bodies are
+`overlay-required`, while 16 shell/OLE/printing, multimedia and network
+providers are `adapter-backed`. The overlays retain original provider flow and
+replace only private NT4 transport or unsafe identity conversion; see the [WOW32 provider final baseline](etc/operations/m0-t276-s25-wow32-provider-final-disposition-baseline-001.md).
