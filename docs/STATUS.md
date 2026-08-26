@@ -2,9 +2,8 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T275 closed after the adapter boundary inventory.
-The queue head is the MVDM package dependency and interface-closure tracker;
-no provider body or adapter ABI is active before that candidate is admitted.
+**Active: M0 T276 S1** — Verify and classify every selected MVDM host mirror
+path before any package-level interface or build recovery is admitted.
 
 The current intermission architecture is the seventeen-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,6 +23,26 @@ implementation subtasks are withdrawn and re-enter only through owner-package
 waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
+
+### M0 T276 S1 — file identity and package taxonomy baseline
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T276 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | The owner approved the queue-head MVDM package dependency and interface-closure tracker after requiring independent file, interface, dependency, build/profile and exclusion ledgers. |
+| Objective | Reverify all 1,689 selected `opennt-mvdm-host` files against their canonical selected source; classify package, file kind and mirror identity without making an unsupported recovery/build claim. |
+| Non-goals | No provider/adaptor implementation, source-body edit, enabled build edge, interface-function conclusion, BOP behavior, Bochs change or guest execution. |
+| Reference Baseline | T274 source-supply union and host manifests; T275 interface debt inventory; initialized MVDM ledgers; source policy and tracker proposal. |
+| Files And ABI Surface | File-recovery and package-dependency ledgers, reproducible audit script/evidence, Status and documentation inventory. No runtime ABI changes. |
+| Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
+| Verification | Rehash every selected source and destination; prove a one-to-one 1,689-path file ledger with no duplicate ID/path; verify all 23 package roots and file-kind counts. |
+| Expected Markers | `byte-exact-verified` or explicit mismatch/missing status for every path; no `composition_class` or build status promoted from `unreviewed` by this S. |
+| Asset Needs | Canonical T274 union ledger, local external OpenNT/OpenNT-4.5 source paths, `opennt-mvdm-host`, initialized tracker ledgers and PowerShell hash facilities. |
+| Reporting Requirements | Exact files/package/kind/hash counts, every mismatch or missing input, classification limitations and S2 handoff to source-symbol/interface expansion. |
+| Stop Conditions | A canonical selected source is missing, a host mirror hash differs, ledger identity is ambiguous, a package-root count differs from 23, or recovery behavior would be needed to continue. |
+| Exit Criteria | All 1,689 rows have reproducible identity evidence and package/file-kind taxonomy; every discrepancy is explicit; ledgers remain behavior-neutral; evidence and review are committed/pushed. |
+| Original Owner Request | “好的 开始审计任务”。 |
+| Similar-Issue Sweep | Source path provenance, target path existence, package-root cardinality, build-control files, headers/resources, source extensions, duplicate tracker identities and accidental composition-status claims. |
 
 **S1 closure:** the clean source topology initially contained thirteen
 production roots and no premature production service body. The
@@ -46,6 +65,14 @@ complete and pushed through `d94d46ae`; its authoritative record is
 and all selected MVDM host inputs are exact and hash-verified. This establishes
 source supply only; later adapter/composition packets retain all behavior,
 build and runtime claims. See [M0 T274 closure](history/m0-t274-closure-20260826.md).
+
+**T276 S1 closure:** all 1,689 selected `opennt-mvdm-host` paths now have
+reproducible source-to-mirror SHA-256 identity evidence, spanning exactly 23
+package roots.  The file ledger records `byte-exact-verified` for every row;
+composition and build-profile dispositions deliberately remain `unreviewed`.
+See [T276 S1 file identity evidence](etc/operations/m0-t276-s1-file-identity-taxonomy-001.md).
+The next S expands original build descriptions, translation units and include
+edges; it does not recover interfaces or enable a package.
 
 ### M0 T275 S1 — Complete interface and reuse ledger
 
