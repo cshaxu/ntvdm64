@@ -2,11 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T277 S3** — T277 expands T276's final file-level expected
+**Active: M0 T277 S4** — T277 expands T276's final file-level expected
 integration dispositions into a source-proven package, symbol, ABI and build
 closure before any MVDM provider body is enabled. It is an ordinary,
 single-person dual-role audit packet; no source body, adapter ABI, build edge
-or guest execution is admitted by S3.
+or guest execution is admitted by S4.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -27,25 +27,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T277 S3 — machine-facing source-form family audit
+### M0 T277 S4 — DOS DEM/COMMAND source-form family audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T277 S3`, Ordinary Mode with single-person dual-role implementation and review. |
+| Identifier Mode | `M0 T277 S4`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Owner admitted the queue-head objective: “**MVDM package dependency and interface-closure tracker** 单人模式实施”. |
-| Objective | Audit source and provider forms for the first dependency tranche (`suballoc`, `xms.486`, `dpmi32`) and assign only source-proven machine/CRT/monitor boundary families. |
+| Objective | Audit all 73 future-host call correlations whose original caller is the complete `dos` DEM/COMMAND package; assign source-proven host, session, monitor, BOP, machine and CRT call families without enabling a provider body. |
 | Non-goals | No MVDM provider/adapter implementation, source-body edit, generated build edge, Ninja run, guest execution, or inferred direct-link conclusion. |
-| Reference Baseline | T277 S2 worklist (`e1ca986c`), original selected source forms, T276 family/interface evidence, architecture and source-policy authorities. |
-| Files And ABI Surface | S3 family evidence and a source-form disposition ledger; Status and documentation inventory. No runtime ABI is changed. |
+| Reference Baseline | T277 S2 worklist (`e1ca986c`), closed S3 machine-family evidence (`fb620352`), original selected DOS/DEM/COMMAND forms, T276 evidence, architecture and source-policy authorities. |
+| Files And ABI Surface | S4 plan, generated DOS family ledger and verifier, Status and documentation inventory. No runtime ABI is changed. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Each family cites original caller/provider forms, preserves the required interface shape and failure rule, names one adapter or direct CRT binding, and does not activate a body. |
-| Expected Markers | XMS A20/range, DPMI CPU-frame/run/real-mode/IRET and ordinary CRT allocation families have explicit owner, mapping and successor disposition. |
-| Asset Needs | [S2 worklist](etc/operations/m0-t277-s2-source-form-worklist.tsv), original `xms.486`, `dpmi32` and `suballoc` forms, and existing T276 source-family evidence. |
-| Reporting Requirements | Exact work-item coverage, owner, ABI/form and failure disposition; unresolved items are assigned to a named successor package rather than silently deferred. |
+| Verification | Every `dos` work item is in one source-form family with original caller/provider citations, same-shaped owner and failure disposition. The verifier rejects missing/duplicate work, a private host pointer across a boundary, an invented direct-link conclusion, or an enabled body. |
+| Expected Markers | `TerminateVDM`, COMMAND event/pipe/console signals, DEM machine/drive paths, top-level hard-error policy, bounded machine run, CRT and environment calls each have source-proven owners and successor dispositions. |
+| Asset Needs | [S2 worklist](etc/operations/m0-t277-s2-source-form-worklist.tsv), [S3 machine ledger](etc/operations/m0-t277-s3-machine-family-disposition-ledger.tsv), original `dos/dem` and `dos/command` forms, T276 source-family evidence and [S4 plan](etc/operations/m0-t277-s4-dos-source-form-family-plan-001.md). |
+| Reporting Requirements | Exact 73-item coverage, counts by original DEM/COMMAND file and family, caller/provider form, mapping rule and failure disposition; every unresolved call names a successor package. |
 | Stop Conditions | An interface is assigned from filename or declaration alone, an adapter is invented without source evidence, a raw host pointer is proposed across a boundary, a second mapping manager is proposed, or a source body would be enabled. |
-| Exit Criteria | Every S2 work item from `suballoc`, `xms.486` and `dpmi32` is represented by a source-form family disposition; none is falsely claimed buildable or implemented. |
+| Exit Criteria | Every S2 `dos` work item is represented by a source-form family disposition and none is falsely claimed buildable, linked or implemented; all 73 retained source references and any excluded product-shell branch have a named successor. |
 | Original Owner Request | “MVDM package dependency and interface-closure tracker 单人模式实施”。 |
-| Similar-Issue Sweep | Lexical declaration ambiguity, macro/assembly non-projection, duplicate symbol spellings, package cycles, profile-excluded executors, x86/x64 ABI boundaries and false adapter ownership. |
+| Similar-Issue Sweep | DEM versus COMMAND ownership, command child lifecycle versus broker paths, console notification, host drive mutation, session-local handles, BOP ingress, machine ownership, NT4 private events, x86/x64 mapping and false direct-link conclusions. |
 
 ### Closed packet reference — M0 T276 S25
 

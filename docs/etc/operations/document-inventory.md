@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2546 |
+| Documentation records | 2552 |
 | --- | --- |
-| Generated UTC | 2026-08-26T19:56:26Z |
+| Generated UTC | 2026-08-26T20:09:07Z |
 
 ## Entries
 
@@ -721,6 +721,12 @@ content-divergent entries.
 | etc/operations/m0-t277-s2-source-form-worklist.tsv | indexed supporting material | 1c1d3dcbef8713da190835f232df239d0c9cc1051a498dd0547977812c1e38e6 |
 | etc/operations/m0-t277-s2-source-form-worklist-evidence-001.md | indexed supporting material | 6c26d6bd01e97cf2e5d9e0f8c0585819c918c33f7a4e2829114a35c01a8f99b5 |
 | etc/operations/m0-t277-s2-source-form-worklist-plan-001.md | indexed supporting material | ca15898db0dec2cbf4965ab43390453beff208249b26079d21d3b765fb1cfbbd |
+| etc/operations/m0-t277-s3-file-disposition-corrections.tsv | indexed supporting material | de03e06f42cedabb1aeb8fbf11cb33ed5a7e5faf161a15966495549679b2ec58 |
+| etc/operations/m0-t277-s3-machine-family-audit-001.md | indexed supporting material | 919b5a4d045e5e27390b428646b97b8fe00540fe17227ccb56b5a6744d370734 |
+| etc/operations/m0-t277-s3-machine-family-disposition-ledger.tsv | indexed supporting material | da436af3a1efb6753755f07f962ff7b3bf5cd937ce2988233c1ac2bd2758c589 |
+| etc/operations/m0-t277-s4-dos-family-disposition-ledger.tsv | indexed supporting material | 58055b530dbfecf74eb176fc6aa9c62762a05d5d4d5bfa3ae93c6b3e044f98c5 |
+| etc/operations/m0-t277-s4-dos-source-form-family-audit-001.md | indexed supporting material | 7e7ed88898d97ab65af0b2995029f7db595083ba2a223ef73db82d7a3a28807b |
+| etc/operations/m0-t277-s4-dos-source-form-family-plan-001.md | indexed supporting material | c063e4fd621c527fb96a2ab3c687cfb0ebc8165aab1cff5cde681fd3a36a31f7 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -2560,7 +2566,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 16308ddc37de882c500afb888b464e1d851dd117d8d25ccf1b7f51857da1e867 |
+| STATUS.md | principal control document | f3e795b27f525ca9eb2b1359b39d1f4821e7506f98364ea07696b62a5fcaa746 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |
