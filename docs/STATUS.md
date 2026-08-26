@@ -144,6 +144,12 @@ mirror-private overlay behind one registered linkage boundary; no other
 component consumes it.  Formal lifecycle, child and native-entry regressions
 remain green. See [S3 P16 evidence](etc/evidence/m0-t271-s3-p16-command-composition-overlay-isolation-001.md).
 
+**S3 P17:** binary, config and environment helper bodies are now registered
+mirror-private overlays, leaving one-linkage boundaries in the COMMAND mirror.
+Config, dynamic-environment and lifecycle regressions remain green.  The PIF
+parser is explicitly held for a later whole `opennt-host` capability move,
+not misclassified as COMMAND glue. See [S3 P17 evidence](etc/evidence/m0-t271-s3-p17-command-helper-overlay-isolation-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored
