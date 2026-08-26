@@ -123,7 +123,7 @@ int main(void)
     if (session.local_child_events_blocked != 0u) return 19;
     if (session.local_child_stdout_redirected != 1u ||
         session.local_child_std_handle_notification_count == 0u) return 23;
-    if (session.local_child_reentrancy != 0u || session.local_child_reentrancy_peak != 1u)
+    if (session.input.reentry_count != 0u || session.input.reentry_peak != 1u)
         return 20;
     if (GetStdHandle(STD_INPUT_HANDLE) != host_stdin ||
         GetStdHandle(STD_OUTPUT_HANDLE) != host_stdout ||

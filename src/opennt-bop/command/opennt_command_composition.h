@@ -3,6 +3,7 @@
 
 #include "adapter-win32/facade/opennt_error_dialog_facade.h"
 #include "adapter-win32/facade/opennt_command_oem_facade.h"
+#include "adapter-win32/facade/opennt_vdm_api_facade.h"
 #include "adapter-softpc/softpc_printer_openclose_shim.h"
 #include "session/session_input.h"
 
@@ -63,14 +64,6 @@ typedef struct _RedirComplete_Info {
 } REDIRCOMPLETE_INFO, *PREDIRCOMPLETE_INFO;
 /* Exact OpenNT vdmapi.h and cmdsvc.h records used by cmdGetNextCmd.  Pointer
  * members remain host-private; guest access is always copied by this shim. */
-#define ASKING_FOR_FIRST_COMMAND 0x0001u
-#define ASKING_FOR_DOS_BINARY    0x0004u
-#define ASKING_FOR_SECOND_TIME   0x0008u
-#define ASKING_FOR_ENVIRONMENT   0x0400u
-#define INCREMENT_REENTER_COUNT  0x0010u /* OpenNT public/internal/base/inc/vdmapi.h */
-#define DECREMENT_REENTER_COUNT  0x0020u /* OpenNT public/internal/base/inc/vdmapi.h */
-#define NO_PARENT_TO_WAKE        0x0040u
-#define RETURN_ON_NO_COMMAND     0x0080u
 #define CNTRL_SHELLCOUNT         0x0000ffffu
 #ifndef CREATE_FORCEDOS
 #define CREATE_FORCEDOS          0x00000200u
@@ -92,17 +85,6 @@ typedef struct _CMDINFO {
     USHORT ExecPathSize, ExecExtType;
 } CMDINFO, *PCMDINFO;
 #pragma pack(pop)
-typedef struct _VDMINFO {
-    ULONG iTask, dwCreationFlags, ErrorCode, CodePage;
-    HANDLE StdIn, StdOut, StdErr;
-    LPVOID CmdLine, AppName, PifFile, CurDirectory, Enviornment;
-    ULONG EnviornmentSize;
-    STARTUPINFOA StartupInfo;
-    LPVOID Desktop; ULONG DesktopLen; LPVOID Title; ULONG TitleLen;
-    LPVOID Reserved; ULONG ReservedLen;
-    USHORT CmdSize, AppLen, PifLen, CurDirectoryLen, VDMState, CurDrive;
-    BOOLEAN fComingFromBat;
-} VDMINFO, *PVDMINFO;
 typedef struct _VDMENVBLK { DWORD cchEnv, cchRemain; CHAR *lpszzEnv; } VDMENVBLK, *PVDMENVBLK;
 /* OpenNT command/cmdpif.h: retain the original PIF record layout because
  * cmdpif.c and the original nt_pif.c parser exchange it directly. */
@@ -242,8 +224,6 @@ typedef struct runtime_command_misc_session {
      * no host-console mutation is implied. */
     uint32_t local_child_stdout_redirected;
     uint32_t local_child_std_handle_notification_count;
-    uint32_t local_child_reentrancy;
-    uint32_t local_child_reentrancy_peak;
     uint32_t create_process_attempted;
     uint32_t create_process_last_error;
     uint32_t create_process_environment_bytes;
@@ -358,10 +338,7 @@ LPVOID runtime_command_misc_get_vdm_addr(USHORT segment, USHORT offset);
 void nt_init_event_thread(void);
 DWORD runtime_command_misc_get_environment_variable(LPSTR name,
     LPSTR buffer, DWORD bytes);
-BOOL GetNextVDMCommand(PVDMINFO vdm_info);
 void cmdUpdateCurrentDirectories(BYTE current_drive);
-BOOL SetVDMCurrentDirectories(ULONG current_directory_bytes,
-    LPSTR current_directories);
 extern CHAR *lpszzCurrentDirectories;
 extern DWORD cchCurrentDirectories;
 void cmdSetDirectories(PCHAR environment, PVDMINFO vdm_info);

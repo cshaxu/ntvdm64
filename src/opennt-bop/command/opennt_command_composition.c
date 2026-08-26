@@ -57,7 +57,6 @@ static __declspec(thread) runtime_command_misc_active_call *g_active_call;
  * active BOP call, a guest pointer, or a raw HANDLE in its continuation. */
 static runtime_command_misc_session *g_pending_session;
 static __declspec(thread) runtime_command_misc_session *g_worker_session;
-static const CHAR g_empty_environment[2] = { '\0', '\0' };
 
 static uint32_t real_mode_address(USHORT segment, USHORT offset)
 {
@@ -175,72 +174,6 @@ int runtime_command_misc_session_set_command_environment(
     return session_input_set_environment(&session->input, environment, bytes);
 }
 
-BOOL GetNextVDMCommand(PVDMINFO vdm_info)
-{
-    runtime_command_misc_session *session = runtime_command_misc_active_session();
-    size_t application_bytes, tail_bytes;
-    if (vdm_info == NULL || session == NULL)
-        return FALSE;
-    /* OpenNT's vdm.c client routes these two records to BaseSrv, which adjusts
-     * a console VDM reentrancy count.  The public CLI has no BaseSrv client;
-     * retain the exact ordered count in the only supported session instead. */
-    if (vdm_info->VDMState == INCREMENT_REENTER_COUNT) {
-        session->local_child_reentrancy++;
-        if (session->local_child_reentrancy > session->local_child_reentrancy_peak)
-            session->local_child_reentrancy_peak = session->local_child_reentrancy;
-        return TRUE;
-    }
-    if (vdm_info->VDMState == DECREMENT_REENTER_COUNT) {
-        if (session->local_child_reentrancy == 0u) return FALSE;
-        session->local_child_reentrancy--;
-        return TRUE;
-    }
-    if (session->input.ready == 0u) return FALSE;
-    if ((vdm_info->VDMState & ASKING_FOR_ENVIRONMENT) != 0u) {
-        uint32_t bytes = session->input.environment_bytes;
-        const CHAR *environment = session->input.environment;
-        if (bytes == 0u || environment == NULL) {
-            environment = g_empty_environment;
-            bytes = sizeof(g_empty_environment);
-        }
-        if (vdm_info->Enviornment == NULL || vdm_info->EnviornmentSize < bytes) {
-            vdm_info->EnviornmentSize = bytes;
-            return FALSE;
-        }
-        memcpy(vdm_info->Enviornment, environment, bytes);
-        vdm_info->EnviornmentSize = bytes;
-        return TRUE;
-    }
-    if (session->input.delivered != 0u || vdm_info->AppName == NULL ||
-        vdm_info->CmdLine == NULL) return FALSE;
-    application_bytes = strlen(session->input.target) + 1u;
-    tail_bytes = strlen(session->input.arguments);
-    if (application_bytes > vdm_info->AppLen || tail_bytes + 2u > vdm_info->CmdSize ||
-        application_bytes > USHRT_MAX || tail_bytes + 2u > USHRT_MAX) return FALSE;
-    memcpy(vdm_info->AppName, session->input.target, application_bytes);
-    memcpy(vdm_info->CmdLine, session->input.arguments, tail_bytes);
-    ((CHAR *)vdm_info->CmdLine)[tail_bytes] = '\r';
-    ((CHAR *)vdm_info->CmdLine)[tail_bytes + 1u] = '\n';
-    ((CHAR *)vdm_info->CmdLine)[tail_bytes + 2u] = '\0';
-    vdm_info->AppLen = (USHORT)application_bytes;
-    vdm_info->CmdSize = (USHORT)(tail_bytes + 2u);
-    vdm_info->CurDrive = session->input.location;
-    vdm_info->CodePage = session->input.text_code_page;
-    session->input.delivered = 1u;
-    return TRUE;
-}
-
-BOOL SetVDMCurrentDirectories(ULONG current_directory_bytes,
-    LPSTR current_directories)
-{
-    runtime_command_misc_session *session = runtime_command_misc_active_session();
-    /* DIVERGENCE(BOP-DIV-035): OpenNT's client stub sends these bytes to BaseSrv/CSR for a
-     * console-bound VDM.  That NT4 product service is not independently
-     * composable in the CLI; retain its copied multisz publication contract in
-     * the active session instead. */
-    return session != NULL && session_input_set_published_directories(
-        &session->input, current_directories, current_directory_bytes);
-}
 void cmdPushExitInConsoleBuffer(void)
 {
     /* No host-console injection is admitted. Preserve a visible session
@@ -540,12 +473,23 @@ BOOL runtime_command_worker_begin(PCHAR command, PCHAR environment)
 
 DWORD WINAPI runtime_command_worker_thread(LPVOID ignored)
 {
+    session_input *input;
     (void)ignored;
     g_worker_session = g_pending_session;
     if (g_worker_session == NULL) return ERROR_INVALID_STATE;
+    input = &g_worker_session->input;
+    /* cmdCreateProcess reaches the original GetNextVDMCommand re-entry
+     * calls on this worker thread.  Bind only the neutral copied session
+     * input for that duration: the facade retains the historical VDM API
+     * shape without retaining an active BOP call or guest pointer. */
+    if (!opennt_vdm_api_bind_input(input)) {
+        g_worker_session = NULL;
+        return ERROR_INVALID_STATE;
+    }
     pCommand32 = g_worker_session->pending.command;
     pEnv32 = g_worker_session->pending.environment;
     cmdCreateProcess();
+    opennt_vdm_api_unbind_input(input);
     g_worker_session = NULL;
     return 0u;
 }
@@ -1087,11 +1031,21 @@ static int runtime_command_misc_invoke_internal(runtime_command_misc_call *call,
 
 int runtime_command_misc_invoke(runtime_command_misc_call *call)
 {
-    return runtime_command_misc_invoke_internal(call, NULL);
+    int result;
+    if (call == NULL || (call->session != NULL &&
+        !opennt_vdm_api_bind_input(&call->session->input))) return 0;
+    result = runtime_command_misc_invoke_internal(call, NULL);
+    if (call->session != NULL) opennt_vdm_api_unbind_input(&call->session->input);
+    return result;
 }
 
 int runtime_command_misc_invoke_body(runtime_command_misc_call *call,
     void (*body)(void))
 {
-    return body != NULL ? runtime_command_misc_invoke_internal(call, body) : 0;
+    int result;
+    if (body == NULL || call == NULL || (call->session != NULL &&
+        !opennt_vdm_api_bind_input(&call->session->input))) return 0;
+    result = runtime_command_misc_invoke_internal(call, body);
+    if (call->session != NULL) opennt_vdm_api_unbind_input(&call->session->input);
+    return result;
 }

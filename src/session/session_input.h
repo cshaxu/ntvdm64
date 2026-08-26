@@ -17,6 +17,8 @@ typedef struct session_input {
     uint32_t ready;
     uint32_t delivered;
     uint32_t repeat_pending;
+    uint32_t reentry_count;
+    uint32_t reentry_peak;
     uint16_t location;
     uint16_t text_code_page;
     char target[SESSION_INPUT_TARGET_BYTES];

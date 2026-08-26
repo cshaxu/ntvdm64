@@ -60,6 +60,14 @@ get-next, dynamic-environment and native-entry regressions pass; the next P
 moves the historical VDM API definitions themselves into `adapter-win32`.
 See [S3 P5 evidence](etc/evidence/m0-t271-s3-p5-session-input-extraction-001.md).
 
+**S3 P6:** the reached historical `GetNextVDMCommand` and
+`SetVDMCurrentDirectories` declarations and implementations now belong to
+`adapter-win32` as a same-shaped VDM API facade.  It preserves `VDMINFO`,
+the re-entry state transitions and original caller/worker order while binding
+only neutral copied `session_input` state; it does not claim the unavailable
+NT4 BaseSrv/CSR broker.  Formal direct, dynamic-environment, native-session
+and local-child regressions pass.  See [S3 P6 evidence](etc/evidence/m0-t271-s3-p6-vdm-api-facade-recovery-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored
