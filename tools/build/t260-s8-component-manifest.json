@@ -243,6 +243,7 @@
       "name": "adapter-bop",
       "sources": [
         "src/adapter-bop/bop_ingress.c",
+        "src/adapter-bop/frame_transaction.c",
         "src/adapter-bop/generic_ud_bridge.cc"
       ]
     },
@@ -433,6 +434,24 @@
         "adapter-bop"
       ],
       "platformLibraries": []
+    },
+    {
+      "name": "t271-s3-frame-transaction-fixture",
+      "source": "tests/adapter-bop/t271_s3_frame_transaction_fixture.c",
+      "libraries": [
+        "app",
+        "opennt-bop",
+        "opennt-host",
+        "adapter-win32",
+        "adapter-bop",
+        "adapter-softpc",
+        "session",
+        "adapter-bochs",
+        "bochs-core"
+      ],
+      "platformLibraries": [
+        "kernel32.lib"
+      ]
     },
     {
       "name": "t258-s1-guest-pointer-manager-fixture",

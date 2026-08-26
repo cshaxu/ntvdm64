@@ -90,11 +90,12 @@ capability. COMMAND retains only the original-body callback and scoped
 session-input bind required for `cmdCreateProcess`; it no longer directly
 creates or waits on host threads/events. See [S3 P8b evidence](etc/evidence/m0-t271-s3-p8b-command-child-worker-recovery-001.md).
 
-**S3 P8b:** worker/event creation, completion polling/release and
-dispose/cancellation now also belong to the same `opennt-host` child
-capability. COMMAND retains only the original-body callback and scoped
-session-input bind required for `cmdCreateProcess`; it no longer directly
-creates or waits on host threads/events. See [S3 P8b evidence](etc/evidence/m0-t271-s3-p8b-command-child-worker-recovery-001.md).
+**S3 P9:** the generic copied CPU-frame / checked-RAM / typed-outcome
+transaction has moved from COMMAND ingress to selector-blind `adapter-bop`.
+COMMAND retains only its original entry envelope, staged service byte and
+`MS_bop_4` call. Focused transaction, native COMMAND-entry and local-child
+regressions pass after a formal Ninja relink; the remaining source-shaped
+COMMAND composition blocks are still active S3 work. See [S3 P9 evidence](etc/evidence/m0-t271-s3-p9-selector-blind-frame-transaction-001.md).
 
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service

@@ -16,3 +16,4 @@ code, not an imported OpenNT mirror.
 | ID | Original definition purpose | Divergence reason | Replacement implementation | Production file(s) |
 | --- | --- | --- | --- | --- |
 | `ADAPTER-BOP-001` | NT4 connected BOP dispatch directly to its product host. | The modern component graph must not make Bochs or its generic CPU entry selector-aware. | A same-runtime, `app`-owned route binding forwards only the copied event and typed outcome; the route remains in `opennt-bop`. | `bop_ingress.c`, `bop_ingress.h` |
+| `ADAPTER-BOP-002` | OpenNT providers read CCPU/SAS state directly while executing a BOP body. | The replacement machine exposes only copied CPU state and checked ordinary-RAM transport. | A selector-blind borrowed frame transaction supplies source-shaped CPU/result records and returns only a typed outcome. | `frame_transaction.c`, `frame_transaction.h` |

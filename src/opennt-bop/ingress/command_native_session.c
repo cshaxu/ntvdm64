@@ -1,6 +1,6 @@
 #include "command_native_session.h"
 
-#include "adapter-softpc/mechanical_action.h"
+#include "adapter-bop/frame_transaction.h"
 #include "opennt-bop/command/nt_bop_command.h"
 
 #include <string.h>
@@ -56,73 +56,15 @@ static int event_valid(const struct runtime_generic_ud_event *event)
         event->window_bytes <= RUNTIME_GENERIC_UD_WINDOW_BYTES;
 }
 
-static void copy_cpu(const struct runtime_generic_ud_event *source,
-    runtime_cpu_state *target)
-{
-    runtime_cpu_state_initialize(target, source->execution_mode);
-    target->eax = source->eax; target->ebx = source->ebx; target->ecx = source->ecx;
-    target->edx = source->edx; target->esi = source->esi; target->edi = source->edi;
-    target->ebp = source->ebp; target->esp = source->esp; target->eip = source->eip;
-    target->eflags = source->eflags; target->cs = source->cs; target->ds = source->ds;
-    target->es = source->es; target->ss = source->ss; target->fs = source->fs;
-    target->gs = source->gs;
-}
-
-static int guest_read(void *state, uint32_t address, uint8_t *bytes,
-    uint32_t byte_count)
-{
-    return session_valid((runtime_command_native_session *)state) &&
-        runtime_machine_checked_ram_read(address, bytes, byte_count);
-}
-
-static int guest_write(void *state, uint32_t address, const uint8_t *bytes,
-    uint32_t byte_count)
-{
-    return session_valid((runtime_command_native_session *)state) &&
-        runtime_machine_checked_ram_write(address, bytes, byte_count);
-}
-
-static int copy_outcome(const runtime_cpu_result *result,
-    struct runtime_generic_ud_outcome *outcome)
-{
-    if (!runtime_cpu_result_valid(result) || outcome == NULL ||
-        result->disposition == RUNTIME_CPU_RESULT_PASS_THROUGH) return 0;
-    memset(outcome, 0, sizeof(*outcome));
-    outcome->abi_version = RUNTIME_GENERIC_UD_EVENT_VERSION;
-    outcome->disposition = result->disposition == RUNTIME_CPU_RESULT_RESUME ?
-        RUNTIME_GENERIC_UD_RESUME :
-        (result->disposition == RUNTIME_CPU_RESULT_PENDING ?
-            RUNTIME_GENERIC_UD_PENDING : RUNTIME_GENERIC_UD_STOP);
-    outcome->resume_rip = result->resume_rip;
-    outcome->gpr16_write_mask = result->cpu_delta.gpr16_write_mask;
-    memcpy(outcome->gpr16_values, result->cpu_delta.gpr16_values,
-        sizeof(outcome->gpr16_values));
-    outcome->segment_write_mask = result->cpu_delta.segment_write_mask;
-    memcpy(outcome->segment_values, result->cpu_delta.segment_values,
-        sizeof(outcome->segment_values));
-    outcome->eflags_write_mask = result->eflags_write_mask;
-    outcome->eflags_values = result->eflags_values;
-    return 1;
-}
-
 int runtime_command_native_session_dispatch(
     const struct runtime_generic_ud_event *event,
     struct runtime_generic_ud_outcome *outcome)
 {
-    runtime_exception_event boundary;
-    runtime_cpu_state cpu;
-    runtime_cpu_result result;
+    runtime_bop_frame_transaction frame;
     runtime_command_misc_call call;
     if (!session_valid(g_active_session) || g_active_session->bound == 0u ||
         !event_valid(event) || outcome == NULL) return 0;
-    memset(&boundary, 0, sizeof(boundary));
-    boundary.magic = RUNTIME_EXCEPTION_ABI_MAGIC;
-    boundary.abi_version = RUNTIME_EXCEPTION_ABI_VERSION;
-    boundary.struct_bytes = sizeof(boundary);
-    boundary.kind = RUNTIME_EXCEPTION_EVENT_CPU_EXCEPTION;
-    boundary.cpu_id = event->cpu_id; boundary.vector = event->vector;
-    boundary.error_code = event->error_code; boundary.fault_rip = event->fault_rip;
-    copy_cpu(event, &cpu);
+    if (!runtime_bop_frame_transaction_begin(event, &frame)) return 0;
     memset(&call, 0, sizeof(call));
     call.magic = RUNTIME_COMMAND_MISC_CALL_MAGIC;
     call.abi_version = RUNTIME_COMMAND_MISC_CALL_VERSION;
@@ -133,11 +75,13 @@ int runtime_command_native_session_dispatch(
     /* MS_bop_4 reads the service byte at the staged CS:IP. This value only
      * describes the bounded callback/post-body record. */
     call.service = event->window[3];
-    call.boundary = &boundary; call.cpu = &cpu; call.result = &result;
-    call.guest_state = g_active_session; call.guest_read = guest_read;
-    call.guest_write = guest_write; call.session = &g_active_session->direct;
+    call.boundary = &frame.boundary; call.cpu = &frame.cpu; call.result = &frame.result;
+    call.guest_state = &frame;
+    call.guest_read = runtime_bop_frame_transaction_guest_read;
+    call.guest_write = runtime_bop_frame_transaction_guest_write;
+    call.session = &g_active_session->direct;
     call.first_call = 1u;
-    cpu.eip += 3u;
+    frame.cpu.eip += 3u;
     return runtime_command_misc_invoke_body(&call, MS_bop_4) &&
-        copy_outcome(&result, outcome);
+        runtime_bop_frame_transaction_complete(&frame, outcome);
 }
