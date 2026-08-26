@@ -18,7 +18,7 @@
 #include "opennt-bop/ingress/softpc_emm_unavailable_generic_ud_bridge.h"
 #include "opennt-bop/ingress/softpc_mouse_vector_generic_ud_bridge.h"
 #include "opennt-bop/ingress/softpc_printer_openclose_generic_ud_bridge.h"
-#include "opennt-bop/ingress/config_complete_generic_ud_bridge.h"
+#include "app/bop/config_complete_entry.h"
 #include "opennt-bop/ingress/spckbd_handoff_generic_ud_bridge.h"
 #include "opennt-bop/ingress/top_level_nosupport_generic_ud_bridge.h"
 #include "app/bop/xms_entry.h"

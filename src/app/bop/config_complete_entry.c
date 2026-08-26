@@ -1,4 +1,4 @@
-#include "config_complete_generic_ud_bridge.h"
+#include "config_complete_entry.h"
 #include "app/bop/dem_session.h"
 
 void MS_bop_E(void);

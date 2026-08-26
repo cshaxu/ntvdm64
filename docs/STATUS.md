@@ -204,6 +204,11 @@ provider tables unchanged.  Formal Ninja build plus the focused source-path
 fixtures pass; the non-mirror ingress inventory drops from 22 to 13 named
 deferred owner inputs.  See [S5 P3 extraction](etc/evidence/m0-t271-s5-p3-app-composition-extraction-001.md).
 
+**S5 P4:** the `0x5E` fixed-frame wrapper for the already mirrored OpenNT
+`MS_bop_E` is also app composition, not a mirror body.  It now lives in
+`app/bop/`; the focused formal fixture passes and 12 non-mirror ingress bodies
+remain for owner-package disposition.  See [S5 P4 extraction](etc/evidence/m0-t271-s5-p4-config-complete-app-entry-extraction-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

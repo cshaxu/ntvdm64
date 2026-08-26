@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "opennt-bop/ingress/config_complete_generic_ud_bridge.h"
+#include "app/bop/config_complete_entry.h"
 #include "app/bop/dem_host_session.h"
 #include "app/bop/dem_session.h"
 

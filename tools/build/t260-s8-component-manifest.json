@@ -279,7 +279,6 @@
       "name": "opennt-bop",
       "sources": [
         "src/opennt-bop/ingress/startup_machine_interrupt.c",
-        "src/opennt-bop/ingress/config_complete_generic_ud_bridge.c",
           "src/opennt-bop/ingress/redir_generic_ud_bridge.c",
           "src/opennt-bop/ingress/redir_native_session.c",
           "src/opennt-bop/ingress/softpc_emm_unavailable_generic_ud_bridge.c",
@@ -364,6 +363,7 @@
     {
       "name": "app",
       "sources": [
+        "src/app/bop/config_complete_entry.c",
         "src/app/bop/route.c",
         "src/app/bop/dem_host_session.c",
         "src/app/bop/dem_entry.c",
