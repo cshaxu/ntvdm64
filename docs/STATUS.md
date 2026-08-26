@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T273 S4** — M0 T271 remains closed by owner-directed
+**Active: M0 T274 S1** — M0 T271 remains closed by owner-directed
 exit-criterion revision; its audited residuals are recorded in its closure and
 the debt ledger, not misrepresented as completed mirror recovery.
 
@@ -10,7 +10,8 @@ The current intermission architecture is the thirteen-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
 project interfaces, a cross-process broker, and a shared x86/x64 32-bit
 compatibility object space. Its former single candidate has been divided into
-five dependency-closed packages. The first package is now active; see the
+five dependency-closed packages. The first two packages are closed and the
+third is now active; see the
 [rebootstrap program roadmap](etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md).
 
 ## Active Packet
@@ -32,11 +33,31 @@ focused lifecycle test passes under both MSVC x64 and Win32/x86 `/MT`.
 complete and pushed through `d94d46ae`; its authoritative record is
 [M0 T272 closure](history/m0-t272-closure-20260826.md).
 
-### M0 T273 S4 — Boundary and architecture verification
+### M0 T274 S1 — Non-guest package-scope union ledger
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T273 S4`, Ordinary Mode with single-person dual-role implementation and review. |
+| Identifier Mode | `M0 T274 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner-approved canonical OpenNT source-supply proposal; T273 closed after its S4 boundary audit. |
+| Objective | Create the authoritative package-scope path/provenance/hash/disposition ledger for the non-guest OpenNT/OpenNT-4.5 MVDM union. |
+| Non-goals | No guest reimport, provider enablement, dormant-body compilation, interface replacement, BOP execution, or host composition. |
+| Reference Baseline | `O:\repos.external\OpenNT\base\mvdm`, `O:\repos.external\OpenNT-4.5\nt\private\mvdm`, source policy, T272 owner manifest and source-supply proposal. |
+| Files And ABI Surface | Source-supply ledger/evidence, proposal/status/README provenance records and documentation inventory only. No production source body is changed in S1. |
+| Applicable Rules | Execution, source policy, mirror-component, architecture, coding, document and build-hygiene rules. |
+| Verification | Enumerate both trees; hash matching relative paths; classify every one-sided/conflicting file by owning package/build/resource/artifact lineage; governance and scoped diff review. |
+| Expected Markers | One selected source or explicit rejection for each target-relative non-guest path, variant hash evidence, package owner and next-subtask disposition. |
+| Asset Needs | Both pinned external source trees, existing guest carry-forward inventories and the repository-local source policy. |
+| Reporting Requirements | State cardinalities, conflict rules, selected/rejected variants, unresolved package ambiguities and host/guest isolation. |
+| Stop Conditions | A path cannot be assigned to a complete owner package, provenance is ambiguous, or a selection would silently mix incompatible build generations. |
+| Exit Criteria | Complete non-guest union ledger with every target path classified; S2 can import exact platform ABI declarations without reopening selection decisions. |
+| Original Owner Request | “opennt-guest里面的dos和wow16，其实可以直接复制到位…已有的app, session, bochs-core和adapter-*组件，可作为参考来源…” |
+| Similar-Issue Sweep | All MVDM package roots, headers, build files, resources, binaries, tools, duplicate variants, guest/host boundaries and obsolete current roots. |
+
+### M0 T273 S4 closure — Boundary and architecture verification
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T273 S4`, closed; Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Owner-approved Bochs foundation proposal; S3 closed in `f364eccf`; S4 is its final declared verification subtask. |
 | Objective | Prove the recovered Bochs foundation has the required directed dependencies, mirror/overlay privacy and x86/x64 focused lifecycle closure. |
 | Non-goals | No guest execution, firmware product boot, BOP provider, OpenNT service, SoftPC API recovery, feature enablement, or new Bochs semantic change. |
@@ -51,6 +72,13 @@ complete and pushed through `d94d46ae`; its authoritative record is
 | Exit Criteria | Both host-width fixtures and all directed-boundary/mirror checks pass, or every found violation is explicitly dispositioned; T273 closure then records only proven minimal-machine facts. |
 | Original Owner Request | “单人双角色模式实施当前队列中的所有任务，要求全局统筹，追求结果极简主义…避免添油战术。” |
 | Similar-Issue Sweep | All production include edges, Bochs/adapter vocabulary, old-root build inputs, overlay external consumers, CPU configuration, host-width assumptions and fixture source lists. |
+
+**T273 closure:** the minimal CPU5/Pentium-MMX Bochs construction/reset/RAM/
+port-space/timer-stop/resume foundation is proven under x64 and Win32/x86;
+`adapter-bochs` is its only external caller and `bochs-core` has no project
+dependency. The closure does not claim guest execution. See the
+[S4 audit](etc/operations/m0-t273-s4-bochs-boundary-architecture-audit-001.md)
+and [T273 closure](history/m0-t273-closure-20260826.md).
 
 ### M0 T273 S3 closure — Minimal app machine shell
 

@@ -31,3 +31,39 @@ formal build may read `src.old/bochs-core`.
   for Win32/x86 and eight for Win64/x64, preserving one CPU5 guest profile
   while preventing native host-pointer truncation.  The local lines carry a
   matching `DIVERGENCE(BX-CONFIG-002)` comment.  File: `config.h`.
+
+## M0 T273 S4 reconciled divergence index
+
+Every non-identical mirror file is registered below. Private executable bodies
+live only in `bochs-core-overlay`; these mirror files retain original subsets,
+declarations or minimal call sites.
+
+- `BX-BUILD-002` — historical build-tree/compiler spelling is adjusted only
+  to preserve the same declarations. Files: `cpu/i387.h`,
+  `gui/paramtree.cc`, `gui/siminterface.h`.
+- `BX-BUILD-003` — root-relative include spelling is redirected to this
+  mirror root only. Files: `bochs.h`, `gui/siminterface.h`.
+- `BX-MACH-023` — reset/exit is reduced from the full product shell to its
+  reset-window subset. File: `pc_system.cc`.
+- `BX-CORE-DIV-001` and `BX-EXEC-016` — private profile/entry state supports
+  minimal predicates and calls. Files: `cpu/access.cc`, `access32.cc`,
+  `cpu.cc`, `cpu.h`, `ctrl_xfer16.cc`, `ctrl_xfer32.cc`, `exception.cc`,
+  `icache.cc`, `init.cc`, `io.cc`, `stack.cc`, `string.cc`.
+- `BX-UD-001` and `BX-UD-002` — a selector-blind opaque event hook is private
+  overlay code. Files: `cpu/cpu.cc`, `cpu/cpu.h`, `cpu/exception.cc`.
+- `BX-CORE-DIV-002`, `BX-CORE-DIV-003`, `BX-CORE-DIV-004` — optional copied
+  observations are private; the mirror keeps default-off call sites. Files:
+  `cpu/access32.cc`, `cpu/cpu.cc`, `cpu/cpu.h`, `cpu/ctrl_xfer16.cc`,
+  `cpu/ctrl_xfer32.cc`, `cpu/instr.h`, `cpu/soft_int.cc`, `memory/memory.cc`.
+- `BX-IO-025`, `BX-IO-029`, `BX-IO-030`, `BX-MACH-024`, `BX-MACH-025`,
+  `BX-MACH-082` — full device/plugin composition is reduced to private minimal
+  port-space/PIC lifecycle bodies. Files: `iodev/devices.cc`, `iodev/iodev.h`,
+  `iodev/pic.cc`, `iodev/pic.h`.
+- `BX-MACH-026`, `BX-MACH-027`, `BX-MACHINE-091` — original machine/keyboard
+  product lifecycles are reduced to private native boundaries with no GUI or
+  host-input composition. Files: `iodev/iodev.h`, `iodev/keyboard.cc`,
+  `iodev/keyboard.h`, `memory/memory.h`.
+- `BX-MEM-007`, `BX-MEM-010`, `BX-MEM-020`, `BX-MEM-024`,
+  `BX-CORE-DIV-006` — SIM-dependent RAM setup is replaced by private checked
+  ordinary-RAM allocation/copy bodies; mirror files keep declarations. Files:
+  `memory/memory.h`, `memory/misc_mem.cc`.
