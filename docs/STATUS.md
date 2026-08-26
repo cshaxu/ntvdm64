@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T276 S12** — Begin W2 `softpc.new` package-boundary and
-composition disposition without enabling a historical machine body.
+**Active: M0 T276 S13** — Begin W3 complete `dos` package file/interface
+disposition without enabling a DEM, COMMAND or DOS provider body.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,25 +24,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S12 — W2 `softpc.new` package-boundary baseline
+### M0 T276 S13 — W3 `dos` package disposition baseline
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T276 S12`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T276/S11 is closed: all 140 W0/W1 paths, 14 source-interface families, 2,270 lexical calls and three runtime-support binding handoffs are accounted. The approved runtime/support/tool/firmware separation leaves W2 as the next source-owner boundary. |
-| Objective | Classify all selected `softpc.new` paths by original package/subpackage role, executable ownership (Bochs replacement versus recoverable host control versus separately mirrored firmware/input/tool), original build evidence and reached interface family before any machine body enters a build. |
-| Non-goals | No `softpc.new` source move, source-body edit, CPU execution enablement, Bochs change, adapter ABI implementation, formal build edge, BOP behavior or guest execution. |
-| Reference Baseline | T276 S1/S2/S5/S6/S8/S10 ledgers, exact `softpc.new` mirror, W0/W1 closure, source policy and architecture rules. |
-| Files And ABI Surface | W2 per-file/subpackage disposition ledger and evidence, Status and documentation inventory. No runtime ABI changes. |
+| Identifier Mode | `M0 T276 S13`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T276/S12 is closed: all 998 `softpc.new` paths have provisional disposition and its 56 `host/src` source units have complete detailed owner-group coverage. The next complete original package is the 40-path `dos` root. |
+| Objective | Classify all selected `dos` paths by original subpackage/provider role, literal build evidence and reached external interface family before enabling a DEM, COMMAND or DOS provider body. |
+| Non-goals | No source move/edit, BOP service implementation, adapter ABI/body, formal build edge, Ninja run, guest image change, Bochs change, host filesystem operation or guest execution. |
+| Reference Baseline | T276/S1–S12 ledgers, exact selected `dos` mirror, W0/W1 and W2 closure, source policy and architecture rules. |
+| Files And ABI Surface | W3 `dos` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Account for all selected `softpc.new` paths; separately identify CCPU execution bodies, Bochs-compatible machine/control candidates, firmware/ROM inputs, host control, build tools and debugger inputs; reject path-name-only ownership. |
-| Expected Markers | One provisional W2 composition disposition per selected path, exact source/build evidence, explicit Bochs-replacement exclusions and no unowned historical machine interface. |
-| Asset Needs | T276 S1/S2/S5/S6/S8/S10 ledgers and exact selected `softpc.new` source mirror. |
-| Reporting Requirements | Exact path/source/build counts, subpackage composition roles, machine/exclusion boundaries, adapter prerequisites, unresolved ABI dependencies and W3 handoff. |
-| Stop Conditions | A source path has no selected/build evidence, a CPU body is mistakenly enabled beside Bochs, a purported host-control unit hides CCPU/SAS/Win32 requirements, or a classification needs invented adapter behavior. |
-| Exit Criteria | Every selected `softpc.new` path has a reproducible provisional W2 composition/disposition record; every candidate recovery group has a named adapter/Bochs prerequisite or explicit profile exclusion without mirror changes. |
+| Verification | Account for all 40 selected `dos` paths; identify original dispatcher/provider/control roles and actual external interface families; reject path-name-only ownership and trace-led leaf work. |
+| Expected Markers | One provisional composition disposition per path, exact source/build evidence, named internal/adapter prerequisite or explicit profile exclusion per reached family. |
+| Asset Needs | T276 S1–S12 ledgers, exact selected `dos` mirror and [S13 plan](etc/operations/m0-t276-s13-dos-package-disposition-plan-001.md). |
+| Reporting Requirements | Exact path/source/build counts, subpackage roles, dependency families, unresolved ABI facts and subsequent package handoff. |
+| Stop Conditions | A path has no selected/build evidence, a provider is enabled due to a trace, a dependency has no named owner, or classification requires invented adapter behavior. |
+| Exit Criteria | Every selected `dos` path has a reproducible provisional owner/disposition record and each actual external family is assigned to a named existing adapter/internal owner or explicit exclusion; no source body is enabled. |
 | Original Owner Request | “好的 开始审计任务”。 |
-| Similar-Issue Sweep | CCPU/SoftPC CPU bodies, device and host units, BIOS/ROM assembly, source descriptions, imported include forms, adapter-softpc/adapter-bochs boundaries and existing T276 ABI evidence. |
+| Similar-Issue Sweep | DEM, COMMAND, DOS BOP dispatch, host control/namespace/file/session providers, original build descriptions, BOP/SoftPC/Win32/session boundaries and prior partial provider evidence. |
 
 ### M0 T276 S11 — W0/W1 file and interface disposition baseline
 
@@ -200,9 +200,10 @@ or build edge is enabled. See [T276 S12 SoftPC baseline](etc/operations/m0-t276-
 **T276 S12 P2:** the 56 original `softpc.new/host/src` source units are now
 split by boundary rather than treated as one recoverable library: one BOP
 dispatcher, ten SoftPC/SAS facade units, four monitor/reset/event units, one
-session/worker unit, one cross-owner startup-composition unit, nine Win32
-host-capability units, two VDD/debugger units, 18 device bridges and ten
-literal-build-unobserved auxiliaries. No source or
+session/worker unit, one cross-owner startup-composition unit, one
+launch/configuration-composition unit, seven Win32 host-capability units, one
+video/machine-composition unit, two VDD/debugger units, 18 device bridges and
+ten literal-build-unobserved auxiliaries. No source or
 adapter becomes enabled; the next slice audits complete owner groups at the
 function/interface level. See [T276 S12 host/src baseline](etc/operations/m0-t276-s12-host-src-disposition-baseline-001.md).
 
