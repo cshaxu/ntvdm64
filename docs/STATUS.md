@@ -72,6 +72,12 @@ the named boundary for a future separately audited product package. See the
 [S24 plan](etc/operations/m0-t276-s24-vdd-sample-package-disposition-plan-001.md)
 and the global [final expected-integration tracker](etc/operations/m0-t276-final-integration-disposition-ledger.tsv).
 
+**S25 P1:** all 140 W0/W1 paths now have final expected-integration
+dispositions: two `adapter-backed` OEM library bodies, 105 `binding-only`
+declaration/library carriers, 31 `tool-only` historical products and two
+`not-host-runtime` build-control inputs. This is a final planning conclusion,
+not a source enablement claim; see the [W0/W1 final baseline](etc/operations/m0-t276-s25-w0-w1-final-disposition-baseline-001.md).
+
 **S20 closure:** all 25 selected `dpmi32` paths have reproducible non-enabled
 dispositions. Sixteen selected x86 bodies form one host-provider package; all
 guest addresses are constrained to the unique session mapping-manager lease or
