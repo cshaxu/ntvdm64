@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T278 S1** — M0 T278 makes the audited MVDM component ownership
+**Active: M0 T278 S2** — M0 T278 makes the audited MVDM component ownership
 split physically true. It is an Ordinary Mode, single-person dual-role source
 identity migration; no source body, adapter ABI, build edge or guest execution
 is admitted.
@@ -26,25 +26,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T278 S1 — destination and source-identity freeze
+### M0 T278 S2 — physical mirror move
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T278 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Identifier Mode | `M0 T278 S2`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Owner directed single-person dual-role execution of the queue task following closed M0 T277. |
-| Objective | Generate a unique per-path target-component and hash ledger for all 1,689 audited non-guest MVDM paths before any physical move. |
+| Objective | Use only `git mv` to transfer the frozen support, tool and firmware path groups to their target mirror components; leave all other selected paths in the host carrier. |
 | Non-goals | No original source-body edit, adapter implementation, build/Ninja edge, provider enablement, Bochs change or guest execution. |
-| Reference Baseline | T274 union source/hash ledger, T276 final file dispositions, T277 effective package/profile closure and the physical re-root proposal. |
-| Files And ABI Surface | S1 plan, generated destination ledger/verifier, Status and documentation inventory. No runtime ABI changes. |
+| Reference Baseline | Closed S1 1,689-row destination/hash ledger and the physical re-root proposal. |
+| Files And ABI Surface | Exact source paths below the four MVDM mirror components, S2 post-move verifier, Status and documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | All 1,689 source paths appear once; each has one destination component and an upstream SHA-256; target classifications match the approved package roots. |
-| Expected Markers | Support=`dirs`/`makefil0`/`inc`/`oemuni`/`suballoc`; tools=`vdmutils`; firmware only the named SoftPC BIOS/ROM/data subtrees; all others remain host. |
-| Asset Needs | T274 union ledger, T277 file/profile ledgers and [re-root proposal](etc/operations/proposal-mvdm-runtime-support-tool-re-root-001.md). |
-| Reporting Requirements | Exact destination counts, each component's package roots, source identity basis and any inconsistent input. |
-| Stop Conditions | Any duplicate/missing path, mismatch in upstream hash, ambiguous target, undocumented new source, source-body change or build-edge change. |
-| Exit Criteria | A reproducible 1,689-row destination ledger and verifier pass before any `git mv` is issued. |
+| Verification | Each ledger path exists exactly at its frozen target, retains the frozen SHA-256 and no selected path remains at an old non-target location. The four target components contain only their assigned paths plus own README. |
+| Expected Markers | 112 support, 28 tool and 58 firmware files move by `git mv`; 1,491 host files remain. No source body changes. |
+| Asset Needs | [S1 ledger](etc/operations/m0-t278-destination-source-identity-ledger.tsv), T274 source union and [S2 plan](etc/operations/m0-t278-s2-physical-mirror-move-plan-001.md). |
+| Reporting Requirements | Exact moved/retained counts, SHA-256 proof, destination isolation and any Git rename anomaly. |
+| Stop Conditions | A path would be copied instead of moved, a hash differs, target ownership is ambiguous, source text changes, or a build file would be edited. |
+| Exit Criteria | All 1,689 frozen paths pass post-move location/hash checks; only exact original files changed location. |
 | Original Owner Request | “单人双角色模式执行队列任务”。 |
-| Similar-Issue Sweep | Package versus file-level target, tool/runtime leakage, firmware/guest confusion, source hash mismatch, duplicate target and hidden build-input change. |
+| Similar-Issue Sweep | Package versus file-level target, tool/runtime leakage, firmware/guest confusion, source hash mismatch, duplicate target, Git rename anomaly and hidden build-input change. |
 
 ### Closed packet reference — M0 T276 S25
 
