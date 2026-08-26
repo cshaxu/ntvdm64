@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2516 |
+| Documentation records | 2517 |
 | --- | --- |
-| Generated UTC | 2026-08-26T18:40:52Z |
+| Generated UTC | 2026-08-26T18:42:58Z |
 
 ## Entries
 
@@ -600,7 +600,7 @@ content-divergent entries.
 | etc/operations/m0-t275-s1-implementation-disposition.tsv | indexed supporting material | 16039911ea241c885cdab7c8ecaf3ca4433380bb633c34263c492c076c7afd6d |
 | etc/operations/m0-t275-s2-missing-interface-ledger.tsv | indexed supporting material | be3b36ae102279a9f0441ade94dfdc0c7272d171db540bf34cc0e3c405b0b21c |
 | etc/operations/m0-t275-s2-specialist-adapter-inventory-001.md | indexed supporting material | daf42931d0cfa245d0048f2d2d3ccd427b9e94cf259c0cbcb6fbeaef11427c4c |
-| etc/operations/m0-t276-final-integration-disposition-ledger.tsv | indexed supporting material | 5f9f0a9f32b75644cc71a7a86eb5b93475798f89a0ae746ca4fee7dd9bf8a66a |
+| etc/operations/m0-t276-final-integration-disposition-ledger.tsv | indexed supporting material | 3d3ee5a413590816a2717941fa7fd1633a6c3336f0a262231ac2ab4a98c55658 |
 | etc/operations/m0-t276-final-integration-disposition-taxonomy-001.md | indexed supporting material | 070c9b7ffc778030b88c7e70bc995cd12982ca03ea4db5ef4615b97390b0247c |
 | etc/operations/m0-t276-s10-package-profile-wave-baseline-001.md | indexed supporting material | 840902ac888110f1032af8da55ce272ad5057a6c6ac62fb380004b83f2b4e942 |
 | etc/operations/m0-t276-s10-package-profile-wave-ledger.tsv | indexed supporting material | f4434686ab667b05bc38f4c94d142053857475b232c5cd2c650c56b509aeeaed |
@@ -672,6 +672,7 @@ content-divergent entries.
 | etc/operations/m0-t276-s25-final-disposition-backfill-plan-001.md | indexed supporting material | 0d4a009d08ea22fca641052a94923aa16cff2de86f690b0ade90a86384d95bab |
 | etc/operations/m0-t276-s25-softpc-conclusive-final-disposition-baseline-001.md | indexed supporting material | 168ac6626bf6fe1b1eef0564d9cfd89c1e7d8bc87a7210f59306df2da0677eaa |
 | etc/operations/m0-t276-s25-w0-w1-final-disposition-baseline-001.md | indexed supporting material | deb544a5598f38dfbd6a30b988d73be622ba2426db8385e5dbaa9c0738bc6857 |
+| etc/operations/m0-t276-s25-xms-final-disposition-baseline-001.md | indexed supporting material | 74690dad401b7dd6d4125b1c57d1ce1afdd986713c550d42ef166056a7a15fc9 |
 | etc/operations/m0-t276-s2-build-input-include-graph-001.md | indexed supporting material | 550a64073284061d8c7638fe6e3b271f0930e95a41384640890fad047f77a70d |
 | etc/operations/m0-t276-s2-original-build-description-ledger.tsv | indexed supporting material | 44d1f5ee7c63c2b856960871603621e2052cb1c0903baf3224af41ccee725268 |
 | etc/operations/m0-t276-s2-translation-unit-build-ledger.tsv | indexed supporting material | 542cb74fca0d9d6d857b901d30d462437d819a27a399e3e798f5a664eca4328f |
@@ -2530,7 +2531,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | ae0d822cb9484089e7b060141f6ecf088894f4fe309abfde081b3817b290dc96 |
+| STATUS.md | principal control document | 69d0e58b53fced1a93b3ce4a5395ff3d059c3f2ff2c2a6ffaaf906149d75f6f0 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |

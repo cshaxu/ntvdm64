@@ -85,6 +85,12 @@ and seven historical utilities are `tool-only`. The host control, monitor,
 declaration and app-composition subdomains remain deliberately unresolved;
 see the [conclusive SoftPC baseline](etc/operations/m0-t276-s25-softpc-conclusive-final-disposition-baseline-001.md).
 
+**S25 P3:** all 15 `xms.486` paths now have a final disposition: six selected
+original provider bodies are `adapter-backed`, `xms.h` is `binding-only`, and
+the direct-host-address/non-x86/build-evidence paths are `not-host-runtime`.
+The session `guest_memory` mapping-manager instance is the only XMS address
+resolution route; see the [XMS final baseline](etc/operations/m0-t276-s25-xms-final-disposition-baseline-001.md).
+
 **S20 closure:** all 25 selected `dpmi32` paths have reproducible non-enabled
 dispositions. Sixteen selected x86 bodies form one host-provider package; all
 guest addresses are constrained to the unique session mapping-manager lease or
