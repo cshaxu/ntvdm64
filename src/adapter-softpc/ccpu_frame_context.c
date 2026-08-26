@@ -71,3 +71,9 @@ int runtime_ccpu_set_pending(void)
     runtime_ccpu_frame_context *c = active_context();
     return c != NULL && runtime_cpu_result_pending(c->result);
 }
+
+int runtime_ccpu_set_controlled_stop(void)
+{
+    runtime_ccpu_frame_context *c = active_context();
+    return c != NULL && runtime_cpu_result_stop(c->result);
+}

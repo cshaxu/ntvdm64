@@ -452,7 +452,7 @@ void TerminateVDM(void)
     /* OpenNT's terminal path does not return.  The typed composition models
      * that directly as a controlled stop instead of resuming after an error. */
     if (g_active_call != NULL) {
-        (void)runtime_cpu_result_stop(g_active_call->call->result);
+        (void)runtime_ccpu_set_controlled_stop();
         longjmp(g_active_call->terminal_exit, 1);
     }
 }

@@ -50,6 +50,7 @@ void runtime_ccpu_set_es(uint16_t value); void runtime_ccpu_set_ip(uint16_t valu
 void runtime_ccpu_set_cf(int value);
 void runtime_ccpu_sas_load(uint32_t address, uint8_t *target);
 int runtime_ccpu_set_pending(void);
+int runtime_ccpu_set_controlled_stop(void);
 
 #ifdef __cplusplus
 }

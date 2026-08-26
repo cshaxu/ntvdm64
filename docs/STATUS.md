@@ -121,6 +121,14 @@ and service ordering remain under the active source-body review.  Focused
 CCPU context, direct COMMAND import and native COMMAND-entry regressions pass
 after the formal relink. See [S3 P12 evidence](etc/evidence/m0-t271-s3-p12-ccpu-frame-context-extraction-001.md).
 
+**S3 P13:** owner audit confirms that the original `cmdCreateProcess` worker
+callback and `GetVDMAddr` pointer/writeback order must remain source-specific
+COMMAND glue, while generic host child mechanics remain in `opennt-host`.
+The last generic terminal operation, typed controlled-stop, now belongs to
+the selector-blind CCPU frame context; only the original non-returning
+COMMAND convention remains locally. Redirector and WOW-specific tails retain
+their named future owner packages. See [S3 P13 evidence](etc/evidence/m0-t271-s3-p13-command-residual-owner-audit-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

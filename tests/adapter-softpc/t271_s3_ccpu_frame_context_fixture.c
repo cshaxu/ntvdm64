@@ -68,6 +68,8 @@ int main(void)
         result.eflags_values != RUNTIME_CPU_RESULT_EFLAGS_CF ||
         !runtime_ccpu_set_pending() ||
         result.disposition != RUNTIME_CPU_RESULT_PENDING) return 2;
+    if (!runtime_ccpu_set_controlled_stop() ||
+        result.disposition != RUNTIME_CPU_RESULT_STOP) return 3;
     runtime_ccpu_frame_context_end();
-    return runtime_ccpu_get_ax() == 0u ? 0 : 3;
+    return runtime_ccpu_get_ax() == 0u ? 0 : 4;
 }
