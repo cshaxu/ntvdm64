@@ -91,6 +91,11 @@ the direct-host-address/non-x86/build-evidence paths are `not-host-runtime`.
 The session `guest_memory` mapping-manager instance is the only XMS address
 resolution route; see the [XMS final baseline](etc/operations/m0-t276-s25-xms-final-disposition-baseline-001.md).
 
+**S25 P4:** all 59 `dpmi/*` paths are `guest-only`: the original package is
+one 16-bit `DOSX.EXE` guest product, never a host static library. Its future
+machine and BOP contracts remain at the declared guest boundary; see the
+[DPMI final baseline](etc/operations/m0-t276-s25-dpmi-final-disposition-baseline-001.md).
+
 **S20 closure:** all 25 selected `dpmi32` paths have reproducible non-enabled
 dispositions. Sixteen selected x86 bodies form one host-provider package; all
 guest addresses are constrained to the unique session mapping-manager lease or
