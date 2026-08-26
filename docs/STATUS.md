@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T276 S20** — Begin W6 complete `dpmi32` package file/interface
-disposition without enabling a DPMI32 provider body.
+**Active: M0 T276 S21** — Begin W7 complete `vdmredir` package file/interface
+disposition without enabling a Redirector provider body.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,25 +24,30 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S20 — W6 `dpmi32` package disposition baseline
+### M0 T276 S21 — W7 `vdmredir` package disposition baseline
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T276 S20`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T276/S19 is closed: all 59 `dpmi` paths are source-shaped DOSX guest-provider or guest-artifact inputs, never host composition. The next bounded original package is the 25-path `dpmi32` root. |
-| Objective | Classify every selected `dpmi32` path by original 32-bit DPMI provider/control role, build selection and reached protected-machine, monitor, session and BOP boundaries before enabling a DPMI32 body. |
-| Non-goals | No source move/edit, DPMI32 implementation, Bochs change, adapter body, formal build edge, Ninja run or guest execution. |
-| Reference Baseline | T276/S1–S19 ledgers, exact selected `dpmi32` mirror, source policy and architecture rules. |
-| Files And ABI Surface | W6 `dpmi32` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
+| Identifier Mode | `M0 T276 S21`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T276/S20 is closed: all 25 `dpmi32` paths have exact non-enabled dispositions, with 16 selected x86 provider bodies requiring the unique session mapping-manager boundary. The next bounded original package is the 25-path `vdmredir` root. |
+| Objective | Classify every selected `vdmredir` path by original Redirector protocol/provider role, build selection and reached COMMAND/DEM/session/Win32 boundary before enabling a Redirector body. |
+| Non-goals | No source move/edit, Redirector implementation, Bochs change, adapter body, formal build edge, Ninja run or guest execution. |
+| Reference Baseline | T276/S1–S20 ledgers, exact selected `vdmredir` mirror, source policy and architecture rules. |
+| Files And ABI Surface | W7 `vdmredir` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Account for all 25 selected `dpmi32` paths; distinguish provider/control/data and build forms; identify actual monitor, SoftPC/SAS, BOP, session and machine dependencies; reject a trace-led provider or invented protected-machine semantics. |
+| Verification | Account for all 25 selected `vdmredir` paths; distinguish redirector protocol, provider/data and build forms; identify actual DEM/COMMAND/session/Win32 boundaries; reject a standalone redirector rewrite. |
 | Expected Markers | One provisional composition disposition per path, exact build evidence and named internal/adapter prerequisite per reached family. |
-| Asset Needs | T276/S1–S19 ledgers, exact selected `dpmi32` mirror and [S20 plan](etc/operations/m0-t276-s20-dpmi32-package-disposition-plan-001.md). |
-| Reporting Requirements | Exact path/source/build counts, DPMI32 role, external boundary facts and subsequent package handoff. |
+| Asset Needs | T276/S1–S20 ledgers, exact selected `vdmredir` mirror and [S21 plan](etc/operations/m0-t276-s21-vdmredir-package-disposition-plan-001.md). |
+| Reporting Requirements | Exact path/source/build counts, Redirector role, external boundary facts and subsequent package handoff. |
 | Stop Conditions | A path has no selected/build evidence, raw host pointers cross a boundary, a second mapping manager is proposed, a body is enabled from a trace, or classification requires invented adapter behavior. |
-| Exit Criteria | Every selected `dpmi32` path has a reproducible provisional owner/disposition record and each actual external family is assigned to a named session or adapter/machine boundary; no source body is enabled. |
+| Exit Criteria | Every selected `vdmredir` path has a reproducible provisional owner/disposition record and each actual external family is assigned to a named session or adapter boundary; no source body is enabled. |
 | Original Owner Request | “好的 开始审计任务”。 |
-| Similar-Issue Sweep | DPMI32 protected-mode/LDT/exception/memory forms, BOP/DOS/WOW entry references, monitor and SoftPC/SAS calls, guest-memory mapping uniqueness, original build descriptions and adapter-softpc/adapter-vdm-monitor/adapter-bop/adapter-bochs boundaries. |
+| Similar-Issue Sweep | Redirector protocol/transport, DOS file/handle semantics, COMMAND child I/O, host Win32/network calls, session lifecycle and adapter-redir boundary. |
+
+**S20 closure:** all 25 selected `dpmi32` paths have reproducible non-enabled
+dispositions. Sixteen selected x86 bodies form one host-provider package; all
+guest addresses are constrained to the unique session mapping-manager lease or
+copy path, and two RISC bodies remain evidence only. See the [S20 DPMI32 baseline](etc/operations/m0-t276-s20-dpmi32-package-disposition-baseline-001.md).
 
 **S19 closure:** all 59 selected `dpmi` paths have reproducible non-enabled
 dispositions. The original build produces 16-bit `DOSX.EXE`; its 22 selected
