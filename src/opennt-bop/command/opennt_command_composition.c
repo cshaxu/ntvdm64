@@ -118,28 +118,8 @@ void runtime_command_misc_session_dispose(runtime_command_misc_session *session)
     int cancelled = 0;
     if (!runtime_command_misc_session_valid(session)) return;
     if (session == g_pending_session) {
-        HANDLE job = INVALID_HANDLE_VALUE;
-        HANDLE worker = INVALID_HANDLE_VALUE;
-        if (session->pending.state == OPENNT_HOST_CHILD_PENDING) {
-            /* A dispose can race CreateProcess.  Record intent in the fixed
-             * continuation so worker_attach_process terminates a job which
-             * is published after this point. */
-            session->pending.cancel_requested = 1u;
-            cancelled = 1;
-            if (session->pending.job_token != 0u &&
-                runtime_host_handle_manager_lookup_handle(session->handles,
-                    session->pending.job_token, &job))
-                (void)TerminateJobObject(job, ERROR_CANCELLED);
-        }
-        if (session->pending.worker_token != 0u &&
-            runtime_host_handle_manager_lookup_handle(session->handles,
-                session->pending.worker_token, &worker))
-            (void)WaitForSingleObject(worker, INFINITE);
-        if (cancelled) {
-            session->pending.state = OPENNT_HOST_CHILD_CANCELLED;
-            session->pending.exit_code = ERROR_CANCELLED;
-            session->pending.error = ERROR_CANCELLED;
-        }
+        cancelled = session->pending.state == OPENNT_HOST_CHILD_PENDING;
+        opennt_host_child_dispose(&session->pending, session->handles, cancelled);
         g_pending_session = NULL;
     }
     session_input_dispose(&session->input);
@@ -271,8 +251,6 @@ BOOL runtime_command_worker_begin(PCHAR command, PCHAR environment)
     runtime_command_misc_session *session;
     uint32_t tokens[3] = { UINT32_MAX, UINT32_MAX, UINT32_MAX };
     uint32_t address, index, command_bytes, generation;
-    HANDLE event, worker;
-    DWORD error = ERROR_NOT_ENOUGH_MEMORY;
     if (g_active_call == NULL || command == NULL || environment == NULL ||
         (session = g_active_call->call->session) == NULL ||
         g_pending_session != NULL ||
@@ -324,45 +302,23 @@ BOOL runtime_command_worker_begin(PCHAR command, PCHAR environment)
             }
         }
     }
-    session->pending.state = OPENNT_HOST_CHILD_PENDING;
     session->pending.service = g_active_call->call->service;
     session->pending.command_bytes = command_bytes;
     memcpy(session->pending.command, command, command_bytes);
     memcpy(session->pending.standard_handle_tokens, tokens, sizeof(tokens));
-    event = CreateEventA(NULL, TRUE, FALSE, NULL);
-    if (event == NULL || !runtime_host_handle_manager_publish(session->handles,
-            event, RUNTIME_HOST_HANDLE_OWNED,
-            &session->pending.completion_event_token, &error)) {
-        if (event != NULL) CloseHandle(event);
+    if (!opennt_host_child_start(&session->pending, session->handles,
+            runtime_command_worker_thread, session)) {
         memset(&session->pending, 0, sizeof(session->pending));
-        SetLastError(error);
         return FALSE;
     }
     g_pending_session = session;
-    session->pending.error = ERROR_SUCCESS;
-    worker = CreateThread(NULL, 0u, runtime_command_worker_thread, NULL, 0u, NULL);
-    if (worker == NULL || !runtime_host_handle_manager_publish(session->handles,
-            worker, RUNTIME_HOST_HANDLE_OWNED, &session->pending.worker_token,
-            &error)) {
-        if (worker != NULL) {
-            (void)WaitForSingleObject(worker, INFINITE);
-            CloseHandle(worker);
-        }
-        (void)runtime_host_handle_manager_release(session->handles,
-            session->pending.completion_event_token, &error);
-        memset(&session->pending, 0, sizeof(session->pending));
-        g_pending_session = NULL;
-        SetLastError(error);
-        return FALSE;
-    }
     return TRUE;
 }
 
 DWORD WINAPI runtime_command_worker_thread(LPVOID ignored)
 {
     session_input *input;
-    (void)ignored;
-    g_worker_session = g_pending_session;
+    g_worker_session = (runtime_command_misc_session *)ignored;
     if (g_worker_session == NULL) return ERROR_INVALID_STATE;
     input = &g_worker_session->input;
     /* cmdCreateProcess reaches the original GetNextVDMCommand re-entry
@@ -384,33 +340,10 @@ DWORD WINAPI runtime_command_worker_thread(LPVOID ignored)
 BOOL runtime_command_worker_complete(void)
 {
     runtime_command_misc_session *session = runtime_command_misc_active_session();
-    HANDLE worker;
-    DWORD ignored;
     if (session == NULL || session != g_pending_session ||
-        (session->pending.state != OPENNT_HOST_CHILD_PENDING &&
-         session->pending.state != OPENNT_HOST_CHILD_COMPLETED &&
-         session->pending.state != OPENNT_HOST_CHILD_FAILED) ||
-        session->pending.worker_token == 0u ||
-        !runtime_host_handle_manager_lookup_handle(session->handles,
-            session->pending.worker_token, &worker)) {
-        SetLastError(ERROR_INVALID_STATE);
-        return FALSE;
-    }
-    if (WaitForSingleObject(worker, 0u) != WAIT_OBJECT_0) {
-        SetLastError(ERROR_IO_INCOMPLETE);
-        return FALSE;
-    }
-    (void)runtime_host_handle_manager_release(session->handles,
-        session->pending.worker_token, &ignored);
-    session->pending.worker_token = 0u;
-    if (session->pending.completion_event_token != 0u) {
-        (void)runtime_host_handle_manager_release(session->handles,
-            session->pending.completion_event_token, &ignored);
-        session->pending.completion_event_token = 0u;
-    }
+        !opennt_host_child_complete(&session->pending, session->handles)) return FALSE;
     g_pending_session = NULL;
-    return session->pending.state == OPENNT_HOST_CHILD_COMPLETED ||
-        session->pending.state == OPENNT_HOST_CHILD_FAILED;
+    return TRUE;
 }
 
 BOOL runtime_command_worker_reentry_pending(void)
@@ -419,11 +352,7 @@ BOOL runtime_command_worker_reentry_pending(void)
     /* A completed record is historical state until a worker token still owns
      * the pending continuation.  cmdExec32 releases that token as it consumes
      * the exact BOP re-entry; a later 54:08 is a fresh request, not a replay. */
-    return session != NULL && session->pending.worker_token != 0u &&
-        (session->pending.state ==
-        OPENNT_HOST_CHILD_PENDING || session->pending.state ==
-        OPENNT_HOST_CHILD_COMPLETED || session->pending.state ==
-        OPENNT_HOST_CHILD_FAILED);
+    return session != NULL && opennt_host_child_reentry_pending(&session->pending);
 }
 
 BOOL runtime_command_misc_set_pending(void)

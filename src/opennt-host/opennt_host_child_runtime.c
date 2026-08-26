@@ -105,3 +105,104 @@ void opennt_host_child_finish(opennt_host_child_record *child,
             child->completion_event_token, &event))
         (void)SetEvent(event);
 }
+
+BOOL opennt_host_child_start(opennt_host_child_record *child,
+    runtime_host_handle_manager *handles, opennt_host_child_worker_proc worker,
+    LPVOID context)
+{
+    HANDLE event, thread;
+    DWORD error = ERROR_NOT_ENOUGH_MEMORY;
+    if (child == NULL || worker == NULL || child->state == OPENNT_HOST_CHILD_PENDING)
+        return FALSE;
+    event = CreateEventA(NULL, TRUE, FALSE, NULL);
+    if (event == NULL || !runtime_host_handle_manager_publish(handles, event,
+            RUNTIME_HOST_HANDLE_OWNED, &child->completion_event_token, &error)) {
+        if (event != NULL) CloseHandle(event);
+        SetLastError(error);
+        return FALSE;
+    }
+    child->state = OPENNT_HOST_CHILD_PENDING;
+    child->error = ERROR_SUCCESS;
+    thread = CreateThread(NULL, 0u, worker, context, 0u, NULL);
+    if (thread != NULL && runtime_host_handle_manager_publish(handles, thread,
+            RUNTIME_HOST_HANDLE_OWNED, &child->worker_token, &error)) return TRUE;
+    if (thread != NULL) {
+        (void)WaitForSingleObject(thread, INFINITE);
+        CloseHandle(thread);
+    }
+    (void)runtime_host_handle_manager_release(handles,
+        child->completion_event_token, &error);
+    child->completion_event_token = 0u;
+    child->state = OPENNT_HOST_CHILD_FAILED;
+    child->error = error;
+    SetLastError(error);
+    return FALSE;
+}
+
+BOOL opennt_host_child_complete(opennt_host_child_record *child,
+    runtime_host_handle_manager *handles)
+{
+    HANDLE worker;
+    DWORD ignored;
+    if (child == NULL ||
+        (child->state != OPENNT_HOST_CHILD_PENDING &&
+         child->state != OPENNT_HOST_CHILD_COMPLETED &&
+         child->state != OPENNT_HOST_CHILD_FAILED) || child->worker_token == 0u ||
+        !runtime_host_handle_manager_lookup_handle(handles, child->worker_token, &worker)) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    if (WaitForSingleObject(worker, 0u) != WAIT_OBJECT_0) {
+        SetLastError(ERROR_IO_INCOMPLETE);
+        return FALSE;
+    }
+    (void)runtime_host_handle_manager_release(handles, child->worker_token, &ignored);
+    child->worker_token = 0u;
+    if (child->completion_event_token != 0u) {
+        (void)runtime_host_handle_manager_release(handles,
+            child->completion_event_token, &ignored);
+        child->completion_event_token = 0u;
+    }
+    return child->state == OPENNT_HOST_CHILD_COMPLETED ||
+        child->state == OPENNT_HOST_CHILD_FAILED;
+}
+
+BOOL opennt_host_child_reentry_pending(const opennt_host_child_record *child)
+{
+    return child != NULL && child->worker_token != 0u &&
+        (child->state == OPENNT_HOST_CHILD_PENDING ||
+         child->state == OPENNT_HOST_CHILD_COMPLETED ||
+         child->state == OPENNT_HOST_CHILD_FAILED);
+}
+
+void opennt_host_child_dispose(opennt_host_child_record *child,
+    runtime_host_handle_manager *handles, BOOL cancel)
+{
+    HANDLE worker = INVALID_HANDLE_VALUE;
+    HANDLE job = INVALID_HANDLE_VALUE;
+    DWORD ignored;
+    if (child == NULL) return;
+    if (cancel && child->state == OPENNT_HOST_CHILD_PENDING) {
+        child->cancel_requested = 1u;
+        if (child->job_token != 0u && runtime_host_handle_manager_lookup_handle(
+                handles, child->job_token, &job))
+            (void)TerminateJobObject(job, ERROR_CANCELLED);
+    }
+    if (child->worker_token != 0u && runtime_host_handle_manager_lookup_handle(
+            handles, child->worker_token, &worker))
+        (void)WaitForSingleObject(worker, INFINITE);
+    if (cancel) {
+        child->state = OPENNT_HOST_CHILD_CANCELLED;
+        child->exit_code = ERROR_CANCELLED;
+        child->error = ERROR_CANCELLED;
+    }
+    if (child->worker_token != 0u) {
+        (void)runtime_host_handle_manager_release(handles, child->worker_token, &ignored);
+        child->worker_token = 0u;
+    }
+    if (child->completion_event_token != 0u) {
+        (void)runtime_host_handle_manager_release(handles,
+            child->completion_event_token, &ignored);
+        child->completion_event_token = 0u;
+    }
+}

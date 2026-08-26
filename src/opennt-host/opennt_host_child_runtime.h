@@ -33,6 +33,8 @@ typedef struct opennt_host_child_record {
     CHAR environment[OPENNT_HOST_CHILD_ENV_MAX];
 } opennt_host_child_record;
 
+typedef DWORD (WINAPI *opennt_host_child_worker_proc)(LPVOID context);
+
 enum opennt_host_child_state {
     OPENNT_HOST_CHILD_IDLE = 0u,
     OPENNT_HOST_CHILD_STARTING = 1u,
@@ -53,5 +55,13 @@ void opennt_host_child_attach_process(opennt_host_child_record *child,
     runtime_host_handle_manager *handles, HANDLE process);
 void opennt_host_child_finish(opennt_host_child_record *child,
     runtime_host_handle_manager *handles, BOOL child_created, DWORD exit_code);
+BOOL opennt_host_child_start(opennt_host_child_record *child,
+    runtime_host_handle_manager *handles, opennt_host_child_worker_proc worker,
+    LPVOID context);
+BOOL opennt_host_child_complete(opennt_host_child_record *child,
+    runtime_host_handle_manager *handles);
+BOOL opennt_host_child_reentry_pending(const opennt_host_child_record *child);
+void opennt_host_child_dispose(opennt_host_child_record *child,
+    runtime_host_handle_manager *handles, BOOL cancel);
 
 #endif

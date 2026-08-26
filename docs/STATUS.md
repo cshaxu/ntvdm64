@@ -84,13 +84,17 @@ worker/re-entry seam.  The direct lifecycle fixture passes; the native
 machine fixture currently stops before reaching PENDING and is separately
 classified as a machine/dispatch prerequisite.  See [S3 P8a evidence](etc/evidence/m0-t271-s3-p8a-command-child-host-recovery-001.md).
 
-**S3 P8a:** the modern child record and pure host capability portions of the
-reached `cmdexec.c` path now belong to `opennt-host`: stream endpoint lookup,
-ANSI `CreateProcessA`, Job ownership, completion signaling and result
-recording.  COMMAND retains its source call ordering and the BOP-facing
-worker/re-entry seam.  The direct lifecycle fixture passes; the native
-machine fixture currently stops before reaching PENDING and is separately
-classified as a machine/dispatch prerequisite.  See [S3 P8a evidence](etc/evidence/m0-t271-s3-p8a-command-child-host-recovery-001.md).
+**S3 P8b:** worker/event creation, completion polling/release and
+dispose/cancellation now also belong to the same `opennt-host` child
+capability. COMMAND retains only the original-body callback and scoped
+session-input bind required for `cmdCreateProcess`; it no longer directly
+creates or waits on host threads/events. See [S3 P8b evidence](etc/evidence/m0-t271-s3-p8b-command-child-worker-recovery-001.md).
+
+**S3 P8b:** worker/event creation, completion polling/release and
+dispose/cancellation now also belong to the same `opennt-host` child
+capability. COMMAND retains only the original-body callback and scoped
+session-input bind required for `cmdCreateProcess`; it no longer directly
+creates or waits on host threads/events. See [S3 P8b evidence](etc/evidence/m0-t271-s3-p8b-command-child-worker-recovery-001.md).
 
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
