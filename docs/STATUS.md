@@ -248,6 +248,13 @@ each remaining custom class a unique target owner; S5 remains active until
 those moves and original-dispatcher boundary recoveries are complete. See
 [P10 re-audit](etc/evidence/m0-t271-s5-p10-opennt-bop-mirror-reaudit-and-disposition-001.md).
 
+**S5 P11:** an attempted test-only extraction of eight DEM composition bodies
+was rejected by formal native `MS_bop_0 -> DemDispatch` linking: the original
+provider table requires their same-shaped symbols. They remain production
+dependencies and must be owner-split, not hidden under tests. The formal graph
+now also gives intentionally shared test-support sources fixture-specific
+object paths.
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

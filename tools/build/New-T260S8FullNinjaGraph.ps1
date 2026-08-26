@@ -221,7 +221,10 @@ foreach ($entry in @($manifest.fixtures) + @($manifest.targets)) {
     $objects = [Collections.Generic.List[string]]::new()
     foreach ($targetSource in $targetSources) {
         $source = NinjaPath (Join-Path $root $targetSource)
-        $object = 'obj/targets/' + (ObjectName $targetSource)
+        # A test-support source may be intentionally shared by several
+        # fixtures.  Keep a distinct object edge per fixture so Ninja does
+        # not diagnose multiple producers for one path.
+        $object = 'obj/targets/' + (ObjectName ($entry.name + '_' + $targetSource))
         $rule = if ($targetSource.EndsWith('.cc')) { 'cxx' } else { 'cc' }
         $graph.Add('build ' + $object + ': ' + $rule + ' ' + $source)
         $objects.Add($object)

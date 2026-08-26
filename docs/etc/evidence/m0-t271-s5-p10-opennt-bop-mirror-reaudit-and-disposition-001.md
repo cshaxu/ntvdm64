@@ -32,8 +32,8 @@ standard, and do all previously extracted bodies now have a correct owner?
   claim, not a loss of source evidence.
 - After the DPMI archive, DEM CCPU/SAS extraction and wrapper fold, the live
   root contains 90 C/H/INC inputs: 59 original-name inputs and 31 remaining
-  project-named compatibility/composition inputs.  This is a reduction, not
-  a closure claim: the 31 inputs are the concrete residual owner ledger below.
+  project-named compatibility/composition inputs. This is a reduction, not a
+  closure claim: the 31 inputs are the concrete residual owner ledger below.
 
 ## Focused regression after the corrective moves
 
@@ -76,6 +76,13 @@ not pass the mirror test merely because a README row exists.
   host capabilities to `opennt-host`, and only inseparable source-local
   modified fragments to `opennt-bop-overlay/dem` behind the original DEM
   translation unit.
+  A controlled P11 experiment removed the eight `*_composition.c` bodies
+  from the production library and supplied them only to direct-import tests.
+  Formal linking of the unchanged native `MS_bop_0 -> DemDispatch` fixture
+  then failed with 53 unresolved references from the original DEM provider
+  table.  The experiment was reverted: the bodies are formal production
+  closure dependencies, not dead test helpers.  They must be split by owner;
+  they cannot be hidden by relocating them beneath `tests/`.
 - **Redirector compatibility headers:** `vdmredir/vrdisp_compat.h` and
   `vrmslot_compat.h` are project headers. Their typed frame/guest-span pieces
   belong to `adapter-softpc`; their named-pipe/mailslot host calls belong to
