@@ -73,6 +73,20 @@ one VDM-monitor surface and the minimal broker boundary. It explicitly retires
 the old machine shell and project-only observation surfaces from adapter
 recovery. See the [P2 interface ledger note](etc/operations/m0-t275-s1-historical-interface-ledger-001.md).
 
+**S1 closure:** all 453 historical adapter candidates now have a unique,
+reproducible disposition and all 61 implementation candidates are linked to
+one of the 11 original-caller interface surfaces. The matrix has no duplicate
+path, empty interface ID or empty disposition; the exact host mirror has zero
+direct Bochs reference. S2 may recover only `ADAPTER-IF-001`, the frozen
+selector-blind transport surface. See the [S1 closure evidence](etc/operations/m0-t275-s1-adapter-reuse-ledger-closure-001.md).
+
+**S1 closure:** all 453 historical adapter candidates now have a unique,
+reproducible disposition and all 61 implementation candidates are linked to
+one of the 11 original-caller interface surfaces. The matrix has no duplicate
+path, empty interface ID or empty disposition; the exact host mirror has zero
+direct Bochs reference. S2 may recover only `ADAPTER-IF-001`, the frozen
+selector-blind transport surface. See the [S1 closure evidence](etc/operations/m0-t275-s1-adapter-reuse-ledger-closure-001.md).
+
 **S1 P2:** the original-caller ledger now freezes 11 interface dispositions:
 one BOP transport, five SoftPC/CCPU/SAS surfaces, three Win32/NTDLL surfaces,
 one VDM-monitor surface and the minimal broker boundary. It explicitly retires
