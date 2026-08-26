@@ -10,7 +10,7 @@ as integrated verification.
 ## Phase 0 — MVDM package rebootstrap
 
 Phase 0 is five dependency-closed candidate T packages, not one implementation
-packet and not thirteen component-only packets:
+packet and not seventeen component-only packets:
 
 1. repository and neutral runtime foundation;
 2. Bochs machine foundation;

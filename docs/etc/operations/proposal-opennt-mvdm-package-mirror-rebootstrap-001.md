@@ -2,7 +2,7 @@
 
 ## Decision
 
-Reconstruct `src/` into thirteen production components while preserving the non-invasive `ntvdm.exe` direct
+Reconstruct `src/` into seventeen production components while preserving the non-invasive `ntvdm.exe` direct
 COM/EXE/BAT/PIF launch contract. Recovery is package-led, not trace-led:
 original source, same-shaped adapter, registered private overlay, then a
 last-resort authored exception.
@@ -65,6 +65,10 @@ src/
   adapter-softpc/
   adapter-win32/
   adapter-vdm-monitor/
+  adapter-redir/
+  adapter-wow/
+  adapter-vdd/
+  adapter-debugger/
   session/
   broker/
   app/
@@ -124,6 +128,10 @@ candidate for relocation, reimport, host linkage, or a substitute source root.
   public Win32 APIs.
 - `adapter-vdm-monitor` declares and dispositions the complete same-shaped
   `NtVdmControl`/`VDM_TIB`/V86-event/handler family from the start.
+- `adapter-redir`, `adapter-wow`, `adapter-vdd` and `adapter-debugger` own
+  the respectively named historical product-interface families. They are
+  established before importing a source unit that reaches a missing interface;
+  no mirror function is rewritten merely to bypass that boundary.
 - `session` owns per-instance mappings/resources/events and thread-bound
   monitor context; no hidden singleton is allowed.
 - `broker` owns only cross-process coordination through versioned copied IPC.
@@ -170,12 +178,12 @@ while directly recovering—not reimporting—the established local DOS/WOW16
 Each candidate receives its numeric T identifier only when admitted. A later
 candidate cannot silently pull an earlier candidate's unfinished work into its
 scope. The five documents divide this former eight-S outline by independently
-verifiable dependency closure; they do not split the thirteen components into
+verifiable dependency closure; they do not split the seventeen components into
 separate component-only tasks.
 
 ## Exit criteria
 
-- `src/` contains exactly the thirteen declared roots; no transitional or
+- `src/` contains exactly the seventeen declared roots; no transitional or
   stale component root is a production input.
 - Every selected original file has path/hash/provenance and a package-scope
   OpenNT/OpenNT-4.5 disposition.

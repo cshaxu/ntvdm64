@@ -18,7 +18,7 @@
 
 ## Placement and dependencies
 
-- Place each production file in one of the thirteen roots declared by the
+- Place each production file in one of the seventeen roots declared by the
   architecture rules. `opennt-mvdm-host` preserves the complete selected
   non-guest/non-tool MVDM package topology; package libraries do not create
   new source owners.
@@ -31,6 +31,11 @@
 - Do not add a generic compatibility/common component. Use the declared owner
   or obtain explicit architecture admission for a source-proven specialist
   interface family.
+- Import directly composable MVDM translation units before changing their
+  reached function bodies. Every missing external function/interface records
+  the original caller and declaration, ABI/layout and failure contract, its
+  single adapter owner, the binding change, and x86/x64 evidence. A missing
+  boundary never justifies cropping or rewriting the original algorithm.
 
 ## Original mirrors
 

@@ -14,6 +14,10 @@ src/
   adapter-softpc/
   adapter-win32/
   adapter-vdm-monitor/
+  adapter-redir/
+  adapter-wow/
+  adapter-vdd/
+  adapter-debugger/
   session/
   broker/
   app/
@@ -39,9 +43,11 @@ material and never a source, build, link or runtime input.
   an unselected external source-universe import.
 - `adapter-bochs` contains Bochs-only composition and is the only caller of
   `bochs-core`.
-- `adapter-bop`, `adapter-softpc`, `adapter-win32` and
-  `adapter-vdm-monitor` contain only their declared same-shaped or typed
-  mechanical boundaries.
+- `adapter-bop`, `adapter-softpc`, `adapter-win32`, `adapter-vdm-monitor`,
+  `adapter-redir`, `adapter-wow`, `adapter-vdd` and `adapter-debugger` contain
+  only their declared same-shaped or typed mechanical boundaries. A missing
+  historical product interface is assigned to this explicit adapter inventory
+  before a mirror source is changed to avoid it.
 - `session` contains neutral per-instance lifetime, mappings, resources,
   events and teardown.
 - `broker` contains the versioned IPC client/server contract and per-user

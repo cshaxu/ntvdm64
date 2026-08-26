@@ -2,11 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T275 S1** — Historical interface adapter recovery begins with a
-complete original-caller and existing-implementation reuse ledger. No adapter
-ABI or provider behavior is enabled before that ledger closes.
+**Active: M0 T275 S2** — Complete the missing-adapter component inventory and
+freeze each specialist owner boundary before recovering any adapter ABI or
+altering any mirror source.
 
-The current intermission architecture is the thirteen-component MVDM package
+The current intermission architecture is the seventeen-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
 project interfaces, a cross-process broker, and a shared x86/x64 32-bit
 compatibility object space. Its former single candidate has been divided into
@@ -20,7 +20,7 @@ authoritative closure is [M0 T274 closure](history/m0-t274-closure-20260826.md).
 
 ## Active Packet
 
-**S1 closure:** the clean source topology now contains exactly thirteen
+**S1 closure:** the clean source topology initially contained thirteen
 production roots and no premature production service body. The
 [owner/source manifest](etc/operations/m0-t272-s1-production-owner-manifest-001.md)
 records every root, its provenance/reuse class, intended build role and
@@ -77,8 +77,29 @@ recovery. See the [P2 interface ledger note](etc/operations/m0-t275-s1-historica
 reproducible disposition and all 61 implementation candidates are linked to
 one of the 11 original-caller interface surfaces. The matrix has no duplicate
 path, empty interface ID or empty disposition; the exact host mirror has zero
-direct Bochs reference. S2 may recover only `ADAPTER-IF-001`, the frozen
-selector-blind transport surface. See the [S1 closure evidence](etc/operations/m0-t275-s1-adapter-reuse-ledger-closure-001.md).
+direct Bochs reference. S2 may establish only the missing-interface inventory
+and its component boundaries; adapter-source recovery begins only after that
+inventory closes. See the [S1 closure evidence](etc/operations/m0-t275-s1-adapter-reuse-ledger-closure-001.md).
+
+### M0 T275 S2 — specialist adapter component inventory
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T275 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | The owner requires original MVDM source to be imported before function-body alteration; every missing boundary must be assigned to a named adapter and recorded before source recovery. |
+| Objective | Establish the complete missing-interface and specialist-adapter inventory: original caller/declaration/contract, unique owner adapter, modern recovery or original-style failure disposition, and successor ownership for every unavailable historical external interface. |
+| Non-goals | No adapter source implementation, mirror-source modification, BOP selector/service decode, provider enablement, guest-memory implementation, Bochs change, guest execution or host build claim. |
+| Reference Baseline | T275/S1 ledger; exact `opennt-mvdm-host` VDMREDIR, WOW32, VDD, debugger/monitor, SoftPC and host packages; current architecture/rules; old adapter references. |
+| Files And ABI Surface | Adapter component inventory and architecture/proposal/rule updates only. No runtime ABI becomes active. |
+| Applicable Rules | Execution, historical recovery, architecture, coding, mirror-component, source policy and build-hygiene rules. |
+| Verification | Scan selected MVDM callers/declarations for unavailable external/product interface families; classify each as existing adapter, new specialist adapter or original internal owner; verify every enabled-source edit is only a source-recorded binding change and no generic catch-all adapter exists. |
+| Expected Markers | One named owner adapter or explicit non-adapter owner per external family; each future symbol row records caller, declaration, ABI/layout, failure contract, adapter, binding edit and x86/x64 evidence; `adapter-redir`, `adapter-wow`, `adapter-vdd` and `adapter-debugger` each have original package evidence and directed-boundary rules. |
+| Asset Needs | Exact host mirror, source-supply manifests, existing adapter ledger, current architecture/rules and tracker. |
+| Reporting Requirements | State component additions, original callers/packages, retained interface shape, public-modern/API or machine dependency, explicit unavailable rule, successor S/T and why no generic adapter is introduced. |
+| Stop Conditions | An interface has no original owner, requires a generic adapter, crosses prohibited Bochs/mirror boundaries, or needs source-body implementation before its component boundary is approved. |
+| Exit Criteria | Architecture, coding/rule documents, proposal and inventory name every specialist adapter needed by the selected source universe; later implementation imports original MVDM bodies and uses the inventory rather than modifying mirrors to bypass a missing interface. |
+| Original Owner Request | “单人双角色模式实施当前队列中的所有任务，要求全局统筹，追求结果极简主义…避免添油战术。” |
+| Similar-Issue Sweep | VDMREDIR, WOW32, VDD, debugger/monitor, SoftPC, Win32, BOP, broker, existing adapter roots, mirror includes, package build descriptions and forbidden generic adapter roots. |
 
 **S1 closure:** all 453 historical adapter candidates now have a unique,
 reproducible disposition and all 61 implementation candidates are linked to

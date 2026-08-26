@@ -8,7 +8,7 @@ recreating a private NT subsystem, or requiring installation-time host
 mutation. Public Win32 APIs and ordinary host resources remain valid integration
 mechanisms.
 
-The product has thirteen production source components. A source file has one
+The product has seventeen production source components. A source file has one
 owner. Original mirrors preserve upstream package identity, adapters preserve
 historical interface shape while translating mechanics, and project components
 own composition, session lifetime and cross-process coordination.
@@ -45,6 +45,15 @@ own composition, session lifetime and cross-process coordination.
   for `NtVdmControl`, `VDM_TIB`, V86 events and interrupt/fault-handler
   installation. It uses a bound session context and an app-installed opaque
   machine endpoint; unsupported kernel/CSRSS behavior fails deterministically.
+- `adapter-redir`: same-shaped boundary for the original VDMREDIR/Redirector
+  product-interface family. It never becomes a redirector provider; absent
+  private transport or control surfaces fail explicitly.
+- `adapter-wow`: same-shaped boundary for the original WOW32/WOWEXEC product
+  interfaces. It does not contain guest NE/WOW provider logic.
+- `adapter-vdd`: same-shaped boundary for original VDD product interfaces and
+  host callbacks. It contains no VDD/provider implementation or Bochs object.
+- `adapter-debugger`: same-shaped boundary for the BDE/DBG/VDMDBG/VDMEXTS
+  product interfaces. It contains no debugger/provider policy.
 
 ### Project components
 
@@ -91,6 +100,10 @@ opennt-mvdm-host -> opennt-platform-abi
 opennt-mvdm-host -> adapter-win32
 opennt-mvdm-host -> adapter-softpc -> adapter-bochs
 opennt-mvdm-host -> adapter-vdm-monitor
+opennt-mvdm-host -> adapter-redir
+opennt-mvdm-host -> adapter-wow
+opennt-mvdm-host -> adapter-vdd
+opennt-mvdm-host -> adapter-debugger
 opennt-mvdm-host -> session                      (neutral contract only)
 adapter-bop -> adapter-softpc                    (typed mechanics only)
 adapter-win32 -> broker client                   (only for brokered historical calls)
@@ -101,6 +114,12 @@ calls `bochs-core`. `adapter-softpc` never includes a Bochs type or global.
 The broker never receives a native pointer, local HANDLE, guest pointer or
 Bochs object. It exchanges versioned fixed-width copied messages and stable
 cross-process identities only.
+
+Each specialist adapter owns one historical external/product interface family;
+it is not a convenience shim and it may not absorb another adapter's caller or
+provider semantics. A missing interface is first assigned to this inventory,
+then recovered with original source evidence, rather than edited out of an
+OpenNT mirror.
 
 ## Guest and host width model
 
