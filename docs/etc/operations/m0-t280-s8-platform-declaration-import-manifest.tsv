@@ -1,0 +1,4 @@
+﻿"include"	"source_path"	"source_sha256"	"target_path"	"action"	"direct_occurrences"	"first_mvdm_source"
+"ntdddisk.h"	"O:\repos.external\opennt\public\ddk\inc\ntdddisk.h"	"ab1a18990f477e823de45110a12a83498e87b0c4ce87c39d89720cce8ed9e455"	"source/opennt/public/ddk/inc/ntdddisk.h"	"copied-byte-identical"	"4"	"base/mvdm/dos/dem/dem.h"
+"ntddstor.h"	"O:\repos.external\opennt\public\ddk\inc\ntddstor.h"	"78056c337304e2d4e2885c5780f44279c74d39a7c8a261cad39b539652bd316a"	"source/opennt/public/ddk/inc/ntddstor.h"	"copied-byte-identical"	"1"	"public/ddk/inc/ntdddisk.h"
+"ntioapi.h"	"O:\repos.external\opennt\public\sdk\inc\ntioapi.h"	"fd7980ccd70169ce052baa8aa43388df2d8689f3bed43028a940093c52f9f6ee"	"source/opennt/public/sdk/inc/ntioapi.h"	"copied-byte-identical"	"3"	"base/mvdm/dos/dem/{demsrch.c,demerror.c,demgset.c}"

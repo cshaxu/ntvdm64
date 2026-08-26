@@ -1,0 +1,4 @@
+include	disposition	selected_candidate	occurrence_count	first_source
+ntdddisk.h	exact-opennt-platform-candidate	O:\repos.external\opennt\public\ddk\inc\ntdddisk.h	4	base/mvdm/dos/dem/dem.h
+ntddstor.h	exact-opennt-platform-candidate	O:\repos.external\opennt\public\ddk\inc\ntddstor.h	1	public/ddk/inc/ntdddisk.h
+ntioapi.h	exact-opennt-platform-candidate	O:\repos.external\opennt\public\sdk\inc\ntioapi.h	3	base/mvdm/dos/dem/{demsrch.c,demerror.c,demgset.c}

@@ -2,10 +2,10 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T280 S7 closed the source-form design for the
-five shared DEM ABI families proven by S6. The next packet may implement only
-the shared declaration/binding package identified by that ledger; no
-selector/BOP route is enabled merely by the closed design.
+**No active M/T/S packet.** M0 T280 S8 closed the exact shared OpenNT
+declaration-carrier import. The next packet may bind the resulting source
+forms as one shared compatibility package; no selector/BOP route is enabled
+merely by this source-supply closure.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -26,7 +26,33 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S7 — closed: DEM shared ABI recovery design
+### M0 T280 S8 — closed: exact DEM platform declaration carriers
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T280 S8`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S7 closed in `ffe95bcf`; it selected exact OpenNT `ntdddisk.h`, `ntddstor.h` and `ntioapi.h` as the first recovery rung. |
+| Objective | Import the three byte-identical original declaration carriers with complete provenance and no body/provider admission. |
+| Non-goals | No original DEM edit/link, adapter behavior, Win32/NT API call, SoftPC mapping implementation, BOP route, guest trace or private kernel import. |
+| Reference Baseline | T280 S7 five-family ledger, source policy, existing platform ABI import manifest and pinned OpenNT source. |
+| Files And ABI Surface | Three exact platform declaration files, import ledger/manifest, plan, Status and documentation inventory. No product ABI behavior is introduced. |
+| Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and recovery-ladder rules. |
+| Verification | Verify byte hashes against pinned sources, source/destination manifest entries, required include roots and no source-body/binding change. |
+| Expected Markers | Exact DDK storage carrier pair, exact SDK NT IO carrier and reproducible source provenance. |
+| Asset Needs | Pinned OpenNT public DDK/SDK headers and existing `opennt-platform-abi` source root. |
+| Reporting Requirements | Exact source/destination/hash, direct consumer evidence, retained declaration-only role and no-mapping/no-provider limitation. |
+| Stop Conditions | A carrier is edited, a modern SDK header substitutes for it, a body is enabled, a host pointer is mapped, or an adapter implementation is smuggled into the import. |
+| Exit Criteria | Three files are byte-identical and manifest-backed; all are declaration-only; no DEM source body or provider is built/linked. |
+| Original Owner Request | “单人双角色模式执行队列任务”。 |
+| Similar-Issue Sweep | Nested original headers, source-tree provenance, existing platform ABI destination paths, host-local record ownership and mapping-manager isolation. |
+
+**S8 closure:** exact OpenNT `ntdddisk.h`, `ntddstor.h` and `ntioapi.h` are
+now imported under the platform ABI mirror with source path/hash/consumer
+manifest evidence. They are declaration-only carriers. This does not compose
+a DEM body, bind a historical NT call, create a mapping-manager route or
+enable any BOP.
+
+### Closed packet reference — M0 T280 S7
 
 | Field | Record |
 | --- | --- |

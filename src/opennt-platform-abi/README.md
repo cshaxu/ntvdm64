@@ -15,10 +15,13 @@ provider body, compatibility implementation, or machine access.
 - [T274 S2 direct-include ledger](../../docs/etc/operations/m0-t274-s2-platform-abi-direct-include-ledger.tsv)
   records every scanned direct declaration need and its disposition.
 
-The component presently contains the 22 uniquely resolved direct platform
-headers. CRT and public SDK headers remain toolchain inputs; ambiguous,
-generated, and unresolved include forms remain explicit ledger rows for their
-owning MVDM package rather than speculative copies.
+The component presently contains the 22 initially resolved direct platform
+headers plus three package-led DEM declaration carriers (`ntdddisk.h`,
+`ntddstor.h`, and `ntioapi.h`) recorded by
+[T280 S8](../../docs/etc/operations/m0-t280-s8-platform-declaration-import-manifest.tsv).
+CRT and public SDK headers remain toolchain inputs; ambiguous, generated, and
+unresolved include forms remain explicit ledger rows for their owning MVDM
+package rather than speculative copies.
 
 ## Divergence register
 
