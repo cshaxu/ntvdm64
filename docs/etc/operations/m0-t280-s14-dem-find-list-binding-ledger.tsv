@@ -1,0 +1,7 @@
+site	original_role	planned_binding	lifetime_and_failure	mapping_instance
+demFileFindFirst:316,354	DTA stores PFFINDLIST beside original FFindId	publish PFFINDLIST and store surrogate32 in pFFindEntry	publish failure clears both fields and follows original no-search failure branch	session.host_resource
+demFindFirstFCB:557	FCB directory entry stores PFFINDLIST beside FFindId	publish PFFINDLIST and store surrogate32	publish failure clears FCB fields; no native pointer is stored	session.host_resource
+demFileFindNext:436-475	resolve FFindId then compare persisted pointer	resolve surrogate then compare resolved pointer to FFindId lookup	missing/stale/mismatch clears fields and returns original ERROR_NO_MORE_FILES	session.host_resource
+demFindNextFCB:601-650	resolve FFindId then validate persisted pointer	resolve surrogate then compare resolved pointer to FFindId lookup	missing/stale/mismatch preserves existing cleanup and DOS failure	session.host_resource
+FreeFFindEntry/FreeFFindList/PSP cleanup:2177-2185,2384-2390	release native find-list allocation	release surrogate before free; session disposal tombstones any residual record	double release is failure; stale token cannot resolve	session.host_resource
+guest DTA/FCB storage	DOS memory contains 32-bit fields	copy only surrogate32 through existing guest lease	never stores PFFINDLIST or HANDLE	guest_memory only for copy span

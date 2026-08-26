@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2623 |
+| Documentation records | 2625 |
 | --- | --- |
-| Generated UTC | 2026-08-26T23:42:36Z |
+| Generated UTC | 2026-08-26T23:43:59Z |
 
 ## Entries
 
@@ -767,6 +767,8 @@ content-divergent entries.
 | etc/operations/m0-t280-s12-dem-object-surface-plan-001.md | indexed supporting material | fc025125dfaa8b29da291baedbffae80d408fa79daf747a2168a6d777515930c |
 | etc/operations/m0-t280-s13-dem-rtl-object-surface-evidence-001.md | indexed supporting material | 71ab587cf0359b23a684250b647a8d8ae70a9dd2dad606fecb6d8bc9e3aaa2c9 |
 | etc/operations/m0-t280-s13-dem-rtl-object-surface-plan-001.md | indexed supporting material | d9546c1db970236e25d32319e42a305842af8a5cd81b8239ba87f5b541f8416b |
+| etc/operations/m0-t280-s14-dem-find-list-binding-evidence-001.md | indexed supporting material | 8d7fa42c6c5db5d6c782dd4acdb31f3f2ad9f184aae23d0f332ed0f9430de018 |
+| etc/operations/m0-t280-s14-dem-find-list-binding-ledger.tsv | indexed supporting material | 0a50abadeb1246b76bdf762344479c447e5e704587b5ba058d6248048b407c77 |
 | etc/operations/m0-t280-s14-dem-find-list-binding-plan-001.md | indexed supporting material | b7d494c899eaa7b03e2e30203192e7faf2d626f17262f4e7fe1297fbad9f0bef |
 | etc/operations/m0-t280-s1-host-control-dem-workset-audit-001.md | indexed supporting material | 784c0bf2fdf1272d9a62c65b590c21b5040f55a33f4f52a68013bd9dd19b9388 |
 | etc/operations/m0-t280-s1-host-control-dem-workset-ledger.tsv | indexed supporting material | c7192301f8681aa5735e4e9520634db87139e55c318a2e23eae003ac05676a6d |
