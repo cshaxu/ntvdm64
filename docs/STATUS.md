@@ -2,12 +2,9 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T274/S3 is closed. T274 is paused before S4 because the
-actual repository-local WOW16 carry is materially smaller than the claimed
-complete source mirror; its exact disposition requires owner direction. M0
-T271 remains closed by owner-directed exit-criterion revision; its audited
-residuals are recorded in its closure and the debt ledger, not misrepresented
-as completed mirror recovery.
+**Active: M0 T274 S4** — M0 T271 remains closed by owner-directed
+exit-criterion revision; its audited residuals are recorded in its closure and
+the debt ledger, not misrepresented as completed mirror recovery.
 
 The current intermission architecture is the thirteen-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -17,10 +14,9 @@ five dependency-closed packages. The first two packages are closed and the
 third is now active; see the
 [rebootstrap program roadmap](etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md).
 
-The S4 pause is evidence-bound: the local WOW16 source tree contains 44 files,
-local `bin86` contains 10, and `build/output/wow16` contains 87 retained binary
-products, while the S1 union ledger records 1,261 WOW/bin86 source paths not
-present in that carry. See the [S4 local-inventory disposition](etc/operations/m0-t274-s4-wow16-local-inventory-disposition-001.md).
+S4 recovers the local WOW16/bin86 carry and inventories retained output
+products only. It does not compile, supplement, or make a completeness claim
+about external source paths. See the [S4 local-inventory disposition](etc/operations/m0-t274-s4-wow16-local-inventory-disposition-001.md).
 
 ## Active Packet
 
@@ -40,6 +36,32 @@ focused lifecycle test passes under both MSVC x64 and Win32/x86 `/MT`.
 **T272 closure:** the neutral session/mapping/lease/broker foundation is
 complete and pushed through `d94d46ae`; its authoritative record is
 [M0 T272 closure](history/m0-t272-closure-20260826.md).
+
+### M0 T274 S4 — WOW16/bin86 direct guest recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T274 S4`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner direction: directly copy existing guest files; do not compile, reimport external sources, or treat source-cardinality as a blocker. |
+| Objective | Recover the existing local WOW16 and bin86 guest carry into `opennt-guest-wow16` and record the unchanged `build/output/wow16` products as immutable load-only inventory. |
+| Non-goals | No compilation, external OpenNT/OpenNT-4.5 source recovery, source-completeness claim, host linking, BOP/provider change, or output relocation. |
+| Reference Baseline | `src.old/opennt-guest/wow16`, `src.old/opennt-guest/bin86`, `build/output/wow16`, S1 ledger, source policy and S4 local-inventory disposition. |
+| Files And ABI Surface | Byte-identical WOW16/bin86 carried files, source/output hash manifests, component README, S4 evidence, Status and documentation inventory. No host ABI. |
+| Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
+| Verification | Copy every local carried file with conflict refusal; rehash source/destination; hash the output tree in place; prove no output move/copy and no host build input. |
+| Expected Markers | Two source manifests, one in-place output manifest, zero source/destination hash mismatches and explicit load-only ownership. |
+| Asset Needs | Existing local WOW16/bin86 carry, existing output tree, S1 ledger and Git path inventory. |
+| Reporting Requirements | State carried source/product counts and bytes, output location/hash inventory, exclusions, source-cardinality limitation and no-host-link result. |
+| Stop Conditions | A local file conflicts with its destination, a command attempts output relocation, or a host manifest consumes a guest object/library. |
+| Exit Criteria | Every current carried WOW16/bin86 file is byte-identical in its guest root, output products are manifested in place, and the source-completeness limitation is explicit without blocking load-only use. |
+| Original Owner Request | “你只是把guest文件直接复制进来，难点是啥 又不用你编译 难点是啥？不是分分钟就做完了？” |
+| Similar-Issue Sweep | WOW16/bin86 files, output binaries, source manifests, source/link consumers, external source references and guest-root placement. |
+
+**S4 closure:** 44 WOW16 and 10 bin86 carried files were directly recovered
+and rehashed with zero mismatches. The 87 products already in
+`build/output/wow16` were hash-manifested in place without copy, move or build.
+The 1,261 external-only source paths are explicitly not an S4 requirement. See
+the [S4 closure evidence](etc/operations/m0-t274-s4-wow16-guest-recovery-closure-001.md).
 
 ### M0 T274 S3 — DOS guest mirror direct recovery
 

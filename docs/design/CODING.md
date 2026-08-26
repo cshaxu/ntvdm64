@@ -33,8 +33,10 @@ material and never a source, build, link or runtime input.
   packages, retaining package-internal paths and filenames.
 - `opennt-platform-abi` contains exact declarations outside MVDM required by
   those packages; it has no implementation.
-- `opennt-guest-dos` and `opennt-guest-wow16` contain complete selected guest
-  source, resources, build descriptions, intermediates and original products.
+- `opennt-guest-dos` contains the complete selected local DOS carry.
+  `opennt-guest-wow16` contains its selected local WOW16/bin86 carry and
+  references its immutable in-place output inventory; neither phrasing implies
+  an unselected external source-universe import.
 - `adapter-bochs` contains Bochs-only composition and is the only caller of
   `bochs-core`.
 - `adapter-bop`, `adapter-softpc`, `adapter-win32` and

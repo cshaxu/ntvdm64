@@ -28,7 +28,9 @@ own composition, session lifetime and cross-process coordination.
   behavior.
 - `opennt-guest-dos`: complete selected DOS/V86 guest source, resources, build
   descriptions, intermediates and original products.
-- `opennt-guest-wow16`: the equivalent complete WOW16 guest image supply.
+- `opennt-guest-wow16`: the selected load-only WOW16/bin86 carry plus an
+  immutable in-place WOW16 product inventory. It does not imply an external
+  WOW16 source-universe mirror.
 
 ### Mechanical adapters
 

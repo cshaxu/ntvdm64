@@ -17,17 +17,16 @@ The S1 ledger has 1,273 `opennt-guest-wow16` rows. Only 12 have the
 WOW roots contain 1,201 and 1,254 files respectively, confirming that this is
 not a naming or enumeration error.
 
-## Disposition
+## Superseded initial interpretation
 
-The owner instruction prohibits silently repeating an external source import,
-and the source-supply proposal requires a complete carried guest mirror before
-declaring S4 closed. Therefore S4 is not admitted and no external WOW source is
-copied. The existing local source/products remain intact and `build/output/*`
-remains in place.
+The initial pause incorrectly treated source-cardinality completeness as a
+prerequisite for the straightforward carry-forward task. The owner clarified
+that S4 must directly recover the files already present and retain the existing
+outputs; it does not compile, supplement or claim an external source mirror.
 
-## Required owner choice
+## Active disposition
 
-Either declare the 54-file local WOW16/bin86 carry plus the retained output
-products as the intended bounded guest inventory, or explicitly authorize a
-package-scoped external WOW16 source recovery. Until then, a claim of complete
-WOW16 source recovery would be false.
+S4 copies the 54 local WOW16/bin86 files into `opennt-guest-wow16`, hashes the
+87 existing output products in place and keeps all 1,261 external-only source
+paths outside this task. The carried source count is reported accurately, but
+does not block the defined load-only guest inventory.
