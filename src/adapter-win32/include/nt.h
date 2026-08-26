@@ -94,4 +94,6 @@ POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID);
 #define RtlZeroMemory(Destination, Length) ZeroMemory((Destination), (Length))
 #endif
 
+#include <ntioapi.h>
+
 #endif

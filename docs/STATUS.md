@@ -2,10 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T280 S11** — M0 T280 now implements the one reached,
-source-shaped `ntioapi` adapter facade selected by S10. It is Ordinary Mode
-with single-person dual-role review; no selector/BOP route is enabled merely
-by this ABI-and-binding packet.
+**Active: M0 T280 S12** — M0 T280 now observes the direct original DEM object
+surface after the closed NT I/O facade. It is Ordinary Mode with single-person
+dual-role review; no selector/BOP route is enabled by this source-form packet.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -26,25 +25,32 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S11 — reached `ntioapi` facade implementation
+### M0 T280 S12 — original DEM object-surface observation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T280 S11`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S10 is closed by its complete 11-row reached ABI ledger and implementation plan; S11 is the directly selected, bounded same-shaped facade follow-on. |
-| Objective | Implement and verify one reached-subset `adapter-win32` NT I/O declaration/binding facade for the three original DEM consumers. |
-| Non-goals | No arbitrary full old-header inclusion, DEM body enablement, BOP route, raw guest pointer, mapping-manager change, private kernel call, guest trace, directory/provider backend, or per-service rewrite. |
-| Reference Baseline | T280 S10 ledger/evidence/implementation plan, exact `ntioapi.h` mirror, original DEM caller bodies and adapter-win32 facade. |
-| Files And ABI Surface | Adapter-win32 same-shaped NT I/O declarations/bindings, focused x86/x64 fixtures, Status and documentation inventory. |
+| Identifier Mode | `M0 T280 S12`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S11 closed its same-shaped NT I/O facade on x86/x64; this is the bounded direct-source observation it enables. |
+| Objective | Compile and classify the three original reached DEM consumers as independent x86/x64 object surfaces. |
+| Non-goals | No DEM provider link, BOP route, guest trace, source-body rewrite, raw guest pointer, mapping-manager change or private kernel call. |
+| Reference Baseline | T280 S10/S11 records, exact original DEM sources and closed adapter-win32 facade. |
+| Files And ABI Surface | Disposable object observations, source/adapter owner ledger, Status and documentation inventory only. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | x86/x64 declaration/layout/build fixtures; direct and unavailable-call tests; source review of failure/lifetime/mapping isolation; documentation governance and diff checks. |
-| Expected Markers | One complete same-shaped adapter facade, explicit direct `ntdll` versus unavailable outcomes, and no host-local record/handle mapping. |
+| Verification | x86/x64 MSVC `/Zs` or isolated object observations, whole three-source review, source/owner classification and governance checks. |
+| Expected Markers | Exact original source form reaches the closed facade; any remaining blocker has one source-proven adapter owner. |
 | Asset Needs | Exact OpenNT `ntioapi.h`, original DEM sources, current modern SDK/ntdll declarations and existing adapter/session boundaries. |
-| Reporting Requirements | Source form, selected binding, retained ABI/failure semantics, adapter owner, layout/lifetime and mapping exclusion for every reached family. |
-| Stop Conditions | A name is inferred rather than sourced, a modern API changes a source failure rule without record, a full old header is blindly included, a provider/body is enabled, or a guest pointer crosses the facade. |
-| Exit Criteria | One source-shaped reached facade passes x86/x64 focused positive/negative ABI checks; all unavailable forms remain explicit; no DEM body/provider or mapping behavior is enabled. |
+| Reporting Requirements | Per-source x86/x64 result, first remaining shared dependency, original source evidence, future owner and mapping rule. |
+| Stop Conditions | A body is linked, a trace selects a leaf repair, a host pointer is mapped, or an error is patched without complete owner classification. |
+| Exit Criteria | All three sources have x86/x64 observations and every remaining blocker has a source-proven owner/disposition. |
 | Original Owner Request | “单人双角色模式执行队列任务”。 |
 | Similar-Issue Sweep | Directory and volume queries, object/symlink paths, status mapping, handle lifetime, x86/x64 layout, public/ntdll availability and guest-memory isolation. |
+
+### Closed packet reference — M0 T280 S11
+
+**S11 closure:** one source-shaped adapter-win32 NT I/O facade parses original
+`dem.h`, compiles, links and runs on x86/x64. It preserves the original
+32-bit status record at the host-local `ntdll` boundary and has no guest-memory
+mapping route. See [S11 closure](history/m0-t280-s11-closure-20260826.md).
 
 ### Closed packet reference — M0 T280 S10
 
