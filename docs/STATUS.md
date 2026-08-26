@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T280 S2** — M0 T280 recovers the original host control plane and
+**Active: M0 T280 S3** — M0 T280 recovers the original host control plane and
 DEM as one source-owner package after the T279 support-library closure. It is
 Ordinary Mode with single-person dual-role review; no selector/BOP route is
 enabled merely by this planning packet.
@@ -26,23 +26,23 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S2 — ingress and machine-façade declaration closure
+### M0 T280 S3 — original host static-data build island
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T280 S2`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S1 closed with 81 exact source paths in `d3a79922`. Start with the original `nt_bop.c` and CPU/SAS façade declaration/import map; do not enable a selector merely because its declaration is mapped. |
-| Objective | Produce a complete source-shaped declaration/import map for fixed BOP ingress and the historical CPU/SAS/Sim32 façade boundary, including explicit owner, same-form adapter target, mapping-manager use and unavailable outcome. |
-| Non-goals | No original-body edit, BOP enablement, machine behavior change, adapter implementation, DEM service implementation, guest trace, second executor, or private NT4 product-shell rehost. |
-| Reference Baseline | T280/S1 workset, T277/S5 host-control interface ledger, exact original `nt_bop.c`, `nt_aorc.c`, `nt_sas.c`, `sim32.c`, and the T279 support-library closure. |
-| Files And ABI Surface | Declaration/import ledger and source-evidence audit only. No runtime ABI changes. |
+| Identifier Mode | `M0 T280 S3`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S2 closed in `049aba0a`. Enter only the two original static-data host bodies whose symbols are self-contained and whose adapter declaration gap is now source-proven. |
+| Objective | Build an x86/x64 static island from byte-exact `nt_ertbl.c` and `nt_mess.c`, using only the same-shaped `adapter-softpc` error declaration bridge and existing `adapter-win32` NT type binding. |
+| Non-goals | No original-body edit, BOP enablement, machine behavior change, provider link into app, DEM service implementation, guest trace, second executor, or private NT4 product-shell rehost. |
+| Reference Baseline | T280/S1 workset, T280/S2 declaration map, exact original static-data bodies and the matching base error declarations. |
+| Files And ABI Surface | One `adapter-softpc` declaration bridge, generated Ninja graph, original static library and build evidence only. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Every exposed ingress, CPU/SAS table and Sim32 transport surface has an exact source form, exclusive adapter boundary, mapping statement and implementation status; no entry directs an OpenNT source body to Bochs. |
-| Expected Markers | Original BOP dispatcher shape → `adapter-bop`; CPU/SAS/Sim32 façade → `adapter-softpc -> adapter-bochs`; session stop/UI routes explicit; six Sim32/CPU transport overlays remain not enabled. |
-| Asset Needs | Exact MVDM host mirror, T280/S1 workset, T277/S5 ledger, source headers and existing adapter/session boundaries. |
-| Reporting Requirements | Source line/range, original symbol group, one owner chain, guest/host mapping distinction, excluded successor and S3 body-import prerequisite. |
-| Stop Conditions | Any selector enters Bochs, raw host pointer crosses guest fields, mapper is used for host-local scratch pointers, a second CCPU executor appears, or a trace selects a leaf implementation. |
-| Exit Criteria | Reproducible S2 declaration/import ledger covers all mapped ingress/façade groups and is source-reviewed; it identifies which exact original source bodies can enter S3 without an invented replacement. |
+| Verification | Both architectures compile and archive byte-exact `nt_ertbl.c` and `nt_mess.c` with `/MT /W4`, the bridge has the exact historical table layout/enumerators, and no runtime provider/selector becomes linked. |
+| Expected Markers | `ERROR_STRUCT` plus `EH_*`/`EV_*` bridge from base source evidence; `host-static-data.lib` on x86 and x64; Ninja `deps = msvc`; no guest-memory mapper use. |
+| Asset Needs | Exact MVDM host mirror, matching base error header, adapter-win32 type binding, adapter-softpc declaration bridge, MSVC and Ninja. |
+| Reporting Requirements | Original hashes, compiler output/warnings, architecture results, bridge provenance and explicit absence of runtime enablement. |
+| Stop Conditions | A mirror file changes, bridge gains behavior, a provider is linked into app, guest/machine state crosses the boundary, warning suppression is used, or a trace selects an implementation. |
+| Exit Criteria | Formal Ninja x86/x64 graphs archive the two source-identical static data bodies and the verifier proves bridge/build scope remains bounded. |
 | Original Owner Request | “单人双角色模式执行队列任务”。 |
 | Similar-Issue Sweep | DEM vs COMMAND ownership, host-control executors vs façades, overlay transport seams, session/mapping boundary, known adapter ownership, and non-runtime historical product shells. |
 
