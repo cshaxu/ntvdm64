@@ -2,10 +2,10 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T279 is closed as the original low-dependency MVDM
-support-library closure. Its authoritative record is
-[M0 T279 closure](history/m0-t279-closure-20260826.md). No MVDM provider/BOP
-route or guest runtime is enabled by T279.
+**Active: M0 T280 S1** — M0 T280 recovers the original host control plane and
+DEM as one source-owner package after the T279 support-library closure. It is
+Ordinary Mode with single-person dual-role review; no selector/BOP route is
+enabled merely by this planning packet.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -25,6 +25,26 @@ implementation subtasks are withdrawn and re-enter only through owner-package
 waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
+
+### M0 T280 S1 — host-control and DEM workset admission
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T280 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Queue-head Wave 2 follows closed T279. Begin with a complete source-owner workset, not a trace-selected BOP or a compile-error-driven shim. |
+| Objective | Materialise the exact original DEM and reached SoftPC host-control file/interface workset, separating adapter-backed bodies, narrow overlay prerequisites, binding-only declarations and excluded alternate executors. |
+| Non-goals | No original-body edit, BOP enablement, machine behavior change, adapter implementation, DEM service implementation, guest trace, or private NT4 product-shell rehost. |
+| Reference Baseline | T276 final DOS and SoftPC host-control dispositions, T277/S5 197-row host-control interface ledger, T279 support-library closure and Wave 2 plan. |
+| Files And ABI Surface | Generated Wave 2 workset ledger and admission plan only. No runtime ABI changes. |
+| Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
+| Verification | Every selected `dos/dem` and `softpc.new/host/src` path has one inherited final disposition, owner/binding boundary and T280 implementation grouping; all counts reconcile to the global tracker. |
+| Expected Markers | 16 DEM adapter-backed bodies; 33 host-control adapter-backed bodies; six host-control overlay prerequisites; five binding declarations; 21 excluded paths. |
+| Asset Needs | Exact MVDM host mirror, global final-disposition ledger, T277/S5 ledger and support-library build artifacts. |
+| Reporting Requirements | Exact source counts, dependency grouping, boundary owners, overlay cases, exclusion reasons and S2 admission preconditions. |
+| Stop Conditions | A path is classified by name alone, a new adapter is proposed without source evidence, Bochs becomes BOP-aware, raw host pointers enter DOS fields, or a trace selects a leaf implementation. |
+| Exit Criteria | Reproducible Wave 2 workset is complete, count-reconciled and dependency-grouped; it makes explicit which prerequisite package/interface closure S2 must implement first. |
+| Original Owner Request | “单人双角色模式执行队列任务”。 |
+| Similar-Issue Sweep | DEM vs COMMAND ownership, host-control executors vs façades, overlay transport seams, session/mapping boundary, known adapter ownership, and non-runtime historical product shells. |
 
 ### Closed packet reference — M0 T279 S4
 
