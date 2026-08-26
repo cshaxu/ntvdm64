@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T280 S3** — M0 T280 recovers the original host control plane and
+**Active: M0 T280 S4** — M0 T280 recovers the original host control plane and
 DEM as one source-owner package after the T279 support-library closure. It is
 Ordinary Mode with single-person dual-role review; no selector/BOP route is
 enabled merely by this planning packet.
@@ -26,23 +26,23 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S3 — original host static-data build island
+### M0 T280 S4 — complete DEM include and ABI boundary ledger
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T280 S3`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S2 closed in `049aba0a`. Enter only the two original static-data host bodies whose symbols are self-contained and whose adapter declaration gap is now source-proven. |
-| Objective | Build an x86/x64 static island from byte-exact `nt_ertbl.c` and `nt_mess.c`, using only the same-shaped `adapter-softpc` error declaration bridge and existing `adapter-win32` NT type binding. |
-| Non-goals | No original-body edit, BOP enablement, machine behavior change, provider link into app, DEM service implementation, guest trace, second executor, or private NT4 product-shell rehost. |
-| Reference Baseline | T280/S1 workset, T280/S2 declaration map, exact original static-data bodies and the matching base error declarations. |
-| Files And ABI Surface | One `adapter-softpc` declaration bridge, generated Ninja graph, original static library and build evidence only. No runtime ABI changes. |
+| Identifier Mode | `M0 T280 S4`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S3 closed in `706270ef`. Establish the full 16-body DEM source include/ABI boundary before compiling or enabling any selected DEM provider. |
+| Objective | Generate and verify an exact original-include ledger for every selected DEM body, assigning every included contract to local mirror, support mirror, platform ABI, public SDK, or a named adapter recovery boundary. |
+| Non-goals | No original-body edit, BOP enablement, machine behavior change, DEM provider implementation, app link, guest trace, second executor, or private NT4 product-shell rehost. |
+| Reference Baseline | Exact original `dos/dem/sources`, all 16 selected bodies, existing support and platform-ABI mirrors, T280/S1 final workset, and source-policy constraints. |
+| Files And ABI Surface | Generated include/ABI ledger and gap audit only. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Both architectures compile and archive byte-exact `nt_ertbl.c` and `nt_mess.c` with `/MT /W4`, the bridge has the exact historical table layout/enumerators, and no runtime provider/selector becomes linked. |
-| Expected Markers | `ERROR_STRUCT` plus `EH_*`/`EV_*` bridge from base source evidence; `host-static-data.lib` on x86 and x64; Ninja `deps = msvc`; no guest-memory mapper use. |
-| Asset Needs | Exact MVDM host mirror, matching base error header, adapter-win32 type binding, adapter-softpc declaration bridge, MSVC and Ninja. |
-| Reporting Requirements | Original hashes, compiler output/warnings, architecture results, bridge provenance and explicit absence of runtime enablement. |
-| Stop Conditions | A mirror file changes, bridge gains behavior, a provider is linked into app, guest/machine state crosses the boundary, warning suppression is used, or a trace selects an implementation. |
-| Exit Criteria | Formal Ninja x86/x64 graphs archive the two source-identical static data bodies and the verifier proves bridge/build scope remains bounded. |
+| Verification | All 16 `sources` bodies occur once; each direct include has exactly one disposition; unmirrored historical private headers are named adapter gaps rather than silently sourced from external trees. |
+| Expected Markers | Local DEM headers; support headers; `nt_vdd.h` platform ABI; public SDK/CRT headers; `winbasep.h`/`vdm.h` explicit adapter-win32 recovery records. |
+| Asset Needs | Exact MVDM host mirror, sources list, current component topology, OpenNT/OpenNT-4.5 comparison sources for header provenance. |
+| Reporting Requirements | Per-body include evidence, target owner, adapter gap/provenance, no raw pointer/mapping misuse, and S5 import preconditions. |
+| Stop Conditions | A missing header is copied into a mirror without provenance, a private header silently resolves from external source, a new adapter is created without source evidence, or a trace selects a provider. |
+| Exit Criteria | Reproducible ledger covers all 16 bodies and all direct includes; every presently absent required contract has one named owner and source evidence. |
 | Original Owner Request | “单人双角色模式执行队列任务”。 |
 | Similar-Issue Sweep | DEM vs COMMAND ownership, host-control executors vs façades, overlay transport seams, session/mapping boundary, known adapter ownership, and non-runtime historical product shells. |
 
