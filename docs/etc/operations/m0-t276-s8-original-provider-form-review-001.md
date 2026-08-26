@@ -2,8 +2,9 @@
 
 ## Result
 
-The S6 list of 26 lexical external-boundary candidates is not a list of 26
-missing functions.  Direct source review gives the following non-final forms:
+The case-sensitive S6 list of 25 lexical external-boundary candidates is not a
+list of 25 missing functions. Direct source review gives the following
+non-final forms:
 
 - 13 rows have an original selected source body or a selected original body
   with historical dispatch indirection.
@@ -11,7 +12,7 @@ missing functions.  Direct source review gives the following non-final forms:
 - 1 row is the CRT/toolchain import `malloc`.
 - 3 rows are optional historical feature calls with no provider body in either
   selected upstream source tree; their callers are macro-guarded.
-- 8 rows have no provider body in the selected source universe and require a
+- 6 rows have no provider body in the selected source universe and require a
   later package/ABI decision rather than an invented replacement.
 
 The detail ledger is
@@ -34,7 +35,10 @@ It preserves the S6 identity and declaration evidence for every row.
 
 ## Limit
 
-This is definition-form evidence only.  It neither enables a source body nor
+This is definition-form evidence only. A case-sensitive regeneration removed
+the false `CMDRebootVDM`/`cmdRebootVDM` correlation: the first is an uncalled
+declaration and the second is a separate undeclared lexical call. It neither
+enables a source body nor
 selects a modern implementation, adapter ABI, build target, profile, failure
 contract or Bochs binding.  S9 must expand the actual package-level ABI and
 failure contract for the rows that remain actionable after this correction.

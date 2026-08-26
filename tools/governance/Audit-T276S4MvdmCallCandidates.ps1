@@ -27,9 +27,11 @@ $sources = @($files | Where-Object { $_.file_kind -eq 'source' })
 if ($sources.Count -ne 612) { throw "Expected 612 selected source files; found $($sources.Count)." }
 $declarations = @(Import-Csv -LiteralPath $declarationPath -Delimiter "`t")
 if ($declarations.Count -ne 4803) { throw "Expected 4,803 declaration candidates; found $($declarations.Count)." }
-$byName = @{}
+$byName = New-Object 'System.Collections.Generic.Dictionary[string,System.Collections.Generic.List[string]]' ([System.StringComparer]::Ordinal)
 foreach ($declaration in $declarations) {
-    $name = $declaration.lexical_name.ToLowerInvariant()
+    # C and C++ external names are case-sensitive.  Retain the source spelling
+    # so CMDRebootVDM cannot be correlated with cmdRebootVDM.
+    $name = $declaration.lexical_name
     if (-not $byName.ContainsKey($name)) { $byName[$name] = New-Object System.Collections.Generic.List[string] }
     $byName[$name].Add($declaration.declaration_id)
 }
@@ -59,7 +61,7 @@ foreach ($source in $sources) {
         $name = $match.Groups[1].Value
         if ($keywords -contains $name.ToLowerInvariant()) { continue }
         $callIndex++; $unitCount++
-        $nameKey = $name.ToLowerInvariant()
+        $nameKey = $name
         $candidateIds = if ($byName.ContainsKey($nameKey)) { @($byName[$nameKey]) } else { @() }
         $correlation = if ($candidateIds.Count -eq 0) { 'no-selected-extern-candidate' }
             elseif ($candidateIds.Count -eq 1) { 'unique-declaration-name-candidate' }

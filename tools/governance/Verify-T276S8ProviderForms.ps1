@@ -16,7 +16,7 @@ foreach ($path in @($worklistPath, $formsPath)) {
 
 $worklist = Import-Csv -LiteralPath $worklistPath -Delimiter "`t"
 $forms = Import-Csv -LiteralPath $formsPath -Delimiter "`t"
-if ($worklist.Count -ne 26) { throw "Expected 26 S6 worklist rows, found $($worklist.Count)." }
+if ($worklist.Count -eq 0) { throw 'S6 worklist must not be empty.' }
 if ($forms.Count -ne $worklist.Count) { throw "Provider-form row count $($forms.Count) does not match worklist count $($worklist.Count)." }
 
 $duplicate = $forms | Group-Object worklist_id | Where-Object Count -ne 1

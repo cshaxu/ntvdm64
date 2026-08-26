@@ -7,9 +7,9 @@ S5 scans selected C/C++ source for a lexical function-definition form, then disp
 ## Counts
 
 - Selected C/C++ lexical definition occurrences: 12855
-- S4 unique-declaration-name call candidates disposed: 3825
-- `external-boundary-candidate`: 2355
-- `selected-definition-name-observed`: 1470
+- S4 unique-declaration-name call candidates disposed: 3697
+- `external-boundary-candidate`: 2268
+- `selected-definition-name-observed`: 1429
 
 ## Limits
 

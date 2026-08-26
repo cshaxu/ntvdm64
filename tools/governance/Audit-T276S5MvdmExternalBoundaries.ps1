@@ -27,7 +27,7 @@ if ($calls.Count -ne 89924) { throw "Expected 89,924 calls; found $($calls.Count
 $keywords = @('if','for','while','switch','return','sizeof','case','do','typedef','defined','__asm','asm','catch')
 $definitions = New-Object System.Collections.Generic.List[object]
 $definitionIndex = 0
-$definitionNames = @{}
+$definitionNames = New-Object 'System.Collections.Generic.Dictionary[string,System.Collections.Generic.List[string]]' ([System.StringComparer]::Ordinal)
 foreach ($source in $sources) {
     if ([System.IO.Path]::GetExtension($source.target_path).ToLowerInvariant() -notin @('.c','.cc','.cpp')) { continue }
     $path = Join-Path $mirrorRoot ($source.target_path -replace '/', '\\')
@@ -48,7 +48,9 @@ foreach ($source in $sources) {
             lexical_name = $name; provenance = 'selected-c-or-cpp-source-lexical-definition'; evidence = $source.target_path + ':' + $line
         }
         $definitions.Add($record)
-        $key = $name.ToLowerInvariant()
+        # C and C++ external names are case-sensitive; the lexical pass must
+        # not turn a case mismatch into a false selected definition.
+        $key = $name
         if (-not $definitionNames.ContainsKey($key)) { $definitionNames[$key] = New-Object System.Collections.Generic.List[string] }
         $definitionNames[$key].Add($record.definition_id)
     }
@@ -64,7 +66,7 @@ foreach ($call in $uniqueCalls) {
     $boundaryIndex++
     $declaration = $declarationById[$call.declaration_candidate_ids]
     if ($null -eq $declaration) { throw "S4 unique candidate lacks S3 declaration: $($call.call_id)" }
-    $key = $call.lexical_callee.ToLowerInvariant()
+    $key = $call.lexical_callee
     $disposition = if ($definitionNames.ContainsKey($key)) { 'selected-definition-name-observed' } else { 'external-boundary-candidate' }
     $boundaries.Add([pscustomobject]@{
         disposition_id = ('MVDM-BOUNDARY-{0:D5}' -f $boundaryIndex); call_id = $call.call_id
