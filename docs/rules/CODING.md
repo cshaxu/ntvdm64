@@ -1,5 +1,27 @@
 # Coding Rules
 
+## Rebootstrap source-placement rule
+
+The current production roots are exactly `bochs-core`, `opennt-mvdm-host`,
+`opennt-platform-abi`, `opennt-guest-dos`, `opennt-guest-wow16`,
+`adapter-bochs`, `adapter-bop`, `adapter-softpc`, `adapter-win32`,
+`adapter-vdm-monitor`, `session`, and `app`. These rules supersede
+transition-era placement text below that names separate `opennt-bop`,
+`opennt-host`, `opennt-softpc`, `opennt-utils` or `opennt-abi` roots.
+
+Selected non-guest/non-tool OpenNT MVDM source is kept in
+`opennt-mvdm-host`, preserving upstream relative paths after re-rooting.
+Required exact declarations outside MVDM are `opennt-platform-abi` only.
+The DOS and WOW16 roots carry selected source/resources/build metadata and
+products but never supply a host object or library. `adapter-bochs` alone
+calls `bochs-core`; `adapter-softpc` reaches Bochs only through it.
+
+All mirror modifications use the existing exact/subset/same-shaped review
+standard. The matching `*-overlay` is private to its mirror. `src.old/` is
+comparison evidence only. Historical MVDM tooling belongs under `tools/opennt`.
+
+## Superseded transition-era rules retained as migration evidence
+
 - Historical recovery is mandatory source-first engineering, not merely an
   evidence preference. For every recovered OpenNT/guest/host behavior, attempt
   and record this order: (1) directly composable original source; (2) the
@@ -94,11 +116,13 @@
   cannot solve the problem. Distribution review is deferred until a release is
   considered.
 - Place each source file in its named target component: Bochs mechanics in
-  `bochs-core`; Bochs-only native assembly in `adapter-bochs`; guest image source in
-  `opennt-guest`; independently composable OpenNT host capability in
-  `opennt-host`; original SoftPC firmware/ROM/machine-contract inputs in
-  `opennt-softpc`; selected original reusable utility packages in
-  `opennt-utils`; OpenNT BOP mirrors in `opennt-bop`; unavailable public-Win32
+  `bochs-core`; Bochs-only native assembly in `adapter-bochs`; shared original
+  MVDM/VDM declarations in `opennt-abi`; DOS guest source in
+  `opennt-guest-dos`; WOW16 guest source in `opennt-guest-wow16`;
+  independently composable OpenNT host capability in `opennt-host`; original
+  SoftPC firmware/ROM/machine-contract inputs in `opennt-softpc`; selected
+  original reusable utility packages in `opennt-utils`; OpenNT BOP mirrors in
+  `opennt-bop`; unavailable public-Win32
   facades in `adapter-win32`; selector-blind copied-frame BOP ingress and
   typed completion in `adapter-bop`; bounded same-shaped SoftPC/CCPU recovery
   in `adapter-softpc`; dependency-free per-VDM lifecycle/resource/event state
@@ -108,7 +132,8 @@
   incidental feature change; the admitted reorganization package inventories
   it and uses `git mv` whenever ownership is pure.
 - Reserve `legacy` for an archived historical-record path, an immutable external`r`n  spelling, or prose that identifies a historical platform/API. It must not`r`n  label a current production ABI, component, fixture, build target, or active`r`n  compatibility facade merely because that code was renamed from an earlier`r`n  local revision. Use a neutral semantic name instead; a retained external`r`n  spelling is registered as an upstream-identity exception.`r`n- The only original-code components are `bochs-core`, `opennt-guest`,
-  `opennt-bop`, `opennt-host`, `opennt-softpc`, and `opennt-utils`; every imported-body change is individually
+  `opennt-abi`, `opennt-guest-dos`, `opennt-guest-wow16`, `opennt-bop`,
+  `opennt-host`, `opennt-softpc`, and `opennt-utils`; every imported-body change is individually
   registered in that component's README and marked `DIVERGENCE:` locally.
   `adapter-bochs`, `adapter-bop`, `adapter-softpc`, and `adapter-win32` are
   mechanical-adaptation components. `app` and `session` are project-authored
@@ -159,8 +184,9 @@
   register; it must not become a generic `compat`/`common` container.
 - A `*-overlay` is called only by the corresponding native mirror, never by a
   different component or test. It has no standalone public include/link ABI.
-  `app` and `adapter-softpc` are the only production callers of the declared,
-  selector-blind, fixed-width mechanical facade of `adapter-bochs`.
+  `app` is the only direct lifecycle caller of the declared selector-blind,
+  fixed-width mechanical facade of `adapter-bochs`; it supplies any opaque
+  endpoint consumed by `adapter-softpc` during composition.
   `adapter-softpc` must not include `bochs-core` or access a Bochs type, object
   or global. `adapter-bochs` is the only production caller of `bochs-core`.
 - Keep imported OpenNT mirrors recognizable. Preserve source names, interfaces,
@@ -169,12 +195,12 @@
   dependency must first be offered through an equivalently shaped
   `adapter-win32`, `adapter-softpc`, or `opennt-host` facade. A self-authored
   alternate interface remains a registered last-resort exception.
-- A production OpenNT component may retain an original package only when that
-  package is admitted for an actually composed/recovered provider or is a
-  declared guest/firmware/tool input. Do not import dormant VDD, debugger,
-  WOW, FAX or similar host product packages merely as a convenient local
-  source archive; the pinned external OpenNT tree remains their source record
-  until their owner-package task begins.
+- An original-code component may retain a complete upstream package before its
+  translation units are admitted to the formal build. The import manifest must
+  state its source identity, owner and whether it is build-selected; a complete
+  package mirror is not an authorization to enable its dormant behavior.
+  Retain it under its original owner component and upstream-relative path, not
+  under a generic reference or compatibility root.
 - `adapter-softpc` may implement a reached historical SoftPC/CCPU interface
   only through the same name, parameters, calling convention and observable
   mechanical result, backed by bounded Bochs operations. It may transport a

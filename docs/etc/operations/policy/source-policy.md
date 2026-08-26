@@ -1,6 +1,15 @@
 # Source And Research Policy
 
-OpenNT NT4 MVDM/NTDOS is the primary historical guest/service source base.
+OpenNT NT4 MVDM/NTDOS is the primary historical guest/service source family.
+The pinned local OpenNT and OpenNT-4.5 MVDM trees are merged into one canonical
+component superset: identical target paths collapse with dual provenance,
+one-sided paths are included, and content conflicts are resolved once at
+complete-package scope using source/build/resource/artifact lineage. Product
+source never retains parallel edition roots or applies an undocumented
+file-level precedence. The selected file's source path/hash and the rejected
+alternative are recorded. DOS/WOW16 guest components also retain every
+selected original source, resource, intermediate and binary product, but none
+of their objects is a host link input.
 Bochs 2.6, from `O:\repos.external\bochs-2.6-compat\bochs-2.6`, is the
 approved third-party guest-machine backend, subject to the pinned-import and
 source-identity requirements in `design/CODING.md` and the adoption record.

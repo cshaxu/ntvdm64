@@ -1,5 +1,35 @@
 # Architecture Rules
 
+## Rebootstrap component rule
+
+The current production model has exactly twelve roots: `bochs-core`,
+`opennt-mvdm-host`, `opennt-platform-abi`, `opennt-guest-dos`,
+`opennt-guest-wow16`, `adapter-bochs`, `adapter-bop`, `adapter-softpc`,
+`adapter-win32`, `adapter-vdm-monitor`, `session`, and `app`. This rule
+supersedes transition-era rules below that mention separate `opennt-bop`,
+`opennt-host`, `opennt-softpc`, `opennt-utils` or `opennt-abi` roots.
+
+`opennt-mvdm-host` is the only non-guest/non-tool MVDM source mirror. It keeps
+the selected original owner packages together; a build may partition them into
+many libraries without creating source components. `opennt-platform-abi` holds
+exact outside-MVDM OpenNT declarations only. Guest roots are load-only and are
+never host compile/link inputs.
+
+`adapter-bochs` is the sole production caller of `bochs-core`.
+`adapter-softpc` uses only `adapter-bochs` typed mechanics, never Bochs types
+or globals. `adapter-bop` remains selector-blind. `adapter-vdm-monitor` is a
+required same-shaped, bounded single-session interface family for
+`NtVdmControl`, `VDM_TIB`, V86 events and interrupt/fault-handler installation;
+it is not a license to re-create a kernel, CSRSS or product shell.
+
+Every mirror has a README divergence register. Its overlay is private to that
+mirror and may not be called, included or linked by another component. The
+canonical OpenNT selection is a single package-scope union of the two pinned
+MVDM baselines: one selected file per target path, no parallel editions or
+undocumented file-level hybrids.
+
+## Superseded transition-era rules retained as migration evidence
+
 1. Bochs 2.6 owns guest CPU, RAM/ROM, firmware and PC-device mechanics; guest OpenNT owns DOS/WOW/COMMAND behavior; `opennt-bop` owns routing to the original OpenNT host provider where it can be independently composed, and the source-derived replacement only where that historical host composition is unavailable. Neither Bochs nor guest code may absorb the other's responsibility.
 2. The Bochs/OpenNT bridge is the only integration point. It uses versioned fixed-width records, validated guest-memory ranges and explicit stop/result dispositions; no host pointer, C++ object or cross-architecture function pointer crosses it.
 3. A local OpenNT recovery requires a reached OpenNT caller, owner analysis, data-layout and failure-behavior evidence, and a bounded fixture. Its implementation decision is made in this mandatory order: (a) reuse independently composable original OpenNT source; (b) reuse that source through the smallest adapter, compatibility seam, or build shim needed to replace unavailable host composition; (c) make a registered, exceptional intrusion into adopted external code only when neither preceding route can provide an essential mechanical boundary; (d) author new behavior only when the required historical source or usable behavior is absent. This is an implementation hierarchy, not a choice among equivalent designs: a convenient transcription, trace observation, available modern API, or temporary capacity boundary never justifies skipping an earlier rung. At step (b), the preferred form is an **OpenNT-shaped compatibility facade**: original source files retain their original function/macro/structure shape while a named compatibility header maps the unavailable historical dependency to a bounded, session-owned implementation. The internal implementation may be safely isolated, but it must preserve the reached call site's calling convention, layout, ordering and failure rule. Where session mapping is required, isolation is by separately owned mapping-manager instances, not a shared numeric namespace. A source-derived rehost is permitted only when that facade cannot compose the original translation unit; it must record why, and must not become a permanent substitute merely because it is functional. The owner may explicitly override this order for a named product requirement, including the CLI, Bochs-for-SoftPC substitution, and unpack-and-run host non-intrusion.
@@ -42,19 +72,20 @@
     shaped boundary requires rule 12's exception and may expose only the
     state required by the reached call.
 14. Intrusion is minimized independently for adopted Bochs `bochs-core` and
-    imported OpenNT mirrors (`opennt-guest`, `opennt-bop`, `opennt-host`,
-    `opennt-softpc`, `opennt-utils`, and
+    imported OpenNT mirrors (`opennt-abi`, `opennt-guest-dos`,
+    `opennt-guest-wow16`, `opennt-bop`, `opennt-host`, `opennt-softpc`, `opennt-utils`, and
     tracked BOP-dependencies). Prefer an `adapter-softpc`, `adapter-win32`, or
     `opennt-host` same-shaped facade that preserves the original call shape.
     An edit to `bochs-core` or imported OpenNT source requires a source-proven
     necessity, the smallest feasible diff, and the component's divergence or
     exception record; convenience or a local trace result is never sufficient.
 15. The target source owners are exactly `bochs-core`, `adapter-bochs`,
-    `opennt-guest`, `opennt-host`, `opennt-bop`, `opennt-softpc`,
-    `opennt-utils`, `adapter-bop`,
+    `opennt-abi`, `opennt-guest-dos`, `opennt-guest-wow16`, `opennt-host`,
+    `opennt-bop`, `opennt-softpc`, `opennt-utils`, `adapter-bop`,
     `adapter-softpc`, `adapter-win32`, `session`, and `app`. The original-code
-    owners are exactly `bochs-core`, `opennt-guest`, `opennt-bop`, `opennt-host`,
-    `opennt-softpc`, and `opennt-utils`, each with a component README exception register. The
+    owners are exactly `bochs-core`, `opennt-abi`, `opennt-guest-dos`,
+    `opennt-guest-wow16`, `opennt-bop`, `opennt-host`, `opennt-softpc`, and
+    `opennt-utils`, each with a component README exception register. The
     mechanical-adaptation owners are exactly `adapter-bochs`, `adapter-bop`,
     `adapter-softpc`, and `adapter-win32`; the project-composition owners are
     exactly `app` and `session`. `session` is a
@@ -66,7 +97,8 @@
     on the declared `session` contract rather than call upward into `app`.
     Dependencies flow from `app`
     through `adapter-bop`'s typed, selector-blind ingress and declared OpenNT/adapter
-    contracts to `adapter-bochs` and then `bochs-core`; `opennt-guest` is a guest-image
+    contracts to `adapter-bochs` and then `bochs-core`; `opennt-guest-dos` and
+    `opennt-guest-wow16` are guest-image
     input and does not become a host-provider library. `opennt-bop` alone owns
     BOP source meaning. `adapter-bop` is selector-blind copied-frame transport,
     while `adapter-softpc` is selector-blind, same-shaped
@@ -77,7 +109,8 @@
     the original owner plus `session`, `adapter-win32`, `adapter-softpc`, and
     `adapter-bop` cannot preserve the required contract.
 16. The local-intrusion registers are component-owned. `bochs-core/README.md`,
-    `opennt-guest/README.md`, `opennt-bop/README.md`, `opennt-host/README.md`,
+    `opennt-abi/README.md`, `opennt-guest-dos/README.md`,
+    `opennt-guest-wow16/README.md`, `opennt-bop/README.md`, `opennt-host/README.md`,
     `opennt-softpc/README.md`, and `opennt-utils/README.md`
     record every edit to their imported source and every source-derived component.
     `opennt-bop` mirror edits additionally retain the original call form and mark

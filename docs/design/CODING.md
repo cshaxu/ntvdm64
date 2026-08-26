@@ -1,11 +1,46 @@
 # Source Layout
 
-The twelve production components are classified before any file move or new
+> **Current rebootstrap layout.** This section supersedes the transition-era
+> root list below. The production layout is exactly:
+
+```text
+src/bochs-core/
+src/opennt-mvdm-host/
+src/opennt-platform-abi/
+src/opennt-guest-dos/
+src/opennt-guest-wow16/
+src/adapter-bochs/
+src/adapter-bop/
+src/adapter-softpc/
+src/adapter-win32/
+src/adapter-vdm-monitor/
+src/session/
+src/app/
+```
+
+The five mirror roots preserve selected upstream-relative paths after
+re-rooting and each has a README exception register. `opennt-mvdm-host` is the
+canonical merged non-guest/non-tool MVDM mirror. `opennt-platform-abi` is
+declarations only. The guest roots retain selected source, resources, build
+metadata, intermediates and original products but their objects/libraries
+never enter the host link; `app` selects immutable guest bytes via a manifest
+and loads them through `adapter-bochs`.
+
+`adapter-bochs` is the sole production caller of `bochs-core`.
+`adapter-softpc` reaches it only through `adapter-bochs`; `adapter-bop` is
+selector-blind; `adapter-vdm-monitor` owns the same-shaped monitor interface
+family. `session` stays neutral and `app` is the sole composition owner.
+Historical tools live under `tools/opennt`; `src.old/` is comparison evidence,
+not a build input. Mirror overlays are private to their matching mirror.
+
+## Superseded transition-era layout record
+
+The fourteen production components are classified before any file move or new
 source is admitted:
 
 - **Original code, with component README exception registers:** `bochs-core`,
-  `opennt-guest`, `opennt-bop`, `opennt-host`, `opennt-softpc`,
-  `opennt-utils`.
+  `opennt-abi`, `opennt-guest-dos`, `opennt-guest-wow16`, `opennt-bop`,
+  `opennt-host`, `opennt-softpc`, `opennt-utils`.
 - **Mechanical adaptation:** `adapter-bochs`, `adapter-bop`, `adapter-softpc`,
   `adapter-win32`.
 - **Project composition:** `app`, `session`.
@@ -19,7 +54,9 @@ dependency-free even though it is project-authored composition code.
 src/
   bochs-core/             adopted Bochs CPU, memory and exception mechanics
   adapter-bochs/          project-owned native Bochs lifecycle composition
-  opennt-guest/           imported OpenNT DOS/WOW source and guest-image inputs
+  opennt-abi/             exact shared OpenNT MVDM/VDM declarations
+  opennt-guest-dos/       imported OpenNT DOS/V86 and DOSX guest inputs
+  opennt-guest-wow16/     imported OpenNT WOW16/Win16 guest inputs
   opennt-host/            imported OpenNT host-capability components
   opennt-bop/             minimal-change OpenNT BOP source mirrors
   opennt-softpc/          imported OpenNT SoftPC firmware/ROM/machine-contract inputs
@@ -29,14 +66,8 @@ src/
   adapter-win32/          source-shaped modern Win32 compatibility facades
   session/                dependency-free per-VDM lifecycle/resource/event foundation
   app/                    ntvdm64 CLI and final component composition
-refs/                     read-only comparison, historical and archival inputs
-  bochs/                  pinned Bochs 2.6 imported source tree
-  ms-dos-6/               recovered MS-DOS 6 source input
-  opennt/                 external OpenNT comparison tree
-  opennt-45/              OpenNT 4.5 comparison slice
-  ntvdmx64/               external NTVDMx64 comparison tree
-  ntvdmx64-derived/       fixed NTVDMx64-derived comparison slice
-  archive/                retired probes, adapters and reconstruction fixtures
+src.old/                  quarantined pre-rebootstrap implementation evidence;
+                          never a source, build, link or runtime input
 tests/
   app/                    app-owned CLI fixture inputs
   adapter-bop/            copied-frame ingress boundary fixtures
@@ -67,20 +98,27 @@ Bochs-internal lifecycle assembly; it may use native Bochs structures but has
 no OpenNT, DOS, VDM, WOW or Win32 meaning. It is a deliberately cropped Bochs
 product assembly layer, not an adopted-source exception surface.
 
-Only `app` and `adapter-softpc` may directly include, link, or call the
-declared selector-blind, fixed-width mechanical facade of `adapter-bochs`;
-`adapter-softpc` may not include a `bochs-core` header or access a Bochs type,
-object or global. Only `adapter-bochs` may directly include, link, or call
-`bochs-core`. A
+Only `app` may directly include, link, or call the declared selector-blind,
+fixed-width mechanical facade of `adapter-bochs`; it supplies a typed opaque
+endpoint to `adapter-softpc` during composition. `adapter-softpc` may not
+include a `bochs-core` header or access a Bochs type, object or global. Only
+`adapter-bochs` may directly include, link, or call `bochs-core`. A
 component-specific `*-overlay` is private to the matching original mirror:
 only that mirror may include, link, or call it. Overlays are not fixture,
 adapter, session, or app inputs and expose no public component surface.
 
-`src/opennt-guest/` contains the original DOS/WOW guest sources and guest-image
-inputs. Original prebuilt OpenNT images are the default packaging input;
+`src/opennt-guest-dos/` contains the canonical single-tree union of original
+DOS/V86 and DOSX guest source and guest-image inputs selected from OpenNT and
+OpenNT-4.5; `src/opennt-guest-wow16/` contains the corresponding canonical
+WOW16/Win16 union. They preserve all selected original source, resources,
+build descriptions, intermediates and product binaries. The guest components
+are not host libraries: no guest object or archive enters the MSVC x64 host
+compile/link graph. Original prebuilt images are the default packaging input;
 source-built images are fallback/reproducibility inputs only where an original
-artifact is unavailable. Its `README.md` records every guest-source divergence
-and its exception identifier; the expected normal count is zero.
+artifact is unavailable. `app` consumes only a guest-image manifest and loads
+the selected immutable bytes through `adapter-bochs`. Each component
+`README.md` records every guest-source divergence and its exception identifier;
+the expected normal count is zero.
 
 `src/opennt-host/` contains independently composable original OpenNT
 host-capability components. Its production files preserve their original
@@ -89,13 +127,19 @@ local to its corresponding original unit, carries a `DIVERGENCE:` comment, and
 is recorded in the component exception register; an invented helper cannot
 pose as an upstream mirror file.
 
-An original host package is imported into `src/opennt-host/` only as part of
-an admitted, actually composed provider recovery. Unreached VDD, debugger,
-WOW, FAX or other historical host packages remain in the pinned external
-source baseline; source preservation alone is not a reason to put dormant
-product code in a production component.
+An OpenNT package may be imported intact before its translation units are
+admitted to the formal build. All OpenNT mirror components use one canonical
+target tree formed from the pinned OpenNT and OpenNT-4.5 baselines. Identical
+paths collapse to one file with dual provenance; a one-sided path is included;
+a content conflict is decided once at complete-package scope using its build,
+resource and artifact lineage. Parallel edition directories and silent
+file-by-file precedence are forbidden. The source import records original
+identity and the union disposition; the build manifest separately lists
+composed inputs. This permits low-diff whole-package mirrors without silently
+reshaping unused source to satisfy a current local build.
 
-`src/opennt-softpc/` contains admitted original OpenNT SoftPC firmware, ROM
+`src/opennt-abi/` contains only exact shared MVDM/VDM declarations and has no
+project-authored implementation. `src/opennt-softpc/` contains admitted original OpenNT SoftPC firmware, ROM
 and machine-contract inputs. It is neither a second machine runtime nor a
 dependency from `adapter-bochs`: `app` may select opaque admitted bytes for the
 mechanical loader, while `adapter-bochs` remains OpenNT-blind. `src/opennt-utils/`
@@ -146,17 +190,14 @@ the product layout. Historical OpenNT reference material remains under
 `tests/legacy/opennt/`. These roots are not product, formal-build or runtime
 inputs.
 
-The target layout has twelve source components. The current formal graph has
-nine linkable host-side modules; `opennt-guest` and `opennt-softpc` are input
-rather than host libraries, while `opennt-utils` gains a formal library only
-when an admitted original caller requires it. A component skeleton never
-creates an empty library merely to satisfy the diagram.
-than a host library. All current modern runtime sources below `src/app/`, `src/session/`, `src/adapter-softpc/`,
-`src/adapter-win32/`, `src/opennt-host/`, `src/opennt-bop/`,
-`src/adapter-bop/`, `src/adapter-bochs/`, and the admitted `src/bochs-core/` closure build with MSVC x64
-and the static `/MT` CRT. Generated build artifacts record the compiler,
-target architecture and CRT. MinGW artifacts are retained evidence only and
-cannot be linked into the x64 runtime process.
+The target layout has fourteen source components. The formal graph may select
+only a subset of imported OpenNT packages. `opennt-guest-dos` and
+`opennt-guest-wow16` are loaded data inputs and never host-side libraries;
+`opennt-softpc` and `opennt-abi` do not require empty host libraries merely to
+satisfy the diagram. Any composed modern runtime
+source builds with MSVC x64 and the static `/MT` CRT. Generated build artifacts
+record the compiler, target architecture and CRT. MinGW artifacts are retained
+evidence only and cannot be linked into the x64 runtime process.
 
 `build/<task>/<run>/` is the sole repository-local location for temporary
 build trees, objects, libraries, generated project files and debug logs. It is
