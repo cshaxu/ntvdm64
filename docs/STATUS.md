@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T280 S4** — M0 T280 recovers the original host control plane and
+**Active: M0 T280 S5** — M0 T280 recovers the original host control plane and
 DEM as one source-owner package after the T279 support-library closure. It is
 Ordinary Mode with single-person dual-role review; no selector/BOP route is
 enabled merely by this planning packet.
@@ -26,23 +26,23 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S4 — complete DEM include and ABI boundary ledger
+### M0 T280 S5 — reached VDM directory-control adapter
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T280 S4`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S3 closed in `706270ef`. Establish the full 16-body DEM source include/ABI boundary before compiling or enabling any selected DEM provider. |
-| Objective | Generate and verify an exact original-include ledger for every selected DEM body, assigning every included contract to local mirror, support mirror, platform ABI, public SDK, or a named adapter recovery boundary. |
-| Non-goals | No original-body edit, BOP enablement, machine behavior change, DEM provider implementation, app link, guest trace, second executor, or private NT4 product-shell rehost. |
-| Reference Baseline | Exact original `dos/dem/sources`, all 16 selected bodies, existing support and platform-ABI mirrors, T280/S1 final workset, and source-policy constraints. |
-| Files And ABI Surface | Generated include/ABI ledger and gap audit only. No runtime ABI changes. |
+| Identifier Mode | `M0 T280 S5`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S4 closed in `33265acd`; recover only the source-proven `demsrch.c` private VDM declaration/control boundary. |
+| Objective | Provide same-shaped `vdm.h` declarations and a session-bound `NtVdmControl(VdmQueryDir, VDMQUERYDIRINFO)` adapter contract, plus behavior-free `winbasep.h` include preservation. |
+| Non-goals | No original-body edit, full NT4 kernel VDM service, directory-query backend, BOP enablement, DEM body link, app link, guest trace, second executor, or private product-shell import. |
+| Reference Baseline | T280/S4 gap evidence, OpenNT `vdm.h`, `ntos/vdm/vdm.c`, selected `demsrch.c`, session lifecycle and adapter-win32 public facade. |
+| Files And ABI Surface | Reached VDM declarations, session generic synchronous control seam, `NtVdmControl` adapter and focused contract fixture. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | All 16 `sources` bodies occur once; each direct include has exactly one disposition; unmirrored historical private headers are named adapter gaps rather than silently sourced from external trees. |
-| Expected Markers | Local DEM headers; support headers; `nt_vdd.h` platform ABI; public SDK/CRT headers; `winbasep.h`/`vdm.h` explicit adapter-win32 recovery records. |
-| Asset Needs | Exact MVDM host mirror, sources list, current component topology, OpenNT/OpenNT-4.5 comparison sources for header provenance. |
-| Reporting Requirements | Per-body include evidence, target owner, adapter gap/provenance, no raw pointer/mapping misuse, and S5 import preconditions. |
-| Stop Conditions | A missing header is copied into a mirror without provenance, a private header silently resolves from external source, a new adapter is created without source evidence, or a trace selects a provider. |
-| Exit Criteria | Reproducible ledger covers all 16 bodies and all direct includes; every presently absent required contract has one named owner and source evidence. |
+| Verification | Original enum/structure/function spelling is available; only `VdmQueryDir` reaches a bound session handler; no handler and all other VDM services return `STATUS_NOT_IMPLEMENTED`; no host-local control pointer enters guest mapping. |
+| Expected Markers | Same-shaped `VDMQUERYDIRINFO`; session synchronous control callback; behavior-free `winbasep.h`; focused no-session/unregistered/registered/unsupported fixture. |
+| Asset Needs | Existing session component, adapter-win32 facade, public Windows types and OpenNT source evidence. |
+| Reporting Requirements | Source semantics, bounded modern divergence, session ownership, negative capability outcomes and formal x86/x64 test results. |
+| Stop Conditions | A full private VDM/Base header is imported, an unregistered call succeeds, a raw host pointer is mapped as guest identity, a kernel VDM call is attempted, or a DEM body is enabled. |
+| Exit Criteria | Same-shaped reached ABI and session route compile/test on x86/x64; all unimplemented service classes fail explicitly; no provider/backend is falsely claimed. |
 | Original Owner Request | “单人双角色模式执行队列任务”。 |
 | Similar-Issue Sweep | DEM vs COMMAND ownership, host-control executors vs façades, overlay transport seams, session/mapping boundary, known adapter ownership, and non-runtime historical product shells. |
 

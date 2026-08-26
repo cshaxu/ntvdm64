@@ -41,3 +41,11 @@ M0 T272 S4 disposition register:
   through the owning session and terminate leases before mapping and session
   teardown.  The API accepts only caller-provided read/write callbacks and
   keeps a bounce pointer within the synchronous lease lifetime.
+
+M0 T280 S5 disposition register:
+
+- `session.c` and `session.h`: `small extension`. They expose a synchronous,
+  dependency-neutral external control callback for source-shaped adapters.
+  The callback has an explicit context and operation number; it owns neither
+  guest-memory mapping nor native resource lifetime. `adapter-win32` uses it
+  for the reached `NtVdmControl(VdmQueryDir, ...)` declaration contract.

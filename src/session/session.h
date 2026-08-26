@@ -23,6 +23,8 @@ enum session_cancellation_reason {
 };
 
 typedef void (*session_teardown_fn)(void *context);
+typedef int32_t (*session_control_dispatch_fn)(void *context,
+    uint32_t operation, void *request);
 
 typedef struct session_teardown {
     session_teardown_fn function;
@@ -39,6 +41,8 @@ typedef struct session {
     uint32_t completion_code;
     uint32_t cancellation_reason;
     uint32_t teardown_count;
+    session_control_dispatch_fn control_dispatch;
+    void *control_context;
     volatile long binding_count;
     session_teardown teardowns[SESSION_MAX_TEARDOWNS];
     mapping_manager guest_memory_mappings;
@@ -59,6 +63,10 @@ int session_register_teardown(session *instance, session_teardown_fn function,
 int session_request_cancellation(session *instance, uint32_t reason);
 void session_complete(session *instance, uint32_t completion_code);
 int session_dispose(session *instance);
+int session_set_control_dispatch(session *instance,
+    session_control_dispatch_fn dispatch, void *context);
+int32_t session_dispatch_control(session *instance, uint32_t operation,
+    void *request, int32_t unavailable_status);
 
 mapping_manager *session_guest_memory_mappings(session *instance);
 mapping_manager *session_host_resource_mappings(session *instance);

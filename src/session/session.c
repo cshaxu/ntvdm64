@@ -107,6 +107,24 @@ int session_dispose(session *instance)
     return 1;
 }
 
+int session_set_control_dispatch(session *instance,
+    session_control_dispatch_fn dispatch, void *context)
+{
+    if (!session_valid(instance) || instance->state == SESSION_STATE_COMPLETED ||
+        instance->state == SESSION_STATE_CANCELLED) return 0;
+    instance->control_dispatch = dispatch;
+    instance->control_context = context;
+    return 1;
+}
+
+int32_t session_dispatch_control(session *instance, uint32_t operation,
+    void *request, int32_t unavailable_status)
+{
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+        instance->control_dispatch == NULL) return unavailable_status;
+    return instance->control_dispatch(instance->control_context, operation, request);
+}
+
 int session_thread_bind(session *instance)
 {
     if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
