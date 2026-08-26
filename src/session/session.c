@@ -1,67 +1,110 @@
 #include "session.h"
 
+#include <intrin.h>
 #include <string.h>
 
-static uint32_t next_identity;
+static __declspec(thread) session *thread_instance;
 
-void app_session_initialize(app_session *session)
+static uint32_t session_binding_count(const session *instance)
 {
-    if (session == 0) return;
-    memset(session, 0, sizeof(*session));
-    session->magic = APP_SESSION_MAGIC;
-    session->abi_version = APP_SESSION_VERSION;
-    session->struct_bytes = (uint32_t)sizeof(*session);
-    if (++next_identity == 0u) ++next_identity;
-    session->identity = next_identity;
+    return (uint32_t)_InterlockedCompareExchange(
+        (volatile long *)&instance->binding_count, 0, 0);
 }
 
-int app_session_valid(const app_session *session)
+void session_initialize(session *instance, uint32_t identity)
 {
-    return session != 0 && session->magic == APP_SESSION_MAGIC &&
-        session->abi_version == APP_SESSION_VERSION &&
-        session->struct_bytes == sizeof(*session) &&
-        session->identity != 0u &&
-        session->state <= APP_SESSION_COMPLETED &&
-        session->teardown_count <= APP_SESSION_MAX_TEARDOWNS &&
-        session->reserved0 == 0u;
+    if (instance == NULL || identity == 0u) return;
+    memset(instance, 0, sizeof(*instance));
+    instance->magic = SESSION_MAGIC;
+    instance->abi_version = SESSION_ABI_VERSION;
+    instance->struct_bytes = (uint32_t)sizeof(*instance);
+    instance->identity = identity;
 }
 
-int app_session_activate(app_session *session)
+int session_valid(const session *instance)
 {
-    if (!app_session_valid(session) ||
-        session->state != APP_SESSION_INACTIVE) return 0;
-    if (++session->epoch == 0u) session->epoch = 1u;
-    session->state = APP_SESSION_ACTIVE;
+    return instance != NULL && instance->magic == SESSION_MAGIC &&
+        instance->abi_version == SESSION_ABI_VERSION &&
+        instance->struct_bytes == sizeof(*instance) &&
+        instance->identity != 0u && instance->state <= SESSION_STATE_COMPLETED &&
+        instance->teardown_count <= SESSION_MAX_TEARDOWNS &&
+        session_binding_count(instance) <= INT32_MAX;
+}
+
+int session_activate(session *instance)
+{
+    if (!session_valid(instance) || instance->state != SESSION_STATE_READY)
+        return 0;
+    if (++instance->epoch == 0u) ++instance->epoch;
+    instance->state = SESSION_STATE_ACTIVE;
     return 1;
 }
 
-int app_session_register_teardown(app_session *session,
-    app_session_teardown_fn teardown)
+int session_register_teardown(session *instance, session_teardown_fn function,
+    void *context)
 {
     uint32_t index;
-    if (!app_session_valid(session) ||
-        session->state != APP_SESSION_ACTIVE || teardown == 0) return 0;
-    for (index = 0u; index < session->teardown_count; ++index)
-        if (session->teardowns[index] == teardown) return 1;
-    if (session->teardown_count == APP_SESSION_MAX_TEARDOWNS) return 0;
-    session->teardowns[session->teardown_count++] = teardown;
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+        function == NULL) return 0;
+    for (index = 0u; index < instance->teardown_count; ++index) {
+        if (instance->teardowns[index].function == function &&
+            instance->teardowns[index].context == context) return 1;
+    }
+    if (instance->teardown_count == SESSION_MAX_TEARDOWNS) return 0;
+    instance->teardowns[instance->teardown_count].function = function;
+    instance->teardowns[instance->teardown_count].context = context;
+    ++instance->teardown_count;
     return 1;
 }
 
-void app_session_complete(app_session *session,
-    uint32_t completion_code)
+int session_request_cancellation(session *instance, uint32_t reason)
 {
-    if (!app_session_valid(session) ||
-        session->state != APP_SESSION_ACTIVE) return;
-    session->completion_code = completion_code;
-    session->state = APP_SESSION_COMPLETED;
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+        reason != SESSION_CANCELLATION_REQUESTED) return 0;
+    instance->cancellation_reason = reason;
+    instance->state = SESSION_STATE_CANCELLED;
+    return 1;
 }
 
-void app_session_reset(app_session *session)
+void session_complete(session *instance, uint32_t completion_code)
+{
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
+        return;
+    instance->completion_code = completion_code;
+    instance->state = SESSION_STATE_COMPLETED;
+}
+
+int session_dispose(session *instance)
 {
     uint32_t index;
-    if (!app_session_valid(session)) return;
-    for (index = session->teardown_count; index != 0u; --index)
-        session->teardowns[index - 1u]();
-    app_session_initialize(session);
+    if (!session_valid(instance) || session_binding_count(instance) != 0u)
+        return 0;
+    for (index = instance->teardown_count; index != 0u; --index) {
+        session_teardown teardown = instance->teardowns[index - 1u];
+        teardown.function(teardown.context);
+    }
+    memset(instance, 0, sizeof(*instance));
+    return 1;
+}
+
+int session_thread_bind(session *instance)
+{
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+        thread_instance != NULL) return 0;
+    _InterlockedIncrement(&instance->binding_count);
+    thread_instance = instance;
+    return 1;
+}
+
+int session_thread_unbind(session *instance)
+{
+    if (instance == NULL || thread_instance != instance) return 0;
+    thread_instance = NULL;
+    _InterlockedDecrement(&instance->binding_count);
+    return 1;
+}
+
+session *session_thread_current(void)
+{
+    return thread_instance;
 }

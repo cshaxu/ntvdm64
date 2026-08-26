@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T272 S2** — M0 T271 remains closed by owner-directed
+**Active: M0 T272 S3** — M0 T271 remains closed by owner-directed
 exit-criterion revision; its audited residuals are recorded in its closure and
 the debt ledger, not misrepresented as completed mirror recovery.
 
@@ -22,16 +22,22 @@ records every root, its provenance/reuse class, intended build role and
 owner packet; it also excludes `src.old/` and existing build outputs from
 formal inputs.
 
-### M0 T272 S2 — Session lifecycle recovery
+**S2 closure:** the existing lifecycle reference was audited. The new
+`session` component now has explicit caller-owned identity, instance-owned
+cancellation, context-bearing LIFO teardown and bounded TLS bind/unbind;
+global cancellation and COMMAND input payload were not carried forward. Its
+focused lifecycle test passes under both MSVC x64 and Win32/x86 `/MT`.
+
+### M0 T272 S3 — Compatibility object space
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T272 S2`, Ordinary Mode with single-person dual-role implementation and review. |
-| Objective | Audit and recover the smallest dependency-neutral session lifecycle from the existing session reference, without carrying BOP, OpenNT provider, Bochs or Win32 service semantics into `session`. |
-| Scope | `src/session`, focused neutral session tests, component README/register and supporting evidence. Existing session files receive an explicit copy/reference-only/split/replace/retire disposition before use. |
-| Non-goals | No mapping-manager behavior beyond what is needed to expose a neutral session owner; no broker service implementation, source import, guest copy, machine lifecycle or formal host build. |
-| Verification | Per-file owner/dependency audit, create/cancel/teardown and thread-binding focused tests, production dependency scan, documentation governance and `git diff --check`. |
-| Exit Criteria | A minimal explicit session instance supports deterministic create, bind/unbind, cancellation and teardown with no process-global current session; every recovered file has a disposition and no provider vocabulary remains in `src/session`. |
+| Identifier Mode | `M0 T272 S3`, Ordinary Mode with single-person dual-role implementation and review. |
+| Objective | Recover one generic, session-owned mapping-manager implementation with separate typed instances for guest memory, host resource and completion/callback identity, using existing mapping code only as audited reference. |
+| Scope | `src/session`, neutral mapping tests, component README/register and supporting evidence. Mapping identities are opaque surrogate32 values; native representation remains private to the owning adapter. |
+| Non-goals | No guest pointer lease yet, no SoftPC/CCPU facade, no external HANDLE exposure, no BOP/OpenNT service semantics and no broker IPC implementation. |
+| Verification | Per-file reuse audit, reserved/sentinel allocation, bidirectional lookup, instance/type isolation, stale/tombstone, overflow and teardown tests on x64/x86; production dependency scan, governance and `git diff --check`. |
+| Exit Criteria | One generic manager is instantiated separately for the three typed per-session uses; allocation is monotonic, no-reuse, sentinel-aware and bidirectional; no native value is identity-passed into an imported ABI. |
 | Reference | [Foundation proposal](etc/operations/proposal-rebootstrap-neutral-runtime-foundation-001.md) and [program roadmap](etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md). |
 | Stop Conditions | Any file has ambiguous owner/provenance, an attempted reuse imports BOP/OpenNT/Bochs semantics into S1, or the new root topology would consume `src.old/` directly. |
 
