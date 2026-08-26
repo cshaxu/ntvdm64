@@ -123,9 +123,9 @@ int main(void)
     if ((result.eflags_values & RUNTIME_CPU_RESULT_EFLAGS_CF) != 0u) return 13;
     if (result.cpu_delta.gpr16_values[0] != (0x0100u | 37u)) return 14;
     if (context.guest[0x1007u] != 0u) return 15;
-    if (session.local_child_state != RUNTIME_COMMAND_LOCAL_CHILD_COMPLETED) return 16;
-    if (session.local_child_generation != 1u) return 17;
-    if (session.local_child_exit_code != 37u) return 18;
+    if (session.pending.state != OPENNT_HOST_CHILD_COMPLETED) return 16;
+    if (session.pending.generation != 1u) return 17;
+    if (session.pending.exit_code != 37u) return 18;
     opennt_host_event_snapshot(&host_events);
     if (host_events.event_blocked != 0u) return 19;
     if (host_events.stdout_redirected != 1u ||
@@ -141,8 +141,8 @@ int main(void)
      * another child from stale continuation state. */
     if (!invoke(&context, &event, &cpu, &result, &session,
             RUNTIME_COMMAND_MISC_EXEC) ||
-        session.local_child_generation != 1u ||
-        session.local_child_state != RUNTIME_COMMAND_LOCAL_CHILD_COMPLETED)
+        session.pending.generation != 1u ||
+        session.pending.state != OPENNT_HOST_CHILD_COMPLETED)
         return 22;
 
     fSoftpcRedirection = FALSE;
@@ -157,9 +157,9 @@ int main(void)
             RUNTIME_COMMAND_MISC_EXEC_COMSPEC32) ||
         (result.eflags_values & RUNTIME_CPU_RESULT_EFLAGS_CF) != 0u ||
         result.cpu_delta.gpr16_values[0] != 41u ||
-        session.local_child_state != RUNTIME_COMMAND_LOCAL_CHILD_COMPLETED ||
-        session.local_child_generation != 2u ||
-        session.local_child_exit_code != 41u) {
+        session.pending.state != OPENNT_HOST_CHILD_COMPLETED ||
+        session.pending.generation != 2u ||
+        session.pending.exit_code != 41u) {
         SetEnvironmentVariableA("COMSPEC", old_comspec);
         return 2;
     }
@@ -178,8 +178,8 @@ int main(void)
         (result.eflags_values & RUNTIME_CPU_RESULT_EFLAGS_CF) != 0u ||
         (result.cpu_delta.gpr16_values[0] & 0xffu) !=
             (ERROR_INVALID_HANDLE & 0xffu) ||
-        session.local_child_state != RUNTIME_COMMAND_LOCAL_CHILD_FAILED ||
-        session.local_child_error != ERROR_INVALID_HANDLE) {
+        session.pending.state != OPENNT_HOST_CHILD_FAILED ||
+        session.pending.error != ERROR_INVALID_HANDLE) {
         return 3;
     }
     opennt_host_event_snapshot(&host_events);
@@ -198,8 +198,8 @@ int main(void)
     if (!invoke_pending_completion(&context, &event, &cpu, &result, &session,
             RUNTIME_COMMAND_MISC_EXEC)) return 51;
     if ((result.eflags_values & RUNTIME_CPU_RESULT_EFLAGS_CF) != 0u) return 52;
-    if (session.local_child_state != RUNTIME_COMMAND_LOCAL_CHILD_COMPLETED) return 53;
-    if (session.local_child_generation != 4u) return 54;
+    if (session.pending.state != OPENNT_HOST_CHILD_COMPLETED) return 53;
+    if (session.pending.generation != 4u) return 54;
     opennt_host_event_snapshot(&host_events);
     if (host_events.event_blocked != 0u) return 55;
     if (!runtime_host_handle_manager_release(session.handles, standard_token,
@@ -228,9 +228,8 @@ int main(void)
      * call races before its Job object has been published. */
     Sleep(50u);
     runtime_command_misc_session_dispose(&session);
-    if (session.local_child_state != RUNTIME_COMMAND_LOCAL_CHILD_CANCELLED ||
-        session.local_child_error != ERROR_CANCELLED ||
-        session.pending.state != RUNTIME_COMMAND_LOCAL_CHILD_CANCELLED ||
+    if (session.pending.state != OPENNT_HOST_CHILD_CANCELLED ||
+        session.pending.error != ERROR_CANCELLED ||
         session.handles->entry_count != 0u) return 58;
 
     puts("T236 S2 pending imported worker, opaque-handle stream isolation, direct/COMSPEC, failure, pipe, double-completion and cancellation contracts verified");

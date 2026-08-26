@@ -122,12 +122,12 @@ int main()
         observed_command) || observed_command[g_command_cr_index] != 0u) {
     fprintf(stderr, "native cmdexec32 failure: status=%lu ax=%04x child=%lu command-cr=%02x create=%lu error=%lu env=%lu/%02lx command=\"%s\"\\n",
       (unsigned long)status, (unsigned)bx_cpu.get_reg16(0u),
-      (unsigned long)session.direct.local_child_exit_code,
+      (unsigned long)session.direct.pending.exit_code,
       (unsigned)observed_command[g_command_cr_index],
-      (unsigned long)session.direct.create_process_attempted,
-      (unsigned long)session.direct.create_process_last_error,
-      (unsigned long)session.direct.create_process_environment_bytes,
-      (unsigned long)session.direct.create_process_environment_flags,
+      (unsigned long)session.direct.pending.create_process_attempted,
+      (unsigned long)session.direct.pending.create_process_last_error,
+      (unsigned long)session.direct.pending.create_process_environment_bytes,
+      (unsigned long)session.direct.pending.create_process_environment_flags,
       session.direct.pending.command);
     return 3;
   }

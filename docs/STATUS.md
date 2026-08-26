@@ -76,6 +76,22 @@ Their original state ordering is active; VDD/display/BIOS/console-process
 product-shell tails are explicitly deferred and never reported as success.
 See [S3 P7 evidence](etc/evidence/m0-t271-s3-p7-command-host-event-recovery-001.md).
 
+**S3 P8a:** the modern child record and pure host capability portions of the
+reached `cmdexec.c` path now belong to `opennt-host`: stream endpoint lookup,
+ANSI `CreateProcessA`, Job ownership, completion signaling and result
+recording.  COMMAND retains its source call ordering and the BOP-facing
+worker/re-entry seam.  The direct lifecycle fixture passes; the native
+machine fixture currently stops before reaching PENDING and is separately
+classified as a machine/dispatch prerequisite.  See [S3 P8a evidence](etc/evidence/m0-t271-s3-p8a-command-child-host-recovery-001.md).
+
+**S3 P8a:** the modern child record and pure host capability portions of the
+reached `cmdexec.c` path now belong to `opennt-host`: stream endpoint lookup,
+ANSI `CreateProcessA`, Job ownership, completion signaling and result
+recording.  COMMAND retains its source call ordering and the BOP-facing
+worker/re-entry seam.  The direct lifecycle fixture passes; the native
+machine fixture currently stops before reaching PENDING and is separately
+classified as a machine/dispatch prerequisite.  See [S3 P8a evidence](etc/evidence/m0-t271-s3-p8a-command-child-host-recovery-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

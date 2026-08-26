@@ -269,7 +269,8 @@
         "src/opennt-host/vdmredir/vrputil.c",
         "src/opennt-host/softpc.new/host/src/nt_error.c",
         "src/opennt-host/softpc.new/host/src/nt_msscs.c",
-        "src/opennt-host/softpc.new/host/src/nt_event.c"
+        "src/opennt-host/softpc.new/host/src/nt_event.c",
+        "src/opennt-host/opennt_host_child_runtime.c"
       ]
     },
     {

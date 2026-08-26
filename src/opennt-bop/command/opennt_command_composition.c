@@ -45,7 +45,6 @@ typedef struct runtime_command_misc_active_call {
     uint32_t guest_bytes2;
     uint32_t guest_address3;
     uint32_t guest_bytes3;
-    HANDLE local_child_job;
     jmp_buf terminal_exit;
 } runtime_command_misc_active_call;
 #pragma warning(pop)
@@ -121,7 +120,7 @@ void runtime_command_misc_session_dispose(runtime_command_misc_session *session)
     if (session == g_pending_session) {
         HANDLE job = INVALID_HANDLE_VALUE;
         HANDLE worker = INVALID_HANDLE_VALUE;
-        if (session->pending.state == RUNTIME_COMMAND_LOCAL_CHILD_PENDING) {
+        if (session->pending.state == OPENNT_HOST_CHILD_PENDING) {
             /* A dispose can race CreateProcess.  Record intent in the fixed
              * continuation so worker_attach_process terminates a job which
              * is published after this point. */
@@ -137,9 +136,9 @@ void runtime_command_misc_session_dispose(runtime_command_misc_session *session)
                 session->pending.worker_token, &worker))
             (void)WaitForSingleObject(worker, INFINITE);
         if (cancelled) {
-            session->local_child_state = RUNTIME_COMMAND_LOCAL_CHILD_CANCELLED;
-            session->local_child_error = ERROR_CANCELLED;
-            session->pending.state = RUNTIME_COMMAND_LOCAL_CHILD_CANCELLED;
+            session->pending.state = OPENNT_HOST_CHILD_CANCELLED;
+            session->pending.exit_code = ERROR_CANCELLED;
+            session->pending.error = ERROR_CANCELLED;
         }
         g_pending_session = NULL;
     }
@@ -191,32 +190,9 @@ ULONG runtime_command_misc_redirection_token(PREDIRCOMPLETE_INFO info)
 
 BOOL runtime_command_worker_prepare_startup(STARTUPINFO *startup)
 {
-    runtime_command_misc_session *session;
-    uint32_t index;
-    uint32_t explicit_streams = 0u;
-    HANDLE *targets[3];
-    if (startup == NULL ||
-        (session = runtime_command_misc_active_session()) == NULL) return FALSE;
-    targets[0] = &startup->hStdError;
-    targets[1] = &startup->hStdOutput;
-    targets[2] = &startup->hStdInput;
-    for (index = 0u; index < 3u; ++index) {
-        uint32_t token = session->pending.standard_handle_tokens[index];
-        if (token == UINT32_MAX) continue;
-        /* DIVERGENCE (T236 S2): retain OpenNT's three-handle ordering but bind
-         * endpoints to this child only. SetStdHandle would alter the CLI. */
-        if (token == 0u || !runtime_host_handle_manager_lookup_handle(
-                session->handles, token, targets[index])) {
-            SetLastError(ERROR_INVALID_HANDLE);
-            return FALSE;
-        }
-        ++explicit_streams;
-    }
-    /* The original worker receives VDM-installed standard handles.  A sentinel
-     * means this BOP supplied none, so do not force unrelated CLI handles into
-     * the child; retain CreateProcess's normal default-stream behavior. */
-    if (explicit_streams != 0u) startup->dwFlags |= STARTF_USESTDHANDLES;
-    return TRUE;
+    runtime_command_misc_session *session = runtime_command_misc_active_session();
+    return session != NULL && opennt_host_child_prepare_startup(
+        &session->pending, session->handles, startup);
 }
 
 BOOL runtime_command_create_process(LPCSTR application, LPSTR command,
@@ -225,80 +201,24 @@ BOOL runtime_command_create_process(LPCSTR application, LPSTR command,
     LPSTARTUPINFOA startup, LPPROCESS_INFORMATION process_information)
 {
     runtime_command_misc_session *session = runtime_command_misc_active_session();
-    const CHAR *entry = (const CHAR *)environment;
-    uint32_t environment_bytes = 0u;
-    uint32_t environment_flags = 0u;
-    BOOL created;
-    if (session != NULL) {
-        session->create_process_attempted = 1u;
-        session->create_process_last_error = ERROR_SUCCESS;
-        if (entry != NULL) {
-            while (environment_bytes < RUNTIME_COMMAND_CONTINUATION_ENV_MAX) {
-                size_t entry_bytes = strlen(entry);
-                if (entry_bytes == 0u) {
-                    ++environment_bytes;
-                    break;
-                }
-                if (entry_bytes >= RUNTIME_COMMAND_CONTINUATION_ENV_MAX - environment_bytes)
-                    break;
-                if (_strnicmp(entry, "COMSPEC=", 8u) == 0) environment_flags |= 0x01u;
-                if (_strnicmp(entry, "SystemRoot=", 11u) == 0) environment_flags |= 0x02u;
-                if (_strnicmp(entry, "PATH=", 5u) == 0) environment_flags |= 0x04u;
-                environment_bytes += (uint32_t)entry_bytes + 1u;
-                entry += entry_bytes + 1u;
-            }
-        }
-        session->create_process_environment_bytes = environment_bytes;
-        session->create_process_environment_flags = environment_flags;
-    }
-    /* DIVERGENCE (T236 S2): cmdexec.c's source buffers are explicitly ANSI.
-     * Bind that historical contract to public CreateProcessA, avoiding a
-     * build-wide TCHAR setting while preserving every original argument. */
-    created = CreateProcessA(application, command, process_attributes,
+    return opennt_host_child_create_process(session == NULL ? NULL :
+        &session->pending, application, command, process_attributes,
         thread_attributes, inherit_handles, creation_flags, environment,
         current_directory, startup, process_information);
-    if (session != NULL) session->create_process_last_error = created ?
-        ERROR_SUCCESS : GetLastError();
-    return created;
 }
 
 void runtime_command_worker_attach_process(HANDLE process)
 {
     runtime_command_misc_session *session = runtime_command_misc_active_session();
-    HANDLE job;
-    DWORD error = ERROR_NOT_ENOUGH_MEMORY;
-    if (session == NULL || process == NULL || process == INVALID_HANDLE_VALUE) return;
-    job = CreateJobObjectA(NULL, NULL);
-    if (job != NULL && AssignProcessToJobObject(job, process) &&
-        runtime_host_handle_manager_publish(session->handles, job,
-            RUNTIME_HOST_HANDLE_OWNED, &session->pending.job_token, &error)) {
-        if (session->pending.cancel_requested != 0u)
-            (void)TerminateJobObject(job, ERROR_CANCELLED);
-        return;
-    }
-    if (job != NULL) CloseHandle(job);
+    if (session != NULL) opennt_host_child_attach_process(&session->pending,
+        session->handles, process);
 }
 
 void runtime_command_worker_finish(BOOL child_created, DWORD exit_code)
 {
     runtime_command_misc_session *session = runtime_command_misc_active_session();
-    HANDLE event = INVALID_HANDLE_VALUE;
-    DWORD ignored;
-    if (session == NULL) return;
-    if (session->pending.job_token != 0u) {
-        (void)runtime_host_handle_manager_release(session->handles,
-            session->pending.job_token, &ignored);
-        session->pending.job_token = 0u;
-    }
-    session->local_child_exit_code = exit_code;
-    session->local_child_error = exit_code;
-    session->local_child_state = child_created ?
-        RUNTIME_COMMAND_LOCAL_CHILD_COMPLETED : RUNTIME_COMMAND_LOCAL_CHILD_FAILED;
-    session->pending.state = session->local_child_state;
-    if (session->pending.completion_event_token != 0u &&
-        runtime_host_handle_manager_lookup_handle(session->handles,
-            session->pending.completion_event_token, &event))
-        (void)SetEvent(event);
+    if (session != NULL) opennt_host_child_finish(&session->pending,
+        session->handles, child_created, exit_code);
 }
 
 static int copy_pending_environment(CHAR *destination, uint32_t *bytes_out,
@@ -350,13 +270,13 @@ BOOL runtime_command_worker_begin(PCHAR command, PCHAR environment)
 {
     runtime_command_misc_session *session;
     uint32_t tokens[3] = { UINT32_MAX, UINT32_MAX, UINT32_MAX };
-    uint32_t address, index, command_bytes;
+    uint32_t address, index, command_bytes, generation;
     HANDLE event, worker;
     DWORD error = ERROR_NOT_ENOUGH_MEMORY;
     if (g_active_call == NULL || command == NULL || environment == NULL ||
         (session = g_active_call->call->session) == NULL ||
         g_pending_session != NULL ||
-        session->pending.state == RUNTIME_COMMAND_LOCAL_CHILD_PENDING) return FALSE;
+        session->pending.state == OPENNT_HOST_CHILD_PENDING) return FALSE;
     command_bytes = (uint32_t)strlen(command) + 1u;
     if (command_bytes == 0u || command_bytes > sizeof(session->pending.command)) {
         SetLastError(ERROR_BAD_ENVIRONMENT);
@@ -364,11 +284,12 @@ BOOL runtime_command_worker_begin(PCHAR command, PCHAR environment)
     }
     /* The copied OpenNT worker must receive the same immutable command and
      * double-NUL environment snapshot after the BOP call has returned. */
+    generation = session->pending.generation;
     memset(&session->pending, 0, sizeof(session->pending));
     /* A generation identifies an admitted BOP attempt, including an input
      * rejection before CreateThread.  This prevents a failed stream-token
      * request from being observationally invisible between two child runs. */
-    session->pending.generation = ++session->local_child_generation;
+    session->pending.generation = generation + 1u;
     if (!copy_pending_environment(session->pending.environment,
             &session->pending.environment_bytes, environment)) {
         SetLastError(ERROR_BAD_ENVIRONMENT);
@@ -385,9 +306,8 @@ BOOL runtime_command_worker_begin(PCHAR command, PCHAR environment)
             !g_active_call->call->guest_read(g_active_call->call->guest_state, address,
                 (uint8_t *)tokens, sizeof(tokens))) {
             SetLastError(ERROR_INVALID_HANDLE);
-            session->local_child_state = RUNTIME_COMMAND_LOCAL_CHILD_FAILED;
-            session->local_child_error = ERROR_INVALID_HANDLE;
-            session->pending.state = RUNTIME_COMMAND_LOCAL_CHILD_FAILED;
+            session->pending.state = OPENNT_HOST_CHILD_FAILED;
+            session->pending.exit_code = ERROR_INVALID_HANDLE;
             session->pending.error = ERROR_INVALID_HANDLE;
             return FALSE;
         }
@@ -397,15 +317,14 @@ BOOL runtime_command_worker_begin(PCHAR command, PCHAR environment)
                 !runtime_host_handle_manager_lookup_handle(session->handles,
                     tokens[index], &unused))) {
                 SetLastError(ERROR_INVALID_HANDLE);
-                session->local_child_state = RUNTIME_COMMAND_LOCAL_CHILD_FAILED;
-                session->local_child_error = ERROR_INVALID_HANDLE;
-                session->pending.state = RUNTIME_COMMAND_LOCAL_CHILD_FAILED;
+                session->pending.state = OPENNT_HOST_CHILD_FAILED;
+                session->pending.exit_code = ERROR_INVALID_HANDLE;
                 session->pending.error = ERROR_INVALID_HANDLE;
                 return FALSE;
             }
         }
     }
-    session->pending.state = RUNTIME_COMMAND_LOCAL_CHILD_PENDING;
+    session->pending.state = OPENNT_HOST_CHILD_PENDING;
     session->pending.service = g_active_call->call->service;
     session->pending.command_bytes = command_bytes;
     memcpy(session->pending.command, command, command_bytes);
@@ -420,8 +339,7 @@ BOOL runtime_command_worker_begin(PCHAR command, PCHAR environment)
         return FALSE;
     }
     g_pending_session = session;
-    session->local_child_state = RUNTIME_COMMAND_LOCAL_CHILD_PENDING;
-    session->local_child_error = ERROR_SUCCESS;
+    session->pending.error = ERROR_SUCCESS;
     worker = CreateThread(NULL, 0u, runtime_command_worker_thread, NULL, 0u, NULL);
     if (worker == NULL || !runtime_host_handle_manager_publish(session->handles,
             worker, RUNTIME_HOST_HANDLE_OWNED, &session->pending.worker_token,
@@ -469,9 +387,9 @@ BOOL runtime_command_worker_complete(void)
     HANDLE worker;
     DWORD ignored;
     if (session == NULL || session != g_pending_session ||
-        (session->pending.state != RUNTIME_COMMAND_LOCAL_CHILD_PENDING &&
-         session->pending.state != RUNTIME_COMMAND_LOCAL_CHILD_COMPLETED &&
-         session->pending.state != RUNTIME_COMMAND_LOCAL_CHILD_FAILED) ||
+        (session->pending.state != OPENNT_HOST_CHILD_PENDING &&
+         session->pending.state != OPENNT_HOST_CHILD_COMPLETED &&
+         session->pending.state != OPENNT_HOST_CHILD_FAILED) ||
         session->pending.worker_token == 0u ||
         !runtime_host_handle_manager_lookup_handle(session->handles,
             session->pending.worker_token, &worker)) {
@@ -491,8 +409,8 @@ BOOL runtime_command_worker_complete(void)
         session->pending.completion_event_token = 0u;
     }
     g_pending_session = NULL;
-    return session->pending.state == RUNTIME_COMMAND_LOCAL_CHILD_COMPLETED ||
-        session->pending.state == RUNTIME_COMMAND_LOCAL_CHILD_FAILED;
+    return session->pending.state == OPENNT_HOST_CHILD_COMPLETED ||
+        session->pending.state == OPENNT_HOST_CHILD_FAILED;
 }
 
 BOOL runtime_command_worker_reentry_pending(void)
@@ -503,9 +421,9 @@ BOOL runtime_command_worker_reentry_pending(void)
      * the exact BOP re-entry; a later 54:08 is a fresh request, not a replay. */
     return session != NULL && session->pending.worker_token != 0u &&
         (session->pending.state ==
-        RUNTIME_COMMAND_LOCAL_CHILD_PENDING || session->pending.state ==
-        RUNTIME_COMMAND_LOCAL_CHILD_COMPLETED || session->pending.state ==
-        RUNTIME_COMMAND_LOCAL_CHILD_FAILED);
+        OPENNT_HOST_CHILD_PENDING || session->pending.state ==
+        OPENNT_HOST_CHILD_COMPLETED || session->pending.state ==
+        OPENNT_HOST_CHILD_FAILED);
 }
 
 BOOL runtime_command_misc_set_pending(void)

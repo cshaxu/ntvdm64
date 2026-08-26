@@ -6,6 +6,7 @@
 #include "adapter-win32/facade/opennt_vdm_api_facade.h"
 #include "adapter-softpc/softpc_printer_openclose_shim.h"
 #include "opennt-host/opennt_host_event_state.h"
+#include "opennt-host/opennt_host_child_runtime.h"
 #include "opennt-host/softpc.new/host/inc/nt_event.h"
 #include "session/session_input.h"
 
@@ -151,20 +152,9 @@ typedef struct _SCSINFO {
 #define MAXIMUM_VDM_CURRENT_DIR 64u
 #define RUNTIME_COMMAND_MISC_COMSPEC_MAX 64u
 #define RUNTIME_COMMAND_MISC_CURRENT_DIR_BYTES (MAXIMUM_VDM_CURRENT_DIR + 3u)
-#define RUNTIME_COMMAND_CONTINUATION_COMMAND_MAX 256u
-#define RUNTIME_COMMAND_CONTINUATION_ENV_MAX 65535u
+#define RUNTIME_COMMAND_CONTINUATION_COMMAND_MAX OPENNT_HOST_CHILD_COMMAND_MAX
+#define RUNTIME_COMMAND_CONTINUATION_ENV_MAX OPENNT_HOST_CHILD_ENV_MAX
 #define MAX_SHORTCUT_SIZE 128u
-
-/* Fixed-width, session-owned continuation.  It stores only copied OpenNT
- * inputs and opaque IDs; every native HANDLE remains in `handles`. */
-typedef struct runtime_command_pending_continuation {
-    uint32_t generation, state, service, error, cancel_requested;
-    uint32_t worker_token, completion_event_token, job_token;
-    uint32_t standard_handle_tokens[3];
-    uint32_t command_bytes, environment_bytes;
-    CHAR command[RUNTIME_COMMAND_CONTINUATION_COMMAND_MAX];
-    CHAR environment[RUNTIME_COMMAND_CONTINUATION_ENV_MAX];
-} runtime_command_pending_continuation;
 
 enum runtime_command_misc_service {
     RUNTIME_COMMAND_MISC_EXIT = 0x00u,
@@ -212,30 +202,14 @@ typedef struct runtime_command_misc_session {
      * through this neutral session record; it never receives this COMMAND
      * source object or guest state. */
     session_input input;
-    /* T236: host-child mechanics are session-local. These are fixed-width
-     * observations only; a host HANDLE never enters this record or guest RAM. */
-    uint32_t local_child_state;
-    uint32_t local_child_generation;
-    uint32_t local_child_exit_code;
-    uint32_t local_child_error;
-    uint32_t create_process_attempted;
-    uint32_t create_process_last_error;
-    uint32_t create_process_environment_bytes;
-    uint32_t create_process_environment_flags;
-    runtime_command_pending_continuation pending;
+    /* Source-shaped COMMAND state ends above. The host child record contains
+     * only copied execution inputs and opaque IDs; no native HANDLE enters
+     * this session object or guest RAM. */
+    opennt_host_child_record pending;
 } runtime_command_misc_session;
 
-enum runtime_command_local_child_state {
-    RUNTIME_COMMAND_LOCAL_CHILD_IDLE = 0u,
-    RUNTIME_COMMAND_LOCAL_CHILD_STARTING = 1u,
-    RUNTIME_COMMAND_LOCAL_CHILD_COMPLETED = 2u,
-    RUNTIME_COMMAND_LOCAL_CHILD_FAILED = 3u,
-    RUNTIME_COMMAND_LOCAL_CHILD_PENDING = 4u,
-    RUNTIME_COMMAND_LOCAL_CHILD_CANCELLED = 5u
-};
-
 #define RUNTIME_COMMAND_MISC_SESSION_MAGIC 0x42584353u
-#define RUNTIME_COMMAND_MISC_SESSION_VERSION 5u
+#define RUNTIME_COMMAND_MISC_SESSION_VERSION 6u
 
 void runtime_command_misc_session_initialize(runtime_command_misc_session *session);
 void runtime_command_misc_session_dispose(runtime_command_misc_session *session);
