@@ -30,16 +30,14 @@ M0 T272 S3 disposition register:
   registries with guest-memory lease and host-resource ownership semantics, so
   they cannot be reused as the neutral, per-session manager.
 
-M0 T272 S3 disposition register:
+M0 T272 S4 disposition register:
 
-- `mapping_manager.c` and `mapping_manager.h`: `new neutral replacement`.
-  They provide the one generic mapping implementation required by the
-  rebootstrap architecture.  A session owns three separate instances:
-  `guest_memory_mappings`, `host_resource_mappings`, and
-  `completion_callback_mappings`.  The manager stores opaque native-sized
-  values only; it does not acquire guest memory, close host resources, or
-  attach callback semantics.
-- Historical `guest_pointer_manager` and `host_handle_manager` records remain
-  in `src.old/` as reference-only material.  They combined process-global
-  registries with guest-memory lease and host-resource ownership semantics, so
-  they cannot be reused as the neutral, per-session manager.
+- `guest_memory_lease.c` and `guest_memory_lease.h`: `new neutral
+  replacement`.  The old guest-pointer manager supplies only the checked
+  copied-memory lifecycle reference.  Its process-global session identity,
+  real-mode helper, host-handle registry and provider-specific ownership were
+  deliberately not carried forward.
+- `session.c` and `session.h`: `small extension`.  They expose the lease
+  through the owning session and terminate leases before mapping and session
+  teardown.  The API accepts only caller-provided read/write callbacks and
+  keeps a bounce pointer within the synchronous lease lifetime.

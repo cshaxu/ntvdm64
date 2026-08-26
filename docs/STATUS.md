@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T272 S3** — M0 T271 remains closed by owner-directed
+**Active: M0 T272 S4** — M0 T271 remains closed by owner-directed
 exit-criterion revision; its audited residuals are recorded in its closure and
 the debt ledger, not misrepresented as completed mirror recovery.
 
@@ -28,18 +28,26 @@ cancellation, context-bearing LIFO teardown and bounded TLS bind/unbind;
 global cancellation and COMMAND input payload were not carried forward. Its
 focused lifecycle test passes under both MSVC x64 and Win32/x86 `/MT`.
 
-### M0 T272 S3 — Compatibility object space
+### M0 T272 S4 — Guest-memory lease contract
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T272 S3`, Ordinary Mode with single-person dual-role implementation and review. |
-| Objective | Recover one generic, session-owned mapping-manager implementation with separate typed instances for guest memory, host resource and completion/callback identity, using existing mapping code only as audited reference. |
-| Scope | `src/session`, neutral mapping tests, component README/register and supporting evidence. Mapping identities are opaque surrogate32 values; native representation remains private to the owning adapter. |
-| Non-goals | No guest pointer lease yet, no SoftPC/CCPU facade, no external HANDLE exposure, no BOP/OpenNT service semantics and no broker IPC implementation. |
-| Verification | Per-file reuse audit, reserved/sentinel allocation, bidirectional lookup, instance/type isolation, stale/tombstone, overflow and teardown tests on x64/x86; production dependency scan, governance and `git diff --check`. |
-| Exit Criteria | One generic manager is instantiated separately for the three typed per-session uses; allocation is monotonic, no-reuse, sentinel-aware and bidirectional; no native value is identity-passed into an imported ABI. |
-| Reference | [Foundation proposal](etc/operations/proposal-rebootstrap-neutral-runtime-foundation-001.md) and [program roadmap](etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md). |
+| Identifier Mode | `M0 T272 S4`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner-approved neutral-runtime proposal; S3 compatibility object space is closed in `371be986`, so this preplanned S4 contract is now admitted. |
+| Objective | Recover a neutral, synchronous and checked guest-memory lease contract that permits later adapters to use copied guest bytes without retaining a native guest pointer. |
+| Scope | `src/session`, neutral lease tests, component README/register and supporting evidence. The contract accepts caller-owned checked read/write callbacks, address/span/access, epoch and explicit release/commit. |
+| Non-goals | No real-mode segment calculation, no Bochs object, no SoftPC/CCPU facade, no BOP/OpenNT provider, no asynchronous pointer retention, no host HANDLE exposure and no broker IPC. |
+| Verification | Reuse audit, read/write/copy/commit, overflow, invalid access, stale epoch/end, teardown, x64/x86 builds, production dependency scan, governance and `git diff --check`. |
+| Exit Criteria | A session-owned lease copies bytes only through checked callbacks; it enforces address/span/access and synchronous epoch lifetime; release commits only write-authorized bytes; termination invalidates all outstanding leases. |
+| Reference Baseline | [Foundation proposal](etc/operations/proposal-rebootstrap-neutral-runtime-foundation-001.md), S3 commit `371be986`, and the reference-only old guest-pointer manager. |
+| Files And ABI Surface | `src/session/guest_memory_lease.{c,h}`, session lease accessors, focused lease fixture and audit record. The ABI is copied callback/address/span/access/epoch data only. |
+| Applicable Rules | Execution, architecture, coding, source policy, build hygiene and documentation governance rules. |
+| Expected Markers | No Bochs/OpenNT/BOP dependency, no retained pointer after end/release, and successful architecture-identical x86/x64 focused tests. |
+| Asset Needs | Existing session/mapping source, quarantined reference-only manager, MSVC x64/x86 and disposable `build/M0-T272-S4/` outputs. |
+| Reporting Requirements | Record original-reference disposition, retained copy/commit failure semantics, test results and deferred adapter ownership. |
 | Stop Conditions | Any file has ambiguous owner/provenance, an attempted reuse imports BOP/OpenNT/Bochs semantics into S1, or the new root topology would consume `src.old/` directly. |
+| Similar-Issue Sweep | Session mappings, prior pointer/handle registries, old CCPU/SAS facades, all new source includes and focused test inputs. |
+| Original Owner Request | Continue the approved rebootstrap program with minimal non-mirror components, shared mapping implementation and no source/build/runtime dependency on `src.old/`. |
 
 The latest closed packet remains the technical baseline below.
 

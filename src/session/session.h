@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #include "mapping_manager.h"
+#include "guest_memory_lease.h"
 
 #define SESSION_MAGIC UINT32_C(0x53455353)
 #define SESSION_ABI_VERSION UINT32_C(1)
@@ -43,6 +44,7 @@ typedef struct session {
     mapping_manager guest_memory_mappings;
     mapping_manager host_resource_mappings;
     mapping_manager completion_callback_mappings;
+    guest_memory_lease_context guest_memory_lease;
 } session;
 
 #ifdef __cplusplus
@@ -61,6 +63,15 @@ int session_dispose(session *instance);
 mapping_manager *session_guest_memory_mappings(session *instance);
 mapping_manager *session_host_resource_mappings(session *instance);
 mapping_manager *session_completion_callback_mappings(session *instance);
+
+int session_guest_memory_begin(session *instance, void *context,
+    guest_memory_read_fn read, guest_memory_write_fn write);
+void session_guest_memory_end(session *instance);
+int session_guest_memory_acquire(session *instance, uint32_t address,
+    uint32_t byte_count, uint32_t access, guest_memory_lease **lease_out,
+    uint8_t **bytes_out);
+int session_guest_memory_release(session *instance, guest_memory_lease *lease,
+    int commit);
 
 int session_thread_bind(session *instance);
 int session_thread_unbind(session *instance);

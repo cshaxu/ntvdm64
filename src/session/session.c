@@ -43,7 +43,8 @@ int session_valid(const session *instance)
         mapping_manager_valid(&instance->host_resource_mappings,
             MAPPING_MANAGER_HOST_RESOURCE) &&
         mapping_manager_valid(&instance->completion_callback_mappings,
-            MAPPING_MANAGER_COMPLETION_CALLBACK);
+            MAPPING_MANAGER_COMPLETION_CALLBACK) &&
+        guest_memory_lease_context_valid(&instance->guest_memory_lease);
 }
 
 int session_activate(session *instance)
@@ -98,6 +99,7 @@ int session_dispose(session *instance)
         session_teardown teardown = instance->teardowns[index - 1u];
         teardown.function(teardown.context);
     }
+    session_guest_memory_end(instance);
     mapping_manager_dispose(&instance->guest_memory_mappings);
     mapping_manager_dispose(&instance->host_resource_mappings);
     mapping_manager_dispose(&instance->completion_callback_mappings);
@@ -140,4 +142,38 @@ mapping_manager *session_host_resource_mappings(session *instance)
 mapping_manager *session_completion_callback_mappings(session *instance)
 {
     return session_valid(instance) ? &instance->completion_callback_mappings : NULL;
+}
+
+int session_guest_memory_begin(session *instance, void *context,
+    guest_memory_read_fn read, guest_memory_write_fn write)
+{
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
+        return 0;
+    return guest_memory_lease_begin(&instance->guest_memory_lease, context,
+        read, write);
+}
+
+void session_guest_memory_end(session *instance)
+{
+    if (instance == NULL) return;
+    guest_memory_lease_end(&instance->guest_memory_lease);
+}
+
+int session_guest_memory_acquire(session *instance, uint32_t address,
+    uint32_t byte_count, uint32_t access, guest_memory_lease **lease_out,
+    uint8_t **bytes_out)
+{
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
+        return 0;
+    return guest_memory_lease_acquire(&instance->guest_memory_lease, address,
+        byte_count, access, lease_out, bytes_out);
+}
+
+int session_guest_memory_release(session *instance, guest_memory_lease *lease,
+    int commit)
+{
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
+        return 0;
+    return guest_memory_lease_release(&instance->guest_memory_lease, lease,
+        commit);
 }
