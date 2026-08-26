@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2573 |
+| Documentation records | 2576 |
 | --- | --- |
-| Generated UTC | 2026-08-26T21:54:06Z |
+| Generated UTC | 2026-08-26T21:57:14Z |
 
 ## Entries
 
@@ -744,9 +744,11 @@ content-divergent entries.
 | etc/operations/m0-t277-s8-package-edge-build-profile-reconciliation-plan-001.md | indexed supporting material | c6413189859c8406d6e6ad5840aadf24080e968efd3bfb4dc679637c837d1688 |
 | etc/operations/m0-t277-s9-end-to-end-closure-audit-plan-001.md | indexed supporting material | a330f9a82dbd8f54f9df4a4d426aa271b8dbfdd69f45b71be14916cd07fed6e6 |
 | etc/operations/m0-t277-tracker-closure-audit-001.md | indexed supporting material | 9a86639a5ab41f4e0fcdd64d4cc7eff36222187426b747bc98a1ba9433351801 |
+| etc/operations/m0-t278-component-isolation-audit-001.md | indexed supporting material | 7be202f409b0647b14bc17b4c00231163413f6481a38dd5794de25a7f39fb7a4 |
 | etc/operations/m0-t278-destination-source-identity-ledger.tsv | indexed supporting material | cf077e0863d94ac381f40697f4cfe44e77bd89fdd071a4c1740479bb564390b3 |
 | etc/operations/m0-t278-s1-destination-source-identity-freeze-plan-001.md | indexed supporting material | 8e9d9788d9e72dc2b59b773f0f1f601edb6dce459fc0e10d3e8ac5152000152f |
 | etc/operations/m0-t278-s2-physical-mirror-move-plan-001.md | indexed supporting material | e28d74e7c4d54aa99469c7f292eda98b2efe2d848d7f689731135fa90210d321 |
+| etc/operations/m0-t278-s3-isolation-build-input-audit-plan-001.md | indexed supporting material | 50df0c71ce2add9a458d32f4a321833fe6fc041df9ca60154f3ddc90e5447a9b |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -2302,6 +2304,7 @@ content-divergent entries.
 | history/m0-t275-closure-20260826.md | closed task history | 9c2fdfbe315e9024acfd81ce1f592ab2870caee53b8f14a4edda22cb08f14b0e |
 | history/m0-t276-closure-20260826.md | closed task history | 926382f0f3c0343b5ded52d1744c172eca46b3566f0e5fd1624d71471436512c |
 | history/m0-t277-closure-20260826.md | closed task history | ad259849dd2f20940eab95a8fc79dead0d146408d62d981421ce653f09e0fcd4 |
+| history/m0-t278-closure-20260826.md | closed task history | 686f74d4f558f47d661391b0144ab44df2ca2c28d930d2be64b020c897e235b7 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -2587,7 +2590,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 4aaa59f3f218454347aa31b0e5b496ae73c62b584a58e06a3e0902904760cf3f |
+| STATUS.md | principal control document | 3a2d00ee106c6cb8fde39275fa99a4998bdd1bbd385fd47fd5b13ededcd77b75 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |
