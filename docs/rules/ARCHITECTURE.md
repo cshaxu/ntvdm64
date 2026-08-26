@@ -69,11 +69,14 @@
     and OpenNT-4.5 MVDM baselines. Every target path has one selection;
     conflicts are decided at complete-package scope with provenance. Parallel
     edition roots and undocumented file-level hybrids are forbidden.
-19. Recovery order is mandatory: directly composable original source; the
+19. Recovery order is mandatory: audit an applicable project-owned current or
+    quarantined owner candidate; directly composable original source; the
     smallest same-shaped adapter/build seam; a registered mirror-private
     overlay or external-code intrusion; newly authored behavior only when no
-    usable source remains. Convenience and trace order do not justify
-    skipping a rung.
+    usable source remains. A candidate may be selectively copied only after
+    per-file provenance, owner, dependency, behavior and test review; no whole
+    component tree may be revived by default. Convenience and trace order do
+    not justify skipping a rung.
 20. Every mirror file is exact upstream, a registered true subset, or a
     registered same-shaped minimal modification. Every changed imported
     expression carries `DIVERGENCE:` and a component README register entry.
@@ -92,3 +95,7 @@
     cross-process interaction uses only an admitted fixed wire ABI.
 25. `src.old/` and comparison repositories are evidence only and must not
     enter source, build, link, runtime or acceptance manifests.
+26. Bochs 2.6 is the only mirror baseline for `bochs-core`. Existing project
+    Bochs/adapter mechanics are recovery evidence only; every retained core
+    difference is minimized, individually registered, and placed in the
+    matching private overlay when it exceeds the mirror rule's local boundary.

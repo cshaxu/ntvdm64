@@ -49,6 +49,13 @@ material and never a source, build, link or runtime input.
 Historical MVDM build tools such as `tools16`, `bin86`, `convert` and
 `dat2obj` belong under `tools/opennt`, not `src/`.
 
+Before authoring or reimplementing a project-owned mechanic, audit existing
+current and quarantined same-owner `bochs-core`, `adapter-*`, `app`, `session`
+and related component code as a recovery/reference source. Reuse only the
+individually selected, provenance-recorded portion that already satisfies final
+ownership, dependency and mirror rules; never bulk-import a component tree or
+revive a rejected semantic path.
+
 ## Host-width coding model
 
 Both MSVC Win32/x86 and MSVC x64 builds use `/MT` and the same logical code
@@ -96,6 +103,12 @@ retained source differs, or an inserted semantic body needs more than three
 executable lines, move that implementation to the matching private
 `*-overlay` and leave the smallest registered call boundary. Only the matching
 mirror may call or link its overlay.
+
+`bochs-core` is measured only against the pinned upstream Bochs 2.6 tree.
+First compress any recovered historical difference into an existing upstream
+call boundary; then place material retained mechanics in `bochs-core-overlay`.
+A prior project copy is evidence for a possible behavior, never a substitute
+mirror baseline.
 
 ## Build layout
 

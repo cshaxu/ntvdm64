@@ -160,6 +160,17 @@ same-shaped minimal modification. A changed expression carries `DIVERGENCE:`
 and a README register row. A material added implementation belongs in the
 matching private `*-overlay`; only that mirror may call its overlay.
 
+Existing project-owned component code is an audited recovery source, not
+discarded work. Before authoring a replacement, a packet reviews applicable
+current or quarantined `bochs-core`, `adapter-*`, `app`, `session` and related
+owner candidates for provenance, dependency direction, behavior and tests. It
+may selectively copy a compliant pure mechanic or adapter into its final owner
+root, but never imports a whole tree by default. Bochs 2.6 remains the sole
+authority for `bochs-core` mirror identity: every retained project difference
+is minimized, registered and moved to the private overlay when it is material.
+`src.old/` remains outside all formal source/build/link/runtime inputs after
+such a per-file recovery.
+
 ## Non-goals
 
 The architecture does not claim NT4 kernel VDM, CSRSS/BaseSrv internals,

@@ -5,6 +5,10 @@
 - Attempt and record recovery in this order: directly composable original
   source; smallest same-shaped adapter/build shim; registered mirror overlay
   or adopted-code intrusion; newly authored behavior as the last resort.
+- Audit same-owner current and quarantined project code before authoring a new
+  mechanic. Selectively reuse/copy only a per-file reviewed candidate that
+  satisfies final component ownership, dependency direction and mirror rules;
+  never bulk-copy an old component or revive a rejected semantic path.
 - Preserve original names, parameters, calling convention, structures, control
   order and failure semantics. A modern API supplies a dependency; it does not
   authorize bypassing an available original algorithm.
@@ -45,6 +49,10 @@
   another mirror or tests.
 - Keep upstream names and paths after re-rooting. Reference/example/test code
   stays outside production roots.
+- For `bochs-core`, the pinned upstream Bochs 2.6 tree is the sole mirror
+  baseline. Existing project copies may guide a registered recovery but do not
+  justify a retained diff; first minimize the call boundary, then use the
+  private `bochs-core-overlay` when the added body is material.
 
 ## Width and mapping
 
