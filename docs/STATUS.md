@@ -2,10 +2,10 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T280 S8 closed the exact shared OpenNT
-declaration-carrier import. The next packet may bind the resulting source
-forms as one shared compatibility package; no selector/BOP route is enabled
-merely by this source-supply closure.
+**No active M/T/S packet.** M0 T280 S9 closed the exact OpenNT storage
+declaration binding. The next packet must recover the remaining `ntioapi.h`
+surface as one source-shaped ABI package; no selector/BOP route is enabled by
+the storage declaration closure.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -26,7 +26,34 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S8 — closed: exact DEM platform declaration carriers
+### M0 T280 S9 — closed: DEM storage declaration binding form
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T280 S9`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S8 closed in `c3359863`; S7/S8 prove a declaration-only, same-shaped binding is the next smallest recovery rung. |
+| Objective | Make the exact original storage declaration carrier visible through adapter-win32 so original DEM header form can parse without selecting a modern SDK substitute. |
+| Non-goals | No DEM body build/link, provider/BOP route, host API implementation, SoftPC mapping call, private NT import, guest trace or generic shim. |
+| Reference Baseline | T280 S7 source-form ledger, S8 exact import manifest, existing `devioctl.h` mirror and adapter-win32 `nt.h` facade. |
+| Files And ABI Surface | `adapter-win32/include/nt.h`, adapter README, S9 plan/fixture/verifier and Status. No behavior ABI is introduced. |
+| Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and recovery-ladder rules. |
+| Verification | Focused x86/x64 syntax fixture includes original `dem.h`, verifies source identity of exact carriers and rejects a DEM body/provider/mapping input. |
+| Expected Markers | Original `devioctl.h` supplies `DEVICE_TYPE`; original nested `ntddstor.h` is selected; original `dem.h` parses. |
+| Asset Needs | S8 exact mirrors, MSVC x86/x64, current adapter-win32 facade and original `dem.h`. |
+| Reporting Requirements | Smallest declaration divergence, architecture results, hash/provenance proof, and explicit no-behavior/no-mapping limitation. |
+| Stop Conditions | A modern storage header is substituted, an original carrier is edited, a DEM body is admitted, a private API is called, or mapping manager code appears. |
+| Exit Criteria | Both architectures pass the declaration-only fixture with exact source carriers; README registers the facade-only divergence; no source body is built. |
+| Original Owner Request | “单人双角色模式执行队列任务”。 |
+| Similar-Issue Sweep | Include ordering, nested original headers, `DEVICE_TYPE` source, modern SDK collisions, adapter divergence register and mapping isolation. |
+
+**S9 closure:** formal Ninja x64/x86 syntax fixtures select exact
+`devioctl.h`, `ntdddisk.h` and `ntddstor.h` through the existing adapter-win32
+facade and parse original `dem.h`. The sole divergence removes a modern
+same-name macro collision. Full `ntioapi.h` is explicitly not included: it
+requires a whole same-shaped NT I/O ABI package, not an unreviewed facade
+expansion. No DEM body, provider, host API call or mapping operation is added.
+
+### Closed packet reference — M0 T280 S8
 
 | Field | Record |
 | --- | --- |

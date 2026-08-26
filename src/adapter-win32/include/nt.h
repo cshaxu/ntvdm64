@@ -10,7 +10,16 @@
 #define WIN32_LEAN_AND_MEAN
 #endif
 #include <windows.h>
+#include <devioctl.h>
 #include <winternl.h>
+
+/* DIVERGENCE: Original DEM storage declarations require historical
+ * devioctl.h and own GetDiskSpaceInformation as an unrelated BOOL helper.
+ * Keep the storage carrier visible and remove only the conflicting modern
+ * SDK convenience alias; ntioapi.h awaits its own complete ABI binding. */
+#ifdef GetDiskSpaceInformation
+#undef GetDiskSpaceInformation
+#endif
 
 #ifdef NtCurrentTeb
 #undef NtCurrentTeb
