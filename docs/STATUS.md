@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T273 S3** — M0 T271 remains closed by owner-directed
+**Active: M0 T273 S4** — M0 T271 remains closed by owner-directed
 exit-criterion revision; its audited residuals are recorded in its closure and
 the debt ledger, not misrepresented as completed mirror recovery.
 
@@ -32,11 +32,31 @@ focused lifecycle test passes under both MSVC x64 and Win32/x86 `/MT`.
 complete and pushed through `d94d46ae`; its authoritative record is
 [M0 T272 closure](history/m0-t272-closure-20260826.md).
 
-### M0 T273 S3 — Minimal app machine shell
+### M0 T273 S4 — Boundary and architecture verification
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T273 S3`, Ordinary Mode with single-person dual-role implementation and review. |
+| Identifier Mode | `M0 T273 S4`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner-approved Bochs foundation proposal; S3 closed in `f364eccf`; S4 is its final declared verification subtask. |
+| Objective | Prove the recovered Bochs foundation has the required directed dependencies, mirror/overlay privacy and x86/x64 focused lifecycle closure. |
+| Non-goals | No guest execution, firmware product boot, BOP provider, OpenNT service, SoftPC API recovery, feature enablement, or new Bochs semantic change. |
+| Reference Baseline | T273 S1 audit, S2 P2--P4 evidence, S3 closure, current architecture/rules and the pinned Bochs 2.6 baseline. |
+| Files And ABI Surface | Source/include/build manifests, component READMEs, boundary tests, status/evidence/history/queue only. No new consumer ABI is admitted. |
+| Applicable Rules | Execution, architecture, coding, mirror-component, build-hygiene, documentation and source-policy rules. |
+| Verification | Full production include/reference scan, mirror-difference/register reconciliation, overlay reachability audit, focused x64/x86 rerun, governance and scoped diff review. |
+| Expected Markers | `adapter-bochs` is the sole `bochs-core` consumer; no project dependency from `bochs-core`; overlay only supports its mirror; app only sees opaque adapter API. |
+| Asset Needs | Recovered roots, registered README/evidence records, disposable P3/P4 x64/x86 roots, MSVC toolchains and governance scripts. |
+| Reporting Requirements | State command inputs/results, exact remaining registered Bochs differences, negative dependency findings and the boundary of later source-supply work. |
+| Stop Conditions | A prohibited consumer, unregistered mirror deviation, overlay external caller or host-width failure is found; it must be separately admitted rather than concealed by S4. |
+| Exit Criteria | Both host-width fixtures and all directed-boundary/mirror checks pass, or every found violation is explicitly dispositioned; T273 closure then records only proven minimal-machine facts. |
+| Original Owner Request | “单人双角色模式实施当前队列中的所有任务，要求全局统筹，追求结果极简主义…避免添油战术。” |
+| Similar-Issue Sweep | All production include edges, Bochs/adapter vocabulary, old-root build inputs, overlay external consumers, CPU configuration, host-width assumptions and fixture source lists. |
+
+### M0 T273 S3 closure — Minimal app machine shell
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T273 S3`, closed; Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Owner-approved Bochs foundation proposal; S2 is closed in `9645cdd9`, and the proposal’s next bounded subtask is admitted. |
 | Objective | Recover the smallest existing app/session composition that can create and deterministically destroy an opaque `adapter-bochs` machine endpoint. |
 | Non-goals | No guest image loading, BOP decoding, OpenNT/DOS/WOW/SoftPC/CCPU behavior, CLI feature surface, Win32 host service, or independent machine scheduler. |
