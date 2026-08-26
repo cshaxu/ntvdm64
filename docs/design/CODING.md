@@ -6,6 +6,8 @@
 src/
   bochs-core/
   opennt-mvdm-host/
+  opennt-mvdm-support/
+  opennt-mvdm-tools/
   opennt-platform-abi/
   opennt-guest-dos/
   opennt-guest-wow16/
@@ -23,7 +25,7 @@ src/
   app/
 ```
 
-The five original mirror roots preserve selected upstream-relative paths after
+The seven original mirror roots preserve selected upstream-relative paths after
 re-rooting and maintain component README exception registers. One source
 component may generate several libraries. Production roots contain production
 inputs only; tests, examples, reference copies and historical experiments stay
@@ -33,8 +35,14 @@ material and never a source, build, link or runtime input.
 ## Owner placement
 
 - `bochs-core` contains the adopted Bochs mirror only.
-- `opennt-mvdm-host` contains the canonical selected non-guest/non-tool MVDM
+- `opennt-mvdm-host` contains only canonical selected MVDM host-runtime
   packages, retaining package-internal paths and filenames.
+- `opennt-mvdm-support` contains selected shared MVDM build/header carriers
+  and original support libraries (`inc`, `dirs`, `makefil0`, `oemuni`, and
+  `suballoc`). It has no implied default host link edge.
+- `opennt-mvdm-tools` contains selected standalone MVDM tools and their
+  resources (`vdmutils`). It is a production mirror with optional independent
+  tool builds, never a main-program library.
 - `opennt-platform-abi` contains exact declarations outside MVDM required by
   those packages; it has no implementation.
 - `opennt-guest-dos` contains the complete selected local DOS carry.

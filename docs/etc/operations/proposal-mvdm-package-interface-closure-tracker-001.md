@@ -2,14 +2,23 @@
 
 ## Purpose
 
-Before any non-guest MVDM provider package enters the enabled host graph,
+Before any MVDM host-runtime provider or support package enters the enabled host graph,
 produce a complete package-to-symbol dependency closure. This replaces
 compile-error-led adapter growth with an import-first, tracker-led recovery
 sequence.
 
 ## Scope
 
-The audit covers the 23 selected `opennt-mvdm-host` package roots:
+The audit covers the 23 selected original MVDM package roots. During this
+audit they remain in the exact temporary `opennt-mvdm-host` source-union
+carrier established by T274; their final component owner is recorded before
+any source/body move. The final owner groups are:
+
+- `opennt-mvdm-host`: true MVDM host-runtime provider packages;
+- `opennt-mvdm-support`: `dirs`, `makefil0`, `inc`, `oemuni` and `suballoc`;
+- `opennt-mvdm-tools`: `vdmutils` standalone products/resources.
+
+The selected roots are:
 
 `dirs`, `makefil0`, `inc`, `oemuni`, `suballoc`, `vdmutils`, `softpc.new`, `dos`, `xms.486`,
 `sim16`, `sim32`, `v86`, `ieuvddex`, `dpmi`, `dpmi32`, `vdmredir`, `wow32`,
@@ -19,10 +28,11 @@ It separates header/utility roots from source-owner packages, and separately
 records non-enabled SoftPC CPU bodies whose execution ownership is Bochs.
 Guest mirrors are load-only and outside this host compile closure.
 
-All 1,689 selected host paths remain original mirrors regardless of current
+All 1,689 selected paths remain original mirrors regardless of current
 build disposition. A path that is not enabled in the current profile is not an
 import failure and is never deleted merely because a historical dependency is
-unavailable.
+unavailable. Physical re-rooting follows a dedicated file-identity migration;
+this tracker does not move source.
 
 ## Exact composition classifications
 

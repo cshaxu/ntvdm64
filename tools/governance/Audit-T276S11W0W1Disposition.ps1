@@ -69,6 +69,7 @@ $fileOut = foreach ($file in $files) {
         file_id = $file.file_id
         target_path = $file.target_path
         package_root = $file.package_root
+        final_component_owner = if ($file.package_root -eq 'vdmutils') { 'opennt-mvdm-tools' } else { 'opennt-mvdm-support' }
         file_kind = $file.file_kind
         original_build_membership = $membershipText
         provisional_composition_disposition = $rule[0]
@@ -107,6 +108,45 @@ $familyOut = foreach ($family in $sourceFamilies) {
     }
 }
 
+$runtimeSupportOut = @(
+    [pscustomobject][ordered]@{
+        binding_id = 'MVDM-W1-BIND-001'
+        package_root = 'oemuni'
+        original_translation_unit = 'oemuni/file.c'
+        original_consumer_evidence = 'softpc.new/obj.vdm/sources:91; wow32/sources:20 link oemuni.lib'
+        original_interface_shape = 'OEM public wrappers declared by inc/oemuni.h; internal source uses NTSTATUS, STRING/UNICODE_STRING, NtCurrentPeb/NtCurrentTeb and Rtl heap/conversion calls'
+        required_owner = 'adapter-win32'
+        binding_disposition = 'same-shaped historical Win32/NTDLL binding review required'
+        retained_source_rule = 'retain file.c algorithm and public entrypoint names unchanged; no source-body fork or custom OEM algorithm'
+        prerequisite = 'exact type/calling-convention/error-conversion and temporary-string-lifetime audit for each imported NT RTL helper'
+        state = 'adapter-pending-not-enabled'
+    }
+    [pscustomobject][ordered]@{
+        binding_id = 'MVDM-W1-BIND-002'
+        package_root = 'oemuni'
+        original_translation_unit = 'oemuni/process.c'
+        original_consumer_evidence = 'softpc.new/obj.vdm/sources:91; wow32/sources:20 link oemuni.lib'
+        original_interface_shape = 'OEM process/environment/path wrappers declared by inc/oemuni.h; source preserves OEM-to-Unicode conversion, STARTUPINFOA/PROCESS_INFORMATION and SetLastError mapping'
+        required_owner = 'adapter-win32'
+        binding_disposition = 'same-shaped historical Win32/NTDLL binding review required'
+        retained_source_rule = 'retain process.c conversion/order/error logic and original entrypoint names; no session/COMMAND logic enters oemuni'
+        prerequisite = 'exact CreateProcess/environment/current-directory and RTL string/heap ABI/error mapping audit for x86 and x64'
+        state = 'adapter-pending-not-enabled'
+    }
+    [pscustomobject][ordered]@{
+        binding_id = 'MVDM-W1-BIND-003'
+        package_root = 'suballoc'
+        original_translation_unit = 'suballoc/suballoc.c'
+        original_consumer_evidence = 'softpc.new/obj.vdm/sources:90 links suballoc.lib'
+        original_interface_shape = 'inc/suballoc.h exports SAInitialize/SAQueryFree/SAAllocate/SAFree/SAReallocate with ULONG address/size and caller-supplied NTSTATUS commit/decommit plus overlapping move callbacks'
+        required_owner = 'toolchain binding; adapter-softpc only at original machine-facing callers'
+        binding_disposition = 'original algorithm-library candidate; no direct Bochs or guest semantic binding in library'
+        retained_source_rule = 'retain 32-bit ULONG callback contract and source algorithm; do not reinterpret BaseAddress as a host pointer or insert mapping-manager logic'
+        prerequisite = 'compile-header/CRT allocation review and separate caller-side adapter-softpc audit of commit/decommit/move callbacks'
+        state = 'binding-pending-not-enabled'
+    }
+)
+
 $callOut = foreach ($call in $calls) {
     $sourceFile = @($fileOut | Where-Object { $_.target_path -eq $call.caller_path })
     if ($sourceFile.Count -ne 1) { throw "No W0/W1 file row for call $($call.call_id)." }
@@ -132,5 +172,6 @@ function Export-Tsv {
 Export-Tsv -Rows $fileOut -Path (Join-Path $operations 'm0-t276-s11-w0-w1-file-disposition-ledger.tsv')
 Export-Tsv -Rows $familyOut -Path (Join-Path $operations 'm0-t276-s11-w0-w1-source-interface-family-ledger.tsv')
 Export-Tsv -Rows $callOut -Path (Join-Path $operations 'm0-t276-s11-w0-w1-call-accounting-ledger.tsv')
+Export-Tsv -Rows $runtimeSupportOut -Path (Join-Path $operations 'm0-t276-s11-w0-w1-runtime-support-binding-ledger.tsv')
 
-Write-Output "T276 S11 W0/W1 audit generated: $($fileOut.Count) files, $($familyOut.Count) source-interface families, $($callOut.Count) lexical call candidates."
+Write-Output "T276 S11 W0/W1 audit generated: $($fileOut.Count) files, $($familyOut.Count) source-interface families, $($callOut.Count) lexical call candidates, $($runtimeSupportOut.Count) runtime-support bindings."

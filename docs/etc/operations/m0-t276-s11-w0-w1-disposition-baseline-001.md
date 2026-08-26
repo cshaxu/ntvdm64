@@ -15,9 +15,10 @@ expected root/file/family/call coverage and rejects any enabled state.
 ## Exact accounting
 
 - 140 selected mirror paths are assigned one provisional composition
-  disposition: one `dirs` build-control input, one `makefil0` build-control
-  input, 96 `inc` declaration/resource carriers, six `oemuni` paths, eight
-  `suballoc` paths, and 28 `vdmutils` paths.
+  disposition and final component owner: 112 support-owned paths (one `dirs`
+  build-control input, one `makefil0` build-control input, 96 `inc`
+  declaration/resource carriers, six `oemuni` paths and eight `suballoc`
+  paths), plus 28 tool-owned `vdmutils` paths.
 - 12 source translation units are explicitly represented by 14
   source-interface-family rows.  The split is deliberate: `oemuni/file.c`
   and `oemuni/process.c` each cross both public Win32 and historical
@@ -58,10 +59,13 @@ formal x86/x64 target and exact adapter ABI/link evidence, which S11 is
 forbidden to enable.
 
 The only candidate runtime source bodies handed forward are the original
-`oemuni` library pair and `suballoc/suballoc.c`.  Their next prerequisite is
-an interface-by-interface `adapter-win32`/toolchain binding review, retaining
-the original names, parameters, error conversion, allocation and ownership
-semantics wherever they are supportable.  This handoff does not authorize a
+`oemuni` library pair and `suballoc/suballoc.c`. Their next prerequisite is the
+three-row runtime-support binding ledger. `oemuni/file.c` and `process.c`
+require an interface-by-interface `adapter-win32` review, retaining original
+names, parameters, error conversion, allocation and temporary-string ownership
+semantics. `suballoc.c` remains an original algorithm library with `ULONG`
+address values and caller-supplied callbacks; only its callers may later bind
+those callbacks through `adapter-softpc`. This handoff does not authorize a
 source modification or a generic compatibility layer.
 
 All `vdmutils` programs remain a later product-profile decision.  They are

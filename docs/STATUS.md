@@ -5,7 +5,7 @@
 **Active: M0 T276 S11** — Begin per-file composition and interface disposition
 with the low-dependency W0/W1 source-carrier and support packages.
 
-The current intermission architecture is the seventeen-component MVDM package
+The current intermission architecture is the nineteen-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
 project interfaces, a cross-process broker, and a shared x86/x64 32-bit
 compatibility object space. The neutral, machine, source-supply and adapter
@@ -152,6 +152,13 @@ source-interface families and 2,270 call candidates.  Only the exact original
 all original utility products are explicit profile exclusions.  This remains
 audit-only: no mirror source, provider body, adapter ABI or build edge is
 enabled.  See [T276 S11 W0/W1 disposition evidence](etc/operations/m0-t276-s11-w0-w1-disposition-baseline-001.md).
+
+**T276 S11 P2:** the three original W1 runtime-support translation units now
+have an explicit binding handoff. `oemuni/file.c` and `process.c` retain their
+original OEM/NT RTL algorithms pending same-shaped `adapter-win32` bindings;
+`suballoc.c` retains its `ULONG`/callback algorithm and defers only its
+machine-facing callers to `adapter-softpc`. No binding or source edit is
+enabled. See the same S11 disposition evidence and runtime-support ledger.
 
 ### M0 T275 S1 — Complete interface and reuse ledger
 

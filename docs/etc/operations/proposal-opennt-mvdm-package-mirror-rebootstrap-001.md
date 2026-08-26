@@ -2,7 +2,7 @@
 
 ## Decision
 
-Reconstruct `src/` into seventeen production components while preserving the non-invasive `ntvdm.exe` direct
+Reconstruct `src/` into nineteen production components while preserving the non-invasive `ntvdm.exe` direct
 COM/EXE/BAT/PIF launch contract. Recovery is package-led, not trace-led:
 original source, same-shaped adapter, registered private overlay, then a
 last-resort authored exception.
@@ -57,6 +57,8 @@ both host architectures; numeric data retains original semantics.
 src/
   bochs-core/
   opennt-mvdm-host/
+  opennt-mvdm-support/
+  opennt-mvdm-tools/
   opennt-platform-abi/
   opennt-guest-dos/
   opennt-guest-wow16/
@@ -90,9 +92,14 @@ variant remains external evidence, not a second product path.
 
 Owner mapping:
 
-- `opennt-mvdm-host`: every selected non-guest/non-tool MVDM package,
-  including MVDM includes, DEM, COMMAND, XMS, DPMI32, VDMREDIR, WOW32,
-  VDD/debugger, `softpc.new`, SIM/monitor, utility and OEM packages;
+- `opennt-mvdm-host`: selected MVDM host-runtime provider packages, including
+  DEM, COMMAND, XMS, DPMI32, VDMREDIR, WOW32, VDD/debugger, `softpc.new` and
+  SIM/monitor packages;
+- `opennt-mvdm-support`: original shared MVDM build/header carriers and
+  support libraries: `dirs`, `makefil0`, `inc`, `oemuni` and `suballoc`;
+- `opennt-mvdm-tools`: original standalone utility products/resources under
+  `vdmutils`, including `forcedos`, `graftabl`, `pifedit` and `win`; these may
+  be independently built but never link into the main runtime;
 - `opennt-platform-abi`: exact required declarations outside MVDM;
 - `opennt-guest-dos`: the already-established repository-local DOS/V86 and guest
   DPMI mirror, recovered directly from the existing guest mirror without a
@@ -172,7 +179,7 @@ or by trace hit.
 
 ## Exit criteria
 
-- `src/` contains exactly the seventeen declared roots; no transitional or
+- `src/` contains exactly the nineteen declared roots; no transitional or
   stale component root is a production input.
 - Every selected original file has path/hash/provenance and a package-scope
   OpenNT/OpenNT-4.5 disposition.

@@ -1,10 +1,13 @@
 # opennt-mvdm-host
 
-Canonical selected non-guest/non-tool OpenNT MVDM mirror. M0 T274 S5 recovered
-its original package topology, headers and static resources byte-identically;
-S6 then recovered every selected original provider body and remaining input
-without changing its contents. This component has no locally authored provider
-replacement.
+Temporary exact source-union carrier for the selected OpenNT MVDM mirror. M0
+T274 S5 recovered its original package topology, headers and static resources
+byte-identically; S6 then recovered every selected original provider body and
+remaining input without changing its contents. This root remains the canonical
+audit carrier only until the approved file-identity re-root moves support
+(`dirs`, `makefil0`, `inc`, `oemuni`, `suballoc`) and standalone tool
+(`vdmutils`) paths to their dedicated mirror components. It has no locally
+authored provider replacement.
 
 ## Provenance
 
@@ -20,9 +23,10 @@ replacement.
 - [S6 closure evidence](../../docs/etc/operations/m0-t274-s6-mvdm-host-package-supply-closure-001.md)
   records full selected-host coverage and verification.
 
-The root contains all 1,689 selected host inputs across 23 original package
+The root currently carries all 1,689 selected paths across 23 original package
 roots: 1,050 topology/header/resource inputs and 639 S6-recovered inputs
-(612 C/C++/assembly provider bodies plus 27 remaining forms).
+(612 C/C++/assembly provider bodies plus 27 remaining forms). This physical
+layout is not a final runtime-owner claim.
 
 ## Divergence register
 

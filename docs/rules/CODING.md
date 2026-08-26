@@ -18,9 +18,10 @@
 
 ## Placement and dependencies
 
-- Place each production file in one of the seventeen roots declared by the
-  architecture rules. `opennt-mvdm-host` preserves the complete selected
-  non-guest/non-tool MVDM package topology; package libraries do not create
+- Place each production file in one of the nineteen roots declared by the
+  architecture rules. `opennt-mvdm-host`, `opennt-mvdm-support` and
+  `opennt-mvdm-tools` preserve selected host-runtime, support and standalone
+  tool package topology respectively; package libraries do not create ad-hoc
   new source owners.
 - `opennt-platform-abi` contains exact original declarations only.
 - `adapter-bochs` alone includes or calls `bochs-core`. `adapter-softpc` calls

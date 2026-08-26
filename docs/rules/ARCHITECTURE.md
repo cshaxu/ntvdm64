@@ -1,14 +1,16 @@
 # Architecture Rules
 
 1. The production source owners are exactly `bochs-core`,
-   `opennt-mvdm-host`, `opennt-platform-abi`, `opennt-guest-dos`,
+   `opennt-mvdm-host`, `opennt-mvdm-support`, `opennt-mvdm-tools`,
+   `opennt-platform-abi`, `opennt-guest-dos`,
    `opennt-guest-wow16`, `adapter-bochs`, `adapter-bop`, `adapter-softpc`,
    `adapter-win32`, `adapter-vdm-monitor`, `adapter-redir`, `adapter-wow`,
    `adapter-vdd`, `adapter-debugger`, `session`, `broker`, and `app`.
-2. `opennt-mvdm-host` is the sole non-guest/non-tool MVDM mirror. BOP, host,
-   SoftPC and utility package distinctions may become library targets but not
-   separate source components. `opennt-platform-abi` contains declarations
-   only.
+2. `opennt-mvdm-host` is the sole MVDM host-runtime mirror. Shared original
+   MVDM support carriers/libraries belong to `opennt-mvdm-support`; independent
+   historical tools belong to `opennt-mvdm-tools`. A tool is never a host
+   runtime dependency merely because it is independently buildable.
+   `opennt-platform-abi` contains declarations only.
 3. Bochs owns CPU, memory, firmware and PC-device semantics. `adapter-bochs`
    is its only production caller and contains only Bochs mechanics.
    `adapter-softpc` reaches the machine only through typed `adapter-bochs`
@@ -106,3 +108,7 @@
     Bochs/adapter mechanics are recovery evidence only; every retained core
     difference is minimized, individually registered, and placed in the
     matching private overlay when it exceeds the mirror rule's local boundary.
+28. `opennt-mvdm-support` may be linked only after the package/symbol tracker
+    records its original consumer, exact interface shape, binding owner and
+    x86/x64 disposition. `opennt-mvdm-tools` may never be linked into `app` or
+    an MVDM host runtime.

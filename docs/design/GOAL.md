@@ -15,10 +15,14 @@ OpenNT and Bochs recovery is source-first:
    the original unit composable;
 4. author new behavior only under a recorded last-resort exception.
 
-The seventeen-component architecture keeps one canonical non-guest/non-tool
-`opennt-mvdm-host` mirror, exact `opennt-platform-abi`, complete load-only DOS
-and WOW16 guest mirrors, Bochs core and nine adapters, neutral `session`,
-cross-process `broker`, and final `app` composition.
+The nineteen-component architecture separates canonical original MVDM host
+runtime, support-library and standalone-tool mirrors:
+`opennt-mvdm-host`, `opennt-mvdm-support` and `opennt-mvdm-tools`. It also
+keeps exact `opennt-platform-abi`, complete load-only DOS and WOW16 guest
+mirrors, Bochs core and nine adapters, neutral `session`, cross-process
+`broker`, and final `app` composition. A preserved/buildable historical tool
+is never treated as a host-runtime dependency merely because it shares the
+MVDM source tree.
 
 The current execution profile is one active MVDM session per `ntvdm.exe`
 process, with multiple processes allowed concurrently. A session must support

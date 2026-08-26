@@ -8,7 +8,7 @@ recreating a private NT subsystem, or requiring installation-time host
 mutation. Public Win32 APIs and ordinary host resources remain valid integration
 mechanisms.
 
-The product has seventeen production source components. A source file has one
+The product has nineteen production source components. A source file has one
 owner. Original mirrors preserve upstream package identity, adapters preserve
 historical interface shape while translating mechanics, and project components
 own composition, session lifetime and cross-process coordination.
@@ -19,10 +19,18 @@ own composition, session lifetime and cross-process coordination.
 
 - `bochs-core`: complete adopted Bochs 2.6 CPU, memory, firmware and PC-device
   mechanics. It has no OpenNT, DOS, WOW, BOP or host-policy knowledge.
-- `opennt-mvdm-host`: the single canonical merged non-guest/non-tool MVDM
-  mirror. It owns selected DEM, COMMAND, XMS, DPMI32, VDMREDIR, WOW32,
-  VDD/debugger, `softpc.new`, SIM/monitor, utility and OEM packages. One source
-  component may produce many libraries.
+- `opennt-mvdm-host`: the canonical original MVDM host-runtime mirror. It owns
+  selected DEM, COMMAND, XMS, DPMI32, VDMREDIR, WOW32, VDD/debugger,
+  `softpc.new` and SIM/monitor provider packages. It does not own standalone
+  tools or common support libraries.
+- `opennt-mvdm-support`: the canonical original MVDM common support mirror:
+  shared `inc` declarations/build carriers plus original `oemuni` and
+  `suballoc` library packages. It may be independently built, but it enters a
+  host runtime only after its exact interface audit admits it.
+- `opennt-mvdm-tools`: the canonical original standalone MVDM tool mirror,
+  including `vdmutils/forcedos`, `graftabl`, `pifedit` and `win` resources.
+  Tools may be independently built but never enter the main `ntvdm.exe` link
+  graph merely because their source is available.
 - `opennt-platform-abi`: exact original declarations and contracts outside
   MVDM required to compile imported MVDM packages. It contains no replacement
   behavior.
@@ -97,6 +105,7 @@ app -> adapter-bop -> opennt-mvdm-host
 app -> opennt-guest-dos / opennt-guest-wow16     (data/load only)
 
 opennt-mvdm-host -> opennt-platform-abi
+opennt-mvdm-host -> opennt-mvdm-support
 opennt-mvdm-host -> adapter-win32
 opennt-mvdm-host -> adapter-softpc -> adapter-bochs
 opennt-mvdm-host -> adapter-vdm-monitor
@@ -107,6 +116,7 @@ opennt-mvdm-host -> adapter-debugger
 opennt-mvdm-host -> session                      (neutral contract only)
 adapter-bop -> adapter-softpc                    (typed mechanics only)
 adapter-win32 -> broker client                   (only for brokered historical calls)
+opennt-mvdm-tools -> opennt-mvdm-support / opennt-platform-abi  (independent tool builds only)
 ```
 
 `session` never calls a component-specific provider. `adapter-bochs` alone
@@ -120,6 +130,11 @@ it is not a convenience shim and it may not absorb another adapter's caller or
 provider semantics. A missing interface is first assigned to this inventory,
 then recovered with original source evidence, rather than edited out of an
 OpenNT mirror.
+
+`opennt-mvdm-support` has no automatic inbound runtime edge: a host package
+may use it only after the package/symbol tracker records the original consumer,
+exact interface shape and binding disposition. `opennt-mvdm-tools` has no
+inbound production-runtime edge at all.
 
 ## Guest and host width model
 
