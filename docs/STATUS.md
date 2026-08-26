@@ -2,8 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T276 S6** — Group external-boundary candidates by original
-declaration family before assigning any final adapter or package owner.
+**Active: M0 T276 S8** — Review each grouped original declaration against its
+actual selected-source definition form before recording an adapter, package or
+profile disposition.
 
 The current intermission architecture is the seventeen-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,23 +25,23 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S6 — original declaration-family worklist
+### M0 T276 S8 — original provider-definition and ABI-form review
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T276 S6`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T276/S1–S5 establish exact mirror, build, declaration, caller and external-boundary candidate provenance; no final owner or recovery decision exists yet. |
-| Objective | Aggregate all S5 external-boundary candidates by original declaration and declaration-path family; identify the prospective adapter/package review family without treating it as a final owner decision. |
-| Non-goals | No provider/adaptor implementation, source-body edit, enabled build edge, ABI/owner conclusion, BOP behavior, Bochs change or guest execution. |
-| Reference Baseline | T276 S1–S5 ledgers, 23 exact package mirrors and source policy. |
-| Files And ABI Surface | Boundary-family worklist, reproducible grouping evidence, Status and documentation inventory. No runtime ABI changes. |
+| Identifier Mode | `M0 T276 S8`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T276/S1–S7 establish exact mirror, build, declaration, caller, external-boundary and original-source-occurrence provenance. No provider body or adapter ABI is enabled. |
+| Objective | For every S6 declaration worklist row, distinguish an original selected-source function body, macro/function-pointer indirection, callback/global, toolchain dependency or absent provider; record actual declaration/definition evidence and only then identify the next semantic review owner. |
+| Non-goals | No provider/adapter implementation, source-body edit, enabled build edge, final recovery decision, BOP behavior, Bochs change or guest execution. |
+| Reference Baseline | T276 S1–S7 ledgers, 23 exact package mirrors and source policy. |
+| Files And ABI Surface | Provider-form review ledger and evidence, Status and documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Account for all 2,546 S5 external-boundary candidates; preserve callers, declaration source and grouping rule; reject duplicate declaration worklist identities; retain all final owner fields as `unreviewed`. |
-| Expected Markers | Declaration families are `observed`; final reachability, ABI, owner, adapter, composition and x86/x64 decisions remain `unreviewed`. |
-| Asset Needs | T276 S3 declaration and S5 boundary ledgers plus source-policy adapter taxonomy. |
-| Reporting Requirements | Exact declaration/family/caller counts, unclassified paths, grouping limits and S7 handoff to original declaration/caller semantic review. |
-| Stop Conditions | A boundary cannot map to original declaration evidence, a grouping requires an invented interface, or a final owner would be inferred from pathname alone. |
-| Exit Criteria | One reproducible worklist row per reached external declaration candidate exists with all callers and a non-final review family; evidence and review are committed/pushed. |
+| Verification | Account for all 26 S6 worklist rows; locate and classify selected-source provider forms or record their absence; preserve declaration/caller evidence; reject a final owner inferred only from a pathname or lexical name. |
+| Expected Markers | Each row has a source-form result and exact locations. Final reachability, implementation, x86/x64 build, composition and profile decisions remain `unreviewed` unless the original form itself makes an exclusion unavoidable. |
+| Asset Needs | T276 S3/S5/S6/S7 ledgers plus selected exact source mirrors. |
+| Reporting Requirements | Exact form counts, definition versus macro/callback/toolchain/absent evidence, ambiguous forms, non-speculative next review owner and S9 handoff. |
+| Stop Conditions | A definition form cannot be identified from selected source, an ABI would be invented, or a source occurrence is mistaken for a callable provider. |
+| Exit Criteria | Every S6 worklist row has reproducible original declaration-and-provider-form evidence, and no candidate remains mislabeled as an adapter merely because lexical scanning did not see its definition. |
 | Original Owner Request | “好的 开始审计任务”。 |
 | Similar-Issue Sweep | Definition provenance, C/C++ versus assembly forms, unique declaration candidates, source-call aggregation, duplicate IDs and accidental provider/owner claims. |
 
@@ -115,6 +116,12 @@ debugger-shape and one OpenNT-host/Win32-shape review family.  See
 [T276 S6 worklist](etc/operations/m0-t276-s6-boundary-family-worklist-001.md).
 The next S reviews each original declaration and its callers before any final
 owner, adapter, availability or failure-contract entry is made.
+
+**T276 S7 closure:** all 26 declaration worklist rows now have selected-source
+occurrence navigation evidence. This evidence deliberately distinguishes no
+source form yet: an occurrence may be a body, call, macro, callback/global or
+comment-adjacent token. See [T276 S7 occurrence evidence](etc/operations/m0-t276-s7-provider-occurrence-baseline-001.md).
+S8 performs that source-form review before any adapter or recovery conclusion.
 
 ### M0 T275 S1 — Complete interface and reuse ledger
 
