@@ -2,9 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T279 S3** — M0 T279 recovers the original low-dependency MVDM
-support-library closure after the physical re-root. It is Ordinary Mode with
-single-person dual-role review; no MVDM provider/BOP route is enabled by S1.
+**No active M/T/S packet.** M0 T279 is closed as the original low-dependency MVDM
+support-library closure. Its authoritative record is
+[M0 T279 closure](history/m0-t279-closure-20260826.md). No MVDM provider/BOP
+route or guest runtime is enabled by T279.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,6 +25,24 @@ implementation subtasks are withdrawn and re-enter only through owner-package
 waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
+
+### Closed packet reference — M0 T279 S4
+
+### M0 T279 S4 — support-package closure audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T279 S4`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T279/S3 is complete and pushed as `7679ae9c`; audit the complete support package before T279 closure. |
+| Objective | Prove that all 112 exact support paths retain their correct source/build role, both original libraries have bounded x86/x64 build evidence, and no provider/BOP/guest route was accidentally enabled. |
+| Non-goals | No new provider, adapter family, BOP, guest runtime, suballoc callback binding, or host-control implementation. |
+| Reference Baseline | T278 exact movement closure plus T279/S1–S3 ledgers, bindings, build plan and build evidence. |
+| Files And ABI Surface | Closure verifier, closure history record, Status and documentation inventory only. |
+| Verification | Re-run T278, T279/S1, S2 and S3 verifiers; inspect formal artifacts; scan support/overlay build inputs for forbidden provider/guest/component edges. |
+| Exit Criteria | Met: one closure record distinguishes source mirror, x86 original library, x64 four-export overlay, static-only callback boundary and excluded tool/test inputs; all gates pass. |
+| Original Owner Request | “单人双角色模式执行队列任务”。 |
+
+### Closed packet reference — M0 T279 S3
 
 ### M0 T279 S3 — dual-architecture original-library build closure
 
