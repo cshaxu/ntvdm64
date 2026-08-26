@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T276 S16** — Begin W3 complete `sim32` package file/interface
-disposition without enabling a SIM32 monitor body.
+**Active: M0 T276 S17** — Begin W3 complete `v86` package file/interface
+disposition without enabling a V86 monitor body.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,25 +24,33 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S16 — W3 `sim32` package disposition baseline
+### M0 T276 S17 — W3 `v86` package disposition baseline
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T276 S16`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T276/S15 is closed: all eight `sim16` paths have exact non-enabled disposition and its two 16-bit host-product bodies are explicitly adapter-wow-profile-gated. The next bounded original package is the five-path `sim32` root. |
-| Objective | Classify selected `sim32` paths by original SIM32 monitor/guest-memory API role, build evidence and reached mapping/SoftPC/monitor/machine boundary before enabling a SIM32 body. |
-| Non-goals | No source move/edit, SIM32 implementation, pointer lease implementation, Bochs change, adapter body, formal build edge, Ninja run or guest execution. |
-| Reference Baseline | T276/S1–S15 ledgers, exact selected `sim32` mirror, source policy and architecture rules. |
-| Files And ABI Surface | W3 `sim32` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
+| Identifier Mode | `M0 T276 S17`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T276/S16 is closed: all five `sim32` paths have exact non-enabled disposition, and the historical pointer API is assigned to the unique session mapping manager rather than a raw host-pointer or second-manager route. The next bounded original package is the 35-path `v86` root. |
+| Objective | Classify every selected `v86` path by its original monitor/scaffold/util role, exact build selection, and reached SoftPC/monitor/machine/session boundary before enabling any V86 monitor or scaffold body. |
+| Non-goals | No source move/edit, V86 implementation, pointer lease implementation, Bochs change, adapter body, formal build edge, Ninja run or guest execution. |
+| Reference Baseline | T276/S1–S16 ledgers, exact selected `v86` mirror, source policy and architecture rules. |
+| Files And ABI Surface | W3 `v86` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Account for all five selected `sim32` paths; identify original pointer/read/write/flush role and actual mapping/SoftPC/monitor/machine dependencies; reject a raw pointer or second manager inference. |
+| Verification | Account for all 35 selected `v86` paths; distinguish monitor, scaffold and utility product roles; identify actual SoftPC/CCPU/SAS, VDM monitor, session and machine dependencies; reject an inferred alternate V86 engine or a second mapping manager. |
 | Expected Markers | One provisional composition disposition per path, exact build evidence and named internal/adapter prerequisite per reached family. |
-| Asset Needs | T276/S1–S15 ledgers, exact selected `sim32` mirror and [S16 plan](etc/operations/m0-t276-s16-sim32-package-disposition-plan-001.md). |
-| Reporting Requirements | Exact path/source/build counts, SIM32 role, mapping-boundary facts and subsequent package handoff. |
-| Stop Conditions | A path has no selected/build evidence, a raw host pointer crosses a boundary, a second mapping manager is proposed, a body is enabled from a trace, or classification requires invented adapter behavior. |
-| Exit Criteria | Every selected `sim32` path has a reproducible provisional owner/disposition record and each actual external family is assigned to the unique mapping-manager/session owner or named adapter/machine boundary; no source body is enabled. |
+| Asset Needs | T276/S1–S16 ledgers, exact selected `v86` mirror and [S17 plan](etc/operations/m0-t276-s17-v86-package-disposition-plan-001.md). |
+| Reporting Requirements | Exact path/source/build counts, monitor/scaffold/utility role, external boundary facts and subsequent package handoff. |
+| Stop Conditions | A path has no selected/build evidence, an alternate V86 engine or raw host pointer is inferred, a second mapping manager is proposed, a body is enabled from a trace, or classification requires invented adapter behavior. |
+| Exit Criteria | Every selected `v86` path has a reproducible provisional owner/disposition record and each actual external family is assigned to a named session or adapter/machine boundary; no source body is enabled. |
 | Original Owner Request | “好的 开始审计任务”。 |
-| Similar-Issue Sweep | SIM32 pointer leases, copy/flush/free semantics, guest descriptor/linear conversion, mapping-manager uniqueness, original build descriptions and adapter-softpc/adapter-vdm-monitor/adapter-bochs boundaries. |
+| Similar-Issue Sweep | Monitor/scaffold product split, CCPU/SAS/SoftPC calls, VDM event/thread forms, guest-memory mapping uniqueness, historical `ntvdm.def` exports, original build descriptions and adapter-softpc/adapter-vdm-monitor/adapter-bochs boundaries. |
+
+**S16 closure:** all five selected `sim32` paths have reproducible non-enabled
+dispositions.  The original `sources` file selects no translation unit;
+`sim32.c` is a private serial-IOCTL/sim16 WOW product shell.  Its historical
+read/write/pointer API is retained only as recovery evidence for
+`adapter-vdm-monitor`; every guest address must resolve through the unique
+session guest-memory mapping manager, never a raw host pointer or a second
+manager.  See the [S16 SIM32 baseline](etc/operations/m0-t276-s16-sim32-package-disposition-baseline-001.md).
 
 ### M0 T276 S11 — W0/W1 file and interface disposition baseline
 
