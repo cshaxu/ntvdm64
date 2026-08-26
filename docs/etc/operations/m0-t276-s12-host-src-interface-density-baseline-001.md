@@ -18,10 +18,14 @@ names and 37 external-boundary candidates across the eight owner groups:
 - VDM monitor: four files, 447 calls, 27 observations, three candidates.
 - Cross-owner startup composition: one file, 178 calls, 13 observations, four
   candidates.
-  candidates. It is not a direct implementation priority merely because it
-  sits in the historical `spchost` library.
-- Win32 host capability: nine files, 655 calls, 11 observations, two
+  It is not a direct implementation priority merely because it sits in the
+  historical `spchost` library.
+- Cross-owner launch configuration: one file, 159 calls, zero observations,
+  zero candidates.
+- Win32 host capability: seven files, 480 calls, 11 observations, two
   candidates.
+- Cross-owner video/machine initialization: one file, 16 calls, zero
+  observations, zero candidates.
 - VDD/debugger: two files, 246 calls, one observation, zero candidates.
 - Device bridges: 18 files, 3,263 calls, 258 observations, eight candidates.
 - BOP dispatcher: one file, 221 calls, 21 observations, zero candidates.

@@ -237,6 +237,14 @@ guest-memory, physical-page, VDD or session prerequisites. Historical build
 stubs remain excluded rather than becoming default adapter bodies. No source
 or adapter is enabled.
 
+**T276 S12 P7:** the nine original host-capability files now have eleven
+source-span-level Win32/NTDLL dispositions. `config.c` and `nt_sec.c` are
+explicit cross-owner launch and video/machine composition prerequisites, not
+generic Win32 helpers. The remaining diagnostic, NLS, keyboard, serial, PIF,
+error and wait paths retain their original interface contracts with named
+public-binding/session gates. No source or adapter is enabled; see the
+[P7 Win32/NTDLL capability baseline](etc/operations/m0-t276-s12-win32-capability-interface-baseline-001.md).
+
 ### M0 T275 S1 — Complete interface and reuse ledger
 
 | Field | Record |

@@ -25,9 +25,17 @@ membership; it does not import a body into a build.
   joins COMMAND, XMS, debugger/VDD, machine and Win32 startup paths. It remains
   an exact mirror and a composition prerequisite; it is not a monitor provider
   that can be enabled independently.
-- Nine Win32/NTDLL host-capability units: configuration, diagnostics, OEM/NLS,
-  PIF/security and related host functions. Their original algorithm/error order
-  stays in mirror source; `adapter-win32` is the only prospective binding owner.
+- One cross-owner launch/configuration unit: `config.c`. Its original body
+  crosses PIF, console, host environment, monitor and machine setup; it stays
+  an exact mirror and must not be mistaken for a standalone Win32 provider.
+- Seven Win32/NTDLL host-capability units: diagnostics, OEM/NLS, serial, PIF
+  and related host functions. Their original algorithm/error order stays in
+  mirror source; each later binding is owned by `adapter-win32` together with
+  any source-proven session, app or debugger consumer.
+- One cross-owner video/machine-initialization unit: `nt_sec.c`. Its original
+  virtual-memory calls are coupled to ROM mapping and VDM initialization, so
+  it requires an explicit monitor/machine/Win32 composition review rather than
+  a generic Win32 shim.
 - Two specialist product bridge units: `nt_vdd.c` and `nt_yoda.c`, assigned to
   the existing VDD/debugger adapters rather than a generic host shim.
 - Eighteen device bridge units (display, serial/parallel, input, disk/floppy,
