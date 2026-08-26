@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T274 S5** — M0 T271 remains closed by owner-directed
+**Active: M0 T274 S6** — M0 T271 remains closed by owner-directed
 exit-criterion revision; its audited residuals are recorded in its closure and
 the debt ledger, not misrepresented as completed mirror recovery.
 
@@ -36,6 +36,33 @@ focused lifecycle test passes under both MSVC x64 and Win32/x86 `/MT`.
 **T272 closure:** the neutral session/mapping/lease/broker foundation is
 complete and pushed through `d94d46ae`; its authoritative record is
 [M0 T272 closure](history/m0-t272-closure-20260826.md).
+
+### M0 T274 S6 — MVDM host package source recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T274 S6`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S1 establishes a unique selected source for every host path; S2--S5 are closed. |
+| Objective | Recover every S5-deferred, selected original MVDM host provider body and remaining package input under `opennt-mvdm-host`, retaining the selected source-relative path and hash. |
+| Non-goals | No body modification, compilation, linking, provider enablement, adapter implementation, guest change, or replacement shim. |
+| Reference Baseline | S1 union ledger; S5 topology manifest; pinned OpenNT/OpenNT-4.5 MVDM roots; source policy and T274 proposal. |
+| Files And ABI Surface | Exact selected body/other host inputs, reproducible S6 manifest/evidence, component README, Status and documentation inventory. No enabled runtime ABI. |
+| Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
+| Verification | Copy only the S5-deferred rows with non-identical-conflict refusal; rehash every destination; prove all selected host paths are represented and guest roots/build inputs remain isolated. |
+| Expected Markers | Complete 1,689-row selected host manifest, zero source/destination hash mismatches, no unregistered non-original host file and no guest build/link consumer. |
+| Asset Needs | S1 TSV ledger, S5 manifest, both pinned external MVDM roots, `opennt-mvdm-host` root and component source policy. |
+| Reporting Requirements | State imported/deferred counts, bytes/types/package roots, source selections, conflicts, exactness exceptions and host/guest isolation. |
+| Stop Conditions | Ambiguous provenance, a non-identical destination conflict, a selected source unavailable locally, or an attempted behavior-changing edit. |
+| Exit Criteria | Every S1-selected `opennt-mvdm-host` path is byte-identical to its selected source or explicitly registered as an allowed mirror exception; the source-supply task then closes without claiming compilation or runtime enablement. |
+| Original Owner Request | “单人双角色模式实施当前队列中的所有任务，要求全局统筹，追求结果极简主义…避免添油战术。” |
+| Similar-Issue Sweep | All S5 deferred bodies/non-topology inputs, package roots, source selections, destination conflicts, external reference leaks and host/guest boundaries. |
+
+**S6 closure:** all 639 S5-deferred selected host inputs were directly
+recovered and rehashed with zero mismatches: 612 C/C++/assembly provider bodies
+and 27 other inputs. Together with S5, `opennt-mvdm-host` now contains all
+1,689 selected paths across 23 original package roots, with no compilation,
+linking or provider enablement claim. See the [S6 closure
+evidence](etc/operations/m0-t274-s6-mvdm-host-package-supply-closure-001.md).
 
 ### M0 T274 S5 — MVDM host topology recovery
 
