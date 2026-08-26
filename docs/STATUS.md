@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T272 S5** — M0 T271 remains closed by owner-directed
+**Active: M0 T273 S2** — M0 T271 remains closed by owner-directed
 exit-criterion revision; its audited residuals are recorded in its closure and
 the debt ledger, not misrepresented as completed mirror recovery.
 
@@ -32,25 +32,25 @@ focused lifecycle test passes under both MSVC x64 and Win32/x86 `/MT`.
 complete and pushed through `d94d46ae`; its authoritative record is
 [M0 T272 closure](history/m0-t272-closure-20260826.md).
 
-### M0 T273 S1 — Bochs provenance and mirror recovery
+### M0 T273 S2 — Mechanical lifecycle
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T273 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Owner-approved first queue candidate, [Bochs foundation proposal](etc/operations/proposal-rebootstrap-bochs-machine-foundation-001.md); T272 is closed at `d94d46ae`. |
-| Objective | Establish the exact Bochs 2.6 baseline and a complete per-file source/mirror/overlay disposition before any Bochs source or machine code enters the new production graph. |
-| Scope | `bochs-core`, future overlay boundary, `adapter-bochs` reuse inventory, source hashes, divergence registers and audit evidence only. |
-| Non-goals | No Bochs build repair, no machine lifecycle implementation, no OpenNT/BOP/DOS/WOW/SoftPC/Win32 meaning, no app composition and no change to upstream Bochs sources. |
-| Verification | Exact baseline identity/provenance check; per-file compare of `src.old/bochs-core`; owner/dependency scan; architecture/mirror-rule review, governance and `git diff --check`. |
-| Exit Criteria | Every reusable Bochs file has exact/subset/same-shaped/overlay/defer disposition, each difference has a source baseline and exception owner, and no unreviewed old path is consumed by a formal build. |
-| Reference Baseline | Pinned `O:\repos.external\bochs-2.6-compat\bochs-2.6`, T272 closure, existing source-owner manifest and quarantined old Bochs/adaptor references. |
-| Files And ABI Surface | Audit/provenance records and component README/register only. No production Bochs or adapter ABI changes are admitted in S1. |
+| Identifier Mode | `M0 T273 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner-approved Bochs foundation proposal; S1 provenance and mirror audit is closed in `a4ad30a0`. |
+| Objective | Recover the smallest Bochs-only construction, reset, default-port-space, finite-run, stop and resume lifecycle through `adapter-bochs`. |
+| Scope | Reviewed exact/subset Bochs files, registered private overlay boundaries, audited `adapter-bochs` lifecycle candidates, focused construction/reset/budget fixtures and evidence. |
+| Non-goals | No app shell, guest loading, BOP decoding, OpenNT/DOS/WOW/SoftPC/CCPU provider semantics, Win32 service behavior or full Bochs product-shell build. |
+| Verification | Per-file source/reuse audit, adapter vocabulary/dependency scan, focused lifecycle fixture under x64/x86, mirror exception review, governance and `git diff --check`. |
+| Exit Criteria | An opaque minimal machine is constructed/reset/run for a finite budget/stopped/resumed by `adapter-bochs`; `bochs-core` stays project-dependency-free and all copied/modified source meets mirror rules. |
+| Reference Baseline | T273 S1 recovery audit, pinned Bochs 2.6 baseline, quarantined mechanical candidates and prior Bochs exception evidence. |
+| Files And ABI Surface | Reviewed `bochs-core`/private overlay files and `adapter-bochs` lifecycle API only; no caller outside the adapter receives a Bochs type. |
 | Applicable Rules | Execution, source policy, mirror-component, architecture, coding, build-hygiene and documentation rules. |
-| Expected Markers | Exact baseline hash, file-classification ledger, registered divergence IDs, and explicit `bochs-core`/`adapter-bochs` ownership boundary. |
-| Asset Needs | Pinned Bochs source tree, quarantined `src.old/bochs-core` and `src.old/adapter-bochs`, source policy and comparison tooling. |
-| Reporting Requirements | State every source-reuse/rung disposition, any ambiguity, proposed minimal overlay shape and later S2 dependencies without claiming a runnable machine. |
-| Stop Conditions | Baseline cannot be identified, a file exceeds mirror divergence limits without an overlay route, or an old implementation imports forbidden MVDM/Win32/provider semantics. |
-| Similar-Issue Sweep | Bochs core/overlay candidates, adapter-bochs candidates, old build manifests, include dependencies and exception README coverage. |
+| Expected Markers | Selected source manifest, private overlay isolation, one adapter-owned opaque lifecycle API and x86/x64 focused evidence. |
+| Asset Needs | Pinned Bochs source, audited candidate files, CPU5 configuration evidence, MSVC x64/x86 and disposable S2 build roots. |
+| Reporting Requirements | Identify every copied source, exception/overlay link, build closure and intentionally excluded Bochs product-shell feature. |
+| Stop Conditions | Lifecycle needs an unregistered Bochs semantic intrusion, imports non-Bochs vocabulary, or cannot form a defined minimal object/link closure. |
+| Similar-Issue Sweep | SIM/logging/PC-time/CPU decode/RAM/default-port-space/reset/run lifecycle, old adapter candidate dependencies and all core include edges. |
 | Original Owner Request | Rebootstrap from zero using existing app/session/Bochs/adapter files only after global provenance and owner review, while retaining a minimal source-audited Bochs machine boundary. |
 
 The latest closed packet remains the technical baseline below.
