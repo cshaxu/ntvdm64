@@ -2,10 +2,10 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T277 is closed as the source-proven MVDM
-package dependency and interface-closure tracker. Its authoritative record is
-[M0 T277 closure](history/m0-t277-closure-20260826.md). The next candidate
-remains unadmitted: MVDM runtime/support/tool/firmware physical re-root.
+**Active: M0 T278 S1** — M0 T278 makes the audited MVDM component ownership
+split physically true. It is an Ordinary Mode, single-person dual-role source
+identity migration; no source body, adapter ABI, build edge or guest execution
+is admitted.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -26,12 +26,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T277 S9 — end-to-end tracker closure audit
+### M0 T278 S1 — destination and source-identity freeze
 
-The aggregate verifier passed all S1–S8 gates and the independent-ledger
-identity joins. See the [S9 audit](etc/operations/m0-t277-tracker-closure-audit-001.md)
-and [M0 T277 closure](history/m0-t277-closure-20260826.md). No provider body,
-adapter ABI, build edge or guest execution was enabled.
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T278 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner directed single-person dual-role execution of the queue task following closed M0 T277. |
+| Objective | Generate a unique per-path target-component and hash ledger for all 1,689 audited non-guest MVDM paths before any physical move. |
+| Non-goals | No original source-body edit, adapter implementation, build/Ninja edge, provider enablement, Bochs change or guest execution. |
+| Reference Baseline | T274 union source/hash ledger, T276 final file dispositions, T277 effective package/profile closure and the physical re-root proposal. |
+| Files And ABI Surface | S1 plan, generated destination ledger/verifier, Status and documentation inventory. No runtime ABI changes. |
+| Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
+| Verification | All 1,689 source paths appear once; each has one destination component and an upstream SHA-256; target classifications match the approved package roots. |
+| Expected Markers | Support=`dirs`/`makefil0`/`inc`/`oemuni`/`suballoc`; tools=`vdmutils`; firmware only the named SoftPC BIOS/ROM/data subtrees; all others remain host. |
+| Asset Needs | T274 union ledger, T277 file/profile ledgers and [re-root proposal](etc/operations/proposal-mvdm-runtime-support-tool-re-root-001.md). |
+| Reporting Requirements | Exact destination counts, each component's package roots, source identity basis and any inconsistent input. |
+| Stop Conditions | Any duplicate/missing path, mismatch in upstream hash, ambiguous target, undocumented new source, source-body change or build-edge change. |
+| Exit Criteria | A reproducible 1,689-row destination ledger and verifier pass before any `git mv` is issued. |
+| Original Owner Request | “单人双角色模式执行队列任务”。 |
+| Similar-Issue Sweep | Package versus file-level target, tool/runtime leakage, firmware/guest confusion, source hash mismatch, duplicate target and hidden build-input change. |
 
 ### Closed packet reference — M0 T276 S25
 
