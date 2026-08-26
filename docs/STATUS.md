@@ -298,6 +298,13 @@ memory and XMS shared state. A20/guest range/UMB/IVT remain
 `adapter-softpc -> adapter-bochs` prerequisites; UMB stays gated until a
 durable bounded guest-byte seam is actually proved. No source body is enabled.
 
+**T276 S15 P1:** all eight original `sim16` paths now have a non-enabled
+disposition. The original makefile proves a 16-bit host-side WOW simulator DLL
+using historical WOW libraries, not a Bochs-loadable guest image. Its two
+assembler bodies remain `adapter-wow` profile-gated: serial/PIC mechanics stay
+with `adapter-bochs`, VDM-memory transport with `adapter-vdm-monitor`, and no
+generic protocol or device implementation is created.
+
 ### M0 T275 S1 — Complete interface and reuse ledger
 
 | Field | Record |
