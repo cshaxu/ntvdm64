@@ -96,6 +96,12 @@ one 16-bit `DOSX.EXE` guest product, never a host static library. Its future
 machine and BOP contracts remain at the declared guest boundary; see the
 [DPMI final baseline](etc/operations/m0-t276-s25-dpmi-final-disposition-baseline-001.md).
 
+**S25 P5:** all 13 `sim16`/`sim32` paths now have final dispositions. The
+private serial peer/product-shell bodies are `not-host-runtime`; `sim32.h`
+and the SIM16 declaration forms are `binding-only` evidence for specialised
+monitor/WOW adapters, never a second mapping manager or serial machine.
+See the [SIM final baseline](etc/operations/m0-t276-s25-sim-final-disposition-baseline-001.md).
+
 **S20 closure:** all 25 selected `dpmi32` paths have reproducible non-enabled
 dispositions. Sixteen selected x86 bodies form one host-provider package; all
 guest addresses are constrained to the unique session mapping-manager lease or
