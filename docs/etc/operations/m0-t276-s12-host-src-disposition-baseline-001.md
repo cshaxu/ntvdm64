@@ -17,10 +17,14 @@ membership; it does not import a body into a build.
   `stubs.c`, and `x86_emm.c`. They require original-shape
   `adapter-softpc -> adapter-bochs` review. No source unit directly includes
   or calls a Bochs object.
-- Five VDM monitor/reset/event units: `nt_eoi.c`, `nt_event.c`, `nt_inthk.c`,
-  `nt_msscs.c`, `nt_reset.c`; and one worker unit, `nt_thred.c`. They are
-  separate monitor/session contracts, not an invitation to recreate NT4's
-  global worker shell.
+- Four VDM monitor/reset/event units: `nt_eoi.c`, `nt_event.c`, `nt_inthk.c`,
+  and `nt_reset.c`; and one worker unit, `nt_thred.c`. They are separate
+  monitor/session contracts, not an invitation to recreate NT4's global worker
+  shell.
+- One cross-owner startup composition unit: `nt_msscs.c`. Its original body
+  joins COMMAND, XMS, debugger/VDD, machine and Win32 startup paths. It remains
+  an exact mirror and a composition prerequisite; it is not a monitor provider
+  that can be enabled independently.
 - Nine Win32/NTDLL host-capability units: configuration, diagnostics, OEM/NLS,
   PIF/security and related host functions. Their original algorithm/error order
   stays in mirror source; `adapter-win32` is the only prospective binding owner.

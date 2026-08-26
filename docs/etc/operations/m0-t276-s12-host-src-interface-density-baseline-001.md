@@ -15,7 +15,11 @@ names and 37 external-boundary candidates across the eight owner groups:
 
 - SoftPC facade: 10 files, 851 calls, 22 selected-definition observations,
   eight external-boundary candidates.
-- VDM monitor: five files, 625 calls, 40 observations, seven candidates.
+- VDM monitor: four files, 447 calls, 27 observations, three candidates.
+- Cross-owner startup composition: one file, 178 calls, 13 observations, four
+  candidates.
+  candidates. It is not a direct implementation priority merely because it
+  sits in the historical `spchost` library.
 - Win32 host capability: nine files, 655 calls, 11 observations, two
   candidates.
 - VDD/debugger: two files, 246 calls, one observation, zero candidates.

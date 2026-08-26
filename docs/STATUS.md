@@ -199,9 +199,10 @@ or build edge is enabled. See [T276 S12 SoftPC baseline](etc/operations/m0-t276-
 
 **T276 S12 P2:** the 56 original `softpc.new/host/src` source units are now
 split by boundary rather than treated as one recoverable library: one BOP
-dispatcher, ten SoftPC/SAS facade units, five monitor/reset/event units, one
-session/worker unit, nine Win32 host-capability units, two VDD/debugger units,
-18 device bridges and ten literal-build-unobserved auxiliaries. No source or
+dispatcher, ten SoftPC/SAS facade units, four monitor/reset/event units, one
+session/worker unit, one cross-owner startup-composition unit, nine Win32
+host-capability units, two VDD/debugger units, 18 device bridges and ten
+literal-build-unobserved auxiliaries. No source or
 adapter becomes enabled; the next slice audits complete owner groups at the
 function/interface level. See [T276 S12 host/src baseline](etc/operations/m0-t276-s12-host-src-disposition-baseline-001.md).
 
@@ -219,6 +220,14 @@ carrier only: no source is compiled or linked as host runtime, no parallel
 SoftPC machine is admitted, and only a future explicit `adapter-bochs`
 manifest can select an input. The regenerated 998-row S12 ledger and verifier
 record this owner boundary.
+
+**T276 S12 P5:** the four monitor/reset sources, one session-worker source and
+one cross-owner startup-composition source now have fifteen source-span-level
+original-interface dispositions. `nt_msscs.c` is explicitly separated from
+monitor ownership: it sequences COMMAND/DEM/XMS/debugger startup, guest-image
+loading and VDD hooks, so it cannot be independently enabled. The ledger names
+the applicable adapter/package predecessor for every group and records no
+source or adapter enablement.
 
 ### M0 T275 S1 — Complete interface and reuse ledger
 

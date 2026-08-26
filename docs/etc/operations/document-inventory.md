@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2458 |
+| Documentation records | 2460 |
 | --- | --- |
-| Generated UTC | 2026-08-26T16:51:39Z |
+| Generated UTC | 2026-08-26T16:56:22Z |
 
 ## Entries
 
@@ -607,10 +607,12 @@ content-divergent entries.
 | etc/operations/m0-t276-s11-w0-w1-file-disposition-ledger.tsv | indexed supporting material | 148b361d09884543a7ca1a9a61028cd2bf27df6fb382d302963d1c5ee16e46dd |
 | etc/operations/m0-t276-s11-w0-w1-runtime-support-binding-ledger.tsv | indexed supporting material | 11d3dbaac4cda59d65b1809c805634d666439447163a2f4cebc9333ad519327e |
 | etc/operations/m0-t276-s11-w0-w1-source-interface-family-ledger.tsv | indexed supporting material | e903b264e8a483a49cc4e98c024ed04628fc18bc5311df26cb4fc0101b8534dc |
-| etc/operations/m0-t276-s12-host-src-disposition-baseline-001.md | indexed supporting material | 754a143d5bd6e3f9c5725699a79e0a9d20037d8f92b6ac641f951ef264949059 |
-| etc/operations/m0-t276-s12-host-src-disposition-ledger.tsv | indexed supporting material | 3c088b7a497efdfd6ede4cf8009c101c95611f09d1b745daad9f0b1dcfae0061 |
-| etc/operations/m0-t276-s12-host-src-interface-density-baseline-001.md | indexed supporting material | 8c55b4335966df22ace155b3c42261cc5747b0d438685de2fed7fbe909a5174a |
-| etc/operations/m0-t276-s12-host-src-interface-density-ledger.tsv | indexed supporting material | 33a46282d8418fa92bbfc55190e7ae5ac36bbdf8ec222bb6ffb9b4f28d3e2de6 |
+| etc/operations/m0-t276-s12-host-src-disposition-baseline-001.md | indexed supporting material | ddd57c326606c27af706a0427348b3ea6a27c70797e7ea0c8d132e1fafbff5db |
+| etc/operations/m0-t276-s12-host-src-disposition-ledger.tsv | indexed supporting material | 31ddeb6f8e8f8663ca9c4519fe106269c9da1df8940c12ce8345be94b0060aa9 |
+| etc/operations/m0-t276-s12-host-src-interface-density-baseline-001.md | indexed supporting material | 2d4ad9b8c810ad44f030a876ce6b2995d8611d74c4915f5ee814500f40726663 |
+| etc/operations/m0-t276-s12-host-src-interface-density-ledger.tsv | indexed supporting material | 1b3cfe05bbc4e271b0f0426bd39b15def2eef8dbeca0923c0c42982c5f9581a4 |
+| etc/operations/m0-t276-s12-monitor-session-interface-baseline-001.md | indexed supporting material | 22beab35f1ed1ed05f52b292810e21b5b47800b261d3317ace040f07965c469b |
+| etc/operations/m0-t276-s12-monitor-session-interface-ledger.tsv | indexed supporting material | a91da53e7f225771883f7ad95751b2622c1890c5f48b627d57e372e7c0691c98 |
 | etc/operations/m0-t276-s12-softpc-disposition-baseline-001.md | indexed supporting material | 73f1fcda1e037e0e74b4faf05a441cd61e840e5f2f36683bfbeba6622fb2998e |
 | etc/operations/m0-t276-s12-softpc-file-disposition-ledger.tsv | indexed supporting material | 5fff1b11b5a96d9e312ea15693ef09adb64fb7916a5e59fa71bcceb8cc2e7ea5 |
 | etc/operations/m0-t276-s1-file-identity-taxonomy-001.md | indexed supporting material | 58ef5ae55117e9eab275ce7a53aec14e1be29c373ea2214f5af8875bedf77094 |
@@ -2472,7 +2474,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 4c3bc245227723e1b97af2dbabdee35379ffba98e118eb14549138109253ed9d |
+| STATUS.md | principal control document | 8062bee35f440615147bc39b0ce96c4128932f63c35f91fa713f1bd3cd214ed3 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |
