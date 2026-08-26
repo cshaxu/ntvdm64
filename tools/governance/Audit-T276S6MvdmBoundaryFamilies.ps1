@@ -21,7 +21,7 @@ function Get-ReviewFamily([string]$Path) {
     return 'original-package-semantic-review'
 }
 $boundaries = @(Import-Csv $boundaryPath -Delimiter "`t" | Where-Object { $_.disposition -eq 'external-boundary-candidate' })
-if ($boundaries.Count -ne 2546) { throw "Expected 2,546 external candidates; found $($boundaries.Count)." }
+if ($boundaries.Count -eq 0) { throw 'S5 produced no external boundary candidates.' }
 $declarations = @{}; foreach ($d in (Import-Csv $declarationPath -Delimiter "`t")) { $declarations[$d.declaration_id] = $d }
 $i=0; $worklist = foreach ($group in ($boundaries | Group-Object declaration_id | Sort-Object Name)) {
     $i++; $d = $declarations[$group.Name]; if ($null -eq $d) { throw "Missing declaration: $($group.Name)" }

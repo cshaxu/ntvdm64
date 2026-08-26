@@ -33,11 +33,15 @@ foreach ($source in $sources) {
     $path = Join-Path $mirrorRoot ($source.target_path -replace '/', '\\')
     $text = Get-Content -LiteralPath $path -Raw
     if ($null -eq $text) { $text = '' }
-    foreach ($match in [regex]::Matches($text, '(?ms)\b([A-Za-z_][A-Za-z0-9_]*)\s*\([^;{}]{0,4096}\)\s*\{')) {
+    $scanText = [regex]::Replace($text, '(?s)/\*.*?\*/', { param($m) [regex]::Replace($m.Value, '[^\r\n]', ' ') })
+    $scanText = [regex]::Replace($scanText, '(?m)//[^\r\n]*', { param($m) [regex]::Replace($m.Value, '[^\r\n]', ' ') })
+    # Preserve both ANSI and the original K&R definition form.  A K&R header
+    # may have parameter declaration lines between `name(args)` and `{`.
+    foreach ($match in [regex]::Matches($scanText, '(?ms)\b([A-Za-z_][A-Za-z0-9_]*)\s*\([^(){}]{0,2048}\)\s*(?:(?:[A-Za-z_][A-Za-z0-9_ \t\*,\r\n]*;)\s*){0,32}\{')) {
         $name = $match.Groups[1].Value
         if ($keywords -contains $name.ToLowerInvariant()) { continue }
         $definitionIndex++
-        $line = 1 + ([regex]::Matches($text.Substring(0, $match.Index), "`n")).Count
+        $line = 1 + ([regex]::Matches($scanText.Substring(0, $match.Index), "`n")).Count
         $record = [pscustomobject]@{
             definition_id = ('MVDM-DEF-{0:D5}' -f $definitionIndex); file_id = $source.file_id
             definition_path = $source.target_path; package_root = $source.package_root; source_line = $line

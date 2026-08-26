@@ -2,16 +2,14 @@
 
 ## Result
 
-- External call candidates grouped: 2546
-- Unique original declaration worklist rows: 75
+- External call candidates grouped: 2651
+- Unique original declaration worklist rows: 28
 
 ## Non-final review families
 
-- `adapter-debugger-review`: 1
-- `adapter-redir-review`: 1
-- `adapter-softpc-review`: 68
-- `adapter-wow-review`: 1
-- `opennt-mvdm-host-or-adapter-win32-review`: 4
+- `adapter-debugger-review`: 2
+- `adapter-softpc-review`: 25
+- `opennt-mvdm-host-or-adapter-win32-review`: 1
 
 ## Limit
 

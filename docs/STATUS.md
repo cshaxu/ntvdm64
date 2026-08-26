@@ -100,12 +100,20 @@ S5 reviews only source-proven external boundaries and preserves unresolved
 assembly/macro cases as evidence rather than inventing owners.
 
 **T276 S5 closure:** all 4,119 S4 unique-name candidates now have a recorded
-definition/boundary disposition: 1,573 have a selected-source definition-name
-observation and 2,546 remain external-boundary candidates.  The 12,350
-definition records are deliberately lexical and do not make a linkage claim.
+definition/boundary disposition: 1,468 have a selected-source definition-name
+observation and 2,651 remain external-boundary candidates.  The 12,855
+definition records include a comment-stripped K&R form and are deliberately
+lexical; they do not make a linkage claim.
 See [T276 S5 boundary evidence](etc/operations/m0-t276-s5-external-boundary-baseline-001.md).
 S6 must review the 2,546 candidates by original declaration shape and caller
 package, grouping real historical interface families before assigning owners.
+
+**T276 S6 closure:** after the K&R-aware S5 correction, 2,651 external-boundary
+calls reduce to 28 original declaration worklist rows: 25 SoftPC-shape, two
+debugger-shape and one OpenNT-host/Win32-shape review family.  See
+[T276 S6 worklist](etc/operations/m0-t276-s6-boundary-family-worklist-001.md).
+The next S reviews each original declaration and its callers before any final
+owner, adapter, availability or failure-contract entry is made.
 
 ### M0 T275 S1 — Complete interface and reuse ledger
 
