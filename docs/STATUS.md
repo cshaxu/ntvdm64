@@ -2,9 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T276 S10** — Map all selected MVDM packages to their original
-build/profile roles and prerequisite boundary families before choosing a
-recovery wave.
+**Active: M0 T276 S11** — Begin per-file composition and interface disposition
+with the low-dependency W0/W1 source-carrier and support packages.
 
 The current intermission architecture is the seventeen-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -25,23 +24,23 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S10 — package/profile dependency-wave baseline
+### M0 T276 S11 — W0/W1 file and interface disposition baseline
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T276 S10`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T276/S1–S9 establish exact mirror, build, declaration, caller, external-boundary, source-occurrence, provider-form and non-body ABI/guard evidence. No provider body or adapter ABI is enabled. |
-| Objective | Give every selected MVDM package one original role, formal build/profile disposition, predecessor interface/package set and a non-trace topological recovery-wave candidate. |
+| Identifier Mode | `M0 T276 S11`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T276/S1–S10 establish exact source identity, boundary evidence, non-body ABI/guard evidence and six non-final package waves. No provider body or adapter ABI is enabled. |
+| Objective | For W0/W1 (`dirs`, `makefil0`, `inc`, `oemuni`, `suballoc`, `vdmutils`), classify every selected file's original composition role and reached interface dependencies; identify direct, adapter-bound, minimal-binding-diff or profile-excluded candidates without enabling a build. |
 | Non-goals | No provider/adapter implementation, source-body edit, enabled build edge, final recovery admission, BOP behavior, Bochs change or guest execution. |
-| Reference Baseline | T276 S1–S9 ledgers, original build descriptions, exact selected mirrors and source policy. |
-| Files And ABI Surface | Package/profile/wave ledger and evidence, Status and documentation inventory. No runtime ABI changes. |
+| Reference Baseline | T276 S1/S2/S3/S4/S5/S10 ledgers, exact selected mirrors and source policy. |
+| Files And ABI Surface | W0/W1 file/interface disposition ledger and evidence, Status and documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Account for all 23 selected package roots; preserve original build-control evidence and S8/S9 interface prerequisites; reject a wave selected by trace hit, lexical path order, or an invented adapter. |
-| Expected Markers | Each package has a role and profile state plus predecessor evidence. Wave labels are planning candidates, not provider enablement or build claims. |
-| Asset Needs | T276 S1/S2/S6/S8/S9 ledgers and exact selected mirrors. |
-| Reporting Requirements | Exact package/wave counts, build-role classes, internal cycles, external interface prerequisites, profile exclusions, and S11 handoff to full ledger normalization. |
-| Stop Conditions | A package role or dependency cannot be tied to source/build evidence, a cycle is hidden, or a candidate wave would require a new generic adapter. |
-| Exit Criteria | All selected package roots have a reproducible source-derived role/profile/prerequisite/wave record, and cycles or missing data are explicit. |
+| Verification | Account for every selected W0/W1 file and all reached source declarations/call candidates under those roots; preserve exact original build evidence; reject a file classification derived from path name alone. |
+| Expected Markers | One provisional composition class and interface/dependency state per W0/W1 file, with any unresolved ABI explicitly linked to a named later review. No buildability is implied. |
+| Asset Needs | T276 S1/S2/S3/S4/S5/S10 ledgers and exact W0/W1 source mirrors. |
+| Reporting Requirements | Exact file and source/build-control counts, interface candidates, direct/profile-excluded candidates, unresolved ABI dependencies and W2 handoff. |
+| Stop Conditions | A file cannot be tied to selected source/build evidence, a classification hides an unresolved external interface, or a direct classification requires an invented adapter. |
+| Exit Criteria | Every W0/W1 selected path has a reproducible provisional composition/disposition record; unresolved interfaces are assigned to a later package/adapter review without changing mirror source. |
 | Original Owner Request | “好的 开始审计任务”。 |
 | Similar-Issue Sweep | Definition provenance, C/C++ versus assembly forms, unique declaration candidates, source-call aggregation, duplicate IDs and accidental provider/owner claims. |
 
@@ -137,6 +136,14 @@ optional historical paths remain profile questions; the debugger globals remain
 callback bindings. See [T276 S9 ABI/failure evidence](etc/operations/m0-t276-s9-actionable-boundary-abi-failure-baseline-001.md).
 S10 derives package waves from those records, not from a guest trace or compile
 failure.
+
+**T276 S10 closure:** all 23 selected roots now have an original role,
+build/profile disposition, predecessor set and non-final candidate wave. The
+six waves make the mixed `softpc.new` machine source and later product
+extensions explicit rather than pretending they are one direct library. See
+[T276 S10 package-wave evidence](etc/operations/m0-t276-s10-package-profile-wave-baseline-001.md).
+S11 begins the required file/interface disposition from W0/W1 rather than
+enabling a package on the first compile error.
 
 ### M0 T275 S1 — Complete interface and reuse ledger
 

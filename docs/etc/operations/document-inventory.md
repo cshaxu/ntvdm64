@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2444 |
+| Documentation records | 2446 |
 | --- | --- |
-| Generated UTC | 2026-08-26T16:16:34Z |
+| Generated UTC | 2026-08-26T16:19:19Z |
 
 ## Entries
 
@@ -600,6 +600,8 @@ content-divergent entries.
 | etc/operations/m0-t275-s1-implementation-disposition.tsv | indexed supporting material | 16039911ea241c885cdab7c8ecaf3ca4433380bb633c34263c492c076c7afd6d |
 | etc/operations/m0-t275-s2-missing-interface-ledger.tsv | indexed supporting material | be3b36ae102279a9f0441ade94dfdc0c7272d171db540bf34cc0e3c405b0b21c |
 | etc/operations/m0-t275-s2-specialist-adapter-inventory-001.md | indexed supporting material | daf42931d0cfa245d0048f2d2d3ccd427b9e94cf259c0cbcb6fbeaef11427c4c |
+| etc/operations/m0-t276-s10-package-profile-wave-baseline-001.md | indexed supporting material | 840902ac888110f1032af8da55ce272ad5057a6c6ac62fb380004b83f2b4e942 |
+| etc/operations/m0-t276-s10-package-profile-wave-ledger.tsv | indexed supporting material | f4434686ab667b05bc38f4c94d142053857475b232c5cd2c650c56b509aeeaed |
 | etc/operations/m0-t276-s1-file-identity-taxonomy-001.md | indexed supporting material | 58ef5ae55117e9eab275ce7a53aec14e1be29c373ea2214f5af8875bedf77094 |
 | etc/operations/m0-t276-s2-build-input-include-graph-001.md | indexed supporting material | 550a64073284061d8c7638fe6e3b271f0930e95a41384640890fad047f77a70d |
 | etc/operations/m0-t276-s2-original-build-description-ledger.tsv | indexed supporting material | 44d1f5ee7c63c2b856960871603621e2052cb1c0903baf3224af41ccee725268 |
@@ -2458,7 +2460,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 163c4776226386e0c7d85fb1196b9753559b040b1490fe8f54440269af8b7f62 |
+| STATUS.md | principal control document | 262482adba637324f8b9d17ece18439b34d0e61d46a90ca2ceb3b32cbde1c41e |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |
