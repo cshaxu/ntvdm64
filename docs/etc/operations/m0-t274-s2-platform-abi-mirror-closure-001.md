@@ -54,3 +54,12 @@ scan covers every selected host code input and every imported file is
 hash-verified. Transitive declaration closure, historical generated segment
 inputs, and same-basename candidates require the S5/S6 package build topology;
 they are not implied by this S2 result.
+
+## Exact-source whitespace note
+
+Several imported original headers contain their historical trailing whitespace
+and EOF spacing. It is retained deliberately because mirror identity requires
+the manifest SHA-256 to equal the upstream source. Consequently, generic
+`git diff --check` is applied to the authored Status, README, evidence and
+tool files, not to these byte-identical imported headers; the manifest hash
+audit is their stricter, applicable gate.
