@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T276 S2** — Derive the original translation-unit/build-input and
-package include graph before any interface recovery or enabled build is admitted.
+**Active: M0 T276 S3** — Extract original textual interface declarations as
+evidence before resolving reached caller-to-interface dependencies.
 
 The current intermission architecture is the seventeen-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,25 +24,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S2 — original build-input and include-graph baseline
+### M0 T276 S3 — original textual interface-declaration baseline
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T276 S2`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | The owner approved the tracker-led import order. S1 closed at `1628f8ca`; S2 does not enable a source body. |
-| Objective | Derive each selected source translation unit, original build-control declaration and direct include edge from the byte-exact mirror; classify edges as selected-MVDM, Win32/NT SDK, toolchain or unresolved textual input. |
-| Non-goals | No provider/adaptor implementation, source-body edit, enabled build edge, function-level recovery conclusion, BOP behavior, Bochs change or guest execution. |
-| Reference Baseline | T276 S1 identity evidence, 23 exact package mirrors, original `dirs`/`makefile`/`sources` inputs, initialized independent ledgers and source policy. |
-| Files And ABI Surface | Package-dependency and build/profile ledgers, reproducible extractor/evidence, Status and documentation inventory. No runtime ABI changes. |
+| Identifier Mode | `M0 T276 S3`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | The owner approved tracker-led recovery. T276/S1 and S2 established byte-exact file identity and non-enabling original build-input evidence. |
+| Objective | Extract each lexical historical `extern` declaration found in the selected MVDM mirror into an auditable provenance ledger, without treating a declaration as a reached call or an available interface. |
+| Non-goals | No provider/adaptor implementation, source-body edit, enabled build edge, external-call resolution, function-level recovery conclusion, BOP behavior, Bochs change or guest execution. |
+| Reference Baseline | T276 S1 identity evidence, T276 S2 translation-unit/build-input/include ledgers, 23 exact package mirrors and source policy. |
+| Files And ABI Surface | Interface-recovery ledger, declaration provenance ledger, reproducible extractor/evidence, Status and documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Account for every selected `source` file and every selected build-control file; preserve raw source-location evidence; reject duplicate edge IDs; distinguish parsed textual edges from a resolved build closure. |
-| Expected Markers | Translation-unit/build-input inventory and package include edges are `observed`; all interface, final composition and x86/x64 build decisions remain `unreviewed`. |
-| Asset Needs | `opennt-mvdm-host` byte-exact mirror, T276 file ledger, package/build ledgers and PowerShell text-processing facilities. |
-| Reporting Requirements | Exact source/build-control/edge counts, unresolved include spellings, observed package cycles, parser limits and S3 handoff to reached-symbol/interface expansion. |
-| Stop Conditions | An input cannot map to a verified file-ledger row, generated evidence would infer a linkable build from textual data, or source modification would be needed. |
-| Exit Criteria | Reproducible per-file build/input and direct-include evidence exists for all relevant selected files; package/build ledgers gain only observed facts; evidence and review are committed/pushed. |
+| Verification | Account for every selected declaration file; preserve file/line/raw-declaration evidence; reject duplicate candidate IDs; retain the twelve family debt rows and do not overwrite their `unexpanded` status. |
+| Expected Markers | Textual declaration candidates are `observed`; reached caller, final owner, adapter, composition and x86/x64 decisions remain `unreviewed`. |
+| Asset Needs | `opennt-mvdm-host` byte-exact mirror, T276 file/interface ledgers and PowerShell text-processing facilities. |
+| Reporting Requirements | Exact declaration-file/candidate counts, parser limitations, declarations lacking unambiguous lexical names and S4 handoff to caller-to-interface resolution. |
+| Stop Conditions | An input cannot map to a verified file-ledger row, generated evidence would infer reachability/availability from a declaration, or source modification would be needed. |
+| Exit Criteria | Reproducible declaration provenance exists for all selected headers/inc files and interface tracker retains only evidence-neutral candidate rows; evidence and review are committed/pushed. |
 | Original Owner Request | “好的 开始审计任务”。 |
-| Similar-Issue Sweep | Build-control provenance, translation-unit identity, include spelling/resolution, package edge cardinality, cycles, duplicate IDs and accidental build/composition claims. |
+| Similar-Issue Sweep | Declaration-file provenance, `extern` lexical forms, multiline declarations, candidate naming, duplicate IDs and accidental reachability/availability claims. |
 
 **S1 closure:** the clean source topology initially contained thirteen
 production roots and no premature production service body. The
@@ -82,6 +82,14 @@ recorded as not observed by this literal parser, pending build-description and
 symbol analysis.  See [T276 S2 build-input evidence](etc/operations/m0-t276-s2-build-input-include-graph-001.md).
 The next S expands reached declarations and external interfaces; it does not
 enable a package merely because a textual include was observed.
+
+**T276 S3 closure:** all 857 selected declaration files were scanned into
+4,803 source-located lexical `extern` candidates, while the twelve historical
+family debts remain explicitly unexpanded.  These are provenance records only:
+they do not assert caller reachability, ABI availability, adapter ownership or
+buildability.  See [T276 S3 declaration evidence](etc/operations/m0-t276-s3-interface-declaration-baseline-001.md).
+The next S must resolve actual translation-unit callers against these candidates
+and record ambiguities rather than guessing a package owner.
 
 ### M0 T275 S1 — Complete interface and reuse ledger
 
