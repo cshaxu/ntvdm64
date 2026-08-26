@@ -21,9 +21,11 @@ All paths remain original-host mirror evidence and none is enabled.
   bounded guest-byte UMB seam. Until that seam is proved, the source remains
   machine-profile-gated and preserves its original failure disposition.
 - `i386/xmsmem86.c` casts 32-bit values to host addresses and calls NT virtual
-  memory/RtlMoveMemory. That representation is invalid as a portable x86/x64
-  host contract, so this architecture body is explicitly excluded rather than
-  adapted by leaking a host pointer through a BOP or guest register.
+  memory/RtlMoveMemory. Its three exported contracts are not discarded:
+  `adapter-softpc` supplies the same names, parameters and result semantics,
+  while the session guest-memory mapping manager resolves the 32-bit values to
+  checked Bochs guest ranges. This applies on both x86 and x64; no host pointer
+  passes through a BOP or guest register.
 - `suballoc` remains an independently audited original support prerequisite;
   XMS does not receive a project-authored allocator.
 
@@ -59,4 +61,5 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass `
 ```
 
 Expected result: 15 original paths and eight named, non-enabled interface
-families, including explicit direct-pointer and UMB machine gates.
+families, including an explicit mapping-manager replacement and UMB machine
+gate.

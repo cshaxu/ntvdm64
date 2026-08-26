@@ -8,5 +8,5 @@ if ($rows.Count -ne 8) { throw "Expected eight XMS interface families, found $($
 if (@($rows | Group-Object interface_id | Where-Object Count -ne 1).Count -ne 0) { throw 'XMS interface IDs must be unique.' }
 if (@($rows | Where-Object { [string]::IsNullOrWhiteSpace($_.owner) -or [string]::IsNullOrWhiteSpace($_.source_paths) }).Count -ne 0) { throw 'Every XMS interface family requires an owner and source evidence.' }
 if (@($rows | Where-Object state -ne 'provisional-not-enabled').Count -ne 0) { throw 'S14 may not enable an XMS interface.' }
-if (@($rows | Where-Object { $_.interface_id -eq 'XMS-IF-07' -and $_.disposition -eq 'architecture/profile exclusion' }).Count -ne 1) { throw 'The direct host-address path must remain an explicit exclusion.' }
+if (@($rows | Where-Object { $_.interface_id -eq 'XMS-IF-07' -and $_.disposition -eq 'same-shaped mapping-manager replacement prerequisite' }).Count -ne 1) { throw 'The direct-address backend must require mapping-manager replacement.' }
 Write-Output 'T276 S14 XMS interface-family verification passed: 8 rows.'

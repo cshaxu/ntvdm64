@@ -288,8 +288,9 @@ Redirector prerequisites; no provider is enabled.
 **T276 S14 P1:** all 15 original `xms.486` paths have one non-enabled
 disposition. The exact package contains six top-level literal XMS sources, one
 separately selected i386 source, one profile-unselected RISC source, one public
-header and six build descriptions. `xmsmem86.c` is an explicit historical
-direct-host-address exclusion rather than an x64 pointer workaround.
+header and six build descriptions. `xmsmem86.c` requires a same-shaped
+mapping-manager replacement: its original three exported functions preserve
+their contract but resolve 32-bit values to checked Bochs guest ranges.
 
 **T276 S14 P2:** XMS reaches eight owner boundaries: XMS BOP dispatch, A20,
 extended-memory/block move, UMB, INT 15, suballoc, historical direct virtual

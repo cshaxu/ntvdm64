@@ -21,7 +21,7 @@ $contracts = @{
     'xms.486/xmsdisp.c' = @('xms-service-dispatch', 'adapter-bop; adapter-softpc', 'original XMS service dispatch and unsupported-service failure route; selector/service meanings remain source-owned', 'package-led interface review')
     'xms.486/xmsmisc.c' = @('xms-system-information-and-int15-hook', 'adapter-softpc; adapter-bochs; session', 'original system-page, extended-memory and INT 15 hook/provider logic; IVT and interrupt effects require machine seam proof', 'package-led machine-seam review')
     'xms.486/xmsumb.c' = @('xms-umb-services', 'adapter-softpc; adapter-bochs; session', 'original UMB list, request and release control flow; a durable bounded guest-byte/UMB seam is required before enablement', 'machine-profile-gated review')
-    'xms.486/i386/xmsmem86.c' = @('xms-i386-direct-address-memory-routine', 'adapter-softpc; adapter-bochs', 'historical x86 routine passes ULONG values as direct host addresses to NT virtual memory and RtlMoveMemory; preserve as mirror evidence but do not expose that representation on x64', 'architecture-specific direct-pointer exclusion')
+    'xms.486/i386/xmsmem86.c' = @('xms-i386-direct-address-memory-routine', 'session guest-memory mapping manager; adapter-softpc; adapter-bochs', 'historical x86 routine passes ULONG values as direct host addresses to NT virtual memory and RtlMoveMemory; retain its three same-shaped exported contracts, but resolve their values through the session mapping-manager into checked Bochs guest ranges', 'same-shaped mapping-manager replacement prerequisite')
     'xms.486/xmsmemr.c' = @('xms-risc-memory-routine', 'adapter-softpc; adapter-bochs', 'historical non-i386 memory-management routine; not selected by the x86 original profile and retains only source/contract evidence', 'profile/build-unobserved exclusion')
 }
 
@@ -47,7 +47,7 @@ function Get-LexicalFamilies {
     $families = [System.Collections.Generic.List[string]]::new()
     if ($text -match '(?i)(xmssvc\.h|xmsexp\.h|\bXMSDispatch\b)') { $families.Add('adapter-bop (XMS service ABI lexical surface)') }
     if ($text -match '(?i)(softpc\.h|\bsas_|\bSim32|\bGetVDMAddr|\bget[A-Z]|\bset[A-Z]|\bUpdateKbdInt15)') { $families.Add('adapter-softpc (SoftPC/SAS/guest-state lexical surface)') }
-    if ($text -match '(?i)(NtAllocateVirtualMemory|NtFreeVirtualMemory|RtlMoveMemory|VdmAllocateVirtualMemory)') { $families.Add('adapter-win32 (historical virtual-memory lexical surface)') }
+    if ($text -match '(?i)(NtAllocateVirtualMemory|NtFreeVirtualMemory|RtlMoveMemory|VdmAllocateVirtualMemory)') { $families.Add('same-shaped mapping-manager replacement (historical virtual-memory lexical surface)') }
     if ($text -match '(?i)(mvdm\.h|\bVDM(?:ForWOW|Addr)|\bExtMemSA)') { $families.Add('session (VDM state/lifecycle lexical surface)') }
     if ($text -match '(?i)(suballoc\.h|\bSA(?:Initialize|Alloc|Free|Realloc))') { $families.Add('opennt-mvdm-support (suballoc lexical surface)') }
     if ($text -match '(?i)(ReserveUMB|UMB_OWNER|\bUMB\b)') { $families.Add('adapter-softpc/adapter-bochs (UMB machine-range lexical surface)') }
