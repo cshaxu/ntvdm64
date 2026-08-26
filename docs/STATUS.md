@@ -44,6 +44,12 @@ waves after the queue-head package/symbol tracker closes.
 | Original Owner Request | “好的 开始审计任务”。 |
 | Similar-Issue Sweep | Redirector protocol/transport, DOS file/handle semantics, COMMAND child I/O, host Win32/network calls, session lifecycle and adapter-redir boundary. |
 
+**S21 closure:** all 25 selected `vdmredir` paths have reproducible non-enabled
+dispositions. Fifteen selected DLL provider bodies remain one owner package;
+any recovery retains its protocol ordering and uses only session-owned handles,
+`adapter-win32` and checked mapping-manager copies at the named boundaries.
+See the [S21 Redirector baseline](etc/operations/m0-t276-s21-vdmredir-package-disposition-baseline-001.md).
+
 **S20 closure:** all 25 selected `dpmi32` paths have reproducible non-enabled
 dispositions. Sixteen selected x86 bodies form one host-provider package; all
 guest addresses are constrained to the unique session mapping-manager lease or
