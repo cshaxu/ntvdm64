@@ -124,7 +124,18 @@ BOOLEAN NTAPI RtlFreeHeap(PVOID heap, ULONG flags, PVOID value) { (void)flags; r
 VOID NTAPI RtlInitString(PSTRING value, PCSZ text) { RtlInitAnsiString((PANSI_STRING)value, text); }
 VOID NTAPI RtlInitAnsiString(PANSI_STRING value, PCSZ text) { SIZE_T length = text == NULL ? 0u : strlen(text); if (value != NULL) { value->Buffer = (PCHAR)text; value->Length = (USHORT)(length > USHRT_MAX ? USHRT_MAX : length); value->MaximumLength = (USHORT)(value->Length == USHRT_MAX ? USHRT_MAX : value->Length + 1u); } }
 VOID NTAPI RtlInitUnicodeString(PUNICODE_STRING value, PCWSTR text) { SIZE_T length = text == NULL ? 0u : wcslen(text); if (value != NULL) { value->Buffer = (PWSTR)text; value->Length = (USHORT)(length > (USHRT_MAX / sizeof(WCHAR)) ? 0u : length * sizeof(WCHAR)); value->MaximumLength = (USHORT)(value->Length == 0u && length != 0u ? 0u : value->Length + sizeof(WCHAR)); } }
-NTSTATUS NTAPI RtlOemStringToUnicodeString(PUNICODE_STRING destination, PCOEM_STRING source, BOOLEAN allocate) { return opennt_support_convert_to_unicode(destination, source, CP_OEMCP, allocate); }
+NTSTATUS NTAPI RtlOemStringToUnicodeString(PUNICODE_STRING destination, PCOEM_STRING source, BOOLEAN allocate) {
+    OPENNT_SUPPORT_THREAD_STATE *state = opennt_support_thread();
+    /* DIVERGENCE(ADAPTER-WIN32-002): the reached OpenNT bodies reuse
+     * TEB.StaticUnicodeString as scratch after RtlInitUnicodeString has
+     * temporarily pointed it at a caller buffer. Restore adapter-private TLS
+     * capacity instead of exposing a real host TEB. */
+    if (!allocate && destination == &state->Teb.StaticUnicodeString) {
+        destination->Buffer = state->StaticBuffer;
+        destination->MaximumLength = (USHORT)sizeof(state->StaticBuffer);
+    }
+    return opennt_support_convert_to_unicode(destination, source, CP_OEMCP, allocate);
+}
 NTSTATUS NTAPI RtlAnsiStringToUnicodeString(PUNICODE_STRING destination, PCANSI_STRING source, BOOLEAN allocate) { return opennt_support_convert_to_unicode(destination, (PCOEM_STRING)source, CP_ACP, allocate); }
 NTSTATUS NTAPI RtlUnicodeStringToOemString(POEM_STRING destination, PCUNICODE_STRING source, BOOLEAN allocate) { return opennt_support_convert_from_unicode((PANSI_STRING)destination, source, CP_OEMCP, allocate); }
 NTSTATUS NTAPI RtlUnicodeStringToAnsiString(PANSI_STRING destination, PCUNICODE_STRING source, BOOLEAN allocate) { return opennt_support_convert_from_unicode(destination, source, CP_ACP, allocate); }

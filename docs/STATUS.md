@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T279 S2** — M0 T279 recovers the original low-dependency MVDM
+**Active: M0 T279 S3** — M0 T279 recovers the original low-dependency MVDM
 support-library closure after the physical re-root. It is Ordinary Mode with
 single-person dual-role review; no MVDM provider/BOP route is enabled by S1.
 
@@ -24,6 +24,24 @@ implementation subtasks are withdrawn and re-enter only through owner-package
 waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
+
+### M0 T279 S3 — dual-architecture original-library build closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T279 S3`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T279/S2 is source-form closed and pushed as `f6a2a996`; enable only the audited support-library build islands. |
+| Objective | Build `oemuni.lib` and `suballoc.lib` from original selected bodies on x86 and x64 with Ninja/MSVC `/MT`; provide the four source-derived x64 OEM wrappers required to avoid pointer narrowing. |
+| Non-goals | No edit to original mirror sources, provider/BOP activation, raw pointer mapping, suballoc callback backend, host control plane, or guest trace. |
+| Reference Baseline | T279/S1 ledger, T279/S2 binding audit, original `sources` files and exact mirror hashes. |
+| Files And ABI Surface | Generated Ninja graph, `opennt-mvdm-support-overlay` four exported OEM wrappers, focused host-local contract fixture and formal build evidence. |
+| Verification | x86 links only original OEM bodies; x64 compiles renamed original unsafe bodies plus overlay exports; both build `oemuni.lib` and `suballoc.lib`; fixture proves four x64 wrapper contracts without native pointer narrowing. |
+| Stop Conditions | An overlay grows beyond the four audited functions, an original mirror is edited, a second mapping manager or guest pointer route appears, or a warning is suppressed to fabricate closure. |
+| Exit Criteria | Reproducible Ninja manifests build both architecture library forms with no duplicate exports; original hashes remain exact; x64 overlay behavior has local tests; warning disposition is explicit. |
+| Original Owner Request | “单人双角色模式执行队列任务”。 |
+| Similar-Issue Sweep | x86/x64 export uniqueness, offset reconstruction after OEM conversion, find-data header copy size, static-library link order, original compiler warnings, and excluded tests/tools. |
+
+### Closed packet reference — M0 T279 S2
 
 ### M0 T279 S2 — same-shaped Win32/RTL binding closure
 
