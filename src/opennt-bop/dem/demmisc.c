@@ -211,7 +211,6 @@ DWORD	BytesRead;
     return;
 }
 
-
 /* demDOSDispCall
  *
  * This SVC is made by System_Call upon entering the dos
@@ -649,3 +648,7 @@ VOID demWOWFiles ( VOID )
 	setAL (255);
     return;
 }
+
+/* DIVERGENCE(BOP-DIV-043): miscellaneous DEM product composition remains
+ * private overlay code at the original demmisc.c owner boundary. */
+#include "opennt-bop-overlay/dem/opennt_demmisc_composition.c"

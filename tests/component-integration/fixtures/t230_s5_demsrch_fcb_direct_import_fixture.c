@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
-#include "opennt-bop/dem/opennt_demsrch_fcb_composition.h"
+#include "opennt-bop-overlay/dem/opennt_dem_dispatch_composition.h"
+#include "opennt-bop-overlay/dem/opennt_demsrch_fcb_composition.h"
 #include "adapter-softpc/host_handle_manager.h"
 
 typedef struct fixture_context { uint8_t guest[0x20000]; runtime_host_handle_manager *handles; } fixture_context;

@@ -18,7 +18,7 @@
  * declarations while retaining the imported service bodies below. */
 /* DIVERGENCE(BOP-DIV-039): retain the imported body, but bind its historical
  * OEM/CCPU/VDMREDIR include closure through declared component facades. */
-#include "opennt_demfile_composition.h"
+#include "opennt-bop-overlay/dem/opennt_demfile_composition.h"
 
 extern PDOSSF pSFTHead;
 
@@ -1174,3 +1174,7 @@ ULONG   ulSFLink;
 
     return (HANDLE) pSftFlat[usSFN].SFT_NTHandle;
 }
+
+/* DIVERGENCE(BOP-DIV-039): file/label source-call composition remains private
+ * overlay code at the original demfile.c provider-family boundary. */
+#include "opennt-bop-overlay/dem/opennt_demfile_composition.c"

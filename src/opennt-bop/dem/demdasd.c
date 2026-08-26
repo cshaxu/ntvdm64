@@ -729,3 +729,7 @@ VOID demFloppyInit(VOID)
     setDI(DI);
     setES(ES);
 }
+
+/* DIVERGENCE(BOP-DIV-040): raw-DASD/IOCTL host composition is a private
+ * overlay shared by the original demdasd.c and demioctl.c provider family. */
+#include "opennt-bop-overlay/dem/opennt_demdasd_ioctl_composition.c"

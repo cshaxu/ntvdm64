@@ -1,4 +1,4 @@
-#include "opennt_demerror_lock_composition.h"
+#include "opennt-bop-overlay/dem/opennt_demerror_lock_composition.h"
 
 void demSetHardErrorInfo(void);
 void demRetry(void);

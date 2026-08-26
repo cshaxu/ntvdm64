@@ -266,6 +266,19 @@ private body is included only by original `xms.c`. Formal XMS source-mirror
 and A20 source-mirror fixtures relink and execute successfully. The remaining
 `opennt_xms_compat.h` header is active owner-split work.
 
+**S5 P14:** all eight non-original DEM composition `.c` bodies now live in
+the private BOP overlay and are included solely by their original DEM source
+unit (or its original dispatcher overlay). Refreshed formal DEM/COMMAND links
+and executions pass. The remaining 17 project-named inputs are compatibility
+headers requiring owner recovery, not provider/route bodies.
+
+**S5 P15:** ten DEM-private compatibility/composition headers have joined the
+eight P14 bodies below `opennt-bop-overlay`; the root now retains only seven
+project-named headers with production cross-component consumers. Focused
+formal DEM source-path rebuild and execution pass. Those seven headers and
+the remaining app-held selector/service composition are still active owner
+recovery work; this is not S5 closure.
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

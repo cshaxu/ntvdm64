@@ -6,7 +6,7 @@
  * recursive-CPU and raw-device module ABI; it never routes BOPs itself.
  */
 
-#include "opennt_demdasd_ioctl_compat.h"
+#include "opennt-bop/dem/opennt_demdasd_ioctl_compat.h"
 #include "opennt-host/softpc.new/host/inc/error.h"
 
 #include <stdlib.h>

@@ -31,9 +31,9 @@ standard, and do all previously extracted bodies now have a correct owner?
   production/test build root. This is a removal of an invalid production
   claim, not a loss of source evidence.
 - After the DPMI archive, DEM CCPU/SAS extraction, wrapper fold and COMMAND
-  overlay-boundary recovery, the live root contains 84 C/H/INC inputs: 59
-  original-name inputs and 25 remaining project-named compatibility inputs.
-  This is a reduction, not a closure claim: the 25 inputs are the concrete
+  overlay-boundary recovery, the live root contains 76 C/H/INC inputs: 59
+  original-name inputs and 17 remaining project-named compatibility headers.
+  This is a reduction, not a closure claim: the 17 inputs are the concrete
   residual owner ledger below.
 
 ## Focused regression after the corrective moves
@@ -49,6 +49,8 @@ standard, and do all previously extracted bodies now have a correct owner?
   results.
 - The XMS source-mirror and A20 source-mirror fixtures were also rebuilt and
   executed from `r004` after the `xms.c` boundary fold; both passed.
+- After the DEM body folds, refreshed `r004` formal linking and execution of
+  the DEM/COMMAND native-session fixtures passed unchanged.
 - Folding the two wrapper bodies initially exposed a real macro-scope collision
   in `softpc/nt_bop.c`; the formal compiler caught it and the file now keeps
   one definition each of `MS_bop_0` and `MS_bop_4`.  This validation proves
@@ -81,7 +83,9 @@ not pass the mirror test merely because a README row exists.
   to `adapter-softpc`, unavailable Win32/NTDLL spellings to `adapter-win32`,
   host capabilities to `opennt-host`, and only inseparable source-local
   modified fragments to `opennt-bop-overlay/dem` behind the original DEM
-  translation unit.
+  translation unit. The eight `.c` bodies have now been moved to those private
+  overlay boundaries and deleted from the mirror root; their 12 non-original
+  compatibility headers remain the active owner-split work.
   A controlled P11 experiment removed the eight `*_composition.c` bodies
   from the production library and supplied them only to direct-import tests.
   Formal linking of the unchanged native `MS_bop_0 -> DemDispatch` fixture
@@ -129,3 +133,20 @@ is complete: the DEM copied-frame/CCPU-SAS facade and direct context now
 belong to `adapter-softpc`; they are compiled there and no longer reside in
 the mirror root. Their remaining source-specific span-selection logic is the
 next split, rather than a claim that the facade is already fully generic.
+
+## P15 follow-up: DEM-private declaration isolation
+
+Ten project-named DEM declaration surfaces had no production consumer outside
+the corresponding DEM mirror units: `opennt_dem_common_compat.h`, the
+dispatcher/directory/error/file/GSET/search composition headers, and the
+file/GSET/search compatibility headers. They now live in
+`opennt-bop-overlay/dem/` with the P14 bodies. Original DEM units include them
+only as registered private boundaries; focused direct-import fixtures use them
+only to compile the matching mirror source. A formal Ninja rebuild and
+execution of the DEM native-session and direct-dispatch fixtures passed.
+
+The residual mirror-root set is seven cross-component headers: COMMAND
+composition/PIF, DEM DASD/misc compatibility, VDMREDIR dispatch/mailslot
+compatibility and XMS compatibility. They cannot be moved privately because
+current production `app` code includes them. Their required disposition is API
+ownership recovery, not another path-only move.

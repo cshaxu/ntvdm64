@@ -11,7 +11,7 @@
  * removed NTVDM product composition.  opennt_dem_dispatch_composition.h supplies only the same
  * declarations and the typed checked-call entry boundary; the table, dispatch
  * order, CurrentISVC and original ordinary-return bodies remain unchanged. */
-#include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
+#include "opennt-bop-overlay/dem/opennt_dem_dispatch_composition.h"
 #include <stdio.h>
 
 #if DBG
@@ -102,3 +102,7 @@ VOID demSetV86KernelAddr(VOID)
 {
     return;
 }
+
+/* DIVERGENCE(BOP-DIV-090): source-derived checked-call composition remains
+ * private overlay code at the original DEM dispatcher boundary. */
+#include "opennt-bop-overlay/dem/opennt_dem_dispatch_composition.c"

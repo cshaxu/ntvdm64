@@ -3,7 +3,7 @@
 
 /* Compatibility surface for directly imported OpenNT demerror.c/demlock.c.
  * Diagnostics determine each missing historic binding before it is admitted. */
-#include "opennt_demdasd_ioctl_compat.h"
+#include "opennt-bop/dem/opennt_demdasd_ioctl_compat.h"
 
 /* demerror.c is the original owner of demClientError.  Earlier imports used
  * the temporary demhndl fallback macro; remove it here so demlock.c binds to

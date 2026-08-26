@@ -4,7 +4,7 @@
 /* Compatibility surface for directly imported OpenNT demmisc.c.  The
  * imported translation unit remains the DEM owner; this seam contains only
  * historic product-host bindings that cannot compose with typed bx-vdm. */
-#include "opennt_demerror_lock_composition.h"
+#include "opennt-bop-overlay/dem/opennt_demerror_lock_composition.h"
 #include "adapter-win32/facade/opennt_error_dialog_facade.h"
 
 extern BOOL IsFirstCall;

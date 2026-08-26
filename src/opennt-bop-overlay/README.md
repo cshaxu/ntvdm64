@@ -1,8 +1,11 @@
 # opennt-bop-overlay
 
-Private source bodies for registered OpenNT BOP mirror divergences. This root
-has no public ABI and is included only by the matching `opennt-bop` mirror
-translation unit; no adapter, host, session or app source may include it.
+Private source bodies and declaration-only compatibility surfaces for
+registered OpenNT BOP mirror divergences. This root has no public production
+ABI and is included only by the matching `opennt-bop` mirror translation unit;
+no adapter, host, session or app source may include it. Focused direct-import
+fixtures may include its declarations solely to compile the matching mirror
+translation unit.
 
 | ID | Original definition purpose | Private divergence | Mirror boundary |
 | --- | --- | --- | --- |
@@ -24,3 +27,10 @@ translation unit; no adapter, host, session or app source may include it.
 | `BOP-DIV-108` | `nt_mouse.c:host_mouse_install1` begins the NT4 mouse product shell. | The admitted headless source fragment publishes only the resident INT 33h vector. | `softpc/nt_mouse.c` includes this private body only. |
 | `BOP-DIV-109` | `printer_.c:printer_io` includes device and monitor product paths. | The admitted fragment keeps only source-ordered LPT open/close lifecycle. | `softpc/printer_.c` includes this private body only. |
 | `BOP-DIV-110` | `keybd_io.c:UpdateKbdInt15` and `nt_bop.c:MS_bop_F` require keyboard/PPI/timer/ICA composition. | The admitted fragments keep only checked IVT/vector publication. | `softpc/keybd_io.c` and `softpc/nt_bop.c` include these private bodies only. |
+| `BOP-DIV-038` | `demdir.c` needs the historical DEM/OEM/CCPU composition to invoke its unchanged provider functions. | The original product call frame cannot be linked unchanged. | `dem/demdir.c` includes private `dem/opennt_demdir_composition.c`; the body supplies only checked invocation glue. |
+| `BOP-DIV-039`, `BOP-DIV-051`, `BOP-DIV-089` | `demfile.c`/`demlabel.c` use historical VDMREDIR import binding and file-provider call state. | The dynamic NT4 DLL product shell is unavailable in this composition. | `dem/demfile.c` includes private `dem/opennt_demfile_composition.c`; binding remains source-shaped and bounded. |
+| `BOP-DIV-040`, `BOP-DIV-046`, `BOP-DIV-054`, `BOP-DIV-055` | `demdasd.c`/`demioctl.c` require raw disk, recursive execution and FDC-related product helpers. | Those helpers cross unavailable machine/device and host ABI boundaries. | `dem/demdasd.c` includes private `dem/opennt_demdasd_ioctl_composition.c`; unsupported machine branches retain their explicit failure. |
+| `BOP-DIV-047` | `demerror.c`/`demlock.c` require copied hard-error state and NTDLL helper closure. | The NT4 global SAS/NTDLL product closure cannot be linked directly. | `dem/demerror.c` includes private `dem/opennt_demerror_lock_composition.c`. |
+| `BOP-DIV-042`–`BOP-DIV-045` | `demmisc.c` reaches VDD/debugger/floppy product paths. | Their product brokers are outside the admitted composition. | `dem/demmisc.c` includes private `dem/opennt_demmisc_composition.c`, which preserves source failure/defer semantics. |
+| `BOP-DIV-053` | `demsrch.c`/`demfcb.c` reach the VDD user-hook product list. | A new VDD callback broker is not admitted. | `dem/demsrch.c` includes private `dem/opennt_demsrch_fcb_composition.c`; the unavailable callback is not fabricated. |
+| `BOP-DIV-090` | `demdisp.c` owns original service-table globals and source dispatch ordering. | The checked-call entry wrapper exceeds a mirror-local edit. | Private `dem/opennt_dem_dispatch_composition.c` is included by the original dispatcher overlay, which remains the sole root boundary. |

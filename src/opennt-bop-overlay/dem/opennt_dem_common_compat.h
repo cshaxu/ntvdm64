@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <windows.h>
 
-#include "opennt_demmisc_compat.h"
+#include "opennt-bop/dem/opennt_demmisc_compat.h"
 
 /* OpenNT's DEM sources were compiled with their DBG surface available: other
  * directly imported owners call demPrintMsg unconditionally.  The current

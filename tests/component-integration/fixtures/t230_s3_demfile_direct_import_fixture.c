@@ -2,8 +2,8 @@
 #include <string.h>
 #include <windows.h>
 
-#include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
-#include "opennt-bop/dem/opennt_demfile_composition.h"
+#include "opennt-bop-overlay/dem/opennt_dem_dispatch_composition.h"
+#include "opennt-bop-overlay/dem/opennt_demfile_composition.h"
 #include "adapter-softpc/host_handle_manager.h"
 
 typedef struct fixture_context {

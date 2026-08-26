@@ -5,7 +5,7 @@
  * APIs.  They do not create a virtual drive model or carry retired mutation policy.
  */
 
-#include "opennt_demgset_composition.h"
+#include "opennt-bop-overlay/dem/opennt_demgset_composition.h"
 
 void demSetDefaultDrive(void);
 void demGetBootDrive(void);

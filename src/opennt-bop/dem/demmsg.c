@@ -16,7 +16,7 @@
  * The historical demmsg.h/dem.h include closure is supplied by
  * opennt_dem_common_compat.h; no message selection or debug-output logic is replaced. */
 #include <stdio.h>
-#include "opennt_dem_common_compat.h"
+#include "opennt-bop-overlay/dem/opennt_dem_common_compat.h"
 
 PCHAR aMsg [] = {
     "DOS Location Not Found. Using Default.\n",

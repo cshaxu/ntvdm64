@@ -21,7 +21,7 @@
  * imported FCB algorithms remain below unchanged. */
 /* DIVERGENCE(BOP-DIV-052): shared source-body composition preserves the
  * original body while separating historical host dependency owners. */
-#include "opennt_demsrch_fcb_composition.h"
+#include "opennt-bop-overlay/dem/opennt_demsrch_fcb_composition.h"
 
 #define DOT '.'
 #define QMARK '?'

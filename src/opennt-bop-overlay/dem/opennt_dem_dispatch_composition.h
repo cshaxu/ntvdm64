@@ -7,7 +7,7 @@
  * composition.  This seam supplies only the declared DEM bodies and the
  * bounded typed-call bridge; it performs no BOP classification. */
 
-#include "opennt-bop/dem/opennt_demerror_lock_composition.h"
+#include "opennt-bop-overlay/dem/opennt_demerror_lock_composition.h"
 
 #define SVC_DEMLASTSVC 0x49u
 #define DEMSVCTRACE 0u

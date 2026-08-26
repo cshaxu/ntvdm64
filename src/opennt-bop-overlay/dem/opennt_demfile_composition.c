@@ -2,7 +2,7 @@
  * demlabel.c.  Historical OEM calls are supplied by adapter-win32 and the
  * Redirector protocol stays in its lower host-capability owner. */
 
-#include "opennt_demfile_composition.h"
+#include "opennt-bop-overlay/dem/opennt_demfile_composition.h"
 /* Project-only static binding for the original DLL-import pointer shape. */
 BOOLEAN runtime_vr_initialized_provider(VOID);
 

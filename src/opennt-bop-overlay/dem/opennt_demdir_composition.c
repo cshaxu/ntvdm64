@@ -2,7 +2,7 @@
  * The OEM directory calls retain their historical spelling but are supplied
  * by adapter-win32; this unit owns only source-body selection and scoped
  * copied CPU/guest-memory invocation. */
-#include "opennt_demdir_composition.h"
+#include "opennt-bop-overlay/dem/opennt_demdir_composition.h"
 
 void demCreateDir(void);
 void demDeleteDir(void);

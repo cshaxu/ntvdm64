@@ -15,7 +15,7 @@
  * DIVERGENCE(BOP-DIV-038): the unavailable historical DEM/SoftPC/OEM include
  * closure is split into the source-shaped BOP composition and adapter-win32
  * OEM facade, without changing the imported provider body. */
-#include "opennt_demdir_composition.h"
+#include "opennt-bop-overlay/dem/opennt_demdir_composition.h"
 
 /* demCreateDir - Create a directory
  *
@@ -56,7 +56,6 @@ LPSTR	lpDir;
     setCF(0);
     return;
 }
-
 
 /* demDeleteDir - Create a directory
  *
@@ -182,3 +181,7 @@ CHAR   EnvVar[] = "=?:",ch;
 	setCF(0);
     return;
 }
+
+/* DIVERGENCE(BOP-DIV-038): checked source-call composition is private overlay
+ * code at the original demdir.c provider boundary. */
+#include "opennt-bop-overlay/dem/opennt_demdir_composition.c"

@@ -16,7 +16,7 @@
  * package shim; imported search algorithms remain below unchanged. */
 /* DIVERGENCE(BOP-DIV-041): retain the imported search body, but route its
  * historical Win32/NTDLL/VDD include surface through declared component APIs. */
-#include "opennt_demsrch_fcb_composition.h"
+#include "opennt-bop-overlay/dem/opennt_demsrch_fcb_composition.h"
 
 extern BOOL IsFirstCall;
 
@@ -2322,6 +2322,10 @@ PFFINDLIST GetFFindEntryByFindId(ULONG NextFFindId)
 
    return NULL;
 }
+
+/* DIVERGENCE(BOP-DIV-044): pathname/FCB source-call composition remains
+ * private overlay code at the original demsrch.c provider-family boundary. */
+#include "opennt-bop-overlay/dem/opennt_demsrch_fcb_composition.c"
 
 
 

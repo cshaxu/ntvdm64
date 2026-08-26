@@ -1,4 +1,4 @@
-#include "opennt_dem_dispatch_composition.h"
+#include "opennt-bop-overlay/dem/opennt_dem_dispatch_composition.h"
 
 static __declspec(thread) runtime_demhndl_call *g_demdisp_call;
 

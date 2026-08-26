@@ -13,7 +13,7 @@
  * dem/softpc headers bind CCPU, SAS and the NTVDM product shell.  Keep the
  * original body below intact and obtain only that ABI surface from this
  * neutral bx-vdm compatibility seam. */
-#include "opennt_demerror_lock_composition.h"
+#include "opennt-bop-overlay/dem/opennt_demerror_lock_composition.h"
 
 PVHE    pHardErrPacket;
 PSYSDEV pDeviceChain;
@@ -387,3 +387,7 @@ VOID demRestoreHardErrInfo (VOID)
     CurrentISVC =   RetryInfo.iSVC;
     return;
 }
+
+/* DIVERGENCE(BOP-DIV-041): hard-error/lock copied-state composition remains
+ * private overlay code at the original demerror.c owner boundary. */
+#include "opennt-bop-overlay/dem/opennt_demerror_lock_composition.c"

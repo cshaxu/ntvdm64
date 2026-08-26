@@ -13,7 +13,7 @@
  * neutral demfile shim for the unavailable historical host include closure. */
 /* DIVERGENCE(BOP-DIV-050): shared demfile composition owns the historical
  * OEM/CCPU include closure for this directly imported companion body. */
-#include "opennt_demfile_composition.h"
+#include "opennt-bop-overlay/dem/opennt_demfile_composition.h"
 
 USHORT demDeleteLabel(BYTE Drive)
 {

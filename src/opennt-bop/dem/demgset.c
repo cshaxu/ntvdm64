@@ -28,7 +28,7 @@
  */
 /* DIVERGENCE(BOP-DIV-040): preserve the imported body while separating its
  * BOP composition, public Win32 facades and host drive-admission dependency. */
-#include "opennt_demgset_composition.h"
+#include "opennt-bop-overlay/dem/opennt_demgset_composition.h"
 
 #define BOOTDRIVE_PATH "Software\\Microsoft\\Windows\\CurrentVersion\\Setup"
 #define BOOTDRIVE_VALUE "BootDir"
@@ -1021,3 +1021,7 @@ VOID demGetDPBList (VOID)
     //
     setBP(usDpbOffset);
 }
+
+/* DIVERGENCE(BOP-DIV-042): GSET checked-call composition remains private
+ * overlay code at the original demgset.c provider boundary. */
+#include "opennt-bop-overlay/dem/opennt_demgset_composition.c"

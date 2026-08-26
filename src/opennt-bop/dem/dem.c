@@ -8,7 +8,7 @@
  * The historical io.h/dem.h closure is unavailable outside the
  * NTVDM product shell; opennt_dem_common_compat.h supplies only its declarations and
  * exact diagnostic constants. */
-#include "opennt_dem_common_compat.h"
+#include "opennt-bop-overlay/dem/opennt_dem_common_compat.h"
 
 /* DemInit - DEM Initialiazation routine. (This name may change when DEM is
  *           converted to DLL). */

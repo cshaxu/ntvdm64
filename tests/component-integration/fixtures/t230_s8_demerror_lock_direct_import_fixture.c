@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "opennt-bop/dem/opennt_dem_dispatch_composition.h"
-#include "opennt-bop/dem/opennt_demerror_lock_composition.h"
+#include "opennt-bop-overlay/dem/opennt_dem_dispatch_composition.h"
+#include "opennt-bop-overlay/dem/opennt_demerror_lock_composition.h"
 
 extern SAVEDEMWORLD RetryInfo;
 

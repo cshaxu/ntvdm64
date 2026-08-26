@@ -4,7 +4,7 @@
  * replacement; pathname matching, FCB state and all search ordering remain
  * in the imported translation units. */
 
-#include "opennt_demsrch_fcb_composition.h"
+#include "opennt-bop-overlay/dem/opennt_demsrch_fcb_composition.h"
 
 void demFindFirst(void);
 void demFindFirstFCB(void);
