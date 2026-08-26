@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T276 S1** — Verify and classify every selected MVDM host mirror
-path before any package-level interface or build recovery is admitted.
+**Active: M0 T276 S2** — Derive the original translation-unit/build-input and
+package include graph before any interface recovery or enabled build is admitted.
 
 The current intermission architecture is the seventeen-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,25 +24,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S1 — file identity and package taxonomy baseline
+### M0 T276 S2 — original build-input and include-graph baseline
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T276 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | The owner approved the queue-head MVDM package dependency and interface-closure tracker after requiring independent file, interface, dependency, build/profile and exclusion ledgers. |
-| Objective | Reverify all 1,689 selected `opennt-mvdm-host` files against their canonical selected source; classify package, file kind and mirror identity without making an unsupported recovery/build claim. |
-| Non-goals | No provider/adaptor implementation, source-body edit, enabled build edge, interface-function conclusion, BOP behavior, Bochs change or guest execution. |
-| Reference Baseline | T274 source-supply union and host manifests; T275 interface debt inventory; initialized MVDM ledgers; source policy and tracker proposal. |
-| Files And ABI Surface | File-recovery and package-dependency ledgers, reproducible audit script/evidence, Status and documentation inventory. No runtime ABI changes. |
+| Identifier Mode | `M0 T276 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | The owner approved the tracker-led import order. S1 closed at `1628f8ca`; S2 does not enable a source body. |
+| Objective | Derive each selected source translation unit, original build-control declaration and direct include edge from the byte-exact mirror; classify edges as selected-MVDM, Win32/NT SDK, toolchain or unresolved textual input. |
+| Non-goals | No provider/adaptor implementation, source-body edit, enabled build edge, function-level recovery conclusion, BOP behavior, Bochs change or guest execution. |
+| Reference Baseline | T276 S1 identity evidence, 23 exact package mirrors, original `dirs`/`makefile`/`sources` inputs, initialized independent ledgers and source policy. |
+| Files And ABI Surface | Package-dependency and build/profile ledgers, reproducible extractor/evidence, Status and documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Rehash every selected source and destination; prove a one-to-one 1,689-path file ledger with no duplicate ID/path; verify all 23 package roots and file-kind counts. |
-| Expected Markers | `byte-exact-verified` or explicit mismatch/missing status for every path; no `composition_class` or build status promoted from `unreviewed` by this S. |
-| Asset Needs | Canonical T274 union ledger, local external OpenNT/OpenNT-4.5 source paths, `opennt-mvdm-host`, initialized tracker ledgers and PowerShell hash facilities. |
-| Reporting Requirements | Exact files/package/kind/hash counts, every mismatch or missing input, classification limitations and S2 handoff to source-symbol/interface expansion. |
-| Stop Conditions | A canonical selected source is missing, a host mirror hash differs, ledger identity is ambiguous, a package-root count differs from 23, or recovery behavior would be needed to continue. |
-| Exit Criteria | All 1,689 rows have reproducible identity evidence and package/file-kind taxonomy; every discrepancy is explicit; ledgers remain behavior-neutral; evidence and review are committed/pushed. |
+| Verification | Account for every selected `source` file and every selected build-control file; preserve raw source-location evidence; reject duplicate edge IDs; distinguish parsed textual edges from a resolved build closure. |
+| Expected Markers | Translation-unit/build-input inventory and package include edges are `observed`; all interface, final composition and x86/x64 build decisions remain `unreviewed`. |
+| Asset Needs | `opennt-mvdm-host` byte-exact mirror, T276 file ledger, package/build ledgers and PowerShell text-processing facilities. |
+| Reporting Requirements | Exact source/build-control/edge counts, unresolved include spellings, observed package cycles, parser limits and S3 handoff to reached-symbol/interface expansion. |
+| Stop Conditions | An input cannot map to a verified file-ledger row, generated evidence would infer a linkable build from textual data, or source modification would be needed. |
+| Exit Criteria | Reproducible per-file build/input and direct-include evidence exists for all relevant selected files; package/build ledgers gain only observed facts; evidence and review are committed/pushed. |
 | Original Owner Request | “好的 开始审计任务”。 |
-| Similar-Issue Sweep | Source path provenance, target path existence, package-root cardinality, build-control files, headers/resources, source extensions, duplicate tracker identities and accidental composition-status claims. |
+| Similar-Issue Sweep | Build-control provenance, translation-unit identity, include spelling/resolution, package edge cardinality, cycles, duplicate IDs and accidental build/composition claims. |
 
 **S1 closure:** the clean source topology initially contained thirteen
 production roots and no premature production service body. The
@@ -73,6 +73,15 @@ composition and build-profile dispositions deliberately remain `unreviewed`.
 See [T276 S1 file identity evidence](etc/operations/m0-t276-s1-file-identity-taxonomy-001.md).
 The next S expands original build descriptions, translation units and include
 edges; it does not recover interfaces or enable a package.
+
+**T276 S2 closure:** 612 selected source translation units, 127 selected
+original build-control inputs and 5,171 literal include edges are now recorded
+without macro expansion or artificial build claims.  Of the source files, 487
+are observed in 58 original NT `sources` descriptions; 125 are deliberately
+recorded as not observed by this literal parser, pending build-description and
+symbol analysis.  See [T276 S2 build-input evidence](etc/operations/m0-t276-s2-build-input-include-graph-001.md).
+The next S expands reached declarations and external interfaces; it does not
+enable a package merely because a textual include was observed.
 
 ### M0 T275 S1 — Complete interface and reuse ledger
 
