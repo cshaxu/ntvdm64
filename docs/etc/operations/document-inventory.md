@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2616 |
+| Documentation records | 2618 |
 | --- | --- |
-| Generated UTC | 2026-08-26T23:36:08Z |
+| Generated UTC | 2026-08-26T23:38:12Z |
 
 ## Entries
 
@@ -762,6 +762,8 @@ content-divergent entries.
 | etc/operations/m0-t280-s10-dem-ntioapi-reached-abi-ledger.tsv | indexed supporting material | 0427a7ca0c4960fb141e45a71d35568fbe8f6eac844b7e1fc1a00e4e0b0b395a |
 | etc/operations/m0-t280-s11-ntioapi-facade-evidence-001.md | indexed supporting material | bb5e50447ad41f285bd239bf68347f2ba249f860831a042dc9d5cc65d61b71bd |
 | etc/operations/m0-t280-s11-reached-ntioapi-facade-plan-001.md | indexed supporting material | 5bb1e65e2952d66f0c8b71e8ae9cda76a76884753db94f1f5775f2e000215f70 |
+| etc/operations/m0-t280-s12-dem-object-surface-evidence-001.md | indexed supporting material | ae201099404f15b01cd018fb0ad3380fcd1fc1b50cdf9a81d0e06d6990481d1f |
+| etc/operations/m0-t280-s12-dem-object-surface-ledger.tsv | indexed supporting material | 87512a6206fb2a48acc33dc7613601351a9525af6d872b28274cea66c8ef1e7c |
 | etc/operations/m0-t280-s12-dem-object-surface-plan-001.md | indexed supporting material | fc025125dfaa8b29da291baedbffae80d408fa79daf747a2168a6d777515930c |
 | etc/operations/m0-t280-s1-host-control-dem-workset-audit-001.md | indexed supporting material | 784c0bf2fdf1272d9a62c65b590c21b5040f55a33f4f52a68013bd9dd19b9388 |
 | etc/operations/m0-t280-s1-host-control-dem-workset-ledger.tsv | indexed supporting material | c7192301f8681aa5735e4e9520634db87139e55c318a2e23eae003ac05676a6d |
