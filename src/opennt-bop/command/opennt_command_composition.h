@@ -182,7 +182,6 @@ typedef struct runtime_command_misc_session {
     uint32_t scs_info_address;
     uint32_t is_dos_binary_address;
     uint32_t fd_access_address;
-    uint32_t console_initialized;
     uint32_t dos_session_id;
     CHAR comspec[64 + 8];
     USHORT comspec_bytes;
@@ -302,6 +301,7 @@ void TerminateVDM(void);
 extern BOOL fSoftpcRedirection;
 #define ASSERT(value) ((void)(value))
 LPVOID runtime_command_misc_get_vdm_addr(USHORT segment, USHORT offset);
+/* Same-shaped host-event export, implemented by opennt-host/nt_event.c. */
 void nt_init_event_thread(void);
 void cmdUpdateCurrentDirectories(BYTE current_drive);
 extern CHAR *lpszzCurrentDirectories;

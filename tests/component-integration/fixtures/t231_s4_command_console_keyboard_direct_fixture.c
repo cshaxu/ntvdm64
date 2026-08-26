@@ -15,13 +15,15 @@ static int invoke(fixture_context *c,runtime_exception_event *e,runtime_cpu_stat
 int main(void)
 {
     fixture_context c; runtime_exception_event e; runtime_cpu_state cpu;
-    runtime_cpu_result r; runtime_command_misc_session s;
+    runtime_cpu_result r; runtime_command_misc_session s; opennt_host_event_state event_state;
     HANDLE pipe_read, pipe_write; DWORD bytes; CHAR received[2];
     HKEY root,key; HANDLE kb16, keyboard; CHAR directory[MAX_PATH], kb16_path[MAX_PATH], keyboard_path[MAX_PATH], layout[KL_NAMELENGTH]; DWORD disposition;
     memset(&c,0,sizeof(c));event_initialize(&e);runtime_cpu_state_initialize(&cpu,RUNTIME_CPU_EXECUTION_REAL);runtime_command_misc_session_initialize(&s);
-    if(!invoke(&c,&e,&cpu,&r,&s,RUNTIME_COMMAND_MISC_INIT_CONSOLE)||s.console_initialized!=1u)return 1;
+    if(!invoke(&c,&e,&cpu,&r,&s,RUNTIME_COMMAND_MISC_INIT_CONSOLE))return 1;
+    opennt_host_event_snapshot(&event_state);if(event_state.console_initialized!=1u)return 1;
     bPifFastPaste=TRUE;cpu.edx=0u;cpu.ds=0x100u;cpu.esi=0u;cpu.ecx=0x80u;
-    if(!invoke(&c,&e,&cpu,&r,&s,RUNTIME_COMMAND_MISC_GET_KBD_LAYOUT)||r.cpu_delta.gpr16_values[2]!=0u||s.console_initialized!=1u)return 2;
+    if(!invoke(&c,&e,&cpu,&r,&s,RUNTIME_COMMAND_MISC_GET_KBD_LAYOUT)||r.cpu_delta.gpr16_values[2]!=0u)return 2;
+    opennt_host_event_snapshot(&event_state);if(event_state.console_initialized!=1u)return 2;
     s.redirection_token=1u;s.redirection_info.ri_hStdOut=CreateFileA("NUL",GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
     if(s.redirection_info.ri_hStdOut==INVALID_HANDLE_VALUE)return 3;
     cpu.eax=0u;cpu.ebx=1u;cpu.ecx=HANDLE_STDOUT;

@@ -33,3 +33,8 @@ void opennt_host_overlay_event_note_exit_request(void)
 {
     state.console_exit_requested = 1u;
 }
+
+void opennt_host_overlay_event_note_console_initialized(void)
+{
+    state.console_initialized = 1u;
+}

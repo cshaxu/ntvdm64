@@ -44,6 +44,19 @@ void opennt_host_event_note_exit_request(void)
     opennt_host_overlay_event_note_exit_request();
 }
 
+void opennt_host_event_note_console_initialized(void)
+{
+    opennt_host_overlay_event_note_console_initialized();
+}
+
+/* DIVERGENCE(HOST-DIV-030): the original thread bootstrap also binds VDD,
+ * display, BIOS-keyboard and console-window product facilities. The admitted
+ * single-session subset records only that source initialization was requested. */
+void nt_init_event_thread(void)
+{
+    opennt_host_event_note_console_initialized();
+}
+
 /* True source subset of OpenNT nt_event.c:1364. */
 void nt_block_event_thread(ULONG BlockFlags)
 {

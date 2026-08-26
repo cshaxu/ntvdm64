@@ -507,12 +507,6 @@ void TerminateVDM(void)
         longjmp(g_active_call->terminal_exit, 1);
     }
 }
-void nt_init_event_thread(void)
-{
-    if (g_active_call != NULL && g_active_call->call->session != NULL)
-        g_active_call->call->session->console_initialized = 1u;
-}
-
 LPVOID runtime_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
 {
     runtime_command_misc_active_call *active = g_active_call;

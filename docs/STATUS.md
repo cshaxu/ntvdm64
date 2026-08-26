@@ -106,6 +106,13 @@ regressions pass after the formal relink. The remaining CCPU/SAS,
 copied-address, worker callback, Redirector and terminal blocks remain
 distinct active S3 owner work. See [S3 P10 evidence](etc/evidence/m0-t271-s3-p10-command-win32-facade-completion-001.md).
 
+**S3 P11:** source-shaped `nt_init_event_thread` is now the reached
+`opennt-host/nt_event.c` subset, which records only the admitted one-session
+event initialization request. COMMAND no longer owns host-console state;
+the console/keyboard regression passes after the formal relink. VDD/display/
+BIOS/window/thread product-shell tails remain the existing explicit
+`HOST-DIV-030` deferral. See [S3 P11 evidence](etc/evidence/m0-t271-s3-p11-command-host-event-initialization-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored
