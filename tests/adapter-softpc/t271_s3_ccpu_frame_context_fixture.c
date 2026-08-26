@@ -1,15 +1,16 @@
 #include "adapter-softpc/ccpu_frame_context.h"
 
+#include <stdlib.h>
 #include <string.h>
 
 static int read_byte(void *state, uint32_t address, uint8_t *bytes,
     uint32_t byte_count)
 {
     uint8_t *memory = (uint8_t *)state;
-    if (memory == 0 || bytes == 0 || byte_count != 1u || address != 7u) {
+    if (memory == 0 || bytes == 0 || byte_count != 1u || address >= 8u) {
         return 0;
     }
-    bytes[0] = memory[7];
+    bytes[0] = memory[address];
     return 1;
 }
 
@@ -17,10 +18,10 @@ static int write_byte(void *state, uint32_t address, const uint8_t *bytes,
     uint32_t byte_count)
 {
     uint8_t *memory = (uint8_t *)state;
-    if (memory == 0 || bytes == 0 || byte_count != 1u || address != 7u) {
+    if (memory == 0 || bytes == 0 || byte_count != 1u || address >= 8u) {
         return 0;
     }
-    memory[7] = bytes[0];
+    memory[address] = bytes[0];
     return 1;
 }
 
@@ -28,12 +29,19 @@ int main(void)
 {
     uint8_t memory[8];
     uint8_t loaded = 0u;
+    uint8_t *multisz = 0;
+    uint32_t multisz_bytes = 0u;
     runtime_cpu_state cpu;
     runtime_cpu_result result;
     runtime_ccpu_frame_context context;
 
     memset(memory, 0, sizeof(memory));
     memory[7] = 0xa5u;
+    memory[1] = 'A';
+    memory[2] = 0u;
+    memory[3] = 'B';
+    memory[4] = 0u;
+    memory[5] = 0u;
     runtime_cpu_state_initialize(&cpu, RUNTIME_CPU_EXECUTION_REAL);
     runtime_cpu_result_pass_through(&result);
     cpu.eax = 0x11223344u;
@@ -59,7 +67,9 @@ int main(void)
     runtime_ccpu_set_cf(1);
     runtime_ccpu_set_ip(0x0200u);
     runtime_ccpu_sas_load(7u, &loaded);
-    if (loaded != 0xa5u || cpu.eip != 0x0200u ||
+    if (!runtime_ccpu_copy_multisz(1u, 7u, &multisz, &multisz_bytes) ||
+        multisz_bytes != 5u || memcmp(multisz, memory + 1u, 5u) != 0 ||
+        loaded != 0xa5u || cpu.eip != 0x0200u ||
         result.cpu_delta.gpr16_write_mask != 1u ||
         result.cpu_delta.gpr16_values[0] != 0x5566u ||
         result.cpu_delta.segment_write_mask != (1u << 3u) ||
@@ -67,9 +77,10 @@ int main(void)
         result.eflags_write_mask != RUNTIME_CPU_RESULT_EFLAGS_CF ||
         result.eflags_values != RUNTIME_CPU_RESULT_EFLAGS_CF ||
         !runtime_ccpu_set_pending() ||
-        result.disposition != RUNTIME_CPU_RESULT_PENDING) return 2;
+        result.disposition != RUNTIME_CPU_RESULT_PENDING) { free(multisz); return 2; }
     if (!runtime_ccpu_set_controlled_stop() ||
-        result.disposition != RUNTIME_CPU_RESULT_STOP) return 3;
+        result.disposition != RUNTIME_CPU_RESULT_STOP) { free(multisz); return 3; }
+    free(multisz);
     runtime_ccpu_frame_context_end();
     return runtime_ccpu_get_ax() == 0u ? 0 : 4;
 }

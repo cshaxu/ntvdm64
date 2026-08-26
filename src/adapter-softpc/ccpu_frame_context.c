@@ -1,5 +1,6 @@
 #include "ccpu_frame_context.h"
 
+#include <stdlib.h>
 #include <string.h>
 
 static __declspec(thread) runtime_ccpu_frame_context *g_context;
@@ -65,6 +66,46 @@ void runtime_ccpu_sas_load(uint32_t address, uint8_t *target)
     runtime_ccpu_frame_context *c = active_context();
     if (target == NULL) return;
     if (c == NULL || !c->guest_read(c->guest_state, address, target, 1u)) *target = 0xffu;
+}
+
+int runtime_ccpu_copy_multisz(uint32_t address, uint32_t maximum_bytes,
+    uint8_t **buffer_out, uint32_t *bytes_out)
+{
+    runtime_ccpu_frame_context *c = active_context();
+    uint8_t *buffer;
+    uint32_t index, capacity;
+    if (c == NULL || buffer_out == NULL || bytes_out == NULL ||
+        *buffer_out != NULL || maximum_bytes < 2u) return 0;
+    capacity = maximum_bytes < 256u ? maximum_bytes : 256u;
+    buffer = (uint8_t *)malloc(capacity);
+    if (buffer == NULL) return 0;
+    for (index = 0u; index < maximum_bytes; ++index) {
+        uint8_t value;
+        if (address > UINT32_MAX - index ||
+            !c->guest_read(c->guest_state, address + index, &value, 1u)) {
+            free(buffer);
+            return 0;
+        }
+        if (index == capacity) {
+            uint32_t next_capacity = capacity > maximum_bytes / 2u ?
+                maximum_bytes : capacity * 2u;
+            uint8_t *expanded = (uint8_t *)realloc(buffer, next_capacity);
+            if (expanded == NULL) {
+                free(buffer);
+                return 0;
+            }
+            buffer = expanded;
+            capacity = next_capacity;
+        }
+        buffer[index] = value;
+        if (index != 0u && buffer[index - 1u] == 0u && value == 0u) {
+            *buffer_out = buffer;
+            *bytes_out = index + 1u;
+            return 1;
+        }
+    }
+    free(buffer);
+    return 0;
 }
 int runtime_ccpu_set_pending(void)
 {

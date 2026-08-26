@@ -61,38 +61,6 @@ static uint32_t real_mode_address(USHORT segment, USHORT offset)
     return ((uint32_t)segment << 4) + (uint32_t)offset;
 }
 
-static int copy_guest_multisz(runtime_command_misc_active_call *active,
-    uint32_t address, uint8_t **buffer_out, uint32_t *bytes_out)
-{
-    uint8_t *buffer;
-    uint32_t index;
-    if (active == NULL || buffer_out == NULL || bytes_out == NULL || *buffer_out != NULL ||
-        address > 0x100000u - 2u) return 0;
-    buffer = (uint8_t *)malloc(256u);
-    if (buffer == NULL) return 0;
-    for (index = 0u; index < USHRT_MAX; ++index) {
-        uint8_t value;
-        if (address > 0x100000u - 1u - index ||
-            !active->call->guest_read(active->call->guest_state, address + index, &value, 1u)) {
-            free(buffer);
-            return 0;
-        }
-        if (index == 256u || (index > 256u && (index & (index - 1u)) == 0u)) {
-            uint8_t *expanded = (uint8_t *)realloc(buffer, index * 2u);
-            if (expanded == NULL) { free(buffer); return 0; }
-            buffer = expanded;
-        }
-        buffer[index] = value;
-        if (index != 0u && buffer[index - 1u] == 0u && value == 0u) {
-            *buffer_out = buffer;
-            *bytes_out = index + 1u;
-            return 1;
-        }
-    }
-    free(buffer);
-    return 0;
-}
-
 void runtime_command_misc_session_initialize(runtime_command_misc_session *session)
 {
     if (session == NULL) return;
@@ -476,7 +444,8 @@ LPVOID runtime_command_misc_get_vdm_addr(USHORT segment, USHORT offset)
             /* DIVERGENCE(BOP-DIV-036): the old 1 KiB probe was an adapter limit, not an
              * OpenNT environment contract.  Read a bounded DOS multisz and
              * retain only its exact copied extent for the CLI backend. */
-            if (!copy_guest_multisz(active, address, buffer, buffer_bytes)) return NULL;
+            if (!runtime_ccpu_copy_multisz(address, USHRT_MAX,
+                    buffer, buffer_bytes)) return NULL;
             return *buffer;
         }
         *buffer = (uint8_t *)calloc(maximum, 1u);

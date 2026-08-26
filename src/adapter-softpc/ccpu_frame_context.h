@@ -49,6 +49,8 @@ void runtime_ccpu_set_dx(uint16_t value); void runtime_ccpu_set_ds(uint16_t valu
 void runtime_ccpu_set_es(uint16_t value); void runtime_ccpu_set_ip(uint16_t value);
 void runtime_ccpu_set_cf(int value);
 void runtime_ccpu_sas_load(uint32_t address, uint8_t *target);
+int runtime_ccpu_copy_multisz(uint32_t address, uint32_t maximum_bytes,
+    uint8_t **buffer_out, uint32_t *bytes_out);
 int runtime_ccpu_set_pending(void);
 int runtime_ccpu_set_controlled_stop(void);
 
