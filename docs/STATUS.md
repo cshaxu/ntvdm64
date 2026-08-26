@@ -145,6 +145,14 @@ extensions explicit rather than pretending they are one direct library. See
 S11 begins the required file/interface disposition from W0/W1 rather than
 enabling a package on the first compile error.
 
+**T276 S11 P1:** the six W0/W1 roots now have complete provisional file,
+source-interface-family and lexical-call accounting: 140 selected paths, 14
+source-interface families and 2,270 call candidates.  Only the exact original
+`oemuni` library pair and `suballoc.c` remain runtime-support candidates;
+all original utility products are explicit profile exclusions.  This remains
+audit-only: no mirror source, provider body, adapter ABI or build edge is
+enabled.  See [T276 S11 W0/W1 disposition evidence](etc/operations/m0-t276-s11-w0-w1-disposition-baseline-001.md).
+
 ### M0 T275 S1 — Complete interface and reuse ledger
 
 | Field | Record |
