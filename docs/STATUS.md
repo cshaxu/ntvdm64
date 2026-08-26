@@ -258,6 +258,17 @@ remains in the OpenNT mirror, VDD requires the existing specialist adapter and
 typed machine requests, and Yoda stays debugger-profile-gated. No source or
 adapter is enabled; see the [P9 BOP/VDD/debugger baseline](etc/operations/m0-t276-s12-bop-vdd-debugger-interface-baseline-001.md).
 
+**T276 S12 P10:** all ten literal-build-unobserved auxiliary sources now have
+source-form dispositions. Alternative CCPU/A2CPU access and virtual-FDC bodies
+are explicit Bochs-replacement exclusions; error data, historical stubs,
+debug/settings UI, cleanup and configuration paths await their named original
+build/profile and owner prerequisite. No source or adapter is enabled.
+
+**T276 S12 P11:** the six detailed owner ledgers now cover all 56 original
+`host/src` source paths exactly once. The combined gate reruns all family
+checks, rejects omissions/duplicates and records the W3 package-wave handoff;
+see the [host/src completion baseline](etc/operations/m0-t276-s12-host-src-completion-baseline-001.md).
+
 ### M0 T275 S1 — Complete interface and reuse ledger
 
 | Field | Record |
