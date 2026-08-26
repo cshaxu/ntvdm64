@@ -19,6 +19,15 @@ void session_initialize(session *instance, uint32_t identity)
     instance->abi_version = SESSION_ABI_VERSION;
     instance->struct_bytes = (uint32_t)sizeof(*instance);
     instance->identity = identity;
+    mapping_manager_initialize(&instance->guest_memory_mappings,
+        MAPPING_MANAGER_GUEST_MEMORY,
+        MAPPING_MANAGER_RESERVE_ZERO | MAPPING_MANAGER_RESERVE_MAXIMUM);
+    mapping_manager_initialize(&instance->host_resource_mappings,
+        MAPPING_MANAGER_HOST_RESOURCE,
+        MAPPING_MANAGER_RESERVE_ZERO | MAPPING_MANAGER_RESERVE_MAXIMUM);
+    mapping_manager_initialize(&instance->completion_callback_mappings,
+        MAPPING_MANAGER_COMPLETION_CALLBACK,
+        MAPPING_MANAGER_RESERVE_ZERO | MAPPING_MANAGER_RESERVE_MAXIMUM);
 }
 
 int session_valid(const session *instance)
@@ -28,7 +37,13 @@ int session_valid(const session *instance)
         instance->struct_bytes == sizeof(*instance) &&
         instance->identity != 0u && instance->state <= SESSION_STATE_COMPLETED &&
         instance->teardown_count <= SESSION_MAX_TEARDOWNS &&
-        session_binding_count(instance) <= INT32_MAX;
+        session_binding_count(instance) <= INT32_MAX &&
+        mapping_manager_valid(&instance->guest_memory_mappings,
+            MAPPING_MANAGER_GUEST_MEMORY) &&
+        mapping_manager_valid(&instance->host_resource_mappings,
+            MAPPING_MANAGER_HOST_RESOURCE) &&
+        mapping_manager_valid(&instance->completion_callback_mappings,
+            MAPPING_MANAGER_COMPLETION_CALLBACK);
 }
 
 int session_activate(session *instance)
@@ -83,6 +98,9 @@ int session_dispose(session *instance)
         session_teardown teardown = instance->teardowns[index - 1u];
         teardown.function(teardown.context);
     }
+    mapping_manager_dispose(&instance->guest_memory_mappings);
+    mapping_manager_dispose(&instance->host_resource_mappings);
+    mapping_manager_dispose(&instance->completion_callback_mappings);
     memset(instance, 0, sizeof(*instance));
     return 1;
 }
@@ -107,4 +125,19 @@ int session_thread_unbind(session *instance)
 session *session_thread_current(void)
 {
     return thread_instance;
+}
+
+mapping_manager *session_guest_memory_mappings(session *instance)
+{
+    return session_valid(instance) ? &instance->guest_memory_mappings : NULL;
+}
+
+mapping_manager *session_host_resource_mappings(session *instance)
+{
+    return session_valid(instance) ? &instance->host_resource_mappings : NULL;
+}
+
+mapping_manager *session_completion_callback_mappings(session *instance)
+{
+    return session_valid(instance) ? &instance->completion_callback_mappings : NULL;
 }

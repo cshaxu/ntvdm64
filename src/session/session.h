@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#include "mapping_manager.h"
+
 #define SESSION_MAGIC UINT32_C(0x53455353)
 #define SESSION_ABI_VERSION UINT32_C(1)
 #define SESSION_MAX_TEARDOWNS 8u
@@ -38,6 +40,9 @@ typedef struct session {
     uint32_t teardown_count;
     volatile long binding_count;
     session_teardown teardowns[SESSION_MAX_TEARDOWNS];
+    mapping_manager guest_memory_mappings;
+    mapping_manager host_resource_mappings;
+    mapping_manager completion_callback_mappings;
 } session;
 
 #ifdef __cplusplus
@@ -52,6 +57,10 @@ int session_register_teardown(session *instance, session_teardown_fn function,
 int session_request_cancellation(session *instance, uint32_t reason);
 void session_complete(session *instance, uint32_t completion_code);
 int session_dispose(session *instance);
+
+mapping_manager *session_guest_memory_mappings(session *instance);
+mapping_manager *session_host_resource_mappings(session *instance);
+mapping_manager *session_completion_callback_mappings(session *instance);
 
 int session_thread_bind(session *instance);
 int session_thread_unbind(session *instance);
