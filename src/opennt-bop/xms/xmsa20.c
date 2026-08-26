@@ -61,7 +61,7 @@ VOID xmsA20 (VOID)
 VOID xmsEnableA20Wrapping(VOID)
 {
     sas_enable_20_bit_wrapping();
-    /* DIVERGENCE (T237 S5): original code dereferenced its saved host VDM
+    /* DIVERGENCE(BOP-DIV-111): original code dereferenced its saved host VDM
      * pointer here.  The shim publishes through a checked guest-byte seam. */
     runtime_xms_write_himem_a20_state(0);
 
@@ -87,7 +87,7 @@ VOID xmsDisableA20Wrapping(VOID)
 {
 
     sas_disable_20_bit_wrapping();
-    /* DIVERGENCE (T237 S5): see xmsEnableA20Wrapping. */
+    /* DIVERGENCE(BOP-DIV-111): see xmsEnableA20Wrapping. */
     runtime_xms_write_himem_a20_state(1);
 #if 0 // this is not necessay because the intel space(pointed by
       // HimemA20State) doesn't contain instruction

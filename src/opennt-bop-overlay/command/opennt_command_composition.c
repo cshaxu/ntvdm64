@@ -116,7 +116,7 @@ int runtime_command_misc_session_set_command_environment(
 
 void GetWowKernelCmdLine(void)
 {
-    /* DIVERGENCE (T236 S5): the directly imported cmdGetNextCmd preserves
+    /* DIVERGENCE(BOP-DIV-103): the directly imported cmdGetNextCmd preserves
      * OpenNT's VDMForWOW branch and its non-returning terminal convention.
      * The original helper publishes krnl386 startup input for the separate
      * WOWEXEC/WOW32/NE-loader product composition.  This one-session CLI has
@@ -195,7 +195,7 @@ static int snapshot_host_environment(runtime_command_misc_session *session)
             break;
         }
     }
-    /* DIVERGENCE (T236 S2): cmdXformEnvironment originally snapshots the
+    /* DIVERGENCE(BOP-DIV-106): cmdXformEnvironment originally snapshots the
      * NTVDM process environment. Preserve that source input as a copied,
      * session-owned public Win32 snapshot: the guest DOS multisz remains the
      * separate pEnv32 input and is never substituted for the host snapshot. */

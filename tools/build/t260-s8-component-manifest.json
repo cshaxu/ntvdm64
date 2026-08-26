@@ -208,6 +208,7 @@
         "src/adapter-softpc/guest_write_abi.c",
         "src/adapter-softpc/host_handle_manager.c",
         "src/adapter-softpc/idle_shim.c",
+        "src/adapter-softpc/interrupt06_provider.c",
         "src/adapter-softpc/instruction_window_abi.c",
         "src/adapter-softpc/interrupt_return_observation.cc",
         "src/adapter-softpc/ivt_watch.cc",
@@ -325,13 +326,11 @@
         "src/opennt-bop/dpmi/dpmiselr.c",
         "src/opennt-bop/softpc/emm_fncs.c",
         "src/opennt-bop/softpc/mem_size.c",
-        "src/opennt-bop/softpc/mouse_install1_headless.c",
-        "src/opennt-bop/softpc/nt_bop_config_done.c",
-        "src/opennt-bop/softpc/opennt_config_complete_composition.c",
-        "src/opennt-bop/softpc/printer_openclose.c",
-        "src/opennt-bop/softpc/spckbd_handoff.c",
+        "src/opennt-bop/softpc/nt_mouse.c",
+        "src/opennt-bop/softpc/nt_bop.c",
+        "src/opennt-bop/softpc/printer_.c",
         "src/opennt-bop/softpc/tape_io.c",
-        "src/opennt-bop/softpc/update_kbd_int15.c",
+        "src/opennt-bop/softpc/keybd_io.c",
         "src/opennt-bop/xms/suballoc.c",
         "src/opennt-bop/xms/opennt_xms_composition.c",
         "src/opennt-bop/xms/xms.c",
@@ -345,8 +344,7 @@
         "src/opennt-bop/command/opennt_command_environment_composition.c",
         "src/opennt-bop/command/opennt_command_composition.c",
           "src/opennt-bop/vdmredir/vrdisp.c",
-          "src/opennt-bop/vdmredir/vrmslot.c",
-        "src/opennt-bop/softpc/opennt_int06_provider.c"
+          "src/opennt-bop/vdmredir/vrmslot.c"
       ]
     },
     {
@@ -434,7 +432,9 @@
       "libraries": [
         "adapter-bop"
       ],
-      "platformLibraries": []
+      "platformLibraries": [
+        "user32.lib"
+      ]
     },
     {
       "name": "t271-s3-frame-transaction-fixture",
@@ -660,9 +660,7 @@
         "bochs-core",
         "adapter-bop"
       ],
-      "platformLibraries": [
-        "user32.lib"
-      ]
+      "platformLibraries": []
     },
     {
       "name": "t245-s18-dem-open-observation-fixture",
@@ -1155,8 +1153,8 @@
       ]
     },
     {
-      "name": "t225-s23-opennt-int06-provider-fixture",
-      "source": "tests/adapter-softpc/opennt_int06_provider_test.c",
+      "name": "interrupt06-provider-fixture",
+      "source": "tests/adapter-softpc/interrupt06_provider_test.c",
       "libraries": [
         "app",
         "opennt-bop",
@@ -1960,7 +1958,9 @@
         "bochs-core",
         "adapter-bop"
       ],
-      "platformLibraries": []
+      "platformLibraries": [
+        "user32.lib"
+      ]
     }
   ],
   "targets": {

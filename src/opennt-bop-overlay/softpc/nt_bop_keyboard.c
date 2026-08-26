@@ -3,7 +3,7 @@
  *   base/mvdm/softpc.new/host/src/nt_bop.c:MS_bop_F
  *   base/mvdm/softpc.new/base/keymouse/keybd_io.c:kb_setup_vectors
  *
- * DIVERGENCE (T243 S2): the complete keyboard translation unit owns CCPU/SAS
+ * DIVERGENCE(BOP-DIV-110): the complete keyboard translation unit owns CCPU/SAS
  * pointer state, host keyboard arbitration, timer/event threads, ICA control,
  * printer and video product composition.  None is composable into the
  * headless first profile.  This retained fragment preserves the original
@@ -51,7 +51,7 @@ void MS_bop_F(void)
     kb_setup_vectors();
     if (runtime_spckbd_handoff_failed()) return;
 
-    /* DIVERGENCE (T243 S2): AddrIretBopTable, ICA restart and event-thread
+    /* DIVERGENCE(BOP-DIV-110): AddrIretBopTable, ICA restart and event-thread
      * release are monitor/product-shell responsibilities. Native machine
      * lifecycle is already active; no guest IRQ is injected here. */
     setCF(1);

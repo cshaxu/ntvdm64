@@ -4,7 +4,7 @@
 
 #include "adapter-softpc/mechanical_action.h"
 #include "adapter-softpc/port_action.h"
-#include "opennt-bop/softpc/opennt_int06_provider.h"
+#include "adapter-softpc/interrupt06_provider.h"
 
 static int is_real_machine_bop(const struct runtime_generic_ud_event *event,
     uint8_t selector)

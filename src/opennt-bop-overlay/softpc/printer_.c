@@ -4,7 +4,7 @@
  *   base/mvdm/softpc.new/base/comms/printer_.c:printer_bop_openclose
  *   base/mvdm/softpc.new/host/src/nt_lpt.c:host_lpt_dos_open/close
  *
- * DIVERGENCE (T245 S7): the original translation unit proceeds after this
+ * DIVERGENCE(BOP-DIV-109): the original translation unit proceeds after this
  * early BOP switch into BDA/port I/O and may use monitor printer buffers and
  * host handles.  This package admits only the independent SI=1/2 lifecycle;
  * every other branch is marked unavailable instead of fabricating printer

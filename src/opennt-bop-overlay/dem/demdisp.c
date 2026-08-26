@@ -7,7 +7,7 @@
  */
 
 /* Direct import from src/opennt/base/mvdm/dos/dem/demdisp.c.
- * Divergence: the historical dem.h/softpc.h include closure belongs to the
+ * DIVERGENCE(BOP-DIV-090): the historical dem.h/softpc.h include closure belongs to the
  * removed NTVDM product composition.  opennt_dem_dispatch_composition.h supplies only the same
  * declarations and the typed checked-call entry boundary; the table, dispatch
  * order, CurrentISVC and original ordinary-return bodies remain unchanged. */

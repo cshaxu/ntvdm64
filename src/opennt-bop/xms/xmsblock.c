@@ -34,7 +34,7 @@
 VOID xmsAllocBlock (VOID)
 {
 BOOL Success;
-/* DIVERGENCE (T237): preserve the source's zero-size request behavior under
+/* DIVERGENCE(BOP-DIV-111): preserve the source's zero-size request behavior under
  * MSVC /WX; the historical uninitialized local is otherwise undefined. */
 ULONG BaseAddress = 0;
 ULONG size;
@@ -128,7 +128,7 @@ ULONG NewSize;
     size = getDX() * 1024;
     NewSize = getBX() * 1024;
     BaseAddress = getAX() * 1024;
-    /* DIVERGENCE (T237): source leaves this result undefined when the two
+    /* DIVERGENCE(BOP-DIV-111): source leaves this result undefined when the two
      * sizes match.  Preserve the intended original-base result explicitly. */
     NewAddress = BaseAddress;
     if(size != NewSize) {
@@ -180,7 +180,7 @@ ULONG NewSize;
 
 VOID xmsMoveBlock (VOID)
 {
-    /* DIVERGENCE (T237): i386 OpenNT treated guest physical addresses as
+    /* DIVERGENCE(BOP-DIV-111): i386 OpenNT treated guest physical addresses as
      * process pointers.  That is invalid on x64 and leaks a guest pointer
      * across the adapter boundary.  The shim reads the unchanged 12-byte
      * SS:BP descriptor through checked RAM and performs the same forward-copy

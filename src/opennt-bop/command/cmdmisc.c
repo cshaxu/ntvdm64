@@ -8,7 +8,7 @@
 
 /* OpenNT source: src/opennt/base/mvdm/dos/command/cmdmisc.c.
  *
- * Divergence: this first admitted slice is built without the retired NT4
+ * DIVERGENCE(BOP-DIV-013): this first admitted slice is built without the retired NT4
  * CCPU/SAS, VDD and PIF product composition.  opennt_command_composition.h supplies
  * the original register spellings, bounded guest spans, OEM environment API
  * and Direct host-drive capability only.  The unadmitted routines below are
@@ -675,7 +675,7 @@ LPSTR   lpszCS;
     lpszCS =    (LPVOID) GetVDMAddr ((USHORT)getDS(),(USHORT)getDX());
     strcpy(lpszComSpec,"COMSPEC=");
     strcpy(lpszComSpec+8,lpszCS);
-    /* Divergence: original Win32 used a 16-bit destination but its legacy
+    /* DIVERGENCE(BOP-DIV-016): original Win32 used a 16-bit destination but its legacy
      * headers did not diagnose this conversion.  The admitted shim bounds
      * the source string to 64 bytes, so the explicit cast preserves the
      * original 16-bit COMMAND layout under modern /W4 /WX. */

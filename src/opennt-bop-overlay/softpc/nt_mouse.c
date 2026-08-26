@@ -3,7 +3,7 @@
  *   base/mvdm/softpc.new/host/src/nt_mouse.c:host_mouse_install1
  *   base/mvdm/softpc.new/base/keymouse/mouse_io.c:mouse_install1
  *
- * DIVERGENCE (T245 S5): the historical host wrapper sets mouse_state and
+ * DIVERGENCE(BOP-DIV-108): the historical host wrapper sets mouse_state and
  * registers an IRQ9 EOI hook.  The full mouse_install1 body also owns INT71,
  * PIC masks, video hooks, a hardware reset, and host UI.  Those are a later
  * mouse-device/input package and cannot be silently enabled by a bootstrap

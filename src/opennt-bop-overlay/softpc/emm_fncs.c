@@ -2,7 +2,7 @@
  * Direct source mirror: src/opennt/base/mvdm/softpc.new/base/bios/emm_fncs.c
  * (`emm_init` only).
  *
- * DIVERGENCE (T245 S3): the historical translation unit draws EMS allocation
+ * DIVERGENCE(BOP-DIV-080): the historical translation unit draws EMS allocation
  * and PIF/configuration state from the NT4 SoftPC product shell.  That shell
  * cannot be independently composed and no EMS hardware is admitted here.
  * The shim therefore supplies its original no-pages condition.  The retained

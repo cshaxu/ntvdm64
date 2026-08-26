@@ -227,6 +227,19 @@ markers and five non-original SoftPC fragment inputs still inside the mirror
 root; both are mandatory remaining S5 remediation, so this is explicitly not
 closure. See [S5 P7 ledger](etc/evidence/m0-t271-s5-p7-family-compatibility-and-overlay-ledger-001.md).
 
+**S5 P8:** P7's remaining SoftPC fragment/marker defects are remediated:
+original-name mirror boundaries now include private source fragments, typed
+interrupt-06 mechanics belong to selector-blind `adapter-softpc`, and every
+remaining marker has a stable register ID. The formal five-fixture matrix,
+boundary script and production-tree gate pass. Final full-family verification
+and ledger refresh remain before S5 closure. See [S5 P8 evidence](etc/evidence/m0-t271-s5-p8-softpc-mirror-boundary-remediation-001.md).
+
+**S5 P9 / closure admission:** full source-path and private-overlay matrix passes;
+every remaining BOP mirror input has a registered source disposition, and no
+external overlay consumer or unregistered divergence marker remains. The S5
+technical exit evidence is ready for owner closure; see
+[P9 final matrix](etc/evidence/m0-t271-s5-p9-final-mirror-closure-matrix-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

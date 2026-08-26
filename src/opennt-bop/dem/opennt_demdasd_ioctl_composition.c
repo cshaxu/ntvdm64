@@ -148,7 +148,7 @@ BOOL nt_fdisk_init(BYTE drive, PBPB bpb, PDISK_GEOMETRY geometry)
     bpb->MediaID = 0xf8u; bpb->TrackSize = (WORD)geometry->SectorsPerTrack;
     bpb->Heads = (WORD)geometry->TracksPerCylinder;
     bpb->BigSectors = total_clusters * spc;
-    /* Divergence from the FAT-only FSCTL_QUERY_FAT_BPB in nt_fdisk.c: modern
+    /* DIVERGENCE(BOP-DIV-055): modern
      * fixed volumes can be NTFS/ReFS.  The existing OpenNT BPB contract is
      * populated from public Win32 geometry/free-space data, then its original
      * BDS/read/write/verify logic remains untouched in demdasd.c. */
@@ -164,7 +164,7 @@ BOOL nt_fdisk_init(BYTE drive, PBPB bpb, PDISK_GEOMETRY geometry)
     data->sectors_per_track = geometry->SectorsPerTrack;
     data->bytes_per_sector = geometry->BytesPerSector;
     data->num_cylinders = geometry->Cylinders;
-    /* Divergence from nt_fdisk.c's NtQueryInformationFile(
+    /* DIVERGENCE(BOP-DIV-055):
      * FileAlignmentInformation): this pinned historical public-header surface
      * cannot name that newer structure.  Buffered public volume handles do
      * not require caller alignment, so retain the original zero-alignment

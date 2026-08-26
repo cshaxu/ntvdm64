@@ -820,7 +820,7 @@ Notes:
 --*/
 {
     ULONG FirstBlock, LastBlock, CurrentBlock;
-    /* DIVERGENCE (T237): the two declared COMMIT_ACTION values both assign
+    /* DIVERGENCE(BOP-DIV-111): the two declared COMMIT_ACTION values both assign
      * Status, but MSVC cannot prove it.  Preserve the source-success default
      * for no-op ranges without changing either callback path. */
     NTSTATUS Status = STATUS_SUCCESS;

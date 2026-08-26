@@ -8,7 +8,7 @@
  */
 
 /* OpenNT source: src/opennt/base/mvdm/dos/command/cmdexec.c.
- * Divergence: the admitted binary classifier uses the narrow COMMAND binary
+ * DIVERGENCE(BOP-DIV-102): the admitted binary classifier uses the narrow COMMAND binary
  * shim for the unavailable CCPU/SAS/RTL include closure. */
 #define RUNTIME_COMMAND_EXEC_ADMIT_CHECK_BINARY 1
 #define RUNTIME_COMMAND_EXEC_ADMIT_LIFECYCLE 1
@@ -349,7 +349,7 @@ VOID cmdCreateProcess ( VOID )
     if (dwRet == 0 || dwRet == MAX_DIR)
 	CurDir = NULL;
 
-    /* DIVERGENCE (T236 S2): original code temporarily installs three
+    /* DIVERGENCE(BOP-DIV-102): original code temporarily installs three
      * guest-derived handles process-wide. Preserve its order, but bind them
      * only to the child through the active session's opaque handle table. */
     Status = runtime_command_worker_prepare_startup(&StartupInfo);
@@ -383,7 +383,7 @@ VOID cmdCreateProcess ( VOID )
 	}
 	else {
 
-	    /* DIVERGENCE (T236 S2): source arguments are ANSI. The narrow shim
+	    /* DIVERGENCE(BOP-DIV-102): source arguments are ANSI. The narrow shim
 	     * selects public CreateProcessA explicitly and records only the session
 	     * result needed to diagnose the detached worker boundary. */
 	    Status = runtime_command_create_process (
@@ -425,7 +425,7 @@ VOID cmdCreateProcess ( VOID )
     // one less 32 executable active
     Exe32ActiveCount--;
 
-    /* DIVERGENCE (T236 S2): this imported body now returns to the bounded
+    /* DIVERGENCE(BOP-DIV-102): this imported body now returns to the bounded
      * bx-vdm worker wrapper.  Its historical CCPU thread boundary is carried
      * by the fixed pending continuation, not an active BOP-call pointer. */
     return;
@@ -497,7 +497,7 @@ VOID cmdExec (VOID)
     PCHAR   pEnv;
     CHAR Buffer[MAX_PATH];
 
-    /* DIVERGENCE (T236 S2): the historical CCPU suspension returns through
+    /* DIVERGENCE(BOP-DIV-102): the historical CCPU suspension returns through
      * cmdExec32 after the worker finishes.  The finite machine re-enters the
      * BOP instruction, whose first pass has already converted the tail CR to
      * NUL.  Preserve source ordering by routing only that recorded pending

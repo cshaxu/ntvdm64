@@ -46,7 +46,7 @@ WORD	    DirSector;			// starting sector of directory
 DWORD	    DriveAddr;			// address of the corresponding driver
 BYTE	    MediaID;			// media ID
 BYTE	    FirstAccess;		// 0xFF if this DPB is first accessed
-/* Divergence from src/opennt/base/mvdm/dos/dem/demdasd.h: this is a DOS
+/* DIVERGENCE(BOP-DIV-096): this is a DOS
  * guest far-link, not a host pointer.  Retain its 32-bit guest width on x86
  * and x64; demgset.c has matching adjacent assignments. */
 DWORD	    Next;			// next DPB

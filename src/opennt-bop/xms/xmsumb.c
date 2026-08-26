@@ -34,7 +34,7 @@ Author:
 Revision History:
 
 --*/
-/* DIVERGENCE (T237): the original SoftPC include supplied raw SAS access.
+/* DIVERGENCE(BOP-DIV-111): the original SoftPC include supplied raw SAS access.
  * opennt_xms_compat.h supplies only the fixed-width, checked replacement
  * boundary through adapter-softpc. */
 
@@ -54,7 +54,7 @@ VOID  xmsInitUMB(VOID)
 {
     PVOID   Address;
     ULONG   Size;
-    /* DIVERGENCE (T237): zero-reservation UMB is valid for the declared
+    /* DIVERGENCE(BOP-DIV-111): zero-reservation UMB is valid for the declared
      * profile; initialize the prior-node cursor rather than retain undefined
      * first-insertion behavior under modern MSVC. */
     PXMSUMB xmsUMB = NULL, xmsUMBNew;
@@ -64,7 +64,7 @@ VOID  xmsInitUMB(VOID)
 	    // convert size in bytes to paragraphs
 	    xmsUMBNew->Size = (WORD) (Size >> 4);
 	    // convert linear address to paragraphs segment
-	    /* DIVERGENCE (T237): `Address` is host-private on x64.  The machine
+	    /* DIVERGENCE(BOP-DIV-111): `Address` is host-private on x64.  The machine
 	     * seam supplies only its declared 20-bit guest-linear projection. */
 	    xmsUMBNew->Segment = runtime_xms_linear_to_segment(Address);
 	    xmsUMBNew->Owner = 0;
@@ -79,7 +79,7 @@ VOID  xmsInitUMB(VOID)
 	    xmsUMB = xmsUMBNew;
     }
     xmsIsON = TRUE;
-    /* DIVERGENCE (T237 S5): retain the original AX:BX input and operation
+    /* DIVERGENCE(BOP-DIV-111): retain the original AX:BX input and operation
      * order, but bind it as a checked guest byte rather than a host pointer. */
     xmsEnableA20Wrapping();
 
@@ -119,7 +119,7 @@ ULONG	Size
     PXMSUMB xmsUMB, xmsUMBNew;
     WORD    Segment;
 
-    /* DIVERGENCE (T237): see xmsInitUMB's host-pointer projection note. */
+    /* DIVERGENCE(BOP-DIV-111): see xmsInitUMB's host-pointer projection note. */
     Segment = runtime_xms_linear_to_segment(Address);
     Size >>= 4;
 

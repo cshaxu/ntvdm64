@@ -1,4 +1,4 @@
-#include "opennt-bop/softpc/opennt_int06_provider.h"
+#include "adapter-softpc/interrupt06_provider.h"
 
 static int step(struct int06_provider_state *s, uint32_t kind, uint64_t address, uint8_t value, uint8_t read_value) {
   struct int06_provider_operation o;

@@ -2,7 +2,7 @@
  * Direct source fragment from:
  *   base/mvdm/softpc.new/base/keymouse/keybd_io.c:UpdateKbdInt15
  *
- * DIVERGENCE (T241 S2): the full translation unit owns PPI, keyboard, timer,
+ * DIVERGENCE(BOP-DIV-110): the full translation unit owns PPI, keyboard, timer,
  * mouse, video and host_simulate product state.  The two historical globals
  * are therefore staged by the named selector-blind IVT-watch shim around the
  * unchanged comparison/clear/update body below.

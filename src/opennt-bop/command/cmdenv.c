@@ -8,7 +8,7 @@
  */
 
 /* OpenNT source: src/opennt/base/mvdm/dos/command/cmdenv.c.
- * Divergence: the admitted init-environment body is composed through the
+ * DIVERGENCE(BOP-DIV-003): the admitted init-environment body is composed through the
  * narrow COMMAND environment shim rather than the historical CCPU/SAS/RTL
  * product include closure.  The original body retains all filtering, OEM
  * conversion, buffer-size and result rules. */

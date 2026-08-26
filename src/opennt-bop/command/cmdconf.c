@@ -6,7 +6,7 @@
  */
 
 /* OpenNT source: src/opennt/base/mvdm/dos/command/cmdconf.c.
- * Divergence: the historical CCPU/SAS/PIF include closure is unavailable in
+ * DIVERGENCE(BOP-DIV-001): the historical CCPU/SAS/PIF include closure is unavailable in
  * the standalone composition.  The COMMAND configuration shim supplies only
  * its checked guest span and named host-capability contracts; the original
  * preprocessor below remains the owner of all filtering and file logic. */

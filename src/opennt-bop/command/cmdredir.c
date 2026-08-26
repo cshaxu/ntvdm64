@@ -7,7 +7,7 @@
  */
 
 /* OpenNT source: src/opennt/base/mvdm/dos/command/cmdredir.c.
- * Divergence: only cmdGetStdHandle is admitted.  The shim replaces the
+ * DIVERGENCE(BOP-DIV-022): only cmdGetStdHandle is admitted.  The shim replaces the
  * historical CCPU include closure and transports session tokens, never raw
  * host pointers or truncated HANDLE values. */
 #include "opennt_command_composition.h"
@@ -253,7 +253,7 @@ USHORT iStdHandle;
 PREDIRCOMPLETE_INFO pRdrInfo;
 
     iStdHandle = getCX();
-    /* Divergence: AX:BX is a checked session token, rather than a host pointer. */
+    /* DIVERGENCE(BOP-DIV-022): AX:BX is a checked session token, rather than a host pointer. */
     pRdrInfo = runtime_command_misc_redirection_from_guest(
         ((ULONG)getAX() << 16) + (ULONG)getBX());
     if (pRdrInfo == NULL) { setCF(1); return; }

@@ -414,7 +414,7 @@ ULONG runtime_command_misc_redirection_token(PREDIRCOMPLETE_INFO info);
  * its original registry, file-presence and result algorithm. */
 #undef GetSystemDirectory
 #define GetSystemDirectory(buffer, bytes) runtime_command_misc_get_system_directory((buffer), (bytes))
-/* DIVERGENCE (T236): the NT4 environment carried hidden `=X:` current-drive
+/* DIVERGENCE(BOP-DIV-106): the NT4 environment carried hidden `=X:` current-drive
  * entries. Public modern process environments do not reliably expose those
  * entries, so preserve cmdUpdateCurrentDirectories' source order through a
  * checked session/process-current-directory fallback. */

@@ -21,7 +21,7 @@
 /*
  * Direct import from src/opennt/base/mvdm/dos/dem/demgset.c.
  *
- * Divergence: the historical include closure bound this DEM owner to
+ * DIVERGENCE(BOP-DIV-040): the historical include closure bound this DEM owner to
  * SoftPC/CCPU/SAS and the NT VDM product composition.  The local shim retains
  * the original spellings and exposes only the checked bx-vdm call boundary;
  * it does not replace any drive, DPB, date/time or machine-name algorithm.
@@ -514,7 +514,7 @@ SYSTEMTIME TimeDate;
     TimeDate.wYear  = (WORD)getCX();
     TimeDate.wMonth = (WORD)getDH();
     TimeDate.wDay   = (WORD)getDL();
-    /* Divergence from src/opennt/base/mvdm/dos/dem/demgset.c: the Direct
+    /* DIVERGENCE(BOP-DIV-040): the Direct
      * default still calls SetLocalTime, but this named host seam permits a
      * non-mutating fixture writer so source-register/result semantics can be
      * tested without changing the developer machine clock. */
@@ -567,7 +567,7 @@ SYSTEMTIME TimeDate;
 
 VOID demSetDTALocation (VOID)
 {
-    /* Divergence from src/opennt/base/mvdm/dos/dem/demgset.c: its four
+    /* DIVERGENCE(BOP-DIV-040): its four
      * CCPU/SAS mappings were persistent dereferenceable host pointers.  The
      * bx-vdm shim preserves the same DS:AX/DX/CX/SI registration contract in
      * session-owned typed storage, reading guest values through the checked
@@ -741,7 +741,7 @@ BYTE demGetDpbI(BYTE Drive, DPB UNALIGNED *pDPB)
 			    &FreeClusters
 			    ))
     {
-	/* Divergence from src/opennt/base/mvdm/dos/dem/demgset.c: this is a
+	/* DIVERGENCE(BOP-DIV-040): this is a
 	 * 16-bit guest DPB link, not a native pointer.  The shim's packed DPB
 	 * layout retains its original 32-bit guest representation on x86/x64. */
 	pDPB->Next = 0xFFFFFFFFu;
