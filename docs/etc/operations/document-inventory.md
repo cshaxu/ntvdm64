@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2555 |
+| Documentation records | 2557 |
 | --- | --- |
-| Generated UTC | 2026-08-26T20:14:07Z |
+| Generated UTC | 2026-08-26T20:16:20Z |
 
 ## Entries
 
@@ -728,6 +728,8 @@ content-divergent entries.
 | etc/operations/m0-t277-s4-dos-source-form-family-audit-001.md | indexed supporting material | 7e7ed88898d97ab65af0b2995029f7db595083ba2a223ef73db82d7a3a28807b |
 | etc/operations/m0-t277-s4-dos-source-form-family-plan-001.md | indexed supporting material | c063e4fd621c527fb96a2ab3c687cfb0ebc8165aab1cff5cde681fd3a36a31f7 |
 | etc/operations/m0-t277-s5-provider-candidate-evidence-001.md | indexed supporting material | 33c6939617b299805d5dd0882ede472b41f5103ae6b76e9332ff39747849a1d4 |
+| etc/operations/m0-t277-s5-softpc-host-control-disposition-ledger.tsv | indexed supporting material | 6ac79983507c0e0d91f6a73d1bb7fa1a56ab77156388e3c0d1568bfd08eb9399 |
+| etc/operations/m0-t277-s5-softpc-host-control-family-audit-001.md | indexed supporting material | 55376ad76daf1e0171219340f8a27f3a11238c151c923d4d8ef1312d874826d9 |
 | etc/operations/m0-t277-s5-softpc-host-control-family-plan-001.md | indexed supporting material | 11b87c6298dfae1ec261ff09e3013e99c77760b834de10bdfcfb008c43659549 |
 | etc/operations/m0-t277-s5-softpc-provider-candidate-ledger.tsv | indexed supporting material | 05a7b08dad5c9c0580ffdb5043287053e42d5460d1647df285d81dfee0d72a1b |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
