@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "opennt-bop/ingress/softpc_tape_io_generic_ud_bridge.h"
+#include "app/bop/softpc_tape_io_generic_ud_bridge.h"
 #include "cpu_state_abi.h"
 
 static void initialize(struct runtime_generic_ud_event *event)

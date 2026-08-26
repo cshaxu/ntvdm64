@@ -2,7 +2,7 @@
 #include "app/bop/dem_host_session.h"
 #include "opennt-bop/dem/opennt_demdasd_ioctl_compat.h"
 #include "app/bop/dem_session.h"
-#include "opennt-bop/ingress/redir_native_session.h"
+#include "app/bop/redir_native_session.h"
 
 #include <string.h>
 

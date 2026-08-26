@@ -2,7 +2,7 @@
 #include "app/bop/route.h"
 #include "adapter-softpc/mechanical_action.h"
 #include "app/bop/route.h"
-#include "opennt-bop/ingress/softpc_mouse_vector_generic_ud_bridge.h"
+#include "app/bop/softpc_mouse_vector_generic_ud_bridge.h"
 #include "app/bop/route.h"
 
 #include <stdint.h>

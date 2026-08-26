@@ -209,6 +209,12 @@ deferred owner inputs.  See [S5 P3 extraction](etc/evidence/m0-t271-s5-p3-app-co
 `app/bop/`; the focused formal fixture passes and 12 non-mirror ingress bodies
 remain for owner-package disposition.  See [S5 P4 extraction](etc/evidence/m0-t271-s5-p4-config-complete-app-entry-extraction-001.md).
 
+**S5 P5:** all residual SoftPC/Redirector/top-level fixed-frame and session
+wrappers now also belong to `app/bop/`; the test-only selector map moved to
+tests, and `opennt-bop/ingress` is gone. Nine focused residual fixtures pass.
+The final mirror/compatibility/overlay ledger audit remains active; this is not
+yet S5 closure. See [S5 P5 extraction](etc/evidence/m0-t271-s5-p5-mirror-root-ingress-removal-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

@@ -5,9 +5,9 @@
 #include "app/bop/dem_host_session.h"
 #include "adapter-softpc/host_handle_manager.h"
 #include "opennt-bop/opennt_ccpu_sas_facade.h"
-#include "opennt-bop/ingress/redir_native_session.h"
+#include "app/bop/redir_native_session.h"
 BOOLEAN runtime_vr_initialized_provider(VOID);
-#include "opennt-bop/ingress/redir_generic_ud_bridge.h"
+#include "app/bop/redir_generic_ud_bridge.h"
 
 _Static_assert(sizeof(runtime_ccpu_sas_call) == sizeof(runtime_demhndl_call),
     "the generic CCPU/SAS facade must not create a second call frame");

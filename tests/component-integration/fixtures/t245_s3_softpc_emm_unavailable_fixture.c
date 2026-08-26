@@ -3,7 +3,7 @@
 #include <string.h>
 #include "app/bop/route.h"
 
-#include "opennt-bop/ingress/softpc_emm_unavailable_generic_ud_bridge.h"
+#include "app/bop/softpc_emm_unavailable_generic_ud_bridge.h"
 #include "app/bop/route.h"
 
 int runtime_machine_generic_ud_bridge(

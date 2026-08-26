@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "opennt-bop/ingress/softpc_memory_size_generic_ud_bridge.h"
+#include "app/bop/softpc_memory_size_generic_ud_bridge.h"
 #include "cpu_state_abi.h"
 
 static uint8_t bda[2] = { 0x7fu, 0x02u };

@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "opennt-bop/ingress/softpc_printer_openclose_generic_ud_bridge.h"
+#include "app/bop/softpc_printer_openclose_generic_ud_bridge.h"
 #include "app/bop/route.h"
 #include "adapter-softpc/softpc_printer_openclose_shim.h"
 

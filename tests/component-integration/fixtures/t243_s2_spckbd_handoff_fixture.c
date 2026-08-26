@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "opennt-bop/ingress/spckbd_handoff_generic_ud_bridge.h"
+#include "app/bop/spckbd_handoff_generic_ud_bridge.h"
 #include "adapter-softpc/spckbd_handoff_shim.h"
 #include "cpu_state_abi.h"
 

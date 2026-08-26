@@ -10,10 +10,12 @@ child-engine launch environment, cancellation, exit status and diagnostics.
 They must not implement guest DOS/BOP semantics or manipulate Bochs CPU/RAM
 objects directly.
 
-`observation/` is default-off CLI diagnostics only. `bop_composition` wraps
-the BOP route after it returns in order to record an already-produced typed
-outcome; it neither recognizes a selector nor changes guest state. Selector
-and service interpretation remains in `opennt-bop`.
+`observation/` is default-off CLI diagnostics only. `bop_composition` binds
+the selector-blind `adapter-bop` callback. `bop/` owns final modern composition:
+it recognizes the fixed historical selector envelope, establishes an admitted
+single-session copied frame, and enters the corresponding original OpenNT
+owner body. It may not replace a provider table, change source ordering, or
+invent a service result; those semantics remain in `opennt-bop`.
 
 `startup_composition` owns only app-selected guest images, launch declaration
 and machine-stage assembly. It supplies copied launch values to the temporary

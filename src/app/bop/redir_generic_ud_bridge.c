@@ -1,5 +1,5 @@
 #include "redir_generic_ud_bridge.h"
-#include "opennt-bop/ingress/redir_native_session.h"
+#include "app/bop/redir_native_session.h"
 
 int runtime_redir_generic_ud_recognizes(
     const struct runtime_generic_ud_event *event)
