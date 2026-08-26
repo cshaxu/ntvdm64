@@ -31,9 +31,9 @@ standard, and do all previously extracted bodies now have a correct owner?
   production/test build root. This is a removal of an invalid production
   claim, not a loss of source evidence.
 - After the DPMI archive, DEM CCPU/SAS extraction, wrapper fold and COMMAND
-  overlay-boundary recovery, the live root contains 85 C/H/INC inputs: 59
-  original-name inputs and 26 remaining project-named compatibility inputs.
-  This is a reduction, not a closure claim: the 26 inputs are the concrete
+  overlay-boundary recovery, the live root contains 84 C/H/INC inputs: 59
+  original-name inputs and 25 remaining project-named compatibility inputs.
+  This is a reduction, not a closure claim: the 25 inputs are the concrete
   residual owner ledger below.
 
 ## Focused regression after the corrective moves
@@ -47,6 +47,8 @@ standard, and do all previously extracted bodies now have a correct owner?
 - After the COMMAND boundary fold, the same two fixtures were rebuilt and
   executed from the refreshed formal `r004` graph with the same passing
   results.
+- The XMS source-mirror and A20 source-mirror fixtures were also rebuilt and
+  executed from `r004` after the `xms.c` boundary fold; both passed.
 - Folding the two wrapper bodies initially exposed a real macro-scope collision
   in `softpc/nt_bop.c`; the formal compiler caught it and the file now keeps
   one definition each of `MS_bop_0` and `MS_bop_4`.  This validation proves
@@ -95,10 +97,10 @@ not pass the mirror test merely because a README row exists.
   overlays.
 - **XMS compatibility and composition:** `xms/opennt_xms_compat.h` is a
   project compatibility aggregate and must be decomposed into the existing
-  same-shaped `adapter-softpc`/`adapter-win32` declarations. The private
-  `opennt_xms_composition.c` body remains eligible only after its boundary is
-  placed in an original XMS translation unit; it cannot remain a named custom
-  production mirror file.
+  same-shaped `adapter-softpc`/`adapter-win32` declarations. Its private
+  composition body is now included only at the original `xms.c` boundary;
+  `opennt_xms_composition.c` no longer exists as a named custom production
+  mirror file.
 
 ## Extracted-code placement review
 

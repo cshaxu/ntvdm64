@@ -261,6 +261,11 @@ Their private bodies are now included only by original `cmd.c`, `cmdmisc.c`,
 formal DEM/COMMAND source-path links and executions pass. The non-original
 COMMAND compatibility headers remain active source-recovery work.
 
+**S5 P13:** the non-original XMS composition wrapper has been deleted and its
+private body is included only by original `xms.c`. Formal XMS source-mirror
+and A20 source-mirror fixtures relink and execute successfully. The remaining
+`opennt_xms_compat.h` header is active owner-split work.
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

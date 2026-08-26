@@ -109,3 +109,7 @@ BOOL XMSInit (int argc, char *argv[])
 
     return TRUE;
 }
+
+/* DIVERGENCE(BOP-DIV-107): package configuration and scoped mechanical
+ * composition remain private overlay code at the original xms.c boundary. */
+#include "opennt-bop-overlay/xms/opennt_xms_composition.c"

@@ -324,7 +324,6 @@
         "src/opennt-bop/softpc/tape_io.c",
         "src/opennt-bop/softpc/keybd_io.c",
         "src/opennt-bop/xms/suballoc.c",
-        "src/opennt-bop/xms/opennt_xms_composition.c",
         "src/opennt-bop/xms/xms.c",
         "src/opennt-bop/xms/xmsa20.c",
         "src/opennt-bop/xms/xmsblock.c",
