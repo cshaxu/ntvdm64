@@ -72,10 +72,10 @@ Owner mapping:
   including MVDM includes, DEM, COMMAND, XMS, DPMI32, VDMREDIR, WOW32,
   VDD/debugger, `softpc.new`, SIM/monitor, utility and OEM packages;
 - `opennt-platform-abi`: exact required declarations outside MVDM;
-- `opennt-guest-dos`: the already-complete repository-local DOS/V86 and guest
+- `opennt-guest-dos`: the already-established repository-local DOS/V86 and guest
   DPMI mirror, recovered directly from the existing guest mirror without a
   second external-tree import;
-- `opennt-guest-wow16`: the already-complete repository-local WOW16 mirror,
+- `opennt-guest-wow16`: the already-established repository-local WOW16 mirror,
   recovered by the same direct route without a second external-tree import;
 - `tools/opennt`: historical build tools; never a runtime component.
 
@@ -132,8 +132,8 @@ in order:
    establishes the `bochs-core` / `adapter-bochs` mechanical closure and the
    smallest app-owned machine shell.
 3. [Canonical OpenNT source supply](proposal-rebootstrap-opennt-source-supply-001.md)
-   imports the platform ABI and selected non-guest MVDM host package union,
-   while directly recovering—not reimporting—the complete local DOS/WOW16
+imports the platform ABI and selected non-guest MVDM host package union,
+while directly recovering—not reimporting—the established local DOS/WOW16
    guest mirrors, without claiming provider execution.
 4. [Historical interface adapter recovery](proposal-rebootstrap-historical-interface-adapter-recovery-001.md)
    recovers same-shaped BOP, SoftPC, Win32 and VDM-monitor interfaces plus the

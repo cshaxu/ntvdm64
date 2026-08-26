@@ -53,6 +53,13 @@ complete and pushed through `d94d46ae`; its authoritative record is
 | Original Owner Request | “opennt-guest里面的dos和wow16，其实可以直接复制到位…已有的app, session, bochs-core和adapter-*组件，可作为参考来源…” |
 | Similar-Issue Sweep | All MVDM package roots, headers, build files, resources, binaries, tools, duplicate variants, guest/host boundaries and obsolete current roots. |
 
+**S1 closure:** the reproducible 3,671-path union ledger gives every non-guest
+host path a unique source/owner disposition. It retains guest/tree evidence
+without reimporting it: 688 current carried guest paths match exactly, while
+1,261 external WOW paths are explicitly outside the current carried inventory
+and cannot become implicit source inputs. See the
+[S1 ledger closure](etc/operations/m0-t274-s1-non-guest-mvdm-union-ledger-closure-001.md).
+
 ### M0 T273 S4 closure — Boundary and architecture verification
 
 | Field | Record |
