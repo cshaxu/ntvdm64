@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T276 S22** — Begin W8 complete `wow32` package file/interface
-disposition without enabling a WOW provider body.
+**Active: M0 T276 S23** — Begin W8 complete `fax` package file/interface
+disposition without enabling a fax provider body.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,31 +24,38 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S22 — W8 `wow32` package disposition baseline
+### M0 T276 S23 — W8 `fax` package disposition baseline
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T276 S22`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T276/S21 is closed: all 25 `vdmredir` paths have exact non-enabled dispositions, with fifteen selected protocol-provider bodies remaining one original owner package. The next bounded original package is the 201-path `wow32` root. |
-| Objective | Classify every selected `wow32` path by condition-aware original build selection, original thunk/provider subdomain and reached Windows, SoftPC, monitor and session boundary before enabling a WOW body. |
-| Non-goals | No source move/edit, WOW implementation, Bochs change, adapter body, formal build edge, Ninja run or guest execution. |
-| Reference Baseline | T276/S1–S21 ledgers, exact selected `wow32` mirror, source policy and architecture rules. |
-| Files And ABI Surface | W8 `wow32` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
+| Identifier Mode | `M0 T276 S23`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T276/S22 is closed: all 201 `wow32` paths have exact non-enabled dispositions; 77 active C bodies are partitioned into eight source-proven subdomains, and nine reached interface families have unique boundary/mapping dispositions. The next bounded original package is the 21-path `fax` root. |
+| Objective | Classify every selected `fax` path by original driver/DLL build selection, printer/UI provider role and reached WOW32, GDI, Win32, monitor and session boundary before enabling a fax body. |
+| Non-goals | No source move/edit, fax implementation, Bochs change, adapter body, formal build edge, Ninja run or guest execution. |
+| Reference Baseline | T276/S1–S22 ledgers, exact selected `fax` mirror, source policy and architecture rules. |
+| Files And ABI Surface | W8 `fax` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Account for all 201 selected `wow32` paths; distinguish active and `!IF 0` source selection, declaration/table and build forms; identify actual thunk, USER/GDI, shell/media and historical-host boundaries; reject an invented standalone WOW rewrite. |
-| Expected Markers | One provisional composition disposition per path, exact build evidence, original subdomain and named internal/adapter prerequisite per reached family. |
-| Asset Needs | T276/S1–S21 ledgers, exact selected `wow32` mirror, [S22 build-selection baseline](etc/operations/m0-t276-s22-wow32-build-selection-baseline-001.md) and [S22 plan](etc/operations/m0-t276-s22-wow32-package-disposition-plan-001.md). |
-| Reporting Requirements | Exact path/source/build counts, active WOW subdomain, external boundary facts, mapping-manager rule and subsequent package handoff. |
+| Verification | Account for all 21 selected `fax` paths; distinguish the original GDI driver from the UI DLL build and resource forms; identify actual printer, WOW32, GDI, Win32 and mapping boundaries; reject an invented standalone fax provider. |
+| Expected Markers | One provisional composition disposition per path, exact build evidence and named internal/adapter prerequisite per reached family. |
+| Asset Needs | T276/S1–S22 ledgers, exact selected `fax` mirror and [S23 plan](etc/operations/m0-t276-s23-fax-package-disposition-plan-001.md). |
+| Reporting Requirements | Exact path/source/build counts, driver/UI role, external boundary facts, mapping-manager rule and subsequent package handoff. |
 | Stop Conditions | A path has no selected/build evidence, raw host pointers cross a boundary, a second mapping manager is proposed, a body is enabled from a trace, or classification requires invented adapter behavior. |
-| Exit Criteria | Every selected `wow32` path has a reproducible provisional owner/disposition record and each actual external family is assigned to a named session or adapter boundary; no source body is enabled. |
+| Exit Criteria | Every selected `fax` path has a reproducible provisional owner/disposition record and each actual external family is assigned to a named session or adapter boundary; no source body is enabled. |
 | Original Owner Request | “好的 开始审计任务”。 |
-| Similar-Issue Sweep | 16/32 thunk and callback frame semantics, GDI/USER private API coupling, guest-memory mapping leases, opaque handle translation, shell/media/printing, session lifecycle and adapter-wow boundary. |
+| Similar-Issue Sweep | GDI driver interface, printer setup/UI, WOW32 callback/structure conversion, host spooler and registry capabilities, session mapping leases and adapter-wow boundary. |
 
 **S21 closure:** all 25 selected `vdmredir` paths have reproducible non-enabled
 dispositions. Fifteen selected DLL provider bodies remain one owner package;
 any recovery retains its protocol ordering and uses only session-owned handles,
 `adapter-win32` and checked mapping-manager copies at the named boundaries.
 See the [S21 Redirector baseline](etc/operations/m0-t276-s21-vdmredir-package-disposition-baseline-001.md).
+
+**S22 closure:** all 201 selected `wow32` paths have reproducible non-enabled
+dispositions. Seventy-seven active C bodies are separated into eight original
+provider subdomains, and nine source-proven interface families name their sole
+adapter/session boundary and mapping-manager rule. `gdi32p`, `user32p`, VDD,
+NT4 monitor and product-shell dependencies remain explicit historical
+requirements; no WOW body is enabled. See the [S22 subdomain baseline](etc/operations/m0-t276-s22-wow32-subdomain-baseline-001.md) and [interface-family ledger](etc/operations/m0-t276-s22-wow32-interface-family-ledger.tsv).
 
 **S20 closure:** all 25 selected `dpmi32` paths have reproducible non-enabled
 dispositions. Sixteen selected x86 bodies form one host-provider package; all

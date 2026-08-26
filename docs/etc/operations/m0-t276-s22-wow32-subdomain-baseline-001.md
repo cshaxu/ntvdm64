@@ -42,6 +42,11 @@ selected paths.
   instances. A historical guest address remains numeric guest data; native
   pointer or HANDLE identity never crosses an imported WOW interface.
 
+The companion [interface-family ledger](m0-t276-s22-wow32-interface-family-ledger.tsv)
+records the nine reached families, their original callers and their sole
+composition boundary. It is deliberately a source-interface audit, not a
+claim that any of the listed historical facades exists or is enabled.
+
 ## Interpretation
 
 WOW32 cannot be recovered safely by admitting isolated thunk files in trace

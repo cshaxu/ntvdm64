@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2505 |
+| Documentation records | 2507 |
 | --- | --- |
-| Generated UTC | 2026-08-26T18:24:59Z |
+| Generated UTC | 2026-08-26T18:28:32Z |
 
 ## Entries
 
@@ -659,8 +659,10 @@ content-divergent entries.
 | etc/operations/m0-t276-s22-wow32-active-subdomain-ledger.tsv | indexed supporting material | eb659c741eba14cbbe153770f77a05ca099cad13ded674308dff2489d7ce2c7d |
 | etc/operations/m0-t276-s22-wow32-build-selection-baseline-001.md | indexed supporting material | 2d96caee4a4f44ae77868efc67a6eedbe1b98f44a527f65dbad2082e1b8929b8 |
 | etc/operations/m0-t276-s22-wow32-file-disposition-ledger.tsv | indexed supporting material | 91085471ee794ca769b4d3b51a89f8cee37f2fc228802c2e2ef663dfbaff0a2c |
+| etc/operations/m0-t276-s22-wow32-interface-family-ledger.tsv | indexed supporting material | 313a1de49e115aa1376a68ed73cae7da9c205b0386ecdb043d8b0aea2b7cbfc0 |
 | etc/operations/m0-t276-s22-wow32-package-disposition-plan-001.md | indexed supporting material | 400ab31d75a4f3b45ba8b4fb9b5bce2547f60bb9bc6b97b51b10df7ff77b2f35 |
-| etc/operations/m0-t276-s22-wow32-subdomain-baseline-001.md | indexed supporting material | c362e164e2546e5ebea1390ead2a1ca68ad4bf8a0c1d068bdf14ba9c22165b7b |
+| etc/operations/m0-t276-s22-wow32-subdomain-baseline-001.md | indexed supporting material | 99a11e8e4af70d318f0967798d2e19190a4b62d669d6f538e222e2a5e5ee979b |
+| etc/operations/m0-t276-s23-fax-package-disposition-plan-001.md | indexed supporting material | cc9e878a3ecb9088252dd56269be7d577f8be38fbdf5d67e2fb51eb92308abd7 |
 | etc/operations/m0-t276-s2-build-input-include-graph-001.md | indexed supporting material | 550a64073284061d8c7638fe6e3b271f0930e95a41384640890fad047f77a70d |
 | etc/operations/m0-t276-s2-original-build-description-ledger.tsv | indexed supporting material | 44d1f5ee7c63c2b856960871603621e2052cb1c0903baf3224af41ccee725268 |
 | etc/operations/m0-t276-s2-translation-unit-build-ledger.tsv | indexed supporting material | 542cb74fca0d9d6d857b901d30d462437d819a27a399e3e798f5a664eca4328f |
@@ -2519,7 +2521,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | bd833c817181b1fc754b4cdb6be0c0b52ce34f32eb3e3ba5f297d7c20e43afb6 |
+| STATUS.md | principal control document | f8633eb82ed3fa4d05cb9b3aea39847c6ca7d975ef61a4b552d28c782f23d762 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |
