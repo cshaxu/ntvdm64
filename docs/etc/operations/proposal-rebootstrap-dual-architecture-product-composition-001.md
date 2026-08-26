@@ -20,6 +20,12 @@ owner/dependency review before new composition is authored. Ninja owns host
 dependency tracking and incremental library/link execution. The task tests
 composition and boundaries, not general DOS/WOW runtime continuity.
 
+Guest-image selection consumes only the manifest of the directly recovered
+`opennt-guest-dos` and `opennt-guest-wow16` roots.  It does not relocate or
+rebuild `build/output/dos` or `build/output/wow16`; those established binary
+trees remain isolated build-output evidence until a separately admitted guest
+build task declares a product packaging input.
+
 ## Proposed subtasks
 
 1. **S1 — Formal Ninja graphs.** Generate isolated MSVC Win32/x86 `/MT` and

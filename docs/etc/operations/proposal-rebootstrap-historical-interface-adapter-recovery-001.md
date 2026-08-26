@@ -23,6 +23,11 @@ parameters, layouts, ordering and failure contracts. They do not become
 alternate DEM/COMMAND/XMS/DPMI providers or introduce Bochs knowledge into
 imported OpenNT source.
 
+The audit includes existing `bochs-core` mechanics where an adapter needs a
+machine-facing counterpart, but preserves the one-way boundary: only
+`adapter-bochs` calls `bochs-core`; no recovered adapter imports Bochs internals
+directly.
+
 ## Proposed subtasks
 
 1. **S1 — Complete interface and reuse ledger.** Freeze original caller,

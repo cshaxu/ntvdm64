@@ -15,6 +15,24 @@ provenance, owner, dependency and architecture review. This is a reuse order,
 not permission to retain `src.old/` as an input.
 `src.old/` itself remains outside all formal source/build/link/runtime inputs.
 
+## Recovery precedence
+
+Before an implementation subtask authors or imports a production file, it
+applies this fixed order:
+
+1. audit a same-owner candidate in the existing `app`, `session`,
+   `bochs-core` or `adapter-*` component trees and reuse/copy it when its
+   provenance, dependency direction and architecture contract comply;
+2. for an OpenNT or Bochs mirror, import the selected upstream original only
+   when no compliant project-owned candidate can supply the project-owned
+   composition around it;
+3. author a new implementation only after both earlier choices are recorded
+   as unsuitable.
+
+This preference saves recovery work without turning `src.old/` into a live
+input.  The per-file disposition records the candidate examined, the selected
+destination and the reason a candidate was reused, split, or rejected.
+
 The current profile binds one active imported MVDM host context to each
 `ntvdm.exe` process and permits multiple processes. DOS child programs,
 COMMAND re-entry and WOW16 tasks are intra-session lifecycles. Project-owned
@@ -88,6 +106,13 @@ host graph. The existing
 `build/output/dos` and `build/output/wow16` binary trees remain in place as
 prior build outputs/evidence; they are not moved into production roots. App
 loads manifest-selected immutable products through `adapter-bochs`.
+
+The DOS and WOW16 recovery path is deliberately repository-local: the existing
+guest inventories are copied directly into their matching guest roots as the
+complete carried guest inputs.  The external OpenNT trees remain provenance
+evidence and are not revisited merely to make a second guest mirror.  Likewise
+`build/output/dos` and `build/output/wow16` are retained in situ; neither is a
+candidate for relocation, reimport, host linkage, or a substitute source root.
 
 ## Adapter and session contracts
 

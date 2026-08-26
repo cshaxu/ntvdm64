@@ -19,6 +19,12 @@ This task creates `opennt-platform-abi`, `opennt-guest-dos`,
 remains one source component even when it produces multiple original package
 libraries. No new adapter/provider implementation belongs here.
 
+Existing project-owned `app`, `session`, `bochs-core` and `adapter-*` files are
+not discarded while this source-supply task runs: later composition/adaptor
+packets must audit them as the first reuse source before authoring an
+equivalent project-owned mechanic.  This task records their provenance but does
+not make `src.old/` a build input.
+
 ## Proposed subtasks
 
 1. **S1 — Non-guest package-scope union ledger.** Decide every non-guest
@@ -33,7 +39,9 @@ libraries. No new adapter/provider implementation belongs here.
    guest-image manifest.
 4. **S4 — WOW16 guest mirror direct recovery.** Recover the established
    `src.old/opennt-guest/wow16` guest mirror into `opennt-guest-wow16` by the
-   same direct route. Preserve `build/output/dos` and `build/output/wow16`
+   same direct route. These carried guest inventories are the complete guest
+   inputs for this recovery path; do not re-copy either guest family from an
+   external OpenNT tree. Preserve `build/output/dos` and `build/output/wow16`
    exactly where they are as prior build outputs/evidence: do not move, copy,
    relink or treat them as host-build inputs.
 5. **S5 — MVDM host topology.** Import public/private headers, build topology

@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 2391 |
 | --- | --- |
-| Generated UTC | 2026-08-26T08:17:50Z |
+| Generated UTC | 2026-08-26T08:21:07Z |
 
 ## Entries
 
@@ -607,7 +607,7 @@ content-divergent entries.
 | etc/operations/proposal-opennt-host-mirror-overlay-convergence-001.md | indexed supporting material | d38de2d9de2c658e17efa69f3eb414c7488f3e181a50f3d5ac3c94a57986d28e |
 | etc/operations/proposal-opennt-host-original-layout-recovery-001.md | indexed supporting material | 9af7e168e93e0fcc55371785fa7f91cf8fd2b694f1089e3fe96c3caad56b9192 |
 | etc/operations/proposal-opennt-mvdm-owner-expansion-001.md | indexed supporting material | 2f837a6af1fe6b48f167983fe60ee285b3a7b1fa92fe243f9fd2816959614bdf |
-| etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md | indexed supporting material | 8232e601b9498974455c63748f23810d6653c70db1ab235e63567316c2df2c57 |
+| etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md | indexed supporting material | 2575ceaaf48fa9a7597932ba4b945517b7b3dfce582bd90565726c32acb73192 |
 | etc/operations/proposal-opennt-redirector-owner-package-completion-001.md | indexed supporting material | a94a8dfb72d0625f20e0152dacab24b4aca3862f4d8960290201eeb361e1b129 |
 | etc/operations/proposal-opennt-wow16-owner-package-completion-001.md | indexed supporting material | cad78b521e3fd3edb645002ed7986082d45082dcbba54f153d11dc61ef65c07e |
 | etc/operations/proposal-opennt-xms-owner-package-completion-001.md | indexed supporting material | 63d5209a8032bff793219242257dd8ab637d833f66c17c969939e6a5e56d3d3d |
@@ -615,10 +615,10 @@ content-divergent entries.
 | etc/operations/proposal-overlay-mutation-capability-completion-001.md | indexed supporting material | f7ffebc5d2e99ecef44e029526afbaddbcce02d05d66819e544d02d2ce929cff |
 | etc/operations/proposal-project-code-filename-normalization-001.md | indexed supporting material | 8a42536533fd68114f575dc49f3d02213778a8ecb6e80e8cc797d2f70df2382a |
 | etc/operations/proposal-rebootstrap-bochs-machine-foundation-001.md | indexed supporting material | 8b9960658a8a271b7d5b0ebac3c435cccf9f3a136e0332266b7159a720d49be5 |
-| etc/operations/proposal-rebootstrap-dual-architecture-product-composition-001.md | indexed supporting material | 7413117ab96181ef2c17b81935cbc29140a6eb5d7540e1df4c9730fe1b1cd09f |
-| etc/operations/proposal-rebootstrap-historical-interface-adapter-recovery-001.md | indexed supporting material | 7b5221601ea274342ad27c6b9619a5fd42210ac2aa2e757845080fb6fae50c96 |
+| etc/operations/proposal-rebootstrap-dual-architecture-product-composition-001.md | indexed supporting material | 7242d95aaa9d1e1c875e3fe318d8606a95a315fb842a92cac40ef45ef9edfba4 |
+| etc/operations/proposal-rebootstrap-historical-interface-adapter-recovery-001.md | indexed supporting material | 856962dfad68d72de29206bd9fc0e860c0b76593db4604719b4acad5c570d5f9 |
 | etc/operations/proposal-rebootstrap-neutral-runtime-foundation-001.md | indexed supporting material | 8a5ae994a7ffffe78353d72f5448be3908d767583c3e3013b24c3005bc1057ba |
-| etc/operations/proposal-rebootstrap-opennt-source-supply-001.md | indexed supporting material | 5d3a6faf08fda0c592e9915136c1c512a468aa1a3ae29014c08e387dd1fd2be6 |
+| etc/operations/proposal-rebootstrap-opennt-source-supply-001.md | indexed supporting material | 09fff377c703e1b4a65ad3d06c8c8453b5afba1fa21f327fb08243d40762fbc3 |
 | etc/operations/proposal-repository-local-source-closure-refs-retirement-001.md | indexed supporting material | db10b8498c1f6525221b1cf86df8312ba90aa4a26f752601f5fd5b3608c70986 |
 | etc/operations/proposal-selector-blind-guest-async-completion-delivery-001.md | indexed supporting material | 3453f27990bb707109bb81db1ebbe029e3a937f3af1deb174b172f7f86780e5a |
 | etc/operations/proposal-selector-blind-protected-mode-substrate-001.md | indexed supporting material | 6353218f86907661b1dc72bb4a20067ef08f6c8e59be33e65e084a2a8b8b5598 |
