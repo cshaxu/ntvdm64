@@ -2,9 +2,9 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T274 is closed by its verified source-supply
-exit criteria. The next ordered candidate remains Historical interface adapter
-recovery; it requires separate owner admission before implementation.
+**Active: M0 T275 S1** — Historical interface adapter recovery begins with a
+complete original-caller and existing-implementation reuse ledger. No adapter
+ABI or provider behavior is enabled before that ledger closes.
 
 The current intermission architecture is the thirteen-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -41,6 +41,36 @@ complete and pushed through `d94d46ae`; its authoritative record is
 and all selected MVDM host inputs are exact and hash-verified. This establishes
 source supply only; later adapter/composition packets retain all behavior,
 build and runtime claims. See [M0 T274 closure](history/m0-t274-closure-20260826.md).
+
+### M0 T275 S1 — Complete interface and reuse ledger
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T275 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | The owner’s standing direction to implement the ordered queue as a globally planned, minimalist recovery program; T274 source supply is closed. |
+| Objective | Freeze a complete original-caller/interface/ABI/failure/reuse disposition for BOP, SoftPC/CCPU/SAS, Win32/NTDLL, VDM-monitor and broker families before any adapter body is recovered. |
+| Non-goals | No new adapter ABI, source-body import, provider enablement, Bochs change, guest change, broker IPC implementation or host build claim. |
+| Reference Baseline | T274 exact MVDM mirror; adapter-recovery proposal; `src.old/adapter-*`, `app` and `session` as non-formal recovery references; BOP tracker and component owner manifest. |
+| Files And ABI Surface | A reproducible family/caller/reuse ledger, candidate-file inventory, S1 evidence, Status and documentation inventory. No runtime ABI becomes active. |
+| Applicable Rules | Execution, historical recovery, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
+| Verification | Enumerate every old adapter candidate; identify its original caller/contract or disposition it as reference-only; scan the exact host mirror for family declarations/callers; prove no source copy or formal build input is enabled. |
+| Expected Markers | One owner and one disposition for every candidate file and each reached family; exact source references, calling-convention/layout/failure requirements, reuse decision and successor S. |
+| Asset Needs | T274 manifests, `opennt-mvdm-host`, `opennt-platform-abi`, `src.old` reference tree, existing source-adapter proposal and tracker. |
+| Reporting Requirements | Candidate and family counts, direct caller evidence, source-first rung decision, retained/rejected recovery candidates, unavailable historical dependencies, boundary and next-S handoff. |
+| Stop Conditions | A candidate has no discoverable owner, a caller requires a behavior body before the ledger is complete, an interface crosses a prohibited Bochs boundary, or an ambiguous historical ABI cannot be resolved. |
+| Exit Criteria | Every candidate and every reached interface family has a reproducible source/ABI/failure/reuse disposition; S2--S6 can each recover only the frozen family surface without reviving a parallel product shell. |
+| Original Owner Request | “单人双角色模式实施当前队列中的所有任务，要求全局统筹，追求结果极简主义…避免添油战术。” |
+| Similar-Issue Sweep | Existing adapter/app/session mechanics, BOP tracker dependencies, MVDM declarations/callers, source mirror package roots, old-path build leaks and Bochs direct-access risks. |
+
+**S1 P1:** the reproducible recovery-candidate inventory contains 453 files:
+61 implementation candidates, 385 declaration candidates and seven supporting
+references. It is a source-reference baseline only, not permission to copy a
+file or claim an adapter ABI. See the [P1 inventory note](etc/operations/m0-t275-s1-adapter-candidate-inventory-001.md).
+
+**S1 P1:** the reproducible recovery-candidate inventory contains 453 files:
+61 implementation candidates, 385 declaration candidates and seven supporting
+references. It is a source-reference baseline only, not permission to copy a
+file or claim an adapter ABI. See the [P1 inventory note](etc/operations/m0-t275-s1-adapter-candidate-inventory-001.md).
 
 ### M0 T274 S6 — MVDM host package source recovery
 
