@@ -1,6 +1,7 @@
 #include "opennt_xms_softpc_facade.h"
 
 #include "adapter-softpc/a20_capability.h"
+#include "adapter-softpc/guest_pointer_manager.h"
 #include "adapter-softpc/ivt_watch.h"
 #include "softpc_int15_watch_shim.h"
 
@@ -59,12 +60,19 @@ int runtime_xms_softpc_context_begin(const runtime_xms_softpc_context *context)
     memset(&active, 0, sizeof(active));
     active.context = *context;
     active.cpu = *context->cpu;
+    /* DIVERGENCE(SOFTPC-DIV-006): the original XMS body obtained a process-wide
+     * SAS alias.  The sole session guest-memory instance instead owns a
+     * bounded call epoch; no pointer may survive this source invocation. */
+    if (!runtime_guest_pointer_manager_begin(
+            runtime_guest_pointer_manager_session(), context->guest_state,
+            context->guest_read, context->guest_write)) return 0;
     g_active_context = &active;
     return 1;
 }
 
 void runtime_xms_softpc_context_end(void)
 {
+    runtime_guest_pointer_manager_end(runtime_guest_pointer_manager_session());
     g_active_context = NULL;
 }
 
@@ -95,22 +103,30 @@ PVOID runtime_xms_get_vdm_addr(USHORT segment, USHORT offset)
 
 int runtime_xms_bind_himem_a20_state(USHORT segment, USHORT offset)
 {
-    uint8_t value;
-    uint32_t address = ((uint32_t)segment << 4) + (uint32_t)offset;
+    runtime_guest_pointer_lease *lease;
+    void *pointer;
     runtime_xms_active_context *active = active_context();
-    if (active == NULL || !active->context.guest_read(active->context.guest_state,
-        address, &value, 1u)) return 0;
-    g_himem_a20_state_address = address;
+    if (active == NULL || !runtime_guest_pointer_manager_acquire_real_mode(
+            runtime_guest_pointer_manager_session(), segment, offset, 1u,
+            RUNTIME_GUEST_POINTER_READ, &lease, &pointer)) return 0;
+    g_himem_a20_state_address = lease->address;
     g_himem_a20_state_bound = 1;
-    return 1;
+    return runtime_guest_pointer_manager_release(
+        runtime_guest_pointer_manager_session(), lease, 0);
 }
 
 void runtime_xms_write_himem_a20_state(BYTE value)
 {
+    runtime_guest_pointer_lease *lease;
+    void *pointer;
     runtime_xms_active_context *active = active_context();
     if (active == NULL || !g_himem_a20_state_bound) return;
-    (void)active->context.guest_write(active->context.guest_state,
-        g_himem_a20_state_address, &value, 1u);
+    if (!runtime_guest_pointer_manager_acquire_linear(
+            runtime_guest_pointer_manager_session(), g_himem_a20_state_address,
+            1u, RUNTIME_GUEST_POINTER_WRITE, &lease, &pointer)) return;
+    *(BYTE *)pointer = value;
+    (void)runtime_guest_pointer_manager_release(
+        runtime_guest_pointer_manager_session(), lease, 1);
 }
 
 void runtime_xms_clear_himem_a20_state(void)

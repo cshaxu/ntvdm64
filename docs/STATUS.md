@@ -174,6 +174,11 @@ private overlay behind the sole `xms/opennt_xms_composition.c` mirror boundary.
 The original 12-slot XMS table and provider bodies are unchanged; formal source
 and A20 fixtures pass. See [S4 P1 evidence](etc/evidence/m0-t271-s4-p1-xms-composition-overlay-isolation-001.md).
 
+**S4 P2:** the reached `xmsa20.c` / `xmsumb.c` HIMEM state path now uses the
+sole session `guest_memory` mapping-manager instance with bounded leases;
+no native guest pointer survives the source call. Both formal XMS fixtures
+remain green. See [S4 P2 evidence](etc/evidence/m0-t271-s4-p2-xms-a20-mapping-manager-migration-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored

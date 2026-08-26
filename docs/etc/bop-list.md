@@ -417,7 +417,7 @@ not a DPMI provider or authorization to recreate an NT4 process LDT.
 | `BOP-DEPENDENCY-034` | `opennt-shaped-facade` | Original `xms.c`; active mirror and named `xms_shim.h`. | CCPU/SAS entry becomes bounded typed call; XMS table/order retained. | none | `retain-facade` |
 | `BOP-DEPENDENCY-035` | `opennt-shaped-facade` | Original `xmsdisp.c:apfnXMSSvc`; active direct mirror. | Typed ingress replaces historical entry only. | none | `retain-facade` |
 | `BOP-DEPENDENCY-036` | `registered-exception` | Original `xmsblock.c` allocator/mover calls. | Modern ordinary-RAM capacity/reservation replaces NT4 host allocation identity. | `BX-MANTLE-096`, `BX-MANTLE-097` | `retain-generic-mechanics` |
-| `BOP-DEPENDENCY-037` | `migration-debt` | Original `xmsa20.c` `GetVDMAddr`/A20 state writeback. | Current fixed guest byte-address shim avoids raw pointer but is not the shared mapping facade. | none | `migrate-facade` |
+| `BOP-DEPENDENCY-037` | `opennt-shaped-facade` | Original `xmsa20.c` `GetVDMAddr`/A20 state writeback. | The same-shaped SoftPC facade opens the session `guest_memory` mapping epoch and retains only a checked guest address; each byte access has a bounded lease. | `SOFTPC-DIV-006` | `retain-facade` |
 | `BOP-DEPENDENCY-038` | `opennt-shaped-facade` | Original `xmsumb.c`; empty UMB failure bodies are active. | No physical UMB success span is fabricated. | none | `retain-facade` |
 | `BOP-DEPENDENCY-039` | `opennt-shaped-facade` | Original `xmsmisc.c:xmsNotifyHookI15` → `UpdateKbdInt15`. | Bounded keyboard fragment is classified by dependency 044. | none | `retain-facade` |
 | `BOP-DEPENDENCY-040` | `registered-exception` | Original `suballoc.c` allocation layout/callback sequence. | Backing interval is the generic opaque ordinary-RAM reservation, not host memory. | `BX-MANTLE-097` | `retain-generic-mechanics` |
@@ -446,13 +446,13 @@ not a DPMI provider or authorization to recreate an NT4 process LDT.
 
 | Tracker ID | Interface disposition | Original interface evidence | Divergence | Exception | Migration conclusion |
 | --- | --- | --- | --- | --- | --- |
-| `BOP-XMS-52-00` | `migration-debt` | X:00 `xmsA20` in `xmsa20.c`. | A20 state uses the local checked byte-address shim, not dependency 118. | none | `migrate-facade` |
+| `BOP-XMS-52-00` | `opennt-shaped-facade` | X:00 `xmsA20` in `xmsa20.c`. | A20 state uses dependency 118's session `guest_memory` lease through the same-shaped SoftPC facade. | `SOFTPC-DIV-006` | `retain-facade` |
 | `BOP-XMS-52-01` | `registered-exception` | X:01 `xmsMoveBlock` in `xmsblock.c`. | Uses generic native ordinary-RAM capacity/reservation mechanics. | `BX-MANTLE-096`, `BX-MANTLE-097` | `retain-generic-mechanics` |
 | `BOP-XMS-52-02` | `registered-exception` | X:02 `xmsAllocBlock` in `xmsblock.c`. | Uses generic native ordinary-RAM reservation mechanics. | `BX-MANTLE-097` | `retain-generic-mechanics` |
 | `BOP-XMS-52-03` | `registered-exception` | X:03 `xmsFreeBlock` in `xmsblock.c`. | Uses generic native ordinary-RAM reservation mechanics. | `BX-MANTLE-097` | `retain-generic-mechanics` |
 | `BOP-XMS-52-04` | `opennt-shaped-facade` | X:04 `xmsSysPageSize` in `xmsblock.c`. | Source register query is retained. | none | `retain-facade` |
 | `BOP-XMS-52-05` | `opennt-shaped-facade` | X:05 `xmsQueryExtMem` in `xmsblock.c`. | Source capacity query is retained through named machine capacity seam. | none | `retain-facade` |
-| `BOP-XMS-52-06` | `migration-debt` | X:06 `xmsInitUMB` in `xmsumb.c` / A20 source state. | Its A20 guest-byte source path still needs dependency 118. | none | `migrate-facade` |
+| `BOP-XMS-52-06` | `opennt-shaped-facade` | X:06 `xmsInitUMB` in `xmsumb.c` / A20 source state. | Its A20 guest-byte source path uses dependency 118's bounded session lease. | `SOFTPC-DIV-006` | `retain-facade` |
 | `BOP-XMS-52-07` | `opennt-shaped-facade` | X:07 `xmsRequestUMB` in `xmsumb.c`. | Original empty-UMB `B1` failure remains; no fake physical span. | none | `retain-facade` |
 | `BOP-XMS-52-08` | `opennt-shaped-facade` | X:08 `xmsReleaseUMB` in `xmsumb.c`. | Original empty-UMB `B2` failure remains. | none | `retain-facade` |
 | `BOP-XMS-52-09` | `opennt-shaped-facade` | X:09 `xmsNotifyHookI15` in `xmsmisc.c`. | Uses bounded original `UpdateKbdInt15` fragment; full keyboard remains separate. | none | `retain-facade` |
