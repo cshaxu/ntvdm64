@@ -220,6 +220,13 @@ existing DEM source facade. It is removed; focused formal Redirector rebuild
 and regression pass. The family-local compatibility/overlay ledger review
 continues. See [S5 P6 audit](etc/evidence/m0-t271-s5-p6-redundant-ccpu-sas-alias-removal-001.md).
 
+**S5 P7:** the complete family ledger confirms that all 13 private overlays
+have one mirror boundary and no external consumer, and that the removed
+`ingress` tree has no live consumer. It also found task-labelled divergence
+markers and five non-original SoftPC fragment inputs still inside the mirror
+root; both are mandatory remaining S5 remediation, so this is explicitly not
+closure. See [S5 P7 ledger](etc/evidence/m0-t271-s5-p7-family-compatibility-and-overlay-ledger-001.md).
+
 **S2 closure:** the active `C4 C4 50 xx` route now stages its copied CPU frame
 into the imported OpenNT `MS_bop_0` subset, which alone reads the guest service
 byte and calls the original `DemDispatch` table.  The former project-authored
