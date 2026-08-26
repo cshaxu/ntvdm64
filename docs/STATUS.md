@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T276 S19** — Begin W6 complete `dpmi` package file/interface
-disposition without enabling a DPMI provider body.
+**Active: M0 T276 S20** — Begin W6 complete `dpmi32` package file/interface
+disposition without enabling a DPMI32 provider body.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -24,25 +24,31 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T276 S19 — W6 `dpmi` package disposition baseline
+### M0 T276 S20 — W6 `dpmi32` package disposition baseline
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T276 S19`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T276/S18 is closed: all 23 `ieuvddex` paths are debugger-product inputs, not VDD runtime; six non-x86 paths are source evidence only. The next bounded original package is the 59-path `dpmi` root. |
-| Objective | Classify every selected `dpmi` path by original provider/control/data role, build selection and reached protected-machine, monitor, session and BOP boundaries before enabling a DPMI body. |
-| Non-goals | No source move/edit, DPMI implementation, Bochs change, adapter body, formal build edge, Ninja run or guest execution. |
-| Reference Baseline | T276/S1–S18 ledgers, exact selected `dpmi` mirror, source policy and architecture rules. |
-| Files And ABI Surface | W6 `dpmi` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
+| Identifier Mode | `M0 T276 S20`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T276/S19 is closed: all 59 `dpmi` paths are source-shaped DOSX guest-provider or guest-artifact inputs, never host composition. The next bounded original package is the 25-path `dpmi32` root. |
+| Objective | Classify every selected `dpmi32` path by original 32-bit DPMI provider/control role, build selection and reached protected-machine, monitor, session and BOP boundaries before enabling a DPMI32 body. |
+| Non-goals | No source move/edit, DPMI32 implementation, Bochs change, adapter body, formal build edge, Ninja run or guest execution. |
+| Reference Baseline | T276/S1–S19 ledgers, exact selected `dpmi32` mirror, source policy and architecture rules. |
+| Files And ABI Surface | W6 `dpmi32` file/interface/dependency evidence and Status/documentation inventory. No runtime ABI changes. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Account for all 59 selected `dpmi` paths; distinguish provider, protected-machine, control/data and build forms; identify actual monitor, SoftPC/SAS, BOP, session and machine dependencies; reject a trace-led provider or invented protected-machine semantics. |
+| Verification | Account for all 25 selected `dpmi32` paths; distinguish provider/control/data and build forms; identify actual monitor, SoftPC/SAS, BOP, session and machine dependencies; reject a trace-led provider or invented protected-machine semantics. |
 | Expected Markers | One provisional composition disposition per path, exact build evidence and named internal/adapter prerequisite per reached family. |
-| Asset Needs | T276/S1–S18 ledgers, exact selected `dpmi` mirror and [S19 plan](etc/operations/m0-t276-s19-dpmi-package-disposition-plan-001.md). |
-| Reporting Requirements | Exact path/source/build counts, DPMI role, external boundary facts and subsequent package handoff. |
+| Asset Needs | T276/S1–S19 ledgers, exact selected `dpmi32` mirror and [S20 plan](etc/operations/m0-t276-s20-dpmi32-package-disposition-plan-001.md). |
+| Reporting Requirements | Exact path/source/build counts, DPMI32 role, external boundary facts and subsequent package handoff. |
 | Stop Conditions | A path has no selected/build evidence, raw host pointers cross a boundary, a second mapping manager is proposed, a body is enabled from a trace, or classification requires invented adapter behavior. |
-| Exit Criteria | Every selected `dpmi` path has a reproducible provisional owner/disposition record and each actual external family is assigned to a named session or adapter/machine boundary; no source body is enabled. |
+| Exit Criteria | Every selected `dpmi32` path has a reproducible provisional owner/disposition record and each actual external family is assigned to a named session or adapter/machine boundary; no source body is enabled. |
 | Original Owner Request | “好的 开始审计任务”。 |
-| Similar-Issue Sweep | DPMI protected-mode/LDT/exception/memory forms, BOP/DOS/WOW entry references, monitor and SoftPC/SAS calls, guest-memory mapping uniqueness, original build descriptions and adapter-softpc/adapter-vdm-monitor/adapter-bop/adapter-bochs boundaries. |
+| Similar-Issue Sweep | DPMI32 protected-mode/LDT/exception/memory forms, BOP/DOS/WOW entry references, monitor and SoftPC/SAS calls, guest-memory mapping uniqueness, original build descriptions and adapter-softpc/adapter-vdm-monitor/adapter-bop/adapter-bochs boundaries. |
+
+**S19 closure:** all 59 selected `dpmi` paths have reproducible non-enabled
+dispositions. The original build produces 16-bit `DOSX.EXE`; its 22 selected
+provider bodies and all supporting source remain one guest product prerequisite,
+while products and map/sym files remain guest artifacts. No DPMI source is a
+host composition input. See the [S19 DPMI baseline](etc/operations/m0-t276-s19-dpmi-package-disposition-baseline-001.md).
 
 **S18 closure:** all 23 selected `ieuvddex` paths have reproducible non-enabled
 dispositions. The package is an NTSD/WinDbg debugger extension, not a VDD
