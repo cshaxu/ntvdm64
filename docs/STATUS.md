@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T274 S2** — M0 T271 remains closed by owner-directed
+**Active: M0 T274 S3** — M0 T271 remains closed by owner-directed
 exit-criterion revision; its audited residuals are recorded in its closure and
 the debt ledger, not misrepresented as completed mirror recovery.
 
@@ -32,6 +32,32 @@ focused lifecycle test passes under both MSVC x64 and Win32/x86 `/MT`.
 **T272 closure:** the neutral session/mapping/lease/broker foundation is
 complete and pushed through `d94d46ae`; its authoritative record is
 [M0 T272 closure](history/m0-t272-closure-20260826.md).
+
+### M0 T274 S3 — DOS guest mirror direct recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T274 S3`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner-approved canonical source-supply proposal and explicit direction to reuse the existing complete DOS guest rather than re-copy it from external OpenNT sources. |
+| Objective | Recover the complete repository-local DOS/V86 guest mirror into `opennt-guest-dos`, preserving every carried source/resource/build/intermediate/product input as an immutable guest-only inventory. |
+| Non-goals | No external guest reimport, guest-source modification, guest compilation, host linking, BOP/provider enablement, output relocation, or WOW16 recovery. |
+| Reference Baseline | `src.old/opennt-guest/dos-v86`, S1 selected union ledger, source policy, T274 source-supply proposal and current build-output isolation. |
+| Files And ABI Surface | Byte-identical `opennt-guest-dos` mirror paths, source hash manifest, component README, S3 evidence, Status and documentation inventory. No host ABI. |
+| Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
+| Verification | Enumerate and SHA-256 every carried source path; copy only into the matching guest root; prove source/destination equality, no host build manifest reference, and unchanged `build/output/dos`/`build/output/wow16` placement. |
+| Expected Markers | One source-relative DOS/V86 inventory, zero source/destination hash mismatches, no divergence entries, and explicit guest-load-only ownership. |
+| Asset Needs | Existing repository-local DOS/V86 mirror, S1 ledger, Git path inventory and prior build-output roots. |
+| Reporting Requirements | Record files/bytes/types, source/destination hashes, excluded output paths, source provenance, any absent local ledger rows and no-host-link conclusion. |
+| Stop Conditions | A carried path conflicts with a non-identical destination, a supposed guest item requires host linkage, an external source is needed to fill the local inventory, or a source provenance issue is found. |
+| Exit Criteria | Complete byte-identical DOS/V86 mirror and reproducible manifest/evidence; `build/output/*` remains in situ and excluded from formal host inputs; S4 can repeat the same direct route for WOW16. |
+| Original Owner Request | “opennt-guest里面的dos和wow16，其实可以直接复制到位，不需要从opennt opennt-4.5再次复制…build/output/dos, build/output/wow16里面的二进制…留着就行。” |
+| Similar-Issue Sweep | DOS/V86 source/resource/build/intermediate/product files, guest DPMI forms, carried artifacts, manifest consumers, output paths, host source lists and external-guest references. |
+
+**S3 closure:** all 676 local DOS/V86 inventory rows were copied into
+`opennt-guest-dos` and rehashed without a mismatch. The second recovery run
+accepted all 676 destinations as already identical. `build/output/dos` and
+`build/output/wow16` remain in place and are not host inputs. See the
+[S3 closure evidence](etc/operations/m0-t274-s3-dos-guest-mirror-closure-001.md).
 
 ### M0 T274 S2 — Platform ABI mirror audit
 
