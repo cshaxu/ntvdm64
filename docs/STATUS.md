@@ -2,21 +2,40 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T271 is closed by owner-directed exit-criterion
-revision; its audited residuals are recorded in its closure and the debt
-ledger, not misrepresented as completed mirror recovery.
+**Active: M0 T272 S2** — M0 T271 remains closed by owner-directed
+exit-criterion revision; its audited residuals are recorded in its closure and
+the debt ledger, not misrepresented as completed mirror recovery.
 
 The current intermission architecture is the thirteen-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
 project interfaces, a cross-process broker, and a shared x86/x64 32-bit
 compatibility object space. Its former single candidate has been divided into
-five dependency-closed queue candidates; it is a queued design decision, not
-an active or implemented packet. See the [rebootstrap program roadmap](etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md).
+five dependency-closed packages. The first package is now active; see the
+[rebootstrap program roadmap](etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md).
 
 ## Active Packet
 
-There is no active packet. The latest closure is retained below as the current
-technical baseline.
+**S1 closure:** the clean source topology now contains exactly thirteen
+production roots and no premature production service body. The
+[owner/source manifest](etc/operations/m0-t272-s1-production-owner-manifest-001.md)
+records every root, its provenance/reuse class, intended build role and
+owner packet; it also excludes `src.old/` and existing build outputs from
+formal inputs.
+
+### M0 T272 S2 — Session lifecycle recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T272 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Objective | Audit and recover the smallest dependency-neutral session lifecycle from the existing session reference, without carrying BOP, OpenNT provider, Bochs or Win32 service semantics into `session`. |
+| Scope | `src/session`, focused neutral session tests, component README/register and supporting evidence. Existing session files receive an explicit copy/reference-only/split/replace/retire disposition before use. |
+| Non-goals | No mapping-manager behavior beyond what is needed to expose a neutral session owner; no broker service implementation, source import, guest copy, machine lifecycle or formal host build. |
+| Verification | Per-file owner/dependency audit, create/cancel/teardown and thread-binding focused tests, production dependency scan, documentation governance and `git diff --check`. |
+| Exit Criteria | A minimal explicit session instance supports deterministic create, bind/unbind, cancellation and teardown with no process-global current session; every recovered file has a disposition and no provider vocabulary remains in `src/session`. |
+| Reference | [Foundation proposal](etc/operations/proposal-rebootstrap-neutral-runtime-foundation-001.md) and [program roadmap](etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md). |
+| Stop Conditions | Any file has ambiguous owner/provenance, an attempted reuse imports BOP/OpenNT/Bochs semantics into S1, or the new root topology would consume `src.old/` directly. |
+
+The latest closed packet remains the technical baseline below.
 
 ### M0 T271 closure — OpenNT BOP source-recovery and mirror-boundary audit
 

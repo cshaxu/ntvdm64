@@ -14,7 +14,7 @@ collection of protected-mode service stubs.
 
 ## Queue relationship
 
-This is the admission plan for queue candidate 6, **OpenNT DPMI protected-mode
+This is the admission plan for queue candidate 5, **OpenNT DPMI protected-mode
 owner-package recovery**.  It may be admitted only after the protected-mode
 machine dependency slice and every `53:xx` source/ABI/failure row are frozen.
 ## Boundary
