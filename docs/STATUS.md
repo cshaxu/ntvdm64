@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T281 S3 — original DEM provider source composition.** The owner has
+**Active: M0 T281 S4 — complete original DEM static package composition.** The owner has
 directed execution in Queue order. The
 closed T277 package tracker, T278 physical re-root, T279 support-library
 closure, and T280 source-boundary recovery establish the inputs; they do not
@@ -11,25 +11,25 @@ package: original host control plane and DEM.
 
 ## Active Packet
 
-### M0 T281 S3 — original DEM provider source composition
+### M0 T281 S4 — complete original DEM static package composition
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T281 S3`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T281/S1 closed in `558a9626` and S2 P1 is formally complete as `15ce6c79`; this is the next package-wide, selector-disabled DEM composition step. |
-| Objective | Compile every remaining original `dos/dem` provider translation unit on x86 and x64 as one static-only source matrix, classify each first source-shaped boundary, and enable no selector, provider call, or runtime route. |
-| Non-goals | Invoking `DemDispatch`, enabling any `50:xx`, linking a runnable image, guest trace, Bochs change, new generic ABI, ad-hoc provider replacement, host mutation, or changing an OpenNT mirror body. |
-| Reference Baseline | T277 complete package tracker; T280 whole-package include/ABI surveys and persistent-location closure; T281/S1 dispatch island and S2 common-control archive; Wave 2 recovery plan. |
-| Files And ABI Surface | The twelve remaining original DEM provider bodies (`demdasd`, `demdir`, `demerror`, `demfcb`, `demfile`, `demgset`, `demhndl`, `demioctl`, `demlabel`, `demlock`, `demmisc`, `demsrch`), existing exact/common declarations, existing adapter-softpc/adapter-win32/session carriers, static-only evidence and ledger. |
+| Identifier Mode | `M0 T281 S4`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T281/S3 P1 is complete as `27cffb4e`; S4 is the package-level static combination of the already proven common-control and provider source sets. |
+| Objective | Produce one x86/x64 static archive containing all sixteen original DEM translation units under their already-audited declaration forms, with no executable link, selector invocation, or runtime provider route. |
+| Non-goals | Invoking `DemDispatch`, enabling any `50:xx`, linking a runnable image, guest trace, Bochs change, new generic ABI, host mutation, or changing an OpenNT mirror body. |
+| Reference Baseline | T281/S2 common-control archive (`15ce6c79`), T281/S3 provider archive (`27cffb4e`), their direct-import ledgers/evidence, T280 persistent-location closure and Wave 2 recovery plan. |
+| Files And ABI Surface | All sixteen original DEM translation units and the already-selected existing declaration carriers (`adapter-win32`, `adapter-softpc`, `adapter-vdm-monitor`, session declarations); a package archive generator, verifier, evidence and tracker rows. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Whole-package x86/x64 syntax matrix first; each blocking symbol gets one source/owner/disposition; only then a static-only graph for the admitted compile-safe matrix; documentation governance and `git diff --check`. |
-| Expected Markers | One row for every remaining provider translation unit; exact source hashes or existing registered divergences; no new selector handler, executable, or guest route. |
+| Verification | Formal MSVC/Ninja `/MT` archive graph and selector-disabled surface check on x86 and x64; archive member inventory proves exactly the sixteen original units; documentation governance and `git diff --check`. |
+| Expected Markers | One archive member per original DEM translation unit; no new selector handler, executable, adapter implementation body, or guest route. |
 | Asset Needs | Pinned original mirror, T277/T280 ledgers, existing component headers, MSVC x64/x86 and Ninja. |
 | Reporting Requirements | Report per-import source form, owner/binding, architecture result, compile/link state, excluded branch and any boundary that requires a re-admission. |
-| Stop Conditions | A failure requires newly invented provider semantics, a mirror edit beyond registered divergences, direct Bochs inclusion, raw guest-pointer retention, a selector/provider invocation, or any untracked dependency. |
-| Exit Criteria | Every remaining DEM provider unit has a reproducible x86/x64 compilation disposition and each new blocking interface has one owner/route decision; any compile-safe subset is formally static-only; no route is enabled. |
+| Stop Conditions | A package member requires a new semantic adapter, source edit beyond registered divergences, direct Bochs inclusion, raw guest-pointer retention, selector/provider invocation, or untracked dependency. |
+| Exit Criteria | Both architectures contain exactly the sixteen audited original DEM object members in one static archive, the surface proof rejects runtime inputs, and the archive-member evidence records the full package identity. |
 | Original Owner Request | “我都叫你按顺序执行了”。 |
-| Similar-Issue Sweep | All twelve remaining provider units, their direct original declarations, x86/x64 warning/error forms, persistent-location use sites, and every blocked interface family. |
+| Similar-Issue Sweep | All sixteen objects, archive member names, include forms, existing VDM control declaration binding and forbidden runtime inputs. |
 
 **T281 S1 P1:** `558a9626` selected and imported exact OpenNT `vdm.h`, made the three historical function-pointer conversions explicit under `MVDM-HOST-DIV-008`, and proved a selector-disabled original `nt_bop.c` static-library island on x86 and x64. The dispatcher is not linked into a runtime image and no selector/provider was enabled.
 
@@ -52,7 +52,22 @@ matrix-specific declaration gap (`NtVdmControl(VdmQueryDir, ...)`) in
 `demsrch.c`; its implementation body is excluded. The archive is
 selector-disabled and does not invoke a provider or enable `50:xx`.
 
-The detailed execution plans are [S1 original BOP dispatch composition](etc/operations/m0-t281-s1-original-bop-dispatch-composition-plan-001.md), [S2 original DEM common-control composition](etc/operations/m0-t281-s2-original-dem-common-control-composition-plan-001.md), and [S3 original DEM provider source composition](etc/operations/m0-t281-s3-original-dem-provider-source-composition-plan-001.md).
+**T281 S3 closure:** every remaining provider unit has its x86/x64 source
+composition disposition and the only matrix-specific declaration gap is closed
+by an existing, implementation-excluded same-shaped boundary. Full-package
+archive composition transfers to S4.
+
+**T281 S4 P1:** x86 and x64 now each archive exactly the sixteen original DEM
+objects as `original-dem-package.lib`. The archive-member verifier proves the
+complete source set and rejects executables, runtime rules, BOP ingress,
+Bochs, `nt_bop.c`, and the VDM control implementation body.
+
+**T281 S4 P1:** x86 and x64 now each archive exactly the sixteen original DEM
+objects as `original-dem-package.lib`. The archive-member verifier proves the
+complete source set and rejects executables, runtime rules, BOP ingress,
+Bochs, `nt_bop.c`, and the VDM control implementation body.
+
+The detailed execution plans are [S1 original BOP dispatch composition](etc/operations/m0-t281-s1-original-bop-dispatch-composition-plan-001.md), [S2 original DEM common-control composition](etc/operations/m0-t281-s2-original-dem-common-control-composition-plan-001.md), [S3 original DEM provider source composition](etc/operations/m0-t281-s3-original-dem-provider-source-composition-plan-001.md), and [S4 complete original DEM static package composition](etc/operations/m0-t281-s4-complete-original-dem-static-package-composition-plan-001.md).
 
 ### Closed packet reference — M0 T280 S20
 

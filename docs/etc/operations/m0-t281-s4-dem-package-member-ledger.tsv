@@ -1,0 +1,3 @@
+archive	architecture	member_count	members	runtime_disposition
+original-dem-package.lib	x64	16	dem;demdata;demmsg;demdisp;demdasd;demdir;demerror;demfcb;demfile;demgset;demhndl;demioctl;demlabel;demlock;demmisc;demsrch	static only; no selector or provider call
+original-dem-package.lib	x86	16	dem;demdata;demmsg;demdisp;demdasd;demdir;demerror;demfcb;demfile;demgset;demhndl;demioctl;demlabel;demlock;demmisc;demsrch	static only; no selector or provider call
