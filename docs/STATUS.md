@@ -44,6 +44,14 @@ exit criterion. Its scope is closed as a static source composition island;
 provider bodies are explicitly transferred to S3, not treated as an unplanned
 trace-derived backlog.
 
+**T281 S3 P1:** the complete remaining twelve-unit original DEM provider
+matrix now compiles and archives on x86 and x64 as
+`original-dem-providers.lib`. The existing same-shaped
+`adapter-vdm-monitor/include/vdm.h` declaration carrier closes the only
+matrix-specific declaration gap (`NtVdmControl(VdmQueryDir, ...)`) in
+`demsrch.c`; its implementation body is excluded. The archive is
+selector-disabled and does not invoke a provider or enable `50:xx`.
+
 The detailed execution plans are [S1 original BOP dispatch composition](etc/operations/m0-t281-s1-original-bop-dispatch-composition-plan-001.md), [S2 original DEM common-control composition](etc/operations/m0-t281-s2-original-dem-common-control-composition-plan-001.md), and [S3 original DEM provider source composition](etc/operations/m0-t281-s3-original-dem-provider-source-composition-plan-001.md).
 
 ### Closed packet reference — M0 T280 S20

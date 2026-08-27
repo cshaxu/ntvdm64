@@ -1,0 +1,13 @@
+unit	current_form	x86_syntax	x64_syntax	binding_disposition	runtime_disposition
+demdasd.c	original mirror	pass	pass	existing adapter-win32 and adapter-softpc declarations	provider not invoked
+demdir.c	original mirror	pass	pass	existing adapter-win32 and adapter-softpc declarations	provider not invoked
+demerror.c	original mirror	pass	pass	existing adapter-win32 and adapter-softpc declarations	provider not invoked
+demfcb.c	original mirror	pass	pass	existing adapter-win32 and adapter-softpc declarations	provider not invoked
+demfile.c	original mirror	pass	pass	existing adapter-win32 and adapter-softpc declarations	provider not invoked
+demgset.c	registered existing guest-location divergences	pass	pass	existing numeric-location and lease boundary	provider not invoked
+demhndl.c	original mirror	pass	pass	existing adapter-win32 and adapter-softpc declarations	provider not invoked
+demioctl.c	original mirror	pass	pass	existing adapter-win32 and adapter-softpc declarations	provider not invoked
+demlabel.c	original mirror	pass	pass	existing adapter-win32 and adapter-softpc declarations	provider not invoked
+demlock.c	original mirror	pass	pass	existing adapter-win32 and adapter-softpc declarations	provider not invoked
+demmisc.c	original mirror	pass	pass	existing adapter-win32 and adapter-softpc declarations	provider not invoked
+demsrch.c	registered existing host-resource/guest-location divergences	pass	pass	existing adapter-vdm-monitor vdm.h declaration carrier for NtVdmControl/VdmQueryDir	provider not invoked; control implementation excluded
