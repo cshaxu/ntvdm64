@@ -2,32 +2,18 @@
 
 ## Current Work
 
-**Active: M0 T286 S6 — final remeasurement, focused formal validation and closure.**
+**No active M/T/S packet.**
 
-T285 is closed as a duplicate-route withdrawal. T286 begins the queue's
-Bochs-core minimization package before XMS or other BOP-owner recovery.
+T286 is closed. Its final Bochs-core minimization evidence is in
+[the closure record](history/m0-t286-closure-20260827.md). The next candidate
+is the original XMS owner package; no implementation is admitted until its
+own bounded packet is recorded below.
 
 ## Active Packet
 
-### M0 T286 S6 — final remeasurement, focused formal validation and closure
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | `M0 T286 S6`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T286 S1--S5 have disposed every divergence group; S6 is the required final measurement and focused validation closure. |
-| Objective | Recalculate the adopted Bochs mirror/overlay delta, reconcile every retained exception register, repair only T286-owned focused build inputs, and validate the minimized Bochs boundary on x86 and x64. |
-| Non-goals | No XMS/UMB/DOS policy, BOP implementation, new machine device, global MVDM build-graph reconstruction, or `src.old` use. |
-| Reference Baseline | T286 S1 ledger and S2--S5 evidence; pinned Bochs 2.6 source; current core/overlay manifests and focused fixtures. |
-| Files And ABI Surface | `bochs-core`, `bochs-core-overlay`, `adapter-bochs`, focused fixtures, T286-specific manifest/generator if required, exception READMEs and evidence. |
-| Applicable Rules | Architecture, coding, execution, source policy, build hygiene and mirror/overlay rules. |
-| Verification | Repeat pinned-source metric; check overlay privacy and exception indexes; run focused structural fixtures and a T286-scoped formal x86/x64 graph where graph permits; documentation governance and `git diff --check`. |
-| Expected Markers | No retired observer returns; every retained divergence has an owner and exception index; focused graph never uses stale component roots or `src.old`. |
-| Asset Needs | Pinned core sources, current overlay, adapter machine sources, formal MSVC/Ninja toolchain and focused fixtures. |
-| Reporting Requirements | Final counts, each validation result, any scope-limited graph constraint, and an explicit T286 closure disposition. |
-| Stop Conditions | Any proposed repair expands to unrelated MVDM runtime/link closure, adds BOP semantics, or restores retired diagnostics. |
-| Exit Criteria | Final metrics and exception registers reconcile; focused x86/x64 validation is evidenced or a precise independent blocker is proved; T286 closure is written and queue head is ready for admission. |
-| Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | SIM parameter accesses, allocation/configuration decisions, RAM copy/range validation, direct private-memory access, adapter facade calls and memory test inputs. |
+No active implementation packet is admitted.  The next packet must use the
+queue-head XMS proposal, the live BOP tracker and its source/interface ledgers
+as its admission baseline.
 
 **T286 S1 closure:** the complete [divergence disposition ledger](etc/operations/m0-t286-s1-bochs-core-divergence-disposition-ledger-001.md) measures 29 differing upstream-relative mirror files (431 additions / 353 deletions) and 15 private overlay bodies (1,164 lines). It classifies all groups as build bindings, required private CPU/memory/device hooks, optional diagnostics, or B2/D4 external-composition candidates. No source behavior changed.
 

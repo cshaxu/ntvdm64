@@ -16,10 +16,6 @@
 #define RUNTIME_ENABLE_MACHINE_UD_BRIDGE 0
 #endif
 
-#ifndef RUNTIME_ENABLE_MACHINE_FIRST_FAULT_OBSERVER
-#define RUNTIME_ENABLE_MACHINE_FIRST_FAULT_OBSERVER 0
-#endif
-
 enum {
   BOCHS_CORE_OVERLAY_GENERIC_UD_EVENT_MAGIC = 0x42585544u,
   BOCHS_CORE_OVERLAY_GENERIC_UD_EVENT_VERSION = 1u,
@@ -34,9 +30,7 @@ enum {
   BOCHS_CORE_OVERLAY_GENERIC_UD_PENDING = 3u,
   BOCHS_CORE_OVERLAY_CONTEXT_UNCHANGED = 0u,
   BOCHS_CORE_OVERLAY_CONTEXT_REAL = 1u,
-  BOCHS_CORE_OVERLAY_CONTEXT_PROTECTED = 2u,
-  BOCHS_CORE_OVERLAY_FIRST_FAULT_MAGIC = 0x42584631u,
-  BOCHS_CORE_OVERLAY_FIRST_FAULT_VERSION = 1u
+  BOCHS_CORE_OVERLAY_CONTEXT_PROTECTED = 2u
 };
 
 /* These private records intentionally retain the fixed byte layout used by
@@ -75,14 +69,6 @@ struct bochs_core_overlay_generic_ud_outcome {
   Bit32u context_mode, reserved0;
 };
 
-struct bochs_core_overlay_first_fault {
-  Bit32u magic, abi_version, struct_bytes, cpu_id;
-  Bit32u vector, error_code, execution_mode, reserved0;
-  Bit64u fault_rip;
-  Bit32u eax, ebx, ecx, edx, esi, edi, ebp, esp, eip, eflags;
-  Bit16u cs, ds, es, ss, fs, gs;
-};
-
 static void bochs_core_overlay_copy_exception_state(BX_CPU_C *cpu,
   bochs_core_overlay_generic_ud_event *event, unsigned vector,
   Bit16u error_code)
@@ -116,23 +102,6 @@ static void bochs_core_overlay_copy_exception_state(BX_CPU_C *cpu,
 
 int BX_CPU_C::overlay_handle_exception(unsigned vector, Bit16u error_code)
 {
-#if RUNTIME_ENABLE_MACHINE_FIRST_FAULT_OBSERVER
-  if (vector != BX_UD_EXCEPTION) {
-    bochs_core_overlay_first_fault event;
-    bochs_core_overlay_generic_ud_event common;
-    bochs_core_overlay_copy_exception_state(this, &common, vector, error_code);
-    memcpy(&event, &common, sizeof(event));
-    event.magic = BOCHS_CORE_OVERLAY_FIRST_FAULT_MAGIC;
-    event.abi_version = BOCHS_CORE_OVERLAY_FIRST_FAULT_VERSION;
-    event.struct_bytes = sizeof(event);
-    if (bochs_core_overlay_opaque_callback_invoke(&event, sizeof(event), 0, 0)) {
-      bx_pc_system.kill_bochs_request = 1;
-      BX_CPU_THIS_PTR async_event |= BX_ASYNC_EVENT_STOP_TRACE;
-      longjmp(BX_CPU_THIS_PTR jmp_buf_env, 1);
-    }
-  }
-#endif
-
 #if RUNTIME_ENABLE_MACHINE_UD_BRIDGE
   if (vector == BX_UD_EXCEPTION) {
     bochs_core_overlay_generic_ud_event event;

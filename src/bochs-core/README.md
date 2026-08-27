@@ -65,3 +65,12 @@ declarations or minimal call sites.
   `BX-CORE-DIV-006` — SIM-dependent RAM setup is replaced by private checked
   ordinary-RAM allocation/copy bodies; mirror files keep declarations. Files:
   `memory/memory.h`, `memory/misc_mem.cc`.
+
+## M0 T286 final minimization measure
+
+The current pinned comparison has 27 non-identical upstream-relative mirror
+files (393 insertions / 356 deletions) and no project-authored production file
+under this root.  The ten private implementation bodies (1,067 physical
+lines) remain in `../bochs-core-overlay` and are indexed by its README.  The
+final evidence and focused x86/x64 Ninja validation are recorded in
+[`m0-t286-s6-final-minimization-validation-001.md`](../../docs/etc/evidence/m0-t286-s6-final-minimization-validation-001.md).

@@ -21,32 +21,7 @@
       "classification": "MSVC x64 host pointer width; guest CPU level remains independently CPU5"
     }
   ],
-  "additions": [
-    {
-      "name": "RUNTIME_ENABLE_MACHINE_UD_BRIDGE",
-      "expectedSource": "<absent>",
-      "newValue": "1",
-      "classification": "registered selector-blind core-to-machine bridge; formal Ninja graph must compile the same gate as its prior CPU5 witnesses"
-    },
-    {
-      "name": "RUNTIME_EXTERNAL_GENERIC_UD_BRIDGE",
-      "expectedSource": "<absent>",
-      "newValue": "1",
-      "classification": "documented external adapter composition: retain machine stop-observation helpers while compiling out only machine's fixture-default bridge definition"
-    },
-    {
-      "name": "RUNTIME_ENABLE_MACHINE_FIRST_FAULT_OBSERVER",
-      "expectedSource": "<absent>",
-      "newValue": "1",
-      "classification": "registered default-off runtime observer compiled into the formal graph; only a fixture can arm it"
-    },
-    {
-      "name": "RUNTIME_ENABLE_MACHINE_SEGMENT_ACCESS_OBSERVER",
-      "expectedSource": "<absent>",
-      "newValue": "1",
-      "classification": "registered default-off runtime observer compiled only in the formal graph; it is armed only with the existing first-fault diagnostic"
-    }
-  ],
+  "additions": [],
   "derivedAssertions": [
     {
       "name": "BX_SUPPORT_APIC",
