@@ -46,7 +46,10 @@ int machine_facade_copy_real_mode_state(uint16_t *cs, uint16_t *ss,
  * OpenNT, DOS or VDM semantics; adapter-mvdm-host-out/softpc owns that compatibility ABI. */
 int machine_facade_copy_ax16(uint16_t *value);
 int machine_facade_copy_bx16(uint16_t *value);
+int machine_facade_copy_cx16(uint16_t *value);
 int machine_facade_copy_dx16(uint16_t *value);
+int machine_facade_copy_bp16(uint16_t *value);
+int machine_facade_copy_ss16(uint16_t *value);
 int machine_facade_copy_si16(uint16_t *value);
 int machine_facade_copy_ds16(uint16_t *value);
 int machine_facade_copy_es16(uint16_t *value);
@@ -56,6 +59,8 @@ int machine_facade_set_bl8(uint8_t value);
 int machine_facade_set_ax16(uint16_t value);
 int machine_facade_set_bx16(uint16_t value);
 int machine_facade_set_dx16(uint16_t value);
+int machine_facade_set_cx16(uint16_t value);
+int machine_facade_set_bp16(uint16_t value);
 int machine_facade_set_carry(uint32_t value);
 void machine_facade_request_cpu_stop(void);
 /* Clears only a previous adapter-owned finite-run stop request.  This does

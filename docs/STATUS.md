@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T287 S4 — XMS extended-memory block and copy binding.**
+**Active: M0 T287 S5 — XMS UMB and IVT/INT15 source-family binding.**
 
 T286 is closed. Its final Bochs-core minimization evidence is in
 [the closure record](history/m0-t286-closure-20260827.md). T287 admits the
@@ -10,25 +10,25 @@ queue-head original XMS owner package using a complete source-first plan.
 
 ## Active Packet
 
-### M0 T287 S4 — XMS extended-memory block and copy binding
+### M0 T287 S5 — XMS UMB and IVT/INT15 source-family binding
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T287 S4`, Ordinary Mode with single-person dual-role implementation and review. |
+| Identifier Mode | `M0 T287 S5`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Queue order after closed T286; owner direction is continuous single-person dual-role execution in queue order. |
-| Objective | Bind original `xmsblock.c` allocation, capacity, move, free and realloc flow to one source-shaped extended-memory reservation/copy seam without a host-pointer conversion. |
-| Non-goals | No `52:xx` ingress route, direct-address `xmsmem86.c` backend, UMB policy in Bochs, generic guest pointer, new mapping manager, or `src.old` use. |
-| Reference Baseline | [T287 plan](etc/operations/m0-t287-xms-owner-package-recovery-plan-001.md), [S1 evidence](etc/evidence/m0-t287-s1-xms-current-rebaseline-001.md), [S2 evidence](etc/evidence/m0-t287-s2-original-xms-static-composition-001.md), [S3 evidence](etc/evidence/m0-t287-s3-xms-a20-lease-binding-001.md), source policy and mapping-manager rule. |
-| Files And ABI Surface | `mvdm-host/xms.486/xmsblock.c`, retained direct-address source identity in `i386/xmsmem86.c`, one `adapter-mvdm-host-out/softpc` reservation/copy facade, the existing session mapping manager, and typed `adapter-bochs` memory mechanics. |
+| Objective | Close original `xmsumb.c` and `xmsmisc.c` UMB/IVT/INT15 source families with explicit source-shaped success/failure dispositions, without introducing DOS/UMB policy below their owner. |
+| Non-goals | No `52:xx` ingress route, new UMB policy in Bochs, generic guest pointer, host-pointer conversion, new mapping manager, or `src.old` use. |
+| Reference Baseline | [T287 plan](etc/operations/m0-t287-xms-owner-package-recovery-plan-001.md), [S1--S4 evidence](etc/evidence/m0-t287-s4-xms-block-binding-001.md), source policy and mapping-manager rule. |
+| Files And ABI Surface | `mvdm-host/xms.486/xmsumb.c`, `xmsmisc.c`, historical Reserve/Release UMB and IVT/INT15 interface forms, session bounded leases and typed adapter-bochs range/interrupt mechanics. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Focused x86/x64 source fixture for allocation/capacity/move/free/realloc success and failure, plus documentation governance and `git diff --check`. |
-| Expected Markers | `xmsblock.c` remains a minimally changed mirror or delegates only a material binding to its matching overlay. All guest memory comes through a fresh bounded lease. |
-| Asset Needs | S1--S3 evidence, current session mapping manager, existing global handle/mapping rules, original `suballoc` mirror and adapter-bochs typed memory operations. |
-| Reporting Requirements | Original source call order, numeric XMS address/capacity contract, negative x86/x64 cases and any named successor boundary. |
-| Stop Conditions | A second mapping manager, host-pointer conversion, XMS/UMB vocabulary in `adapter-bochs`/Bochs, source-body rewrite, or a selector route. |
-| Exit Criteria | Block allocation/copy/free/realloc follows one source-shaped capacity and identity contract on both architectures; no direct host pointer is admitted. |
+| Verification | Focused x86/x64 UMB/IVT source-family fixtures for no-UMB failures and any admitted success, plus documentation governance and `git diff --check`. |
+| Expected Markers | Original source retains its UMB/INT15 flow; successful physical spans are selected only outside adapter-bochs and every unavailable branch is source-proven. |
+| Asset Needs | S1--S4 evidence, exact XMS source, existing A20 binding, session leases, and an owner disposition for ReserveUMB/ReleaseUMB/IVT. |
+| Reporting Requirements | Per-source function disposition, exact failure/result registers, positive/negative x86/x64 results and any transferred machine prerequisite. |
+| Stop Conditions | UMB/DOS/XMS policy in adapter-bochs/Bochs, an unregistered direct pointer, selector route, or invented success path. |
+| Exit Criteria | `xmsumb.c` and `xmsmisc.c` have complete source-family dispositions and local x86/x64 proof; unresolved physical machinery transfers by named owner. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | Every block identity, allocation limit, move source/destination, free/realloc transition, lease lifetime and original failure branch. |
+| Similar-Issue Sweep | Every UMB reservation/release/result, IVT/INT15 read/write, A20 interaction, guest lease, and source-defined unavailable branch. |
 
 **T287 S1 closure:** all 15 physical `mvdm-host/xms.486` paths hash-match
 both canonical OpenNT roots (0 mismatches).  The final per-file SHA-256
@@ -51,6 +51,13 @@ only numeric guest location data and acquires a fresh one-byte session lease
 per write. Formal x86 and x64 `/MT` fixtures both pass valid location,
 invalid location, lease-expiry and AX/BL-result checks. No `52:xx` route or
 direct-address `xmsmem86.c` backend is enabled; see [S3 evidence](etc/evidence/m0-t287-s3-xms-a20-lease-binding-001.md).
+
+**T287 S4 closure:** original `suballoc.c` and `xmsblock.c` now compose on
+x86/x64 through same-shaped numeric XMS commit/decommit/move exports. The
+only material source divergence is the matching private bounded-lease overlay
+for the source `SS:BP-12` move structure. Formal fixtures cover allocation,
+move, malformed input, reallocation/free and capacity/range failures; see
+[S4 evidence](etc/evidence/m0-t287-s4-xms-block-binding-001.md).
 
 **T286 S1 closure:** the complete [divergence disposition ledger](etc/operations/m0-t286-s1-bochs-core-divergence-disposition-ledger-001.md) measures 29 differing upstream-relative mirror files (431 additions / 353 deletions) and 15 private overlay bodies (1,164 lines). It classifies all groups as build bindings, required private CPU/memory/device hooks, optional diagnostics, or B2/D4 external-composition candidates. No source behavior changed.
 

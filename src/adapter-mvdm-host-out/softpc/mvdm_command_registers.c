@@ -30,6 +30,13 @@ uint16_t getDX(void)
     return value;
 }
 
+uint16_t getBP(void)
+{
+    uint16_t value = 0u;
+    (void)machine_facade_copy_bp16(&value);
+    return value;
+}
+
 uint16_t getSI(void)
 {
     uint16_t value = 0u;
@@ -48,6 +55,13 @@ uint16_t getES(void)
 {
     uint16_t value = 0u;
     (void)machine_facade_copy_es16(&value);
+    return value;
+}
+
+uint16_t getSS(void)
+{
+    uint16_t value = 0u;
+    (void)machine_facade_copy_ss16(&value);
     return value;
 }
 
@@ -74,6 +88,11 @@ void setBX(uint16_t value)
 void setDX(uint16_t value)
 {
     (void)machine_facade_set_dx16(value);
+}
+
+void setCX(uint16_t value)
+{
+    (void)machine_facade_set_cx16(value);
 }
 
 void setCF(uint32_t value)

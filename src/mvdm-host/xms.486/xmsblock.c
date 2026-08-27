@@ -17,6 +17,7 @@
 #include <xmssvc.h>
 #include <softpc.h>
 #include <mvdm.h>
+#include "mvdm-host-overlay/xms.486/xms_block_move.h"
 
 
 /* xmsAllocBlock - Commit Memory for an EMB.
@@ -176,36 +177,14 @@ ULONG NewSize;
 
 VOID xmsMoveBlock (VOID)
 {
-PBYTE	pExtMoveInfo,pSrc,pDst;
-ULONG	cbTransfer,SoftpcBase, DstSegOff;
-
-    pExtMoveInfo = (PBYTE) GetVDMAddr(getSS(),getBP());
-    (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;
-    cbTransfer = (FETCHDWORD(*(PULONG)pExtMoveInfo));
-    cbTransfer *= 2;					// Get in bytes
-    (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;
-    (DWORD)pSrc = FETCHDWORD(*(PULONG)pExtMoveInfo);
-    (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;
-    (DWORD)pDst = FETCHDWORD(*(PULONG)pExtMoveInfo);
-
-    // Yes, we could use memmov for handling the overlapping regions
-    // but XMS spec wants memcpy behaviour.
-
-#ifdef i386
-    RtlCopyMemory (pDst,pSrc,cbTransfer);
-#else
-    SoftpcBase = (ULONG) GetVDMAddr (0,0);
-    RtlCopyMemory((PVOID)((ULONG)pDst + SoftpcBase),
-	   (PVOID)((ULONG)pSrc + SoftpcBase),
-	   cbTransfer);
-    // if we touched the intel memory, tell the emulator to flush its cache
-    // WARNING!!!! Donot use Sim32FlushVDMPoiner unless you know the exact segment
-    // address. In this case, we have no idea what the segment value is, all we
-    // know is its "linear address".
-    // BUGBUG verify whether we can ignore the case with pDst > 0x110000
-    sas_overwrite_memory(pDst, cbTransfer);
-
-#endif
+    /* DIVERGENCE MVDM-HOST-DIV-011: the source body retains SS:BP and two
+       DWORD linear operands through persistent host aliases.  The matching
+       private overlay reads the same twelve bytes under one bounded lease and
+       invokes the original-shaped numeric xmsMoveMemory seam. */
+    if (!mvdm_xms_move_block_from_stack()) {
+        setAX(0);
+        return;
+    }
     setAX(1);
     return;
 }
