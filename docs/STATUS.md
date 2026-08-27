@@ -2,9 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T280 S17** — Audit the remaining x64-sensitive boundaries of the
-original `demsrch.c` body as one source-owner surface. It is Ordinary Mode
-with single-person dual-role review; no provider/BOP route is enabled.
+**Active: M0 T280 S18** — Recover the grouped host-local x64 boundaries of
+the original `demsrch.c` body and relocate the reached VDM-control facade to
+its architectural owner. It is Ordinary Mode with single-person dual-role
+review; no provider/BOP route is enabled.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -25,25 +26,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S17 — `demsrch.c` remaining x64 boundary audit
+### M0 T280 S18 — `demsrch.c` host-local x64 binding closure
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T280 S17`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S16 closed only persisted find-list identity and exact DOS layout; it leaves the source's other x64 warnings unmodified. |
-| Objective | Produce a whole-source, source-first disposition of every remaining x64-sensitive `demsrch.c` operation. |
-| Non-goals | No pointer-leaf fix, provider/BOP route, guest trace, new mapper, Bochs change, directory backend or source-body implementation. |
-| Reference Baseline | Original `demsrch.c`, S16 compile evidence, mapping rules, adapter-win32 and adapter-softpc boundaries. |
-| Files And ABI Surface | Audit ledger/evidence, focused source/cast inventory and Status only; no product source modification. |
+| Identifier Mode | `M0 T280 S18`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S17 classified every remaining x64-sensitive `demsrch.c` group and selected one source-owner follow-on rather than a warning-selected leaf patch. |
+| Objective | Recover S17 groups `SRCH-X64-001` through `SRCH-X64-005`: host-local sentinel/path/buffer width binding and `VdmQueryDir` facade owner relocation. |
+| Non-goals | No DEM provider/BOP route, guest trace, directory backend, `GetVDMAddr` guest lease, new mapper, kernel VDM/CSRSS recreation, Bochs change or source-hygiene rewrite. |
+| Reference Baseline | Original `demsrch.c`, S17 ledger/evidence, adapter-win32 NT I/O facade, current VdmQueryDir facade and adapter-vdm-monitor architecture rule. |
+| Files And ABI Surface | One original mirror body/register, adapter-vdm-monitor same-shaped VDM-control facade, relevant include/build/test evidence and Status. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | x64 warning/cast inventory, original call-path review, owner/mapping classification and focused no-new-raw-persistence scan. |
-| Expected Markers | Every remaining warning has a unique value classification and future package disposition; no trace-selected patch. |
-| Asset Needs | S16 x86/x64 compiler evidence, original source paths, current adapter/session contracts and tracker. |
-| Reporting Requirements | Exact line/value class, original owner, required adapter or direct host-local handling, failure behavior and dependency order. |
-| Stop Conditions | A leaf implementation begins, a host-local pointer enters a mapper, a guest numeric value is tokenized, or any provider/BOP route is enabled. |
-| Exit Criteria | A complete remaining-boundary ledger exists with no unclassified x64 warning/cast and one package-level follow-on disposition per group. |
+| Verification | Focused x86/x64 syntax and host-local VDM-control tests, source call/failure review, README divergence register, no-mapping scan and diff review. |
+| Expected Markers | No x64 pointer-width warnings in groups 001-005; VdmQueryDir has one adapter-vdm-monitor owner; all original status/fallback paths remain visible. |
+| Asset Needs | S17 ledger, original source and includes, current adapter/session contract, MSVC x86/x64 and formal Ninja graph. |
+| Reporting Requirements | Exact changed original expressions, source failure preservation, adapter relocation proof, mapping exclusion and remaining non-goals. |
+| Stop Conditions | A host-local pointer/handle enters a mapper, a guest lease is implemented, a provider/BOP route begins, a kernel VDM/CSRSS path is recreated, or non-width source hygiene is altered. |
+| Exit Criteria | All five selected S17 groups have focused x86/x64 evidence and registered minimal divergences; the source remains a non-enabled provider candidate. |
 | Original Owner Request | “单人双角色模式执行队列任务”。 |
-| Similar-Issue Sweep | Directory buffers, device handles, path conversion, offsets, `NtQueryDirectoryFile`, `NtVdmControl`, cleanup, guest-memory isolation and source failure branches. |
+| Similar-Issue Sweep | Every FindFirst/FindNext/FCB path, device sentinel, path offsets, directory buffers, `NtQueryDirectoryFile`, `NtVdmControl` relocation, cleanup, guest-memory exclusion and source failure branches. |
 
 ### Closed packet reference — M0 T280 S13
 
@@ -74,6 +75,14 @@ layout on both architectures and persist only session `host_resource`
 surrogates. Formal x86/x64 source and layout evidence passed; remaining
 unrelated `demsrch.c` width warnings transfer to S17 as one source audit. See
 [S16 closure](history/m0-t280-s16-closure-20260826.md).
+
+### Closed packet reference — M0 T280 S17
+
+**S17 closure:** all remaining `demsrch.c` x64 warning/cast groups have a
+source-owner, value-class, mapping and follow-on disposition. Host-local
+directory state is not tokenized; only the separately bounded `GetVDMAddr`
+family is a future guest-memory lease. See
+[S17 closure](history/m0-t280-s17-closure-20260826.md).
 
 ### Closed packet reference — M0 T280 S12
 
