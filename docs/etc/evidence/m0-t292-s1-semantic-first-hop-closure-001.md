@@ -1,5 +1,10 @@
 # M0 T292 S1 — semantic first-hop egress closure
 
+> The function/file-level successor is
+> [the first-hop closure record](m0-t292-s1-function-file-first-hop-closure-001.md).
+> This evidence remains the authoritative source-expression and symbol
+> classification input to that successor.
+
 ## Question
 
 Has the selected MVDM source union been reduced from a conservative lexical
@@ -56,8 +61,9 @@ package BFS begins?
 
 The earlier 5,988-spelling record is retained as a deliberately broad lexical
 seed only.  It is not a first-hop closure: it includes comments, strings,
-preprocessor forms, macro aliases and declarations.  This successor is the
-authoritative function-level first-hop result.
+preprocessor forms, macro aliases and declarations.  This is the authoritative
+source-expression and symbol-level result; the successor records the
+function/file definition-candidate frontier without changing these symbols.
 
 This closes **stage one only**.  A `non-mvdm-opennt-package-boundary`, CSR,
 Console, Redirector, WOW or kernel-VDM row is a precisely identified BFS seed,

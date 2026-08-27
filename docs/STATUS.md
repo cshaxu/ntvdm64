@@ -2,55 +2,16 @@
 
 ## Current Work
 
-**Active: M0 T292 S1 — External OpenNT dependency BFS audit.**
-
-M0 T290 is closed. Its final Redirector package boundary is in
-[the closure record](history/m0-t290-closure-20260827.md). M0 T291 closed the
-package-level audit. Owner-directed T292 now traverses the complete external
-dependency graph of the selected MVDM host union before static closure work
-resumes; hard-boundary source reuse is one required traversal outcome, not the
-whole search perimeter.
+**No active M/T/S packet.** M0 T292 was closed at the owner-directed
+one-degree stopping point; its lexical, semantic, function and file evidence is
+in [the closure record](history/m0-t292-closure-20260827.md). A subsequent
+owner-designed task may use that finite frontier to split and admit package BFS
+work. No second-degree expansion has started.
 
 ## Active Packet
 
-### M0 T292 S1 — External OpenNT dependency BFS audit
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | `M0 T292 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Owner directed a breadth-first audit from every selected `mvdm-host` outward dependency—definitions, variables, functions, declarations, libraries and build inputs—through every non-MVDM OpenNT package. It includes original kernel-mode code that may be source-derived into a non-invasive public-Win32/Bochs/adapter implementation. |
-| Objective | Build a complete dependency graph and per-file/per-function/block disposition. Start at the complete MVDM host union, discover all non-MVDM OpenNT package candidates, and recursively expand each dispatched package until an edge reaches a modern public Win32 API, a kernel/product hard boundary, no external dependency, or a finite small closure. Record original fragment reuse, same-shaped modern route, explicit exclusion, owner, failure contract and current diff/overlay reversion consequence. |
-| Non-goals | No linked CSR/CSRSS/kernel code, no CSRSS clone, no provider/adapter body, fast WOW assembler, global current task/session, second CPU executor, raw pointer/HANDLE ABI, selector enablement, Bochs change or `src.old` input. |
-| Reference Baseline | [T291 closure](history/m0-t291-closure-20260827.md), [stopping-boundary audit](etc/evidence/adapter-source-reuse-at-stopping-boundaries-001.md), original OpenNT source and source policy. |
-| Files And ABI Surface | A breadth-first package/node/edge ledger; external package/file/function ledgers; MVDM interface/file/divergence/reversion ledgers; current adapter and overlay sources considered only as reversion candidates. |
-| Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Original source/build traversal, breadth-first package/node/edge walk, per-file SHA-256, function/block dependency review, source-to-current-diff/overlay mapping, ledger schema checks and documentation governance validation. No executable feature proof is claimed. |
-| Expected Markers | Every discovered non-MVDM package has one candidate disposition; every reached file/function/block has one modern non-invasive route or explicit exclusion; candidate fragments have finite closure and no adapter is created without source evidence. |
-| Asset Needs | Complete local OpenNT tree, existing MVDM/external trackers and current production code. |
-| Reporting Requirements | State graph depth, original path/hash, caller, definition, package root, retained algorithm, unavailable kernel/product dependency, modern route, owner, failure rule and diff/overlay consequence. |
-| Stop Conditions | Any attempt to link kernel/product-shell code, import a package after only a symbol search or incomplete BFS expansion, create a generic adapter, expose raw identity, touch Bochs or import `src.old`. |
-| Exit Criteria | Complete external dependency BFS ledger; complete hard-boundary file/function/block ledgers; exact external-package decisions; quantified current-diff/overlay reversion map; and owner-review report. |
-| Original Owner Request | “虽然opennt是内核态但是在现代win32可以用非内核态或者bochs/其他非侵入式方式实现的，都包括进来，用同样标准审计代码可用性。” |
-| Similar-Issue Sweep | CSR capture, CSRSS wait/process lifecycle, every `NtVdmControl` service, V86 monitor, DPMI, DEM search, WOW/VDD and current adapter/overlay replacements. |
-
-**T292 S1 stage-one semantic closure:** the complete MVDM outward lexical
-inventory remains retained as [the BFS seed ledger](etc/operations/opennt-non-mvdm-dependency-bfs-ledger.tsv),
-[include edges](etc/operations/opennt-non-mvdm-stage1-include-edge-ledger.tsv),
-[build edges](etc/operations/opennt-non-mvdm-stage1-build-edge-ledger.tsv),
-[call edges](etc/operations/opennt-non-mvdm-stage1-call-edge-ledger.tsv) and
-[declared data edges](etc/operations/opennt-non-mvdm-stage1-extern-data-ledger.tsv).
-The preceding historical call ledger was found incomplete for public/imported
-calls; the complete raw invocation inventory is
-[here](etc/operations/opennt-non-mvdm-stage1-invocation-ledger.tsv) and is the
-conservative function seed for this audit. Its reconciled symbol-to-header
-candidate index is [here](etc/operations/opennt-non-mvdm-stage1-invocation-symbol-ledger.tsv).
-The authoritative source-aware result is the [semantic site ledger](etc/operations/opennt-non-mvdm-stage1-semantic-site-ledger.tsv),
-[semantic symbol ledger](etc/operations/opennt-non-mvdm-stage1-semantic-symbol-ledger.tsv),
-and [true egress ledger](etc/operations/opennt-non-mvdm-stage1-true-egress-ledger.tsv).
-Every actual direct-call symbol has one final first-hop owner/disposition;
-the method, counts and boundary meaning are in the
-[semantic closure](etc/evidence/m0-t292-s1-semantic-first-hop-closure-001.md).
-Second-level package/file/function expansion has not begun.
+No active M/T/S packet. The next task requires fresh owner admission against
+the T292 closure frontier.
 
 **T291 S4 closure:** command, monitor-control and synchronous callback
 execution are now distinct typed planes; the generic session operation table
