@@ -1,9 +1,14 @@
 # mvdm-guest
 
-Complete load-only MVDM guest mirror.  `dos/` carries the selected DOS/V86
-guest; `win16/` carries the selected WOW16/bin86 guest.  Neither subtree is a
-host library, compile input or link input.  App loads only manifest-selected
-immutable guest bytes.
+Complete load-only MVDM guest mirror.  The explicit guest roots are:
+
+- `dos/v86/`: selected DOS/V86 guest;
+- `bin86/`: selected Bin86 bootstrap carry;
+- `wow16/`: selected WOW16 source, resources and products; and
+- `font16/`: selected original 16-bit font products.
+
+None is a host library, compile input or link input. App loads only
+manifest-selected immutable guest bytes.
 
 ## Provenance
 
@@ -12,18 +17,16 @@ immutable guest bytes.
 - [WOW16 carry manifest](../../docs/etc/operations/m0-t274-s4-wow16-carry-manifest.tsv)
   and [bin86 carry manifest](../../docs/etc/operations/m0-t274-s4-bin86-carry-manifest.tsv)
   record the selected Win16 paths and hashes.
+- [T297 root move manifest](../../docs/etc/operations/m0-t297-s1-guest-root-move-manifest.tsv)
+  records all 1,991 canonical old-to-new paths. Its
+  [duplicate-elision manifest](../../docs/etc/operations/m0-t297-s1-guest-root-duplicate-elision-manifest.tsv)
+  records the ten old supplementary Win16 paths removed only after an equal
+  SHA-256 canonical WOW16 target was verified.
 - `build/output/dos` and `build/output/wow16` remain in-place immutable
   product evidence. They are not copied here or linked into the host.
-- Eight selected Win16 driver products (`comm.drv`, `vga.drv`, `keyboard.drv`,
-  `mouse.drv`, `sound.drv`, `system.drv`, `TIMER.DRV`, and `WFWNET.DRV`) are
-  hash-identical carries from `build/output/wow16`; the S9 evidence records
-  their exact source paths.
-- Eight selected Win16 driver products (`comm.drv`, `vga.drv`, `keyboard.drv`,
-  `mouse.drv`, `sound.drv`, `system.drv`, `TIMER.DRV`, and `WFWNET.DRV`) are
-  hash-identical carries from `build/output/wow16`; the S9 evidence records
-  their exact source paths.
 
 ## Divergence register
 
-None.  Apart from this component README, every carried file below `dos/` and
-`win16/` remains byte-identical to its recorded local source path.
+None. Apart from this component README, every carried file below `dos/v86/`,
+`bin86/`, `wow16/` and `font16/` remains byte-identical to its recorded local
+source path.

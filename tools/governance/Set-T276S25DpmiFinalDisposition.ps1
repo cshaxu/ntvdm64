@@ -10,7 +10,7 @@ $dpmi = @($rows | Where-Object {$_.source_path -like 'dpmi/*'})
 if ($dpmi.Count -ne 59) { throw "Expected 59 DPMI rows, found $($dpmi.Count)." }
 foreach ($row in $dpmi) {
     $row.final_disposition = 'guest-only'
-    $row.final_owner_or_link_boundary = 'mvdm-guest/dos DOSX/DPMI guest product; loaded immutable guest bytes, never a host link input'
+    $row.final_owner_or_link_boundary = 'mvdm-guest/dos/v86 DOSX/DPMI guest product; loaded immutable guest bytes, never a host link input'
     $row.final_change_class = 'none; byte-exact guest source, build input or artifact retained'
     $row.named_adapter = 'adapter-mvdm-host-in; adapter-mvdm-host-out/softpc; adapter-mvdm-host-out/monitor; adapter-bochs at the historical guest boundary only'
     $row.mapping_implication = 'guest addresses remain guest numeric values; any host-facing boundary uses fixed-width adapter frames and the session guest-memory mapping-manager lease'

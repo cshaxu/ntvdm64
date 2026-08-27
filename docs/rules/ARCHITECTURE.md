@@ -2,7 +2,8 @@
 
 1. The production source owners are exactly `bochs-core`, `mvdm-host`, `opennt-host`,
    `mvdm-support`, `mvdm-tools`, `mvdm-softpc-firmware`,
-   `mvdm-platform-abi`, `mvdm-guest/dos`, `mvdm-guest/win16`,
+   `mvdm-platform-abi`, `mvdm-guest/dos/v86`, `mvdm-guest/bin86`,
+   `mvdm-guest/wow16`, `mvdm-guest/font16`,
    `adapter-bochs`, `adapter-mvdm-host-in`, `adapter-mvdm-host-out`, `session`, `broker`,
    `adapter-opennt-host`, and `app`.
 2. `mvdm-host` is the sole complete selected MVDM host-runtime mirror.
@@ -86,10 +87,10 @@
     the `softpc` family of `adapter-mvdm-host-out` with a checked synchronous mapping lease with address, span,
     access and epoch. No such pointer crosses an ABI or reaches asynchronous
     work.
-18. `mvdm-guest/dos` and `mvdm-guest/win16` are complete load-only
-    mirrors. Their source, objects, libraries and products never satisfy a
-    host symbol. App loads manifest-selected immutable bytes through
-    `adapter-bochs`.
+18. `mvdm-guest/dos/v86`, `mvdm-guest/bin86`, `mvdm-guest/wow16` and
+    `mvdm-guest/font16` are complete load-only mirrors. Their source, objects,
+    libraries and products never satisfy a host symbol. App loads
+    manifest-selected immutable bytes through `adapter-bochs`.
 19. The selected OpenNT tree is one package-scope union of the pinned OpenNT
     and OpenNT-4.5 MVDM baselines. Every target path has one selection;
     conflicts are decided at complete-package scope with provenance. Parallel

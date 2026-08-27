@@ -56,8 +56,9 @@ x86/x64 evidence.
 1. Build a complete per-file/per-public-symbol owner and dependency manifest
    for the seven existing OpenNT-facing roots and all selected host consumers.
 2. Rename the product components exactly once: `adapter-bop` becomes
-   `adapter-mvdm-host-in`; the seven mirror roots become `mvdm-guest/dos`,
-   `mvdm-guest/win16`, `mvdm-softpc-firmware`, `mvdm-host`, `mvdm-support`,
+   `adapter-mvdm-host-in`; the guest mirror becomes the explicit load-only
+   roots `mvdm-guest/dos/v86`, `mvdm-guest/bin86`, `mvdm-guest/wow16` and
+   `mvdm-guest/font16`, alongside `mvdm-softpc-firmware`, `mvdm-host`, `mvdm-support`,
    `mvdm-tools` and `mvdm-platform-abi`. Update every live code/build/document
    reference before an adapter source move.
 3. Admit the `adapter-mvdm-host-out` root and its seven internal subfamilies,
@@ -75,8 +76,9 @@ x86/x64 evidence.
    roots, and prove no current source/build/test input refers to them.
 8. Run formal x86 and x64 static composition/fixture regressions and perform
    a final dependency-direction and source-provenance audit.
-9. Merge the two selected load-only guest mirrors into `mvdm-guest/dos` and
-   `mvdm-guest/win16`. This is component-root normalization only: every inner
+9. Normalize the selected load-only guest mirror into `mvdm-guest/dos/v86`,
+   `mvdm-guest/bin86`, `mvdm-guest/wow16` and `mvdm-guest/font16`. This is
+   component-root normalization only: every inner
    source, resource and binary path remains unchanged and stays outside every
    host-library link input.
 

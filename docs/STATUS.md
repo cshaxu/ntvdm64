@@ -4,17 +4,19 @@
 
 **No active M/T/S packet.**
 
-**Latest closure: M0 T296 S1 — OpenNT tools16 source import.**
-The 33-path original historical build-tool tree is now complete under
-`tools/opennt/tools16`, with every source selection and SHA-256 recorded. It
-remains outside product build, link and runtime inputs. See the
-[closure](history/m0-t296-closure-20260827.md).
+M0 T297 is closed. The guest mirror is now organized as the immutable,
+load-only `dos/v86`, `bin86`, `wow16` and `font16` roots.
 
 ## Active Packet
 
-No packet is admitted. A future guest-build packet may consume the tools16
-manifest explicitly; it may not infer a host/runtime link edge from this
-historical tool mirror.
+### M0 T297 closure — MVDM guest original-root recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T297 S1`, ordinary mode with single-person dual-role implementation and review. |
+| Result | Re-rooted the immutable guest inputs without changing their bytes or runtime/build ownership. |
+| Evidence | [T297 closure](etc/evidence/m0-t297-s1-guest-root-recovery-closure-001.md) and [plan](etc/operations/m0-t297-s1-guest-root-recovery-plan-001.md). |
+| Next admission | Owner queue direction; no source semantics, host/adapters/Bochs or guest build enablement was added. |
 
 **T291 S4 closure:** command, monitor-control and synchronous callback
 execution are now distinct typed planes; the generic session operation table

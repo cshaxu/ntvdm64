@@ -11,8 +11,10 @@ src/
   mvdm-tools/
   mvdm-softpc-firmware/
   mvdm-platform-abi/
-  mvdm-guest/dos/
-  mvdm-guest/win16/
+  mvdm-guest/dos/v86/
+  mvdm-guest/bin86/
+  mvdm-guest/wow16/
+  mvdm-guest/font16/
   adapter-bochs/
   adapter-mvdm-host-in/
   adapter-mvdm-host-out/
@@ -54,10 +56,10 @@ material and never a source, build, link or runtime input.
   manifest-selected input.
 - `mvdm-platform-abi` contains exact declarations outside MVDM required by
   those packages; it has no implementation.
-- `mvdm-guest/dos` contains the complete selected local DOS carry.
-  `mvdm-guest/win16` contains its selected local WOW16/bin86 carry and
-  references its immutable in-place output inventory; neither phrasing implies
-  an unselected external source-universe import.
+- `mvdm-guest/dos/v86`, `mvdm-guest/bin86`, `mvdm-guest/wow16` and
+  `mvdm-guest/font16` are the complete selected local DOS/V86, Bin86, WOW16
+  and 16-bit-font carries. They remain data/load-only input roots and do not
+  imply an unselected external source-universe import.
 - `adapter-bochs` contains Bochs-only composition and is the only caller of
   `bochs-core`.
 - `adapter-mvdm-host-in` contains only its declared selector-blind typed
