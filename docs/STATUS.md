@@ -2,18 +2,42 @@
 
 ## Current Work
 
-**No active M/T/S packet.**
+**Active: M0 T287 S2 — XMS original common static composition.**
 
 T286 is closed. Its final Bochs-core minimization evidence is in
-[the closure record](history/m0-t286-closure-20260827.md). The next candidate
-is the original XMS owner package; no implementation is admitted until its
-own bounded packet is recorded below.
+[the closure record](history/m0-t286-closure-20260827.md). T287 admits the
+queue-head original XMS owner package using a complete source-first plan.
 
 ## Active Packet
 
-No active implementation packet is admitted.  The next packet must use the
-queue-head XMS proposal, the live BOP tracker and its source/interface ledgers
-as its admission baseline.
+### M0 T287 S2 — XMS original common static composition
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T287 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Queue order after closed T286; owner direction is continuous single-person dual-role execution in queue order. |
+| Objective | Compose the complete directly-composable original common XMS source set as an x86/x64 static island through declaration-only or existing same-shaped facades. |
+| Non-goals | No BOP route enablement, direct-address backend, behavior rewrite, host-pointer conversion, UMB policy in Bochs, or `src.old` use. |
+| Reference Baseline | [T287 plan](etc/operations/m0-t287-xms-owner-package-recovery-plan-001.md), [S1 evidence](etc/evidence/m0-t287-s1-xms-current-rebaseline-001.md), current component roots and source policy. |
+| Files And ABI Surface | Original common `xms.c`, `xmsa20.c`, `xmsblock.c`, `xmsdisp.c`, `xmsmisc.c`, `xmsumb.c`, declarations/support headers and static build manifests; `i386/xmsmem86.c` remains excluded. |
+| Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
+| Verification | Generated x86/x64 Ninja graphs, original source/member identity, external declaration scan, negative exclusion of `xmsmem86.c`, no executable/route selection, documentation governance and `git diff --check`. |
+| Expected Markers | The archive contains only original common XMS units and declaration carriers; every unresolved machine callback remains an unresolved external rather than a substituted leaf implementation. |
+| Asset Needs | S1 ledgers, current MVDM support/platform ABI carriers, current adapter declaration roots and repository MSVC/Ninja tools. |
+| Reporting Requirements | Exact source list, archive member list, unresolved symbol disposition, x86/x64 result and explicit excluded source list. |
+| Stop Conditions | Any source-body modification, a need to link `xmsmem86.c`, a selector/service route, or an external interface without its S1 owner. |
+| Exit Criteria | Both architectures build the selector-disabled original common static archive with an evidence-led member/interface disposition; S3 may begin only with its A20/lease binding scope. |
+| Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
+| Similar-Issue Sweep | Every selected common translation unit, source list, external import, architecture-specific backend exclusion, archive member and route/build manifest. |
+
+**T287 S1 closure:** all 15 physical `mvdm-host/xms.486` paths hash-match
+both canonical OpenNT roots (0 mismatches).  The final per-file SHA-256
+ledger is [S1 file ledger revision 002](etc/operations/m0-t287-s1-xms-file-rebaseline-ledger-002.tsv);
+the interface ledger names all nine external contract groups and their sole
+owners.  The direct-address `i386/xmsmem86.c` body is retained exact but is
+not a product input on either architecture; it has a named same-shaped
+successor in `adapter-mvdm-host-out/softpc`.  The remaining `bx-vdm` wording
+in the historical tracker is evidence only, never a live input.
 
 **T286 S1 closure:** the complete [divergence disposition ledger](etc/operations/m0-t286-s1-bochs-core-divergence-disposition-ledger-001.md) measures 29 differing upstream-relative mirror files (431 additions / 353 deletions) and 15 private overlay bodies (1,164 lines). It classifies all groups as build bindings, required private CPU/memory/device hooks, optional diagnostics, or B2/D4 external-composition candidates. No source behavior changed.
 

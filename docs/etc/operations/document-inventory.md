@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2745 |
+| Documentation records | 2750 |
 | --- | --- |
-| Generated UTC | 2026-08-27T07:29:09Z |
+| Generated UTC | 2026-08-27T07:41:12Z |
 
 ## Entries
 
@@ -355,6 +355,7 @@ content-divergent entries.
 | etc/evidence/m0-t286-s4-observer-retirement-001.md | indexed supporting material | 05e295b7fb91876ffcfc73b44cd29da6896fa24a72cb9898acfd46a10a0154a7 |
 | etc/evidence/m0-t286-s5-memory-boundary-review-001.md | indexed supporting material | bce6d771f28fa25d53a1f76bae362b399cfec008fcff4ce1737191f1e2078bcd |
 | etc/evidence/m0-t286-s6-final-minimization-validation-001.md | indexed supporting material | 2e9078ce09adba1d42c2eec2582e7d289b32111bbaf749c29795020b0119c03a |
+| etc/evidence/m0-t287-s1-xms-current-rebaseline-001.md | indexed supporting material | 2e3a784aaf34f4734f389471b1a6f7117a530de4df8c96909c1c25840b7980f3 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -896,6 +897,10 @@ content-divergent entries.
 | etc/operations/m0-t285-s2-nt-bop-binding-ledger.tsv | indexed supporting material | 46f5c1820f5ff75b418c2180a60291bc06be6ddc7e3222f772884ddbafc9ad96 |
 | etc/operations/m0-t285-wave2-host-control-dem-recovery-plan-001.md | indexed supporting material | 8733245ea7db84a2a60fd6a79235613ce3a0f70d4f1ddecbbe07d9a566c91f02 |
 | etc/operations/m0-t286-s1-bochs-core-divergence-disposition-ledger-001.md | indexed supporting material | d3b41aeeabbfb73a76d461c02f414880b6ee4393dc206d453c4747426fb8b252 |
+| etc/operations/m0-t287-s1-xms-file-rebaseline-ledger.tsv | indexed supporting material | 68766c930f7d81f6a5485908fb94f5fa2dcd4a4c189a2519d368cde4cdd65669 |
+| etc/operations/m0-t287-s1-xms-file-rebaseline-ledger-002.tsv | indexed supporting material | 0fbfa306644351c7562acf9447b337d9469c3a51f2ef4073639666a20935d5a6 |
+| etc/operations/m0-t287-s1-xms-interface-rebaseline-ledger.tsv | indexed supporting material | ead75142239020060f0d78eac0028ce3d17811637ef520898942795b40e61ea6 |
+| etc/operations/m0-t287-xms-owner-package-recovery-plan-001.md | indexed supporting material | f5dcd67378bac1ac5502a57ba31cf7d010420ea7d4fdcdb59f3f84ed73995e0c |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -2759,7 +2764,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 5b030f5f0b80fca2b5dd8ba1194c82f26d45cabba4afacff26e25804f92d1456 |
+| STATUS.md | principal control document | 997b1de9bb12489f5508153083bd5062e886f506f075cdee13c11325f5e09c2c |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
