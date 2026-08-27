@@ -61,6 +61,13 @@ Formal x86/x64 fixtures prove the `ES:0x1000` switch and exact restoration;
 the remaining interrupt/IRET/fault bodies still require bounded stack-frame
 composition. See [P3 evidence](etc/evidence/m0-t289-s5-p3-locked-stack-transaction-001.md).
 
+**T289 S5 P4 audit:** the remaining original `stack.c` and `dpmiint.c`
+dispatch/IRET/fault bodies require a guest-visible VDM-TIB/DOSX projection,
+selector descriptor publication and separate real-mode frame mechanics. They
+remain compiled but selector-disabled; the source dependency map prohibits
+inventing host pointers, a host LDT or a second executor. See the [P4
+dependency audit](etc/evidence/m0-t289-s5-p4-stack-frame-dependency-audit-001.md).
+
 **T289 S3 closure:** `adapter-bochs` now exposes a selector-blind copied
 protected-frame, copied active-segment inspection and checked protected-span
 contract.  A frame commit is comparison-guarded, only changes GPR/EIP/native
