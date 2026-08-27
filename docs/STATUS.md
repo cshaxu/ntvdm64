@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T291 S2 — WOW thunk/frame interface recovery design.**
+**Active: M0 T291 S3 — WOW frame/callback transaction recovery.**
 
 M0 T290 is closed. Its final Redirector package boundary is in
 [the closure record](history/m0-t290-closure-20260827.md). T291 has closed
@@ -10,25 +10,34 @@ its whole-package source/ABI audit and now admits its first dependency group.
 
 ## Active Packet
 
-### M0 T291 S2 — WOW thunk/frame interface recovery design
+### M0 T291 S3 — WOW frame/callback transaction recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T291 S2`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S1 closed the 222-file WOW/FAX package audit. Its dependency sequence admits the 12-body original WOW32 thunk/frame/structure interface design before any provider body is enabled. |
-| Objective | Freeze source-shaped `GETVDMPTR`/`FREEVDMPTR`, monitor-memory, `CallBack16`/`VDMFRAME`, pointer and identity interface dispositions for the first whole WOW32 subdomain. |
-| Non-goals | No WOW body enablement, Win16 API, callback scheduler, WOWEXEC/CSRSS recreation, GUI policy, guest load, BOP ingress, raw pointer/host-handle exposure, new mapping manager, direct Bochs call, machine change or `src.old` input. |
-| Reference Baseline | [T291 S1 closure](etc/evidence/m0-t291-s1-wow-owner-package-source-abi-audit-001.md), [T291 S2 plan](etc/operations/m0-t291-s2-wow-thunk-frame-interface-recovery-plan-001.md), current session/adapter contracts and source policy. |
-| Files And ABI Surface | Original active WOW32 thunk/frame bodies and declarations, `adapter-mvdm-host-out/{softpc,monitor,wow}`, session mapping APIs, existing ABI ledgers and focused audit tools. |
+| Identifier Mode | `M0 T291 S3`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S2 closed the 214-occurrence source/ABI/failure audit for all twelve selected WOW32 thunk/frame bodies. It admits the complete pointer/frame/callback interface group, not an individual WOW API or BOP. |
+| Objective | Recover the source-shaped bounded WOW pointer scope, numeric task/frame projection and single-session `CallBack16` transaction while retaining original layout/order and the current adapter ownership boundaries. |
+| Non-goals | No original WOW provider body enablement, Win16 API, fast monitor, whole-memory alias, `CurrentMonitorTeb`, PEB/AeDebug, WOWEXEC/CSRSS recreation, GUI policy, BOP ingress, guest load, raw pointer/HANDLE transport, new mapping manager, direct Bochs call, machine change or `src.old` input. |
+| Reference Baseline | [T291 S2 closure](etc/evidence/m0-t291-s2-wow-thunk-frame-interface-recovery-001.md), [T291 S3 plan](etc/operations/m0-t291-s3-wow-frame-callback-transaction-plan-001.md), current session/adapter contracts and source policy. |
+| Files And ABI Surface | `adapter-mvdm-host-out/{softpc,monitor,wow}`, session guest-memory bindings, typed `adapter-bochs` mechanics and new focused x86/x64 fixture only. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Audit every reached source call/declaration/field and compare it to the current adapter/session ABI; prove each pointer or handle lifetime and each failure branch before selecting an implementation seam. |
-| Expected Markers | One source-shaped owner per interface, no direct pointer/HANDLE transport, no duplicate mapping/worker implementation, and source-defined unavailable results where an interface cannot yet compose. |
-| Asset Needs | Selected original WOW32 source, declaration carriers, current outgoing adapter/session headers and S1 subdomain/interface ledgers. |
-| Reporting Requirements | State all callers, original signatures/layouts/order, current binding availability, mapping lifetime, rejected routes, smallest binding/failure route and next implementation prerequisite. |
-| Stop Conditions | A proposal to implement a provider before the whole interface ledger closes, create a generic adapter/mapping manager, touch Bochs, use a raw pointer/HANDLE or import `src.old`. |
-| Exit Criteria | Every first-subdomain external interface has a source/ABI/failure/recovery disposition and the project can decide whether existing adapter families are sufficient without enabling a provider. |
+| Verification | Source-shaped order, bounds, nested/re-entry rejection, stale-lease cleanup and typed callback return on formal x86/x64 fixtures; graph evidence that no WOW provider/selector is enabled. |
+| Expected Markers | One source-shaped owner per interface layer, no direct pointer/HANDLE transport, no duplicate mapping/worker implementation, and exact S2 unavailable routes unchanged. |
+| Asset Needs | S2 ledger/decision, current session mapping APIs, outgoing adapter declarations and selected original layout carriers. |
+| Reporting Requirements | State original call shape/order, exact lease/identity lifetime, adapter ownership, x86/x64 fixture result, unchanged exclusions and any source-defined unavailable result. |
+| Stop Conditions | Enabling a provider body/selector, creating a generic adapter/mapping manager, touching Bochs, using a raw pointer/HANDLE, recreating a private product shell or importing `src.old`. |
+| Exit Criteria | The three interface layers have formal x86/x64 evidence, preserve source-shaped transaction order and leave every original WOW provider body disabled for its later whole-package admission. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | All 12 thunk/frame bodies, `GETVDMPTR`/`FREEVDMPTR`, monitor-memory, `CallBack16`/`VDMFRAME`, session mapping lifetimes, historical worker calls and current outgoing adapter ownership. |
+| Similar-Issue Sweep | All S2 families: guest pointer/free/flush, task/frame projection, callback/stack mechanics, monitor/TEB/PEB assumptions, scalar register calls and existing session mapping lifetimes. |
+
+**T291 S2 closure:** all twelve selected original WOW32 thunk/frame bodies
+have source coverage; 214 reached external-interface occurrences and eighteen
+source-token dispositions have one owner, bounded lifetime and recovery or
+failure result. Existing adapter families are sufficient in ownership but not
+yet in implementation. S3 owns the complete bounded pointer/frame/callback
+transaction; no original WOW provider body or route is enabled. See the
+[S2 evidence](etc/evidence/m0-t291-s2-wow-thunk-frame-interface-recovery-001.md)
+and [decision](etc/operations/m0-t291-s2-wow-thunk-frame-recovery-decision-001.md).
 
 **T290 S1 closure:** [the source/ABI audit](etc/evidence/m0-t290-s1-redirector-source-abi-audit-001.md) proves all fifty original `57:00..31` dispatch entries and all twenty-five selected package paths.  The source mirror is exact in both canonical OpenNT editions; lifecycle/named-pipe, mailslot/async, and NetAPI/NetBIOS/DLC groups are the only admissible next owner groups.  No Redirector selector is enabled.
 
