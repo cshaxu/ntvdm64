@@ -2,12 +2,34 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T281 closed as source composition and a complete
-host-control recovery partition in [its closure record](history/m0-t281-closure-20260826.md).
-The owner-directed Queue order identifies the next candidate; it still needs
-an explicit Status admission before implementation begins.
+**Active: M0 T282 S1 — original COMMAND package source surface.** T281 closed
+in `5aa51088`; the owner has directed Queue-order execution. T282 begins the
+next candidate, original COMMAND local lifecycle, with a full package source
+and interface audit before any `54:xx` route is enabled.
 
 ## Active Packet
+
+### M0 T282 S1 — original COMMAND package source surface
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T282 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T281 is closed in `5aa51088`; the owner directed Queue-order execution and S1 admits the complete original COMMAND source surface, not an individual BOP. |
+| Objective | Give all eleven original `dos/command` translation units and all seventeen `54:00..54:10` entries one reproducible x86/x64 source/interface disposition. |
+| Non-goals | Enabling `CmdDispatch` or any `54:xx` route, provider execution, a host executable, Bochs changes, a new COMMAND rewrite, trace-driven selection, or a generic shim. |
+| Reference Baseline | Original `dos/command/sources`; T231 COMMAND ledger; T236 closures; T276/T277 owner and cycle ledgers; T281 closure and host-control disposition. |
+| Files And ABI Surface | Original `dos/command` source/header/sources files; existing adapter-win32, adapter-softpc, adapter-vdm-monitor, adapter-bop, session, Redirector, WOW/VDD boundary records; S1 ledger/probe/evidence only. |
+| Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
+| Verification | Unique 11-source/17-service ledger; x86/x64 static compile-surface probes; source identity and interface-owner review; documentation governance and `git diff --check`. |
+| Expected Markers | One whole-package disposition per original source and named owner for every non-composable boundary; no enabled runtime route. |
+| Asset Needs | Pinned original MVDM mirror, prior COMMAND ledgers, existing declaration carriers, MSVC x86/x64 and Ninja. |
+| Reporting Requirements | Original source/service, interface family, owner/binding, architecture result, selected recovery rung, unsupported branch and transfer owner. |
+| Stop Conditions | A source body needs a new unnamed adapter, a proposed group crosses a Redirector/WOW/VDD owner without a package boundary, a route is enabled, or a Bochs device/executor is selected. |
+| Exit Criteria | Every original unit and service is covered once, each blocked interface has one named owner, both architecture observations are retained, and a follow-on S can select a whole coherent source group without leaf re-audit. |
+| Original Owner Request | “我都叫你按顺序执行了” and “请参照治理规范和实施规范执行任务”. |
+| Similar-Issue Sweep | Process/re-entry/standard streams, environment/configuration, PIF, command source, console/key layout, BOP dispatch, Redirector/broker, WOW/VDD and all historical machine-facing calls. |
+
+The detailed execution plan is [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md).
 
 ### Closed packet reference — M0 T281 S5 — original host-control package disposition
 
