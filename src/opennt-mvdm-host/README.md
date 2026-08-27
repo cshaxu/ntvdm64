@@ -31,5 +31,7 @@ layout is not a final runtime-owner claim.
 
 ## Divergence register
 
-None. Every current file is byte-identical to the selected source and hash
-recorded by the S5 topology manifest and, for the deferred inputs, S6 manifest.
+| ID | Original purpose | Reason | Implementation | Files |
+| --- | --- | --- | --- | --- |
+| MVDM-HOST-DIV-001 | Store a native x86 `PVOID` find-list reference in the DOS DTA/FCB reserved field. | The original field is 32 bits by process-pointer coincidence; on x64 `PVOID` widens and corrupts the original DOS layout. | Retain the original 32-bit field with `ULONG`; its value is an opaque host-resource surrogate, not a pointer. | `dos/dem/dosdef.h` |
+| MVDM-HOST-DIV-002 | Persist, compare and release a `PFFINDLIST` pointer across DOS FindFirst/FindNext calls. | Native pointer persistence is width-unsafe and forbidden across the MVDM/guest boundary. | The original source flow publishes, resolves and releases an opaque identity through the S15 adapter-softpc facade; `FFindId` stays original numeric data and source resource-failure branches are retained. | `dos/dem/demsrch.c` |

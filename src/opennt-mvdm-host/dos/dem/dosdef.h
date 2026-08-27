@@ -65,7 +65,9 @@
 #pragma pack(1)
 
 typedef struct _SRCHDTA {               /* DTA */
-    PVOID       pFFindEntry;          // 21 bytes reserved area begins
+    /* DIVERGENCE(MVDM-HOST-DIV-001): this is a DOS-resident 32-bit identity,
+     * not a host pointer. Keep the original x86 layout on x64. */
+    ULONG       pFFindEntry;          // 21 bytes reserved area begins
     ULONG       FFindId;
     BYTE        bReserved[13];        // 21 bytes reserved area ends
     UCHAR       uchFileAttr;
@@ -91,7 +93,9 @@ typedef struct _DIRENT {
     CHAR	FileName[8];
     CHAR	FileExt[3];
     UCHAR       uchAttributes;
-    PVOID       pFFindEntry;         // DOS Reserved Area
+    /* DIVERGENCE(MVDM-HOST-DIV-001): preserve the original 32-bit DOS field;
+     * the native find-list pointer remains outside guest-visible storage. */
+    ULONG       pFFindEntry;         // DOS Reserved Area
     ULONG       FFindId;             // DOS Reserved Area
     USHORT      usDummy;             // DOS Reserved Area
     USHORT	usTime;

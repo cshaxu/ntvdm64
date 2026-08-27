@@ -2,9 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T280 S16** — Apply the source-proven, source-local `demsrch.c`
-host-identity divergence over the closed S15 facade. It is Ordinary Mode with
-single-person dual-role review; no provider/BOP route is enabled.
+**Active: M0 T280 S17** — Audit the remaining x64-sensitive boundaries of the
+original `demsrch.c` body as one source-owner surface. It is Ordinary Mode
+with single-person dual-role review; no provider/BOP route is enabled.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -25,25 +25,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S16 — `demsrch.c` host-identity divergence
+### M0 T280 S17 — `demsrch.c` remaining x64 boundary audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T280 S16`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S15 closed the only bounded host-identity facade; original `SearchFile` supplies the reached resource-failure behavior. |
-| Objective | Replace only raw persisted `PFFINDLIST` fields with fixed-width mapped identities while retaining original search, error and cleanup control flow. |
-| Non-goals | No provider/BOP route, guest trace, new mapper, new DOS search behavior, guest-memory implementation, directory backend or unrelated pointer rewrite. |
-| Reference Baseline | Original `demsrch.c`, S14/S15 closures, session mapping rules and original `SearchFile` `STATUS_NO_MEMORY` branch. |
-| Files And ABI Surface | One original mirror body, its README divergence register, focused fixture/build evidence and Status. |
+| Identifier Mode | `M0 T280 S17`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S16 closed only persisted find-list identity and exact DOS layout; it leaves the source's other x64 warnings unmodified. |
+| Objective | Produce a whole-source, source-first disposition of every remaining x64-sensitive `demsrch.c` operation. |
+| Non-goals | No pointer-leaf fix, provider/BOP route, guest trace, new mapper, Bochs change, directory backend or source-body implementation. |
+| Reference Baseline | Original `demsrch.c`, S16 compile evidence, mapping rules, adapter-win32 and adapter-softpc boundaries. |
+| Files And ABI Surface | Audit ledger/evidence, focused source/cast inventory and Status only; no product source modification. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Original source/cast inventory, focused x86/x64 composition/fixture, exact error-path review, README register and diff review. |
-| Expected Markers | No `STOREDWORD` receives `PFFINDLIST`; raw pointers stay local; release precedes free; `FFindId` stays numeric. |
-| Asset Needs | Original DEM sources, S15 facade, session binding contract, MSVC x86/x64 and source-shaped DEM declarations. |
-| Reporting Requirements | Each divergence site, original form, resource-failure preservation, mapping lifetime and remaining provider limitation. |
-| Stop Conditions | A raw pointer is persisted, failure is guessed rather than source-derived, a second mapper appears, or any provider/BOP route is enabled. |
-| Exit Criteria | All seven persistence/validation/cleanup sites use the one facade, pass focused x86/x64 proof and retain documented original failure branches. |
+| Verification | x64 warning/cast inventory, original call-path review, owner/mapping classification and focused no-new-raw-persistence scan. |
+| Expected Markers | Every remaining warning has a unique value classification and future package disposition; no trace-selected patch. |
+| Asset Needs | S16 x86/x64 compiler evidence, original source paths, current adapter/session contracts and tracker. |
+| Reporting Requirements | Exact line/value class, original owner, required adapter or direct host-local handling, failure behavior and dependency order. |
+| Stop Conditions | A leaf implementation begins, a host-local pointer enters a mapper, a guest numeric value is tokenized, or any provider/BOP route is enabled. |
+| Exit Criteria | A complete remaining-boundary ledger exists with no unclassified x64 warning/cast and one package-level follow-on disposition per group. |
 | Original Owner Request | “单人双角色模式执行队列任务”。 |
-| Similar-Issue Sweep | Path/FCB first/next, volume-label look-ahead, wraparound cleanup, PSP cleanup, token publication failure, no-session behavior and guest-memory isolation. |
+| Similar-Issue Sweep | Directory buffers, device handles, path conversion, offsets, `NtQueryDirectoryFile`, `NtVdmControl`, cleanup, guest-memory isolation and source failure branches. |
 
 ### Closed packet reference — M0 T280 S13
 
@@ -66,6 +66,14 @@ surrogate facade over the thread-bound session. Its x86/x64 fixture proves
 identity, stale-token, isolation and disposal outcomes; it has no
 guest-memory route. The original DEM mirror remains unchanged. See
 [S15 closure](history/m0-t280-s15-closure-20260826.md).
+
+### Closed packet reference — M0 T280 S16
+
+**S16 closure:** original DOS DTA/FCB find fields now retain the exact x86
+layout on both architectures and persist only session `host_resource`
+surrogates. Formal x86/x64 source and layout evidence passed; remaining
+unrelated `demsrch.c` width warnings transfer to S17 as one source audit. See
+[S16 closure](history/m0-t280-s16-closure-20260826.md).
 
 ### Closed packet reference — M0 T280 S12
 
