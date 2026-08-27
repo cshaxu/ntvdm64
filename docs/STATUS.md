@@ -2,18 +2,34 @@
 
 ## Current Work
 
-**No active M/T/S packet.**
+**Active: M0 T294 S1 — MVDM host first-degree function audit.**
 
-M0 T293 closed the complete selected `mvdm-host` zero-degree definition audit:
-4,499 original-source definition identities, 2,353 frozen direct external
-first-degree call sites, and 91 explicit zero-degree conditional-variant
-bindings. The next candidate awaits owner admission; see the
-[T293 closure](history/m0-t293-closure-20260827.md).
+Owner admitted the frozen direct external exits from T293. This packet resolves
+all 2,353 candidate call sites to exact source definitions, public leaves,
+hard boundaries or finite replacements and records only their direct
+second-degree exits; it does not import or implement anything.
 
 ## Active Packet
 
-No active packet. The latest closed packet is
-[M0 T293](history/m0-t293-closure-20260827.md).
+### M0 T294 S1 — MVDM host first-degree function audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T294 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner explicitly admitted the first-degree audit and required complete coverage without omissions. |
+| Objective | Resolve each frozen T293 first-degree call-site candidate to one source-evidenced outcome and freeze only direct prospective second-degree exits. |
+| Non-goals | No second-degree body analysis or package BFS; no source import, compilation, linking, adapter/provider implementation, BOP enablement, Bochs change or `src.old` input. |
+| Reference Baseline | [T293 closure](history/m0-t293-closure-20260827.md), [degree audit plan](etc/operations/mvdm-host-degree-audit-plan-001.md), frozen candidate ledger and [T294 plan](etc/operations/m0-t294-s1-first-degree-function-audit-plan-001.md). |
+| Files And ABI Surface | New first-degree resolution/definition/coverage/call-resolution and second-degree ledgers plus reproducible audit tooling only. No production ABI change. |
+| Applicable Rules | Execution, architecture, coding, documentation, source policy, mirror/overlay and mapping-manager rules. |
+| Verification | Assert complete one-result coverage of all 2,353 candidate IDs; preserve definition identities; record every direct first-degree exit without body expansion; run documentation governance and `git diff --check`. |
+| Expected Markers | A public Win32/CRT result is a terminal leaf; exact same-spelling source definitions retain separate identities; private product boundaries have explicit declaration-only outcomes; all non-leaf exits become second-degree candidates. |
+| Asset Needs | Frozen T293 ledgers, selected original source/hash records, both local OpenNT trees, Node and ripgrep. |
+| Reporting Requirements | Report call-site/result cardinality, distinct source identities, public leaves, hard boundaries, finite replacements, unresolved rows, second-degree cardinality and parser limitations. |
+| Stop Conditions | A result requires a source package/body beyond the resolved first-degree function, an unrecorded source import, an adapter/runtime change, or a private-product shell needs implementation rather than declared boundary treatment. |
+| Exit Criteria | Every frozen first-degree candidate has exactly one result; every selected first-degree definition/source file and direct exit has evidence; no second-degree body is read; all result rows have disposition/owner; required gates pass. |
+| Original Owner Request | “准入T294，进行一度审计。这次可别漏掉东西了。” |
+| Similar-Issue Sweep | Same-name definitions, duplicate call sites, alternate OpenNT editions, declarations versus definitions, macros/function pointers, public API false positives and hard-boundary calls. |
 
 **T291 S4 closure:** command, monitor-control and synchronous callback
 execution are now distinct typed planes; the generic session operation table
