@@ -23,6 +23,11 @@ function's direct outgoing calls as frozen prospective second-degree edges.
 
 ## Required outputs
 
+- `mvdm-host-first-degree-include-frontier-ledger.tsv`: exactly one row per
+  frozen candidate.  It records the caller's direct include spellings, the
+  bounded OpenNT-header include closure, declaration hits, allowed package
+  roots, and the reason a row is terminal or searchable.  This is a search
+  constraint, not a definition result.
 - `mvdm-host-first-degree-resolution-ledger.tsv`: exactly one row per frozen
   candidate call site, with exact selected definition identity, public leaf,
   declaration-only hard boundary, finite shallow replacement, or explicit
@@ -39,19 +44,28 @@ function's direct outgoing calls as frozen prospective second-degree edges.
 - `mvdm-host-first-degree-call-resolution-ledger.tsv`: explicit conditional
   definition variants and macro/function-pointer/declaration-only outcomes,
   so no such case is silently lost or promoted to an invented implementation.
+- `../evidence/m0-t294-s1-first-degree-function-audit-closure-001.md`:
+  reproducible count/result summary, parser limits and the explicit statement
+  that second-degree bodies remain unread.
 
 ## Resolution order
 
 1. Preserve each frozen call-site identity and determine whether its spelling
-   is a public modern API/CRT leaf from source declaration evidence.
-2. Otherwise locate all exact original definition candidates by spelling,
-   path/hash/line and linkage. Resolve with caller declaration context and
-   original package/product condition; retain conditional variants explicitly
-   where a selected build is not yet chosen.
-3. Classify each outcome as `direct`, `binding-only`, `adapter-backed`,
+   is a public modern API/CRT leaf or an original hard boundary from the
+   frozen source-form evidence.
+2. For every remaining row, build a sparse declaration frontier: follow only
+   headers reachable from that caller's `#include` directives inside the two
+   approved original trees.  A matching declaration supplies allowed package
+   roots; absent a declaration, search is limited to the caller's MVDM
+   package.  The audit never creates a whole-tree function index.
+3. Locate exact original definition candidates only inside those allowed
+   package roots, recording path/hash/line/linkage. Resolve with declaration
+   context and original package/product condition; retain conditional variants
+   explicitly where a selected build is not yet chosen.
+4. Classify each outcome as `direct`, `binding-only`, `adapter-backed`,
    `overlay-required`, `not-host-runtime`, `tool-only`, `hard-boundary`,
    `finite-shallow-replacement`, or `unresolved`.
-4. Parse only the selected/resolved first-degree body. Every direct exit is
+5. Parse only the selected/resolved first-degree body. Every direct exit is
    recorded as a prospective second-degree edge; no exit body, package BFS,
    import, adapter or runtime implementation is admitted.
 
