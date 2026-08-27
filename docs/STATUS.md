@@ -15,20 +15,20 @@ queue-head original XMS owner package using a complete source-first plan.
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T289 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S5 IVT/lifecycle disposition closure is recorded; S6 is the next bounded recovery rung in the admitted T288 plan. |
+| Admission And Approval | T288 is closed; this is the next dependency-ordered candidate in `QUEUE.md`. |
 | Objective | Establish the complete original DPMI/dpmi32 source identity, ABI, machine and failure inventory before selecting any protected-mode implementation. |
-| Non-goals | No monitor/BOP route enablement, serial SIM32 transport, kernel VDM or CSRSS recreation, generic keyboard controller/IRQ/input shell, second CPU executor, raw VDM_TIB/native guest-pointer ABI, new mapping manager, or `src.old` use. |
-| Reference Baseline | [T288 plan](etc/operations/m0-t288-monitor-keyboard-ivt-recovery-plan-001.md), [S5 evidence](etc/evidence/m0-t288-s5-keyboard-ivt-lifecycle-001.md), source policy and mapping-manager rule. |
-| Files And ABI Surface | Selected monitor/firmware sources, `adapter-mvdm-host-out/{softpc,monitor}`, `adapter-bochs`, session leases, existing XMS package and formal fixtures. |
+| Non-goals | No `53:xx` route, protected-mode transition, LDT/IDT mutation, CPU-frame ABI, second executor, raw VDM_TIB pointer, new mapping manager or `src.old` use. |
+| Reference Baseline | [Wave 6](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-6-dpmi), `bop-list.md`, source policy and mapping-manager rule. |
+| Files And ABI Surface | Exact `mvdm-host/{dpmi,dpmi32}` sources, DOSX artifacts, `adapter-mvdm-host-out`, `adapter-bochs`, session and the BOP/dependency tracker. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Package matrix on x86/x64; original source/facade link and forbidden-direct-dependency scans; XMS success-path integration; documentation governance and `git diff --check`. |
-| Expected Markers | No direct Bochs dependency enters an OpenNT mirror; no keyboard controller, IRQ shell, CPU executor or mapping manager is introduced. |
-| Asset Needs | S4 ledger, canonical roots, existing session mapping rule, adapter-bochs typed mechanics and current exception registers. |
+| Verification | Complete source/path/hash inventory, 25-row BOP-to-owner audit, interface/owner/failure ledger, documentation governance and `git diff --check`. |
+| Expected Markers | No direct Bochs dependency enters an OpenNT mirror; no LDT/IDT/CPU executor or mapping manager is introduced. |
+| Asset Needs | Canonical MVDM roots, current adapter inventory, session mapping rule and Bochs mechanical surface. |
 | Reporting Requirements | Package input ledger, selected source/facade matrix, all unavailable status paths, focused x86/x64 result and every excluded machine mechanism. |
 | Stop Conditions | A source body needs a semantic rewrite, direct Bochs call or new mapper is proposed, a second CPU/product shell is selected, or a non-direct carrier is silently linked. |
-| Exit Criteria | Original source bodies or their source-proven unavailable outcomes execute in one package matrix; trace is observation only. |
+| Exit Criteria | Every original DPMI source group and all `53:00..18` entries have source, ABI/failure, owner and dependency disposition plus a bounded subsequent S plan. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | Monitor/keyboard source inputs, SoftPC/SAS bindings, IVT/vector forms, XMS integration, Bochs-facing calls, session leases, x86/x64 forms, forbidden direct pointers and forbidden historical shells. |
+| Similar-Issue Sweep | DOSX artifacts, dpmi32 source groups, selector table/memory/stack/interrupt/fault forms, host pointers, Win32 imports, Bochs-facing calls, session leases and x86/x64 ABI forms. |
 
 **T288 S1 closure:** the reproducible union ledger records 78 selected source
 files, all exact in both canonical OpenNT roots. It identifies the seven exact
