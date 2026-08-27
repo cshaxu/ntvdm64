@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2709 |
+| Documentation records | 2716 |
 | --- | --- |
-| Generated UTC | 2026-08-27T05:20:16Z |
+| Generated UTC | 2026-08-27T05:24:06Z |
 
 ## Entries
 
@@ -331,6 +331,8 @@ content-divergent entries.
 | etc/evidence/m0-t282-s12-bounded-copy-binding-001.md | indexed supporting material | 78e945da6871ddb026595dbc33e027fc065178edb8842f079ea31aa790b1a100 |
 | etc/evidence/m0-t282-s13-command-current-directory-bounded-binding-001.md | indexed supporting material | 5958520e44fb9dda87771a7a25aa019c50943b7e1b299ebe528bfac2c1eeff27 |
 | etc/evidence/m0-t282-s14-command-comspec-bounded-input-audit-001.md | indexed supporting material | e07b5016a663c34d5618bbee60f7026352b0f65f1777641c25d723f248787840 |
+| etc/evidence/m0-t282-s15-command-init-environment-bounded-output-audit-001.md | indexed supporting material | 9948152ed14598f4f73a1f9e6c4d02fe31de599764b60351c68b77bda312e867 |
+| etc/evidence/m0-t282-s16-command-local-package-closure-audit-001.md | indexed supporting material | a273a2e8553674057b11dd8f712bf069a58a2b4ce4db2babfc500426898e8822 |
 | etc/evidence/m0-t282-s1-command-source-surface-001.md | indexed supporting material | 8da78111a6e91cbdf18b3020f1b2a67f8369e1ae6d8c3409e28cae4a7566aa2c |
 | etc/evidence/m0-t282-s2-command-declaration-carriers-001.md | indexed supporting material | d8eb5b4a03f6ceddf60e0865bfc2cb5f07838eef4fe17162835c7ab6ffb8a6f8 |
 | etc/evidence/m0-t282-s3-command-console-declaration-carrier-001.md | indexed supporting material | e8c050f08f7402aeca99e2fcdfb44e8964d65424cf597dab2ffe262041ce2b43 |
@@ -852,6 +854,8 @@ content-divergent entries.
 | etc/operations/m0-t282-s13-command-current-directory-bounded-binding-plan-001.md | indexed supporting material | 91f42f268f2f7a7d7dfbe6dd29c189f083522c76f6fbf6914bb74ec380dcba7b |
 | etc/operations/m0-t282-s14-command-comspec-bounded-input-binding-plan-001.md | indexed supporting material | 3dcecb46605c7957ff22fedf4130b19f7c97b880a4fb6baecba3a11cef544d71 |
 | etc/operations/m0-t282-s15-command-init-environment-bounded-output-plan-001.md | indexed supporting material | 64088349fe36fca00b17939209115c59f429b2f3e5a3282cdd7f03d35c97ab1c |
+| etc/operations/m0-t282-s16-command-closure-disposition-ledger-001.tsv | indexed supporting material | 9ccbd69ae7eaba24aa6cadaa37a3b5834f86b72cb32408109d09833b78d6b1fb |
+| etc/operations/m0-t282-s16-command-local-package-closure-audit-plan-001.md | indexed supporting material | a8219be1b21e3fb898bf5a461a47d468f98d69da3981f522326020ba9bf7dda8 |
 | etc/operations/m0-t282-s1-command-service-disposition-ledger.tsv | indexed supporting material | bf60b651a515f5777dbed4aa655fa1b9c0c42bf29f312d05bdd2ebef9d7e0d40 |
 | etc/operations/m0-t282-s1-command-source-disposition-ledger.tsv | indexed supporting material | ca41e554a4c1028416fd4b17c44eff98789afc122a41434dda0c207cd73b99ce |
 | etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md | indexed supporting material | 7f68749b6e2337457390f159034cb98c95de94d3ef49c756806308fc3e0e6770 |
@@ -866,6 +870,7 @@ content-divergent entries.
 | etc/operations/m0-t282-s8-command-owner-dependency-partition-plan-001.md | indexed supporting material | 40375e741012215e9d7ca6e9ed226b3fa2f678326fc7dba58037eaa1f8df0541 |
 | etc/operations/m0-t282-s9-command-environment-guest-seam-audit-plan-001.md | indexed supporting material | 387f06766a3550aec19c8dc19cd404867b60813454ac4ad360416a40e018f880 |
 | etc/operations/m0-t282-s9-command-environment-guest-seam-ledger-001.tsv | indexed supporting material | b713d790e3e8b73cd368bde3a7421f5deb5ba592f237e090ec2b76ba3db7b23a |
+| etc/operations/m0-t283-s1-platform-abi-canonical-union-inventory-plan-001.md | indexed supporting material | f843345b365bf5b35b26a9b39ea61b231dde214be1c84af0af4ac492c0cfef24 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -907,6 +912,7 @@ content-divergent entries.
 | etc/operations/proposal-opennt-interface-adapter-convergence-001.md | indexed supporting material | e66c6f797dd66e396b93ec87f232fd796304698abb629f75da55ce21891e9960 |
 | etc/operations/proposal-opennt-mvdm-owner-expansion-001.md | indexed supporting material | 2f837a6af1fe6b48f167983fe60ee285b3a7b1fa92fe243f9fd2816959614bdf |
 | etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md | indexed supporting material | 893d0c94985043b5b3ae405f928bee10e2b576dab13e1dc773d37080162719a6 |
+| etc/operations/proposal-opennt-platform-abi-canonical-union-001.md | indexed supporting material | ee21cf7d9fffe1d3eb47a3c88cdf09adde15478516d4254506161d11455d62ee |
 | etc/operations/proposal-opennt-redirector-owner-package-completion-001.md | indexed supporting material | a94a8dfb72d0625f20e0152dacab24b4aca3862f4d8960290201eeb361e1b129 |
 | etc/operations/proposal-opennt-wow16-owner-package-completion-001.md | indexed supporting material | cad78b521e3fd3edb645002ed7986082d45082dcbba54f153d11dc61ef65c07e |
 | etc/operations/proposal-opennt-xms-owner-package-completion-001.md | indexed supporting material | 63d5209a8032bff793219242257dd8ab637d833f66c17c969939e6a5e56d3d3d |
@@ -2438,6 +2444,7 @@ content-divergent entries.
 | history/m0-t280-s19-closure-20260826.md | closed task history | cee2a0280432e6d4c9a1dfbd1576968a6ddf6ebb54839dfd9db3ba55c5b234f4 |
 | history/m0-t280-s20-closure-20260826.md | closed task history | 586ec73cdd01bc3374204536e504635cc690180b42aefdbb9ed7c67db657d96f |
 | history/m0-t281-closure-20260826.md | closed task history | 94861820b4926a684341bcbd106c903001e3c49e799e84a7b8f36e641b6d2da2 |
+| history/m0-t282-closure-20260827.md | closed task history | d41bf516e296eeb2cdc4de801989ac3889805f0766847b882abd769f308e406a |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -2723,7 +2730,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 4ba0d8441c3e3306d1f1c517dee9a2ecf33bf24517a3b08f0b5b47435f657610 |
+| STATUS.md | principal control document | 9464c1f987c2f9d5a6236234997e9b4b34892113b307f9e924428b9fffde2fd7 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |

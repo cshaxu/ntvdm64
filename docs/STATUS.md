@@ -2,32 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T282 S15 — COMMAND initial-environment bounded output binding.** T281 closed
-in `5aa51088`; the owner has directed Queue-order execution. T282 begins the
-next candidate, original COMMAND local lifecycle, with a full package source
-and interface audit before any `54:xx` route is enabled.
+**Active: M0 T283 S1 — platform-ABI canonical-union inventory.** T282 closed
+in `m0-t282-closure-20260827.md`; the owner has directed Queue-order
+execution. T283 begins the current first Queue candidate before historical
+interface adapter convergence.
 
 ## Active Packet
 
-### M0 T282 S15 — COMMAND initial-environment bounded output binding
+### M0 T283 S1 — platform-ABI canonical-union inventory
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T282 S15`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S14 closed with source-proven refusal for malformed COMSPEC input; S9 gives the initial-environment output contract and original `BX` shortage result. |
-| Objective | Audit and, only if its negative lease contract is source-backed, recover original `cmdGetInitEnvironment` with its exact post-capacity guest output span. |
-| Non-goals | `cmdComSpec`, `cmdGetCurrentDir`, raw-pointer macro, new mapper, BOP route, environment policy, machine change or asynchronous lease. |
-| Reference Baseline | S9 guest-span ledger, original `cmdenv.c`, S12 bounded-copy primitives and S13 current-directory binding. |
-| Files And ABI Surface | Original `dos/command/cmdenv.c`, any private matching overlay required by mirror rules, adapter-softpc guest-location output form and focused x86/x64 source/lease graphs. |
+| Identifier Mode | `M0 T283 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T282 closed after S16's complete owner disposition. The owner has directed execution in Queue order; T283 is the first current candidate. |
+| Objective | Establish a complete source/hash/consumer inventory for a single canonical OpenNT platform ABI declaration tree. |
+| Non-goals | Header synthesis, include-root moves, runtime behavior, BOP/provider route, Bochs change, adapter implementation or source-body changes. |
+| Reference Baseline | Platform-ABI canonical-union proposal, source policy, current ABI tree and selected OpenNT/OpenNT-4.5 source inputs. |
+| Files And ABI Surface | Platform-ABI inventory/generator/verifier and evidence only. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Source failure and staging audit before modification; original source composition on x86/x64; exact-output positive/negative fixture; mirror review; documentation governance and `git diff --check`. |
-| Expected Markers | `ES:0000` is represented numerically, capacity is checked before any lease, and the source output is written only through one exact synchronous lease. |
-| Asset Needs | S9 initial-environment record, original source, S12 primitives/fixture and current session lease contract. |
-| Reporting Requirements | Exact required size, original BX shortage result, lease failure disposition, mapping instance and x86/x64 outcome. |
-| Stop Conditions | A pointer is acquired before original capacity check, an invented lease/temporary-allocation failure result is needed, a lease crosses async work, or another mapper is added. |
-| Exit Criteria | Either the source binding formally composes with explicit source-derived negative behavior, or a source-first evidence record proves it cannot be safely enabled and names the successor owner. |
-| Original Owner Request | “我都叫你按顺序执行了” and “请参照治理规范和实施规范执行任务”. |
-| Similar-Issue Sweep | S9 COMSPEC input, current-directory output and initial-environment output spans; only the initial-environment output branch is admitted. |
+| Verification | Full inventory denominator/count verification, source/hash spot-check, documentation governance and `git diff --check`. |
+| Expected Markers | Every current ABI file and both original candidates have a unique recorded disposition without changing a declaration. |
+| Asset Needs | Pinned OpenNT/OpenNT-4.5 inputs, current platform-ABI tree, live include/build manifests and source policy. |
+| Reporting Requirements | Counts by candidate class, every conflict, consumer impact and the next re-rooting boundary. |
+| Stop Conditions | A source origin is unavailable, a conflict requires a hybrid declaration, or a live consumer cannot be identified. |
+| Exit Criteria | Full machine-checkable inventory with no unclassified current ABI input and an explicit selected/rejected record for every conflict. |
+| Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
+| Similar-Issue Sweep | Public/private declarations, edition roots, source-selection manifests and all live include/build inputs. |
 
 The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md), [S4 complete original COMMAND static package](etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md), [S5 VDM command-acquisition source audit](etc/operations/m0-t282-s5-vdm-command-acquisition-source-audit-plan-001.md), [S6 local VDM command transport](etc/operations/m0-t282-s6-local-vdm-command-transport-plan-001.md), [S7 original COMMAND initialization composition](etc/operations/m0-t282-s7-original-command-initialization-plan-001.md), [S8 COMMAND owner dependency partition](etc/operations/m0-t282-s8-command-owner-dependency-partition-plan-001.md), [S9 COMMAND environment guest-memory seam audit](etc/operations/m0-t282-s9-command-environment-guest-seam-audit-plan-001.md), [S10 COMMAND register and bounded-lease binding](etc/operations/m0-t282-s10-command-register-and-lease-binding-plan-001.md), [S11 COMMAND OEM support composition](etc/operations/m0-t282-s11-command-oem-support-composition-plan-001.md), and [S13 COMMAND current-directory bounded mirror binding](etc/operations/m0-t282-s13-command-current-directory-bounded-binding-plan-001.md).
 
@@ -148,6 +148,14 @@ a callable `54:04` claim; see the [S13 evidence](etc/evidence/m0-t282-s13-comman
 failure branch for a malformed/unmappable COMSPEC string; the bounded
 descriptor correctly rejects it but cannot choose AL/CF/stop semantics. No
 mirror body changed and `54:02` remains disabled; see the [S14 audit](etc/evidence/m0-t282-s14-command-comspec-bounded-input-audit-001.md).
+
+**T282 S15 closure:** original `cmdGetInitEnvironment` preserves an explicit
+`BX` shortage result but has no result for a post-capacity guest-lease fault.
+No mirror body changed or `54:0F` route was enabled; see the [S15 audit](etc/evidence/m0-t282-s15-command-init-environment-bounded-output-audit-001.md).
+
+**T282 S16 closure and T282 closure:** the full 32-row original COMMAND
+ledger has no ownerless or directly recoverable local source item remaining.
+T282 closes as source-composition work only; see the [S16 audit](etc/evidence/m0-t282-s16-command-local-package-closure-audit-001.md) and [T282 closure](history/m0-t282-closure-20260827.md).
 
 ### Closed packet reference — M0 T281 S5 — original host-control package disposition
 
