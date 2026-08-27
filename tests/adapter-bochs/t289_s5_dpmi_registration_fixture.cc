@@ -3,6 +3,7 @@
 
 extern "C" {
 #include "mvdm_command_registers.h"
+#include "mvdm_host_identity.h"
 #include "session/session.h"
 #include "vdm.h"
 
@@ -67,6 +68,7 @@ int main()
 {
     session instance;
     machine_facade_protected_frame before, after;
+    uint32_t pm_stack_identity = 0u;
     uint8_t interrupt_frame[10] = {0};
     uint8_t fault_frame[18] = {0};
     int result = 1;
@@ -102,24 +104,27 @@ int main()
     if (machine_facade_copy_protected_frame(&before) !=
         MACHINE_FACADE_PROTECTED_FRAME_OK) { result = 9; goto done_session; }
     DpmiPassPmStackInfo();
+    if (!mvdm_host_identity_lookup((uintptr_t)&VdmTib.PmStackInfo,
+        &pm_stack_identity) || getCX() != (uint16_t)(pm_stack_identity >> 16) ||
+        getDX() != (uint16_t)pm_stack_identity) { result = 10; goto done_session; }
     BeginUseLockedPMStack();
     if (machine_facade_copy_protected_frame(&after) !=
         MACHINE_FACADE_PROTECTED_FRAME_OK || after.ss != before.es ||
         after.esp != 0x1000u || VdmTib.PmStackInfo.LockCount != 1u) {
-        result = 10; goto done_session;
+        result = 11; goto done_session;
     }
     if (!EndUseLockedPMStack() ||
         machine_facade_copy_protected_frame(&after) !=
         MACHINE_FACADE_PROTECTED_FRAME_OK || after.ss != before.ss ||
         after.esp != before.esp || VdmTib.PmStackInfo.LockCount != 0u) {
-        result = 11; goto done_session;
+        result = 12; goto done_session;
     }
     result = 0;
 done_session:
     session_guest_memory_end(&instance);
-    if (!session_thread_unbind(&instance) || !session_dispose(&instance)) result = result == 0 ? 12 : result;
+    if (!session_thread_unbind(&instance) || !session_dispose(&instance)) result = result == 0 ? 13 : result;
 done:
     machine_facade_unbind_opaque_callback();
-    if (!machine_facade_machine_cleanup() && result == 0) result = 13;
+    if (!machine_facade_machine_cleanup() && result == 0) result = 14;
     return result;
 }

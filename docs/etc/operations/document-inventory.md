@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 2784 |
 | --- | --- |
-| Generated UTC | 2026-08-27T11:40:38Z |
+| Generated UTC | 2026-08-27T11:48:26Z |
 
 ## Entries
 
@@ -374,7 +374,7 @@ content-divergent entries.
 | etc/evidence/m0-t289-s4-dpmi-composition-001.md | indexed supporting material | cf555b3cdb7b890c5b7d0193624118e9756b31c287fff58e5e9b714ca5609c00 |
 | etc/evidence/m0-t289-s5-p1-dpmi-registration-001.md | indexed supporting material | 0d0a925c51f4c598d1b1466a4f8e1d9a638b4f5d38b68fb592a974176e98ce52 |
 | etc/evidence/m0-t289-s5-p2-protected-transition-001.md | indexed supporting material | fce16a235176751ede86c409a7cbe154808b54e1c83fccc313a958d03daf5933 |
-| etc/evidence/m0-t289-s5-p3-locked-stack-transaction-001.md | indexed supporting material | 3af342a07ce3a32296e4ba24593b3beddbcab9c41373e17863a5eda1e9ac8475 |
+| etc/evidence/m0-t289-s5-p3-locked-stack-transaction-001.md | indexed supporting material | ddb306181c384d180b1434dd80498eceda710af22fb9e6c184749c5c8d043582 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -933,7 +933,7 @@ content-divergent entries.
 | etc/operations/m0-t289-s2-dpmi-pointer-frame-disposition.tsv | indexed supporting material | 8e7ea92776b1a8f8f88560db7cfb539bddeb31304ab2530b578ab0203e4ea908 |
 | etc/operations/m0-t289-s3-protected-machine-foundation-ledger.tsv | indexed supporting material | 295095f6a8d49bf2da827228c447623d69a856fad0bc2de418f2c02276675f16 |
 | etc/operations/m0-t289-s4-dpmi-composition-ledger.tsv | indexed supporting material | 993f29516964a5cf94d4e4d85d9b09ead6ee3f73c7eed92bf1197157a83cbc15 |
-| etc/operations/m0-t289-s5-dpmi-stack-interrupt-disposition-ledger.tsv | indexed supporting material | ae318351c2e30b7a39ca79288b5abdea9c74924dcdb2b7f74636f86bcb25769e |
+| etc/operations/m0-t289-s5-dpmi-stack-interrupt-disposition-ledger.tsv | indexed supporting material | 77ff8cdfe9f87bccf04dfb9e39f0ec263fed21a07ec765cbe2a7172b6592cd4f |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |

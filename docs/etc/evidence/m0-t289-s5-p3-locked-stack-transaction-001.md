@@ -23,7 +23,9 @@ Bochs stop, binds a session and worker `VDM_TIB`, invokes original
 `DpmiPassPmStackInfo`, then invokes the original `BeginUseLockedPMStack` and
 `EndUseLockedPMStack` bodies. It proves the exact `SS`/`ESP` switch to the
 source `ES` selector and `0x1000`, plus the original-frame restoration and
-zero nesting count.
+zero nesting count. It also proves that `DpmiPassPmStackInfo` publishes the
+original `CX:DX` result form as an existing session host-resource identity,
+not as a truncated native pointer.
 
 - `build/M0-T289/S5/registration-x64/bin/dpmi-registration-fixture.exe`:
   exit `0`.
