@@ -1,6 +1,6 @@
 #ifndef OPENNT_SUPPORT_VDMAPI_H
 #define OPENNT_SUPPORT_VDMAPI_H
-/* The reached OEM support-library bodies include this historical header but
- * use no VDM API declaration outside their original disabled CreateProcess
- * branch.  Keep the include form without inventing a VDM provider surface. */
+/* Exact original declaration carrier.  This adapter header intentionally
+ * supplies no VDM behavior; session/monitor own the later callable binding. */
+#include "../../opennt-platform-abi/source/opennt/public/internal/base/inc/vdmapi.h"
 #endif

@@ -24,10 +24,8 @@ $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM ' +
     '/I ' + $root + '/src/adapter-win32/include ' +
     '/I ' + $root + '/src/adapter-softpc/include ' +
     '/I ' + $root + '/src/adapter-vdm-monitor/include ' +
+    '/I ' + $root + '/src/opennt-platform-abi/source/opennt/public/internal/windows/inc ' +
     '/I ' + $root + '/src/opennt-mvdm-support/inc ' +
-    '/I ' + $root + '/src/opennt-platform-abi/source/opennt/public/sdk/inc ' +
-    '/I ' + $root + '/src/opennt-platform-abi/source/opennt/public/internal/base/inc ' +
-    '/I ' + $root + '/src/opennt-platform-abi/source/opennt/public/ddk/inc ' +
     '/I ' + $root + '/src/opennt-mvdm-host/dos/command ' +
     '/I ' + $root + '/src/opennt-mvdm-host/dos/dem ' +
     '/I ' + $root + '/src/opennt-mvdm-host/softpc.new/host/inc ' +

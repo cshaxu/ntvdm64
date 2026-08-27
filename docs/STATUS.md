@@ -2,39 +2,50 @@
 
 ## Current Work
 
-**Active: M0 T282 S1 — original COMMAND package source surface.** T281 closed
+**Active: M0 T282 S2 — COMMAND declaration carriers.** T281 closed
 in `5aa51088`; the owner has directed Queue-order execution. T282 begins the
 next candidate, original COMMAND local lifecycle, with a full package source
 and interface audit before any `54:xx` route is enabled.
 
 ## Active Packet
 
-### M0 T282 S1 — original COMMAND package source surface
+### M0 T282 S2 — COMMAND declaration carriers
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T282 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T281 is closed in `5aa51088`; the owner directed Queue-order execution and S1 admits the complete original COMMAND source surface, not an individual BOP. |
-| Objective | Give all eleven original `dos/command` translation units and all seventeen `54:00..54:10` entries one reproducible x86/x64 source/interface disposition. |
-| Non-goals | Enabling `CmdDispatch` or any `54:xx` route, provider execution, a host executable, Bochs changes, a new COMMAND rewrite, trace-driven selection, or a generic shim. |
+| Identifier Mode | `M0 T282 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S1 closed in `b2c50bc8`; its complete package ledger proves the exact `vdmapi.h` and `pif.h` declaration carriers are the smallest next source-first recovery rung. |
+| Objective | Import and select exact original COMMAND declaration carriers on x86/x64 without enabling behavior. |
+| Non-goals | Implementing `GetNextVDMCommand`, PIF behavior, a `54:xx` route, provider execution, host executable, Bochs change, generic shim or trace. |
 | Reference Baseline | Original `dos/command/sources`; T231 COMMAND ledger; T236 closures; T276/T277 owner and cycle ledgers; T281 closure and host-control disposition. |
-| Files And ABI Surface | Original `dos/command` source/header/sources files; existing adapter-win32, adapter-softpc, adapter-vdm-monitor, adapter-bop, session, Redirector, WOW/VDD boundary records; S1 ledger/probe/evidence only. |
+| Files And ABI Surface | Exact original `vdmapi.h` and `pif.h`, platform-ABI import/adapter include selection, COMMAND static probe and evidence only. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Unique 11-source/17-service ledger; x86/x64 static compile-surface probes; source identity and interface-owner review; documentation governance and `git diff --check`. |
-| Expected Markers | One whole-package disposition per original source and named owner for every non-composable boundary; no enabled runtime route. |
+| Verification | Exact source hashes, selector-disabled x86/x64 static probes, source identity review, documentation governance and `git diff --check`. |
+| Expected Markers | Original `VDMINFO`/PIF declarations parse; no behavior route is enabled. |
 | Asset Needs | Pinned original MVDM mirror, prior COMMAND ledgers, existing declaration carriers, MSVC x86/x64 and Ninja. |
 | Reporting Requirements | Original source/service, interface family, owner/binding, architecture result, selected recovery rung, unsupported branch and transfer owner. |
-| Stop Conditions | A source body needs a new unnamed adapter, a proposed group crosses a Redirector/WOW/VDD owner without a package boundary, a route is enabled, or a Bochs device/executor is selected. |
-| Exit Criteria | Every original unit and service is covered once, each blocked interface has one named owner, both architecture observations are retained, and a follow-on S can select a whole coherent source group without leaf re-audit. |
+| Stop Conditions | Any behavior body is selected, an imported carrier differs from its pinned source, an unnamed adapter is required, or a route is enabled. |
+| Exit Criteria | Both exact carriers are hash-proven and selected by x86/x64 static probes; remaining function boundaries are recorded without implementation. |
 | Original Owner Request | “我都叫你按顺序执行了” and “请参照治理规范和实施规范执行任务”. |
 | Similar-Issue Sweep | Process/re-entry/standard streams, environment/configuration, PIF, command source, console/key layout, BOP dispatch, Redirector/broker, WOW/VDD and all historical machine-facing calls. |
 
-The detailed execution plan is [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md).
+The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md) and [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md).
 
 **T282 S1 P1:** both static-only architecture probes reached the same original
 `vdmapi.h` declaration boundary. The verified 11-unit/17-service ledgers and
 [surface evidence](etc/evidence/m0-t282-s1-command-source-surface-001.md)
 record the exact original carriers and successor owners; no route was enabled.
+
+**T282 S2 P1:** byte-exact original `vdmapi.h` and `pif.h` are now registered
+in the platform-ABI manifest. Focused x86/x64 static probes compile original
+`cmdexec.c` and `cmdpif.c` through those carriers. The whole package remains
+selector-disabled; `cmdkeyb.c` stops at the separately-owned private
+`winconp.h` declaration boundary.
+
+**T282 S2 closure:** both admitted declaration carriers are hash-proven and
+selected on x86/x64 without adding any behavior. `GetNextVDMCommand` remains
+for the session/monitor binding package; PIF behavior and the `winconp.h`
+console-private boundary remain later named work. See the [S2 evidence](etc/evidence/m0-t282-s2-command-declaration-carriers-001.md).
 
 ### Closed packet reference — M0 T281 S5 — original host-control package disposition
 

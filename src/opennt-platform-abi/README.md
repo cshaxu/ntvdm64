@@ -29,6 +29,13 @@ baseline after checking the reached `VdmServiceClass` layout used by original
 same manifest. This supplies declarations only and does not admit monitor,
 selector, or provider behavior.
 
+T282 S2 selected byte-exact public internal `vdmapi.h` and PIF `pif.h` for
+the original COMMAND package. `vdmapi.h` supplies the `VDMINFO` and
+`GetNextVDMCommand` declarations; `pif.h` supplies only the historical PIF
+layouts. Neither import supplies a callable VDM API, PIF provider, selector or
+runtime route. Their hashes and original callers are recorded in the same
+manifest.
+
 ## Divergence register
 
 None. Every current file below `source/` is byte-identical to the exact source
