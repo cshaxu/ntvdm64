@@ -2,16 +2,34 @@
 
 ## Current Work
 
-**No active M/T/S packet.**
+**Active: M0 T286 S2 — Bochs-only configuration and product-shell minimization.**
 
-M0 T285 is closed as an owner-directed duplicate-route withdrawal. Its S1/S2
-static source/binding evidence remains retained, but it does not establish a
-need to repeat the already-connected DEM/COMMAND package. The next candidate
-is Bochs core diff and overlay minimization; XMS and the remaining BOP-owner
-packages follow it in the dependency queue. See
-[T285 closure](history/m0-t285-closure-20260826.md).
+T285 is closed as a duplicate-route withdrawal. T286 begins the queue's
+Bochs-core minimization package before XMS or other BOP-owner recovery.
 
 ## Active Packet
+
+### M0 T286 S2 — Bochs-only configuration and product-shell minimization
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T286 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T286 S1 ledger classifies configuration B2 and finite product-shell crop D4 as the only candidate external-composition groups. |
+| Objective | Determine whether Bochs CPU5 configuration selection and finite product-shell Reset/exit composition can move wholly into `adapter-bochs`, retaining only the smallest upstream-relative core boundary. |
+| Non-goals | No change to guest, BOP, OpenNT, SoftPC, device, firmware, timer or CPU behavior; no public overlay ABI; no source/build/runtime input from `src.old`. |
+| Reference Baseline | T286 S1 ledger, pinned Bochs 2.6 `config.h`/`pc_system.cc`, `adapter-bochs/minimal_{sim,product_shell,machine}.*`, current component README registers. |
+| Files And ABI Surface | `bochs-core/{config.h,pc_system.cc}`, `adapter-bochs/minimal_{sim,product_shell,machine}.*`, exception registers, manifest and focused configuration/lifecycle fixtures. |
+| Applicable Rules | Architecture, coding, execution, source policy, build hygiene and mirror/overlay rules. |
+| Verification | Upstream/diff comparison, construction/lifecycle call-direction review, x86/x64 focused machine lifecycle check if code changes, documentation governance and `git diff --check`. |
+| Expected Markers | Every B2/D4 line is either deleted, reduced to a registered mirror boundary, or proven to require private Bochs state; no configuration/lifecycle policy moves into an overlay. |
+| Asset Needs | Pinned Bochs 2.6 source, current adapter composition sources, existing formal fixtures/manifests. |
+| Reporting Requirements | Original line/function, current behavior, adapter ownership feasibility, final disposition, changed-line result and verification. |
+| Stop Conditions | A move would expose a private Bochs object, require product-shell plugins/GUI/devices, or changes the current machine contract. |
+| Exit Criteria | B2/D4 have a final bounded disposition, any safe externalization is implemented and verified, and deferred device/CPU/memory groups retain their S3--S5 owners. |
+| Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
+| Similar-Issue Sweep | Generated configuration macros, PC-system Reset/exit overrides, adapter SIM/product-shell construction, and all external callers of the current lifecycle façade. |
+
+**T286 S1 closure:** the complete [divergence disposition ledger](etc/operations/m0-t286-s1-bochs-core-divergence-disposition-ledger-001.md) measures 29 differing upstream-relative mirror files (431 additions / 353 deletions) and 15 private overlay bodies (1,164 lines). It classifies all groups as build bindings, required private CPU/memory/device hooks, optional diagnostics, or B2/D4 external-composition candidates. No source behavior changed.
 
 **T285 S1 closure:** `New-T285S1Wave2CurrentWorkset.ps1` revalidated all 81
 selected current mirror paths (22 DEM + 59 host-control), recorded their
