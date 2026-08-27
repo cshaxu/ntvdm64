@@ -23,6 +23,7 @@ VOID VrGetNamedPipeInfo(VOID);
 VOID VrSetNamedPipeHandleState(VOID);
 VOID VrPeekNamedPipe(VOID);
 VOID VrTransactNamedPipe(VOID);
+VOID VrWaitNamedPipe(VOID);
 
 extern CRITICAL_SECTION VrNamedPipeCancelCritSec;
 
@@ -137,6 +138,8 @@ int main(void)
     HANDLE transact_thread;
     transact_server_context transact_context;
     char transact_pipe_name[MAX_PATH];
+    char wait_pipe_name[MAX_PATH];
+    HANDLE wait_server;
     DWORD pipe_mode;
 
     if (!VrIsNamedPipeName(remote) || !VrIsNamedPipeName(remote_slash) ||
@@ -332,6 +335,31 @@ int main(void)
     CloseHandle(transact_thread);
     CloseHandle(transact_client);
     CloseHandle(transact_server);
+    if (sprintf_s(wait_pipe_name, sizeof(wait_pipe_name),
+            "\\\\.\\pipe\\t290-s3-wait-%lu",
+            (unsigned long)GetCurrentProcessId()) < 0)
+        return 28;
+    wait_server = CreateNamedPipeA(wait_pipe_name, PIPE_ACCESS_DUPLEX,
+        PIPE_TYPE_BYTE | PIPE_READMODE_BYTE | PIPE_WAIT, 1u,
+        256u, 256u, 0u, NULL);
+    if (wait_server == INVALID_HANDLE_VALUE)
+        return 29;
+    memcpy(memory.bytes + 0x1500u, wait_pipe_name,
+        strlen(wait_pipe_name) + 1u);
+    fixture_ds = 0u;
+    fixture_dx = 0x1500u;
+    fixture_bx = 0u;
+    fixture_cx = 1000u;
+    fixture_carry = 1u;
+    if (!mvdm_redirector_pointer_scope_begin())
+        return 30;
+    VrWaitNamedPipe();
+    if (!mvdm_redirector_pointer_scope_end(1) || fixture_carry != 0u ||
+        fixture_ax != 0u) {
+        CloseHandle(wait_server);
+        return 31;
+    }
+    CloseHandle(wait_server);
     DeleteCriticalSection(&VrNamedPipeCancelCritSec);
     if (!VrRemoveOpenNamedPipeInfo(client) ||
         !mvdm_host_identity_release(identity) || !session_thread_unbind(&instance)) {

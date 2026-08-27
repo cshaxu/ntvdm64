@@ -76,6 +76,11 @@ message-mode public pipes through the same session BP:BX opaque identity and
 bounded DS:SI/ES:DI guest spans.  It retains the source event/overlapped wait,
 byte-count and carry/error sequence; see the [P12 evidence](etc/evidence/m0-t290-s3-p12-named-pipe-transact-guest-span-001.md).
 
+**T290 S3 P13:** original `VrWaitNamedPipe` now composes on formal x86/x64
+through the session DS:DX string lease and source BX:CX timeout. It retains
+the source `AX=0`/carry-clear success direction; see the [P13
+evidence](etc/evidence/m0-t290-s3-p13-named-pipe-wait-guest-string-001.md).
+
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
 bodies now compose on formal x86/x64 Ninja fixtures.  Session-owned numeric
