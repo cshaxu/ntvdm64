@@ -36,6 +36,13 @@ fixture matrix. `CallBack16` now bypasses session command routing and uses
 only the SoftPC-shaped mechanical interval. It remains a foundation, not a
 loaded WOW runtime; see the [S3 closure](etc/evidence/m0-t291-s3-wow-frame-callback-foundation-closure-001.md).
 
+**T291 S4 P1:** `NtVdmControl(VdmQueryDir)` now uses a distinct typed
+monitor-control capability rather than the command route, with formal x86/x64
+proof. `GetNextVDMCommand`, generic `host_simulate` postconditions and full
+WOW task lifecycle remain separate source-first groups; see the
+[P1 evidence](etc/evidence/m0-t291-s4-p1-vdm-control-capability-separation-001.md)
+and [live control-plane ledger](etc/operations/m0-t291-s4-control-plane-disposition-ledger-001.md).
+
 **T291 S2 closure:** all twelve selected original WOW32 thunk/frame bodies
 have source coverage; 214 reached external-interface occurrences and eighteen
 source-token dispositions have one owner, bounded lifetime and recovery or

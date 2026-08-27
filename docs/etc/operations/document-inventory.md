@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2854 |
+| Documentation records | 2856 |
 | --- | --- |
-| Generated UTC | 2026-08-27T16:50:15Z |
+| Generated UTC | 2026-08-27T16:53:47Z |
 
 ## Entries
 
@@ -419,6 +419,7 @@ content-divergent entries.
 | etc/evidence/m0-t291-s3-p4-wow-callback-guest-frame-001.md | indexed supporting material | 98ec8585cbfbf0e1a8067fa9492c51e7cd4a876e5c51f7f8cd55d0b2ac72958c |
 | etc/evidence/m0-t291-s3-p5-wow-stack-simulation-boundary-001.md | indexed supporting material | 78662fa371c46a7c7c6e2f72046462e846e32f87e10fc1f1e841d2bcb2d1412b |
 | etc/evidence/m0-t291-s3-wow-frame-callback-foundation-closure-001.md | indexed supporting material | 45060644e25ad19bd367e07bc471fc102c7bdd187e0a8775465a2a460b6896f5 |
+| etc/evidence/m0-t291-s4-p1-vdm-control-capability-separation-001.md | indexed supporting material | b5060038aa25819a757ef56ecb1f51c967c2798a302c811df13a9fe1effb3055 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -1000,6 +1001,7 @@ content-divergent entries.
 | etc/operations/m0-t291-s2-wow-thunk-frame-recovery-decision-001.md | indexed supporting material | 5d34e55a7514674b224081d2ae67e9eeb3269d6b62a74b512b2af12a3a054f4c |
 | etc/operations/m0-t291-s2-wow-thunk-frame-source-coverage-ledger.tsv | indexed supporting material | f9cb1fdc139d6b02a94b1d268c4fd85f69a4c0ccfe50e426deadb45611125b04 |
 | etc/operations/m0-t291-s3-wow-frame-callback-transaction-plan-001.md | indexed supporting material | 2f9a0ff7a256abeef2372b23b8cbd3ba5125065d40a255d183f96986c6eea98f |
+| etc/operations/m0-t291-s4-control-plane-disposition-ledger-001.md | indexed supporting material | 1e890dd98bf5bf3041d7d0fab0ae7aab707e863582d1acdc5b9d95953412ec40 |
 | etc/operations/m0-t291-s4-control-plane-separation-and-reentry-contract-plan-001.md | indexed supporting material | edb829f9c554c7090d1c773731c91a9c5d25ab09e06a904628e3fae93a73e41e |
 | etc/operations/m0-t291-wow-owner-package-source-abi-audit-plan-001.md | indexed supporting material | 3025476a681ddfa727684e32ddf5a7a7b5148f09362d4b4f31a23df6ba5b75fd |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
@@ -2868,7 +2870,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | cdc8cb8ce519df930835ec6415f563ef019f039d6bde34334236e01e35ef1b24 |
+| STATUS.md | principal control document | e342794a2c84ca71b92285dd95938b8dd5de9ad060ffdaeca71369a1d9d1d70e |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
