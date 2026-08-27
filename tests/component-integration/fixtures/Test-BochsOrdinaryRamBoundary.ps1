@@ -8,15 +8,14 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path))
 }
 
-$path = Join-Path $RepositoryRoot 'src\bochs-core\memory\misc_mem.cc'
-if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing Bochs memory source: $path" }
+$path = Join-Path $RepositoryRoot 'src\bochs-core-overlay\memory\checked_ram.cc'
+if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing private checked-RAM source: $path" }
 $text = Get-Content -LiteralPath $path -Raw
 $preflightStart = $text.IndexOf('bx_bool BX_MEM_C::ordinary_ram_readable')
 if ($preflightStart -lt 0) { throw 'Missing ordinary-RAM readable preflight' }
 $copyStart = $text.IndexOf('bx_bool BX_MEM_C::copy_from_ordinary_ram')
 if ($copyStart -lt 0) { throw 'Missing ordinary-RAM observation primitive' }
-$end = $text.IndexOf("`n/*", $copyStart)
-if ($end -lt 0) { throw 'Could not bound ordinary-RAM observation primitive' }
+$end = $text.Length
 $preflight = $text.Substring($preflightStart, $copyStart - $preflightStart)
 $body = $text.Substring($copyStart, $end - $copyStart)
 

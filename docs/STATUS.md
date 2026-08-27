@@ -2,30 +2,30 @@
 
 ## Current Work
 
-**Active: M0 T286 S5 — minimal memory and checked-RAM boundary review.**
+**Active: M0 T286 S6 — final remeasurement, focused formal validation and closure.**
 
 T285 is closed as a duplicate-route withdrawal. T286 begins the queue's
 Bochs-core minimization package before XMS or other BOP-owner recovery.
 
 ## Active Packet
 
-### M0 T286 S5 — minimal memory and checked-RAM boundary review
+### M0 T286 S6 — final remeasurement, focused formal validation and closure
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T286 S5`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T286 S1 classifies M1/M2 as remaining private Bochs memory mechanics after S4 retired all unconsumed observers. |
-| Objective | Re-evaluate SIM-free memory initialization and checked ordinary/backing RAM operations; move only configuration/lifecycle decisions outward and retain a minimum private member boundary. |
-| Non-goals | No XMS/UMB/DOS policy, guest allocator, BOP behavior, new RAM feature, public overlay ABI, or `src.old` use. |
-| Reference Baseline | T286 S1 ledger; pinned `memory/{memory.h,misc_mem.cc}`, current `minimal_memory.cc`/`checked_ram.cc`, adapter machine assembly and memory fixtures. |
-| Files And ABI Surface | `bochs-core/memory/{memory.h,misc_mem.cc}`, private memory overlay files, adapter machine facade/lifecycle, manifest and focused memory fixtures. |
+| Identifier Mode | `M0 T286 S6`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T286 S1--S5 have disposed every divergence group; S6 is the required final measurement and focused validation closure. |
+| Objective | Recalculate the adopted Bochs mirror/overlay delta, reconcile every retained exception register, repair only T286-owned focused build inputs, and validate the minimized Bochs boundary on x86 and x64. |
+| Non-goals | No XMS/UMB/DOS policy, BOP implementation, new machine device, global MVDM build-graph reconstruction, or `src.old` use. |
+| Reference Baseline | T286 S1 ledger and S2--S5 evidence; pinned Bochs 2.6 source; current core/overlay manifests and focused fixtures. |
+| Files And ABI Surface | `bochs-core`, `bochs-core-overlay`, `adapter-bochs`, focused fixtures, T286-specific manifest/generator if required, exception READMEs and evidence. |
 | Applicable Rules | Architecture, coding, execution, source policy, build hygiene and mirror/overlay rules. |
-| Verification | Pinned-source/body comparison, private member-access review, adapter-only configuration scan, focused checked-RAM/memory fixture where graph permits, documentation governance and `git diff --check`. |
-| Expected Markers | Each remaining memory line is either a minimal core declaration/call, a private state body or an adapter-owned configuration decision; no MVDM/XMS vocabulary crosses the boundary. |
-| Asset Needs | Pinned memory sources, overlays, adapter lifecycle/facade and focused fixtures. |
-| Reporting Requirements | Upstream body/function, private state accessed, externalizable decision, final disposition, diff/overlay change and verification. |
-| Stop Conditions | Any proposal introduces address mapping, allocation/UMB semantics, guest policy or a raw private-memory object outside the Bochs boundary. |
-| Exit Criteria | M1/M2 receive a final minimal disposition; any safe externalization is implemented; remaining private RAM bodies are registered for S6 verification. |
+| Verification | Repeat pinned-source metric; check overlay privacy and exception indexes; run focused structural fixtures and a T286-scoped formal x86/x64 graph where graph permits; documentation governance and `git diff --check`. |
+| Expected Markers | No retired observer returns; every retained divergence has an owner and exception index; focused graph never uses stale component roots or `src.old`. |
+| Asset Needs | Pinned core sources, current overlay, adapter machine sources, formal MSVC/Ninja toolchain and focused fixtures. |
+| Reporting Requirements | Final counts, each validation result, any scope-limited graph constraint, and an explicit T286 closure disposition. |
+| Stop Conditions | Any proposed repair expands to unrelated MVDM runtime/link closure, adds BOP semantics, or restores retired diagnostics. |
+| Exit Criteria | Final metrics and exception registers reconcile; focused x86/x64 validation is evidenced or a precise independent blocker is proved; T286 closure is written and queue head is ready for admission. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
 | Similar-Issue Sweep | SIM parameter accesses, allocation/configuration decisions, RAM copy/range validation, direct private-memory access, adapter facade calls and memory test inputs. |
 
@@ -36,6 +36,8 @@ Bochs-core minimization package before XMS or other BOP-owner recovery.
 **T286 S3 closure:** all minimal port-space, PIC and headless-8042 bodies are confirmed private Bochs-state mechanics with no safe upstream no-product alternative or duplicate adapter lifecycle. The [S3 review](etc/evidence/m0-t286-s3-device-lifecycle-review-001.md) retains D1--D3 unchanged and transfers the only safe reduction opportunity to unconsumed CPU observers.
 
 **T286 S4 closure:** six unconsumed default-off observer/gate files, every mirror call/declaration and all formal diagnostic switches are deleted. The [S4 evidence](etc/evidence/m0-t286-s4-observer-retirement-001.md) records the retained #UD/profile boundary and post-removal totals: 29 core diffs (393 additions / 356 deletions) and nine overlay bodies (978 lines). Full graph generation remains independently blocked by stale manifest roots.
+
+**T286 S5 closure:** SIM-free allocation and checked ordinary/backing RAM remain the minimum private `BX_MEM_C` mechanics. `adapter-bochs` already owns only size/lifecycle selection and typed copied requests; it cannot safely own A20, MMIO/ROM vetoes, sparse vectors, handler tables or write stamps. The ordinary-RAM boundary fixture now follows the private checked-RAM body; see the [S5 evidence](etc/evidence/m0-t286-s5-memory-boundary-review-001.md).
 
 **T285 S1 closure:** `New-T285S1Wave2CurrentWorkset.ps1` revalidated all 81
 selected current mirror paths (22 DEM + 59 host-control), recorded their
