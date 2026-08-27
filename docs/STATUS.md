@@ -2,33 +2,16 @@
 
 ## Current Work
 
-**Active: M0 T289 S7 — DPMI source identity, exception and transfer closure.**
+**No active M/T/S packet.**
 
-T286 is closed. Its final Bochs-core minimization evidence is in
-[the closure record](history/m0-t286-closure-20260827.md). T287 admits the
-queue-head original XMS owner package using a complete source-first plan.
+M0 T289 is closed. Its final original-DPMI package boundary is in
+[the closure record](history/m0-t289-closure-20260827.md). The next ordered
+candidate is original Redirector and brokered COMMAND extensions; it requires
+separate owner admission before implementation.
 
 ## Active Packet
 
-### M0 T289 S7 — DPMI source identity, exception and transfer closure
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | `M0 T289 S7`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S6 complete x86/x64 package matrix and source-proven unavailable outcomes. |
-| Objective | Audit DPMI source identity, divergence registration, mapping-manager ownership and every deferred transfer; close T289 only if no ownerless branch remains. |
-| Non-goals | No BOP ingress route, DOSX host link, raw pointer, host LDT/IDT mutation, protected-mode runtime executor, new mapping manager or `src.old` use. |
-| Reference Baseline | [S6 closure](etc/evidence/m0-t289-s6-dpmi-family-matrix-closure-001.md), [family matrix](etc/operations/m0-t289-s6-dpmi-family-disposition-matrix.tsv), `bop-list.md`, source policy and mapping-manager rule. |
-| Files And ABI Surface | Exact `mvdm-host/{dpmi,dpmi32}` sources, `mvdm-host-overlay`, `adapter-mvdm-host-out`, `adapter-bochs`, session and DPMI tracker/exception registers. |
-| Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Source-hash check, mirror README divergence check, mapping-manager call-path audit, transfer ledger, documentation governance and `git diff --check`. |
-| Expected Markers | Every DPMI mirror/overlay/adapter path has one source/exception/owner result; no direct Bochs dependency enters a mirror; every unavailable branch names a future owner or final non-runtime reason. |
-| Asset Needs | Canonical MVDM roots, S6 closure, current adapter inventory, session mapping rule and Bochs mechanical surface. |
-| Reporting Requirements | Original-source identity, every divergence/mapping use, and each deliberately unavailable transfer. |
-| Stop Conditions | A source body needs a semantic rewrite, direct Bochs call, raw pointer, host LDT/IDT mutation, a new mapping manager, a second CPU/product shell, or a BOP ingress route is proposed. |
-| Exit Criteria | T289 source identity/exception/transfer ledger is complete, no ownerless DPMI branch remains, and T289 closure accurately states local versus runtime scope. |
-| Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | All `53:xx` entries, DOSX artifacts, dpmi/dpmi32 source groups, selector/memory/stack/interrupt/fault forms, VDD/debug declarations, host pointers, Win32 imports, Bochs-facing calls, session leases and x86/x64 ABI forms. |
+No implementation may proceed until the owner admits the next bounded S.
 
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
@@ -100,6 +83,15 @@ formal x86/x64 fixtures.  The S4 fixture also now proves original
 failure.  The live all-25 disposition is in the
 [S6 matrix](etc/operations/m0-t289-s6-dpmi-family-disposition-matrix.tsv);
 no selector ingress is enabled.
+
+**T289 S7 closure:** both canonical OpenNT DPMI editions are identical for
+all 25 selected paths; the current mirror has nineteen exact files and six
+in-file/README-registered minimal divergences.  Session-owned host-resource
+identity use is the only durable mapping route.  All nine selector-disabled
+outcomes have a named queued owner, so T289 has no ownerless DPMI branch.
+The complete ledger and reproducible source audit are in the
+[S7 evidence](etc/evidence/m0-t289-s7-dpmi-identity-transfer-closure-001.md)
+and [transfer ledger](etc/operations/m0-t289-s7-dpmi-identity-exception-transfer-ledger.tsv).
 
 **T289 S3 closure:** `adapter-bochs` now exposes a selector-blind copied
 protected-frame, copied active-segment inspection and checked protected-span

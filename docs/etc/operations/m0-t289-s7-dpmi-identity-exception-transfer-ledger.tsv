@@ -1,0 +1,20 @@
+category	item	original_source	current_identity_or_binding	current_result	future_owner_or_terminal_disposition
+mirror identity	25 audited DPMI paths	OpenNT/base/mvdm/dpmi32 and OpenNT-4.5/nt/private/mvdm/dpmi32	both canonical editions hash-identical; 19 current files exact	identity audit passes	all 19 exact paths remain direct mirrors
+registered divergence	MVDM-HOST-DIV-012	dpmi32/xmem.c	session host-resource opaque 32-bit identity via adapter-mvdm-host-out/softpc	formal x86/x64 local lifecycle evidence	DPMI ingress only after whole-package admission
+registered divergence	MVDM-HOST-DIV-013	dpmi32/dpmiselr.c	checked protected descriptor copy; source host-LDT final action fails	formal x86/x64 failure direction retained	future Bochs descriptor-publication owner
+registered divergence	MVDM-HOST-DIV-014	dpmi32/dpmimemr.c	checked copied protected response buffer	formal x86/x64 local evidence	DPMI ingress only after whole-package admission
+registered divergence	MVDM-HOST-DIV-015	dpmi32/dpmi32.c	per-session numeric DOSX state and checked copied inputs	formal x86/x64 local evidence	future protected DOSX runtime owner
+registered divergence	MVDM-HOST-DIV-016	dpmi32/dpmiint.c	checked copied registration frames and range checks	formal x86/x64 local evidence	future protected interrupt/fault runtime owner
+registered divergence	MVDM-HOST-DIV-017	dpmi32/dpmiint.c	same-shaped atomic protected frame transaction	formal x86/x64 local locked-stack evidence	future protected interrupt/fault runtime owner
+registered divergence	MVDM-HOST-DIV-018	dpmi32/dpmiint.c	session host-resource opaque 32-bit identity	formal x86/x64 local stack-info evidence	future monitor guest-visible VDM-TIB/DOSX projection owner
+registered divergence	MVDM-HOST-DIV-019	dpmi32/stack.c	bounded IVT/stack leases plus selector-blind real-mode frame transaction	formal x86/x64 local real-mode-stack evidence	future protected interrupt/fault runtime owner
+mapping ownership	all DPMI durable host identities	DPMI x86 pointer-shaped values	only session.host_resource_mappings through mvdm_host_identity	no direct mapping-manager use in DPMI mirror or overlay	one session-owned mapping-manager implementation
+transfer	53:01 switch_to_protected_mode	dpmi32/i386/dpmi386.c	source-proven unavailable; raw aliases and coupled CR0/frame writes	no route enabled	queue candidate 8: protected runtime mode-transition composition
+transfer	53:03 DpmiGetFastBopEntry	dpmi32/i386/dpmi386.c plus v86/monitor/i386/fastpm.asm	source-proven unavailable; no monitor fast-PM entry publication	no route enabled	queue candidate 8: monitor-owned protected entry lifecycle
+transfer	53:06 DpmiXlatInt21Call	dpmi32/int21map.c	source-proven unavailable; protected aliases and PM-to-real transport required	no route enabled	queue candidate 8: DPMI-to-DEM/COMMAND transport composition
+transfer	53:0E DpmiSetDebugRegisters	dpmi32/i386/dpmi386.c	source-proven unavailable; host-thread debug registers are not Bochs CPU registers	no route enabled	queue candidate 6: VDD/debugger package plus selector-blind Bochs debug register seam
+transfer	53:14 DpmiIntHandlerIret16	dpmi32/dpmiint.c	source-proven unavailable; DOSX 16-bit frame and atomic IRET commit required	no route enabled	queue candidate 8: protected interrupt/fault runtime
+transfer	53:15 DpmiIntHandlerIret32	dpmi32/dpmiint.c	source-proven unavailable; DOSX 32-bit frame and atomic IRET commit required	no route enabled	queue candidate 8: protected interrupt/fault runtime
+transfer	53:16 DpmiFaultHandlerIret16	dpmi32/dpmiint.c	source-proven unavailable; DOSX 16-bit fault frame and atomic IRET commit required	no route enabled	queue candidate 8: protected interrupt/fault runtime
+transfer	53:17 DpmiFaultHandlerIret32	dpmi32/dpmiint.c	source-proven unavailable; DOSX 32-bit fault frame and atomic IRET commit required	no route enabled	queue candidate 8: protected interrupt/fault runtime
+transfer	53:18 DpmiUnhandledExceptionHandler	dpmi32/dpmiint.c	source-proven unavailable; descriptor-aware fault reflection and DOSX stubs required	no route enabled	queue candidate 8: protected interrupt/fault runtime
