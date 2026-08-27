@@ -110,6 +110,12 @@ process-termination stale-handle cleanup are proven; asynchronous named-pipe
 completion remains the next S4 sub-group. See the
 [P18 evidence](etc/evidence/m0-t290-s4-p18-original-mailslot-composition-001.md).
 
+**T290 S4 P19:** original `VrReadWriteAsyncNmPipe` now has formal x86/x64
+safe-decline evidence: its fixed 16:16 request layout parses under a bounded
+scope, then the current same-shaped unavailable worker facade preserves the
+source carry/error path without queuing I/O or exposing guest memory. See the
+[P19 evidence](etc/evidence/m0-t290-s4-p19-async-pipe-safe-decline-001.md).
+
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
 bodies now compose on formal x86/x64 Ninja fixtures.  Session-owned numeric

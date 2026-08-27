@@ -29,6 +29,7 @@ VOID VrWaitNamedPipe(VOID);
 VOID VrCallNamedPipe(VOID);
 VOID VrNetHandleGetInfo(VOID);
 VOID VrNetHandleSetInfo(VOID);
+VOID VrReadWriteAsyncNmPipe(VOID);
 
 extern CRITICAL_SECTION VrNamedPipeCancelCritSec;
 
@@ -166,6 +167,7 @@ int main(void)
     transact_server_context call_context;
     DOS_CALL_NAMED_PIPE_STRUCT *call_structure;
     DWORD pipe_mode;
+    DOS_ASYNC_NAMED_PIPE_STRUCT *async_request;
 
     if (!VrIsNamedPipeName(remote) || !VrIsNamedPipeName(remote_slash) ||
         VrIsNamedPipeName(local) || VrIsNamedPipeName(missing_name) ||
@@ -217,6 +219,28 @@ int main(void)
         CloseHandle(server);
         return 10;
     }
+    async_request = (DOS_ASYNC_NAMED_PIPE_STRUCT *)(memory.bytes + 0x1b00u);
+    memset(async_request, 0, sizeof(*async_request));
+    async_request->lpBytesRead = 0x1c00u;
+    async_request->BufferLength = 1u;
+    async_request->lpBuffer = 0x1c10u;
+    async_request->lpErrorCode = 0x1c20u;
+    async_request->lpANR = 0u;
+    async_request->PipeHandle = 1u;
+    fixture_ax = 0x0086u;
+    fixture_bp = (USHORT)(identity >> 16);
+    fixture_bx = (USHORT)identity;
+    fixture_ds = 0u;
+    fixture_si = 0x1b00u;
+    fixture_carry = 0u;
+    if (!mvdm_redirector_pointer_scope_begin() ||
+        !mvdm_redirector_pointer_scope_prepare(0u, 0x1b00u,
+            sizeof(*async_request), GUEST_MEMORY_ACCESS_READ) ||
+        !mvdm_redirector_pointer_scope_prepare(0u, 0x1c10u, 1u,
+            GUEST_MEMORY_ACCESS_READ)) return 43;
+    VrReadWriteAsyncNmPipe();
+    if (!mvdm_redirector_pointer_scope_end(0) || fixture_carry == 0u ||
+        fixture_ax != ERROR_NOT_ENOUGH_MEMORY) return 44;
     fixture_bp = (USHORT)(identity >> 16);
     fixture_bx = (USHORT)identity;
     fixture_ax = 0xffffu;

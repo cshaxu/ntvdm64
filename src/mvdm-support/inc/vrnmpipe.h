@@ -301,13 +301,17 @@ typedef struct {
 //#include <packon.h>
 #pragma pack(1)
 typedef struct {
-    LPWORD  lpBytesRead;        // pointer to returned bytes read/written
+    /* DIVERGENCE(MVDM-SUPPORT-DIV-004): each value below is a packed 16:16
+     * guest location.  Native pointer typedefs would widen this request ABI
+     * on x64; original consumers continue to decode them with far-pointer
+     * helpers only while a bounded Redirector scope is active. */
+    DWORD   lpBytesRead;        // pointer to returned bytes read/written
     WORD    BufferLength;       // size of caller's buffer
-    LPBYTE  lpBuffer;           // pointer to caller's buffer
-    LPWORD  lpErrorCode;        // pointer to returned error code
-    LPVOID  lpANR;              // pointer to Asynchronous Notification Routine
+    DWORD   lpBuffer;           // pointer to caller's buffer
+    DWORD   lpErrorCode;        // pointer to returned error code
+    DWORD   lpANR;              // pointer to Asynchronous Notification Routine
     WORD    PipeHandle;         // named pipe handle
-    LPBYTE  lpSemaphore;        // pointer to caller's 'semaphore'
+    DWORD   lpSemaphore;        // pointer to caller's 'semaphore'
 } DOS_ASYNC_NAMED_PIPE_STRUCT, *PDOS_ASYNC_NAMED_PIPE_STRUCT;
 //#include <packoff.h>
 #pragma pack()
