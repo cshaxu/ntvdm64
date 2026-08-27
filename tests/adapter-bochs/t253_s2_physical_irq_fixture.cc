@@ -1,9 +1,9 @@
 #include "bochs.h"
 #include "iodev/iodev.h"
 #include "adapter-mvdm-host-in/generic_ud_bridge.h"
-#include "adapter-softpc/machine_stage.h"
-#include "adapter-softpc/physical_irq.h"
-#include "adapter-softpc/port_action.h"
+#include "adapter-mvdm-host-out/softpc/machine_stage.h"
+#include "adapter-mvdm-host-out/softpc/physical_irq.h"
+#include "adapter-mvdm-host-out/softpc/port_action.h"
 #include "bochs-core/pc_system.h"
 
 #include <string.h>

@@ -1,8 +1,8 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "adapter-softpc/guest_pointer_manager.h"
-#include "adapter-softpc/host_handle_manager.h"
+#include "adapter-mvdm-host-out/softpc/guest_pointer_manager.h"
+#include "adapter-mvdm-host-out/softpc/host_handle_manager.h"
 
 typedef struct fixture_guest { uint8_t memory[0x100000u]; } fixture_guest;
 static int data_release_count;

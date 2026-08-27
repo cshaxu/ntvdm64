@@ -33,9 +33,9 @@ foreach ($row in $targets) {
         $row.final_evidence = 'T276 S12 device-bridge baseline: original device execution is a Bochs-replacement exclusion'
     } else {
         $row.final_disposition = 'adapter-backed'
-        $row.final_owner_or_link_boundary = 'mvdm-host original host endpoint/control provider -> adapter-mvdm-host-out/win32 or adapter-wow -> adapter-bochs typed device request; app supplies presentation policy'
+        $row.final_owner_or_link_boundary = 'mvdm-host original host endpoint/control provider -> adapter-mvdm-host-out/win32 or adapter-mvdm-host-out/wow -> adapter-bochs typed device request; app supplies presentation policy'
         $row.final_change_class = 'binding-only; preserve original endpoint/control flow while excluding direct controller/object access'
-        $row.named_adapter = 'adapter-mvdm-host-out/win32; adapter-wow where reached; adapter-bochs; session host-resource mapping manager'
+        $row.named_adapter = 'adapter-mvdm-host-out/win32; adapter-mvdm-host-out/wow where reached; adapter-bochs; session host-resource mapping manager'
         $row.mapping_implication = 'host handles/resources remain opaque session host-resource identities; Bochs receives only typed endpoint/device operations'
         $row.final_evidence = 'T276 S12 device-bridge baseline: original host endpoint/provider body with named public capability and Bochs profile boundary'
     }

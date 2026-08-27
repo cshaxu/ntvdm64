@@ -128,8 +128,8 @@ $exclusionRows = @(
         original_purpose = 'historical SoftPC CPU execution engine'
         disposition = 'candidate-bochs-replacement-exclusion'
         reason = 'Bochs is the sole CPU execution owner; tracker must verify each body before final exclusion.'
-        retained_contract = 'original headers/call shapes remain adapter-softpc evidence'
-        adapter_or_exception_id = 'adapter-softpc / adapter-bochs'
+        retained_contract = 'original headers/call shapes remain adapter-mvdm-host-out/softpc evidence'
+        adapter_or_exception_id = 'adapter-mvdm-host-out/softpc / adapter-bochs'
         final_state = 'unreviewed'
         evidence = 'docs/design/ARCHITECTURE.md'
     }

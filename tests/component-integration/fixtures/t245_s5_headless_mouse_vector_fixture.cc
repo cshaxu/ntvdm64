@@ -1,6 +1,6 @@
-#include "adapter-softpc/machine_stage.h"
+#include "adapter-mvdm-host-out/softpc/machine_stage.h"
 #include "app/bop/route.h"
-#include "adapter-softpc/mechanical_action.h"
+#include "adapter-mvdm-host-out/softpc/mechanical_action.h"
 #include "app/bop/route.h"
 #include "app/bop/softpc_mouse_vector_generic_ud_bridge.h"
 #include "app/bop/route.h"

@@ -18,12 +18,12 @@ New-Item -ItemType Directory -Force $build | Out-Null
 
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM ' +
     '/FI ' + $root + '/src/adapter-mvdm-host-out/win32/include/nt.h ' +
-    '/FI ' + $root + '/src/adapter-softpc/include/error_abi.h ' +
-    '/FI ' + $root + '/src/adapter-vdm-monitor/include/vdm.h ' +
+    '/FI ' + $root + '/src/adapter-mvdm-host-out/softpc/include/error_abi.h ' +
+    '/FI ' + $root + '/src/adapter-mvdm-host-out/monitor/include/vdm.h ' +
     '/I ' + $root + '/src ' +
     '/I ' + $root + '/src/adapter-mvdm-host-out/win32/include ' +
-    '/I ' + $root + '/src/adapter-softpc/include ' +
-    '/I ' + $root + '/src/adapter-vdm-monitor/include ' +
+    '/I ' + $root + '/src/adapter-mvdm-host-out/softpc/include ' +
+    '/I ' + $root + '/src/adapter-mvdm-host-out/monitor/include ' +
     '/I ' + $root + '/src/mvdm-platform-abi/source/public/internal/windows/inc ' +
     '/I ' + $root + '/src/mvdm-support/inc ' +
     '/I ' + $root + '/src/mvdm-host/dos/command ' +

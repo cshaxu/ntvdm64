@@ -851,7 +851,7 @@ CHAR    szFileName[MAX_PATH];
 /* DIVERGENCE MVDM-HOST-DIV-007: the original VDD body assumes all returned
  * SFT/JFT pointers permanently alias NTVDM process memory.  Preserve the
  * original source below as inactive provenance; the same exported functions
- * immediately following it use the adapter-softpc bounded shadow lifecycle. */
+ * immediately following it use the adapter-mvdm-host-out/softpc bounded shadow lifecycle. */
 #if 0
 PDOSSFT GetFreeSftEntry(PDOSSF pSfHead, PWORD usSFN)
 {

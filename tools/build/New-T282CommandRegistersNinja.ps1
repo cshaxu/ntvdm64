@@ -13,7 +13,7 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
 $build = Join-Path $root ("build/M0-T282/S10/{0}" -f $Architecture)
 New-Item -ItemType Directory -Force $build | Out-Null
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root +
-    '/src /I ' + $root + '/src/adapter-softpc/include'
+    '/src /I ' + $root + '/src/adapter-mvdm-host-out/softpc/include'
 $content = @"
 ninja_required_version = 1.10
 root = $root
@@ -30,8 +30,8 @@ rule run
   command = `$in
   description = RUN `$in
 
-build obj/fixture.obj: cc `$root/tests/adapter-softpc/t282_s10_command_registers_fixture.c
-build obj/registers.obj: cc `$root/src/adapter-softpc/mvdm_command_registers.c
+build obj/fixture.obj: cc `$root/tests/adapter-mvdm-host-out/softpc/t282_s10_command_registers_fixture.c
+build obj/registers.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_command_registers.c
 build command_registers_fixture.exe: link obj/fixture.obj obj/registers.obj
 build test: run command_registers_fixture.exe
 default command_registers_fixture.exe

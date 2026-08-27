@@ -56,8 +56,8 @@ x86/x64 evidence.
 1. Build a complete per-file/per-public-symbol owner and dependency manifest
    for the seven existing OpenNT-facing roots and all selected host consumers.
 2. Rename the product components exactly once: `adapter-bop` becomes
-   `adapter-mvdm-host-in`; the seven mirror roots become `mvdm-guest-dos`,
-   `mvdm-guest-win16`, `mvdm-softpc-firmware`, `mvdm-host`, `mvdm-support`,
+   `adapter-mvdm-host-in`; the seven mirror roots become `mvdm-guest/dos`,
+   `mvdm-guest/win16`, `mvdm-softpc-firmware`, `mvdm-host`, `mvdm-support`,
    `mvdm-tools` and `mvdm-platform-abi`. Update every live code/build/document
    reference before an adapter source move.
 3. Admit the `adapter-mvdm-host-out` root and its seven internal subfamilies,
@@ -75,13 +75,18 @@ x86/x64 evidence.
    roots, and prove no current source/build/test input refers to them.
 8. Run formal x86 and x64 static composition/fixture regressions and perform
    a final dependency-direction and source-provenance audit.
+9. Merge the two selected load-only guest mirrors into `mvdm-guest/dos` and
+   `mvdm-guest/win16`. This is component-root normalization only: every inner
+   source, resource and binary path remains unchanged and stays outside every
+   host-library link input.
 
 ## Admission evidence and exit criteria
 
 Admission requires the current interface and package trackers plus a full
 enumeration of live consumers. The task closes only when every live source
 and public header formerly owned by the seven roots has one final owner or a
-documented deletion; all seven MVDM mirror roots use their approved names; no
+documented deletion; all selected MVDM mirror components use their approved
+names; no
 OpenNT algorithm has moved into the adapter; no `adapter-mvdm-host-out` source
 calls `bochs-core` directly; all selected x86/x64 graphs are updated and pass;
 and the architecture, coding, source-policy, README and build manifests name

@@ -3,7 +3,7 @@
 #include <windows.h>
 
 #include "opennt-bop-overlay/dem/opennt_dem_dispatch_composition.h"
-#include "adapter-softpc/dem/ccpu_sas_facade.h"
+#include "adapter-mvdm-host-out/softpc/dem/ccpu_sas_facade.h"
 
 typedef struct fixture_context {
     HANDLE handle;

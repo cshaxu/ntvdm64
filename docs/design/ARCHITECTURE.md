@@ -38,9 +38,9 @@ own composition, session lifetime and cross-process coordination.
 - `mvdm-platform-abi`: exact original declarations and contracts outside
   MVDM required to compile imported MVDM packages. It contains no replacement
   behavior.
-- `mvdm-guest-dos`: complete selected DOS/V86 guest source, resources, build
+- `mvdm-guest/dos`: complete selected DOS/V86 guest source, resources, build
   descriptions, intermediates and original products.
-- `mvdm-guest-win16`: the selected load-only WOW16/bin86 carry plus an
+- `mvdm-guest/win16`: the selected load-only WOW16/bin86 carry plus an
   immutable in-place WOW16 product inventory. It does not imply an external
   WOW16 source-universe mirror.
 
@@ -100,7 +100,7 @@ app -> session
 app -> broker client -> broker process
 app -> adapter-bochs -> bochs-core
 app -> adapter-mvdm-host-in -> mvdm-host
-app -> mvdm-guest-dos / mvdm-guest-win16         (data/load only)
+app -> mvdm-guest/dos / mvdm-guest/win16         (data/load only)
 
 mvdm-host -> mvdm-platform-abi
 mvdm-host -> mvdm-support

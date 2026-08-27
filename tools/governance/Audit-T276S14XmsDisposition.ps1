@@ -15,19 +15,19 @@ $builds = @(Import-Csv -LiteralPath $buildLedgerPath -Delimiter "`t")
 if ($files.Count -ne 15) { throw "Expected 15 XMS rows, found $($files.Count)." }
 
 $contracts = @{
-    'xms.486/xms.c' = @('xms-initialization-and-extended-memory-range', 'adapter-softpc; adapter-bochs; session; mvdm-support', 'original XMS initialization and suballocator arrangement; extended memory must be a bounded Bochs-owned guest range, never a host pointer', 'package-led machine-seam review')
-    'xms.486/xmsa20.c' = @('xms-a20-service', 'adapter-softpc; adapter-bochs; session', 'original A20 request/query control flow and results; same-shaped A20 facade owns the only machine transition', 'package-led machine-seam review')
-    'xms.486/xmsblock.c' = @('xms-extended-block-services', 'adapter-softpc; adapter-bochs; session; mvdm-support', 'original allocation/free/reallocation/move/query provider; guest memory is copied through typed machine seams', 'package-led machine-seam review')
-    'xms.486/xmsdisp.c' = @('xms-service-dispatch', 'adapter-mvdm-host-in; adapter-softpc', 'original XMS service dispatch and unsupported-service failure route; selector/service meanings remain source-owned', 'package-led interface review')
-    'xms.486/xmsmisc.c' = @('xms-system-information-and-int15-hook', 'adapter-softpc; adapter-bochs; session', 'original system-page, extended-memory and INT 15 hook/provider logic; IVT and interrupt effects require machine seam proof', 'package-led machine-seam review')
-    'xms.486/xmsumb.c' = @('xms-umb-services', 'adapter-softpc; adapter-bochs; session', 'original UMB list, request and release control flow; a durable bounded guest-byte/UMB seam is required before enablement', 'machine-profile-gated review')
-    'xms.486/i386/xmsmem86.c' = @('xms-i386-direct-address-memory-routine', 'session guest-memory mapping manager; adapter-softpc; adapter-bochs', 'historical x86 routine passes ULONG values as direct host addresses to NT virtual memory and RtlMoveMemory; retain its three same-shaped exported contracts, but resolve their values through the session mapping-manager into checked Bochs guest ranges', 'same-shaped mapping-manager replacement prerequisite')
-    'xms.486/xmsmemr.c' = @('xms-risc-memory-routine', 'adapter-softpc; adapter-bochs', 'historical non-i386 memory-management routine; not selected by the x86 original profile and retains only source/contract evidence', 'profile/build-unobserved exclusion')
+    'xms.486/xms.c' = @('xms-initialization-and-extended-memory-range', 'adapter-mvdm-host-out/softpc; adapter-bochs; session; mvdm-support', 'original XMS initialization and suballocator arrangement; extended memory must be a bounded Bochs-owned guest range, never a host pointer', 'package-led machine-seam review')
+    'xms.486/xmsa20.c' = @('xms-a20-service', 'adapter-mvdm-host-out/softpc; adapter-bochs; session', 'original A20 request/query control flow and results; same-shaped A20 facade owns the only machine transition', 'package-led machine-seam review')
+    'xms.486/xmsblock.c' = @('xms-extended-block-services', 'adapter-mvdm-host-out/softpc; adapter-bochs; session; mvdm-support', 'original allocation/free/reallocation/move/query provider; guest memory is copied through typed machine seams', 'package-led machine-seam review')
+    'xms.486/xmsdisp.c' = @('xms-service-dispatch', 'adapter-mvdm-host-in; adapter-mvdm-host-out/softpc', 'original XMS service dispatch and unsupported-service failure route; selector/service meanings remain source-owned', 'package-led interface review')
+    'xms.486/xmsmisc.c' = @('xms-system-information-and-int15-hook', 'adapter-mvdm-host-out/softpc; adapter-bochs; session', 'original system-page, extended-memory and INT 15 hook/provider logic; IVT and interrupt effects require machine seam proof', 'package-led machine-seam review')
+    'xms.486/xmsumb.c' = @('xms-umb-services', 'adapter-mvdm-host-out/softpc; adapter-bochs; session', 'original UMB list, request and release control flow; a durable bounded guest-byte/UMB seam is required before enablement', 'machine-profile-gated review')
+    'xms.486/i386/xmsmem86.c' = @('xms-i386-direct-address-memory-routine', 'session guest-memory mapping manager; adapter-mvdm-host-out/softpc; adapter-bochs', 'historical x86 routine passes ULONG values as direct host addresses to NT virtual memory and RtlMoveMemory; retain its three same-shaped exported contracts, but resolve their values through the session mapping-manager into checked Bochs guest ranges', 'same-shaped mapping-manager replacement prerequisite')
+    'xms.486/xmsmemr.c' = @('xms-risc-memory-routine', 'adapter-mvdm-host-out/softpc; adapter-bochs', 'historical non-i386 memory-management routine; not selected by the x86 original profile and retains only source/contract evidence', 'profile/build-unobserved exclusion')
 }
 
 function Get-NonSourceContract {
     param([string]$Path)
-    if ($Path -eq 'xms.486/xms.h') { return @('xms-public-declaration', 'mvdm-host; adapter-mvdm-host-in; adapter-softpc; session; mvdm-support', 'original XMS data and external declaration surface; preserve exact shape before any provider binding', 'declaration-only') }
+    if ($Path -eq 'xms.486/xms.h') { return @('xms-public-declaration', 'mvdm-host; adapter-mvdm-host-in; adapter-mvdm-host-out/softpc; session; mvdm-support', 'original XMS data and external declaration surface; preserve exact shape before any provider binding', 'declaration-only') }
     if ($Path -like 'xms.486/*/sources' -or $Path -eq 'xms.486/sources' -or $Path -eq 'xms.486/makefile') { return @('original-build-description', 'mvdm-support; build governance', 'original architecture/build selection evidence only; no modern build edge', 'build-description-only') }
     throw "No non-source contract for $Path"
 }
@@ -46,11 +46,11 @@ function Get-LexicalFamilies {
     $text = Get-Content -LiteralPath $Path -Raw
     $families = [System.Collections.Generic.List[string]]::new()
     if ($text -match '(?i)(xmssvc\.h|xmsexp\.h|\bXMSDispatch\b)') { $families.Add('adapter-mvdm-host-in (XMS service ABI lexical surface)') }
-    if ($text -match '(?i)(softpc\.h|\bsas_|\bSim32|\bGetVDMAddr|\bget[A-Z]|\bset[A-Z]|\bUpdateKbdInt15)') { $families.Add('adapter-softpc (SoftPC/SAS/guest-state lexical surface)') }
+    if ($text -match '(?i)(softpc\.h|\bsas_|\bSim32|\bGetVDMAddr|\bget[A-Z]|\bset[A-Z]|\bUpdateKbdInt15)') { $families.Add('adapter-mvdm-host-out/softpc (SoftPC/SAS/guest-state lexical surface)') }
     if ($text -match '(?i)(NtAllocateVirtualMemory|NtFreeVirtualMemory|RtlMoveMemory|VdmAllocateVirtualMemory)') { $families.Add('same-shaped mapping-manager replacement (historical virtual-memory lexical surface)') }
     if ($text -match '(?i)(mvdm\.h|\bVDM(?:ForWOW|Addr)|\bExtMemSA)') { $families.Add('session (VDM state/lifecycle lexical surface)') }
     if ($text -match '(?i)(suballoc\.h|\bSA(?:Initialize|Alloc|Free|Realloc))') { $families.Add('mvdm-support (suballoc lexical surface)') }
-    if ($text -match '(?i)(ReserveUMB|UMB_OWNER|\bUMB\b)') { $families.Add('adapter-softpc/adapter-bochs (UMB machine-range lexical surface)') }
+    if ($text -match '(?i)(ReserveUMB|UMB_OWNER|\bUMB\b)') { $families.Add('adapter-mvdm-host-out/softpc/adapter-bochs (UMB machine-range lexical surface)') }
     if ($families.Count -eq 0) { return 'none detected in retained source text' }
     return [string]::Join('; ', $families)
 }

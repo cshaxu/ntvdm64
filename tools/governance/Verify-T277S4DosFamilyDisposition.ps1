@@ -19,6 +19,6 @@ if (($ledger | Where-Object { [string]::IsNullOrWhiteSpace($_.original_provider_
 if (($ledger.family | Sort-Object -Unique).Count -ne 8) { throw 'Expected eight DOS source-form families.' }
 if (@($ledger | Where-Object { $_.symbol -eq 'TerminateVDM' -and $_.owner -notlike 'session*' }).Count) { throw 'TerminateVDM must be session-owned controlled stop, not a process exit.' }
 if (@($ledger | Where-Object { $_.symbol -in @('cmdPipeFileDataEOF','cmdPipeFileEOF') -and $_.mapping_rule -notlike 'session host_resource*' }).Count) { throw 'Pipe calls must name the unique session host_resource mapping instance.' }
-if (@($ledger | Where-Object { $_.symbol -eq 'host_simulate' -and $_.owner -ne 'adapter-softpc -> adapter-bochs' }).Count) { throw 'host_simulate must retain the S3 machine owner.' }
+if (@($ledger | Where-Object { $_.symbol -eq 'host_simulate' -and $_.owner -ne 'adapter-mvdm-host-out/softpc -> adapter-bochs' }).Count) { throw 'host_simulate must retain the S3 machine owner.' }
 
 Write-Host "T277 S4 DOS family disposition passed: work-items=$($ledger.Count); families=8."

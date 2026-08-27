@@ -1,10 +1,10 @@
 #include "bochs.h"
-#include "adapter-softpc/cpu_state_abi.h"
-#include "adapter-softpc/a20_capability.h"
+#include "adapter-mvdm-host-out/softpc/cpu_state_abi.h"
+#include "adapter-mvdm-host-out/softpc/a20_capability.h"
 #include "adapter-mvdm-host-in/generic_ud_bridge.h"
 #include "app/bop/route.h"
-#include "adapter-softpc/machine_stage.h"
-#include "adapter-softpc/ivt_watch.h"
+#include "adapter-mvdm-host-out/softpc/machine_stage.h"
+#include "adapter-mvdm-host-out/softpc/ivt_watch.h"
 
 extern "C" {
 #include "app/xms_session_binding.h"

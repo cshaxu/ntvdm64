@@ -1,7 +1,7 @@
 #include "bochs.h"
-#include "adapter-softpc/finite_run.h"
+#include "adapter-mvdm-host-out/softpc/finite_run.h"
 #include "adapter-mvdm-host-in/generic_ud_bridge.h"
-#include "adapter-softpc/instruction_history.h"
+#include "adapter-mvdm-host-out/softpc/instruction_history.h"
 
 #ifndef RUNTIME_ENABLE_MACHINE_INSTRUCTION_HISTORY
 #define RUNTIME_ENABLE_MACHINE_INSTRUCTION_HISTORY 0

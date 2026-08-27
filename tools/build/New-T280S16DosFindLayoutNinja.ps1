@@ -26,7 +26,7 @@ rule link
   command = link /nologo /out:`$out `$in
   description = LINK `$out
 
-build obj/layout.obj: cc `$root/tests/adapter-softpc/t280_s16_dos_find_layout_fixture.c
+build obj/layout.obj: cc `$root/tests/adapter-mvdm-host-out/softpc/t280_s16_dos_find_layout_fixture.c
 build dos_find_layout_fixture.exe: link obj/layout.obj
 default dos_find_layout_fixture.exe
 "@

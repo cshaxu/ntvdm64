@@ -15,7 +15,7 @@ provide an OpenNT service, expose a Bochs type, or create a worker/scheduler.
 `command_source.{c,h}` owns the copied, local single-session producer record
 used by `GetNextVDMCommand`. It retains no caller `VDMINFO` pointer, Windows
 handle, CSR record or guest address. The record is intentionally consumed only
-through the same-shaped `adapter-vdm-monitor` entry while a session is bound.
+through the same-shaped `adapter-mvdm-host-out/monitor` entry while a session is bound.
 
 ### Registered divergences
 

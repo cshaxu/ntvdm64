@@ -15,7 +15,7 @@ if ($files.Count -ne 23) { throw "Expected 23 IEUVDDEx paths, found $($files.Cou
 $result = foreach ($file in $files) {
     $path = $file.target_path
     $role = $null
-    $boundary = 'adapter-debugger; session diagnostic snapshot/export boundary'
+    $boundary = 'adapter-mvdm-host-out/debugger; session diagnostic snapshot/export boundary'
     $families = 'historical NTSD/WinDbg extension API; VDM_TIB/context/LDT/PIC/DPMI trace inspection'
     $summary = $null
     $disposition = $null
@@ -23,14 +23,14 @@ $result = foreach ($file in $files) {
     switch -Regex ($path) {
         '^ieuvddex/(makefile|sources|i386/sources)$' {
             $role = 'historical-debugger-extension-build-description'
-            $boundary = 'build governance; adapter-debugger'
+            $boundary = 'build governance; adapter-mvdm-host-out/debugger'
             $families = 'historical NTSD/WinDbg extension build selection'
             $summary = 'original debugger-extension build-selection evidence only; it does not enable a DLL or debugger API edge'
             $disposition = 'build-description-only'
         }
         '^ieuvddex/(alpha|mips|ppc)/(helpp\.c|sources)$' {
             $role = 'historical-non-x86-debugger-extension-form'
-            $boundary = 'adapter-debugger; build governance'
+            $boundary = 'adapter-mvdm-host-out/debugger; build governance'
             $families = 'processor-specific debugger-extension help form'
             $summary = 'original Alpha/MIPS/PPC help/build form; retain for source/provenance completeness but exclude from x86/x64 host recovery profile'
             $disposition = 'non-x86 profile exclusion; source evidence only'
@@ -52,7 +52,7 @@ $result = foreach ($file in $files) {
         }
         '^ieuvddex/(ntvdm\.def|vdmdll\.rc)$' {
             $role = 'historical-debugger-extension-export-or-resource'
-            $boundary = 'adapter-debugger; app packaging'
+            $boundary = 'adapter-mvdm-host-out/debugger; app packaging'
             $families = 'historical NTSD/WinDbg command exports and resource metadata'
             $summary = 'original debugger-extension export/resource evidence; no current application claims the ntvdm.dll product identity'
             $disposition = 'debugger-product exclusion; export/resource evidence only'

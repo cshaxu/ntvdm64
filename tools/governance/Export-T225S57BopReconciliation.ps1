@@ -63,8 +63,8 @@ function Get-BoundRoute([string]$selector, [int]$service) {
 
 function Get-RecoveryRung([string]$selector, [int]$service) {
     switch ($selector) {
-        '50' { if ((Is-Dem-Noop $service)) { return 'rung-1 original no-op retained' }; return 'rung-2 original owner contract through checked adapter-softpc seam; detailed ABI/failure closure pending' }
-        '54' { return 'rung-2 original owner contract through checked adapter-softpc session seam; detailed ABI/failure closure pending' }
+        '50' { if ((Is-Dem-Noop $service)) { return 'rung-1 original no-op retained' }; return 'rung-2 original owner contract through checked adapter-mvdm-host-out/softpc seam; detailed ABI/failure closure pending' }
+        '54' { return 'rung-2 original owner contract through checked adapter-mvdm-host-out/softpc session seam; detailed ABI/failure closure pending' }
         '57' { return 'rung-2 source-derived original unavailable contract' }
         '52' { return 'rung-2 original XMS ownership through admitted mechanical seam, or source-proven deferred stop' }
         '53' { return 'rung-2 source-proven deferred protected-mode composition' }

@@ -38,16 +38,16 @@ function Get-SoftpcDisposition {
         return @('firmware-rom-or-machine-data', 'mvdm-softpc-firmware', 'adapter-bochs-firmware-review', 'separate firmware mirror input; no automatic machine or host-runtime enablement')
     }
     if ($Path -match '^softpc\.new/base/support/') {
-        return @('historical-machine-support', 'mvdm-host', 'adapter-softpc-review', 'machine-facing helper set; review only through original SoftPC-shaped adapter boundary')
+        return @('historical-machine-support', 'mvdm-host', 'adapter-mvdm-host-out/softpc-review', 'machine-facing helper set; review only through original SoftPC-shaped adapter boundary')
     }
     if ($Path -match '^softpc\.new/base/inc/') {
-        return @('historical-machine-declaration', 'mvdm-host', 'adapter-softpc-declaration-review', 'shared original SoftPC machine declaration/input; no standalone body or direct host-control claim')
+        return @('historical-machine-declaration', 'mvdm-host', 'adapter-mvdm-host-out/softpc-declaration-review', 'shared original SoftPC machine declaration/input; no standalone body or direct host-control claim')
     }
     if ($Path -match '^softpc\.new/base/unix/') {
         return @('historical-unix-port', 'mvdm-host', 'profile-excluded', 'non-Windows historical port input; retained mirror only')
     }
     if ($Path -match '^softpc\.new/(base/debug|base/dasm386|debugger)/') {
-        return @('historical-debugger-or-disassembler', 'mvdm-host', 'adapter-debugger-review', 'debugger/disassembler product input; no default host-runtime enablement')
+        return @('historical-debugger-or-disassembler', 'mvdm-host', 'adapter-mvdm-host-out/debugger-review', 'debugger/disassembler product input; no default host-runtime enablement')
     }
     if ($Path -match '^softpc\.new/(convert|dat2obj|rename)/') {
         return @('historical-build-tool', 'tools/opennt', 'tool-profile-excluded', 'independent historical build conversion tool, not an MVDM runtime package')

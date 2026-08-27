@@ -13,7 +13,7 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
 $build = Join-Path $root ("build/M0-T282/S6/{0}" -f $Architecture)
 New-Item -ItemType Directory -Force $build | Out-Null
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root +
-    '/src /I ' + $root + '/src/adapter-vdm-monitor/include /I ' + $root +
+    '/src /I ' + $root + '/src/adapter-mvdm-host-out/monitor/include /I ' + $root +
     '/src/adapter-mvdm-host-out/win32/include /I ' + $root + '/src/session'
 $content = @"
 ninja_required_version = 1.10
@@ -31,8 +31,8 @@ rule run
   command = `$in
   description = RUN `$in
 
-build obj/vdm_command_fixture.obj: cc `$root/tests/adapter-vdm-monitor/vdm_command_fixture.c
-build obj/vdm_command.obj: cc `$root/src/adapter-vdm-monitor/source/vdm_command.c
+build obj/vdm_command_fixture.obj: cc `$root/tests/adapter-mvdm-host-out/monitor/vdm_command_fixture.c
+build obj/vdm_command.obj: cc `$root/src/adapter-mvdm-host-out/monitor/source/vdm_command.c
 build obj/command_source.obj: cc `$root/src/app/command_source.c
 build obj/session.obj: cc `$root/src/session/session.c
 build obj/mapping_manager.obj: cc `$root/src/session/mapping_manager.c

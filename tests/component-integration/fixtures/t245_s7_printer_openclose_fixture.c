@@ -3,7 +3,7 @@
 
 #include "app/bop/softpc_printer_openclose_generic_ud_bridge.h"
 #include "app/bop/route.h"
-#include "adapter-softpc/softpc_printer_openclose_shim.h"
+#include "adapter-mvdm-host-out/softpc/softpc_printer_openclose_shim.h"
 
 int runtime_machine_generic_ud_bridge(
     const struct runtime_generic_ud_event *event,

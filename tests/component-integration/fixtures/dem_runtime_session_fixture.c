@@ -3,8 +3,8 @@
 
 #include "app/bop/dem_runtime.h"
 #include "adapter-mvdm-host-in/generic_ud_bridge.h"
-#include "adapter-softpc/machine_stage.h"
-#include "adapter-softpc/mechanical_action.h"
+#include "adapter-mvdm-host-out/softpc/machine_stage.h"
+#include "adapter-mvdm-host-out/softpc/mechanical_action.h"
 #include "app/bop/route.h"
 
 static void event_initialize(struct runtime_generic_ud_event *event,

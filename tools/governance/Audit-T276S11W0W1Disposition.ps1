@@ -139,10 +139,10 @@ $runtimeSupportOut = @(
         original_translation_unit = 'suballoc/suballoc.c'
         original_consumer_evidence = 'softpc.new/obj.vdm/sources:90 links suballoc.lib'
         original_interface_shape = 'inc/suballoc.h exports SAInitialize/SAQueryFree/SAAllocate/SAFree/SAReallocate with ULONG address/size and caller-supplied NTSTATUS commit/decommit plus overlapping move callbacks'
-        required_owner = 'toolchain binding; adapter-softpc only at original machine-facing callers'
+        required_owner = 'toolchain binding; adapter-mvdm-host-out/softpc only at original machine-facing callers'
         binding_disposition = 'original algorithm-library candidate; no direct Bochs or guest semantic binding in library'
         retained_source_rule = 'retain 32-bit ULONG callback contract and source algorithm; do not reinterpret BaseAddress as a host pointer or insert mapping-manager logic'
-        prerequisite = 'compile-header/CRT allocation review and separate caller-side adapter-softpc audit of commit/decommit/move callbacks'
+        prerequisite = 'compile-header/CRT allocation review and separate caller-side adapter-mvdm-host-out/softpc audit of commit/decommit/move callbacks'
         state = 'binding-pending-not-enabled'
     }
 )

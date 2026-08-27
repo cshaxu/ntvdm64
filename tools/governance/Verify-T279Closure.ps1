@@ -17,7 +17,7 @@ $ledger = @(Import-Csv (Join-Path $root 'docs/etc/operations/m0-t278-destination
 if ($ledger.Count -ne 112) { throw "Expected 112 exact support paths; found $($ledger.Count)." }
 
 $generator = Get-Content -LiteralPath (Join-Path $root 'tools/build/New-T279SupportLibraryNinja.ps1') -Raw
-foreach ($forbidden in @('mvdm-host', 'adapter-mvdm-host-in', 'adapter-softpc', 'adapter-bochs', 'session/', 'app/', 'bochs-core')) {
+foreach ($forbidden in @('mvdm-host', 'adapter-mvdm-host-in', 'adapter-mvdm-host-out/softpc', 'adapter-bochs', 'session/', 'app/', 'bochs-core')) {
     if ($generator -match [regex]::Escape($forbidden)) {
         throw "Support-library build generator imports forbidden runtime input: $forbidden"
     }

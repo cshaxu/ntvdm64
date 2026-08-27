@@ -11,9 +11,9 @@ foreach ($row in $v86) {
     $row.final_audit_state = 'final-disposition-audited; not implemented'
     if ($row.source_path -eq 'v86/monitor/i386/monitorp.h') {
         $row.final_disposition = 'binding-only'
-        $row.final_owner_or_link_boundary = 'adapter-vdm-monitor same-shaped monitor declarations -> session guest-memory mapping manager -> adapter-softpc -> adapter-bochs'
+        $row.final_owner_or_link_boundary = 'adapter-mvdm-host-out/monitor same-shaped monitor declarations -> session guest-memory mapping manager -> adapter-mvdm-host-out/softpc -> adapter-bochs'
         $row.final_change_class = 'binding-only; retain original monitor declaration/layout shape while excluding kernel monitor bodies'
-        $row.named_adapter = 'adapter-vdm-monitor; adapter-softpc; adapter-bochs'
+        $row.named_adapter = 'adapter-mvdm-host-out/monitor; adapter-mvdm-host-out/softpc; adapter-bochs'
         $row.mapping_implication = 'CPU frames are copied and guest ranges use the single session guest-memory mapping-manager lease'
         $row.final_evidence = 'T276 S17: monitor declaration/API recovery prerequisite; kernel VDM monitor itself is excluded'
         continue
@@ -22,7 +22,7 @@ foreach ($row in $v86) {
         $row.final_disposition = 'binding-only'
         $row.final_owner_or_link_boundary = 'app/adapter declaration evidence for individually admitted same-shaped boundaries; excluded standalone ntvdm.exe scaffold is not composed'
         $row.final_change_class = 'binding-only; retain original declaration/layout form outside the product-shell graph'
-        $row.named_adapter = 'adapter-mvdm-host-in; adapter-softpc; adapter-bochs; adapter-mvdm-host-out/win32; session'
+        $row.named_adapter = 'adapter-mvdm-host-in; adapter-mvdm-host-out/softpc; adapter-bochs; adapter-mvdm-host-out/win32; session'
         $row.mapping_implication = 'any later recovered boundary uses fixed-width frames and the session mapping-manager rule; declarations transfer no native identity'
         $row.final_evidence = 'T276 S17: scaffold declarations are evidence only; modern app owns composition and cannot import the old product shell'
         continue
@@ -37,9 +37,9 @@ foreach ($row in $v86) {
         continue
     }
     $row.final_disposition = 'not-host-runtime'
-    $row.final_owner_or_link_boundary = 'retained historical kernel monitor or ntvdm.exe product-shell evidence; modern app/adapter-vdm-monitor own any separately admitted boundary'
+    $row.final_owner_or_link_boundary = 'retained historical kernel monitor or ntvdm.exe product-shell evidence; modern app/adapter-mvdm-host-out/monitor own any separately admitted boundary'
     $row.final_change_class = 'none; byte-exact source mirror retained outside the final host graph'
-    $row.named_adapter = 'adapter-vdm-monitor; adapter-softpc; adapter-bochs; app'
+    $row.named_adapter = 'adapter-mvdm-host-out/monitor; adapter-mvdm-host-out/softpc; adapter-bochs; app'
     $row.mapping_implication = 'no NtVdmControl or raw VDM pointer survives; future admitted paths use copied frames and session guest-memory mapping-manager leases'
     $row.final_evidence = 'T276 S17: kernel VDM monitor and standalone ntvdm.exe scaffold are explicit product-shell exclusions'
 }

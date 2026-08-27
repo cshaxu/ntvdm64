@@ -32,14 +32,14 @@ $result = foreach ($group in $groups.Keys) {
         if (!$active.Contains($source)) { throw "Subdomain manifest names non-active source '$source'." }
         if (!$claimed.Add($source)) { throw "Subdomain manifest assigns '$source' more than once." }
         $boundary = switch ($group) {
-            'thunk-frame-and-structure' { 'adapter-wow; adapter-softpc; adapter-vdm-monitor; session' }
-            'message-and-window-procedure' { 'adapter-wow; adapter-mvdm-host-out/win32; adapter-softpc; adapter-vdm-monitor; session' }
-            'gdi-and-window-object' { 'adapter-wow; adapter-mvdm-host-out/win32; adapter-softpc; adapter-vdm-monitor; session' }
-            'kernel-task-and-dos-session' { 'adapter-wow; adapter-mvdm-host-out/win32; adapter-softpc; adapter-vdm-monitor; session' }
-            'user-interface' { 'adapter-wow; adapter-mvdm-host-out/win32; adapter-softpc; adapter-vdm-monitor; session' }
-            'shell-ole-and-printing' { 'adapter-wow; adapter-mvdm-host-out/win32; adapter-softpc; adapter-vdm-monitor; session' }
-            'multimedia' { 'adapter-wow; adapter-mvdm-host-out/win32; adapter-softpc; adapter-vdm-monitor; session' }
-            'network' { 'adapter-wow; adapter-mvdm-host-out/win32; session' }
+            'thunk-frame-and-structure' { 'adapter-mvdm-host-out/wow; adapter-mvdm-host-out/softpc; adapter-mvdm-host-out/monitor; session' }
+            'message-and-window-procedure' { 'adapter-mvdm-host-out/wow; adapter-mvdm-host-out/win32; adapter-mvdm-host-out/softpc; adapter-mvdm-host-out/monitor; session' }
+            'gdi-and-window-object' { 'adapter-mvdm-host-out/wow; adapter-mvdm-host-out/win32; adapter-mvdm-host-out/softpc; adapter-mvdm-host-out/monitor; session' }
+            'kernel-task-and-dos-session' { 'adapter-mvdm-host-out/wow; adapter-mvdm-host-out/win32; adapter-mvdm-host-out/softpc; adapter-mvdm-host-out/monitor; session' }
+            'user-interface' { 'adapter-mvdm-host-out/wow; adapter-mvdm-host-out/win32; adapter-mvdm-host-out/softpc; adapter-mvdm-host-out/monitor; session' }
+            'shell-ole-and-printing' { 'adapter-mvdm-host-out/wow; adapter-mvdm-host-out/win32; adapter-mvdm-host-out/softpc; adapter-mvdm-host-out/monitor; session' }
+            'multimedia' { 'adapter-mvdm-host-out/wow; adapter-mvdm-host-out/win32; adapter-mvdm-host-out/softpc; adapter-mvdm-host-out/monitor; session' }
+            'network' { 'adapter-mvdm-host-out/wow; adapter-mvdm-host-out/win32; session' }
         }
         $mapping = switch ($group) {
             'network' { 'host-resource mapping for native socket/provider identity; copied guest buffers only' }

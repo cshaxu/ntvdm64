@@ -12,7 +12,7 @@ foreach ($row in $vdd) {
     $row.final_disposition = 'not-host-runtime'
     $row.final_owner_or_link_boundary = 'retained mvdm-host mirror evidence; no final host link input'
     $row.final_change_class = 'none; byte-exact source mirror retained'
-    $row.named_adapter = 'adapter-vdd future product boundary only; sample is not promoted'
+    $row.named_adapter = 'adapter-mvdm-host-out/vdd future product boundary only; sample is not promoted'
     $row.mapping_implication = 'not applicable to final product; any separately admitted VDD reuse must use session guest-memory and host-resource mapping-manager instances'
     $row.final_evidence = 'vdd root contains only samples/guest sample halves; original sample SOURCES and T276 S24 audit'
     $row.final_audit_state = 'final-disposition-audited; not implemented'

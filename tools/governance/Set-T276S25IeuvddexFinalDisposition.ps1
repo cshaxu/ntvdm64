@@ -9,9 +9,9 @@ $debug = @($rows | Where-Object {$_.source_path -like 'ieuvddex/*'})
 if ($debug.Count -ne 23) { throw "Expected 23 IEUVDDEx rows, found $($debug.Count)." }
 foreach ($row in $debug) {
     $row.final_disposition = 'not-host-runtime'
-    $row.final_owner_or_link_boundary = 'retained historical NTSD/WinDbg debugger-extension evidence; future same-shaped extension boundary is adapter-debugger, not the app host runtime'
+    $row.final_owner_or_link_boundary = 'retained historical NTSD/WinDbg debugger-extension evidence; future same-shaped extension boundary is adapter-mvdm-host-out/debugger, not the app host runtime'
     $row.final_change_class = 'none; byte-exact source mirror retained outside the final host link graph'
-    $row.named_adapter = 'adapter-debugger future extension boundary; session publishes copied diagnostic snapshots only'
+    $row.named_adapter = 'adapter-mvdm-host-out/debugger future extension boundary; session publishes copied diagnostic snapshots only'
     $row.mapping_implication = 'no direct host-process/guest pointer access; any future diagnostic data is copied from session-owned state and never creates a second guest-memory manager'
     $row.final_evidence = 'T276 S18: ieuvddex is the historical ntvdm.dll NTSD/WinDbg extension, not a VDD or host runtime provider'
     $row.final_audit_state = 'final-disposition-audited; not implemented'

@@ -13,7 +13,7 @@ $components = @(
     'bochs-core', 'bochs-core-overlay', 'adapter-bochs',
     'opennt-guest', 'opennt-host', 'opennt-host-overlay', 'opennt-bop',
     'opennt-softpc', 'opennt-utils', 'adapter-mvdm-host-in', 'adapter-mvdm-host-out/win32',
-    'adapter-softpc', 'session', 'app'
+    'adapter-mvdm-host-out/softpc', 'session', 'app'
 )
 $nonProductNames = @(
     'original', 'mirror', 'overlay', 'capability', 'example', 'examples',
@@ -52,7 +52,7 @@ foreach ($path in $declaredPaths) {
 $registers = @{
     'opennt-bop'    = 'README.md'
     'opennt-host'   = 'README.md'
-    'adapter-softpc' = 'README.md'
+    'adapter-mvdm-host-out/softpc' = 'README.md'
     'adapter-mvdm-host-out/win32' = 'README.md'
 }
 foreach ($component in $registers.Keys) {

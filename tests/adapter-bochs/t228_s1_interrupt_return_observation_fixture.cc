@@ -1,6 +1,6 @@
-#include "adapter-softpc/finite_run.h"
+#include "adapter-mvdm-host-out/softpc/finite_run.h"
 #include "adapter-mvdm-host-in/generic_ud_bridge.h"
-#include "adapter-softpc/interrupt_return_observation.h"
+#include "adapter-mvdm-host-out/softpc/interrupt_return_observation.h"
 
 #include <string.h>
 

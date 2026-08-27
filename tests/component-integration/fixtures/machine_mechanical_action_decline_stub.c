@@ -1,4 +1,4 @@
-#include "adapter-softpc/mechanical_action.h"
+#include "adapter-mvdm-host-out/softpc/mechanical_action.h"
 
 /* The focused readonly-file fixture invokes only direct adapter results.
  * The package source closure also contains unrelated paths which name the

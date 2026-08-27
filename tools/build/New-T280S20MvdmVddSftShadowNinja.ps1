@@ -14,7 +14,7 @@ $build = Join-Path $root ("build/M0-T280/{0}-vdd-sft-shadow" -f $Architecture)
 New-Item -ItemType Directory -Force -Path $build | Out-Null
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path -LiteralPath $vs -PathType Leaf)) { throw "MSVC environment entry point missing: $vs" }
-$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/adapter-softpc/include /I ' + $root + '/src/mvdm-support/inc'
+$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/adapter-mvdm-host-out/softpc/include /I ' + $root + '/src/mvdm-support/inc'
 $content = @"
 ninja_required_version = 1.10
 root = $root
@@ -31,10 +31,10 @@ rule link
 build obj/mapping_manager.obj: cc `$root/src/session/mapping_manager.c
 build obj/guest_memory_lease.obj: cc `$root/src/session/guest_memory_lease.c
 build obj/session.obj: cc `$root/src/session/session.c
-build obj/mvdm_host_identity.obj: cc `$root/src/adapter-softpc/mvdm_host_identity.c
-build obj/mvdm_guest_location.obj: cc `$root/src/adapter-softpc/mvdm_guest_location.c
-build obj/mvdm_vdd_sft_shadow.obj: cc `$root/src/adapter-softpc/mvdm_vdd_sft_shadow.c
-build obj/fixture.obj: cc `$root/tests/adapter-softpc/t280_s20_mvdm_vdd_sft_shadow_fixture.c
+build obj/mvdm_host_identity.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_host_identity.c
+build obj/mvdm_guest_location.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_guest_location.c
+build obj/mvdm_vdd_sft_shadow.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_vdd_sft_shadow.c
+build obj/fixture.obj: cc `$root/tests/adapter-mvdm-host-out/softpc/t280_s20_mvdm_vdd_sft_shadow_fixture.c
 build mvdm_vdd_sft_shadow_fixture.exe: link obj/mapping_manager.obj obj/guest_memory_lease.obj obj/session.obj obj/mvdm_host_identity.obj obj/mvdm_guest_location.obj obj/mvdm_vdd_sft_shadow.obj obj/fixture.obj
 default mvdm_vdd_sft_shadow_fixture.exe
 "@

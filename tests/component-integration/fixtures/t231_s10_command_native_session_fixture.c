@@ -3,8 +3,8 @@
 
 #include "app/bop/command_entry.h"
 #include "app/bop/command_session.h"
-#include "adapter-softpc/machine_stage.h"
-#include "adapter-softpc/mechanical_action.h"
+#include "adapter-mvdm-host-out/softpc/machine_stage.h"
+#include "adapter-mvdm-host-out/softpc/mechanical_action.h"
 
 static void event_initialize(struct runtime_generic_ud_event *event,
     uint8_t service)

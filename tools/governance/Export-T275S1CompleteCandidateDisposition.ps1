@@ -33,7 +33,7 @@ function Get-NonImplementationDisposition([string]$Path, [string]$Kind) {
     if ($Path -match '/(physical_irq|port_action|spckbd_handoff_shim|softpc_int15_watch_shim|softpc_mouse_vector_shim|softpc_printer_openclose_shim|softpc_tape_io_shim|interrupt06_provider)\.') {
         return [pscustomobject]@{ ledger_id='ADAPTER-IF-005'; disposition='defer'; successor='machine/VDD/debugger packages'; rationale='device-specific semantics do not belong in generic facade' }
     }
-    if ($Path -match '^adapter-softpc/include/') {
+    if ($Path -match '^adapter-mvdm-host-out/softpc/include/') {
         return [pscustomobject]@{ ledger_id='ADAPTER-IF-002'; disposition='replace-with-exact-opennt-mirror-declaration'; successor='T275 S3 declaration audit'; rationale='original declaration topology now lives in mvdm-host' }
     }
     if ($Path -match '/(controlled_stop_service|cpu_result|cpu_delta_abi|cpu_state_abi|exception_abi|pending_action|bulk_result_transaction|multi_write_abi|multi_write_transaction|mechanical_action)\.') {

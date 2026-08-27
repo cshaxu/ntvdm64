@@ -1,8 +1,8 @@
 #include "bochs.h"
 #include "bochs-core/cpu/cpu.h"
-#include "adapter-softpc/machine_stage.h"
+#include "adapter-mvdm-host-out/softpc/machine_stage.h"
 #include "bochs-core/pc_system.h"
-#include "adapter-softpc/instruction_history.h"
+#include "adapter-mvdm-host-out/softpc/instruction_history.h"
 #include "adapter-mvdm-host-in/generic_ud_bridge.h"
 
 #include <string.h>

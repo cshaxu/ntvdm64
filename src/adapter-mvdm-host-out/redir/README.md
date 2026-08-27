@@ -1,4 +1,4 @@
 # redir family
 
-Reserved for historical VDMREDIR/Redirector product-interface bindings. No
-Redirector provider or protocol implementation is admitted by T284 S3.
+Owns the historical VDMREDIR/Redirector external-product boundary. No
+Redirector provider, protocol implementation, or adapter ABI is admitted.

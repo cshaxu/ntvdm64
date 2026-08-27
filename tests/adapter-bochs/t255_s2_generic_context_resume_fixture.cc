@@ -1,9 +1,9 @@
 #include "bochs.h"
 #include "bochs-core/cpu/cpu.h"
-#include "adapter-softpc/a20_capability.h"
+#include "adapter-mvdm-host-out/softpc/a20_capability.h"
 #include "adapter-mvdm-host-in/generic_ud_bridge.h"
-#include "adapter-softpc/machine_stage.h"
-#include "adapter-softpc/protected_range_action.h"
+#include "adapter-mvdm-host-out/softpc/machine_stage.h"
+#include "adapter-mvdm-host-out/softpc/protected_range_action.h"
 #include "support/t255_s2_generic_ud_context_fixture_bridge.h"
 
 #include <string.h>

@@ -1,4 +1,4 @@
 # debugger family
 
-Reserved for historical BDE, DBG, VDMDBG and VDMEXTS product-interface
-bindings. No debugger implementation is admitted by T284 S3.
+Owns the historical BDE, DBG, VDMDBG and VDMEXTS debugger-product boundary.
+No debugger implementation or adapter ABI is admitted.

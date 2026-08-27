@@ -10,13 +10,13 @@ $files = @(Import-Csv -LiteralPath $fileLedgerPath -Delimiter "`t" | Where-Objec
 if ($files.Count -ne 8) { throw "Expected eight sim16 paths, found $($files.Count)." }
 
 $contracts = @{
-    'sim16/sim16.asm' = @('wow16-simulator-packet-and-serial-transport', 'adapter-wow; adapter-vdm-monitor; adapter-bochs; session', 'historical 16-bit WOW simulator DLL body: packet transport, VDM memory requests, serial port/PIC interrupt and stack switching; retain as source evidence, never reinterpret as a Bochs guest image', 'WOW-profile-gated host-product body')
-    'sim16/siminit.asm' = @('wow16-simulator-initialization', 'adapter-wow; adapter-bochs; session', 'historical 16-bit DLL entry, serial/PIC initialization and buffer setup; no standalone machine or device ownership', 'WOW-profile-gated host-product body')
-    'sim16/incs.inc' = @('wow16-simulator-declaration', 'adapter-wow; adapter-vdm-monitor; adapter-bochs; session', 'original simulator packet, serial and interrupt declaration surface', 'declaration-only')
-    'sim16/segdefs.inc' = @('wow16-simulator-segment-declaration', 'adapter-wow', 'original 16-bit segment layout declaration', 'declaration-only')
-    'sim16/sim16.inc' = @('wow16-simulator-declaration', 'adapter-wow; adapter-vdm-monitor; adapter-bochs; session', 'original simulator public declaration surface', 'declaration-only')
-    'sim16/sim16.def' = @('wow16-simulator-dll-export-description', 'adapter-wow; build governance', 'original 16-bit DLL export description', 'build-description-only')
-    'sim16/sim16.mac' = @('wow16-simulator-macro-support', 'adapter-wow; build governance', 'original 16-bit assembler macro support', 'build-description-only')
+    'sim16/sim16.asm' = @('wow16-simulator-packet-and-serial-transport', 'adapter-mvdm-host-out/wow; adapter-mvdm-host-out/monitor; adapter-bochs; session', 'historical 16-bit WOW simulator DLL body: packet transport, VDM memory requests, serial port/PIC interrupt and stack switching; retain as source evidence, never reinterpret as a Bochs guest image', 'WOW-profile-gated host-product body')
+    'sim16/siminit.asm' = @('wow16-simulator-initialization', 'adapter-mvdm-host-out/wow; adapter-bochs; session', 'historical 16-bit DLL entry, serial/PIC initialization and buffer setup; no standalone machine or device ownership', 'WOW-profile-gated host-product body')
+    'sim16/incs.inc' = @('wow16-simulator-declaration', 'adapter-mvdm-host-out/wow; adapter-mvdm-host-out/monitor; adapter-bochs; session', 'original simulator packet, serial and interrupt declaration surface', 'declaration-only')
+    'sim16/segdefs.inc' = @('wow16-simulator-segment-declaration', 'adapter-mvdm-host-out/wow', 'original 16-bit segment layout declaration', 'declaration-only')
+    'sim16/sim16.inc' = @('wow16-simulator-declaration', 'adapter-mvdm-host-out/wow; adapter-mvdm-host-out/monitor; adapter-bochs; session', 'original simulator public declaration surface', 'declaration-only')
+    'sim16/sim16.def' = @('wow16-simulator-dll-export-description', 'adapter-mvdm-host-out/wow; build governance', 'original 16-bit DLL export description', 'build-description-only')
+    'sim16/sim16.mac' = @('wow16-simulator-macro-support', 'adapter-mvdm-host-out/wow; build governance', 'original 16-bit assembler macro support', 'build-description-only')
     'sim16/makefile' = @('wow16-simulator-build-description', 'tools/opennt; build governance', 'original cl16/masm/link16 DLL build and WOW16 library composition evidence; no modern build edge', 'build-description-only')
 }
 
@@ -26,9 +26,9 @@ $result = foreach ($file in $files) {
     $contract = $contracts[$file.target_path]
     $owner = if ($file.target_path -eq 'sim16/makefile') { 'mvdm-tools' } else { 'mvdm-host' }
     $lexical = if ($file.target_path -in @('sim16/sim16.asm','sim16/siminit.asm')) {
-        'adapter-wow (16-bit WOW DLL/packet transport); adapter-vdm-monitor (VDM memory transport); adapter-bochs (serial/PIC device mechanics); session (instance coordination)'
+        'adapter-mvdm-host-out/wow (16-bit WOW DLL/packet transport); adapter-mvdm-host-out/monitor (VDM memory transport); adapter-bochs (serial/PIC device mechanics); session (instance coordination)'
     } elseif ($file.file_kind -eq 'declaration') {
-        'adapter-wow (16-bit simulator declaration surface)'
+        'adapter-mvdm-host-out/wow (16-bit simulator declaration surface)'
     } else { 'none (build/macro metadata)' }
     [pscustomobject][ordered]@{
         file_id = $file.file_id

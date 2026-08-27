@@ -6,7 +6,7 @@
  */
 
 #include "bochs.h"
-#include "adapter-softpc/finite_run.h"
+#include "adapter-mvdm-host-out/softpc/finite_run.h"
 
 #include <string.h>
 

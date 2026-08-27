@@ -15,9 +15,9 @@ if ($headers.Count -ne 339) { throw "Expected 339 selected SoftPC declaration ro
 
 foreach ($row in $headers) {
     $row.final_disposition = 'binding-only'
-    $row.final_owner_or_link_boundary = 'original SoftPC declaration surface retained for same-shaped adapter-softpc or adapter-bochs binding; never a direct MVDM-to-Bochs object dependency'
+    $row.final_owner_or_link_boundary = 'original SoftPC declaration surface retained for same-shaped adapter-mvdm-host-out/softpc or adapter-bochs binding; never a direct MVDM-to-Bochs object dependency'
     $row.final_change_class = 'binding-only; preserve original names, parameter layouts, constants and calling conventions'
-    $row.named_adapter = 'adapter-softpc; adapter-bochs where a machine facade is reached'
+    $row.named_adapter = 'adapter-mvdm-host-out/softpc; adapter-bochs where a machine facade is reached'
     $row.mapping_implication = 'pointer-shaped MVDM fields bind only through the session mapping-manager rules; declaration inclusion alone does not establish an identity mapping'
     $row.final_evidence = 'T276 S12 SoftPC original-subpackage and facade-interface baselines: declaration carrier, not a parallel machine executor'
     $row.final_audit_state = 'final-disposition-audited; not implemented'

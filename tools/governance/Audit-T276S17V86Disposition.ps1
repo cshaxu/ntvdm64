@@ -31,14 +31,14 @@ $result = foreach ($file in $files) {
         }
         '^v86/monitor/i386/(monitor\.c|int\.c|thread\.c|sas\.c|fastpm\.asm|spcstubs\.c|proflib\.c)$' {
             $role = 'historical-kernel-vdm-monitor'
-            $boundary = 'adapter-vdm-monitor; adapter-softpc; adapter-bochs; session guest-memory mapping manager'
+            $boundary = 'adapter-mvdm-host-out/monitor; adapter-mvdm-host-out/softpc; adapter-bochs; session guest-memory mapping manager'
             $families = 'NT VDM_TIB/event/NtVdmControl; CCPU/SAS/SoftPC; BOP/interrupt/port callbacks; checked guest-memory leases'
             $summary = 'original monitor dispatches NT kernel VDM events and exposes register, BOP, interrupt, port and memory callbacks; retain the source/API evidence, but no kernel-VDM monitor body is composed'
             $disposition = 'historical-monitor-body profile exclusion; same-shaped monitor API recovery prerequisite'
         }
         '^v86/monitor/i386/monitorp\.h$' {
             $role = 'historical-vdm-monitor-declaration'
-            $boundary = 'adapter-vdm-monitor; adapter-softpc; adapter-bochs; session guest-memory mapping manager'
+            $boundary = 'adapter-mvdm-host-out/monitor; adapter-mvdm-host-out/softpc; adapter-bochs; session guest-memory mapping manager'
             $families = 'VDM_TIB/event/NtVdmControl; CCPU/SAS/SoftPC; checked guest-memory leases'
             $summary = 'original monitor declaration and data-layout evidence; any recovered callback form must use copied CPU frames and the unique mapping manager, never a raw host VDM pointer'
             $disposition = 'declaration and monitor-API recovery prerequisite'
@@ -46,7 +46,7 @@ $result = foreach ($file in $files) {
         '^v86/scaffold/i386/(softpc\.c|fakebop\.c|fakeinit\.c|fakekbd\.c|fakevid\.c|stubs\.c)$' {
             $role = 'historical-ntvdm-product-scaffold'
             $owner = 'app'
-            $boundary = 'app; adapter-mvdm-host-in; adapter-softpc; adapter-bochs; adapter-mvdm-host-out/win32; session'
+            $boundary = 'app; adapter-mvdm-host-in; adapter-mvdm-host-out/softpc; adapter-bochs; adapter-mvdm-host-out/win32; session'
             $families = 'historical ntvdm.exe startup/termination; SoftPC initialization; BOP/BIOS/video/keyboard placeholders; console and BaseSrv APIs'
             $summary = 'original standalone NTVDM product startup/scaffold and temporary BIOS stubs; app owns modern composition and cannot import this product shell as a second engine or duplicate startup path'
             $disposition = 'historical-product-shell exclusion; source-shaped composition evidence only'
@@ -54,7 +54,7 @@ $result = foreach ($file in $files) {
         '^v86/scaffold/i386/(fun\.h|x86\.h|xbios\.h|xbiosdsk\.h|xbioskbd\.h|xbiosvid\.h|xguest\.h|xwincon\.h)$' {
             $role = 'historical-scaffold-declaration'
             $owner = 'app'
-            $boundary = 'app; adapter-mvdm-host-in; adapter-softpc; adapter-bochs; adapter-mvdm-host-out/win32; session'
+            $boundary = 'app; adapter-mvdm-host-in; adapter-mvdm-host-out/softpc; adapter-bochs; adapter-mvdm-host-out/win32; session'
             $families = 'historical product startup, BIOS placeholder and console declarations'
             $summary = 'declaration/layout evidence for the excluded standalone scaffold; individual same-shaped boundary declarations may be recovered only through their named component owner'
             $disposition = 'declaration evidence; no standalone scaffold composition'
@@ -62,7 +62,7 @@ $result = foreach ($file in $files) {
         '^v86/scaffold/(ntvdm\.def|vdm\.rc|vdm\.ico|wow\.ico)$' {
             $role = 'historical-ntvdm-product-resource-or-export'
             $owner = 'app'
-            $boundary = 'app; adapter-softpc; adapter-vdm-monitor'
+            $boundary = 'app; adapter-mvdm-host-out/softpc; adapter-mvdm-host-out/monitor'
             $families = 'historical ntvdm.exe exports and UI resources'
             $summary = 'original product export/resource evidence; modern app does not claim the historical executable identity or export surface by this audit'
             $disposition = 'historical-product-shell exclusion; export/resource evidence only'

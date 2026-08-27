@@ -1,4 +1,4 @@
 # wow family
 
-Reserved for historical WOW32/WOWEXEC host-product bindings. No WOW provider
-or broker behavior is admitted by T284 S3.
+Owns the historical WOW32/WOWEXEC host-product boundary. No guest provider,
+broker behavior, or adapter ABI is admitted.

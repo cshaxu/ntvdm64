@@ -14,12 +14,12 @@ foreach ($row in $dos) {
     if ($row.file_kind -eq 'source') {
         $row.final_disposition = 'adapter-backed'
         if ($row.source_path -like 'dos/dem/*') {
-            $row.final_owner_or_link_boundary = 'mvdm-host original DEM provider -> adapter-mvdm-host-in -> adapter-softpc -> adapter-bochs; host capability through adapter-mvdm-host-out/win32 and session'
+            $row.final_owner_or_link_boundary = 'mvdm-host original DEM provider -> adapter-mvdm-host-in -> adapter-mvdm-host-out/softpc -> adapter-bochs; host capability through adapter-mvdm-host-out/win32 and session'
         } else {
-            $row.final_owner_or_link_boundary = 'mvdm-host original COMMAND provider -> adapter-mvdm-host-in -> adapter-softpc -> adapter-bochs; host/session capability through adapter-mvdm-host-out/win32, session and adapter-redir'
+            $row.final_owner_or_link_boundary = 'mvdm-host original COMMAND provider -> adapter-mvdm-host-in -> adapter-mvdm-host-out/softpc -> adapter-bochs; host/session capability through adapter-mvdm-host-out/win32, session and adapter-mvdm-host-out/redir'
         }
         $row.final_change_class = 'binding-only; preserve original provider algorithm, dispatcher ordering, structures and failure routes'
-        $row.named_adapter = 'adapter-mvdm-host-in; adapter-softpc; adapter-bochs; adapter-mvdm-host-out/win32; session; adapter-redir where reached'
+        $row.named_adapter = 'adapter-mvdm-host-in; adapter-mvdm-host-out/softpc; adapter-bochs; adapter-mvdm-host-out/win32; session; adapter-mvdm-host-out/redir where reached'
         $row.mapping_implication = 'guest frames and pointer-shaped fields use the sole session guest-memory mapping-manager instance; host resources remain opaque mapped identities'
         $row.final_evidence = 'T276 S13 DOS package and interface baselines: selected original DEM/COMMAND provider body'
     }
@@ -27,7 +27,7 @@ foreach ($row in $dos) {
         $row.final_disposition = 'binding-only'
         $row.final_owner_or_link_boundary = 'mvdm-platform-abi original DEM/COMMAND declaration surface shared by the source provider packages and same-shaped adapters'
         $row.final_change_class = 'binding-only; preserve declaration, layout and calling-convention shape'
-        $row.named_adapter = 'adapter-mvdm-host-in; adapter-softpc; adapter-mvdm-host-out/win32; session; adapter-redir where reached'
+        $row.named_adapter = 'adapter-mvdm-host-in; adapter-mvdm-host-out/softpc; adapter-mvdm-host-out/win32; session; adapter-mvdm-host-out/redir where reached'
         $row.mapping_implication = 'reached pointer fields resolve through the appropriate one of the three session mapping-manager instances; no raw host identity is represented in guest fields'
         $row.final_evidence = 'T276 S13 DOS package baseline: original declaration carrier'
     }

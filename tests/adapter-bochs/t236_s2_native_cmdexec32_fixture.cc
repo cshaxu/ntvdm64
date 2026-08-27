@@ -2,7 +2,7 @@
 #include "cpu/cpu.h"
 #include "adapter-bochs/machine_facade.h"
 #include "adapter-mvdm-host-in/bop_ingress.h"
-#include "adapter-softpc/machine_stage.h"
+#include "adapter-mvdm-host-out/softpc/machine_stage.h"
 extern "C" {
 #include "app/bop/command_session.h"
 #include "app/bop/route.h"

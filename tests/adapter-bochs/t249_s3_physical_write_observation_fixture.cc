@@ -2,7 +2,7 @@
 #include "bochs-core/cpu/cpu.h"
 #include "bochs-core/memory/memory.h"
 #include "adapter-bochs/minimal_machine.h"
-#include "adapter-softpc/physical_write_observation.h"
+#include "adapter-mvdm-host-out/softpc/physical_write_observation.h"
 #include "adapter-bochs/machine_facade.h"
 
 static int observe_physical_write(void *, const void *event, unsigned event_bytes,

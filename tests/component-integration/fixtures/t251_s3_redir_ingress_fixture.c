@@ -3,7 +3,7 @@
 #include <windows.h>
 
 #include "app/bop/dem_host_session.h"
-#include "adapter-softpc/host_handle_manager.h"
+#include "adapter-mvdm-host-out/softpc/host_handle_manager.h"
 #include "app/bop/redir_native_session.h"
 BOOLEAN runtime_vr_initialized_provider(VOID);
 #include "app/bop/redir_generic_ud_bridge.h"

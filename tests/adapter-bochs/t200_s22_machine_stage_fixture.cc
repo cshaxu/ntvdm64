@@ -1,6 +1,6 @@
 #include "bochs.h"
 #include "bochs-core/memory/memory.h"
-#include "adapter-softpc/machine_stage.h"
+#include "adapter-mvdm-host-out/softpc/machine_stage.h"
 
 #include <string.h>
 

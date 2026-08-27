@@ -10,7 +10,7 @@ $ErrorActionPreference = 'Stop'
 
 $families = [ordered]@{
     'adapter-mvdm-host-in' = 'bop-transport'
-    'adapter-softpc' = 'softpc-ccpu-sas'
+    'adapter-mvdm-host-out/softpc' = 'softpc-ccpu-sas'
     'adapter-mvdm-host-out/win32' = 'win32-ntdll'
 }
 

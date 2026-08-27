@@ -1,5 +1,5 @@
 #include "bochs.h"
-#include "adapter-softpc/a20_capability.h"
+#include "adapter-mvdm-host-out/softpc/a20_capability.h"
 #include "adapter-bochs/minimal_machine.h"
 
 static int call(unsigned operation, unsigned value, unsigned status,

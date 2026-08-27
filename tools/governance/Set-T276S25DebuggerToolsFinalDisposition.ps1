@@ -13,7 +13,7 @@ foreach ($row in $debugTools) {
     $row.final_disposition = 'tool-only'
     $row.final_owner_or_link_boundary = 'independent original NTSD/WinDbg debugger extension or VDM debugging-support product; never linked into the main host runtime'
     $row.final_change_class = 'none; byte-exact source mirror retained for separately admitted debugger-tool recovery'
-    $row.named_adapter = 'none; a future adapter-debugger requires its own whole-tool admission'
+    $row.named_adapter = 'none; a future adapter-mvdm-host-out/debugger requires its own whole-tool admission'
     $row.mapping_implication = 'no debugger-process address, HANDLE or host pointer crosses a main-runtime boundary; any future tool uses copied diagnostic snapshots or an explicitly admitted broker'
     $row.final_evidence = 'T276 S25 debugger-tools source review: original TARGETTYPE=DYNLINK extension/DLL or static debug support product, with NTSD/WinDbg external-debugger dependencies'
     $row.final_audit_state = 'final-disposition-audited; not implemented'

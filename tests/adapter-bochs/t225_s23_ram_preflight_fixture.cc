@@ -1,6 +1,6 @@
 #include "bochs.h"
 #include "adapter-bochs/minimal_machine.h"
-#include "adapter-softpc/mechanical_action.h"
+#include "adapter-mvdm-host-out/softpc/mechanical_action.h"
 #include "adapter-mvdm-host-in/generic_ud_bridge.h"
 extern "C" int runtime_machine_generic_ud_bridge(const struct runtime_generic_ud_event *, struct runtime_generic_ud_outcome *) { return 0; }
 static void a(struct runtime_mechanical_action *x, uint32_t k, uint64_t p, uint8_t v) { runtime_mechanical_action_clear(x); x->action_id=1; x->kind=k; x->range_count=1; x->payload_bytes=1; x->ranges[0].physical_address=p; x->ranges[0].byte_count=1; x->payload[0]=v; }

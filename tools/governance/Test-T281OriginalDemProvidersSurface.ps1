@@ -22,7 +22,7 @@ if (-not (Test-Path -LiteralPath $ninjaPath -PathType Leaf)) {
 $text = Get-Content -Raw -LiteralPath $ninjaPath
 $required = @('build obj/demdasd.obj: cc', 'build obj/demsrch.obj: cc',
     'build original-dem-providers.lib: lib', 'default original-dem-providers.lib',
-    'adapter-vdm-monitor/include/vdm.h')
+    'adapter-mvdm-host-out/monitor/include/vdm.h')
 foreach ($marker in $required) {
     if ($text -notlike "*$marker*") {
         throw "T281 graph is missing required DEM provider marker: $marker"

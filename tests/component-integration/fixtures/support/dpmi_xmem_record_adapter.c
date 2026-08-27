@@ -1,7 +1,7 @@
 #include "dpmi_xmem_record_adapter.h"
 
-#include "adapter-softpc/ordinary_ram_reservation.h"
-#include "adapter-softpc/mechanical_action.h"
+#include "adapter-mvdm-host-out/softpc/ordinary_ram_reservation.h"
+#include "adapter-mvdm-host-out/softpc/mechanical_action.h"
 
 #include <string.h>
 

@@ -1,6 +1,6 @@
-#include "adapter-softpc/finite_run.h"
-#include "adapter-softpc/first_fault_observation.h"
-#include "adapter-softpc/segment_access_observation.h"
+#include "adapter-mvdm-host-out/softpc/finite_run.h"
+#include "adapter-mvdm-host-out/softpc/first_fault_observation.h"
+#include "adapter-mvdm-host-out/softpc/segment_access_observation.h"
 #include "adapter-mvdm-host-in/generic_ud_bridge.h"
 
 extern "C" int runtime_machine_generic_ud_bridge(

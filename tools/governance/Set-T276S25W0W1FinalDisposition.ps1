@@ -42,9 +42,9 @@ foreach ($row in $w0w1) {
         }
         'suballoc/suballoc.c' {
             $row.final_disposition = 'binding-only'
-            $row.final_owner_or_link_boundary = 'mvdm-support original suballoc library; original machine-facing callbacks bind at caller through adapter-softpc'
+            $row.final_owner_or_link_boundary = 'mvdm-support original suballoc library; original machine-facing callbacks bind at caller through adapter-mvdm-host-out/softpc'
             $row.final_change_class = 'binding-only; retain original allocator algorithm and ULONG callback contract'
-            $row.named_adapter = 'adapter-softpc at callers only'
+            $row.named_adapter = 'adapter-mvdm-host-out/softpc at callers only'
             $row.mapping_implication = 'the library does not map ULONG values to pointers; caller callbacks resolve guest ranges only through the session guest-memory mapping-manager lease'
             $row.final_evidence = 'T276 S11 MVDM-W1-BIND-003; suballoc/sources lists suballoc.c as the only library source'
             continue
@@ -89,7 +89,7 @@ foreach ($row in $w0w1) {
             $row.final_disposition = 'binding-only'
             $row.final_owner_or_link_boundary = 'mvdm-support source/build/declaration carrier for the selected original library bodies'
             $row.final_change_class = 'binding-only; retain byte-exact carrier and bind only the selected original library translation units'
-            $row.named_adapter = 'adapter-mvdm-host-out/win32 for oemuni bodies; adapter-softpc only at suballoc machine-facing callers'
+            $row.named_adapter = 'adapter-mvdm-host-out/win32 for oemuni bodies; adapter-mvdm-host-out/softpc only at suballoc machine-facing callers'
             $row.mapping_implication = 'carrier has no independent native identity transfer; reached boundaries use the owning adapter/session mapping-manager rule'
             $row.final_evidence = 'T276 S11 W0/W1 file disposition and runtime-support binding ledgers'
             continue
@@ -98,7 +98,7 @@ foreach ($row in $w0w1) {
             $row.final_disposition = 'binding-only'
             $row.final_owner_or_link_boundary = 'mvdm-support source/build/declaration carrier for the selected original library bodies'
             $row.final_change_class = 'binding-only; retain byte-exact carrier and bind only the selected original library translation units'
-            $row.named_adapter = 'adapter-mvdm-host-out/win32 for oemuni bodies; adapter-softpc only at suballoc machine-facing callers'
+            $row.named_adapter = 'adapter-mvdm-host-out/win32 for oemuni bodies; adapter-mvdm-host-out/softpc only at suballoc machine-facing callers'
             $row.mapping_implication = 'carrier has no independent native identity transfer; reached boundaries use the owning adapter/session mapping-manager rule'
             $row.final_evidence = 'T276 S11 W0/W1 file disposition and runtime-support binding ledgers'
             continue

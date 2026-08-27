@@ -19,7 +19,7 @@
 #include "nt_uis.h"	  // For resource id
 /* DIVERGENCE(MVDM-HOST-DIV-009): GetVDMAddr has no bounded x64 lifetime.
  * Retain cmdGetCurrentDir ordering and register contract through the
- * source-shaped adapter-softpc numeric location/lease boundary. */
+ * source-shaped adapter-mvdm-host-out/softpc numeric location/lease boundary. */
 #include "mvdm_guest_location.h"
 
 

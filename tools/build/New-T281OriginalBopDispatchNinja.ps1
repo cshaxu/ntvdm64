@@ -23,11 +23,11 @@ New-Item -ItemType Directory -Force $build | Out-Null
 # a provider or create a runtime route.
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DPROD /DMONITOR /DC_VID /DX86GFX /DANSI ' +
     '/FI ' + $root + '/src/adapter-mvdm-host-out/win32/include/nt.h ' +
-    '/FI ' + $root + '/src/adapter-softpc/include/error_abi.h ' +
+    '/FI ' + $root + '/src/adapter-mvdm-host-out/softpc/include/error_abi.h ' +
     '/I ' + $root + '/src/mvdm-platform-abi/source/public/internal/base/inc ' +
     '/I ' + $root + '/src/mvdm-support/inc ' +
     '/I ' + $root + '/src/adapter-mvdm-host-out/win32/include ' +
-    '/I ' + $root + '/src/adapter-softpc/include ' +
+    '/I ' + $root + '/src/adapter-mvdm-host-out/softpc/include ' +
     '/I ' + $root + '/src/mvdm-host/softpc.new/host/inc ' +
     '/I ' + $root + '/src/mvdm-host/softpc.new/base/inc ' +
     '/I ' + $root + '/src/mvdm-host/softpc.new/base/cvidc'

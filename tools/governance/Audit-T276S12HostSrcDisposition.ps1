@@ -16,14 +16,14 @@ if ($files.Count -ne 56) { throw "Expected 56 host/src source rows, found $($fil
 
 $groups = [ordered]@{
     'opennt-bop-dispatch' = @('nt_bop.c')
-    'adapter-vdm-monitor' = @('nt_eoi.c','nt_event.c','nt_inthk.c','nt_reset.c')
+    'adapter-mvdm-host-out/monitor' = @('nt_eoi.c','nt_event.c','nt_inthk.c','nt_reset.c')
     'session-and-monitor-thread' = @('nt_thred.c')
     'cross-owner-startup-composition' = @('nt_msscs.c')
-    'adapter-softpc-machine-facade' = @('copy_fnc.c','cpucstbs.c','nt_cpu.c','nt_emm.c','nt_mem.c','nt_sas.c','nt_umb.c','sim32.c','stubs.c','x86_emm.c')
+    'adapter-mvdm-host-out/softpc-machine-facade' = @('copy_fnc.c','cpucstbs.c','nt_cpu.c','nt_emm.c','nt_mem.c','nt_sas.c','nt_umb.c','sim32.c','stubs.c','x86_emm.c')
     'cross-owner-launch-configuration' = @('config.c')
     'adapter-mvdm-host-out/win32-host-capability' = @('fprt.c','nt_error.c','nt_keycd.c','nt_nls.c','nt_ntfun.c','nt_pif.c','nt_unix.c')
     'cross-owner-video-machine-initialization' = @('nt_sec.c')
-    'adapter-vdd-or-debugger' = @('nt_vdd.c','nt_yoda.c')
+    'adapter-mvdm-host-out/vdd-or-debugger' = @('nt_vdd.c','nt_yoda.c')
     'machine-device-bridge-review' = @('nt_cga.c','nt_com.c','nt_det.c','nt_ega.c','nt_fdisk.c','nt_fulsc.c','nt_graph.c','nt_hosts.c','nt_input.c','nt_lpt.c','nt_mouse.c','nt_munge.c','nt_rez.c','nt_rflop.c','nt_sound.c','nt_timer.c','nt_vga.c','nt_wcom.c')
     'literal-build-unobserved-auxiliary' = @('nt_aorc.c','nt_cprgs.c','nt_ertbl.c','nt_hfx.c','nt_hunt.c','nt_mess.c','nt_smenu.c','nt_term.c','nt_vflop.c','stf_conf.c')
 }
@@ -39,16 +39,16 @@ foreach ($entry in $groups.GetEnumerator()) {
 function Get-Contract {
     param([string]$Group)
     switch ($Group) {
-        'opennt-bop-dispatch' { return @('adapter-mvdm-host-in; adapter-softpc; adapter-mvdm-host-out/win32; specialist adapters', 'original BOP selector/host dispatch; preserve original routing shape, evaluate each reached historical boundary', 'adapter-bound review') }
-        'adapter-vdm-monitor' { return @('adapter-vdm-monitor; adapter-softpc', 'original event/interrupt/reset/monitor glue; retain interface shape and classify VDM monitor versus machine calls', 'adapter-bound review') }
-        'session-and-monitor-thread' { return @('session; adapter-vdm-monitor', 'original worker/thread coordination; recover only session-local observable contract, never NT4 global worker shell', 'adapter-bound review') }
-        'cross-owner-startup-composition' { return @('app; session; adapter-softpc; adapter-mvdm-host-out/win32; adapter-vdd; mvdm-host owner packages', 'original NTVDM startup/control composition reaches COMMAND, XMS, debugger/VDD, machine and host APIs; preserve it as a cross-owner composition nexus and do not misclassify it as a standalone monitor provider', 'composition-prerequisite review') }
-        'adapter-softpc-machine-facade' { return @('adapter-softpc; adapter-bochs', 'original CCPU/SAS/memory facade; same-shaped calls may bind to Bochs mechanics only through declared adapter boundary', 'adapter-bound review') }
-        'cross-owner-launch-configuration' { return @('app; session; adapter-mvdm-host-out/win32; adapter-softpc; adapter-vdm-monitor; mvdm-host owner packages', 'original launch/configuration composition crosses PIF, console, host environment, monitor and machine setup; retain exact mirror and do not classify it as a standalone Win32 provider', 'composition-prerequisite review') }
-        'adapter-mvdm-host-out/win32-host-capability' { return @('adapter-mvdm-host-out/win32; session; app; adapter-debugger as individually proved', 'original host capability/NTDLL/Win32 source; preserve algorithm and error ordering while auditing each public-modern binding and its session/product owner', 'adapter-bound review') }
-        'cross-owner-video-machine-initialization' { return @('adapter-vdm-monitor; adapter-softpc; adapter-bochs; adapter-mvdm-host-out/win32', 'original video-memory and ROM-mapping initialization crosses monitor, machine and virtual-memory boundaries; retain exact mirror and do not classify it as a standalone Win32 provider', 'composition-prerequisite review') }
-        'adapter-vdd-or-debugger' { return @('adapter-vdd; adapter-debugger', 'original VDD or debugger product bridge; no provider policy or Bochs object enters source', 'adapter-bound review') }
-        'machine-device-bridge-review' { return @('adapter-softpc; adapter-bochs; adapter-mvdm-host-out/win32 as individually proved', 'mixed original device bridge; determine Bochs-native replacement versus same-shaped host-device binding before enablement', 'device-bound review') }
+        'opennt-bop-dispatch' { return @('adapter-mvdm-host-in; adapter-mvdm-host-out/softpc; adapter-mvdm-host-out/win32; specialist adapters', 'original BOP selector/host dispatch; preserve original routing shape, evaluate each reached historical boundary', 'adapter-bound review') }
+        'adapter-mvdm-host-out/monitor' { return @('adapter-mvdm-host-out/monitor; adapter-mvdm-host-out/softpc', 'original event/interrupt/reset/monitor glue; retain interface shape and classify VDM monitor versus machine calls', 'adapter-bound review') }
+        'session-and-monitor-thread' { return @('session; adapter-mvdm-host-out/monitor', 'original worker/thread coordination; recover only session-local observable contract, never NT4 global worker shell', 'adapter-bound review') }
+        'cross-owner-startup-composition' { return @('app; session; adapter-mvdm-host-out/softpc; adapter-mvdm-host-out/win32; adapter-mvdm-host-out/vdd; mvdm-host owner packages', 'original NTVDM startup/control composition reaches COMMAND, XMS, debugger/VDD, machine and host APIs; preserve it as a cross-owner composition nexus and do not misclassify it as a standalone monitor provider', 'composition-prerequisite review') }
+        'adapter-mvdm-host-out/softpc-machine-facade' { return @('adapter-mvdm-host-out/softpc; adapter-bochs', 'original CCPU/SAS/memory facade; same-shaped calls may bind to Bochs mechanics only through declared adapter boundary', 'adapter-bound review') }
+        'cross-owner-launch-configuration' { return @('app; session; adapter-mvdm-host-out/win32; adapter-mvdm-host-out/softpc; adapter-mvdm-host-out/monitor; mvdm-host owner packages', 'original launch/configuration composition crosses PIF, console, host environment, monitor and machine setup; retain exact mirror and do not classify it as a standalone Win32 provider', 'composition-prerequisite review') }
+        'adapter-mvdm-host-out/win32-host-capability' { return @('adapter-mvdm-host-out/win32; session; app; adapter-mvdm-host-out/debugger as individually proved', 'original host capability/NTDLL/Win32 source; preserve algorithm and error ordering while auditing each public-modern binding and its session/product owner', 'adapter-bound review') }
+        'cross-owner-video-machine-initialization' { return @('adapter-mvdm-host-out/monitor; adapter-mvdm-host-out/softpc; adapter-bochs; adapter-mvdm-host-out/win32', 'original video-memory and ROM-mapping initialization crosses monitor, machine and virtual-memory boundaries; retain exact mirror and do not classify it as a standalone Win32 provider', 'composition-prerequisite review') }
+        'adapter-mvdm-host-out/vdd-or-debugger' { return @('adapter-mvdm-host-out/vdd; adapter-mvdm-host-out/debugger', 'original VDD or debugger product bridge; no provider policy or Bochs object enters source', 'adapter-bound review') }
+        'machine-device-bridge-review' { return @('adapter-mvdm-host-out/softpc; adapter-bochs; adapter-mvdm-host-out/win32 as individually proved', 'mixed original device bridge; determine Bochs-native replacement versus same-shaped host-device binding before enablement', 'device-bound review') }
         'literal-build-unobserved-auxiliary' { return @('none until original build/profile evidence expands', 'not in the literal host/src SOURCES list; retain exact mirror and do not infer runtime reachability', 'profile/build-unobserved') }
         default { throw "Unknown host/src group: $Group" }
     }

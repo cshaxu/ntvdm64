@@ -1,5 +1,5 @@
 #include "session/session.h"
-#include "adapter-softpc/guest_pointer_manager.h"
+#include "adapter-mvdm-host-out/softpc/guest_pointer_manager.h"
 
 static unsigned int teardown_calls;
 

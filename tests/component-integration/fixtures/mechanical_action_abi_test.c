@@ -1,5 +1,5 @@
 #include <stddef.h>
-#include "adapter-softpc/mechanical_action.h"
+#include "adapter-mvdm-host-out/softpc/mechanical_action.h"
 
 int main(void)
 {

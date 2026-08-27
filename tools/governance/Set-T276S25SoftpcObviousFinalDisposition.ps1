@@ -21,8 +21,8 @@ foreach ($entry in $eligible) {
             $row.final_disposition = 'not-host-runtime'
             $row.final_owner_or_link_boundary = 'retained mvdm-host SoftPC machine evidence; Bochs owns the final CPU/device execution'
             $row.final_change_class = 'none; byte-exact source mirror retained outside the final host link graph'
-            $row.named_adapter = 'adapter-softpc -> adapter-bochs is the same-shaped machine boundary, not an import of this executor'
-            $row.mapping_implication = 'not applicable to this excluded executor; any admitted caller uses adapter-softpc and the session guest-memory mapping-manager lease'
+            $row.named_adapter = 'adapter-mvdm-host-out/softpc -> adapter-bochs is the same-shaped machine boundary, not an import of this executor'
+            $row.mapping_implication = 'not applicable to this excluded executor; any admitted caller uses adapter-mvdm-host-out/softpc and the session guest-memory mapping-manager lease'
             $row.final_evidence = 'T276 S12 SoftPC baseline: original CCPU/CPU/device execution is a parallel-machine exclusion replaced by Bochs'
         }
         'adapter-bochs-firmware-review' {

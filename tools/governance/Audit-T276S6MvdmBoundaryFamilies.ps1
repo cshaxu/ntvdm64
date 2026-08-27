@@ -10,14 +10,14 @@ $worklistPath = Join-Path $ops 'm0-t276-s6-boundary-family-worklist.tsv'
 $evidencePath = Join-Path $ops 'm0-t276-s6-boundary-family-worklist-001.md'
 foreach ($p in @($boundaryPath,$declarationPath)) { if (-not (Test-Path -LiteralPath $p)) { throw "Missing T276 input: $p" } }
 function Get-ReviewFamily([string]$Path) {
-    if ($Path -match '^(?i:inc/(softpc|memapi)\.h|softpc\.new/(base|host)/inc/)') { return 'adapter-softpc-review' }
-    if ($Path -match '^(?i:inc/(vdmredir|rdrsvc|rdrexp)\.h|vdmredir/)') { return 'adapter-redir-review' }
-    if ($Path -match '^(?i:inc/(vdmtib|v86def|vint)\.h|v86/|sim16/|sim32/|ieuvddex/)') { return 'adapter-vdm-monitor-review' }
-    if ($Path -match '^(?i:inc/wow|wow32/|fax/)') { return 'adapter-wow-review' }
-    if ($Path -match '^(?i:inc/(dbg|dbgs|dbgexp)|bde/|dbg/|vdmdbg/|vdmexts/)') { return 'adapter-debugger-review' }
-    if ($Path -match '^(?i:vdd/|inc/.*vdd)') { return 'adapter-vdd-review' }
+    if ($Path -match '^(?i:inc/(softpc|memapi)\.h|softpc\.new/(base|host)/inc/)') { return 'adapter-mvdm-host-out/softpc-review' }
+    if ($Path -match '^(?i:inc/(vdmredir|rdrsvc|rdrexp)\.h|vdmredir/)') { return 'adapter-mvdm-host-out/redir-review' }
+    if ($Path -match '^(?i:inc/(vdmtib|v86def|vint)\.h|v86/|sim16/|sim32/|ieuvddex/)') { return 'adapter-mvdm-host-out/monitor-review' }
+    if ($Path -match '^(?i:inc/wow|wow32/|fax/)') { return 'adapter-mvdm-host-out/wow-review' }
+    if ($Path -match '^(?i:inc/(dbg|dbgs|dbgexp)|bde/|dbg/|vdmdbg/|vdmexts/)') { return 'adapter-mvdm-host-out/debugger-review' }
+    if ($Path -match '^(?i:vdd/|inc/.*vdd)') { return 'adapter-mvdm-host-out/vdd-review' }
     if ($Path -match '^(?i:inc/(oemuni|cmdsvc|dossvc|curdir)|dos/)') { return 'mvdm-host-or-adapter-mvdm-host-out/win32-review' }
-    if ($Path -match '^(?i:xms\.486/)') { return 'adapter-softpc-xms-review' }
+    if ($Path -match '^(?i:xms\.486/)') { return 'adapter-mvdm-host-out/softpc-xms-review' }
     return 'original-package-semantic-review'
 }
 $boundaries = @(Import-Csv $boundaryPath -Delimiter "`t" | Where-Object { $_.disposition -eq 'external-boundary-candidate' })

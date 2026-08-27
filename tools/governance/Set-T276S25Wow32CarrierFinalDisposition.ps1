@@ -12,9 +12,9 @@ if ($headers.Count -ne 105) { throw "Expected 105 WOW32 declaration rows, found 
 if ($excluded.Count -ne 19) { throw "Expected 19 WOW32 unselected/build/resource rows, found $($excluded.Count)." }
 foreach ($row in $headers) {
     $row.final_disposition = 'binding-only'
-    $row.final_owner_or_link_boundary = 'original WOW32 declaration surface retained for same-shaped adapter-wow and adapter-mvdm-host-out/win32 bindings'
+    $row.final_owner_or_link_boundary = 'original WOW32 declaration surface retained for same-shaped adapter-mvdm-host-out/wow and adapter-mvdm-host-out/win32 bindings'
     $row.final_change_class = 'binding-only; preserve declaration, layout and calling-convention shape'
-    $row.named_adapter = 'adapter-wow; adapter-mvdm-host-out/win32; adapter-softpc; adapter-vdm-monitor; session where reached'
+    $row.named_adapter = 'adapter-mvdm-host-out/wow; adapter-mvdm-host-out/win32; adapter-mvdm-host-out/softpc; adapter-mvdm-host-out/monitor; session where reached'
     $row.mapping_implication = 'pointer and handle fields bind through session mapping-manager instances; no native identity is represented by a 32-bit WOW value'
     $row.final_evidence = 'T276 S22 WOW32 package baseline: declaration carrier'
     $row.final_audit_state = 'final-disposition-audited; not implemented'

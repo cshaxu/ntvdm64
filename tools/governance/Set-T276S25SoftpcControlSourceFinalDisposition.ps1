@@ -45,9 +45,9 @@ foreach ($row in $targets) {
     $row.final_audit_state = 'final-disposition-audited; not implemented'
     if ($row.source_path -in $overlay) {
         $row.final_disposition = 'overlay-required'
-        $row.final_owner_or_link_boundary = 'original SoftPC control algorithm with a narrow same-shaped adapter-softpc/adapter-bochs overlay; Bochs remains sole CPU/RAM/physical-page owner'
+        $row.final_owner_or_link_boundary = 'original SoftPC control algorithm with a narrow same-shaped adapter-mvdm-host-out/softpc/adapter-bochs overlay; Bochs remains sole CPU/RAM/physical-page owner'
         $row.final_change_class = 'overlay-required; replace only direct executor, native-pointer or private-section transport with typed adapter operations'
-        $row.named_adapter = 'adapter-softpc; adapter-bochs; session guest-memory and host-resource mapping managers; adapter-vdm-monitor where reached'
+        $row.named_adapter = 'adapter-mvdm-host-out/softpc; adapter-bochs; session guest-memory and host-resource mapping managers; adapter-mvdm-host-out/monitor where reached'
         $row.mapping_implication = 'all historical 32-bit pointer-shaped values resolve via checked session mappings and typed machine requests; raw host addresses cannot enter the mirror body'
         $row.final_evidence = 'T276 S12 SoftPC/SAS facade baseline: original useful control algorithm mixed with non-reusable executor or direct-address transport'
     }
@@ -63,7 +63,7 @@ foreach ($row in $targets) {
         $row.final_disposition = 'adapter-backed'
         $row.final_owner_or_link_boundary = 'mvdm-host original monitor, BOP, session, host-capability, configuration, VDD or error provider -> named adapters and session; Bochs receives only typed mechanical requests'
         $row.final_change_class = 'binding-only; preserve original control flow, ordering, failure routes and data shapes'
-        $row.named_adapter = 'adapter-mvdm-host-in; adapter-softpc; adapter-bochs; adapter-mvdm-host-out/win32; adapter-vdm-monitor; adapter-vdd; session as reached'
+        $row.named_adapter = 'adapter-mvdm-host-in; adapter-mvdm-host-out/softpc; adapter-bochs; adapter-mvdm-host-out/win32; adapter-mvdm-host-out/monitor; adapter-mvdm-host-out/vdd; session as reached'
         $row.mapping_implication = 'guest data uses only session guest-memory mapping; callbacks/resources use the session completion or host-resource instance, never native identity in MVDM fields'
         $row.final_evidence = 'T276 S12 monitor/session, Win32 capability and BOP/VDD/debugger source-span owner baselines'
     }

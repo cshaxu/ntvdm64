@@ -2,7 +2,7 @@
 
 1. The production source owners are exactly `bochs-core`, `mvdm-host`,
    `mvdm-support`, `mvdm-tools`, `mvdm-softpc-firmware`,
-   `mvdm-platform-abi`, `mvdm-guest-dos`, `mvdm-guest-win16`,
+   `mvdm-platform-abi`, `mvdm-guest/dos`, `mvdm-guest/win16`,
    `adapter-bochs`, `adapter-mvdm-host-in`, `adapter-mvdm-host-out`, `session`, `broker`,
    and `app`.
 2. `mvdm-host` is the sole MVDM host-runtime mirror. Shared original MVDM
@@ -72,7 +72,7 @@
     the `softpc` family of `adapter-mvdm-host-out` with a checked synchronous mapping lease with address, span,
     access and epoch. No such pointer crosses an ABI or reaches asynchronous
     work.
-18. `mvdm-guest-dos` and `mvdm-guest-win16` are complete load-only
+18. `mvdm-guest/dos` and `mvdm-guest/win16` are complete load-only
     mirrors. Their source, objects, libraries and products never satisfy a
     host symbol. App loads manifest-selected immutable bytes through
     `adapter-bochs`.

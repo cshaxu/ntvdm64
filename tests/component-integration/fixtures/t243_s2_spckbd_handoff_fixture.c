@@ -2,7 +2,7 @@
 #include <string.h>
 
 #include "app/bop/spckbd_handoff_generic_ud_bridge.h"
-#include "adapter-softpc/spckbd_handoff_shim.h"
+#include "adapter-mvdm-host-out/softpc/spckbd_handoff_shim.h"
 #include "cpu_state_abi.h"
 
 static unsigned char ram[0x100000];

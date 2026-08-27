@@ -1,4 +1,4 @@
 # vdd family
 
-Reserved for historical VDD registration and host-callback bindings. No device
-provider or VDD callback behavior is admitted by T284 S3.
+Owns the historical VDD registration, callback and host-bridge boundary. No
+device provider, VDD callback behavior, or adapter ABI is admitted.

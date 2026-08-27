@@ -14,12 +14,12 @@ $rows = Import-Csv -LiteralPath $inputPath -Delimiter "`t"
 
 $map = @{
     'machine-device-bridge-review' = @('bochs-replacement', 'Bochs device/profile owner')
-    'adapter-softpc-machine-facade' = @('adapter-prerequisite', 'adapter-softpc and adapter-bochs mechanical facade')
+    'adapter-mvdm-host-out/softpc-machine-facade' = @('adapter-prerequisite', 'adapter-mvdm-host-out/softpc and adapter-bochs mechanical facade')
     'adapter-mvdm-host-out/win32-host-capability' = @('adapter-prerequisite', 'adapter-mvdm-host-out/win32 same-shaped host capability group')
-    'adapter-vdm-monitor' = @('adapter-prerequisite', 'adapter-vdm-monitor plus named session/machine prerequisite')
-    'session-and-monitor-thread' = @('adapter-prerequisite', 'session worker and adapter-vdm-monitor group')
-    'opennt-bop-dispatch' = @('adapter-prerequisite', 'adapter-mvdm-host-in/adapter-softpc plus complete owner provider groups')
-    'adapter-vdd-or-debugger' = @('specialist-owner', 'adapter-vdd or adapter-debugger package')
+    'adapter-mvdm-host-out/monitor' = @('adapter-prerequisite', 'adapter-mvdm-host-out/monitor plus named session/machine prerequisite')
+    'session-and-monitor-thread' = @('adapter-prerequisite', 'session worker and adapter-mvdm-host-out/monitor group')
+    'opennt-bop-dispatch' = @('adapter-prerequisite', 'adapter-mvdm-host-in/adapter-mvdm-host-out/softpc plus complete owner provider groups')
+    'adapter-mvdm-host-out/vdd-or-debugger' = @('specialist-owner', 'adapter-mvdm-host-out/vdd or adapter-mvdm-host-out/debugger package')
     'literal-build-unobserved-auxiliary' = @('specialist-owner', 'original build/profile owner')
     'cross-owner-launch-configuration' = @('specialist-owner', 'app/session multi-owner startup composition')
     'cross-owner-startup-composition' = @('specialist-owner', 'app/session plus DEM/COMMAND/XMS/VDD composition')

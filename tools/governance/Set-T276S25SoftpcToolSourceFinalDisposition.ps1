@@ -21,7 +21,7 @@ foreach ($row in $toolSources) {
     $row.final_disposition = 'tool-only'
     $row.final_owner_or_link_boundary = 'original SoftPC debugger/disassembler tool source; separately recoverable only under a future whole-tool admission'
     $row.final_change_class = 'none; byte-exact source mirror retained'
-    $row.named_adapter = 'none; future adapter-debugger only after a complete tool boundary is admitted'
+    $row.named_adapter = 'none; future adapter-mvdm-host-out/debugger only after a complete tool boundary is admitted'
     $row.mapping_implication = 'no main-runtime mapping implication'
     $row.final_evidence = 'T276 S12 original SoftPC debugger/disassembler subpackage classification'
     $row.final_audit_state = 'final-disposition-audited; not implemented'

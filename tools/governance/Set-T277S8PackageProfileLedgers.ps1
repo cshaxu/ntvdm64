@@ -42,7 +42,7 @@ $cycles = @([pscustomobject]@{
     source_evidence = 'softpc.new/host/src/nt_msscs.c calls dos/command/CMDInit; DOS source-form rows retain old SoftPC interface calls'
     classification = 'original source composition cycle; not a static-library link cycle'
     required_resolution = 'co-link the reached DOS/DEM/COMMAND and SoftPC host-control units within one mvdm-host composition unit, or introduce a one-way source-shaped facade; never create cyclic static libraries'
-    machine_rule = 'adapter-softpc -> adapter-bochs is the sole machine route; no CCPU executor is admitted'
+    machine_rule = 'adapter-mvdm-host-out/softpc -> adapter-bochs is the sole machine route; no CCPU executor is admitted'
 })
 Write-Tsv $cycles $cyclesPath @('cycle_id','source_packages','source_evidence','classification','required_resolution','machine_rule')
 

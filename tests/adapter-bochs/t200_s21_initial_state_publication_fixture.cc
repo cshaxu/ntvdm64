@@ -1,5 +1,5 @@
 #include "bochs.h"
-#include "adapter-softpc/mechanical_action.h"
+#include "adapter-mvdm-host-out/softpc/mechanical_action.h"
 #include "adapter-bochs/minimal_machine.h"
 #include "app/initial_state_action.h"
 

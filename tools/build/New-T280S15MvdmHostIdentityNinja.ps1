@@ -12,7 +12,7 @@ $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
 $build = Join-Path $root ("build/M0-T280/{0}-mvdm-host-identity" -f $Architecture)
 New-Item -ItemType Directory -Force -Path $build | Out-Null
-$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/adapter-softpc/include'
+$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/adapter-mvdm-host-out/softpc/include'
 $content = @"
 ninja_required_version = 1.10
 root = $root
@@ -29,8 +29,8 @@ rule link
 build obj/mapping_manager.obj: cc `$root/src/session/mapping_manager.c
 build obj/guest_memory_lease.obj: cc `$root/src/session/guest_memory_lease.c
 build obj/session.obj: cc `$root/src/session/session.c
-build obj/mvdm_host_identity.obj: cc `$root/src/adapter-softpc/mvdm_host_identity.c
-build obj/fixture.obj: cc `$root/tests/adapter-softpc/t280_s15_mvdm_host_identity_fixture.c
+build obj/mvdm_host_identity.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_host_identity.c
+build obj/fixture.obj: cc `$root/tests/adapter-mvdm-host-out/softpc/t280_s15_mvdm_host_identity_fixture.c
 build mvdm_host_identity_fixture.exe: link obj/mapping_manager.obj obj/guest_memory_lease.obj obj/session.obj obj/mvdm_host_identity.obj obj/fixture.obj
 default mvdm_host_identity_fixture.exe
 "@

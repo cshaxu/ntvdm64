@@ -1,6 +1,6 @@
 #include "bochs.h"
-#include "adapter-softpc/cpu_state_abi.h"
-#include "adapter-softpc/port_action.h"
+#include "adapter-mvdm-host-out/softpc/cpu_state_abi.h"
+#include "adapter-mvdm-host-out/softpc/port_action.h"
 #include "adapter-mvdm-host-in/generic_ud_bridge.h"
 #include "app/bop/route.h"
 #include "adapter-bochs/minimal_machine.h"
