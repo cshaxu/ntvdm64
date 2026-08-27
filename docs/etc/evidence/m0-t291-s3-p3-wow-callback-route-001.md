@@ -1,5 +1,10 @@
 # M0 T291 S3 P3 — WOW callback transaction route
 
+> **Superseded for `CallBack16` by [P5](m0-t291-s3-p5-wow-stack-simulation-boundary-001.md).**
+> The neutral per-session operation routing remains valid for
+> `GetNextVDMCommand`-style control requests, including future WOW callers;
+> it is no longer used for synchronous WOW guest callback execution.
+
 ## Question
 
 Can the new one-session WOW callback handoff coexist with the already

@@ -56,5 +56,7 @@ M0 T291 S3 disposition register:
   register a bounded set of unique numeric-operation routes before its older
   fallback dispatch is consulted. The route record owns no MVDM/WOW/COMMAND,
   Bochs, pointer, handle, worker or mapping semantics. It only lets two
-  independently owned source-shaped control contracts coexist in the same
-  session without either becoming a process-global broker.
+  independently owned source-shaped *control-request* contracts coexist in
+  the same session without either becoming a process-global broker. It is the
+  modern carrier for `GetNextVDMCommand`-style callers, not for WOW
+  `CallBack16` synchronous guest re-entry.
