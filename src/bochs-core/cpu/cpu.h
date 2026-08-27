@@ -30,6 +30,16 @@
 typedef int (*bx_cpu_opaque_callback_t)(void *context, const void *event,
   unsigned event_bytes, void *outcome, unsigned outcome_bytes);
 
+/* DIVERGENCE(BX-DPMI-MECH-001): selector-blind copied CPU-state carrier for
+ * one prevalidated same-privilege protected-mode transition. Its validation
+ * and private implementation remain in bochs-core-overlay; it names neither
+ * an MVDM service nor an external owner. */
+struct bx_cpu_overlay_protected_transition {
+  Bit32u eax, ebx, ecx, edx, esi, edi, ebp, esp;
+  Bit32u eip, eflags;
+  Bit16u cs, ds, es, ss, fs, gs;
+};
+
 #include <setjmp.h>
 
 // <TAG-DEFINES-DECODE-START>
@@ -920,6 +930,8 @@ public: // for now...
   int overlay_bind_opaque_callback(bx_cpu_opaque_callback_t callback,
     void *context);
   void overlay_unbind_opaque_callback(void);
+  int overlay_commit_same_cpl_protected_transition(
+    const bx_cpu_overlay_protected_transition *state);
 
   unsigned bx_cpuid;
 #if BX_CPU_LEVEL >= 4

@@ -24,11 +24,13 @@ static int stop_on_ud(void *context, const void *event, unsigned event_bytes,
 static int enter_protected_stop(void)
 {
   static const uint8_t gdt[] = {
-    0x17, 0x00, 0x20, 0x08, 0x00, 0x00, 0, 0,
+    0x27, 0x00, 0x20, 0x08, 0x00, 0x00, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0,
+    0xff, 0xff, 0x00, 0x00, 0x00, 0x9a, 0xcf, 0x00,
+    0xff, 0xff, 0x00, 0x00, 0x00, 0x92, 0xcf, 0x00,
     0xff, 0xff, 0x00, 0x00, 0x00, 0x9a, 0xcf, 0x00,
     0xff, 0xff, 0x00, 0x00, 0x00, 0x92, 0xcf, 0x00
   };
@@ -42,7 +44,8 @@ static int enter_protected_stop(void)
   if (!machine_facade_machine_begin(0x100000u, 0x100000u)) return 10;
   if (!machine_facade_memory_write(0x800u, sizeof(gdt), gdt)) return 11;
   if (!machine_facade_memory_write(0x700u, sizeof(transition), transition)) return 12;
-  if (!machine_facade_memory_write(0x900u, sizeof(stop), stop)) return 13;
+  if (!machine_facade_memory_write(0x900u, sizeof(stop), stop) ||
+      !machine_facade_memory_write(0x910u, sizeof(stop), stop)) return 13;
   if (!machine_facade_bind_opaque_callback(stop_on_ud, 0)) return 14;
   machine_facade_apply_real_mode_entry(0x70u, 0u);
   machine_facade_cpu_loop();
@@ -95,10 +98,35 @@ int main(void)
   candidate.ebx = 0x55667788u;
   if (machine_facade_commit_protected_frame(&before, &candidate) !=
       MACHINE_FACADE_PROTECTED_FRAME_REJECTED_STALE) { result = 7; goto done; }
+  candidate = after;
+  candidate.cs = 0x18u;
+  candidate.ss = candidate.ds = candidate.es = candidate.fs = candidate.gs =
+    0x20u;
+  candidate.eip = 0x910u;
+  candidate.esp = 0x2400u;
+  candidate.ecx = 0xdecafbadU;
+  if (machine_facade_commit_same_cpl_protected_frame(&after, &candidate) !=
+      MACHINE_FACADE_PROTECTED_FRAME_OK) { result = 8; goto done; }
+  machine_facade_cpu_loop();
+  if (machine_facade_copy_protected_frame(&after) !=
+        MACHINE_FACADE_PROTECTED_FRAME_OK || after.cs != 0x18u ||
+      after.ss != 0x20u || after.ds != 0x20u || after.eip != 0x910u ||
+      after.esp != 0x2400u || after.ecx != 0xdecafbadU) {
+    result = 9; goto done;
+  }
+  stable = after;
+  candidate = after;
+  candidate.cs = 0x28u;
+  candidate.eax ^= 0xffffffffu;
+  if (machine_facade_commit_same_cpl_protected_frame(&after, &candidate) !=
+        MACHINE_FACADE_PROTECTED_FRAME_REJECTED_CHANGE ||
+      machine_facade_copy_protected_frame(&after) !=
+        MACHINE_FACADE_PROTECTED_FRAME_OK || memcmp(&stable, &after,
+          sizeof(after)) != 0) { result = 10; goto done; }
   result = 0;
 
 done:
   machine_facade_unbind_opaque_callback();
-  if (!machine_facade_machine_cleanup() && result == 0) result = 8;
+  if (!machine_facade_machine_cleanup() && result == 0) result = 11;
   return result;
 }

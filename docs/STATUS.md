@@ -47,6 +47,13 @@ IRET and stack switching require a prevalidated atomic CS/SS/EIP/ESP/EFLAGS
 transition rather than field-by-field setters. See [P1 evidence](etc/evidence/m0-t289-s5-p1-dpmi-registration-001.md)
 and [ledger](etc/operations/m0-t289-s5-dpmi-stack-interrupt-disposition-ledger.tsv).
 
+**T289 S5 P2:** `adapter-bochs` now has the required selector-blind
+same-privilege protected-frame transaction. Its private Bochs overlay
+prevalidates all target descriptors and EIP before altering architectural
+state; formal x86/x64 fixtures prove both a valid CS/SS/data/GPR/EIP transfer
+and invalid-selector no-mutation rejection. No DPMI source path is enabled by
+P2; P3 owns its source-shaped composition. See [P2 evidence](etc/evidence/m0-t289-s5-p2-protected-transition-001.md).
+
 **T289 S3 closure:** `adapter-bochs` now exposes a selector-blind copied
 protected-frame, copied active-segment inspection and checked protected-span
 contract.  A frame commit is comparison-guarded, only changes GPR/EIP/native

@@ -65,6 +65,10 @@ declarations or minimal call sites.
   `BX-CORE-DIV-006` — SIM-dependent RAM setup is replaced by private checked
   ordinary-RAM allocation/copy bodies; mirror files keep declarations. Files:
   `memory/memory.h`, `memory/misc_mem.cc`.
+- `BX-DPMI-MECH-001` — a selector-blind copied protected-frame declaration
+  allows a private overlay to prevalidate and apply a same-privilege segment
+  transition. No MVDM, BOP or service identity enters the mirror. Files:
+  `cpu/cpu.h`, `../bochs-core-overlay/cpu/protected_transition.cc`.
 
 ## M0 T286 final minimization measure
 

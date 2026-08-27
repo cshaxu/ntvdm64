@@ -186,6 +186,40 @@ extern "C" int machine_facade_commit_protected_frame(
   return MACHINE_FACADE_PROTECTED_FRAME_OK;
 }
 
+extern "C" int machine_facade_commit_same_cpl_protected_frame(
+  const struct machine_facade_protected_frame *expected,
+  const struct machine_facade_protected_frame *candidate)
+{
+  struct machine_facade_protected_frame current;
+  bx_cpu_overlay_protected_transition state;
+  if (!machine_facade_cpu_paused ||
+      !machine_facade_protected_frame_valid(expected) ||
+      !machine_facade_protected_frame_valid(candidate))
+    return MACHINE_FACADE_PROTECTED_FRAME_REJECTED_INPUT;
+  if (machine_facade_copy_protected_frame(&current) !=
+      MACHINE_FACADE_PROTECTED_FRAME_OK)
+    return MACHINE_FACADE_PROTECTED_FRAME_REJECTED_MODE;
+  if (memcmp(&current, expected, sizeof(current)) != 0)
+    return MACHINE_FACADE_PROTECTED_FRAME_REJECTED_STALE;
+  if (candidate->execution_mode != expected->execution_mode ||
+      candidate->cr0 != expected->cr0 ||
+      ((candidate->eflags ^ expected->eflags) &
+        ~MACHINE_FACADE_PROTECTED_EFLAGS_WRITE_MASK) != 0u)
+    return MACHINE_FACADE_PROTECTED_FRAME_REJECTED_CHANGE;
+  memset(&state, 0, sizeof(state));
+  state.eax = candidate->eax; state.ebx = candidate->ebx;
+  state.ecx = candidate->ecx; state.edx = candidate->edx;
+  state.esi = candidate->esi; state.edi = candidate->edi;
+  state.ebp = candidate->ebp; state.esp = candidate->esp;
+  state.eip = candidate->eip; state.eflags = candidate->eflags;
+  state.cs = candidate->cs; state.ds = candidate->ds;
+  state.es = candidate->es; state.ss = candidate->ss;
+  state.fs = candidate->fs; state.gs = candidate->gs;
+  return bx_cpu.overlay_commit_same_cpl_protected_transition(&state) ?
+    MACHINE_FACADE_PROTECTED_FRAME_OK :
+    MACHINE_FACADE_PROTECTED_FRAME_REJECTED_CHANGE;
+}
+
 extern "C" int machine_facade_copy_protected_segment(uint32_t slot,
   struct machine_facade_protected_segment *segment)
 {

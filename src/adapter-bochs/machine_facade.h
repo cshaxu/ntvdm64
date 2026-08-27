@@ -90,6 +90,13 @@ int machine_facade_copy_protected_frame(
 int machine_facade_commit_protected_frame(
     const struct machine_facade_protected_frame *expected,
     const struct machine_facade_protected_frame *candidate);
+/* Selector-blind extension for recovered protected host-control paths. It
+ * permits only a same-privilege, prevalidated segment/frame transaction; the
+ * Bochs-private implementation performs every descriptor check before it
+ * changes a register. */
+int machine_facade_commit_same_cpl_protected_frame(
+    const struct machine_facade_protected_frame *expected,
+    const struct machine_facade_protected_frame *candidate);
 int machine_facade_copy_protected_segment(uint32_t slot,
     struct machine_facade_protected_segment *segment);
 int machine_facade_protected_span_transfer(uint32_t kind,
