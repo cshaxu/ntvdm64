@@ -2,34 +2,34 @@
 
 ## Current Work
 
-**Active: M0 T282 S10 — COMMAND register and bounded-lease binding.** T281 closed
+**Active: M0 T282 S11 — COMMAND OEM support composition.** T281 closed
 in `5aa51088`; the owner has directed Queue-order execution. T282 begins the
 next candidate, original COMMAND local lifecycle, with a full package source
 and interface audit before any `54:xx` route is enabled.
 
 ## Active Packet
 
-### M0 T282 S10 — COMMAND register and bounded-lease binding
+### M0 T282 S11 — COMMAND OEM support composition
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T282 S10`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S9 closed in `a4d137c2`; its ledger proves that the selected source bodies need original `softpc.h` register forms plus only existing bounded leases. |
-| Objective | Recover the reached source-shaped `get*`/`set*` SoftPC register boundary and bind it to selector-blind typed adapter-bochs mechanics. |
-| Non-goals | Generic CPU-frame ABI, raw-pointer `GetVDMAddr`, generic mapper, source-body modification, BOP route, host policy, guest trace, CCPU executor or Bochs-core change. |
-| Reference Baseline | Exact `softpc.h`, `cmdmisc.c`/`cmdenv.c`; T280 bounded lease closures; S8/S9 COMMAND ledgers; adapter-softpc/session mapping rules. |
-| Files And ABI Surface | Original register declarations, adapter-softpc source-shaped facade, adapter-bochs typed mechanics, existing bounded guest-location lease and focused fixture. |
+| Identifier Mode | `M0 T282 S11`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S10 closed in `b5497c79`; its source-shaped register binding is the remaining mechanical prerequisite alongside original OEM support bodies. |
+| Objective | Compose the reached original OEM environment/current-directory helper bodies with their adapter-win32 bindings before changing COMMAND callers. |
+| Non-goals | COMMAND mirror modification, BOP route, new environment algorithm, raw guest pointer, session policy, CCPU executor, broker/WOW support or Bochs change. |
+| Reference Baseline | Exact `oemuni/process.c` and `file.c`; exact COMMAND callers; S8/S9 owner and lease ledgers; adapter-win32 RTL facade. |
+| Files And ABI Surface | Original OEM helper bodies/declarations, adapter-win32 same-shaped bindings, focused x86/x64 composition graph and import ledger. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Original declaration/call audit, typed register semantics review, focused x86/x64 fixture, documentation governance and `git diff --check`. |
-| Expected Markers | Exact reached register widths, low-byte/low-word preservation, carry update, selector-blind adapter path and existing lease-only guest-memory route. |
-| Asset Needs | Pinned original MVDM mirror, S9 ledger/evidence, adapter-softpc/session mapping contracts and adapter-bochs machine facade. |
-| Reporting Requirements | Original caller/declaration, typed mechanical operation, width semantics, test result, mapping instance and any remaining minimal mirror divergence. |
-| Stop Conditions | A generic frame is invented, a raw pointer crosses an adapter ABI, a lease becomes asynchronous, a selector is recognized below adapter-bop, or a new mapper is introduced. |
-| Exit Criteria | Reached register forms have one verified typed binding or an evidence-backed blocker; the later source group can be admitted without guessing a register or guest-memory contract. |
+| Verification | Exact source/import audit, focused x86/x64 source-composition probe, adapter ownership review, documentation governance and `git diff --check`. |
+| Expected Markers | Original helper bodies remain selected, every historical RTL/OEM import has one same-shaped adapter-win32 disposition, and no guest pointer is acquired. |
+| Asset Needs | Pinned original MVDM mirror, S9/S10 evidence, original OEM declarations and current adapter-win32 facade. |
+| Reporting Requirements | Original caller/declaration, compile result, missing symbol, exact adapter owner, failure contract and later-owner limit. |
+| Stop Conditions | A helper is rewritten instead of composed, an unbounded guest pointer is introduced, COMMAND body is changed before support closure, or a generic compatibility root is proposed. |
+| Exit Criteria | Reached original OEM helper set has x86/x64 composition evidence and each unresolved import has an exact adapter-win32 or later-owner disposition. |
 | Original Owner Request | “我都叫你按顺序执行了” and “请参照治理规范和实施规范执行任务”. |
-| Similar-Issue Sweep | All reached COMMAND `get*`/`set*` forms, bounded `GetVDMAddr` replacements, partial-register writes and carry updates. |
+| Similar-Issue Sweep | All reached `GetEnvironmentVariableOem`, `SetEnvironmentVariableOem`, `GetCurrentDirectoryOem`, `SetCurrentDirectoryOem` and their RTL dependencies. |
 
-The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md), [S4 complete original COMMAND static package](etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md), [S5 VDM command-acquisition source audit](etc/operations/m0-t282-s5-vdm-command-acquisition-source-audit-plan-001.md), [S6 local VDM command transport](etc/operations/m0-t282-s6-local-vdm-command-transport-plan-001.md), [S7 original COMMAND initialization composition](etc/operations/m0-t282-s7-original-command-initialization-plan-001.md), [S8 COMMAND owner dependency partition](etc/operations/m0-t282-s8-command-owner-dependency-partition-plan-001.md), [S9 COMMAND environment guest-memory seam audit](etc/operations/m0-t282-s9-command-environment-guest-seam-audit-plan-001.md), and [S10 COMMAND register and bounded-lease binding](etc/operations/m0-t282-s10-command-register-and-lease-binding-plan-001.md).
+The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md), [S4 complete original COMMAND static package](etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md), [S5 VDM command-acquisition source audit](etc/operations/m0-t282-s5-vdm-command-acquisition-source-audit-plan-001.md), [S6 local VDM command transport](etc/operations/m0-t282-s6-local-vdm-command-transport-plan-001.md), [S7 original COMMAND initialization composition](etc/operations/m0-t282-s7-original-command-initialization-plan-001.md), [S8 COMMAND owner dependency partition](etc/operations/m0-t282-s8-command-owner-dependency-partition-plan-001.md), [S9 COMMAND environment guest-memory seam audit](etc/operations/m0-t282-s9-command-environment-guest-seam-audit-plan-001.md), [S10 COMMAND register and bounded-lease binding](etc/operations/m0-t282-s10-command-register-and-lease-binding-plan-001.md), and [S11 COMMAND OEM support composition](etc/operations/m0-t282-s11-command-oem-support-composition-plan-001.md).
 
 **T282 S1 P1:** both static-only architecture probes reached the same original
 `vdmapi.h` declaration boundary. The verified 11-unit/17-service ledgers and
@@ -118,6 +118,12 @@ now bind through source-shaped adapter-softpc functions to selector-blind
 adapter-bochs mechanics. The formal x86/x64 fixture and real adapter-bochs
 source compiles pass; guest memory remains S9's exact bounded lease. See the
 [S10 evidence](etc/evidence/m0-t282-s10-command-register-and-lease-binding-001.md).
+
+**T282 S11 closure:** exact original OEM process/current-directory helper
+bodies compose and execute on x86/x64 through the existing adapter-win32 RTL
+facade and public Kernel32/GDI32 imports. Unreached historical pointer-width
+branches remain separately tracked; no COMMAND mirror body changed. See the
+[S11 evidence](etc/evidence/m0-t282-s11-command-oem-support-composition-001.md).
 
 ### Closed packet reference — M0 T281 S5 — original host-control package disposition
 
