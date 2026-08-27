@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T290 S2 — Redirector same-shaped external-interface closure design.**
+**Active: M0 T290 S3 — Redirector lifecycle, COMMAND-consumer and synchronous named-pipe composition.**
 
 M0 T289 is closed. Its final original-DPMI package boundary is in
 [the closure record](history/m0-t289-closure-20260827.md). T290 now admits
@@ -10,27 +10,29 @@ the next ordered Redirector and brokered COMMAND owner package.
 
 ## Active Packet
 
-### M0 T290 S2 — Redirector same-shaped external-interface closure design
+### M0 T290 S3 — Redirector lifecycle, COMMAND-consumer and synchronous named-pipe composition
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T290 S2`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S1 is closed by the verified original dispatch/path ledger; the persistent owner instruction continues the ordered Queue. |
-| Objective | Freeze every Redirector external interface as direct modern Win32, same-shaped adapter, selector-blind mechanical delivery, original unavailable or later owner before composing an original provider body. |
-| Non-goals | No BOP ingress, provider rewrite, host-handle guest exposure, raw pointer, new mapping manager, machine semantic change, `src.old` input or selected service implementation. |
-| Reference Baseline | [T290 plan](etc/operations/m0-t290-redirector-owner-package-recovery-plan-001.md), [S1 service ledger](etc/operations/m0-t290-s1-redirector-service-abi-ledger.tsv), Wave 7 plan, source policy and T289 closure. |
-| Files And ABI Surface | `mvdm-host/vdmredir`, reached `dos/{dem,command}` broker callers, `mvdm-platform-abi` Redirector declarations, `adapter-mvdm-host-out/{redir,win32,softpc}`, session and adapter-bochs. |
+| Identifier Mode | `M0 T290 S3`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S2 is closed by a source-first external-interface ledger; its S3 selected group is now bounded for implementation. |
+| Objective | Compose original `VrInitialize`/`VrUninitialize`, `VrTerminateDosProcess`, synchronous named-pipe forms and original COMMAND consumer paths through the declared session, Win32 and SoftPC facades. |
+| Non-goals | No BOP ingress, async pipe, mailslot, NetAPI, NetBIOS, DLC, VDD hook success, physical IRQ delivery, provider rewrite, raw pointer, host-handle exposure, new mapping manager, machine semantic change or `src.old` input. |
+| Reference Baseline | [T290 plan](etc/operations/m0-t290-redirector-owner-package-recovery-plan-001.md), [S1 service ledger](etc/operations/m0-t290-s1-redirector-service-abi-ledger.tsv), [S2 interface ledger](etc/operations/m0-t290-s2-redirector-external-interface-recovery-ledger.tsv) and source policy. |
+| Files And ABI Surface | Original `mvdm-host/vdmredir/{vrinit,vrmisc,vrnmpipe,vrdisp}.c`, reached `dos/command/cmdredir.c`, `adapter-mvdm-host-out/{redir,win32,softpc}`, session, fixtures and formal Ninja inputs. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Original import/call scan, existing adapter surface audit, four-rung recovery ledger, forbidden-direct-dependency scan, documentation governance and `git diff --check`. |
-| Expected Markers | Every external family has one smallest legal boundary, retained original signature/form where usable, and no provider-owned surrogate session or machine semantics. |
-| Asset Needs | Canonical source roots, S1 ledgers, existing adapter/session declarations and public Win32 availability. |
-| Reporting Requirements | Explain which original body can compose unchanged, which calls need a same-shaped adapter and each exact unavailable/private dependency. |
-| Stop Conditions | A semantic rewrite, direct Bochs call, raw pointer path, second broker, additional mapping manager or selector ingress is proposed. |
-| Exit Criteria | Every S1 owner group has a source-first external interface result and S3/S4/S5 have bounded input interfaces without an ownerless dependency. |
+| Verification | Original source bodies compile/execute in focused x86/x64 fixtures; handle/lease boundaries, original error ordering, COMMAND broker non-duplication and forbidden-dependency scans all pass. |
+| Expected Markers | Original lifecycle/named-pipe functions remain source bodies; every native handle is session-owned opaque identity; source-defined unavailable VDD/IRQ results are preserved. |
+| Asset Needs | Existing session mappings/lease API, outgoing adapter declarations, original vdmredir declarations and public Win32 named-pipe APIs. |
+| Reporting Requirements | State each original body compiled, each minimal binding/difference, x86/x64 proof and every deferred branch. |
+| Stop Conditions | A semantic rewrite, direct Bochs call, raw pointer path, second broker, additional mapping manager, selector ingress or async/NetAPI/DLC scope expansion is proposed. |
+| Exit Criteria | The selected original lifecycle/named-pipe/COMMAND group has x86/x64 local evidence, source-defined failure results for VDD/IRQ branches, and no duplicate COMMAND broker. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | Win32/NTDLL calls, SoftPC/CCPU/SAS calls, guest pointer aliases, host handles, asynchronous callback/interrupt forms, NetAPI/NetBIOS/DLC imports, COMMAND broker calls and direct Bochs references. |
+| Similar-Issue Sweep | `00/01/02..08/0F/20/21`, `VrDispatch`, `cmdredir.c`, session child records, named-pipe token lifecycle, Win32 errors, lease teardown, VDD user hook and physical IRQ calls. |
 
 **T290 S1 closure:** [the source/ABI audit](etc/evidence/m0-t290-s1-redirector-source-abi-audit-001.md) proves all fifty original `57:00..31` dispatch entries and all twenty-five selected package paths.  The source mirror is exact in both canonical OpenNT editions; lifecycle/named-pipe, mailslot/async, and NetAPI/NetBIOS/DLC groups are the only admissible next owner groups.  No Redirector selector is enabled.
+
+**T290 S2 closure:** [the interface recovery design](etc/evidence/m0-t290-s2-redirector-interface-closure-design-001.md) records sixteen source-first boundary outcomes.  Public pipes/mailslots/selected NetAPI calls use same-shaped outgoing facades; scoped guest copies and opaque identities stay session-owned; private DLC/LLC and VDD/monitor paths retain explicit original unavailable outcomes until their named owners are admitted.  No Redirector selector is enabled.
 
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
