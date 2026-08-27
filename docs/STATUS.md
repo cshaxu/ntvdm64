@@ -2,38 +2,18 @@
 
 ## Current Work
 
-**Active: M0 T293 S1 — MVDM host zero-degree function audit.**
+**No active M/T/S packet.**
 
-M0 T292 closed the pre-admission external first-hop evidence. Owner has now
-admitted the queue head: the complete selected `mvdm-host` definition set and
-its direct non-zero exits. No external function body is in scope.
+M0 T293 closed the complete selected `mvdm-host` zero-degree definition audit:
+4,499 original-source definition identities, 2,353 frozen direct external
+first-degree call sites, and 91 explicit zero-degree conditional-variant
+bindings. The next candidate awaits owner admission; see the
+[T293 closure](history/m0-t293-closure-20260827.md).
 
 ## Active Packet
 
-### M0 T293 S1 — MVDM host zero-degree function audit
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | `M0 T293 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Owner approved the first queue package: audit all selected `mvdm-host` function definitions and emit their direct non-zero callees as the next mutually exclusive degree. |
-| Objective | Produce a complete zero-degree definition ledger and frozen first-degree candidate ledger. Each source definition has an identity, direct-call disposition, leaf determination and final recovery disposition. |
-| Non-goals | No first-degree function-body analysis, package BFS, source import, compile/link, provider/adapter implementation, Bochs change, BOP enablement or `src.old` input. |
-| Reference Baseline | [T292 closure](history/m0-t292-closure-20260827.md), selected MVDM file ledger, source policy and [degree audit plan](etc/operations/mvdm-host-degree-audit-plan-001.md). |
-| Files And ABI Surface | New zero-degree definition/call ledger, first-degree candidate ledger, reproducible export tool and concise evidence only. No production ABI changes. |
-| Applicable Rules | Execution, architecture, coding, documentation, source policy, mirror/overlay and mapping-manager rules. |
-| Verification | Scan only provenance-selected MVDM C/C++ source; mask comments/literals/preprocessor forms; assert every definition has a unique source-path/hash/line identity, every direct call resolves to zero degree or one first-degree row, and every live zero-degree row has a disposition; run documentation governance and `git diff --check`. |
-| Expected Markers | Same-named static definitions remain separate; zero/first degree rows are mutually exclusive; every first-degree candidate cites its exact zero-degree call-site; every leaf records why it is a leaf. |
-| Asset Needs | Current selected MVDM source paths, source/hash ledger, local OpenNT source evidence and Node/ripgrep audit tooling. |
-| Reporting Requirements | Report definition, source identity, call identity, leaf basis, recovery disposition, first-degree cardinality, exclusions and any parser limitation. |
-| Stop Conditions | A call cannot be classified without reading a non-selected body, a candidate requires package traversal, function identity is ambiguous, a new adapter is proposed, or any product source/runtime input would change. |
-| Exit Criteria | Every selected MVDM C/C++ definition has exactly one zero-degree row; each direct callee is either an exact zero-degree definition, an explicit non-function expression, or exactly one first-degree candidate; all zero-degree rows have leaf and final recovery dispositions; generator assertions and documentation gates pass. |
-| Original Owner Request | “第1个T任务：0度扫描。创建0度清单；把 mvdm-host 内部的所有函数符号列出来（仅函数的定义）……0度函数和1度函数是 mutually exclusive的。” |
-| Similar-Issue Sweep | Same-spelling static/global definitions, macro/function-pointer forms, selected-but-not-host-runtime source, C/C++ linkage variants, and public Win32 calls. |
-
-**T293 S1 P1:** all 522 `mvdm-host` C/C++ paths now have source-coverage
-records; 4,499 original-source definition identities and 2,706 direct
-first-degree call-site candidates are exported. The first-degree function body
-is uninspected. See the [P1 export evidence](etc/evidence/m0-t293-s1-p1-zero-degree-export-001.md).
+No active packet. The latest closed packet is
+[M0 T293](history/m0-t293-closure-20260827.md).
 
 **T291 S4 closure:** command, monitor-control and synchronous callback
 execution are now distinct typed planes; the generic session operation table

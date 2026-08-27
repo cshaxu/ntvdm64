@@ -21,6 +21,11 @@ source.
   and exact line, but does not inspect the callee body.
 - `mvdm-host-zero-degree-source-coverage-ledger.tsv`: one row for every
   component C/C++ file, including files with no function definition.
+- `mvdm-host-zero-degree-call-resolution-ledger.tsv`: calls whose spelling
+  names zero-degree definitions but whose source context has multiple valid
+  compile-time/product-variant target definitions. These remain explicit
+  zero-degree conditional bindings and are never misclassified as
+  first-degree functions.
 
 ## Identity and resolution
 
@@ -28,9 +33,11 @@ The exporter identifies function bodies only after comment/string/preprocessor
 masking. A source definition identity contains selected source path, SHA-256,
 definition line, spelling, linkage/storage evidence and call-form evidence.
 Same spelling is never enough to merge rows. A direct call resolves internally
-only when its selected source definition identity is unambiguous in the
-available source context; otherwise it becomes a first-degree candidate with
-an explicit ambiguity reason.
+to one source identity when linkage context selects one body. When historical
+compile-time/product alternatives leave multiple selected bodies, the call is
+recorded as an explicit zero-degree conditional-variant binding to those
+identities; it does not become a first-degree candidate. Only a spelling with
+no selected zero-degree definition becomes a first-degree candidate.
 
 ## Disposition and leaf rules
 

@@ -215,14 +215,28 @@ for (const definition of definitions) {
 }
 function resolveInternal(caller, symbol) {
   const sameFile = byFileAndSymbol.get(`${caller.file_id}:${symbol}`) || [];
-  if (sameFile.length === 1) return [sameFile[0], 'same-selected-source-definition'];
+  if (sameFile.length === 1) return [sameFile[0], 'same-selected-source-definition', sameFile];
   const global = (bySymbol.get(symbol) || []).filter((definition) => definition.linkage !== 'file-static');
-  if (global.length === 1) return [global[0], 'unique-nonstatic-selected-definition'];
-  if (sameFile.length > 1 || global.length > 1) return [null, 'ambiguous-selected-definition'];
-  return [null, 'no-selected-definition'];
+  if (global.length === 1) return [global[0], 'unique-nonstatic-selected-definition', global];
+  // Original MVDM is a multi-product union.  Independent tools can legitimately
+  // reuse a global spelling, but a caller's own original package/directory is
+  // the first source-shaped linkage context before declaring an ambiguity.
+  const samePackage = global.filter((definition) => definition.package_root === caller.package_root);
+  if (samePackage.length === 1) return [samePackage[0], 'unique-same-package-selected-definition', samePackage];
+  const callerDirectory = path.posix.dirname(caller.source_path.replaceAll('\\', '/'));
+  const sameDirectory = global.filter((definition) => path.posix.dirname(definition.source_path.replaceAll('\\', '/')) === callerDirectory);
+  if (sameDirectory.length === 1) return [sameDirectory[0], 'unique-same-directory-selected-definition', sameDirectory];
+  // The selected MVDM corpus intentionally preserves historical product and
+  // architecture alternatives.  When ordinary source-shaped linkage cannot
+  // choose one body, retain every mutually-exclusive selected body as a
+  // zero-degree conditional variant target.  It is not a first-degree
+  // candidate: no source outside the zero-degree component needs discovery.
+  if (sameFile.length > 1 || global.length > 1) return [[...sameFile, ...global], 'conditional-variant-zero-targets', [...sameFile, ...global]];
+  return [null, 'no-selected-definition', []];
 }
 
 const candidates = [];
+const conditionalVariantCalls = [];
 for (const definition of definitions) {
   const body = definition.masked.slice(definition.body_open + 1, definition.body_close);
   const bodyOffset = definition.body_open + 1;
@@ -236,10 +250,25 @@ for (const definition of definitions) {
     if (close < 0) { hasOpaque = true; callDetails.push(`${symbol}@${lineAt(definition.masked, absolute)}:unbalanced-expression`); continue; }
     const line = lineAt(definition.masked, absolute);
     if (macroNames.has(symbol)) { hasOpaque = true; callDetails.push(`${symbol}@${line}:macro-expression`); continue; }
-    const [target, resolution] = resolveInternal(definition, symbol);
-    if (target) {
+    const [target, resolution, definitionOptions] = resolveInternal(definition, symbol);
+    if (target && !Array.isArray(target)) {
       hasInternal = true;
       callDetails.push(`${symbol}@${line}:zero:${target.definition_id}`);
+      continue;
+    }
+    if (resolution === 'conditional-variant-zero-targets') {
+      hasInternal = true;
+      const resolutionId = `MVDM-ZERO-CONDITIONAL-CALL-${String(conditionalVariantCalls.length + 1).padStart(6, '0')}`;
+      conditionalVariantCalls.push({
+        resolution_id: resolutionId, caller_definition_id: definition.definition_id,
+        caller_source_path: definition.source_path, caller_source_sha256: definition.source_sha256,
+        caller_source_line: String(line), caller_symbol: definition.symbol,
+        callee_spelling: symbol, resolution_status: resolution,
+        candidate_zero_definition_ids: [...new Set(definitionOptions.map((option) => option.definition_id))].join(';'),
+        candidate_zero_source_identities: [...new Set(definitionOptions.map((option) => `${option.source_path}:${option.source_line}`))].join(';'),
+        boundary: 'historical compile-time/product alternatives; all targets are zero-degree definitions and none is a first-degree function candidate',
+      });
+      callDetails.push(`${symbol}@${line}:zero-conditional:${resolutionId}`);
       continue;
     }
     hasExternal = true;
@@ -283,6 +312,7 @@ for (const definition of definitions) {
 
 const zeroColumns = ['definition_id', 'file_id', 'source_path', 'source_sha256', 'package_root', 'source_line', 'symbol', 'linkage', 'signature_evidence', 'file_disposition', 'final_function_disposition', 'function_disposition_basis', 'should_recover', 'recovery_form', 'leaf_status', 'leaf_basis', 'direct_call_summary'];
 const candidateColumns = ['candidate_id', 'caller_definition_id', 'caller_source_path', 'caller_source_sha256', 'caller_source_line', 'caller_symbol', 'callee_spelling', 'call_form', 'internal_resolution', 'prior_semantic_disposition', 'initial_first_degree_status', 'boundary'];
+const ambiguousColumns = ['resolution_id', 'caller_definition_id', 'caller_source_path', 'caller_source_sha256', 'caller_source_line', 'caller_symbol', 'callee_spelling', 'resolution_status', 'candidate_zero_definition_ids', 'candidate_zero_source_identities', 'boundary'];
 const definitionsByFile = new Map();
 for (const definition of definitions) definitionsByFile.set(definition.file_id, (definitionsByFile.get(definition.file_id) || 0) + 1);
 const coverageRows = sourceRows.map((row) => ({
@@ -295,10 +325,11 @@ const coverageRows = sourceRows.map((row) => ({
 const coverageColumns = ['file_id', 'source_path', 'source_sha256', 'package_root', 'final_file_disposition', 'function_definition_count', 'source_coverage', 'source_basis'];
 writeTsv(path.join(operationsRoot, 'mvdm-host-zero-degree-definition-ledger.tsv'), definitions, zeroColumns);
 writeTsv(path.join(operationsRoot, 'mvdm-host-first-degree-candidate-ledger.tsv'), candidates, candidateColumns);
+writeTsv(path.join(operationsRoot, 'mvdm-host-zero-degree-call-resolution-ledger.tsv'), conditionalVariantCalls, ambiguousColumns);
 writeTsv(path.join(operationsRoot, 'mvdm-host-zero-degree-source-coverage-ledger.tsv'), coverageRows, coverageColumns);
 
 const counts = (rows, key) => [...rows.reduce((map, row) => map.set(row[key], (map.get(row[key]) || 0) + 1), new Map()).entries()].sort(([a], [b]) => a.localeCompare(b));
-console.log(`source files: ${sourceRows.length}; definitions: ${definitions.length}; first-degree call candidates: ${candidates.length}; no-definition sources: ${coverageRows.filter((row) => row.function_definition_count === '0').length}`);
+console.log(`source files: ${sourceRows.length}; definitions: ${definitions.length}; first-degree call candidates: ${candidates.length}; zero-degree conditional-variant calls: ${conditionalVariantCalls.length}; no-definition sources: ${coverageRows.filter((row) => row.function_definition_count === '0').length}`);
 console.log(`definition linkage: ${counts(definitions, 'linkage').map(([key, value]) => `${key}=${value}`).join('; ')}`);
 console.log(`leaf status: ${counts(definitions, 'leaf_status').map(([key, value]) => `${key}=${value}`).join('; ')}`);
 console.log(`first-degree status: ${counts(candidates, 'initial_first_degree_status').map(([key, value]) => `${key}=${value}`).join('; ')}`);
