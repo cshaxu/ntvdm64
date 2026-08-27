@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2755 |
+| Documentation records | 2756 |
 | --- | --- |
-| Generated UTC | 2026-08-27T09:06:49Z |
+| Generated UTC | 2026-08-27T09:14:21Z |
 
 ## Entries
 
@@ -360,7 +360,8 @@ content-divergent entries.
 | etc/evidence/m0-t287-s3-xms-a20-lease-binding-001.md | indexed supporting material | cf8c38abfbd5db366cb529a9dc9e9a7cf8e7ba806fd4226b3b2cef87a8a741ea |
 | etc/evidence/m0-t287-s4-xms-block-binding-001.md | indexed supporting material | 71031faf77f4a8ab872619301a50d1d64f8c14daf0f2959dfbacbbaa194863c7 |
 | etc/evidence/m0-t287-s5-xms-umb-ivt-binding-001.md | indexed supporting material | f15b77486f3faf450ca2a2ad7f859b14d2c1498415aa18b18ef787c0566231f6 |
-| etc/evidence/m0-t287-s6-xms-dispatch-matrix-001.md | indexed supporting material | 98f5441c0f450a98965e4e5c7eef5e12e55decf8e1474871c1e3e814578d7fad |
+| etc/evidence/m0-t287-s6-xms-dispatch-matrix-001.md | indexed supporting material | bf80e6e0ab4e635b53a1b19e2fb219c50487c335e07ec43925af206184b16c7c |
+| etc/evidence/m0-t287-s7-xms-owner-package-closure-001.md | indexed supporting material | a8abd1e12ed34974bb49a232d16fbd005eadaa603a2cf1720147dc1e826d41a1 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -903,7 +904,7 @@ content-divergent entries.
 | etc/operations/m0-t285-wave2-host-control-dem-recovery-plan-001.md | indexed supporting material | 8733245ea7db84a2a60fd6a79235613ce3a0f70d4f1ddecbbe07d9a566c91f02 |
 | etc/operations/m0-t286-s1-bochs-core-divergence-disposition-ledger-001.md | indexed supporting material | d3b41aeeabbfb73a76d461c02f414880b6ee4393dc206d453c4747426fb8b252 |
 | etc/operations/m0-t287-s1-xms-file-rebaseline-ledger.tsv | indexed supporting material | 68766c930f7d81f6a5485908fb94f5fa2dcd4a4c189a2519d368cde4cdd65669 |
-| etc/operations/m0-t287-s1-xms-file-rebaseline-ledger-002.tsv | indexed supporting material | 0fbfa306644351c7562acf9447b337d9469c3a51f2ef4073639666a20935d5a6 |
+| etc/operations/m0-t287-s1-xms-file-rebaseline-ledger-002.tsv | indexed supporting material | 05ef3df3ac8586b530aa6ebccdd0c9629cab050def8987b39257eb89d96fe54f |
 | etc/operations/m0-t287-s1-xms-interface-rebaseline-ledger.tsv | indexed supporting material | f94a5839afe8cf1b84c654b02293bb44fe76bc8a4a8c9a34ca4bc24bb85242e7 |
 | etc/operations/m0-t287-xms-owner-package-recovery-plan-001.md | indexed supporting material | f5dcd67378bac1ac5502a57ba31cf7d010420ea7d4fdcdb59f3f84ed73995e0c |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
@@ -2643,7 +2644,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | fbfa3a202453ef9a31c0549310ff6ce96d822ac85e2cbbfb6a9c6c032e516f0c |
-| QUEUE.md | principal control document | a7d7bba84f65b07243c44b19be395542da94318661f4bca515adda07feb15563 |
+| QUEUE.md | principal control document | 1070178564e9b98e5ab535d58bc377ddc30f2681d9f920e73ab2e33fbd0dc7bc |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -2769,7 +2770,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 0da0694597649fe424be1fe32e7cc6add12b86151a151ac25117196f0c8ccd34 |
+| STATUS.md | principal control document | cdbf4abbc9e62047d3612de7da345594a09bff6ab3281aeb51001e9c891535d5 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

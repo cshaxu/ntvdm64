@@ -15,7 +15,7 @@ appropriate tracker before it can enter an admitted S.
 | Order | Candidate T package | Boundary | Admission evidence |
 | --- | --- | --- | --- |
 | 1 | Original XMS owner package | Recover `xms.486` through the source-shaped A20/RAM/IVT/UMB mechanical seam. | [Wave 4](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-4-xms). |
-| 2 | Original VDM monitor substrate | Recover `sim16`, `sim32`, `v86` and `ieuvddex` through the complete same-shaped monitor adapter. | [Wave 5](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-5-vdm-monitor-substrate). |
+| 2 | Original VDM monitor and keyboard/IVT substrate | Recover `sim16`, `sim32`, `v86`, `ieuvddex`, and the source-proven `UpdateKbdInt15` keyboard/IVT seam through complete same-shaped monitor/firmware adapters. | [Wave 5](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-5-vdm-monitor-substrate). |
 | 3 | Original DPMI owner packages | Recover `dpmi` and `dpmi32` after their complete protected-machine dependency profile closes. | [Wave 6](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-6-dpmi). |
 | 4 | Original Redirector and brokered COMMAND extensions | Recover `vdmredir` and only its source-proven brokered COMMAND dependencies. | [Wave 7](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-7-redirector-and-brokered-command-extensions). |
 | 5 | Original WOW owner packages | Recover `wow32` and `fax` after their monitor, COMMAND, Redirector and adapter-wow rows close. | [Wave 8](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-8-wow). |

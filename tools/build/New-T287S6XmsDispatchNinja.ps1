@@ -33,7 +33,7 @@ $cSources = @(
     'src/adapter-mvdm-host-out/softpc/mvdm_xms_memory.c',
     'src/mvdm-host-overlay/xms.486/xms_a20_state.c',
     'src/mvdm-host-overlay/xms.486/xms_block_move.c',
-    'src/mvdm-host/xms.486/xmsa20.c', 'src/mvdm-host/xms.486/xmsblock.c',
+    'src/mvdm-host/xms.486/xms.c', 'src/mvdm-host/xms.486/xmsa20.c', 'src/mvdm-host/xms.486/xmsblock.c',
     'src/mvdm-host/xms.486/xmsumb.c', 'src/mvdm-host/xms.486/xmsmisc.c',
     'src/mvdm-host/xms.486/xmsdisp.c'
 )

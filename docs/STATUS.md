@@ -2,7 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T287 S7 — XMS owner-package closure audit.**
+**No active M/T/S packet.** M0 T287 is closed; the next queue candidate
+awaits admission.
 
 T286 is closed. Its final Bochs-core minimization evidence is in
 [the closure record](history/m0-t286-closure-20260827.md). T287 admits the
@@ -10,7 +11,7 @@ queue-head original XMS owner package using a complete source-first plan.
 
 ## Active Packet
 
-### M0 T287 S7 — XMS owner-package closure audit
+### M0 T287 S7 — closed: XMS owner-package closure audit
 
 | Field | Record |
 | --- | --- |
@@ -30,14 +31,22 @@ queue-head original XMS owner package using a complete source-first plan.
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
 | Similar-Issue Sweep | Every dispatcher table entry, result register, bounded lease, allocator state, A20 result, UMB/IVT transfer, and source-defined unavailable branch. |
 
-**T287 S1 closure:** all 15 physical `mvdm-host/xms.486` paths hash-match
-both canonical OpenNT roots (0 mismatches).  The final per-file SHA-256
-ledger is [S1 file ledger revision 002](etc/operations/m0-t287-s1-xms-file-rebaseline-ledger-002.tsv);
-the interface ledger names all nine external contract groups and their sole
-owners.  The direct-address `i386/xmsmem86.c` body is retained exact but is
-not a product input on either architecture; it has a named same-shaped
-successor in `adapter-mvdm-host-out/softpc`.  The remaining `bx-vdm` wording
-in the historical tracker is evidence only, never a live input.
+**T287 S7/T287 closure:** the exact XMS source package is code-complete and
+locally regression-closed. The corrected source audit records eleven exact
+files and four registered minimal same-shaped modifications; it confirms the
+sole session mapping-manager implementation, the sole same-shaped SoftPC
+facade, and the explicit non-runtime direct-pointer backends. Successful UMB
+and production keyboard/IVT work transfer to the renamed next queue candidate,
+not to an invented XMS path. See [S7 closure evidence](etc/evidence/m0-t287-s7-xms-owner-package-closure-001.md).
+
+**T287 S1 baseline note (superseded by S7):** the original source selection is
+identical in both canonical roots. The final per-file SHA-256 ledger initially
+overstated the current mirror identity; S7 corrects it to eleven exact files
+and four registered minimal same-shaped modifications. The direct-address
+`i386/xmsmem86.c` body remains exact but is not a product input on either
+architecture; it has a named same-shaped successor in
+`adapter-mvdm-host-out/softpc`. The remaining `bx-vdm` wording in the
+historical tracker is evidence only, never a live input.
 
 **T287 S2 closure:** the formal MSVC `/MT` Ninja graph rebuilt the six exact
 common XMS units as `original-xms-common.lib` on x86 and x64.  Archive members
@@ -67,11 +76,11 @@ Successful UMB ownership transfers to the queued monitor substrate, and the
 real keyboard IVT state algorithm transfers to its existing firmware plan;
 see [S5 evidence](etc/evidence/m0-t287-s5-xms-umb-ivt-binding-001.md).
 
-**T287 S6 closure:** exact original `xmsdisp.c` now invokes every `52:00..0B`
-table entry in a single local family matrix on formal x86 and x64 `/MT` Ninja
-graphs. A20, move, allocation, free, reallocation, page/free-memory, UMB and
-INT15 paths retain their original bodies and their existing source-proven
-unavailable or transferred outcomes. No BOP ingress is enabled; see
+**T287 S6 closure:** exact original `xms.c:XMSInit` and `xmsdisp.c` now invoke
+every `52:00..0B` table entry in a single local family matrix on formal x86 and
+x64 `/MT` Ninja graphs. A20, move, allocation, free, reallocation,
+page/free-memory, UMB and INT15 paths retain their original bodies and their
+existing source-proven unavailable or transferred outcomes. No BOP ingress is enabled; see
 [S6 evidence](etc/evidence/m0-t287-s6-xms-dispatch-matrix-001.md).
 
 **T286 S1 closure:** the complete [divergence disposition ledger](etc/operations/m0-t286-s1-bochs-core-divergence-disposition-ledger-001.md) measures 29 differing upstream-relative mirror files (431 additions / 353 deletions) and 15 private overlay bodies (1,164 lines). It classifies all groups as build bindings, required private CPU/memory/device hooks, optional diagnostics, or B2/D4 external-composition candidates. No source behavior changed.

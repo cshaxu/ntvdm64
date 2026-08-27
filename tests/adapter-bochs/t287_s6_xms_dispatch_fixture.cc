@@ -6,14 +6,14 @@ extern "C" {
 
 typedef int32_t (*commit_routine)(uint32_t, uint32_t);
 typedef void (*move_routine)(uint32_t, uint32_t, uint32_t);
-void *SAInitialize(uint32_t, uint32_t, commit_routine, commit_routine, move_routine);
 int32_t xmsCommitBlock(uint32_t, uint32_t);
 int32_t xmsDecommitBlock(uint32_t, uint32_t);
 void xmsMoveMemory(uint32_t, uint32_t, uint32_t);
+int XMSInit(int, char **);
 int XMSDispatch(unsigned long);
 int ReserveUMB(unsigned short, void **, unsigned long *);
-void *ExtMemSA = 0;
-unsigned long xmsMemorySize = 640u;
+extern void *ExtMemSA;
+extern unsigned long xmsMemorySize;
 unsigned long __cdecl DbgPrint(char *, ...) { return 0u; }
 }
 
@@ -60,9 +60,8 @@ int main()
     session_initialize(&instance, 3u);
     if (!session_activate(&instance) || !session_thread_bind(&instance) ||
         !session_guest_memory_begin(&instance, 0, machine_read, machine_write)) return 2;
-    ExtMemSA = SAInitialize(0x110000u, 0x100000u, xmsCommitBlock,
-        xmsDecommitBlock, xmsMoveMemory);
-    if (ExtMemSA == 0) return 3;
+    xmsMemorySize = 640u;
+    if (!XMSInit(0, 0) || ExtMemSA == 0) return 3;
 
     if (!machine_facade_set_ax16(2u) || !machine_facade_set_bx16(0xff00u) ||
         !XMSDispatch(0u) || !ax(1u)) return 4;

@@ -3,13 +3,15 @@
 ## Result
 
 S6 closes the local dispatcher regression rung. The exact original
-`mvdm-host/xms.486/xmsdisp.c` dispatch table is compiled and invoked on both
-x86 and x64. All twelve source table entries run through the already-admitted
-same-shaped bindings; none is replaced with a selector-specific provider and
-no external `52:xx` BOP ingress is enabled.
+`mvdm-host/xms.486/xms.c` initialization and `xmsdisp.c` dispatch table are
+compiled and invoked on both x86 and x64. All twelve source table entries run
+through the already-admitted same-shaped bindings; none is replaced with a
+selector-specific provider and no external `52:xx` BOP ingress is enabled.
 
 ## Source table and disposition
 
+- `XMSInit`: retains its i386 source order, including its empty `ReserveUMB`
+  call and `SAInitialize` range selection.
 - `0`: `xmsA20` retains source AX/BL results over the typed A20 operation.
 - `1`: `xmsMoveBlock` retains the original stack descriptor body and uses the
   S4 bounded-lease move binding.
