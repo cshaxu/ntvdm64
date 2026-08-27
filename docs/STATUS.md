@@ -2,34 +2,34 @@
 
 ## Current Work
 
-**Active: M0 T282 S6 — local VDM command transport.** T281 closed
+**Active: M0 T282 S7 — original COMMAND initialization composition.** T281 closed
 in `5aa51088`; the owner has directed Queue-order execution. T282 begins the
 next candidate, original COMMAND local lifecycle, with a full package source
 and interface audit before any `54:xx` route is enabled.
 
 ## Active Packet
 
-### M0 T282 S6 — local VDM command transport
+### M0 T282 S7 — original COMMAND initialization composition
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T282 S6`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S5 closed in `2712f0e2`; its source ledger admits only the local one-session copied `GetNextVDMCommand` transport. |
-| Objective | Implement and test the source-shaped local command request/response binding through `app`, `session`, and `adapter-vdm-monitor`. |
-| Non-goals | BaseSrv/CSR, cross-process broker, WOW, PIF, BOP routing, guest trace, Bochs change, or a generic adapter. |
-| Reference Baseline | Original `dos/command/sources`; T231 COMMAND ledger; T236 closures; T276/T277 owner and cycle ledgers; T281 closure and host-control disposition. |
-| Files And ABI Surface | `VDMINFO`, adapter-vdm-monitor same-shaped entry, app producer record, session bound control dispatch, focused fixture and Ninja graph. |
+| Identifier Mode | `M0 T282 S7`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S6 closed in `e112c919`; direct source identity makes the original `cmd.c` + `cmddata.c` initialization pair the next bounded COMMAND owner slice. |
+| Objective | Compose and test exact original `CMDInit` and the reached original COMMAND global state on x86/x64. |
+| Non-goals | BOP routing, guest trace, command dispatch, command acquisition, process launch, console, PIF, broker, WOW, SoftPC executor, Bochs change, or a generic adapter. |
+| Reference Baseline | Original `dos/command/cmd.c` and `cmddata.c`; T282 S1 full static archive; T282 S6 closure; existing public Win32 and declaration carriers. |
+| Files And ABI Surface | Original mirror `cmd.c`, `cmddata.c`, their original global/`CMDInit` ABI, focused fixture and Ninja graph. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Exact source hashes, selector-disabled x86/x64 static probes, source identity review, documentation governance and `git diff --check`. |
-| Expected Markers | Bounded copied payload, size-failure, normal response, re-entry count and no-command outcomes on x86/x64. |
-| Asset Needs | Pinned original MVDM mirror, prior COMMAND ledgers, existing declaration carriers, MSVC x86/x64 and Ninja. |
-| Reporting Requirements | Original source/service, interface family, owner/binding, architecture result, selected recovery rung, unsupported branch and transfer owner. |
-| Stop Conditions | Any behavior body is selected, an imported carrier differs from its pinned source, an unnamed adapter is required, or a route is enabled. |
-| Exit Criteria | Focused x86/x64 fixture proves the admitted local contract and rejects unsupported historical modes without a route. |
+| Verification | Exact source hashes, x86/x64 `/MT` direct-source fixture, source identity review, documentation governance and `git diff --check`. |
+| Expected Markers | Original global defaults and `CMDInit` retain the source-defined home-drive update on x86/x64. |
+| Asset Needs | Pinned original MVDM mirror, existing declaration carriers, MSVC x86/x64 and Ninja. |
+| Reporting Requirements | Original sources, direct-composition proof, architecture result, recovery rung and all deliberately uncalled owner paths. |
+| Stop Conditions | Either mirror differs from its pinned source, a non-public/private dependency appears, an unnamed adapter is required, or a route is enabled. |
+| Exit Criteria | Focused x86/x64 fixture proves exact direct source composition without a BOP, guest or machine route. |
 | Original Owner Request | “我都叫你按顺序执行了” and “请参照治理规范和实施规范执行任务”. |
-| Similar-Issue Sweep | Process/re-entry/standard streams, environment/configuration, PIF, command source, console/key layout, BOP dispatch, Redirector/broker, WOW/VDD and all historical machine-facing calls. |
+| Similar-Issue Sweep | All COMMAND global initializers, initialization, configuration, acquisition, console/key layout, BOP dispatch, Redirector/broker, WOW/VDD and historical machine-facing calls. |
 
-The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md), [S4 complete original COMMAND static package](etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md), [S5 VDM command-acquisition source audit](etc/operations/m0-t282-s5-vdm-command-acquisition-source-audit-plan-001.md), and [S6 local VDM command transport](etc/operations/m0-t282-s6-local-vdm-command-transport-plan-001.md).
+The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md), [S4 complete original COMMAND static package](etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md), [S5 VDM command-acquisition source audit](etc/operations/m0-t282-s5-vdm-command-acquisition-source-audit-plan-001.md), [S6 local VDM command transport](etc/operations/m0-t282-s6-local-vdm-command-transport-plan-001.md), and [S7 original COMMAND initialization composition](etc/operations/m0-t282-s7-original-command-initialization-plan-001.md).
 
 **T282 S1 P1:** both static-only architecture probes reached the same original
 `vdmapi.h` declaration boundary. The verified 11-unit/17-service ledgers and
@@ -86,6 +86,14 @@ composition.
 adapter-backed original contract. First-VDM, BaseSrv/CSR wait/broker, PIF and
 WOW branches remain explicit non-routes, not fallback behavior. See the
 [S6 evidence](etc/evidence/m0-t282-s6-local-vdm-command-transport-001.md).
+
+**T282 S7 P1:** exact original `cmd.c` and `cmddata.c` now compose directly
+as one initialization slice on x86/x64. The fixture verifies the original
+globals and `CMDInit` home-drive update; the only diagnostics are the retained
+K&R and unused-parameter warnings from the unchanged original source.
+
+**T282 S7 closure:** this initialization slice is directly source-complete;
+it does not enable COMMAND dispatch or any guest route. See the [S7 evidence](etc/evidence/m0-t282-s7-original-command-initialization-001.md).
 
 ### Closed packet reference — M0 T281 S5 — original host-control package disposition
 
