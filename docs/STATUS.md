@@ -34,6 +34,24 @@ the next ordered Redirector and brokered COMMAND owner package.
 
 **T290 S2 closure:** [the interface recovery design](etc/evidence/m0-t290-s2-redirector-interface-closure-design-001.md) records sixteen source-first boundary outcomes.  Public pipes/mailslots/selected NetAPI calls use same-shaped outgoing facades; scoped guest copies and opaque identities stay session-owned; private DLC/LLC and VDD/monitor paths retain explicit original unavailable outcomes until their named owners are admitted.  No Redirector selector is enabled.
 
+**T290 S3 P5:** exact original `vrinit.c` now compiles and executes its
+source-defined VDD-unavailable initialization branch on formal x86/x64 Ninja
+fixtures.  It does not enter NetBIOS, DLC, guest writes or IRQ delivery, and
+`VrUninitialize` retains its carry-clear result.  The byte-identical canonical
+`dlcapi.h` declaration carrier is now selected in `mvdm-platform-abi`; see the
+[P5 evidence](etc/evidence/m0-t290-s3-p5-vrinit-vdd-failure-001.md).
+
+**T290 S3 P6:** exact original `vrnmpipe.c` now has formal x86/x64 evidence
+for named-pipe name classification, open-list lifecycle and synchronous
+read/write on a local public Win32 named pipe.  Async, callbacks, physical IRQ
+and selector ingress remain excluded; see the [P6 evidence](etc/evidence/m0-t290-s3-p6-sync-named-pipe-composition-001.md).
+
+**T290 S3 P7:** exact original `cmdredir.c` now has formal x86/x64 evidence
+for host-local standard-handle classification, notification and cleanup
+without creating a second COMMAND broker.  Its legacy AX:BX pointer/HANDLE
+marshaller and pipe-worker paths are still selector-disabled pending their
+named session mapping/lifecycle closure; see the [P7 evidence](etc/evidence/m0-t290-s3-p7-command-redirection-consumer-001.md).
+
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
 bodies now compose on formal x86/x64 Ninja fixtures.  Session-owned numeric
