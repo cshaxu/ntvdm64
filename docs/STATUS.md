@@ -4,19 +4,17 @@
 
 **No active M/T/S packet.**
 
-**Latest closure: M0 T295 S1 — MVDM zero/first-degree frontier correction.**
-The provenance-selected `mvdm-host` corpus has been re-enumerated as 11,872
-zero-degree function-definition identities.  Its corrected, mutually
-exclusive first-degree frontier contains 2,821 direct call-site candidates.
-T294's older source-resolution output is superseded and must not be consumed.
-See the [closure](history/m0-t295-closure-20260827.md) and
-[correction evidence](etc/evidence/m0-t295-s1-degree-frontier-correction-001.md).
+**Latest closure: M0 T296 S1 — OpenNT tools16 source import.**
+The 33-path original historical build-tool tree is now complete under
+`tools/opennt/tools16`, with every source selection and SHA-256 recorded. It
+remains outside product build, link and runtime inputs. See the
+[closure](history/m0-t296-closure-20260827.md).
 
 ## Active Packet
 
-No packet is admitted.  A successor may audit the corrected 2,821-row
-first-degree frontier, but must not reuse T294's superseded output or classify
-a `mvdm-host` definition as first degree.
+No packet is admitted. A future guest-build packet may consume the tools16
+manifest explicitly; it may not infer a host/runtime link edge from this
+historical tool mirror.
 
 **T291 S4 closure:** command, monitor-control and synchronous callback
 execution are now distinct typed planes; the generic session operation table
