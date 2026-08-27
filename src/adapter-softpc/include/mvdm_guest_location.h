@@ -32,6 +32,10 @@ int mvdm_guest_location_acquire_far(mvdm_guest_location const *location,
     mvdm_guest_location_lease *lease_out);
 int mvdm_guest_location_read_u16(mvdm_guest_location const *location,
     uint16_t *value_out);
+int mvdm_guest_location_copy_c_string(mvdm_guest_location const *location,
+    uint8_t *bytes_out, uint32_t capacity, uint32_t *byte_count_out);
+int mvdm_guest_location_copy_to_guest(mvdm_guest_location const *location,
+    uint8_t const *bytes, uint32_t byte_count);
 int mvdm_guest_location_acquire(mvdm_guest_location const *location,
     uint32_t byte_count, uint32_t access,
     mvdm_guest_location_lease *lease_out);

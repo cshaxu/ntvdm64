@@ -2,32 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T282 S11 — COMMAND OEM support composition.** T281 closed
+**Active: M0 T282 S12 — COMMAND bounded copy binding.** T281 closed
 in `5aa51088`; the owner has directed Queue-order execution. T282 begins the
 next candidate, original COMMAND local lifecycle, with a full package source
 and interface audit before any `54:xx` route is enabled.
 
 ## Active Packet
 
-### M0 T282 S11 — COMMAND OEM support composition
+### M0 T282 S12 — COMMAND bounded copy binding
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T282 S11`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S10 closed in `b5497c79`; its source-shaped register binding is the remaining mechanical prerequisite alongside original OEM support bodies. |
-| Objective | Compose the reached original OEM environment/current-directory helper bodies with their adapter-win32 bindings before changing COMMAND callers. |
-| Non-goals | COMMAND mirror modification, BOP route, new environment algorithm, raw guest pointer, session policy, CCPU executor, broker/WOW support or Bochs change. |
-| Reference Baseline | Exact `oemuni/process.c` and `file.c`; exact COMMAND callers; S8/S9 owner and lease ledgers; adapter-win32 RTL facade. |
-| Files And ABI Surface | Original OEM helper bodies/declarations, adapter-win32 same-shaped bindings, focused x86/x64 composition graph and import ledger. |
+| Identifier Mode | `M0 T282 S12`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S11 closed in `bb661457`; S9 requires bounded string and exact-write primitives before any COMMAND mirror call site changes. |
+| Objective | Provide source-independent bounded C-string read and exact host-to-guest write forms over the existing adapter-softpc guest-location lease. |
+| Non-goals | COMMAND mirror modification, raw-pointer macro, new mapper, BOP route, environment policy, machine change or asynchronous lease. |
+| Reference Baseline | S9 guest-span ledger; T280 guest-location facade/fixture; session guest-memory rules. |
+| Files And ABI Surface | Adapter-softpc guest-location helpers and focused x86/x64 lease fixture. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Exact source/import audit, focused x86/x64 source-composition probe, adapter ownership review, documentation governance and `git diff --check`. |
-| Expected Markers | Original helper bodies remain selected, every historical RTL/OEM import has one same-shaped adapter-win32 disposition, and no guest pointer is acquired. |
-| Asset Needs | Pinned original MVDM mirror, S9/S10 evidence, original OEM declarations and current adapter-win32 facade. |
-| Reporting Requirements | Original caller/declaration, compile result, missing symbol, exact adapter owner, failure contract and later-owner limit. |
-| Stop Conditions | A helper is rewritten instead of composed, an unbounded guest pointer is introduced, COMMAND body is changed before support closure, or a generic compatibility root is proposed. |
-| Exit Criteria | Reached original OEM helper set has x86/x64 composition evidence and each unresolved import has an exact adapter-win32 or later-owner disposition. |
+| Verification | Exact lease/lifetime review, focused x86/x64 positive/negative fixture, documentation governance and `git diff --check`. |
+| Expected Markers | No native pointer leaves a lease, C-string reads have a fixed caller maximum, writes have an exact byte count, and the existing session map remains sole owner. |
+| Asset Needs | S9 span evidence, T280 guest-location fixture and current session lease contract. |
+| Reporting Requirements | Source-independent operation, span/access/lifetime, error result, mapping instance and focused test outcome. |
+| Stop Conditions | A raw pointer is exposed, a lease crosses async work, a string bound is inferred outside the caller, or another mapper is added. |
+| Exit Criteria | Both bounded copy forms pass x86/x64 and the next S can bind the exact three source spans without inventing a memory primitive. |
 | Original Owner Request | “我都叫你按顺序执行了” and “请参照治理规范和实施规范执行任务”. |
-| Similar-Issue Sweep | All reached `GetEnvironmentVariableOem`, `SetEnvironmentVariableOem`, `GetCurrentDirectoryOem`, `SetCurrentDirectoryOem` and their RTL dependencies. |
+| Similar-Issue Sweep | S9 COMSPEC input, current-directory output and initial-environment output spans. |
 
 The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md), [S4 complete original COMMAND static package](etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md), [S5 VDM command-acquisition source audit](etc/operations/m0-t282-s5-vdm-command-acquisition-source-audit-plan-001.md), [S6 local VDM command transport](etc/operations/m0-t282-s6-local-vdm-command-transport-plan-001.md), [S7 original COMMAND initialization composition](etc/operations/m0-t282-s7-original-command-initialization-plan-001.md), [S8 COMMAND owner dependency partition](etc/operations/m0-t282-s8-command-owner-dependency-partition-plan-001.md), [S9 COMMAND environment guest-memory seam audit](etc/operations/m0-t282-s9-command-environment-guest-seam-audit-plan-001.md), [S10 COMMAND register and bounded-lease binding](etc/operations/m0-t282-s10-command-register-and-lease-binding-plan-001.md), and [S11 COMMAND OEM support composition](etc/operations/m0-t282-s11-command-oem-support-composition-plan-001.md).
 
@@ -124,6 +124,11 @@ bodies compose and execute on x86/x64 through the existing adapter-win32 RTL
 facade and public Kernel32/GDI32 imports. Unreached historical pointer-width
 branches remain separately tracked; no COMMAND mirror body changed. See the
 [S11 evidence](etc/evidence/m0-t282-s11-command-oem-support-composition-001.md).
+
+**T282 S12 P1:** bounded C-string read and exact host-to-guest write are now
+adapter-softpc operations over the sole session guest-memory lease. The formal
+x86/x64 fixture covers positive and negative spans; COMMAND mirror source is
+still unchanged. See the [S12 P1 evidence](etc/evidence/m0-t282-s12-bounded-copy-binding-001.md).
 
 ### Closed packet reference — M0 T281 S5 — original host-control package disposition
 

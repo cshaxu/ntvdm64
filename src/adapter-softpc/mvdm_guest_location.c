@@ -81,6 +81,44 @@ int mvdm_guest_location_read_u16(mvdm_guest_location const *location,
     return 1;
 }
 
+int mvdm_guest_location_copy_c_string(mvdm_guest_location const *location,
+    uint8_t *bytes_out, uint32_t capacity, uint32_t *byte_count_out)
+{
+    mvdm_guest_location probe;
+    mvdm_guest_location_lease lease;
+    uint32_t index;
+
+    if (byte_count_out != NULL) *byte_count_out = 0u;
+    if (location == NULL || bytes_out == NULL || byte_count_out == NULL ||
+        capacity == 0u || location->valid != 1u) return 0;
+    probe = *location;
+    for (index = 0u; index < capacity; ++index) {
+        if (!mvdm_guest_location_acquire(&probe, 1u, GUEST_MEMORY_ACCESS_READ,
+            &lease)) return 0;
+        bytes_out[index] = lease.bytes[0];
+        if (!mvdm_guest_location_release(&lease, 0)) return 0;
+        if (bytes_out[index] == 0u) {
+            *byte_count_out = index + 1u;
+            return 1;
+        }
+        if (probe.offset == UINT16_MAX) return 0;
+        ++probe.offset;
+    }
+    return 0;
+}
+
+int mvdm_guest_location_copy_to_guest(mvdm_guest_location const *location,
+    uint8_t const *bytes, uint32_t byte_count)
+{
+    mvdm_guest_location_lease lease;
+
+    if (location == NULL || bytes == NULL || byte_count == 0u ||
+        !mvdm_guest_location_acquire(location, byte_count,
+            GUEST_MEMORY_ACCESS_WRITE, &lease)) return 0;
+    memcpy(lease.bytes, bytes, byte_count);
+    return mvdm_guest_location_release(&lease, 1);
+}
+
 int mvdm_guest_location_acquire(mvdm_guest_location const *location,
     uint32_t byte_count, uint32_t access,
     mvdm_guest_location_lease *lease_out)

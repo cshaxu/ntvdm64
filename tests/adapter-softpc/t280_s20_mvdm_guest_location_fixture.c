@@ -35,6 +35,9 @@ int main(void)
     mvdm_guest_location location;
     mvdm_guest_location_lease lease;
     uint16_t word;
+    uint8_t copied[8];
+    uint8_t replacement[] = { 0xa1u, 0xb2u, 0xc3u };
+    uint32_t copied_bytes;
     uint32_t address = 0x12396u;
 
     memset(&memory, 0, sizeof(memory));
@@ -68,10 +71,25 @@ int main(void)
     if (!mvdm_guest_location_set_real_mode(&location, 0u, 0x8cu) ||
         !mvdm_guest_location_read_u16(&location, &word) || word != 0xbeefu)
         return 6;
+    memory.bytes[0x90u] = 'A';
+    memory.bytes[0x91u] = 'B';
+    memory.bytes[0x92u] = 0u;
+    if (!mvdm_guest_location_set_real_mode(&location, 0u, 0x90u) ||
+        !mvdm_guest_location_copy_c_string(&location, copied,
+            (uint32_t)sizeof(copied), &copied_bytes) || copied_bytes != 3u ||
+        memcmp(copied, "AB", 3u) != 0) return 7;
+    if (!mvdm_guest_location_copy_to_guest(&location, replacement,
+        (uint32_t)sizeof(replacement)) ||
+        memcmp(memory.bytes + 0x90u, replacement, sizeof(replacement)) != 0)
+        return 8;
+    memset(memory.bytes + 0x98u, 'C', 8u);
+    if (!mvdm_guest_location_set_real_mode(&location, 0u, 0x98u) ||
+        mvdm_guest_location_copy_c_string(&location, copied,
+            (uint32_t)sizeof(copied), &copied_bytes)) return 9;
     if (!mvdm_guest_location_set_real_mode(&location, 0xffffu, 0xffffu) ||
         mvdm_guest_location_acquire(&location, 1u, GUEST_MEMORY_ACCESS_READ,
-            &lease)) return 7;
-    if (!session_thread_unbind(&instance)) return 8;
+            &lease)) return 10;
+    if (!session_thread_unbind(&instance)) return 11;
     session_guest_memory_end(&instance);
-    return session_dispose(&instance) ? 0 : 9;
+    return session_dispose(&instance) ? 0 : 12;
 }
