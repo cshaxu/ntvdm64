@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2821 |
+| Documentation records | 2822 |
 | --- | --- |
-| Generated UTC | 2026-08-27T14:39:02Z |
+| Generated UTC | 2026-08-27T14:40:38Z |
 
 ## Entries
 
@@ -405,6 +405,7 @@ content-divergent entries.
 | etc/evidence/m0-t290-s4-mailslot-async-closure-001.md | indexed supporting material | 55e4d656047d3bec6b589fe3f60e2a2abe3478bfcef38d9e669ae68414d25e8e |
 | etc/evidence/m0-t290-s4-p18-original-mailslot-composition-001.md | indexed supporting material | 4a677fede55dcd7aaa3c0c9a4233d39ab4db9ef9066ef39829b73924b96c5043 |
 | etc/evidence/m0-t290-s4-p19-async-pipe-safe-decline-001.md | indexed supporting material | 87f5381855722cd3082f3bc29bd6f6ed44e9cd435beecf02d9908e05a9beae5c |
+| etc/evidence/m0-t290-s5-remaining-provider-source-abi-audit-001.md | indexed supporting material | 32feb3a5ba154b2e1753aab8be69fd9cb59f0923eb5603939336428a8b023fa9 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
