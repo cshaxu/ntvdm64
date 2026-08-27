@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2687 |
+| Documentation records | 2688 |
 | --- | --- |
-| Generated UTC | 2026-08-27T04:29:48Z |
+| Generated UTC | 2026-08-27T04:34:01Z |
 
 ## Entries
 
@@ -859,6 +859,7 @@ content-divergent entries.
 | etc/operations/opennt-bop-implementation-tracker-001.md | indexed supporting material | 11d4a0cd06dc670513084704cd78aa4625d039cf3fbde55194d6d66ef7bd947e |
 | etc/operations/policy/source-policy.md | indexed supporting material | a022318f5bde277bd61938b1eeb93f0366a9535bc0bb5bbdd3fe6dcc5ccf72cb |
 | etc/operations/proposal-bochs-component-identity-overlay-convergence-001.md | indexed supporting material | ac4de17a933c62d6b6adc1971345c6fe4e58860453fd894608553f2bdd6974c8 |
+| etc/operations/proposal-bochs-core-diff-overlay-minimization-001.md | indexed supporting material | 45eb3881102adb316497ec85eeac90488d95cd69c77d4555a1608a14d953db29 |
 | etc/operations/proposal-bop-cross-family-completion-audit-001.md | indexed supporting material | cd82506607453ad558fc2e09b7f8cad9ec5ce8deef43c44c54277a0e0a03c645 |
 | etc/operations/proposal-bop-external-compatibility-machine-closure-001.md | indexed supporting material | 0419a8e3b1b6bcf53b5e2be4c050aa662704cfa4765cc7e7bb88111768be453e |
 | etc/operations/proposal-bop-internal-dependency-closure-001.md | indexed supporting material | a30f2c280f8e2d25e4037483c93a1d66799a85383cacb6af868ad18c0e5aabee |
@@ -2575,7 +2576,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | fbfa3a202453ef9a31c0549310ff6ce96d822ac85e2cbbfb6a9c6c032e516f0c |
-| QUEUE.md | principal control document | a523fc0192b94382dd9f61c0ef7cc42f71aac1797351d1cddb18ab79592ceca5 |
+| QUEUE.md | principal control document | 5ef274b24d81e8d59fed74a1d4633be8a82e0f8a825211ed04701db241341c3a |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
