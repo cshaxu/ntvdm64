@@ -1,0 +1,54 @@
+selector	original_entry	original_body	owner_group	external_contract	current_disposition	next_recovery_group
+57:00	VrInitialize	vdmredir/vrinit.c	lifecycle	per-session state; Win32 event/handle ownership	original body mirrored; selector disabled	S3 lifecycle/local broker
+57:01	VrUninitialize	vdmredir/vrinit.c	lifecycle	per-session state; Win32 event/handle ownership	original body mirrored; selector disabled	S3 lifecycle/local broker
+57:02	VrGetNamedPipeInfo	vdmredir/vrnmpipe.c	named-pipe	checked guest spans; opaque host-resource identity; public named-pipe API	original body mirrored; selector disabled	S3 named-pipe/local broker
+57:03	VrGetNamedPipeHandleState	vdmredir/vrnmpipe.c	named-pipe	checked guest spans; opaque host-resource identity; public named-pipe API	original body mirrored; selector disabled	S3 named-pipe/local broker
+57:04	VrSetNamedPipeHandleState	vdmredir/vrnmpipe.c	named-pipe	checked guest spans; opaque host-resource identity; public named-pipe API	original body mirrored; selector disabled	S3 named-pipe/local broker
+57:05	VrPeekNamedPipe	vdmredir/vrnmpipe.c	named-pipe	checked guest spans; opaque host-resource identity; public named-pipe API	original body mirrored; selector disabled	S3 named-pipe/local broker
+57:06	VrTransactNamedPipe	vdmredir/vrnmpipe.c	named-pipe	checked guest spans; opaque host-resource identity; public named-pipe API	original body mirrored; selector disabled	S3 named-pipe/local broker
+57:07	VrCallNamedPipe	vdmredir/vrnmpipe.c	named-pipe	checked guest spans; public named-pipe API	original body mirrored; selector disabled	S3 named-pipe/local broker
+57:08	VrWaitNamedPipe	vdmredir/vrnmpipe.c	named-pipe	checked guest spans; public named-pipe API	original body mirrored; selector disabled	S3 named-pipe/local broker
+57:09	VrDeleteMailslot	vdmredir/vrmslot.c	mailslot	checked guest spans; opaque host-resource identity; mailslot API	original body mirrored; selector disabled	S4 mailslot/async completion
+57:0A	VrGetMailslotInfo	vdmredir/vrmslot.c	mailslot	checked guest spans; opaque host-resource identity; mailslot API	original body mirrored; selector disabled	S4 mailslot/async completion
+57:0B	VrMakeMailslot	vdmredir/vrmslot.c	mailslot	checked guest spans; opaque host-resource identity; mailslot API	original body mirrored; selector disabled	S4 mailslot/async completion
+57:0C	VrPeekMailslot	vdmredir/vrmslot.c	mailslot	checked guest spans; opaque host-resource identity; mailslot API	original body mirrored; selector disabled	S4 mailslot/async completion
+57:0D	VrReadMailslot	vdmredir/vrmslot.c	mailslot	checked guest spans; opaque host-resource identity; mailslot API	original body mirrored; selector disabled	S4 mailslot/async completion
+57:0E	VrWriteMailslot	vdmredir/vrmslot.c	mailslot	checked guest spans; opaque host-resource identity; mailslot API	original body mirrored; selector disabled	S4 mailslot/async completion
+57:0F	VrTerminateDosProcess	vdmredir/vrmisc.c	lifecycle	DEM/COMMAND process teardown; session child record	original body mirrored; selector disabled	S3 lifecycle/local broker
+57:10	VrNetTransactApi	vdmredir/vrnetapi.c	netapi	checked guest marshal; NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:11	VrNetRemoteApi	vdmredir/vrnetapi.c	netapi	checked guest marshal; NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:12	VrNetNullTransactApi	vdmredir/vrnetapi.c	netapi	checked guest marshal; NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:13	VrNetServerEnum	vdmredir/vrnetapi.c	netapi	checked guest marshal; NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:14	VrNetUseAdd	vdmredir/vrnetapi.c	netapi	checked guest marshal; NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:15	VrNetUseDel	vdmredir/vrnetapi.c	netapi	checked guest marshal; NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:16	VrNetUseEnum	vdmredir/vrnetapi.c	netapi	checked guest marshal; NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:17	VrNetUseGetInfo	vdmredir/vrnetapi.c	netapi	checked guest marshal; NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:18	VrNetWkstaGetInfo	vdmredir/vrnetapi.c	netapi	checked guest marshal; NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:19	VrNetWkstaSetInfo	vdmredir/vrnetapi.c	netapi	checked guest marshal; NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:1A	VrNetMessageBufferSend	vdmredir/vrnetapi.c	netapi	checked guest marshal; NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:1B	VrGetCDNames	vdmredir/vrnetapi.c	netapi	checked guest marshal; NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:1C	VrGetComputerName	vdmredir/vrnetapi.c	netapi	checked guest marshal; NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:1D	VrGetUserName	vdmredir/vrnetapi.c	netapi	checked guest marshal; NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:1E	VrGetDomainName	vdmredir/vrnetapi.c	netapi	checked guest marshal; NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:1F	VrGetLogonServer	vdmredir/vrnetapi.c	netapi	checked guest marshal; NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:20	VrNetHandleGetInfo	vdmredir/vrnmpipe.c	named-pipe	opaque host-resource identity; named-pipe API	original body mirrored; selector disabled	S3 named-pipe/local broker
+57:21	VrNetHandleSetInfo	vdmredir/vrnmpipe.c	named-pipe	opaque host-resource identity; named-pipe API	original body mirrored; selector disabled	S3 named-pipe/local broker
+57:22	VrNetGetDCName	vdmredir/vrnetapi.c	netapi	checked guest marshal; NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:23	VrReadWriteAsyncNmPipe	vdmredir/vrnmpipe.c	async-pipe	checked guest spans; opaque identity; session completion; physical completion delivery	original body mirrored; selector disabled	S4 mailslot/async completion
+57:24	VrReadWriteAsyncNmPipe	vdmredir/vrnmpipe.c	async-pipe	checked guest spans; opaque identity; session completion; physical completion delivery	original body mirrored; selector disabled	S4 mailslot/async completion
+57:25	VrNetbios5c	vdmredir/vrnetb.c	netbios	NetBIOS/NCB compatibility and interrupt completion	original body mirrored; selector disabled	S5 NetBIOS/DLC/window group
+57:26	VrHandleAsyncCompletion	vdmredir/vrinit.c	async-completion	session completion queue and physical completion delivery	original body mirrored; selector disabled	S4 mailslot/async completion
+57:27	VrDlc5cHandler	vdmredir/vrdlc5c.c	DLC/LLC	DLC/LLC device contract and interrupt completion	original body mirrored; selector disabled	S5 NetBIOS/DLC/window group
+57:28	VrVdmWindowInit	vdmredir/vrdlc5c.c	DLC/window	DLC window data and interrupt bridge	original body mirrored; selector disabled	S5 NetBIOS/DLC/window group
+57:29	VrReturnAssignMode	vdmredir/vrnetapi.c	mode	Redirector session state	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:2A	VrSetAssignMode	vdmredir/vrnetapi.c	mode	Redirector session state	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:2B	VrGetAssignListEntry	vdmredir/vrnetapi.c	mode	Redirector session state	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:2C	VrDefineMacro	vdmredir/vrnetapi.c	mode	Redirector session state	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:2D	VrBreakMacro	vdmredir/vrnetapi.c	mode	Redirector session state	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:2E	VrNetServiceControl	vdmredir/vrnetapi.c	netapi	NetAPI compatibility facade	original body mirrored; selector disabled	S5 NetAPI/remote group
+57:2F	VrDismissInterrupt	vdmredir/vrinit.c	async-completion	physical interrupt completion delivery	original body mirrored; selector disabled	S4 mailslot/async completion
+57:30	VrEoiAndDismissInterrupt	vdmredir/vrinit.c	async-completion	physical interrupt completion delivery	original body mirrored; selector disabled	S4 mailslot/async completion
+57:31	VrCheckPmNetbiosAnr	vdmredir/vrinit.c	async-completion	protected monitor/NetBIOS interrupt completion	original body mirrored; selector disabled	S5 NetBIOS/DLC/window group
+helper	VrDispatch	vdmredir/vrdisp.c	dispatch	original 0..31 table and BOP ingress separation	original body mirrored; selector disabled	S6 whole-family reconciliation
+helper	cmdredir broker callers	dos/command/cmdredir.c	COMMAND broker	original three stream routing and child lifecycle	original body mirrored; no duplicate broker	S3 lifecycle/local broker
+helper	DEM pipe EOF callers	dos/dem/demfile.c;dos/dem/demgset.c	DEM broker	original remote/pipe failure and completion paths	original bodies mirrored; selector disabled	S3 lifecycle/local broker

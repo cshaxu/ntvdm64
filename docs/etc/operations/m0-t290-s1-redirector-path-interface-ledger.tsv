@@ -1,0 +1,26 @@
+path	kind	original_role	identity	current_product_disposition	boundary_owner
+vdmredir/dlstruct.h	declaration	DLC/LLC structure carrier	exact dual-edition mirror	binding-only until selected body composition	mvdm-platform-abi; adapter-mvdm-host-out/redir
+vdmredir/makefile	build	original DLL build recipe	exact dual-edition mirror	not-host-runtime evidence	build governance
+vdmredir/sources	build	original DLL source selection	exact dual-edition mirror	not-host-runtime evidence	build governance
+vdmredir/vdmredir.def	build	original VrDispatch export	exact dual-edition mirror	not-host-runtime evidence	app composition after package closure
+vdmredir/vdmredir.rc	build	original DLL resource	exact dual-edition mirror	not-host-runtime evidence	build governance
+vdmredir/vrdebug.c	provider	original diagnostic parser/output	exact dual-edition mirror	provider helper; no standalone enablement	adapter-mvdm-host-out/redir; adapter-mvdm-host-out/softpc
+vdmredir/vrdebug.h	declaration	Redirector diagnostics/layout carrier	exact dual-edition mirror	binding-only	mvdm-platform-abi
+vdmredir/vrdisp.c	provider	original 57:00..31 dispatcher	exact dual-edition mirror	selector-disabled original body	adapter-mvdm-host-in after S6
+vdmredir/vrdlc.h	declaration	DLC/LLC protocol carrier	exact dual-edition mirror	binding-only	mvdm-platform-abi; adapter-mvdm-host-out/redir
+vdmredir/vrdlc5c.c	provider	INT 5Ch DLC and window services	exact dual-edition mirror	selector-disabled original body	adapter-mvdm-host-out/redir; adapter-bochs mechanical completion
+vdmredir/vrdlcbuf.c	provider	DLC buffer management	exact dual-edition mirror	selector-disabled original body	adapter-mvdm-host-out/redir; session guest-memory leases
+vdmredir/vrdlcdbg.c	provider	DLC diagnostics	exact dual-edition mirror	provider helper; no standalone enablement	adapter-mvdm-host-out/redir
+vdmredir/vrdlcdbg.h	declaration	DLC diagnostic layout carrier	exact dual-edition mirror	binding-only	mvdm-platform-abi
+vdmredir/vrdlcpst.c	provider	DLC event/post processing	exact dual-edition mirror	selector-disabled original body	adapter-mvdm-host-out/redir; session completion; adapter-bochs mechanical completion
+vdmredir/vrdll.c	provider	DLC initialization/device binding	exact dual-edition mirror	selector-disabled original body	adapter-mvdm-host-out/redir; adapter-mvdm-host-out/win32
+vdmredir/vrica.h	declaration	ICA/window protocol carrier	exact dual-edition mirror	binding-only	mvdm-platform-abi
+vdmredir/vrinit.c	provider	Redirector lifecycle and async completion	exact dual-edition mirror	selector-disabled original body	adapter-mvdm-host-out/redir; session; adapter-bochs mechanical completion
+vdmredir/vrmisc.c	provider	Redirector lifecycle helper	exact dual-edition mirror	selector-disabled original body	adapter-mvdm-host-out/redir; session
+vdmredir/vrmslot.c	provider	mailslot services	exact dual-edition mirror	selector-disabled original body	adapter-mvdm-host-out/redir; adapter-mvdm-host-out/win32; session
+vdmredir/vrnetapi.c	provider	NetAPI and assign-mode services	exact dual-edition mirror	selector-disabled original body	adapter-mvdm-host-out/redir; adapter-mvdm-host-out/win32; session
+vdmredir/vrnetb.c	provider	NetBIOS service	exact dual-edition mirror	selector-disabled original body	adapter-mvdm-host-out/redir; adapter-mvdm-host-out/win32; adapter-bochs mechanical completion
+vdmredir/vrnmpipe.c	provider	named-pipe and async-pipe services	exact dual-edition mirror	selector-disabled original body	adapter-mvdm-host-out/redir; adapter-mvdm-host-out/win32; session
+vdmredir/vrputil.c	provider	remote parameter marshal helper	exact dual-edition mirror	selector-disabled original body	adapter-mvdm-host-out/redir; session guest-memory leases
+vdmredir/vrputil.h	declaration	remote marshal layout carrier	exact dual-edition mirror	binding-only	mvdm-platform-abi
+vdmredir/vrremote.c	provider	remote API marshal helper	exact dual-edition mirror	selector-disabled original body	adapter-mvdm-host-out/redir; adapter-mvdm-host-out/win32; session guest-memory leases
