@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T287 S6 — XMS dispatcher and complete local family regression.**
+**Active: M0 T287 S7 — XMS owner-package closure audit.**
 
 T286 is closed. Its final Bochs-core minimization evidence is in
 [the closure record](history/m0-t286-closure-20260827.md). T287 admits the
@@ -10,23 +10,23 @@ queue-head original XMS owner package using a complete source-first plan.
 
 ## Active Packet
 
-### M0 T287 S6 — XMS dispatcher and complete local family regression
+### M0 T287 S7 — XMS owner-package closure audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T287 S6`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Queue order after closed T286; owner direction is continuous single-person dual-role execution in queue order. |
-| Objective | Compose the original XMS dispatcher with the complete locally admitted family matrix and prove every `52:00..0B` has one original body or source-proven unavailable disposition. |
+| Identifier Mode | `M0 T287 S7`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S6 local x86/x64 dispatcher matrix is closed; queue order continues with the final T287 source/owner audit. |
+| Objective | Audit the complete XMS owner package for source identity, sole interface ownership, mapping-manager isolation, exception registration and transferred prerequisites; then write the T287 closure. |
 | Non-goals | No external BOP ingress enablement, successful UMB span before its monitor owner, keyboard-controller product shell, generic guest pointer, host-pointer conversion, new mapping manager, or `src.old` use. |
-| Reference Baseline | [T287 plan](etc/operations/m0-t287-xms-owner-package-recovery-plan-001.md), [S5 evidence](etc/evidence/m0-t287-s5-xms-umb-ivt-binding-001.md), source policy and mapping-manager rule. |
-| Files And ABI Surface | `mvdm-host/xms.486/xmsdisp.c`, all `xms.486` service bodies and their existing same-shaped SoftPC/session bindings. |
+| Reference Baseline | [T287 plan](etc/operations/m0-t287-xms-owner-package-recovery-plan-001.md), [S6 evidence](etc/evidence/m0-t287-s6-xms-dispatch-matrix-001.md), source policy and mapping-manager rule. |
+| Files And ABI Surface | All `mvdm-host/xms.486` source, S1 interface/file ledgers, same-shaped SoftPC/session bindings, and their private overlays. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Focused x86/x64 dispatcher/matrix fixture covering all locally admitted direct paths and each unavailable outcome, plus documentation governance and `git diff --check`. |
-| Expected Markers | Original service-table order remains intact; every source body has one owner/disposition; unavailable owner transfers cannot accidentally report success. |
-| Asset Needs | S1--S5 evidence, exact XMS dispatcher and all previously built source-family bindings. |
-| Reporting Requirements | Per-service source body/disposition, x86/x64 result evidence, and a precise list of pending monitor/firmware prerequisites. |
-| Stop Conditions | Per-trace service implementation, UMB/XMS policy in adapter-bochs/Bochs, an unregistered direct pointer, selector ingress, or invented success path. |
-| Exit Criteria | Every `52:00..0B` has one original source path or source-proven unavailable disposition with local x86/x64 matrix evidence. |
+| Verification | Source/ledger/README audit, focused S1--S6 evidence reconciliation, documentation governance and `git diff --check`. |
+| Expected Markers | Source identity remains intact; every interface has one owner/disposition; no private mapping manager, host pointer or unregistered mirror divergence remains. |
+| Asset Needs | S1--S6 evidence, exact XMS source baseline, interface/file ledgers, and current component exception registers. |
+| Reporting Requirements | Final original-source and adapter/overlay disposition, exceptions, local regression result, and every deferred prerequisite with its named successor. |
+| Stop Conditions | A source identity mismatch, ownerless interface, second mapping manager, unregistered divergence, selector ingress, or invented success path. |
+| Exit Criteria | The complete XMS owner package is code-complete/local-regression closed, or each remaining external prerequisite is transferred by a named later owner package. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
 | Similar-Issue Sweep | Every dispatcher table entry, result register, bounded lease, allocator state, A20 result, UMB/IVT transfer, and source-defined unavailable branch. |
 
@@ -66,6 +66,13 @@ are proven without enabling a selector route or test-only success policy.
 Successful UMB ownership transfers to the queued monitor substrate, and the
 real keyboard IVT state algorithm transfers to its existing firmware plan;
 see [S5 evidence](etc/evidence/m0-t287-s5-xms-umb-ivt-binding-001.md).
+
+**T287 S6 closure:** exact original `xmsdisp.c` now invokes every `52:00..0B`
+table entry in a single local family matrix on formal x86 and x64 `/MT` Ninja
+graphs. A20, move, allocation, free, reallocation, page/free-memory, UMB and
+INT15 paths retain their original bodies and their existing source-proven
+unavailable or transferred outcomes. No BOP ingress is enabled; see
+[S6 evidence](etc/evidence/m0-t287-s6-xms-dispatch-matrix-001.md).
 
 **T286 S1 closure:** the complete [divergence disposition ledger](etc/operations/m0-t286-s1-bochs-core-divergence-disposition-ledger-001.md) measures 29 differing upstream-relative mirror files (431 additions / 353 deletions) and 15 private overlay bodies (1,164 lines). It classifies all groups as build bindings, required private CPU/memory/device hooks, optional diagnostics, or B2/D4 external-composition candidates. No source behavior changed.
 
