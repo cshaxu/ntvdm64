@@ -1,6 +1,9 @@
 #include <nt.h>
 #include <stdio.h>
 
+#include "adapter-mvdm-host-out/softpc/include/mvdm_host_identity.h"
+#include "session/session.h"
+
 BOOL VrIsNamedPipeName(LPSTR name);
 BOOL VrAddOpenNamedPipeInfo(HANDLE handle, LPSTR name);
 BOOL VrRemoveOpenNamedPipeInfo(HANDLE handle);
@@ -9,13 +12,18 @@ BOOL VrReadNamedPipe(HANDLE handle, LPBYTE buffer, DWORD byte_count,
     LPDWORD bytes_read, LPDWORD error);
 BOOL VrWriteNamedPipe(HANDLE handle, LPBYTE buffer, DWORD byte_count,
     LPDWORD bytes_written);
+VOID VrGetNamedPipeHandleState(VOID);
 
 extern CRITICAL_SECTION VrNamedPipeCancelCritSec;
 
 VOID WaitIfIdle(VOID) {}
-USHORT getAX(VOID) { return 0u; }
-USHORT getBX(VOID) { return 0u; }
-USHORT getBP(VOID) { return 0u; }
+static USHORT fixture_ax;
+static USHORT fixture_bx;
+static USHORT fixture_bp;
+static ULONG fixture_carry;
+USHORT getAX(VOID) { return fixture_ax; }
+USHORT getBX(VOID) { return fixture_bx; }
+USHORT getBP(VOID) { return fixture_bp; }
 USHORT getCX(VOID) { return 0u; }
 USHORT getDX(VOID) { return 0u; }
 USHORT getSI(VOID) { return 0u; }
@@ -23,15 +31,15 @@ USHORT getDI(VOID) { return 0u; }
 USHORT getDS(VOID) { return 0u; }
 USHORT getES(VOID) { return 0u; }
 VOID setAL(UCHAR value) { (void)value; }
-VOID setAX(USHORT value) { (void)value; }
-VOID setBX(USHORT value) { (void)value; }
+VOID setAX(USHORT value) { fixture_ax = value; }
+VOID setBX(USHORT value) { fixture_bx = value; }
 VOID setCX(USHORT value) { (void)value; }
 VOID setDX(USHORT value) { (void)value; }
 VOID setSI(USHORT value) { (void)value; }
 VOID setDI(USHORT value) { (void)value; }
 VOID setDS(USHORT value) { (void)value; }
 VOID setES(USHORT value) { (void)value; }
-VOID setCF(ULONG value) { (void)value; }
+VOID setCF(ULONG value) { fixture_carry = value; }
 VOID setZF(ULONG value) { (void)value; }
 LPVOID _inlinePointerFromWords(WORD segment, WORD offset)
 {
@@ -60,6 +68,8 @@ int main(void)
     BYTE outbound[] = { 0x71u, 0x72u };
     BYTE received[sizeof(inbound)];
     BYTE written[sizeof(outbound)];
+    session instance;
+    uint32_t identity;
 
     if (!VrIsNamedPipeName(remote) || !VrIsNamedPipeName(remote_slash) ||
         VrIsNamedPipeName(local) || VrIsNamedPipeName(missing_name) ||
@@ -90,6 +100,26 @@ int main(void)
         CloseHandle(server);
         return 8;
     }
+    session_initialize(&instance, 0x2903u);
+    if (!session_activate(&instance) || !session_thread_bind(&instance) ||
+        !mvdm_host_identity_publish((uintptr_t)client, &identity)) {
+        CloseHandle(client);
+        CloseHandle(server);
+        return 9;
+    }
+    fixture_bp = (USHORT)(identity >> 16);
+    fixture_bx = (USHORT)identity;
+    fixture_ax = 0xffffu;
+    fixture_carry = 1u;
+    VrGetNamedPipeHandleState();
+    if (fixture_carry != 0u) {
+        mvdm_host_identity_release(identity);
+        session_thread_unbind(&instance);
+        session_dispose(&instance);
+        CloseHandle(client);
+        CloseHandle(server);
+        return 10;
+    }
 
     InitializeCriticalSection(&VrNamedPipeCancelCritSec);
     if (!WriteFile(server, inbound, sizeof(inbound), &bytes, NULL) ||
@@ -97,7 +127,7 @@ int main(void)
         DeleteCriticalSection(&VrNamedPipeCancelCritSec);
         CloseHandle(client);
         CloseHandle(server);
-        return 9;
+        return 11;
     }
     bytes = 0u;
     error = ERROR_GEN_FAILURE;
@@ -107,7 +137,7 @@ int main(void)
         DeleteCriticalSection(&VrNamedPipeCancelCritSec);
         CloseHandle(client);
         CloseHandle(server);
-        return 10;
+        return 12;
     }
     bytes = 0u;
     if (!VrWriteNamedPipe(client, outbound, sizeof(outbound), &bytes) ||
@@ -117,9 +147,15 @@ int main(void)
         DeleteCriticalSection(&VrNamedPipeCancelCritSec);
         CloseHandle(client);
         CloseHandle(server);
-        return 11;
+        return 13;
     }
     DeleteCriticalSection(&VrNamedPipeCancelCritSec);
+    if (!mvdm_host_identity_release(identity) || !session_thread_unbind(&instance) ||
+        !session_dispose(&instance)) {
+        CloseHandle(client);
+        CloseHandle(server);
+        return 14;
+    }
     CloseHandle(client);
     CloseHandle(server);
     return 0;

@@ -52,6 +52,12 @@ without creating a second COMMAND broker.  Its legacy AX:BX pointer/HANDLE
 marshaller and pipe-worker paths are still selector-disabled pending their
 named session mapping/lifecycle closure; see the [P7 evidence](etc/evidence/m0-t290-s3-p7-command-redirection-consumer-001.md).
 
+**T290 S3 P8:** the original `VrGetNamedPipeHandleState` BP:BX path now runs
+on the same formal x86/x64 pipe fixture through session-owned opaque host
+resource identity resolution.  Native handles remain local and are released
+before session disposal; guest-buffer pipe forms remain the next bounded
+pointer-scope group.  See the [P8 evidence](etc/evidence/m0-t290-s3-p8-named-pipe-handle-state-001.md).
+
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
 bodies now compose on formal x86/x64 Ninja fixtures.  Session-owned numeric
