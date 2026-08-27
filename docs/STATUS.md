@@ -71,6 +71,11 @@ DOS-to-Win32 mode conversion; see the [P10 evidence](etc/evidence/m0-t290-s3-p10
 session DS:SI pointer scope and returns source-shaped counts/status before the
 same bytes are consumed by original read; see the [P11 evidence](etc/evidence/m0-t290-s3-p11-named-pipe-peek-guest-span-001.md).
 
+**T290 S3 P12:** original `VrTransactNamedPipe` now composes on formal x86/x64
+message-mode public pipes through the same session BP:BX opaque identity and
+bounded DS:SI/ES:DI guest spans.  It retains the source event/overlapped wait,
+byte-count and carry/error sequence; see the [P12 evidence](etc/evidence/m0-t290-s3-p12-named-pipe-transact-guest-span-001.md).
+
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
 bodies now compose on formal x86/x64 Ninja fixtures.  Session-owned numeric
