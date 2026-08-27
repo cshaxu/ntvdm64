@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2849 |
+| Documentation records | 2850 |
 | --- | --- |
-| Generated UTC | 2026-08-27T16:19:18Z |
+| Generated UTC | 2026-08-27T16:26:45Z |
 
 ## Entries
 
@@ -415,6 +415,7 @@ content-divergent entries.
 | etc/evidence/m0-t291-s2-wow-thunk-frame-interface-recovery-001.md | indexed supporting material | c53d079f448f31c37fd945c4fbf5bf2e46dd98d0b070dd649735b34fe30140d8 |
 | etc/evidence/m0-t291-s3-p1-wow-pointer-scope-001.md | indexed supporting material | f9b0676c0e8bbeedabb9df5c594287a51e1dd2e496599ec31fc564d1ef84d3eb |
 | etc/evidence/m0-t291-s3-p2-wow-task-frame-projection-001.md | indexed supporting material | 881d6e783430b3233c9852d9877534c54b8cd2c59270cd5895ac6883d13e695e |
+| etc/evidence/m0-t291-s3-p3-wow-callback-route-001.md | indexed supporting material | 1d1434cf2cff1270d078d986247a78f850da6660b0b6cadba3097d6295ac1d6a |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |

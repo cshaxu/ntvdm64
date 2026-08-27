@@ -49,3 +49,12 @@ M0 T280 S5 disposition register:
   The callback has an explicit context and operation number; it owns neither
   guest-memory mapping nor native resource lifetime. `adapter-mvdm-host-out/win32` uses it
   for the reached `NtVdmControl(VdmQueryDir, ...)` declaration contract.
+
+M0 T291 S3 disposition register:
+
+- `session.c` and `session.h`: `small neutral extension`. One session may now
+  register a bounded set of unique numeric-operation routes before its older
+  fallback dispatch is consulted. The route record owns no MVDM/WOW/COMMAND,
+  Bochs, pointer, handle, worker or mapping semantics. It only lets two
+  independently owned source-shaped control contracts coexist in the same
+  session without either becoming a process-global broker.

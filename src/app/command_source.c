@@ -212,10 +212,12 @@ int app_command_source_bind(app_command_source *source, session *owner)
 {
     if (!app_command_source_valid(source) || source->owner != NULL || owner == NULL ||
         !session_valid(owner) || owner->state != SESSION_STATE_ACTIVE) return 0;
-    if (!session_set_control_dispatch(owner, app_command_source_dispatch, source))
+    if (!session_register_control_route(owner,
+        ADAPTER_VDM_MONITOR_GET_NEXT_COMMAND, app_command_source_dispatch, source))
         return 0;
     if (!session_register_teardown(owner, app_command_source_teardown, source)) {
-        (void)session_set_control_dispatch(owner, NULL, NULL);
+        (void)session_unregister_control_route(owner,
+            ADAPTER_VDM_MONITOR_GET_NEXT_COMMAND, app_command_source_dispatch, source);
         return 0;
     }
     source->owner = owner;
@@ -225,7 +227,8 @@ int app_command_source_bind(app_command_source *source, session *owner)
 int app_command_source_unbind(app_command_source *source)
 {
     if (!app_command_source_valid(source) || source->owner == NULL) return 0;
-    if (!session_set_control_dispatch(source->owner, NULL, NULL)) return 0;
+    if (!session_unregister_control_route(source->owner,
+        ADAPTER_VDM_MONITOR_GET_NEXT_COMMAND, app_command_source_dispatch, source)) return 0;
     source->owner = NULL;
     return 1;
 }
