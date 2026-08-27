@@ -51,12 +51,14 @@ fragment below becomes a linked CSRSS, NTDLL CSR or kernel-VDM component.
 
 - `base/ntos/vdm/vdm.c` and `x86/vdmentry.c` preserve valuable declaration and
   result evidence: `NtVdmControl` service discrimination, `VDMQUERYDIRINFO`
-  layout, and source service/failure directions.
-- Their bodies are not candidates for source-derived reuse. Even the small
-  query-directory path probes user pages, references kernel file objects,
-  builds IRPs/MDLs, raises/lowers IRQL and waits on kernel events. The x86
-  dispatcher additionally calls `Ke386*`, accesses current kernel-thread and
-  process state, and controls hardware VDM execution.
+  layout, and source service/failure directions. Their **files must still be
+  audited at function/block granularity** for source-derived adapter reuse.
+- The currently observed query-directory body probes user pages, references
+  kernel file objects, builds IRPs/MDLs, raises/lowers IRQL and waits on kernel
+  events. The x86 dispatcher calls `Ke386*`, accesses current kernel-thread
+  and process state, and controls hardware VDM execution. Those observed
+  kernel-bound blocks cannot be copied; this does not decide other blocks in
+  the package before their own audit.
 - `mvdm-platform-abi` retains exact declarations. The monitor/SoftPC adapter
   must implement only individually admitted services with public modern APIs
   or Bochs mechanics, preserving source result/failure contracts. It must not
@@ -64,7 +66,8 @@ fragment below becomes a linked CSRSS, NTDLL CSR or kernel-VDM component.
 
 ## Implementation consequence
 
-The static-closure task may select **two narrowly named adapter fragments**:
+The static-closure task may select **two already identified narrowly named
+adapter fragments**:
 
 1. `adapter-opennt-host` capture-layout fragment from `csrutil.c` for the Base
    VDM client subset; and
@@ -72,7 +75,9 @@ The static-closure task may select **two narrowly named adapter fragments**:
    `GetNextVDMCommand`/WOW notification is admitted.
 
 Both need their own declaration, changed-layout, mapping and failure rows
-before code is copied. No third generic compatibility component is justified.
+before code is copied. In addition, the complete kernel VDM package requires
+a per-file/per-block source-derived-adapter audit before any final conclusion;
+no generic compatibility component is justified.
 
 ## Evidence
 

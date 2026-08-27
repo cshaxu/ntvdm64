@@ -3,9 +3,36 @@
 ## Purpose
 
 Replace symbol-led recovery with a complete package-first decision for the
-selected MVDM host union and every non-MVDM OpenNT package directly reached
-from it. This is an audit-only packet. It deliberately stops before provider,
-adapter or broker implementation so the owner can review the complete boundary.
+selected MVDM host union and every non-MVDM OpenNT package reached from it.
+This is an audit-only packet. It deliberately stops before provider, adapter
+or broker implementation so the owner can review the complete boundary.
+
+The discovery algorithm is breadth-first, not a hand-maintained list of
+familiar stopping boundaries. Seed the graph with every outward MVDM
+definition, variable, function, declaration, library and build-input edge.
+For each non-MVDM package found, enumerate its relevant files and outward
+edges before assigning a final disposition. A path ends only at a public modern
+Windows API, an actual kernel/product hard boundary, no further outside
+dependency, or a recorded finite small closure. A package is not omitted
+because its first observed edge is hard to compose.
+
+## BFS audit stages
+
+1. **Stage one — MVDM outward-edge inventory.** Produce the complete first
+   frontier: every selected MVDM file, source line/build line, external
+   include/import/library/symbol/variable edge, original declaration or
+   definition candidate, and destination package root. This is complete only
+   when every outward edge has one recorded first-hop disposition. It does not
+   decide whether a candidate package is importable.
+2. **Stage two — candidate-package expansion.** For every package discovered
+   at stage one, enumerate its files, source/build inputs and outward
+   interfaces. Record the exact parent edge and assign child nodes. No package
+   is selected merely because it is in this frontier.
+3. **Stage three and later — recursive closure.** Repeat package expansion in
+   breadth-first order until every active branch ends at a public modern API,
+   a true kernel/product hard boundary, no further external dependency, or a
+   finite small closure. Only then make package-level import, adapter or
+   explicit-unavailable decisions.
 
 ## Governing decisions
 
@@ -39,6 +66,9 @@ adapter or broker implementation so the owner can review the complete boundary.
   record every package-to-package edge, external candidate and source cycle.
 - Maintain `opennt-non-mvdm-package-boundary-ledger.tsv` for every candidate
   outside MVDM, including rejected NT4 product-shell packages.
+- Maintain a breadth-first node/edge ledger for every seed, discovered
+  package, source definition and stopping boundary. It must identify graph
+  depth, parent edge, exact source path and the reason traversal ended.
 - Add a reversion row for every current project-owned implementation that an
   accepted original external package could replace. A row may be `not-yet-
   eligible`, but may not be omitted.
@@ -82,10 +112,14 @@ newly noticed symbol cannot create a second, untracked import route.
 2. Audit every selected `mvdm-host` package at complete package/build scope:
    source membership, internal edges, external interface families, profile
    exclusions and current autonomous reversion candidates.
-3. For every discovered external OpenNT candidate, audit the entire upstream
-   package boundary before selecting a required original slice or rejecting the
-   package. Record all selected and rejected source paths, outgoing edges and
-   stopping boundaries in the external ledger.
+3. Build the breadth-first graph from all MVDM outward declaration, definition,
+   variable, library and build-input edges. For every discovered external
+   OpenNT candidate, audit the entire upstream package boundary before
+   selecting a required original slice or rejecting the package. Recursively
+   traverse each relevant outgoing edge until it ends at public Win32, a real
+   hard boundary, no further dependency or a finite small closure. Record all
+   selected and rejected source paths, outgoing edges and stopping boundaries
+   in the external ledger.
 4. Expand every reached outward edge to a child interface row with original
    caller/declaration/layout, same-shaped owner, x86/x64 mapping effect,
    unavailable failure contract and prerequisite. A family summary is not an

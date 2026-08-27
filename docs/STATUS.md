@@ -2,36 +2,50 @@
 
 ## Current Work
 
-**No active M/T/S packet.**
-
-M0 T291 is closed for owner review.
+**Active: M0 T292 S1 — External OpenNT dependency BFS audit.**
 
 M0 T290 is closed. Its final Redirector package boundary is in
-[the closure record](history/m0-t290-closure-20260827.md). M0 T291 closes the
-complete MVDM/OpenNT package-boundary audit; the next candidate is not admitted
-until owner review of [its closure](history/m0-t291-closure-20260827.md).
+[the closure record](history/m0-t290-closure-20260827.md). M0 T291 closed the
+package-level audit. Owner-directed T292 now traverses the complete external
+dependency graph of the selected MVDM host union before static closure work
+resumes; hard-boundary source reuse is one required traversal outcome, not the
+whole search perimeter.
 
 ## Active Packet
 
-### No active packet
+### M0 T292 S1 — External OpenNT dependency BFS audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | Intermission after `M0 T291`; no T/S packet is active. |
-| Admission And Approval | Owner requested a unified repair of the partially correct command/control/re-entry boundary. S4 has now closed the prerequisite separation rather than leaving a generic dispatcher in place. |
-| Objective | Owner review of the completed package-first audit before selecting the next queue candidate. |
-| Non-goals | No new BaseSrv/CSRSS clone, no BaseSrv/client binding body, fast WOW assembler, `CurrentMonitorTeb`, global current task/session, second CPU executor, raw pointer/HANDLE ABI, selector enablement, Bochs change or `src.old` input. |
-| Reference Baseline | [S4 closure](etc/evidence/m0-t291-s4-control-plane-separation-closure-001.md), [S5 plan](etc/operations/m0-t291-s5-source-shaped-command-broker-and-monitor-reentry-plan-001.md), [P5 package-boundary plan](etc/operations/m0-t291-s5-mvdm-opennt-package-boundary-audit-plan-001.md), original MVDM/BaseSrv/client source and source policy. |
-| Files And ABI Surface | All selected `mvdm-host` package paths, every directly reached external OpenNT package candidate, the shared file/interface/package/build/divergence ledgers, the external package-boundary ledger, existing `app`, `session`, `broker` and adapter code considered only as possible reversion targets. |
+| Identifier Mode | `M0 T292 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner directed a breadth-first audit from every selected `mvdm-host` outward dependency—definitions, variables, functions, declarations, libraries and build inputs—through every non-MVDM OpenNT package. It includes original kernel-mode code that may be source-derived into a non-invasive public-Win32/Bochs/adapter implementation. |
+| Objective | Build a complete dependency graph and per-file/per-function/block disposition. Start at the complete MVDM host union, discover all non-MVDM OpenNT package candidates, and recursively expand each dispatched package until an edge reaches a modern public Win32 API, a kernel/product hard boundary, no external dependency, or a finite small closure. Record original fragment reuse, same-shaped modern route, explicit exclusion, owner, failure contract and current diff/overlay reversion consequence. |
+| Non-goals | No linked CSR/CSRSS/kernel code, no CSRSS clone, no provider/adapter body, fast WOW assembler, global current task/session, second CPU executor, raw pointer/HANDLE ABI, selector enablement, Bochs change or `src.old` input. |
+| Reference Baseline | [T291 closure](history/m0-t291-closure-20260827.md), [stopping-boundary audit](etc/evidence/adapter-source-reuse-at-stopping-boundaries-001.md), original OpenNT source and source policy. |
+| Files And ABI Surface | A breadth-first package/node/edge ledger; external package/file/function ledgers; MVDM interface/file/divergence/reversion ledgers; current adapter and overlay sources considered only as reversion candidates. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Source/build dependency traversal, dual-edition identity selection, package-level outgoing-edge review, current-code reversion scan, ledger schema checks and documentation governance validation. No executable feature proof is claimed by this audit. |
-| Expected Markers | Every direct external edge has one package owner or stopping-boundary result; accepted package closures are finite; no present autonomous implementation remains unclassified; and BaseSrv is no longer mistaken for an independently composable CSRSS substitute. |
-| Asset Needs | Complete selected MVDM union, complete OpenNT/OpenNT-4.5 source trees, current package/interface ledgers, current production code and package build manifests. |
-| Reporting Requirements | State selected source/package roots, direct MVDM caller, retained source value, outgoing interface closure, stopping boundary, final file/interface disposition, adapter owner and reversion candidate. |
-| Stop Conditions | Any attempt to implement a provider, import a package after only a symbol search, recurse into CSR/CSRSS/NTDLL CSR/kernel VDM/BaseClient/Win32k/USER-GDI server, expose raw identity, touch Bochs or import `src.old`. |
-| Exit Criteria | Owner selects and admits a new packet from `QUEUE.md`. |
-| Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | All COMMAND/WOW command consumers, `NtVdmControl` service classes, `host_simulate` groups, TD/TEB projection fields, broker records and session teardown paths. |
+| Verification | Original source/build traversal, breadth-first package/node/edge walk, per-file SHA-256, function/block dependency review, source-to-current-diff/overlay mapping, ledger schema checks and documentation governance validation. No executable feature proof is claimed. |
+| Expected Markers | Every discovered non-MVDM package has one candidate disposition; every reached file/function/block has one modern non-invasive route or explicit exclusion; candidate fragments have finite closure and no adapter is created without source evidence. |
+| Asset Needs | Complete local OpenNT tree, existing MVDM/external trackers and current production code. |
+| Reporting Requirements | State graph depth, original path/hash, caller, definition, package root, retained algorithm, unavailable kernel/product dependency, modern route, owner, failure rule and diff/overlay consequence. |
+| Stop Conditions | Any attempt to link kernel/product-shell code, import a package after only a symbol search or incomplete BFS expansion, create a generic adapter, expose raw identity, touch Bochs or import `src.old`. |
+| Exit Criteria | Complete external dependency BFS ledger; complete hard-boundary file/function/block ledgers; exact external-package decisions; quantified current-diff/overlay reversion map; and owner-review report. |
+| Original Owner Request | “虽然opennt是内核态但是在现代win32可以用非内核态或者bochs/其他非侵入式方式实现的，都包括进来，用同样标准审计代码可用性。” |
+| Similar-Issue Sweep | CSR capture, CSRSS wait/process lifecycle, every `NtVdmControl` service, V86 monitor, DPMI, DEM search, WOW/VDD and current adapter/overlay replacements. |
+
+**T292 S1 stage-one progress:** the complete MVDM outward lexical inventory is
+now retained as [the BFS seed ledger](etc/operations/opennt-non-mvdm-dependency-bfs-ledger.tsv),
+[include edges](etc/operations/opennt-non-mvdm-stage1-include-edge-ledger.tsv),
+[build edges](etc/operations/opennt-non-mvdm-stage1-build-edge-ledger.tsv),
+[call edges](etc/operations/opennt-non-mvdm-stage1-call-edge-ledger.tsv) and
+[declared data edges](etc/operations/opennt-non-mvdm-stage1-extern-data-ledger.tsv).
+The preceding historical call ledger was found incomplete for public/imported
+calls; the complete raw invocation inventory is
+[here](etc/operations/opennt-non-mvdm-stage1-invocation-ledger.tsv) and is the
+authoritative function seed for this audit. Its reconciled symbol-to-header
+candidate index is [here](etc/operations/opennt-non-mvdm-stage1-invocation-symbol-ledger.tsv).
+This is an inventory checkpoint only: second-level package/file/function
+expansion has not yet begun, and S1 remains active.
 
 **T291 S4 closure:** command, monitor-control and synchronous callback
 execution are now distinct typed planes; the generic session operation table
