@@ -31,10 +31,12 @@
 `VrGetComputerName`, `VrGetDomainName`, `VrGetLogonServer`, `VrGetUserName`,
 `VrNetGetDCName`, `VrNetWkstaSetInfo`, `VrReturnAssignMode` and
 `VrSetAssignMode` are the only small local entry bodies worth individual
-source composition review.  The latter five already retain original no-op or
+source composition review. The latter five already retain original no-op or
 `ERROR_NOT_SUPPORTED` results; they must be regression-proven, not expanded.
-`VrGetComputerName` and `VrGetUserName` need exact synchronous guest output
-spans and public Unicode-to-OEM/ANSI conversion bindings before local proof.
+`VrGetComputerName` is now locally proven through its original bounded
+`LM20_CNLEN` output rule. Only the bounded `BX=1` `VrGetUserName` form still
+needs a source-shaped public Unicode-to-OEM/ANSI conversion binding; its
+unbounded `BX=0` form does not have an admissible output-span proof.
 
 The original-object fixture proved a declaration-closure precondition:
 `vrnetapi.c` includes `apinums.h`, `remdef.h`, `remtypes.h`, `rxp.h`,

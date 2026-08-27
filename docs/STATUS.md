@@ -135,6 +135,13 @@ with their source register outcomes. The fixture's test-only forced link does
 not resolve or enable the sibling private Lanman/SMB bodies; see the
 [P2 evidence](etc/evidence/m0-t290-s5-p2-vrnetapi-local-source-closure-001.md).
 
+**T290 S5 P3:** the exact original `VrGetComputerName` body now composes on
+formal x86/x64 fixtures through its source `LM20_CNLEN` bound and the existing
+session-owned `ES:DI` Redirector pointer scope. It retains either the original
+`AX=0` carry-clear copy result or `NERR_BufTooSmall` carry-set result, without
+creating a larger project buffer or enabling private Lanman/SMB paths; see the
+[P3 evidence](etc/evidence/m0-t290-s5-p3-vrnetapi-computer-name-source-closure-001.md).
+
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
 bodies now compose on formal x86/x64 Ninja fixtures.  Session-owned numeric
