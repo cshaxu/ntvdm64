@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2646 |
+| Documentation records | 2647 |
 | --- | --- |
-| Generated UTC | 2026-08-27T02:22:46Z |
+| Generated UTC | 2026-08-27T02:25:22Z |
 
 ## Entries
 
@@ -788,6 +788,7 @@ content-divergent entries.
 | etc/operations/m0-t280-s20-dem-persistent-guest-location-ledger-001.tsv | indexed supporting material | acbd7ae0171a421fd1e4de8312f86f6045c041e6fb1a7949f6d9bf5d02f308cc |
 | etc/operations/m0-t280-s20-dem-persistent-guest-location-plan-001.md | indexed supporting material | a79effb77a5dc6dcb23552c538ef65eaf22b15e5555469e224b8c7785b8f593b |
 | etc/operations/m0-t280-s20-p1-persistent-location-sweep-001.md | indexed supporting material | c73ac538ad5de0fca7f89d989d2f9c18135b72e23a2f833a6c66a1bc9002f4a8 |
+| etc/operations/m0-t280-s20-p2-descriptor-layout-and-lease-design-001.md | indexed supporting material | 47eb2c1bfcfcfb10118a0cc75fc94b808869df5112194f171fec35f54ae3c222 |
 | etc/operations/m0-t280-s2-ingress-machine-facade-ledger.tsv | indexed supporting material | 0136d94fe4a972222341035d108e4550e91b3cc223e56e27bffc3ffbe42854e5 |
 | etc/operations/m0-t280-s2-ingress-machine-facade-plan-001.md | indexed supporting material | 0237ce42a5b3a8b4f00b5a461992c83b3ab05db26601ff82d818e740b7b18490 |
 | etc/operations/m0-t280-s3-host-static-data-build-evidence-001.md | indexed supporting material | 529049bc0318f43d2db7c94da2cc0168a580938e04dad89beef816077b00ca50 |
@@ -2660,7 +2661,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 56a3e6dedadba46b27d32fca81934bb3356e48d180b60d3d497d9be5e124f947 |
+| STATUS.md | principal control document | d942c1b970d5bfc4d1551322ffda9ec67742ae6a642addae35b25c3e760d536b |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |
