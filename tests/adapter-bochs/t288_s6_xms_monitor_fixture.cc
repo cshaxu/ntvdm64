@@ -2,6 +2,8 @@
 
 extern "C" {
 #include "adapter-mvdm-host-out/softpc/include/mvdm_command_registers.h"
+#include "adapter-mvdm-host-out/softpc/include/mvdm_int15.h"
+#include "adapter-mvdm-host-out/softpc/include/mvdm_sas.h"
 #include "session/session.h"
 
 typedef int32_t (*commit_routine)(uint32_t, uint32_t);
@@ -17,22 +19,11 @@ extern unsigned long xmsMemorySize;
 unsigned long __cdecl DbgPrint(char *, ...) { return 0u; }
 }
 
-static unsigned short int15_segment;
-static unsigned short int15_offset;
-static unsigned int int15_calls;
-
 extern "C" int ReserveUMB(unsigned short, void **address, unsigned long *size)
 {
     if (address != 0) *address = 0;
     if (size != 0) *size = 0;
     return 0;
-}
-
-extern "C" void UpdateKbdInt15(unsigned short segment, unsigned short offset)
-{
-    int15_segment = segment;
-    int15_offset = offset;
-    ++int15_calls;
 }
 
 static int machine_read(void *, uint32_t address, uint8_t *bytes, uint32_t count)
@@ -57,6 +48,10 @@ int main()
     };
 
     if (!machine_facade_machine_begin(0x400000u, 0x400000u)) return 1;
+    sas_init(0x400000u);
+    sas_storew(0x15u * 4u, 0x0100u);
+    sas_storew(0x15u * 4u + 2u, 0xf000u);
+    mvdm_int15_capture_vector();
     session_initialize(&instance, 3u);
     if (!session_activate(&instance) || !session_thread_bind(&instance) ||
         !session_guest_memory_begin(&instance, 0, machine_read, machine_write)) return 2;
@@ -95,10 +90,13 @@ int main()
 
     machine_facade_apply_real_mode_entry(0x1234u, 0u);
     if (!machine_facade_set_ax16(0x5678u) || !XMSDispatch(9u) ||
-        int15_calls != 1u || int15_segment != 0x1234u ||
-        int15_offset != 0x5678u || !cx(640u)) return 12;
+        mvdm_int15_matches_current_vector() || !cx(640u)) return 12;
+    sas_storew(0x15u * 4u, 0x5678u);
+    sas_storew(0x15u * 4u + 2u, 0x1234u);
+    if (!mvdm_int15_matches_current_vector()) return 12;
     if (!XMSDispatch(10u)) return 13;
 
+    sas_term();
     session_guest_memory_end(&instance);
     if (!session_thread_unbind(&instance) || !session_dispose(&instance) ||
         !machine_facade_machine_cleanup()) return 15;

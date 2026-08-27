@@ -31,6 +31,8 @@ $cSources = @(
     'src/adapter-mvdm-host-out/softpc/mvdm_command_registers.c',
     'src/adapter-mvdm-host-out/softpc/mvdm_a20.c',
     'src/adapter-mvdm-host-out/softpc/mvdm_xms_memory.c',
+    'src/adapter-mvdm-host-out/softpc/mvdm_sas.c',
+    'src/adapter-mvdm-host-out/softpc/mvdm_int15.c',
     'src/mvdm-host-overlay/xms.486/xms_a20_state.c',
     'src/mvdm-host-overlay/xms.486/xms_block_move.c',
     'src/mvdm-host/xms.486/xms.c', 'src/mvdm-host/xms.486/xmsa20.c', 'src/mvdm-host/xms.486/xmsblock.c',
@@ -39,7 +41,7 @@ $cSources = @(
 )
 $cxxSources = @('src/adapter-bochs/headless_8042.cc', 'src/adapter-bochs/machine_facade.cc',
     'src/adapter-bochs/minimal_machine.cc', 'src/adapter-bochs/minimal_pic.cc', 'src/adapter-bochs/minimal_sim.cc')
-$fixture = 'tests/adapter-bochs/t287_s6_xms_dispatch_fixture.cc'
+$fixture = 'tests/adapter-bochs/t288_s6_xms_monitor_fixture.cc'
 foreach ($path in $cSources + $cxxSources + $fixture) {
     if (!(Test-Path -LiteralPath (Join-Path $root $path) -PathType Leaf) -or $path -match '(^|/)src\.old(/|$)') { throw "Invalid S6 input: $path" }
 }
