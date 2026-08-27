@@ -130,6 +130,9 @@ adapter-softpc operations over the sole session guest-memory lease. The formal
 x86/x64 fixture covers positive and negative spans; COMMAND mirror source is
 still unchanged. See the [S12 P1 evidence](etc/evidence/m0-t282-s12-bounded-copy-binding-001.md).
 
+**T282 S12 P2:** the same reached original register boundary now includes
+`getAL`/`setAX`, required by `cmdGetCurrentDir`; the x86/x64 regression passes.
+
 ### Closed packet reference — M0 T281 S5 — original host-control package disposition
 
 | Field | Record |

@@ -11,3 +11,8 @@ checks terminated string copying, unterminated maximum rejection, exact guest
 write commit, and existing invalid-address rejection.
 
 This P1 does not modify a COMMAND mirror file or enable a BOP route.
+
+P2 added the exact reached `getAL` and `setAX` imports alongside the earlier
+COMMAND register set. The same formal x86/x64 register fixture passed after
+the extension. These remain selector-blind adapter-softpc calls over typed
+adapter-bochs mechanics.

@@ -206,10 +206,24 @@ extern "C" int machine_facade_copy_es16(uint16_t *value)
   return 1;
 }
 
+extern "C" int machine_facade_copy_al8(uint8_t *value)
+{
+  if (machine_facade_machine == 0 || value == 0) return 0;
+  *value = bx_cpu.get_reg8l(BX_16BIT_REG_AX);
+  return 1;
+}
+
 extern "C" int machine_facade_set_al8(uint8_t value)
 {
   if (machine_facade_machine == 0) return 0;
   bx_cpu.set_reg8l(BX_16BIT_REG_AX, value);
+  return 1;
+}
+
+extern "C" int machine_facade_set_ax16(uint16_t value)
+{
+  if (machine_facade_machine == 0) return 0;
+  bx_cpu.set_reg16(BX_16BIT_REG_AX, value);
   return 1;
 }
 

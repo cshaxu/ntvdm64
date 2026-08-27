@@ -9,6 +9,13 @@ uint16_t getAX(void)
     return value;
 }
 
+uint8_t getAL(void)
+{
+    uint8_t value = 0u;
+    (void)machine_facade_copy_al8(&value);
+    return value;
+}
+
 uint16_t getBX(void)
 {
     uint16_t value = 0u;
@@ -47,6 +54,11 @@ uint16_t getES(void)
 void setAL(uint8_t value)
 {
     (void)machine_facade_set_al8(value);
+}
+
+void setAX(uint16_t value)
+{
+    (void)machine_facade_set_ax16(value);
 }
 
 void setBX(uint16_t value)
