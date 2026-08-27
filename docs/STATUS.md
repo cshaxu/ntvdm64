@@ -2,16 +2,14 @@
 
 ## Current Work
 
-**Active: M0 T281 S5 — original host-control package disposition.** The owner has
-directed execution in Queue order. The
-closed T277 package tracker, T278 physical re-root, T279 support-library
-closure, and T280 source-boundary recovery establish the inputs; they do not
-make a provider route active. T281 begins the first remaining ordered Wave 2
-package: original host control plane and DEM.
+**No active M/T/S packet.** M0 T281 closed as source composition and a complete
+host-control recovery partition in [its closure record](history/m0-t281-closure-20260826.md).
+The owner-directed Queue order identifies the next candidate; it still needs
+an explicit Status admission before implementation begins.
 
 ## Active Packet
 
-### M0 T281 S5 — original host-control package disposition
+### Closed packet reference — M0 T281 S5 — original host-control package disposition
 
 | Field | Record |
 | --- | --- |
@@ -27,7 +25,7 @@ package: original host control plane and DEM.
 | Asset Needs | Pinned original mirror, T277/T280 ledgers, existing component headers, MSVC x64/x86 and Ninja. |
 | Reporting Requirements | Report per-import source form, owner/binding, architecture result, compile/link state, excluded branch and any boundary that requires a re-admission. |
 | Stop Conditions | Any row lacks an existing tracker owner, a proposed group would mix Bochs device/executor semantics with MVDM control semantics, or a new adapter is assumed without a named source interface. |
-| Exit Criteria | All 56 sources are assigned to one ordered recovery group or explicit non-eligibility owner, all adapter prerequisites are named, and the next source-composition S can be admitted without re-auditing a leaf function. |
+| Exit Criteria | Met: all 56 sources are assigned once to an ordered recovery group or explicit non-eligibility owner and each prerequisite is named. See [M0 T281 closure](history/m0-t281-closure-20260826.md). |
 | Original Owner Request | “我都叫你按顺序执行了”。 |
 | Similar-Issue Sweep | All six T276 S12 owner families, every host/src path, startup/termination/event/monitor/BOP forms, and all machine/device/external product exclusions. |
 
@@ -67,10 +65,12 @@ source-identity-preserving static archive per architecture. Runtime dispatch,
 provider invocation and host control composition remain deliberately outside
 that archive and transfer to the host-control package sequence.
 
-**T281 S4 P1:** x86 and x64 now each archive exactly the sixteen original DEM
-objects as `original-dem-package.lib`. The archive-member verifier proves the
-complete source set and rejects executables, runtime rules, BOP ingress,
-Bochs, `nt_bop.c`, and the VDM control implementation body.
+**T281 S5 P1:** the reproducible consolidation ledger now assigns all 56
+original `host/src` paths exactly once: 23 `adapter-prerequisite`, 18
+`bochs-replacement`, 15 `specialist-owner`, and zero `eligible-next`. The
+generator and verifier prove unique source/owner records; no source body,
+selector, provider, machine executor, or guest route was enabled. See the
+[S5 disposition evidence](etc/evidence/m0-t281-s5-host-control-disposition-001.md).
 
 The detailed execution plans are [S1 original BOP dispatch composition](etc/operations/m0-t281-s1-original-bop-dispatch-composition-plan-001.md), [S2 original DEM common-control composition](etc/operations/m0-t281-s2-original-dem-common-control-composition-plan-001.md), [S3 original DEM provider source composition](etc/operations/m0-t281-s3-original-dem-provider-source-composition-plan-001.md), [S4 complete original DEM static package composition](etc/operations/m0-t281-s4-complete-original-dem-static-package-composition-plan-001.md), and [S5 original host-control package disposition](etc/operations/m0-t281-s5-original-host-control-package-disposition-plan-001.md).
 
