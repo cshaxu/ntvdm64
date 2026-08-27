@@ -45,10 +45,11 @@ If a declaration is proved to be private to the imported BaseSrv package, a
 later source-selection record may relocate that exact declaration; generic
 public/private ABI carriers remain separate.
 
-## Next work
+## P3 outcome and next work
 
-P3 imports the selected exact files and establishes their component README and
-source/hash manifest. P4 maps each CSR/private-NT dependency to a same-shaped
+P3 imported the selected exact files, established the component README and
+recorded each hash in the shared file tracker; see the
+[P3 import evidence](m0-t291-s5-p3-basesrv-source-import-001.md). P4 maps each CSR/private-NT dependency to a same-shaped
 `adapter-opennt-host` facade when it is BaseSrv-specific, an existing shared
 adapter family only when the original interface is demonstrably shared, a
 bounded `broker` transport where the original server requires a copied

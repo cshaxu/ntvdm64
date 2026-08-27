@@ -2,21 +2,25 @@
 
 ## Purpose
 
-Before any MVDM host-runtime provider or support package enters the enabled host graph,
-produce a complete package-to-symbol dependency closure. This replaces
-compile-error-led adapter growth with an import-first, tracker-led recovery
-sequence.
+Before any MVDM host-runtime provider, support package, or approved external
+OpenNT host package enters the enabled host graph, produce a complete
+package-to-symbol dependency closure. This replaces compile-error-led adapter
+growth with an import-first, tracker-led recovery sequence.
 
 ## Scope
 
-The audit covers the 23 selected original MVDM package roots. During this
-audit they remain in the exact temporary `opennt-mvdm-host` source-union
-carrier established by T274; their final component owner is recorded before
-any source/body move. The final owner groups are:
+The audit covers the 23 selected original MVDM package roots and every
+non-MVDM OpenNT host package admitted by a complete-package source audit.
+During this audit the MVDM paths remain in the exact temporary
+`opennt-mvdm-host` source-union carrier established by T274; an external
+package receives its own original-mirror owner before any source/body move.
+The final owner groups are:
 
 - `opennt-mvdm-host`: true MVDM host-runtime provider packages;
 - `opennt-mvdm-support`: `dirs`, `makefil0`, `inc`, `oemuni` and `suballoc`;
 - `opennt-mvdm-tools`: `vdmutils` standalone products/resources.
+- `opennt-host`: an original, non-MVDM OpenNT host package with a complete
+  source/ABI selection record. It never becomes a generic replacement layer.
 
 The selected roots are:
 
@@ -28,11 +32,12 @@ It separates header/utility roots from source-owner packages, and separately
 records non-enabled SoftPC CPU bodies whose execution ownership is Bochs.
 Guest mirrors are load-only and outside this host compile closure.
 
-All 1,689 selected paths remain original mirrors regardless of current
-build disposition. A path that is not enabled in the current profile is not an
-import failure and is never deleted merely because a historical dependency is
-unavailable. Physical re-rooting follows a dedicated file-identity migration;
-this tracker does not move source.
+All 1,689 selected MVDM paths, plus every explicitly selected non-MVDM OpenNT
+host path, remain original mirrors regardless of current build disposition. A
+path that is not enabled in the current profile is not an import failure and
+is never deleted merely because a historical dependency is unavailable.
+Physical re-rooting follows a dedicated file-identity migration; this tracker
+does not move source.
 
 ## Exact composition classifications
 
@@ -80,7 +85,8 @@ Every reached source symbol and dependency records:
 The package tracker is a coordinated set of independent, machine-readable
 ledgers. A status in one ledger cannot be inferred from another.
 
-1. **File recovery ledger** — one row for each of the 1,689 selected paths:
+1. **File recovery ledger** — one row for each of the 1,689 selected MVDM
+   paths and every selected external OpenNT host path:
    upstream selection/hash, package, file kind, mirror identity, final
    composition class, build/profile state, divergence/exception ID and final
    non-recovery reason where applicable. Its final class is exactly one of
@@ -110,10 +116,11 @@ an original file to make a count look better.
 
 ## Exit criteria
 
-- Every selected package root has a complete import/disposition record.
-- The four exact composition classifications report auditable counts for all
-  1,689 selected host paths and for every reached symbol; no percentage estimate
-  is used as an acceptance result.
+- Every selected MVDM or external OpenNT host package root has a complete
+  import/disposition record.
+- The four exact composition classifications report auditable counts for the
+  fixed 1,689 MVDM paths, every selected external OpenNT host path and every
+  reached symbol; no percentage estimate is used as an acceptance result.
 - Every package proposed for the next recovery wave has no unresolved external
   dependency without a named adapter and successor task.
 - The tracker gives a dependency-topological order and identifies package

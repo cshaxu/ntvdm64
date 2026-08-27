@@ -22,3 +22,4 @@
 "MVDM-PROFILE-VDMUTILS"	"vdmutils"	"unreviewed"	"unreviewed"	"observed-source=6; observed-build-control=9"	"observed-textual-includes; library-closure-unreviewed"	"unreviewed"	""	""	""
 "MVDM-PROFILE-WOW32"	"wow32"	"unreviewed"	"unreviewed"	"observed-source=85; observed-build-control=3"	"observed-textual-includes; library-closure-unreviewed"	"unreviewed"	""	""	""
 "MVDM-PROFILE-XMS-486"	"xms.486"	"unreviewed"	"unreviewed"	"observed-source=8; observed-build-control=6"	"observed-textual-includes; library-closure-unreviewed"	"unreviewed"	""	""	""
+"OPENNT-HOST-PROFILE-BASESRV-VDM"	"base/win32"	"adapter-pending"	"adapter-pending"	"source=3; direct-declaration-carriers=7"	"CSR client/server plus NTDLL/USER and event-pair closure pending named adapter-opennt-host interfaces"	"source-package-audited"	"m0-t291-s5-p2-basesrv-source-package-audit-001.md"	""	""

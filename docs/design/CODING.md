@@ -6,6 +6,7 @@
 src/
   bochs-core/
   mvdm-host/
+  opennt-host/
   mvdm-support/
   mvdm-tools/
   mvdm-softpc-firmware/
@@ -32,6 +33,10 @@ material and never a source, build, link or runtime input.
 - `bochs-core` contains the adopted Bochs mirror only.
 - `mvdm-host` contains only canonical selected MVDM host-runtime
   packages, retaining package-internal paths and filenames.
+- `opennt-host` contains only a complete selected original OpenNT host-service
+  package outside MVDM, retaining its upstream-relative paths and filenames.
+  It is admitted only with rows in the shared file/interface/dependency/build
+  trackers; a standalone convenience helper never qualifies.
 - `mvdm-support` contains selected shared MVDM build/header carriers
   and original support libraries (`inc`, `dirs`, `makefil0`, `oemuni`, and
   `suballoc`). It has no implied default host link edge.
@@ -56,6 +61,10 @@ material and never a source, build, link or runtime input.
   interface families `win32`, `softpc`, `monitor`, `redir`, `wow`, `vdd` and
   `debugger`; a missing historical product interface is assigned to one of
   those families before a mirror source is changed to avoid it.
+- `adapter-opennt-host`, when admitted, contains only the same-shaped
+  BaseSrv/private-host interface family required by its `opennt-host` caller.
+  It cannot be used by `mvdm-host` directly or become a generic compatibility
+  root.
 - `session` contains neutral per-instance lifetime, mappings, resources,
   events and teardown.
 - `broker` contains the versioned IPC client/server contract and per-user

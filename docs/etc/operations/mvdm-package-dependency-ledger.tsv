@@ -22,3 +22,4 @@
 "MVDM-PACKAGE-VDMUTILS"	"vdmutils"	"support"	"28"	"observed-textual-include-graph"	""	""	"m0-t276-s2-translation-unit-include-ledger.tsv; source=6; build-input=9; include=26"
 "MVDM-PACKAGE-WOW32"	"wow32"	"owner-package"	"201"	"observed-textual-include-graph"	""	""	"m0-t276-s2-translation-unit-include-ledger.tsv; source=85; build-input=3; include=154"
 "MVDM-PACKAGE-XMS-486"	"xms.486"	"owner-package"	"15"	"observed-textual-include-graph"	""	""	"m0-t276-s2-translation-unit-include-ledger.tsv; source=8; build-input=6; include=29"
+"OPENNT-HOST-PACKAGE-BASESRV-VDM"	"base/win32"	"external-opennt-host-package"	"10"	"source-package-audited; direct-include-closure-pending"	""	"M0 T291 S5 P4"	"m0-t291-s5-p2-basesrv-source-package-audit-001.md; original BaseSrv/client VDM slice plus direct declaration carriers"

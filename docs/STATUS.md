@@ -43,6 +43,12 @@ package and its owner boundary before any binding is admitted; see the
 [P1 audit](etc/evidence/m0-t291-s5-p1-command-broker-source-abi-audit-001.md)
 and [P2 source-package audit](etc/evidence/m0-t291-s5-p2-basesrv-source-package-audit-001.md).
 
+**T291 S5 P3:** the selected exact BaseSrv/client VDM package now lives in
+`opennt-host`; its ten file rows and five source-interface rows were added to
+the shared MVDM/OpenNT host tracker. It remains unlinked pending the named
+CSR/private-host binding audit; see the
+[P3 import evidence](etc/evidence/m0-t291-s5-p3-basesrv-source-import-001.md).
+
 **T291 S3 closure:** the bounded pointer scope, numeric task projection and
 source-shaped non-fast callback mechanics passed their complete formal x86/x64
 fixture matrix. `CallBack16` now bypasses session command routing and uses

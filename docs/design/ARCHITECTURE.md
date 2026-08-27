@@ -8,7 +8,7 @@ recreating a private NT subsystem, or requiring installation-time host
 mutation. Public Win32 APIs and ordinary host resources remain valid integration
 mechanisms.
 
-The product has fourteen production source components. A source file has one
+The product has fifteen production source components. A source file has one
 owner. Original mirrors preserve upstream package identity, adapters preserve
 historical interface shape while translating mechanics, and project components
 own composition, session lifetime and cross-process coordination.
@@ -23,6 +23,10 @@ own composition, session lifetime and cross-process coordination.
   selected DEM, COMMAND, XMS, DPMI32, VDMREDIR, WOW32, VDD/debugger,
   `softpc.new` and SIM/monitor provider packages. It does not own standalone
   tools or common support libraries.
+- `opennt-host`: the canonical original non-MVDM OpenNT host-service mirror.
+  It owns only complete, source-audited Windows-host packages actually used by
+  `mvdm-host`, beginning with the BaseSrv/client VDM command package. It is
+  neither a replacement MVDM provider nor a generic compatibility layer.
 - `mvdm-support`: the canonical original MVDM common support mirror:
   shared `inc` declarations/build carriers plus original `oemuni` and
   `suballoc` library packages. It may be independently built, but it enters a
@@ -103,12 +107,16 @@ app -> adapter-mvdm-host-in -> mvdm-host
 app -> mvdm-guest/dos / mvdm-guest/win16         (data/load only)
 
 mvdm-host -> mvdm-platform-abi
+mvdm-host -> opennt-host                           (same-shaped original host service)
 mvdm-host -> mvdm-support
 mvdm-host -> adapter-mvdm-host-out
 mvdm-host -> session                              (neutral contract only)
 adapter-mvdm-host-out/softpc -> adapter-bochs
 adapter-mvdm-host-in -> adapter-mvdm-host-out/softpc  (typed mechanics only)
 adapter-mvdm-host-out/win32 -> broker client      (only for brokered historical calls)
+opennt-host -> mvdm-platform-abi
+opennt-host -> adapter-opennt-host                 (only source-audited BaseSrv-specific bindings)
+opennt-host -> broker                              (only source-required fixed-width transport)
 mvdm-tools -> mvdm-support / mvdm-platform-abi    (independent tool builds only)
 mvdm-softpc-firmware -> adapter-bochs             (manifest-selected machine input only)
 ```
@@ -125,6 +133,12 @@ it is not a convenience shim and it may not absorb another adapter's caller or
 provider semantics. A missing interface is first assigned to this inventory,
 then recovered with original source evidence, rather than edited out of an
 OpenNT mirror.
+
+`adapter-opennt-host` is created only when a complete original `opennt-host`
+package reaches a host interface private to that package (for example a
+BaseSrv CSR operation). It preserves the original spelling, ABI shape and
+observable order for that one interface family. It is not a second generic
+Win32 shim and is consumed only by its owning `opennt-host` package.
 
 `mvdm-support` has no automatic inbound runtime edge: a host package
 may use it only after the package/symbol tracker records the original consumer,

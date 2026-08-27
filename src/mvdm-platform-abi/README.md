@@ -43,6 +43,12 @@ T282 S3 selected byte-exact public internal `winconp.h` for original COMMAND
 keyboard-layout declarations. It does not enable keyboard policy, registry
 access, console initialization, a `54:0E` provider or guest-memory writes.
 
+T291 S5 P3 selected byte-exact public SDK `ntcsrsrv.h` for the original
+OpenNT BaseSrv VDM package now mirrored in `opennt-host`. It is only the
+declaration carrier for the original CSR server shapes; it neither recreates
+CSR nor enables a BaseSrv runtime route. Its source/hash/final-disposition row
+is `OPENNT-PLATFORM-FILE-0001` in the shared host tracker.
+
 T290 S3 selected byte-exact public internal `align.h` for the reached original
 Redirector named-pipe provider.  The newer OpenNT cohort preserves its
 historical macro names while using `ULONG_PTR` alignment arithmetic on both

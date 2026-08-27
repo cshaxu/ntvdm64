@@ -1,11 +1,15 @@
 # Architecture Rules
 
-1. The production source owners are exactly `bochs-core`, `mvdm-host`,
+1. The production source owners are exactly `bochs-core`, `mvdm-host`, `opennt-host`,
    `mvdm-support`, `mvdm-tools`, `mvdm-softpc-firmware`,
    `mvdm-platform-abi`, `mvdm-guest/dos`, `mvdm-guest/win16`,
    `adapter-bochs`, `adapter-mvdm-host-in`, `adapter-mvdm-host-out`, `session`, `broker`,
-   and `app`.
-2. `mvdm-host` is the sole MVDM host-runtime mirror. Shared original MVDM
+   `adapter-opennt-host` when a source-audited OpenNT-host package requires
+   it, and `app`.
+2. `mvdm-host` is the sole MVDM host-runtime mirror. `opennt-host` is the sole
+   original non-MVDM OpenNT host-service mirror and accepts a package only
+   after it has a complete source/ABI/final-disposition audit in the shared
+   host tracker. Shared original MVDM
    support carriers/libraries belong to `mvdm-support`; independent historical
    tools belong to `mvdm-tools`. A tool is never a host
    runtime dependency merely because it is independently buildable.
@@ -26,6 +30,9 @@
    the reached original name, parameters, calling convention, layout, ordering
    and failure contract wherever the platform permits. No family becomes an
    alternate OpenNT provider or absorbs another family's semantics.
+   `adapter-opennt-host` is a distinct, package-private family for a reached
+   `opennt-host` CSR/private-host interface; it cannot absorb MVDM caller
+   semantics or become a generic adapter.
 6. The `monitor` family owns the complete same-shaped user-mode
    `NtVdmControl`, `VDM_TIB`, V86-event and interrupt/fault-handler interface
    family. It binds bounded per-session/per-thread state and an app-installed
