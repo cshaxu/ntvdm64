@@ -29,6 +29,13 @@ ULONG NTAPI RtlNtStatusToDosError(NTSTATUS Status);
 VOID NTAPI RtlAcquirePebLock(VOID);
 VOID NTAPI RtlReleasePebLock(VOID);
 
+/* DIVERGENCE ADAPTER-WIN32-009: `nt_bop.c` reaches the exact historical
+ * ntrtl.h declaration for this diagnostic-only breakpoint.  Modern SDK
+ * selection through nt.h does not expose it consistently, so retain only its
+ * original declaration shape here; debugger behavior remains owned by the
+ * debugger adapter family. */
+VOID NTAPI DbgBreakPoint(VOID);
+
 BOOLEAN NTAPI RtlCreateUnicodeString(PUNICODE_STRING DestinationString, PCWSTR SourceString);
 LONG NTAPI RtlCompareUnicodeString(PCUNICODE_STRING String1, PCUNICODE_STRING String2, BOOLEAN CaseInSensitive);
 NTSTATUS NTAPI RtlAppendUnicodeToString(PUNICODE_STRING Destination, PCWSTR Source);
