@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2801 |
+| Documentation records | 2802 |
 | --- | --- |
-| Generated UTC | 2026-08-27T12:56:58Z |
+| Generated UTC | 2026-08-27T13:01:31Z |
 
 ## Entries
 
@@ -385,6 +385,7 @@ content-divergent entries.
 | etc/evidence/m0-t290-s1-redirector-source-abi-audit-001.md | indexed supporting material | b7652efafd42643e5aab0cd327221466df918fd0c536c8a5ae9d79e8cf4d90cd |
 | etc/evidence/m0-t290-s2-redirector-interface-closure-design-001.md | indexed supporting material | 19d850fef6730d04c91725740fd6c84b1a6069abf87c777e6c3261b55c8082b3 |
 | etc/evidence/m0-t290-s3-p1-redirector-pointer-scope-001.md | indexed supporting material | f449bb74962851d95c0f820741465b9793d26ff93601428d1e991d71cfd19597 |
+| etc/evidence/m0-t290-s3-p2-redirector-vrmisc-original-body-001.md | indexed supporting material | f8720c21aa51417379c2956ecba2191513a8c0d411e0bdd3627ea70129974428 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
