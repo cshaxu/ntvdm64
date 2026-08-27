@@ -50,6 +50,26 @@ supported host widths.  The differing OpenNT-4.5 private candidate is recorded
 in the canonical import manifest; this is a source-cohort selection, not an
 adapter or source-body divergence.
 
+T290 S5 selected the complete byte-exact OpenNT
+`public/internal/ds/inc` declaration package under
+`source/public/internal/ds/inc`. This preserves the historical declaration
+cohort required by the original Redirector NetAPI source without importing a
+Lanman implementation, server, RPC service, or Redirector route. The
+package-selection record and per-file source/hash manifest are
+[here](../../docs/etc/operations/m0-t290-s5-ds-declaration-package-selection-001.md)
+and
+[here](../../docs/etc/operations/m0-t290-s5-ds-declaration-package-manifest-001.tsv).
+
+T290 S5 selected the complete byte-exact OpenNT
+`public/internal/ds/inc` declaration package under
+`source/public/internal/ds/inc`. This preserves the historical declaration
+cohort required by the original Redirector NetAPI source without importing a
+Lanman implementation, server, RPC service, or Redirector route. The
+package-selection record and per-file source/hash manifest are
+[here](../../docs/etc/operations/m0-t290-s5-ds-declaration-package-selection-001.md)
+and
+[here](../../docs/etc/operations/m0-t290-s5-ds-declaration-package-manifest-001.tsv).
+
 ## Divergence register
 
 None. Every current file below `source/` is byte-identical to the exact source
