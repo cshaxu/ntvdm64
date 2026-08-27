@@ -67,6 +67,10 @@ retains BP:BX opaque identity, DS:SI bounded bounce-lease and packed
 x86/x64 local-pipe fixture with the same BP:BX opaque identity and source
 DOS-to-Win32 mode conversion; see the [P10 evidence](etc/evidence/m0-t290-s3-p10-named-pipe-state-set-001.md).
 
+**T290 S3 P11:** original `VrPeekNamedPipe` now composes through the existing
+session DS:SI pointer scope and returns source-shaped counts/status before the
+same bytes are consumed by original read; see the [P11 evidence](etc/evidence/m0-t290-s3-p11-named-pipe-peek-guest-span-001.md).
+
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
 bodies now compose on formal x86/x64 Ninja fixtures.  Session-owned numeric

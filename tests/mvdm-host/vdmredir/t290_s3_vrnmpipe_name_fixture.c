@@ -17,6 +17,7 @@ BOOL VrWriteNamedPipe(HANDLE handle, LPBYTE buffer, DWORD byte_count,
 VOID VrGetNamedPipeHandleState(VOID);
 VOID VrGetNamedPipeInfo(VOID);
 VOID VrSetNamedPipeHandleState(VOID);
+VOID VrPeekNamedPipe(VOID);
 
 extern CRITICAL_SECTION VrNamedPipeCancelCritSec;
 
@@ -27,6 +28,7 @@ static USHORT fixture_bp;
 static USHORT fixture_cx;
 static USHORT fixture_ds;
 static USHORT fixture_si;
+static USHORT fixture_di;
 static ULONG fixture_carry;
 USHORT getAX(VOID) { return fixture_ax; }
 USHORT getBX(VOID) { return fixture_bx; }
@@ -34,7 +36,7 @@ USHORT getBP(VOID) { return fixture_bp; }
 USHORT getCX(VOID) { return fixture_cx; }
 USHORT getDX(VOID) { return 0u; }
 USHORT getSI(VOID) { return fixture_si; }
-USHORT getDI(VOID) { return 0u; }
+USHORT getDI(VOID) { return fixture_di; }
 USHORT getDS(VOID) { return fixture_ds; }
 USHORT getES(VOID) { return 0u; }
 VOID setAL(UCHAR value) { (void)value; }
@@ -43,7 +45,7 @@ VOID setBX(USHORT value) { fixture_bx = value; }
 VOID setCX(USHORT value) { (void)value; }
 VOID setDX(USHORT value) { (void)value; }
 VOID setSI(USHORT value) { (void)value; }
-VOID setDI(USHORT value) { (void)value; }
+VOID setDI(USHORT value) { fixture_di = value; }
 VOID setDS(USHORT value) { (void)value; }
 VOID setES(USHORT value) { (void)value; }
 VOID setCF(ULONG value) { fixture_carry = value; }
@@ -195,6 +197,21 @@ int main(void)
         CloseHandle(server);
         return 15;
     }
+    fixture_bp = (USHORT)(identity >> 16);
+    fixture_bx = (USHORT)identity;
+    fixture_cx = (USHORT)sizeof(inbound);
+    fixture_ds = 0u;
+    fixture_si = 0x1200u;
+    fixture_di = 0u;
+    fixture_carry = 1u;
+    if (!mvdm_redirector_pointer_scope_begin())
+        return 16;
+    VrPeekNamedPipe();
+    if (!mvdm_redirector_pointer_scope_end(1) || fixture_carry != 0u ||
+        fixture_bx != sizeof(inbound) || fixture_cx != sizeof(inbound) ||
+        fixture_di != 3u ||
+        memcmp(memory.bytes + 0x1200u, inbound, sizeof(inbound)) != 0)
+        return 17;
     bytes = 0u;
     error = ERROR_GEN_FAILURE;
     if (!VrReadNamedPipe(client, received, sizeof(received), &bytes, &error) ||
@@ -203,7 +220,7 @@ int main(void)
         DeleteCriticalSection(&VrNamedPipeCancelCritSec);
         CloseHandle(client);
         CloseHandle(server);
-        return 16;
+        return 18;
     }
     bytes = 0u;
     if (!VrWriteNamedPipe(client, outbound, sizeof(outbound), &bytes) ||
@@ -213,20 +230,20 @@ int main(void)
         DeleteCriticalSection(&VrNamedPipeCancelCritSec);
         CloseHandle(client);
         CloseHandle(server);
-        return 17;
+        return 19;
     }
     DeleteCriticalSection(&VrNamedPipeCancelCritSec);
     if (!VrRemoveOpenNamedPipeInfo(client) ||
         !mvdm_host_identity_release(identity) || !session_thread_unbind(&instance)) {
         CloseHandle(client);
         CloseHandle(server);
-        return 18;
+        return 20;
     }
     session_guest_memory_end(&instance);
     if (!session_dispose(&instance)) {
         CloseHandle(client);
         CloseHandle(server);
-        return 19;
+        return 21;
     }
     CloseHandle(client);
     CloseHandle(server);
