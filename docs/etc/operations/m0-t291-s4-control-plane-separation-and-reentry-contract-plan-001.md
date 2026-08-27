@@ -39,6 +39,29 @@ No WOW provider selector/body, Win16 guest load, private CSRSS/BaseSrv clone,
 CCPU worker, current-monitor TEB, fast WOW assembler, global dispatcher,
 generic adapter or extra mapping manager. No `src.old` input.
 
+## Ordered parts and successor
+
+1. **P1 — `NtVdmControl` capability separation (closed).** `VdmQueryDir`
+   uses a typed monitor binding and all other service classes retain their
+   original unavailable result.
+2. **P2 — `GetNextVDMCommand` typed provider separation (closed).** Remove
+   the temporary generic `session` operation dispatcher. Preserve the public
+   entry/`VDMINFO` shape and bind the one current app command source directly
+   to a monitor-owned command-provider capability. Its absent-provider result
+   is explicit; this is not a BaseSrv/CSR completion claim.
+3. **P3 — reached `host_simulate` source-postcondition inventory.** Record
+   every source call site by owner, precondition, expected stop/result and
+   successor. A same-spelled entry remains mechanical only.
+4. **P4 — WOW task binding and callback-stream limit.** Record the precise
+   one-bound-thread/reentrant rejection behavior and the original TD/TEB
+   lifecycle required before additional workers or WOW tasks are admitted.
+5. **S5 successor — source-shaped command brokerage and monitor re-entry
+   completion.** After S4 closes its inventories, S5 will recover the
+   applicable `GetNextVDMCommand` wait/wake/arbitration contract through the
+   named monitor/broker owners, and will extend worker/task lifecycle only
+   where original source evidence supplies the call order and failure result.
+   It must not create a generic dispatcher or a speculative BaseSrv/CSR clone.
+
 ## Exit criteria
 
 The product has one explicitly typed owner per original layer, no current

@@ -43,6 +43,14 @@ WOW task lifecycle remain separate source-first groups; see the
 [P1 evidence](etc/evidence/m0-t291-s4-p1-vdm-control-capability-separation-001.md)
 and [live control-plane ledger](etc/operations/m0-t291-s4-control-plane-disposition-ledger-001.md).
 
+**T291 S4 P2:** `GetNextVDMCommand` now has its own typed monitor command
+provider and no longer crosses a generic `session` operation dispatcher.
+The single immediate app source remains deliberately bounded: BaseSrv/CSR
+capture, wait/wake, WOWEXEC notification and multi-caller arbitration are
+not claimed. Formal x86/x64 proof and the named S5 successor are recorded in
+the [S4 plan](etc/operations/m0-t291-s4-control-plane-separation-and-reentry-contract-plan-001.md)
+and [live ledger](etc/operations/m0-t291-s4-control-plane-disposition-ledger-001.md).
+
 **T291 S2 closure:** all twelve selected original WOW32 thunk/frame bodies
 have source coverage; 214 reached external-interface occurrences and eighteen
 source-token dispositions have one owner, bounded lifetime and recovery or

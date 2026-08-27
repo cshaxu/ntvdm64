@@ -184,21 +184,15 @@ static NTSTATUS app_command_source_copy(app_command_source *source,
     return STATUS_SUCCESS;
 }
 
-static int32_t app_command_source_dispatch(void *context, uint32_t operation,
-    void *request_bytes)
+static NTSTATUS app_command_source_dispatch(void *context, PVDMINFO information)
 {
     app_command_source *source = (app_command_source *)context;
-    adapter_vdm_monitor_command_request *request =
-        (adapter_vdm_monitor_command_request *)request_bytes;
-    if (!app_command_source_valid(source) ||
-        operation != ADAPTER_VDM_MONITOR_GET_NEXT_COMMAND || request == NULL ||
-        request->version != ADAPTER_VDM_MONITOR_COMMAND_REQUEST_VERSION ||
-        request->struct_bytes != sizeof(*request) || request->information == NULL)
-        return (int32_t)STATUS_INVALID_PARAMETER;
-    if (request->information->VDMState == INCREMENT_REENTER_COUNT ||
-        request->information->VDMState == DECREMENT_REENTER_COUNT)
-        return (int32_t)app_command_source_reentry(source, request->information);
-    return (int32_t)app_command_source_copy(source, request->information);
+    if (!app_command_source_valid(source) || information == NULL)
+        return STATUS_INVALID_PARAMETER;
+    if (information->VDMState == INCREMENT_REENTER_COUNT ||
+        information->VDMState == DECREMENT_REENTER_COUNT)
+        return app_command_source_reentry(source, information);
+    return app_command_source_copy(source, information);
 }
 
 static void app_command_source_teardown(void *context)
@@ -212,12 +206,11 @@ int app_command_source_bind(app_command_source *source, session *owner)
 {
     if (!app_command_source_valid(source) || source->owner != NULL || owner == NULL ||
         !session_valid(owner) || owner->state != SESSION_STATE_ACTIVE) return 0;
-    if (!session_register_control_route(owner,
-        ADAPTER_VDM_MONITOR_GET_NEXT_COMMAND, app_command_source_dispatch, source))
+    if (!adapter_vdm_monitor_bind_command_provider(owner,
+        app_command_source_dispatch, source))
         return 0;
     if (!session_register_teardown(owner, app_command_source_teardown, source)) {
-        (void)session_unregister_control_route(owner,
-            ADAPTER_VDM_MONITOR_GET_NEXT_COMMAND, app_command_source_dispatch, source);
+        (void)adapter_vdm_monitor_unbind_command_provider(owner);
         return 0;
     }
     source->owner = owner;
@@ -227,8 +220,7 @@ int app_command_source_bind(app_command_source *source, session *owner)
 int app_command_source_unbind(app_command_source *source)
 {
     if (!app_command_source_valid(source) || source->owner == NULL) return 0;
-    if (!session_unregister_control_route(source->owner,
-        ADAPTER_VDM_MONITOR_GET_NEXT_COMMAND, app_command_source_dispatch, source)) return 0;
+    if (!adapter_vdm_monitor_unbind_command_provider(source->owner)) return 0;
     source->owner = NULL;
     return 1;
 }

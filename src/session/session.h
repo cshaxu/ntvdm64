@@ -9,7 +9,6 @@
 #define SESSION_MAGIC UINT32_C(0x53455353)
 #define SESSION_ABI_VERSION UINT32_C(1)
 #define SESSION_MAX_TEARDOWNS 8u
-#define SESSION_MAX_CONTROL_ROUTES 8u
 
 enum session_state {
     SESSION_STATE_READY = 0u,
@@ -24,19 +23,11 @@ enum session_cancellation_reason {
 };
 
 typedef void (*session_teardown_fn)(void *context);
-typedef int32_t (*session_control_dispatch_fn)(void *context,
-    uint32_t operation, void *request);
 
 typedef struct session_teardown {
     session_teardown_fn function;
     void *context;
 } session_teardown;
-
-typedef struct session_control_route {
-    uint32_t operation;
-    session_control_dispatch_fn dispatch;
-    void *context;
-} session_control_route;
 
 typedef struct session {
     uint32_t magic;
@@ -48,12 +39,8 @@ typedef struct session {
     uint32_t completion_code;
     uint32_t cancellation_reason;
     uint32_t teardown_count;
-    uint32_t control_route_count;
-    session_control_dispatch_fn control_dispatch;
-    void *control_context;
     volatile long binding_count;
     session_teardown teardowns[SESSION_MAX_TEARDOWNS];
-    session_control_route control_routes[SESSION_MAX_CONTROL_ROUTES];
     mapping_manager guest_memory_mappings;
     mapping_manager host_resource_mappings;
     mapping_manager completion_callback_mappings;
@@ -72,15 +59,6 @@ int session_register_teardown(session *instance, session_teardown_fn function,
 int session_request_cancellation(session *instance, uint32_t reason);
 void session_complete(session *instance, uint32_t completion_code);
 int session_dispose(session *instance);
-int session_set_control_dispatch(session *instance,
-    session_control_dispatch_fn dispatch, void *context);
-int session_register_control_route(session *instance, uint32_t operation,
-    session_control_dispatch_fn dispatch, void *context);
-int session_unregister_control_route(session *instance, uint32_t operation,
-    session_control_dispatch_fn dispatch, void *context);
-int32_t session_dispatch_control(session *instance, uint32_t operation,
-    void *request, int32_t unavailable_status);
-
 mapping_manager *session_guest_memory_mappings(session *instance);
 mapping_manager *session_host_resource_mappings(session *instance);
 mapping_manager *session_completion_callback_mappings(session *instance);

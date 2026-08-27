@@ -106,8 +106,11 @@ int main(void)
     information.VDMState = ASKING_FOR_WOW_BINARY;
     if (GetNextVDMCommand(&information) || GetLastError() != ERROR_CALL_NOT_IMPLEMENTED)
         return 10;
-    if (!session_thread_unbind(&instance) || !app_command_source_unbind(&source) ||
-        !session_dispose(&instance)) return 11;
+    if (!app_command_source_unbind(&source)) return 11;
+    reset_info(&information);
+    if (GetNextVDMCommand(&information) ||
+        GetLastError() != ERROR_CALL_NOT_IMPLEMENTED) return 12;
+    if (!session_thread_unbind(&instance) || !session_dispose(&instance)) return 13;
     puts("PASS: local VDM command transport");
     return 0;
 }

@@ -37,7 +37,6 @@ int session_valid(const session *instance)
         instance->struct_bytes == sizeof(*instance) &&
         instance->identity != 0u && instance->state <= SESSION_STATE_COMPLETED &&
         instance->teardown_count <= SESSION_MAX_TEARDOWNS &&
-        instance->control_route_count <= SESSION_MAX_CONTROL_ROUTES &&
         session_binding_count(instance) <= INT32_MAX &&
         mapping_manager_valid(&instance->guest_memory_mappings,
             MAPPING_MANAGER_GUEST_MEMORY) &&
@@ -106,74 +105,6 @@ int session_dispose(session *instance)
     mapping_manager_dispose(&instance->completion_callback_mappings);
     memset(instance, 0, sizeof(*instance));
     return 1;
-}
-
-int session_set_control_dispatch(session *instance,
-    session_control_dispatch_fn dispatch, void *context)
-{
-    if (!session_valid(instance) || instance->state == SESSION_STATE_COMPLETED ||
-        instance->state == SESSION_STATE_CANCELLED) return 0;
-    if (dispatch != NULL && instance->control_dispatch != NULL &&
-        (instance->control_dispatch != dispatch ||
-         instance->control_context != context)) return 0;
-    instance->control_dispatch = dispatch;
-    instance->control_context = context;
-    return 1;
-}
-
-int session_register_control_route(session *instance, uint32_t operation,
-    session_control_dispatch_fn dispatch, void *context)
-{
-    uint32_t index;
-
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
-        operation == 0u || dispatch == NULL) return 0;
-    for (index = 0u; index < instance->control_route_count; ++index) {
-        session_control_route *route = &instance->control_routes[index];
-        if (route->operation != operation) continue;
-        return route->dispatch == dispatch && route->context == context;
-    }
-    if (instance->control_route_count == SESSION_MAX_CONTROL_ROUTES) return 0;
-    instance->control_routes[instance->control_route_count].operation = operation;
-    instance->control_routes[instance->control_route_count].dispatch = dispatch;
-    instance->control_routes[instance->control_route_count].context = context;
-    ++instance->control_route_count;
-    return 1;
-}
-
-int session_unregister_control_route(session *instance, uint32_t operation,
-    session_control_dispatch_fn dispatch, void *context)
-{
-    uint32_t index;
-
-    if (!session_valid(instance) || operation == 0u || dispatch == NULL) return 0;
-    for (index = 0u; index < instance->control_route_count; ++index) {
-        session_control_route *route = &instance->control_routes[index];
-        if (route->operation != operation || route->dispatch != dispatch ||
-            route->context != context) continue;
-        --instance->control_route_count;
-        instance->control_routes[index] =
-            instance->control_routes[instance->control_route_count];
-        memset(&instance->control_routes[instance->control_route_count], 0,
-            sizeof(instance->control_routes[instance->control_route_count]));
-        return 1;
-    }
-    return 0;
-}
-
-int32_t session_dispatch_control(session *instance, uint32_t operation,
-    void *request, int32_t unavailable_status)
-{
-    uint32_t index;
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
-        return unavailable_status;
-    for (index = 0u; index < instance->control_route_count; ++index) {
-        session_control_route const *route = &instance->control_routes[index];
-        if (route->operation == operation)
-            return route->dispatch(route->context, operation, request);
-    }
-    if (instance->control_dispatch == NULL) return unavailable_status;
-    return instance->control_dispatch(instance->control_context, operation, request);
 }
 
 int session_thread_bind(session *instance)

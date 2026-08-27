@@ -9,25 +9,35 @@ typedef struct adapter_vdm_monitor_query_dir_binding {
 
 static __declspec(thread) adapter_vdm_monitor_query_dir_binding current_binding;
 
+static void adapter_vdm_monitor_query_dir_teardown(void *context)
+{
+    if (current_binding.owner != (session *)context) return;
+    current_binding.owner = NULL;
+    current_binding.callback = NULL;
+    current_binding.context = NULL;
+}
+
 int adapter_vdm_monitor_bind_query_dir(session *owner,
     adapter_vdm_monitor_query_dir_fn callback, void *context)
 {
     if (owner == NULL || callback == NULL || !session_valid(owner) ||
-        owner->state != SESSION_STATE_ACTIVE || session_thread_current() != owner ||
+        owner->state != SESSION_STATE_ACTIVE ||
         current_binding.owner != NULL) return 0;
     current_binding.owner = owner;
     current_binding.callback = callback;
     current_binding.context = context;
+    if (!session_register_teardown(owner, adapter_vdm_monitor_query_dir_teardown,
+        owner)) {
+        adapter_vdm_monitor_query_dir_teardown(owner);
+        return 0;
+    }
     return 1;
 }
 
 int adapter_vdm_monitor_unbind_query_dir(session *owner)
 {
-    if (owner == NULL || current_binding.owner != owner ||
-        session_thread_current() != owner) return 0;
-    current_binding.owner = NULL;
-    current_binding.callback = NULL;
-    current_binding.context = NULL;
+    if (owner == NULL || current_binding.owner != owner) return 0;
+    adapter_vdm_monitor_query_dir_teardown(owner);
     return 1;
 }
 

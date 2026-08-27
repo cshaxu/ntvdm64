@@ -42,21 +42,12 @@ M0 T272 S4 disposition register:
   teardown.  The API accepts only caller-provided read/write callbacks and
   keeps a bounce pointer within the synchronous lease lifetime.
 
-M0 T280 S5 disposition register:
+M0 T291 S4 disposition register:
 
-- `session.c` and `session.h`: `small extension`. They expose a synchronous,
-  dependency-neutral external control callback for source-shaped adapters.
-  The callback has an explicit context and operation number; it owns neither
-  guest-memory mapping nor native resource lifetime. `adapter-mvdm-host-out/win32` uses it
-  for the reached `NtVdmControl(VdmQueryDir, ...)` declaration contract.
-
-M0 T291 S3 disposition register:
-
-- `session.c` and `session.h`: `small neutral extension`. One session may now
-  register a bounded set of unique numeric-operation routes before its older
-  fallback dispatch is consulted. The route record owns no MVDM/WOW/COMMAND,
-  Bochs, pointer, handle, worker or mapping semantics. It only lets two
-  independently owned source-shaped *control-request* contracts coexist in
-  the same session without either becoming a process-global broker. It is the
-  modern carrier for `GetNextVDMCommand`-style callers, not for WOW
-  `CallBack16` synchronous guest re-entry.
+- `session.c` and `session.h`: `remove temporary generic route`. The previous
+  numeric-operation dispatcher conflated BaseSrv-shaped command acquisition
+  with kernel-VDM monitor control. `adapter-mvdm-host-out/monitor` now owns
+  separate typed bindings for `GetNextVDMCommand` and `NtVdmControl` while
+  `session` retains only neutral lifetime, thread binding, leases and mapping.
+  Future multi-caller command brokerage belongs to the source-shaped monitor/
+  broker package, never to a generic session callback table.
