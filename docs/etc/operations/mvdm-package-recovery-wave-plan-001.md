@@ -31,11 +31,13 @@ The `xms.486` owner package. Requires a source-shaped A20/RAM/IVT/UMB machine
 seam from `adapter-softpc`; unavailable physical spans retain the original
 failure disposition.
 
-## Wave 5: VDM monitor substrate
+## Wave 5: VDM monitor and keyboard/IVT substrate
 
-`sim16`, `sim32`, `v86` and `ieuvddex`, through `adapter-vdm-monitor`.
-Completes same-shaped user-mode monitor/VDM_TIB/event/handler contracts without
-recreating kernel VDM or CSRSS.
+`sim16`, `sim32`, `v86`, `ieuvddex`, and the reached
+`softpc.new/base/keymouse:UpdateKbdInt15` fragment, through the monitor and
+SoftPC adapters. Completes same-shaped user-mode monitor/VDM_TIB/event/handler
+and minimal IVT contracts without recreating kernel VDM, CSRSS, a general
+keyboard/controller shell, or a second CPU executor.
 
 ## Wave 6: DPMI
 

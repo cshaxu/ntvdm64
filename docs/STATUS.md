@@ -2,8 +2,7 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T287 is closed; the next queue candidate
-awaits admission.
+**Active: M0 T288 S2 — Monitor/keyboard exact-root correction and static composition.**
 
 T286 is closed. Its final Bochs-core minimization evidence is in
 [the closure record](history/m0-t286-closure-20260827.md). T287 admits the
@@ -11,25 +10,32 @@ queue-head original XMS owner package using a complete source-first plan.
 
 ## Active Packet
 
-### M0 T287 S7 — closed: XMS owner-package closure audit
+### M0 T288 S2 — Monitor/keyboard exact-root correction and static composition
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T287 S7`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S6 local x86/x64 dispatcher matrix is closed; queue order continues with the final T287 source/owner audit. |
-| Objective | Audit the complete XMS owner package for source identity, sole interface ownership, mapping-manager isolation, exception registration and transferred prerequisites; then write the T287 closure. |
-| Non-goals | No external BOP ingress enablement, successful UMB span before its monitor owner, keyboard-controller product shell, generic guest pointer, host-pointer conversion, new mapping manager, or `src.old` use. |
-| Reference Baseline | [T287 plan](etc/operations/m0-t287-xms-owner-package-recovery-plan-001.md), [S6 evidence](etc/evidence/m0-t287-s6-xms-dispatch-matrix-001.md), source policy and mapping-manager rule. |
-| Files And ABI Surface | All `mvdm-host/xms.486` source, S1 interface/file ledgers, same-shaped SoftPC/session bindings, and their private overlays. |
+| Identifier Mode | `M0 T288 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S1 source/ABI audit is closed; S2 is the next bounded direct-source recovery rung in the admitted T288 plan. |
+| Objective | Re-root the seven exact original keymouse files into `mvdm-softpc-firmware`, then compose only directly usable original monitor declaration/control carriers as x86/x64 static islands. |
+| Non-goals | No monitor/BOP route enablement, kernel VDM or CSRSS recreation, generic keyboard controller/IRQ/input shell, second CPU executor, host-pointer conversion, new mapping manager, or `src.old` use. |
+| Reference Baseline | [T288 plan](etc/operations/m0-t288-monitor-keyboard-ivt-recovery-plan-001.md), [S1 audit](etc/evidence/m0-t288-s1-monitor-source-abi-audit-001.md), source policy and mapping-manager rule. |
+| Files And ABI Surface | Exact `softpc.new/base/keymouse` root, direct declaration/control carriers selected by S1, formal Ninja manifests and static archive inputs. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Source/ledger/README audit, focused S1--S6 evidence reconciliation, documentation governance and `git diff --check`. |
-| Expected Markers | Source identity remains intact; every interface has one owner/disposition; no private mapping manager, host pointer or unregistered mirror divergence remains. |
-| Asset Needs | S1--S6 evidence, exact XMS source baseline, interface/file ledgers, and current component exception registers. |
-| Reporting Requirements | Final original-source and adapter/overlay disposition, exceptions, local regression result, and every deferred prerequisite with its named successor. |
-| Stop Conditions | A source identity mismatch, ownerless interface, second mapping manager, unregistered divergence, selector ingress, or invented success path. |
-| Exit Criteria | The complete XMS owner package is code-complete/local-regression closed, or each remaining external prerequisite is transferred by a named later owner package. |
+| Verification | Exact source hashes before/after re-root, formal x86/x64 static build manifests, unresolved-symbol ledger, documentation governance and `git diff --check`. |
+| Expected Markers | Seven pure renames preserve hashes; each selected direct carrier retains original body/form; no host runtime route, old tree or source-derived replacement enters the graph. |
+| Asset Needs | S1 identity/interface ledgers, canonical roots, MSVC/Ninja and current component exception registers. |
+| Reporting Requirements | Rename identity proof, selected original unit/build form, compile/link result, every unresolved symbol/failure owner, and explicit excluded translation units. |
+| Stop Conditions | A source body requires semantic modification, an adapter/new mapper is proposed without re-admission, a second CPU/product shell is selected, or a non-direct carrier is silently linked. |
+| Exit Criteria | The keymouse root is corrected and a reproducible direct-source static island either passes or has a complete source-proven unresolved ABI ledger for S3. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | Every dispatcher table entry, result register, bounded lease, allocator state, A20 result, UMB/IVT transfer, and source-defined unavailable branch. |
+| Similar-Issue Sweep | All keymouse files, source/hash provenance, original sources build forms, x86/x64 declarations, static-library inputs, unresolved external groups and forbidden historical shells. |
+
+**T288 S1 closure:** the reproducible union ledger records 78 selected source
+files, all exact in both canonical OpenNT roots. It identifies the seven exact
+keymouse files still under the temporary `mvdm-host` root for S2 re-rooting,
+partitions 15 monitor/firmware interface groups by original owner and recovery
+ladder, and transfers SIM16/WOW plus VDD/debugger-specific behavior without
+inventing substitutes. See [S1 evidence](etc/evidence/m0-t288-s1-monitor-source-abi-audit-001.md).
 
 **T287 S7/T287 closure:** the exact XMS source package is code-complete and
 locally regression-closed. The corrected source audit records eleven exact
