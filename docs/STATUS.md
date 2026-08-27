@@ -2,32 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T283 S2 — platform-ABI canonical re-root.** T283 S1 has produced
-a complete 29-row source/hash/consumer inventory and a single-source selection
-ledger; T282 remains closed.
-in `m0-t282-closure-20260827.md`; the owner has directed Queue-order
-execution. T283 begins the current first Queue candidate before historical
-interface adapter convergence.
+**Active: M0 T284 S1 — historical-interface adapter convergence inventory.**
+T283 closed at `0f3e1ce0`; Queue-order execution now admits the next
+historical-interface boundary audit.
 
 ## Active Packet
 
-### M0 T283 S2 — platform-ABI canonical re-root
+### M0 T284 S1 — historical-interface adapter convergence inventory
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T283 S2`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T283 S1 met its 29-row inventory and selection gate. The owner has directed Queue-order execution; S2 is the admitted unchanged re-root step. |
-| Objective | Re-root selected platform declarations into one logical `public/`/`private/` tree without changing their text. |
-| Non-goals | Header synthesis, declaration edits, runtime behavior, BOP/provider route, Bochs change, adapter implementation or source-body changes. |
-| Reference Baseline | Platform-ABI canonical-union proposal; S1 candidate inventory and selection ledger; source policy. |
-| Files And ABI Surface | Platform-ABI mirror paths, provenance manifests, README, and live include/build manifests only. |
+| Identifier Mode | `M0 T284 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T283 is closed. The owner has directed Queue-order execution; T284 is the next approved candidate and S1 is its read-only source-first inventory gate. |
+| Objective | Establish a complete owner/symbol/consumer inventory for the three current historical-interface adapter roots and four source-proven specialist interface families before any convergence move. |
+| Non-goals | Creating or renaming an adapter root; moving OpenNT source; adding a BOP/provider, monitor, machine, filesystem, broker or child-process behavior. |
+| Reference Baseline | Adapter-convergence proposal; T275 historical-interface ledger; current component tree; T283 canonical ABI tree and source policy. |
+| Files And ABI Surface | Inventory/generator/verifier and evidence only for `adapter-win32`, `adapter-softpc`, `adapter-vdm-monitor`, reached Redirector/WOW/VDD/debugger interfaces and selected host consumers. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Exact moved-header hash checks, edition-root sweep of live build inputs, declaration-carrier probes on x86/x64, documentation governance and `git diff --check`. |
-| Expected Markers | One logical ABI root, retained selected/rejected provenance, and no changed declaration body. |
-| Asset Needs | Pinned OpenNT/OpenNT-4.5 inputs, current platform-ABI tree, live include/build manifests and source policy. |
-| Reporting Requirements | Moved-header count, hash proof, changed include/build inputs, and any declaration-carrier failure. |
-| Stop Conditions | A move changes a selected hash, a live input still requires an edition-specific root, or a carrier needs a hybrid declaration. |
-| Exit Criteria | All 29 selected headers are canonical-rooted, all live inputs are edition-root-free, and focused x86/x64 declaration-carrier probes pass. |
+| Verification | Denominator/count checks, source/header and consumer spot checks, dependency-direction review, documentation governance and `git diff --check`. |
+| Expected Markers | One final disposition for every live adapter file/header, each reached added-family interface and each selected host consumer, with no ownerless symbol family. |
+| Asset Needs | Current adapter roots, interface/consumer ledgers, selected host sources, canonical platform ABI declarations and source policy. |
+| Reporting Requirements | Counts by root/family/disposition, all ambiguous boundaries, selected target subfamily and any deletion/migration prerequisite. |
+| Stop Conditions | A live file has no original caller or final owner, a target would merge a specialist boundary, or a required interface shape is unknown. |
+| Exit Criteria | Full machine-checkable inventory with unique disposition/consumer coverage and a migration-ready dependency graph, without changing production code. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
 | Similar-Issue Sweep | Public/private declarations, edition roots, source-selection manifests and all live include/build inputs. |
 

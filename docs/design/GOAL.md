@@ -17,9 +17,8 @@ OpenNT and Bochs recovery is source-first:
 
 The twenty-component architecture separates canonical original MVDM host
 runtime, support-library, standalone-tool and firmware-input mirrors:
-`opennt-mvdm-host`, `opennt-mvdm-support`, `opennt-mvdm-tools` and
-`opennt-mvdm-firmware`. It also
-keeps exact `opennt-platform-abi`, complete load-only DOS and WOW16 guest
+`mvdm-host`, `mvdm-support`, `mvdm-tools` and `mvdm-softpc-firmware`. It also
+keeps exact `mvdm-platform-abi`, complete load-only DOS and WOW16 guest
 mirrors, Bochs core and nine adapters, neutral `session`, cross-process
 `broker`, and final `app` composition. A preserved/buildable historical tool
 is never treated as a host-runtime dependency merely because it shares the

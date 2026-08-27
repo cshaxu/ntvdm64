@@ -136,7 +136,7 @@ mechanics/delete disposition.
 
 When the reached source uses `GetVDMAddr`, `Sim32GetVDMPointer`,
 `Sim32FlushVDMPointer`, or `Sim32FreeVDMPointer`, provider closure additionally
-records the shared `adapter-softpc` mapping-manager disposition: direct synchronous
+records the shared `adapter-mvdm-host-out/softpc` mapping-manager disposition: direct synchronous
 lease, copied/bounce lease, explicit refusal, address/span, access direction,
 epoch/teardown, and focused positive and negative proof. A provider may not
 introduce a family-private guest-pointer mapper. Native pointers are local
@@ -218,7 +218,7 @@ or CRT graph.
 
 | Island | Required toolchain | Permitted responsibility |
 | --- | --- | --- |
-| Host runtime components and in-process fixtures | MSVC Win32/x86 `/MT` and MSVC x64 `/MT`, as two independent graphs | Each architecture links app, session, broker client, adapters, selected `opennt-mvdm-host` units and Bochs machine with one ABI/CRT. Objects never cross architectures. |
+| Host runtime components and in-process fixtures | MSVC Win32/x86 `/MT` and MSVC x64 `/MT`, as two independent graphs | Each architecture links app, session, broker client, adapters, selected `mvdm-host` units and Bochs machine with one ABI/CRT. Objects never cross architectures. |
 | DOS/WOW16 guest source and products | Matching historical Microsoft toolchain or explicitly evidenced compatible island | Load-only guest images and provenance; guest objects/libraries never satisfy a host symbol. |
 | Broker process and IPC fixtures | Same MSVC architecture/CRT policy as its selected host target; wire ABI is fixed-width and architecture-neutral | Cross-process registration, identity, queues, notifications, leases and cleanup only. |
 | PowerShell tools and retained cross-toolchain evidence | Their recorded host/toolchain | Inspection, historical evidence and non-runtime probes only; they never supply an object to a host runtime process. |

@@ -18,14 +18,15 @@
 
 ## Placement and dependencies
 
-- Place each production file in one of the twenty roots declared by the
-  architecture rules. `opennt-mvdm-host`, `opennt-mvdm-support` and
-  `opennt-mvdm-tools` and `opennt-mvdm-firmware` preserve selected host-runtime,
+- Place each production file in one of the fourteen roots declared by the
+  architecture rules. `mvdm-host`, `mvdm-support`, `mvdm-tools` and
+  `mvdm-softpc-firmware` preserve selected host-runtime,
   support, standalone-tool and firmware-input package topology respectively;
   package libraries do not create ad-hoc new source owners.
-- `opennt-platform-abi` contains exact original declarations only.
-- `adapter-bochs` alone includes or calls `bochs-core`. `adapter-softpc` calls
-  only the public typed mechanics of `adapter-bochs`.
+- `mvdm-platform-abi` contains exact original declarations only.
+- `adapter-bochs` alone includes or calls `bochs-core`. Only the `softpc`
+  family of `adapter-mvdm-host-out` calls the public typed mechanics of
+  `adapter-bochs`.
 - `session` contains neutral per-instance mechanisms. `broker` contains only
   cross-process registration/queue/notification mechanics. `app` alone wires
   instances and product policy.

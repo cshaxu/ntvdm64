@@ -1,42 +1,40 @@
 # Architecture Rules
 
-1. The production source owners are exactly `bochs-core`,
-   `opennt-mvdm-host`, `opennt-mvdm-support`, `opennt-mvdm-tools`,
-   `opennt-mvdm-firmware`,
-   `opennt-platform-abi`, `opennt-guest-dos`,
-   `opennt-guest-wow16`, `adapter-bochs`, `adapter-bop`, `adapter-softpc`,
-   `adapter-win32`, `adapter-vdm-monitor`, `adapter-redir`, `adapter-wow`,
-   `adapter-vdd`, `adapter-debugger`, `session`, `broker`, and `app`.
-2. `opennt-mvdm-host` is the sole MVDM host-runtime mirror. Shared original
-   MVDM support carriers/libraries belong to `opennt-mvdm-support`; independent
-   historical tools belong to `opennt-mvdm-tools`. A tool is never a host
+1. The production source owners are exactly `bochs-core`, `mvdm-host`,
+   `mvdm-support`, `mvdm-tools`, `mvdm-softpc-firmware`,
+   `mvdm-platform-abi`, `mvdm-guest-dos`, `mvdm-guest-win16`,
+   `adapter-bochs`, `adapter-mvdm-host-in`, `adapter-mvdm-host-out`, `session`, `broker`,
+   and `app`.
+2. `mvdm-host` is the sole MVDM host-runtime mirror. Shared original MVDM
+   support carriers/libraries belong to `mvdm-support`; independent historical
+   tools belong to `mvdm-tools`. A tool is never a host
    runtime dependency merely because it is independently buildable.
-   `opennt-mvdm-firmware` owns only selected original firmware/ROM/data
+   `mvdm-softpc-firmware` owns only selected original firmware/ROM/data
    inputs; it is neither a host-runtime library nor a machine executor and is
    consumable only by `adapter-bochs` through an admitted immutable-input
-   manifest. `opennt-platform-abi` contains declarations only.
+   manifest. `mvdm-platform-abi` contains declarations only.
 3. Bochs owns CPU, memory, firmware and PC-device semantics. `adapter-bochs`
    is its only production caller and contains only Bochs mechanics.
-   `adapter-softpc` reaches the machine only through typed `adapter-bochs`
-   operations and never includes a Bochs type, object or global.
-4. `adapter-bop` transports fixed-width copied machine events and typed
+   the `softpc` family of `adapter-mvdm-host-out` reaches the machine only through
+   typed `adapter-bochs` operations and no `adapter-mvdm-host-out` family includes
+   a Bochs type, object or global.
+4. `adapter-mvdm-host-in` transports fixed-width copied machine events and typed
    completion only. Selector, service, dispatch and provider meaning remain in
-   imported `opennt-mvdm-host` source.
-5. `adapter-win32`, `adapter-softpc` and `adapter-vdm-monitor` preserve the
-   reached original name, parameters, calling convention, layout, ordering
-   and failure contract wherever the platform permits. An adapter does not
-   become an alternate OpenNT provider.
-6. `adapter-vdm-monitor` owns the complete same-shaped user-mode
+   imported `mvdm-host` source.
+5. `adapter-mvdm-host-out` contains the explicit `win32`, `softpc`, `monitor`,
+   `redir`, `wow`, `vdd` and `debugger` interface families. Each preserves
+   the reached original name, parameters, calling convention, layout, ordering
+   and failure contract wherever the platform permits. No family becomes an
+   alternate OpenNT provider or absorbs another family's semantics.
+6. The `monitor` family owns the complete same-shaped user-mode
    `NtVdmControl`, `VDM_TIB`, V86-event and interrupt/fault-handler interface
    family. It binds bounded per-session/per-thread state and an app-installed
    opaque machine endpoint. It must not recreate NT kernel or CSRSS internals;
    unavailable operations fail deterministically.
-7. `adapter-redir`, `adapter-wow`, `adapter-vdd` and `adapter-debugger` are
-   separate specialist adapters for the original VDMREDIR, WOW32/WOWEXEC, VDD
-   and debugger product-interface families. Each preserves only its named
-   historical external boundary; none is an alternate provider or a generic
-   compatibility layer. A missing interface is assigned to one of these or to
-   an existing adapter before any mirror source is modified to bypass it.
+7. The `redir`, `wow`, `vdd` and `debugger` families respectively own the
+   original VDMREDIR, WOW32/WOWEXEC, VDD and debugger product-interface
+   boundaries. A missing interface is assigned to one named family before a
+   mirror source is modified to bypass it.
 8. `session` is dependency-neutral and owns one independent VDM instance's
    lifecycle, mapping-manager instances, resources, completions/events and
    teardown. It has no BOP, DOS, WOW, VDD, Redirector, Win32 or Bochs service
@@ -71,10 +69,10 @@
     errors, registers and guest addresses retain original semantics and must
     receive explicit range and overflow validation.
 17. Historical guest-pointer calls may expose a native pointer only through
-    an `adapter-softpc` checked synchronous mapping lease with address, span,
+    the `softpc` family of `adapter-mvdm-host-out` with a checked synchronous mapping lease with address, span,
     access and epoch. No such pointer crosses an ABI or reaches asynchronous
     work.
-18. `opennt-guest-dos` and `opennt-guest-wow16` are complete load-only
+18. `mvdm-guest-dos` and `mvdm-guest-win16` are complete load-only
     mirrors. Their source, objects, libraries and products never satisfy a
     host symbol. App loads manifest-selected immutable bytes through
     `adapter-bochs`.
@@ -112,8 +110,8 @@
     Bochs/adapter mechanics are recovery evidence only; every retained core
     difference is minimized, individually registered, and placed in the
     matching private overlay when it exceeds the mirror rule's local boundary.
-28. `opennt-mvdm-support` may be linked only after the package/symbol tracker
+28. `mvdm-support` may be linked only after the package/symbol tracker
     records its original consumer, exact interface shape, binding owner and
-    x86/x64 disposition. `opennt-mvdm-tools` may never be linked into `app` or
-    an MVDM host runtime. `opennt-mvdm-firmware` may not be compiled or linked
+    x86/x64 disposition. `mvdm-tools` may never be linked into `app` or
+    an MVDM host runtime. `mvdm-softpc-firmware` may not be compiled or linked
     as a host provider; it can enter only as an `adapter-bochs`-selected input.

@@ -10,13 +10,13 @@ file-level precedence. The selected file's source path/hash and the rejected
 alternative are recorded. DOS/WOW16 guest components also retain every
 selected original source, resource, intermediate and binary product, but none
 of their objects is a host link input.
-Selected host-runtime packages remain together in the canonical
-`opennt-mvdm-host` mirror; conceptual BOP, host and SoftPC-control categories
+Selected host-runtime packages remain together in the canonical `mvdm-host`
+mirror; conceptual BOP, host and SoftPC-control categories
 do not create parallel source roots. Independent historical tools belong to
-`opennt-mvdm-tools`, shared support carriers/libraries belong to
-`opennt-mvdm-support`, and selected `softpc.new` BIOS/ROM/data inputs belong
-to `opennt-mvdm-firmware`. Exact declarations required from outside MVDM belong
-to `opennt-platform-abi`.
+`mvdm-tools`, shared support carriers/libraries belong to `mvdm-support`, and
+selected `softpc.new` BIOS/ROM/data inputs belong to
+`mvdm-softpc-firmware`. Exact declarations required from outside MVDM belong
+to `mvdm-platform-abi`.
 Bochs 2.6, from `O:\repos.external\bochs-2.6-compat\bochs-2.6`, is the
 approved third-party guest-machine backend, subject to the pinned-import and
 source-identity requirements in `design/CODING.md` and the adoption record.
@@ -44,8 +44,8 @@ dependencies through a named bounded session seam. Internal implementation may
 be isolated, but same naming alone never proves behavioral equivalence. Where
 mapping is required, the session owns separate fixed mapping-manager instances
 rather than one shared numeric namespace. The
-sole permitted historical guest-pointer compatibility route is the
-`adapter-softpc` facade using an applicable `session`-owned mapping-manager
+sole permitted historical guest-pointer compatibility route is the `softpc`
+family of `adapter-mvdm-host-out` using an applicable `session`-owned mapping-manager
 instance: it may return a native pointer for an
 exact `GetVDMAddr`/`Sim32GetVDMPointer` call only under a bounded synchronous
 mapping lease, and that pointer may not enter guest state, cross a component

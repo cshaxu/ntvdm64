@@ -8,7 +8,7 @@ recreating a private NT subsystem, or requiring installation-time host
 mutation. Public Win32 APIs and ordinary host resources remain valid integration
 mechanisms.
 
-The product has twenty production source components. A source file has one
+The product has fourteen production source components. A source file has one
 owner. Original mirrors preserve upstream package identity, adapters preserve
 historical interface shape while translating mechanics, and project components
 own composition, session lifetime and cross-process coordination.
@@ -19,28 +19,28 @@ own composition, session lifetime and cross-process coordination.
 
 - `bochs-core`: complete adopted Bochs 2.6 CPU, memory, firmware and PC-device
   mechanics. It has no OpenNT, DOS, WOW, BOP or host-policy knowledge.
-- `opennt-mvdm-host`: the canonical original MVDM host-runtime mirror. It owns
+- `mvdm-host`: the canonical original MVDM host-runtime mirror. It owns
   selected DEM, COMMAND, XMS, DPMI32, VDMREDIR, WOW32, VDD/debugger,
   `softpc.new` and SIM/monitor provider packages. It does not own standalone
   tools or common support libraries.
-- `opennt-mvdm-support`: the canonical original MVDM common support mirror:
+- `mvdm-support`: the canonical original MVDM common support mirror:
   shared `inc` declarations/build carriers plus original `oemuni` and
   `suballoc` library packages. It may be independently built, but it enters a
   host runtime only after its exact interface audit admits it.
-- `opennt-mvdm-tools`: the canonical original standalone MVDM tool mirror,
+- `mvdm-tools`: the canonical original standalone MVDM tool mirror,
   including `vdmutils/forcedos`, `graftabl`, `pifedit` and `win` resources.
   Tools may be independently built but never enter the main `ntvdm.exe` link
   graph merely because their source is available.
-- `opennt-mvdm-firmware`: the canonical original MVDM firmware-input mirror:
+- `mvdm-softpc-firmware`: the canonical original MVDM firmware-input mirror:
   selected `softpc.new/base/bios`, `softpc.new/bios`, `softpc.new/roms` and
   `softpc.new/data` paths. It preserves original source, ROM and data inputs
   but is neither a host-runtime library nor a second machine executor.
-- `opennt-platform-abi`: exact original declarations and contracts outside
+- `mvdm-platform-abi`: exact original declarations and contracts outside
   MVDM required to compile imported MVDM packages. It contains no replacement
   behavior.
-- `opennt-guest-dos`: complete selected DOS/V86 guest source, resources, build
+- `mvdm-guest-dos`: complete selected DOS/V86 guest source, resources, build
   descriptions, intermediates and original products.
-- `opennt-guest-wow16`: the selected load-only WOW16/bin86 carry plus an
+- `mvdm-guest-win16`: the selected load-only WOW16/bin86 carry plus an
   immutable in-place WOW16 product inventory. It does not imply an external
   WOW16 source-universe mirror.
 
@@ -48,24 +48,18 @@ own composition, session lifetime and cross-process coordination.
 
 - `adapter-bochs`: the only production caller of `bochs-core`; owns Bochs-only
   machine construction, bounded run/stop/resume and opaque mechanical endpoints.
-- `adapter-bop`: selector-blind fixed-width machine-event/frame transport.
-- `adapter-softpc`: same-shaped implementations of reached SoftPC/CCPU/SAS
-  calls using bounded `adapter-bochs` mechanics.
-- `adapter-win32`: same-shaped implementations of unavailable historical
-  Win32/NTDLL calls using supported public Win32 APIs.
-- `adapter-vdm-monitor`: the complete same-shaped user-mode interface family
-  for `NtVdmControl`, `VDM_TIB`, V86 events and interrupt/fault-handler
-  installation. It uses a bound session context and an app-installed opaque
-  machine endpoint; unsupported kernel/CSRSS behavior fails deterministically.
-- `adapter-redir`: same-shaped boundary for the original VDMREDIR/Redirector
-  product-interface family. It never becomes a redirector provider; absent
-  private transport or control surfaces fail explicitly.
-- `adapter-wow`: same-shaped boundary for the original WOW32/WOWEXEC product
-  interfaces. It does not contain guest NE/WOW provider logic.
-- `adapter-vdd`: same-shaped boundary for original VDD product interfaces and
-  host callbacks. It contains no VDD/provider implementation or Bochs object.
-- `adapter-debugger`: same-shaped boundary for the BDE/DBG/VDMDBG/VDMEXTS
-  product interfaces. It contains no debugger/provider policy.
+- `adapter-mvdm-host-in`: selector-blind fixed-width Bochs-to-MVDM
+  machine-event/frame transport.
+- `adapter-mvdm-host-out`: the sole OpenNT-facing historical-interface component.
+  Its explicit internal families are `win32`, `softpc`, `monitor`, `redir`,
+  `wow`, `vdd` and `debugger`. Each preserves only the corresponding reached
+  original interface shape; none is an alternate MVDM provider. The `softpc`
+  family reaches the machine only through typed `adapter-bochs` mechanics.
+  The `monitor` family owns same-shaped `NtVdmControl`, `VDM_TIB`, V86-event
+  and interrupt/fault-handler facades, and unsupported kernel/CSRSS behavior
+  fails deterministically. The remaining families preserve their named
+  Redirector, WOW, VDD and debugger external boundaries without importing
+  provider policy or Bochs objects.
 
 ### Project components
 
@@ -94,10 +88,10 @@ global as immutable process state, per-session state, TLS/thread state,
 guest-owned state or broker-owned state. It is not achieved by swapping an
 unbounded block of globals.
 
-`adapter-vdm-monitor` binds the active session/`VDM_TIB` context to each
-participating thread. Worker threads bind before entering imported MVDM code
-and unbind on exit. No raw session pointer enters guest state or a fixed-width
-component ABI.
+The `monitor` family of `adapter-mvdm-host-out` binds the active session/`VDM_TIB`
+context to each participating thread. Worker threads bind before entering
+imported MVDM code and unbind on exit. No raw session pointer enters guest
+state or a fixed-width component ABI.
 
 ## Dependency direction
 
@@ -105,27 +99,23 @@ component ABI.
 app -> session
 app -> broker client -> broker process
 app -> adapter-bochs -> bochs-core
-app -> adapter-bop -> opennt-mvdm-host
-app -> opennt-guest-dos / opennt-guest-wow16     (data/load only)
+app -> adapter-mvdm-host-in -> mvdm-host
+app -> mvdm-guest-dos / mvdm-guest-win16         (data/load only)
 
-opennt-mvdm-host -> opennt-platform-abi
-opennt-mvdm-host -> opennt-mvdm-support
-opennt-mvdm-host -> adapter-win32
-opennt-mvdm-host -> adapter-softpc -> adapter-bochs
-opennt-mvdm-host -> adapter-vdm-monitor
-opennt-mvdm-host -> adapter-redir
-opennt-mvdm-host -> adapter-wow
-opennt-mvdm-host -> adapter-vdd
-opennt-mvdm-host -> adapter-debugger
-opennt-mvdm-host -> session                      (neutral contract only)
-adapter-bop -> adapter-softpc                    (typed mechanics only)
-adapter-win32 -> broker client                   (only for brokered historical calls)
-opennt-mvdm-tools -> opennt-mvdm-support / opennt-platform-abi  (independent tool builds only)
-opennt-mvdm-firmware -> adapter-bochs             (manifest-selected machine input only)
+mvdm-host -> mvdm-platform-abi
+mvdm-host -> mvdm-support
+mvdm-host -> adapter-mvdm-host-out
+mvdm-host -> session                              (neutral contract only)
+adapter-mvdm-host-out/softpc -> adapter-bochs
+adapter-mvdm-host-in -> adapter-mvdm-host-out/softpc  (typed mechanics only)
+adapter-mvdm-host-out/win32 -> broker client      (only for brokered historical calls)
+mvdm-tools -> mvdm-support / mvdm-platform-abi    (independent tool builds only)
+mvdm-softpc-firmware -> adapter-bochs             (manifest-selected machine input only)
 ```
 
 `session` never calls a component-specific provider. `adapter-bochs` alone
-calls `bochs-core`. `adapter-softpc` never includes a Bochs type or global.
+calls `bochs-core`. No `adapter-mvdm-host-out` family includes a Bochs type or
+global.
 The broker never receives a native pointer, local HANDLE, guest pointer or
 Bochs object. It exchanges versioned fixed-width copied messages and stable
 cross-process identities only.
@@ -136,10 +126,10 @@ provider semantics. A missing interface is first assigned to this inventory,
 then recovered with original source evidence, rather than edited out of an
 OpenNT mirror.
 
-`opennt-mvdm-support` has no automatic inbound runtime edge: a host package
+`mvdm-support` has no automatic inbound runtime edge: a host package
 may use it only after the package/symbol tracker records the original consumer,
-exact interface shape and binding disposition. `opennt-mvdm-tools` has no
-inbound production-runtime edge at all. `opennt-mvdm-firmware` has no host
+exact interface shape and binding disposition. `mvdm-tools` has no
+inbound production-runtime edge at all. `mvdm-softpc-firmware` has no host
 compile or link edge; `adapter-bochs` may consume only an explicitly admitted,
 manifest-selected immutable firmware input.
 

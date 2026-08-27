@@ -5,22 +5,16 @@
 ```text
 src/
   bochs-core/
-  opennt-mvdm-host/
-  opennt-mvdm-support/
-  opennt-mvdm-tools/
-  opennt-mvdm-firmware/
-  opennt-platform-abi/
-  opennt-guest-dos/
-  opennt-guest-wow16/
+  mvdm-host/
+  mvdm-support/
+  mvdm-tools/
+  mvdm-softpc-firmware/
+  mvdm-platform-abi/
+  mvdm-guest-dos/
+  mvdm-guest-win16/
   adapter-bochs/
-  adapter-bop/
-  adapter-softpc/
-  adapter-win32/
-  adapter-vdm-monitor/
-  adapter-redir/
-  adapter-wow/
-  adapter-vdd/
-  adapter-debugger/
+  adapter-mvdm-host-in/
+  adapter-mvdm-host-out/
   session/
   broker/
   app/
@@ -36,32 +30,32 @@ material and never a source, build, link or runtime input.
 ## Owner placement
 
 - `bochs-core` contains the adopted Bochs mirror only.
-- `opennt-mvdm-host` contains only canonical selected MVDM host-runtime
+- `mvdm-host` contains only canonical selected MVDM host-runtime
   packages, retaining package-internal paths and filenames.
-- `opennt-mvdm-support` contains selected shared MVDM build/header carriers
+- `mvdm-support` contains selected shared MVDM build/header carriers
   and original support libraries (`inc`, `dirs`, `makefil0`, `oemuni`, and
   `suballoc`). It has no implied default host link edge.
-- `opennt-mvdm-tools` contains selected standalone MVDM tools and their
+- `mvdm-tools` contains selected standalone MVDM tools and their
   resources (`vdmutils`). It is a production mirror with optional independent
   tool builds, never a main-program library.
-- `opennt-mvdm-firmware` contains selected original MVDM firmware and machine
+- `mvdm-softpc-firmware` contains selected original MVDM firmware and machine
   input paths (`softpc.new/base/bios`, `bios`, `roms`, and `data`). It is an
   immutable mirror input carrier, never a host-runtime library or a second
   machine implementation; only `adapter-bochs` may consume an admitted,
   manifest-selected input.
-- `opennt-platform-abi` contains exact declarations outside MVDM required by
+- `mvdm-platform-abi` contains exact declarations outside MVDM required by
   those packages; it has no implementation.
-- `opennt-guest-dos` contains the complete selected local DOS carry.
-  `opennt-guest-wow16` contains its selected local WOW16/bin86 carry and
+- `mvdm-guest-dos` contains the complete selected local DOS carry.
+  `mvdm-guest-win16` contains its selected local WOW16/bin86 carry and
   references its immutable in-place output inventory; neither phrasing implies
   an unselected external source-universe import.
 - `adapter-bochs` contains Bochs-only composition and is the only caller of
   `bochs-core`.
-- `adapter-bop`, `adapter-softpc`, `adapter-win32`, `adapter-vdm-monitor`,
-  `adapter-redir`, `adapter-wow`, `adapter-vdd` and `adapter-debugger` contain
-  only their declared same-shaped or typed mechanical boundaries. A missing
-  historical product interface is assigned to this explicit adapter inventory
-  before a mirror source is changed to avoid it.
+- `adapter-mvdm-host-in` contains only its declared selector-blind typed
+  machine-event boundary. `adapter-mvdm-host-out` contains the named same-shaped historical
+  interface families `win32`, `softpc`, `monitor`, `redir`, `wow`, `vdd` and
+  `debugger`; a missing historical product interface is assigned to one of
+  those families before a mirror source is changed to avoid it.
 - `session` contains neutral per-instance lifetime, mappings, resources,
   events and teardown.
 - `broker` contains the versioned IPC client/server contract and per-user
