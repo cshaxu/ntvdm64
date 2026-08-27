@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T289 S5 — DPMI stack, interrupt and fault composition.**
+**Active: M0 T289 S6 — DPMI family disposition and local matrix.**
 
 T286 is closed. Its final Bochs-core minimization evidence is in
 [the closure record](history/m0-t286-closure-20260827.md). T287 admits the
@@ -10,25 +10,25 @@ queue-head original XMS owner package using a complete source-first plan.
 
 ## Active Packet
 
-### M0 T289 S5 — DPMI stack, interrupt and fault composition
+### M0 T289 S6 — DPMI family disposition and local matrix
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T289 S5`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S4 composes original initialization, descriptor and xmem bodies on formal x86/x64 local fixtures. |
-| Objective | Compose original DPMI stack, interrupt and fault source groups through the existing atomic frame contract. |
-| Non-goals | No `53:xx` route, DOSX host link, raw pointer, host LDT/IDT mutation, protected-mode transition provider, second executor, new mapping manager or `src.old` use. |
-| Reference Baseline | [Wave 6](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-6-dpmi), `bop-list.md`, source policy and mapping-manager rule. |
-| Files And ABI Surface | Exact `mvdm-host/{dpmi,dpmi32}` sources, DOSX artifacts, `adapter-mvdm-host-out`, `adapter-bochs`, session and the BOP/dependency tracker. |
+| Identifier Mode | `M0 T289 S6`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T289 S1--S5 source/ABI/failure disposition and formal x86/x64 local composition evidence. |
+| Objective | Execute a complete local `53:00..18` source/ABI/failure matrix and compose only eligible DOS translation and VDD/debug dispositions. |
+| Non-goals | No BOP ingress route, DOSX host link, raw pointer, host LDT/IDT mutation, protected-mode runtime executor, new mapping manager or `src.old` use. |
+| Reference Baseline | [S5 closure](etc/evidence/m0-t289-s5-stack-interrupt-fault-closure-001.md), [Wave 6](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-6-dpmi), `bop-list.md`, source policy and mapping-manager rule. |
+| Files And ABI Surface | Exact `mvdm-host/{dpmi,dpmi32}` sources, DOSX artifacts, `adapter-mvdm-host-out`, `adapter-bochs`, session, selected VDD/debug declaration carriers and the BOP/dependency tracker. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Source identity before/after ledger, same-shaped binding matrix, original-body local cases on x86/x64, documentation governance and `git diff --check`. |
-| Expected Markers | Original bodies retain their source order; no direct Bochs dependency enters an OpenNT mirror; no partial frame commit, LDT/IDT mutation, CPU executor or mapping manager is introduced. |
-| Asset Needs | Canonical MVDM roots, current adapter inventory, session mapping rule and Bochs mechanical surface. |
-| Reporting Requirements | Original-source identity, every binding/exception, x86/x64 result and each deliberately unavailable descriptor/memory branch. |
-| Stop Conditions | A source body needs a semantic rewrite, direct Bochs call, raw pointer, host LDT or new mapper is proposed, a second CPU/product shell is selected, or a non-direct carrier is silently linked. |
-| Exit Criteria | Admitted original stack/interrupt/fault bodies compile and preserve atomic source-defined failure outcomes; no BOP ingress is enabled. |
+| Verification | Complete owner/matrix ledger, original-body local cases on x86/x64, declared unavailable-path checks, documentation governance and `git diff --check`. |
+| Expected Markers | Each `53:xx` has exactly one source body or source-proven unavailable outcome; no direct Bochs dependency enters an OpenNT mirror; no partial frame commit, LDT/IDT mutation, CPU executor or mapping manager is introduced. |
+| Asset Needs | Canonical MVDM roots, S5 closure, current adapter inventory, session mapping rule and Bochs mechanical surface. |
+| Reporting Requirements | Original-source identity, every matrix row/binding/exception, x86/x64 result and each deliberately unavailable descriptor/memory branch. |
+| Stop Conditions | A source body needs a semantic rewrite, direct Bochs call, raw pointer, host LDT/IDT mutation, a new mapping manager, a second CPU/product shell, or a BOP ingress route is proposed. |
+| Exit Criteria | Every `53:00..18` entry has one locally exercised original behavior or original/proven unavailable outcome; no BOP ingress is enabled. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | DOSX artifacts, dpmi32 source groups, selector table/memory/stack/interrupt/fault forms, host pointers, Win32 imports, Bochs-facing calls, session leases and x86/x64 ABI forms. |
+| Similar-Issue Sweep | All `53:xx` entries, DOSX artifacts, dpmi/dpmi32 source groups, selector/memory/stack/interrupt/fault forms, VDD/debug declarations, host pointers, Win32 imports, Bochs-facing calls, session leases and x86/x64 ABI forms. |
 
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
@@ -81,6 +81,13 @@ Formal x86/x64 original-body fixtures prove exact BOP/FLAGS frame order,
 IVT transfer, CF merge and invalid-vector no-change behavior. DOSX stack
 projection and protected interrupt/fault paths remain selector-disabled; see
 the [P6 evidence](etc/evidence/m0-t289-s5-p6-realmode-stack-composition-001.md).
+
+**T289 S5 closure:** every independently composable stack/interrupt/fault
+mechanic has formal x86/x64 evidence; remaining DOSX projection, descriptor
+publication and historical monitor branches retain named source-proven
+unavailable dispositions. The complete closure record is
+[here](etc/evidence/m0-t289-s5-stack-interrupt-fault-closure-001.md). S6 is
+now the sole active packet and owns only the package-level `53:00..18` matrix.
 
 **T289 S3 closure:** `adapter-bochs` now exposes a selector-blind copied
 protected-frame, copied active-segment inspection and checked protected-span
