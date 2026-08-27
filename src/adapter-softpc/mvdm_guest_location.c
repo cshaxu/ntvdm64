@@ -65,6 +65,22 @@ int mvdm_guest_location_acquire_far(mvdm_guest_location const *location,
             lease_out);
 }
 
+int mvdm_guest_location_read_u16(mvdm_guest_location const *location,
+    uint16_t *value_out)
+{
+    mvdm_guest_location_lease lease;
+    uint16_t value;
+
+    if (value_out != NULL) *value_out = 0u;
+    if (value_out == NULL || !mvdm_guest_location_acquire(location, 2u,
+        GUEST_MEMORY_ACCESS_READ, &lease)) return 0;
+    value = (uint16_t)((uint16_t)lease.bytes[0] |
+        ((uint16_t)lease.bytes[1] << 8));
+    if (!mvdm_guest_location_release(&lease, 0)) return 0;
+    *value_out = value;
+    return 1;
+}
+
 int mvdm_guest_location_acquire(mvdm_guest_location const *location,
     uint32_t byte_count, uint32_t access,
     mvdm_guest_location_lease *lease_out)

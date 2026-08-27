@@ -34,6 +34,7 @@ int main(void)
     session instance;
     mvdm_guest_location location;
     mvdm_guest_location_lease lease;
+    uint16_t word;
     uint32_t address = 0x12396u;
 
     memset(&memory, 0, sizeof(memory));
@@ -62,10 +63,15 @@ int main(void)
         !mvdm_guest_location_acquire_far(&location, 1u,
             GUEST_MEMORY_ACCESS_READ, &lease) || lease.lease->address != address ||
         !mvdm_guest_location_release(&lease, 0)) return 5;
+    memory.bytes[0x8cu] = 0xefu;
+    memory.bytes[0x8du] = 0xbeu;
+    if (!mvdm_guest_location_set_real_mode(&location, 0u, 0x8cu) ||
+        !mvdm_guest_location_read_u16(&location, &word) || word != 0xbeefu)
+        return 6;
     if (!mvdm_guest_location_set_real_mode(&location, 0xffffu, 0xffffu) ||
         mvdm_guest_location_acquire(&location, 1u, GUEST_MEMORY_ACCESS_READ,
-            &lease)) return 6;
-    if (!session_thread_unbind(&instance)) return 7;
+            &lease)) return 7;
+    if (!session_thread_unbind(&instance)) return 8;
     session_guest_memory_end(&instance);
-    return session_dispose(&instance) ? 0 : 8;
+    return session_dispose(&instance) ? 0 : 9;
 }

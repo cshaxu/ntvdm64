@@ -26,6 +26,18 @@ BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
 extern BOOL LoadVdmRedir(VOID);
 extern BOOL IsVdmRedirLoaded(VOID);
 
+/* DIVERGENCE MVDM-HOST-DIV-006: preserve the source's optional-current-PDB
+ * convention without retaining a native pointer to its two-byte DOS value. */
+static BOOL demCurrentPdbAddress(PULONG pPDB)
+{
+    USHORT currentPdb;
+
+    if (pPDB == NULL || !mvdm_guest_location_read_u16(&current_pdb_location,
+        &currentPdb)) return FALSE;
+    *pPDB = (ULONG)currentPdb << 16;
+    return TRUE;
+}
+
 BOOL
 IsNamedPipeName(
     IN LPSTR Name
@@ -911,9 +923,8 @@ USHORT  usSFN;
 WORD    JFTLength;
 SHORT   hDosHandle;
 
-    if (!pPDB) {
-        pPDB = (ULONG) (*pusCurrentPDB) << 16;
-    }
+    if (!pPDB && !demCurrentPdbAddress(&pPDB))
+        return (- ERROR_INVALID_ADDRESS);
 
     //
     // Get the JFT.
@@ -1036,9 +1047,8 @@ PDOSSFT pSFT;
 HANDLE  ntHandle;
 
 
-    if (!pPDB) {
-        pPDB = (ULONG) (*pusCurrentPDB) << 16;
-    }
+    if (!pPDB && !demCurrentPdbAddress(&pPDB))
+        return FALSE;
 
     ntHandle = VDDRetrieveNtHandle(pPDB,hFile,(PVOID *)&pSFT,&pJFT);
     if (!ntHandle) {
@@ -1106,9 +1116,8 @@ USHORT  usSFN;
 USHORT  usSFTCount;
 ULONG   ulSFLink;
 
-    if (!pPDB) {
-        pPDB = (ULONG) (*pusCurrentPDB) << 16;
-    }
+    if (!pPDB && !demCurrentPdbAddress(&pPDB))
+        return 0;
 
     // Get flat pointer to PDB
     pPDBFlat = (PDOSPDB) Sim32GetVDMPointer(pPDB, 0, 0);

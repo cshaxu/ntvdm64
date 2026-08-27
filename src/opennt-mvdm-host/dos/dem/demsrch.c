@@ -2282,6 +2282,7 @@ DemHeartBeat(void)
    PLIST_ENTRY    pFFindHeadList;
    PPSP_FFINDLIST pPspFFindEntry;
    PFFINDLIST  pFFindEntry;
+   USHORT currentPdb;
 
    if (!NumFindBuffer ||
        NextFindFileTics.QuadPart > ++FindFileTics.QuadPart)
@@ -2289,7 +2290,9 @@ DemHeartBeat(void)
        return;
        }
 
-   pPspFFindEntry = GetPspFFindList(FETCHWORD(pusCurrentPDB[0]));
+   if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
+       return;
+   pPspFFindEntry = GetPspFFindList(currentPdb);
    if (!pPspFFindEntry) {
        return;
        }
@@ -2419,8 +2422,11 @@ AddFFindEntry(
     PPSP_FFINDLIST pPspFFindEntry;
     PFFINDLIST     pFFindEntry;
     ULONG          Len;
+    USHORT         currentPdb;
 
-    pPspFFindEntry = GetPspFFindList(FETCHWORD(pusCurrentPDB[0]));
+    if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
+        return NULL;
+    pPspFFindEntry = GetPspFFindList(currentPdb);
 
         //
         // if a Psp entry doesn't exist
@@ -2431,7 +2437,7 @@ AddFFindEntry(
         if (!pPspFFindEntry)
             return NULL;
 
-        pPspFFindEntry->usPsp = FETCHWORD(pusCurrentPDB[0]);
+        pPspFFindEntry->usPsp = currentPdb;
         InitializeListHead(&pPspFFindEntry->FFindHeadList);
         InsertHeadList(&PspFFindHeadList, &pPspFFindEntry->PspFFindEntry);
         }

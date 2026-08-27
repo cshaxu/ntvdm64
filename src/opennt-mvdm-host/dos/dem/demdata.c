@@ -13,7 +13,9 @@ mvdm_guest_location dta_location;
 
 /** VDM's Current PDB **/
 
-PUSHORT pusCurrentPDB;
+/* DIVERGENCE MVDM-HOST-DIV-006: numeric location of the current two-byte
+ * PDB segment in NTDOS, not a retained native GetVDMAddr pointer. */
+mvdm_guest_location current_pdb_location;
 
 /** SFT Chain Head **/
 

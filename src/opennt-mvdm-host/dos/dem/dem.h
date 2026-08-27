@@ -130,7 +130,9 @@ extern PCHAR  aSVCNames[];
 extern PFNSVC apfnSVC[];
 extern PSZ    pszDefaultDOSDirectory;
 extern USHORT nDrives;
-extern PUSHORT pusCurrentPDB;
+/* DIVERGENCE MVDM-HOST-DIV-006: current PDB is a two-byte guest scalar;
+ * callers must read it under a fresh bounded lease. */
+extern mvdm_guest_location current_pdb_location;
 /* DIVERGENCE MVDM-HOST-DIV-005: the original x86 pointer is retained as a
  * numeric guest descriptor; every use must acquire a fresh bounded lease. */
 extern mvdm_guest_location extended_error_location;

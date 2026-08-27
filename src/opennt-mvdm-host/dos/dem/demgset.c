@@ -563,7 +563,10 @@ VOID demSetDTALocation (VOID)
     /* DIVERGENCE MVDM-HOST-DIV-005: retain DS:AX numerically; consumers read
      * this far-address cell under a fresh bounded lease. */
     mvdm_guest_location_set_real_mode(&dta_location, getDS(), getAX());
-    pusCurrentPDB  = (PUSHORT) GetVDMAddr(getDS(),getDX());
+    /* DIVERGENCE MVDM-HOST-DIV-006: current PDB remains a numeric DS:DX
+     * location and is read afresh by every DEM/SoftPC consumer. */
+    mvdm_guest_location_set_real_mode(&current_pdb_location, getDS(),
+        getDX());
     /* DIVERGENCE MVDM-HOST-DIV-005: retain DS:CX numerically instead of a
      * native pointer returned by GetVDMAddr. */
     mvdm_guest_location_set_real_mode(&extended_error_location, getDS(),

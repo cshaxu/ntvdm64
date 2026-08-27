@@ -7,6 +7,7 @@
 #include <windows.h>
 #include "insignia.h"
 #include "host_def.h"
+#include <mvdm_guest_location.h>
 
 /*
  * [ Product:        SoftPC-AT Revision 3.0
@@ -232,7 +233,14 @@ WORD	    fdisk_open_count = 0;
 
 WORD	    * pFDAccess = 0;
 
-extern	    USHORT * pusCurrentPDB;
+/* DIVERGENCE MVDM-HOST-DIV-006: original code retained a native pointer to
+ * the DOS current-PDB value.  Read that scalar through the session lease. */
+extern mvdm_guest_location current_pdb_location;
+
+static BOOL nt_fdisk_current_pdb(PUSHORT currentPdb)
+{
+    return mvdm_guest_location_read_u16(&current_pdb_location, currentPdb);
+}
 
 extern	    int     DiskOpenRetry(CHAR);
 
@@ -399,10 +407,13 @@ ULONG nt_fdisk_read(
 {
     PFDISKDATA fdisk_data;
     ULONG   size_returned = 0;
+    USHORT  currentPdb;
 
     if ((fdisk_data = get_fdisk_data(drive)) == NULL)
 	return 0;
-    if (get_fdisk_handle(fdisk_data, *pusCurrentPDB, FALSE))
+    if (!nt_fdisk_current_pdb(&currentPdb))
+	return 0;
+    if (get_fdisk_handle(fdisk_data, currentPdb, FALSE))
 	return(disk_read(fdisk_data->fdisk_fd,
 			 offset,
 			 size,
@@ -419,11 +430,14 @@ ULONG nt_fdisk_write(
 {
     PFDISKDATA fdisk_data;
     ULONG   size_returned = 0;
+    USHORT  currentPdb;
 
     if ((fdisk_data = get_fdisk_data(drive)) == NULL)
 	return 0;
 
-    if (get_fdisk_handle(fdisk_data, *pusCurrentPDB, TRUE)) {
+    if (!nt_fdisk_current_pdb(&currentPdb))
+	return 0;
+    if (get_fdisk_handle(fdisk_data, currentPdb, TRUE)) {
 	// must lock the drive. This is very important.
 	size_returned = disk_write(fdisk_data->fdisk_fd,
 				   offset,
@@ -444,11 +458,14 @@ BOOL nt_fdisk_verify(
     PFDISKDATA fdisk_data;
     ULONG   size_returned = 0;
     VERIFY_INFORMATION verify_info;
+    USHORT currentPdb;
 
     if ((fdisk_data = get_fdisk_data(drive)) == NULL)
 	return FALSE;
 
-    if (get_fdisk_handle(fdisk_data, *pusCurrentPDB, FALSE)) {
+    if (!nt_fdisk_current_pdb(&currentPdb))
+	return FALSE;
+    if (get_fdisk_handle(fdisk_data, currentPdb, FALSE)) {
 	verify_info.StartingOffset = *offset;
 	verify_info.Length = size;
 	return(DeviceIoControl(fdisk_data->fdisk_fd,
