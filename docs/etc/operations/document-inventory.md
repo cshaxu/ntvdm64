@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2835 |
+| Documentation records | 2841 |
 | --- | --- |
-| Generated UTC | 2026-08-27T15:50:57Z |
+| Generated UTC | 2026-08-27T15:59:44Z |
 
 ## Entries
 
@@ -411,6 +411,7 @@ content-divergent entries.
 | etc/evidence/m0-t290-s5-remaining-provider-disposition-closure-001.md | indexed supporting material | 3021ff2719265584e0f3c40c81529daea32ffd4b246fce2b3d3db70c9106a4d0 |
 | etc/evidence/m0-t290-s5-remaining-provider-source-abi-audit-001.md | indexed supporting material | be38730284080155f9b675343aeb69bc9678e9f9f14d4745be210446ca82fa30 |
 | etc/evidence/m0-t290-s6-redirector-family-closure-001.md | indexed supporting material | 6b9f1d7cc58ff23000c901bddcdb10c09863a210b329f361d14c89ba8646284b |
+| etc/evidence/m0-t291-s1-wow-owner-package-source-abi-audit-001.md | indexed supporting material | 52f9a7c6abad541f2fea85a37b90976748f17a8ec2e1e8e9a200ed47462365b7 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -982,6 +983,11 @@ content-divergent entries.
 | etc/operations/m0-t290-s5-public-internal-declaration-cohort-selection-001.md | indexed supporting material | ac4504cdc04b417db108f8c79219704939fe9c2eb3804a818813e9a77ab43af8 |
 | etc/operations/m0-t290-s5-remaining-provider-disposition-matrix.tsv | indexed supporting material | 0544812da6f563bb8be817809b45d2d73eb26ab0916da944426ff10754683e5c |
 | etc/operations/m0-t290-s6-redirector-family-disposition-matrix.tsv | indexed supporting material | d91ffefd6420bcb606d1723a2cb75302b98e62893525fa923ca367b0d7485a65 |
+| etc/operations/m0-t291-s1-wow-file-subdomain-disposition-ledger.tsv | indexed supporting material | 2660d6618f80b9c8fddc2cffa347875e8c44aef73cc90d909d93b15c992c86a2 |
+| etc/operations/m0-t291-s1-wow-interface-family-ledger.tsv | indexed supporting material | 61e574122fdf1af54241827b424e6ec5e9dfe3ada0d85e149240545a4add144c |
+| etc/operations/m0-t291-s1-wow-mirror-identity-ledger.tsv | indexed supporting material | fc6c8452e3b99a0c0622dcf664f6cf2ba4ad5326400d033944e68fdf840efaf2 |
+| etc/operations/m0-t291-s1-wow-recovery-sequence-001.md | indexed supporting material | db56082840ba99d11ca47b7fc03daaf4a1fa3f546bfae7f7a15bf4724676b39e |
+| etc/operations/m0-t291-s2-wow-thunk-frame-interface-recovery-plan-001.md | indexed supporting material | cfdfeaa6671fc4cb341bbca81edff8dbdadcc5c9de5830f8eaf20ce39632cf29 |
 | etc/operations/m0-t291-wow-owner-package-source-abi-audit-plan-001.md | indexed supporting material | 3025476a681ddfa727684e32ddf5a7a7b5148f09362d4b4f31a23df6ba5b75fd |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
@@ -2849,7 +2855,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 53dc9c2e9d4ecb77a5101d4a35473518eb21af37de453012bad8306065386885 |
+| STATUS.md | principal control document | 5dce9629e1c03d3701a2bbb4e90820a0cdbc7bd9979fc5a2eb4f9f93abca61b1 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

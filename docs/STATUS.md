@@ -2,33 +2,33 @@
 
 ## Current Work
 
-**Active: M0 T291 S1 — WOW owner-package source/ABI admission audit.**
+**Active: M0 T291 S2 — WOW thunk/frame interface recovery design.**
 
 M0 T290 is closed. Its final Redirector package boundary is in
-[the closure record](history/m0-t290-closure-20260827.md). T291 now admits
-the next ordered WOW owner-package source/ABI audit.
+[the closure record](history/m0-t290-closure-20260827.md). T291 has closed
+its whole-package source/ABI audit and now admits its first dependency group.
 
 ## Active Packet
 
-### M0 T291 S1 — WOW owner-package source/ABI admission audit
+### M0 T291 S2 — WOW thunk/frame interface recovery design
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T291 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T290 has closed its ordered Redirector owner package. The owner-directed sequential queue now admits the Wave 8 WOW source/ABI audit, before any WOW provider implementation. |
-| Objective | Freeze the complete original `mvdm-host/{wow32,fax}` host-owner surface, source package topology, interface families, session mapping crossings and dependency order for later source-first recovery. |
-| Non-goals | No WOW body enablement, generic Win16 API, WOWEXEC/CSRSS recreation, GUI policy, guest load, BOP ingress, raw pointer/host-handle exposure, new mapping manager, direct Bochs call, machine change or `src.old` input. |
-| Reference Baseline | [T291 S1 plan](etc/operations/m0-t291-wow-owner-package-source-abi-audit-plan-001.md), Wave 8, selected WOW32/FAX disposition baselines, closed monitor/DPMI/Redirector records and source policy. |
-| Files And ABI Surface | Selected `mvdm-host/{wow32,fax}` mirrors, their original declarations/resources/build forms, current session and outgoing adapter headers, existing package/provenance ledgers and audit tools. |
+| Identifier Mode | `M0 T291 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S1 closed the 222-file WOW/FAX package audit. Its dependency sequence admits the 12-body original WOW32 thunk/frame/structure interface design before any provider body is enabled. |
+| Objective | Freeze source-shaped `GETVDMPTR`/`FREEVDMPTR`, monitor-memory, `CallBack16`/`VDMFRAME`, pointer and identity interface dispositions for the first whole WOW32 subdomain. |
+| Non-goals | No WOW body enablement, Win16 API, callback scheduler, WOWEXEC/CSRSS recreation, GUI policy, guest load, BOP ingress, raw pointer/host-handle exposure, new mapping manager, direct Bochs call, machine change or `src.old` input. |
+| Reference Baseline | [T291 S1 closure](etc/evidence/m0-t291-s1-wow-owner-package-source-abi-audit-001.md), [T291 S2 plan](etc/operations/m0-t291-s2-wow-thunk-frame-interface-recovery-plan-001.md), current session/adapter contracts and source policy. |
+| Files And ABI Surface | Original active WOW32 thunk/frame bodies and declarations, `adapter-mvdm-host-out/{softpc,monitor,wow}`, session mapping APIs, existing ABI ledgers and focused audit tools. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Reconcile canonical source paths/hashes, selected build forms, provider subdomains and reached interface declarations; verify the completed ledger has one disposition per selected row and no forbidden source input. |
-| Expected Markers | Original source package identities remain intact; each external boundary has a single owner and every pointer/handle crossing names the existing session mapping instance or an explicit refusal. |
-| Asset Needs | Selected OpenNT/OpenNT-4.5 source evidence, current mirrors, existing package ledgers, session/mapping declarations and outgoing adapter interfaces. |
-| Reporting Requirements | State total file/subdomain/interface coverage, exact/mirror divergence facts, mapping forms, unavailable historical dependencies, next package order and all unresolved boundaries. |
-| Stop Conditions | A proposal to implement a WOW provider, create a generic adapter, add a mapping manager, touch Bochs, use a raw pointer/HANDLE or import `src.old`. |
-| Exit Criteria | A complete reproducible WOW32/FAX file/subdomain/interface/dependency ledger and smallest next owner package are published; no source body or runtime route is enabled. |
+| Verification | Audit every reached source call/declaration/field and compare it to the current adapter/session ABI; prove each pointer or handle lifetime and each failure branch before selecting an implementation seam. |
+| Expected Markers | One source-shaped owner per interface, no direct pointer/HANDLE transport, no duplicate mapping/worker implementation, and source-defined unavailable results where an interface cannot yet compose. |
+| Asset Needs | Selected original WOW32 source, declaration carriers, current outgoing adapter/session headers and S1 subdomain/interface ledgers. |
+| Reporting Requirements | State all callers, original signatures/layouts/order, current binding availability, mapping lifetime, rejected routes, smallest binding/failure route and next implementation prerequisite. |
+| Stop Conditions | A proposal to implement a provider before the whole interface ledger closes, create a generic adapter/mapping manager, touch Bochs, use a raw pointer/HANDLE or import `src.old`. |
+| Exit Criteria | Every first-subdomain external interface has a source/ABI/failure/recovery disposition and the project can decide whether existing adapter families are sufficient without enabling a provider. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | WOW32/FAX provider subdomains, inactive forms, guest/host pointer and handle conversion, private NT4 product interfaces, monitor/Redirector/COMMAND dependencies and all candidate adapter boundaries. |
+| Similar-Issue Sweep | All 12 thunk/frame bodies, `GETVDMPTR`/`FREEVDMPTR`, monitor-memory, `CallBack16`/`VDMFRAME`, session mapping lifetimes, historical worker calls and current outgoing adapter ownership. |
 
 **T290 S1 closure:** [the source/ABI audit](etc/evidence/m0-t290-s1-redirector-source-abi-audit-001.md) proves all fifty original `57:00..31` dispatch entries and all twenty-five selected package paths.  The source mirror is exact in both canonical OpenNT editions; lifecycle/named-pipe, mailslot/async, and NetAPI/NetBIOS/DLC groups are the only admissible next owner groups.  No Redirector selector is enabled.
 
@@ -165,6 +165,14 @@ proves that no `57:xx` route is silently enabled. The only non-exact provider
 mirror is the already-registered `vrmslot.c` session-identity divergence. See
 the [S6 evidence](etc/evidence/m0-t290-s6-redirector-family-closure-001.md)
 and [T290 history](history/m0-t290-closure-20260827.md).
+
+**T291 S1 closure:** the current [222-file WOW/FAX
+ledger](etc/operations/m0-t291-s1-wow-file-subdomain-disposition-ledger.tsv),
+[15-family interface ledger](etc/operations/m0-t291-s1-wow-interface-family-ledger.tsv)
+and [mirror identity ledger](etc/operations/m0-t291-s1-wow-mirror-identity-ledger.tsv)
+are reproducibly generated and fully cover the selected package. The only
+mirror divergence is registered `MVDM-HOST-DIV-007` in `wow32/wkfileio.c`.
+No WOW body or route is enabled; see the [S1 evidence](etc/evidence/m0-t291-s1-wow-owner-package-source-abi-audit-001.md).
 
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
