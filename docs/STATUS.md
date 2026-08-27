@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T288 S3 — Monitor VDM_TIB/event boundary recovery.**
+**Active: M0 T288 S4 — Monitor SoftPC/SAS mechanical recovery.**
 
 T286 is closed. Its final Bochs-core minimization evidence is in
 [the closure record](history/m0-t286-closure-20260827.md). T287 admits the
@@ -10,25 +10,25 @@ queue-head original XMS owner package using a complete source-first plan.
 
 ## Active Packet
 
-### M0 T288 S3 — Monitor VDM_TIB/event boundary recovery
+### M0 T288 S4 — Monitor SoftPC/SAS mechanical recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T288 S3`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S2 root/static-composition closure is recorded; S3 is the next bounded recovery rung in the admitted T288 plan. |
-| Objective | Recover only the smallest source-shaped copied monitor VDM_TIB/event and fixed-frame boundary proven by S1/S2. |
-| Non-goals | No monitor/BOP route enablement, serial SIM32 transport, kernel VDM or CSRSS recreation, generic keyboard controller/IRQ/input shell, second CPU executor, host-pointer conversion, new mapping manager, or `src.old` use. |
-| Reference Baseline | [T288 plan](etc/operations/m0-t288-monitor-keyboard-ivt-recovery-plan-001.md), [S1 audit](etc/evidence/m0-t288-s1-monitor-source-abi-audit-001.md), [S2 evidence](etc/evidence/m0-t288-s2-monitor-root-and-static-composition-001.md), source policy and mapping-manager rule. |
-| Files And ABI Surface | Original `v86`/`ieuvddex` declaration and VDM_TIB/event forms; `adapter-mvdm-host-out/monitor`, session-bound copied records and formal fixtures. |
+| Identifier Mode | `M0 T288 S4`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S3 source-proven non-duplication/transfer closure is recorded; S4 is the next bounded recovery rung in the admitted T288 plan. |
+| Objective | Recover source-proven SoftPC/SAS monitor mechanics using original-name facades and selector-blind Bochs requests only. |
+| Non-goals | No monitor/BOP route enablement, serial SIM32 transport, kernel VDM or CSRSS recreation, generic keyboard controller/IRQ/input shell, second CPU executor, raw VDM_TIB/native guest-pointer ABI, new mapping manager, or `src.old` use. |
+| Reference Baseline | [T288 plan](etc/operations/m0-t288-monitor-keyboard-ivt-recovery-plan-001.md), [S3 evidence](etc/evidence/m0-t288-s3-monitor-frame-recovery-001.md), source policy and mapping-manager rule. |
+| Files And ABI Surface | Exact `v86/monitor` SoftPC/SAS callers; `adapter-mvdm-host-out/softpc`, `adapter-bochs`, session leases and formal fixtures. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Original layout/calling-form audit; focused x86/x64 copied-frame validation; ownership/forbidden-dependency scans; documentation governance and `git diff --check`. |
-| Expected Markers | One source-shaped copied boundary is explicit; no native guest pointer, selector, service, CPU object, serial transport or debugger behavior crosses it. |
-| Asset Needs | S1/S2 ledgers, canonical roots, existing session mapping rule and current adapter exception registers. |
-| Reporting Requirements | Original declaration/caller form, copied-record layout, every excluded function group and focused x86/x64 result. |
-| Stop Conditions | A source body needs a semantic rewrite, a direct Bochs call or new mapper is proposed, a second CPU/product shell is selected, or a non-direct carrier is silently linked. |
-| Exit Criteria | The smallest copied VDM_TIB/event boundary is source-shaped and locally verified, or each necessary original interface has a complete source-proven unresolved ledger for S4. |
+| Verification | Original caller/facade map; x86/x64 local register/memory/port-range checks; source-body and forbidden-direct-dependency scans; documentation governance and `git diff --check`. |
+| Expected Markers | No direct Bochs dependency enters an OpenNT mirror; no duplicate SAS allocator, CPU executor or mapping manager is introduced. |
+| Asset Needs | S3 ledger, canonical roots, existing session mapping rule, adapter-bochs typed mechanics and current exception registers. |
+| Reporting Requirements | Original caller/declaration form, selected same-shaped facade, all unavailable status paths, focused x86/x64 result and every excluded machine mechanism. |
+| Stop Conditions | A source body needs a semantic rewrite, direct Bochs call or new mapper is proposed, a second CPU/product shell is selected, or a non-direct carrier is silently linked. |
+| Exit Criteria | Each selected SoftPC/SAS monitor interface either composes through an existing same-shaped adapter with local proof, or has a complete source-proven transfer disposition for S5/later owner packages. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | VDM_TIB layouts, copied event/context records, session binding, historical monitor globals, `ieuvddex` consumers, x86/x64 forms, forbidden direct pointers and forbidden historical shells. |
+| Similar-Issue Sweep | SoftPC/SAS imports, register/mode/memory/port range forms, Bochs-facing calls, session leases, V86 monitor globals, x86/x64 forms, forbidden direct pointers and forbidden historical shells. |
 
 **T288 S1 closure:** the reproducible union ledger records 78 selected source
 files, all exact in both canonical OpenNT roots. It identifies the seven exact
