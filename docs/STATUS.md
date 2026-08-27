@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T287 S2 — XMS original common static composition.**
+**Active: M0 T287 S3 — XMS A20 and bounded guest-memory lease binding.**
 
 T286 is closed. Its final Bochs-core minimization evidence is in
 [the closure record](history/m0-t286-closure-20260827.md). T287 admits the
@@ -10,25 +10,25 @@ queue-head original XMS owner package using a complete source-first plan.
 
 ## Active Packet
 
-### M0 T287 S2 — XMS original common static composition
+### M0 T287 S3 — XMS A20 and bounded guest-memory lease binding
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T287 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Identifier Mode | `M0 T287 S3`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Queue order after closed T286; owner direction is continuous single-person dual-role execution in queue order. |
-| Objective | Compose the complete directly-composable original common XMS source set as an x86/x64 static island through declaration-only or existing same-shaped facades. |
-| Non-goals | No BOP route enablement, direct-address backend, behavior rewrite, host-pointer conversion, UMB policy in Bochs, or `src.old` use. |
-| Reference Baseline | [T287 plan](etc/operations/m0-t287-xms-owner-package-recovery-plan-001.md), [S1 evidence](etc/evidence/m0-t287-s1-xms-current-rebaseline-001.md), current component roots and source policy. |
-| Files And ABI Surface | Original common `xms.c`, `xmsa20.c`, `xmsblock.c`, `xmsdisp.c`, `xmsmisc.c`, `xmsumb.c`, declarations/support headers and static build manifests; `i386/xmsmem86.c` remains excluded. |
+| Objective | Bind original `xmsa20.c` ordering to a session-owned bounded guest-memory lease and typed A20 mechanics, retaining the original register/result contract. |
+| Non-goals | No whole XMS dispatcher route, direct-address backend, UMB policy in Bochs, generic guest pointer, keyboard-controller semantics, host-pointer conversion, or `src.old` use. |
+| Reference Baseline | [T287 plan](etc/operations/m0-t287-xms-owner-package-recovery-plan-001.md), [S1 evidence](etc/evidence/m0-t287-s1-xms-current-rebaseline-001.md), [S2 evidence](etc/evidence/m0-t287-s2-original-xms-static-composition-001.md), source policy and mapping-manager rule. |
+| Files And ABI Surface | `mvdm-host/xms.486/xmsa20.c`, exact historical SoftPC A20/register shapes, `session` guest-memory manager, and typed `adapter-bochs` A20 mechanics. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Generated x86/x64 Ninja graphs, original source/member identity, external declaration scan, negative exclusion of `xmsmem86.c`, no executable/route selection, documentation governance and `git diff --check`. |
-| Expected Markers | The archive contains only original common XMS units and declaration carriers; every unresolved machine callback remains an unresolved external rather than a substituted leaf implementation. |
-| Asset Needs | S1 ledgers, current MVDM support/platform ABI carriers, current adapter declaration roots and repository MSVC/Ninja tools. |
-| Reporting Requirements | Exact source list, archive member list, unresolved symbol disposition, x86/x64 result and explicit excluded source list. |
-| Stop Conditions | Any source-body modification, a need to link `xmsmem86.c`, a selector/service route, or an external interface without its S1 owner. |
-| Exit Criteria | Both architectures build the selector-disabled original common static archive with an evidence-led member/interface disposition; S3 may begin only with its A20/lease binding scope. |
+| Verification | Focused x86/x64 original-source fixture with A20 enable/disable/query, valid/invalid bounded lease spans, lease expiry and source register ordering; documentation governance and `git diff --check`. |
+| Expected Markers | `xmsa20.c` remains an original mirror; the only new behavior is outside it in existing owner adapters/session. No naked pointer crosses a component boundary. |
+| Asset Needs | S1/S2 evidence, current session mapping manager, adapter SoftPC declaration surface, adapter-bochs typed A20 operation and formal Ninja tooling. |
+| Reporting Requirements | Exact retained source call ordering, mapping/lease lifetime proof, positive/negative x86/x64 results and successor boundaries. |
+| Stop Conditions | A second mapping manager, persistent guest pointer, A20/UMB vocabulary in `adapter-bochs`/Bochs, source-body rewrite, or a selector route. |
+| Exit Criteria | Original A20 operation works only through a scoped session lease and typed mechanics on both architectures; all errors preserve explicit source-shaped failure semantics. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | Every selected common translation unit, source list, external import, architecture-specific backend exclusion, archive member and route/build manifest. |
+| Similar-Issue Sweep | Every A20 call, register accessor, guest-byte write, pointer/lease lifetime, typed machine action and source-visible failure branch. |
 
 **T287 S1 closure:** all 15 physical `mvdm-host/xms.486` paths hash-match
 both canonical OpenNT roots (0 mismatches).  The final per-file SHA-256
@@ -38,6 +38,12 @@ owners.  The direct-address `i386/xmsmem86.c` body is retained exact but is
 not a product input on either architecture; it has a named same-shaped
 successor in `adapter-mvdm-host-out/softpc`.  The remaining `bx-vdm` wording
 in the historical tracker is evidence only, never a live input.
+
+**T287 S2 closure:** the formal MSVC `/MT` Ninja graph rebuilt the six exact
+common XMS units as `original-xms-common.lib` on x86 and x64.  Archive members
+and SHA-256 manifests match the S1 ledger; `i386/xmsmem86.c` is excluded.
+Historical pointer-width warnings remain explicit S4 binding debt, not a
+source change or a runtime-success claim; see [S2 evidence](etc/evidence/m0-t287-s2-original-xms-static-composition-001.md).
 
 **T286 S1 closure:** the complete [divergence disposition ledger](etc/operations/m0-t286-s1-bochs-core-divergence-disposition-ledger-001.md) measures 29 differing upstream-relative mirror files (431 additions / 353 deletions) and 15 private overlay bodies (1,164 lines). It classifies all groups as build bindings, required private CPU/memory/device hooks, optional diagnostics, or B2/D4 external-composition candidates. No source behavior changed.
 
