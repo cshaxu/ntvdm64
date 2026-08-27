@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T291 S4 — Control-plane separation and source-shaped re-entry contracts.**
+**Active: M0 T291 S5 — Source-shaped command broker and monitor re-entry recovery.**
 
 M0 T290 is closed. Its final Redirector package boundary is in
 [the closure record](history/m0-t290-closure-20260827.md). T291 has closed
@@ -10,25 +10,30 @@ its whole-package source/ABI audit and now admits its first dependency group.
 
 ## Active Packet
 
-### M0 T291 S4 — Control-plane separation and source-shaped re-entry contracts
+### M0 T291 S5 — Source-shaped command broker and monitor re-entry recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T291 S4`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S3 closed the bounded pointer/task/frame/callback mechanics, but its review found control-plane distinctions that require a separate package-level contract pass before a WOW provider is considered. |
-| Objective | Separate source-shaped `GetNextVDMCommand`, `NtVdmControl` and synchronous `host_simulate` contracts; record owner-specific re-entry postconditions and the real single-thread WOW task boundary. |
-| Non-goals | No WOW provider/selector, Win16 guest load, BaseSrv/CSR clone, fast monitor, `CurrentMonitorTeb`, new CCPU worker, global dispatcher, raw pointer/HANDLE, mapping manager or `src.old` input. |
-| Reference Baseline | [S3 closure](etc/evidence/m0-t291-s3-wow-frame-callback-foundation-closure-001.md), [S4 plan](etc/operations/m0-t291-s4-control-plane-separation-and-reentry-contract-plan-001.md), S2 ledger and source policy. |
-| Files And ABI Surface | `mvdm-host` source audits; `adapter-mvdm-host-out/{monitor,softpc,wow}`, `session`, `app`, focused fixtures and control-plane records. |
+| Identifier Mode | `M0 T291 S5`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner requested a unified repair of the partially correct command/control/re-entry boundary. S4 has now closed the prerequisite separation rather than leaving a generic dispatcher in place. |
+| Objective | Recover the applicable source-shaped `GetNextVDMCommand` producer/consumer, wait/wake and monitor re-entry contracts without rebuilding BaseSrv/CSR or conflating WOW callbacks with command acquisition. |
+| Non-goals | No BaseSrv/CSRSS clone, fast WOW assembler, `CurrentMonitorTeb`, global current task/session, second CPU executor, raw pointer/HANDLE ABI, selector enablement, Bochs change or `src.old` input. |
+| Reference Baseline | [S4 closure](etc/evidence/m0-t291-s4-control-plane-separation-closure-001.md), [S5 plan](etc/operations/m0-t291-s5-source-shaped-command-broker-and-monitor-reentry-plan-001.md), original `vdmapi.h`, COMMAND/WOW/monitor call sites and source policy. |
+| Files And ABI Surface | Selected `mvdm-host` COMMAND/WOW/monitor source, `adapter-mvdm-host-out/{monitor,softpc,wow}`, `broker`, `session`, `app`, focused fixtures and source/ABI ledgers. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Source/ABI/failure ledger for each original control plane; x86/x64 focused route/postcondition tests; negative scan proving command, monitor control and callback execution are not conflated. |
-| Expected Markers | One typed owner per original control layer, explicit single-session limitations, no generic business dispatcher and no added provider enablement. |
-| Asset Needs | Original `vdmapi.h`, COMMAND/WOW/monitor call sites, current S3 mechanics and S2 source-interface ledger. |
-| Reporting Requirements | State original caller/callee shape, host-thread/session lifetime, stop result, source failure semantics, x86/x64 evidence and deferred owner. |
-| Stop Conditions | Recreating BaseSrv/CSR, enabling a provider/selector, introducing a CCPU executor/worker, using raw pointers/HANDLEs, touching Bochs or importing `src.old`. |
-| Exit Criteria | Every currently reached control path has a separate source-backed disposition; `CallBack16` and `NtVdmControl` do not use command routing; each reached `host_simulate` caller has its own postcondition record. |
+| Verification | Source call-order/failure ledger; x86/x64 producer/consumer, unavailable and lifecycle tests; negative scan proving no generic route or cross-plane fallback. |
+| Expected Markers | Original `VDMINFO` ownership/order retained, typed command and monitor owners remain distinct, copied event/queue records only where source requires them, and each re-entry group has an owner-specific outcome. |
+| Asset Needs | Original `vdmapi.h`, `cmdexec.c`, `cmdmisc.c`, `config.c`, `wkman.c`, monitor source, existing S4 ledgers and current fixtures. |
+| Reporting Requirements | State original caller/callee shape, notification/wait order, host-thread/session lifetime, stop result, source failure semantics, x86/x64 evidence and deferred owner. |
+| Stop Conditions | Any need to clone BaseSrv/CSR, add a generic dispatcher, expose raw identity, create a second executor, enable a selector without its owner package, touch Bochs or import `src.old`. |
+| Exit Criteria | Each admitted command/monitor consumer has source-backed queue/wake or explicit unavailable behavior, typed ownership, x86/x64 proof and no command/control/callback cross-routing. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | All S2 families: guest pointer/free/flush, task/frame projection, callback/stack mechanics, monitor/TEB/PEB assumptions, scalar register calls and existing session mapping lifetimes. |
+| Similar-Issue Sweep | All COMMAND/WOW command consumers, `NtVdmControl` service classes, `host_simulate` groups, TD/TEB projection fields, broker records and session teardown paths. |
+
+**T291 S4 closure:** command, monitor-control and synchronous callback
+execution are now distinct typed planes; the generic session operation table
+is gone. The owner-specific `host_simulate` and WOW task limits are recorded,
+not papered over. See the [closure](etc/evidence/m0-t291-s4-control-plane-separation-closure-001.md).
 
 **T291 S3 closure:** the bounded pointer scope, numeric task projection and
 source-shaped non-fast callback mechanics passed their complete formal x86/x64
@@ -50,6 +55,14 @@ capture, wait/wake, WOWEXEC notification and multi-caller arbitration are
 not claimed. Formal x86/x64 proof and the named S5 successor are recorded in
 the [S4 plan](etc/operations/m0-t291-s4-control-plane-separation-and-reentry-contract-plan-001.md)
 and [live ledger](etc/operations/m0-t291-s4-control-plane-disposition-ledger-001.md).
+
+**T291 S4 P3/P4:** the complete direct-call postcondition ledger now prevents
+the shared `host_simulate` spelling from masquerading as device, DPMI, DEM,
+firmware or WOW completion. The current WOW TD projection is formally limited
+to its one bound thread and callback fields. The successor
+[S5 plan](etc/operations/m0-t291-s5-source-shaped-command-broker-and-monitor-reentry-plan-001.md)
+is now explicitly queued behind S4 for source-shaped command broker and
+monitor re-entry recovery.
 
 **T291 S2 closure:** all twelve selected original WOW32 thunk/frame bodies
 have source coverage; 214 reached external-interface occurrences and eighteen
