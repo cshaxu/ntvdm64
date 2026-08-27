@@ -1,0 +1,10 @@
+interface_family	original_consumers	current_status	correct_owner	allowed successor	prohibited substitute
+16-bit register access	all dpmi32 groups	partial existing softpc facade	adapter-mvdm-host-out/softpc	complete same-shaped typed register facade over adapter-bochs	private Bochs type in MVDM mirror
+32-bit registers and flags	register.c,dpmiint.c,stack.c,debug.c	absent	adapter-mvdm-host-out/softpc + adapter-bochs	copied typed GPR/segment/flags snapshot and commit	individual uncoordinated register writes during exception handling
+mode/segment attributes	modesw.c,register.c,dpmi386.c	absent	adapter-bochs	selector-blind protected-mode/segment attribute query and atomic transition request	MVDM mutating Bochs CPU internals or host LDT
+LDT/descriptor table	dpmiselr.c,dpmi32.c	absent	adapter-bochs	bounded descriptor read/write/publication contract, session owns policy records	second LDT implementation or direct process LDT import
+protected guest spans	all Sim32GetVDMPointer callers	no DPMI-safe path	adapter-mvdm-host-out/softpc + session	fresh bounded lease/copy by numeric address and explicit span	raw host pointer or durable mapped guest address
+atomic frame/IRET	stack.c,dpmiint.c	retained but disconnected generic frame carrier	adapter-mvdm-host-in + adapter-bochs	one selector-blind copied protected-frame transaction with typed outcome	BOP-specific frame inside Bochs or partial register commits
+interrupt/fault producer	dpmiint.c,dpmimscr.c	absent	adapter-bochs	registered opaque machine event producer and no-op-free lifecycle	legacy VdmInstall* hooks or synthetic success
+virtual/extended memory	dpmimemr.c,xmem.c	absent	adapter-mvdm-host-out/softpc + session	32-bit surrogate identity using session host_resource mapping; bounded typed machine allocation	casting host pointer into SI:DI or a new mapper
+historical monitor controls	dpmiint.c,dpmiselr.c,dpmimscr.c	unavailable	later monitor/VDD/debugger owners	original failure/disposition until owner package admits a public replacement	NtVdmControl, CSRSS or kernel VDM recreation
