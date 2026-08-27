@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2802 |
+| Documentation records | 2803 |
 | --- | --- |
-| Generated UTC | 2026-08-27T13:01:31Z |
+| Generated UTC | 2026-08-27T13:12:14Z |
 
 ## Entries
 
@@ -386,6 +386,7 @@ content-divergent entries.
 | etc/evidence/m0-t290-s2-redirector-interface-closure-design-001.md | indexed supporting material | 19d850fef6730d04c91725740fd6c84b1a6069abf87c777e6c3261b55c8082b3 |
 | etc/evidence/m0-t290-s3-p1-redirector-pointer-scope-001.md | indexed supporting material | f449bb74962851d95c0f820741465b9793d26ff93601428d1e991d71cfd19597 |
 | etc/evidence/m0-t290-s3-p2-redirector-vrmisc-original-body-001.md | indexed supporting material | f8720c21aa51417379c2956ecba2191513a8c0d411e0bdd3627ea70129974428 |
+| etc/evidence/m0-t290-s3-p3-redirector-named-pipe-source-parse-001.md | indexed supporting material | 50052332cd81a10a35b28b259a963bcda35f54cb365c261f80d244e86430f733 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -917,7 +918,7 @@ content-divergent entries.
 | etc/operations/m0-t283-s1-platform-abi-candidate-inventory-001.tsv | indexed supporting material | 38151bf5b6f097a8abfc7fa9ce61cb32740e7b32d0f0336e4007faf6da93772b |
 | etc/operations/m0-t283-s1-platform-abi-canonical-union-inventory-plan-001.md | indexed supporting material | f843345b365bf5b35b26a9b39ea61b231dde214be1c84af0af4ac492c0cfef24 |
 | etc/operations/m0-t283-s1-platform-abi-selection-ledger-001.tsv | indexed supporting material | 3eb5923f9bf38a06efbcbff2d56c9e852ef8217edbe7087d86d3de821785a387 |
-| etc/operations/m0-t283-s2-platform-abi-canonical-import-manifest-001.tsv | indexed supporting material | 001f82b57e14798622896868d2dd234568c8bb4bce6944cf8523d8fe7c09e104 |
+| etc/operations/m0-t283-s2-platform-abi-canonical-import-manifest-001.tsv | indexed supporting material | ec18f6da50f128024326f5137f68928cc6d58a53592b71f21be43242721eca33 |
 | etc/operations/m0-t283-s2-platform-abi-canonical-reroot-plan-001.md | indexed supporting material | 3f97eb9c51ccb5967d8fd23c6cd55ff7a7e1a3760aa1081bdfd932485710cbf1 |
 | etc/operations/m0-t284-s1-adapter-convergence-consumer-inventory-001.tsv | indexed supporting material | 0ea0a85773b0444a247e919cc7b314631a7cc952374181c13454850758d5d81d |
 | etc/operations/m0-t284-s1-adapter-convergence-file-inventory-001.tsv | indexed supporting material | 9ebafe8f21d068a14385f8093e661a071e4960db59e16fd15eb5fc2541c5b3ba |
@@ -950,7 +951,7 @@ content-divergent entries.
 | etc/operations/m0-t290-redirector-owner-package-recovery-plan-001.md | indexed supporting material | 00fdb7f5303f8917b07770b70d6eb78e5cb9a4e3b8c8c44f0e4b13a364d1eb2d |
 | etc/operations/m0-t290-s1-redirector-path-interface-ledger.tsv | indexed supporting material | 22d7fc81a17fc45c478edbabd02ab6b72b6ebcf7075968c07589fe1b6b0a1960 |
 | etc/operations/m0-t290-s1-redirector-service-abi-ledger.tsv | indexed supporting material | aaf7149ddb4229ec823666330dbcb82020df9b77a94bc9c5b6e9b3a7054599ee |
-| etc/operations/m0-t290-s2-redirector-external-interface-recovery-ledger.tsv | indexed supporting material | 16c21e3f0d0dc37c7738b69f65ce7db4265520c0a493cb9a32b4b42e48aea87c |
+| etc/operations/m0-t290-s2-redirector-external-interface-recovery-ledger.tsv | indexed supporting material | 6bc3ca27e50c0bdbde60c61b75569049f1fd6763d819b784826a15a5532c1e77 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |

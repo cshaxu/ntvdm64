@@ -18,7 +18,7 @@ provider body, compatibility implementation, or machine access.
 - [T274 S2 direct-include ledger](../../docs/etc/operations/m0-t274-s2-platform-abi-direct-include-ledger.tsv)
   records every scanned direct declaration need and its disposition.
 
-The component presently contains the 23 resolved direct platform
+The component presently contains the 24 resolved direct platform
 headers plus three package-led DEM declaration carriers (`ntdddisk.h`,
 `ntddstor.h`, and `ntioapi.h`) recorded by
 [T280 S8](../../docs/etc/operations/m0-t280-s8-platform-declaration-import-manifest.tsv).
@@ -42,6 +42,13 @@ manifest.
 T282 S3 selected byte-exact public internal `winconp.h` for original COMMAND
 keyboard-layout declarations. It does not enable keyboard policy, registry
 access, console initialization, a `54:0E` provider or guest-memory writes.
+
+T290 S3 selected byte-exact public internal `align.h` for the reached original
+Redirector named-pipe provider.  The newer OpenNT cohort preserves its
+historical macro names while using `ULONG_PTR` alignment arithmetic on both
+supported host widths.  The differing OpenNT-4.5 private candidate is recorded
+in the canonical import manifest; this is a source-cohort selection, not an
+adapter or source-body divergence.
 
 ## Divergence register
 
