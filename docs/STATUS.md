@@ -2,10 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T280 S19** — Audit the original `demsrch.c` guest-address
-dereference surface for one bounded `GetVDMAddr` lease contract. It is
-Ordinary Mode with single-person dual-role review; no provider/BOP route is
-enabled.
+**Active: M0 T280 S20** — Recover persistent DEM guest-location state as
+numeric descriptors and fresh bounded leases. It is Ordinary Mode with
+single-person dual-role review; no provider/BOP route is enabled.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -26,25 +25,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S19 — DEM `GetVDMAddr` guest-lease contract audit
+### M0 T280 S20 — DEM persistent guest-location recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T280 S19`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S18 closed all host-local x64 groups without enabling a directory provider; `GetVDMAddr` remains a separate guest-memory boundary. |
-| Objective | Produce a complete source-first lease/extent/failure contract for every original `demsrch.c` `GetVDMAddr` dereference. |
-| Non-goals | No `GetVDMAddr` implementation, DEM provider/BOP route, guest trace, directory backend, new mapper, Bochs change, async pointer retention or source-body feature rewrite. |
-| Reference Baseline | Original `demsrch.c`, S17 ledger, S18 closure, session guest-memory lease API, adapter-softpc and adapter-bochs boundaries. |
-| Files And ABI Surface | Guest-address ledger/evidence, focused original-source sweep and Status only; no product ABI is introduced. |
+| Identifier Mode | `M0 T280 S20`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S19 proved that original `demgset.c` retains native GetVDMAddr results beyond a legal lease lifetime, blocking a raw-pointer facade. |
+| Objective | Recover the reached DEM persistent guest-location globals as numeric descriptors and fresh per-dereference guest-memory leases. |
+| Non-goals | No generic GetVDMAddr raw-pointer shim, DEM provider/BOP route, guest trace, directory backend, new mapper, Bochs change, host-resource token, broker value or async pointer retention. |
+| Reference Baseline | Original demgset/demsrch consumers, S19 lease ledger/evidence, session guest-memory API and adapter-softpc/adapter-bochs ownership rules. |
+| Files And ABI Surface | Reached original DEM globals/consumers, adapter-softpc source-shaped descriptor/lease boundary, focused fixtures/evidence and Status. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Every call site has segment:offset origin, read/write extent, synchronous lifetime, source failure disposition and one adapter-softpc/session owner; no native pointer escapes the contract. |
-| Expected Markers | A whole-source lease ledger covers pathname, DTA, FCB and current-DTA/PDB-derived spans, with no guest numeric value tokenized. |
-| Asset Needs | Original DEM source, S17/S18 evidence, session guest-memory lease contract, adapter-softpc/adapter-bochs interfaces and mapping rules. |
-| Reporting Requirements | Original sites, guest numeric inputs, exact typed access/extent, source return/failure behavior, lease release point and later implementation order. |
-| Stop Conditions | A generic mapper or raw pointer ABI is added, an asynchronous retention path appears, a host-resource token represents guest memory, or any provider/BOP route is enabled. |
-| Exit Criteria | Every `demsrch.c` GetVDMAddr call is classified with one bounded source-facing lease design and no unresolved access/lifetime ambiguity. |
+| Verification | All reached global assignments/uses are inventoried; descriptor persistence, x86/x64 range rejection, lease release and no-native-pointer-retention tests pass. |
+| Expected Markers | Persistent guest locations remain numeric; every actual dereference uses a fresh exact read/read-write lease and no source global is a native pointer. |
+| Asset Needs | S19 ledger, original DEM source/layouts, current session lease API, adapter-softpc/adapter-bochs contracts and formal Ninja/MSVC matrix. |
+| Reporting Requirements | Original global/caller, numeric descriptor layout, lease extent/access/lifetime, source failure preservation, all consumer coverage and remaining provider limit. |
+| Stop Conditions | A descriptor is tokenized, a host pointer/HANDLE enters MVDM global state, a lease crosses an async callback, a generic mapper is created, or a provider/BOP route is enabled. |
+| Exit Criteria | Every reached retained guest pointer is removed/recovered as a numeric descriptor with focused x86/x64 evidence; no actual guest pointer survives its source callback. |
 | Original Owner Request | “单人双角色模式执行队列任务”。 |
-| Similar-Issue Sweep | FindFirst/FindNext pathname, DTA, FCB, `pulDTALocation`, PDB-derived spans, direct copy-out, source exception/failure branches and stale/invalid guest address behavior. |
+| Similar-Issue Sweep | All demSetDTALocation globals, every reached dereference in demgset/demsrch/demfile/demfcb, DTA/PDB paths, descriptor arithmetic, lease cleanup and invalid/stale guest address behavior. |
 
 ### Closed packet reference — M0 T280 S13
 
@@ -91,6 +90,14 @@ x86/x64 without width diagnostics, and the same-shaped VDM control family now
 belongs solely to `adapter-vdm-monitor`. The guest `GetVDMAddr` boundary
 remains deliberately unimplemented for S19 source-first audit. See
 [S18 closure](history/m0-t280-s18-closure-20260826.md).
+
+### Closed packet reference — M0 T280 S19
+
+**S19 closure:** `demsrch.c` guest accesses are fully classified as bounded
+lease candidates, and the retained pointer bug is traced to
+`demSetDTALocation` across owner files. S20 must recover numeric descriptors
+before any raw source-facing guest pointer can exist. See
+[S19 closure](history/m0-t280-s19-closure-20260826.md).
 
 ### Closed packet reference — M0 T280 S12
 
