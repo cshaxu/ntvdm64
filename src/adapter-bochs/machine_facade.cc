@@ -331,6 +331,27 @@ extern "C" int machine_facade_copy_bp16(uint16_t *value)
   return 1;
 }
 
+extern "C" int machine_facade_copy_sp16(uint16_t *value)
+{
+  if (machine_facade_machine == 0 || value == 0) return 0;
+  *value = bx_cpu.get_reg16(BX_16BIT_REG_SP);
+  return 1;
+}
+
+extern "C" int machine_facade_copy_di16(uint16_t *value)
+{
+  if (machine_facade_machine == 0 || value == 0) return 0;
+  *value = bx_cpu.get_reg16(BX_16BIT_REG_DI);
+  return 1;
+}
+
+extern "C" int machine_facade_copy_ip16(uint16_t *value)
+{
+  if (machine_facade_machine == 0 || value == 0) return 0;
+  *value = (uint16_t)bx_cpu.get_eip();
+  return 1;
+}
+
 extern "C" int machine_facade_copy_cs16(uint16_t *value)
 {
   if (machine_facade_machine == 0 || value == 0) return 0;
@@ -363,6 +384,51 @@ extern "C" int machine_facade_copy_es16(uint16_t *value)
 {
   if (machine_facade_machine == 0 || value == 0) return 0;
   *value = bx_cpu.sregs[BX_SEG_REG_ES].selector.value;
+  return 1;
+}
+
+extern "C" int machine_facade_copy_fs16(uint16_t *value)
+{
+  if (machine_facade_machine == 0 || value == 0) return 0;
+  *value = bx_cpu.sregs[BX_SEG_REG_FS].selector.value;
+  return 1;
+}
+
+extern "C" int machine_facade_copy_gs16(uint16_t *value)
+{
+  if (machine_facade_machine == 0 || value == 0) return 0;
+  *value = bx_cpu.sregs[BX_SEG_REG_GS].selector.value;
+  return 1;
+}
+
+extern "C" int machine_facade_copy_msw16(uint16_t *value)
+{
+  if (machine_facade_machine == 0 || value == 0) return 0;
+  *value = (uint16_t)bx_cpu.cr0.get32();
+  return 1;
+}
+
+#define MACHINE_FACADE_COPY_REGISTER32(name, reg) \
+extern "C" int machine_facade_copy_##name##32(uint32_t *value) \
+{ \
+  if (machine_facade_machine == 0 || value == 0) return 0; \
+  *value = bx_cpu.get_reg32(reg); \
+  return 1; \
+}
+
+MACHINE_FACADE_COPY_REGISTER32(eax, BX_32BIT_REG_EAX)
+MACHINE_FACADE_COPY_REGISTER32(ebx, BX_32BIT_REG_EBX)
+MACHINE_FACADE_COPY_REGISTER32(ecx, BX_32BIT_REG_ECX)
+MACHINE_FACADE_COPY_REGISTER32(edx, BX_32BIT_REG_EDX)
+MACHINE_FACADE_COPY_REGISTER32(esi, BX_32BIT_REG_ESI)
+MACHINE_FACADE_COPY_REGISTER32(edi, BX_32BIT_REG_EDI)
+MACHINE_FACADE_COPY_REGISTER32(ebp, BX_32BIT_REG_EBP)
+MACHINE_FACADE_COPY_REGISTER32(esp, BX_32BIT_REG_ESP)
+
+extern "C" int machine_facade_copy_eip32(uint32_t *value)
+{
+  if (machine_facade_machine == 0 || value == 0) return 0;
+  *value = bx_cpu.get_eip();
   return 1;
 }
 
@@ -419,6 +485,58 @@ extern "C" int machine_facade_set_bp16(uint16_t value)
 {
   if (machine_facade_machine == 0) return 0;
   bx_cpu.set_reg16(BX_16BIT_REG_BP, value);
+  return 1;
+}
+
+extern "C" int machine_facade_set_sp16(uint16_t value)
+{
+  if (machine_facade_machine == 0) return 0;
+  bx_cpu.set_reg16(BX_16BIT_REG_SP, value);
+  return 1;
+}
+
+extern "C" int machine_facade_set_si16(uint16_t value)
+{
+  if (machine_facade_machine == 0) return 0;
+  bx_cpu.set_reg16(BX_16BIT_REG_SI, value);
+  return 1;
+}
+
+extern "C" int machine_facade_set_di16(uint16_t value)
+{
+  if (machine_facade_machine == 0) return 0;
+  bx_cpu.set_reg16(BX_16BIT_REG_DI, value);
+  return 1;
+}
+
+extern "C" int machine_facade_set_ip16(uint16_t value)
+{
+  if (machine_facade_machine == 0) return 0;
+  bx_cpu.gen_reg[BX_32BIT_REG_EIP].word.rx = value;
+  return 1;
+}
+
+#define MACHINE_FACADE_SET_REGISTER32(name, reg) \
+extern "C" int machine_facade_set_##name##32(uint32_t value) \
+{ \
+  if (machine_facade_machine == 0) return 0; \
+  bx_cpu.set_reg32(reg, value); \
+  return 1; \
+}
+
+MACHINE_FACADE_SET_REGISTER32(eax, BX_32BIT_REG_EAX)
+MACHINE_FACADE_SET_REGISTER32(ebx, BX_32BIT_REG_EBX)
+MACHINE_FACADE_SET_REGISTER32(ecx, BX_32BIT_REG_ECX)
+MACHINE_FACADE_SET_REGISTER32(edx, BX_32BIT_REG_EDX)
+MACHINE_FACADE_SET_REGISTER32(esi, BX_32BIT_REG_ESI)
+MACHINE_FACADE_SET_REGISTER32(edi, BX_32BIT_REG_EDI)
+MACHINE_FACADE_SET_REGISTER32(ebp, BX_32BIT_REG_EBP)
+MACHINE_FACADE_SET_REGISTER32(esp, BX_32BIT_REG_ESP)
+
+extern "C" int machine_facade_set_eip32(uint32_t value)
+{
+  if (machine_facade_machine == 0) return 0;
+  bx_cpu.gen_reg[BX_32BIT_REG_EIP].dword.erx = value;
   return 1;
 }
 

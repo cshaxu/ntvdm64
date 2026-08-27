@@ -32,6 +32,7 @@ Revision History:
 #pragma hdrstop
 #include "softpc.h"
 #include "malloc.h"
+#include "dpmi_descriptor_buffer.h"
 
 #if DBG
 USHORT CheckValue=0;
@@ -105,12 +106,16 @@ Return Value:
         return;
     }
 
-    Descriptors = (PLDT_ENTRY)Sim32GetVDMPointer(((getES() << 16) | getBX()),
-        0,
-        (UCHAR) (getMSW() & MSW_PE));
-
-
     registerCX =  getCX();
+    Descriptors = NULL;
+    /* DIVERGENCE(MVDM-HOST-DIV-013): Sim32GetVDMPointer formerly returned a
+     * persistent native alias of the protected guest descriptor array.  Keep
+     * the source's descriptor loop and result order, but use a private
+     * transient copy with one checked read/write span instead. */
+    if (registerCX != 0 && !mvdm_dpmi_descriptor_buffer_load(getES(), getBX(),
+        registerCX, sizeof(*Descriptors), (void **)&Descriptors)) {
+        return;
+    }
     for (i = 0; i < registerCX; i++) {
 
         // form Base and Limit values
@@ -162,10 +167,18 @@ Return Value:
     }
 
 #ifdef i386
+    if (registerCX != 0 && !mvdm_dpmi_descriptor_buffer_store(getES(), getBX(),
+        registerCX, sizeof(*Descriptors), Descriptors)) {
+        mvdm_dpmi_descriptor_buffer_dispose(Descriptors);
+        return;
+    }
     if (!DpmiSetX86Descriptor(Descriptors, registerAX, registerCX)) {
+        mvdm_dpmi_descriptor_buffer_dispose(Descriptors);
         return;
     }
 #endif
+
+    mvdm_dpmi_descriptor_buffer_dispose(Descriptors);
 
     setAX(0);
     

@@ -33,6 +33,15 @@ Revision History:
 #include <suballoc.h>
 #include <xmsexp.h>
 #include "memapi.h"
+#include "dpmi_protected_buffer.h"
+
+static ULONG
+DpmiLinearPointerToAddress(
+    PVOID Address
+    )
+{
+    return (ULONG)(uintptr_t)Address;
+}
 
 
 NTSTATUS
@@ -117,7 +126,7 @@ Return Value:
         Success = SAFree(
             ExtMemSA,
             *Size,
-            (ULONG)*Address
+            DpmiLinearPointerToAddress(*Address)
             );
                
         //
@@ -162,7 +171,7 @@ Return Value:
     NTSTATUS Status;
     BOOL Success;
 
-    Status = VdmReallocateVirtualMemory((ULONG)OldAddress,
+    Status = VdmReallocateVirtualMemory(DpmiLinearPointerToAddress(OldAddress),
                                         (PULONG)NewAddress,
                                         *NewSize);
 
@@ -171,7 +180,7 @@ Return Value:
         Success = SAReallocate(
             ExtMemSA,
             OldSize,
-            (ULONG)OldAddress,
+            DpmiLinearPointerToAddress(OldAddress),
             *NewSize,
             (PULONG)NewAddress
             );
@@ -218,13 +227,14 @@ Return Value:
     //
     // Get a pointer to the return structure
     //
-    MemInfo = (PDPMIMEMINFO)Sim32GetVDMPointer(
-        ((ULONG)getES()) << 16,
-        1,
-        TRUE
-        );
-
-    (CHAR *)MemInfo += (*GetDIRegister)();
+    /* DIVERGENCE(MVDM-HOST-DIV-014): retain the original DPMIMEMINFO layout
+     * and field order, but replace the protected-mode raw Sim32 alias with a
+     * private transient copy.  A failed checked span leaves the guest and
+     * register state unchanged. */
+    if (!mvdm_dpmi_protected_buffer_load(getES(), (*GetDIRegister)(),
+        sizeof(DPMIMEMINFO), (void **)&MemInfo)) {
+        return;
+    }
 
     //
     // Initialize the structure
@@ -274,4 +284,11 @@ Return Value:
     GlobalMemoryStatus(&MemStatus);
 
     MemInfo->PageFileSize = MemStatus.dwTotalPageFile / 4096;
+
+    if (!mvdm_dpmi_protected_buffer_store(getES(), (*GetDIRegister)(),
+        sizeof(DPMIMEMINFO), MemInfo)) {
+        mvdm_dpmi_protected_buffer_dispose(MemInfo);
+        return;
+    }
+    mvdm_dpmi_protected_buffer_dispose(MemInfo);
 }

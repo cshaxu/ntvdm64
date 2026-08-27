@@ -30,6 +30,7 @@ Revision History:
 #pragma hdrstop
 #include "softpc.h"
 #include <malloc.h>
+#include "mvdm_host_identity.h"
 
 //
 // Xmem structure
@@ -74,6 +75,7 @@ Return Value:
 --*/
 {
     ULONG BlockAddress, BlockSize;
+    uint32_t BlockIdentity;
     NTSTATUS Status;
     PXMEM_BLOCK XmemBlock;
 
@@ -103,10 +105,22 @@ Return Value:
             );
         return;
     }
-    XmemBlock->Address = (PVOID)BlockAddress;
+    XmemBlock->Address = (PVOID)(uintptr_t)BlockAddress;
     XmemBlock->Length = BlockSize;
     XmemBlock->Owner = getDX();
     INSERT_BLOCK(XmemBlock);
+
+    /* DIVERGENCE(MVDM-HOST-DIV-012): the original x86 source split the
+     * native XMEM_BLOCK pointer into SI:DI.  Preserve the 32-bit ABI and
+     * source lifecycle, but publish an opaque session host-resource identity
+     * instead; no native pointer crosses the MVDM boundary on x64. */
+    if (!mvdm_host_identity_publish((uintptr_t)XmemBlock, &BlockIdentity)) {
+        DELETE_BLOCK(XmemBlock);
+        free(XmemBlock);
+        DpmiFreeVirtualMemory((PVOID)&BlockAddress, &BlockSize);
+        setCF(1);
+        return;
+    }
 
     //
     // Return the information about the block
@@ -116,8 +130,8 @@ Return Value:
     //
     // Use xmem block addresss as handle
     //
-    setSI((USHORT)((ULONG)XmemBlock >> 16));
-    setDI((USHORT)((ULONG)XmemBlock & 0x0000FFFF));
+    setSI((USHORT)(BlockIdentity >> 16));
+    setDI((USHORT)(BlockIdentity & 0x0000FFFF));
     setCF(0);
 }
 
@@ -142,11 +156,18 @@ Return Value:
 --*/
 {
     PXMEM_BLOCK XmemBlock;
+    uint32_t BlockIdentity;
+    uintptr_t BlockValue;
     NTSTATUS Status;
     PVOID BlockAddress;
     ULONG BlockSize;
 
-    XmemBlock = (PVOID)(((ULONG)getSI() << 16) | getDI());
+    BlockIdentity = ((ULONG)getSI() << 16) | getDI();
+    if (!mvdm_host_identity_resolve(BlockIdentity, &BlockValue)) {
+        setCF(1);
+        return;
+    }
+    XmemBlock = (PXMEM_BLOCK)BlockValue;
 
     BlockAddress = XmemBlock->Address;
     BlockSize = XmemBlock->Length;
@@ -166,6 +187,7 @@ Return Value:
 
     DELETE_BLOCK(XmemBlock);
 
+    (void)mvdm_host_identity_release(BlockIdentity);
     free(XmemBlock);
     setCF(0);
     return;
@@ -193,10 +215,17 @@ Return Value:
 --*/
 {
     PXMEM_BLOCK OldBlock;
+    uint32_t BlockIdentity;
+    uintptr_t BlockValue;
     ULONG BlockAddress, NewSize;
     NTSTATUS Status;
 
-    OldBlock = (PVOID)(((ULONG)getSI() << 16) | getDI());
+    BlockIdentity = ((ULONG)getSI() << 16) | getDI();
+    if (!mvdm_host_identity_resolve(BlockIdentity, &BlockValue)) {
+        setCF(1);
+        return;
+    }
+    OldBlock = (PXMEM_BLOCK)BlockValue;
     NewSize = (((ULONG)getBX() << 16) | getCX());
 
     BlockAddress = 0;
@@ -215,7 +244,7 @@ Return Value:
         return;
     }
 
-    OldBlock->Address = (PVOID)BlockAddress;
+    OldBlock->Address = (PVOID)(uintptr_t)BlockAddress;
     OldBlock->Length = NewSize;
     
     //
@@ -248,6 +277,7 @@ Return Value:
 --*/
 {
     PXMEM_BLOCK p1, p2;
+    uint32_t BlockIdentity;
     NTSTATUS Status;
     PVOID BlockAddress;
     ULONG BlockSize;
@@ -275,6 +305,8 @@ Return Value:
             }
             p2 = p1->Next;
             DELETE_BLOCK(p1);
+            if (mvdm_host_identity_lookup((uintptr_t)p1, &BlockIdentity))
+                (void)mvdm_host_identity_release(BlockIdentity);
             free(p1);
             p1 = p2;
             continue;
@@ -305,6 +337,7 @@ Return Value:
 --*/
 {
     PXMEM_BLOCK p1, p2;
+    uint32_t BlockIdentity;
     NTSTATUS Status;
     PVOID BlockAddress;
     ULONG BlockSize;
@@ -327,6 +360,8 @@ Return Value:
         }
         p2 = p1->Next;
         DELETE_BLOCK(p1);
+        if (mvdm_host_identity_lookup((uintptr_t)p1, &BlockIdentity))
+            (void)mvdm_host_identity_release(BlockIdentity);
         free(p1);
         p1 = p2;
     }

@@ -1,0 +1,9 @@
+item\toriginal_source\tdisposition\tmodern_binding\tlocal_result\ttransfer
+DOSX initialization\tmvdm-host/dpmi32/dpmi32.c:DpmiInitDosx\tadapter-backed mirror\tchecked protected buffer plus per-session numeric state\tformal x86/x64 pass\tS6 owns dispatcher routing
+application initialization\tmvdm-host/dpmi32/dpmi32.c:DpmiInitApp\tadapter-backed mirror\tchecked protected buffer plus per-session numeric state\tformal x86/x64 pass\tS5/S6 own continuation and dispatch
+selector-table address\tmvdm-host/dpmi32/dpmi32.c:DpmiPassTableAddress\tadapter-backed mirror\tper-session numeric state\tformal x86/x64 pass\tS5/S6 own selector use
+extended-memory lifecycle\tmvdm-host/dpmi32/xmem.c\tadapter-backed mirror\tsession host_resource surrogate32 identity and same-shaped Vdm* numeric allocation facade\tformal x86/x64 pass\tS6 owns service routing
+descriptor normalization\tmvdm-host/dpmi32/dpmiselr.c\toverlay-required mirror\tchecked protected descriptor copy\tformal x86/x64 source failure pass\tlater Bochs-native descriptor-publication package owns success path
+host-LDT installation\tmvdm-host/dpmi32/dpmiselr.c:DpmiSetX86Descriptor\texplicit source-defined unavailable\tadapter-mvdm-host-out/softpc returns FALSE\tformal x86/x64 retains AX failure\tlater Bochs-native descriptor-publication package
+memory information\tmvdm-host/dpmi32/dpmimemr.c:DpmiGetMemoryInfo\toverlay-required mirror\tchecked protected response copy\tformal x86/x64 pass\tS6 owns service routing
+raw dispatcher carrier\tmvdm-host/dpmi32/dpmi32.c:DpmiDispatch\tnot enabled\tfixture-local null declaration only for static linkage\tnot called\tS6

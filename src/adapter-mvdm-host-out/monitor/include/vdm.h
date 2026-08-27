@@ -33,6 +33,34 @@ typedef struct _VdmQueryDirInfo {
     ULONG FileIndex;
 } VDMQUERYDIRINFO, *PVDMQUERYDIRINFO;
 
+/* Reached, same-shaped user-mode subset of the historical per-VDM TIB.
+ * The original DPMI sources use only PmStackInfo and pNtVDMState in this
+ * recovery stage.  Storage is thread-local and belongs to the bound session;
+ * it is not the removed NT kernel VDM control block. */
+typedef struct _VdmPmStackInfo {
+    USHORT LockCount;
+    USHORT Flags;
+    USHORT SsSelector;
+    USHORT SaveSsSelector;
+    ULONG SaveEsp;
+    ULONG SaveEip;
+    ULONG DosxIntIret;
+    ULONG DosxIntIretD;
+    ULONG DosxFaultIret;
+    ULONG DosxFaultIretD;
+    ULONG DosxRmReflector;
+} VDM_PMSTACKINFO, *PVDM_PMSTACKINFO;
+
+typedef struct _Vdm_Tib {
+    VDM_PMSTACKINFO PmStackInfo;
+} VDM_TIB, *PVDM_TIB;
+
+extern __declspec(thread) VDM_TIB VdmTib;
+extern __declspec(thread) ULONG mvdm_monitor_ntvdm_state;
+
+#define pNtVDMState (&mvdm_monitor_ntvdm_state)
+#define VDM_32BIT_APP 0x00000100UL
+
 NTSTATUS NtVdmControl(VDMSERVICECLASS Service, PVOID ServiceData);
 
 #endif

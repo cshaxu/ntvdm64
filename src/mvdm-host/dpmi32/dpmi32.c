@@ -23,6 +23,8 @@ Revision History:
 #include "precomp.h"
 #pragma hdrstop
 #include "softpc.h"
+#include "dpmi_protected_buffer.h"
+#include "dpmi_session_state.h"
 //
 // Information about the current PSP
 //
@@ -173,16 +175,23 @@ Return Value:
 
     ASSERT((getMSW() & MSW_PE));
 
-    SharedData = Sim32GetVDMPointer(((getDS() << 16) | getSI()), 2, TRUE);
+    /* DIVERGENCE(MVDM-HOST-DIV-015): this source historically retained raw
+     * Sim32 aliases to DOSX shared data.  Preserve the source decoding order
+     * in session-owned numeric state; no guest alias survives this call. */
+    if (!mvdm_dpmi_protected_buffer_load(getDS(), getSI(), 58u,
+        (void **)&SharedData) ||
+        !mvdm_dpmi_session_record_dosx(SharedData, 58u)) {
+        mvdm_dpmi_protected_buffer_dispose(SharedData);
+        return;
+    }
 
     DosxStackSegment = *((PWORD16)SharedData);
 
-    SmallXlatBuffer = Sim32GetVDMPointer(*((PDWORD16)(SharedData+2)), 4, TRUE);
+    SmallXlatBuffer = NULL;
 
-    LargeXlatBuffer = Sim32GetVDMPointer(*((PDWORD16)(SharedData+6)), 4, TRUE);
+    LargeXlatBuffer = NULL;
 
-    DosxStackFramePointer = (PWORD16)((PULONG)Sim32GetVDMPointer(
-                                     *((PDWORD16)(SharedData + 10)), 4, TRUE));
+    DosxStackFramePointer = NULL;
 
     DosxStackFrameSize = *((PWORD16)(SharedData + 14));
 
@@ -190,7 +199,7 @@ Return Value:
 
     DosxRmCodeSegment = *((PWORD16)(SharedData + 20));
 
-    DosxDtaBuffer = Sim32GetVDMPointer(*(PDWORD16)(SharedData+22), 4, TRUE);
+    DosxDtaBuffer = NULL;
 
     DosxPmDataSelector = *(PWORD16)(SharedData + 26);
     DosxRmCodeSelector = *(PWORD16)(SharedData + 28);
@@ -202,6 +211,8 @@ Return Value:
     DosxIntHandlerIretd  = *(PDWORD16)(SharedData + 46);
     DosxIret             = *(PDWORD16)(SharedData + 50);
     DosxIretd            = *(PDWORD16)(SharedData + 54);
+
+    mvdm_dpmi_protected_buffer_dispose(SharedData);
 
 }
 
@@ -235,11 +246,12 @@ Notes:
 {
     PWORD16 Data;
 
-    Data = (PWORD16)Sim32GetVDMPointer(
-        ((ULONG)getSS() << 16) | getSP(),
-        1,
-        TRUE
-        );
+    /* DIVERGENCE(MVDM-HOST-DIV-015): retain the original six-byte app record
+     * and source field order, but stage it under one checked protected span. */
+    if (!mvdm_dpmi_protected_buffer_load(getSS(), getSP(), 6u,
+        (void **)&Data)) {
+        return;
+    }
 
 
     // Only 1 bit defined in dpmi
@@ -253,17 +265,20 @@ Notes:
 
     DpmiInitRegisterSize();
 
-    CurrentDta = Sim32GetVDMPointer(
-        *(PDWORD16)(Data),
-        1,
-        TRUE
-        );
+    if (!mvdm_dpmi_session_record_app(CurrentAppFlags, *(PDWORD16)(Data),
+        *Data, *(Data + 1), *(Data + 2))) {
+        mvdm_dpmi_protected_buffer_dispose(Data);
+        return;
+    }
+
+    CurrentDta = NULL;
 
     CurrentDosDta = (PUCHAR) NULL;
 
     CurrentDtaOffset = *Data;
     CurrentDtaSelector = *(Data + 1);
     CurrentPSPSelector = *(Data + 2);
+    mvdm_dpmi_protected_buffer_dispose(Data);
 }
 VOID DpmiPassTableAddress(
     VOID
@@ -286,12 +301,13 @@ Return Value:
 --*/
 {
 
-    Ldt = (PVOID)Sim32GetVDMPointer(
-        (getAX() << 16),
-        0,
-        (UCHAR) (getMSW() & MSW_PE)
-        );
-
-    IntelBase = (ULONG) Sim32GetVDMPointer((ULONG)0, 1, FALSE);
+    /* DIVERGENCE(MVDM-HOST-DIV-015): the historical source retained guest
+     * LDT and Intel-base aliases.  Keep the original AX source location as
+     * numeric session state; host pointers and an NT host LDT are forbidden. */
+    if (!mvdm_dpmi_session_record_selector_table(getAX())) {
+        return;
+    }
+    Ldt = NULL;
+    IntelBase = 0;
 
 }

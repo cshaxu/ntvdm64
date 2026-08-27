@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T289 S4 — DPMI initialization, descriptor and xmem composition.**
+**Active: M0 T289 S5 — DPMI stack, interrupt and fault composition.**
 
 T286 is closed. Its final Bochs-core minimization evidence is in
 [the closure record](history/m0-t286-closure-20260827.md). T287 admits the
@@ -10,25 +10,33 @@ queue-head original XMS owner package using a complete source-first plan.
 
 ## Active Packet
 
-### M0 T289 S4 — DPMI initialization, descriptor and xmem composition
+### M0 T289 S5 — DPMI stack, interrupt and fault composition
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T289 S4`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S3 is complete with a selector-blind x86/x64 mechanical foundation. |
-| Objective | Compose original DPMI initialization, descriptor and xmem source groups through the admitted interfaces and session-owned resource identities. |
-| Non-goals | No `53:xx` route, DOSX host link, raw pointer, host LDT, LDT/IDT mutation, protected-mode transition provider, second executor, new mapping manager or `src.old` use. |
+| Identifier Mode | `M0 T289 S5`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S4 composes original initialization, descriptor and xmem bodies on formal x86/x64 local fixtures. |
+| Objective | Compose original DPMI stack, interrupt and fault source groups through the existing atomic frame contract. |
+| Non-goals | No `53:xx` route, DOSX host link, raw pointer, host LDT/IDT mutation, protected-mode transition provider, second executor, new mapping manager or `src.old` use. |
 | Reference Baseline | [Wave 6](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-6-dpmi), `bop-list.md`, source policy and mapping-manager rule. |
 | Files And ABI Surface | Exact `mvdm-host/{dpmi,dpmi32}` sources, DOSX artifacts, `adapter-mvdm-host-out`, `adapter-bochs`, session and the BOP/dependency tracker. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
 | Verification | Source identity before/after ledger, same-shaped binding matrix, original-body local cases on x86/x64, documentation governance and `git diff --check`. |
-| Expected Markers | Original bodies retain their source order; no direct Bochs dependency enters an OpenNT mirror; no LDT/IDT/CPU executor or mapping manager is introduced. |
+| Expected Markers | Original bodies retain their source order; no direct Bochs dependency enters an OpenNT mirror; no partial frame commit, LDT/IDT mutation, CPU executor or mapping manager is introduced. |
 | Asset Needs | Canonical MVDM roots, current adapter inventory, session mapping rule and Bochs mechanical surface. |
 | Reporting Requirements | Original-source identity, every binding/exception, x86/x64 result and each deliberately unavailable descriptor/memory branch. |
 | Stop Conditions | A source body needs a semantic rewrite, direct Bochs call, raw pointer, host LDT or new mapper is proposed, a second CPU/product shell is selected, or a non-direct carrier is silently linked. |
-| Exit Criteria | Admitted original initialization/descriptor/xmem bodies compile and their local source-defined failure outcomes are proven; no BOP ingress is enabled. |
+| Exit Criteria | Admitted original stack/interrupt/fault bodies compile and preserve atomic source-defined failure outcomes; no BOP ingress is enabled. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
 | Similar-Issue Sweep | DOSX artifacts, dpmi32 source groups, selector table/memory/stack/interrupt/fault forms, host pointers, Win32 imports, Bochs-facing calls, session leases and x86/x64 ABI forms. |
+
+**T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
+lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
+bodies now compose on formal x86/x64 Ninja fixtures.  Session-owned numeric
+resource identities replace only persisted x86 host-pointer coincidences;
+checked copied protected spans replace transient aliases.  The historical
+host-LDT final operation retains its original failure direction, and no
+`53:xx` ingress or dispatcher is enabled.  See the [S4 evidence](etc/evidence/m0-t289-s4-dpmi-composition-001.md) and [ledger](etc/operations/m0-t289-s4-dpmi-composition-ledger.tsv).
 
 **T289 S3 closure:** `adapter-bochs` now exposes a selector-blind copied
 protected-frame, copied active-segment inspection and checked protected-span
