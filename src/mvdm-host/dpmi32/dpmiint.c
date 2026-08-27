@@ -40,6 +40,7 @@ Comments:
 #include <softpc.h>
 #include <dpmiint.h>
 #include <intapi.h>
+#include "dpmi_interrupt_registration.h"
 
 
 VOID
@@ -65,47 +66,11 @@ Routine Description:
 --*/
 
 {
-
-    PVDM_INTERRUPTHANDLER Handlers = DpmiInterruptHandlers;
-    USHORT IntNumber;
-    PCHAR StackPointer;
-
-    StackPointer = Sim32GetVDMPointer(((((ULONG)getSS()) << 16) | getSP()),
-        0,
-        (UCHAR) (getMSW() & MSW_PE)
-        );
-
-    IntNumber = *(PWORD16)(StackPointer + 6);
-
-    Handlers[IntNumber].Flags = *(PWORD16)(StackPointer + 8);
-    Handlers[IntNumber].CsSelector = *(PWORD16)(StackPointer + 4);
-    Handlers[IntNumber].Eip = *(PDWORD16)(StackPointer);
-
-    DBGTRACE(DPMI_SET_PMODE_INT_HANDLER, IntNumber,
-                                         Handlers[IntNumber].CsSelector,
-                                         Handlers[IntNumber].Eip);
-    
-#ifdef i386
-    if (IntNumber == 0x21)
-    {
-        VDMSET_INT21_HANDLER_DATA    ServiceData;
-        NTSTATUS Status;
-
-        ServiceData.Selector = Handlers[IntNumber].CsSelector;
-        ServiceData.Offset =   Handlers[IntNumber].Eip;
-        ServiceData.Gate32 = Handlers[IntNumber].Flags & VDM_INT_32;
-        
-        Status = NtVdmControl(VdmSetInt21Handler,  &ServiceData);
-
-#if DBG
-        if (!NT_SUCCESS(Status)) {
-            OutputDebugString("DPMI32: Error Setting Int21handler\n");
-        }
-#endif        
-    }
-#endif      //i386
-
-    setAX(0);
+    /* DIVERGENCE(MVDM-HOST-DIV-016): Sim32GetVDMPointer exposed an
+     * unbounded native alias of the current protected stack. The matching
+     * mirror-private overlay takes one fixed ten-byte checked copy, retains
+     * the source field order/AX outcome and records the same VDM_TIB entry. */
+    (void)mvdm_dpmi_register_protected_interrupt();
 }
 
 VOID
@@ -125,29 +90,10 @@ Routine Description:
 --*/
 
 {
-
-    PVDM_FAULTHANDLER Handlers = DpmiFaultHandlers;
-    USHORT IntNumber;
-    PCHAR StackPointer;
-
-    StackPointer = Sim32GetVDMPointer(((((ULONG)getSS()) << 16) | getSP()),
-        0,
-        (UCHAR) (getMSW() & MSW_PE)
-        );
-
-    IntNumber = *(PWORD16)(StackPointer + 12);
-
-    Handlers[IntNumber].Flags = *(PDWORD16)(StackPointer + 14);
-    Handlers[IntNumber].CsSelector = *(PWORD16)(StackPointer + 10);
-    Handlers[IntNumber].Eip = *(PDWORD16)(StackPointer + 6);
-    Handlers[IntNumber].SsSelector = *(PWORD16)(StackPointer + 4);
-    Handlers[IntNumber].Esp = *(PDWORD16)(StackPointer);
-
-
-    DBGTRACE(DPMI_SET_FAULT_HANDLER, IntNumber,
-                                     Handlers[IntNumber].CsSelector,
-                                     Handlers[IntNumber].Eip);
-    setAX(0);
+    /* DIVERGENCE(MVDM-HOST-DIV-016): see the protected-interrupt registration
+     * above. The private overlay reads the source-defined eighteen-byte frame
+     * and retains the handler-table ordering and AX success direction. */
+    (void)mvdm_dpmi_register_fault_handler();
 }
 
 VOID

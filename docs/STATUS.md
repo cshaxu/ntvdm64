@@ -38,6 +38,15 @@ checked copied protected spans replace transient aliases.  The historical
 host-LDT final operation retains its original failure direction, and no
 `53:xx` ingress or dispatcher is enabled.  See the [S4 evidence](etc/evidence/m0-t289-s4-dpmi-composition-001.md) and [ledger](etc/operations/m0-t289-s4-dpmi-composition-ledger.tsv).
 
+**T289 S5 P1:** original `DpmiSetProtectedmodeInterrupt` and
+`DpmiSetFaultHandler` now compose through a source-shaped current-worker
+`VDM_TIB` and checked fixed `SS:SP` copies. Formal x86/x64 fixtures prove both
+registrations and no-mutation invalid indexing; the entire selected S5 source
+group also static-compiles on both architectures. S5 remains active: dispatch,
+IRET and stack switching require a prevalidated atomic CS/SS/EIP/ESP/EFLAGS
+transition rather than field-by-field setters. See [P1 evidence](etc/evidence/m0-t289-s5-p1-dpmi-registration-001.md)
+and [ledger](etc/operations/m0-t289-s5-dpmi-stack-interrupt-disposition-ledger.tsv).
+
 **T289 S3 closure:** `adapter-bochs` now exposes a selector-blind copied
 protected-frame, copied active-segment inspection and checked protected-span
 contract.  A frame commit is comparison-guarded, only changes GPR/EIP/native

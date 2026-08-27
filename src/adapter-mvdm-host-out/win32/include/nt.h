@@ -64,6 +64,10 @@ typedef struct _OPENNT_SUPPORT_PEB {
 
 typedef struct _OPENNT_SUPPORT_TEB {
     UNICODE_STRING StaticUnicodeString;
+    /* Reached historical TEB field: imported x86 DPMI sources locate their
+     * per-thread VDM TIB through this spelling. The value is assigned only
+     * by the monitor's bound-thread carrier and is never a guest value. */
+    PVOID Vdm;
 } OPENNT_SUPPORT_TEB, *POPENNT_SUPPORT_TEB;
 
 POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID);
