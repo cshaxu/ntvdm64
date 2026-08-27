@@ -6,7 +6,30 @@
 /* Copied callback request/result. It contains the original callback's
  * observable numeric values but no guest/native pointer or handle. */
 #define MVDM_WOW_CALLBACK_CONTROL_OPERATION 0x574f5701u
-#define MVDM_WOW_CALLBACK_PARAMETER_MAXIMUM 64u
+#define MVDM_WOW_CALLBACK_PARAMETER_MAXIMUM 16u
+
+/* This is the numeric, packed portion of the original WOW32 CBVDMFRAME in
+ * mvdm-support/inc/wow.h.  It deliberately retains the original field order
+ * and 16-byte PARM16 union extent, while replacing only historical typedefs
+ * with fixed-width C types so its byte layout is identical on x86 and x64.
+ * It is copied through a scoped guest lease; it is never a host pointer. */
+#pragma pack(push, 1)
+typedef struct mvdm_wow_callback_guest_frame {
+    uint16_t w_tdb;
+    uint16_t w_return_id;
+    uint16_t w_local_bp;
+    uint8_t parm16[MVDM_WOW_CALLBACK_PARAMETER_MAXIMUM];
+    uint32_t vpfn_proc;
+    uint32_t vp_stack;
+    uint16_t w_ax;
+    uint16_t w_dx;
+    uint16_t w_gen_use1;
+    uint16_t w_gen_use2;
+} mvdm_wow_callback_guest_frame;
+#pragma pack(pop)
+
+_Static_assert(sizeof(mvdm_wow_callback_guest_frame) == 38u,
+    "CBVDMFRAME numeric layout must remain source-shaped");
 
 typedef struct mvdm_wow_callback_transaction {
     uint32_t struct_bytes;
@@ -20,6 +43,7 @@ typedef struct mvdm_wow_callback_transaction {
     uint16_t parameter_bytes;
     uint16_t reserved0;
     uint8_t parameters[MVDM_WOW_CALLBACK_PARAMETER_MAXIMUM];
+    mvdm_wow_callback_guest_frame guest_frame;
 } mvdm_wow_callback_transaction;
 
 /* The input is copied before dispatch. The app/session dispatch operation is
