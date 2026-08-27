@@ -33,7 +33,7 @@ whole search perimeter.
 | Original Owner Request | “虽然opennt是内核态但是在现代win32可以用非内核态或者bochs/其他非侵入式方式实现的，都包括进来，用同样标准审计代码可用性。” |
 | Similar-Issue Sweep | CSR capture, CSRSS wait/process lifecycle, every `NtVdmControl` service, V86 monitor, DPMI, DEM search, WOW/VDD and current adapter/overlay replacements. |
 
-**T292 S1 stage-one progress:** the complete MVDM outward lexical inventory is
+**T292 S1 stage-one closure:** the complete MVDM outward lexical inventory is
 now retained as [the BFS seed ledger](etc/operations/opennt-non-mvdm-dependency-bfs-ledger.tsv),
 [include edges](etc/operations/opennt-non-mvdm-stage1-include-edge-ledger.tsv),
 [build edges](etc/operations/opennt-non-mvdm-stage1-build-edge-ledger.tsv),
@@ -44,8 +44,11 @@ calls; the complete raw invocation inventory is
 [here](etc/operations/opennt-non-mvdm-stage1-invocation-ledger.tsv) and is the
 authoritative function seed for this audit. Its reconciled symbol-to-header
 candidate index is [here](etc/operations/opennt-non-mvdm-stage1-invocation-symbol-ledger.tsv).
-This is an inventory checkpoint only: second-level package/file/function
-expansion has not yet begun, and S1 remains active.
+Every extracted outward expression now has a first-hop category; the complete
+counts, method and explicitly deferred definition proof are in the
+[stage-one closure](etc/evidence/m0-t292-s1-stage-one-egress-inventory-closure-001.md).
+Second-level package/file/function expansion has not begun and requires owner
+review of this first frontier.
 
 **T291 S4 closure:** command, monitor-control and synchronous callback
 execution are now distinct typed planes; the generic session operation table
