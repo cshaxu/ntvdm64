@@ -2,9 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T280 S14** — M0 T280 now audits the source-proven find-list
-host-resource binding needed before original DEM bodies can link. It is
-Ordinary Mode with single-person dual-role review; no provider is enabled.
+**Active: M0 T280 S14** — M0 T280's source-proven find-list host-resource
+binding audit is closed.  Its next prerequisite is an adapter-softpc
+host-identity facade over the existing bounded imported-call session binding;
+no provider is enabled.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -50,6 +51,14 @@ waves after the queue-head package/symbol tracker closes.
 **S13 closure:** the shared NT/RTL declaration surface makes all three original
 DEM bodies syntax-clean on x86/x64; remaining host identity casts are
 explicitly transferred to S14. See [S13 closure](history/m0-t280-s13-closure-20260826.md).
+
+### Closed packet reference — M0 T280 S14
+
+**S14 closure:** original `demsrch.c` persisted find-list identity is now
+classified as a session `host_resource` surrogate, distinct from DTA/FCB
+`guest_memory` leases. The existing scoped session binding and the missing
+adapter-softpc identity facade are explicit successor evidence; no DEM mirror
+body or provider was enabled. See [S14 closure](history/m0-t280-s14-closure-20260826.md).
 
 ### Closed packet reference — M0 T280 S12
 
