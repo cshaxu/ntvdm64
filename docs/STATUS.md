@@ -2,30 +2,30 @@
 
 ## Current Work
 
-**Active: M0 T282 S5 — VDM command-acquisition source audit.** T281 closed
+**Active: M0 T282 S6 — local VDM command transport.** T281 closed
 in `5aa51088`; the owner has directed Queue-order execution. T282 begins the
 next candidate, original COMMAND local lifecycle, with a full package source
 and interface audit before any `54:xx` route is enabled.
 
 ## Active Packet
 
-### M0 T282 S5 — VDM command-acquisition source audit
+### M0 T282 S6 — local VDM command transport
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T282 S5`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S4 closed in `b4799c9a`; all original COMMAND bodies now compose statically and expose `GetNextVDMCommand` as the first shared callable host boundary. |
-| Objective | Audit the complete original client/server `GetNextVDMCommand` contract and give its session/monitor recovery one source-first disposition. |
-| Non-goals | Implementing a callable command broker, enabling COMMAND/BOP behavior, changing an original mirror body, creating a generic adapter, linking an executable, Bochs change or trace. |
+| Identifier Mode | `M0 T282 S6`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S5 closed in `2712f0e2`; its source ledger admits only the local one-session copied `GetNextVDMCommand` transport. |
+| Objective | Implement and test the source-shaped local command request/response binding through `app`, `session`, and `adapter-vdm-monitor`. |
+| Non-goals | BaseSrv/CSR, cross-process broker, WOW, PIF, BOP routing, guest trace, Bochs change, or a generic adapter. |
 | Reference Baseline | Original `dos/command/sources`; T231 COMMAND ledger; T236 closures; T276/T277 owner and cycle ledgers; T281 closure and host-control disposition. |
-| Files And ABI Surface | Original `base/win32/client/vdm.c`, `base/win32/server/srvvdm.c`, their original declarations/messages, reached COMMAND callers and existing session/adapter-vdm-monitor boundaries. |
+| Files And ABI Surface | `VDMINFO`, adapter-vdm-monitor same-shaped entry, app producer record, session bound control dispatch, focused fixture and Ninja graph. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
 | Verification | Exact source hashes, selector-disabled x86/x64 static probes, source identity review, documentation governance and `git diff --check`. |
-| Expected Markers | One complete client/server call-path and ABI ledger, with each private BaseSrv/CSR dependency classified and one named recovery owner. |
+| Expected Markers | Bounded copied payload, size-failure, normal response, re-entry count and no-command outcomes on x86/x64. |
 | Asset Needs | Pinned original MVDM mirror, prior COMMAND ledgers, existing declaration carriers, MSVC x86/x64 and Ninja. |
 | Reporting Requirements | Original source/service, interface family, owner/binding, architecture result, selected recovery rung, unsupported branch and transfer owner. |
 | Stop Conditions | Any behavior body is selected, an imported carrier differs from its pinned source, an unnamed adapter is required, or a route is enabled. |
-| Exit Criteria | All reached client/server branches and records have source, ABI, failure and owner dispositions; the next implementation S, if any, has a bounded same-shaped seam or an explicit unavailable conclusion. |
+| Exit Criteria | Focused x86/x64 fixture proves the admitted local contract and rejects unsupported historical modes without a route. |
 | Original Owner Request | “我都叫你按顺序执行了” and “请参照治理规范和实施规范执行任务”. |
 | Similar-Issue Sweep | Process/re-entry/standard streams, environment/configuration, PIF, command source, console/key layout, BOP dispatch, Redirector/broker, WOW/VDD and all historical machine-facing calls. |
 
