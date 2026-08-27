@@ -220,6 +220,13 @@ extern "C" int machine_facade_set_al8(uint8_t value)
   return 1;
 }
 
+extern "C" int machine_facade_set_bl8(uint8_t value)
+{
+  if (machine_facade_machine == 0) return 0;
+  bx_cpu.set_reg8l(BX_16BIT_REG_BX, value);
+  return 1;
+}
+
 extern "C" int machine_facade_set_ax16(uint16_t value)
 {
   if (machine_facade_machine == 0) return 0;
@@ -231,6 +238,13 @@ extern "C" int machine_facade_set_bx16(uint16_t value)
 {
   if (machine_facade_machine == 0) return 0;
   bx_cpu.set_reg16(BX_16BIT_REG_BX, value);
+  return 1;
+}
+
+extern "C" int machine_facade_set_dx16(uint16_t value)
+{
+  if (machine_facade_machine == 0) return 0;
+  bx_cpu.set_reg16(BX_16BIT_REG_DX, value);
   return 1;
 }
 

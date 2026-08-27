@@ -56,6 +56,11 @@ void setAL(uint8_t value)
     (void)machine_facade_set_al8(value);
 }
 
+void setBL(uint8_t value)
+{
+    (void)machine_facade_set_bl8(value);
+}
+
 void setAX(uint16_t value)
 {
     (void)machine_facade_set_ax16(value);
@@ -64,6 +69,11 @@ void setAX(uint16_t value)
 void setBX(uint16_t value)
 {
     (void)machine_facade_set_bx16(value);
+}
+
+void setDX(uint16_t value)
+{
+    (void)machine_facade_set_dx16(value);
 }
 
 void setCF(uint32_t value)

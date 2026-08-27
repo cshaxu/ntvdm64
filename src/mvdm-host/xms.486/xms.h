@@ -153,4 +153,5 @@ BOOL sas_manage_xms (VOID * start_addr, ULONG cb, INT a_or_f);
 /** External Data */
 
 extern ULONG xmsMemorySize;
-extern BYTE * pHimemA20State;
+/* DIVERGENCE MVDM-HOST-DIV-010: the historical persistent native pointer is
+   replaced by the mirror-private numeric location binding. */

@@ -30,6 +30,7 @@ Revision History:
 #include    <xms.h>
 #include    "umb.h"
 #include    "softpc.h"
+#include    "mvdm-host-overlay/xms.486/xms_a20_state.h"
 
 
 
@@ -67,7 +68,9 @@ VOID  xmsInitUMB(VOID)
 	    xmsUMB = xmsUMBNew;
     }
     xmsIsON = TRUE;
-    pHimemA20State = (PBYTE) GetVDMAddr(getAX(), getBX());
+    /* DIVERGENCE MVDM-HOST-DIV-010: retain the source AX:BX location as
+       numeric data; the private overlay obtains a new bounded lease later. */
+    (void)mvdm_xms_himem_a20_state_bind(getAX(), getBX());
     xmsEnableA20Wrapping();
 
 

@@ -52,8 +52,10 @@ int machine_facade_copy_ds16(uint16_t *value);
 int machine_facade_copy_es16(uint16_t *value);
 int machine_facade_copy_al8(uint8_t *value);
 int machine_facade_set_al8(uint8_t value);
+int machine_facade_set_bl8(uint8_t value);
 int machine_facade_set_ax16(uint16_t value);
 int machine_facade_set_bx16(uint16_t value);
+int machine_facade_set_dx16(uint16_t value);
 int machine_facade_set_carry(uint32_t value);
 void machine_facade_request_cpu_stop(void);
 /* Clears only a previous adapter-owned finite-run stop request.  This does

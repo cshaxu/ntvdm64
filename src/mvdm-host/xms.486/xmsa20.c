@@ -11,13 +11,11 @@
 
 #include <xmssvc.h>
 #include <softpc.h>
+#include "mvdm-host-overlay/xms.486/xms_a20_state.h"
 
 void sas_enable_20_bit_wrapping(void);
 void sas_disable_20_bit_wrapping(void);
 BOOL sas_twenty_bit_wrapping_enabled(void);
-
-BYTE * pHimemA20State = NULL;
-
 
 /* xmsA20 - Handle A20 requests
  *
@@ -61,8 +59,10 @@ VOID xmsA20 (VOID)
 VOID xmsEnableA20Wrapping(VOID)
 {
     sas_enable_20_bit_wrapping();
-    if (pHimemA20State != NULL)
-	*pHimemA20State = 0;
+    /* DIVERGENCE MVDM-HOST-DIV-010: retain the original state-byte order,
+       but write it through a fresh bounded session lease, never a retained
+       native GetVDMAddr pointer. */
+    (void)mvdm_xms_himem_a20_state_write(0u);
 
 #if 0 // this is not necessay because the intel space(pointed by
       // HimemA20State) doesn't contain instruction
@@ -86,8 +86,8 @@ VOID xmsDisableA20Wrapping(VOID)
 {
 
     sas_disable_20_bit_wrapping();
-    if (pHimemA20State != NULL)
-	*pHimemA20State = 1;
+    /* DIVERGENCE MVDM-HOST-DIV-010: see xmsEnableA20Wrapping. */
+    (void)mvdm_xms_himem_a20_state_write(1u);
 #if 0 // this is not necessay because the intel space(pointed by
       // HimemA20State) doesn't contain instruction
       // doesn't contain instruction

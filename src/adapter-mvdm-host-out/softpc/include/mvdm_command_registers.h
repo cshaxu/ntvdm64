@@ -18,8 +18,10 @@ uint16_t getDS(void);
 uint16_t getES(void);
 uint32_t getPE(void);
 void setAL(uint8_t value);
+void setBL(uint8_t value);
 void setAX(uint16_t value);
 void setBX(uint16_t value);
+void setDX(uint16_t value);
 void setCF(uint32_t value);
 
 #ifdef __cplusplus
