@@ -2,9 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T280 S15** — The bounded adapter-softpc host-identity facade
-required by the closed S14 `demsrch` audit is closed. The next operation is a
-separate source-local DEM mirror divergence; no provider is enabled.
+**Active: M0 T280 S16** — Apply the source-proven, source-local `demsrch.c`
+host-identity divergence over the closed S15 facade. It is Ordinary Mode with
+single-person dual-role review; no provider/BOP route is enabled.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -25,25 +25,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S15 — DEM host-identity facade
+### M0 T280 S16 — `demsrch.c` host-identity divergence
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T280 S15`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S14 closed the source-first `demsrch` pointer-identity audit; it identified one adapter-softpc facade over the existing bound session mapping instance. |
-| Objective | Implement and prove one bounded host-resource surrogate facade for source-shaped DEM use. |
-| Non-goals | No DEM body edit/link, provider/BOP route, guest trace, new mapper, guest-memory access, raw pointer persistence, resource closing or service selection. |
-| Reference Baseline | Original `demsrch.c`, S14 binding ledger/closure, session thread-binding contract and mapping rules. |
-| Files And ABI Surface | Adapter-softpc facade header/source, focused x86/x64 fixture/build evidence, adapter divergence register and Status; no DEM body modification. |
+| Identifier Mode | `M0 T280 S16`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S15 closed the only bounded host-identity facade; original `SearchFile` supplies the reached resource-failure behavior. |
+| Objective | Replace only raw persisted `PFFINDLIST` fields with fixed-width mapped identities while retaining original search, error and cleanup control flow. |
+| Non-goals | No provider/BOP route, guest trace, new mapper, new DOS search behavior, guest-memory implementation, directory backend or unrelated pointer rewrite. |
+| Reference Baseline | Original `demsrch.c`, S14/S15 closures, session mapping rules and original `SearchFile` `STATUS_NO_MEMORY` branch. |
+| Files And ABI Surface | One original mirror body, its README divergence register, focused fixture/build evidence and Status. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Original source/recovery-ladder review plus focused MSVC x86/x64 facade fixture: no session, publish/resolve, stale/release, session isolation and disposal invalidation. |
-| Expected Markers | One session `host_resource` identity route and explicit separation from both FFindId numeric data and guest-memory spans. |
-| Asset Needs | Original DEM sources, current session mapping/thread contract, MSVC x86/x64 and adapter-softpc build boundary. |
-| Reporting Requirements | Recovery exception, source limitation, fixed-width ABI, lifetime/teardown rules, original failure outcome and unique owner. |
-| Stop Conditions | A raw host pointer is stored in guest/MVDM state, a second mapper appears, the facade acquires guest memory, or a body/provider is enabled. |
-| Exit Criteria | The facade passes its focused x86/x64 fixture and is registered as the only DEM host-identity bridge; the original mirror remains unedited. |
+| Verification | Original source/cast inventory, focused x86/x64 composition/fixture, exact error-path review, README register and diff review. |
+| Expected Markers | No `STOREDWORD` receives `PFFINDLIST`; raw pointers stay local; release precedes free; `FFindId` stays numeric. |
+| Asset Needs | Original DEM sources, S15 facade, session binding contract, MSVC x86/x64 and source-shaped DEM declarations. |
+| Reporting Requirements | Each divergence site, original form, resource-failure preservation, mapping lifetime and remaining provider limitation. |
+| Stop Conditions | A raw pointer is persisted, failure is guessed rather than source-derived, a second mapper appears, or any provider/BOP route is enabled. |
+| Exit Criteria | All seven persistence/validation/cleanup sites use the one facade, pass focused x86/x64 proof and retain documented original failure branches. |
 | Original Owner Request | “单人双角色模式执行队列任务”。 |
-| Similar-Issue Sweep | Host handles, callbacks, find-list cleanup, no-session calls, x86/x64 layout, session disposal and guest-memory isolation. |
+| Similar-Issue Sweep | Path/FCB first/next, volume-label look-ahead, wraparound cleanup, PSP cleanup, token publication failure, no-session behavior and guest-memory isolation. |
 
 ### Closed packet reference — M0 T280 S13
 
