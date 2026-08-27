@@ -4,10 +4,9 @@
 
 **No active M/T/S packet.**
 
-M0 T299 is closed by S4. First degree is now the reachable closure over the
-physical original files entered by zero-degree calls; a same-file or other
-already selected-file definition remains first-degree. Every direct no-body
-call remains individual missing-definition evidence.
+M0 T299 is closed by S5. The source scanner excludes C/C++/MSVC control
+constructs; the current first-degree closure has 128 physical definitions and
+743 second-degree cross-file candidates.
 
 ## Active Packet
 
@@ -19,6 +18,15 @@ call remains individual missing-definition evidence.
 | Result | 152 physical first-degree definitions form the selected-file closure; all 762 second-degree rows leave that file set. |
 | Evidence | [S4 closure](etc/evidence/m0-t299-s4-first-degree-translation-unit-closure-001.md) and [plan](etc/operations/m0-t299-s4-first-degree-translation-unit-closure-plan-001.md). |
 | Next Admission | Public Win32/CRT source-shaped binding and facade recovery may consume the frozen per-call and per-definition ledgers. |
+
+### M0 T299 S5 closure — parser language-construct correction
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T299 S5`, ordinary mode with single-person dual-role implementation and review. |
+| Result | Control constructs are absent from definition and candidate rows; the selected-file closure invariants still hold. |
+| Evidence | [S5 closure](etc/evidence/m0-t299-s5-parser-control-construct-correction-001.md) and [plan](etc/operations/m0-t299-s5-parser-control-construct-correction-plan-001.md). |
+| Next Admission | Public Win32/CRT source-shaped binding and facade recovery may consume the corrected T299 ledgers. |
 
 ### M0 T299 S3 closure — missing-definition normalization
 

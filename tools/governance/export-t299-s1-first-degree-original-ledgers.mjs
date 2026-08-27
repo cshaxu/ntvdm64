@@ -7,7 +7,7 @@ import path from 'node:path';
 const root = process.argv[2] || process.cwd();
 const ops = path.join(root, 'docs', 'etc', 'operations');
 const sourceRoots = ['O:\\repos.external\\OpenNT', 'O:\\repos.external\\OpenNT-4.5'].filter(fs.existsSync).sort((left, right) => right.length - left.length);
-const keywords = new Set(['if', 'for', 'while', 'switch', 'return', 'sizeof', 'case', 'do', 'typedef', 'defined', '__asm', 'asm', 'catch', '__try']);
+const keywords = new Set(['if', 'for', 'while', 'switch', 'return', 'sizeof', 'case', 'do', 'typedef', 'defined', '__asm', 'asm', 'catch', '__try', '__except', 'except', '__finally', 'finally', 'try']);
 
 function parseTsv(fileName) {
   const lines = fs.readFileSync(fileName, 'utf8').replace(/^\uFEFF/, '').split(/\r?\n/).filter(Boolean);
