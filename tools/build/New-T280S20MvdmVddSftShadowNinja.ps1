@@ -14,7 +14,7 @@ $build = Join-Path $root ("build/M0-T280/{0}-vdd-sft-shadow" -f $Architecture)
 New-Item -ItemType Directory -Force -Path $build | Out-Null
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path -LiteralPath $vs -PathType Leaf)) { throw "MSVC environment entry point missing: $vs" }
-$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/adapter-softpc/include /I ' + $root + '/src/opennt-mvdm-support/inc'
+$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/adapter-softpc/include /I ' + $root + '/src/mvdm-support/inc'
 $content = @"
 ninja_required_version = 1.10
 root = $root

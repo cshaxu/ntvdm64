@@ -35,12 +35,12 @@ $crtOrSdk = @(
 
 $ledger = Import-Csv -LiteralPath $UnionLedgerPath -Delimiter "`t"
 $hostRows = @($ledger | Where-Object {
-    $_.owner_root -eq 'opennt-mvdm-host' -and
+    $_.owner_root -eq 'mvdm-host' -and
     $sourceExtensions -contains [IO.Path]::GetExtension($_.target_path).ToLowerInvariant()
 })
 
 $selectedMvdm = @{}
-foreach ($row in $ledger | Where-Object { $_.owner_root -eq 'opennt-mvdm-host' }) {
+foreach ($row in $ledger | Where-Object { $_.owner_root -eq 'mvdm-host' }) {
     $key = Normalize-Include $row.target_path
     $selectedMvdm[$key] = Get-SelectedPath $row
 }

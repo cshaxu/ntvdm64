@@ -8,7 +8,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $ops = Join-Path $root 'docs/etc/operations'
-$source = Join-Path $root 'src/opennt-mvdm-host'
+$source = Join-Path $root 'src/mvdm-host'
 $work = @(Import-Csv -LiteralPath (Join-Path $ops 'm0-t277-s2-source-form-worklist.tsv') -Delimiter "`t" | Where-Object { $_.caller_package -eq 'softpc.new' })
 if ($work.Count -ne 197) { throw "Expected 197 SoftPC work items; found $($work.Count)." }
 

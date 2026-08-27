@@ -25,7 +25,7 @@ foreach ($row in $dpmi) {
     $row.final_audit_state = 'final-disposition-audited; not implemented'
     if ($row.source_path -in $x86Bodies) {
         $row.final_disposition = 'adapter-backed'
-        $row.final_owner_or_link_boundary = 'opennt-mvdm-host original DPMI32 provider -> adapter-softpc -> adapter-bochs; adapter-vdm-monitor owns only monitor callback binding'
+        $row.final_owner_or_link_boundary = 'mvdm-host original DPMI32 provider -> adapter-softpc -> adapter-bochs; adapter-vdm-monitor owns only monitor callback binding'
         $row.final_change_class = 'binding-only; preserve original DPMI selector, interrupt, mode-switch, LDT and VDM_TIB control flow'
         $row.named_adapter = 'adapter-softpc; adapter-bochs; adapter-vdm-monitor; session guest-memory mapping manager'
         $row.mapping_implication = 'Sim32GetVDMPointer-style ranges resolve only through synchronous bounded guest-memory leases or copies; no native host pointer may enter DPMI fields'
@@ -33,7 +33,7 @@ foreach ($row in $dpmi) {
     }
     elseif ($row.source_path -in $declarations) {
         $row.final_disposition = 'binding-only'
-        $row.final_owner_or_link_boundary = 'opennt-platform-abi original DPMI32 declaration surface supplied unchanged to the selected provider and same-shaped adapters'
+        $row.final_owner_or_link_boundary = 'mvdm-platform-abi original DPMI32 declaration surface supplied unchanged to the selected provider and same-shaped adapters'
         $row.final_change_class = 'binding-only; preserve original declaration, layout and calling-convention shape'
         $row.named_adapter = 'adapter-softpc; adapter-vdm-monitor; session'
         $row.mapping_implication = 'reached guest addresses use the session guest-memory instance; declarations never expose native identities'

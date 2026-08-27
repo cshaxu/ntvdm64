@@ -1,7 +1,7 @@
 /*
  * Reached same-shaped subset of OpenNT ntioapi.h.
  *
- * The byte-exact historical carrier remains in opennt-platform-abi.  This
+ * The byte-exact historical carrier remains in mvdm-platform-abi.  This
  * facade exposes only declarations reached by the original DEM source, where
  * current winternl.h has no compatible public declaration.
  */

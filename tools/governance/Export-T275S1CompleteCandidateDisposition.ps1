@@ -14,7 +14,7 @@ function Get-NonImplementationDisposition([string]$Path, [string]$Kind) {
     if ($Kind -eq 'supporting-reference') {
         return [pscustomobject]@{ ledger_id='REFERENCE'; disposition='retain-as-reference-only'; successor='docs/etc or source provenance'; rationale='not an adapter ABI input' }
     }
-    if ($Path -like 'adapter-bop/*') {
+    if ($Path -like 'adapter-mvdm-host-in/*') {
         return [pscustomobject]@{ ledger_id='ADAPTER-IF-001'; disposition='recover-if-required-by-S2'; successor='T275 S2'; rationale='declaration follows retained selector-blind transport only' }
     }
     if ($Path -like 'adapter-win32/*') {
@@ -34,7 +34,7 @@ function Get-NonImplementationDisposition([string]$Path, [string]$Kind) {
         return [pscustomobject]@{ ledger_id='ADAPTER-IF-005'; disposition='defer'; successor='machine/VDD/debugger packages'; rationale='device-specific semantics do not belong in generic facade' }
     }
     if ($Path -match '^adapter-softpc/include/') {
-        return [pscustomobject]@{ ledger_id='ADAPTER-IF-002'; disposition='replace-with-exact-opennt-mirror-declaration'; successor='T275 S3 declaration audit'; rationale='original declaration topology now lives in opennt-mvdm-host' }
+        return [pscustomobject]@{ ledger_id='ADAPTER-IF-002'; disposition='replace-with-exact-opennt-mirror-declaration'; successor='T275 S3 declaration audit'; rationale='original declaration topology now lives in mvdm-host' }
     }
     if ($Path -match '/(controlled_stop_service|cpu_result|cpu_delta_abi|cpu_state_abi|exception_abi|pending_action|bulk_result_transaction|multi_write_abi|multi_write_transaction|mechanical_action)\.') {
         return [pscustomobject]@{ ledger_id='ADAPTER-IF-001'; disposition='migrate'; successor='T275 S2'; rationale='typed BOP result/completion mechanics belong with transport' }

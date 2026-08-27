@@ -19,7 +19,7 @@ foreach ($entry in $eligible) {
     switch ($entry.provisional_composition_disposition) {
         'bochs-replacement-profile-excluded' {
             $row.final_disposition = 'not-host-runtime'
-            $row.final_owner_or_link_boundary = 'retained opennt-mvdm-host SoftPC machine evidence; Bochs owns the final CPU/device execution'
+            $row.final_owner_or_link_boundary = 'retained mvdm-host SoftPC machine evidence; Bochs owns the final CPU/device execution'
             $row.final_change_class = 'none; byte-exact source mirror retained outside the final host link graph'
             $row.named_adapter = 'adapter-softpc -> adapter-bochs is the same-shaped machine boundary, not an import of this executor'
             $row.mapping_implication = 'not applicable to this excluded executor; any admitted caller uses adapter-softpc and the session guest-memory mapping-manager lease'
@@ -27,7 +27,7 @@ foreach ($entry in $eligible) {
         }
         'adapter-bochs-firmware-review' {
             $row.final_disposition = 'firmware-only'
-            $row.final_owner_or_link_boundary = 'opennt-mvdm-firmware immutable machine input selected only by an adapter-bochs manifest'
+            $row.final_owner_or_link_boundary = 'mvdm-softpc-firmware immutable machine input selected only by an adapter-bochs manifest'
             $row.final_change_class = 'none; byte-exact firmware/source input retained and never linked as a host provider'
             $row.named_adapter = 'adapter-bochs'
             $row.mapping_implication = 'firmware bytes are immutable machine input; they expose neither native pointers nor host handles'
@@ -35,7 +35,7 @@ foreach ($entry in $eligible) {
         }
         'tool-profile-excluded' {
             $row.final_disposition = 'tool-only'
-            $row.final_owner_or_link_boundary = 'opennt-mvdm-tools historical build/debug utility evidence; never a host link input'
+            $row.final_owner_or_link_boundary = 'mvdm-tools historical build/debug utility evidence; never a host link input'
             $row.final_change_class = 'none; byte-exact source mirror retained'
             $row.named_adapter = 'none'
             $row.mapping_implication = 'not applicable to the host runtime'

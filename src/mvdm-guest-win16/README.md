@@ -1,4 +1,4 @@
-# opennt-guest-wow16
+# mvdm-guest-win16
 
 Load-only WOW16/bin86 guest carry recovered byte-identically from the existing
 repository-local guest inventory during M0 T274 S4. It is not a claim that the

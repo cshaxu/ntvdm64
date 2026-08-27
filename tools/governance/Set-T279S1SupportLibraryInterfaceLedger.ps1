@@ -18,7 +18,7 @@ $groups = @(
 
 $rows = @(); $sequence = 0
 foreach ($group in $groups) {
-    $source = Join-Path $root ('src/opennt-mvdm-support/' + $group.Path)
+    $source = Join-Path $root ('src/mvdm-support/' + $group.Path)
     $text = Get-Content -LiteralPath $source
     foreach ($symbol in $group.Symbols.Split(',')) {
         $hits = @($text | Select-String -Pattern ('\b' + [regex]::Escape($symbol) + '\b'))
@@ -34,7 +34,7 @@ foreach ($group in $groups) {
             x86_x64_disposition = $group.X64
             failure_disposition = $group.Failure
             state = 'source-form-audited; build-not-enabled'
-            evidence = ('src/opennt-mvdm-support/' + $group.Path + ':' + (($hits | Select-Object -First 1).LineNumber))
+            evidence = ('src/mvdm-support/' + $group.Path + ':' + (($hits | Select-Object -First 1).LineNumber))
         }
     }
 }

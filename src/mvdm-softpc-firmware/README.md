@@ -1,4 +1,4 @@
-# opennt-mvdm-firmware
+# mvdm-softpc-firmware
 
 Canonical original MVDM firmware-input mirror. Its final retained
 upstream-relative package set is `softpc.new/base/bios`, `softpc.new/bios`,
@@ -9,7 +9,7 @@ an executable DOS/WOW16 guest image. It carries immutable firmware, ROM and
 machine-profile inputs only.
 
 The current T276 audit keeps the byte-exact source union temporarily under
-`src/opennt-mvdm-host`; no source is copied, changed, compiled, linked or
+`src/mvdm-host`; no source is copied, changed, compiled, linked or
 deleted by this skeleton. A dedicated hash-verified `git mv` packet must
 establish this component. It is an immutable input carrier: it has no host
 runtime library edge and never enables a parallel SoftPC machine. Only an

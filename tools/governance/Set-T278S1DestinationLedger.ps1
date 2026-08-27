@@ -16,15 +16,15 @@ $union = @($union | Where-Object { $selectedPath.ContainsKey($_.target_path) })
 if ($union.Count -ne 1689) { throw "Expected the T274 union to supply all 1689 selected paths; found $($union.Count)." }
 
 function Get-Destination([string]$Path, [string]$Package) {
-    if ($Package -in @('dirs','makefil0','inc','oemuni','suballoc')) { return 'opennt-mvdm-support' }
-    if ($Package -eq 'vdmutils') { return 'opennt-mvdm-tools' }
-    if ($Path -match '^softpc\.new/(base/bios|bios|roms|data)(/|$)') { return 'opennt-mvdm-firmware' }
-    return 'opennt-mvdm-host'
+    if ($Package -in @('dirs','makefil0','inc','oemuni','suballoc')) { return 'mvdm-support' }
+    if ($Package -eq 'vdmutils') { return 'mvdm-tools' }
+    if ($Path -match '^softpc\.new/(base/bios|bios|roms|data)(/|$)') { return 'mvdm-softpc-firmware' }
+    return 'mvdm-host'
 }
 
 $rows = foreach ($entry in $union | Sort-Object target_path) {
     $destination = Get-Destination $entry.target_path $entry.package_root
-    $current = Join-Path $root ('src/opennt-mvdm-host/' + $entry.target_path)
+    $current = Join-Path $root ('src/mvdm-host/' + $entry.target_path)
     if (-not (Test-Path -LiteralPath $current -PathType Leaf)) { throw "Canonical source is missing: $($entry.target_path)" }
     $currentHash = (Get-FileHash -LiteralPath $current -Algorithm SHA256).Hash.ToLowerInvariant()
     $expectedHash = if ([string]::IsNullOrWhiteSpace($entry.primary_sha256)) { $entry.secondary_sha256 } else { $entry.primary_sha256 }
@@ -35,7 +35,7 @@ $rows = foreach ($entry in $union | Sort-Object target_path) {
         source_path = $entry.target_path
         package_root = $entry.package_root
         source_sha256 = $expectedHash.ToLowerInvariant()
-        current_component = 'opennt-mvdm-host'
+        current_component = 'mvdm-host'
         destination_component = $destination
         destination_relative_path = $entry.target_path
         movement_state = 'frozen-pre-move'

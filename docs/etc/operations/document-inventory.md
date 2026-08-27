@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2727 |
+| Documentation records | 2728 |
 | --- | --- |
-| Generated UTC | 2026-08-27T05:50:21Z |
+| Generated UTC | 2026-08-27T06:01:01Z |
 
 ## Entries
 
@@ -343,7 +343,8 @@ content-divergent entries.
 | etc/evidence/m0-t282-s8-command-owner-dependency-partition-001.md | indexed supporting material | d7c0b23ea976ebfe6e4ca178e4677724d0f53fa25572328a197e8be2bc1ec8e8 |
 | etc/evidence/m0-t282-s9-command-environment-guest-seam-audit-001.md | indexed supporting material | ee24823203b89ef1d7df16401a568623be27eefea2e5d73d2e6b550dea16d7f7 |
 | etc/evidence/m0-t283-s2-platform-abi-canonical-reroot-001.md | indexed supporting material | ea9bf6981139815ad93f7ffb29906e4d6bc5e1d74a8bc98cc3f2a030638ff35c |
-| etc/evidence/m0-t284-s1-adapter-convergence-inventory-001.md | indexed supporting material | 5ab373f6938caf64530c8cb7434eb7aacc795e4b10b65b037e021b997ade0141 |
+| etc/evidence/m0-t284-s1-adapter-convergence-inventory-001.md | indexed supporting material | e3819dd9fe3dc687bded5c02350882bee313c0dc492fe1e21d9bd72eb1d20919 |
+| etc/evidence/m0-t284-s2-component-root-rename-closure-001.md | indexed supporting material | 12baf3b3497b73eea6b5aa6b7863a739c4e08c88c63b3b33f4002d9f2aa8cc93 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -2615,7 +2616,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | fbfa3a202453ef9a31c0549310ff6ce96d822ac85e2cbbfb6a9c6c032e516f0c |
-| QUEUE.md | principal control document | 4e68c4107f1713bbbd99da9e2b8216023e8b305ff7144e3534279b5302b7d098 |
+| QUEUE.md | principal control document | ba8c02f7d1991a8864b13c1edfebb0af7f2bd7b7e4f8fe6583f32961381fb95f |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -2741,9 +2742,9 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 41feac2ce591c27ec2d2a6b360ea8bf7adb92a868763c29810e78b6d8c8900c5 |
+| STATUS.md | principal control document | c51bbbc6456873d39f827d8557e8a25098532f72b66b9643ea73251beb214816 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
-| TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |
+| TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
 | WHPX-BACKEND-RESEARCH.md | retained pre-governance evidence | 1c914aaeb4f42b4f04a839c77baec69312b791f75c595ee583da77f3c63e54f8 |
 | WIN32-HOST-API-BOUNDARY.md | retained pre-governance evidence | 37a3c277001248596b2819f105fe5d422f37de32cfd0b5d83730e66138b716df |

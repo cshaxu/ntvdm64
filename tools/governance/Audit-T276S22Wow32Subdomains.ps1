@@ -3,7 +3,7 @@ param([Parameter(Mandatory=$true)][string]$RepositoryRoot)
 
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path $RepositoryRoot).Path
-$wow = Join-Path $root 'src/opennt-mvdm-host/wow32'
+$wow = Join-Path $root 'src/mvdm-host/wow32'
 $ops = Join-Path $root 'docs/etc/operations'
 
 $groups = [ordered]@{

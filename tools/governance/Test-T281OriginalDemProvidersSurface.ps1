@@ -29,7 +29,7 @@ foreach ($marker in $required) {
     }
 }
 
-$forbidden = @('rule link', 'rule run', '.exe', 'adapter-bop/', 'bochs-core/',
+$forbidden = @('rule link', 'rule run', '.exe', 'adapter-mvdm-host-in/', 'bochs-core/',
     'vdm_control.c', 'nt_bop.c')
 foreach ($marker in $forbidden) {
     if ($text -like "*$marker*") {

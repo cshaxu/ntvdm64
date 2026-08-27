@@ -1,4 +1,4 @@
-# opennt-guest-dos
+# mvdm-guest-dos
 
 Complete repository-local DOS/V86 guest mirror, recovered byte-identically
 from `src.old/opennt-guest/dos-v86` during M0 T274 S3. It is a load-only guest

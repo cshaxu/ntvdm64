@@ -10,7 +10,7 @@ $vdd = @($rows | Where-Object {$_.source_path -like 'vdd/*'})
 if ($vdd.Count -ne 47) { throw "Expected 47 VDD rows, found $($vdd.Count)." }
 foreach ($row in $vdd) {
     $row.final_disposition = 'not-host-runtime'
-    $row.final_owner_or_link_boundary = 'retained opennt-mvdm-host mirror evidence; no final host link input'
+    $row.final_owner_or_link_boundary = 'retained mvdm-host mirror evidence; no final host link input'
     $row.final_change_class = 'none; byte-exact source mirror retained'
     $row.named_adapter = 'adapter-vdd future product boundary only; sample is not promoted'
     $row.mapping_implication = 'not applicable to final product; any separately admitted VDD reuse must use session guest-memory and host-resource mapping-manager instances'

@@ -27,10 +27,10 @@ function Write-Tsv([object[]]$Rows, [string]$Name) {
 }
 
 $union = Import-Csv -LiteralPath $unionPath -Delimiter "`t" |
-    Where-Object { $_.owner_root -eq 'opennt-mvdm-host' } |
+    Where-Object { $_.owner_root -eq 'mvdm-host' } |
     Sort-Object target_path
 if ($union.Count -ne 1689) {
-    throw "Expected 1,689 selected opennt-mvdm-host paths; found $($union.Count)."
+    throw "Expected 1,689 selected mvdm-host paths; found $($union.Count)."
 }
 $index = 0
 $fileRows = foreach ($row in $union) {

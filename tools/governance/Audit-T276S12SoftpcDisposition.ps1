@@ -20,40 +20,40 @@ if ($files.Count -ne 998) { throw "Expected 998 softpc.new rows, found $($files.
 function Get-SoftpcDisposition {
     param([string]$Path)
     if ($Path -match '^softpc\.new/host/src/') {
-        return @('original-host-control', 'opennt-mvdm-host', 'candidate-adapter-bound', 'host control source; requires per-interface SoftPC/Win32/monitor audit')
+        return @('original-host-control', 'mvdm-host', 'candidate-adapter-bound', 'host control source; requires per-interface SoftPC/Win32/monitor audit')
     }
     if ($Path -match '^softpc\.new/(host/inc|host/link|host/dirs)') {
-        return @('host-control-declaration-or-build', 'opennt-mvdm-host', 'host-control-input-review', 'supporting original host-control input; no standalone body claim')
+        return @('host-control-declaration-or-build', 'mvdm-host', 'host-control-input-review', 'supporting original host-control input; no standalone body claim')
     }
     if ($Path -match '^softpc\.new/obj\.vdm/') {
-        return @('original-host-product-composition', 'opennt-mvdm-host', 'app-composition-review', 'historical NTVDM product composition source; app is the eventual composition consumer, not a source rewrite target')
+        return @('original-host-product-composition', 'mvdm-host', 'app-composition-review', 'historical NTVDM product composition source; app is the eventual composition consumer, not a source rewrite target')
     }
     if ($Path -match '^softpc\.new/base/(ccpu386|cpu|cvidc|video|disks|keymouse|comms|system|dos)/') {
-        return @('historical-machine-execution-or-device', 'opennt-mvdm-host', 'bochs-replacement-profile-excluded', 'CPU/memory/device execution ownership belongs to Bochs; retain exact original source as exclusion evidence')
+        return @('historical-machine-execution-or-device', 'mvdm-host', 'bochs-replacement-profile-excluded', 'CPU/memory/device execution ownership belongs to Bochs; retain exact original source as exclusion evidence')
     }
     if ($Path -match '^softpc\.new/base/bios/') {
-        return @('historical-machine-firmware', 'opennt-mvdm-firmware', 'adapter-bochs-firmware-review', 'separate firmware mirror input; later evaluate only as an adapter-bochs manifest-selected input, never as a host runtime library or parallel machine implementation')
+        return @('historical-machine-firmware', 'mvdm-softpc-firmware', 'adapter-bochs-firmware-review', 'separate firmware mirror input; later evaluate only as an adapter-bochs manifest-selected input, never as a host runtime library or parallel machine implementation')
     }
     if ($Path -match '^softpc\.new/(bios|roms|data)/') {
-        return @('firmware-rom-or-machine-data', 'opennt-mvdm-firmware', 'adapter-bochs-firmware-review', 'separate firmware mirror input; no automatic machine or host-runtime enablement')
+        return @('firmware-rom-or-machine-data', 'mvdm-softpc-firmware', 'adapter-bochs-firmware-review', 'separate firmware mirror input; no automatic machine or host-runtime enablement')
     }
     if ($Path -match '^softpc\.new/base/support/') {
-        return @('historical-machine-support', 'opennt-mvdm-host', 'adapter-softpc-review', 'machine-facing helper set; review only through original SoftPC-shaped adapter boundary')
+        return @('historical-machine-support', 'mvdm-host', 'adapter-softpc-review', 'machine-facing helper set; review only through original SoftPC-shaped adapter boundary')
     }
     if ($Path -match '^softpc\.new/base/inc/') {
-        return @('historical-machine-declaration', 'opennt-mvdm-host', 'adapter-softpc-declaration-review', 'shared original SoftPC machine declaration/input; no standalone body or direct host-control claim')
+        return @('historical-machine-declaration', 'mvdm-host', 'adapter-softpc-declaration-review', 'shared original SoftPC machine declaration/input; no standalone body or direct host-control claim')
     }
     if ($Path -match '^softpc\.new/base/unix/') {
-        return @('historical-unix-port', 'opennt-mvdm-host', 'profile-excluded', 'non-Windows historical port input; retained mirror only')
+        return @('historical-unix-port', 'mvdm-host', 'profile-excluded', 'non-Windows historical port input; retained mirror only')
     }
     if ($Path -match '^softpc\.new/(base/debug|base/dasm386|debugger)/') {
-        return @('historical-debugger-or-disassembler', 'opennt-mvdm-host', 'adapter-debugger-review', 'debugger/disassembler product input; no default host-runtime enablement')
+        return @('historical-debugger-or-disassembler', 'mvdm-host', 'adapter-debugger-review', 'debugger/disassembler product input; no default host-runtime enablement')
     }
     if ($Path -match '^softpc\.new/(convert|dat2obj|rename)/') {
         return @('historical-build-tool', 'tools/opennt', 'tool-profile-excluded', 'independent historical build conversion tool, not an MVDM runtime package')
     }
     if ($Path -match '^softpc\.new/(base/dirs|dirs)$') {
-        return @('original-build-control', 'opennt-mvdm-host', 'build-control-only', 'original build control; no runtime body')
+        return @('original-build-control', 'mvdm-host', 'build-control-only', 'original build control; no runtime body')
     }
     throw "No S12 disposition rule for $Path"
 }

@@ -1,4 +1,4 @@
-# opennt-platform-abi
+# mvdm-platform-abi
 
 This mirror component holds only byte-identical, declaration-only OpenNT
 headers required outside the canonical MVDM source union. It owns no behavior,

@@ -18,16 +18,16 @@ function Get-RelativeKey([string]$Root, [string]$Path) {
 
 function Get-Owner([string]$Key) {
     if ($Key.StartsWith('dos/v86/', [StringComparison]::OrdinalIgnoreCase)) {
-        return 'opennt-guest-dos'
+        return 'mvdm-guest-dos'
     }
     if ($Key.StartsWith('wow16/', [StringComparison]::OrdinalIgnoreCase) -or
         $Key.StartsWith('bin86/', [StringComparison]::OrdinalIgnoreCase)) {
-        return 'opennt-guest-wow16'
+        return 'mvdm-guest-win16'
     }
     if ($Key.StartsWith('tools16/', [StringComparison]::OrdinalIgnoreCase)) {
         return 'tools/opennt'
     }
-    return 'opennt-mvdm-host'
+    return 'mvdm-host'
 }
 
 function Get-LocalGuestPath([string]$GuestRoot, [string]$Key) {
@@ -45,8 +45,8 @@ function Get-LocalGuestPath([string]$GuestRoot, [string]$Key) {
 
 function Get-Transfer([string]$Owner, [string]$LocalIdentity) {
     switch ($Owner) {
-    'opennt-guest-dos' { return $LocalIdentity }
-    'opennt-guest-wow16' { return $LocalIdentity }
+    'mvdm-guest-dos' { return $LocalIdentity }
+    'mvdm-guest-win16' { return $LocalIdentity }
     'tools/opennt' { return 'tool-supply-later-subtask' }
     default { return 'non-guest-host-supply-later-subtask' }
     }
@@ -104,7 +104,7 @@ $rows = foreach ($key in $records.Keys | Sort-Object) {
     } else {
         ''
     }
-    $localIdentity = if ($owner -eq 'opennt-mvdm-host' -or $owner -eq 'tools/opennt') {
+    $localIdentity = if ($owner -eq 'mvdm-host' -or $owner -eq 'tools/opennt') {
         ''
     } elseif ($localHash -ne '' -and $localHash -eq $selectedHash) {
         'carry-forward-local-guest-mirror'

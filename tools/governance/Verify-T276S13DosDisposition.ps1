@@ -15,7 +15,7 @@ if (@($rows | Group-Object source_path | Where-Object Count -ne 1).Count -ne 0) 
 if (@($rows | Where-Object { [string]::IsNullOrWhiteSpace($_.provisional_component_owner) -or [string]::IsNullOrWhiteSpace($_.required_boundary_owner) }).Count -ne 0) { throw 'Every DOS path requires a component owner and boundary disposition.' }
 $sources = @($rows | Where-Object file_kind -eq 'source')
 if ($sources.Count -ne 27) { throw "Expected 27 DOS source units, found $($sources.Count)." }
-if (@($sources | Where-Object { $_.provisional_component_owner -ne 'opennt-mvdm-host' }).Count -ne 0) { throw 'Every DOS source unit must remain in the opennt-mvdm-host audit carrier.' }
+if (@($sources | Where-Object { $_.provisional_component_owner -ne 'mvdm-host' }).Count -ne 0) { throw 'Every DOS source unit must remain in the mvdm-host audit carrier.' }
 if (@($sources | Where-Object { $_.original_literal_build_membership -ne 'observed-in-literal-sources' }).Count -ne 0) { throw 'Every DOS source unit must have literal historical SOURCES evidence.' }
 if (@($rows | Where-Object state -ne 'provisional-not-enabled').Count -ne 0) { throw 'S13 may not enable a source body.' }
 Write-Output "T276 S13 dos disposition verification passed: 40 paths, 27 source units."

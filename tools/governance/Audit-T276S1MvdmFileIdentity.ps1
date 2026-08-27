@@ -14,7 +14,7 @@ $unionPath = Join-Path $operationsRoot 'm0-t274-s1-non-guest-mvdm-union-ledger.t
 $fileLedgerPath = Join-Path $operationsRoot 'mvdm-file-recovery-ledger.tsv'
 $packageLedgerPath = Join-Path $operationsRoot 'mvdm-package-dependency-ledger.tsv'
 $evidencePath = Join-Path $operationsRoot 'm0-t276-s1-file-identity-taxonomy-001.md'
-$mirrorRoot = Join-Path $repositoryRoot 'src/opennt-mvdm-host'
+$mirrorRoot = Join-Path $repositoryRoot 'src/mvdm-host'
 
 foreach ($path in @($unionPath, $fileLedgerPath, $packageLedgerPath)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
@@ -23,7 +23,7 @@ foreach ($path in @($unionPath, $fileLedgerPath, $packageLedgerPath)) {
 }
 
 $union = Import-Csv -LiteralPath $unionPath -Delimiter "`t" |
-    Where-Object { $_.owner_root -eq 'opennt-mvdm-host' } |
+    Where-Object { $_.owner_root -eq 'mvdm-host' } |
     Sort-Object target_path
 if ($union.Count -ne 1689) {
     throw "Expected 1,689 selected host paths; found $($union.Count)."
@@ -130,7 +130,7 @@ $lines = @(
     '- `m0-t274-s1-non-guest-mvdm-union-ledger.tsv` (canonical selected source);',
     '- `mvdm-file-recovery-ledger.tsv` (one row per selected path);',
     '- `mvdm-package-dependency-ledger.tsv` (declared package counts); and',
-    '- local `src/opennt-mvdm-host` mirror plus selected external source paths.',
+    '- local `src/mvdm-host` mirror plus selected external source paths.',
     '',
     '## Procedure',
     '',

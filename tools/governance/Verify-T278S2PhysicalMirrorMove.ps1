@@ -15,15 +15,15 @@ foreach ($row in $ledger) {
     if (-not (Test-Path -LiteralPath $target -PathType Leaf)) { throw "Missing frozen target path: $($row.source_path) -> $($row.destination_component)" }
     $hash = (Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash.ToLowerInvariant()
     if ($hash -ne $row.source_sha256) { throw "Hash changed during move: $($row.source_path)" }
-    $old = Join-Path $root ('src/opennt-mvdm-host/' + $row.source_path)
-    if ($row.destination_component -ne 'opennt-mvdm-host' -and (Test-Path -LiteralPath $old -PathType Leaf)) { throw "Moved path still exists in host component: $($row.source_path)" }
+    $old = Join-Path $root ('src/mvdm-host/' + $row.source_path)
+    if ($row.destination_component -ne 'mvdm-host' -and (Test-Path -LiteralPath $old -PathType Leaf)) { throw "Moved path still exists in host component: $($row.source_path)" }
 }
 
 $expectedCounts = @{
-    'opennt-mvdm-host' = 1491
-    'opennt-mvdm-support' = 112
-    'opennt-mvdm-tools' = 28
-    'opennt-mvdm-firmware' = 58
+    'mvdm-host' = 1491
+    'mvdm-support' = 112
+    'mvdm-tools' = 28
+    'mvdm-softpc-firmware' = 58
 }
 foreach ($component in $expectedCounts.Keys) {
     $actual = @($ledger | Where-Object destination_component -eq $component).Count

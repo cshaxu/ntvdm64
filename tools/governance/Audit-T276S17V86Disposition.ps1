@@ -15,7 +15,7 @@ if ($files.Count -ne 35) { throw "Expected 35 V86 paths, found $($files.Count)."
 $result = foreach ($file in $files) {
     $path = $file.target_path
     $role = $null
-    $owner = 'opennt-mvdm-host'
+    $owner = 'mvdm-host'
     $boundary = 'none'
     $families = 'none'
     $summary = $null
@@ -24,7 +24,7 @@ $result = foreach ($file in $files) {
     switch -Regex ($path) {
         '^v86/(dirs|monitor/makefile|monitor/sources|monitor/i386/sources|scaffold/makefile|scaffold/sources|scaffold/i386/sources)$' {
             $role = 'historical-build-description'
-            $owner = 'opennt-mvdm-host'
+            $owner = 'mvdm-host'
             $boundary = 'build governance'
             $summary = 'original build selection and profile evidence only; no modern build edge is enabled by this audit'
             $disposition = 'build-description-only'
@@ -46,7 +46,7 @@ $result = foreach ($file in $files) {
         '^v86/scaffold/i386/(softpc\.c|fakebop\.c|fakeinit\.c|fakekbd\.c|fakevid\.c|stubs\.c)$' {
             $role = 'historical-ntvdm-product-scaffold'
             $owner = 'app'
-            $boundary = 'app; adapter-bop; adapter-softpc; adapter-bochs; adapter-win32; session'
+            $boundary = 'app; adapter-mvdm-host-in; adapter-softpc; adapter-bochs; adapter-win32; session'
             $families = 'historical ntvdm.exe startup/termination; SoftPC initialization; BOP/BIOS/video/keyboard placeholders; console and BaseSrv APIs'
             $summary = 'original standalone NTVDM product startup/scaffold and temporary BIOS stubs; app owns modern composition and cannot import this product shell as a second engine or duplicate startup path'
             $disposition = 'historical-product-shell exclusion; source-shaped composition evidence only'
@@ -54,7 +54,7 @@ $result = foreach ($file in $files) {
         '^v86/scaffold/i386/(fun\.h|x86\.h|xbios\.h|xbiosdsk\.h|xbioskbd\.h|xbiosvid\.h|xguest\.h|xwincon\.h)$' {
             $role = 'historical-scaffold-declaration'
             $owner = 'app'
-            $boundary = 'app; adapter-bop; adapter-softpc; adapter-bochs; adapter-win32; session'
+            $boundary = 'app; adapter-mvdm-host-in; adapter-softpc; adapter-bochs; adapter-win32; session'
             $families = 'historical product startup, BIOS placeholder and console declarations'
             $summary = 'declaration/layout evidence for the excluded standalone scaffold; individual same-shaped boundary declarations may be recovered only through their named component owner'
             $disposition = 'declaration evidence; no standalone scaffold composition'
@@ -69,8 +69,8 @@ $result = foreach ($file in $files) {
         }
         '^v86/util/(makefile|quit\.asm)$' {
             $role = 'historical-16bit-vdm-utility'
-            $owner = 'opennt-mvdm-tools'
-            $boundary = 'tools/opennt; adapter-bop'
+            $owner = 'mvdm-tools'
+            $boundary = 'tools/opennt; adapter-mvdm-host-in'
             $families = '16-bit BOP_UNSIMULATE termination utility'
             $summary = 'original independently-built 16-bit quit utility; retain as tool/source evidence and do not link it into the host runtime'
             $disposition = 'tool-only profile exclusion'

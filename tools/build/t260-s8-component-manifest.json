@@ -13,7 +13,7 @@
     "src",
     "src/app",
     "src/session",
-    "src/adapter-bop",
+    "src/adapter-mvdm-host-in",
     "src/adapter-softpc",
     "src/adapter-win32",
     "src/opennt-host",
@@ -244,11 +244,11 @@
       ]
     },
     {
-      "name": "adapter-bop",
+      "name": "adapter-mvdm-host-in",
       "sources": [
-        "src/adapter-bop/bop_ingress.c",
-        "src/adapter-bop/frame_transaction.c",
-        "src/adapter-bop/generic_ud_bridge.cc"
+        "src/adapter-mvdm-host-in/bop_ingress.c",
+        "src/adapter-mvdm-host-in/frame_transaction.c",
+        "src/adapter-mvdm-host-in/generic_ud_bridge.cc"
       ]
     },
     {
@@ -407,9 +407,9 @@
     },
     {
       "name": "t261-s5-bop-ingress-fixture",
-      "source": "tests/adapter-bop/t261_s5_bop_ingress_fixture.c",
+      "source": "tests/adapter-mvdm-host-in/t261_s5_bop_ingress_fixture.c",
       "libraries": [
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -417,13 +417,13 @@
     },
     {
       "name": "t271-s3-frame-transaction-fixture",
-      "source": "tests/adapter-bop/t271_s3_frame_transaction_fixture.c",
+      "source": "tests/adapter-mvdm-host-in/t271_s3_frame_transaction_fixture.c",
       "libraries": [
         "app",
         "opennt-bop",
         "opennt-host",
         "adapter-win32",
-        "adapter-bop",
+        "adapter-mvdm-host-in",
         "adapter-softpc",
         "session",
         "adapter-bochs",
@@ -453,7 +453,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -472,7 +472,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -488,7 +488,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -504,7 +504,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -520,7 +520,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -536,7 +536,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -552,7 +552,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -568,7 +568,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -587,7 +587,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib"
@@ -605,7 +605,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -621,7 +621,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -639,7 +639,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -657,7 +657,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -675,7 +675,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -693,7 +693,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -711,7 +711,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -729,7 +729,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -747,7 +747,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -763,7 +763,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -785,7 +785,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -801,7 +801,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -817,7 +817,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -839,7 +839,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -858,7 +858,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -877,7 +877,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -904,7 +904,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -929,7 +929,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -951,7 +951,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -976,7 +976,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -998,7 +998,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1020,7 +1020,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1042,7 +1042,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1064,7 +1064,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1086,7 +1086,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1111,7 +1111,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -1127,7 +1127,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -1143,7 +1143,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -1159,7 +1159,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -1175,7 +1175,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -1191,7 +1191,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -1207,7 +1207,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -1223,7 +1223,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -1239,7 +1239,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -1255,7 +1255,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -1271,7 +1271,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -1287,7 +1287,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1309,7 +1309,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1331,7 +1331,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1351,7 +1351,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1371,7 +1371,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1391,7 +1391,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1411,7 +1411,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1431,7 +1431,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1451,7 +1451,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1471,7 +1471,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1491,7 +1491,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1511,7 +1511,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1531,7 +1531,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1551,7 +1551,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1576,7 +1576,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1603,7 +1603,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "kernel32.lib",
@@ -1623,7 +1623,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1650,7 +1650,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1677,7 +1677,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1702,7 +1702,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1729,7 +1729,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1756,7 +1756,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1783,7 +1783,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1810,7 +1810,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "libcmt.lib",
@@ -1835,7 +1835,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -1853,7 +1853,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -1869,7 +1869,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -1887,7 +1887,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": []
     },
@@ -1903,7 +1903,7 @@
         "session",
         "adapter-bochs",
         "bochs-core",
-        "adapter-bop"
+        "adapter-mvdm-host-in"
       ],
       "platformLibraries": [
         "user32.lib"
@@ -1922,7 +1922,7 @@
       "session",
       "adapter-bochs",
       "bochs-core",
-      "adapter-bop"
+      "adapter-mvdm-host-in"
     ],
     "platformLibraries": [
       "libcmt.lib",

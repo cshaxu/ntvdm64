@@ -1,6 +1,6 @@
 #include "opennt-bop/xms/opennt_xms_compat.h"
 #include "app/xms_session_binding.h"
-#include "adapter-bop/generic_ud_bridge.h"
+#include "adapter-mvdm-host-in/generic_ud_bridge.h"
 #include "app/bop/route.h"
 
 #include <stdlib.h>

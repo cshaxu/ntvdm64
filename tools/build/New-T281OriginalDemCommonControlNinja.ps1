@@ -26,13 +26,13 @@ $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL ' +
     '/I ' + $root + '/src ' +
     '/I ' + $root + '/src/adapter-win32/include ' +
     '/I ' + $root + '/src/adapter-softpc/include ' +
-    '/I ' + $root + '/src/opennt-mvdm-support/inc ' +
-    '/I ' + $root + '/src/opennt-platform-abi/source/public/sdk/inc ' +
-    '/I ' + $root + '/src/opennt-platform-abi/source/public/internal/base/inc ' +
-    '/I ' + $root + '/src/opennt-platform-abi/source/public/ddk/inc ' +
-    '/I ' + $root + '/src/opennt-mvdm-host/dos/dem ' +
-    '/I ' + $root + '/src/opennt-mvdm-host/softpc.new/host/inc ' +
-    '/I ' + $root + '/src/opennt-mvdm-host/softpc.new/base/inc'
+    '/I ' + $root + '/src/mvdm-support/inc ' +
+    '/I ' + $root + '/src/mvdm-platform-abi/source/public/sdk/inc ' +
+    '/I ' + $root + '/src/mvdm-platform-abi/source/public/internal/base/inc ' +
+    '/I ' + $root + '/src/mvdm-platform-abi/source/public/ddk/inc ' +
+    '/I ' + $root + '/src/mvdm-host/dos/dem ' +
+    '/I ' + $root + '/src/mvdm-host/softpc.new/host/inc ' +
+    '/I ' + $root + '/src/mvdm-host/softpc.new/base/inc'
 
 $content = @"
 ninja_required_version = 1.10
@@ -47,10 +47,10 @@ rule lib
   command = lib /nologo /out:`$out `$in
   description = LIB `$out
 
-build obj/dem.obj: cc `$root/src/opennt-mvdm-host/dos/dem/dem.c
-build obj/demdata.obj: cc `$root/src/opennt-mvdm-host/dos/dem/demdata.c
-build obj/demmsg.obj: cc `$root/src/opennt-mvdm-host/dos/dem/demmsg.c
-build obj/demdisp.obj: cc `$root/src/opennt-mvdm-host/dos/dem/demdisp.c
+build obj/dem.obj: cc `$root/src/mvdm-host/dos/dem/dem.c
+build obj/demdata.obj: cc `$root/src/mvdm-host/dos/dem/demdata.c
+build obj/demmsg.obj: cc `$root/src/mvdm-host/dos/dem/demmsg.c
+build obj/demdisp.obj: cc `$root/src/mvdm-host/dos/dem/demdisp.c
 build original-dem-common-control.lib: lib obj/dem.obj obj/demdata.obj obj/demmsg.obj obj/demdisp.obj
 default original-dem-common-control.lib
 "@

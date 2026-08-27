@@ -3,7 +3,7 @@
 #include "bochs-core/pc_system.h"
 #include "adapter-bochs/minimal_machine.h"
 #include "adapter-softpc/port_action.h"
-#include "adapter-bop/generic_ud_bridge.h"
+#include "adapter-mvdm-host-in/generic_ud_bridge.h"
 
 extern "C" int runtime_machine_generic_ud_bridge(
   const struct runtime_generic_ud_event *,

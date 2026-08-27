@@ -8,7 +8,7 @@ $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $ops = Join-Path $root 'docs/etc/operations'
 $ledger = @(Import-Csv (Join-Path $ops 'm0-t278-destination-source-identity-ledger.tsv') -Delimiter "`t")
-$components = @('opennt-mvdm-host','opennt-mvdm-support','opennt-mvdm-tools','opennt-mvdm-firmware')
+$components = @('mvdm-host','mvdm-support','mvdm-tools','mvdm-softpc-firmware')
 
 foreach ($component in $components) {
     $componentRoot = Join-Path $root ('src/' + $component)
@@ -26,7 +26,7 @@ $configFiles = @(Get-ChildItem -LiteralPath $root -File -Recurse | Where-Object 
     $_.Name -in @('CMakeLists.txt','build.ninja') -or
     ($_.FullName -notmatch '\\(src\\opennt-mvdm-|tools\\historical\\)' -and $_.Extension -in @('.cmake','.vcxproj','.vcproj','.sln','.props'))
 })
-$oldPathPattern = 'opennt-mvdm-host[\\/]((inc|oemuni|suballoc|vdmutils)|dirs|makefil0|softpc\.new[\\/](base[\\/]bios|bios|roms|data))'
+$oldPathPattern = 'mvdm-host[\\/]((inc|oemuni|suballoc|vdmutils)|dirs|makefil0|softpc\.new[\\/](base[\\/]bios|bios|roms|data))'
 $stale = @($configFiles | Select-String -Pattern $oldPathPattern -AllMatches)
 if ($stale.Count) { throw "Current build configuration still names moved path(s): $($stale.Path -join ', ')" }
 & (Join-Path $PSScriptRoot 'Verify-T278S2PhysicalMirrorMove.ps1') -RepositoryRoot $root

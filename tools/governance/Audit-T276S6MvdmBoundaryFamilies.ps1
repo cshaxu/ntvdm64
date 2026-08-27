@@ -16,7 +16,7 @@ function Get-ReviewFamily([string]$Path) {
     if ($Path -match '^(?i:inc/wow|wow32/|fax/)') { return 'adapter-wow-review' }
     if ($Path -match '^(?i:inc/(dbg|dbgs|dbgexp)|bde/|dbg/|vdmdbg/|vdmexts/)') { return 'adapter-debugger-review' }
     if ($Path -match '^(?i:vdd/|inc/.*vdd)') { return 'adapter-vdd-review' }
-    if ($Path -match '^(?i:inc/(oemuni|cmdsvc|dossvc|curdir)|dos/)') { return 'opennt-mvdm-host-or-adapter-win32-review' }
+    if ($Path -match '^(?i:inc/(oemuni|cmdsvc|dossvc|curdir)|dos/)') { return 'mvdm-host-or-adapter-win32-review' }
     if ($Path -match '^(?i:xms\.486/)') { return 'adapter-softpc-xms-review' }
     return 'original-package-semantic-review'
 }

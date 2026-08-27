@@ -1,5 +1,5 @@
 #include "bochs.h"
-#include "adapter-bop/generic_ud_bridge.h"
+#include "adapter-mvdm-host-in/generic_ud_bridge.h"
 #include "adapter-softpc/machine_stage.h"
 #include "adapter-softpc/mechanical_action.h"
 #include "support/dpmi_xmem_record_adapter.h"

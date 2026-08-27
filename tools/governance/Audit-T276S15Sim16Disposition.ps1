@@ -24,7 +24,7 @@ $result = foreach ($file in $files) {
     if (-not $contracts.ContainsKey($file.target_path)) { throw "Missing SIM16 contract: $($file.target_path)" }
     if (-not (Test-Path -LiteralPath $file.selected_source_path)) { throw "Missing selected source: $($file.selected_source_path)" }
     $contract = $contracts[$file.target_path]
-    $owner = if ($file.target_path -eq 'sim16/makefile') { 'opennt-mvdm-tools' } else { 'opennt-mvdm-host' }
+    $owner = if ($file.target_path -eq 'sim16/makefile') { 'mvdm-tools' } else { 'mvdm-host' }
     $lexical = if ($file.target_path -in @('sim16/sim16.asm','sim16/siminit.asm')) {
         'adapter-wow (16-bit WOW DLL/packet transport); adapter-vdm-monitor (VDM memory transport); adapter-bochs (serial/PIC device mechanics); session (instance coordination)'
     } elseif ($file.file_kind -eq 'declaration') {

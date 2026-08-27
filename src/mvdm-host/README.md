@@ -1,4 +1,4 @@
-# opennt-mvdm-host
+# mvdm-host
 
 Temporary exact source-union carrier for the selected OpenNT MVDM mirror. M0
 T274 S5 recovered its original package topology, headers and static resources

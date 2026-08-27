@@ -12,7 +12,7 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $components = @(
     'bochs-core', 'bochs-core-overlay', 'adapter-bochs',
     'opennt-guest', 'opennt-host', 'opennt-host-overlay', 'opennt-bop',
-    'opennt-softpc', 'opennt-utils', 'adapter-bop', 'adapter-win32',
+    'opennt-softpc', 'opennt-utils', 'adapter-mvdm-host-in', 'adapter-win32',
     'adapter-softpc', 'session', 'app'
 )
 $nonProductNames = @(

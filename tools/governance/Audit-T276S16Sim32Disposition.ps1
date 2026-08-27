@@ -17,7 +17,7 @@ $contracts = @{
 $result = foreach ($file in $files) {
     if (-not $contracts.ContainsKey($file.target_path)) { throw "Missing SIM32 contract: $($file.target_path)" }
     $c=$contracts[$file.target_path]
-    $owner=if ($file.target_path -eq 'sim32/b.cmd') {'opennt-mvdm-tools'} else {'opennt-mvdm-host'}
+    $owner=if ($file.target_path -eq 'sim32/b.cmd') {'mvdm-tools'} else {'mvdm-host'}
     $family=if ($file.target_path -eq 'sim32/sim32.c') {'adapter-wow (private serial/WOW peer); adapter-vdm-monitor (SIM32 public API form); session guest-memory mapping manager (checked 32-bit guest address resolution); adapter-bochs (only machine memory/device mechanics)'} elseif ($file.target_path -eq 'sim32/sim32.h') {'adapter-vdm-monitor; session guest-memory mapping manager; adapter-softpc'} else {'none (build metadata)'}
     [pscustomobject][ordered]@{ file_id=$file.file_id; source_path=$file.target_path; file_kind=$file.file_kind; original_role_group=$c[0]; provisional_component_owner=$owner; required_boundary_owner=$c[1]; lexical_external_families=$family; original_contract_summary=$c[2]; provisional_disposition=$c[3]; state='provisional-not-enabled'; evidence="$($file.target_path); sim32/sources; sim32/makefile" }
 }

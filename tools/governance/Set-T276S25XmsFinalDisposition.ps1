@@ -14,7 +14,7 @@ foreach ($row in $xms) {
     switch ($row.source_path) {
         'xms.486/xms.c' {
             $row.final_disposition = 'adapter-backed'
-            $row.final_owner_or_link_boundary = 'opennt-mvdm-host original XMS initialization/range provider -> adapter-softpc -> adapter-bochs; session owns instance state'
+            $row.final_owner_or_link_boundary = 'mvdm-host original XMS initialization/range provider -> adapter-softpc -> adapter-bochs; session owns instance state'
             $row.final_change_class = 'binding-only; preserve original suballocator and initialization sequence'
             $row.named_adapter = 'adapter-softpc; adapter-bochs; session guest-memory mapping manager'
             $row.mapping_implication = 'extended memory is a bounded Bochs guest range; no host pointer may enter the original provider'
@@ -22,7 +22,7 @@ foreach ($row in $xms) {
         }
         'xms.486/xmsa20.c' {
             $row.final_disposition = 'adapter-backed'
-            $row.final_owner_or_link_boundary = 'opennt-mvdm-host original A20 service -> adapter-softpc -> adapter-bochs'
+            $row.final_owner_or_link_boundary = 'mvdm-host original A20 service -> adapter-softpc -> adapter-bochs'
             $row.final_change_class = 'binding-only; preserve original AX/BL result control flow'
             $row.named_adapter = 'adapter-softpc; adapter-bochs'
             $row.mapping_implication = 'no identity mapping; typed A20 state is requested only through the machine boundary'
@@ -30,7 +30,7 @@ foreach ($row in $xms) {
         }
         'xms.486/xmsblock.c' {
             $row.final_disposition = 'adapter-backed'
-            $row.final_owner_or_link_boundary = 'opennt-mvdm-host original XMS block provider -> adapter-softpc -> adapter-bochs; suballoc remains original support'
+            $row.final_owner_or_link_boundary = 'mvdm-host original XMS block provider -> adapter-softpc -> adapter-bochs; suballoc remains original support'
             $row.final_change_class = 'binding-only; preserve allocation/free/move/query algorithm'
             $row.named_adapter = 'adapter-softpc; adapter-bochs; session guest-memory mapping manager'
             $row.mapping_implication = 'all guest range transfer occurs through checked session guest-memory leases and typed machine transactions'
@@ -38,15 +38,15 @@ foreach ($row in $xms) {
         }
         'xms.486/xmsdisp.c' {
             $row.final_disposition = 'adapter-backed'
-            $row.final_owner_or_link_boundary = 'opennt-mvdm-host original XMS dispatch -> adapter-bop ingress/completion and adapter-softpc machine facade'
+            $row.final_owner_or_link_boundary = 'mvdm-host original XMS dispatch -> adapter-mvdm-host-in ingress/completion and adapter-softpc machine facade'
             $row.final_change_class = 'binding-only; preserve selector meanings and unsupported-service failure route'
-            $row.named_adapter = 'adapter-bop; adapter-softpc'
+            $row.named_adapter = 'adapter-mvdm-host-in; adapter-softpc'
             $row.mapping_implication = 'BOP state crosses only fixed-width adapter frames; no native identity is exposed'
             $row.final_evidence = 'T276 S14 XMS-IF-01 and XMS-IF-04; xms.486/sources selects xmsdisp.c'
         }
         'xms.486/xmsmisc.c' {
             $row.final_disposition = 'adapter-backed'
-            $row.final_owner_or_link_boundary = 'opennt-mvdm-host original system information/INT 15 provider -> adapter-softpc -> adapter-bochs'
+            $row.final_owner_or_link_boundary = 'mvdm-host original system information/INT 15 provider -> adapter-softpc -> adapter-bochs'
             $row.final_change_class = 'binding-only; preserve original system-page and interrupt-hook control flow'
             $row.named_adapter = 'adapter-softpc; adapter-bochs; session'
             $row.mapping_implication = 'IVT and interrupt effects use typed machine operations; no guest address becomes a host pointer'
@@ -54,7 +54,7 @@ foreach ($row in $xms) {
         }
         'xms.486/xmsumb.c' {
             $row.final_disposition = 'adapter-backed'
-            $row.final_owner_or_link_boundary = 'opennt-mvdm-host original UMB provider -> adapter-softpc -> adapter-bochs; session owns the durable bounded UMB range contract'
+            $row.final_owner_or_link_boundary = 'mvdm-host original UMB provider -> adapter-softpc -> adapter-bochs; session owns the durable bounded UMB range contract'
             $row.final_change_class = 'binding-only; preserve original UMB list and B0/B1/B2 result flow'
             $row.named_adapter = 'adapter-softpc; adapter-bochs; session guest-memory mapping manager'
             $row.mapping_implication = 'durable UMB bytes resolve through the session guest-memory instance and typed machine range operations only'
@@ -62,9 +62,9 @@ foreach ($row in $xms) {
         }
         'xms.486/xms.h' {
             $row.final_disposition = 'binding-only'
-            $row.final_owner_or_link_boundary = 'opennt-platform-abi original XMS declaration surface supplied to the selected XMS provider and adapters'
+            $row.final_owner_or_link_boundary = 'mvdm-platform-abi original XMS declaration surface supplied to the selected XMS provider and adapters'
             $row.final_change_class = 'binding-only; preserve exact data and external declaration shape'
-            $row.named_adapter = 'adapter-bop; adapter-softpc; session'
+            $row.named_adapter = 'adapter-mvdm-host-in; adapter-softpc; session'
             $row.mapping_implication = 'declarations do not carry native identity; reached fields follow the session mapping-manager rule'
             $row.final_evidence = 'T276 S14 XMS-IF-01 and XMS-IF-08'
         }

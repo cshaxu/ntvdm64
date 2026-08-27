@@ -11,7 +11,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 $ErrorActionPreference = 'Stop'
 $repositoryRoot = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $operationsRoot = Join-Path $repositoryRoot $OutputDirectory
-$mirrorRoot = Join-Path $repositoryRoot 'src/opennt-mvdm-host'
+$mirrorRoot = Join-Path $repositoryRoot 'src/mvdm-host'
 $fileLedgerPath = Join-Path $operationsRoot 'mvdm-file-recovery-ledger.tsv'
 $packageLedgerPath = Join-Path $operationsRoot 'mvdm-package-dependency-ledger.tsv'
 $profileLedgerPath = Join-Path $operationsRoot 'mvdm-build-profile-ledger.tsv'

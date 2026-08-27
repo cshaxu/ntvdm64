@@ -28,18 +28,18 @@ $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL ' +
     '/I ' + $root + '/src/adapter-win32/include ' +
     '/I ' + $root + '/src/adapter-softpc/include ' +
     '/I ' + $root + '/src/adapter-vdm-monitor/include ' +
-    '/I ' + $root + '/src/opennt-mvdm-support/inc ' +
-    '/I ' + $root + '/src/opennt-platform-abi/source/public/sdk/inc ' +
-    '/I ' + $root + '/src/opennt-platform-abi/source/public/internal/base/inc ' +
-    '/I ' + $root + '/src/opennt-platform-abi/source/public/ddk/inc ' +
-    '/I ' + $root + '/src/opennt-mvdm-host/dos/dem ' +
-    '/I ' + $root + '/src/opennt-mvdm-host/softpc.new/host/inc ' +
-    '/I ' + $root + '/src/opennt-mvdm-host/softpc.new/base/inc'
+    '/I ' + $root + '/src/mvdm-support/inc ' +
+    '/I ' + $root + '/src/mvdm-platform-abi/source/public/sdk/inc ' +
+    '/I ' + $root + '/src/mvdm-platform-abi/source/public/internal/base/inc ' +
+    '/I ' + $root + '/src/mvdm-platform-abi/source/public/ddk/inc ' +
+    '/I ' + $root + '/src/mvdm-host/dos/dem ' +
+    '/I ' + $root + '/src/mvdm-host/softpc.new/host/inc ' +
+    '/I ' + $root + '/src/mvdm-host/softpc.new/base/inc'
 
 $units = @('demdasd', 'demdir', 'demerror', 'demfcb', 'demfile', 'demgset',
     'demhndl', 'demioctl', 'demlabel', 'demlock', 'demmisc', 'demsrch')
 $buildLines = foreach ($unit in $units) {
-    "build obj/$unit.obj: cc `$root/src/opennt-mvdm-host/dos/dem/$unit.c"
+    "build obj/$unit.obj: cc `$root/src/mvdm-host/dos/dem/$unit.c"
 }
 $objects = ($units | ForEach-Object { "obj/$_.obj" }) -join ' '
 

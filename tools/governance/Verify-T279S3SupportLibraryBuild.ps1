@@ -12,8 +12,8 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 
 $required = @(
     'tools/build/New-T279SupportLibraryNinja.ps1',
-    'src/opennt-mvdm-support-overlay/README.md',
-    'src/opennt-mvdm-support-overlay/source/oemuni_pointer_width.c',
+    'src/mvdm-support-overlay/README.md',
+    'src/mvdm-support-overlay/source/oemuni_pointer_width.c',
     'tests/mvdm-support/oemuni_pointer_width_fixture.c',
     'docs/etc/operations/m0-t279-s3-support-library-build-plan-001.md',
     'docs/etc/operations/m0-t279-s3-support-library-build-evidence-001.md'
@@ -24,7 +24,7 @@ foreach ($relative in $required) {
     }
 }
 
-$overlay = Get-Content -LiteralPath (Join-Path $root 'src/opennt-mvdm-support-overlay/source/oemuni_pointer_width.c') -Raw
+$overlay = Get-Content -LiteralPath (Join-Path $root 'src/mvdm-support-overlay/source/oemuni_pointer_width.c') -Raw
 $exports = @('FindFirstFileOem', 'FindNextFileOem', 'GetFullPathNameOem', 'SearchPathOem')
 foreach ($name in $exports) {
     if ($overlay -notmatch ('\b' + [regex]::Escape($name) + '\b')) {
@@ -36,7 +36,7 @@ if ($overlay -match '\(ULONG\).*\+' -or $overlay -match '\(DWORD\).*\+') {
 }
 
 $generator = Get-Content -LiteralPath (Join-Path $root 'tools/build/New-T279SupportLibraryNinja.ps1') -Raw
-foreach ($token in @('deps = msvc', '/MT', 'opennt-mvdm-support-overlay', 'opennt_original_SearchPathOem')) {
+foreach ($token in @('deps = msvc', '/MT', 'mvdm-support-overlay', 'opennt_original_SearchPathOem')) {
     if ($generator -notmatch [regex]::Escape($token)) { throw "Ninja generator misses required token: $token" }
 }
 

@@ -11,6 +11,6 @@ if(($ledger|Where-Object {$_.audit_state -ne 'source-form-family-reviewed; imple
 if(($ledger|Where-Object {[string]::IsNullOrWhiteSpace($_.original_provider_form)-or [string]::IsNullOrWhiteSpace($_.owner)-or [string]::IsNullOrWhiteSpace($_.failure_disposition)}).Count){throw 'S5 requires provider form, owner, and failure disposition on every row.'}
 if(($ledger.family|Sort-Object -Unique).Count -ne 9){throw 'Expected nine SoftPC source-form families.'}
 if(@($ledger|Where-Object {$_.family -eq 'machine-CPU-SAS-PIC-facade' -and $_.owner -ne 'adapter-softpc -> adapter-bochs'}).Count){throw 'All CPU/SAS/PIC facade rows must use the sole mechanical owner.'}
-if(@($ledger|Where-Object {$_.family -eq 'BOP-dispatch-control' -and $_.owner -notlike 'adapter-bop*'}).Count){throw 'All BOP dispatch rows must enter through adapter-bop.'}
+if(@($ledger|Where-Object {$_.family -eq 'BOP-dispatch-control' -and $_.owner -notlike 'adapter-mvdm-host-in*'}).Count){throw 'All BOP dispatch rows must enter through adapter-mvdm-host-in.'}
 if(@($ledger|Where-Object {$_.family -eq 'session-stop-and-event' -and $_.failure_disposition -notlike 'controlled stop*'}).Count){throw 'Session stop/event rows must reject process termination.'}
 Write-Host "T277 S5 SoftPC host-control disposition passed: work-items=$($ledger.Count); families=9."

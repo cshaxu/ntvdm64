@@ -20,7 +20,7 @@ foreach ($name in $expected) {
     if ($row.Count -ne 1) { throw "Expected one manifest row for $name." }
     if ($row[0].action -notin @('copied-byte-identical','already-identical')) { throw "$name has invalid import action: $($row[0].action)" }
     $sourceHash = (Get-FileHash -LiteralPath $row[0].source_path -Algorithm SHA256).Hash.ToLowerInvariant()
-    $target = Join-Path $root ('src/opennt-platform-abi/' + $row[0].target_path)
+    $target = Join-Path $root ('src/mvdm-platform-abi/' + $row[0].target_path)
     if (-not (Test-Path -LiteralPath $target -PathType Leaf)) { throw "Missing destination: $target" }
     $targetHash = (Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash.ToLowerInvariant()
     if ($sourceHash -ne $row[0].source_sha256 -or $targetHash -ne $row[0].source_sha256) { throw "$name is not byte-identical to its manifest source." }

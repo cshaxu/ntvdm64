@@ -2,31 +2,31 @@
 
 ## Current Work
 
-**Active: M0 T284 S2 — component-root canonical rename.**
-T284 S1 closed with the complete seven-family ownership, symbol and consumer
-inventory; the next ordered change is one atomic product-root rename before
-any adapter source migration.
+**Active: M0 T284 S3 — outgoing historical-adapter root admission.**
+T284 S2 closed with the approved component-root rename and formal x86/x64
+carrier rebuild; S3 admits the one classified outgoing adapter component
+before any of its sources move.
 
 ## Active Packet
 
-### M0 T284 S2 — component-root canonical rename
+### M0 T284 S3 — outgoing historical-adapter root admission
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T284 S2`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T284 S1 inventory is closed. The owner approved the exact rename list in the accepted T284 proposal. |
-| Objective | Rename the eight approved product roots exactly once and repair every live source, build, test and current-document reference. |
-| Non-goals | Creating `adapter-mvdm-host-out`; moving OpenNT adapter source into it; adding behavior, a BOP/provider, monitor, machine, filesystem, broker or child-process capability. |
-| Reference Baseline | Adapter-convergence proposal; T284 S1 file/symbol/consumer inventories; current component tree and source policy. |
-| Files And ABI Surface | `adapter-bop` and the seven approved mirror roots, plus every live reference to their outgoing or incoming name. |
+| Identifier Mode | `M0 T284 S3`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T284 S1 inventory and S2 canonical-root rename are closed. The owner approved the seven named outgoing interface families. |
+| Objective | Create the empty, classified `adapter-mvdm-host-out` component root with seven named family boundaries and its source/build/document ownership contract before a source file moves. |
+| Non-goals | Moving an existing adapter source; adding a historical implementation; changing a BOP/provider, monitor, machine, filesystem, broker or child-process behavior. |
+| Reference Baseline | Adapter-convergence proposal; T284 S1 inventories; T284 S2 closure evidence; current architecture and source policy. |
+| Files And ABI Surface | `adapter-mvdm-host-out/{win32,softpc,monitor,redir,wow,vdd,debugger}` boundary documentation, public-include rules and build ownership only. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Exact old/new root denominator scan, source/build/test/current-document reference scan, documentation governance, `git diff --check`, and focused configured-graph checks. |
-| Expected Markers | No live reference to a renamed root survives; no old root remains; all approved new roots exist with unchanged file identity apart from reference repair. |
-| Asset Needs | T284 S1 inventories, current root contents, source/build manifests and current architecture authorities. |
-| Reporting Requirements | Old/new root mapping, reference counts before/after, deliberate historical-record exclusions and any non-mechanical reference repair. |
-| Stop Conditions | A non-historical reference cannot be repaired mechanically, a move would alter mirror identity, or an unapproved root name is required. |
-| Exit Criteria | The approved eight-root rename is complete and verified without an adapter source migration or behavior change. |
-| Original Owner Request | “T284 S2: 组件重命名 … 改好所有的代码和文档。” |
+| Verification | Family denominator scan, owner/dependency-direction review, no-source assertion, documentation governance and `git diff --check`. |
+| Expected Markers | One component README, seven named empty family boundaries, a public include policy and no generic compatibility catch-all. |
+| Asset Needs | T284 S1 inventories, canonical root layout, architecture authorities and source policy. |
+| Reporting Requirements | Family names, explicit no-source result, legal incoming/outgoing dependencies and later source-move prerequisites. |
+| Stop Conditions | A family requires a source move before its owner boundary is documented, an added catch-all directory appears, or a family boundary becomes ambiguous. |
+| Exit Criteria | The component boundary is documented and recognized by current governance without moving source or enabling behavior. |
+| Original Owner Request | “T284: S1 合并 … S2 组件重命名 … 改好所有的代码和文档。” |
 | Similar-Issue Sweep | Public/private declarations, edition roots, source-selection manifests and all live include/build inputs. |
 
 **T284 S1 closure:** the generated owner inventory records 33 final file/
@@ -35,6 +35,14 @@ empty specialist families), 71 public callable declarations/carriers and all
 seven MVDM host consumer directions. No production interface changed. See the
 [S1 evidence](etc/evidence/m0-t284-s1-adapter-convergence-inventory-001.md)
 and its three TSV inventories.
+
+**T284 S2 closure:** all eight approved component roots, the required support
+overlay and matching fixture roots now use their canonical names. Four
+owner-authorized Win16 mirror directories moved and were staged with the
+component. Active source/build/test/current-document scans find zero obsolete
+root references; the formal x86/x64 original DEM/COMMAND carrier archives
+both rebuild successfully. See the
+[S2 evidence](etc/evidence/m0-t284-s2-component-root-rename-closure-001.md).
 
 The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md), [S4 complete original COMMAND static package](etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md), [S5 VDM command-acquisition source audit](etc/operations/m0-t282-s5-vdm-command-acquisition-source-audit-plan-001.md), [S6 local VDM command transport](etc/operations/m0-t282-s6-local-vdm-command-transport-plan-001.md), [S7 original COMMAND initialization composition](etc/operations/m0-t282-s7-original-command-initialization-plan-001.md), [S8 COMMAND owner dependency partition](etc/operations/m0-t282-s8-command-owner-dependency-partition-plan-001.md), [S9 COMMAND environment guest-memory seam audit](etc/operations/m0-t282-s9-command-environment-guest-seam-audit-plan-001.md), [S10 COMMAND register and bounded-lease binding](etc/operations/m0-t282-s10-command-register-and-lease-binding-plan-001.md), [S11 COMMAND OEM support composition](etc/operations/m0-t282-s11-command-oem-support-composition-plan-001.md), and [S13 COMMAND current-directory bounded mirror binding](etc/operations/m0-t282-s13-command-current-directory-bounded-binding-plan-001.md).
 
@@ -180,7 +188,7 @@ the [S2 evidence](etc/evidence/m0-t283-s2-platform-abi-canonical-reroot-001.md).
 | Objective | Give every original `softpc.new/host/src` control-plane source and interface one final near-term disposition: eligible static composition group, explicit existing-adapter prerequisite, later specialist owner package, or Bochs-replacement exclusion. |
 | Non-goals | Compiling an unaudited all-host mega-library, enabling BOP selectors, reviving a CCPU/SoftPC executor, adding a generic shim, executing a guest trace, changing a mirror body, or treating one compiler diagnostic as a leaf feature task. |
 | Reference Baseline | T276 S12 complete six-family owner ledgers, T277 package-cycle ledger, T280 ingress/machine-facade ledger, T281/S1–S4 DEM/static control evidence, and the Wave 2 plan. |
-| Files And ABI Surface | Original `softpc.new/host/src` source and six T276 S12 owner ledgers; adapter-win32, adapter-softpc, adapter-vdm-monitor, adapter-bop, session, app, adapter-vdd and adapter-debugger boundary records; S5 consolidation ledger/evidence only. |
+| Files And ABI Surface | Original `softpc.new/host/src` source and six T276 S12 owner ledgers; adapter-win32, adapter-softpc, adapter-vdm-monitor, adapter-mvdm-host-in, session, app, adapter-vdd and adapter-debugger boundary records; S5 consolidation ledger/evidence only. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
 | Verification | Every host/src source appears once in the consolidation ledger; disposition cross-checks the six existing detailed ledgers; no new implementation input is selected; documentation governance and `git diff --check`. |
 | Expected Markers | Explicit recovery groups and prerequisite adapters; device/executor exclusions remain separate; no source body is activated by the audit. |
@@ -394,7 +402,7 @@ expansion. No DEM body, provider, host API call or mapping operation is added.
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and recovery-ladder rules. |
 | Verification | Verify byte hashes against pinned sources, source/destination manifest entries, required include roots and no source-body/binding change. |
 | Expected Markers | Exact DDK storage carrier pair, exact SDK NT IO carrier and reproducible source provenance. |
-| Asset Needs | Pinned OpenNT public DDK/SDK headers and existing `opennt-platform-abi` source root. |
+| Asset Needs | Pinned OpenNT public DDK/SDK headers and existing `mvdm-platform-abi` source root. |
 | Reporting Requirements | Exact source/destination/hash, direct consumer evidence, retained declaration-only role and no-mapping/no-provider limitation. |
 | Stop Conditions | A carrier is edited, a modern SDK header substitutes for it, a body is enabled, a host pointer is mapped, or an adapter implementation is smuggled into the import. |
 | Exit Criteria | Three files are byte-identical and manifest-backed; all are declaration-only; no DEM source body or provider is built/linked. |
@@ -510,7 +518,7 @@ source-shaped compatibility package; it may not patch a trace-selected BOP.
 | Objective | Build `oemuni.lib` and `suballoc.lib` from original selected bodies on x86 and x64 with Ninja/MSVC `/MT`; provide the four source-derived x64 OEM wrappers required to avoid pointer narrowing. |
 | Non-goals | No edit to original mirror sources, provider/BOP activation, raw pointer mapping, suballoc callback backend, host control plane, or guest trace. |
 | Reference Baseline | T279/S1 ledger, T279/S2 binding audit, original `sources` files and exact mirror hashes. |
-| Files And ABI Surface | Generated Ninja graph, `opennt-mvdm-support-overlay` four exported OEM wrappers, focused host-local contract fixture and formal build evidence. |
+| Files And ABI Surface | Generated Ninja graph, `mvdm-support-overlay` four exported OEM wrappers, focused host-local contract fixture and formal build evidence. |
 | Verification | x86 links only original OEM bodies; x64 compiles renamed original unsafe bodies plus overlay exports; both build `oemuni.lib` and `suballoc.lib`; fixture proves four x64 wrapper contracts without native pointer narrowing. |
 | Stop Conditions | An overlay grows beyond the four audited functions, an original mirror is edited, a second mapping manager or guest pointer route appears, or a warning is suppressed to fabricate closure. |
 | Exit Criteria | Reproducible Ninja manifests build both architecture library forms with no duplicate exports; original hashes remain exact; x64 overlay behavior has local tests; warning disposition is explicit. |
@@ -721,7 +729,7 @@ and all selected MVDM host inputs are exact and hash-verified. This establishes
 source supply only; later adapter/composition packets retain all behavior,
 build and runtime claims. See [M0 T274 closure](history/m0-t274-closure-20260826.md).
 
-**T276 S1 closure:** all 1,689 selected `opennt-mvdm-host` paths now have
+**T276 S1 closure:** all 1,689 selected `mvdm-host` paths now have
 reproducible source-to-mirror SHA-256 identity evidence, spanning exactly 23
 package roots.  The file ledger records `byte-exact-verified` for every row;
 composition and build-profile dispositions deliberately remain `unreviewed`.
@@ -817,8 +825,8 @@ enabled. See the same S11 disposition evidence and runtime-support ledger.
 
 **T276 S11 closure:** the six W0/W1 source-carrier/support/tool roots have a
 complete provisional file owner/disposition record: 112 exact paths are
-assigned to the future `opennt-mvdm-support` mirror and 28 to
-`opennt-mvdm-tools`; all 2,270 lexical calls remain accounted without being
+assigned to the future `mvdm-support` mirror and 28 to
+`mvdm-tools`; all 2,270 lexical calls remain accounted without being
 mistaken for enabled ABI. The only runtime-support candidates have exact
 same-shaped binding handoffs. No source has moved or entered a build. S12 now
 audits W2 `softpc.new` under the same source-first constraints.
@@ -827,7 +835,7 @@ audits W2 `softpc.new` under the same source-first constraints.
 original-subpackage disposition. The baseline isolates 489 historical machine
 execution/device paths as Bochs-replacement exclusions, 59 `host/src` mixed
 control/device candidates, 156 `base/inc` machine declaration inputs, 58
-firmware/ROM/data inputs assigned to the separate future `opennt-mvdm-firmware`
+firmware/ROM/data inputs assigned to the separate future `mvdm-softpc-firmware`
 mirror, plus separate debugger/tool/Unix/composition inputs.
 This is a boundary ledger only: no original machine/host source, adapter ABI
 or build edge is enabled. See [T276 S12 SoftPC baseline](etc/operations/m0-t276-s12-softpc-disposition-baseline-001.md).
@@ -851,7 +859,7 @@ non-enabled. See [T276 S12 interface-density baseline](etc/operations/m0-t276-s1
 
 **T276 S12 P4:** all 58 selected original `softpc.new/base/bios`, `bios`,
 `roms` and `data` paths are now assigned to the future
-`opennt-mvdm-firmware` mirror. The component is an immutable machine-input
+`mvdm-softpc-firmware` mirror. The component is an immutable machine-input
 carrier only: no source is compiled or linked as host runtime, no parallel
 SoftPC machine is admitted, and only a future explicit `adapter-bochs`
 manifest can select an input. The regenerated 998-row S12 ledger and verifier
@@ -961,7 +969,7 @@ pointer, serial product shell or second manager is admitted.
 | Applicable Rules | Execution, historical recovery, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
 | Verification | Enumerate every old adapter candidate; identify its original caller/contract or disposition it as reference-only; scan the exact host mirror for family declarations/callers; prove no source copy or formal build input is enabled. |
 | Expected Markers | One owner and one disposition for every candidate file and each reached family; exact source references, calling-convention/layout/failure requirements, reuse decision and successor S. |
-| Asset Needs | T274 manifests, `opennt-mvdm-host`, `opennt-platform-abi`, `src.old` reference tree, existing source-adapter proposal and tracker. |
+| Asset Needs | T274 manifests, `mvdm-host`, `mvdm-platform-abi`, `src.old` reference tree, existing source-adapter proposal and tracker. |
 | Reporting Requirements | Candidate and family counts, direct caller evidence, source-first rung decision, retained/rejected recovery candidates, unavailable historical dependencies, boundary and next-S handoff. |
 | Stop Conditions | A candidate has no discoverable owner, a caller requires a behavior body before the ledger is complete, an interface crosses a prohibited Bochs boundary, or an ambiguous historical ABI cannot be resolved. |
 | Exit Criteria | Every candidate and every reached interface family has a reproducible source/ABI/failure/reuse disposition; S2--S6 can each recover only the frozen family surface without reviving a parallel product shell. |
@@ -995,7 +1003,7 @@ inventory closes. See the [S1 closure evidence](etc/operations/m0-t275-s1-adapte
 | Admission And Approval | The owner requires original MVDM source to be imported before function-body alteration; every missing boundary must be assigned to a named adapter and recorded before source recovery. |
 | Objective | Establish the complete missing-interface and specialist-adapter inventory: original caller/declaration/contract, unique owner adapter, modern recovery or original-style failure disposition, and successor ownership for every unavailable historical external interface. |
 | Non-goals | No adapter source implementation, mirror-source modification, BOP selector/service decode, provider enablement, guest-memory implementation, Bochs change, guest execution or host build claim. |
-| Reference Baseline | T275/S1 ledger; exact `opennt-mvdm-host` VDMREDIR, WOW32, VDD, debugger/monitor, SoftPC and host packages; current architecture/rules; old adapter references. |
+| Reference Baseline | T275/S1 ledger; exact `mvdm-host` VDMREDIR, WOW32, VDD, debugger/monitor, SoftPC and host packages; current architecture/rules; old adapter references. |
 | Files And ABI Surface | Adapter component inventory and architecture/proposal/rule updates only. No runtime ABI becomes active. |
 | Applicable Rules | Execution, historical recovery, architecture, coding, mirror-component, source policy and build-hygiene rules. |
 | Verification | Scan selected MVDM callers/declarations for unavailable external/product interface families; classify each as existing adapter, new specialist adapter or original internal owner; verify every enabled-source edit is only a source-recorded binding change and no generic catch-all adapter exists. |
@@ -1037,23 +1045,23 @@ file or claim an adapter ABI. See the [P1 inventory note](etc/operations/m0-t275
 | --- | --- |
 | Identifier Mode | `M0 T274 S6`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | S1 establishes a unique selected source for every host path; S2--S5 are closed. |
-| Objective | Recover every S5-deferred, selected original MVDM host provider body and remaining package input under `opennt-mvdm-host`, retaining the selected source-relative path and hash. |
+| Objective | Recover every S5-deferred, selected original MVDM host provider body and remaining package input under `mvdm-host`, retaining the selected source-relative path and hash. |
 | Non-goals | No body modification, compilation, linking, provider enablement, adapter implementation, guest change, or replacement shim. |
 | Reference Baseline | S1 union ledger; S5 topology manifest; pinned OpenNT/OpenNT-4.5 MVDM roots; source policy and T274 proposal. |
 | Files And ABI Surface | Exact selected body/other host inputs, reproducible S6 manifest/evidence, component README, Status and documentation inventory. No enabled runtime ABI. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
 | Verification | Copy only the S5-deferred rows with non-identical-conflict refusal; rehash every destination; prove all selected host paths are represented and guest roots/build inputs remain isolated. |
 | Expected Markers | Complete 1,689-row selected host manifest, zero source/destination hash mismatches, no unregistered non-original host file and no guest build/link consumer. |
-| Asset Needs | S1 TSV ledger, S5 manifest, both pinned external MVDM roots, `opennt-mvdm-host` root and component source policy. |
+| Asset Needs | S1 TSV ledger, S5 manifest, both pinned external MVDM roots, `mvdm-host` root and component source policy. |
 | Reporting Requirements | State imported/deferred counts, bytes/types/package roots, source selections, conflicts, exactness exceptions and host/guest isolation. |
 | Stop Conditions | Ambiguous provenance, a non-identical destination conflict, a selected source unavailable locally, or an attempted behavior-changing edit. |
-| Exit Criteria | Every S1-selected `opennt-mvdm-host` path is byte-identical to its selected source or explicitly registered as an allowed mirror exception; the source-supply task then closes without claiming compilation or runtime enablement. |
+| Exit Criteria | Every S1-selected `mvdm-host` path is byte-identical to its selected source or explicitly registered as an allowed mirror exception; the source-supply task then closes without claiming compilation or runtime enablement. |
 | Original Owner Request | “单人双角色模式实施当前队列中的所有任务，要求全局统筹，追求结果极简主义…避免添油战术。” |
 | Similar-Issue Sweep | All S5 deferred bodies/non-topology inputs, package roots, source selections, destination conflicts, external reference leaks and host/guest boundaries. |
 
 **S6 closure:** all 639 S5-deferred selected host inputs were directly
 recovered and rehashed with zero mismatches: 612 C/C++/assembly provider bodies
-and 27 other inputs. Together with S5, `opennt-mvdm-host` now contains all
+and 27 other inputs. Together with S5, `mvdm-host` now contains all
 1,689 selected paths across 23 original package roots, with no compilation,
 linking or provider enablement claim. See the [S6 closure
 evidence](etc/operations/m0-t274-s6-mvdm-host-package-supply-closure-001.md).
@@ -1064,14 +1072,14 @@ evidence](etc/operations/m0-t274-s6-mvdm-host-package-supply-closure-001.md).
 | --- | --- |
 | Identifier Mode | `M0 T274 S5`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Owner-approved canonical source-supply proposal; S1 selected union ledger and S2–S4 source-supply closures are complete. |
-| Objective | Recover the selected original MVDM host header, resource and build-topology inputs under `opennt-mvdm-host` with one source/hash disposition per copied path. |
+| Objective | Recover the selected original MVDM host header, resource and build-topology inputs under `mvdm-host` with one source/hash disposition per copied path. |
 | Non-goals | No provider C/C++/assembly body import, compilation, link closure, adapter implementation, external source mix, guest relocation, or source-body modification. |
 | Reference Baseline | S1 union ledger, pinned OpenNT/OpenNT-4.5 MVDM roots, source policy, T274 proposal and current component rules. |
-| Files And ABI Surface | Byte-identical headers, declarations, resources and build-topology files in `opennt-mvdm-host`; topology manifest, component README, S5 evidence, Status and documentation inventory. No enabled runtime ABI. |
+| Files And ABI Surface | Byte-identical headers, declarations, resources and build-topology files in `mvdm-host`; topology manifest, component README, S5 evidence, Status and documentation inventory. No enabled runtime ABI. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
 | Verification | Filter the selected host ledger by topology/header/resource class; copy with non-identical-conflict refusal; rehash every destination; verify package-relative paths and no provider body import. |
 | Expected Markers | Complete selected topology manifest, zero source/destination hash mismatches, exact source-relative paths and explicit deferred provider-body count. |
-| Asset Needs | S1 TSV ledger, both pinned external MVDM roots, `opennt-mvdm-host` root and component source policy. |
+| Asset Needs | S1 TSV ledger, both pinned external MVDM roots, `mvdm-host` root and component source policy. |
 | Reporting Requirements | State file/byte/type/package counts, provenance selections, deferred body count, conflicts, exceptions and host/guest isolation. |
 | Stop Conditions | A selected path has ambiguous provenance, a destination conflicts, a needed item is behavior-bearing provider body, or an import would create a parallel edition root. |
 | Exit Criteria | Exact selected host topology/header/resource inputs are mirrored with a reproducible manifest and body import remains explicitly deferred to S6. |
@@ -1092,7 +1100,7 @@ evidence](etc/operations/m0-t274-s5-mvdm-host-topology-closure-001.md).
 | --- | --- |
 | Identifier Mode | `M0 T274 S4`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Owner direction: directly copy existing guest files; do not compile, reimport external sources, or treat source-cardinality as a blocker. |
-| Objective | Recover the existing local WOW16 and bin86 guest carry into `opennt-guest-wow16` and record the unchanged `build/output/wow16` products as immutable load-only inventory. |
+| Objective | Recover the existing local WOW16 and bin86 guest carry into `mvdm-guest-win16` and record the unchanged `build/output/wow16` products as immutable load-only inventory. |
 | Non-goals | No compilation, external OpenNT/OpenNT-4.5 source recovery, source-completeness claim, host linking, BOP/provider change, or output relocation. |
 | Reference Baseline | `src.old/opennt-guest/wow16`, `src.old/opennt-guest/bin86`, `build/output/wow16`, S1 ledger, source policy and S4 local-inventory disposition. |
 | Files And ABI Surface | Byte-identical WOW16/bin86 carried files, source/output hash manifests, component README, S4 evidence, Status and documentation inventory. No host ABI. |
@@ -1118,10 +1126,10 @@ the [S4 closure evidence](etc/operations/m0-t274-s4-wow16-guest-recovery-closure
 | --- | --- |
 | Identifier Mode | `M0 T274 S3`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Owner-approved canonical source-supply proposal and explicit direction to reuse the existing complete DOS guest rather than re-copy it from external OpenNT sources. |
-| Objective | Recover the complete repository-local DOS/V86 guest mirror into `opennt-guest-dos`, preserving every carried source/resource/build/intermediate/product input as an immutable guest-only inventory. |
+| Objective | Recover the complete repository-local DOS/V86 guest mirror into `mvdm-guest-dos`, preserving every carried source/resource/build/intermediate/product input as an immutable guest-only inventory. |
 | Non-goals | No external guest reimport, guest-source modification, guest compilation, host linking, BOP/provider enablement, output relocation, or WOW16 recovery. |
 | Reference Baseline | `src.old/opennt-guest/dos-v86`, S1 selected union ledger, source policy, T274 source-supply proposal and current build-output isolation. |
-| Files And ABI Surface | Byte-identical `opennt-guest-dos` mirror paths, source hash manifest, component README, S3 evidence, Status and documentation inventory. No host ABI. |
+| Files And ABI Surface | Byte-identical `mvdm-guest-dos` mirror paths, source hash manifest, component README, S3 evidence, Status and documentation inventory. No host ABI. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
 | Verification | Enumerate and SHA-256 every carried source path; copy only into the matching guest root; prove source/destination equality, no host build manifest reference, and unchanged `build/output/dos`/`build/output/wow16` placement. |
 | Expected Markers | One source-relative DOS/V86 inventory, zero source/destination hash mismatches, no divergence entries, and explicit guest-load-only ownership. |
@@ -1133,7 +1141,7 @@ the [S4 closure evidence](etc/operations/m0-t274-s4-wow16-guest-recovery-closure
 | Similar-Issue Sweep | DOS/V86 source/resource/build/intermediate/product files, guest DPMI forms, carried artifacts, manifest consumers, output paths, host source lists and external-guest references. |
 
 **S3 closure:** all 676 local DOS/V86 inventory rows were copied into
-`opennt-guest-dos` and rehashed without a mismatch. The second recovery run
+`mvdm-guest-dos` and rehashed without a mismatch. The second recovery run
 accepted all 676 destinations as already identical. `build/output/dos` and
 `build/output/wow16` remain in place and are not host inputs. See the
 [S3 closure evidence](etc/operations/m0-t274-s3-dos-guest-mirror-closure-001.md).
@@ -1147,20 +1155,20 @@ accepted all 676 destinations as already identical. `build/output/dos` and
 | Objective | Establish the smallest exact-declaration platform ABI inventory and production root needed to compile later selected MVDM host packages without inventing replacement behavior. |
 | Non-goals | No MVDM provider body import, host compilation, Win32/NTDLL replacement, adapter implementation, BOP execution, guest reimport, or guest-output relocation. |
 | Reference Baseline | S1 selected union ledger, pinned OpenNT/OpenNT-4.5 trees, source policy, mirror rules and T274 source-supply proposal. |
-| Files And ABI Surface | `opennt-platform-abi` README, exact declaration/disposition ledger, optional byte-identical upstream declarations, S2 evidence, Status and documentation inventory. No behavior-bearing source file. |
+| Files And ABI Surface | `mvdm-platform-abi` README, exact declaration/disposition ledger, optional byte-identical upstream declarations, S2 evidence, Status and documentation inventory. No behavior-bearing source file. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component and build-hygiene rules. |
-| Verification | Scan the selected `opennt-mvdm-host` universe for direct include/declaration needs; distinguish MVDM-local, upstream-platform, public SDK and unresolved rows; hash every imported declaration; run governance and scoped diff review. |
+| Verification | Scan the selected `mvdm-host` universe for direct include/declaration needs; distinguish MVDM-local, upstream-platform, public SDK and unresolved rows; hash every imported declaration; run governance and scoped diff review. |
 | Expected Markers | Every direct external include/declaration requirement has a unique disposition, every material file is byte-identical upstream and no platform behavior is linked or authored. |
 | Asset Needs | S1 TSV ledger, both pinned external source trees, source policy and existing component ownership manifest. |
 | Reporting Requirements | State requirement cardinalities, direct versus transitive boundary, selected source path/hash, exclusions, unresolved API/declaration risks and future package consumers. |
 | Stop Conditions | A required item needs a behavior body, an ambiguous cross-generation header mix, a proprietary SDK import without source-policy approval, or an ABI source cannot be identified. |
-| Exit Criteria | A reproducible complete direct-platform ABI disposition ledger, an audited minimal `opennt-platform-abi` root and no unregistered declaration import; S5/S6 can consume it without reopening the S1 union decision. |
+| Exit Criteria | A reproducible complete direct-platform ABI disposition ledger, an audited minimal `mvdm-platform-abi` root and no unregistered declaration import; S5/S6 can consume it without reopening the S1 union decision. |
 | Original Owner Request | “单人双角色模式实施当前队列中的所有任务…追求结果极简主义…避免添油战术。” |
 | Similar-Issue Sweep | All selected MVDM header/include forms, platform declarations, `windows.h`/NTDLL families, internal MVDM headers, source/build descriptions, pre-existing shims and architecture-specific forms. |
 
 **S2 closure:** the reproducible direct-include ledger covers all 637 include
 forms found in 1,467 selected MVDM code inputs.  The minimal
-`opennt-platform-abi` mirror contains 22 uniquely resolved, byte-identical
+`mvdm-platform-abi` mirror contains 22 uniquely resolved, byte-identical
 original declaration headers; its import manifest reports zero SHA-256
 mismatches on an idempotent second import.  CRT/SDK forms remain toolchain
 inputs, while same-name and generated historical forms remain explicit owner
@@ -1372,7 +1380,7 @@ session-input bind required for `cmdCreateProcess`; it no longer directly
 creates or waits on host threads/events. See [S3 P8b evidence](etc/evidence/m0-t271-s3-p8b-command-child-worker-recovery-001.md).
 
 **S3 P9:** the generic copied CPU-frame / checked-RAM / typed-outcome
-transaction has moved from COMMAND ingress to selector-blind `adapter-bop`.
+transaction has moved from COMMAND ingress to selector-blind `adapter-mvdm-host-in`.
 COMMAND retains only its original entry envelope, staged service byte and
 `MS_bop_4` call. Focused transaction, native COMMAND-entry and local-child
 regressions pass after a formal Ninja relink; the remaining source-shaped
@@ -1471,7 +1479,7 @@ with it linked from `app.lib`. See [S4 P4 evidence](etc/evidence/m0-t271-s4-p4-x
 
 **S5 P1:** complete production classification finds 22 remaining project
 `ingress` sources. They are now individually grouped by source owner; none is
-silently moved into selector-blind `adapter-bop`. See [S5 P1 classification](etc/evidence/m0-t271-s5-p1-opennt-bop-production-classification-001.md).
+silently moved into selector-blind `adapter-mvdm-host-in`. See [S5 P1 classification](etc/evidence/m0-t271-s5-p1-opennt-bop-production-classification-001.md).
 
 **S5 P2:** the 13 exceptional overlay bodies each have exactly one matching
 `opennt-bop` mirror include boundary; no production component outside that
@@ -1480,7 +1488,7 @@ the 22 non-mirror ingress inputs remain active owner-disposition work.  See
 [S5 P2 audit](etc/evidence/m0-t271-s5-p2-overlay-consumer-and-boundary-audit-001.md).
 
 **S5 P3:** DEM, COMMAND and XMS one-session entry/context composition now
-belongs to `app/bop/`, leaving `adapter-bop` selector-blind and the imported
+belongs to `app/bop/`, leaving `adapter-mvdm-host-in` selector-blind and the imported
 provider tables unchanged.  Formal Ninja build plus the focused source-path
 fixtures pass; the non-mirror ingress inventory drops from 22 to 13 named
 deferred owner inputs.  See [S5 P3 extraction](etc/evidence/m0-t271-s5-p3-app-composition-extraction-001.md).
@@ -1877,7 +1885,7 @@ admitted by this closure.
 | Objective | Produce the complete in-scope filename/consumer manifest needed to remove `runner`, `ntvdm64`, `bx`, and `bochs` from project-authored and mechanical-adaptation code filenames. |
 | Non-goals | No content/ABI/behavior change; no rename of the six source mirrors or any `*-overlay`; no rename of an imported upstream filename merely because it is temporarily retained as a non-live input. |
 | Reference Baseline | [Filename-normalization proposal](etc/operations/proposal-project-code-filename-normalization-001.md), current formal Ninja manifests, and live source/build consumers. |
-| Files And ABI Surface | `app`, `session`, `adapter-bop`, `adapter-softpc`, `adapter-win32`, in-scope fixtures/build manifests, filename inventory evidence, status and documentation inventory only; no ABI change. |
+| Files And ABI Surface | `app`, `session`, `adapter-mvdm-host-in`, `adapter-softpc`, `adapter-win32`, in-scope fixtures/build manifests, filename inventory evidence, status and documentation inventory only; no ABI change. |
 | Applicable Rules | Execution closure, component ownership, mirror source identity, `git mv` requirement, and production-only component rules. |
 | Verification | Recursive filename scan, include/build/document consumer scan, live-versus-imported classification review, documentation governance and `git diff --check`. |
 | Expected Markers | Every in-scope matching filename has one retain/rename disposition, proposed neutral basename and consumer set; excluded original files name their source-identity reason. |
@@ -1920,10 +1928,10 @@ no work. See the S1/S2 inventory evidence.
 | --- | --- |
 | Identifier Mode | `M0 T264 S3`, Ordinary Mode with a single-person dual-role review. |
 | Admission And Approval | T264/S1 inventory and completed S2 under the owner-approved cleanup task. |
-| Objective | Rename the 77 project-authored `adapter-bop` and top-level `adapter-softpc` files from redundant former project-specific basenames to neutral owner-local names, then repair direct source, fixture and build consumers. |
+| Objective | Rename the 77 project-authored `adapter-mvdm-host-in` and top-level `adapter-softpc` files from redundant former project-specific basenames to neutral owner-local names, then repair direct source, fixture and build consumers. |
 | Non-goals | No rename of `adapter-softpc/include/mvdm/**`, `include/softpc.new/**`, original mirror/overlay code, source symbols, ABI, or behavior. |
 | Reference Baseline | [S1/S2 inventory](etc/evidence/m0-t264-s1-project-code-filename-inventory-001.md) and `tools/build/t260-s8-component-manifest.json`. |
-| Files And ABI Surface | `adapter-bop`, top-level project-owned `adapter-softpc` files, direct tests/build references and evidence only; filename paths, no ABI. |
+| Files And ABI Surface | `adapter-mvdm-host-in`, top-level project-owned `adapter-softpc` files, direct tests/build references and evidence only; filename paths, no ABI. |
 | Applicable Rules | T264 proposal; `git mv`; source-identity exclusions; no semantic rewrite. |
 | Verification | No prohibited basename in scoped project-owned adapter files; stale-reference scan; fresh formal Ninja closure; `git diff --check`. |
 | Expected Markers | All 77 approved paths are Git renames and direct consumers name only their new paths. |
@@ -1972,7 +1980,7 @@ T264 as S5; it does not invalidate the S4 product/backend-prefix result.
 | Objective | Remove standalone temporary generation filename segments, then classify and remove non-semantic project/backend/OpenNT source-provenance identifier prefixes from all in-scope project-authored production code and repair direct consumers. |
 | Non-goals | No source-symbol change where an identifier actually names DOS/VDM guest semantics, Bochs/register mechanics, an OpenNT provider/guest contract, a public configuration contract, or a preserved historical interface; no function-contract, ABI, behavior, component-directory, mirror, overlay, historical-interface, or test-directory rename. |
 | Reference Baseline | T264 proposal and S1/S4 inventory; the 70-row versioned-filename scan and source token disposition audit. |
-| Files And ABI Surface | `src/app`, `src/session`, `src/adapter-bop`, top-level project-owned `src/adapter-softpc`, their direct consumers, and closure evidence only; private project identifiers and filename paths, no ABI. |
+| Files And ABI Surface | `src/app`, `src/session`, `src/adapter-mvdm-host-in`, top-level project-owned `src/adapter-softpc`, their direct consumers, and closure evidence only; private project identifiers and filename paths, no ABI. |
 | Applicable Rules | `git mv`, component ownership, source-identity exclusions, production-only component rule, and no semantic rewrite. |
 | Verification | Scoped recursive basename scan; stale old-path scan; identifier disposition audit; fresh formal Ninja closure; documentation governance and `git diff --check`. |
 | Expected Markers | Zero standalone `v1` or `v2` filename segments; no non-semantic project/backend/OpenNT source-provenance prefix remains in scoped private identifiers; and zero live direct reference to moved versioned paths. |
@@ -2006,7 +2014,7 @@ record.
 | Objective | Rebuild `nt_error.c`, `vrinit.c`, and `vrnmpipe.c` from their exact OpenNT originals: retain the reached original function bodies, associated data and explanatory comments; delete unconnected function blocks with their dedicated support/commentary; use only statement-local same-shaped `adapter-win32` or `adapter-softpc` substitutions where a retained call cannot compose. |
 | Non-goals | No VDD/NetBIOS/DLC/ICA/CSR/WOW product-shell recreation; no new BOP service admission; no fabricated `VrInitialize` success; no Bochs semantic change. |
 | Reference Baseline | `O:\\repos.external\\OpenNT\\base\\mvdm\\{softpc.new\\host\\src\\nt_error.c,vdmredir\\vrinit.c,vdmredir\\vrnmpipe.c}`, current reached callers, `HOST-DIV-012..025`, and the source-first recovery rules. |
-| Files And ABI Surface | The three host mirrors; needed declared `adapter-win32`/`adapter-softpc` same-shaped facades; focused host/Redirector fixtures; host README/evidence/status. `adapter-bop` remains selector-blind ingress only and is not a provider dependency. |
+| Files And ABI Surface | The three host mirrors; needed declared `adapter-win32`/`adapter-softpc` same-shaped facades; focused host/Redirector fixtures; host README/evidence/status. `adapter-mvdm-host-in` remains selector-blind ingress only and is not a provider dependency. |
 | Applicable Rules | Source-first ladder; original body/order/layout preservation; statement-local divergence/register rule; no fabricated success; component ownership and bounded mapping rules. |
 | Verification | Per-retained-block original-span ledger; source diff review; positive and negative focused fixture coverage; formal Ninja closure; documentation governance; `git diff --check`. |
 | Expected Markers | Each retained function has a cited original span and unchanged body except registered adapter call sites; every deleted block names its unavailable dependency and owner; `VrInitialize` either retains its required original prerequisites or is not admitted. |
@@ -2014,7 +2022,7 @@ record.
 | Reporting Requirements | Separately report original retained lines, adapter substitutions, deleted unconnected blocks, and any capability that must remain unavailable. Do not call a cropped function connected if its original success prerequisites are absent. |
 | Stop Conditions | A retained block would require a new product-shell adapter, an adapter would acquire BOP/Redirector semantics, an original success path cannot be preserved, or a crop bisects retained control flow. |
 | Exit Criteria | The three files are reviewable original-body subsets; no project-authored replacement algorithm remains in a retained block; all substitutions are local and README-indexed; no incomplete historical success is exposed; stated checks pass. |
-| Original Owner Request | “原版文件，保留大段注释部分，删去不需要接通的那些部分及配套注释；保留所有需要接通的部分；然后，这些部分如果依赖 adapter-win32, adapter-bop, adapter-softpc，就在对应地方实现需要的替代接口。” |
+| Original Owner Request | “原版文件，保留大段注释部分，删去不需要接通的那些部分及配套注释；保留所有需要接通的部分；然后，这些部分如果依赖 adapter-win32, adapter-mvdm-host-in, adapter-softpc，就在对应地方实现需要的替代接口。” |
 | Similar-Issue Sweep | Rewritten same-name source, blanket divergence claims, include-only but behavior-changing edits, hidden fabricated success, unbounded host pointers, and adapter ownership leaks. |
 
 **S9 closure:** all three files were re-rooted from cited original source
@@ -2504,7 +2512,7 @@ evidence is the [S9 residue closure audit](etc/evidence/m0-t261-s9-final-adapter
 | --- | --- |
 | Identifier Mode | `M0 T261 S9`, Ordinary Mode with a single-person dual-role review. |
 | Objective | Remove selector-aware BOP/NTDOS/COMMAND observation and fixture-only residue from adapter production roots; retain all source-owned interpretation in `opennt-bop` and generic test hooks in `tests/`. |
-| Scope | `adapter-bop` and `adapter-softpc` production sources, their public headers, build inputs and focused fixtures. |
+| Scope | `adapter-mvdm-host-in` and `adapter-softpc` production sources, their public headers, build inputs and focused fixtures. |
 | Non-goals | No provider semantic change, no BOP enablement, no OpenNT source rewrite, no new adapter, no Bochs change, and no VDD/Redirector lifecycle implementation. |
 | Required Direction | The mechanical adapters remain selector/service/family/DOS/WOW blind. `opennt-bop` owns every source/provider interpretation; fixture-only code belongs under `tests/`. |
 | Verification | Owner/function map, negative semantic-token scan, focused fixtures, formal Ninja closure, `git diff --check`, and documentation governance. |
@@ -2543,10 +2551,10 @@ behavior evidence.
 had one fixture consumer and no formal production-graph input. It now lives
 entirely under that fixture's `tests/.../support/` directory, leaving
 `adapter-softpc` without this selector/family knowledge. P5b remains to
-isolate the separate generic-UD test controls in `adapter-bop`.
+isolate the separate generic-UD test controls in `adapter-mvdm-host-in`.
 
 **S9 P5b completed:** generic-UD v2 context injection and the finite-run
-UD-stop switch have left production. `adapter-bop` now has only its default
+UD-stop switch have left production. `adapter-mvdm-host-in` now has only its default
 mechanical decline plus selector-blind accepted-outcome observations; the
 context fixture uses an explicitly linked test-support object and the
 cancellation fixture now supplies its own v1 callback. Its separate
@@ -2672,7 +2680,7 @@ evidence](etc/evidence/m0-t261-s8-p5-vrmslot-record-lifecycle-recovery-001.md).
 | Admission And Approval | S6 closed the component-count, ownership and terminology governance. The owner directed that S7, rather than S6, implements the `session` owner split. |
 | Objective | Establish `src/session` as the dependency-free per-VDM lifecycle foundation and move only neutral lifecycle, resource/token, capability-registration, completion/event and teardown ownership into it. |
 | Non-goals | No BOP selector/provider implementation, no OpenNT host-source rewrite, no Win32 facade semantics, no SoftPC/CCPU or Bochs mechanics change, no guest change, and no preemptive `adapter-vdd`, `adapter-debugger`, `adapter-redir`, `adapter-wow`, generic `adapter-common`, `adapter-host`, or `compat` root. |
-| Reference Baseline | T261/S5 closure `ab49a2d4`; current `app`, `adapter-bop`, `adapter-softpc`, `adapter-win32`, `opennt-bop`, and `opennt-host` session-facing sources; T260 mapping-manager boundary. |
+| Reference Baseline | T261/S5 closure `ab49a2d4`; current `app`, `adapter-mvdm-host-in`, `adapter-softpc`, `adapter-win32`, `opennt-bop`, and `opennt-host` session-facing sources; T260 mapping-manager boundary. |
 | Files And ABI Surface | New `src/session/*`, precisely inventoried neutral state currently held by component composition/adapters, component public declarations, formal module manifest/generator, and focused session fixtures. |
 | Applicable Rules | `session` has no product-component dependency and no BOP/DOS/WOW/VDD/Redirector/Win32/Bochs vocabulary; `app` creates and wires the instance; source-owned behavior stays in its original owner; cross-component data remains fixed-width or opaque. |
 | Stop Conditions | A candidate extraction requires service/provider/guest interpretation, an OpenNT-body semantic edit, a raw Bochs object or Win32 handle in the public session ABI, an upward import of `app`, or a second mapping-manager implementation. Pause and record the owner conflict. |
@@ -2693,23 +2701,23 @@ evidence](etc/evidence/m0-t261-s8-p5-vrmslot-record-lifecycle-recovery-001.md).
 | Exit Criteria | Architecture, goal, coding and rules agree on the ten-component target; S7 is the sole active implementation packet for `session`; no current build claim is inflated; and the follow-on cleanup has an explicit S owner. |
 | Follow-on | S7 implements only dependency-free `session`; S8 performs the owner-directed OpenNT-host source replacement; the former adapter-root cleanup is deferred to S9. |
 
-### M0 T261 S5 — closed: adapter-bop generic ingress ownership split
+### M0 T261 S5 — closed: adapter-mvdm-host-in generic ingress ownership split
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T261 S5`, Ordinary Mode with a single-person dual-role review. |
 | Admission And Approval | The owner explicitly authorized S5: “好的 接下来S5开工？”.  T261’s approved proposal admits this exact split after S4 closure. |
-| Objective | Establish `adapter-bop` as the sole selector-blind fixed-width generic-UD ingress/completion owner; retain every BOP selector/service recognition, provider dispatch and BOP-aware observation in `opennt-bop`. |
-| Non-goals | No new BOP enablement, no provider semantic change, no new CPU-frame ABI, no Bochs change, and no migration of family/session/provider logic into `adapter-bop`. |
+| Objective | Establish `adapter-mvdm-host-in` as the sole selector-blind fixed-width generic-UD ingress/completion owner; retain every BOP selector/service recognition, provider dispatch and BOP-aware observation in `opennt-bop`. |
+| Non-goals | No new BOP enablement, no provider semantic change, no new CPU-frame ABI, no Bochs change, and no migration of family/session/provider logic into `adapter-mvdm-host-in`. |
 | Reference Baseline | T261/S4 P7 closure `694cf087`; existing the former generic-UD bridge header; `opennt-bop/ingress/dem_generic_ud_bridge.c`; T260 formal component manifest and architecture/coding authorities. |
-| Files And ABI Surface | New `src/adapter-bop/*`; the generic-UD external bridge symbol; exported `opennt-bop` route callback; app session-composition bind/reset calls; manifest/generator module and link order; focused bridge fixture. |
-| Applicable Rules | `adapter-bop` is selector/service/family/DOS/WOW/provider blind; OpenNT route semantics remain in `opennt-bop`; `app` owns wiring; `adapter-softpc` remains the only SoftPC/CCPU-to-Bochs boundary; fixed-width copied data only. |
-| Verification | Function-level owner map; selector-token negative scan of `adapter-bop`; focused bind/decline/dispatch/reset fixture; formal Ninja closure; component-direction scan; `git diff --check`; documentation governance. |
-| Expected Markers | No selector/service literal or provider include in `adapter-bop`; no exported CPU generic-UD bridge implementation in `opennt-bop`; an unbound bridge declines, a bound route receives the unchanged copied event/outcome, and reset removes the binding. |
+| Files And ABI Surface | New `src/adapter-mvdm-host-in/*`; the generic-UD external bridge symbol; exported `opennt-bop` route callback; app session-composition bind/reset calls; manifest/generator module and link order; focused bridge fixture. |
+| Applicable Rules | `adapter-mvdm-host-in` is selector/service/family/DOS/WOW/provider blind; OpenNT route semantics remain in `opennt-bop`; `app` owns wiring; `adapter-softpc` remains the only SoftPC/CCPU-to-Bochs boundary; fixed-width copied data only. |
+| Verification | Function-level owner map; selector-token negative scan of `adapter-mvdm-host-in`; focused bind/decline/dispatch/reset fixture; formal Ninja closure; component-direction scan; `git diff --check`; documentation governance. |
+| Expected Markers | No selector/service literal or provider include in `adapter-mvdm-host-in`; no exported CPU generic-UD bridge implementation in `opennt-bop`; an unbound bridge declines, a bound route receives the unchanged copied event/outcome, and reset removes the binding. |
 | Asset Needs | Existing fixed-width generic-UD ABI, current route entry, app engine lifecycle, formal Ninja manifest/generator and focused C fixtures. |
 | Reporting Requirements | Exact function ownership map; no-new-ABI proof; retained route/observation source; binding lifetime; source/list/link changes; focused and formal results. |
 | Stop Conditions | A proposed adapter file reads a selector/service/window payload for meaning, names a provider/family/DOS/WOW concept, requires a raw guest/Bochs object pointer, or forces a provider semantic change. Pause and record the boundary conflict. |
-| Exit Criteria | `adapter-bop` owns the externally called generic ingress symbol and only generic registration/validation/forwarding; `opennt-bop` owns one exported route callback and all selector-aware logic; `app` binds/unbinds around one engine session; formal graph names eight linkable libraries and passes stated focused checks. |
+| Exit Criteria | `adapter-mvdm-host-in` owns the externally called generic ingress symbol and only generic registration/validation/forwarding; `opennt-bop` owns one exported route callback and all selector-aware logic; `app` binds/unbinds around one engine session; formal graph names eight linkable libraries and passes stated focused checks. |
 | Original Owner Request | “好的 接下来S5开工？” |
 | Similar-Issue Sweep | Generic-UD v1/v2 symbol definitions, handler registration lifetime, BOP observations, fixtures with bridge stubs, manifest module/source/link lists, old `bx-vdm`/ingress path references, and component READMEs. |
 
@@ -2796,12 +2804,12 @@ error/lock and MISC direct-import fixtures pass.  The old r015 concurrent
 build root is explicitly excluded from evidence.  See the
 [S4 owner closure](etc/evidence/m0-t261-s4-p7-dem-host-owner-closure-001.md).
 S5 is now admitted as the next bounded owner split.  It must not interpret a
-selector in `adapter-bop` or change the already-closed DEM host boundary.
-S5 P1 is closed in `ab49a2d4`: `adapter-bop` owns the generic CPU entry and
+selector in `adapter-mvdm-host-in` or change the already-closed DEM host boundary.
+S5 P1 is closed in `ab49a2d4`: `adapter-mvdm-host-in` owns the generic CPU entry and
 the unchanged copied record; `opennt-bop` retains the renamed selector route;
 and `app` owns bind/reset around one engine run.  The actual formal r002 native
 link and focused ingress fixture pass; see
-[S5 ingress evidence](etc/evidence/m0-t261-s5-adapter-bop-ingress-split-001.md).
+[S5 ingress evidence](etc/evidence/m0-t261-s5-adapter-mvdm-host-in-ingress-split-001.md).
 
 ## Previous Active Packet — M0 T260
 

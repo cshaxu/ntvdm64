@@ -20,22 +20,22 @@ $builds = @(Import-Csv -LiteralPath $buildLedgerPath -Delimiter "`t")
 if ($files.Count -ne 40) { throw "Expected 40 dos rows, found $($files.Count)." }
 
 $sourceContracts = @{
-    'dos/command/cmd.c'      = @('command-service-entry', 'adapter-bop; adapter-softpc; adapter-win32; session', 'original COMMAND service entry and result contract; preserve dispatch shape before individual services are admitted')
-    'dos/command/cmdconf.c'  = @('command-bootstrap-configuration', 'adapter-softpc; adapter-win32; session; opennt-mvdm-support', 'original CONFIG.SYS/AUTOEXEC bootstrap and configuration transfer; retain the source-owned ordering')
+    'dos/command/cmd.c'      = @('command-service-entry', 'adapter-mvdm-host-in; adapter-softpc; adapter-win32; session', 'original COMMAND service entry and result contract; preserve dispatch shape before individual services are admitted')
+    'dos/command/cmdconf.c'  = @('command-bootstrap-configuration', 'adapter-softpc; adapter-win32; session; mvdm-support', 'original CONFIG.SYS/AUTOEXEC bootstrap and configuration transfer; retain the source-owned ordering')
     'dos/command/cmddata.c'  = @('command-shared-state', 'session; adapter-softpc', 'original COMMAND global state and VDM-facing data definitions; recover only with explicit session ownership')
-    'dos/command/cmddisp.c'  = @('command-service-dispatch', 'adapter-bop; adapter-softpc', 'original COMMAND BOP service dispatch; selector meanings stay source-owned')
+    'dos/command/cmddisp.c'  = @('command-service-dispatch', 'adapter-mvdm-host-in; adapter-softpc', 'original COMMAND BOP service dispatch; selector meanings stay source-owned')
     'dos/command/cmdenv.c'   = @('command-environment', 'adapter-win32; session', 'original DOS-to-host environment transformation and current-directory data; requires session-owned modern host environment binding')
     'dos/command/cmdexec.c'  = @('command-child-lifecycle', 'session; adapter-win32; adapter-softpc', 'original COMMAND child creation, wait and re-entry control flow; requires the session lifecycle contract, not a replacement command runner')
     'dos/command/cmdexit.c'  = @('command-child-return', 'session; adapter-softpc', 'original COMMAND exit/re-entry result path; depends on source-owned child lifecycle and guest return contracts')
     'dos/command/cmdkeyb.c'  = @('command-keyboard-layout', 'adapter-win32; session', 'original keyboard-layout discovery/configuration provider; public host input binding must retain original failure behavior')
-    'dos/command/cmdmisc.c'  = @('command-bootstrap-console', 'session; adapter-win32; adapter-softpc; opennt-mvdm-support', 'original startup, console and command-information orchestration; it is a cross-provider composition point')
-    'dos/command/cmdpif.c'   = @('command-pif-policy', 'adapter-win32; session; opennt-mvdm-support', 'original PIF/environment policy reader; modern public binding must preserve PIF absence/failure semantics')
+    'dos/command/cmdmisc.c'  = @('command-bootstrap-console', 'session; adapter-win32; adapter-softpc; mvdm-support', 'original startup, console and command-information orchestration; it is a cross-provider composition point')
+    'dos/command/cmdpif.c'   = @('command-pif-policy', 'adapter-win32; session; mvdm-support', 'original PIF/environment policy reader; modern public binding must preserve PIF absence/failure semantics')
     'dos/command/cmdredir.c' = @('command-redirection-pipes', 'adapter-redir; adapter-win32; session; adapter-softpc', 'original standard-stream redirection and pipe control flow; Redirector ownership is a prerequisite')
-    'dos/dem/dem.c'          = @('dem-service-entry', 'adapter-bop; adapter-softpc; adapter-win32; session', 'original DEM entry/configuration contract; retain source-owned service semantics')
+    'dos/dem/dem.c'          = @('dem-service-entry', 'adapter-mvdm-host-in; adapter-softpc; adapter-win32; session', 'original DEM entry/configuration contract; retain source-owned service semantics')
     'dos/dem/demdasd.c'      = @('dem-raw-dasd', 'adapter-softpc; adapter-bochs; adapter-win32; session', 'original absolute disk/floppy control path; machine-media ownership must be proved before enablement')
     'dos/dem/demdata.c'      = @('dem-shared-state', 'session; adapter-softpc', 'original DEM global state and guest pointer data; recover only through session and same-shaped SoftPC facade')
     'dos/dem/demdir.c'       = @('dem-directory-namespace', 'adapter-win32; adapter-softpc; session', 'original directory/current-drive provider; public host path binding must preserve DOS-facing error order')
-    'dos/dem/demdisp.c'      = @('dem-service-dispatch', 'adapter-bop; adapter-softpc', 'original DEM BOP dispatch and not-yet-implemented failure routing; selectors remain in source')
+    'dos/dem/demdisp.c'      = @('dem-service-dispatch', 'adapter-mvdm-host-in; adapter-softpc', 'original DEM BOP dispatch and not-yet-implemented failure routing; selectors remain in source')
     'dos/dem/demerror.c'     = @('dem-hard-error-state', 'adapter-softpc; adapter-win32; session', 'original hard-error state, guest register result and user-visible error ordering')
     'dos/dem/demfcb.c'       = @('dem-fcb-filesystem', 'adapter-win32; adapter-softpc; session', 'original FCB filesystem provider; host handles and guest memory require their dedicated same-shaped adapters')
     'dos/dem/demfile.c'      = @('dem-handle-filesystem', 'adapter-win32; adapter-softpc; adapter-redir; adapter-vdd; session', 'original DOS handle filesystem, pipe and VDD-aware provider; each external bridge remains separately owned')
@@ -52,18 +52,18 @@ $sourceContracts = @{
 function Get-NonSourceContract {
     param([string]$Path)
     if ($Path -eq 'dos/dirs') {
-        return @('original-build-directory-metadata', 'opennt-mvdm-support', 'original build-tree metadata; exact mirror only, never a runtime input', 'metadata-only')
+        return @('original-build-directory-metadata', 'mvdm-support', 'original build-tree metadata; exact mirror only, never a runtime input', 'metadata-only')
     }
     if ($Path -eq 'dos/test/test.bat') {
         return @('historical-package-test', 'none until an admitted test harness', 'historical test evidence; no product test or runtime inference', 'test-evidence-only')
     }
     if ($Path -like '*/sources' -or $Path -like '*/makefile') {
-        return @('original-build-description', 'opennt-mvdm-support; build governance', 'original build description; source selection evidence only, not a modern build edge', 'build-description-only')
+        return @('original-build-description', 'mvdm-support; build governance', 'original build description; source selection evidence only, not a modern build edge', 'build-description-only')
     }
     if ($Path -like 'dos/command/*') {
-        return @('command-public-declaration', 'opennt-mvdm-host; adapter-bop; adapter-softpc; adapter-win32; session', 'original COMMAND declaration/data surface; preserve exact source shape before provider enablement', 'declaration-only')
+        return @('command-public-declaration', 'mvdm-host; adapter-mvdm-host-in; adapter-softpc; adapter-win32; session', 'original COMMAND declaration/data surface; preserve exact source shape before provider enablement', 'declaration-only')
     }
-    return @('dem-public-declaration', 'opennt-mvdm-host; adapter-bop; adapter-softpc; adapter-win32; session', 'original DEM declaration/data surface; preserve exact source shape before provider enablement', 'declaration-only')
+    return @('dem-public-declaration', 'mvdm-host; adapter-mvdm-host-in; adapter-softpc; adapter-win32; session', 'original DEM declaration/data surface; preserve exact source shape before provider enablement', 'declaration-only')
 }
 
 function Get-LexicalFamilies {
@@ -75,8 +75,8 @@ function Get-LexicalFamilies {
     if ($text -match '(?i)(windows\.h|winbase\.h|nt\.h|ntrtl\.h|nturtl\.h|ntdddisk\.h|process\.h|\bCreateFile|\bGetLastError|\bCreateProcess)') { $families.Add('adapter-win32 (historical Win32/NTDLL lexical surface)') }
     if ($text -match '(?i)(vrnmpipe\.h|vdmredir|\bPipe(?:In|Out|File|Handle)|cmdredir)') { $families.Add('adapter-redir (redirector/pipe lexical surface)') }
     if ($text -match '(?i)(nt_vdd\.h|\bVDD[A-Za-z0-9_]*\s*\()') { $families.Add('adapter-vdd (VDD lexical surface)') }
-    if ($text -match '(?i)(oemuni\.h|\bOem[A-Za-z0-9_]*\s*\()') { $families.Add('opennt-mvdm-support (OEM/NLS lexical surface)') }
-    if ($text -match '(?i)(cmdsvc\.h|dossvc\.h|\bBOP\b)') { $families.Add('adapter-bop (BOP ABI lexical surface)') }
+    if ($text -match '(?i)(oemuni\.h|\bOem[A-Za-z0-9_]*\s*\()') { $families.Add('mvdm-support (OEM/NLS lexical surface)') }
+    if ($text -match '(?i)(cmdsvc\.h|dossvc\.h|\bBOP\b)') { $families.Add('adapter-mvdm-host-in (BOP ABI lexical surface)') }
     if ($text -match '(?i)(mvdm\.h|\bVDM(?:INFO|ENV|TIB|STATE)|\bReEnter)') { $families.Add('session (VDM session/lifecycle lexical surface)') }
     if ($families.Count -eq 0) { return 'none detected in retained source text' }
     return [string]::Join('; ', $families)
@@ -94,14 +94,14 @@ $result = foreach ($file in $files) {
         if (-not $sourceContracts.ContainsKey($file.target_path)) { throw "Missing source contract: $($file.target_path)" }
         $contract = $sourceContracts[$file.target_path]
         $role = $contract[0]
-        $owner = 'opennt-mvdm-host'
+        $owner = 'mvdm-host'
         $prerequisite = $contract[1]
         $summary = $contract[2]
         $disposition = 'package-led adapter/interface review'
     } else {
         $contract = Get-NonSourceContract -Path $file.target_path
         $role = $contract[0]
-        $owner = if ($role -eq 'original-build-directory-metadata') { 'opennt-mvdm-support' } elseif ($role -eq 'historical-package-test') { 'opennt-mvdm-tools' } else { 'opennt-mvdm-host' }
+        $owner = if ($role -eq 'original-build-directory-metadata') { 'mvdm-support' } elseif ($role -eq 'historical-package-test') { 'mvdm-tools' } else { 'mvdm-host' }
         $prerequisite = $contract[1]
         $summary = $contract[2]
         $disposition = $contract[3]

@@ -10,7 +10,7 @@
 #include "bochs.h"
 #include "adapter-softpc/finite_run.h"
 #include "adapter-softpc/first_fault_observation.h"
-#include "adapter-bop/generic_ud_bridge.h"
+#include "adapter-mvdm-host-in/generic_ud_bridge.h"
 #include "adapter-bochs/minimal_machine.h"
 #include "bochs-core/cpu/cpu.h"
 

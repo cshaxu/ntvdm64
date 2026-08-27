@@ -34,7 +34,7 @@ foreach ($marker in $required) {
     }
 }
 
-$forbidden = @('rule link', 'rule run', '.exe', 'adapter-bop/', 'bochs-core/', 'demfile.c', 'demsrch.c', 'demhndl.c')
+$forbidden = @('rule link', 'rule run', '.exe', 'adapter-mvdm-host-in/', 'bochs-core/', 'demfile.c', 'demsrch.c', 'demhndl.c')
 foreach ($marker in $forbidden) {
     if ($text -like "*$marker*") {
         throw "T281 graph enables a forbidden runtime/provider surface: $marker"

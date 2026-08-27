@@ -1,7 +1,7 @@
 #include "bochs.h"
 #include "adapter-bochs/machine_facade.h"
-#include "adapter-bop/bop_ingress.h"
-#include "adapter-bop/generic_ud_bridge.h"
+#include "adapter-mvdm-host-in/bop_ingress.h"
+#include "adapter-mvdm-host-in/generic_ud_bridge.h"
 #include "adapter-softpc/machine_stage.h"
 
 #include <string.h>

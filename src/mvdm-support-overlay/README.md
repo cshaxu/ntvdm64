@@ -1,6 +1,6 @@
-# opennt-mvdm-support-overlay
+# mvdm-support-overlay
 
-This overlay is called only by the matching `opennt-mvdm-support` static
+This overlay is called only by the matching `mvdm-support` static
 library build. It preserves the four original OEM exports that contain x86
 pointer truncation, while the original bodies remain byte-exact evidence.
 

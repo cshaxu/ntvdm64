@@ -19,7 +19,7 @@ foreach ($architecture in @('x86', 'x64')) {
             throw "$architecture graph omits original COMMAND unit $unit."
         }
     }
-    foreach ($forbidden in @('adapter-bop', 'bochs-core', 'adapter-bochs', 'nt_bop.c', '/src/app/')) {
+    foreach ($forbidden in @('adapter-mvdm-host-in', 'bochs-core', 'adapter-bochs', 'nt_bop.c', '/src/app/')) {
         if ($content -match [regex]::Escape($forbidden)) {
             throw "$architecture COMMAND graph contains forbidden input $forbidden."
         }

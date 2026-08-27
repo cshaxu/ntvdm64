@@ -1,7 +1,7 @@
 #ifndef T255_S2_GENERIC_UD_CONTEXT_FIXTURE_BRIDGE_H
 #define T255_S2_GENERIC_UD_CONTEXT_FIXTURE_BRIDGE_H
 
-#include "adapter-bop/generic_ud_bridge.h"
+#include "adapter-mvdm-host-in/generic_ud_bridge.h"
 
 #define T255_S2_GENERIC_UD_CONTEXT_FIXTURE_MAGIC 0x42584346u
 

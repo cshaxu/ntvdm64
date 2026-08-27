@@ -23,9 +23,9 @@ foreach ($relative in $required) {
 }
 
 $mirrorPairs = @(
-    @('src/opennt-mvdm-support/oemuni/file.c', 'O:/repos.external/OpenNT/base/mvdm/oemuni/file.c'),
-    @('src/opennt-mvdm-support/oemuni/process.c', 'O:/repos.external/OpenNT/base/mvdm/oemuni/process.c'),
-    @('src/opennt-mvdm-support/suballoc/suballoc.c', 'O:/repos.external/OpenNT/base/mvdm/suballoc/suballoc.c')
+    @('src/mvdm-support/oemuni/file.c', 'O:/repos.external/OpenNT/base/mvdm/oemuni/file.c'),
+    @('src/mvdm-support/oemuni/process.c', 'O:/repos.external/OpenNT/base/mvdm/oemuni/process.c'),
+    @('src/mvdm-support/suballoc/suballoc.c', 'O:/repos.external/OpenNT/base/mvdm/suballoc/suballoc.c')
 )
 foreach ($pair in $mirrorPairs) {
     $actual = (Get-FileHash -LiteralPath (Join-Path $root $pair[0]) -Algorithm SHA256).Hash

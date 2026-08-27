@@ -9,7 +9,7 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 $families = [ordered]@{
-    'adapter-bop' = 'bop-transport'
+    'adapter-mvdm-host-in' = 'bop-transport'
     'adapter-softpc' = 'softpc-ccpu-sas'
     'adapter-win32' = 'win32-ntdll'
 }

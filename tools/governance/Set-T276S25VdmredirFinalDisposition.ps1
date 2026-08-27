@@ -11,14 +11,14 @@ foreach ($row in $redir) {
     $row.final_audit_state = 'final-disposition-audited; not implemented'
     if ($row.file_kind -eq 'source') {
         $row.final_disposition = 'adapter-backed'
-        $row.final_owner_or_link_boundary = 'opennt-mvdm-host original vdmredir provider -> adapter-redir protocol boundary -> adapter-win32/session; BOP consumers remain opennt-bop'
+        $row.final_owner_or_link_boundary = 'mvdm-host original vdmredir provider -> adapter-redir protocol boundary -> adapter-win32/session; BOP consumers remain opennt-bop'
         $row.final_change_class = 'binding-only; retain original Redirector protocol ordering, dispatch and failure semantics'
         $row.named_adapter = 'adapter-redir; adapter-win32; session'
         $row.mapping_implication = 'DOS far buffers use checked session guest-memory leases/copies; host handles and async completion IDs remain session-owned'
         $row.final_evidence = 'T276 S21: vdmredir is one original DLL owner package of 15 provider bodies; no standalone file-redirector shim may replace it'
     } elseif ($row.file_kind -eq 'declaration') {
         $row.final_disposition = 'binding-only'
-        $row.final_owner_or_link_boundary = 'opennt-platform-abi Redirector protocol declaration supplied to the original provider and adapter-redir binding'
+        $row.final_owner_or_link_boundary = 'mvdm-platform-abi Redirector protocol declaration supplied to the original provider and adapter-redir binding'
         $row.final_change_class = 'binding-only; retain original layout/protocol declarations'
         $row.named_adapter = 'adapter-redir; adapter-win32; session'
         $row.mapping_implication = 'declarations transfer no native identity; DOS pointers and host handles follow the session mapping-manager/host-resource rule'

@@ -24,17 +24,17 @@ $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM ' +
     '/I ' + $root + '/src/adapter-win32/include ' +
     '/I ' + $root + '/src/adapter-softpc/include ' +
     '/I ' + $root + '/src/adapter-vdm-monitor/include ' +
-    '/I ' + $root + '/src/opennt-platform-abi/source/public/internal/windows/inc ' +
-    '/I ' + $root + '/src/opennt-mvdm-support/inc ' +
-    '/I ' + $root + '/src/opennt-mvdm-host/dos/command ' +
-    '/I ' + $root + '/src/opennt-mvdm-host/dos/dem ' +
-    '/I ' + $root + '/src/opennt-mvdm-host/softpc.new/host/inc ' +
-    '/I ' + $root + '/src/opennt-mvdm-host/softpc.new/base/inc'
+    '/I ' + $root + '/src/mvdm-platform-abi/source/public/internal/windows/inc ' +
+    '/I ' + $root + '/src/mvdm-support/inc ' +
+    '/I ' + $root + '/src/mvdm-host/dos/command ' +
+    '/I ' + $root + '/src/mvdm-host/dos/dem ' +
+    '/I ' + $root + '/src/mvdm-host/softpc.new/host/inc ' +
+    '/I ' + $root + '/src/mvdm-host/softpc.new/base/inc'
 
 $units = @('cmd', 'cmddata', 'cmddisp', 'cmdexec', 'cmdexit', 'cmdmisc',
     'cmdpif', 'cmdredir', 'cmdconf', 'cmdkeyb', 'cmdenv')
 $buildLines = foreach ($unit in $units) {
-    "build obj/$unit.obj: cc `$root/src/opennt-mvdm-host/dos/command/$unit.c"
+    "build obj/$unit.obj: cc `$root/src/mvdm-host/dos/command/$unit.c"
 }
 $objects = ($units | ForEach-Object { "obj/$_.obj" }) -join ' '
 $content = @"

@@ -3,7 +3,7 @@
 #include "adapter-softpc/machine_stage.h"
 #include "bochs-core/pc_system.h"
 #include "adapter-softpc/instruction_history.h"
-#include "adapter-bop/generic_ud_bridge.h"
+#include "adapter-mvdm-host-in/generic_ud_bridge.h"
 
 #include <string.h>
 

@@ -1,6 +1,6 @@
 #include "adapter-softpc/finite_run.h"
 #include "adapter-softpc/first_fault_observation.h"
-#include "adapter-bop/generic_ud_bridge.h"
+#include "adapter-mvdm-host-in/generic_ud_bridge.h"
 
 extern "C" int runtime_machine_generic_ud_bridge(
   const struct runtime_generic_ud_event *,

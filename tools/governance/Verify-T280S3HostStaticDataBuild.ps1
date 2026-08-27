@@ -10,8 +10,8 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $required = @(
-    'src/opennt-mvdm-host/softpc.new/host/src/nt_ertbl.c',
-    'src/opennt-mvdm-host/softpc.new/host/src/nt_mess.c',
+    'src/mvdm-host/softpc.new/host/src/nt_ertbl.c',
+    'src/mvdm-host/softpc.new/host/src/nt_mess.c',
     'src/adapter-softpc/include/error_abi.h',
     'tools/build/New-T280HostStaticDataNinja.ps1',
     'docs/etc/operations/m0-t280-s3-host-static-data-build-plan-001.md',
@@ -26,7 +26,7 @@ $bridge = Get-Content -LiteralPath (Join-Path $root 'src/adapter-softpc/include/
 foreach ($token in @('ERROR_STRUCT', 'EH_ERROR', 'EV_EXTRA_CHAR', 'DIVERGENCE:')) {
     if ($bridge -notmatch [regex]::Escape($token)) { throw "Missing bridge token: $token" }
 }
-if ($bridge -match 'adapter-bochs|adapter-bop|session|mapping_manager') {
+if ($bridge -match 'adapter-bochs|adapter-mvdm-host-in|session|mapping_manager') {
     throw 'Static-data declaration bridge must not carry runtime, machine or mapping behavior.'
 }
 $generator = Get-Content -LiteralPath (Join-Path $root 'tools/build/New-T280HostStaticDataNinja.ps1') -Raw

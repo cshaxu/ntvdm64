@@ -35,7 +35,7 @@ function Get-S5Disposition([string]$Path) {
 
 $target = (Resolve-Path -LiteralPath $TargetRoot).Path.TrimEnd([char]92)
 $ledger = Import-Csv -LiteralPath $UnionLedgerPath -Delimiter "`t"
-$rows = @($ledger | Where-Object { $_.owner_root -eq 'opennt-mvdm-host' } |
+$rows = @($ledger | Where-Object { $_.owner_root -eq 'mvdm-host' } |
     Sort-Object target_path)
 if ($rows.Count -eq 0) {
     throw 'No selected MVDM host rows are present in the union ledger.'

@@ -1,7 +1,7 @@
 #include "bochs.h"
 #include "cpu/cpu.h"
 #include "adapter-bochs/machine_facade.h"
-#include "adapter-bop/bop_ingress.h"
+#include "adapter-mvdm-host-in/bop_ingress.h"
 #include "adapter-softpc/machine_stage.h"
 extern "C" {
 #include "app/bop/command_session.h"

@@ -16,10 +16,11 @@ sole source of truth for later T284 source moves:
   — all seven selected MVDM host consumer families and their required future
   dependency direction.
 
-`tools/governance/Export-T284AdapterConvergenceInventory.ps1` regenerates the
-three inventories from the current roots. It records a SHA-256 identity for
-every currently live production input; it never reads, writes or selects an
-MVDM body.
+`tools/historical/pre-t284/Export-T284AdapterConvergenceInventory.ps1` is the
+frozen pre-rename generator that produced the three inventories. It records a
+SHA-256 identity for every then-live production input; it never reads, writes
+or selects an MVDM body. It is historical because the roots were renamed by
+T284 S2.
 
 ## Findings
 

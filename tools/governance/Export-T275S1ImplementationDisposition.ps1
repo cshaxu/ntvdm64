@@ -9,7 +9,7 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 function Get-Disposition([string]$Path) {
-    if ($Path -like 'adapter-bop/*') {
+    if ($Path -like 'adapter-mvdm-host-in/*') {
         return [pscustomobject]@{ ledger_id='ADAPTER-IF-001'; disposition='split-recover'; successor='T275 S2'; rationale='selector-blind copied ingress/completion only' }
     }
     if ($Path -like 'adapter-win32/facade/demfile_create_observation.*') {

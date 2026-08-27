@@ -24,13 +24,13 @@ New-Item -ItemType Directory -Force $build | Out-Null
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DPROD /DMONITOR /DC_VID /DX86GFX /DANSI ' +
     '/FI ' + $root + '/src/adapter-win32/include/nt.h ' +
     '/FI ' + $root + '/src/adapter-softpc/include/error_abi.h ' +
-    '/I ' + $root + '/src/opennt-platform-abi/source/public/internal/base/inc ' +
-    '/I ' + $root + '/src/opennt-mvdm-support/inc ' +
+    '/I ' + $root + '/src/mvdm-platform-abi/source/public/internal/base/inc ' +
+    '/I ' + $root + '/src/mvdm-support/inc ' +
     '/I ' + $root + '/src/adapter-win32/include ' +
     '/I ' + $root + '/src/adapter-softpc/include ' +
-    '/I ' + $root + '/src/opennt-mvdm-host/softpc.new/host/inc ' +
-    '/I ' + $root + '/src/opennt-mvdm-host/softpc.new/base/inc ' +
-    '/I ' + $root + '/src/opennt-mvdm-host/softpc.new/base/cvidc'
+    '/I ' + $root + '/src/mvdm-host/softpc.new/host/inc ' +
+    '/I ' + $root + '/src/mvdm-host/softpc.new/base/inc ' +
+    '/I ' + $root + '/src/mvdm-host/softpc.new/base/cvidc'
 
 $content = @"
 ninja_required_version = 1.10
@@ -45,7 +45,7 @@ rule lib
   command = lib /nologo /out:`$out `$in
   description = LIB `$out
 
-build obj/nt_bop.obj: cc `$root/src/opennt-mvdm-host/softpc.new/host/src/nt_bop.c
+build obj/nt_bop.obj: cc `$root/src/mvdm-host/softpc.new/host/src/nt_bop.c
 build original-bop-dispatch.lib: lib obj/nt_bop.obj
 default original-bop-dispatch.lib
 "@

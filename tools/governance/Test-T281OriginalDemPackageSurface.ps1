@@ -17,7 +17,7 @@ if (-not (Test-Path -LiteralPath $ninjaPath -PathType Leaf)) { throw "Missing fo
 $text = Get-Content -Raw -LiteralPath $ninjaPath
 $units = @('dem', 'demdata', 'demmsg', 'demdisp', 'demdasd', 'demdir', 'demerror', 'demfcb', 'demfile', 'demgset', 'demhndl', 'demioctl', 'demlabel', 'demlock', 'demmisc', 'demsrch')
 foreach ($unit in $units) { if ($text -notlike "*build obj/$unit.obj: cc*") { throw "Missing DEM package member: $unit" } }
-foreach ($marker in @('rule link', 'rule run', '.exe', 'adapter-bop/', 'bochs-core/', 'vdm_control.c', 'nt_bop.c')) { if ($text -like "*$marker*") { throw "Forbidden runtime surface: $marker" } }
+foreach ($marker in @('rule link', 'rule run', '.exe', 'adapter-mvdm-host-in/', 'bochs-core/', 'vdm_control.c', 'nt_bop.c')) { if ($text -like "*$marker*") { throw "Forbidden runtime surface: $marker" } }
 $libraryPath = Join-Path $build 'original-dem-package.lib'
 if (-not (Test-Path -LiteralPath $libraryPath -PathType Leaf)) { throw "Missing static package archive: $libraryPath" }
 $members = & lib /nologo /list $libraryPath

@@ -12,8 +12,8 @@ $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 
 $carriers = @(
-    @{ name = 'vdmapi.h'; source = 'O:\repos.external\OpenNT\public\internal\base\inc\vdmapi.h'; target = 'src\opennt-platform-abi\source\public\internal\base\inc\vdmapi.h'; hash = 'B942656BA8761DDB9325A7EEA7997394562D2E57797C923FF5688D7BE86426DE' },
-    @{ name = 'pif.h'; source = 'O:\repos.external\OpenNT\public\internal\windows\inc\pif.h'; target = 'src\opennt-platform-abi\source\public\internal\windows\inc\pif.h'; hash = '224F6BDF5CFA15A37D95F97E24C30D37D947D5F7F5199D50AEAB65B39D150C55' }
+    @{ name = 'vdmapi.h'; source = 'O:\repos.external\OpenNT\public\internal\base\inc\vdmapi.h'; target = 'src\mvdm-platform-abi\source\public\internal\base\inc\vdmapi.h'; hash = 'B942656BA8761DDB9325A7EEA7997394562D2E57797C923FF5688D7BE86426DE' },
+    @{ name = 'pif.h'; source = 'O:\repos.external\OpenNT\public\internal\windows\inc\pif.h'; target = 'src\mvdm-platform-abi\source\public\internal\windows\inc\pif.h'; hash = '224F6BDF5CFA15A37D95F97E24C30D37D947D5F7F5199D50AEAB65B39D150C55' }
 )
 foreach ($carrier in $carriers) {
     $source = (Get-FileHash -Algorithm SHA256 -LiteralPath $carrier.source).Hash
@@ -24,7 +24,7 @@ foreach ($carrier in $carriers) {
 }
 
 $forwarder = Get-Content -Raw -LiteralPath (Join-Path $root 'src\adapter-win32\include\vdmapi.h')
-if ($forwarder -notmatch 'opennt-platform-abi/source/public/internal/base/inc/vdmapi\.h') {
+if ($forwarder -notmatch 'mvdm-platform-abi/source/public/internal/base/inc/vdmapi\.h') {
     throw 'The adapter vdmapi declaration forwarder does not select the exact platform-ABI carrier.'
 }
 foreach ($architecture in @('x86', 'x64')) {
