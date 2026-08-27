@@ -2,10 +2,13 @@
 
 ## Scope
 
-Build the selected `mvdm-host` internal definition graph only. The audit reads
-the provenance-selected C/C++ files named by the live MVDM file ledger; it does
-not treat the current mirror, `src.old`, compiler output or an alternate
-OpenNT edition as a definition source.
+Build the complete current `mvdm-host` component definition graph, including
+files already classified tool-only or not-host-runtime so their functions can
+receive an explicit final exclusion. The audit reads the provenance-selected
+C/C++ files named by the live MVDM file ledger; the current mirror supplies
+only component-path membership, never parsed source bytes. It does not treat
+`src.old`, compiler output or an alternate OpenNT edition as a definition
+source.
 
 ## Outputs
 
@@ -16,6 +19,8 @@ OpenNT edition as a definition source.
   from zero degree whose callee is not a zero-degree definition and is not a
   proven non-function expression. It records the caller definition identity
   and exact line, but does not inspect the callee body.
+- `mvdm-host-zero-degree-source-coverage-ledger.tsv`: one row for every
+  component C/C++ file, including files with no function definition.
 
 ## Identity and resolution
 

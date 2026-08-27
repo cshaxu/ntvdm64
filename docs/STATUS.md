@@ -30,6 +30,11 @@ its direct non-zero exits. No external function body is in scope.
 | Original Owner Request | “第1个T任务：0度扫描。创建0度清单；把 mvdm-host 内部的所有函数符号列出来（仅函数的定义）……0度函数和1度函数是 mutually exclusive的。” |
 | Similar-Issue Sweep | Same-spelling static/global definitions, macro/function-pointer forms, selected-but-not-host-runtime source, C/C++ linkage variants, and public Win32 calls. |
 
+**T293 S1 P1:** all 522 `mvdm-host` C/C++ paths now have source-coverage
+records; 4,499 original-source definition identities and 2,706 direct
+first-degree call-site candidates are exported. The first-degree function body
+is uninspected. See the [P1 export evidence](etc/evidence/m0-t293-s1-p1-zero-degree-export-001.md).
+
 **T291 S4 closure:** command, monitor-control and synchronous callback
 execution are now distinct typed planes; the generic session operation table
 is gone. The owner-specific `host_simulate` and WOW task limits are recorded,
