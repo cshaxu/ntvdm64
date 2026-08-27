@@ -1,0 +1,83 @@
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory = $true)]
+    [ValidateSet('x86', 'x64')]
+    [string]$Architecture,
+    [string]$RepositoryRoot = ''
+)
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+
+function NinjaPath([string]$Path) {
+    $result = $Path.Replace('\', '/')
+    if ($result.Length -ge 2 -and $result[1] -eq ':') {
+        return $result.Substring(0, 1) + '$:' + $result.Substring(2)
+    }
+    return $result
+}
+function ObjectName([string]$Path) { return (($Path -replace '[^A-Za-z0-9_]', '_') + '.obj') }
+function Sha256([string]$Path) { return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant() }
+if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
+    $RepositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+}
+$root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
+$build = Join-Path $root ("build/M0-T289/S3/{0}" -f $Architecture)
+$vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
+if (!(Test-Path -LiteralPath $vs -PathType Leaf)) { throw "Missing MSVC: $vs" }
+if (!(Get-Command ninja -ErrorAction SilentlyContinue)) { throw 'Ninja is required.' }
+
+$core = @(Get-ChildItem -LiteralPath (Join-Path $root 'src/bochs-core') -Recurse -File |
+    Where-Object { $_.Extension -in @('.c', '.cc') } |
+    ForEach-Object { $_.FullName.Substring($root.Length + 1).Replace('\', '/') } | Sort-Object)
+$overlay = @(Get-ChildItem -LiteralPath (Join-Path $root 'src/bochs-core-overlay') -Recurse -File |
+    Where-Object { $_.Extension -in @('.c', '.cc') } |
+    ForEach-Object { $_.FullName.Substring($root.Length + 1).Replace('\', '/') } | Sort-Object)
+$adapter = @('src/adapter-bochs/headless_8042.cc', 'src/adapter-bochs/machine_facade.cc',
+    'src/adapter-bochs/minimal_machine.cc', 'src/adapter-bochs/minimal_pic.cc',
+    'src/adapter-bochs/minimal_sim.cc')
+$fixture = 'tests/adapter-bochs/t289_s3_protected_machine_fixture.cc'
+foreach ($path in @($core + $overlay + $adapter + $fixture)) {
+    if (!(Test-Path -LiteralPath (Join-Path $root $path) -PathType Leaf) -or
+        $path -match '(^|/)src\.old(/|$)') { throw "Invalid S3 input: $path" }
+}
+New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj/core'),
+    (Join-Path $build 'obj/adapter'), (Join-Path $build 'obj/fixture'),
+    (Join-Path $build 'lib'), (Join-Path $build 'bin') | Out-Null
+$environment = Join-Path $build 'msvc-mt.cmd'
+@('@echo off', 'set "MVDM_T289_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready',
+    ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'),
+    'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T289_CALLER_CWD%"', '%*') |
+    Set-Content -LiteralPath $environment -Encoding ascii
+$manifest = [ordered]@{ schema = 'm0.t289.s3.dpmi-foundation.v1'; architecture = $Architecture; runtimeLibrary = '/MT';
+    coreSources = @($core + $overlay | ForEach-Object { [ordered]@{ path = $_; sha256 = Sha256 (Join-Path $root $_) } });
+    adapterSources = @($adapter | ForEach-Object { [ordered]@{ path = $_; sha256 = Sha256 (Join-Path $root $_) } });
+    fixture = [ordered]@{ path = $fixture; sha256 = Sha256 (Join-Path $root $fixture) };
+    forbiddenInputs = @('src.old', 'DPMI provider source', 'prebuilt Bochs archive') }
+$manifest | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
+$includes = @('src', 'src/bochs-core', 'src/bochs-core/cpu', 'src/bochs-core/iodev',
+    'src/bochs-core/instrument/stubs', 'src/adapter-bochs') |
+    ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
+$flags = '/nologo /TP /c /std:c++14 /EHsc /MT /W4 /showIncludes /DWIN32 /DRUNTIME_ENABLE_MACHINE_UD_BRIDGE=1 ' + ($includes -join ' ')
+$graph = [Collections.Generic.List[string]]::new()
+$graph.Add('ninja_required_version = 1.10'); $graph.Add('build_root = ' + (NinjaPath $build)); $graph.Add('cflags = ' + $flags); $graph.Add('')
+$graph.Add('rule cxx'); $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in'); $graph.Add('  deps = msvc'); $graph.Add('  msvc_deps_prefix = Note: including file:')
+$graph.Add('rule lib'); $graph.Add('  command = cmd.exe /d /s /c cd /d $build_root && call ' + (NinjaPath $environment) + ' lib.exe /nologo /OUT:$out @$out.rsp')
+$graph.Add('rule link'); $graph.Add('  command = cmd.exe /d /s /c cd /d $build_root && call ' + (NinjaPath $environment) + ' link.exe /nologo /OUT:$out @$out.rsp')
+function AddLibrary([string]$name, [string[]]$sources) {
+    $objects = [Collections.Generic.List[string]]::new()
+    foreach ($source in $sources) { $object = 'obj/' + $name + '/' + (ObjectName $source); $graph.Add('build ' + $object + ': cxx ' + (NinjaPath (Join-Path $root $source))); $objects.Add($object) }
+    $library = 'lib/' + $name + '.lib'
+    [IO.File]::WriteAllLines((Join-Path $build ($library + '.rsp')), $objects, [Text.UTF8Encoding]::new($false))
+    $graph.Add('build ' + $library + ': lib ' + ($objects -join ' ')); return $library
+}
+$coreLibrary = AddLibrary 'bochs-core' @($core + $overlay)
+$adapterLibrary = AddLibrary 'adapter-bochs' $adapter
+$fixtureObject = 'obj/fixture/' + (ObjectName $fixture)
+$graph.Add('build ' + $fixtureObject + ': cxx ' + (NinjaPath (Join-Path $root $fixture)))
+$output = 'bin/t289-s3-protected-machine-fixture.exe'
+[IO.File]::WriteAllLines((Join-Path $build ($output + '.rsp')), @($fixtureObject, $adapterLibrary, $coreLibrary, 'kernel32.lib', 'user32.lib'), [Text.UTF8Encoding]::new($false))
+$graph.Add('build ' + $output + ': link ' + $fixtureObject + ' ' + $adapterLibrary + ' ' + $coreLibrary)
+$graph.Add('default ' + $output)
+[IO.File]::WriteAllLines((Join-Path $build 'build.ninja'), $graph, [Text.UTF8Encoding]::new($false))
+Write-Output "Generated T289 S3 DPMI foundation graph: $build"

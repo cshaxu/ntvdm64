@@ -1,0 +1,9 @@
+surface	implementation	S3 disposition	later owner or restriction
+copied protected frame	machine_facade_protected_frame + copy/commit	implemented; copied GPR/EIP/supported-FLAGS delta commits only after exact returned-frame comparison	S5 may compose stack/interrupt source bodies only through this contract
+execution mode	machine_facade_copy_protected_frame	implemented as protected non-v8086/non-paged admission; no mode transition API	modesw.c transition proof requires a later source-shaped packet
+segment descriptor	machine_facade_copy_protected_segment	implemented inspection-only for the six active segment slots	LDT/IDT mutation and descriptor publication remain S4/S5 source-proven work
+protected span	machine_facade_protected_span_transfer	implemented as checked selector-index/offset/count read or write	DPMI source groups acquire bounded session leases separately; no raw pointer
+atomic lifecycle	machine_facade_cpu_paused	implemented; commit is permitted only after adapter-bochs has returned from cpu_loop	no independent CPU executor or asynchronous frame writer
+raw Sim32 pointer	no API	refused	S4 uses session-owned bounded lease/copy
+process LDT/VdmTib publication	no API	refused	separate explicitly admitted DPMI/session design only
+NtVdmControl/VdmInstall hooks	no API	refused	monitor/VDD/debugger owner packages

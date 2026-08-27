@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2770 |
+| Documentation records | 2778 |
 | --- | --- |
-| Generated UTC | 2026-08-27T09:59:45Z |
+| Generated UTC | 2026-08-27T10:26:46Z |
 
 ## Entries
 
@@ -368,6 +368,9 @@ content-divergent entries.
 | etc/evidence/m0-t288-s4-softpc-sas-mechanics-001.md | indexed supporting material | 263b4432e897c7d3a9f3a4d665350e1d044e4541f01a25daa7e329950a28b6fb |
 | etc/evidence/m0-t288-s5-keyboard-ivt-lifecycle-001.md | indexed supporting material | 05fbf01ad6d23c95fc7b23e56689fcd09f970a883cd762793674b53e6fe8ccc5 |
 | etc/evidence/m0-t288-s6-monitor-keyboard-xms-matrix-001.md | indexed supporting material | 04e75e2fe6d9b4705059ac38cb02c6bc0e4431d4008484ab3b53619fb327fadb |
+| etc/evidence/m0-t289-s1-dpmi-admission-audit-001.md | indexed supporting material | 1f8870a6b44053632df0452fafbdeba01ab091de452daf22f32c3d83b8af8396 |
+| etc/evidence/m0-t289-s2-protected-machine-interface-audit-001.md | indexed supporting material | 1c0830c710ccfa15f04a62a7daa21adceeda1870174dffcd3cb596835ccc45b8 |
+| etc/evidence/m0-t289-s3-protected-machine-foundation-001.md | indexed supporting material | 0f6fced8982011810205a4467e715a22346f38014f103c1a750d0311a0c857bd |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -920,6 +923,11 @@ content-divergent entries.
 | etc/operations/m0-t288-s3-monitor-frame-recovery-ledger.tsv | indexed supporting material | 2fe5c53400bb3a0a676fc2b0cb227c28f8e17f60c9dc2a1dcd11336c0739156d |
 | etc/operations/m0-t288-s4-softpc-sas-disposition-ledger.tsv | indexed supporting material | de3d778036e7b61b2759127f01b52cdc5dd87f09cd9ffe84e5c5297d1aae072e |
 | etc/operations/m0-t288-s5-keyboard-ivt-lifecycle-ledger.tsv | indexed supporting material | fe65b310c8934fe97acec37266114a118b74870d1594c870017aa0a72553d77a |
+| etc/operations/m0-t289-dpmi-owner-package-recovery-plan-001.md | indexed supporting material | 524df7aaf534fdf66de24bf46e4e206b187926289aeea3428bfe3c0358e79cc1 |
+| etc/operations/m0-t289-s1-dpmi-source-abi-admission-ledger.tsv | indexed supporting material | 3594d0e20f3e90549e7980aeb5533423a07da1b5021137f77a5ba05a4f8e6c9a |
+| etc/operations/m0-t289-s1-protected-machine-interface-ledger.tsv | indexed supporting material | 666c31817de93b3f746a32708bec9b387f11103be0cb1c93fb18510d09d4f4ba |
+| etc/operations/m0-t289-s2-dpmi-pointer-frame-disposition.tsv | indexed supporting material | 8e7ea92776b1a8f8f88560db7cfb539bddeb31304ab2530b578ab0203e4ea908 |
+| etc/operations/m0-t289-s3-protected-machine-foundation-ledger.tsv | indexed supporting material | 295095f6a8d49bf2da827228c447623d69a856fad0bc2de418f2c02276675f16 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -2784,7 +2792,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 667b36228fb457f41847b164ff3b40676e3095bd69c16b37548313a0feea8380 |
+| STATUS.md | principal control document | 4f6277e039513252ea2af701061ab4125549452385f63f81a16f6a1ab7e86de5 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

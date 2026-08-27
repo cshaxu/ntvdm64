@@ -31,6 +31,69 @@ enum machine_facade_protected_range_status {
 };
 int machine_facade_execute_protected_range(uint32_t kind,
     uint32_t segment, uint32_t offset, uint32_t byte_count, uint8_t *bytes);
+
+/* Selector-blind protected-machine records.  They intentionally carry only
+ * copied architectural scalars.  They do not identify a DPMI service, an
+ * OpenNT provider, a guest object, or a Bochs object. */
+#define MACHINE_FACADE_PROTECTED_FRAME_VERSION 1u
+#define MACHINE_FACADE_PROTECTED_SEGMENT_VERSION 1u
+#define MACHINE_FACADE_PROTECTED_EFLAGS_WRITE_MASK 0x003f7fd5u
+
+enum machine_facade_execution_mode {
+    MACHINE_FACADE_EXECUTION_MODE_REAL = 1u,
+    MACHINE_FACADE_EXECUTION_MODE_PROTECTED = 2u,
+    MACHINE_FACADE_EXECUTION_MODE_V8086 = 3u
+};
+
+enum machine_facade_protected_frame_status {
+    MACHINE_FACADE_PROTECTED_FRAME_OK = 0,
+    MACHINE_FACADE_PROTECTED_FRAME_REJECTED_INPUT,
+    MACHINE_FACADE_PROTECTED_FRAME_REJECTED_MODE,
+    MACHINE_FACADE_PROTECTED_FRAME_REJECTED_STALE,
+    MACHINE_FACADE_PROTECTED_FRAME_REJECTED_CHANGE
+};
+
+/* The order of general registers is explicit instead of relying on Bochs'
+ * private register-index order.  A caller may only submit a candidate based
+ * on a freshly copied frame while adapter-bochs owns a returned CPU loop; it
+ * cannot alter CR0 or a segment selector. */
+struct machine_facade_protected_frame {
+    uint32_t abi_version;
+    uint32_t struct_bytes;
+    uint32_t execution_mode;
+    uint32_t cr0;
+    uint32_t eax, ebx, ecx, edx, esi, edi, ebp, esp;
+    uint32_t eip, eflags;
+    uint16_t cs, ds, es, ss, fs, gs;
+    uint32_t reserved0;
+};
+
+/* A copied active segment descriptor.  It is inspection-only in S3: LDT/IDT
+ * mutation remains a later, source-proven owner decision. */
+struct machine_facade_protected_segment {
+    uint32_t abi_version;
+    uint32_t struct_bytes;
+    uint32_t slot;
+    uint32_t base;
+    uint32_t limit;
+    uint32_t access;
+    uint16_t selector;
+    uint16_t reserved0;
+};
+
+void machine_facade_protected_frame_clear(
+    struct machine_facade_protected_frame *frame);
+int machine_facade_protected_frame_valid(
+    const struct machine_facade_protected_frame *frame);
+int machine_facade_copy_protected_frame(
+    struct machine_facade_protected_frame *frame);
+int machine_facade_commit_protected_frame(
+    const struct machine_facade_protected_frame *expected,
+    const struct machine_facade_protected_frame *candidate);
+int machine_facade_copy_protected_segment(uint32_t slot,
+    struct machine_facade_protected_segment *segment);
+int machine_facade_protected_span_transfer(uint32_t kind,
+    uint32_t segment, uint32_t offset, uint32_t byte_count, uint8_t *bytes);
 int machine_facade_machine_begin(uint64_t guest_bytes,
     uint64_t host_bytes);
 int machine_facade_machine_cleanup(void);

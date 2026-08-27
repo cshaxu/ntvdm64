@@ -26,6 +26,26 @@ only create, copied real-mode load, finite budget run, active query and
 destroy. A finite stop clears only the adapter-owned Bochs stop latch before
 the next run; it neither resets nor recreates CPU/RAM state.
 
+## M0 T289 S3 protected-machine foundation
+
+`machine_facade` additionally owns a selector-blind protected-machine record:
+an inspection-only copied frame, an active segment-descriptor snapshot, and a
+bounded protected-span transfer.  A candidate frame may change only copied
+GPRs, EIP and the native-supported FLAGS bits; it is accepted only after an
+exact comparison with the returned CPU-loop snapshot.  CR0, execution mode,
+LDT/IDT state and segment selectors are rejected.  This is a mechanical
+adapter contract, not a DPMI route or provider API.
+
+## M0 T289 S3 protected-machine foundation
+
+`machine_facade` additionally owns a selector-blind protected-machine record:
+an inspection-only copied frame, an active segment-descriptor snapshot, and a
+bounded protected-span transfer.  A candidate frame may change only copied
+GPRs, EIP and the native-supported FLAGS bits; it is accepted only after an
+exact comparison with the returned CPU-loop snapshot.  CR0, execution mode,
+LDT/IDT state and segment selectors are rejected.  This is a mechanical
+adapter contract, not a DPMI route or provider API.
+
 `machine_lifecycle.{cc,h}` is the reusable lower-level form of that same
 mechanical boundary. It owns one opaque native machine at a time and exposes
 only create, copied real-mode load, finite budget run, active query and

@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T289 S3 — DPMI selector-blind mechanical foundation.**
+**Active: M0 T289 S4 — DPMI initialization, descriptor and xmem composition.**
 
 T286 is closed. Its final Bochs-core minimization evidence is in
 [the closure record](history/m0-t286-closure-20260827.md). T287 admits the
@@ -10,25 +10,33 @@ queue-head original XMS owner package using a complete source-first plan.
 
 ## Active Packet
 
-### M0 T289 S3 — DPMI selector-blind mechanical foundation
+### M0 T289 S4 — DPMI initialization, descriptor and xmem composition
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T289 S3`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T288 is closed; this is the next dependency-ordered candidate in `QUEUE.md`. |
-| Objective | Implement and locally prove the minimum selector-blind typed protected-frame, span and descriptor/mode mechanics without enabling any DPMI source body or selector. |
-| Non-goals | No `53:xx` route, protected-mode transition, LDT/IDT mutation, CPU-frame ABI, second executor, raw VDM_TIB pointer, new mapping manager or `src.old` use. |
+| Identifier Mode | `M0 T289 S4`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S3 is complete with a selector-blind x86/x64 mechanical foundation. |
+| Objective | Compose original DPMI initialization, descriptor and xmem source groups through the admitted interfaces and session-owned resource identities. |
+| Non-goals | No `53:xx` route, DOSX host link, raw pointer, host LDT, LDT/IDT mutation, protected-mode transition provider, second executor, new mapping manager or `src.old` use. |
 | Reference Baseline | [Wave 6](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-6-dpmi), `bop-list.md`, source policy and mapping-manager rule. |
 | Files And ABI Surface | Exact `mvdm-host/{dpmi,dpmi32}` sources, DOSX artifacts, `adapter-mvdm-host-out`, `adapter-bochs`, session and the BOP/dependency tracker. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Complete source/path/hash inventory, 25-row BOP-to-owner audit, interface/owner/failure ledger, documentation governance and `git diff --check`. |
-| Expected Markers | No direct Bochs dependency enters an OpenNT mirror; no LDT/IDT/CPU executor or mapping manager is introduced. |
+| Verification | Source identity before/after ledger, same-shaped binding matrix, original-body local cases on x86/x64, documentation governance and `git diff --check`. |
+| Expected Markers | Original bodies retain their source order; no direct Bochs dependency enters an OpenNT mirror; no LDT/IDT/CPU executor or mapping manager is introduced. |
 | Asset Needs | Canonical MVDM roots, current adapter inventory, session mapping rule and Bochs mechanical surface. |
-| Reporting Requirements | Package input ledger, selected source/facade matrix, all unavailable status paths, focused x86/x64 result and every excluded machine mechanism. |
-| Stop Conditions | A source body needs a semantic rewrite, direct Bochs call or new mapper is proposed, a second CPU/product shell is selected, or a non-direct carrier is silently linked. |
-| Exit Criteria | Atomic copied frame, bounded protected spans and minimum descriptor/mode operations have x86/x64 mechanical proof; no DPMI provider is compiled or routed. |
+| Reporting Requirements | Original-source identity, every binding/exception, x86/x64 result and each deliberately unavailable descriptor/memory branch. |
+| Stop Conditions | A source body needs a semantic rewrite, direct Bochs call, raw pointer, host LDT or new mapper is proposed, a second CPU/product shell is selected, or a non-direct carrier is silently linked. |
+| Exit Criteria | Admitted original initialization/descriptor/xmem bodies compile and their local source-defined failure outcomes are proven; no BOP ingress is enabled. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
 | Similar-Issue Sweep | DOSX artifacts, dpmi32 source groups, selector table/memory/stack/interrupt/fault forms, host pointers, Win32 imports, Bochs-facing calls, session leases and x86/x64 ABI forms. |
+
+**T289 S3 closure:** `adapter-bochs` now exposes a selector-blind copied
+protected-frame, copied active-segment inspection and checked protected-span
+contract.  A frame commit is comparison-guarded, only changes GPR/EIP/native
+FLAGS while the CPU loop is returned, and rejects CR0/mode/segment changes.
+Formal x86 and x64 Ninja fixtures execute a real-to-protected transition and
+prove valid commit, stale rejection and no-mutation invalid change rejection;
+no DPMI source or `53:xx` route was selected. See [S3 evidence](etc/evidence/m0-t289-s3-protected-machine-foundation-001.md) and [ledger](etc/operations/m0-t289-s3-protected-machine-foundation-ledger.tsv).
 
 **T288 S1 closure:** the reproducible union ledger records 78 selected source
 files, all exact in both canonical OpenNT roots. It identifies the seven exact

@@ -5,7 +5,12 @@
 #include "machine_facade.h"
 #include "minimal_machine.h"
 
+#include <string.h>
+
 static adapter_bochs_minimal_machine_c *machine_facade_machine;
+/* A copied-frame commit is legal only while adapter-bochs owns a returned
+ * CPU loop.  This is lifecycle state, not a guest/VDM scheduler. */
+static int machine_facade_cpu_paused;
 
 extern "C" int machine_facade_bind_opaque_callback(
   machine_facade_opaque_callback callback, void *context)
@@ -85,6 +90,131 @@ extern "C" int machine_facade_execute_protected_range(uint32_t kind,
   return MACHINE_FACADE_PROTECTED_RANGE_OK;
 }
 
+extern "C" void machine_facade_protected_frame_clear(
+  struct machine_facade_protected_frame *frame)
+{
+  if (frame == 0) return;
+  memset(frame, 0, sizeof(*frame));
+  frame->abi_version = MACHINE_FACADE_PROTECTED_FRAME_VERSION;
+  frame->struct_bytes = sizeof(*frame);
+}
+
+extern "C" int machine_facade_protected_frame_valid(
+  const struct machine_facade_protected_frame *frame)
+{
+  return frame != 0 &&
+    frame->abi_version == MACHINE_FACADE_PROTECTED_FRAME_VERSION &&
+    frame->struct_bytes == sizeof(*frame) &&
+    frame->execution_mode == MACHINE_FACADE_EXECUTION_MODE_PROTECTED &&
+    (frame->cr0 & 1u) != 0u && (frame->cr0 & 0x80000000u) == 0u &&
+    frame->reserved0 == 0u;
+}
+
+static void machine_facade_copy_protected_frame_current(
+  struct machine_facade_protected_frame *frame)
+{
+  machine_facade_protected_frame_clear(frame);
+  frame->execution_mode = MACHINE_FACADE_EXECUTION_MODE_PROTECTED;
+  frame->cr0 = bx_cpu.read_CR0();
+  frame->eax = bx_cpu.get_reg32(BX_32BIT_REG_EAX);
+  frame->ebx = bx_cpu.get_reg32(BX_32BIT_REG_EBX);
+  frame->ecx = bx_cpu.get_reg32(BX_32BIT_REG_ECX);
+  frame->edx = bx_cpu.get_reg32(BX_32BIT_REG_EDX);
+  frame->esi = bx_cpu.get_reg32(BX_32BIT_REG_ESI);
+  frame->edi = bx_cpu.get_reg32(BX_32BIT_REG_EDI);
+  frame->ebp = bx_cpu.get_reg32(BX_32BIT_REG_EBP);
+  frame->esp = bx_cpu.get_reg32(BX_32BIT_REG_ESP);
+  frame->eip = bx_cpu.get_eip();
+  frame->eflags = bx_cpu.read_eflags();
+  frame->cs = bx_cpu.sregs[BX_SEG_REG_CS].selector.value;
+  frame->ds = bx_cpu.sregs[BX_SEG_REG_DS].selector.value;
+  frame->es = bx_cpu.sregs[BX_SEG_REG_ES].selector.value;
+  frame->ss = bx_cpu.sregs[BX_SEG_REG_SS].selector.value;
+  frame->fs = bx_cpu.sregs[BX_SEG_REG_FS].selector.value;
+  frame->gs = bx_cpu.sregs[BX_SEG_REG_GS].selector.value;
+}
+
+extern "C" int machine_facade_copy_protected_frame(
+  struct machine_facade_protected_frame *frame)
+{
+  if (machine_facade_machine == 0 || frame == 0 || !bx_cpu.protected_mode() ||
+      bx_cpu.v8086_mode() || (bx_cpu.read_CR0() & 0x80000000u) != 0u)
+    return MACHINE_FACADE_PROTECTED_FRAME_REJECTED_MODE;
+  machine_facade_copy_protected_frame_current(frame);
+  return MACHINE_FACADE_PROTECTED_FRAME_OK;
+}
+
+extern "C" int machine_facade_commit_protected_frame(
+  const struct machine_facade_protected_frame *expected,
+  const struct machine_facade_protected_frame *candidate)
+{
+  struct machine_facade_protected_frame current;
+  uint32_t eflags_changed;
+  if (!machine_facade_cpu_paused ||
+      !machine_facade_protected_frame_valid(expected) ||
+      !machine_facade_protected_frame_valid(candidate))
+    return MACHINE_FACADE_PROTECTED_FRAME_REJECTED_INPUT;
+  if (machine_facade_copy_protected_frame(&current) !=
+      MACHINE_FACADE_PROTECTED_FRAME_OK)
+    return MACHINE_FACADE_PROTECTED_FRAME_REJECTED_MODE;
+  if (memcmp(&current, expected, sizeof(current)) != 0)
+    return MACHINE_FACADE_PROTECTED_FRAME_REJECTED_STALE;
+  if (candidate->execution_mode != expected->execution_mode ||
+      candidate->cr0 != expected->cr0 || candidate->cs != expected->cs ||
+      candidate->ds != expected->ds || candidate->es != expected->es ||
+      candidate->ss != expected->ss || candidate->fs != expected->fs ||
+      candidate->gs != expected->gs ||
+      ((candidate->eflags ^ expected->eflags) &
+        ~MACHINE_FACADE_PROTECTED_EFLAGS_WRITE_MASK) != 0u)
+    return MACHINE_FACADE_PROTECTED_FRAME_REJECTED_CHANGE;
+
+  /* All validation precedes the first CPU mutation.  The admitted S3 delta
+   * deliberately excludes descriptors, CR0 and segment selectors. */
+  bx_cpu.set_reg32(BX_32BIT_REG_EAX, candidate->eax);
+  bx_cpu.set_reg32(BX_32BIT_REG_EBX, candidate->ebx);
+  bx_cpu.set_reg32(BX_32BIT_REG_ECX, candidate->ecx);
+  bx_cpu.set_reg32(BX_32BIT_REG_EDX, candidate->edx);
+  bx_cpu.set_reg32(BX_32BIT_REG_ESI, candidate->esi);
+  bx_cpu.set_reg32(BX_32BIT_REG_EDI, candidate->edi);
+  bx_cpu.set_reg32(BX_32BIT_REG_EBP, candidate->ebp);
+  bx_cpu.set_reg32(BX_32BIT_REG_ESP, candidate->esp);
+  eflags_changed = (candidate->eflags ^ expected->eflags) &
+    MACHINE_FACADE_PROTECTED_EFLAGS_WRITE_MASK;
+  if (eflags_changed != 0u)
+    bx_cpu.writeEFlags(candidate->eflags, eflags_changed);
+  bx_cpu.gen_reg[BX_32BIT_REG_EIP].dword.erx = candidate->eip;
+  return MACHINE_FACADE_PROTECTED_FRAME_OK;
+}
+
+extern "C" int machine_facade_copy_protected_segment(uint32_t slot,
+  struct machine_facade_protected_segment *segment)
+{
+  bx_segment_reg_t const *source;
+  if (machine_facade_machine == 0 || segment == 0 || slot >= 6u ||
+      !bx_cpu.protected_mode() || bx_cpu.v8086_mode() ||
+      (bx_cpu.read_CR0() & 0x80000000u) != 0u)
+    return MACHINE_FACADE_PROTECTED_FRAME_REJECTED_MODE;
+  source = &bx_cpu.sregs[slot];
+  memset(segment, 0, sizeof(*segment));
+  segment->abi_version = MACHINE_FACADE_PROTECTED_SEGMENT_VERSION;
+  segment->struct_bytes = sizeof(*segment);
+  segment->slot = slot;
+  segment->base = (uint32_t)source->cache.u.segment.base;
+  segment->limit = source->cache.u.segment.limit_scaled;
+  segment->access = ((uint32_t)source->cache.valid << 24) |
+    ((uint32_t)source->cache.p << 16) | ((uint32_t)source->cache.dpl << 8) |
+    (uint32_t)source->cache.type;
+  segment->selector = source->selector.value;
+  return MACHINE_FACADE_PROTECTED_FRAME_OK;
+}
+
+extern "C" int machine_facade_protected_span_transfer(uint32_t kind,
+  uint32_t segment, uint32_t offset, uint32_t byte_count, uint8_t *bytes)
+{
+  return machine_facade_execute_protected_range(kind, segment, offset,
+    byte_count, bytes);
+}
+
 extern "C" int machine_facade_machine_begin(uint64_t guest_bytes,
   uint64_t host_bytes)
 {
@@ -97,6 +227,7 @@ extern "C" int machine_facade_machine_begin(uint64_t guest_bytes,
     machine_facade_machine = 0;
     return 0;
   }
+  machine_facade_cpu_paused = 1;
   return 1;
 }
 
@@ -104,6 +235,7 @@ extern "C" int machine_facade_machine_cleanup(void)
 {
   adapter_bochs_minimal_machine_c *machine = machine_facade_machine;
   machine_facade_machine = 0;
+  machine_facade_cpu_paused = 0;
   if (machine == 0) return 1;
   if (machine->cleanup() != BX_MACHINE_MINIMAL_MACHINE_OK) {
     delete machine;
@@ -309,12 +441,15 @@ extern "C" int machine_facade_prepare_cpu_resume(void)
   /* The finite-run timer is adapter-owned.  CPU event handling clears the
    * asynchronous indication after this stop latch is released. */
   bx_pc_system.kill_bochs_request = 0;
+  machine_facade_cpu_paused = 0;
   return 1;
 }
 
 extern "C" void machine_facade_cpu_loop(void)
 {
+  machine_facade_cpu_paused = 0;
   bx_cpu.cpu_loop();
+  machine_facade_cpu_paused = 1;
 }
 
 extern "C" int machine_facade_register_timer(void *opaque,
