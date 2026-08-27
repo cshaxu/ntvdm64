@@ -44,6 +44,13 @@ uint16_t getSI(void)
     return value;
 }
 
+uint16_t getCS(void)
+{
+    uint16_t value = 0u;
+    (void)machine_facade_copy_cs16(&value);
+    return value;
+}
+
 uint16_t getDS(void)
 {
     uint16_t value = 0u;

@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T287 S5 — XMS UMB and IVT/INT15 source-family binding.**
+**Active: M0 T287 S6 — XMS dispatcher and complete local family regression.**
 
 T286 is closed. Its final Bochs-core minimization evidence is in
 [the closure record](history/m0-t286-closure-20260827.md). T287 admits the
@@ -10,25 +10,25 @@ queue-head original XMS owner package using a complete source-first plan.
 
 ## Active Packet
 
-### M0 T287 S5 — XMS UMB and IVT/INT15 source-family binding
+### M0 T287 S6 — XMS dispatcher and complete local family regression
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T287 S5`, Ordinary Mode with single-person dual-role implementation and review. |
+| Identifier Mode | `M0 T287 S6`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Queue order after closed T286; owner direction is continuous single-person dual-role execution in queue order. |
-| Objective | Close original `xmsumb.c` and `xmsmisc.c` UMB/IVT/INT15 source families with explicit source-shaped success/failure dispositions, without introducing DOS/UMB policy below their owner. |
-| Non-goals | No `52:xx` ingress route, new UMB policy in Bochs, generic guest pointer, host-pointer conversion, new mapping manager, or `src.old` use. |
-| Reference Baseline | [T287 plan](etc/operations/m0-t287-xms-owner-package-recovery-plan-001.md), [S1--S4 evidence](etc/evidence/m0-t287-s4-xms-block-binding-001.md), source policy and mapping-manager rule. |
-| Files And ABI Surface | `mvdm-host/xms.486/xmsumb.c`, `xmsmisc.c`, historical Reserve/Release UMB and IVT/INT15 interface forms, session bounded leases and typed adapter-bochs range/interrupt mechanics. |
+| Objective | Compose the original XMS dispatcher with the complete locally admitted family matrix and prove every `52:00..0B` has one original body or source-proven unavailable disposition. |
+| Non-goals | No external BOP ingress enablement, successful UMB span before its monitor owner, keyboard-controller product shell, generic guest pointer, host-pointer conversion, new mapping manager, or `src.old` use. |
+| Reference Baseline | [T287 plan](etc/operations/m0-t287-xms-owner-package-recovery-plan-001.md), [S5 evidence](etc/evidence/m0-t287-s5-xms-umb-ivt-binding-001.md), source policy and mapping-manager rule. |
+| Files And ABI Surface | `mvdm-host/xms.486/xmsdisp.c`, all `xms.486` service bodies and their existing same-shaped SoftPC/session bindings. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Focused x86/x64 UMB/IVT source-family fixtures for no-UMB failures and any admitted success, plus documentation governance and `git diff --check`. |
-| Expected Markers | Original source retains its UMB/INT15 flow; successful physical spans are selected only outside adapter-bochs and every unavailable branch is source-proven. |
-| Asset Needs | S1--S4 evidence, exact XMS source, existing A20 binding, session leases, and an owner disposition for ReserveUMB/ReleaseUMB/IVT. |
-| Reporting Requirements | Per-source function disposition, exact failure/result registers, positive/negative x86/x64 results and any transferred machine prerequisite. |
-| Stop Conditions | UMB/DOS/XMS policy in adapter-bochs/Bochs, an unregistered direct pointer, selector route, or invented success path. |
-| Exit Criteria | `xmsumb.c` and `xmsmisc.c` have complete source-family dispositions and local x86/x64 proof; unresolved physical machinery transfers by named owner. |
+| Verification | Focused x86/x64 dispatcher/matrix fixture covering all locally admitted direct paths and each unavailable outcome, plus documentation governance and `git diff --check`. |
+| Expected Markers | Original service-table order remains intact; every source body has one owner/disposition; unavailable owner transfers cannot accidentally report success. |
+| Asset Needs | S1--S5 evidence, exact XMS dispatcher and all previously built source-family bindings. |
+| Reporting Requirements | Per-service source body/disposition, x86/x64 result evidence, and a precise list of pending monitor/firmware prerequisites. |
+| Stop Conditions | Per-trace service implementation, UMB/XMS policy in adapter-bochs/Bochs, an unregistered direct pointer, selector ingress, or invented success path. |
+| Exit Criteria | Every `52:00..0B` has one original source path or source-proven unavailable disposition with local x86/x64 matrix evidence. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | Every UMB reservation/release/result, IVT/INT15 read/write, A20 interaction, guest lease, and source-defined unavailable branch. |
+| Similar-Issue Sweep | Every dispatcher table entry, result register, bounded lease, allocator state, A20 result, UMB/IVT transfer, and source-defined unavailable branch. |
 
 **T287 S1 closure:** all 15 physical `mvdm-host/xms.486` paths hash-match
 both canonical OpenNT roots (0 mismatches).  The final per-file SHA-256
@@ -58,6 +58,14 @@ only material source divergence is the matching private bounded-lease overlay
 for the source `SS:BP-12` move structure. Formal fixtures cover allocation,
 move, malformed input, reallocation/free and capacity/range failures; see
 [S4 evidence](etc/evidence/m0-t287-s4-xms-block-binding-001.md).
+
+**T287 S5 closure:** original `xmsumb.c` and `xmsmisc.c` now compile and run
+locally on x86/x64. The original empty-physical-span `B1`/`B2` outcomes,
+page-size/ext-memory results, and `UpdateKbdInt15(CS,AX)` then `CX` ordering
+are proven without enabling a selector route or test-only success policy.
+Successful UMB ownership transfers to the queued monitor substrate, and the
+real keyboard IVT state algorithm transfers to its existing firmware plan;
+see [S5 evidence](etc/evidence/m0-t287-s5-xms-umb-ivt-binding-001.md).
 
 **T286 S1 closure:** the complete [divergence disposition ledger](etc/operations/m0-t286-s1-bochs-core-divergence-disposition-ledger-001.md) measures 29 differing upstream-relative mirror files (431 additions / 353 deletions) and 15 private overlay bodies (1,164 lines). It classifies all groups as build bindings, required private CPU/memory/device hooks, optional diagnostics, or B2/D4 external-composition candidates. No source behavior changed.
 

@@ -199,6 +199,13 @@ extern "C" int machine_facade_copy_bp16(uint16_t *value)
   return 1;
 }
 
+extern "C" int machine_facade_copy_cs16(uint16_t *value)
+{
+  if (machine_facade_machine == 0 || value == 0) return 0;
+  *value = bx_cpu.sregs[BX_SEG_REG_CS].selector.value;
+  return 1;
+}
+
 extern "C" int machine_facade_copy_ss16(uint16_t *value)
 {
   if (machine_facade_machine == 0 || value == 0) return 0;

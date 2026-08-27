@@ -15,6 +15,7 @@ uint16_t getBX(void);
 uint16_t getDX(void);
 uint16_t getBP(void);
 uint16_t getSI(void);
+uint16_t getCS(void);
 uint16_t getDS(void);
 uint16_t getES(void);
 uint16_t getSS(void);

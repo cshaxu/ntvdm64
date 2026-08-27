@@ -49,6 +49,7 @@ int machine_facade_copy_bx16(uint16_t *value);
 int machine_facade_copy_cx16(uint16_t *value);
 int machine_facade_copy_dx16(uint16_t *value);
 int machine_facade_copy_bp16(uint16_t *value);
+int machine_facade_copy_cs16(uint16_t *value);
 int machine_facade_copy_ss16(uint16_t *value);
 int machine_facade_copy_si16(uint16_t *value);
 int machine_facade_copy_ds16(uint16_t *value);
