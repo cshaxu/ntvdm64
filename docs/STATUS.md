@@ -2,38 +2,40 @@
 
 ## Current Work
 
-**Active: M0 T286 S4 — CPU observer retirement and private-hook minimization.**
+**Active: M0 T286 S5 — minimal memory and checked-RAM boundary review.**
 
 T285 is closed as a duplicate-route withdrawal. T286 begins the queue's
 Bochs-core minimization package before XMS or other BOP-owner recovery.
 
 ## Active Packet
 
-### M0 T286 S4 — CPU observer retirement and private-hook minimization
+### M0 T286 S5 — minimal memory and checked-RAM boundary review
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T286 S4`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T286 S1 identifies C3--C5 default-off observer groups with no named product consumer; C1--C2 remain separately required CPU mechanics. |
-| Objective | Delete unconsumed segment-access, instruction-history, software-interrupt, physical-write and interrupt-return observer bodies and their mirror hooks; retain only the fixed-width #UD callback and real/V86 compatibility profile mechanics. |
-| Non-goals | No new diagnostics, trace capability, BOP decoding, CPU instruction semantic change, callback ABI expansion, or `src.old` use. |
-| Reference Baseline | T286 S1 ledger; observer overlays and call-site diffs; current adapter opaque callback binding; pinned CPU/memory paths and existing fixtures. |
-| Files And ABI Surface | Affected `bochs-core/cpu` and `memory` hook call sites, observer overlay files/gates, `cpu/opaque_callback` and #UD/profile code only. |
+| Identifier Mode | `M0 T286 S5`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T286 S1 classifies M1/M2 as remaining private Bochs memory mechanics after S4 retired all unconsumed observers. |
+| Objective | Re-evaluate SIM-free memory initialization and checked ordinary/backing RAM operations; move only configuration/lifecycle decisions outward and retain a minimum private member boundary. |
+| Non-goals | No XMS/UMB/DOS policy, guest allocator, BOP behavior, new RAM feature, public overlay ABI, or `src.old` use. |
+| Reference Baseline | T286 S1 ledger; pinned `memory/{memory.h,misc_mem.cc}`, current `minimal_memory.cc`/`checked_ram.cc`, adapter machine assembly and memory fixtures. |
+| Files And ABI Surface | `bochs-core/memory/{memory.h,misc_mem.cc}`, private memory overlay files, adapter machine facade/lifecycle, manifest and focused memory fixtures. |
 | Applicable Rules | Architecture, coding, execution, source policy, build hygiene and mirror/overlay rules. |
-| Verification | Source/call denominator scan, no remaining observer declaration/call/body scan, #UD callback preservation scan, focused formal build where manifest permits, documentation governance and `git diff --check`. |
-| Expected Markers | C3--C5 files and hooks are absent; no default-off observer gate remains; #UD opaque callback/profile mechanisms retain their existing consumers. |
-| Asset Needs | Pinned sources, current observer overlays/call sites, current build manifest and CPU boundary fixtures. |
-| Reporting Requirements | Removed body/call list, deleted lines/files, retained #UD/profile boundary, failed/blocked verification and updated divergence totals. |
-| Stop Conditions | A current admitted product consumer for an observer is discovered, a removal changes instruction execution rather than an observation side effect, or deletion crosses a private overlay boundary. |
-| Exit Criteria | All unconsumed C3--C5 observation code and mirror hooks are removed, no generic observer infrastructure remains, and retained C1/C2 mechanics are isolated. |
+| Verification | Pinned-source/body comparison, private member-access review, adapter-only configuration scan, focused checked-RAM/memory fixture where graph permits, documentation governance and `git diff --check`. |
+| Expected Markers | Each remaining memory line is either a minimal core declaration/call, a private state body or an adapter-owned configuration decision; no MVDM/XMS vocabulary crosses the boundary. |
+| Asset Needs | Pinned memory sources, overlays, adapter lifecycle/facade and focused fixtures. |
+| Reporting Requirements | Upstream body/function, private state accessed, externalizable decision, final disposition, diff/overlay change and verification. |
+| Stop Conditions | Any proposal introduces address mapping, allocation/UMB semantics, guest policy or a raw private-memory object outside the Bochs boundary. |
+| Exit Criteria | M1/M2 receive a final minimal disposition; any safe externalization is implemented; remaining private RAM bodies are registered for S6 verification. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | All observation gates, copied event record declarations, callback invokes, default-off macros, formal diagnostic switches and instruction/memory call sites. |
+| Similar-Issue Sweep | SIM parameter accesses, allocation/configuration decisions, RAM copy/range validation, direct private-memory access, adapter facade calls and memory test inputs. |
 
 **T286 S1 closure:** the complete [divergence disposition ledger](etc/operations/m0-t286-s1-bochs-core-divergence-disposition-ledger-001.md) measures 29 differing upstream-relative mirror files (431 additions / 353 deletions) and 15 private overlay bodies (1,164 lines). It classifies all groups as build bindings, required private CPU/memory/device hooks, optional diagnostics, or B2/D4 external-composition candidates. No source behavior changed.
 
 **T286 S2 closure:** CPU5 and host-pointer-width macros remain necessary generated Bochs configuration differences. Finite `bx_pc_system_c::Reset/exit` bodies require private Bochs state, so `minimal_product_shell.cc` moved from `adapter-bochs` to the matching private `bochs-core-overlay/pc_system_lifecycle.cc`; the mirror retains only its registered whole-method crop. The formal manifest's retired `session_input`/`session_cancellation` entries were also replaced by the actual neutral session sources before verification. The next stale pre-rebootstrap manifest input prevented graph generation; its exact limitation is recorded in the [S2 evidence](etc/evidence/m0-t286-s2-product-shell-overlay-001.md). No lifecycle semantics changed.
 
 **T286 S3 closure:** all minimal port-space, PIC and headless-8042 bodies are confirmed private Bochs-state mechanics with no safe upstream no-product alternative or duplicate adapter lifecycle. The [S3 review](etc/evidence/m0-t286-s3-device-lifecycle-review-001.md) retains D1--D3 unchanged and transfers the only safe reduction opportunity to unconsumed CPU observers.
+
+**T286 S4 closure:** six unconsumed default-off observer/gate files, every mirror call/declaration and all formal diagnostic switches are deleted. The [S4 evidence](etc/evidence/m0-t286-s4-observer-retirement-001.md) records the retained #UD/profile boundary and post-removal totals: 29 core diffs (393 additions / 356 deletions) and nine overlay bodies (978 lines). Full graph generation remains independently blocked by stale manifest roots.
 
 **T285 S1 closure:** `New-T285S1Wave2CurrentWorkset.ps1` revalidated all 81
 selected current mirror paths (22 DEM + 59 host-control), recorded their

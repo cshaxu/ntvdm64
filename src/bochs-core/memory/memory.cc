@@ -24,7 +24,6 @@
 #include "cpu/cpu.h"
 #include "iodev/iodev.h"
 #define LOG_THIS BX_MEM_THIS
-/* DIVERGENCE(BX-CORE-DIV-003): retained default-off copied physical-write observation. */
 
 //
 // Memory map inside the 1st megabyte:
@@ -36,8 +35,6 @@
 // 0xe0000 - 0xeffff    Lower BIOS Area (64K)
 // 0xf0000 - 0xfffff    Upper BIOS Area (64K)
 //
-
-#include "bochs-core-overlay/cpu/observation_gates.h"
 
 void BX_MEM_C::writePhysicalPage(BX_CPU_C *cpu, bx_phy_address addr, unsigned len, void *data)
 {
@@ -60,7 +57,6 @@ void BX_MEM_C::writePhysicalPage(BX_CPU_C *cpu, bx_phy_address addr, unsigned le
 #endif
 
   if (cpu != NULL) {
-    RUNTIME_OBSERVE_PHYSICAL_WRITE(cpu, a20addr, len, data);
 #if BX_SUPPORT_IODEBUG
     bx_devices.pluginIODebug->mem_write(cpu, a20addr, len, data);
 #endif

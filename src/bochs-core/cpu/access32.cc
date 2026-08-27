@@ -25,9 +25,7 @@
 #include "bochs.h"
 #include "cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
-/* DIVERGENCE(BX-CORE-DIV-001,BX-CORE-DIV-002): retained segment profile and default-off observation guards. */
-
-#include "bochs-core-overlay/cpu/observation_gates.h"
+/* DIVERGENCE(BX-CORE-DIV-001): retained segment profile guards. */
 
   void BX_CPP_AttrRegparmN(3)
 BX_CPU_C::write_virtual_byte_32(unsigned s, Bit32u offset, Bit8u data)
@@ -549,13 +547,11 @@ accessOK:
     }
     else {
       BX_ERROR(("read_virtual_word_32(): segment limit violation"));
-      RUNTIME_RECORD_SEGMENT_ACCESS(s, seg, offset, 1u);
       exception(int_number(s), 0);
     }
   }
 
   if (!read_virtual_checks(seg, offset, 2)) {
-    RUNTIME_RECORD_SEGMENT_ACCESS(s, seg, offset, 2u);
     exception(int_number(s), 0);
   }
   goto accessOK;

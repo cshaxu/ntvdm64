@@ -22,8 +22,8 @@
 #ifndef BX_CPU_H
 #  define BX_CPU_H 1
 
-/* DIVERGENCE(BX-CORE-DIV-001,BX-CORE-DIV-003,BX-EXEC-016): retained profile,
- * observation and typed mechanical-entry declarations. */
+/* DIVERGENCE(BX-CORE-DIV-001,BX-EXEC-016): retained profile and typed
+ * mechanical-entry declarations. */
 
 /* DIVERGENCE(BX-UD-002): selector-blind fixed-width callback shape.  The
  * registered state and all record handling remain private to the overlay. */
@@ -31,8 +31,6 @@ typedef int (*bx_cpu_opaque_callback_t)(void *context, const void *event,
   unsigned event_bytes, void *outcome, unsigned outcome_bytes);
 
 #include <setjmp.h>
-
-#include "bochs-core-overlay/cpu/observation_gates.h"
 
 // <TAG-DEFINES-DECODE-START>
 // segment register encoding
@@ -534,7 +532,6 @@ BOCHSAPI extern BX_CPU_C   bx_cpu;
 #define BX_NOTIFY_LIN_MEMORY_ACCESS(laddr, paddr, size, pl, rw, dataptr) {              \
   BX_INSTR_LIN_ACCESS(BX_CPU_ID, (laddr), (paddr), (size), (rw));                       \
   BX_DBG_LIN_MEMORY_ACCESS(BX_CPU_ID, (laddr), (paddr), (size), (pl), (rw), (dataptr)); \
-  RUNTIME_OBSERVE_LIN_MEMORY_WRITE((paddr), (size), (rw), (dataptr));                  \
 }
 
 #define BX_NOTIFY_PHY_MEMORY_ACCESS(paddr, size, rw, why, dataptr) {            \
@@ -924,16 +921,7 @@ public: // for now...
     void *context);
   void overlay_unbind_opaque_callback(void);
 
-  void overlay_observe_segment_access(unsigned segment_index,
-    const bx_segment_reg_t *segment, Bit32u offset, Bit32u branch_kind);
-
   unsigned bx_cpuid;
-  void overlay_observe_interrupt_return(unsigned width);
-  void overlay_observe_software_interrupt(unsigned vector);
-  void overlay_observe_instruction_history(void);
-  void overlay_observe_physical_write(Bit64u address, unsigned count,
-    const void *bytes);
-
 #if BX_CPU_LEVEL >= 4
   bx_cpuid_t *cpuid;
 #endif

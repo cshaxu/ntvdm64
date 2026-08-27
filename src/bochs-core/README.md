@@ -53,10 +53,6 @@ declarations or minimal call sites.
   `icache.cc`, `init.cc`, `io.cc`, `stack.cc`, `string.cc`.
 - `BX-UD-001` and `BX-UD-002` — a selector-blind opaque event hook is private
   overlay code. Files: `cpu/cpu.cc`, `cpu/cpu.h`, `cpu/exception.cc`.
-- `BX-CORE-DIV-002`, `BX-CORE-DIV-003`, `BX-CORE-DIV-004` — optional copied
-  observations are private; the mirror keeps default-off call sites. Files:
-  `cpu/access32.cc`, `cpu/cpu.cc`, `cpu/cpu.h`, `cpu/ctrl_xfer16.cc`,
-  `cpu/ctrl_xfer32.cc`, `cpu/instr.h`, `cpu/soft_int.cc`, `memory/memory.cc`.
 - `BX-IO-025`, `BX-IO-029`, `BX-IO-030`, `BX-MACH-024`, `BX-MACH-025`,
   `BX-MACH-082` — full device/plugin composition is reduced to private minimal
   port-space/PIC lifecycle bodies. Files: `iodev/devices.cc`, `iodev/iodev.h`,

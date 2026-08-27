@@ -3,12 +3,7 @@ param(
     [Parameter(Mandatory = $true)][string]$RepositoryRoot,
     [Parameter(Mandatory = $true)][string]$BuildRoot,
     [string]$ManifestPath = '',
-    [switch]$Refresh,
-    [switch]$InstructionHistoryDiagnostic,
-    [switch]$InstructionHistoryProvenanceDiagnostic,
-    [switch]$SoftwareInterruptDiagnostic,
-    [switch]$InterruptReturnDiagnostic,
-    [switch]$PhysicalWriteDiagnostic
+    [switch]$Refresh
 )
 
 Set-StrictMode -Version Latest
@@ -120,23 +115,7 @@ $environment = Join-Path $build 'msvc-x64-mt.cmd'
 $manifestHash = Get-FileSha256 $manifestPath
 $configHash = Get-FileSha256 $config
 $toolchainHash = Get-TextSha256 (($compiler | Out-String).Trim())
-$diagnosticDefineParts = [Collections.Generic.List[string]]::new()
-if ($InstructionHistoryDiagnostic -or $InstructionHistoryProvenanceDiagnostic) {
-    $diagnosticDefineParts.Add('/DRUNTIME_ENABLE_MACHINE_INSTRUCTION_HISTORY=1')
-}
-if ($InstructionHistoryProvenanceDiagnostic) {
-    $diagnosticDefineParts.Add('/DRUNTIME_ENABLE_MACHINE_INSTRUCTION_HISTORY_PROVENANCE=1')
-}
-if ($SoftwareInterruptDiagnostic) {
-    $diagnosticDefineParts.Add('/DRUNTIME_ENABLE_MACHINE_SOFTWARE_INTERRUPT_OBSERVATION=1')
-}
-if ($InterruptReturnDiagnostic) {
-    $diagnosticDefineParts.Add('/DRUNTIME_ENABLE_MACHINE_INTERRUPT_RETURN_OBSERVATION=1')
-}
-if ($PhysicalWriteDiagnostic) {
-    $diagnosticDefineParts.Add('/DRUNTIME_ENABLE_MACHINE_PHYSICAL_WRITE_OBSERVATION=1')
-}
-$diagnosticDefines = $diagnosticDefineParts -join ' '
+$diagnosticDefines = ''
 $buildManifest = [ordered]@{
     schema = 'runner.t260.s8.ninja-component-graph.v1'
     sourceManifest = $manifestPath.Substring($root.Length + 1).Replace('\','/')

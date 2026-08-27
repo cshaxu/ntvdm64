@@ -24,16 +24,11 @@
 #ifndef BX_INSTR_H
 #define BX_INSTR_H
 
-/* DIVERGENCE(BX-CORE-DIV-003): retained default-off instruction-history
- * observation is mechanically copied and does not alter instruction decode. */
-
 class bxInstruction_c;
 
 typedef void BX_INSF_TYPE;
 
 #if BX_SUPPORT_HANDLERS_CHAINING_SPEEDUPS
-
-#include "bochs-core-overlay/cpu/observation_gates.h"
 
 #define BX_SYNC_TIME_IF_SINGLE_PROCESSOR(allowed_delta) {                     \
   if (BX_SMP_PROCESSORS == 1) {                                               \
@@ -52,7 +47,6 @@ typedef void BX_INSF_TYPE;
 }
 
 #define BX_EXECUTE_INSTRUCTION(i) {                    \
-  RUNTIME_RECORD_INSTRUCTION_HISTORY();                \
   BX_INSTR_BEFORE_EXECUTION(BX_CPU_ID, (i));           \
   BX_CPU_THIS_PTR advance_ip((i)->ilen());              \
   return BX_CPU_CALL_METHOD(i->execute, (i));          \

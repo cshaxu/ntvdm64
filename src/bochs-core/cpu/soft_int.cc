@@ -23,9 +23,6 @@
 #include "bochs.h"
 #include "cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
-/* DIVERGENCE(BX-CORE-DIV-003): retained default-off copied software-interrupt observation. */
-
-#include "bochs-core-overlay/cpu/observation_gates.h"
 
 BX_INSF_TYPE BX_CPP_AttrRegparmN(1) BX_CPU_C::BOUND_GwMa(bxInstruction_c *i)
 {
@@ -143,8 +140,6 @@ BX_INSF_TYPE BX_CPP_AttrRegparmN(1) BX_CPU_C::INT_Ib(bxInstruction_c *i)
 #if BX_DEBUGGER
   BX_CPU_THIS_PTR show_flag |= Flag_softint;
 #endif
-
-  RUNTIME_RECORD_SOFTWARE_INTERRUPT(vector);
 
   interrupt(vector, BX_SOFTWARE_INTERRUPT, 0, 0);
 

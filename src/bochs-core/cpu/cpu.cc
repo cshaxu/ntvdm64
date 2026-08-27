@@ -24,7 +24,7 @@
 #include "cpu.h"
 #include "bochs-core-overlay/cpu/opaque_callback_private.h"
 #define LOG_THIS BX_CPU_THIS_PTR
-/* DIVERGENCE(BX-CORE-DIV-001,BX-CORE-DIV-003): retained segment profile and default-off instruction observation. */
+/* DIVERGENCE(BX-CORE-DIV-001): retained segment profile mechanics. */
 
 #define InstrumentICACHE 0
 
@@ -116,7 +116,6 @@ void BX_CPU_C::cpu_loop(void)
     for(;;) {
 
       // want to allow changing of the instruction inside instrumentation callback
-      RUNTIME_RECORD_INSTRUCTION_HISTORY();
       BX_INSTR_BEFORE_EXECUTION(BX_CPU_ID, i);
       advance_ip(i->ilen());
       // when handlers chaining is enabled this single call will execute entire trace
@@ -194,7 +193,6 @@ void BX_CPU_C::cpu_run_trace(void)
 
 #if BX_SUPPORT_HANDLERS_CHAINING_SPEEDUPS
   // want to allow changing of the instruction inside instrumentation callback
-  RUNTIME_RECORD_INSTRUCTION_HISTORY();
   BX_INSTR_BEFORE_EXECUTION(BX_CPU_ID, i);
   advance_ip(i->ilen());
   // when handlers chaining is enabled this single call will execute entire trace

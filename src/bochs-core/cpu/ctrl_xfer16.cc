@@ -23,9 +23,7 @@
 #include "bochs.h"
 #include "cpu.h"
 #define LOG_THIS BX_CPU_THIS_PTR
-/* DIVERGENCE(BX-CORE-DIV-001,BX-CORE-DIV-004): retained real/V86 transfer checks and default-off IRET observation. */
-
-#include "bochs-core-overlay/cpu/observation_gates.h"
+/* DIVERGENCE(BX-CORE-DIV-001): retained real/V86 transfer checks. */
 
 BX_CPP_INLINE void BX_CPP_AttrRegparmN(1) BX_CPU_C::branch_near16(Bit16u new_IP)
 {
@@ -584,8 +582,6 @@ BX_INSF_TYPE BX_CPP_AttrRegparmN(1) BX_CPU_C::IRET16(bxInstruction_c *i)
   }
 
   RSP_COMMIT;
-  RUNTIME_RECORD_INTERRUPT_RETURN(16u);
-
 done:
 
   BX_INSTR_FAR_BRANCH(BX_CPU_ID, BX_INSTR_IS_IRET,
