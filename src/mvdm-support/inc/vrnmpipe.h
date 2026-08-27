@@ -279,12 +279,15 @@ typedef struct _DOS_ASYNC_NAMED_PIPE_INFO {
 #pragma pack(1)
 typedef struct {
     DWORD   Timeout;            // Time to wait for pipe to become available
-    LPWORD  lpBytesRead;        // pointer to returned bytes read
+    /* DIVERGENCE(MVDM-SUPPORT-DIV-002): these members are physical 16:16
+     * guest values, not native host pointers.  Keeping their original
+     * four-byte representation preserves the DOS ABI on x64. */
+    DWORD   lpBytesRead;        // pointer to returned bytes read
     WORD    nOutBufferLen;      // size of send data
-    LPBYTE  lpOutBuffer;        // pointer to send data
+    DWORD   lpOutBuffer;        // pointer to send data
     WORD    nInBufferLen;       // size of receive buffer
-    LPBYTE  lpInBuffer;         // pointer to receive buffer
-    LPSTR   lpPipeName;         // pointer to pipe name
+    DWORD   lpInBuffer;         // pointer to receive buffer
+    DWORD   lpPipeName;         // pointer to pipe name
 } DOS_CALL_NAMED_PIPE_STRUCT, *PDOS_CALL_NAMED_PIPE_STRUCT;
 //#include <packoff.h>
 #pragma pack()

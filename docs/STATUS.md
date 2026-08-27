@@ -81,6 +81,11 @@ through the session DS:DX string lease and source BX:CX timeout. It retains
 the source `AX=0`/carry-clear success direction; see the [P13
 evidence](etc/evidence/m0-t290-s3-p13-named-pipe-wait-guest-string-001.md).
 
+**T290 S3 P14:** original `VrCallNamedPipe` now composes on formal x86/x64
+through exact session leases for its source packed structure and every 16:16
+input/output span. The original body and source call/error order remain;
+see the [P14 evidence](etc/evidence/m0-t290-s3-p14-named-pipe-call-structured-guest-span-001.md).
+
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
 bodies now compose on formal x86/x64 Ninja fixtures.  Session-owned numeric

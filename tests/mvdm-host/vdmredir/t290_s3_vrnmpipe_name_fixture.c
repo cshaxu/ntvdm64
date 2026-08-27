@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "vrnmpipe.h"
+
 #include "adapter-mvdm-host-out/softpc/include/mvdm_host_identity.h"
 #include "adapter-mvdm-host-out/softpc/include/mvdm_redirector_pointer_scope.h"
 #include "session/session.h"
@@ -24,6 +26,7 @@ VOID VrSetNamedPipeHandleState(VOID);
 VOID VrPeekNamedPipe(VOID);
 VOID VrTransactNamedPipe(VOID);
 VOID VrWaitNamedPipe(VOID);
+VOID VrCallNamedPipe(VOID);
 
 extern CRITICAL_SECTION VrNamedPipeCancelCritSec;
 
@@ -112,6 +115,18 @@ static DWORD WINAPI transact_server_thread(LPVOID parameter)
     return 0u;
 }
 
+static DWORD WINAPI call_server_thread(LPVOID parameter)
+{
+    transact_server_context *context = (transact_server_context *)parameter;
+    if (context == NULL ||
+        (!ConnectNamedPipe(context->pipe, NULL) &&
+         GetLastError() != ERROR_PIPE_CONNECTED)) {
+        if (context != NULL) context->result = 0u;
+        return 1u;
+    }
+    return transact_server_thread(parameter);
+}
+
 int main(void)
 {
     char remote[] = "\\\\server\\PIPE\\queue";
@@ -140,6 +155,11 @@ int main(void)
     char transact_pipe_name[MAX_PATH];
     char wait_pipe_name[MAX_PATH];
     HANDLE wait_server;
+    char call_pipe_name[MAX_PATH];
+    HANDLE call_server;
+    HANDLE call_thread;
+    transact_server_context call_context;
+    DOS_CALL_NAMED_PIPE_STRUCT *call_structure;
     DWORD pipe_mode;
 
     if (!VrIsNamedPipeName(remote) || !VrIsNamedPipeName(remote_slash) ||
@@ -360,6 +380,63 @@ int main(void)
         return 31;
     }
     CloseHandle(wait_server);
+    if (sprintf_s(call_pipe_name, sizeof(call_pipe_name),
+            "\\\\.\\pipe\\t290-s3-call-%lu",
+            (unsigned long)GetCurrentProcessId()) < 0)
+        return 32;
+    call_server = CreateNamedPipeA(call_pipe_name, PIPE_ACCESS_DUPLEX,
+        PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE | PIPE_WAIT, 1u,
+        256u, 256u, 0u, NULL);
+    if (call_server == INVALID_HANDLE_VALUE)
+        return 33;
+    call_context.pipe = call_server;
+    call_context.result = 0u;
+    call_thread = CreateThread(NULL, 0u, call_server_thread, &call_context,
+        0u, NULL);
+    if (call_thread == NULL) {
+        CloseHandle(call_server);
+        return 34;
+    }
+    call_structure = (DOS_CALL_NAMED_PIPE_STRUCT *)(memory.bytes + 0x1600u);
+    memset(call_structure, 0, sizeof(*call_structure));
+    call_structure->Timeout = 1000u;
+    call_structure->lpBytesRead = 0x1a00u;
+    call_structure->nOutBufferLen = 2u;
+    call_structure->lpOutBuffer = 0x1900u;
+    call_structure->nInBufferLen = 2u;
+    call_structure->lpInBuffer = 0x1800u;
+    call_structure->lpPipeName = 0x1700u;
+    memcpy(memory.bytes + 0x1700u, call_pipe_name, strlen(call_pipe_name) + 1u);
+    memory.bytes[0x1800u] = 0x72u;
+    memory.bytes[0x1801u] = 0x71u;
+    fixture_ds = 0u;
+    fixture_si = 0x1600u;
+    fixture_carry = 1u;
+    if (!mvdm_redirector_pointer_scope_begin() ||
+        !mvdm_redirector_pointer_scope_prepare(0u, 0x1600u,
+            sizeof(*call_structure), GUEST_MEMORY_ACCESS_READ) ||
+        !mvdm_redirector_pointer_scope_prepare(0u, 0x1700u,
+            (uint32_t)strlen(call_pipe_name) + 1u, GUEST_MEMORY_ACCESS_READ) ||
+        !mvdm_redirector_pointer_scope_prepare(0u, 0x1800u, 2u,
+            GUEST_MEMORY_ACCESS_READ) ||
+        !mvdm_redirector_pointer_scope_prepare(0u, 0x1900u, 2u,
+            GUEST_MEMORY_ACCESS_WRITE) ||
+        !mvdm_redirector_pointer_scope_prepare(0u, 0x1a00u, 2u,
+            GUEST_MEMORY_ACCESS_WRITE))
+        return 35;
+    VrCallNamedPipe();
+    if (!mvdm_redirector_pointer_scope_end(1) || fixture_carry != 0u ||
+        fixture_cx != 2u || memory.bytes[0x1900u] != 0x6fu ||
+        memory.bytes[0x1901u] != 0x6bu || memory.bytes[0x1a00u] != 2u ||
+        memory.bytes[0x1a01u] != 0u ||
+        WaitForSingleObject(call_thread, INFINITE) != WAIT_OBJECT_0 ||
+        call_context.result == 0u) {
+        CloseHandle(call_thread);
+        CloseHandle(call_server);
+        return 36;
+    }
+    CloseHandle(call_thread);
+    CloseHandle(call_server);
     DeleteCriticalSection(&VrNamedPipeCancelCritSec);
     if (!VrRemoveOpenNamedPipeInfo(client) ||
         !mvdm_host_identity_release(identity) || !session_thread_unbind(&instance)) {

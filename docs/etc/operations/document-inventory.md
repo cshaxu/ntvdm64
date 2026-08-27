@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2813 |
+| Documentation records | 2814 |
 | --- | --- |
-| Generated UTC | 2026-08-27T13:57:00Z |
+| Generated UTC | 2026-08-27T14:02:07Z |
 
 ## Entries
 
@@ -388,6 +388,7 @@ content-divergent entries.
 | etc/evidence/m0-t290-s3-p11-named-pipe-peek-guest-span-001.md | indexed supporting material | 54d48134cf297528b744a672fadb29dbd04f83db4065c51c5b05e13c5fcec2ef |
 | etc/evidence/m0-t290-s3-p12-named-pipe-transact-guest-span-001.md | indexed supporting material | 85fe51f0c68baab0dac0259c2a41c302278ab0c858e87fb98ed180d8630aa52f |
 | etc/evidence/m0-t290-s3-p13-named-pipe-wait-guest-string-001.md | indexed supporting material | 2ec09fd20aaaa81b8c82c4d7e80480d768236855916732b2b8f6bfbcec144ca2 |
+| etc/evidence/m0-t290-s3-p14-named-pipe-call-structured-guest-span-001.md | indexed supporting material | 5bf7b0a75ad8031d2febaba069c6759e9201344e9a551a60eb90fbeb97bedc34 |
 | etc/evidence/m0-t290-s3-p1-redirector-pointer-scope-001.md | indexed supporting material | f449bb74962851d95c0f820741465b9793d26ff93601428d1e991d71cfd19597 |
 | etc/evidence/m0-t290-s3-p2-redirector-vrmisc-original-body-001.md | indexed supporting material | f8720c21aa51417379c2956ecba2191513a8c0d411e0bdd3627ea70129974428 |
 | etc/evidence/m0-t290-s3-p3-redirector-named-pipe-source-parse-001.md | indexed supporting material | 50052332cd81a10a35b28b259a963bcda35f54cb365c261f80d244e86430f733 |
@@ -961,7 +962,7 @@ content-divergent entries.
 | etc/operations/m0-t290-redirector-owner-package-recovery-plan-001.md | indexed supporting material | 00fdb7f5303f8917b07770b70d6eb78e5cb9a4e3b8c8c44f0e4b13a364d1eb2d |
 | etc/operations/m0-t290-s1-redirector-path-interface-ledger.tsv | indexed supporting material | 22d7fc81a17fc45c478edbabd02ab6b72b6ebcf7075968c07589fe1b6b0a1960 |
 | etc/operations/m0-t290-s1-redirector-service-abi-ledger.tsv | indexed supporting material | aaf7149ddb4229ec823666330dbcb82020df9b77a94bc9c5b6e9b3a7054599ee |
-| etc/operations/m0-t290-s2-redirector-external-interface-recovery-ledger.tsv | indexed supporting material | 63bb9a7a3b9ab12cf0fea9856a2bbbfa15a3c4b06d301073cad615c913128f7a |
+| etc/operations/m0-t290-s2-redirector-external-interface-recovery-ledger.tsv | indexed supporting material | 4fb68cdb9bb734dbf3bef28b04456c2216c5f2aabaeddef417d209a77f33201b |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -2827,7 +2828,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 37e8926abd643436466237b5a1035fd45483584812e4a32bb3d852337d02c334 |
+| STATUS.md | principal control document | d2a163fb2c2a1f44b62c38cf4b2406641e99ba4dcc10dc6ee3f612fa5ff87179 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
