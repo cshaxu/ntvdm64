@@ -2,30 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T284 S3 — outgoing historical-adapter root admission.**
-T284 S2 closed with the approved component-root rename and formal x86/x64
-carrier rebuild; S3 admits the one classified outgoing adapter component
-before any of its sources move.
+**Active: M0 T284 S4 — Win32-family migration.**
+T284 S3 closed with the seven named outgoing interface boundaries and no
+implementation; S4 may move only the audited Win32 inputs into that component.
 
 ## Active Packet
 
-### M0 T284 S3 — outgoing historical-adapter root admission
+### M0 T284 S4 — Win32-family migration
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T284 S3`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T284 S1 inventory and S2 canonical-root rename are closed. The owner approved the seven named outgoing interface families. |
-| Objective | Create the empty, classified `adapter-mvdm-host-out` component root with seven named family boundaries and its source/build/document ownership contract before a source file moves. |
-| Non-goals | Moving an existing adapter source; adding a historical implementation; changing a BOP/provider, monitor, machine, filesystem, broker or child-process behavior. |
-| Reference Baseline | Adapter-convergence proposal; T284 S1 inventories; T284 S2 closure evidence; current architecture and source policy. |
-| Files And ABI Surface | `adapter-mvdm-host-out/{win32,softpc,monitor,redir,wow,vdd,debugger}` boundary documentation, public-include rules and build ownership only. |
+| Identifier Mode | `M0 T284 S4`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T284 S1–S3 are closed. The S1 file inventory assigns all nine current Win32 inputs to the `win32` subfamily. |
+| Objective | Move only the audited Win32 declaration/facade inputs into `adapter-mvdm-host-out/win32`, repair their direct consumers and prove the source-shaped boundary remains unchanged. |
+| Non-goals | Changing a historical call contract; moving SoftPC, monitor, Redirector, WOW, VDD or debugger inputs; enabling a BOP/provider or host product capability. |
+| Reference Baseline | T284 S1 file/symbol inventories, current adapter-win32 source, root admission evidence, source policy and architecture rules. |
+| Files And ABI Surface | The nine Win32 headers/implementations and their direct `mvdm-host`, test and build consumers. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Family denominator scan, owner/dependency-direction review, no-source assertion, documentation governance and `git diff --check`. |
-| Expected Markers | One component README, seven named empty family boundaries, a public include policy and no generic compatibility catch-all. |
-| Asset Needs | T284 S1 inventories, canonical root layout, architecture authorities and source policy. |
-| Reporting Requirements | Family names, explicit no-source result, legal incoming/outgoing dependencies and later source-move prerequisites. |
-| Stop Conditions | A family requires a source move before its owner boundary is documented, an added catch-all directory appears, or a family boundary becomes ambiguous. |
-| Exit Criteria | The component boundary is documented and recognized by current governance without moving source or enabling behavior. |
+| Verification | Exact nine-file inventory match, exported symbol/header inclusion review, old-root absence, x86/x64 static carrier rebuild, documentation governance and `git diff --check`. |
+| Expected Markers | Only `adapter-mvdm-host-out/win32` owns the migrated inputs and direct consumers resolve the same public spellings. |
+| Asset Needs | T284 S1 inventories, current adapter-win32 source, canonical component roots and selected static graphs. |
+| Reporting Requirements | File/symbol denominator, old/new path mapping, consumer repairs, architecture result and any preserved unavailable contract. |
+| Stop Conditions | A source needs a behavior edit rather than a move/binding repair, a Win32 input requires a different family, or a caller gains a Bochs dependency. |
+| Exit Criteria | All nine audited inputs have moved, no live `adapter-win32` root remains, and static carrier validation passes on x86/x64 without behavior expansion. |
 | Original Owner Request | “T284: S1 合并 … S2 组件重命名 … 改好所有的代码和文档。” |
 | Similar-Issue Sweep | Public/private declarations, edition roots, source-selection manifests and all live include/build inputs. |
 
@@ -43,6 +42,11 @@ component. Active source/build/test/current-document scans find zero obsolete
 root references; the formal x86/x64 original DEM/COMMAND carrier archives
 both rebuild successfully. See the
 [S2 evidence](etc/evidence/m0-t284-s2-component-root-rename-closure-001.md).
+
+**T284 S3 closure:** `adapter-mvdm-host-out` now has the seven required named
+family boundaries and no implementation source, build input or enabled
+capability. The root's source-facing and Bochs-prohibition contract is fixed
+in [S3 evidence](etc/evidence/m0-t284-s3-outgoing-adapter-root-admission-001.md).
 
 The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md), [S4 complete original COMMAND static package](etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md), [S5 VDM command-acquisition source audit](etc/operations/m0-t282-s5-vdm-command-acquisition-source-audit-plan-001.md), [S6 local VDM command transport](etc/operations/m0-t282-s6-local-vdm-command-transport-plan-001.md), [S7 original COMMAND initialization composition](etc/operations/m0-t282-s7-original-command-initialization-plan-001.md), [S8 COMMAND owner dependency partition](etc/operations/m0-t282-s8-command-owner-dependency-partition-plan-001.md), [S9 COMMAND environment guest-memory seam audit](etc/operations/m0-t282-s9-command-environment-guest-seam-audit-plan-001.md), [S10 COMMAND register and bounded-lease binding](etc/operations/m0-t282-s10-command-register-and-lease-binding-plan-001.md), [S11 COMMAND OEM support composition](etc/operations/m0-t282-s11-command-oem-support-composition-plan-001.md), and [S13 COMMAND current-directory bounded mirror binding](etc/operations/m0-t282-s13-command-current-directory-bounded-binding-plan-001.md).
 
