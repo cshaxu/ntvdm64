@@ -2,34 +2,16 @@
 
 ## Current Work
 
-**Active: M0 T285 S3 — original DEM dispatch/data closure.**
+**No active M/T/S packet.**
 
-T285 S2 closed the original `nt_bop.c` control-boundary map with 21 explicit
-source contract dispositions and rebuilt its selector-disabled static island
-on x86/x64. S3 now recovers the original DEM dispatch/data group through the
-already-audited fixed-width register and bounded guest-memory seams.
+M0 T285 is closed as an owner-directed duplicate-route withdrawal. Its S1/S2
+static source/binding evidence remains retained, but it does not establish a
+need to repeat the already-connected DEM/COMMAND package. The next candidate
+is Bochs core diff and overlay minimization; XMS and the remaining BOP-owner
+packages follow it in the dependency queue. See
+[T285 closure](history/m0-t285-closure-20260826.md).
 
 ## Active Packet
-
-### M0 T285 S3 — original DEM dispatch/data closure
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | `M0 T285 S3`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T285 S2 closed the complete original ingress boundary without enabling a selector; the approved Wave 2 plan names `03-dem-dispatch-data` as the next source-shaped group. |
-| Objective | Recover the exact original DEM dispatch/data group (`dem.c`, `demdata.c`, `demmsg.c`, `demdisp.c` and reached declarations) through one fixed-width register and bounded guest-memory contract, retaining original dispatcher order and failure behavior. |
-| Non-goals | No BOP selector enablement, guest trace, file/search/FCB/provider recovery, host filesystem policy, Bochs change, CPU executor revival, generic adapter, or product runtime link. |
-| Reference Baseline | T285 S1 canonical workset/evidence; T285 S2 ingress ledger; original DEM sources and declarations; current SoftPC, Win32, session and platform-ABI ledgers. |
-| Files And ABI Surface | `mvdm-host/dos/dem/{dem.c,demdata.c,demmsg.c,demdisp.c}` and reached headers; `adapter-mvdm-host-out/softpc`, `adapter-mvdm-host-out/win32`, `session`, original-DEM Ninja graph and S3 package ledger/evidence. |
-| Applicable Rules | Execution historical-recovery gate, source policy, architecture, coding, document and build-hygiene rules. |
-| Verification | Complete DEM dispatch/data call denominator; original dispatch/order/failure checks; adapter direction scan; x86/x64 selector-disabled static rebuild and focused local carrier tests; documentation governance and `git diff --check`. |
-| Expected Markers | No DEM body depends on a raw guest pointer, native HANDLE or Bochs type; dispatch/data behavior preserves original source owner and all unreached provider paths have one named later owner. |
-| Asset Needs | Current workset, original DEM package/declarations, existing fixed-width SoftPC and Win32 facades, session mapping manager and formal Ninja recipe. |
-| Reporting Requirements | Symbol/call denominator, source owner, exact declaration/calling form, selected adapter/later owner, failure disposition, mapping use and architecture result. |
-| Stop Conditions | A DEM source body needs a semantic rewrite, a dependency is not source-proven, a file/search/FCB/device provider would be activated in isolation, imported code needs direct Bochs access, or a new adapter family is implied. |
-| Exit Criteria | Every reached dispatch/data dependency has one tested source composition or explicit later-owner result; original DEM static island passes x86/x64; no selector/provider is enabled. |
-| Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | All original dispatcher-table entries, shared DEM data/message helpers, register/guest-memory access sites, dispatch returns and source-defined failure paths. |
 
 **T285 S1 closure:** `New-T285S1Wave2CurrentWorkset.ps1` revalidated all 81
 selected current mirror paths (22 DEM + 59 host-control), recorded their
@@ -49,6 +31,7 @@ its original unavailable behavior.  The only two missing declaration carriers
 (`DbgBreakPoint`, `getPE`) are now source-shaped and selector-disabled.  The
 formal original BOP static archive rebuilt on x86 and x64; see [S2
 evidence](etc/evidence/m0-t285-s2-nt-bop-binding-001.md).
+
 
 **T284 S1 closure:** the generated owner inventory records 33 final file/
 boundary dispositions (22 production inputs, seven root documents and four
