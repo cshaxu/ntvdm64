@@ -1,0 +1,11 @@
+original_group	pointer/form	access_shape	allowed modern form	owner/disposition
+dpmi32.c dispatcher	CS:IP subfunction byte	fixed 1 byte read	one bounded guest-byte read inside copied transaction	S3 frame foundation
+dpmi32.c initialization	DS:SI shared data and fixed offsets	fixed 26-byte structure plus referenced numeric addresses	one bounded structure copy then separately bounded named spans	S4 initialization composition
+dpmiselr.c	ES:BX LDT entries	counted descriptor array	bounded descriptor-array copy/write; no host LDT pointer	S3 descriptor surface then S4
+dpmimemr.c	ES:DI DPMIMEMINFO	fixed result structure	one bounded result copy/write	S4 memory composition
+xmem.c	SI:DI historical host pointer identity	durable per-app allocation record	session host_resource surrogate32 identifier, never native pointer	S4 xmem composition
+modesw.c/stack.c	SS:SP stack records and IVT	fixed source-defined frames	one atomic copied frame transaction and bounded frame span	S3 frame foundation
+dpmiint.c	SS:SP/CS:EIP exception, interrupt and IRET frames	variable 16/32-bit frame with commit ordering	one typed atomic frame read/validate/commit; no field-by-field live CPU writes	S3 then S5
+int21map.c/buffer.c	DOS strings, FCB, DTA, command/environment buffers	variable and DEM/COMMAND-owned semantics	source-specific bounded copy contracts after real/protected transition	S6 cross-package integration
+dpmi32.c:PassTableAddress	guest LDT base plus IntelBase zero address	long-lived table aliases	session record of numeric guest locations only; typed descriptor publication, no pointer retention	S3/S4
+dpmiint.c:PassPmStackInfo	VdmTib PmStackInfo host address	host-address publication to guest	refuse until a source-proven fixed-width guest-visible replacement is designed	later explicit DPMI/session packet
