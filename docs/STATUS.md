@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T291 S3 — WOW frame/callback transaction recovery.**
+**Active: M0 T291 S4 — Control-plane separation and source-shaped re-entry contracts.**
 
 M0 T290 is closed. Its final Redirector package boundary is in
 [the closure record](history/m0-t290-closure-20260827.md). T291 has closed
@@ -10,25 +10,31 @@ its whole-package source/ABI audit and now admits its first dependency group.
 
 ## Active Packet
 
-### M0 T291 S3 — WOW frame/callback transaction recovery
+### M0 T291 S4 — Control-plane separation and source-shaped re-entry contracts
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T291 S3`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S2 closed the 214-occurrence source/ABI/failure audit for all twelve selected WOW32 thunk/frame bodies. It admits the complete pointer/frame/callback interface group, not an individual WOW API or BOP. |
-| Objective | Recover the source-shaped bounded WOW pointer scope, numeric task/frame projection and single-session `CallBack16` transaction while retaining original layout/order and the current adapter ownership boundaries. |
-| Non-goals | No original WOW provider body enablement, Win16 API, fast monitor, whole-memory alias, `CurrentMonitorTeb`, PEB/AeDebug, WOWEXEC/CSRSS recreation, GUI policy, BOP ingress, guest load, raw pointer/HANDLE transport, new mapping manager, direct Bochs call, machine change or `src.old` input. |
-| Reference Baseline | [T291 S2 closure](etc/evidence/m0-t291-s2-wow-thunk-frame-interface-recovery-001.md), [T291 S3 plan](etc/operations/m0-t291-s3-wow-frame-callback-transaction-plan-001.md), current session/adapter contracts and source policy. |
-| Files And ABI Surface | `adapter-mvdm-host-out/{softpc,monitor,wow}`, session guest-memory bindings, typed `adapter-bochs` mechanics and new focused x86/x64 fixture only. |
+| Identifier Mode | `M0 T291 S4`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S3 closed the bounded pointer/task/frame/callback mechanics, but its review found control-plane distinctions that require a separate package-level contract pass before a WOW provider is considered. |
+| Objective | Separate source-shaped `GetNextVDMCommand`, `NtVdmControl` and synchronous `host_simulate` contracts; record owner-specific re-entry postconditions and the real single-thread WOW task boundary. |
+| Non-goals | No WOW provider/selector, Win16 guest load, BaseSrv/CSR clone, fast monitor, `CurrentMonitorTeb`, new CCPU worker, global dispatcher, raw pointer/HANDLE, mapping manager or `src.old` input. |
+| Reference Baseline | [S3 closure](etc/evidence/m0-t291-s3-wow-frame-callback-foundation-closure-001.md), [S4 plan](etc/operations/m0-t291-s4-control-plane-separation-and-reentry-contract-plan-001.md), S2 ledger and source policy. |
+| Files And ABI Surface | `mvdm-host` source audits; `adapter-mvdm-host-out/{monitor,softpc,wow}`, `session`, `app`, focused fixtures and control-plane records. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Source-shaped order, bounds, nested/re-entry rejection, stale-lease cleanup and typed callback return on formal x86/x64 fixtures; graph evidence that no WOW provider/selector is enabled. |
-| Expected Markers | One source-shaped owner per interface layer, no direct pointer/HANDLE transport, no duplicate mapping/worker implementation, and exact S2 unavailable routes unchanged. |
-| Asset Needs | S2 ledger/decision, current session mapping APIs, outgoing adapter declarations and selected original layout carriers. |
-| Reporting Requirements | State original call shape/order, exact lease/identity lifetime, adapter ownership, x86/x64 fixture result, unchanged exclusions and any source-defined unavailable result. |
-| Stop Conditions | Enabling a provider body/selector, creating a generic adapter/mapping manager, touching Bochs, using a raw pointer/HANDLE, recreating a private product shell or importing `src.old`. |
-| Exit Criteria | The three interface layers have formal x86/x64 evidence, preserve source-shaped transaction order and leave every original WOW provider body disabled for its later whole-package admission. |
+| Verification | Source/ABI/failure ledger for each original control plane; x86/x64 focused route/postcondition tests; negative scan proving command, monitor control and callback execution are not conflated. |
+| Expected Markers | One typed owner per original control layer, explicit single-session limitations, no generic business dispatcher and no added provider enablement. |
+| Asset Needs | Original `vdmapi.h`, COMMAND/WOW/monitor call sites, current S3 mechanics and S2 source-interface ledger. |
+| Reporting Requirements | State original caller/callee shape, host-thread/session lifetime, stop result, source failure semantics, x86/x64 evidence and deferred owner. |
+| Stop Conditions | Recreating BaseSrv/CSR, enabling a provider/selector, introducing a CCPU executor/worker, using raw pointers/HANDLEs, touching Bochs or importing `src.old`. |
+| Exit Criteria | Every currently reached control path has a separate source-backed disposition; `CallBack16` and `NtVdmControl` do not use command routing; each reached `host_simulate` caller has its own postcondition record. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
 | Similar-Issue Sweep | All S2 families: guest pointer/free/flush, task/frame projection, callback/stack mechanics, monitor/TEB/PEB assumptions, scalar register calls and existing session mapping lifetimes. |
+
+**T291 S3 closure:** the bounded pointer scope, numeric task projection and
+source-shaped non-fast callback mechanics passed their complete formal x86/x64
+fixture matrix. `CallBack16` now bypasses session command routing and uses
+only the SoftPC-shaped mechanical interval. It remains a foundation, not a
+loaded WOW runtime; see the [S3 closure](etc/evidence/m0-t291-s3-wow-frame-callback-foundation-closure-001.md).
 
 **T291 S2 closure:** all twelve selected original WOW32 thunk/frame bodies
 have source coverage; 214 reached external-interface occurrences and eighteen
