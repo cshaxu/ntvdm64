@@ -52,7 +52,9 @@ P3 has independently verified the source-facing bounded lease facade on x86
 and x64 in [fixture evidence](etc/evidence/m0-t280-s20-p3-mvdm-guest-location-fixture-001.md).
 P4 has converted only the extended-error retained location and records its
 source/layout evidence in [extended-error recovery](etc/evidence/m0-t280-s20-p4-extended-error-location-recovery-001.md).
-None of these records is an implementation closure.
+P5 has removed the reached DTA retained pointer and records its focused
+source/fixture evidence in [DTA recovery](etc/evidence/m0-t280-s20-p5-dta-location-recovery-001.md).
+None of these records is an S20 closure.
 
 ### Closed packet reference — M0 T280 S13
 

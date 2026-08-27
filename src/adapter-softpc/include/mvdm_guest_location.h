@@ -25,6 +25,11 @@ int mvdm_guest_location_set_real_mode(mvdm_guest_location *location,
     uint16_t segment, uint16_t offset);
 int mvdm_guest_location_from_far_value(mvdm_guest_location *location,
     uint32_t far_value);
+int mvdm_guest_location_read_far(mvdm_guest_location const *location,
+    mvdm_guest_location *far_location_out);
+int mvdm_guest_location_acquire_far(mvdm_guest_location const *location,
+    uint32_t byte_count, uint32_t access,
+    mvdm_guest_location_lease *lease_out);
 int mvdm_guest_location_acquire(mvdm_guest_location const *location,
     uint32_t byte_count, uint32_t access,
     mvdm_guest_location_lease *lease_out);

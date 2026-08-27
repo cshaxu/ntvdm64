@@ -240,18 +240,40 @@ FreeFFindList(
  *
  */
 
+/* DIVERGENCE MVDM-HOST-DIV-005: the DTA address cell and the DTA itself are
+ * guest memory.  Recover both as short-lived leases; never retain the native
+ * pointer that historical Sim32 exposed. */
+static BOOL demAcquireSearchDta(mvdm_guest_location_lease *lease)
+{
+    mvdm_guest_location dta;
+
+    return mvdm_guest_location_read_far(&dta_location, &dta) &&
+        mvdm_guest_location_acquire(&dta, sizeof(SRCHDTA),
+            GUEST_MEMORY_ACCESS_READ | GUEST_MEMORY_ACCESS_WRITE, lease);
+}
+
 VOID demFindFirst (VOID)
 {
     DWORD dwRet;
     PVOID pDta;
+    mvdm_guest_location_lease dtaLease;
 
 
     LPSTR lpFile = (LPSTR) GetVDMAddr (getDS(),getDX());
 
-    pDta = (PVOID) GetVDMAddr (*((PUSHORT)pulDTALocation + 1),
-                               *((PUSHORT)pulDTALocation));
+    if (!demAcquireSearchDta(&dtaLease)) {
+        SetLastError(ERROR_INVALID_ADDRESS);
+        demClientError(INVALID_HANDLE_VALUE, *lpFile);
+        return;
+    }
+    pDta = dtaLease.bytes;
 
     dwRet = demFileFindFirst (pDta, lpFile, getCX());
+
+    if (!mvdm_guest_location_release(&dtaLease, TRUE)) {
+        SetLastError(ERROR_INVALID_ADDRESS);
+        dwRet = (DWORD)-1;
+    }
 
     if (dwRet == -1) {
         dwRet = GetLastError();
@@ -431,11 +453,19 @@ VOID demFindNext (VOID)
 {
     DWORD dwRet;
     PVOID pDta;
+    mvdm_guest_location_lease dtaLease;
 
-    pDta = (PVOID) GetVDMAddr(*((PUSHORT)pulDTALocation + 1),
-                              *((PUSHORT)pulDTALocation));
+    if (!demAcquireSearchDta(&dtaLease)) {
+        setAX(ERROR_INVALID_ADDRESS);
+        setCF(1);
+        return;
+    }
+    pDta = dtaLease.bytes;
 
     dwRet = demFileFindNext (pDta);
+
+    if (!mvdm_guest_location_release(&dtaLease, TRUE))
+        dwRet = ERROR_INVALID_ADDRESS;
 
     if (dwRet != 0) {
         setAX((USHORT) dwRet);

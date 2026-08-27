@@ -6,7 +6,9 @@
 #include "dem.h"
 
 /** VDM's DTA Address **/
-ULONG  UNALIGNED *pulDTALocation; // Address in ntdos where DTA address is kept.
+/* DIVERGENCE MVDM-HOST-DIV-005: numeric location of the four-byte DTA
+ * address cell in NTDOS; never a retained native GetVDMAddr pointer. */
+mvdm_guest_location dta_location;
 
 
 /** VDM's Current PDB **/

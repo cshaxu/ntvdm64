@@ -448,6 +448,8 @@ PVOID   pBuf;
 DWORD	dwBytesIO;
 DWORD	dwSize,dwSizeHigh;
 DWORD	dwErrCode;
+mvdm_guest_location_lease dtaLease;
+BOOL dtaWrite;
 
     hFile = GETHANDLE (getAX(),getBP());
     CurOffset = (((ULONG)getDI()) << 16) + (ULONG)getDX();
@@ -460,8 +462,18 @@ DWORD	dwErrCode;
         return ;
     }
 
-    pBuf = (PVOID)GetVDMAddr(*((PUSHORT)pulDTALocation + 1),
-                              *((PUSHORT)pulDTALocation));
+    /* DIVERGENCE MVDM-HOST-DIV-005: the original DTA is reached through a
+     * retained native pointer.  Lease its current far address only for this
+     * FCB I/O operation. */
+    dtaWrite = getBX() ? TRUE : FALSE;
+    if (!mvdm_guest_location_acquire_far(&dta_location, getCX(),
+        dtaWrite ? (GUEST_MEMORY_ACCESS_READ | GUEST_MEMORY_ACCESS_WRITE) :
+        GUEST_MEMORY_ACCESS_READ, &dtaLease)) {
+        SetLastError(ERROR_INVALID_ADDRESS);
+        demClientError(hFile, (CHAR)-1);
+        return;
+    }
+    pBuf = dtaLease.bytes;
 
     if(getBX()) {	// Read Operation
 	if (ReadFile (hFile,
@@ -470,13 +482,11 @@ DWORD	dwErrCode;
 		      &dwBytesIO,
 		      NULL) == FALSE){
 
-            Sim32FlushVDMPointer(*pulDTALocation, getCX(), pBuf, FALSE);
-            Sim32FreeVDMPointer(*pulDTALocation, getCX(), pBuf, FALSE);
+            if (!mvdm_guest_location_release(&dtaLease, TRUE))
+                SetLastError(ERROR_INVALID_ADDRESS);
             demClientError(hFile, (CHAR)-1);
             return ;
 	}
-        Sim32FlushVDMPointer (*pulDTALocation, getCX(),pBuf, FALSE);
-        Sim32FreeVDMPointer (*pulDTALocation, getCX(), pBuf, FALSE);
     }
     else {
 	if (WriteFile (hFile,
@@ -489,6 +499,8 @@ DWORD	dwErrCode;
 	// AX = 1 and CF = 1
 
 	    dwErrCode = GetLastError();
+
+            (void)mvdm_guest_location_release(&dtaLease, FALSE);
 	    if(dwErrCode == ERROR_DISK_FULL) {
 
 		setCX( (USHORT) dwBytesIO);
@@ -503,6 +515,12 @@ DWORD	dwErrCode;
 	    return ;
 
 	}
+    }
+
+    if (!mvdm_guest_location_release(&dtaLease, dtaWrite)) {
+        SetLastError(ERROR_INVALID_ADDRESS);
+        demClientError(hFile, (CHAR)-1);
+        return;
     }
 
     // Get File Size

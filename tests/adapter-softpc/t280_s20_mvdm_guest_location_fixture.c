@@ -54,10 +54,18 @@ int main(void)
     if (!mvdm_guest_location_from_far_value(&location, 0x12340056u) ||
         !mvdm_guest_location_acquire(&location, 1u, GUEST_MEMORY_ACCESS_READ,
             &lease) || !mvdm_guest_location_release(&lease, 0)) return 4;
+    memory.bytes[0x88u] = 0x56u;
+    memory.bytes[0x89u] = 0x00u;
+    memory.bytes[0x8au] = 0x34u;
+    memory.bytes[0x8bu] = 0x12u;
+    if (!mvdm_guest_location_set_real_mode(&location, 0u, 0x88u) ||
+        !mvdm_guest_location_acquire_far(&location, 1u,
+            GUEST_MEMORY_ACCESS_READ, &lease) || lease.lease->address != address ||
+        !mvdm_guest_location_release(&lease, 0)) return 5;
     if (!mvdm_guest_location_set_real_mode(&location, 0xffffu, 0xffffu) ||
         mvdm_guest_location_acquire(&location, 1u, GUEST_MEMORY_ACCESS_READ,
-            &lease)) return 5;
-    if (!session_thread_unbind(&instance)) return 6;
+            &lease)) return 6;
+    if (!session_thread_unbind(&instance)) return 7;
     session_guest_memory_end(&instance);
-    return session_dispose(&instance) ? 0 : 7;
+    return session_dispose(&instance) ? 0 : 8;
 }

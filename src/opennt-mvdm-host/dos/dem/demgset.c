@@ -560,7 +560,9 @@ VOID demSetDTALocation (VOID)
 {
     PDOSWOWDATA pDosWowData;
 
-    pulDTALocation = (PULONG)  GetVDMAddr(getDS(),getAX());
+    /* DIVERGENCE MVDM-HOST-DIV-005: retain DS:AX numerically; consumers read
+     * this far-address cell under a fresh bounded lease. */
+    mvdm_guest_location_set_real_mode(&dta_location, getDS(), getAX());
     pusCurrentPDB  = (PUSHORT) GetVDMAddr(getDS(),getDX());
     /* DIVERGENCE MVDM-HOST-DIV-005: retain DS:CX numerically instead of a
      * native pointer returned by GetVDMAddr. */

@@ -35,6 +35,36 @@ int mvdm_guest_location_from_far_value(mvdm_guest_location *location,
         (uint16_t)(far_value >> 16), (uint16_t)far_value);
 }
 
+int mvdm_guest_location_read_far(mvdm_guest_location const *location,
+    mvdm_guest_location *far_location_out)
+{
+    mvdm_guest_location_lease lease;
+    mvdm_guest_location resolved;
+    uint32_t far_value;
+
+    if (far_location_out == NULL || !mvdm_guest_location_acquire(location,
+        4u, GUEST_MEMORY_ACCESS_READ, &lease)) return 0;
+    far_value = (uint32_t)lease.bytes[0] |
+        ((uint32_t)lease.bytes[1] << 8) |
+        ((uint32_t)lease.bytes[2] << 16) |
+        ((uint32_t)lease.bytes[3] << 24);
+    if (!mvdm_guest_location_release(&lease, 0) ||
+        !mvdm_guest_location_from_far_value(&resolved, far_value)) return 0;
+    *far_location_out = resolved;
+    return 1;
+}
+
+int mvdm_guest_location_acquire_far(mvdm_guest_location const *location,
+    uint32_t byte_count, uint32_t access,
+    mvdm_guest_location_lease *lease_out)
+{
+    mvdm_guest_location far_location;
+
+    return mvdm_guest_location_read_far(location, &far_location) &&
+        mvdm_guest_location_acquire(&far_location, byte_count, access,
+            lease_out);
+}
+
 int mvdm_guest_location_acquire(mvdm_guest_location const *location,
     uint32_t byte_count, uint32_t access,
     mvdm_guest_location_lease *lease_out)

@@ -27,7 +27,8 @@ build demsrch: syntax `$root/src/opennt-mvdm-host/dos/dem/demsrch.c
 build demerror: syntax `$root/src/opennt-mvdm-host/dos/dem/demerror.c
 build demgset: syntax `$root/src/opennt-mvdm-host/dos/dem/demgset.c
 build demhndl: syntax `$root/src/opennt-mvdm-host/dos/dem/demhndl.c
-build all: phony demsrch demerror demgset demhndl
+build demfcb: syntax `$root/src/opennt-mvdm-host/dos/dem/demfcb.c
+build all: phony demsrch demerror demgset demhndl demfcb
 default all
 "@
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))
