@@ -47,5 +47,5 @@ M0 T280 S5 disposition register:
 - `session.c` and `session.h`: `small extension`. They expose a synchronous,
   dependency-neutral external control callback for source-shaped adapters.
   The callback has an explicit context and operation number; it owns neither
-  guest-memory mapping nor native resource lifetime. `adapter-win32` uses it
+  guest-memory mapping nor native resource lifetime. `adapter-mvdm-host-out/win32` uses it
   for the reached `NtVdmControl(VdmQueryDir, ...)` declaration contract.

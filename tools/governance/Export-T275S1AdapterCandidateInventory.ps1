@@ -11,7 +11,7 @@ $ErrorActionPreference = 'Stop'
 $families = [ordered]@{
     'adapter-mvdm-host-in' = 'bop-transport'
     'adapter-softpc' = 'softpc-ccpu-sas'
-    'adapter-win32' = 'win32-ntdll'
+    'adapter-mvdm-host-out/win32' = 'win32-ntdll'
 }
 
 $rows = foreach ($component in $families.Keys) {

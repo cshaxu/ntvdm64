@@ -11,7 +11,7 @@ $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $required = @(
     'src/adapter-vdm-monitor/include/vdm.h',
-    'src/adapter-win32/include/winbasep.h',
+    'src/adapter-mvdm-host-out/win32/include/winbasep.h',
     'src/adapter-vdm-monitor/source/vdm_control.c',
     'tests/adapter-vdm-monitor/vdm_control_fixture.c',
     'tools/build/New-T280VdmControlNinja.ps1',
@@ -26,7 +26,7 @@ foreach ($token in @('VdmQueryDir', 'session_dispatch_control', 'STATUS_NOT_IMPL
     if ($source -notmatch [regex]::Escape($token)) { throw "VDM control source misses: $token" }
 }
 if ($source -match 'NtQueryDirectoryFile|CreateFile|bochs|mapping_manager') { throw 'VDM control adapter exceeds its declared session-dispatch seam.' }
-$carrier = Get-Content -LiteralPath (Join-Path $root 'src/adapter-win32/include/winbasep.h') -Raw
+$carrier = Get-Content -LiteralPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/winbasep.h') -Raw
 if ($carrier -notmatch 'DIVERGENCE:' -or $carrier -match 'typedef|#include') { throw 'winbasep carrier gained declarations or behavior.' }
 $generator = Get-Content -LiteralPath (Join-Path $root 'tools/build/New-T280VdmControlNinja.ps1') -Raw
 foreach ($token in @('deps = msvc', '/MT', '/W4', 'vdm_control.c', 'session.c', 'vdm_control_fixture.c')) {

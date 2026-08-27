@@ -21,10 +21,10 @@ New-Item -ItemType Directory -Force $build | Out-Null
 # specifies WIN_32 and demexp.h exposes its original debug declarations only
 # under DEVL.  This archive contains no provider implementation or route.
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL ' +
-    '/FI ' + $root + '/src/adapter-win32/include/nt.h ' +
+    '/FI ' + $root + '/src/adapter-mvdm-host-out/win32/include/nt.h ' +
     '/FI ' + $root + '/src/adapter-softpc/include/error_abi.h ' +
     '/I ' + $root + '/src ' +
-    '/I ' + $root + '/src/adapter-win32/include ' +
+    '/I ' + $root + '/src/adapter-mvdm-host-out/win32/include ' +
     '/I ' + $root + '/src/adapter-softpc/include ' +
     '/I ' + $root + '/src/mvdm-support/inc ' +
     '/I ' + $root + '/src/mvdm-platform-abi/source/public/sdk/inc ' +

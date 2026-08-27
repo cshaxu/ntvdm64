@@ -22,7 +22,7 @@ foreach ($row in $v86) {
         $row.final_disposition = 'binding-only'
         $row.final_owner_or_link_boundary = 'app/adapter declaration evidence for individually admitted same-shaped boundaries; excluded standalone ntvdm.exe scaffold is not composed'
         $row.final_change_class = 'binding-only; retain original declaration/layout form outside the product-shell graph'
-        $row.named_adapter = 'adapter-mvdm-host-in; adapter-softpc; adapter-bochs; adapter-win32; session'
+        $row.named_adapter = 'adapter-mvdm-host-in; adapter-softpc; adapter-bochs; adapter-mvdm-host-out/win32; session'
         $row.mapping_implication = 'any later recovered boundary uses fixed-width frames and the session mapping-manager rule; declarations transfer no native identity'
         $row.final_evidence = 'T276 S17: scaffold declarations are evidence only; modern app owns composition and cannot import the old product shell'
         continue

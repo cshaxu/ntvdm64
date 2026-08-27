@@ -13,9 +13,9 @@ foreach ($row in $support) {
     $row.final_audit_state = 'final-disposition-audited; not implemented'
     if ($row.source_path -eq 'softpc.new/base/support/get_env.c') {
         $row.final_disposition = 'adapter-backed'
-        $row.final_owner_or_link_boundary = 'original SoftPC configuration-environment helper -> adapter-win32 capability binding; app/session own final launch inputs'
+        $row.final_owner_or_link_boundary = 'original SoftPC configuration-environment helper -> adapter-mvdm-host-out/win32 capability binding; app/session own final launch inputs'
         $row.final_change_class = 'binding-only; preserve original typed environment lookup algorithm and default/error flow'
-        $row.named_adapter = 'adapter-win32; session'
+        $row.named_adapter = 'adapter-mvdm-host-out/win32; session'
         $row.mapping_implication = 'no guest or host identity mapping is exposed'
         $row.final_evidence = 'T276 S12 base/support source review: isolated configuration helper, not a machine executor'
     } else {

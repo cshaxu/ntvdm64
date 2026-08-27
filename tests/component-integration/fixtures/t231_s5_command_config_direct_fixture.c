@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "adapter-win32/facade/opennt_error_dialog_facade.h"
+#include "adapter-mvdm-host-out/win32/facade/opennt_error_dialog_facade.h"
 #include "opennt-bop/command/opennt_command_composition.h"
 
 typedef struct fixture_context { uint8_t guest[0x10000]; } fixture_context;

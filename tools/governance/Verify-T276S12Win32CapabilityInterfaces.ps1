@@ -18,7 +18,7 @@ foreach ($source in @('config.c','fprt.c','nt_error.c','nt_keycd.c','nt_nls.c','
 }
 if (@($rows | Where-Object source_path -eq 'softpc.new/host/src/config.c' | Where-Object provisional_disposition -notmatch 'cross-owner').Count -ne 0) { throw 'config.c must remain a cross-owner composition review.' }
 if (@($rows | Where-Object source_path -eq 'softpc.new/host/src/nt_sec.c' | Where-Object provisional_disposition -notmatch 'cross-owner').Count -ne 0) { throw 'nt_sec.c must remain a cross-owner composition review.' }
-if (@($rows | Where-Object original_symbol_or_call_group -match 'host_direct_access_error' | Where-Object single_recovery_owner -notmatch 'adapter-win32; session').Count -ne 0) { throw 'Direct-access error contract must remain owned by adapter-win32 and session.' }
+if (@($rows | Where-Object original_symbol_or_call_group -match 'host_direct_access_error' | Where-Object single_recovery_owner -notmatch 'adapter-mvdm-host-out/win32; session').Count -ne 0) { throw 'Direct-access error contract must remain owned by adapter-mvdm-host-out/win32 and session.' }
 foreach ($row in $rows) {
     foreach ($column in 'source_span','original_symbol_or_call_group','original_contract','historical_dependency','single_recovery_owner','provisional_disposition','predecessor_gate','evidence') {
         if ([string]::IsNullOrWhiteSpace($row.$column)) { throw "Empty $column for $($row.interface_id)." }

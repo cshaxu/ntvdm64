@@ -15,9 +15,9 @@ foreach ($row in $fax) {
     $row.final_audit_state = 'final-disposition-audited; not implemented'
     if ($row.source_path -in $uiBodies) {
         $row.final_disposition = 'adapter-backed'
-        $row.final_owner_or_link_boundary = 'mvdm-host original WOWFAXUI provider -> adapter-wow -> adapter-win32 and session copied broker records'
+        $row.final_owner_or_link_boundary = 'mvdm-host original WOWFAXUI provider -> adapter-wow -> adapter-mvdm-host-out/win32 and session copied broker records'
         $row.final_change_class = 'binding-only; preserve original UI/provider flow while replacing private shared-section transport'
-        $row.named_adapter = 'adapter-wow; adapter-win32; session host-resource mapping manager'
+        $row.named_adapter = 'adapter-wow; adapter-mvdm-host-out/win32; session host-resource mapping manager'
         $row.mapping_implication = 'historical 32-bit shared-section offsets are fixed-width copied broker fields; PVOID-to-DWORD identity conversion is prohibited'
         $row.final_evidence = 'T276 S23 FAX package baseline: original user-mode WOWFAXUI provider body'
     }
@@ -25,7 +25,7 @@ foreach ($row in $fax) {
         $row.final_disposition = 'binding-only'
         $row.final_owner_or_link_boundary = 'mvdm-platform-abi original WOWFAX declaration surface supplied to the selected UI provider and adapter-wow binding'
         $row.final_change_class = 'binding-only; preserve declaration and offset field shape'
-        $row.named_adapter = 'adapter-wow; adapter-win32; session'
+        $row.named_adapter = 'adapter-wow; adapter-mvdm-host-out/win32; session'
         $row.mapping_implication = 'shared data is copied through session-owned fixed-width records, never direct native pointer identity'
         $row.final_evidence = 'T276 S23 FAX declaration prerequisite'
     }

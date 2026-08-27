@@ -12,7 +12,7 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $components = @(
     'bochs-core', 'bochs-core-overlay', 'adapter-bochs',
     'opennt-guest', 'opennt-host', 'opennt-host-overlay', 'opennt-bop',
-    'opennt-softpc', 'opennt-utils', 'adapter-mvdm-host-in', 'adapter-win32',
+    'opennt-softpc', 'opennt-utils', 'adapter-mvdm-host-in', 'adapter-mvdm-host-out/win32',
     'adapter-softpc', 'session', 'app'
 )
 $nonProductNames = @(
@@ -53,7 +53,7 @@ $registers = @{
     'opennt-bop'    = 'README.md'
     'opennt-host'   = 'README.md'
     'adapter-softpc' = 'README.md'
-    'adapter-win32' = 'README.md'
+    'adapter-mvdm-host-out/win32' = 'README.md'
 }
 foreach ($component in $registers.Keys) {
     $componentRoot = Join-Path $root (Join-Path 'src' $component)

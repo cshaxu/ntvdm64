@@ -46,7 +46,7 @@ $result = foreach ($file in $files) {
         '^v86/scaffold/i386/(softpc\.c|fakebop\.c|fakeinit\.c|fakekbd\.c|fakevid\.c|stubs\.c)$' {
             $role = 'historical-ntvdm-product-scaffold'
             $owner = 'app'
-            $boundary = 'app; adapter-mvdm-host-in; adapter-softpc; adapter-bochs; adapter-win32; session'
+            $boundary = 'app; adapter-mvdm-host-in; adapter-softpc; adapter-bochs; adapter-mvdm-host-out/win32; session'
             $families = 'historical ntvdm.exe startup/termination; SoftPC initialization; BOP/BIOS/video/keyboard placeholders; console and BaseSrv APIs'
             $summary = 'original standalone NTVDM product startup/scaffold and temporary BIOS stubs; app owns modern composition and cannot import this product shell as a second engine or duplicate startup path'
             $disposition = 'historical-product-shell exclusion; source-shaped composition evidence only'
@@ -54,7 +54,7 @@ $result = foreach ($file in $files) {
         '^v86/scaffold/i386/(fun\.h|x86\.h|xbios\.h|xbiosdsk\.h|xbioskbd\.h|xbiosvid\.h|xguest\.h|xwincon\.h)$' {
             $role = 'historical-scaffold-declaration'
             $owner = 'app'
-            $boundary = 'app; adapter-mvdm-host-in; adapter-softpc; adapter-bochs; adapter-win32; session'
+            $boundary = 'app; adapter-mvdm-host-in; adapter-softpc; adapter-bochs; adapter-mvdm-host-out/win32; session'
             $families = 'historical product startup, BIOS placeholder and console declarations'
             $summary = 'declaration/layout evidence for the excluded standalone scaffold; individual same-shaped boundary declarations may be recovered only through their named component owner'
             $disposition = 'declaration evidence; no standalone scaffold composition'

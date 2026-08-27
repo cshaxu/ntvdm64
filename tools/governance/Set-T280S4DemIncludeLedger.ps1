@@ -16,8 +16,8 @@ function Get-Disposition([string]$Header) {
         '^(softpc\.h|mvdm\.h|vrnmpipe\.h|exterr\.h|dbgsvc\.h)$' { return @('support-mirror', 'mvdm-support/inc', 'byte-exact selected MVDM support header') }
         '^nt_vdd\.h$' { return @('platform-abi-mirror', 'mvdm-platform-abi', 'byte-exact public SDK declaration mirror') }
         '^(windows\.h|winbase\.h|stdio\.h|string\.h|memory\.h|io\.h|fcntl\.h)$' { return @('public-sdk-or-crt', 'modern SDK/CRT', 'public compiler/platform header; no project replacement') }
-        '^winbasep\.h$' { return @('adapter-gap', 'adapter-win32', 'include-only historical private Base header; no DEM-reached declaration, so only a behavior-free same-name include carrier is permitted') }
-        '^vdm\.h$' { return @('adapter-gap', 'adapter-win32 -> session', 'DEM reaches VDMQUERYDIRINFO, VdmQueryDir and NtVdmControl; recover only their same-shaped declaration and scoped session-backed query behavior') }
+        '^winbasep\.h$' { return @('adapter-gap', 'adapter-mvdm-host-out/win32', 'include-only historical private Base header; no DEM-reached declaration, so only a behavior-free same-name include carrier is permitted') }
+        '^vdm\.h$' { return @('adapter-gap', 'adapter-mvdm-host-out/win32 -> session', 'DEM reaches VDMQUERYDIRINFO, VdmQueryDir and NtVdmControl; recover only their same-shaped declaration and scoped session-backed query behavior') }
         default { throw "Unclassified DEM direct include: $Header" }
     }
 }

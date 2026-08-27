@@ -30,7 +30,7 @@ foreach ($token in @('NtQueryDirectoryFile','NtQueryVolumeInformationFile','NtOp
     if ($all -notmatch [regex]::Escape($token)) { throw "Reached NTIO ledger misses $token." }
 }
  $implementation = Get-Content -Raw -LiteralPath (Join-Path $root 'docs/etc/operations/m0-t280-s10-dem-ntioapi-implementation-plan-001.md')
-foreach ($token in @('reached-subset facade', 'adapter-win32', 'host-local', 'session.guest_memory', 'explicit source-shaped')) {
+foreach ($token in @('reached-subset facade', 'adapter-mvdm-host-out/win32', 'host-local', 'session.guest_memory', 'explicit source-shaped')) {
     if ($implementation -notmatch [regex]::Escape($token)) { throw "T280 S10 implementation plan misses $token." }
 }
 Write-Host 'PASS: T280 S10 ledger covers all reached NTIO declaration/call families with mapping isolation.'

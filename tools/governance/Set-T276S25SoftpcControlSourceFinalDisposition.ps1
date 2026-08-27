@@ -63,7 +63,7 @@ foreach ($row in $targets) {
         $row.final_disposition = 'adapter-backed'
         $row.final_owner_or_link_boundary = 'mvdm-host original monitor, BOP, session, host-capability, configuration, VDD or error provider -> named adapters and session; Bochs receives only typed mechanical requests'
         $row.final_change_class = 'binding-only; preserve original control flow, ordering, failure routes and data shapes'
-        $row.named_adapter = 'adapter-mvdm-host-in; adapter-softpc; adapter-bochs; adapter-win32; adapter-vdm-monitor; adapter-vdd; session as reached'
+        $row.named_adapter = 'adapter-mvdm-host-in; adapter-softpc; adapter-bochs; adapter-mvdm-host-out/win32; adapter-vdm-monitor; adapter-vdd; session as reached'
         $row.mapping_implication = 'guest data uses only session guest-memory mapping; callbacks/resources use the session completion or host-resource instance, never native identity in MVDM fields'
         $row.final_evidence = 'T276 S12 monitor/session, Win32 capability and BOP/VDD/debugger source-span owner baselines'
     }

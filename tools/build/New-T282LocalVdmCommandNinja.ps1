@@ -14,7 +14,7 @@ $build = Join-Path $root ("build/M0-T282/S6/{0}" -f $Architecture)
 New-Item -ItemType Directory -Force $build | Out-Null
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root +
     '/src /I ' + $root + '/src/adapter-vdm-monitor/include /I ' + $root +
-    '/src/adapter-win32/include /I ' + $root + '/src/session'
+    '/src/adapter-mvdm-host-out/win32/include /I ' + $root + '/src/session'
 $content = @"
 ninja_required_version = 1.10
 root = $root

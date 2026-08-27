@@ -17,11 +17,11 @@ $build = Join-Path $root ("build/M0-T283/S2/{0}" -f $Architecture)
 New-Item -ItemType Directory -Force $build | Out-Null
 
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM ' +
-    '/FI ' + $root + '/src/adapter-win32/include/nt.h ' +
+    '/FI ' + $root + '/src/adapter-mvdm-host-out/win32/include/nt.h ' +
     '/FI ' + $root + '/src/adapter-softpc/include/error_abi.h ' +
     '/FI ' + $root + '/src/adapter-vdm-monitor/include/vdm.h ' +
     '/I ' + $root + '/src ' +
-    '/I ' + $root + '/src/adapter-win32/include ' +
+    '/I ' + $root + '/src/adapter-mvdm-host-out/win32/include ' +
     '/I ' + $root + '/src/adapter-softpc/include ' +
     '/I ' + $root + '/src/adapter-vdm-monitor/include ' +
     '/I ' + $root + '/src/mvdm-support/inc ' +

@@ -1,4 +1,17 @@
 # win32 family
 
-Reserved for same-shaped historical Win32, NTDLL and OEM bindings used by
-`mvdm-host`. T284 S3 admits no source or export here.
+Same-shaped historical Win32/NTDLL/OEM facade used by imported `mvdm-host`
+source. It uses public modern Windows APIs where the original private NT4
+product composition no longer exists.
+
+## Registered divergences
+
+| ID | Original purpose | Reason | Implementation | Files |
+| --- | --- | --- | --- | --- |
+| ADAPTER-WIN32-001 | NT4 exported RTL string, heap, TEB/PEB and current-directory helpers to `oemuni`. | Modern public SDKs do not expose the historical private product composition safely on both x86 and x64. | Preserve source-facing names and counted-string/NTSTATUS contracts; use public Win32 conversion, heap and directory APIs with adapter-private TLS state. | `include/nt.h`, `include/ntrtl.h`, `include/nturtl.h`, `source/opennt_support_rtl.c` |
+| ADAPTER-WIN32-002 | Reached OEM calls reuse `TEB.StaticUnicodeString` after temporary `RtlInitUnicodeString` rebinding. | A real modern TEB cannot provide the historical scratch field safely. | Restore only the adapter-owned TLS buffer before a non-allocating OEM-to-Unicode conversion. | `source/opennt_support_rtl.c` |
+| ADAPTER-WIN32-004 | Original DEM `dem.h` uses the historical `devioctl.h` storage declaration layout and declares a local `GetDiskSpaceInformation` helper. | The modern SDK exposes an unrelated macro alias with that name and does not automatically select the source-mirrored storage carrier. | Expose the original storage carrier, then remove only the conflicting modern convenience macro. | `include/nt.h`, `include/ntioapi.h` |
+| ADAPTER-WIN32-005 | Original DEM directory, volume and symbolic-link branches use selected `ntioapi.h` layouts and NT call shapes. | Modern public headers omit a complete compatible declaration set, while the byte-exact historical carrier cannot be included wholesale beside `winternl.h`. | Retain the reached source spellings and resolve matching `ntdll` exports at call time; missing exports return `STATUS_NOT_IMPLEMENTED`. | `include/ntioapi.h`, `source/ntioapi_facade.c`, `include/nt.h` |
+| ADAPTER-WIN32-006 | Original DEM bodies require selected historical NT status/object/device constants, RTL list macros, and NT/RTL function declarations. | Modern headers omit a coherent NT4 source form and direct full historical header inclusion conflicts with the current SDK. | Retain the exact reached spellings and values in the adapter declaration subset. | `include/ntioapi.h`, `include/ntrtl.h`, `include/nturtl.h` |
+| ADAPTER-WIN32-007 | Original COMMAND `cmd.h` includes the historical `vdmapi.h` declaration surface. | The previous local placeholder hid `VDMINFO`/`GetNextVDMCommand` declarations. | `include/vdmapi.h` is a declaration-only forwarding carrier to the byte-exact platform-ABI mirror; implementation remains session/monitor-owned. | `include/vdmapi.h` |
+| ADAPTER-WIN32-008 | Original COMMAND `cmdkeyb.c` includes historical private console declarations from `winconp.h`. | Modern SDK headers do not carry this NT4-private declaration carrier. | `include/winconp.h` forwards declarations only to the byte-exact platform-ABI mirror. | `include/winconp.h` |

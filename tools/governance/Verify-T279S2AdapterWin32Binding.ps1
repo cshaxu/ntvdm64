@@ -8,13 +8,13 @@ $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 
 $required = @(
-    'src/adapter-win32/include/nt.h',
-    'src/adapter-win32/include/ntrtl.h',
-    'src/adapter-win32/include/nturtl.h',
-    'src/adapter-win32/include/vdmapi.h',
-    'src/adapter-win32/source/opennt_support_rtl.c',
-    'docs/etc/operations/m0-t279-s2-adapter-win32-binding-plan-001.md',
-    'docs/etc/operations/m0-t279-s2-adapter-win32-binding-audit-001.md'
+    'src/adapter-mvdm-host-out/win32/include/nt.h',
+    'src/adapter-mvdm-host-out/win32/include/ntrtl.h',
+    'src/adapter-mvdm-host-out/win32/include/nturtl.h',
+    'src/adapter-mvdm-host-out/win32/include/vdmapi.h',
+    'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c',
+    'docs/etc/operations/m0-t279-s2-adapter-mvdm-host-out/win32-binding-plan-001.md',
+    'docs/etc/operations/m0-t279-s2-adapter-mvdm-host-out/win32-binding-audit-001.md'
 )
 foreach ($relative in $required) {
     if (-not (Test-Path -LiteralPath (Join-Path $root $relative) -PathType Leaf)) {
@@ -33,7 +33,7 @@ foreach ($pair in $mirrorPairs) {
     if ($actual -ne $baseline) { throw "Original support mirror changed: $($pair[0])" }
 }
 
-$audit = Get-Content -LiteralPath (Join-Path $root 'docs/etc/operations/m0-t279-s2-adapter-win32-binding-audit-001.md') -Raw
+$audit = Get-Content -LiteralPath (Join-Path $root 'docs/etc/operations/m0-t279-s2-adapter-mvdm-host-out/win32-binding-audit-001.md') -Raw
 foreach ($name in @('FindFirstFileOem', 'FindNextFileOem', 'GetFullPathNameOem', 'SearchPathOem')) {
     if ($audit -notmatch [regex]::Escape($name)) { throw "Missing x64 overlay decision: $name" }
 }

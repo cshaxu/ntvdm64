@@ -72,11 +72,11 @@ if ($manifest.schema -ne 'runner.t260.s8.component-manifest.v1' -or $manifest.ar
 }
 if (@($manifest.modules).Count -ne 9) { throw 'T261 S7 requires exactly nine linkable component modules.' }
 foreach ($module in @($manifest.modules)) {
-    if ($module.name -notin @('bochs-core', 'adapter-bochs', 'adapter-mvdm-host-in', 'adapter-softpc', 'adapter-win32', 'opennt-host', 'opennt-bop', 'session', 'app') -or @($module.sources).Count -eq 0) {
+    if ($module.name -notin @('bochs-core', 'adapter-bochs', 'adapter-mvdm-host-in', 'adapter-softpc', 'adapter-mvdm-host-out-win32', 'opennt-host', 'opennt-bop', 'session', 'app') -or @($module.sources).Count -eq 0) {
         throw 'Module ownership or source list is invalid.'
     }
     foreach ($source in @($module.sources)) {
-        if ($source -notmatch '^src/(?:bochs-core(?:-overlay)?|adapter-bochs|adapter-mvdm-host-in|adapter-softpc|adapter-win32|opennt-bop|opennt-host|session|app)/.+\.(c|cc)$' -or
+        if ($source -notmatch '^src/(?:bochs-core(?:-overlay)?|adapter-bochs|adapter-mvdm-host-in|adapter-softpc|adapter-mvdm-host-out/win32|opennt-bop|opennt-host|session|app)/.+\.(c|cc)$' -or
             !(Test-Path -LiteralPath (Join-Path $root $source) -PathType Leaf)) {
             throw "Invalid or missing manifest source: $source"
         }

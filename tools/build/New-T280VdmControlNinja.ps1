@@ -12,7 +12,7 @@ $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
 $build = Join-Path $root ("build/M0-T280/{0}-vdm-control" -f $Architecture)
 New-Item -ItemType Directory -Force $build | Out-Null
-$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src/adapter-vdm-monitor/include /I ' + $root + '/src/adapter-win32/include /I ' + $root + '/src/session'
+$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src/adapter-vdm-monitor/include /I ' + $root + '/src/adapter-mvdm-host-out/win32/include /I ' + $root + '/src/session'
 $content = @"
 ninja_required_version = 1.10
 root = $root

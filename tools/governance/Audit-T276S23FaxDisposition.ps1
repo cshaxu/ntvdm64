@@ -9,15 +9,15 @@ if ($rows.Count -ne 21) { throw "Expected 21 selected fax paths, found $($rows.C
 $out = foreach ($row in $rows) {
     $path = $row.target_path
     if ($path -eq 'fax/wowfax/wowfax.c') {
-        $role = 'historical-gdi-driver-provider-body'; $owner = 'adapter-wow; adapter-win32; session; broker'; $contract = 'Original GDI driver body runs in historical graphics-engine/CSRSS product context.'; $disposition = 'private graphics-engine prerequisite; no body enabled'
+        $role = 'historical-gdi-driver-provider-body'; $owner = 'adapter-wow; adapter-mvdm-host-out/win32; session; broker'; $contract = 'Original GDI driver body runs in historical graphics-engine/CSRSS product context.'; $disposition = 'private graphics-engine prerequisite; no body enabled'
     } elseif ($path -match '^fax/wowfaxui/.+\.c$') {
-        $role = 'historical-fax-ui-dll-provider-body'; $owner = 'adapter-wow; adapter-win32; session; broker'; $contract = 'Original printer UI DLL body coordinates WOW fax structures, shared section and spooler/UI calls.'; $disposition = 'whole fax UI owner-package prerequisite; no body enabled'
+        $role = 'historical-fax-ui-dll-provider-body'; $owner = 'adapter-wow; adapter-mvdm-host-out/win32; session; broker'; $contract = 'Original printer UI DLL body coordinates WOW fax structures, shared section and spooler/UI calls.'; $disposition = 'whole fax UI owner-package prerequisite; no body enabled'
     } elseif ($row.file_kind -eq 'declaration') {
-        $role = 'historical-fax-declaration'; $owner = 'adapter-wow; adapter-win32; session; broker'; $contract = 'Original fax driver/UI ABI and shared layout evidence.'; $disposition = 'declaration recovery prerequisite'
+        $role = 'historical-fax-declaration'; $owner = 'adapter-wow; adapter-mvdm-host-out/win32; session; broker'; $contract = 'Original fax driver/UI ABI and shared layout evidence.'; $disposition = 'declaration recovery prerequisite'
     } elseif ($path -match '/(sources|makefile|\.def|\.rc)$') {
-        $role = 'historical-fax-build-or-resource-input'; $owner = 'adapter-wow; adapter-win32; session; broker'; $contract = 'Original driver/DLL build, export or resource input.'; $disposition = 'build/resource evidence only'
+        $role = 'historical-fax-build-or-resource-input'; $owner = 'adapter-wow; adapter-mvdm-host-out/win32; session; broker'; $contract = 'Original driver/DLL build, export or resource input.'; $disposition = 'build/resource evidence only'
     } else {
-        $role = 'historical-fax-product-resource'; $owner = 'adapter-wow; adapter-win32; session; broker'; $contract = 'Original fax product installation/help/PPD resource.'; $disposition = 'product resource evidence only'
+        $role = 'historical-fax-product-resource'; $owner = 'adapter-wow; adapter-mvdm-host-out/win32; session; broker'; $contract = 'Original fax product installation/help/PPD resource.'; $disposition = 'product resource evidence only'
     }
     [pscustomobject][ordered]@{
         file_id = $row.file_id

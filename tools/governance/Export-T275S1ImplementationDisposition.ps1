@@ -12,10 +12,10 @@ function Get-Disposition([string]$Path) {
     if ($Path -like 'adapter-mvdm-host-in/*') {
         return [pscustomobject]@{ ledger_id='ADAPTER-IF-001'; disposition='split-recover'; successor='T275 S2'; rationale='selector-blind copied ingress/completion only' }
     }
-    if ($Path -like 'adapter-win32/facade/demfile_create_observation.*') {
+    if ($Path -like 'adapter-mvdm-host-out/win32/facade/demfile_create_observation.*') {
         return [pscustomobject]@{ ledger_id='ADAPTER-IF-007'; disposition='retire'; successor='documentation-only'; rationale='project diagnostic is not an original Win32 facade' }
     }
-    if ($Path -like 'adapter-win32/*') {
+    if ($Path -like 'adapter-mvdm-host-out/win32/*') {
         $id = if ($Path -match 'error_dialog') { 'ADAPTER-IF-009' } elseif ($Path -match 'command|rtl|vdm_api') { 'ADAPTER-IF-008' } else { 'ADAPTER-IF-007' }
         return [pscustomobject]@{ ledger_id=$id; disposition='recover-if-reached'; successor='T275 S4'; rationale='retain only named source-shaped public-Win32 facade' }
     }

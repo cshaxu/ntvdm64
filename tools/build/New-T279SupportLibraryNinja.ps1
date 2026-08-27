@@ -13,7 +13,7 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
 $build = Join-Path $root ("build/M0-T279/{0}" -f $Architecture)
 New-Item -ItemType Directory -Force $build | Out-Null
 
-$common = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src/adapter-win32/include /I ' + $root + '/src/mvdm-support/inc /I ' + $root + '/src/mvdm-support/oemuni'
+$common = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src/adapter-mvdm-host-out/win32/include /I ' + $root + '/src/mvdm-support/inc /I ' + $root + '/src/mvdm-support/oemuni'
 $unsafeFileDefines = ''
 $unsafeProcessDefines = ''
 $overlayObject = ''
@@ -57,8 +57,8 @@ rule run
   command = `$in
   description = RUN `$in
 
-build obj/opennt_support_rtl.obj: cc `$root/src/adapter-win32/source/opennt_support_rtl.c
-build adapter-win32.lib: lib obj/opennt_support_rtl.obj
+build obj/opennt_support_rtl.obj: cc `$root/src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c
+build adapter-mvdm-host-out-win32.lib: lib obj/opennt_support_rtl.obj
 build obj/file.obj: cc_file `$root/src/mvdm-support/oemuni/file.c
 build obj/process.obj: cc_process `$root/src/mvdm-support/oemuni/process.c
 build obj/suballoc.obj: cc_suballoc `$root/src/mvdm-support/suballoc/suballoc.c
@@ -69,7 +69,7 @@ if ($Architecture -eq 'x64') {
 build obj/oemuni_pointer_width.obj: cc `$root/src/mvdm-support-overlay/source/oemuni_pointer_width.c
 build oemuni.lib: lib obj/file.obj obj/process.obj obj/oemuni_pointer_width.obj
 build obj/oemuni_pointer_width_fixture.obj: cc `$root/tests/mvdm-support/oemuni_pointer_width_fixture.c
-build oemuni_pointer_width_fixture.exe: link obj/oemuni_pointer_width_fixture.obj oemuni.lib adapter-win32.lib
+build oemuni_pointer_width_fixture.exe: link obj/oemuni_pointer_width_fixture.obj oemuni.lib adapter-mvdm-host-out-win32.lib
 build test: run oemuni_pointer_width_fixture.exe
 "@
 } else {
@@ -78,7 +78,7 @@ build test: run oemuni_pointer_width_fixture.exe
 $content += "`n"
 $content += @"
 build suballoc.lib: lib obj/suballoc.obj
-build all: phony adapter-win32.lib oemuni.lib suballoc.lib$(if ($Architecture -eq 'x64') { ' oemuni_pointer_width_fixture.exe' } else { '' })
+build all: phony adapter-mvdm-host-out-win32.lib oemuni.lib suballoc.lib$(if ($Architecture -eq 'x64') { ' oemuni_pointer_width_fixture.exe' } else { '' })
 default all
 "@
 $content += "`n"

@@ -13,7 +13,7 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
 $build = Join-Path $root ("build/M0-T280/{0}" -f $Architecture)
 New-Item -ItemType Directory -Force $build | Out-Null
 
-$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /FI ' + $root + '/src/adapter-win32/include/nt.h /FI ' + $root + '/src/adapter-softpc/include/error_abi.h /I ' + $root + '/src/adapter-win32/include /I ' + $root + '/src/adapter-softpc/include /I ' + $root + '/src/mvdm-host/softpc.new/host/inc /I ' + $root + '/src/mvdm-host/softpc.new/base/inc'
+$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /FI ' + $root + '/src/adapter-mvdm-host-out/win32/include/nt.h /FI ' + $root + '/src/adapter-softpc/include/error_abi.h /I ' + $root + '/src/adapter-mvdm-host-out/win32/include /I ' + $root + '/src/adapter-softpc/include /I ' + $root + '/src/mvdm-host/softpc.new/host/inc /I ' + $root + '/src/mvdm-host/softpc.new/base/inc'
 $content = @"
 ninja_required_version = 1.10
 root = $root

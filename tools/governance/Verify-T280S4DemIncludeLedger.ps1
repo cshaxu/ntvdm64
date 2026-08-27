@@ -16,7 +16,7 @@ foreach ($required in @('local-mirror','support-mirror','platform-abi-mirror','p
     if (@($ledger | Where-Object disposition -eq $required).Count -eq 0) { throw "Missing DEM include disposition: $required" }
 }
 $gapRows = @($ledger | Where-Object disposition -eq 'adapter-gap')
-if (@($gapRows | Where-Object { $_.direct_include -eq 'winbasep.h' -and $_.final_owner -eq 'adapter-win32' }).Count -eq 0) { throw 'Missing adapter-win32 winbasep.h recovery gap.' }
-if (@($gapRows | Where-Object { $_.direct_include -eq 'vdm.h' -and $_.final_owner -eq 'adapter-win32 -> session' }).Count -eq 0) { throw 'Missing adapter-win32/session vdm.h recovery gap.' }
+if (@($gapRows | Where-Object { $_.direct_include -eq 'winbasep.h' -and $_.final_owner -eq 'adapter-mvdm-host-out/win32' }).Count -eq 0) { throw 'Missing adapter-mvdm-host-out/win32 winbasep.h recovery gap.' }
+if (@($gapRows | Where-Object { $_.direct_include -eq 'vdm.h' -and $_.final_owner -eq 'adapter-mvdm-host-out/win32 -> session' }).Count -eq 0) { throw 'Missing adapter-mvdm-host-out/win32/session vdm.h recovery gap.' }
 if (@($ledger | Where-Object { $_.admission_state -ne 'S4-audited; no DEM body enabled' }).Count -ne 0) { throw 'S4 must not enable a DEM body.' }
 Write-Host "PASS: T280 S4 DEM include ledger covers $($ledger.Count) direct includes across all 16 original bodies."

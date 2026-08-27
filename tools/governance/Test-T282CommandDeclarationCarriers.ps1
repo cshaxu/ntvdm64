@@ -23,7 +23,7 @@ foreach ($carrier in $carriers) {
     }
 }
 
-$forwarder = Get-Content -Raw -LiteralPath (Join-Path $root 'src\adapter-win32\include\vdmapi.h')
+$forwarder = Get-Content -Raw -LiteralPath (Join-Path $root 'src\adapter-mvdm-host-out/win32\include\vdmapi.h')
 if ($forwarder -notmatch 'mvdm-platform-abi/source/public/internal/base/inc/vdmapi\.h') {
     throw 'The adapter vdmapi declaration forwarder does not select the exact platform-ABI carrier.'
 }
@@ -32,7 +32,7 @@ foreach ($architecture in @('x86', 'x64')) {
     if ($RequireArchitectureProbes) {
         if (-not (Test-Path -LiteralPath $graph)) { throw "Missing $architecture declaration-carrier graph." }
         $content = Get-Content -Raw -LiteralPath $graph
-        if ($content -notmatch 'adapter-win32/include' -or $content -notmatch 'internal/windows/inc') {
+        if ($content -notmatch 'adapter-mvdm-host-out/win32/include' -or $content -notmatch 'internal/windows/inc') {
             throw "$architecture graph does not select both adapter vdmapi and original pif carriers."
         }
         foreach ($object in @('cmdexec.obj', 'cmdpif.obj')) {

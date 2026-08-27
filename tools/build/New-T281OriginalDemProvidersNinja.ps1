@@ -21,11 +21,11 @@ New-Item -ItemType Directory -Force $build | Out-Null
 # existing same-shaped adapter boundary required by original demsrch.c; only
 # its declarations are compiled here, never its control implementation.
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL ' +
-    '/FI ' + $root + '/src/adapter-win32/include/nt.h ' +
+    '/FI ' + $root + '/src/adapter-mvdm-host-out/win32/include/nt.h ' +
     '/FI ' + $root + '/src/adapter-softpc/include/error_abi.h ' +
     '/FI ' + $root + '/src/adapter-vdm-monitor/include/vdm.h ' +
     '/I ' + $root + '/src ' +
-    '/I ' + $root + '/src/adapter-win32/include ' +
+    '/I ' + $root + '/src/adapter-mvdm-host-out/win32/include ' +
     '/I ' + $root + '/src/adapter-softpc/include ' +
     '/I ' + $root + '/src/adapter-vdm-monitor/include ' +
     '/I ' + $root + '/src/mvdm-support/inc ' +

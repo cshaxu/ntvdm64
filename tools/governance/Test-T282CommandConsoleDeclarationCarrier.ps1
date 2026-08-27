@@ -16,7 +16,7 @@ $target = (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $root 'src\mvd
 if ($source -ne $expected -or $target -ne $expected) {
     throw 'winconp.h is not byte-identical to its pinned original declaration carrier.'
 }
-$forwarder = Get-Content -Raw -LiteralPath (Join-Path $root 'src\adapter-win32\include\winconp.h')
+$forwarder = Get-Content -Raw -LiteralPath (Join-Path $root 'src\adapter-mvdm-host-out/win32\include\winconp.h')
 if ($forwarder -notmatch 'mvdm-platform-abi/source/public/internal/windows/inc/winconp\.h') {
     throw 'The adapter winconp declaration forwarder does not select the exact platform-ABI carrier.'
 }
@@ -27,7 +27,7 @@ if ($RequireArchitectureProbes) {
         if (-not (Test-Path -LiteralPath $graph) -or -not (Test-Path -LiteralPath $object)) {
             throw "Missing $architecture COMMAND console declaration probe."
         }
-        if ((Get-Content -Raw -LiteralPath $graph) -notmatch 'adapter-win32/include') {
+        if ((Get-Content -Raw -LiteralPath $graph) -notmatch 'adapter-mvdm-host-out/win32/include') {
             throw "$architecture graph does not select the adapter declaration carrier."
         }
     }

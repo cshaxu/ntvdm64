@@ -17,7 +17,7 @@ function Get-NonImplementationDisposition([string]$Path, [string]$Kind) {
     if ($Path -like 'adapter-mvdm-host-in/*') {
         return [pscustomobject]@{ ledger_id='ADAPTER-IF-001'; disposition='recover-if-required-by-S2'; successor='T275 S2'; rationale='declaration follows retained selector-blind transport only' }
     }
-    if ($Path -like 'adapter-win32/*') {
+    if ($Path -like 'adapter-mvdm-host-out/win32/*') {
         $id = if ($Path -match 'error_dialog') { 'ADAPTER-IF-009' } elseif ($Path -match 'command|rtl|vdm_api|vdmtib') { 'ADAPTER-IF-008' } else { 'ADAPTER-IF-007' }
         return [pscustomobject]@{ ledger_id=$id; disposition='compare-then-recover-if-required-by-S4'; successor='T275 S4'; rationale='retain only exact declaration closure of an admitted source-shaped facade' }
     }

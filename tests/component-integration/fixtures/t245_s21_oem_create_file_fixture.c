@@ -2,7 +2,7 @@
 #include <string.h>
 #include <windows.h>
 
-#include "adapter-win32/include/opennt-api/opennt_dem_file_oem_facade.h"
+#include "adapter-mvdm-host-out/win32/include/opennt-api/opennt_dem_file_oem_facade.h"
 
 int main(void)
 {

@@ -19,17 +19,17 @@ foreach ($provider in $active) {
     $row.final_audit_state = 'final-disposition-audited; not implemented'
     if ($provider.original_subdomain -in $overlayDomains) {
         $row.final_disposition = 'overlay-required'
-        $row.final_owner_or_link_boundary = 'mvdm-host original WOW32 provider with adapter-wow overlay -> adapter-win32, adapter-softpc and adapter-vdm-monitor as reached; session owns mapping instances'
+        $row.final_owner_or_link_boundary = 'mvdm-host original WOW32 provider with adapter-wow overlay -> adapter-mvdm-host-out/win32, adapter-softpc and adapter-vdm-monitor as reached; session owns mapping instances'
         $row.final_change_class = 'overlay-required; retain original provider flow while replacing private USER/GDI/NT4 monitor or direct 32-bit pointer/HANDLE transport'
-        $row.named_adapter = 'adapter-wow; adapter-win32; adapter-softpc; adapter-vdm-monitor; session guest-memory, host-resource and completion-callback mapping managers'
+        $row.named_adapter = 'adapter-wow; adapter-mvdm-host-out/win32; adapter-softpc; adapter-vdm-monitor; session guest-memory, host-resource and completion-callback mapping managers'
         $row.mapping_implication = 'all frame/guest pointer access is a bounded lease or copy; host resource identity is an opaque mapped ID; no DWORD cast may carry a native pointer or HANDLE'
         $row.final_evidence = "T276 S22 WOW32 active-subdomain baseline: $($provider.original_subdomain) requires private-product boundary overlay"
     }
     elseif ($provider.original_subdomain -in $bindingDomains) {
         $row.final_disposition = 'adapter-backed'
-        $row.final_owner_or_link_boundary = 'mvdm-host original WOW32 provider -> adapter-wow and adapter-win32 public/same-shaped capability bindings; session owns identity mapping'
+        $row.final_owner_or_link_boundary = 'mvdm-host original WOW32 provider -> adapter-wow and adapter-mvdm-host-out/win32 public/same-shaped capability bindings; session owns identity mapping'
         $row.final_change_class = 'binding-only; preserve original provider dispatch, structures and failure order'
-        $row.named_adapter = 'adapter-wow; adapter-win32; session host-resource mapping manager'
+        $row.named_adapter = 'adapter-wow; adapter-mvdm-host-out/win32; session host-resource mapping manager'
         $row.mapping_implication = 'native resources are opaque host-resource IDs; guest frame access remains a bounded session lease/copy'
         $row.final_evidence = "T276 S22 WOW32 active-subdomain baseline: $($provider.original_subdomain) provider can bind through named adapters"
     }
