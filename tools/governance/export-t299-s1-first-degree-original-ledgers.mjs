@@ -54,6 +54,7 @@ const rawById = new Map(rawCalls.map((row) => [row.candidate_id, row]));
 const canonicalByRawId = new Map(canonicalCallResolution.map((row) => [row.raw_candidate_id, row]));
 const frontierByRawId = new Map(includeFrontier.map((row) => [row.candidate_id, row]));
 const publicInterfaces = interfaces.filter((row) => row.initial_first_degree_statuses.split(';').includes('public-modern-api-leaf-candidate'));
+const publicSymbols = new Set(publicInterfaces.map((row) => row.callee_spelling));
 const scopesByInterfaceId = new Map();
 for (const item of interfaces) {
   const packageRoots = new Set();
@@ -111,26 +112,31 @@ for (const sourceRoot of sourceRoots) for (const fileName of sourceFilesFor(fall
   }
 }
 
-// The two approved trees retain many byte-identical file aliases.  A matching
-// symbol/hash/line/signature is one original definition identity with explicit
-// source aliases; differing bytes remain separate product variants.
-const canonicalDefinitions = new Map();
+// A source location is an implementation identity.  Even byte-identical
+// cross-tree/file copies stay distinct: this audit must never merge functions
+// merely because their spelling, bytes or signature coincide.
 for (const definition of definitions) {
-  const key = `${definition.symbol}:${definition.source_sha256}:${definition.source_line}:${definition.signature_evidence}`;
-  if (!canonicalDefinitions.has(key)) canonicalDefinitions.set(key, { ...definition, source_aliases: new Set(), provenance_roots: new Set() });
-  const canonical = canonicalDefinitions.get(key);
-  canonical.source_aliases.add(`${definition.source_root}:${definition.source_path}`);
-  canonical.provenance_roots.add(definition.source_root);
-}
-definitions.length = 0;
-for (const definition of canonicalDefinitions.values()) {
-  definition.source_aliases = [...definition.source_aliases].sort().join(';');
-  definition.provenance_roots = [...definition.provenance_roots].sort().join(';');
-  definitions.push(definition);
+  definition.source_aliases = `${definition.source_root}:${definition.source_path}`;
+  definition.provenance_roots = definition.source_root;
 }
 definitions.sort((left, right) => left.symbol.localeCompare(right.symbol) || left.source_path.localeCompare(right.source_path) || Number(left.source_line) - Number(right.source_line));
 definitions.forEach((definition, index) => { definition.definition_id = `MVDM-FIRST-DEFINITION-${String(index + 1).padStart(6, '0')}`; });
 const bySymbol = new Map(); for (const definition of definitions) bySymbol.set(definition.symbol, [...(bySymbol.get(definition.symbol) || []), definition]);
+const callImplementationRows = [];
+for (const rawCall of rawCalls) {
+  if (canonicalByRawId.get(rawCall.candidate_id)?.canonical_resolution !== 'remains-first-degree-external-interface') continue;
+  const frontier = frontierByRawId.get(rawCall.candidate_id);
+  const allowed = new Set((frontier?.allowed_package_roots || '').split(';').filter(Boolean));
+  const allCandidates = bySymbol.get(rawCall.callee_spelling) || [];
+  const scopedCandidates = allCandidates.filter((definition) => !allowed.size || [...allowed].some((packageRoot) => definition.source_path.startsWith(`${packageRoot}/`)));
+  const candidates = scopedCandidates.length ? scopedCandidates : allCandidates;
+  if (!candidates.length) {
+    const publicProvider = publicSymbols.has(rawCall.callee_spelling);
+    callImplementationRows.push({ raw_candidate_id: rawCall.candidate_id, caller_definition_id: rawCall.caller_definition_id, caller_source_path: rawCall.caller_source_path, caller_source_sha256: rawCall.caller_source_sha256, caller_source_line: rawCall.caller_source_line, callee_spelling: rawCall.callee_spelling, implementation_definition_id: '', implementation_source_identity: '', relation: publicProvider ? 'public-system-provider-no-opennt-body' : 'missing-original-definition', missing_basis: publicProvider ? 'Public Win32/CRT API: implementation is supplied by the host system, not an OpenNT source body.' : allowed.size ? 'No implementation body in the original include-constrained scope or approved-tree discovery fallback.' : 'No original C/C++ implementation is selected at this private/kernel historical boundary; retain this raw call as missing-definition evidence.' });
+    continue;
+  }
+  for (const definition of candidates) callImplementationRows.push({ raw_candidate_id: rawCall.candidate_id, caller_definition_id: rawCall.caller_definition_id, caller_source_path: rawCall.caller_source_path, caller_source_sha256: rawCall.caller_source_sha256, caller_source_line: rawCall.caller_source_line, callee_spelling: rawCall.callee_spelling, implementation_definition_id: definition.definition_id, implementation_source_identity: `${definition.source_root}:${definition.source_path}:${definition.source_line}@${definition.source_sha256}`, relation: scopedCandidates.length ? 'original-implementation-in-include-constrained-scope' : 'original-implementation-discovery-candidate-outside-include-scope', missing_basis: '' });
+}
 const second = [];
 for (const definition of definitions) {
   const calls = []; let macroExpression = false;
@@ -165,5 +171,6 @@ const resolution = interfaces.map((item) => {
 if (resolution.length !== interfaces.length) throw new Error('Lost canonical first-degree interface during resolution');
 writeTsv('mvdm-host-first-degree-original-definition-ledger.tsv', definitions, ['definition_id', 'symbol', 'source_root', 'source_path', 'source_aliases', 'provenance_roots', 'source_sha256', 'source_line', 'signature_evidence', 'leaf_status', 'leaf_basis', 'direct_call_summary']);
 writeTsv('mvdm-host-first-degree-original-resolution-ledger.tsv', resolution, ['canonical_interface_id', 'callee_spelling', 'raw_candidate_ids', 'raw_call_site_count', 'resolution', 'original_definition_ids', 'original_definition_identities', 'basis']);
+writeTsv('mvdm-host-first-degree-call-implementation-ledger.tsv', callImplementationRows, ['raw_candidate_id', 'caller_definition_id', 'caller_source_path', 'caller_source_sha256', 'caller_source_line', 'callee_spelling', 'implementation_definition_id', 'implementation_source_identity', 'relation', 'missing_basis']);
 writeTsv('mvdm-host-second-degree-initial-candidate-ledger.tsv', second, ['candidate_id', 'caller_definition_id', 'caller_source_root', 'caller_source_path', 'caller_source_sha256', 'caller_source_line', 'caller_symbol', 'callee_spelling', 'call_form', 'boundary']);
 console.log(`canonical interfaces=${interfaces.length}; public leaves=${publicInterfaces.length}; include-constrained source interfaces=${sourceInterfaces.length}; original definitions=${definitions.length}; original source files=${fileSymbols.size}; second-degree initial candidates=${second.length}`);
