@@ -55,6 +55,16 @@ one discovered BaseSrv slice to the complete `mvdm-host`/external-OpenNT
 package boundary; see the
 [P5 package-boundary plan](etc/operations/m0-t291-s5-mvdm-opennt-package-boundary-audit-plan-001.md).
 
+**T291 S5 P5 progress:** the immutable T276 final-disposition result has been
+reconciled into the live 1,699-row file tracker: all 1,689 selected MVDM rows
+and ten current external OpenNT rows now have a final file disposition. The
+Base VDM vertical slice is limited to exact declaration carriers plus selected
+client/server true subsets; `srvinit.c` is evidence-only, while CSR/CSRSS and
+kernel VDM remain stopping boundaries. Reached interface-child, build/profile
+and current-route reversion ledgers remain the active exit work; see the
+[T276 reconciliation](etc/evidence/m0-t291-s5-p5-t276-live-ledger-reconciliation-001.md)
+and [external file audit](etc/evidence/m0-t291-s5-p5-external-file-disposition-001.md).
+
 **T291 S3 closure:** the bounded pointer scope, numeric task projection and
 source-shaped non-fast callback mechanics passed their complete formal x86/x64
 fixture matrix. `CallBack16` now bypasses session command routing and uses
