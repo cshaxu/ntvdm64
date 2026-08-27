@@ -2,31 +2,39 @@
 
 ## Current Work
 
-**Active: M0 T284 S1 — historical-interface adapter convergence inventory.**
-T283 closed at `0f3e1ce0`; Queue-order execution now admits the next
-historical-interface boundary audit.
+**Active: M0 T284 S2 — component-root canonical rename.**
+T284 S1 closed with the complete seven-family ownership, symbol and consumer
+inventory; the next ordered change is one atomic product-root rename before
+any adapter source migration.
 
 ## Active Packet
 
-### M0 T284 S1 — historical-interface adapter convergence inventory
+### M0 T284 S2 — component-root canonical rename
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T284 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T283 is closed. The owner has directed Queue-order execution; T284 is the next approved candidate and S1 is its read-only source-first inventory gate. |
-| Objective | Establish a complete owner/symbol/consumer inventory for the three current historical-interface adapter roots and four source-proven specialist interface families before any convergence move. |
-| Non-goals | Creating or renaming an adapter root; moving OpenNT source; adding a BOP/provider, monitor, machine, filesystem, broker or child-process behavior. |
-| Reference Baseline | Adapter-convergence proposal; T275 historical-interface ledger; current component tree; T283 canonical ABI tree and source policy. |
-| Files And ABI Surface | Inventory/generator/verifier and evidence only for `adapter-win32`, `adapter-softpc`, `adapter-vdm-monitor`, reached Redirector/WOW/VDD/debugger interfaces and selected host consumers. |
+| Identifier Mode | `M0 T284 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T284 S1 inventory is closed. The owner approved the exact rename list in the accepted T284 proposal. |
+| Objective | Rename the eight approved product roots exactly once and repair every live source, build, test and current-document reference. |
+| Non-goals | Creating `adapter-mvdm-host-out`; moving OpenNT adapter source into it; adding behavior, a BOP/provider, monitor, machine, filesystem, broker or child-process capability. |
+| Reference Baseline | Adapter-convergence proposal; T284 S1 file/symbol/consumer inventories; current component tree and source policy. |
+| Files And ABI Surface | `adapter-bop` and the seven approved mirror roots, plus every live reference to their outgoing or incoming name. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Denominator/count checks, source/header and consumer spot checks, dependency-direction review, documentation governance and `git diff --check`. |
-| Expected Markers | One final disposition for every live adapter file/header, each reached added-family interface and each selected host consumer, with no ownerless symbol family. |
-| Asset Needs | Current adapter roots, interface/consumer ledgers, selected host sources, canonical platform ABI declarations and source policy. |
-| Reporting Requirements | Counts by root/family/disposition, all ambiguous boundaries, selected target subfamily and any deletion/migration prerequisite. |
-| Stop Conditions | A live file has no original caller or final owner, a target would merge a specialist boundary, or a required interface shape is unknown. |
-| Exit Criteria | Full machine-checkable inventory with unique disposition/consumer coverage and a migration-ready dependency graph, without changing production code. |
-| Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
+| Verification | Exact old/new root denominator scan, source/build/test/current-document reference scan, documentation governance, `git diff --check`, and focused configured-graph checks. |
+| Expected Markers | No live reference to a renamed root survives; no old root remains; all approved new roots exist with unchanged file identity apart from reference repair. |
+| Asset Needs | T284 S1 inventories, current root contents, source/build manifests and current architecture authorities. |
+| Reporting Requirements | Old/new root mapping, reference counts before/after, deliberate historical-record exclusions and any non-mechanical reference repair. |
+| Stop Conditions | A non-historical reference cannot be repaired mechanically, a move would alter mirror identity, or an unapproved root name is required. |
+| Exit Criteria | The approved eight-root rename is complete and verified without an adapter source migration or behavior change. |
+| Original Owner Request | “T284 S2: 组件重命名 … 改好所有的代码和文档。” |
 | Similar-Issue Sweep | Public/private declarations, edition roots, source-selection manifests and all live include/build inputs. |
+
+**T284 S1 closure:** the generated owner inventory records 33 final file/
+boundary dispositions (22 production inputs, seven root documents and four
+empty specialist families), 71 public callable declarations/carriers and all
+seven MVDM host consumer directions. No production interface changed. See the
+[S1 evidence](etc/evidence/m0-t284-s1-adapter-convergence-inventory-001.md)
+and its three TSV inventories.
 
 The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md), [S4 complete original COMMAND static package](etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md), [S5 VDM command-acquisition source audit](etc/operations/m0-t282-s5-vdm-command-acquisition-source-audit-plan-001.md), [S6 local VDM command transport](etc/operations/m0-t282-s6-local-vdm-command-transport-plan-001.md), [S7 original COMMAND initialization composition](etc/operations/m0-t282-s7-original-command-initialization-plan-001.md), [S8 COMMAND owner dependency partition](etc/operations/m0-t282-s8-command-owner-dependency-partition-plan-001.md), [S9 COMMAND environment guest-memory seam audit](etc/operations/m0-t282-s9-command-environment-guest-seam-audit-plan-001.md), [S10 COMMAND register and bounded-lease binding](etc/operations/m0-t282-s10-command-register-and-lease-binding-plan-001.md), [S11 COMMAND OEM support composition](etc/operations/m0-t282-s11-command-oem-support-composition-plan-001.md), and [S13 COMMAND current-directory bounded mirror binding](etc/operations/m0-t282-s13-command-current-directory-bounded-binding-plan-001.md).
 

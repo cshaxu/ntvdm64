@@ -1,0 +1,8 @@
+family	selected_consumer_package	current_dependency_root	future_dependency_root	direction	prohibited_direction	source_basis
+win32	dos/dem/*, dos/command/*, softpc.new/host/src/nt_error.c	src/adapter-win32	adapter-mvdm-host-out/win32	mvdm-host -> adapter-mvdm-host-out/win32	adapter-mvdm-host-out/win32 -> bochs-core	inc/{oemuni,vdmredir,cmdsvc,vdmtib}.h; historical NT/RTL headers
+softpc	dos/dem/*, dos/command/*, xms.486/*, vdd/*	src/adapter-softpc	adapter-mvdm-host-out/softpc	mvdm-host -> adapter-mvdm-host-out/softpc	adapter-mvdm-host-out/softpc -> bochs-core	inc/softpc.h; softpc.new/base/inc/sas.h; softpc.new/host/inc/*
+monitor	v86/monitor/i386/*, ieuvddex/i386/vdmtib.c, dos/command/*	src/adapter-vdm-monitor	adapter-mvdm-host-out/monitor	mvdm-host -> adapter-mvdm-host-out/monitor	adapter-mvdm-host-out/monitor -> bochs-core	inc/{vdmtib,v86def}.h; vdmapi.h
+redir	base/mvdm/vdmredir/*	src/adapter-redir	adapter-mvdm-host-out/redir	mvdm-host -> adapter-mvdm-host-out/redir	adapter-mvdm-host-out/redir -> bochs-core	inc/vdmredir.h and VDMREDIR product declarations
+wow	wow32/*, wowexec/*	src/adapter-wow	adapter-mvdm-host-out/wow	mvdm-host -> adapter-mvdm-host-out/wow	adapter-mvdm-host-out/wow -> bochs-core	WOW32/WOWEXEC host-product declarations
+vdd	vdd/*, ieuvddex/*, fax/*	src/adapter-vdd	adapter-mvdm-host-out/vdd	mvdm-host -> adapter-mvdm-host-out/vdd	adapter-mvdm-host-out/vdd -> bochs-core	VDD registration and callback declarations
+debugger	bde/*, dbg/*, vdmdbg/*, vdmexts/*	src/adapter-debugger	adapter-mvdm-host-out/debugger	mvdm-host -> adapter-mvdm-host-out/debugger	adapter-mvdm-host-out/debugger -> bochs-core	BDE/DBG/VDMDBG/VDMEXTS declarations

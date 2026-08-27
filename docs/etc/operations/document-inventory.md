@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2723 |
+| Documentation records | 2727 |
 | --- | --- |
-| Generated UTC | 2026-08-27T05:44:49Z |
+| Generated UTC | 2026-08-27T05:50:21Z |
 
 ## Entries
 
@@ -343,6 +343,7 @@ content-divergent entries.
 | etc/evidence/m0-t282-s8-command-owner-dependency-partition-001.md | indexed supporting material | d7c0b23ea976ebfe6e4ca178e4677724d0f53fa25572328a197e8be2bc1ec8e8 |
 | etc/evidence/m0-t282-s9-command-environment-guest-seam-audit-001.md | indexed supporting material | ee24823203b89ef1d7df16401a568623be27eefea2e5d73d2e6b550dea16d7f7 |
 | etc/evidence/m0-t283-s2-platform-abi-canonical-reroot-001.md | indexed supporting material | ea9bf6981139815ad93f7ffb29906e4d6bc5e1d74a8bc98cc3f2a030638ff35c |
+| etc/evidence/m0-t284-s1-adapter-convergence-inventory-001.md | indexed supporting material | 5ab373f6938caf64530c8cb7434eb7aacc795e4b10b65b037e021b997ade0141 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -876,7 +877,10 @@ content-divergent entries.
 | etc/operations/m0-t283-s1-platform-abi-selection-ledger-001.tsv | indexed supporting material | 3eb5923f9bf38a06efbcbff2d56c9e852ef8217edbe7087d86d3de821785a387 |
 | etc/operations/m0-t283-s2-platform-abi-canonical-import-manifest-001.tsv | indexed supporting material | 001f82b57e14798622896868d2dd234568c8bb4bce6944cf8523d8fe7c09e104 |
 | etc/operations/m0-t283-s2-platform-abi-canonical-reroot-plan-001.md | indexed supporting material | 3f97eb9c51ccb5967d8fd23c6cd55ff7a7e1a3760aa1081bdfd932485710cbf1 |
+| etc/operations/m0-t284-s1-adapter-convergence-consumer-inventory-001.tsv | indexed supporting material | 0ea0a85773b0444a247e919cc7b314631a7cc952374181c13454850758d5d81d |
+| etc/operations/m0-t284-s1-adapter-convergence-file-inventory-001.tsv | indexed supporting material | 9ebafe8f21d068a14385f8093e661a071e4960db59e16fd15eb5fc2541c5b3ba |
 | etc/operations/m0-t284-s1-adapter-convergence-inventory-plan-001.md | indexed supporting material | c02dd84404fefbe7eff2837d64d1a8d84488107ea7d6b14db38a5793d927ab47 |
+| etc/operations/m0-t284-s1-adapter-convergence-public-symbol-inventory-001.tsv | indexed supporting material | a9606496160d29df474f8fc04b7be1db98e145d5b3f03fa2aff80e44364eeda8 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -2737,7 +2741,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | ee700edba51dcb7c1725007e7db40f1b3817eab5d8709a74d0e4688eadef071a |
+| STATUS.md | principal control document | 41feac2ce591c27ec2d2a6b360ea8bf7adb92a868763c29810e78b6d8c8900c5 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |
