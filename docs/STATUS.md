@@ -2,10 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T280 S14** — M0 T280's source-proven find-list host-resource
-binding audit is closed.  Its next prerequisite is an adapter-softpc
-host-identity facade over the existing bounded imported-call session binding;
-no provider is enabled.
+**Active: M0 T280 S15** — Recover the bounded adapter-softpc host-identity
+facade required by the closed S14 `demsrch` audit. It is Ordinary Mode with
+single-person dual-role review; no DEM provider or mirror body is enabled.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -26,25 +25,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S14 — DEM find-list identity binding audit
+### M0 T280 S15 — DEM host-identity facade
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T280 S14`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S13 closed the shared declaration surface on x86/x64; remaining source-proven blocker is `demsrch` persisted host identity. |
-| Objective | Design the smallest original-shaped find-list identity binding through the existing session host-resource mapper. |
-| Non-goals | No provider link, BOP route, guest trace, new mapper, raw pointer cast or guest-memory route. |
-| Reference Baseline | Original `demsrch.c`, S12 ledger, S13 closure and session mapping rules. |
-| Files And ABI Surface | Binding audit/plan and focused mapping contract only; no DEM body modification. |
+| Identifier Mode | `M0 T280 S15`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S14 closed the source-first `demsrch` pointer-identity audit; it identified one adapter-softpc facade over the existing bound session mapping instance. |
+| Objective | Implement and prove one bounded host-resource surrogate facade for source-shaped DEM use. |
+| Non-goals | No DEM body edit/link, provider/BOP route, guest trace, new mapper, guest-memory access, raw pointer persistence, resource closing or service selection. |
+| Reference Baseline | Original `demsrch.c`, S14 binding ledger/closure, session thread-binding contract and mapping rules. |
+| Files And ABI Surface | Adapter-softpc facade header/source, focused x86/x64 fixture/build evidence, adapter divergence register and Status; no DEM body modification. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Original source/cast inventory, existing mapping-manager contract review and focused x86/x64 disposition checks. |
-| Expected Markers | One host-resource identity route and explicit separation from guest-memory spans. |
-| Asset Needs | Exact OpenNT `ntioapi.h`, original DEM sources, current modern SDK/ntdll declarations and existing adapter/session boundaries. |
-| Reporting Requirements | Every persisted identity cast, lifetime/teardown rule, original failure behavior and unique owner. |
-| Stop Conditions | A raw host pointer is stored in guest/MVDM state, a second mapper appears, or a body/provider is enabled. |
-| Exit Criteria | A complete source-first binding plan exists with one owner and focused positive/negative mapping proof requirements. |
+| Verification | Original source/recovery-ladder review plus focused MSVC x86/x64 facade fixture: no session, publish/resolve, stale/release, session isolation and disposal invalidation. |
+| Expected Markers | One session `host_resource` identity route and explicit separation from both FFindId numeric data and guest-memory spans. |
+| Asset Needs | Original DEM sources, current session mapping/thread contract, MSVC x86/x64 and adapter-softpc build boundary. |
+| Reporting Requirements | Recovery exception, source limitation, fixed-width ABI, lifetime/teardown rules, original failure outcome and unique owner. |
+| Stop Conditions | A raw host pointer is stored in guest/MVDM state, a second mapper appears, the facade acquires guest memory, or a body/provider is enabled. |
+| Exit Criteria | The facade passes its focused x86/x64 fixture and is registered as the only DEM host-identity bridge; the original mirror remains unedited. |
 | Original Owner Request | “单人双角色模式执行队列任务”。 |
-| Similar-Issue Sweep | Directory and volume queries, object/symlink paths, status mapping, handle lifetime, x86/x64 layout, public/ntdll availability and guest-memory isolation. |
+| Similar-Issue Sweep | Host handles, callbacks, find-list cleanup, no-session calls, x86/x64 layout, session disposal and guest-memory isolation. |
 
 ### Closed packet reference — M0 T280 S13
 
