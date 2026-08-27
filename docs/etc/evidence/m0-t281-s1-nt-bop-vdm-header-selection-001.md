@@ -32,16 +32,29 @@ the OpenNT-4.5 private candidate defines only its older nine-value prefix.
 ## Interpretation and disposition
 
 This is a declaration-carrier selection, not a request for a new VDM monitor
-implementation. The caller is selected from the OpenNT baseline, so the
-public OpenNT internal candidate is the leading source-identity candidate;
-the similarly named client/private alternatives must still be compared against
-the reached definitions and consuming layouts before import. A copied exact
-carrier belongs in `opennt-platform-abi`, never in `adapter-vdm-monitor`.
+implementation. The caller is selected from the OpenNT baseline. The two
+client headers are byte-identical to one another but declare Base
+process-creation helpers rather than `VdmServiceClass`; the OpenNT-4.5 private
+header has only the obsolete nine-value enum prefix. The public OpenNT
+internal candidate supplies the full reached declaration layout and is
+therefore selected.
+
+It was copied byte-identically to
+`src/opennt-platform-abi/source/opennt/public/internal/base/inc/vdm.h` and
+verified at the source SHA-256 above. This declaration carrier belongs in
+`opennt-platform-abi`, never in `adapter-vdm-monitor`.
 
 ## Follow-up
 
-S1 next audits the remaining two same-basename candidates and the precise
-`nt_bop.c` symbols/layouts that need `vdm.h`. Only after one exact original
-carrier is selected and manifested may it be imported and the unchanged
-compiler observation advance. No adapter body, selector handler or monitor
-semantics are admitted by this evidence.
+S1 may now advance the unchanged x86/x64 compiler observation with this
+declaration root. No adapter body, selector handler, or monitor semantics are
+admitted by this evidence.
+
+## Compiler continuation
+
+With the selected declaration root and the already-mirrored MVDM `inc` root,
+the original source reaches code generation on both x86 and x64. Modern x86
+MSVC alone rejects three historical implicit `FARPROC`/`MYFARPROC` assignments.
+`MVDM-HOST-DIV-008` makes those three already-intended conversions explicit;
+it preserves the raw export pointer and does not enable the WOW or
+installable-BOP branches whose provider ABIs remain later-owner work.

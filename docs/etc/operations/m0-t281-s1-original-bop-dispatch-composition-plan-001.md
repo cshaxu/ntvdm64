@@ -9,8 +9,10 @@ Its selector table is not enabled in a machine session by this S.
 
 ## Source-first disposition
 
-1. **Original source:** the byte-exact `nt_bop.c` mirror is the tested body;
+1. **Original source:** the original `nt_bop.c` mirror is the tested body;
    its dispatch order, names, declarations, and failure paths are retained.
+   The sole admitted mirror divergence is `MVDM-HOST-DIV-008`: three explicit
+   historical function-pointer conversions required by modern x86 MSVC.
 2. **Same-shaped bindings:** only pre-recorded `adapter-bop`,
    `adapter-softpc`, `adapter-win32`, `session`, and named successor
    declarations may satisfy an import. The source file does not call Bochs.
@@ -52,7 +54,8 @@ Its selector table is not enabled in a machine session by this S.
 
 - Every direct imported symbol has an original source location, exact declared
   form, named owner, and x86/x64 composition disposition.
-- The original body compiles through existing same-shaped bindings, or each
+- The original body, other than registered `MVDM-HOST-DIV-008`, compiles
+  through existing same-shaped bindings, or each
   smallest missing binding is recorded and the S is revised before it is built.
 - A selector-disabled proof shows no provider/BOP route became enabled.
 - Documentation governance and `git diff --check` pass before P1 acceptance.

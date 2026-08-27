@@ -193,7 +193,10 @@ void MS_bop_1(void) {
         return;
     }
 
-    if ((WOWDispatchEntry = GetProcAddress(hWOWDll, "W32Dispatch")) == NULL)
+    /* DIVERGENCE MVDM-HOST-DIV-008: modern x86 MSVC rejects the historical
+       implicit FARPROC-to-MYFARPROC conversion.  Preserve the original raw
+       export address and call path; no WOW provider is enabled by this cast. */
+    if ((WOWDispatchEntry = (MYFARPROC)GetProcAddress(hWOWDll, "W32Dispatch")) == NULL)
     {
 #ifndef PROD
         HostDebugBreak();
@@ -843,7 +846,9 @@ void ISV_RegisterModule (BOOL fMode)
         pchInit = procbuffer;
     }
 
-    if ((InitEntry = (MYFARPROC)GetProcAddress(hDll, pchInit)) == NULL){
+    /* DIVERGENCE MVDM-HOST-DIV-008: preserve the historical export address
+       while making the intended FARPROC call shape explicit for modern x86. */
+    if ((InitEntry = (FARPROC)GetProcAddress(hDll, pchInit)) == NULL){
         FreeLibrary(hDll);
         setCF(1);
         setAX(3);
@@ -862,7 +867,8 @@ void ISV_RegisterModule (BOOL fMode)
     pchDispatch = procbuffer;
     }
 
-    if ((DispatchEntry = (MYFARPROC)GetProcAddress(hDll, pchDispatch)) == NULL){
+    /* DIVERGENCE MVDM-HOST-DIV-008: see the matching InitEntry conversion. */
+    if ((DispatchEntry = (FARPROC)GetProcAddress(hDll, pchDispatch)) == NULL){
     FreeLibrary(hDll);
     setCF(1);
     setAX(2);

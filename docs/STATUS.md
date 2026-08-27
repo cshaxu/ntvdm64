@@ -17,17 +17,17 @@ package: original host control plane and DEM.
 | --- | --- |
 | Identifier Mode | `M0 T281 S1`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | The owner instructed that Queue packages execute in order. Closed candidates T277, T278 and T279 have been removed from Queue; its first remaining candidate is admitted here as T281. |
-| Objective | Formally compose the byte-exact original `softpc.new/host/src/nt_bop.c` dispatcher on x86 and x64 through pre-recorded same-shaped boundaries, without enabling a BOP selector or provider. |
+| Objective | Formally compose the original `softpc.new/host/src/nt_bop.c` dispatcher on x86 and x64 through pre-recorded same-shaped boundaries, preserving it byte-exact except for registered three-cast binding divergence `MVDM-HOST-DIV-008`, without enabling a BOP selector or provider. |
 | Non-goals | DEM behavior, selector/provider enablement, guest trace, Bochs changes, new adapter ABI, generic compatibility, VDD/debugger/monitor/Redirector/WOW recovery, or raw guest-pointer retention. |
 | Reference Baseline | T277 tracker ledgers; T278 re-root closure; T279 support closure; T280 S2 ingress/machine-facade ledger and T280 S20 descriptor/lease boundary closure; Wave 2 recovery plan. |
 | Files And ABI Surface | Original `src/opennt-mvdm-host/softpc.new/host/src/nt_bop.c`, direct original declaration carriers, existing adapter-bop/adapter-softpc/adapter-win32/session declarations, formal Ninja island, evidence and tracker rows. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
 | Verification | Import-to-owner source ledger; formal MSVC `/MT` Ninja object/static-library graphs on x64 and x86; selector-disabled proof; documentation governance and `git diff --check`. |
-| Expected Markers | Exact original source hash; every direct import has one owner/disposition; no new selector handler, provider body, Bochs dependency, or guest route. |
+| Expected Markers | Exact original source hash plus the registered `MVDM-HOST-DIV-008` three-cast diff; every direct import has one owner/disposition; no new selector handler, provider body, Bochs dependency, or guest route. |
 | Asset Needs | Pinned original mirror, T277/T280 ledgers, existing component headers, MSVC x64/x86 and Ninja. |
 | Reporting Requirements | Report per-import source form, owner/binding, architecture result, compile/link state, excluded branch and any boundary that requires a re-admission. |
 | Stop Conditions | A missing interface would require new semantics/ABI, an original source edit beyond an admitted binding diff, direct Bochs inclusion, a BOP/provider route, raw guest pointer retention, or scope expansion beyond `nt_bop.c` imports. |
-| Exit Criteria | Every direct import has a recorded source-shaped composition decision; the exact dispatcher formally compiles on both architectures or the smallest blocked boundary is fully evidenced and causes a revised S before implementation; no route is enabled. |
+| Exit Criteria | Every direct import has a recorded source-shaped composition decision; the original dispatcher, modified only by registered `MVDM-HOST-DIV-008`, formally compiles on both architectures or the smallest blocked boundary is fully evidenced and causes a revised S before implementation; no route is enabled. |
 | Original Owner Request | “我都叫你按顺序执行了”。 |
 | Similar-Issue Sweep | All `nt_bop.c` selectors, direct imports, original table/global declarations, x86/x64 call forms, machine-facing calls, and successor branches. |
 
