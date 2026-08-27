@@ -26,13 +26,15 @@ The transaction now preserves this order:
 3. select the aligned callback stack using the existing source-shaped task
    projection;
 4. acquire, populate, flush and release exactly one callback-frame lease;
-5. dispatch the existing copied session control record;
-6. write and reread AX/DX through a fresh bounded callback-frame lease; and
+5. perform the source-shaped synchronous stack/simulation interval;
+6. reread AX/DX through a fresh bounded callback-frame lease; and
 7. restore the numeric task stack and end the pointer scope.
 
-The temporary route remains a copied result handoff.  It does not claim that
-a Win16 callback instruction stream has already run.  P5 owns the separate
-`SETVDMSTACK` / `host_simulate` / `VDMSTACK` machine interval.
+This P4 record described the pre-P5 copied route only as a staging handoff.
+P5 supersedes that arrangement: a `CallBack16` result now comes only from the
+callback frame after the separate source-shaped
+`SETVDMSTACK` / `host_simulate` / `VDMSTACK` interval, not from the session
+command/control route.
 
 ## Verification
 

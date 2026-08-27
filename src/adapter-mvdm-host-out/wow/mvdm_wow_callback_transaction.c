@@ -4,6 +4,8 @@
 
 #include "adapter-mvdm-host-out/monitor/include/mvdm_wow_task_frame.h"
 #include "adapter-mvdm-host-out/softpc/include/mvdm_wow_pointer_scope.h"
+#include "adapter-mvdm-host-out/softpc/include/mvdm_vdm_stack.h"
+#include "adapter-mvdm-host-out/softpc/include/mvdm_command_registers.h"
 #include "session/session.h"
 
 static uint16_t mvdm_wow_read_u16(const uint8_t *bytes)
@@ -21,7 +23,8 @@ int mvdm_wow_callback_transaction_invoke(uint32_t return_id,
     uint8_t *source_frame;
     mvdm_wow_callback_guest_frame *callback_frame;
     uint16_t local_bp;
-    int32_t dispatch_result;
+    uint16_t saved_ip;
+    uint32_t callback_stack;
     int result = 0;
 
     if (return_value_out != NULL) *return_value_out = 0u;
@@ -67,20 +70,18 @@ int mvdm_wow_callback_transaction_invoke(uint32_t return_id,
     transaction.guest_frame = *callback_frame;
     if (!mvdm_wow_pointer_scope_release(callback_frame, 1)) goto restore;
 
-    /* The app-owned dispatch is the sole synchronous machine-resume owner.
-     * This adapter supplies only a copied source-shaped callback record. */
-    dispatch_result = session_dispatch_control(owner,
-        MVDM_WOW_CALLBACK_CONTROL_OPERATION, &transaction, -1);
-    if (dispatch_result != 0) goto restore;
+
+    /* Preserve the original non-fast CallBack16 interval.  The only owner of
+     * the synchronous continuation is the SoftPC-shaped mechanical facade;
+     * GetNextVDMCommand/session command routing is deliberately uninvolved. */
+    if (!mvdm_vdm_stack_set(task.vp_callback_stack)) goto restore;
+    saved_ip = getIP();
+    host_simulate();
+    setIP(saved_ip);
+    if (!mvdm_vdm_stack_copy(&callback_stack) ||
+        callback_stack != task.vp_callback_stack) goto restore;
     callback_frame = (mvdm_wow_callback_guest_frame *)
-        mvdm_wow_pointer_scope_acquire(task.vp_callback_stack,
-            (uint32_t)sizeof(*callback_frame), MVDM_WOW_POINTER_ACCESS_WRITE);
-    if (callback_frame == NULL) goto restore;
-    callback_frame->w_ax = transaction.ax;
-    callback_frame->w_dx = transaction.dx;
-    if (!mvdm_wow_pointer_scope_release(callback_frame, 1)) goto restore;
-    callback_frame = (mvdm_wow_callback_guest_frame *)
-        mvdm_wow_pointer_scope_acquire(task.vp_callback_stack,
+        mvdm_wow_pointer_scope_acquire(callback_stack,
             (uint32_t)sizeof(*callback_frame), MVDM_WOW_POINTER_ACCESS_READ);
     if (callback_frame == NULL) goto restore;
     transaction.ax = callback_frame->w_ax;

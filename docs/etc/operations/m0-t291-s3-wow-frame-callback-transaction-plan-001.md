@@ -17,11 +17,12 @@ pause/resume transaction.
    monitor family.  It owns only copied task fields and bounded frame leases;
    it does not expose a native TEB, CCPU context or Bochs object.
 3. Add the one-session callback transaction in the existing WOW adapter
-   family.  P4 first retains original `CBVDMFRAME` construction, scoped
-   write/read, AX:DX return and task-stack restoration. P5 then binds the
-   original `SETVDMSTACK` / `host_simulate` / `VDMSTACK` interval to typed
-   SoftPC/Bochs mechanics. It calls that boundary only through its declared
-   SoftPC interface.
+   family.  P4 retains original `CBVDMFRAME` construction, scoped write/read,
+   AX:DX return and task-stack restoration. P5 binds the original
+   `SETVDMSTACK` / `host_simulate` / `VDMSTACK` interval to typed
+   SoftPC/Bochs mechanics. This path is explicitly independent of the
+   session command/control route: `GetNextVDMCommand` callers use that route,
+   while `CallBack16` preserves original synchronous guest re-entry.
 4. Prove positive, invalid-span, nested/re-entry rejection, stale lease and
    cleanup cases on formal x86 and x64 Ninja fixtures.  Verify no provider
    body, selector or guest load enters the graph.

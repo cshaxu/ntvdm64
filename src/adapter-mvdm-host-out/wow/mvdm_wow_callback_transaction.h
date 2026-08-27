@@ -5,7 +5,6 @@
 
 /* Copied callback request/result. It contains the original callback's
  * observable numeric values but no guest/native pointer or handle. */
-#define MVDM_WOW_CALLBACK_CONTROL_OPERATION 0x574f5701u
 #define MVDM_WOW_CALLBACK_PARAMETER_MAXIMUM 16u
 
 /* This is the numeric, packed portion of the original WOW32 CBVDMFRAME in
@@ -46,8 +45,8 @@ typedef struct mvdm_wow_callback_transaction {
     mvdm_wow_callback_guest_frame guest_frame;
 } mvdm_wow_callback_transaction;
 
-/* The input is copied before dispatch. The app/session dispatch operation is
- * synchronous; it may only update the numeric AX/DX result in this record. */
+/* The input is copied before the source-shaped synchronous guest transaction.
+ * No session command/control dispatcher participates in CallBack16. */
 int mvdm_wow_callback_transaction_invoke(uint32_t return_id,
     uint32_t procedure, const uint8_t *parameters, uint16_t parameter_bytes,
     uint32_t *return_value_out);

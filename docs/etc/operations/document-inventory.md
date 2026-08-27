@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2851 |
+| Documentation records | 2852 |
 | --- | --- |
-| Generated UTC | 2026-08-27T16:36:17Z |
+| Generated UTC | 2026-08-27T16:44:27Z |
 
 ## Entries
 
@@ -416,7 +416,8 @@ content-divergent entries.
 | etc/evidence/m0-t291-s3-p1-wow-pointer-scope-001.md | indexed supporting material | f9b0676c0e8bbeedabb9df5c594287a51e1dd2e496599ec31fc564d1ef84d3eb |
 | etc/evidence/m0-t291-s3-p2-wow-task-frame-projection-001.md | indexed supporting material | 881d6e783430b3233c9852d9877534c54b8cd2c59270cd5895ac6883d13e695e |
 | etc/evidence/m0-t291-s3-p3-wow-callback-route-001.md | indexed supporting material | 1d1434cf2cff1270d078d986247a78f850da6660b0b6cadba3097d6295ac1d6a |
-| etc/evidence/m0-t291-s3-p4-wow-callback-guest-frame-001.md | indexed supporting material | 7e39c0959fdc4f10270db676fbe57e3c2953b12a082d5c40a662f471f9633c4b |
+| etc/evidence/m0-t291-s3-p4-wow-callback-guest-frame-001.md | indexed supporting material | 98ec8585cbfbf0e1a8067fa9492c51e7cd4a876e5c51f7f8cd55d0b2ac72958c |
+| etc/evidence/m0-t291-s3-p5-wow-stack-simulation-boundary-001.md | indexed supporting material | 78662fa371c46a7c7c6e2f72046462e846e32f87e10fc1f1e841d2bcb2d1412b |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -997,7 +998,7 @@ content-divergent entries.
 | etc/operations/m0-t291-s2-wow-thunk-frame-interface-recovery-plan-001.md | indexed supporting material | cfdfeaa6671fc4cb341bbca81edff8dbdadcc5c9de5830f8eaf20ce39632cf29 |
 | etc/operations/m0-t291-s2-wow-thunk-frame-recovery-decision-001.md | indexed supporting material | 5d34e55a7514674b224081d2ae67e9eeb3269d6b62a74b512b2af12a3a054f4c |
 | etc/operations/m0-t291-s2-wow-thunk-frame-source-coverage-ledger.tsv | indexed supporting material | f9cb1fdc139d6b02a94b1d268c4fd85f69a4c0ccfe50e426deadb45611125b04 |
-| etc/operations/m0-t291-s3-wow-frame-callback-transaction-plan-001.md | indexed supporting material | 28bd531ad8f345c62adabd5cb22f71ebe8d921f0a74ecdf0a03fedacc5c3c6a7 |
+| etc/operations/m0-t291-s3-wow-frame-callback-transaction-plan-001.md | indexed supporting material | 2f9a0ff7a256abeef2372b23b8cbd3ba5125065d40a255d183f96986c6eea98f |
 | etc/operations/m0-t291-wow-owner-package-source-abi-audit-plan-001.md | indexed supporting material | 3025476a681ddfa727684e32ddf5a7a7b5148f09362d4b4f31a23df6ba5b75fd |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
