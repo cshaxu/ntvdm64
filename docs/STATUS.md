@@ -92,6 +92,12 @@ its original mapped local collection failure; the latter's original
 pre-decrement no-op success is retained, not repaired; see the [P15
 evidence](etc/evidence/m0-t290-s3-p15-named-pipe-handle-info-local-disposition-001.md).
 
+**T290 S3 P16:** original non-pipe `cmdGetStdHandle` now composes on formal
+x86/x64 through session-owned AX:BX record and BX:CX handle identities, with
+the original cleanup point retiring the record. The full `cmdmisc`/`cmdexec`
+producer-consumer handoff remains assigned to S6; see the [P16
+evidence](etc/evidence/m0-t290-s3-p16-command-redirection-handle-identity-001.md).
+
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
 bodies now compose on formal x86/x64 Ninja fixtures.  Session-owned numeric

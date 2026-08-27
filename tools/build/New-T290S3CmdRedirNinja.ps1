@@ -38,8 +38,13 @@ rule link
   description = LINK `$out
 
 build obj/cmdredir.obj: cc `$root/src/mvdm-host/dos/command/cmdredir.c
+build obj/mapping_manager.obj: cc `$root/src/session/mapping_manager.c
+build obj/guest_memory_lease.obj: cc `$root/src/session/guest_memory_lease.c
+build obj/session.obj: cc `$root/src/session/session.c
+build obj/mvdm_host_identity.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_host_identity.c
+build obj/mvdm_command_redirection.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_command_redirection.c
 build obj/fixture.obj: cc `$root/tests/mvdm-host/dos/command/t290_s3_cmdredir_fixture.c
-build bin/t290-s3-cmdredir-fixture.exe: link obj/cmdredir.obj obj/fixture.obj
+build bin/t290-s3-cmdredir-fixture.exe: link obj/cmdredir.obj obj/mapping_manager.obj obj/guest_memory_lease.obj obj/session.obj obj/mvdm_host_identity.obj obj/mvdm_command_redirection.obj obj/fixture.obj
 default bin/t290-s3-cmdredir-fixture.exe
 "@
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))

@@ -13,6 +13,8 @@
 #include <mvdm.h>
 #include <ctype.h>
 
+#include "adapter-mvdm-host-out/softpc/include/mvdm_command_redirection.h"
+
 #define CMDREDIR_DEBUG	1
 
 PPIPE_INPUT   cmdPipeList = NULL;
@@ -91,6 +93,10 @@ PPIPE_OUTPUT pPipeOut;
 	WaitForSingleObject(pRdrInfo->ri_hStdErrThread, 1000);
 	CloseHandle(pRdrInfo->ri_hStdErrThread);
     }
+    /* DIVERGENCE(MVDM-HOST-DIV-020): the record can have crossed the VDM
+     * ABI as a session identity; retire that identity before the original
+     * ownership/free point. */
+    mvdm_command_redirection_retire(pRdrInfo);
     free (pRdrInfo);
 
     return TRUE;
@@ -236,9 +242,19 @@ VOID cmdGetStdHandle (VOID)
 {
 USHORT iStdHandle;
 PREDIRCOMPLETE_INFO pRdrInfo;
+VOID *pRdrInfoValue;
+USHORT HandleHigh;
+USHORT HandleLow;
 
     iStdHandle = getCX();
-    pRdrInfo = (PREDIRCOMPLETE_INFO) (((ULONG)getAX() << 16) + (ULONG)getBX());
+    /* DIVERGENCE(MVDM-HOST-DIV-020): AX:BX was an x86 process pointer.
+     * Resolve its same-width session identity before using the source record. */
+    if (!mvdm_command_redirection_resolve(getAX(), getBX(), &pRdrInfoValue)) {
+        setAX(ERROR_INVALID_HANDLE);
+        setCF(1);
+        return;
+    }
+    pRdrInfo = (PREDIRCOMPLETE_INFO)pRdrInfoValue;
 
     switch (iStdHandle) {
 
@@ -251,12 +267,14 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 		    setCF(1);
 		    return;
 		}
-		setCX ((USHORT)pRdrInfo->ri_hStdInFile);
-		setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdInFile >> 16));
+		if (!mvdm_command_redirection_publish_handle((uintptr_t)pRdrInfo->ri_hStdInFile, &HandleHigh, &HandleLow)) { setAX(ERROR_NOT_ENOUGH_MEMORY); setCF(1); return; }
+		setCX (HandleLow);
+		setBX (HandleHigh);
 	    }
 	    else {
-		setCX ((USHORT)pRdrInfo->ri_hStdIn);
-		setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdIn >> 16));
+		if (!mvdm_command_redirection_publish_handle((uintptr_t)pRdrInfo->ri_hStdIn, &HandleHigh, &HandleLow)) { setAX(ERROR_NOT_ENOUGH_MEMORY); setCF(1); return; }
+		setCX (HandleLow);
+		setBX (HandleHigh);
 	    }
 	    break;
 
@@ -268,8 +286,9 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 		    setCF(1);
 		    return;
 		}
-		setCX ((USHORT)pRdrInfo->ri_hStdOutFile);
-		setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdOutFile >> 16));
+		if (!mvdm_command_redirection_publish_handle((uintptr_t)pRdrInfo->ri_hStdOutFile, &HandleHigh, &HandleLow)) { setAX(ERROR_NOT_ENOUGH_MEMORY); setCF(1); return; }
+		setCX (HandleLow);
+		setBX (HandleHigh);
 
 	    }
 	    else {
@@ -278,8 +297,9 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 		// inherit the 32 bit handle of lpt1, so the ouput will
 		// directly go to the LPT1 and a DOS TSR/APP hooking int17
 		// wont see this printing. Is this a big deal???
-		setCX ((USHORT)pRdrInfo->ri_hStdOut);
-		setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdOut >> 16));
+		if (!mvdm_command_redirection_publish_handle((uintptr_t)pRdrInfo->ri_hStdOut, &HandleHigh, &HandleLow)) { setAX(ERROR_NOT_ENOUGH_MEMORY); setCF(1); return; }
+		setCX (HandleLow);
+		setBX (HandleHigh);
 	    }
 	    break;
 
@@ -287,8 +307,9 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 
             if (pRdrInfo->ri_hStdErr == pRdrInfo->ri_hStdOut
                               && pRdrInfo->ri_hStdOutFile != 0) {
-                setCX ((USHORT)pRdrInfo->ri_hStdOutFile);
-                setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdOutFile >> 16));
+                if (!mvdm_command_redirection_publish_handle((uintptr_t)pRdrInfo->ri_hStdOutFile, &HandleHigh, &HandleLow)) { setAX(ERROR_NOT_ENOUGH_MEMORY); setCF(1); return; }
+                setCX (HandleLow);
+                setBX (HandleHigh);
                 pRdrInfo->ri_hStdErrFile = pRdrInfo->ri_hStdOutFile;
 		break;
 	    }
@@ -300,12 +321,14 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 		    setCF(1);
 		    return;
 		}
-                setCX ((USHORT)pRdrInfo->ri_hStdErrFile);
-                setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdErrFile >> 16));
+                if (!mvdm_command_redirection_publish_handle((uintptr_t)pRdrInfo->ri_hStdErrFile, &HandleHigh, &HandleLow)) { setAX(ERROR_NOT_ENOUGH_MEMORY); setCF(1); return; }
+                setCX (HandleLow);
+                setBX (HandleHigh);
 	    }
 	    else {
-                setCX ((USHORT)pRdrInfo->ri_hStdErr);
-                setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdErr >> 16));
+                if (!mvdm_command_redirection_publish_handle((uintptr_t)pRdrInfo->ri_hStdErr, &HandleHigh, &HandleLow)) { setAX(ERROR_NOT_ENOUGH_MEMORY); setCF(1); return; }
+                setCX (HandleLow);
+                setBX (HandleHigh);
 	    }
 	    break;
     }
