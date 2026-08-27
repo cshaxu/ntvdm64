@@ -114,6 +114,7 @@ typedef struct _DISKINFO {
 
 #include "dosdef.h"
 #include "dossvc.h"
+#include <mvdm_guest_location.h>
 
 
 
@@ -128,7 +129,9 @@ extern PFNSVC apfnSVC[];
 extern PSZ    pszDefaultDOSDirectory;
 extern USHORT nDrives;
 extern PUSHORT pusCurrentPDB;
-extern PDEMEXTERR pExtendedError;
+/* DIVERGENCE MVDM-HOST-DIV-005: the original x86 pointer is retained as a
+ * numeric guest descriptor; every use must acquire a fresh bounded lease. */
+extern mvdm_guest_location extended_error_location;
 
 
 #include "demexp.h"

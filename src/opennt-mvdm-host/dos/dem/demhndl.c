@@ -25,6 +25,27 @@
 BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
 extern BOOL IsVdmRedirLoaded(VOID);
 
+/* DIVERGENCE MVDM-HOST-DIV-005: original x86 code wrote through a retained
+ * PDEMEXTERR.  Acquire the packed guest record only for this write, retaining
+ * the original field order and falling back through the existing error path
+ * if the location is no longer accessible. */
+static BOOL demStoreExtendedError(UCHAR locus, USHORT error, UCHAR action,
+    UCHAR class)
+{
+    mvdm_guest_location_lease lease;
+    PDEMEXTERR extendedError;
+
+    if (!mvdm_guest_location_acquire(&extended_error_location,
+        sizeof(DEMEXTERR), GUEST_MEMORY_ACCESS_READ | GUEST_MEMORY_ACCESS_WRITE,
+        &lease)) return FALSE;
+    extendedError = (PDEMEXTERR)lease.bytes;
+    extendedError->ExtendedErrorLocus = locus;
+    STOREWORD(extendedError->ExtendedError, error);
+    extendedError->ExtendedErrorAction = action;
+    extendedError->ExtendedErrorClass = class;
+    return mvdm_guest_location_release(&lease, TRUE);
+}
+
 /* demClose - Close a file
  *
  *
@@ -168,10 +189,8 @@ LONG    lLoc;
 
                 goto readFailureExit;
             }
-            pExtendedError->ExtendedErrorLocus = locus;
-            STOREWORD(pExtendedError->ExtendedError, (WORD)dwReadError);
-            pExtendedError->ExtendedErrorAction = action;
-            pExtendedError->ExtendedErrorClass = class;
+            if (!demStoreExtendedError(locus, (WORD)dwReadError, action,
+                class)) goto readFailureExit;
             if (ok) {
                 goto readSuccessExit;
             } else {

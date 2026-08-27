@@ -10,4 +10,6 @@ component before a support source becomes a formal build input.
 
 ## Divergence register
 
-None. No upstream source has entered this root yet.
+| ID | Original purpose | Reason | Implementation | Files |
+| --- | --- | --- | --- | --- |
+| MVDM-SUPPORT-DIV-001 | Model `DEMEXTERR.ExtendedErrorPointer` as a 32-bit field in the packed DOS data record. | The original x86 `PUCHAR` happens to be 32 bits; on x64 it widens and changes the guest ABI. | Preserve the source record's nine-byte packed layout by storing the guest pointer numerically as `ULONG`. | `inc/dossvc.h` |

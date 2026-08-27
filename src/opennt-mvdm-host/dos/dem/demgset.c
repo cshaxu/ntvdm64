@@ -562,7 +562,10 @@ VOID demSetDTALocation (VOID)
 
     pulDTALocation = (PULONG)  GetVDMAddr(getDS(),getAX());
     pusCurrentPDB  = (PUSHORT) GetVDMAddr(getDS(),getDX());
-    pExtendedError = (PDEMEXTERR) GetVDMAddr(getDS(),getCX());
+    /* DIVERGENCE MVDM-HOST-DIV-005: retain DS:CX numerically instead of a
+     * native pointer returned by GetVDMAddr. */
+    mvdm_guest_location_set_real_mode(&extended_error_location, getDS(),
+        getCX());
 
     pDosWowData = (PDOSWOWDATA) GetVDMAddr(getDS(),getSI());
     pSFTHead    = (PDOSSF) GetVDMAddr(getDS(),(WORD)pDosWowData->lpSftAddr);

@@ -21,4 +21,6 @@ PDOSSF pSFTHead = NULL;
 // address of extended error information in DOS data segment
 //
 
-PDEMEXTERR pExtendedError;
+/* DIVERGENCE MVDM-HOST-DIV-005: do not retain a native GetVDMAddr result
+ * beyond the source callback.  This remains the original DS:CX location. */
+mvdm_guest_location extended_error_location;
