@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2820 |
+| Documentation records | 2821 |
 | --- | --- |
-| Generated UTC | 2026-08-27T14:37:12Z |
+| Generated UTC | 2026-08-27T14:39:02Z |
 
 ## Entries
 
@@ -402,6 +402,7 @@ content-divergent entries.
 | etc/evidence/m0-t290-s3-p8-named-pipe-handle-state-001.md | indexed supporting material | f9a4efc0d489101912930c10ee074e19bf2af97ed097dcf143c6d45cbc309cb3 |
 | etc/evidence/m0-t290-s3-p9-named-pipe-info-guest-span-001.md | indexed supporting material | 1774d56ddbfb4492bcfbbb1f21ae35abacf8717aa62266e5449c72c9a7736457 |
 | etc/evidence/m0-t290-s4-async-mailslot-source-abi-audit-001.md | indexed supporting material | abc30927550b04b7d245f046b5357634bc35922a5d7655ff7ec77b29fab5666a |
+| etc/evidence/m0-t290-s4-mailslot-async-closure-001.md | indexed supporting material | 55e4d656047d3bec6b589fe3f60e2a2abe3478bfcef38d9e669ae68414d25e8e |
 | etc/evidence/m0-t290-s4-p18-original-mailslot-composition-001.md | indexed supporting material | 4a677fede55dcd7aaa3c0c9a4233d39ab4db9ef9066ef39829b73924b96c5043 |
 | etc/evidence/m0-t290-s4-p19-async-pipe-safe-decline-001.md | indexed supporting material | 87f5381855722cd3082f3bc29bd6f6ed44e9cd435beecf02d9908e05a9beae5c |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
@@ -2834,7 +2835,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | e1f525953f1d8e0ed622a3617808538decc2aed369a223612db6fe758dea1f93 |
+| STATUS.md | principal control document | a21fee8b406811f627b499f5ddee3990d89c8a8963c31f86b70dce068e652099 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

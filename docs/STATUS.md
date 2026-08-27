@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T290 S4 — Redirector mailslot and asynchronous-completion composition.**
+**Active: M0 T290 S5 — Redirector NetAPI, NetBIOS, DLC, window and mode composition.**
 
 M0 T289 is closed. Its final original-DPMI package boundary is in
 [the closure record](history/m0-t289-closure-20260827.md). T290 now admits
@@ -10,25 +10,25 @@ the next ordered Redirector and brokered COMMAND owner package.
 
 ## Active Packet
 
-### M0 T290 S4 — Redirector mailslot and asynchronous-completion composition
+### M0 T290 S5 — Redirector NetAPI, NetBIOS, DLC, window and mode composition
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T290 S4`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S3 is closed by formal source-body matrix evidence; the plan's next mailslot/async owner group is admitted for source and ABI audit. |
-| Objective | Compose original `vrmslot.c`, `VrReadWriteAsyncNmPipe`, cancellation and source completion-record lifecycle through the declared session, Win32 and SoftPC facades. |
-| Non-goals | No BOP ingress, NetAPI, NetBIOS, DLC, VDD hook success, physical IRQ delivery, provider rewrite, raw pointer, host-handle exposure, new mapping manager, machine semantic change or `src.old` input. |
-| Reference Baseline | [T290 plan](etc/operations/m0-t290-redirector-owner-package-recovery-plan-001.md), [S1 service ledger](etc/operations/m0-t290-s1-redirector-service-abi-ledger.tsv), [S2 interface ledger](etc/operations/m0-t290-s2-redirector-external-interface-recovery-ledger.tsv) and source policy. |
-| Files And ABI Surface | Original `mvdm-host/vdmredir/{vrinit,vrmisc,vrmslot,vrnmpipe}.c`, declared `adapter-mvdm-host-out/{redir,win32,softpc}`, session, fixtures and formal Ninja inputs. |
+| Identifier Mode | `M0 T290 S5`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S4 is closed by local source-body evidence; the ordered remaining Redirector provider group is admitted for source/ABI/failure audit. |
+| Objective | Compose original NetAPI/NetBIOS/DLC/window/mode providers wherever a public Win32 or declared same-shaped facade preserves source semantics; retain source-proven unavailable outcomes elsewhere. |
+| Non-goals | No BOP ingress, new provider policy, private CSR/BaseSrv/kernel emulation, physical IRQ delivery, raw pointer/host-handle exposure, new mapping manager, machine semantic change or `src.old` input. |
+| Reference Baseline | [T290 plan](etc/operations/m0-t290-redirector-owner-package-recovery-plan-001.md), [S1 service ledger](etc/operations/m0-t290-s1-redirector-service-abi-ledger.tsv), [S2 interface ledger](etc/operations/m0-t290-s2-redirector-external-interface-recovery-ledger.tsv), [S4 closure](etc/evidence/m0-t290-s4-mailslot-async-closure-001.md) and source policy. |
+| Files And ABI Surface | Remaining original `mvdm-host/vdmredir` NetAPI/NetBIOS/DLC/window/mode bodies, declared `adapter-mvdm-host-out/{redir,win32,softpc}`, session, fixtures and formal Ninja inputs. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | First produce a complete source/ABI/cancellation/teardown map, then execute original bodies in focused x86/x64 fixtures with stale/cancel/disconnect negative proof. |
-| Expected Markers | Original mailslot/async functions remain source bodies; every native handle, callback and completion record remains session-owned opaque state; source-defined unavailable physical IRQ results are preserved. |
-| Asset Needs | Existing session mappings/lease API, outgoing adapter declarations, original vdmredir declarations and public Win32 mailslot/overlapped-I/O APIs. |
-| Reporting Requirements | State each original body compiled, each minimal binding/difference, x86/x64 proof, completion teardown and every deferred branch. |
-| Stop Conditions | A semantic rewrite, direct Bochs call, raw pointer path, raw guest callback, second broker, additional mapping manager, selector ingress or NetAPI/DLC scope expansion is proposed. |
-| Exit Criteria | The selected original mailslot/async group has x86/x64 local evidence, stale/cancel/disconnect proof, source-defined physical-IRQ unavailable results and no duplicate COMMAND broker. |
+| Verification | First freeze the remaining source/interface/failure map, then execute admissible original bodies on focused formal x86/x64 fixtures. |
+| Expected Markers | Original provider bodies remain owner code; public APIs preserve their source result order; private kernel/product dependencies stay explicit unavailable outcomes. |
+| Asset Needs | Existing session mappings/lease API, outgoing adapters, original vdmredir declarations and public Win32/NetAPI APIs. |
+| Reporting Requirements | State each original body compiled, each minimal binding/difference, x86/x64 proof and every source-defined unavailable branch. |
+| Stop Conditions | A semantic rewrite, private kernel/CSR emulation, direct Bochs call, raw pointer path, second broker, additional mapping manager or selector ingress is proposed. |
+| Exit Criteria | Every S5 provider branch has a source-first public composition or explicit original failure disposition, with a whole-group x86/x64 matrix. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | `09..0E/23/24/26/2F/30`, `vrmslot.c`, `vrnmpipe.c` async queue/cancel paths, `vrinit.c` completion paths, session completion mappings, guest callback suppression, lease teardown and physical IRQ calls. |
+| Similar-Issue Sweep | NetAPI/NetBIOS/DLC/window/mode provider bodies, external interfaces, public API substitutions, VDD/monitor branches and all declared selector-disabled outcomes. |
 
 **T290 S1 closure:** [the source/ABI audit](etc/evidence/m0-t290-s1-redirector-source-abi-audit-001.md) proves all fifty original `57:00..31` dispatch entries and all twenty-five selected package paths.  The source mirror is exact in both canonical OpenNT editions; lifecycle/named-pipe, mailslot/async, and NetAPI/NetBIOS/DLC groups are the only admissible next owner groups.  No Redirector selector is enabled.
 
@@ -115,6 +115,12 @@ safe-decline evidence: its fixed 16:16 request layout parses under a bounded
 scope, then the current same-shaped unavailable worker facade preserves the
 source carry/error path without queuing I/O or exposing guest memory. See the
 [P19 evidence](etc/evidence/m0-t290-s4-p19-async-pipe-safe-decline-001.md).
+
+**T290 S4 closure:** original mailslot bodies are source-composed with stale
+and cleanup proof; the async group retains its original safe decline and
+empty-queue cancellation direction while physical IRQ completion remains
+explicitly unavailable. See the
+[closure record](etc/evidence/m0-t290-s4-mailslot-async-closure-001.md).
 
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
