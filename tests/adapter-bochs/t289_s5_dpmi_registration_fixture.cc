@@ -8,16 +8,16 @@ extern "C" {
 
 void DpmiSetProtectedmodeInterrupt(void);
 void DpmiSetFaultHandler(void);
+void DpmiPassPmStackInfo(void);
+void BeginUseLockedPMStack(void);
+int EndUseLockedPMStack(void);
 unsigned char *Sim32pGetVDMPointer(unsigned long, unsigned char) { return 0; }
 void *Sim32GetVDMPointer(unsigned long, unsigned char) { return 0; }
 void RcErrorDialogBox(unsigned long, char *, void *) {}
-void setCS(unsigned short) {}
-void setSS(unsigned short) {}
 void setDS(unsigned short) {}
 void setES(unsigned short) {}
 void setFS(unsigned short) {}
 void setGS(unsigned short) {}
-void setSTATUS(unsigned short) {}
 }
 
 #include <string.h>
@@ -66,6 +66,7 @@ static int enter_protected_stop(void)
 int main()
 {
     session instance;
+    machine_facade_protected_frame before, after;
     uint8_t interrupt_frame[10] = {0};
     uint8_t fault_frame[18] = {0};
     int result = 1;
@@ -98,12 +99,27 @@ int main()
         !machine_facade_set_sp16(0x2300u) || !machine_facade_set_ax16(0xbbbbu)) { result = 7; goto done_session; }
     DpmiSetProtectedmodeInterrupt();
     if (getAX() != 0xbbbbu) { result = 8; goto done_session; }
+    if (machine_facade_copy_protected_frame(&before) !=
+        MACHINE_FACADE_PROTECTED_FRAME_OK) { result = 9; goto done_session; }
+    DpmiPassPmStackInfo();
+    BeginUseLockedPMStack();
+    if (machine_facade_copy_protected_frame(&after) !=
+        MACHINE_FACADE_PROTECTED_FRAME_OK || after.ss != before.es ||
+        after.esp != 0x1000u || VdmTib.PmStackInfo.LockCount != 1u) {
+        result = 10; goto done_session;
+    }
+    if (!EndUseLockedPMStack() ||
+        machine_facade_copy_protected_frame(&after) !=
+        MACHINE_FACADE_PROTECTED_FRAME_OK || after.ss != before.ss ||
+        after.esp != before.esp || VdmTib.PmStackInfo.LockCount != 0u) {
+        result = 11; goto done_session;
+    }
     result = 0;
 done_session:
     session_guest_memory_end(&instance);
-    if (!session_thread_unbind(&instance) || !session_dispose(&instance)) result = result == 0 ? 9 : result;
+    if (!session_thread_unbind(&instance) || !session_dispose(&instance)) result = result == 0 ? 12 : result;
 done:
     machine_facade_unbind_opaque_callback();
-    if (!machine_facade_machine_cleanup() && result == 0) result = 10;
+    if (!machine_facade_machine_cleanup() && result == 0) result = 13;
     return result;
 }

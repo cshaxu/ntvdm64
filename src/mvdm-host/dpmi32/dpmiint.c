@@ -41,6 +41,7 @@ Comments:
 #include <dpmiint.h>
 #include <intapi.h>
 #include "dpmi_interrupt_registration.h"
+#include "mvdm_protected_frame_transaction.h"
 
 
 VOID
@@ -364,8 +365,19 @@ Routine Description:
         PMLockOrigEIP = getEIP();
         PMLockOrigSS = getSS();
         PMLockOrigESP = getESP();
+        /* DIVERGENCE(MVDM-HOST-DIV-017): historical i386 monitor writes
+         * VdmTib fields directly.  Bochs must validate CS/SS/EIP/ESP as one
+         * selector-blind machine operation, so preserve the original write
+         * order in a copied same-CPL transaction. */
+        if (!mvdm_protected_frame_transaction_begin()) {
+            --LockedPMStackCount;
+            return;
+        }
         setSS(LockedPMStackSel);
         setESP(LockedPMStackOffset);
+        if (!mvdm_protected_frame_transaction_commit()) {
+            --LockedPMStackCount;
+        }
     }
 }
 
@@ -390,9 +402,20 @@ Return Value:
 {
 
     if (!--LockedPMStackCount) {
+        /* DIVERGENCE(MVDM-HOST-DIV-017): see BeginUseLockedPMStack.  A
+         * rejected atomic Bochs transition restores the source nesting state
+         * and reports the original FALSE direction. */
+        if (!mvdm_protected_frame_transaction_begin()) {
+            ++LockedPMStackCount;
+            return FALSE;
+        }
         setEIP(PMLockOrigEIP);
         setSS((WORD)PMLockOrigSS);
         setESP(PMLockOrigESP);
+        if (!mvdm_protected_frame_transaction_commit()) {
+            ++LockedPMStackCount;
+            return FALSE;
+        }
         return TRUE;
     }
     return FALSE;

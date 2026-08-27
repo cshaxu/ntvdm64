@@ -35,6 +35,7 @@ uint32_t getEDI(void);
 uint32_t getEBP(void);
 uint32_t getESP(void);
 uint32_t getEIP(void);
+uint32_t getEFLAGS(void);
 uint32_t getPE(void);
 void setAL(uint8_t value);
 void setBL(uint8_t value);
@@ -55,6 +56,10 @@ void setEDI(uint32_t value);
 void setEBP(uint32_t value);
 void setESP(uint32_t value);
 void setEIP(uint32_t value);
+void setCS(uint16_t value);
+void setSS(uint16_t value);
+void setEFLAGS(uint32_t value);
+void setSTATUS(uint16_t value);
 void setCF(uint32_t value);
 
 #ifdef __cplusplus

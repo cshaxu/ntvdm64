@@ -17,7 +17,7 @@ if (!(Test-Path $bochs) -or !(Test-Path $vs) -or !(Get-Command ninja -ErrorActio
 $c = @('src/session/mapping_manager.c', 'src/session/guest_memory_lease.c', 'src/session/session.c',
     'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c',
     'src/adapter-mvdm-host-out/monitor/mvdm_vdm_tib.c', 'src/adapter-mvdm-host-out/monitor/source/vdm_control.c',
-    'src/adapter-mvdm-host-out/softpc/mvdm_command_registers.c', 'src/adapter-mvdm-host-out/softpc/mvdm_protected_span.c',
+    'src/adapter-mvdm-host-out/softpc/mvdm_command_registers.c', 'src/adapter-mvdm-host-out/softpc/mvdm_protected_frame_transaction.c', 'src/adapter-mvdm-host-out/softpc/mvdm_protected_span.c',
     'src/mvdm-host/dpmi32/data.c', 'src/mvdm-host/dpmi32/register.c', 'src/mvdm-host/dpmi32/dpmiint.c',
     'src/mvdm-host-overlay/dpmi32/dpmi_interrupt_registration.c')
 $cxx = @('src/adapter-bochs/headless_8042.cc', 'src/adapter-bochs/machine_facade.cc', 'src/adapter-bochs/minimal_machine.cc', 'src/adapter-bochs/minimal_pic.cc', 'src/adapter-bochs/minimal_sim.cc')

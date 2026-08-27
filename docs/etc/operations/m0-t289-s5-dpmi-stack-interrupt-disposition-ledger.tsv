@@ -1,6 +1,7 @@
 item	original_source	disposition	modern_binding	local_result	remaining_owner
 protected interrupt registration	dpmi32/dpmiint.c:DpmiSetProtectedmodeInterrupt	overlay-required mirror	checked SS:SP copy to source-shaped VDM_TIB	formal x86/x64 fixture pass	S5 atomic dispatch transaction
 fault registration	dpmi32/dpmiint.c:DpmiSetFaultHandler	overlay-required mirror	checked SS:SP copy to source-shaped VDM_TIB	formal x86/x64 fixture pass	S5 atomic fault transaction
+locked PM stack	dpmi32/dpmiint.c:BeginUseLockedPMStack,EndUseLockedPMStack	adapter-backed mirror	copied same-CPL CS/SS/EIP/ESP transaction	formal x86/x64 fixture pass	S5 bounded interrupt/IRET/fault stack frames
 stack source group	dpmi32/stack.c	adapter-backed source audit	original source compiles against existing carriers	formal x86/x64 static archive pass	S5 atomic CS/SS frame transaction
 interrupt and IRET source group	dpmi32/dpmiint.c	partially composed mirror	registration endpoints enabled; dispatch/IRET remain disabled	formal x86/x64 static archive pass	S5 atomic CS/SS/EIP/ESP/EFLAGS transaction
 mode and monitor carriers	dpmi32/dpmimscr.c,modesw.c,savestat.c	binding-only source audit	original declarations compile; historical hooks remain unimplemented	formal x86/x64 static archive pass	S5/monitor owner disposition

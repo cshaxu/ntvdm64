@@ -1,4 +1,5 @@
 #include "mvdm_command_registers.h"
+#include "mvdm_protected_frame_transaction.h"
 
 #include "adapter-bochs/machine_facade.h"
 
@@ -75,6 +76,8 @@ uint16_t getSI(void)
 uint16_t getCS(void)
 {
     uint16_t value = 0u;
+    if (mvdm_protected_frame_transaction_active())
+        return mvdm_protected_frame_transaction_cs();
     (void)machine_facade_copy_cs16(&value);
     return value;
 }
@@ -96,6 +99,8 @@ uint16_t getES(void)
 uint16_t getSS(void)
 {
     uint16_t value = 0u;
+    if (mvdm_protected_frame_transaction_active())
+        return mvdm_protected_frame_transaction_ss();
     (void)machine_facade_copy_ss16(&value);
     return value;
 }
@@ -142,7 +147,24 @@ MVDM_COMMAND_GET_REGISTER32(ESI, esi)
 MVDM_COMMAND_GET_REGISTER32(EDI, edi)
 MVDM_COMMAND_GET_REGISTER32(EBP, ebp)
 MVDM_COMMAND_GET_REGISTER32(ESP, esp)
-MVDM_COMMAND_GET_REGISTER32(EIP, eip)
+uint32_t getEIP(void)
+{
+    uint32_t value = 0u;
+    if (mvdm_protected_frame_transaction_active())
+        return mvdm_protected_frame_transaction_eip();
+    (void)machine_facade_copy_eip32(&value);
+    return value;
+}
+
+uint32_t getEFLAGS(void)
+{
+    struct machine_facade_protected_frame frame;
+    if (mvdm_protected_frame_transaction_active())
+        return mvdm_protected_frame_transaction_eflags();
+    if (machine_facade_copy_protected_frame(&frame) !=
+        MACHINE_FACADE_PROTECTED_FRAME_OK) return 0u;
+    return frame.eflags;
+}
 
 void setAL(uint8_t value)
 {
@@ -176,7 +198,13 @@ void setCX(uint16_t value)
 
 void setSP(uint16_t value)
 {
-    (void)machine_facade_set_sp16(value);
+    if (mvdm_protected_frame_transaction_active()) {
+        uint32_t esp = mvdm_protected_frame_transaction_esp();
+        mvdm_protected_frame_transaction_set_esp(
+            (esp & 0xffff0000u) | value);
+    } else {
+        (void)machine_facade_set_sp16(value);
+    }
 }
 
 void setSI(uint16_t value)
@@ -207,8 +235,53 @@ MVDM_COMMAND_SET_REGISTER32(EDX, edx)
 MVDM_COMMAND_SET_REGISTER32(ESI, esi)
 MVDM_COMMAND_SET_REGISTER32(EDI, edi)
 MVDM_COMMAND_SET_REGISTER32(EBP, ebp)
-MVDM_COMMAND_SET_REGISTER32(ESP, esp)
-MVDM_COMMAND_SET_REGISTER32(EIP, eip)
+void setESP(uint32_t value)
+{
+    if (mvdm_protected_frame_transaction_active()) {
+        mvdm_protected_frame_transaction_set_esp(value);
+    } else {
+        (void)machine_facade_set_esp32(value);
+    }
+}
+
+void setEIP(uint32_t value)
+{
+    if (mvdm_protected_frame_transaction_active()) {
+        mvdm_protected_frame_transaction_set_eip(value);
+    } else {
+        (void)machine_facade_set_eip32(value);
+    }
+}
+
+void setCS(uint16_t value)
+{
+    if (mvdm_protected_frame_transaction_active()) {
+        mvdm_protected_frame_transaction_set_cs(value);
+    }
+}
+
+void setSS(uint16_t value)
+{
+    if (mvdm_protected_frame_transaction_active()) {
+        mvdm_protected_frame_transaction_set_ss(value);
+    }
+}
+
+void setEFLAGS(uint32_t value)
+{
+    if (mvdm_protected_frame_transaction_active()) {
+        mvdm_protected_frame_transaction_set_eflags(value);
+    }
+}
+
+void setSTATUS(uint16_t value)
+{
+    if (mvdm_protected_frame_transaction_active()) {
+        uint32_t eflags = mvdm_protected_frame_transaction_eflags();
+        mvdm_protected_frame_transaction_set_eflags(
+            (eflags & 0xffff0000u) | value);
+    }
+}
 
 void setCF(uint32_t value)
 {

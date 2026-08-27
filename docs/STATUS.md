@@ -54,6 +54,13 @@ state; formal x86/x64 fixtures prove both a valid CS/SS/data/GPR/EIP transfer
 and invalid-selector no-mutation rejection. No DPMI source path is enabled by
 P2; P3 owns its source-shaped composition. See [P2 evidence](etc/evidence/m0-t289-s5-p2-protected-transition-001.md).
 
+**T289 S5 P3:** original `BeginUseLockedPMStack` and
+`EndUseLockedPMStack` now retain their source save/restore ordering and
+nesting behavior through a copied, same-CPL SoftPC register transaction.
+Formal x86/x64 fixtures prove the `ES:0x1000` switch and exact restoration;
+the remaining interrupt/IRET/fault bodies still require bounded stack-frame
+composition. See [P3 evidence](etc/evidence/m0-t289-s5-p3-locked-stack-transaction-001.md).
+
 **T289 S3 closure:** `adapter-bochs` now exposes a selector-blind copied
 protected-frame, copied active-segment inspection and checked protected-span
 contract.  A frame commit is comparison-guarded, only changes GPR/EIP/native
