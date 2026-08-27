@@ -10,7 +10,10 @@ growth with an import-first, tracker-led recovery sequence.
 ## Scope
 
 The audit covers the 23 selected original MVDM package roots and every
-candidate non-MVDM OpenNT host package, whether accepted or rejected. A
+candidate non-MVDM OpenNT host package, whether accepted or rejected. It is
+the mandatory first implementation wave: it must finish the complete missing-
+interface/adapter catalogue before an original package body is wired or a
+provider is enabled. A
 candidate is accepted only if a selected MVDM caller directly needs it, its
 original package is materially worth retaining, and its complete outward
 closure terminates in public modern APIs, existing bounded adapters or a
@@ -130,8 +133,12 @@ ledgers. A status in one ledger cannot be inferred from another.
    the other.
 
 The initial versions of these ledgers are generated from the canonical T274
-union and T275 debt records. The tracker task expands them; it never discards
-an original file to make a count look better.
+union and T275 debt records. The immutable T276 1,689-path final-disposition
+ledger is an input, not a parallel live authority: its per-file final owner,
+change class, adapter consequence and evidence must be migrated and reconciled
+into the current shared file/interface/package/build ledgers before the next
+package is admitted. The tracker task expands them; it never discards an
+original file to make a count look better.
 
 ## Exit criteria
 
@@ -149,3 +156,6 @@ an original file to make a count look better.
 - The five independent ledgers are regenerated from their canonical input and
   contain no duplicate file identity, interface identity or dependency edge.
 - No provider body, adapter ABI or mirror change is enabled by this task.
+- The next task receives a complete package-static and interface-contract
+  manifest; it may not rediscover an unrecorded boundary through a compile
+  failure or trace hit.

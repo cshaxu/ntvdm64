@@ -71,6 +71,30 @@ OpenNT-host package; original declaration-only carrier; existing adapter;
 finite new specialist adapter; public modern API; explicit stopping boundary.
 No compile error and no trace determines the ordering.
 
+## Required execution sequence
+
+This packet is one audit closure, but its work is deliberately sequenced so a
+newly noticed symbol cannot create a second, untracked import route.
+
+1. Reconcile the immutable T276 1,689-path final-disposition evidence into the
+   live file, package, build and divergence ledgers; retain the historical
+   ledger as evidence rather than maintaining a parallel live conclusion.
+2. Audit every selected `mvdm-host` package at complete package/build scope:
+   source membership, internal edges, external interface families, profile
+   exclusions and current autonomous reversion candidates.
+3. For every discovered external OpenNT candidate, audit the entire upstream
+   package boundary before selecting a required original slice or rejecting the
+   package. Record all selected and rejected source paths, outgoing edges and
+   stopping boundaries in the external ledger.
+4. Expand every reached outward edge to a child interface row with original
+   caller/declaration/layout, same-shaped owner, x86/x64 mapping effect,
+   unavailable failure contract and prerequisite. A family summary is not an
+   interface closure.
+5. Reconcile build/profile input rows and reversion rows, report exact counts
+   and unresolved items, then stop for owner review. The next queue package
+   consumes this manifest to create static source closures; it does not use a
+   compile error or a trace as discovery.
+
 ## Stop and exit criteria
 
 Stop immediately for owner review when all tracker rows have a final package,

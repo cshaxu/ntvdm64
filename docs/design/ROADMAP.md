@@ -7,44 +7,53 @@ the next trace hit. A phase selects source, proves its external interface
 family, composes the smallest original-owner closure and then uses trace only
 as integrated verification.
 
-## Phase 0 — MVDM package rebootstrap
+## Phase 0 — MVDM package perimeter and interface audit
 
-Phase 0 closes the neutral runtime, Bochs machine foundation, canonical OpenNT
-source supply and global adapter-boundary inventory. It establishes sources and
-interface owners, not provider execution. The next task is a package/symbol
-closure tracker, not a first adapter implementation.
+Phase 0 closes the canonical OpenNT source supply and the full MVDM-host
+package perimeter before provider work. It inventories the selected MVDM union,
+every directly reached non-MVDM OpenNT candidate, and every outward interface
+needed to preserve their original call shape. It establishes sources,
+interface owners, finite stopping boundaries and reversion targets, not
+provider execution.
 
 The program authority is the [rebootstrap program roadmap](../etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md).
 Each candidate has its own proposal and can be admitted only after its stated
 predecessor closes.
 
-**Gate:** every selected MVDM root has provenance and every known external
-family has a named adapter owner. This phase establishes source and interface
-inventory, not product-build closure or general guest execution.
+**Gate:** every selected MVDM root and external candidate has provenance,
+package/file/build disposition, and a complete reached-interface row with one
+adapter, public API or explicit stop owner. This phase establishes source and
+interface inventory, not product-build closure or general guest execution.
 
-## Phase 1 — Package dependency closure and low-dependency originals
+## Phase 1 — Static original-package and contract closure
 
-Expand the package/symbol tracker for all 23 selected host roots, then compose
-the low-dependency `dirs`, `makefil0`, `inc`, `oemuni`, `suballoc` and
-`vdmutils` originals. No
-package starts adapter implementation until its entire reached interface set is
-owned and topologically ordered.
+Materialize the selected MVDM union and accepted external slices as exact
+static mirrors/build manifests, then compose low-dependency `dirs`,
+`makefil0`, `inc`, `oemuni`, `suballoc` and `vdmutils` support carriers. Define
+the named same-shaped adapter contracts and x86/x64 mapping rules required by
+more than one package. No package starts adapter-body implementation until its
+whole reached interface set is owned and topologically ordered.
 
-**Gate:** tracker rows have complete source/ABI/failure disposition and the
-support closure is code/ABI complete in both host graphs.
+**Gate:** selected original package membership and static inputs are fixed;
+shared support and every cross-package adapter contract have a source/ABI/
+failure disposition in both host graphs.
 
-## Phase 2 — Original host control, DEM, COMMAND and XMS
+## Phase 2 — Base protocol and machine-control substrate
 
-Recover the reached `softpc.new/host` control plane, DEM, COMMAND local
-lifecycle and XMS packages in tracker order. Original code stays intact except
-for recorded binding changes to same-shaped adapters.
+Recover the Base VDM client/server vertical slice through its bounded private
+host adapter, followed by reached non-executor `softpc.new` monitor/SIM control
+through the Bochs mechanical adapter. Original code stays intact except for
+recorded same-shaped binding changes. CSR/CSRSS, kernel VDM and a second CPU
+executor remain outside the boundary.
 
-**Gate:** each complete owner package passes its local x86/x64 compile, link
-and positive/negative matrix; unresolved broker or machine rows remain explicit.
+**Gate:** command/control protocol and source-shaped machine entry/stop
+contracts have local x86/x64 proof with explicit unavailable product-shell
+branches.
 
-## Phase 3 — Monitor, protected mode, Redirector, WOW and VDD dependencies
+## Phase 3 — Original MVDM service packages
 
-Recover DPMI, Redirector, WOW16 and VDD/debugger packages in dependency order.
+Recover DEM/COMMAND, then XMS/DPMI/DPMI32, then VDMREDIR, and finally
+WOW32/FAX/VDD/debugger packages in the dependency order fixed by Phase 0.
 Enable Bochs features only for reached original callers. Extend the broker only
 for source-proven multi-process command/WOW coordination; do not recreate
 CSRSS internals.
@@ -55,9 +64,10 @@ one integrated guest trace is used to observe behavior change.
 ## Phase 4 — Brokered COMMAND and cross-family lifecycle
 
 Complete original COMMAND child/return, DOS EXEC parent restoration, brokered
-`GetNextVDMCommand`, console/event and WOW lifecycle after their owners are
-available. Preserve one active imported MVDM session per process unless a
-separate reentrancy audit admits in-process multiple contexts.
+`GetNextVDMCommand`, console/event and WOW lifecycle after their package owners
+are available. Remove only project-owned paths that the Phase 0 reversion
+ledger marks as superseded. Preserve one active imported MVDM session per
+process unless a separate reentrancy audit admits in-process multiple contexts.
 
 ## Phase 5 — Integrated verification and packaging
 
