@@ -57,6 +57,8 @@ source/fixture evidence in [DTA recovery](etc/evidence/m0-t280-s20-p5-dta-locati
 P6 has removed the reached current-PDB pointer across DEM and selected SoftPC
 consumers; its source recovery and transferred product-shell interface gaps
 are recorded in [PDB recovery](etc/evidence/m0-t280-s20-p6-current-pdb-source-recovery-001.md).
+P7 proves that SFT/JFT is a distinct VDD host-buffer lifecycle boundary, not
+a legal scalar lease conversion; see the [SFT boundary audit](etc/operations/m0-t280-s20-p7-sft-chain-boundary-audit-001.md).
 None of these records is an S20 closure.
 
 ### Closed packet reference — M0 T280 S13
