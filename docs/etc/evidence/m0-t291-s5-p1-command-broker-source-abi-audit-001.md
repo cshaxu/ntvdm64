@@ -12,15 +12,16 @@ WOWEXEC notification comment with every selected COMMAND, WOW, config and V86
 consumer. The resulting request/result and owner disposition is in the
 [ledger](../operations/m0-t291-s5-p1-command-broker-source-abi-ledger-001.md).
 
-## Conclusion
+## Superseded conclusion and successor
 
-The selected mirror has client evidence but no BaseSrv implementation to copy.
-The smallest permitted authored seam is therefore a `broker`-owned copied
-record queue/wake capability. It is constrained by the original callers:
-bounded `VDMINFO` payload data, capacity-retry reporting, no-command result,
-re-entry count and producer/consumer ordering. It does not receive a caller
-pointer or replace the monitor command entry.
+This audit correctly identifies the caller contracts, but its source-supply
+conclusion was too narrow: it searched the selected MVDM mirror, not the
+complete approved OpenNT source. The latter contains the original BaseSrv
+server and client implementation under `base/win32`. The proposed authored
+`broker` queue was not retained.
 
-The one-session DOS forms CB-02 through CB-04 are ready for a focused P2.
-WOW, PIF, first-VDM and `ExitVDM` forms stay explicit unavailable/deferred;
-they need their source package owners rather than an invented fallback.
+The successor [P2 source-package audit](m0-t291-s5-p2-basesrv-source-package-audit-001.md)
+selects the original package and records its CSR/private-NT dependencies.
+Only after that import may a same-shaped adapter or bounded broker record
+replace an individual unavailable platform operation. CB-02 through CB-07
+remain source-owned; their runtime admission is not implied by this correction.

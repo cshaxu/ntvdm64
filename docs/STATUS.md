@@ -16,16 +16,16 @@ its whole-package source/ABI audit and now admits its first dependency group.
 | --- | --- |
 | Identifier Mode | `M0 T291 S5`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Owner requested a unified repair of the partially correct command/control/re-entry boundary. S4 has now closed the prerequisite separation rather than leaving a generic dispatcher in place. |
-| Objective | Recover the applicable source-shaped `GetNextVDMCommand` producer/consumer, wait/wake and monitor re-entry contracts without rebuilding BaseSrv/CSR or conflating WOW callbacks with command acquisition. |
-| Non-goals | No BaseSrv/CSRSS clone, fast WOW assembler, `CurrentMonitorTeb`, global current task/session, second CPU executor, raw pointer/HANDLE ABI, selector enablement, Bochs change or `src.old` input. |
-| Reference Baseline | [S4 closure](etc/evidence/m0-t291-s4-control-plane-separation-closure-001.md), [S5 plan](etc/operations/m0-t291-s5-source-shaped-command-broker-and-monitor-reentry-plan-001.md), original `vdmapi.h`, COMMAND/WOW/monitor call sites and source policy. |
-| Files And ABI Surface | Selected `mvdm-host` COMMAND/WOW/monitor source, `adapter-mvdm-host-out/{monitor,softpc,wow}`, `broker`, `session`, `app`, focused fixtures and source/ABI ledgers. |
+| Objective | Recover the applicable source-shaped `GetNextVDMCommand` producer/consumer, wait/wake and monitor re-entry contracts by first reusing the original OpenNT BaseSrv/client package, without conflating WOW callbacks with command acquisition. |
+| Non-goals | No new BaseSrv/CSRSS clone, fast WOW assembler, `CurrentMonitorTeb`, global current task/session, second CPU executor, raw pointer/HANDLE ABI, selector enablement, Bochs change or `src.old` input. |
+| Reference Baseline | [S4 closure](etc/evidence/m0-t291-s4-control-plane-separation-closure-001.md), [S5 plan](etc/operations/m0-t291-s5-source-shaped-command-broker-and-monitor-reentry-plan-001.md), [P2 source-package audit](etc/evidence/m0-t291-s5-p2-basesrv-source-package-audit-001.md), original `vdmapi.h`, BaseSrv, COMMAND/WOW/monitor call sites and source policy. |
+| Files And ABI Surface | Selected `mvdm-host` COMMAND/WOW/monitor source, original OpenNT BaseSrv/client package proposed for `opennt-host`, `mvdm-platform-abi`, `adapter-mvdm-host-out/{monitor,softpc,wow,win32}`, a possible BaseSrv-specific `adapter-opennt-host`, `broker`, `session`, `app`, focused fixtures and source/ABI ledgers. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
 | Verification | Source call-order/failure ledger; x86/x64 producer/consumer, unavailable and lifecycle tests; negative scan proving no generic route or cross-plane fallback. |
 | Expected Markers | Original `VDMINFO` ownership/order retained, typed command and monitor owners remain distinct, copied event/queue records only where source requires them, and each re-entry group has an owner-specific outcome. |
 | Asset Needs | Original `vdmapi.h`, `cmdexec.c`, `cmdmisc.c`, `config.c`, `wkman.c`, monitor source, existing S4 ledgers and current fixtures. |
 | Reporting Requirements | State original caller/callee shape, notification/wait order, host-thread/session lifetime, stop result, source failure semantics, x86/x64 evidence and deferred owner. |
-| Stop Conditions | Any need to clone BaseSrv/CSR, add a generic dispatcher, expose raw identity, create a second executor, enable a selector without its owner package, touch Bochs or import `src.old`. |
+| Stop Conditions | Any need to author a replacement before the original BaseSrv/client package is audited, add a generic dispatcher, expose raw identity, create a second executor, enable a selector without its owner package, touch Bochs or import `src.old`. |
 | Exit Criteria | Each admitted command/monitor consumer has source-backed queue/wake or explicit unavailable behavior, typed ownership, x86/x64 proof and no command/control/callback cross-routing. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
 | Similar-Issue Sweep | All COMMAND/WOW command consumers, `NtVdmControl` service classes, `host_simulate` groups, TD/TEB projection fields, broker records and session teardown paths. |
@@ -35,11 +35,13 @@ execution are now distinct typed planes; the generic session operation table
 is gone. The owner-specific `host_simulate` and WOW task limits are recorded,
 not papered over. See the [closure](etc/evidence/m0-t291-s4-control-plane-separation-closure-001.md).
 
-**T291 S5 P1:** the original `VDMINFO` request/result forms now have one
-source-backed disposition. The selected mirror contains client evidence but
-no BaseSrv body, so only a copied `broker` record/wake seam is admissible for
-the one-session DOS forms; WOW/PIF/first-VDM/`ExitVDM` remain with their
-original owner packages. See the [source/ABI audit](etc/evidence/m0-t291-s5-p1-command-broker-source-abi-audit-001.md).
+**T291 S5 P1 correction:** P1 established the original `VDMINFO` request/result
+forms, but its source-supply conclusion was limited incorrectly to the selected
+MVDM mirror. The complete approved OpenNT source contains the original BaseSrv
+server/client package. No authored queue draft is retained. P2 now audits that
+package and its owner boundary before any binding is admitted; see the
+[P1 audit](etc/evidence/m0-t291-s5-p1-command-broker-source-abi-audit-001.md)
+and [P2 source-package audit](etc/evidence/m0-t291-s5-p2-basesrv-source-package-audit-001.md).
 
 **T291 S3 closure:** the bounded pointer scope, numeric task projection and
 source-shaped non-fast callback mechanics passed their complete formal x86/x64

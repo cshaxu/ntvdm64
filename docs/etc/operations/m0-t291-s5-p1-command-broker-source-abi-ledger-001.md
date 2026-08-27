@@ -6,8 +6,11 @@
 public `GetNextVDMCommand(PVDMINFO)` spelling, `VDMINFO` layout and the
 request-state bitfield. The same header states that BaseSrv notifies shared
 WOWEXEC with `WM_WOWEXECSTARTAPP`, specifically to avoid a permanently blocked
-WOW thread. The BaseSrv server body itself is not in the selected MVDM mirror;
-therefore it cannot be copied directly.
+WOW thread. The selected MVDM mirror contains no BaseSrv server body. This was
+initially used as a source-supply boundary, but P2 corrected that scope: the
+complete approved OpenNT source contains the original server and client
+package. This ledger remains the caller-form input; it no longer authorizes a
+replacement queue.
 
 ## Reached consumer forms
 
@@ -21,21 +24,17 @@ therefore it cannot be copied directly.
 | CB-06 | `wow32/wkman.c` | `ASKING_FOR_WOW_BINARY` or `ASKING_FOR_SEPWOW_BINARY`; no command is successful `CmdSize == 0`; capacity retry includes the WOW environment doubling rule; shared WOW receives BaseSrv notification. | Explicit unavailable. | Recover only after a typed WOW consumer owns its copied 16-bit frame/capacity bridge. S5 may provide broker notification record, not WOW execution. |
 | CB-07 | `wow32/wkman.c` | A shared WOW skips a `wowexec.exe` payload through `ExitVDM` and asks again. | Unavailable. | Defer to the source-shaped WOW lifecycle group; S5 must not implement `ExitVDM` as a generic command queue operation. |
 
-## Required boundary
+## Superseded required boundary
 
-The missing original server is a **broker capability**, not a new command
-dispatcher. Its records must be copied/fixed-width and must not carry caller
-`PVDMINFO`, guest pointers, local mapping IDs or native handles. The monitor
-adapter preserves the original client API and interprets the source state;
-`broker` owns only producer registration, copied records, queue/wake and
-deterministic disconnect cleanup. `app` remains the initial producer/product
-policy owner. WOW's frame conversion and guest execution remain WOW-owned.
+The former boundary that assigned a copied queue to `broker` is withdrawn.
+P2 first imports and audits the original BaseSrv/client package; only an
+identified unavailable BaseSrv/CSR operation may then receive a same-shaped
+adapter or bounded broker seam.
 
-## P1 decision
+## Superseded P1 decision
 
-The first admissible S5 implementation group is CB-02/CB-03/CB-04 for the
-one-session DOS client: a copied bounded record queue, explicit no-command
-result, producer wake state and balanced re-entry count. CB-05--CB-07 remain
-unavailable until their original packages are admitted. This replaces no
-original provider body because none is available; the source client ABI and
-observable results are the binding specification.
+The former proposal to begin CB-02/CB-04 with a copied bounded queue is
+withdrawn. It made an incorrect source-supply inference from the selected
+MVDM mirror. CB-02 through CB-07 remain source-owned; their runtime admission
+is not implied until the original BaseSrv/client package has been imported and
+its private dependencies have been mapped.
