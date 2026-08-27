@@ -36,14 +36,17 @@ source composition review.  The latter five already retain original no-op or
 `VrGetComputerName` and `VrGetUserName` need exact synchronous guest output
 spans and public Unicode-to-OEM/ANSI conversion bindings before local proof.
 
-The attempted original-object fixture additionally proves a declaration-closure
-precondition: `vrnetapi.c` includes `apinums.h`, `remdef.h`, `remtypes.h`,
-`rxp.h`, `apiparam.h`, `xstypes.h`, `xsprocs.h`, `netlibnt.h`, `rxuser.h` and
-`crypt.h`.  The existing platform-ABI include ledger records `apinums.h` and
-related DS headers as ambiguous source-package candidates, not present build
-inputs.  They must first be selected/imported as one provenance-reviewed
-declaration carrier; copying an arbitrary same-basename header merely to make
-one decline body compile would violate the source policy.
+The original-object fixture proved a declaration-closure precondition:
+`vrnetapi.c` includes `apinums.h`, `remdef.h`, `remtypes.h`, `rxp.h`,
+`apiparam.h`, `xstypes.h`, `xsprocs.h`, `netlibnt.h`, `rxuser.h` and `crypt.h`.
+T290 S5 P2 resolved that input at package scope: the exact 95-file OpenNT DS
+declaration package plus its required exact OpenNT public-internal base and
+network declaration cohorts are now in `mvdm-platform-abi`. The original body
+compiles on both host widths. Its many private Lanman/SMB/SoftPC imports remain
+unresolved for the unselected sibling bodies; the focused local-result fixture
+uses a test-only forced-unresolved link and calls only the four original
+`ERROR_NOT_SUPPORTED` bodies and two original no-op bodies. This is not a
+product-link claim and does not provide a substitute for the private services.
 
 ## Frozen decision
 

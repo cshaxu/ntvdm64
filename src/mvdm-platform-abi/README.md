@@ -60,6 +60,15 @@ package-selection record and per-file source/hash manifest are
 and
 [here](../../docs/etc/operations/m0-t290-s5-ds-declaration-package-manifest-001.tsv).
 
+The same S5 compilation closure selected exact OpenNT
+`public/internal/base/inc` and `public/internal/net/inc` declaration cohorts.
+They supply the original `smbgtpt.h` and `tstring.h` dependencies of the DS
+headers only; neither package activates its historical host services. Their
+selection and per-file hashes are recorded
+[here](../../docs/etc/operations/m0-t290-s5-public-internal-declaration-cohort-selection-001.md)
+and
+[here](../../docs/etc/operations/m0-t290-s5-public-internal-declaration-cohort-manifest-001.tsv).
+
 T290 S5 selected the complete byte-exact OpenNT
 `public/internal/ds/inc` declaration package under
 `source/public/internal/ds/inc`. This preserves the historical declaration

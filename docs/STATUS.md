@@ -128,6 +128,13 @@ owner outcomes and identifies the first real source closure prerequisite:
 not an arbitrary same-name header. No incomplete fixture is retained. See the
 [P1 audit](etc/evidence/m0-t290-s5-remaining-provider-source-abi-audit-001.md).
 
+**T290 S5 P2:** the exact original `vrnetapi.c` now compiles on formal x86/x64
+fixtures after selecting its DS/public-internal declaration cohorts. Four
+original `ERROR_NOT_SUPPORTED` entries and two original no-op entries execute
+with their source register outcomes. The fixture's test-only forced link does
+not resolve or enable the sibling private Lanman/SMB bodies; see the
+[P2 evidence](etc/evidence/m0-t290-s5-p2-vrnetapi-local-source-closure-001.md).
+
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
 bodies now compose on formal x86/x64 Ninja fixtures.  Session-owned numeric

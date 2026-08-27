@@ -13,6 +13,17 @@
 #include <devioctl.h>
 #include <winternl.h>
 
+/* DIVERGENCE: The selected historical netlibnt.h declaration carrier uses
+ * NT_PRODUCT_TYPE. The modern SDK's winnt.h exposes its own foundational
+ * definitions but not this retired enum, while including ntdef.h after
+ * windows.h duplicates SDK structures. Preserve the exact three-value NT4
+ * declaration shape locally; it declares no service or product policy. */
+typedef enum _NT_PRODUCT_TYPE {
+    NtProductWinNt = 1,
+    NtProductLanManNt,
+    NtProductServer
+} NT_PRODUCT_TYPE, *PNT_PRODUCT_TYPE;
+
 /* DIVERGENCE: Original DEM storage declarations require historical
  * devioctl.h and own GetDiskSpaceInformation as an unrelated BOOL helper.
  * Keep the storage carrier visible and remove only the conflicting modern
