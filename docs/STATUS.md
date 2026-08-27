@@ -48,7 +48,9 @@ waves after the queue-head package/symbol tracker closes.
 P1 inventory is recorded in the [persistent-location ledger](etc/operations/m0-t280-s20-dem-persistent-guest-location-ledger-001.tsv).
 P2 fixes the numeric descriptor, packed-layout and lease conversion contract in
 the [descriptor/lease design](etc/operations/m0-t280-s20-p2-descriptor-layout-and-lease-design-001.md).
-Neither record is an implementation closure.
+P3 has independently verified the source-facing bounded lease facade on x86
+and x64 in [fixture evidence](etc/evidence/m0-t280-s20-p3-mvdm-guest-location-fixture-001.md).
+None of these records is an implementation closure.
 
 ### Closed packet reference — M0 T280 S13
 
