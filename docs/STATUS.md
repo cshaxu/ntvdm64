@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T288 S4 — Monitor SoftPC/SAS mechanical recovery.**
+**Active: M0 T288 S5 — Monitor keyboard/IVT and lifecycle recovery.**
 
 T286 is closed. Its final Bochs-core minimization evidence is in
 [the closure record](history/m0-t286-closure-20260827.md). T287 admits the
@@ -10,25 +10,25 @@ queue-head original XMS owner package using a complete source-first plan.
 
 ## Active Packet
 
-### M0 T288 S4 — Monitor SoftPC/SAS mechanical recovery
+### M0 T288 S5 — Monitor keyboard/IVT and lifecycle recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T288 S4`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S3 source-proven non-duplication/transfer closure is recorded; S4 is the next bounded recovery rung in the admitted T288 plan. |
-| Objective | Recover source-proven SoftPC/SAS monitor mechanics using original-name facades and selector-blind Bochs requests only. |
+| Identifier Mode | `M0 T288 S5`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S4 SAS disposition closure is recorded; S5 is the next bounded recovery rung in the admitted T288 plan. |
+| Objective | Recover the smallest original `UpdateKbdInt15` IVT state fragment and source-proven monitor lifecycle linkage without creating a keyboard/IRQ product shell. |
 | Non-goals | No monitor/BOP route enablement, serial SIM32 transport, kernel VDM or CSRSS recreation, generic keyboard controller/IRQ/input shell, second CPU executor, raw VDM_TIB/native guest-pointer ABI, new mapping manager, or `src.old` use. |
-| Reference Baseline | [T288 plan](etc/operations/m0-t288-monitor-keyboard-ivt-recovery-plan-001.md), [S3 evidence](etc/evidence/m0-t288-s3-monitor-frame-recovery-001.md), source policy and mapping-manager rule. |
-| Files And ABI Surface | Exact `v86/monitor` SoftPC/SAS callers; `adapter-mvdm-host-out/softpc`, `adapter-bochs`, session leases and formal fixtures. |
+| Reference Baseline | [T288 plan](etc/operations/m0-t288-monitor-keyboard-ivt-recovery-plan-001.md), [S4 evidence](etc/evidence/m0-t288-s4-softpc-sas-mechanics-001.md), source policy and mapping-manager rule. |
+| Files And ABI Surface | Exact reached `UpdateKbdInt15` sources, monitor lifecycle callers, `adapter-mvdm-host-out/{softpc,monitor}`, `adapter-bochs`, session leases and formal fixtures. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Original caller/facade map; x86/x64 local register/memory/port-range checks; source-body and forbidden-direct-dependency scans; documentation governance and `git diff --check`. |
-| Expected Markers | No direct Bochs dependency enters an OpenNT mirror; no duplicate SAS allocator, CPU executor or mapping manager is introduced. |
-| Asset Needs | S3 ledger, canonical roots, existing session mapping rule, adapter-bochs typed mechanics and current exception registers. |
+| Verification | Original IVT/lifecycle caller map; x86/x64 local register/memory checks; source-body and forbidden-direct-dependency scans; documentation governance and `git diff --check`. |
+| Expected Markers | No direct Bochs dependency enters an OpenNT mirror; no keyboard controller, IRQ shell, CPU executor or mapping manager is introduced. |
+| Asset Needs | S4 ledger, canonical roots, existing session mapping rule, adapter-bochs typed mechanics and current exception registers. |
 | Reporting Requirements | Original caller/declaration form, selected same-shaped facade, all unavailable status paths, focused x86/x64 result and every excluded machine mechanism. |
 | Stop Conditions | A source body needs a semantic rewrite, direct Bochs call or new mapper is proposed, a second CPU/product shell is selected, or a non-direct carrier is silently linked. |
-| Exit Criteria | Each selected SoftPC/SAS monitor interface either composes through an existing same-shaped adapter with local proof, or has a complete source-proven transfer disposition for S5/later owner packages. |
+| Exit Criteria | The original IVT compare/update/reset contract is locally verified; every mandatory monitor lifecycle prerequisite either composes through an existing same-shaped adapter or has a source-proven transfer to S6/later owner packages. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | SoftPC/SAS imports, register/mode/memory/port range forms, Bochs-facing calls, session leases, V86 monitor globals, x86/x64 forms, forbidden direct pointers and forbidden historical shells. |
+| Similar-Issue Sweep | UpdateKbdInt15 callers, IVT/vector register forms, monitor lifecycle linkage, Bochs-facing calls, session leases, x86/x64 forms, forbidden direct pointers and forbidden historical shells. |
 
 **T288 S1 closure:** the reproducible union ledger records 78 selected source
 files, all exact in both canonical OpenNT roots. It identifies the seven exact
@@ -36,6 +36,14 @@ keymouse files still under the temporary `mvdm-host` root for S2 re-rooting,
 partitions 15 monitor/firmware interface groups by original owner and recovery
 ladder, and transfers SIM16/WOW plus VDD/debugger-specific behavior without
 inventing substitutes. See [S1 evidence](etc/evidence/m0-t288-s1-monitor-source-abi-audit-001.md).
+
+**T288 S4 closure:** the source-shaped SAS scalar/span facade now composes
+through checked `adapter-bochs` memory mechanics on formal x86 and x64 Ninja
+fixtures. Its complete source disposition records the intentionally excluded
+low-host-address mapper, raw-pointer forms, memory handler table and CCPU
+descriptor stubs; no second allocator, mapper or CPU executor was added. See
+[S4 evidence](etc/evidence/m0-t288-s4-softpc-sas-mechanics-001.md) and the
+[S4 ledger](etc/operations/m0-t288-s4-softpc-sas-disposition-ledger.tsv).
 
 **T287 S7/T287 closure:** the exact XMS source package is code-complete and
 locally regression-closed. The corrected source audit records eleven exact
