@@ -42,6 +42,17 @@ void machine_facade_apply_real_mode_entry(uint16_t cs, uint32_t eip);
 int machine_facade_copy_real_mode_entry(uint16_t *cs, uint32_t *eip);
 int machine_facade_copy_real_mode_state(uint16_t *cs, uint16_t *ss,
     uint16_t *sp, uint32_t *eip);
+/* Source-shaped 16-bit monitor register primitives.  They expose no BOP,
+ * OpenNT, DOS or VDM semantics; adapter-softpc owns that compatibility ABI. */
+int machine_facade_copy_ax16(uint16_t *value);
+int machine_facade_copy_bx16(uint16_t *value);
+int machine_facade_copy_dx16(uint16_t *value);
+int machine_facade_copy_si16(uint16_t *value);
+int machine_facade_copy_ds16(uint16_t *value);
+int machine_facade_copy_es16(uint16_t *value);
+int machine_facade_set_al8(uint8_t value);
+int machine_facade_set_bx16(uint16_t value);
+int machine_facade_set_carry(uint32_t value);
 void machine_facade_request_cpu_stop(void);
 /* Clears only a previous adapter-owned finite-run stop request.  This does
  * not alter CPU registers, guest memory, devices, or pending interrupts. */

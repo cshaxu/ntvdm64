@@ -2,34 +2,34 @@
 
 ## Current Work
 
-**Active: M0 T282 S9 — COMMAND environment guest-memory seam audit.** T281 closed
+**Active: M0 T282 S10 — COMMAND register and bounded-lease binding.** T281 closed
 in `5aa51088`; the owner has directed Queue-order execution. T282 begins the
 next candidate, original COMMAND local lifecycle, with a full package source
 and interface audit before any `54:xx` route is enabled.
 
 ## Active Packet
 
-### M0 T282 S9 — COMMAND environment guest-memory seam audit
+### M0 T282 S10 — COMMAND register and bounded-lease binding
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T282 S9`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S8 closed in `dd38deb5`; its chosen environment/current-directory slice is gated by the project rule forbidding unbounded historical guest pointers. |
-| Objective | Establish the complete bounded guest-memory contract for original `cmdComSpec`, `cmdGetCurrentDir`, `cmdGetInitEnvironment` and reached helpers. |
-| Non-goals | Raw-pointer `GetVDMAddr` facade, generic mapper, source-body modification, BOP route, host policy, guest trace or Bochs change. |
-| Reference Baseline | Exact `cmdmisc.c`/`cmdenv.c`; T280 bounded lease and descriptor closures; S8 COMMAND owner partition; session mapping-manager rules. |
-| Files And ABI Surface | Original guest pointer call sites, data layouts, adapter-softpc bounded lease facade, source/ABI span ledger and evidence. |
+| Identifier Mode | `M0 T282 S10`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S9 closed in `a4d137c2`; its ledger proves that the selected source bodies need original `softpc.h` register forms plus only existing bounded leases. |
+| Objective | Recover the reached source-shaped `get*`/`set*` SoftPC register boundary and bind it to selector-blind typed adapter-bochs mechanics. |
+| Non-goals | Generic CPU-frame ABI, raw-pointer `GetVDMAddr`, generic mapper, source-body modification, BOP route, host policy, guest trace, CCPU executor or Bochs-core change. |
+| Reference Baseline | Exact `softpc.h`, `cmdmisc.c`/`cmdenv.c`; T280 bounded lease closures; S8/S9 COMMAND ledgers; adapter-softpc/session mapping rules. |
+| Files And ABI Surface | Original register declarations, adapter-softpc source-shaped facade, adapter-bochs typed mechanics, existing bounded guest-location lease and focused fixture. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Exact-source pointer-call audit, span/layout/lease review, existing adapter contract comparison, documentation governance and `git diff --check`. |
-| Expected Markers | Every read/write has address, minimum span, access, lifetime, failure path and one safe adapter/mirror disposition. |
-| Asset Needs | Pinned original MVDM mirror, T280 S19/S20 evidence, adapter-softpc/session mapping contracts and source layouts. |
-| Reporting Requirements | Caller, original expression, operation, span, lifetime, mapping instance, source failure and required minimal divergence. |
-| Stop Conditions | A raw pointer is proposed without a bounded synchronous lease, a mapping is retained asynchronously, a span is guessed, or a new generic mapper is introduced. |
-| Exit Criteria | Complete safe pointer/lease ledger sufficient to admit the environment/current-directory implementation group. |
+| Verification | Original declaration/call audit, typed register semantics review, focused x86/x64 fixture, documentation governance and `git diff --check`. |
+| Expected Markers | Exact reached register widths, low-byte/low-word preservation, carry update, selector-blind adapter path and existing lease-only guest-memory route. |
+| Asset Needs | Pinned original MVDM mirror, S9 ledger/evidence, adapter-softpc/session mapping contracts and adapter-bochs machine facade. |
+| Reporting Requirements | Original caller/declaration, typed mechanical operation, width semantics, test result, mapping instance and any remaining minimal mirror divergence. |
+| Stop Conditions | A generic frame is invented, a raw pointer crosses an adapter ABI, a lease becomes asynchronous, a selector is recognized below adapter-bop, or a new mapper is introduced. |
+| Exit Criteria | Reached register forms have one verified typed binding or an evidence-backed blocker; the later source group can be admitted without guessing a register or guest-memory contract. |
 | Original Owner Request | “我都叫你按顺序执行了” and “请参照治理规范和实施规范执行任务”. |
-| Similar-Issue Sweep | All `GetVDMAddr`, `Sim32GetVDMPointer`, direct string/memory, register and descriptor operations in the selected COMMAND group. |
+| Similar-Issue Sweep | All reached COMMAND `get*`/`set*` forms, bounded `GetVDMAddr` replacements, partial-register writes and carry updates. |
 
-The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md), [S4 complete original COMMAND static package](etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md), [S5 VDM command-acquisition source audit](etc/operations/m0-t282-s5-vdm-command-acquisition-source-audit-plan-001.md), [S6 local VDM command transport](etc/operations/m0-t282-s6-local-vdm-command-transport-plan-001.md), [S7 original COMMAND initialization composition](etc/operations/m0-t282-s7-original-command-initialization-plan-001.md), [S8 COMMAND owner dependency partition](etc/operations/m0-t282-s8-command-owner-dependency-partition-plan-001.md), and [S9 COMMAND environment guest-memory seam audit](etc/operations/m0-t282-s9-command-environment-guest-seam-audit-plan-001.md).
+The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md), [S4 complete original COMMAND static package](etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md), [S5 VDM command-acquisition source audit](etc/operations/m0-t282-s5-vdm-command-acquisition-source-audit-plan-001.md), [S6 local VDM command transport](etc/operations/m0-t282-s6-local-vdm-command-transport-plan-001.md), [S7 original COMMAND initialization composition](etc/operations/m0-t282-s7-original-command-initialization-plan-001.md), [S8 COMMAND owner dependency partition](etc/operations/m0-t282-s8-command-owner-dependency-partition-plan-001.md), [S9 COMMAND environment guest-memory seam audit](etc/operations/m0-t282-s9-command-environment-guest-seam-audit-plan-001.md), and [S10 COMMAND register and bounded-lease binding](etc/operations/m0-t282-s10-command-register-and-lease-binding-plan-001.md).
 
 **T282 S1 P1:** both static-only architecture probes reached the same original
 `vdmapi.h` declaration boundary. The verified 11-unit/17-service ledgers and
@@ -112,6 +112,12 @@ instance and adapter-softpc bounded leases are the sole legal route.
 64-byte COMSPEC input, 67-byte current-directory output and source-calculated
 initial-environment output. Naked `GetVDMAddr` remains forbidden; see the
 [S9 evidence](etc/evidence/m0-t282-s9-command-environment-guest-seam-audit-001.md).
+
+**T282 S10 closure:** the reached original `softpc.h` COMMAND register imports
+now bind through source-shaped adapter-softpc functions to selector-blind
+adapter-bochs mechanics. The formal x86/x64 fixture and real adapter-bochs
+source compiles pass; guest memory remains S9's exact bounded lease. See the
+[S10 evidence](etc/evidence/m0-t282-s10-command-register-and-lease-binding-001.md).
 
 ### Closed packet reference — M0 T281 S5 — original host-control package disposition
 

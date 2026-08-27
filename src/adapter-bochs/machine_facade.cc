@@ -164,6 +164,69 @@ extern "C" int machine_facade_copy_real_mode_state(uint16_t *cs,
   return 1;
 }
 
+extern "C" int machine_facade_copy_ax16(uint16_t *value)
+{
+  if (machine_facade_machine == 0 || value == 0) return 0;
+  *value = bx_cpu.get_reg16(BX_16BIT_REG_AX);
+  return 1;
+}
+
+extern "C" int machine_facade_copy_bx16(uint16_t *value)
+{
+  if (machine_facade_machine == 0 || value == 0) return 0;
+  *value = bx_cpu.get_reg16(BX_16BIT_REG_BX);
+  return 1;
+}
+
+extern "C" int machine_facade_copy_dx16(uint16_t *value)
+{
+  if (machine_facade_machine == 0 || value == 0) return 0;
+  *value = bx_cpu.get_reg16(BX_16BIT_REG_DX);
+  return 1;
+}
+
+extern "C" int machine_facade_copy_si16(uint16_t *value)
+{
+  if (machine_facade_machine == 0 || value == 0) return 0;
+  *value = bx_cpu.get_reg16(BX_16BIT_REG_SI);
+  return 1;
+}
+
+extern "C" int machine_facade_copy_ds16(uint16_t *value)
+{
+  if (machine_facade_machine == 0 || value == 0) return 0;
+  *value = bx_cpu.sregs[BX_SEG_REG_DS].selector.value;
+  return 1;
+}
+
+extern "C" int machine_facade_copy_es16(uint16_t *value)
+{
+  if (machine_facade_machine == 0 || value == 0) return 0;
+  *value = bx_cpu.sregs[BX_SEG_REG_ES].selector.value;
+  return 1;
+}
+
+extern "C" int machine_facade_set_al8(uint8_t value)
+{
+  if (machine_facade_machine == 0) return 0;
+  bx_cpu.set_reg8l(BX_16BIT_REG_AX, value);
+  return 1;
+}
+
+extern "C" int machine_facade_set_bx16(uint16_t value)
+{
+  if (machine_facade_machine == 0) return 0;
+  bx_cpu.set_reg16(BX_16BIT_REG_BX, value);
+  return 1;
+}
+
+extern "C" int machine_facade_set_carry(uint32_t value)
+{
+  if (machine_facade_machine == 0 || value > 1u) return 0;
+  bx_cpu.set_CF(value ? 1 : 0);
+  return 1;
+}
+
 extern "C" void machine_facade_request_cpu_stop(void)
 {
   bx_pc_system.kill_bochs_request = 1;

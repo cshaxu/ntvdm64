@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2697 |
+| Documentation records | 2699 |
 | --- | --- |
-| Generated UTC | 2026-08-27T04:50:22Z |
+| Generated UTC | 2026-08-27T04:58:23Z |
 
 ## Entries
 
@@ -326,6 +326,7 @@ content-divergent entries.
 | etc/evidence/m0-t281-s3-dem-provider-source-matrix-001.md | indexed supporting material | 6d963692b5cb83d685d940e9e63254814dd93d2f458fcffbbbe475e2c1033e42 |
 | etc/evidence/m0-t281-s4-complete-original-dem-package-build-001.md | indexed supporting material | dd5742e12f05d29c385b91402485925e23be52e3586cf1fa872d8dd4a2c88ca7 |
 | etc/evidence/m0-t281-s5-host-control-disposition-001.md | indexed supporting material | b345d12b4bfe808e72db97ae0d318c31a61430ec5547ed14f07f8ff354f6d548 |
+| etc/evidence/m0-t282-s10-command-register-and-lease-binding-001.md | indexed supporting material | 3021cb185da7ae6952019f25d9a82544418d5205f159b6f329ea0e9ca0fb3e00 |
 | etc/evidence/m0-t282-s1-command-source-surface-001.md | indexed supporting material | 8da78111a6e91cbdf18b3020f1b2a67f8369e1ae6d8c3409e28cae4a7566aa2c |
 | etc/evidence/m0-t282-s2-command-declaration-carriers-001.md | indexed supporting material | d8eb5b4a03f6ceddf60e0865bfc2cb5f07838eef4fe17162835c7ab6ffb8a6f8 |
 | etc/evidence/m0-t282-s3-command-console-declaration-carrier-001.md | indexed supporting material | e8c050f08f7402aeca99e2fcdfb44e8964d65424cf597dab2ffe262041ce2b43 |
@@ -841,6 +842,7 @@ content-divergent entries.
 | etc/operations/m0-t281-s4-dem-package-member-ledger.tsv | indexed supporting material | 1f9770a7f447ce7533205c956de29fca67de5624e34129f0b89dfcf4edf63230 |
 | etc/operations/m0-t281-s5-host-control-disposition-ledger.tsv | indexed supporting material | 4ee0ee91befcacc0843d4cdeeb06ce4d924b9b763fddcc5db50f3411fa916086 |
 | etc/operations/m0-t281-s5-original-host-control-package-disposition-plan-001.md | indexed supporting material | 6cf8f0ff0c7ce67b96a81057c7867f4815dbddae22883cb36d1b4ea84bec799b |
+| etc/operations/m0-t282-s10-command-register-and-lease-binding-plan-001.md | indexed supporting material | 357f8cb2e06a914055882fb4e8b2c0b46ccdd57e537b81729b8d5791049a0fb9 |
 | etc/operations/m0-t282-s1-command-service-disposition-ledger.tsv | indexed supporting material | bf60b651a515f5777dbed4aa655fa1b9c0c42bf29f312d05bdd2ebef9d7e0d40 |
 | etc/operations/m0-t282-s1-command-source-disposition-ledger.tsv | indexed supporting material | ca41e554a4c1028416fd4b17c44eff98789afc122a41434dda0c207cd73b99ce |
 | etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md | indexed supporting material | 7f68749b6e2337457390f159034cb98c95de94d3ef49c756806308fc3e0e6770 |
@@ -2711,7 +2713,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 2f212a783387aa04f042019ce31c7b989c03b9ac6df2e4f9efb301dd7fe8fef1 |
+| STATUS.md | principal control document | ead913e5658146836322373a8d92a1a1ace9dbd66f16720cc84a551e2c839348 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |
