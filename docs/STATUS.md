@@ -29,7 +29,7 @@ and interface audit before any `54:xx` route is enabled.
 | Original Owner Request | “我都叫你按顺序执行了” and “请参照治理规范和实施规范执行任务”. |
 | Similar-Issue Sweep | Process/re-entry/standard streams, environment/configuration, PIF, command source, console/key layout, BOP dispatch, Redirector/broker, WOW/VDD and all historical machine-facing calls. |
 
-The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md), [S4 complete original COMMAND static package](etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md), and [S5 VDM command-acquisition source audit](etc/operations/m0-t282-s5-vdm-command-acquisition-source-audit-plan-001.md).
+The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md), [S4 complete original COMMAND static package](etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md), [S5 VDM command-acquisition source audit](etc/operations/m0-t282-s5-vdm-command-acquisition-source-audit-plan-001.md), and [S6 local VDM command transport](etc/operations/m0-t282-s6-local-vdm-command-transport-plan-001.md).
 
 **T282 S1 P1:** both static-only architecture probes reached the same original
 `vdmapi.h` declaration boundary. The verified 11-unit/17-service ledgers and
@@ -74,6 +74,18 @@ CSR first-VDM and WOW/broker branches remain explicit later owners.
 **T282 S5 closure:** no callable behavior is enabled. The next implementation
 may recover only the one-session copied request/response binding while
 preserving original size, retry and failure semantics. See the [S5 evidence](etc/evidence/m0-t282-s5-vdm-command-acquisition-audit-001.md).
+
+**T282 S6 P1:** the one-session source-shaped `GetNextVDMCommand` transport
+now carries only a copied app record through a bound session dispatch and
+retains bounded copies, required-size failures, environment-only response,
+re-entry operations and the terminal no-command outcome. The focused formal
+x86/x64 Ninja fixtures pass with no BOP route, Bochs input or historical CSR
+composition.
+
+**T282 S6 closure:** the local DOS request/response branch is closed as an
+adapter-backed original contract. First-VDM, BaseSrv/CSR wait/broker, PIF and
+WOW branches remain explicit non-routes, not fallback behavior. See the
+[S6 evidence](etc/evidence/m0-t282-s6-local-vdm-command-transport-001.md).
 
 ### Closed packet reference — M0 T281 S5 — original host-control package disposition
 

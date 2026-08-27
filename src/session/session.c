@@ -112,6 +112,9 @@ int session_set_control_dispatch(session *instance,
 {
     if (!session_valid(instance) || instance->state == SESSION_STATE_COMPLETED ||
         instance->state == SESSION_STATE_CANCELLED) return 0;
+    if (dispatch != NULL && instance->control_dispatch != NULL &&
+        (instance->control_dispatch != dispatch ||
+         instance->control_context != context)) return 0;
     instance->control_dispatch = dispatch;
     instance->control_context = context;
     return 1;
