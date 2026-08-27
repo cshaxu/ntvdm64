@@ -35,3 +35,23 @@ void BX_CPU_C::apply_real_mode_entry(Bit16u cs, Bit32u eip)
   RIP=eip;
   invalidate_prefetch_q();
 }
+
+int BX_CPU_C::overlay_commit_real_mode_transition(
+  const bx_cpu_overlay_real_mode_transition *state)
+{
+  Bit32u changed;
+
+  if (state == 0 || !real_mode() || v8086_mode()) return 0;
+
+  /* Real-mode selector loads cannot fault.  Validate every admissible input
+   * before the first architectural update, then apply the copied frame as a
+   * single mechanical transition. */
+  changed = read_eflags() ^ state->eflags;
+  load_seg_reg(&sregs[BX_SEG_REG_SS], state->ss);
+  load_seg_reg(&sregs[BX_SEG_REG_CS], state->cs);
+  ESP = (ESP & 0xffff0000u) | state->sp;
+  if (changed != 0) writeEFlags(state->eflags, changed);
+  RIP = state->ip;
+  invalidate_prefetch_q();
+  return 1;
+}

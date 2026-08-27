@@ -69,6 +69,11 @@ declarations or minimal call sites.
   allows a private overlay to prevalidate and apply a same-privilege segment
   transition. No MVDM, BOP or service identity enters the mirror. Files:
   `cpu/cpu.h`, `../bochs-core-overlay/cpu/protected_transition.cc`.
+- `BX-DPMI-MECH-002` — a selector-blind copied real-mode frame declaration
+  allows the private overlay to atomically apply validated CS/SS/SP/IP/FLAGS
+  after a returned CPU loop. It has no interrupt, DPMI, BOP or guest-memory
+  meaning. Files: `cpu/cpu.h`,
+  `../bochs-core-overlay/cpu/realmode_profile.cc`.
 
 ## M0 T286 final minimization measure
 

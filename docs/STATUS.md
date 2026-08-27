@@ -68,6 +68,13 @@ remain compiled but selector-disabled; the source dependency map prohibits
 inventing host pointers, a host LDT or a second executor. See the [P4
 dependency audit](etc/evidence/m0-t289-s5-p4-stack-frame-dependency-audit-001.md).
 
+**T289 S5 P5:** `adapter-bochs` now provides the selector-blind copied
+real-mode CS/SS/SP/IP/FLAGS transition identified by P4. Formal x86/x64
+fixtures prove valid, stale and rejected-change outcomes. Original DPMI
+stack/interrupt bodies remain selector-disabled because their bounded
+guest-stack/IVT copies and descriptor projection are separate requirements;
+see the [P5 evidence](etc/evidence/m0-t289-s5-p5-realmode-frame-foundation-001.md).
+
 **T289 S3 closure:** `adapter-bochs` now exposes a selector-blind copied
 protected-frame, copied active-segment inspection and checked protected-span
 contract.  A frame commit is comparison-guarded, only changes GPR/EIP/native

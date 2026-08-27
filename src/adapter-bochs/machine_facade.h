@@ -38,6 +38,8 @@ int machine_facade_execute_protected_range(uint32_t kind,
 #define MACHINE_FACADE_PROTECTED_FRAME_VERSION 1u
 #define MACHINE_FACADE_PROTECTED_SEGMENT_VERSION 1u
 #define MACHINE_FACADE_PROTECTED_EFLAGS_WRITE_MASK 0x003f7fd5u
+#define MACHINE_FACADE_REAL_MODE_FRAME_VERSION 1u
+#define MACHINE_FACADE_REAL_MODE_EFLAGS_WRITE_MASK 0x003f7fd5u
 
 enum machine_facade_execution_mode {
     MACHINE_FACADE_EXECUTION_MODE_REAL = 1u,
@@ -53,6 +55,14 @@ enum machine_facade_protected_frame_status {
     MACHINE_FACADE_PROTECTED_FRAME_REJECTED_CHANGE
 };
 
+enum machine_facade_real_mode_frame_status {
+    MACHINE_FACADE_REAL_MODE_FRAME_OK = 0,
+    MACHINE_FACADE_REAL_MODE_FRAME_REJECTED_INPUT,
+    MACHINE_FACADE_REAL_MODE_FRAME_REJECTED_MODE,
+    MACHINE_FACADE_REAL_MODE_FRAME_REJECTED_STALE,
+    MACHINE_FACADE_REAL_MODE_FRAME_REJECTED_CHANGE
+};
+
 /* The order of general registers is explicit instead of relying on Bochs'
  * private register-index order.  A caller may only submit a candidate based
  * on a freshly copied frame while adapter-bochs owns a returned CPU loop; it
@@ -66,6 +76,21 @@ struct machine_facade_protected_frame {
     uint32_t eip, eflags;
     uint16_t cs, ds, es, ss, fs, gs;
     uint32_t reserved0;
+};
+
+/* A copied, selector-blind real-mode architectural frame.  This is a CPU
+ * mechanical record: it carries no interrupt vector, guest pointer, service,
+ * or host-provider meaning. */
+struct machine_facade_real_mode_frame {
+    uint32_t abi_version;
+    uint32_t struct_bytes;
+    uint32_t execution_mode;
+    uint32_t cr0;
+    uint32_t eflags;
+    uint16_t cs;
+    uint16_t ss;
+    uint16_t sp;
+    uint16_t ip;
 };
 
 /* A copied active segment descriptor.  It is inspection-only in S3: LDT/IDT
@@ -97,6 +122,15 @@ int machine_facade_commit_protected_frame(
 int machine_facade_commit_same_cpl_protected_frame(
     const struct machine_facade_protected_frame *expected,
     const struct machine_facade_protected_frame *candidate);
+void machine_facade_real_mode_frame_clear(
+    struct machine_facade_real_mode_frame *frame);
+int machine_facade_real_mode_frame_valid(
+    const struct machine_facade_real_mode_frame *frame);
+int machine_facade_copy_real_mode_frame(
+    struct machine_facade_real_mode_frame *frame);
+int machine_facade_commit_real_mode_frame(
+    const struct machine_facade_real_mode_frame *expected,
+    const struct machine_facade_real_mode_frame *candidate);
 int machine_facade_copy_protected_segment(uint32_t slot,
     struct machine_facade_protected_segment *segment);
 int machine_facade_protected_span_transfer(uint32_t kind,

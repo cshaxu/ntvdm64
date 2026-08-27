@@ -40,6 +40,15 @@ struct bx_cpu_overlay_protected_transition {
   Bit16u cs, ds, es, ss, fs, gs;
 };
 
+/* DIVERGENCE(BX-DPMI-MECH-002): selector-blind copied real-mode CPU-state
+ * carrier.  It is deliberately limited to the architectural fields that a
+ * real-mode stack/interrupt return may alter; its validation and private
+ * implementation remain in bochs-core-overlay. */
+struct bx_cpu_overlay_real_mode_transition {
+  Bit16u cs, ss, sp, ip;
+  Bit32u eflags;
+};
+
 #include <setjmp.h>
 
 // <TAG-DEFINES-DECODE-START>
@@ -932,6 +941,8 @@ public: // for now...
   void overlay_unbind_opaque_callback(void);
   int overlay_commit_same_cpl_protected_transition(
     const bx_cpu_overlay_protected_transition *state);
+  int overlay_commit_real_mode_transition(
+    const bx_cpu_overlay_real_mode_transition *state);
 
   unsigned bx_cpuid;
 #if BX_CPU_LEVEL >= 4

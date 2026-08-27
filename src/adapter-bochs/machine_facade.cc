@@ -220,6 +220,78 @@ extern "C" int machine_facade_commit_same_cpl_protected_frame(
     MACHINE_FACADE_PROTECTED_FRAME_REJECTED_CHANGE;
 }
 
+extern "C" void machine_facade_real_mode_frame_clear(
+  struct machine_facade_real_mode_frame *frame)
+{
+  if (frame == 0) return;
+  memset(frame, 0, sizeof(*frame));
+  frame->abi_version = MACHINE_FACADE_REAL_MODE_FRAME_VERSION;
+  frame->struct_bytes = sizeof(*frame);
+}
+
+extern "C" int machine_facade_real_mode_frame_valid(
+  const struct machine_facade_real_mode_frame *frame)
+{
+  return frame != 0 &&
+    frame->abi_version == MACHINE_FACADE_REAL_MODE_FRAME_VERSION &&
+    frame->struct_bytes == sizeof(*frame) &&
+    frame->execution_mode == MACHINE_FACADE_EXECUTION_MODE_REAL &&
+    (frame->cr0 & 1u) == 0u;
+}
+
+static void machine_facade_copy_real_mode_frame_current(
+  struct machine_facade_real_mode_frame *frame)
+{
+  machine_facade_real_mode_frame_clear(frame);
+  frame->execution_mode = MACHINE_FACADE_EXECUTION_MODE_REAL;
+  frame->cr0 = bx_cpu.read_CR0();
+  frame->eflags = bx_cpu.read_eflags();
+  frame->cs = bx_cpu.sregs[BX_SEG_REG_CS].selector.value;
+  frame->ss = bx_cpu.sregs[BX_SEG_REG_SS].selector.value;
+  frame->sp = bx_cpu.get_reg16(BX_16BIT_REG_SP);
+  frame->ip = (uint16_t)bx_cpu.get_eip();
+}
+
+extern "C" int machine_facade_copy_real_mode_frame(
+  struct machine_facade_real_mode_frame *frame)
+{
+  if (machine_facade_machine == 0 || frame == 0 || !bx_cpu.real_mode() ||
+      bx_cpu.v8086_mode()) return MACHINE_FACADE_REAL_MODE_FRAME_REJECTED_MODE;
+  machine_facade_copy_real_mode_frame_current(frame);
+  return MACHINE_FACADE_REAL_MODE_FRAME_OK;
+}
+
+extern "C" int machine_facade_commit_real_mode_frame(
+  const struct machine_facade_real_mode_frame *expected,
+  const struct machine_facade_real_mode_frame *candidate)
+{
+  struct machine_facade_real_mode_frame current;
+  bx_cpu_overlay_real_mode_transition state;
+
+  if (!machine_facade_cpu_paused ||
+      !machine_facade_real_mode_frame_valid(expected) ||
+      !machine_facade_real_mode_frame_valid(candidate))
+    return MACHINE_FACADE_REAL_MODE_FRAME_REJECTED_INPUT;
+  if (machine_facade_copy_real_mode_frame(&current) !=
+      MACHINE_FACADE_REAL_MODE_FRAME_OK)
+    return MACHINE_FACADE_REAL_MODE_FRAME_REJECTED_MODE;
+  if (memcmp(&current, expected, sizeof(current)) != 0)
+    return MACHINE_FACADE_REAL_MODE_FRAME_REJECTED_STALE;
+  if (candidate->execution_mode != expected->execution_mode ||
+      candidate->cr0 != expected->cr0 ||
+      ((candidate->eflags ^ expected->eflags) &
+        ~MACHINE_FACADE_REAL_MODE_EFLAGS_WRITE_MASK) != 0u)
+    return MACHINE_FACADE_REAL_MODE_FRAME_REJECTED_CHANGE;
+  state.cs = candidate->cs;
+  state.ss = candidate->ss;
+  state.sp = candidate->sp;
+  state.ip = candidate->ip;
+  state.eflags = candidate->eflags;
+  return bx_cpu.overlay_commit_real_mode_transition(&state) ?
+    MACHINE_FACADE_REAL_MODE_FRAME_OK :
+    MACHINE_FACADE_REAL_MODE_FRAME_REJECTED_CHANGE;
+}
+
 extern "C" int machine_facade_copy_protected_segment(uint32_t slot,
   struct machine_facade_protected_segment *segment)
 {
