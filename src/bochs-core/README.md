@@ -44,7 +44,9 @@ declarations or minimal call sites.
 - `BX-BUILD-003` — root-relative include spelling is redirected to this
   mirror root only. Files: `bochs.h`, `gui/siminterface.h`.
 - `BX-MACH-023` — reset/exit is reduced from the full product shell to its
-  reset-window subset. File: `pc_system.cc`.
+  reset-window subset. The mirror crops the product bodies; the private
+  Bochs-method replacements live in `bochs-core-overlay/pc_system_lifecycle.cc`.
+  File: `pc_system.cc`.
 - `BX-CORE-DIV-001` and `BX-EXEC-016` — private profile/entry state supports
   minimal predicates and calls. Files: `cpu/access.cc`, `access32.cc`,
   `cpu.cc`, `cpu.h`, `ctrl_xfer16.cc`, `ctrl_xfer32.cc`, `exception.cc`,

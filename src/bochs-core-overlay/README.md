@@ -9,6 +9,7 @@ source may include or link to it directly.
 
 | ID | Original purpose | Divergence reason and implementation | Files |
 | --- | --- | --- | --- |
+| `BX-MACH-023` | Bochs `Reset` and `exit` normally orchestrate the full device and GUI product shell. | The adopted finite machine must retain only CPU reset/A20 and timer-baseline semantics; the private replacement method definitions require `bx_pc_system_c` and CPU globals and therefore cannot live in `adapter-bochs`. | `pc_system_lifecycle.cc`, `../bochs-core/pc_system.cc` |
 | `BX-MACH-024` | Bochs PIC teardown is normally owned by the complete product/device shell. | The finite empty-port-space unregister body is private here; `bochs-core/iodev/pic.cc` retains only the one-call member boundary. | `iodev/pic_lifecycle.cc`, `../bochs-core/iodev/pic.{cc,h}` |
 | `BX-MACH-027` | Bochs keyboard initialization assumes plugin, SIM, GUI, mouse and paste product facilities. | The non-product creation and teardown bodies live here; original `keyboard.cc` retains only same-shaped plugin entry delegations and is the sole overlay caller. | `iodev/keyboard_lifecycle.cc`, `../bochs-core/iodev/keyboard.{cc,h}` |
 | `BX-IO-025`, `BX-IO-029`, `BX-IO-030`, `BX-MACH-065`, `BX-MACH-082` | `devices.cc` normally composes a full Bochs device/product shell. | The original port lifetime/default-handler/dispatch bodies and new bounded no-device lifecycle are private here; `iodev` retains the smallest declared machine boundary. | `iodev/minimal_port_space.cc`, `../bochs-core/iodev/{devices.cc,iodev.h}` |
