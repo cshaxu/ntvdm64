@@ -31,6 +31,12 @@ enum machine_facade_protected_range_status {
 };
 int machine_facade_execute_protected_range(uint32_t kind,
     uint32_t segment, uint32_t offset, uint32_t byte_count, uint8_t *bytes);
+/* Resolve one currently-active protected segment span only after Bochs has
+ * applied its native access/limit checks. The result is a copied numeric
+ * linear address; it never exposes a Bochs object or a guest pointer. */
+int machine_facade_resolve_protected_range(uint32_t kind,
+    uint32_t segment, uint32_t offset, uint32_t byte_count,
+    uint32_t *linear_out);
 
 /* Selector-blind protected-machine records.  They intentionally carry only
  * copied architectural scalars.  They do not identify a DPMI service, an

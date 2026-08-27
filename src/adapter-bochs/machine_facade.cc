@@ -66,12 +66,12 @@ extern "C" int machine_facade_memory_write(uint64_t address,
     (Bit64u)byte_count, (uint8_t *)bytes) ? 1 : 0;
 }
 
-extern "C" int machine_facade_execute_protected_range(uint32_t kind,
-  uint32_t segment, uint32_t offset, uint32_t byte_count, uint8_t *bytes)
+extern "C" int machine_facade_resolve_protected_range(uint32_t kind,
+  uint32_t segment, uint32_t offset, uint32_t byte_count, uint32_t *linear_out)
 {
   bx_address linear;
   bx_bool access_ok;
-  if (bytes == 0 || segment >= 6u || byte_count == 0u ||
+  if (linear_out == 0 || segment >= 6u || byte_count == 0u ||
       (kind != 1u && kind != 2u) || !bx_cpu.protected_mode() ||
       (bx_cpu.read_CR0() & 0x80000000u) != 0u)
     return MACHINE_FACADE_PROTECTED_RANGE_REJECTED_MODE;
@@ -83,6 +83,18 @@ extern "C" int machine_facade_execute_protected_range(uint32_t kind,
   if (!bx_pc_system.get_enable_a20() &&
       ((((Bit64u)linear & 0x100000u) != 0u) ||
        (Bit64u)linear + byte_count > 0x100000u))
+    return MACHINE_FACADE_PROTECTED_RANGE_REJECTED_MEMORY;
+  if ((Bit64u)linear > UINT32_MAX) return MACHINE_FACADE_PROTECTED_RANGE_REJECTED_MEMORY;
+  *linear_out = (uint32_t)linear;
+  return MACHINE_FACADE_PROTECTED_RANGE_OK;
+}
+
+extern "C" int machine_facade_execute_protected_range(uint32_t kind,
+  uint32_t segment, uint32_t offset, uint32_t byte_count, uint8_t *bytes)
+{
+  uint32_t linear;
+  if (bytes == 0 || machine_facade_resolve_protected_range(kind, segment,
+      offset, byte_count, &linear) != MACHINE_FACADE_PROTECTED_RANGE_OK)
     return MACHINE_FACADE_PROTECTED_RANGE_REJECTED_MEMORY;
   if (!(kind == 1u ? machine_facade_memory_read(linear, byte_count, bytes) :
       machine_facade_memory_write(linear, byte_count, bytes)))

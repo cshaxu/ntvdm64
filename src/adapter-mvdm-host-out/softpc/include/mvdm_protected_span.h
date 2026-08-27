@@ -11,5 +11,9 @@
 
 int mvdm_protected_span_copy(uint32_t kind, uint16_t selector,
     uint32_t offset, uint32_t byte_count, uint8_t *bytes);
+/* Resolve a source selector/offset into one already-validated copied linear
+ * address. The caller still needs its own bounded session lease. */
+int mvdm_protected_span_resolve(uint32_t kind, uint16_t selector,
+    uint32_t offset, uint32_t byte_count, uint32_t *linear_out);
 
 #endif

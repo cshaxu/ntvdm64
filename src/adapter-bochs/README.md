@@ -26,6 +26,20 @@ only create, copied real-mode load, finite budget run, active query and
 destroy. A finite stop clears only the adapter-owned Bochs stop latch before
 the next run; it neither resets nor recreates CPU/RAM state.
 
+`machine_facade_resolve_protected_range` is a selector-blind mechanical
+preflight. It verifies one current active segment through Bochs' native
+access/limit checks and returns only the copied numeric linear address. It
+does not return a guest pointer, a Bochs object, a VDM selector meaning or a
+host service result; the caller remains responsible for the bounded
+session-owned lease.
+
+`machine_facade_resolve_protected_range` is a selector-blind mechanical
+preflight. It verifies one current active segment through Bochs' native
+access/limit checks and returns only the copied numeric linear address. It
+does not return a guest pointer, a Bochs object, a VDM selector meaning or a
+host service result; the caller remains responsible for the bounded
+session-owned lease.
+
 ## M0 T289 S3 protected-machine foundation
 
 `machine_facade` additionally owns a selector-blind protected-machine record:
