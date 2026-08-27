@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T290 S3 — Redirector lifecycle, COMMAND-consumer and synchronous named-pipe composition.**
+**Active: M0 T290 S4 — Redirector mailslot and asynchronous-completion composition.**
 
 M0 T289 is closed. Its final original-DPMI package boundary is in
 [the closure record](history/m0-t289-closure-20260827.md). T290 now admits
@@ -10,25 +10,25 @@ the next ordered Redirector and brokered COMMAND owner package.
 
 ## Active Packet
 
-### M0 T290 S3 — Redirector lifecycle, COMMAND-consumer and synchronous named-pipe composition
+### M0 T290 S4 — Redirector mailslot and asynchronous-completion composition
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T290 S3`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S2 is closed by a source-first external-interface ledger; its S3 selected group is now bounded for implementation. |
-| Objective | Compose original `VrInitialize`/`VrUninitialize`, `VrTerminateDosProcess`, synchronous named-pipe forms and original COMMAND consumer paths through the declared session, Win32 and SoftPC facades. |
-| Non-goals | No BOP ingress, async pipe, mailslot, NetAPI, NetBIOS, DLC, VDD hook success, physical IRQ delivery, provider rewrite, raw pointer, host-handle exposure, new mapping manager, machine semantic change or `src.old` input. |
+| Identifier Mode | `M0 T290 S4`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S3 is closed by formal source-body matrix evidence; the plan's next mailslot/async owner group is admitted for source and ABI audit. |
+| Objective | Compose original `vrmslot.c`, `VrReadWriteAsyncNmPipe`, cancellation and source completion-record lifecycle through the declared session, Win32 and SoftPC facades. |
+| Non-goals | No BOP ingress, NetAPI, NetBIOS, DLC, VDD hook success, physical IRQ delivery, provider rewrite, raw pointer, host-handle exposure, new mapping manager, machine semantic change or `src.old` input. |
 | Reference Baseline | [T290 plan](etc/operations/m0-t290-redirector-owner-package-recovery-plan-001.md), [S1 service ledger](etc/operations/m0-t290-s1-redirector-service-abi-ledger.tsv), [S2 interface ledger](etc/operations/m0-t290-s2-redirector-external-interface-recovery-ledger.tsv) and source policy. |
-| Files And ABI Surface | Original `mvdm-host/vdmredir/{vrinit,vrmisc,vrnmpipe,vrdisp}.c`, reached `dos/command/cmdredir.c`, `adapter-mvdm-host-out/{redir,win32,softpc}`, session, fixtures and formal Ninja inputs. |
+| Files And ABI Surface | Original `mvdm-host/vdmredir/{vrinit,vrmisc,vrmslot,vrnmpipe}.c`, declared `adapter-mvdm-host-out/{redir,win32,softpc}`, session, fixtures and formal Ninja inputs. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Original source bodies compile/execute in focused x86/x64 fixtures; handle/lease boundaries, original error ordering, COMMAND broker non-duplication and forbidden-dependency scans all pass. |
-| Expected Markers | Original lifecycle/named-pipe functions remain source bodies; every native handle is session-owned opaque identity; source-defined unavailable VDD/IRQ results are preserved. |
-| Asset Needs | Existing session mappings/lease API, outgoing adapter declarations, original vdmredir declarations and public Win32 named-pipe APIs. |
-| Reporting Requirements | State each original body compiled, each minimal binding/difference, x86/x64 proof and every deferred branch. |
-| Stop Conditions | A semantic rewrite, direct Bochs call, raw pointer path, second broker, additional mapping manager, selector ingress or async/NetAPI/DLC scope expansion is proposed. |
-| Exit Criteria | The selected original lifecycle/named-pipe/COMMAND group has x86/x64 local evidence, source-defined failure results for VDD/IRQ branches, and no duplicate COMMAND broker. |
+| Verification | First produce a complete source/ABI/cancellation/teardown map, then execute original bodies in focused x86/x64 fixtures with stale/cancel/disconnect negative proof. |
+| Expected Markers | Original mailslot/async functions remain source bodies; every native handle, callback and completion record remains session-owned opaque state; source-defined unavailable physical IRQ results are preserved. |
+| Asset Needs | Existing session mappings/lease API, outgoing adapter declarations, original vdmredir declarations and public Win32 mailslot/overlapped-I/O APIs. |
+| Reporting Requirements | State each original body compiled, each minimal binding/difference, x86/x64 proof, completion teardown and every deferred branch. |
+| Stop Conditions | A semantic rewrite, direct Bochs call, raw pointer path, raw guest callback, second broker, additional mapping manager, selector ingress or NetAPI/DLC scope expansion is proposed. |
+| Exit Criteria | The selected original mailslot/async group has x86/x64 local evidence, stale/cancel/disconnect proof, source-defined physical-IRQ unavailable results and no duplicate COMMAND broker. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | `00/01/02..08/0F/20/21`, `VrDispatch`, `cmdredir.c`, session child records, named-pipe token lifecycle, Win32 errors, lease teardown, VDD user hook and physical IRQ calls. |
+| Similar-Issue Sweep | `09..0E/23/24/26/2F/30`, `vrmslot.c`, `vrnmpipe.c` async queue/cancel paths, `vrinit.c` completion paths, session completion mappings, guest callback suppression, lease teardown and physical IRQ calls. |
 
 **T290 S1 closure:** [the source/ABI audit](etc/evidence/m0-t290-s1-redirector-source-abi-audit-001.md) proves all fifty original `57:00..31` dispatch entries and all twenty-five selected package paths.  The source mirror is exact in both canonical OpenNT editions; lifecycle/named-pipe, mailslot/async, and NetAPI/NetBIOS/DLC groups are the only admissible next owner groups.  No Redirector selector is enabled.
 
@@ -97,6 +97,11 @@ x86/x64 through session-owned AX:BX record and BX:CX handle identities, with
 the original cleanup point retiring the record. The full `cmdmisc`/`cmdexec`
 producer-consumer handoff remains assigned to S6; see the [P16
 evidence](etc/evidence/m0-t290-s3-p16-command-redirection-handle-identity-001.md).
+
+**T290 S3 closure:** the original lifecycle failure, all synchronous
+named-pipe forms and local COMMAND group passed the full formal x86/x64 matrix
+with explicit source transfers. S4 is now the sole active packet; see the
+[closure record](etc/evidence/m0-t290-s3-lifecycle-sync-pipe-command-closure-001.md).
 
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
