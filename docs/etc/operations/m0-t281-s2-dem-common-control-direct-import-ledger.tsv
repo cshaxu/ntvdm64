@@ -1,0 +1,8 @@
+unit	original_source	form	current_disposition	direct_declarations_or_dependencies	runtime_disposition
+dem.c	O:\repos.external\opennt\base\mvdm\dos\dem\dem.c	byte-exact	compile-and-archive	io.h; dem.h; DEM shared globals	no provider or selector enabled
+demdata.c	O:\repos.external\opennt\base\mvdm\dos\dem\demdata.c	MVDM-HOST-DIV-005/006/007 only	compile-and-archive	dem.h; numeric guest-location descriptors	no provider or selector enabled
+demmsg.c	O:\repos.external\opennt\base\mvdm\dos\dem\demmsg.c	byte-exact	compile-and-archive	stdio.h; demmsg.h; dem.h	no provider or selector enabled
+demdisp.c	O:\repos.external\opennt\base\mvdm\dos\dem\demdisp.c	byte-exact	compile-and-archive	dem.h; softpc.h; original apfnSVC declaration table	no provider bodies linked; DemDispatch is not invoked
+nt.h	adapter-win32/include/nt.h	same-shaped existing binding	forced declaration carrier	modern public SDK declarations; no original nt.h include	no behavior selected
+ntrtl.h/nturtl.h	adapter-win32/include/	same-shaped existing binding	include resolution	OpenNT RTL/URTL declaration surface	no behavior selected
+mvdm_guest_location.h	adapter-softpc/include/mvdm_guest_location.h	existing source-shaped boundary	include resolution	session guest-memory lease declarations	no lease acquired by this archive

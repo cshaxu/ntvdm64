@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T281 S1 — original BOP dispatch composition.** The owner has
+**Active: M0 T281 S2 — original DEM common-control composition.** The owner has
 directed execution in Queue order. The
 closed T277 package tracker, T278 physical re-root, T279 support-library
 closure, and T280 source-boundary recovery establish the inputs; they do not
@@ -11,27 +11,35 @@ package: original host control plane and DEM.
 
 ## Active Packet
 
-### M0 T281 S1 — original BOP dispatch composition
+### M0 T281 S2 — original DEM common-control composition
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T281 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | The owner instructed that Queue packages execute in order. Closed candidates T277, T278 and T279 have been removed from Queue; its first remaining candidate is admitted here as T281. |
-| Objective | Formally compose the original `softpc.new/host/src/nt_bop.c` dispatcher on x86 and x64 through pre-recorded same-shaped boundaries, preserving it byte-exact except for registered three-cast binding divergence `MVDM-HOST-DIV-008`, without enabling a BOP selector or provider. |
-| Non-goals | DEM behavior, selector/provider enablement, guest trace, Bochs changes, new adapter ABI, generic compatibility, VDD/debugger/monitor/Redirector/WOW recovery, or raw guest-pointer retention. |
-| Reference Baseline | T277 tracker ledgers; T278 re-root closure; T279 support closure; T280 S2 ingress/machine-facade ledger and T280 S20 descriptor/lease boundary closure; Wave 2 recovery plan. |
-| Files And ABI Surface | Original `src/opennt-mvdm-host/softpc.new/host/src/nt_bop.c`, direct original declaration carriers, existing adapter-bop/adapter-softpc/adapter-win32/session declarations, formal Ninja island, evidence and tracker rows. |
+| Identifier Mode | `M0 T281 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | The owner instructed that Queue packages execute in order. T281/S1 is complete as `558a9626`; this S continues the same admitted Wave 2 owner package through its lowest-dependency DEM common-control group. |
+| Objective | Formally compose original `dos/dem/dem.c`, `demdata.c`, `demmsg.c`, and `demdisp.c` on x86 and x64 through pre-recorded same-shaped boundaries, without enabling a DEM BOP selector or provider. |
+| Non-goals | DEM service behavior, selector/provider enablement, guest trace, Bochs changes, new adapter ABI, generic compatibility, VDD/debugger/monitor/Redirector/WOW recovery, raw guest-pointer retention, or provider-body linkage. |
+| Reference Baseline | T280 DEM include/build ledgers and persistent-location closure; T281/S1 formal original-dispatch island; T277 package tracker; Wave 2 recovery plan. `dem.c`, `demmsg.c`, and `demdisp.c` are byte-exact; `demdata.c` retains only existing registered MVDM-HOST-DIV-005/006/007 guest-descriptor divergences. |
+| Files And ABI Surface | Original `src/opennt-mvdm-host/dos/dem/{dem.c,demdata.c,demmsg.c,demdisp.c}`, existing original/shared declaration carriers, existing adapter-softpc/adapter-win32/session declarations, formal Ninja island, evidence and tracker rows. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
 | Verification | Import-to-owner source ledger; formal MSVC `/MT` Ninja object/static-library graphs on x64 and x86; selector-disabled proof; documentation governance and `git diff --check`. |
-| Expected Markers | Exact original source hash plus the registered `MVDM-HOST-DIV-008` three-cast diff; every direct import has one owner/disposition; no new selector handler, provider body, Bochs dependency, or guest route. |
+| Expected Markers | Exact source hashes or existing registered divergences; every direct import has one owner/disposition; no new selector handler, provider body, Bochs dependency, or guest route. |
 | Asset Needs | Pinned original mirror, T277/T280 ledgers, existing component headers, MSVC x64/x86 and Ninja. |
 | Reporting Requirements | Report per-import source form, owner/binding, architecture result, compile/link state, excluded branch and any boundary that requires a re-admission. |
-| Stop Conditions | A missing interface would require new semantics/ABI, an original source edit beyond an admitted binding diff, direct Bochs inclusion, a BOP/provider route, raw guest pointer retention, or scope expansion beyond `nt_bop.c` imports. |
-| Exit Criteria | Every direct import has a recorded source-shaped composition decision; the original dispatcher, modified only by registered `MVDM-HOST-DIV-008`, formally compiles on both architectures or the smallest blocked boundary is fully evidenced and causes a revised S before implementation; no route is enabled. |
+| Stop Conditions | A missing interface would require new semantics/ABI, an original source edit beyond existing registered divergences, direct Bochs inclusion, a BOP/provider route, raw guest pointer retention, or scope expansion beyond this four-file group. |
+| Exit Criteria | Every direct import has a recorded source-shaped composition decision; all four original control units formally compile on both architectures or the smallest blocked boundary is fully evidenced and causes a revised S before implementation; no route is enabled. |
 | Original Owner Request | “我都叫你按顺序执行了”。 |
-| Similar-Issue Sweep | All `nt_bop.c` selectors, direct imports, original table/global declarations, x86/x64 call forms, machine-facing calls, and successor branches. |
+| Similar-Issue Sweep | All four direct import surfaces, original DEM dispatcher table/global declarations, x86/x64 call forms, existing descriptor divergences, and provider/selector branches. |
 
-The detailed execution plan is [M0 T281 S1 original BOP dispatch composition](etc/operations/m0-t281-s1-original-bop-dispatch-composition-plan-001.md).
+**T281 S1 P1:** `558a9626` selected and imported exact OpenNT `vdm.h`, made the three historical function-pointer conversions explicit under `MVDM-HOST-DIV-008`, and proved a selector-disabled original `nt_bop.c` static-library island on x86 and x64. The dispatcher is not linked into a runtime image and no selector/provider was enabled.
+
+**T281 S2 P1:** the formal x86/x64 Ninja islands now compile and archive the
+four original DEM common-control units as `original-dem-common-control.lib`.
+The graph retains original `WIN_32`/`DEVL` declaration form, uses only existing
+same-shaped declaration carriers, and is verifier-proven to exclude provider,
+ingress, executable, and Bochs source inputs. No `50:xx` route is enabled.
+
+The detailed execution plans are [S1 original BOP dispatch composition](etc/operations/m0-t281-s1-original-bop-dispatch-composition-plan-001.md) and [S2 original DEM common-control composition](etc/operations/m0-t281-s2-original-dem-common-control-composition-plan-001.md).
 
 ### Closed packet reference — M0 T280 S20
 
