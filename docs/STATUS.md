@@ -2,16 +2,43 @@
 
 ## Current Work
 
-**No active M/T/S packet.**
+**Active: M0 T285 S2 — original host-control ingress binding.**
 
-M0 T284 is closed as `T284 historical-interface adapter convergence`; see the
-[closure record](history/m0-t284-closure-20260826.md). The next package
-requires explicit owner admission from [QUEUE.md](QUEUE.md); implementation
-must not continue until then.
+T285 S1 closed the canonical 81-row Wave 2 workset and rebuilt its two
+selector-disabled original static islands on x86/x64. S2 now maps the full
+original `nt_bop.c` control boundary before any BOP selector is enabled.
 
 ## Active Packet
 
-None. The next packet must be admitted here before implementation begins.
+### M0 T285 S2 — original host-control ingress binding
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T285 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T285 S1 closed its canonical source workset; the approved Wave 2 plan names `01-bop-ingress-control` as the first source-shaped group. |
+| Objective | Give every reached original `nt_bop.c` external function/data dependency one final same-shaped binding, direct declaration, explicit non-link/later-owner disposition, and prove its static source island remains architecture-correct. |
+| Non-goals | No selector/provider enablement, guest trace, OpenNT source-body semantic edit, Bochs change, CPU executor revival, generic adapter, or product runtime link. |
+| Reference Baseline | T285 S1 canonical workset/evidence; original `nt_bop.c`; current `adapter-mvdm-host-in`, named outgoing adapter families, session and host-package trackers. |
+| Files And ABI Surface | `mvdm-host/softpc.new/host/src/nt_bop.c`, its reached declarations, ingress adapter declarations, source-shaped platform declarations, S2 binding ledger/evidence and the original-BOP static Ninja graph. |
+| Applicable Rules | Execution historical-recovery gate, source policy, architecture, coding, document and build-hygiene rules. |
+| Verification | Complete symbol/call denominator; original declaration and caller checks; adapter direction scan; x86/x64 selector-disabled static rebuild; documentation governance and `git diff --check`. |
+| Expected Markers | No `nt_bop.c` dependency has an implicit project rehost or stale root; imported source has no Bochs type dependency; each unavailable branch retains a named owner/failure disposition. |
+| Asset Needs | Current workset, original source/declarations, existing adapter headers and MSVC/Ninja recipe. |
+| Reporting Requirements | Symbol/call denominator, source owner, exact declaration/calling form, selected binding/later owner, failure disposition, and architecture result. |
+| Stop Conditions | A source body needs behavior change, a dependency is not source-proven, a BOP family owner would be activated in isolation, an imported source needs direct Bochs access, or a new adapter family is implied. |
+| Exit Criteria | Every reached `nt_bop.c` dependency has one reviewed disposition and the direct static island passes on x86/x64; any newly admitted binding is declaration-only or has source-proven local behavior and no selector is enabled. |
+| Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
+| Similar-Issue Sweep | All `nt_bop.c` dynamic provider, monitor, VDD, debugger, WOW, Redirector, session, Win32 and SoftPC/CCPU dependencies; all ingress direction and selector-blindness surfaces. |
+
+**T285 S1 closure:** `New-T285S1Wave2CurrentWorkset.ps1` revalidated all 81
+selected current mirror paths (22 DEM + 59 host-control), recorded their
+SHA-256 identities and canonical adapter owners, and rejected stale root
+names. Its disposition counts are 49 adapter-backed, five binding-only, six
+overlay-required and 21 not-host-runtime. The complete original DEM static
+package and the original `nt_bop.c` static package rebuilt on both x86 and
+x64 after the formal Ninja recipes began loading the repository MSVC
+environment. Historical compiler warnings remain evidence, not runtime
+claims. See the [S1 evidence](etc/evidence/m0-t285-s1-wave2-current-workset-001.md).
 
 **T284 S1 closure:** the generated owner inventory records 33 final file/
 boundary dispositions (22 production inputs, seven root documents and four
