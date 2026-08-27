@@ -34,6 +34,11 @@ build/M0-T290/S3/vrnmpipe-name-<x86|x64>/bin/t290-s3-vrnmpipe-name-fixture.exe
 
 Both runs passed on 2026-08-27.
 
+The same fixture initializes the original cancellation critical section and
+calls `VrCancelPipeIo` for an empty request queue after the declined request.
+Both architectures prove that this source cancellation path leaves no pending
+request, guest write, callback or host handle behind.
+
 ## Boundary retained
 
 This is deliberately not a worker-success claim.  The source retains buffer,

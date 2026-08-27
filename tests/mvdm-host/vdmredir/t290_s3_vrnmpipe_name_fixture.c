@@ -30,6 +30,7 @@ VOID VrCallNamedPipe(VOID);
 VOID VrNetHandleGetInfo(VOID);
 VOID VrNetHandleSetInfo(VOID);
 VOID VrReadWriteAsyncNmPipe(VOID);
+VOID VrCancelPipeIo(DWORD thread);
 
 extern CRITICAL_SECTION VrNamedPipeCancelCritSec;
 
@@ -219,6 +220,7 @@ int main(void)
         CloseHandle(server);
         return 10;
     }
+    InitializeCriticalSection(&VrNamedPipeCancelCritSec);
     async_request = (DOS_ASYNC_NAMED_PIPE_STRUCT *)(memory.bytes + 0x1b00u);
     memset(async_request, 0, sizeof(*async_request));
     async_request->lpBytesRead = 0x1c00u;
@@ -241,6 +243,7 @@ int main(void)
     VrReadWriteAsyncNmPipe();
     if (!mvdm_redirector_pointer_scope_end(0) || fixture_carry == 0u ||
         fixture_ax != ERROR_NOT_ENOUGH_MEMORY) return 44;
+    VrCancelPipeIo((DWORD)(ULONG_PTR)GetCurrentThread());
     fixture_bp = (USHORT)(identity >> 16);
     fixture_bx = (USHORT)identity;
     fixture_ax = 0xffffu;
@@ -324,7 +327,6 @@ int main(void)
     if (!mvdm_redirector_pointer_scope_end(1) || fixture_carry != 0u)
         return 20;
 
-    InitializeCriticalSection(&VrNamedPipeCancelCritSec);
     if (!WriteFile(server, inbound, sizeof(inbound), &bytes, NULL) ||
         bytes != sizeof(inbound)) {
         DeleteCriticalSection(&VrNamedPipeCancelCritSec);
