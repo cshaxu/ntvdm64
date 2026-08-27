@@ -2,34 +2,34 @@
 
 ## Current Work
 
-**Active: M0 T282 S4 — complete original COMMAND static package.** T281 closed
+**Active: M0 T282 S5 — VDM command-acquisition source audit.** T281 closed
 in `5aa51088`; the owner has directed Queue-order execution. T282 begins the
 next candidate, original COMMAND local lifecycle, with a full package source
 and interface audit before any `54:xx` route is enabled.
 
 ## Active Packet
 
-### M0 T282 S4 — complete original COMMAND static package
+### M0 T282 S5 — VDM command-acquisition source audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T282 S4`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S3 closed in `a107b8c8`; the three exact declaration carriers now let every original COMMAND translation unit be assessed as one selector-disabled package. |
-| Objective | Compile and archive the complete original 11-unit COMMAND package on x86/x64 without enabling any service behavior. |
-| Non-goals | Enabling `CmdDispatch` or `54:xx`, implementing session/monitor/child/stream/PIF/keyboard behavior, linking an executable, changing an original mirror body, Bochs change, generic shim or trace. |
+| Identifier Mode | `M0 T282 S5`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S4 closed in `b4799c9a`; all original COMMAND bodies now compose statically and expose `GetNextVDMCommand` as the first shared callable host boundary. |
+| Objective | Audit the complete original client/server `GetNextVDMCommand` contract and give its session/monitor recovery one source-first disposition. |
+| Non-goals | Implementing a callable command broker, enabling COMMAND/BOP behavior, changing an original mirror body, creating a generic adapter, linking an executable, Bochs change or trace. |
 | Reference Baseline | Original `dos/command/sources`; T231 COMMAND ledger; T236 closures; T276/T277 owner and cycle ledgers; T281 closure and host-control disposition. |
-| Files And ABI Surface | The 11 original `dos/command` translation units and their `sources` list; existing exact declaration carriers; selector-disabled static archive/evidence only. |
+| Files And ABI Surface | Original `base/win32/client/vdm.c`, `base/win32/server/srvvdm.c`, their original declarations/messages, reached COMMAND callers and existing session/adapter-vdm-monitor boundaries. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
 | Verification | Exact source hashes, selector-disabled x86/x64 static probes, source identity review, documentation governance and `git diff --check`. |
-| Expected Markers | Exactly eleven original members archive under both MSVC architectures; no behavior route is enabled. |
+| Expected Markers | One complete client/server call-path and ABI ledger, with each private BaseSrv/CSR dependency classified and one named recovery owner. |
 | Asset Needs | Pinned original MVDM mirror, prior COMMAND ledgers, existing declaration carriers, MSVC x86/x64 and Ninja. |
 | Reporting Requirements | Original source/service, interface family, owner/binding, architecture result, selected recovery rung, unsupported branch and transfer owner. |
 | Stop Conditions | Any behavior body is selected, an imported carrier differs from its pinned source, an unnamed adapter is required, or a route is enabled. |
-| Exit Criteria | Both architecture archives contain exactly all eleven original units; a verifier excludes all provider, ingress, executable and Bochs inputs and records remaining callable boundaries without implementation. |
+| Exit Criteria | All reached client/server branches and records have source, ABI, failure and owner dispositions; the next implementation S, if any, has a bounded same-shaped seam or an explicit unavailable conclusion. |
 | Original Owner Request | “我都叫你按顺序执行了” and “请参照治理规范和实施规范执行任务”. |
 | Similar-Issue Sweep | Process/re-entry/standard streams, environment/configuration, PIF, command source, console/key layout, BOP dispatch, Redirector/broker, WOW/VDD and all historical machine-facing calls. |
 
-The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md), and [S4 complete original COMMAND static package](etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md).
+The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md), [S4 complete original COMMAND static package](etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md), and [S5 VDM command-acquisition source audit](etc/operations/m0-t282-s5-vdm-command-acquisition-source-audit-plan-001.md).
 
 **T282 S1 P1:** both static-only architecture probes reached the same original
 `vdmapi.h` declaration boundary. The verified 11-unit/17-service ledgers and
