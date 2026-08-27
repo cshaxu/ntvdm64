@@ -12,6 +12,14 @@
 - Preserve original names, parameters, calling convention, structures, control
   order and failure semantics. A modern API supplies a dependency; it does not
   authorize bypassing an available original algorithm.
+- Recover package edges before individual symbols. An external OpenNT package
+  is not imported merely because a header or unresolved symbol mentions it:
+  first audit its complete source/build boundary, select only its necessary
+  original file/interface slice, record all outbound interfaces, the
+  finite adapter/public-API closure, final file disposition, and any current
+  project-owned implementation that it would supersede. Do not recurse into
+  CSR/CSRSS, NTDLL CSR transport, kernel VDM, full BaseClient/Kernel32,
+  Win32k, or USER/GDI server merely to satisfy an import.
 - Every project-defined replacement interface records the unavailable
   dependency, rejected earlier rungs, smallest new ABI, failure contract,
   focused test and disposition.

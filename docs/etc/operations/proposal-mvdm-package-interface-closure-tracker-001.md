@@ -10,7 +10,13 @@ growth with an import-first, tracker-led recovery sequence.
 ## Scope
 
 The audit covers the 23 selected original MVDM package roots and every
-non-MVDM OpenNT host package admitted by a complete-package source audit.
+candidate non-MVDM OpenNT host package, whether accepted or rejected. A
+candidate is accepted only if a selected MVDM caller directly needs it, its
+original package is materially worth retaining, and its complete outward
+closure terminates in public modern APIs, existing bounded adapters or a
+specifically admitted finite adapter. CSR/CSRSS, NTDLL CSR transport, kernel
+VDM, full BaseClient/Kernel32, Win32k and USER/GDI server are explicit
+non-recursive stopping boundaries.
 During this audit the MVDM paths remain in the exact temporary
 `opennt-mvdm-host` source-union carrier established by T274; an external
 package receives its own original-mirror owner before any source/body move.
@@ -109,6 +115,19 @@ ledgers. A status in one ledger cannot be inferred from another.
    same-shaped binding change, Bochs-replacement exclusion and permanently
    unavailable NT4 product path. It records the original purpose, adapter or
    exception ID, reason, retained failure semantics and future disposition.
+6. **External package-boundary ledger** — one row per candidate OpenNT package
+   outside MVDM. It records the direct MVDM caller, retained source value,
+   complete outgoing package/interface closure, accept/reject decision,
+   selected mirror location, required adapter (if any), stopping boundary and
+   every current project implementation eligible for reversion to the original
+   package. A source directory alone is never a package conclusion.
+7. **MVDM host package-boundary ledger** — one row per selected MVDM host
+   package. It records selected path/source/header/build counts, retained
+   package boundary, direct internal/external edges, expected final
+   composition, product-profile exclusion, prerequisite packages and any
+   source-union/reversion decision. This provides the package-level index for
+   the file/interface rows; neither ledger may be treated as a substitute for
+   the other.
 
 The initial versions of these ledgers are generated from the canonical T274
 union and T275 debt records. The tracker task expands them; it never discards

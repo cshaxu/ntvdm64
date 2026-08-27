@@ -13,6 +13,40 @@ owner. Original mirrors preserve upstream package identity, adapters preserve
 historical interface shape while translating mechanics, and project components
 own composition, session lifetime and cross-process coordination.
 
+## Package-first recovery boundary
+
+`mvdm-host` is a complete canonical mirror of the selected non-guest MVDM
+host package union. Recovery proceeds first across **original package
+boundaries**, then through named interfaces between admitted packages; it does
+not grow from a trace hit or compiler error one symbol at a time.
+
+An original OpenNT package outside `base/mvdm` is eligible for `opennt-host`
+only when a complete-package audit proves all of the following. The audit may
+select only the required original slice; it never implies importing unrelated
+translation units from an otherwise accepted package:
+
+- a selected `mvdm-host` package directly reaches its original service;
+- its retained state machine, data layout, ordering, or failure semantics are
+  substantial enough that an autonomous replacement would lose source value;
+- its complete outgoing closure bottoms out in a public modern Win32 API, an
+  existing bounded adapter, or a small specifically-owned adapter whose own
+  contract is finite; and
+- it does not require importing an NT4 platform/product shell such as CSRSS,
+  the CSR transport, kernel VDM, Kernel32/BaseClient as a whole, Win32k, or
+  USER/GDI server internals.
+
+The stopping boundary is a package-interface boundary, not an arbitrary
+source-directory boundary. For example, the Base VDM service protocol
+(`VDMINFO`, command records, capacity/re-entry, wait/wake ordering) is an
+eligible OpenNT-host service slice; the NT4 CSR/CSRSS transport below it is
+not. A bounded `adapter-opennt-host` may preserve the reached CSR-facing call
+shape and observable result, but never grows into a CSRSS replacement.
+
+Before an adapter-owned implementation is extended, the package audit records
+whether an admitted original OpenNT package supersedes it. That record is the
+authority to migrate the implementation back to the original owner and
+prevents permanent parallel providers.
+
 ## Components
 
 ### Original mirrors
@@ -110,7 +144,7 @@ app -> adapter-mvdm-host-in -> mvdm-host
 app -> mvdm-guest/dos / mvdm-guest/win16         (data/load only)
 
 mvdm-host -> mvdm-platform-abi
-mvdm-host -> opennt-host                           (same-shaped original host service)
+mvdm-host -> opennt-host                           (only an admitted original host-service package)
 mvdm-host -> mvdm-support
 mvdm-host -> adapter-mvdm-host-out
 mvdm-host -> session                              (neutral contract only)
@@ -119,7 +153,7 @@ adapter-mvdm-host-in -> adapter-mvdm-host-out/softpc  (typed mechanics only)
 adapter-mvdm-host-out/win32 -> broker client      (only for brokered historical calls)
 opennt-host -> mvdm-platform-abi
 opennt-host -> adapter-opennt-host                 (only source-audited BaseSrv-specific bindings)
-opennt-host -> broker                              (only source-required fixed-width transport)
+opennt-host -> broker                              (only after package closure admits fixed-width transport)
 mvdm-tools -> mvdm-support / mvdm-platform-abi    (independent tool builds only)
 mvdm-softpc-firmware -> adapter-bochs             (manifest-selected machine input only)
 ```
@@ -222,6 +256,6 @@ such a per-file recovery.
 
 ## Non-goals
 
-The architecture does not claim NT4 kernel VDM, CSRSS/BaseSrv internals,
+The architecture does not claim NT4 kernel VDM or CSRSS/CSR internals,
 unbounded multi-session reentrancy, or automatic support for every dormant
 MVDM package. Unsupported historical operations remain explicit failures.

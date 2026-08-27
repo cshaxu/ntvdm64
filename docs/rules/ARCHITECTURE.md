@@ -5,10 +5,18 @@
    `mvdm-platform-abi`, `mvdm-guest/dos`, `mvdm-guest/win16`,
    `adapter-bochs`, `adapter-mvdm-host-in`, `adapter-mvdm-host-out`, `session`, `broker`,
    `adapter-opennt-host`, and `app`.
-2. `mvdm-host` is the sole MVDM host-runtime mirror. `opennt-host` is the sole
-   original non-MVDM OpenNT host-service mirror and accepts a package only
-   after it has a complete source/ABI/final-disposition audit in the shared
-   host tracker. Shared original MVDM
+2. `mvdm-host` is the sole complete selected MVDM host-runtime mirror.
+   `opennt-host` is the sole original non-MVDM OpenNT host-service mirror and
+   accepts only a required original slice after a complete package-boundary
+   audit proves: a
+   direct selected-MVDM caller; a retained original algorithm/state-machine
+   benefit; a finite outgoing closure through public modern APIs, existing
+   bounded adapters or a specifically admitted small adapter; and no need to
+   import an NT4 system/product shell. CSR/CSRSS, NTDLL CSR transport, kernel
+   VDM, the full BaseClient/Kernel32 product, Win32k and USER/GDI server are
+   stopping boundaries, not recursive import candidates. Every accepted and
+   rejected candidate has a complete source/ABI/final-disposition record in
+   the shared host tracker. Shared original MVDM
    support carriers/libraries belong to `mvdm-support`; independent historical
    tools belong to `mvdm-tools`. A tool is never a host
    runtime dependency merely because it is independently buildable.
@@ -29,9 +37,9 @@
    the reached original name, parameters, calling convention, layout, ordering
    and failure contract wherever the platform permits. No family becomes an
    alternate OpenNT provider or absorbs another family's semantics.
-   `adapter-opennt-host` is the distinct, package-private family for the reached
-   `opennt-host` CSR/private-host interface; it cannot absorb MVDM caller
-   semantics or become a generic adapter.
+   `adapter-opennt-host` is the distinct, package-private family for the
+   reached `opennt-host` private-host interface; it cannot absorb MVDM caller
+   semantics, reconstruct CSR/CSRSS, or become a generic adapter.
 6. The `monitor` family owns the complete same-shaped user-mode
    `NtVdmControl`, `VDM_TIB`, V86-event and interrupt/fault-handler interface
    family. It binds bounded per-session/per-thread state and an app-installed

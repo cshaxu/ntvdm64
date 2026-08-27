@@ -37,7 +37,10 @@ material and never a source, build, link or runtime input.
 - `opennt-host` contains only a complete selected original OpenNT host-service
   package outside MVDM, retaining its upstream-relative paths and filenames.
   It is admitted only with rows in the shared file/interface/dependency/build
-  trackers; a standalone convenience helper never qualifies.
+  trackers and the external package-boundary ledger. The audit must show a
+  direct `mvdm-host` caller, retained original service value and a finite
+  outward modern-binding closure; a standalone convenience helper, a symbol
+  hit or a recursively required NT4 product-shell package never qualifies.
 - `mvdm-support` contains selected shared MVDM build/header carriers
   and original support libraries (`inc`, `dirs`, `makefil0`, `oemuni`, and
   `suballoc`). It has no implied default host link edge.

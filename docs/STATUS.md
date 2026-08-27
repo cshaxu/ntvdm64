@@ -16,17 +16,17 @@ its whole-package source/ABI audit and now admits its first dependency group.
 | --- | --- |
 | Identifier Mode | `M0 T291 S5`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Owner requested a unified repair of the partially correct command/control/re-entry boundary. S4 has now closed the prerequisite separation rather than leaving a generic dispatcher in place. |
-| Objective | Recover the applicable source-shaped `GetNextVDMCommand` producer/consumer, wait/wake and monitor re-entry contracts by first reusing the original OpenNT BaseSrv/client package, without conflating WOW callbacks with command acquisition. |
-| Non-goals | No new BaseSrv/CSRSS clone, fast WOW assembler, `CurrentMonitorTeb`, global current task/session, second CPU executor, raw pointer/HANDLE ABI, selector enablement, Bochs change or `src.old` input. |
-| Reference Baseline | [S4 closure](etc/evidence/m0-t291-s4-control-plane-separation-closure-001.md), [S5 plan](etc/operations/m0-t291-s5-source-shaped-command-broker-and-monitor-reentry-plan-001.md), [P2 source-package audit](etc/evidence/m0-t291-s5-p2-basesrv-source-package-audit-001.md), original `vdmapi.h`, BaseSrv, COMMAND/WOW/monitor call sites and source policy. |
-| Files And ABI Surface | Selected `mvdm-host` COMMAND/WOW/monitor source, imported original OpenNT BaseSrv/client package in `opennt-host`, `mvdm-platform-abi`, `adapter-mvdm-host-out/{monitor,softpc,wow,win32}`, BaseSrv-specific `adapter-opennt-host`, `broker`, `session`, `app`, focused fixtures and source/ABI ledgers. |
+| Objective | Complete the package-first audit of the selected `mvdm-host` union and directly reached non-MVDM OpenNT candidates before any source-shaped command broker or monitor re-entry implementation resumes. Establish one finite external boundary and final disposition for every package, file and reached interface. |
+| Non-goals | No new BaseSrv/CSRSS clone, no BaseSrv/client binding body, fast WOW assembler, `CurrentMonitorTeb`, global current task/session, second CPU executor, raw pointer/HANDLE ABI, selector enablement, Bochs change or `src.old` input. |
+| Reference Baseline | [S4 closure](etc/evidence/m0-t291-s4-control-plane-separation-closure-001.md), [S5 plan](etc/operations/m0-t291-s5-source-shaped-command-broker-and-monitor-reentry-plan-001.md), [P5 package-boundary plan](etc/operations/m0-t291-s5-mvdm-opennt-package-boundary-audit-plan-001.md), original MVDM/BaseSrv/client source and source policy. |
+| Files And ABI Surface | All selected `mvdm-host` package paths, every directly reached external OpenNT package candidate, the shared file/interface/package/build/divergence ledgers, the external package-boundary ledger, existing `app`, `session`, `broker` and adapter code considered only as possible reversion targets. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Source call-order/failure ledger; x86/x64 producer/consumer, unavailable and lifecycle tests; negative scan proving no generic route or cross-plane fallback. |
-| Expected Markers | Original `VDMINFO` ownership/order retained, typed command and monitor owners remain distinct, copied event/queue records only where source requires them, and each re-entry group has an owner-specific outcome. |
-| Asset Needs | Original `vdmapi.h`, `cmdexec.c`, `cmdmisc.c`, `config.c`, `wkman.c`, monitor source, existing S4 ledgers and current fixtures. |
-| Reporting Requirements | State original caller/callee shape, notification/wait order, host-thread/session lifetime, stop result, source failure semantics, x86/x64 evidence and deferred owner. |
-| Stop Conditions | Any need to author a replacement before the original BaseSrv/client package is audited, add a generic dispatcher, expose raw identity, create a second executor, enable a selector without its owner package, touch Bochs or import `src.old`. |
-| Exit Criteria | Each admitted command/monitor consumer has source-backed queue/wake or explicit unavailable behavior, typed ownership, x86/x64 proof and no command/control/callback cross-routing. |
+| Verification | Source/build dependency traversal, dual-edition identity selection, package-level outgoing-edge review, current-code reversion scan, ledger schema checks and documentation governance validation. No executable feature proof is claimed by this audit. |
+| Expected Markers | Every direct external edge has one package owner or stopping-boundary result; accepted package closures are finite; no present autonomous implementation remains unclassified; and BaseSrv is no longer mistaken for an independently composable CSRSS substitute. |
+| Asset Needs | Complete selected MVDM union, complete OpenNT/OpenNT-4.5 source trees, current package/interface ledgers, current production code and package build manifests. |
+| Reporting Requirements | State selected source/package roots, direct MVDM caller, retained source value, outgoing interface closure, stopping boundary, final file/interface disposition, adapter owner and reversion candidate. |
+| Stop Conditions | Any attempt to implement a provider, import a package after only a symbol search, recurse into CSR/CSRSS/NTDLL CSR/kernel VDM/BaseClient/Win32k/USER-GDI server, expose raw identity, touch Bochs or import `src.old`. |
+| Exit Criteria | The complete selected MVDM host union and every discovered external candidate have audited package/file/interface/build dispositions, finite accepted closures or explicit stopping boundaries, and a reversion ledger. Stop for owner review before implementation. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
 | Similar-Issue Sweep | All COMMAND/WOW command consumers, `NtVdmControl` service classes, `host_simulate` groups, TD/TEB projection fields, broker records and session teardown paths. |
 
@@ -49,12 +49,11 @@ the shared MVDM/OpenNT host tracker. It remains unlinked pending the named
 CSR/private-host binding audit; see the
 [P3 import evidence](etc/evidence/m0-t291-s5-p3-basesrv-source-import-001.md).
 
-**T291 S5 P4 admission:** the imported source proves that a distinct,
-package-private `adapter-opennt-host` is required for NT4 CSR capture/dispatch,
-server process context and event-pair mechanics. Its six-group source ledger
-separates those boundaries from existing RTL, WOW/PIF and full Base-server
-concerns before any binding body is written; see the
-[P4 ledger](etc/operations/m0-t291-s5-p4-basesrv-interface-composition-ledger-001.md).
+**T291 S5 P4 pause:** the BaseSrv interface ledger is retained as source
+evidence, but no binding is admitted from it. P5 now expands the review from
+one discovered BaseSrv slice to the complete `mvdm-host`/external-OpenNT
+package boundary; see the
+[P5 package-boundary plan](etc/operations/m0-t291-s5-mvdm-opennt-package-boundary-audit-plan-001.md).
 
 **T291 S3 closure:** the bounded pointer scope, numeric task projection and
 source-shaped non-fast callback mechanics passed their complete formal x86/x64

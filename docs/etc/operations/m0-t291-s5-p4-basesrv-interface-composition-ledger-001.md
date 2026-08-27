@@ -1,5 +1,11 @@
 # M0 T291 S5 P4 — BaseSrv interface-composition ledger
 
+> **Paused by P5 package-boundary audit.** This remains evidence for the
+> Base VDM vertical slice; it is not an admission to implement an adapter or
+> compose a runtime route. P5 must first prove the complete selected
+> `mvdm-host` and non-MVDM OpenNT package boundary in
+> [the package-boundary plan](m0-t291-s5-mvdm-opennt-package-boundary-audit-plan-001.md).
+
 ## Scope
 
 This ledger covers the selected `opennt-host/base/win32` VDM package imported
