@@ -4,12 +4,19 @@
 
 **No active M/T/S packet.**
 
-M0 T298 is closed. Its canonical zero-degree projection preserves every T295
-raw identity, source-proves macro-generated function names and resolves every
-raw first-degree call either to a normalized zero-degree target or to a
-remaining external interface.
+M0 T299 is closed. Its original-only first-degree audit resolves every T298
+external interface and freezes the 481-row second-degree initial frontier.
 
 ## Active Packet
+
+### M0 T299 closure — canonical first-degree original-source audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T299 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Result | All 801 canonical external interfaces have an original-source resolution; 63 definition identities and 481 initial second-degree candidates are frozen. |
+| Evidence | [T299 closure](etc/evidence/m0-t299-s1-canonical-first-degree-audit-closure-001.md) and [plan](etc/operations/m0-t299-s1-canonical-first-degree-audit-plan-001.md). |
+| Next Admission | A second-degree audit may consume only `mvdm-host-second-degree-initial-candidate-ledger.tsv`; it must not read those candidate bodies before admission. |
 
 ### M0 T298 closure — MVDM-host zero-degree canonicalization
 
