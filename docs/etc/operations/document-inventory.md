@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2817 |
+| Documentation records | 2818 |
 | --- | --- |
-| Generated UTC | 2026-08-27T14:19:01Z |
+| Generated UTC | 2026-08-27T14:23:31Z |
 
 ## Entries
 
@@ -401,6 +401,7 @@ content-divergent entries.
 | etc/evidence/m0-t290-s3-p7-command-redirection-consumer-001.md | indexed supporting material | 13cd3e400edf991092bc9df6e3c350c3979b04601d9ff1549a0250a3487f0477 |
 | etc/evidence/m0-t290-s3-p8-named-pipe-handle-state-001.md | indexed supporting material | f9a4efc0d489101912930c10ee074e19bf2af97ed097dcf143c6d45cbc309cb3 |
 | etc/evidence/m0-t290-s3-p9-named-pipe-info-guest-span-001.md | indexed supporting material | 1774d56ddbfb4492bcfbbb1f21ae35abacf8717aa62266e5449c72c9a7736457 |
+| etc/evidence/m0-t290-s4-async-mailslot-source-abi-audit-001.md | indexed supporting material | abc30927550b04b7d245f046b5357634bc35922a5d7655ff7ec77b29fab5666a |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
