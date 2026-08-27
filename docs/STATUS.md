@@ -86,6 +86,12 @@ through exact session leases for its source packed structure and every 16:16
 input/output span. The original body and source call/error order remain;
 see the [P14 evidence](etc/evidence/m0-t290-s3-p14-named-pipe-call-structured-guest-span-001.md).
 
+**T290 S3 P15:** original `VrNetHandleGetInfo`/`VrNetHandleSetInfo` and
+`vrputil.c` now execute on formal x86/x64 local-pipe paths. The former keeps
+its original mapped local collection failure; the latter's original
+pre-decrement no-op success is retained, not repaired; see the [P15
+evidence](etc/evidence/m0-t290-s3-p15-named-pipe-handle-info-local-disposition-001.md).
+
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
 bodies now compose on formal x86/x64 Ninja fixtures.  Session-owned numeric

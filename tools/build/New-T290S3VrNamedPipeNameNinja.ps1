@@ -41,6 +41,7 @@ rule link
   description = LINK `$out
 
 build obj/vrnmpipe.obj: cc `$root/src/mvdm-host/vdmredir/vrnmpipe.c
+build obj/vrputil.obj: cc `$root/src/mvdm-host/vdmredir/vrputil.c
 build obj/mvdm_redirector_thread.obj: cc `$root/src/adapter-mvdm-host-out/win32/source/mvdm_redirector_thread.c
 build obj/mvdm_redirector_pointer_scope.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_redirector_pointer_scope.c
 build obj/mapping_manager.obj: cc `$root/src/session/mapping_manager.c
@@ -49,7 +50,7 @@ build obj/session.obj: cc `$root/src/session/session.c
 build obj/mvdm_host_identity.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_host_identity.c
 build obj/mvdm_redirector_handle.obj: cc `$root/src/adapter-mvdm-host-out/redir/mvdm_redirector_handle.c
 build obj/fixture.obj: cc `$root/tests/mvdm-host/vdmredir/t290_s3_vrnmpipe_name_fixture.c
-build bin/t290-s3-vrnmpipe-name-fixture.exe: link obj/vrnmpipe.obj obj/mvdm_redirector_thread.obj obj/mvdm_redirector_pointer_scope.obj obj/mapping_manager.obj obj/guest_memory_lease.obj obj/session.obj obj/mvdm_host_identity.obj obj/mvdm_redirector_handle.obj obj/fixture.obj
+build bin/t290-s3-vrnmpipe-name-fixture.exe: link obj/vrnmpipe.obj obj/vrputil.obj obj/mvdm_redirector_thread.obj obj/mvdm_redirector_pointer_scope.obj obj/mapping_manager.obj obj/guest_memory_lease.obj obj/session.obj obj/mvdm_host_identity.obj obj/mvdm_redirector_handle.obj obj/fixture.obj
 default bin/t290-s3-vrnmpipe-name-fixture.exe
 "@
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))

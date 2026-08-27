@@ -27,6 +27,8 @@ VOID VrPeekNamedPipe(VOID);
 VOID VrTransactNamedPipe(VOID);
 VOID VrWaitNamedPipe(VOID);
 VOID VrCallNamedPipe(VOID);
+VOID VrNetHandleGetInfo(VOID);
+VOID VrNetHandleSetInfo(VOID);
 
 extern CRITICAL_SECTION VrNamedPipeCancelCritSec;
 
@@ -67,7 +69,6 @@ LPVOID _inlinePointerFromWords(WORD segment, WORD offset)
 }
 VOID VrRaiseInterrupt(VOID) {}
 VOID VrQueueCompletionHandler(VOID (*routine)(VOID)) { (void)routine; }
-WORD VrpMapLastError(VOID) { return ERROR_NOT_SUPPORTED; }
 
 typedef struct fixture_memory {
     uint8_t bytes[0x20000];
@@ -140,6 +141,10 @@ int main(void)
     HANDLE client;
     DWORD bytes;
     DWORD error;
+    DWORD collection_value;
+    DWORD collect_count;
+    DWORD collect_time;
+    WORD expected_error;
     BYTE inbound[] = { 0x51u, 0x52u, 0x53u };
     BYTE outbound[] = { 0x71u, 0x72u };
     BYTE received[sizeof(inbound)];
@@ -249,6 +254,51 @@ int main(void)
         memory.bytes[0x1006u] != (BYTE)(strlen(remote) + 1u) ||
         strcmp((char *)(memory.bytes + 0x1007u), remote) != 0)
         return 14;
+    collect_count = 0u;
+    collect_time = 0u;
+    if (GetNamedPipeHandleState(client, NULL, NULL, &collect_count,
+        &collect_time, NULL, 0u))
+        return 15;
+    expected_error = (WORD)GetLastError();
+    fixture_bp = (USHORT)(identity >> 16);
+    fixture_bx = (USHORT)identity;
+    fixture_cx = (USHORT)sizeof(VDM_HANDLE_INFO_1);
+    fixture_si = 1u;
+    fixture_dx = 0x1100u;
+    fixture_ds = 0u;
+    fixture_carry = 1u;
+    if (!mvdm_redirector_pointer_scope_begin())
+        return 16;
+    VrNetHandleGetInfo();
+    if (!mvdm_redirector_pointer_scope_end(1) || fixture_carry == 0u ||
+        fixture_ax != expected_error)
+        return 17;
+    memory.bytes[0x1120u] = 1u;
+    memory.bytes[0x1121u] = 0u;
+    memory.bytes[0x1122u] = 0u;
+    memory.bytes[0x1123u] = 0u;
+    collection_value = 1u;
+    if (SetNamedPipeHandleState(client, NULL, &collection_value, NULL))
+        return 18;
+    expected_error = (WORD)GetLastError();
+    fixture_bp = (USHORT)(identity >> 16);
+    fixture_bx = (USHORT)identity;
+    fixture_cx = (USHORT)sizeof(DWORD);
+    fixture_si = 1u;
+    fixture_di = 1u;
+    fixture_dx = 0x1120u;
+    fixture_ds = 0u;
+    fixture_carry = 1u;
+    if (!mvdm_redirector_pointer_scope_begin() ||
+        !mvdm_redirector_pointer_scope_prepare(0u, 0x1120u, sizeof(DWORD),
+            GUEST_MEMORY_ACCESS_READ))
+        return 19;
+    VrNetHandleSetInfo();
+    /* The unchanged source pre-decrements ParmNum, then tests the decremented
+     * value against 1/2.  Its public API call therefore receives NULL
+     * collection pointers and returns the original no-op success. */
+    if (!mvdm_redirector_pointer_scope_end(1) || fixture_carry != 0u)
+        return 20;
 
     InitializeCriticalSection(&VrNamedPipeCancelCritSec);
     if (!WriteFile(server, inbound, sizeof(inbound), &bytes, NULL) ||
@@ -256,7 +306,7 @@ int main(void)
         DeleteCriticalSection(&VrNamedPipeCancelCritSec);
         CloseHandle(client);
         CloseHandle(server);
-        return 15;
+        return 21;
     }
     fixture_bp = (USHORT)(identity >> 16);
     fixture_bx = (USHORT)identity;
@@ -266,13 +316,13 @@ int main(void)
     fixture_di = 0u;
     fixture_carry = 1u;
     if (!mvdm_redirector_pointer_scope_begin())
-        return 16;
+        return 22;
     VrPeekNamedPipe();
     if (!mvdm_redirector_pointer_scope_end(1) || fixture_carry != 0u ||
         fixture_bx != sizeof(inbound) || fixture_cx != sizeof(inbound) ||
         fixture_di != 3u ||
         memcmp(memory.bytes + 0x1200u, inbound, sizeof(inbound)) != 0)
-        return 17;
+        return 23;
     bytes = 0u;
     error = ERROR_GEN_FAILURE;
     if (!VrReadNamedPipe(client, received, sizeof(received), &bytes, &error) ||
@@ -281,7 +331,7 @@ int main(void)
         DeleteCriticalSection(&VrNamedPipeCancelCritSec);
         CloseHandle(client);
         CloseHandle(server);
-        return 18;
+        return 24;
     }
     bytes = 0u;
     if (!VrWriteNamedPipe(client, outbound, sizeof(outbound), &bytes) ||
@@ -291,28 +341,28 @@ int main(void)
         DeleteCriticalSection(&VrNamedPipeCancelCritSec);
         CloseHandle(client);
         CloseHandle(server);
-        return 19;
+        return 25;
     }
     if (sprintf_s(transact_pipe_name, sizeof(transact_pipe_name),
             "\\\\.\\pipe\\t290-s3-transact-%lu",
             (unsigned long)GetCurrentProcessId()) < 0)
-        return 20;
+        return 26;
     transact_server = CreateNamedPipeA(transact_pipe_name, PIPE_ACCESS_DUPLEX,
         PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE | PIPE_WAIT, 1u,
         256u, 256u, 0u, NULL);
     if (transact_server == INVALID_HANDLE_VALUE)
-        return 21;
+        return 27;
     transact_client = CreateFileA(transact_pipe_name, GENERIC_READ | GENERIC_WRITE,
         0u, NULL, OPEN_EXISTING, FILE_FLAG_OVERLAPPED, NULL);
     if (transact_client == INVALID_HANDLE_VALUE) {
         CloseHandle(transact_server);
-        return 22;
+        return 28;
     }
     if (!ConnectNamedPipe(transact_server, NULL) &&
         GetLastError() != ERROR_PIPE_CONNECTED) {
         CloseHandle(transact_client);
         CloseHandle(transact_server);
-        return 23;
+        return 29;
     }
     pipe_mode = PIPE_READMODE_MESSAGE;
     if (!SetNamedPipeHandleState(transact_client, &pipe_mode, NULL, NULL) ||
@@ -320,7 +370,7 @@ int main(void)
             &transact_identity)) {
         CloseHandle(transact_client);
         CloseHandle(transact_server);
-        return 24;
+        return 30;
     }
     transact_context.pipe = transact_server;
     transact_context.result = 0u;
@@ -330,7 +380,7 @@ int main(void)
         mvdm_host_identity_release(transact_identity);
         CloseHandle(transact_client);
         CloseHandle(transact_server);
-        return 25;
+        return 31;
     }
     memory.bytes[0x1400u] = 0x72u;
     memory.bytes[0x1401u] = 0x71u;
@@ -344,26 +394,26 @@ int main(void)
     fixture_di = 0x1300u;
     fixture_carry = 1u;
     if (!mvdm_redirector_pointer_scope_begin())
-        return 26;
+        return 32;
     VrTransactNamedPipe();
     if (!mvdm_redirector_pointer_scope_end(1) || fixture_carry != 0u ||
         fixture_cx != 2u || memory.bytes[0x1300u] != 0x6fu ||
         memory.bytes[0x1301u] != 0x6bu ||
         WaitForSingleObject(transact_thread, INFINITE) != WAIT_OBJECT_0 ||
         transact_context.result == 0u || !mvdm_host_identity_release(transact_identity))
-        return 27;
+        return 33;
     CloseHandle(transact_thread);
     CloseHandle(transact_client);
     CloseHandle(transact_server);
     if (sprintf_s(wait_pipe_name, sizeof(wait_pipe_name),
             "\\\\.\\pipe\\t290-s3-wait-%lu",
             (unsigned long)GetCurrentProcessId()) < 0)
-        return 28;
+        return 34;
     wait_server = CreateNamedPipeA(wait_pipe_name, PIPE_ACCESS_DUPLEX,
         PIPE_TYPE_BYTE | PIPE_READMODE_BYTE | PIPE_WAIT, 1u,
         256u, 256u, 0u, NULL);
     if (wait_server == INVALID_HANDLE_VALUE)
-        return 29;
+        return 35;
     memcpy(memory.bytes + 0x1500u, wait_pipe_name,
         strlen(wait_pipe_name) + 1u);
     fixture_ds = 0u;
@@ -372,30 +422,30 @@ int main(void)
     fixture_cx = 1000u;
     fixture_carry = 1u;
     if (!mvdm_redirector_pointer_scope_begin())
-        return 30;
+        return 36;
     VrWaitNamedPipe();
     if (!mvdm_redirector_pointer_scope_end(1) || fixture_carry != 0u ||
         fixture_ax != 0u) {
         CloseHandle(wait_server);
-        return 31;
+        return 37;
     }
     CloseHandle(wait_server);
     if (sprintf_s(call_pipe_name, sizeof(call_pipe_name),
             "\\\\.\\pipe\\t290-s3-call-%lu",
             (unsigned long)GetCurrentProcessId()) < 0)
-        return 32;
+        return 38;
     call_server = CreateNamedPipeA(call_pipe_name, PIPE_ACCESS_DUPLEX,
         PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE | PIPE_WAIT, 1u,
         256u, 256u, 0u, NULL);
     if (call_server == INVALID_HANDLE_VALUE)
-        return 33;
+        return 39;
     call_context.pipe = call_server;
     call_context.result = 0u;
     call_thread = CreateThread(NULL, 0u, call_server_thread, &call_context,
         0u, NULL);
     if (call_thread == NULL) {
         CloseHandle(call_server);
-        return 34;
+        return 40;
     }
     call_structure = (DOS_CALL_NAMED_PIPE_STRUCT *)(memory.bytes + 0x1600u);
     memset(call_structure, 0, sizeof(*call_structure));
@@ -423,7 +473,7 @@ int main(void)
             GUEST_MEMORY_ACCESS_WRITE) ||
         !mvdm_redirector_pointer_scope_prepare(0u, 0x1a00u, 2u,
             GUEST_MEMORY_ACCESS_WRITE))
-        return 35;
+        return 41;
     VrCallNamedPipe();
     if (!mvdm_redirector_pointer_scope_end(1) || fixture_carry != 0u ||
         fixture_cx != 2u || memory.bytes[0x1900u] != 0x6fu ||
@@ -433,7 +483,7 @@ int main(void)
         call_context.result == 0u) {
         CloseHandle(call_thread);
         CloseHandle(call_server);
-        return 36;
+        return 42;
     }
     CloseHandle(call_thread);
     CloseHandle(call_server);
