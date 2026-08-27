@@ -133,6 +133,10 @@ extern USHORT nDrives;
 /* DIVERGENCE MVDM-HOST-DIV-006: current PDB is a two-byte guest scalar;
  * callers must read it under a fresh bounded lease. */
 extern mvdm_guest_location current_pdb_location;
+/* DIVERGENCE MVDM-HOST-DIV-007: the original SFT-chain head was retained as
+ * a native pointer.  It remains the original numeric DS:offset location and
+ * VDD obtains only fresh bounded shadows from it. */
+extern mvdm_guest_location sft_head_location;
 /* DIVERGENCE MVDM-HOST-DIV-005: the original x86 pointer is retained as a
  * numeric guest descriptor; every use must acquire a fresh bounded lease. */
 extern mvdm_guest_location extended_error_location;

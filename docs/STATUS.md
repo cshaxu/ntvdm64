@@ -2,9 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T280 S20** — Recover persistent DEM guest-location state as
-numeric descriptors and fresh bounded leases. It is Ordinary Mode with
-single-person dual-role review; no provider/BOP route is enabled.
+**No active M/T/S packet.** M0 T280 is closed as a source/boundary recovery
+packet; its final S20 closure is recorded in
+[M0 T280 closure](history/m0-t280-closure-20260826.md). No provider/BOP route
+is enabled by that closure. The next task remains owner-selected from Queue.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -25,14 +26,16 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S20 — DEM persistent guest-location recovery
+No active packet is admitted. The following is the latest closure reference.
+
+### Closed packet reference — M0 T280 S20
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T280 S20`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S19 proved that original `demgset.c` retains native GetVDMAddr results beyond a legal lease lifetime, blocking a raw-pointer facade. |
-| Objective | Recover the reached DEM persistent guest-location globals as numeric descriptors and fresh per-dereference guest-memory leases. |
-| Non-goals | No generic GetVDMAddr raw-pointer shim, DEM provider/BOP route, guest trace, directory backend, new mapper, Bochs change, host-resource token, broker value or async pointer retention. |
+| Admission And Approval | S19 proved that original `demgset.c` retains native GetVDMAddr results beyond a legal lease lifetime, blocking a raw-pointer facade. P7 then proved SFT/JFT requires a distinct VDD shadow lifecycle; the owner approved its source-shaped P8 recovery. |
+| Objective | Recover the reached DEM persistent guest-location globals as numeric descriptors and fresh per-dereference guest-memory leases. **Closed.** |
+| Non-goals | No generic GetVDMAddr raw-pointer shim, DEM provider/BOP route, guest trace, directory backend, new mapping-manager implementation, Bochs change, broker value or async guest-pointer retention. P8 may use the existing session `host_resource` instance only to own host-local SFT shadow/HANDLE identities. |
 | Reference Baseline | Original demgset/demsrch consumers, S19 lease ledger/evidence, session guest-memory API and adapter-softpc/adapter-bochs ownership rules. |
 | Files And ABI Surface | Reached original DEM globals/consumers, adapter-softpc source-shaped descriptor/lease boundary, focused fixtures/evidence and Status. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
@@ -41,7 +44,7 @@ waves after the queue-head package/symbol tracker closes.
 | Asset Needs | S19 ledger, original DEM source/layouts, current session lease API, adapter-softpc/adapter-bochs contracts and formal Ninja/MSVC matrix. |
 | Reporting Requirements | Original global/caller, numeric descriptor layout, lease extent/access/lifetime, source failure preservation, all consumer coverage and remaining provider limit. |
 | Stop Conditions | A descriptor is tokenized, a host pointer/HANDLE enters MVDM global state, a lease crosses an async callback, a generic mapper is created, or a provider/BOP route is enabled. |
-| Exit Criteria | Every reached retained guest pointer is removed/recovered as a numeric descriptor with focused x86/x64 evidence; no actual guest pointer survives its source callback. |
+| Exit Criteria | Met: every reached retained guest pointer is removed/recovered as a numeric descriptor with focused x86/x64 evidence; no actual guest pointer survives its source callback. See [M0 T280 S20 closure](history/m0-t280-s20-closure-20260826.md). |
 | Original Owner Request | “单人双角色模式执行队列任务”。 |
 | Similar-Issue Sweep | All demSetDTALocation globals, every reached dereference in demgset/demsrch/demfile/demfcb, DTA/PDB paths, descriptor arithmetic, lease cleanup and invalid/stale guest address behavior. |
 
@@ -59,7 +62,13 @@ consumers; its source recovery and transferred product-shell interface gaps
 are recorded in [PDB recovery](etc/evidence/m0-t280-s20-p6-current-pdb-source-recovery-001.md).
 P7 proves that SFT/JFT is a distinct VDD host-buffer lifecycle boundary, not
 a legal scalar lease conversion; see the [SFT boundary audit](etc/operations/m0-t280-s20-p7-sft-chain-boundary-audit-001.md).
-None of these records is an S20 closure.
+P8 recovers that boundary as one session-owned, source-shaped VDD SFT/JFT
+shadow/commit contract; x86/x64 evidence is in [SFT/JFT recovery](etc/evidence/m0-t280-s20-p8-vdd-sft-jft-shadow-recovery-001.md).
+
+**S20 closure:** the extended-error, DTA, current-PDB and SFT-chain retained
+guest locations now preserve numeric source data and use only fresh bounded
+leases or bounded synchronous shadows. The historical raw-pointer body remains
+inactive provenance; no provider or BOP route is enabled.
 
 ### Closed packet reference — M0 T280 S13
 

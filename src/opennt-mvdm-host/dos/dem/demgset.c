@@ -38,8 +38,6 @@ BYTE demGetDpbI(BYTE Drive, DPB UNALIGNED *pDpb);
 
 UCHAR PhysicalDriveTypes[26]={0};
 
-extern PDOSSF pSFTHead;
-
 USHORT  nDrives = 0;
 CHAR    IsAPresent = TRUE;
 CHAR    IsBPresent = TRUE;
@@ -558,7 +556,9 @@ SYSTEMTIME TimeDate;
 
 VOID demSetDTALocation (VOID)
 {
-    PDOSWOWDATA pDosWowData;
+    mvdm_guest_location dos_wow_data_location;
+    mvdm_guest_location_lease dos_wow_data_lease;
+    ULONG sft_offset;
 
     /* DIVERGENCE MVDM-HOST-DIV-005: retain DS:AX numerically; consumers read
      * this far-address cell under a fresh bounded lease. */
@@ -572,8 +572,22 @@ VOID demSetDTALocation (VOID)
     mvdm_guest_location_set_real_mode(&extended_error_location, getDS(),
         getCX());
 
-    pDosWowData = (PDOSWOWDATA) GetVDMAddr(getDS(),getSI());
-    pSFTHead    = (PDOSSF) GetVDMAddr(getDS(),(WORD)pDosWowData->lpSftAddr);
+    /* DIVERGENCE MVDM-HOST-DIV-007: `lpSftAddr` is source numeric data in
+     * DOSWOWDATA.  Read it under one short lease, then retain DS:offset;
+     * neither DOSWOWDATA nor the SFT chain is retained as a host pointer. */
+    if (mvdm_guest_location_set_real_mode(&dos_wow_data_location, getDS(),
+        getSI()) && mvdm_guest_location_acquire(&dos_wow_data_location,
+        sizeof(DOSWOWDATA), GUEST_MEMORY_ACCESS_READ, &dos_wow_data_lease)) {
+        sft_offset = ((PDOSWOWDATA)dos_wow_data_lease.bytes)->lpSftAddr;
+        if (!mvdm_guest_location_release(&dos_wow_data_lease, FALSE)) {
+            memset(&sft_head_location, 0, sizeof(sft_head_location));
+        } else {
+            (void)mvdm_guest_location_set_real_mode(&sft_head_location,
+                getDS(), (WORD)sft_offset);
+        }
+    } else {
+        memset(&sft_head_location, 0, sizeof(sft_head_location));
+    }
     return;
 }
 

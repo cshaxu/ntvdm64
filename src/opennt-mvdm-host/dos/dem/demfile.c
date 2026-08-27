@@ -20,7 +20,7 @@
 #include <vrnmpipe.h>
 #include <nt_vdd.h>
 
-extern PDOSSF pSFTHead;
+#include <mvdm_vdd_sft_shadow.h>
 
 BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
 extern BOOL LoadVdmRedir(VOID);
@@ -848,6 +848,11 @@ CHAR    szFileName[MAX_PATH];
 }
 
 
+/* DIVERGENCE MVDM-HOST-DIV-007: the original VDD body assumes all returned
+ * SFT/JFT pointers permanently alias NTVDM process memory.  Preserve the
+ * original source below as inactive provenance; the same exported functions
+ * immediately following it use the adapter-softpc bounded shadow lifecycle. */
+#if 0
 PDOSSFT GetFreeSftEntry(PDOSSF pSfHead, PWORD usSFN)
 {
     WORD    i;
@@ -1166,4 +1171,66 @@ ULONG   ulSFLink;
     }
 
     return (HANDLE) pSftFlat[usSFN].SFT_NTHandle;
+}
+#endif
+
+/* DIVERGENCE MVDM-HOST-DIV-007: retain the original exported VDD names,
+ * K&R parameter form, search order and source failure directions.  The
+ * adapter supplies bounded host shadows instead of a persistent guest alias. */
+SHORT VDDAllocateDosHandle (pPDB,ppSFT,ppJFT)
+ULONG       pPDB;
+PDOSSFT*    ppSFT;
+PBYTE*      ppJFT;
+{
+    if (!pPDB && !demCurrentPdbAddress(&pPDB))
+        return (- ERROR_INVALID_ADDRESS);
+    if (ppSFT == NULL)
+        return (- ERROR_INVALID_ADDRESS);
+    {
+        SHORT handle = mvdm_vdd_sft_shadow_allocate(pPDB, &sft_head_location,
+            ppSFT, ppJFT);
+        return handle < 0 ? (- ERROR_TOO_MANY_OPEN_FILES) : handle;
+    }
+}
+
+VOID VDDAssociateNtHandle (pSFT,hFile,wAccess)
+PDOSSFT     pSFT;
+HANDLE      hFile;
+WORD        wAccess;
+{
+    (void)mvdm_vdd_sft_shadow_associate(pSFT, hFile, wAccess);
+}
+
+BOOL VDDReleaseDosHandle (pPDB,hFile)
+ULONG       pPDB;
+SHORT       hFile;
+{
+PBYTE   pJFT;
+PDOSSFT pSFT;
+HANDLE  ntHandle;
+
+    if (!pPDB && !demCurrentPdbAddress(&pPDB))
+        return FALSE;
+    ntHandle = mvdm_vdd_sft_shadow_retrieve(pPDB, &sft_head_location, hFile,
+        &pSFT, &pJFT);
+    if (!ntHandle) return FALSE;
+    pJFT[hFile] = 0xFF;
+    pSFT->SFT_Ref_Count--;
+    if (!mvdm_vdd_sft_shadow_commit(pSFT)) {
+        mvdm_vdd_sft_shadow_discard(pSFT);
+        return FALSE;
+    }
+    return TRUE;
+}
+
+HANDLE VDDRetrieveNtHandle (pPDB,hFile,ppSFT,ppJFT)
+ULONG       pPDB;
+SHORT       hFile;
+PDOSSFT*    ppSFT;
+PBYTE*      ppJFT;
+{
+    if (!pPDB && !demCurrentPdbAddress(&pPDB))
+        return 0;
+    return mvdm_vdd_sft_shadow_retrieve(pPDB, &sft_head_location, hFile,
+        ppSFT, ppJFT);
 }
