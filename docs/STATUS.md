@@ -2,31 +2,36 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T280 is closed as a source/boundary recovery
-packet; its final S20 closure is recorded in
-[M0 T280 closure](history/m0-t280-closure-20260826.md). No provider/BOP route
-is enabled by that closure. The next task remains owner-selected from Queue.
-
-The current intermission architecture is the twenty-component MVDM package
-rebootstrap: one active imported MVDM session per process, multi-instance-safe
-project interfaces, a cross-process broker, and a shared x86/x64 32-bit
-compatibility object space. The neutral, machine, source-supply and adapter
-inventory prerequisites are closed; package-led recovery begins only after the
-queue-head tracker is admitted. See the
-[rebootstrap program roadmap](etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md).
-
-The completed source-supply package establishes exact source availability, not
-host compilation, linking, provider enablement or guest execution. Its
-authoritative closure is [M0 T274 closure](history/m0-t274-closure-20260826.md).
-
-M0 T275 is closed as an adapter-boundary inventory. Its closure record is
-[M0 T275 closure](history/m0-t275-closure-20260826.md); its former adapter
-implementation subtasks are withdrawn and re-enter only through owner-package
-waves after the queue-head package/symbol tracker closes.
+**Active: M0 T281 S1 — original BOP dispatch composition.** The owner has
+directed execution in Queue order. The
+closed T277 package tracker, T278 physical re-root, T279 support-library
+closure, and T280 source-boundary recovery establish the inputs; they do not
+make a provider route active. T281 begins the first remaining ordered Wave 2
+package: original host control plane and DEM.
 
 ## Active Packet
 
-No active packet is admitted. The following is the latest closure reference.
+### M0 T281 S1 — original BOP dispatch composition
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T281 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | The owner instructed that Queue packages execute in order. Closed candidates T277, T278 and T279 have been removed from Queue; its first remaining candidate is admitted here as T281. |
+| Objective | Formally compose the byte-exact original `softpc.new/host/src/nt_bop.c` dispatcher on x86 and x64 through pre-recorded same-shaped boundaries, without enabling a BOP selector or provider. |
+| Non-goals | DEM behavior, selector/provider enablement, guest trace, Bochs changes, new adapter ABI, generic compatibility, VDD/debugger/monitor/Redirector/WOW recovery, or raw guest-pointer retention. |
+| Reference Baseline | T277 tracker ledgers; T278 re-root closure; T279 support closure; T280 S2 ingress/machine-facade ledger and T280 S20 descriptor/lease boundary closure; Wave 2 recovery plan. |
+| Files And ABI Surface | Original `src/opennt-mvdm-host/softpc.new/host/src/nt_bop.c`, direct original declaration carriers, existing adapter-bop/adapter-softpc/adapter-win32/session declarations, formal Ninja island, evidence and tracker rows. |
+| Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
+| Verification | Import-to-owner source ledger; formal MSVC `/MT` Ninja object/static-library graphs on x64 and x86; selector-disabled proof; documentation governance and `git diff --check`. |
+| Expected Markers | Exact original source hash; every direct import has one owner/disposition; no new selector handler, provider body, Bochs dependency, or guest route. |
+| Asset Needs | Pinned original mirror, T277/T280 ledgers, existing component headers, MSVC x64/x86 and Ninja. |
+| Reporting Requirements | Report per-import source form, owner/binding, architecture result, compile/link state, excluded branch and any boundary that requires a re-admission. |
+| Stop Conditions | A missing interface would require new semantics/ABI, an original source edit beyond an admitted binding diff, direct Bochs inclusion, a BOP/provider route, raw guest pointer retention, or scope expansion beyond `nt_bop.c` imports. |
+| Exit Criteria | Every direct import has a recorded source-shaped composition decision; the exact dispatcher formally compiles on both architectures or the smallest blocked boundary is fully evidenced and causes a revised S before implementation; no route is enabled. |
+| Original Owner Request | “我都叫你按顺序执行了”。 |
+| Similar-Issue Sweep | All `nt_bop.c` selectors, direct imports, original table/global declarations, x86/x64 call forms, machine-facing calls, and successor branches. |
+
+The detailed execution plan is [M0 T281 S1 original BOP dispatch composition](etc/operations/m0-t281-s1-original-bop-dispatch-composition-plan-001.md).
 
 ### Closed packet reference — M0 T280 S20
 
