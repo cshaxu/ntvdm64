@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2877 |
+| Documentation records | 2878 |
 | --- | --- |
-| Generated UTC | 2026-08-27T18:25:46Z |
+| Generated UTC | 2026-08-27T18:29:41Z |
 
 ## Entries
 
@@ -83,6 +83,7 @@ content-divergent entries.
 | DOS-WOW16-SOURCE-CLOSURE-TASK-BRIEF.md | retained pre-governance evidence | 5ea19abcd564854c1c21c6dff2714b204303e935ca5385345a3f3e23ee0ecb85 |
 | ENGINE-CONTRACT.md | retained pre-governance evidence | d57785469d3221d45b6931f4ab0f40c2cc6f78ab4ecd8425daaa338931d7ca3c |
 | etc/bop-list.md | indexed supporting material | ed3e108c966b5355ae01ffb394ea0d8c49a763ec9847791461346fef107eec34 |
+| etc/evidence/adapter-source-reuse-at-stopping-boundaries-001.md | indexed supporting material | 0538168bb6acddacd9b46d1a399315b74b21facd10472fb3de9f5b4b27bb4790 |
 | etc/evidence/m0-t240-s2-softpc-memory-size-closure-001.md | indexed supporting material | 3e0c56fab1d88442fa48813bee1d97d26bc12d4d49ff24dd5ff8c4efa179aba3 |
 | etc/evidence/m0-t241-s2-ivt-watch-source-recovery-001.md | indexed supporting material | dc7cfee2ac868e9e664cb4da58d58bdf73aa0dec2d6a9f5085b35bd9ede2217f |
 | etc/evidence/m0-t241-s3-xms-ivt-watch-regression-001.md | indexed supporting material | 82a407226439c8e5a5703e2560fb19ac6716f6d525a328f7ee4e955217d05082 |
@@ -1034,7 +1035,7 @@ content-divergent entries.
 | etc/operations/mvdm-package-recovery-wave-plan-001.md | indexed supporting material | c87a4966353daee3cd0d7975a868a575e274b0363aa3c8bb1d347c68ed2c4b8b |
 | etc/operations/opennt-bop-host-service-plane-recovery-candidate.md | indexed supporting material | 643385cb4d3c61e70583d59ae2eb6dab5284e07f647bdd47da8575aa0ffbfadf |
 | etc/operations/opennt-bop-implementation-tracker-001.md | indexed supporting material | 11d4a0cd06dc670513084704cd78aa4625d039cf3fbde55194d6d66ef7bd947e |
-| etc/operations/opennt-non-mvdm-package-boundary-ledger.tsv | indexed supporting material | 0fbe408399633ba345fceb315b402a5bcc3114ea9917451c55576437e809506d |
+| etc/operations/opennt-non-mvdm-package-boundary-ledger.tsv | indexed supporting material | 8ce8f2ca78f9de48f39f762367d086a92953dd41fac8bfea384c39317b93986a |
 | etc/operations/policy/source-policy.md | indexed supporting material | c77f4589a4476e87473885c3eeb167c8909943746438d2773ad9ba31d407ad00 |
 | etc/operations/proposal-bochs-component-identity-overlay-convergence-001.md | indexed supporting material | ac4de17a933c62d6b6adc1971345c6fe4e58860453fd894608553f2bdd6974c8 |
 | etc/operations/proposal-bochs-core-diff-overlay-minimization-001.md | indexed supporting material | 45eb3881102adb316497ec85eeac90488d95cd69c77d4555a1608a14d953db29 |
