@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2703 |
+| Documentation records | 2707 |
 | --- | --- |
-| Generated UTC | 2026-08-27T05:09:07Z |
+| Generated UTC | 2026-08-27T05:16:31Z |
 
 ## Entries
 
@@ -329,6 +329,7 @@ content-divergent entries.
 | etc/evidence/m0-t282-s10-command-register-and-lease-binding-001.md | indexed supporting material | 3021cb185da7ae6952019f25d9a82544418d5205f159b6f329ea0e9ca0fb3e00 |
 | etc/evidence/m0-t282-s11-command-oem-support-composition-001.md | indexed supporting material | 674da4df050cf89b6cbd03970f36ac1b60393ab82c747b9dabd150abd524507c |
 | etc/evidence/m0-t282-s12-bounded-copy-binding-001.md | indexed supporting material | 78e945da6871ddb026595dbc33e027fc065178edb8842f079ea31aa790b1a100 |
+| etc/evidence/m0-t282-s13-command-current-directory-bounded-binding-001.md | indexed supporting material | 5958520e44fb9dda87771a7a25aa019c50943b7e1b299ebe528bfac2c1eeff27 |
 | etc/evidence/m0-t282-s1-command-source-surface-001.md | indexed supporting material | 8da78111a6e91cbdf18b3020f1b2a67f8369e1ae6d8c3409e28cae4a7566aa2c |
 | etc/evidence/m0-t282-s2-command-declaration-carriers-001.md | indexed supporting material | d8eb5b4a03f6ceddf60e0865bfc2cb5f07838eef4fe17162835c7ab6ffb8a6f8 |
 | etc/evidence/m0-t282-s3-command-console-declaration-carrier-001.md | indexed supporting material | e8c050f08f7402aeca99e2fcdfb44e8964d65424cf597dab2ffe262041ce2b43 |
@@ -847,6 +848,8 @@ content-divergent entries.
 | etc/operations/m0-t282-s10-command-register-and-lease-binding-plan-001.md | indexed supporting material | 357f8cb2e06a914055882fb4e8b2c0b46ccdd57e537b81729b8d5791049a0fb9 |
 | etc/operations/m0-t282-s11-command-oem-support-composition-plan-001.md | indexed supporting material | 079a85cec3cbdb4b49b62db0edff903ed939d3145b54e579c5eb8e38288ac188 |
 | etc/operations/m0-t282-s12-command-bounded-copy-binding-plan-001.md | indexed supporting material | c79d1a11a8278560328a4327af6220ee7d55d30ca008ce5bbb89da61537cce0f |
+| etc/operations/m0-t282-s13-command-current-directory-bounded-binding-plan-001.md | indexed supporting material | 91f42f268f2f7a7d7dfbe6dd29c189f083522c76f6fbf6914bb74ec380dcba7b |
+| etc/operations/m0-t282-s14-command-comspec-bounded-input-binding-plan-001.md | indexed supporting material | 3dcecb46605c7957ff22fedf4130b19f7c97b880a4fb6baecba3a11cef544d71 |
 | etc/operations/m0-t282-s1-command-service-disposition-ledger.tsv | indexed supporting material | bf60b651a515f5777dbed4aa655fa1b9c0c42bf29f312d05bdd2ebef9d7e0d40 |
 | etc/operations/m0-t282-s1-command-source-disposition-ledger.tsv | indexed supporting material | ca41e554a4c1028416fd4b17c44eff98789afc122a41434dda0c207cd73b99ce |
 | etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md | indexed supporting material | 7f68749b6e2337457390f159034cb98c95de94d3ef49c756806308fc3e0e6770 |
@@ -899,6 +902,7 @@ content-divergent entries.
 | etc/operations/proposal-opennt-guest-sft-opaque-handle-publication-001.md | indexed supporting material | d82bbb255bd3c7d2b70c8bc55ad105141e837455232d248f367d60369ac8a96f |
 | etc/operations/proposal-opennt-host-mirror-overlay-convergence-001.md | indexed supporting material | d38de2d9de2c658e17efa69f3eb414c7488f3e181a50f3d5ac3c94a57986d28e |
 | etc/operations/proposal-opennt-host-original-layout-recovery-001.md | indexed supporting material | 9af7e168e93e0fcc55371785fa7f91cf8fd2b694f1089e3fe96c3caad56b9192 |
+| etc/operations/proposal-opennt-interface-adapter-convergence-001.md | indexed supporting material | e66c6f797dd66e396b93ec87f232fd796304698abb629f75da55ce21891e9960 |
 | etc/operations/proposal-opennt-mvdm-owner-expansion-001.md | indexed supporting material | 2f837a6af1fe6b48f167983fe60ee285b3a7b1fa92fe243f9fd2816959614bdf |
 | etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md | indexed supporting material | 893d0c94985043b5b3ae405f928bee10e2b576dab13e1dc773d37080162719a6 |
 | etc/operations/proposal-opennt-redirector-owner-package-completion-001.md | indexed supporting material | a94a8dfb72d0625f20e0152dacab24b4aca3862f4d8960290201eeb361e1b129 |
@@ -2591,7 +2595,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | fbfa3a202453ef9a31c0549310ff6ce96d822ac85e2cbbfb6a9c6c032e516f0c |
-| QUEUE.md | principal control document | 5ef274b24d81e8d59fed74a1d4633be8a82e0f8a825211ed04701db241341c3a |
+| QUEUE.md | principal control document | 99494fc64242c09fb37c1f917208b84d294d022e1ab88ac5aa5abd33fbc8ddf4 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -2717,7 +2721,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 061929060951ab9cd7774342b32a2d4a70462f3e49ad20eccf8e28606c8c57f6 |
+| STATUS.md | principal control document | bb9b1faca6b248ca7cf83ed2fa1113a5b893fb26ed2dc201a796f8560166aec0 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |

@@ -2,34 +2,34 @@
 
 ## Current Work
 
-**Active: M0 T282 S12 — COMMAND bounded copy binding.** T281 closed
+**Active: M0 T282 S14 — COMMAND COMSPEC bounded input binding.** T281 closed
 in `5aa51088`; the owner has directed Queue-order execution. T282 begins the
 next candidate, original COMMAND local lifecycle, with a full package source
 and interface audit before any `54:xx` route is enabled.
 
 ## Active Packet
 
-### M0 T282 S12 — COMMAND bounded copy binding
+### M0 T282 S14 — COMMAND COMSPEC bounded input binding
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T282 S12`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S11 closed in `bb661457`; S9 requires bounded string and exact-write primitives before any COMMAND mirror call site changes. |
-| Objective | Provide source-independent bounded C-string read and exact host-to-guest write forms over the existing adapter-softpc guest-location lease. |
-| Non-goals | COMMAND mirror modification, raw-pointer macro, new mapper, BOP route, environment policy, machine change or asynchronous lease. |
-| Reference Baseline | S9 guest-span ledger; T280 guest-location facade/fixture; session guest-memory rules. |
-| Files And ABI Surface | Adapter-softpc guest-location helpers and focused x86/x64 lease fixture. |
+| Identifier Mode | `M0 T282 S14`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S13 is closed by this delivery; S9 records the DS:DX COMSPEC input maximum and S12 supplies the reusable bounded C-string primitive. |
+| Objective | Audit and, only if the source failure contract is sufficient, recover original `cmdComSpec` through a bounded DS:DX C-string input descriptor. |
+| Non-goals | `cmdGetCurrentDir`, `cmdGetInitEnvironment`, raw-pointer macro, new mapper, BOP route, environment policy, machine change or asynchronous lease. |
+| Reference Baseline | S9 guest-span ledger, S10 register facade, S12 bounded-copy primitives and S13 original current-directory binding. |
+| Files And ABI Surface | Original `dos/command/cmdmisc.c`, its mirror register, adapter-softpc guest-location C-string form and focused x86/x64 lease/source graphs. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Exact lease/lifetime review, focused x86/x64 positive/negative fixture, documentation governance and `git diff --check`. |
-| Expected Markers | No native pointer leaves a lease, C-string reads have a fixed caller maximum, writes have an exact byte count, and the existing session map remains sole owner. |
-| Asset Needs | S9 span evidence, T280 guest-location fixture and current session lease contract. |
-| Reporting Requirements | Source-independent operation, span/access/lifetime, error result, mapping instance and focused test outcome. |
-| Stop Conditions | A raw pointer is exposed, a lease crosses async work, a string bound is inferred outside the caller, or another mapper is added. |
-| Exit Criteria | Both bounded copy forms pass x86/x64 and the next S can bind the exact three source spans without inventing a memory primitive. |
+| Verification | Source failure audit before modification; original source composition on x86/x64; bounded C-string positive/negative fixture; mirror review; documentation governance and `git diff --check`. |
+| Expected Markers | A numeric DS:DX descriptor, a caller-owned 64-byte C-string bound and no native pointer outside a synchronous lease. |
+| Asset Needs | S9 COMSPEC record, original source, S12 primitives/fixture and current session lease contract. |
+| Reporting Requirements | Input bound, source failure disposition, mapping instance, original AL result and x86/x64 outcome. |
+| Stop Conditions | The original malformed-input behavior is unknowable, a native pointer is exposed, a lease crosses async work, an invented failure is needed, or another mapper is added. |
+| Exit Criteria | Either the source binding formally composes with explicit source-derived malformed-input behavior, or a source-first evidence record proves it cannot be safely enabled and names the successor owner. |
 | Original Owner Request | “我都叫你按顺序执行了” and “请参照治理规范和实施规范执行任务”. |
-| Similar-Issue Sweep | S9 COMSPEC input, current-directory output and initial-environment output spans. |
+| Similar-Issue Sweep | S9 COMSPEC input, current-directory output and initial-environment output spans; only the COMSPEC input branch is admitted. |
 
-The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md), [S4 complete original COMMAND static package](etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md), [S5 VDM command-acquisition source audit](etc/operations/m0-t282-s5-vdm-command-acquisition-source-audit-plan-001.md), [S6 local VDM command transport](etc/operations/m0-t282-s6-local-vdm-command-transport-plan-001.md), [S7 original COMMAND initialization composition](etc/operations/m0-t282-s7-original-command-initialization-plan-001.md), [S8 COMMAND owner dependency partition](etc/operations/m0-t282-s8-command-owner-dependency-partition-plan-001.md), [S9 COMMAND environment guest-memory seam audit](etc/operations/m0-t282-s9-command-environment-guest-seam-audit-plan-001.md), [S10 COMMAND register and bounded-lease binding](etc/operations/m0-t282-s10-command-register-and-lease-binding-plan-001.md), and [S11 COMMAND OEM support composition](etc/operations/m0-t282-s11-command-oem-support-composition-plan-001.md).
+The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md), [S4 complete original COMMAND static package](etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md), [S5 VDM command-acquisition source audit](etc/operations/m0-t282-s5-vdm-command-acquisition-source-audit-plan-001.md), [S6 local VDM command transport](etc/operations/m0-t282-s6-local-vdm-command-transport-plan-001.md), [S7 original COMMAND initialization composition](etc/operations/m0-t282-s7-original-command-initialization-plan-001.md), [S8 COMMAND owner dependency partition](etc/operations/m0-t282-s8-command-owner-dependency-partition-plan-001.md), [S9 COMMAND environment guest-memory seam audit](etc/operations/m0-t282-s9-command-environment-guest-seam-audit-plan-001.md), [S10 COMMAND register and bounded-lease binding](etc/operations/m0-t282-s10-command-register-and-lease-binding-plan-001.md), [S11 COMMAND OEM support composition](etc/operations/m0-t282-s11-command-oem-support-composition-plan-001.md), and [S13 COMMAND current-directory bounded mirror binding](etc/operations/m0-t282-s13-command-current-directory-bounded-binding-plan-001.md).
 
 **T282 S1 P1:** both static-only architecture probes reached the same original
 `vdmapi.h` declaration boundary. The verified 11-unit/17-service ledgers and
@@ -130,8 +130,19 @@ adapter-softpc operations over the sole session guest-memory lease. The formal
 x86/x64 fixture covers positive and negative spans; COMMAND mirror source is
 still unchanged. See the [S12 P1 evidence](etc/evidence/m0-t282-s12-bounded-copy-binding-001.md).
 
+**T282 S12 closure:** the source-independent bounded C-string and exact-write
+forms are verified on x86/x64. The next packet may bind only a source-backed
+span with an explicit original failure disposition; S13 admits current
+directory output alone.
+
 **T282 S12 P2:** the same reached original register boundary now includes
 `getAL`/`setAX`, required by `cmdGetCurrentDir`; the x86/x64 regression passes.
+
+**T282 S13 closure:** the original `cmdGetCurrentDir` now retains its source
+drive/environment order and CF/AX contract while replacing only the unsafe
+`DS:SI` alias with S12's exact synchronous descriptor write. The original
+COMMAND source archive and bounded-copy fixture pass on x86/x64. This is not
+a callable `54:04` claim; see the [S13 evidence](etc/evidence/m0-t282-s13-command-current-directory-bounded-binding-001.md).
 
 ### Closed packet reference — M0 T281 S5 — original host-control package disposition
 

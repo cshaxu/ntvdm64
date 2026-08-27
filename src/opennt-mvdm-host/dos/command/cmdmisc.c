@@ -17,6 +17,10 @@
 #include "oemuni.h"
 #include "nt_pif.h"
 #include "nt_uis.h"	  // For resource id
+/* DIVERGENCE(MVDM-HOST-DIV-009): GetVDMAddr has no bounded x64 lifetime.
+ * Retain cmdGetCurrentDir ordering and register contract through the
+ * source-shaped adapter-softpc numeric location/lease boundary. */
+#include "mvdm_guest_location.h"
 
 
 VOID GetWowKernelCmdLine(VOID);
@@ -529,7 +533,8 @@ LPSTR    pszCmdLine;
 
 VOID cmdGetCurrentDir (VOID)
 {
-PCHAR lpszCurDir;
+CHAR  CurDir[MAXIMUM_VDM_CURRENT_DIR + 3];
+mvdm_guest_location CurDirLocation;
 UCHAR chDrive;
 CHAR  EnvVar[] = "=?:";
 CHAR  RootName[] = "?:\\";
@@ -537,7 +542,14 @@ DWORD EnvVarLen;
 UINT  DriveType;
 
 
-    lpszCurDir = (PCHAR) GetVDMAddr ((USHORT)getDS(),(USHORT)getSI());
+    /* DIVERGENCE(MVDM-HOST-DIV-009): retain the far address numerically;
+     * no guest pointer is materialized before the known bounded result exists. */
+    if (!mvdm_guest_location_set_real_mode(&CurDirLocation, (USHORT)getDS(),
+        (USHORT)getSI())) {
+        setCF(1);
+        setAX(0);
+        return;
+    }
     chDrive = getAL();
     EnvVar[1] = chDrive + 'A';
     RootName[0] = chDrive + 'A';
@@ -556,12 +568,20 @@ UINT  DriveType;
 	return;
     }
 
-    if((EnvVarLen = GetEnvironmentVariableOem (EnvVar,lpszCurDir,
+    if((EnvVarLen = GetEnvironmentVariableOem (EnvVar,CurDir,
                                             MAXIMUM_VDM_CURRENT_DIR+3)) == 0){
 
 	// if its not in env then and drive exist then we have'nt
 	// yet touched it.
-        strcpy(lpszCurDir, RootName);
+        strcpy(CurDir, RootName);
+        /* DIVERGENCE(MVDM-HOST-DIV-009): exact synchronous write replaces
+         * the source's direct guest alias before its environment mutation. */
+        if (!mvdm_guest_location_copy_to_guest(&CurDirLocation,
+            (PBYTE)CurDir, (ULONG)strlen(CurDir) + 1)) {
+            setCF(1);
+            setAX(0);
+            return;
+        }
         SetEnvironmentVariableOem (EnvVar,RootName);
 	setCF(0);
 	return;
@@ -571,7 +591,13 @@ UINT  DriveType;
         setAX(0);
     }
     else {
-        setCF(0);
+        if (!mvdm_guest_location_copy_to_guest(&CurDirLocation,
+            (PBYTE)CurDir, EnvVarLen + 1)) {
+            setCF(1);
+            setAX(0);
+            return;
+        }
+	setCF(0);
     }
     return;
 }
