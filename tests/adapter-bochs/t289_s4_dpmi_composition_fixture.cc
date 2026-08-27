@@ -12,6 +12,8 @@ void DpmiPassTableAddress(void);
 void DpmiAllocateXmem(void);
 void DpmiFreeXmem(void);
 void DpmiReallocateXmem(void);
+void DpmiFreeAppXmem(void);
+void DpmiFreeAllXmem(void);
 void DpmiSetDescriptorEntry(void);
 void DpmiGetMemoryInfo(void);
 
@@ -183,6 +185,46 @@ int main()
     if (machine_facade_copy_protected_frame(&frame) !=
         MACHINE_FACADE_PROTECTED_FRAME_OK || (frame.eflags & 1u)) {
         result = 14; goto done_session;
+    }
+
+    /* 53:10 keeps the original per-owner sweep.  The stale opaque identity
+     * must then take the original carry failure of DpmiFreeXmem. */
+    if (!machine_facade_set_bx16(1u) || !machine_facade_set_cx16(0u) ||
+        !machine_facade_set_dx16(0x28u)) { result = 141; goto done_session; }
+    DpmiAllocateXmem();
+    if (machine_facade_copy_protected_frame(&frame) !=
+        MACHINE_FACADE_PROTECTED_FRAME_OK || (frame.eflags & 1u)) {
+        result = 142; goto done_session;
+    }
+    handle_hi = getSI(); handle_lo = getDI();
+    DpmiFreeAppXmem();
+    if (!machine_facade_set_si16(handle_hi) || !machine_facade_set_di16(handle_lo)) {
+        result = 143; goto done_session;
+    }
+    DpmiFreeXmem();
+    if (machine_facade_copy_protected_frame(&frame) !=
+        MACHINE_FACADE_PROTECTED_FRAME_OK || !(frame.eflags & 1u)) {
+        result = 144; goto done_session;
+    }
+
+    /* 53:13 retains the original whole-list release and also retires every
+     * session opaque identity which had represented a released XMEM block. */
+    if (!machine_facade_set_bx16(1u) || !machine_facade_set_cx16(0u) ||
+        !machine_facade_set_dx16(0x29u)) { result = 145; goto done_session; }
+    DpmiAllocateXmem();
+    if (machine_facade_copy_protected_frame(&frame) !=
+        MACHINE_FACADE_PROTECTED_FRAME_OK || (frame.eflags & 1u)) {
+        result = 146; goto done_session;
+    }
+    handle_hi = getSI(); handle_lo = getDI();
+    DpmiFreeAllXmem();
+    if (!machine_facade_set_si16(handle_hi) || !machine_facade_set_di16(handle_lo)) {
+        result = 147; goto done_session;
+    }
+    DpmiFreeXmem();
+    if (machine_facade_copy_protected_frame(&frame) !=
+        MACHINE_FACADE_PROTECTED_FRAME_OK || !(frame.eflags & 1u)) {
+        result = 148; goto done_session;
     }
 
     if (!machine_facade_memory_write(0x2500u, sizeof(descriptor), descriptor) ||

@@ -89,6 +89,14 @@ unavailable dispositions. The complete closure record is
 [here](etc/evidence/m0-t289-s5-stack-interrupt-fault-closure-001.md). S6 is
 now the sole active packet and owns only the package-level `53:00..18` matrix.
 
+**T289 S6 P1:** original x86 `DpmiDpmiInUse`/`DpmiDpmiNoLongerInUse` no-op
+bodies and original `DpmiVcdPmSvcCall32` public registry branches now run on
+formal x86/x64 fixtures.  The S4 fixture also now proves original
+`DpmiFreeAppXmem` and `DpmiFreeAllXmem`, including stale opaque-identity carry
+failure.  The live all-25 disposition is in the
+[S6 matrix](etc/operations/m0-t289-s6-dpmi-family-disposition-matrix.tsv);
+no selector ingress is enabled.
+
 **T289 S3 closure:** `adapter-bochs` now exposes a selector-blind copied
 protected-frame, copied active-segment inspection and checked protected-span
 contract.  A frame commit is comparison-guarded, only changes GPR/EIP/native

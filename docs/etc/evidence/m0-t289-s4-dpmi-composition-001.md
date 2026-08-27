@@ -32,17 +32,21 @@ raw guest pointer is enabled.
 
 `tools/build/New-T289S4DpmiCompositionNinja.ps1` creates a formal `/MT` Ninja
 graph that rejects `src.old`, a DOSX host translation unit, a host-LDT
-implementation and prebuilt product archives. It consumes the existing S3
-Bochs-core static prerequisite.
+implementation and prebuilt product archives. It consumes the completed S5
+Bochs-core static prerequisite, including the selector-blind real-mode frame
+primitive required by the current `adapter-bochs` facade. This is build
+closure only and does not select an additional DPMI path.
 
 - `build/M0-T289/S4/x64/bin/dpmi-init-descriptor-xmem-fixture.exe`: exit `0`.
 - `build/M0-T289/S4/x86/bin/dpmi-init-descriptor-xmem-fixture.exe`: exit `0`.
 
 The fixture uses a real minimal Bochs machine and actual imported original
-bodies. It proves DOSX/app/table initialization state, XMEM allocate/reallocate/free,
-the original descriptor-install failure direction, and memory-information
-writeback. Its `DpmiDispatch` declaration stub is fixture-local static-link
-scaffolding; the dispatcher is not called and no BOP ingress is selected.
+bodies. It proves DOSX/app/table initialization state, all five XMEM lifecycle
+entries (allocate, free, reallocate, per-owner free and all-owner free), the
+retired-opaque-identity carry failure, the original descriptor-install failure
+direction, and memory-information writeback. Its `DpmiDispatch` declaration
+stub is fixture-local static-link scaffolding; the dispatcher is not called and
+no BOP ingress is selected.
 
 ## Transfer
 

@@ -755,13 +755,43 @@ registered replacement-interface admission.
 
 ## 4. DPMI（25）
 
-> **T271 S5 correction.** Every `BOP-DPMI-53-00..18` row remains a deferred
-> entry classification with no active v1/v2 provider, local runtime evidence
-> or formal production link. The former T257 S3 source/ABI experiment is now
-> archived at `docs/etc/legacy_code/opennt-bop/deferred-dpmi/`; its old row
-> text is retained solely as historical evidence and is superseded by this
-> current disposition. All 25 rows depend on `BOP-DEPENDENCY-117`; see the
-> [T254 S1 admission map](evidence/m0-t254-s1-dpmi-profile-source-abi-admission-map-001.md).
+> **Historical T271 S5 note.** The detailed rows retained below were the
+> pre-rebootstrap deferred classification. They are evidence, not current
+> implementation state. The former T257 S3 source/ABI experiment remains
+> archived at `docs/etc/legacy_code/opennt-bop/deferred-dpmi/`.
+
+> **T289 S6 live override.** The following is the current per-entry state;
+> the complete source, ABI, formal-test and transfer record is the
+> [S6 DPMI family matrix](operations/m0-t289-s6-dpmi-family-disposition-matrix.tsv).
+> No row enables BOP ingress. All 25 rows retain `BOP-DEPENDENCY-117`.
+
+| Tracker ID | Current original-source disposition | Formal local / source-proven result | Next owner if not locally executable |
+| --- | --- | --- | --- |
+| `BOP-DPMI-53-00` | Original descriptor-normalization body composed. | x86/x64 original failure direction for unavailable host LDT. | Bochs-native descriptor publication. |
+| `BOP-DPMI-53-01` | Original mode-switch body not enabled. | Source-proven unavailable: raw pointer plus coupled CR0/frame write. | Selector-blind mode transition. |
+| `BOP-DPMI-53-02` | Original handler registration body composed. | x86/x64 registration and invalid-index cases. | Protected interrupt/DOSX runtime. |
+| `BOP-DPMI-53-03` | Original fast-entry body not enabled. | Source-proven unavailable: missing monitor fast-PM publication. | Monitor fast-PM lifecycle. |
+| `BOP-DPMI-53-04` | Original DOSX initialization body composed. | x86/x64 bounded-copy session state. | DOSX consumer runtime. |
+| `BOP-DPMI-53-05` | Original app initialization body composed. | x86/x64 bounded-copy application state. | DOSX continuation runtime. |
+| `BOP-DPMI-53-06` | Original INT21 translation body not enabled. | Source-proven unavailable: raw aliases plus PM-to-real DEM transport. | DPMI-to-DEM transport. |
+| `BOP-DPMI-53-07` | Original XMEM allocation body composed. | x86/x64 allocate path. | Package ingress. |
+| `BOP-DPMI-53-08` | Original XMEM free body composed. | x86/x64 release and stale-identity carry path. | Package ingress. |
+| `BOP-DPMI-53-09` | Original XMEM realloc body composed. | x86/x64 reallocation path. | Package ingress. |
+| `BOP-DPMI-53-0A` | Original fault registration body composed. | x86/x64 registration and invalid-index cases. | Protected fault/DOSX runtime. |
+| `BOP-DPMI-53-0B` | Original memory-information body composed. | x86/x64 checked response writeback. | Package ingress. |
+| `BOP-DPMI-53-0C` | Original i386 no-op body composed. | x86/x64 deliberate no-op. | None for x86 semantic. |
+| `BOP-DPMI-53-0D` | Original i386 no-op body composed. | x86/x64 deliberate no-op. | None for x86 semantic. |
+| `BOP-DPMI-53-0E` | Original debug body not enabled. | Source-proven unavailable: host-thread debug state is not Bochs state. | Debugger/monitor plus selector-blind CPU debug facade. |
+| `BOP-DPMI-53-0F` | Original table-address body composed. | x86/x64 numeric session-state result. | Bochs-native descriptor publication. |
+| `BOP-DPMI-53-10` | Original per-app XMEM free body composed. | x86/x64 owner sweep and stale carry path. | Package ingress. |
+| `BOP-DPMI-53-11` | Original PM-stack-info body composed. | x86/x64 opaque session identity. | Monitor VDM-TIB/DOSX projection. |
+| `BOP-DPMI-53-12` | Original VCD version/port-query body composed. | x86/x64 public registry branches. | VDD broker for other VCD operations. |
+| `BOP-DPMI-53-13` | Original all-XMEM free body composed. | x86/x64 full release and identity retirement. | Package ingress. |
+| `BOP-DPMI-53-14` | Original 16-bit interrupt IRET not enabled. | Source-proven unavailable: DOSX frame/atomic IRET absent. | Protected interrupt/fault runtime. |
+| `BOP-DPMI-53-15` | Original 32-bit interrupt IRET not enabled. | Source-proven unavailable: DOSX frame/atomic IRET absent. | Protected interrupt/fault runtime. |
+| `BOP-DPMI-53-16` | Original 16-bit fault IRET not enabled. | Source-proven unavailable: DOSX frame/atomic IRET absent. | Protected interrupt/fault runtime. |
+| `BOP-DPMI-53-17` | Original 32-bit fault IRET not enabled. | Source-proven unavailable: DOSX frame/atomic IRET absent. | Protected interrupt/fault runtime. |
+| `BOP-DPMI-53-18` | Original unhandled-fault body not enabled. | Source-proven unavailable: fault reflection/DOSX stubs absent. | Protected interrupt/fault runtime. |
 
 | Tracker ID | BOP 入口 | 原始 handler / 高层作用 | OpenNT 源码与可复通性 | 当前 code / 局部测试状态 | 已接入但待前置分支 | lifecycle / 其他 BOP 依赖 | bx / host / guest 前置 | 优先级 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
