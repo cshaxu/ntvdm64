@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T290 S5 — Redirector NetAPI, NetBIOS, DLC, window and mode composition.**
+**Active: M0 T290 S6 — Redirector whole-family reconciliation and bounded integration observation.**
 
 M0 T289 is closed. Its final original-DPMI package boundary is in
 [the closure record](history/m0-t289-closure-20260827.md). T290 now admits
@@ -10,25 +10,25 @@ the next ordered Redirector and brokered COMMAND owner package.
 
 ## Active Packet
 
-### M0 T290 S5 — Redirector NetAPI, NetBIOS, DLC, window and mode composition
+### M0 T290 S6 — Redirector whole-family reconciliation and bounded integration observation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T290 S5`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S4 is closed by local source-body evidence; the ordered remaining Redirector provider group is admitted for source/ABI/failure audit. |
-| Objective | Compose original NetAPI/NetBIOS/DLC/window/mode providers wherever a public Win32 or declared same-shaped facade preserves source semantics; retain source-proven unavailable outcomes elsewhere. |
-| Non-goals | No BOP ingress, new provider policy, private CSR/BaseSrv/kernel emulation, physical IRQ delivery, raw pointer/host-handle exposure, new mapping manager, machine semantic change or `src.old` input. |
-| Reference Baseline | [T290 plan](etc/operations/m0-t290-redirector-owner-package-recovery-plan-001.md), [S1 service ledger](etc/operations/m0-t290-s1-redirector-service-abi-ledger.tsv), [S2 interface ledger](etc/operations/m0-t290-s2-redirector-external-interface-recovery-ledger.tsv), [S4 closure](etc/evidence/m0-t290-s4-mailslot-async-closure-001.md) and source policy. |
-| Files And ABI Surface | Remaining original `mvdm-host/vdmredir` NetAPI/NetBIOS/DLC/window/mode bodies, declared `adapter-mvdm-host-out/{redir,win32,softpc}`, session, fixtures and formal Ninja inputs. |
+| Identifier Mode | `M0 T290 S6`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S5 is closed by its all-entry source disposition and x86/x64 original-body matrix. The pre-approved final T290 reconciliation subtask is now admitted. |
+| Objective | Reconcile the complete original `57:00..31` package ledger, brokered DEM/COMMAND dependencies, mirror divergences and adapter ownership; run its formal local matrix and one bounded integration observation. |
+| Non-goals | No new Redirector policy, private CSR/BaseSrv/kernel emulation, physical IRQ delivery, raw pointer/host-handle exposure, new mapping manager, machine semantic change or `src.old` input. |
+| Reference Baseline | [T290 plan](etc/operations/m0-t290-redirector-owner-package-recovery-plan-001.md), [S1 service ledger](etc/operations/m0-t290-s1-redirector-service-abi-ledger.tsv), S3/S4 closures, [S5 disposition closure](etc/evidence/m0-t290-s5-remaining-provider-disposition-closure-001.md) and source policy. |
+| Files And ABI Surface | All original `mvdm-host/vdmredir` bodies, reached `dos/{dem,command}` dependencies, declared outgoing adapters, session, package ledgers, fixtures and formal Ninja inputs. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | First freeze the remaining source/interface/failure map, then execute admissible original bodies on focused formal x86/x64 fixtures. |
-| Expected Markers | Original provider bodies remain owner code; public APIs preserve their source result order; private kernel/product dependencies stay explicit unavailable outcomes. |
-| Asset Needs | Existing session mappings/lease API, outgoing adapters, original vdmredir declarations and public Win32/NetAPI APIs. |
-| Reporting Requirements | State each original body compiled, each minimal binding/difference, x86/x64 proof and every source-defined unavailable branch. |
+| Verification | Reconcile the 50-entry source ledger against every S3--S5 evidence/matrix record, execute the declared formal family runner, then run one bounded selector-disabled integration observation. |
+| Expected Markers | No ownerless dispatch or adapter path, no duplicate COMMAND broker, original providers remain owner code, and the integration observation is not misreported as ingress success. |
+| Asset Needs | Existing session mappings/lease API, outgoing adapters, original vdmredir declarations, public Win32/NetAPI APIs and accepted focused fixtures. |
+| Reporting Requirements | State each dispatch disposition, every mirror divergence, x86/x64 matrix result, integration result and remaining unavailable branch owner. |
 | Stop Conditions | A semantic rewrite, private kernel/CSR emulation, direct Bochs call, raw pointer path, second broker, additional mapping manager or selector ingress is proposed. |
-| Exit Criteria | Every S5 provider branch has a source-first public composition or explicit original failure disposition, with a whole-group x86/x64 matrix. |
+| Exit Criteria | Every `57:00..31` entry and reached brokered dependency has one owner/disposition, the formal local matrix passes on x86/x64, and the bounded observation is reported without a false Redirector runtime claim. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | NetAPI/NetBIOS/DLC/window/mode provider bodies, external interfaces, public API substitutions, VDD/monitor branches and all declared selector-disabled outcomes. |
+| Similar-Issue Sweep | All dispatch rows, helper/broker routes, exact mirror divergences, outgoing adapter ownership, original unavailable paths and the disabled ingress boundary. |
 
 **T290 S1 closure:** [the source/ABI audit](etc/evidence/m0-t290-s1-redirector-source-abi-audit-001.md) proves all fifty original `57:00..31` dispatch entries and all twenty-five selected package paths.  The source mirror is exact in both canonical OpenNT editions; lifecycle/named-pipe, mailslot/async, and NetAPI/NetBIOS/DLC groups are the only admissible next owner groups.  No Redirector selector is enabled.
 
@@ -148,6 +148,14 @@ x86/x64 fixtures for its bounded `BX=1` form through public
 scope. It retains original success and `NERR_BufTooSmall` results; its
 unbounded `BX=0` form remains selector-disabled because no checked guest span
 exists. See the [P4 evidence](etc/evidence/m0-t290-s5-p4-vrnetapi-user-name-source-closure-001.md).
+
+**T290 S5 closure:** the [27-entry remaining-provider disposition
+matrix](etc/operations/m0-t290-s5-remaining-provider-disposition-matrix.tsv)
+now gives every NetAPI/NetBIOS/DLC/window/mode branch one source-first result.
+The six focused original-body graphs pass together on formal x86/x64 Ninja
+runs. Private Lanman, NetBIOS/DLC driver and physical-IRQ contracts remain
+source-preserved and selector-disabled, with named future owners; see the
+[closure record](etc/evidence/m0-t290-s5-remaining-provider-disposition-closure-001.md).
 
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info

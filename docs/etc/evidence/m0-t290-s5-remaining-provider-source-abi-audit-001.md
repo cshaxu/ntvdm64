@@ -58,3 +58,6 @@ S5 will not attempt to recover a private Lanman transaction server, NetBIOS,
 DLC driver, VDD hook, physical IRQ, or a new network policy.  It first proves
 the small local original result bodies and then records all remaining groups
 as explicit source-owned unavailable outcomes for the S6 whole-family matrix.
+
+The final entry-by-entry outcome is frozen in the [S5 remaining-provider
+disposition matrix](../operations/m0-t290-s5-remaining-provider-disposition-matrix.tsv).

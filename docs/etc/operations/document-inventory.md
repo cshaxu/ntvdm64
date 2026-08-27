@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2829 |
+| Documentation records | 2831 |
 | --- | --- |
-| Generated UTC | 2026-08-27T15:29:44Z |
+| Generated UTC | 2026-08-27T15:38:25Z |
 
 ## Entries
 
@@ -408,7 +408,8 @@ content-divergent entries.
 | etc/evidence/m0-t290-s5-p2-vrnetapi-local-source-closure-001.md | indexed supporting material | 4a7dd94b837c496b44ffebe1cc351cb72878eee7f0d1b572037015670a4045c4 |
 | etc/evidence/m0-t290-s5-p3-vrnetapi-computer-name-source-closure-001.md | indexed supporting material | ac5707d7ab57bd3632952743f4a2c7a164ec20d2fa32a8375720bb0f585a3fcb |
 | etc/evidence/m0-t290-s5-p4-vrnetapi-user-name-source-closure-001.md | indexed supporting material | ab831de6db81340b66c59c61b9a74fdb60867dc6d4967d42ed547cc2ad8acf96 |
-| etc/evidence/m0-t290-s5-remaining-provider-source-abi-audit-001.md | indexed supporting material | 9a829b1a5d2ad5622ad42d40f6bfd85b8e1070a01ed62db041f224a9825368e6 |
+| etc/evidence/m0-t290-s5-remaining-provider-disposition-closure-001.md | indexed supporting material | 3021ff2719265584e0f3c40c81529daea32ffd4b246fce2b3d3db70c9106a4d0 |
+| etc/evidence/m0-t290-s5-remaining-provider-source-abi-audit-001.md | indexed supporting material | be38730284080155f9b675343aeb69bc9678e9f9f14d4745be210446ca82fa30 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -978,6 +979,7 @@ content-divergent entries.
 | etc/operations/m0-t290-s5-ds-declaration-package-selection-001.md | indexed supporting material | 0c4eb7466a492b81c045890e6bd93dab83c3e587164cec44558574feee002b2c |
 | etc/operations/m0-t290-s5-public-internal-declaration-cohort-manifest-001.tsv | indexed supporting material | af4c86c1aa850e5e995648ce5f930ba7b014dcc04b93911e3eb19a8ccb5c3545 |
 | etc/operations/m0-t290-s5-public-internal-declaration-cohort-selection-001.md | indexed supporting material | ac4504cdc04b417db108f8c79219704939fe9c2eb3804a818813e9a77ab43af8 |
+| etc/operations/m0-t290-s5-remaining-provider-disposition-matrix.tsv | indexed supporting material | 0544812da6f563bb8be817809b45d2d73eb26ab0916da944426ff10754683e5c |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -2843,7 +2845,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 6873b590972d695f063d9a3bbdc35d252d9b4bfbd37ef05851da333e75fd6841 |
+| STATUS.md | principal control document | d38860744f7a02ec55fefb85f340ab15ce71775a45569c5006e368ac6b150b30 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
