@@ -2,9 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T280 S15** — Recover the bounded adapter-softpc host-identity
-facade required by the closed S14 `demsrch` audit. It is Ordinary Mode with
-single-person dual-role review; no DEM provider or mirror body is enabled.
+**Active: M0 T280 S15** — The bounded adapter-softpc host-identity facade
+required by the closed S14 `demsrch` audit is closed. The next operation is a
+separate source-local DEM mirror divergence; no provider is enabled.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -58,6 +58,14 @@ classified as a session `host_resource` surrogate, distinct from DTA/FCB
 `guest_memory` leases. The existing scoped session binding and the missing
 adapter-softpc identity facade are explicit successor evidence; no DEM mirror
 body or provider was enabled. See [S14 closure](history/m0-t280-s14-closure-20260826.md).
+
+### Closed packet reference — M0 T280 S15
+
+**S15 closure:** `adapter-softpc` now exposes the one bounded host-resource
+surrogate facade over the thread-bound session. Its x86/x64 fixture proves
+identity, stale-token, isolation and disposal outcomes; it has no
+guest-memory route. The original DEM mirror remains unchanged. See
+[S15 closure](history/m0-t280-s15-closure-20260826.md).
 
 ### Closed packet reference — M0 T280 S12
 
