@@ -122,6 +122,12 @@ empty-queue cancellation direction while physical IRQ completion remains
 explicitly unavailable. See the
 [closure record](etc/evidence/m0-t290-s4-mailslot-async-closure-001.md).
 
+**T290 S5 P1:** the remaining provider audit freezes NetAPI/remote/NetBIOS/DLC
+owner outcomes and identifies the first real source closure prerequisite:
+`vrnetapi.c` needs a provenance-selected historical DS declaration package,
+not an arbitrary same-name header. No incomplete fixture is retained. See the
+[P1 audit](etc/evidence/m0-t290-s5-remaining-provider-source-abi-audit-001.md).
+
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
 bodies now compose on formal x86/x64 Ninja fixtures.  Session-owned numeric

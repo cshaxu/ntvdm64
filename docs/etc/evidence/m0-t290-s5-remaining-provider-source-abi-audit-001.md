@@ -36,6 +36,15 @@ source composition review.  The latter five already retain original no-op or
 `VrGetComputerName` and `VrGetUserName` need exact synchronous guest output
 spans and public Unicode-to-OEM/ANSI conversion bindings before local proof.
 
+The attempted original-object fixture additionally proves a declaration-closure
+precondition: `vrnetapi.c` includes `apinums.h`, `remdef.h`, `remtypes.h`,
+`rxp.h`, `apiparam.h`, `xstypes.h`, `xsprocs.h`, `netlibnt.h`, `rxuser.h` and
+`crypt.h`.  The existing platform-ABI include ledger records `apinums.h` and
+related DS headers as ambiguous source-package candidates, not present build
+inputs.  They must first be selected/imported as one provenance-reviewed
+declaration carrier; copying an arbitrary same-basename header merely to make
+one decline body compile would violate the source policy.
+
 ## Frozen decision
 
 S5 will not attempt to recover a private Lanman transaction server, NetBIOS,
