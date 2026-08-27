@@ -45,7 +45,11 @@ int main(void)
     if (mvdm_redirector_pointer_from_real_mode(0x0100u, 0x0020u) != NULL ||
         !mvdm_redirector_pointer_scope_begin() ||
         mvdm_redirector_pointer_scope_begin() ||
-        mvdm_redirector_pointer_from_source_address(0x01000020u, 1u) != NULL)
+        mvdm_redirector_pointer_from_source_address(0x01000020u, 1u) != NULL ||
+        !mvdm_redirector_pointer_scope_prepare(0x0100u, 0x0020u, 2u,
+            GUEST_MEMORY_ACCESS_WRITE) ||
+        !mvdm_redirector_pointer_scope_prepare(0x0100u, 0x0030u, 1u,
+            GUEST_MEMORY_ACCESS_WRITE))
         return 2;
     first = (uint8_t *)mvdm_redirector_pointer_from_real_mode(0x0100u, 0x0020u);
     second = (uint8_t *)mvdm_redirector_pointer_from_source_address(0x01000030u, 0u);

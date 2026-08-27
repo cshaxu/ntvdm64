@@ -1,0 +1,54 @@
+selector	original_entry	original_source	final_s6_disposition	formal_local_evidence	remaining_prerequisite_or_owner
+57:00	VrInitialize	vdmredir/vrinit.c	original source failure body composed; VDD rejection remains FALSE	T290 S3 P5 x86/x64	VDD/DLC/NetBIOS success composition
+57:01	VrUninitialize	vdmredir/vrinit.c	original source body composed after failed initialization	T290 S3 P5 x86/x64	no initialization success is claimed
+57:02	VrGetNamedPipeInfo	vdmredir/vrnmpipe.c	original source body composed through bounded lease and opaque handle	T290 S3 P6/P9 x86/x64	BOP ingress remains disabled
+57:03	VrGetNamedPipeHandleState	vdmredir/vrnmpipe.c	original source body composed through opaque handle	T290 S3 P6/P8 x86/x64	BOP ingress remains disabled
+57:04	VrSetNamedPipeHandleState	vdmredir/vrnmpipe.c	original source body composed through opaque handle	T290 S3 P6/P10 x86/x64	BOP ingress remains disabled
+57:05	VrPeekNamedPipe	vdmredir/vrnmpipe.c	original source body composed through bounded lease	T290 S3 P6/P11 x86/x64	BOP ingress remains disabled
+57:06	VrTransactNamedPipe	vdmredir/vrnmpipe.c	original source body composed through bounded leases	T290 S3 P6/P12 x86/x64	BOP ingress remains disabled
+57:07	VrCallNamedPipe	vdmredir/vrnmpipe.c	original source body composed through structured bounded leases	T290 S3 P6/P14 x86/x64	BOP ingress remains disabled
+57:08	VrWaitNamedPipe	vdmredir/vrnmpipe.c	original source body composed through bounded string lease	T290 S3 P6/P13 x86/x64	BOP ingress remains disabled
+57:09	VrDeleteMailslot	vdmredir/vrmslot.c	original source body composed; WORD identity is session opaque	T290 S4 P18 x86/x64	BOP ingress remains disabled
+57:0A	VrGetMailslotInfo	vdmredir/vrmslot.c	original source body composed	T290 S4 P18 x86/x64	BOP ingress remains disabled
+57:0B	VrMakeMailslot	vdmredir/vrmslot.c	original source body composed	T290 S4 P18 x86/x64	BOP ingress remains disabled
+57:0C	VrPeekMailslot	vdmredir/vrmslot.c	original source-defined ERROR_NOT_SUPPORTED decline composed	T290 S4 P18 x86/x64	no fabricated peek cache
+57:0D	VrReadMailslot	vdmredir/vrmslot.c	original source body composed	T290 S4 P18 x86/x64	BOP ingress remains disabled
+57:0E	VrWriteMailslot	vdmredir/vrmslot.c	original source body composed	T290 S4 P18 x86/x64	BOP ingress remains disabled
+57:0F	VrTerminateDosProcess	vdmredir/vrmisc.c	original source body composed; mailslot then pipe cleanup order retained	T290 S3 P2 x86/x64	BOP ingress remains disabled
+57:10	VrNetTransactApi	vdmredir/vrnetapi.c	original source preserved; unavailable	T290 S5 disposition matrix	private Lanman/Rxp transaction contract
+57:11	VrNetRemoteApi	vdmredir/vrnetapi.c	original source preserved; unavailable	T290 S5 disposition matrix	private Rxp/XactSrv remote contract
+57:12	VrNetNullTransactApi	vdmredir/vrnetapi.c	original source preserved; unavailable	T290 S5 disposition matrix	private Lanman transaction contract
+57:13	VrNetServerEnum	vdmredir/vrnetapi.c	original source preserved; unavailable	T290 S5 disposition matrix	private Xs/Rx server enumeration contract
+57:14	VrNetUseAdd	vdmredir/vrnetapi.c	original source preserved; unavailable	T290 S5 disposition matrix	private Xs use contract
+57:15	VrNetUseDel	vdmredir/vrnetapi.c	original source preserved; unavailable	T290 S5 disposition matrix	private Xs use contract
+57:16	VrNetUseEnum	vdmredir/vrnetapi.c	original source preserved; unavailable	T290 S5 disposition matrix	private Xs use contract and bounded output marshal
+57:17	VrNetUseGetInfo	vdmredir/vrnetapi.c	original source preserved; unavailable	T290 S5 disposition matrix	private Xs use contract and bounded output marshal
+57:18	VrNetWkstaGetInfo	vdmredir/vrnetapi.c	original source preserved; unavailable	T290 S5 disposition matrix	private Xs workstation contract and bounded output marshal
+57:19	VrNetWkstaSetInfo	vdmredir/vrnetapi.c	original ERROR_NOT_SUPPORTED body composed	T290 S5 P2 x86/x64	no further T290 prerequisite
+57:1A	VrNetMessageBufferSend	vdmredir/vrnetapi.c	original source preserved; unavailable	T290 S5 disposition matrix	private Xs message service contract
+57:1B	VrGetCDNames	vdmredir/vrnetapi.c	original source preserved; unavailable	T290 S5 disposition matrix	three unbounded nested far output pointers
+57:1C	VrGetComputerName	vdmredir/vrnetapi.c	original bounded name body composed	T290 S5 P3 x86/x64	no further T290 prerequisite
+57:1D	VrGetUserName	vdmredir/vrnetapi.c	BX=1 original bounded body composed; BX=0 unavailable	T290 S5 P4 x86/x64	future bounded-marshaling owner for BX=0
+57:1E	VrGetDomainName	vdmredir/vrnetapi.c	original ERROR_NOT_SUPPORTED body composed	T290 S5 P2 x86/x64	no further T290 prerequisite
+57:1F	VrGetLogonServer	vdmredir/vrnetapi.c	original ERROR_NOT_SUPPORTED body composed	T290 S5 P2 x86/x64	no further T290 prerequisite
+57:20	VrNetHandleGetInfo	vdmredir/vrnmpipe.c	original source body composed	T290 S3 P15 x86/x64	BOP ingress remains disabled
+57:21	VrNetHandleSetInfo	vdmredir/vrnmpipe.c	original source-defined no-op composed	T290 S3 P15 x86/x64	no fabricated handle mutation
+57:22	VrNetGetDCName	vdmredir/vrnetapi.c	original ERROR_NOT_SUPPORTED body composed	T290 S5 P2 x86/x64	no further T290 prerequisite
+57:23	VrReadWriteAsyncNmPipe	vdmredir/vrnmpipe.c	original safe failure body composed	T290 S4 P19 x86/x64	physical IRQ completion owner
+57:24	VrReadWriteAsyncNmPipe	vdmredir/vrnmpipe.c	original safe failure body composed	T290 S4 P19 x86/x64	physical IRQ completion owner
+57:25	VrNetbios5c	vdmredir/vrnetb.c	original source preserved; unavailable	T290 S5 disposition matrix	NetBIOS NCB, callback and IRQ owner
+57:26	VrHandleAsyncCompletion	vdmredir/vrinit.c	original source preserved; unavailable	T290 S4 closure	physical IRQ completion owner
+57:27	VrDlc5cHandler	vdmredir/vrdlc5c.c	original source preserved; unavailable	T290 S5 disposition matrix	DLC/LLC driver and IRQ owner
+57:28	VrVdmWindowInit	vdmredir/vrdlc5c.c	original source preserved; unavailable	T290 S5 disposition matrix	DLC window/IRQ owner
+57:29	VrReturnAssignMode	vdmredir/vrnetapi.c	original carry-clear no-op body composed	T290 S5 P2 x86/x64	no further T290 prerequisite
+57:2A	VrSetAssignMode	vdmredir/vrnetapi.c	original carry-clear no-op body composed	T290 S5 P2 x86/x64	no further T290 prerequisite
+57:2B	VrGetAssignListEntry	vdmredir/vrnetapi.c	original source preserved; unavailable	T290 S5 disposition matrix	private Xs use contract and output marshal
+57:2C	VrDefineMacro	vdmredir/vrnetapi.c	original source preserved; unavailable	T290 S5 disposition matrix	private Xs use contract
+57:2D	VrBreakMacro	vdmredir/vrnetapi.c	original source preserved; unavailable	T290 S5 disposition matrix	private Xs use contract
+57:2E	VrNetServiceControl	vdmredir/vrnetapi.c	original source preserved; unavailable	T290 S5 disposition matrix	private Xs service contract
+57:2F	VrDismissInterrupt	vdmredir/vrinit.c	original source preserved; unavailable	T290 S4 closure	physical IRQ completion owner
+57:30	VrEoiAndDismissInterrupt	vdmredir/vrinit.c	original source preserved; unavailable	T290 S4 closure	physical IRQ completion owner
+57:31	VrCheckPmNetbiosAnr	vdmredir/vrinit.c	original source preserved; unavailable	T290 S5 disposition matrix	NetBIOS monitor/IRQ owner
+helper	VrDispatch	vdmredir/vrdisp.c	exact original dispatcher compiled only as selector-disabled source carrier	T290 S1 source audit; T290 S6 disabled-ingress fixture x86/x64	adapter-mvdm-host-in admission after a future package-level runtime decision
+helper	cmdredir broker consumers	dos/command/cmdredir.c	original non-pipe identity/cleanup body composed	T290 S3 P16 x86/x64	cmdmisc/cmdexec producer-consumer lifecycle owner
+helper	DEM pipe consumers	dos/dem/demfile.c; dos/dem/demgset.c	original dependency remains source-owned; no duplicate broker	T290 S1/S3 ledger	future DEM/COMMAND integration admission

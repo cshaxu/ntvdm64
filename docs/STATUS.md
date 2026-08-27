@@ -2,33 +2,33 @@
 
 ## Current Work
 
-**Active: M0 T290 S6 — Redirector whole-family reconciliation and bounded integration observation.**
+**Active: M0 T291 S1 — WOW owner-package source/ABI admission audit.**
 
-M0 T289 is closed. Its final original-DPMI package boundary is in
-[the closure record](history/m0-t289-closure-20260827.md). T290 now admits
-the next ordered Redirector and brokered COMMAND owner package.
+M0 T290 is closed. Its final Redirector package boundary is in
+[the closure record](history/m0-t290-closure-20260827.md). T291 now admits
+the next ordered WOW owner-package source/ABI audit.
 
 ## Active Packet
 
-### M0 T290 S6 — Redirector whole-family reconciliation and bounded integration observation
+### M0 T291 S1 — WOW owner-package source/ABI admission audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T290 S6`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S5 is closed by its all-entry source disposition and x86/x64 original-body matrix. The pre-approved final T290 reconciliation subtask is now admitted. |
-| Objective | Reconcile the complete original `57:00..31` package ledger, brokered DEM/COMMAND dependencies, mirror divergences and adapter ownership; run its formal local matrix and one bounded integration observation. |
-| Non-goals | No new Redirector policy, private CSR/BaseSrv/kernel emulation, physical IRQ delivery, raw pointer/host-handle exposure, new mapping manager, machine semantic change or `src.old` input. |
-| Reference Baseline | [T290 plan](etc/operations/m0-t290-redirector-owner-package-recovery-plan-001.md), [S1 service ledger](etc/operations/m0-t290-s1-redirector-service-abi-ledger.tsv), S3/S4 closures, [S5 disposition closure](etc/evidence/m0-t290-s5-remaining-provider-disposition-closure-001.md) and source policy. |
-| Files And ABI Surface | All original `mvdm-host/vdmredir` bodies, reached `dos/{dem,command}` dependencies, declared outgoing adapters, session, package ledgers, fixtures and formal Ninja inputs. |
+| Identifier Mode | `M0 T291 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T290 has closed its ordered Redirector owner package. The owner-directed sequential queue now admits the Wave 8 WOW source/ABI audit, before any WOW provider implementation. |
+| Objective | Freeze the complete original `mvdm-host/{wow32,fax}` host-owner surface, source package topology, interface families, session mapping crossings and dependency order for later source-first recovery. |
+| Non-goals | No WOW body enablement, generic Win16 API, WOWEXEC/CSRSS recreation, GUI policy, guest load, BOP ingress, raw pointer/host-handle exposure, new mapping manager, direct Bochs call, machine change or `src.old` input. |
+| Reference Baseline | [T291 S1 plan](etc/operations/m0-t291-wow-owner-package-source-abi-audit-plan-001.md), Wave 8, selected WOW32/FAX disposition baselines, closed monitor/DPMI/Redirector records and source policy. |
+| Files And ABI Surface | Selected `mvdm-host/{wow32,fax}` mirrors, their original declarations/resources/build forms, current session and outgoing adapter headers, existing package/provenance ledgers and audit tools. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Reconcile the 50-entry source ledger against every S3--S5 evidence/matrix record, execute the declared formal family runner, then run one bounded selector-disabled integration observation. |
-| Expected Markers | No ownerless dispatch or adapter path, no duplicate COMMAND broker, original providers remain owner code, and the integration observation is not misreported as ingress success. |
-| Asset Needs | Existing session mappings/lease API, outgoing adapters, original vdmredir declarations, public Win32/NetAPI APIs and accepted focused fixtures. |
-| Reporting Requirements | State each dispatch disposition, every mirror divergence, x86/x64 matrix result, integration result and remaining unavailable branch owner. |
-| Stop Conditions | A semantic rewrite, private kernel/CSR emulation, direct Bochs call, raw pointer path, second broker, additional mapping manager or selector ingress is proposed. |
-| Exit Criteria | Every `57:00..31` entry and reached brokered dependency has one owner/disposition, the formal local matrix passes on x86/x64, and the bounded observation is reported without a false Redirector runtime claim. |
+| Verification | Reconcile canonical source paths/hashes, selected build forms, provider subdomains and reached interface declarations; verify the completed ledger has one disposition per selected row and no forbidden source input. |
+| Expected Markers | Original source package identities remain intact; each external boundary has a single owner and every pointer/handle crossing names the existing session mapping instance or an explicit refusal. |
+| Asset Needs | Selected OpenNT/OpenNT-4.5 source evidence, current mirrors, existing package ledgers, session/mapping declarations and outgoing adapter interfaces. |
+| Reporting Requirements | State total file/subdomain/interface coverage, exact/mirror divergence facts, mapping forms, unavailable historical dependencies, next package order and all unresolved boundaries. |
+| Stop Conditions | A proposal to implement a WOW provider, create a generic adapter, add a mapping manager, touch Bochs, use a raw pointer/HANDLE or import `src.old`. |
+| Exit Criteria | A complete reproducible WOW32/FAX file/subdomain/interface/dependency ledger and smallest next owner package are published; no source body or runtime route is enabled. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | All dispatch rows, helper/broker routes, exact mirror divergences, outgoing adapter ownership, original unavailable paths and the disabled ingress boundary. |
+| Similar-Issue Sweep | WOW32/FAX provider subdomains, inactive forms, guest/host pointer and handle conversion, private NT4 product interfaces, monitor/Redirector/COMMAND dependencies and all candidate adapter boundaries. |
 
 **T290 S1 closure:** [the source/ABI audit](etc/evidence/m0-t290-s1-redirector-source-abi-audit-001.md) proves all fifty original `57:00..31` dispatch entries and all twenty-five selected package paths.  The source mirror is exact in both canonical OpenNT editions; lifecycle/named-pipe, mailslot/async, and NetAPI/NetBIOS/DLC groups are the only admissible next owner groups.  No Redirector selector is enabled.
 
@@ -156,6 +156,15 @@ The six focused original-body graphs pass together on formal x86/x64 Ninja
 runs. Private Lanman, NetBIOS/DLC driver and physical-IRQ contracts remain
 source-preserved and selector-disabled, with named future owners; see the
 [closure record](etc/evidence/m0-t290-s5-remaining-provider-disposition-closure-001.md).
+
+**T290 S6/T290 closure:** the [complete 50-entry Redirector family
+matrix](etc/operations/m0-t290-s6-redirector-family-disposition-matrix.tsv)
+has one original-source disposition per entry and reached brokered helper.
+The formal 11-graph x86/x64 matrix passes, and the bounded ingress observation
+proves that no `57:xx` route is silently enabled. The only non-exact provider
+mirror is the already-registered `vrmslot.c` session-identity divergence. See
+the [S6 evidence](etc/evidence/m0-t290-s6-redirector-family-closure-001.md)
+and [T290 history](history/m0-t290-closure-20260827.md).
 
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info

@@ -2,9 +2,10 @@
 
 S1 freezes the current source truth before any `57:xx` provider is enabled.
 The current `mvdm-host/vdmredir` mirror contains all twenty-five selected
-paths, and each is byte-identical to the corresponding path in both canonical
-OpenNT editions.  This supersedes older evidence that treated the historical
-provider bodies as absent.
+paths. Twenty-four are byte-identical to the selected canonical OpenNT source;
+`vrmslot.c` has only the registered `MVDM-HOST-DIV-021` identity-boundary
+change. This supersedes older evidence that treated the historical provider
+bodies as absent.
 
 The original `VrDispatchTable` directly defines exactly fifty selectors,
 `57:00` through `57:31`.  The [service ledger](../operations/m0-t290-s1-redirector-service-abi-ledger.tsv)
