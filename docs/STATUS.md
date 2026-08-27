@@ -2,34 +2,34 @@
 
 ## Current Work
 
-**Active: M0 T282 S2 — COMMAND declaration carriers.** T281 closed
+**Active: M0 T282 S3 — COMMAND console declaration carrier.** T281 closed
 in `5aa51088`; the owner has directed Queue-order execution. T282 begins the
 next candidate, original COMMAND local lifecycle, with a full package source
 and interface audit before any `54:xx` route is enabled.
 
 ## Active Packet
 
-### M0 T282 S2 — COMMAND declaration carriers
+### M0 T282 S3 — COMMAND console declaration carrier
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T282 S2`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S1 closed in `b2c50bc8`; its complete package ledger proves the exact `vdmapi.h` and `pif.h` declaration carriers are the smallest next source-first recovery rung. |
-| Objective | Import and select exact original COMMAND declaration carriers on x86/x64 without enabling behavior. |
-| Non-goals | Implementing `GetNextVDMCommand`, PIF behavior, a `54:xx` route, provider execution, host executable, Bochs change, generic shim or trace. |
+| Identifier Mode | `M0 T282 S3`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S2 closed in `d4605640`; the whole COMMAND package static attempt next reaches the exact original private console declaration `winconp.h` from `cmdkeyb.c`. |
+| Objective | Import and select exact original `winconp.h` on x86/x64 so the original COMMAND keyboard source can be statically observed without enabling behavior. |
+| Non-goals | Implementing keyboard-layout policy, registry access, console initialization, `54:0E` routing, guest-memory writes, provider execution, host executable, Bochs change, generic shim or trace. |
 | Reference Baseline | Original `dos/command/sources`; T231 COMMAND ledger; T236 closures; T276/T277 owner and cycle ledgers; T281 closure and host-control disposition. |
-| Files And ABI Surface | Exact original `vdmapi.h` and `pif.h`, platform-ABI import/adapter include selection, COMMAND static probe and evidence only. |
+| Files And ABI Surface | Exact original `winconp.h`, platform-ABI import/adapter include selection, original `cmdkeyb.c` static probe and evidence only. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
 | Verification | Exact source hashes, selector-disabled x86/x64 static probes, source identity review, documentation governance and `git diff --check`. |
-| Expected Markers | Original `VDMINFO`/PIF declarations parse; no behavior route is enabled. |
+| Expected Markers | Original keyboard-layout declaration parses; no behavior route is enabled. |
 | Asset Needs | Pinned original MVDM mirror, prior COMMAND ledgers, existing declaration carriers, MSVC x86/x64 and Ninja. |
 | Reporting Requirements | Original source/service, interface family, owner/binding, architecture result, selected recovery rung, unsupported branch and transfer owner. |
 | Stop Conditions | Any behavior body is selected, an imported carrier differs from its pinned source, an unnamed adapter is required, or a route is enabled. |
-| Exit Criteria | Both exact carriers are hash-proven and selected by x86/x64 static probes; remaining function boundaries are recorded without implementation. |
+| Exit Criteria | The exact carrier is hash-proven and selected by x86/x64 `cmdkeyb.c` static probes; remaining function boundaries are recorded without implementation. |
 | Original Owner Request | “我都叫你按顺序执行了” and “请参照治理规范和实施规范执行任务”. |
 | Similar-Issue Sweep | Process/re-entry/standard streams, environment/configuration, PIF, command source, console/key layout, BOP dispatch, Redirector/broker, WOW/VDD and all historical machine-facing calls. |
 
-The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md) and [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md).
+The detailed execution plans are [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md), [S2 COMMAND declaration carriers](etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md), and [S3 COMMAND console declaration carrier](etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md).
 
 **T282 S1 P1:** both static-only architecture probes reached the same original
 `vdmapi.h` declaration boundary. The verified 11-unit/17-service ledgers and
@@ -46,6 +46,26 @@ selector-disabled; `cmdkeyb.c` stops at the separately-owned private
 selected on x86/x64 without adding any behavior. `GetNextVDMCommand` remains
 for the session/monitor binding package; PIF behavior and the `winconp.h`
 console-private boundary remain later named work. See the [S2 evidence](etc/evidence/m0-t282-s2-command-declaration-carriers-001.md).
+
+**T282 S3 P1:** byte-exact `winconp.h` is registered in the platform-ABI
+manifest and selected through an adapter declaration carrier. Original
+`cmdkeyb.c` compiles on x86/x64; keyboard service, registry, console policy
+and guest-memory behavior remain unenabled.
+
+**T282 S3 closure:** the complete admitted console declaration carrier is
+hash-proven and both architecture probes pass without source-body changes.
+The remaining keyboard provider policy belongs to its later COMMAND/session
+binding work. See the [S3 evidence](etc/evidence/m0-t282-s3-command-console-declaration-carrier-001.md).
+
+**T282 S3 P1:** byte-exact `winconp.h` is registered in the platform-ABI
+manifest and selected through an adapter declaration carrier. Original
+`cmdkeyb.c` compiles on x86/x64; keyboard service, registry, console policy
+and guest-memory behavior remain unenabled.
+
+**T282 S3 closure:** the complete admitted console declaration carrier is
+hash-proven and both architecture probes pass without source-body changes.
+The remaining keyboard provider policy belongs to its later COMMAND/session
+binding work. See the [S3 evidence](etc/evidence/m0-t282-s3-command-console-declaration-carrier-001.md).
 
 ### Closed packet reference — M0 T281 S5 — original host-control package disposition
 

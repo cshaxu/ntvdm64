@@ -36,6 +36,10 @@ layouts. Neither import supplies a callable VDM API, PIF provider, selector or
 runtime route. Their hashes and original callers are recorded in the same
 manifest.
 
+T282 S3 selected byte-exact public internal `winconp.h` for original COMMAND
+keyboard-layout declarations. It does not enable keyboard policy, registry
+access, console initialization, a `54:0E` provider or guest-memory writes.
+
 ## Divergence register
 
 None. Every current file below `source/` is byte-identical to the exact source

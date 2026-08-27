@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2679 |
+| Documentation records | 2681 |
 | --- | --- |
-| Generated UTC | 2026-08-27T04:17:20Z |
+| Generated UTC | 2026-08-27T04:21:03Z |
 
 ## Entries
 
@@ -328,6 +328,7 @@ content-divergent entries.
 | etc/evidence/m0-t281-s5-host-control-disposition-001.md | indexed supporting material | b345d12b4bfe808e72db97ae0d318c31a61430ec5547ed14f07f8ff354f6d548 |
 | etc/evidence/m0-t282-s1-command-source-surface-001.md | indexed supporting material | 8da78111a6e91cbdf18b3020f1b2a67f8369e1ae6d8c3409e28cae4a7566aa2c |
 | etc/evidence/m0-t282-s2-command-declaration-carriers-001.md | indexed supporting material | d8eb5b4a03f6ceddf60e0865bfc2cb5f07838eef4fe17162835c7ab6ffb8a6f8 |
+| etc/evidence/m0-t282-s3-command-console-declaration-carrier-001.md | indexed supporting material | e8c050f08f7402aeca99e2fcdfb44e8964d65424cf597dab2ffe262041ce2b43 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -591,7 +592,7 @@ content-divergent entries.
 | etc/operations/m0-t274-s1-non-guest-mvdm-union-ledger.tsv | indexed supporting material | ad3c456725415ad24fb1316ffc03f627d16fe4f41c8c342164822c08bf74bc36 |
 | etc/operations/m0-t274-s1-non-guest-mvdm-union-ledger-closure-001.md | indexed supporting material | 4a41df139144c42db65457ba8987aaef26e97dfe2c7d981797f68043102f9f78 |
 | etc/operations/m0-t274-s2-platform-abi-direct-include-ledger.tsv | indexed supporting material | b0dfec3956a231b5d8779703c719a26bf31e1cebfb593a067e07c2574a1646a4 |
-| etc/operations/m0-t274-s2-platform-abi-import-manifest.tsv | indexed supporting material | b6e3a9e9ee1bc476d99b00603d737d84acfaf97ba3d61720647ae14d84756217 |
+| etc/operations/m0-t274-s2-platform-abi-import-manifest.tsv | indexed supporting material | b94654a5719e2311729a9e9ee237ed306098dd357e8433e2c3719b43446a5bac |
 | etc/operations/m0-t274-s2-platform-abi-mirror-closure-001.md | indexed supporting material | 141c34ea01889faed9b60c6dc60592bd885d9995fe20e5a3e6c224613c52af0a |
 | etc/operations/m0-t274-s3-dos-guest-mirror-closure-001.md | indexed supporting material | d5c85751676139323aca895d7a30e07705393177c78f38f954e98297f4ddb6eb |
 | etc/operations/m0-t274-s3-dos-guest-mirror-manifest.tsv | indexed supporting material | 33997080284ef00497798d7c93f07bc66eb1206d97cea205d0bc1c90e456f382 |
@@ -838,6 +839,7 @@ content-divergent entries.
 | etc/operations/m0-t282-s1-command-source-disposition-ledger.tsv | indexed supporting material | ca41e554a4c1028416fd4b17c44eff98789afc122a41434dda0c207cd73b99ce |
 | etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md | indexed supporting material | 7f68749b6e2337457390f159034cb98c95de94d3ef49c756806308fc3e0e6770 |
 | etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md | indexed supporting material | 164de20d0af02b0361dd17535b3bd91ddc3763147b4102850004aded82bf2bf1 |
+| etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md | indexed supporting material | ea78761090980948a902373de46ec4478048f27366ebd13b213e52e117287c5a |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -2693,7 +2695,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 084007fbcd4e976f65b0652b94227699c3add3c2c00730c8712de904e2cd50b2 |
+| STATUS.md | principal control document | 34c74670e0583a6136da5f8f66b7c63136ff7152fbacbfd6589576c0f612e744 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |
