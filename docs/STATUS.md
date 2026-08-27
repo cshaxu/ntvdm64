@@ -35,6 +35,12 @@ execution are now distinct typed planes; the generic session operation table
 is gone. The owner-specific `host_simulate` and WOW task limits are recorded,
 not papered over. See the [closure](etc/evidence/m0-t291-s4-control-plane-separation-closure-001.md).
 
+**T291 S5 P1:** the original `VDMINFO` request/result forms now have one
+source-backed disposition. The selected mirror contains client evidence but
+no BaseSrv body, so only a copied `broker` record/wake seam is admissible for
+the one-session DOS forms; WOW/PIF/first-VDM/`ExitVDM` remain with their
+original owner packages. See the [source/ABI audit](etc/evidence/m0-t291-s5-p1-command-broker-source-abi-audit-001.md).
+
 **T291 S3 closure:** the bounded pointer scope, numeric task projection and
 source-shaped non-fast callback mechanics passed their complete formal x86/x64
 fixture matrix. `CallBack16` now bypasses session command routing and uses
