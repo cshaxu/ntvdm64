@@ -1,0 +1,18 @@
+service	original_entry	owner_source	package_group	first_required_boundary
+54:00	cmdExitVDM	cmdexit.c	controlled session exit	session controlled-stop facade
+54:01	cmdGetNextCmd	cmdmisc.c	command source/session	vdmapi.h and session command contract
+54:02	cmdComSpec	cmdmisc.c	query/bootstrap	vdmapi.h and checked guest-memory facade
+54:03	cmdSaveWorld	cmdmisc.c	registration/context	adapter-softpc CPU context facade
+54:04	cmdGetCurrentDir	cmdmisc.c	query/bootstrap	vdmapi.h and public current-directory capability
+54:05	cmdSetInfo	cmdmisc.c	registration/context	adapter-softpc checked guest-memory facade
+54:06	cmdGetStdHandle	cmdredir.c	stream/console	session host-resource mapping
+54:07	cmdCheckBinary	cmdexec.c	binary admission	adapter-win32 file/process capability
+54:08	cmdExec	cmdexec.c	local child lifecycle	vdmapi.h and session child/re-entry contract
+54:09	cmdInitConsole	cmdmisc.c	stream/console	adapter-win32 console capability
+54:0A	cmdExecComspec32	cmdexec.c	local child lifecycle	vdmapi.h and session child/re-entry contract
+54:0B	cmdReturnExitCode	cmdexec.c	local child lifecycle	vdmapi.h and session child/re-entry contract
+54:0C	cmdGetConfigSys	cmdconf.c	configuration/environment	adapter-win32 PIF/filesystem capability
+54:0D	cmdGetAutoexecBat	cmdconf.c	configuration/environment	adapter-win32 PIF/filesystem capability
+54:0E	cmdGetKbdLayout	cmdkeyb.c	stream/console	adapter-win32 keyboard capability
+54:0F	cmdGetInitEnvironment	cmdenv.c	configuration/environment	adapter-win32 RTL environment facade
+54:10	cmdGetStartInfo	cmdmisc.c	configuration/environment	vdmapi.h and session startup contract

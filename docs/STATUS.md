@@ -31,6 +31,11 @@ and interface audit before any `54:xx` route is enabled.
 
 The detailed execution plan is [S1 original COMMAND package source surface](etc/operations/m0-t282-s1-original-command-package-surface-plan-001.md).
 
+**T282 S1 P1:** both static-only architecture probes reached the same original
+`vdmapi.h` declaration boundary. The verified 11-unit/17-service ledgers and
+[surface evidence](etc/evidence/m0-t282-s1-command-source-surface-001.md)
+record the exact original carriers and successor owners; no route was enabled.
+
 ### Closed packet reference — M0 T281 S5 — original host-control package disposition
 
 | Field | Record |

@@ -1,0 +1,12 @@
+source_path	original_role	compile_observation	first_required_boundary	disposition	next_owner_group
+dos/command/cmd.c	package initialization	both: blocked by VDMINFO carrier	vdmapi.h declaration plus session command contract	adapter-prerequisite	adapter-win32/session/adapter-vdm-monitor
+dos/command/cmddata.c	COMMAND globals	both: blocked by VDMINFO carrier	vdmapi.h declaration	adapter-prerequisite	adapter-win32 declaration carrier
+dos/command/cmddisp.c	54:xx dispatcher	both: blocked by VDMINFO carrier	vdmapi.h declaration and adapter-bop ingress exclusion	adapter-prerequisite	adapter-win32/adapter-bop
+dos/command/cmdexec.c	child lifecycle	both: blocked by VDMINFO carrier	vdmapi.h plus session child/re-entry contract	adapter-prerequisite	session/adapter-win32/adapter-vdm-monitor
+dos/command/cmdexit.c	VDM exit	both: blocked by VDMINFO carrier	session controlled-stop facade	adapter-prerequisite	session/adapter-softpc
+dos/command/cmdmisc.c	command acquisition and current directory	both: blocked by VDMINFO carrier	vdmapi.h plus session command contract	adapter-prerequisite	adapter-win32/session/adapter-vdm-monitor
+dos/command/cmdpif.c	PIF interpretation	both: VDMINFO and pif.h carriers absent	original vdmapi.h and public/internal/windows/inc/pif.h	adapter-prerequisite	adapter-win32/session
+dos/command/cmdredir.c	standard streams and local pipes	both: blocked by VDMINFO carrier	vdmapi.h plus session stream mapping	adapter-prerequisite	session/adapter-win32/adapter-redir
+dos/command/cmdconf.c	CONFIG/AUTOEXEC transform	both: blocked by VDMINFO carrier	vdmapi.h plus session controlled-stop	adapter-prerequisite	adapter-win32/session/adapter-softpc
+dos/command/cmdkeyb.c	keyboard layout	both: blocked by VDMINFO carrier	vdmapi.h plus public keyboard capability	adapter-prerequisite	adapter-win32/session
+dos/command/cmdenv.c	environment transform	both: blocked by VDMINFO carrier	vdmapi.h plus original RTL environment facade	adapter-prerequisite	adapter-win32/session
