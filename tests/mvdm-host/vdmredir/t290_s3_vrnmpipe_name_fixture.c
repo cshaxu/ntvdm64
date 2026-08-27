@@ -16,6 +16,7 @@ BOOL VrWriteNamedPipe(HANDLE handle, LPBYTE buffer, DWORD byte_count,
     LPDWORD bytes_written);
 VOID VrGetNamedPipeHandleState(VOID);
 VOID VrGetNamedPipeInfo(VOID);
+VOID VrSetNamedPipeHandleState(VOID);
 
 extern CRITICAL_SECTION VrNamedPipeCancelCritSec;
 
@@ -161,17 +162,30 @@ int main(void)
         CloseHandle(server);
         return 11;
     }
+    fixture_cx = 0u;
+    fixture_carry = 1u;
+    VrSetNamedPipeHandleState();
+    if (fixture_carry != 0u) {
+        VrRemoveOpenNamedPipeInfo(client);
+        mvdm_host_identity_release(identity);
+        session_thread_unbind(&instance);
+        session_guest_memory_end(&instance);
+        session_dispose(&instance);
+        CloseHandle(client);
+        CloseHandle(server);
+        return 12;
+    }
     fixture_cx = 64u;
     fixture_ds = 0u;
     fixture_si = 0x1000u;
     fixture_carry = 1u;
     if (!mvdm_redirector_pointer_scope_begin())
-        return 12;
+        return 13;
     VrGetNamedPipeInfo();
     if (!mvdm_redirector_pointer_scope_end(1) || fixture_carry != 0u ||
         memory.bytes[0x1006u] != (BYTE)(strlen(remote) + 1u) ||
         strcmp((char *)(memory.bytes + 0x1007u), remote) != 0)
-        return 13;
+        return 14;
 
     InitializeCriticalSection(&VrNamedPipeCancelCritSec);
     if (!WriteFile(server, inbound, sizeof(inbound), &bytes, NULL) ||
@@ -179,7 +193,7 @@ int main(void)
         DeleteCriticalSection(&VrNamedPipeCancelCritSec);
         CloseHandle(client);
         CloseHandle(server);
-        return 14;
+        return 15;
     }
     bytes = 0u;
     error = ERROR_GEN_FAILURE;
@@ -189,7 +203,7 @@ int main(void)
         DeleteCriticalSection(&VrNamedPipeCancelCritSec);
         CloseHandle(client);
         CloseHandle(server);
-        return 15;
+        return 16;
     }
     bytes = 0u;
     if (!VrWriteNamedPipe(client, outbound, sizeof(outbound), &bytes) ||
@@ -199,20 +213,20 @@ int main(void)
         DeleteCriticalSection(&VrNamedPipeCancelCritSec);
         CloseHandle(client);
         CloseHandle(server);
-        return 16;
+        return 17;
     }
     DeleteCriticalSection(&VrNamedPipeCancelCritSec);
     if (!VrRemoveOpenNamedPipeInfo(client) ||
         !mvdm_host_identity_release(identity) || !session_thread_unbind(&instance)) {
         CloseHandle(client);
         CloseHandle(server);
-        return 17;
+        return 18;
     }
     session_guest_memory_end(&instance);
     if (!session_dispose(&instance)) {
         CloseHandle(client);
         CloseHandle(server);
-        return 18;
+        return 19;
     }
     CloseHandle(client);
     CloseHandle(server);

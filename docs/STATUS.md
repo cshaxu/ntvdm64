@@ -63,6 +63,10 @@ x86/x64 fixture through the existing session guest-memory pointer scope.  It
 retains BP:BX opaque identity, DS:SI bounded bounce-lease and packed
 `PIPEINFO` output; see the [P9 evidence](etc/evidence/m0-t290-s3-p9-named-pipe-info-guest-span-001.md).
 
+**T290 S3 P10:** original `VrSetNamedPipeHandleState` now runs on the formal
+x86/x64 local-pipe fixture with the same BP:BX opaque identity and source
+DOS-to-Win32 mode conversion; see the [P10 evidence](etc/evidence/m0-t290-s3-p10-named-pipe-state-set-001.md).
+
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
 bodies now compose on formal x86/x64 Ninja fixtures.  Session-owned numeric
