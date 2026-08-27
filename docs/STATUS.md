@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T289 S2 — DPMI protected-machine interface audit.**
+**Active: M0 T289 S3 — DPMI selector-blind mechanical foundation.**
 
 T286 is closed. Its final Bochs-core minimization evidence is in
 [the closure record](history/m0-t286-closure-20260827.md). T287 admits the
@@ -10,13 +10,13 @@ queue-head original XMS owner package using a complete source-first plan.
 
 ## Active Packet
 
-### M0 T289 S2 — DPMI protected-machine interface audit
+### M0 T289 S3 — DPMI selector-blind mechanical foundation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T289 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Identifier Mode | `M0 T289 S3`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | T288 is closed; this is the next dependency-ordered candidate in `QUEUE.md`. |
-| Objective | Audit exact DPMI protected-machine imports and specify the minimum selector-blind typed mechanical interface before enabling any source body. |
+| Objective | Implement and locally prove the minimum selector-blind typed protected-frame, span and descriptor/mode mechanics without enabling any DPMI source body or selector. |
 | Non-goals | No `53:xx` route, protected-mode transition, LDT/IDT mutation, CPU-frame ABI, second executor, raw VDM_TIB pointer, new mapping manager or `src.old` use. |
 | Reference Baseline | [Wave 6](etc/operations/mvdm-package-recovery-wave-plan-001.md#wave-6-dpmi), `bop-list.md`, source policy and mapping-manager rule. |
 | Files And ABI Surface | Exact `mvdm-host/{dpmi,dpmi32}` sources, DOSX artifacts, `adapter-mvdm-host-out`, `adapter-bochs`, session and the BOP/dependency tracker. |
@@ -26,7 +26,7 @@ queue-head original XMS owner package using a complete source-first plan.
 | Asset Needs | Canonical MVDM roots, current adapter inventory, session mapping rule and Bochs mechanical surface. |
 | Reporting Requirements | Package input ledger, selected source/facade matrix, all unavailable status paths, focused x86/x64 result and every excluded machine mechanism. |
 | Stop Conditions | A source body needs a semantic rewrite, direct Bochs call or new mapper is proposed, a second CPU/product shell is selected, or a non-direct carrier is silently linked. |
-| Exit Criteria | Every protected import is existing, named-new or source-proven refused; a bounded S3 mechanical plan exists without DPMI selector behavior. |
+| Exit Criteria | Atomic copied frame, bounded protected spans and minimum descriptor/mode operations have x86/x64 mechanical proof; no DPMI provider is compiled or routed. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
 | Similar-Issue Sweep | DOSX artifacts, dpmi32 source groups, selector table/memory/stack/interrupt/fault forms, host pointers, Win32 imports, Bochs-facing calls, session leases and x86/x64 ABI forms. |
 
