@@ -103,6 +103,13 @@ named-pipe forms and local COMMAND group passed the full formal x86/x64 matrix
 with explicit source transfers. S4 is now the sole active packet; see the
 [closure record](etc/evidence/m0-t290-s3-lifecycle-sync-pipe-command-closure-001.md).
 
+**T290 S4 P18:** original `vrmslot.c` now composes on formal x86/x64 fixtures
+through the existing session host-resource mapping and bounded Redirector
+pointer scopes. Make/info/write/read/delete, original peek decline and
+process-termination stale-handle cleanup are proven; asynchronous named-pipe
+completion remains the next S4 sub-group. See the
+[P18 evidence](etc/evidence/m0-t290-s4-p18-original-mailslot-composition-001.md).
+
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
 bodies now compose on formal x86/x64 Ninja fixtures.  Session-owned numeric

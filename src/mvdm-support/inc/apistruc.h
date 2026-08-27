@@ -131,7 +131,9 @@ struct NetUseGetInfoStruc {
 
 struct  DosWriteMailslotStruct {
     unsigned long DWMS_Timeout;         /* Timeout value of search */
-    const char FAR *DWMS_Buffer;        /* Buffer address for mailslot write*/
+    /* DIVERGENCE(MVDM-SUPPORT-DIV-003): this is a packed 16:16 guest
+     * location.  It remains four bytes on x64, not a native pointer. */
+    unsigned long DWMS_Buffer;          /* Buffer address for mailslot write*/
 }; /* DosWriteMailslotStruct */
 
 struct  NetServerEnum2Struct {
