@@ -20,6 +20,7 @@ Revision History:
 #include "precomp.h"
 #pragma hdrstop
 #include "softpc.h"
+#include "mvdm_realmode_stack.h"
 
 VOID
 DpmiSwitchToDosxStack(
@@ -97,34 +98,17 @@ Return Value:
 
 --*/
 {
-    PWORD16 StackPointer;
-    PULONG Ivt;
-
     // bugbug stack wrap???
 
     ASSERT((getSP() > 6));
     ASSERT((!(getMSW() & MSW_PE)));
 
-    StackPointer = (PWORD16)Sim32GetVDMPointer(
-        ((getSS() << 16) | getSP()),
-        1,
-        FALSE
-        );
-
-    *(StackPointer - 3) = (USHORT)(RmBopFe & 0x0000FFFF);
-    *(StackPointer - 2) = (USHORT)(RmBopFe >> 16);
-    *(StackPointer - 1) = getSTATUS();
-
-    setSP(getSP() - 6);
-
-    Ivt = (PULONG)Sim32GetVDMPointer(
-        0,
-        1,
-        FALSE
-        );
-
-     setCS((USHORT) (Ivt[InterruptNumber] >> 16));
-     setIP((USHORT) (Ivt[InterruptNumber] & 0xFFFF));
+    /* DIVERGENCE(MVDM-HOST-DIV-019): the original body retains the same
+     * return BOP, FLAGS, IVT and CS:IP ordering, but its two
+     * Sim32GetVDMPointer aliases were unbounded host pointers. The named
+     * SoftPC facade uses fresh bounded session leases and one guarded
+     * selector-blind real-mode frame commit instead. */
+    (void)mvdm_realmode_push_interrupt(InterruptNumber, RmBopFe);
 }
 
 VOID
@@ -154,20 +138,8 @@ Notes:
 
 --*/
 {
-    PWORD16 StackPointer;
-
-    StackPointer = (PWORD16)Sim32GetVDMPointer(
-        (((ULONG)getSS() << 16) | getSP()),
-        1,
-//        (UCHAR) (getMSW() & MSW_PE)
-        TRUE
-        );
-
-    //
-    // Return the carry flag from the int 21
-    //
-    setSTATUS((*(StackPointer + 2) & ~1) | (getSTATUS() & 1));
-    setCS(*(StackPointer + 1));
-    setIP(*StackPointer);
-    setSP(getSP() + 6);
+    /* DIVERGENCE(MVDM-HOST-DIV-019): preserve the original low-word FLAGS
+     * merge and far return through a bounded source-shaped stack copy and
+     * the guarded real-mode frame transaction described above. */
+    (void)mvdm_realmode_simulate_iret_cf();
 }

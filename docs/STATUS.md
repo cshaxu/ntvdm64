@@ -75,6 +75,13 @@ stack/interrupt bodies remain selector-disabled because their bounded
 guest-stack/IVT copies and descriptor projection are separate requirements;
 see the [P5 evidence](etc/evidence/m0-t289-s5-p5-realmode-frame-foundation-001.md).
 
+**T289 S5 P6:** original `DpmiPushRmInt` and `DpmiSimulateIretCF` now compose
+through bounded session IVT/stack leases and the P5 real-mode transaction.
+Formal x86/x64 original-body fixtures prove exact BOP/FLAGS frame order,
+IVT transfer, CF merge and invalid-vector no-change behavior. DOSX stack
+projection and protected interrupt/fault paths remain selector-disabled; see
+the [P6 evidence](etc/evidence/m0-t289-s5-p6-realmode-stack-composition-001.md).
+
 **T289 S3 closure:** `adapter-bochs` now exposes a selector-blind copied
 protected-frame, copied active-segment inspection and checked protected-span
 contract.  A frame commit is comparison-guarded, only changes GPR/EIP/native
