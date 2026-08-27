@@ -29,7 +29,9 @@ extern BOOL IsFirstCall;
  *  Internal globals, function prototypes
  */
 
-#define FINDFILE_DEVICE (HANDLE)0xffffffff
+/* DIVERGENCE(MVDM-HOST-DIV-003): this is a private host HANDLE sentinel,
+ * not a 32-bit MVDM value. Preserve its all-bits-one comparison on x86/x64. */
+#define FINDFILE_DEVICE ((HANDLE)(LONG_PTR)-1)
 
 typedef struct _PSP_FILEFINDLIST {
     LIST_ENTRY PspFFindEntry;      // Next psp
@@ -1022,7 +1024,9 @@ FileFindOpen(
                      goto FFOFinallyExit;
                      }
 
-                 PathName->Length = (USHORT)((ULONG)pwc - (ULONG)PathName->Buffer);
+                  /* DIVERGENCE(MVDM-HOST-DIV-003): preserve the source byte
+                   * count without narrowing either host pointer on x64. */
+                  PathName->Length = (USHORT)((pwc - PathName->Buffer) * sizeof(*pwc));
                  if (PathName->Buffer[(PathName->Length>>1)-2] != (WCHAR)':' ) {
                      PathName->Length -= sizeof(UNICODE_NULL);
                      }
@@ -1381,8 +1385,10 @@ FileFindReset(
            }
 
        if ( DirectoryInfo->NextEntryOffset ) {
-           pFFindEntry->FindBufferNext = (PVOID)((ULONG)DirectoryInfo +
-                                                DirectoryInfo->NextEntryOffset);
+           /* DIVERGENCE(MVDM-HOST-DIV-003): directory-buffer cursors remain
+            * host-local; advance them as native-width byte pointers. */
+           pFFindEntry->FindBufferNext = (PVOID)((PBYTE)DirectoryInfo +
+                                                 DirectoryInfo->NextEntryOffset);
            }
        else {
            pFFindEntry->FindBufferNext = NULL;
@@ -1435,8 +1441,10 @@ FileFindLast(
     if (pFFindEntry->FindBufferNext) {
         ULONG BytesOffset;
 
-        BytesOffset = (ULONG)pFFindEntry->FindBufferNext -
-                      (ULONG)pFFindEntry->FindBufferBase;
+        /* DIVERGENCE(MVDM-HOST-DIV-003): this is an in-buffer byte offset,
+         * never an opaque pointer identity or guest address. */
+        BytesOffset = (ULONG)((PBYTE)pFFindEntry->FindBufferNext -
+                              (PBYTE)pFFindEntry->FindBufferBase);
 
         if (BytesOffset) {
             RtlMoveMemory(pFFindEntry->FindBufferBase,
@@ -1449,17 +1457,17 @@ FileFindLast(
         DirInfo = pFFindEntry->FindBufferBase;
 
         while (DirInfo->NextEntryOffset) {
-            DirInfo = (PVOID)((ULONG)DirInfo + DirInfo->NextEntryOffset);
+            DirInfo = (PVOID)((PBYTE)DirInfo + DirInfo->NextEntryOffset);
             }
         LastDirInfo = DirInfo;
 
         DirInfo = (PVOID)&DirInfo->FileName[DirInfo->FileNameLength>>1];
 
-        DirInfo = (PVOID) (((ULONG) DirInfo + sizeof(LONGLONG) - 1) &
+        DirInfo = (PVOID) (((uintptr_t) DirInfo + sizeof(LONGLONG) - 1) &
             ~(sizeof(LONGLONG) - 1));
 
         BytesLeft = pFFindEntry->FindBufferLength -
-                     ((ULONG)DirInfo - (ULONG)pFFindEntry->FindBufferBase);
+                     (ULONG)((PBYTE)DirInfo - (PBYTE)pFFindEntry->FindBufferBase);
         }
     else {
         DirInfo = pFFindEntry->FindBufferBase;
@@ -1501,23 +1509,24 @@ FileFindLast(
            }
 
        if (LastDirInfo) {
-           LastDirInfo->NextEntryOffset =(ULONG)DirInfo - (ULONG)LastDirInfo;
+            LastDirInfo->NextEntryOffset = (ULONG)((PBYTE)DirInfo -
+                                                    (PBYTE)LastDirInfo);
            }
        else {
            pFFindEntry->FindBufferNext = pFFindEntry->FindBufferBase;
            }
 
        while (DirInfo->NextEntryOffset) {
-           DirInfo = (PVOID)((ULONG)DirInfo + DirInfo->NextEntryOffset);
+            DirInfo = (PVOID)((PBYTE)DirInfo + DirInfo->NextEntryOffset);
            }
        LastDirInfo = DirInfo;
        DirInfo = (PVOID)&DirInfo->FileName[DirInfo->FileNameLength>>1];
 
-        DirInfo = (PVOID) (((ULONG) DirInfo + sizeof(LONGLONG) - 1) &
+         DirInfo = (PVOID) (((uintptr_t) DirInfo + sizeof(LONGLONG) - 1) &
             ~(sizeof(LONGLONG) - 1));
 
        BytesLeft = pFFindEntry->FindBufferLength -
-                    ((ULONG)DirInfo - (ULONG)pFFindEntry->FindBufferBase);
+                    (ULONG)((PBYTE)DirInfo - (PBYTE)pFFindEntry->FindBufferBase);
        }
 
    return STATUS_SUCCESS;
@@ -1602,8 +1611,8 @@ FileFindNext(
 
 
        if ( DirectoryInfo->NextEntryOffset ) {
-           pFFindEntry->FindBufferNext = (PVOID)((ULONG)DirectoryInfo +
-                                                DirectoryInfo->NextEntryOffset);
+           pFFindEntry->FindBufferNext = (PVOID)((PBYTE)DirectoryInfo +
+                                                 DirectoryInfo->NextEntryOffset);
            }
        else {
            pFFindEntry->FindBufferNext = NULL;
@@ -1755,7 +1764,9 @@ Return Value:
         RtlZeroMemory(DirectoryInfo, sizeof(FILE_BOTH_DIR_INFORMATION));
 
         DirectoryInfo->FileAttributes = FILE_ATTRIBUTE_ARCHIVE;
-        DeviceName = (PWSTR)((ULONG)FileName + (DeviceNameData >> 16));
+        /* DIVERGENCE(MVDM-HOST-DIV-003): RtlIsDosDeviceName_U supplies a
+         * numeric byte offset into this native host string. */
+        DeviceName = (PWSTR)((PBYTE)FileName + (DeviceNameData >> 16));
 
         DeviceNameData &= 0xffff;
 

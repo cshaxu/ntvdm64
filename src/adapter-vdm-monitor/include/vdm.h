@@ -2,8 +2,8 @@
  * Reached same-shaped subset of the historical user-mode VDM control ABI.
  * The complete NT4 kernel VDM product surface is intentionally not imported.
  */
-#ifndef ADAPTER_WIN32_VDM_H
-#define ADAPTER_WIN32_VDM_H
+#ifndef ADAPTER_VDM_MONITOR_VDM_H
+#define ADAPTER_VDM_MONITOR_VDM_H
 
 #include <nt.h>
 

@@ -2,10 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T280 S18** — Recover the grouped host-local x64 boundaries of
-the original `demsrch.c` body and relocate the reached VDM-control facade to
-its architectural owner. It is Ordinary Mode with single-person dual-role
-review; no provider/BOP route is enabled.
+**Active: M0 T280 S19** — Audit the original `demsrch.c` guest-address
+dereference surface for one bounded `GetVDMAddr` lease contract. It is
+Ordinary Mode with single-person dual-role review; no provider/BOP route is
+enabled.
 
 The current intermission architecture is the twenty-component MVDM package
 rebootstrap: one active imported MVDM session per process, multi-instance-safe
@@ -26,25 +26,25 @@ waves after the queue-head package/symbol tracker closes.
 
 ## Active Packet
 
-### M0 T280 S18 — `demsrch.c` host-local x64 binding closure
+### M0 T280 S19 — DEM `GetVDMAddr` guest-lease contract audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T280 S18`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S17 classified every remaining x64-sensitive `demsrch.c` group and selected one source-owner follow-on rather than a warning-selected leaf patch. |
-| Objective | Recover S17 groups `SRCH-X64-001` through `SRCH-X64-005`: host-local sentinel/path/buffer width binding and `VdmQueryDir` facade owner relocation. |
-| Non-goals | No DEM provider/BOP route, guest trace, directory backend, `GetVDMAddr` guest lease, new mapper, kernel VDM/CSRSS recreation, Bochs change or source-hygiene rewrite. |
-| Reference Baseline | Original `demsrch.c`, S17 ledger/evidence, adapter-win32 NT I/O facade, current VdmQueryDir facade and adapter-vdm-monitor architecture rule. |
-| Files And ABI Surface | One original mirror body/register, adapter-vdm-monitor same-shaped VDM-control facade, relevant include/build/test evidence and Status. |
+| Identifier Mode | `M0 T280 S19`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S18 closed all host-local x64 groups without enabling a directory provider; `GetVDMAddr` remains a separate guest-memory boundary. |
+| Objective | Produce a complete source-first lease/extent/failure contract for every original `demsrch.c` `GetVDMAddr` dereference. |
+| Non-goals | No `GetVDMAddr` implementation, DEM provider/BOP route, guest trace, directory backend, new mapper, Bochs change, async pointer retention or source-body feature rewrite. |
+| Reference Baseline | Original `demsrch.c`, S17 ledger, S18 closure, session guest-memory lease API, adapter-softpc and adapter-bochs boundaries. |
+| Files And ABI Surface | Guest-address ledger/evidence, focused original-source sweep and Status only; no product ABI is introduced. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Focused x86/x64 syntax and host-local VDM-control tests, source call/failure review, README divergence register, no-mapping scan and diff review. |
-| Expected Markers | No x64 pointer-width warnings in groups 001-005; VdmQueryDir has one adapter-vdm-monitor owner; all original status/fallback paths remain visible. |
-| Asset Needs | S17 ledger, original source and includes, current adapter/session contract, MSVC x86/x64 and formal Ninja graph. |
-| Reporting Requirements | Exact changed original expressions, source failure preservation, adapter relocation proof, mapping exclusion and remaining non-goals. |
-| Stop Conditions | A host-local pointer/handle enters a mapper, a guest lease is implemented, a provider/BOP route begins, a kernel VDM/CSRSS path is recreated, or non-width source hygiene is altered. |
-| Exit Criteria | All five selected S17 groups have focused x86/x64 evidence and registered minimal divergences; the source remains a non-enabled provider candidate. |
+| Verification | Every call site has segment:offset origin, read/write extent, synchronous lifetime, source failure disposition and one adapter-softpc/session owner; no native pointer escapes the contract. |
+| Expected Markers | A whole-source lease ledger covers pathname, DTA, FCB and current-DTA/PDB-derived spans, with no guest numeric value tokenized. |
+| Asset Needs | Original DEM source, S17/S18 evidence, session guest-memory lease contract, adapter-softpc/adapter-bochs interfaces and mapping rules. |
+| Reporting Requirements | Original sites, guest numeric inputs, exact typed access/extent, source return/failure behavior, lease release point and later implementation order. |
+| Stop Conditions | A generic mapper or raw pointer ABI is added, an asynchronous retention path appears, a host-resource token represents guest memory, or any provider/BOP route is enabled. |
+| Exit Criteria | Every `demsrch.c` GetVDMAddr call is classified with one bounded source-facing lease design and no unresolved access/lifetime ambiguity. |
 | Original Owner Request | “单人双角色模式执行队列任务”。 |
-| Similar-Issue Sweep | Every FindFirst/FindNext/FCB path, device sentinel, path offsets, directory buffers, `NtQueryDirectoryFile`, `NtVdmControl` relocation, cleanup, guest-memory exclusion and source failure branches. |
+| Similar-Issue Sweep | FindFirst/FindNext pathname, DTA, FCB, `pulDTALocation`, PDB-derived spans, direct copy-out, source exception/failure branches and stale/invalid guest address behavior. |
 
 ### Closed packet reference — M0 T280 S13
 
@@ -83,6 +83,14 @@ source-owner, value-class, mapping and follow-on disposition. Host-local
 directory state is not tokenized; only the separately bounded `GetVDMAddr`
 family is a future guest-memory lease. See
 [S17 closure](history/m0-t280-s17-closure-20260826.md).
+
+### Closed packet reference — M0 T280 S18
+
+**S18 closure:** all selected host-local `demsrch.c` x64 groups compile on
+x86/x64 without width diagnostics, and the same-shaped VDM control family now
+belongs solely to `adapter-vdm-monitor`. The guest `GetVDMAddr` boundary
+remains deliberately unimplemented for S19 source-first audit. See
+[S18 closure](history/m0-t280-s18-closure-20260826.md).
 
 ### Closed packet reference — M0 T280 S12
 
