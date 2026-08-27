@@ -34,9 +34,11 @@
 source composition review. The latter five already retain original no-op or
 `ERROR_NOT_SUPPORTED` results; they must be regression-proven, not expanded.
 `VrGetComputerName` is now locally proven through its original bounded
-`LM20_CNLEN` output rule. Only the bounded `BX=1` `VrGetUserName` form still
-needs a source-shaped public Unicode-to-OEM/ANSI conversion binding; its
-unbounded `BX=0` form does not have an admissible output-span proof.
+`LM20_CNLEN` output rule. The bounded `BX=1` `VrGetUserName` form is also
+locally proven through public `NetWkstaUserGetInfo`: in the selected source
+profile its historical `NET_UNICODE` marker does not select the modern SDK
+`UNICODE` form, so the reached original copy remains ANSI and `CX` is its
+byte capacity. The unbounded `BX=0` form has no admissible output-span proof.
 
 The original-object fixture proved a declaration-closure precondition:
 `vrnetapi.c` includes `apinums.h`, `remdef.h`, `remtypes.h`, `rxp.h`,

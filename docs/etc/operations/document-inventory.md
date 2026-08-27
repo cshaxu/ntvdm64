@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2828 |
+| Documentation records | 2829 |
 | --- | --- |
-| Generated UTC | 2026-08-27T15:17:50Z |
+| Generated UTC | 2026-08-27T15:29:44Z |
 
 ## Entries
 
@@ -407,7 +407,8 @@ content-divergent entries.
 | etc/evidence/m0-t290-s4-p19-async-pipe-safe-decline-001.md | indexed supporting material | 87f5381855722cd3082f3bc29bd6f6ed44e9cd435beecf02d9908e05a9beae5c |
 | etc/evidence/m0-t290-s5-p2-vrnetapi-local-source-closure-001.md | indexed supporting material | 4a7dd94b837c496b44ffebe1cc351cb72878eee7f0d1b572037015670a4045c4 |
 | etc/evidence/m0-t290-s5-p3-vrnetapi-computer-name-source-closure-001.md | indexed supporting material | ac5707d7ab57bd3632952743f4a2c7a164ec20d2fa32a8375720bb0f585a3fcb |
-| etc/evidence/m0-t290-s5-remaining-provider-source-abi-audit-001.md | indexed supporting material | 4dd1d9ec504ce36a40bd46d6c1a0d32e4b89912d61b37c33882ab7a3455dc770 |
+| etc/evidence/m0-t290-s5-p4-vrnetapi-user-name-source-closure-001.md | indexed supporting material | ab831de6db81340b66c59c61b9a74fdb60867dc6d4967d42ed547cc2ad8acf96 |
+| etc/evidence/m0-t290-s5-remaining-provider-source-abi-audit-001.md | indexed supporting material | 9a829b1a5d2ad5622ad42d40f6bfd85b8e1070a01ed62db041f224a9825368e6 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -2842,7 +2843,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 54eeb87937713bcb67769b341e53836db27530e5cb38dd1c2c9f11fc886d041b |
+| STATUS.md | principal control document | 6873b590972d695f063d9a3bbdc35d252d9b4bfbd37ef05851da333e75fd6841 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

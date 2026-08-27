@@ -142,6 +142,13 @@ session-owned `ES:DI` Redirector pointer scope. It retains either the original
 creating a larger project buffer or enabling private Lanman/SMB paths; see the
 [P3 evidence](etc/evidence/m0-t290-s5-p3-vrnetapi-computer-name-source-closure-001.md).
 
+**T290 S5 P4:** the exact original `VrGetUserName` body now composes on formal
+x86/x64 fixtures for its bounded `BX=1` form through public
+`NetWkstaUserGetInfo`, `netapi32.lib` and the existing session-owned `ES:DI`
+scope. It retains original success and `NERR_BufTooSmall` results; its
+unbounded `BX=0` form remains selector-disabled because no checked guest span
+exists. See the [P4 evidence](etc/evidence/m0-t290-s5-p4-vrnetapi-user-name-source-closure-001.md).
+
 **T289 S4 closure:** original `dpmi32.c` initialization, `xmem.c` allocation
 lifecycle, `dpmiselr.c` descriptor normalization and `dpmimemr.c` memory-info
 bodies now compose on formal x86/x64 Ninja fixtures.  Session-owned numeric
