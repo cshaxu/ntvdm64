@@ -15,7 +15,7 @@ New-Item -ItemType Directory -Force $build | Out-Null
 $cflags = '/nologo /std:c11 /MT /W4 /DWIN32 /showIncludes /I ' + $root +
     '/src /I ' + $root + '/src/adapter-win32/include /I ' + $root +
     '/src/opennt-mvdm-support/inc /I ' + $root +
-    '/src/opennt-platform-abi/source/opennt/public/sdk/inc'
+    '/src/opennt-platform-abi/source/public/sdk/inc'
 $content = @"
 ninja_required_version = 1.10
 root = $root

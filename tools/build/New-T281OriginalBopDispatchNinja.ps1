@@ -24,7 +24,7 @@ New-Item -ItemType Directory -Force $build | Out-Null
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DPROD /DMONITOR /DC_VID /DX86GFX /DANSI ' +
     '/FI ' + $root + '/src/adapter-win32/include/nt.h ' +
     '/FI ' + $root + '/src/adapter-softpc/include/error_abi.h ' +
-    '/I ' + $root + '/src/opennt-platform-abi/source/opennt/public/internal/base/inc ' +
+    '/I ' + $root + '/src/opennt-platform-abi/source/public/internal/base/inc ' +
     '/I ' + $root + '/src/opennt-mvdm-support/inc ' +
     '/I ' + $root + '/src/adapter-win32/include ' +
     '/I ' + $root + '/src/adapter-softpc/include ' +

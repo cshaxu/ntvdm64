@@ -9,11 +9,11 @@ param(
 if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 }
+
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
-
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
-$build = Join-Path $root ("build/M0-T282/S1/{0}" -f $Architecture)
+$build = Join-Path $root ("build/M0-T283/S2/{0}" -f $Architecture)
 New-Item -ItemType Directory -Force $build | Out-Null
 
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM ' +
@@ -24,19 +24,29 @@ $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM ' +
     '/I ' + $root + '/src/adapter-win32/include ' +
     '/I ' + $root + '/src/adapter-softpc/include ' +
     '/I ' + $root + '/src/adapter-vdm-monitor/include ' +
-    '/I ' + $root + '/src/opennt-platform-abi/source/public/internal/windows/inc ' +
     '/I ' + $root + '/src/opennt-mvdm-support/inc ' +
-    '/I ' + $root + '/src/opennt-mvdm-host/dos/command ' +
+    '/I ' + $root + '/src/opennt-platform-abi/source/public/sdk/inc ' +
+    '/I ' + $root + '/src/opennt-platform-abi/source/public/ddk/inc ' +
+    '/I ' + $root + '/src/opennt-platform-abi/source/public/internal/base/inc ' +
+    '/I ' + $root + '/src/opennt-platform-abi/source/public/internal/windows/inc ' +
     '/I ' + $root + '/src/opennt-mvdm-host/dos/dem ' +
+    '/I ' + $root + '/src/opennt-mvdm-host/dos/command ' +
     '/I ' + $root + '/src/opennt-mvdm-host/softpc.new/host/inc ' +
     '/I ' + $root + '/src/opennt-mvdm-host/softpc.new/base/inc'
 
-$units = @('cmd', 'cmddata', 'cmddisp', 'cmdexec', 'cmdexit', 'cmdmisc',
+$commandUnits = @('cmd', 'cmddata', 'cmddisp', 'cmdexec', 'cmdexit', 'cmdmisc',
     'cmdpif', 'cmdredir', 'cmdconf', 'cmdkeyb', 'cmdenv')
-$buildLines = foreach ($unit in $units) {
-    "build obj/$unit.obj: cc `$root/src/opennt-mvdm-host/dos/command/$unit.c"
+$demUnits = @('dem', 'demdata', 'demmsg', 'demdisp', 'demdasd', 'demdir',
+    'demerror', 'demfcb', 'demfile', 'demgset', 'demhndl', 'demioctl',
+    'demlabel', 'demlock', 'demmisc', 'demsrch')
+$commandLines = foreach ($unit in $commandUnits) {
+    "build obj/command/$unit.obj: cc `$root/src/opennt-mvdm-host/dos/command/$unit.c"
 }
-$objects = ($units | ForEach-Object { "obj/$_.obj" }) -join ' '
+$demLines = foreach ($unit in $demUnits) {
+    "build obj/dem/$unit.obj: cc `$root/src/opennt-mvdm-host/dos/dem/$unit.c"
+}
+$commandObjects = ($commandUnits | ForEach-Object { "obj/command/$_.obj" }) -join ' '
+$demObjects = ($demUnits | ForEach-Object { "obj/dem/$_.obj" }) -join ' '
 $content = @"
 ninja_required_version = 1.10
 root = $root
@@ -50,10 +60,13 @@ rule lib
   command = lib /nologo /out:`$out `$in
   description = LIB `$out
 
-$($buildLines -join "`n")
-build original-command-surface.lib: lib $objects
-default original-command-surface.lib
+$($commandLines -join "`n")
+$($demLines -join "`n")
+build original-command-carrier.lib: lib $commandObjects
+build original-dem-carrier.lib: lib $demObjects
+default original-command-carrier.lib original-dem-carrier.lib
 "@
+
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'),
     $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))
-Write-Host "Wrote T282 $Architecture original COMMAND surface graph: $build/build.ninja"
+Write-Host "Wrote T283 $Architecture platform-ABI declaration-carrier graph: $build/build.ninja"

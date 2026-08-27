@@ -12,7 +12,7 @@ $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
 $build = Join-Path $root ("build/M0-T280/{0}-ntioapi-facade" -f $Architecture)
 New-Item -ItemType Directory -Force -Path $build | Out-Null
-$cflags = '/nologo /std:c11 /MT /W4 /DWIN_32 /DDEVL=1 /showIncludes /I ' + $root + '/src/adapter-win32/include /I ' + $root + '/src/opennt-mvdm-host/dos/dem /I ' + $root + '/src/opennt-mvdm-support/inc /I ' + $root + '/src/opennt-platform-abi/source/opennt/public/sdk/inc /I ' + $root + '/src/opennt-platform-abi/source/opennt/public/ddk/inc /I ' + $root + '/src/opennt-mvdm-host/softpc.new/base/inc /I ' + $root + '/src/opennt-mvdm-host/softpc.new/host/inc'
+$cflags = '/nologo /std:c11 /MT /W4 /DWIN_32 /DDEVL=1 /showIncludes /I ' + $root + '/src/adapter-win32/include /I ' + $root + '/src/opennt-mvdm-host/dos/dem /I ' + $root + '/src/opennt-mvdm-support/inc /I ' + $root + '/src/opennt-platform-abi/source/public/sdk/inc /I ' + $root + '/src/opennt-platform-abi/source/public/ddk/inc /I ' + $root + '/src/opennt-mvdm-host/softpc.new/base/inc /I ' + $root + '/src/opennt-mvdm-host/softpc.new/host/inc'
 $content = @"
 ninja_required_version = 1.10
 root = $root

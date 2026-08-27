@@ -2,30 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T283 S1 — platform-ABI canonical-union inventory.** T282 closed
+**Active: M0 T283 S2 — platform-ABI canonical re-root.** T283 S1 has produced
+a complete 29-row source/hash/consumer inventory and a single-source selection
+ledger; T282 remains closed.
 in `m0-t282-closure-20260827.md`; the owner has directed Queue-order
 execution. T283 begins the current first Queue candidate before historical
 interface adapter convergence.
 
 ## Active Packet
 
-### M0 T283 S1 — platform-ABI canonical-union inventory
+### M0 T283 S2 — platform-ABI canonical re-root
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T283 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T282 closed after S16's complete owner disposition. The owner has directed execution in Queue order; T283 is the first current candidate. |
-| Objective | Establish a complete source/hash/consumer inventory for a single canonical OpenNT platform ABI declaration tree. |
-| Non-goals | Header synthesis, include-root moves, runtime behavior, BOP/provider route, Bochs change, adapter implementation or source-body changes. |
-| Reference Baseline | Platform-ABI canonical-union proposal, source policy, current ABI tree and selected OpenNT/OpenNT-4.5 source inputs. |
-| Files And ABI Surface | Platform-ABI inventory/generator/verifier and evidence only. |
+| Identifier Mode | `M0 T283 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T283 S1 met its 29-row inventory and selection gate. The owner has directed Queue-order execution; S2 is the admitted unchanged re-root step. |
+| Objective | Re-root selected platform declarations into one logical `public/`/`private/` tree without changing their text. |
+| Non-goals | Header synthesis, declaration edits, runtime behavior, BOP/provider route, Bochs change, adapter implementation or source-body changes. |
+| Reference Baseline | Platform-ABI canonical-union proposal; S1 candidate inventory and selection ledger; source policy. |
+| Files And ABI Surface | Platform-ABI mirror paths, provenance manifests, README, and live include/build manifests only. |
 | Applicable Rules | Execution, source policy, architecture, coding, document, mirror-component, build-hygiene and recovery-ladder rules. |
-| Verification | Full inventory denominator/count verification, source/hash spot-check, documentation governance and `git diff --check`. |
-| Expected Markers | Every current ABI file and both original candidates have a unique recorded disposition without changing a declaration. |
+| Verification | Exact moved-header hash checks, edition-root sweep of live build inputs, declaration-carrier probes on x86/x64, documentation governance and `git diff --check`. |
+| Expected Markers | One logical ABI root, retained selected/rejected provenance, and no changed declaration body. |
 | Asset Needs | Pinned OpenNT/OpenNT-4.5 inputs, current platform-ABI tree, live include/build manifests and source policy. |
-| Reporting Requirements | Counts by candidate class, every conflict, consumer impact and the next re-rooting boundary. |
-| Stop Conditions | A source origin is unavailable, a conflict requires a hybrid declaration, or a live consumer cannot be identified. |
-| Exit Criteria | Full machine-checkable inventory with no unclassified current ABI input and an explicit selected/rejected record for every conflict. |
+| Reporting Requirements | Moved-header count, hash proof, changed include/build inputs, and any declaration-carrier failure. |
+| Stop Conditions | A move changes a selected hash, a live input still requires an edition-specific root, or a carrier needs a hybrid declaration. |
+| Exit Criteria | All 29 selected headers are canonical-rooted, all live inputs are edition-root-free, and focused x86/x64 declaration-carrier probes pass. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
 | Similar-Issue Sweep | Public/private declarations, edition roots, source-selection manifests and all live include/build inputs. |
 
@@ -156,6 +158,13 @@ No mirror body changed or `54:0F` route was enabled; see the [S15 audit](etc/evi
 **T282 S16 closure and T282 closure:** the full 32-row original COMMAND
 ledger has no ownerless or directly recoverable local source item remaining.
 T282 closes as source-composition work only; see the [S16 audit](etc/evidence/m0-t282-s16-command-local-package-closure-audit-001.md) and [T282 closure](history/m0-t282-closure-20260827.md).
+
+**T283 S1/S2 P1:** the 29-header platform-ABI inventory and selection ledger
+classify 18 one-sided, three byte-identical dual-source and eight conflict
+records. All selected declarations are now hash-proven under one logical
+`source/public` or `source/private` topology; live source/build/test inputs no
+longer name edition roots. Formal x86/x64 Ninja carrier archives passed. See
+the [S2 evidence](etc/evidence/m0-t283-s2-platform-abi-canonical-reroot-001.md).
 
 ### Closed packet reference — M0 T281 S5 — original host-control package disposition
 

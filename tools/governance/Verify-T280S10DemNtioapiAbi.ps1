@@ -11,7 +11,7 @@ foreach ($relative in @(
     'docs/etc/operations/m0-t280-s10-dem-ntioapi-reached-abi-ledger.tsv',
     'docs/etc/operations/m0-t280-s10-dem-ntioapi-abi-evidence-001.md',
     'docs/etc/operations/m0-t280-s10-dem-ntioapi-implementation-plan-001.md',
-    'src/opennt-platform-abi/source/opennt/public/sdk/inc/ntioapi.h'
+    'src/opennt-platform-abi/source/public/sdk/inc/ntioapi.h'
 )) {
     if (-not (Test-Path -LiteralPath (Join-Path $root $relative) -PathType Leaf)) { throw "Missing T280 S10 artifact: $relative" }
 }

@@ -12,12 +12,12 @@ $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $expected = '26B1B3CFF877EE2802AEFF0EEAB04F1DAF7127E63279BCAA990C8B4F97384F2D'
 $source = (Get-FileHash -Algorithm SHA256 -LiteralPath 'O:\repos.external\OpenNT\public\internal\windows\inc\winconp.h').Hash
-$target = (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $root 'src\opennt-platform-abi\source\opennt\public\internal\windows\inc\winconp.h')).Hash
+$target = (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $root 'src\opennt-platform-abi\source\public\internal\windows\inc\winconp.h')).Hash
 if ($source -ne $expected -or $target -ne $expected) {
     throw 'winconp.h is not byte-identical to its pinned original declaration carrier.'
 }
 $forwarder = Get-Content -Raw -LiteralPath (Join-Path $root 'src\adapter-win32\include\winconp.h')
-if ($forwarder -notmatch 'opennt-platform-abi/source/opennt/public/internal/windows/inc/winconp\.h') {
+if ($forwarder -notmatch 'opennt-platform-abi/source/public/internal/windows/inc/winconp\.h') {
     throw 'The adapter winconp declaration forwarder does not select the exact platform-ABI carrier.'
 }
 if ($RequireArchitectureProbes) {

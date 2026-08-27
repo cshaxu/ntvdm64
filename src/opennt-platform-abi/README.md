@@ -6,12 +6,15 @@ provider body, compatibility implementation, or machine access.
 
 ## Layout and provenance
 
-- `source/opennt/...` preserves paths relative to
-  `O:\repos.external\OpenNT`.
-- `source/opennt-4.5-private/...` preserves paths relative to
-  `O:\repos.external\OpenNT-4.5\nt\private`.
+- `source/public/...` and `source/private/...` preserve only logical upstream
+  topology; neither source-tree nor edition names appear in product paths.
+- [T283 S1 selection ledger](../../docs/etc/operations/m0-t283-s1-platform-abi-selection-ledger-001.tsv)
+  records the exact selected source/hash, rejected corresponding candidate and
+  basis for every header. The companion [canonical import manifest](../../docs/etc/operations/m0-t283-s2-platform-abi-canonical-import-manifest-001.tsv)
+  records each selected logical product path.
 - [T274 S2 import manifest](../../docs/etc/operations/m0-t274-s2-platform-abi-import-manifest.tsv)
-  records every imported path, SHA-256, direct MVDM consumer and import action.
+  is retained as the historical initial-import record; T283's canonical
+  manifest is the current selection authority.
 - [T274 S2 direct-include ledger](../../docs/etc/operations/m0-t274-s2-platform-abi-direct-include-ledger.tsv)
   records every scanned direct declaration need and its disposition.
 
