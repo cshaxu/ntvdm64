@@ -24,10 +24,10 @@ authored provider replacement.
 - [S6 closure evidence](../../docs/etc/operations/m0-t274-s6-mvdm-host-package-supply-closure-001.md)
   records full selected-host coverage and verification.
 
-The root currently carries all 1,689 selected paths across 23 original package
-roots: 1,050 topology/header/resource inputs and 639 S6-recovered inputs
-(612 C/C++/assembly provider bodies plus 27 remaining forms). This physical
-layout is not a final runtime-owner claim.
+The root carries the current host-owned selection described by the topology
+manifests. Firmware-owned `softpc.new/base/keymouse` is intentionally rooted
+in `mvdm-softpc-firmware` instead. This physical layout is not a final
+runtime-owner claim.
 
 ## Divergence register
 

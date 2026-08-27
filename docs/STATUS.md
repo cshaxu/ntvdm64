@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T288 S2 — Monitor/keyboard exact-root correction and static composition.**
+**Active: M0 T288 S3 — Monitor VDM_TIB/event boundary recovery.**
 
 T286 is closed. Its final Bochs-core minimization evidence is in
 [the closure record](history/m0-t286-closure-20260827.md). T287 admits the
@@ -10,25 +10,25 @@ queue-head original XMS owner package using a complete source-first plan.
 
 ## Active Packet
 
-### M0 T288 S2 — Monitor/keyboard exact-root correction and static composition
+### M0 T288 S3 — Monitor VDM_TIB/event boundary recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T288 S2`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | S1 source/ABI audit is closed; S2 is the next bounded direct-source recovery rung in the admitted T288 plan. |
-| Objective | Re-root the seven exact original keymouse files into `mvdm-softpc-firmware`, then compose only directly usable original monitor declaration/control carriers as x86/x64 static islands. |
-| Non-goals | No monitor/BOP route enablement, kernel VDM or CSRSS recreation, generic keyboard controller/IRQ/input shell, second CPU executor, host-pointer conversion, new mapping manager, or `src.old` use. |
-| Reference Baseline | [T288 plan](etc/operations/m0-t288-monitor-keyboard-ivt-recovery-plan-001.md), [S1 audit](etc/evidence/m0-t288-s1-monitor-source-abi-audit-001.md), source policy and mapping-manager rule. |
-| Files And ABI Surface | Exact `softpc.new/base/keymouse` root, direct declaration/control carriers selected by S1, formal Ninja manifests and static archive inputs. |
+| Identifier Mode | `M0 T288 S3`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | S2 root/static-composition closure is recorded; S3 is the next bounded recovery rung in the admitted T288 plan. |
+| Objective | Recover only the smallest source-shaped copied monitor VDM_TIB/event and fixed-frame boundary proven by S1/S2. |
+| Non-goals | No monitor/BOP route enablement, serial SIM32 transport, kernel VDM or CSRSS recreation, generic keyboard controller/IRQ/input shell, second CPU executor, host-pointer conversion, new mapping manager, or `src.old` use. |
+| Reference Baseline | [T288 plan](etc/operations/m0-t288-monitor-keyboard-ivt-recovery-plan-001.md), [S1 audit](etc/evidence/m0-t288-s1-monitor-source-abi-audit-001.md), [S2 evidence](etc/evidence/m0-t288-s2-monitor-root-and-static-composition-001.md), source policy and mapping-manager rule. |
+| Files And ABI Surface | Original `v86`/`ieuvddex` declaration and VDM_TIB/event forms; `adapter-mvdm-host-out/monitor`, session-bound copied records and formal fixtures. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
-| Verification | Exact source hashes before/after re-root, formal x86/x64 static build manifests, unresolved-symbol ledger, documentation governance and `git diff --check`. |
-| Expected Markers | Seven pure renames preserve hashes; each selected direct carrier retains original body/form; no host runtime route, old tree or source-derived replacement enters the graph. |
-| Asset Needs | S1 identity/interface ledgers, canonical roots, MSVC/Ninja and current component exception registers. |
-| Reporting Requirements | Rename identity proof, selected original unit/build form, compile/link result, every unresolved symbol/failure owner, and explicit excluded translation units. |
-| Stop Conditions | A source body requires semantic modification, an adapter/new mapper is proposed without re-admission, a second CPU/product shell is selected, or a non-direct carrier is silently linked. |
-| Exit Criteria | The keymouse root is corrected and a reproducible direct-source static island either passes or has a complete source-proven unresolved ABI ledger for S3. |
+| Verification | Original layout/calling-form audit; focused x86/x64 copied-frame validation; ownership/forbidden-dependency scans; documentation governance and `git diff --check`. |
+| Expected Markers | One source-shaped copied boundary is explicit; no native guest pointer, selector, service, CPU object, serial transport or debugger behavior crosses it. |
+| Asset Needs | S1/S2 ledgers, canonical roots, existing session mapping rule and current adapter exception registers. |
+| Reporting Requirements | Original declaration/caller form, copied-record layout, every excluded function group and focused x86/x64 result. |
+| Stop Conditions | A source body needs a semantic rewrite, a direct Bochs call or new mapper is proposed, a second CPU/product shell is selected, or a non-direct carrier is silently linked. |
+| Exit Criteria | The smallest copied VDM_TIB/event boundary is source-shaped and locally verified, or each necessary original interface has a complete source-proven unresolved ledger for S4. |
 | Original Owner Request | “单人双角色模式，按照QUEUE.md规定的顺序，将全部队列任务执行完毕。” |
-| Similar-Issue Sweep | All keymouse files, source/hash provenance, original sources build forms, x86/x64 declarations, static-library inputs, unresolved external groups and forbidden historical shells. |
+| Similar-Issue Sweep | VDM_TIB layouts, copied event/context records, session binding, historical monitor globals, `ieuvddex` consumers, x86/x64 forms, forbidden direct pointers and forbidden historical shells. |
 
 **T288 S1 closure:** the reproducible union ledger records 78 selected source
 files, all exact in both canonical OpenNT roots. It identifies the seven exact

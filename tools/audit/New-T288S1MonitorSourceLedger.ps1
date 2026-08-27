@@ -25,7 +25,7 @@ $packages = @(
     [ordered]@{ id = 'SIM32'; component = 'mvdm-host'; target = 'mvdm-host'; relative = 'sim32'; source = 'base/mvdm/sim32'; source45 = 'nt/private/mvdm/sim32' },
     [ordered]@{ id = 'V86'; component = 'mvdm-host'; target = 'mvdm-host'; relative = 'v86'; source = 'base/mvdm/v86'; source45 = 'nt/private/mvdm/v86' },
     [ordered]@{ id = 'IEUVDDEx'; component = 'mvdm-host'; target = 'mvdm-host'; relative = 'ieuvddex'; source = 'base/mvdm/ieuvddex'; source45 = 'nt/private/mvdm/ieuvddex' },
-    [ordered]@{ id = 'KEYMOUSE'; component = 'mvdm-host'; target = 'mvdm-softpc-firmware'; relative = 'softpc.new/base/keymouse'; source = 'base/mvdm/softpc.new/base/keymouse'; source45 = 'nt/private/mvdm/softpc.new/base/keymouse' }
+    [ordered]@{ id = 'KEYMOUSE'; component = 'mvdm-softpc-firmware'; target = 'mvdm-softpc-firmware'; relative = 'softpc.new/base/keymouse'; source = 'base/mvdm/softpc.new/base/keymouse'; source45 = 'nt/private/mvdm/softpc.new/base/keymouse' }
 )
 
 $rows = [System.Collections.Generic.List[object]]::new()

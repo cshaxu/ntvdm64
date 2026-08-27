@@ -1,0 +1,6 @@
+candidate_id	original_source	attempted_rung	x86_result	x64_result	disposition	next_owner
+T288-S2-01	sim32/sim32.h	direct exact declaration carrier	pass	pass	original declaration island only	T288 S3 copied VDM_TIB/event boundary
+T288-S2-02	sim32/sim32.c	direct exact translation-unit syntax survey	original source failure	original source failure	not directly composable; retains source evidence only	T288 S3 monitor boundary and later WOW/broker package
+T288-S2-03	v86/monitor/i386/{monitor,sas,int,thread}.c	not selected before monitor ABI boundary	deferred	deferred	requires S3/S4 source-proven VDM_TIB, event and SoftPC/SAS carriers	T288 S3/S4
+T288-S2-04	ieuvddex/i386/vdmtib.c	not selected before VDM_TIB declaration boundary	deferred	deferred	requires source-proven VDM_TIB and debugger callback disposition	T288 S3 and later VDD/debugger package
+T288-S2-05	softpc.new/base/keymouse/*	exact root correction only	not compiled	not compiled	seven exact firmware-adjacent mirrors moved with no enabled host route	T288 S5
