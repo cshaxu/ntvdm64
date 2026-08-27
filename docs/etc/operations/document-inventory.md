@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2805 |
+| Documentation records | 2806 |
 | --- | --- |
-| Generated UTC | 2026-08-27T13:27:07Z |
+| Generated UTC | 2026-08-27T13:32:00Z |
 
 ## Entries
 
@@ -389,6 +389,7 @@ content-divergent entries.
 | etc/evidence/m0-t290-s3-p3-redirector-named-pipe-source-parse-001.md | indexed supporting material | 50052332cd81a10a35b28b259a963bcda35f54cb365c261f80d244e86430f733 |
 | etc/evidence/m0-t290-s3-p4-redirector-handle-binding-001.md | indexed supporting material | bf2a8d317dc2b36b25629b132283a161710083d985783e021b84c2b284758e8a |
 | etc/evidence/m0-t290-s3-p5-vrinit-vdd-failure-001.md | indexed supporting material | 3772c9413879a627045e3b7d1ea2999fb2363c2b90750f9d064d8ba5fe578eec |
+| etc/evidence/m0-t290-s3-p6-sync-named-pipe-composition-001.md | indexed supporting material | 34621ba921ebc9a668261a4fde6af488e5767665f9821ae43f44c3fe463b54c1 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -953,7 +954,7 @@ content-divergent entries.
 | etc/operations/m0-t290-redirector-owner-package-recovery-plan-001.md | indexed supporting material | 00fdb7f5303f8917b07770b70d6eb78e5cb9a4e3b8c8c44f0e4b13a364d1eb2d |
 | etc/operations/m0-t290-s1-redirector-path-interface-ledger.tsv | indexed supporting material | 22d7fc81a17fc45c478edbabd02ab6b72b6ebcf7075968c07589fe1b6b0a1960 |
 | etc/operations/m0-t290-s1-redirector-service-abi-ledger.tsv | indexed supporting material | aaf7149ddb4229ec823666330dbcb82020df9b77a94bc9c5b6e9b3a7054599ee |
-| etc/operations/m0-t290-s2-redirector-external-interface-recovery-ledger.tsv | indexed supporting material | ca575e1d55993c29d071d39ece16e955518e67a90166f3a559af20ac92fc1c1d |
+| etc/operations/m0-t290-s2-redirector-external-interface-recovery-ledger.tsv | indexed supporting material | c273d3a692da80b0e8b2beb8b5e556e54705b053fad6bbd15f17b6f0744d72c8 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
