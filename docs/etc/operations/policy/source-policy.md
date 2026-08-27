@@ -22,9 +22,9 @@ mirror only after complete-package audit proves that it has a clear original
 host-service boundary and is actually required by a selected MVDM caller.
 Every such file, dependency interface, build profile and final disposition is
 added to the same host tracker that covers the 1,689 MVDM paths. A package-
-specific `adapter-opennt-host` may supply a same-shaped modern binding only
-after the imported source identifies a private host interface that cannot be
-directly composed; it must not become a generic compatibility layer. The
+specific `adapter-opennt-host` supplies a same-shaped modern binding only for
+the private host interfaces identified in an imported package; it must not
+become a generic compatibility layer. The
 shared declaration-only `mvdm-platform-abi` remains separate unless a tracked
 declaration is proved private to one admitted `opennt-host` package.
 Bochs 2.6, from `O:\repos.external\bochs-2.6-compat\bochs-2.6`, is the

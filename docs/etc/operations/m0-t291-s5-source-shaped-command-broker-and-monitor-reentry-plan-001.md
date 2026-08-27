@@ -30,10 +30,9 @@ callback execution.
    declaration-only shared mirror unless a selected BaseSrv declaration is
    demonstrably private to `opennt-host`.
 4. Recover the applicable one-session COMMAND and WOW consumer arbitration
-   through the imported source. A BaseSrv-specific `adapter-opennt-host` may
-   exist only where the original server calls a CSR/private-NT operation that
-   cannot be composed directly; it preserves that operation's original shape
-   and is consumed only by `opennt-host`. A bounded `broker`
+   through the imported source. The BaseSrv-specific `adapter-opennt-host`
+   preserves an original server CSR/private-NT operation only where it cannot
+   be composed directly, and is consumed only by `opennt-host`. A bounded `broker`
    record/notification seam is permitted only behind such an identified
    original server dependency; it may not become a generic operation
    dispatcher. Every unavailable WOWEXEC/CSR/private-server behavior retains

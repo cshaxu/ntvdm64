@@ -19,7 +19,7 @@ its whole-package source/ABI audit and now admits its first dependency group.
 | Objective | Recover the applicable source-shaped `GetNextVDMCommand` producer/consumer, wait/wake and monitor re-entry contracts by first reusing the original OpenNT BaseSrv/client package, without conflating WOW callbacks with command acquisition. |
 | Non-goals | No new BaseSrv/CSRSS clone, fast WOW assembler, `CurrentMonitorTeb`, global current task/session, second CPU executor, raw pointer/HANDLE ABI, selector enablement, Bochs change or `src.old` input. |
 | Reference Baseline | [S4 closure](etc/evidence/m0-t291-s4-control-plane-separation-closure-001.md), [S5 plan](etc/operations/m0-t291-s5-source-shaped-command-broker-and-monitor-reentry-plan-001.md), [P2 source-package audit](etc/evidence/m0-t291-s5-p2-basesrv-source-package-audit-001.md), original `vdmapi.h`, BaseSrv, COMMAND/WOW/monitor call sites and source policy. |
-| Files And ABI Surface | Selected `mvdm-host` COMMAND/WOW/monitor source, original OpenNT BaseSrv/client package proposed for `opennt-host`, `mvdm-platform-abi`, `adapter-mvdm-host-out/{monitor,softpc,wow,win32}`, a possible BaseSrv-specific `adapter-opennt-host`, `broker`, `session`, `app`, focused fixtures and source/ABI ledgers. |
+| Files And ABI Surface | Selected `mvdm-host` COMMAND/WOW/monitor source, imported original OpenNT BaseSrv/client package in `opennt-host`, `mvdm-platform-abi`, `adapter-mvdm-host-out/{monitor,softpc,wow,win32}`, BaseSrv-specific `adapter-opennt-host`, `broker`, `session`, `app`, focused fixtures and source/ABI ledgers. |
 | Applicable Rules | Architecture, coding, execution, source policy, mirror/overlay standard and mapping-manager rule. |
 | Verification | Source call-order/failure ledger; x86/x64 producer/consumer, unavailable and lifecycle tests; negative scan proving no generic route or cross-plane fallback. |
 | Expected Markers | Original `VDMINFO` ownership/order retained, typed command and monitor owners remain distinct, copied event/queue records only where source requires them, and each re-entry group has an owner-specific outcome. |
@@ -48,6 +48,13 @@ and [P2 source-package audit](etc/evidence/m0-t291-s5-p2-basesrv-source-package-
 the shared MVDM/OpenNT host tracker. It remains unlinked pending the named
 CSR/private-host binding audit; see the
 [P3 import evidence](etc/evidence/m0-t291-s5-p3-basesrv-source-import-001.md).
+
+**T291 S5 P4 admission:** the imported source proves that a distinct,
+package-private `adapter-opennt-host` is required for NT4 CSR capture/dispatch,
+server process context and event-pair mechanics. Its six-group source ledger
+separates those boundaries from existing RTL, WOW/PIF and full Base-server
+concerns before any binding body is written; see the
+[P4 ledger](etc/operations/m0-t291-s5-p4-basesrv-interface-composition-ledger-001.md).
 
 **T291 S3 closure:** the bounded pointer scope, numeric task projection and
 source-shaped non-fast callback mechanics passed their complete formal x86/x64

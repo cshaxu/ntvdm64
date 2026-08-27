@@ -16,6 +16,7 @@ src/
   adapter-bochs/
   adapter-mvdm-host-in/
   adapter-mvdm-host-out/
+  adapter-opennt-host/
   session/
   broker/
   app/
@@ -61,7 +62,7 @@ material and never a source, build, link or runtime input.
   interface families `win32`, `softpc`, `monitor`, `redir`, `wow`, `vdd` and
   `debugger`; a missing historical product interface is assigned to one of
   those families before a mirror source is changed to avoid it.
-- `adapter-opennt-host`, when admitted, contains only the same-shaped
+- `adapter-opennt-host` contains only the same-shaped
   BaseSrv/private-host interface family required by its `opennt-host` caller.
   It cannot be used by `mvdm-host` directly or become a generic compatibility
   root.

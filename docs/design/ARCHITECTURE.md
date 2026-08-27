@@ -8,7 +8,7 @@ recreating a private NT subsystem, or requiring installation-time host
 mutation. Public Win32 APIs and ordinary host resources remain valid integration
 mechanisms.
 
-The product has fifteen production source components. A source file has one
+The product has sixteen production source components. A source file has one
 owner. Original mirrors preserve upstream package identity, adapters preserve
 historical interface shape while translating mechanics, and project components
 own composition, session lifetime and cross-process coordination.
@@ -64,6 +64,9 @@ own composition, session lifetime and cross-process coordination.
   fails deterministically. The remaining families preserve their named
   Redirector, WOW, VDD and debugger external boundaries without importing
   provider policy or Bochs objects.
+- `adapter-opennt-host`: the package-private OpenNT BaseSrv host-interface
+  adapter. It owns only same-shaped substitutions for reached CSR/private-host
+  calls from `opennt-host`; it has no MVDM, guest, BOP or Bochs meaning.
 
 ### Project components
 
@@ -134,11 +137,10 @@ provider semantics. A missing interface is first assigned to this inventory,
 then recovered with original source evidence, rather than edited out of an
 OpenNT mirror.
 
-`adapter-opennt-host` is created only when a complete original `opennt-host`
-package reaches a host interface private to that package (for example a
-BaseSrv CSR operation). It preserves the original spelling, ABI shape and
-observable order for that one interface family. It is not a second generic
-Win32 shim and is consumed only by its owning `opennt-host` package.
+`adapter-opennt-host` preserves the original spelling, ABI shape and observable
+order for the reached BaseSrv/private-host interface family. It is not a
+second generic Win32 shim and is consumed only by its owning `opennt-host`
+package.
 
 `mvdm-support` has no automatic inbound runtime edge: a host package
 may use it only after the package/symbol tracker records the original consumer,
