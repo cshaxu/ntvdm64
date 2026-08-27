@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2644 |
+| Documentation records | 2646 |
 | --- | --- |
-| Generated UTC | 2026-08-27T02:20:52Z |
+| Generated UTC | 2026-08-27T02:22:46Z |
 
 ## Entries
 
@@ -785,7 +785,9 @@ content-divergent entries.
 | etc/operations/m0-t280-s1-host-control-dem-workset-audit-001.md | indexed supporting material | 784c0bf2fdf1272d9a62c65b590c21b5040f55a33f4f52a68013bd9dd19b9388 |
 | etc/operations/m0-t280-s1-host-control-dem-workset-ledger.tsv | indexed supporting material | c7192301f8681aa5735e4e9520634db87139e55c318a2e23eae003ac05676a6d |
 | etc/operations/m0-t280-s1-host-control-dem-workset-plan-001.md | indexed supporting material | 720c7cbb8cce103d905c673861bf84629acf4e1a85d373bffa7a12f62ef79784 |
-| etc/operations/m0-t280-s20-dem-persistent-guest-location-plan-001.md | indexed supporting material | 71dd6ee05be393b56838e951c036b7f3418a4fd0b052695a02a32a522b0fea88 |
+| etc/operations/m0-t280-s20-dem-persistent-guest-location-ledger-001.tsv | indexed supporting material | acbd7ae0171a421fd1e4de8312f86f6045c041e6fb1a7949f6d9bf5d02f308cc |
+| etc/operations/m0-t280-s20-dem-persistent-guest-location-plan-001.md | indexed supporting material | a79effb77a5dc6dcb23552c538ef65eaf22b15e5555469e224b8c7785b8f593b |
+| etc/operations/m0-t280-s20-p1-persistent-location-sweep-001.md | indexed supporting material | c73ac538ad5de0fca7f89d989d2f9c18135b72e23a2f833a6c66a1bc9002f4a8 |
 | etc/operations/m0-t280-s2-ingress-machine-facade-ledger.tsv | indexed supporting material | 0136d94fe4a972222341035d108e4550e91b3cc223e56e27bffc3ffbe42854e5 |
 | etc/operations/m0-t280-s2-ingress-machine-facade-plan-001.md | indexed supporting material | 0237ce42a5b3a8b4f00b5a461992c83b3ab05db26601ff82d818e740b7b18490 |
 | etc/operations/m0-t280-s3-host-static-data-build-evidence-001.md | indexed supporting material | 529049bc0318f43d2db7c94da2cc0168a580938e04dad89beef816077b00ca50 |
