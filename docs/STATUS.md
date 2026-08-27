@@ -4,13 +4,23 @@
 
 **No active M/T/S packet.**
 
-M0 T299 is closed by S3. Every raw first-degree call is now a concrete
-original implementation, a public-system provider or a per-call missing
-original definition; all second-degree candidates have concrete callers.
+M0 T299 is closed by S4. First degree is now the reachable closure over the
+physical original files entered by zero-degree calls; a same-file or other
+already selected-file definition remains first-degree. Every direct no-body
+call remains individual missing-definition evidence.
 
 ## Active Packet
 
-### M0 T299 closure — missing-definition normalization
+### M0 T299 S4 closure — physical translation-unit closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T299 S4`, ordinary mode with single-person dual-role implementation and review. |
+| Result | 152 physical first-degree definitions form the selected-file closure; all 762 second-degree rows leave that file set. |
+| Evidence | [S4 closure](etc/evidence/m0-t299-s4-first-degree-translation-unit-closure-001.md) and [plan](etc/operations/m0-t299-s4-first-degree-translation-unit-closure-plan-001.md). |
+| Next Admission | Public Win32/CRT source-shaped binding and facade recovery may consume the frozen per-call and per-definition ledgers. |
+
+### M0 T299 S3 closure — missing-definition normalization
 
 | Field | Record |
 | --- | --- |

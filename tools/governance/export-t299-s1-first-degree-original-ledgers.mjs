@@ -67,7 +67,7 @@ for (const item of interfaces) {
   scopesByInterfaceId.set(item.canonical_interface_id, [...packageRoots].sort());
 }
 const sourceInterfaces = interfaces.filter((row) => !publicInterfaces.includes(row) && scopesByInterfaceId.get(row.canonical_interface_id).length);
-const definitions = [];
+let definitions = [];
 const fileSymbols = new Map();
 for (const sourceRoot of sourceRoots) for (const [packageRoot, symbols] of [...new Map(sourceInterfaces.flatMap((item) => scopesByInterfaceId.get(item.canonical_interface_id).map((packageRoot) => [packageRoot, []]))).entries()]) {
   const packageSymbols = sourceInterfaces.filter((item) => scopesByInterfaceId.get(item.canonical_interface_id).includes(packageRoot)).map((item) => item.callee_spelling);
@@ -112,6 +112,58 @@ for (const sourceRoot of sourceRoots) for (const fileName of sourceFilesFor(fall
   }
 }
 
+// One degree is the closure over the physical translation units entered by
+// zero-degree calls. A same-file helper remains first-degree, as does an
+// externally-linkable definition reached in any other already selected
+// first-degree unit. This prevents false second-degree edges caused by source
+// file factoring or by calls among directly reached provider files.
+const directDefinitions = definitions;
+const directIdentity = (definition) => `${definition.source_root}\u0000${definition.source_path}\u0000${definition.source_sha256}\u0000${definition.source_line}\u0000${definition.symbol}`;
+const parseAllDefinitions = (fileName) => {
+  const raw = fs.readFileSync(fileName, 'utf8'); const masked = maskC(raw);
+  const macroNames = new Set([...raw.matchAll(/^\s*#\s*define\s+([A-Za-z_]\w*)\b/gm)].map((match) => match[1]));
+  const location = originalLocation(fileName); const sourceSha = sha256(fileName); const found = [];
+  for (const match of masked.matchAll(/\b([A-Za-z_]\w*)\s*\(/g)) {
+    const symbol = match[1]; if (macroNames.has(symbol)) continue;
+    const open = masked.indexOf('(', match.index + symbol.length); const close = matching(masked, open, '(', ')');
+    if (close < 0 || !isDefinition(masked, match.index, close)) continue;
+    const tail = masked.slice(close + 1); const braceDelta = tail.indexOf('{'); if (braceDelta < 0) continue;
+    const bodyOpen = close + 1 + braceDelta; const bodyClose = matching(masked, bodyOpen, '{', '}'); if (bodyClose < 0) continue;
+    const signature = raw.slice(raw.lastIndexOf('\n', match.index) + 1, bodyOpen).replace(/\s+/g, ' ').trim().slice(0, 512);
+    found.push({ symbol, source_root: location.source_root, source_path: location.source_path, source_sha256: sourceSha, source_line: String(lineAt(raw, match.index)), signature_evidence: signature, linkage: /\bstatic\b/.test(signature) ? 'translation-unit-local' : 'externally-linkable', body: masked.slice(bodyOpen + 1, bodyClose), body_offset: bodyOpen + 1, masked });
+  }
+  return found;
+};
+const physicalFile = (definition) => `${definition.source_root}\u0000${definition.source_path}\u0000${definition.source_sha256}`;
+const selectedFiles = new Map();
+for (const definition of directDefinitions) selectedFiles.set(physicalFile(definition), path.join(definition.source_root, definition.source_path));
+const definitionsInSelectedFiles = [...selectedFiles.values()].flatMap(parseAllDefinitions);
+const definitionsByPhysicalSymbol = new Map();
+for (const definition of definitionsInSelectedFiles) {
+  const key = `${physicalFile(definition)}\u0000${definition.symbol}`;
+  definitionsByPhysicalSymbol.set(key, [...(definitionsByPhysicalSymbol.get(key) || []), definition]);
+}
+const closedDefinitions = []; const closedIds = new Set(); const originsByIdentity = new Map();
+const addClosed = (definition, reason) => {
+  const id = directIdentity(definition); const origins = originsByIdentity.get(id) || new Set(); origins.add(reason); originsByIdentity.set(id, origins);
+  if (closedIds.has(id)) return;
+  closedIds.add(id); closedDefinitions.push(definition);
+  for (const match of definition.body.matchAll(/\b([A-Za-z_]\w*)\s*\(/g)) {
+    const callee = match[1]; if (keywords.has(callee.toLowerCase()) || /^[A-Z][A-Z0-9_]*$/.test(callee)) continue;
+    for (const local of definitionsByPhysicalSymbol.get(`${physicalFile(definition)}\u0000${callee}`) || []) addClosed(local, 'same-translation-unit-helper');
+    // A call may cross from one selected first-degree translation unit to an
+    // externally-linkable definition in another selected first-degree unit.
+    // It remains first degree: the frontier has not crossed to a new file.
+    for (const target of definitionsInSelectedFiles.filter((item) => item.symbol === callee && physicalFile(item) !== physicalFile(definition) && item.linkage === 'externally-linkable')) addClosed(target, 'selected-translation-unit-cross-call');
+  }
+};
+for (const direct of directDefinitions) {
+  const sameFile = definitionsByPhysicalSymbol.get(`${physicalFile(direct)}\u0000${direct.symbol}`) || [direct];
+  for (const definition of sameFile.filter((item) => directIdentity(item) === directIdentity(direct))) addClosed(definition, 'direct-zero-degree-call');
+}
+definitions = closedDefinitions;
+for (const definition of definitions) definition.first_degree_origin = [...originsByIdentity.get(directIdentity(definition))].sort().join(';');
+
 // A source location is an implementation identity.  Even byte-identical
 // cross-tree/file copies stay distinct: this audit must never merge functions
 // merely because their spelling, bytes or signature coincide.
@@ -121,13 +173,14 @@ for (const definition of definitions) {
 }
 definitions.sort((left, right) => left.symbol.localeCompare(right.symbol) || left.source_path.localeCompare(right.source_path) || Number(left.source_line) - Number(right.source_line));
 definitions.forEach((definition, index) => { definition.definition_id = `MVDM-FIRST-DEFINITION-${String(index + 1).padStart(6, '0')}`; });
-const bySymbol = new Map(); for (const definition of definitions) bySymbol.set(definition.symbol, [...(bySymbol.get(definition.symbol) || []), definition]);
+const directBySymbol = new Map(); for (const definition of directDefinitions) directBySymbol.set(definition.symbol, [...(directBySymbol.get(definition.symbol) || []), definition]);
+const firstCrossFileBySymbol = new Map(); for (const definition of definitions.filter((item) => item.linkage === 'externally-linkable')) firstCrossFileBySymbol.set(definition.symbol, [...(firstCrossFileBySymbol.get(definition.symbol) || []), definition]);
 const callImplementationRows = [];
 for (const rawCall of rawCalls) {
   if (canonicalByRawId.get(rawCall.candidate_id)?.canonical_resolution !== 'remains-first-degree-external-interface') continue;
   const frontier = frontierByRawId.get(rawCall.candidate_id);
   const allowed = new Set((frontier?.allowed_package_roots || '').split(';').filter(Boolean));
-  const allCandidates = bySymbol.get(rawCall.callee_spelling) || [];
+  const allCandidates = directBySymbol.get(rawCall.callee_spelling) || [];
   const scopedCandidates = allCandidates.filter((definition) => !allowed.size || [...allowed].some((packageRoot) => definition.source_path.startsWith(`${packageRoot}/`)));
   const candidates = scopedCandidates.length ? scopedCandidates : allCandidates;
   if (!candidates.length) {
@@ -147,11 +200,12 @@ for (const definition of definitions) {
     // second-degree function candidate. Mixed-case names remain candidates
     // until their next BFS audit proves function, macro or other form.
     if (/^[A-Z][A-Z0-9_]*$/.test(callee)) { macroExpression = true; calls.push(`${callee}:macro-expression`); continue; }
+    if ((definitionsByPhysicalSymbol.get(`${physicalFile(definition)}\u0000${callee}`) || []).length) { calls.push(`${callee}:first-local`); continue; }
     if (zeroNames.has(callee)) { calls.push(`${callee}:zero`); continue; }
-    if (bySymbol.has(callee)) { calls.push(`${callee}:first`); continue; }
+    if (firstCrossFileBySymbol.has(callee)) { calls.push(`${callee}:first-known-cross-file`); continue; }
     const sourceLine = lineAt(definition.masked, definition.body_offset + match.index);
     const candidateId = `MVDM-SECOND-CANDIDATE-${String(second.length + 1).padStart(6, '0')}`;
-    second.push({ candidate_id: candidateId, caller_definition_id: definition.definition_id, caller_source_root: definition.source_root, caller_source_path: definition.source_path, caller_source_sha256: definition.source_sha256, caller_source_line: String(sourceLine), caller_symbol: definition.symbol, callee_spelling: callee, call_form: 'direct-named-call', boundary: 'Initial second-degree candidate only; T299 does not inspect this callee body.' });
+    second.push({ candidate_id: candidateId, caller_definition_id: definition.definition_id, caller_source_root: definition.source_root, caller_source_path: definition.source_path, caller_source_sha256: definition.source_sha256, caller_source_line: String(sourceLine), caller_symbol: definition.symbol, callee_spelling: callee, call_form: 'direct-named-call', boundary: 'Cross-translation-unit second-degree candidate only; T299 does not inspect this callee body.' });
     calls.push(`${callee}:${candidateId}`);
   }
   definition.leaf_status = calls.length === 0 ? 'leaf' : 'non-leaf';
@@ -159,18 +213,23 @@ for (const definition of definitions) {
   definition.direct_call_summary = calls.join(';');
   delete definition.body; delete definition.body_offset; delete definition.masked;
 }
+for (const candidate of second) {
+  if ((definitionsByPhysicalSymbol.get(`${candidate.caller_source_root}\u0000${candidate.caller_source_path}\u0000${candidate.caller_source_sha256}\u0000${candidate.callee_spelling}`) || []).length || firstCrossFileBySymbol.has(candidate.callee_spelling)) {
+    throw new Error(`Second-degree candidate resolves in selected first-degree translation units: ${candidate.candidate_id}`);
+  }
+}
 
 const resolution = interfaces.map((item) => {
   const rawIds = item.raw_candidate_ids.split(';').filter(Boolean); const callers = rawIds.map((id) => rawById.get(id)).filter(Boolean);
   if (item.initial_first_degree_statuses.split(';').includes('public-modern-api-leaf-candidate')) return { canonical_interface_id: item.canonical_interface_id, callee_spelling: item.callee_spelling, raw_candidate_ids: item.raw_candidate_ids, raw_call_site_count: item.raw_call_site_count, resolution: 'public-win32-or-crt-leaf', original_definition_ids: '', original_definition_identities: '', basis: 'T298 public Win32/CRT leaf classification; no original body search is required.' };
-  const matches = bySymbol.get(item.callee_spelling) || [];
+  const matches = directBySymbol.get(item.callee_spelling) || [];
   const scopes = scopesByInterfaceId.get(item.canonical_interface_id) || [];
   const terminal = !scopes.length;
   return { canonical_interface_id: item.canonical_interface_id, callee_spelling: item.callee_spelling, raw_candidate_ids: item.raw_candidate_ids, raw_call_site_count: item.raw_call_site_count, resolution: matches.length ? (matches.length === 1 ? 'original-definition-found' : 'original-definition-variant-family') : terminal ? 'original-boundary-no-body-search' : 'no-original-c-cpp-definition-found-in-approved-trees', original_definition_ids: matches.map((match) => match.definition_id).join(';'), original_definition_identities: matches.map((match) => `${match.source_aliases}:${match.source_line}@${match.source_sha256}`).join(';'), basis: matches.length ? (fallbackSymbols.includes(item.callee_spelling) ? `Include-constrained package roots (${scopes.join(';')}) had no body; every approved-tree candidate is retained without selecting a provider.` : `Parsed only from original include-constrained package roots: ${scopes.join(';')}. Each source-root/path/hash/definition-line implementation remains distinct, even when byte-identical.`) : terminal ? 'All original raw call sites terminate at a public/private/kernel/not-host-runtime boundary; T299 does not search beyond that boundary.' : `No C/C++ body definition was found in either approved tree after include-constrained roots (${scopes.join(';')}) and the discovery fallback.` };
 });
 if (resolution.length !== interfaces.length) throw new Error('Lost canonical first-degree interface during resolution');
-writeTsv('mvdm-host-first-degree-original-definition-ledger.tsv', definitions, ['definition_id', 'symbol', 'source_root', 'source_path', 'source_aliases', 'provenance_roots', 'source_sha256', 'source_line', 'signature_evidence', 'leaf_status', 'leaf_basis', 'direct_call_summary']);
+writeTsv('mvdm-host-first-degree-original-definition-ledger.tsv', definitions, ['definition_id', 'symbol', 'first_degree_origin', 'linkage', 'source_root', 'source_path', 'source_aliases', 'provenance_roots', 'source_sha256', 'source_line', 'signature_evidence', 'leaf_status', 'leaf_basis', 'direct_call_summary']);
 writeTsv('mvdm-host-first-degree-original-resolution-ledger.tsv', resolution, ['canonical_interface_id', 'callee_spelling', 'raw_candidate_ids', 'raw_call_site_count', 'resolution', 'original_definition_ids', 'original_definition_identities', 'basis']);
 writeTsv('mvdm-host-first-degree-call-implementation-ledger.tsv', callImplementationRows, ['raw_candidate_id', 'caller_definition_id', 'caller_source_path', 'caller_source_sha256', 'caller_source_line', 'callee_spelling', 'implementation_definition_id', 'implementation_source_identity', 'relation', 'missing_basis']);
 writeTsv('mvdm-host-second-degree-initial-candidate-ledger.tsv', second, ['candidate_id', 'caller_definition_id', 'caller_source_root', 'caller_source_path', 'caller_source_sha256', 'caller_source_line', 'caller_symbol', 'callee_spelling', 'call_form', 'boundary']);
-console.log(`canonical interfaces=${interfaces.length}; public leaves=${publicInterfaces.length}; include-constrained source interfaces=${sourceInterfaces.length}; original definitions=${definitions.length}; original source files=${fileSymbols.size}; second-degree initial candidates=${second.length}`);
+console.log(`canonical interfaces=${interfaces.length}; public leaves=${publicInterfaces.length}; include-constrained source interfaces=${sourceInterfaces.length}; direct original definitions=${directDefinitions.length}; first-degree translation-unit closure=${definitions.length}; first-degree source files=${selectedFiles.size}; second-degree cross-file candidates=${second.length}`);
