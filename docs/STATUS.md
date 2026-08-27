@@ -2,7 +2,9 @@
 
 ## Current Work
 
-**No M/T/S packet is active — M0 T291 is closed for owner review.**
+**No active M/T/S packet.**
+
+M0 T291 is closed for owner review.
 
 M0 T290 is closed. Its final Redirector package boundary is in
 [the closure record](history/m0-t290-closure-20260827.md). M0 T291 closes the
