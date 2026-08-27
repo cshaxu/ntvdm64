@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2769 |
+| Documentation records | 2770 |
 | --- | --- |
-| Generated UTC | 2026-08-27T09:56:52Z |
+| Generated UTC | 2026-08-27T09:59:45Z |
 
 ## Entries
 
@@ -365,7 +365,7 @@ content-divergent entries.
 | etc/evidence/m0-t288-s1-monitor-source-abi-audit-001.md | indexed supporting material | e1bfe8825296913712a3061e545a894118c6f9564567e8feab9491cbe608c693 |
 | etc/evidence/m0-t288-s2-monitor-root-and-static-composition-001.md | indexed supporting material | 6ff29137781bea8bd7efbc7fb2e86c5000ececc47c581c7d2e1e9ee659fac868 |
 | etc/evidence/m0-t288-s3-monitor-frame-recovery-001.md | indexed supporting material | 877b6d6975d90ec4f527f156730b9ab0de1458ec3e83adc44305d6911d9d9150 |
-| etc/evidence/m0-t288-s4-softpc-sas-mechanics-001.md | indexed supporting material | d39eb9f83705977cfbda74b17dbbad74c85375894d0b566842cc5594ce7cdb74 |
+| etc/evidence/m0-t288-s4-softpc-sas-mechanics-001.md | indexed supporting material | 263b4432e897c7d3a9f3a4d665350e1d044e4541f01a25daa7e329950a28b6fb |
 | etc/evidence/m0-t288-s5-keyboard-ivt-lifecycle-001.md | indexed supporting material | 05fbf01ad6d23c95fc7b23e56689fcd09f970a883cd762793674b53e6fe8ccc5 |
 | etc/evidence/m0-t288-s6-monitor-keyboard-xms-matrix-001.md | indexed supporting material | 04e75e2fe6d9b4705059ac38cb02c6bc0e4431d4008484ab3b53619fb327fadb |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
@@ -2498,6 +2498,7 @@ content-divergent entries.
 | history/m0-t284-closure-20260826.md | closed task history | 8c24fbdf7e4054da4c10883025071131ecdada43e8a7a1e4f10f742dd3a5ebb7 |
 | history/m0-t285-closure-20260826.md | closed task history | 50821759e2c35a7cd1b1ecc1d04f2873bcf59217f6e858ea239aa01070a26766 |
 | history/m0-t286-closure-20260827.md | closed task history | 52ef7913ec93432b4d2a7017b3ab95e70ed48eefb2aff30d784a140ce5e5b430 |
+| history/m0-t288-closure-20260827.md | closed task history | 3a1ab990d9ce2ebe2d9426263a1dd305cdebf8c0242fd10c98b4974f26f1c641 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -2783,7 +2784,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | d14edda80fe6903b876bc742d1ff160c4f4579522ee2cf63d78c54976f9067e9 |
+| STATUS.md | principal control document | 667b36228fb457f41847b164ff3b40676e3095bd69c16b37548313a0feea8380 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

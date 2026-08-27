@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T288 S7 — Monitor/keyboard closure audit.**
+**Active: M0 T289 S1 — DPMI source/package admission audit.**
 
 T286 is closed. Its final Bochs-core minimization evidence is in
 [the closure record](history/m0-t286-closure-20260827.md). T287 admits the
@@ -10,13 +10,13 @@ queue-head original XMS owner package using a complete source-first plan.
 
 ## Active Packet
 
-### M0 T288 S7 — Monitor/keyboard closure audit
+### M0 T289 S1 — DPMI source/package admission audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T288 S7`, Ordinary Mode with single-person dual-role implementation and review. |
+| Identifier Mode | `M0 T289 S1`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | S5 IVT/lifecycle disposition closure is recorded; S6 is the next bounded recovery rung in the admitted T288 plan. |
-| Objective | Audit source identity, exceptions, interface ownership, mapping managers and transferred prerequisites; write the T288 closure. |
+| Objective | Establish the complete original DPMI/dpmi32 source identity, ABI, machine and failure inventory before selecting any protected-mode implementation. |
 | Non-goals | No monitor/BOP route enablement, serial SIM32 transport, kernel VDM or CSRSS recreation, generic keyboard controller/IRQ/input shell, second CPU executor, raw VDM_TIB/native guest-pointer ABI, new mapping manager, or `src.old` use. |
 | Reference Baseline | [T288 plan](etc/operations/m0-t288-monitor-keyboard-ivt-recovery-plan-001.md), [S5 evidence](etc/evidence/m0-t288-s5-keyboard-ivt-lifecycle-001.md), source policy and mapping-manager rule. |
 | Files And ABI Surface | Selected monitor/firmware sources, `adapter-mvdm-host-out/{softpc,monitor}`, `adapter-bochs`, session leases, existing XMS package and formal fixtures. |

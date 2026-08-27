@@ -24,7 +24,7 @@ and CCPU descriptor stubs are explicitly not disguised as S4 success.
 
 The historical `*_no_check` forms dereference the numeric address directly.
 The new same-shaped spelling deliberately continues to apply the sole legal
-Bochs range/ROM guard. This is registered as `ADAPTER-SOFTPC-008` in the
+Bochs range/ROM guard. This is registered as `ADAPTER-SOFTPC-011` in the
 component README. It is a safety boundary, not a new SAS policy.
 
 ## Reproducible verification
