@@ -4,10 +4,21 @@
 
 **No active M/T/S packet.**
 
-M0 T297 is closed. The guest mirror is now organized as the immutable,
-load-only `dos/v86`, `bin86`, `wow16` and `font16` roots.
+M0 T298 is closed. Its canonical zero-degree projection preserves every T295
+raw identity, source-proves macro-generated function names and resolves every
+raw first-degree call either to a normalized zero-degree target or to a
+remaining external interface.
 
 ## Active Packet
+
+### M0 T298 closure — MVDM-host zero-degree canonicalization
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T298 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Result | Canonicalized the immutable T295 11,872-identity source audit without replacing it. |
+| Evidence | [T298 closure](etc/evidence/m0-t298-s1-zero-degree-canonicalization-closure-001.md) and [plan](etc/operations/m0-t298-s1-zero-degree-canonicalization-plan-001.md). |
+| Next Admission | First-degree source audit may consume only the 801 canonical external interface spellings and the complete raw-call resolution ledger. |
 
 ### M0 T297 closure — MVDM guest original-root recovery
 
