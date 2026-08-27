@@ -4,19 +4,19 @@
 
 **No active M/T/S packet.**
 
-**Latest closure: M0 T294 S1 — MVDM host first-degree function audit.**
-All 2,353 frozen direct external call-site candidates now have one
-source-evidenced result, final disposition and owner.  The audit resolved 53
-original definition identities, froze 582 prospective second-degree exits and
-did not read a second-degree body, import a source package or modify product
-code.  See the [closure](history/m0-t294-closure-20260827.md) and
-[evidence](etc/evidence/m0-t294-s1-first-degree-function-audit-closure-001.md).
+**Latest closure: M0 T295 S1 — MVDM zero/first-degree frontier correction.**
+The provenance-selected `mvdm-host` corpus has been re-enumerated as 11,872
+zero-degree function-definition identities.  Its corrected, mutually
+exclusive first-degree frontier contains 2,821 direct call-site candidates.
+T294's older source-resolution output is superseded and must not be consumed.
+See the [closure](history/m0-t295-closure-20260827.md) and
+[correction evidence](etc/evidence/m0-t295-s1-degree-frontier-correction-001.md).
 
 ## Active Packet
 
-No packet is admitted.  The next task requires owner selection and admission
-from [the queue](QUEUE.md); it must not consume T294's second-degree bodies
-before recording its own scope.
+No packet is admitted.  A successor may audit the corrected 2,821-row
+first-degree frontier, but must not reuse T294's superseded output or classify
+a `mvdm-host` definition as first degree.
 
 **T291 S4 closure:** command, monitor-control and synchronous callback
 execution are now distinct typed planes; the generic session operation table

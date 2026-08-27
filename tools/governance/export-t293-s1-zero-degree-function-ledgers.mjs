@@ -1,6 +1,7 @@
 import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 
 const repositoryRoot = process.argv[2] || process.cwd();
@@ -110,6 +111,21 @@ function nextCode(text, offset) {
   for (let index = offset; index < text.length; index += 1) if (!/\s/.test(text[index])) return text[index];
   return '';
 }
+function definitionBodyOpen(masked, symbolOffset, close) {
+  // OpenNT has K&R definitions (`fn(arg) TYPE arg; { ... }`) and ordinary
+  // C definitions.  Do not mistake a call condition such as `if (fn()) {`
+  // or an `extern fn();` prototype followed by another body for a definition.
+  const linePrefix = masked.slice(masked.lastIndexOf('\n', symbolOffset) + 1, symbolOffset);
+  const trimmedPrefix = linePrefix.trim();
+  if (trimmedPrefix && /[()!<>=,.;+\-\/]/.test(trimmedPrefix)) return -1;
+  const knrPrefix = /\b[A-Za-z_]\w*\s*$/.test(linePrefix) && !/(?:\breturn|\bif|\bfor|\bwhile|\bswitch)\s*$/i.test(linePrefix);
+  const tail = masked.slice(close + 1, close + 1 + 2048);
+  const braceAt = tail.indexOf('{');
+  const semiAt = tail.indexOf(';');
+  const between = braceAt < 0 ? '' : tail.slice(0, braceAt);
+  if (braceAt < 0 || (semiAt >= 0 && semiAt < braceAt && (!knrPrefix || /^\s*;/.test(between)))) return -1;
+  return close + 1 + braceAt;
+}
 function previousBoundary(text, offset) {
   return Math.max(text.lastIndexOf(';', offset), text.lastIndexOf('}', offset), text.lastIndexOf('{', offset)) + 1;
 }
@@ -173,36 +189,80 @@ for (const root of ['O:\\repos.external\\OpenNT', 'O:\\repos.external\\OpenNT-4.
   }
 }
 
-const definitions = [];
-for (const row of sourceRows) {
-  const original = fs.readFileSync(row.selected_source_path, 'utf8');
-  const masked = maskCText(original);
-  for (const match of masked.matchAll(/\b([A-Za-z_][A-Za-z0-9_]*)\s*\(/g)) {
-    const symbol = match[1];
-    // Only a macro declared in the selected source/declaration context can
-    // suppress a definition.  A same spelling in an unrelated historical SDK
-    // header must not erase a real selected definition.  This also filters the
-    // SoftPC IFN/IPT declaration grammar before its brace is mistaken for a
-    // body belonging to the macro itself.
-    if (keywords.has(symbol.toLowerCase()) || definitionMacroNames.has(symbol) || /^(IFN|IPT|IPF)\d*$/.test(symbol)) continue;
-    const open = masked.indexOf('(', match.index + match[0].length - 1);
-    const close = closeParen(masked, open);
-    if (close < 0 || nextCode(masked, close + 1) !== '{') continue;
-    const bodyOpen = masked.indexOf('{', close + 1);
-    const bodyClose = closeBraceWithPreprocessor(masked, original, bodyOpen);
-    if (bodyClose < 0) throw new Error(`Unbalanced definition ${row.target_path}:${lineAt(masked, match.index)} ${symbol}`);
-    const sourceLine = lineAt(masked, match.index);
-    const linkage = linkageFor(masked, match.index);
-    const sourceHash = row.selected_source_sha256 || sha256(row.selected_source_path);
-    definitions.push({
-      definition_id: `MVDM-ZERO-DEFINITION-${String(definitions.length + 1).padStart(6, '0')}`,
-      file_id: row.file_id, source_path: row.target_path, source_sha256: sourceHash,
-      package_root: row.package_root, source_line: String(sourceLine), symbol, linkage,
-      signature_evidence: signatureFor(original, masked, match.index, close),
-      file_disposition: row.expected_final_disposition, body_open: bodyOpen, body_close: bodyClose,
-      masked, original,
-    });
+const sourceByNativePath = new Map(sourceRows.map((row) => [path.resolve(row.selected_source_path).toLowerCase(), row]));
+const sourceTextByNativePath = new Map();
+function sourceText(fileName) {
+  const key = path.resolve(fileName).toLowerCase();
+  if (!sourceTextByNativePath.has(key)) {
+    const original = fs.readFileSync(fileName, 'utf8');
+    sourceTextByNativePath.set(key, { original, masked: maskCText(original) });
   }
+  return sourceTextByNativePath.get(key);
+}
+function tagSymbol(tag) {
+  if (!/^(IFN|IPT|IPF)\d*$/.test(tag.name)) return tag.name;
+  const type = String(tag.typeref || '').replace(/^typename:/, '');
+  const words = type.match(/[A-Za-z_][A-Za-z0-9_]*/g) || [];
+  return words.at(-1) || tag.name;
+}
+function lineOffset(text, targetLine) {
+  let offset = 0;
+  for (let line = 1; line < targetLine && offset < text.length; line += 1) offset = text.indexOf('\n', offset) + 1;
+  return offset < 0 ? text.length : offset;
+}
+function bodyForTag(masked, original, offset, endLine) {
+  const bodyOpen = masked.indexOf('{', offset);
+  if (bodyOpen < 0) return [-1, -1];
+  if (Number.isInteger(endLine) && endLine > 0) {
+    const afterEnd = lineOffset(masked, endLine + 1);
+    const bodyClose = masked.lastIndexOf('}', afterEnd);
+    if (bodyClose >= bodyOpen) return [bodyOpen, bodyClose];
+  }
+  return [bodyOpen, closeBraceWithPreprocessor(masked, original, bodyOpen)];
+}
+// Universal Ctags parses the historical K&R and SoftPC function-declaration
+// macros more reliably than a call-expression regular expression.  Its JSON
+// tags are used only to enumerate definitions in the already selected MVDM
+// source files; call extraction remains our masked-source pass below.
+const ctagsList = path.join(os.tmpdir(), `mvdm-zero-${process.pid}.lst`);
+const ctagsPath = process.env.CTAGS || 'ctags.exe';
+let functionTags = [];
+try {
+  fs.writeFileSync(ctagsList, sourceRows.map((row) => row.selected_source_path).join('\n') + '\n');
+  const output = execFileSync(ctagsPath, ['--output-format=json', '--fields=+nKSte', '--languages=C,C++', '--kinds-C=f', '--kinds-C++=f', '--sort=no', '--quiet', '-L', ctagsList], { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
+  functionTags = output.split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line)).filter((tag) => tag._type === 'tag' && tag.kind === 'function');
+} finally {
+  if (fs.existsSync(ctagsList)) fs.unlinkSync(ctagsList);
+}
+const definitions = [];
+const seenDefinitions = new Set();
+for (const tag of functionTags) {
+  const nativePath = path.resolve(tag.path).toLowerCase();
+  const row = sourceByNativePath.get(nativePath);
+  if (!row) continue;
+  const symbol = tagSymbol(tag);
+  if (!symbol || /^(IFN|IPT|IPF)\d*$/.test(symbol)) continue;
+  const { original, masked } = sourceText(tag.path);
+  const start = lineOffset(masked, Number(tag.line));
+  const tagLineEnd = masked.indexOf('\n', start);
+  // Macro-form definitions have the tag line at IFN/IPT, after the true
+  // function name.  Select the nearest spelling at or before that tag line,
+  // never a later call in the body.
+  const symbolOffset = masked.lastIndexOf(symbol, tagLineEnd < 0 ? masked.length : tagLineEnd);
+  if (symbolOffset < Math.max(0, start - 4096) || symbolOffset > (tagLineEnd < 0 ? masked.length : tagLineEnd)) throw new Error(`Ctags symbol mismatch ${row.target_path}:${tag.line} ${symbol}`);
+  const [bodyOpen, bodyClose] = bodyForTag(masked, original, symbolOffset, Number(tag.end));
+  if (bodyClose < 0) throw new Error(`Unbalanced Ctags definition ${row.target_path}:${tag.line}-${tag.end} ${symbol}; symbol-line=${lineAt(masked, symbolOffset)} body=${bodyOpen}`);
+  const key = `${row.file_id}:${symbol}:${tag.line}`;
+  if (seenDefinitions.has(key)) continue;
+  seenDefinitions.add(key);
+  definitions.push({
+    definition_id: `MVDM-ZERO-DEFINITION-${String(definitions.length + 1).padStart(6, '0')}`,
+    file_id: row.file_id, source_path: row.target_path, source_sha256: row.selected_source_sha256 || sha256(row.selected_source_path),
+    package_root: row.package_root, source_line: String(tag.line), symbol, linkage: linkageFor(masked, symbolOffset),
+    signature_evidence: `${String(tag.typeref || '').replace(/^typename:/, '')} ${symbol}${tag.signature || ''}`.trim().slice(0, 512),
+    file_disposition: row.expected_final_disposition, body_open: bodyOpen, body_close: bodyClose,
+    masked, original,
+  });
 }
 
 const bySymbol = new Map(); const byFileAndSymbol = new Map();
@@ -323,6 +383,15 @@ const coverageRows = sourceRows.map((row) => ({
   source_basis: 'component membership by src/mvdm-host path; parsed bytes from provenance-selected original source only',
 }));
 const coverageColumns = ['file_id', 'source_path', 'source_sha256', 'package_root', 'final_file_disposition', 'function_definition_count', 'source_coverage', 'source_basis'];
+const byDefinitionId = new Map(definitions.map((definition) => [definition.definition_id, definition]));
+for (const candidate of candidates) {
+  const caller = byDefinitionId.get(candidate.caller_definition_id);
+  if (!caller) throw new Error(`First-degree candidate has no zero-degree caller: ${candidate.candidate_id}`);
+  const [target, resolution] = resolveInternal(caller, candidate.callee_spelling);
+  if (target || resolution === 'conditional-variant-zero-targets') {
+    throw new Error(`Zero/first-degree boundary violation: ${candidate.candidate_id} ${candidate.callee_spelling} resolves ${resolution}`);
+  }
+}
 writeTsv(path.join(operationsRoot, 'mvdm-host-zero-degree-definition-ledger.tsv'), definitions, zeroColumns);
 writeTsv(path.join(operationsRoot, 'mvdm-host-first-degree-candidate-ledger.tsv'), candidates, candidateColumns);
 writeTsv(path.join(operationsRoot, 'mvdm-host-zero-degree-call-resolution-ledger.tsv'), conditionalVariantCalls, ambiguousColumns);

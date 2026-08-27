@@ -1,0 +1,7 @@
+artifact_path	status	superseded_by	reason
+"history/m0-t293-closure-20260827.md"	"superseded-counts"	"M0 T295 S1"	"T293's regular-expression definition extractor omitted valid OpenNT K&R and macro-form C definitions."
+"operations/mvdm-host-zero-degree-definition-ledger.tsv (pre-T295 revision)"	"superseded"	"M0 T295 S1 regenerated ledger"	"The prior 4,499-definition set was incomplete; the regenerated selected-MVDM definition set is 11,872 identities."
+"operations/mvdm-host-first-degree-candidate-ledger.tsv (pre-T295 revision)"	"superseded"	"M0 T295 S1 regenerated ledger"	"The old 2,353-row frontier included calls whose actual target definition belonged to selected MVDM source."
+"history/m0-t294-closure-20260827.md"	"superseded-input"	"M0 T295 S1"	"T294 consumed the incomplete T293 frontier; its source-resolution counts are historical method evidence, not an admissible future input."
+"evidence/m0-t294-s1-first-degree-function-audit-closure-001.md"	"superseded-input"	"M0 T295 S1"	"The ledger correctly recorded its old frozen inputs, but those inputs violate the corrected zero/first degree boundary."
+"operations/mvdm-host-first-degree-*-ledger.tsv (T294 generation)"	"superseded"	"M0 T295 S1 then a newly admitted first-degree audit"	"No T294 result ledger may be used for package recovery or public-API binding until a new audit consumes the corrected first-degree frontier."

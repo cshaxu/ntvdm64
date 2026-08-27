@@ -59,7 +59,9 @@ leaf: its actual target or non-call status must be documented.
 ## Verification and limits
 
 Both packages scan only provenance-selected source files and approved original
-OpenNT trees. They mask comments, strings and preprocessor forms; distinguish
-declarations from definitions; preserve source line and SHA-256; and assert
-cardinality and absence of unclassified live rows. `src.old` is never an
-input. Neither audit imports, compiles, links or enables historical source.
+OpenNT trees. Zero degree uses a recorded C/C++ definition enumerator capable
+of historical K&R and macro-form declarations, then derives direct calls from
+the same masked source bytes. They preserve source line and SHA-256 and assert
+zero/first-degree mutual exclusion, cardinality and absence of unclassified
+live rows. `src.old` is never an input. Neither audit imports, compiles, links
+or enables historical source.

@@ -1,5 +1,10 @@
 # M0 T294 S1 — MVDM host first-degree function audit closure
 
+> **Superseded input notice — M0 T295 S1.** This document accurately records
+> the former T294 procedure and its frozen inputs.  It must not be used as a
+> current dependency graph because the preceding zero-degree extractor omitted
+> valid MVDM-resident K&R/macro-form function definitions.
+
 ## Scope and frozen input
 
 This closure consumes the 2,353 immutable call-site rows emitted by T293 in
