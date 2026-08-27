@@ -33,8 +33,8 @@ whole search perimeter.
 | Original Owner Request | “虽然opennt是内核态但是在现代win32可以用非内核态或者bochs/其他非侵入式方式实现的，都包括进来，用同样标准审计代码可用性。” |
 | Similar-Issue Sweep | CSR capture, CSRSS wait/process lifecycle, every `NtVdmControl` service, V86 monitor, DPMI, DEM search, WOW/VDD and current adapter/overlay replacements. |
 
-**T292 S1 stage-one closure:** the complete MVDM outward lexical inventory is
-now retained as [the BFS seed ledger](etc/operations/opennt-non-mvdm-dependency-bfs-ledger.tsv),
+**T292 S1 stage-one semantic closure:** the complete MVDM outward lexical
+inventory remains retained as [the BFS seed ledger](etc/operations/opennt-non-mvdm-dependency-bfs-ledger.tsv),
 [include edges](etc/operations/opennt-non-mvdm-stage1-include-edge-ledger.tsv),
 [build edges](etc/operations/opennt-non-mvdm-stage1-build-edge-ledger.tsv),
 [call edges](etc/operations/opennt-non-mvdm-stage1-call-edge-ledger.tsv) and
@@ -42,13 +42,15 @@ now retained as [the BFS seed ledger](etc/operations/opennt-non-mvdm-dependency-
 The preceding historical call ledger was found incomplete for public/imported
 calls; the complete raw invocation inventory is
 [here](etc/operations/opennt-non-mvdm-stage1-invocation-ledger.tsv) and is the
-authoritative function seed for this audit. Its reconciled symbol-to-header
+conservative function seed for this audit. Its reconciled symbol-to-header
 candidate index is [here](etc/operations/opennt-non-mvdm-stage1-invocation-symbol-ledger.tsv).
-Every extracted outward expression now has a first-hop category; the complete
-counts, method and explicitly deferred definition proof are in the
-[stage-one closure](etc/evidence/m0-t292-s1-stage-one-egress-inventory-closure-001.md).
-Second-level package/file/function expansion has not begun and requires owner
-review of this first frontier.
+The authoritative source-aware result is the [semantic site ledger](etc/operations/opennt-non-mvdm-stage1-semantic-site-ledger.tsv),
+[semantic symbol ledger](etc/operations/opennt-non-mvdm-stage1-semantic-symbol-ledger.tsv),
+and [true egress ledger](etc/operations/opennt-non-mvdm-stage1-true-egress-ledger.tsv).
+Every actual direct-call symbol has one final first-hop owner/disposition;
+the method, counts and boundary meaning are in the
+[semantic closure](etc/evidence/m0-t292-s1-semantic-first-hop-closure-001.md).
+Second-level package/file/function expansion has not begun.
 
 **T291 S4 closure:** command, monitor-control and synchronous callback
 execution are now distinct typed planes; the generic session operation table

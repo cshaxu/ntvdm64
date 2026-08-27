@@ -1,4 +1,10 @@
-# M0 T292 S1 — stage-one MVDM egress inventory closure
+# M0 T292 S1 — preliminary lexical MVDM egress inventory
+
+> Superseded as the function-level stage-one conclusion by
+> [the semantic first-hop closure](m0-t292-s1-semantic-first-hop-closure-001.md).
+> This record remains the complete conservative lexical seed and include/build
+> inventory; it must not be read as proof that every `identifier(` form was a
+> callable external interface.
 
 ## Question
 
@@ -58,12 +64,10 @@ selected or expanded?
 
 ## Interpretation
 
-Stage one is complete as an **egress inventory**: every extracted MVDM outward
-expression has a durable first-hop destination category, and every non-MVDM
-source-package candidate has a node in the BFS frontier. It does not claim
-that a same-named upstream header is the exact callable definition, nor that
-any candidate package is importable. Those are precisely the second-stage
-package/file/function expansion questions.
+The lexical inventory is complete, but it is not by itself stage-one closure:
+it intentionally retains macro and false-positive forms. The successor uses a
+source-aware scan to identify actual direct calls and assign their first-hop
+owner before package/file/function expansion begins.
 
 The raw invocation scan intentionally retains macro and false-positive lexical
 forms. It is the conservative source inventory; stage two resolves reached
