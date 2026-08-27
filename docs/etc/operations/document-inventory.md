@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2684 |
+| Documentation records | 2686 |
 | --- | --- |
-| Generated UTC | 2026-08-27T04:25:30Z |
+| Generated UTC | 2026-08-27T04:27:43Z |
 
 ## Entries
 
@@ -330,6 +330,7 @@ content-divergent entries.
 | etc/evidence/m0-t282-s2-command-declaration-carriers-001.md | indexed supporting material | d8eb5b4a03f6ceddf60e0865bfc2cb5f07838eef4fe17162835c7ab6ffb8a6f8 |
 | etc/evidence/m0-t282-s3-command-console-declaration-carrier-001.md | indexed supporting material | e8c050f08f7402aeca99e2fcdfb44e8964d65424cf597dab2ffe262041ce2b43 |
 | etc/evidence/m0-t282-s4-complete-original-command-static-package-001.md | indexed supporting material | 56c80381c21b8ba204c09b65b2fdf94b2b9a78463e4b5366f3e9dbb47d374a48 |
+| etc/evidence/m0-t282-s5-vdm-command-acquisition-audit-001.md | indexed supporting material | c18bb44428552f9308a74b8e1318766e8ff766d260f83510dfc3da5567874ece |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/t225-s10-primary-bootstrap-observation-result-001.md | indexed supporting material | 0ae0f48b51e21a0d410c89753cefdf54560ffae399ba4c51fb35305d2e99635c |
@@ -842,6 +843,7 @@ content-divergent entries.
 | etc/operations/m0-t282-s2-command-declaration-carrier-plan-001.md | indexed supporting material | 164de20d0af02b0361dd17535b3bd91ddc3763147b4102850004aded82bf2bf1 |
 | etc/operations/m0-t282-s3-command-console-declaration-carrier-plan-001.md | indexed supporting material | ea78761090980948a902373de46ec4478048f27366ebd13b213e52e117287c5a |
 | etc/operations/m0-t282-s4-complete-original-command-static-package-plan-001.md | indexed supporting material | 4b84c169a2a3454a2d176aa56029e6484613d4d8b229bf199929c43a95385231 |
+| etc/operations/m0-t282-s5-vdm-command-acquisition-ledger.tsv | indexed supporting material | 69cf3fdf7fa7150b10ab49c27946ad0d0c16f549a55fbfa74223f11ae8cb2e0a |
 | etc/operations/m0-t282-s5-vdm-command-acquisition-source-audit-plan-001.md | indexed supporting material | 7e67e4deca61b139c066ace3658f25e2141b35848f2ff57e3762277064b8078e |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
@@ -2698,7 +2700,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | ace0cb17b2ce20a7937fb317bbeb3b1d76f66bce1e37e93d3d19f317c26afcdf |
+| STATUS.md | principal control document | ef6313a5f68b3a89986720adb22bb580a7bd029938b9aad007629ab028395eda |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 68d32f16d489f7738cd917896e1693e6c0b78d799d93ab22223c2065361341ff |

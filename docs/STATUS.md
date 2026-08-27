@@ -66,24 +66,14 @@ source-identity-preserving static archive on x86/x64. Callable session,
 monitor, stream, PIF and child-lifecycle boundaries remain unresolved by
 design; no `54:xx` route or provider is enabled. See the [S4 evidence](etc/evidence/m0-t282-s4-complete-original-command-static-package-001.md).
 
-**T282 S4 P1:** both formal MSVC graphs archive the exact eleven original
-COMMAND units as `original-command-surface.lib`; archive member and graph
-verification reject runtime ingress, executable and Bochs inputs.
+**T282 S5 P1:** the original client/BaseSrv command-acquisition contract is
+now partitioned into seven source/ABI slices. Single-session DOS request,
+re-entry and retry semantics have a named same-shaped session/monitor owner;
+CSR first-VDM and WOW/broker branches remain explicit later owners.
 
-**T282 S4 closure:** the complete original COMMAND source package has a
-source-identity-preserving static archive on x86/x64. Callable session,
-monitor, stream, PIF and child-lifecycle boundaries remain unresolved by
-design; no `54:xx` route or provider is enabled. See the [S4 evidence](etc/evidence/m0-t282-s4-complete-original-command-static-package-001.md).
-
-**T282 S3 P1:** byte-exact `winconp.h` is registered in the platform-ABI
-manifest and selected through an adapter declaration carrier. Original
-`cmdkeyb.c` compiles on x86/x64; keyboard service, registry, console policy
-and guest-memory behavior remain unenabled.
-
-**T282 S3 closure:** the complete admitted console declaration carrier is
-hash-proven and both architecture probes pass without source-body changes.
-The remaining keyboard provider policy belongs to its later COMMAND/session
-binding work. See the [S3 evidence](etc/evidence/m0-t282-s3-command-console-declaration-carrier-001.md).
+**T282 S5 closure:** no callable behavior is enabled. The next implementation
+may recover only the one-session copied request/response binding while
+preserving original size, retry and failure semantics. See the [S5 evidence](etc/evidence/m0-t282-s5-vdm-command-acquisition-audit-001.md).
 
 ### Closed packet reference — M0 T281 S5 — original host-control package disposition
 
