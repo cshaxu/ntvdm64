@@ -57,6 +57,13 @@ physical first-degree frontier: 202 confirmed old internal calls are removed,
 unconfirmed internal calls enter first degree. See the [P13 frontier rebase]
 (etc/evidence/m0-t301-s1-p13-rebased-mvdm-degree-frontier-001.md).
 
+**T301 S1 P14:** every rebased first-degree call is now mapped against a
+64,059-record local index of both approved original trees: 6,066 CRT, 1,475
+host-boundary, 1,557 other non-MVDM source, 3,055 source-absent, and 334 MVDM
+variant/parser-gap candidates. These are evidence categories, not provider
+selections. See the [P14 global source map]
+(etc/evidence/m0-t301-s1-p14-rebased-global-source-map-001.md).
+
 ## Active Packet
 
 | Field | Record |

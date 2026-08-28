@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3010 |
+| Documentation records | 3012 |
 | --- | --- |
-| Generated UTC | 2026-08-28T03:07:13Z |
+| Generated UTC | 2026-08-28T03:14:07Z |
 
 ## Entries
 
@@ -455,6 +455,7 @@ content-divergent entries.
 | etc/evidence/m0-t301-s1-p11-full-mvdm-rebase-expansion-001.md | indexed supporting material | 5d3b038e7603f0e9f691dd42871dcf894f62e22d706a3a1868e571ee801cd24a |
 | etc/evidence/m0-t301-s1-p12-expanded-internal-edge-gate-001.md | indexed supporting material | a71199c4f4bfc5ab04eb696c2bb69ab810030af2998fe34923244cde28a2737f |
 | etc/evidence/m0-t301-s1-p13-rebased-mvdm-degree-frontier-001.md | indexed supporting material | 038af58dc143c058933b50d8d9f7a56cb3ac703c19524b439c00ad06a1680dea |
+| etc/evidence/m0-t301-s1-p14-rebased-global-source-map-001.md | indexed supporting material | 33d0e66d04df45323ea126f5068bbff69542d51a25c3488156444d67ee221992 |
 | etc/evidence/m0-t301-s1-p1-first-degree-include-frontier-001.md | indexed supporting material | 21482f2f3594f3381ec1f772626ac14444639f7503b589cf7665ae7c9bff3713 |
 | etc/evidence/m0-t301-s1-p2-first-degree-declaration-frontier-001.md | indexed supporting material | 04d5b0e49a197d6b2ee7271d0df63861dc2c0a95b7a72c0c6d2b4a3f0779b021 |
 | etc/evidence/m0-t301-s1-p3-prior-definition-identity-crosswalk-001.md | indexed supporting material | 39f07f8fe438b7518465be2d626993104d56830f20da42b29c0236ee41ef4b6c |
@@ -1083,6 +1084,7 @@ content-divergent entries.
 | etc/operations/mvdm-first-degree-function-candidate-ledger.tsv | indexed supporting material | 9fafc48e49a1d755f01d2907972c50675f5d4f198082c7cc96bea5d0a8b32a71 |
 | etc/operations/mvdm-first-degree-prior-second-reclassification-ledger.tsv | indexed supporting material | 841a493fc5fd9a0ad1cb1deeab0735ebf7bedd43824bd82fea7a0c3d6550f109 |
 | etc/operations/mvdm-first-degree-rebased-boundary-ledger.tsv | indexed supporting material | e68c209d2b0e2720ee82addf86785a0719c934f7bf1bebd92da654aeec344462 |
+| etc/operations/mvdm-first-degree-rebased-global-source-map-ledger.tsv | indexed supporting material | 46dbf9dfcd3f48c39482fd1b1a60be04f37f55842289599242ff2a05dfd414dd |
 | etc/operations/mvdm-first-degree-rebaselined-boundary-ledger.tsv | indexed supporting material | 0df190eb92ff482aed850a513416af8d30eb13167132dbdea13fa0b9216ea370 |
 | etc/operations/mvdm-first-degree-rebaselined-caller-include-frontier-ledger.tsv | indexed supporting material | 13753e8163055b63fc997f833fcd44aac2d3bbf33f4dced6e6b6e01d04a88781 |
 | etc/operations/mvdm-first-degree-rebaselined-call-resolution-ledger.tsv | indexed supporting material | 96423d06709b856ff937f065dbc9fa6d68ff3db838ec956bc066392ad763aefb |
@@ -3024,7 +3026,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | e7d46d0b947300d16caaa444636ca22314f98d7dbfe7006e43238d69159ce157 |
+| STATUS.md | principal control document | faea06461200dc0508cb5f6508e668f19370a6466b3091193ec65531b8fbe928 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
