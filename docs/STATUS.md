@@ -51,6 +51,12 @@ explicit unresolved candidates. The P12 edge ledger is input to the
 zero-degree rebase, not a silent merge. See the [P12 edge gate]
 (etc/evidence/m0-t301-s1-p12-expanded-internal-edge-gate-001.md).
 
+**T301 S1 P13:** the active static audit input is now the rebased 12,487-row
+physical first-degree frontier: 202 confirmed old internal calls are removed,
+82 original-MVDM definition identities join zero degree, and 263 new exits or
+unconfirmed internal calls enter first degree. See the [P13 frontier rebase]
+(etc/evidence/m0-t301-s1-p13-rebased-mvdm-degree-frontier-001.md).
+
 ## Active Packet
 
 | Field | Record |
