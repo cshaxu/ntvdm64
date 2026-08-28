@@ -139,6 +139,12 @@ downlevel password-protocol hard boundary. No historical Workstation/RPC
 product shell is selected. See the [cohort audit]
 (etc/evidence/m0-t306-s1-netapi-cohort-boundary-audit-001.md).
 
+**T306 S1 P5:** source-level macro/arity review removed the apparent OLEAUT
+cohort: both `ReadByte` rows are in-MVDM debug macros targeting local
+`read_byte` functions. The remaining CSR row is a genuine NTDLL/CSRSS
+hard-boundary call from a WOW debugger path. See the [correction]
+(etc/evidence/m0-t306-s1-ole-csr-cohort-correction-001.md).
+
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,
 including historical build products, into the existing `mvdm-*` component
