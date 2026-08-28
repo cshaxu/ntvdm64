@@ -10,10 +10,12 @@ selecting a runtime provider.
 
 ## Inputs and boundaries
 
-- `mvdm-first-degree-rebaselined-boundary-ledger.tsv` is immutable input: it
-  contains 34,429 physical call occurrences.
-- `mvdm-first-degree-function-candidate-ledger.tsv` is an index only. It has
-  3,963 spellings but cannot merge identities by spelling.
+- `mvdm-first-degree-rebaselined-boundary-ledger.tsv` is regenerated input.
+  Earlier 34,429-row lexical output was superseded by direct-call
+  normalization; its current generated cardinality is recorded in P4.
+- `mvdm-first-degree-function-candidate-ledger.tsv` is an index only. Its
+  earlier 3,963 spelling count was provisional and cannot merge identities by
+  spelling.
 - Definition and declaration bytes may be read only from the approved
   `OpenNT` and `OpenNT-4.5` source trees. `src.old`, product mirrors,
   adapters, build output and runtime traces are forbidden inputs.

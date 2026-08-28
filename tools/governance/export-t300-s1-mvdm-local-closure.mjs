@@ -25,6 +25,27 @@ function walk(root) {
   }
   return output;
 }
+// The historical build used package include directories (for example
+// softpc.new/base/inc) which are not necessarily adjacent to each caller.
+// For source auditing we may resolve a basename only when it is physically
+// unique below that exact original MVDM root.  Ambiguous basenames deliberately
+// remain unresolved rather than selecting a potentially different variant.
+const headersByRootAndBase = new Map();
+function indexHeaders(root) {
+  const byBase = new Map();
+  const visit = (directory) => {
+    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+      const full = path.join(directory, entry.name);
+      if (entry.isDirectory()) visit(full);
+      else if (/\.(h|inc)$/i.test(entry.name)) {
+        const key = entry.name.toLowerCase();
+        byBase.set(key, [...(byBase.get(key) || []), full]);
+      }
+    }
+  };
+  visit(root); headersByRootAndBase.set(root, byBase);
+}
+for (const root of sourceRoots) indexHeaders(root);
 function hash(file) { return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'); }
 function writeTsv(name, rows, columns) {
   const quote = (value) => `"${String(value ?? '').replaceAll('"', '""')}"`;
@@ -65,22 +86,52 @@ function isDefinition(text, symbolOffset, closeParen) {
   const tail = text.slice(closeParen + 1, closeParen + 2049); const next = tail.search(/\S/);
   return next >= 0 && tail[next] === '{';
 }
-function parseDefinitions(sourceFile, identity) {
-  const raw = fs.readFileSync(sourceFile, 'utf8'); const masked = mask(raw); const macros = new Set([...raw.matchAll(/^\s*#\s*define\s+([A-Za-z_]\w*)\b/gm)].map((match) => match[1]));
+function parseDefinitions(sourceFile, identity, visibleMacros) {
+  const raw = fs.readFileSync(sourceFile, 'utf8'); const masked = mask(raw);
+  const macros = new Set([...visibleMacros, ...raw.matchAll(/^\s*#\s*define\s+([A-Za-z_]\w*)\b/gm)].map((match) => typeof match === 'string' ? match : match[1]));
   const output = [];
+  const emitted = new Set();
+  const addDefinition = (symbol, symbolOffset, open, close) => {
+    const bodyOpen = masked.indexOf('{', close); const bodyClose = paired(masked, bodyOpen, '{', '}');
+    if (bodyOpen < 0 || bodyClose < 0) return;
+    const signature = raw.slice(raw.lastIndexOf('\n', symbolOffset) + 1, bodyOpen).replace(/\s+/g, ' ').trim().slice(0, 512);
+    const key = `${symbolOffset}\u0000${symbol}`;
+    if (emitted.has(key)) return;
+    emitted.add(key);
+    output.push({ ...identity, symbol, source_line: String(lineAt(raw, symbolOffset)), signature_evidence: signature, parameter_count: argumentCount(masked, open, close), linkage: /\bstatic\b/.test(signature) ? 'translation-unit-local' : 'externally-linkable', body: masked.slice(bodyOpen + 1, bodyClose), body_offset: bodyOpen + 1, masked, visible_macros: macros });
+  };
   for (const match of masked.matchAll(/\b([A-Za-z_]\w*)\s*\(/g)) {
-    const symbol = match[1]; if (macros.has(symbol) || controls.has(symbol.toLowerCase())) continue;
+    const symbol = match[1]; if (controls.has(symbol.toLowerCase()) || /^IFN\d+$/i.test(symbol)) continue;
     const open = masked.indexOf('(', match.index + symbol.length); const close = paired(masked, open, '(', ')');
     if (close < 0 || !isDefinition(masked, match.index, close)) continue;
-    const bodyOpen = masked.indexOf('{', close); const bodyClose = paired(masked, bodyOpen, '{', '}');
-    if (bodyOpen < 0 || bodyClose < 0) continue;
-    const signature = raw.slice(raw.lastIndexOf('\n', match.index) + 1, bodyOpen).replace(/\s+/g, ' ').trim().slice(0, 512);
-    output.push({ ...identity, symbol, source_line: String(lineAt(raw, match.index)), signature_evidence: signature, parameter_count: argumentCount(masked, open, close), linkage: /\bstatic\b/.test(signature) ? 'translation-unit-local' : 'externally-linkable', body: masked.slice(bodyOpen + 1, bodyClose), body_offset: bodyOpen + 1, masked });
+    addDefinition(symbol, match.index, open, close);
+  }
+  // Insignia/OpenNT uses IFNn as a declaration macro: `name IFN2(...)`.
+  // The declared function is `name`, never `IFN2`.  Preserve that original
+  // spelling so zero-degree closure can reach the actual MVDM body.
+  for (const match of masked.matchAll(/\b([A-Za-z_]\w*)\s+IFN\d+\s*\(/gi)) {
+    const symbol = match[1]; if (controls.has(symbol.toLowerCase())) continue;
+    const macroOffset = masked.indexOf('IFN', match.index + symbol.length);
+    const open = masked.indexOf('(', macroOffset); const close = paired(masked, open, '(', ')');
+    if (close < 0 || !isDefinition(masked, match.index, close)) continue;
+    addDefinition(symbol, match.index, open, close);
   }
   return output;
 }
 function sourceIdentity(sourceFile, root) { return `${root}\u0000${path.relative(root, sourceFile).replaceAll('\\', '/')}`; }
 function originalFileName(root, relative) { return path.join(root, ...relative.split('/')); }
+function resolveMvdmInclude(sourceRoot, current, name) {
+  const direct = [path.resolve(path.dirname(current), name), path.resolve(sourceRoot, name)];
+  for (const candidate of direct) if (fs.existsSync(candidate)) return candidate;
+  const basename = path.basename(name).toLowerCase();
+  const matches = headersByRootAndBase.get(sourceRoot)?.get(basename) || [];
+  if (matches.length === 1) return matches[0];
+  // A build include such as "debug.h" is frequently package-local.  A caller
+  // in softpc.new must not accidentally consume WOW's same-named header.
+  const family = path.relative(sourceRoot, current).split(path.sep)[0].toLowerCase();
+  const familyMatches = matches.filter((item) => path.relative(sourceRoot, item).split(path.sep)[0].toLowerCase() === family);
+  return familyMatches.length === 1 ? familyMatches[0] : null;
+}
 const headerIncludeCache = new Map();
 function includeClosure(sourceRoot, relative) {
   const cacheKey = `${sourceRoot}\u0000${relative}`;
@@ -90,18 +141,51 @@ function includeClosure(sourceRoot, relative) {
     const current = pending.pop(); if (visited.has(current) || !fs.existsSync(current)) continue; visited.add(current);
     const raw = fs.readFileSync(current, 'utf8');
     for (const match of raw.matchAll(/^\s*#\s*include\s*["<]([^">]+)[">]/gm)) {
-      const name = match[1]; const candidates = [path.resolve(path.dirname(current), name), path.resolve(sourceRoot, name)];
-      for (const candidate of candidates) if (fs.existsSync(candidate)) {
+      const candidate = resolveMvdmInclude(sourceRoot, current, match[1]);
+      if (candidate) {
         const normalized = path.normalize(candidate); if (path.extname(normalized).toLowerCase() === '.h') headers.add(normalized);
-        if (!visited.has(normalized)) pending.push(normalized); break;
+        if (!visited.has(normalized)) pending.push(normalized);
       }
     }
   }
   headerIncludeCache.set(cacheKey, headers); return headers;
 }
-function headerDeclaresSymbol(header, symbol) {
-  const raw = fs.readFileSync(header, 'utf8');
-  return new RegExp(`\\b${symbol.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*\\(`).test(mask(raw));
+const headerCallTokenCache = new Map();
+function headerCallTokens(header) {
+  if (headerCallTokenCache.has(header)) return headerCallTokenCache.get(header);
+  const tokens = new Set([...mask(fs.readFileSync(header, 'utf8')).matchAll(/\b([A-Za-z_]\w*)\s*\(/g)].map((match) => match[1]));
+  headerCallTokenCache.set(header, tokens);
+  return tokens;
+}
+function headerDeclaresSymbol(header, symbol) { return headerCallTokens(header).has(symbol); }
+// A token shaped like `name(...)` is not automatically a function call in
+// historical C.  In particular, SoftPC headers contribute large sets of
+// function-like debug and generated-code macros.  Those macros must be
+// removed before computing a cross-package function boundary; otherwise an
+// implementation audit would falsely treat macro expansion as a missing
+// OpenNT provider.  This is intentionally source-local: conditional build
+// variants remain distinct identities rather than a global spelling set.
+const visibleMacroCache = new Map();
+const headerMacroNameCache = new Map();
+function macroNamesInHeader(header) {
+  if (headerMacroNameCache.has(header)) return headerMacroNameCache.get(header);
+  const names = new Set([...fs.readFileSync(header, 'utf8').matchAll(/^\s*#\s*define\s+([A-Za-z_]\w*)\b/gm)].map((match) => match[1]));
+  headerMacroNameCache.set(header, names);
+  return names;
+}
+function visibleMacrosFor(sourceRoot, relative) {
+  const cacheKey = `${sourceRoot}\u0000${relative}`;
+  if (visibleMacroCache.has(cacheKey)) return visibleMacroCache.get(cacheKey);
+  const result = new Set();
+  // This follows only uniquely resolved original header identities.  The
+  // header-name cache makes the transitive walk linear in physical headers,
+  // while configuration-ambiguous include names remain unresolved rather
+  // than becoming silently excluded calls.
+  for (const header of includeClosure(sourceRoot, relative)) {
+    for (const name of macroNamesInHeader(header)) result.add(name);
+  }
+  visibleMacroCache.set(cacheKey, result);
+  return result;
 }
 
 // Establish the selected original identity first.  The project file can prove
@@ -127,7 +211,7 @@ const selectedFiles = localFiles.filter((item) => item.selected);
 const definitions = [];
 for (const item of selectedFiles) {
   const selected = item.selected; const id = { source_root: selected.root, source_path: selected.relative, source_sha256: selected.sha256 };
-  for (const definition of parseDefinitions(selected.file, id)) definitions.push({ ...definition, components: item.component });
+  for (const definition of parseDefinitions(selected.file, id, visibleMacrosFor(selected.root, selected.relative))) definitions.push({ ...definition, components: item.component });
 }
 const definitionKey = (item) => `${item.source_root}\u0000${item.source_path}\u0000${item.source_sha256}\u0000${item.source_line}\u0000${item.symbol}`;
 const filesByIdentity = new Map();
@@ -155,7 +239,7 @@ const boundary = []; const ambiguous = []; const variantFamilies = new Map();
 while (pending.length) {
   const caller = pending.shift();
   for (const match of caller.body.matchAll(/\b([A-Za-z_]\w*)\s*\(/g)) {
-    const callee = match[1]; if (controls.has(callee.toLowerCase()) || /^[A-Z][A-Z0-9_]*$/.test(callee)) continue;
+    const callee = match[1]; if (caller.visible_macros.has(callee) || controls.has(callee.toLowerCase()) || /^[A-Z][A-Z0-9_]*$/.test(callee)) continue;
     const fileKey = `${caller.source_root}\u0000${caller.source_path}\u0000${caller.source_sha256}\u0000${callee}`;
     const local = byFileSymbol.get(fileKey) || [];
     const external = local.length ? local : (bySymbol.get(callee) || []);
