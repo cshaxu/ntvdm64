@@ -2,18 +2,51 @@
 
 ## Current Work
 
-**No active M/T/S packet.**
+**Active: M0 T300 S1 — MVDM-local call-closure rebaseline.**
 
-M0 T299 is closed by S6. The scanner now requires a parsed parameter list to
-enter its own function body; the corrected first-degree closure has 112
-physical definitions and 670 second-degree cross-file candidates.
+M0 T299 remains closed historical evidence. Its 112/670 derived boundary is
+not a planning input until this packet replaces its `mvdm-host`-only root with
+the owner-approved continuous original-MVDM call closure.
+
+**S1 progress:** the provenance scan has 12,148 `mvdm-host` root definitions
+and a 12,392-definition unambiguous MVDM-local closure. It found no unpaired
+local source file, but 3,995 same-spelled internal call edges still require
+original include/declaration-scope resolution before the rebaselined boundary
+is final. The new one-degree candidate ledger has 3,907 spellings: it carries
+forward 690 T299 interface rows as evidence and retains 3,217 newly exposed
+spellings for physical implementation resolution. See the [preliminary evidence](etc/evidence/m0-t300-s1-mvdm-local-closure-preliminary-001.md).
+
+**S1 P1:** source-graph governance, the provenance scanner, the physical
+zero-closure ledger and the rebaselined one-degree function-candidate ledger
+are recorded. The packet remains active solely for original
+include/declaration-scope resolution of the 3,995 ambiguous internal edges.
+
+## Active Packet
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T300 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner approved the queue-leading project-MVDM zero-degree rebaseline and specified that every continuous resolved call inside original OpenNT `mvdm` remains zero-degree. |
+| Objective | Reclassify the reachable original-MVDM call closure from `mvdm-host` as zero-degree, then regenerate the first-degree boundary ledger at its true external boundary. |
+| Non-goals | No provider implementation, source import, build/link admission, adapter body, runtime route, or tool/firmware/guest runtime-policy change. |
+| Reference Baseline | T298 zero canonicalization, T299 S6 physical-definition scanner correction, project component provenance, and [T300 S1 plan](etc/operations/m0-t300-s1-mvdm-local-call-closure-rebaseline-plan-001.md). |
+| Files And ABI Surface | Degree-audit generator and derived TSV/evidence records; Architecture/Source Policy rules only. No production ABI changes. |
+| Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; no name-only identity; `src.old` exclusion. |
+| Verification | Physical source-path/provenance/signature review of every promotion; no overlay or `src.old` input; documentation inventory/governance checks; `git diff --check`. |
+| Expected Markers | One closure/reclassification ledger, a regenerated first-degree boundary ledger (including former second-degree rows whose caller has returned to zero), exact promoted/boundary counts, and a no-runtime-edge conclusion. |
+| Asset Needs | Selected OpenNT/OpenNT-4.5 source union, current original MVDM mirrors, T298/T299 raw ledgers, and Node/Ripgrep parser tooling. |
+| Reporting Requirements | Report promoted definition identities, retained unresolved/ambiguous calls, updated counts, and explicitly distinguish source-graph status from runtime eligibility. |
+| Stop Conditions | Missing provenance, unresolved identity ambiguity, a target outside original `mvdm`, any proposed overlay/runtime import, or a need to change source semantics pauses the packet. |
+| Exit Criteria | Every reachable MVDM-local implementation has one physical identity and zero-degree disposition; every regenerated first-degree row leaves original `mvdm`; former second-degree rows from promoted MVDM callers are represented there; evidence and gates pass. |
+| Original Owner Request | “所有mvdm-host内的函数，以及从mvdm-host出发的连续调用，只要都在mvdm包内，都属于零度；以此为基础，所有不在mvdm包内的调用才属于一度。” |
+| Similar-Issue Sweep | Check support, tools, firmware and guest mirrors for reachable selected original definitions while excluding unreachable roots, overlays, ABI declarations, `opennt-host`, adapters and `src.old`. |
 
 **Td closure — OpenNT-host directory boundary:** `opennt-host` is now
 explicitly governed as the single mirror root for every separately accepted
 non-MVDM OpenNT host package; Base VDM is its first slice, not its limit. See
 the [Td record](history/td-opennt-host-package-root-governance-20260827.md).
 
-## Active Packet
+## Closed Packet Archive
 
 ### M0 T299 S4 closure — physical translation-unit closure
 

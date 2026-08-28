@@ -51,6 +51,12 @@
   the original caller and declaration, ABI/layout and failure contract, its
   single adapter owner, the binding change, and x86/x64 evidence. A missing
   boundary never justifies cropping or rewriting the original algorithm.
+- In MVDM source-function BFS, include every original `mvdm-host` definition
+  at zero-degree, then retain its transitive resolved call closure while each
+  callee's physical original definition remains in selected OpenNT `mvdm`
+  source and already has a project `mvdm-*` mirror. Do not classify unreachable
+  local MVDM definitions as zero, and never infer membership from a bare symbol
+  spelling.
 
 ## Original mirrors
 

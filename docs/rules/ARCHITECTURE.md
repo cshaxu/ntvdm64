@@ -26,6 +26,12 @@
    inputs; it is neither a host-runtime library nor a machine executor and is
    consumable only by `adapter-bochs` through an admitted immutable-input
    manifest. `mvdm-platform-abi` contains declarations only.
+   For source-function BFS, zero-degree is all original definitions in
+   `mvdm-host` plus their transitive resolved call closure while each physical
+   original definition remains selected OpenNT `mvdm` source already mirrored
+   under a `mvdm-*` component. Existing but unreachable support, tool, firmware
+   and guest definitions are not zero-degree. The rule creates no runtime link
+   edge and matches source identity rather than function spelling.
 3. Bochs owns CPU, memory, firmware and PC-device semantics. `adapter-bochs`
    is its only production caller and contains only Bochs mechanics.
    the `softpc` family of `adapter-mvdm-host-out` reaches the machine only through

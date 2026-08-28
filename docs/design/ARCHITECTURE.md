@@ -20,6 +20,18 @@ host package union. Recovery proceeds first across **original package
 boundaries**, then through named interfaces between admitted packages; it does
 not grow from a trace hit or compiler error one symbol at a time.
 
+The source-function graph has a deliberately narrower zero-degree expansion
+than the project-wide MVDM mirror inventory. Its base is every original
+definition in `mvdm-host`; it then takes the transitive call closure only while
+each resolved physical definition remains selected OpenNT `mvdm` source already
+mirrored under a project `mvdm-*` component. The first resolved call that
+leaves that original source universe is one-degree. An unrelated or unreachable
+support, tool, firmware, or guest definition is not zero-degree. This is source
+provenance only, not a runtime-link edge; all established tool, firmware, and
+guest restrictions remain in force. Identity is physical—selected source path,
+edition/provenance, signature and content identity where applicable—not a
+function spelling.
+
 An original OpenNT package outside `base/mvdm` is eligible for `opennt-host`
 only when a complete-package audit proves all of the following. The audit may
 select only the required original slice; it never implies importing unrelated

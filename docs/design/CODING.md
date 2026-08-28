@@ -89,6 +89,15 @@ individually selected, provenance-recorded portion that already satisfies final
 ownership, dependency and mirror rules; never bulk-import a component tree or
 revive a rejected semantic path.
 
+For the source-function BFS, zero-degree consists of all original definitions
+in `mvdm-host` and their transitive resolved call closure while each callee's
+physical original definition remains in the selected OpenNT `mvdm` tree and is
+already mirrored under a project `mvdm-*` component. Do not sweep every
+`mvdm-support`, tool, firmware, or guest definition into zero merely because it
+exists locally: it must be reachable from that closure. This classification
+does not change final build ownership. Resolve by selected physical definition
+identity, never by a bare same-spelled function name.
+
 ## Host-width coding model
 
 Both MSVC Win32/x86 and MSVC x64 builds use `/MT` and the same logical code

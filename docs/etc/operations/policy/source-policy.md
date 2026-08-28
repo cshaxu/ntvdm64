@@ -40,6 +40,17 @@ accepted imported package; it must not become a generic compatibility layer.
 The
 shared declaration-only `mvdm-platform-abi` remains separate unless a tracked
 declaration is proved private to one admitted `opennt-host` package.
+
+For source-function dependency audit, zero-degree starts with every original
+definition in `mvdm-host` and expands through its transitive resolved calls
+only while each physical original definition remains within the selected OpenNT
+`mvdm` source tree and is already mirrored under a project `mvdm-*` component.
+The first resolved call outside that universe is one-degree. Existing but
+unreachable support, tool, firmware and guest functions remain outside zero.
+This is only a source-graph classification: it cannot make tools, firmware or
+guest inputs host-runtime providers. The match is selected source
+path/provenance/signature and content identity where applicable, never a
+name-only match.
 Bochs 2.6, from `O:\repos.external\bochs-2.6-compat\bochs-2.6`, is the
 approved third-party guest-machine backend, subject to the pinned-import and
 source-identity requirements in `design/CODING.md` and the adoption record.
