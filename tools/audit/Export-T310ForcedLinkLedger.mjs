@@ -3,14 +3,16 @@ import path from 'node:path';
 
 const root = path.resolve(process.argv[2] ?? '.');
 const architecture = process.argv[3] ?? 'x86';
+const phase = process.argv[4] ?? 's2';
 if (!['x86', 'x64'].includes(architecture)) throw new Error('Architecture must be x86 or x64');
+if (!['s2', 's4-p4'].includes(phase)) throw new Error('Phase must be s2 or s4-p4');
 /* Read the freshly generated formal linker log.  The previous sidecar input
  * could survive a regenerated graph and report stale architecture-specific
  * hook forms after a source-shaped binding had entered both candidates. */
 const input = path.join(root,
   `build/M0-T310/S2/softpc/${architecture}/original-softpc-forced-closure.dll.log`);
 const sourceLedger = path.join(root, 'docs/etc/operations/zero-ledger1-softpc-disposition-ledger.tsv');
-const output = path.join(root, `docs/etc/operations/m0-t310-s2-${architecture}-forced-link-ledger.tsv`);
+const output = path.join(root, `docs/etc/operations/m0-t310-${phase}-${architecture}-forced-link-ledger.tsv`);
 
 function parseTsv(line) {
   const fields = [];
@@ -51,8 +53,21 @@ const originalSoftpcMachineForms = new Set([
   'Ios_outw_function', 'read_pointers', 'host_swint_hook', 'host_exint_hook',
   'host_sas_init', 'host_sas_term', 'rom_init', 'LIM_b_write', 'LIM_w_write',
   'lim_page_frame_init', 'host_timer_event', 'dispatch_q_event', 'ica_intack',
-  'host_ica_lock', 'host_ica_unlock', 'InitializeIcaLock'
+  'host_ica_lock', 'host_ica_unlock', 'InitializeIcaLock',
+  'c_effective_addr', 'ClearInstanceDataMarking',
+  'Currently_emulated_video_mode', 'DelayIrqLine', 'handle_ok',
+  'host_bop_table', 'ica_clear_int', 'idetect', 'KbdHdwFull', 'PCDisplay',
+  'pCharPollsPerTick', 'pICounter', 'pMinConsecutiveTicks', 'restore_map',
+  'stream_io_enabled', 'timer_gate_func', 'TimerInt08Off', 'TimerInt08Seg',
+  'TimerInt1COff', 'TimerInt1CSeg', 'valid_modes', 'vd_mode_table',
+  'video_adapter', 'VirtualX', 'VirtualY'
 ]);
+const originalSoftpcBopForms = new Set([
+  'MS_bop_0', 'MS_bop_1', 'MS_bop_2', 'MS_bop_3', 'MS_bop_4', 'MS_bop_5',
+  'MS_bop_6', 'MS_bop_7', 'MS_bop_8', 'MS_bop_9', 'MS_bop_A', 'MS_bop_B',
+  'MS_bop_C', 'MS_bop_D', 'MS_bop_E', 'MS_bop_F'
+]);
+const originalXmsForms = new Set(['xmsDisableA20Wrapping', 'xmsEnableA20Wrapping']);
 const originalHostControlForms = new Set([
   'achES', 'BWVKey', 'ConsoleInit', 'ConsoleInitialised', 'DeleteConfigFiles',
   'FdiskTerminatePDB', 'FloppyTerminatePDB', 'host_com_close_all',
@@ -64,7 +79,7 @@ const originalHostControlForms = new Set([
   'stdoutRedirected', 'SuspendTimerThread', 'szDoomMsg', 'szSysErrMsg',
   'the_mouse_funcs', 'TerminateHeartBeat', 'terminate', 'ThreadInfo',
   'trace_file', 'working_keybd_funcs', 'working_mouse_funcs',
-  'working_video_funcs'
+  'working_video_funcs', 'host_alarm', 'host_memset', 'SPC_Product_Name'
 ]);
 const originalProviderForms = new Set([
   'CMDInit', 'DBGInit', 'DemInit', 'GetPIFConfigFiles', 'io_init', 'reset',
@@ -102,7 +117,9 @@ function disposition(entry) {
   if (crtForms.has(normalized)) return ['modern-crt-link', 'MSVC /MT CRT import; no OpenNT source or adapter required'];
   if (x86PatchHookForms.has(normalized)) return ['debugbreak-patch-default', 'fmstubs.c preserves its original immediate debugger-break default through __debugbreak() on both x86 and x64; a mapping-backed replacement remains disabled pending an owner-approved runtime contract'];
   if (normalized === 'GetPerfCounterUsecs') return ['select-original-softpc-source', 'softpc.new/host/src/nt_timer.c is the original provider; fmstubs.c remains evidence-only and does not replace that provider'];
-  if (originalSoftpcMachineForms.has(normalized)) return ['select-original-softpc-machine-source', 'original SoftPC machine source family must be selected by physical owner; do not replace the mechanical body with a local stub'];
+  if (originalSoftpcMachineForms.has(normalized)) return ['select-original-softpc-machine-source', 'select the physical original SoftPC machine owner for the SoftPC-selected path; do not substitute Bochs or a local stub'];
+  if (originalSoftpcBopForms.has(normalized)) return ['select-original-softpc-bop-source', 'select the original SoftPC host BOP owner and preserve its source dispatch contract; do not create a parallel BOP handler'];
+  if (originalXmsForms.has(normalized)) return ['select-original-xms-source', 'select the original XMS provider and retain its source control flow before adding only the required memory/A20 adapter seam'];
   if (originalHostControlForms.has(normalized)) return ['select-original-softpc-host-control-source', 'original SoftPC host-control source family must be selected before a modern public-API binding is considered'];
   if (originalProviderForms.has(normalized)) return ['select-original-mvdm-provider-source', 'select the original MVDM provider package and preserve its entry before adding any adapter binding'];
   const candidates = definitions.get(normalized.toLowerCase()) ?? [];

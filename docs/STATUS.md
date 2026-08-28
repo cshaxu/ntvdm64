@@ -102,6 +102,13 @@ expanded whole-archive audit exposes 264/263 x86/x64 physical unresolved
 forms for source-first owner classification; it is not a runnable-backend
 claim. See the [P3 build evidence](etc/evidence/m0-t310-s4-p3-original-init-group-build-001.md).
 
+**T310 S4 P4:** every P3 physical unresolved form now has one explicit
+source-first disposition in separate x86/x64 ledgers. The pre-T310
+Bochs-only assumptions are not reused: SoftPC machine, BOP, XMS and
+host-control forms select their original owners first; only six/five forms are
+named public-host boundaries and four preserve the `fmstubs.c` debugbreak
+default. See the [P4 disposition evidence](etc/evidence/m0-t310-s4-p4-init-group-interface-disposition-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove
