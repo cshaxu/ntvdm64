@@ -1,226 +1,188 @@
-#include "app/command_source.h"
+#include "base_vdm_local.h"
 
-#include "vdm_command.h"
 #include "session/session.h"
 
 #include <string.h>
 
-static int app_command_bytes_valid(const uint8_t *bytes, uint32_t byte_count,
-    uint32_t maximum)
+static __declspec(thread) base_vdm_local *base_vdm_current;
+
+static int valid_bytes(const uint8_t *bytes, uint32_t count, uint32_t maximum)
 {
-    return byte_count <= maximum && (byte_count == 0u || bytes != NULL);
+    return count <= maximum && (count == 0u || bytes != NULL);
 }
 
-static int app_command_copy(uint8_t *destination, const uint8_t *source,
-    uint32_t byte_count)
+static int copy_bytes(uint8_t *destination, const uint8_t *source, uint32_t count)
 {
-    if (byte_count == 0u) return 1;
+    if (count == 0u) return 1;
     if (destination == NULL || source == NULL) return 0;
-    memcpy(destination, source, byte_count);
+    memcpy(destination, source, count);
     return 1;
 }
 
-void app_command_source_initialize(app_command_source *source)
+void base_vdm_local_initialize(base_vdm_local *record)
 {
-    if (source == NULL) return;
-    memset(source, 0, sizeof(*source));
-    source->version = APP_COMMAND_SOURCE_VERSION;
-    source->struct_bytes = (uint32_t)sizeof(*source);
+    if (record == NULL) return;
+    memset(record, 0, sizeof(*record));
+    record->version = BASE_VDM_LOCAL_VERSION;
+    record->struct_bytes = (uint32_t)sizeof(*record);
 }
 
-int app_command_source_valid(const app_command_source *source)
+int base_vdm_local_valid(const base_vdm_local *record)
 {
-    return source != NULL && source->version == APP_COMMAND_SOURCE_VERSION &&
-        source->struct_bytes == sizeof(*source) && source->reserved0 == 0u &&
-        source->command_bytes <= MAXIMUM_VDM_COMMAND_LENGTH &&
-        source->application_bytes <= MAXIMUM_VDM_PATH_STRING &&
-        source->environment_bytes <= MAXIMUM_VDM_ENVIORNMENT &&
-        source->current_directory_bytes <= MAXIMUM_VDM_CURRENT_DIR;
+    return record != NULL && record->version == BASE_VDM_LOCAL_VERSION &&
+        record->struct_bytes == sizeof(*record) && record->reserved0 == 0u &&
+        record->command_bytes <= MAXIMUM_VDM_COMMAND_LENGTH &&
+        record->application_bytes <= MAXIMUM_VDM_PATH_STRING &&
+        record->environment_bytes <= MAXIMUM_VDM_ENVIORNMENT &&
+        record->current_directory_bytes <= MAXIMUM_VDM_CURRENT_DIR;
 }
 
-int app_command_source_publish(app_command_source *source,
-    const app_command_payload *payload)
+int base_vdm_local_publish(base_vdm_local *record, const base_vdm_command *command)
 {
-    if (!app_command_source_valid(source) || payload == NULL ||
-        payload->struct_bytes != sizeof(*payload) || source->available != 0u ||
-        payload->command_bytes == 0u ||
-        !app_command_bytes_valid(payload->command, payload->command_bytes,
-            MAXIMUM_VDM_COMMAND_LENGTH) ||
-        !app_command_bytes_valid(payload->application, payload->application_bytes,
-            MAXIMUM_VDM_PATH_STRING) ||
-        !app_command_bytes_valid(payload->environment, payload->environment_bytes,
-            MAXIMUM_VDM_ENVIORNMENT) ||
-        !app_command_bytes_valid(payload->current_directory,
-            payload->current_directory_bytes, MAXIMUM_VDM_CURRENT_DIR)) return 0;
-
-    if (!app_command_copy(source->command, payload->command, payload->command_bytes) ||
-        !app_command_copy(source->application, payload->application,
-            payload->application_bytes) ||
-        !app_command_copy(source->environment, payload->environment,
-            payload->environment_bytes) ||
-        !app_command_copy(source->current_directory, payload->current_directory,
-            payload->current_directory_bytes)) return 0;
-    source->task = payload->task;
-    source->creation_flags = payload->creation_flags;
-    source->error_code = payload->error_code;
-    source->code_page = payload->code_page;
-    source->current_drive = payload->current_drive;
-    source->coming_from_bat = payload->coming_from_bat;
-    source->command_bytes = payload->command_bytes;
-    source->application_bytes = payload->application_bytes;
-    source->environment_bytes = payload->environment_bytes;
-    source->current_directory_bytes = payload->current_directory_bytes;
-    source->available = 1u;
+    if (!base_vdm_local_valid(record) || command == NULL ||
+        command->struct_bytes != sizeof(*command) || record->available != 0u ||
+        command->command_bytes == 0u ||
+        !valid_bytes(command->command, command->command_bytes, MAXIMUM_VDM_COMMAND_LENGTH) ||
+        !valid_bytes(command->application, command->application_bytes, MAXIMUM_VDM_PATH_STRING) ||
+        !valid_bytes(command->environment, command->environment_bytes, MAXIMUM_VDM_ENVIORNMENT) ||
+        !valid_bytes(command->current_directory, command->current_directory_bytes, MAXIMUM_VDM_CURRENT_DIR)) return 0;
+    if (!copy_bytes(record->command, command->command, command->command_bytes) ||
+        !copy_bytes(record->application, command->application, command->application_bytes) ||
+        !copy_bytes(record->environment, command->environment, command->environment_bytes) ||
+        !copy_bytes(record->current_directory, command->current_directory, command->current_directory_bytes)) return 0;
+    record->task = command->task;
+    record->creation_flags = command->creation_flags;
+    record->error_code = command->error_code;
+    record->code_page = command->code_page;
+    record->current_drive = command->current_drive;
+    record->coming_from_bat = command->coming_from_bat;
+    record->command_bytes = command->command_bytes;
+    record->application_bytes = command->application_bytes;
+    record->environment_bytes = command->environment_bytes;
+    record->current_directory_bytes = command->current_directory_bytes;
+    record->available = 1u;
     return 1;
 }
 
-static void app_command_source_clear_sizes(PVDMINFO information)
+static void clear_sizes(PVDMINFO information)
 {
-    information->CmdSize = 0u;
-    information->AppLen = 0u;
-    information->PifLen = 0u;
-    information->EnviornmentSize = 0u;
-    information->CurDirectoryLen = 0u;
-    information->DesktopLen = 0u;
-    information->TitleLen = 0u;
-    information->ReservedLen = 0u;
+    information->CmdSize = information->AppLen = information->PifLen = 0u;
+    information->EnviornmentSize = information->CurDirectoryLen = 0u;
+    information->DesktopLen = information->TitleLen = information->ReservedLen = 0u;
 }
 
-static void app_command_source_required_sizes(const app_command_source *source,
-    PVDMINFO information)
+static void required_sizes(const base_vdm_local *record, PVDMINFO information)
 {
-    information->CmdSize = source->command_bytes;
-    information->AppLen = source->application_bytes;
+    information->CmdSize = record->command_bytes;
+    information->AppLen = record->application_bytes;
     information->PifLen = 0u;
-    information->EnviornmentSize = source->environment_bytes;
-    information->CurDirectoryLen = source->current_directory_bytes;
-    information->DesktopLen = 0u;
-    information->TitleLen = 0u;
-    information->ReservedLen = 0u;
+    information->EnviornmentSize = record->environment_bytes;
+    information->CurDirectoryLen = record->current_directory_bytes;
+    information->DesktopLen = information->TitleLen = information->ReservedLen = 0u;
 }
 
-static int app_command_source_buffer_valid(const void *destination,
-    uint32_t capacity, uint32_t required)
+static int has_buffer(const void *destination, uint32_t capacity, uint32_t required)
 {
     return required == 0u || (destination != NULL && capacity >= required);
 }
 
-static NTSTATUS app_command_source_reentry(app_command_source *source,
-    PVDMINFO information)
+/* DIVERGENCE: source-derived DOS-only BaseSrvGetNextVDMCommand slice. The
+ * original body requires CSRSS console/DOS records and duplicated handles.
+ * This retains copy, capacity, environment and status order; WOW/PIF/child
+ * and global server branches remain unavailable. */
+static NTSTATUS get_next_dos(base_vdm_local *record, PVDMINFO information)
 {
-    if (information->VDMState == INCREMENT_REENTER_COUNT) {
-        if (source->reentry_count == UINT32_MAX) return STATUS_INVALID_PARAMETER;
-        ++source->reentry_count;
-        return STATUS_SUCCESS;
-    }
-    if (information->VDMState == DECREMENT_REENTER_COUNT) {
-        if (source->reentry_count == 0u) return STATUS_INVALID_PARAMETER;
-        --source->reentry_count;
-        return STATUS_SUCCESS;
-    }
-    return STATUS_NOT_IMPLEMENTED;
-}
-
-static NTSTATUS app_command_source_copy(app_command_source *source,
-    PVDMINFO information)
-{
-    uint16_t requested_state = information->VDMState;
-
-    if ((requested_state & (ASKING_FOR_WOW_BINARY |
-            ASKING_FOR_SEPWOW_BINARY | ASKING_FOR_PIF)) != 0u)
+    uint16_t state = information->VDMState;
+    if (state & (ASKING_FOR_WOW_BINARY | ASKING_FOR_SEPWOW_BINARY | ASKING_FOR_PIF))
         return STATUS_NOT_IMPLEMENTED;
-    if (source->available == 0u) {
-        app_command_source_clear_sizes(information);
-        if ((requested_state & RETURN_ON_NO_COMMAND) != 0u &&
-            (requested_state & ASKING_FOR_SECOND_TIME) != 0u)
-            return STATUS_NO_MEMORY;
-        return STATUS_NOT_IMPLEMENTED;
+    if (record->available == 0u) {
+        clear_sizes(information);
+        return ((state & RETURN_ON_NO_COMMAND) && (state & ASKING_FOR_SECOND_TIME))
+            ? STATUS_NO_MEMORY : STATUS_NOT_IMPLEMENTED;
     }
-    if ((requested_state & ASKING_FOR_ENVIRONMENT) != 0u) {
-        if (!app_command_source_buffer_valid(information->Enviornment,
-                information->EnviornmentSize, source->environment_bytes)) {
-            app_command_source_clear_sizes(information);
-            information->EnviornmentSize = source->environment_bytes;
+    if (state & ASKING_FOR_ENVIRONMENT) {
+        if (!has_buffer(information->Enviornment, information->EnviornmentSize,
+                record->environment_bytes)) {
+            clear_sizes(information);
+            information->EnviornmentSize = record->environment_bytes;
             return STATUS_INVALID_PARAMETER;
         }
-        (void)app_command_copy((uint8_t *)information->Enviornment,
-            source->environment, source->environment_bytes);
-        app_command_source_clear_sizes(information);
-        information->EnviornmentSize = source->environment_bytes;
+        (void)copy_bytes((uint8_t *)information->Enviornment, record->environment,
+            record->environment_bytes);
+        clear_sizes(information);
+        information->EnviornmentSize = record->environment_bytes;
         return STATUS_SUCCESS;
     }
-    if (!app_command_source_buffer_valid(information->CmdLine,
-            information->CmdSize, source->command_bytes) ||
-        !app_command_source_buffer_valid(information->AppName,
-            information->AppLen, source->application_bytes) ||
-        !app_command_source_buffer_valid(information->Enviornment,
-            information->EnviornmentSize, source->environment_bytes) ||
-        !app_command_source_buffer_valid(information->CurDirectory,
-            information->CurDirectoryLen, source->current_directory_bytes)) {
-        app_command_source_required_sizes(source, information);
+    if (!has_buffer(information->CmdLine, information->CmdSize, record->command_bytes) ||
+        !has_buffer(information->AppName, information->AppLen, record->application_bytes) ||
+        !has_buffer(information->Enviornment, information->EnviornmentSize, record->environment_bytes) ||
+        !has_buffer(information->CurDirectory, information->CurDirectoryLen, record->current_directory_bytes)) {
+        required_sizes(record, information);
         return STATUS_INVALID_PARAMETER;
     }
-
-    (void)app_command_copy((uint8_t *)information->CmdLine, source->command,
-        source->command_bytes);
-    (void)app_command_copy((uint8_t *)information->AppName, source->application,
-        source->application_bytes);
-    (void)app_command_copy((uint8_t *)information->Enviornment, source->environment,
-        source->environment_bytes);
-    (void)app_command_copy((uint8_t *)information->CurDirectory,
-        source->current_directory, source->current_directory_bytes);
-    app_command_source_required_sizes(source, information);
+    (void)copy_bytes((uint8_t *)information->CmdLine, record->command, record->command_bytes);
+    (void)copy_bytes((uint8_t *)information->AppName, record->application, record->application_bytes);
+    (void)copy_bytes((uint8_t *)information->Enviornment, record->environment, record->environment_bytes);
+    (void)copy_bytes((uint8_t *)information->CurDirectory, record->current_directory, record->current_directory_bytes);
+    required_sizes(record, information);
     information->VDMState = 0u;
-    information->CurDrive = source->current_drive;
-    information->StdIn = NULL;
-    information->StdOut = NULL;
-    information->StdErr = NULL;
-    information->iTask = source->task;
-    information->CodePage = source->code_page;
-    information->dwCreationFlags = source->creation_flags;
-    information->ErrorCode = source->error_code;
-    information->fComingFromBat = source->coming_from_bat;
-    source->available = 0u;
+    information->CurDrive = record->current_drive;
+    information->StdIn = information->StdOut = information->StdErr = NULL;
+    information->iTask = record->task;
+    information->CodePage = record->code_page;
+    information->dwCreationFlags = record->creation_flags;
+    information->ErrorCode = record->error_code;
+    information->fComingFromBat = record->coming_from_bat;
+    record->available = 0u;
     return STATUS_SUCCESS;
 }
 
-static NTSTATUS app_command_source_dispatch(void *context, PVDMINFO information)
+static void teardown(void *context)
 {
-    app_command_source *source = (app_command_source *)context;
-    if (!app_command_source_valid(source) || information == NULL)
-        return STATUS_INVALID_PARAMETER;
-    if (information->VDMState == INCREMENT_REENTER_COUNT ||
-        information->VDMState == DECREMENT_REENTER_COUNT)
-        return app_command_source_reentry(source, information);
-    return app_command_source_copy(source, information);
+    base_vdm_local *record = (base_vdm_local *)context;
+    if (record == NULL) return;
+    if (base_vdm_current == record) base_vdm_current = NULL;
+    record->owner = NULL;
 }
 
-static void app_command_source_teardown(void *context)
+int base_vdm_local_bind(base_vdm_local *record, session *owner)
 {
-    app_command_source *source = (app_command_source *)context;
-    if (source == NULL) return;
-    source->owner = NULL;
+    if (!base_vdm_local_valid(record) || record->owner != NULL || owner == NULL ||
+        !session_valid(owner) || owner->state != SESSION_STATE_ACTIVE || base_vdm_current != NULL) return 0;
+    base_vdm_current = record;
+    if (!session_register_teardown(owner, teardown, record)) { base_vdm_current = NULL; return 0; }
+    record->owner = owner;
+    return 1;
 }
 
-int app_command_source_bind(app_command_source *source, session *owner)
+int base_vdm_local_unbind(base_vdm_local *record)
 {
-    if (!app_command_source_valid(source) || source->owner != NULL || owner == NULL ||
-        !session_valid(owner) || owner->state != SESSION_STATE_ACTIVE) return 0;
-    if (!adapter_vdm_monitor_bind_command_provider(owner,
-        app_command_source_dispatch, source))
-        return 0;
-    if (!session_register_teardown(owner, app_command_source_teardown, source)) {
-        (void)adapter_vdm_monitor_unbind_command_provider(owner);
-        return 0;
+    if (!base_vdm_local_valid(record) || record->owner == NULL || base_vdm_current != record) return 0;
+    teardown(record);
+    return 1;
+}
+
+BOOL APIENTRY GetNextVDMCommand(PVDMINFO information)
+{
+    session *owner = session_thread_current();
+    NTSTATUS status;
+    if (information == NULL) { SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return FALSE; }
+    if (owner == NULL) { SetLastError(ERROR_NOT_READY); return FALSE; }
+    if (base_vdm_current == NULL || base_vdm_current->owner != owner) {
+        SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return FALSE;
     }
-    source->owner = owner;
-    return 1;
-}
-
-int app_command_source_unbind(app_command_source *source)
-{
-    if (!app_command_source_valid(source) || source->owner == NULL) return 0;
-    if (!adapter_vdm_monitor_unbind_command_provider(source->owner)) return 0;
-    source->owner = NULL;
-    return 1;
+    if (information->VDMState == INCREMENT_REENTER_COUNT || information->VDMState == DECREMENT_REENTER_COUNT) {
+        if (information->VDMState == INCREMENT_REENTER_COUNT && base_vdm_current->reentry_count != UINT32_MAX) {
+            ++base_vdm_current->reentry_count; return TRUE;
+        }
+        if (information->VDMState == DECREMENT_REENTER_COUNT && base_vdm_current->reentry_count != 0u) {
+            --base_vdm_current->reentry_count; return TRUE;
+        }
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    status = get_next_dos(base_vdm_current, information);
+    if (status == STATUS_SUCCESS) return TRUE;
+    SetLastError(status == STATUS_INVALID_PARAMETER ? ERROR_INVALID_PARAMETER :
+        status == STATUS_NO_MEMORY ? ERROR_NOT_ENOUGH_MEMORY : ERROR_CALL_NOT_IMPLEMENTED);
+    return FALSE;
 }

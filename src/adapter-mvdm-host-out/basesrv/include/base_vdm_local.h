@@ -1,5 +1,5 @@
-#ifndef APP_COMMAND_SOURCE_H
-#define APP_COMMAND_SOURCE_H
+#ifndef BASE_VDM_LOCAL_H
+#define BASE_VDM_LOCAL_H
 
 #include <stdint.h>
 
@@ -8,14 +8,10 @@
 
 typedef struct session session;
 
-#define APP_COMMAND_SOURCE_VERSION UINT32_C(1)
+#define BASE_VDM_LOCAL_VERSION UINT32_C(1)
 
-/*
- * A copied, one-session replacement for the reached DOS command record from
- * BaseSrv.  It carries only byte payloads and scalar metadata: no caller
- * pointer, Windows HANDLE, CSR record or guest address crosses this boundary.
- */
-typedef struct app_command_payload {
+/* A copied DOS record for the reached BaseSrv command path. */
+typedef struct base_vdm_command {
     uint32_t struct_bytes;
     uint32_t task;
     uint32_t creation_flags;
@@ -32,9 +28,9 @@ typedef struct app_command_payload {
     uint32_t environment_bytes;
     const uint8_t *current_directory;
     uint16_t current_directory_bytes;
-} app_command_payload;
+} base_vdm_command;
 
-typedef struct app_command_source {
+typedef struct base_vdm_local {
     uint32_t version;
     uint32_t struct_bytes;
     session *owner;
@@ -55,18 +51,19 @@ typedef struct app_command_source {
     uint8_t application[MAXIMUM_VDM_PATH_STRING];
     uint8_t environment[MAXIMUM_VDM_ENVIORNMENT];
     uint8_t current_directory[MAXIMUM_VDM_CURRENT_DIR];
-} app_command_source;
+} base_vdm_local;
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void app_command_source_initialize(app_command_source *source);
-int app_command_source_valid(const app_command_source *source);
-int app_command_source_publish(app_command_source *source,
-    const app_command_payload *payload);
-int app_command_source_bind(app_command_source *source, session *owner);
-int app_command_source_unbind(app_command_source *source);
+void base_vdm_local_initialize(base_vdm_local *record);
+int base_vdm_local_valid(const base_vdm_local *record);
+int base_vdm_local_publish(base_vdm_local *record,
+    const base_vdm_command *command);
+int base_vdm_local_bind(base_vdm_local *record, session *owner);
+int base_vdm_local_unbind(base_vdm_local *record);
+BOOL APIENTRY GetNextVDMCommand(PVDMINFO information);
 
 #ifdef __cplusplus
 }

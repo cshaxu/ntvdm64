@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "app/command_source.h"
-#include "vdm_command.h"
+#include "base_vdm_local.h"
 #include "session/session.h"
 
 static void reset_info(VDMINFO *information)
@@ -16,8 +15,8 @@ int main(void)
     static const uint8_t application[] = "C:\\DOS\\COMMAND.COM";
     static const uint8_t environment[] = "COMSPEC=C:\\DOS\\COMMAND.COM\0PATH=C:\\DOS\0\0";
     static const uint8_t directory[] = "C:\\DOS\0";
-    app_command_payload payload;
-    app_command_source source;
+    base_vdm_command payload;
+    base_vdm_local source;
     session instance;
     VDMINFO information;
     uint8_t command_buffer[MAXIMUM_VDM_COMMAND_LENGTH];
@@ -29,7 +28,7 @@ int main(void)
     if (GetNextVDMCommand(NULL) || GetLastError() != ERROR_CALL_NOT_IMPLEMENTED)
         return 1;
     session_initialize(&instance, 1u);
-    app_command_source_initialize(&source);
+    base_vdm_local_initialize(&source);
     memset(&payload, 0, sizeof(payload));
     payload.struct_bytes = sizeof(payload);
     payload.task = 7u;
@@ -46,8 +45,8 @@ int main(void)
     payload.environment_bytes = (uint32_t)sizeof(environment);
     payload.current_directory = directory;
     payload.current_directory_bytes = (uint16_t)sizeof(directory);
-    if (!app_command_source_publish(&source, &payload) ||
-        !session_activate(&instance) || !app_command_source_bind(&source, &instance) ||
+    if (!base_vdm_local_publish(&source, &payload) ||
+        !session_activate(&instance) || !base_vdm_local_bind(&source, &instance) ||
         !session_thread_bind(&instance)) return 2;
 
     reset_info(&information);
@@ -106,7 +105,7 @@ int main(void)
     information.VDMState = ASKING_FOR_WOW_BINARY;
     if (GetNextVDMCommand(&information) || GetLastError() != ERROR_CALL_NOT_IMPLEMENTED)
         return 10;
-    if (!app_command_source_unbind(&source)) return 11;
+    if (!base_vdm_local_unbind(&source)) return 11;
     reset_info(&information);
     if (GetNextVDMCommand(&information) ||
         GetLastError() != ERROR_CALL_NOT_IMPLEMENTED) return 12;

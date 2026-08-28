@@ -19,9 +19,15 @@ for migration or deletion; no existing mirror diff is retained. See the
 **T302 S2 admission:** the owner has directed single-person dual-role recovery
 from the queue's first functional package, Base VDM command protocol, through
 DPMI/DPMI32. This implementation S recovers only the local one-session DOS
-Base VDM protocol through original client code plus named same-shaped adapter
-mechanics; it does not admit CSR/CSRSS reconstruction, a new BOP service or a
-second machine executor. See the [T302 S2 plan](etc/operations/m0-t302-s2-base-vdm-local-protocol-recovery-plan-001.md).
+Base VDM protocol through the original public `VDMINFO` contract plus named
+source-shaped adapter mechanics; it does not admit CSR/CSRSS reconstruction,
+a new BOP service or a second machine executor. See the [T302 S2 plan](etc/operations/m0-t302-s2-base-vdm-local-protocol-recovery-plan-001.md).
+
+**T302 S2 P1:** the temporary app/monitor command path has been migrated into
+the named `adapter-mvdm-host-out/basesrv` family. Its source-shaped local DOS
+record passes focused formal Ninja x86/x64 tests; direct BaseClient CSR capture
+and BaseSrv's CSRSS product shell remain explicit S2 limits. See the
+[P1 migration evidence](etc/evidence/m0-t302-s2-p1-local-basesrv-record-migration-001.md).
 
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,

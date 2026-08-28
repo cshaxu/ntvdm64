@@ -11,6 +11,8 @@ implementation, or a general compatibility layer.
 - `softpc/`: historical SoftPC, CCPU and SAS call shapes over typed
   `adapter-bochs` mechanics and session-bounded services.
 - `monitor/`: historical user-mode VDM monitor and command-record call shapes.
+- `basesrv/`: reached BaseClient/BaseSrv VDM command protocol over copied
+  session-local records; never a generic CSR or CSRSS substitute.
 - `redir/`: historical VDMREDIR/Redirector product-interface call shapes.
 - `wow/`: historical WOW32/WOWEXEC product-interface call shapes.
 - `vdd/`: historical VDD registration and callback call shapes.
@@ -21,12 +23,12 @@ the T284 S1 inventory. `adapter-mvdm-host-out` never calls `bochs-core`
 directly; its `softpc` family reaches machine state only through the typed
 public operations of `adapter-bochs`.
 
-## Initial state
+## Current state
 
-T284 S3 creates only the seven classified family boundaries. There are no
-production source files, public exports, static-library inputs, or enabled
-historical capabilities in this component until their separately audited
-migration steps.
+Families remain separately admitted. The first recovered capability is the
+T302 local Base VDM protocol in `basesrv`; all other family implementation
+requires its own source/ABI/failure audit and must not use this protocol as a
+generic host-service shortcut.
 
 ## Registered divergences
 
