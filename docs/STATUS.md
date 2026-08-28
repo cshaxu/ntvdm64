@@ -150,6 +150,11 @@ MVDM source closure; all 76 historical SoftPC machine/device seeds are now
 explicitly retained as a no-second-executor Bochs boundary. See the [cohort
 evidence](etc/evidence/m0-t306-s1-mvdm-machine-cohort-rebase-001.md).
 
+**T306 S1 P7:** all 15 remaining signature-proven CRT seeds are the standard
+`memcpy` public CRT leaf. No historical CRT source or extra adapter is
+selected. See the [cohort audit]
+(etc/evidence/m0-t306-s1-crt-cohort-boundary-audit-001.md).
+
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,
 including historical build products, into the existing `mvdm-*` component

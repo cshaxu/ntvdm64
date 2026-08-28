@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3080 |
+| Documentation records | 3082 |
 | --- | --- |
-| Generated UTC | 2026-08-28T09:33:13Z |
+| Generated UTC | 2026-08-28T09:35:17Z |
 
 ## Entries
 
@@ -486,8 +486,9 @@ content-divergent entries.
 | etc/evidence/m0-t304-s2-fixed-width-machine-event-closure-001.md | indexed supporting material | 10fdad7c493ac0357f586b4186a5d52d29f786b8f2390ad394a960680484acc5 |
 | etc/evidence/m0-t305-s1-dispatcher-boundary-audit-001.md | indexed supporting material | d530f2048c35e37cdd04daca599f2fb28de5fe6fe7534ec96f973f65787abfdf |
 | etc/evidence/m0-t306-s1-baseclient-cohort-boundary-audit-001.md | indexed supporting material | f3763ad7548915fe11552238390649a60d6818de7b208934b9d9403a374b57fc |
+| etc/evidence/m0-t306-s1-crt-cohort-boundary-audit-001.md | indexed supporting material | 86851288574249f405f589085ef366d2d513cf0cb6dc08a57684397ffe899582 |
 | etc/evidence/m0-t306-s1-frontier-input-integrity-001.md | indexed supporting material | 3cab41560a6015d05a9d80912ea1bb7e69ef2a6d11c6b39f089f2d5f43ac52ab |
-| etc/evidence/m0-t306-s1-mvdm-machine-cohort-rebase-001.md | indexed supporting material | e0ab9c62cfcba510d66d040973d03962b9e3e935899a5558622c9d33c7ecd322 |
+| etc/evidence/m0-t306-s1-mvdm-machine-cohort-rebase-001.md | indexed supporting material | 797d93048dabb8a7f44d22b23a6322076f87b590289ff582f5cceb5af801cc8b |
 | etc/evidence/m0-t306-s1-netapi-cohort-boundary-audit-001.md | indexed supporting material | d22877294147357820a3b48ff4f00cd20def3b8a02d6dbc70821743ed58a7587 |
 | etc/evidence/m0-t306-s1-ole-csr-cohort-correction-001.md | indexed supporting material | a8edc95e51ae43896b7dc9310ec53e08cd780e905ced59fe723644f3c1c7c5c3 |
 | etc/evidence/m0-t306-s1-signature-seed-package-partition-001.md | indexed supporting material | 530d0fa173d7c5bf4d5361c4962e094f1fe338f4ceb06f32e191201265f15213 |
@@ -1114,8 +1115,9 @@ content-divergent entries.
 | etc/operations/m0-t304-s2-fixed-width-machine-event-plan-001.md | indexed supporting material | 6f4c877d408fe58fa9a59f38a94759ea64e57a33b5904446f28188fa011f55f3 |
 | etc/operations/m0-t305-s1-dem-command-vertical-slice-plan-001.md | indexed supporting material | 4b6f3e5c240c3b5a8d2136c30ed53ea2662e61c8e7584c1a707caca601b4f7ed |
 | etc/operations/m0-t306-s1-baseclient-cohort-ledger.tsv | indexed supporting material | d8f295fe39de56ae2c992526758e77870a48f3f500496a8bc235cf86fa7d4019 |
+| etc/operations/m0-t306-s1-crt-cohort-ledger.tsv | indexed supporting material | f09dca8422bc8fad28cf2190d2c420acd27a11007a1852a4dc125a587629c104 |
 | etc/operations/m0-t306-s1-external-boundary-package-selection-plan-001.md | indexed supporting material | 1bce6826b3d6f9f6d5aba1ccdca2dc9c3ec5e83a6052b8b775711f545aba04c1 |
-| etc/operations/m0-t306-s1-mvdm-machine-cohort-ledger.tsv | indexed supporting material | f26229e6427d2b71841c96c30eb1e7dbeade64f24d6b4677094596e78ab4d1ba |
+| etc/operations/m0-t306-s1-mvdm-machine-cohort-ledger.tsv | indexed supporting material | 534c25d8d36e8c8e02c75793685ce93c23d1b6e290c1e88211b5b662f1842872 |
 | etc/operations/m0-t306-s1-netapi-cohort-ledger.tsv | indexed supporting material | 89fe1ea314ba84870e419262225480a85db3f33ae2bb3684bed30303e34e876a |
 | etc/operations/m0-t306-s1-ole-csr-cohort-ledger.tsv | indexed supporting material | 855b8ba886b6aad4489cb7485ef3a6e020acd492f91106562d3fdff480fb6a14 |
 | etc/operations/m0-t306-s1-signature-seed-package-ledger.tsv | indexed supporting material | 3cd0ec89b26ee9cb9ecc9a3f86c3cab009ef5314f14092645237951692ac8d9a |
@@ -3094,7 +3096,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 72af8270769b0c662a1afcae7648c26a98801b5db26edb516b7bcfb56dcbebe6 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | 0055a9789fec8022df8358a37bd7363790edd60f082f99aa52960fe1ffd3f5e2 |
 | source-policy.md | retained pre-governance evidence | 6b881abf191f57828d1d61e5cbda60deefda2a669de6e93bf159a25a6cfc5580 |
-| STATUS.md | principal control document | 22bac2bfd6bb92b86600f428da3fd4de7175aa706600879f3f887488cd769243 |
+| STATUS.md | principal control document | 77b74a703c7bd09fcb2a3244f2f84e09da214aaf9e0bbca9901ee5d9c84409c5 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | 3a8206fb0166ba91aed98c7351ab42c8615a23dce24ffb35f1fb0e69b06fa5c1 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | d986609216a1b513de81053676d5a1c90e0c6dd84109f841644e299028d15f4c |
 | TODO.md | principal control document | 442391d4dcfc560074d6c535fa319376e28bd58011f85247f8659765c0d1b608 |

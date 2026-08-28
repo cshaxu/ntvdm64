@@ -1,0 +1,2 @@
+cohort_id	physical_call_count	reached_form	original_definition	final_disposition	owner	action	stopping_boundary
+T306-CRT-01	15	memcpy	base/crts/crtw32/string/memcpy.c	public CRT leaf	MSVC CRT	link the supported CRT form through the selected x86/x64 /MT build; do not import the NT4 CRT body	modern CRT runtime
