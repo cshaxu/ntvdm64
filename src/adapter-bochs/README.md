@@ -26,6 +26,14 @@ only create, copied real-mode load, finite budget run, active query and
 destroy. A finite stop clears only the adapter-owned Bochs stop latch before
 the next run; it neither resets nor recreates CPU/RAM state.
 
+## M0 T304 S2 fixed-width machine-event ingress
+
+`machine_facade_bind_opaque_callback` keeps its source-compatible opaque
+registration form, but copies bounded event and outcome bytes before invoking
+the consumer. It interprets no record layout. The sole public generic event
+and outcome layout remains in `adapter-mvdm-host-in`; this adapter only keeps
+Bochs-private CPU-stack records private.
+
 M0 T303/S2 adds the versioned `resume` request/outcome form beneath the older
 budget-run convenience form.  Its result is limited to mechanical input,
 inactive, failure, unexpected-return or budget exhaustion: it has no BOP,

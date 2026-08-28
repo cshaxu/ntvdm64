@@ -11,17 +11,51 @@ static adapter_bochs_minimal_machine_c *machine_facade_machine;
 /* A copied-frame commit is legal only while adapter-bochs owns a returned
  * CPU loop.  This is lifecycle state, not a guest/VDM scheduler. */
 static int machine_facade_cpu_paused;
+/* Preserve the source-compatible opaque registration API outside bochs-core,
+ * but copy bounded records at this mechanical boundary. The consumer is never
+ * passed the private CPU-stack record used by the overlay. */
+static machine_facade_opaque_callback machine_facade_callback;
+static void *machine_facade_callback_context;
+
+static int machine_facade_opaque_copy_callback(void *, const void *event,
+  unsigned event_bytes, void *outcome, unsigned outcome_bytes)
+{
+  uint8_t event_copy[MACHINE_FACADE_OPAQUE_EVENT_MAX_BYTES];
+  uint8_t outcome_copy[MACHINE_FACADE_OPAQUE_OUTCOME_MAX_BYTES];
+  int accepted;
+  if (machine_facade_callback == 0 || event == 0 || event_bytes == 0u ||
+      event_bytes > sizeof(event_copy) || outcome_bytes > sizeof(outcome_copy) ||
+      (outcome_bytes != 0u && outcome == 0))
+    return 0;
+  memcpy(event_copy, event, event_bytes);
+  if (outcome_bytes != 0u) memset(outcome_copy, 0, outcome_bytes);
+  accepted = machine_facade_callback(machine_facade_callback_context,
+    event_copy, event_bytes, outcome_bytes != 0u ? outcome_copy : 0,
+    outcome_bytes);
+  if (accepted != 0 && outcome_bytes != 0u)
+    memcpy(outcome, outcome_copy, outcome_bytes);
+  return accepted != 0 ? 1 : 0;
+}
 
 extern "C" int machine_facade_bind_opaque_callback(
   machine_facade_opaque_callback callback, void *context)
 {
-  return bx_cpu.overlay_bind_opaque_callback(
-    (bx_cpu_opaque_callback_t) callback, context);
+  if (callback == 0 || machine_facade_callback != 0) return 0;
+  machine_facade_callback = callback;
+  machine_facade_callback_context = context;
+  if (bx_cpu.overlay_bind_opaque_callback(
+      (bx_cpu_opaque_callback_t)machine_facade_opaque_copy_callback, 0))
+    return 1;
+  machine_facade_callback = 0;
+  machine_facade_callback_context = 0;
+  return 0;
 }
 
 extern "C" void machine_facade_unbind_opaque_callback(void)
 {
   bx_cpu.overlay_unbind_opaque_callback();
+  machine_facade_callback = 0;
+  machine_facade_callback_context = 0;
 }
 
 extern "C" int machine_facade_get_a20(uint32_t *enabled)

@@ -19,3 +19,11 @@ OpenNT selectors nor services.
 The later inventory must either reconnect `frame_transaction` through named
 current adapter contracts or remove it with a replacement/disposition record;
 it may not revive the former component root or introduce selector semantics.
+
+## M0 T304 S2 fixed-width contract
+
+`generic_ud_bridge.h` is the sole public definition of the generic copied
+machine-event and result records. Its sizes and critical offsets are asserted
+for x86 and x64. `adapter-bochs` does not include this header or attach
+provider meaning; it only copies bounded opaque bytes between the private
+Bochs overlay record and this public contract.

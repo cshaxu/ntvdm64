@@ -8,6 +8,7 @@
 #ifndef RUNTIME_GENERIC_UD_BRIDGE_H
 #define RUNTIME_GENERIC_UD_BRIDGE_H
 
+#include <stddef.h>
 #include <stdint.h>
 
 #define RUNTIME_GENERIC_UD_EVENT_MAGIC 0x42585544u
@@ -71,6 +72,38 @@ struct runtime_generic_ud_context_outcome {
   uint32_t eflags_write_mask, eflags_values;
   uint32_t context_mode, reserved0;
 };
+
+/* This is the sole public byte contract for the admitted generic machine
+ * event. It deliberately uses only fixed-width scalars, so both supported
+ * host targets must retain the same layout. The Bochs mirror never includes
+ * this header: adapter-bochs copies the private CPU record at the boundary. */
+#ifdef __cplusplus
+static_assert(sizeof(struct runtime_generic_ud_event) == 112u,
+  "generic machine event must remain fixed-width");
+static_assert(offsetof(struct runtime_generic_ud_event, fault_rip) == 32u,
+  "generic machine event fault_rip offset changed");
+static_assert(offsetof(struct runtime_generic_ud_event, window) == 96u,
+  "generic machine event window offset changed");
+static_assert(sizeof(struct runtime_generic_ud_outcome) == 64u,
+  "generic machine outcome must remain fixed-width");
+static_assert(offsetof(struct runtime_generic_ud_outcome, resume_rip) == 8u,
+  "generic machine outcome resume offset changed");
+static_assert(sizeof(struct runtime_generic_ud_context_outcome) == 88u,
+  "generic context outcome must remain fixed-width");
+static_assert(offsetof(struct runtime_generic_ud_context_outcome, resume_rip) == 8u,
+  "generic context outcome resume offset changed");
+#else
+typedef char runtime_generic_ud_event_size_must_be_112[
+  sizeof(struct runtime_generic_ud_event) == 112u ? 1 : -1];
+typedef char runtime_generic_ud_event_fault_rip_offset_must_be_32[
+  offsetof(struct runtime_generic_ud_event, fault_rip) == 32u ? 1 : -1];
+typedef char runtime_generic_ud_event_window_offset_must_be_96[
+  offsetof(struct runtime_generic_ud_event, window) == 96u ? 1 : -1];
+typedef char runtime_generic_ud_outcome_size_must_be_64[
+  sizeof(struct runtime_generic_ud_outcome) == 64u ? 1 : -1];
+typedef char runtime_generic_ud_context_outcome_size_must_be_88[
+  sizeof(struct runtime_generic_ud_context_outcome) == 88u ? 1 : -1];
+#endif
 
 #ifdef __cplusplus
 extern "C" {

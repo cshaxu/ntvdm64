@@ -2,7 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T304 S2.**
+**No active M/T/S packet.** T304 is closed at its fixed-width ingress
+boundary; the next admitted package may begin the DEM/COMMAND vertical slice.
 
 M0 T301/S1 is closed. Its constrained first-degree audit produced physical
 source/binding evidence without turning whole-program BFS into a functional
@@ -82,6 +83,11 @@ EIP policy and all other event families remain excluded. See the
 into one versioned fixed-width `adapter-mvdm-host-in` machine-event ABI,
 verified on x86/x64.  It remains selector- and service-blind. See the
 [S2 plan](etc/operations/m0-t304-s2-fixed-width-machine-event-plan-001.md).
+
+**T304 closure:** the public copied machine-event ABI is now fixed-width on
+x86/x64, while the Bochs-private record stays private behind an opaque bounded
+copy in `adapter-bochs`. No BOP/provider or `VDMEVENTINFO` semantics entered
+the machine boundary. See the [S2 closure evidence](etc/evidence/m0-t304-s2-fixed-width-machine-event-closure-001.md).
 
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,
@@ -211,19 +217,19 @@ not package/provider admissions. See the [P20 signature evidence]
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T304 S2`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | T304/S1 closure. This S admits one versioned copied machine-event ABI and removal of duplicated mechanical record layout only. |
-| Objective | Make one selector-blind fixed-width #UD event/outcome boundary authoritative between the Bochs overlay and `adapter-mvdm-host-in`. |
-| Non-goals | No BOP route/decoder, EIP policy, guest trace repair, device enablement, CPU profile, second SoftPC/CCPU executor, BaseSrv expansion, DEM/COMMAND provider behavior, XMS A20/SAS or DPMI protected behavior. |
-| Reference Baseline | T303 closure; [T304 S1 audit](etc/evidence/m0-t304-s1-machine-event-ingress-audit-001.md); current overlay, `adapter-bochs` and `adapter-mvdm-host-in` contracts. |
-| Files And ABI Surface | One public copied event/outcome header, overlay conversion/binding and x86/x64 local fixture only. |
+| Identifier Mode | No active packet; `M0 T304 S2` closed with single-person dual-role implementation and review. |
+| Admission And Approval | T304/S1 closure admitted one versioned copied machine-event ABI and the bounded opaque-copy binding only. |
+| Objective | Closed: one selector-blind fixed-width #UD event/outcome boundary is authoritative outside the Bochs mirror. |
+| Non-goals | BOP route/decoder, EIP policy, guest trace repair, device enablement, CPU profile, second SoftPC/CCPU executor, BaseSrv expansion, DEM/COMMAND provider behavior, XMS A20/SAS and DPMI protected behavior remain out of scope. |
+| Reference Baseline | [T304 S1 audit](etc/evidence/m0-t304-s1-machine-event-ingress-audit-001.md) and [S2 closure](etc/evidence/m0-t304-s2-fixed-width-machine-event-closure-001.md). |
+| Files And ABI Surface | Public copied event/outcome header, opaque facade conversion/binding and x86/x64 local fixture only. |
 | Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; four-rung source-recovery gate; mapping and `src.old` exclusion rules. |
-| Verification | Focused x86/x64 machine-event fixture, dependency-direction review, documentation governance and `git diff --check`. |
-| Expected Markers | One typed mechanical outcome for every finite resume; no MVDM semantic dependency enters Bochs; no unowned pointer/lease conversion or second executor exists. |
-| Asset Needs | Existing overlay opaque callback, `adapter-bochs` facade, current generic bridge and selected original monitor/ABI declarations. |
-| Reporting Requirements | Report ABI widths, accepted/declined outcome rules, eliminated duplicate record and x86/x64 evidence. |
-| Stop Conditions | A required change needs BOP/provider semantics, an unbounded device/product-shell import, a family-private mapping manager, or any `VDMEVENTINFO` owner behavior. |
-| Exit Criteria | One formally-tested copied mechanical event/outcome ABI has no duplicated private/public record definition and no service/selector content. |
+| Verification | Focused x86/x64 machine-event fixture, dependency-direction review, documentation governance and `git diff --check` passed for the closure. |
+| Expected Markers | Fixed ABI widths, accepted/declined outcome rules, Bochs-private record remains private, and no service/selector content at the mechanical boundary. |
+| Asset Needs | Existing overlay opaque callback, `adapter-bochs` facade and generic bridge. |
+| Reporting Requirements | Closure evidence reports ABI widths, accepted/declined rules, private/public separation and x86/x64 test result. |
+| Stop Conditions | A follow-on requires BOP/provider semantics, an unbounded device/product-shell import, a family-private mapping manager, or any `VDMEVENTINFO` owner behavior. |
+| Exit Criteria | Met: one formally tested copied mechanical event/outcome ABI, no public duplicate layout, no service/selector content. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务，从 Base VDM 命令协议开始，到 DPMI / DPMI32 复通。” |
 | Similar-Issue Sweep | finite stop class, no-active-machine/failure behavior, copied register frame, guest-memory lease lifetime, Bochs-only ownership, second-executor exclusion and selector-blind interface review. |
 

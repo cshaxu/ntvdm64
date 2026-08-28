@@ -11,6 +11,11 @@ typedef void (*machine_facade_timer_callback)(void *opaque);
 typedef int (*machine_facade_opaque_callback)(void *context,
     const void *event, unsigned event_bytes, void *outcome, unsigned outcome_bytes);
 
+/* Capacity limits for a copied opaque mechanical record. They carry no event,
+ * selector, service, guest-object or MVDM interpretation. */
+#define MACHINE_FACADE_OPAQUE_EVENT_MAX_BYTES 128u
+#define MACHINE_FACADE_OPAQUE_OUTCOME_MAX_BYTES 128u
+
 int machine_facade_bind_opaque_callback(
     machine_facade_opaque_callback callback, void *context);
 void machine_facade_unbind_opaque_callback(void);
