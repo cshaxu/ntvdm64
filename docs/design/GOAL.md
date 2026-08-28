@@ -46,4 +46,8 @@ resources or guest pointers.
 Success means reproducible source and artifact provenance, a manifest-driven
 x86/x64 build, auditable package selection, minimal imported-source diffs,
 bounded one-session execution, explicit unsupported behavior, and a stable
-path to original multi-process and intra-session semantics.
+path to original multi-process and intra-session semantics.  Original SoftPC
+is the product-default machine backend; Bochs is an explicit alternate.  Any
+functional acceptance that exercises a machine, guest, or MVDM host behavior
+must record the x86/x64 × SoftPC/Bochs matrix.  A deliberately unavailable or
+blocked backend is an explicit cell outcome, never a skipped test dimension.

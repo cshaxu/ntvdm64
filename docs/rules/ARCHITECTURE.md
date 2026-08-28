@@ -127,13 +127,20 @@
 25. The host build matrix is MSVC Win32/x86 `/MT` and MSVC x64 `/MT`.
     Different architectures never satisfy symbols in one process;
     cross-process interaction uses only an admitted fixed wire ABI.
-26. `src.old/` and comparison repositories are evidence only and must not
+26. Original SoftPC is the default session machine backend; Bochs is selected
+    only explicitly. A session chooses exactly one before activation and may
+    not silently fall back or execute both. Every functional test that reaches
+    machine, guest or MVDM-host behavior records the Win32/x86 × Win64/x64 ×
+    SoftPC/Bochs matrix. An intentionally unavailable or blocked backend is a
+    recorded expected result, not an omitted row. Pure source/build-audit work
+    may state why it has no machine matrix.
+27. `src.old/` and comparison repositories are evidence only and must not
     enter source, build, link, runtime or acceptance manifests.
-27. Bochs 2.6 is the only mirror baseline for `bochs-core`. Existing project
+28. Bochs 2.6 is the only mirror baseline for `bochs-core`. Existing project
     Bochs/adapter mechanics are recovery evidence only; every retained core
     difference is minimized, individually registered, and placed in the
     matching private overlay when it exceeds the mirror rule's local boundary.
-28. `mvdm-support` may be linked only after the package/symbol tracker
+29. `mvdm-support` may be linked only after the package/symbol tracker
     records its original consumer, exact interface shape, binding owner and
     x86/x64 disposition. `mvdm-tools` may never be linked into `app` or
     an MVDM host runtime. `mvdm-softpc-firmware` may not be compiled or linked

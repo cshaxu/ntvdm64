@@ -162,6 +162,16 @@ The current runtime binds exactly one active imported MVDM host context to each
 session, original DOS `EXEC`, COMMAND child/re-entry behavior and multiple
 WOW16 tasks are guest/task lifecycles, not additional VDM sessions.
 
+Each session selects exactly one machine backend before activation. Original
+SoftPC is the default selected by `app` when the user omits a backend choice;
+Bochs is an explicit alternate. A session may never execute both backends or
+silently substitute one for the other. Functional machine, guest, or MVDM-host
+acceptance always records four cells—Win32/x86 SoftPC, Win32/x86 Bochs,
+Win64/x64 SoftPC and Win64/x64 Bochs. A backend that is intentionally
+unavailable or blocked is recorded with its expected outcome; it is not
+removed from the matrix. Pure source, static-analysis, and documentation work
+need not create machine sessions.
+
 All project-owned session and adapter APIs are multi-instance-safe: no hidden
 process-global current machine, mapping table or resource registry is allowed.
 Imported MVDM code may retain its original process globals for the current

@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 3118 |
 | --- | --- |
-| Generated UTC | 2026-08-28T18:13:52Z |
+| Generated UTC | 2026-08-28T18:16:49Z |
 
 ## Entries
 
@@ -65,10 +65,10 @@ content-divergent entries.
 | design/ADAPTER-STARTUP-FIRMWARE-SNAPSHOT.md | retained pre-governance evidence | e53c4d8b5f849bfbdf779622750076211dfd4a1ed75cb97888777ad65a18e7b0 |
 | design/ADAPTER-STARTUP-SNAPSHOT-EVIDENCE-EXPORT.md | retained pre-governance evidence | 744618843058cbcf0c9074019f755ebdb573be5a9b33ff454da224537edd0cbd |
 | design/ADAPTER-TWO-PHASE-GUEST-READ.md | retained pre-governance evidence | 4332f15018aa65bb5bd372768ec80683654d73dafb4c7cf1ea485ed9ff972028 |
-| design/ARCHITECTURE.md | current design authority | e1e86ccbc556d47e2f2bd76df083e7f4947276d1469df2cfebd45993966307c9 |
+| design/ARCHITECTURE.md | current design authority | f0860771d0715c72cc9b28ec6bebb8ce3cced215fb40b1fb05825b7895591a7b |
 | design/BOCHS-MACHINE-COMPOSITION.md | retained pre-governance evidence | 3d55ee174e229e89da3ab9f31e65ebbd832a1f48c4f2eb487ce48dc25043703f |
 | design/CODING.md | current design authority | b530f5bd2f28b019df396a6115627958802c0024d18020287b5cae7cada32cd9 |
-| design/GOAL.md | current design authority | 53e09e945d64be1a990b16a26dc4d748bfd103db9ae76a6ae60387b10d308943 |
+| design/GOAL.md | current design authority | 2a5db8048e1b51a64eb3ba252b97988fd46f554e88b0b988d16f700d78ed254b |
 | design/HOST-NAMESPACE-CAPABILITY.md | retained pre-governance evidence | d8f6df52c8bdc9527526d14756c05465136571bfbd90ee17f5798c766c256bd5 |
 | design/ROADMAP.md | current design authority | f013e77b1eeb36c1f152382beffab263bd1cbdab1ff15c84e6244a9cf10e514e |
 | design/STOCK-FIRMWARE-STARTUP-PROBE.md | retained pre-governance evidence | 2f5c8b2de1329fa7c500552229840dcf9c5c5b780aeb73797a84a004e79088c0 |
@@ -3104,8 +3104,8 @@ content-divergent entries.
 | research/softpc-source-matrix/NT4-V86-PRODUCT-ORACLE-AUDIT.md | retained pre-governance evidence | 0cc622520f5e900d78a3f6ff1f425c4a3cfda670e29a66f89d221ccdbcb4d893 |
 | RESET-TRACE-STATUS.md | retained pre-governance evidence | dd0ce777cf9399cf4438ddf618a720b33e4ca2d5e21df66b16a8aeeb9eae55bb |
 | ROI-DRIVEN-EXECUTION-ROADMAP.md | retained pre-governance evidence | 89fe2b2d62f7f3e46bd183e7cb7ee0a637ecfe68d41450cfe0383ae3bfbfa660 |
-| rules/ARCHITECTURE.md | current rule authority | 34f9d03f1cbc02033d38c86f90e6b9b46ab3e8777f5c13ceecc37c07c4f85dd6 |
-| rules/CODING.md | current rule authority | 2a2ea3bf985054ca673bbd99b15f697338b22f73d0979b7501b03f6249cc3ebd |
+| rules/ARCHITECTURE.md | current rule authority | 72e51fb4c976bbb151c480c0a3b86938b13299f580e9df3d36d8511781deadb7 |
+| rules/CODING.md | current rule authority | 760610d77c378087dab8198df9a5e6bad6052e139cf3d0d5e59b3150eb61274e |
 | rules/DOCUMENT.md | current rule authority | 0cff1e805fbba9692de73db0daaaf4f651a9f62bbe908707027ac65fb0eb617f |
 | rules/EXECUTION.md | current rule authority | 8889c0db7661dbb61a3ac91831cb6d8396e67c85d3838cb7e2630694bffc53e4 |
 | S1-HISTORICAL-HOST-CLOSURE.md | retained pre-governance evidence | 0796b7bf5f0a780fbd7a989938474045ed2d3aa2a6b68b8697605393bd2e1bb8 |

@@ -153,6 +153,11 @@
 
 - Build the host with MSVC Win32/x86 `/MT` and MSVC x64 `/MT`. Do not link
   objects of different architecture or CRT into one process.
+- For a functional fixture that reaches machine execution, guest state or an
+  imported MVDM-host behavior, run and record SoftPC-default and
+  explicitly-selected Bochs rows on both x86 and x64.  An unavailable backend
+  is a passing negative result only when the fixture asserts that exact
+  source-shaped unavailable outcome; it may not be silently omitted.
 - Generate the Ninja graph from audited owner/package manifests and dependency
   files. A configuration hash change invalidates the relevant graph/objects.
 - Put all disposable compiler, linker, generated and debug output under
