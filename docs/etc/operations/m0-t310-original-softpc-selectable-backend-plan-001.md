@@ -1,4 +1,4 @@
-# M0 T310 — original SoftPC/CCPU backend import and selectable Bochs backend
+# M0 T310 — original SoftPC/CCPU recovery and Bochs runtime retirement
 
 ## Product decision
 
@@ -9,22 +9,21 @@ one and only one machine backend for that session:
 app CLI selection
   -> session backend binding
      -> original MVDM/SoftPC call shapes
-        -> original SoftPC/CCPU backend, or
-        -> same-shaped adapter-mvdm-host-out/softpc -> adapter-bochs backend
+        -> original SoftPC/CCPU backend
 ```
 
 This is not two concurrently executing VMs, and it does not permit rewriting
-MVDM callers. Bochs is the presently demonstrated mechanical backend. Original
-SoftPC/CCPU is the source-first selectable backend: this task must import,
-build, bind and progressively verify its original owner closure before runtime
-selection is enabled.
+MVDM callers.  The prior Bochs branch is only retained as recovery evidence
+until the original SoftPC profile has passed S7.  Original SoftPC/CCPU is the
+sole intended runtime backend: this task must import, build, bind and
+progressively verify its original owner closure before the historical Bochs
+runtime material is retired in S8.
 
-The application default is original SoftPC. Bochs is an explicit alternative.
-Until S5 makes SoftPC machine creation runnable, the default selection must
-produce an explicit unavailable result rather than silently selecting Bochs.
-Every later functional verification matrix covers both selected backends on
-both x86 and x64; a deliberately unavailable backend records its expected
-outcome instead of being omitted from the matrix.
+The application default is original SoftPC. Until S5 makes SoftPC machine
+creation runnable, the default selection must produce an explicit unavailable
+result rather than silently selecting another executor. S7 verifies the
+SoftPC profile on both x86 and x64. S8 then removes the alternate Bochs runtime
+route rather than preserving a permanent dual-backend matrix.
 
 For the original SoftPC branch, the selected executor is the original
 `i386 + CCPU` pure-software configuration. `MONITOR`, hardware V86 execution,
@@ -145,14 +144,32 @@ runtime substitute.
 
 S5 must prove on both x86 and x64 that a selected initialized SoftPC session
 enters original CCPU execution, returns one bounded typed stop result, and
-tears down without selecting MONITOR, V86 or Bochs. Every comparable
-selection/lifecycle behavior uses an x86/x64 × SoftPC/Bochs matrix from this S
-onward; an assertion which necessarily enters the original CCPU body is
-SoftPC-only by source ownership, but records the paired Bochs lifecycle
-control instead of omitting that backend. It does not yet claim the full
-device/startup-media matrix, BOP completion or a runnable user product.
+tears down without selecting MONITOR, V86 or Bochs. It does not yet claim the
+full device/startup-media matrix, BOP completion or a runnable user product.
+It also produces a source/path-level CCPU-profile removal audit: each reached
+V86/monitor/scaffold/tool path is classified as delete-after-S5,
+adapter-contract-retained, tool-only relocation, or still-required-with-owner.
+S5 audits this disposition but does not physically delete the original mirror
+paths.
 
-### S6 — original SoftPC machine/device composition recovery and verification
+### S6 — CCPU-profile V86/monitor implementation removal
+
+Apply the S5 removal audit before full-profile verification. Physically remove
+every original V86/Kernel-Monitor implementation path classified
+`delete-after-S5` from the production mirror, move tool-only inputs to their
+proper tool component, and remove `MONITOR`, `monitor.lib`, V86 scaffold and
+kernel-VDM implementation inputs from all CCPU build manifests. Do not delete
+an interface solely because its original implementation was V86-specific:
+`NtVdmControl`, `VDM_TIB`, `CurrentMonitorTeb` and related reached call shapes
+remain only where their named session/monitor adapter retains the same-shaped
+modern contract or explicit unavailable result.
+
+S6 proves x86/x64 CCPU build selection has no physical V86/monitor executable
+source, `MONITOR` define, `monitor.lib`, kernel-VDM execution or Bochs fallback.
+It records every deletion/move and verifies no live source/build input retains
+an obsolete path.
+
+### S7 — original SoftPC machine/device composition recovery and verification
 
 Starting from the S5 CCPU execution interval, recover and verify the selected
 original SoftPC controller and peripheral composition as one integrated
@@ -162,46 +179,55 @@ keyboard/mouse, display/VGA, disk/floppy and serial/parallel I/O. It verifies
 their original initialization order, interrupt and port behavior, failure
 directions and teardown against the selected startup-media profile.
 
-S6 does not broaden the product to optional devices merely because a source
+S7 does not broaden the product to optional devices merely because a source
 file exists, and it does not use a Bochs substitution to satisfy a SoftPC
 controller. Every enabled or unavailable family must retain its S4 source
 disposition. Its result is a verified original SoftPC machine profile, not the
 cross-backend product matrix.
 
-### S7 — focused dual-backend verification and transfer
+### S8 — Bochs runtime retirement and original-source diff recovery
 
-Run x86/x64 × SoftPC/Bochs selection, rejection,
-create/reset/run/stop/teardown tests. Test
-the original SoftPC call form where actually linked.  The minimum original
-SoftPC acceptance path is `create -> reset -> firmware/machine initialization
--> bounded execution -> typed controlled stop -> teardown`.  Its focused
-evidence must exercise the enabled keyboard input, timer/PIC delivery, basic
-video/port path and selected startup-media path.  Verify that unavailable
-devices fail by their recorded source-shaped direction rather than disappearing.
-Only after this closure may later XMS/DPMI packages use the selected backend
+S8 begins only after S7 has verified the original SoftPC profile on both x86
+and x64 through `create -> reset -> firmware/machine initialization -> bounded
+execution -> typed controlled stop -> teardown`, including the enabled keyboard
+input, timer/PIC delivery, basic video/port path and selected startup-media
+path.
+
+Then retire `bochs-core` and `adapter-bochs` from the live product tree into
+the indexed historical-code record. Remove their build, link, session-selection
+and CLI/composition routes; remove all live app and MVDM references to Bochs;
+and simplify every OpenNT mirror divergence that existed only to bind a Bochs
+mechanical path. The original MVDM/SoftPC spelling and control flow must be
+restored wherever a same-shaped SoftPC binding now exists. Any remaining
+non-SoftPC historical reference must be evidence-only and outside production
+source/build inputs.
+
+S8 verifies the final SoftPC-only x86/x64 product path and a negative source /
+build scan proving no live `bochs-core`, `adapter-bochs`, Bochs type, global,
+CLI option or backend-selection branch remains. It also records each removed
+or retained divergence and why, and updates the mirror README registers. Only
+after this closure may later XMS/DPMI packages use the SoftPC-only machine
 contract.
 
 ## Invariants
 
-1. `bochs-core` remains private to `adapter-bochs`; neither MVDM nor SoftPC
-   includes a Bochs type, object or global.
-2. `adapter-bochs` remains Bochs-only and receives no SoftPC, BOP, DOS, WOW,
-   COMMAND, DPMI or Win32 semantics.
-3. Original SoftPC/CCPU remains a mirror. Any divergence needs `DIVERGENCE:`
+1. Before S8, any retained Bochs recovery material remains isolated from
+   original MVDM/SoftPC source; after S8 it is historical evidence only.
+2. Original SoftPC/CCPU remains a mirror. Any divergence needs `DIVERGENCE:`
    and README registration; substantial added logic belongs in a private
    overlay or named adapter. The sole pre-approved divergence class is an
    original 32-bit native host pointer/handle/VDM alias replaced by the
    existing session mapping manager and bounded leases, so the same source
    builds correctly on both x86 and x64. It must preserve the original function
    spelling, parameters, ordering and observable failure result.
-4. `adapter-mvdm-host-out/softpc` preserves historical call shapes and cannot
+3. `adapter-mvdm-host-out/softpc` preserves historical call shapes and cannot
    invent an MVDM service result.
-5. A session owns the selected backend and mapping-manager instances. No
-   pointer, Bochs object, CCPU state pointer or host handle crosses fixed-width
+4. A session owns the SoftPC backend and mapping-manager instances. No
+   pointer, CCPU state pointer or host handle crosses fixed-width
    component ABI.
-6. Once original source is composable, an equivalent Bochs substitution is
-   deleted or reduced to its binding seam.
-7. `mvdm-softpc-patch` may contain only a registered NTVDMx64-provenance body.
+5. Once original source is composable, any equivalent Bochs substitution is
+   removed from the live product and retained only as indexed history.
+6. `mvdm-softpc-patch` may contain only a registered NTVDMx64-provenance body.
    It retains original spelling, parameters and failure order; any x86/x64
    address conversion uses the session mapping manager through the
    source-shaped SoftPC adapter boundary.
@@ -227,14 +253,15 @@ path.
 ## Completion standard
 
 T310 closes only after S5 has recovered original `i386 + CCPU` bounded
-execution, S6 has verified the selected original SoftPC machine/device profile,
-and S7 has formally tested the SoftPC/Bochs matrix on x86/x64. The SoftPC
-backend must complete the
+execution, S6 has removed the excluded V86/monitor implementation profile,
+S7 has verified the selected original SoftPC machine/device profile, and S8
+has retired the Bochs runtime and verified the resulting SoftPC-only product
+on x86/x64. The SoftPC backend must complete the
 minimum
 `create -> reset -> firmware/machine initialization -> bounded execution ->
 typed controlled stop -> teardown` path.  The closure records one explicit
 disposition for every reached machine family, proves keyboard input, timer/PIC,
 basic video/port and startup-media behavior for the selected profile, and
-proves that a session never runs SoftPC and Bochs concurrently.  The permitted
-mapping-manager changes must be individually registered and tested. S1 closes
-only the source/contract decision required to do that safely.
+proves that no live session, app or MVDM body can select or reach Bochs. The
+permitted mapping-manager changes must be individually registered and tested.
+S1 closes only the source/contract decision required to do that safely.

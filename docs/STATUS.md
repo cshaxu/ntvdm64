@@ -17,12 +17,12 @@
 | Reference Baseline | T310 S1 root/interface ledgers; S2 exact `ccpu386` x86/x64 archive and forced-link evidence; S3 selected-backend lifecycle closure; S4 P1--P4 machine-family/initialization worksets; original `softpc.new` mirrors; existing session mapping manager; registered NTVDMx64 patch exception. |
 | Files And ABI Surface | Original `mvdm-host/softpc.new/base/ccpu386` and selected `host/src` execution roots; S4-selected machine initialization inputs; `adapter-mvdm-host-out/softpc` same-shaped lower seams; session mapping leases for historical native-pointer aliases; registered `mvdm-softpc-patch` evidence only where indispensable. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island and source-recovery rules; T310 plan and S1--S3 evidence. |
-| Verification | Formal Ninja x86/x64 build and focused bounded-execution fixtures; prove original CCPU entry, typed stop and teardown; for every behavior that has a comparable selected-backend contract, run the same x86/x64 request through both SoftPC and explicit Bochs rows and record all four outcomes. The exact original CCPU-body probe is SoftPC-only by source ownership, but it requires the paired Bochs lifecycle/control result rather than being silently omitted. Assert that the selected SoftPC row does not select MONITOR, V86 or Bochs; no `src.old`, Bochs type/global in original sources, raw guest pointer, or unclassified forced-link form; governance and diff checks. |
-| Expected Markers | Explicit `i386 + CCPU` source/build selection; initialized SAS-backed state; one original CCPU bounded execution interval; copied typed stop result; session teardown; per-seam mapping-manager and NTVDMx64 patch-intent disposition. |
+| Verification | Formal Ninja x86/x64 build and focused bounded-execution fixtures; prove original CCPU entry, typed stop and teardown; assert that the selected SoftPC row does not select MONITOR, V86 or Bochs; no `src.old`, Bochs type/global in original sources, raw guest pointer, or unclassified forced-link form; governance and diff checks. After S7 validates SoftPC, S8 retires the Bochs runtime and verifies the SoftPC-only x86/x64 product path. |
+| Expected Markers | Explicit `i386 + CCPU` source/build selection; initialized SAS-backed state; one original CCPU bounded execution interval; copied typed stop result; session teardown; per-seam mapping-manager and NTVDMx64 patch-intent disposition; a path-level V86/monitor/scaffold removal audit for S6. |
 | Asset Needs | Exact source mirrors, original manifests and source hashes, T310 ledgers, existing adapter boundaries, MSVC Build Tools and Ninja. |
-| Reporting Requirements | Record original executor source/order, x86/x64 selection state, CCPU-versus-MONITOR disposition, source-recovery rung, interface owner, mapping-manager use, patch intent/body status, stop result and deferred owner. |
+| Reporting Requirements | Record original executor source/order, x86/x64 selection state, CCPU-versus-MONITOR disposition, source-recovery rung, interface owner, mapping-manager use, patch intent/body status, stop result, and a S6 disposition of delete-after-S5, adapter-contract-retained, tool-only relocation or still-required-with-owner for every reached V86/monitor/scaffold path. |
 | Stop Conditions | A required original body needs unregistered mirror modification; CCPU requires a new unclassified external boundary; a path selects MONITOR/V86 or Bochs; a native pointer escapes its synchronous mapping lease; or a patch would change the original debugbreak/failure contract. |
-| Exit Criteria | Both x86 and x64 prove the selected original `i386 + CCPU` path enters bounded execution from S4-initialized state, returns a typed controlled stop and tears down. Every comparable selection/lifecycle behavior has recorded x86/x64 × SoftPC/Bochs outcomes; an exact CCPU source-body assertion is explicitly SoftPC-only and has a paired Bochs control result. Every reached external seam has a named source-first disposition; no MONITOR/V86/Bochs fallback or unregistered pointer conversion occurs. |
+| Exit Criteria | Both x86 and x64 prove the selected original `i386 + CCPU` path enters bounded execution from S4-initialized state, returns a typed controlled stop and tears down. Every reached external seam has a named source-first disposition; no MONITOR/V86/Bochs fallback or unregistered pointer conversion occurs; the S6 removal audit classifies every reached V86/monitor/scaffold path. |
 | Original Owner Request | “本任务中，对你的要求是，尽可能的复通原始 mvdm/softpc.new 的softpc逻辑，使得softpc真实可靠；但是，应该使用映射管理器的地方，还是要记得用。” / “下一个S任务就做ccpu复通！” |
 | Similar-Issue Sweep | Original `ccpu386` executor and support roots; CCPU/MONITOR conditions; `nt_cpu`, `cfpu_def`, `nt_mem` and SAS interfaces; S4 initialization roots; existing SoftPC/Win32/session seams; mapping-manager leases; NTVDMx64 selected patch provenance; Bochs include/type/global edges; and `src.old` references. |
 
@@ -124,6 +124,18 @@ manifests on x86/x64, and every P3 unresolved physical form has an explicit
 owner. This is composition and interface closure only; it does not claim an
 executing CCPU. M0 T310 S5 owns the first original `i386 + CCPU` bounded
 execution interval.
+
+**T310 S5 P1:** the exact original `ccpu386` executor now enters and returns
+from one bounded `D6 FE` interval through original `nt_cprgs` selection and
+`nt_cpu::host_start_cpu`, after original SAS, CPU, FPU and access
+initialization on formal MSVC/Ninja x86 and x64 graphs. Six registered,
+source-preserving x64 corrections keep internal SoftPC native allocation
+addresses pointer-sized; they do not create guest/host mapping identities.
+The fixture deliberately exits before BIOS/BOP/device dispatch and uses only
+unreachable test-only link seams, so it proves the original executor rather
+than a runnable SoftPC session. The remaining source-shaped product lifecycle,
+typed session stop and V86/MONITOR removal audit remain active S5 work; see
+the [execution-seam audit](etc/evidence/m0-t310-s5-ccpu-execution-seam-audit-001.md).
 
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer

@@ -128,7 +128,7 @@ $includeRoots = @(
     'src/session'
 ) | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 
-$baseFlags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /Di386 /DNTVDM /DCPU_30_STYLE /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DANSI /DPROD ' +
+$baseFlags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /Di386 /DNTVDM /DCPU_30_STYLE /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' +
     ($includeRoots -join ' ')
 

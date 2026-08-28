@@ -1340,7 +1340,11 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
                                     IHP *, allocAddr,
                                     IU32 *, allocSize)
 {
-    IU32    prevAllocLastPage,      /* Last page previous chunk touches. */
+    /* DIVERGENCE: these are page numbers derived from native header-table
+     * addresses, not emulated addresses.  The original x86 IU32 temporaries
+     * happened to retain every pointer bit; use the existing pointer-sized
+     * IHPE carrier so the same shift/reconstruct algorithm works on x64. */
+    IHPE    prevAllocLastPage,      /* Last page previous chunk touches. */
             currentAllocFirstPage,  /* First page current chunk touches. */
             currentAllocLastPage,   /* Last page current chunk touches. */
             nextAllocFirstPage,     /* First page next chunk touches. */

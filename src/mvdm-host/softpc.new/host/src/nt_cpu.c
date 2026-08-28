@@ -36,9 +36,16 @@ static char SccsID[]="@(#)sun4_a3cpu.c	1.2 5/24/91 Copyright Insignia Solutions 
 #include "cpu_c.h"
 #endif
 
+/* DIVERGENCE: CCPU SAS owns Start_of_M_area and Length_of_M_area in
+ * ccpusas4.c.  This host source's historical duplicate definitions are
+ * unused by the CCPU path and collide at modern static link.  Keep them for
+ * non-CCPU configurations; the original host_start_cpu/host_simulate bodies
+ * below remain unchanged. */
+#ifndef CCPU
 GLOBAL	quick_event_delays	host_delays;
 GLOBAL	host_addr Start_of_M_area;
 GLOBAL	IHPE Length_of_M_area;
+#endif
 #ifdef A2CPU
 extern	void	route_on();
 extern	void	route_on_fragment_no_interrupt_check();
