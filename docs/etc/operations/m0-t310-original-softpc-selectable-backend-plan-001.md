@@ -145,8 +145,12 @@ runtime substitute.
 
 S5 must prove on both x86 and x64 that a selected initialized SoftPC session
 enters original CCPU execution, returns one bounded typed stop result, and
-tears down without selecting MONITOR, V86 or Bochs. It does not yet claim the
-full device/startup-media matrix, BOP completion or a runnable user product.
+tears down without selecting MONITOR, V86 or Bochs. Every comparable
+selection/lifecycle behavior uses an x86/x64 × SoftPC/Bochs matrix from this S
+onward; an assertion which necessarily enters the original CCPU body is
+SoftPC-only by source ownership, but records the paired Bochs lifecycle
+control instead of omitting that backend. It does not yet claim the full
+device/startup-media matrix, BOP completion or a runnable user product.
 
 ### S6 — original SoftPC machine/device composition recovery and verification
 
