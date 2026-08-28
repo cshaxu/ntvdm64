@@ -4,27 +4,27 @@
 
 ## Active Packet
 
-**Active: M0 T310 S3**
+**Active: M0 T310 S4**
 
-### M0 T310 S3 — selected-backend binding and lifecycle implementation
+### M0 T310 S4 — original SoftPC machine-composition recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T310 S3; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | S2 is closed by the recorded x86/x64 forced-link audit; S3 is the next pre-approved subtask in the owner-approved T310 plan. |
-| Objective | Implement the source-shaped, copied per-session backend-selection binding for the already-audited original SoftPC candidate and the existing Bochs path, without changing MVDM caller spelling or enabling unclassified machine/device behavior. |
-| Non-goals | No BOP/provider recovery, guest trace repair, CCPU rewrite, Bochs call from SoftPC source, kernel/CSRSS/VDD/console product-shell recreation, or claim that either candidate has completed a runnable SoftPC machine composition. |
-| Reference Baseline | T310 S1 source/interface ledgers, T310 S2 x86/x64 forced-link ledgers, original `ccpu386`/host manifests, and the existing session mapping manager. |
-| Files And ABI Surface | Session-owned fixed-width backend identity/lifecycle state; thin app composition; `adapter-mvdm-host-out/softpc` same-shaped binding only. New source bodies retain original MVDM/SoftPC call names and may use mapping-manager leases only for native pointer/VDM aliases. |
-| Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island and source-recovery rules; T310 plan and prior S evidence. |
-| Verification | Source-owner scan; focused selected/unselected lifecycle tests on x86/x64; the default SoftPC and explicit Bochs selections are both matrix rows; formal Ninja link of one selected backend per session; no `src.old`, mixed CCPU/Bochs execution target, raw guest pointer, or backend switch while active; governance and diff checks. |
-| Expected Markers | One selected backend per inactive session; copied create/reset/run/stop/teardown result; same-shaped MVDM-facing binding; no Bochs object/type/global in original SoftPC sources. |
-| Asset Needs | Current original mirrors and x86/x64 audit ledgers, session mapping manager, existing adapter boundaries, MSVC Build Tools and Ninja. |
-| Reporting Requirements | Identify every selection state and transition, original call form, mapping-manager lease where used, link membership, x86/x64 result, and any machine family deferred to S4. |
-| Stop Conditions | A required change modifies an original MVDM/SoftPC body outside a registered mapping or patch divergence; source selection needs an unclassified forced-link form; either backend leaks a private type/pointer through the copied session ABI; or selection would enable a device family not yet admitted by S4. |
-| Exit Criteria | x86/x64 evidence proves session creation chooses exactly one backend, rejects a second/late choice, routes only the selected source-shaped facade, and tears down without state leakage; all remaining original machine families retain their S2 physical owner disposition for S4. |
+| Identifier Mode | M0 T310 S4; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | S3 is closed by the recorded x86/x64 selection evidence; S4 is the next pre-approved subtask in the owner-approved T310 plan. |
+| Objective | Recover the original SoftPC machine composition in initialization/dependency order: establish each selected firmware and machine-control family as direct original composition, adapter-backed original composition, source-shaped unavailable, or a named later owner. |
+| Non-goals | No BOP/provider expansion, trace-selected repair, CCPU rewrite, Bochs call from an original SoftPC body, kernel/CSRSS product-shell recreation, optional device enablement by convenience, or runnable-backend claim before the complete selected profile is proven. |
+| Reference Baseline | T310 S1 root/interface ledgers, S2 x86/x64 forced-link ledgers, S3 backend-selection closure, original `softpc.new` source/manifest mirrors, firmware mirror, and existing session mapping manager. |
+| Files And ABI Surface | Original `mvdm-host/softpc.new` machine roots and `mvdm-softpc-firmware` inputs; source-shaped `adapter-mvdm-host-out/softpc` / Win32 bindings only where original callers require them; session mapping leases for any native-pointer alias. |
+| Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island and source-recovery rules; T310 plan and S1--S3 evidence. |
+| Verification | Per-family source/build disposition ledger; original-initialization-order review; formal Ninja x86/x64 archive/link probes; no `src.old`, Bochs type/global in original sources, raw guest pointer, or unclassified forced-link form; governance and diff checks. |
+| Expected Markers | One disposition for BIOS/ROM/CMOS, memory/SAS/A20/UMB, PIC/PIT, keyboard/mouse, DMA, display/VGA, disk/floppy and serial/parallel; smallest same-shaped adapter seams; explicit S5 runnable-profile workset. |
+| Asset Needs | Exact source mirrors, original manifests and source hashes, T310 ledgers, existing adapter boundaries, MSVC Build Tools and Ninja. |
+| Reporting Requirements | Record original source/order, x86/x64 status, source-recovery rung, interface owner, mapping-manager use, link membership, failure direction and deferred owner for each family. |
+| Stop Conditions | A required original body needs unregistered mirror modification; a family requires a new unclassified external boundary; a source path would run Bochs and CCPU together; or a device must be enabled without a source-shaped owner disposition. |
+| Exit Criteria | Every reached selected machine family has a source-first disposition and bounded build/initialization workset; all necessary mapping/adapter seams are named and registered; no original device/firmware family is silently omitted; S5 has a finite x86/x64 × SoftPC/Bochs verification matrix. |
 | Original Owner Request | “本任务中，对你的要求是，尽可能的复通原始 mvdm/softpc.new 的softpc逻辑，使得softpc真实可靠；但是，应该使用映射管理器的地方，还是要记得用。” |
-| Similar-Issue Sweep | All original CCPU sources, host/src roots, `sources` conditionals, existing forced includes, source hashes, x86/x64 diagnostics, current mapping-manager seams, Bochs include/type/global edges and old `src.old` references. |
+| Similar-Issue Sweep | All original `softpc.new` host/base device/firmware roots, `sources` conditionals, T310 forced-link forms, existing adapters, source hashes, x86/x64 diagnostics, current mapping-manager seams, Bochs include/type/global edges and `src.old` references. |
 
 **T310 S1 closure:** `6a46ee748` establishes the exact original `ccpu386`,
 `host/src` and `obj.vdm` roots, hashes, historical source roles and a
@@ -76,6 +76,18 @@ cannot silently construct or resume a Bochs machine before S4 composition.
 Formal Ninja x86/x64 focused fixtures prove selection rejection, default
 admission and `host_simulate` non-fallback; see the [S3 evidence]
 (etc/evidence/m0-t310-s3-selected-backend-lifecycle-001.md).
+
+**T310 S3 closure:** the selected-backend lifecycle is closed. Its product
+default is SoftPC; before S4 makes that original composition runnable the
+selection fails explicitly and never changes to Bochs. The x86/x64 tests cover
+the default and explicit choice rows, late-selection rejection, source-shaped
+`host_simulate` routing and teardown.
+
+**T310 S4 P1:** the original SoftPC machine scope is now a nine-family,
+initialization-ordered workset. Firmware, memory/SAS, UMB/VDD, PIC/PIT,
+keyboard/mouse, DMA, display, disk/floppy and serial/parallel each have one
+source-first disposition; no family is silently substituted or omitted. See
+the [family audit](etc/evidence/m0-t310-s4-original-machine-family-audit-001.md).
 
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
