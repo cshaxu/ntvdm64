@@ -170,6 +170,13 @@ session mapping-manager/SoftPC physical-page binding is recovered.  No old
 fixture is retained as a current production claim.  See the [retirement
 record](etc/evidence/m0-t310-s5-nonnative-memory-fallback-retirement-001.md).
 
+**T310 S5 P6:** the bounded original CCPU proof now executes an ordinary
+register-to-RAM instruction sequence before its original `D6 FE` return.
+Both original host entry forms prove `mov al,5Ah; mov [DS:8000h],al` through
+the original CCPU/SAS backing on x86 and x64, followed by the typed outer
+return.  This remains deliberately below BIOS/BOP/device composition.  See
+the [CPU/SAS/RAM evidence](etc/evidence/m0-t310-s5-ccpu-sas-ram-execution-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove

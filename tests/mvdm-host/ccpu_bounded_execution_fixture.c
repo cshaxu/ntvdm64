@@ -21,9 +21,11 @@ static LONG WINAPI fixture_unhandled_exception(EXCEPTION_POINTERS *exception)
 extern void sas_init(uint32_t size);
 extern void sas_term(void);
 extern void c_sas_store(uint32_t address, uint8_t value);
+extern uint8_t c_sas_hw_at(uint32_t address);
 extern void c_cpu_init(void);
 extern uint16_t c_getIP(void);
 extern void c_setIP(uint16_t value);
+extern uintptr_t c_setDS(uint16_t value);
 extern void load_sw_cpu_access_functions(void);
 extern void (*host_simulate_func)(void);
 extern void host_start_cpu(void);
@@ -31,9 +33,10 @@ extern void host_simulate(void);
 
 int main(void)
 {
-    /* `D6 FE` is the original CCPU BOP-FE exit instruction.  c_main.c
-     * advances IP before calling c_cpu_unsimulate(), which returns through
-     * the original CCPU TLS simulation frame. */
+    /* The program uses ordinary original CCPU decode and SAS RAM access
+     * before its `D6 FE` exit.  `c_main.c` advances IP before calling
+     * c_cpu_unsimulate(), which returns through the original CCPU TLS
+     * simulation frame. */
     SetUnhandledExceptionFilter(fixture_unhandled_exception);
     fputs("sas-init\n", stderr);
     sas_init(UINT32_C(0x00200000));
@@ -42,8 +45,15 @@ int main(void)
     fputs("access-init\n", stderr);
     load_sw_cpu_access_functions();
     fputs("seed\n", stderr);
-    c_sas_store(UINT32_C(0x000ffff0), UINT8_C(0xd6));
-    c_sas_store(UINT32_C(0x000ffff1), UINT8_C(0xfe));
+    (void)c_setDS(0u);
+    /* mov al,5ah; mov [8000h],al; d6 fe */
+    c_sas_store(UINT32_C(0x000ffff0), UINT8_C(0xb0));
+    c_sas_store(UINT32_C(0x000ffff1), UINT8_C(0x5a));
+    c_sas_store(UINT32_C(0x000ffff2), UINT8_C(0xa2));
+    c_sas_store(UINT32_C(0x000ffff3), UINT8_C(0x00));
+    c_sas_store(UINT32_C(0x000ffff4), UINT8_C(0x80));
+    c_sas_store(UINT32_C(0x000ffff5), UINT8_C(0xd6));
+    c_sas_store(UINT32_C(0x000ffff6), UINT8_C(0xfe));
     fputs("start\n", stderr);
     /* `nt_cprgs.c` selects the original CCPU executor through this historical
      * SoftPC CPU-access dispatch slot.  The fixture must not bypass that
@@ -71,9 +81,10 @@ int main(void)
         (void)session_dispose(&owner);
     }
     fputs("returned-start\n", stderr);
-    if (c_getIP() != UINT16_C(0xfff2)) {
-        fprintf(stderr, "CCPU host_start_cpu did not return through BOP FE: IP=%04x\n",
-            (unsigned)c_getIP());
+    if (c_getIP() != UINT16_C(0xfff7) ||
+        c_sas_hw_at(UINT32_C(0x00008000)) != UINT8_C(0x5a)) {
+        fprintf(stderr, "CCPU host_start_cpu did not execute original RAM write: IP=%04x mem=%02x\n",
+            (unsigned)c_getIP(), (unsigned)c_sas_hw_at(UINT32_C(0x00008000)));
         sas_term();
         return 1;
     }
@@ -86,9 +97,10 @@ int main(void)
     fputs("reenter\n", stderr);
     host_simulate();
     fputs("returned-recursive\n", stderr);
-    if (c_getIP() != UINT16_C(0xfff2)) {
-        fprintf(stderr, "CCPU host_simulate did not return through BOP FE: IP=%04x\n",
-            (unsigned)c_getIP());
+    if (c_getIP() != UINT16_C(0xfff7) ||
+        c_sas_hw_at(UINT32_C(0x00008000)) != UINT8_C(0x5a)) {
+        fprintf(stderr, "CCPU host_simulate did not execute original RAM write: IP=%04x mem=%02x\n",
+            (unsigned)c_getIP(), (unsigned)c_sas_hw_at(UINT32_C(0x00008000)));
         sas_term();
         return 1;
     }
