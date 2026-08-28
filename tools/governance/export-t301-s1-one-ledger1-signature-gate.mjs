@@ -1,0 +1,34 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
+const repository = process.argv[2] || process.cwd();
+const operations = path.join(repository, 'docs', 'etc', 'operations');
+const headerRoots = { OpenNT: 'O:\\repos.external\\OpenNT', 'OpenNT-4.5': 'O:\\repos.external\\OpenNT-4.5' };
+
+function split(line) { const fields = []; let field = ''; let quoted = false; for (let index = 0; index < line.length; index += 1) { const character = line[index]; if (character === '"') { if (quoted && line[index + 1] === '"') { field += '"'; index += 1; } else quoted = !quoted; } else if (character === '\t' && !quoted) { fields.push(field); field = ''; } else field += character; } fields.push(field); return fields; }
+function read(name) { const [header, ...body] = fs.readFileSync(path.join(operations, name), 'utf8').replace(/^\uFEFF/, '').split(/\r?\n/).filter(Boolean).map(split); return body.map((fields) => Object.fromEntries(header.map((column, index) => [column, fields[index] || '']))); }
+function quote(value) { return `"${String(value ?? '').replaceAll('"', '""')}"`; }
+function write(name, columns, rows) { fs.writeFileSync(path.join(operations, name), `${columns.join('\t')}\n${rows.map((row) => columns.map((column) => quote(row[column])).join('\t')).join('\n')}\n`); }
+function parenClose(text, open) { let depth = 0; for (let index = open; index < Math.min(text.length, open + 4096); index += 1) { if (text[index] === '(') depth += 1; else if (text[index] === ')' && --depth === 0) return index; } return -1; }
+function argumentCount(text, open, close) { const value = text.slice(open + 1, close).trim(); if (!value || /^void$/i.test(value)) return 0; let nesting = 0; let count = 1; for (const character of value) { if ('([{'.includes(character)) nesting += 1; else if (')]}'.includes(character)) nesting -= 1; else if (character === ',' && nesting === 0) count += 1; } return count; }
+function offsetAtLine(source, line) { let offset = 0; for (let current = 1; current < line && offset < source.length; current += 1) { const next = source.indexOf('\n', offset); offset = next < 0 ? source.length : next + 1; } return offset; }
+function invocation(fileName, line, symbol) { const source = fs.readFileSync(fileName, 'utf8'); const start = offsetAtLine(source, line); const marked = source.indexOf(symbol, start); const prior = source.lastIndexOf(symbol, start); const at = marked >= start && marked < start + 8192 ? marked : prior; if (at < Math.max(0, start - 2048) || at > start + 8192) return null; const open = source.indexOf('(', at + symbol.length); const close = parenClose(source, open); return close < 0 ? null : { count: argumentCount(source, open, close), source }; }
+function conditionContext(source, line) { const stack = []; for (const value of source.split(/\r?\n/).slice(0, line)) { const directive = value.match(/^\s*#\s*(if|ifdef|ifndef|elif|else|endif)\b(.*)$/); if (!directive) continue; const [, kind, tail] = directive; if (/^(if|ifdef|ifndef)$/.test(kind)) stack.push(`${kind}:${tail.trim()}`); else if (/^(elif|else)$/.test(kind) && stack.length) stack[stack.length - 1] = `${kind}:${tail.trim()}`; else if (kind === 'endif') stack.pop(); } return stack.join(' > ') || 'unconditional'; }
+function headerFile(token) { const [raw, line] = token.split('@'); const [edition, relative] = raw.split('|'); const root = headerRoots[edition]; return root ? { fileName: path.join(root, ...relative.split('/')), line: Number(line) } : null; }
+
+const resolutions = new Map(read('one-ledger1-definition-resolution.tsv').map((row) => [row.resolution_id, row]));
+const bindings = read('one-ledger1-declaration-binding-ledger.tsv').filter((row) => row.binding_disposition === 'unique-source-candidate-with-reachable-declaration-token');
+const rows = [];
+for (const binding of bindings) {
+  const resolution = resolutions.get(binding.resolution_id); if (!resolution) throw new Error(`binding without P18 resolution: ${binding.binding_id}`);
+  const callerRoot = resolution.caller_physical_identity.split('|')[0];
+  const caller = invocation(path.join(callerRoot, ...resolution.caller_source_path.split('/')), Number(resolution.call_source_line), binding.callee_spelling);
+  const definition = invocation(path.join(binding.definition_source_root, ...binding.definition_source_path.split('/')), Number(binding.definition_source_line), binding.callee_spelling);
+  const headerCalls = binding.reachable_declaration_tokens.split(';').filter(Boolean).map(headerFile).filter(Boolean).map((item) => fs.existsSync(item.fileName) ? invocation(item.fileName, item.line, binding.callee_spelling) : null).filter(Boolean);
+  const headerCounts = headerCalls.map((item) => item.count);
+  const confirmed = caller && definition && headerCounts.includes(definition.count) && caller.count === definition.count;
+  rows.push({ signature_gate_id: `MVDM-HOST-ONE1-SIGNATURE-${String(rows.length + 1).padStart(6, '0')}`, binding_id: binding.binding_id, resolution_id: binding.resolution_id, one_ledger1_identity: binding.one_ledger1_identity, callee_spelling: binding.callee_spelling, selected_definition_identity: binding.candidate_identity, caller_argument_count: caller ? String(caller.count) : 'unresolved', declaration_argument_counts: headerCounts.join(';') || 'unresolved', definition_argument_count: definition ? String(definition.count) : 'unresolved', caller_condition_context: caller ? conditionContext(caller.source, Number(resolution.call_source_line)) : 'unresolved-call-form', definition_condition_context: definition ? conditionContext(definition.source, Number(binding.definition_source_line)) : 'unresolved-definition-form', signature_disposition: confirmed ? 'physical-call-declaration-definition-arity-confirmed' : 'signature-or-condition-form-unresolved', next_action: confirmed ? 'eligible future seed for separately admitted callee-body/second-degree expansion; not a package/provider selection' : 'retain one-degree unresolved; do not inspect candidate body without a new source-form recovery decision', boundary: 'P20 reads bounded call/declaration/definition signature regions and preprocessor contexts only; no candidate function body traversal occurred' });
+}
+write('one-ledger1-signature-gate.tsv', ['signature_gate_id', 'binding_id', 'resolution_id', 'one_ledger1_identity', 'callee_spelling', 'selected_definition_identity', 'caller_argument_count', 'declaration_argument_counts', 'definition_argument_count', 'caller_condition_context', 'definition_condition_context', 'signature_disposition', 'next_action', 'boundary'], rows);
+const count = new Map(); for (const row of rows) count.set(row.signature_disposition, (count.get(row.signature_disposition) || 0) + 1);
+console.log(`eligible bindings=${bindings.length}; ${[...count].map(([key, value]) => `${key}=${value}`).join('; ')}`);

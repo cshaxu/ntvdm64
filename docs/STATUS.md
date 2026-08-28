@@ -109,6 +109,18 @@ reachable declaration token and 243 are invalid cross-translation-unit static
 candidates. No callee body was read. See the [P19 binding evidence]
 (etc/evidence/m0-t301-s1-p19-one-ledger1-declaration-binding-001.md).
 
+**T301 S1 P20 admission:** only P19's 310 unique/declaration-reachable rows
+enter a bounded original call/declaration/definition signature and conditional
+context gate. Passing rows become future body-expansion seeds only; P20 still
+does not traverse a candidate body. See the [P20 plan]
+(etc/operations/m0-t301-s1-one-ledger1-signature-gate-plan-001.md).
+
+**T301 S1 P20:** 251 of the 310 eligible rows now have physical
+call/declaration/definition arity confirmation; 59 remain explicit one-degree
+signature/condition-form failures. The 251 are future body-expansion seeds,
+not package/provider admissions. See the [P20 signature evidence]
+(etc/evidence/m0-t301-s1-p20-one-ledger1-signature-gate-001.md).
+
 ## Active Packet
 
 | Field | Record |

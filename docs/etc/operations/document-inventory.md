@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3042 |
+| Documentation records | 3045 |
 | --- | --- |
-| Generated UTC | 2026-08-28T05:29:16Z |
+| Generated UTC | 2026-08-28T05:32:00Z |
 
 ## Entries
 
@@ -463,6 +463,7 @@ content-divergent entries.
 | etc/evidence/m0-t301-s1-p18-one-ledger1-definition-resolution-001.md | indexed supporting material | d9e20aeefbf072273decb658a877234ca30c79b4b5d67193c6c35d300418c5ae |
 | etc/evidence/m0-t301-s1-p19-one-ledger1-declaration-binding-001.md | indexed supporting material | dff6224893988d960809d1c75bf0d704df32d2493dd698d6e7ed618f533d49cb |
 | etc/evidence/m0-t301-s1-p1-first-degree-include-frontier-001.md | indexed supporting material | 21482f2f3594f3381ec1f772626ac14444639f7503b589cf7665ae7c9bff3713 |
+| etc/evidence/m0-t301-s1-p20-one-ledger1-signature-gate-001.md | indexed supporting material | 67aabd39cc35f041bb368c898ef7e2a90ae420851837734985ddc43dd26399f4 |
 | etc/evidence/m0-t301-s1-p2-first-degree-declaration-frontier-001.md | indexed supporting material | 04d5b0e49a197d6b2ee7271d0df63861dc2c0a95b7a72c0c6d2b4a3f0779b021 |
 | etc/evidence/m0-t301-s1-p3-prior-definition-identity-crosswalk-001.md | indexed supporting material | 39f07f8fe438b7518465be2d626993104d56830f20da42b29c0236ee41ef4b6c |
 | etc/evidence/m0-t301-s1-p4-direct-call-normalization-001.md | indexed supporting material | 5d5a9d9c8029fbc46db7acc4a8a77dd57ed8fb7cc16f09b716d804467337108c |
@@ -1081,6 +1082,7 @@ content-divergent entries.
 | etc/operations/m0-t301-s1-first-degree-resumption-plan-001.md | indexed supporting material | 16c72e008a7d0b8e7ffcd39875a161cc4f04f6d2513fb081eac4dd4c9e8c8faf |
 | etc/operations/m0-t301-s1-one-ledger1-declaration-binding-plan-001.md | indexed supporting material | 082cc2a908fdf980f3e043fc5b814e15f54df31e86c41acf9870ab1bcd6d1173 |
 | etc/operations/m0-t301-s1-one-ledger1-resolution-plan-001.md | indexed supporting material | af232f54a4327690d98fc9ecb6a939f9baee1c9580c231a6916052a4f5af9058 |
+| etc/operations/m0-t301-s1-one-ledger1-signature-gate-plan-001.md | indexed supporting material | 2e770e743a2068e85f2b835b784f03778a060b82d9c8ede14d6a79fe71ac0e7e |
 | etc/operations/m0-t301-s1-rebaselined-first-degree-audit-plan-001.md | indexed supporting material | 609bd87076612e6bffbbaa3b5ec2d73adc4cc331f18c8461b4f2ab9df0c6a7b2 |
 | etc/operations/m0-t301-s1-zero-degree-legality-audit-plan-001.md | indexed supporting material | 3a3439abae116f68092418f3f3e6d35a172a77753f1b898b5e3561aeb52a9361 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
@@ -1158,6 +1160,7 @@ content-divergent entries.
 | etc/operations/one-ledger1-declaration-binding-ledger.tsv | indexed supporting material | 59066eac8e75752a98df79908e94e4af8fd251de928d80e139e7c6d7c6c89df8 |
 | etc/operations/one-ledger1-definition-candidate-ledger.tsv | indexed supporting material | dd9b8694dda84ba0a678cacb7d458a1cb5f04865a36b3b2cb656ca6e7d9ed7c0 |
 | etc/operations/one-ledger1-definition-resolution.tsv | indexed supporting material | 31d91e40bc905508710a9867372a23e1a870b83cbb4f40d8ac8b6bdad2e96df0 |
+| etc/operations/one-ledger1-signature-gate.tsv | indexed supporting material | 224dd075d6f3610807b34762c2d38e362a585133e0bf8b3edc62f8b5a461c4d7 |
 | etc/operations/one-ledger1-unparsed-zero-body-ledger.tsv | indexed supporting material | 26d0ca58c10b7adc7b9e71d2fe677e0cadfb9f54113d915fd4860cd484d3e687 |
 | etc/operations/opennt-bop-host-service-plane-recovery-candidate.md | indexed supporting material | 643385cb4d3c61e70583d59ae2eb6dab5284e07f647bdd47da8575aa0ffbfadf |
 | etc/operations/opennt-bop-implementation-tracker-001.md | indexed supporting material | 11d4a0cd06dc670513084704cd78aa4625d039cf3fbde55194d6d66ef7bd947e |
@@ -3056,7 +3059,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | f9b1f676dd8c0f6d45e6b69215231d1293303cc3d1b2da9bef11a0c767d6f5ce |
+| STATUS.md | principal control document | b8c265b458e76cf401a297521dc27d5d135a5d62c80b0041184cbedfacc703d5 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
