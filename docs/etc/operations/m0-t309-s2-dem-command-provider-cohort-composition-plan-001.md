@@ -45,3 +45,19 @@ Both cohorts either formally link on x86/x64 through source-shaped bindings,
 or each remaining original external form has one exact owner/disposition and
 the complete original cohort remains selected. No table entry or provider body
 may be replaced merely to obtain a link.
+
+## P3 — residual original-owner selection
+
+P3 starts with the forced-link caller/symbol pairs, not bare symbol spellings.
+For each residual it first asks whether the selected `mvdm-host` mirror already
+contains the original body.  If so, that body is an original-source selection
+candidate, not an excuse to author an adapter replacement.  The initial
+inspection proves this distinction is material: `nt_rflop.c`, `nt_msscs.c`,
+`nt_error.c`, `nt_event.c`, `nt_lpt.c`, `nt_pif.c`, `nt_hosts.c`, and the
+original debugger/firmware paths own reached forms from DEM or COMMAND.
+
+Only after that pass may a row select an existing named adapter, a lower
+Bochs/firmware boundary, public CRT/Win32 linkage, or a later owner package.
+P3 does not add all of those source files blindly: each candidate retains its
+original caller, full translation-unit boundary, direct composition result,
+and failure/product-shell disposition.

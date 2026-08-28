@@ -35,6 +35,12 @@ links generate the deliberate non-runnable DLLs and isolate a stable 49-form
 `bochs-core` lower boundary plus 25 MSVC C++ runtime forms on both
 architectures; no provider or selector semantics entered that adapter.
 
+**T309 S2 P3 admission:** classify each residual by physical caller and
+original body before selecting any adapter. Initial inspection already proves
+that several residuals have original `mvdm-host` definitions in `nt_rflop`,
+`nt_msscs`, `nt_error`, `nt_event`, `nt_lpt`, `nt_pif`, and `nt_hosts`; they
+are source-selection candidates, not permission for replacement shims.
+
 **T307 S1 P1:** the local Base VDM facade now covers the reached DOS forms for
 first-VDM query, command capture/capacity/reentry, copied one-shot current
 directories and session-only `ExitVDM`. Its formal Ninja fixture passes under
