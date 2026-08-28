@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2981 |
+| Documentation records | 2983 |
 | --- | --- |
-| Generated UTC | 2026-08-28T01:13:30Z |
+| Generated UTC | 2026-08-28T01:16:06Z |
 
 ## Entries
 
@@ -452,6 +452,7 @@ content-divergent entries.
 | etc/evidence/m0-t300-s1-mvdm-local-call-closure-closure-001.md | indexed supporting material | 6df14f3f45d8adcee79f85e5f236750c30ac419a924aeac495e4f8feb40b4bcb |
 | etc/evidence/m0-t300-s1-mvdm-local-closure-preliminary-001.md | indexed supporting material | e56f9f4b721517ddd89c268b9dbb0fd4094b64a1daab39e3a4d7bbbe6c1e40f2 |
 | etc/evidence/m0-t301-s1-p1-first-degree-include-frontier-001.md | indexed supporting material | 21482f2f3594f3381ec1f772626ac14444639f7503b589cf7665ae7c9bff3713 |
+| etc/evidence/m0-t301-s1-p2-first-degree-declaration-frontier-001.md | indexed supporting material | 04d5b0e49a197d6b2ee7271d0df63861dc2c0a95b7a72c0c6d2b4a3f0779b021 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1071,6 +1072,7 @@ content-divergent entries.
 | etc/operations/mvdm-first-degree-rebaselined-boundary-ledger.tsv | indexed supporting material | 73578a54ed7cb9ee1571d5e5b14f445ee38ad0f79c67b188b5beb364ddb85df8 |
 | etc/operations/mvdm-first-degree-rebaselined-caller-include-frontier-ledger.tsv | indexed supporting material | d3ceb63fb79cddec5b3d91a8f577944f650ef778f87ed1f58c93d65b5d903e9f |
 | etc/operations/mvdm-first-degree-rebaselined-call-resolution-ledger.tsv | indexed supporting material | 96423d06709b856ff937f065dbc9fa6d68ff3db838ec956bc066392ad763aefb |
+| etc/operations/mvdm-first-degree-rebaselined-declaration-frontier-ledger.tsv | indexed supporting material | 34cd14ad6eb4e08a279dc321568ccd3e185e40031ae4feae0ac0337e7d5e5e99 |
 | etc/operations/mvdm-first-degree-rebaselined-definition-candidate-ledger.tsv | indexed supporting material | 53ea8d16315d98e2f3e5cd5e33e3a5402f44949a62022fe39ce24875c4af312c |
 | etc/operations/mvdm-first-degree-rebaselined-include-frontier-ledger.tsv | indexed supporting material | 514ad1d9e4d56c97e716e99a54d22356a5f39e0632900b762a572c89b8ab9fee |
 | etc/operations/mvdm-first-degree-rebaselined-worklist-ledger.tsv | indexed supporting material | 83eacef5f1f5604aa171daf5e8bb932065d74f3408ec2d1277506e058a427bdc |

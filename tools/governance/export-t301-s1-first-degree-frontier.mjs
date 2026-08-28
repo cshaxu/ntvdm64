@@ -102,6 +102,7 @@ const oldResults = parseTsv('mvdm-host-first-degree-original-resolution-ledger.t
 const zeroRoots = new Map();
 for (const row of zero) zeroRoots.set(`${row.source_path}\u0000${row.source_sha256}`, row.source_root);
 const oldBySpelling = new Map(oldResults.map((row) => [row.callee_spelling, row]));
+const targetSpellings = new Set(boundaries.map((row) => row.callee_spelling));
 const callers = new Map();
 for (const row of boundaries) {
   const key = `${row.caller_source_path}\u0000${row.caller_source_sha256}`;
@@ -117,8 +118,21 @@ for (const [key, row] of callers) {
   const resolved = includeClosure(fileName, includes);
   callerHeaders.set(key, { includes, resolved });
 }
+const declarationTokens = new Map();
+for (const info of callerHeaders.values()) for (const header of info.resolved) {
+  const id = headerIdentity(header); if (declarationTokens.has(id)) continue;
+  const raw = fs.readFileSync(header.fileName, 'utf8');
+  const lines = new Map();
+  for (const match of raw.matchAll(/\b([A-Za-z_]\w*)\s*\(/g)) {
+    const symbol = match[1]; if (!targetSpellings.has(symbol)) continue;
+    const line = raw.slice(0, match.index).split('\n').length;
+    lines.set(symbol, [...(lines.get(symbol) || []), line]);
+  }
+  declarationTokens.set(id, lines);
+}
 const frontierRows = [];
 const workRows = [];
+const declarationRows = [];
 const callerFrontierRows = [...callerHeaders.entries()].map(([key, info], index) => {
   const [caller_source_path, caller_source_sha256] = key.split('\u0000');
   return {
@@ -157,9 +171,20 @@ for (const row of boundaries) {
     required_next_action: retained === 'public-win32-or-crt-leaf' ? 'prove declaration/ABI at this physical caller include frontier; then terminate as public leaf' : 'resolve declaration-guided original body variants or record hard-boundary/source-unavailable outcome',
     constraint: 'T301 must not merge by spelling, inspect a second-degree body, import source, or select a runtime provider.',
   });
+  for (const header of info.resolved) for (const line of declarationTokens.get(headerIdentity(header)).get(row.callee_spelling) || []) declarationRows.push({
+    candidate_id: row.candidate_id,
+    callee_spelling: row.callee_spelling,
+    caller_frontier_id: frontierIdByCaller.get(key),
+    declaration_header_identity: headerIdentity(header),
+    declaration_header_path: header.relative,
+    declaration_line: String(line),
+    declaration_package_root: packageRoot(header.relative),
+    disposition: 'original-header token in the physical caller include closure; declaration form and compatible definition remain to be resolved',
+  });
 }
 writeTsv('mvdm-first-degree-rebaselined-caller-include-frontier-ledger.tsv', callerFrontierRows, ['caller_frontier_id', 'caller_source_path', 'caller_source_sha256', 'direct_include_spellings', 'direct_original_headers', 'allowed_package_roots', 'frontier_basis']);
 writeTsv('mvdm-first-degree-rebaselined-include-frontier-ledger.tsv', frontierRows, ['candidate_id', 'caller_symbol', 'caller_source_path', 'caller_source_sha256', 'caller_source_line', 'callee_spelling', 'caller_frontier_id']);
 writeTsv('mvdm-first-degree-rebaselined-worklist-ledger.tsv', workRows, ['candidate_id', 'callee_spelling', 'preliminary_disposition', 'prior_t299_resolution', 'prior_t299_basis', 'required_next_action', 'constraint']);
+writeTsv('mvdm-first-degree-rebaselined-declaration-frontier-ledger.tsv', declarationRows, ['candidate_id', 'callee_spelling', 'caller_frontier_id', 'declaration_header_identity', 'declaration_header_path', 'declaration_line', 'declaration_package_root', 'disposition']);
 const counts = new Map(); for (const row of workRows) counts.set(row.preliminary_disposition, (counts.get(row.preliminary_disposition) || 0) + 1);
 console.log(`boundary calls=${boundaries.length}; physical caller files=${callers.size}; original header identities=${new Set(callerFrontierRows.flatMap((row) => row.direct_original_headers.split(';').filter(Boolean))).size}; preliminary outcomes=${[...counts].map(([key, value]) => `${key}=${value}`).join('; ')}`);
