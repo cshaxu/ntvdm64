@@ -1,0 +1,5 @@
+ledger0_identity	source_root	source_path	source_sha256	source_line	symbol	reason
+"MVDM-HOST-ZERO1-000014"	"O:\repos.external\OpenNT\base\mvdm"	"bde/bdecmds.c"	"ddcc992c69fa9f390780a935c2b3721b1df59ef148b15554b338cfbd248b110e"	"535"	"u"	"definition-body-not-parsed-from-recorded-physical-identity"
+"MVDM-HOST-ZERO1-000409"	"O:\repos.external\OpenNT\base\mvdm"	"ieuvddex/procdep.c"	"33912500d91e1c6a59c7986f19c9e7b251371ee54f675407e1cbd90b8ad7910a"	"649"	"WriteProcessMem"	"definition-body-not-parsed-from-recorded-physical-identity"
+"MVDM-HOST-ZERO1-001151"	"O:\repos.external\OpenNT\base\mvdm"	"v86/scaffold/i386/softpc.c"	"4272b1aafa096106981fb1445846c5e3c317f8849b084734c1c2f472c5c3b3f6"	"409"	"SCSConsoleThread"	"definition-body-not-parsed-from-recorded-physical-identity"
+"MVDM-HOST-ZERO1-001395"	"O:\repos.external\OpenNT\base\mvdm"	"vdmexts/stack.c"	"eb5992dad41aeb3d8cc325a49aae8f586e3fdf6552250d71bd84708c86525f39"	"678"	"k"	"definition-body-not-parsed-from-recorded-physical-identity"

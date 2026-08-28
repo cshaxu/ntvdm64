@@ -73,6 +73,11 @@
 - A `*-overlay` is callable only by its matching mirror. It has no standalone
   public ABI and cannot be linked directly by app, adapters, session, broker,
   another mirror or tests.
+- Build a mirror and its private overlay as one owner library.  The overlay
+  may contain added mechanics but may not duplicate an imported algorithm,
+  become the provider selected by an adapter, or acquire a public header.
+  Preserve the smallest possible `DIVERGENCE:` hook in the original source;
+  the corresponding mirror README registers both the hook and overlay file.
 - Keep upstream names and paths after re-rooting. Reference/example/test code
   stays outside production roots.
 - For `bochs-core`, the pinned upstream Bochs 2.6 tree is the sole mirror

@@ -13,6 +13,30 @@ owner. Original mirrors preserve upstream package identity, adapters preserve
 historical interface shape while translating mechanics, and project components
 own composition, session lifetime and cross-process coordination.
 
+## Mirror-preserving recovery model
+
+Source recovery has a second product objective in addition to executable
+closure: every adopted Bochs, MVDM and non-MVDM OpenNT package must remain
+recognisably comparable with its selected upstream source.  A successful build
+does not justify absorbing an original package into adapters or replacing its
+control flow with newly authored code.
+
+Each original mirror may have one private paired `*-overlay` implementation
+root.  That root is not an additional architectural component or a generic
+compatibility layer: it is part of its matching mirror's implementation and is
+compiled into that mirror's library only.  The mirror is the overlay's sole
+caller and linker.  Adapters and project components call the mirror's original
+or explicitly registered public boundary; they never call an overlay.
+
+Consequently, an imported translation unit retains its selected upstream path,
+name, data layout, function shape, original algorithm and failure order.  A
+small changed include, declaration binding or one-line hook stays in the mirror
+with a local `DIVERGENCE:` marker.  A material added mechanism is implemented
+in the paired overlay and reached through the smallest possible hook.  If a
+file would cease to be a byte-exact upstream file, true subset, or same-shaped
+minimal modification, it is not admitted as a mirror file.  The mirror README
+is the index of every crop, modified expression, hook and overlay binding.
+
 ## Package-first recovery boundary
 
 `mvdm-host` is a complete canonical mirror of the selected non-guest MVDM

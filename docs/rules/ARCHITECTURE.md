@@ -138,3 +138,13 @@
     x86/x64 disposition. `mvdm-tools` may never be linked into `app` or
     an MVDM host runtime. `mvdm-softpc-firmware` may not be compiled or linked
     as a host provider; it can enter only as an `adapter-bochs`-selected input.
+29. A `*-overlay` is a private implementation partition of its matching
+    original mirror, not an additional generic source component.  It compiles
+    into that mirror's library only; the matching mirror is its sole caller
+    and linker.  Adapters, `session`, `broker`, `app`, fixtures and every other
+    mirror must use the mirror boundary, never an overlay boundary.
+30. Mirror similarity is a release property.  An original package may not be
+    relocated into an adapter or replaced by autonomous code merely to reach a
+    build.  Retain upstream path/name/control structure in the mirror; use a
+    registered local `DIVERGENCE:` hook only for a minimal binding, and move
+    any material added mechanism to the paired overlay.
