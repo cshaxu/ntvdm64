@@ -22,7 +22,9 @@ of Bochs, MONITOR, V86 and BOP-provider dispatch.
 5. The fixture writes `D6 FE` at the reset location using the original
    `c_sas_store` surface.  `c_main.c` decodes that historical direct CCPU
    exit, advances IP, calls `c_cpu_unsimulate`, and returns by the original
-   simulation frame.  It does not enter BIOS BOP dispatch.
+   simulation frame. It then restores the original IP and repeats the bounded
+   interval through original `host_simulate`; neither interval enters BIOS BOP
+   dispatch.
 6. `sas_term` invokes original teardown.
 
 The test-only seam carrier supplies only symbols proven unreachable for this
@@ -77,10 +79,9 @@ source alteration.
 
 ## Explicit exclusions
 
-- The fixture does not enter `nt_cpu.c`'s recursive `host_simulate` wrapper:
-  its lock/TEB assertion and recursive BIOS semantics require later product
-  composition. `host_start_cpu` alone is selected for this bounded host-entry
-  proof.
+- The fixture exercises original `nt_cpu.c::host_simulate` only with the
+  direct CCPU `D6 FE` return opcode. Its recursive BIOS callers and
+  lock-contended semantics remain later product-composition work.
 - No `MONITOR`, V86, kernel VDM or Bochs source/type/global is a graph input.
 - `fmstubs.c` retains its `__debugbreak` default and is not selected.
 
@@ -96,15 +97,17 @@ access-init
 [load_sw_cpu_access_functions] init READ/WRITE functions.
 seed
 start
-returned
+returned-start
+reenter
+returned-recursive
 fixture_exit=0
 ```
 
 The checked postcondition is original `c_getIP() == 0xfff2`: the original
 `nt_cprgs.c` selector was installed, original `nt_cpu.c` entered CCPU, and
-CCPU consumed the two seeded bytes at
-`0xffff0`, advanced its original IP, and returned via the original
-`c_cpu_unsimulate` frame.  The formally generated graphs were run from
+CCPU consumed the two seeded bytes at `0xffff0`, advanced its original IP,
+and returned via the original `c_cpu_unsimulate` frame for both the primary
+and recursive original host-entry forms. The formally generated graphs were run from
 `build/M0-T310/S5/ccpu/x86` and a fresh
 `build/M0-T310/S5/ccpu/x64-clean` root.  Both graphs select the original CCPU
 and stated host roots only; neither takes a MONITOR, V86, Bochs or `src.old`
@@ -113,15 +116,15 @@ input.
 This is a **bounded original-executor proof**, not a product boot claim.  The
 fixture seeds `D6 FE`, whose original direct-unsimulate path returns before
 BIOS BOP dispatch, device I/O, interrupt delivery, ROM media or BOP-provider
-execution.  `rom_init`, `copyROM`, `host_simulate` and the other declared
-forms in `ccpu_bounded_execution_fixture_seams.c` are test-only link seams,
-except original `nt_cpu.c::host_simulate`, which is linked but not reached by
-the direct branch. None of the test-only forms enters a product library.
+execution. `rom_init`, `copyROM` and the other declared forms in
+`ccpu_bounded_execution_fixture_seams.c` are test-only link seams; original
+`nt_cpu.c::host_simulate` is linked and exercised. None of the test-only forms
+enters a product library.
 
 ## Remaining S5 work
 
-- Select and prove the source-shaped recursive `host_simulate` lifecycle
-  without the test-only `host_simulate` seam.
+- Select and prove source-shaped recursive BIOS `host_simulate` callers and
+  their lock/TEB lifecycle without test-only seams.
 - Classify the remaining, unexercised `nt_mem.c` pointer-conversion paths
   (`VdmAllocate*`, `VdmCommit*`, `VdmDecommit*`, physical-record setup and
   related callers).  They are not covered by this fixture and may require a

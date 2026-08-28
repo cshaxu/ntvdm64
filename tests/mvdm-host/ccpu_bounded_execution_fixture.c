@@ -21,9 +21,11 @@ extern void sas_term(void);
 extern void c_sas_store(uint32_t address, uint8_t value);
 extern void c_cpu_init(void);
 extern uint16_t c_getIP(void);
+extern void c_setIP(uint16_t value);
 extern void load_sw_cpu_access_functions(void);
 extern void (*host_simulate_func)(void);
 extern void host_start_cpu(void);
+extern void host_simulate(void);
 
 int main(void)
 {
@@ -53,9 +55,24 @@ int main(void)
      * the CCPU executor.  Under CPU_40_STYLE+CCPU its untouched source body
      * resolves cpu_simulate to c_cpu_simulate. */
     host_start_cpu();
-    fputs("returned\n", stderr);
+    fputs("returned-start\n", stderr);
     if (c_getIP() != UINT16_C(0xfff2)) {
-        fprintf(stderr, "CCPU did not return through BOP FE: IP=%04x\n",
+        fprintf(stderr, "CCPU host_start_cpu did not return through BOP FE: IP=%04x\n",
+            (unsigned)c_getIP());
+        sas_term();
+        return 1;
+    }
+
+    /* Re-enter through the original recursive SoftPC spelling.  The source
+     * body preserves its historical lock/TEB guard, then invokes the same
+     * CPU macro.  Reusing the direct exit keeps this a bounded mechanical
+     * proof, not a BIOS callback claim. */
+    c_setIP(UINT16_C(0xfff0));
+    fputs("reenter\n", stderr);
+    host_simulate();
+    fputs("returned-recursive\n", stderr);
+    if (c_getIP() != UINT16_C(0xfff2)) {
+        fprintf(stderr, "CCPU host_simulate did not return through BOP FE: IP=%04x\n",
             (unsigned)c_getIP());
         sas_term();
         return 1;

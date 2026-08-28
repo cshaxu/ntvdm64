@@ -126,9 +126,9 @@ executing CCPU. M0 T310 S5 owns the first original `i386 + CCPU` bounded
 execution interval.
 
 **T310 S5 P1:** the exact original `ccpu386` executor now enters and returns
-from one bounded `D6 FE` interval through original `nt_cprgs` selection and
-`nt_cpu::host_start_cpu`, after original SAS, CPU, FPU and access
-initialization on formal MSVC/Ninja x86 and x64 graphs. Six registered,
+from bounded `D6 FE` intervals through original `nt_cprgs` selection and both
+`nt_cpu::host_start_cpu` and `nt_cpu::host_simulate`, after original SAS, CPU,
+FPU and access initialization on formal MSVC/Ninja x86 and x64 graphs. Six registered,
 source-preserving x64 corrections keep internal SoftPC native allocation
 addresses pointer-sized; they do not create guest/host mapping identities.
 The fixture deliberately exits before BIOS/BOP/device dispatch and uses only
