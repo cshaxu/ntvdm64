@@ -13,6 +13,13 @@ retains its physical caller identity. Both approved MVDM source roots are
 used; see the [source-union correction
 evidence](etc/evidence/m0-t301-s1-p5-mvdm-source-union-correction-001.md).
 
+**T301 S1 P7:** the 122 declaration-shaped spellings now have a physical
+original-MVDM definition-form index from both approved source editions: 64
+spellings resolve to 128 bodies, including K&R forms that the lightweight
+parser did not recognize. This is candidate evidence only; no call has been
+reclassified by spelling. See the [P7 definition index]
+(etc/evidence/m0-t301-s1-p7-original-mvdm-definition-index-001.md).
+
 ## Active Packet
 
 | Field | Record |
