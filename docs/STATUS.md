@@ -64,23 +64,42 @@ variant/parser-gap candidates. These are evidence categories, not provider
 selections. See the [P14 global source map]
 (etc/evidence/m0-t301-s1-p14-rebased-global-source-map-001.md).
 
+**T301 S1 zero-degree legality pause:** first-degree classification is paused.
+The preceding P11--P14 counts are regenerated working evidence, not a licence
+to treat their implied zero-degree rebase as final.  The active work is now a
+per-definition legality audit of the complete selected MVDM zero closure:
+source identity, root/inbound-edge authority, static-linkage legality, body
+parse result and preprocessor variant evidence.  Any conditional or
+unparseable body remains an explicit zero-degree issue and cannot be silently
+reclassified to first degree.  See the [legality-audit plan]
+(etc/operations/m0-t301-s1-zero-degree-legality-audit-plan-001.md).
+
+**T301 S1 P15:** the pause has now established a lawful 12,202-identity
+zero-degree MVDM closure: 12,110 historic roots/continuous-MVDM members plus
+92 source-shape-confirmed rebase admissions. All source hashes, root/inbound
+authority, static-linkage conditions and physical bodies pass; 11,062 bodies
+are unconditional and 1,140 retain an explicit original conditional context.
+The exception ledger is empty. P11--P14 aggregate counts are superseded where
+their CRLF line-offset assumption differed from the regenerated input. See the
+[P15 legality closure](etc/evidence/m0-t301-s1-p15-zero-degree-legality-closure-001.md).
+
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T301 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Owner’s active goal is “开展一度审计”; T300 closed the predecessor zero-degree closure and the queue’s ordered first-frontier audit is now admitted. |
-| Objective | Resolve every T300 one-degree boundary call against original OpenNT/OpenNT-4.5 sources without spelling-only identity merges; classify each result as a public leaf, exact original body/variant, hard boundary, finite shallow replacement, or source-unavailable item, and emit only direct second-degree edges from actually resolved first-degree bodies. |
-| Non-goals | No source import, adapter/provider implementation, build/link admission, BOP enablement, runtime route, Bochs change, or inspection of any second-degree callee body. |
-| Reference Baseline | Current regenerated T300/T301 ledgers: 12,426 physical boundary-call rows / 1,446 spelling groups. T299 parser and include-frontier methods are reusable evidence only, not authoritative result rows. See [T301 plan](etc/operations/m0-t301-s1-rebaselined-first-degree-audit-plan-001.md). |
-| Files And ABI Surface | T301 audit generator, derived first-degree call/definition/file/second-degree ledgers, evidence, Status and documentation inventory only. No production ABI changes. |
+| Admission And Approval | Owner’s active goal is “开展一度审计”, but has explicitly paused first-degree expansion until the selected zero-degree closure is lawful. T301 remains active under that prerequisite. |
+| Objective | Prove every selected zero-degree MVDM definition’s original identity, root/inbound-edge authority, linkage legality, body parse result and conditional-variant disposition. Only then resume the original first-degree objective. |
+| Non-goals | During the pause: no first-degree classification, second-degree expansion, source import, adapter/provider implementation, build/link admission, BOP enablement, runtime route or Bochs change. |
+| Reference Baseline | P15's lawful 12,202-definition original-MVDM zero closure: 12,110 historic identities plus 92 confirmed rebase admissions. The currently regenerated first-degree outputs are derived evidence only and are not an active classification worklist. See the [zero-degree legality plan](etc/operations/m0-t301-s1-zero-degree-legality-audit-plan-001.md) and [closure](etc/evidence/m0-t301-s1-p15-zero-degree-legality-closure-001.md). |
+| Files And ABI Surface | T301 audit generators, zero-degree legality ledgers/evidence, Status and documentation inventory only. No production ABI changes. |
 | Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; physical identity rather than name-only matching; original-source-first recovery; `src.old` exclusion. |
-| Verification | Generation assertions for one result per T300 boundary ID, physical source-path/hash/line/signature review, include-frontier constraint evidence, source-root and `src.old` exclusion scans, documentation inventory/governance checks, and `git diff --check`. |
-| Expected Markers | One row for every boundary call, one row for each distinct first-degree physical identity, selected-source coverage, explicit variants/macros/declaration-only outcomes, and a second-degree initial frontier whose bodies are unread. |
+| Verification | Generation assertions for one row per zero identity, physical source-path/hash/line/linkage review, root/inbound-edge proof, body/conditional evidence, source-root and `src.old` exclusion scans, documentation inventory/governance checks, and `git diff --check`. |
+| Expected Markers | One ledger row per zero-degree identity; separate explicit rows for unresolved conditional/unbalanced bodies; no spelling-only merge and no static cross-translation-unit admission. |
 | Asset Needs | Approved OpenNT/OpenNT-4.5 source union, frozen T300 ledgers, Node 22/Ripgrep parser tooling, and current documentation authorities. |
-| Reporting Requirements | Report public-leaf, original-body, hard-boundary, finite-shallow and unavailable counts; distinguish static source-graph disposition from product/runtime eligibility; identify every still-unresolved physical identity. |
-| Stop Conditions | Missing or conflicting provenance that cannot be recorded as a variant, an attempted provider/import/build change, use of current product bodies or `src.old` as source input, a needed second-degree body read, or an owner/package-boundary change. |
-| Exit Criteria | Every T300 boundary-call ID has exactly one source-evidenced outcome; every selected physical first-degree definition has a complete identity and direct-call record; no first-degree body is silently merged by spelling; all second-degree calls are emitted but unexpanded; evidence and gates pass. |
+| Reporting Requirements | Report structurally-valid roots/rebased definitions, conditionally unresolved bodies, unparsed bodies, invalid source/linkage rows and every unresolved physical identity. Distinguish source-graph legality from product/runtime eligibility. |
+| Stop Conditions | Missing or conflicting provenance, a static cross-translation-unit target, a body that needs an unrecorded build variant, an attempted provider/import/build change, use of current product bodies or `src.old` as source input, or an owner/package-boundary change. |
+| Exit Criteria | Every selected zero identity has exactly one source-evidenced legality result; every rebase target has a valid root or confirmed physical inbound edge; all exceptional body/variant rows are explicit; evidence and gates pass. |
 | Original Owner Request | “开展一度审计”。 |
 | Similar-Issue Sweep | Historical 0/1-degree ledgers, selected original source variants, macros/function pointers/assembly declarations, public Win32/CRT leaves, private CSR/kernel boundaries, support/tools/firmware guest callers, and accidental `src.old` or current-product inputs. |
 

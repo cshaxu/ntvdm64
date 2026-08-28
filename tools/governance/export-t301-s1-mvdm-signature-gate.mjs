@@ -53,12 +53,31 @@ function argumentCount(text, open, close) {
 function invocationAt(file, line, symbol) {
   const source = fs.readFileSync(file, 'utf8');
   const lines = source.split(/\r?\n/);
-  const start = lines.slice(0, line - 1).reduce((total, value) => total + value.length + 1, 0);
-  const offset = source.indexOf(symbol, start);
-  if (offset < start || offset > start + 4096) return null;
+  const newlineWidth = source.includes('\r\n') ? 2 : 1;
+  const start = lines.slice(0, line - 1).reduce((total, value) => total + value.length + newlineWidth, 0);
+  const marked = source.indexOf(symbol, start);
+  const prior = source.lastIndexOf(symbol, start);
+  const offset = marked >= start && marked < start + 8192 ? marked : prior;
+  if (offset < Math.max(0, start - 2048) || offset > start + 8192) return null;
   const open = source.indexOf('(', offset + symbol.length);
   const close = parenClose(source, open);
   return close < 0 ? null : { count: argumentCount(source, open, close), source };
+}
+function definitionInvocationAt(file, line, symbol) {
+  const source = fs.readFileSync(file, 'utf8'); const lines = source.split(/\r?\n/);
+  const newlineWidth = source.includes('\r\n') ? 2 : 1;
+  const start = lines.slice(0, line - 1).reduce((total, value) => total + value.length + newlineWidth, 0);
+  const candidates = [];
+  let offset = source.lastIndexOf(symbol, start + 8192);
+  while (offset >= Math.max(0, start - 2048)) {
+    const open = source.indexOf('(', offset + symbol.length); const close = parenClose(source, open); const body = source.indexOf('{', close);
+    if (!(close < 0 || body < 0 || body > close + 1024 || body < start - 2048 || body > start + 8192)) {
+      candidates.push({ source, count: argumentCount(source, open, close), distance: Math.abs(body - start) });
+    }
+    offset = source.lastIndexOf(symbol, offset - 1);
+  }
+  if (!candidates.length) return null;
+  candidates.sort((left, right) => left.distance - right.distance); return candidates[0];
 }
 function conditionContext(source, line) {
   const stack = [];
@@ -96,7 +115,7 @@ const rows = bindings.map((binding) => {
     : identities.get(definitionIdentity);
   if (!definition) throw new Error(`missing selected definition ${definitionIdentity}`);
   const caller = invocationAt(sourceFile(binding.caller_source_root, binding.caller_source_path), Number(binding.caller_source_line), binding.callee_spelling);
-  const body = invocationAt(sourceFile(definition.source_root, definition.source_path), Number(definition.source_line), definition.symbol);
+  const body = definitionInvocationAt(sourceFile(definition.source_root, definition.source_path), Number(definition.source_line), definition.symbol);
   const headerRows = (declarations.get(binding.candidate_id) || []).filter((row) => headerFile(row.declaration_header_identity));
   const headerCounts = headerRows.map((row) => {
     const item = invocationAt(headerFile(row.declaration_header_identity), Number(row.declaration_line), binding.callee_spelling);

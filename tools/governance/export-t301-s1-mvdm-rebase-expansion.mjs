@@ -67,9 +67,15 @@ function indexDefinitions() {
 }
 function bodyOf(definition) {
   const raw = fs.readFileSync(sourceFile(definition), 'utf8'); const parsed = mask(raw); const lines = raw.split(/\r?\n/);
-  const start = lines.slice(0, Number(definition.source_line) - 1).reduce((total, line) => total + line.length + 1, 0);
-  const symbolOffset = parsed.indexOf(definition.symbol, start); const open = parsed.indexOf('(', symbolOffset + definition.symbol.length); const close = paired(parsed, open, '(', ')'); const bodyOpen = parsed.indexOf('{', close); const bodyClose = paired(parsed, bodyOpen, '{', '}');
-  if (symbolOffset < start || close < 0 || bodyOpen < 0 || bodyClose < 0) throw new Error(`cannot extract ${key(definition)}`);
+  const newlineWidth = raw.includes('\r\n') ? 2 : 1;
+  const start = lines.slice(0, Number(definition.source_line) - 1).reduce((total, line) => total + line.length + newlineWidth, 0);
+  const atMarkedLine = parsed.indexOf(definition.symbol, start);
+  const prior = parsed.lastIndexOf(definition.symbol, start);
+  const symbolOffset = atMarkedLine >= start && atMarkedLine < start + 8192 ? atMarkedLine : prior;
+  const open = parsed.indexOf('(', symbolOffset + definition.symbol.length); const close = paired(parsed, open, '(', ')'); const bodyOpen = parsed.indexOf('{', close); const bodyClose = paired(parsed, bodyOpen, '{', '}');
+  if (symbolOffset < Math.max(0, start - 2048) || close < 0 || bodyOpen < 0 || bodyClose < 0) {
+    return { unexpanded_reason: 'conditional-or-unbalanced original source body requires build-variant parsing' };
+  }
   const ownMacros = new Set([...raw.matchAll(/^\s*#\s*define\s+([A-Za-z_]\w*)\b/gm)].map((match) => match[1]));
   return { code: parsed.slice(bodyOpen + 1, bodyClose), ownMacros, body_offset: bodyOpen + 1, source: raw };
 }
@@ -81,10 +87,12 @@ const seedRows = readTsv('mvdm-first-degree-rebaselined-full-mvdm-signature-gate
 const seeds = [...new Set(seedRows.map((row) => row.selected_definition_identity))].map((identity) => {
   const [source_root, source_path, source_sha256, source_line] = identity.split('|'); return byKey.get(key({ source_root, source_path, source_sha256, source_line }));
 }).filter(Boolean);
-const reached = new Map(); const queue = [...seeds]; const edges = [];
+const reached = new Map(); const queue = [...seeds]; const edges = []; const unexpanded = [];
 while (queue.length) {
   const caller = queue.shift(); const callerKey = key(caller); if (reached.has(callerKey) || old.has(callerKey)) continue; reached.set(callerKey, caller);
-  const { code, ownMacros, body_offset, source } = bodyOf(caller);
+  const extracted = bodyOf(caller);
+  if (extracted.unexpanded_reason) { unexpanded.push({ ...caller, reason: extracted.unexpanded_reason }); continue; }
+  const { code, ownMacros, body_offset, source } = extracted;
   for (const match of code.matchAll(/\b([A-Za-z_]\w*)\s*\(/g)) {
     const callee = match[1]; if (controls.has(callee.toLowerCase()) || ownMacros.has(callee) || /^IFN\d+$/i.test(callee) || /^[A-Z][A-Z0-9_]*$/.test(callee)) continue;
     const candidates = (byName.get(callee) || []).filter((candidate) => candidate.source_root === caller.source_root && (candidate.linkage === 'externally-linkable' || candidate.source_path === caller.source_path));
@@ -97,6 +105,8 @@ while (queue.length) {
 const definitionRows = [...reached.values()].map((definition) => ({ ...definition, source: seeds.some((seed) => key(seed) === key(definition)) ? 'P10 seed body' : 'directly reached during P12 expansion' }));
 const definitionColumns = ['symbol', 'source_root', 'source_path', 'source_sha256', 'source_line', 'linkage', 'source'];
 const edgeColumns = ['caller_identity', 'caller_symbol', 'caller_source_root', 'caller_source_path', 'caller_source_sha256', 'caller_source_line', 'call_source_line', 'callee_spelling', 'internal_candidate_identity', 'disposition'];
+const unexpandedColumns = ['symbol', 'source_root', 'source_path', 'source_sha256', 'source_line', 'linkage', 'reason'];
 fs.writeFileSync(path.join(operations, 'mvdm-zero-degree-rebase-expansion-definition-ledger.tsv'), `${definitionColumns.join('\t')}\n${definitionRows.map((row) => definitionColumns.map((column) => quote(row[column])).join('\t')).join('\n')}\n`);
 fs.writeFileSync(path.join(operations, 'mvdm-zero-degree-rebase-expansion-edge-ledger.tsv'), `${edgeColumns.join('\t')}\n${edges.map((row) => edgeColumns.map((column) => quote(row[column])).join('\t')).join('\n')}\n`);
-console.log(`P10 seed bodies=${seeds.length}; additional reached original-MVDM bodies=${definitionRows.length - seeds.length}; direct edges=${edges.length}; direct exits requiring T301 classification=${edges.filter((edge) => !edge.internal_candidate_identity).length}`);
+fs.writeFileSync(path.join(operations, 'mvdm-zero-degree-rebase-expansion-unparsed-body-ledger.tsv'), `${unexpandedColumns.join('\t')}\n${unexpanded.map((row) => unexpandedColumns.map((column) => quote(row[column])).join('\t')).join('\n')}\n`);
+console.log(`P10 seed bodies=${seeds.length}; additional reached original-MVDM bodies=${definitionRows.length - seeds.length}; direct edges=${edges.length}; unexpanded conditional bodies=${unexpanded.length}; direct exits requiring T301 classification=${edges.filter((edge) => !edge.internal_candidate_identity).length}`);

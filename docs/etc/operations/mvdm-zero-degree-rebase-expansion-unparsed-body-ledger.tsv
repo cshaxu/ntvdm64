@@ -1,0 +1,2 @@
+symbol	source_root	source_path	source_sha256	source_line	linkage	reason
+"mon_text_update"	"O:\repos.external\OpenNT\base\mvdm"	"softpc.new/base/video/gfx_updt.c"	"02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987"	"4159"	"externally-linkable"	"conditional-or-unbalanced original source body requires build-variant parsing"

@@ -84,9 +84,11 @@ const rows = boundary.map((call) => {
   const callerRoot = rootsForCaller.length === 1 ? rootsForCaller[0] : '';
   const allowed = frontiers.get(`${call.caller_source_path}\u0000${call.caller_source_sha256}`) || new Set();
   const rawCandidates = candidatesByName.get(call.callee_spelling) || [];
-  const selectable = rawCandidates.filter((candidate) => candidate.source_root === callerRoot
-    && candidate.linkage === 'externally-linkable'
-    && allowed.has(sourcePackage(candidate)));
+  const rootMatching = rawCandidates.filter((candidate) => candidate.source_root === callerRoot);
+  const linkageMatching = rootMatching.filter((candidate) => candidate.linkage === 'externally-linkable'
+    || (candidate.source_path === call.caller_source_path && candidate.source_sha256 === call.caller_source_sha256));
+  const selectable = linkageMatching.filter((candidate) => candidate.source_path === call.caller_source_path
+    || allowed.has(sourcePackage(candidate)));
   return {
     candidate_id: call.candidate_id,
     caller_symbol: call.caller_symbol,
@@ -96,6 +98,9 @@ const rows = boundary.map((call) => {
     callee_spelling: call.callee_spelling,
     caller_source_root: callerRoot || 'unresolved-caller-root',
     all_original_mvdm_definition_candidate_count: String(rawCandidates.length),
+    root_matching_original_mvdm_definition_count: String(rootMatching.length),
+    linkage_matching_original_mvdm_definition_count: String(linkageMatching.length),
+    allowed_package_roots: [...allowed].sort().join(';'),
     selectable_original_mvdm_definition_count: String(selectable.length),
     selectable_original_mvdm_definition_identities: selectable.map((candidate) => `${candidate.source_root}|${candidate.source_path}|${candidate.source_sha256}|${candidate.source_line}`).join(';'),
     next_disposition: selectable.length === 1
