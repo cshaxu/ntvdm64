@@ -41,6 +41,7 @@ $biosRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/bios'
 $keymouseRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/keymouse'
 $systemRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/system'
 $supportRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/support'
+$videoRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/video'
 $hostRoot = Join-Path $root 'src/mvdm-host/softpc.new/host/src'
 $adapterWin32Root = Join-Path $root 'src/adapter-mvdm-host-out/win32/source'
 $patchRoot = Join-Path $root 'src/mvdm-softpc-patch/x86/prod'
@@ -51,16 +52,19 @@ $biosManifest = Join-Path $biosRoot 'sources'
 $keymouseManifest = Join-Path $keymouseRoot 'sources'
 $systemManifest = Join-Path $systemRoot 'sources'
 $supportManifest = Join-Path $supportRoot 'sources'
+$videoManifest = Join-Path $videoRoot 'sources'
 $hostManifest = Join-Path $hostRoot 'sources'
 $ccpuNames = Get-OriginalSources $ccpuManifest
 $biosNames = Get-OriginalSources $biosManifest
 $keymouseNames = Get-OriginalSources $keymouseManifest
 $systemNames = Get-OriginalSources $systemManifest
 $supportNames = Get-OriginalSources $supportManifest
+$videoNames = Get-OriginalSources $videoManifest
 $hostNames = @('nt_cprgs.c', 'nt_cpu.c', 'nt_aorc.c', 'nt_reset.c', 'nt_error.c',
                'nt_msscs.c', 'sim32.c', 'nt_sas.c', 'nt_mem.c', 'nt_umb.c',
-               'config.c', 'nt_pif.c', 'nt_unix.c', 'nt_fdisk.c')
-$adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c')
+               'config.c', 'nt_pif.c', 'nt_unix.c', 'nt_fdisk.c',
+               'nt_eoi.c', 'nt_timer.c')
+$adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_compat.c')
 $patchNames = @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h')
 $patchBodyNames = @('fmstubs.c')
 $patchEvidenceNames = @('minnt/callconv.patch')
@@ -79,6 +83,9 @@ foreach ($name in $systemNames) {
 foreach ($name in $supportNames) {
     if (!(Test-Path -LiteralPath (Join-Path $supportRoot $name))) { throw "Original SoftPC support source missing: $name" }
 }
+foreach ($name in $videoNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $videoRoot $name))) { throw "Original SoftPC video source missing: $name" }
+}
 foreach ($name in $hostNames) {
     if (!(Test-Path -LiteralPath (Join-Path $hostRoot $name))) { throw "Original SoftPC host root missing: $name" }
 }
@@ -95,7 +102,7 @@ foreach ($name in $patchEvidenceNames) {
     if (!(Test-Path -LiteralPath (Join-Path $patchEvidenceRoot $name))) { throw "Registered SoftPC patch evidence missing: $name" }
 }
 
-New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/patch') | Out-Null
+New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/patch') | Out-Null
 $environment = Join-Path $build 'msvc-mt.cmd'
 @('@echo off', 'set "MVDM_T310_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready',
   ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'),
@@ -108,6 +115,11 @@ $includeRoots = @(
     # ABI mirror: the selected original sources include nt.h/ntrtl.h/ntioapi.h
     # by historical short names, while the adapter owns their modern binding.
     'src/adapter-mvdm-host-out/win32/include',
+    # Reached original non-MVDM OpenNT declaration slices retain their
+    # source identity under opennt-host. Keep this after the adapter's nt.h:
+    # nt.h owns modern type binding while this directory owns original
+    # public-header subsets such as ntexapi.h.
+    'src/opennt-host/public/sdk/inc',
     'src/opennt-abi/source/public/sdk/inc',
     'src/opennt-abi/source/public/internal/base/inc',
     'src/opennt-abi/source/public/internal/windows/inc',
@@ -149,7 +161,7 @@ $graph.Add('rule forced_link_audit')
 # This deliberately produces a non-runnable DLL.  /WHOLEARCHIVE makes the
 # candidate's complete original membership visible to LINK; /FORCE keeps the
 # unresolved physical forms in the adjacent log for source-first ownership.
-$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-system.lib /wholearchive:original-softpc-support.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-win32-bindings.lib kernel32.lib user32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib > $out.log 2>&1')
+$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-system.lib /wholearchive:original-softpc-support.lib /wholearchive:original-softpc-video.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-win32-bindings.lib kernel32.lib user32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib > $out.log 2>&1')
 
 $ccpuObjects = foreach ($name in $ccpuNames) {
     $object = 'obj/ccpu/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
@@ -176,9 +188,23 @@ $supportObjects = foreach ($name in $supportNames) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $supportRoot $name)))
     $object
 }
+$videoObjects = foreach ($name in $videoNames) {
+    $object = 'obj/video/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $videoRoot $name)))
+    $object
+}
 $hostObjects = foreach ($name in $hostNames) {
     $object = 'obj/host/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $hostRoot $name)))
+    if ($name -eq 'nt_timer.c') {
+        $threadCompat = NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/thread_start_compat.h')
+        # `nt.h` from the modern SDK can predefine the historical include
+        # guard before the original source reaches <ntexapi.h>.  Force the
+        # selected opennt-host subset after nt.h so the original timer's
+        # declarations stay visible on both architectures.
+        $ntexapiSubset = NinjaPath (Join-Path $root 'src/opennt-host/public/sdk/inc/ntexapi.h')
+        $graph.Add('  cflags = ' + $baseFlags + ' /FI "' + $ntexapiSubset + '" /FI "' + $threadCompat + '"')
+    }
     $object
 }
 $adapterWin32Objects = foreach ($name in $adapterWin32Names) {
@@ -196,11 +222,12 @@ $graph.Add('build original-softpc-bios.lib: lib ' + ($biosObjects -join ' '))
 $graph.Add('build original-softpc-keymouse.lib: lib ' + ($keymouseObjects -join ' '))
 $graph.Add('build original-softpc-system.lib: lib ' + ($systemObjects -join ' '))
 $graph.Add('build original-softpc-support.lib: lib ' + ($supportObjects -join ' '))
+$graph.Add('build original-softpc-video.lib: lib ' + ($videoObjects -join ' '))
 $graph.Add('build original-softpc-host-roots.lib: lib ' + ($hostObjects -join ' '))
 $graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' '))
 $graph.Add('build ntvdmx64-softpc-patch-evidence.lib: lib ' + ($patchBodyObjects -join ' '))
-$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-support.lib original-softpc-host-roots.lib softpc-win32-bindings.lib ntvdmx64-softpc-patch-evidence.lib')
-$graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-support.lib original-softpc-host-roots.lib softpc-win32-bindings.lib')
+$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-support.lib original-softpc-video.lib original-softpc-host-roots.lib softpc-win32-bindings.lib ntvdmx64-softpc-patch-evidence.lib')
+$graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-support.lib original-softpc-video.lib original-softpc-host-roots.lib softpc-win32-bindings.lib')
 $graph.Add('default original-softpc-candidate')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 
@@ -216,6 +243,7 @@ $graph.Add('default original-softpc-candidate')
     keymouseSources = @($keymouseNames)
     systemSources = @($systemNames)
     supportSources = @($supportNames)
+    videoSources = @($videoNames)
     hostRoots = @($hostNames)
     adapterWin32Sources = @($adapterWin32Names)
     patchInputs = @($patchNames | ForEach-Object {

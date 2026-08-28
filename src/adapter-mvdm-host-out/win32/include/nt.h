@@ -12,6 +12,10 @@
 #include <windows.h>
 #include <devioctl.h>
 #include <winternl.h>
+/* `ntpsapi.h` is a selected original OpenNT declaration subset under
+ * opennt-host.  The adapter's type binding is deliberately established
+ * first, then the original historical declaration shape is made visible. */
+#include <ntpsapi.h>
 
 /* DIVERGENCE: The selected historical netlibnt.h declaration carrier uses
  * NT_PRODUCT_TYPE. The modern SDK's winnt.h exposes its own foundational
@@ -53,6 +57,9 @@ typedef enum _NT_PRODUCT_TYPE {
 #endif
 #ifndef STATUS_NOT_IMPLEMENTED
 #define STATUS_NOT_IMPLEMENTED ((NTSTATUS)0xC0000002L)
+#endif
+#ifndef STATUS_ALERTED
+#define STATUS_ALERTED ((NTSTATUS)0x00000101L)
 #endif
 /* The modern SDK leaves these historical NTSTATUS spellings out of the
  * user-mode declaration set, although the values and their failure contract
@@ -113,6 +120,9 @@ POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID);
 #endif
 #ifndef finally
 #define finally __finally
+#endif
+#ifndef except
+#define except __except
 #endif
 #ifndef RtlMoveMemory
 #define RtlMoveMemory(Destination, Source, Length) \

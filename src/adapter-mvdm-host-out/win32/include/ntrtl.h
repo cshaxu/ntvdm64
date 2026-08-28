@@ -64,6 +64,26 @@ VOID NTAPI RtlTimeToTimeFields(PLARGE_INTEGER Time, PTIME_FIELDS TimeFields);
 BOOLEAN NTAPI RtlTimeFieldsToTime(PTIME_FIELDS TimeFields, PLARGE_INTEGER Time);
 #endif
 
+/* DIVERGENCE(ADAPTER-WIN32-017): Original SoftPC timer and heartbeat code
+ * reaches these NT4 RTL arithmetic, critical-section, and process-control
+ * declaration forms.  The modern public SDK does not expose a coherent
+ * source-compatible subset through the selected headers.  Retain their
+ * original signatures only; NTDLL remains the implementation owner. */
+LARGE_INTEGER NTAPI RtlExtendedLargeIntegerDivide(
+    LARGE_INTEGER Dividend,
+    ULONG Divisor,
+    PULONG Remainder);
+LARGE_INTEGER NTAPI RtlExtendedIntegerMultiply(
+    LARGE_INTEGER Multiplicand,
+    LONG Multiplier);
+NTSTATUS NTAPI RtlEnterCriticalSection(PRTL_CRITICAL_SECTION CriticalSection);
+NTSTATUS NTAPI RtlLeaveCriticalSection(PRTL_CRITICAL_SECTION CriticalSection);
+NTSTATUS NTAPI RtlInitializeCriticalSection(PRTL_CRITICAL_SECTION CriticalSection);
+NTSTATUS NTAPI NtTerminateProcess(HANDLE ProcessHandle, NTSTATUS ExitStatus);
+#ifndef NtCurrentProcess
+#define NtCurrentProcess() ((HANDLE)(LONG_PTR)-1)
+#endif
+
 #ifndef InitializeListHead
 #define InitializeListHead(ListHead) ((ListHead)->Flink = (ListHead)->Blink = (ListHead))
 #define IsListEmpty(ListHead) ((ListHead)->Flink == (ListHead))

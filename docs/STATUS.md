@@ -6,25 +6,25 @@
 
 **Active: M0 T310 S7**
 
-### M0 T310 S7 — original SoftPC machine/device composition recovery
+### M0 T310 S7 — original SoftPC physical-address and mapping-manager binding closure
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T310 S7; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | T310's owner-approved S7 plan and active owner goal: recover original SoftPC CPU/FPU/RAM/DMA/PIC/PIT/keyboard/mouse/video/internal controller composition, without a Bochs controller substitution. S5 and S6 are closed. |
-| Objective | Compose and prove the original SoftPC minimum machine profile on both x86 and x64: firmware/reset, SAS/A20 memory, PIC/PIT/timer, input, DMA, video/ports, selected startup-media and endpoint teardown in original initialization order. |
-| Non-goals | No kernel VDM, MONITOR, Bochs device/controller fallback, trace-selected BOP repair, optional device expansion, or claim of complete DOS/WOW/BOP product execution. |
+| Admission And Approval | Owner-directed plan amendment: insert a distinct S7 before device composition. Recover the original SoftPC physical-address boundary through the existing session mapping manager; S5 and S6 are closed. |
+| Objective | On x86 and x64, make every reached `nt_mem`/`sim32`/`VdmSetPhysRecStructs`/`PhysicalPageREC` crossing use a stable session mapping-manager surrogate and checked physical-page binding, while preserving the original SoftPC source-shaped call and failure contract. Inventory all `guest_memory_lease` callers and remove only a dead or duplicate selected-SoftPC physical route. |
+| Non-goals | No kernel VDM, MONITOR, Bochs device/controller fallback, trace-selected BOP repair, optional device expansion, controller composition, or claim of complete DOS/WOW/BOP product execution. WOW/Redirector/VDD pointer-scope implementation is not enabled or rewritten here. |
 | Reference Baseline | T310 S4 nine-family workset and source manifests; S5 original CCPU/RAM/FPU execution; S6 physical V86/MONITOR cleanup; exact `mvdm-host` and `mvdm-softpc-firmware` mirrors; session mapping manager. |
-| Files And ABI Surface | Original `mvdm-host/softpc.new/base/{bios,system,keymouse,video,disks,comms}` and `host/src` machine roots; immutable firmware inputs; narrowly named adapter-mvdm-host-out softpc/win32/session seams; focused fixtures and formal Ninja manifests. |
+| Files And ABI Surface | Original `mvdm-host/softpc.new/host/src/{nt_mem.c,sim32.c}` and reached physical-record declarations/callers; narrowly named `adapter-mvdm-host-out/softpc` and `session` mapping seams; focused fixtures and formal Ninja manifests. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island and source-recovery rules; approved T310 S7 plan. |
-| Verification | Each enabled family compiles from original sources on formal MSVC `/MT` x86/x64 graphs, has focused positive/negative source-shaped evidence, preserves initialization/teardown order, and has no Bochs, MONITOR, kernel-VDM or `src.old` input. |
-| Expected Markers | Original reset chain; initialized firmware/SAS; source-owned PIC/PIT/timer and port state; keyboard/mouse input handling; checked DMA span; basic video port path; startup-media read or original unavailable result; ordered endpoint teardown. |
-| Asset Needs | Original source manifests, firmware/media manifests, S4/S5/S6 evidence, current adapter interfaces, session mapping manager, MSVC Build Tools and Ninja. |
-| Reporting Requirements | For every family record exact selected source files, initialization predecessor/successor, source-recovery rung, adapter owner, mapping/handle rule, x86/x64 build result, positive/negative behavior and unavailable rationale. |
-| Stop Conditions | An original body requires unregistered modification; an adapter would invent a controller or BOP result; a raw host pointer/handle crosses an ABI; a family implicitly selects Bochs/MONITOR/kernel VDM; or a device needs an unclassified external capability. |
-| Exit Criteria | A formal x86/x64 original-SoftPC profile proves `create -> reset -> firmware/machine initialization -> bounded execution -> typed stop -> teardown` with source-owned enabled keyboard input, timer/PIC delivery, basic video/port path and selected startup-media behavior; every unenabled family has the original unavailable direction and named owner. |
+| Verification | Formal MSVC `/MT` x86/x64 graphs and focused positive/negative fixtures prove stable surrogate allocation/lookup, checked span and overflow rejection, teardown invalidation and absence of raw pointer/handle aliases; no Bochs, MONITOR, kernel-VDM or `src.old` input. |
+| Expected Markers | Original source-shaped physical-memory call sequence; session-owned mapping-manager surrogate; checked physical-page operation; raw-alias refusal; expired mapping and out-of-range failure; no persistent guest-memory lease. |
+| Asset Needs | Original source manifests; S4/S5/S6 evidence; current `session` mapping manager and bounded lease implementation; `adapter-mvdm-host-out/softpc` boundary; MSVC Build Tools and Ninja. |
+| Reporting Requirements | For every reached crossing record original caller/callee, source-recovery rung, mapping-manager instance and surrogate layout, physical-page span/access/lifetime, x86/x64 result, source failure direction, and explicit distinction from short-lived guest-memory leases. |
+| Stop Conditions | An original body requires unregistered modification; a raw host pointer/handle crosses an ABI; a `guest_memory_lease` becomes a persistent physical/SAS/object alias or async handoff; a second mapping manager is created; or a path implicitly selects Bochs/MONITOR/kernel VDM. |
+| Exit Criteria | Formal x86/x64 evidence proves every reached `nt_mem`/`sim32`/`VdmSetPhysRecStructs`/`PhysicalPageREC` crossing uses the existing session mapping manager, preserves source-shaped failure direction, rejects raw aliases and invalid spans, invalidates mappings at teardown, and never retains a guest-memory lease beyond its synchronous caller. The packet records every lease caller and either removes a dead/duplicate selected-SoftPC physical route or assigns each retained caller to its independently named owner; it does not delete the neutral facility or alter a future-owner contract. The follow-on S8 device composition may consume this binding but may not redefine it. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
-| Similar-Issue Sweep | All nine S4 families, source manifests, reset/create/teardown paths, `MONITOR` and Bochs references, firmware input provenance, public Win32 endpoint bindings, mapping-manager crossings, old fallback providers and `src.old` references. |
+| Similar-Issue Sweep | All reached `nt_mem`/`sim32`/SAS/physical-record callers, existing mapping-manager instances, guest-memory lease use sites, reset/create/teardown paths, `MONITOR` and Bochs references, old fallback providers and `src.old` references. |
 
 **T310 S1 closure:** `6a46ee748` establishes the exact original `ccpu386`,
 `host/src` and `obj.vdm` roots, hashes, historical source roles and a
@@ -202,19 +202,37 @@ session/monitor adapter declarations remain correctly distinct.  Formal x86
 and x64 CCPU execution fixtures still pass; see the [S6 evidence]
 (etc/evidence/m0-t310-s6-v86-monitor-profile-removal-001.md).
 
-**T310 S7 P1:** deleted the disabled, project-authored SoftPC patch hook and
+**T310 resequencing note:** the former machine-composition S7 is now S8. Its
+already recorded P1/P2 evidence remains valid as pre-S8 source-composition
+evidence under its original document/commit identifiers; it does not satisfy
+the new S7 physical-address exit criterion.
+
+**T310 pre-S8 P1:** deleted the disabled, project-authored SoftPC patch hook and
 timer fallback bodies.  The only retained NTVDMx64 patch behavior is the
 registered `fmstubs.c` immediate `__debugbreak()` default on both host
 architectures; no mapping-backed, cancellation, zero-result, or timer
 replacement remains available for accidental activation.
 
-**T310 S7 P2:** the selected original SoftPC machine candidate now compiles
-and archives its 190/191 x64/x86 Ninja inputs under one source graph: 130
-original CCPU units, BIOS, keymouse, system, support, and fourteen original
-host roots.  The only new work is registered same-shaped Win32/CRT binding
-needed for original `config.c`, `nt_pif.c`, `nt_unix.c`, and `nt_fdisk.c`; it
-adds no controller, console, timer, mapping, or Bochs fallback.  See the
+**T310 pre-S8 P2:** the selected original SoftPC machine candidate now compiles
+and archives its original-source graph on x64 and x86: 130 original CCPU
+units, BIOS, keymouse, system, support, video, and sixteen selected original
+host roots, including `nt_eoi.c` and `nt_timer.c`.  Reached non-MVDM OpenNT
+declaration subsets retain their original same-named paths under `opennt-host`;
+the only new code is registered same-shaped Win32/CRT binding needed to make
+the source bodies compile.  This remains static composition evidence, not a
+controller, timer, mapping, or runnable-backend claim.  See the
 [interface build evidence](etc/evidence/m0-t310-s7-p2-original-machine-host-interface-build-001.md).
+
+**T310 S7 P3:** reached non-MVDM platform declarations are restored below
+`opennt-host/public/sdk/inc` under their original names: the selected
+`ntexapi.h` subset carries the original EOI include and timer counter/tick
+declarations, while `ntpsapi.h` carries `NtAlertThread`.  The only adapter
+addition is the x86-safe, same-shaped Cdecl-to-WINAPI start-routine binding
+required by the original `nt_timer.c` call text.  Focused formal MSVC `/MT`
+x86/x64 timer compilation succeeds with original-source diagnostics only.
+This P establishes source placement and static ABI composition; heartbeat,
+session cancellation, BDA mapping, timer/PIC delivery and controlled-stop
+semantics remain S8 work.
 
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer

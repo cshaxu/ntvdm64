@@ -14,15 +14,15 @@ app CLI selection
 
 This is not two concurrently executing VMs, and it does not permit rewriting
 MVDM callers.  The prior Bochs branch is only retained as recovery evidence
-until the original SoftPC profile has passed S7.  Original SoftPC/CCPU is the
+until the original SoftPC profile has passed S8.  Original SoftPC/CCPU is the
 sole intended runtime backend: this task must import, build, bind and
 progressively verify its original owner closure before the historical Bochs
-runtime material is retired in S8.
+runtime material is retired in S9.
 
 The application default is original SoftPC. Until S5 makes SoftPC machine
 creation runnable, the default selection must produce an explicit unavailable
-result rather than silently selecting another executor. S7 verifies the
-SoftPC profile on both x86 and x64. S8 then removes the alternate Bochs runtime
+result rather than silently selecting another executor. S8 verifies the
+SoftPC profile on both x86 and x64. S9 then removes the alternate Bochs runtime
 route rather than preserving a permanent dual-backend matrix.
 
 For the original SoftPC branch, the selected executor is the original
@@ -169,7 +169,43 @@ source, `MONITOR` define, `monitor.lib`, kernel-VDM execution or Bochs fallback.
 It records every deletion/move and verifies no live source/build input retains
 an obsolete path.
 
-### S7 — original SoftPC machine/device composition recovery and verification
+### S7 — original SoftPC physical-address and mapping-manager binding closure
+
+Before controller composition can make the selected profile runnable, recover
+the original `nt_mem.c`, `sim32.c`, `VdmSetPhysRecStructs` and
+`PhysicalPageREC` crossings through the existing session-owned mapping-manager
+instances. Preserve the original SoftPC function names, parameter shapes,
+call order and failure direction. On both x86 and x64, every host backing
+object that enters a source-shaped SoftPC physical-memory boundary must first
+receive a stable session-owned 32-bit surrogate from the applicable mapping
+manager; `adapter-mvdm-host-out/softpc` then resolves it to a checked physical
+page operation.
+
+No Intel `ULONG`/`DWORD` address may be cast to `PVOID`, and no native pointer
+or handle may persist in `PhysicalPageREC`, SAS, a SoftPC global or a fixed-width
+component ABI. `guest_memory_lease` remains a short-lived synchronous copied
+byte-access facility: it may not serve as a persistent physical-page record,
+SAS alias, mapping-manager substitute or asynchronous handoff. The existing
+WOW, Redirector and VDD pointer-scope callers are not enabled or rewritten by
+this S; they are separately owned future-package surfaces and may not be used
+as a hidden SoftPC memory backend.
+
+This S also inventories every current `guest_memory_lease` call site and
+removes only a lease wrapper that is demonstrably dead or exclusively a
+duplicate selected-SoftPC physical-memory route. It must retain the neutral
+session lease facility and every independently owned DEM/WOW/Redirector/VDD
+caller until that owner's package can preserve its source-shaped guest-pointer
+contract. A lease caller is not made a mapping-manager caller merely to make
+this cleanup appear complete.
+
+S7 closes only with focused x86/x64 positive and negative evidence for the
+same source-shaped physical-page binding: stable surrogate allocation and
+lookup, checked span/overflow rejection, teardown invalidation, no raw native
+alias, and no lease retained beyond its synchronous caller. It records any
+minimal mirror divergence and adapter/overlay location in the relevant README
+registers.
+
+### S8 — original SoftPC machine/device composition recovery and verification
 
 Starting from the S5 CCPU execution interval, recover and verify the selected
 original SoftPC controller and peripheral composition as one integrated
@@ -179,15 +215,33 @@ keyboard/mouse, display/VGA, disk/floppy and serial/parallel I/O. It verifies
 their original initialization order, interrupt and port behavior, failure
 directions and teardown against the selected startup-media profile.
 
-S7 does not broaden the product to optional devices merely because a source
+`softpc.new/host/src/nt_timer.c` is a required original host-heartbeat member
+of this composition, not an optional replacement timer.  Its original
+`host_timer_init`, `TimerInit`, `Win32_host_timer`, suspend/resume and drift
+correction order remain selected.  Public modern Win32 thread/event/wait and
+performance-counter facilities provide the same-shaped host binding.  The
+historical `NtAlertThread` termination route becomes the owning session's
+cancellation event; it must wake the heartbeat's source-shaped wait and lead
+to a session controlled stop rather than process termination.  Its BIOS Data
+Area tick/RTC writes must resolve through S7's session mapping-manager
+physical binding and then the selected machine write operation; raw
+`Start_of_M_area` pointer arithmetic is not a runnable route.  `time_tick`,
+`cpu_interrupt`, ICA locking and delayed hardware interrupts remain original
+SoftPC call shapes and original system/host source owners.  This requires
+PIT/IRQ0/RTC behavior from the selected SoftPC machine profile, but no BOP
+family admission.
+
+S8 begins only after S7 has closed the shared physical-address binding. It
+consumes that binding rather than reintroducing a raw alias or using a bounded
+guest-memory lease as device backing. S8 does not broaden the product to optional devices merely because a source
 file exists, and it does not use a Bochs substitution to satisfy a SoftPC
 controller. Every enabled or unavailable family must retain its S4 source
 disposition. Its result is a verified original SoftPC machine profile, not the
 cross-backend product matrix.
 
-### S8 — Bochs runtime retirement and original-source diff recovery
+### S9 — Bochs runtime retirement and original-source diff recovery
 
-S8 begins only after S7 has verified the original SoftPC profile on both x86
+S9 begins only after S8 has verified the original SoftPC profile on both x86
 and x64 through `create -> reset -> firmware/machine initialization -> bounded
 execution -> typed controlled stop -> teardown`, including the enabled keyboard
 input, timer/PIC delivery, basic video/port path and selected startup-media
@@ -202,7 +256,7 @@ restored wherever a same-shaped SoftPC binding now exists. Any remaining
 non-SoftPC historical reference must be evidence-only and outside production
 source/build inputs.
 
-S8 verifies the final SoftPC-only x86/x64 product path and a negative source /
+S9 verifies the final SoftPC-only x86/x64 product path and a negative source /
 build scan proving no live `bochs-core`, `adapter-bochs`, Bochs type, global,
 CLI option or backend-selection branch remains. It also records each removed
 or retained divergence and why, and updates the mirror README registers. Only
@@ -211,14 +265,15 @@ contract.
 
 ## Invariants
 
-1. Before S8, any retained Bochs recovery material remains isolated from
-   original MVDM/SoftPC source; after S8 it is historical evidence only.
+1. Before S9, any retained Bochs recovery material remains isolated from
+   original MVDM/SoftPC source; after S9 it is historical evidence only.
 2. Original SoftPC/CCPU remains a mirror. Any divergence needs `DIVERGENCE:`
    and README registration; substantial added logic belongs in a private
    overlay or named adapter. The sole pre-approved divergence class is an
    original 32-bit native host pointer/handle/VDM alias replaced by the
-   existing session mapping manager and bounded leases, so the same source
-   builds correctly on both x86 and x64. It must preserve the original function
+   existing session mapping manager. A bounded lease is permitted only for an
+   exact synchronous byte transfer, never durable page/object identity, so the
+   same source builds correctly on both x86 and x64. It must preserve the original function
    spelling, parameters, ordering and observable failure result.
 3. `adapter-mvdm-host-out/softpc` preserves historical call shapes and cannot
    invent an MVDM service result.
@@ -254,14 +309,18 @@ path.
 
 T310 closes only after S5 has recovered original `i386 + CCPU` bounded
 execution, S6 has removed the excluded V86/monitor implementation profile,
-S7 has verified the selected original SoftPC machine/device profile, and S8
-has retired the Bochs runtime and verified the resulting SoftPC-only product
+S7 has closed the original SoftPC physical-address binding through the session
+mapping manager, S8 has verified the selected original SoftPC machine/device
+profile, and S9 has retired the Bochs runtime and verified the resulting SoftPC-only product
 on x86/x64. The SoftPC backend must complete the
 minimum
 `create -> reset -> firmware/machine initialization -> bounded execution ->
 typed controlled stop -> teardown` path.  The closure records one explicit
 disposition for every reached machine family, proves keyboard input, timer/PIC,
 basic video/port and startup-media behavior for the selected profile, and
-proves that no live session, app or MVDM body can select or reach Bochs. The
-permitted mapping-manager changes must be individually registered and tested.
+proves that no live session, app or MVDM body can select or reach Bochs. Every
+reached `nt_mem`/`sim32`/`VdmSetPhysRecStructs`/`PhysicalPageREC` crossing must
+use the session mapping manager on both architectures, reject raw aliases, and
+prove lease lifetime separation. The permitted mapping-manager changes must be
+individually registered and tested.
 S1 closes only the source/contract decision required to do that safely.

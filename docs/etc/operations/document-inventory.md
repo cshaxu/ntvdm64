@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3134 |
+| Documentation records | 3136 |
 | --- | --- |
-| Generated UTC | 2026-08-28T21:43:54Z |
+| Generated UTC | 2026-08-28T22:28:49Z |
 
 ## Entries
 
@@ -1155,7 +1155,7 @@ content-divergent entries.
 | etc/operations/m0-t308-s1-ntvdmcontrol-service-disposition.tsv | indexed supporting material | 714af034cf488b0bedcfc273bbc3ab31d46524af4040c69a262c145946976a14 |
 | etc/operations/m0-t309-s1-dem-command-vertical-slice-plan-001.md | indexed supporting material | ced38fb7d138830633b5df72eb59892b31829187b521353f26cadadb64df741d |
 | etc/operations/m0-t309-s2-dem-command-provider-cohort-composition-plan-001.md | indexed supporting material | cac1dcfa1fc2bec7722b5fd392ee38812381f47564833e4da78eb82857413c6c |
-| etc/operations/m0-t310-original-softpc-selectable-backend-plan-001.md | indexed supporting material | fec5d5632b9ad34370d7c01974bde618222666c49c80c0828e6e4e1cf97c6f81 |
+| etc/operations/m0-t310-original-softpc-selectable-backend-plan-001.md | indexed supporting material | 69732da86652aa5350609762860433cad86b47f977eb4199d6fc3c27b21caabe |
 | etc/operations/m0-t310-s1-softpc-backend-interface-ledger.tsv | indexed supporting material | 87e6a8ff3faf30087f4c43589c27db96ce2066bb2715319db91a3c3560e3f74d |
 | etc/operations/m0-t310-s1-softpc-source-root-ledger.tsv | indexed supporting material | 406c86dcf6da651436602f8a305e413392842532f5d66eac5b5fbe79d905031c |
 | etc/operations/m0-t310-s2-x64-forced-link-ledger.tsv | indexed supporting material | bb4a5bcdeac0b67d2c5ed0c629942fbed49d4cdaf81f814812dc0f670fc0e193 |
@@ -1166,6 +1166,8 @@ content-divergent entries.
 | etc/operations/m0-t310-s4-p5-x64-forced-link-ledger.tsv | indexed supporting material | 1b3f5ddf2b2741c28e26fd1881f454a1bfc868c958d6536e240c79580d8b94b1 |
 | etc/operations/m0-t310-s4-p5-x86-forced-link-ledger.tsv | indexed supporting material | c0cbc0836b0fc51b19f3744545d9db0c96595c83277d6834519c0a2c130623d6 |
 | etc/operations/m0-t310-s6-v86-monitor-production-input-ledger.tsv | indexed supporting material | 0675745e96a02ade16a8dedf715fcc6e9cc1a1f90f672c02bc54681e12f8eb20 |
+| etc/operations/m0-t310-s7-p2-x64-forced-link-ledger.tsv | indexed supporting material | 9661205c2aecadb55e7fc2b1537f1279ad187b7fec37d8859128dedfb3b8a93d |
+| etc/operations/m0-t310-s7-p2-x86-forced-link-ledger.tsv | indexed supporting material | ab1f513b8221f3fa90965068237b75d79f917365bb4e9d4293b775faddd15f68 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3148,7 +3150,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 9e39bed0f1abaf26ab11ae6a1855ecc83eaefb63954fdc47d9d3735361b69dc9 |
+| STATUS.md | principal control document | 76376d0c0fcfc5f92a9a9df5b681d523f509404d5ca33ccaaa3ba9e783784094 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
