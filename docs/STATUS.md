@@ -2,8 +2,7 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T304 is closed at its fixed-width ingress
-boundary; the next admitted package may begin the DEM/COMMAND vertical slice.
+**Active: M0 T305 S1.**
 
 M0 T301/S1 is closed. Its constrained first-degree audit produced physical
 source/binding evidence without turning whole-program BFS into a functional
@@ -88,6 +87,12 @@ verified on x86/x64.  It remains selector- and service-blind. See the
 x86/x64, while the Bochs-private record stays private behind an opaque bounded
 copy in `adapter-bochs`. No BOP/provider or `VDMEVENTINFO` semantics entered
 the machine boundary. See the [S2 closure evidence](etc/evidence/m0-t304-s2-fixed-width-machine-event-closure-001.md).
+
+**T305 S1 admission:** the owner-directed queue now enters the DEM/COMMAND
+vertical slice. This S maps and attempts the smallest original-source closure
+through the already-closed Base VDM, SoftPC-shaped and copied machine-event
+boundaries; it may not replace OpenNT dispatchers with app-owned behavior.
+See the [S1 plan](etc/operations/m0-t305-s1-dem-command-vertical-slice-plan-001.md).
 
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,
@@ -217,19 +222,19 @@ not package/provider admissions. See the [P20 signature evidence]
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | No active packet; `M0 T304 S2` closed with single-person dual-role implementation and review. |
-| Admission And Approval | T304/S1 closure admitted one versioned copied machine-event ABI and the bounded opaque-copy binding only. |
-| Objective | Closed: one selector-blind fixed-width #UD event/outcome boundary is authoritative outside the Bochs mirror. |
-| Non-goals | BOP route/decoder, EIP policy, guest trace repair, device enablement, CPU profile, second SoftPC/CCPU executor, BaseSrv expansion, DEM/COMMAND provider behavior, XMS A20/SAS and DPMI protected behavior remain out of scope. |
-| Reference Baseline | [T304 S1 audit](etc/evidence/m0-t304-s1-machine-event-ingress-audit-001.md) and [S2 closure](etc/evidence/m0-t304-s2-fixed-width-machine-event-closure-001.md). |
-| Files And ABI Surface | Public copied event/outcome header, opaque facade conversion/binding and x86/x64 local fixture only. |
+| Identifier Mode | `M0 T305 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner-directed ordered-queue execution after T304 closure; admits only the first source-shaped DEM/COMMAND vertical slice. |
+| Objective | Map and attempt the smallest original DEM/COMMAND dispatcher closure through existing Base VDM, SoftPC-shaped and copied machine-event contracts. |
+| Non-goals | Trace-selected BOP implementation, full DEM namespace/file behavior, child-product shell, CSR/CSRSS, WOW, XMS, DPMI, device expansion and guest execution remain excluded. |
+| Reference Baseline | [T302 closure](history/m0-t302-closure-20260828.md), [T303 closure](etc/evidence/m0-t303-s2-typed-resume-contract-closure-001.md), [T304 closure](etc/evidence/m0-t304-s2-fixed-width-machine-event-closure-001.md), and selected `mvdm-host` DEM/COMMAND source. |
+| Files And ABI Surface | Original DEM/COMMAND dispatcher/owner files, Base VDM local protocol, SoftPC-shaped mapping/resume forms, machine-event ingress, focused fixture and closure evidence only. |
 | Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; four-rung source-recovery gate; mapping and `src.old` exclusion rules. |
-| Verification | Focused x86/x64 machine-event fixture, dependency-direction review, documentation governance and `git diff --check` passed for the closure. |
-| Expected Markers | Fixed ABI widths, accepted/declined outcome rules, Bochs-private record remains private, and no service/selector content at the mechanical boundary. |
-| Asset Needs | Existing overlay opaque callback, `adapter-bochs` facade and generic bridge. |
-| Reporting Requirements | Closure evidence reports ABI widths, accepted/declined rules, private/public separation and x86/x64 test result. |
-| Stop Conditions | A follow-on requires BOP/provider semantics, an unbounded device/product-shell import, a family-private mapping manager, or any `VDMEVENTINFO` owner behavior. |
-| Exit Criteria | Met: one formally tested copied mechanical event/outcome ABI, no public duplicate layout, no service/selector content. |
+| Verification | Original source/boundary audit, selected source-closure compile attempt, x86/x64 focused local proof, dependency-direction review, documentation governance and `git diff --check`. |
+| Expected Markers | Every reached selector has an original dispatcher owner; every historical boundary has one existing or named same-shaped adapter; no app-owned command semantics appear. |
+| Asset Needs | Selected MVDM DEM/COMMAND source, T302 Base VDM form, T303 mechanical form, T304 copied event ingress and formal Ninja tooling. |
+| Reporting Requirements | Record original paths, source/adapter rung, attempted closure, x86/x64 outcome and each retained unavailable product-shell branch. |
+| Stop Conditions | A required body needs a new unreviewed provider, CSR/CSRSS/kernel recreation, a second executor, unbounded pointer lifetime, or semantics owned by Redirector/WOW/XMS/DPMI. |
+| Exit Criteria | Original first-slice owner map, attempted source-shaped closure, local x86/x64 result and bounded next-P disposition are recorded. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务，从 Base VDM 命令协议开始，到 DPMI / DPMI32 复通。” |
 | Similar-Issue Sweep | finite stop class, no-active-machine/failure behavior, copied register frame, guest-memory lease lifetime, Bochs-only ownership, second-executor exclusion and selector-blind interface review. |
 

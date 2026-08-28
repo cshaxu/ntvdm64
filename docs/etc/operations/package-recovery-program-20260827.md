@@ -11,20 +11,29 @@ admitted packet still requires its own bounded S brief in Status.
 The former standalone candidates for whole-program one/two-degree expansion,
 source-absent classification, perimeter reconciliation, generic support/ABI,
 generic Win32, generic OpenNT-host and generic Ninja closure are no longer
-queue blockers. They remain shared ledgers and per-package S1 admission work.
-An owner package may inspect only its immediate original callers, files,
-declarations and external boundary; it updates those common ledgers, then
-recovers its original source body and tests its local contract. It may not use
-the absence of an unrelated global classification to author a substitute.
+independent recurring queue blockers.  One bounded exception now consumes the
+existing `zero-ledger1` / `one-ledger1` evidence before further owner-package
+admission: external-boundary package selection.  It must give every direct
+non-MVDM exit a final package or boundary disposition, then stop at public
+Win32/CRT leaves, a small local closure, or a documented hard boundary.  It
+does not recursively classify the entire OpenNT tree and it implements no
+provider.
 
-For avoidance of doubt, an S1 boundary review is an admission substep, not a
-separate recovery phase. Once it has named the reached forms and their owner,
-the same T must proceed to source binding/recovery and local verification for
-that owner package. No P03--P14 package may restart a repository-wide degree
-scan, wait for all shared-ledger rows to be classified, or create a new audit
-T in place of its selected implementation slice. A later package may inherit
-an explicit unavailable or deferred edge, but it may not use that edge to
-silently replace the original owner flow.
+After that finite selection result, an owner package may inspect only its
+immediate original callers, files, declarations and external boundary; it
+updates those common ledgers, then recovers its original source body and tests
+its local contract. It may not use the absence of an unrelated global
+classification to author a substitute.
+
+For avoidance of doubt, this is the sole program-level perimeter-selection
+task. An S1 boundary review is otherwise an admission substep, not a separate
+recovery phase. Once it has named the reached forms and their owner, the same
+T must proceed to source binding/recovery and local verification for that owner
+package. No later owner package may restart repository-wide BFS, wait for all
+shared-ledger rows to be classified, or create a new audit T in place of its
+selected implementation slice. A later package may inherit an explicit
+unavailable or deferred edge, but it may not use that edge to silently replace
+the original owner flow.
 
 This avoids an audit-only critical path while retaining the existing physical
 identity, provenance, source-first and mirror/overlay rules. The completed P01
@@ -47,9 +56,36 @@ Historical source-index evidence. It emitted physical declaration/signature
 binding seeds but selected no package/provider route. It is closed and is not
 a candidate or implementation gate.
 
-## P02 — Base VDM command protocol (completed M0 T302)
+## P02 — MVDM external-boundary package selection and adapter inventory
 
-**Predecessor:** P01. **S1 admission:** audit only the immediate BaseClient,
+**Predecessor:** P01 and the retained `zero-ledger1` / `one-ledger1` evidence.
+**Purpose:** turn the direct non-MVDM frontier into a closed product-boundary
+worklist before further BOP-family implementation. For every directly reached
+physical identity, record one final disposition: public Win32/CRT leaf, small
+local closure, importable non-MVDM OpenNT package, named `adapter-*` family,
+or non-invasive hard boundary. Candidate OpenNT packages are followed only
+until one of those stopping forms, with source files, exported forms, imports
+and proposed mirror root recorded.
+
+**Delivery:** a complete package/import/adapter inventory; edge evidence for
+the BaseSrv/BaseClient, monitor/`NtVdmControl` and any other selected package
+stops; and a reordered implementation worklist. It records any current
+source-derived workaround that can be removed after the original package is
+connected.
+
+**Exit:** no direct external identity lacks an owner disposition; every
+proposed imported package has a bounded external closure; no source body is
+copied, no adapter behavior is implemented, and no guest trace runs.
+
+`M0 T305 S1` predates this reordering. It may close its already-admitted
+smallest DEM/COMMAND source attempt, but may not grow into P02; P02 is the
+first new candidate after that bounded packet closes.
+
+## P03 — Base VDM command protocol (completed M0 T302)
+
+**Predecessor:** P01. The completed local profile is evidence for the broader
+P02 decision; any additional broker recovery is admitted only after P02.
+**S1 admission:** audit only the immediate BaseClient,
 BaseSrv VDM slice and its private/public boundary. **Delivery:** recover the
 source-shaped `VDMINFO` request, copied capture, sizing/retry, wait/wake and
 completion protocol from `opennt-host`; migrate the app one-command seam to a
@@ -59,114 +95,116 @@ broker paths; no CSRSS reconstruction. The admitted local source-shaped
 client/server slice is complete; retained CSRSS product-shell branches are
 separate future owners.
 
-## P03 — Bochs/SoftPC mechanical contract closure (active M0 T303; not a Queue candidate)
+## P04 — Bochs/SoftPC mechanical contract closure (completed M0 T303; not a Queue candidate)
 
-**Predecessor:** P02. **S1 admission:** inspect only reached original SoftPC/
+**Predecessor:** P03. **S1 admission:** inspect only reached original SoftPC/
 CCPU forms used by the first vertical slice. **Delivery:** make
 `adapter-bochs` and the SoftPC family provide bounded original-shaped mechanics
 and mapping leases while Bochs remains the sole executor. **Exit:** x86/x64
 contract tests and an explicit unsupported-machine ledger.
 
-## P04 — MVDM ingress and fixed-width event bridge
+## P05 — MVDM ingress and fixed-width event bridge (completed M0 T304)
 
-**Predecessor:** P03. **S1 admission:** inspect only reached original machine
+**Predecessor:** P04. **S1 admission:** inspect only reached original machine
 event forms. **Delivery:** complete selector-blind copied machine
 event ingress to original MVDM dispatch. **Exit:** typed frame/stop matrix
 without BOP semantics in Bochs.
 
-## P05 — DEM/COMMAND vertical slice and child lifecycle
+## P06 — DEM/COMMAND vertical slice and child lifecycle
 
-**Predecessor:** P02–P04. **S1 admission:** inspect only DEM/COMMAND's reached
+**Predecessor:** P04–P05 for the already-admitted `M0 T305 S1`; P02 is required
+before a further DEM/COMMAND package is admitted. **S1 admission:** inspect
+only DEM/COMMAND's reached
 Base VDM, machine and local child boundaries. **Delivery:** compose the original DEM/COMMAND
 mirrors with the Base VDM protocol, closed local child lifecycle and machine
 interfaces. **Exit:** local package matrix and explicit unavailable historical
 product-shell branches; no new app-owned command semantics.
 
-## P06 — Minimal DOS guest execution and controlled return
+## P07 — Minimal DOS guest execution and controlled return
 
-**Predecessor:** P05. **S1 admission:** verify only reached guest load and
+**Predecessor:** P06. **S1 admission:** verify only reached guest load and
 return contracts. **Delivery:** load and run one declared DOS program
 through the completed vertical slice. **Exit:** controlled result-return
 evidence; a trace verifies this package and does not select repairs.
 
-## P07 — Minimal vertical-slice integration closure
+## P08 — Minimal vertical-slice integration closure
 
-**Predecessor:** P06. **Delivery:** x86/x64 positive/negative matrix and
+**Predecessor:** P07. **Delivery:** x86/x64 positive/negative matrix and
 reversion sweep. **Exit:** no unowned bypass in the completed first slice.
 
-## P08 — XMS owner package
+## P09 — XMS owner package
 
-**Predecessor:** P03, P04, P07. **S1 admission:** inspect only reached XMS
+**Predecessor:** P04, P05, P08. **S1 admission:** inspect only reached XMS
 mapping, A20, UMB and INT15 boundaries. **Delivery:** original XMS allocator, A20,
 UMB and INT15 semantics through mapping and machine contracts. **Exit:**
 package tests and explicit hardware prerequisites.
 
-## P09 — DPMI/DPMI32 owner package
+## P10 — DPMI/DPMI32 owner package
 
-**Predecessor:** P03, P04, P08. **S1 admission:** inspect only reached
+**Predecessor:** P04, P05, P09. **S1 admission:** inspect only reached
 protected-context, monitor and mapping boundaries. **Delivery:** original protected-context,
 LDT, exception and memory paths. **Exit:** monitor and x86/x64 package matrix.
 
-## P10 — Redirector owner package
+## P11 — Redirector owner package
 
-**Predecessor:** P02–P05. **S1 admission:** inspect only reached local file,
+**Predecessor:** P03–P06. **S1 admission:** inspect only reached local file,
 pipe and host capability boundaries. **Delivery:** original VDMREDIR local file and pipe
 paths, with explicit network/device unavailable paths. **Exit:** owner-family
 regression without NetAPI/CSRSS shell reconstruction.
 
-## P11 — WOW32/Win16 owner package
+## P12 — WOW32/Win16 owner package
 
-**Predecessor:** P02–P04, P09. **S1 admission:** inspect only reached callback,
+**Predecessor:** P03–P05, P10. **S1 admission:** inspect only reached callback,
 task, monitor and host-UI boundaries. **Delivery:** original callback, task and
 command contracts through bounded monitor and host-UI boundaries. **Exit:**
 source package matrix; no speculative WOW broker.
 
-## P12 — VDD owner package
+## P13 — VDD owner package
 
-**Predecessor:** P03–P04. **S1 admission:** inspect only reached VDD service,
+**Predecessor:** P04–P05. **S1 admission:** inspect only reached VDD service,
 machine and public-host boundaries. **Delivery:** original VDD service/interface paths
 where public capability exists; preserve unavailable kernel branches. **Exit:**
 family closure ledger and tests.
 
-## P13 — Debugger/BDE/FAX owner packages
+## P14 — Debugger/BDE/FAX owner packages
 
-**Predecessor:** P02–P04, P12. **S1 admission:** inspect only reached debug/UI
+**Predecessor:** P03–P05, P13. **S1 admission:** inspect only reached debug/UI
 and machine boundaries. **Delivery:** package-specific debug/UI
 boundaries and explicit unsupported product-shell paths. **Exit:** no generic
 adapter or unregistered mirror difference.
 
-## P14 — Service-package cross-family closure
+## P15 — Service-package cross-family closure
 
-**Predecessor:** P08–P13. **Delivery:** reconcile shared interfaces, mappings,
+**Predecessor:** P09–P14. **Delivery:** reconcile shared interfaces, mappings,
 completion/lifecycle and package regressions. **Exit:** one owner per edge and
 native integration evidence for each completed family.
 
-## P15 — Broker process and cross-process coordination
+## P16 — Broker process and cross-process coordination
 
-**Predecessor:** P02, P11, P14. **Delivery:** public-IPC restoration of needed
+**Predecessor:** P03, P12, P15. **Delivery:** public-IPC restoration of needed
 BaseSrv-style coordination. **Exit:** registration, notification, lease and
 cleanup tests; no CSRSS recreation.
 
-## P16 — In-process multi-session reentrancy audit
+## P17 — In-process multi-session reentrancy audit
 
-**Predecessor:** P14–P15. **Delivery:** classify each reached MVDM global and
+**Predecessor:** P15–P16. **Delivery:** classify each reached MVDM global and
 worker state before any multi-context enablement. **Exit:** explicit supported
 profile or evidence-backed deferral.
 
-## P17 — Host capability expansion
+## P18 — Host capability expansion
 
-**Predecessor:** P14. **Delivery:** package-owned drive, filesystem, console,
+**Predecessor:** P15. **Delivery:** package-owned drive, filesystem, console,
 registry and device capabilities through public Win32. **Exit:** source-shaped
 semantics and permission/failure matrix.
 
-## P18 — Guest DOS/WOW16 artifact matrix
+## P19 — Guest DOS/WOW16 artifact matrix
 
-**Predecessor:** P07, P14. **Delivery:** validate source-built and original
+**Predecessor:** P08, P15. **Delivery:** validate source-built and original
 guest images as load-only inputs. **Exit:** artifact classification and
 reproducible manifest.
 
-## P19 — Product release closure
+## P20 — Product release closure
 
-**Predecessor:** P15–P18. **Delivery:** x86/x64 package, integration,
+**Predecessor:** P16–P19. **Delivery:** x86/x64 package, integration,
 stability and release manifests. **Exit:** unpack-and-run product evidence and
 remaining explicit exclusions.
