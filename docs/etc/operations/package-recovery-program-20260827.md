@@ -56,22 +56,26 @@ Historical source-index evidence. It emitted physical declaration/signature
 binding seeds but selected no package/provider route. It is closed and is not
 a candidate or implementation gate.
 
-## P02 — MVDM external-boundary package selection and adapter inventory
+## P02 — MVDM external-boundary package selection, adoption plan and adapter inventory
 
 **Predecessor:** P01 and the retained `zero-ledger1` / `one-ledger1` evidence.
 **Purpose:** turn the direct non-MVDM frontier into a closed product-boundary
 worklist before further BOP-family implementation. For every directly reached
 physical identity, record one final disposition: public Win32/CRT leaf, small
-local closure, importable non-MVDM OpenNT package, named `adapter-*` family,
-or non-invasive hard boundary. Candidate OpenNT packages are followed only
-until one of those stopping forms, with source files, exported forms, imports
-and proposed mirror root recorded.
+local closure, importable non-MVDM OpenNT package slice, named `adapter-*`
+family, or non-invasive hard boundary. Candidate OpenNT packages are followed
+until every reached branch reaches one of those stopping forms. The decision
+records the exact source files and source-shaped exported forms worth mirroring,
+their imports and proposed mirror root, and why the remainder of the parent
+OpenNT product package remains outside the runtime closure.
 
-**Delivery:** a complete package/import/adapter inventory; edge evidence for
+**Delivery:** a complete package/adoption/adapter inventory; edge evidence for
 the BaseSrv/BaseClient, monitor/`NtVdmControl` and any other selected package
 stops; and a reordered implementation worklist. It records any current
 source-derived workaround that can be removed after the original package is
-connected.
+connected. The delivery is the only program-level perimeter audit: later owner
+tasks may verify their immediate edge, then must recover and test their source
+package instead of restarting a global scan.
 
 **Exit:** no direct external identity lacks an owner disposition; every
 proposed imported package has a bounded external closure; no source body is
