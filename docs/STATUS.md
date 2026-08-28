@@ -21,6 +21,14 @@ remaining boundary is whole-provider-package linking: `apfnSVC[]` and
 `apfnSVCCmd[]` cannot be satisfied by replacement entries or one-off stubs.
 The ingress audit records the exact package-owned continuation.
 
+**T309 S2 P1:** all 16 original DEM and 11 original COMMAND provider source
+files now compile and archive on formal x86/x64 Ninja graphs. The same graphs
+also compile the selected existing source-shaped Base VDM/SoftPC/monitor/Win32/
+Redirector binding cohort; the forced-link audit now correctly exposes only
+its lower `adapter-bochs` and `session` component boundary plus later owner
+families. See the [cohort audit]
+(etc/evidence/m0-t309-s2-provider-cohort-build-audit-001.md).
+
 **T307 S1 P1:** the local Base VDM facade now covers the reached DOS forms for
 first-VDM query, command capture/capacity/reentry, copied one-shot current
 directories and session-only `ExitVDM`. Its formal Ninja fixture passes under
