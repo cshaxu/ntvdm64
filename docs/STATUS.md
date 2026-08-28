@@ -370,7 +370,7 @@ signature/condition-form failures. The 251 are future body-expansion seeds,
 not package/provider admissions. See the [P20 signature evidence]
 (etc/evidence/m0-t301-s1-p20-one-ledger1-signature-gate-001.md).
 
-## Latest Closed Packet
+## Active Packet
 
 | Field | Record |
 | --- | --- |
