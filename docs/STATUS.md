@@ -124,6 +124,14 @@ boundary, and 88 form bounded non-MVDM/leaf cohorts led by BaseClient and
 NetAPI. See the [package partition]
 (etc/evidence/m0-t306-s1-signature-seed-package-partition-001.md).
 
+**T306 S1 P3:** the 54 physical BaseClient candidates now have a final
+source-slice disposition: 30 are public Win32 leaves, 21 retain named
+BaseVDM/CSRSS-shaped adapter or future broker ownership, and 3 belong solely
+to the future WOW package. No Kernel32/BaseClient product shell is selected;
+the existing local DOS BaseSrv seam remains the bounded source-derived route.
+See the [cohort audit]
+(etc/evidence/m0-t306-s1-baseclient-cohort-boundary-audit-001.md).
+
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,
 including historical build products, into the existing `mvdm-*` component
