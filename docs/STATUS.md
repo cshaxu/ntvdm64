@@ -58,6 +58,11 @@ classified as Console/standard-stream/LPT lifecycle, not a collection of
 COMMAND shims: its CPU/BIOS, private-console and direct-port branches remain
 named later owners.  See the [event/host/LPT audit]
 (etc/evidence/m0-t309-s2-p3-event-host-lpt-source-boundary-audit-001.md).
+The original `nt_msscs.c` is a complete host-composition/VDD root (startup,
+NTIO load, UMB/VDD hook and PDB lifecycle), so its two residual forms cannot
+be detached into current provider shims; it transfers intact to the queued
+selectable SoftPC/Bochs host-composition task.  See the [MSSCS audit]
+(etc/evidence/m0-t309-s2-p3-msscs-source-boundary-audit-001.md).
 
 **T307 S1 P1:** the local Base VDM facade now covers the reached DOS forms for
 first-VDM query, command capture/capacity/reentry, copied one-shot current
