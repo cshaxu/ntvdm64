@@ -254,6 +254,16 @@ This P establishes source placement and static ABI composition; heartbeat,
 session cancellation, BDA mapping, timer/PIC delivery and controlled-stop
 semantics remain S8 work.
 
+**T310 S7 P4:** placement is now enforced at the original-file boundary:
+`nt_eoi.c` and `nt_timer.c` remain byte-identical `mvdm-host` roots, while
+their non-MVDM original declaration carriers remain same-named source subsets
+under `opennt-host`; only non-composable interface behavior belongs in
+`adapter-mvdm-host-out`. After the declaration-root correction, the formal
+x86 and x64 bounded CCPU fixtures both executed successfully. Their
+`VdmSetPhysRecStructs` fixture seam now fails hard if reached, so it cannot
+mask the still-unrecovered external physical-page operation. See the
+[physical-page audit](etc/evidence/m0-t310-s7-physical-page-source-recovery-audit-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove

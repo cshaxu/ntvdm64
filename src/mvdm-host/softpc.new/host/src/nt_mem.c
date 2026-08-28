@@ -107,6 +107,16 @@ typedef enum
 #define ADDRESS_TO_HEADER(address)   \
     (headerTable + (((address) - intelMem) >> PAGE_SHIFT))
 
+/* DIVERGENCE MVDM-HOST-DIV-034: keep the original Intel-linear ULONG ABI,
+ * but perform the private allocation-header/base arithmetic in the existing
+ * pointer-sized IHPE carrier. The original x86 code narrowed intelMem before
+ * subtraction, which corrupts only its own host allocation on x64. Neither
+ * macro publishes a native pointer outside this SoftPC translation unit. */
+#define INTEL_ADDRESS_FROM_HOST(address) \
+    ((ULONG)((IHPE)(address) - (IHPE)intelMem))
+#define HOST_ADDRESS_FROM_INTEL(address) \
+    ((IHPE)intelMem + (IHPE)(address))
+
 /* Local variables. */
 LOCAL IBOOL              memInit = FALSE;
                                         /* Is memory system initialised? */
@@ -440,12 +450,12 @@ GLOBAL NTSTATUS VdmAllocateVirtualMemory IFN3(PULONG, INTELAddress,
      * the new chunk to the caller.
      */
     totalFree -= Size;
-    *INTELAddress = ((ULONG) (IHPE) headerPtr->address) - (ULONG) intelMem;
+    *INTELAddress = INTEL_ADDRESS_FROM_HOST(headerPtr->address);
 
 #ifdef DEBUG_MEM
     printf(" => alloc %lxh, commit %lxh\n",
-        ((ULONG) (IHPE)headerPtr->address) - (ULONG)intelMem,
-        ((ULONG) (IHPE)commitAddr) - (ULONG)intelMem);
+        INTEL_ADDRESS_FROM_HOST(headerPtr->address),
+        INTEL_ADDRESS_FROM_HOST(commitAddr));
 
 #ifdef DEBUG_MEM_DUMP
     DumpAllocationHeaders("after allocate");
@@ -547,7 +557,7 @@ GLOBAL NTSTATUS VdmFreeVirtualMemory IFN1(ULONG, INTELAddress)
     IU32    size,
             decommitSize;
     IHP     decommitAddr;
-    ULONG   Address;
+    IHPE    Address;
 
 
     /* Make sure memory system is initialised. */
@@ -558,7 +568,7 @@ GLOBAL NTSTATUS VdmFreeVirtualMemory IFN1(ULONG, INTELAddress)
 #endif
 
     /* Calculate chunk address */
-    Address = INTELAddress + (ULONG)intelMem;
+    Address = HOST_ADDRESS_FROM_INTEL(INTELAddress);
 
     /* Get header table entry for address. */
     headerPtr = ADDRESS_TO_HEADER((IU8 *) Address);
@@ -734,7 +744,7 @@ GLOBAL NTSTATUS VdmReallocateVirtualMemory IFN3(ULONG, INTELOriginalAddress,
             maxSize;
     ULONG   newAddr;
     NTSTATUS	status;
-    ULONG   OriginalAddress;
+    IHPE    OriginalAddress;
 
 
 #ifdef DEBUG_MEM
@@ -747,7 +757,7 @@ GLOBAL NTSTATUS VdmReallocateVirtualMemory IFN3(ULONG, INTELOriginalAddress,
 	NewSize = (NewSize + PAGE_MASK) & (~PAGE_MASK);
 
     /* Calculate chunk address */
-    OriginalAddress = INTELOriginalAddress + (ULONG)intelMem;
+    OriginalAddress = HOST_ADDRESS_FROM_INTEL(INTELOriginalAddress);
 
     /* Make sure memory system is initialised. */
     assert0(memInit, "Called VdmReallocateVirtualMemory before initialisation");
@@ -822,7 +832,8 @@ GLOBAL NTSTATUS VdmReallocateVirtualMemory IFN3(ULONG, INTELOriginalAddress,
             return(status);
 
         /* Copy old chunk. */
-        memcpy((void *) (newAddr + intelMem), (void *) OriginalAddress,
+        memcpy((void *) HOST_ADDRESS_FROM_INTEL(newAddr),
+                (void *) OriginalAddress,
                 (size_t) oldSize);
 
         /* Free old chunk. */
@@ -878,7 +889,7 @@ GLOBAL NTSTATUS VdmReallocateVirtualMemory IFN3(ULONG, INTELOriginalAddress,
         }
 
         /* Inform caller address has not changed. */
-	*INTELNewAddress = OriginalAddress - (ULONG)intelMem;
+	*INTELNewAddress = INTEL_ADDRESS_FROM_HOST(OriginalAddress);
 
         /* Update total free space store. */
         totalFree += NewSize - oldSize;

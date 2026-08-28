@@ -105,3 +105,35 @@ Its warnings are original-source diagnostics such as old-style declarators,
 NT4 macro overlaps, and pre-existing pointer-width sites in unenabled device
 paths; neither architecture reported a new missing declaration or compile
 failure from the relocated carriers.
+
+## Mirror-placement rule applied to EOI and timer roots
+
+`nt_eoi.c` itself is an original MVDM SoftPC host root, not a non-MVDM
+dependency. It therefore remains byte-identically at
+`mvdm-host/softpc.new/host/src/nt_eoi.c`; moving it to `opennt-host` would
+break the selected MVDM package mirror and obscure its original owner.
+
+The rule applies at the original-file boundary:
+
+- a non-MVDM original OpenNT file (or a source-identified true subset) is
+  restored below `opennt-host` at its original relative name; and
+- an interface whose original body cannot compose on the modern host is
+  supplied only by the named same-shaped family below
+  `adapter-mvdm-host-out`.
+
+For EOI/timer, `ntexapi.h`, `ntrtl.h`, `nturtl.h`, and `ntpsapi.h` are the
+first case and now live under `opennt-host/public/sdk/inc/`. Modern
+type/import and unavailable-behavior bindings are the second case and remain
+under the adapter. This keeps `nt_eoi.c` and `nt_timer.c` source-shaped while
+preventing a compatibility reimplementation from entering either mirror.
+
+## Focused CCPU verification after declaration relocation
+
+The formal bounded CCPU fixture graph was corrected to include the restored
+`opennt-host/public/sdk/inc` carrier root. The existing x64 and x86 fixture
+executables were then run outside the sandbox. Both completed their
+`sas-init -> cpu-init -> seed -> start -> reenter` proof sequence with exit
+code zero. Its `VdmSetPhysRecStructs` test seam now fails hard if invoked;
+the fixture therefore cannot accidentally treat a passive stub as a
+physical-page binding. This is evidence only for the bounded CCPU interval
+and include closure; it does not enable the external WOW DIB mapping path.
