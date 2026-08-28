@@ -2,11 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T309 S2.** S1 closed the original ingress and dispatcher-object
-boundary. The active work now composes the complete original DEM and COMMAND
-provider cohorts through named source-shaped forms; it may not choose services
-by trace or replace provider bodies to force a link. See the [S2 plan]
-(etc/operations/m0-t309-s2-dem-command-provider-cohort-composition-plan-001.md).
+**No M/T/S packet is active.** M0 T309 is closed: the original DEM/COMMAND
+provider cohorts and every current residual source-owner boundary are recorded
+without a service/body replacement. See the [T309 closure]
+(history/m0-t309-closure-20260828.md). The next packet requires explicit
+admission from the queue.
 
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
@@ -370,11 +370,11 @@ signature/condition-form failures. The 251 are future body-expansion seeds,
 not package/provider admissions. See the [P20 signature evidence]
 (etc/evidence/m0-t301-s1-p20-one-ledger1-signature-gate-001.md).
 
-## Active Packet
+## Latest Closed Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T309 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Identifier Mode | `M0 T309 S2`, Ordinary Mode with single-person dual-role implementation and review; closed. |
 | Admission And Approval | Owner-directed sequential queue execution admits the source-package continuation after the S1 ingress/dispatcher closure. |
 | Objective | Compose original DEM and COMMAND provider cohorts through their selected named adapter forms, retaining original tables and provider bodies. |
 | Non-goals | No trace-led service patch, provider/table replacement, full `nt_bop.c` aggregate, second SoftPC/PIC executor, kernel VDM/CSRSS, XMS/DPMI/Redirector/WOW/VDD/debugger recovery or app-owned service policy. |
@@ -386,7 +386,7 @@ not package/provider admissions. See the [P20 signature evidence]
 | Asset Needs | Selected OpenNT MVDM mirror, T309 S1 closure, closed Base VDM and monitor artifacts, current Bochs-facing mechanical facade. |
 | Reporting Requirements | Record original source path, provider cohort membership, preserved call/layout/failure rule, every selected binding and deferred product-shell branch. |
 | Stop Conditions | A proposed route requires a provider/table rewrite, full historical PIC executor, kernel/CSRSS reconstruction, an unregistered mirror divergence, an app semantic or trace-selected service. |
-| Exit Criteria | Both selected cohorts formally link on both architectures or every remaining original external form has one exact owner/disposition; no provider is replaced merely to obtain a link. |
+| Exit Criteria | Met: every remaining original external form has one exact owner/disposition; no provider was replaced merely to obtain a link. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务，从 Base VDM 命令协议开始，到 DPMI / DPMI32 复通。” |
 | Similar-Issue Sweep | Both original table arrays, every original `sources` member, and all direct external symbols are classified before any local route test. |
 

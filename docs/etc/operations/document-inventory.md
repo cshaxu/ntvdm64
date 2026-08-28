@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3106 |
+| Documentation records | 3107 |
 | --- | --- |
-| Generated UTC | 2026-08-28T15:42:17Z |
+| Generated UTC | 2026-08-28T15:44:11Z |
 
 ## Entries
 
@@ -2833,6 +2833,7 @@ content-divergent entries.
 | history/m0-t306-closure-20260828.md | closed task history | d40cb86990c0c07efeda0ac1620a0406aca1328cbbd538d25234af5e856863c3 |
 | history/m0-t307-closure-20260828.md | closed task history | 0c89cce9de83ac656e016dcbcbaad89869634cbec0c5f1113587f85bee647a0e |
 | history/m0-t308-closure-20260828.md | closed task history | 3b1c1d0f2b324d629ecc8bab75846b68e3f0070bd03e33e97458f15caf582468 |
+| history/m0-t309-closure-20260828.md | closed task history | b151a07fd5f52a791e6fafa5fba59c35a8ae544b9844f4b2e310c53aa1b712ae |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -3120,7 +3121,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 4bf07a7aac88f44861028f3160827fc24011610ee9a3262d56383215a6a31d81 |
+| STATUS.md | principal control document | 6955eb0d081902ae73cdc394190c8d6a299026421e32ded0874dc083407f3500 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
