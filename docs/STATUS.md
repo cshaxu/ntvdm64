@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T302 S2.**
+**Active: M0 T303 S1.**
 
 M0 T301/S1 is closed. Its constrained first-degree audit produced physical
 source/binding evidence without turning whole-program BFS into a functional
@@ -34,6 +34,17 @@ and BaseSrv's CSRSS product shell remain explicit S2 limits. See the
 dispatcher. A direct `vdm.c` composition probe stops at the private Base
 DLL/CSR header chain, while the selected facade passes the same x86/x64 formal
 fixture. See the [P2 evidence](etc/evidence/m0-t302-s2-p2-baseclient-local-facade-001.md).
+
+**T302 closure:** the admitted local one-session Base VDM protocol is closed;
+its retained CSR/CSRSS, first-VDM, cross-process, WOW/PIF and child-lifecycle
+branches are explicit future owners, not missing local behavior. See the
+[closure record](history/m0-t302-closure-20260828.md).
+
+**T303 S1 admission:** owner-directed queue execution now enters the bounded
+Bochs/SoftPC mechanical-contract audit required by the first vertical slice.
+It may identify only original machine-facing forms and their existing adapter
+seams; no Bochs edit, BOP route or guest trace repair is admitted. See the
+[S1 plan](etc/operations/m0-t303-s1-bochs-softpc-mechanical-contract-plan-001.md).
 
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,
@@ -163,21 +174,21 @@ not package/provider admissions. See the [P20 signature evidence]
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T302 S2`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Owner-directed queue execution from Base VDM command protocol toward DPMI/DPMI32. T302/S1 admitted this exact local DOS subprotocol; the current S implements only that approved source-shaped slice. |
-| Objective | Compose original `GetNextVDMCommand` request/capacity/retry behavior with a bounded local BaseSrv record/copy/wait backend; remove the permanent app/monitor callback protocol ownership while preserving original `VDMINFO` entry, order and failures. |
-| Non-goals | No CSRSS/CSR server recreation, kernel VDM work, multi-process broker, first-VDM global query, WOW/PIF, normal child-process producer, BOP-family expansion, Bochs change or guest trace-driven repair. |
-| Reference Baseline | T302/S1 boundary ledger and seam disposition; byte-exact BaseClient/BaseSrv files; T301 source audit; app command source and monitor facade marked for migration/deletion. |
-| Files And ABI Surface | New named `adapter-mvdm-host-out/basesrv` local-protocol subfamily, only necessary same-shaped `win32` hooks, source-shaped BaseClient entry composition, app producer migration and monitor seam removal/narrowing. `VDMINFO`, VDM state flags and result status layout remain the external contract. |
-| Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; four-rung source-recovery gate; mirror/overlay, mapping and `src.old` exclusion rules. |
-| Verification | x86/x64 focused local fixtures for publish/request, insufficient capacity/retry, environment-only, no-command return, reentry and teardown; source/body diff review; no raw caller pointer or host handle retention; documentation governance and `git diff --check`. |
-| Expected Markers | Original client request/capacity/retry code is selected or explicitly source-shaped through its facade; one session-owned Base VDM record/event owner; no monitor callback slot; app supplies bytes only; CSR/WOW/PIF/global paths decline explicitly. |
-| Asset Needs | Exact Base VDM mirror, S1 ledgers, session mapping/lifecycle support, public Win32 event primitives, MSVC x86/x64 and formal Ninja graph after the source slice is fixed. |
-| Reporting Requirements | Report each direct original body selected, every minimal divergence, adapter ABI/failure mapping, deleted/migrated app/monitor seam and all unsupported product-shell branches. |
-| Stop Conditions | The work needs an unbounded CSR/CSRSS transport, code must retain a caller pointer across wait, an original body would require a >50% mirror edit, an adapter becomes a generic CSR service, or scope reaches child lifecycle/WOW/PIF/BOP/Bochs. |
-| Exit Criteria | A local one-session DOS command record passes positive/capacity/no-command/reentry/teardown fixtures through the original-shaped public entry; app/monitor parallel dispatch is removed or permanently narrowed to non-command semantics; exact mirror and adapter registers are updated; x86/x64 build evidence is recorded. |
+| Identifier Mode | `M0 T303 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner-directed queue execution from Base VDM command protocol toward DPMI/DPMI32. This S admits only the first vertical-slice Bochs/SoftPC source and ABI audit described in its plan. |
+| Objective | Identify every reached original SoftPC/CCPU/SAS mechanical interface required by the first vertical slice, assign its existing or missing same-shaped adapter owner, and prove that Bochs remains the sole executor. |
+| Non-goals | No Bochs source change, CPU profile, BOP route, guest trace repair, device enablement, second SoftPC/CCPU executor, BaseSrv expansion, or DEM/COMMAND implementation. |
+| Reference Baseline | T302 closure; T301 physical source audit; original reached MVDM mechanical declarations; current `adapter-mvdm-host-out/softpc` and `adapter-bochs` contracts. |
+| Files And ABI Surface | Source/ABI/failure ledger and S1 plan only; inspection may cover reached MVDM callers, `adapter-mvdm-host-out/softpc`, `adapter-bochs`, session mapping/lease contracts and their source declarations. |
+| Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; four-rung source-recovery gate; mapping and `src.old` exclusion rules. |
+| Verification | Physical caller/declaration proof, dependency-direction review, x86/x64 width/mapping treatment review, documentation governance and `git diff --check`. |
+| Expected Markers | One owner and disposition for each reached original mechanical form; no MVDM semantic dependency enters Bochs; no unowned pointer/lease conversion remains. |
+| Asset Needs | Original MVDM/SoftPC declarations, existing adapter source, Base VDM closure evidence, both approved OpenNT source roots and current source manifests. |
+| Reporting Requirements | Report direct original forms, retained existing adapter behavior, missing bindings, explicit second-executor exclusions and every candidate Bochs requirement. |
+| Stop Conditions | A required form needs a BOP-specific Bochs change, an unbounded device/product-shell import, a family-private mapping manager, or a source body beyond the immediate first-slice boundary. |
+| Exit Criteria | A bounded complete immediate mechanical ledger and approved implementation plan exist; no new runtime behavior is introduced in S1. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务，从 Base VDM 命令协议开始，到 DPMI / DPMI32 复通。” |
-| Similar-Issue Sweep | `GetNextVDMCommand`, reentry state, capacity retry, environment-only request, no-command wait, teardown, `ExitVDM`, `SetVDMCurrentDirectories`, `RegisterWowExec`, server request records, session binding, command source, monitor facade, `VDMINFO` declarations and CSR/kernel/WOW boundaries. |
+| Similar-Issue Sweep | `host_simulate`, register get/set forms, selector and stack transaction, `Sim32GetVDMPointer` family, A20, protected-frame operations, mapping leases, controlled stop/resume, SoftPC CPU executor exclusion and Bochs dependency direction. |
 
 **Td closure — OpenNT-host directory boundary:** `opennt-host` is now
 explicitly governed as the single mirror root for every separately accepted

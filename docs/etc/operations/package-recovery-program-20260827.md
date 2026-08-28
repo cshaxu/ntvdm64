@@ -2,9 +2,9 @@
 
 This is the detailed proposal set for the current package-first program. Each
 `P` section is a package proposal, not a serial audit gate. The active
-`M0 T302` Base VDM recovery is represented here for program continuity but is
-not a Queue candidate; its live S scope belongs only to Status. Every admitted
-packet still requires its own bounded S brief in Status.
+`M0 T303` Bochs/SoftPC recovery is represented here for program continuity but
+is not a Queue candidate; its live S scope belongs only to Status. Every
+admitted packet still requires its own bounded S brief in Status.
 
 ## 2026-08-27 owner-directed recovery order
 
@@ -37,7 +37,7 @@ Historical source-index evidence. It emitted physical declaration/signature
 binding seeds but selected no package/provider route. It is closed and is not
 a candidate or implementation gate.
 
-## P02 — Base VDM command protocol (active M0 T302; not a Queue candidate)
+## P02 — Base VDM command protocol (completed M0 T302)
 
 **Predecessor:** P01. **S1 admission:** audit only the immediate BaseClient,
 BaseSrv VDM slice and its private/public boundary. **Delivery:** recover the
@@ -45,10 +45,11 @@ source-shaped `VDMINFO` request, copied capture, sizing/retry, wait/wake and
 completion protocol from `opennt-host`; migrate the app one-command seam to a
 bounded backend rather than a parallel protocol owner. **Exit:** local
 one-session protocol tests plus explicit deferred CSRSS/multi-process/WOW
-broker paths; no CSRSS reconstruction. This is active implementation work,
-not a generic BaseSrv audit.
+broker paths; no CSRSS reconstruction. The admitted local source-shaped
+client/server slice is complete; retained CSRSS product-shell branches are
+separate future owners.
 
-## P03 — Bochs/SoftPC mechanical contract closure
+## P03 — Bochs/SoftPC mechanical contract closure (active M0 T303; not a Queue candidate)
 
 **Predecessor:** P02. **S1 admission:** inspect only reached original SoftPC/
 CCPU forms used by the first vertical slice. **Delivery:** make

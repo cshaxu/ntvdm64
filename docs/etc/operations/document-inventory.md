@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3059 |
+| Documentation records | 3061 |
 | --- | --- |
-| Generated UTC | 2026-08-28T07:16:30Z |
+| Generated UTC | 2026-08-28T07:19:04Z |
 
 ## Entries
 
@@ -1097,6 +1097,7 @@ content-divergent entries.
 | etc/operations/m0-t302-s1-base-vdm-existing-seam-disposition-ledger.tsv | indexed supporting material | a0661c7cd1cbbeb49d070863ec5bac78c0c81432aa4256f3282c9b29936b91be |
 | etc/operations/m0-t302-s1-base-vdm-protocol-boundary-ledger.tsv | indexed supporting material | ab9c8963bdb64676fcbdc9edbb84b5b9b53f27ac169e0a1850f2b103ba8f8a66 |
 | etc/operations/m0-t302-s2-base-vdm-local-protocol-recovery-plan-001.md | indexed supporting material | 40fcae120ea90aec489e7152669e8b2f2d49171f10841c3e06493840ce763d24 |
+| etc/operations/m0-t303-s1-bochs-softpc-mechanical-contract-plan-001.md | indexed supporting material | 6c2fd93ceee4856402df806bcf8ebcdd9f0cae1a14594216136243def97fc77a |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -1191,7 +1192,7 @@ content-divergent entries.
 | etc/operations/opennt-non-mvdm-stage1-semantic-site-ledger.tsv | indexed supporting material | e4d4936ec2f7aec51e360c39daff960b2e451c3f54be28a992e8e1ad52c3d524 |
 | etc/operations/opennt-non-mvdm-stage1-semantic-symbol-ledger.tsv | indexed supporting material | 0c281cd8ee4d7b225919ef6af7dba0105343be4c691b31725a34b22302c5bdec |
 | etc/operations/opennt-non-mvdm-stage1-true-egress-ledger.tsv | indexed supporting material | a537d68f8d63655fb89e98701058fa4f394b5924ef40d2dbc78f2e03d1f3b57b |
-| etc/operations/package-recovery-program-20260827.md | indexed supporting material | 37956125866e936a5ca82dbfa74c94e6648e26cd509ca30675b373a7a5ed00de |
+| etc/operations/package-recovery-program-20260827.md | indexed supporting material | 47451e8f5017ba29bc3d29a44c70b65c96208c7405d490eab76ad8b52ec6db3e |
 | etc/operations/policy/source-policy.md | indexed supporting material | afc0bd36e17bad0c401e1ad7f324658db50c68a19ce7ef80ff8bf4542b6f52b7 |
 | etc/operations/proposal-bochs-component-identity-overlay-convergence-001.md | indexed supporting material | ac4de17a933c62d6b6adc1971345c6fe4e58860453fd894608553f2bdd6974c8 |
 | etc/operations/proposal-bochs-core-diff-overlay-minimization-001.md | indexed supporting material | 45eb3881102adb316497ec85eeac90488d95cd69c77d4555a1608a14d953db29 |
@@ -2786,6 +2787,7 @@ content-divergent entries.
 | history/m0-t299-s6-closure-20260827.md | closed task history | e1522f792f00c1090d8f5136f78e2443d00fe342f9e4f61af034835ce6c42538 |
 | history/m0-t300-s1-closure-20260827.md | closed task history | 5bfe7465a3baac57d39f85c4cff05c0fc5fc5d45598dd028a65a745fe7037e08 |
 | history/m0-t301-closure-20260828.md | closed task history | e8c3dbca77bd9ce46aafe794afce4ff69c25dfb41e0c85c6a7074eaeeb07be0f |
+| history/m0-t302-closure-20260828.md | closed task history | 65f6137051b0e344a5f14d13634596139637c76b724eeeae91d46e9fb567cf97 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -2947,7 +2949,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | fbfa3a202453ef9a31c0549310ff6ce96d822ac85e2cbbfb6a9c6c032e516f0c |
-| QUEUE.md | principal control document | c38c8272ebafd44cdeafc79223e00a6da0809b93f8e64e4c0646490d02761938 |
+| QUEUE.md | principal control document | abdc8e5f18722d7e6d5e83e02892ed37f18c75cc2a214d4bb1460fcbe7bfe7f8 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -3073,7 +3075,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | a25ae148edd4e947924b9a1f8157c9a4c20024cba1a423939d7e3f12dcedde6d |
+| STATUS.md | principal control document | 5c026e31d612e9bb0871c7fe50ee3c9ab5cc1666ad652b1a938f1109972901e3 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

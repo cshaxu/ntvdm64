@@ -2,8 +2,8 @@
 
 This is the authoritative ordered queue of **unnumbered candidate T packages**.
 A candidate receives its next global `T` number only when the owner admits it
-to [STATUS.md](STATUS.md). The active Base VDM package is deliberately absent:
-its live scope and progress belong only to Status.
+to [STATUS.md](STATUS.md). The active Bochs/SoftPC package is deliberately
+absent: its live scope and progress belong only to Status.
 
 Recovery is package-first and mirror-first: a trace, BOP hit, compiler error
 or convenient API may verify a completed package but cannot choose the next
@@ -19,23 +19,22 @@ item are in the [package recovery proposal set](etc/operations/package-recovery-
 
 | Order | Candidate package |
 | --- | --- | --- |
-| 1 | Bochs/SoftPC mechanical contract closure |
-| 2 | MVDM ingress and fixed-width event bridge |
-| 3 | DEM/COMMAND vertical slice and child lifecycle |
-| 4 | Minimal DOS guest execution and controlled return |
-| 5 | Minimal vertical-slice integration closure |
-| 6 | XMS owner package |
-| 7 | DPMI/DPMI32 owner package |
-| 8 | Redirector owner package |
-| 9 | WOW32/Win16 owner package |
-| 10 | VDD owner package |
-| 11 | Debugger/BDE/FAX owner packages |
-| 12 | Service-package cross-family closure |
-| 13 | Broker process and cross-process coordination |
-| 14 | In-process multi-session reentrancy audit |
-| 15 | Host capability expansion |
-| 16 | Guest DOS/WOW16 artifact matrix |
-| 17 | Product release closure |
+| 1 | MVDM ingress and fixed-width event bridge |
+| 2 | DEM/COMMAND vertical slice and child lifecycle |
+| 3 | Minimal DOS guest execution and controlled return |
+| 4 | Minimal vertical-slice integration closure |
+| 5 | XMS owner package |
+| 6 | DPMI/DPMI32 owner package |
+| 7 | Redirector owner package |
+| 8 | WOW32/Win16 owner package |
+| 9 | VDD owner package |
+| 10 | Debugger/BDE/FAX owner packages |
+| 11 | Service-package cross-family closure |
+| 12 | Broker process and cross-process coordination |
+| 13 | In-process multi-session reentrancy audit |
+| 14 | Host capability expansion |
+| 15 | Guest DOS/WOW16 artifact matrix |
+| 16 | Product release closure |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).
