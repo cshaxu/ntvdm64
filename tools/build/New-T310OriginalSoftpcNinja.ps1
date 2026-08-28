@@ -37,14 +37,20 @@ if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or !(Get-Command ninja -ErrorA
 }
 
 $ccpuRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/ccpu386'
+$biosRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/bios'
+$keymouseRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/keymouse'
 $hostRoot = Join-Path $root 'src/mvdm-host/softpc.new/host/src'
 $adapterWin32Root = Join-Path $root 'src/adapter-mvdm-host-out/win32/source'
 $patchRoot = Join-Path $root 'src/mvdm-softpc-patch/x86/prod'
 $patchBodyRoot = Join-Path $root 'src/mvdm-softpc-patch/patches/common'
 $patchEvidenceRoot = Join-Path $root 'src/mvdm-softpc-patch/patches'
 $ccpuManifest = Join-Path $ccpuRoot 'sources'
+$biosManifest = Join-Path $biosRoot 'sources'
+$keymouseManifest = Join-Path $keymouseRoot 'sources'
 $hostManifest = Join-Path $hostRoot 'sources'
 $ccpuNames = Get-OriginalSources $ccpuManifest
+$biosNames = Get-OriginalSources $biosManifest
+$keymouseNames = Get-OriginalSources $keymouseManifest
 $hostNames = @('nt_cprgs.c', 'nt_cpu.c', 'nt_aorc.c', 'nt_reset.c', 'nt_error.c',
                'nt_msscs.c', 'sim32.c', 'nt_sas.c', 'nt_mem.c', 'nt_umb.c')
 $adapterWin32Names = @('dialog_context.c')
@@ -53,6 +59,12 @@ $patchBodyNames = @('fmstubs.c')
 $patchEvidenceNames = @('minnt/callconv.patch')
 foreach ($name in $ccpuNames) {
     if (!(Test-Path -LiteralPath (Join-Path $ccpuRoot $name))) { throw "Original CCPU source missing: $name" }
+}
+foreach ($name in $biosNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $biosRoot $name))) { throw "Original SoftPC BIOS source missing: $name" }
+}
+foreach ($name in $keymouseNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $keymouseRoot $name))) { throw "Original SoftPC keymouse source missing: $name" }
 }
 foreach ($name in $hostNames) {
     if (!(Test-Path -LiteralPath (Join-Path $hostRoot $name))) { throw "Original SoftPC host root missing: $name" }
@@ -70,7 +82,7 @@ foreach ($name in $patchEvidenceNames) {
     if (!(Test-Path -LiteralPath (Join-Path $patchEvidenceRoot $name))) { throw "Registered SoftPC patch evidence missing: $name" }
 }
 
-New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/patch') | Out-Null
+New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/patch') | Out-Null
 $environment = Join-Path $build 'msvc-mt.cmd'
 @('@echo off', 'set "MVDM_T310_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready',
   ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'),
@@ -123,11 +135,21 @@ $graph.Add('rule forced_link_audit')
 # This deliberately produces a non-runnable DLL.  /WHOLEARCHIVE makes the
 # candidate's complete original membership visible to LINK; /FORCE keeps the
 # unresolved physical forms in the adjacent log for source-first ownership.
-$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-win32-bindings.lib kernel32.lib user32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib > $out.log 2>&1')
+$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-win32-bindings.lib kernel32.lib user32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib > $out.log 2>&1')
 
 $ccpuObjects = foreach ($name in $ccpuNames) {
     $object = 'obj/ccpu/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $ccpuRoot $name)))
+    $object
+}
+$biosObjects = foreach ($name in $biosNames) {
+    $object = 'obj/bios/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $biosRoot $name)))
+    $object
+}
+$keymouseObjects = foreach ($name in $keymouseNames) {
+    $object = 'obj/keymouse/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $keymouseRoot $name)))
     $object
 }
 $hostObjects = foreach ($name in $hostNames) {
@@ -146,11 +168,13 @@ $patchBodyObjects = @(foreach ($name in $patchBodyNames) {
     $object
 })
 $graph.Add('build original-ccpu386.lib: lib ' + ($ccpuObjects -join ' '))
+$graph.Add('build original-softpc-bios.lib: lib ' + ($biosObjects -join ' '))
+$graph.Add('build original-softpc-keymouse.lib: lib ' + ($keymouseObjects -join ' '))
 $graph.Add('build original-softpc-host-roots.lib: lib ' + ($hostObjects -join ' '))
 $graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' '))
 $graph.Add('build ntvdmx64-softpc-patch-evidence.lib: lib ' + ($patchBodyObjects -join ' '))
-$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-host-roots.lib softpc-win32-bindings.lib ntvdmx64-softpc-patch-evidence.lib')
-$graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-host-roots.lib softpc-win32-bindings.lib')
+$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-host-roots.lib softpc-win32-bindings.lib ntvdmx64-softpc-patch-evidence.lib')
+$graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-host-roots.lib softpc-win32-bindings.lib')
 $graph.Add('default original-softpc-candidate')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 
@@ -162,6 +186,8 @@ $graph.Add('default original-softpc-candidate')
     originalHostManifest = 'src/mvdm-host/softpc.new/host/src/sources'
     ccpuSourceCount = @($ccpuNames).Count
     ccpuSources = @($ccpuNames)
+    biosSources = @($biosNames)
+    keymouseSources = @($keymouseNames)
     hostRoots = @($hostNames)
     adapterWin32Sources = @($adapterWin32Names)
     patchInputs = @($patchNames | ForEach-Object {
