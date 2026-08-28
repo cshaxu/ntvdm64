@@ -40,6 +40,10 @@ original body before selecting any adapter. Initial inspection already proves
 that several residuals have original `mvdm-host` definitions in `nt_rflop`,
 `nt_msscs`, `nt_error`, `nt_event`, `nt_lpt`, `nt_pif`, and `nt_hosts`; they
 are source-selection candidates, not permission for replacement shims.
+The first physical pass records 133 provider-origin residuals (90 DEM, 43
+COMMAND), separately from the fixed 49-form `bochs-core` and 25-form toolchain
+boundaries; see the [P3 first pass]
+(etc/evidence/m0-t309-s2-p3-residual-owner-first-pass-001.md).
 
 **T307 S1 P1:** the local Base VDM facade now covers the reached DOS forms for
 first-VDM query, command capture/capacity/reentry, copied one-shot current
