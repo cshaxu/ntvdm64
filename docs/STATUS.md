@@ -137,6 +137,14 @@ than a runnable SoftPC session. The remaining source-shaped product lifecycle,
 typed session stop and V86/MONITOR removal audit remain active S5 work; see
 the [execution-seam audit](etc/evidence/m0-t310-s5-ccpu-execution-seam-audit-001.md).
 
+**T310 S5 P2:** the exact 133-file x86/x64 CCPU graph has a physical-path
+disposition: it contains no `src.old`, Bochs, kernel-VDM or `monitor.lib`
+input. Its five `MONITOR` mentions are original inactive conditional guards;
+its 38 `V86` mentions are CCPU guest-emulation semantics, not a MONITOR
+product path. The resulting owner classifications prevent either premature
+source deletion or silent fallback; see the [profile-path audit]
+(etc/evidence/m0-t310-s5-ccpu-profile-path-disposition-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove
