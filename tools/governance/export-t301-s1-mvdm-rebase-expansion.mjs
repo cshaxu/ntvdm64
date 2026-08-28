@@ -71,7 +71,7 @@ function bodyOf(definition) {
   const symbolOffset = parsed.indexOf(definition.symbol, start); const open = parsed.indexOf('(', symbolOffset + definition.symbol.length); const close = paired(parsed, open, '(', ')'); const bodyOpen = parsed.indexOf('{', close); const bodyClose = paired(parsed, bodyOpen, '{', '}');
   if (symbolOffset < start || close < 0 || bodyOpen < 0 || bodyClose < 0) throw new Error(`cannot extract ${key(definition)}`);
   const ownMacros = new Set([...raw.matchAll(/^\s*#\s*define\s+([A-Za-z_]\w*)\b/gm)].map((match) => match[1]));
-  return { code: parsed.slice(bodyOpen + 1, bodyClose), ownMacros };
+  return { code: parsed.slice(bodyOpen + 1, bodyClose), ownMacros, body_offset: bodyOpen + 1, source: raw };
 }
 
 const all = indexDefinitions(); const byName = new Map(); const byKey = new Map();
@@ -84,18 +84,19 @@ const seeds = [...new Set(seedRows.map((row) => row.selected_definition_identity
 const reached = new Map(); const queue = [...seeds]; const edges = [];
 while (queue.length) {
   const caller = queue.shift(); const callerKey = key(caller); if (reached.has(callerKey) || old.has(callerKey)) continue; reached.set(callerKey, caller);
-  const { code, ownMacros } = bodyOf(caller);
+  const { code, ownMacros, body_offset, source } = bodyOf(caller);
   for (const match of code.matchAll(/\b([A-Za-z_]\w*)\s*\(/g)) {
     const callee = match[1]; if (controls.has(callee.toLowerCase()) || ownMacros.has(callee) || /^IFN\d+$/i.test(callee) || /^[A-Z][A-Z0-9_]*$/.test(callee)) continue;
     const candidates = (byName.get(callee) || []).filter((candidate) => candidate.source_root === caller.source_root && (candidate.linkage === 'externally-linkable' || candidate.source_path === caller.source_path));
     const internal = candidates.length === 1 ? candidates[0] : null;
-    edges.push({ caller_identity: callerKey, caller_symbol: caller.symbol, caller_source_path: caller.source_path, caller_source_line: caller.source_line, callee_spelling: callee, internal_candidate_identity: internal ? key(internal) : '', disposition: internal ? 'original-MVDM direct internal candidate; requires next shape/frontier gate if newly reached' : 'direct exit from newly discovered original-MVDM body; classify in T301 first-degree audit' });
+    const callLine = String(source.slice(0, body_offset + match.index).split('\n').length);
+    edges.push({ caller_identity: callerKey, caller_symbol: caller.symbol, caller_source_root: caller.source_root, caller_source_path: caller.source_path, caller_source_sha256: caller.source_sha256, caller_source_line: caller.source_line, call_source_line: callLine, callee_spelling: callee, internal_candidate_identity: internal ? key(internal) : '', disposition: internal ? 'original-MVDM direct internal candidate; requires next shape/frontier gate if newly reached' : 'direct exit from newly discovered original-MVDM body; classify in T301 first-degree audit' });
     if (internal && !old.has(key(internal)) && !reached.has(key(internal))) queue.push(internal);
   }
 }
 const definitionRows = [...reached.values()].map((definition) => ({ ...definition, source: seeds.some((seed) => key(seed) === key(definition)) ? 'P10 seed body' : 'directly reached during P12 expansion' }));
 const definitionColumns = ['symbol', 'source_root', 'source_path', 'source_sha256', 'source_line', 'linkage', 'source'];
-const edgeColumns = ['caller_identity', 'caller_symbol', 'caller_source_path', 'caller_source_line', 'callee_spelling', 'internal_candidate_identity', 'disposition'];
+const edgeColumns = ['caller_identity', 'caller_symbol', 'caller_source_root', 'caller_source_path', 'caller_source_sha256', 'caller_source_line', 'call_source_line', 'callee_spelling', 'internal_candidate_identity', 'disposition'];
 fs.writeFileSync(path.join(operations, 'mvdm-zero-degree-rebase-expansion-definition-ledger.tsv'), `${definitionColumns.join('\t')}\n${definitionRows.map((row) => definitionColumns.map((column) => quote(row[column])).join('\t')).join('\n')}\n`);
 fs.writeFileSync(path.join(operations, 'mvdm-zero-degree-rebase-expansion-edge-ledger.tsv'), `${edgeColumns.join('\t')}\n${edges.map((row) => edgeColumns.map((column) => quote(row[column])).join('\t')).join('\n')}\n`);
 console.log(`P10 seed bodies=${seeds.length}; additional reached original-MVDM bodies=${definitionRows.length - seeds.length}; direct edges=${edges.length}; direct exits requiring T301 classification=${edges.filter((edge) => !edge.internal_candidate_identity).length}`);

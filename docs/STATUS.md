@@ -45,6 +45,12 @@ direct expansion reaches 17 more bodies and records 343 physical direct edges.
 These are rebase inputs, not yet a final zero-degree rewrite. See the [P11
 expansion evidence](etc/evidence/m0-t301-s1-p11-full-mvdm-rebase-expansion-001.md).
 
+**T301 S1 P12:** 80 of P11's 120 newly expanded internal edges now pass the
+same-translation-unit or original header/definition shape gate; 40 remain
+explicit unresolved candidates. The P12 edge ledger is input to the
+zero-degree rebase, not a silent merge. See the [P12 edge gate]
+(etc/evidence/m0-t301-s1-p12-expanded-internal-edge-gate-001.md).
+
 ## Active Packet
 
 | Field | Record |
