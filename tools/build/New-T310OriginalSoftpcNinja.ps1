@@ -111,9 +111,9 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 
 $includeRoots = @(
     'src',
-    # Source-shaped adapter declarations must precede the byte-exact OpenNT
-    # ABI mirror: the selected original sources include nt.h/ntrtl.h/ntioapi.h
-    # by historical short names, while the adapter owns their modern binding.
+    # The adapter owns the modern `nt.h` type binding. Original reached NT
+    # public-header subsets are restored under opennt-host below, so source
+    # files still resolve historical short names without an adapter copy.
     'src/adapter-mvdm-host-out/win32/include',
     # Reached original non-MVDM OpenNT declaration slices retain their
     # source identity under opennt-host. Keep this after the adapter's nt.h:

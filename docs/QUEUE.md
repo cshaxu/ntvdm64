@@ -34,11 +34,12 @@ that bounded packet closes is item 1 below.
 
 | Order | Candidate implementation package |
 | --- | --- | --- |
-| 1 | Base VDM source-shaped broker recovery |
-| 2 | Monitor / `NtVdmControl` user-mode contract package recovery |
-| 3 | DEM/COMMAND vertical slice and child lifecycle |
-| 4 | Minimal DOS guest execution and controlled return |
-| 5 | Minimal vertical-slice integration closure |
+| 1 | MVDM host mirror-topology recovery (`mvdm-support` reintegration) |
+| 2 | Base VDM source-shaped broker recovery |
+| 3 | Monitor / `NtVdmControl` user-mode contract package recovery |
+| 4 | DEM/COMMAND vertical slice and child lifecycle |
+| 5 | Minimal DOS guest execution and controlled return |
+| 6 | Minimal vertical-slice integration closure |
 | 7 | XMS owner package |
 | 8 | DPMI/DPMI32 owner package |
 | 9 | Redirector owner package (including the selected `netstatus.c` mirror slice) |

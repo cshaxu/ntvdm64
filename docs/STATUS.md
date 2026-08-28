@@ -218,6 +218,24 @@ and archives its original-source graph on x64 and x86: 130 original CCPU
 units, BIOS, keymouse, system, support, video, and sixteen selected original
 host roots, including `nt_eoi.c` and `nt_timer.c`.  Reached non-MVDM OpenNT
 declaration subsets retain their original same-named paths under `opennt-host`;
+
+**T310 S7 P1:** source recovery confirms that `VdmSetPhysRecStructs` is a
+called but undefined original interface across all three OpenNT source
+editions; the NTVDMx64 same-named body is a TODO no-op and is rejected as a
+product implementation. The selected CCPU profile declares but does not
+consume the physical-record table described by an older `nt_mem.c` comment.
+The resulting exact recovery contract assigns stable surrogate identity to
+the existing session guest-memory mapping manager and requires a real,
+checked selected-SoftPC physical-page operation before this packet can close.
+It explicitly excludes the old Bochs SAS test route. See the
+[physical-page audit](etc/evidence/m0-t310-s7-physical-page-source-recovery-audit-001.md).
+
+**T310 S7 P2:** `nt_eoi.c` remains byte-identical MVDM host source. Its reached
+same-named original NT declaration subsets (`ntexapi.h`, `ntrtl.h`,
+`nturtl.h`, and `ntpsapi.h`) now live under `opennt-host`, while only modern
+type/import and behavior binding remains in the Win32 adapter. Focused formal
+MSVC `/MT` x86/x64 recompilation of original `nt_eoi.c` passed with original
+warnings only; the S7 physical-page audit records the placement and result.
 the only new code is registered same-shaped Win32/CRT binding needed to make
 the source bodies compile.  This remains static composition evidence, not a
 controller, timer, mapping, or runnable-backend claim.  See the

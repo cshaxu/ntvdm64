@@ -99,9 +99,27 @@ identity holds. Consequently P03 begins with the retained source-shaped Base
 VDM seam rather than a full BaseClient/BaseSrv import, and P11 owns the exact
 `ntstatus.c` mirror slice alongside its Redirector binding.
 
+## P02A — MVDM host mirror-topology recovery
+
+**Predecessor:** the active original-SoftPC packet. **Purpose:** restore the
+original `base/mvdm` host topology before further owner recovery: move the
+complete `inc`, `oemuni`, and `suballoc` package members out of the obsolete
+top-level `mvdm-support` component and back under `mvdm-host`; move the
+corresponding overlay material to `mvdm-host-overlay`; then remove both old
+component roots. The detailed source, consumer, divergence and build closure
+plan is [the support-reintegration proposal](proposal-mvdm-host-support-reintegration-001.md).
+
+**Delivery:** a mirror-preserving `git mv` migration, one current owner and
+divergence register for every moved path, updated formal build paths, and
+proof that no guest, firmware, tools, production source or formal graph names
+the removed roots.
+
+**Exit:** formal affected x86/x64 graphs and documentation governance pass.
+This package changes no MVDM behavior, source-shaped adapter or BOP route.
+
 ## P03 — Base VDM source-shaped broker recovery
 
-**Predecessor:** P02. The completed local profile is evidence for the broader
+**Predecessor:** P02 and P02A. The completed local profile is evidence for the broader
 P02 decision; the recovered package retains the local source-shaped Base VDM
 protocol rather than importing the CSRSS-bound BaseClient/BaseSrv product
 shell.

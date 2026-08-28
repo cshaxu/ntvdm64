@@ -1,5 +1,12 @@
-#ifndef OPENNT_SUPPORT_NTRTL_H
-#define OPENNT_SUPPORT_NTRTL_H
+/*
+ * DIVERGENCE OPENNT-HOST-003: source-identified true subset of the original
+ * public/sdk/inc/ntrtl.h.  The full NT4 declaration carrier reaches private
+ * product APIs that are outside the selected modern user-mode closure.  This
+ * file preserves only declarations reached by imported MVDM/OpenNT sources;
+ * adapter-mvdm-host-out owns any modern implementation binding.
+ */
+#ifndef OPENNT_HOST_NTRTL_SUBSET_H
+#define OPENNT_HOST_NTRTL_SUBSET_H
 
 #include <nt.h>
 
@@ -29,7 +36,7 @@ ULONG NTAPI RtlNtStatusToDosError(NTSTATUS Status);
 VOID NTAPI RtlAcquirePebLock(VOID);
 VOID NTAPI RtlReleasePebLock(VOID);
 
-/* DIVERGENCE ADAPTER-WIN32-009: `nt_bop.c` reaches the exact historical
+/* DIVERGENCE OPENNT-HOST-004: `nt_bop.c` reaches the exact historical
  * ntrtl.h declaration for this diagnostic-only breakpoint.  Modern SDK
  * selection through nt.h does not expose it consistently, so retain only its
  * original declaration shape here; debugger behavior remains owned by the
@@ -41,7 +48,7 @@ LONG NTAPI RtlCompareUnicodeString(PCUNICODE_STRING String1, PCUNICODE_STRING St
 NTSTATUS NTAPI RtlAppendUnicodeToString(PUNICODE_STRING Destination, PCWSTR Source);
 NTSTATUS NTAPI RtlUpcaseUnicodeStringToCountedOemString(POEM_STRING DestinationString, PCUNICODE_STRING SourceString, BOOLEAN AllocateDestinationString);
 
-/* DIVERGENCE ADAPTER-WIN32-015: Original SoftPC CMOS code includes ntrtl.h
+/* DIVERGENCE OPENNT-HOST-005: Original SoftPC CMOS code includes ntrtl.h
  * for this NT4 time-conversion declaration shape.  The selected modern SDK
  * route intentionally supplies only a small historical subset, so retain the
  * unchanged data layout and public-NTDLL declarations here rather than alter
@@ -64,7 +71,7 @@ VOID NTAPI RtlTimeToTimeFields(PLARGE_INTEGER Time, PTIME_FIELDS TimeFields);
 BOOLEAN NTAPI RtlTimeFieldsToTime(PTIME_FIELDS TimeFields, PLARGE_INTEGER Time);
 #endif
 
-/* DIVERGENCE(ADAPTER-WIN32-017): Original SoftPC timer and heartbeat code
+/* DIVERGENCE OPENNT-HOST-006: Original SoftPC timer and heartbeat code
  * reaches these NT4 RTL arithmetic, critical-section, and process-control
  * declaration forms.  The modern public SDK does not expose a coherent
  * source-compatible subset through the selected headers.  Retain their
