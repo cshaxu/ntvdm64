@@ -2,32 +2,33 @@
 
 ## Current Work
 
-**No active M/T/S packet.**
+**Active: M0 T301 S1.**
 
-M0 T300/S1 is closed. The selected OpenNT-MVDM source closure has 12,402
+M0 T300/S1 is closed. Its selected OpenNT-MVDM source closure has 12,402
 physical zero-degree definitions, including 2,981 explicitly retained variant
-family edges, and its 3,963 one-degree candidates are only calls leaving that
-source universe. See the [closure evidence](etc/evidence/m0-t300-s1-mvdm-local-call-closure-closure-001.md).
+family edges. Its 3,963 one-degree candidates are only calls leaving that
+source universe; T301 consumes that frozen boundary. See the [closure
+evidence](etc/evidence/m0-t300-s1-mvdm-local-call-closure-closure-001.md).
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T300 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Owner approved the queue-leading project-MVDM zero-degree rebaseline and specified that every continuous resolved call inside original OpenNT `mvdm` remains zero-degree. |
-| Objective | Reclassify the reachable original-MVDM call closure from `mvdm-host` as zero-degree, then regenerate the first-degree boundary ledger at its true external boundary. |
-| Non-goals | No provider implementation, source import, build/link admission, adapter body, runtime route, or tool/firmware/guest runtime-policy change. |
-| Reference Baseline | T298 zero canonicalization, T299 S6 physical-definition scanner correction, project component provenance, and [T300 S1 plan](etc/operations/m0-t300-s1-mvdm-local-call-closure-rebaseline-plan-001.md). |
-| Files And ABI Surface | Degree-audit generator and derived TSV/evidence records; Architecture/Source Policy rules only. No production ABI changes. |
-| Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; no name-only identity; `src.old` exclusion. |
-| Verification | Physical source-path/provenance/signature review of every promotion; no overlay or `src.old` input; documentation inventory/governance checks; `git diff --check`. |
-| Expected Markers | One closure/reclassification ledger, a regenerated first-degree boundary ledger (including former second-degree rows whose caller has returned to zero), exact promoted/boundary counts, and a no-runtime-edge conclusion. |
-| Asset Needs | Selected OpenNT/OpenNT-4.5 source union, current original MVDM mirrors, T298/T299 raw ledgers, and Node/Ripgrep parser tooling. |
-| Reporting Requirements | Report promoted definition identities, retained unresolved/ambiguous calls, updated counts, and explicitly distinguish source-graph status from runtime eligibility. |
-| Stop Conditions | Missing provenance, unresolved identity ambiguity, a target outside original `mvdm`, any proposed overlay/runtime import, or a need to change source semantics pauses the packet. |
-| Exit Criteria | Every reachable MVDM-local implementation has one physical identity and zero-degree disposition; every regenerated first-degree row leaves original `mvdm`; former second-degree rows from promoted MVDM callers are represented there; evidence and gates pass. |
-| Original Owner Request | “所有mvdm-host内的函数，以及从mvdm-host出发的连续调用，只要都在mvdm包内，都属于零度；以此为基础，所有不在mvdm包内的调用才属于一度。” |
-| Similar-Issue Sweep | Check support, tools, firmware and guest mirrors for reachable selected original definitions while excluding unreachable roots, overlays, ABI declarations, `opennt-host`, adapters and `src.old`. |
+| Identifier Mode | `M0 T301 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner’s active goal is “开展一度审计”; T300 closed the predecessor zero-degree closure and the queue’s ordered first-frontier audit is now admitted. |
+| Objective | Resolve every T300 one-degree boundary call against original OpenNT/OpenNT-4.5 sources without spelling-only identity merges; classify each result as a public leaf, exact original body/variant, hard boundary, finite shallow replacement, or source-unavailable item, and emit only direct second-degree edges from actually resolved first-degree bodies. |
+| Non-goals | No source import, adapter/provider implementation, build/link admission, BOP enablement, runtime route, Bochs change, or inspection of any second-degree callee body. |
+| Reference Baseline | T300 closure evidence and its 34,429 physical boundary-call rows / 3,963 function candidates; T299 parser and include-frontier methods are reusable evidence only, not authoritative result rows. See [T301 plan](etc/operations/m0-t301-s1-rebaselined-first-degree-audit-plan-001.md). |
+| Files And ABI Surface | T301 audit generator, derived first-degree call/definition/file/second-degree ledgers, evidence, Status and documentation inventory only. No production ABI changes. |
+| Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; physical identity rather than name-only matching; original-source-first recovery; `src.old` exclusion. |
+| Verification | Generation assertions for one result per T300 boundary ID, physical source-path/hash/line/signature review, include-frontier constraint evidence, source-root and `src.old` exclusion scans, documentation inventory/governance checks, and `git diff --check`. |
+| Expected Markers | One row for every boundary call, one row for each distinct first-degree physical identity, selected-source coverage, explicit variants/macros/declaration-only outcomes, and a second-degree initial frontier whose bodies are unread. |
+| Asset Needs | Approved OpenNT/OpenNT-4.5 source union, frozen T300 ledgers, Node 22/Ripgrep parser tooling, and current documentation authorities. |
+| Reporting Requirements | Report public-leaf, original-body, hard-boundary, finite-shallow and unavailable counts; distinguish static source-graph disposition from product/runtime eligibility; identify every still-unresolved physical identity. |
+| Stop Conditions | Missing or conflicting provenance that cannot be recorded as a variant, an attempted provider/import/build change, use of current product bodies or `src.old` as source input, a needed second-degree body read, or an owner/package-boundary change. |
+| Exit Criteria | Every T300 boundary-call ID has exactly one source-evidenced outcome; every selected physical first-degree definition has a complete identity and direct-call record; no first-degree body is silently merged by spelling; all second-degree calls are emitted but unexpanded; evidence and gates pass. |
+| Original Owner Request | “开展一度审计”。 |
+| Similar-Issue Sweep | Historical 0/1-degree ledgers, selected original source variants, macros/function pointers/assembly declarations, public Win32/CRT leaves, private CSR/kernel boundaries, support/tools/firmware guest callers, and accidental `src.old` or current-product inputs. |
 
 **Td closure — OpenNT-host directory boundary:** `opennt-host` is now
 explicitly governed as the single mirror root for every separately accepted

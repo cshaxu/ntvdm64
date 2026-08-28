@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2974 |
+| Documentation records | 2981 |
 | --- | --- |
-| Generated UTC | 2026-08-28T00:43:11Z |
+| Generated UTC | 2026-08-28T01:13:30Z |
 
 ## Entries
 
@@ -451,6 +451,7 @@ content-divergent entries.
 | etc/evidence/m0-t299-s6-definition-body-binding-correction-001.md | indexed supporting material | 9e16ef593ef08033b8cf5173f712f9fd7c82d064d01653287e14848932f30fdc |
 | etc/evidence/m0-t300-s1-mvdm-local-call-closure-closure-001.md | indexed supporting material | 6df14f3f45d8adcee79f85e5f236750c30ac419a924aeac495e4f8feb40b4bcb |
 | etc/evidence/m0-t300-s1-mvdm-local-closure-preliminary-001.md | indexed supporting material | e56f9f4b721517ddd89c268b9dbb0fd4094b64a1daab39e3a4d7bbbe6c1e40f2 |
+| etc/evidence/m0-t301-s1-p1-first-degree-include-frontier-001.md | indexed supporting material | 21482f2f3594f3381ec1f772626ac14444639f7503b589cf7665ae7c9bff3713 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1056,6 +1057,7 @@ content-divergent entries.
 | etc/operations/m0-t299-s4-first-degree-translation-unit-closure-plan-001.md | indexed supporting material | 49f630b922d460478692550ee8a95e038693819213d01b424c9eed7a33dcdc46 |
 | etc/operations/m0-t299-s5-parser-control-construct-correction-plan-001.md | indexed supporting material | 390426506b426e4aa53a7f247a94fc41882967382bde3ec517e24cbb53657715 |
 | etc/operations/m0-t300-s1-mvdm-local-call-closure-rebaseline-plan-001.md | indexed supporting material | bda1890f8cf09dd2c1d4e1cf56488e77cba37cfba1cd06726c451752c9cb517e |
+| etc/operations/m0-t301-s1-rebaselined-first-degree-audit-plan-001.md | indexed supporting material | 49d5808a323641fa72160f4275d87b14ab566a37b37724c084d62f2f59d5dc60 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -1067,6 +1069,11 @@ content-divergent entries.
 | etc/operations/mvdm-first-degree-function-candidate-ledger.tsv | indexed supporting material | f5754f5bc4ab5bc787ef1de448c035997c132171bb6a8704275fadb1f19a4154 |
 | etc/operations/mvdm-first-degree-prior-second-reclassification-ledger.tsv | indexed supporting material | 841a493fc5fd9a0ad1cb1deeab0735ebf7bedd43824bd82fea7a0c3d6550f109 |
 | etc/operations/mvdm-first-degree-rebaselined-boundary-ledger.tsv | indexed supporting material | 73578a54ed7cb9ee1571d5e5b14f445ee38ad0f79c67b188b5beb364ddb85df8 |
+| etc/operations/mvdm-first-degree-rebaselined-caller-include-frontier-ledger.tsv | indexed supporting material | d3ceb63fb79cddec5b3d91a8f577944f650ef778f87ed1f58c93d65b5d903e9f |
+| etc/operations/mvdm-first-degree-rebaselined-call-resolution-ledger.tsv | indexed supporting material | 96423d06709b856ff937f065dbc9fa6d68ff3db838ec956bc066392ad763aefb |
+| etc/operations/mvdm-first-degree-rebaselined-definition-candidate-ledger.tsv | indexed supporting material | 53ea8d16315d98e2f3e5cd5e33e3a5402f44949a62022fe39ce24875c4af312c |
+| etc/operations/mvdm-first-degree-rebaselined-include-frontier-ledger.tsv | indexed supporting material | 514ad1d9e4d56c97e716e99a54d22356a5f39e0632900b762a572c89b8ab9fee |
+| etc/operations/mvdm-first-degree-rebaselined-worklist-ledger.tsv | indexed supporting material | 83eacef5f1f5604aa171daf5e8bb932065d74f3408ec2d1277506e058a427bdc |
 | etc/operations/mvdm-host-degree-audit-plan-001.md | indexed supporting material | 975c31bccb526e2b16aed61629c69dba844b36e31c1240fc4d4e5dcba61b4c10 |
 | etc/operations/mvdm-host-first-degree-call-implementation-ledger.tsv | indexed supporting material | 152325d0d1a41d9be54f1094bc69ee1956368b529c03e47f9d9ca881f5a3fad1 |
 | etc/operations/mvdm-host-first-degree-call-resolution-ledger.tsv | indexed supporting material | 37f26a92864e26f58deaa669742ed2f7337d9599fa69abac1a77f7209d580ec7 |
@@ -2988,7 +2995,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 3f33dfc0cadfe9db986dda04f42f49a777577d75319fe576702097af02e502e0 |
+| STATUS.md | principal control document | 56a64b074c5e0347b6a875a62d60cd826f8cabee447c3d5f61572590225fe61b |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
