@@ -33,6 +33,12 @@ prototype/conditional-form confirmation before zero-degree reclassification.
 See the [P9 binding gate]
 (etc/evidence/m0-t301-s1-p9-original-mvdm-binding-gate-001.md).
 
+**T301 S1 P10:** source call/header/definition arity is now confirmed for 160
+of P9's 217 unique original-MVDM bindings; 57 remain explicit first-degree
+records.  Both caller and definition conditional contexts remain physical
+evidence, not a spelling merge. See the [P10 signature gate]
+(etc/evidence/m0-t301-s1-p10-original-mvdm-signature-gate-001.md).
+
 ## Active Packet
 
 | Field | Record |
