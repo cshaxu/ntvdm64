@@ -118,6 +118,12 @@ passed the prior physical declaration/signature gate; they seed package-boundary
 inspection rather than provider selection. See the [input-integrity record]
 (etc/evidence/m0-t306-s1-frontier-input-integrity-001.md).
 
+**T306 S1 P2:** the 251 physically proven seeds are now partitioned without
+name merging: 87 return to MVDM closure, 76 remain the excluded SoftPC machine
+boundary, and 88 form bounded non-MVDM/leaf cohorts led by BaseClient and
+NetAPI. See the [package partition]
+(etc/evidence/m0-t306-s1-signature-seed-package-partition-001.md).
+
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,
 including historical build products, into the existing `mvdm-*` component
