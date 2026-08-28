@@ -112,6 +112,12 @@ families and hard boundaries; it does not implement a BOP/provider or restart
 unbounded program-wide BFS. See the [S1 plan]
 (etc/operations/m0-t306-s1-external-boundary-package-selection-plan-001.md).
 
+**T306 S1 P1:** the direct frontier is now pinned to 7,367 physical external
+calls plus 319 retained internal-binding exceptions. Only 251 candidates have
+passed the prior physical declaration/signature gate; they seed package-boundary
+inspection rather than provider selection. See the [input-integrity record]
+(etc/evidence/m0-t306-s1-frontier-input-integrity-001.md).
+
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,
 including historical build products, into the existing `mvdm-*` component
