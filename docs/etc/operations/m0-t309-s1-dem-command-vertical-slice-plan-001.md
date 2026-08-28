@@ -40,3 +40,13 @@ dispatcher.
 The selected original dispatcher/ingress route is either formally composed on
 x86/x64 or has one exact remaining original boundary with a next-owner plan.
 No selector or handler is authored merely to bypass the original package.
+
+## P2 checkpoint
+
+The source-shaped ingress subset is complete. The original `demdisp.c` and
+`cmddisp.c` also compile as unchanged current-source objects under formal
+MSVC/Ninja x86 and x64 graphs. Their table references deliberately remain
+unlinked in this checkpoint: static linking either table requires its complete
+original owner provider cohort. The next S must recover those cohorts as
+packages; it is explicitly forbidden from replacing table entries with test
+or product stubs.

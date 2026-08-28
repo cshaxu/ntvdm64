@@ -15,6 +15,12 @@ the original service → dispatcher → IP sequence and idle branch; the origina
 dispatcher package integration is the remaining active S1 work. See the
 [ingress audit](etc/evidence/m0-t309-s1-dem-command-ingress-closure-audit-001.md).
 
+**T309 S1 P2:** the unchanged original DEM and COMMAND dispatcher tables now
+compile under formal current-root MSVC/Ninja x86/x64 graphs. Their only
+remaining boundary is whole-provider-package linking: `apfnSVC[]` and
+`apfnSVCCmd[]` cannot be satisfied by replacement entries or one-off stubs.
+The ingress audit records the exact package-owned continuation.
+
 **T307 S1 P1:** the local Base VDM facade now covers the reached DOS forms for
 first-VDM query, command capture/capacity/reentry, copied one-shot current
 directories and session-only `ExitVDM`. Its formal Ninja fixture passes under

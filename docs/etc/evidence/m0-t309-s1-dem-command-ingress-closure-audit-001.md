@@ -69,3 +69,24 @@ source-shaped subset with `/WX`, linked the focused harness, and printed
 two original dispatcher-before-IP orders and both branches of the original
 DEM idle condition; its dispatcher functions are test-only observation stubs,
 not a product route.
+
+## P2 — current dispatcher object closure
+
+The source subset is not a replacement dispatcher. The two original tables
+remain the sole DEM/COMMAND service-owner tables, and they must stay directly
+buildable after the current ABI-root rename. `New-T309OriginalDispatcherNinja.ps1`
+therefore compiles exactly `mvdm-host/dos/dem/demdisp.c` and
+`mvdm-host/dos/command/cmddisp.c`, without adding a provider, table, or
+link-time replacement.
+
+The formal MSVC `/MT`, `/W4` Ninja graphs passed on x86 and x64. The sole
+diagnostic is the original source's MSVC C4996 `sprintf` warning in the
+`DBG`-compiled `demNotYetImplemented` logging branch. It is neither hidden nor
+changed because replacing it would be an unrelated mirror edit.
+
+The exact remaining boundary is link closure, not dispatch semantics:
+`apfnSVC[]` references the complete original 73-member DEM provider package,
+and `apfnSVCCmd[]` references the complete original 17-member COMMAND package.
+The next owner work must compose those full source packages through their
+selected Base VDM, SoftPC, Win32, monitor, and session forms. It may not
+satisfy this boundary with hand-written provider stubs or a second table.
