@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2983 |
+| Documentation records | 2985 |
 | --- | --- |
-| Generated UTC | 2026-08-28T01:16:06Z |
+| Generated UTC | 2026-08-28T01:18:40Z |
 
 ## Entries
 
@@ -453,6 +453,7 @@ content-divergent entries.
 | etc/evidence/m0-t300-s1-mvdm-local-closure-preliminary-001.md | indexed supporting material | e56f9f4b721517ddd89c268b9dbb0fd4094b64a1daab39e3a4d7bbbe6c1e40f2 |
 | etc/evidence/m0-t301-s1-p1-first-degree-include-frontier-001.md | indexed supporting material | 21482f2f3594f3381ec1f772626ac14444639f7503b589cf7665ae7c9bff3713 |
 | etc/evidence/m0-t301-s1-p2-first-degree-declaration-frontier-001.md | indexed supporting material | 04d5b0e49a197d6b2ee7271d0df63861dc2c0a95b7a72c0c6d2b4a3f0779b021 |
+| etc/evidence/m0-t301-s1-p3-prior-definition-identity-crosswalk-001.md | indexed supporting material | 39f07f8fe438b7518465be2d626993104d56830f20da42b29c0236ee41ef4b6c |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1075,6 +1076,7 @@ content-divergent entries.
 | etc/operations/mvdm-first-degree-rebaselined-declaration-frontier-ledger.tsv | indexed supporting material | 34cd14ad6eb4e08a279dc321568ccd3e185e40031ae4feae0ac0337e7d5e5e99 |
 | etc/operations/mvdm-first-degree-rebaselined-definition-candidate-ledger.tsv | indexed supporting material | 53ea8d16315d98e2f3e5cd5e33e3a5402f44949a62022fe39ce24875c4af312c |
 | etc/operations/mvdm-first-degree-rebaselined-include-frontier-ledger.tsv | indexed supporting material | 514ad1d9e4d56c97e716e99a54d22356a5f39e0632900b762a572c89b8ab9fee |
+| etc/operations/mvdm-first-degree-rebaselined-prior-definition-identity-ledger.tsv | indexed supporting material | f4e4f3c39cddd3e2360f83c014158ac96e63a646bbbda729c16686c4b3e7c4a0 |
 | etc/operations/mvdm-first-degree-rebaselined-worklist-ledger.tsv | indexed supporting material | 83eacef5f1f5604aa171daf5e8bb932065d74f3408ec2d1277506e058a427bdc |
 | etc/operations/mvdm-host-degree-audit-plan-001.md | indexed supporting material | 975c31bccb526e2b16aed61629c69dba844b36e31c1240fc4d4e5dcba61b4c10 |
 | etc/operations/mvdm-host-first-degree-call-implementation-ledger.tsv | indexed supporting material | 152325d0d1a41d9be54f1094bc69ee1956368b529c03e47f9d9ca881f5a3fad1 |
