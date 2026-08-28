@@ -34,24 +34,25 @@ that bounded packet closes is item 1 below.
 
 | Order | Candidate implementation package |
 | --- | --- | --- |
-| 1 | MVDM host mirror-topology recovery (`mvdm-support` reintegration) |
-| 2 | Base VDM source-shaped broker recovery |
-| 3 | Monitor / `NtVdmControl` user-mode contract package recovery |
-| 4 | DEM/COMMAND vertical slice and child lifecycle |
-| 5 | Minimal DOS guest execution and controlled return |
-| 6 | Minimal vertical-slice integration closure |
-| 7 | XMS owner package |
-| 8 | DPMI/DPMI32 owner package |
-| 9 | Redirector owner package (including the selected `netstatus.c` mirror slice) |
-| 10 | WOW32/Win16 owner package |
-| 11 | VDD owner package |
-| 12 | Debugger/BDE/FAX owner packages |
-| 13 | Service-package cross-family closure and native integration evidence |
-| 14 | Broker process and cross-process coordination |
-| 15 | In-process multi-session reentrancy audit |
-| 16 | Host capability expansion |
-| 17 | Guest DOS/WOW16 artifact matrix |
-| 18 | Product release closure |
+| 1 | MVDM-host `i386` conditional semantic audit and capability recovery plan |
+| 2 | MVDM host mirror-topology recovery (`mvdm-support` reintegration) |
+| 3 | Base VDM source-shaped broker recovery |
+| 4 | Monitor / `NtVdmControl` user-mode contract package recovery |
+| 5 | DEM/COMMAND vertical slice and child lifecycle |
+| 6 | Minimal DOS guest execution and controlled return |
+| 7 | Minimal vertical-slice integration closure |
+| 8 | XMS owner package |
+| 9 | DPMI/DPMI32 owner package |
+| 10 | Redirector owner package (including the selected `netstatus.c` mirror slice) |
+| 11 | WOW32/Win16 owner package |
+| 12 | VDD owner package |
+| 13 | Debugger/BDE/FAX owner packages |
+| 14 | Service-package cross-family closure and native integration evidence |
+| 15 | Broker process and cross-process coordination |
+| 16 | In-process multi-session reentrancy audit |
+| 17 | Host capability expansion |
+| 18 | Guest DOS/WOW16 artifact matrix |
+| 19 | Product release closure |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

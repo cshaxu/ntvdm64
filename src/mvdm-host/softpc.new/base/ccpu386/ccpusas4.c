@@ -61,6 +61,7 @@
 #include <c_reg.h>
 #include <timer.h>
 #include <yoda.h>
+#include "mvdm_softpc_physical_mapping.h"
 
 /* DIVERGENCE: the original x86 build relied on an implicit-int declaration
  * for host_sas_init.  Its actual SoftPC implementation returns UTINY *;
@@ -1317,6 +1318,13 @@ GLOBAL IU8 *
 c_GetPhyAdd IFN1(PHY_ADDR, addr)
 {
 	IU8 *retVal;
+
+	/* DIVERGENCE MVDM-HOST-DIV-036: preserve the original CCPU fast path for
+	 * normal SoftPC RAM, but first ask the source-shaped adapter whether this
+	 * Intel address is a checked external physical-page binding. The returned
+	 * pointer is consumed only by the immediate CCPU access path. */
+	if (mvdm_softpc_physical_mapping_resolve(addr, &retVal))
+		return(retVal);
 
 #ifdef BACK_M
 	retVal = (IU8 *)((IHPE)end_of_M - (IHPE)addr);

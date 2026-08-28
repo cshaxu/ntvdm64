@@ -264,6 +264,19 @@ x86 and x64 bounded CCPU fixtures both executed successfully. Their
 mask the still-unrecovered external physical-page operation. See the
 [physical-page audit](etc/evidence/m0-t310-s7-physical-page-source-recovery-audit-001.md).
 
+**T310 S7 P5:** the formerly undefined historical
+`VdmSetPhysRecStructs(ULONG, ULONG, ULONG)` seam is now a named same-shaped
+SoftPC adapter binding, not a no-op or Bochs fallback. On both x86 and x64,
+the existing session `guest_memory` mapping manager publishes the external
+backing identity as a stable 32-bit ID; the original `nt_mem.c` add/remove
+order reserves/releases its Intel span while original `c_GetPhyAdd` resolves
+only the immediate physical byte access. Fresh formal MSVC `/MT` x86/x64
+fixtures prove an unaligned live external page write/read and post-remove
+mapping release, followed by the existing original CCPU/SAS/FPU recursive
+interval. P4's former hard-fail fixture seam is superseded. This does not
+claim WOW DIB, full device composition, Bochs, MONITOR or kernel-VDM support;
+see the [physical-page audit](etc/evidence/m0-t310-s7-physical-page-source-recovery-audit-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove

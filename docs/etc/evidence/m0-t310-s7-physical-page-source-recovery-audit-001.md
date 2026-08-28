@@ -65,6 +65,46 @@ The session mapping manager may be extended with span/lifetime metadata if
 needed, but no second manager, pointer-split ABI, raw alias, or Bochs fallback
 may be introduced.
 
+## Recovered selected-SoftPC binding
+
+The required same-shaped binding is now implemented below the named SoftPC
+adapter, not in a mirror body or test seam:
+
+- `mvdm_softpc_physical_mapping_publish` publishes the native backing range
+  in the existing per-session `guest_memory` mapping-manager instance and
+  returns its stable 32-bit identifier. This happens on both host
+  architectures; x86 has no native-pointer identity shortcut.
+- Original `VdmAddVirtualMemory` preserves its fixed-width call, alignment,
+  Intel/SAS reservation and cache-invalidation ordering. Its only registered
+  divergence is that `HostAddress` is the stable identifier and the adapter
+  recovers the original native alignment before the original allocation.
+- The exact historical `VdmSetPhysRecStructs(ULONG, ULONG, ULONG)` spelling is
+  supplied by the named adapter. It binds the source span to the original
+  Intel reservation and removes/releases it by that same Intel span when the
+  original remove path calls the interface with zero host identity.
+- The minimal `ccpusas4.c` hook asks the adapter first only when original CCPU
+  needs a physical byte through `c_GetPhyAdd`; normal `Start_of_M_area + addr`
+  behavior remains the unchanged fallback. The adapter returns a native byte
+  address only for this immediate CCPU physical access, never as an MVDM ABI,
+  session record, worker handoff or guest-memory lease.
+
+This is a selected CCPU physical-page operation, not a claim that the old
+`PhysicalPageREC.translation` layout exists, that WOW DIB mapping is fully
+enabled, or that any Bochs/MONITOR/kernel-VDM path has been selected.
+
+## Verification
+
+Fresh formal MSVC `/MT` Ninja graphs were generated under
+`build/M0-T310/S7/physical-x64` and `build/M0-T310/S7/physical-x86` and built
+outside the sandbox. Both fixtures exit zero. Before their existing original
+SAS/CPU/FPU/recursive-`host_simulate` interval, they deliberately create a
+non-DWORD-aligned external 4096-byte backing range, publish it, invoke the
+original `VdmAddVirtualMemory`, write/read it through original
+`c_GetPhyAdd`, invoke original `VdmRemoveVirtualMemory`, and verify the
+session mapping-manager active count is zero. The test therefore proves live
+external physical access and original removal release on both x86 and x64;
+it does not merely prove a remembered token.
+
 ## Admission consequence
 
 No current caller exercises `VdmAddVirtualMemory` or
@@ -127,13 +167,10 @@ type/import and unavailable-behavior bindings are the second case and remain
 under the adapter. This keeps `nt_eoi.c` and `nt_timer.c` source-shaped while
 preventing a compatibility reimplementation from entering either mirror.
 
-## Focused CCPU verification after declaration relocation
+## Superseded focused verification note
 
-The formal bounded CCPU fixture graph was corrected to include the restored
-`opennt-host/public/sdk/inc` carrier root. The existing x64 and x86 fixture
-executables were then run outside the sandbox. Both completed their
-`sas-init -> cpu-init -> seed -> start -> reenter` proof sequence with exit
-code zero. Its `VdmSetPhysRecStructs` test seam now fails hard if invoked;
-the fixture therefore cannot accidentally treat a passive stub as a
-physical-page binding. This is evidence only for the bounded CCPU interval
-and include closure; it does not enable the external WOW DIB mapping path.
+The earlier hard-fail `VdmSetPhysRecStructs` fixture seam was intentionally
+removed once the real adapter binding above replaced it. The current focused
+fixture now exercises that binding directly. The declaration-relocation result
+remains valid; its earlier passive-stub guard is superseded by the live-page
+verification above.

@@ -8,8 +8,6 @@
  * original external form, not a substitute product implementation.
  */
 #include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 typedef void (*fixture_callback)(void);
 
@@ -32,18 +30,6 @@ void host_terminate(void) {}
 void read_descriptor(void) {}
 int selector_outside_table(void) { return 1; }
 void sas_overwrite_memory(void) {}
-/* `nt_mem.c` retains this unresolved historical external-page interface.  The
- * bounded CCPU proof never calls VdmAdd/RemoveVirtualMemory, so a no-op would
- * hide an accidental route instead of proving the selected interval. */
-void VdmSetPhysRecStructs(uintptr_t host_address, uint32_t intel_address,
-    uint32_t byte_count)
-{
-    (void)host_address;
-    (void)intel_address;
-    (void)byte_count;
-    fputs("unexpected VdmSetPhysRecStructs in bounded CCPU fixture\n", stderr);
-    abort();
-}
 short host_error(int error, int options, char *text)
 {
     (void)error;

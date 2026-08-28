@@ -3,6 +3,7 @@
 #include <windows.h>
 
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_execution.h"
+#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_physical_mapping.h"
 
 static LONG WINAPI fixture_unhandled_exception(EXCEPTION_POINTERS *exception)
 {
@@ -22,6 +23,7 @@ extern void sas_init(uint32_t size);
 extern void sas_term(void);
 extern void c_sas_store(uint32_t address, uint8_t value);
 extern uint8_t c_sas_hw_at(uint32_t address);
+extern uint8_t *c_GetPhyAdd(uint32_t address);
 extern void c_cpu_init(void);
 extern uint16_t c_getIP(void);
 extern void c_setIP(uint16_t value);
@@ -30,6 +32,9 @@ extern void load_sw_cpu_access_functions(void);
 extern void (*host_simulate_func)(void);
 extern void host_start_cpu(void);
 extern void host_simulate(void);
+extern NTSTATUS VdmAddVirtualMemory(ULONG host_address, ULONG size,
+    PULONG intel_address);
+extern NTSTATUS VdmRemoveVirtualMemory(ULONG intel_address);
 
 int main(void)
 {
@@ -40,6 +45,46 @@ int main(void)
     SetUnhandledExceptionFilter(fixture_unhandled_exception);
     fputs("sas-init\n", stderr);
     sas_init(UINT32_C(0x00200000));
+    {
+        session physical_owner;
+        uint8_t external_page_storage[4097] = { 0 };
+        uint8_t *external_page = &external_page_storage[1];
+        uint32_t mapping_identifier;
+        ULONG intel_address = 0u;
+
+        session_initialize(&physical_owner, 2u);
+        if (!session_activate(&physical_owner) ||
+            !session_thread_bind(&physical_owner) ||
+            !mvdm_softpc_physical_mapping_publish(external_page,
+                UINT32_C(4096), &mapping_identifier) ||
+            VdmAddVirtualMemory(mapping_identifier, UINT32_C(4096),
+                &intel_address) != STATUS_SUCCESS) {
+            fputs("external physical-page binding setup failed\n", stderr);
+            sas_term();
+            return 1;
+        }
+        /* `c_GetPhyAdd` is the selected original CCPU physical-access
+         * operation.  `c_sas_store` is a linear BIOS/SAS entry and is not a
+         * proof that the external physical page was selected. */
+        *c_GetPhyAdd(intel_address) = UINT8_C(0x6d);
+        if (external_page[0] != UINT8_C(0x6d) ||
+            *c_GetPhyAdd(intel_address) != UINT8_C(0x6d) ||
+            VdmRemoveVirtualMemory(intel_address) != STATUS_SUCCESS ||
+            session_guest_memory_mappings(&physical_owner)->active_count != 0u) {
+            fputs("external physical-page binding did not remain live and release\n",
+                stderr);
+            (void)session_thread_unbind(&physical_owner);
+            (void)session_dispose(&physical_owner);
+            sas_term();
+            return 1;
+        }
+        if (!session_thread_unbind(&physical_owner) ||
+            !session_dispose(&physical_owner)) {
+            fputs("external physical-page binding teardown failed\n", stderr);
+            sas_term();
+            return 1;
+        }
+    }
     fputs("cpu-init\n", stderr);
     c_cpu_init();
     fputs("access-init\n", stderr);

@@ -117,9 +117,54 @@ the removed roots.
 **Exit:** formal affected x86/x64 graphs and documentation governance pass.
 This package changes no MVDM behavior, source-shaped adapter or BOP route.
 
+## P02B — MVDM-host `i386` conditional semantic audit and capability recovery plan
+
+**Predecessor:** the active original-SoftPC packet. **Purpose:** prevent
+historical `#if defined(i386)`, `#ifdef i386`, and `#ifndef i386` branches
+from becoming an accidental x86/x64 product-feature switch. The package
+audits every such conditional in selected `mvdm-host`, records its original
+precondition and reachable semantic effect, and gives it one owner/disposition
+before any candidate treats the inactive preprocessor side as dead code.
+
+**S1 admission:** enumerate every physical conditional, enclosing function,
+source package, build selection and both branch bodies. Classify whether it is
+only an assembler/build-target choice; a direct host-pointer or linear-address
+identity assumption; a descriptor/page-remap requirement; a monitor/VDM
+callback or stack transaction; a CPU/CCPU/V86 product prerequisite; or an
+optional debugger, VDD, BDE, or WOW product path.
+
+**S2 recovery plan:** for every reached or future-admissible product branch,
+record the source-first recovery rung and a named capability owner. Pointer or
+handle identity must use the existing session mapping-manager route on both
+x86 and x64. Machine mechanics belong to the selected SoftPC call graph or
+the explicitly selected Bochs path; monitor, Win32, WOW, VDD and debugger
+semantics retain their corresponding owner packages. A conditional may remain
+only when it selects compilation syntax or an evidence-proven equivalent
+implementation, never as an unreviewed product capability decision.
+
+**S3 verification and queue reconciliation:** produce a complete conditional
+ledger with original file/line, source purpose, branch classification,
+x86/x64 selection, required named capability, owner package, mapping-manager
+use when applicable, source/adapter/overlay disposition and test requirement.
+Update each affected later package proposal only with its own conditional
+rows; do not implement BOPs, change selected machine behavior, or rewrite
+historical bodies in this package.
+
+**Delivery:** one complete semantic-condition ledger and a finite recovery
+plan. The initial high-risk review set is original SoftPC host/build selection,
+XMS, DPMI/DPMI32, DEM/COMMAND and WOW32; debugger/VDD extension packages
+receive explicit runtime/profile dispositions rather than silent exclusion.
+
+**Exit:** every selected `i386` conditional has an exact source location and
+one disposition: compile-only selection, explicit named capability recovery,
+owner-package deferral, or not-host-runtime. No condition remains justified
+solely by the current host being x86 or x64. The resulting plan preserves the
+same mapping-manager rule on both architectures and introduces no source or
+runtime behavior change.
+
 ## P03 — Base VDM source-shaped broker recovery
 
-**Predecessor:** P02 and P02A. The completed local profile is evidence for the broader
+**Predecessor:** P02, P02A and P02B. The completed local profile is evidence for the broader
 P02 decision; the recovered package retains the local source-shaped Base VDM
 protocol rather than importing the CSRSS-bound BaseClient/BaseSrv product
 shell.
