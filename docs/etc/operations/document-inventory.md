@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2985 |
+| Documentation records | 2986 |
 | --- | --- |
-| Generated UTC | 2026-08-28T01:18:40Z |
+| Generated UTC | 2026-08-28T01:21:36Z |
 
 ## Entries
 
@@ -1059,6 +1059,7 @@ content-divergent entries.
 | etc/operations/m0-t299-s4-first-degree-translation-unit-closure-plan-001.md | indexed supporting material | 49f630b922d460478692550ee8a95e038693819213d01b424c9eed7a33dcdc46 |
 | etc/operations/m0-t299-s5-parser-control-construct-correction-plan-001.md | indexed supporting material | 390426506b426e4aa53a7f247a94fc41882967382bde3ec517e24cbb53657715 |
 | etc/operations/m0-t300-s1-mvdm-local-call-closure-rebaseline-plan-001.md | indexed supporting material | bda1890f8cf09dd2c1d4e1cf56488e77cba37cfba1cd06726c451752c9cb517e |
+| etc/operations/m0-t301-s1-base-vdm-client-direct-dependency-ledger.tsv | indexed supporting material | 78bcecaa766b1df2609ac8eb2ea6e70e7913be5f7267ac963af6cbb848a1f28a |
 | etc/operations/m0-t301-s1-rebaselined-first-degree-audit-plan-001.md | indexed supporting material | 49d5808a323641fa72160f4275d87b14ab566a37b37724c084d62f2f59d5dc60 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
