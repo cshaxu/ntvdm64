@@ -23,6 +23,8 @@ int main(void)
     uint8_t application_buffer[MAXIMUM_VDM_PATH_STRING];
     uint8_t environment_buffer[MAXIMUM_VDM_ENVIORNMENT];
     uint8_t directory_buffer[MAXIMUM_VDM_CURRENT_DIR];
+    static const CHAR directories[] = "=C:=C:\\DOS\0=D:=D:\\WORK\0\0";
+    CHAR directory_copy[sizeof(directories)];
 
     reset_info(&information);
     if (GetNextVDMCommand(NULL) || GetLastError() != ERROR_CALL_NOT_IMPLEMENTED)
@@ -48,6 +50,7 @@ int main(void)
     if (!base_vdm_local_publish(&source, &payload) ||
         !session_activate(&instance) || !base_vdm_local_bind(&source, &instance) ||
         !session_thread_bind(&instance)) return 2;
+    if (!GetNextVDMCommand(NULL) || GetNextVDMCommand(NULL)) return 14;
 
     reset_info(&information);
     information.VDMState = ASKING_FOR_ENVIRONMENT;
@@ -105,11 +108,25 @@ int main(void)
     information.VDMState = ASKING_FOR_WOW_BINARY;
     if (GetNextVDMCommand(&information) || GetLastError() != ERROR_CALL_NOT_IMPLEMENTED)
         return 10;
+    if (!SetVDMCurrentDirectories((ULONG)sizeof(directories), (CHAR *)directories))
+        return 15;
+    if (GetVDMCurrentDirectories(1u, directory_copy) != sizeof(directories) ||
+        GetLastError() != ERROR_INVALID_PARAMETER) return 16;
+    if (GetVDMCurrentDirectories((ULONG)sizeof(directory_copy), directory_copy) !=
+        sizeof(directories) || memcmp(directory_copy, directories, sizeof(directories)) != 0)
+        return 17;
+    if (GetVDMCurrentDirectories((ULONG)sizeof(directory_copy), directory_copy) != 0u)
+        return 18;
+    ExitVDM(FALSE, 0u);
+    if (instance.state != SESSION_STATE_COMPLETED) return 19;
+    reset_info(&information);
+    if (GetNextVDMCommand(&information) || GetLastError() != ERROR_NOT_READY)
+        return 20;
     if (!base_vdm_local_unbind(&source)) return 11;
     reset_info(&information);
     if (GetNextVDMCommand(&information) ||
-        GetLastError() != ERROR_CALL_NOT_IMPLEMENTED) return 12;
+        GetLastError() != ERROR_NOT_READY) return 12;
     if (!session_thread_unbind(&instance) || !session_dispose(&instance)) return 13;
-    puts("PASS: local VDM command transport");
+    puts("PASS: local Base VDM broker contract");
     return 0;
 }

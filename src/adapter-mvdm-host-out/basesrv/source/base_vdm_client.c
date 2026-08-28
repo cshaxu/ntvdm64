@@ -9,7 +9,7 @@ BOOL APIENTRY GetNextVDMCommand(PVDMINFO information)
      * Base DLL transport.  The local profile retains its caller-owned request
      * snapshot and result-copy boundary, then invokes the same-shaped local
      * BaseSrv dispatcher.  No caller pointer survives this call. */
-    if (information == NULL) return base_vdm_local_dispatch(NULL);
+    if (information == NULL) return base_vdm_local_is_first();
 
     capture = *information;
     state = information->VDMState;
@@ -28,4 +28,19 @@ BOOL APIENTRY GetNextVDMCommand(PVDMINFO information)
 
     *information = capture;
     return TRUE;
+}
+
+VOID APIENTRY ExitVDM(BOOL wow_caller, ULONG wow_task)
+{
+    base_vdm_local_exit(wow_caller, wow_task);
+}
+
+BOOL APIENTRY SetVDMCurrentDirectories(ULONG byte_count, CHAR *directories)
+{
+    return base_vdm_local_set_current_directories(byte_count, directories);
+}
+
+ULONG APIENTRY GetVDMCurrentDirectories(ULONG byte_count, CHAR *directories)
+{
+    return base_vdm_local_get_current_directories(byte_count, directories);
 }

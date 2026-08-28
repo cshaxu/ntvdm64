@@ -36,6 +36,7 @@ typedef struct base_vdm_local {
     session *owner;
     uint32_t reentry_count;
     uint32_t available;
+    uint32_t first_vdm_available;
     uint32_t task;
     uint32_t creation_flags;
     uint32_t error_code;
@@ -47,6 +48,8 @@ typedef struct base_vdm_local {
     uint16_t application_bytes;
     uint32_t environment_bytes;
     uint16_t current_directory_bytes;
+    uint32_t current_directories_bytes;
+    uint8_t *current_directories;
     uint8_t command[MAXIMUM_VDM_COMMAND_LENGTH];
     uint8_t application[MAXIMUM_VDM_PATH_STRING];
     uint8_t environment[MAXIMUM_VDM_ENVIORNMENT];
@@ -64,7 +67,16 @@ int base_vdm_local_publish(base_vdm_local *record,
 int base_vdm_local_bind(base_vdm_local *record, session *owner);
 int base_vdm_local_unbind(base_vdm_local *record);
 BOOL base_vdm_local_dispatch(PVDMINFO information);
+BOOL base_vdm_local_is_first(void);
+BOOL base_vdm_local_set_current_directories(ULONG byte_count,
+    const CHAR *directories);
+ULONG base_vdm_local_get_current_directories(ULONG byte_count,
+    CHAR *directories);
+VOID base_vdm_local_exit(BOOL wow_caller, ULONG wow_task);
 BOOL APIENTRY GetNextVDMCommand(PVDMINFO information);
+VOID APIENTRY ExitVDM(BOOL wow_caller, ULONG wow_task);
+BOOL APIENTRY SetVDMCurrentDirectories(ULONG byte_count, CHAR *directories);
+ULONG APIENTRY GetVDMCurrentDirectories(ULONG byte_count, CHAR *directories);
 
 #ifdef __cplusplus
 }

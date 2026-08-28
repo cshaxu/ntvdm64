@@ -25,6 +25,7 @@ void base_vdm_local_initialize(base_vdm_local *record)
     memset(record, 0, sizeof(*record));
     record->version = BASE_VDM_LOCAL_VERSION;
     record->struct_bytes = (uint32_t)sizeof(*record);
+    record->first_vdm_available = 1u;
 }
 
 int base_vdm_local_valid(const base_vdm_local *record)
@@ -34,7 +35,9 @@ int base_vdm_local_valid(const base_vdm_local *record)
         record->command_bytes <= MAXIMUM_VDM_COMMAND_LENGTH &&
         record->application_bytes <= MAXIMUM_VDM_PATH_STRING &&
         record->environment_bytes <= MAXIMUM_VDM_ENVIORNMENT &&
-        record->current_directory_bytes <= MAXIMUM_VDM_CURRENT_DIR;
+        record->current_directory_bytes <= MAXIMUM_VDM_CURRENT_DIR &&
+        (record->current_directories_bytes == 0u ||
+         record->current_directories != NULL);
 }
 
 int base_vdm_local_publish(base_vdm_local *record, const base_vdm_command *command)
@@ -142,6 +145,11 @@ static void teardown(void *context)
     base_vdm_local *record = (base_vdm_local *)context;
     if (record == NULL) return;
     if (base_vdm_current == record) base_vdm_current = NULL;
+    if (record->current_directories != NULL) {
+        HeapFree(GetProcessHeap(), 0u, record->current_directories);
+        record->current_directories = NULL;
+        record->current_directories_bytes = 0u;
+    }
     record->owner = NULL;
 }
 
@@ -167,7 +175,9 @@ BOOL base_vdm_local_dispatch(PVDMINFO information)
     session *owner = session_thread_current();
     NTSTATUS status;
     if (information == NULL) { SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return FALSE; }
-    if (owner == NULL) { SetLastError(ERROR_NOT_READY); return FALSE; }
+    if (owner == NULL || !session_valid(owner) || owner->state != SESSION_STATE_ACTIVE) {
+        SetLastError(ERROR_NOT_READY); return FALSE;
+    }
     if (base_vdm_current == NULL || base_vdm_current->owner != owner) {
         SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return FALSE;
     }
@@ -185,4 +195,86 @@ BOOL base_vdm_local_dispatch(PVDMINFO information)
     SetLastError(status == STATUS_INVALID_PARAMETER ? ERROR_INVALID_PARAMETER :
         status == STATUS_NO_MEMORY ? ERROR_NOT_ENOUGH_MEMORY : ERROR_CALL_NOT_IMPLEMENTED);
     return FALSE;
+}
+
+/* DIVERGENCE: BaseSrvIsFirstVDM originally owns a CSRSS-global flag. The
+ * admitted product has one local session, so the identical query-and-clear
+ * contract is kept in its bound Base VDM record. */
+BOOL base_vdm_local_is_first(void)
+{
+    session *owner = session_thread_current();
+    if (owner == NULL || !session_valid(owner) || owner->state != SESSION_STATE_ACTIVE ||
+        base_vdm_current == NULL || base_vdm_current->owner != owner) {
+        SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
+        return FALSE;
+    }
+    if (base_vdm_current->first_vdm_available == 0u) return FALSE;
+    base_vdm_current->first_vdm_available = 0u;
+    return TRUE;
+}
+
+/* DIVERGENCE: BaseSrvSetVDMCurDirs stores a captured MULTI_SZ on a CSRSS
+ * console record. Keep that copied allocation in the bound one-session record
+ * and retain the client API's zero-length no-op behavior. */
+BOOL base_vdm_local_set_current_directories(ULONG byte_count,
+    const CHAR *directories)
+{
+    session *owner = session_thread_current();
+    uint8_t *copy;
+    if (byte_count == 0u || directories == NULL) return TRUE;
+    if (owner == NULL || !session_valid(owner) || owner->state != SESSION_STATE_ACTIVE ||
+        base_vdm_current == NULL || base_vdm_current->owner != owner) {
+        SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
+        return FALSE;
+    }
+    copy = (uint8_t *)HeapAlloc(GetProcessHeap(), 0u, byte_count);
+    if (copy == NULL) {
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+        return FALSE;
+    }
+    memcpy(copy, directories, byte_count);
+    if (base_vdm_current->current_directories != NULL)
+        HeapFree(GetProcessHeap(), 0u, base_vdm_current->current_directories);
+    base_vdm_current->current_directories = copy;
+    base_vdm_current->current_directories_bytes = byte_count;
+    return TRUE;
+}
+
+/* DIVERGENCE: BaseSrvGetVDMCurDirs returns the stored MULTI_SZ once and then
+ * frees its console-record copy to avoid leaking a DOS directory into WOW.
+ * The local record preserves that one-shot ownership rule. */
+ULONG base_vdm_local_get_current_directories(ULONG byte_count,
+    CHAR *directories)
+{
+    session *owner = session_thread_current();
+    ULONG required;
+    if (owner == NULL || !session_valid(owner) || owner->state != SESSION_STATE_ACTIVE ||
+        base_vdm_current == NULL || base_vdm_current->owner != owner) {
+        SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
+        return 0u;
+    }
+    required = base_vdm_current->current_directories_bytes;
+    if (required == 0u) return 0u;
+    if (directories == NULL || byte_count < required) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return required;
+    }
+    memcpy(directories, base_vdm_current->current_directories, required);
+    HeapFree(GetProcessHeap(), 0u, base_vdm_current->current_directories);
+    base_vdm_current->current_directories = NULL;
+    base_vdm_current->current_directories_bytes = 0u;
+    return required;
+}
+
+/* DIVERGENCE: BaseSrvExitDOSTask eventually tears down an NT4 console/CSR
+ * record. A DOS caller in the one-session product completes only its own
+ * session; it never exits the host process. WOW exits remain a later owner. */
+VOID base_vdm_local_exit(BOOL wow_caller, ULONG wow_task)
+{
+    session *owner = session_thread_current();
+    (void)wow_task;
+    if (wow_caller || owner == NULL || !session_valid(owner) ||
+        owner->state != SESSION_STATE_ACTIVE || base_vdm_current == NULL ||
+        base_vdm_current->owner != owner) return;
+    session_complete(owner, 0u);
 }
