@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const repository = process.argv[2] || process.cwd();
+const fullBoundary = process.argv.includes('--full');
 const operations = path.join(repository, 'docs', 'etc', 'operations');
 const roots = {
   'O:\\repos.external\\OpenNT\\base\\mvdm': 'O:\\repos.external\\OpenNT\\base\\mvdm',
@@ -72,8 +73,11 @@ function conditionContext(source, line) {
   return stack.join(' > ') || 'unconditional';
 }
 
-const bindings = readTsv('mvdm-first-degree-rebaselined-mvdm-binding-gate-ledger.tsv')
-  .filter((row) => row.selectable_definition_count === '1');
+const bindingInput = fullBoundary
+  ? 'mvdm-first-degree-rebaselined-full-mvdm-boundary-gate-ledger.tsv'
+  : 'mvdm-first-degree-rebaselined-mvdm-binding-gate-ledger.tsv';
+const bindings = readTsv(bindingInput)
+  .filter((row) => (fullBoundary ? row.selectable_original_mvdm_definition_count : row.selectable_definition_count) === '1');
 const declarations = new Map();
 for (const row of readTsv('mvdm-first-degree-rebaselined-declaration-frontier-ledger.tsv')) {
   declarations.set(row.candidate_id, [...(declarations.get(row.candidate_id) || []), row]);
@@ -82,8 +86,15 @@ const identities = new Map(readTsv('mvdm-first-degree-rebaselined-mvdm-definitio
   .map((row) => [`${row.source_root}|${row.source_path}|${row.source_sha256}|${row.source_line}`, row]));
 
 const rows = bindings.map((binding) => {
-  const definition = identities.get(binding.selectable_definition_identities);
-  if (!definition) throw new Error(`missing selected definition ${binding.selectable_definition_identities}`);
+  const definitionIdentity = fullBoundary
+    ? binding.selectable_original_mvdm_definition_identities : binding.selectable_definition_identities;
+  const definition = fullBoundary
+    ? (() => {
+      const [source_root, source_path, source_sha256, source_line] = definitionIdentity.split('|');
+      return { source_root, source_path, source_sha256, source_line, symbol: binding.callee_spelling };
+    })()
+    : identities.get(definitionIdentity);
+  if (!definition) throw new Error(`missing selected definition ${definitionIdentity}`);
   const caller = invocationAt(sourceFile(binding.caller_source_root, binding.caller_source_path), Number(binding.caller_source_line), binding.callee_spelling);
   const body = invocationAt(sourceFile(definition.source_root, definition.source_path), Number(definition.source_line), definition.symbol);
   const headerRows = (declarations.get(binding.candidate_id) || []).filter((row) => headerFile(row.declaration_header_identity));
@@ -91,7 +102,12 @@ const rows = bindings.map((binding) => {
     const item = invocationAt(headerFile(row.declaration_header_identity), Number(row.declaration_line), binding.callee_spelling);
     return item ? item.count : null;
   }).filter((value) => value !== null);
-  const arity = caller && body && headerCounts.length && caller.count === body.count && headerCounts.includes(body.count);
+  const sameTranslationUnit = binding.caller_source_path === definition.source_path
+    && binding.caller_source_sha256 === definition.source_sha256;
+  const headerMatch = caller && body && headerCounts.length
+    && caller.count === body.count && headerCounts.includes(body.count);
+  const localBodyMatch = fullBoundary && caller && body && sameTranslationUnit && caller.count === body.count;
+  const arity = headerMatch || localBodyMatch;
   const callerContext = caller ? conditionContext(caller.source, Number(binding.caller_source_line)) : 'unresolved-call-form';
   const definitionSource = fs.readFileSync(sourceFile(definition.source_root, definition.source_path), 'utf8');
   const definitionContext = conditionContext(definitionSource, Number(definition.source_line));
@@ -102,10 +118,11 @@ const rows = bindings.map((binding) => {
     caller_source_sha256: binding.caller_source_sha256,
     caller_source_line: binding.caller_source_line,
     callee_spelling: binding.callee_spelling,
-    selected_definition_identity: binding.selectable_definition_identities,
+    selected_definition_identity: definitionIdentity,
     call_argument_count: caller ? String(caller.count) : 'unresolved',
     declaration_argument_counts: headerCounts.join(';') || 'unresolved',
     definition_argument_count: body ? String(body.count) : 'unresolved',
+    shape_basis: headerMatch ? 'reachable original declaration and definition' : localBodyMatch ? 'same-translation-unit original definition' : 'unresolved',
     caller_condition_context: callerContext,
     definition_condition_context: definitionContext,
     next_disposition: arity
@@ -114,6 +131,9 @@ const rows = bindings.map((binding) => {
   };
 });
 const columns = Object.keys(rows[0]);
-fs.writeFileSync(path.join(operations, 'mvdm-first-degree-rebaselined-mvdm-signature-gate-ledger.tsv'), `${columns.join('\t')}\n${rows.map((row) => columns.map((column) => quote(row[column])).join('\t')).join('\n')}\n`);
+const output = fullBoundary
+  ? 'mvdm-first-degree-rebaselined-full-mvdm-signature-gate-ledger.tsv'
+  : 'mvdm-first-degree-rebaselined-mvdm-signature-gate-ledger.tsv';
+fs.writeFileSync(path.join(operations, output), `${columns.join('\t')}\n${rows.map((row) => columns.map((column) => quote(row[column])).join('\t')).join('\n')}\n`);
 const passed = rows.filter((row) => row.next_disposition.startsWith('source call')).length;
 console.log(`eligible bindings=${rows.length}; source shape confirmed=${passed}; shape unresolved=${rows.length - passed}`);

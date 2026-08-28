@@ -39,6 +39,12 @@ records.  Both caller and definition conditional contexts remain physical
 evidence, not a spelling merge. See the [P10 signature gate]
 (etc/evidence/m0-t301-s1-p10-original-mvdm-signature-gate-001.md).
 
+**T301 S1 P11:** a complete one-degree sweep now finds 380 unique-gated
+original-MVDM candidates.  The 202 source-shape-confirmed calls seed 69 bodies;
+direct expansion reaches 17 more bodies and records 343 physical direct edges.
+These are rebase inputs, not yet a final zero-degree rewrite. See the [P11
+expansion evidence](etc/evidence/m0-t301-s1-p11-full-mvdm-rebase-expansion-001.md).
+
 ## Active Packet
 
 | Field | Record |
