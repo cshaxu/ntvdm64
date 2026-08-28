@@ -26,6 +26,11 @@ only create, copied real-mode load, finite budget run, active query and
 destroy. A finite stop clears only the adapter-owned Bochs stop latch before
 the next run; it neither resets nor recreates CPU/RAM state.
 
+M0 T303/S2 adds the versioned `resume` request/outcome form beneath the older
+budget-run convenience form.  Its result is limited to mechanical input,
+inactive, failure, unexpected-return or budget exhaustion: it has no BOP,
+MVDM, DOS, WOW, selector or host-service interpretation.
+
 `machine_facade_resolve_protected_range` is a selector-blind mechanical
 preflight. It verifies one current active segment through Bochs' native
 access/limit checks and returns only the copied numeric linear address. It

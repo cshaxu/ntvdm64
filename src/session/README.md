@@ -51,3 +51,11 @@ M0 T291 S4 disposition register:
   `session` retains only neutral lifetime, thread binding, leases and mapping.
   Future multi-caller command brokerage belongs to the source-shaped monitor/
   broker package, never to a generic session callback table.
+
+M0 T303 S2 disposition register:
+
+- `session.c` and `session.h`: `small neutral extension`.  A bound session may
+  retain an opaque finite mechanical-resume budget and the copied status of its
+  last mechanical resume.  It does not identify the machine implementation,
+  a BOP selector, or an OpenNT service; `adapter-mvdm-host-out/softpc` remains
+  the owner of the historical `host_simulate(void)` spelling.

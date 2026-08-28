@@ -5,6 +5,10 @@
 
 #include "session/guest_memory_lease.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
  * A retained MVDM guest location.  It deliberately preserves the original
  * real-mode numeric form; it is neither a native pointer nor an opaque
@@ -41,5 +45,9 @@ int mvdm_guest_location_acquire(mvdm_guest_location const *location,
     mvdm_guest_location_lease *lease_out);
 int mvdm_guest_location_release(mvdm_guest_location_lease *lease,
     int commit);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T303 S2.**
+**Active: M0 T304 S1.**
 
 M0 T301/S1 is closed. Its constrained first-degree audit produced physical
 source/binding evidence without turning whole-program BFS into a functional
@@ -57,6 +57,20 @@ give each form one owner and x86/x64 rule.
 resume/stop contract needed by the retained `host_simulate` spelling. It may
 make no BOP or MVDM service decision and must leave all source-site pointer
 conversion to the DEM/COMMAND owner package. See the [S2 plan](etc/operations/m0-t303-s2-typed-resume-contract-plan-001.md).
+
+**T303 closure:** the historical no-argument `host_simulate` form now enters a
+versioned selector-blind finite-resume request and records only its copied
+mechanical outcome in the bound session.  The focused formal Ninja fixture
+passes on x86 and x64; it proves invalid-input rejection, scalar register
+access, bounded guest-memory lease access, and a budget stop without importing
+a SoftPC executor or BOP semantics.  See the [closure evidence](etc/evidence/m0-t303-s2-typed-resume-contract-closure-001.md).
+
+**T304 S1 admission:** recover the source-shaped, fixed-width machine-event
+ingress contract required before the DEM/COMMAND vertical slice.  The first S
+is limited to the reached original event forms, their exact owner/binding
+locations, and an implementation-ready selector-blind boundary plan; it does
+not admit BOP routing, service behavior, device enablement, or guest-trace
+repair. See the [S1 plan](etc/operations/m0-t304-s1-machine-event-ingress-plan-001.md).
 
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,
@@ -186,19 +200,19 @@ not package/provider admissions. See the [P20 signature evidence]
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T303 S2`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Owner-directed recovery after T303/S1's bounded ledger. This S admits only a selector-blind typed finite-resume/stop contract for the reached historical `host_simulate` form. |
-| Objective | Make the first slice's `host_simulate` spelling use a bounded Bochs-only resume operation with a copied, typed outcome, while retaining scalar-register and session-lease boundaries. |
-| Non-goals | No BOP route, guest trace repair, device enablement, CPU profile, second SoftPC/CCPU executor, BaseSrv expansion, DEM/COMMAND pointer-site conversion, XMS A20/SAS or DPMI protected behavior. |
-| Reference Baseline | T302 closure; [T303 S1 mechanical ledger](etc/operations/m0-t303-s1-first-slice-mechanical-ledger.tsv); original `softpc.h`/reached DEM callers; current `adapter-mvdm-host-out/softpc`, `adapter-bochs` and session contracts. |
-| Files And ABI Surface | `adapter-bochs` typed finite-resume request/outcome, the historical `host_simulate` binding, focused x86/x64 fixture and formal Ninja recipe only. |
+| Identifier Mode | `M0 T304 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Queue P04 after T303 closure. This S admits only the source-shaped fixed-width machine-event ingress/binding discovery needed to define the next implementation packet. |
+| Objective | Identify the reached original machine-event forms, current adapter locations, data widths, stop/outcome ownership and smallest selector-blind ingress boundary. |
+| Non-goals | No BOP route, guest trace repair, device enablement, CPU profile, second SoftPC/CCPU executor, BaseSrv expansion, DEM/COMMAND provider behavior, XMS A20/SAS or DPMI protected behavior. |
+| Reference Baseline | T303 closure; original reached `softpc.h`/monitor event declarations; current `adapter-mvdm-host-out/softpc`, `adapter-bochs` and session contracts. |
+| Files And ABI Surface | Read-only original/event binding review and a bounded T304 implementation plan only. |
 | Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; four-rung source-recovery gate; mapping and `src.old` exclusion rules. |
-| Verification | Focused real-machine x86/x64 Ninja tests for typed finite resume, register facade and bounded session lease; dependency-direction review, documentation governance and `git diff --check`. |
+| Verification | Source/ABI ownership evidence, dependency-direction review, documentation governance and `git diff --check`. |
 | Expected Markers | One typed mechanical outcome for every finite resume; no MVDM semantic dependency enters Bochs; no unowned pointer/lease conversion or second executor exists. |
-| Asset Needs | Existing `adapter-bochs` lifecycle/facade, `adapter-mvdm-host-out/softpc` bindings, session lease contract and original reached declarations. |
-| Reporting Requirements | Report the public mechanical request/outcome, retained `host_simulate` source shape, failure direction, x86/x64 evidence and explicit exclusions. |
-| Stop Conditions | A required change needs a BOP selector, MVDM owner decision, an unbounded device/product-shell import, a family-private mapping manager, or a source body outside the shared mechanical form. |
-| Exit Criteria | A focused x86/x64 formal build proves the typed finite resume contract with existing scalar/lease guards; P04 may attach copied event ingress without reopening this mechanical contract. |
+| Asset Needs | Existing T303 typed-resume contract, source union, current event bridge/fixture evidence and original reached declarations. |
+| Reporting Requirements | Report each reached event form, source owner, fixed-width fields, current route, rejected ownership and the ready-to-implement boundary. |
+| Stop Conditions | A required change needs BOP/provider semantics, an unbounded device/product-shell import, a family-private mapping manager, or a source body outside the shared mechanical form. |
+| Exit Criteria | A small implementation S is defined with exact original forms, owning component and x86/x64 local test contract; it does not reopen T303 mechanical resume. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务，从 Base VDM 命令协议开始，到 DPMI / DPMI32 复通。” |
 | Similar-Issue Sweep | finite stop class, no-active-machine/failure behavior, copied register frame, guest-memory lease lifetime, Bochs-only ownership, second-executor exclusion and selector-blind interface review. |
 

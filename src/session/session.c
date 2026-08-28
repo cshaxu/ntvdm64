@@ -19,6 +19,7 @@ void session_initialize(session *instance, uint32_t identity)
     instance->abi_version = SESSION_ABI_VERSION;
     instance->struct_bytes = (uint32_t)sizeof(*instance);
     instance->identity = identity;
+    instance->mechanical_resume_status = SESSION_MECHANICAL_STATUS_NONE;
     mapping_manager_initialize(&instance->guest_memory_mappings,
         MAPPING_MANAGER_GUEST_MEMORY,
         MAPPING_MANAGER_RESERVE_ZERO | MAPPING_MANAGER_RESERVE_MAXIMUM);
@@ -88,6 +89,36 @@ void session_complete(session *instance, uint32_t completion_code)
         return;
     instance->completion_code = completion_code;
     instance->state = SESSION_STATE_COMPLETED;
+}
+
+int session_set_mechanical_resume_budget(session *instance, uint64_t budget)
+{
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+        budget == 0u) return 0;
+    instance->mechanical_resume_budget = budget;
+    instance->mechanical_resume_status = SESSION_MECHANICAL_STATUS_NONE;
+    return 1;
+}
+
+uint64_t session_mechanical_resume_budget(const session *instance)
+{
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
+        return 0u;
+    return instance->mechanical_resume_budget;
+}
+
+void session_record_mechanical_resume_status(session *instance,
+    uint32_t status)
+{
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
+        return;
+    instance->mechanical_resume_status = status;
+}
+
+uint32_t session_mechanical_resume_status(const session *instance)
+{
+    if (!session_valid(instance)) return SESSION_MECHANICAL_STATUS_NONE;
+    return instance->mechanical_resume_status;
 }
 
 int session_dispose(session *instance)

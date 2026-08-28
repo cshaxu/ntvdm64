@@ -9,6 +9,7 @@
 #define SESSION_MAGIC UINT32_C(0x53455353)
 #define SESSION_ABI_VERSION UINT32_C(1)
 #define SESSION_MAX_TEARDOWNS 8u
+#define SESSION_MECHANICAL_STATUS_NONE UINT32_MAX
 
 enum session_state {
     SESSION_STATE_READY = 0u,
@@ -38,6 +39,8 @@ typedef struct session {
     uint32_t epoch;
     uint32_t completion_code;
     uint32_t cancellation_reason;
+    uint64_t mechanical_resume_budget;
+    uint32_t mechanical_resume_status;
     uint32_t teardown_count;
     volatile long binding_count;
     session_teardown teardowns[SESSION_MAX_TEARDOWNS];
@@ -58,6 +61,11 @@ int session_register_teardown(session *instance, session_teardown_fn function,
     void *context);
 int session_request_cancellation(session *instance, uint32_t reason);
 void session_complete(session *instance, uint32_t completion_code);
+int session_set_mechanical_resume_budget(session *instance, uint64_t budget);
+uint64_t session_mechanical_resume_budget(const session *instance);
+void session_record_mechanical_resume_status(session *instance,
+    uint32_t status);
+uint32_t session_mechanical_resume_status(const session *instance);
 int session_dispose(session *instance);
 mapping_manager *session_guest_memory_mappings(session *instance);
 mapping_manager *session_host_resource_mappings(session *instance);
