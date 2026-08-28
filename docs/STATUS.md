@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T305 S1.**
+**Active: M0 T306 S1.**
 
 M0 T301/S1 is closed. Its constrained first-degree audit produced physical
 source/binding evidence without turning whole-program BFS into a functional
@@ -93,6 +93,24 @@ vertical slice. This S maps and attempts the smallest original-source closure
 through the already-closed Base VDM, SoftPC-shaped and copied machine-event
 boundaries; it may not replace OpenNT dispatchers with app-owned behavior.
 See the [S1 plan](etc/operations/m0-t305-s1-dem-command-vertical-slice-plan-001.md).
+
+**T305 S1 P1:** both original dispatcher translation units now compile on
+x86/x64; the original aggregate `nt_bop.c` reaches a historical PIC/second-
+executor boundary before link composition.  The exact source owner map and
+the reason this packet must not handwrite a selector route are recorded in the
+[boundary audit](etc/evidence/m0-t305-s1-dispatcher-boundary-audit-001.md).
+
+**T305 closure:** the narrow DEM/COMMAND source boundary is closed without
+adopting a second SoftPC/PIC executor.  The [closure record]
+(history/m0-t305-closure-20260828.md) retains the verified source result and
+its explicit non-runtime limit.
+
+**T306 S1 admission:** the owner-directed queue now enters finite MVDM
+external-boundary package selection. It consumes the existing `zero-ledger1`
+and `one-ledger1` evidence to decide original package imports, named adapter
+families and hard boundaries; it does not implement a BOP/provider or restart
+unbounded program-wide BFS. See the [S1 plan]
+(etc/operations/m0-t306-s1-external-boundary-package-selection-plan-001.md).
 
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,
@@ -222,21 +240,21 @@ not package/provider admissions. See the [P20 signature evidence]
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T305 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Owner-directed ordered-queue execution after T304 closure; admits only the first source-shaped DEM/COMMAND vertical slice. |
-| Objective | Map and attempt the smallest original DEM/COMMAND dispatcher closure through existing Base VDM, SoftPC-shaped and copied machine-event contracts. |
-| Non-goals | Trace-selected BOP implementation, full DEM namespace/file behavior, child-product shell, CSR/CSRSS, WOW, XMS, DPMI, device expansion and guest execution remain excluded. |
-| Reference Baseline | [T302 closure](history/m0-t302-closure-20260828.md), [T303 closure](etc/evidence/m0-t303-s2-typed-resume-contract-closure-001.md), [T304 closure](etc/evidence/m0-t304-s2-fixed-width-machine-event-closure-001.md), and selected `mvdm-host` DEM/COMMAND source. |
-| Files And ABI Surface | Original DEM/COMMAND dispatcher/owner files, Base VDM local protocol, SoftPC-shaped mapping/resume forms, machine-event ingress, focused fixture and closure evidence only. |
+| Identifier Mode | `M0 T306 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner-directed queue execution after M0 T305 closure; admits the finite external-boundary package-selection work defined in the queue and S1 plan. |
+| Objective | Convert the physical direct non-MVDM frontier into a complete original-package, adapter-family and hard-boundary worklist. |
+| Non-goals | Provider/BOP behavior, source import, adapter implementation, guest trace, kernel/CSRSS recreation, second executor and unbounded whole-program classification remain excluded. |
+| Reference Baseline | [M0 T305 closure](history/m0-t305-closure-20260828.md), [P18--P20 first-degree evidence](etc/evidence/), `zero-ledger1.tsv`, and `one-ledger1.tsv`. |
+| Files And ABI Surface | Degree ledgers, source index/search tooling, package-boundary evidence and queue/proposal records only. |
 | Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; four-rung source-recovery gate; mapping and `src.old` exclusion rules. |
-| Verification | Original source/boundary audit, selected source-closure compile attempt, x86/x64 focused local proof, dependency-direction review, documentation governance and `git diff --check`. |
-| Expected Markers | Every reached selector has an original dispatcher owner; every historical boundary has one existing or named same-shaped adapter; no app-owned command semantics appear. |
-| Asset Needs | Selected MVDM DEM/COMMAND source, T302 Base VDM form, T303 mechanical form, T304 copied event ingress and formal Ninja tooling. |
-| Reporting Requirements | Record original paths, source/adapter rung, attempted closure, x86/x64 outcome and each retained unavailable product-shell branch. |
-| Stop Conditions | A required body needs a new unreviewed provider, CSR/CSRSS/kernel recreation, a second executor, unbounded pointer lifetime, or semantics owned by Redirector/WOW/XMS/DPMI. |
-| Exit Criteria | Original first-slice owner map, attempted source-shaped closure, local x86/x64 result and bounded next-P disposition are recorded. |
+| Verification | Physical-identity spot checks, original-source/package-root verification, stopping-boundary review, documentation governance and `git diff --check`. |
+| Expected Markers | Every direct external identity has exactly one disposition; proposed imports have bounded closure and every adapter is owner-named. |
+| Asset Needs | Selected original OpenNT source union, current degree ledgers, source index and existing component/adapters inventory. |
+| Reporting Requirements | Record package/source evidence, final disposition, stopping reason, current workaround migration and unresolved limits. |
+| Stop Conditions | A candidate requires recursive whole-product reconstruction, an unapproved new provider, kernel/CSRSS recreation, a second executor or ambiguous source identity. |
+| Exit Criteria | Full direct-frontier disposition plus a bounded import/adapter worklist and re-ordered source-recovery plan. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务，从 Base VDM 命令协议开始，到 DPMI / DPMI32 复通。” |
-| Similar-Issue Sweep | finite stop class, no-active-machine/failure behavior, copied register frame, guest-memory lease lifetime, Bochs-only ownership, second-executor exclusion and selector-blind interface review. |
+| Similar-Issue Sweep | Source root, edition identity, linkage, public leaf, adapter owner, hard-boundary reason, existing workaround migration and component dependency direction. |
 
 **Td closure — OpenNT-host directory boundary:** `opennt-host` is now
 explicitly governed as the single mirror root for every separately accepted
