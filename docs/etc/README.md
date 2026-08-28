@@ -9,6 +9,7 @@ competing current architecture, rule, roadmap, queue, or status.
 | `research/` | Source, ABI, build, and compatibility observations | `../STATUS.md` and `../design/` |
 | `architecture/` | Retained architecture supporting records | `../design/ARCHITECTURE.md` |
 | `evidence/` | Closure records, fixtures, and retained detailed status ledgers | `../rules/EXECUTION.md` |
+| `archive/` | Superseded queues and retained planning indexes | Current authority documents above |
 
 Pre-governance records remain in the direct legacy tree until a manifest-backed
 batch moves them here. The migration inventory is

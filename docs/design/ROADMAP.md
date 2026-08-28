@@ -16,9 +16,9 @@ needed to preserve their original call shape. It establishes sources,
 interface owners, finite stopping boundaries and reversion targets, not
 provider execution.
 
-The program authority is the [rebootstrap program roadmap](../etc/operations/proposal-opennt-mvdm-package-mirror-rebootstrap-001.md).
-Each candidate has its own proposal and can be admitted only after its stated
-predecessor closes.
+The program authority is the [package-recovery proposal set](../etc/operations/package-recovery-program-20260827.md).
+The active `M0 T301` is its first package; each subsequent candidate is
+ordered in Queue and can be admitted only after its stated predecessor closes.
 
 **Gate:** every selected MVDM root and external candidate has provenance,
 package/file/build disposition, and a complete reached-interface row with one
@@ -38,13 +38,13 @@ whole reached interface set is owned and topologically ordered.
 shared support and every cross-package adapter contract have a source/ABI/
 failure disposition in both host graphs.
 
-## Phase 2 — Base protocol and machine-control substrate
+## Phase 2 — Minimal runnable vertical slice
 
 Recover the Base VDM client/server vertical slice through its bounded private
-host adapter, followed by reached non-executor `softpc.new` monitor/SIM control
-through the Bochs mechanical adapter. Original code stays intact except for
-recorded same-shaped binding changes. CSR/CSRSS, kernel VDM and a second CPU
-executor remain outside the boundary.
+host adapter, then connect original DEM/COMMAND to the Bochs machine and run
+one declared DOS program. Original code stays intact except for recorded
+same-shaped binding changes. CSR/CSRSS, kernel VDM and a second CPU executor
+remain outside the boundary.
 
 **Gate:** command/control protocol and source-shaped machine entry/stop
 contracts have local x86/x64 proof with explicit unavailable product-shell
