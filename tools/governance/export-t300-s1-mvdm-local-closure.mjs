@@ -14,7 +14,7 @@ const mirrorRoots = [
   ['mvdm-guest', path.join(repository, 'src', 'mvdm-guest')],
 ].filter(([, root]) => fs.existsSync(root));
 const sourceExtensions = new Set(['.c', '.cc', '.cpp', '.cxx']);
-const controls = new Set(['if', 'for', 'while', 'switch', 'return', 'sizeof', 'case', 'do', 'typedef', 'defined', '__asm', 'asm', 'catch', '__try', '__except', 'except', '__finally', 'finally', 'try']);
+const controls = new Set(['if', 'for', 'while', 'switch', 'return', 'sizeof', 'case', 'do', 'typedef', 'defined', '__asm', 'asm', 'catch', '__try', '__except', 'except', '__finally', 'finally', 'try', 'void', 'char', 'short', 'int', 'long', 'float', 'double', 'signed', 'unsigned', 'const', 'volatile', 'struct', 'union', 'enum']);
 
 function walk(root) {
   const output = [];

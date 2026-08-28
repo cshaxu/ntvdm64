@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2987 |
+| Documentation records | 2988 |
 | --- | --- |
-| Generated UTC | 2026-08-28T01:24:23Z |
+| Generated UTC | 2026-08-28T01:27:47Z |
 
 ## Entries
 
@@ -454,6 +454,7 @@ content-divergent entries.
 | etc/evidence/m0-t301-s1-p1-first-degree-include-frontier-001.md | indexed supporting material | 21482f2f3594f3381ec1f772626ac14444639f7503b589cf7665ae7c9bff3713 |
 | etc/evidence/m0-t301-s1-p2-first-degree-declaration-frontier-001.md | indexed supporting material | 04d5b0e49a197d6b2ee7271d0df63861dc2c0a95b7a72c0c6d2b4a3f0779b021 |
 | etc/evidence/m0-t301-s1-p3-prior-definition-identity-crosswalk-001.md | indexed supporting material | 39f07f8fe438b7518465be2d626993104d56830f20da42b29c0236ee41ef4b6c |
+| etc/evidence/m0-t301-s1-parser-type-keyword-correction-001.md | indexed supporting material | e4b33662ad7e8289e3d9376388408d61ed5b20f83c69788aadaaa96e81afca52 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1069,17 +1070,17 @@ content-divergent entries.
 | etc/operations/mvdm-degree-audit-supersession-ledger.tsv | indexed supporting material | 52caba1bb9b6407a41aafadd229b523fda4a6eb586bbcf6e41fff5548ac56ef2 |
 | etc/operations/mvdm-divergence-exclusion-ledger.tsv | indexed supporting material | 02a652eb50ffcc0da7a7f138b4650ea1962514cdfab5ce19f2d2c8438aa97d1d |
 | etc/operations/mvdm-file-recovery-ledger.tsv | indexed supporting material | d95249afdae9196425eb38450a47daaa0afabddad4a5ca4c2b9d17040a9a90dc |
-| etc/operations/mvdm-first-degree-function-candidate-ledger.tsv | indexed supporting material | f5754f5bc4ab5bc787ef1de448c035997c132171bb6a8704275fadb1f19a4154 |
+| etc/operations/mvdm-first-degree-function-candidate-ledger.tsv | indexed supporting material | 580c782e179395cf94dfe05f4881c57ccf8123ee81f8044701ca113f23af6df4 |
 | etc/operations/mvdm-first-degree-prior-second-reclassification-ledger.tsv | indexed supporting material | 841a493fc5fd9a0ad1cb1deeab0735ebf7bedd43824bd82fea7a0c3d6550f109 |
-| etc/operations/mvdm-first-degree-rebaselined-boundary-ledger.tsv | indexed supporting material | 73578a54ed7cb9ee1571d5e5b14f445ee38ad0f79c67b188b5beb364ddb85df8 |
+| etc/operations/mvdm-first-degree-rebaselined-boundary-ledger.tsv | indexed supporting material | e2938945ff336cdf4fb461cfce6d7ecd7e190c711a23bc0e62cac525c7842477 |
 | etc/operations/mvdm-first-degree-rebaselined-caller-include-frontier-ledger.tsv | indexed supporting material | d3ceb63fb79cddec5b3d91a8f577944f650ef778f87ed1f58c93d65b5d903e9f |
 | etc/operations/mvdm-first-degree-rebaselined-call-resolution-ledger.tsv | indexed supporting material | 96423d06709b856ff937f065dbc9fa6d68ff3db838ec956bc066392ad763aefb |
-| etc/operations/mvdm-first-degree-rebaselined-declaration-frontier-ledger.tsv | indexed supporting material | 34cd14ad6eb4e08a279dc321568ccd3e185e40031ae4feae0ac0337e7d5e5e99 |
+| etc/operations/mvdm-first-degree-rebaselined-declaration-frontier-ledger.tsv | indexed supporting material | 879432b4cd0eeaab4b6bfe4355bd4f913bdf10b168e3659dc4948ad8f8e3a218 |
 | etc/operations/mvdm-first-degree-rebaselined-definition-candidate-ledger.tsv | indexed supporting material | 53ea8d16315d98e2f3e5cd5e33e3a5402f44949a62022fe39ce24875c4af312c |
-| etc/operations/mvdm-first-degree-rebaselined-include-frontier-ledger.tsv | indexed supporting material | 514ad1d9e4d56c97e716e99a54d22356a5f39e0632900b762a572c89b8ab9fee |
+| etc/operations/mvdm-first-degree-rebaselined-include-frontier-ledger.tsv | indexed supporting material | 1da99866f8bbeb31ec19b91ff125d13f9277bca75b3a3d3f6583442d33672053 |
 | etc/operations/mvdm-first-degree-rebaselined-no-declaration-category-ledger.tsv | indexed supporting material | 4274326d906ded6e56c9d80db8c541cee40196010d6e992f3c8383113b9b53e5 |
-| etc/operations/mvdm-first-degree-rebaselined-prior-definition-identity-ledger.tsv | indexed supporting material | f4e4f3c39cddd3e2360f83c014158ac96e63a646bbbda729c16686c4b3e7c4a0 |
-| etc/operations/mvdm-first-degree-rebaselined-worklist-ledger.tsv | indexed supporting material | 83eacef5f1f5604aa171daf5e8bb932065d74f3408ec2d1277506e058a427bdc |
+| etc/operations/mvdm-first-degree-rebaselined-prior-definition-identity-ledger.tsv | indexed supporting material | 0f2ad15a38cafccc7488a8949c25e02a4e1df221cfd90c82c0ff4c569dc9ba0d |
+| etc/operations/mvdm-first-degree-rebaselined-worklist-ledger.tsv | indexed supporting material | 7c153599e3c89bff381e7a006cf29e23939cbed572eeba44ca1da72a7ead75dc |
 | etc/operations/mvdm-host-degree-audit-plan-001.md | indexed supporting material | 975c31bccb526e2b16aed61629c69dba844b36e31c1240fc4d4e5dcba61b4c10 |
 | etc/operations/mvdm-host-first-degree-call-implementation-ledger.tsv | indexed supporting material | 152325d0d1a41d9be54f1094bc69ee1956368b529c03e47f9d9ca881f5a3fad1 |
 | etc/operations/mvdm-host-first-degree-call-resolution-ledger.tsv | indexed supporting material | 37f26a92864e26f58deaa669742ed2f7337d9599fa69abac1a77f7209d580ec7 |
