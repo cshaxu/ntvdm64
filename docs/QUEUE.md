@@ -7,15 +7,14 @@ absent: its live scope and progress belong only to Status.
 
 Recovery is package-first and mirror-first: a trace, BOP hit, compiler error
 or convenient API may verify a completed package but cannot choose the next
-package or substitute a new provider for source-shaped recovery.  Before the
-remaining owner packages proceed, one finite **external-boundary package
-selection** task consumes the existing `zero-ledger1` / `one-ledger1` evidence.
-It decides which direct non-MVDM packages are genuinely worth importing and
-which historical interfaces have a named adapter or hard-boundary disposition.
-It is not another open-ended whole-program audit: it must stop at public
-Win32/CRT leaves, a documented small local closure, or a documented hard
-boundary, and it must emit the complete package/adapter worklist that orders
-the recovery packages below.
+package or substitute a new provider for source-shaped recovery.  The finite
+external-boundary selection has closed: all 7,367 physical direct exits now
+have an adoption disposition.  It selected only the exact
+`opennt-host/netapi/netlib/ntstatus.c` mirror slice, retained the bounded
+source-shaped Base VDM seam, assigned the existing machine/Win32/Redirector
+adapter families, and recorded CSRSS, downlevel RAP and second-SoftPC paths as
+hard boundaries.  The remaining non-admissible rows are caller-owned identity
+holds, not invitations for another global scan.
 
 Once that worklist is closed, each owner package begins with only its bounded
 immediate-boundary review and must then enter source recovery, binding, local
@@ -35,24 +34,23 @@ that bounded packet closes is item 1 below.
 
 | Order | Candidate implementation package |
 | --- | --- | --- |
-| 1 | MVDM external-boundary package selection and adapter inventory |
-| 2 | Base VDM BaseClient/BaseSrv broker package recovery |
-| 3 | Monitor / `NtVdmControl` user-mode contract package recovery |
-| 4 | DEM/COMMAND vertical slice and child lifecycle |
-| 5 | Minimal DOS guest execution and controlled return |
-| 6 | Minimal vertical-slice integration closure |
-| 7 | XMS owner package |
-| 8 | DPMI/DPMI32 owner package |
-| 9 | Redirector owner package |
-| 10 | WOW32/Win16 owner package |
-| 11 | VDD owner package |
-| 12 | Debugger/BDE/FAX owner packages |
-| 13 | Service-package cross-family closure and native integration evidence |
-| 14 | Broker process and cross-process coordination |
-| 15 | In-process multi-session reentrancy audit |
-| 16 | Host capability expansion |
-| 17 | Guest DOS/WOW16 artifact matrix |
-| 18 | Product release closure |
+| 1 | Base VDM source-shaped broker recovery |
+| 2 | Monitor / `NtVdmControl` user-mode contract package recovery |
+| 3 | DEM/COMMAND vertical slice and child lifecycle |
+| 4 | Minimal DOS guest execution and controlled return |
+| 5 | Minimal vertical-slice integration closure |
+| 6 | XMS owner package |
+| 7 | DPMI/DPMI32 owner package |
+| 8 | Redirector owner package (including the selected `netstatus.c` mirror slice) |
+| 9 | WOW32/Win16 owner package |
+| 10 | VDD owner package |
+| 11 | Debugger/BDE/FAX owner packages |
+| 12 | Service-package cross-family closure and native integration evidence |
+| 13 | Broker process and cross-process coordination |
+| 14 | In-process multi-session reentrancy audit |
+| 15 | Host capability expansion |
+| 16 | Guest DOS/WOW16 artifact matrix |
+| 17 | Product release closure |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

@@ -56,7 +56,7 @@ Historical source-index evidence. It emitted physical declaration/signature
 binding seeds but selected no package/provider route. It is closed and is not
 a candidate or implementation gate.
 
-## P02 — MVDM external-boundary package selection, adoption plan and adapter inventory
+## P02 — MVDM external-boundary package selection, adoption plan and adapter inventory (completed M0 T306)
 
 **Predecessor:** P01 and the retained `zero-ledger1` / `one-ledger1` evidence.
 **Purpose:** turn the direct non-MVDM frontier into a closed product-boundary
@@ -68,6 +68,9 @@ until every reached branch reaches one of those stopping forms. The decision
 records the exact source files and source-shaped exported forms worth mirroring,
 their imports and proposed mirror root, and why the remainder of the parent
 OpenNT product package remains outside the runtime closure.
+Calls that do not pass physical declaration/signature identity are recorded as
+owner-local source-identity holds: they are not import or generic-adapter
+evidence, and are resolved only by the future original caller owner package.
 
 **Delivery:** a complete package/adoption/adapter inventory; edge evidence for
 the BaseSrv/BaseClient, monitor/`NtVdmControl` and any other selected package
@@ -85,10 +88,23 @@ copied, no adapter behavior is implemented, and no guest trace runs.
 smallest DEM/COMMAND source attempt, but may not grow into P02; P02 is the
 first new candidate after that bounded packet closes.
 
-## P03 — Base VDM command protocol (completed M0 T302)
+**Completion:** M0 T306 classified all 7,367 physical direct exits without a
+spelling-only promotion. The 251 identity-proven rows select 87 existing
+MVDM-closure functions, two MVDM macro corrections, 76 no-second-executor
+Bochs-machine boundaries, 54 retained source-shaped Base VDM boundary calls,
+11 exact `opennt-host/netapi/netlib/ntstatus.c` mirror calls, four public
+Win32 Redirector bindings, one Redirector RAP hard boundary, 15 public CRT
+leaves and one NTDLL/CSRSS hard boundary. The other 7,116 rows are owner-local
+identity holds. Consequently P03 begins with the retained source-shaped Base
+VDM seam rather than a full BaseClient/BaseSrv import, and P11 owns the exact
+`ntstatus.c` mirror slice alongside its Redirector binding.
 
-**Predecessor:** P01. The completed local profile is evidence for the broader
-P02 decision; any additional broker recovery is admitted only after P02.
+## P03 — Base VDM source-shaped broker recovery
+
+**Predecessor:** P02. The completed local profile is evidence for the broader
+P02 decision; the recovered package retains the local source-shaped Base VDM
+protocol rather than importing the CSRSS-bound BaseClient/BaseSrv product
+shell.
 **S1 admission:** audit only the immediate BaseClient,
 BaseSrv VDM slice and its private/public boundary. **Delivery:** recover the
 source-shaped `VDMINFO` request, copied capture, sizing/retry, wait/wake and
@@ -153,7 +169,8 @@ LDT, exception and memory paths. **Exit:** monitor and x86/x64 package matrix.
 
 **Predecessor:** P03–P06. **S1 admission:** inspect only reached local file,
 pipe and host capability boundaries. **Delivery:** original VDMREDIR local file and pipe
-paths, with explicit network/device unavailable paths. **Exit:** owner-family
+paths plus the P02-selected exact `opennt-host/netapi/netlib/ntstatus.c` mirror
+slice, with explicit network/device unavailable paths. **Exit:** owner-family
 regression without NetAPI/CSRSS shell reconstruction.
 
 ## P12 — WOW32/Win16 owner package

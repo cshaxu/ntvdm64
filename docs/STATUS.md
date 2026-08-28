@@ -2,7 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T306 S1.**
+**No M/T/S packet is active.** M0 T306/S1 closed its finite external-boundary
+selection; the next unadmitted candidate is Base VDM source-shaped broker
+recovery in [the queue](QUEUE.md). See the [T306 closure record]
+(history/m0-t306-closure-20260828.md).
 
 M0 T301/S1 is closed. Its constrained first-degree audit produced physical
 source/binding evidence without turning whole-program BFS into a functional
@@ -155,6 +158,17 @@ evidence](etc/evidence/m0-t306-s1-mvdm-machine-cohort-rebase-001.md).
 selected. See the [cohort audit]
 (etc/evidence/m0-t306-s1-crt-cohort-boundary-audit-001.md).
 
+**T306 S1 P8:** all 7,367 physical direct external calls now have a safe
+adoption disposition. Only identity-proven seeds can select a package or
+adapter; 7,116 non-admissible rows are explicit owner-local binding/source
+holds, not guessed dependencies. See the [frontier closure]
+(etc/evidence/m0-t306-s1-external-frontier-disposition-closure-001.md).
+
+**T306 closure:** the final disposition ledger, updated queue and P02 recovery
+program now select one exact non-MVDM source slice and a bounded owner-package
+worklist. No provider, BOP route, historical product shell or second executor
+was introduced. See the [closure record](history/m0-t306-closure-20260828.md).
+
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,
 including historical build products, into the existing `mvdm-*` component
@@ -280,6 +294,9 @@ not package/provider admissions. See the [P20 signature evidence]
 (etc/evidence/m0-t301-s1-p20-one-ledger1-signature-gate-001.md).
 
 ## Active Packet
+
+The following is the retained M0 T306/S1 closure brief. No M/T/S packet is
+currently active; the next packet requires separate owner admission.
 
 | Field | Record |
 | --- | --- |

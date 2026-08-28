@@ -12,6 +12,13 @@ interfaces that preserve MVDM's source shape, their finite outward closure,
 the `opennt-host` target root, and any current source-derived workaround that
 must be migrated, retained, or deleted.
 
+Where a physical call lacks a caller-reachable declaration, has unresolved
+signature/condition form, or has no original C/C++ body, its final planning
+disposition is an **owner-local source-identity hold**. This is a final
+non-adoption result for T306: it authorizes neither a package import nor a
+generic adapter. The later admitted original caller package must resolve the
+exact source/header/assembly/public-ABI form at its immediate boundary.
+
 ## Required work
 
 1. Validate the ledger's physical caller/callee identity rule and remove no
@@ -19,6 +26,8 @@ must be migrated, retained, or deleted.
 2. Partition direct exits by original source location, declaration form,
    linkage and package root; distinguish public leaves and source-absent forms
    from import candidates.
+   Record owner-local source-identity holds for all non-admissible physical
+   rows rather than merging them by spelling or inventing a substitute.
 3. For each import candidate, breadth-first inspect its required original
    slice until every reached branch stops at public Win32/CRT, a demonstrably
    small local closure, a named adapter family, or a hard boundary.  Record
