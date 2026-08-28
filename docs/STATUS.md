@@ -235,7 +235,9 @@ same-named original NT declaration subsets (`ntexapi.h`, `ntrtl.h`,
 `nturtl.h`, and `ntpsapi.h`) now live under `opennt-host`, while only modern
 type/import and behavior binding remains in the Win32 adapter. Focused formal
 MSVC `/MT` x86/x64 recompilation of original `nt_eoi.c` passed with original
-warnings only; the S7 physical-page audit records the placement and result.
+warnings only; the full selected sixteen-root original SoftPC host archive also
+passes on both architectures. The S7 physical-page audit records the placement
+and result.
 the only new code is registered same-shaped Win32/CRT binding needed to make
 the source bodies compile.  This remains static composition evidence, not a
 controller, timer, mapping, or runnable-backend claim.  See the

@@ -97,3 +97,11 @@ Focused formal Ninja recompilation of `obj/host/nt_eoi.obj` passed on MSVC
 `/MT` x64 and x86 after this relocation. The only diagnostics were pre-existing
 original warning forms (`NTVDM`/`CPU_30_STYLE` macro redefinitions,
 unreferenced `TicCount`, and the historical `IS32 *` callback mismatch).
+
+The complete selected `original-softpc-host-roots.lib` archive also rebuilt
+successfully on both architectures after the same header move. It covers all
+sixteen selected original host roots, including `nt_eoi.c` and `nt_timer.c`.
+Its warnings are original-source diagnostics such as old-style declarators,
+NT4 macro overlaps, and pre-existing pointer-width sites in unenabled device
+paths; neither architecture reported a new missing declaration or compile
+failure from the relocated carriers.
