@@ -34,6 +34,9 @@ $dem = @('dem','demfcb','demdata','demdir','demdisp','demerror','demfile',
 $command = @('cmd','cmddata','cmddisp','cmdexec','cmdexit','cmdmisc','cmdpif',
              'cmdredir','cmdconf','cmdkeyb','cmdenv')
 $bindings = @(
+    'src/session/mapping_manager.c',
+    'src/session/guest_memory_lease.c',
+    'src/session/session.c',
     'src/adapter-mvdm-host-out/basesrv/source/base_vdm_local.c',
     'src/adapter-mvdm-host-out/basesrv/source/base_vdm_client.c',
     'src/adapter-mvdm-host-out/softpc/mvdm_command_registers.c',
@@ -78,6 +81,7 @@ $includes = @(
     'src/adapter-mvdm-host-out/monitor/include',
     'src/adapter-mvdm-host-out/basesrv/include',
     'src/adapter-mvdm-host-out/redir/include',
+    'src/session',
     'src/mvdm-support/inc',
     'src/opennt-abi/source/public/sdk/inc',
     'src/opennt-abi/source/public/internal/base/inc',
@@ -139,5 +143,7 @@ $auditResponse = @(
 $graph.Add('build external-link-audit.dll: audit original-dem-provider-cohort.lib original-command-provider-cohort.lib source-shaped-bindings.lib')
 $graph.Add('build cohorts: phony original-dem-provider-cohort.lib original-command-provider-cohort.lib source-shaped-bindings.lib')
 $graph.Add('default cohorts external-link-audit.dll')
-[IO.File]::WriteAllLines((Join-Path $build 'build.ninja'), $graph, [Text.UTF8Encoding]::new($false))
+[IO.File]::WriteAllText((Join-Path $build 'build.ninja'),
+    (($graph -join [Environment]::NewLine) + [Environment]::NewLine),
+    [Text.UTF8Encoding]::new($false))
 Write-Host "Generated T309 S2 original provider-cohort graph: $build"
