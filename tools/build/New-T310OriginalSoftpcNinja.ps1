@@ -30,7 +30,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$build = Join-Path $root ("build/M0-T310/S2/softpc/{0}" -f $Architecture)
+$build = Join-Path $root ("build/M0-T310/S7/machine/{0}" -f $Architecture)
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or !(Get-Command ninja -ErrorAction SilentlyContinue)) {
     throw 'MSVC Build Tools and Ninja are required.'
@@ -58,7 +58,8 @@ $keymouseNames = Get-OriginalSources $keymouseManifest
 $systemNames = Get-OriginalSources $systemManifest
 $supportNames = Get-OriginalSources $supportManifest
 $hostNames = @('nt_cprgs.c', 'nt_cpu.c', 'nt_aorc.c', 'nt_reset.c', 'nt_error.c',
-               'nt_msscs.c', 'sim32.c', 'nt_sas.c', 'nt_mem.c', 'nt_umb.c')
+               'nt_msscs.c', 'sim32.c', 'nt_sas.c', 'nt_mem.c', 'nt_umb.c',
+               'config.c', 'nt_pif.c', 'nt_unix.c', 'nt_fdisk.c')
 $adapterWin32Names = @('dialog_context.c')
 $patchNames = @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h')
 $patchBodyNames = @('fmstubs.c')
@@ -203,7 +204,7 @@ $graph.Add('default original-softpc-candidate')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 
 [ordered]@{
-    schema = 'm0.t310.s2.original-softpc-candidate.v1'
+    schema = 'm0.t310.s7.original-softpc-machine-candidate.v1'
     architecture = $Architecture
     toolchain = 'MSVC /MT via VsDevCmd'
     originalCcpuManifest = 'src/mvdm-host/softpc.new/base/ccpu386/sources'
@@ -238,4 +239,4 @@ $graph.Add('default original-softpc-candidate')
     forbiddenInputs = @('src.old', 'bochs-core', 'adapter-bochs')
 } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
 
-Write-Host "Generated T310 S2 original SoftPC candidate graph: $build (CCPU sources: $(@($ccpuNames).Count))"
+Write-Host "Generated T310 S7 original SoftPC machine candidate graph: $build (CCPU sources: $(@($ccpuNames).Count))"

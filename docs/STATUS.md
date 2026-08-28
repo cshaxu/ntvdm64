@@ -4,27 +4,27 @@
 
 ## Active Packet
 
-**Active: M0 T310 S6**
+**Active: M0 T310 S7**
 
-### M0 T310 S6 — CCPU-profile V86/MONITOR implementation removal
+### M0 T310 S7 — original SoftPC machine/device composition recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T310 S6; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | T310's owner-approved S6 plan; the active goal additionally requires physical removal of no-longer-needed V86/kernel-VDM code. S5's selected CCPU profile is now evidenced on x86/x64. |
-| Objective | Remove every physically selected V86, MONITOR, kernel-VDM or Bochs executable implementation input from the original SoftPC CCPU production profile, while retaining only source-shaped interfaces whose modern session/adapter owner is explicit. |
-| Non-goals | Do not delete original CCPU guest-V86 semantics, rewrite SoftPC bodies, remove immutable mirror evidence merely on a lexical match, recreate a kernel VDM/CSRSS shell, or enable devices/BOP families. |
-| Reference Baseline | T310 S5 P1--P7 execution/path/memory evidence; exact S5 x86/x64 source manifests; original `softpc.new` mirrors; existing session mapping manager; T310 S1/S2 ledgers. |
-| Files And ABI Surface | Live SoftPC source manifests and Ninja generators; selected `mvdm-host/softpc.new` execution roots; any reached adapter-mvdm-host-out declarations; test-only fixtures and historical evidence trees only where their classification changes. |
-| Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island and source-recovery rules; approved T310 S6 plan. |
-| Verification | Produce a physical input ledger; prove x86/x64 CCPU graph has no `MONITOR` define, monitor library/body, kernel-VDM executable input, Bochs input or `src.old`; run formal x86/x64 CCPU fixture; governance, diff and source-path checks. |
-| Expected Markers | A per-path retain/delete/move disposition; zero forbidden production inputs; original CCPU guest-V86 files retained only where they are selected interpreter semantics; named adapters for every retained historical declaration. |
-| Asset Needs | Exact source mirrors and manifests, T310 S5 evidence, current formal Ninja graphs, MSVC Build Tools and Ninja. |
-| Reporting Requirements | Record every deleted, moved, retained-interface and retained-interpreter path; distinguish physical build membership from immutable mirror/source evidence; state source owner and modern adapter disposition. |
-| Stop Conditions | A candidate deletion is a selected CCPU interpreter body; removal would violate mirror provenance without an approved evidence relocation; a build selects MONITOR/kernel-VDM/Bochs; or a new external boundary is required. |
-| Exit Criteria | Both x86/x64 selected CCPU graphs contain zero executable MONITOR/kernel-VDM/V86-scaffold/Bochs inputs; all such former production paths are deleted or relocated; every retained historical declaration has a named adapter/unavailable disposition; formal fixtures and governance checks pass. |
+| Identifier Mode | M0 T310 S7; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | T310's owner-approved S7 plan and active owner goal: recover original SoftPC CPU/FPU/RAM/DMA/PIC/PIT/keyboard/mouse/video/internal controller composition, without a Bochs controller substitution. S5 and S6 are closed. |
+| Objective | Compose and prove the original SoftPC minimum machine profile on both x86 and x64: firmware/reset, SAS/A20 memory, PIC/PIT/timer, input, DMA, video/ports, selected startup-media and endpoint teardown in original initialization order. |
+| Non-goals | No kernel VDM, MONITOR, Bochs device/controller fallback, trace-selected BOP repair, optional device expansion, or claim of complete DOS/WOW/BOP product execution. |
+| Reference Baseline | T310 S4 nine-family workset and source manifests; S5 original CCPU/RAM/FPU execution; S6 physical V86/MONITOR cleanup; exact `mvdm-host` and `mvdm-softpc-firmware` mirrors; session mapping manager. |
+| Files And ABI Surface | Original `mvdm-host/softpc.new/base/{bios,system,keymouse,video,disks,comms}` and `host/src` machine roots; immutable firmware inputs; narrowly named adapter-mvdm-host-out softpc/win32/session seams; focused fixtures and formal Ninja manifests. |
+| Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island and source-recovery rules; approved T310 S7 plan. |
+| Verification | Each enabled family compiles from original sources on formal MSVC `/MT` x86/x64 graphs, has focused positive/negative source-shaped evidence, preserves initialization/teardown order, and has no Bochs, MONITOR, kernel-VDM or `src.old` input. |
+| Expected Markers | Original reset chain; initialized firmware/SAS; source-owned PIC/PIT/timer and port state; keyboard/mouse input handling; checked DMA span; basic video port path; startup-media read or original unavailable result; ordered endpoint teardown. |
+| Asset Needs | Original source manifests, firmware/media manifests, S4/S5/S6 evidence, current adapter interfaces, session mapping manager, MSVC Build Tools and Ninja. |
+| Reporting Requirements | For every family record exact selected source files, initialization predecessor/successor, source-recovery rung, adapter owner, mapping/handle rule, x86/x64 build result, positive/negative behavior and unavailable rationale. |
+| Stop Conditions | An original body requires unregistered modification; an adapter would invent a controller or BOP result; a raw host pointer/handle crosses an ABI; a family implicitly selects Bochs/MONITOR/kernel VDM; or a device needs an unclassified external capability. |
+| Exit Criteria | A formal x86/x64 original-SoftPC profile proves `create -> reset -> firmware/machine initialization -> bounded execution -> typed stop -> teardown` with source-owned enabled keyboard input, timer/PIC delivery, basic video/port path and selected startup-media behavior; every unenabled family has the original unavailable direction and named owner. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
-| Similar-Issue Sweep | All T310 CCPU source/build manifests, `MONITOR` and V86 conditionals, `monitor.lib`, adapter monitor forms, Bochs references, old fallback providers, mapping-manager boundaries and `src.old` references. |
+| Similar-Issue Sweep | All nine S4 families, source manifests, reset/create/teardown paths, `MONITOR` and Bochs references, firmware input provenance, public Win32 endpoint bindings, mapping-manager crossings, old fallback providers and `src.old` references. |
 
 **T310 S1 closure:** `6a46ee748` establishes the exact original `ccpu386`,
 `host/src` and `obj.vdm` roots, hashes, historical source roles and a
@@ -201,6 +201,12 @@ aggregate product manifest.  Original CCPU guest-V86 semantics and named
 session/monitor adapter declarations remain correctly distinct.  Formal x86
 and x64 CCPU execution fixtures still pass; see the [S6 evidence]
 (etc/evidence/m0-t310-s6-v86-monitor-profile-removal-001.md).
+
+**T310 S7 P1:** deleted the disabled, project-authored SoftPC patch hook and
+timer fallback bodies.  The only retained NTVDMx64 patch behavior is the
+registered `fmstubs.c` immediate `__debugbreak()` default on both host
+architectures; no mapping-backed, cancellation, zero-result, or timer
+replacement remains available for accidental activation.
 
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
