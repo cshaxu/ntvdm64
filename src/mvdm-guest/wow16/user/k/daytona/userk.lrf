@@ -1,0 +1,8 @@
+k\DAYTONA\wowk.obj k\DAYTONA\wowkr.obj k\DAYTONA\user.obj k\DAYTONA\user1a.obj k\DAYTONA\user2.obj k\DAYTONA\user2a.obj k\DAYTONA\user3.obj k\DAYTONA\user3a.obj k\DAYTONA\user4.obj k\DAYTONA\winrect.obj k\DAYTONA\layer.obj k\DAYTONA\msglayer.obj+
+k\DAYTONA\init.obj k\DAYTONA\rmload.obj k\DAYTONA\wsprintf.obj k\DAYTONA\wclass.obj k\DAYTONA\fastres.obj k\DAYTONA\wowcomm.obj k\DAYTONA\usercli.obj+
+k\DAYTONA\wsphelp.obj k\DAYTONA\net.obj k\DAYTONA\winnet.obj k\DAYTONA\inuserds.obj k\DAYTONA\intds.obj k\DAYTONA\drvr.obj k\DAYTONA\drvrrare.obj k\DAYTONA\winq.obj k\DAYTONA\debug.obj+
+k\DAYTONA\winlang.obj k\DAYTONA\winstr.obj k\DAYTONA\winstack.obj k\DAYTONA\helpcall.obj k\DAYTONA\winhook.obj k\DAYTONA\winmisc2.obj k\DAYTONA\rmcreate.obj
+k\DAYTONA\user.exe
+k\DAYTONA\user.map /map /align:16 /batch /LI
+..\lib\libw.lib ..\lib\system.lib /nod 
+user;

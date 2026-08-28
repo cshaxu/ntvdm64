@@ -1,0 +1,24 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\vcdex.res \
+    $(_OBJ_DIR)\alpha\vcdex.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\vcdex.res \
+    $(_OBJ_DIR)\mips\vcdex.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\vcdex.res \
+    $(_OBJ_DIR)\i386\vcdex.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\vcdex.res \
+    $(_OBJ_DIR)\ppc\vcdex.obj
+
+PASS0_PPC_OBJECTS=
+

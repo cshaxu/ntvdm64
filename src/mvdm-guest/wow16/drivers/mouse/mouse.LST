@@ -1,0 +1,395 @@
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:23 2019
+MOUSE.ASM                                                   Page     1-1
+
+
+			      \	   TITLE   MOUSE.ASM
+			      \	   PAGE    ,132
+			      \	;
+			      \	; WOW v1.0
+			      \	;
+			      \	; Copyright (c) 1991, Microsoft Corporation
+			      \	;
+			      \	; MOUSE.ASM
+			      \	; Thunks in 16-bit space to route Windows API calls to WOW32
+			      \	;
+			      \	; History:
+			      \	;   30-Sept-1992 Chandan Chauhan (ChandanC)
+			      \	;   Created.
+			      \	;
+			      \	; Freehand and ??? need mouse driver.
+			      \	;
+				
+				
+			      \	   .286p
+				
+			      \	    .list
+				
+ = 0000                       \	   __acrtused = 0
+			      \	   public  __acrtused  ;satisfy external C ref.
+				
+				
+			      \	createSeg   _TEXT,CODE,WORD,PUBLIC,CODE
+ 0000                         \	_TEXT segment WORD PUBLIC 'CODE' 
+ 0000                         \	_TEXT ends 
+			      \	createSeg   _DATA,DATA,WORD,PUBLIC,DATA,DGROUP
+ 0000                         \	_DATA segment WORD PUBLIC 'DATA' 
+ 0000                         \	_DATA ends 
+			      \	defgrp     DGROUP,DATA
+				
+			      \	sBegin  DATA
+ 0000                         \	_DATA segment 
+ 0000  0010[                  \	Reserved   db  16 dup (0)      ;reserved for Windows  //!!!!! what is this
+	   00			
+			 ]	
+				
+				
+ 0010  6D 6F 75 73 65         \	mouse_Identifier     db      'mouse'
+				
+			      \	sEnd    DATA
+ 0015                         \	_DATA ends 
+				
+				
+			      \	sBegin  CODE
+ 0000                         \	_TEXT segment 
+			      \	assumes CS,CODE
+			      \	assumes DS,DATA
+			      \	assumes ES,NOTHING
+				
+				
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:23 2019
+MOUSE.ASM                                                   Page     1-2
+
+
+				
+			      \	cProc   MOUSE,<PUBLIC,FAR,PASCAL,NODATA,ATOMIC>
+			      \	   cBegin  <nogen>
+ 0000                         \	MOUSE proc far 
+ 0000  B8 0001                \	   mov ax,1        ;always indicate success
+ 0003  CB                     \	   ret
+			      \	   cEnd    <nogen>
+ 0004                         \	MOUSE endp 
+				
+				
+				
+			      \	;--------------------------Exported-Routine-----------------------------;
+			      \	; int Inquire(lp_mouse_info);
+			      \	;
+			      \	; Information regarding the mouse is returned to the caller.
+			      \	;
+			      \	; Entry:
+			      \	;  None
+			      \	; Returns:
+			      \	;  AX = # bytes returned in lp_mouse_info
+			      \	; Error Returns:
+			      \	;  None
+			      \	; Registers Preserved:
+			      \	;  SI,DI,DS,BP
+			      \	; Registers Destroyed:
+			      \	;  AX,BX,CX,DX,ES,FLAGS
+			      \	;-----------------------------------------------------------------------;
+				
+			      \	   assumes cs,Code
+			      \	   assumes ds,Data
+				
+			      \	cProc  Inquire,<FAR,PUBLIC,WIN,PASCAL>,<di>
+				
+			      \	   parmD   lp_mouse_info
+				
+			      \	cBegin
+ 0004                         \	Inquire proc far 
+ 0004  8C D8                  \		mov	ax,ds 
+ 0006  90                     \		nop 
+ 0007  45                     \		inc	bp 
+ 0008  55                     \		push	bp 
+ 0009  8B EC                  \		mov	bp,sp 
+ 000B  1E                     \		push	ds 
+ 000C  8E D8                  \		mov	ds,ax 
+ 000E  57                     \		push	di 
+ 000F  33 C0                  \	   xor ax, ax
+				
+			      \	cEnd
+ 0011  5F                     \		pop	di 
+ 0012  8D 66 FE               \		lea	sp,-2[bp] 
+ 0015  1F                     \		pop	ds 
+ 0016  5D                     \		pop	bp 
+ 0017  4D                     \		dec	bp 
+ 0018  CA 0004                \		ret	4 
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:23 2019
+MOUSE.ASM                                                   Page     1-3
+
+
+ 001B                         \	Inquire endp 
+				
+				
+				
+				
+			      \	;--------------------------Exported-Routine-----------------------------;
+			      \	; void Enable(lp_event_proc);
+			      \	;
+			      \	; Enable hardware mouse interrupts, with the passed procedure address
+			      \	; being the target of all mouse events.
+			      \	;
+			      \	; This routine may be called while already enabled.  In this case the
+			      \	; passed event procedure should be saved, and all other initialization
+			      \	; skipped.
+			      \	;
+			      \	; Entry:
+			      \	;  None
+			      \	; Returns:
+			      \	;  None
+			      \	; Error Returns:
+			      \	;  None
+			      \	; Registers Preserved:
+			      \	;  SI,DI,DS,BP
+			      \	; Registers Destroyed:
+			      \	;  AX,BX,CX,DX,ES,FLAGS
+			      \	;-----------------------------------------------------------------------;
+				
+			      \	   assumes cs,Code
+			      \	   assumes ds,Data
+				
+			      \	cProc  Enable,<FAR,PUBLIC,WIN,PASCAL>,<si,di>
+				
+			      \	   parmD   new_event_proc
+				
+			      \	cBegin
+ 001B                         \	Enable proc far 
+ 001B  8C D8                  \		mov	ax,ds 
+ 001D  90                     \		nop 
+ 001E  45                     \		inc	bp 
+ 001F  55                     \		push	bp 
+ 0020  8B EC                  \		mov	bp,sp 
+ 0022  1E                     \		push	ds 
+ 0023  8E D8                  \		mov	ds,ax 
+ 0025  56                     \		push	si 
+ 0026  57                     \		push	di 
+				
+			      \	;  The new event procedure is always saved regardless of the
+			      \	;  mouse already being enabled.  This allows the event proc
+			      \	;  to be changed as needed.
+				
+ 0027  33 C0                  \	    xor ax, ax
+				
+			      \	cEnd
+ 0029  5F                     \		pop	di 
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:23 2019
+MOUSE.ASM                                                   Page     1-4
+
+
+ 002A  5E                     \		pop	si 
+ 002B  8D 66 FE               \		lea	sp,-2[bp] 
+ 002E  1F                     \		pop	ds 
+ 002F  5D                     \		pop	bp 
+ 0030  4D                     \		dec	bp 
+ 0031  CA 0004                \		ret	4 
+ 0034                         \	Enable endp 
+				
+			      \	;--------------------------Exported-Routine-----------------------------;
+			      \	; void Disable();
+			      \	;
+			      \	; Disable hardware mouse interrupts, restoring the previous mouse
+			      \	; interrupt handler and 8259 interrupt enable mask.
+			      \	;
+			      \	; This routine may be called while already disabled.  In this case the
+			      \	; disabling should be ignored.
+			      \	;
+			      \	; Entry:
+			      \	;  None
+			      \	; Returns:
+			      \	;  None
+			      \	; Error Returns:
+			      \	;  None
+			      \	; Registers Preserved:
+			      \	;  SI,DI,DS,BP
+			      \	; Registers Destroyed:
+			      \	;  AX,BX,CX,DX,ES,FLAGS
+			      \	;-----------------------------------------------------------------------;
+				
+				
+			      \	   assumes cs,Code
+			      \	   assumes ds,Data
+				
+			      \	cProc  Disable,<FAR,PUBLIC,WIN,PASCAL>,<si,di>
+				
+			      \	cBegin
+ 0034                         \	Disable proc far 
+ 0034  8C D8                  \		mov	ax,ds 
+ 0036  90                     \		nop 
+ 0037  45                     \		inc	bp 
+ 0038  55                     \		push	bp 
+ 0039  8B EC                  \		mov	bp,sp 
+ 003B  1E                     \		push	ds 
+ 003C  8E D8                  \		mov	ds,ax 
+ 003E  56                     \		push	si 
+ 003F  57                     \		push	di 
+ 0040  33 C0                  \	    xor ax, ax
+				
+			      \	cEnd
+ 0042  5F                     \		pop	di 
+ 0043  5E                     \		pop	si 
+ 0044  8D 66 FE               \		lea	sp,-2[bp] 
+ 0047  1F                     \		pop	ds 
+ 0048  5D                     \		pop	bp 
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:23 2019
+MOUSE.ASM                                                   Page     1-5
+
+
+ 0049  4D                     \		dec	bp 
+ 004A  CB                     \		ret	0 
+ 004B                         \	Disable endp 
+				
+			      \	;--------------------------Exported-Routine-----------------------------;
+			      \	; WORD WEP();
+			      \	;
+			      \	; Generic WEP.
+			      \	;
+			      \	; Entry:
+			      \	;  None
+			      \	; Returns:
+			      \	;  AX = 1
+			      \	; Error Returns:
+			      \	;  None
+			      \	; Registers Preserved:
+			      \	;  all
+			      \	; Registers Destroyed:
+			      \	;  none
+			      \	;-----------------------------------------------------------------------;
+				
+				
+			      \	   assumes cs,Code
+			      \	   assumes ds,Data
+				
+			      \	cProc  WEP,<FAR,PUBLIC,WIN,PASCAL>
+			      \	;  parmW   stuff
+			      \	cBegin nogen
+ 004B                         \	WEP proc far 
+ 004B  B8 0001                \	   mov ax,1
+ 004E  CA 0002                \	   ret 2
+			      \	cEnd nogen
+ 0051                         \	WEP endp 
+				
+			      \	;--------------------------Exported-Routine-----------------------------;
+			      \	; int MouseGetIntVect();
+			      \	;
+			      \	; The interrupt vector used by the mouse is returned to the caller.
+			      \	; If no mouse is found, then -1 is returned.
+			      \	;
+			      \	; Entry:
+			      \	;  None
+			      \	; Returns:
+			      \	;  AX = interrupt vector
+			      \	;  AX = -1 if no mouse was found
+			      \	; Error Returns:
+			      \	;  None
+			      \	; Registers Preserved:
+			      \	;  SI,DI,DS,BP
+			      \	; Registers Destroyed:
+			      \	;  AX,BX,CX,DX,ES,FLAGS
+			      \	;-----------------------------------------------------------------------;
+				
+				
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:23 2019
+MOUSE.ASM                                                   Page     1-6
+
+
+			      \	   assumes cs,Code
+			      \	   assumes ds,Data
+				
+			      \	cProc  MouseGetIntVect,<FAR,PUBLIC,WIN,PASCAL>
+				
+			      \	cBegin
+ 0051                         \	MouseGetIntVect proc far 
+ 0051  8C D8                  \		mov	ax,ds 
+ 0053  90                     \		nop 
+ 0054  45                     \		inc	bp 
+ 0055  55                     \		push	bp 
+ 0056  8B EC                  \		mov	bp,sp 
+ 0058  1E                     \		push	ds 
+ 0059  8E D8                  \		mov	ds,ax 
+ 005B  B0 FF                  \	    mov al, -1
+			      \	cEnd
+ 005D  8D 66 FE               \		lea	sp,-2[bp] 
+ 0060  1F                     \		pop	ds 
+ 0061  5D                     \		pop	bp 
+ 0062  4D                     \		dec	bp 
+ 0063  CB                     \		ret	0 
+ 0064                         \	MouseGetIntVect endp 
+				
+				
+				
+			      \	assumes DS,DATA
+				
+			      \	assumes DS,NOTHING
+				
+			      \	sEnd   CODE
+ 0064                         \	_TEXT ends 
+				
+			      \	end MOUSE
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:23 2019
+MOUSE.ASM                                                   Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+DGROUP . . . . . . . . . . . . .  	GROUP
+  _DATA  . . . . . . . . . . . .  	0015	WORD	PUBLIC	'DATA'
+_TEXT  . . . . . . . . . . . . .  	0064	WORD	PUBLIC	'CODE'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+CODEBASE . . . . . . . . . . . .  	ALIAS	 _TEXT		
+CODEOFFSET . . . . . . . . . . .  	TEXT  offset _TEXT:		
+CodeBASE . . . . . . . . . . . .  	ALIAS	 _TEXT		
+CodeOFFSET . . . . . . . . . . .  	TEXT  offset _TEXT:		
+
+DATABASE . . . . . . . . . . . .  	ALIAS	 DGROUP		
+DATAOFFSET . . . . . . . . . . .  	TEXT  offset DGROUP:		
+DEBUG  . . . . . . . . . . . . .  	TEXT  		
+DataBASE . . . . . . . . . . . .  	ALIAS	 DGROUP		
+DataOFFSET . . . . . . . . . . .  	TEXT  offset DGROUP:		
+Disable  . . . . . . . . . . . .  	F PROC	0034	_TEXT	Global	Length = 0017
+
+Enable . . . . . . . . . . . . .  	F PROC	001B	_TEXT	Global	Length = 0019
+
+Inquire  . . . . . . . . . . . .  	F PROC	0004	_TEXT	Global	Length = 0017
+
+lp_mouse_info  . . . . . . . . .  	TEXT  (dword ptr [bp+6])		
+
+MOUSE  . . . . . . . . . . . . .  	F PROC	0000	_TEXT	Global	Length = 0004
+MouseGetIntVect  . . . . . . . .  	F PROC	0051	_TEXT	Global	Length = 0013
+mouse_Identifier . . . . . . . .  	L BYTE	0010	_DATA
+
+new_event_proc . . . . . . . . .  	TEXT  (dword ptr [bp+6])		
+
+off_lp_mouse_info  . . . . . . .  	TEXT  (word ptr [bp+6])		
+off_new_event_proc . . . . . . .  	TEXT  (word ptr [bp+6])		
+
+Reserved . . . . . . . . . . . .  	L BYTE	0000	_DATA	Length = 0010
+
+seg_lp_mouse_info  . . . . . . .  	TEXT  (word ptr [bp+8])		
+seg_new_event_proc . . . . . . .  	TEXT  (word ptr [bp+8])		
+
+WEP  . . . . . . . . . . . . . .  	F PROC	004B	_TEXT	Global	Length = 0006
+WOW  . . . . . . . . . . . . . .  	TEXT  		
+
+?386regs . . . . . . . . . . . .  	NUMBER	0000	
+?QUIET . . . . . . . . . . . . .  	NUMBER	0001	
+@Cpu . . . . . . . . . . . . . .  	TEXT  1415		
+@FileName  . . . . . . . . . . .  	TEXT  mouse		
+@Version . . . . . . . . . . . .  	TEXT  510		
+__acrtused . . . . . . . . . . .  	NUMBER	0000		Global
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:23 2019
+MOUSE.ASM                                                   Symbols-2
+
+
+
+
+   1637 Source  Lines
+   7439 Total   Lines
+    233 Symbols
+      0 Warning Errors
+      0 Severe  Errors

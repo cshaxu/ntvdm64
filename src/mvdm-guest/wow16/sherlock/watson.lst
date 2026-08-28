@@ -1,0 +1,2571 @@
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-1
+
+
+			      \	; Watson.asm - Helper routines for Sherlock
+				
+ = 0001                       \		memS = 1
+ = 0000                       \		?PLM = 0
+ = 0000                       \		?WIN = 0
+ = 0001                       \	        ?QUIET = 1
+			      \	include	cmacros.inc
+			     C\	comment $
+			     C\	cmacros - assembly macros for interfacing to hl
+				ls
+			     C\	(C)Copyright Microsoft Corp. 1984-1988
+			     C\	$
+			     C\	.xcref
+			     C\	.xcref ??_out
+			     C\	??_out macro t
+			     C\	ifndef ?QUIET
+			     C\	%out t
+			     C\	endif
+			     C\	endm
+			     C\	outif macro name,defval,onmsg,offmsg
+			     C\	ifndef name
+			     C\	ifb <defval>
+			     C\	name=0
+			     C\	else
+			     C\	name=defval
+			     C\	endif
+			     C\	endif
+			     C\	if name
+			     C\	name=1
+			     C\	ifnb <onmsg>
+			     C\	??_out <! onmsg>
+			     C\	endif
+			     C\	else
+			     C\	ifnb <offmsg>
+			     C\	??_out <! offmsg>
+			     C\	endif
+			     C\	endif
+			     C\	endm
+			     C\	.xcref ??error
+			     C\	??error macro msg
+			     C\	e r r o r ----- msg
+			     C\	.err
+			     C\	endm
+			     C\	.xcref ASMpass
+			     C\	.xcref memS,memM,memL,memC,memH,memMOD,sizec,si
+				zed
+			     C\	else
+ = 0002                      C\	ASMpass=2
+			     C\	endif
+			     C\	ifdef ?pmd
+			     C\	.286p
+			     C\	endif
+			     C\	else
+			     C\	.xcref ?n,?ax,?ah,?al,?bx,?bh
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-2
+
+
+			     C\	.xcref ?bl,?cx,?ch,?cl,?dx,?dh
+			     C\	.xcref ?dl,?si,?di,?es,?ds,?bp
+			     C\	.xcref ?sp,?ss,?cs
+			     C\	endif
+			     C\	.xcref ?rsl,?cpd,?argl,?argc,?ba
+			     C\	.xcref ?acb,???,?po
+			     C\	.xcref ?pas,?pc
+			     C\	.xcref uconcat,mpush,mpop
+			     C\	.xcref ?ri,?pp,?pp1,?al1
+			     C\	.xcref ?ad,?ap,?atal,?dd,?dd1,?dd2
+			     C\	.xcref ?pg,?pg1,?aloc,?cs1,?cs2
+			     C\	.xcref ?DF,?TF,?ff,?PLM,?WIN,?ia,?pu,?adj
+			     C\	.xcref ?uf,?rp,?nx,?nd,?nodata1,?chkstk1,?DOS5,
+				?pmd,?lds,?exp
+			     C\	.xcref ?wfp,arg,cCall,cProc,assumes,?cs3,?cs2,?
+				cs1
+			     C\	.xcref defgrp,addseg,createSeg
+			     C\	.xcref save,outif,errnz,errn$,errnz1
+			     C\	.xcref ?PLMPrevParm,?gcc
+			     C\	.xcref ?cCall1,?pcc
+ = 0000                      C\	?rsl = 0
+ = 0000                      C\	?cpd = 0
+ = 0000                      C\	?argl = 0
+ = 0000                      C\	?argc = 0
+ = 0000                      C\	?ba = 0
+ = 0000                      C\	?acb = 0
+ = 0000                      C\	??? = 0
+ = 0000                      C\	?po = 0
+ = 0000                      C\	?pas = 0
+ = 0000                      C\	?pc = 0
+ = 0000                      C\	?ia = 0
+ = 0000                      C\	?pu = 0
+ = 0000                      C\	?adj = 0
+ = 0000                      C\	?rp = 0
+ = 0000                      C\	?uf = 0
+ = 0000                      C\	?nd = 0
+ = 0000                      C\	?nx = 0
+ = 0000                      C\	?wfp = 0
+ = 0000                      C\	?lds = 0
+ = 0000                      C\	?exp = 0
+ = 0000                      C\	?ff = 0
+ = 0000                      C\	?dd2 = 0
+ = 0000                      C\	?cCall1 = 0
+ = 0000                      C\	?pcc = 0
+ = 0000                      C\	?PLMPrevParm = 0
+			     C\	.xcref ?casen
+			     C\	else
+ = 0000                      C\	?n = 0000000000000000b
+ = 0003                      C\	?ax = 0000000000000011b
+ = 0001                      C\	?ah = 0000000000000001b
+ = 0002                      C\	?al = 0000000000000010b
+ = 000C                      C\	?bx = 0000000000001100b
+ = 0004                      C\	?bh = 0000000000000100b
+ = 0008                      C\	?bl = 0000000000001000b
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-3
+
+
+ = 0030                      C\	?cx = 0000000000110000b
+ = 0010                      C\	?ch = 0000000000010000b
+ = 0020                      C\	?cl = 0000000000100000b
+ = 00C0                      C\	?dx = 0000000011000000b
+ = 0040                      C\	?dh = 0000000001000000b
+ = 0080                      C\	?dl = 0000000010000000b
+ = 0100                      C\	?si = 0000000100000000b
+ = 0200                      C\	?di = 0000001000000000b
+ = 0400                      C\	?es = 0000010000000000b
+ = 0800                      C\	?ds = 0000100000000000b
+ = 1000                      C\	?bp = 0001000000000000b
+ = 2000                      C\	?sp = 0010000000000000b
+ = 4000                      C\	?ss = 0100000000000000b
+ = 8000                      C\	?cs = 1000000000000000b
+			     C\	endif
+			     C\	.cref
+			     C\	uconcat macro a,b,c,d,e,f,g
+			     C\	a&b c&d e&f&g
+			     C\	endm
+			     C\	else
+			     C\	mpush macro r
+			     C\	irp x,<ax,bx,cx,dx,si,di,es,ds,bp,sp,ss,cs>
+			     C\	if (r and ?&&x)
+			     C\		push	x
+			     C\	endif
+			     C\	endm
+			     C\	endm
+			     C\	endif
+			     C\	else
+			     C\	mpop macro r
+			     C\	irp x,<cs,ss,sp,bp,ds,es,di,si,dx,cx,bx,ax>
+			     C\	if (r and ?&&x)
+			     C\		pop	x
+			     C\	endif
+			     C\	endm
+			     C\	endm
+			     C\	endif
+			     C\	save macro r
+			     C\	?rsl=0
+			     C\	?ri ?rsl,<r>
+			     C\	endm
+			     C\	?ri macro n,r
+			     C\	irp x,<r>
+			     C\	.ERRNDEF ?&&x
+			     C\	n=n or ?&&x
+			     C\	endm
+			     C\	endm
+			     C\	.xcref
+			     C\	.xcref parmB,parmW,parmD,parmQ,parmT,parmCP,par
+				mDP
+			     C\	.cref
+			     C\	parmB macro n
+			     C\	?pp <n>,<byte>,2,1
+			     C\	endm
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-4
+
+
+			     C\	parmW macro n
+			     C\	?pp <n>,<word>,2,2
+			     C\	endm
+			     C\	parmD macro n
+			     C\	ife ?PLM
+			     C\	irp x,<n>
+			     C\	?pp <&&x>,<dword>,0,4
+			     C\	?pp <off_&&x>,<word>,2,2
+			     C\	?pp <seg_&&x>,<word>,2,2
+			     C\	endm
+			     C\	else
+			     C\	irp x,<n>
+			     C\	?pp <seg_&&x>,<word>,2,2
+			     C\	?pp <off_&&x>,<word>,2,2
+			     C\	?pp <&&x>,<dword>,0,4
+			     C\	endm
+			     C\	endif
+			     C\	endm
+			     C\	parmQ macro n
+			     C\	?pp <n>,<qword>,8,8
+			     C\	endm
+			     C\	parmT macro n
+			     C\	?pp <n>,<tbyte>,10,10
+			     C\	endm
+			     C\	else
+			     C\	parmCP macro n
+			     C\	parmW <n>
+			     C\	endm
+			     C\	endif
+			     C\	else
+			     C\	parmDP macro n
+			     C\	parmW <n>
+			     C\	endm
+			     C\	endif
+			     C\	?pp macro n,t,l,s
+			     C\	if ?cpd
+			     C\	.xcref
+			     C\	irp x,<n>
+			     C\	.xcref ?t&&x
+			     C\	?t&&x=s
+			     C\	ife ?PLM
+			     C\	?pp1 x,<t>,,,%(?po+?adj)
+			     C\	?po=?po+l
+			     C\	else
+			     C\	?PLMPrevParm=?PLMPrevParm+1
+			     C\	?po=?po+l
+			     C\	?pp1 x,<t>,%?po,%?adj,,%?PLMPrevParm,%(?PLMPrev
+				Parm-1)
+			     C\	endif
+			     C\	endm
+			     C\	.cref
+			     C\	else
+			     C\	??error <parm(s) "&n" declared outside proc def
+				>
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-5
+
+
+			     C\	endif
+			     C\	endm
+			     C\	?pp1 macro n,t,o,a,b,cpc,ppc
+			     C\	ife ?PLM
+			     C\	n equ (t ptr [bp+b])
+			     C\	else
+			     C\	.xcref
+			     C\	.xcref ?PLMParm&cpc
+			     C\	.cref
+			     C\	?PLMParm&cpc &macro po
+			     C\	uconcat <n>,,<equ>,,<(t ptr [bp+>,%(a+po-o),<])
+				>
+			     C\	?PLMParm&ppc po
+			     C\	purge ?PLMParm&cpc
+			     C\	&endm
+			     C\	endif
+			     C\	endm
+			     C\	ifndef ?NOPARMR
+			     C\	else
+			     C\	.xcref
+			     C\	.xcref ?pr,parmR
+			     C\	.cref
+			     C\	parmR macro n,r,r2
+			     C\	?pr n,r,r2,%?rp,%(?ia+2)
+			     C\	endm
+			     C\	?pr macro n,r,r2,i,o
+			     C\	.xcref
+			     C\	ifnb <r2>
+			     C\	parmR seg_&n,r
+			     C\	parmR off_&n,r2
+			     C\	n equ (dword ptr [bp-o-2])
+			     C\	.xcref ?t&n
+			     C\	?t&n=4
+			     C\	else
+			     C\	.xcref ?rp&i
+			     C\	?rp&i=0
+			     C\	ifdef ?&r
+			     C\	?rp&i=?&r
+			     C\	endif
+			     C\	if ??? or (?cpd eq 0) or (?rp&i eq 0)
+			     C\	??error <invalid parmR encountered: &n,&r>
+			     C\	exitm
+			     C\	endif
+			     C\	n equ (word ptr [bp-o])
+			     C\	?t&n=2
+			     C\	irp x,<bh,ch,dh,bl,cl,dl,ah,al>
+			     C\	if ?&&x eq ?&r
+			     C\	n equ (byte ptr [bp-o])
+			     C\	?t&n=1
+			     C\	exitm
+			     C\	endif
+			     C\	endm
+			     C\	?ia=?ia+2
+			     C\	?rp=?rp+1
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-6
+
+
+			     C\	endif
+			     C\	.cref
+			     C\	endm
+			     C\	endif
+			     C\	endif
+			     C\	.xcref
+			     C\	.xcref localB,localW,localD,localQ,localT,local
+				CP,localDP,localV
+			     C\	.cref
+			     C\	localB macro n
+			     C\	?aloc <n>,<byte ptr>,1,1,0
+			     C\	endm
+			     C\	localW macro n
+			     C\	?aloc <n>,<word ptr>,2,2,1
+			     C\	endm
+			     C\	localD macro n
+			     C\	irp x,<n>
+			     C\	?aloc <seg_&&x>,<word ptr>,2,2,1
+			     C\	?aloc <off_&&x>,<word ptr>,2,2,1
+			     C\	?aloc <&&x>,<dword ptr>,0,4,1
+			     C\	endm
+			     C\	endm
+			     C\	localQ macro n
+			     C\	?aloc <n>,<qword ptr>,8,8,1
+			     C\	endm
+			     C\	localT macro n
+			     C\	?aloc <n>,<tbyte ptr>,10,10,1
+			     C\	endm
+			     C\	else
+			     C\	localCP macro n
+			     C\	localW <n>
+			     C\	endm
+			     C\	endif
+			     C\	else
+			     C\	localDP macro n
+			     C\	localW <n>
+			     C\	endm
+			     C\	endif
+			     C\	localV macro n,a
+			     C\	?aloc <n>,,%(a),0,1
+			     C\	endm
+			     C\	?aloc macro n,t,l,s,a
+			     C\	if ?cpd
+			     C\	.xcref
+			     C\	irp x,<n>
+			     C\	???=???+l
+			     C\	if a
+			     C\	???=((??? + 1) and 0fffeh)
+			     C\	endif
+			     C\	?al1 x,<t>,%(???+?ia)
+			     C\	.xcref ?t&&x
+			     C\	?t&&x=s
+			     C\	endm
+			     C\	.cref
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-7
+
+
+			     C\	else
+			     C\	??error <locals "&n" declared outside procedure
+				 def>
+			     C\	endif
+			     C\	endm
+			     C\	?al1 macro n,t,o
+			     C\	n equ (t [bp-o])
+			     C\	endm
+			     C\	?gcc macro s,i,cc
+			     C\	s = i
+			     C\	ifnb <cc>
+			     C\	ifidn <cc>,<C>
+			     C\	s=0
+			     C\	endif
+			     C\	ifidn <cc>,<PLM>
+			     C\	s=1
+			     C\	endif
+			     C\	ifidn <cc>,<PASCAL>
+			     C\	s=1
+			     C\	endif
+			     C\	endif
+			     C\	endm
+			     C\	ifndef ?NOGLOBAL
+			     C\	.xcref
+			     C\	.xcref globalB,globalW,globalD,globalQ,globalT,
+				globalCP,globalDP
+			     C\	.cref
+			     C\	globalB macro n,i,s,c
+			     C\	?ad <n>,1
+			     C\	?dd n,1,<byte>,<db>,<i>,<s>,<c>
+			     C\	endm
+			     C\	globalW macro n,i,s,c
+			     C\	?ad <n>,2
+			     C\	?dd n,1,<word>,<dw>,<i>,<s>,<c>
+			     C\	endm
+			     C\	globalD macro n,i,s,c
+			     C\	?ad <n>,4
+			     C\	?dd n,1,<dword>,<dd>,<i>,<s>,<c>
+			     C\	off_&n equ n
+			     C\	seg_&n equ n[2]
+			     C\	endm
+			     C\	globalQ macro n,i,s,c
+			     C\	?ad <n>,8
+			     C\	?dd n,1,<qword>,<dq>,<i>,<s>,<c>
+			     C\	endm
+			     C\	globalT macro n,i,s,c
+			     C\	?ad <n>,10
+			     C\	?dd n,1,<tbyte>,<dt>,<i>,<s>,<c>
+			     C\	endm
+			     C\	else
+			     C\	globalCP macro n,i,s,c
+			     C\	globalW n,<i>,<s>,<c>
+			     C\	endm
+			     C\	endif
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-8
+
+
+			     C\	else
+			     C\	globalDP macro n,i,s,c
+			     C\	globalW n,<i>,<s>,<c>
+			     C\	endm
+			     C\	endif
+			     C\	endif
+			     C\	ifndef ?NOSTATIC
+			     C\	.xcref
+			     C\	.xcref staticB,staticW,staticD,staticQ,staticT,
+				staticCP,staticDP
+			     C\	.cref
+			     C\	staticB macro n,i,s
+			     C\	?ad <n>,1
+			     C\	?dd n,0,<byte>,<db>,<i>,<s>,<PLM>
+			     C\	endm
+			     C\	staticW macro n,i,s
+			     C\	?ad <n>,2
+			     C\	?dd n,0,<word>,<dw>,<i>,<s>,<PLM>
+			     C\	endm
+			     C\	staticD macro n,i,s
+			     C\	?ad <n>,4
+			     C\	?dd n,0,<dword>,<dd>,<i>,<s>,<PLM>
+			     C\	endm
+			     C\	staticQ macro n,i,s
+			     C\	?ad <n>,8
+			     C\	?dd n,0,<qword>,<dq>,<i>,<s>,<PLM>
+			     C\	endm
+			     C\	staticT macro n,i,s
+			     C\	?ad <n>,10
+			     C\	?dd n,0,<tbyte>,<dt>,<i>,<s>,<PLM>
+			     C\	endm
+			     C\	else
+			     C\	staticCP macro n,i,s
+			     C\	staticW n,<i>,<s>
+			     C\	endm
+			     C\	endif
+			     C\	else
+			     C\	staticDP macro n,i,s
+			     C\	staticW n,<i>,<s>
+			     C\	endm
+			     C\	endif
+			     C\	endif
+			     C\	?dd macro n,p,t,d,i,s,c
+			     C\	?gcc ?dd2,%?PLM,<c>
+			     C\	ife ?dd2
+			     C\	n label t
+			     C\	?dd1 _&n,p,<d>,<i>,<s>
+			     C\	else
+			     C\	?dd1 n,p,<d>,<i>,<s>
+			     C\	endif
+			     C\	endm
+			     C\	?dd1 macro n,p,d,i,s
+			     C\	if p
+			     C\	public n
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-9
+
+
+			     C\	endif
+			     C\	ifb <s>
+			     C\	n d i
+			     C\	else
+			     C\	ifb <i>
+			     C\	n d s dup (?)
+			     C\	else
+			     C\	n d s dup (i)
+			     C\	endif
+			     C\	endif
+			     C\	endm
+			     C\	ifndef ?NOEXTERN
+			     C\	.xcref
+			     C\	.xcref ?ex1,?ex2,externB,externW,externD,extern
+				Q,externT
+			     C\	.xcref externNP,externFP,externP,externCP,exter
+				nDP,externA
+			     C\	.cref
+ = 0000                      C\	?ex2 = 0
+			     C\	externA macro n,c
+			     C\	?ex1 <n>,40h,<abs>,<c>,<>
+			     C\	endm
+			     C\	externB macro n,c
+			     C\	?ex1 <n>,1,<byte>,<c>,<>
+			     C\	endm
+			     C\	externW macro n,c
+			     C\	?ex1 <n>,2,<word>,<c>,<>
+			     C\	endm
+			     C\	externD macro n,c
+			     C\	?ex1 <n>,4,<dword>,<c>,<>
+			     C\	endm
+			     C\	externQ macro n,c
+			     C\	?ex1 <n>,8,<qword>,<c>,<>
+			     C\	endm
+			     C\	externT macro n,c
+			     C\	?ex1 <n>,10,<tbyte>,<c>,<>
+			     C\	endm
+			     C\	externNP macro n,c
+			     C\	?ex1 <n>,2,<near>,<c>,<cc>
+			     C\	endm
+			     C\	externFP macro n,c
+			     C\	?ex1 <n>,4,<far>,<c>,<cc>
+			     C\	endm
+			     C\	else
+			     C\	externP macro n,c
+			     C\	?ex1 <n>,2,<near>,<c>,<cc>
+			     C\	endm
+			     C\	endif
+			     C\	else
+			     C\	externCP macro n,c
+			     C\	?ex1 <n>,2,<word>,<c>,<>
+			     C\	endm
+			     C\	endif
+			     C\	else
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-10
+
+
+			     C\	externDP macro n,c
+			     C\	?ex1 <n>,2,<word>,<c>,<>
+			     C\	endm
+			     C\	endif
+			     C\	?ex1 macro n,s,d,c,scv
+			     C\	?gcc ?ex2,%?PLM,<c>
+			     C\	irp x,<n>
+			     C\	.xcref
+			     C\	.xcref ?t&&x
+			     C\	.cref
+			     C\	?t&&x=s
+			     C\	ife ?ex2
+			     C\	extrn _&&x:&d
+			     C\	x equ _&&x
+			     C\	else
+			     C\	extrn x:&d
+			     C\	endif
+			     C\	ifidn <scv>,<cc>
+			     C\	.xcref
+			     C\	.xcref ?CC&&x
+			     C\	.cref
+			     C\	?CC&&x=?ex2
+			     C\	endif
+			     C\	endm
+			     C\	endm
+			     C\	endif
+			     C\	ifndef ?NOLABEL
+			     C\	.xcref
+			     C\	.xcref ?lb1,?lblpu,?lb2
+			     C\	.xcref labelB,labelW,labelD,labelQ,labelT
+			     C\	.xcref labelNP,labelFP,labelP,labelCP,labelDP
+			     C\	.cref
+ = 0000                      C\	?lblpu = 0
+ = 0000                      C\	?lb2 = 0
+			     C\	labelB macro n,c
+			     C\	?lb1 <n>,1,<byte>,<c>
+			     C\	endm
+			     C\	labelW macro n,c
+			     C\	?lb1 <n>,2,<word>,<c>
+			     C\	endm
+			     C\	labelD macro n,c
+			     C\	?lb1 <n>,4,<dword>,<c>
+			     C\	endm
+			     C\	labelQ macro n,c
+			     C\	?lb1 <n>,8,<qword>,<c>
+			     C\	endm
+			     C\	labelT macro n,c
+			     C\	?lb1 <n>,10,<tbyte>,<c>
+			     C\	endm
+			     C\	labelNP macro n,c
+			     C\	?lb1 <n>,2,<near>,<c>
+			     C\	endm
+			     C\	labelFP macro n,c
+			     C\	?lb1 <n>,4,<far>,<c>
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-11
+
+
+			     C\	endm
+			     C\	else
+			     C\	labelP macro n,c
+			     C\	?lb1 <n>,2,<near>,<c>
+			     C\	endm
+			     C\	endif
+			     C\	else
+			     C\	labelCP macro n,c
+			     C\	?lb1 <n>,2,<word>,<c>
+			     C\	endm
+			     C\	endif
+			     C\	else
+			     C\	labelDP macro n,c
+			     C\	?lb1 <n>,2,<word>,<c>
+			     C\	endm
+			     C\	endif
+			     C\	?lb1 macro n,s,d,c
+			     C\	?gcc ?lb2,%?PLM,<c>
+			     C\	?lblpu=0
+			     C\	irp x,<n>
+			     C\	ifidn <x>,<PUBLIC>
+			     C\	?lblpu=1
+			     C\	else
+			     C\	.xcref
+			     C\	.xcref ?t&&x
+			     C\	.cref
+			     C\	?t&&x=s
+			     C\	ife ?lb2
+			     C\	if ?lblpu
+			     C\	public _&&x
+			     C\	endif
+			     C\	_&&x label &d
+			     C\	x equ _&&x
+			     C\	else
+			     C\	if ?lblpu
+			     C\	public x
+			     C\	endif
+			     C\	x label &d
+			     C\	endif
+			     C\	endif
+			     C\	endm
+			     C\	endm
+			     C\	endif
+			     C\	ifndef ?NODEF
+			     C\	.xcref
+			     C\	.xcref defB,defW,defD,defQ,defT,defCP,defDP
+			     C\	.cref
+			     C\	defB macro n
+			     C\	?ad <n>,1
+			     C\	endm
+			     C\	defW macro n
+			     C\	?ad <n>,2
+			     C\	endm
+			     C\	defD macro n
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-12
+
+
+			     C\	?ad <n>,4
+			     C\	endm
+			     C\	defQ macro n
+			     C\	?ad <n>,8
+			     C\	endm
+			     C\	defT macro n
+			     C\	?ad <n>,10
+			     C\	endm
+			     C\	else
+			     C\	defCP macro n
+			     C\	defW <n>
+			     C\	endm
+			     C\	endif
+			     C\	else
+			     C\	defDP macro n
+			     C\	defW <n>
+			     C\	endm
+			     C\	endif
+			     C\	endif
+			     C\	?ad macro n,s
+			     C\	irp x,<n>
+			     C\	.xcref
+			     C\	.xcref ?t&&x
+			     C\	.cref
+			     C\	?t&&x=s
+			     C\	endm
+			     C\	endm
+			     C\	ifndef ?NOPTR
+			     C\	.xcref
+			     C\	.xcref regPtr,farPtr
+			     C\	.cref
+			     C\	regPtr macro n,s,o
+			     C\	farPtr n,s,o
+			     C\	endm
+			     C\	farPtr macro n,s,o
+			     C\	.xcref
+			     C\	.xcref ?t&n
+			     C\	.cref
+			     C\	n &macro
+			     C\		push	s
+			     C\		push	o
+			     C\	&endm
+			     C\	?t&n=80h
+			     C\	endm
+			     C\	endif
+			     C\	arg macro a
+			     C\	irp x,<a>
+			     C\	?argc=?argc+1
+			     C\	?atal <x>,%?argc
+			     C\	endm
+			     C\	endm
+			     C\	?atal macro n,i
+			     C\	.xcref
+			     C\	.xcref ?ali&i
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-13
+
+
+			     C\	.cref
+			     C\	?ali&i &macro
+			     C\	?ap n
+			     C\	&endm
+			     C\	endm
+			     C\	?ap macro n
+			     C\	?argl=?argl+2
+			     C\	ifdef ?t&n
+			     C\	ife ?t&n-1
+			     C\		push	word ptr (n)
+			     C\	exitm
+			     C\	endif
+			     C\	ife ?t&n-2
+			     C\		push	n
+			     C\	exitm
+			     C\	endif
+			     C\	ife ?t&n-4
+			     C\		push	word ptr (n)[2]
+			     C\		push	word ptr (n)
+			     C\	?argl=?argl+2
+			     C\	exitm
+			     C\	endif
+			     C\	ife ?t&n-8
+			     C\		push	word ptr (n)[6]
+			     C\		push	word ptr (n)[4]
+			     C\		push	word ptr (n)[2]
+			     C\		push	word ptr (n)
+			     C\	?argl=?argl+6
+			     C\	exitm
+			     C\	endif
+			     C\	if ?t&n and 80h
+			     C\	n
+			     C\	?argl=?argl+2
+			     C\	exitm
+			     C\	endif
+			     C\	ife ?t&n
+			     C\		push	word ptr (n)
+			     C\	exitm
+			     C\	endif
+			     C\	endif
+			     C\		push	n
+			     C\	endm
+			     C\	cCall macro n,a,c
+			     C\	ifnb <a>
+			     C\	arg <a>
+			     C\	endif
+			     C\	mpush %?rsl
+			     C\	ifdef ?CC&n
+			     C\	?cCall1=?CC&n
+			     C\	else
+			     C\	?cCall1=?PLM
+			     C\	endif
+			     C\	ifnb <c>
+			     C\	?gcc ?cCall1,%?cCall1,<c>
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-14
+
+
+			     C\	endif
+			     C\	?argl=0
+			     C\	ife ?cCall1
+			     C\	?acb=?argc
+			     C\	else
+			     C\	?acb=1
+			     C\	endif
+			     C\	rept ?argc
+			     C\	uconcat <?ali>,%?acb
+			     C\	uconcat <purge>,,<?ali>,%?acb
+			     C\	ife ?cCall1
+			     C\	?acb=?acb-1
+			     C\	else
+			     C\	?acb=?acb+1
+			     C\	endif
+			     C\	endm
+			     C\		call	n
+			     C\	if ((?cCall1 eq 0) and (?argl ne 0))
+			     C\		add	sp,?argl
+			     C\	endif
+			     C\	mpop %?rsl
+			     C\	?rsl=0
+			     C\	?argc= 0
+			     C\	?argl= 0
+			     C\	endm
+			     C\	cProc macro n,cf,a
+			     C\	if ?cpd
+			     C\	?utpe
+			     C\	endif
+			     C\	?cpd=1
+			     C\	???=0
+			     C\	?argc=0
+			     C\	?ba=0
+			     C\	?po=0
+			     C\	?pu=0
+			     C\	?ia=0
+			     C\	?adj=4
+			     C\	?rp=0
+			     C\	?uf=0
+			     C\	?wfp=?WIN
+			     C\	?ff=0
+			     C\	?pas=0
+			     C\	?pcc=?PLM
+			     C\	?lds=0
+			     C\	?exp=0
+			     C\	ifnb <a>
+			     C\	?ri ?pas,<a>
+			     C\	endif
+			     C\	?pc=sizec
+			     C\	?nd=?nodata1
+			     C\	?nx=0
+			     C\	irp x,<cf>
+			     C\	ifidn <x>,<FAR>
+			     C\	?pc=1
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-15
+
+
+			     C\	endif
+			     C\	ifidn <x>,<NEAR>
+			     C\	?pc=0
+			     C\	endif
+			     C\	ifidn <x>,<PUBLIC>
+			     C\	?pu=1
+			     C\	endif
+			     C\	ifidn <x>,<SMALL>
+			     C\	?uf=1
+			     C\	endif
+			     C\	ifidn <x>,<DATA>
+			     C\	?nd=0
+			     C\	endif
+			     C\	ifidn <x>,<NODATA>
+			     C\	?nd=1
+			     C\	endif
+			     C\	ifidn <x>,<ATOMIC>
+			     C\	?nx=1
+			     C\	endif
+			     C\	ifidn <x>,<C>
+			     C\	?pcc=0
+			     C\	endif
+			     C\	ifidn <x>,<PLM>
+			     C\	?pcc=1
+			     C\	endif
+			     C\	ifidn <x>,<PASCAL>
+			     C\	?pcc=1
+			     C\	endif
+			     C\	ifidn <x>,<WIN>
+			     C\	?wfp=1
+			     C\	endif
+			     C\	ifidn <x>,<NONWIN>
+			     C\	?wfp=0
+			     C\	endif
+			     C\	ifidn <x>,<LOADDS>
+			     C\	?lds=1
+			     C\	endif
+			     C\	ifidn <x>,<EXPORTED>
+			     C\	?exp=1
+			     C\	endif
+			     C\	endm
+			     C\	if ?pcc
+			     C\	?PLMPrevParm=0
+			     C\	.xcref
+			     C\	.xcref ?PLMParm0
+			     C\	.cref
+			     C\	?PLMParm0 &macro
+			     C\	purge ?PLMParm0
+			     C\	&endm
+			     C\	endif
+			     C\	.xcref
+			     C\	.xcref ?CC&n
+			     C\	.cref
+			     C\	?CC&n=?pcc
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-16
+
+
+			     C\	if (?nx eq 1) and (?nd eq 0)
+			     C\	?nx = 0
+			     C\	??error <ATOMIC specified without NODATA - ATOM
+				IC ignored>
+			     C\	endif
+			     C\	if ?pc
+			     C\	if ?wfp+?exp+?lds
+			     C\	ife ?nx
+			     C\	ife ?pmd
+			     C\	?ia=2
+			     C\	endif
+			     C\	?pas = ?pas and (not ?ds)
+			     C\	endif
+			     C\	endif
+			     C\	?adj=?adj+2
+			     C\	else
+			     C\	?wfp=0
+			     C\	endif
+			     C\	ife ?386regs
+			     C\	?pas = ?pas and (not (?sp+?cs+?ss))
+			     C\	endif
+			     C\	if ?uf
+			     C\	if ?386regs
+			     C\	?pas = ?pas and (not (?si+?di))
+			     C\	else
+			     C\	?pas = ?pas and (not (?bp+?si+?di))
+			     C\	endif
+			     C\	endif
+			     C\	ife ?pcc
+			     C\	?pg <_&n>,%?pu,%?pc,%?pas,%?wfp,<n>,%?pcc
+			     C\	else
+			     C\	?pg <n>,%?pu,%?pc,%?pas,%?wfp,<n>,%?pcc
+			     C\	endif
+			     C\	endm
+			     C\	?pg macro n,p,c,a,w,nnu,cc
+			     C\	.xcref
+			     C\	if ?uf
+			     C\	if ?nd
+			     C\	??error <NODATA encountered in &n - user frame 
+				ignored>
+			     C\	?uf=0
+			     C\	endif
+			     C\	endif
+			     C\	.xcref cBegin
+			     C\	cBegin &macro g
+			     C\	.xcref
+			     C\	if cc
+			     C\	uconcat <?PLMParm>,%?PLMPrevParm,%?po
+			     C\	endif
+			     C\	if ?uf
+			     C\	if ?rp
+			     C\	??error <parmR encountered in &n - user frame i
+				gnored>
+			     C\	?uf=0
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-17
+
+
+			     C\	endif
+			     C\	endif
+			     C\	?pg1 <n>,c,a,%?po,w,%?uf,%?nd,%?rp,cc
+			     C\	?cpd=0
+			     C\	?argc=0
+			     C\	?ba=1
+			     C\	???=(???+1) and 0fffeh
+			     C\	if p
+			     C\	public n
+			     C\	endif
+			     C\	ife c
+			     C\	n proc near
+			     C\	else
+			     C\	n proc far
+			     C\	endif
+			     C\	ife cc
+			     C\	nnu equ n
+			     C\	endif
+			     C\	ifidn <g>,<nogen>
+			     C\	if ???+?po+a+?rp
+			     C\	??_out <cBegin - possible invalid use of nogen>
+			     C\	endif
+			     C\	else
+			     C\	if ?uf
+			     C\	?mf c,%???,%?po
+			     C\	mpush a
+			     C\	else
+			     C\	if w+?exp+?lds
+			     C\	if ?pmd
+			     C\	ife ?nd
+			     C\	if ?lds
+			     C\	mov ax,_DATA
+			     C\	else
+			     C\	if ?exp
+			     C\	mov ax,ds
+			     C\	nop
+			     C\	endif
+			     C\	endif
+			     C\	endif
+			     C\	ife ?nx
+			     C\	if ???+?po
+			     C\	if ?chkstk1
+			     C\	push bp
+			     C\	mov bp,sp
+			     C\	else
+			     C\	if ???
+			     C\	enter ???,0
+			     C\	else
+			     C\	push bp
+			     C\	mov bp,sp
+			     C\	endif
+			     C\	endif
+			     C\	endif
+			     C\	push ds
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-18
+
+
+			     C\	if ?lds+?exp
+			     C\	mov ds,ax
+			     C\	endif
+			     C\	else
+			     C\	if ?ff+???+?po+?rp
+			     C\		push	bp
+			     C\		mov	bp,sp
+			     C\	endif
+			     C\	endif
+			     C\	else
+			     C\	ife ?nd
+			     C\		mov	ax,ds
+			     C\		nop
+			     C\	endif
+			     C\	ife ?nx
+			     C\	ife ?DOS5
+			     C\		inc	bp
+			     C\	endif
+			     C\		push	bp
+			     C\		mov	bp,sp
+			     C\		push	ds
+			     C\	else
+			     C\	if ?ff+???+?po+?rp
+			     C\		push	bp
+			     C\		mov	bp,sp
+			     C\	endif
+			     C\	endif
+			     C\	ife ?nd
+			     C\		mov	ds,ax
+			     C\	endif
+			     C\	endif
+			     C\	else
+			     C\	if ?pmd
+			     C\	if ?exp
+			     C\	mov ax,ds
+			     C\	nop
+			     C\	else
+			     C\	if ?lds
+			     C\	mov ax,_DATA
+			     C\	endif
+			     C\	endif
+			     C\	if ?ff+???+?po+?rp
+			     C\	if ?chkstk1
+			     C\	push bp
+			     C\	mov bp,sp
+			     C\	else
+			     C\	if ???
+			     C\	enter ???,0
+			     C\	else
+			     C\	push bp
+			     C\	mov bp,sp
+			     C\	endif
+			     C\	endif
+			     C\	endif
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-19
+
+
+			     C\	if ?exp+?lds
+			     C\	push ds
+			     C\	mov ds,ax
+			     C\	endif
+			     C\	else
+			     C\	if ?ff+???+?po+?rp
+			     C\		push	bp
+			     C\		mov	bp,sp
+			     C\	endif
+			     C\	endif
+			     C\	endif
+			     C\	if ?rp
+			     C\	?uf=0
+			     C\	rept ?rp
+			     C\	uconcat mpush,,?rp,%?uf
+			     C\	?uf=?uf+1
+			     C\	endm
+			     C\	endif
+			     C\	if ???
+			     C\	if ?chkstk1
+			     C\	ifdef ?CHKSTKPROC
+			     C\	?CHKSTKPROC %???
+			     C\	else
+			     C\		mov	ax,???
+			     C\	ife cc
+			     C\		call	_chkstk
+			     C\	else
+			     C\		call	chkstk
+			     C\	endif
+			     C\	endif
+			     C\	else
+			     C\	ife ?pmd
+			     C\		sub	sp,???
+			     C\	endif
+			     C\	endif
+			     C\	endif
+			     C\	mpush a
+			     C\	endif
+			     C\	ifdef ?PROFILE
+			     C\	if c
+			     C\		call	StartNMeas
+			     C\	endif
+			     C\	endif
+			     C\	endif
+			     C\	.cref
+			     C\	purge cBegin
+			     C\	&endm
+			     C\	.xcref ?utpe
+			     C\	?utpe &macro
+			     C\	??error <unterminated procedure definition: "&n
+				">
+			     C\	&endm
+			     C\	.cref
+			     C\	endm
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-20
+
+
+			     C\	?pg1 macro n,c,a,o,w,f,d,r,cc
+			     C\	.xcref
+			     C\	.xcref cEnd
+			     C\	cEnd &macro g
+			     C\	.xcref
+			     C\	?ba=0
+			     C\	ifidn <g>,<nogen>
+			     C\	if o+a+r
+			     C\	??_out <cEnd - possible invalid use of nogen>
+			     C\	endif
+			     C\	else
+			     C\	ifdef ?PROFILE
+			     C\	if c
+			     C\	call StopNMeas
+			     C\	endif
+			     C\	endif
+			     C\	mpop a
+			     C\	if f
+			     C\		db	0c3h
+			     C\	else
+			     C\	if w+?exp+?lds
+			     C\	if ?pmd
+			     C\	ife ?nx
+			     C\	pop ds
+			     C\	endif
+			     C\	ife ?nx
+			     C\	if ?chkstk1+???+?po
+			     C\	leave
+			     C\	endif
+			     C\	else
+			     C\	if ?ff+???+?po+?rp
+			     C\	leave
+			     C\	endif
+			     C\	endif
+			     C\	else
+			     C\	ife ?nx
+			     C\	if (?TF eq 0) or (???+?rp)
+			     C\		lea	sp,-2[bp]
+			     C\	endif
+			     C\		pop	ds
+			     C\		pop	bp
+			     C\	ife ?DOS5
+			     C\		dec	bp
+			     C\	endif
+			     C\	else
+			     C\	if (?TF eq 0) or (???+?rp)
+			     C\		mov	sp,bp
+			     C\	endif
+			     C\	if ???+?po+?rp
+			     C\		pop	bp
+			     C\	endif
+			     C\	endif
+			     C\	endif
+			     C\	else
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-21
+
+
+			     C\	if ?pmd
+			     C\	if ?ff+???+?po+?rp
+			     C\	leave
+			     C\	endif
+			     C\	else
+			     C\	if ?ff+???+?po+?rp
+			     C\	if (?TF eq 0) or (???+?rp)
+			     C\		mov	sp,bp
+			     C\	endif
+			     C\		pop	bp
+			     C\	endif
+			     C\	endif
+			     C\	endif
+			     C\	ife cc
+			     C\		ret
+			     C\	else
+			     C\		ret	o
+			     C\	endif
+			     C\	endif
+			     C\	endif
+			     C\	n endp
+			     C\	.cref
+			     C\	purge cEnd
+			     C\	&endm
+			     C\	.cref
+			     C\	endm
+			     C\	assumes macro s,ln
+			     C\	ifndef ln&_assumes
+			     C\	assume s:ln
+			     C\	else
+			     C\	ln&_assumes s
+			     C\	endif
+			     C\	endm
+			     C\	createSeg macro n,ln,a,co,cl,grp
+			     C\	ifnb <grp>
+			     C\	addseg grp,n
+			     C\	else
+			     C\	ln&OFFSET equ offset n:
+			     C\	ln&BASE equ n
+			     C\	?cs3 <ln>,<n>
+			     C\	endif
+			     C\	ifnb <cl>
+			     C\	n segment a co '&cl'
+			     C\	else
+			     C\	n segment a co
+			     C\	endif
+			     C\	n ends
+			     C\	?cs1 <ln>,<n>
+			     C\	endm
+			     C\	addseg macro grp,seg
+			     C\	.xcref
+			     C\	.xcref grp&_def
+			     C\	.cref
+			     C\	ifndef grp&_def
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-22
+
+
+			     C\	grp&_def=0
+			     C\	endif
+			     C\	if grp&_def ne ASMpass
+			     C\	.xcref
+			     C\	.xcref grp&_add
+			     C\	.cref
+			     C\	grp&_add &macro s
+			     C\	grp&_in <seg>,s
+			     C\	&endm
+			     C\	.xcref
+			     C\	.xcref grp&_in
+			     C\	.cref
+			     C\	grp&_in &macro sl,s
+			     C\	ifb <s>
+			     C\	grp group sl
+			     C\	else
+			     C\	grp&_add &macro ns
+			     C\	grp&_in <sl,s>,ns
+			     C\	&endm
+			     C\	endif
+			     C\	&endm
+			     C\	grp&_def=ASMpass
+			     C\	else
+			     C\	grp&_add seg
+			     C\	endif
+			     C\	endm
+			     C\	defgrp macro grp,ln
+			     C\	addseg grp
+			     C\	ifnb <ln>
+			     C\	irp x,<ln>
+			     C\	?cs3 <&x>,<grp>
+			     C\	x&&OFFSET equ offset grp:
+			     C\	x&&BASE equ grp
+			     C\	endm
+			     C\	endif
+			     C\	endm
+			     C\	?cs1 macro ln,n
+			     C\	.xcref
+			     C\	.xcref ln&_sbegin
+			     C\	.cref
+			     C\	ln&_sbegin &macro
+			     C\	.xcref
+			     C\	.xcref ?mf
+			     C\	.cref
+			     C\	?mf &&macro c,l,p
+			     C\	if c
+			     C\		extrn	n&_FARFRAME:near
+			     C\		call	n&_FARFRAME
+			     C\	else
+			     C\		extrn	n&_NEARFRAME:near
+			     C\		call	n&_NEARFRAME
+			     C\	endif
+			     C\		db	l shr 1
+			     C\		db	p shr 1
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-23
+
+
+			     C\	&&endm
+			     C\	?cs2 <ln>,<n>
+			     C\	n segment
+			     C\	&endm
+			     C\	endm
+			     C\	?cs2 macro ln,n
+			     C\	.xcref
+			     C\	.xcref sEnd
+			     C\	.cref
+			     C\	sEnd &macro
+			     C\	n ends
+			     C\	purge ?mf
+			     C\	purge sEnd
+			     C\	&endm
+			     C\	endm
+			     C\	?cs3 macro ln,n
+			     C\	.xcref
+			     C\	.xcref ln&_assumes
+			     C\	.cref
+			     C\	ln&_assumes &macro s
+			     C\	assume s:&n
+			     C\	&endm
+			     C\	endm
+			     C\	.xcref
+			     C\	.xcref sBegin
+			     C\	.cref
+			     C\	sBegin macro ln
+			     C\	ln&_sbegin
+			     C\	endm
+			     C\	ife ?DF
+			     C\	createSeg _TEXT,Code,word,public,CODE
+ 0000                        C\	_TEXT segment word public 'CODE' 
+ 0000                        C\	_TEXT ends 
+			     C\	ife ?nodata1
+			     C\	createSeg _DATA,Data,word,public,DATA,DGROUP
+ 0000                        C\	_DATA segment word public 'DATA' 
+ 0000                        C\	_DATA ends 
+			     C\	defgrp DGROUP,Data
+			     C\	endif
+			     C\	endif
+			     C\	errnz macro x
+			     C\	if2
+			     C\	if x
+			     C\	errnz1 <x>,%(x)
+			     C\	endif
+			     C\	endif
+			     C\	endm
+			     C\	errnz1 macro x1,x2
+			     C\	= *errnz* x1 = x2
+			     C\	.err
+			     C\	endm
+			     C\	errn$ macro l,x
+			     C\	errnz <offset $ - offset l x>
+			     C\	endm
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-24
+
+
+			      \	include toolhelp.inc
+			     C\	;**********************************************
+				****************************
+			     C\	;*  TOOLHELP.INC
+			     C\	;*
+			     C\	;*      Assembly-language public include file f
+				or TOOLHELP.DLL
+			     C\	;*
+			     C\	;**********************************************
+				****************************
+			     C	
+			     C\	;** General symbol values
+ = 000B                      C\	MAX_DATA        EQU     11
+ = 00FF                      C\	MAX_PATH        EQU     255
+ = 0009                      C\	MAX_MODULE_NAME EQU     8 + 1           ;Leave 
+				room for the zero and padding
+ = 00FF                      C\	MAX_CLASSNAME   EQU     255
+			     C	
+			     C\	; ----- Global heap walking -----
+			     C	
+			     C\	GLOBALENTRY STRUC
+ 0000  00000000              C\	ge_dwSize       DD      ?               ;Struct
+				ure version
+ 0004  00000000              C\	ge_dwAddress    DD      ?               ;This b
+				lock's address
+ 0008  00000000              C\	ge_dwBlockSize  DD      ?               ;This b
+				lock's size
+ 000C  0000                  C\	ge_hBlock       DW      ?               ;This b
+				lock's handle
+ 000E  0000                  C\	ge_wcLock       DW      ?               ;Lock c
+				ount
+ 0010  0000                  C\	ge_wcPageLock   DW      ?               ;Page l
+				ock count
+ 0012  0000                  C\	ge_wFlags       DW      ?               ;Block 
+				flags
+ 0014  0000                  C\	ge_wHeapPresent DW      ?               ;Size o
+				f available local heap
+ 0016  0000                  C\	ge_hOwner       DW      ?               ;Owner 
+				handle
+ 0018  0000                  C\	ge_wType        DW      ?               ;Block 
+				type
+ 001A  0000                  C\	ge_wData        DW      ?               ;Type-s
+				pecific data
+ 001C  00000000              C\	ge_dwNext       DD      ?               ;Pointe
+				r to next block
+ 0020  00000000              C\	ge_dwNextAlt    DD      ?               ;Next f
+				ree/LRU block in chain
+ 0024                        C\	GLOBALENTRY ENDS
+			     C	
+			     C\	; ** GlobalFirst()/GlobalNext() flags
+ = 0000                      C\	GLOBAL_ALL      EQU     0
+ = 0001                      C\	GLOBAL_LRU      EQU     1
+ = 0002                      C\	GLOBAL_FREE     EQU     2
+			     C	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-25
+
+
+			     C\	; ** GLOBALENTRY.ge_wType entries
+ = 0000                      C\	GT_UNKNOWN      EQU     0
+ = 0001                      C\	GT_DGROUP       EQU     1
+ = 0002                      C\	GT_DATA         EQU     2
+ = 0003                      C\	GT_CODE         EQU     3
+ = 0004                      C\	GT_TASK         EQU     4
+ = 0005                      C\	GT_RESOURCE     EQU     5
+ = 0006                      C\	GT_MODULE       EQU     6
+ = 0007                      C\	GT_FREE         EQU     7
+ = 0008                      C\	GT_INTERNAL     EQU     8
+ = 0009                      C\	GT_SENTINEL     EQU     9
+ = 000A                      C\	GT_BURGERMASTER EQU     10
+			     C	
+			     C\	; ** if GLOBALENTRY.wType==GT_RESOURCE, the fol
+				lowing is GLOBALENTRY.wData:
+ = 0000                      C\	GD_USERDEFINED          EQU     0
+ = 0001                      C\	GD_CURSORCOMPONENT      EQU     1
+ = 0002                      C\	GD_BITMAP               EQU     2
+ = 0003                      C\	GD_ICONCOMPONENT        EQU     3
+ = 0004                      C\	GD_MENU                 EQU     4
+ = 0005                      C\	GD_DIALOG               EQU     5
+ = 0006                      C\	GD_STRING               EQU     6
+ = 0007                      C\	GD_FONTDIR              EQU     7
+ = 0008                      C\	GD_FONT                 EQU     8
+ = 0009                      C\	GD_ACCELERATORS         EQU     9
+ = 000A                      C\	GD_RCDATA               EQU     10
+ = 000B                      C\	GD_ERRTABLE             EQU     11
+ = 000C                      C\	GD_CURSOR               EQU     12
+ = 000E                      C\	GD_ICON                 EQU     14
+ = 000F                      C\	GD_NAMETABLE            EQU     15
+ = 000F                      C\	GD_MAX_RESOURCE         EQU     15
+			     C	
+			     C\	;** GLOBALENTRY.wFlags
+ = 0100                      C\	GF_PDB_OWNER    EQU     100h            ;Low by
+				te is KERNEL flags
+			     C	
+			     C\	; ----- Local heap walking -----
+			     C	
+			     C\	LOCALENTRY STRUC
+ 0000  00000000              C\	le_dwSize       DD      ?
+ 0004  0000                  C\	le_hHandle      DW      ?
+ 0006  0000                  C\	le_wAddress     DW      ?
+ 0008  0000                  C\	le_wSize        DW      ?
+ 000A  0000                  C\	le_wFlags       DW      ?
+ 000C  0000                  C\	le_wcLock       DW      ?
+ 000E  0000                  C\	le_wType        DW      ?
+ 0010  0000                  C\	le_hHeap        DW      ?
+ 0012  0000                  C\	le_wHeapType    DW      ?
+ 0014  0000                  C\	le_wNext        DW      ?
+ 0016                        C\	LOCALENTRY ENDS
+			     C	
+			     C\	; ** LOCALENTRY.wHeapType flags
+ = 0000                      C\	NORMAL_HEAP     EQU     0
+ = 0001                      C\	USER_HEAP       EQU     1
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-26
+
+
+ = 0002                      C\	GDI_HEAP        EQU     2
+			     C	
+			     C\	;** LOCALENTRY.wFlags
+ = 0001                      C\	LF_FIXED                EQU     1
+ = 0002                      C\	LF_FREE                 EQU     2
+ = 0004                      C\	LF_MOVEABLE             EQU     4
+			     C	
+			     C\	;** LOCALENTRY.wType
+ = 0000                      C\	LT_NORMAL               EQU     0
+ = 0001                      C\	LT_GDI_PEN              EQU     1
+ = 0002                      C\	LT_GDI_BRUSH            EQU     2
+ = 0003                      C\	LT_GDI_FONT             EQU     3
+ = 0004                      C\	LT_GDI_PALETTE          EQU     4
+ = 0005                      C\	LT_GDI_BITMAP           EQU     5
+ = 0006                      C\	LT_GDI_RGN              EQU     6
+ = 0007                      C\	LT_GDI_DC               EQU     7
+ = 0008                      C\	LT_GDI_DISABLED_DC      EQU     8
+ = 0009                      C\	LT_GDI_METADC           EQU     9
+ = 000A                      C\	LT_GDI_METAFILE         EQU     10
+ =                           C\	LT_GDI_MAX              EQU     LT_GDI_METAFILE
+ = 00FF                      C\	LT_FREE                 EQU     0ffh
+			     C	
+			     C\	; ----- Stack tracing -----
+			     C	
+			     C\	STACKTRACEENTRY STRUC
+ 0000  00000000              C\	st_dwSize       DD      ?
+ 0004  0000                  C\	st_hTask        DW      ?
+ 0006  0000                  C\	st_wSS          DW      ?
+ 0008  0000                  C\	st_wBP          DW      ?
+ 000A  0000                  C\	st_wCS          DW      ?
+ 000C  0000                  C\	st_wIP          DW      ?
+ 000E  0000                  C\	st_hModule      DW      ?
+ 0010  0000                  C\	st_wSegment     DW      ?
+ 0012  0000                  C\	st_wFlags       DW      ?
+ 0014                        C\	STACKTRACEENTRY ENDS
+			     C	
+			     C\	;** STACKTRACEENTRY.wFlags values
+ = 0000                      C\	FRAME_FAR       EQU     0
+ = 0001                      C\	FRAME_NEAR      EQU     1
+			     C	
+			     C\	; ----- Module list walking -----
+			     C	
+			     C\	MODULEENTRY STRUC
+ 0000  00000000              C\	me_dwSize       DD      ?
+ 0004  000A[                 C\	me_szModule     DB      MAX_MODULE_NAME + 1 DUP
+				(?)
+	   ??                C	
+			 ]   C	
+			     C	
+ 000E  0000                  C\	me_hModule      DW      ?
+ 0010  0000                  C\	me_wcUsage      DW      ?
+ 0012  0101[                 C\	me_szExePath    DB      MAX_PATH + 1 + 1 DUP(?)
+	   ??                C	
+			 ]   C	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-27
+
+
+			     C	
+ 0113  0000                  C\	me_wNext        DW      ?
+ 0115                        C\	MODULEENTRY ENDS
+			     C	
+			     C\	; ----- Task list walking -----
+			     C	
+			     C\	TASKENTRY STRUC
+ 0000  00000000              C\	te_dwSize               DD      ?
+ 0004  0000                  C\	te_hTask                DW      ?
+ 0006  0000                  C\	te_hTaskParent          DW      ?
+ 0008  0000                  C\	te_hInst                DW      ?
+ 000A  0000                  C\	te_hModule              DW      ?
+ 000C  0000                  C\	te_wSS                  DW      ?
+ 000E  0000                  C\	te_wSP                  DW      ?
+ 0010  0000                  C\	te_wStackTop            DW      ?
+ 0012  0000                  C\	te_wStackMinimum        DW      ?
+ 0014  0000                  C\	te_wStackBottom         DW      ?
+ 0016  0000                  C\	te_wcEvents             DW      ?
+ 0018  0000                  C\	te_hQueue               DW      ?
+ 001A  000A[                 C\	te_szModule             DB      MAX_MODULE_NAME
+				 + 1 DUP(?)
+	   ??                C	
+			 ]   C	
+			     C	
+ 0024  0000                  C\	te_wPSPOffset           DW      ?
+ 0026  0000                  C\	te_hNext                DW      ?
+ 0028                        C\	TASKENTRY ENDS
+			     C	
+			     C\	;** TaskSwitch() return values
+ = 0000                      C\	TS_ERROR    EQU         0
+ = 0001                      C\	TS_NEW      EQU         1
+ = 0002                      C\	TS_OLD      EQU         2
+			     C	
+			     C\	; ----- Window Class enumeration -----
+			     C	
+			     C\	CLASSENTRY STRUC
+ 0000  00000000              C\	ce_dwSize               DD      ?
+ 0004  0000                  C\	ce_hInst                DW      ?
+ 0006  0100[                 C\	ce_szClassName          DB      MAX_CLASSNAME +
+				 1 DUP(?)
+	   ??                C	
+			 ]   C	
+			     C	
+ 0106  0000                  C\	ce_wNext                DW      ?
+ 0108                        C\	CLASSENTRY ENDS
+			     C	
+			     C\	; ----- Information functions -----
+			     C	
+			     C\	VMEMMANINFO STRUC
+ 0000  00000000              C\	vmm_dwSize              DD      ?
+ 0004  00000000              C\	vmm_dwLargestFreeBlock  DD      ?
+ 0008  00000000              C\	vmm_dwMaxPagesAvailable DD      ?
+ 000C  00000000              C\	vmm_dwMaxPagesLockable  DD      ?
+ 0010  00000000              C\	vmm_dwTotalLinearSpace  DD      ?
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-28
+
+
+ 0014  00000000              C\	vmm_dwTotalUnlockedPages DD     ?
+ 0018  00000000              C\	vmm_dwFreePages         DD      ?
+ 001C  00000000              C\	vmm_dwTotalPages        DD      ?
+ 0020  00000000              C\	vmm_dwFreeLinearSpace   DD      ?
+ 0024  00000000              C\	vmm_dwSwapFilePages     DD      ?
+ 0028  0000                  C\	vmm_wPageSize           DW      ?
+ 002A                        C\	VMEMMANINFO ENDS
+			     C	
+			     C\	SYSHEAPINFO STRUC
+ 0000  00000000              C\	si_dwSize               DD      ?
+ 0004  0000                  C\	si_wUserFreePercent     DW      ?
+ 0006  0000                  C\	si_wGDIFreePercent      DW      ?
+ 0008  0000                  C\	si_hUserSegment         DW      ?
+ 000A  0000                  C\	si_hGDISegment          DW      ?
+ 000C                        C\	SYSHEAPINFO ENDS
+			     C	
+			     C\	; ----- Notifications -----
+			     C	
+			     C\	;* NFY_UNKNOWN:  An unknown notification has be
+				en returned from KERNEL.  Apps
+			     C\	;*      should ignore these.
+			     C\	;*
+ = 0000                      C\	NFY_UNKNOWN     EQU     0
+			     C	
+			     C\	;** NFY_LOADSEG:  dwData points to a NFYLOADSEG
+				 structure
+ = 0001                      C\	NFY_LOADSEG     EQU     1
+			     C\	NFYLOADSEG STRUC
+ 0000  00000000              C\	nls_dwSize              DD      ?
+ 0004  0000                  C\	nls_wSelector           DW      ?
+ 0006  0000                  C\	nls_wSegNum             DW      ?
+ 0008  0000                  C\	nls_wType               DW      ?       ;Low bi
+				t set for DATA, clear for CODE
+ 000A  0000                  C\	nls_wcInstance          DW      ?       ;Instan
+				ce count ONLY VALID FOR DATA!
+ 000C  00000000              C\	nls_lpstrModuleName     DD      ?
+ 0010                        C\	NFYLOADSEG ENDS
+			     C	
+			     C\	;** NFY_FREESEG:  LOWORD(dwData) is the selecto
+				r of the segment being freed
+ = 0002                      C\	NFY_FREESEG     EQU     2
+			     C	
+			     C\	;** NFY_STARTDLL:  dwData points to a NFYSTARTD
+				LL structure
+ = 0003                      C\	NFY_STARTDLL    EQU     3
+			     C\	NFYSTARTDLL STRUC
+ 0000  00000000              C\	nsd_dwSize              DD      ?
+ 0004  0000                  C\	nsd_hModule             DW      ?
+ 0006  0000                  C\	nsd_wCS                 DW      ?
+ 0008  0000                  C\	nsd_wIP                 DW      ?
+ 000A                        C\	NFYSTARTDLL ENDS
+			     C	
+			     C\	;** NFY_STARTTASK:  dwData is the CS:IP of the 
+				task start address
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-29
+
+
+ = 0004                      C\	NFY_STARTTASK   EQU     4
+			     C	
+			     C\	;** NFY_EXITTASK:  The low byte of dwData conta
+				ins the program exit code
+ = 0005                      C\	NFY_EXITTASK    EQU     5
+			     C	
+			     C\	;** NFY_DELMODULE:  LOWORD(dwData) is the handl
+				e of the module to be freed
+ = 0006                      C\	NFY_DELMODULE   EQU     6
+			     C	
+			     C\	;** NFY_RIP:  LOWORD(dwData) is the fatal exit 
+				code
+			     C\	;** NFY_RIP:  dwData points to a NFYRIP structu
+				re
+ = 0007                      C\	NFY_RIP         EQU     7
+			     C\	NFYRIP STRUC
+ 0000  00000000              C\	nrp_dwSize      DD      ?
+ 0004  0000                  C\	nrp_wIP         DW      ?
+ 0006  0000                  C\	nrp_wCS         DW      ?
+ 0008  0000                  C\	nrp_wSS         DW      ?
+ 000A  0000                  C\	nrp_wBP         DW      ?
+ 000C  0000                  C\	nrp_wExitCode   DW      ?
+ 000E                        C\	NFYRIP ENDS
+			     C	
+			     C\	;** NFY_TASKIN:  No data.  Callback should do G
+				etCurrentTask()
+ = 0008                      C\	NFY_TASKIN      EQU     8
+			     C	
+			     C\	;** NFY_TASKOUT:  No data.  Callback should do 
+				GetCurrentTask()
+ = 0009                      C\	NFY_TASKOUT     EQU     9
+			     C	
+			     C\	;** NFY_INCHAR:  Return value of callback is us
+				ed.  If FALSE, mapped to 'i'
+ = 000A                      C\	NFY_INCHAR      EQU     10
+			     C	
+			     C\	;** NFY_OUTSTR:  dwData points to the string to
+				 be displayed
+ = 000B                      C\	NFY_OUTSTR      EQU     11
+			     C	
+			     C\	;** NFY_LOGERROR:  dwData points to a NFYLOGERR
+				OR struct
+ = 000C                      C\	NFY_LOGERROR    EQU     12
+			     C\	NFYLOGERROR STRUC
+ 0000  00000000              C\	nle_dwSize      DD      ?
+ 0004  0000                  C\	nle_wErrCode    DW      ?
+ 0006  00000000              C\	nle_lpInfo      DD      ?       ;Error-code dep
+				endent
+ 000A                        C\	NFYLOGERROR ENDS
+			     C	
+			     C\	;** NFY_LOGPARAMERROR:  dwData points to a NFYL
+				OGPARAMERROR struct
+ = 000D                      C\	NFY_LOGPARAMERROR EQU   13
+			     C\	NFYLOGPARAMERROR STRUC
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-30
+
+
+ 0000  00000000              C\	nlp_dwSize              DD      ?
+ 0004  0000                  C\	nlp_wErrCode            DW      ?
+ 0006  00000000              C\	nlp_lpfnErrorAddr       DD      ?
+ 000A  00000000              C\	nlp_lpBadParam          DD      ?
+ 000E                        C\	NFYLOGPARAMERROR ENDS
+			     C	
+			     C\	;** NotifyRegister() flags
+ = 0000                      C\	NF_NORMAL       EQU     0
+ = 0001                      C\	NF_TASKSWITCH   EQU     1
+ = 0002                      C\	NF_RIP          EQU     2
+			     C	
+			     C\	;** TerminateApp() flag values
+ = 0000                      C\	UAE_BOX         EQU     0
+ = 0001                      C\	NO_UAE_BOX      EQU     1
+			     C	
+			     C\	TIMERINFO STRUC
+ 0000  00000000              C\	ti_dwSize               DD      ?
+ 0004  00000000              C\	ti_dwmsSinceStart       DD      ?
+ 0008  00000000              C\	ti_dwmsThisVM           DD      ?
+ 000C                        C\	TIMERINFO ENDS
+			     C	
+			      \		.286p
+			      \		.model	small
+				
+			      \		.data?
+			      \	;newStack db	4096 dup (?)
+			      \	externW	newsp
+			      \	externW	cpu32
+			      \	externW retflag
+			      \	;newsp	=	(newStack+4096)
+				
+			      \	externW	regs
+ = 0000                       \		val	= 0
+			      \	irp	reg, <ax,cx,dx,bx,sp,bp,si,di,ip,flag,e
+				s,cs,ss,ds,fs,gs,int>
+			      \		r&reg	= val
+			      \		val	= val+2
+			      \	endm
+				
+				
+			      \	externD	regs32
+ = 0000                       \		val	= 0
+			      \	irp	reg, <ax, cx, dx, bx, sp, bp, si, di, i
+				p, flags>
+			      \		re&reg	= val
+			      \		val	= val+4
+			      \	endm
+				
+			      \		.code
+			      \	externP	Sherlock
+				
+			      \	cProc   SegLimit, <PUBLIC>,
+			      \		parmW	segVal
+			      \	cBegin
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-31
+
+
+ 0000                         \	_SegLimit proc near 
+ 0000  55                     \		push	bp 
+ 0001  8B EC                  \		mov	bp,sp 
+ 0003  83 3E 0000 E 00        \		cmp	[cpu32], 0
+ 0008  75 0A                  \		jnz	SegLimit32
+ 000A  33 C0                  \		xor	ax, ax
+ 000C  33 D2                  \		xor	dx, dx
+ 000E  0F 03 46 04            \	        lsl     ax, [segVal]
+ 0012  EB 1A                  \		jmp short	done
+ 0014                         \	SegLimit32:
+			      \		.386p
+ 0014  66| 52                 \		push	edx			; save 
+				EDX.hi
+ 0016  5A                     \		pop	dx
+				
+ 0017  66| 50                 \		push	eax			; save 
+				EAX.hi
+ 0019  58                     \		pop	ax
+				
+ 001A  66| 33 D2              \		xor	edx, edx		; retur
+				n 0 if failure
+ 001D  66| 0F B7 46 04        \		movzx	eax, [segVal]
+ 0022  66| 0F 03 D0           \		lsl	edx, eax		; EDX =
+				 return result
+				
+ 0026  52                     \		push	dx			; push 
+				ans.lo
+ 0027  66| 58                 \		pop	eax			; EAX.l
+				o = ans.lo, EAX.hi restored
+				
+ 0029  66| 52                 \		push	edx			; stack
+				 is ans.lo, ans.hi, EDX.hi
+ 002B  5A                     \		pop	dx			; disca
+				rd ans.lo (already in EAX.lo)
+ 002C  66| 5A                 \		pop	edx			; DX ha
+				s ans.hi, EDX.hi restored
+			      \		.286p
+ 002E                         \	done:
+			      \	cEnd
+ 002E  8B E5                  \		mov	sp,bp 
+ 0030  5D                     \		pop	bp 
+ 0031  C3                     \		ret 
+ 0032                         \	_SegLimit endp 
+				
+			      \	cProc	SegBase, <PUBLIC>
+			      \		parmW	segVal
+			      \	cBegin
+ 0032                         \	_SegBase proc near 
+ 0032  55                     \		push	bp 
+ 0033  8B EC                  \		mov	bp,sp 
+ 0035  B8 0006                \		mov	ax, 6
+ 0038  8B 5E 04               \		mov	bx, [segVal]
+ 003B  0B DB                  \		or	bx, bx			; DPMI 
+				whines on a 0 selector
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-32
+
+
+ 003D  74 04                  \		jz	baseBad
+ 003F  CD 31                  \		int	31h			; call 
+				DPMI
+ 0041  73 04                  \		jnc	baseOK
+ 0043                         \	baseBad:
+ 0043  33 D2                  \		xor	dx, dx
+ 0045  33 C9                  \		xor	cx, cx
+ 0047                         \	baseOK:
+ 0047  8B C2                  \		mov	ax, dx
+ 0049  8B D1                  \		mov	dx, cx
+			      \	cEnd
+ 004B  8B E5                  \		mov	sp,bp 
+ 004D  5D                     \		pop	bp 
+ 004E  C3                     \		ret 
+ 004F                         \	_SegBase endp 
+				
+			      \	cProc	SegRights, <PUBLIC>
+			      \		parmW	segVal
+			      \	cBegin
+ 004F                         \	_SegRights proc near 
+ 004F  55                     \		push	bp 
+ 0050  8B EC                  \		mov	bp,sp 
+ 0052  0F 02 46 04            \		lar	ax, [segVal]
+ 0056  74 02                  \		jz	rightOK
+ 0058  33 C0                  \		xor	ax, ax
+ 005A                         \	rightOK:
+			      \	cEnd
+ 005A  8B E5                  \		mov	sp,bp 
+ 005C  5D                     \		pop	bp 
+ 005D  C3                     \		ret 
+ 005E                         \	_SegRights endp 
+				
+			      \	externNP CallMeToo
+				
+			      \	cProc	CallMe,<PUBLIC,FAR>		; I was
+				 a big Blondie fan
+			      \	;	parmD	foo			; BP+6,
+				 BP+8
+			      \	;	parmW	id			; BP+10
+			      \	cBegin nogen
+ 005E                         \	_CallMe proc far 
+ 005E  55                     \		push	bp
+ 005F  8B EC                  \		mov	bp, sp
+ = word ptr [bp+10]           \	id	equ	word ptr [bp+10]
+ = word ptr [bp+8]            \	seg_foo	equ	word ptr [bp+8]
+ = word ptr [bp+6]            \	off_foo	equ	word ptr [bp+6]
+ 0061  33 C0                  \		xor	ax, ax
+ 0063  83 7E 0A 0C            \		cmp	id, NFY_LOGERROR
+ 0067  74 06                  \		jz	cm_stay
+ 0069  83 7E 0A 0D            \		cmp	id, NFY_LOGPARAMERROR
+			      \	;        jz      cm_stay
+			      \	;        cmp     id, NFY_OUTSTR
+ 006D  75 47                  \		jnz	cm_go			; "if I
+				 go there will be trouble"
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-33
+
+
+ 006F                         \	cm_stay:				; "if I
+				 stay it will be double"
+ 006F  B8 ---- R              \		mov	ax, DGROUP
+ 0072  8C D3                  \		mov	bx, ss
+ 0074  3B C3                  \		cmp	ax, bx
+ 0076  74 3E                  \		jz	cm_go
+ 0078  1E                     \		push	ds			; I lik
+				e The Clash too
+ 0079  8E D8                  \		mov	ds, ax
+ 007B  8B 56 08               \		mov	dx, SEG_foo
+ 007E  8B 4E 06               \		mov	cx, OFF_foo
+ 0081  8B 5E 0A               \		mov	bx, id
+ 0084  8C 16 0018 E           \		mov	[regs+rss], ss		; for s
+				tack trace, and to continue
+ 0088  89 26 0008 E           \		mov	[regs+rsp], sp
+ 008C  89 2E 000A E           \		mov	[regs+rbp], bp
+ 0090  8C 0E 0016 E           \		mov	[regs+rcs], cs
+ 0094  C7 06 0010 E 006F R    \		mov	[regs+rip], offset cm_stay
+ 009A  8E D0                  \		mov	ss, ax
+ 009C  8B 26 0000 E           \		mov	sp, [newsp]
+ 00A0  BD 0000                \		mov	bp, 0
+ 00A3  52                     \		push	dx
+ 00A4  51                     \		push	cx
+ 00A5  53                     \		push	bx
+			      \		cCall	CallMeToo
+ 00A6  E8 0000 E              \		call	CallMeToo 
+ 00A9  8B 2E 000A E           \		mov	bp, [regs+rbp]
+ 00AD  8E 16 0018 E           \		mov	ss, [regs+rss]
+ 00B1  8B 26 0008 E           \		mov	sp, [regs+rsp]
+ 00B5  1F                     \		pop	ds
+ 00B6                         \	cm_go:
+ 00B6  5D                     \		pop	bp
+ 00B7  CA 0006                \		retf	6
+			      \	cEnd	nogen
+ 00BA                         \	_CallMe endp 
+				
+			      \	; GPFault - called as part of gpfault chain by 
+				ToolHelp
+			      \	;	Ret IP		Far ret back to ToolHel
+				p fault handler
+			      \	;	Ret CS
+			      \	;	AX		Saved in case prolog tr
+				ashes AX
+			      \	;6	IntNum		Number of interrupt tha
+				t occurred
+			      \	;	Resv		Magic value, don't tras
+				h
+			      \	;10	Fault IP	IRET back to faulting i
+				nstruction
+			      \	;12	Fault CS
+			      \	;14	Fault Flags
+				
+ = 0006                       \	fint	= 6
+ = 000A                       \	fip	= 10
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-34
+
+
+ = 000C                       \	fcs	= 12
+ = 000E                       \	fflag	= 14
+				
+ 00BA                         \	GPFAULT proc	far ; pascal
+			      \	public	GPFAULT
+ 00BA  1E                     \		push	ds			; save 
+				ds
+ 00BB  50                     \		push	ax
+ 00BC  55                     \		push	bp
+ 00BD  8B EC                  \		mov	bp, sp
+ 00BF  8B 46 0C               \		mov	ax, [bp+12]
+ 00C2  3D 0000                \		cmp	ax, 0			; only 
+				save regs if int Div0,
+ 00C5  74 0E                  \		jz	keeper
+ 00C7  3D 0006                \		cmp	ax, 6			; inval
+				id opcode
+ 00CA  74 09                  \		jz	keeper
+ 00CC  3D 000D                \		cmp	ax, 13			; GP fa
+				ult
+ 00CF  74 04                  \		jz	keeper
+ 00D1  5D                     \	nokeep:	pop	bp			; don't
+				 like this fault, chain on
+ 00D2  58                     \		pop	ax
+ 00D3  1F                     \		pop	ds
+ 00D4  CB                     \		ret
+				
+ 00D5  53                     \	keeper:	push	bx
+ 00D6  8C D3                  \		mov	bx, ss
+ 00D8  B8 ---- R              \		mov	ax, DGROUP		; and a
+				ddress our group
+ 00DB  3B C3                  \		cmp	ax, bx
+ 00DD  5B                     \		pop	bx
+ 00DE  74 F1                  \		je	nokeep			; don't
+				 go re-entrant
+ 00E0  8E D8                  \		mov	ds, ax
+ 00E2  8F 06 000A E           \		pop	[regs+rbp]
+ 00E6  8F 06 0000 E           \		pop	[regs+rax]		;save A
+				X
+ 00EA  8F 06 001A E           \		pop	[regs+rds]		; and D
+				S in regs[]
+				
+			      \	irp	reg, <cx,dx,bx, sp, si,di, es,ss>
+			      \		mov	[regs+r&reg], reg	; all b
+				ut ip, flag, intNum,
+			      \	endm					;   cs,
+				 fs, gs, int
+ 00EE  89 0E 0002 E           \		mov	[regs+rcx], cx	; all but ip, f
+				lag, intNum, 
+ 00F2  89 16 0004 E           \		mov	[regs+rdx], dx	; all but ip, f
+				lag, intNum, 
+ 00F6  89 1E 0006 E           \		mov	[regs+rbx], bx	; all but ip, f
+				lag, intNum, 
+ 00FA  89 26 0008 E           \		mov	[regs+rsp], sp	; all but ip, f
+				lag, intNum, 
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-35
+
+
+ 00FE  89 36 000C E           \		mov	[regs+rsi], si	; all but ip, f
+				lag, intNum, 
+ 0102  89 3E 000E E           \		mov	[regs+rdi], di	; all but ip, f
+				lag, intNum, 
+ 0106  8C 06 0014 E           \		mov	[regs+res], es	; all but ip, f
+				lag, intNum, 
+ 010A  8C 16 0018 E           \		mov	[regs+rss], ss	; all but ip, f
+				lag, intNum, 
+ 010E  8B EC                  \		mov	bp, sp			; nothi
+				ng local on stack
+			      \	irp	reg, <cs, ip, flag, int>
+			      \		mov	bx, [bp+f&reg]
+			      \		mov	[regs+r&reg], bx
+			      \	endm
+ 0110  8B 5E 0C               \		mov	bx, [bp+fcs] 
+ 0113  89 1E 0016 E           \		mov	[regs+rcs], bx 
+ 0117  8B 5E 0A               \		mov	bx, [bp+fip] 
+ 011A  89 1E 0010 E           \		mov	[regs+rip], bx 
+ 011E  8B 5E 0E               \		mov	bx, [bp+fflag] 
+ 0121  89 1E 0012 E           \		mov	[regs+rflag], bx 
+ 0125  8B 5E 06               \		mov	bx, [bp+fint] 
+ 0128  89 1E 0020 E           \		mov	[regs+rint], bx 
+				
+			      \	; Save away 32 bit registers if required
+ 012C  83 3E 0000 E 00        \		cmp	[cpu32], 0
+ 0131  74 48                  \		jz	NoSave32
+			      \		.386p
+ 0133  A1 0000 E              \		mov	ax, [regs+rax]
+			      \	irp	reg, <eax, ecx, edx, esi, edi>
+			      \		mov	[regs32+r&reg], reg
+			      \	endm
+ 0136  66| A3 0000 E          \		mov	[regs32+reax], eax 
+ 013A  66| 89 0E 0004 E       \		mov	[regs32+recx], ecx 
+ 013F  66| 89 16 0008 E       \		mov	[regs32+redx], edx 
+ 0144  66| 89 36 0018 E       \		mov	[regs32+resi], esi 
+ 0149  66| 89 3E 001C E       \		mov	[regs32+redi], edi 
+			      \	irp	reg, <bx, sp, bp>
+			      \		mov	eax, e&reg
+			      \		mov	ax, [regs+r&reg]
+			      \		mov	[regs32+re&reg], eax
+			      \	endm
+ 014E  66| 8B C3              \		mov	eax, ebx 
+ 0151  A1 0006 E              \		mov	ax, [regs+rbx] 
+ 0154  66| A3 000C E          \		mov	[regs32+rebx], eax 
+ 0158  66| 8B C4              \		mov	eax, esp 
+ 015B  A1 0008 E              \		mov	ax, [regs+rsp] 
+ 015E  66| A3 0010 E          \		mov	[regs32+resp], eax 
+ 0162  66| 8B C5              \		mov	eax, ebp 
+ 0165  A1 000A E              \		mov	ax, [regs+rbp] 
+ 0168  66| A3 0014 E          \		mov	[regs32+rebp], eax 
+ 016C  66| 9C                 \		pushfd
+ 016E  66| 8F 06 0024 E       \		pop	[regs32+reflags]
+ 0173  8C 26 001C E           \		mov	[regs+rfs], fs
+ 0177  8C 2E 001E E           \		mov	[regs+rgs], gs
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-36
+
+
+			      \		.286p
+ 017B                         \	NoSave32:
+ 017B  8C D8                  \		mov	ax, ds
+ 017D  8E D0                  \		mov	ss, ax	
+ 017F  8B 26 0000 E           \		mov	sp, [newsp]
+ 0183  BD 0000                \		mov	bp, 0
+				
+ 0186  3B 06 0018 E           \		cmp	ax, [regs+rss]		; can't
+				 debug ourselves
+ 018A  74 35                  \		jz	oh_no
+				
+			      \	; Save high halves of registers if required
+ 018C  83 3E 0000 E 00        \	        cmp     [cpu32], 0
+ 0191  74 10                  \	        jz      CallSherlock286
+			      \		.386p
+ 0193  66| 60                 \		pushad
+ 0195  E8 0000 E              \		call	Sherlock		; Displ
+				ay the info
+ 0198  A3 0000 E              \		mov	retflag, ax
+ 019B  66| 61                 \		popad
+ 019D  66| A1 0000 E          \		mov	eax, [regs32+reax]
+			      \		.286p
+			      \		
+ 01A1  EB 08                  \	        jmp     short DoneWithSherlock
+				
+ 01A3                         \	CallSherlock286:
+ 01A3  60                     \	        pusha
+ 01A4  E8 0000 E              \	        call    Sherlock                ; Displ
+				ay the info
+ 01A7  A3 0000 E              \	        mov     retflag, ax
+ 01AA  61                     \	        popa
+				
+ 01AB                         \	DoneWithSherlock:
+ 01AB  A1 0000 E              \	        mov     ax, retflag
+ 01AE  0B C0                  \	        or      ax, ax                  ; 0 - f
+				ault, 1 = continue
+ 01B0  74 0F                  \		jz	oh_no
+ 01B2  8E 06 0018 E           \		mov	es, [regs+rss]
+ 01B6  8B 1E 0008 E           \		mov	bx, [regs+rsp]
+ 01BA  A1 0010 E              \		mov	ax, [regs+rip]
+ 01BD  26: 89 47 0A           \		mov	es:[bx+10], ax
+ 01C1                         \	oh_no:					; resto
+				re all regs, then test again
+			      \	irp	reg, <ax,cx,dx,bx, ss,sp, bp,si,di, es,
+				ds>
+			      \		mov	reg, [regs+r&reg]
+			      \	endm
+ 01C1  A1 0000 E              \		mov	ax, [regs+rax] 
+ 01C4  8B 0E 0002 E           \		mov	cx, [regs+rcx] 
+ 01C8  8B 16 0004 E           \		mov	dx, [regs+rdx] 
+ 01CC  8B 1E 0006 E           \		mov	bx, [regs+rbx] 
+ 01D0  8E 16 0018 E           \		mov	ss, [regs+rss] 
+ 01D4  8B 26 0008 E           \		mov	sp, [regs+rsp] 
+ 01D8  8B 2E 000A E           \		mov	bp, [regs+rbp] 
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-37
+
+
+ 01DC  8B 36 000C E           \		mov	si, [regs+rsi] 
+ 01E0  8B 3E 000E E           \		mov	di, [regs+rdi] 
+ 01E4  8E 06 0014 E           \		mov	es, [regs+res] 
+ 01E8  8E 1E 001A E           \		mov	ds, [regs+rds] 
+ 01EC  74 04                  \		jz	oh_no_2
+ 01EE  83 C4 0A               \		add	sp, 10
+ 01F1  CF                     \		iret
+ 01F2                         \	oh_no_2:
+ 01F2  CB                     \		ret
+ 01F3                         \	GPFAULT	endp
+				
+			      \		.386p
+			      \	cProc	GetRegs32, <PUBLIC>
+			      \	cBegin
+ 01F3                         \	_GetRegs32 proc near 
+			      \	cEnd
+ 01F3  C3                     \		ret 
+ 01F4                         \	_GetRegs32 endp 
+				
+			      \	irp	reg, <sp, bp, si, di>
+			      \		mov	eax, [regs32+re&reg]
+			      \		mov	ax, reg
+			      \		mov	e&reg, eax
+			      \	endm
+ 01F4  66| A1 0010 E          \		mov	eax, [regs32+resp] 
+ 01F8  8B C4                  \		mov	ax, sp 
+ 01FA  66| 8B E0              \		mov	esp, eax 
+ 01FD  66| A1 0014 E          \		mov	eax, [regs32+rebp] 
+ 0201  8B C5                  \		mov	ax, bp 
+ 0203  66| 8B E8              \		mov	ebp, eax 
+ 0206  66| A1 0018 E          \		mov	eax, [regs32+resi] 
+ 020A  8B C6                  \		mov	ax, si 
+ 020C  66| 8B F0              \		mov	esi, eax 
+ 020F  66| A1 001C E          \		mov	eax, [regs32+redi] 
+ 0213  8B C7                  \		mov	ax, di 
+ 0215  66| 8B F8              \		mov	edi, eax 
+				
+			      \	irp	reg, <ebx, edx, ecx, eax>
+			      \		mov	reg, [regs32+r&reg]
+			      \	endm
+ 0218  66| 8B 1E 000C E       \		mov	ebx, [regs32+rebx] 
+ 021D  66| 8B 16 0008 E       \		mov	edx, [regs32+redx] 
+ 0222  66| 8B 0E 0004 E       \		mov	ecx, [regs32+recx] 
+ 0227  66| A1 0000 E          \		mov	eax, [regs32+reax] 
+			      \	cEnd
+			      \		.286p
+				
+			      \	cProc	GetTimeDate, <PUBLIC>
+			      \		parmW	buf
+			      \	cBegin
+ 022B                         \	_GetTimeDate proc near 
+ 022B  55                     \		push	bp 
+ 022C  8B EC                  \		mov	bp,sp 
+ 022E  B4 2A                  \		mov	ah, 2ah
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-38
+
+
+ 0230  CD 21                  \		int	21h
+ 0232  8B 5E 04               \		mov	bx, [buf]
+ 0235  89 07                  \		mov	[bx], ax
+ 0237  89 4F 02               \		mov	[bx+2], cx
+ 023A  89 57 04               \		mov	[bx+4], dx
+ 023D  B4 2C                  \		mov	ah, 2ch
+ 023F  CD 21                  \		int	21h
+ 0241  8B 5E 04               \		mov	bx, [buf]
+ 0244  89 4F 06               \		mov	[bx+6], cx
+ 0247  89 57 08               \		mov	[bx+8], dx
+			      \	cEnd
+ 024A  8B E5                  \		mov	sp,bp 
+ 024C  5D                     \		pop	bp 
+ 024D  C3                     \		ret 
+ 024E                         \	_GetTimeDate endp 
+				
+			      \	cProc	FindFile, <PUBLIC>
+			      \		parmW	buf
+			      \		parmW	_name
+			      \		localW	dtaSeg
+			      \		localW	dtaOff
+			      \	cBegin
+ 024E                         \	_FindFile proc near 
+ 024E  55                     \		push	bp 
+ 024F  8B EC                  \		mov	bp,sp 
+ 0251  83 EC 04               \		sub	sp,??? 
+ 0254  B4 2F                  \		mov	ah, 2fh			;get DT
+				A
+ 0256  CD 21                  \		int	21h
+ 0258  8C 46 FE               \		mov	[dtaSeg], es
+ 025B  89 5E FC               \		mov	[dtaOff], bx
+				
+ 025E  B4 1A                  \		mov	ah, 1ah
+ 0260  8B 56 04               \		mov	dx, buf
+ 0263  CD 21                  \		int	21h			; set D
+				TA to caller's buffer
+				
+ 0265  B4 4E                  \		mov	ah, 4eh			; find 
+				first matching file
+ 0267  B9 0000                \		mov	cx, 0
+ 026A  8B 56 06               \		mov	dx, _name
+ 026D  CD 21                  \		int	21h
+ 026F  1B C0                  \		sbb	ax, ax
+ 0271  50                     \		push	ax
+				
+ 0272  1E                     \		push	ds			; resto
+				re DTA
+ 0273  8E 5E FE               \		mov	ds, [dtaSeg]
+ 0276  8B 56 FC               \		mov	dx, [dtaOff]
+ 0279  B4 1A                  \		mov	ah, 1ah
+ 027B  CD 21                  \		int	21h
+				
+ 027D  1F                     \		pop	ds
+ 027E  58                     \		pop	ax			; retur
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Page     1-39
+
+
+				n value, 0 == OK
+			      \	cEnd
+ 027F  8B E5                  \		mov	sp,bp 
+ 0281  5D                     \		pop	bp 
+ 0282  C3                     \		ret 
+ 0283                         \	_FindFile endp 
+			      \		end
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Symbols-1
+
+
+Structures and Records:
+
+                N a m e                 Width   # fields
+                                        Shift   Width   Mask    Initial
+
+CLASSENTRY . . . . . . . . . . .  	0108	0004
+  CE_DWSIZE  . . . . . . . . . .  	0000
+  CE_HINST . . . . . . . . . . .  	0004
+  CE_SZCLASSNAME . . . . . . . .  	0006
+  CE_WNEXT . . . . . . . . . . .  	0106
+GLOBALENTRY  . . . . . . . . . .  	0024	000D
+  GE_DWSIZE  . . . . . . . . . .  	0000
+  GE_DWADDRESS . . . . . . . . .  	0004
+  GE_DWBLOCKSIZE . . . . . . . .  	0008
+  GE_HBLOCK  . . . . . . . . . .  	000C
+  GE_WCLOCK  . . . . . . . . . .  	000E
+  GE_WCPAGELOCK  . . . . . . . .  	0010
+  GE_WFLAGS  . . . . . . . . . .  	0012
+  GE_WHEAPPRESENT  . . . . . . .  	0014
+  GE_HOWNER  . . . . . . . . . .  	0016
+  GE_WTYPE . . . . . . . . . . .  	0018
+  GE_WDATA . . . . . . . . . . .  	001A
+  GE_DWNEXT  . . . . . . . . . .  	001C
+  GE_DWNEXTALT . . . . . . . . .  	0020
+LOCALENTRY . . . . . . . . . . .  	0016	000A
+  LE_DWSIZE  . . . . . . . . . .  	0000
+  LE_HHANDLE . . . . . . . . . .  	0004
+  LE_WADDRESS  . . . . . . . . .  	0006
+  LE_WSIZE . . . . . . . . . . .  	0008
+  LE_WFLAGS  . . . . . . . . . .  	000A
+  LE_WCLOCK  . . . . . . . . . .  	000C
+  LE_WTYPE . . . . . . . . . . .  	000E
+  LE_HHEAP . . . . . . . . . . .  	0010
+  LE_WHEAPTYPE . . . . . . . . .  	0012
+  LE_WNEXT . . . . . . . . . . .  	0014
+MODULEENTRY  . . . . . . . . . .  	0115	0006
+  ME_DWSIZE  . . . . . . . . . .  	0000
+  ME_SZMODULE  . . . . . . . . .  	0004
+  ME_HMODULE . . . . . . . . . .  	000E
+  ME_WCUSAGE . . . . . . . . . .  	0010
+  ME_SZEXEPATH . . . . . . . . .  	0012
+  ME_WNEXT . . . . . . . . . . .  	0113
+NFYLOADSEG . . . . . . . . . . .  	0010	0006
+  NLS_DWSIZE . . . . . . . . . .  	0000
+  NLS_WSELECTOR  . . . . . . . .  	0004
+  NLS_WSEGNUM  . . . . . . . . .  	0006
+  NLS_WTYPE  . . . . . . . . . .  	0008
+  NLS_WCINSTANCE . . . . . . . .  	000A
+  NLS_LPSTRMODULENAME  . . . . .  	000C
+NFYLOGERROR  . . . . . . . . . .  	000A	0003
+  NLE_DWSIZE . . . . . . . . . .  	0000
+  NLE_WERRCODE . . . . . . . . .  	0004
+  NLE_LPINFO . . . . . . . . . .  	0006
+NFYLOGPARAMERROR . . . . . . . .  	000E	0004
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Symbols-2
+
+
+  NLP_DWSIZE . . . . . . . . . .  	0000
+  NLP_WERRCODE . . . . . . . . .  	0004
+  NLP_LPFNERRORADDR  . . . . . .  	0006
+  NLP_LPBADPARAM . . . . . . . .  	000A
+NFYRIP . . . . . . . . . . . . .  	000E	0006
+  NRP_DWSIZE . . . . . . . . . .  	0000
+  NRP_WIP  . . . . . . . . . . .  	0004
+  NRP_WCS  . . . . . . . . . . .  	0006
+  NRP_WSS  . . . . . . . . . . .  	0008
+  NRP_WBP  . . . . . . . . . . .  	000A
+  NRP_WEXITCODE  . . . . . . . .  	000C
+NFYSTARTDLL  . . . . . . . . . .  	000A	0004
+  NSD_DWSIZE . . . . . . . . . .  	0000
+  NSD_HMODULE  . . . . . . . . .  	0004
+  NSD_WCS  . . . . . . . . . . .  	0006
+  NSD_WIP  . . . . . . . . . . .  	0008
+STACKTRACEENTRY  . . . . . . . .  	0014	0009
+  ST_DWSIZE  . . . . . . . . . .  	0000
+  ST_HTASK . . . . . . . . . . .  	0004
+  ST_WSS . . . . . . . . . . . .  	0006
+  ST_WBP . . . . . . . . . . . .  	0008
+  ST_WCS . . . . . . . . . . . .  	000A
+  ST_WIP . . . . . . . . . . . .  	000C
+  ST_HMODULE . . . . . . . . . .  	000E
+  ST_WSEGMENT  . . . . . . . . .  	0010
+  ST_WFLAGS  . . . . . . . . . .  	0012
+SYSHEAPINFO  . . . . . . . . . .  	000C	0005
+  SI_DWSIZE  . . . . . . . . . .  	0000
+  SI_WUSERFREEPERCENT  . . . . .  	0004
+  SI_WGDIFREEPERCENT . . . . . .  	0006
+  SI_HUSERSEGMENT  . . . . . . .  	0008
+  SI_HGDISEGMENT . . . . . . . .  	000A
+TASKENTRY  . . . . . . . . . . .  	0028	000F
+  TE_DWSIZE  . . . . . . . . . .  	0000
+  TE_HTASK . . . . . . . . . . .  	0004
+  TE_HTASKPARENT . . . . . . . .  	0006
+  TE_HINST . . . . . . . . . . .  	0008
+  TE_HMODULE . . . . . . . . . .  	000A
+  TE_WSS . . . . . . . . . . . .  	000C
+  TE_WSP . . . . . . . . . . . .  	000E
+  TE_WSTACKTOP . . . . . . . . .  	0010
+  TE_WSTACKMINIMUM . . . . . . .  	0012
+  TE_WSTACKBOTTOM  . . . . . . .  	0014
+  TE_WCEVENTS  . . . . . . . . .  	0016
+  TE_HQUEUE  . . . . . . . . . .  	0018
+  TE_SZMODULE  . . . . . . . . .  	001A
+  TE_WPSPOFFSET  . . . . . . . .  	0024
+  TE_HNEXT . . . . . . . . . . .  	0026
+TIMERINFO  . . . . . . . . . . .  	000C	0003
+  TI_DWSIZE  . . . . . . . . . .  	0000
+  TI_DWMSSINCESTART  . . . . . .  	0004
+  TI_DWMSTHISVM  . . . . . . . .  	0008
+VMEMMANINFO  . . . . . . . . . .  	002A	000B
+  VMM_DWSIZE . . . . . . . . . .  	0000
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Symbols-3
+
+
+  VMM_DWLARGESTFREEBLOCK . . . .  	0004
+  VMM_DWMAXPAGESAVAILABLE  . . .  	0008
+  VMM_DWMAXPAGESLOCKABLE . . . .  	000C
+  VMM_DWTOTALLINEARSPACE . . . .  	0010
+  VMM_DWTOTALUNLOCKEDPAGES . . .  	0014
+  VMM_DWFREEPAGES  . . . . . . .  	0018
+  VMM_DWTOTALPAGES . . . . . . .  	001C
+  VMM_DWFREELINEARSPACE  . . . .  	0020
+  VMM_DWSWAPFILEPAGES  . . . . .  	0024
+  VMM_WPAGESIZE  . . . . . . . .  	0028
+
+Segments and Groups:
+
+                N a m e         	Size	Length	 Align	Combine Class
+
+DGROUP . . . . . . . . . . . . .  	GROUP
+  _DATA  . . . . . . . . . . . .  	16 Bit	0000	WORD	PUBLIC	'DATA'
+  _BSS . . . . . . . . . . . . .  	16 Bit	0000	WORD	PUBLIC	'BSS'
+_TEXT  . . . . . . . . . . . . .  	16 Bit	0283	WORD	PUBLIC	'CODE'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+BASEBAD  . . . . . . . . . . . .  	L NEAR	0043	_TEXT
+BASEOK . . . . . . . . . . . . .  	L NEAR	0047	_TEXT
+BUF  . . . . . . . . . . . . . .  	TEXT  (word ptr [bp+4])		
+
+CALLME . . . . . . . . . . . . .  	ALIAS	 _CALLME		
+CALLMETOO  . . . . . . . . . . .  	ALIAS	 _CALLMETOO		
+CALLSHERLOCK286  . . . . . . . .  	L NEAR	01A3	_TEXT
+CM_GO  . . . . . . . . . . . . .  	L NEAR	00B6	_TEXT
+CM_STAY  . . . . . . . . . . . .  	L NEAR	006F	_TEXT
+CODEBASE . . . . . . . . . . . .  	ALIAS	 _TEXT		
+CODEOFFSET . . . . . . . . . . .  	TEXT  offset _TEXT:		
+CPU32  . . . . . . . . . . . . .  	ALIAS	 _CPU32		
+
+DATABASE . . . . . . . . . . . .  	ALIAS	 DGROUP		
+DATAOFFSET . . . . . . . . . . .  	TEXT  offset DGROUP:		
+DONE . . . . . . . . . . . . . .  	L NEAR	002E	_TEXT
+DONEWITHSHERLOCK . . . . . . . .  	L NEAR	01AB	_TEXT
+DTAOFF . . . . . . . . . . . . .  	TEXT  (word ptr [bp-4])		
+DTASEG . . . . . . . . . . . . .  	TEXT  (word ptr [bp-2])		
+
+FCS  . . . . . . . . . . . . . .  	NUMBER	000C	
+FFLAG  . . . . . . . . . . . . .  	NUMBER	000E	
+FINDFILE . . . . . . . . . . . .  	ALIAS	 _FINDFILE		
+FINT . . . . . . . . . . . . . .  	NUMBER	0006	
+FIP  . . . . . . . . . . . . . .  	NUMBER	000A	
+FRAME_FAR  . . . . . . . . . . .  	NUMBER	0000	
+FRAME_NEAR . . . . . . . . . . .  	NUMBER	0001	
+
+GDI_HEAP . . . . . . . . . . . .  	NUMBER	0002	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Symbols-4
+
+
+GD_ACCELERATORS  . . . . . . . .  	NUMBER	0009	
+GD_BITMAP  . . . . . . . . . . .  	NUMBER	0002	
+GD_CURSOR  . . . . . . . . . . .  	NUMBER	000C	
+GD_CURSORCOMPONENT . . . . . . .  	NUMBER	0001	
+GD_DIALOG  . . . . . . . . . . .  	NUMBER	0005	
+GD_ERRTABLE  . . . . . . . . . .  	NUMBER	000B	
+GD_FONT  . . . . . . . . . . . .  	NUMBER	0008	
+GD_FONTDIR . . . . . . . . . . .  	NUMBER	0007	
+GD_ICON  . . . . . . . . . . . .  	NUMBER	000E	
+GD_ICONCOMPONENT . . . . . . . .  	NUMBER	0003	
+GD_MAX_RESOURCE  . . . . . . . .  	NUMBER	000F	
+GD_MENU  . . . . . . . . . . . .  	NUMBER	0004	
+GD_NAMETABLE . . . . . . . . . .  	NUMBER	000F	
+GD_RCDATA  . . . . . . . . . . .  	NUMBER	000A	
+GD_STRING  . . . . . . . . . . .  	NUMBER	0006	
+GD_USERDEFINED . . . . . . . . .  	NUMBER	0000	
+GETREGS32  . . . . . . . . . . .  	ALIAS	 _GETREGS32		
+GETTIMEDATE  . . . . . . . . . .  	ALIAS	 _GETTIMEDATE		
+GF_PDB_OWNER . . . . . . . . . .  	NUMBER	0100	
+GLOBAL_ALL . . . . . . . . . . .  	NUMBER	0000	
+GLOBAL_FREE  . . . . . . . . . .  	NUMBER	0002	
+GLOBAL_LRU . . . . . . . . . . .  	NUMBER	0001	
+GPFAULT  . . . . . . . . . . . .  	F PROC	00BA	_TEXT	Global	Length = 0139
+GT_BURGERMASTER  . . . . . . . .  	NUMBER	000A	
+GT_CODE  . . . . . . . . . . . .  	NUMBER	0003	
+GT_DATA  . . . . . . . . . . . .  	NUMBER	0002	
+GT_DGROUP  . . . . . . . . . . .  	NUMBER	0001	
+GT_FREE  . . . . . . . . . . . .  	NUMBER	0007	
+GT_INTERNAL  . . . . . . . . . .  	NUMBER	0008	
+GT_MODULE  . . . . . . . . . . .  	NUMBER	0006	
+GT_RESOURCE  . . . . . . . . . .  	NUMBER	0005	
+GT_SENTINEL  . . . . . . . . . .  	NUMBER	0009	
+GT_TASK  . . . . . . . . . . . .  	NUMBER	0004	
+GT_UNKNOWN . . . . . . . . . . .  	NUMBER	0000	
+
+ID . . . . . . . . . . . . . . .  	TEXT  word ptr [bp+10]		
+
+KEEPER . . . . . . . . . . . . .  	L NEAR	00D5	_TEXT
+
+LF_FIXED . . . . . . . . . . . .  	NUMBER	0001	
+LF_FREE  . . . . . . . . . . . .  	NUMBER	0002	
+LF_MOVEABLE  . . . . . . . . . .  	NUMBER	0004	
+LT_FREE  . . . . . . . . . . . .  	NUMBER	00FF	
+LT_GDI_BITMAP  . . . . . . . . .  	NUMBER	0005	
+LT_GDI_BRUSH . . . . . . . . . .  	NUMBER	0002	
+LT_GDI_DC  . . . . . . . . . . .  	NUMBER	0007	
+LT_GDI_DISABLED_DC . . . . . . .  	NUMBER	0008	
+LT_GDI_FONT  . . . . . . . . . .  	NUMBER	0003	
+LT_GDI_MAX . . . . . . . . . . .  	ALIAS	 LT_GDI_METAFILE		
+LT_GDI_METADC  . . . . . . . . .  	NUMBER	0009	
+LT_GDI_METAFILE  . . . . . . . .  	NUMBER	000A	
+LT_GDI_PALETTE . . . . . . . . .  	NUMBER	0004	
+LT_GDI_PEN . . . . . . . . . . .  	NUMBER	0001	
+LT_GDI_RGN . . . . . . . . . . .  	NUMBER	0006	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Symbols-5
+
+
+LT_NORMAL  . . . . . . . . . . .  	NUMBER	0000	
+
+MAX_CLASSNAME  . . . . . . . . .  	NUMBER	00FF	
+MAX_DATA . . . . . . . . . . . .  	NUMBER	000B	
+MAX_MODULE_NAME  . . . . . . . .  	NUMBER	0009	
+MAX_PATH . . . . . . . . . . . .  	NUMBER	00FF	
+
+NEWSP  . . . . . . . . . . . . .  	ALIAS	 _NEWSP		
+NFY_DELMODULE  . . . . . . . . .  	NUMBER	0006	
+NFY_EXITTASK . . . . . . . . . .  	NUMBER	0005	
+NFY_FREESEG  . . . . . . . . . .  	NUMBER	0002	
+NFY_INCHAR . . . . . . . . . . .  	NUMBER	000A	
+NFY_LOADSEG  . . . . . . . . . .  	NUMBER	0001	
+NFY_LOGERROR . . . . . . . . . .  	NUMBER	000C	
+NFY_LOGPARAMERROR  . . . . . . .  	NUMBER	000D	
+NFY_OUTSTR . . . . . . . . . . .  	NUMBER	000B	
+NFY_RIP  . . . . . . . . . . . .  	NUMBER	0007	
+NFY_STARTDLL . . . . . . . . . .  	NUMBER	0003	
+NFY_STARTTASK  . . . . . . . . .  	NUMBER	0004	
+NFY_TASKIN . . . . . . . . . . .  	NUMBER	0008	
+NFY_TASKOUT  . . . . . . . . . .  	NUMBER	0009	
+NFY_UNKNOWN  . . . . . . . . . .  	NUMBER	0000	
+NF_NORMAL  . . . . . . . . . . .  	NUMBER	0000	
+NF_RIP . . . . . . . . . . . . .  	NUMBER	0002	
+NF_TASKSWITCH  . . . . . . . . .  	NUMBER	0001	
+NOKEEP . . . . . . . . . . . . .  	L NEAR	00D1	_TEXT
+NORMAL_HEAP  . . . . . . . . . .  	NUMBER	0000	
+NOSAVE32 . . . . . . . . . . . .  	L NEAR	017B	_TEXT
+NO_UAE_BOX . . . . . . . . . . .  	NUMBER	0001	
+
+OFF_FOO  . . . . . . . . . . . .  	TEXT  word ptr [bp+6]		
+OH_NO  . . . . . . . . . . . . .  	L NEAR	01C1	_TEXT
+OH_NO_2  . . . . . . . . . . . .  	L NEAR	01F2	_TEXT
+
+RAX  . . . . . . . . . . . . . .  	NUMBER	0000	
+RBP  . . . . . . . . . . . . . .  	NUMBER	000A	
+RBX  . . . . . . . . . . . . . .  	NUMBER	0006	
+RCS  . . . . . . . . . . . . . .  	NUMBER	0016	
+RCX  . . . . . . . . . . . . . .  	NUMBER	0002	
+RDI  . . . . . . . . . . . . . .  	NUMBER	000E	
+RDS  . . . . . . . . . . . . . .  	NUMBER	001A	
+RDX  . . . . . . . . . . . . . .  	NUMBER	0004	
+REAX . . . . . . . . . . . . . .  	NUMBER	0000	
+REBP . . . . . . . . . . . . . .  	NUMBER	0014	
+REBX . . . . . . . . . . . . . .  	NUMBER	000C	
+RECX . . . . . . . . . . . . . .  	NUMBER	0004	
+REDI . . . . . . . . . . . . . .  	NUMBER	001C	
+REDX . . . . . . . . . . . . . .  	NUMBER	0008	
+REFLAGS  . . . . . . . . . . . .  	NUMBER	0024	
+REGS . . . . . . . . . . . . . .  	ALIAS	 _REGS		
+REGS32 . . . . . . . . . . . . .  	ALIAS	 _REGS32		
+REIP . . . . . . . . . . . . . .  	NUMBER	0020	
+RES  . . . . . . . . . . . . . .  	NUMBER	0014	
+RESI . . . . . . . . . . . . . .  	NUMBER	0018	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Symbols-6
+
+
+RESP . . . . . . . . . . . . . .  	NUMBER	0010	
+RETFLAG  . . . . . . . . . . . .  	ALIAS	 _RETFLAG		
+RFLAG  . . . . . . . . . . . . .  	NUMBER	0012	
+RFS  . . . . . . . . . . . . . .  	NUMBER	001C	
+RGS  . . . . . . . . . . . . . .  	NUMBER	001E	
+RIGHTOK  . . . . . . . . . . . .  	L NEAR	005A	_TEXT
+RINT . . . . . . . . . . . . . .  	NUMBER	0020	
+RIP  . . . . . . . . . . . . . .  	NUMBER	0010	
+RSI  . . . . . . . . . . . . . .  	NUMBER	000C	
+RSP  . . . . . . . . . . . . . .  	NUMBER	0008	
+RSS  . . . . . . . . . . . . . .  	NUMBER	0018	
+
+SEGBASE  . . . . . . . . . . . .  	ALIAS	 _SEGBASE		
+SEGLIMIT . . . . . . . . . . . .  	ALIAS	 _SEGLIMIT		
+SEGLIMIT32 . . . . . . . . . . .  	L NEAR	0014	_TEXT
+SEGRIGHTS  . . . . . . . . . . .  	ALIAS	 _SEGRIGHTS		
+SEGVAL . . . . . . . . . . . . .  	TEXT  (word ptr [bp+4])		
+SEG_FOO  . . . . . . . . . . . .  	TEXT  word ptr [bp+8]		
+SHERLOCK . . . . . . . . . . . .  	ALIAS	 _SHERLOCK		
+
+TS_ERROR . . . . . . . . . . . .  	NUMBER	0000	
+TS_NEW . . . . . . . . . . . . .  	NUMBER	0001	
+TS_OLD . . . . . . . . . . . . .  	NUMBER	0002	
+
+UAE_BOX  . . . . . . . . . . . .  	NUMBER	0000	
+USER_HEAP  . . . . . . . . . . .  	NUMBER	0001	
+
+VAL  . . . . . . . . . . . . . .  	NUMBER	0028	
+
+?386REGS . . . . . . . . . . . .  	NUMBER	0000	
+?QUIET . . . . . . . . . . . . .  	NUMBER	0001	
+@CODE  . . . . . . . . . . . . .  	TEXT  _TEXT		
+@CODESIZE  . . . . . . . . . . .  	TEXT  0		
+@CPU . . . . . . . . . . . . . .  	TEXT  1415		
+@DATASIZE  . . . . . . . . . . .  	TEXT  0		
+@FILENAME  . . . . . . . . . . .  	TEXT  watson		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+_CALLME  . . . . . . . . . . . .  	F PROC	005E	_TEXT	Global	Length = 005C
+_CALLMETOO . . . . . . . . . . .  	L NEAR	0000	_TEXT	External
+_CPU32 . . . . . . . . . . . . .  	V WORD	0000	_BSS	External
+_FINDFILE  . . . . . . . . . . .  	N PROC	024E	_TEXT	Global	Length = 0035
+_GETREGS32 . . . . . . . . . . .  	N PROC	01F3	_TEXT	Global	Length = 0001
+_GETTIMEDATE . . . . . . . . . .  	N PROC	022B	_TEXT	Global	Length = 0023
+_NAME  . . . . . . . . . . . . .  	TEXT  (word ptr [bp+6])		
+_NEWSP . . . . . . . . . . . . .  	V WORD	0000	_BSS	External
+_REGS  . . . . . . . . . . . . .  	V WORD	0000	_BSS	External
+_REGS32  . . . . . . . . . . . .  	V DWORD	0000	_BSS	External
+_RETFLAG . . . . . . . . . . . .  	V WORD	0000	_BSS	External
+_SEGBASE . . . . . . . . . . . .  	N PROC	0032	_TEXT	Global	Length = 001D
+_SEGLIMIT  . . . . . . . . . . .  	N PROC	0000	_TEXT	Global	Length = 0032
+_SEGRIGHTS . . . . . . . . . . .  	N PROC	004F	_TEXT	Global	Length = 000F
+_SHERLOCK  . . . . . . . . . . .  	L NEAR	0000	_TEXT	External
+
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:58 2019
+                                                             Symbols-7
+
+
+
+   2030 Source  Lines
+   8103 Total   Lines
+    493 Symbols
+      0 Warning Errors
+      0 Severe  Errors

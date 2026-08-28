@@ -1,0 +1,2469 @@
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Page     1-1
+
+
+			      \		TITLE	WINSPOOL.ASM
+			      \		PAGE	,132
+			      \	;
+			      \	; WOW v1.0
+			      \	;
+			      \	; Copyright (c) 1991, Microsoft Corporation
+			      \	;
+			      \	; WINSPOOL.ASM
+			      \	; Thunks in 16-bit space to route Windows API calls to WOW32
+			      \	;
+			      \	; History:
+			      \	;   17-OCT-1991 Matt Felton (mattfe)
+			      \	;   Created.
+			      \	;
+				
+			      \		.286p
+				
+			      \		.list
+				
+ = 0000                       \		__acrtused = 0
+			      \		public	__acrtused	;satisfy external C ref.
+				
+				
+			      \	createSeg   _TEXT,CODE,WORD,PUBLIC,CODE
+ 0000                         \	_TEXT segment WORD PUBLIC 'CODE' 
+ 0000                         \	_TEXT ends 
+			      \	createSeg   _DATA,DATA,WORD,PUBLIC,DATA,DGROUP
+ 0000                         \	_DATA segment WORD PUBLIC 'DATA' 
+ 0000                         \	_DATA ends 
+			      \	defgrp	    DGROUP,DATA
+				
+			      \	sBegin	DATA
+ 0000                         \	_DATA segment 
+ 0000  0010[                  \	Reserved	db  16 dup (0)	    ;reserved for Windows  //!!!!! what is this
+	   00			
+			 ]	
+				
+				
+ 0010  57 49 4E 53 50 4F      \	WINSPOOL_Identifier	db	'WINSPOOL16 Data Segment'
+       4F 4C 31 36 20 44	
+       61 74 61 20 53 65	
+       67 6D 65 6E 74		
+			      \	public _iLogLevel
+ 0027  0000                   \	_iLogLevel	dw	0
+			      \	public _iBreakLevel
+ 0029  0000                   \	_iBreakLevel	dw	0
+				
+			      \	sEnd	DATA
+ 002B                         \	_DATA ends 
+				
+				
+			      \	sBegin	CODE
+ 0000                         \	_TEXT segment 
+			      \	assumes	CS,CODE
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Page     1-2
+
+
+			      \	assumes DS,DATA
+			      \	assumes ES,NOTHING
+				
+			      \	cProc	WINSPOOL16,<PUBLIC,FAR,PASCAL,NODATA,ATOMIC>
+			      \		cBegin	<nogen>
+ 0000                         \	WINSPOOL16 proc far 
+ 0000  B8 0001                \		mov	ax,1		;always indicate success
+ 0003  CB                     \		ret
+			      \		cEnd	<nogen>
+ 0004                         \	WINSPOOL16 endp 
+				
+			      \	assumes DS,NOTHING
+				
+			      \	cProc	WEP,<PUBLIC,FAR,PASCAL,NODATA,NOWIN,ATOMIC>
+			      \		parmW	iExit		;DLL exit code
+				
+			      \		cBegin
+ 0004                         \	WEP proc far 
+ 0004  55                     \		push	bp 
+ 0005  8B EC                  \		mov	bp,sp 
+ 0007  B8 0001                \		mov	ax,1		;always indicate success
+			      \		cEnd
+ 000A  8B E5                  \		mov	sp,bp 
+ 000C  5D                     \		pop	bp 
+ 000D  CA 0002                \		ret	2 
+ 0010                         \	WEP endp 
+				
+			      \	assumes DS,DATA
+				
+			      \	assumes DS,NOTHING
+				
+			      \		DGDIThunk	 DEVICEMODE
+ 0010                         \	DEVICEMODE proc far 
+ 0010  6A 0C                  \	        push    size DEVICEMODE16 
+ 0012                         \	        tmplabel_DEVICEMODE: 
+ 0012  68 0000                \	            push    word ptr HI_WCALLID 
+ 0015  68 01C4 E              \	            push    __MOD_DGDI + FUN_DEVICEMODE 
+ 0018  9A 0000 ---- E         \	            call   WOW16Call 
+ 001D                         \	DEVICEMODE endp 
+			      \		DGDIThunk	 EXTDEVICEMODE
+ 001D                         \	EXTDEVICEMODE proc far 
+ 001D  6A 1A                  \	        push    size EXTDEVICEMODE16 
+ 001F                         \	        tmplabel_EXTDEVICEMODE: 
+ 001F  68 0000                \	            push    word ptr HI_WCALLID 
+ 0022  68 01C5 E              \	            push    __MOD_DGDI + FUN_EXTDEVICEMODE 
+ 0025  9A 0000 ---- E         \	            call   WOW16Call 
+ 002A                         \	EXTDEVICEMODE endp 
+			      \		DGDIThunk	 DEVICECAPABILITIES
+ 002A                         \	DEVICECAPABILITIES proc far 
+ 002A  6A 12                  \	        push    size DEVICECAPABILITIES16 
+ 002C                         \	        tmplabel_DEVICECAPABILITIES: 
+ 002C  68 0000                \	            push    word ptr HI_WCALLID 
+ 002F  68 01C6 E              \	            push    __MOD_DGDI + FUN_DEVICECAPABILITIES 
+ 0032  9A 0000 ---- E         \	            call   WOW16Call 
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Page     1-3
+
+
+ 0037                         \	DEVICECAPABILITIES endp 
+				
+			      \	cProc	ExtTextOut,<PUBLIC,FAR>
+			      \	cBegin
+ 0037                         \	ExtTextOut proc far 
+ 0037  8C D8                  \		mov	ax,ds 
+ 0039  90                     \		nop 
+ 003A  45                     \		inc	bp 
+ 003B  55                     \		push	bp 
+ 003C  8B EC                  \		mov	bp,sp 
+ 003E  1E                     \		push	ds 
+ 003F  8E D8                  \		mov	ds,ax 
+ 0041  CC                     \		int 3
+			      \	cEnd
+ 0042  8D 66 FE               \		lea	sp,-2[bp] 
+ 0045  1F                     \		pop	ds 
+ 0046  5D                     \		pop	bp 
+ 0047  4D                     \		dec	bp 
+ 0048  CB                     \		ret	0 
+ 0049                         \	ExtTextOut endp 
+				
+				
+			      \	sEnd	CODE
+ 0049                         \	_TEXT ends 
+				
+			      \	end	WINSPOOL16
+
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-1
+
+
+Macros:
+
+		N a m e			Lines
+
+BOP  . . . . . . . . . . . . . .  	   1
+CommdlgThunk . . . . . . . . . .  	   1
+DGDIThunk  . . . . . . . . . . .  	   1
+DKernelThunk . . . . . . . . . .  	   1
+DUserThunk . . . . . . . . . . .  	   1
+EUserThunk . . . . . . . . . . .  	   1
+FBOP . . . . . . . . . . . . . .  	   4
+GDIThunk . . . . . . . . . . . .  	   1
+KbdThunk . . . . . . . . . . . .  	   1
+KernelThunk  . . . . . . . . . .  	   1
+MMediaThunk  . . . . . . . . . .  	   1
+PDUserThunk  . . . . . . . . . .  	   1
+PGDIThunk  . . . . . . . . . . .  	   1
+PKernelThunk . . . . . . . . . .  	   1
+PUserThunk . . . . . . . . . . .  	   1
+SHELLThunk . . . . . . . . . . .  	   1
+SoundThunk . . . . . . . . . . .  	   1
+Thunk  . . . . . . . . . . . . .  	  69
+ToolHelpThunk  . . . . . . . . .  	   1
+UserThunk  . . . . . . . . . . .  	   1
+WinsockThunk . . . . . . . . . .  	   1
+
+Structures and Records:
+
+                N a m e                 Width   # fields
+                                        Shift   Width   Mask    Initial
+
+ABC16  . . . . . . . . . . . . .  	0006	0003
+  abc16_abcA . . . . . . . . . .  	0000
+  abc16_abcB . . . . . . . . . .  	0002
+  abc16_abcC . . . . . . . . . .  	0004
+ABORTDOC16 . . . . . . . . . . .  	0002	0001
+  g382_f1  . . . . . . . . . . .  	0000
+ADDFONTRESOURCE16  . . . . . . .  	0004	0001
+  g119_f1  . . . . . . . . . . .  	0000
+ANIMATEPALETTE16 . . . . . . . .  	000A	0004
+  g367_f4  . . . . . . . . . . .  	0000
+  g367_f3  . . . . . . . . . . .  	0004
+  g367_f2  . . . . . . . . . . .  	0006
+  g367_f1  . . . . . . . . . . .  	0008
+ARC16  . . . . . . . . . . . . .  	0012	0009
+  g23_f9 . . . . . . . . . . . .  	0000
+  g23_f8 . . . . . . . . . . . .  	0002
+  g23_f7 . . . . . . . . . . . .  	0004
+  g23_f6 . . . . . . . . . . . .  	0006
+  g23_f5 . . . . . . . . . . . .  	0008
+  g23_f4 . . . . . . . . . . . .  	000A
+  g23_f3 . . . . . . . . . . . .  	000C
+  g23_f2 . . . . . . . . . . . .  	000E
+  g23_f1 . . . . . . . . . . . .  	0010
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-2
+
+
+BITBLT16 . . . . . . . . . . . .  	0014	0009
+  g34_f9 . . . . . . . . . . . .  	0000
+  g34_f8 . . . . . . . . . . . .  	0004
+  g34_f7 . . . . . . . . . . . .  	0006
+  g34_f6 . . . . . . . . . . . .  	0008
+  g34_f5 . . . . . . . . . . . .  	000A
+  g34_f4 . . . . . . . . . . . .  	000C
+  g34_f3 . . . . . . . . . . . .  	000E
+  g34_f2 . . . . . . . . . . . .  	0010
+  g34_f1 . . . . . . . . . . . .  	0012
+BITMAP16 . . . . . . . . . . . .  	000E	0007
+  bm16_bmType  . . . . . . . . .  	0000
+  bm16_bmWidth . . . . . . . . .  	0002
+  bm16_bmHeight  . . . . . . . .  	0004
+  bm16_bmWidthBytes  . . . . . .  	0006
+  bm16_bmPlanes  . . . . . . . .  	0008
+  bm16_bmBitsPixel . . . . . . .  	0009
+  bm16_bmBits  . . . . . . . . .  	000A
+BITMAPCOREHEADER16 . . . . . . .  	000C	0005
+  bmch16_bcSize  . . . . . . . .  	0000
+  bmch16_bcWidth . . . . . . . .  	0004
+  bmch16_bcHeight  . . . . . . .  	0006
+  bmch16_bcPlanes  . . . . . . .  	0008
+  bmch16_bcBitCount  . . . . . .  	000A
+BITMAPCOREINFO16 . . . . . . . .  	000F	0002
+  bmci16_bmciHeader  . . . . . .  	0000
+  bmci16_bmciColors  . . . . . .  	000C
+CBTACTIVATESTRUCT16  . . . . . .  	0004	0002
+  cbtas16_fMouse . . . . . . . .  	0000
+  cbtas16_hWndActive . . . . . .  	0002
+CBT_CREATEWND16  . . . . . . . .  	0006	0002
+  cbtcw16_vpcs . . . . . . . . .  	0000
+  cbtcw16_hwndInsertAfter  . . .  	0004
+CBVDMFRAME . . . . . . . . . . .  	0026	000A
+  cvf_wTDB . . . . . . . . . . .  	0000
+  cvf_wRetID . . . . . . . . . .  	0002
+  cvf_wLocalBP . . . . . . . . .  	0004
+  cvf_Parm16 . . . . . . . . . .  	0006
+  cvf_vpfnProc . . . . . . . . .  	0016
+  cvf_vpStack  . . . . . . . . .  	001A
+  cvf_wAX  . . . . . . . . . . .  	001E
+  cvf_wDX  . . . . . . . . . . .  	0020
+  cvf_wGenUse1 . . . . . . . . .  	0022
+  cvf_wGenUse2 . . . . . . . . .  	0024
+CHORD16  . . . . . . . . . . . .  	0012	0009
+  g348_f9  . . . . . . . . . . .  	0000
+  g348_f8  . . . . . . . . . . .  	0002
+  g348_f7  . . . . . . . . . . .  	0004
+  g348_f6  . . . . . . . . . . .  	0006
+  g348_f5  . . . . . . . . . . .  	0008
+  g348_f4  . . . . . . . . . . .  	000A
+  g348_f3  . . . . . . . . . . .  	000C
+  g348_f2  . . . . . . . . . . .  	000E
+  g348_f1  . . . . . . . . . . .  	0010
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-3
+
+
+CLIENTCREATESTRUCT16 . . . . . .  	0004	0002
+  ccs16_hWindowMenu  . . . . . .  	0000
+  ccs16_idFirstChild . . . . . .  	0002
+CLOSEJOB16 . . . . . . . . . . .  	0002	0001
+  g243_f1  . . . . . . . . . . .  	0000
+CLOSEMETAFILE16  . . . . . . . .  	0002	0001
+  g126_f1  . . . . . . . . . . .  	0000
+COMBINERGN16 . . . . . . . . . .  	0008	0004
+  g47_f4 . . . . . . . . . . . .  	0000
+  g47_f3 . . . . . . . . . . . .  	0002
+  g47_f2 . . . . . . . . . . . .  	0004
+  g47_f1 . . . . . . . . . . . .  	0006
+COMPAREITEMSTRUCT16  . . . . . .  	0012	0007
+  cis16_CtlType  . . . . . . . .  	0000
+  cis16_CtlID  . . . . . . . . .  	0002
+  cis16_hwndItem . . . . . . . .  	0004
+  cis16_itemID1  . . . . . . . .  	0006
+  cis16_itemData1  . . . . . . .  	0008
+  cis16_itemID2  . . . . . . . .  	000C
+  cis16_itemData2  . . . . . . .  	000E
+COMSTAT16  . . . . . . . . . . .  	0005	0003
+  cs16_status  . . . . . . . . .  	0000
+  cs16_cbInQue . . . . . . . . .  	0001
+  cs16_cbOutQue  . . . . . . . .  	0003
+COPYMETAFILE16 . . . . . . . . .  	0006	0002
+  g151_f2  . . . . . . . . . . .  	0000
+  g151_f1  . . . . . . . . . . .  	0004
+CREATEBITMAP16 . . . . . . . . .  	000C	0005
+  g48_f5 . . . . . . . . . . . .  	0000
+  g48_f4 . . . . . . . . . . . .  	0004
+  g48_f3 . . . . . . . . . . . .  	0006
+  g48_f2 . . . . . . . . . . . .  	0008
+  g48_f1 . . . . . . . . . . . .  	000A
+CREATEBITMAPINDIRECT16 . . . . .  	0004	0001
+  g49_f1 . . . . . . . . . . . .  	0000
+CREATEBRUSHINDIRECT16  . . . . .  	0004	0001
+  g50_f1 . . . . . . . . . . . .  	0000
+CREATECOMPATIBLEBITMAP16 . . . .  	0006	0003
+  g51_f3 . . . . . . . . . . . .  	0000
+  g51_f2 . . . . . . . . . . . .  	0002
+  g51_f1 . . . . . . . . . . . .  	0004
+CREATECOMPATIBLEDC16 . . . . . .  	0002	0001
+  g52_f1 . . . . . . . . . . . .  	0000
+CREATEDC16 . . . . . . . . . . .  	0010	0004
+  g53_f4 . . . . . . . . . . . .  	0000
+  g53_f3 . . . . . . . . . . . .  	0004
+  g53_f2 . . . . . . . . . . . .  	0008
+  g53_f1 . . . . . . . . . . . .  	000C
+CREATEDIBITMAP16 . . . . . . . .  	0014	0006
+  g442_f6  . . . . . . . . . . .  	0000
+  g442_f5  . . . . . . . . . . .  	0002
+  g442_f4  . . . . . . . . . . .  	0006
+  g442_f3  . . . . . . . . . . .  	000A
+  g442_f2  . . . . . . . . . . .  	000E
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-4
+
+
+  g442_f1  . . . . . . . . . . .  	0012
+CREATEDIBPATTERNBRUSH16  . . . .  	0006	0002
+  g445_f2  . . . . . . . . . . .  	0000
+  g445_f1  . . . . . . . . . . .  	0002
+CREATEDIBSECTION16 . . . . . . .  	0014	0006
+  g489_f6  . . . . . . . . . . .  	0000
+  g489_f5  . . . . . . . . . . .  	0004
+  g489_f4  . . . . . . . . . . .  	0008
+  g489_f3  . . . . . . . . . . .  	000C
+  g489_f2  . . . . . . . . . . .  	000E
+  g489_f1  . . . . . . . . . . .  	0012
+CREATEDISCARDABLEBITMAP16  . . .  	0006	0003
+  g156_height  . . . . . . . . .  	0000
+  g156_width . . . . . . . . . .  	0002
+  g156_hdc . . . . . . . . . . .  	0004
+CREATEELLIPTICRGN16  . . . . . .  	0008	0004
+  g54_f4 . . . . . . . . . . . .  	0000
+  g54_f3 . . . . . . . . . . . .  	0002
+  g54_f2 . . . . . . . . . . . .  	0004
+  g54_f1 . . . . . . . . . . . .  	0006
+CREATEELLIPTICRGNINDIRECT16  . .  	0004	0001
+  g55_f1 . . . . . . . . . . . .  	0000
+CREATEFONT16 . . . . . . . . . .  	001E	000E
+  g56_f14  . . . . . . . . . . .  	0000
+  g56_f13  . . . . . . . . . . .  	0004
+  g56_f12  . . . . . . . . . . .  	0006
+  g56_f11  . . . . . . . . . . .  	0008
+  g56_f10  . . . . . . . . . . .  	000A
+  g56_f9 . . . . . . . . . . . .  	000C
+  g56_f8 . . . . . . . . . . . .  	000E
+  g56_f7 . . . . . . . . . . . .  	0010
+  g56_f6 . . . . . . . . . . . .  	0012
+  g56_f5 . . . . . . . . . . . .  	0014
+  g56_f4 . . . . . . . . . . . .  	0016
+  g56_f3 . . . . . . . . . . . .  	0018
+  g56_f2 . . . . . . . . . . . .  	001A
+  g56_f1 . . . . . . . . . . . .  	001C
+CREATEFONTINDIRECT16 . . . . . .  	0004	0001
+  g57_f1 . . . . . . . . . . . .  	0000
+CREATEHATCHBRUSH16 . . . . . . .  	0006	0002
+  g58_f2 . . . . . . . . . . . .  	0000
+  g58_f1 . . . . . . . . . . . .  	0004
+CREATEIC16 . . . . . . . . . . .  	0010	0004
+  g153_f4  . . . . . . . . . . .  	0000
+  g153_f3  . . . . . . . . . . .  	0004
+  g153_f2  . . . . . . . . . . .  	0008
+  g153_f1  . . . . . . . . . . .  	000C
+CREATEMETAFILE16 . . . . . . . .  	0004	0001
+  g125_f1  . . . . . . . . . . .  	0000
+CREATEPALETTE16  . . . . . . . .  	0004	0001
+  g360_f1  . . . . . . . . . . .  	0000
+CREATEPATTERNBRUSH16 . . . . . .  	0002	0001
+  g60_f1 . . . . . . . . . . . .  	0000
+CREATEPEN16  . . . . . . . . . .  	0008	0003
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-5
+
+
+  g61_f3 . . . . . . . . . . . .  	0000
+  g61_f2 . . . . . . . . . . . .  	0004
+  g61_f1 . . . . . . . . . . . .  	0006
+CREATEPENINDIRECT16  . . . . . .  	0004	0001
+  g62_f1 . . . . . . . . . . . .  	0000
+CREATEPOLYGONRGN16 . . . . . . .  	0008	0003
+  g63_f3 . . . . . . . . . . . .  	0000
+  g63_f2 . . . . . . . . . . . .  	0002
+  g63_f1 . . . . . . . . . . . .  	0004
+CREATEPOLYPOLYGONRGN16 . . . . .  	000C	0004
+  g451_f4  . . . . . . . . . . .  	0000
+  g451_f3  . . . . . . . . . . .  	0002
+  g451_f2  . . . . . . . . . . .  	0004
+  g451_f1  . . . . . . . . . . .  	0008
+CREATERECTRGN16  . . . . . . . .  	0008	0004
+  g64_f4 . . . . . . . . . . . .  	0000
+  g64_f3 . . . . . . . . . . . .  	0002
+  g64_f2 . . . . . . . . . . . .  	0004
+  g64_f1 . . . . . . . . . . . .  	0006
+CREATERECTRGNINDIRECT16  . . . .  	0004	0001
+  g65_f1 . . . . . . . . . . . .  	0000
+CREATEROUNDRECTRGN16 . . . . . .  	000C	0006
+  g444_f6  . . . . . . . . . . .  	0000
+  g444_f5  . . . . . . . . . . .  	0002
+  g444_f4  . . . . . . . . . . .  	0004
+  g444_f3  . . . . . . . . . . .  	0006
+  g444_f2  . . . . . . . . . . .  	0008
+  g444_f1  . . . . . . . . . . .  	000A
+CREATESCALABLEFONTRESOURCE16 . .  	000E	0004
+  g510_f4  . . . . . . . . . . .  	0000
+  g510_f3  . . . . . . . . . . .  	0004
+  g510_f2  . . . . . . . . . . .  	0008
+  g510_f1  . . . . . . . . . . .  	000C
+CREATESOLIDBRUSH16 . . . . . . .  	0004	0001
+  g66_f1 . . . . . . . . . . . .  	0000
+CREATESTRUCT16 . . . . . . . . .  	0022	000C
+  cws16_vpCreateParams . . . . .  	0000
+  cws16_hInstance  . . . . . . .  	0004
+  cws16_hMenu  . . . . . . . . .  	0006
+  cws16_hwndParent . . . . . . .  	0008
+  cws16_cy . . . . . . . . . . .  	000A
+  cws16_cx . . . . . . . . . . .  	000C
+  cws16_y  . . . . . . . . . . .  	000E
+  cws16_x  . . . . . . . . . . .  	0010
+  cws16_dwStyle  . . . . . . . .  	0012
+  cws16_vpszWindow . . . . . . .  	0016
+  cws16_vpszClass  . . . . . . .  	001A
+  cws16_dwExStyle  . . . . . . .  	001E
+CREATEUSERBITMAP16 . . . . . . .  	000C	0005
+  g407_f5  . . . . . . . . . . .  	0000
+  g407_f4  . . . . . . . . . . .  	0004
+  g407_f3  . . . . . . . . . . .  	0006
+  g407_f2  . . . . . . . . . . .  	0008
+  g407_f1  . . . . . . . . . . .  	000A
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-6
+
+
+CURSORDIR16  . . . . . . . . . .  	0004	0002
+  cdir16_Width . . . . . . . . .  	0000
+  cdir16_Height  . . . . . . . .  	0002
+CWPSTRUCT16  . . . . . . . . . .  	000A	0004
+  cwps16_lParam  . . . . . . . .  	0000
+  cwps16_wParam  . . . . . . . .  	0004
+  cwps16_message . . . . . . . .  	0006
+  cwps16_hwnd  . . . . . . . . .  	0008
+DCB16  . . . . . . . . . . . . .  	0019	0011
+  dcb16_Id . . . . . . . . . . .  	0000
+  dcb16_BaudRate . . . . . . . .  	0001
+  dcb16_ByteSize . . . . . . . .  	0003
+  dcb16_Parity . . . . . . . . .  	0004
+  dcb16_StopBits . . . . . . . .  	0005
+  dcb16_RlsTimeout . . . . . . .  	0006
+  dcb16_CtsTimeout . . . . . . .  	0008
+  dcb16_DsrTimeout . . . . . . .  	000A
+  dcb16_wFlags . . . . . . . . .  	000C
+  dcb16_XonChar  . . . . . . . .  	000E
+  dcb16_XoffChar . . . . . . . .  	000F
+  dcb16_XonLim . . . . . . . . .  	0010
+  dcb16_XoffLim  . . . . . . . .  	0012
+  dcb16_PeChar . . . . . . . . .  	0014
+  dcb16_EofChar  . . . . . . . .  	0015
+  dcb16_EvtChar  . . . . . . . .  	0016
+  dcb16_TxDelay  . . . . . . . .  	0017
+DEBUGHOOKINFO16  . . . . . . . .  	000E	0005
+  dbgi16_hModuleHook . . . . . .  	0000
+  dbgi16_reserved  . . . . . . .  	0002
+  dbgi16_lParam  . . . . . . . .  	0006
+  dbgi16_wParam  . . . . . . . .  	000A
+  dbgi16_code  . . . . . . . . .  	000C
+DELETEDC16 . . . . . . . . . . .  	0002	0001
+  g68_f1 . . . . . . . . . . . .  	0000
+DELETEITEMSTRUCT16 . . . . . . .  	000C	0005
+  des16_CtlType  . . . . . . . .  	0000
+  des16_CtlID  . . . . . . . . .  	0002
+  des16_itemID . . . . . . . . .  	0004
+  des16_hwndItem . . . . . . . .  	0006
+  des16_itemData . . . . . . . .  	0008
+DELETEJOB16  . . . . . . . . . .  	0004	0002
+  g244_f2  . . . . . . . . . . .  	0000
+  g244_f1  . . . . . . . . . . .  	0002
+DELETEMETAFILE16 . . . . . . . .  	0002	0001
+  g127_f1  . . . . . . . . . . .  	0000
+DELETEOBJECT16 . . . . . . . . .  	0002	0001
+  g69_f1 . . . . . . . . . . . .  	0000
+DEVICECAPABILITIES16 . . . . . .  	0012	0005
+  g454_f5  . . . . . . . . . . .  	0000
+  g454_f4  . . . . . . . . . . .  	0004
+  g454_f3  . . . . . . . . . . .  	0008
+  g454_f2  . . . . . . . . . . .  	000A
+  g454_f1  . . . . . . . . . . .  	000E
+DEVICEMODE16 . . . . . . . . . .  	000C	0004
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-7
+
+
+  g452_f4  . . . . . . . . . . .  	0000
+  g452_f3  . . . . . . . . . . .  	0004
+  g452_f2  . . . . . . . . . . .  	0008
+  g452_f1  . . . . . . . . . . .  	000A
+DEVMODE16  . . . . . . . . . . .  	0040	0010
+  dm16_dmDeviceName  . . . . . .  	0000
+  dm16_dmSpecVersion . . . . . .  	0020
+  dm16_dmDriverVersion . . . . .  	0022
+  dm16_dmSize  . . . . . . . . .  	0024
+  dm16_dmDriverExtra . . . . . .  	0026
+  dm16_dmFields  . . . . . . . .  	0028
+  dm16_dmOrientation . . . . . .  	002C
+  dm16_dmPaperSize . . . . . . .  	002E
+  dm16_dmPaperLength . . . . . .  	0030
+  dm16_dmPaperWidth  . . . . . .  	0032
+  dm16_dmScale . . . . . . . . .  	0034
+  dm16_dmCopies  . . . . . . . .  	0036
+  dm16_dmDefaultSource . . . . .  	0038
+  dm16_dmPrintQuality  . . . . .  	003A
+  dm16_dmColor . . . . . . . . .  	003C
+  dm16_dmDuplex  . . . . . . . .  	003E
+DEVMODE31  . . . . . . . . . . .  	0044	0012
+  dm31_dmDeviceName  . . . . . .  	0000
+  dm31_dmSpecVersion . . . . . .  	0020
+  dm31_dmDriverVersion . . . . .  	0022
+  dm31_dmSize  . . . . . . . . .  	0024
+  dm31_dmDriverExtra . . . . . .  	0026
+  dm31_dmFields  . . . . . . . .  	0028
+  dm31_dmOrientation . . . . . .  	002C
+  dm31_dmPaperSize . . . . . . .  	002E
+  dm31_dmPaperLength . . . . . .  	0030
+  dm31_dmPaperWidth  . . . . . .  	0032
+  dm31_dmScale . . . . . . . . .  	0034
+  dm31_dmCopies  . . . . . . . .  	0036
+  dm31_dmDefaultSource . . . . .  	0038
+  dm31_dmPrintQuality  . . . . .  	003A
+  dm31_dmColor . . . . . . . . .  	003C
+  dm31_dmDuplex  . . . . . . . .  	003E
+  dm31_dmYResolution . . . . . .  	0040
+  dm31_dmTTOption  . . . . . . .  	0042
+DLGITEMTEMPLATE16  . . . . . . .  	000E	0006
+  dit16_x  . . . . . . . . . . .  	0000
+  dit16_y  . . . . . . . . . . .  	0002
+  dit16_cx . . . . . . . . . . .  	0004
+  dit16_cy . . . . . . . . . . .  	0006
+  dit16_id . . . . . . . . . . .  	0008
+  dit16_style  . . . . . . . . .  	000A
+DLGTEMPLATE16  . . . . . . . . .  	000D	0006
+  dt16_style . . . . . . . . . .  	0000
+  dt16_cdit  . . . . . . . . . .  	0004
+  dt16_x . . . . . . . . . . . .  	0005
+  dt16_y . . . . . . . . . . . .  	0007
+  dt16_cx  . . . . . . . . . . .  	0009
+  dt16_cy  . . . . . . . . . . .  	000B
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-8
+
+
+DMBITBLT16 . . . . . . . . . . .  	0020	000B
+  g201_pdrawmode . . . . . . . .  	0000
+  g201_pbrush  . . . . . . . . .  	0004
+  g201_rop . . . . . . . . . . .  	0008
+  g201_exty  . . . . . . . . . .  	000C
+  g201_extx  . . . . . . . . . .  	000E
+  g201_srcy  . . . . . . . . . .  	0010
+  g201_srcx  . . . . . . . . . .  	0012
+  g201_pbitmapsrc  . . . . . . .  	0014
+  g201_desty . . . . . . . . . .  	0018
+  g201_destx . . . . . . . . . .  	001A
+  g201_pbitmapdest . . . . . . .  	001C
+DOCINFO16  . . . . . . . . . . .  	000A	0003
+  di16wow32_cbSize . . . . . . .  	0000
+  di16wow32_lpszDocName  . . . .  	0002
+  di16wow32_lpszOutput . . . . .  	0006
+DPTOLP16 . . . . . . . . . . . .  	0008	0003
+  g67_f3 . . . . . . . . . . . .  	0000
+  g67_f2 . . . . . . . . . . . .  	0002
+  g67_f1 . . . . . . . . . . . .  	0006
+DRAWITEMSTRUCT16 . . . . . . . .  	001A	0009
+  dis16_CtlType  . . . . . . . .  	0000
+  dis16_CtlID  . . . . . . . . .  	0002
+  dis16_itemID . . . . . . . . .  	0004
+  dis16_itemAction . . . . . . .  	0006
+  dis16_itemState  . . . . . . .  	0008
+  dis16_hwndItem . . . . . . . .  	000A
+  dis16_hDC  . . . . . . . . . .  	000C
+  dis16_rcItem . . . . . . . . .  	000E
+  dis16_itemData . . . . . . . .  	0016
+ELLIPSE16  . . . . . . . . . . .  	000A	0005
+  g24_y2 . . . . . . . . . . . .  	0000
+  g24_x2 . . . . . . . . . . . .  	0002
+  g24_y1 . . . . . . . . . . . .  	0004
+  g24_x1 . . . . . . . . . . . .  	0006
+  g24_hdc  . . . . . . . . . . .  	0008
+ENDDOC16 . . . . . . . . . . . .  	0002	0001
+  g378_f1  . . . . . . . . . . .  	0000
+ENDPAGE16  . . . . . . . . . . .  	0002	0001
+  g380_f1  . . . . . . . . . . .  	0000
+ENDSPOOLPAGE16 . . . . . . . . .  	0002	0001
+  g247_f1  . . . . . . . . . . .  	0000
+ENUMFONTFAMILIES16 . . . . . . .  	000E	0004
+  g330_f4  . . . . . . . . . . .  	0000
+  g330_f3  . . . . . . . . . . .  	0004
+  g330_f2  . . . . . . . . . . .  	0008
+  g330_f1  . . . . . . . . . . .  	000C
+ENUMFONTS16  . . . . . . . . . .  	000E	0004
+  g70_f4 . . . . . . . . . . . .  	0000
+  g70_f3 . . . . . . . . . . . .  	0004
+  g70_f2 . . . . . . . . . . . .  	0008
+  g70_f1 . . . . . . . . . . . .  	000C
+ENUMLOGFONT16  . . . . . . . . .  	0092	0003
+  elp16_elfLogFont . . . . . . .  	0000
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-9
+
+
+  elp16_elfFullName  . . . . . .  	0032
+  elp16_elfStyle . . . . . . . .  	0072
+ENUMMETAFILE16 . . . . . . . . .  	000C	0004
+  g175_f4  . . . . . . . . . . .  	0000
+  g175_f3  . . . . . . . . . . .  	0004
+  g175_f2  . . . . . . . . . . .  	0008
+  g175_f1  . . . . . . . . . . .  	000A
+ENUMOBJECTS16  . . . . . . . . .  	000C	0004
+  g71_f4 . . . . . . . . . . . .  	0000
+  g71_f3 . . . . . . . . . . . .  	0004
+  g71_f2 . . . . . . . . . . . .  	0008
+  g71_f1 . . . . . . . . . . . .  	000A
+EQUALRGN16 . . . . . . . . . . .  	0004	0002
+  g72_f2 . . . . . . . . . . . .  	0000
+  g72_f1 . . . . . . . . . . . .  	0002
+ESCAPE16 . . . . . . . . . . . .  	000E	0005
+  g38_f5 . . . . . . . . . . . .  	0000
+  g38_f4 . . . . . . . . . . . .  	0004
+  g38_f3 . . . . . . . . . . . .  	0008
+  g38_f2 . . . . . . . . . . . .  	000A
+  g38_f1 . . . . . . . . . . . .  	000C
+EVENTMSG16 . . . . . . . . . . .  	000A	0004
+  evmsg16_message  . . . . . . .  	0000
+  evmsg16_paramL . . . . . . . .  	0002
+  evmsg16_paramH . . . . . . . .  	0004
+  evmsg16_time . . . . . . . . .  	0006
+EXCLUDECLIPRECT16  . . . . . . .  	000A	0005
+  g21_f5 . . . . . . . . . . . .  	0000
+  g21_f4 . . . . . . . . . . . .  	0002
+  g21_f3 . . . . . . . . . . . .  	0004
+  g21_f2 . . . . . . . . . . . .  	0006
+  g21_f1 . . . . . . . . . . . .  	0008
+EXTDEVICEMODE16  . . . . . . . .  	001A	0008
+  g453_f8  . . . . . . . . . . .  	0000
+  g453_f7  . . . . . . . . . . .  	0002
+  g453_f6  . . . . . . . . . . .  	0006
+  g453_f5  . . . . . . . . . . .  	000A
+  g453_f4  . . . . . . . . . . .  	000E
+  g453_f3  . . . . . . . . . . .  	0012
+  g453_f2  . . . . . . . . . . .  	0016
+  g453_f1  . . . . . . . . . . .  	0018
+EXTFLOODFILL16 . . . . . . . . .  	000C	0005
+  g372_f5  . . . . . . . . . . .  	0000
+  g372_f4  . . . . . . . . . . .  	0002
+  g372_f3  . . . . . . . . . . .  	0006
+  g372_f2  . . . . . . . . . . .  	0008
+  g372_f1  . . . . . . . . . . .  	000A
+EXTTEXTOUT16 . . . . . . . . . .  	0016	0008
+  g351_f8  . . . . . . . . . . .  	0000
+  g351_f7  . . . . . . . . . . .  	0004
+  g351_f6  . . . . . . . . . . .  	0006
+  g351_f5  . . . . . . . . . . .  	000A
+  g351_f4  . . . . . . . . . . .  	000E
+  g351_f3  . . . . . . . . . . .  	0010
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-10
+
+
+  g351_f2  . . . . . . . . . . .  	0012
+  g351_f1  . . . . . . . . . . .  	0014
+FILLRGN16  . . . . . . . . . . .  	0006	0003
+  g40_f3 . . . . . . . . . . . .  	0000
+  g40_f2 . . . . . . . . . . . .  	0002
+  g40_f1 . . . . . . . . . . . .  	0004
+FIXED16  . . . . . . . . . . . .  	0004	0002
+  fxd16_fract  . . . . . . . . .  	0000
+  fxd16_value  . . . . . . . . .  	0002
+FLOODFILL16  . . . . . . . . . .  	000A	0004
+  g25_f4 . . . . . . . . . . . .  	0000
+  g25_f3 . . . . . . . . . . . .  	0004
+  g25_f2 . . . . . . . . . . . .  	0006
+  g25_f1 . . . . . . . . . . . .  	0008
+FONTINFO16 . . . . . . . . . . .  	0002	0001
+  fi16_cPoints . . . . . . . . .  	0000
+FRAMERGN16 . . . . . . . . . . .  	000A	0005
+  g41_f5 . . . . . . . . . . . .  	0000
+  g41_f4 . . . . . . . . . . . .  	0002
+  g41_f3 . . . . . . . . . . . .  	0004
+  g41_f2 . . . . . . . . . . . .  	0006
+  g41_f1 . . . . . . . . . . . .  	0008
+GETASPECTRATIOFILTER16 . . . . .  	0002	0001
+  g353_f1  . . . . . . . . . . .  	0000
+GETASPECTRATIOFILTEREX16 . . . .  	0006	0002
+  g486_f2  . . . . . . . . . . .  	0000
+  g486_f1  . . . . . . . . . . .  	0004
+GETBITMAPBITS16  . . . . . . . .  	000A	0003
+  g74_f3 . . . . . . . . . . . .  	0000
+  g74_f2 . . . . . . . . . . . .  	0004
+  g74_f1 . . . . . . . . . . . .  	0008
+GETBITMAPDIMENSION16 . . . . . .  	0002	0001
+  g162_f1  . . . . . . . . . . .  	0000
+GETBITMAPDIMENSIONEX16 . . . . .  	0006	0002
+  g468_f2  . . . . . . . . . . .  	0000
+  g468_f1  . . . . . . . . . . .  	0004
+GETBKCOLOR16 . . . . . . . . . .  	0002	0001
+  g75_f1 . . . . . . . . . . . .  	0000
+GETBKMODE16  . . . . . . . . . .  	0002	0001
+  g76_f1 . . . . . . . . . . . .  	0000
+GETBOUNDSRECT16  . . . . . . . .  	0008	0003
+  g194_f3  . . . . . . . . . . .  	0000
+  g194_f2  . . . . . . . . . . .  	0002
+  g194_f1  . . . . . . . . . . .  	0006
+GETBRUSHORG16  . . . . . . . . .  	0002	0001
+  g149_f1  . . . . . . . . . . .  	0000
+GETBRUSHORGEX16  . . . . . . . .  	0006	0002
+  g469_f2  . . . . . . . . . . .  	0000
+  g469_f1  . . . . . . . . . . .  	0004
+GETCHARABCWIDTHS16 . . . . . . .  	000A	0004
+  g307_f4  . . . . . . . . . . .  	0000
+  g307_f3  . . . . . . . . . . .  	0004
+  g307_f2  . . . . . . . . . . .  	0006
+  g307_f1  . . . . . . . . . . .  	0008
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-11
+
+
+GETCHARWIDTH16 . . . . . . . . .  	000A	0004
+  g350_lpIntBuffer . . . . . . .  	0000
+  g350_wLastChar . . . . . . . .  	0004
+  g350_wFirstChar  . . . . . . .  	0006
+  g350_hDC . . . . . . . . . . .  	0008
+GETCLIPBOX16 . . . . . . . . . .  	0006	0002
+  g77_f2 . . . . . . . . . . . .  	0000
+  g77_f1 . . . . . . . . . . . .  	0004
+GETCLIPRGN16 . . . . . . . . . .  	0002	0001
+  g173_f1  . . . . . . . . . . .  	0000
+GETCURLOGFONT16  . . . . . . . .  	0002	0001
+  g411_hDC . . . . . . . . . . .  	0000
+GETCURRENTOBJECT16 . . . . . . .  	0004	0002
+  g261_f2  . . . . . . . . . . .  	0000
+  g261_f1  . . . . . . . . . . .  	0002
+GETCURRENTPOSITION16 . . . . . .  	0002	0001
+  g78_f1 . . . . . . . . . . . .  	0000
+GETCURRENTPOSITIONEX16 . . . . .  	0006	0002
+  g470_f2  . . . . . . . . . . .  	0000
+  g470_f1  . . . . . . . . . . .  	0004
+GETDCORG16 . . . . . . . . . . .  	0002	0001
+  g79_f1 . . . . . . . . . . . .  	0000
+GETDEVICECAPS16  . . . . . . . .  	0004	0002
+  g80_f2 . . . . . . . . . . . .  	0000
+  g80_f1 . . . . . . . . . . . .  	0002
+GETDIBCOLORTABLE16 . . . . . . .  	000A	0004
+  g603_f4  . . . . . . . . . . .  	0000
+  g603_f3  . . . . . . . . . . .  	0004
+  g603_f2  . . . . . . . . . . .  	0006
+  g603_f1  . . . . . . . . . . .  	0008
+GETDIBITS16  . . . . . . . . . .  	0012	0007
+  g441_f7  . . . . . . . . . . .  	0000
+  g441_f6  . . . . . . . . . . .  	0002
+  g441_f5  . . . . . . . . . . .  	0006
+  g441_f4  . . . . . . . . . . .  	000A
+  g441_f3  . . . . . . . . . . .  	000C
+  g441_f2  . . . . . . . . . . .  	000E
+  g441_f1  . . . . . . . . . . .  	0010
+GETENVIRONMENT16 . . . . . . . .  	000A	0003
+  g133_f3  . . . . . . . . . . .  	0000
+  g133_f2  . . . . . . . . . . .  	0002
+  g133_f1  . . . . . . . . . . .  	0006
+GETFONTDATA16  . . . . . . . . .  	0012	0005
+  g311_f5  . . . . . . . . . . .  	0000
+  g311_f4  . . . . . . . . . . .  	0004
+  g311_f3  . . . . . . . . . . .  	0008
+  g311_f2  . . . . . . . . . . .  	000C
+  g311_f1  . . . . . . . . . . .  	0010
+GETGLYPHOUTLINE16  . . . . . . .  	0016	0007
+  g309_f7  . . . . . . . . . . .  	0000
+  g309_f6  . . . . . . . . . . .  	0004
+  g309_f5  . . . . . . . . . . .  	0008
+  g309_f4  . . . . . . . . . . .  	000C
+  g309_f3  . . . . . . . . . . .  	0010
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-12
+
+
+  g309_f2  . . . . . . . . . . .  	0012
+  g309_f1  . . . . . . . . . . .  	0014
+GETKERNINGPAIRS16  . . . . . . .  	0008	0003
+  g332_f3  . . . . . . . . . . .  	0000
+  g332_f2  . . . . . . . . . . .  	0004
+  g332_f1  . . . . . . . . . . .  	0006
+GETMAPMODE16 . . . . . . . . . .  	0002	0001
+  g81_f1 . . . . . . . . . . . .  	0000
+GETMETAFILE16  . . . . . . . . .  	0004	0001
+  g124_f1  . . . . . . . . . . .  	0000
+GETMETAFILEBITS16  . . . . . . .  	0002	0001
+  g159_f1  . . . . . . . . . . .  	0000
+GETNEARESTCOLOR16  . . . . . . .  	0006	0002
+  g154_f2  . . . . . . . . . . .  	0000
+  g154_f1  . . . . . . . . . . .  	0004
+GETNEARESTPALETTEINDEX16 . . . .  	0006	0002
+  g370_f2  . . . . . . . . . . .  	0000
+  g370_f1  . . . . . . . . . . .  	0004
+GETOBJECT16  . . . . . . . . . .  	0008	0003
+  g82_f3 . . . . . . . . . . . .  	0000
+  g82_f2 . . . . . . . . . . . .  	0004
+  g82_f1 . . . . . . . . . . . .  	0006
+GETOBJECTTYPE16  . . . . . . . .  	0002	0001
+  g260_f1  . . . . . . . . . . .  	0000
+GETOULTLINETEXTMETRICS16 . . . .  	0008	0003
+  g1000_f3 . . . . . . . . . . .  	0000
+  g1000_f2 . . . . . . . . . . .  	0004
+  g1000_f1 . . . . . . . . . . .  	0006
+GETOUTLINETEXTMETRICS16  . . . .  	0008	0003
+  g308_f3  . . . . . . . . . . .  	0000
+  g308_f2  . . . . . . . . . . .  	0004
+  g308_f1  . . . . . . . . . . .  	0006
+GETPALETTEENTRIES16  . . . . . .  	000A	0004
+  g363_f4  . . . . . . . . . . .  	0000
+  g363_f3  . . . . . . . . . . .  	0004
+  g363_f2  . . . . . . . . . . .  	0006
+  g363_f1  . . . . . . . . . . .  	0008
+GETPIXEL16 . . . . . . . . . . .  	0006	0003
+  g83_f3 . . . . . . . . . . . .  	0000
+  g83_f2 . . . . . . . . . . . .  	0002
+  g83_f1 . . . . . . . . . . . .  	0004
+GETPOLYFILLMODE16  . . . . . . .  	0002	0001
+  g84_f1 . . . . . . . . . . . .  	0000
+GETRASTERIZERCAPS16  . . . . . .  	0006	0002
+  g313_f2  . . . . . . . . . . .  	0000
+  g313_f1  . . . . . . . . . . .  	0002
+GETREGIONDATA16  . . . . . . . .  	000A	0003
+  g262_f3  . . . . . . . . . . .  	0000
+  g262_f2  . . . . . . . . . . .  	0004
+  g262_f1  . . . . . . . . . . .  	0008
+GETRELABS16  . . . . . . . . . .  	0002	0001
+  g86_f1 . . . . . . . . . . . .  	0000
+GETRGNBOX16  . . . . . . . . . .  	0006	0002
+  g134_f2  . . . . . . . . . . .  	0000
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-13
+
+
+  g134_f1  . . . . . . . . . . .  	0004
+GETROP216  . . . . . . . . . . .  	0002	0001
+  g85_f1 . . . . . . . . . . . .  	0000
+GETSTOCKOBJECT16 . . . . . . . .  	0002	0001
+  g87_f1 . . . . . . . . . . . .  	0000
+GETSTRETCHBLTMODE16  . . . . . .  	0002	0001
+  g88_f1 . . . . . . . . . . . .  	0000
+GETSYSTEMPALETTEENTRIES16  . . .  	000A	0004
+  g375_f4  . . . . . . . . . . .  	0000
+  g375_f3  . . . . . . . . . . .  	0004
+  g375_f2  . . . . . . . . . . .  	0006
+  g375_f1  . . . . . . . . . . .  	0008
+GETSYSTEMPALETTEUSE16  . . . . .  	0002	0001
+  g374_f1  . . . . . . . . . . .  	0000
+GETTEXTALIGN16 . . . . . . . . .  	0002	0001
+  g345_f1  . . . . . . . . . . .  	0000
+GETTEXTCHARACTEREXTRA16  . . . .  	0002	0001
+  g89_f1 . . . . . . . . . . . .  	0000
+GETTEXTCOLOR16 . . . . . . . . .  	0002	0001
+  g90_f1 . . . . . . . . . . . .  	0000
+GETTEXTEXTENT16  . . . . . . . .  	0008	0003
+  g91_f3 . . . . . . . . . . . .  	0000
+  g91_f2 . . . . . . . . . . . .  	0002
+  g91_f1 . . . . . . . . . . . .  	0006
+GETTEXTEXTENTEX16  . . . . . . .  	0012	0006
+  g2000_f6 . . . . . . . . . . .  	0000
+  g2000_f5 . . . . . . . . . . .  	0004
+  g2000_f4 . . . . . . . . . . .  	0008
+  g2000_f3 . . . . . . . . . . .  	000A
+  g2000_f2 . . . . . . . . . . .  	000C
+  g2000_f1 . . . . . . . . . . .  	0010
+GETTEXTEXTENTPOINT16 . . . . . .  	000C	0004
+  gxx_f4 . . . . . . . . . . . .  	0000
+  gxx_f3 . . . . . . . . . . . .  	0004
+  gxx_f2 . . . . . . . . . . . .  	0006
+  gxx_f1 . . . . . . . . . . . .  	000A
+GETTEXTFACE16  . . . . . . . . .  	0008	0003
+  g92_f3 . . . . . . . . . . . .  	0000
+  g92_f2 . . . . . . . . . . . .  	0004
+  g92_f1 . . . . . . . . . . . .  	0006
+GETTEXTMETRICS16 . . . . . . . .  	0006	0002
+  g93_f2 . . . . . . . . . . . .  	0000
+  g93_f1 . . . . . . . . . . . .  	0004
+GETVIEWPORTEXT16 . . . . . . . .  	0002	0001
+  g94_f1 . . . . . . . . . . . .  	0000
+GETVIEWPORTEXTEX16 . . . . . . .  	0006	0002
+  g472_f2  . . . . . . . . . . .  	0000
+  g472_f1  . . . . . . . . . . .  	0004
+GETVIEWPORTORG16 . . . . . . . .  	0002	0001
+  g95_f1 . . . . . . . . . . . .  	0000
+GETVIEWPORTORGEX16 . . . . . . .  	0006	0002
+  g473_f2  . . . . . . . . . . .  	0000
+  g473_f1  . . . . . . . . . . .  	0004
+GETWINDOWEXT16 . . . . . . . . .  	0002	0001
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-14
+
+
+  g96_f1 . . . . . . . . . . . .  	0000
+GETWINDOWEXTEX16 . . . . . . . .  	0006	0002
+  g474_f2  . . . . . . . . . . .  	0000
+  g474_f1  . . . . . . . . . . .  	0004
+GETWINDOWORG16 . . . . . . . . .  	0002	0001
+  g97_f1 . . . . . . . . . . . .  	0000
+GETWINDOWORGEX16 . . . . . . . .  	0006	0002
+  g475_f2  . . . . . . . . . . .  	0000
+  g475_f1  . . . . . . . . . . .  	0004
+GLYPHMETRICS16 . . . . . . . . .  	000C	0005
+  glyph16_gmBlackBoxX  . . . . .  	0000
+  glyph16_gmBlackBoxY  . . . . .  	0002
+  glyph16_gmptGlyphOrigin  . . .  	0004
+  glyph16_gmCellIncX . . . . . .  	0008
+  glyph16_gmCellIncY . . . . . .  	000A
+HANDLETABLE16  . . . . . . . . .  	0002	0001
+  ht16_objectHandle  . . . . . .  	0000
+ICONDIR16  . . . . . . . . . . .  	0004	0004
+  idir16_Width . . . . . . . . .  	0000
+  idir16_Height  . . . . . . . .  	0001
+  idir16_ColorCount  . . . . . .  	0002
+  idir16_reserved  . . . . . . .  	0003
+INQUIREVISRGN16  . . . . . . . .  	0002	0001
+  g131_f1  . . . . . . . . . . .  	0000
+INTERSECTCLIPRECT16  . . . . . .  	000A	0005
+  g22_f5 . . . . . . . . . . . .  	0000
+  g22_f4 . . . . . . . . . . . .  	0002
+  g22_f3 . . . . . . . . . . . .  	0004
+  g22_f2 . . . . . . . . . . . .  	0006
+  g22_f1 . . . . . . . . . . . .  	0008
+INVERTRGN16  . . . . . . . . . .  	0004	0002
+  g42_f2 . . . . . . . . . . . .  	0000
+  g42_f1 . . . . . . . . . . . .  	0002
+ISGDIOBJECT16  . . . . . . . . .  	0002	0001
+  g462_f1  . . . . . . . . . . .  	0000
+KERNINGPAIR16  . . . . . . . . .  	0006	0003
+  k16_wFirst . . . . . . . . . .  	0000
+  k16_wSecond  . . . . . . . . .  	0002
+  k16_iKernAmount  . . . . . . .  	0004
+LINEDDA16  . . . . . . . . . . .  	0010	0006
+  g100_f6  . . . . . . . . . . .  	0000
+  g100_f5  . . . . . . . . . . .  	0004
+  g100_f4  . . . . . . . . . . .  	0008
+  g100_f3  . . . . . . . . . . .  	000A
+  g100_f2  . . . . . . . . . . .  	000C
+  g100_f1  . . . . . . . . . . .  	000E
+LINETO16 . . . . . . . . . . . .  	0006	0003
+  g19_f3 . . . . . . . . . . . .  	0000
+  g19_f2 . . . . . . . . . . . .  	0002
+  g19_f1 . . . . . . . . . . . .  	0004
+LOGBRUSH16 . . . . . . . . . . .  	0008	0003
+  lb16_lbStyle . . . . . . . . .  	0000
+  lb16_lbColor . . . . . . . . .  	0002
+  lb16_lbHatch . . . . . . . . .  	0006
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-15
+
+
+LOGFONT16  . . . . . . . . . . .  	0032	000E
+  lf16_lfHeight  . . . . . . . .  	0000
+  lf16_lfWidth . . . . . . . . .  	0002
+  lf16_lfEscapement  . . . . . .  	0004
+  lf16_lfOrientation . . . . . .  	0006
+  lf16_lfWeight  . . . . . . . .  	0008
+  lf16_lfItalic  . . . . . . . .  	000A
+  lf16_lfUnderline . . . . . . .  	000B
+  lf16_lfStrikeOut . . . . . . .  	000C
+  lf16_lfCharSet . . . . . . . .  	000D
+  lf16_lfOutPrecision  . . . . .  	000E
+  lf16_lfClipPrecision . . . . .  	000F
+  lf16_lfQuality . . . . . . . .  	0010
+  lf16_lfPitchAndFamily  . . . .  	0011
+  lf16_lfFaceName  . . . . . . .  	0012
+LOGPALETTE16 . . . . . . . . . .  	0008	0003
+  logpal16_palVersion  . . . . .  	0000
+  logpal16_palNumEntries . . . .  	0002
+  logpal16_palPalEntry . . . . .  	0004
+LOGPEN16 . . . . . . . . . . . .  	000A	0003
+  lp16_lopnStyle . . . . . . . .  	0000
+  lp16_lopnWidth . . . . . . . .  	0002
+  lp16_lopnColor . . . . . . . .  	0006
+LPTODP16 . . . . . . . . . . . .  	0008	0003
+  g99_f3 . . . . . . . . . . . .  	0000
+  g99_f2 . . . . . . . . . . . .  	0002
+  g99_f1 . . . . . . . . . . . .  	0006
+MAT216 . . . . . . . . . . . . .  	0010	0004
+  mat216_eM11  . . . . . . . . .  	0000
+  mat216_eM12  . . . . . . . . .  	0004
+  mat216_eM21  . . . . . . . . .  	0008
+  mat216_eM22  . . . . . . . . .  	000C
+MDICREATESTRUCT16  . . . . . . .  	001A	0009
+  mcs16_vpszClass  . . . . . . .  	0000
+  mcs16_vpszTitle  . . . . . . .  	0004
+  mcs16_hOwner . . . . . . . . .  	0008
+  mcs16_x  . . . . . . . . . . .  	000A
+  mcs16_y  . . . . . . . . . . .  	000C
+  mcs16_cx . . . . . . . . . . .  	000E
+  mcs16_cy . . . . . . . . . . .  	0010
+  mcs16_style  . . . . . . . . .  	0012
+  mcs16_lParam . . . . . . . . .  	0016
+MEASUREITEMSTRUCT16  . . . . . .  	000E	0006
+  mis16_CtlType  . . . . . . . .  	0000
+  mis16_CtlID  . . . . . . . . .  	0002
+  mis16_itemID . . . . . . . . .  	0004
+  mis16_itemWidth  . . . . . . .  	0006
+  mis16_itemHeight . . . . . . .  	0008
+  mis16_itemData . . . . . . . .  	000A
+METARECORD16 . . . . . . . . . .  	0008	0003
+  mr16_rdSize  . . . . . . . . .  	0000
+  mr16_rdFunction  . . . . . . .  	0004
+  mr16_rdParm  . . . . . . . . .  	0006
+MOUSEHOOKSTRUCT16  . . . . . . .  	000C	0004
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-16
+
+
+  mhs16_pt . . . . . . . . . . .  	0000
+  mhs16_hwnd . . . . . . . . . .  	0004
+  mhs16_wHitTestCode . . . . . .  	0006
+  mhs16_dwExtraInfo  . . . . . .  	0008
+MOVETO16 . . . . . . . . . . . .  	0006	0003
+  g20_f3 . . . . . . . . . . . .  	0000
+  g20_f2 . . . . . . . . . . . .  	0002
+  g20_f1 . . . . . . . . . . . .  	0004
+MOVETOEX16 . . . . . . . . . . .  	000A	0004
+  g483_f4  . . . . . . . . . . .  	0000
+  g483_f3  . . . . . . . . . . .  	0004
+  g483_f2  . . . . . . . . . . .  	0006
+  g483_f1  . . . . . . . . . . .  	0008
+MSG16  . . . . . . . . . . . . .  	0012	0006
+  msg16_hwnd . . . . . . . . . .  	0000
+  msg16_message  . . . . . . . .  	0002
+  msg16_wParam . . . . . . . . .  	0004
+  msg16_lParam . . . . . . . . .  	0006
+  msg16_time . . . . . . . . . .  	000A
+  msg16_pt . . . . . . . . . . .  	000E
+MULDIV16 . . . . . . . . . . . .  	0006	0003
+  g128_f3  . . . . . . . . . . .  	0000
+  g128_f2  . . . . . . . . . . .  	0002
+  g128_f1  . . . . . . . . . . .  	0004
+NCCALCSIZE_PARAMS16  . . . . . .  	001C	0002
+  nccsz16_rgrc . . . . . . . . .  	0000
+  nccsz16_lppos  . . . . . . . .  	0018
+NEWTEXTMETRIC16  . . . . . . . .  	0029	0018
+  ntm16_tmHeight . . . . . . . .  	0000
+  ntm16_tmAscent . . . . . . . .  	0002
+  ntm16_tmDescent  . . . . . . .  	0004
+  ntm16_tmInternalLeading  . . .  	0006
+  ntm16_tmExternalLeading  . . .  	0008
+  ntm16_tmAveCharWidth . . . . .  	000A
+  ntm16_tmMaxCharWidth . . . . .  	000C
+  ntm16_tmWeight . . . . . . . .  	000E
+  ntm16_tmItalic . . . . . . . .  	0010
+  ntm16_tmUnderlined . . . . . .  	0011
+  ntm16_tmStruckOut  . . . . . .  	0012
+  ntm16_tmFirstChar  . . . . . .  	0013
+  ntm16_tmLastChar . . . . . . .  	0014
+  ntm16_tmDefaultChar  . . . . .  	0015
+  ntm16_tmBreakChar  . . . . . .  	0016
+  ntm16_tmPitchAndFamily . . . .  	0017
+  ntm16_tmCharSet  . . . . . . .  	0018
+  ntm16_tmOverhang . . . . . . .  	0019
+  ntm16_tmDigitizedAspectX . . .  	001B
+  ntm16_tmDigitizedAspectY . . .  	001D
+  ntm16_ntmFlags . . . . . . . .  	001F
+  ntm16_ntmSizeEM  . . . . . . .  	0023
+  ntm16_ntmCellHeight  . . . . .  	0025
+  ntm16_ntmAvgWidth  . . . . . .  	0027
+OFFSETCLIPRGN16  . . . . . . . .  	0006	0003
+  g32_f3 . . . . . . . . . . . .  	0000
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-17
+
+
+  g32_f2 . . . . . . . . . . . .  	0002
+  g32_f1 . . . . . . . . . . . .  	0004
+OFFSETRGN16  . . . . . . . . . .  	0006	0003
+  g101_f3  . . . . . . . . . . .  	0000
+  g101_f2  . . . . . . . . . . .  	0002
+  g101_f1  . . . . . . . . . . .  	0004
+OFFSETVIEWPORTORG16  . . . . . .  	0006	0003
+  g17_f3 . . . . . . . . . . . .  	0000
+  g17_f2 . . . . . . . . . . . .  	0002
+  g17_f1 . . . . . . . . . . . .  	0004
+OFFSETVIEWPORTORGEX16  . . . . .  	000A	0004
+  g476_f4  . . . . . . . . . . .  	0000
+  g476_f3  . . . . . . . . . . .  	0004
+  g476_f2  . . . . . . . . . . .  	0006
+  g476_f1  . . . . . . . . . . .  	0008
+OFFSETWINDOWORG16  . . . . . . .  	0006	0003
+  g15_f3 . . . . . . . . . . . .  	0000
+  g15_f2 . . . . . . . . . . . .  	0002
+  g15_f1 . . . . . . . . . . . .  	0004
+OFFSETWINDOWORGEX16  . . . . . .  	000A	0004
+  g477_f4  . . . . . . . . . . .  	0000
+  g477_f3  . . . . . . . . . . .  	0004
+  g477_f2  . . . . . . . . . . .  	0006
+  g477_f1  . . . . . . . . . . .  	0008
+OFSTRUCT16 . . . . . . . . . . .  	0088	0005
+  of16_cBytes  . . . . . . . . .  	0000
+  of16_fFixedDisk  . . . . . . .  	0001
+  of16_nErrCode  . . . . . . . .  	0002
+  of16_reserved  . . . . . . . .  	0004
+  of16_szPathName  . . . . . . .  	0008
+OPENJOB16  . . . . . . . . . . .  	000A	0003
+  g240_f3  . . . . . . . . . . .  	0000
+  g240_f2  . . . . . . . . . . .  	0002
+  g240_f1  . . . . . . . . . . .  	0006
+OUTLINETEXTMETRIC16  . . . . . .  	0072	0020
+  otm16_otmSize  . . . . . . . .  	0000
+  otm16_otmTextMetrics . . . . .  	0002
+  otm16_otmFiller  . . . . . . .  	0021
+  otm16_otmPanoseNumber  . . . .  	0022
+  otm16_otmfsSelection . . . . .  	002C
+  otm16_otmfsType  . . . . . . .  	002E
+  otm16_otmsCharSlopeRise  . . .  	0030
+  otm16_otmsCharSlopeRun . . . .  	0032
+  otm16_otmItalicAngle . . . . .  	0034
+  otm16_otmEMSquare  . . . . . .  	0036
+  otm16_otmAscent  . . . . . . .  	0038
+  otm16_otmDescent . . . . . . .  	003A
+  otm16_otmLineGap . . . . . . .  	003C
+  otm16_otmsCapEmHeight  . . . .  	003E
+  otm16_otmsXHeight  . . . . . .  	0040
+  otm16_otmrcFontBox . . . . . .  	0042
+  otm16_otmMacAscent . . . . . .  	004A
+  otm16_otmMacDescent  . . . . .  	004C
+  otm16_otmMacLineGap  . . . . .  	004E
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-18
+
+
+  otm16_otmusMinimumPPEM . . . .  	0050
+  otm16_otmptSubscriptSize . . .  	0052
+  otm16_otmptSubscriptOffset . .  	0056
+  otm16_otmptSuperscriptSize . .  	005A
+  otm16_otmptSuperscriptOffset .  	005E
+  otm16_otmsStrikeoutSize  . . .  	0062
+  otm16_otmsStrikeoutPosition  .  	0064
+  otm16_otmsUnderscorePosition .  	0066
+  otm16_otmsUnderscoreSize . . .  	0068
+  otm16_otmpFamilyName . . . . .  	006A
+  otm16_otmpFaceName . . . . . .  	006C
+  otm16_otmpStyleName  . . . . .  	006E
+  otm16_otmpFullName . . . . . .  	0070
+PAINTRGN16 . . . . . . . . . . .  	0004	0002
+  g43_f2 . . . . . . . . . . . .  	0000
+  g43_f1 . . . . . . . . . . . .  	0002
+PAINTSTRUCT16  . . . . . . . . .  	0020	0006
+  ps16_hdc . . . . . . . . . . .  	0000
+  ps16_fErase  . . . . . . . . .  	0002
+  ps16_rcPaint . . . . . . . . .  	0004
+  ps16_fRestore  . . . . . . . .  	000C
+  ps16_fIncUpdate  . . . . . . .  	000E
+  ps16_rgbReserved . . . . . . .  	0010
+PALETTEENTRY16 . . . . . . . . .  	0004	0004
+  pe16_peRed . . . . . . . . . .  	0000
+  pe16_peGreen . . . . . . . . .  	0001
+  pe16_peBlue  . . . . . . . . .  	0002
+  pe16_peFlags . . . . . . . . .  	0003
+PANOSE16 . . . . . . . . . . . .  	000A	000A
+  pan16_bFamilyType  . . . . . .  	0000
+  pan16_bSerifStyle  . . . . . .  	0001
+  pan16_bWeight  . . . . . . . .  	0002
+  pan16_bProportion  . . . . . .  	0003
+  pan16_bContrast  . . . . . . .  	0004
+  pan16_bStrokeVariation . . . .  	0005
+  pan16_bArmStyle  . . . . . . .  	0006
+  pan16_bLetterform  . . . . . .  	0007
+  pan16_bMidline . . . . . . . .  	0008
+  pan16_bXHeight . . . . . . . .  	0009
+PARM16 . . . . . . . . . . . . .  	0010	0001
+PARMDDA  . . . . . . . . . . . .  	0008	0003
+  dda_vpData . . . . . . . . . .  	0000
+  dda_y  . . . . . . . . . . . .  	0004
+  dda_x  . . . . . . . . . . . .  	0006
+PARMDIR  . . . . . . . . . . . .  	0006	0002
+  cdir_wDrive  . . . . . . . . .  	0000
+  cdir_vpDir . . . . . . . . . .  	0002
+PARMEFP  . . . . . . . . . . . .  	000E	0004
+  efp_vpData . . . . . . . . . .  	0000
+  efp_nFontType  . . . . . . . .  	0004
+  efp_vpTextMetric . . . . . . .  	0006
+  efp_vpLogFont  . . . . . . . .  	000A
+PARMEMP  . . . . . . . . . . . .  	0010	0005
+  emp_vpData . . . . . . . . . .  	0000
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-19
+
+
+  emp_nObjects . . . . . . . . .  	0004
+  emp_vpMetaRecord . . . . . . .  	0006
+  emp_vpHandleTable  . . . . . .  	000A
+  emp_hdc  . . . . . . . . . . .  	000E
+PARMEOP  . . . . . . . . . . . .  	0008	0002
+  eop_vpData . . . . . . . . . .  	0000
+  eop_vpLogObject  . . . . . . .  	0004
+PARMEPP  . . . . . . . . . . . .  	0008	0003
+  epp_hData  . . . . . . . . . .  	0000
+  epp_vpString . . . . . . . . .  	0002
+  epp_hwnd . . . . . . . . . . .  	0006
+PARMEWP  . . . . . . . . . . . .  	0006	0002
+  ewp_lParam . . . . . . . . . .  	0000
+  ewp_hwnd . . . . . . . . . . .  	0004
+PARMGST  . . . . . . . . . . . .  	0008	0003
+  gst_n  . . . . . . . . . . . .  	0000
+  gst_data . . . . . . . . . . .  	0002
+  gst_hdc  . . . . . . . . . . .  	0006
+PARMHKP  . . . . . . . . . . . .  	0008	0003
+  hkp_lParam . . . . . . . . . .  	0000
+  hkp_wParam . . . . . . . . . .  	0004
+  hkp_nCode  . . . . . . . . . .  	0006
+PARMIOP  . . . . . . . . . . . .  	000E	0004
+  iop_lParam2  . . . . . . . . .  	0000
+  iop_lParam1  . . . . . . . . .  	0004
+  iop_wMsg . . . . . . . . . . .  	0008
+  iop_lpmmioinfo . . . . . . . .  	000A
+PARMMIF  . . . . . . . . . . . .  	0010	0005
+  mif_dwParam2 . . . . . . . . .  	0000
+  mif_dwParam1 . . . . . . . . .  	0004
+  mif_dwInstance . . . . . . . .  	0008
+  mif_wMsg . . . . . . . . . . .  	000C
+  mif_hMidiIn  . . . . . . . . .  	000E
+PARMMOF  . . . . . . . . . . . .  	0010	0005
+  mof_dwParam2 . . . . . . . . .  	0000
+  mof_dwParam1 . . . . . . . . .  	0004
+  mof_dwInstance . . . . . . . .  	0008
+  mof_wMsg . . . . . . . . . . .  	000C
+  mof_hMidiOut . . . . . . . . .  	000E
+PARMSAP  . . . . . . . . . . . .  	0004	0002
+  sap_code . . . . . . . . . . .  	0000
+  sap_hPr  . . . . . . . . . . .  	0002
+PARMSCP  . . . . . . . . . . . .  	0002	0001
+  scp_iOrdinal . . . . . . . . .  	0000
+PARMTIF  . . . . . . . . . . . .  	0010	0005
+  tif_dw2  . . . . . . . . . . .  	0000
+  tif_dw1  . . . . . . . . . . .  	0004
+  tif_dwUser . . . . . . . . . .  	0008
+  tif_wMsg . . . . . . . . . . .  	000C
+  tif_wID  . . . . . . . . . . .  	000E
+PARMWBP  . . . . . . . . . . . .  	000A	0004
+  wbp_action . . . . . . . . . .  	0000
+  wbp_cbEditText . . . . . . . .  	0002
+  wbp_ichCurrentWord . . . . . .  	0004
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-20
+
+
+  wbp_lpszEditText . . . . . . .  	0006
+PARMWCB16  . . . . . . . . . . .  	0010	0001
+  wcb16_wArgs  . . . . . . . . .  	0000
+PARMWIF  . . . . . . . . . . . .  	0010	0005
+  wif_dwParam2 . . . . . . . . .  	0000
+  wif_dwParam1 . . . . . . . . .  	0004
+  wif_dwInstance . . . . . . . .  	0008
+  wif_wMsg . . . . . . . . . . .  	000C
+  wif_hWaveIn  . . . . . . . . .  	000E
+PARMWOF  . . . . . . . . . . . .  	0010	0005
+  wof_dwParam2 . . . . . . . . .  	0000
+  wof_dwParam1 . . . . . . . . .  	0004
+  wof_dwInstance . . . . . . . .  	0008
+  wof_wMsg . . . . . . . . . . .  	000C
+  wof_hWaveOut . . . . . . . . .  	000E
+PARMWP . . . . . . . . . . . . .  	000C	0005
+  wp_lParam  . . . . . . . . . .  	0000
+  wp_wParam  . . . . . . . . . .  	0004
+  wp_wMsg  . . . . . . . . . . .  	0006
+  wp_hwnd  . . . . . . . . . . .  	0008
+  wp_hInst . . . . . . . . . . .  	000A
+PATBLT16 . . . . . . . . . . . .  	000E	0006
+  g29_dwRop  . . . . . . . . . .  	0000
+  g29_nHeight  . . . . . . . . .  	0004
+  g29_nWidth . . . . . . . . . .  	0006
+  g29_y  . . . . . . . . . . . .  	0008
+  g29_x  . . . . . . . . . . . .  	000A
+  g29_hdc  . . . . . . . . . . .  	000C
+PIE16  . . . . . . . . . . . . .  	0012	0009
+  g26_f9 . . . . . . . . . . . .  	0000
+  g26_f8 . . . . . . . . . . . .  	0002
+  g26_f7 . . . . . . . . . . . .  	0004
+  g26_f6 . . . . . . . . . . . .  	0006
+  g26_f5 . . . . . . . . . . . .  	0008
+  g26_f4 . . . . . . . . . . . .  	000A
+  g26_f3 . . . . . . . . . . . .  	000C
+  g26_f2 . . . . . . . . . . . .  	000E
+  g26_f1 . . . . . . . . . . . .  	0010
+PLAYMETAFILE16 . . . . . . . . .  	0004	0002
+  g123_f2  . . . . . . . . . . .  	0000
+  g123_f1  . . . . . . . . . . .  	0002
+PLAYMETAFILERECORD16 . . . . . .  	000C	0004
+  g176_f4  . . . . . . . . . . .  	0000
+  g176_f3  . . . . . . . . . . .  	0002
+  g176_f2  . . . . . . . . . . .  	0006
+  g176_f1  . . . . . . . . . . .  	000A
+POINT16  . . . . . . . . . . . .  	0004	0002
+  pt16_x . . . . . . . . . . . .  	0000
+  pt16_y . . . . . . . . . . . .  	0002
+POLYGON16  . . . . . . . . . . .  	0008	0003
+  g36_f3 . . . . . . . . . . . .  	0000
+  g36_f2 . . . . . . . . . . . .  	0002
+  g36_f1 . . . . . . . . . . . .  	0006
+POLYLINE16 . . . . . . . . . . .  	0008	0003
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-21
+
+
+  g37_f3 . . . . . . . . . . . .  	0000
+  g37_f2 . . . . . . . . . . . .  	0002
+  g37_f1 . . . . . . . . . . . .  	0006
+POLYPOLYGON16  . . . . . . . . .  	000C	0004
+  g450_f4  . . . . . . . . . . .  	0000
+  g450_f3  . . . . . . . . . . .  	0002
+  g450_f2  . . . . . . . . . . .  	0006
+  g450_f1  . . . . . . . . . . .  	000A
+POLYPOLYLINEWOW16  . . . . . . .  	000E	0004
+  g490_f4  . . . . . . . . . . .  	0000
+  g490_f3  . . . . . . . . . . .  	0004
+  g490_f2  . . . . . . . . . . .  	0008
+  g490_f1  . . . . . . . . . . .  	000C
+PTINREGION16 . . . . . . . . . .  	0006	0003
+  g161_f3  . . . . . . . . . . .  	0000
+  g161_f2  . . . . . . . . . . .  	0002
+  g161_f1  . . . . . . . . . . .  	0004
+PTVISIBLE16  . . . . . . . . . .  	0006	0003
+  g103_f3  . . . . . . . . . . .  	0000
+  g103_f2  . . . . . . . . . . .  	0002
+  g103_f1  . . . . . . . . . . .  	0004
+QUERTABORT16 . . . . . . . . . .  	0004	0002
+  gxxx_f2  . . . . . . . . . . .  	0000
+  gxxx_f1  . . . . . . . . . . .  	0002
+RASTERIZER_STATUS16  . . . . . .  	0006	0003
+  rs16_nSize . . . . . . . . . .  	0000
+  rs16_wFlags  . . . . . . . . .  	0002
+  rs16_nLanguageID . . . . . . .  	0004
+RECT16 . . . . . . . . . . . . .  	0008	0004
+  rc16_left  . . . . . . . . . .  	0000
+  rc16_top . . . . . . . . . . .  	0002
+  rc16_right . . . . . . . . . .  	0004
+  rc16_bottom  . . . . . . . . .  	0006
+RECTANGLE16  . . . . . . . . . .  	000A	0005
+  g27_y2 . . . . . . . . . . . .  	0000
+  g27_x2 . . . . . . . . . . . .  	0002
+  g27_y1 . . . . . . . . . . . .  	0004
+  g27_x1 . . . . . . . . . . . .  	0006
+  g27_hdc  . . . . . . . . . . .  	0008
+RECTINREGION16 . . . . . . . . .  	0006	0002
+  g181_f2  . . . . . . . . . . .  	0000
+  g181_f1  . . . . . . . . . . .  	0004
+RECTVISIBLE16  . . . . . . . . .  	0006	0002
+  g104_f2  . . . . . . . . . . .  	0000
+  g104_f1  . . . . . . . . . . .  	0004
+REMOVEFONTRESOURCE16 . . . . . .  	0004	0001
+  g136_f1  . . . . . . . . . . .  	0000
+RESDIRHEADER16 . . . . . . . . .  	0006	0003
+  hdir16_reserved  . . . . . . .  	0000
+  hdir16_rt  . . . . . . . . . .  	0002
+  hdir16_cResources  . . . . . .  	0004
+RESETDC16  . . . . . . . . . . .  	0006	0002
+  g376_f2  . . . . . . . . . . .  	0000
+  g376_f1  . . . . . . . . . . .  	0004
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-22
+
+
+RESIZEPALETTE16  . . . . . . . .  	0004	0002
+  g368_f2  . . . . . . . . . . .  	0000
+  g368_f1  . . . . . . . . . . .  	0002
+RESTOREDC16  . . . . . . . . . .  	0004	0002
+  g39_f2 . . . . . . . . . . . .  	0000
+  g39_f1 . . . . . . . . . . . .  	0002
+RGBTRIPLE16  . . . . . . . . . .  	0003	0003
+  rgbt16_rgbtBlue  . . . . . . .  	0000
+  rgbt16_rgbtGreen . . . . . . .  	0001
+  rgbt16_rgbtRed . . . . . . . .  	0002
+ROUNDRECT16  . . . . . . . . . .  	000E	0007
+  g28_f7 . . . . . . . . . . . .  	0000
+  g28_f6 . . . . . . . . . . . .  	0002
+  g28_f5 . . . . . . . . . . . .  	0004
+  g28_f4 . . . . . . . . . . . .  	0006
+  g28_f3 . . . . . . . . . . . .  	0008
+  g28_f2 . . . . . . . . . . . .  	000A
+  g28_f1 . . . . . . . . . . . .  	000C
+SAVEDC16 . . . . . . . . . . . .  	0002	0001
+  g30_f1 . . . . . . . . . . . .  	0000
+SCALEVIEWPORTEXT16 . . . . . . .  	000A	0005
+  g18_f5 . . . . . . . . . . . .  	0000
+  g18_f4 . . . . . . . . . . . .  	0002
+  g18_f3 . . . . . . . . . . . .  	0004
+  g18_f2 . . . . . . . . . . . .  	0006
+  g18_f1 . . . . . . . . . . . .  	0008
+SCALEVIEWPORTEXTEX16 . . . . . .  	000E	0006
+  g484_f6  . . . . . . . . . . .  	0000
+  g484_f5  . . . . . . . . . . .  	0004
+  g484_f4  . . . . . . . . . . .  	0006
+  g484_f3  . . . . . . . . . . .  	0008
+  g484_f2  . . . . . . . . . . .  	000A
+  g484_f1  . . . . . . . . . . .  	000C
+SCALEWINDOWEXT16 . . . . . . . .  	000A	0005
+  g16_f5 . . . . . . . . . . . .  	0000
+  g16_f4 . . . . . . . . . . . .  	0002
+  g16_f3 . . . . . . . . . . . .  	0004
+  g16_f2 . . . . . . . . . . . .  	0006
+  g16_f1 . . . . . . . . . . . .  	0008
+SCALEWINDOWEXTEX16 . . . . . . .  	000E	0006
+  g485_f6  . . . . . . . . . . .  	0000
+  g485_f5  . . . . . . . . . . .  	0004
+  g485_f4  . . . . . . . . . . .  	0006
+  g485_f3  . . . . . . . . . . .  	0008
+  g485_f2  . . . . . . . . . . .  	000A
+  g485_f1  . . . . . . . . . . .  	000C
+SELECTCLIPRGN16  . . . . . . . .  	0004	0002
+  g44_f2 . . . . . . . . . . . .  	0000
+  g44_f1 . . . . . . . . . . . .  	0002
+SELECTOBJECT16 . . . . . . . . .  	0004	0002
+  g45_f2 . . . . . . . . . . . .  	0000
+  g45_f1 . . . . . . . . . . . .  	0002
+SETABORTPROC16 . . . . . . . . .  	0006	0002
+  g381_f2  . . . . . . . . . . .  	0000
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-23
+
+
+  g381_f1  . . . . . . . . . . .  	0004
+SETBITMAPBITS16  . . . . . . . .  	000A	0003
+  g106_f3  . . . . . . . . . . .  	0000
+  g106_f2  . . . . . . . . . . .  	0004
+  g106_f1  . . . . . . . . . . .  	0008
+SETBITMAPDIMENSION16 . . . . . .  	0006	0003
+  g163_f3  . . . . . . . . . . .  	0000
+  g163_f2  . . . . . . . . . . .  	0002
+  g163_f1  . . . . . . . . . . .  	0004
+SETBITMAPDIMENSIONEX16 . . . . .  	000A	0004
+  g478_f4  . . . . . . . . . . .  	0000
+  g478_f3  . . . . . . . . . . .  	0004
+  g478_f2  . . . . . . . . . . .  	0006
+  g478_f1  . . . . . . . . . . .  	0008
+SETBKCOLOR16 . . . . . . . . . .  	0006	0002
+  g1_f2  . . . . . . . . . . . .  	0000
+  g1_f1  . . . . . . . . . . . .  	0004
+SETBKMODE16  . . . . . . . . . .  	0004	0002
+  g2_f2  . . . . . . . . . . . .  	0000
+  g2_f1  . . . . . . . . . . . .  	0002
+SETBOUNDSRECT16  . . . . . . . .  	0008	0003
+  g193_f3  . . . . . . . . . . .  	0000
+  g193_f2  . . . . . . . . . . .  	0002
+  g193_f1  . . . . . . . . . . .  	0006
+SETBRUSHORG16  . . . . . . . . .  	0006	0003
+  g148_f3  . . . . . . . . . . .  	0000
+  g148_f2  . . . . . . . . . . .  	0002
+  g148_f1  . . . . . . . . . . .  	0004
+SETDIBCOLORTABLE16 . . . . . . .  	000A	0004
+  g602_f4  . . . . . . . . . . .  	0000
+  g602_f3  . . . . . . . . . . .  	0004
+  g602_f2  . . . . . . . . . . .  	0006
+  g602_f1  . . . . . . . . . . .  	0008
+SETDIBITS16  . . . . . . . . . .  	0012	0007
+  g440_f7  . . . . . . . . . . .  	0000
+  g440_f6  . . . . . . . . . . .  	0002
+  g440_f5  . . . . . . . . . . .  	0006
+  g440_f4  . . . . . . . . . . .  	000A
+  g440_f3  . . . . . . . . . . .  	000C
+  g440_f2  . . . . . . . . . . .  	000E
+  g440_f1  . . . . . . . . . . .  	0010
+SETDIBITSTODEVICE16  . . . . . .  	001C	000C
+  g443_f12 . . . . . . . . . . .  	0000
+  g443_f11 . . . . . . . . . . .  	0002
+  g443_f10 . . . . . . . . . . .  	0006
+  g443_f9  . . . . . . . . . . .  	000A
+  g443_f8  . . . . . . . . . . .  	000C
+  g443_f7  . . . . . . . . . . .  	000E
+  g443_f6  . . . . . . . . . . .  	0010
+  g443_f5  . . . . . . . . . . .  	0012
+  g443_f4  . . . . . . . . . . .  	0014
+  g443_f3  . . . . . . . . . . .  	0016
+  g443_f2  . . . . . . . . . . .  	0018
+  g443_f1  . . . . . . . . . . .  	001A
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-24
+
+
+SETENVIRONMENT16 . . . . . . . .  	000A	0003
+  g132_f3  . . . . . . . . . . .  	0000
+  g132_f2  . . . . . . . . . . .  	0002
+  g132_f1  . . . . . . . . . . .  	0006
+SETMAPMODE16 . . . . . . . . . .  	0004	0002
+  g3_f2  . . . . . . . . . . . .  	0000
+  g3_f1  . . . . . . . . . . . .  	0002
+SETMAPPERFLAGS16 . . . . . . . .  	0006	0002
+  g349_f2  . . . . . . . . . . .  	0000
+  g349_f1  . . . . . . . . . . .  	0004
+SETMETAFILEBITS16  . . . . . . .  	0002	0001
+  g160_f1  . . . . . . . . . . .  	0000
+SETMETAFILEBITSBETTER16  . . . .  	0002	0001
+  g196_f1  . . . . . . . . . . .  	0000
+SETPALETTEENTRIES16  . . . . . .  	000A	0004
+  g364_f4  . . . . . . . . . . .  	0000
+  g364_f3  . . . . . . . . . . .  	0004
+  g364_f2  . . . . . . . . . . .  	0006
+  g364_f1  . . . . . . . . . . .  	0008
+SETPIXEL16 . . . . . . . . . . .  	000A	0004
+  g31_f4 . . . . . . . . . . . .  	0000
+  g31_f3 . . . . . . . . . . . .  	0004
+  g31_f2 . . . . . . . . . . . .  	0006
+  g31_f1 . . . . . . . . . . . .  	0008
+SETPOLYFILLMODE16  . . . . . . .  	0004	0002
+  g6_f2  . . . . . . . . . . . .  	0000
+  g6_f1  . . . . . . . . . . . .  	0002
+SETRECTRGN16 . . . . . . . . . .  	000A	0005
+  g172_f5  . . . . . . . . . . .  	0000
+  g172_f4  . . . . . . . . . . .  	0002
+  g172_f3  . . . . . . . . . . .  	0004
+  g172_f2  . . . . . . . . . . .  	0006
+  g172_f1  . . . . . . . . . . .  	0008
+SETRELABS16  . . . . . . . . . .  	0004	0002
+  g5_f2  . . . . . . . . . . . .  	0000
+  g5_f1  . . . . . . . . . . . .  	0002
+SETROP216  . . . . . . . . . . .  	0004	0002
+  g4_f2  . . . . . . . . . . . .  	0000
+  g4_f1  . . . . . . . . . . . .  	0002
+SETSTRETCHBLTMODE16  . . . . . .  	0004	0002
+  g7_f2  . . . . . . . . . . . .  	0000
+  g7_f1  . . . . . . . . . . . .  	0002
+SETSYSTEMPALETTEUSE16  . . . . .  	0004	0002
+  g373_f2  . . . . . . . . . . .  	0000
+  g373_f1  . . . . . . . . . . .  	0002
+SETTEXTALIGN16 . . . . . . . . .  	0004	0002
+  g346_f2  . . . . . . . . . . .  	0000
+  g346_f1  . . . . . . . . . . .  	0002
+SETTEXTCHARACTEREXTRA16  . . . .  	0004	0002
+  g8_f2  . . . . . . . . . . . .  	0000
+  g8_f1  . . . . . . . . . . . .  	0002
+SETTEXTCOLOR16 . . . . . . . . .  	0006	0002
+  g9_f2  . . . . . . . . . . . .  	0000
+  g9_f1  . . . . . . . . . . . .  	0004
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-25
+
+
+SETTEXTJUSTIFICATION16 . . . . .  	0006	0003
+  g10_f3 . . . . . . . . . . . .  	0000
+  g10_f2 . . . . . . . . . . . .  	0002
+  g10_f1 . . . . . . . . . . . .  	0004
+SETVIEWPORTEXT16 . . . . . . . .  	0006	0003
+  g14_f3 . . . . . . . . . . . .  	0000
+  g14_f2 . . . . . . . . . . . .  	0002
+  g14_f1 . . . . . . . . . . . .  	0004
+SETVIEWPORTEXTEX16 . . . . . . .  	000A	0004
+  g479_f4  . . . . . . . . . . .  	0000
+  g479_f3  . . . . . . . . . . .  	0004
+  g479_f2  . . . . . . . . . . .  	0006
+  g479_f1  . . . . . . . . . . .  	0008
+SETVIEWPORTORG16 . . . . . . . .  	0006	0003
+  g13_f3 . . . . . . . . . . . .  	0000
+  g13_f2 . . . . . . . . . . . .  	0002
+  g13_f1 . . . . . . . . . . . .  	0004
+SETVIEWPORTORGEX16 . . . . . . .  	000A	0004
+  g480_f4  . . . . . . . . . . .  	0000
+  g480_f3  . . . . . . . . . . .  	0004
+  g480_f2  . . . . . . . . . . .  	0006
+  g480_f1  . . . . . . . . . . .  	0008
+SETWINDOWEXT16 . . . . . . . . .  	0006	0003
+  g12_f3 . . . . . . . . . . . .  	0000
+  g12_f2 . . . . . . . . . . . .  	0002
+  g12_f1 . . . . . . . . . . . .  	0004
+SETWINDOWEXTEX16 . . . . . . . .  	000A	0004
+  g481_f4  . . . . . . . . . . .  	0000
+  g481_f3  . . . . . . . . . . .  	0004
+  g481_f2  . . . . . . . . . . .  	0006
+  g481_f1  . . . . . . . . . . .  	0008
+SETWINDOWORG16 . . . . . . . . .  	0006	0003
+  g11_f3 . . . . . . . . . . . .  	0000
+  g11_f2 . . . . . . . . . . . .  	0002
+  g11_f1 . . . . . . . . . . . .  	0004
+SETWINDOWORGEX16 . . . . . . . .  	000A	0004
+  g482_f4  . . . . . . . . . . .  	0000
+  g482_f3  . . . . . . . . . . .  	0004
+  g482_f2  . . . . . . . . . . .  	0006
+  g482_f1  . . . . . . . . . . .  	0008
+SIZE16 . . . . . . . . . . . . .  	0004	0002
+  sz16wow32_cx . . . . . . . . .  	0000
+  sz16wow32_cy . . . . . . . . .  	0002
+SPOOLFILE16  . . . . . . . . . .  	0010	0004
+  g254_f4  . . . . . . . . . . .  	0000
+  g254_f3  . . . . . . . . . . .  	0004
+  g254_f2  . . . . . . . . . . .  	0008
+  g254_f1  . . . . . . . . . . .  	000C
+STARTDOC16 . . . . . . . . . . .  	0006	0002
+  g377_f2  . . . . . . . . . . .  	0000
+  g377_f1  . . . . . . . . . . .  	0004
+STARTPAGE16  . . . . . . . . . .  	0002	0001
+  g379_f1  . . . . . . . . . . .  	0000
+STARTSPOOLPAGE16 . . . . . . . .  	0002	0001
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-26
+
+
+  g246_f1  . . . . . . . . . . .  	0000
+STRETCHBLT16 . . . . . . . . . .  	0018	000B
+  g35_f11  . . . . . . . . . . .  	0000
+  g35_f10  . . . . . . . . . . .  	0004
+  g35_f9 . . . . . . . . . . . .  	0006
+  g35_f8 . . . . . . . . . . . .  	0008
+  g35_f7 . . . . . . . . . . . .  	000A
+  g35_f6 . . . . . . . . . . . .  	000C
+  g35_f5 . . . . . . . . . . . .  	000E
+  g35_f4 . . . . . . . . . . . .  	0010
+  g35_f3 . . . . . . . . . . . .  	0012
+  g35_f2 . . . . . . . . . . . .  	0014
+  g35_f1 . . . . . . . . . . . .  	0016
+STRETCHDIBITS16  . . . . . . . .  	0020	000D
+  g439_f13 . . . . . . . . . . .  	0000
+  g439_f12 . . . . . . . . . . .  	0004
+  g439_f11 . . . . . . . . . . .  	0006
+  g439_f10 . . . . . . . . . . .  	000A
+  g439_f9  . . . . . . . . . . .  	000E
+  g439_f8  . . . . . . . . . . .  	0010
+  g439_f7  . . . . . . . . . . .  	0012
+  g439_f6  . . . . . . . . . . .  	0014
+  g439_f5  . . . . . . . . . . .  	0016
+  g439_f4  . . . . . . . . . . .  	0018
+  g439_f3  . . . . . . . . . . .  	001A
+  g439_f2  . . . . . . . . . . .  	001C
+  g439_f1  . . . . . . . . . . .  	001E
+TEXTMETRIC16 . . . . . . . . . .  	001F	0014
+  tm16_tmHeight  . . . . . . . .  	0000
+  tm16_tmAscent  . . . . . . . .  	0002
+  tm16_tmDescent . . . . . . . .  	0004
+  tm16_tmInternalLeading . . . .  	0006
+  tm16_tmExternalLeading . . . .  	0008
+  tm16_tmAveCharWidth  . . . . .  	000A
+  tm16_tmMaxCharWidth  . . . . .  	000C
+  tm16_tmWeight  . . . . . . . .  	000E
+  tm16_tmItalic  . . . . . . . .  	0010
+  tm16_tmUnderlined  . . . . . .  	0011
+  tm16_tmStruckOut . . . . . . .  	0012
+  tm16_tmFirstChar . . . . . . .  	0013
+  tm16_tmLastChar  . . . . . . .  	0014
+  tm16_tmDefaultChar . . . . . .  	0015
+  tm16_tmBreakChar . . . . . . .  	0016
+  tm16_tmPitchAndFamily  . . . .  	0017
+  tm16_tmCharSet . . . . . . . .  	0018
+  tm16_tmOverhang  . . . . . . .  	0019
+  tm16_tmDigitizedAspectX  . . .  	001B
+  tm16_tmDigitizedAspectY  . . .  	001D
+TEXTOUT16  . . . . . . . . . . .  	000C	0005
+  g33_f5 . . . . . . . . . . . .  	0000
+  g33_f4 . . . . . . . . . . . .  	0002
+  g33_f3 . . . . . . . . . . . .  	0006
+  g33_f2 . . . . . . . . . . . .  	0008
+  g33_f1 . . . . . . . . . . . .  	000A
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-27
+
+
+UNREALIZEOBJECT16  . . . . . . .  	0002	0001
+  g150_f1  . . . . . . . . . . .  	0000
+UPDATECOLORS16 . . . . . . . . .  	0002	0001
+  g366_f1  . . . . . . . . . . .  	0000
+VDMFRAME . . . . . . . . . . . .  	002B	0013
+  vf_wTDB  . . . . . . . . . . .  	0000
+  vf_wRetID  . . . . . . . . . .  	0002
+  vf_wLocalBP  . . . . . . . . .  	0004
+  vf_wDI . . . . . . . . . . . .  	0006
+  vf_wSI . . . . . . . . . . . .  	0008
+  vf_wAX . . . . . . . . . . . .  	000A
+  vf_wDX . . . . . . . . . . . .  	000C
+  vf_wAppDS  . . . . . . . . . .  	000E
+  vf_wGS . . . . . . . . . . . .  	0010
+  vf_wFS . . . . . . . . . . . .  	0012
+  vf_wCX . . . . . . . . . . . .  	0014
+  vf_wES . . . . . . . . . . . .  	0016
+  vf_wBX . . . . . . . . . . . .  	0018
+  vf_wBP . . . . . . . . . . . .  	001A
+  vf_wThunkCSIP  . . . . . . . .  	001C
+  vf_wCallID . . . . . . . . . .  	0020
+  vf_cbArgs  . . . . . . . . . .  	0024
+  vf_vpCSIP  . . . . . . . . . .  	0026
+  vf_bArgs . . . . . . . . . . .  	002A
+WINDOWPOS16  . . . . . . . . . .  	000E	0007
+  wp16_hwnd  . . . . . . . . . .  	0000
+  wp16_hwndInsertAfter . . . . .  	0002
+  wp16_x . . . . . . . . . . . .  	0004
+  wp16_y . . . . . . . . . . . .  	0006
+  wp16_cx  . . . . . . . . . . .  	0008
+  wp16_cy  . . . . . . . . . . .  	000A
+  wp16_flags . . . . . . . . . .  	000C
+WNDCLASS16 . . . . . . . . . . .  	001A	000A
+  wc16_style . . . . . . . . . .  	0000
+  wc16_vpfnWndProc . . . . . . .  	0002
+  wc16_cbClsExtra  . . . . . . .  	0006
+  wc16_cbWndExtra  . . . . . . .  	0008
+  wc16_hInstance . . . . . . . .  	000A
+  wc16_hIcon . . . . . . . . . .  	000C
+  wc16_hCursor . . . . . . . . .  	000E
+  wc16_hbrBackground . . . . . .  	0010
+  wc16_vpszMenuName  . . . . . .  	0012
+  wc16_vpszClassName . . . . . .  	0016
+WRITEDIALOG16  . . . . . . . . .  	0008	0003
+  g242_f3  . . . . . . . . . . .  	0000
+  g242_f2  . . . . . . . . . . .  	0002
+  g242_f1  . . . . . . . . . . .  	0006
+WRITESPOOL16 . . . . . . . . . .  	0008	0003
+  g241_f3  . . . . . . . . . . .  	0000
+  g241_f2  . . . . . . . . . . .  	0002
+  g241_f1  . . . . . . . . . . .  	0006
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-28
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+DGROUP . . . . . . . . . . . . .  	GROUP
+  _DATA  . . . . . . . . . . . .  	002B	WORD	PUBLIC	'DATA'
+_TEXT  . . . . . . . . . . . . .  	0049	WORD	PUBLIC	'CODE'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+BOP_CMD  . . . . . . . . . . . .  	NUMBER	0054	
+BOP_DBGBREAKPOINT  . . . . . . .  	NUMBER	005B	
+BOP_DEBUGGER . . . . . . . . . .  	NUMBER	0056	
+BOP_DOS  . . . . . . . . . . . .  	NUMBER	0050	
+BOP_DPMI . . . . . . . . . . . .  	NUMBER	0053	
+BOP_KBD  . . . . . . . . . . . .  	NUMBER	005C	
+BOP_NOSUPPORT  . . . . . . . . .  	NUMBER	0059	
+BOP_NOTIFICATION . . . . . . . .  	NUMBER	005E	
+BOP_REDIR  . . . . . . . . . . .  	NUMBER	0057	
+BOP_SIZE . . . . . . . . . . . .  	NUMBER	0003	
+BOP_SWITCHTOREALMODE . . . . . .  	NUMBER	00FD	
+BOP_UNIMPINT . . . . . . . . . .  	NUMBER	005F	
+BOP_UNSIMULATE . . . . . . . . .  	NUMBER	00FE	
+BOP_VIDEO  . . . . . . . . . . .  	NUMBER	005D	
+BOP_WAITIFIDLE . . . . . . . . .  	NUMBER	005A	
+BOP_WOW  . . . . . . . . . . . .  	NUMBER	0051	
+BOP_XMS  . . . . . . . . . . . .  	NUMBER	0052	
+
+CODEBASE . . . . . . . . . . . .  	ALIAS	 _TEXT		
+CODEOFFSET . . . . . . . . . . .  	TEXT  offset _TEXT:		
+CW_USEDEFAULT16  . . . . . . . .  	NUMBER	8000	
+CodeBASE . . . . . . . . . . . .  	ALIAS	 _TEXT		
+CodeOFFSET . . . . . . . . . . .  	TEXT  offset _TEXT:		
+CurDir . . . . . . . . . . . . .  	BYTE	0000	
+
+DATABASE . . . . . . . . . . . .  	ALIAS	 DGROUP		
+DATAOFFSET . . . . . . . . . . .  	TEXT  offset DGROUP:		
+DEBUG  . . . . . . . . . . . . .  	TEXT  		
+DEVICECAPABILITIES . . . . . . .  	F PROC	002A	_TEXT	Global	Length = 000D
+DEVICEMODE . . . . . . . . . . .  	F PROC	0010	_TEXT	Global	Length = 000D
+DataBASE . . . . . . . . . . . .  	ALIAS	 DGROUP		
+DataOFFSET . . . . . . . . . . .  	TEXT  offset DGROUP:		
+
+ED_BADSYSFILE  . . . . . . . . .  	NUMBER	0150	
+ED_INITMEMERR  . . . . . . . . .  	NUMBER	0151	
+ED_INITTMPFILE . . . . . . . . .  	NUMBER	0152	
+EG_BAD_FAULT . . . . . . . . . .  	NUMBER	001B	
+EG_DOS_PROG_EXTENSION  . . . . .  	NUMBER	001C	
+EG_ENVIRONMENT_ERR . . . . . . .  	NUMBER	0017	
+EG_MALLOC_FAILURE  . . . . . . .  	NUMBER	0007	
+EG_PIF_ASK_CMDLINE . . . . . . .  	NUMBER	0016	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-29
+
+
+EG_PIF_BAD_FORMAT  . . . . . . .  	NUMBER	0012	
+EG_PIF_CMDLINE_ERR . . . . . . .  	NUMBER	0015	
+EG_PIF_STARTDIR_ERR  . . . . . .  	NUMBER	0013	
+EG_PIF_STARTFILE_ERR . . . . . .  	NUMBER	0014	
+EXPORT . . . . . . . . . . . . .  	NUMBER	0001	
+EXTDEVICEMODE  . . . . . . . . .  	F PROC	001D	_TEXT	Global	Length = 000D
+EnumFontProc . . . . . . . . . .  	BYTE	0000	
+EnumMetaProc . . . . . . . . . .  	BYTE	0000	
+EnumObjProc  . . . . . . . . . .  	BYTE	0000	
+EnumPropsProc  . . . . . . . . .  	BYTE	0000	
+EnumWndProc  . . . . . . . . . .  	BYTE	0000	
+ExtTextOut . . . . . . . . . . .  	F PROC	0037	_TEXT	Global	Length = 0012
+
+FLG_AUXILIARY  . . . . . . . . .  	NUMBER	0010	
+FLG_AUXILIARY_BIT  . . . . . . .  	NUMBER	0005	
+FLG_CARRY  . . . . . . . . . . .  	NUMBER	0001	
+FLG_CARRY_BIT  . . . . . . . . .  	NUMBER	0000	
+FLG_DIRECTION  . . . . . . . . .  	NUMBER	0400	
+FLG_DIRECTION_BIT  . . . . . . .  	NUMBER	000A	
+FLG_INTERRUPT  . . . . . . . . .  	NUMBER	0200	
+FLG_INTERRUPT_BIT  . . . . . . .  	NUMBER	0009	
+FLG_OVERFLOW . . . . . . . . . .  	NUMBER	0800	
+FLG_OVERFLOW_BIT . . . . . . . .  	NUMBER	000B	
+FLG_PARITY . . . . . . . . . . .  	NUMBER	0004	
+FLG_PARITY_BIT . . . . . . . . .  	NUMBER	0003	
+FLG_SIGN . . . . . . . . . . . .  	NUMBER	0080	
+FLG_SIGN_BIT . . . . . . . . . .  	NUMBER	0007	
+FLG_TRAP . . . . . . . . . . . .  	NUMBER	0100	
+FLG_ZERO . . . . . . . . . . . .  	NUMBER	0040	
+FLG_ZERO_BIT . . . . . . . . . .  	NUMBER	0006	
+FUN_ABORTDOC . . . . . . . . . .  	NUMBER	017E	
+FUN_ADDFONTRESOURCE  . . . . . .  	NUMBER	0077	
+FUN_ANIMATEPALETTE . . . . . . .  	NUMBER	016F	
+FUN_ARC  . . . . . . . . . . . .  	NUMBER	0017	
+FUN_BITBLT . . . . . . . . . . .  	NUMBER	0022	
+FUN_BITMAPBITS . . . . . . . . .  	NUMBER	002E	
+FUN_BRUTE  . . . . . . . . . . .  	NUMBER	00D5	
+FUN_CHORD  . . . . . . . . . . .  	NUMBER	015C	
+FUN_CLOSEJOB . . . . . . . . . .  	NUMBER	00F3	
+FUN_CLOSEMETAFILE  . . . . . . .  	NUMBER	007E	
+FUN_COMBINERGN . . . . . . . . .  	NUMBER	002F	
+FUN_COMPATIBLEBITMAP . . . . . .  	NUMBER	009D	
+FUN_CONVERTOUTLINEFONTFILE . . .  	NUMBER	0138	
+FUN_COPY . . . . . . . . . . . .  	NUMBER	00FA	
+FUN_COPYMETAFILE . . . . . . . .  	NUMBER	0097	
+FUN_CREATEBITMAP . . . . . . . .  	NUMBER	0030	
+FUN_CREATEBITMAPINDIRECT . . . .  	NUMBER	0031	
+FUN_CREATEBRUSHINDIRECT  . . . .  	NUMBER	0032	
+FUN_CREATECOMPATIBLEBITMAP . . .  	NUMBER	0033	
+FUN_CREATECOMPATIBLEDC . . . . .  	NUMBER	0034	
+FUN_CREATEDC . . . . . . . . . .  	NUMBER	0035	
+FUN_CREATEDIBITMAP . . . . . . .  	NUMBER	01BA	
+FUN_CREATEDIBPATTERNBRUSH  . . .  	NUMBER	01BD	
+FUN_CREATEDIBSECTION . . . . . .  	NUMBER	01E9	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-30
+
+
+FUN_CREATEDISCARDABLEBITMAP  . .  	NUMBER	009C	
+FUN_CREATEELLIPTICRGN  . . . . .  	NUMBER	0036	
+FUN_CREATEELLIPTICRGNINDIRECT  .  	NUMBER	0037	
+FUN_CREATEFONT . . . . . . . . .  	NUMBER	0038	
+FUN_CREATEFONTINDIRECT . . . . .  	NUMBER	0039	
+FUN_CREATEHATCHBRUSH . . . . . .  	NUMBER	003A	
+FUN_CREATEIC . . . . . . . . . .  	NUMBER	0099	
+FUN_CREATEMETAFILE . . . . . . .  	NUMBER	007D	
+FUN_CREATEPALETTE  . . . . . . .  	NUMBER	0168	
+FUN_CREATEPATTERNBRUSH . . . . .  	NUMBER	003C	
+FUN_CREATEPEN  . . . . . . . . .  	NUMBER	003D	
+FUN_CREATEPENINDIRECT  . . . . .  	NUMBER	003E	
+FUN_CREATEPOLYGONRGN . . . . . .  	NUMBER	003F	
+FUN_CREATEPOLYPOLYGONRGN . . . .  	NUMBER	01C3	
+FUN_CREATEPQ . . . . . . . . . .  	NUMBER	00E6	
+FUN_CREATEREALBITMAP . . . . . .  	NUMBER	0198	
+FUN_CREATEREALBITMAPINDIRECT . .  	NUMBER	0196	
+FUN_CREATERECTRGN  . . . . . . .  	NUMBER	0040	
+FUN_CREATERECTRGNINDIRECT  . . .  	NUMBER	0041	
+FUN_CREATEROUNDRECTRGN . . . . .  	NUMBER	01BC	
+FUN_CREATESCALABLEFONTRESOURCE .  	NUMBER	0136	
+FUN_CREATESOLIDBRUSH . . . . . .  	NUMBER	0042	
+FUN_CREATEUSERBITMAP . . . . . .  	NUMBER	0197	
+FUN_CREATEUSERDISCARDABLEBITMAP   	NUMBER	0199	
+FUN_DEATH  . . . . . . . . . . .  	NUMBER	0079	
+FUN_DELETEABOVELINEFONTS . . . .  	NUMBER	00BA	
+FUN_DELETEDC . . . . . . . . . .  	NUMBER	0044	
+FUN_DELETEJOB  . . . . . . . . .  	NUMBER	00F4	
+FUN_DELETEMETAFILE . . . . . . .  	NUMBER	007F	
+FUN_DELETEOBJECT . . . . . . . .  	NUMBER	0045	
+FUN_DELETEPQ . . . . . . . . . .  	NUMBER	00EB	
+FUN_DELETESPOOLPAGE  . . . . . .  	NUMBER	00FD	
+FUN_DEVICECAPABILITIES . . . . .  	NUMBER	01C6	
+FUN_DEVICECOLORMATCH . . . . . .  	NUMBER	01C1	
+FUN_DEVICEMODE . . . . . . . . .  	NUMBER	01C4	
+FUN_DMBITBLT . . . . . . . . . .  	NUMBER	00C9	
+FUN_DMCOLORINFO  . . . . . . . .  	NUMBER	00CA	
+FUN_DMDIBBITS  . . . . . . . . .  	NUMBER	00D9	
+FUN_DMENUMDFONTS . . . . . . . .  	NUMBER	00CE	
+FUN_DMENUMOBJ  . . . . . . . . .  	NUMBER	00CF	
+FUN_DMEXTTEXTOUT . . . . . . . .  	NUMBER	00D6	
+FUN_DMGETCHARWIDTH . . . . . . .  	NUMBER	00D7	
+FUN_DMOUTPUT . . . . . . . . . .  	NUMBER	00D0	
+FUN_DMPIXEL  . . . . . . . . . .  	NUMBER	00D1	
+FUN_DMREALIZEOBJECT  . . . . . .  	NUMBER	00D2	
+FUN_DMSCANLR . . . . . . . . . .  	NUMBER	00D4	
+FUN_DMSETDIBTODEV  . . . . . . .  	NUMBER	00DB	
+FUN_DMSTRBLT . . . . . . . . . .  	NUMBER	00D3	
+FUN_DMSTRETCHBLT . . . . . . . .  	NUMBER	00D8	
+FUN_DMSTRETCHDIBITS  . . . . . .  	NUMBER	00DA	
+FUN_DMTRANSPOSE  . . . . . . . .  	NUMBER	00DC	
+FUN_DPTOLP . . . . . . . . . . .  	NUMBER	0043	
+FUN_DPXLATE  . . . . . . . . . .  	NUMBER	008A	
+FUN_ELLIPSE  . . . . . . . . . .  	NUMBER	0018	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-31
+
+
+FUN_ENDDOC . . . . . . . . . . .  	NUMBER	017A	
+FUN_ENDPAGE  . . . . . . . . . .  	NUMBER	017C	
+FUN_ENDSPOOLPAGE . . . . . . . .  	NUMBER	00F7	
+FUN_ENGINEDELETEFONT . . . . . .  	NUMBER	012D	
+FUN_ENGINEENUMERATEFONT  . . . .  	NUMBER	012C	
+FUN_ENGINEEXTTEXTOUT . . . . . .  	NUMBER	013A	
+FUN_ENGINEGETCHARWIDTH . . . . .  	NUMBER	012F	
+FUN_ENGINEGETGLYPHBMP  . . . . .  	NUMBER	0131	
+FUN_ENGINEMAKEFONTDIR  . . . . .  	NUMBER	0132	
+FUN_ENGINEREALIZEFONT  . . . . .  	NUMBER	012E	
+FUN_ENGINESETFONTCONTEXT . . . .  	NUMBER	0130	
+FUN_ENUMCALLBACK . . . . . . . .  	NUMBER	009E	
+FUN_ENUMFONTFAMILIES . . . . . .  	NUMBER	014A	
+FUN_ENUMFONTS  . . . . . . . . .  	NUMBER	0046	
+FUN_ENUMMETAFILE . . . . . . . .  	NUMBER	00AF	
+FUN_ENUMOBJECTS  . . . . . . . .  	NUMBER	0047	
+FUN_EQUALRGN . . . . . . . . . .  	NUMBER	0048	
+FUN_ESCAPE . . . . . . . . . . .  	NUMBER	0026	
+FUN_EXCLUDECLIPRECT  . . . . . .  	NUMBER	0015	
+FUN_EXCLUDEVISRECT . . . . . . .  	NUMBER	0049	
+FUN_EXTDEVICEMODE  . . . . . . .  	NUMBER	01C5	
+FUN_EXTFLOODFILL . . . . . . . .  	NUMBER	0174	
+FUN_EXTRACTPQ  . . . . . . . . .  	NUMBER	00E8	
+FUN_EXTTEXTOUT . . . . . . . . .  	NUMBER	015F	
+FUN_FASTWINDOWFRAME  . . . . . .  	NUMBER	0190	
+FUN_FILLRGN  . . . . . . . . . .  	NUMBER	0028	
+FUN_FINALGDIINIT . . . . . . . .  	NUMBER	0195	
+FUN_FIXUPBOGUSPUBLISHERMETAFILE   	NUMBER	01D0	
+FUN_FLOODFILL  . . . . . . . . .  	NUMBER	0019	
+FUN_FRAMERGN . . . . . . . . . .  	NUMBER	0029	
+FUN_FTRAPPING0 . . . . . . . . .  	NUMBER	0163	
+FUN_GDIFLUSH . . . . . . . . . .  	NUMBER	0107	
+FUN_GDIINIT2 . . . . . . . . . .  	NUMBER	0193	
+FUN_GDIMOVEBITMAP  . . . . . . .  	NUMBER	0191	
+FUN_GDIREALIZEPALETTE  . . . . .  	NUMBER	016A	
+FUN_GDISEEGDIDO  . . . . . . . .  	NUMBER	01C4	
+FUN_GDISELECTPALETTE . . . . . .  	NUMBER	0169	
+FUN_GDITASKTERMINATION . . . . .  	NUMBER	01CC	
+FUN_GDI_WEP  . . . . . . . . . .  	NUMBER	0000	
+FUN_GETASPECTRATIOFILTER . . . .  	NUMBER	0161	
+FUN_GETASPECTRATIOFILTEREX . . .  	NUMBER	01E6	
+FUN_GETBITMAPBITS  . . . . . . .  	NUMBER	004A	
+FUN_GETBITMAPDIMENSION . . . . .  	NUMBER	00A2	
+FUN_GETBITMAPDIMENSIONEX . . . .  	NUMBER	01D4	
+FUN_GETBKCOLOR . . . . . . . . .  	NUMBER	004B	
+FUN_GETBKMODE  . . . . . . . . .  	NUMBER	004C	
+FUN_GETBOUNDSRECT  . . . . . . .  	NUMBER	00C2	
+FUN_GETBRUSHORG  . . . . . . . .  	NUMBER	0095	
+FUN_GETBRUSHORGEX  . . . . . . .  	NUMBER	01D5	
+FUN_GETCHARABCWIDTHS . . . . . .  	NUMBER	0133	
+FUN_GETCHARWIDTH . . . . . . . .  	NUMBER	015E	
+FUN_GETCLIPBOX . . . . . . . . .  	NUMBER	004D	
+FUN_GETCLIPRGN . . . . . . . . .  	NUMBER	00AD	
+FUN_GETCURLOGFONT  . . . . . . .  	NUMBER	019B	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-32
+
+
+FUN_GETCURRENTOBJECT . . . . . .  	NUMBER	0105	
+FUN_GETCURRENTPOSITION . . . . .  	NUMBER	004E	
+FUN_GETCURRENTPOSITIONEX . . . .  	NUMBER	01D6	
+FUN_GETDCHOOK  . . . . . . . . .  	NUMBER	00BF	
+FUN_GETDCORG . . . . . . . . . .  	NUMBER	004F	
+FUN_GETDCSTATE . . . . . . . . .  	NUMBER	00B3	
+FUN_GETDEVICECAPS  . . . . . . .  	NUMBER	0050	
+FUN_GETDIBCOLORTABLE . . . . . .  	NUMBER	01E7	
+FUN_GETDIBITS  . . . . . . . . .  	NUMBER	01B9	
+FUN_GETENVIRONMENT . . . . . . .  	NUMBER	0085	
+FUN_GETEXTEXTENTEX . . . . . . .  	NUMBER	00BC	
+FUN_GETEXTEXTENTPOINT  . . . . .  	NUMBER	01D7	
+FUN_GETFONTDATA  . . . . . . . .  	NUMBER	0137	
+FUN_GETGLYPHOUTLINE  . . . . . .  	NUMBER	0135	
+FUN_GETKERNINGPAIRS  . . . . . .  	NUMBER	014C	
+FUN_GETMAPMODE . . . . . . . . .  	NUMBER	0051	
+FUN_GETMETAFILE  . . . . . . . .  	NUMBER	007C	
+FUN_GETMETAFILEBITS  . . . . . .  	NUMBER	009F	
+FUN_GETNEARESTCOLOR  . . . . . .  	NUMBER	009A	
+FUN_GETNEARESTPALETTEINDEX . . .  	NUMBER	0172	
+FUN_GETOBJECT  . . . . . . . . .  	NUMBER	0052	
+FUN_GETOBJECTTYPE  . . . . . . .  	NUMBER	0104	
+FUN_GETOUTLINETEXTMETRICS  . . .  	NUMBER	0134	
+FUN_GETPALETTEENTRIES  . . . . .  	NUMBER	016B	
+FUN_GETPHYSICALFONTHANDLE  . . .  	NUMBER	0160	
+FUN_GETPIXEL . . . . . . . . . .  	NUMBER	0053	
+FUN_GETPOLYFILLMODE  . . . . . .  	NUMBER	0054	
+FUN_GETRASTERIZERCAPS  . . . . .  	NUMBER	0139	
+FUN_GETREGIONDATA  . . . . . . .  	NUMBER	0106	
+FUN_GETRELABS  . . . . . . . . .  	NUMBER	0056	
+FUN_GETRGNBOX  . . . . . . . . .  	NUMBER	0086	
+FUN_GETROP2  . . . . . . . . . .  	NUMBER	0055	
+FUN_GETSPOOLJOB  . . . . . . . .  	NUMBER	00F5	
+FUN_GETSTOCKOBJECT . . . . . . .  	NUMBER	0057	
+FUN_GETSTRETCHBLTMODE  . . . . .  	NUMBER	0058	
+FUN_GETSYSTEMPALETTEENTRIES  . .  	NUMBER	0177	
+FUN_GETSYSTEMPALETTEUSE  . . . .  	NUMBER	0176	
+FUN_GETTEXTALIGN . . . . . . . .  	NUMBER	0159	
+FUN_GETTEXTCHARACTEREXTRA  . . .  	NUMBER	0059	
+FUN_GETTEXTCOLOR . . . . . . . .  	NUMBER	005A	
+FUN_GETTEXTEXTENT  . . . . . . .  	NUMBER	005B	
+FUN_GETTEXTEXTENTPOINT . . . . .  	NUMBER	01D7	
+FUN_GETTEXTFACE  . . . . . . . .  	NUMBER	005C	
+FUN_GETTEXTMETRICS . . . . . . .  	NUMBER	005D	
+FUN_GETVIEWPORTEXT . . . . . . .  	NUMBER	005E	
+FUN_GETVIEWPORTEXTEX . . . . . .  	NUMBER	01D8	
+FUN_GETVIEWPORTORG . . . . . . .  	NUMBER	005F	
+FUN_GETVIEWPORTORGEX . . . . . .  	NUMBER	01D9	
+FUN_GETWINDOWEXT . . . . . . . .  	NUMBER	0060	
+FUN_GETWINDOWEXTEX . . . . . . .  	NUMBER	01DA	
+FUN_GETWINDOWORG . . . . . . . .  	NUMBER	0061	
+FUN_GETWINDOWORGEX . . . . . . .  	NUMBER	01DB	
+FUN_GSV  . . . . . . . . . . . .  	NUMBER	0089	
+FUN_INQUIREVISRGN  . . . . . . .  	NUMBER	0083	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-33
+
+
+FUN_INSERTPQ . . . . . . . . . .  	NUMBER	00E9	
+FUN_INTERNALCREATEDC . . . . . .  	NUMBER	0076	
+FUN_INTERSECTCLIPRECT  . . . . .  	NUMBER	0016	
+FUN_INTERSECTVISRECT . . . . . .  	NUMBER	0062	
+FUN_INVERTRGN  . . . . . . . . .  	NUMBER	002A	
+FUN_ISDCCURRENTPALETTE . . . . .  	NUMBER	019C	
+FUN_ISDCDIRTY  . . . . . . . . .  	NUMBER	00A9	
+FUN_ISGDIOBJECT  . . . . . . . .  	NUMBER	01CE	
+FUN_ISVALIDMETAFILE  . . . . . .  	NUMBER	019A	
+FUN_LINEDDA  . . . . . . . . . .  	NUMBER	0064	
+FUN_LINETO . . . . . . . . . . .  	NUMBER	0013	
+FUN_LPTODP . . . . . . . . . . .  	NUMBER	0063	
+FUN_LVBUNION . . . . . . . . . .  	NUMBER	00AB	
+FUN_MAKEOBJECTPRIVATE  . . . . .  	NUMBER	01CF	
+FUN_MASK . . . . . . . . . . . .  	NUMBER	0FFF	
+FUN_MFDRAWTEXT . . . . . . . . .  	NUMBER	015B	
+FUN_MINPQ  . . . . . . . . . . .  	NUMBER	00E7	
+FUN_MOVETO . . . . . . . . . . .  	NUMBER	0014	
+FUN_MOVETOEX . . . . . . . . . .  	NUMBER	01E3	
+FUN_MULDIV . . . . . . . . . . .  	NUMBER	0080	
+FUN_OFFSETCLIPRGN  . . . . . . .  	NUMBER	0020	
+FUN_OFFSETORG  . . . . . . . . .  	NUMBER	008F	
+FUN_OFFSETRGN  . . . . . . . . .  	NUMBER	0065	
+FUN_OFFSETVIEWPORTORG  . . . . .  	NUMBER	0011	
+FUN_OFFSETVIEWPORTORGEX  . . . .  	NUMBER	01DC	
+FUN_OFFSETVISRGN . . . . . . . .  	NUMBER	0066	
+FUN_OFFSETWINDOWORG  . . . . . .  	NUMBER	000F	
+FUN_OFFSETWINDOWORGEX  . . . . .  	NUMBER	01DD	
+FUN_OPENJOB  . . . . . . . . . .  	NUMBER	00F0	
+FUN_PAINTRGN . . . . . . . . . .  	NUMBER	002B	
+FUN_PATBLT . . . . . . . . . . .  	NUMBER	001D	
+FUN_PIE  . . . . . . . . . . . .  	NUMBER	001A	
+FUN_PIXTOLINE  . . . . . . . . .  	NUMBER	00A4	
+FUN_PLAYMETAFILE . . . . . . . .  	NUMBER	007B	
+FUN_PLAYMETAFILERECORD . . . . .  	NUMBER	00B0	
+FUN_POLYGON  . . . . . . . . . .  	NUMBER	0024	
+FUN_POLYLINE . . . . . . . . . .  	NUMBER	0025	
+FUN_POLYPOLYGON  . . . . . . . .  	NUMBER	01C2	
+FUN_POLYPOLYLINEWOW  . . . . . .  	NUMBER	01EA	
+FUN_PTINREGION . . . . . . . . .  	NUMBER	00A1	
+FUN_PTVISIBLE  . . . . . . . . .  	NUMBER	0067	
+FUN_QUERYABORT . . . . . . . . .  	NUMBER	009B	
+FUN_QUERYJOB . . . . . . . . . .  	NUMBER	00F8	
+FUN_RCOS . . . . . . . . . . . .  	NUMBER	00B1	
+FUN_REALIZEDEFAULTPALETTE  . . .  	NUMBER	016D	
+FUN_RECTANGLE  . . . . . . . . .  	NUMBER	001B	
+FUN_RECTINREGION . . . . . . . .  	NUMBER	00B5	
+FUN_RECTINREGION_EHH . . . . . .  	NUMBER	01D2	
+FUN_RECTSTUFF  . . . . . . . . .  	NUMBER	008E	
+FUN_RECTVISIBLE  . . . . . . . .  	NUMBER	0068	
+FUN_RECTVISIBLE_EHH  . . . . . .  	NUMBER	01D1	
+FUN_REMOVEFONTRESOURCE . . . . .  	NUMBER	0088	
+FUN_RESETDC  . . . . . . . . . .  	NUMBER	0178	
+FUN_RESIZEPALETTE  . . . . . . .  	NUMBER	0170	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-34
+
+
+FUN_RESTOREDC  . . . . . . . . .  	NUMBER	0027	
+FUN_RESTOREVISRGN  . . . . . . .  	NUMBER	0082	
+FUN_RESURRECTION . . . . . . . .  	NUMBER	007A	
+FUN_RETURN . . . . . . . . . . .  	NUMBER	0000	
+FUN_ROUNDRECT  . . . . . . . . .  	NUMBER	001C	
+FUN_RSIN . . . . . . . . . . . .  	NUMBER	00B2	
+FUN_SAVEDC . . . . . . . . . . .  	NUMBER	001E	
+FUN_SAVEVISRGN . . . . . . . . .  	NUMBER	0081	
+FUN_SCALEEXT . . . . . . . . . .  	NUMBER	008C	
+FUN_SCALEVIEWPORTEXT . . . . . .  	NUMBER	0012	
+FUN_SCALEVIEWPORTEXTEX . . . . .  	NUMBER	01E4	
+FUN_SCALEWINDOWEXT . . . . . . .  	NUMBER	0010	
+FUN_SCALEWINDOWEXTEX . . . . . .  	NUMBER	01E5	
+FUN_SCANLR . . . . . . . . . . .  	NUMBER	0087	
+FUN_SELECTBITMAP . . . . . . . .  	NUMBER	00C3	
+FUN_SELECTCLIPRGN  . . . . . . .  	NUMBER	002C	
+FUN_SELECTOBJECT . . . . . . . .  	NUMBER	002D	
+FUN_SELECTVISRGN . . . . . . . .  	NUMBER	0069	
+FUN_SETABORTPROC . . . . . . . .  	NUMBER	017D	
+FUN_SETBITMAPBITS  . . . . . . .  	NUMBER	006A	
+FUN_SETBITMAPDIMENSION . . . . .  	NUMBER	00A3	
+FUN_SETBITMAPDIMENSIONEX . . . .  	NUMBER	01DE	
+FUN_SETBKCOLOR . . . . . . . . .  	NUMBER	0001	
+FUN_SETBKMODE  . . . . . . . . .  	NUMBER	0002	
+FUN_SETBOUNDSRECT  . . . . . . .  	NUMBER	00C1	
+FUN_SETBRUSHORG  . . . . . . . .  	NUMBER	0094	
+FUN_SETDCHOOK  . . . . . . . . .  	NUMBER	00BE	
+FUN_SETDCORG . . . . . . . . . .  	NUMBER	0075	
+FUN_SETDCSTATE . . . . . . . . .  	NUMBER	00B4	
+FUN_SETDCSTATUS  . . . . . . . .  	NUMBER	00AA	
+FUN_SETDIBCOLORTABLE . . . . . .  	NUMBER	01E8	
+FUN_SETDIBITS  . . . . . . . . .  	NUMBER	01B8	
+FUN_SETDIBITSTODEVICE  . . . . .  	NUMBER	01BB	
+FUN_SETENVIRONMENT . . . . . . .  	NUMBER	0084	
+FUN_SETHOOKFLAGS . . . . . . . .  	NUMBER	00C0	
+FUN_SETMAPMODE . . . . . . . . .  	NUMBER	0003	
+FUN_SETMAPPERFLAGS . . . . . . .  	NUMBER	015D	
+FUN_SETMETAFILEBITS  . . . . . .  	NUMBER	00A0	
+FUN_SETMETAFILEBITSBETTER  . . .  	NUMBER	00C4	
+FUN_SETOBJECTOWNER . . . . . . .  	NUMBER	01CD	
+FUN_SETPALETTEENTRIES  . . . . .  	NUMBER	016C	
+FUN_SETPIXEL . . . . . . . . . .  	NUMBER	001F	
+FUN_SETPOLYFILLMODE  . . . . . .  	NUMBER	0006	
+FUN_SETRECTRGN . . . . . . . . .  	NUMBER	00AC	
+FUN_SETRELABS  . . . . . . . . .  	NUMBER	0005	
+FUN_SETROP2  . . . . . . . . . .  	NUMBER	0004	
+FUN_SETSTRETCHBLTMODE  . . . . .  	NUMBER	0007	
+FUN_SETSYSTEMPALETTEUSE  . . . .  	NUMBER	0175	
+FUN_SETTEXTALIGN . . . . . . . .  	NUMBER	015A	
+FUN_SETTEXTCHARACTEREXTRA  . . .  	NUMBER	0008	
+FUN_SETTEXTCOLOR . . . . . . . .  	NUMBER	0009	
+FUN_SETTEXTJUSTIFICATION . . . .  	NUMBER	000A	
+FUN_SETVIEWPORTEXT . . . . . . .  	NUMBER	000E	
+FUN_SETVIEWPORTEXTEX . . . . . .  	NUMBER	01DF	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-35
+
+
+FUN_SETVIEWPORTORG . . . . . . .  	NUMBER	000D	
+FUN_SETVIEWPORTORGEX . . . . . .  	NUMBER	01E0	
+FUN_SETWINDOWEXT . . . . . . . .  	NUMBER	000C	
+FUN_SETWINDOWEXTEX . . . . . . .  	NUMBER	01E1	
+FUN_SETWINDOWORG . . . . . . . .  	NUMBER	000B	
+FUN_SETWINDOWORGEX . . . . . . .  	NUMBER	01E2	
+FUN_SETWINVIEWEXT  . . . . . . .  	NUMBER	008B	
+FUN_SHRINKGDIHEAP  . . . . . . .  	NUMBER	0162	
+FUN_SIZEPQ . . . . . . . . . . .  	NUMBER	00EA	
+FUN_SPOOLFILE  . . . . . . . . .  	NUMBER	00FE	
+FUN_STARTDOC . . . . . . . . . .  	NUMBER	0179	
+FUN_STARTPAGE  . . . . . . . . .  	NUMBER	017B	
+FUN_STARTSPOOLPAGE . . . . . . .  	NUMBER	00F6	
+FUN_STRETCHBLT . . . . . . . . .  	NUMBER	0023	
+FUN_STRETCHDIBITS  . . . . . . .  	NUMBER	01B7	
+FUN_STUFFINREGION  . . . . . . .  	NUMBER	00B9	
+FUN_STUFFVISIBLE . . . . . . . .  	NUMBER	00B8	
+FUN_TEXTOUT  . . . . . . . . . .  	NUMBER	0021	
+FUN_UNICODETOANSI  . . . . . . .  	NUMBER	01D3	
+FUN_UNREALIZEOBJECT  . . . . . .  	NUMBER	0096	
+FUN_UPDATECOLORS . . . . . . . .  	NUMBER	016E	
+FUN_WORDSET  . . . . . . . . . .  	NUMBER	008D	
+FUN_WRITEDIALOG  . . . . . . . .  	NUMBER	00F2	
+FUN_WRITESPOOL . . . . . . . . .  	NUMBER	00F1	
+
+GRAINYTIC_RES  . . . . . . . . .  	NUMBER	003F	
+GrayStringProc . . . . . . . . .  	BYTE	0000	
+
+HI_WCALLID . . . . . . . . . . .  	NUMBER	0000	
+HookProc . . . . . . . . . . . .  	BYTE	0000	
+
+IOProc . . . . . . . . . . . . .  	BYTE	0000	
+iExit  . . . . . . . . . . . . .  	TEXT  (word ptr [bp+6])		
+
+K  . . . . . . . . . . . . . . .  	NUMBER	0400	
+
+LF_FACESIZE  . . . . . . . . . .  	NUMBER	0020	
+LF_FULLFACESIZE  . . . . . . . .  	NUMBER	0040	
+LineDDAProc  . . . . . . . . . .  	BYTE	0000	
+
+MAX_VDMFILENAME  . . . . . . . .  	NUMBER	0090	
+MOD_COMMDLG  . . . . . . . . . .  	NUMBER	9000	
+MOD_DGDI . . . . . . . . . . . .  	NUMBER	2000	
+MOD_DKERNEL  . . . . . . . . . .  	NUMBER	0000	
+MOD_DUSER  . . . . . . . . . . .  	NUMBER	1000	
+MOD_GDI  . . . . . . . . . . . .  	NUMBER	2000	
+MOD_KERNEL . . . . . . . . . . .  	NUMBER	0000	
+MOD_KEYBOARD . . . . . . . . . .  	NUMBER	3000	
+MOD_LAST . . . . . . . . . . . .  	NUMBER	A000	
+MOD_MASK . . . . . . . . . . . .  	NUMBER	F000	
+MOD_MMEDIA . . . . . . . . . . .  	NUMBER	8000	
+MOD_SHELL  . . . . . . . . . . .  	NUMBER	5000	
+MOD_SOUND  . . . . . . . . . . .  	NUMBER	4000	
+MOD_TOOLHELP . . . . . . . . . .  	NUMBER	7000	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-36
+
+
+MOD_USER . . . . . . . . . . . .  	NUMBER	1000	
+MOD_WINSOCK  . . . . . . . . . .  	NUMBER	6000	
+MSW_PE . . . . . . . . . . . . .  	NUMBER	0001	
+MidiInFunc . . . . . . . . . . .  	BYTE	0000	
+MidiOutFunc  . . . . . . . . . .  	BYTE	0000	
+
+NOSUPPORT_DRIVER . . . . . . . .  	NUMBER	0002	
+NOSUPPORT_FLOPPY . . . . . . . .  	NUMBER	0000	
+NOSUPPORT_HARDDISK . . . . . . .  	NUMBER	0001	
+NOSUPPORT_ILLBOP . . . . . . . .  	NUMBER	0004	
+NOSUPPORT_MOUSEDRVR  . . . . . .  	NUMBER	0006	
+NOSUPPORT_NOLIM  . . . . . . . .  	NUMBER	0005	
+NOSUPPORT_OLDPIF . . . . . . . .  	NUMBER	0003	
+
+OLDBM_GETCHECK . . . . . . . . .  	NUMBER	0400	
+OLDBM_GETSTATE . . . . . . . . .  	NUMBER	0402	
+OLDBM_SETCHECK . . . . . . . . .  	NUMBER	0401	
+OLDBM_SETSTATE . . . . . . . . .  	NUMBER	0403	
+OLDBM_SETSTYLE . . . . . . . . .  	NUMBER	0404	
+OLDCBEC_KILLCOMBOFOCUS . . . . .  	NUMBER	041B	
+OLDCBEC_SETCOMBOFOCUS  . . . . .  	NUMBER	041A	
+OLDCB_ADDSTRING  . . . . . . . .  	NUMBER	0403	
+OLDCB_DELETESTRING . . . . . . .  	NUMBER	0404	
+OLDCB_DIR  . . . . . . . . . . .  	NUMBER	0405	
+OLDCB_FINDSTRING . . . . . . . .  	NUMBER	040C	
+OLDCB_FINDSTRINGEXACT  . . . . .  	NUMBER	0418	
+OLDCB_GETCOUNT . . . . . . . . .  	NUMBER	0406	
+OLDCB_GETCURSEL  . . . . . . . .  	NUMBER	0407	
+OLDCB_GETDROPPEDCONTROLRECT  . .  	NUMBER	0412	
+OLDCB_GETDROPPEDSTATE  . . . . .  	NUMBER	0417	
+OLDCB_GETEDITSEL . . . . . . . .  	NUMBER	0400	
+OLDCB_GETEXTENDEDUI  . . . . . .  	NUMBER	0416	
+OLDCB_GETITEMDATA  . . . . . . .  	NUMBER	0410	
+OLDCB_GETITEMHEIGHT  . . . . . .  	NUMBER	0414	
+OLDCB_GETLBTEXT  . . . . . . . .  	NUMBER	0408	
+OLDCB_GETLBTEXTLEN . . . . . . .  	NUMBER	0409	
+OLDCB_INSERTSTRING . . . . . . .  	NUMBER	040A	
+OLDCB_LIMITTEXT  . . . . . . . .  	NUMBER	0401	
+OLDCB_MSGMAX . . . . . . . . . .  	NUMBER	0419	
+OLDCB_RESETCONTENT . . . . . . .  	NUMBER	040B	
+OLDCB_SELECTSTRING . . . . . . .  	NUMBER	040D	
+OLDCB_SETCURSEL  . . . . . . . .  	NUMBER	040E	
+OLDCB_SETEDITSEL . . . . . . . .  	NUMBER	0402	
+OLDCB_SETEXTENDEDUI  . . . . . .  	NUMBER	0415	
+OLDCB_SETITEMDATA  . . . . . . .  	NUMBER	0411	
+OLDCB_SETITEMHEIGHT  . . . . . .  	NUMBER	0413	
+OLDCB_SHOWDROPDOWN . . . . . . .  	NUMBER	040F	
+OLDEM_CANUNDO  . . . . . . . . .  	NUMBER	0416	
+OLDEM_EMPTYUNDOBUFFER  . . . . .  	NUMBER	041D	
+OLDEM_FMTLINES . . . . . . . . .  	NUMBER	0418	
+OLDEM_GETFIRSTVISIBLELINE  . . .  	NUMBER	041E	
+OLDEM_GETHANDLE  . . . . . . . .  	NUMBER	040D	
+OLDEM_GETLINE  . . . . . . . . .  	NUMBER	0414	
+OLDEM_GETLINECOUNT . . . . . . .  	NUMBER	040A	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-37
+
+
+OLDEM_GETMODIFY  . . . . . . . .  	NUMBER	0408	
+OLDEM_GETPASSWORDCHAR  . . . . .  	NUMBER	0422	
+OLDEM_GETRECT  . . . . . . . . .  	NUMBER	0402	
+OLDEM_GETSEL . . . . . . . . . .  	NUMBER	0400	
+OLDEM_GETTHUMB . . . . . . . . .  	NUMBER	040E	
+OLDEM_GETWORDBREAKPROC . . . . .  	NUMBER	0421	
+OLDEM_LIMITTEXT  . . . . . . . .  	NUMBER	0415	
+OLDEM_LINEFROMCHAR . . . . . . .  	NUMBER	0419	
+OLDEM_LINEINDEX  . . . . . . . .  	NUMBER	040B	
+OLDEM_LINELENGTH . . . . . . . .  	NUMBER	0411	
+OLDEM_LINESCROLL . . . . . . . .  	NUMBER	0406	
+OLDEM_MSGMAX . . . . . . . . . .  	NUMBER	0423	
+OLDEM_REPLACESEL . . . . . . . .  	NUMBER	0412	
+OLDEM_SCROLL . . . . . . . . . .  	NUMBER	0405	
+OLDEM_SETFONT  . . . . . . . . .  	NUMBER	0413	
+OLDEM_SETHANDLE  . . . . . . . .  	NUMBER	040C	
+OLDEM_SETMODIFY  . . . . . . . .  	NUMBER	0409	
+OLDEM_SETPASSWORDCHAR  . . . . .  	NUMBER	041C	
+OLDEM_SETREADONLY  . . . . . . .  	NUMBER	041F	
+OLDEM_SETRECT  . . . . . . . . .  	NUMBER	0403	
+OLDEM_SETRECTNP  . . . . . . . .  	NUMBER	0404	
+OLDEM_SETSEL . . . . . . . . . .  	NUMBER	0401	
+OLDEM_SETTABSTOPS  . . . . . . .  	NUMBER	041B	
+OLDEM_SETWORDBREAK . . . . . . .  	NUMBER	041A	
+OLDEM_SETWORDBREAKPROC . . . . .  	NUMBER	0420	
+OLDEM_UNDO . . . . . . . . . . .  	NUMBER	0417	
+OLDLBCB_CARETOFF . . . . . . . .  	NUMBER	0425	
+OLDLBCB_CARETON  . . . . . . . .  	NUMBER	0424	
+OLDLB_ADDFILE  . . . . . . . . .  	NUMBER	0417	
+OLDLB_ADDSTRING  . . . . . . . .  	NUMBER	0401	
+OLDLB_DELETESTRING . . . . . . .  	NUMBER	0403	
+OLDLB_DIR  . . . . . . . . . . .  	NUMBER	040E	
+OLDLB_FINDSTRING . . . . . . . .  	NUMBER	0410	
+OLDLB_FINDSTRINGEXACT  . . . . .  	NUMBER	0423	
+OLDLB_GETANCHORINDEX . . . . . .  	NUMBER	041E	
+OLDLB_GETCARETINDEX  . . . . . .  	NUMBER	0420	
+OLDLB_GETCOUNT . . . . . . . . .  	NUMBER	040C	
+OLDLB_GETCURSEL  . . . . . . . .  	NUMBER	0409	
+OLDLB_GETHORIZONTALEXTENT  . . .  	NUMBER	0414	
+OLDLB_GETITEMDATA  . . . . . . .  	NUMBER	041A	
+OLDLB_GETITEMHEIGHT  . . . . . .  	NUMBER	0422	
+OLDLB_GETITEMRECT  . . . . . . .  	NUMBER	0419	
+OLDLB_GETSEL . . . . . . . . . .  	NUMBER	0408	
+OLDLB_GETSELCOUNT  . . . . . . .  	NUMBER	0411	
+OLDLB_GETSELITEMS  . . . . . . .  	NUMBER	0412	
+OLDLB_GETTEXT  . . . . . . . . .  	NUMBER	040A	
+OLDLB_GETTEXTLEN . . . . . . . .  	NUMBER	040B	
+OLDLB_GETTOPINDEX  . . . . . . .  	NUMBER	040F	
+OLDLB_INSERTSTRING . . . . . . .  	NUMBER	0402	
+OLDLB_MSGMAX . . . . . . . . . .  	NUMBER	0426	
+OLDLB_RESETCONTENT . . . . . . .  	NUMBER	0405	
+OLDLB_SELECTSTRING . . . . . . .  	NUMBER	040D	
+OLDLB_SELITEMRANGE . . . . . . .  	NUMBER	041C	
+OLDLB_SETANCHORINDEX . . . . . .  	NUMBER	041D	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-38
+
+
+OLDLB_SETCARETINDEX  . . . . . .  	NUMBER	041F	
+OLDLB_SETCOLUMNWIDTH . . . . . .  	NUMBER	0416	
+OLDLB_SETCURSEL  . . . . . . . .  	NUMBER	0407	
+OLDLB_SETHORIZONTALEXTENT  . . .  	NUMBER	0415	
+OLDLB_SETITEMDATA  . . . . . . .  	NUMBER	041B	
+OLDLB_SETITEMHEIGHT  . . . . . .  	NUMBER	0421	
+OLDLB_SETSEL . . . . . . . . . .  	NUMBER	0406	
+OLDLB_SETTABSTOPS  . . . . . . .  	NUMBER	0413	
+OLDLB_SETTOPINDEX  . . . . . . .  	NUMBER	0418	
+OLDSBM_ENABLEARROWS  . . . . . .  	NUMBER	0404	
+OLDSBM_GETPOS  . . . . . . . . .  	NUMBER	0401	
+OLDSBM_GETRANGE  . . . . . . . .  	NUMBER	0403	
+OLDSBM_SETPOS  . . . . . . . . .  	NUMBER	0400	
+OLDSBM_SETRANGE  . . . . . . . .  	NUMBER	0402	
+
+RET_CHANGESELECTOR . . . . . . .  	NUMBER	0034	
+RET_DEBUG  . . . . . . . . . . .  	NUMBER	0002	
+RET_DEBUGRETURN  . . . . . . . .  	NUMBER	0001	
+RET_ENUMFONTPROC . . . . . . . .  	NUMBER	0004	
+RET_ENUMMETAFILEPROC . . . . . .  	NUMBER	0018	
+RET_ENUMOBJPROC  . . . . . . . .  	NUMBER	0020	
+RET_ENUMPROPSPROC  . . . . . . .  	NUMBER	0023	
+RET_ENUMWINDOWPROC . . . . . . .  	NUMBER	0005	
+RET_FINDRESOURCE . . . . . . . .  	NUMBER	0010	
+RET_FORCESEGMENTFAULT  . . . . .  	NUMBER	0024	
+RET_FORCETASKEXIT  . . . . . . .  	NUMBER	001E	
+RET_FORCETASKFAULT . . . . . . .  	NUMBER	002C	
+RET_FOREGROUNDIDLE . . . . . . .  	NUMBER	0031	
+RET_FREEDIBSEL . . . . . . . . .  	NUMBER	003C	
+RET_FREERESOURCE . . . . . . . .  	NUMBER	0012	
+RET_GETCURDIR  . . . . . . . . .  	NUMBER	002E	
+RET_GETDIBFLAGS  . . . . . . . .  	NUMBER	003A	
+RET_GETDIBSIZE . . . . . . . . .  	NUMBER	0039	
+RET_GETDOSPDB  . . . . . . . . .  	NUMBER	002F	
+RET_GETDOSSFT  . . . . . . . . .  	NUMBER	0030	
+RET_GETEXEPTR  . . . . . . . . .  	NUMBER	002A	
+RET_GETEXPWINVER . . . . . . . .  	NUMBER	002D	
+RET_GETMODULEFILENAME  . . . . .  	NUMBER	0035	
+RET_GLOBALALLOCLOCK  . . . . . .  	NUMBER	000C	
+RET_GLOBALLOCK . . . . . . . . .  	NUMBER	000D	
+RET_GLOBALUNLOCK . . . . . . . .  	NUMBER	000E	
+RET_GLOBALUNLOCKFREE . . . . . .  	NUMBER	000F	
+RET_GRAYSTRINGPROC . . . . . . .  	NUMBER	001D	
+RET_HOOKPROC . . . . . . . . . .  	NUMBER	001A	
+RET_LINEDDAPROC  . . . . . . . .  	NUMBER	001C	
+RET_LOADRESOURCE . . . . . . . .  	NUMBER	0011	
+RET_LOCALALLOC . . . . . . . . .  	NUMBER	0006	
+RET_LOCALFREE  . . . . . . . . .  	NUMBER	000B	
+RET_LOCALLOCK  . . . . . . . . .  	NUMBER	0008	
+RET_LOCALREALLOC . . . . . . . .  	NUMBER	0007	
+RET_LOCALSIZE  . . . . . . . . .  	NUMBER	000A	
+RET_LOCALUNLOCK  . . . . . . . .  	NUMBER	0009	
+RET_LOCKRESOURCE . . . . . . . .  	NUMBER	0013	
+RET_LOCKSEGMENT  . . . . . . . .  	NUMBER	0016	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-39
+
+
+RET_MAX  . . . . . . . . . . . .  	NUMBER	003C	
+RET_RETURN . . . . . . . . . . .  	NUMBER	0000	
+RET_SETABORTPROC . . . . . . . .  	NUMBER	0022	
+RET_SETCURDIR  . . . . . . . . .  	NUMBER	001F	
+RET_SETCURSORICONFLAG  . . . . .  	NUMBER	0021	
+RET_SETDIBSEL  . . . . . . . . .  	NUMBER	003B	
+RET_SETWORDBREAKPROC . . . . . .  	NUMBER	0036	
+RET_SIZEOFRESOURCE . . . . . . .  	NUMBER	0015	
+RET_SUBCLASSPROC . . . . . . . .  	NUMBER	001B	
+RET_TASKSTARTED  . . . . . . . .  	NUMBER	0019	
+RET_UNLOCKRESOURCE . . . . . . .  	NUMBER	0014	
+RET_UNLOCKSEGMENT  . . . . . . .  	NUMBER	0017	
+RET_WINEXEC  . . . . . . . . . .  	NUMBER	0037	
+RET_WINSOCKBLOCKHOOK . . . . . .  	NUMBER	0032	
+RET_WNDPROC  . . . . . . . . . .  	NUMBER	0003	
+RET_WOWCALLBACK16  . . . . . . .  	NUMBER	0038	
+RET_WOWDDEFREEHANDLE . . . . . .  	NUMBER	0033	
+RMB_ABORT  . . . . . . . . . . .  	NUMBER	0001	
+RMB_EDIT . . . . . . . . . . . .  	NUMBER	0080	
+RMB_EDITBUFFERSIZE_MASK  . . . .  	TEXT  0FFFF0000H		
+RMB_FLAGS_MASK . . . . . . . . .  	NUMBER	FFFF	
+RMB_ICON_BANG  . . . . . . . . .  	NUMBER	0010	
+RMB_ICON_INFO  . . . . . . . . .  	NUMBER	0008	
+RMB_ICON_STOP  . . . . . . . . .  	NUMBER	0020	
+RMB_ICON_WHAT  . . . . . . . . .  	NUMBER	0040	
+RMB_IGNORE . . . . . . . . . . .  	NUMBER	0004	
+RMB_RETRY  . . . . . . . . . . .  	NUMBER	0002	
+Reserved . . . . . . . . . . . .  	L BYTE	0000	_DATA	Length = 0010
+
+SEB_ABORT  . . . . . . . . . . .  	NUMBER	0006	
+SEB_CANCEL . . . . . . . . . . .  	NUMBER	0002	
+SEB_CLOSE  . . . . . . . . . . .  	NUMBER	0008	
+SEB_DEFBUTTON  . . . . . . . . .  	NUMBER	8000	
+SEB_IGNORE . . . . . . . . . . .  	NUMBER	0007	
+SEB_NO . . . . . . . . . . . . .  	NUMBER	0004	
+SEB_OK . . . . . . . . . . . . .  	NUMBER	0001	
+SEB_RETRY  . . . . . . . . . . .  	NUMBER	0005	
+SEB_YES  . . . . . . . . . . . .  	NUMBER	0003	
+SetAbortProc . . . . . . . . . .  	BYTE	0000	
+SubClassProc . . . . . . . . . .  	BYTE	0000	
+
+TimeFunc . . . . . . . . . . . .  	BYTE	0000	
+tmplabel_DEVICECAPABILITIES  . .  	L NEAR	002C	_TEXT
+tmplabel_DEVICEMODE  . . . . . .  	L NEAR	0012	_TEXT
+tmplabel_EXTDEVICEMODE . . . . .  	L NEAR	001F	_TEXT
+
+WCB16_CDECL  . . . . . . . . . .  	NUMBER	0001	
+WCB16_MAX_CBARGS . . . . . . . .  	NUMBER	0010	
+WCB16_PASCAL . . . . . . . . . .  	NUMBER	0000	
+WEP  . . . . . . . . . . . . . .  	F PROC	0004	_TEXT	Global	Length = 000C
+WIN31  . . . . . . . . . . . . .  	NUMBER	0001	
+WINSPOOL16 . . . . . . . . . . .  	F PROC	0000	_TEXT	Global	Length = 0004
+WINSPOOL_Identifier  . . . . . .  	L BYTE	0010	_DATA
+WM_ALTTABACTIVE  . . . . . . . .  	NUMBER	0029	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-40
+
+
+WM_BEGINDRAG . . . . . . . . . .  	NUMBER	022C	
+WM_DRAGLOOP  . . . . . . . . . .  	NUMBER	022D	
+WM_DRAGMOVE  . . . . . . . . . .  	NUMBER	022F	
+WM_DRAGSELECT  . . . . . . . . .  	NUMBER	022E	
+WM_DROPOBJECT  . . . . . . . . .  	NUMBER	022A	
+WM_ENTERMENULOOP . . . . . . . .  	NUMBER	0211	
+WM_ENTERSIZEMOVE . . . . . . . .  	NUMBER	0231	
+WM_EXITMENULOOP  . . . . . . . .  	NUMBER	0212	
+WM_EXITSIZEMOVE  . . . . . . . .  	NUMBER	0232	
+WM_ISACTIVEICON  . . . . . . . .  	NUMBER	0035	
+WM_LBTRACKPOINT  . . . . . . . .  	NUMBER	0131	
+WM_NEXTMENU  . . . . . . . . . .  	NUMBER	0213	
+WM_QUERYDROPOBJECT . . . . . . .  	NUMBER	022B	
+WM_QUERYPARKICON . . . . . . . .  	NUMBER	0036	
+WM_SETVISIBLE  . . . . . . . . .  	NUMBER	0009	
+WM_SYNCPAINT . . . . . . . . . .  	NUMBER	0088	
+WM_SYSTIMER  . . . . . . . . . .  	NUMBER	0118	
+WM_USER  . . . . . . . . . . . .  	NUMBER	0400	
+WOW  . . . . . . . . . . . . . .  	TEXT  		
+WOW16Call  . . . . . . . . . . .  	L FAR 	0000	_TEXT	External
+WOWCallback16  . . . . . . . . .  	BYTE	0000	
+WaveInFunc . . . . . . . . . . .  	BYTE	0000	
+WaveOutFunc  . . . . . . . . . .  	BYTE	0000	
+WndProc  . . . . . . . . . . . .  	BYTE	0000	
+WordBreakProc  . . . . . . . . .  	BYTE	0000	
+
+?386regs . . . . . . . . . . . .  	NUMBER	0000	
+?QUIET . . . . . . . . . . . . .  	NUMBER	0001	
+?UnionSize . . . . . . . . . . .  	NUMBER	0010	
+@Cpu . . . . . . . . . . . . . .  	TEXT  1415		
+@FileName  . . . . . . . . . . .  	TEXT  winspool		
+@Version . . . . . . . . . . . .  	TEXT  510		
+_WOWNT32_  . . . . . . . . . . .  	NUMBER	0001	
+__MOD_COMMDLG  . . . . . . . . .  	NUMBER	0000		External
+__MOD_DGDI . . . . . . . . . . .  	NUMBER	0000		Communal
+__MOD_DKERNEL  . . . . . . . . .  	NUMBER	0000		Communal
+__MOD_DUSER  . . . . . . . . . .  	NUMBER	0000		Communal
+__MOD_GDI  . . . . . . . . . . .  	NUMBER	0000		Communal
+__MOD_KERNEL . . . . . . . . . .  	NUMBER	0000		Communal
+__MOD_KEYBOARD . . . . . . . . .  	NUMBER	0000		Communal
+__MOD_MMEDIA . . . . . . . . . .  	NUMBER	0000		Communal
+__MOD_SHELL  . . . . . . . . . .  	NUMBER	0000		Communal
+__MOD_SOUND  . . . . . . . . . .  	NUMBER	0000		Communal
+__MOD_TOOLHELP . . . . . . . . .  	NUMBER	0000		Communal
+__MOD_USER . . . . . . . . . . .  	NUMBER	0000		Communal
+__MOD_WINSOCK  . . . . . . . . .  	NUMBER	0000		Communal
+__acrtused . . . . . . . . . . .  	NUMBER	0000		Global
+_iBreakLevel . . . . . . . . . .  	L WORD	0029	_DATA	Global
+_iLogLevel . . . . . . . . . . .  	L WORD	0027	_DATA	Global
+
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:24 2019
+WINSPOOL.ASM                                                Symbols-41
+
+
+
+   4477 Source  Lines
+  12139 Total   Lines
+   2323 Symbols
+      0 Warning Errors
+      0 Severe  Errors

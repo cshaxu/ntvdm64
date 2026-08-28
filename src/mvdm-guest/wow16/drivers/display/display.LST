@@ -1,0 +1,227 @@
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:22 2019
+DISPLAY.ASM                                                 Page     1-1
+
+
+			      \		TITLE	DISPLAY.ASM
+			      \		PAGE	,132
+			      \	;
+			      \	; WOW v1.0
+			      \	;
+			      \	; Copyright (c) 1991, Microsoft Corporation
+			      \	;
+			      \	; DISPLAY.ASM
+			      \	; Thunks in 16-bit space to route Windows API calls to WOW32
+			      \	;
+			      \	; History:
+			      \	;   13-MAY-1992 Matt Felton (mattfe)
+			      \	;   Created.
+			      \	;
+			      \	; WinProj 3.0 does the following API:-
+			      \	;  GetModuleFileName(GetModuleHandle("DISPLAY"), buffer, sizeof(buffer));
+			      \	; In WOW we do not require a display driver becuase we always call GDI32 to
+			      \	; perform screen IO.
+				
+				
+				
+			      \		.286p
+				
+			      \		.list
+				
+ = 0000                       \		__acrtused = 0
+			      \		public	__acrtused	;satisfy external C ref.
+				
+				
+			      \	createSeg   _TEXT,CODE,WORD,PUBLIC,CODE
+ 0000                         \	_TEXT segment WORD PUBLIC 'CODE' 
+ 0000                         \	_TEXT ends 
+			      \	createSeg   _DATA,DATA,WORD,PUBLIC,DATA,DGROUP
+ 0000                         \	_DATA segment WORD PUBLIC 'DATA' 
+ 0000                         \	_DATA ends 
+			      \	defgrp	    DGROUP,DATA
+				
+			      \	sBegin	DATA
+ 0000                         \	_DATA segment 
+ 0000  0010[                  \	Reserved	db  16 dup (0)	    ;reserved for Windows  //!!!!! what is this
+	   00			
+			 ]	
+				
+				
+ 0010  44 49 53 50 4C 41      \	DISPLAY_Identifier     db      'DISPLAY'
+       59			
+				
+			      \	sEnd	DATA
+ 0017                         \	_DATA ends 
+				
+				
+			      \	sBegin	CODE
+ 0000                         \	_TEXT segment 
+			      \	assumes	CS,CODE
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:22 2019
+DISPLAY.ASM                                                 Page     1-2
+
+
+			      \	assumes DS,DATA
+			      \	assumes ES,NOTHING
+				
+			      \	cProc	DISPLAY,<PUBLIC,FAR,PASCAL,NODATA,ATOMIC>
+			      \		cBegin	<nogen>
+ 0000                         \	DISPLAY proc far 
+ 0000  B8 0001                \		mov	ax,1		;always indicate success
+ 0003  CB                     \		ret
+			      \		cEnd	<nogen>
+ 0004                         \	DISPLAY endp 
+				
+			      \	assumes DS,NOTHING
+				
+			      \	cProc	WEP,<PUBLIC,FAR,PASCAL,NODATA,NOWIN,ATOMIC>
+			      \		parmW	iExit		;DLL exit code
+				
+			      \		cBegin
+ 0004                         \	WEP proc far 
+ 0004  55                     \		push	bp 
+ 0005  8B EC                  \		mov	bp,sp 
+ 0007  B8 0001                \		mov	ax,1		;always indicate success
+			      \		cEnd
+ 000A  8B E5                  \		mov	sp,bp 
+ 000C  5D                     \		pop	bp 
+ 000D  CA 0002                \		ret	2 
+ 0010                         \	WEP endp 
+				
+			      \	cProc   Disable,<FAR,PUBLIC,WIN,PASCAL>,<si,di>
+			      \	        parmD   lp_device
+				
+			      \	cBegin
+ 0010                         \	Disable proc far 
+ 0010  8C D8                  \		mov	ax,ds 
+ 0012  90                     \		nop 
+ 0013  45                     \		inc	bp 
+ 0014  55                     \		push	bp 
+ 0015  8B EC                  \		mov	bp,sp 
+ 0017  1E                     \		push	ds 
+ 0018  8E D8                  \		mov	ds,ax 
+ 001A  56                     \		push	si 
+ 001B  57                     \		push	di 
+ 001C  B8 FFFF                \	        mov     ax,-1
+			      \	cEnd
+ 001F  5F                     \		pop	di 
+ 0020  5E                     \		pop	si 
+ 0021  8D 66 FE               \		lea	sp,-2[bp] 
+ 0024  1F                     \		pop	ds 
+ 0025  5D                     \		pop	bp 
+ 0026  4D                     \		dec	bp 
+ 0027  CA 0004                \		ret	4 
+ 002A                         \	Disable endp 
+				
+			      \	cProc   Enable,<FAR,PUBLIC,WIN,PASCAL>,<si,di>
+			      \	        parmD   lp_device               ;Physical device or GDIinfo destination
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:22 2019
+DISPLAY.ASM                                                 Page     1-3
+
+
+			      \		parmW	style			;Style, Enable Device, or Inquire Info
+			      \		parmD	lp_device_type		;Device type (i.e FX80, HP7470, ...)
+			      \		parmD	lp_output_file		;DOS output file name (if applicable)
+			      \	        parmD   lp_stuff                ;Device specific information
+				
+			      \	cBegin
+ 002A                         \	Enable proc far 
+ 002A  8C D8                  \		mov	ax,ds 
+ 002C  90                     \		nop 
+ 002D  45                     \		inc	bp 
+ 002E  55                     \		push	bp 
+ 002F  8B EC                  \		mov	bp,sp 
+ 0031  1E                     \		push	ds 
+ 0032  8E D8                  \		mov	ds,ax 
+ 0034  56                     \		push	si 
+ 0035  57                     \		push	di 
+ 0036  B8 0000                \	        mov     ax,0
+			      \	cEnd
+ 0039  5F                     \		pop	di 
+ 003A  5E                     \		pop	si 
+ 003B  8D 66 FE               \		lea	sp,-2[bp] 
+ 003E  1F                     \		pop	ds 
+ 003F  5D                     \		pop	bp 
+ 0040  4D                     \		dec	bp 
+ 0041  CA 0012                \		ret	18 
+ 0044                         \	Enable endp 
+				
+			      \	assumes DS,DATA
+				
+			      \	assumes DS,NOTHING
+				
+			      \	sEnd	CODE
+ 0044                         \	_TEXT ends 
+				
+			      \	end	DISPLAY
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:22 2019
+DISPLAY.ASM                                                 Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+DGROUP . . . . . . . . . . . . .  	GROUP
+  _DATA  . . . . . . . . . . . .  	0017	WORD	PUBLIC	'DATA'
+_TEXT  . . . . . . . . . . . . .  	0044	WORD	PUBLIC	'CODE'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+CODEBASE . . . . . . . . . . . .  	ALIAS	 _TEXT		
+CODEOFFSET . . . . . . . . . . .  	TEXT  offset _TEXT:		
+CodeBASE . . . . . . . . . . . .  	ALIAS	 _TEXT		
+CodeOFFSET . . . . . . . . . . .  	TEXT  offset _TEXT:		
+
+DATABASE . . . . . . . . . . . .  	ALIAS	 DGROUP		
+DATAOFFSET . . . . . . . . . . .  	TEXT  offset DGROUP:		
+DEBUG  . . . . . . . . . . . . .  	TEXT  		
+DISPLAY  . . . . . . . . . . . .  	F PROC	0000	_TEXT	Global	Length = 0004
+DISPLAY_Identifier . . . . . . .  	L BYTE	0010	_DATA
+DataBASE . . . . . . . . . . . .  	ALIAS	 DGROUP		
+DataOFFSET . . . . . . . . . . .  	TEXT  offset DGROUP:		
+Disable  . . . . . . . . . . . .  	F PROC	0010	_TEXT	Global	Length = 001A
+
+Enable . . . . . . . . . . . . .  	F PROC	002A	_TEXT	Global	Length = 001A
+
+iExit  . . . . . . . . . . . . .  	TEXT  (word ptr [bp+6])		
+
+lp_device  . . . . . . . . . . .  	TEXT  (dword ptr [bp+20])		
+lp_device_type . . . . . . . . .  	TEXT  (dword ptr [bp+14])		
+lp_output_file . . . . . . . . .  	TEXT  (dword ptr [bp+10])		
+lp_stuff . . . . . . . . . . . .  	TEXT  (dword ptr [bp+6])		
+
+off_lp_device  . . . . . . . . .  	TEXT  (word ptr [bp+20])		
+off_lp_device_type . . . . . . .  	TEXT  (word ptr [bp+14])		
+off_lp_output_file . . . . . . .  	TEXT  (word ptr [bp+10])		
+off_lp_stuff . . . . . . . . . .  	TEXT  (word ptr [bp+6])		
+
+Reserved . . . . . . . . . . . .  	L BYTE	0000	_DATA	Length = 0010
+
+seg_lp_device  . . . . . . . . .  	TEXT  (word ptr [bp+22])		
+seg_lp_device_type . . . . . . .  	TEXT  (word ptr [bp+16])		
+seg_lp_output_file . . . . . . .  	TEXT  (word ptr [bp+12])		
+seg_lp_stuff . . . . . . . . . .  	TEXT  (word ptr [bp+8])		
+style  . . . . . . . . . . . . .  	TEXT  (word ptr [bp+18])		
+
+WEP  . . . . . . . . . . . . . .  	F PROC	0004	_TEXT	Global	Length = 000C
+WOW  . . . . . . . . . . . . . .  	TEXT  		
+
+?386regs . . . . . . . . . . . .  	NUMBER	0000	
+?QUIET . . . . . . . . . . . . .  	NUMBER	0001	
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:22 2019
+DISPLAY.ASM                                                 Symbols-2
+
+
+@Cpu . . . . . . . . . . . . . .  	TEXT  1415		
+@FileName  . . . . . . . . . . .  	TEXT  display		
+@Version . . . . . . . . . . . .  	TEXT  510		
+__acrtused . . . . . . . . . . .  	NUMBER	0000		Global
+
+
+   1501 Source  Lines
+   6230 Total   Lines
+    255 Symbols
+      0 Warning Errors
+      0 Severe  Errors

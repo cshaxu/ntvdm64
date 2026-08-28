@@ -10,6 +10,11 @@ Complete load-only MVDM guest mirror.  The explicit guest roots are:
 None is a host library, compile input or link input. App loads only
 manifest-selected immutable guest bytes.
 
+T301 S1 P21 preserves additional byte-exact original build products from
+`opennt-src-2` in their existing guest-relative paths.  They are historical
+mirror evidence, not default host inputs.  See the complete per-file record in
+[`m0-t301-s1-opennt-src-2-mvdm-extra-import-manifest.tsv`](../../docs/etc/operations/m0-t301-s1-opennt-src-2-mvdm-extra-import-manifest.tsv).
+
 ## Provenance
 
 - [DOS carry manifest](../../docs/etc/operations/m0-t274-s3-dos-guest-mirror-manifest.tsv)

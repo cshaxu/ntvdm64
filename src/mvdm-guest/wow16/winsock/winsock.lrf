@@ -1,0 +1,5 @@
+winsock.obj 
+winsock.dll
+winsock /map /align:16 /LI
+..\lib\libw.lib /nod
+winsock;

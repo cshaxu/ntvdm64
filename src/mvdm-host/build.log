@@ -1,0 +1,1178 @@
+BUILD: Computing Include file dependencies:
+BUILD: Examining w:\nt\private\mvdm directory tree for files to compile.
+Building generated files in w:\nt\private\mvdm ********************
+'nmake.exe /c BUILDMSG=Stop. -i -f makefil0. NOLINK=1 386=1'
+making dos mode binaries under NTVDM.
+	cd inc
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd ..\dpmi
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace .\486\dosx.exe .\486\dosx.map .\486\dosx.sym
+	cd ..\dos\v86
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd doskrnl
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd dos
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace ntdos.sys
+	binplace ntdos.map
+	binplace ntdos.sym
+	cd ..\bios
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	nosrvbld msbio.skl ..\..\messages\usa-ms.msg
+;  Creating .CT? files for msbio.skl using ..\..\messages\usa-ms.msg file of messages. 
+;  SKL, MSG and IDX files have been opened for reading.
+;  Writing to msbio.cl3
+;  Writing to msbio.cl4
+;  Writing to msbio.cl5
+;  Writing to msbio.cl6
+;  Message files for msbio completed.
+	link16 /MAP @msbio_4.lnk
+
+Microsoft (R) Segmented Executable Linker NTGroup Version 5.60.220 Dec 28 1999
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /MAP msbio1 mschar msint13 spckbd spcmse_4 spcemm+
+Object Modules [.obj]: msinit+sysinit1+sysconf+sysinit2+sysimes+
+Object Modules [.obj]: msend,ntio.exe,ntio.map;
+	mapsym ntio
+Microsoft (R) Symbol File Generator  Version 6.00
+Copyright (C) Microsoft Corp 1984 - 1995.  All rights reserved.
+Line number support enabled
+No entry point, assume 0000:0100
+	reloc ntio.exe ntio.sys 70
+	del ntio.exe
+	binplace ntio.sys
+	binplace ntio.sym
+	cd ..
+	cd ..\dev
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd himem
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace himem.sys
+	cd ..\ansi
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace ansi.sys
+	cd ..\keyboard
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace keyboard.sys
+	cd ..\country
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace country.sys
+	cd ..
+	cd ..\lib\xmm
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd ..\..\cmd
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd command
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace command.com
+	cd ..\append
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace append.exe
+	cd ..\backup
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace backup.exe
+	cd ..\edlin
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace edlin.exe
+	cd ..\exe2bin
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace exe2bin.exe
+	cd ..\debug
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace debug.exe
+	cd ..\qbasic
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace qbasic.exe
+	binplace qbasic.hlp
+	binplace msherc.com
+	binplace edit.com
+	binplace edit.hlp
+	binplace gorilla.bas
+	binplace nibbles.bas
+	binplace money.bas
+	binplace remline.bas
+	cd ..\setver
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace setver.exe
+	cd ..\mem
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace mem.exe
+	cd ..\loadfix
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace loadfix.com
+	cd ..\nlsfunc
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace nlsfunc.exe
+	cd ..\keyb
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace kb16.com
+	cd ..\graphics
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace graphics.com
+	binplace graphics.pro
+	cd ..\fastopen
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace fastopen.exe
+	cd ..\share
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace share.exe
+	cd ..
+	cd ..\redir
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd ..
+	cd ..\..\wow16
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd kernel31
+	nmake d386
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	nmake r386
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	NMAKE 386P=1 DEST=RETAIL3
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd RETAIL3
+	link16  @..\krnl386.lnk,..\kernel.def
+
+Microsoft (R) Segmented Executable Linker NTGroup Version 5.60.220 Dec 28 1999
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: kdata strings stack mapdata layer ldboot dosinit    +
+Object Modules [.obj]: ldfastb 3gmemini ldself int24 diskio 3ginterf       +
+Object Modules [.obj]: intnn i21file i21task i21entry 3protect 3gmoreme    +
+Object Modules [.obj]: 3gcompac lhandle 3galloc 3glru 3gmem handle emsmisc +
+Object Modules [.obj]: winexec ldfile ldaux atom gpfix hmem ldutil module  +
+Object Modules [.obj]: ldheader ld ldcache ldopen ldint userpro ldreloc +
+Object Modules [.obj]: ldappl ldseg context tasking lstring task ldstack  +
+Object Modules [.obj]: resaux linterf lcompact lalloc ripaux rip 3gacheck  +
+Object Modules [.obj]: lacheck lddebug rom enable miscapi lzexp error      +
+Object Modules [.obj]: gpcont disasm patch reboot diag wow16cal kthunks    +
+Object Modules [.obj]: wowdeb kdataend
+Run File [kdata.exe]: kernel.exe/align:16/warnfixup/farcall/nopackcode
+List File [nul.map]: kernel.map/map
+Libraries [.lib]: /NOD/NOE
+	rc16 -t ..\krnl386.res kernel.exe
+Microsoft (R) Windows Resource Compiler Version 3.11
+Copyright (C) Microsoft Corp. 1985-1992. All rights reserved.
+
+	fixexe kernel.exe
+Processing kernel.exe
+Filesize is 85824 bytes, 168 pages, 320 mod
+	cd ..
+	cd RETAIL3
+	mapsym /n kernel
+Microsoft (R) Symbol File Generator  Version 6.00
+Copyright (C) Microsoft Corp 1984 - 1995.  All rights reserved.
+Line number support disabled
+Program entry point at 0001:bc60
+	copy kernel.sym krnl386.sym
+        1 file(s) copied.
+	copy kernel.map krnl386.map
+        1 file(s) copied.
+	copy kernel.exe krnl386.exe
+        1 file(s) copied.
+	copy kernel.sym krnl386.sym
+        1 file(s) copied.
+	erase kernel.exe
+	cd ..
+	binplace RETAIL3\krnl386.exe RETAIL3\krnl386.sym RETAIL3\krnl386.map
+	cd ..\lib
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd ..\user
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace -O . k\DAYTONA\user.exe
+	binplace -O . k\DAYTONA\user.sym
+	binplace -O . k\DAYTONA\user.map
+	cd ..\gdi
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace gdi.exe
+	binplace gdi.sym
+	binplace gdi.map
+	cd ..\system
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace system.drv system.map system.sym
+	cd ..\shell
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace shell.dll
+	binplace shell.sym
+	cd ..\drivers\keyboard
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace keyboard.drv keyboard.map keyboard.sym
+	cd ..\sound
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace sound.drv sound.map sound.sym
+	cd ..\comm
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace comm.drv comm.map comm.sym
+	cd ..\display
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	copy display.exe vga.drv
+        1 file(s) copied.
+	copy display.sym vga.sym
+        1 file(s) copied.
+	copy display.map vga.map
+        1 file(s) copied.
+	binplace vga.drv vga.map vga.sym
+	cd ..\mouse
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	copy mouse.exe mouse.drv
+        1 file(s) copied.
+	binplace mouse.drv mouse.map mouse.sym
+	cd ..
+	cd ..\winspool
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace winspool.exe winspool.map winspool.sym
+	cd ..\test
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd shell
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace wowexec.exe wowexec.map wowexec.sym
+	cd ..
+	cd ..\mmsystem
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd ..\mciole
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd ..\winsock
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace winsock.dll winsock.map winsock.sym
+	cd ..\toolhelp
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace toolhelp.dll
+	binplace toolhelp.map
+	binplace toolhelp.sym
+	cd ..\timer
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd ..\wowdeb
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace wowdeb.exe wowdeb.map wowdeb.sym
+	cd ..\commdlg
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd ..\sherlock
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd ..\rasapi16
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace rasapi16.dll rasapi16.map rasapi16.sym
+	cd ..\wfwnet
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace wfwnet.drv wfwnet.sym wfwnet.map
+	cd ..\write
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd ..\ddeml
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	echo -------- DEBUG BUILD COMPLETE --------
+-------- DEBUG BUILD COMPLETE --------
+	cd ..\winoldap
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace winoldap.mod winoldap.map winoldap.sym
+	cd ..\ole\server
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd ..\..\regedit
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	cd ..\killwow
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace killwow.exe killwow.sym
+	cd ..
+	cd ..\vdd\samples\mscdex\tsr
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace mscdexnt.exe
+	cd ..\..\hpscan
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace hpscan16.sys
+	cd ..\..\..\bin86
+	nmake
+
+Microsoft (R) Program Maintenance Utility   Version 1.50.4048
+Copyright (c) Microsoft Corp 1988-93. All rights reserved.
+
+	binplace autoexec.nt
+	binplace config.nt
+	binplace ctl3dv2.dll ctl3dv2.map ctl3dv2.sym
+	binplace lanman.drv
+	binplace LZEXPAND.DLL
+	binplace NETAPI.DLL
+	binplace OLECLI.DLL
+	binplace PMSPL.DLL
+	binplace VER.DLL
+	cd i386
+	binplace win87em.dll
+	cd ..
+	binplace system.ini
+	binplace winhelp.exe
+	cd ..
+
+Stop. 
+BUILD: Examining w:\nt\private\mvdm directory tree for files to compile. (2nd Pass)
+BUILD: w:\nt\private\mvdm\dos\dem\demfcb.c: w:\nt\private\mvdm\inc\vdmtib.h: cannot find include file "\nt\private\inc\vdm.h"
+BUILD: w:\nt\private\mvdm\softpc.new\base\bios\bios.c: cannot find include file "bios_support.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\bios\cmos_bis.c: cannot find include file "softpc_cmos.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\bios\cmos_bis.c: w:\nt\private\mvdm\softpc.new\base\inc\sas.h: cannot find include file <sas4gen.h>
+BUILD: w:\nt\private\mvdm\softpc.new\base\bios\cntlbop.c: cannot find include file "at_stuff.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\bios\emm_fncs.c: cannot find include file "softpc_lim.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\bios\reset.c: cannot find include file "softpc_init.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\bios\rom_basc.c: cannot find include file "softpc_support.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\bios\slave_bs.c: cannot find include file "at_stuff.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\bios\tape_io.c: cannot find include file "softpc_bios.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\bios\equipmnt.c: cannot find include file "softpc_bios.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\bios\ill_bop.c: cannot find include file "softpc_bios.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\bios\mem_size.c: cannot find include file "softpc_bios.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\comms\com.c: cannot find include file "softpc_comms.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\comms\printer.c: cannot find include file "softpc_printer.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\comms\printer_.c: cannot find include file "softpc_bios.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\comms\rs232_io.c: cannot find include file "softpc_bios.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\debug\btrace.c: cannot find include file "softpc_error.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\debug\trace.c: cannot find include file "softpc_error.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\debug\dasm.c: cannot find include file "dasm1.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\disks\floppy.c: cannot find include file "softpc_floppy.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\disks\floppy_i.c: cannot find include file "softpc_floppy.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\disks\diskbios.c: cannot find include file "at_stuff.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\disks\fdisk.c: cannot find include file "softpc_hda.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\disks\fla.c: cannot find include file "softpc_floppy.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\disks\gfi.c: cannot find include file "softpc_floppy.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\disks\gfi_mpty.c: cannot find include file "softpc_floppy.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\disks\gfi_test.c: cannot find include file "softpc_test_floppy.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\dos\emm_mngr.c: cannot find include file "softpc_lim.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\keymouse\keyba.c: cannot find include file "softpc_ppi.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\keymouse\keybd_io.c: cannot find include file "softpc_bios.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\keymouse\mouse.c: cannot find include file "softpc_mouse.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\keymouse\ppi.c: cannot find include file "softpc_support.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\keymouse\ppi.c: cannot find include file "softpc_init.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\keymouse\mouse_io.c: cannot find include file "softpc_mouse.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\support\time_day.c: cannot find include file "softpc_bios.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\support\ios.c: cannot find include file "softpc_ios.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\support\get_env.c: w:\nt\private\mvdm\softpc.new\host\inc\host_inc.h: cannot find include file <sys\param.h>
+BUILD: w:\nt\private\mvdm\softpc.new\base\system\at_dma.c: cannot find include file "at_stuff.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\system\idetect.c: cannot find include file "smeg_head.h"
+BUILD: w:\nt\private\mvdm\softpc.new\base\system\illegalp.c: cannot find include file "softpc_error.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\system\timer.c: cannot find include file "softpc_support.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\system\timestrb.c: cannot find include file "softpc_support.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\system\dummy_nt.c: cannot find include file "softpc_bios.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\system\unexp_nt.c: cannot find include file "softpc_error.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\video\ega_mode.c: cannot find include file "softpc_ega.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\video\ega_mode.c: w:\nt\private\mvdm\softpc.new\base\inc\egacpu.h: cannot find include file "evidgen.h"
+BUILD: w:\nt\private\mvdm\softpc.new\base\video\video.c: cannot find include file "video_bios.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\video\gvi.c: cannot find include file "softpc_bios.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\video\video_io.c: cannot find include file "video_bios.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\video\v7_ports.c: cannot find include file "softpc_vga.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\video\vga_vide.c: cannot find include file "video_bios_vga.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\video\ega_dmmy.c: cannot find include file "softpc_ega.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\base\video\cga.c: cannot find include file "softpc_cga.seg"
+BUILD: w:\nt\private\mvdm\softpc.new\host\src\nt_bop.c: cannot find include file <gdpvar.h>
+BUILD: w:\nt\private\mvdm\softpc.new\host\src\nt_inthk.c: cannot find include file "gdpvar.h"
+BUILD: w:\nt\private\mvdm\wow32\wow32.rc: cannot find include file "sz.src"
+BUILD: w:\nt\private\mvdm\wow32\wkman.c: w:\nt\private\mvdm\inc\wowfax.h: cannot find include file "\nt\private\mvdm\wow16\inc\print.h"
+BUILD: w:\nt\private\mvdm\wow32\wkman.c: w:\nt\private\mvdm\inc\wowfax.h: cannot find include file "\nt\private\mvdm\wow16\inc\gdidefs.inc"
+Compiling w:\nt\private\mvdm\softpc.new\base\dasm386 directory ********************
+'nmake.exe /c BUILDMSG=Stop. -i NTTEST= UMTEST= NOLINK=1 NOPASS0=1 386=1'
+NTPROFILEINPUT s/b removed in: w:\nt\private\mvdm\softpc.new\base\dasm386.
+
+Stop. 
+Linking w:\nt\private\mvdm\softpc.new\obj.vdm directory ********************
+'nmake.exe /c BUILDMSG=Stop. -i LINKONLY=1 NOPASS0=1 NTTEST= UMTEST= 386=1'
+Linking w:\nt\private\mvdm\wow32 directory ********************
+'nmake.exe /c BUILDMSG=Stop. -i LINKONLY=1 NOPASS0=1 NTTEST= UMTEST= MAKEDLL=1 386=1'
+Linking w:\nt\private\mvdm\vdmexts directory ********************
+'nmake.exe /c BUILDMSG=Stop. -i LINKONLY=1 NOPASS0=1 NTTEST= UMTEST= MAKEDLL=1 386=1'
+Linking w:\nt\private\mvdm\vdmdbg directory ********************
+'nmake.exe /c BUILDMSG=Stop. -i LINKONLY=1 NOPASS0=1 NTTEST= UMTEST= MAKEDLL=1 386=1'
+Linking w:\nt\private\mvdm\vdmutils\graftabl directory ********************
+'nmake.exe /c BUILDMSG=Stop. -i LINKONLY=1 NOPASS0=1 NTTEST= UMTEST= 386=1'
+	link -out:\nt\public\sdk\lib\i386\vdmdbg.dll -machine:i386 @W:\tmp\nma02916.
+	link -out:W:\nt\public\sdk\lib\i386\ntvdm.exe -machine:i386 @W:\tmp\nma03292.
+Microsoft (R) 32-Bit Incremental Linker Version 4.20.6164
+Copyright (C) Microsoft Corp 1992-1996. All rights reserved.
+
+-MERGE:_PAGE=PAGE 
+-MERGE:_TEXT=.text 
+-SECTION:INIT,d 
+-OPT:REF 
+-INCREMENTAL:NO 
+-FORCE:MULTIPLE 
+-RELEASE 
+-FULLBUILD 
+-IGNORE:4001,4037,4039,4065,4070,4078,4087,4089 
+-NODEFAULTLIB 
+-debug:notmapped,FULL 
+-debugtype:both 
+-version:4.00 
+-osversion:4.00 
+-MERGE:.rdata=.text 
+-dll 
+-optidata 
+-base:0x7A000000 
+-subsystem:native,4.00 
+-noentry 
+\nt\public\sdk\lib\i386\vdmdbg.exp 
+obj\i386\vdmdbg.res 
+obj\i386\vdmdbg.obj 
+W:\nt\public\sdk\lib\i386\libc.lib 
+W:\nt\public\sdk\lib\i386\ntdll.lib 
+W:\nt\public\sdk\lib\i386\kernel32.lib 
+W:\nt\public\sdk\lib\i386\advapi32.lib 
+W:\nt\public\sdk\lib\i386\user32.lib 
+	binplace -R W:\binaries\nt -S W:\binaries\nt\Symbols -P W:\nt\public\sdk\lib\placefil.txt -a \nt\public\sdk\lib\i386\vdmdbg.dll
+Microsoft (R) 32-Bit Incremental Linker Version 4.20.6164
+Copyright (C) Microsoft Corp 1992-1996. All rights reserved.
+
+-WS:aggressive 
+-MERGE:_PAGE=PAGE 
+-MERGE:_TEXT=.text 
+-SECTION:INIT,d 
+-OPT:REF 
+-INCREMENTAL:NO 
+-FORCE:MULTIPLE 
+-RELEASE 
+-FULLBUILD 
+-IGNORE:4001,4037,4039,4065,4070,4078,4087,4089 
+-NODEFAULTLIB 
+-debug:notmapped,FULL 
+-debugtype:both 
+-version:4.00 
+-osversion:4.00 
+-MERGE:.rdata=.text 
+-order:@ntvdm.prf 
+-optidata 
+-subsystem:console,4.00 
+-base:0x0f000000 
+-entry:mainCRTStartup 
+obj\i386\resource.res 
+obj\i386\ntvdm.obj 
+W:\nt\public\sdk\lib\i386\ntvdm.exp 
+W:\nt\public\sdk\lib\i386\libc.lib 
+W:\nt\public\sdk\lib\i386\advapi32.lib 
+W:\nt\public\sdk\lib\i386\kernel32.lib 
+W:\nt\public\sdk\lib\i386\gdi32.lib 
+W:\nt\public\sdk\lib\i386\user32p.lib 
+W:\nt\public\sdk\lib\i386\ntdll.lib 
+W:\nt\public\sdk\lib\i386\advapi32.lib 
+W:\nt\private\mvdm\softpc.new\base\support\obj\i386\MAIN.obj 
+W:\nt\private\mvdm\softpc.new\host\src\obj\i386\FPRT.OBJ 
+W:\nt\private\mvdm\softpc.new\base\system\obj\i386\SYSTEM.LIB 
+W:\nt\private\mvdm\softpc.new\base\bios\obj\i386\BIOS.LIB 
+W:\nt\private\mvdm\softpc.new\base\video\obj\i386\VIDEO.LIB 
+W:\nt\private\mvdm\softpc.new\base\dos\obj\i386\DOS.LIB 
+W:\nt\private\mvdm\softpc.new\base\comms\obj\i386\COMMS.LIB 
+W:\nt\private\mvdm\softpc.new\base\debug\obj\i386\DEBUG.LIB 
+W:\nt\private\mvdm\softpc.new\base\support\obj\i386\SUPPORT.LIB 
+W:\nt\private\mvdm\softpc.new\base\disks\obj\i386\DISKS.LIB 
+W:\nt\private\mvdm\softpc.new\base\keymouse\obj\i386\KEYMOUSE.LIB 
+W:\nt\private\mvdm\softpc.new\host\src\obj\i386\SRC.LIB 
+W:\nt\public\sdk\lib\i386\monitor.lib 
+W:\nt\public\sdk\lib\i386\dem.lib 
+W:\nt\public\sdk\lib\i386\dbg.lib 
+W:\nt\public\sdk\lib\i386\command.lib 
+W:\nt\public\sdk\lib\i386\dpmi32.lib 
+W:\nt\public\sdk\lib\i386\xms486.lib 
+W:\nt\public\sdk\lib\i386\suballoc.lib 
+W:\nt\public\sdk\lib\i386\oemuni.lib 
+	link -out:obj\i386\vdmexts.dll -machine:i386 @W:\tmp\nma02708.
+
+Stop. 
+Microsoft (R) 32-Bit Incremental Linker Version 4.20.6164
+Copyright (C) Microsoft Corp 1992-1996. All rights reserved.
+
+-MERGE:_PAGE=PAGE 
+-MERGE:_TEXT=.text 
+-SECTION:INIT,d 
+-OPT:REF 
+-INCREMENTAL:NO 
+-FORCE:MULTIPLE 
+-RELEASE 
+-FULLBUILD 
+-IGNORE:4001,4037,4039,4065,4070,4078,4087,4089 
+-NODEFAULTLIB 
+-debug:notmapped,FULL 
+-debugtype:both 
+-version:4.00 
+-osversion:4.00 
+-MERGE:.rdata=.text 
+-dll 
+-optidata 
+-base:0x79000000 
+-subsystem:native,4.00 
+-noentry 
+obj\i386\precomp.obj 
+obj\i386\vdmexts.exp 
+obj\i386\vdmexts.res 
+obj\i386\profile.obj 
+obj\i386\vdmtib.obj 
+obj\i386\regs.obj 
+obj\i386\data.obj 
+obj\i386\debug.obj 
+obj\i386\disasm.obj 
+obj\i386\heap.obj 
+obj\i386\help.obj 
+obj\i386\misc.obj 
+obj\i386\platform.obj 
+obj\i386\reflect.obj 
+obj\i386\stack.obj 
+obj\i386\sym.obj 
+obj\i386\system.obj 
+obj\i386\trace.obj 
+obj\i386\util.obj 
+obj\i386\wow.obj 
+obj\i386\wowprof.obj 
+obj\i386\dib.obj 
+W:\nt\public\sdk\lib\i386\int64.lib 
+W:\nt\public\sdk\lib\i386\ntdll.lib 
+W:\nt\public\sdk\lib\i386\kernel32.lib 
+W:\nt\public\sdk\lib\i386\user32.lib 
+Linking w:\nt\private\mvdm\vdmutils\forcedos directory ********************
+'nmake.exe /c BUILDMSG=Stop. -i LINKONLY=1 NOPASS0=1 NTTEST= UMTEST= 386=1'
+	binplace -R W:\binaries\nt -S W:\binaries\nt\Symbols -P W:\nt\public\sdk\lib\placefil.txt -a obj\i386\vdmexts.dll
+	link -out:obj\i386\graftabl.com -machine:i386 @W:\tmp\nma03684.
+Microsoft (R) 32-Bit Incremental Linker Version 4.20.6164
+Copyright (C) Microsoft Corp 1992-1996. All rights reserved.
+
+-MERGE:_PAGE=PAGE 
+-MERGE:_TEXT=.text 
+-SECTION:INIT,d 
+-OPT:REF 
+-INCREMENTAL:NO 
+-FORCE:MULTIPLE 
+-RELEASE 
+-FULLBUILD 
+-IGNORE:4001,4037,4039,4065,4070,4078,4087,4089 
+-NODEFAULTLIB 
+-debug:notmapped,FULL 
+-debugtype:both 
+-version:4.00 
+-osversion:4.00 
+-MERGE:.rdata=.text 
+-optidata 
+-base:@W:\nt\public\sdk\lib\coffbase.txt,usermode 
+-subsystem:console,4.00 
+-entry:mainCRTStartup 
+obj\i386\graftabl.res 
+obj\i386\graftabl.obj 
+\nt\public\sdk\lib\i386\user32.lib 
+W:\nt\public\sdk\lib\i386\libc.lib 
+W:\nt\public\sdk\lib\i386\advapi32.lib 
+W:\nt\public\sdk\lib\i386\kernel32.lib 
+	binplace -R W:\binaries\nt -S W:\binaries\nt\Symbols -P W:\nt\public\sdk\lib\placefil.txt -a obj\i386\graftabl.com
+
+Stop. 
+Linking w:\nt\private\mvdm\vdmutils\win directory ********************
+'nmake.exe /c BUILDMSG=Stop. -i LINKONLY=1 NOPASS0=1 NTTEST= UMTEST= 386=1'
+	binplace -R W:\binaries\nt -S W:\binaries\nt\Symbols -P W:\nt\public\sdk\lib\placefil.txt -a W:\nt\public\sdk\lib\i386\ntvdm.exe
+
+Stop. 
+Linking w:\nt\private\mvdm\vdd\samples\mscdex\vdd directory ********************
+'nmake.exe /c BUILDMSG=Stop. -i LINKONLY=1 NOPASS0=1 NTTEST= UMTEST= MAKEDLL=1 386=1'
+	link -out:obj\i386\forcedos.exe -machine:i386 @W:\tmp\nma03220.
+	link -out:obj\i386\win.com -machine:i386 @W:\tmp\nma03224.
+Microsoft (R) 32-Bit Incremental Linker Version 4.20.6164
+Copyright (C) Microsoft Corp 1992-1996. All rights reserved.
+
+-MERGE:_PAGE=PAGE 
+-MERGE:_TEXT=.text 
+-SECTION:INIT,d 
+-OPT:REF 
+-INCREMENTAL:NO 
+-FORCE:MULTIPLE 
+-RELEASE 
+-FULLBUILD 
+-IGNORE:4001,4037,4039,4065,4070,4078,4087,4089 
+-NODEFAULTLIB 
+-debug:notmapped,FULL 
+-debugtype:both 
+-version:4.00 
+-osversion:4.00 
+-MERGE:.rdata=.text 
+-optidata 
+-base:@W:\nt\public\sdk\lib\coffbase.txt,usermode 
+-subsystem:console,4.00 
+-entry:mainCRTStartup 
+obj\i386\forcedos.res 
+obj\i386\forcedos.obj 
+W:\nt\public\sdk\lib\i386\user32.lib 
+W:\nt\public\sdk\lib\i386\ntdll.lib 
+W:\nt\public\sdk\lib\i386\libc.lib 
+W:\nt\public\sdk\lib\i386\advapi32.lib 
+W:\nt\public\sdk\lib\i386\kernel32.lib 
+	link -out:W:\nt\public\sdk\lib\i386\wow32.dll -machine:i386 @W:\tmp\nma01040.
+Microsoft (R) 32-Bit Incremental Linker Version 4.20.6164
+Copyright (C) Microsoft Corp 1992-1996. All rights reserved.
+
+-MERGE:_PAGE=PAGE 
+-MERGE:_TEXT=.text 
+-SECTION:INIT,d 
+-OPT:REF 
+-INCREMENTAL:NO 
+-FORCE:MULTIPLE 
+-RELEASE 
+-FULLBUILD 
+-IGNORE:4001,4037,4039,4065,4070,4078,4087,4089 
+-NODEFAULTLIB 
+-debug:notmapped,FULL 
+-debugtype:both 
+-version:4.00 
+-osversion:4.00 
+-MERGE:.rdata=.text 
+-optidata 
+-base:@W:\nt\public\sdk\lib\coffbase.txt,usermode 
+-subsystem:windows,4.00 
+-entry:WinMainCRTStartup 
+obj\i386\win.res 
+obj\i386\win.obj 
+W:\nt\public\sdk\lib\i386\libc.lib 
+W:\nt\public\sdk\lib\i386\advapi32.lib 
+W:\nt\public\sdk\lib\i386\kernel32.lib 
+W:\nt\public\sdk\lib\i386\gdi32.lib 
+W:\nt\public\sdk\lib\i386\user32.lib 
+	binplace -R W:\binaries\nt -S W:\binaries\nt\Symbols -P W:\nt\public\sdk\lib\placefil.txt -a obj\i386\win.com
+	binplace -R W:\binaries\nt -S W:\binaries\nt\Symbols -P W:\nt\public\sdk\lib\placefil.txt -a obj\i386\forcedos.exe
+
+Stop. 
+Linking w:\nt\private\mvdm\fax\wowfax directory ********************
+'nmake.exe /c BUILDMSG=Stop. -i LINKONLY=1 NOPASS0=1 NTTEST= UMTEST= 386=1'
+Microsoft (R) 32-Bit Incremental Linker Version 4.20.6164
+Copyright (C) Microsoft Corp 1992-1996. All rights reserved.
+
+-MERGE:_PAGE=PAGE 
+-MERGE:_TEXT=.text 
+-SECTION:INIT,d 
+-OPT:REF 
+-INCREMENTAL:NO 
+-FORCE:MULTIPLE 
+-RELEASE 
+-FULLBUILD 
+-IGNORE:4001,4037,4039,4065,4070,4078,4087,4089 
+-NODEFAULTLIB 
+-debug:notmapped,FULL 
+-debugtype:both 
+-version:4.00 
+-osversion:4.00 
+-MERGE:.rdata=.text 
+-dll 
+-order:@wow32.prf 
+-optidata 
+-base:0x10000000 
+-subsystem:windows,4.00 
+-entry:W32DllInitialize@12 
+obj\i386\precomp.obj 
+W:\nt\public\sdk\lib\i386\wow32.exp 
+obj\i386\wow32.res 
+obj\i386\fastwow.obj 
+obj\i386\callpr32.obj 
+obj\i386\mapembed.obj 
+obj\i386\wow32.obj 
+obj\i386\wowtbl.obj 
+obj\i386\walias.obj 
+obj\i386\wstruc.obj 
+obj\i386\wcall16.obj 
+obj\i386\wcall32.obj 
+obj\i386\wcntl32.obj 
+obj\i386\wdde.obj 
+obj\i386\wres16.obj 
+obj\i386\wres32.obj 
+obj\i386\wmsg16.obj 
+obj\i386\wmdisp32.obj 
+obj\i386\wmsgbm.obj 
+obj\i386\wmsgcb.obj 
+obj\i386\wmsgem.obj 
+obj\i386\wmsglb.obj 
+obj\i386\wmsgsbm.obj 
+obj\i386\wmtbl32.obj 
+obj\i386\wgdi31.obj 
+obj\i386\wgman.obj 
+obj\i386\wgdi.obj 
+obj\i386\wgfont.obj 
+obj\i386\wgmeta.obj 
+obj\i386\wgpal.obj 
+obj\i386\wgprnset.obj 
+obj\i386\wgtext.obj 
+obj\i386\wkbman.obj 
+obj\i386\wkmem.obj 
+obj\i386\wkgthunk.obj 
+obj\i386\wkman.obj 
+obj\i386\wkfileio.obj 
+obj\i386\wkernel.obj 
+obj\i386\wow32fax.obj 
+obj\i386\wsman.obj 
+obj\i386\wshell.obj 
+obj\i386\wuser31.obj 
+obj\i386\wuman.obj 
+obj\i386\wucaret.obj 
+obj\i386\wuclass.obj 
+obj\i386\wuclip.obj 
+obj\i386\wucomm.obj 
+obj\i386\wucursor.obj 
+obj\i386\wudlg.obj 
+obj\i386\wuhook.obj 
+obj\i386\wulang.obj 
+obj\i386\wumenu.obj 
+obj\i386\wumsg.obj 
+obj\i386\wuser.obj 
+obj\i386\wutext.obj 
+obj\i386\wutmr.obj 
+obj\i386\wuwind.obj 
+obj\i386\wowhooks.obj 
+obj\i386\wdos.obj 
+obj\i386\wreldc.obj 
+obj\i386\wcuricon.obj 
+obj\i386\wsubcls.obj 
+obj\i386\wmmedia.obj 
+obj\i386\wmmedia1.obj 
+obj\i386\wmmedia2.obj 
+obj\i386\wmmstruc.obj 
+obj\i386\wmmstru1.obj 
+obj\i386\wmmstru2.obj 
+obj\i386\wmmalias.obj 
+obj\i386\walloc16.obj 
+obj\i386\waccel.obj 
+obj\i386\wsdata.obj 
+obj\i386\wsext.obj 
+obj\i386\wsraw.obj 
+obj\i386\wthman.obj 
+obj\i386\wcommdlg.obj 
+obj\i386\wheap.obj 
+obj\i386\wspool.obj 
+obj\i386\wusercli.obj 
+obj\i386\wdib.obj 
+obj\i386\wole2.obj 
+obj\i386\wparam.obj 
+W:\nt\public\sdk\lib\i386\libcntpr.lib 
+W:\nt\public\sdk\lib\i386\ntdll.lib 
+W:\nt\public\sdk\lib\i386\kernel32.lib 
+W:\nt\public\sdk\lib\i386\gdi32p.lib 
+W:\nt\public\sdk\lib\i386\user32p.lib 
+W:\nt\public\sdk\lib\i386\advapi32.lib 
+W:\nt\public\sdk\lib\i386\shell32.lib 
+W:\nt\public\sdk\lib\i386\ntvdm.lib 
+W:\nt\public\sdk\lib\i386\oemuni.lib 
+W:\nt\public\sdk\lib\i386\comdlg32.lib 
+W:\nt\public\sdk\lib\i386\version.lib 
+
+Stop. 
+	link -out:obj\i386\vcdex.dll -machine:i386 @W:\tmp\nma04016.
+
+Stop. 
+Linking w:\nt\private\mvdm\fax\wowfaxui directory ********************
+'nmake.exe /c BUILDMSG=Stop. -i LINKONLY=1 NOPASS0=1 NTTEST= UMTEST= MAKEDLL=1 386=1'
+Linking w:\nt\private\mvdm\vdmredir directory ********************
+'nmake.exe /c BUILDMSG=Stop. -i LINKONLY=1 NOPASS0=1 NTTEST= UMTEST= MAKEDLL=1 386=1'
+Microsoft (R) 32-Bit Incremental Linker Version 4.20.6164
+Copyright (C) Microsoft Corp 1992-1996. All rights reserved.
+
+-MERGE:_PAGE=PAGE 
+-MERGE:_TEXT=.text 
+-SECTION:INIT,d 
+-OPT:REF 
+-INCREMENTAL:NO 
+-FORCE:MULTIPLE 
+-RELEASE 
+-FULLBUILD 
+-IGNORE:4001,4037,4039,4065,4070,4078,4087,4089 
+-NODEFAULTLIB 
+-debug:notmapped,FULL 
+-debugtype:both 
+-version:4.00 
+-osversion:4.00 
+-MERGE:.rdata=.text 
+-dll 
+-optidata 
+-base:0x2000000 
+-subsystem:windows,4.00 
+-entry:VDDInitialize@12 
+obj\i386\vcdex.exp 
+obj\i386\vcdex.res 
+obj\i386\vcdex.obj 
+W:\nt\public\sdk\lib\i386\int64.lib 
+W:\nt\public\sdk\lib\i386\kernel32.lib 
+W:\nt\public\sdk\lib\i386\user32.lib 
+W:\nt\public\sdk\lib\i386\ntvdm.lib 
+	binplace -R W:\binaries\nt -S W:\binaries\nt\Symbols -P W:\nt\public\sdk\lib\placefil.txt -a obj\i386\vcdex.dll
+	link -out:W:\nt\public\sdk\lib\i386\wowfax.dll -machine:i386 @W:\tmp\nma00668.
+Microsoft (R) 32-Bit Incremental Linker Version 4.20.6164
+Copyright (C) Microsoft Corp 1992-1996. All rights reserved.
+
+-MERGE:_PAGE=PAGE 
+-MERGE:_TEXT=.text 
+-SECTION:INIT,d 
+-OPT:REF 
+-INCREMENTAL:NO 
+-FORCE:MULTIPLE 
+-RELEASE 
+-FULLBUILD 
+-IGNORE:4001,4037,4039,4065,4070,4078,4087,4089 
+-NODEFAULTLIB 
+-debug:notmapped,FULL 
+-debugtype:both 
+-version:4.00 
+-osversion:4.00 
+-MERGE:.rdata=.text 
+-dll 
+-optidata 
+-driver 
+-align:0x20 
+-subsystem:native,4.00 
+-base:0x10000 
+-entry:DrvEnableDriver@12 
+-out:W:\nt\public\sdk\lib\i386\wowfax.dll 
+obj\i386\wowfax.res 
+obj\i386\wowfax.obj 
+W:\nt\public\sdk\lib\i386\int64.lib 
+W:\nt\public\sdk\lib\i386\win32k.lib 
+	link -out:W:\nt\public\sdk\lib\i386\wowfaxui.dll -machine:i386 @W:\tmp\nma03744.
+	binplace -R W:\binaries\nt -S W:\binaries\nt\Symbols -P W:\nt\public\sdk\lib\placefil.txt -a W:\nt\public\sdk\lib\i386\wowfax.dll
+
+Stop. 
+Microsoft (R) 32-Bit Incremental Linker Version 4.20.6164
+Copyright (C) Microsoft Corp 1992-1996. All rights reserved.
+
+-MERGE:_PAGE=PAGE 
+-MERGE:_TEXT=.text 
+-SECTION:INIT,d 
+-OPT:REF 
+-INCREMENTAL:NO 
+-FORCE:MULTIPLE 
+-RELEASE 
+-FULLBUILD 
+-IGNORE:4001,4037,4039,4065,4070,4078,4087,4089 
+-NODEFAULTLIB 
+-debug:notmapped,FULL 
+-debugtype:both 
+-version:4.00 
+-osversion:4.00 
+-MERGE:.rdata=.text 
+-dll 
+-optidata 
+-base:@W:\nt\public\sdk\lib\coffbase.txt,wowfaxui 
+-subsystem:windows,4.00 
+-entry:DllInitProc@12 
+W:\nt\public\sdk\lib\i386\wowfaxui.exp 
+obj\i386\wowfaxui.res 
+obj\i386\wfhelper.obj 
+obj\i386\wfsheets.obj 
+obj\i386\wfupgrad.obj 
+obj\i386\wowfaxui.obj 
+W:\nt\public\sdk\lib\i386\libc.lib 
+W:\nt\public\sdk\lib\i386\ntdll.lib 
+W:\nt\public\sdk\lib\i386\user32.lib 
+W:\nt\public\sdk\lib\i386\gdi32.lib 
+W:\nt\public\sdk\lib\i386\kernel32.lib 
+W:\nt\public\sdk\lib\i386\winspool.lib 
+W:\nt\public\sdk\lib\i386\shell32.lib 
+W:\nt\public\sdk\lib\i386\advapi32.lib 
+	binplace -R W:\binaries\nt -S W:\binaries\nt\Symbols -P W:\nt\public\sdk\lib\placefil.txt -a W:\nt\public\sdk\lib\i386\wowfaxui.dll
+
+Stop. 
+	binplace -R W:\binaries\nt -S W:\binaries\nt\Symbols -P W:\nt\public\sdk\lib\placefil.txt -a W:\nt\public\sdk\lib\i386\wow32.dll
+
+Stop. 
+	link -out:W:\nt\public\sdk\lib\i386\vdmredir.dll -machine:i386 @W:\tmp\nma02804.
+
+Stop. 
+Microsoft (R) 32-Bit Incremental Linker Version 4.20.6164
+Copyright (C) Microsoft Corp 1992-1996. All rights reserved.
+
+-MERGE:_PAGE=PAGE 
+-MERGE:_TEXT=.text 
+-SECTION:INIT,d 
+-OPT:REF 
+-INCREMENTAL:NO 
+-FORCE:MULTIPLE 
+-RELEASE 
+-FULLBUILD 
+-IGNORE:4001,4037,4039,4065,4070,4078,4087,4089 
+-NODEFAULTLIB 
+-debug:notmapped,FULL 
+-debugtype:both 
+-version:4.00 
+-osversion:4.00 
+-MERGE:.rdata=.text 
+-dll 
+-optidata 
+-base:0x03000000 
+-subsystem:native,4.00 
+-entry:VrDllInitialize@12 
+W:\nt\public\sdk\lib\i386\vdmredir.exp 
+obj\i386\vdmredir.res 
+obj\i386\vrmslot.obj 
+obj\i386\vrnmpipe.obj 
+obj\i386\vrdisp.obj 
+obj\i386\vrinit.obj 
+obj\i386\vrmisc.obj 
+obj\i386\vrnetapi.obj 
+obj\i386\vrnetb.obj 
+obj\i386\vrputil.obj 
+obj\i386\vrremote.obj 
+obj\i386\vrdlc5c.obj 
+obj\i386\vrdlcpst.obj 
+obj\i386\vrdlcbuf.obj 
+obj\i386\vrdlcdbg.obj 
+obj\i386\vrdebug.obj 
+obj\i386\vrdll.obj 
+W:\nt\public\sdk\lib\i386\crtdll.lib 
+W:\nt\public\sdk\lib\i386\msvcirt.lib 
+W:\nt\public\sdk\lib\i386\ntdll.lib 
+W:\nt\public\sdk\lib\i386\advapi32.lib 
+W:\nt\public\sdk\lib\i386\kernel32.lib 
+W:\nt\public\sdk\lib\i386\crtdll.lib 
+W:\nt\public\sdk\lib\i386\netapi32.lib 
+W:\nt\public\sdk\lib\i386\ntvdm.lib 
+W:\nt\public\sdk\lib\i386\xactsrv.lib 
+W:\nt\public\sdk\lib\i386\netlib.lib 
+W:\nt\public\sdk\lib\i386\netrap.lib 
+W:\nt\public\sdk\lib\i386\rpcrt4.lib 
+W:\nt\Public\SDK\Lib\i386\rxcommon.lib 
+W:\nt\Public\SDK\Lib\i386\rxapi.lib 
+rxapi.lib(rxuser.obj) : warning LNK4006: _RxNetUserPasswordSet@16 already defined in netapi32.lib(NETAPI32.dll); second definition ignored
+netlib.lib(names.obj) : warning LNK4006: _NetpIsUncComputerNameValid@4 already defined in netapi32.lib(NETAPI32.dll); second definition ignored
+W:\nt\public\sdk\lib\i386\vdmredir.dll : warning LNK4088: image being generated due to /FORCE option; image may not run
+	binplace -R W:\binaries\nt -S W:\binaries\nt\Symbols -P W:\nt\public\sdk\lib\placefil.txt -a W:\nt\public\sdk\lib\i386\vdmredir.dll
+
+Stop. 

@@ -1,0 +1,5 @@
+winspool.obj 
+winspool.exe
+winspool /map /align:16 /LI
+..\lib\libw.lib /nod
+winspool;

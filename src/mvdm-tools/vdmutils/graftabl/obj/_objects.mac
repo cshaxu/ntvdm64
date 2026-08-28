@@ -1,0 +1,24 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\graftabl.res \
+    $(_OBJ_DIR)\alpha\graftabl.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\graftabl.res \
+    $(_OBJ_DIR)\mips\graftabl.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\graftabl.res \
+    $(_OBJ_DIR)\i386\graftabl.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\graftabl.res \
+    $(_OBJ_DIR)\ppc\graftabl.obj
+
+PASS0_PPC_OBJECTS=
+

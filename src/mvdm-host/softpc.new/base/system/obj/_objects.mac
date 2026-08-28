@@ -1,0 +1,60 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\at_dma.obj \
+    $(_OBJ_DIR)\alpha\cmosnt.obj \
+    $(_OBJ_DIR)\alpha\ica.obj \
+    $(_OBJ_DIR)\alpha\idetect.obj \
+    $(_OBJ_DIR)\alpha\illegalp.obj \
+    $(_OBJ_DIR)\alpha\qevnt.obj \
+    $(_OBJ_DIR)\alpha\rom.obj \
+    $(_OBJ_DIR)\alpha\timer.obj \
+    $(_OBJ_DIR)\alpha\timestrb.obj \
+    $(_OBJ_DIR)\alpha\dummy_nt.obj \
+    $(_OBJ_DIR)\alpha\unexp_nt.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\at_dma.obj \
+    $(_OBJ_DIR)\mips\cmosnt.obj \
+    $(_OBJ_DIR)\mips\ica.obj \
+    $(_OBJ_DIR)\mips\idetect.obj \
+    $(_OBJ_DIR)\mips\illegalp.obj \
+    $(_OBJ_DIR)\mips\qevnt.obj \
+    $(_OBJ_DIR)\mips\rom.obj \
+    $(_OBJ_DIR)\mips\timer.obj \
+    $(_OBJ_DIR)\mips\timestrb.obj \
+    $(_OBJ_DIR)\mips\dummy_nt.obj \
+    $(_OBJ_DIR)\mips\unexp_nt.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\at_dma.obj \
+    $(_OBJ_DIR)\i386\cmosnt.obj \
+    $(_OBJ_DIR)\i386\ica.obj \
+    $(_OBJ_DIR)\i386\idetect.obj \
+    $(_OBJ_DIR)\i386\illegalp.obj \
+    $(_OBJ_DIR)\i386\qevnt.obj \
+    $(_OBJ_DIR)\i386\rom.obj \
+    $(_OBJ_DIR)\i386\timer.obj \
+    $(_OBJ_DIR)\i386\timestrb.obj \
+    $(_OBJ_DIR)\i386\dummy_nt.obj \
+    $(_OBJ_DIR)\i386\unexp_nt.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\at_dma.obj \
+    $(_OBJ_DIR)\ppc\cmosnt.obj \
+    $(_OBJ_DIR)\ppc\ica.obj \
+    $(_OBJ_DIR)\ppc\idetect.obj \
+    $(_OBJ_DIR)\ppc\illegalp.obj \
+    $(_OBJ_DIR)\ppc\qevnt.obj \
+    $(_OBJ_DIR)\ppc\rom.obj \
+    $(_OBJ_DIR)\ppc\timer.obj \
+    $(_OBJ_DIR)\ppc\timestrb.obj \
+    $(_OBJ_DIR)\ppc\dummy_nt.obj \
+    $(_OBJ_DIR)\ppc\unexp_nt.obj
+
+PASS0_PPC_OBJECTS=
+

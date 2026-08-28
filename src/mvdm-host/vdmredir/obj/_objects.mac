@@ -1,0 +1,80 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\vdmredir.res \
+    $(_OBJ_DIR)\alpha\vrmslot.obj \
+    $(_OBJ_DIR)\alpha\vrnmpipe.obj \
+    $(_OBJ_DIR)\alpha\vrdisp.obj \
+    $(_OBJ_DIR)\alpha\vrinit.obj \
+    $(_OBJ_DIR)\alpha\vrmisc.obj \
+    $(_OBJ_DIR)\alpha\vrnetapi.obj \
+    $(_OBJ_DIR)\alpha\vrnetb.obj \
+    $(_OBJ_DIR)\alpha\vrputil.obj \
+    $(_OBJ_DIR)\alpha\vrremote.obj \
+    $(_OBJ_DIR)\alpha\vrdlc5c.obj \
+    $(_OBJ_DIR)\alpha\vrdlcpst.obj \
+    $(_OBJ_DIR)\alpha\vrdlcbuf.obj \
+    $(_OBJ_DIR)\alpha\vrdlcdbg.obj \
+    $(_OBJ_DIR)\alpha\vrdebug.obj \
+    $(_OBJ_DIR)\alpha\vrdll.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\vdmredir.res \
+    $(_OBJ_DIR)\mips\vrmslot.obj \
+    $(_OBJ_DIR)\mips\vrnmpipe.obj \
+    $(_OBJ_DIR)\mips\vrdisp.obj \
+    $(_OBJ_DIR)\mips\vrinit.obj \
+    $(_OBJ_DIR)\mips\vrmisc.obj \
+    $(_OBJ_DIR)\mips\vrnetapi.obj \
+    $(_OBJ_DIR)\mips\vrnetb.obj \
+    $(_OBJ_DIR)\mips\vrputil.obj \
+    $(_OBJ_DIR)\mips\vrremote.obj \
+    $(_OBJ_DIR)\mips\vrdlc5c.obj \
+    $(_OBJ_DIR)\mips\vrdlcpst.obj \
+    $(_OBJ_DIR)\mips\vrdlcbuf.obj \
+    $(_OBJ_DIR)\mips\vrdlcdbg.obj \
+    $(_OBJ_DIR)\mips\vrdebug.obj \
+    $(_OBJ_DIR)\mips\vrdll.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\vdmredir.res \
+    $(_OBJ_DIR)\i386\vrmslot.obj \
+    $(_OBJ_DIR)\i386\vrnmpipe.obj \
+    $(_OBJ_DIR)\i386\vrdisp.obj \
+    $(_OBJ_DIR)\i386\vrinit.obj \
+    $(_OBJ_DIR)\i386\vrmisc.obj \
+    $(_OBJ_DIR)\i386\vrnetapi.obj \
+    $(_OBJ_DIR)\i386\vrnetb.obj \
+    $(_OBJ_DIR)\i386\vrputil.obj \
+    $(_OBJ_DIR)\i386\vrremote.obj \
+    $(_OBJ_DIR)\i386\vrdlc5c.obj \
+    $(_OBJ_DIR)\i386\vrdlcpst.obj \
+    $(_OBJ_DIR)\i386\vrdlcbuf.obj \
+    $(_OBJ_DIR)\i386\vrdlcdbg.obj \
+    $(_OBJ_DIR)\i386\vrdebug.obj \
+    $(_OBJ_DIR)\i386\vrdll.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\vdmredir.res \
+    $(_OBJ_DIR)\ppc\vrmslot.obj \
+    $(_OBJ_DIR)\ppc\vrnmpipe.obj \
+    $(_OBJ_DIR)\ppc\vrdisp.obj \
+    $(_OBJ_DIR)\ppc\vrinit.obj \
+    $(_OBJ_DIR)\ppc\vrmisc.obj \
+    $(_OBJ_DIR)\ppc\vrnetapi.obj \
+    $(_OBJ_DIR)\ppc\vrnetb.obj \
+    $(_OBJ_DIR)\ppc\vrputil.obj \
+    $(_OBJ_DIR)\ppc\vrremote.obj \
+    $(_OBJ_DIR)\ppc\vrdlc5c.obj \
+    $(_OBJ_DIR)\ppc\vrdlcpst.obj \
+    $(_OBJ_DIR)\ppc\vrdlcbuf.obj \
+    $(_OBJ_DIR)\ppc\vrdlcdbg.obj \
+    $(_OBJ_DIR)\ppc\vrdebug.obj \
+    $(_OBJ_DIR)\ppc\vrdll.obj
+
+PASS0_PPC_OBJECTS=
+

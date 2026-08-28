@@ -1,0 +1,5 @@
+wowexec.obj pmdos.obj wowexfax.obj
+wowexec /map /stack:8192 /align:16 /LI
+wowexec
+..\..\lib\snocrt.lib ..\..\lib\libw.lib /nod
+wowexec;

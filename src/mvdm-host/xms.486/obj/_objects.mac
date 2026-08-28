@@ -1,0 +1,44 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\xmsmemr.obj \
+    $(_OBJ_DIR)\alpha\xms.obj \
+    $(_OBJ_DIR)\alpha\xmsa20.obj \
+    $(_OBJ_DIR)\alpha\xmsblock.obj \
+    $(_OBJ_DIR)\alpha\xmsdisp.obj \
+    $(_OBJ_DIR)\alpha\xmsmisc.obj \
+    $(_OBJ_DIR)\alpha\xmsumb.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\xmsmemr.obj \
+    $(_OBJ_DIR)\mips\xms.obj \
+    $(_OBJ_DIR)\mips\xmsa20.obj \
+    $(_OBJ_DIR)\mips\xmsblock.obj \
+    $(_OBJ_DIR)\mips\xmsdisp.obj \
+    $(_OBJ_DIR)\mips\xmsmisc.obj \
+    $(_OBJ_DIR)\mips\xmsumb.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\xmsmem86.obj \
+    $(_OBJ_DIR)\i386\xms.obj \
+    $(_OBJ_DIR)\i386\xmsa20.obj \
+    $(_OBJ_DIR)\i386\xmsblock.obj \
+    $(_OBJ_DIR)\i386\xmsdisp.obj \
+    $(_OBJ_DIR)\i386\xmsmisc.obj \
+    $(_OBJ_DIR)\i386\xmsumb.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\xmsmemr.obj \
+    $(_OBJ_DIR)\ppc\xms.obj \
+    $(_OBJ_DIR)\ppc\xmsa20.obj \
+    $(_OBJ_DIR)\ppc\xmsblock.obj \
+    $(_OBJ_DIR)\ppc\xmsdisp.obj \
+    $(_OBJ_DIR)\ppc\xmsmisc.obj \
+    $(_OBJ_DIR)\ppc\xmsumb.obj
+
+PASS0_PPC_OBJECTS=
+

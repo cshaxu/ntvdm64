@@ -1,0 +1,36 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\keyba.obj \
+    $(_OBJ_DIR)\alpha\keybd_io.obj \
+    $(_OBJ_DIR)\alpha\mouse.obj \
+    $(_OBJ_DIR)\alpha\ppi.obj \
+    $(_OBJ_DIR)\alpha\mouse_io.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\keyba.obj \
+    $(_OBJ_DIR)\mips\keybd_io.obj \
+    $(_OBJ_DIR)\mips\mouse.obj \
+    $(_OBJ_DIR)\mips\ppi.obj \
+    $(_OBJ_DIR)\mips\mouse_io.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\keyba.obj \
+    $(_OBJ_DIR)\i386\keybd_io.obj \
+    $(_OBJ_DIR)\i386\mouse.obj \
+    $(_OBJ_DIR)\i386\ppi.obj \
+    $(_OBJ_DIR)\i386\mouse_io.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\keyba.obj \
+    $(_OBJ_DIR)\ppc\keybd_io.obj \
+    $(_OBJ_DIR)\ppc\mouse.obj \
+    $(_OBJ_DIR)\ppc\ppi.obj \
+    $(_OBJ_DIR)\ppc\mouse_io.obj
+
+PASS0_PPC_OBJECTS=
+

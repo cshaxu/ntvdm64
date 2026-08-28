@@ -1,0 +1,237 @@
+
+NAME ntvdm.exe
+
+EXPORTS
+
+    getEAX
+    getEBX
+    getECX
+    getEDX
+    getESP
+    getEBP
+    getESI
+    getEDI
+    getFS
+    getGS
+    setEAX
+    setEBX
+    setECX
+    setEDX
+    setESP
+    setEBP
+    setESI
+    setEDI
+    setFS
+    setGS
+    MGetVdmPointer = ExpSim32GetVDMPointer      ; for 1.0 VDD compatibility
+    setMSW
+    getEIP
+    CurrentMonitorTeb  DATA
+    ExpVdmTib = VdmTib DATA
+    SelectorLimit = ExpSelectorLimit DATA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    getMSW
+    getAX
+    getAL
+    getAH
+    getBX
+    getBL
+    getBH
+    getCX
+    getCL
+    getCH
+    getDX
+    getDL
+    getDH
+    getSP
+    getBP
+    getSI
+    getDI
+    getIP
+    getCS
+    getSS
+    getDS
+    getES
+    getCF
+    getPF
+    getAF
+    getZF
+    getSF
+    getIF
+    getDF
+    getOF
+    setAX
+    setAH
+    setAL
+    setBX
+    setBH
+    setBL
+    setCX
+    setCH
+    setCL
+    setDX
+    setDH
+    setDL
+    setSP
+    setBP
+    setSI
+    setDI
+    setIP
+    setCS
+    setSS
+    setDS
+    setES
+    setCF
+    setPF
+    setAF
+    setZF
+    setSF
+    setIF
+    setDF
+    setOF
+
+    host_simulate
+    host_CreateThread
+    host_ExitThread
+    Sim32pGetVDMPointer                        ; for internal use
+    getIntelRegistersPointer
+
+    RegisterWOWIdle
+    BlockWOWIdle
+    SuspendTimerThread
+    ResumeTimerThread
+
+    call_ica_hw_interrupt = ica_hw_interrupt
+    GetWOWShortCutInfo
+
+    DispatchInterrupts
+    ExpLdt = Ldt  DATA
+    FlatAddress   DATA
+    pDeviceChain  DATA
+    fSeparateWow  DATA
+
+    host_com_close
+    host_direct_access_error
+
+    VDDInstallIOHook
+    VDDDeInstallIOHook
+    VDDRequestDMA
+    VDDSetDMA
+    VDDQueryDMA
+    VDDInstallMemoryHook
+    VDDDeInstallMemoryHook
+    VDDAllocMem
+    VDDFreeMem
+    VDDIncludeMem
+    VDDExcludeMem
+    VDDTerminateVDM
+
+    VDDInstallUserHook
+    VDDDeInstallUserHook
+    VDDSimulate16
+
+    VDDReserveIrqLine
+    VDDReleaseIrqLine
+
+    VDDAllocateDosHandle
+    VDDAssociateNtHandle
+    VDDReleaseDosHandle
+    VDDRetrieveNtHandle
+
+    DBGNotifyNewTask
+    DBGNotifyRemoteThreadAddress
+    DBGNotifyDebugged
+
+    cpu_createthread
+
+    WaitIfIdle
+    WOWSysErrorBox
+    SoftPcEoi
+
+    demFileFindFirst
+    demFileFindNext
+    demClientErrorEx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

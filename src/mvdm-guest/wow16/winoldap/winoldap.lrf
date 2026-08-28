@@ -1,0 +1,5 @@
+winoldap.obj 
+winoldap.mod /map /stack:5120 /align:16 /LI 
+winoldap 
+..\lib\snocrt.lib ..\lib\libw.lib /nod 
+winoldap.def; 

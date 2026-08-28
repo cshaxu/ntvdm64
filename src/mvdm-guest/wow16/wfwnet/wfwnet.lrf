@@ -1,0 +1,11 @@
+wfwnet.obj+ 
+to32.obj+ 
+print.obj+ 
+misc.obj+ 
+lfn.obj+ 
+libentry.obj+ 
+ints.obj 
+wfwnet.drv
+wfwnet /map /align:16 /LI
+..\lib\libw.lib /nod
+wfwnet;

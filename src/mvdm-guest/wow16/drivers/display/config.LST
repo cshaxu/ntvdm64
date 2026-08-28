@@ -1,0 +1,131 @@
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:22 2019
+Hardware Dependent Parameters                               Page     1-1
+
+
+			      \	;**********************************************
+				*****************************
+			      \	;					
+								   *
+			      \	;   Copyright (C) 1985-1989 by Microsoft Inc.  
+				                            *
+			      \	;					
+								   *
+			      \	;**********************************************
+				*****************************
+				
+			      \		title	Hardware Dependent Parameters
+			      \		%out	config
+			      \		page	,132
+				
+				
+			      \	RGB     macro   R, G, B
+			      \	        db      R,G,B,0
+			      \		endm
+				
+				
+				
+ 0000                         \	OEM	segment public
+				
+			      \	;	Machine dependent parameters
+				
+ 0000  000E                   \	        dw      14                      ;Height of vertical thumb
+ 0002  0012                   \	        dw      18                      ;Width of horizontal thumb
+ 0004  0002                   \		dw	2			;Icon horiz compression factor
+ 0006  0002                   \		dw	2			;Icon vert compression factor
+ 0008  0001                   \		dw	1			;Cursor horz compression factor
+ 000A  0001                   \		dw	1			;Cursor vert compression factor
+ 000C  0000                   \		dw	0			;Kanji window height
+ 000E  0001                   \		dw	1			;cxBorder (thickness of vertical lines)
+ 0010  0001                   \		dw	1			;cyBorder (thickness of horizontal lines)
+				
+			      \	;	Default system color values
+				
+			      \	        RGB 129,129,129     ;clrScrollbar
+ 0012  81 81 81 00            \	        db      129,129,129,0 
+			      \	        RGB 192,192,192     ;clrDesktop
+ 0016  C0 C0 C0 00            \	        db      192,192,192,0 
+			      \	        RGB 000,000,128     ;clrActiveCaption
+ 001A  00 00 80 00            \	        db      000,000,128,0 
+			      \	        RGB 255,255,255     ;clrInactiveCaption
+ 001E  FF FF FF 00            \	        db      255,255,255,0 
+			      \	        RGB 255,255,255     ;clrMenu
+ 0022  FF FF FF 00            \	        db      255,255,255,0 
+			      \	        RGB 255,255,255     ;clrWindow
+ 0026  FF FF FF 00            \	        db      255,255,255,0 
+			      \	        RGB 000,000,000     ;clrWindowFrame
+ 002A  00 00 00 00            \	        db      000,000,000,0 
+			      \	        RGB 000,000,000     ;clrMenuText
+ 002E  00 00 00 00            \	        db      000,000,000,0 
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:22 2019
+Hardware Dependent Parameters                               Page     1-2
+
+
+			      \	        RGB 000,000,000     ;clrWindowText
+ 0032  00 00 00 00            \	        db      000,000,000,0 
+			      \	        RGB 255,255,255     ;clrCaptionText
+ 0036  FF FF FF 00            \	        db      255,255,255,0 
+			      \	        RGB 128,128,128     ;clrActiveBorder
+ 003A  80 80 80 00            \	        db      128,128,128,0 
+			      \	        RGB 255,255,255     ;clrInactiveBorder
+ 003E  FF FF FF 00            \	        db      255,255,255,0 
+			      \	        RGB 255,255,255     ;clrAppWorkspace
+ 0042  FF FF FF 00            \	        db      255,255,255,0 
+			      \	        RGB 000,000,128     ;clrHiliteBk
+ 0046  00 00 80 00            \	        db      000,000,128,0 
+			      \	        RGB 255,255,255     ;clrHiliteText
+ 004A  FF FF FF 00            \	        db      255,255,255,0 
+			      \	        RGB 255,255,255     ;clrBtnFace
+ 004E  FF FF FF 00            \	        db      255,255,255,0 
+			      \	        RGB 128,128,128     ;clrBtnShadow
+ 0052  80 80 80 00            \	        db      128,128,128,0 
+			      \	        RGB 128,128,128     ;clrGrayText
+ 0056  80 80 80 00            \	        db      128,128,128,0 
+			      \	        RGB 000,000,000     ;clrBtnText
+ 005A  00 00 00 00            \	        db      000,000,000,0 
+				
+			      \	;	dw	0			;Unused words
+			      \	;	dw	0
+			      \	;	dw	0
+			      \	;	dw	0
+			      \	;	dw	0
+			      \	;	dw	0
+ 005E  0000                   \		dw	0
+ 0060  0000                   \		dw	0
+				
+ 0062                         \	OEM	ends
+			      \	end
+
+Microsoft (R) Macro Assembler Version 5.NT.02               Oct 19 01:11:22 2019
+Hardware Dependent Parameters                               Symbols-1
+
+
+Macros:
+
+		N a m e			Lines
+
+RGB  . . . . . . . . . . . . . .  	   1
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+OEM  . . . . . . . . . . . . . .  	0062	PARA	PUBLIC	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+DEBUG  . . . . . . . . . . . . .  	TEXT  		
+
+WOW  . . . . . . . . . . . . . .  	TEXT  		
+
+@Cpu . . . . . . . . . . . . . .  	TEXT  0101h		
+@FileName  . . . . . . . . . . .  	TEXT  config		
+@Version . . . . . . . . . . . .  	TEXT  510		
+
+
+     64 Source  Lines
+     83 Total   Lines
+      9 Symbols
+      0 Warning Errors
+      0 Severe  Errors

@@ -8,6 +8,11 @@ The current T276 audit keeps the byte-exact source union temporarily under
 this skeleton. A dedicated hash-verified `git mv` packet must establish this
 component before a support source becomes a formal build input.
 
+T301 S1 P21 preserves any missing byte-exact support build products from
+`opennt-src-2` under their original-relative paths.  They are provenance
+evidence only and do not enter a host build or link graph; see
+[`m0-t301-s1-opennt-src-2-mvdm-extra-import-manifest.tsv`](../../docs/etc/operations/m0-t301-s1-opennt-src-2-mvdm-extra-import-manifest.tsv).
+
 ## Divergence register
 
 | ID | Original purpose | Reason | Implementation | Files |

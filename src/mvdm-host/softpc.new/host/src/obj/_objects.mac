@@ -1,0 +1,203 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\sim32.obj \
+    $(_OBJ_DIR)\alpha\cpucstbs.obj \
+    $(_OBJ_DIR)\alpha\nt_timer.obj \
+    $(_OBJ_DIR)\alpha\nt_ntfun.obj \
+    $(_OBJ_DIR)\alpha\nt_msscs.obj \
+    $(_OBJ_DIR)\alpha\nt_error.obj \
+    $(_OBJ_DIR)\alpha\nt_cga.obj \
+    $(_OBJ_DIR)\alpha\nt_ega.obj \
+    $(_OBJ_DIR)\alpha\nt_vga.obj \
+    $(_OBJ_DIR)\alpha\nt_input.obj \
+    $(_OBJ_DIR)\alpha\nt_graph.obj \
+    $(_OBJ_DIR)\alpha\nt_hosts.obj \
+    $(_OBJ_DIR)\alpha\nt_sound.obj \
+    $(_OBJ_DIR)\alpha\nt_bop.obj \
+    $(_OBJ_DIR)\alpha\nt_com.obj \
+    $(_OBJ_DIR)\alpha\nt_wcom.obj \
+    $(_OBJ_DIR)\alpha\nt_rez.obj \
+    $(_OBJ_DIR)\alpha\nt_sas.obj \
+    $(_OBJ_DIR)\alpha\nt_fdisk.obj \
+    $(_OBJ_DIR)\alpha\nt_unix.obj \
+    $(_OBJ_DIR)\alpha\nt_keycd.obj \
+    $(_OBJ_DIR)\alpha\nt_cpu.obj \
+    $(_OBJ_DIR)\alpha\nt_lpt.obj \
+    $(_OBJ_DIR)\alpha\nt_yoda.obj \
+    $(_OBJ_DIR)\alpha\nt_mouse.obj \
+    $(_OBJ_DIR)\alpha\nt_event.obj \
+    $(_OBJ_DIR)\alpha\nt_munge.obj \
+    $(_OBJ_DIR)\alpha\config.obj \
+    $(_OBJ_DIR)\alpha\nt_nls.obj \
+    $(_OBJ_DIR)\alpha\copy_fnc.obj \
+    $(_OBJ_DIR)\alpha\stubs.obj \
+    $(_OBJ_DIR)\alpha\nt_pif.obj \
+    $(_OBJ_DIR)\alpha\nt_fulsc.obj \
+    $(_OBJ_DIR)\alpha\nt_emm.obj \
+    $(_OBJ_DIR)\alpha\x86_emm.obj \
+    $(_OBJ_DIR)\alpha\nt_eoi.obj \
+    $(_OBJ_DIR)\alpha\nt_vdd.obj \
+    $(_OBJ_DIR)\alpha\nt_sec.obj \
+    $(_OBJ_DIR)\alpha\nt_thred.obj \
+    $(_OBJ_DIR)\alpha\nt_det.obj \
+    $(_OBJ_DIR)\alpha\nt_umb.obj \
+    $(_OBJ_DIR)\alpha\fprt.obj \
+    $(_OBJ_DIR)\alpha\nt_rflop.obj \
+    $(_OBJ_DIR)\alpha\nt_inthk.obj \
+    $(_OBJ_DIR)\alpha\nt_reset.obj \
+    $(_OBJ_DIR)\alpha\nt_mem.obj \
+    $(_OBJ_DIR)\alpha\nt_aorc.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\sim32.obj \
+    $(_OBJ_DIR)\mips\cpucstbs.obj \
+    $(_OBJ_DIR)\mips\nt_timer.obj \
+    $(_OBJ_DIR)\mips\nt_ntfun.obj \
+    $(_OBJ_DIR)\mips\nt_msscs.obj \
+    $(_OBJ_DIR)\mips\nt_error.obj \
+    $(_OBJ_DIR)\mips\nt_cga.obj \
+    $(_OBJ_DIR)\mips\nt_ega.obj \
+    $(_OBJ_DIR)\mips\nt_vga.obj \
+    $(_OBJ_DIR)\mips\nt_input.obj \
+    $(_OBJ_DIR)\mips\nt_graph.obj \
+    $(_OBJ_DIR)\mips\nt_hosts.obj \
+    $(_OBJ_DIR)\mips\nt_sound.obj \
+    $(_OBJ_DIR)\mips\nt_bop.obj \
+    $(_OBJ_DIR)\mips\nt_com.obj \
+    $(_OBJ_DIR)\mips\nt_wcom.obj \
+    $(_OBJ_DIR)\mips\nt_rez.obj \
+    $(_OBJ_DIR)\mips\nt_sas.obj \
+    $(_OBJ_DIR)\mips\nt_fdisk.obj \
+    $(_OBJ_DIR)\mips\nt_unix.obj \
+    $(_OBJ_DIR)\mips\nt_keycd.obj \
+    $(_OBJ_DIR)\mips\nt_cpu.obj \
+    $(_OBJ_DIR)\mips\nt_lpt.obj \
+    $(_OBJ_DIR)\mips\nt_yoda.obj \
+    $(_OBJ_DIR)\mips\nt_mouse.obj \
+    $(_OBJ_DIR)\mips\nt_event.obj \
+    $(_OBJ_DIR)\mips\nt_munge.obj \
+    $(_OBJ_DIR)\mips\config.obj \
+    $(_OBJ_DIR)\mips\nt_nls.obj \
+    $(_OBJ_DIR)\mips\copy_fnc.obj \
+    $(_OBJ_DIR)\mips\stubs.obj \
+    $(_OBJ_DIR)\mips\nt_pif.obj \
+    $(_OBJ_DIR)\mips\nt_fulsc.obj \
+    $(_OBJ_DIR)\mips\nt_emm.obj \
+    $(_OBJ_DIR)\mips\x86_emm.obj \
+    $(_OBJ_DIR)\mips\nt_eoi.obj \
+    $(_OBJ_DIR)\mips\nt_vdd.obj \
+    $(_OBJ_DIR)\mips\nt_sec.obj \
+    $(_OBJ_DIR)\mips\nt_thred.obj \
+    $(_OBJ_DIR)\mips\nt_det.obj \
+    $(_OBJ_DIR)\mips\nt_umb.obj \
+    $(_OBJ_DIR)\mips\fprt.obj \
+    $(_OBJ_DIR)\mips\nt_rflop.obj \
+    $(_OBJ_DIR)\mips\nt_inthk.obj \
+    $(_OBJ_DIR)\mips\nt_reset.obj \
+    $(_OBJ_DIR)\mips\nt_mem.obj \
+    $(_OBJ_DIR)\mips\nt_aorc.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\sim32.obj \
+    $(_OBJ_DIR)\i386\cpucstbs.obj \
+    $(_OBJ_DIR)\i386\nt_timer.obj \
+    $(_OBJ_DIR)\i386\nt_ntfun.obj \
+    $(_OBJ_DIR)\i386\nt_msscs.obj \
+    $(_OBJ_DIR)\i386\nt_error.obj \
+    $(_OBJ_DIR)\i386\nt_cga.obj \
+    $(_OBJ_DIR)\i386\nt_ega.obj \
+    $(_OBJ_DIR)\i386\nt_vga.obj \
+    $(_OBJ_DIR)\i386\nt_input.obj \
+    $(_OBJ_DIR)\i386\nt_graph.obj \
+    $(_OBJ_DIR)\i386\nt_hosts.obj \
+    $(_OBJ_DIR)\i386\nt_sound.obj \
+    $(_OBJ_DIR)\i386\nt_bop.obj \
+    $(_OBJ_DIR)\i386\nt_com.obj \
+    $(_OBJ_DIR)\i386\nt_wcom.obj \
+    $(_OBJ_DIR)\i386\nt_rez.obj \
+    $(_OBJ_DIR)\i386\nt_sas.obj \
+    $(_OBJ_DIR)\i386\nt_fdisk.obj \
+    $(_OBJ_DIR)\i386\nt_unix.obj \
+    $(_OBJ_DIR)\i386\nt_keycd.obj \
+    $(_OBJ_DIR)\i386\nt_cpu.obj \
+    $(_OBJ_DIR)\i386\nt_lpt.obj \
+    $(_OBJ_DIR)\i386\nt_yoda.obj \
+    $(_OBJ_DIR)\i386\nt_mouse.obj \
+    $(_OBJ_DIR)\i386\nt_event.obj \
+    $(_OBJ_DIR)\i386\nt_munge.obj \
+    $(_OBJ_DIR)\i386\config.obj \
+    $(_OBJ_DIR)\i386\nt_nls.obj \
+    $(_OBJ_DIR)\i386\copy_fnc.obj \
+    $(_OBJ_DIR)\i386\stubs.obj \
+    $(_OBJ_DIR)\i386\nt_pif.obj \
+    $(_OBJ_DIR)\i386\nt_fulsc.obj \
+    $(_OBJ_DIR)\i386\nt_emm.obj \
+    $(_OBJ_DIR)\i386\x86_emm.obj \
+    $(_OBJ_DIR)\i386\nt_eoi.obj \
+    $(_OBJ_DIR)\i386\nt_vdd.obj \
+    $(_OBJ_DIR)\i386\nt_sec.obj \
+    $(_OBJ_DIR)\i386\nt_thred.obj \
+    $(_OBJ_DIR)\i386\nt_det.obj \
+    $(_OBJ_DIR)\i386\nt_umb.obj \
+    $(_OBJ_DIR)\i386\fprt.obj \
+    $(_OBJ_DIR)\i386\nt_rflop.obj \
+    $(_OBJ_DIR)\i386\nt_inthk.obj \
+    $(_OBJ_DIR)\i386\nt_reset.obj \
+    $(_OBJ_DIR)\i386\nt_mem.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\sim32.obj \
+    $(_OBJ_DIR)\ppc\cpucstbs.obj \
+    $(_OBJ_DIR)\ppc\nt_timer.obj \
+    $(_OBJ_DIR)\ppc\nt_ntfun.obj \
+    $(_OBJ_DIR)\ppc\nt_msscs.obj \
+    $(_OBJ_DIR)\ppc\nt_error.obj \
+    $(_OBJ_DIR)\ppc\nt_cga.obj \
+    $(_OBJ_DIR)\ppc\nt_ega.obj \
+    $(_OBJ_DIR)\ppc\nt_vga.obj \
+    $(_OBJ_DIR)\ppc\nt_input.obj \
+    $(_OBJ_DIR)\ppc\nt_graph.obj \
+    $(_OBJ_DIR)\ppc\nt_hosts.obj \
+    $(_OBJ_DIR)\ppc\nt_sound.obj \
+    $(_OBJ_DIR)\ppc\nt_bop.obj \
+    $(_OBJ_DIR)\ppc\nt_com.obj \
+    $(_OBJ_DIR)\ppc\nt_wcom.obj \
+    $(_OBJ_DIR)\ppc\nt_rez.obj \
+    $(_OBJ_DIR)\ppc\nt_sas.obj \
+    $(_OBJ_DIR)\ppc\nt_fdisk.obj \
+    $(_OBJ_DIR)\ppc\nt_unix.obj \
+    $(_OBJ_DIR)\ppc\nt_keycd.obj \
+    $(_OBJ_DIR)\ppc\nt_cpu.obj \
+    $(_OBJ_DIR)\ppc\nt_lpt.obj \
+    $(_OBJ_DIR)\ppc\nt_yoda.obj \
+    $(_OBJ_DIR)\ppc\nt_mouse.obj \
+    $(_OBJ_DIR)\ppc\nt_event.obj \
+    $(_OBJ_DIR)\ppc\nt_munge.obj \
+    $(_OBJ_DIR)\ppc\config.obj \
+    $(_OBJ_DIR)\ppc\nt_nls.obj \
+    $(_OBJ_DIR)\ppc\copy_fnc.obj \
+    $(_OBJ_DIR)\ppc\stubs.obj \
+    $(_OBJ_DIR)\ppc\nt_pif.obj \
+    $(_OBJ_DIR)\ppc\nt_fulsc.obj \
+    $(_OBJ_DIR)\ppc\nt_emm.obj \
+    $(_OBJ_DIR)\ppc\x86_emm.obj \
+    $(_OBJ_DIR)\ppc\nt_eoi.obj \
+    $(_OBJ_DIR)\ppc\nt_vdd.obj \
+    $(_OBJ_DIR)\ppc\nt_sec.obj \
+    $(_OBJ_DIR)\ppc\nt_thred.obj \
+    $(_OBJ_DIR)\ppc\nt_det.obj \
+    $(_OBJ_DIR)\ppc\nt_umb.obj \
+    $(_OBJ_DIR)\ppc\fprt.obj \
+    $(_OBJ_DIR)\ppc\nt_rflop.obj \
+    $(_OBJ_DIR)\ppc\nt_inthk.obj \
+    $(_OBJ_DIR)\ppc\nt_reset.obj \
+    $(_OBJ_DIR)\ppc\nt_mem.obj \
+    $(_OBJ_DIR)\ppc\nt_aorc.obj
+
+PASS0_PPC_OBJECTS=
+

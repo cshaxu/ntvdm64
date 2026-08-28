@@ -1,0 +1,92 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\ega_mode.obj \
+    $(_OBJ_DIR)\alpha\ega_prts.obj \
+    $(_OBJ_DIR)\alpha\ega_vide.obj \
+    $(_OBJ_DIR)\alpha\gfx_updt.obj \
+    $(_OBJ_DIR)\alpha\video.obj \
+    $(_OBJ_DIR)\alpha\gvi.obj \
+    $(_OBJ_DIR)\alpha\video_io.obj \
+    $(_OBJ_DIR)\alpha\v7_ports.obj \
+    $(_OBJ_DIR)\alpha\v7_video.obj \
+    $(_OBJ_DIR)\alpha\vga_mode.obj \
+    $(_OBJ_DIR)\alpha\vga_prts.obj \
+    $(_OBJ_DIR)\alpha\vga_vide.obj \
+    $(_OBJ_DIR)\alpha\ega_read.obj \
+    $(_OBJ_DIR)\alpha\ega_writ.obj \
+    $(_OBJ_DIR)\alpha\ega_dmmy.obj \
+    $(_OBJ_DIR)\alpha\ega_trcr.obj \
+    $(_OBJ_DIR)\alpha\egawrtm0.obj \
+    $(_OBJ_DIR)\alpha\egwrtm12.obj \
+    $(_OBJ_DIR)\alpha\cga.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\ega_mode.obj \
+    $(_OBJ_DIR)\mips\ega_prts.obj \
+    $(_OBJ_DIR)\mips\ega_vide.obj \
+    $(_OBJ_DIR)\mips\gfx_updt.obj \
+    $(_OBJ_DIR)\mips\video.obj \
+    $(_OBJ_DIR)\mips\gvi.obj \
+    $(_OBJ_DIR)\mips\video_io.obj \
+    $(_OBJ_DIR)\mips\v7_ports.obj \
+    $(_OBJ_DIR)\mips\v7_video.obj \
+    $(_OBJ_DIR)\mips\vga_mode.obj \
+    $(_OBJ_DIR)\mips\vga_prts.obj \
+    $(_OBJ_DIR)\mips\vga_vide.obj \
+    $(_OBJ_DIR)\mips\ega_read.obj \
+    $(_OBJ_DIR)\mips\ega_writ.obj \
+    $(_OBJ_DIR)\mips\ega_dmmy.obj \
+    $(_OBJ_DIR)\mips\ega_trcr.obj \
+    $(_OBJ_DIR)\mips\egawrtm0.obj \
+    $(_OBJ_DIR)\mips\egwrtm12.obj \
+    $(_OBJ_DIR)\mips\cga.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\ega_mode.obj \
+    $(_OBJ_DIR)\i386\ega_prts.obj \
+    $(_OBJ_DIR)\i386\ega_vide.obj \
+    $(_OBJ_DIR)\i386\gfx_updt.obj \
+    $(_OBJ_DIR)\i386\video.obj \
+    $(_OBJ_DIR)\i386\gvi.obj \
+    $(_OBJ_DIR)\i386\video_io.obj \
+    $(_OBJ_DIR)\i386\v7_ports.obj \
+    $(_OBJ_DIR)\i386\v7_video.obj \
+    $(_OBJ_DIR)\i386\vga_mode.obj \
+    $(_OBJ_DIR)\i386\vga_prts.obj \
+    $(_OBJ_DIR)\i386\vga_vide.obj \
+    $(_OBJ_DIR)\i386\ega_read.obj \
+    $(_OBJ_DIR)\i386\ega_writ.obj \
+    $(_OBJ_DIR)\i386\ega_dmmy.obj \
+    $(_OBJ_DIR)\i386\ega_trcr.obj \
+    $(_OBJ_DIR)\i386\egawrtm0.obj \
+    $(_OBJ_DIR)\i386\egwrtm12.obj \
+    $(_OBJ_DIR)\i386\cga.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\ega_mode.obj \
+    $(_OBJ_DIR)\ppc\ega_prts.obj \
+    $(_OBJ_DIR)\ppc\ega_vide.obj \
+    $(_OBJ_DIR)\ppc\gfx_updt.obj \
+    $(_OBJ_DIR)\ppc\video.obj \
+    $(_OBJ_DIR)\ppc\gvi.obj \
+    $(_OBJ_DIR)\ppc\video_io.obj \
+    $(_OBJ_DIR)\ppc\v7_ports.obj \
+    $(_OBJ_DIR)\ppc\v7_video.obj \
+    $(_OBJ_DIR)\ppc\vga_mode.obj \
+    $(_OBJ_DIR)\ppc\vga_prts.obj \
+    $(_OBJ_DIR)\ppc\vga_vide.obj \
+    $(_OBJ_DIR)\ppc\ega_read.obj \
+    $(_OBJ_DIR)\ppc\ega_writ.obj \
+    $(_OBJ_DIR)\ppc\ega_dmmy.obj \
+    $(_OBJ_DIR)\ppc\ega_trcr.obj \
+    $(_OBJ_DIR)\ppc\egawrtm0.obj \
+    $(_OBJ_DIR)\ppc\egwrtm12.obj \
+    $(_OBJ_DIR)\ppc\cga.obj
+
+PASS0_PPC_OBJECTS=
+

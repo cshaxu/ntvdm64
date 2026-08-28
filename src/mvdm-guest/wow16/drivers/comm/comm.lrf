@@ -1,0 +1,5 @@
+ccom+ibmsetup+ibmcom+ibmint+ibmlpt+commmsg 
+comm.exe/align:16
+comm /map /align:16 /LI
+..\..\lib\libw.lib ..\..\lib\snocrtd.lib /map /nod
+comm;

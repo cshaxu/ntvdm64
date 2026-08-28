@@ -1,0 +1,56 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\floppy.obj \
+    $(_OBJ_DIR)\alpha\floppy_i.obj \
+    $(_OBJ_DIR)\alpha\diskbios.obj \
+    $(_OBJ_DIR)\alpha\fdisk.obj \
+    $(_OBJ_DIR)\alpha\fla.obj \
+    $(_OBJ_DIR)\alpha\gfi.obj \
+    $(_OBJ_DIR)\alpha\gfi_ibm.obj \
+    $(_OBJ_DIR)\alpha\gfi_mpty.obj \
+    $(_OBJ_DIR)\alpha\gfi_sflp.obj \
+    $(_OBJ_DIR)\alpha\gfi_test.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\floppy.obj \
+    $(_OBJ_DIR)\mips\floppy_i.obj \
+    $(_OBJ_DIR)\mips\diskbios.obj \
+    $(_OBJ_DIR)\mips\fdisk.obj \
+    $(_OBJ_DIR)\mips\fla.obj \
+    $(_OBJ_DIR)\mips\gfi.obj \
+    $(_OBJ_DIR)\mips\gfi_ibm.obj \
+    $(_OBJ_DIR)\mips\gfi_mpty.obj \
+    $(_OBJ_DIR)\mips\gfi_sflp.obj \
+    $(_OBJ_DIR)\mips\gfi_test.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\floppy.obj \
+    $(_OBJ_DIR)\i386\floppy_i.obj \
+    $(_OBJ_DIR)\i386\diskbios.obj \
+    $(_OBJ_DIR)\i386\fdisk.obj \
+    $(_OBJ_DIR)\i386\fla.obj \
+    $(_OBJ_DIR)\i386\gfi.obj \
+    $(_OBJ_DIR)\i386\gfi_ibm.obj \
+    $(_OBJ_DIR)\i386\gfi_mpty.obj \
+    $(_OBJ_DIR)\i386\gfi_sflp.obj \
+    $(_OBJ_DIR)\i386\gfi_test.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\floppy.obj \
+    $(_OBJ_DIR)\ppc\floppy_i.obj \
+    $(_OBJ_DIR)\ppc\diskbios.obj \
+    $(_OBJ_DIR)\ppc\fdisk.obj \
+    $(_OBJ_DIR)\ppc\fla.obj \
+    $(_OBJ_DIR)\ppc\gfi.obj \
+    $(_OBJ_DIR)\ppc\gfi_ibm.obj \
+    $(_OBJ_DIR)\ppc\gfi_mpty.obj \
+    $(_OBJ_DIR)\ppc\gfi_sflp.obj \
+    $(_OBJ_DIR)\ppc\gfi_test.obj
+
+PASS0_PPC_OBJECTS=
+

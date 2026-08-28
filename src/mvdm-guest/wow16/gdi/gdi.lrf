@@ -1,0 +1,5 @@
+gdi.obj+layer.obj+muldiv.obj+fontres.obj+sort.obj 
+gdi.exe
+gdi /map /align:16 /LI
+..\lib\snocrtd.lib ..\lib\libw.lib /nod
+gdi;

@@ -1,0 +1,5 @@
+wowdeb.obj
+wowdeb /map /stack:8192 /align:16 /LI
+wowdeb
+..\lib\snocrt.lib ..\lib\libw.lib /nod
+wowdeb;

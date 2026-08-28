@@ -1,0 +1,72 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\bios.obj \
+    $(_OBJ_DIR)\alpha\cmos_bis.obj \
+    $(_OBJ_DIR)\alpha\cntlbop.obj \
+    $(_OBJ_DIR)\alpha\emm_fncs.obj \
+    $(_OBJ_DIR)\alpha\reset.obj \
+    $(_OBJ_DIR)\alpha\rom_basc.obj \
+    $(_OBJ_DIR)\alpha\rtc_bios.obj \
+    $(_OBJ_DIR)\alpha\slave_bs.obj \
+    $(_OBJ_DIR)\alpha\tape_io.obj \
+    $(_OBJ_DIR)\alpha\equipmnt.obj \
+    $(_OBJ_DIR)\alpha\ill_bop.obj \
+    $(_OBJ_DIR)\alpha\build_id.obj \
+    $(_OBJ_DIR)\alpha\virtual.obj \
+    $(_OBJ_DIR)\alpha\mem_size.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\bios.obj \
+    $(_OBJ_DIR)\mips\cmos_bis.obj \
+    $(_OBJ_DIR)\mips\cntlbop.obj \
+    $(_OBJ_DIR)\mips\emm_fncs.obj \
+    $(_OBJ_DIR)\mips\reset.obj \
+    $(_OBJ_DIR)\mips\rom_basc.obj \
+    $(_OBJ_DIR)\mips\rtc_bios.obj \
+    $(_OBJ_DIR)\mips\slave_bs.obj \
+    $(_OBJ_DIR)\mips\tape_io.obj \
+    $(_OBJ_DIR)\mips\equipmnt.obj \
+    $(_OBJ_DIR)\mips\ill_bop.obj \
+    $(_OBJ_DIR)\mips\build_id.obj \
+    $(_OBJ_DIR)\mips\virtual.obj \
+    $(_OBJ_DIR)\mips\mem_size.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\bios.obj \
+    $(_OBJ_DIR)\i386\cmos_bis.obj \
+    $(_OBJ_DIR)\i386\cntlbop.obj \
+    $(_OBJ_DIR)\i386\emm_fncs.obj \
+    $(_OBJ_DIR)\i386\reset.obj \
+    $(_OBJ_DIR)\i386\rom_basc.obj \
+    $(_OBJ_DIR)\i386\rtc_bios.obj \
+    $(_OBJ_DIR)\i386\slave_bs.obj \
+    $(_OBJ_DIR)\i386\tape_io.obj \
+    $(_OBJ_DIR)\i386\equipmnt.obj \
+    $(_OBJ_DIR)\i386\ill_bop.obj \
+    $(_OBJ_DIR)\i386\build_id.obj \
+    $(_OBJ_DIR)\i386\virtual.obj \
+    $(_OBJ_DIR)\i386\mem_size.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\bios.obj \
+    $(_OBJ_DIR)\ppc\cmos_bis.obj \
+    $(_OBJ_DIR)\ppc\cntlbop.obj \
+    $(_OBJ_DIR)\ppc\emm_fncs.obj \
+    $(_OBJ_DIR)\ppc\reset.obj \
+    $(_OBJ_DIR)\ppc\rom_basc.obj \
+    $(_OBJ_DIR)\ppc\rtc_bios.obj \
+    $(_OBJ_DIR)\ppc\slave_bs.obj \
+    $(_OBJ_DIR)\ppc\tape_io.obj \
+    $(_OBJ_DIR)\ppc\equipmnt.obj \
+    $(_OBJ_DIR)\ppc\ill_bop.obj \
+    $(_OBJ_DIR)\ppc\build_id.obj \
+    $(_OBJ_DIR)\ppc\virtual.obj \
+    $(_OBJ_DIR)\ppc\mem_size.obj
+
+PASS0_PPC_OBJECTS=
+

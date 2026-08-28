@@ -1,0 +1,80 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\dem.obj \
+    $(_OBJ_DIR)\alpha\demfcb.obj \
+    $(_OBJ_DIR)\alpha\demdata.obj \
+    $(_OBJ_DIR)\alpha\demdir.obj \
+    $(_OBJ_DIR)\alpha\demdisp.obj \
+    $(_OBJ_DIR)\alpha\demerror.obj \
+    $(_OBJ_DIR)\alpha\demfile.obj \
+    $(_OBJ_DIR)\alpha\demgset.obj \
+    $(_OBJ_DIR)\alpha\demhndl.obj \
+    $(_OBJ_DIR)\alpha\demioctl.obj \
+    $(_OBJ_DIR)\alpha\demlock.obj \
+    $(_OBJ_DIR)\alpha\demmisc.obj \
+    $(_OBJ_DIR)\alpha\demmsg.obj \
+    $(_OBJ_DIR)\alpha\demsrch.obj \
+    $(_OBJ_DIR)\alpha\demdasd.obj \
+    $(_OBJ_DIR)\alpha\demlabel.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\dem.obj \
+    $(_OBJ_DIR)\mips\demfcb.obj \
+    $(_OBJ_DIR)\mips\demdata.obj \
+    $(_OBJ_DIR)\mips\demdir.obj \
+    $(_OBJ_DIR)\mips\demdisp.obj \
+    $(_OBJ_DIR)\mips\demerror.obj \
+    $(_OBJ_DIR)\mips\demfile.obj \
+    $(_OBJ_DIR)\mips\demgset.obj \
+    $(_OBJ_DIR)\mips\demhndl.obj \
+    $(_OBJ_DIR)\mips\demioctl.obj \
+    $(_OBJ_DIR)\mips\demlock.obj \
+    $(_OBJ_DIR)\mips\demmisc.obj \
+    $(_OBJ_DIR)\mips\demmsg.obj \
+    $(_OBJ_DIR)\mips\demsrch.obj \
+    $(_OBJ_DIR)\mips\demdasd.obj \
+    $(_OBJ_DIR)\mips\demlabel.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\dem.obj \
+    $(_OBJ_DIR)\i386\demfcb.obj \
+    $(_OBJ_DIR)\i386\demdata.obj \
+    $(_OBJ_DIR)\i386\demdir.obj \
+    $(_OBJ_DIR)\i386\demdisp.obj \
+    $(_OBJ_DIR)\i386\demerror.obj \
+    $(_OBJ_DIR)\i386\demfile.obj \
+    $(_OBJ_DIR)\i386\demgset.obj \
+    $(_OBJ_DIR)\i386\demhndl.obj \
+    $(_OBJ_DIR)\i386\demioctl.obj \
+    $(_OBJ_DIR)\i386\demlock.obj \
+    $(_OBJ_DIR)\i386\demmisc.obj \
+    $(_OBJ_DIR)\i386\demmsg.obj \
+    $(_OBJ_DIR)\i386\demsrch.obj \
+    $(_OBJ_DIR)\i386\demdasd.obj \
+    $(_OBJ_DIR)\i386\demlabel.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\dem.obj \
+    $(_OBJ_DIR)\ppc\demfcb.obj \
+    $(_OBJ_DIR)\ppc\demdata.obj \
+    $(_OBJ_DIR)\ppc\demdir.obj \
+    $(_OBJ_DIR)\ppc\demdisp.obj \
+    $(_OBJ_DIR)\ppc\demerror.obj \
+    $(_OBJ_DIR)\ppc\demfile.obj \
+    $(_OBJ_DIR)\ppc\demgset.obj \
+    $(_OBJ_DIR)\ppc\demhndl.obj \
+    $(_OBJ_DIR)\ppc\demioctl.obj \
+    $(_OBJ_DIR)\ppc\demlock.obj \
+    $(_OBJ_DIR)\ppc\demmisc.obj \
+    $(_OBJ_DIR)\ppc\demmsg.obj \
+    $(_OBJ_DIR)\ppc\demsrch.obj \
+    $(_OBJ_DIR)\ppc\demdasd.obj \
+    $(_OBJ_DIR)\ppc\demlabel.obj
+
+PASS0_PPC_OBJECTS=
+

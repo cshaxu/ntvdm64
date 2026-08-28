@@ -1,0 +1,5 @@
+sound.obj 
+sound.exe/align:16
+sound /map /align:16 /LI
+..\..\lib\libw.lib ..\..\lib\snocrtd.lib /map /nod
+sound;

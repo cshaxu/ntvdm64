@@ -1,0 +1,5 @@
+mouse.obj 
+mouse.exe
+mouse /map /align:16 /LI
+..\..\lib\libw.lib ..\..\lib\snocrtd.lib /nod
+mouse;

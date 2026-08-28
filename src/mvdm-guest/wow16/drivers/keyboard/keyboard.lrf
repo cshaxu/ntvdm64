@@ -1,0 +1,5 @@
+keyboard.obj kbdlocal.obj 
+keyboard.exe/align:16
+keyboard /map /align:16 /LI
+..\..\lib\libw.lib ..\..\lib\snocrtd.lib /map /nod
+keyboard;

@@ -1,0 +1,36 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\com.obj \
+    $(_OBJ_DIR)\alpha\printer.obj \
+    $(_OBJ_DIR)\alpha\printer_.obj \
+    $(_OBJ_DIR)\alpha\prt_scrn.obj \
+    $(_OBJ_DIR)\alpha\rs232_io.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\com.obj \
+    $(_OBJ_DIR)\mips\printer.obj \
+    $(_OBJ_DIR)\mips\printer_.obj \
+    $(_OBJ_DIR)\mips\prt_scrn.obj \
+    $(_OBJ_DIR)\mips\rs232_io.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\com.obj \
+    $(_OBJ_DIR)\i386\printer.obj \
+    $(_OBJ_DIR)\i386\printer_.obj \
+    $(_OBJ_DIR)\i386\prt_scrn.obj \
+    $(_OBJ_DIR)\i386\rs232_io.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\com.obj \
+    $(_OBJ_DIR)\ppc\printer.obj \
+    $(_OBJ_DIR)\ppc\printer_.obj \
+    $(_OBJ_DIR)\ppc\prt_scrn.obj \
+    $(_OBJ_DIR)\ppc\rs232_io.obj
+
+PASS0_PPC_OBJECTS=
+

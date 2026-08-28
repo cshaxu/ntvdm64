@@ -1,0 +1,5 @@
+shell.obj dragdrop.obj
+shell.dll
+shell /map /LI
+..\lib\libw.lib /nod 
+shell;

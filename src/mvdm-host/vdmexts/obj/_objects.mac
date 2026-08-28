@@ -1,0 +1,87 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\vdmexts.res \
+    $(_OBJ_DIR)\alpha\data.obj \
+    $(_OBJ_DIR)\alpha\debug.obj \
+    $(_OBJ_DIR)\alpha\disasm.obj \
+    $(_OBJ_DIR)\alpha\heap.obj \
+    $(_OBJ_DIR)\alpha\help.obj \
+    $(_OBJ_DIR)\alpha\misc.obj \
+    $(_OBJ_DIR)\alpha\platform.obj \
+    $(_OBJ_DIR)\alpha\reflect.obj \
+    $(_OBJ_DIR)\alpha\stack.obj \
+    $(_OBJ_DIR)\alpha\sym.obj \
+    $(_OBJ_DIR)\alpha\system.obj \
+    $(_OBJ_DIR)\alpha\trace.obj \
+    $(_OBJ_DIR)\alpha\util.obj \
+    $(_OBJ_DIR)\alpha\wow.obj \
+    $(_OBJ_DIR)\alpha\wowprof.obj \
+    $(_OBJ_DIR)\alpha\dib.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\vdmexts.res \
+    $(_OBJ_DIR)\mips\data.obj \
+    $(_OBJ_DIR)\mips\debug.obj \
+    $(_OBJ_DIR)\mips\disasm.obj \
+    $(_OBJ_DIR)\mips\heap.obj \
+    $(_OBJ_DIR)\mips\help.obj \
+    $(_OBJ_DIR)\mips\misc.obj \
+    $(_OBJ_DIR)\mips\platform.obj \
+    $(_OBJ_DIR)\mips\reflect.obj \
+    $(_OBJ_DIR)\mips\stack.obj \
+    $(_OBJ_DIR)\mips\sym.obj \
+    $(_OBJ_DIR)\mips\system.obj \
+    $(_OBJ_DIR)\mips\trace.obj \
+    $(_OBJ_DIR)\mips\util.obj \
+    $(_OBJ_DIR)\mips\wow.obj \
+    $(_OBJ_DIR)\mips\wowprof.obj \
+    $(_OBJ_DIR)\mips\dib.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\vdmexts.res \
+    $(_OBJ_DIR)\i386\profile.obj \
+    $(_OBJ_DIR)\i386\vdmtib.obj \
+    $(_OBJ_DIR)\i386\regs.obj \
+    $(_OBJ_DIR)\i386\data.obj \
+    $(_OBJ_DIR)\i386\debug.obj \
+    $(_OBJ_DIR)\i386\disasm.obj \
+    $(_OBJ_DIR)\i386\heap.obj \
+    $(_OBJ_DIR)\i386\help.obj \
+    $(_OBJ_DIR)\i386\misc.obj \
+    $(_OBJ_DIR)\i386\platform.obj \
+    $(_OBJ_DIR)\i386\reflect.obj \
+    $(_OBJ_DIR)\i386\stack.obj \
+    $(_OBJ_DIR)\i386\sym.obj \
+    $(_OBJ_DIR)\i386\system.obj \
+    $(_OBJ_DIR)\i386\trace.obj \
+    $(_OBJ_DIR)\i386\util.obj \
+    $(_OBJ_DIR)\i386\wow.obj \
+    $(_OBJ_DIR)\i386\wowprof.obj \
+    $(_OBJ_DIR)\i386\dib.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\vdmexts.res \
+    $(_OBJ_DIR)\ppc\data.obj \
+    $(_OBJ_DIR)\ppc\debug.obj \
+    $(_OBJ_DIR)\ppc\disasm.obj \
+    $(_OBJ_DIR)\ppc\heap.obj \
+    $(_OBJ_DIR)\ppc\help.obj \
+    $(_OBJ_DIR)\ppc\misc.obj \
+    $(_OBJ_DIR)\ppc\platform.obj \
+    $(_OBJ_DIR)\ppc\reflect.obj \
+    $(_OBJ_DIR)\ppc\stack.obj \
+    $(_OBJ_DIR)\ppc\sym.obj \
+    $(_OBJ_DIR)\ppc\system.obj \
+    $(_OBJ_DIR)\ppc\trace.obj \
+    $(_OBJ_DIR)\ppc\util.obj \
+    $(_OBJ_DIR)\ppc\wow.obj \
+    $(_OBJ_DIR)\ppc\wowprof.obj \
+    $(_OBJ_DIR)\ppc\dib.obj
+
+PASS0_PPC_OBJECTS=
+

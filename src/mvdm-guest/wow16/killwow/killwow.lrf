@@ -1,0 +1,5 @@
+killwow.obj 
+KillWOW /map /stack:8192 /align:16 /LI
+KillWOW
+..\lib\snocrt.lib ..\lib\libw.lib /nod
+KillWOW;

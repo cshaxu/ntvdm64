@@ -1,0 +1,5 @@
+display.obj 
+display.exe
+display /map /align:16 /LI
+..\..\lib\libw.lib ..\..\lib\snocrt.lib /nod
+display;

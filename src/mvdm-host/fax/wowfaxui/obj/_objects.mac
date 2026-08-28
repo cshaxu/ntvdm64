@@ -1,0 +1,36 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\wowfaxui.res \
+    $(_OBJ_DIR)\alpha\wfhelper.obj \
+    $(_OBJ_DIR)\alpha\wfsheets.obj \
+    $(_OBJ_DIR)\alpha\wfupgrad.obj \
+    $(_OBJ_DIR)\alpha\wowfaxui.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\wowfaxui.res \
+    $(_OBJ_DIR)\mips\wfhelper.obj \
+    $(_OBJ_DIR)\mips\wfsheets.obj \
+    $(_OBJ_DIR)\mips\wfupgrad.obj \
+    $(_OBJ_DIR)\mips\wowfaxui.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\wowfaxui.res \
+    $(_OBJ_DIR)\i386\wfhelper.obj \
+    $(_OBJ_DIR)\i386\wfsheets.obj \
+    $(_OBJ_DIR)\i386\wfupgrad.obj \
+    $(_OBJ_DIR)\i386\wowfaxui.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\wowfaxui.res \
+    $(_OBJ_DIR)\ppc\wfhelper.obj \
+    $(_OBJ_DIR)\ppc\wfsheets.obj \
+    $(_OBJ_DIR)\ppc\wfupgrad.obj \
+    $(_OBJ_DIR)\ppc\wowfaxui.obj
+
+PASS0_PPC_OBJECTS=
+

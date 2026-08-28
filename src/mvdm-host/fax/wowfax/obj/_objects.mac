@@ -1,0 +1,24 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\wowfax.res \
+    $(_OBJ_DIR)\alpha\wowfax.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\wowfax.res \
+    $(_OBJ_DIR)\mips\wowfax.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\wowfax.res \
+    $(_OBJ_DIR)\i386\wowfax.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\wowfax.res \
+    $(_OBJ_DIR)\ppc\wowfax.obj
+
+PASS0_PPC_OBJECTS=
+

@@ -1,0 +1,77 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\debug.obj \
+    $(_OBJ_DIR)\alpha\dpmi32.obj \
+    $(_OBJ_DIR)\alpha\dpmiint.obj \
+    $(_OBJ_DIR)\alpha\dpmiselr.obj \
+    $(_OBJ_DIR)\alpha\buffer.obj \
+    $(_OBJ_DIR)\alpha\data.obj \
+    $(_OBJ_DIR)\alpha\int21map.obj \
+    $(_OBJ_DIR)\alpha\modesw.obj \
+    $(_OBJ_DIR)\alpha\register.obj \
+    $(_OBJ_DIR)\alpha\savestat.obj \
+    $(_OBJ_DIR)\alpha\stack.obj \
+    $(_OBJ_DIR)\alpha\vxd.obj \
+    $(_OBJ_DIR)\alpha\xmem.obj \
+    $(_OBJ_DIR)\alpha\dpmimemr.obj \
+    $(_OBJ_DIR)\alpha\dpmimscr.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\debug.obj \
+    $(_OBJ_DIR)\mips\dpmi32.obj \
+    $(_OBJ_DIR)\mips\dpmiint.obj \
+    $(_OBJ_DIR)\mips\dpmiselr.obj \
+    $(_OBJ_DIR)\mips\buffer.obj \
+    $(_OBJ_DIR)\mips\data.obj \
+    $(_OBJ_DIR)\mips\int21map.obj \
+    $(_OBJ_DIR)\mips\modesw.obj \
+    $(_OBJ_DIR)\mips\register.obj \
+    $(_OBJ_DIR)\mips\savestat.obj \
+    $(_OBJ_DIR)\mips\stack.obj \
+    $(_OBJ_DIR)\mips\vxd.obj \
+    $(_OBJ_DIR)\mips\xmem.obj \
+    $(_OBJ_DIR)\mips\dpmimemr.obj \
+    $(_OBJ_DIR)\mips\dpmimscr.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\dpmi386.obj \
+    $(_OBJ_DIR)\i386\dpmimem.obj \
+    $(_OBJ_DIR)\i386\dpmimisc.obj \
+    $(_OBJ_DIR)\i386\debug.obj \
+    $(_OBJ_DIR)\i386\dpmi32.obj \
+    $(_OBJ_DIR)\i386\dpmiint.obj \
+    $(_OBJ_DIR)\i386\dpmiselr.obj \
+    $(_OBJ_DIR)\i386\buffer.obj \
+    $(_OBJ_DIR)\i386\data.obj \
+    $(_OBJ_DIR)\i386\int21map.obj \
+    $(_OBJ_DIR)\i386\modesw.obj \
+    $(_OBJ_DIR)\i386\register.obj \
+    $(_OBJ_DIR)\i386\savestat.obj \
+    $(_OBJ_DIR)\i386\stack.obj \
+    $(_OBJ_DIR)\i386\vxd.obj \
+    $(_OBJ_DIR)\i386\xmem.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\debug.obj \
+    $(_OBJ_DIR)\ppc\dpmi32.obj \
+    $(_OBJ_DIR)\ppc\dpmiint.obj \
+    $(_OBJ_DIR)\ppc\dpmiselr.obj \
+    $(_OBJ_DIR)\ppc\buffer.obj \
+    $(_OBJ_DIR)\ppc\data.obj \
+    $(_OBJ_DIR)\ppc\int21map.obj \
+    $(_OBJ_DIR)\ppc\modesw.obj \
+    $(_OBJ_DIR)\ppc\register.obj \
+    $(_OBJ_DIR)\ppc\savestat.obj \
+    $(_OBJ_DIR)\ppc\stack.obj \
+    $(_OBJ_DIR)\ppc\vxd.obj \
+    $(_OBJ_DIR)\ppc\xmem.obj \
+    $(_OBJ_DIR)\ppc\dpmimemr.obj \
+    $(_OBJ_DIR)\ppc\dpmimscr.obj
+
+PASS0_PPC_OBJECTS=
+

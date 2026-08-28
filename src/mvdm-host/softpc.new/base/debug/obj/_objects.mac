@@ -1,0 +1,45 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\debuggng.obj \
+    $(_OBJ_DIR)\alpha\ega_dump.obj \
+    $(_OBJ_DIR)\alpha\btrace.obj \
+    $(_OBJ_DIR)\alpha\trace.obj \
+    $(_OBJ_DIR)\alpha\profile.obj \
+    $(_OBJ_DIR)\alpha\pigyoda.obj \
+    $(_OBJ_DIR)\alpha\yoda.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\debuggng.obj \
+    $(_OBJ_DIR)\mips\ega_dump.obj \
+    $(_OBJ_DIR)\mips\btrace.obj \
+    $(_OBJ_DIR)\mips\trace.obj \
+    $(_OBJ_DIR)\mips\profile.obj \
+    $(_OBJ_DIR)\mips\pigyoda.obj \
+    $(_OBJ_DIR)\mips\yoda.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\debuggng.obj \
+    $(_OBJ_DIR)\i386\ega_dump.obj \
+    $(_OBJ_DIR)\i386\btrace.obj \
+    $(_OBJ_DIR)\i386\trace.obj \
+    $(_OBJ_DIR)\i386\profile.obj \
+    $(_OBJ_DIR)\i386\pigyoda.obj \
+    $(_OBJ_DIR)\i386\yoda.obj \
+    $(_OBJ_DIR)\i386\dasm.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\debuggng.obj \
+    $(_OBJ_DIR)\ppc\ega_dump.obj \
+    $(_OBJ_DIR)\ppc\btrace.obj \
+    $(_OBJ_DIR)\ppc\trace.obj \
+    $(_OBJ_DIR)\ppc\profile.obj \
+    $(_OBJ_DIR)\ppc\pigyoda.obj \
+    $(_OBJ_DIR)\ppc\yoda.obj
+
+PASS0_PPC_OBJECTS=
+

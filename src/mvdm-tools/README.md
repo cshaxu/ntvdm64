@@ -10,6 +10,11 @@ this skeleton. A dedicated hash-verified `git mv` packet must establish this
 component. Independent tool builds may later be admitted, but this component
 may never become a main-program or MVDM host-runtime link input.
 
+T301 S1 P21 additionally preserves missing byte-exact `opennt-src-2` tool
+products under their original-relative paths.  They are retained only as
+historical tool evidence and remain outside the main-program link graph; see
+[`m0-t301-s1-opennt-src-2-mvdm-extra-import-manifest.tsv`](../../docs/etc/operations/m0-t301-s1-opennt-src-2-mvdm-extra-import-manifest.tsv).
+
 ## Divergence register
 
 None. No upstream source has entered this root yet.

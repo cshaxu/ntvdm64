@@ -4,6 +4,13 @@
 
 **Active: M0 T301 S1.**
 
+**T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
+exception for `opennt-src-2`: import every missing original-relative MVDM path,
+including historical build products, into the existing `mvdm-*` component
+roots without overwriting selected files.  The supplement is byte-exact
+provenance/product evidence only; it does not alter the two-root BFS source
+union, build graph or runtime inputs.  A per-file SHA-256 manifest is required.
+
 M0 T300/S1 is closed. T301’s subsequent source-language correction supersedes
 its provisional lexical count: the current selected OpenNT-MVDM zero closure
 has 12,110 physical definition identities and 4,265 explicitly retained
@@ -127,16 +134,16 @@ not package/provider admissions. See the [P20 signature evidence]
 | --- | --- |
 | Identifier Mode | `M0 T301 S1`, Ordinary Mode with single-person dual-role implementation and review. |
 | Admission And Approval | Owner’s active goal is “开展一度审计”; after the P16/P17 true-zero correction, the owner directed continuation from `zero-ledger1.tsv` through the bounded P18 physical definition-presence pass. |
-| Objective | Preserve lawful selected zero evidence; give every `one-ledger1` external direct call a physical definition/source-absence result; then prove original caller declaration/linkage binding before any callee body may enter two-degree BFS. |
-| Non-goals | No callee-body traversal or second-degree expansion; no source import, adapter/provider/overlay implementation, build/link admission, BOP enablement, runtime route or Bochs change. |
+| Objective | Preserve lawful selected zero evidence; give every `one-ledger1` external direct call a physical definition/source-absence result; then prove original caller declaration/linkage binding before any callee body may enter two-degree BFS. P21 additionally preserves every missing `opennt-src-2` MVDM path as byte-exact mirror evidence. |
+| Non-goals | No callee-body traversal or second-degree expansion; no adapter/provider/overlay implementation, build/link admission, BOP enablement, runtime route or Bochs change. The P21 import does not add a third BFS source-definition root. |
 | Reference Baseline | Immutable 12,202-definition historical ledger; P16's `zero-ledger0.tsv`; P17's selected 3,720-definition `zero-ledger1.tsv`; P18's definition resolution; and `one-ledger1.tsv` with its four-row explicit unparsed-body record. See the [legality plan](etc/operations/m0-t301-s1-zero-degree-legality-audit-plan-001.md), [P17 SoftPC cut](etc/evidence/m0-t301-s1-p17-softpc-second-executor-cut-001.md), [P18 plan](etc/operations/m0-t301-s1-one-ledger1-resolution-plan-001.md) and [P19 plan](etc/operations/m0-t301-s1-one-ledger1-declaration-binding-plan-001.md). |
-| Files And ABI Surface | T301 audit generators, zero/one-degree source ledgers/evidence, Status and documentation inventory only. No production ABI changes. |
+| Files And ABI Surface | T301 audit generators, zero/one-degree source ledgers/evidence, byte-exact missing `opennt-src-2` MVDM mirror products, Status and documentation inventory only. No production ABI changes. |
 | Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; physical identity rather than name-only matching; original-source-first recovery; `src.old` exclusion. |
 | Verification | Generation assertions for one row per zero identity, true external one-degree call and P18 candidate; physical source-path/hash/line/linkage/declaration review; source-root and `src.old` exclusion scans; documentation inventory/governance checks; and `git diff --check`. |
 | Expected Markers | Explicit residual conditional/unbalanced zero rows; physical candidate and declaration identities rather than spelling merges; no static cross-translation-unit admission; no callee body read. |
 | Asset Needs | Approved OpenNT/OpenNT-4.5 source union, frozen T300 ledgers, Node 22/Ripgrep parser tooling, and current documentation authorities. |
 | Reporting Requirements | Report structurally-valid roots/rebased definitions, conditionally unresolved bodies, unparsed bodies, invalid source/linkage rows and every unresolved physical identity. Distinguish source-graph legality from product/runtime eligibility. |
-| Stop Conditions | Missing or conflicting provenance; a requested callee-body/second-degree interpretation; a static cross-translation-unit target treated as resolved; an attempted provider/import/build change; use of current product bodies or `src.old` as source input; or an owner/package-boundary change. |
+| Stop Conditions | Missing or conflicting provenance; a requested callee-body/second-degree interpretation; a static cross-translation-unit target treated as resolved; an attempted provider/build change; use of current product bodies or `src.old` as source input; or an owner/package-boundary change. P21 permits only the owner-approved byte-exact non-overwrite import described above. |
 | Exit Criteria | Every selected zero identity has an explicit legality result; residual zero body/variant rows are explicit; every true external `one-ledger1` call has a physical original definition/source-absence result; every P18 source candidate has a declaration/linkage disposition; evidence and gates pass. |
 | Original Owner Request | “开展一度审计”。 |
 | Similar-Issue Sweep | Historical 0/1-degree ledgers, selected original source variants, macros/function pointers/assembly declarations, public Win32/CRT leaves, private CSR/kernel boundaries, support/tools/firmware guest callers, and accidental `src.old` or current-product inputs. |

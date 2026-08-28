@@ -1,0 +1,60 @@
+ALPHA_OBJECTS= \
+    $(_OBJ_DIR)\alpha\cmd.obj \
+    $(_OBJ_DIR)\alpha\cmddata.obj \
+    $(_OBJ_DIR)\alpha\cmddisp.obj \
+    $(_OBJ_DIR)\alpha\cmdexec.obj \
+    $(_OBJ_DIR)\alpha\cmdexit.obj \
+    $(_OBJ_DIR)\alpha\cmdmisc.obj \
+    $(_OBJ_DIR)\alpha\cmdpif.obj \
+    $(_OBJ_DIR)\alpha\cmdredir.obj \
+    $(_OBJ_DIR)\alpha\cmdconf.obj \
+    $(_OBJ_DIR)\alpha\cmdkeyb.obj \
+    $(_OBJ_DIR)\alpha\cmdenv.obj
+
+PASS0_ALPHA_OBJECTS=
+
+MIPS_OBJECTS= \
+    $(_OBJ_DIR)\mips\cmd.obj \
+    $(_OBJ_DIR)\mips\cmddata.obj \
+    $(_OBJ_DIR)\mips\cmddisp.obj \
+    $(_OBJ_DIR)\mips\cmdexec.obj \
+    $(_OBJ_DIR)\mips\cmdexit.obj \
+    $(_OBJ_DIR)\mips\cmdmisc.obj \
+    $(_OBJ_DIR)\mips\cmdpif.obj \
+    $(_OBJ_DIR)\mips\cmdredir.obj \
+    $(_OBJ_DIR)\mips\cmdconf.obj \
+    $(_OBJ_DIR)\mips\cmdkeyb.obj \
+    $(_OBJ_DIR)\mips\cmdenv.obj
+
+PASS0_MIPS_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\cmd.obj \
+    $(_OBJ_DIR)\i386\cmddata.obj \
+    $(_OBJ_DIR)\i386\cmddisp.obj \
+    $(_OBJ_DIR)\i386\cmdexec.obj \
+    $(_OBJ_DIR)\i386\cmdexit.obj \
+    $(_OBJ_DIR)\i386\cmdmisc.obj \
+    $(_OBJ_DIR)\i386\cmdpif.obj \
+    $(_OBJ_DIR)\i386\cmdredir.obj \
+    $(_OBJ_DIR)\i386\cmdconf.obj \
+    $(_OBJ_DIR)\i386\cmdkeyb.obj \
+    $(_OBJ_DIR)\i386\cmdenv.obj
+
+PASS0_386_OBJECTS=
+
+PPC_OBJECTS= \
+    $(_OBJ_DIR)\ppc\cmd.obj \
+    $(_OBJ_DIR)\ppc\cmddata.obj \
+    $(_OBJ_DIR)\ppc\cmddisp.obj \
+    $(_OBJ_DIR)\ppc\cmdexec.obj \
+    $(_OBJ_DIR)\ppc\cmdexit.obj \
+    $(_OBJ_DIR)\ppc\cmdmisc.obj \
+    $(_OBJ_DIR)\ppc\cmdpif.obj \
+    $(_OBJ_DIR)\ppc\cmdredir.obj \
+    $(_OBJ_DIR)\ppc\cmdconf.obj \
+    $(_OBJ_DIR)\ppc\cmdkeyb.obj \
+    $(_OBJ_DIR)\ppc\cmdenv.obj
+
+PASS0_PPC_OBJECTS=
+

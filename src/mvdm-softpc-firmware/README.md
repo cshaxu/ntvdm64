@@ -17,6 +17,11 @@ app-selected host runtime edge. Any later source composition remains governed
 by the monitor/keyboard owner package; only an admitted `adapter-bochs`
 manifest may select a firmware image input.
 
+T301 S1 P21 also preserves missing byte-exact `opennt-src-2` firmware-adjacent
+products at their original-relative paths.  They add no selected firmware or
+machine behavior; see the per-file provenance record in
+[`m0-t301-s1-opennt-src-2-mvdm-extra-import-manifest.tsv`](../../docs/etc/operations/m0-t301-s1-opennt-src-2-mvdm-extra-import-manifest.tsv).
+
 ## Divergence register
 
 None. The re-rooted keymouse files are exact upstream mirrors with no

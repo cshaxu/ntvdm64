@@ -29,6 +29,12 @@ manifests. Firmware-owned `softpc.new/base/keymouse` is intentionally rooted
 in `mvdm-softpc-firmware` instead. This physical layout is not a final
 runtime-owner claim.
 
+T301 S1 P21 additionally preserves missing byte-exact historical build
+products from `opennt-src-2` under their original-relative host paths.  These
+files are source/product evidence only: they are not host build, link or
+runtime-discovery inputs.  The complete per-file provenance is in
+[`m0-t301-s1-opennt-src-2-mvdm-extra-import-manifest.tsv`](../../docs/etc/operations/m0-t301-s1-opennt-src-2-mvdm-extra-import-manifest.tsv).
+
 ## Divergence register
 
 | ID | Original purpose | Reason | Implementation | Files |

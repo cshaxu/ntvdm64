@@ -100,3 +100,16 @@ and never contain a local surrogate, native resource or guest pointer.
 User-approved binary research artifacts must live below `artifacts/`, include
 a source/role/hash/size/redistribution manifest, and remain outside source,
 default build inputs, runtime discovery, and release packaging.
+
+### OpenNT-src-2 MVDM supplement exception
+
+The owner has expressly approved one bounded exception for
+`O:\repos.external\opennt-src-2\nt\private\mvdm`: paths absent from the
+current `mvdm-*` mirrors may be copied byte-for-byte into their corresponding
+original-relative component path, including historical `.obj`, `.lib`,
+`.exe`, `.dll`, map, symbol, log and build-control products.  This is a
+mirror-completeness exception, not a source-selection, build or runtime
+admission.  It must never overwrite an existing selected/mirrored file; every
+row carries source path, SHA-256, size, target path and its no-build/no-runtime
+disposition in the import manifest.  The OpenNT/OpenNT-4.5 union remains the
+only T301 BFS source-definition input unless separately re-admitted.

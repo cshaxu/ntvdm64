@@ -1,0 +1,5 @@
+system.obj timer.obj 
+system.exe/align:16
+system /map /align:16 /LI
+..\lib\libw.lib /nod
+system;
