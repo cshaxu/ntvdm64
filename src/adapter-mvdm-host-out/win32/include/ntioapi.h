@@ -40,7 +40,8 @@ typedef struct _OPENNT_OBJECT_NAME_INFORMATION {
 } OPENNT_OBJECT_NAME_INFORMATION, *POPENNT_OBJECT_NAME_INFORMATION;
 
 typedef enum _ADAPTER_FILE_INFORMATION_CLASS {
-    AdapterFileBothDirectoryInformation = 3
+    AdapterFileBothDirectoryInformation = 3,
+    AdapterFileAlignmentInformation = 17
 } ADAPTER_FILE_INFORMATION_CLASS;
 
 typedef enum _ADAPTER_FS_INFORMATION_CLASS {
@@ -48,6 +49,7 @@ typedef enum _ADAPTER_FS_INFORMATION_CLASS {
 } ADAPTER_FS_INFORMATION_CLASS;
 
 #define FileBothDirectoryInformation AdapterFileBothDirectoryInformation
+#define FileAlignmentInformation AdapterFileAlignmentInformation
 #define FileFsDeviceInformation AdapterFileFsDeviceInformation
 
 /* Exact reached OpenNT ntioapi.h constants. */
@@ -59,6 +61,9 @@ typedef enum _ADAPTER_FS_INFORMATION_CLASS {
 #endif
 #ifndef FILE_REMOTE_DEVICE
 #define FILE_REMOTE_DEVICE 0x00000010
+#endif
+#ifndef FSCTL_QUERY_FAT_BPB
+#define FSCTL_QUERY_FAT_BPB CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 22, METHOD_BUFFERED, FILE_ANY_ACCESS)
 #endif
 #ifndef SYMBOLIC_LINK_QUERY
 #define SYMBOLIC_LINK_QUERY 0x0001
@@ -72,6 +77,17 @@ typedef enum _ADAPTER_FS_INFORMATION_CLASS {
 #ifndef DOS_DOT
 #define DOS_DOT (L'"')
 #endif
+
+/* Reached unchanged SoftPC fixed-disk source needs this exact NT4 input
+ * layout.  It remains process-local host I/O data and never crosses a guest
+ * or component ABI. */
+typedef struct _FSCTL_QUERY_FAT_BPB_BUFFER {
+    UCHAR First0x24BytesOfBootSector[0x24];
+} FSCTL_QUERY_FAT_BPB_BUFFER, *PFSCTL_QUERY_FAT_BPB_BUFFER;
+
+typedef struct _FILE_ALIGNMENT_INFORMATION {
+    ULONG AlignmentRequirement;
+} FILE_ALIGNMENT_INFORMATION, *PFILE_ALIGNMENT_INFORMATION;
 
 #ifndef STATUS_UNSUCCESSFUL
 #define STATUS_UNSUCCESSFUL ((NTSTATUS)0xC0000001L)
@@ -124,6 +140,23 @@ NTSTATUS NTAPI opennt_NtQueryObject(
     HANDLE Handle, ULONG ObjectInformationClass, PVOID ObjectInformation,
     ULONG ObjectInformationLength, PULONG ReturnLength);
 
+NTSTATUS NTAPI opennt_NtQueryInformationFile(
+    HANDLE FileHandle, POPENNT_IO_STATUS_BLOCK IoStatusBlock,
+    PVOID FileInformation, ULONG Length,
+    ADAPTER_FILE_INFORMATION_CLASS FileInformationClass);
+
+NTSTATUS NTAPI opennt_NtFsControlFile(
+    HANDLE FileHandle, HANDLE Event, PIO_APC_ROUTINE ApcRoutine,
+    PVOID ApcContext, POPENNT_IO_STATUS_BLOCK IoStatusBlock,
+    ULONG FsControlCode, PVOID InputBuffer, ULONG InputBufferLength,
+    PVOID OutputBuffer, ULONG OutputBufferLength);
+
+NTSTATUS NTAPI opennt_NtDeviceIoControlFile(
+    HANDLE FileHandle, HANDLE Event, PIO_APC_ROUTINE ApcRoutine,
+    PVOID ApcContext, POPENNT_IO_STATUS_BLOCK IoStatusBlock,
+    ULONG IoControlCode, PVOID InputBuffer, ULONG InputBufferLength,
+    PVOID OutputBuffer, ULONG OutputBufferLength);
+
 /* DIVERGENCE: current winternl.h defines pointer-sized IO_STATUS_BLOCK on
  * x64, while the imported NT4 DEM contract has a 32-bit Information member.
  * Source uses the original spelling below; wrappers marshal only the
@@ -142,5 +175,8 @@ NTSTATUS NTAPI opennt_NtQueryObject(
 #define NtQueryVolumeInformationFile opennt_NtQueryVolumeInformationFile
 #define NtOpenSymbolicLinkObject opennt_NtOpenSymbolicLinkObject
 #define NtQuerySymbolicLinkObject opennt_NtQuerySymbolicLinkObject
+#define NtQueryInformationFile opennt_NtQueryInformationFile
+#define NtFsControlFile opennt_NtFsControlFile
+#define NtDeviceIoControlFile opennt_NtDeviceIoControlFile
 
 #endif

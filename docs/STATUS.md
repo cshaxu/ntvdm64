@@ -208,6 +208,14 @@ registered `fmstubs.c` immediate `__debugbreak()` default on both host
 architectures; no mapping-backed, cancellation, zero-result, or timer
 replacement remains available for accidental activation.
 
+**T310 S7 P2:** the selected original SoftPC machine candidate now compiles
+and archives its 190/191 x64/x86 Ninja inputs under one source graph: 130
+original CCPU units, BIOS, keymouse, system, support, and fourteen original
+host roots.  The only new work is registered same-shaped Win32/CRT binding
+needed for original `config.c`, `nt_pif.c`, `nt_unix.c`, and `nt_fdisk.c`; it
+adds no controller, console, timer, mapping, or Bochs fallback.  See the
+[interface build evidence](etc/evidence/m0-t310-s7-p2-original-machine-host-interface-build-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove

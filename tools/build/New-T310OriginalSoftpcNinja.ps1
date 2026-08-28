@@ -60,7 +60,7 @@ $supportNames = Get-OriginalSources $supportManifest
 $hostNames = @('nt_cprgs.c', 'nt_cpu.c', 'nt_aorc.c', 'nt_reset.c', 'nt_error.c',
                'nt_msscs.c', 'sim32.c', 'nt_sas.c', 'nt_mem.c', 'nt_umb.c',
                'config.c', 'nt_pif.c', 'nt_unix.c', 'nt_fdisk.c')
-$adapterWin32Names = @('dialog_context.c')
+$adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c')
 $patchNames = @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h')
 $patchBodyNames = @('fmstubs.c')
 $patchEvidenceNames = @('minnt/callconv.patch')
@@ -104,13 +104,14 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 
 $includeRoots = @(
     'src',
-    # The source-shaped modern NT facade must precede the byte-exact OpenNT
-    # declaration mirror: it selects its reached ntioapi subset before the
-    # modern SDK's incompatible winternl declarations can collide with it.
+    # Source-shaped adapter declarations must precede the byte-exact OpenNT
+    # ABI mirror: the selected original sources include nt.h/ntrtl.h/ntioapi.h
+    # by historical short names, while the adapter owns their modern binding.
     'src/adapter-mvdm-host-out/win32/include',
     'src/opennt-abi/source/public/sdk/inc',
     'src/opennt-abi/source/public/internal/base/inc',
     'src/opennt-abi/source/public/internal/windows/inc',
+    'src/opennt-abi/source/private/windows/inc',
     'src/opennt-abi/source/public/ddk/inc',
     'src/mvdm-support/inc',
     # NTVDMx64's original patch script deletes the CCPU-local generated GDP

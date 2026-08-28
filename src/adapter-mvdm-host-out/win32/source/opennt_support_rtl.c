@@ -42,6 +42,7 @@ static OPENNT_SUPPORT_THREAD_STATE *opennt_support_thread(void)
         state->Teb.StaticUnicodeString.MaximumLength = (USHORT)sizeof(state->StaticBuffer);
         state->Parameters.CurrentDirectory.DosPath.Buffer = state->CurrentDirectory;
         state->Parameters.CurrentDirectory.DosPath.MaximumLength = (USHORT)sizeof(state->CurrentDirectory);
+        state->Parameters.ConsoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
         state->Peb.ProcessParameters = &state->Parameters;
         state->Peb.ProcessHeap = GetProcessHeap();
     }

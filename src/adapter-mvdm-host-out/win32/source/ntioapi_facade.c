@@ -16,6 +16,14 @@ typedef NTSTATUS (NTAPI *PFN_NT_OPEN_FILE)(
     PHANDLE, ACCESS_MASK, POBJECT_ATTRIBUTES, PIO_STATUS_BLOCK, ULONG, ULONG);
 typedef NTSTATUS (NTAPI *PFN_NT_QUERY_OBJECT)(
     HANDLE, ULONG, PVOID, ULONG, PULONG);
+typedef NTSTATUS (NTAPI *PFN_NT_QUERY_INFORMATION_FILE)(
+    HANDLE, PIO_STATUS_BLOCK, PVOID, ULONG, ULONG);
+typedef NTSTATUS (NTAPI *PFN_NT_FS_CONTROL_FILE)(
+    HANDLE, HANDLE, PIO_APC_ROUTINE, PVOID, PIO_STATUS_BLOCK, ULONG,
+    PVOID, ULONG, PVOID, ULONG);
+typedef NTSTATUS (NTAPI *PFN_NT_DEVICE_IO_CONTROL_FILE)(
+    HANDLE, HANDLE, PIO_APC_ROUTINE, PVOID, PIO_STATUS_BLOCK, ULONG,
+    PVOID, ULONG, PVOID, ULONG);
 
 static FARPROC ntioapi_lookup(const char *name)
 {
@@ -102,4 +110,50 @@ NTSTATUS NTAPI opennt_NtQueryObject(
     return entry == NULL ? STATUS_NOT_IMPLEMENTED :
         entry(handle, information_class, information, information_length,
               return_length);
+}
+
+NTSTATUS NTAPI opennt_NtQueryInformationFile(
+    HANDLE file, POPENNT_IO_STATUS_BLOCK status, PVOID information,
+    ULONG length, ADAPTER_FILE_INFORMATION_CLASS information_class)
+{
+    IO_STATUS_BLOCK native_status;
+    NTSTATUS result;
+    PFN_NT_QUERY_INFORMATION_FILE entry =
+        (PFN_NT_QUERY_INFORMATION_FILE)ntioapi_lookup("NtQueryInformationFile");
+    if (entry == NULL) return STATUS_NOT_IMPLEMENTED;
+    result = entry(file, &native_status, information, length, (ULONG)information_class);
+    ntioapi_copy_status(status, &native_status);
+    return result;
+}
+
+NTSTATUS NTAPI opennt_NtFsControlFile(
+    HANDLE file, HANDLE event, PIO_APC_ROUTINE apc, PVOID context,
+    POPENNT_IO_STATUS_BLOCK status, ULONG code, PVOID input, ULONG input_length,
+    PVOID output, ULONG output_length)
+{
+    IO_STATUS_BLOCK native_status;
+    NTSTATUS result;
+    PFN_NT_FS_CONTROL_FILE entry =
+        (PFN_NT_FS_CONTROL_FILE)ntioapi_lookup("NtFsControlFile");
+    if (entry == NULL) return STATUS_NOT_IMPLEMENTED;
+    result = entry(file, event, apc, context, &native_status, code, input,
+                   input_length, output, output_length);
+    ntioapi_copy_status(status, &native_status);
+    return result;
+}
+
+NTSTATUS NTAPI opennt_NtDeviceIoControlFile(
+    HANDLE file, HANDLE event, PIO_APC_ROUTINE apc, PVOID context,
+    POPENNT_IO_STATUS_BLOCK status, ULONG code, PVOID input, ULONG input_length,
+    PVOID output, ULONG output_length)
+{
+    IO_STATUS_BLOCK native_status;
+    NTSTATUS result;
+    PFN_NT_DEVICE_IO_CONTROL_FILE entry =
+        (PFN_NT_DEVICE_IO_CONTROL_FILE)ntioapi_lookup("NtDeviceIoControlFile");
+    if (entry == NULL) return STATUS_NOT_IMPLEMENTED;
+    result = entry(file, event, apc, context, &native_status, code, input,
+                   input_length, output, output_length);
+    ntioapi_copy_status(status, &native_status);
+    return result;
 }

@@ -40,10 +40,6 @@
 
 /****    externally visible global variable declarations                 ****/
 
-extern  char    *_sys_errlist[];
-extern  int     _sys_nerr;
-
-
 /* Exported Data */
 GLOBAL BOOL ExternalWaitRequest = FALSE;
 
@@ -66,15 +62,17 @@ DWORD  line;
 DWORD  error;
 {
 static  BYTE buf[256];
+const char *message;
 
-if (error > (DWORD)_sys_nerr)
-   {
-   sprintf(buf, "System error %d occurred in %s (line %d)",
-		 error, filename, line);
-   return(buf);
-   }
-else
-   return(_sys_errlist[error]);
+/* DIVERGENCE(MVDM-HOST-DIV-033): the NT4 CRT exported _sys_errlist and
+ * _sys_nerr.  Modern UCRT no longer exposes that storage.  Keep this source
+ * function's same char* error-text contract through its public successor. */
+message = strerror((int)error);
+if (message != NULL)
+   return((LPSTR)message);
+sprintf(buf, "System error %d occurred in %s (line %d)",
+	 error, filename, line);
+return(buf);
 }
 
 
