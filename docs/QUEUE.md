@@ -39,7 +39,6 @@ that bounded packet closes is item 1 below.
 | 3 | DEM/COMMAND vertical slice and child lifecycle |
 | 4 | Minimal DOS guest execution and controlled return |
 | 5 | Minimal vertical-slice integration closure |
-| 6 | NTVdmx64 CCPU backend import and selectable Bochs fallback (SoftPC default) |
 | 7 | XMS owner package |
 | 8 | DPMI/DPMI32 owner package |
 | 9 | Redirector owner package (including the selected `netstatus.c` mirror slice) |

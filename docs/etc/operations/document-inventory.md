@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3107 |
+| Documentation records | 3111 |
 | --- | --- |
-| Generated UTC | 2026-08-28T15:45:14Z |
+| Generated UTC | 2026-08-28T16:00:18Z |
 
 ## Entries
 
@@ -503,6 +503,7 @@ content-divergent entries.
 | etc/evidence/m0-t309-s2-p3-provider-residual-owner-ledger.tsv | indexed supporting material | 8adcff9f833818ca8c9c3047ed9a058b523231607e94869e62982588e8bd2f95 |
 | etc/evidence/m0-t309-s2-p3-residual-owner-first-pass-001.md | indexed supporting material | 5aae55fd6b6d3fd68ce4ad4275881e49945b56c54ad6a1986613402006366060 |
 | etc/evidence/m0-t309-s2-provider-cohort-build-audit-001.md | indexed supporting material | 96c1ca4622519dde4b278de3a5f7e3918f8a09a2818ed388d8b5c85d6dceab1d |
+| etc/evidence/m0-t310-s1-softpc-selectable-backend-audit-001.md | indexed supporting material | a39180a64d82519752ea200a064d1595a0c892d1e94758a18f77bf0af3b5cb40 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1139,6 +1140,9 @@ content-divergent entries.
 | etc/operations/m0-t308-s1-ntvdmcontrol-service-disposition.tsv | indexed supporting material | 714af034cf488b0bedcfc273bbc3ab31d46524af4040c69a262c145946976a14 |
 | etc/operations/m0-t309-s1-dem-command-vertical-slice-plan-001.md | indexed supporting material | ced38fb7d138830633b5df72eb59892b31829187b521353f26cadadb64df741d |
 | etc/operations/m0-t309-s2-dem-command-provider-cohort-composition-plan-001.md | indexed supporting material | cac1dcfa1fc2bec7722b5fd392ee38812381f47564833e4da78eb82857413c6c |
+| etc/operations/m0-t310-original-softpc-selectable-backend-plan-001.md | indexed supporting material | 25d7fe54685c4eedf9a279b5bad58ad39068f0733d6914575d17240661716fef |
+| etc/operations/m0-t310-s1-softpc-backend-interface-ledger.tsv | indexed supporting material | 0865e82a3bde4628350b1f96e1d8241f3206dc28291fb6ae2fbc29fc6db21af8 |
+| etc/operations/m0-t310-s1-softpc-source-root-ledger.tsv | indexed supporting material | 15c5edd23ed5a2a583738fc4c3bb72f97622ae8813681f2e808caa48b61dc5ae |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -2995,7 +2999,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | fbfa3a202453ef9a31c0549310ff6ce96d822ac85e2cbbfb6a9c6c032e516f0c |
-| QUEUE.md | principal control document | eb58b0a140cd0cd74150d444476d60f6923a468cf2b36d3cabc0ce276ce5741d |
+| QUEUE.md | principal control document | a1a2f79d69e10cea68a88742ca18fd69e9508fca2de2598d62d9785297fea349 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -3121,7 +3125,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 625d8d63db2708fee0635b63330d674db4a4ddcc0db0bfa8002f5742e6d4537c |
+| STATUS.md | principal control document | 0e39101792b6b479aa67a3b810c4b51f41a15218d41d370e873bdd195e611730 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

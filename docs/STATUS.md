@@ -2,11 +2,29 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T309 is closed: the original DEM/COMMAND
-provider cohorts and every current residual source-owner boundary are recorded
-without a service/body replacement. See the [T309 closure]
-(history/m0-t309-closure-20260828.md). The next packet requires explicit
-admission from the queue.
+## Active Packet
+
+**Active: M0 T310 S1**
+
+### M0 T310 S1 — original SoftPC/CCPU backend contract and import plan
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T310 S1; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | Owner: “批准准入下一任务”, after directing that the next task import the original SoftPC repair so the CLI can select SoftPC or Bochs. |
+| Objective | Recover an actual original MVDM `softpc.new`/CCPU backend with the smallest source-shaped modern bindings, then define the per-session selection contract under which the same imported MVDM host selects original SoftPC or the already-closed Bochs mechanical backend. |
+| Non-goals | No BOP/provider recovery, no guest trace repair, no CPU opcode patch, no VDD/console/CSRSS reconstruction, no simultaneous dual-executor session, no crop/rewrite of original `nt_reset.c`, `nt_error.c`, `nt_msscs.c`, CCPU or SoftPC source merely to make a Bochs-only link pass. |
+| Reference Baseline | T309 closure and P3 source-boundary audits; T273 Bochs mechanical closure; T276/S12 SoftPC package and facade ledgers; current `mvdm-host`, `adapter-mvdm-host-out/softpc`, `adapter-bochs`, session and app sources. |
+| Files And ABI Surface | T310 proposal/evidence; original `softpc.new` source and `sources` manifests; current adapter/session/app interfaces only for inventory. No runtime ABI is changed in S1. |
+| Applicable Rules | Goal, architecture, coding/source-layout, source-policy, mirror-component and execution rules; Source-Recovery Audit Criterion; Toolchain Islands and ABI Admission. |
+| Verification | Reconcile every selected original executor/composition root with original `sources` membership and source identity; map each direct external interface to an existing named adapter, a required same-shaped adapter extension, public Win32/CRT, firmware input, or explicit hard stop; verify no direct MVDM-to-Bochs type/global edge; run documentation governance and `git diff --check`. |
+| Expected Markers | One source-root ledger; one per-session backend state/selection contract; original SoftPC/CCPU source compiled and progressively linked through named bindings; exact common versus backend-specific lifecycle operations; an explicit source-first disposition for `nt_cprgs.c`, `nt_cpu.c`, `nt_reset.c`, `nt_error.c`, `nt_msscs.c`, SIM32/SAS, CCPU executor roots and selected firmware. |
+| Asset Needs | Selected OpenNT/OpenNT-4.5/OpenNT-src-2 source union, exact `mvdm-host` mirrors, current x86/x64 Ninja manifests, and the pinned Bochs 2.6 source already recorded in project evidence. |
+| Reporting Requirements | Report original-source membership, exact blockers, both backend ownership boundaries, whether each is directly composable/binding-only/adapter-backed/unavailable, all mapping-manager divergences, and what S2 may compile without a false runnable claim. |
+| Stop Conditions | A plan requires a new generic adapter, moves MVDM/SoftPC semantics into Bochs, changes an original mirror body outside the explicitly approved mapping-manager exception or without a registered divergence, needs a kernel/CSRSS/private VDM dependency, or discovers that the original and Bochs paths cannot share a fixed-width per-session contract. Pause and re-admit before such scope expansion. |
+| Exit Criteria | A complete, source-proven S1 plan selects original SoftPC/CCPU roots and their dependency closure; records a single backend-selection seam owned outside mirrors; distinguishes direct, same-shaped binding, adapter-backed and unavailable forms; explicitly registers the permitted mapping-manager exception; and assigns S2/S3/S4 implementation/verification work without a trace-derived service list. |
+| Original Owner Request | “别忘了我们下个T任务还打算接入原始softpc补丁 这样cli可以选择采用softpc还是bochs噢” and “批准准入下一任务”. |
+| Similar-Issue Sweep | Existing Bochs-only exclusions, all `softpc.new/host/src` and `base/ccpu386` source roots, `nt_reset`/`nt_error`/`nt_msscs`, SIM32/SAS and host-simulate forms, session/backend lifecycle, x86/x64 ABI/CRT boundaries, firmware, and all old second-executor wording. |
 
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
@@ -370,7 +388,7 @@ signature/condition-form failures. The 251 are future body-expansion seeds,
 not package/provider admissions. See the [P20 signature evidence]
 (etc/evidence/m0-t301-s1-p20-one-ledger1-signature-gate-001.md).
 
-## Active Packet
+## Historical Packet Archive
 
 | Field | Record |
 | --- | --- |
