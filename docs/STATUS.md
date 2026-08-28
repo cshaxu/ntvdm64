@@ -29,6 +29,12 @@ record passes focused formal Ninja x86/x64 tests; direct BaseClient CSR capture
 and BaseSrv's CSRSS product shell remain explicit S2 limits. See the
 [P1 migration evidence](etc/evidence/m0-t302-s2-p1-local-basesrv-record-migration-001.md).
 
+**T302 S2 P2:** the public BaseClient entry now owns only a caller-local
+`VDMINFO` request/result facade before entering the named BaseSrv local record
+dispatcher. A direct `vdm.c` composition probe stops at the private Base
+DLL/CSR header chain, while the selected facade passes the same x86/x64 formal
+fixture. See the [P2 evidence](etc/evidence/m0-t302-s2-p2-baseclient-local-facade-001.md).
+
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,
 including historical build products, into the existing `mvdm-*` component

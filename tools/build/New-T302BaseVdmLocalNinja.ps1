@@ -43,11 +43,12 @@ rule run
   description = RUN `$in
 
 build obj/fixture.obj: cc `$root/tests/adapter-mvdm-host-out/basesrv/base_vdm_local_fixture.c
+build obj/base_vdm_client.obj: cc `$root/src/adapter-mvdm-host-out/basesrv/source/base_vdm_client.c
 build obj/base_vdm_local.obj: cc `$root/src/adapter-mvdm-host-out/basesrv/source/base_vdm_local.c
 build obj/session.obj: cc `$root/src/session/session.c
 build obj/mapping_manager.obj: cc `$root/src/session/mapping_manager.c
 build obj/guest_memory_lease.obj: cc `$root/src/session/guest_memory_lease.c
-build base_vdm_local_fixture.exe: link obj/fixture.obj obj/base_vdm_local.obj obj/session.obj obj/mapping_manager.obj obj/guest_memory_lease.obj
+build base_vdm_local_fixture.exe: link obj/fixture.obj obj/base_vdm_client.obj obj/base_vdm_local.obj obj/session.obj obj/mapping_manager.obj obj/guest_memory_lease.obj
 build test: run base_vdm_local_fixture.exe
 default base_vdm_local_fixture.exe
 "@

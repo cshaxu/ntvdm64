@@ -162,7 +162,7 @@ int base_vdm_local_unbind(base_vdm_local *record)
     return 1;
 }
 
-BOOL APIENTRY GetNextVDMCommand(PVDMINFO information)
+BOOL base_vdm_local_dispatch(PVDMINFO information)
 {
     session *owner = session_thread_current();
     NTSTATUS status;

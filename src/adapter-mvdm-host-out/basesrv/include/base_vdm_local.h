@@ -63,6 +63,7 @@ int base_vdm_local_publish(base_vdm_local *record,
     const base_vdm_command *command);
 int base_vdm_local_bind(base_vdm_local *record, session *owner);
 int base_vdm_local_unbind(base_vdm_local *record);
+BOOL base_vdm_local_dispatch(PVDMINFO information);
 BOOL APIENTRY GetNextVDMCommand(PVDMINFO information);
 
 #ifdef __cplusplus
