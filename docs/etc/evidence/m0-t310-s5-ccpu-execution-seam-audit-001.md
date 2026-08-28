@@ -134,8 +134,24 @@ enters a product library.
   and belongs to a separate source-first adapter/overlay disposition, not the
   `host_start_cpu` wrapper proven here.
 - Produce the required reached V86/MONITOR/scaffold disposition audit and
-  connect a typed product stop/teardown result.  The direct CCPU return above
-  is an executor return, not yet the session's typed stop contract.
+  complete its product-source follow-through for BIOS/device callers. The
+  direct CCPU return is now observed as a typed outer-session result, but it
+  is not a BIOS/device completion claim.
+
+## Typed outer result
+
+`adapter-mvdm-host-out/softpc/mvdm_softpc_execution.c` supplies the one
+non-mirror composition bridge for this interval. It accepts only an active,
+SoftPC-selected session, binds it if needed, calls the unchanged original
+`host_start_cpu()`, records `SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED` only
+after that outer invocation returns, then releases its temporary binding.
+
+This deliberately observes the outer call rather than changing
+`c_cpu_unsimulate`: the latter is also the return mechanism for nested BIOS
+simulation and is not a session-completion event by itself. The focused x86
+and x64 fixture now proves the typed result as well as both original host
+entry forms. It still supplies the known direct `D6 FE` return and therefore
+does not establish a general instruction budget or a product boot boundary.
 
 ## Evidence state
 

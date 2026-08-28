@@ -145,6 +145,14 @@ product path. The resulting owner classifications prevent either premature
 source deletion or silent fallback; see the [profile-path audit]
 (etc/evidence/m0-t310-s5-ccpu-profile-path-disposition-001.md).
 
+**T310 S5 P3:** a narrow session-owned execution bridge now observes only the
+outer return of unchanged original `host_start_cpu`, recording a typed
+`SOFTPC_RETURNED` mechanical result after the selected SoftPC CCPU invocation
+returns. The x86/x64 fixture proves selection, binding, typed result, unbind,
+and the original recursive return separately; it does not treat a nested BIOS
+return as session completion or claim a general CPU budget. See the
+[execution-seam audit](etc/evidence/m0-t310-s5-ccpu-execution-seam-audit-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove

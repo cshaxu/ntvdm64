@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <windows.h>
 
+#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_execution.h"
+
 static LONG WINAPI fixture_unhandled_exception(EXCEPTION_POINTERS *exception)
 {
     uintptr_t address = (uintptr_t)exception->ExceptionRecord->ExceptionAddress;
@@ -54,7 +56,20 @@ int main(void)
     /* Enter through the original host wrapper rather than directly calling
      * the CCPU executor.  Under CPU_40_STYLE+CCPU its untouched source body
      * resolves cpu_simulate to c_cpu_simulate. */
-    host_start_cpu();
+    {
+        session owner;
+        session_initialize(&owner, 1u);
+        if (!session_select_machine_backend(&owner, SESSION_MACHINE_BACKEND_SOFTPC) ||
+            !session_activate(&owner) ||
+            !mvdm_softpc_execution_run_until_return(&owner) ||
+            session_mechanical_resume_status(&owner) !=
+                SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED) {
+            fputs("typed SoftPC outer return was not recorded\n", stderr);
+            sas_term();
+            return 1;
+        }
+        (void)session_dispose(&owner);
+    }
     fputs("returned-start\n", stderr);
     if (c_getIP() != UINT16_C(0xfff2)) {
         fprintf(stderr, "CCPU host_start_cpu did not return through BOP FE: IP=%04x\n",
