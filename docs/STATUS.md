@@ -2,11 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T307 S1.** T306's closed external-boundary disposition now admits
-the first actual recovery package: Base VDM source-shaped broker recovery.
-The active task is bounded to the non-CSRSS, one-session DOS path and its
-original `VDMINFO` contracts; see the [S1 plan]
-(etc/operations/m0-t307-s1-base-vdm-source-shaped-broker-plan-001.md).
+**No active M/T/S packet.** M0 T307/S1 has closed the one-session DOS Base
+VDM broker family. The next unadmitted candidate is the separate Monitor /
+`NtVdmControl` user-mode contract package; see the [T307 closure]
+(history/m0-t307-closure-20260828.md).
 
 **T307 S1 P1:** the local Base VDM facade now covers the reached DOS forms for
 first-VDM query, command capture/capacity/reentry, copied one-shot current
@@ -14,6 +13,12 @@ directories and session-only `ExitVDM`. Its formal Ninja fixture passes under
 MSVC `/MT` on x86 and x64. The unavailable CSRSS, WOW, PIF, cross-process and
 second-SoftPC branches remain explicitly outside this local contract; see the
 [P1 evidence](etc/evidence/m0-t307-s1-p1-base-vdm-dos-contract-001.md).
+
+**T307 closure:** the one-session DOS Base VDM public family now has one
+source-shaped owner in `adapter-mvdm-host-out/basesrv`, with no parallel app
+command route. Its CSRSS, WOW, PIF, cross-process and second-executor forms
+are explicit later owners rather than local fake successes. See the [closure]
+(history/m0-t307-closure-20260828.md).
 
 **T307 S1 P1:** the local Base VDM facade now covers the reached DOS forms for
 first-VDM query, command capture/capacity/reentry, copied one-shot current
@@ -309,6 +314,9 @@ not package/provider admissions. See the [P20 signature evidence]
 (etc/evidence/m0-t301-s1-p20-one-ledger1-signature-gate-001.md).
 
 ## Active Packet
+
+The following is the retained M0 T307/S1 closure brief. No active M/T/S packet
+is currently present; the next packet requires separate admission.
 
 | Field | Record |
 | --- | --- |
