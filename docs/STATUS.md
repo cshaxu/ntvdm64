@@ -20,6 +20,12 @@ parser did not recognize. This is candidate evidence only; no call has been
 reclassified by spelling. See the [P7 definition index]
 (etc/evidence/m0-t301-s1-p7-original-mvdm-definition-index-001.md).
 
+**T301 S1 P8:** P7 is now joined back to all 473 declaration-shaped physical
+calls: 236 have one or more original-MVDM body candidates and 237 do not. The
+236 rows remain candidates pending include-frontier, linkage and source-variant
+proof; none has been silently moved into zero degree. See the [P8 crosswalk]
+(etc/evidence/m0-t301-s1-p8-physical-call-definition-crosswalk-001.md).
+
 ## Active Packet
 
 | Field | Record |
