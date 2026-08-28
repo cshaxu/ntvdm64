@@ -53,6 +53,11 @@ immediate boundary.  Its reset neighbor is explicitly transferred intact to
 the queued selectable original-SoftPC backend; T309 may not crop it to force a
 Bochs-only result.  See the [PIF audit]
 (etc/evidence/m0-t309-s2-p3-pif-source-composition-audit-001.md).
+The original `nt_event.c`/`nt_hosts.c`/`nt_lpt.c` group is now separately
+classified as Console/standard-stream/LPT lifecycle, not a collection of
+COMMAND shims: its CPU/BIOS, private-console and direct-port branches remain
+named later owners.  See the [event/host/LPT audit]
+(etc/evidence/m0-t309-s2-p3-event-host-lpt-source-boundary-audit-001.md).
 
 **T307 S1 P1:** the local Base VDM facade now covers the reached DOS forms for
 first-VDM query, command capture/capacity/reentry, copied one-shot current
