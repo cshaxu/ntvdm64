@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T304 S1.**
+**Active: M0 T304 S2.**
 
 M0 T301/S1 is closed. Its constrained first-degree audit produced physical
 source/binding evidence without turning whole-program BFS into a functional
@@ -71,6 +71,17 @@ is limited to the reached original event forms, their exact owner/binding
 locations, and an implementation-ready selector-blind boundary plan; it does
 not admit BOP routing, service behavior, device enablement, or guest-trace
 repair. See the [S1 plan](etc/operations/m0-t304-s1-machine-event-ingress-plan-001.md).
+
+**T304 S1 closure:** the audit separates original kernel-VDM `VDMEVENTINFO`
+from the Bochs #UD machine-fact record.  It records the seven original event
+owners and admits only one mechanical copied-event ABI for S2; BOP decoding,
+EIP policy and all other event families remain excluded. See the
+[S1 audit](etc/evidence/m0-t304-s1-machine-event-ingress-audit-001.md).
+
+**T304 S2 admission:** consolidate the duplicate private/public #UD layouts
+into one versioned fixed-width `adapter-mvdm-host-in` machine-event ABI,
+verified on x86/x64.  It remains selector- and service-blind. See the
+[S2 plan](etc/operations/m0-t304-s2-fixed-width-machine-event-plan-001.md).
 
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,
@@ -200,19 +211,19 @@ not package/provider admissions. See the [P20 signature evidence]
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T304 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Queue P04 after T303 closure. This S admits only the source-shaped fixed-width machine-event ingress/binding discovery needed to define the next implementation packet. |
-| Objective | Identify the reached original machine-event forms, current adapter locations, data widths, stop/outcome ownership and smallest selector-blind ingress boundary. |
-| Non-goals | No BOP route, guest trace repair, device enablement, CPU profile, second SoftPC/CCPU executor, BaseSrv expansion, DEM/COMMAND provider behavior, XMS A20/SAS or DPMI protected behavior. |
-| Reference Baseline | T303 closure; original reached `softpc.h`/monitor event declarations; current `adapter-mvdm-host-out/softpc`, `adapter-bochs` and session contracts. |
-| Files And ABI Surface | Read-only original/event binding review and a bounded T304 implementation plan only. |
+| Identifier Mode | `M0 T304 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | T304/S1 closure. This S admits one versioned copied machine-event ABI and removal of duplicated mechanical record layout only. |
+| Objective | Make one selector-blind fixed-width #UD event/outcome boundary authoritative between the Bochs overlay and `adapter-mvdm-host-in`. |
+| Non-goals | No BOP route/decoder, EIP policy, guest trace repair, device enablement, CPU profile, second SoftPC/CCPU executor, BaseSrv expansion, DEM/COMMAND provider behavior, XMS A20/SAS or DPMI protected behavior. |
+| Reference Baseline | T303 closure; [T304 S1 audit](etc/evidence/m0-t304-s1-machine-event-ingress-audit-001.md); current overlay, `adapter-bochs` and `adapter-mvdm-host-in` contracts. |
+| Files And ABI Surface | One public copied event/outcome header, overlay conversion/binding and x86/x64 local fixture only. |
 | Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; four-rung source-recovery gate; mapping and `src.old` exclusion rules. |
-| Verification | Source/ABI ownership evidence, dependency-direction review, documentation governance and `git diff --check`. |
+| Verification | Focused x86/x64 machine-event fixture, dependency-direction review, documentation governance and `git diff --check`. |
 | Expected Markers | One typed mechanical outcome for every finite resume; no MVDM semantic dependency enters Bochs; no unowned pointer/lease conversion or second executor exists. |
-| Asset Needs | Existing T303 typed-resume contract, source union, current event bridge/fixture evidence and original reached declarations. |
-| Reporting Requirements | Report each reached event form, source owner, fixed-width fields, current route, rejected ownership and the ready-to-implement boundary. |
-| Stop Conditions | A required change needs BOP/provider semantics, an unbounded device/product-shell import, a family-private mapping manager, or a source body outside the shared mechanical form. |
-| Exit Criteria | A small implementation S is defined with exact original forms, owning component and x86/x64 local test contract; it does not reopen T303 mechanical resume. |
+| Asset Needs | Existing overlay opaque callback, `adapter-bochs` facade, current generic bridge and selected original monitor/ABI declarations. |
+| Reporting Requirements | Report ABI widths, accepted/declined outcome rules, eliminated duplicate record and x86/x64 evidence. |
+| Stop Conditions | A required change needs BOP/provider semantics, an unbounded device/product-shell import, a family-private mapping manager, or any `VDMEVENTINFO` owner behavior. |
+| Exit Criteria | One formally-tested copied mechanical event/outcome ABI has no duplicated private/public record definition and no service/selector content. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务，从 Base VDM 命令协议开始，到 DPMI / DPMI32 复通。” |
 | Similar-Issue Sweep | finite stop class, no-active-machine/failure behavior, copied register frame, guest-memory lease lifetime, Bochs-only ownership, second-executor exclusion and selector-blind interface review. |
 
