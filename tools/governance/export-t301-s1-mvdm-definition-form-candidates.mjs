@@ -43,7 +43,7 @@ function indexOriginalDefinitions() {
   return records.filter((record) => record._type === 'tag' && record.kind === 'function');
 }
 
-function definitionForm(sourceFile, line, symbol) {
+function definitionMetadata(sourceFile, line, symbol) {
   const source = fs.readFileSync(sourceFile, 'utf8');
   const lines = source.split(/\r?\n/);
   const offset = lines.slice(0, line - 1).reduce((total, value) => total + value.length + 1, 0)
@@ -56,10 +56,16 @@ function definitionForm(sourceFile, line, symbol) {
   }
   const tail = source.slice(close + 1, close + 513);
   const first = tail.search(/\S/);
-  if (first >= 0 && tail[first] === '{') return 'ansi-body';
+  const bodyOpen = source.indexOf('{', close);
+  const signature = source.slice(source.lastIndexOf('\n', offset) + 1, bodyOpen).replace(/\s+/g, ' ');
+  const linkage = /\bstatic\b/.test(signature) ? 'translation-unit-local' : 'externally-linkable';
+  if (first >= 0 && tail[first] === '{') return { definition_form: 'ansi-body', linkage };
   const brace = tail.indexOf('{');
-  return brace >= 0 && /^\s*(?:(?:[A-Za-z_]\w*|\*|\s)+\s+[A-Za-z_]\w*\s*;\s*)+\{/.test(tail.slice(0, brace + 1))
-    ? 'k-and-r-body' : 'ctags-function-body';
+  return {
+    definition_form: brace >= 0 && /^\s*(?:(?:[A-Za-z_]\w*|\*|\s)+\s+[A-Za-z_]\w*\s*;\s*)+\{/.test(tail.slice(0, brace + 1))
+      ? 'k-and-r-body' : 'ctags-function-body',
+    linkage,
+  };
 }
 
 const names = new Set(readTsv('mvdm-first-degree-rebaselined-declaration-shape-ledger.tsv')
@@ -71,20 +77,21 @@ const rows = indexOriginalDefinitions()
   .map((record) => {
     const root = owningRoot(record.path);
     if (!cache.has(record.path)) cache.set(record.path, crypto.createHash('sha256').update(fs.readFileSync(record.path)).digest('hex'));
+    const metadata = definitionMetadata(record.path, record.line, record.name);
     return {
       symbol: record.name,
       source_root: root,
       source_path: path.relative(root, record.path).replaceAll('\\', '/'),
       source_sha256: cache.get(record.path),
       source_line: String(record.line),
-      definition_form: definitionForm(record.path, record.line, record.name),
+      ...metadata,
     };
   })
   .sort((left, right) => left.symbol.localeCompare(right.symbol)
     || left.source_path.localeCompare(right.source_path)
     || Number(left.source_line) - Number(right.source_line));
 
-const columns = ['symbol', 'source_root', 'source_path', 'source_sha256', 'source_line', 'definition_form'];
+const columns = ['symbol', 'source_root', 'source_path', 'source_sha256', 'source_line', 'definition_form', 'linkage'];
 const output = path.join(operations, 'mvdm-first-degree-rebaselined-mvdm-definition-form-candidate-ledger.tsv');
 fs.writeFileSync(output, `${columns.join('\t')}\n${rows.map((row) => columns.map((column) => quote(row[column])).join('\t')).join('\n')}\n`);
 console.log(`requested spellings=${names.size}; physical original MVDM definition candidates=${rows.length}; resolved spellings=${new Set(rows.map((row) => row.symbol)).size}`);

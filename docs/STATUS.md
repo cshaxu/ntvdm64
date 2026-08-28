@@ -26,6 +26,13 @@ calls: 236 have one or more original-MVDM body candidates and 237 do not. The
 proof; none has been silently moved into zero degree. See the [P8 crosswalk]
 (etc/evidence/m0-t301-s1-p8-physical-call-definition-crosswalk-001.md).
 
+**T301 S1 P9:** include-frontier, linkage and selected-edition gates now leave
+217 physical calls with one compatible original-MVDM body and no multi-body
+ambiguity; 256 calls remain without a passing MVDM body. The 217 still need
+prototype/conditional-form confirmation before zero-degree reclassification.
+See the [P9 binding gate]
+(etc/evidence/m0-t301-s1-p9-original-mvdm-binding-gate-001.md).
+
 ## Active Packet
 
 | Field | Record |

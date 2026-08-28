@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2996 |
+| Documentation records | 2998 |
 | --- | --- |
-| Generated UTC | 2026-08-28T02:44:33Z |
+| Generated UTC | 2026-08-28T02:50:05Z |
 
 ## Entries
 
@@ -459,6 +459,7 @@ content-divergent entries.
 | etc/evidence/m0-t301-s1-p6-declaration-shape-partition-001.md | indexed supporting material | 070fbadefdb3a10f6ef6846cf1e9c24c35a2493bc81a807b72db8d87ba10461b |
 | etc/evidence/m0-t301-s1-p7-original-mvdm-definition-index-001.md | indexed supporting material | 5ab97e892ef1c88dcf21c67fedf4736927fc146662ca7403d0d318eda5f965dd |
 | etc/evidence/m0-t301-s1-p8-physical-call-definition-crosswalk-001.md | indexed supporting material | d32c789ab3111b043cd22ecc11d8081930034a024a7e03c9c1075fe2ebc9cb22 |
+| etc/evidence/m0-t301-s1-p9-original-mvdm-binding-gate-001.md | indexed supporting material | cba92b8f9661c005c1b3bd5a206d28f43f82a2044401d36ca0393fe7f0e08566 |
 | etc/evidence/m0-t301-s1-parser-type-keyword-correction-001.md | indexed supporting material | e4b33662ad7e8289e3d9376388408d61ed5b20f83c69788aadaaa96e81afca52 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
@@ -1085,7 +1086,8 @@ content-divergent entries.
 | etc/operations/mvdm-first-degree-rebaselined-definition-candidate-crosswalk-ledger.tsv | indexed supporting material | a686de255a343c63952cc544daf1e9b3dd9f482fe3b194b57d40b280e708961d |
 | etc/operations/mvdm-first-degree-rebaselined-definition-candidate-ledger.tsv | indexed supporting material | 53ea8d16315d98e2f3e5cd5e33e3a5402f44949a62022fe39ce24875c4af312c |
 | etc/operations/mvdm-first-degree-rebaselined-include-frontier-ledger.tsv | indexed supporting material | 64f681541fc90c7041ab723c6d30574f75871761aa9fbf77c17e2b722f8a12d5 |
-| etc/operations/mvdm-first-degree-rebaselined-mvdm-definition-form-candidate-ledger.tsv | indexed supporting material | 49a6805e516bafa81ace81c9d6b0359074aa96c19c0451f94322b4d2d488dfdb |
+| etc/operations/mvdm-first-degree-rebaselined-mvdm-binding-gate-ledger.tsv | indexed supporting material | e312da6d9d6429df7c6e165ba54b1d66202dffa2b30033c3034a6107af72ea76 |
+| etc/operations/mvdm-first-degree-rebaselined-mvdm-definition-form-candidate-ledger.tsv | indexed supporting material | 6dae95100db240edf1a9cac83b3fd92b3a6ea9d2cc8b9a0a64f74f6894f21501 |
 | etc/operations/mvdm-first-degree-rebaselined-no-declaration-category-ledger.tsv | indexed supporting material | 4274326d906ded6e56c9d80db8c541cee40196010d6e992f3c8383113b9b53e5 |
 | etc/operations/mvdm-first-degree-rebaselined-prior-definition-identity-ledger.tsv | indexed supporting material | ae769e14da45b7d7fe426ed6e45bf6b8ca77a15d77b16d760f6b577a5ab52054 |
 | etc/operations/mvdm-first-degree-rebaselined-worklist-ledger.tsv | indexed supporting material | d4a6bac049956faec73b26b0028ea961238a9a8319018a02c842a79a9140209e |
@@ -3010,7 +3012,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 23d2ccee4a98cf88d58e9072e7dfcdb8e71a0fa7ce50d64bcaf09bbf4c82f053 |
+| STATUS.md | principal control document | 0833dec6ab4116c50c9cd6169881c58095cea99b06e301e7c867894759483c8e |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
