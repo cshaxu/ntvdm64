@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2990 |
+| Documentation records | 2992 |
 | --- | --- |
-| Generated UTC | 2026-08-28T02:06:48Z |
+| Generated UTC | 2026-08-28T02:13:59Z |
 
 ## Entries
 
@@ -456,6 +456,7 @@ content-divergent entries.
 | etc/evidence/m0-t301-s1-p3-prior-definition-identity-crosswalk-001.md | indexed supporting material | 39f07f8fe438b7518465be2d626993104d56830f20da42b29c0236ee41ef4b6c |
 | etc/evidence/m0-t301-s1-p4-direct-call-normalization-001.md | indexed supporting material | 5d5a9d9c8029fbc46db7acc4a8a77dd57ed8fb7cc16f09b716d804467337108c |
 | etc/evidence/m0-t301-s1-p5-mvdm-source-union-correction-001.md | indexed supporting material | 713189f8aa84280d55bc0b339cad957b5fef4135b6bab72cfbf55ad977852811 |
+| etc/evidence/m0-t301-s1-p6-declaration-shape-partition-001.md | indexed supporting material | 070fbadefdb3a10f6ef6846cf1e9c24c35a2493bc81a807b72db8d87ba10461b |
 | etc/evidence/m0-t301-s1-parser-type-keyword-correction-001.md | indexed supporting material | e4b33662ad7e8289e3d9376388408d61ed5b20f83c69788aadaaa96e81afca52 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
@@ -1078,6 +1079,7 @@ content-divergent entries.
 | etc/operations/mvdm-first-degree-rebaselined-caller-include-frontier-ledger.tsv | indexed supporting material | 13753e8163055b63fc997f833fcd44aac2d3bbf33f4dced6e6b6e01d04a88781 |
 | etc/operations/mvdm-first-degree-rebaselined-call-resolution-ledger.tsv | indexed supporting material | 96423d06709b856ff937f065dbc9fa6d68ff3db838ec956bc066392ad763aefb |
 | etc/operations/mvdm-first-degree-rebaselined-declaration-frontier-ledger.tsv | indexed supporting material | 086439113f79eeeb6a1048acbe1a4563d55462e0d49e3932ca25478940832879 |
+| etc/operations/mvdm-first-degree-rebaselined-declaration-shape-ledger.tsv | indexed supporting material | 207665d51a6bbb24ba6e0ac0d913d00aaccac79fbb5739a54d773dfa0a9ef752 |
 | etc/operations/mvdm-first-degree-rebaselined-definition-candidate-ledger.tsv | indexed supporting material | 53ea8d16315d98e2f3e5cd5e33e3a5402f44949a62022fe39ce24875c4af312c |
 | etc/operations/mvdm-first-degree-rebaselined-include-frontier-ledger.tsv | indexed supporting material | 64f681541fc90c7041ab723c6d30574f75871761aa9fbf77c17e2b722f8a12d5 |
 | etc/operations/mvdm-first-degree-rebaselined-no-declaration-category-ledger.tsv | indexed supporting material | 4274326d906ded6e56c9d80db8c541cee40196010d6e992f3c8383113b9b53e5 |
