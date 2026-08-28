@@ -132,6 +132,13 @@ the existing local DOS BaseSrv seam remains the bounded source-derived route.
 See the [cohort audit]
 (etc/evidence/m0-t306-s1-baseclient-cohort-boundary-audit-001.md).
 
+**T306 S1 P4:** the 16 physical NetAPI candidates split into an exact small
+`netstatus.c` mirror candidate (11 calls), four current public workstation API
+calls requiring only bounded Redirector/Win32 buffer binding, and one retained
+downlevel password-protocol hard boundary. No historical Workstation/RPC
+product shell is selected. See the [cohort audit]
+(etc/evidence/m0-t306-s1-netapi-cohort-boundary-audit-001.md).
+
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,
 including historical build products, into the existing `mvdm-*` component
