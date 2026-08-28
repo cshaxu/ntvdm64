@@ -2,7 +2,19 @@
 
 ## Current Work
 
-**Active: M0 T301 S1.**
+**Active: M0 T302 S1.**
+
+M0 T301/S1 is closed. Its constrained first-degree audit produced physical
+source/binding evidence without turning whole-program BFS into a functional
+recovery blocker. The [closure record](history/m0-t301-closure-20260828.md)
+retains the exact counts, limits and deferred degree-two seeds.
+
+**T302 S1 admission:** the owner has directed single-person dual-role recovery
+from the queue's first functional package, Base VDM command protocol, through
+DPMI/DPMI32. This first S is limited to the immediate original
+BaseClient/BaseSrv VDM package boundary and its existing project seam; it does
+not yet admit CSR/CSRSS reconstruction, a new BOP service or a second machine
+executor. See the [T302 S1 plan](etc/operations/m0-t302-s1-base-vdm-command-protocol-plan-001.md).
 
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,
@@ -132,21 +144,21 @@ not package/provider admissions. See the [P20 signature evidence]
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T301 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Owner’s active goal is “开展一度审计”; after the P16/P17 true-zero correction, the owner directed continuation from `zero-ledger1.tsv` through the bounded P18 physical definition-presence pass. |
-| Objective | Preserve lawful selected zero evidence; give every `one-ledger1` external direct call a physical definition/source-absence result; then prove original caller declaration/linkage binding before any callee body may enter two-degree BFS. P21 additionally preserves every missing `opennt-src-2` MVDM path as byte-exact mirror evidence. |
-| Non-goals | No callee-body traversal or second-degree expansion; no adapter/provider/overlay implementation, build/link admission, BOP enablement, runtime route or Bochs change. The P21 import does not add a third BFS source-definition root. |
-| Reference Baseline | Immutable 12,202-definition historical ledger; P16's `zero-ledger0.tsv`; P17's selected 3,720-definition `zero-ledger1.tsv`; P18's definition resolution; and `one-ledger1.tsv` with its four-row explicit unparsed-body record. See the [legality plan](etc/operations/m0-t301-s1-zero-degree-legality-audit-plan-001.md), [P17 SoftPC cut](etc/evidence/m0-t301-s1-p17-softpc-second-executor-cut-001.md), [P18 plan](etc/operations/m0-t301-s1-one-ledger1-resolution-plan-001.md) and [P19 plan](etc/operations/m0-t301-s1-one-ledger1-declaration-binding-plan-001.md). |
-| Files And ABI Surface | T301 audit generators, zero/one-degree source ledgers/evidence, byte-exact missing `opennt-src-2` MVDM mirror products, Status and documentation inventory only. No production ABI changes. |
-| Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; physical identity rather than name-only matching; original-source-first recovery; `src.old` exclusion. |
-| Verification | Generation assertions for one row per zero identity, true external one-degree call and P18 candidate; physical source-path/hash/line/linkage/declaration review; source-root and `src.old` exclusion scans; documentation inventory/governance checks; and `git diff --check`. |
-| Expected Markers | Explicit residual conditional/unbalanced zero rows; physical candidate and declaration identities rather than spelling merges; no static cross-translation-unit admission; no callee body read. |
-| Asset Needs | Approved OpenNT/OpenNT-4.5 source union, frozen T300 ledgers, Node 22/Ripgrep parser tooling, and current documentation authorities. |
-| Reporting Requirements | Report structurally-valid roots/rebased definitions, conditionally unresolved bodies, unparsed bodies, invalid source/linkage rows and every unresolved physical identity. Distinguish source-graph legality from product/runtime eligibility. |
-| Stop Conditions | Missing or conflicting provenance; a requested callee-body/second-degree interpretation; a static cross-translation-unit target treated as resolved; an attempted provider/build change; use of current product bodies or `src.old` as source input; or an owner/package-boundary change. P21 permits only the owner-approved byte-exact non-overwrite import described above. |
-| Exit Criteria | Every selected zero identity has an explicit legality result; residual zero body/variant rows are explicit; every true external `one-ledger1` call has a physical original definition/source-absence result; every P18 source candidate has a declaration/linkage disposition; evidence and gates pass. |
-| Original Owner Request | “开展一度审计”。 |
-| Similar-Issue Sweep | Historical 0/1-degree ledgers, selected original source variants, macros/function pointers/assembly declarations, public Win32/CRT leaves, private CSR/kernel boundaries, support/tools/firmware guest callers, and accidental `src.old` or current-product inputs. |
+| Identifier Mode | `M0 T302 S1`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner-directed queue execution from Base VDM command protocol toward DPMI/DPMI32, with source-first mirror recovery, minimum divergence and adapters for only indispensable autonomous mechanics. |
+| Objective | Establish the finite original BaseClient/BaseSrv VDM command-protocol perimeter; prove which original request/capture/wait/completion logic can compose directly and assign every non-public dependency to an existing or specifically proposed adapter seam before any replacement code is written. |
+| Non-goals | No CSRSS/CSR server recreation, kernel VDM work, multi-process broker, WOW worker, BOP-family expansion, DEM/COMMAND lifecycle change, Bochs change or guest trace-driven repair. |
+| Reference Baseline | Exact Base VDM client/server source already mirrored below `src/opennt-host/base/win32/`; T291 Base VDM evidence; T301 closure; the existing bounded app command source and monitor command facade. |
+| Files And ABI Surface | Base VDM boundary ledger/evidence and, if the audit closes, only the source-shaped Base VDM client/server mirror hooks plus the named `adapter-mvdm-host-out` subfamily and existing app/session seam. `VDMINFO` layout and exported historical spellings are preserved. |
+| Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; four-rung source-recovery gate; mirror/overlay and `src.old` exclusion rules. |
+| Verification | Original-path/hash review; direct caller/declaration/dependency ledger; adapter-owner and failure-contract review; focused source-shape tests where an existing seam is exercised; documentation governance and `git diff --check`. |
+| Expected Markers | One original owner for request/copy/size/retry/wait/completion; no app-owned parallel Base VDM protocol; explicit public leaves and CSR/CSRSS stop boundary; no mirror body cropped to evade a dependency. |
+| Asset Needs | Approved OpenNT/OpenNT-4.5 source union, exact `opennt-host` Base VDM mirror, current session/app/adapter source, Git Bash Node 22/Ripgrep and MSVC/Ninja only if a later admitted build slice needs them. |
+| Reporting Requirements | Report every reached original file/function, original external dependency, selected adapter or public binding, deferred product-shell behavior and any existing local diff that can be withdrawn by importing original code. |
+| Stop Conditions | A dependency requires an unbounded CSRSS/CSR/kernel product shell; a second parallel command protocol would be introduced; a mirror alteration exceeds the minimal-hook rule; a new adapter family is needed without an owner/ABI/failure ledger; or scope reaches DEM/COMMAND/WOW/BOP execution. |
+| Exit Criteria | The direct Base VDM slice has a complete source/ABI/failure map and a four-rung disposition for every reached external dependency; existing app/monitor code has retain/migrate/replace/delete disposition; the next implementation S can name one finite source-shaped protocol contract and no unowned behavior. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务，从 Base VDM 命令协议开始，到 DPMI / DPMI32 复通。” |
+| Similar-Issue Sweep | `GetNextVDMCommand`, `ExitVDM`, `SetVDMCurrentDirectories`, `RegisterWowExec`, server request records, copied capture buffers, BaseSrv waits, session binding, command source, monitor facade, `VDMINFO` declarations and CSR/kernel/WOW boundaries. |
 
 **Td closure — OpenNT-host directory boundary:** `opennt-host` is now
 explicitly governed as the single mirror root for every separately accepted
