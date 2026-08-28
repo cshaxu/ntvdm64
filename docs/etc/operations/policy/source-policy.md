@@ -14,9 +14,11 @@ Selected host-runtime packages remain together in the canonical `mvdm-host`
 mirror; conceptual BOP, host and SoftPC-control categories
 do not create parallel source roots. Independent historical tools belong to
 `mvdm-tools`, shared support carriers/libraries belong to `mvdm-support`, and
-selected `softpc.new` BIOS/ROM/data inputs belong to
-`mvdm-softpc-firmware`. Exact declarations required from outside MVDM belong
-to `mvdm-platform-abi`.
+selected immutable `softpc.new` BIOS/ROM/data inputs belong to
+`mvdm-softpc-firmware`. Executable `softpc.new/base/*` packages, including
+`base/bios` and `base/keymouse`, remain in `mvdm-host` even when they
+initialize firmware state. Exact declarations required from outside MVDM
+belong to `mvdm-platform-abi`.
 `mvdm-host` is recovered as a complete selected original host-package union,
 not as a collection of trace-reached files. `opennt-host` is the single mirror
 root for **all** separately accepted original OpenNT host packages outside

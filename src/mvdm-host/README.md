@@ -25,9 +25,13 @@ authored provider replacement.
   records full selected-host coverage and verification.
 
 The root carries the current host-owned selection described by the topology
-manifests. Firmware-owned `softpc.new/base/keymouse` is intentionally rooted
-in `mvdm-softpc-firmware` instead. This physical layout is not a final
-runtime-owner claim.
+manifests. T310/S4 reclassified executable `softpc.new/base/bios` and
+`softpc.new/base/keymouse` packages from the firmware-input component back to
+this host mirror: their 24 source/makefile/manifest files are byte-exact
+selected-OpenNT mirrors; their 23 historical `obj/` products have no selected
+source-root counterpart and are retained as byte-identical project evidence.
+Reset, BIOS services and controller algorithms are original SoftPC runtime
+code. This physical layout is not by itself a runtime-enablement claim.
 
 T301 S1 P21 additionally preserves missing byte-exact historical build
 products from `opennt-src-2` under their original-relative host paths.  These

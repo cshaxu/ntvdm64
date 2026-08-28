@@ -52,11 +52,12 @@ material and never a source, build, link or runtime input.
 - `mvdm-tools` contains selected standalone MVDM tools and their
   resources (`vdmutils`). It is a production mirror with optional independent
   tool builds, never a main-program library.
-- `mvdm-softpc-firmware` contains selected original MVDM firmware and machine
-  input paths (`softpc.new/base/bios`, `bios`, `roms`, and `data`). It is an
-  immutable mirror input carrier, never a host-runtime library or a second
-  machine implementation; only `adapter-bochs` may consume an admitted,
-  manifest-selected input.
+- `mvdm-softpc-firmware` contains only selected immutable original MVDM
+  firmware and machine-input paths (`softpc.new/bios`, `roms`, and `data`).
+  It is never a host-runtime library or a second machine implementation. The
+  executable `softpc.new/base/bios` and `base/keymouse` packages stay in
+  `mvdm-host`; `app` selects immutable inputs for the chosen backend through
+  its admitted source-shaped composition binding.
 - `mvdm-platform-abi` contains exact declarations outside MVDM required by
   those packages; it has no implementation.
 - `mvdm-softpc-patch` contains only individually provenance-registered

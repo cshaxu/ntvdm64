@@ -44,7 +44,7 @@ function targetFor(relative) {
   if (/^(dirs|makefil0|inc\/|oemuni\/|suballoc\/)/.test(normalized)) {
     return `src/mvdm-support/${normalized}`;
   }
-  if (/^softpc\.new\/(base\/(bios|keymouse)\/|bios\/|roms\/|data\/)/.test(normalized)) {
+  if (/^softpc\.new\/(bios\/|roms\/|data\/)/.test(normalized)) {
     return `src/mvdm-softpc-firmware/${normalized}`;
   }
   return `src/mvdm-host/${normalized}`;

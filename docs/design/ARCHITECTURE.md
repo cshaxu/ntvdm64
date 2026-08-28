@@ -91,8 +91,10 @@ prevents permanent parallel providers.
   mechanics. It has no OpenNT, DOS, WOW, BOP or host-policy knowledge.
 - `mvdm-host`: the canonical original MVDM host-runtime mirror. It owns
   selected DEM, COMMAND, XMS, DPMI32, VDMREDIR, WOW32, VDD/debugger,
-  `softpc.new` and SIM/monitor provider packages. It does not own standalone
-  tools or common support libraries.
+  executable `softpc.new` packages—including `base/bios` reset/BIOS services
+  and `base/keymouse` controller sources—and SIM/monitor providers. It does
+  not own standalone tools, common support libraries or immutable firmware
+  media inputs.
 - `opennt-host`: the canonical original non-MVDM OpenNT host-service mirror.
   It owns every complete, source-audited OpenNT host package accepted for use
   by `mvdm-host`; BaseSrv/client VDM is merely its first accepted service
@@ -107,9 +109,10 @@ prevents permanent parallel providers.
   Tools may be independently built but never enter the main `ntvdm.exe` link
   graph merely because their source is available.
 - `mvdm-softpc-firmware`: the canonical original MVDM firmware-input mirror:
-  selected `softpc.new/base/bios`, `softpc.new/bios`, `softpc.new/roms` and
-  `softpc.new/data` paths. It preserves original source, ROM and data inputs
-  but is neither a host-runtime library nor a second machine executor.
+  selected `softpc.new/bios`, `softpc.new/roms` and `softpc.new/data` paths.
+  It preserves immutable ROM and data inputs but is neither a host-runtime
+  library nor a second machine executor. Executable `softpc.new/base/*`
+  packages remain in `mvdm-host`.
 - `mvdm-softpc-patch`: a narrow component for reviewed NTVDMx64-derived SoftPC
   patch bodies. It is neither a generic shim nor an alternate machine; original
   `mvdm-host/softpc.new` control flow remains in the mirror caller.
@@ -132,7 +135,10 @@ prevents permanent parallel providers.
   Its explicit internal families are `win32`, `softpc`, `monitor`, `redir`,
   `wow`, `vdd` and `debugger`. Each preserves only the corresponding reached
   original interface shape; none is an alternate MVDM provider. The `softpc`
-  family reaches the machine only through typed `adapter-bochs` mechanics.
+  family binds one selected source-shaped machine path: typed `adapter-bochs`
+  mechanics for a Bochs session, or the original executable SoftPC call graph
+  for a SoftPC session. It never includes a Bochs type, object or global, and
+  selection never implies fallback or simultaneous execution.
   The `monitor` family owns same-shaped `NtVdmControl`, `VDM_TIB`, V86-event
   and interrupt/fault-handler facades, and unsupported kernel/CSRSS behavior
   fails deterministically. The remaining families preserve their named
@@ -202,7 +208,8 @@ mvdm-host -> mvdm-support
 mvdm-host -> mvdm-softpc-patch                   (only registered SoftPC hooks)
 mvdm-host -> adapter-mvdm-host-out
 mvdm-host -> session                              (neutral contract only)
-adapter-mvdm-host-out/softpc -> adapter-bochs
+adapter-mvdm-host-out/softpc -> adapter-bochs                 (Bochs-selected only)
+adapter-mvdm-host-out/softpc -> original mvdm-host/softpc.new (SoftPC-selected only)
 mvdm-softpc-patch -> adapter-mvdm-host-out/softpc
 adapter-mvdm-host-in -> adapter-mvdm-host-out/softpc  (typed mechanics only)
 adapter-mvdm-host-out/win32 -> broker client      (only for brokered historical calls)
@@ -210,12 +217,13 @@ opennt-host -> mvdm-platform-abi
 opennt-host -> adapter-opennt-host                 (only source-audited package-private bindings)
 opennt-host -> broker                              (only after package closure admits fixed-width transport)
 mvdm-tools -> mvdm-support / mvdm-platform-abi    (independent tool builds only)
-mvdm-softpc-firmware -> adapter-bochs             (manifest-selected machine input only)
+app -> mvdm-softpc-firmware                       (manifest-selected immutable input only)
 ```
 
 `session` never calls a component-specific provider. `adapter-bochs` alone
 calls `bochs-core`. No `adapter-mvdm-host-out` family includes a Bochs type or
-global.
+global. The SoftPC-selected path remains within the original `mvdm-host`
+source-shaped composition; it does not call `adapter-bochs`.
 The broker never receives a native pointer, local HANDLE, guest pointer or
 Bochs object. It exchanges versioned fixed-width copied messages and stable
 cross-process identities only.
@@ -235,8 +243,8 @@ not a second generic Win32 shim and is consumed only by its owning
 may use it only after the package/symbol tracker records the original consumer,
 exact interface shape and binding disposition. `mvdm-tools` has no
 inbound production-runtime edge at all. `mvdm-softpc-firmware` has no host
-compile or link edge; `adapter-bochs` may consume only an explicitly admitted,
-manifest-selected immutable firmware input.
+compile or link edge; `app` stages an explicitly admitted, manifest-selected
+immutable firmware input to the selected backend's source-shaped binding.
 
 ## Guest and host width model
 
@@ -290,7 +298,7 @@ undocumented per-file hybrids are forbidden.
 
 The two guest mirrors are load-only. Their C, assembly, objects and libraries
 never satisfy a host symbol. `app` selects immutable products through a
-guest-image manifest and loads bytes through `adapter-bochs`; subsequent
+guest-image manifest and loads bytes through the selected backend binding; subsequent
 communication is only BOP, interrupts, ports and guest-memory contracts.
 
 Every mirror file is exact upstream, a registered true subset, or a registered

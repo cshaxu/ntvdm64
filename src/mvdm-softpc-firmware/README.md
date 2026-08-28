@@ -1,21 +1,21 @@
 # mvdm-softpc-firmware
 
 Canonical original MVDM firmware-input mirror. Its retained
-upstream-relative package set is `softpc.new/base/bios`,
-`softpc.new/base/keymouse`, `softpc.new/bios`, `softpc.new/roms` and
+upstream-relative package set is `softpc.new/bios`, `softpc.new/roms` and
 `softpc.new/data`.
 
 This is a separate original mirror component, not an executable DOS/WOW16
 guest image and not a parallel SoftPC machine. ROM/data inputs remain
-immutable. `base/keymouse` is retained here because it is original SoftPC
-firmware-adjacent code; a later admitted package may compose only a
-source-proven fragment through the same-shaped adapters.
+immutable. Executable `softpc.new/base/bios` and `base/keymouse` source is
+rooted in `mvdm-host`, where original SoftPC composition can select it. Its
+source, makefile and manifest inputs are byte-exact mirrors; retained
+historical `obj/` products have no selected source-root counterpart and remain
+evidence.
 
-T288 S2 re-rooted the seven byte-exact `base/keymouse` files here using Git
-renames. They retain their original paths below this component and are not an
-app-selected host runtime edge. Any later source composition remains governed
-by the monitor/keyboard owner package; only an admitted `adapter-bochs`
-manifest may select a firmware image input.
+T288 S2's former `base/keymouse` placement was superseded by T310/S4 after
+the original SoftPC startup audit showed that it is executable controller
+source, not firmware media. Its Git move preserves byte identity and original
+relative paths under `mvdm-host`.
 
 T301 S1 P21 also preserves missing byte-exact `opennt-src-2` firmware-adjacent
 products at their original-relative paths.  They add no selected firmware or

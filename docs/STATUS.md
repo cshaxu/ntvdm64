@@ -89,6 +89,12 @@ keyboard/mouse, DMA, display, disk/floppy and serial/parallel each have one
 source-first disposition; no family is silently substituted or omitted. See
 the [family audit](etc/evidence/m0-t310-s4-original-machine-family-audit-001.md).
 
+**T310 S4 P2:** `softpc.new/base/bios` and `base/keymouse` were corrected from
+firmware-input placement to byte-exact `mvdm-host` executable source packages.
+The firmware mirror now contains only immutable `softpc.new/{bios,roms,data}`
+inputs. This makes original `reset`/BIOS/controller source selectable without
+claiming a runnable backend; see the [reclassification audit](etc/evidence/m0-t310-s4-p2-softpc-executable-source-reclassification-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove

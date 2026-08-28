@@ -54,7 +54,9 @@ Inventory exact original roots and `sources` membership, beginning with:
   `nt_reset.c`, `nt_error.c`, `nt_msscs.c`, `sim32.c`, `nt_sas.c`, `nt_mem.c`;
 - executor: selected `softpc.new/base/ccpu386` CCPU library plus each original
   support/library root required by the historical selected target;
-- machine/firmware: only immutable `mvdm-softpc-firmware` inputs;
+- machine source: original `softpc.new/base/bios`, `base/keymouse`, system,
+  device and host packages in `mvdm-host`; immutable
+  `mvdm-softpc-firmware` inputs are only `softpc.new/{bios,roms,data}`;
 - current Bochs binding: `adapter-mvdm-host-out/softpc`, `adapter-bochs` and
   neutral session binding.
 

@@ -14,6 +14,7 @@ component	project_path	sha256	same_hash_original_candidates	suffix_candidates	di
 "mvdm-host"	"src/mvdm-host/dpmi32/stack.c"	"2753ca79d1587d1a065a7147701be729955f1c83805f5e41981fb11d5642352b"	"0"	"0"	"not-used-for-original-identity-closure"
 "mvdm-host"	"src/mvdm-host/dpmi32/xmem.c"	"5675789c121cab885c10f1026784fb78ed9acfb15d07de3cdc874c8faca7e1ad"	"0"	"0"	"not-used-for-original-identity-closure"
 "mvdm-host"	"src/mvdm-host/softpc.new/host/src/nt_bop.c"	"f93960cfc3c31efffbbe08598ed5bee2eaf50c5416fa8bbf6034510ac5fd2821"	"0"	"0"	"not-used-for-original-identity-closure"
+"mvdm-host"	"src/mvdm-host/softpc.new/host/src/nt_error.c"	"343e6503a584839552365963ae520b4f4e4496e9a971d26453f5ab50b0f0d245"	"0"	"0"	"not-used-for-original-identity-closure"
 "mvdm-host"	"src/mvdm-host/softpc.new/host/src/nt_fdisk.c"	"e3bc0e710bdae1cf5dbbc5611f2eb77a6080747ecb69b1f0701e63d39eb1ccfa"	"0"	"0"	"not-used-for-original-identity-closure"
 "mvdm-host"	"src/mvdm-host/softpc.new/host/src/nt_rflop.c"	"8686b559233ddf84b287bebe10dde40c97a48b2506b561897a7eef8ea4a0363b"	"0"	"0"	"not-used-for-original-identity-closure"
 "mvdm-host"	"src/mvdm-host/vdmredir/vrmslot.c"	"a9c0233e054cafec941c89bb6d750e9c74bbdc8f8ddb0dc08a5f1b6809d5a298"	"0"	"0"	"not-used-for-original-identity-closure"

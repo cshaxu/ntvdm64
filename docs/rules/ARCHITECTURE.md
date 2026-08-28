@@ -22,21 +22,25 @@
    support carriers/libraries belong to `mvdm-support`; independent historical
    tools belong to `mvdm-tools`. A tool is never a host
    runtime dependency merely because it is independently buildable.
-   `mvdm-softpc-firmware` owns only selected original firmware/ROM/data
-   inputs; it is neither a host-runtime library nor a machine executor and is
-   consumable only by `adapter-bochs` through an admitted immutable-input
-   manifest. `mvdm-platform-abi` contains declarations only.
+   `mvdm-softpc-firmware` owns only selected original immutable firmware/ROM/
+   data inputs; it is neither a host-runtime library nor a machine executor.
+   `app` stages an admitted immutable input through the selected backend
+   binding. Executable `softpc.new/base/*` packages belong to `mvdm-host`.
+   `mvdm-platform-abi` contains declarations only.
    For source-function BFS, zero-degree is all original definitions in
    `mvdm-host` plus their transitive resolved call closure while each physical
    original definition remains selected OpenNT `mvdm` source already mirrored
    under a `mvdm-*` component. Existing but unreachable support, tool, firmware
    and guest definitions are not zero-degree. The rule creates no runtime link
    edge and matches source identity rather than function spelling.
-3. Bochs owns CPU, memory, firmware and PC-device semantics. `adapter-bochs`
-   is its only production caller and contains only Bochs mechanics.
-   the `softpc` family of `adapter-mvdm-host-out` reaches the machine only through
-   typed `adapter-bochs` operations and no `adapter-mvdm-host-out` family includes
-   a Bochs type, object or global.
+3. When a session selects Bochs, Bochs owns CPU, memory, firmware and PC-device
+   semantics and `adapter-bochs` is its only production caller. When a session
+   selects original SoftPC, the selected executable `mvdm-host/softpc.new`
+   source composition owns its original machine semantics. The `softpc` family
+   of `adapter-mvdm-host-out` binds one selected same-shaped path: typed
+   `adapter-bochs` mechanics for Bochs, or the original SoftPC call graph for
+   SoftPC. It never includes a Bochs type, object or global, and the two paths
+   neither fall back nor execute together.
 4. `adapter-mvdm-host-in` transports fixed-width copied machine events and typed
    completion only. Selector, service, dispatch and provider meaning remain in
    imported `mvdm-host` source.
@@ -98,7 +102,7 @@
 18. `mvdm-guest/dos/v86`, `mvdm-guest/bin86`, `mvdm-guest/wow16` and
     `mvdm-guest/font16` are complete load-only mirrors. Their source, objects,
     libraries and products never satisfy a host symbol. App loads
-    manifest-selected immutable bytes through `adapter-bochs`.
+    manifest-selected immutable bytes through the selected backend binding.
 19. The selected OpenNT tree is one package-scope union of the pinned OpenNT
     and OpenNT-4.5 MVDM baselines. Every target path has one selection;
     conflicts are decided at complete-package scope with provenance. Parallel
@@ -144,18 +148,20 @@
     records its original consumer, exact interface shape, binding owner and
     x86/x64 disposition. `mvdm-tools` may never be linked into `app` or
     an MVDM host runtime. `mvdm-softpc-firmware` may not be compiled or linked
-    as a host provider; it can enter only as an `adapter-bochs`-selected input.
-29. A `*-overlay` is a private implementation partition of its matching
+    as a host provider; `app` may stage its immutable inputs only through the
+    selected machine backend. Executable `softpc.new/base/*` source packages
+    belong to `mvdm-host`, not the firmware component.
+30. A `*-overlay` is a private implementation partition of its matching
     original mirror, not an additional generic source component.  It compiles
     into that mirror's library only; the matching mirror is its sole caller
     and linker.  Adapters, `session`, `broker`, `app`, fixtures and every other
     mirror must use the mirror boundary, never an overlay boundary.
-30. Mirror similarity is a release property.  An original package may not be
+31. Mirror similarity is a release property.  An original package may not be
     relocated into an adapter or replaced by autonomous code merely to reach a
     build.  Retain upstream path/name/control structure in the mirror; use a
     registered local `DIVERGENCE:` hook only for a minimal binding, and move
     any material added mechanism to the paired overlay.
-31. `mvdm-softpc-patch` is a narrow component for individually reviewed
+32. `mvdm-softpc-patch` is a narrow component for individually reviewed
     NTVDMx64-derived SoftPC patch bodies. Each body must have a register row
     identifying its original SoftPC caller and interface shape, NTVDMx64
     provenance, reason, x86/x64 disposition, mapping-manager use and removal

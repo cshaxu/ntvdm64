@@ -1,7 +1,10 @@
 # softpc family
 
-Same-shaped reached SoftPC/CCPU/SAS facade. It may use typed `adapter-bochs`
-operations but never a Bochs type or global.
+Same-shaped reached SoftPC/CCPU/SAS facade. For a Bochs-selected session it may
+use typed `adapter-bochs` operations but never a Bochs type or global. For a
+SoftPC-selected session, T310/S4 restores the original executable
+`mvdm-host/softpc.new` call graph instead; this facade does not redirect that
+path into Bochs or provide a fallback.
 
 ## Registered divergences
 
@@ -27,7 +30,10 @@ operations but never a Bochs type or global.
 | ADAPTER-SOFTPC-018 | Provide the reached non-fast WOW32 `SETVDMSTACK`, `VDMSTACK` and `host_simulate` SoftPC forms. | Original CCPU state cannot be linked, and direct CPU-field writes would violate the Bochs boundary. | `mvdm_vdm_stack_*` preserves 16:16 numeric stack formation and commits through one typed real-mode frame; `host_simulate` delegates only finite CPU resume/loop to `adapter-bochs`. | `include/mvdm_vdm_stack.h`, `mvdm_vdm_stack.c` |
 | ADAPTER-SOFTPC-019 | Preserve the historical no-argument `host_simulate(void)` call shape after CCPU replacement. | The original executor has no modern safe ownership or typed stop result; returning a Bochs object or admitting service meaning here would alter the source contract. | The thread-bound session supplies only an opaque finite budget and receives a copied mechanical outcome. `mvdm_vdm_stack.c` invokes the selector-blind typed resume contract in `adapter-bochs`; BOP, selector and provider decisions remain outside this family. | `include/mvdm_vdm_stack.h`, `mvdm_vdm_stack.c`; `../../adapter-bochs/machine_lifecycle.{h,cc}`; `../../session/session.{h,c}` |
 | ADAPTER-SOFTPC-020 | Preserve `host_simulate(void)` while one session chooses a machine backend. | T310 imports the original SoftPC candidate before its S4 machine composition is runnable; silently taking the Bochs path would falsify the selection. | For selected Bochs, retain the typed finite resume. For selected original SoftPC, record fixed `SESSION_MECHANICAL_STATUS_BACKEND_UNAVAILABLE` and perform no fallback. S4 replaces only that unavailable branch through original composition. | `mvdm_vdm_stack.c`, `../../session/session.{h,c}` |
+| ADAPTER-SOFTPC-021 | Keep the Bochs-recovery rows in this register from redefining the selected original SoftPC executor. | Earlier records describe the existing Bochs-selected binding, while T310 makes original SoftPC the default selected backend. | Every existing `adapter-bochs` reference in this register is scoped to a Bochs-selected session. A SoftPC-selected session preserves the original source-shaped call graph and may not enter these Bochs mechanics. | This README; T310 S4 composition evidence |
 | ADAPTER-SOFTPC-017 | Original WOW32 `GETVDMPTR`/`FLUSHVDMPTR`/`FREEVDMPTR` macros use a process-wide VDM pointer alias. | The historical alias is unsafe on x86/x64 and cannot represent bounded Bochs guest RAM. Redirector's fixed predeclared scope cannot model dynamic WOW structure lifetimes. | `mvdm_wow_pointer_scope_*` resolves one numeric real/protected VDM span, obtains only a synchronous `session.guest_memory` bounce lease, commits only at source-shaped flush, and rejects a retained/stale/nested scope. The protected resolver is selector-blind and validates native descriptor access before the session lease. | `include/mvdm_wow_pointer_scope.h`, `mvdm_wow_pointer_scope.c`, `include/mvdm_protected_span.h`, `mvdm_protected_span.c` |
 
-Any machine operation must use typed `adapter-bochs` mechanics; this family
-never includes a Bochs type or calls `bochs-core` directly.
+For a Bochs-selected session, machine operations use typed `adapter-bochs`
+mechanics. For a SoftPC-selected session, the original `softpc.new` call graph
+is restored without Bochs binding. This family never includes a Bochs type or
+calls `bochs-core` directly.
