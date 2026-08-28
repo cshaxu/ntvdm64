@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 2986 |
+| Documentation records | 2987 |
 | --- | --- |
-| Generated UTC | 2026-08-28T01:21:36Z |
+| Generated UTC | 2026-08-28T01:24:23Z |
 
 ## Entries
 
@@ -1077,6 +1077,7 @@ content-divergent entries.
 | etc/operations/mvdm-first-degree-rebaselined-declaration-frontier-ledger.tsv | indexed supporting material | 34cd14ad6eb4e08a279dc321568ccd3e185e40031ae4feae0ac0337e7d5e5e99 |
 | etc/operations/mvdm-first-degree-rebaselined-definition-candidate-ledger.tsv | indexed supporting material | 53ea8d16315d98e2f3e5cd5e33e3a5402f44949a62022fe39ce24875c4af312c |
 | etc/operations/mvdm-first-degree-rebaselined-include-frontier-ledger.tsv | indexed supporting material | 514ad1d9e4d56c97e716e99a54d22356a5f39e0632900b762a572c89b8ab9fee |
+| etc/operations/mvdm-first-degree-rebaselined-no-declaration-category-ledger.tsv | indexed supporting material | 4274326d906ded6e56c9d80db8c541cee40196010d6e992f3c8383113b9b53e5 |
 | etc/operations/mvdm-first-degree-rebaselined-prior-definition-identity-ledger.tsv | indexed supporting material | f4e4f3c39cddd3e2360f83c014158ac96e63a646bbbda729c16686c4b3e7c4a0 |
 | etc/operations/mvdm-first-degree-rebaselined-worklist-ledger.tsv | indexed supporting material | 83eacef5f1f5604aa171daf5e8bb932065d74f3408ec2d1277506e058a427bdc |
 | etc/operations/mvdm-host-degree-audit-plan-001.md | indexed supporting material | 975c31bccb526e2b16aed61629c69dba844b36e31c1240fc4d4e5dcba61b4c10 |
