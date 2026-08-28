@@ -17,12 +17,22 @@ declarations and external boundary; it updates those common ledgers, then
 recovers its original source body and tests its local contract. It may not use
 the absence of an unrelated global classification to author a substitute.
 
+For avoidance of doubt, an S1 boundary review is an admission substep, not a
+separate recovery phase. Once it has named the reached forms and their owner,
+the same T must proceed to source binding/recovery and local verification for
+that owner package. No P03--P14 package may restart a repository-wide degree
+scan, wait for all shared-ledger rows to be classified, or create a new audit
+T in place of its selected implementation slice. A later package may inherit
+an explicit unavailable or deferred edge, but it may not use that edge to
+silently replace the original owner flow.
+
 This avoids an audit-only critical path while retaining the existing physical
 identity, provenance, source-first and mirror/overlay rules. The completed P01
 source-index task seeds package admissions but does not need to grow into an
 unbounded whole-program BFS before functional recovery starts. Each recovery
 package performs only its bounded immediate-boundary S1 review, then recovers
-and locally verifies the selected original owner slice.
+and locally verifies the selected original owner slice within that same
+implementation package.
 The decision record is [the owner-directed package-first replan]
 (../evidence/m0-t301-owner-directed-package-first-queue-replan-001.md).
 
