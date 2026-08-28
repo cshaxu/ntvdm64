@@ -2,7 +2,8 @@
 
 Canonical original standalone MVDM-tool mirror. Its final retained
 upstream-relative package set is `vdmutils`, including `forcedos`, `graftabl`,
-`pifedit`, `win`, and their original resources.
+`pifedit`, `win`, and their original resources, plus the independent
+`v86/util/QUIT.COM` assembly utility.
 
 The current T276 audit keeps the byte-exact source union temporarily under
 `src/mvdm-host`; no source is copied, changed, linked, or deleted by
@@ -15,6 +16,9 @@ products under their original-relative paths.  They are retained only as
 historical tool evidence and remain outside the main-program link graph; see
 [`m0-t301-s1-opennt-src-2-mvdm-extra-import-manifest.tsv`](../../docs/etc/operations/m0-t301-s1-opennt-src-2-mvdm-extra-import-manifest.tsv).
 
+T310 S6 moved `v86/util` here byte-for-byte from the former host mirror. It is
+not a host-runtime input.
+
 ## Divergence register
 
-None. No upstream source has entered this root yet.
+None. All files in this mirror remain byte-exact upstream sources.

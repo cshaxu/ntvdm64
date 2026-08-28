@@ -4,27 +4,27 @@
 
 ## Active Packet
 
-**Active: M0 T310 S5**
+**Active: M0 T310 S6**
 
-### M0 T310 S5 — original i386 + CCPU pure-software execution recovery
+### M0 T310 S6 — CCPU-profile V86/MONITOR implementation removal
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T310 S5; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | Owner directed: “下一个S任务就做ccpu复通！” S4 has closed its source-first machine-composition selection/disposition scope; the owner-approved T310 plan is updated to make this the next bounded implementation S. |
-| Objective | Recover the original `i386 + CCPU` pure-software execution path from initialized SoftPC state through one bounded execution interval, typed controlled stop and teardown on both x86 and x64. |
-| Non-goals | No CCPU rewrite, MONITOR/V86/kernel-VDM execution, Bochs call from an original SoftPC body, BOP/provider expansion, trace-selected repair, kernel/CSRSS product-shell recreation, optional-device expansion, or runnable-product claim. |
-| Reference Baseline | T310 S1 root/interface ledgers; S2 exact `ccpu386` x86/x64 archive and forced-link evidence; S3 selected-backend lifecycle closure; S4 P1--P4 machine-family/initialization worksets; original `softpc.new` mirrors; existing session mapping manager; registered NTVDMx64 patch exception. |
-| Files And ABI Surface | Original `mvdm-host/softpc.new/base/ccpu386` and selected `host/src` execution roots; S4-selected machine initialization inputs; `adapter-mvdm-host-out/softpc` same-shaped lower seams; session mapping leases for historical native-pointer aliases; registered `mvdm-softpc-patch` evidence only where indispensable. |
-| Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island and source-recovery rules; T310 plan and S1--S3 evidence. |
-| Verification | Formal Ninja x86/x64 build and focused bounded-execution fixtures; prove original CCPU entry, typed stop and teardown; assert that the selected SoftPC row does not select MONITOR, V86 or Bochs; no `src.old`, Bochs type/global in original sources, raw guest pointer, or unclassified forced-link form; governance and diff checks. After S7 validates SoftPC, S8 retires the Bochs runtime and verifies the SoftPC-only x86/x64 product path. |
-| Expected Markers | Explicit `i386 + CCPU` source/build selection; initialized SAS-backed state; one original CCPU bounded execution interval; copied typed stop result; session teardown; per-seam mapping-manager and NTVDMx64 patch-intent disposition; a path-level V86/monitor/scaffold removal audit for S6. |
-| Asset Needs | Exact source mirrors, original manifests and source hashes, T310 ledgers, existing adapter boundaries, MSVC Build Tools and Ninja. |
-| Reporting Requirements | Record original executor source/order, x86/x64 selection state, CCPU-versus-MONITOR disposition, source-recovery rung, interface owner, mapping-manager use, patch intent/body status, stop result, and a S6 disposition of delete-after-S5, adapter-contract-retained, tool-only relocation or still-required-with-owner for every reached V86/monitor/scaffold path. |
-| Stop Conditions | A required original body needs unregistered mirror modification; CCPU requires a new unclassified external boundary; a path selects MONITOR/V86 or Bochs; a native pointer escapes its synchronous mapping lease; or a patch would change the original debugbreak/failure contract. |
-| Exit Criteria | Both x86 and x64 prove the selected original `i386 + CCPU` path enters bounded execution from S4-initialized state, returns a typed controlled stop and tears down. Every reached external seam has a named source-first disposition; no MONITOR/V86/Bochs fallback or unregistered pointer conversion occurs; the S6 removal audit classifies every reached V86/monitor/scaffold path. |
-| Original Owner Request | “本任务中，对你的要求是，尽可能的复通原始 mvdm/softpc.new 的softpc逻辑，使得softpc真实可靠；但是，应该使用映射管理器的地方，还是要记得用。” / “下一个S任务就做ccpu复通！” |
-| Similar-Issue Sweep | Original `ccpu386` executor and support roots; CCPU/MONITOR conditions; `nt_cpu`, `cfpu_def`, `nt_mem` and SAS interfaces; S4 initialization roots; existing SoftPC/Win32/session seams; mapping-manager leases; NTVDMx64 selected patch provenance; Bochs include/type/global edges; and `src.old` references. |
+| Identifier Mode | M0 T310 S6; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | T310's owner-approved S6 plan; the active goal additionally requires physical removal of no-longer-needed V86/kernel-VDM code. S5's selected CCPU profile is now evidenced on x86/x64. |
+| Objective | Remove every physically selected V86, MONITOR, kernel-VDM or Bochs executable implementation input from the original SoftPC CCPU production profile, while retaining only source-shaped interfaces whose modern session/adapter owner is explicit. |
+| Non-goals | Do not delete original CCPU guest-V86 semantics, rewrite SoftPC bodies, remove immutable mirror evidence merely on a lexical match, recreate a kernel VDM/CSRSS shell, or enable devices/BOP families. |
+| Reference Baseline | T310 S5 P1--P7 execution/path/memory evidence; exact S5 x86/x64 source manifests; original `softpc.new` mirrors; existing session mapping manager; T310 S1/S2 ledgers. |
+| Files And ABI Surface | Live SoftPC source manifests and Ninja generators; selected `mvdm-host/softpc.new` execution roots; any reached adapter-mvdm-host-out declarations; test-only fixtures and historical evidence trees only where their classification changes. |
+| Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island and source-recovery rules; approved T310 S6 plan. |
+| Verification | Produce a physical input ledger; prove x86/x64 CCPU graph has no `MONITOR` define, monitor library/body, kernel-VDM executable input, Bochs input or `src.old`; run formal x86/x64 CCPU fixture; governance, diff and source-path checks. |
+| Expected Markers | A per-path retain/delete/move disposition; zero forbidden production inputs; original CCPU guest-V86 files retained only where they are selected interpreter semantics; named adapters for every retained historical declaration. |
+| Asset Needs | Exact source mirrors and manifests, T310 S5 evidence, current formal Ninja graphs, MSVC Build Tools and Ninja. |
+| Reporting Requirements | Record every deleted, moved, retained-interface and retained-interpreter path; distinguish physical build membership from immutable mirror/source evidence; state source owner and modern adapter disposition. |
+| Stop Conditions | A candidate deletion is a selected CCPU interpreter body; removal would violate mirror provenance without an approved evidence relocation; a build selects MONITOR/kernel-VDM/Bochs; or a new external boundary is required. |
+| Exit Criteria | Both x86/x64 selected CCPU graphs contain zero executable MONITOR/kernel-VDM/V86-scaffold/Bochs inputs; all such former production paths are deleted or relocated; every retained historical declaration has a named adapter/unavailable disposition; formal fixtures and governance checks pass. |
+| Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
+| Similar-Issue Sweep | All T310 CCPU source/build manifests, `MONITOR` and V86 conditionals, `monitor.lib`, adapter monitor forms, Bochs references, old fallback providers, mapping-manager boundaries and `src.old` references. |
 
 **T310 S1 closure:** `6a46ee748` establishes the exact original `ccpu386`,
 `host/src` and `obj.vdm` roots, hashes, historical source roles and a
@@ -183,6 +183,24 @@ x86 and x64 graphs verify its `1.0f` SAS-RAM result before the original `D6
 FE` return; no host floating-point substitute, device, BOP, Bochs, or
 `src.old` path is selected.  See the [CPU/SAS/RAM/FPU evidence]
 (etc/evidence/m0-t310-s5-ccpu-sas-ram-execution-001.md).
+
+**T310 S5 closure:** the selected original `i386 + CCPU` profile now has
+formal x86/x64 evidence for initialized entry through original
+`host_start_cpu`, recursive original `host_simulate`, ordinary SAS RAM and
+original x87 effects, an original `D6 FE` return, typed outer-session result
+and teardown.  The source-path audit proves the graph selects no MONITOR,
+kernel-VDM, Bochs or `src.old` implementation.  It does not claim firmware or
+device composition; S6 owns physical profile cleanup and S7 owns that machine
+work.
+
+**T310 S6 P1 / closure:** the selected CCPU profile physically removes the
+unselected NT4 `v86/monitor` and `v86/scaffold` executable packages from
+`mvdm-host`, relocates their byte-exact sources to indexed historical evidence,
+moves `QUIT.COM` to `mvdm-tools`, and removes `monitor.lib` from the legacy
+aggregate product manifest.  Original CCPU guest-V86 semantics and named
+session/monitor adapter declarations remain correctly distinct.  Formal x86
+and x64 CCPU execution fixtures still pass; see the [S6 evidence]
+(etc/evidence/m0-t310-s6-v86-monitor-profile-removal-001.md).
 
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer

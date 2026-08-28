@@ -20,3 +20,7 @@ corresponding row to that component's `README.md` register.
 - `../tests/legacy/reconstruction/monitor/` holds the reconstructed monitor
   source and its direct fixtures. It is a self-contained historical probe,
   never a formal Ninja or production source root.
+- `mvdm-host/v86/monitor/` and `mvdm-host/v86/scaffold/` are byte-exact NT4
+  kernel-monitor and standalone-product-shell evidence moved by T310 S6.
+  They are intentionally outside `mvdm-host`, every formal Ninja graph and
+  all session/app runtime paths.

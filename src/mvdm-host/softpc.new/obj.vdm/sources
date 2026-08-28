@@ -81,7 +81,10 @@ LINKLIBS = \
      $(SOFTPC_TREE)\base\disks\obj\*\DISKS.LIB  \
      $(SOFTPC_TREE)\base\keymouse\obj\*\KEYMOUSE.LIB \
      $(SOFTPC_TREE)\host\src\obj\*\SRC.LIB      \
-     $(BASEDIR)\public\sdk\lib\*\monitor.lib        \
+# DIVERGENCE(MVDM-HOST-DIV-031): The selected i386+CCPU product profile
+# never links the historical kernel-V86 monitor.  Its source package is
+# retained only under docs/etc/legacy_code; all remaining original link order
+# is unchanged.
      $(BASEDIR)\public\sdk\lib\*\dem.lib    \
      $(BASEDIR)\public\sdk\lib\*\dbg.lib    \
      $(BASEDIR)\public\sdk\lib\*\command.lib        \
