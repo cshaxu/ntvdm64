@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T303 S1.**
+**Active: M0 T303 S2.**
 
 M0 T301/S1 is closed. Its constrained first-degree audit produced physical
 source/binding evidence without turning whole-program BFS into a functional
@@ -45,6 +45,18 @@ Bochs/SoftPC mechanical-contract audit required by the first vertical slice.
 It may identify only original machine-facing forms and their existing adapter
 seams; no Bochs edit, BOP route or guest trace repair is admitted. See the
 [S1 plan](etc/operations/m0-t303-s1-bochs-softpc-mechanical-contract-plan-001.md).
+
+**T303 S1 closure:** the first vertical slice reaches scalar register access,
+bounded real-mode locations, the DEM SFT/JFT shadow, and finite CPU resume;
+it does not require the historical SoftPC executor, XMS A20/SAS or DPMI
+protected mechanics. The [mechanical ledger](etc/operations/m0-t303-s1-first-slice-mechanical-ledger.tsv)
+and [audit evidence](etc/evidence/m0-t303-s1-first-slice-mechanical-contract-audit-001.md)
+give each form one owner and x86/x64 rule.
+
+**T303 S2 admission:** recover only the missing selector-blind typed finite
+resume/stop contract needed by the retained `host_simulate` spelling. It may
+make no BOP or MVDM service decision and must leave all source-site pointer
+conversion to the DEM/COMMAND owner package. See the [S2 plan](etc/operations/m0-t303-s2-typed-resume-contract-plan-001.md).
 
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,
@@ -174,21 +186,21 @@ not package/provider admissions. See the [P20 signature evidence]
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T303 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Owner-directed queue execution from Base VDM command protocol toward DPMI/DPMI32. This S admits only the first vertical-slice Bochs/SoftPC source and ABI audit described in its plan. |
-| Objective | Identify every reached original SoftPC/CCPU/SAS mechanical interface required by the first vertical slice, assign its existing or missing same-shaped adapter owner, and prove that Bochs remains the sole executor. |
-| Non-goals | No Bochs source change, CPU profile, BOP route, guest trace repair, device enablement, second SoftPC/CCPU executor, BaseSrv expansion, or DEM/COMMAND implementation. |
-| Reference Baseline | T302 closure; T301 physical source audit; original reached MVDM mechanical declarations; current `adapter-mvdm-host-out/softpc` and `adapter-bochs` contracts. |
-| Files And ABI Surface | Source/ABI/failure ledger and S1 plan only; inspection may cover reached MVDM callers, `adapter-mvdm-host-out/softpc`, `adapter-bochs`, session mapping/lease contracts and their source declarations. |
+| Identifier Mode | `M0 T303 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner-directed recovery after T303/S1's bounded ledger. This S admits only a selector-blind typed finite-resume/stop contract for the reached historical `host_simulate` form. |
+| Objective | Make the first slice's `host_simulate` spelling use a bounded Bochs-only resume operation with a copied, typed outcome, while retaining scalar-register and session-lease boundaries. |
+| Non-goals | No BOP route, guest trace repair, device enablement, CPU profile, second SoftPC/CCPU executor, BaseSrv expansion, DEM/COMMAND pointer-site conversion, XMS A20/SAS or DPMI protected behavior. |
+| Reference Baseline | T302 closure; [T303 S1 mechanical ledger](etc/operations/m0-t303-s1-first-slice-mechanical-ledger.tsv); original `softpc.h`/reached DEM callers; current `adapter-mvdm-host-out/softpc`, `adapter-bochs` and session contracts. |
+| Files And ABI Surface | `adapter-bochs` typed finite-resume request/outcome, the historical `host_simulate` binding, focused x86/x64 fixture and formal Ninja recipe only. |
 | Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; four-rung source-recovery gate; mapping and `src.old` exclusion rules. |
-| Verification | Physical caller/declaration proof, dependency-direction review, x86/x64 width/mapping treatment review, documentation governance and `git diff --check`. |
-| Expected Markers | One owner and disposition for each reached original mechanical form; no MVDM semantic dependency enters Bochs; no unowned pointer/lease conversion remains. |
-| Asset Needs | Original MVDM/SoftPC declarations, existing adapter source, Base VDM closure evidence, both approved OpenNT source roots and current source manifests. |
-| Reporting Requirements | Report direct original forms, retained existing adapter behavior, missing bindings, explicit second-executor exclusions and every candidate Bochs requirement. |
-| Stop Conditions | A required form needs a BOP-specific Bochs change, an unbounded device/product-shell import, a family-private mapping manager, or a source body beyond the immediate first-slice boundary. |
-| Exit Criteria | A bounded complete immediate mechanical ledger and approved implementation plan exist; no new runtime behavior is introduced in S1. |
+| Verification | Focused real-machine x86/x64 Ninja tests for typed finite resume, register facade and bounded session lease; dependency-direction review, documentation governance and `git diff --check`. |
+| Expected Markers | One typed mechanical outcome for every finite resume; no MVDM semantic dependency enters Bochs; no unowned pointer/lease conversion or second executor exists. |
+| Asset Needs | Existing `adapter-bochs` lifecycle/facade, `adapter-mvdm-host-out/softpc` bindings, session lease contract and original reached declarations. |
+| Reporting Requirements | Report the public mechanical request/outcome, retained `host_simulate` source shape, failure direction, x86/x64 evidence and explicit exclusions. |
+| Stop Conditions | A required change needs a BOP selector, MVDM owner decision, an unbounded device/product-shell import, a family-private mapping manager, or a source body outside the shared mechanical form. |
+| Exit Criteria | A focused x86/x64 formal build proves the typed finite resume contract with existing scalar/lease guards; P04 may attach copied event ingress without reopening this mechanical contract. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务，从 Base VDM 命令协议开始，到 DPMI / DPMI32 复通。” |
-| Similar-Issue Sweep | `host_simulate`, register get/set forms, selector and stack transaction, `Sim32GetVDMPointer` family, A20, protected-frame operations, mapping leases, controlled stop/resume, SoftPC CPU executor exclusion and Bochs dependency direction. |
+| Similar-Issue Sweep | finite stop class, no-active-machine/failure behavior, copied register frame, guest-memory lease lifetime, Bochs-only ownership, second-executor exclusion and selector-blind interface review. |
 
 **Td closure — OpenNT-host directory boundary:** `opennt-host` is now
 explicitly governed as the single mirror root for every separately accepted
