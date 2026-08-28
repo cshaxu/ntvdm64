@@ -1,4 +1,4 @@
-# mvdm-platform-abi
+# opennt-abi
 
 This mirror component holds only byte-identical, declaration-only OpenNT
 headers required outside the canonical MVDM source union. It owns no behavior,
@@ -42,6 +42,12 @@ manifest.
 T282 S3 selected byte-exact public internal `winconp.h` for original COMMAND
 keyboard-layout declarations. It does not enable keyboard policy, registry
 access, console initialization, a `54:0E` provider or guest-memory writes.
+
+T309 S2 P3 selected byte-exact public internal `conapi.h` for the original
+SoftPC-host PIF/error/console source cohort. It supplies declarations only;
+private Console/CSRSS operations remain named adapter or product-boundary
+decisions and this import enables neither a console product shell nor a VDM
+route.
 
 T291 S5 P3 selected byte-exact public SDK `ntcsrsrv.h` for the original
 OpenNT BaseSrv VDM package now mirrored in `opennt-host`. It is only the

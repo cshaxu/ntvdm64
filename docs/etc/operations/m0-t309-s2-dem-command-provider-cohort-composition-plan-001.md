@@ -61,3 +61,15 @@ Bochs/firmware boundary, public CRT/Win32 linkage, or a later owner package.
 P3 does not add all of those source files blindly: each candidate retains its
 original caller, full translation-unit boundary, direct composition result,
 and failure/product-shell disposition.
+
+The selected source candidates are grouped for whole-package treatment in this
+order: (1) `nt_pif.c` configuration parsing; (2) `nt_error.c` error
+interaction; (3) `nt_event.c`, `nt_hosts.c`, and `nt_lpt.c`
+console/standard-stream/device endpoint state; and (4) `nt_msscs.c`
+cross-owner startup/VDD composition.  `nt_reset.c` is recorded separately:
+its `CpuH -> CpuInt_c.h` dependency belongs to the queued original-SoftPC
+backend, where the CLI will select SoftPC or Bochs under one MVDM host
+composition.  The current Bochs-only T309 audit may not crop or rewrite it to
+make that backend disappear.  A group may be admitted to a formal composition
+graph only after its whole original translation-unit boundary is recorded.
+This order is a dependency grouping, not a trace-derived service list.

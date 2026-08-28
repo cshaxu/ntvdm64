@@ -39,18 +39,19 @@ that bounded packet closes is item 1 below.
 | 3 | DEM/COMMAND vertical slice and child lifecycle |
 | 4 | Minimal DOS guest execution and controlled return |
 | 5 | Minimal vertical-slice integration closure |
-| 6 | XMS owner package |
-| 7 | DPMI/DPMI32 owner package |
-| 8 | Redirector owner package (including the selected `netstatus.c` mirror slice) |
-| 9 | WOW32/Win16 owner package |
-| 10 | VDD owner package |
-| 11 | Debugger/BDE/FAX owner packages |
-| 12 | Service-package cross-family closure and native integration evidence |
-| 13 | Broker process and cross-process coordination |
-| 14 | In-process multi-session reentrancy audit |
-| 15 | Host capability expansion |
-| 16 | Guest DOS/WOW16 artifact matrix |
-| 17 | Product release closure |
+| 6 | NTVdmx64 CCPU backend import and selectable Bochs fallback (SoftPC default) |
+| 7 | XMS owner package |
+| 8 | DPMI/DPMI32 owner package |
+| 9 | Redirector owner package (including the selected `netstatus.c` mirror slice) |
+| 10 | WOW32/Win16 owner package |
+| 11 | VDD owner package |
+| 12 | Debugger/BDE/FAX owner packages |
+| 13 | Service-package cross-family closure and native integration evidence |
+| 14 | Broker process and cross-process coordination |
+| 15 | In-process multi-session reentrancy audit |
+| 16 | Host capability expansion |
+| 17 | Guest DOS/WOW16 artifact matrix |
+| 18 | Product release closure |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

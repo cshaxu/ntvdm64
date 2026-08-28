@@ -46,7 +46,13 @@ boundaries; see the [P3 first pass]
 (etc/evidence/m0-t309-s2-p3-residual-owner-first-pass-001.md).
 Its generated ledger now assigns every provider-origin row a source/adapter/
 boundary disposition and is cross-checked against the equal-sized x86 caller
-set; no new provider body has been enabled.
+set; no new provider body has been enabled.  **T309 S2 P3 PIF audit:** the
+unchanged original `nt_pif.c` now compiles on both architectures with its
+historical `WINNT` declaration condition and has an eleven-form finite
+immediate boundary.  Its reset neighbor is explicitly transferred intact to
+the queued selectable original-SoftPC backend; T309 may not crop it to force a
+Bochs-only result.  See the [PIF audit]
+(etc/evidence/m0-t309-s2-p3-pif-source-composition-audit-001.md).
 
 **T307 S1 P1:** the local Base VDM facade now covers the reached DOS forms for
 first-VDM query, command capture/capacity/reentry, copied one-shot current

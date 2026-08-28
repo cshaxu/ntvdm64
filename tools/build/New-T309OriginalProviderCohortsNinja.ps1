@@ -1,7 +1,9 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)] [ValidateSet('x86', 'x64')] [string]$Architecture,
-    [string]$RepositoryRoot = ''
+    [string]$RepositoryRoot = '',
+    [switch]$IncludePifAudit,
+    [switch]$IncludeErrorAudit
 )
 
 Set-StrictMode -Version Latest
@@ -62,6 +64,8 @@ $machine = @(
     'src/adapter-bochs/minimal_pic.cc',
     'src/adapter-bochs/minimal_sim.cc'
 )
+$pif = 'nt_pif.c'
+$errorSource = 'nt_error.c'
 foreach ($unit in $dem) {
     $path = Join-Path $root "src/mvdm-host/dos/dem/$unit.c"
     if (!(Test-Path -LiteralPath $path)) { throw "Missing original DEM source: $path" }
@@ -80,7 +84,13 @@ foreach ($source in $machine) {
         throw "Missing selected Bochs mechanical adapter source: $source"
     }
 }
-New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/binding'), (Join-Path $build 'obj/machine') | Out-Null
+if ($IncludePifAudit -and !(Test-Path -LiteralPath (Join-Path $root "src/mvdm-host/softpc.new/host/src/$pif"))) {
+    throw "Missing original PIF source: $pif"
+}
+if ($IncludeErrorAudit -and !(Test-Path -LiteralPath (Join-Path $root "src/mvdm-host/softpc.new/host/src/$errorSource"))) {
+    throw "Missing original error source: $errorSource"
+}
+New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/binding'), (Join-Path $build 'obj/machine'), (Join-Path $build 'obj/pif'), (Join-Path $build 'obj/error') | Out-Null
 $environment = Join-Path $build 'msvc-mt.cmd'
 @('@echo off', 'set "MVDM_T309_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready',
   ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'),
@@ -117,15 +127,21 @@ $flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /Di386 /
     ($includes -join ' ')
 $machineFlags = '/nologo /TP /c /std:c++14 /EHsc /MT /W4 /showIncludes /DWIN32 /DRUNTIME_ENABLE_MACHINE_UD_BRIDGE=1 ' +
     ($machineIncludes -join ' ')
+$pifFlags = $flags + ' /DWINNT /FI "' + (NinjaPath (Join-Path $root 'src/opennt-abi/source/public/internal/windows/inc/pif.h')) + '"'
 
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
 $graph.Add('build_root = ' + (NinjaPath $build))
 $graph.Add('cflags = ' + $flags)
+$graph.Add('pifflags = ' + $pifFlags)
 $graph.Add('machineflags = ' + $machineFlags)
 $graph.Add('')
 $graph.Add('rule cc')
 $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in')
+$graph.Add('  deps = msvc')
+$graph.Add('  msvc_deps_prefix = Note: including file:')
+$graph.Add('rule pifcc')
+$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $pifflags /Fo$out $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('rule cxx')
@@ -158,10 +174,16 @@ $machineObjects = foreach ($source in $machine) {
     $graph.Add("build ${object}: cxx " + (NinjaPath (Join-Path $root $source)))
     $object
 }
+$pifObject = 'obj/pif/nt_pif.obj'
+$errorObject = 'obj/error/nt_error.obj'
+$graph.Add("build ${pifObject}: pifcc " + (NinjaPath (Join-Path $root "src/mvdm-host/softpc.new/host/src/$pif")))
+$graph.Add("build ${errorObject}: cc " + (NinjaPath (Join-Path $root "src/mvdm-host/softpc.new/host/src/$errorSource")))
 $graph.Add('build original-dem-provider-cohort.lib: lib ' + ($demObjects -join ' '))
 $graph.Add('build original-command-provider-cohort.lib: lib ' + ($commandObjects -join ' '))
 $graph.Add('build source-shaped-bindings.lib: lib ' + ($bindingObjects -join ' '))
 $graph.Add('build adapter-bochs-mechanical.lib: lib ' + ($machineObjects -join ' '))
+$graph.Add('build original-pif-audit.lib: lib ' + $pifObject)
+$graph.Add('build original-error-audit.lib: lib ' + $errorObject)
 $auditResponse = @(
     '/nologo', '/dll', '/noentry', '/force:unresolved',
     '/out:external-link-audit.dll',
@@ -173,9 +195,18 @@ $auditResponse = @(
 )
 [IO.File]::WriteAllLines((Join-Path $build 'external-link-audit.dll.rsp'), $auditResponse,
     [Text.UTF8Encoding]::new($false))
+$pifAuditResponse = @('/nologo', '/dll', '/noentry', '/force:unresolved',
+    '/out:pif-external-link-audit.dll', '/wholearchive:original-pif-audit.lib',
+    'kernel32.lib', 'advapi32.lib')
+[IO.File]::WriteAllLines((Join-Path $build 'pif-external-link-audit.dll.rsp'), $pifAuditResponse,
+    [Text.UTF8Encoding]::new($false))
 $graph.Add('build external-link-audit.dll: audit original-dem-provider-cohort.lib original-command-provider-cohort.lib source-shaped-bindings.lib adapter-bochs-mechanical.lib')
+$graph.Add('build pif-external-link-audit.dll: audit original-pif-audit.lib')
+$graph.Add('build error-source-audit: phony original-error-audit.lib')
 $graph.Add('build cohorts: phony original-dem-provider-cohort.lib original-command-provider-cohort.lib source-shaped-bindings.lib adapter-bochs-mechanical.lib')
-$graph.Add('default cohorts external-link-audit.dll')
+if ($IncludePifAudit) { $graph.Add('default cohorts pif-external-link-audit.dll external-link-audit.dll') }
+elseif ($IncludeErrorAudit) { $graph.Add('default cohorts error-source-audit external-link-audit.dll') }
+else { $graph.Add('default cohorts external-link-audit.dll') }
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'),
     (($graph -join [Environment]::NewLine) + [Environment]::NewLine),
     [Text.UTF8Encoding]::new($false))

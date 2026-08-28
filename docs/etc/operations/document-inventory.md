@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3102 |
+| Documentation records | 3104 |
 | --- | --- |
-| Generated UTC | 2026-08-28T15:21:13Z |
+| Generated UTC | 2026-08-28T15:38:34Z |
 
 ## Entries
 
@@ -496,6 +496,8 @@ content-divergent entries.
 | etc/evidence/m0-t307-s1-p1-base-vdm-dos-contract-001.md | indexed supporting material | d3420470deaae53db5b2ada8d0498732ba8345d4f9fc16e9449859f6dd450c7c |
 | etc/evidence/m0-t308-s1-monitor-ntvdmcontrol-contract-001.md | indexed supporting material | 518c11605a21fc3bc3fafd8feb2bf2c9424f1fc11998c763ba44b3f605265a57 |
 | etc/evidence/m0-t309-s1-dem-command-ingress-closure-audit-001.md | indexed supporting material | 85e8320e90154772f60a96d112046ddce4bb0e6ed2c7b3bf90924804c5cf722c |
+| etc/evidence/m0-t309-s2-p3-error-source-boundary-audit-001.md | indexed supporting material | 13f84a113e07ee3064b4ca4aac911f397f8981203279b2c59df73386ac7bd1b7 |
+| etc/evidence/m0-t309-s2-p3-pif-source-composition-audit-001.md | indexed supporting material | ffe391f67ab7a3ac38a7727323b66902f36a3ee80a6837789f31fa540c0f7756 |
 | etc/evidence/m0-t309-s2-p3-provider-residual-owner-ledger.tsv | indexed supporting material | 8adcff9f833818ca8c9c3047ed9a058b523231607e94869e62982588e8bd2f95 |
 | etc/evidence/m0-t309-s2-p3-residual-owner-first-pass-001.md | indexed supporting material | 5aae55fd6b6d3fd68ce4ad4275881e49945b56c54ad6a1986613402006366060 |
 | etc/evidence/m0-t309-s2-provider-cohort-build-audit-001.md | indexed supporting material | 96c1ca4622519dde4b278de3a5f7e3918f8a09a2818ed388d8b5c85d6dceab1d |
@@ -1031,8 +1033,8 @@ content-divergent entries.
 | etc/operations/m0-t282-s9-command-environment-guest-seam-ledger-001.tsv | indexed supporting material | b713d790e3e8b73cd368bde3a7421f5deb5ba592f237e090ec2b76ba3db7b23a |
 | etc/operations/m0-t283-s1-platform-abi-candidate-inventory-001.tsv | indexed supporting material | 38151bf5b6f097a8abfc7fa9ce61cb32740e7b32d0f0336e4007faf6da93772b |
 | etc/operations/m0-t283-s1-platform-abi-canonical-union-inventory-plan-001.md | indexed supporting material | f843345b365bf5b35b26a9b39ea61b231dde214be1c84af0af4ac492c0cfef24 |
-| etc/operations/m0-t283-s1-platform-abi-selection-ledger-001.tsv | indexed supporting material | 3eb5923f9bf38a06efbcbff2d56c9e852ef8217edbe7087d86d3de821785a387 |
-| etc/operations/m0-t283-s2-platform-abi-canonical-import-manifest-001.tsv | indexed supporting material | 82f038eb11798c3ee78622c86eb73f67db13695a7820a5b7076d49d03724ed70 |
+| etc/operations/m0-t283-s1-platform-abi-selection-ledger-001.tsv | indexed supporting material | 73f7eae4881f184ec0eacc2c14c2b83e8413b14c8c824bee4b6db9508f9a3c3d |
+| etc/operations/m0-t283-s2-platform-abi-canonical-import-manifest-001.tsv | indexed supporting material | 216bcaf061b7ea4a23a342c161d1f61473106c86233a60b0ce2db67b38944d0f |
 | etc/operations/m0-t283-s2-platform-abi-canonical-reroot-plan-001.md | indexed supporting material | 3f97eb9c51ccb5967d8fd23c6cd55ff7a7e1a3760aa1081bdfd932485710cbf1 |
 | etc/operations/m0-t284-s1-adapter-convergence-consumer-inventory-001.tsv | indexed supporting material | 0ea0a85773b0444a247e919cc7b314631a7cc952374181c13454850758d5d81d |
 | etc/operations/m0-t284-s1-adapter-convergence-file-inventory-001.tsv | indexed supporting material | 9ebafe8f21d068a14385f8093e661a071e4960db59e16fd15eb5fc2541c5b3ba |
@@ -1134,7 +1136,7 @@ content-divergent entries.
 | etc/operations/m0-t308-s1-monitor-ntvdmcontrol-plan-001.md | indexed supporting material | 77f63d9895f6f97c28dc204038644849ddbc5b623038b69a7201fcf037f3f77a |
 | etc/operations/m0-t308-s1-ntvdmcontrol-service-disposition.tsv | indexed supporting material | 714af034cf488b0bedcfc273bbc3ab31d46524af4040c69a262c145946976a14 |
 | etc/operations/m0-t309-s1-dem-command-vertical-slice-plan-001.md | indexed supporting material | ced38fb7d138830633b5df72eb59892b31829187b521353f26cadadb64df741d |
-| etc/operations/m0-t309-s2-dem-command-provider-cohort-composition-plan-001.md | indexed supporting material | 15806ee9143cc1bce44f7a32c845d6069441630b6a3ebb6d1e0d6bd121874969 |
+| etc/operations/m0-t309-s2-dem-command-provider-cohort-composition-plan-001.md | indexed supporting material | cac1dcfa1fc2bec7722b5fd392ee38812381f47564833e4da78eb82857413c6c |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3116,7 +3118,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 0dfc0aa4c4ad7563b48ce2439a3513a68cecba67f69df6d4b75d8b5b87536070 |
+| STATUS.md | principal control document | eff03286e52588eadc2394d88c9540ddd26b8117c4555d825f4a40fa78e86dbb |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
