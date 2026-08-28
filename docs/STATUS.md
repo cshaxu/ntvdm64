@@ -4,27 +4,27 @@
 
 ## Active Packet
 
-**Active: M0 T310 S4**
+**Active: M0 T310 S5**
 
-### M0 T310 S4 — original SoftPC machine-composition recovery
+### M0 T310 S5 — original i386 + CCPU pure-software execution recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T310 S4; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | S3 is closed by the recorded x86/x64 selection evidence; S4 is the next pre-approved subtask in the owner-approved T310 plan. |
-| Objective | Recover the original SoftPC machine composition in initialization/dependency order: establish each selected firmware and machine-control family as direct original composition, adapter-backed original composition, source-shaped unavailable, or a named later owner. |
-| Non-goals | No BOP/provider expansion, trace-selected repair, CCPU rewrite, Bochs call from an original SoftPC body, kernel/CSRSS product-shell recreation, optional device enablement by convenience, or runnable-backend claim before the complete selected profile is proven. |
-| Reference Baseline | T310 S1 root/interface ledgers, S2 x86/x64 forced-link ledgers, S3 backend-selection closure, original `softpc.new` source/manifest mirrors, firmware mirror, and existing session mapping manager. |
-| Files And ABI Surface | Original `mvdm-host/softpc.new` machine roots and `mvdm-softpc-firmware` inputs; source-shaped `adapter-mvdm-host-out/softpc` / Win32 bindings only where original callers require them; session mapping leases for any native-pointer alias. |
+| Identifier Mode | M0 T310 S5; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | Owner directed: “下一个S任务就做ccpu复通！” S4 has closed its source-first machine-composition selection/disposition scope; the owner-approved T310 plan is updated to make this the next bounded implementation S. |
+| Objective | Recover the original `i386 + CCPU` pure-software execution path from initialized SoftPC state through one bounded execution interval, typed controlled stop and teardown on both x86 and x64. |
+| Non-goals | No CCPU rewrite, MONITOR/V86/kernel-VDM execution, Bochs call from an original SoftPC body, BOP/provider expansion, trace-selected repair, kernel/CSRSS product-shell recreation, optional-device expansion, or runnable-product claim. |
+| Reference Baseline | T310 S1 root/interface ledgers; S2 exact `ccpu386` x86/x64 archive and forced-link evidence; S3 selected-backend lifecycle closure; S4 P1--P4 machine-family/initialization worksets; original `softpc.new` mirrors; existing session mapping manager; registered NTVDMx64 patch exception. |
+| Files And ABI Surface | Original `mvdm-host/softpc.new/base/ccpu386` and selected `host/src` execution roots; S4-selected machine initialization inputs; `adapter-mvdm-host-out/softpc` same-shaped lower seams; session mapping leases for historical native-pointer aliases; registered `mvdm-softpc-patch` evidence only where indispensable. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island and source-recovery rules; T310 plan and S1--S3 evidence. |
-| Verification | Per-family source/build disposition ledger; original-initialization-order review; formal Ninja x86/x64 archive/link probes; no `src.old`, Bochs type/global in original sources, raw guest pointer, or unclassified forced-link form; governance and diff checks. |
-| Expected Markers | One disposition for BIOS/ROM/CMOS, memory/SAS/A20/UMB, PIC/PIT, keyboard/mouse, DMA, display/VGA, disk/floppy and serial/parallel; smallest same-shaped adapter seams; explicit S5 runnable-profile workset. |
+| Verification | Formal Ninja x86/x64 build and focused bounded-execution fixtures; prove original CCPU entry, typed stop and teardown; assert that the selected SoftPC row does not select MONITOR, V86 or Bochs; no `src.old`, Bochs type/global in original sources, raw guest pointer, or unclassified forced-link form; governance and diff checks. |
+| Expected Markers | Explicit `i386 + CCPU` source/build selection; initialized SAS-backed state; one original CCPU bounded execution interval; copied typed stop result; session teardown; per-seam mapping-manager and NTVDMx64 patch-intent disposition. |
 | Asset Needs | Exact source mirrors, original manifests and source hashes, T310 ledgers, existing adapter boundaries, MSVC Build Tools and Ninja. |
-| Reporting Requirements | Record original source/order, x86/x64 status, source-recovery rung, interface owner, mapping-manager use, link membership, failure direction and deferred owner for each family. |
-| Stop Conditions | A required original body needs unregistered mirror modification; a family requires a new unclassified external boundary; a source path would run Bochs and CCPU together; or a device must be enabled without a source-shaped owner disposition. |
-| Exit Criteria | Every reached selected machine family has a source-first disposition and bounded build/initialization workset; all necessary mapping/adapter seams are named and registered; no original device/firmware family is silently omitted; S5 has a finite x86/x64 × SoftPC/Bochs verification matrix. |
-| Original Owner Request | “本任务中，对你的要求是，尽可能的复通原始 mvdm/softpc.new 的softpc逻辑，使得softpc真实可靠；但是，应该使用映射管理器的地方，还是要记得用。” |
-| Similar-Issue Sweep | All original `softpc.new` host/base device/firmware roots, `sources` conditionals, T310 forced-link forms, existing adapters, source hashes, x86/x64 diagnostics, current mapping-manager seams, Bochs include/type/global edges and `src.old` references. |
+| Reporting Requirements | Record original executor source/order, x86/x64 selection state, CCPU-versus-MONITOR disposition, source-recovery rung, interface owner, mapping-manager use, patch intent/body status, stop result and deferred owner. |
+| Stop Conditions | A required original body needs unregistered mirror modification; CCPU requires a new unclassified external boundary; a path selects MONITOR/V86 or Bochs; a native pointer escapes its synchronous mapping lease; or a patch would change the original debugbreak/failure contract. |
+| Exit Criteria | Both x86 and x64 prove the selected original `i386 + CCPU` path enters bounded execution from S4-initialized state, returns a typed controlled stop and tears down; every reached external seam has a named source-first disposition; no MONITOR/V86/Bochs fallback or unregistered pointer conversion occurs. |
+| Original Owner Request | “本任务中，对你的要求是，尽可能的复通原始 mvdm/softpc.new 的softpc逻辑，使得softpc真实可靠；但是，应该使用映射管理器的地方，还是要记得用。” / “下一个S任务就做ccpu复通！” |
+| Similar-Issue Sweep | Original `ccpu386` executor and support roots; CCPU/MONITOR conditions; `nt_cpu`, `cfpu_def`, `nt_mem` and SAS interfaces; S4 initialization roots; existing SoftPC/Win32/session seams; mapping-manager leases; NTVDMx64 selected patch provenance; Bochs include/type/global edges; and `src.old` references. |
 
 **T310 S1 closure:** `6a46ee748` establishes the exact original `ccpu386`,
 `host/src` and `obj.vdm` roots, hashes, historical source roles and a
@@ -108,6 +108,22 @@ Bochs-only assumptions are not reused: SoftPC machine, BOP, XMS and
 host-control forms select their original owners first; only six/five forms are
 named public-host boundaries and four preserve the `fmstubs.c` debugbreak
 default. See the [P4 disposition evidence](etc/evidence/m0-t310-s4-p4-init-group-interface-disposition-001.md).
+
+**T310 S4 P5:** formal x86/x64 Ninja graphs now directly archive the complete
+original SoftPC `base/system` and `base/support` manifests: PIC/PIT/CMOS/DMA,
+ROM and IOS routing stay in their original source owners.  Two declaration/
+include-only divergences preserve those bodies unchanged; P5's non-runnable
+forced-link ledgers reduce to 231/230 forms and identify the next original
+host-control/fixed-disk group rather than installing local replacements. See
+the [P5 composition evidence](etc/evidence/m0-t310-s4-p5-pic-pit-ios-source-composition-001.md).
+
+**T310 S4 closure:** S4 has closed its bounded source-first scope: all nine
+original machine families have an initialization-ordered disposition, the
+selected reset/BIOS/CMOS/keymouse/CCPU-SAS group is selected from original
+manifests on x86/x64, and every P3 unresolved physical form has an explicit
+owner. This is composition and interface closure only; it does not claim an
+executing CCPU. M0 T310 S5 owns the first original `i386 + CCPU` bounded
+execution interval.
 
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer

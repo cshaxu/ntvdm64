@@ -20,11 +20,21 @@ build, bind and progressively verify its original owner closure before runtime
 selection is enabled.
 
 The application default is original SoftPC. Bochs is an explicit alternative.
-Until S4 makes SoftPC machine creation runnable, the default selection must
+Until S5 makes SoftPC machine creation runnable, the default selection must
 produce an explicit unavailable result rather than silently selecting Bochs.
 Every later functional verification matrix covers both selected backends on
 both x86 and x64; a deliberately unavailable backend records its expected
 outcome instead of being omitted from the matrix.
+
+For the original SoftPC branch, the selected executor is the original
+`i386 + CCPU` pure-software configuration. `MONITOR`, hardware V86 execution,
+kernel VDM execution and a Bochs CPU call from an original SoftPC body are
+excluded from that branch. This preserves the historical non-MONITOR CCPU
+route rather than creating a new CPU or treating the historical `i386` build
+label as proof of a V86 dependency. NTVDMx64 is evidence for the narrow
+selection/ABI/SAS corrections needed to expose this existing route; its
+injector, loader, system-DLL patching, registry policy, CSRSS and host-mutation
+product shell remain excluded.
 
 The selection belongs to `app` and neutral session lifetime binding. The MVDM
 mirror does not parse CLI policy, identify a backend, include a Bochs type or
@@ -110,7 +120,51 @@ family.  It does not require every historical optional device to be enabled,
 but it does require every selected/reached device family to be explicitly
 accounted for before a backend is called runnable.
 
-### S5 — focused dual-backend verification and transfer
+S4 closes on source-first machine-family selection, bounded initialization
+worksets and interface dispositions. It deliberately does not claim that the
+selected CCPU executor has run guest instructions; that runtime recovery is
+the next S rather than an implied result of archive or forced-link evidence.
+
+### S5 — original i386 + CCPU pure-software execution recovery
+
+Recover the selected original CCPU execution path from initialized SoftPC
+state through one bounded execution interval and a typed controlled stop. The
+active configuration is explicitly `i386 + CCPU`, never `MONITOR` or V86. Keep
+the original `ccpu386` executor and its call shapes as the source owner; do
+not replace it with a Bochs call or rewrite the executor.
+
+Bind only the source-shaped lower seams required by this interval: SAS-backed
+guest memory, register/state transfer, interrupt/stop observation and the
+existing session mapping-manager lease for any historical native-pointer
+alias. Evaluate the NTVDMx64 CCPU-selection, C-FPU layout and `nt_mem`/SAS
+patch intent against the selected original source. Import a patch body only
+under the registered source-policy exception and only when the original body
+cannot express the same x86/x64 build contract through a smaller named
+adapter. `fmstubs.c` remains an immediate-debugbreak default, not an implicit
+runtime substitute.
+
+S5 must prove on both x86 and x64 that a selected initialized SoftPC session
+enters original CCPU execution, returns one bounded typed stop result, and
+tears down without selecting MONITOR, V86 or Bochs. It does not yet claim the
+full device/startup-media matrix, BOP completion or a runnable user product.
+
+### S6 — original SoftPC machine/device composition recovery and verification
+
+Starting from the S5 CCPU execution interval, recover and verify the selected
+original SoftPC controller and peripheral composition as one integrated
+machine profile. This S owns the enabled internal machine families and their
+source-shaped host edges: BIOS/ROM/CMOS, SAS/A20/UMB, PIC/PIT, DMA,
+keyboard/mouse, display/VGA, disk/floppy and serial/parallel I/O. It verifies
+their original initialization order, interrupt and port behavior, failure
+directions and teardown against the selected startup-media profile.
+
+S6 does not broaden the product to optional devices merely because a source
+file exists, and it does not use a Bochs substitution to satisfy a SoftPC
+controller. Every enabled or unavailable family must retain its S4 source
+disposition. Its result is a verified original SoftPC machine profile, not the
+cross-backend product matrix.
+
+### S7 — focused dual-backend verification and transfer
 
 Run x86/x64 × SoftPC/Bochs selection, rejection,
 create/reset/run/stop/teardown tests. Test
@@ -168,9 +222,11 @@ path.
 
 ## Completion standard
 
-T310 closes only after original SoftPC CPU/CCPU and the selected original
-machine composition are imported, source-shaped bindings are formally tested
-on x86/x64, and the SoftPC backend completes the minimum
+T310 closes only after S5 has recovered original `i386 + CCPU` bounded
+execution, S6 has verified the selected original SoftPC machine/device profile,
+and S7 has formally tested the SoftPC/Bochs matrix on x86/x64. The SoftPC
+backend must complete the
+minimum
 `create -> reset -> firmware/machine initialization -> bounded execution ->
 typed controlled stop -> teardown` path.  The closure records one explicit
 disposition for every reached machine family, proves keyboard input, timer/PIC,

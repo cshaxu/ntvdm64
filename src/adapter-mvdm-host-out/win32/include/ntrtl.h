@@ -41,6 +41,29 @@ LONG NTAPI RtlCompareUnicodeString(PCUNICODE_STRING String1, PCUNICODE_STRING St
 NTSTATUS NTAPI RtlAppendUnicodeToString(PUNICODE_STRING Destination, PCWSTR Source);
 NTSTATUS NTAPI RtlUpcaseUnicodeStringToCountedOemString(POEM_STRING DestinationString, PCUNICODE_STRING SourceString, BOOLEAN AllocateDestinationString);
 
+/* DIVERGENCE ADAPTER-WIN32-015: Original SoftPC CMOS code includes ntrtl.h
+ * for this NT4 time-conversion declaration shape.  The selected modern SDK
+ * route intentionally supplies only a small historical subset, so retain the
+ * unchanged data layout and public-NTDLL declarations here rather than alter
+ * the original CMOS source. */
+#ifndef OPENNT_SUPPORT_TIME_FIELDS_DECLARED
+#define OPENNT_SUPPORT_TIME_FIELDS_DECLARED
+typedef SHORT CSHORT;
+typedef struct _TIME_FIELDS {
+    CSHORT Year;
+    CSHORT Month;
+    CSHORT Day;
+    CSHORT Hour;
+    CSHORT Minute;
+    CSHORT Second;
+    CSHORT Milliseconds;
+    CSHORT Weekday;
+} TIME_FIELDS, *PTIME_FIELDS;
+
+VOID NTAPI RtlTimeToTimeFields(PLARGE_INTEGER Time, PTIME_FIELDS TimeFields);
+BOOLEAN NTAPI RtlTimeFieldsToTime(PTIME_FIELDS TimeFields, PLARGE_INTEGER Time);
+#endif
+
 #ifndef InitializeListHead
 #define InitializeListHead(ListHead) ((ListHead)->Flink = (ListHead)->Blink = (ListHead))
 #define IsListEmpty(ListHead) ((ListHead)->Flink == (ListHead))

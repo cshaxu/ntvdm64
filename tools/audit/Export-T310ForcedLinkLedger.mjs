@@ -5,7 +5,7 @@ const root = path.resolve(process.argv[2] ?? '.');
 const architecture = process.argv[3] ?? 'x86';
 const phase = process.argv[4] ?? 's2';
 if (!['x86', 'x64'].includes(architecture)) throw new Error('Architecture must be x86 or x64');
-if (!['s2', 's4-p4'].includes(phase)) throw new Error('Phase must be s2 or s4-p4');
+if (!['s2', 's4-p4', 's4-p5'].includes(phase)) throw new Error('Phase must be s2, s4-p4 or s4-p5');
 /* Read the freshly generated formal linker log.  The previous sidecar input
  * could survive a regenerated graph and report stale architecture-specific
  * hook forms after a source-shaped binding had entered both candidates. */
