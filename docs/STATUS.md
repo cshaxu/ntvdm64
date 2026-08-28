@@ -4,14 +4,9 @@
 
 **No active M/T/S packet.**
 
-M0 T299 is closed by S5. The source scanner excludes C/C++/MSVC control
-constructs; the current first-degree closure has 128 physical definitions and
-743 second-degree cross-file candidates.
-
-**Td closure — OpenNT-host directory boundary:** `opennt-host` is now
-explicitly governed as the single mirror root for every separately accepted
-non-MVDM OpenNT host package; Base VDM is its first slice, not its limit. See
-the [Td record](history/td-opennt-host-package-root-governance-20260827.md).
+M0 T299 is closed by S6. The scanner now requires a parsed parameter list to
+enter its own function body; the corrected first-degree closure has 112
+physical definitions and 670 second-degree cross-file candidates.
 
 **Td closure — OpenNT-host directory boundary:** `opennt-host` is now
 explicitly governed as the single mirror root for every separately accepted
@@ -36,6 +31,15 @@ the [Td record](history/td-opennt-host-package-root-governance-20260827.md).
 | Identifier Mode | `M0 T299 S5`, ordinary mode with single-person dual-role implementation and review. |
 | Result | Control constructs are absent from definition and candidate rows; the selected-file closure invariants still hold. |
 | Evidence | [S5 closure](etc/evidence/m0-t299-s5-parser-control-construct-correction-001.md) and [plan](etc/operations/m0-t299-s5-parser-control-construct-correction-plan-001.md). |
+| Next Admission | Public Win32/CRT source-shaped binding and facade recovery may consume the corrected T299 ledgers. |
+
+### M0 T299 S6 closure — definition-body binding correction
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | `M0 T299 S6`, ordinary mode with single-person dual-role implementation and review. |
+| Result | The false `GetTickCount` call sites are absent; the regenerated selected-file closure has 112 physical definitions and 670 cross-file candidates. |
+| Evidence | [S6 closure](etc/evidence/m0-t299-s6-definition-body-binding-correction-001.md); the [S5 plan](etc/operations/m0-t299-s5-parser-control-construct-correction-plan-001.md) applies with the stricter predicate. |
 | Next Admission | Public Win32/CRT source-shaped binding and facade recovery may consume the corrected T299 ledgers. |
 
 ### M0 T299 S3 closure — missing-definition normalization

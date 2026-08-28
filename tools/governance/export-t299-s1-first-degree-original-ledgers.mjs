@@ -39,9 +39,11 @@ function sourceFilesFor(symbols, sourceRoot) {
 function isDefinition(masked, symbolOffset, closeParen) {
   const prefix = masked.slice(masked.lastIndexOf('\n', symbolOffset) + 1, symbolOffset).trim();
   if (prefix && /[()!<>=,.;+\-\/]/.test(prefix)) return false;
-  const tail = masked.slice(closeParen + 1, closeParen + 2049); const brace = tail.indexOf('{'); const semi = tail.indexOf(';');
-  if (brace < 0 || (semi >= 0 && semi < brace)) return false;
-  return true;
+  // After comments/preprocessor are masked, a definition must enter its body
+  // immediately after the parameter list. A later brace belongs to a caller's
+  // enclosing if/while block, not to this call expression.
+  const tail = masked.slice(closeParen + 1, closeParen + 2049); const next = tail.search(/\S/);
+  return next >= 0 && tail[next] === '{';
 }
 
 const interfaces = parseTsv(path.join(ops, 'mvdm-host-first-degree-canonical-interface-ledger.tsv'));
