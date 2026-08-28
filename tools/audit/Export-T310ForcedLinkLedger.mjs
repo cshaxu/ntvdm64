@@ -100,7 +100,7 @@ for (const line of fs.readFileSync(input, 'utf8').split(/\r?\n/)) {
 function disposition(entry) {
   const normalized = undecorate(entry.symbol);
   if (crtForms.has(normalized)) return ['modern-crt-link', 'MSVC /MT CRT import; no OpenNT source or adapter required'];
-  if (x86PatchHookForms.has(normalized)) return ['debugbreak-patch-default', 'fmstubs.c preserves its original immediate debugger-break default (x86 int 3; x64 __debugbreak); a mapping-backed replacement remains disabled pending an owner-approved runtime contract'];
+  if (x86PatchHookForms.has(normalized)) return ['debugbreak-patch-default', 'fmstubs.c preserves its original immediate debugger-break default through __debugbreak() on both x86 and x64; a mapping-backed replacement remains disabled pending an owner-approved runtime contract'];
   if (normalized === 'GetPerfCounterUsecs') return ['select-original-softpc-source', 'softpc.new/host/src/nt_timer.c is the original provider; fmstubs.c remains evidence-only and does not replace that provider'];
   if (originalSoftpcMachineForms.has(normalized)) return ['select-original-softpc-machine-source', 'original SoftPC machine source family must be selected by physical owner; do not replace the mechanical body with a local stub'];
   if (originalHostControlForms.has(normalized)) return ['select-original-softpc-host-control-source', 'original SoftPC host-control source family must be selected before a modern public-API binding is considered'];

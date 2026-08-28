@@ -49,7 +49,7 @@ S2 source-first interface work, not a runnable-backend claim. See the
 
 **T310 S2 forced-link audit:** formal MSVC `/MT` x86 and x64 Ninja graphs now
 archive all selected original bodies and generate deliberate non-runnable
-whole-archive DLLs.  The x86/x64 physical ledgers leave 81/83 records,
+whole-archive DLLs.  The x86/x64 physical ledgers leave 84/83 records,
 respectively, each with an original-source or named-boundary disposition.  The
 owner-directed `fmstubs.c` is evidence-only on both architectures; the four
 hooks remain explicit `debugbreak-patch-default` unresolved forms on both

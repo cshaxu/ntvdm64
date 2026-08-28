@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 3118 |
 | --- | --- |
-| Generated UTC | 2026-08-28T18:16:49Z |
+| Generated UTC | 2026-08-28T18:18:53Z |
 
 ## Entries
 
@@ -1147,8 +1147,8 @@ content-divergent entries.
 | etc/operations/m0-t310-original-softpc-selectable-backend-plan-001.md | indexed supporting material | 3b5f19cf9507fd7321f2fa2e9a615bb8a9071cb889a3eb2fd0cd96797bed383f |
 | etc/operations/m0-t310-s1-softpc-backend-interface-ledger.tsv | indexed supporting material | 87e6a8ff3faf30087f4c43589c27db96ce2066bb2715319db91a3c3560e3f74d |
 | etc/operations/m0-t310-s1-softpc-source-root-ledger.tsv | indexed supporting material | 406c86dcf6da651436602f8a305e413392842532f5d66eac5b5fbe79d905031c |
-| etc/operations/m0-t310-s2-x64-forced-link-ledger.tsv | indexed supporting material | 1bfbb1632858a838936bbf9bb7477e5bdb6952ae44655e7267fe23a7597a6f56 |
-| etc/operations/m0-t310-s2-x86-forced-link-ledger.tsv | indexed supporting material | ca19207643f9feb3530f3dcd578d423c735e1c17c24bdeae59ceefe47e522e30 |
+| etc/operations/m0-t310-s2-x64-forced-link-ledger.tsv | indexed supporting material | bb4a5bcdeac0b67d2c5ed0c629942fbed49d4cdaf81f814812dc0f670fc0e193 |
+| etc/operations/m0-t310-s2-x86-forced-link-ledger.tsv | indexed supporting material | cd50cef2ef65f944b47e84c1c3a8c4cfbe47dd7818d3fd9c64a7fe6b5fe2f386 |
 | etc/operations/m0-t310-s4-machine-family-workset-001.tsv | indexed supporting material | d787ff23b53dc8bf6eda9001f98c77fa50855e97034b490e02a0e866cba251fe |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
@@ -3132,7 +3132,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | ddb241e4a7e25bbfd23f9c59bccbe3027dd3fb45f8d226db59411453637a6d8f |
+| STATUS.md | principal control document | 4820947e033b6497233a6f8dd5b34e776d87712024a33a914fec704a4e8b2e0e |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
