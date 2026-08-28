@@ -10,11 +10,13 @@ extern "C" {
 #endif
 
 #define APP_MACHINE_SHELL_VERSION UINT32_C(1)
+#define APP_MACHINE_SHELL_DEFAULT_BACKEND SESSION_MACHINE_BACKEND_SOFTPC
 
 enum app_machine_shell_status {
     APP_MACHINE_SHELL_OK = 0,
     APP_MACHINE_SHELL_REJECTED_INPUT,
     APP_MACHINE_SHELL_REJECTED_STATE,
+    APP_MACHINE_SHELL_BACKEND_UNAVAILABLE,
     APP_MACHINE_SHELL_MACHINE_FAILURE
 };
 
@@ -30,6 +32,9 @@ typedef struct app_machine_shell {
 
 void app_machine_shell_initialize(app_machine_shell *shell);
 int app_machine_shell_valid(const app_machine_shell *shell);
+/* Product policy chooses SoftPC when requested_backend is NONE.  This must be
+ * called while the caller-owned session is still inactive. */
+int app_machine_shell_select_backend(session *owner, uint32_t requested_backend);
 enum app_machine_shell_status app_machine_shell_open(app_machine_shell *shell,
     session *owner, uint32_t ips, uint64_t machine_memory_bytes);
 enum app_machine_shell_status app_machine_shell_close(app_machine_shell *shell);

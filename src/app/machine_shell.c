@@ -22,6 +22,16 @@ int app_machine_shell_valid(const app_machine_shell *shell)
          (shell->active == 1u && shell->owner != NULL));
 }
 
+int app_machine_shell_select_backend(session *owner, uint32_t requested_backend)
+{
+    uint32_t selected = requested_backend;
+    if (owner == NULL || !session_valid(owner) ||
+        owner->state != SESSION_STATE_READY) return 0;
+    if (selected == SESSION_MACHINE_BACKEND_NONE)
+        selected = APP_MACHINE_SHELL_DEFAULT_BACKEND;
+    return session_select_machine_backend(owner, selected);
+}
+
 static void app_machine_shell_teardown(void *context)
 {
     app_machine_shell *shell = (app_machine_shell *)context;
@@ -38,6 +48,12 @@ enum app_machine_shell_status app_machine_shell_open(app_machine_shell *shell,
         ips == 0u || machine_memory_bytes == 0u)
         return APP_MACHINE_SHELL_REJECTED_INPUT;
     if (shell->active != 0u)
+        return APP_MACHINE_SHELL_REJECTED_STATE;
+    if (session_machine_backend(owner) == SESSION_MACHINE_BACKEND_SOFTPC)
+        /* Original SoftPC creation is S4 work.  Do not silently compose a
+         * Bochs machine for a session which selected the original backend. */
+        return APP_MACHINE_SHELL_BACKEND_UNAVAILABLE;
+    if (session_machine_backend(owner) != SESSION_MACHINE_BACKEND_BOCHS)
         return APP_MACHINE_SHELL_REJECTED_STATE;
 
     memset(&configuration, 0, sizeof(configuration));

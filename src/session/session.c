@@ -37,6 +37,7 @@ int session_valid(const session *instance)
         instance->abi_version == SESSION_ABI_VERSION &&
         instance->struct_bytes == sizeof(*instance) &&
         instance->identity != 0u && instance->state <= SESSION_STATE_COMPLETED &&
+        instance->machine_backend <= SESSION_MACHINE_BACKEND_SOFTPC &&
         instance->teardown_count <= SESSION_MAX_TEARDOWNS &&
         session_binding_count(instance) <= INT32_MAX &&
         mapping_manager_valid(&instance->guest_memory_mappings,
@@ -55,6 +56,22 @@ int session_activate(session *instance)
     if (++instance->epoch == 0u) ++instance->epoch;
     instance->state = SESSION_STATE_ACTIVE;
     return 1;
+}
+
+int session_select_machine_backend(session *instance, uint32_t backend)
+{
+    if (!session_valid(instance) || instance->state != SESSION_STATE_READY ||
+        instance->machine_backend != SESSION_MACHINE_BACKEND_NONE ||
+        (backend != SESSION_MACHINE_BACKEND_BOCHS &&
+         backend != SESSION_MACHINE_BACKEND_SOFTPC)) return 0;
+    instance->machine_backend = backend;
+    return 1;
+}
+
+uint32_t session_machine_backend(const session *instance)
+{
+    if (!session_valid(instance)) return SESSION_MACHINE_BACKEND_NONE;
+    return instance->machine_backend;
 }
 
 int session_register_teardown(session *instance, session_teardown_fn function,

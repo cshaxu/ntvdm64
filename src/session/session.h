@@ -10,6 +10,15 @@
 #define SESSION_ABI_VERSION UINT32_C(1)
 #define SESSION_MAX_TEARDOWNS 8u
 #define SESSION_MECHANICAL_STATUS_NONE UINT32_MAX
+#define SESSION_MECHANICAL_STATUS_BACKEND_UNAVAILABLE UINT32_C(0xfffffffe)
+
+/* A fixed-width composition choice.  The numeric value is session-local
+ * state only: it is never copied to guest or MVDM storage. */
+enum session_machine_backend {
+    SESSION_MACHINE_BACKEND_NONE = 0u,
+    SESSION_MACHINE_BACKEND_BOCHS = 1u,
+    SESSION_MACHINE_BACKEND_SOFTPC = 2u
+};
 
 enum session_state {
     SESSION_STATE_READY = 0u,
@@ -39,6 +48,7 @@ typedef struct session {
     uint32_t epoch;
     uint32_t completion_code;
     uint32_t cancellation_reason;
+    uint32_t machine_backend;
     uint64_t mechanical_resume_budget;
     uint32_t mechanical_resume_status;
     uint32_t teardown_count;
@@ -57,6 +67,8 @@ extern "C" {
 void session_initialize(session *instance, uint32_t identity);
 int session_valid(const session *instance);
 int session_activate(session *instance);
+int session_select_machine_backend(session *instance, uint32_t backend);
+uint32_t session_machine_backend(const session *instance);
 int session_register_teardown(session *instance, session_teardown_fn function,
     void *context);
 int session_request_cancellation(session *instance, uint32_t reason);

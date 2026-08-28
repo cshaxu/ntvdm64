@@ -17,7 +17,7 @@
 | Reference Baseline | T310 S1 source/interface ledgers, T310 S2 x86/x64 forced-link ledgers, original `ccpu386`/host manifests, and the existing session mapping manager. |
 | Files And ABI Surface | Session-owned fixed-width backend identity/lifecycle state; thin app composition; `adapter-mvdm-host-out/softpc` same-shaped binding only. New source bodies retain original MVDM/SoftPC call names and may use mapping-manager leases only for native pointer/VDM aliases. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island and source-recovery rules; T310 plan and prior S evidence. |
-| Verification | Source-owner scan; focused selected/unselected lifecycle tests on x86/x64; formal Ninja link of one selected backend per session; no `src.old`, mixed CCPU/Bochs execution target, raw guest pointer, or backend switch while active; governance and diff checks. |
+| Verification | Source-owner scan; focused selected/unselected lifecycle tests on x86/x64; the default SoftPC and explicit Bochs selections are both matrix rows; formal Ninja link of one selected backend per session; no `src.old`, mixed CCPU/Bochs execution target, raw guest pointer, or backend switch while active; governance and diff checks. |
 | Expected Markers | One selected backend per inactive session; copied create/reset/run/stop/teardown result; same-shaped MVDM-facing binding; no Bochs object/type/global in original SoftPC sources. |
 | Asset Needs | Current original mirrors and x86/x64 audit ledgers, session mapping manager, existing adapter boundaries, MSVC Build Tools and Ninja. |
 | Reporting Requirements | Identify every selection state and transition, original call form, mapping-manager lease where used, link membership, x86/x64 result, and any machine family deferred to S4. |
@@ -69,6 +69,13 @@ machine-composition S covering the selected firmware and device families
 before the backend can be called runnable; final acceptance requires the
 bounded create/reset/initialize/run/stop/teardown path and explicit device
 dispositions.
+
+**T310 S3 P1:** a session now selects exactly one fixed-width backend before
+activation; app selection defaults to SoftPC while Bochs is explicit. SoftPC
+cannot silently construct or resume a Bochs machine before S4 composition.
+Formal Ninja x86/x64 focused fixtures prove selection rejection, default
+admission and `host_simulate` non-fallback; see the [S3 evidence]
+(etc/evidence/m0-t310-s3-selected-backend-lifecycle-001.md).
 
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer

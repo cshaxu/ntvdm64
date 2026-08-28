@@ -59,3 +59,10 @@ M0 T303 S2 disposition register:
   last mechanical resume.  It does not identify the machine implementation,
   a BOP selector, or an OpenNT service; `adapter-mvdm-host-out/softpc` remains
   the owner of the historical `host_simulate(void)` spelling.
+
+M0 T310 S3 disposition register:
+
+- `session.c` and `session.h`: `small neutral extension`. Each session may
+  make one fixed-width machine-backend selection while ready. The choice is
+  immutable after activation and carries neither a native pointer nor an
+  executable callback; `session` does not construct either backend.

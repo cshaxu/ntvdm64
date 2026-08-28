@@ -19,6 +19,13 @@ SoftPC/CCPU is the source-first selectable backend: this task must import,
 build, bind and progressively verify its original owner closure before runtime
 selection is enabled.
 
+The application default is original SoftPC. Bochs is an explicit alternative.
+Until S4 makes SoftPC machine creation runnable, the default selection must
+produce an explicit unavailable result rather than silently selecting Bochs.
+Every later functional verification matrix covers both selected backends on
+both x86 and x64; a deliberately unavailable backend records its expected
+outcome instead of being omitted from the matrix.
+
 The selection belongs to `app` and neutral session lifetime binding. The MVDM
 mirror does not parse CLI policy, identify a backend, include a Bochs type or
 branch on product policy. Its historical spelling remains in original context;
@@ -103,7 +110,8 @@ accounted for before a backend is called runnable.
 
 ### S5 — focused dual-backend verification and transfer
 
-Run x86/x64 selection, rejection, create/reset/run/stop/teardown tests. Test
+Run x86/x64 × SoftPC/Bochs selection, rejection,
+create/reset/run/stop/teardown tests. Test
 the original SoftPC call form where actually linked.  The minimum original
 SoftPC acceptance path is `create -> reset -> firmware/machine initialization
 -> bounded execution -> typed controlled stop -> teardown`.  Its focused

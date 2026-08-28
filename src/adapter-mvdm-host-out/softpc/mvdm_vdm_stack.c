@@ -46,6 +46,14 @@ void host_simulate(void)
      * introduced into the machine layer.  The session retains only the copied
      * mechanical result, never a Bochs object or service outcome. */
     if (instance == NULL) return;
+    if (session_machine_backend(instance) != SESSION_MACHINE_BACKEND_BOCHS) {
+        /* S3 deliberately has no runnable original SoftPC composition.  The
+         * selected SoftPC branch must not execute the Bochs facade as an
+         * implicit fallback; S4 owns its source-shaped create/run binding. */
+        session_record_mechanical_resume_status(instance,
+            SESSION_MECHANICAL_STATUS_BACKEND_UNAVAILABLE);
+        return;
+    }
     request.version = ADAPTER_BOCHS_MACHINE_RESUME_VERSION;
     request.struct_bytes = sizeof(request);
     request.tick_budget = session_mechanical_resume_budget(instance);
