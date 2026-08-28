@@ -2,24 +2,12 @@
 
 ## Current Work
 
-**Active: M0 T300 S1 — MVDM-local call-closure rebaseline.**
+**No active M/T/S packet.**
 
-M0 T299 remains closed historical evidence. Its 112/670 derived boundary is
-not a planning input until this packet replaces its `mvdm-host`-only root with
-the owner-approved continuous original-MVDM call closure.
-
-**S1 progress:** the provenance scan has 12,148 `mvdm-host` root definitions
-and a 12,392-definition unambiguous MVDM-local closure. It found no unpaired
-local source file, but 3,995 same-spelled internal call edges still require
-original include/declaration-scope resolution before the rebaselined boundary
-is final. The new one-degree candidate ledger has 3,907 spellings: it carries
-forward 690 T299 interface rows as evidence and retains 3,217 newly exposed
-spellings for physical implementation resolution. See the [preliminary evidence](etc/evidence/m0-t300-s1-mvdm-local-closure-preliminary-001.md).
-
-**S1 P1:** source-graph governance, the provenance scanner, the physical
-zero-closure ledger and the rebaselined one-degree function-candidate ledger
-are recorded. The packet remains active solely for original
-include/declaration-scope resolution of the 3,995 ambiguous internal edges.
+M0 T300/S1 is closed. The selected OpenNT-MVDM source closure has 12,402
+physical zero-degree definitions, including 2,981 explicitly retained variant
+family edges, and its 3,963 one-degree candidates are only calls leaving that
+source universe. See the [closure evidence](etc/evidence/m0-t300-s1-mvdm-local-call-closure-closure-001.md).
 
 ## Active Packet
 
