@@ -286,6 +286,16 @@ records all three direct lease consumers as independent owner contracts; none
 duplicates this physical route. S8 may consume but may not redefine the
 binding.
 
+**T310 S8 P1:** the original machine candidate no longer defines `i386` on
+x64 merely to force the historical x86 branch.  Separate formal MSVC `/MT`
+x86 and x64 Ninja source-selected archives now succeed: x86 defines `i386`,
+x64 deliberately does not.  This exposes rather than suppresses each original
+non-`i386` branch for the queued semantic-owner audit.  The P1 source order is
+`reset -> ROM/CMOS -> disk POST -> host reset/event setup`; the immutable
+firmware inputs and next disk/floppy source group are recorded in the
+[architecture-source validation](etc/evidence/m0-t310-s8-p1-i386-architecture-source-validation-001.md).
+It is composition evidence only, not a runnable-machine claim.
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove

@@ -9,19 +9,26 @@ numeric T identifier only when it is admitted into `STATUS.md`.
 ## Problem
 
 OpenNT MVDM uses `i386` preprocessor conditionals for more than host-CPU
-syntax. Depending on the original package, a conditional can encode direct
-32-bit pointer identity, VDM linear-address remapping, descriptor handling,
-monitor callback behavior, CCPU/V86 selection, or an optional WOW/VDD/debug
-product path. Modern x86 and x64 builds must not discard either branch merely
-because neither reproduces the original NT4 VDM product shell unchanged.
+syntax.  `i386` means the historical 32-bit x86 compilation target; it is not
+defined for the x64 target, and it is not evidence that the modern x86 build
+has NT4 V86 or MONITOR capability.  Depending on the original package, a
+conditional can encode direct 32-bit pointer identity, VDM linear-address
+remapping, descriptor handling, monitor callback behavior, CCPU/V86
+selection, or an optional WOW/VDD/debug product path. Modern x86 and x64
+builds must not discard either branch merely because neither reproduces the
+original NT4 VDM product shell unchanged.
 
 ## Decision
 
 Every `#if defined(i386)`, `#ifdef i386`, `#ifndef i386`, and equivalent
 negated form in selected `mvdm-host` receives one ledger row before a later
-owner package relies on it. `i386` may select only compilation syntax or two
-implementations already proven semantically equivalent for the chosen product
-profile. All product capability decisions use a named owner and capability.
+owner package relies on it.  The ledger must state the x86 branch and the x64
+branch separately: `#ifndef i386` code is an x64 candidate, not a reason to
+discard it. `i386` may select only compilation syntax or two implementations
+already proven semantically equivalent for the chosen product profile. All
+product capability decisions use a named owner and capability; no conditional
+may imply the presence or absence of V86, MONITOR, guest remapping, or device
+semantics by itself.
 
 If a branch relied on native host pointer/handle identity, both x86 and x64
 use the session-owned mapping-manager surrogate and the established bounded
@@ -51,10 +58,10 @@ Classify each behavioral condition as one of:
 - WOW, VDD, BDE, debugger or extension-product profile; or
 - explicitly non-host-runtime historical material.
 
-For each, record the original observable purpose, selected x86/x64 behavior,
-source-recovery rung, capability owner and test obligation. Pointer-bearing
-forms explicitly identify the relevant session mapping-manager instance and
-the no-raw-alias rule.
+For each, record the original observable purpose, the selected x86 behavior,
+the selected x64 behavior, source-recovery rung, capability owner and test
+obligation. Pointer-bearing forms explicitly identify the relevant session
+mapping-manager instance and the no-raw-alias rule.
 
 ### S3 — recovery and queue integration
 
@@ -83,7 +90,8 @@ part of this candidate.
 ## Exit criteria
 
 The ledger classifies every selected `i386` conditional and its exact branch
-meaning. Every behavioral condition has a named owner and x86/x64-uniform
-disposition; every pointer/handle identity case names the required session
-mapping-manager path; and all later affected package proposals have a precise
-dependency note. The worktree contains only governance/evidence records.
+meaning. Every behavioral condition has a named owner and an explicit x86 and
+x64 disposition; every pointer/handle identity case names the required
+session mapping-manager path; and all later affected package proposals have a
+precise dependency note. The worktree contains only governance/evidence
+records.

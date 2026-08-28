@@ -30,7 +30,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$build = Join-Path $root ("build/M0-T310/S7/machine/{0}" -f $Architecture)
+$build = Join-Path $root ("build/M0-T310/S8/p1-machine-source/{0}" -f $Architecture)
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or !(Get-Command ninja -ErrorAction SilentlyContinue)) {
     throw 'MSVC Build Tools and Ninja are required.'
@@ -142,7 +142,12 @@ $includeRoots = @(
     'src/session'
 ) | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 
-$baseFlags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /Di386 /DNTVDM /DCPU_30_STYLE /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD ' +
+# `i386` is the original 32-bit x86 selection macro.  It is deliberately not
+# defined for x64: several historical `#ifndef i386` paths are the only source
+# evidence for a non-i386 host implementation and must be compiled/audited
+# instead of being silently forced through the 32-bit branch.
+$architectureFlags = if ($Architecture -eq 'x86') { '/Di386 ' } else { '' }
+$baseFlags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT ' + $architectureFlags + '/DNTVDM /DCPU_30_STYLE /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' +
     ($includeRoots -join ' ')
 
@@ -232,9 +237,10 @@ $graph.Add('default original-softpc-candidate')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 
 [ordered]@{
-    schema = 'm0.t310.s7.original-softpc-machine-candidate.v1'
+    schema = 'm0.t310.s8.original-softpc-machine-candidate.v2'
     architecture = $Architecture
     toolchain = 'MSVC /MT via VsDevCmd'
+    i386Define = ($Architecture -eq 'x86')
     originalCcpuManifest = 'src/mvdm-host/softpc.new/base/ccpu386/sources'
     originalHostManifest = 'src/mvdm-host/softpc.new/host/src/sources'
     ccpuSourceCount = @($ccpuNames).Count
