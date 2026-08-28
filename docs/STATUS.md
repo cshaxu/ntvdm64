@@ -64,42 +64,55 @@ variant/parser-gap candidates. These are evidence categories, not provider
 selections. See the [P14 global source map]
 (etc/evidence/m0-t301-s1-p14-rebased-global-source-map-001.md).
 
-**T301 S1 zero-degree legality pause:** first-degree classification is paused.
-The preceding P11--P14 counts are regenerated working evidence, not a licence
-to treat their implied zero-degree rebase as final.  The active work is now a
-per-definition legality audit of the complete selected MVDM zero closure:
-source identity, root/inbound-edge authority, static-linkage legality, body
-parse result and preprocessor variant evidence.  Any conditional or
-unparseable body remains an explicit zero-degree issue and cannot be silently
-reclassified to first degree.  See the [legality-audit plan]
-(etc/operations/m0-t301-s1-zero-degree-legality-audit-plan-001.md).
+**T301 S1 zero-degree legality correction:** the historical full ledger stays
+immutable; P16/P17 form the selected `zero-ledger1.tsv` view.  Its residual
+historical body/variant cases are explicit and are not silently reclassified.
+The owner has now directed the bounded one-degree definition-presence pass:
+resolve only physical original definition candidates for `one-ledger1` direct
+calls, without inspecting their bodies or selecting providers.  See the
+[P18 plan](etc/operations/m0-t301-s1-one-ledger1-resolution-plan-001.md).
 
-**T301 S1 P15:** the pause has now established a lawful 12,202-identity
-zero-degree MVDM closure: 12,110 historic roots/continuous-MVDM members plus
-92 source-shape-confirmed rebase admissions. All source hashes, root/inbound
-authority, static-linkage conditions and physical bodies pass; 11,062 bodies
-are unconditional and 1,140 retain an explicit original conditional context.
-The exception ledger is empty. P11--P14 aggregate counts are superseded where
-their CRLF line-offset assumption differed from the regenerated input. See the
-[P15 legality closure](etc/evidence/m0-t301-s1-p15-zero-degree-legality-closure-001.md).
+**T301 S1 P15:** source identity/body legality was proven for its then-current
+input, but its root-membership premise was too broad and is superseded by P16.
+
+**T301 S1 P16:** the 12,202-entry historical audit ledger is immutable.
+`zero-ledger0.tsv` is its new narrow, true-zero view: 11,949 definitions in
+the physical `src/mvdm-host` subtrees only. Guest/tool paths and current
+non-host support paths remain tracked in the full record but do not enter
+ledger0. First-degree work remains paused. See the [P16 root membership
+correction](etc/evidence/m0-t301-s1-p16-zero-root-membership-correction-001.md).
+
+**T301 S1 P17:** `zero-ledger1.tsv` now removes the historical SoftPC second
+executor from `zero-ledger0` without deleting its source evidence: 452
+source-shaped SoftPC host algorithms remain, while 8,229 CPU/FPU/device,
+firmware/tool and alternate-product definitions are explicitly extracted.
+The resulting true host-plus-provider closure has 3,720 definitions. See the
+[P17 SoftPC cut](etc/evidence/m0-t301-s1-p17-softpc-second-executor-cut-001.md).
+
+**T301 S1 P18:** the new `one-ledger1` physical frontier resolves all 7,367
+true external direct calls without callee-body inspection: 4,262 calls have
+original C/C++ definition candidates and 3,105 have explicit source absence.
+The 11,134 candidate rows retain source path/hash/line identity; no package,
+provider or runtime route is selected. See the [P18 definition-resolution
+evidence](etc/evidence/m0-t301-s1-p18-one-ledger1-definition-resolution-001.md).
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | `M0 T301 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Owner’s active goal is “开展一度审计”, but has explicitly paused first-degree expansion until the selected zero-degree closure is lawful. T301 remains active under that prerequisite. |
-| Objective | Prove every selected zero-degree MVDM definition’s original identity, root/inbound-edge authority, linkage legality, body parse result and conditional-variant disposition. Only then resume the original first-degree objective. |
-| Non-goals | During the pause: no first-degree classification, second-degree expansion, source import, adapter/provider implementation, build/link admission, BOP enablement, runtime route or Bochs change. |
-| Reference Baseline | P15's lawful 12,202-definition original-MVDM zero closure: 12,110 historic identities plus 92 confirmed rebase admissions. The currently regenerated first-degree outputs are derived evidence only and are not an active classification worklist. See the [zero-degree legality plan](etc/operations/m0-t301-s1-zero-degree-legality-audit-plan-001.md) and [closure](etc/evidence/m0-t301-s1-p15-zero-degree-legality-closure-001.md). |
-| Files And ABI Surface | T301 audit generators, zero-degree legality ledgers/evidence, Status and documentation inventory only. No production ABI changes. |
+| Admission And Approval | Owner’s active goal is “开展一度审计”; after the P16/P17 true-zero correction, the owner directed continuation from `zero-ledger1.tsv` through the bounded P18 physical definition-presence pass. |
+| Objective | Preserve lawful selected zero evidence, then give every `one-ledger1` external direct call an exact original OpenNT/OpenNT-4.5 definition-candidate result or explicit source absence. |
+| Non-goals | No callee-body traversal or second-degree expansion; no source import, adapter/provider/overlay implementation, build/link admission, BOP enablement, runtime route or Bochs change. |
+| Reference Baseline | Immutable 12,202-definition historical ledger; P16's `zero-ledger0.tsv`; P17's selected 3,720-definition `zero-ledger1.tsv`; `one-ledger1.tsv` and its four-row explicit unparsed-body record. See the [legality plan](etc/operations/m0-t301-s1-zero-degree-legality-audit-plan-001.md), [P17 SoftPC cut](etc/evidence/m0-t301-s1-p17-softpc-second-executor-cut-001.md) and [P18 plan](etc/operations/m0-t301-s1-one-ledger1-resolution-plan-001.md). |
+| Files And ABI Surface | T301 audit generators, zero/one-degree source ledgers/evidence, Status and documentation inventory only. No production ABI changes. |
 | Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; physical identity rather than name-only matching; original-source-first recovery; `src.old` exclusion. |
-| Verification | Generation assertions for one row per zero identity, physical source-path/hash/line/linkage review, root/inbound-edge proof, body/conditional evidence, source-root and `src.old` exclusion scans, documentation inventory/governance checks, and `git diff --check`. |
-| Expected Markers | One ledger row per zero-degree identity; separate explicit rows for unresolved conditional/unbalanced bodies; no spelling-only merge and no static cross-translation-unit admission. |
+| Verification | Generation assertions for one row per zero identity and each true external one-degree call; physical source-path/hash/line/linkage review; source-root and `src.old` exclusion scans; documentation inventory/governance checks; and `git diff --check`. |
+| Expected Markers | Explicit residual conditional/unbalanced zero rows; one source-resolution row per external call; physical candidate identities rather than spelling merges; no static cross-translation-unit admission. |
 | Asset Needs | Approved OpenNT/OpenNT-4.5 source union, frozen T300 ledgers, Node 22/Ripgrep parser tooling, and current documentation authorities. |
 | Reporting Requirements | Report structurally-valid roots/rebased definitions, conditionally unresolved bodies, unparsed bodies, invalid source/linkage rows and every unresolved physical identity. Distinguish source-graph legality from product/runtime eligibility. |
-| Stop Conditions | Missing or conflicting provenance, a static cross-translation-unit target, a body that needs an unrecorded build variant, an attempted provider/import/build change, use of current product bodies or `src.old` as source input, or an owner/package-boundary change. |
-| Exit Criteria | Every selected zero identity has exactly one source-evidenced legality result; every rebase target has a valid root or confirmed physical inbound edge; all exceptional body/variant rows are explicit; evidence and gates pass. |
+| Stop Conditions | Missing or conflicting provenance; a requested callee-body/second-degree interpretation; a static cross-translation-unit target treated as resolved; an attempted provider/import/build change; use of current product bodies or `src.old` as source input; or an owner/package-boundary change. |
+| Exit Criteria | Every selected zero identity has an explicit legality result; residual zero body/variant rows are explicit; every true external `one-ledger1` call has a physical original definition-candidate result or source-absence result; evidence and gates pass. |
 | Original Owner Request | “开展一度审计”。 |
 | Similar-Issue Sweep | Historical 0/1-degree ledgers, selected original source variants, macros/function pointers/assembly declarations, public Win32/CRT leaves, private CSR/kernel boundaries, support/tools/firmware guest callers, and accidental `src.old` or current-product inputs. |
 

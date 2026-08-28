@@ -1,0 +1,14 @@
+original_mvdm_subtree	zero_degree_disposition	root_eligible	continuous_closure_eligible	current_zero_definitions	reason	controlling_evidence
+bin86/**	hard-exclude-guest	no	no	0	Guest bootstrap source/product, mirrored under mvdm-guest/bin86; never host code.	src/mvdm-guest/bin86/ and mvdm-host topology manifest
+dos/v86/**	hard-exclude-guest	no	no	0	DOS/V86 guest image and guest-side source, mirrored under mvdm-guest/dos/v86; never host code.	src/mvdm-guest/dos/v86/ and mvdm-host topology manifest
+dos/test/**	hard-exclude-test	no	no	0	Historical test material is not host source.	original MVDM layout and mvdm-host topology manifest
+dos/command/**	selected-host-path-only	no	explicit-ledger-only	28	Host COMMAND providers may be zero only when their exact original file path/hash is selected; no whole-directory grant.	m0-t274-s5-mvdm-host-topology-manifest.tsv
+dos/dem/**	selected-host-path-only	no	explicit-ledger-only	58	Host DEM providers may be zero only when their exact original file path/hash is selected; no whole-directory grant.	m0-t274-s5-mvdm-host-topology-manifest.tsv
+dos/other/**	exclude-unless-exact-host-selection	no	explicit-ledger-only	0	No other DOS subdirectory can enter merely by being under mvdm/dos.	m0-t274-s5-mvdm-host-topology-manifest.tsv
+wow16/**	hard-exclude-guest	no	no	0	Win16 guest image/source, mirrored under mvdm-guest/wow16; 230 prior false zero entries are separately retained as exclusion evidence.	mvdm-zero-degree-root-exclusion-ledger.tsv
+tools16/**	hard-exclude-tool	no	no	0	Historical guest build tools belong under tools/opennt/tools16 and are not host runtime source.	tools/opennt/tools16/ ownership
+vdmutils/**	hard-exclude-tool	no	no	0	Independent historical tools (forcedos, graftabl, pifedit, win) belong to mvdm-tools, not mvdm-host.	src/mvdm-tools/vdmutils/ ownership
+v86/**	selected-host-path-only	no	explicit-ledger-only	294	Contains monitor/SoftPC host material; it is neither a guest-directory alias nor a blanket root. Only exact topology-selected files are admitted.	m0-t274-s5-mvdm-host-topology-manifest.tsv
+softpc.new/**	selected-host-path-only	no	explicit-ledger-only	8681	Historical machine/host source is eligible only through exact selected file identity; zero membership does not imply it will execute instead of Bochs.	m0-t274-s5-mvdm-host-topology-manifest.tsv
+bde/**;dbg/**;vdmdbg/**;vdmexts/**	selected-host-path-only	no	explicit-ledger-only	363	Debug/tool provenance does not grant directory-wide membership; only selected physical source files are zero members.	m0-t274-s5-mvdm-host-topology-manifest.tsv
+all-other-mvdm-subtrees	exclude-unless-exact-host-selection-or-explicit-continuity	no	explicit-ledger-only	2548	Existence in the historical MVDM tree is insufficient. Exact host path/hash selection or a non-guest, source-evidenced continuity admission is mandatory.	m0-t274-s5-mvdm-host-topology-manifest.tsv; mvdm-zero-degree-continuity-admission-ledger.tsv
