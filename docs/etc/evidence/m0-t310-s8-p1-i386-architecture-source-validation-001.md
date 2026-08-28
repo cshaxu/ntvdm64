@@ -49,8 +49,14 @@ The original reset path remains the P1 authority:
    `host_read_resource` shape.
 3. `base/system/cmosnt.c::cmos_init` binds the CMOS ports and RTC EOI hook;
    `cmos_post` reconciles selected machine configuration.
-4. `base/disks/{diskbios,fdisk,floppy}.c` and host
-   `nt_fdisk.c`/`nt_rflop.c` remain the next original startup-media group.
+4. `base/disks/sources` is selected in full with host `nt_fdisk.c` and
+   `nt_rflop.c`; `nt_rez.c` preserves the original `host_read_resource` ROM
+   call shape. Both formal graphs archive this startup-media group directly.
+
+The full `base/disks/sources` group plus these three host roots now archives
+successfully on both architectures. It is still an initialization/source
+closure only: its actual sector I/O, media admission and guest-visible
+failure-direction verification remain later P1 implementation work.
 
 No Bochs device, MONITOR, kernel VDM, `src.old`, raw native identity or
 preprocessor-derived capability decision was introduced.
