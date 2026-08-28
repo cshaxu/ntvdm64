@@ -162,6 +162,14 @@ binding.  No pointer-width cast, Bochs fallback, or second mapping table has
 been introduced.  See the [memory-boundary audit]
 (etc/evidence/m0-t310-s5-ccpu-x64-memory-boundary-audit-001.md).
 
+**T310 S5 P5:** the obsolete Bochs-backed, locally invented DPMI and XMS
+memory providers plus their matching overlays/graphs are removed.  The
+original `nt_mem.c` and restored original `xmsblock.c` are the only selected
+algorithm bodies; their callers remain explicitly deferred until the single
+session mapping-manager/SoftPC physical-page binding is recovered.  No old
+fixture is retained as a current production claim.  See the [retirement
+record](etc/evidence/m0-t310-s5-nonnative-memory-fallback-retirement-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove

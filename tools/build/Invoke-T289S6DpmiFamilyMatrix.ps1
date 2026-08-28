@@ -29,7 +29,6 @@ function Invoke-FormalGraph([string]$scriptName, [string]$buildPath,
 # m0-t289-s6-dpmi-family-disposition-matrix.tsv.
 Invoke-FormalGraph 'New-T289S3DpmiFoundationNinja.ps1' ("build/M0-T289/S3/{0}" -f $Architecture) ("build/M0-T289/S3/{0}/bin/t289-s3-protected-machine-fixture.exe" -f $Architecture)
 Invoke-FormalGraph 'New-T289S5RealModeFrameNinja.ps1' ("build/M0-T289/S5/realmode-frame-{0}" -f $Architecture) ("build/M0-T289/S5/realmode-frame-{0}/bin/t289-s5-realmode-frame-fixture.exe" -f $Architecture)
-Invoke-FormalGraph 'New-T289S4DpmiCompositionNinja.ps1' ("build/M0-T289/S4/{0}" -f $Architecture) ("build/M0-T289/S4/{0}/bin/dpmi-init-descriptor-xmem-fixture.exe" -f $Architecture)
 Invoke-FormalGraph 'New-T289S5DpmiRegistrationNinja.ps1' ("build/M0-T289/S5/registration-{0}" -f $Architecture) ("build/M0-T289/S5/registration-{0}/bin/dpmi-registration-fixture.exe" -f $Architecture)
 Invoke-FormalGraph 'New-T289S5RealModeStackNinja.ps1' ("build/M0-T289/S5/realmode-stack-{0}" -f $Architecture) ("build/M0-T289/S5/realmode-stack-{0}/bin/t289-s5-realmode-stack-fixture.exe" -f $Architecture)
 Invoke-FormalGraph 'New-T289S5DpmiInterruptAuditNinja.ps1' ("build/M0-T289/S5/audit-{0}" -f $Architecture)
