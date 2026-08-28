@@ -2,11 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T309 S1.** Owner-directed queue execution now enters the
-DEM/COMMAND vertical slice. It recovers the smallest original
-dispatcher/ingress route through the closed Base VDM and monitor boundaries;
-it may not import a second SoftPC/PIC executor or handwrite a BOP provider.
-See the [S1 plan](etc/operations/m0-t309-s1-dem-command-vertical-slice-plan-001.md).
+**Active: M0 T309 S2.** S1 closed the original ingress and dispatcher-object
+boundary. The active work now composes the complete original DEM and COMMAND
+provider cohorts through named source-shaped forms; it may not choose services
+by trace or replace provider bodies to force a link. See the [S2 plan]
+(etc/operations/m0-t309-s2-dem-command-provider-cohort-composition-plan-001.md).
 
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
@@ -15,7 +15,7 @@ the original service → dispatcher → IP sequence and idle branch; the origina
 dispatcher package integration is the remaining active S1 work. See the
 [ingress audit](etc/evidence/m0-t309-s1-dem-command-ingress-closure-audit-001.md).
 
-**T309 S1 P2:** the unchanged original DEM and COMMAND dispatcher tables now
+**T309 S1 closure:** the unchanged original DEM and COMMAND dispatcher tables
 compile under formal current-root MSVC/Ninja x86/x64 graphs. Their only
 remaining boundary is whole-provider-package linking: `apfnSVC[]` and
 `apfnSVCCmd[]` cannot be satisfied by replacement entries or one-off stubs.
@@ -331,21 +331,21 @@ not package/provider admissions. See the [P20 signature evidence]
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T309 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Owner-directed sequential queue execution after T308 closure admits the DEM/COMMAND vertical-slice boundary package. |
-| Objective | Select and recover the smallest original DEM/COMMAND dispatcher/ingress route that composes through the closed Base VDM, monitor and Bochs-facing boundaries. |
-| Non-goals | No full `nt_bop.c` aggregate, second SoftPC/PIC executor, kernel VDM/CSRSS, trace-led service patch, XMS/DPMI/Redirector/WOW/VDD/debugger recovery or app-owned dispatcher. |
-| Reference Baseline | [T305 boundary audit](etc/evidence/m0-t305-s1-dispatcher-boundary-audit-001.md), [T307 closure](history/m0-t307-closure-20260828.md) and [T308 closure](history/m0-t308-closure-20260828.md). |
-| Files And ABI Surface | Original `mvdm-host/dos/{dem,command}` dispatchers, `softpc.new/host/src/nt_bop.c` evidence, named Base VDM/monitor/SoftPC adapters and focused formal fixtures. |
+| Identifier Mode | `M0 T309 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner-directed sequential queue execution admits the source-package continuation after the S1 ingress/dispatcher closure. |
+| Objective | Compose original DEM and COMMAND provider cohorts through their selected named adapter forms, retaining original tables and provider bodies. |
+| Non-goals | No trace-led service patch, provider/table replacement, full `nt_bop.c` aggregate, second SoftPC/PIC executor, kernel VDM/CSRSS, XMS/DPMI/Redirector/WOW/VDD/debugger recovery or app-owned service policy. |
+| Reference Baseline | [T309 S1 ingress audit](etc/evidence/m0-t309-s1-dem-command-ingress-closure-audit-001.md), [T307 closure](history/m0-t307-closure-20260828.md) and [T308 closure](history/m0-t308-closure-20260828.md). |
+| Files And ABI Surface | Original `mvdm-host/dos/{dem,command}` `sources` cohorts, their exact dispatcher tables, named Base VDM/monitor/SoftPC/Win32/session forms and formal cohort graphs. |
 | Applicable Rules | `docs/rules/EXECUTION.md`; source policy; architecture/coding mirror rules; source-first recovery gate; mapping and `src.old` exclusion rules. |
-| Verification | Original source/boundary audit; formal Ninja x86/x64 source closure; focused package test only after route selection; documentation governance and `git diff --check`. |
-| Expected Markers | One original dispatcher/ingress owner map, one named adapter disposition per external form, and no fake success or second executor. |
-| Asset Needs | Selected OpenNT MVDM mirror, T305 audit, closed Base VDM and monitor artifacts, current Bochs-facing mechanical facade. |
-| Reporting Requirements | Record source path, preserved order/layout/failure rule, exact rejected aggregate dependency, selected binding and all deferred product-shell branches. |
-| Stop Conditions | A proposed route requires the full historical PIC executor, kernel/CSRSS reconstruction, an unregistered mirror divergence, an app semantic or a trace-selected handler. |
-| Exit Criteria | The selected original route is formally composed on both architectures or its one exact remaining original boundary has a documented next-owner package; no handwritten selector/provider bypass exists. |
+| Verification | Original source/cohort audit; formal Ninja x86/x64 cohort compile/link closure; focused package test only after original route composition; documentation governance and `git diff --check`. |
+| Expected Markers | Original sources-file cohort map, one named adapter/owner disposition per unresolved external form, and no fake service, replacement table or second executor. |
+| Asset Needs | Selected OpenNT MVDM mirror, T309 S1 closure, closed Base VDM and monitor artifacts, current Bochs-facing mechanical facade. |
+| Reporting Requirements | Record original source path, provider cohort membership, preserved call/layout/failure rule, every selected binding and deferred product-shell branch. |
+| Stop Conditions | A proposed route requires a provider/table rewrite, full historical PIC executor, kernel/CSRSS reconstruction, an unregistered mirror divergence, an app semantic or trace-selected service. |
+| Exit Criteria | Both selected cohorts formally link on both architectures or every remaining original external form has one exact owner/disposition; no provider is replaced merely to obtain a link. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务，从 Base VDM 命令协议开始，到 DPMI / DPMI32 复通。” |
-| Similar-Issue Sweep | All fifteen `VDMSERVICECLASS` values, direct MVDM callers and the `VDM_TIB`/TEB carrier are recorded in the closure ledger. |
+| Similar-Issue Sweep | Both original table arrays, every original `sources` member, and all direct external symbols are classified before any local route test. |
 
 **Td closure — OpenNT-host directory boundary:** `opennt-host` is now
 explicitly governed as the single mirror root for every separately accepted
