@@ -83,12 +83,35 @@ binding: its Bochs branch reaches only `adapter-bochs`; its SoftPC branch
 reaches only the selected original backend. A session selects one branch before
 machine creation and never switches while active.
 
-### S4 — focused dual-backend verification and transfer
+### S4 — original SoftPC machine-composition recovery
+
+Recover the original selected SoftPC machine composition as a source-shaped
+package, rather than treating the CCPU archive as a machine.  Audit and bind,
+in original initialization/dependency order, the reached firmware inputs and
+machine-control families: BIOS/ROM/CMOS, memory/SAS/A20/UMB, PIC/PIT, keyboard
+and mouse, DMA, display/VGA, disk/floppy, and serial/parallel I/O.  Every
+family must receive one disposition: direct original composition,
+adapter-backed original composition, deliberately disabled with the original
+unavailable/failure direction, or a named later owner.  A required native
+pointer/VDM alias must use the existing session mapping manager; device logic
+may not be replaced by a Bochs call or silently omitted.
+
+The S creates a bounded original-source build and initialization workset per
+family.  It does not require every historical optional device to be enabled,
+but it does require every selected/reached device family to be explicitly
+accounted for before a backend is called runnable.
+
+### S5 — focused dual-backend verification and transfer
 
 Run x86/x64 selection, rejection, create/reset/run/stop/teardown tests. Test
-the original SoftPC call form where actually linked. Record unavailable
-CCPU/device/Win32/monitor forms as later owners. Only after this closure may
-later XMS/DPMI packages use the selected backend contract.
+the original SoftPC call form where actually linked.  The minimum original
+SoftPC acceptance path is `create -> reset -> firmware/machine initialization
+-> bounded execution -> typed controlled stop -> teardown`.  Its focused
+evidence must exercise the enabled keyboard input, timer/PIC delivery, basic
+video/port path and selected startup-media path.  Verify that unavailable
+devices fail by their recorded source-shaped direction rather than disappearing.
+Only after this closure may later XMS/DPMI packages use the selected backend
+contract.
 
 ## Invariants
 
@@ -117,9 +140,12 @@ later XMS/DPMI packages use the selected backend contract.
 
 ## Explicit exclusions
 
-No kernel VDM/CSRSS product shell, wholesale `softpc.new` product build,
-unrequested device enablement, BOP expansion, trace-selected repair, guest boot
-claim, XMS/DPMI/WOW/VDD implementation, host mutation or `src.old` input.
+No kernel VDM/CSRSS product shell, BOP expansion, trace-selected repair,
+unapproved optional device enablement, XMS/DPMI/WOW/VDD provider recovery,
+host mutation or `src.old` input.  This task does not claim a wholesale
+historical product build; it does require the bounded original SoftPC machine
+composition necessary for the selected backend's verified minimum execution
+path.
 
 ## Required evidence
 
@@ -132,8 +158,13 @@ claim, XMS/DPMI/WOW/VDD implementation, host mutation or `src.old` input.
 
 ## Completion standard
 
-T310 closes only after original SoftPC source is imported, bound and formally
-tested as a selected backend, Bochs uses the shared session contract, and
-x86/x64 evidence proves that a session never runs both. The permitted mapping
-manager changes must be individually registered and tested. S1 closes only the
-source/contract decision required to do that safely.
+T310 closes only after original SoftPC CPU/CCPU and the selected original
+machine composition are imported, source-shaped bindings are formally tested
+on x86/x64, and the SoftPC backend completes the minimum
+`create -> reset -> firmware/machine initialization -> bounded execution ->
+typed controlled stop -> teardown` path.  The closure records one explicit
+disposition for every reached machine family, proves keyboard input, timer/PIC,
+basic video/port and startup-media behavior for the selected profile, and
+proves that a session never runs SoftPC and Bochs concurrently.  The permitted
+mapping-manager changes must be individually registered and tested. S1 closes
+only the source/contract decision required to do that safely.

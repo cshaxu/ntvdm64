@@ -45,6 +45,13 @@ Raw `nt_mem`/`sim32` address conversions and all unresolved link forms remain
 S2 source-first interface work, not a runnable-backend claim. See the
 [candidate build evidence](etc/evidence/m0-t310-s2-original-softpc-candidate-build-001.md).
 
+**T310 scope clarification:** S2 remains an isolated CPU/host-control build
+closure only.  The admitted T310 plan now requires a later original SoftPC
+machine-composition S covering the selected firmware and device families
+before the backend can be called runnable; final acceptance requires the
+bounded create/reset/initialize/run/stop/teardown path and explicit device
+dispositions.
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove
