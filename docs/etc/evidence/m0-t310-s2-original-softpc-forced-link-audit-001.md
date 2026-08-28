@@ -32,10 +32,10 @@ same-named objects or manufacture a provider.
 - Both x86 and x64 compile all 130 selected original CCPU bodies and ten
   selected original SoftPC host roots, archive them, and emit a deliberate
   forced-link DLL.
-- x86 has 81 physical unresolved records / 79 unique symbol forms after the
+- x86 has 84 physical unresolved records after the
   MSVC `/MT` CRT imports are included.  Its source-first ledger is
   [`m0-t310-s2-x86-forced-link-ledger.tsv`](../operations/m0-t310-s2-x86-forced-link-ledger.tsv).
-- x64 has 83 physical unresolved records / 81 unique symbol forms.  Its
+- x64 has 83 physical unresolved records.  Its
   source-first ledger is
   [`m0-t310-s2-x64-forced-link-ledger.tsv`](../operations/m0-t310-s2-x64-forced-link-ledger.tsv).
 - Every physical form in both ledgers has one disposition: original SoftPC
@@ -45,17 +45,19 @@ same-named objects or manufacture a provider.
 
 ## NTVDMx64 patch visibility
 
-- On x86, the byte-identical `fmstubs.c` is included in
-  `ntvdmx64-softpc-patch-evidence.lib`.  Its
-  `host_q_write_timestamp` contributes a visible physical dependency on the
-  original `softpc.new/host/src/nt_timer.c:GetPerfCounterUsecs`; it is not
-  silently stubbed or omitted.
-- On x64, the same source is retained but cannot compile due to its original
-  x86 inline assembly.  The four patch-hook forms it supplies on x86
-  (`EDL_fast_bop`, `c_VirtualiseInstruction`, `c_sas_touch`, and
-  `VdmSetPhysRecStructs`) remain visible as four explicit
-  `x86-patch-evidence-not-x64-composable` records.  They require a later
-  source-shaped binding decision; none is treated as an implemented x64 path.
+- `fmstubs.c` is compiled and archived as evidence on **both** x86 and x64.
+  Its active contract remains immediate debugging break through uniform MSVC
+  `__debugbreak()` syntax. This is a syntax divergence, not a runtime
+  substitute.
+- The evidence archive is deliberately excluded from both forced-link
+  candidates. Consequently the four forms (`EDL_fast_bop`,
+  `c_VirtualiseInstruction`, `c_sas_touch`, and `VdmSetPhysRecStructs`) remain
+  visible on both architectures with `debugbreak-patch-default` disposition.
+  No mapping manager, cancellation result, zero result or implicit continuation
+  is currently enabled for them.
+- A discarded mapping/lease experiment is retained under `#if 0`, outside the
+  formal build graph, as design material only. It is not evidence of runtime
+  recovery.
 
 ## Interpretation
 

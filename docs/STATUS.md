@@ -37,8 +37,10 @@ and bounded-lease contract.
 **T310 S2 progress:** the formal isolated candidate now archives all 130 exact
 original `ccpu386` translation units plus ten selected original SoftPC host
 roots on both MSVC `/MT` x86 and x64. The owner-directed NTVDMx64
-`fmstubs.c` is byte-identically imported and separately compiled as x86 patch
-evidence; its `int 3` hooks remain unimplemented stop evidence. The selected
+`fmstubs.c` is imported with one registered syntax-only divergence and
+separately compiled as x86/x64 patch evidence; both use `__debugbreak()` with
+the same immediate debugging-break contract. Its four hooks remain
+unimplemented stop evidence. The selected
 two-site `callconv.patch` correction permits the original error-dialog worker
 to enter the modern x86 `CreateThread` ABI without rewriting its behavior.
 Raw `nt_mem`/`sim32` address conversions and all unresolved link forms remain
@@ -49,8 +51,10 @@ S2 source-first interface work, not a runnable-backend claim. See the
 archive all selected original bodies and generate deliberate non-runnable
 whole-archive DLLs.  The x86/x64 physical ledgers leave 81/83 records,
 respectively, each with an original-source or named-boundary disposition.  The
-owner-directed `fmstubs.c` is included in x86 and remains explicit x64 patch
-evidence; no hook has been silently omitted or treated as runnable.  See the
+owner-directed `fmstubs.c` is evidence-only on both architectures; the four
+hooks remain explicit `debugbreak-patch-default` unresolved forms on both
+candidate ledgers, and no hook has been silently omitted or treated as
+runnable. See the
 [forced-link audit](etc/evidence/m0-t310-s2-original-softpc-forced-link-audit-001.md).
 
 **T310 S2 closure:** the exact CCPU and selected host-control roots compile,

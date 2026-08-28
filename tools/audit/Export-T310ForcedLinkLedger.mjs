@@ -4,7 +4,11 @@ import path from 'node:path';
 const root = path.resolve(process.argv[2] ?? '.');
 const architecture = process.argv[3] ?? 'x86';
 if (!['x86', 'x64'].includes(architecture)) throw new Error('Architecture must be x86 or x64');
-const input = path.join(root, `build/M0-T310/S2/softpc/${architecture}/unresolved-${architecture}.txt`);
+/* Read the freshly generated formal linker log.  The previous sidecar input
+ * could survive a regenerated graph and report stale architecture-specific
+ * hook forms after a source-shaped binding had entered both candidates. */
+const input = path.join(root,
+  `build/M0-T310/S2/softpc/${architecture}/original-softpc-forced-closure.dll.log`);
 const sourceLedger = path.join(root, 'docs/etc/operations/zero-ledger1-softpc-disposition-ledger.tsv');
 const output = path.join(root, `docs/etc/operations/m0-t310-s2-${architecture}-forced-link-ledger.tsv`);
 
@@ -96,11 +100,8 @@ for (const line of fs.readFileSync(input, 'utf8').split(/\r?\n/)) {
 function disposition(entry) {
   const normalized = undecorate(entry.symbol);
   if (crtForms.has(normalized)) return ['modern-crt-link', 'MSVC /MT CRT import; no OpenNT source or adapter required'];
-  if (x86PatchHookForms.has(normalized)) return [
-    'x86-patch-evidence-not-x64-composable',
-    'the byte-identical NTVDMx64 fmstubs.c body retains this x86 inline-assembly hook; x64 records it as a required source-shaped binding decision, never as an omitted interface'
-  ];
-  if (normalized === 'GetPerfCounterUsecs') return ['select-original-softpc-source', 'softpc.new/host/src/nt_timer.c is the original provider; fmstubs.c must remain linked as evidence but does not replace that provider'];
+  if (x86PatchHookForms.has(normalized)) return ['debugbreak-patch-default', 'fmstubs.c preserves its original immediate debugger-break default (x86 int 3; x64 __debugbreak); a mapping-backed replacement remains disabled pending an owner-approved runtime contract'];
+  if (normalized === 'GetPerfCounterUsecs') return ['select-original-softpc-source', 'softpc.new/host/src/nt_timer.c is the original provider; fmstubs.c remains evidence-only and does not replace that provider'];
   if (originalSoftpcMachineForms.has(normalized)) return ['select-original-softpc-machine-source', 'original SoftPC machine source family must be selected by physical owner; do not replace the mechanical body with a local stub'];
   if (originalHostControlForms.has(normalized)) return ['select-original-softpc-host-control-source', 'original SoftPC host-control source family must be selected before a modern public-API binding is considered'];
   if (originalProviderForms.has(normalized)) return ['select-original-mvdm-provider-source', 'select the original MVDM provider package and preserve its entry before adding any adapter binding'];

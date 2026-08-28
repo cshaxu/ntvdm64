@@ -109,7 +109,6 @@ $baseFlags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /Di386 /DNTVD
     ($includeRoots -join ' ')
 
 $graph = [Collections.Generic.List[string]]::new()
-$patchLink = if ($Architecture -eq 'x86') { '/wholearchive:ntvdmx64-softpc-patch-evidence.lib' } else { '' }
 $graph.Add('ninja_required_version = 1.10')
 $graph.Add('build_root = ' + (NinjaPath $build))
 $graph.Add('cflags = ' + $baseFlags)
@@ -124,7 +123,7 @@ $graph.Add('rule forced_link_audit')
 # This deliberately produces a non-runnable DLL.  /WHOLEARCHIVE makes the
 # candidate's complete original membership visible to LINK; /FORCE keeps the
 # unresolved physical forms in the adjacent log for source-first ownership.
-$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-win32-bindings.lib ' + $patchLink + ' kernel32.lib user32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib > $out.log 2>&1')
+$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-win32-bindings.lib kernel32.lib user32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib > $out.log 2>&1')
 
 $ccpuObjects = foreach ($name in $ccpuNames) {
     $object = 'obj/ccpu/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
@@ -141,25 +140,17 @@ $adapterWin32Objects = foreach ($name in $adapterWin32Names) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterWin32Root $name)))
     $object
 }
-$patchBodyObjects = @()
-if ($Architecture -eq 'x86') {
-    $patchBodyObjects = @(foreach ($name in $patchBodyNames) {
-        $object = 'obj/patch/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-        $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $patchBodyRoot $name)))
-        $object
-    })
-}
+$patchBodyObjects = @(foreach ($name in $patchBodyNames) {
+    $object = 'obj/patch/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $patchBodyRoot $name)))
+    $object
+})
 $graph.Add('build original-ccpu386.lib: lib ' + ($ccpuObjects -join ' '))
 $graph.Add('build original-softpc-host-roots.lib: lib ' + ($hostObjects -join ' '))
 $graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' '))
-if ($patchBodyObjects.Count -gt 0) {
-    $graph.Add('build ntvdmx64-softpc-patch-evidence.lib: lib ' + ($patchBodyObjects -join ' '))
-    $graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-host-roots.lib softpc-win32-bindings.lib ntvdmx64-softpc-patch-evidence.lib')
-    $graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-host-roots.lib softpc-win32-bindings.lib ntvdmx64-softpc-patch-evidence.lib')
-} else {
-    $graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-host-roots.lib softpc-win32-bindings.lib')
-    $graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-host-roots.lib softpc-win32-bindings.lib')
-}
+$graph.Add('build ntvdmx64-softpc-patch-evidence.lib: lib ' + ($patchBodyObjects -join ' '))
+$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-host-roots.lib softpc-win32-bindings.lib ntvdmx64-softpc-patch-evidence.lib')
+$graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-host-roots.lib softpc-win32-bindings.lib')
 $graph.Add('default original-softpc-candidate')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 
@@ -183,7 +174,7 @@ $graph.Add('default original-softpc-candidate')
         [ordered]@{
             path = 'src/mvdm-softpc-patch/patches/common/' + $_
             sha256 = (Get-FileHash -LiteralPath (Join-Path $patchBodyRoot $_) -Algorithm SHA256).Hash.ToLowerInvariant()
-            buildDisposition = if ($Architecture -eq 'x86') { 'compile-and-archive-evidence-only' } else { 'retained-original-int3-body-not-x64-composable' }
+            buildDisposition = 'compile-and-archive-debugbreak-evidence-only'
         }
     })
     patchEvidence = @($patchEvidenceNames | ForEach-Object {

@@ -8,6 +8,10 @@
 
 #include "timestmp.h"
 #include "nt_timer.h"
+#include <intrin.h>
+
+/* DIVERGENCE MVDM-SOFTPC-PATCH-002: preserve the patch's immediate debugger-
+ * break contract with the one MSVC intrinsic that emits it on both x86/x64. */
 
 
 #if !defined(PROD) && defined(CPU_40_STYLE) 
@@ -43,20 +47,20 @@ VOID VdmSetPhysRecStructs(ULONG HostAddress, ULONG IntelAddress, ULONG Size)
 VOID EDL_fast_bop(ULONG immed)
 {
 	// Whatever this it... Better break on it and see if it gets used
-	__asm int 3
+	__debugbreak();
 }
 
 ULONG c_VirtualiseInstruction (ULONG eipInRom, UINT size, ULONG linearAddrOrPort, ULONG dataIn)
 {
 	// Hopefully this is never called...
-	__asm int 3
+	__debugbreak();
 	return 0;
 }
 
 PBYTE c_sas_touch (ULONG addr, ULONG length)
 {
 	// Hopefully this is never called...
-	__asm int 3
+	__debugbreak();
 	return NULL;
 }
 
