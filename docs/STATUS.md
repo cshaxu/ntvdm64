@@ -2,19 +2,26 @@
 
 ## Current Work
 
-**Active: M0 T302 S1.**
+**Active: M0 T302 S2.**
 
 M0 T301/S1 is closed. Its constrained first-degree audit produced physical
 source/binding evidence without turning whole-program BFS into a functional
 recovery blocker. The [closure record](history/m0-t301-closure-20260828.md)
 retains the exact counts, limits and deferred degree-two seeds.
 
-**T302 S1 admission:** the owner has directed single-person dual-role recovery
+**T302 S1 closure:** exact source and direct-boundary audit proves that the
+client request/capture/size/retry algorithm is original code blocked by CSR
+transport, while the corresponding server record/copy algorithm is original
+code blocked by BaseSrv/CSRSS product state. The local callback seam is marked
+for migration or deletion; no existing mirror diff is retained. See the
+[boundary audit](etc/evidence/m0-t302-s1-base-vdm-protocol-boundary-audit-001.md).
+
+**T302 S2 admission:** the owner has directed single-person dual-role recovery
 from the queue's first functional package, Base VDM command protocol, through
-DPMI/DPMI32. This first S is limited to the immediate original
-BaseClient/BaseSrv VDM package boundary and its existing project seam; it does
-not yet admit CSR/CSRSS reconstruction, a new BOP service or a second machine
-executor. See the [T302 S1 plan](etc/operations/m0-t302-s1-base-vdm-command-protocol-plan-001.md).
+DPMI/DPMI32. This implementation S recovers only the local one-session DOS
+Base VDM protocol through original client code plus named same-shaped adapter
+mechanics; it does not admit CSR/CSRSS reconstruction, a new BOP service or a
+second machine executor. See the [T302 S2 plan](etc/operations/m0-t302-s2-base-vdm-local-protocol-recovery-plan-001.md).
 
 **T301 S1 P21 admission:** the owner has approved a bounded mirror-completeness
 exception for `opennt-src-2`: import every missing original-relative MVDM path,
@@ -144,21 +151,21 @@ not package/provider admissions. See the [P20 signature evidence]
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T302 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Owner-directed queue execution from Base VDM command protocol toward DPMI/DPMI32, with source-first mirror recovery, minimum divergence and adapters for only indispensable autonomous mechanics. |
-| Objective | Establish the finite original BaseClient/BaseSrv VDM command-protocol perimeter; prove which original request/capture/wait/completion logic can compose directly and assign every non-public dependency to an existing or specifically proposed adapter seam before any replacement code is written. |
-| Non-goals | No CSRSS/CSR server recreation, kernel VDM work, multi-process broker, WOW worker, BOP-family expansion, DEM/COMMAND lifecycle change, Bochs change or guest trace-driven repair. |
-| Reference Baseline | Exact Base VDM client/server source already mirrored below `src/opennt-host/base/win32/`; T291 Base VDM evidence; T301 closure; the existing bounded app command source and monitor command facade. |
-| Files And ABI Surface | Base VDM boundary ledger/evidence and, if the audit closes, only the source-shaped Base VDM client/server mirror hooks plus the named `adapter-mvdm-host-out` subfamily and existing app/session seam. `VDMINFO` layout and exported historical spellings are preserved. |
-| Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; four-rung source-recovery gate; mirror/overlay and `src.old` exclusion rules. |
-| Verification | Original-path/hash review; direct caller/declaration/dependency ledger; adapter-owner and failure-contract review; focused source-shape tests where an existing seam is exercised; documentation governance and `git diff --check`. |
-| Expected Markers | One original owner for request/copy/size/retry/wait/completion; no app-owned parallel Base VDM protocol; explicit public leaves and CSR/CSRSS stop boundary; no mirror body cropped to evade a dependency. |
-| Asset Needs | Approved OpenNT/OpenNT-4.5 source union, exact `opennt-host` Base VDM mirror, current session/app/adapter source, Git Bash Node 22/Ripgrep and MSVC/Ninja only if a later admitted build slice needs them. |
-| Reporting Requirements | Report every reached original file/function, original external dependency, selected adapter or public binding, deferred product-shell behavior and any existing local diff that can be withdrawn by importing original code. |
-| Stop Conditions | A dependency requires an unbounded CSRSS/CSR/kernel product shell; a second parallel command protocol would be introduced; a mirror alteration exceeds the minimal-hook rule; a new adapter family is needed without an owner/ABI/failure ledger; or scope reaches DEM/COMMAND/WOW/BOP execution. |
-| Exit Criteria | The direct Base VDM slice has a complete source/ABI/failure map and a four-rung disposition for every reached external dependency; existing app/monitor code has retain/migrate/replace/delete disposition; the next implementation S can name one finite source-shaped protocol contract and no unowned behavior. |
+| Identifier Mode | `M0 T302 S2`, Ordinary Mode with single-person dual-role implementation and review. |
+| Admission And Approval | Owner-directed queue execution from Base VDM command protocol toward DPMI/DPMI32. T302/S1 admitted this exact local DOS subprotocol; the current S implements only that approved source-shaped slice. |
+| Objective | Compose original `GetNextVDMCommand` request/capacity/retry behavior with a bounded local BaseSrv record/copy/wait backend; remove the permanent app/monitor callback protocol ownership while preserving original `VDMINFO` entry, order and failures. |
+| Non-goals | No CSRSS/CSR server recreation, kernel VDM work, multi-process broker, first-VDM global query, WOW/PIF, normal child-process producer, BOP-family expansion, Bochs change or guest trace-driven repair. |
+| Reference Baseline | T302/S1 boundary ledger and seam disposition; byte-exact BaseClient/BaseSrv files; T301 source audit; app command source and monitor facade marked for migration/deletion. |
+| Files And ABI Surface | New named `adapter-mvdm-host-out/basesrv` local-protocol subfamily, only necessary same-shaped `win32` hooks, source-shaped BaseClient entry composition, app producer migration and monitor seam removal/narrowing. `VDMINFO`, VDM state flags and result status layout remain the external contract. |
+| Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; four-rung source-recovery gate; mirror/overlay, mapping and `src.old` exclusion rules. |
+| Verification | x86/x64 focused local fixtures for publish/request, insufficient capacity/retry, environment-only, no-command return, reentry and teardown; source/body diff review; no raw caller pointer or host handle retention; documentation governance and `git diff --check`. |
+| Expected Markers | Original client request/capacity/retry code is selected or explicitly source-shaped through its facade; one session-owned Base VDM record/event owner; no monitor callback slot; app supplies bytes only; CSR/WOW/PIF/global paths decline explicitly. |
+| Asset Needs | Exact Base VDM mirror, S1 ledgers, session mapping/lifecycle support, public Win32 event primitives, MSVC x86/x64 and formal Ninja graph after the source slice is fixed. |
+| Reporting Requirements | Report each direct original body selected, every minimal divergence, adapter ABI/failure mapping, deleted/migrated app/monitor seam and all unsupported product-shell branches. |
+| Stop Conditions | The work needs an unbounded CSR/CSRSS transport, code must retain a caller pointer across wait, an original body would require a >50% mirror edit, an adapter becomes a generic CSR service, or scope reaches child lifecycle/WOW/PIF/BOP/Bochs. |
+| Exit Criteria | A local one-session DOS command record passes positive/capacity/no-command/reentry/teardown fixtures through the original-shaped public entry; app/monitor parallel dispatch is removed or permanently narrowed to non-command semantics; exact mirror and adapter registers are updated; x86/x64 build evidence is recorded. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务，从 Base VDM 命令协议开始，到 DPMI / DPMI32 复通。” |
-| Similar-Issue Sweep | `GetNextVDMCommand`, `ExitVDM`, `SetVDMCurrentDirectories`, `RegisterWowExec`, server request records, copied capture buffers, BaseSrv waits, session binding, command source, monitor facade, `VDMINFO` declarations and CSR/kernel/WOW boundaries. |
+| Similar-Issue Sweep | `GetNextVDMCommand`, reentry state, capacity retry, environment-only request, no-command wait, teardown, `ExitVDM`, `SetVDMCurrentDirectories`, `RegisterWowExec`, server request records, session binding, command source, monitor facade, `VDMINFO` declarations and CSR/kernel/WOW boundaries. |
 
 **Td closure — OpenNT-host directory boundary:** `opennt-host` is now
 explicitly governed as the single mirror root for every separately accepted

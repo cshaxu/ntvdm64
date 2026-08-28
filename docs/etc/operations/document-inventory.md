@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3053 |
+| Documentation records | 3057 |
 | --- | --- |
-| Generated UTC | 2026-08-28T06:42:29Z |
+| Generated UTC | 2026-08-28T06:48:25Z |
 
 ## Entries
 
@@ -477,6 +477,7 @@ content-divergent entries.
 | etc/evidence/m0-t301-s1-p8-physical-call-definition-crosswalk-001.md | indexed supporting material | d32c789ab3111b043cd22ecc11d8081930034a024a7e03c9c1075fe2ebc9cb22 |
 | etc/evidence/m0-t301-s1-p9-original-mvdm-binding-gate-001.md | indexed supporting material | cba92b8f9661c005c1b3bd5a206d28f43f82a2044401d36ca0393fe7f0e08566 |
 | etc/evidence/m0-t301-s1-parser-type-keyword-correction-001.md | indexed supporting material | e4b33662ad7e8289e3d9376388408d61ed5b20f83c69788aadaaa96e81afca52 |
+| etc/evidence/m0-t302-s1-base-vdm-protocol-boundary-audit-001.md | indexed supporting material | ef23fa23edbe94e2f747b30472f5a8a070c048b55eacb435a6aa1d80f9156cb5 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1091,6 +1092,9 @@ content-divergent entries.
 | etc/operations/m0-t301-s1-rebaselined-first-degree-audit-plan-001.md | indexed supporting material | 609bd87076612e6bffbbaa3b5ec2d73adc4cc331f18c8461b4f2ab9df0c6a7b2 |
 | etc/operations/m0-t301-s1-zero-degree-legality-audit-plan-001.md | indexed supporting material | 3a3439abae116f68092418f3f3e6d35a172a77753f1b898b5e3561aeb52a9361 |
 | etc/operations/m0-t302-s1-base-vdm-command-protocol-plan-001.md | indexed supporting material | b375ef89a887caa4d6ee5c1e934dacbc177154c62e89cd4fab53114bf7fc6edc |
+| etc/operations/m0-t302-s1-base-vdm-existing-seam-disposition-ledger.tsv | indexed supporting material | a0661c7cd1cbbeb49d070863ec5bac78c0c81432aa4256f3282c9b29936b91be |
+| etc/operations/m0-t302-s1-base-vdm-protocol-boundary-ledger.tsv | indexed supporting material | ab9c8963bdb64676fcbdc9edbb84b5b9b53f27ac169e0a1850f2b103ba8f8a66 |
+| etc/operations/m0-t302-s2-base-vdm-local-protocol-recovery-plan-001.md | indexed supporting material | 40fcae120ea90aec489e7152669e8b2f2d49171f10841c3e06493840ce763d24 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3067,7 +3071,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 4dc0962f6240fee09e341f75edc8211e64826ac240358dd438372d72713b5bf4 |
+| STATUS.md | principal control document | 2cee06a5b9e83f3d79500313153fda5c9b1996e084c9861520c94e1520e88f46 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
