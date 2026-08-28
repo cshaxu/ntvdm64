@@ -46,14 +46,20 @@ int main(void)
     load_sw_cpu_access_functions();
     fputs("seed\n", stderr);
     (void)c_setDS(0u);
-    /* mov al,5ah; mov [8000h],al; d6 fe */
+    /* mov al,5ah; mov [8000h],al; fld1; fstp dword [8004h]; d6 fe */
     c_sas_store(UINT32_C(0x000ffff0), UINT8_C(0xb0));
     c_sas_store(UINT32_C(0x000ffff1), UINT8_C(0x5a));
     c_sas_store(UINT32_C(0x000ffff2), UINT8_C(0xa2));
     c_sas_store(UINT32_C(0x000ffff3), UINT8_C(0x00));
     c_sas_store(UINT32_C(0x000ffff4), UINT8_C(0x80));
-    c_sas_store(UINT32_C(0x000ffff5), UINT8_C(0xd6));
-    c_sas_store(UINT32_C(0x000ffff6), UINT8_C(0xfe));
+    c_sas_store(UINT32_C(0x000ffff5), UINT8_C(0xd9));
+    c_sas_store(UINT32_C(0x000ffff6), UINT8_C(0xe8));
+    c_sas_store(UINT32_C(0x000ffff7), UINT8_C(0xd9));
+    c_sas_store(UINT32_C(0x000ffff8), UINT8_C(0x1e));
+    c_sas_store(UINT32_C(0x000ffff9), UINT8_C(0x04));
+    c_sas_store(UINT32_C(0x000ffffa), UINT8_C(0x80));
+    c_sas_store(UINT32_C(0x000ffffb), UINT8_C(0xd6));
+    c_sas_store(UINT32_C(0x000ffffc), UINT8_C(0xfe));
     fputs("start\n", stderr);
     /* `nt_cprgs.c` selects the original CCPU executor through this historical
      * SoftPC CPU-access dispatch slot.  The fixture must not bypass that
@@ -81,10 +87,14 @@ int main(void)
         (void)session_dispose(&owner);
     }
     fputs("returned-start\n", stderr);
-    if (c_getIP() != UINT16_C(0xfff7) ||
-        c_sas_hw_at(UINT32_C(0x00008000)) != UINT8_C(0x5a)) {
-        fprintf(stderr, "CCPU host_start_cpu did not execute original RAM write: IP=%04x mem=%02x\n",
-            (unsigned)c_getIP(), (unsigned)c_sas_hw_at(UINT32_C(0x00008000)));
+    if (c_getIP() != UINT16_C(0xfffd) ||
+        c_sas_hw_at(UINT32_C(0x00008000)) != UINT8_C(0x5a) ||
+        c_sas_hw_at(UINT32_C(0x00008004)) != UINT8_C(0x00) ||
+        c_sas_hw_at(UINT32_C(0x00008005)) != UINT8_C(0x00) ||
+        c_sas_hw_at(UINT32_C(0x00008006)) != UINT8_C(0x80) ||
+        c_sas_hw_at(UINT32_C(0x00008007)) != UINT8_C(0x3f)) {
+        fprintf(stderr, "CCPU host_start_cpu did not execute original RAM/FPU writes: IP=%04x\n",
+            (unsigned)c_getIP());
         sas_term();
         return 1;
     }
@@ -97,10 +107,14 @@ int main(void)
     fputs("reenter\n", stderr);
     host_simulate();
     fputs("returned-recursive\n", stderr);
-    if (c_getIP() != UINT16_C(0xfff7) ||
-        c_sas_hw_at(UINT32_C(0x00008000)) != UINT8_C(0x5a)) {
-        fprintf(stderr, "CCPU host_simulate did not execute original RAM write: IP=%04x mem=%02x\n",
-            (unsigned)c_getIP(), (unsigned)c_sas_hw_at(UINT32_C(0x00008000)));
+    if (c_getIP() != UINT16_C(0xfffd) ||
+        c_sas_hw_at(UINT32_C(0x00008000)) != UINT8_C(0x5a) ||
+        c_sas_hw_at(UINT32_C(0x00008004)) != UINT8_C(0x00) ||
+        c_sas_hw_at(UINT32_C(0x00008005)) != UINT8_C(0x00) ||
+        c_sas_hw_at(UINT32_C(0x00008006)) != UINT8_C(0x80) ||
+        c_sas_hw_at(UINT32_C(0x00008007)) != UINT8_C(0x3f)) {
+        fprintf(stderr, "CCPU host_simulate did not execute original RAM/FPU writes: IP=%04x\n",
+            (unsigned)c_getIP());
         sas_term();
         return 1;
     }

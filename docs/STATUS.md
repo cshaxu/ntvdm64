@@ -177,6 +177,13 @@ the original CCPU/SAS backing on x86 and x64, followed by the typed outer
 return.  This remains deliberately below BIOS/BOP/device composition.  See
 the [CPU/SAS/RAM evidence](etc/evidence/m0-t310-s5-ccpu-sas-ram-execution-001.md).
 
+**T310 S5 P7:** the same bounded original CCPU proof now also executes the
+original `fpu.c` x87 sequence `fld1; fstp dword ptr [DS:8004h]`.  Both formal
+x86 and x64 graphs verify its `1.0f` SAS-RAM result before the original `D6
+FE` return; no host floating-point substitute, device, BOP, Bochs, or
+`src.old` path is selected.  See the [CPU/SAS/RAM/FPU evidence]
+(etc/evidence/m0-t310-s5-ccpu-sas-ram-execution-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove
