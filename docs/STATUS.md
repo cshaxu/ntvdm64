@@ -44,6 +44,9 @@ The first physical pass records 133 provider-origin residuals (90 DEM, 43
 COMMAND), separately from the fixed 49-form `bochs-core` and 25-form toolchain
 boundaries; see the [P3 first pass]
 (etc/evidence/m0-t309-s2-p3-residual-owner-first-pass-001.md).
+Its generated ledger now assigns every provider-origin row a source/adapter/
+boundary disposition and is cross-checked against the equal-sized x86 caller
+set; no new provider body has been enabled.
 
 **T307 S1 P1:** the local Base VDM facade now covers the reached DOS forms for
 first-VDM query, command capture/capacity/reentry, copied one-shot current

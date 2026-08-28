@@ -45,6 +45,20 @@ public runtime leaves, and already-named adapter owner families.  It will keep
 the physical caller identity on every row and will not enable a source body
 until its full translation-unit boundary is audited.
 
+## Complete physical disposition
+
+`Export-T309S2ProviderResidualLedger.ps1` now exports all 133 x64 provider
+records to `m0-t309-s2-p3-provider-residual-owner-ledger.tsv`.  Its unique
+initial disposition counts are 40 Win32/public leaves, 26 CRT leaves, 23
+original-source candidates, 20 Bochs/firmware boundaries, 19 existing adapter
+forms, four debugger-product boundaries, and one WOW/second-executor boundary.
+There are no unclassified rows.
+
+The x86 forced link has the same 133 physical provider caller records.  Its
+raw symbol spellings differ only in stdcall/import decoration, CRT spelling,
+and x86 compiler SEH helper forms; it does not expose a different OpenNT
+provider ownership set.
+
 ## Confidence and follow-up
 
 High confidence for the counts and source locations: both come from the
