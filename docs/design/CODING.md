@@ -10,6 +10,7 @@ src/
   mvdm-support/
   mvdm-tools/
   mvdm-softpc-firmware/
+  mvdm-softpc-patch/
   mvdm-platform-abi/
   mvdm-guest/dos/v86/
   mvdm-guest/bin86/
@@ -58,6 +59,11 @@ material and never a source, build, link or runtime input.
   manifest-selected input.
 - `mvdm-platform-abi` contains exact declarations outside MVDM required by
   those packages; it has no implementation.
+- `mvdm-softpc-patch` contains only individually provenance-registered
+  NTVDMx64-derived SoftPC patch bodies. Each register row names the original
+  caller, source identity, interface shape, mapping-manager use and removal
+  condition. It reaches mechanics only through the same-shaped `softpc` family
+  of `adapter-mvdm-host-out`.
 - `mvdm-guest/dos/v86`, `mvdm-guest/bin86`, `mvdm-guest/wow16` and
   `mvdm-guest/font16` are the complete selected local DOS/V86, Bin86, WOW16
   and 16-bit-font carries. They remain data/load-only input roots and do not

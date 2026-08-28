@@ -54,6 +54,18 @@ typedef enum _NT_PRODUCT_TYPE {
 #ifndef STATUS_NOT_IMPLEMENTED
 #define STATUS_NOT_IMPLEMENTED ((NTSTATUS)0xC0000002L)
 #endif
+/* The modern SDK leaves these historical NTSTATUS spellings out of the
+ * user-mode declaration set, although the values and their failure contract
+ * are unchanged.  Keep the original SoftPC callers source-shaped. */
+#ifndef STATUS_UNABLE_TO_DECOMMIT_VM
+#define STATUS_UNABLE_TO_DECOMMIT_VM ((NTSTATUS)0xC000002CL)
+#endif
+#ifndef STATUS_NOT_COMMITTED
+#define STATUS_NOT_COMMITTED ((NTSTATUS)0xC000002DL)
+#endif
+#ifndef STATUS_MEMORY_NOT_ALLOCATED
+#define STATUS_MEMORY_NOT_ALLOCATED ((NTSTATUS)0xC00000A0L)
+#endif
 
 typedef STRING OEM_STRING, *POEM_STRING;
 typedef const OEM_STRING *PCOEM_STRING;

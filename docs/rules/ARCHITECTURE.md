@@ -1,7 +1,7 @@
 # Architecture Rules
 
 1. The production source owners are exactly `bochs-core`, `mvdm-host`, `opennt-host`,
-   `mvdm-support`, `mvdm-tools`, `mvdm-softpc-firmware`,
+   `mvdm-support`, `mvdm-tools`, `mvdm-softpc-firmware`, `mvdm-softpc-patch`,
    `mvdm-platform-abi`, `mvdm-guest/dos/v86`, `mvdm-guest/bin86`,
    `mvdm-guest/wow16`, `mvdm-guest/font16`,
    `adapter-bochs`, `adapter-mvdm-host-in`, `adapter-mvdm-host-out`, `session`, `broker`,
@@ -148,3 +148,9 @@
     build.  Retain upstream path/name/control structure in the mirror; use a
     registered local `DIVERGENCE:` hook only for a minimal binding, and move
     any material added mechanism to the paired overlay.
+31. `mvdm-softpc-patch` is a narrow component for individually reviewed
+    NTVDMx64-derived SoftPC patch bodies. Each body must have a register row
+    identifying its original SoftPC caller and interface shape, NTVDMx64
+    provenance, reason, x86/x64 disposition, mapping-manager use and removal
+    condition. It is neither a generic adapter nor a second executor and may
+    reach mechanics only through `adapter-mvdm-host-out/softpc`.

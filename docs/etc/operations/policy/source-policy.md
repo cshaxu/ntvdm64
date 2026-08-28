@@ -55,9 +55,24 @@ Bochs 2.6, from `O:\repos.external\bochs-2.6-compat\bochs-2.6`, is the
 approved third-party guest-machine backend, subject to the pinned-import and
 source-identity requirements in `design/CODING.md` and the adoption record.
 This is internal research; distribution/license review is deferred until a
-release is considered. Later
-source trees, `ntvdm64`, PCjs, and similar projects remain
-comparative evidence only and cannot become runtime/acceptance dependencies.
+release is considered. Later source trees, `ntvdm64`, PCjs, and similar
+projects remain comparative evidence only and cannot become runtime/acceptance
+dependencies.
+
+### NTVDMx64 SoftPC patch exception
+
+The owner has expressly approved a narrow exception for
+`O:\repos.external\ntvdmx64`: an individually audited SoftPC patch body or
+generated SoftPC build carrier may be copied only into
+`src/mvdm-softpc-patch`. Each imported file must have a register row naming
+the exact NTVDMx64 path and hash, the original SoftPC caller/interface it
+serves, the original-source alternative, the reason that alternative lacks a
+usable x86/x64 build carrier, mapping-manager handling if applicable, and
+focused x86/x64 evidence. This exception does not admit NTVDMx64's injector,
+loader, HAXM path, driver, CSRSS stubs, registry policy, host mutation, or its
+product composition. `src.old` remains evidence only. Original SoftPC callers
+remain in the `mvdm-host` mirror and may use only a minimal registered
+`DIVERGENCE:` hook to enter the imported patch body.
 
 Every imported file, copied fragment, ABI conclusion, or historical-source
 change records its source tree/path/revision, role, notices present, rationale,

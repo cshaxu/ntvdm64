@@ -66,7 +66,14 @@ contract outside mirrors. It distinguishes common `create`, `reset`, bounded
 Form independent x86/x64 candidate graphs using the exact selected original
 CCPU/SoftPC `sources` closure. Preserve source body, names, ordering and build
 membership. Classify every residual by original owner and bind only existing
-or source-shaped named adapters. An archive is not a runnable claim.
+or source-shaped named adapters. An archive is not a runnable claim. A
+reviewed NTVDMx64-derived patch body, if source identity proves it is required,
+lives only in `mvdm-softpc-patch`; its mirror caller keeps a minimal registered
+`DIVERGENCE:` hook. No patch is admitted merely because an earlier experiment
+happened to compile. The owner has specifically admitted the NTVDMx64
+`patches/common/fmstubs.c` body as a byte-identical registered carrier: its
+original `int 3` placeholders remain evidence and are not silently rewritten
+or omitted during import.
 
 ### S3 — selected-backend binding and lifecycle implementation
 
@@ -103,6 +110,10 @@ later XMS/DPMI packages use the selected backend contract.
    component ABI.
 6. Once original source is composable, an equivalent Bochs substitution is
    deleted or reduced to its binding seam.
+7. `mvdm-softpc-patch` may contain only a registered NTVDMx64-provenance body.
+   It retains original spelling, parameters and failure order; any x86/x64
+   address conversion uses the session mapping manager through the
+   source-shaped SoftPC adapter boundary.
 
 ## Explicit exclusions
 

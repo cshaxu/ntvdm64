@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <conapi.h>
+#include <dialog_context.h>
 #include "insignia.h"
 #include "host_def.h"
 /*
@@ -83,7 +84,10 @@ char achPERIOD[]=". ";
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 int ErrorDialogBox(char *message, char *Edit, DWORD dwOptions);
-DWORD ErrorDialogBoxThread(VOID *pv);
+/* DIVERGENCE(MVDM-SOFTPC-PATCH-003): the selected NTVDMx64 callconv patch
+ * corrects the historical cdecl worker declaration to the Win32 thread ABI.
+ * Its parameter, result and dialog lifecycle are otherwise unchanged. */
+DWORD WINAPI ErrorDialogBoxThread(VOID *pv);
 int WowErrorDialogEvents(ERRORDIALOGINFO *pedgi);
 LONG APIENTRY ErrorDialogEvents(HWND hDlg,WORD wMsg,LONG wParam,LONG lParam);
 void SwpButtons(HWND hDlg, DWORD dwOptions);
@@ -645,7 +649,8 @@ int ErrorDialogBox(char *message, char *pEdit, DWORD dwOptions)
  *  exit: fills in pedgi.dwReply with ret code from DialogBoxParam
  *        IDB_QUIT, IDB_CONTINUE
  */
-DWORD ErrorDialogBoxThread(VOID *pv)
+/* DIVERGENCE(MVDM-SOFTPC-PATCH-003): see the source-shaped declaration above. */
+DWORD WINAPI ErrorDialogBoxThread(VOID *pv)
 {
     int    i;
     ERRORDIALOGINFO *pedgi = pv;
@@ -769,14 +774,16 @@ LONG APIENTRY ErrorDialogEvents(HWND hDlg,WORD wMsg,LONG wParam,LONG lParam)
 
             SwpDosDialogs(hDlg, pedgi->hWndCon, HWND_TOPMOST, 0);
 
-            SetWindowLong(hDlg, DWL_USER, (LONG)pedgi);
+            /* DIVERGENCE MVDM-HOST-DIV-022: retain the original dialog
+             * context lifetime without truncating its host-only pointer. */
+            opennt_dialog_set_context(hDlg, pedgi);
 
             break;
 
 
         /*:::::::::::::::::::::::::::::::: Trap and process button messages */
         case WM_COMMAND:
-            pedgi = (PERRORDIALOGINFO)GetWindowLong(hDlg,DWL_USER);
+            pedgi = (PERRORDIALOGINFO)opennt_dialog_get_context(hDlg);
             i = (int) LOWORD(wParam);
             switch (i) {
                  case IDB_QUIT:

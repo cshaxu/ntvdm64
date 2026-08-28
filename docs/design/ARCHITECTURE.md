@@ -8,7 +8,7 @@ recreating a private NT subsystem, or requiring installation-time host
 mutation. Public Win32 APIs and ordinary host resources remain valid integration
 mechanisms.
 
-The product has eighteen production source components. A source file has one
+The product has nineteen production source components. A source file has one
 owner. Original mirrors preserve upstream package identity, adapters preserve
 historical interface shape while translating mechanics, and project components
 own composition, session lifetime and cross-process coordination.
@@ -110,6 +110,9 @@ prevents permanent parallel providers.
   selected `softpc.new/base/bios`, `softpc.new/bios`, `softpc.new/roms` and
   `softpc.new/data` paths. It preserves original source, ROM and data inputs
   but is neither a host-runtime library nor a second machine executor.
+- `mvdm-softpc-patch`: a narrow component for reviewed NTVDMx64-derived SoftPC
+  patch bodies. It is neither a generic shim nor an alternate machine; original
+  `mvdm-host/softpc.new` control flow remains in the mirror caller.
 - `mvdm-platform-abi`: exact original declarations and contracts outside
   MVDM required to compile imported MVDM packages. It contains no replacement
   behavior.
@@ -186,9 +189,11 @@ app -> mvdm-guest/dos/v86 / mvdm-guest/bin86 / mvdm-guest/wow16 / mvdm-guest/fon
 mvdm-host -> mvdm-platform-abi
 mvdm-host -> opennt-host                           (only an admitted original host-service package)
 mvdm-host -> mvdm-support
+mvdm-host -> mvdm-softpc-patch                   (only registered SoftPC hooks)
 mvdm-host -> adapter-mvdm-host-out
 mvdm-host -> session                              (neutral contract only)
 adapter-mvdm-host-out/softpc -> adapter-bochs
+mvdm-softpc-patch -> adapter-mvdm-host-out/softpc
 adapter-mvdm-host-in -> adapter-mvdm-host-out/softpc  (typed mechanics only)
 adapter-mvdm-host-out/win32 -> broker client      (only for brokered historical calls)
 opennt-host -> mvdm-platform-abi
