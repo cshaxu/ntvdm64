@@ -2,10 +2,11 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T307/S1 has closed the one-session DOS Base
-VDM broker family. The next unadmitted candidate is the separate Monitor /
-`NtVdmControl` user-mode contract package; see the [T307 closure]
-(history/m0-t307-closure-20260828.md).
+**No active M/T/S packet.** M0 T308 is closed: the source-shaped user-mode
+`VdmQueryDir` contract and current-thread `VDM_TIB` carrier pass formal MSVC
+`/MT` Ninja fixtures on x86 and x64. The remaining service classes have one
+machine, DPMI, VDD/device, broker or hard-boundary disposition; see the
+[closure](history/m0-t308-closure-20260828.md).
 
 **T307 S1 P1:** the local Base VDM facade now covers the reached DOS forms for
 first-VDM query, command capture/capacity/reentry, copied one-shot current
@@ -315,26 +316,23 @@ not package/provider admissions. See the [P20 signature evidence]
 
 ## Active Packet
 
-The following is the retained M0 T307/S1 closure brief. No active M/T/S packet
-is currently present; the next packet requires separate admission.
-
 | Field | Record |
 | --- | --- |
-| Identifier Mode | `M0 T307 S1`, Ordinary Mode with single-person dual-role implementation and review. |
-| Admission And Approval | Owner previously directed queue execution and has now reiterated approval to admit its first candidate after T306: Base VDM source-shaped broker recovery. |
-| Objective | Recover the directly reached one-session DOS Base VDM client/server contract using original `VDMINFO` ordering and the smallest `adapter-mvdm-host-out/basesrv` transport facade. |
-| Non-goals | CSRSS/CSR transport, BaseClient/BaseSrv product-shell import, WOW broker/first-WOW logic, PIF, cross-process brokering, child lifecycle, guest trace, BOP implementation and any second executor remain excluded. |
-| Reference Baseline | [T306 closure](history/m0-t306-closure-20260828.md), original `opennt-host/base/win32/client/vdm.c`, `opennt-host/base/win32/server/srvvdm.c`, and the closed local Base VDM evidence from T302. |
-| Files And ABI Surface | `adapter-mvdm-host-out/basesrv` source/header and focused fixtures; original mirror files remain source reference and must not receive new logic. |
-| Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; four-rung source-recovery gate; mapping and `src.old` exclusion rules. |
-| Verification | Original client/server source-order review; focused x86/x64 local fixtures through formal Ninja; diff review, documentation governance and `git diff --check`. |
-| Expected Markers | `GetNextVDMCommand` local DOS transfer, first-VDM query, reentry counter, current-directory transfer and DOS controlled-exit each have a source-shaped disposition and focused tests. |
-| Asset Needs | Selected OpenNT source union, existing Base VDM seam, session controlled lifecycle and formal Ninja target definitions. |
-| Reporting Requirements | Record direct source, facade divergence, preserved ordering/failure semantics, tests and explicit CSRSS/WOW/PIF/cross-process exclusions. |
-| Stop Conditions | A requested form needs CSRSS/kernel state, a second executor, a generic broker, a new BOP route, or changes to an original mirror body beyond a registered divergence. |
-| Exit Criteria | All directly reached one-session DOS Base VDM forms either compose through the bounded facade with x86/x64 proof or have an explicit later owner/hard-boundary disposition; no parallel app command protocol remains. |
+| Identifier Mode | No active M/T/S packet. |
+| Admission And Approval | T308 was owner-directed and is closed; the next candidate remains in `QUEUE.md`. |
+| Objective | Retained closure fact: direct monitor `VdmQueryDir` and the user-mode `VDM_TIB` carrier are proven on x86/x64. |
+| Non-goals | Kernel VDM, CSRSS, a second executor and all deferred service-class behaviors remain outside the closed packet. |
+| Reference Baseline | [M0 T308 closure](history/m0-t308-closure-20260828.md) and its service disposition ledger. |
+| Files And ABI Surface | Closed surface: `VDMSERVICECLASS`, `VDMQUERYDIRINFO`, `VDM_TIB`, monitor control binding and the T308 formal Ninja graph. |
+| Applicable Rules | `docs/rules/EXECUTION.md`, source-recovery, architecture, coding and documentation governance rules. |
+| Verification | MSVC `/MT` formal Ninja fixtures passed under x86 and x64; documentation governance and diff review are recorded at P closure. |
+| Expected Markers | `VdmQueryDir` preserves callback status; `VDM_TIB` is thread-local; no other service fakes success. |
+| Asset Needs | No active asset need. |
+| Reporting Requirements | Closure links the source owner, retained layouts, failure/owner disposition and the deliberate non-kernel boundary. |
+| Stop Conditions | No active packet. |
+| Exit Criteria | Met; see [M0 T308 closure](history/m0-t308-closure-20260828.md). |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务，从 Base VDM 命令协议开始，到 DPMI / DPMI32 复通。” |
-| Similar-Issue Sweep | `GetNextVDMCommand`, `ExitVDM`, `Set/GetVDMCurrentDirectories`, first-VDM/reentry forms, source-to-adapter ownership and all existing app/monitor command paths. |
+| Similar-Issue Sweep | All fifteen `VDMSERVICECLASS` values, direct MVDM callers and the `VDM_TIB`/TEB carrier are recorded in the closure ledger. |
 
 **Td closure — OpenNT-host directory boundary:** `opennt-host` is now
 explicitly governed as the single mirror root for every separately accepted
