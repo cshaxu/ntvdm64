@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**No M/T/S packet is active.** M0 T309 is closed: the original DEM/COMMAND
+**No active M/T/S packet.** M0 T309 is closed: the original DEM/COMMAND
 provider cohorts and every current residual source-owner boundary are recorded
 without a service/body replacement. See the [T309 closure]
 (history/m0-t309-closure-20260828.md). The next packet requires explicit
