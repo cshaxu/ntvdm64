@@ -105,6 +105,20 @@ session mapping-manager active count is zero. The test therefore proves live
 external physical access and original removal release on both x86 and x64;
 it does not merely prove a remembered token.
 
+## Lease-caller closure
+
+The production source sweep finds exactly three direct uses of
+`session_guest_memory_acquire`: the generic 16:16 guest-location facade,
+Redirector pointer scope, and WOW pointer scope. Their detailed owner and
+lifetime dispositions are recorded in
+[`m0-t310-s7-guest-memory-lease-caller-ledger.tsv`](../operations/m0-t310-s7-guest-memory-lease-caller-ledger.tsv).
+Each starts a bounded synchronous lease and releases it in the same owner
+operation; none publishes an external backing object, binds an Intel physical
+span, or duplicates `VdmSetPhysRecStructs`. The new SoftPC physical mapping
+does not acquire a guest-memory lease at all. Therefore S7 removes no neutral
+lease mechanism and transfers all three retained callers unchanged to their
+named owner packages.
+
 ## Admission consequence
 
 No current caller exercises `VdmAddVirtualMemory` or

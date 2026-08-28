@@ -277,6 +277,15 @@ interval. P4's former hard-fail fixture seam is superseded. This does not
 claim WOW DIB, full device composition, Bochs, MONITOR or kernel-VDM support;
 see the [physical-page audit](etc/evidence/m0-t310-s7-physical-page-source-recovery-audit-001.md).
 
+**T310 S7 closure:** every reached selected-SoftPC `nt_mem`/`sim32`/
+`VdmSetPhysRecStructs`/physical-access crossing now has a source-shaped,
+mapping-manager-backed disposition on x86 and x64. The formal fixtures prove
+positive live-page access and rejection of zero-length, invalid and stale
+bindings. The [lease-caller ledger](etc/operations/m0-t310-s7-guest-memory-lease-caller-ledger.tsv)
+records all three direct lease consumers as independent owner contracts; none
+duplicates this physical route. S8 may consume but may not redefine the
+binding.
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove

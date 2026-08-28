@@ -49,6 +49,7 @@ int main(void)
         session physical_owner;
         uint8_t external_page_storage[4097] = { 0 };
         uint8_t *external_page = &external_page_storage[1];
+        uint8_t *resolved_page = NULL;
         uint32_t mapping_identifier;
         ULONG intel_address = 0u;
 
@@ -63,6 +64,15 @@ int main(void)
             sas_term();
             return 1;
         }
+        if (mvdm_softpc_physical_mapping_prepare(mapping_identifier, 0u,
+                NULL) || mvdm_softpc_physical_mapping_resolve(
+                UINT32_C(0xffffffff), &resolved_page)) {
+            fputs("external physical-page binding accepted invalid span\n", stderr);
+            (void)session_thread_unbind(&physical_owner);
+            (void)session_dispose(&physical_owner);
+            sas_term();
+            return 1;
+        }
         /* `c_GetPhyAdd` is the selected original CCPU physical-access
          * operation.  `c_sas_store` is a linear BIOS/SAS entry and is not a
          * proof that the external physical page was selected. */
@@ -70,7 +80,11 @@ int main(void)
         if (external_page[0] != UINT8_C(0x6d) ||
             *c_GetPhyAdd(intel_address) != UINT8_C(0x6d) ||
             VdmRemoveVirtualMemory(intel_address) != STATUS_SUCCESS ||
-            session_guest_memory_mappings(&physical_owner)->active_count != 0u) {
+            session_guest_memory_mappings(&physical_owner)->active_count != 0u ||
+            mvdm_softpc_physical_mapping_prepare(mapping_identifier,
+                UINT32_C(4096), NULL) ||
+            mvdm_softpc_physical_mapping_resolve(intel_address,
+                &resolved_page)) {
             fputs("external physical-page binding did not remain live and release\n",
                 stderr);
             (void)session_thread_unbind(&physical_owner);
