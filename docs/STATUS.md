@@ -6,11 +6,12 @@
 
 M0 T300/S1 is closed. T301’s subsequent source-language correction supersedes
 its provisional lexical count: the current selected OpenNT-MVDM zero closure
-has 12,436 physical definition identities and 4,366 explicitly retained
-variant-family edges. The current one-degree frontier has 13,050 physical
-non-MVDM, non-proven-macro direct calls and 1,442 spelling groups; each call
-retains its physical caller identity. See the [parser correction
-evidence](etc/evidence/m0-t301-s1-p4-direct-call-normalization-001.md).
+has 12,110 physical definition identities and 4,265 explicitly retained
+variant-family edges. The current one-degree frontier has 12,426 physical
+non-MVDM, non-proven-macro direct calls and 1,446 spelling groups; each call
+retains its physical caller identity. Both approved MVDM source roots are
+used; see the [source-union correction
+evidence](etc/evidence/m0-t301-s1-p5-mvdm-source-union-correction-001.md).
 
 ## Active Packet
 
@@ -20,7 +21,7 @@ evidence](etc/evidence/m0-t301-s1-p4-direct-call-normalization-001.md).
 | Admission And Approval | Owner’s active goal is “开展一度审计”; T300 closed the predecessor zero-degree closure and the queue’s ordered first-frontier audit is now admitted. |
 | Objective | Resolve every T300 one-degree boundary call against original OpenNT/OpenNT-4.5 sources without spelling-only identity merges; classify each result as a public leaf, exact original body/variant, hard boundary, finite shallow replacement, or source-unavailable item, and emit only direct second-degree edges from actually resolved first-degree bodies. |
 | Non-goals | No source import, adapter/provider implementation, build/link admission, BOP enablement, runtime route, Bochs change, or inspection of any second-degree callee body. |
-| Reference Baseline | Current regenerated T300/T301 ledgers: 13,050 physical boundary-call rows / 1,442 spelling groups. T299 parser and include-frontier methods are reusable evidence only, not authoritative result rows. See [T301 plan](etc/operations/m0-t301-s1-rebaselined-first-degree-audit-plan-001.md). |
+| Reference Baseline | Current regenerated T300/T301 ledgers: 12,426 physical boundary-call rows / 1,446 spelling groups. T299 parser and include-frontier methods are reusable evidence only, not authoritative result rows. See [T301 plan](etc/operations/m0-t301-s1-rebaselined-first-degree-audit-plan-001.md). |
 | Files And ABI Surface | T301 audit generator, derived first-degree call/definition/file/second-degree ledgers, evidence, Status and documentation inventory only. No production ABI changes. |
 | Applicable Rules | `docs/rules/EXECUTION.md`; source policy; Architecture and Coding design/rules; physical identity rather than name-only matching; original-source-first recovery; `src.old` exclusion. |
 | Verification | Generation assertions for one result per T300 boundary ID, physical source-path/hash/line/signature review, include-frontier constraint evidence, source-root and `src.old` exclusion scans, documentation inventory/governance checks, and `git diff --check`. |

@@ -11,7 +11,8 @@ is unique inside the caller's original MVDM top-level package. It therefore
 does not select a WOW header for a SoftPC caller merely because both have the
 same filename.
 
-Current generated evidence:
+The following counts were the P4 single-root intermediate result. They are
+superseded by P5's complete source-union rerun.
 
 - `mvdm-zero-degree-call-closure-ledger.tsv`: 12,436 physical zero-degree
   function identities.

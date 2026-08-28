@@ -4,8 +4,13 @@ import path from 'node:path';
 
 const repository = process.argv[2] || process.cwd();
 const operations = path.join(repository, 'docs', 'etc', 'operations');
-const sourceRoots = ['O:\\repos.external\\OpenNT', 'O:\\repos.external\\OpenNT-4.5']
-  .map((root) => path.join(root, 'base', 'mvdm')).filter(fs.existsSync);
+// The two approved source editions have different historical roots.  They
+// are a source union, not a fallback: OpenNT-4.5 lives under nt/private while
+// OpenNT exposes the same package under base.
+const sourceRoots = [
+  'O:\\repos.external\\OpenNT\\base\\mvdm',
+  'O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm',
+].filter(fs.existsSync);
 const mirrorRoots = [
   ['mvdm-host', path.join(repository, 'src', 'mvdm-host')],
   ['mvdm-support', path.join(repository, 'src', 'mvdm-support')],
@@ -203,8 +208,13 @@ for (const [component, root] of mirrorRoots) for (const file of walk(root)) {
   const candidates = originalByHash.get(sha256) || [];
   const suffix = candidates.filter((item) => item.relative === relative || item.relative.endsWith(`/${relative}`));
   const samePath = originalByRelative.get(relative) || [];
-  const selected = suffix.length === 1 ? suffix[0] : candidates.length === 1 ? candidates[0] : samePath.length === 1 ? samePath[0] : null;
-  const identity_status = suffix.length === 1 ? 'byte-exact-relative-path' : candidates.length === 1 ? 'byte-exact-unique-content' : samePath.length === 1 ? 'same-path-divergent-mirror; original body selected for source audit' : 'unresolved-project-mirror-identity';
+  // Identical bytes at the same relative path in both approved editions form
+  // an explicit edition-equivalent source identity.  Pick the OpenNT copy as
+  // the canonical reader only; candidate_count retains the alternate source
+  // rather than collapsing distinct content or names by spelling.
+  const equivalentEditions = suffix.length > 1 && new Set(suffix.map((item) => item.relative)).size === 1;
+  const selected = suffix.length === 1 ? suffix[0] : equivalentEditions ? suffix[0] : candidates.length === 1 ? candidates[0] : samePath.length === 1 ? samePath[0] : null;
+  const identity_status = suffix.length === 1 ? 'byte-exact-relative-path' : equivalentEditions ? 'byte-exact-edition-equivalent-relative-path' : candidates.length === 1 ? 'byte-exact-unique-content' : samePath.length === 1 ? 'same-path-divergent-mirror; original body selected for source audit' : 'unresolved-project-mirror-identity';
   localFiles.push({ component, file, relative, sha256, selected, candidate_count: candidates.length, suffix_count: suffix.length, same_path_count: samePath.length, identity_status });
 }
 const selectedFiles = localFiles.filter((item) => item.selected);
