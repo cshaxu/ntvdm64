@@ -96,15 +96,16 @@ function includeClosure(caller, includes) {
   return [...resolved.values()];
 }
 
-const boundaries = parseTsv('mvdm-first-degree-rebaselined-boundary-ledger.tsv');
-const zero = parseTsv('mvdm-zero-degree-call-closure-ledger.tsv');
-const oldResults = parseTsv('mvdm-host-first-degree-original-resolution-ledger.tsv');
-const oldDefinitions = parseTsv('mvdm-host-first-degree-original-definition-ledger.tsv');
+// P15 made the rebased frontier authoritative.  The older 12,426-row T300
+// boundary and its spelling-level resolution drafts are historical evidence,
+// never a T301 worklist.
+const boundaries = parseTsv('mvdm-first-degree-rebased-boundary-ledger.tsv');
+const zero = [
+  ...parseTsv('mvdm-zero-degree-call-closure-ledger.tsv'),
+  ...parseTsv('mvdm-zero-degree-rebase-admitted-definition-ledger.tsv'),
+];
 const zeroRoots = new Map();
 for (const row of zero) zeroRoots.set(`${row.source_path}\u0000${row.source_sha256}`, row.source_root);
-const oldBySpelling = new Map(oldResults.map((row) => [row.callee_spelling, row]));
-const oldDefinitionsBySymbol = new Map();
-for (const definition of oldDefinitions) oldDefinitionsBySymbol.set(definition.symbol, [...(oldDefinitionsBySymbol.get(definition.symbol) || []), definition]);
 const targetSpellings = new Set(boundaries.map((row) => row.callee_spelling));
 const callers = new Map();
 for (const row of boundaries) {
@@ -154,9 +155,7 @@ for (const row of boundaries) {
   const key = `${row.caller_source_path}\u0000${row.caller_source_sha256}`;
   const info = callerHeaders.get(key);
   const roots = [...new Set(info.resolved.map((header) => packageRoot(header.relative)).filter(Boolean))].sort();
-  const prior = oldBySpelling.get(row.callee_spelling);
-  const retained = prior?.resolution || '';
-  const preliminary = retained === 'public-win32-or-crt-leaf' ? 'public-leaf-revalidate-declaration' : retained ? 'prior-source-evidence-revalidate-physical-caller-context' : 'requires-original-declaration-and-body-search';
+  const preliminary = 'requires-original-declaration-and-body-search';
   frontierRows.push({
     candidate_id: row.candidate_id,
     caller_symbol: row.caller_symbol,
@@ -170,9 +169,7 @@ for (const row of boundaries) {
     candidate_id: row.candidate_id,
     callee_spelling: row.callee_spelling,
     preliminary_disposition: preliminary,
-    prior_t299_resolution: retained,
-    prior_t299_basis: prior?.basis || '',
-    required_next_action: retained === 'public-win32-or-crt-leaf' ? 'prove declaration/ABI at this physical caller include frontier; then terminate as public leaf' : 'resolve declaration-guided original body variants or record hard-boundary/source-unavailable outcome',
+    required_next_action: 'resolve declaration-guided original body variants or record public leaf, hard-boundary, finite-shallow or source-unavailable outcome',
     constraint: 'T301 must not merge by spelling, inspect a second-degree body, import source, or select a runtime provider.',
   });
   for (const header of info.resolved) for (const line of declarationTokens.get(headerIdentity(header)).get(row.callee_spelling) || []) declarationRows.push({
@@ -185,21 +182,10 @@ for (const row of boundaries) {
     declaration_package_root: packageRoot(header.relative),
     disposition: 'original-header token in the physical caller include closure; declaration form and compatible definition remain to be resolved',
   });
-  for (const definition of oldDefinitionsBySymbol.get(row.callee_spelling) || []) priorDefinitionRows.push({
-    candidate_id: row.candidate_id,
-    callee_spelling: row.callee_spelling,
-    prior_definition_id: definition.definition_id,
-    source_root: definition.source_root,
-    source_path: definition.source_path,
-    source_sha256: definition.source_sha256,
-    source_line: definition.source_line,
-    linkage: definition.linkage,
-    disposition: 'previous approved-original identity is a physical source candidate only; T301 must still prove caller-compatible declaration and final disposition',
-  });
 }
 writeTsv('mvdm-first-degree-rebaselined-caller-include-frontier-ledger.tsv', callerFrontierRows, ['caller_frontier_id', 'caller_source_path', 'caller_source_sha256', 'direct_include_spellings', 'direct_original_headers', 'allowed_package_roots', 'frontier_basis']);
 writeTsv('mvdm-first-degree-rebaselined-include-frontier-ledger.tsv', frontierRows, ['candidate_id', 'caller_symbol', 'caller_source_path', 'caller_source_sha256', 'caller_source_line', 'callee_spelling', 'caller_frontier_id']);
-writeTsv('mvdm-first-degree-rebaselined-worklist-ledger.tsv', workRows, ['candidate_id', 'callee_spelling', 'preliminary_disposition', 'prior_t299_resolution', 'prior_t299_basis', 'required_next_action', 'constraint']);
+writeTsv('mvdm-first-degree-rebaselined-worklist-ledger.tsv', workRows, ['candidate_id', 'callee_spelling', 'preliminary_disposition', 'required_next_action', 'constraint']);
 writeTsv('mvdm-first-degree-rebaselined-declaration-frontier-ledger.tsv', declarationRows, ['candidate_id', 'callee_spelling', 'caller_frontier_id', 'declaration_header_identity', 'declaration_header_path', 'declaration_line', 'declaration_package_root', 'disposition']);
 writeTsv('mvdm-first-degree-rebaselined-prior-definition-identity-ledger.tsv', priorDefinitionRows, ['candidate_id', 'callee_spelling', 'prior_definition_id', 'source_root', 'source_path', 'source_sha256', 'source_line', 'linkage', 'disposition']);
 const counts = new Map(); for (const row of workRows) counts.set(row.preliminary_disposition, (counts.get(row.preliminary_disposition) || 0) + 1);

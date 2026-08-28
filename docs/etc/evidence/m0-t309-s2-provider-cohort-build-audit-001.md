@@ -1,4 +1,4 @@
-# M0 T309 S2 P1 — original provider-cohort build audit
+# M0 T309 S2 P1/P2 — original provider-cohort build audit
 
 ## Inputs and procedure
 
@@ -41,12 +41,32 @@ files and regenerating the graph rebuilt all three session inputs. The same
 clean-state procedure verified x64. No tracked build artifact or source file
 was removed.
 
+## P2 — Bochs mechanical boundary
+
+P2 adds the six existing `adapter-bochs` mechanical translation units to the
+same graph: headless 8042, machine facade, lifecycle, minimal machine, PIC,
+and SIM.  They compile and archive under both formal MSVC `/MT` architectures.
+The forced audit link also completes and deliberately emits a non-runnable DLL
+under `/force:unresolved`.
+
+- x86: 230 unique unresolved forms; 49 are `bochs-core` mechanical symbols
+  and 25 are MSVC C++ runtime forms.
+- x64: 227 unique unresolved forms; the same 49 `bochs-core` mechanical
+  symbols and 25 MSVC C++ runtime forms occur.
+
+The three-count architecture difference is therefore outside the Bochs
+mechanical boundary.  This is expected component composition evidence, not a
+provider failure: T309 does not rebuild or relink the full `bochs-core` mirror.
+That mirror's build/ownership closure remains the already established lower
+`adapter-bochs -> bochs-core` boundary.  No BOP selector, provider body, table
+entry, historical PIC executor, or C++ runtime substitute was introduced.
+
 ## Disposition
 
-The next P will add only the existing `adapter-bochs` C++ machine forms to the
-audit graph, then remeasure the
-remaining external boundary. It must not add a hand-written BOP service,
-rewrite a provider, or import the excluded historical PIC/second executor.
+The next provider-cohort part must classify the residual non-machine external
+forms by original owner and designated package.  It must not add a
+hand-written BOP service, rewrite a provider, or import the excluded
+historical PIC/second executor.
 
 The persistent non-admitted classes are unchanged: historical floppy/FDC and
 INT13 machine bodies remain machine/firmware-owned; Redirector, VDD, WOW, and

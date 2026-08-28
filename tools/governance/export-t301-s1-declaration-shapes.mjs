@@ -14,7 +14,8 @@ function parseTsv(fileName) {
 }
 function writeTsv(fileName, rows, columns) { const quote = (value) => `"${String(value ?? '').replaceAll('"', '""')}"`; fs.writeFileSync(path.join(operations, fileName), [columns.join('\t'), ...rows.map((row) => columns.map((column) => quote(row[column])).join('\t'))].join('\n') + '\n'); }
 function mask(text) { return text.replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\r\n]/g, ' ')).replace(/\/\/[^\r\n]*/g, (m) => m.replace(/[^\r\n]/g, ' ')); }
-const boundaries = parseTsv('mvdm-first-degree-rebaselined-boundary-ledger.tsv');
+// P15/P16 establish the rebased frontier as the only live first-degree input.
+const boundaries = parseTsv('mvdm-first-degree-rebased-boundary-ledger.tsv');
 const declarations = parseTsv('mvdm-first-degree-rebaselined-declaration-frontier-ledger.tsv');
 const byCandidate = new Map();
 for (const row of declarations) byCandidate.set(row.candidate_id, [...(byCandidate.get(row.candidate_id) || []), row]);

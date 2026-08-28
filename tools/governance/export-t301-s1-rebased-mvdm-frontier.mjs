@@ -45,7 +45,12 @@ const admittedRows = [...admitted].filter((identity) => !oldDefinitions.has(iden
   return { ...definition, rebase_admission: seed.has(identity) ? 'confirmed original-boundary call' : 'confirmed expanded original-MVDM internal edge' };
 }).sort((left, right) => left.source_path.localeCompare(right.source_path) || Number(left.source_line) - Number(right.source_line));
 const newEdges = readTsv('mvdm-zero-degree-rebase-expansion-edge-ledger.tsv');
-const newFirst = newEdges.filter((edge) => !edge.internal_candidate_identity || !confirmedEdgeKeys.has(edgeKey(edge)));
+// Only a body that actually joined the lawful zero closure can emit a
+// first-degree edge.  Expansion discovery is deliberately broader than
+// admission; letting an unadmitted discovered body contribute here would
+// manufacture a frontier caller outside zero degree.
+const newFirst = newEdges.filter((edge) => admitted.has(edge.caller_identity)
+  && (!edge.internal_candidate_identity || !confirmedEdgeKeys.has(edgeKey(edge))));
 const retainedOld = oldBoundary.filter((row) => !confirmedBoundaryIds.has(row.candidate_id)).map((row) => ({ ...row, frontier_origin: 'retained T300 physical boundary call' }));
 const appended = newFirst.map((edge, index) => ({
   candidate_id: `MVDM-FIRST-REBASE-NEW-${String(index + 1).padStart(6, '0')}`,

@@ -54,6 +54,14 @@ $bindings = @(
     'src/adapter-mvdm-host-out/redir/mvdm_redirector_handle.c',
     'src/adapter-mvdm-host-out/redir/mvdm_redirector_mailslot.c'
 )
+$machine = @(
+    'src/adapter-bochs/headless_8042.cc',
+    'src/adapter-bochs/machine_facade.cc',
+    'src/adapter-bochs/machine_lifecycle.cc',
+    'src/adapter-bochs/minimal_machine.cc',
+    'src/adapter-bochs/minimal_pic.cc',
+    'src/adapter-bochs/minimal_sim.cc'
+)
 foreach ($unit in $dem) {
     $path = Join-Path $root "src/mvdm-host/dos/dem/$unit.c"
     if (!(Test-Path -LiteralPath $path)) { throw "Missing original DEM source: $path" }
@@ -67,7 +75,12 @@ foreach ($binding in $bindings) {
         throw "Missing selected source-shaped binding: $binding"
     }
 }
-New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/binding') | Out-Null
+foreach ($source in $machine) {
+    if (!(Test-Path -LiteralPath (Join-Path $root $source))) {
+        throw "Missing selected Bochs mechanical adapter source: $source"
+    }
+}
+New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/binding'), (Join-Path $build 'obj/machine') | Out-Null
 $environment = Join-Path $build 'msvc-mt.cmd'
 @('@echo off', 'set "MVDM_T309_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready',
   ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'),
@@ -92,19 +105,31 @@ $includes = @(
     'src/mvdm-host/softpc.new/host/inc',
     'src/mvdm-host/softpc.new/base/inc'
 ) | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
+$machineIncludes = @(
+    'src', 'src/session', 'src/bochs-core', 'src/bochs-core/cpu',
+    'src/bochs-core/iodev', 'src/bochs-core/instrument/stubs',
+    'src/adapter-bochs', 'src/adapter-mvdm-host-out/softpc/include'
+) | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /Di386 /DNTVDM ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/softpc/include/error_abi.h')) + '" ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/monitor/include/vdm.h')) + '" ' +
     ($includes -join ' ')
+$machineFlags = '/nologo /TP /c /std:c++14 /EHsc /MT /W4 /showIncludes /DWIN32 /DRUNTIME_ENABLE_MACHINE_UD_BRIDGE=1 ' +
+    ($machineIncludes -join ' ')
 
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
 $graph.Add('build_root = ' + (NinjaPath $build))
 $graph.Add('cflags = ' + $flags)
+$graph.Add('machineflags = ' + $machineFlags)
 $graph.Add('')
 $graph.Add('rule cc')
 $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in')
+$graph.Add('  deps = msvc')
+$graph.Add('  msvc_deps_prefix = Note: including file:')
+$graph.Add('rule cxx')
+$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $machineflags /Fo$out $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('rule lib')
@@ -127,21 +152,29 @@ $bindingObjects = foreach ($binding in $bindings) {
     $graph.Add("build ${object}: cc " + (NinjaPath (Join-Path $root $binding)))
     $object
 }
+$machineObjects = foreach ($source in $machine) {
+    $unit = [IO.Path]::GetFileNameWithoutExtension($source)
+    $object = "obj/machine/$unit.obj"
+    $graph.Add("build ${object}: cxx " + (NinjaPath (Join-Path $root $source)))
+    $object
+}
 $graph.Add('build original-dem-provider-cohort.lib: lib ' + ($demObjects -join ' '))
 $graph.Add('build original-command-provider-cohort.lib: lib ' + ($commandObjects -join ' '))
 $graph.Add('build source-shaped-bindings.lib: lib ' + ($bindingObjects -join ' '))
+$graph.Add('build adapter-bochs-mechanical.lib: lib ' + ($machineObjects -join ' '))
 $auditResponse = @(
     '/nologo', '/dll', '/noentry', '/force:unresolved',
     '/out:external-link-audit.dll',
     '/wholearchive:original-dem-provider-cohort.lib',
     '/wholearchive:original-command-provider-cohort.lib',
     '/wholearchive:source-shaped-bindings.lib',
+    '/wholearchive:adapter-bochs-mechanical.lib',
     'kernel32.lib', 'advapi32.lib'
 )
 [IO.File]::WriteAllLines((Join-Path $build 'external-link-audit.dll.rsp'), $auditResponse,
     [Text.UTF8Encoding]::new($false))
-$graph.Add('build external-link-audit.dll: audit original-dem-provider-cohort.lib original-command-provider-cohort.lib source-shaped-bindings.lib')
-$graph.Add('build cohorts: phony original-dem-provider-cohort.lib original-command-provider-cohort.lib source-shaped-bindings.lib')
+$graph.Add('build external-link-audit.dll: audit original-dem-provider-cohort.lib original-command-provider-cohort.lib source-shaped-bindings.lib adapter-bochs-mechanical.lib')
+$graph.Add('build cohorts: phony original-dem-provider-cohort.lib original-command-provider-cohort.lib source-shaped-bindings.lib adapter-bochs-mechanical.lib')
 $graph.Add('default cohorts external-link-audit.dll')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'),
     (($graph -join [Environment]::NewLine) + [Environment]::NewLine),

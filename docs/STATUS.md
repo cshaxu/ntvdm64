@@ -29,6 +29,12 @@ to 208 unique external forms and now exposes the lower `adapter-bochs`
 component boundary plus later owner families. See the [cohort audit]
 (etc/evidence/m0-t309-s2-provider-cohort-build-audit-001.md).
 
+**T309 S2 P2:** the six existing `adapter-bochs` mechanical sources now also
+compile/archive in the same formal x86/x64 cohort graphs. Their forced audit
+links generate the deliberate non-runnable DLLs and isolate a stable 49-form
+`bochs-core` lower boundary plus 25 MSVC C++ runtime forms on both
+architectures; no provider or selector semantics entered that adapter.
+
 **T307 S1 P1:** the local Base VDM facade now covers the reached DOS forms for
 first-VDM query, command capture/capacity/reentry, copied one-shot current
 directories and session-only `ExitVDM`. Its formal Ninja fixture passes under

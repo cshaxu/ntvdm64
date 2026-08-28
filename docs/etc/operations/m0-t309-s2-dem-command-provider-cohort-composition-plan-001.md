@@ -22,8 +22,9 @@ the complete 73-service DEM and 17-service COMMAND provider cohorts.
    `sources` files and build them as source-owned packages, not service
    slices.
 2. Compile and link the cohorts on x86 and x64 through already named adapter
-   forms. Classify each unresolved external symbol by original owner and
-   existing adapter or exact next owner.
+   forms, including the existing `adapter-bochs` mechanical archive as the
+   lower machine boundary. Classify each unresolved external symbol by
+   original owner and existing adapter or exact next owner.
 3. Recover only same-shaped bindings that are required to link selected
    original source. Preserve the original provider body, function spelling,
    call order, data layout, and failure behavior; register every divergence.
