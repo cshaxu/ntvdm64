@@ -153,6 +153,15 @@ and the original recursive return separately; it does not treat a nested BIOS
 return as session completion or claim a general CPU budget. See the
 [execution-seam audit](etc/evidence/m0-t310-s5-ccpu-execution-seam-audit-001.md).
 
+**T310 S5 P4:** the unexercised original `nt_mem` and configuration CPU-state
+paths now have a source-first x64 disposition.  The bounded CCPU proof keeps
+its original SAS-backed result, while every path that reconstructs a native
+address from an Intel `ULONG` is assigned to the one session-owned
+guest-memory mapping manager and a later same-shaped SoftPC physical-page
+binding.  No pointer-width cast, Bochs fallback, or second mapping table has
+been introduced.  See the [memory-boundary audit]
+(etc/evidence/m0-t310-s5-ccpu-x64-memory-boundary-audit-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove
