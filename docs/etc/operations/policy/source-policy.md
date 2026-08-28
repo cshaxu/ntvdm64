@@ -18,8 +18,10 @@ selected `softpc.new` BIOS/ROM/data inputs belong to
 `mvdm-softpc-firmware`. Exact declarations required from outside MVDM belong
 to `mvdm-platform-abi`.
 `mvdm-host` is recovered as a complete selected original host-package union,
-not as a collection of trace-reached files. An original OpenNT package outside
-MVDM may enter the separate `opennt-host` mirror only after complete-package
+not as a collection of trace-reached files. `opennt-host` is the single mirror
+root for **all** separately accepted original OpenNT host packages outside
+MVDM; BaseSrv/BaseClient VDM is only its first accepted slice. An original
+OpenNT package outside MVDM may enter that mirror only after complete-package
 audit proves that its **required original slice** is directly required by a
 selected MVDM package, retains
 substantial original state/algorithm value, and has a finite outgoing closure
@@ -32,9 +34,10 @@ paths. The audit never authorizes importing unrelated files from an accepted
 source directory. CSR/CSRSS, NTDLL CSR transport, kernel VDM, full BaseClient/Kernel32,
 Win32k and USER/GDI server are explicit stopping boundaries: their source may
 be cited as evidence but is not recursively imported for host runtime.
-A package-specific `adapter-opennt-host` supplies a same-shaped modern binding
-only for private host interfaces identified in an accepted imported package;
-it must not become a generic compatibility layer. The
+A package-specific subfamily below `adapter-opennt-host` supplies a
+same-shaped modern binding only for private host interfaces identified in its
+accepted imported package; it must not become a generic compatibility layer.
+The
 shared declaration-only `mvdm-platform-abi` remains separate unless a tracked
 declaration is proved private to one admitted `opennt-host` package.
 Bochs 2.6, from `O:\repos.external\bochs-2.6-compat\bochs-2.6`, is the

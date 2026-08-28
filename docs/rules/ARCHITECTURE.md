@@ -7,8 +7,9 @@
    `adapter-bochs`, `adapter-mvdm-host-in`, `adapter-mvdm-host-out`, `session`, `broker`,
    `adapter-opennt-host`, and `app`.
 2. `mvdm-host` is the sole complete selected MVDM host-runtime mirror.
-   `opennt-host` is the sole original non-MVDM OpenNT host-service mirror and
-   accepts only a required original slice after a complete package-boundary
+   `opennt-host` is the sole original non-MVDM OpenNT host-service mirror. It
+   contains every separately accepted original owner package, not only the
+   first Base VDM slice, and accepts only a required original slice after a complete package-boundary
    audit proves: a
    direct selected-MVDM caller; a retained original algorithm/state-machine
    benefit; a finite outgoing closure through public modern APIs, existing
@@ -38,9 +39,10 @@
    the reached original name, parameters, calling convention, layout, ordering
    and failure contract wherever the platform permits. No family becomes an
    alternate OpenNT provider or absorbs another family's semantics.
-   `adapter-opennt-host` is the distinct, package-private family for the
-   reached `opennt-host` private-host interface; it cannot absorb MVDM caller
-   semantics, reconstruct CSR/CSRSS, or become a generic adapter.
+   `adapter-opennt-host` is the distinct, package-private family for reached
+   `opennt-host` private-host interfaces. Its subfamilies remain named by their
+   accepted OpenNT owner packages; it cannot absorb MVDM caller semantics,
+   reconstruct CSR/CSRSS, or become a generic adapter.
 6. The `monitor` family owns the complete same-shaped user-mode
    `NtVdmControl`, `VDM_TIB`, V86-event and interrupt/fault-handler interface
    family. It binds bounded per-session/per-thread state and an app-installed

@@ -8,6 +8,16 @@ M0 T299 is closed by S5. The source scanner excludes C/C++/MSVC control
 constructs; the current first-degree closure has 128 physical definitions and
 743 second-degree cross-file candidates.
 
+**Td closure — OpenNT-host directory boundary:** `opennt-host` is now
+explicitly governed as the single mirror root for every separately accepted
+non-MVDM OpenNT host package; Base VDM is its first slice, not its limit. See
+the [Td record](history/td-opennt-host-package-root-governance-20260827.md).
+
+**Td closure — OpenNT-host directory boundary:** `opennt-host` is now
+explicitly governed as the single mirror root for every separately accepted
+non-MVDM OpenNT host package; Base VDM is its first slice, not its limit. See
+the [Td record](history/td-opennt-host-package-root-governance-20260827.md).
+
 ## Active Packet
 
 ### M0 T299 S4 closure — physical translation-unit closure

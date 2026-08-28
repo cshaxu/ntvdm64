@@ -36,13 +36,15 @@ material and never a source, build, link or runtime input.
 - `bochs-core` contains the adopted Bochs mirror only.
 - `mvdm-host` contains only canonical selected MVDM host-runtime
   packages, retaining package-internal paths and filenames.
-- `opennt-host` contains only a complete selected original OpenNT host-service
-  package outside MVDM, retaining its upstream-relative paths and filenames.
-  It is admitted only with rows in the shared file/interface/dependency/build
-  trackers and the external package-boundary ledger. The audit must show a
-  direct `mvdm-host` caller, retained original service value and a finite
-  outward modern-binding closure; a standalone convenience helper, a symbol
-  hit or a recursively required NT4 product-shell package never qualifies.
+- `opennt-host` contains every complete selected original OpenNT host-service
+  package outside MVDM, each retaining upstream-relative paths and filenames.
+  Base VDM is its first accepted slice, not a limit on future admitted owner
+  packages. Each package is admitted only with rows in the shared
+  file/interface/dependency/build trackers and the external package-boundary
+  ledger. The audit must show a direct `mvdm-host` caller, retained original
+  service value and a finite outward modern-binding closure; a standalone
+  convenience helper, a symbol hit or a recursively required NT4 product-shell
+  package never qualifies.
 - `mvdm-support` contains selected shared MVDM build/header carriers
   and original support libraries (`inc`, `dirs`, `makefil0`, `oemuni`, and
   `suballoc`). It has no implied default host link edge.
@@ -67,10 +69,10 @@ material and never a source, build, link or runtime input.
   interface families `win32`, `softpc`, `monitor`, `redir`, `wow`, `vdd` and
   `debugger`; a missing historical product interface is assigned to one of
   those families before a mirror source is changed to avoid it.
-- `adapter-opennt-host` contains only the same-shaped
-  BaseSrv/private-host interface family required by its `opennt-host` caller.
-  It cannot be used by `mvdm-host` directly or become a generic compatibility
-  root.
+- `adapter-opennt-host` contains only the same-shaped package-private host
+  interface family required by each owning `opennt-host` package. Its source
+  subdirectories identify that original owner package. It cannot be used by
+  `mvdm-host` directly or become a generic compatibility root.
 - `session` contains neutral per-instance lifetime, mappings, resources,
   events and teardown.
 - `broker` contains the versioned IPC client/server contract and per-user

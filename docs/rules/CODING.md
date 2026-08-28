@@ -26,11 +26,16 @@
 
 ## Placement and dependencies
 
-- Place each production file in one of the fourteen roots declared by the
-  architecture rules. `mvdm-host`, `mvdm-support`, `mvdm-tools` and
-  `mvdm-softpc-firmware` preserve selected host-runtime,
-  support, standalone-tool and firmware-input package topology respectively;
-  package libraries do not create ad-hoc new source owners.
+- Place each production file in one of the eighteen roots declared by the
+  architecture rules. `mvdm-host`, `opennt-host`, `mvdm-support`, `mvdm-tools`
+  and `mvdm-softpc-firmware` preserve selected MVDM runtime, accepted
+  non-MVDM OpenNT host, support, standalone-tool and firmware-input package
+  topology respectively; package libraries do not create ad-hoc new source
+  owners.
+- A newly accepted non-MVDM OpenNT package keeps its original relative path
+  below `opennt-host`. Its private historical boundary, if one is needed,
+  belongs below the correspondingly named `adapter-opennt-host` subfamily;
+  neither root may be used as a generic helper collection.
 - `mvdm-platform-abi` contains exact original declarations only.
 - `adapter-bochs` alone includes or calls `bochs-core`. Only the `softpc`
   family of `adapter-mvdm-host-out` calls the public typed mechanics of

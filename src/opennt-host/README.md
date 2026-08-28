@@ -5,7 +5,14 @@ complete source-audited packages used by a selected MVDM caller. It is not an
 alternate MVDM provider, a compatibility layer, or a general collection of
 host utilities.
 
-## Current package
+## Package admission and current package
+
+This root is not limited to BaseSrv/BaseClient. Every separately admitted
+non-MVDM OpenNT host package belongs below this root with its original
+relative path preserved. A package is admitted only after the shared tracker
+records its direct `mvdm-host` caller, complete outgoing boundary, final file
+disposition and any required package-private adapter binding. Discovering a
+same-named function body is not package admission.
 
 `base/win32` is the first selected package slice. It contains the original
 BaseSrv/client VDM command implementation and its direct original declaration
@@ -23,9 +30,10 @@ and the shared MVDM/OpenNT host trackers.
 
 The package is a source mirror only at this point. It is not an enabled build
 or runtime input until every reached CSR/private-host interface has a named,
-same-shaped disposition. A later `adapter-opennt-host` is permitted only for a
-BaseSrv-specific interface that the original source proves cannot compose
-directly; it must not absorb MVDM or generic Win32 semantics.
+same-shaped disposition. A later package-named subfamily under
+`adapter-opennt-host` is permitted only for a private interface that the
+owning original source proves cannot compose directly; it must not absorb
+MVDM or generic Win32 semantics.
 
 ## Divergence register
 

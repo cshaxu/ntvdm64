@@ -8,7 +8,7 @@ recreating a private NT subsystem, or requiring installation-time host
 mutation. Public Win32 APIs and ordinary host resources remain valid integration
 mechanisms.
 
-The product has sixteen production source components. A source file has one
+The product has eighteen production source components. A source file has one
 owner. Original mirrors preserve upstream package identity, adapters preserve
 historical interface shape while translating mechanics, and project components
 own composition, session lifetime and cross-process coordination.
@@ -58,9 +58,10 @@ prevents permanent parallel providers.
   `softpc.new` and SIM/monitor provider packages. It does not own standalone
   tools or common support libraries.
 - `opennt-host`: the canonical original non-MVDM OpenNT host-service mirror.
-  It owns only complete, source-audited Windows-host packages actually used by
-  `mvdm-host`, beginning with the BaseSrv/client VDM command package. It is
-  neither a replacement MVDM provider nor a generic compatibility layer.
+  It owns every complete, source-audited OpenNT host package accepted for use
+  by `mvdm-host`; BaseSrv/client VDM is merely its first accepted service
+  slice, not this component's boundary. It is neither a replacement MVDM
+  provider nor a generic compatibility layer.
 - `mvdm-support`: the canonical original MVDM common support mirror:
   shared `inc` declarations/build carriers plus original `oemuni` and
   `suballoc` library packages. It may be independently built, but it enters a
@@ -98,9 +99,11 @@ prevents permanent parallel providers.
   fails deterministically. The remaining families preserve their named
   Redirector, WOW, VDD and debugger external boundaries without importing
   provider policy or Bochs objects.
-- `adapter-opennt-host`: the package-private OpenNT BaseSrv host-interface
-  adapter. It owns only same-shaped substitutions for reached CSR/private-host
-  calls from `opennt-host`; it has no MVDM, guest, BOP or Bochs meaning.
+- `adapter-opennt-host`: the package-private OpenNT host-interface adapter.
+  It owns only same-shaped substitutions for reached private-host calls from
+  an accepted `opennt-host` package; it has no MVDM, guest, BOP or Bochs
+  meaning. Its subfamilies remain named by the accepted original owner package
+  rather than being merged into a generic compatibility layer.
 
 ### Project components
 
@@ -153,7 +156,7 @@ adapter-mvdm-host-out/softpc -> adapter-bochs
 adapter-mvdm-host-in -> adapter-mvdm-host-out/softpc  (typed mechanics only)
 adapter-mvdm-host-out/win32 -> broker client      (only for brokered historical calls)
 opennt-host -> mvdm-platform-abi
-opennt-host -> adapter-opennt-host                 (only source-audited BaseSrv-specific bindings)
+opennt-host -> adapter-opennt-host                 (only source-audited package-private bindings)
 opennt-host -> broker                              (only after package closure admits fixed-width transport)
 mvdm-tools -> mvdm-support / mvdm-platform-abi    (independent tool builds only)
 mvdm-softpc-firmware -> adapter-bochs             (manifest-selected machine input only)
@@ -173,9 +176,9 @@ then recovered with original source evidence, rather than edited out of an
 OpenNT mirror.
 
 `adapter-opennt-host` preserves the original spelling, ABI shape and observable
-order for the reached BaseSrv/private-host interface family. It is not a
-second generic Win32 shim and is consumed only by its owning `opennt-host`
-package.
+order for each reached accepted-package private-host interface family. It is
+not a second generic Win32 shim and is consumed only by its owning
+`opennt-host` package.
 
 `mvdm-support` has no automatic inbound runtime edge: a host package
 may use it only after the package/symbol tracker records the original consumer,
