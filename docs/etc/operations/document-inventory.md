@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3050 |
+| Documentation records | 3051 |
 | --- | --- |
-| Generated UTC | 2026-08-28T06:13:32Z |
+| Generated UTC | 2026-08-28T06:31:01Z |
 
 ## Entries
 
@@ -453,6 +453,7 @@ content-divergent entries.
 | etc/evidence/m0-t299-s6-definition-body-binding-correction-001.md | indexed supporting material | 9e16ef593ef08033b8cf5173f712f9fd7c82d064d01653287e14848932f30fdc |
 | etc/evidence/m0-t300-s1-mvdm-local-call-closure-closure-001.md | indexed supporting material | 6df14f3f45d8adcee79f85e5f236750c30ac419a924aeac495e4f8feb40b4bcb |
 | etc/evidence/m0-t300-s1-mvdm-local-closure-preliminary-001.md | indexed supporting material | e56f9f4b721517ddd89c268b9dbb0fd4094b64a1daab39e3a4d7bbbe6c1e40f2 |
+| etc/evidence/m0-t301-owner-directed-package-first-queue-replan-001.md | indexed supporting material | acb54d8bb197618a94bf1c7624c14afb159980421043ec2efcc859ac17ca9c30 |
 | etc/evidence/m0-t301-s1-p10-original-mvdm-signature-gate-001.md | indexed supporting material | cb73bfaa1ce327946e8965338a5173e669598956ff017ae88698b4e32ac3d16f |
 | etc/evidence/m0-t301-s1-p11-full-mvdm-rebase-expansion-001.md | indexed supporting material | 5d3b038e7603f0e9f691dd42871dcf894f62e22d706a3a1868e571ee801cd24a |
 | etc/evidence/m0-t301-s1-p12-expanded-internal-edge-gate-001.md | indexed supporting material | a71199c4f4bfc5ab04eb696c2bb69ab810030af2998fe34923244cde28a2737f |
@@ -1183,7 +1184,7 @@ content-divergent entries.
 | etc/operations/opennt-non-mvdm-stage1-semantic-site-ledger.tsv | indexed supporting material | e4d4936ec2f7aec51e360c39daff960b2e451c3f54be28a992e8e1ad52c3d524 |
 | etc/operations/opennt-non-mvdm-stage1-semantic-symbol-ledger.tsv | indexed supporting material | 0c281cd8ee4d7b225919ef6af7dba0105343be4c691b31725a34b22302c5bdec |
 | etc/operations/opennt-non-mvdm-stage1-true-egress-ledger.tsv | indexed supporting material | a537d68f8d63655fb89e98701058fa4f394b5924ef40d2dbc78f2e03d1f3b57b |
-| etc/operations/package-recovery-program-20260827.md | indexed supporting material | 0bce81f5bfc40cbc0409102e31445db625d4d56e3c68d25f09fbf18b995b2425 |
+| etc/operations/package-recovery-program-20260827.md | indexed supporting material | 4a12f70594ac31e31a4f1e38becfccdcd2b2104e809c54ecee3694be2db09ebb |
 | etc/operations/policy/source-policy.md | indexed supporting material | afc0bd36e17bad0c401e1ad7f324658db50c68a19ce7ef80ff8bf4542b6f52b7 |
 | etc/operations/proposal-bochs-component-identity-overlay-convergence-001.md | indexed supporting material | ac4de17a933c62d6b6adc1971345c6fe4e58860453fd894608553f2bdd6974c8 |
 | etc/operations/proposal-bochs-core-diff-overlay-minimization-001.md | indexed supporting material | 45eb3881102adb316497ec85eeac90488d95cd69c77d4555a1608a14d953db29 |
@@ -2938,7 +2939,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | fbfa3a202453ef9a31c0549310ff6ce96d822ac85e2cbbfb6a9c6c032e516f0c |
-| QUEUE.md | principal control document | 0d3088e1ffd278245855bccb68523e7090f67693dd4d5ca187f07091f0f06de9 |
+| QUEUE.md | principal control document | b4c6c9979b9e9fbcbbddd6afe8f6e3545f8691814fa0163483e12b0b4b4cd4a1 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
