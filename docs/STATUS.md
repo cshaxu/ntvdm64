@@ -557,6 +557,14 @@ depends on kernel/CSRSS `NtRaiseHardError`; it is recorded as a physical
 non-runtime boundary rather than emulated in the mirror. See the
 [error-dialog evidence](etc/evidence/m0-t310-s8-p4-error-dialog-native-callback-closure-001.md).
 
+**T310 S8 P4 storage-controller call-contract audit:** clean formal x86/x64
+rebuilds prove that the existing original `host_def.h` carrier supplies the
+selected `void host_simulate(void)` contract to both floppy-controller
+sources.  The two historic undefined-call rows are stale; the remaining 36
+K&R default-`int` diagnostics are retained visibly because they are not
+host-width ABI faults.  See the [storage-controller evidence]
+(etc/evidence/m0-t310-s8-p4-storage-controller-call-contract-audit-001.md).
+
 **T310 S8 P4 CCPU generated video-rule storage closure:** the unchanged
 original `vglob.c`/`egacpu.h` `IUH*` accessor ABI is restored.  The only
 required x86/x64 change is six generated private rule-storage fields, recorded
