@@ -157,6 +157,12 @@ that C4013; the separate source-missing `EDL_fast_bop` operation remains an
 unclosed CCPU-to-BOP contract. See the [note-486 call-contract
 closure](etc/evidence/m0-t310-s8-p4-ccpu-note486-call-contract-closure-001.md).
 
+**T310 S8 P4:** the imported NTVDMx64 `fmstubs.c` patch now uniformly expresses
+its retained original debugger-break behavior with `__debugbreak()`; no
+x86-only inline `int 3` remains. Its formal patch object rebuilds on both
+x86 and x64. This does not enable its placeholder paths or change their
+default debug-break disposition.
+
 **T310 S8 P4:** owner-contract review now includes prior work rather than only
 the pending warning rows.  The generated
 [coverage ledger](etc/operations/m0-t310-s8-p4-owner-contract-coverage-ledger.tsv)

@@ -26,7 +26,7 @@ void FmDebugBop()
 
 void	FmDebug(ULONG hook)
 {
-	__asm int 3
+	__debugbreak();
 }
 #endif
 
