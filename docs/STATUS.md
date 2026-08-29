@@ -594,6 +594,12 @@ builds clear all 81 historical width/call-contract rows without a mapping
 identity or warning suppression. See the [`nt_cpu` evidence]
 (etc/evidence/m0-t310-s8-p4-nt-cpu-generated-gdp-debug-closure-001.md).
 
+**T310 S8 P4 selected CCPU access-table closure:** existing source-shaped
+generated declarations and selected table slots are freshly verified in both
+formal architectures; all four historical `C4057` rows are stale, with no
+source change or suppression. See the [access-table evidence]
+(etc/evidence/m0-t310-s8-p4-selected-ccpu-access-table-closure-001.md).
+
 **T310 S8 P4 serial/parallel native transport closure:** original SoftPC COM
 and LPT host sources retain their device request order and configuration
 semantics while their private pointer-or-scalar ioctl and worker transports
