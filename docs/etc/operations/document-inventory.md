@@ -1277,7 +1277,7 @@ content-divergent entries.
 | etc/operations/m0-t310-s7-p2-x86-forced-link-ledger.tsv | indexed supporting material | ab1f513b8221f3fa90965068237b75d79f917365bb4e9d4293b775faddd15f68 |
 | etc/operations/m0-t310-s8-original-machine-composition-plan-001.md | indexed supporting material | c794b58a3a2ecccdb9d7d7611d4b95623f40a7898bdbab347483d28b3e0c0fef |
 | etc/operations/m0-t310-s8-p4-owner-contract-execution-order-001.md | indexed supporting material | f7fee4c4a028e989d83624a713ed5bf5e7bc84db554fd30328bf99535c1a60df |
-| etc/operations/m0-t310-s8-p4-owner-contract-coverage-ledger.tsv | indexed supporting material | 4d98fe002dd772b91683d01ec36f1e71021e921ca831d884f395406e994cbdb8 |
+| etc/operations/m0-t310-s8-p4-owner-contract-coverage-ledger.tsv | indexed supporting material | abd2c800db1ffe8408c1f7edbad5979a2c9599632b2a0eeffb561710e3230e4c |
 | etc/operations/m0-t310-s8-p2-x64-forced-link-ledger.tsv | indexed supporting material | 4c0be72bd1c3670b870efeb914557a582ed1edb5b09b35ba2a2896c6a7471941 |
 | etc/operations/m0-t310-s8-p2-x86-forced-link-ledger.tsv | indexed supporting material | 4d7c569dacc69fdae7e392a0f59b9b3623e5cb748e38ec12ef2913c5a05d3169 |
 | etc/operations/m0-t310-s8-p4-base-video-callback-interface-ledger.tsv | indexed supporting material | 75acfb9a605d23d333a783d28b9ea707c1622ff09ebac3c27d21b28a0e87abcf |
