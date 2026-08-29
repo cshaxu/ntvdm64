@@ -21,6 +21,11 @@
  * Retain cmdGetCurrentDir ordering and register contract through the
  * source-shaped adapter-mvdm-host-out/softpc numeric location/lease boundary. */
 #include "mvdm_guest_location.h"
+/* DIVERGENCE(MVDM-HOST-DIV-108): the original SCS command record stores a
+ * host redirection-record pointer in a fixed DWORD.  Publish the same
+ * source record through the session host-resource mapping instead; the
+ * original record allocation, use and free ordering remain in cmdredir.c. */
+#include "adapter-mvdm-host-out/softpc/include/mvdm_command_redirection.h"
 
 
 VOID GetWowKernelCmdLine(VOID);
@@ -143,7 +148,13 @@ char    CmdLine[MAX_PATH];
     VDMInfo.VDMState |= ASKING_FOR_DOS_BINARY;
 
     if (!IsFirstCall && !(VDMInfo.VDMState & ASKING_FOR_SECOND_TIME)) {
-        pRdrInfo = (PREDIRCOMPLETE_INFO) FETCHDWORD(pCMDInfo->pRdrInfo);
+        ULONG redirection_identity = FETCHDWORD(pCMDInfo->pRdrInfo);
+        pRdrInfo = NULL;
+        if (redirection_identity != 0 &&
+            !mvdm_command_redirection_resolve(
+                (USHORT)(redirection_identity >> 16),
+                (USHORT)redirection_identity, (PVOID *)&pRdrInfo))
+            VDMInfo.ErrorCode = ERROR_INVALID_HANDLE;
         if (cmdCheckCopyForRedirection (pRdrInfo) == FALSE)
             VDMInfo.ErrorCode = ERROR_NOT_ENOUGH_MEMORY;
     }
@@ -359,7 +370,18 @@ char    CmdLine[MAX_PATH];
 
     // Handle Standard IO redirection
     pRdrInfo = cmdCheckStandardHandles (&VDMInfo,&pCMDInfo->bStdHandles);
-    STOREDWORD(pCMDInfo->pRdrInfo,(ULONG)pRdrInfo);
+    {
+        ULONG redirection_identity = 0;
+        if (pRdrInfo != NULL && !mvdm_command_redirection_publish(pRdrInfo,
+                &redirection_identity)) {
+            (void)cmdCheckCopyForRedirection(pRdrInfo);
+            VDMInfo.ErrorCode = ERROR_NOT_ENOUGH_MEMORY;
+            setCF(1);
+            setAX((USHORT)ERROR_NOT_ENOUGH_MEMORY);
+            return;
+        }
+        STOREDWORD(pCMDInfo->pRdrInfo, redirection_identity);
+    }
 
     // Tell DOS that it has to invalidate the CDSs
     *pSCS_ToSync = (CHAR)0xff;

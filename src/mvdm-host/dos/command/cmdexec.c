@@ -15,6 +15,36 @@
 #include <ctype.h>
 #include <oemuni.h>
 #include <wowcmpat.h>
+/* DIVERGENCE(MVDM-HOST-DIV-108): standard-handle DWORDs and redirection
+ * records crossed the original x86 guest ABI as process addresses.  Resolve
+ * the same session-owned identities through the adapter, never by widening
+ * their guest values into native HANDLEs or pointers. */
+#include "adapter-mvdm-host-out/softpc/include/mvdm_command_redirection.h"
+/* DIVERGENCE(MVDM-HOST-DIV-109): cmdCreateProcess is the original void,
+ * cdecl worker entry, not a WINAPI DWORD start routine.  Keep its source
+ * body and original CreateThread call ordering while binding that call to
+ * the adapter's void-worker bridge, which carries the creator session. */
+#include "adapter-mvdm-host-out/win32/include/thread_start_compat.h"
+#undef CreateThread
+#define CreateThread(attributes, stack_bytes, start_routine, parameter, flags, thread_id) \
+    opennt_create_void_cdecl_thread((attributes), (stack_bytes), \
+        (OPENNT_VOID_CDECL_THREAD_START_ROUTINE)(start_routine), (parameter), \
+        (flags), (thread_id))
+
+static BOOL cmdResolveStdHandle(ULONG identity, HANDLE *handle_out)
+{
+    uintptr_t native_handle;
+
+    if (handle_out == NULL) return FALSE;
+    if (identity == (ULONG)-1) {
+        *handle_out = (HANDLE)-1;
+        return TRUE;
+    }
+    if (!mvdm_command_redirection_resolve_handle(identity, &native_handle))
+        return FALSE;
+    *handle_out = (HANDLE)native_handle;
+    return TRUE;
+}
 
 //*****************************************************************************
 // IsWowAppRunnable
@@ -315,6 +345,7 @@ VOID cmdCreateProcess ( VOID )
     CHAR *CurDir = Buffer;
     DWORD dwRet;
     BOOL  Status;
+    BOOL  StdHandlesValid = TRUE;
     NTSTATUS NtStatus;
     UNICODE_STRING Unicode;
     OEM_STRING	   OemString;
@@ -340,13 +371,19 @@ VOID cmdCreateProcess ( VOID )
 	CurDir = NULL;
 
     pStdHandles = (PSTD_HANDLES) GetVDMAddr (getSS(), getBP());
-    if ((hStd16In = (HANDLE) FETCHDWORD(pStdHandles->hStdIn)) != (HANDLE)-1)
+    if (!cmdResolveStdHandle(FETCHDWORD(pStdHandles->hStdIn), &hStd16In))
+        StdHandlesValid = FALSE;
+    else if (hStd16In != (HANDLE)-1)
         SetStdHandle (STD_INPUT_HANDLE, hStd16In);
 
-    if ((hStd16Out = (HANDLE) FETCHDWORD(pStdHandles->hStdOut)) != (HANDLE)-1)
+    if (!cmdResolveStdHandle(FETCHDWORD(pStdHandles->hStdOut), &hStd16Out))
+        StdHandlesValid = FALSE;
+    else if (hStd16Out != (HANDLE)-1)
         SetStdHandle (STD_OUTPUT_HANDLE, hStd16Out);
 
-    if ((hStd16Err = (HANDLE) FETCHDWORD(pStdHandles->hStdErr)) != (HANDLE)-1)
+    if (!cmdResolveStdHandle(FETCHDWORD(pStdHandles->hStdErr), &hStd16Err))
+        StdHandlesValid = FALSE;
+    else if (hStd16Err != (HANDLE)-1)
         SetStdHandle (STD_ERROR_HANDLE, hStd16Err);
 
     /*
@@ -360,18 +397,23 @@ VOID cmdCreateProcess ( VOID )
 
     Env_A.Buffer = NULL;
 
-    RtlInitString((PSTRING)&OemString, pCommand32);
-    NtStatus = RtlOemStringToUnicodeString(&Unicode,&OemString,TRUE);
-    if (NT_SUCCESS(NtStatus)) {
-        NtStatus = RtlUnicodeStringToAnsiString((PANSI_STRING)&OemString, &Unicode, FALSE);
-        RtlFreeUnicodeString( &Unicode );
-        }
-    if (!NT_SUCCESS(NtStatus)) {
-        SetLastError(RtlNtStatusToDosError(NtStatus));
+    if (!StdHandlesValid) {
+        SetLastError(ERROR_INVALID_HANDLE);
         Status = FALSE;
-        }
+    }
     else {
-	if (pEnv32 != NULL && !cmdXformEnvironment (pEnv32, &Env_A)) {
+        RtlInitString((PSTRING)&OemString, pCommand32);
+        NtStatus = RtlOemStringToUnicodeString(&Unicode,&OemString,TRUE);
+        if (NT_SUCCESS(NtStatus)) {
+            NtStatus = RtlUnicodeStringToAnsiString((PANSI_STRING)&OemString,
+                &Unicode, FALSE);
+            RtlFreeUnicodeString( &Unicode );
+	}
+        if (!NT_SUCCESS(NtStatus)) {
+            SetLastError(RtlNtStatusToDosError(NtStatus));
+	    Status = FALSE;
+	}
+	else if (pEnv32 != NULL && !cmdXformEnvironment (pEnv32, &Env_A)) {
 	    SetLastError(ERROR_NOT_ENOUGH_MEMORY);
 	    Status = FALSE;
 	}
@@ -444,7 +486,7 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
 
     if((hThread = CreateThread (NULL,
                      0,
-                     (LPTHREAD_START_ROUTINE)cmdCreateProcess,
+                     cmdCreateProcess,
                      NULL,
                      0,
                      &dwThreadId)) == FALSE) {
@@ -625,7 +667,14 @@ PREDIRCOMPLETE_INFO pRdrInfo;
     cmdUpdateCurrentDirectories((BYTE)getAL());
 
     // Check for any copying needed for redirection
-    pRdrInfo = (PREDIRCOMPLETE_INFO) (((ULONG)getBX() << 16) + (ULONG)getCX());
+    pRdrInfo = NULL;
+    if ((getBX() != 0 || getCX() != 0) &&
+        !mvdm_command_redirection_resolve(getBX(), getCX(),
+            (PVOID *)&pRdrInfo)) {
+        setAX((USHORT)ERROR_INVALID_HANDLE);
+        setCF(1);
+        return;
+    }
 
     if (cmdCheckCopyForRedirection (pRdrInfo) == FALSE)
             VDMInfo.ErrorCode = ERROR_NOT_ENOUGH_MEMORY;

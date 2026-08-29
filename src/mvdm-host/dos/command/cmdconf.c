@@ -223,7 +223,10 @@ void ExpandConfigFiles(BOOLEAN bConfig)
                          FILE_ATTRIBUTE_NORMAL,
                          NULL );
 
-   if (hRawFile == (HANDLE)0xFFFFFFFF
+   /* DIVERGENCE(MVDM-HOST-DIV-110): preserve the original invalid-file
+    * sentinel without zero-extending its x86 0FFFFFFFFh representation
+    * when HANDLE is a native-width value. */
+   if (hRawFile == INVALID_HANDLE_VALUE
        || !dwLenSysRoot
        || dwLenSysRoot >= sizeof(achSysRoot)
        || !(dwRawFileSize = GetFileSize(hRawFile, NULL))

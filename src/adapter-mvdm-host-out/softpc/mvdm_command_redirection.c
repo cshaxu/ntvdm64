@@ -14,6 +14,13 @@ int mvdm_command_redirection_resolve(uint16_t high, uint16_t low,
     return 1;
 }
 
+int mvdm_command_redirection_publish(void *record, uint32_t *identity_out)
+{
+    if (identity_out != NULL) *identity_out = 0u;
+    return record != NULL && mvdm_host_identity_publish((uintptr_t)record,
+        identity_out);
+}
+
 int mvdm_command_redirection_publish_handle(uintptr_t native_handle,
     uint16_t *high_out, uint16_t *low_out)
 {
@@ -24,6 +31,14 @@ int mvdm_command_redirection_publish_handle(uintptr_t native_handle,
     if (high_out != NULL) *high_out = (uint16_t)(identity >> 16);
     if (low_out != NULL) *low_out = (uint16_t)identity;
     return 1;
+}
+
+int mvdm_command_redirection_resolve_handle(uint32_t identity,
+    uintptr_t *native_handle_out)
+{
+    if (native_handle_out != NULL) *native_handle_out = (uintptr_t)0u;
+    return identity != 0u && mvdm_host_identity_resolve(identity,
+        native_handle_out);
 }
 
 void mvdm_command_redirection_retire(void *record)
