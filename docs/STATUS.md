@@ -130,6 +130,12 @@ transitions. They remain compiler-visible but leave the x86/x64 repair
 worklist without casts, suppression or a new adapter; see the [fixed-width
 operand disposition](etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-operand-call-disposition-001.md).
 
+**T310 S8 P4:** the two `WOWpSysErrorBox` pointer truncations are now
+classified as an NT4 kernel/CSRSS `NtRaiseHardError` hard boundary. They stay
+visible as mirror evidence and do not authorize an invented user-mode ABI;
+see the [hard-error boundary
+disposition](etc/evidence/m0-t310-s8-p4-nt-hard-error-boundary-disposition-001.md).
+
 **T310 S8 P4:** the two selected C-video generated native-word bit tests now
 make their literal operand `IUH`, matching the original `IUH` carrier and its
 existing `sizeof(IUH)` bound on both architectures. Formal x86/x64 object
