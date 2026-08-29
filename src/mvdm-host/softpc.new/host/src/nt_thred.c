@@ -25,6 +25,12 @@ Revision History:
 #include <stdlib.h>
 #include "nt_timer.h"
 #include "monregs.h"
+/* DIVERGENCE(MVDM-HOST-DIV-100): these selected CCPU provider declarations
+ * existed in the original package but were not inherited by this re-rooted
+ * host source.  ntthread.h also requires executor-private jmp_buf carriers;
+ * retain only the two original void contracts used here. */
+void ccpu386newthread(void);
+void ccpu386exitthread(void);
 
 typedef struct _ThreadStartUpParameters {
         LPTHREAD_START_ROUTINE lpStartAddress;

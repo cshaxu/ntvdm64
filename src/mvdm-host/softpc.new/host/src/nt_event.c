@@ -107,7 +107,9 @@ IMPORT void RestoreKbdLed(void);
 #define MAX_KEY_EVENTS (100)
 static PKEY_EVENT_RECORD key_history_head, key_history_tail;
 static PKEY_EVENT_RECORD key_history;
-static key_history_count;
+/* DIVERGENCE(MVDM-HOST-DIV-101): this original private event count is an
+ * integer counter, not an implicit-int declaration. */
+static int key_history_count;
 
 int GetHistoryKeyEvent(PKEY_EVENT_RECORD LastKeyEvent, int KeyNumber);
 void update_key_history(INPUT_RECORD *InputRecords, DWORD RecordsRead);
