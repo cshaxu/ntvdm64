@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3227 |
+| Documentation records | 3228 |
 | --- | --- |
-| Generated UTC | 2026-08-29T15:55:43Z |
+| Generated UTC | 2026-08-29T15:58:39Z |
 
 ## Entries
 
@@ -582,6 +582,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-system-interrupt-abi-audit-001.md | indexed supporting material | ac37a26ac1efbb30c00c0e643bf9294616996c4311c48354491d1b3478616eee |
 | etc/evidence/m0-t310-s8-p4-system-interrupt-native-contract-closure-001.md | indexed supporting material | 59dfdad3620c31670bb912a7c4fd23aacfcc0ad245f11ced9155684dc54bee5e |
 | etc/evidence/m0-t310-s8-p4-umb-numeric-address-audit-001.md | indexed supporting material | 4d8996c148ac65c84c3d181438d0d216e8b472caa86e1ddb6ebf5e4ef300ddee |
+| etc/evidence/m0-t310-s8-p4-vdd-umb-current-source-revalidation-001.md | indexed supporting material | 1a17c84478265780b60cfc85d19db5c9292ed5127506e90692e4cf15e8d71d22 |
 | etc/evidence/m0-t310-s8-p4-vdd-umb-numeric-address-abi-closure-001.md | indexed supporting material | 1017e4ae6893f4aea6dbd20d6ebf71917d47fae40350190889a029cbae0d5a42 |
 | etc/evidence/m0-t310-s8-p4-vglob-generated-slot-closure-001.md | indexed supporting material | 500c2aebd0000d7561ebdde78ce413f028307929c855bfdcc7e115d8e3109eaf |
 | etc/evidence/m0-t310-s8-p4-video-nonwidth-warning-disposition-001.md | indexed supporting material | 7288ceb9f58153d29cbbc1db0c7107611f6f6f49833a3aeeffe27f2355220de6 |
@@ -1255,7 +1256,7 @@ content-divergent entries.
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-audit-baseline-001.md | indexed supporting material | b878f9a100fb6862522f3a5ec35977c3d5369032b99e3c4932d25a34ab1f2c46 |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-cluster-ledger.tsv | indexed supporting material | 3b7193da3c22588dff98a25a8b1390c740cc01d3f19274c250f980bb4ca11fed |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-inventory.tsv | indexed supporting material | 9f5be57f4c4a22e0ae88de22427029fb7b4f31ca753868cc8231453109cd6eb0 |
-| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | bc95a158cd5efa0c5f7a68f457399cd5d0409e2fb9df6be8e0d053a2adea6244 |
+| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | e0fade61c8ed598ec098dab91c81a69a6b5d78ebc95f246dc9edc0a9ca1dcf03 |
 | etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification.tsv | indexed supporting material | 50aaab24789e202c10d982b7ed515e9feb778ee783769098bdaf8485733f94b9 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
