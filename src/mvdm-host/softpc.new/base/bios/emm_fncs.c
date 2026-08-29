@@ -415,7 +415,9 @@ GLOBAL void emm_init IFN0()
 	 * Initialise the LIM
 	 *
 	 */
-	if (limSize = (SHORT)config_inquire(C_LIM_SIZE, NULL)){
+	/* DIVERGENCE(MVDM-HOST-DIV-075): C_LIM_SIZE is the original
+	 * private tagged configuration scalar, not a guest pointer. */
+	if (limSize = (SHORT)(ULONG_PTR)config_inquire(C_LIM_SIZE, NULL)){
 		backFill = 640;					/* We will always have at least 640k	*/
 		limSize--;						/* Subtract 1M of regular DOS memory	*/	
 		/* 
@@ -434,7 +436,7 @@ GLOBAL void emm_init IFN0()
 
 #endif	/* SUN_VA	*/
 #ifdef NTVDM	/* Similar to SUN_VA but without command line sizing */
-	if ((limSize = (SHORT)config_inquire(C_LIM_SIZE, NULL)) && get_no_phys_pages())
+	if ((limSize = (SHORT)(ULONG_PTR)config_inquire(C_LIM_SIZE, NULL)) && get_no_phys_pages())
 	{
 	    backFill = 640;
 	    if (init_expanded_memory(limSize, backFill) == FAILURE)
