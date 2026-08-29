@@ -63,6 +63,27 @@ HMENU WINAPI ConsoleMenuControl(
     UINT dwCommandIdHigh
     );
 
+/*
+ * This is the original client-side registration ABI.  NT4 Console Server
+ * owned the paired hardware events and mapped state/text buffers; the modern
+ * declaration bridge deliberately does not fabricate that private provider.
+ * Keep the pointer-bearing signature exact so selected original callers do
+ * not fall back to an implicit int declaration on either host architecture.
+ */
+BOOL WINAPI RegisterConsoleVDM(
+    DWORD dwRegisterFlags,
+    HANDLE hStartHardwareEvent,
+    HANDLE hEndHardwareEvent,
+    LPWSTR lpStateSectionName,
+    DWORD dwStateSectionNameLength,
+    LPDWORD lpStateLength,
+    PVOID *lpState,
+    LPWSTR lpVDMBufferSectionName,
+    DWORD dwVDMBufferSectionNameLength,
+    COORD VDMBufferSize,
+    PVOID *lpVDMBuffer
+    );
+
 #define CONSOLE_READ_NOREMOVE 0x0001
 #define CONSOLE_READ_NOWAIT   0x0002
 #define CONSOLE_READ_VALID    (CONSOLE_READ_NOREMOVE | CONSOLE_READ_NOWAIT)

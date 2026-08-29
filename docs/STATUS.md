@@ -674,6 +674,20 @@ fabricated through a system-menu shim; its runtime provider remains an explicit
 console-control boundary. See the [call-contract evidence]
 (etc/evidence/m0-t310-s8-p4-console-menu-call-contract-closure-001.md).
 
+**T310 S8 P4 console-VDM registration declaration closure:** original SoftPC
+console initialization and fullscreen-resume callers now see the complete
+pointer-bearing `RegisterConsoleVDM` contract on x86 and x64, eliminating the
+implicit-call ABI while retaining the original private Console Server/Win32k
+provider as an explicit runtime boundary. See the [call-contract evidence]
+(etc/evidence/m0-t310-s8-p4-console-vdm-registration-call-contract-closure-001.md).
+
+**T310 S8 P4 console-VDM registration declaration closure:** original SoftPC
+console initialization and fullscreen-resume callers now see the complete
+pointer-bearing `RegisterConsoleVDM` contract on x86 and x64, eliminating the
+implicit-call ABI while retaining the original private Console Server/Win32k
+provider as an explicit runtime boundary. See the [call-contract evidence]
+(etc/evidence/m0-t310-s8-p4-console-vdm-registration-call-contract-closure-001.md).
+
 **T310 S8 P4 console-menu declaration closure:** original SoftPC mouse and
 host-control code now sees the exact `ConsoleMenuControl(HANDLE, UINT, UINT)
 -> HMENU` source contract on x86 and x64, eliminating its invalid implicit
