@@ -572,6 +572,12 @@ environment predicate while removing its x64 implicit-\`int\` truncation. See
 the [CCPU environment evidence]
 (etc/evidence/m0-t310-s8-p4-ccpu-host-getenv-abi-closure-001.md).
 
+**T310 S8 P4 CCPU EFLAGS contract closure:** the original CCPU internal
+header now declares its own fixed-width \`c_getEFLAGS\` accessor, so interrupt
+and PUSHF callers retain the original \`IU32\` EFLAGS result on both host
+architectures. See the [CCPU EFLAGS evidence]
+(etc/evidence/m0-t310-s8-p4-ccpu-eflags-contract-closure-001.md).
+
 **T310 S8 P4 CCPU generated video-rule storage closure:** the unchanged
 original `vglob.c`/`egacpu.h` `IUH*` accessor ABI is restored.  The only
 required x86/x64 change is six generated private rule-storage fields, recorded

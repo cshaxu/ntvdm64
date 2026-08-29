@@ -96,6 +96,14 @@ IPT1(
 
    );
 
+/*
+ * DIVERGENCE(MVDM-HOST-DIV-071): c_bsic.c owns this original 32-bit
+ * EFLAGS accessor, but the selected internal header omitted its declaration.
+ * Publish its exact fixed-width source contract so CCPU callers do not
+ * assume a host-sized int return on x64.
+ */
+IMPORT IU32 c_getEFLAGS IPT0();
+
 
 IMPORT IU32 getFLAGS IPT0();
 
