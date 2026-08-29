@@ -567,6 +567,12 @@ explicitly converted to the original signed count. The same original source
 builds on x86 and x64 without the selected ABI diagnostics. See the [fprt
 evidence](etc/evidence/m0-t310-s8-p4-fprt-native-buffer-abi-closure-001.md).
 
+**T310 S8 P4 formal whole-tree delta:** fresh formal Ninja x86/x64 runs both
+complete for the scoped `mvdm-host` and `mvdm-support` roots. Their 126
+x64-only excess diagnostics are now evidenced and grouped by original
+COMMAND, DEM and XMS owner packages; no diagnostic suppression was added. See
+the [formal architecture delta](etc/evidence/m0-t310-s8-p4-whole-tree-formal-architecture-delta-001.md).
+
 **T310 S8 P4 serial/parallel native transport closure:** original SoftPC COM
 and LPT host sources retain their device request order and configuration
 semantics while their private pointer-or-scalar ioctl and worker transports
