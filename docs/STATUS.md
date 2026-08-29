@@ -473,6 +473,12 @@ declaration through `cpu4.h`.  Fresh formal x86/x64 builds contain no
 `host_simulate` diagnostic.  See the [call-ABI closure]
 (etc/evidence/m0-t310-s8-p4-host-simulate-call-abi-closure-001.md).
 
+**T310 S8 P4 mouse range callback closure:** the original INT 33h range
+notifier now has the same `MOUSE_SCALAR *` endpoint contract at caller and
+host definition.  Formal x86/x64 rebuilds have no former C4057 range-call
+diagnostics.  See the [range callback evidence]
+(etc/evidence/m0-t310-s8-p4-mouse-range-callback-abi-closure-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove

@@ -160,8 +160,11 @@ sys_addr conditional_off_sysaddr;
 #endif  /* MONITOR */
 
 IMPORT void host_m2p_ratio(word *,word *,word *,word *);
-IMPORT void host_x_range(word *,word *,word *,word *);
-IMPORT void host_y_range(word *,word *,word *,word *);
+/* DIVERGENCE(MVDM-HOST-DIV-058): match the original call operands' scalar
+ * type at the host range boundary; the paired host definitions are adjusted
+ * to the same unchanged four-pointer contract. */
+IMPORT void host_x_range(word *,word *,MOUSE_SCALAR *,MOUSE_SCALAR *);
+IMPORT void host_y_range(word *,word *,MOUSE_SCALAR *,MOUSE_SCALAR *);
 void   host_show_pointer(void);
 void   host_hide_pointer(void);
 
