@@ -12,6 +12,10 @@
 #include <mvdm.h>
 #include <ctype.h>
 #include <oemuni.h>
+/* DIVERGENCE(MVDM-HOST-DIV-113): keep the original temporary-file creation
+ * and error route in this mirror, but make its final native-size-to-WriteFile
+ * conversion an explicit, checked overlay boundary on both host widths. */
+#include "mvdm_command_write_length.h"
 
 //
 // local stuff
@@ -35,8 +39,8 @@ CHAR  achSysRoot[64];
 
 
 void  ExpandConfigFiles(BOOLEAN bConfig);
-DWORD WriteExpanded(HANDLE hFile,  CHAR *pch, DWORD dwBytes);
-void  WriteFileAssert(HANDLE hFile, CHAR *pBuff, DWORD dwBytes);
+DWORD WriteExpanded(HANDLE hFile, CHAR *pch, size_t cbBytes);
+void  WriteFileAssert(HANDLE hFile, CHAR *pBuff, size_t cbBytes);
 #define ISEOL(ch) ( !(ch) || ((ch) == '\n') || ((ch) == '\r'))
 
 
@@ -325,7 +329,11 @@ void ExpandConfigFiles(BOOLEAN bConfig)
                    }
                else if (!_strnicmp(achSysRoot,pTmp, strlen(achSysRoot)))
                   {
-                   dw = strlen(achSysRoot);
+                   if (!mvdm_command_write_length_to_dword(
+                           strlen(achSysRoot), &dw)) {
+                       TerminateVDM();
+                       return;
+                   }
                    }
                else  {
                    dw = 0;
@@ -576,18 +584,27 @@ void ExpandConfigFiles(BOOLEAN bConfig)
  *                  returns number of CHARs processed in buffer
  *                          (not number of bytes actually written)
  */
-DWORD WriteExpanded(HANDLE hFile,  CHAR *pch, DWORD dwChars)
+DWORD WriteExpanded(HANDLE hFile, CHAR *pch, size_t cbBytes)
 {
   DWORD dw;
-  DWORD dwSave = dwChars;
+  DWORD dwChars;
+  DWORD dwSave;
   CHAR  *pSave = pch;
 
+  if (!mvdm_command_write_length_to_dword(cbBytes, &dwChars)) {
+      TerminateVDM();
+      return 0;
+  }
+  dwSave = dwChars;
 
   while (dwChars && !ISEOL(*pch)) {
         if (*pch == '%' &&
             !_strnicmp(pch, achSYSROOT, sizeof(achSYSROOT)-sizeof(CHAR)) )
            {
-            dw = pch - pSave;
+            if (!mvdm_command_write_length_to_dword(pch - pSave, &dw)) {
+                TerminateVDM();
+                return 0;
+            }
             if (dw)  {
                 WriteFileAssert(hFile, pSave, dw);
                 }
@@ -604,7 +621,10 @@ DWORD WriteExpanded(HANDLE hFile,  CHAR *pch, DWORD dwChars)
             }
         }
 
-  dw = pch - pSave;
+  if (!mvdm_command_write_length_to_dword(pch - pSave, &dw)) {
+      TerminateVDM();
+      return 0;
+  }
   if (dw) {
       WriteFileAssert(hFile, pSave, dw);
       }
@@ -622,12 +642,14 @@ DWORD WriteExpanded(HANDLE hFile,  CHAR *pch, DWORD dwChars)
  *  If one occurs displays warning popup and terminates the vdm.
  *
  */
-void WriteFileAssert(HANDLE hFile, CHAR *pBuff, DWORD dwBytes)
+void WriteFileAssert(HANDLE hFile, CHAR *pBuff, size_t cbBytes)
 {
   DWORD dw;
+  DWORD dwBytes;
   CHAR  ach[MAX_PATH];
 
-  if (!WriteFile(hFile, pBuff, dwBytes, &dw, NULL) ||
+  if (!mvdm_command_write_length_to_dword(cbBytes, &dwBytes) ||
+      !WriteFile(hFile, pBuff, dwBytes, &dw, NULL) ||
        dw  != dwBytes)
      {
 

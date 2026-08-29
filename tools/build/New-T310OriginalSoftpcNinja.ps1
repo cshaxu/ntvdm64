@@ -55,6 +55,7 @@ $videoGenerator = Join-Path $root 'tools/build/Generate-T310BaseVideoTypedSource
 $gdpGenerator = Join-Path $root 'tools/build/Generate-T310GdpSlots.mjs'
 $gdpOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/base/cvidc'
 $umbOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/host/src'
+$commandOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/dos/command'
 $commsRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/comms'
 $dosRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/dos'
 $demRoot = Join-Path $root 'src/mvdm-host/dos/dem'
@@ -255,6 +256,7 @@ $includeRootPaths = @(
     'src/mvdm-host/softpc.new/base/cvidc',
     'src/mvdm-host-overlay/softpc.new/base/cvidc',
     'src/mvdm-host-overlay/softpc.new/host/src',
+    'src/mvdm-host-overlay/dos/command',
     'src/mvdm-host/softpc.new/base/inc',
     'src/adapter-mvdm-host-out/softpc/include',
     'src/adapter-mvdm-host-out/monitor/include',
@@ -435,6 +437,9 @@ $hostObjects += 'obj/host/mvdm_umb_address.obj'
 $eoiOverlaySource = Join-Path $umbOverlayRoot 'mvdm_ica_eoi_bridge.c'
 $graph.Add('build obj/host/mvdm_ica_eoi_bridge.obj: cc ' + (NinjaPath $eoiOverlaySource))
 $hostObjects += 'obj/host/mvdm_ica_eoi_bridge.obj'
+$commandWriteLengthOverlaySource = Join-Path $commandOverlayRoot 'mvdm_command_write_length.c'
+$graph.Add('build obj/host/mvdm_command_write_length.obj: cc ' + (NinjaPath $commandWriteLengthOverlaySource))
+$hostObjects += 'obj/host/mvdm_command_write_length.obj'
 $adapterWin32Objects = foreach ($name in $adapterWin32Names) {
     $object = 'obj/adapter-win32/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterWin32Root $name)))
