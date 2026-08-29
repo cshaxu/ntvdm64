@@ -542,6 +542,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-command-multisz-pointer-closure-001.md | indexed supporting material | f863b0636250d13e971695468c5603ff830e3a2f8227c8a13423e88f25b812de |
 | etc/evidence/m0-t310-s8-p4-command-pipe-worker-callback-closure-001.md | indexed supporting material | c4907419dbda2c615a8fadc1b3debe4eafca688f63cfa7da72d0c3662d0c4ec0 |
 | etc/evidence/m0-t310-s8-p4-cvidc-mark-rule-declaration-closure-001.md | indexed supporting material | d0b20c0e36961c3703b56d8c02785b4c22a81a46aa292e9377a62f04d5f06aa9 |
+| etc/evidence/m0-t310-s8-p4-cvidc-native-word-shift-closure-001.md | indexed supporting material | e88f54fa002d93612320cb070299ac830906b4719a4f4473d16d272d09a6e562 |
 | etc/evidence/m0-t310-s8-p4-cvidc-native-word-varargs-closure-001.md | indexed supporting material | bd95c5316de791226393793ea32c81291920c371e076d98d84d080369fb88088 |
 | etc/evidence/m0-t310-s8-p4-command-rtl-environment-binding-closure-001.md | indexed supporting material | 3d977e3ca11b6d3a28ddf35d4a21a985e0e875d01059185d6218ee2b67665049 |
 | etc/evidence/m0-t310-s8-p4-comms-native-transport-closure-001.md | indexed supporting material | 3fcfe6eccc8d3d5efa5bde6958f0e3a8575bd970730231db0e6e1401980750d0 |

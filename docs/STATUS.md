@@ -117,6 +117,20 @@ x86/x64 object rebuilds close their C4477 mismatch without affecting any
 generated rule or display behavior; see the [native-word varargs
 closure](etc/evidence/m0-t310-s8-p4-cvidc-native-word-varargs-closure-001.md).
 
+**T310 S8 P4:** the two selected C-video generated native-word bit tests now
+make their literal operand `IUH`, matching the original `IUH` carrier and its
+existing `sizeof(IUH)` bound on both architectures. Formal x86/x64 object
+rebuilds contain no C4334 for either source; generated control-flow warnings
+remain visible. See the [native-word shift
+closure](etc/evidence/m0-t310-s8-p4-cvidc-native-word-shift-closure-001.md).
+
+**T310 S8 P4:** the two selected C-video generated native-word bit tests now
+make their literal operand `IUH`, matching the original `IUH` carrier and its
+existing `sizeof(IUH)` bound on both architectures. Formal x86/x64 object
+rebuilds contain no C4334 for either source; generated control-flow warnings
+remain visible. See the [native-word shift
+closure](etc/evidence/m0-t310-s8-p4-cvidc-native-word-shift-closure-001.md).
+
 **T310 S8 P4:** the formal full x64 graph exposed one additional selected
 base/video declaration mismatch: `ega_writ.c` declared the word-fill EVID glue
 with `IU8` even though its original body and handler slot use `IU16`.
