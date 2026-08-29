@@ -320,6 +320,9 @@ This is not a general override for unreviewed non-`i386` paths.
 has a same-shaped public Win32 binding. `NtAlertThread(HANDLE)` is provided by
 the named Win32 adapter through `QueueUserAPC`; the original alertable wait
 recognizes its `STATUS_USER_APC` completion as the historical terminal alert.
+The existing cdecl worker-start adapter also carries the creator's
+thread-bound session only in its private Win32 context and unbinds it on
+worker exit; it preserves the original `host_timer_init` call shape.
 Focused formal x86/x64 Ninja tests prove invalid-target failure and real
 alertable-thread wake-up. This does not claim heartbeat/PIC/RTC/BDA execution;
 the original timer and ICA source remains the active P2 owner. See the

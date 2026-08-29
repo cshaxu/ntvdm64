@@ -1,10 +1,13 @@
 #include "thread_start_compat.h"
 
+#include "session/session.h"
+
 #undef CreateThread
 
 typedef struct _OPENNT_CDECL_THREAD_CONTEXT {
     OPENNT_CDECL_THREAD_START_ROUTINE start_routine;
     LPVOID parameter;
+    session *owner;
 } OPENNT_CDECL_THREAD_CONTEXT;
 
 static DWORD WINAPI opennt_cdecl_thread_thunk(LPVOID parameter)
@@ -12,9 +15,21 @@ static DWORD WINAPI opennt_cdecl_thread_thunk(LPVOID parameter)
     OPENNT_CDECL_THREAD_CONTEXT *context = (OPENNT_CDECL_THREAD_CONTEXT *)parameter;
     OPENNT_CDECL_THREAD_START_ROUTINE start_routine = context->start_routine;
     LPVOID start_parameter = context->parameter;
+    session *owner = context->owner;
+    int did_bind = 0;
+    DWORD result;
 
     HeapFree(GetProcessHeap(), 0, context);
-    return start_routine(start_parameter);
+    /* The original SoftPC caller has no session parameter.  Capture only the
+     * creator's process-local binding and establish it for this worker; no
+     * guest pointer, MVDM field, or callback ABI is changed. */
+    if (owner != NULL) {
+        if (!session_thread_bind(owner)) return ERROR_INVALID_STATE;
+        did_bind = 1;
+    }
+    result = start_routine(start_parameter);
+    if (did_bind) (void)session_thread_unbind(owner);
+    return result;
 }
 
 HANDLE opennt_create_cdecl_thread(
@@ -42,6 +57,7 @@ HANDLE opennt_create_cdecl_thread(
 
     context->start_routine = start_routine;
     context->parameter = parameter;
+    context->owner = session_thread_current();
     thread = CreateThread(attributes, stack_bytes, opennt_cdecl_thread_thunk,
         context, flags, thread_id);
     if (thread == NULL) {

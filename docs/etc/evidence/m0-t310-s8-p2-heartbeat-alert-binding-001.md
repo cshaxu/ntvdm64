@@ -60,6 +60,22 @@ original `DelayHeartBeat` binding.
 The selected original `nt_msscs.c` and the adapter source also compile in the
 formal x86/x64 original-SoftPC Ninja graph without a global `/Di386`.
 
+## Worker-session binding follow-up
+
+The same cdecl `CreateThread` bridge now captures only the creator's
+thread-bound `session` in its private process-local context. Before invoking
+the unchanged original callback it binds that session on the worker; it
+unwinds the binding immediately after the callback returns. The original
+`host_timer_init` call still passes `HeartBeatThread, NULL` and no session
+identity is stored in a guest or fixed-width MVDM field.
+
+The focused `thread-start-session-fixture` activates and binds one session on
+the creator thread, starts a cdecl worker through the exact bridge, checks the
+worker sees that same session, then verifies normal unbind/disposal. The
+combined alert and worker fixtures passed under formal MSVC `/MT` Ninja on
+both x86 and x64. This proves worker ownership only; it does not yet claim
+that the original heartbeat has reached BDA, PIT, RTC, or PIC delivery.
+
 ## Remaining P2 work
 
 The still-open group is original heartbeat creation/resume, session-owned
