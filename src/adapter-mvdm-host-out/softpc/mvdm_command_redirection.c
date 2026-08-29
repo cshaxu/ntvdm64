@@ -14,11 +14,15 @@ int mvdm_command_redirection_resolve(uint16_t high, uint16_t low,
     return 1;
 }
 
-int mvdm_command_redirection_publish(void *record, uint32_t *identity_out)
+int mvdm_command_redirection_publish(void *record, ULONG *identity_out)
 {
+    uint32_t identity;
+
     if (identity_out != NULL) *identity_out = 0u;
-    return record != NULL && mvdm_host_identity_publish((uintptr_t)record,
-        identity_out);
+    if (record == NULL || !mvdm_host_identity_publish((uintptr_t)record,
+            &identity)) return 0;
+    if (identity_out != NULL) *identity_out = (ULONG)identity;
+    return 1;
 }
 
 int mvdm_command_redirection_publish_handle(uintptr_t native_handle,
