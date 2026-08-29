@@ -1,0 +1,63 @@
+slot	slot_declaration_line	slot_return_type	slot_canonical_return_type	selected_implementation	selected_assignment_line	generated_declaration_line	generated_return_type	generated_canonical_return_type	generated_arity	generated_parameters	generated_canonical_parameters	public_declaration_line	public_return_type	public_canonical_return_type	public_arity	public_parameters	public_canonical_parameters	review_focus
+getAX_func	61	word	u16	c_getAX	216	1236	IU16	u16	0									selected-zero-argument-contract-observed
+getAH_func	62	half_word	u8	c_getAH	217	1223	IU8	u8	0									selected-zero-argument-contract-observed
+getAL_func	63	half_word	u8	c_getAL	218	1210	IU8	u8	0									selected-zero-argument-contract-observed
+getBX_func	64	word	u16	c_getBX	219	1288	IU16	u16	0									selected-zero-argument-contract-observed
+getBH_func	65	half_word	u8	c_getBH	220	1275	IU8	u8	0									selected-zero-argument-contract-observed
+getBL_func	66	half_word	u8	c_getBL	221	1262	IU8	u8	0									selected-zero-argument-contract-observed
+getCX_func	67	word	u16	c_getCX	222	1340	IU16	u16	0									selected-zero-argument-contract-observed
+getCH_func	68	half_word	u8	c_getCH	223	1327	IU8	u8	0									selected-zero-argument-contract-observed
+getCL_func	69	half_word	u8	c_getCL	224	1314	IU8	u8	0									selected-zero-argument-contract-observed
+getDX_func	70	word	u16	c_getDX	225	1392	IU16	u16	0									selected-zero-argument-contract-observed
+getDH_func	71	half_word	u8	c_getDH	226	1379	IU8	u8	0									selected-zero-argument-contract-observed
+getDL_func	72	half_word	u8	c_getDL	227	1366	IU8	u8	0									selected-zero-argument-contract-observed
+getSP_func	73	word	u16	c_getSP	228	1470	IU16	u16	0									selected-zero-argument-contract-observed
+getBP_func	74	word	u16	c_getBP	229	1496	IU16	u16	0									selected-zero-argument-contract-observed
+getSI_func	75	word	u16	c_getSI	230	1418	IU16	u16	0									selected-zero-argument-contract-observed
+getDI_func	76	word	u16	c_getDI	231	1444	IU16	u16	0									selected-zero-argument-contract-observed
+getIP_func	77	word	u16	c_getIP	232	1522	IU16	u16	0									selected-zero-argument-contract-observed
+getCS_func	78	word	u16	c_getCS	233	1548	IU16	u16	0									selected-zero-argument-contract-observed
+getDS_func	79	word	u16	c_getDS	234	1574	IU16	u16	0									selected-zero-argument-contract-observed
+getES_func	80	word	u16	c_getES	235	1587	IU16	u16	0									selected-zero-argument-contract-observed
+getSS_func	81	word	u16	c_getSS	236	1561	IU16	u16	0									selected-zero-argument-contract-observed
+getMSW_func	82	word	u16	c_getMSW	237	1665	IU16	u16	0									selected-zero-argument-contract-observed
+getDF_func	89	ISM32	s32	c_getDF	238	1811	ISM32	s32	0									selected-zero-argument-contract-observed
+getIF_func	90	ISM32	s32	c_getIF	239	1798	ISM32	s32	0									selected-zero-argument-contract-observed
+getTF_func	91	ISM32	s32	c_getTF	240	1785	ISM32	s32	0									selected-zero-argument-contract-observed
+getPF_func	92	ISM32	s32	c_getPF	241	1733	ISM32	s32	0									selected-zero-argument-contract-observed
+getAF_func	93	ISM32	s32	c_getAF	242	1746	ISM32	s32	0									selected-zero-argument-contract-observed
+getSF_func	94	ISM32	s32	c_getSF	243	1772	ISM32	s32	0									selected-zero-argument-contract-observed
+getZF_func	95	ISM32	s32	c_getZF	244	1759	ISM32	s32	0									selected-zero-argument-contract-observed
+getOF_func	96	ISM32	s32	c_getOF	245	1824	ISM32	s32	0									selected-zero-argument-contract-observed
+getCF_func	97	ISM32	s32	c_getCF	246	1720	ISM32	s32	0									selected-zero-argument-contract-observed
+setAX_func	126	VOID	void	c_setAX	250	426	void	void	1	IU16, val	u16							selected-zero-argument-contract-observed
+setAH_func	127	VOID	void	c_setAH	251	411	void	void	1	IU8, val	u8							selected-zero-argument-contract-observed
+setAL_func	128	VOID	void	c_setAL	252	396	void	void	1	IU8, val	u8							selected-zero-argument-contract-observed
+setBX_func	129	VOID	void	c_setBX	253	486	void	void	1	IU16, val	u16							selected-zero-argument-contract-observed
+setBH_func	130	VOID	void	c_setBH	254	471	void	void	1	IU8, val	u8							selected-zero-argument-contract-observed
+setBL_func	131	VOID	void	c_setBL	255	456	void	void	1	IU8, val	u8							selected-zero-argument-contract-observed
+setCX_func	132	VOID	void	c_setCX	256	546	void	void	1	IU16, val	u16							selected-zero-argument-contract-observed
+setCH_func	133	VOID	void	c_setCH	257	531	void	void	1	IU8, val	u8							selected-zero-argument-contract-observed
+setCL_func	134	VOID	void	c_setCL	258	516	void	void	1	IU8, val	u8							selected-zero-argument-contract-observed
+setDX_func	135	VOID	void	c_setDX	259	606	void	void	1	IU16, val	u16							selected-zero-argument-contract-observed
+setDH_func	136	VOID	void	c_setDH	260	591	void	void	1	IU8, val	u8							selected-zero-argument-contract-observed
+setDL_func	137	VOID	void	c_setDL	261	576	void	void	1	IU8, val	u8							selected-zero-argument-contract-observed
+setSP_func	138	VOID	void	c_setSP	262	696	void	void	1	IU16, val	u16							selected-zero-argument-contract-observed
+setBP_func	139	VOID	void	c_setBP	263	722	void	void	1	IU16, val	u16							selected-zero-argument-contract-observed
+setSI_func	140	VOID	void	c_setSI	264	636	void	void	1	IU16, val	u16							selected-zero-argument-contract-observed
+setDI_func	141	VOID	void	c_setDI	265	666	void	void	1	IU16, val	u16							selected-zero-argument-contract-observed
+setIP_func	142	VOID	void	c_setIP	266	752	void	void	1	IU16, val	u16							selected-zero-argument-contract-observed
+setDF_func	177	VOID	void	c_setDF	267	1041	void	void	1	IBOOL, val	s32							selected-zero-argument-contract-observed
+setIF_func	178	VOID	void	c_setIF	268	1028	void	void	1	IBOOL, val	s32							selected-zero-argument-contract-observed
+setTF_func	179	VOID	void	c_setTF	269	1015	void	void	1	IBOOL, val	s32							selected-zero-argument-contract-observed
+setPF_func	180	VOID	void	c_setPF	270	963	void	void	1	IBOOL, val	s32							selected-zero-argument-contract-observed
+setAF_func	181	VOID	void	c_setAF	271	976	void	void	1	IBOOL, val	s32							selected-zero-argument-contract-observed
+setSF_func	182	VOID	void	c_setSF	272	1002	void	void	1	IBOOL, val	s32							selected-zero-argument-contract-observed
+setZF_func	183	VOID	void	c_setZF	273	989	void	void	1	IBOOL, val	s32							selected-zero-argument-contract-observed
+setOF_func	184	VOID	void	c_setOF	274	1054	void	void	1	IBOOL, val	s32							selected-zero-argument-contract-observed
+setCF_func	185	VOID	void	c_setCF	275	950	void	void	1	IBOOL, val	s32							selected-zero-argument-contract-observed
+setSS_func	168	ISM32	s32	c_setSS	276	794	ISM32	s32	1	IU16, val	u16							selected-zero-argument-contract-observed
+setDS_func	166	ISM32	s32	c_setDS	277	807	ISM32	s32	1	IU16, val	u16							selected-zero-argument-contract-observed
+setES_func	167	ISM32	s32	c_setES	278	820	ISM32	s32	1	IU16, val	u16							selected-zero-argument-contract-observed
+setCS_func	165	ISM32	s32	c_setCS	279	781	ISM32	s32	1	IU16, val	u16							selected-zero-argument-contract-observed
+host_simulate_func	203	VOID	void	c_cpu_simulate	282	188	void	void	0									selected-zero-argument-contract-observed

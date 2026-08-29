@@ -61,6 +61,8 @@
 #include <c_reg.h>
 #include <timer.h>
 #include <yoda.h>
+#include <emm.h>
+#include <host.h>
 #include "mvdm_softpc_physical_mapping.h"
 
 /* DIVERGENCE: the original x86 build relied on an implicit-int declaration
@@ -68,6 +70,7 @@
  * declare that existing same-shaped interface so an x64 build cannot truncate
  * the allocated SAS backing address before CCPU stores it. */
 extern UTINY *host_sas_init IPT1(sys_addr, size);
+extern UTINY *host_sas_term IPT0();
 
 /********************************************************/
 #define SIXTY_FOUR_K 1024*64
@@ -139,9 +142,8 @@ LOCAL void bios_write_word   IPT2(LIN_ADDR, linAddr, IU16, value);
 LOCAL void bios_write_double IPT2(LIN_ADDR, linAddr, IU32, value);
 
 GLOBAL IU8 *Start_of_M_area = NULL;
-GLOBAL IHPE      Length_of_M_area = 0; /* DIVERGENCE: sas.h's original
-                                          CPU_40_STYLE declaration is IHPE;
-                                          retain its pointer-sized contract. */
+GLOBAL PHY_ADDR Length_of_M_area = 0; /* DIVERGENCE(MVDM-HOST-DIV-055):
+                                        guest physical byte count; see sas.h. */
 #ifdef BACK_M
 GLOBAL IU8 *end_of_M = NULL;
 #endif

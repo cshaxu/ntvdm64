@@ -133,13 +133,23 @@ declarations, and the `vga_mode.c` update declaration are now selected through
 source-derived declaration/callback carriers.  The identical selection builds
 on x86 and x64, reducing the live x64 diagnostic set from 40 to **one**.
 
-That remaining CVIDC EVID-to-`MEM_HANDLERS` bridge is not a pointer-width
-conversion: it crosses from a guest-address-oriented EVID ABI to the original
-machine memory-handler ABI.  `ccpusas4.c` stores the broader GMI handler
-registry as `void (*)()` forms, so a local video cast would merely hide the
-same error.  P4 must restore that registry's typed dispatch contract and use
-the existing checked physical binding at the bridge before video execution can
-be enabled.
+The remaining CVIDC EVID-to-`MEM_HANDLERS` diagnostic was audited as a
+profile-local duplicate registration, not a guest-address conversion. In the
+selected `CPU_40_STYLE + C_VID` profile, ordinary video stores enter
+`ccpusas4.c` through the byte/word GMI slots, while C-video string operations
+enter the original `C_Video` `b/w_fwd_move` vectors. The selected CCPU source
+has no caller for the GMI `b/w_move` slots; `gmi_define_mem` only stores their
+historical pointer-based contract. The generated `ega_writ.c` carrier leaves
+those two duplicate, unconsumed slots zero rather than coercing the EVID
+`IU32/IHPE/IU32/IBOOL` entrypoints to the unrelated `UTINY *` signature. The
+original C-video vectors and all original rule bodies remain selected.
+
+Formal x86 and x64 `original-softpc-video.lib` archives now produce no
+`C4113`, `C4133`, or `C4047` diagnostics in the complete CVIDC/base-video
+table family. The zero-row callback ledger records that ABI closure. This is
+not a runtime-video enablement claim: a later bounded machine-profile exercise
+must still prove controller initialization, display port behavior and the
+checked physical-memory binding.
 
 The full `base/video + cvidc` archives currently compile on both architectures;
 this is compile closure only, not a claim that runtime video I/O is enabled.

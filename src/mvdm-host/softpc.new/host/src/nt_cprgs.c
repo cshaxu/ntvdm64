@@ -82,15 +82,19 @@ GLOBAL word		(*getSS_func) ();
 GLOBAL word		(*getMSW_func) ();
 
 #ifdef CCPU
-GLOBAL INT		(*getDF_func) ();
-GLOBAL INT		(*getIF_func) ();
-GLOBAL INT		(*getTF_func) ();
-GLOBAL INT		(*getPF_func) ();
-GLOBAL INT		(*getAF_func) ();
-GLOBAL INT		(*getSF_func) ();
-GLOBAL INT		(*getZF_func) ();
-GLOBAL INT		(*getOF_func) ();
-GLOBAL INT		(*getCF_func) ();
+/* DIVERGENCE: the selected CCPU definitions return ISM32, not the
+ * generated IBOOL carrier.  Keep this table's selected CCPU ABI exact so
+ * MSVC verifies the callback assignments instead of accepting old-style
+ * unprototyped function pointers. */
+GLOBAL ISM32		(*getDF_func) (void);
+GLOBAL ISM32		(*getIF_func) (void);
+GLOBAL ISM32		(*getTF_func) (void);
+GLOBAL ISM32		(*getPF_func) (void);
+GLOBAL ISM32		(*getAF_func) (void);
+GLOBAL ISM32		(*getSF_func) (void);
+GLOBAL ISM32		(*getZF_func) (void);
+GLOBAL ISM32		(*getOF_func) (void);
+GLOBAL ISM32		(*getCF_func) (void);
 GLOBAL INT		(*getIOPL_func ) ();
 #endif
 
@@ -115,6 +119,28 @@ GLOBAL double_word	(*getOPR_func) ();
 GLOBAL sys_addr		(*getSSD_func) ();
 GLOBAL sys_addr		(*getDSD_func) ();
 
+#ifdef CCPU
+/* DIVERGENCE: retain the original selected CCPU table and assignment order,
+ * but make every reached setter prototype explicit. NT4 accepted the
+ * old-style slots without proving their parameter ABI. */
+GLOBAL VOID		(*setAX_func) (IU16);
+GLOBAL VOID		(*setAH_func) (IU8);
+GLOBAL VOID		(*setAL_func) (IU8);
+GLOBAL VOID		(*setBX_func) (IU16);
+GLOBAL VOID		(*setBH_func) (IU8);
+GLOBAL VOID		(*setBL_func) (IU8);
+GLOBAL VOID		(*setCX_func) (IU16);
+GLOBAL VOID		(*setCH_func) (IU8);
+GLOBAL VOID		(*setCL_func) (IU8);
+GLOBAL VOID		(*setDX_func) (IU16);
+GLOBAL VOID		(*setDH_func) (IU8);
+GLOBAL VOID		(*setDL_func) (IU8);
+GLOBAL VOID		(*setSP_func) (IU16);
+GLOBAL VOID		(*setBP_func) (IU16);
+GLOBAL VOID		(*setSI_func) (IU16);
+GLOBAL VOID		(*setDI_func) (IU16);
+GLOBAL VOID		(*setIP_func) (IU16);
+#else
 GLOBAL VOID		(*setAX_func) ();
 GLOBAL VOID		(*setAH_func) ();
 GLOBAL VOID		(*setAL_func) ();
@@ -132,11 +158,32 @@ GLOBAL VOID		(*setBP_func) ();
 GLOBAL VOID		(*setSI_func) ();
 GLOBAL VOID		(*setDI_func) ();
 GLOBAL VOID		(*setIP_func) ();
+#endif
+#ifdef CCPU
+/* DIVERGENCE: c_reg.c owns the selected CCPU segment loaders.  Their
+ * ISM32(IU16) signatures must remain visible at this selection table. */
+GLOBAL ISM32		(*setCS_func) (IU16);
+GLOBAL ISM32		(*setDS_func) (IU16);
+GLOBAL ISM32		(*setES_func) (IU16);
+GLOBAL ISM32		(*setSS_func) (IU16);
+#else
 GLOBAL INT		(*setCS_func) ();
 GLOBAL INT		(*setDS_func) ();
 GLOBAL INT		(*setES_func) ();
 GLOBAL INT		(*setSS_func) ();
+#endif
 GLOBAL VOID		(*setMSW_func) ();
+#ifdef CCPU
+GLOBAL VOID		(*setDF_func) (IBOOL);
+GLOBAL VOID		(*setIF_func) (IBOOL);
+GLOBAL VOID		(*setTF_func) (IBOOL);
+GLOBAL VOID		(*setPF_func) (IBOOL);
+GLOBAL VOID		(*setAF_func) (IBOOL);
+GLOBAL VOID		(*setSF_func) (IBOOL);
+GLOBAL VOID		(*setZF_func) (IBOOL);
+GLOBAL VOID		(*setOF_func) (IBOOL);
+GLOBAL VOID		(*setCF_func) (IBOOL);
+#else
 GLOBAL VOID		(*setDF_func) ();
 GLOBAL VOID		(*setIF_func) ();
 GLOBAL VOID		(*setTF_func) ();
@@ -146,6 +193,7 @@ GLOBAL VOID		(*setSF_func) ();
 GLOBAL VOID		(*setZF_func) ();
 GLOBAL VOID		(*setOF_func) ();
 GLOBAL VOID		(*setCF_func) ();
+#endif
 
 GLOBAL VOID		(*setOPLEN_func) ();
 GLOBAL VOID		(*setOPA_func) ();

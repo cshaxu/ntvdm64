@@ -37,10 +37,9 @@ IU8 npxbuff[108];   /* Make it the maximum required size */
 } OPERAND;
 
 IMPORT IU8 *Start_of_M_area;
-/* DIVERGENCE: keep this declaration in the same pointer-width internal
- * address domain as sas.h/ccpusas4.c.  OpenNT's PHY_ADDR was pointer-sized
- * on its 32-bit host; x64 must not truncate the backing-memory extent. */
-IMPORT IHPE      Length_of_M_area;
+/* DIVERGENCE(MVDM-HOST-DIV-055): this is the CCPU SAS physical extent, not
+ * the native backing pointer.  Keep it identical to sas.h/ccpusas4.c. */
+IMPORT PHY_ADDR Length_of_M_area;
 IMPORT ISM32 in_C;
 IMPORT IU8 *CCPU_M;
 IMPORT IU32 Sas_wrap_mask;

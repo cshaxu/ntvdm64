@@ -22,9 +22,18 @@
 | Asset Needs | Original selected source manifests and immutable firmware manifests; closed S4--S7 evidence; modern public Win32 facilities only behind named source-shaped adapters; MSVC Build Tools and Ninja. |
 | Reporting Requirements | Per family: original roots/callers, recovery rung, source identity, initialization order, ABI/failure contract, any mapping-manager instance, x86/x64 result, unenabled-family disposition and no-Bochs proof. |
 | Stop Conditions | A family requires an unregistered original-source divergence; an adapter would replace an available original controller algorithm; a raw native pointer/handle crosses a fixed-width ABI; a required controller selects Bochs/MONITOR/kernel VDM; or a family requires a new product capability outside the admitted source disposition. |
-| Exit Criteria | The selected original SoftPC profile passes x86/x64 `create -> reset -> firmware/machine initialization -> bounded execution -> typed controlled stop -> teardown`, including source-shaped keyboard input, timer/PIC delivery, basic video/port and selected startup-media behavior. All nine S4 families have direct, adapter-backed or original-unavailable disposition with focused evidence, and no live route selects Bochs/MONITOR/kernel VDM or `src.old`. |
+| Exit Criteria | T310 closes only after S8 composition, S9 Bochs production-closure removal and S10 complete SoftPC capability/mirror-purity acceptance. Formal MSVC `/MT` x86/x64 graphs must prove the same selected SoftPC `create -> reset -> firmware/machine initialization -> bounded execution -> typed controlled stop -> teardown` path, including source-shaped keyboard input, timer/PIC delivery, DMA, video/port, startup-media, disk/floppy and serial/parallel behavior. Every selected `softpc.new` family has a direct, binding-only, adapter-backed or original-unavailable disposition with focused evidence; every retained mirror diff/overlay is minimal and registered; and the production source/build/runtime closure contains zero Bochs, MONITOR, kernel-VDM or `src.old` routes. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
 | Similar-Issue Sweep | All reset/create/teardown roots, original system/device manifests, firmware media staging, timer/PIC/ICA and device-port callers, physical backing/lease boundaries, unavailable paths, MONITOR/Bochs/kernel-VDM references and `src.old` inputs. |
+
+**T310 admitted completion sequence:** S8 remains the active original SoftPC
+machine-composition package.  It is followed by S9, **Bochs
+production-closure removal**, which removes Bochs source/build/runtime routes
+without altering SoftPC controller algorithms; and S10, **complete SoftPC
+capability and mirror-purity acceptance**, which verifies every selected
+`softpc.new` machine family, minimal registered diffs/overlays and one unified
+x86/x64 SoftPC logic path.  S10, not S8, is the final T310 closure gate.  See
+[the amended S8--S10 plan](etc/operations/m0-t310-s8-original-machine-composition-plan-001.md).
 
 **T310 S1 closure:** `6a46ee748` establishes the exact original `ccpu386`,
 `host/src` and `obj.vdm` roots, hashes, historical source roles and a
@@ -384,15 +393,63 @@ assignments in five `base/video` original units; they are P4's remaining
 source-shaped ABI work, so no video runtime enablement is claimed. See the
 [generated-interface audit](etc/evidence/m0-t310-s8-p4-cvidc-generated-interface-audit-001.md).
 
-**T310 S8 P4 P3:** the source-derived `base/video` carrier has reduced the
-remaining x64 callback diagnostics from 40 to one without modifying original
-video algorithms: delayed EGA declarations, polymorphic marking calls,
-chain-write pointers and the VGA update declaration now have exact typed
-contracts under the same x86/x64 selection. The sole remaining form is the
-original CVIDC EVID-to-GMI `MEM_HANDLERS` move bridge, which exposes the wider
-CCPU `ccpusas4.c` untyped handler registry and remains P4 work rather than a
-local cast. See the [base/video callback ledger]
+**T310 S8 P4 pre-rebaseline carrier:** the prior source-derived
+`base/video` carrier and its zero-row callback ledger are retained as audit
+input only. They demonstrate a possible non-casting treatment of several
+table declarations, but they do not close CVIDC/base-video or authorize video
+runtime enablement. The whole-tree source-contract audit below must first
+classify the complete C-video/CCPU table and generated-source package before
+any carrier is accepted. See the [pre-rebaseline callback ledger]
 (etc/operations/m0-t310-s8-p4-base-video-callback-interface-ledger.tsv).
+
+**T310 S8 P4 rebaseline:** the owner rejected warning-by-warning closure. P4
+now begins with a complete static x86/x64 ABI and warning inventory of the
+entire original `mvdm-host` and `mvdm-support` trees: all callback/table
+contracts, pointer-width and pointer/integer conversions, and compiler type
+diagnostics receive original-owner, selected-profile, address-class and
+mirror/overlay/adapter/unavailable disposition. The prior CVIDC/base-video
+carrier work remains uncommitted audit input only; no individual warning or
+partial carrier is a P4 closure until that inventory produces the grouped
+repair plan.
+
+**T310 S8 P4 whole-tree baseline:** both formal x86 and x64 selected SoftPC
+candidate graphs emit 40,587 source-diagnostic occurrences, retained in a
+source-location/architecture ledger and grouped by original interface cluster.
+The source-first inventory contains 1,961 ABI candidates across 1,412 retained
+original-source files and 35 original responsibility clusters. This is
+evidence of an unreviewed workset, not a clean-build or runtime claim.
+
+**T310 S8 P4 architecture-relevance classification:** every unique diagnostic
+source location is classified in
+`m0-t310-s8-p4-whole-tree-warning-x86-x64-classification.tsv`. The 1,643
+records that can affect x86/x64 value width, pointer representation, call ABI,
+old-style declaration/result flow, or an x64-only unused formal comprise the
+separate compatibility worklist. Warnings that are source-quality-only remain
+visible but do not authorize mirror changes or new adapters in this S.
+
+**T310 S8 P4 source reading:** the first complete-contract reading separates
+CCPU access-table selection, CCPU executor dispatch, SAS handler tables and
+the generated C-video package. It proves that mapping is limited to reached
+guest/physical access and cannot replace private SoftPC callbacks or CCPU
+dispatch. Its next tranches classify CCPU GDP as private native-width generated
+state, memory/EMS/UMB external page binding as the only mapping-manager edge,
+timer/ICA as native controller state plus bounded BDA access, and host video
+as native DIB state plus bounded regeneration-memory access. The generated
+CVIDC body is itself the retained original source identity, so its diagnostic
+families need a package-level transform/overlay decision rather than hand
+edits. See the [source-contract reading]
+(etc/evidence/m0-t310-s8-p4-selected-softpc-contract-reading-001.md).
+
+**T310 S8 P4 CCPU selection-table closure:** all 62 active
+`CPU_30_STYLE + CCPU` assignments in `load_sw_cpu_access_functions` now carry
+their actual source return and parameter contracts. This repairs the complete
+flag/segment return group and the complete register/flag setter group together;
+the original `c_reg.c` algorithms, callback order and alternate unselected
+engine declarations remain intact. Formal MSVC `/MT /W4` recompilation of
+`nt_cprgs.c` passes on x86 and x64 without C4057, and the selection-aware
+ledger has no remaining return, parameter or unprototyped-slot mismatch. It is
+not a claim that the broader CCPU indirect-call family is finished; that audit
+continues under P4.
 
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer

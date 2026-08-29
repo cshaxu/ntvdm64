@@ -106,7 +106,11 @@ extern IU8 *NtGetPtrToLinAddrByte IPT1(IU32, lin_addr);
  */
 
 extern host_addr Start_of_M_area;       /* host addr (char *) of start of M */
-extern  IHPE    Length_of_M_area;       /* offset of end of M */
+/* DIVERGENCE(MVDM-HOST-DIV-055): this is a guest physical byte count, not
+ * an address in the host process.  Keep it at the original CCPU physical
+ * address width so c_sas_memory_size and every physical range check retain
+ * one x86/x64-independent contract. */
+extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 #else /* CPU_40_STYLE */
 #define sas_set_buf(buf,addr)	buf=get_byte_addr(addr)
 

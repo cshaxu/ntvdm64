@@ -9,9 +9,11 @@ numeric T identifier only when it is admitted into `STATUS.md`.
 ## Problem
 
 OpenNT MVDM uses `i386` preprocessor conditionals for more than host-CPU
-syntax.  `i386` means the historical 32-bit x86 compilation target; it is not
-defined for the x64 target, and it is not evidence that the modern x86 build
-has NT4 V86 or MONITOR capability.  Depending on the original package, a
+syntax. `i386` means the historical 32-bit x86 compilation target; it is not
+evidence that either modern host build has NT4 V86 or MONITOR capability.
+The product default is that **neither** x86 nor x64 defines `i386`; a source
+unit may receive the macro only as a separately registered, compiler-syntax
+exception. Depending on the original package, a
 conditional can encode direct 32-bit pointer identity, VDM linear-address
 remapping, descriptor handling, monitor callback behavior, CCPU/V86
 selection, or an optional WOW/VDD/debug product path. Modern x86 and x64
@@ -22,13 +24,24 @@ original NT4 VDM product shell unchanged.
 
 Every `#if defined(i386)`, `#ifdef i386`, `#ifndef i386`, and equivalent
 negated form in selected `mvdm-host` receives one ledger row before a later
-owner package relies on it.  The ledger must state the x86 branch and the x64
-branch separately: `#ifndef i386` code is an x64 candidate, not a reason to
-discard it. `i386` may select only compilation syntax or two implementations
-already proven semantically equivalent for the chosen product profile. All
-product capability decisions use a named owner and capability; no conditional
-may imply the presence or absence of V86, MONITOR, guest remapping, or device
-semantics by itself.
+owner package relies on it. The ledger must state the original branch intent
+and the product's unified selection. `#ifndef i386` is neither automatically
+an x64 branch nor automatically removable: the audit must establish whether it
+is historical MIPS/RISC material, a compiler-syntax distinction, or actual
+machine behavior.
+
+When a conditional selects an unsupported historical platform (for example,
+an original MIPS-only arm) and both supported products use one x86-guest
+contract, the preferred recovery is an original-source true subset: delete
+the conditional and unsupported arm, retain the single x86-guest arm, place a
+`DIVERGENCE:` comment at the edit, and register it in the mirror README.
+Do not retain a preprocessor split merely because the historical source used
+one. `i386` may be defined only for a narrowly scoped compilation-syntax
+exception that cannot be recovered otherwise; the exception must state why
+the x86 and x64 source paths cannot be unified. All product capability
+decisions use a named owner and capability; no conditional may imply the
+presence or absence of V86, MONITOR, guest remapping, or device semantics by
+itself.
 
 The preferred recovery result is one architecture-neutral implementation of
 the original observable contract.  The audit must therefore first attempt to
@@ -53,8 +66,9 @@ silently made unavailable by a preprocessor symbol.
 
 Enumerate all selected `mvdm-host` i386 conditions with exact source location,
 enclosing symbol, original package, source identity and both branch bodies.
-Detect nested and compound predicates. Separate compile-only syntax selection
-from any branch that changes observable MVDM behavior.
+Detect nested and compound predicates. Separate compile-only syntax selection,
+unsupported historical-platform material and any branch that changes
+observable MVDM behavior.
 
 ### S2 — semantic and owner classification
 
@@ -74,17 +88,20 @@ obligation. Pointer-bearing forms explicitly identify the relevant session
 mapping-manager instance and the no-raw-alias rule.
 
 The ledger also records whether the final recovery is `unified`,
-`architecture-specific-required`, or `unresolved`. A
-`architecture-specific-required` row names the exact irreducible reason and
-the mirror/adapter divergence registration; absence of `i386` on x64 is never
-such a reason by itself.
+`subset-remove-unsupported-platform`, `architecture-specific-required`, or
+`unresolved`. A `subset-remove-unsupported-platform` row identifies the
+retained original arm and requires a mirror `DIVERGENCE:`/README entry. An
+`architecture-specific-required` row names the exact irreducible compiler or
+platform reason and the mirror/adapter divergence registration; host bitness
+or the absence of `i386` is never such a reason by itself.
 
 ### S3 — recovery and queue integration
 
 Specify the smallest same-shaped source, adapter, overlay or unavailable path
 for every ledger row. Update the immediate owner-package proposal for rows
-that need recovery. Retain historical source unmodified unless a later
-admitted package authorizes a registered divergence.
+that need recovery. For an audited unsupported historical-platform arm, the
+later owner package may make the registered true-subset edit; otherwise retain
+historical source unmodified.
 
 ### S4 — audit closure
 
@@ -95,7 +112,9 @@ part of this candidate.
 
 ## Non-goals
 
-- No preprocessor bulk replacement and no deletion of either original branch.
+- No preprocessor bulk replacement. Branch removal is permitted only after
+  this audit proves it is unsupported historical-platform material and the
+  later owner package registers a true-subset divergence.
 - No source, adapter, overlay, BOP, device, monitor or selected-backend
   implementation change.
 - No reintroduction of kernel VDM, CSRSS, a raw host pointer ABI, or
@@ -106,8 +125,9 @@ part of this candidate.
 ## Exit criteria
 
 The ledger classifies every selected `i386` conditional and its exact branch
-meaning. Every behavioral condition has a named owner, an explicit x86 and
-x64 disposition, and a `unified`/`architecture-specific-required` recovery
-decision; every pointer/handle identity case names the required session
-mapping-manager path; and all later affected package proposals have a precise
-dependency note. The worktree contains only governance/evidence records.
+meaning. Every behavioral condition has a named owner, a product-wide default
+without `i386`, and a `unified`/`subset-remove-unsupported-platform`/
+`architecture-specific-required` recovery decision; every pointer/handle
+identity case names the required session mapping-manager path; and all later
+affected package proposals have a precise dependency note. The worktree
+contains only governance/evidence records.

@@ -21,9 +21,10 @@ $includes = @('src', 'src/adapter-mvdm-host-out/redir/include',
     'src/adapter-mvdm-host-out/softpc/include', 'src/mvdm-support/inc',
     'src/mvdm-host/vdmredir', 'src/mvdm-host/softpc.new/base/inc',
     'src/mvdm-host/softpc.new/host/inc',
-    'src/mvdm-platform-abi/source/public/internal/base/inc',
-    'src/mvdm-platform-abi/source/public/ddk/inc',
-    'src/mvdm-platform-abi/source/private/inc') |
+    'src/opennt-abi/source/public/internal/base/inc',
+    'src/opennt-abi/source/public/ddk/inc',
+    'src/opennt-abi/source/private/inc',
+    'src/opennt-host/public/sdk/inc') |
     ForEach-Object { '/I "' + (Join-Path $root $_).Replace('\', '/') + '"' }
 $cflags = '/nologo /TC /c /std:c11 /MT /W4 /Gy /showIncludes /DWIN_32 /DVDMREDIR_DLL /FI "' + (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/mvdm_redirector_thread.h').Replace('\', '/') + '" ' + ($includes -join ' ')
 $content = @"

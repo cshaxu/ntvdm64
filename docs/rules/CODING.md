@@ -150,7 +150,6 @@
   evidence, an immutable external name or prose describing a historical API.
 
 ## Build and evidence hygiene
-
 - Build the host with MSVC Win32/x86 `/MT` and MSVC x64 `/MT`. Do not link
   objects of different architecture or CRT into one process.
 - For a functional fixture that reaches machine execution, guest state or an

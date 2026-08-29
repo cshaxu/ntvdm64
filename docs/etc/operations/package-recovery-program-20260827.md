@@ -134,13 +134,17 @@ callback or stack transaction; a CPU/CCPU/V86 product prerequisite; or an
 optional debugger, VDD, BDE, or WOW product path.
 
 **S2 recovery plan:** for every reached or future-admissible product branch,
-record the source-first recovery rung and a named capability owner. Pointer or
+record the source-first recovery rung and a named capability owner. The
+default x86 and x64 builds both omit `i386`; use a narrowly registered
+unit-local definition only when compiler syntax cannot be unified. Pointer or
 handle identity must use the existing session mapping-manager route on both
-x86 and x64. Machine mechanics belong to the selected SoftPC call graph or
-the explicitly selected Bochs path; monitor, Win32, WOW, VDD and debugger
-semantics retain their corresponding owner packages. A conditional may remain
-only when it selects compilation syntax or an evidence-proven equivalent
-implementation, never as an unreviewed product capability decision.
+x86 and x64. A condition proven to select only an unsupported historical
+platform may be removed as a registered original-source true subset, retaining
+the shared x86-guest arm. Machine mechanics belong to the selected SoftPC call
+graph or the explicitly selected Bochs path; monitor, Win32, WOW, VDD and
+debugger semantics retain their corresponding owner packages. A conditional
+may remain only when it selects compilation syntax or an evidence-proven
+equivalent implementation, never as an unreviewed product capability decision.
 
 **S3 verification and queue reconciliation:** produce a complete conditional
 ledger with original file/line, source purpose, branch classification,
