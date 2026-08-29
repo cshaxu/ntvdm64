@@ -208,7 +208,9 @@ LONG    lLoc;
     //
 
     if (!getZF()) {
-        ULONG   Zero = 0;
+        /* DIVERGENCE MVDM-HOST-DIV-105: the public SetFilePointer high-offset
+         * parameter is signed LONG; NT4 accepted ULONG by same-width coincidence. */
+        LONG    Zero = 0;
         lLoc  = (LONG)((((int)getBX()) << 16) + (int)getSI());
         if ((SetFilePointer (hFile,
                             lLoc,
@@ -308,7 +310,9 @@ DWORD	dwErrCode;
 
 
     if (!getZF()) {
-        ULONG   Zero = 0;
+        /* DIVERGENCE MVDM-HOST-DIV-105: the public SetFilePointer high-offset
+         * parameter is signed LONG; NT4 accepted ULONG by same-width coincidence. */
+        LONG    Zero = 0;
         lLoc  = (LONG)((((int)getBX()) << 16) + (int)getSI());
         if ((SetFilePointer (hFile,
                             lLoc,

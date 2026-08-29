@@ -186,7 +186,8 @@ DWORD	BytesRead;
                           FILE_ATTRIBUTE_NORMAL,
                           NULL );
 
-    if (hfile == (HANDLE)0xffffffff) {
+    /* DIVERGENCE MVDM-HOST-DIV-106: INVALID_HANDLE_VALUE is the native-width Win32 sentinel; the original 0xffffffff cast truncates on x64. */
+    if (hfile == INVALID_HANDLE_VALUE) {
 	TerminateVDM();
     }
 
@@ -195,7 +196,8 @@ DWORD	BytesRead;
 	if (!ReadFile(hfile, pbLoadAddr, 16384, &BytesRead, NULL)) {
 	    TerminateVDM();
 	}
-	pbLoadAddr = (PBYTE)((ULONG)pbLoadAddr + BytesRead);
+	/* DIVERGENCE MVDM-HOST-DIV-106: this loader cursor is private native storage; advance it directly rather than round-trip through ULONG. */
+	pbLoadAddr += BytesRead;
 
     }
 
