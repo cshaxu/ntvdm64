@@ -50,6 +50,18 @@ formal x86/x64 compilation emits none of their C4113/C4133/C4312 diagnostics;
 unrelated generated-source warnings remain visible. See the
 [selected cvidc glue closure](etc/evidence/m0-t310-s8-p4-cvidc-selected-glue-abi-closure-001.md).
 
+**T310 S8 P4:** the formal full x64 graph exposed one additional selected
+base/video declaration mismatch: `ega_writ.c` declared the word-fill EVID glue
+with `IU8` even though its original body and handler slot use `IU16`.
+`MVDM-HOST-DIV-074` corrects that declaration only; focused formal x86/x64
+rebuilds are clean. See the [EGA word-fill ABI closure](etc/evidence/m0-t310-s8-p4-ega-word-fill-abi-closure-001.md).
+
+**T310 S8 P4:** the formal full x64 graph exposed one additional selected
+base/video declaration mismatch: `ega_writ.c` declared the word-fill EVID glue
+with `IU8` even though its original body and handler slot use `IU16`.
+`MVDM-HOST-DIV-074` corrects that declaration only; focused formal x86/x64
+rebuilds are clean. See the [EGA word-fill ABI closure](etc/evidence/m0-t310-s8-p4-ega-word-fill-abi-closure-001.md).
+
 **T310 S8 P4:** five residual selected video call warnings were read and
 classified as original 32-bit scalar/signedness issues, not x86/x64 ABI
 transitions. They stay visible and unmodified rather than being hidden by
