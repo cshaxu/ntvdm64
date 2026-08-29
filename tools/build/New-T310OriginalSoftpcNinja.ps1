@@ -49,6 +49,7 @@ $cvidcGenerator = Join-Path $root 'tools/build/Generate-CvidcTypedTables.ps1'
 $videoGenerator = Join-Path $root 'tools/build/Generate-T310BaseVideoTypedSources.ps1'
 $gdpGenerator = Join-Path $root 'tools/build/Generate-T310GdpSlots.mjs'
 $gdpOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/base/cvidc'
+$umbOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/host/src'
 $commsRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/comms'
 $dosRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/dos'
 $demRoot = Join-Path $root 'src/mvdm-host/dos/dem'
@@ -190,6 +191,7 @@ if (!(Test-Path -LiteralPath $cvidcGenerator -PathType Leaf)) { throw "CVIDC typ
 if (!(Test-Path -LiteralPath $videoGenerator -PathType Leaf)) { throw "Base/video declaration generator missing: $videoGenerator" }
 if (!(Test-Path -LiteralPath $gdpGenerator -PathType Leaf)) { throw "GDP slot generator missing: $gdpGenerator" }
 if (!(Test-Path -LiteralPath $gdpOverlayRoot -PathType Container)) { throw "GDP overlay root missing: $gdpOverlayRoot" }
+if (!(Test-Path -LiteralPath $umbOverlayRoot -PathType Container)) { throw "UMB overlay root missing: $umbOverlayRoot" }
 if ([string]::IsNullOrWhiteSpace($NodeExecutable)) { $NodeExecutable = $env:MVDM_NODE22 }
 if ([string]::IsNullOrWhiteSpace($NodeExecutable) -or !(Test-Path -LiteralPath $NodeExecutable -PathType Leaf)) {
     throw 'Node 22 is required for the GDP slot generator; pass -NodeExecutable or set MVDM_NODE22.'
@@ -235,6 +237,7 @@ $includeRootPaths = @(
     # the CVIDC generated carrier; the historical host/genPg output is absent.
     'src/mvdm-host/softpc.new/base/cvidc',
     'src/mvdm-host-overlay/softpc.new/base/cvidc',
+    'src/mvdm-host-overlay/softpc.new/host/src',
     'src/mvdm-host/softpc.new/base/inc',
     'src/adapter-mvdm-host-out/softpc/include',
     'src/adapter-mvdm-host-out/monitor/include',
@@ -409,6 +412,9 @@ $hostObjects = foreach ($name in $hostNames) {
     }
     $object
 }
+$umbOverlaySource = Join-Path $umbOverlayRoot 'mvdm_umb_address.c'
+$graph.Add('build obj/host/mvdm_umb_address.obj: cc ' + (NinjaPath $umbOverlaySource))
+$hostObjects += 'obj/host/mvdm_umb_address.obj'
 $adapterWin32Objects = foreach ($name in $adapterWin32Names) {
     $object = 'obj/adapter-win32/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterWin32Root $name)))
