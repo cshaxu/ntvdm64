@@ -1,0 +1,616 @@
+record_id	macro	original_line	original_offset	declared_type	same_offset_macros	x64_overlay_disposition
+T310-S8-P4-GDP-0001	GLOBAL_HookNumber	3	0	IUH *	GLOBAL_HookNumber	candidate-generated-typed-slot
+T310-S8-P4-GDP-0002	GLOBAL_EfiNumber	4	4	IUH *	GLOBAL_EfiNumber	candidate-generated-typed-slot
+T310-S8-P4-GDP-0003	GLOBAL_SubrRingPtr	5	8	IUH* *	GLOBAL_SubrRingPtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0004	GLOBAL_SubrRingLowIncl	6	12	IUH* *	GLOBAL_SubrRingLowIncl	candidate-generated-typed-slot
+T310-S8-P4-GDP-0005	GLOBAL_SubrRingHighIncl	7	16	IUH* *	GLOBAL_SubrRingHighIncl	candidate-generated-typed-slot
+T310-S8-P4-GDP-0006	GLOBAL_WhichAssertion	8	20	IUH *	GLOBAL_WhichAssertion	candidate-generated-typed-slot
+T310-S8-P4-GDP-0007	GLOBAL_WhereAmI	9	24	IU32* *	GLOBAL_WhereAmI	candidate-generated-typed-slot
+T310-S8-P4-GDP-0008	GLOBAL_CoRoRet	10	28	IUH *	GLOBAL_CoRoRet	candidate-generated-typed-slot
+T310-S8-P4-GDP-0009	GLOBAL_ErrorNumber	11	32	IUH *	GLOBAL_ErrorNumber	candidate-generated-typed-slot
+T310-S8-P4-GDP-0010	GLOBAL_EDL_WORKSPACE_0	12	36	IUH *	GLOBAL_EDL_WORKSPACE_0	candidate-generated-typed-slot
+T310-S8-P4-GDP-0011	GLOBAL_EDL_WORKSPACE_1	13	40	IUH *	GLOBAL_EDL_WORKSPACE_1	candidate-generated-typed-slot
+T310-S8-P4-GDP-0012	GLOBAL_EDL_WORKSPACE_2	14	44	IUH *	GLOBAL_EDL_WORKSPACE_2	candidate-generated-typed-slot
+T310-S8-P4-GDP-0013	GLOBAL_EDL_WORKSPACE_3	15	48	IUH *	GLOBAL_EDL_WORKSPACE_3	candidate-generated-typed-slot
+T310-S8-P4-GDP-0014	GLOBAL_EDL_WORKSPACE_4	16	52	IUH *	GLOBAL_EDL_WORKSPACE_4	candidate-generated-typed-slot
+T310-S8-P4-GDP-0015	GLOBAL_EDL_WORKSPACE_5	17	56	IUH *	GLOBAL_EDL_WORKSPACE_5	candidate-generated-typed-slot
+T310-S8-P4-GDP-0016	GLOBAL_EDL_WORKSPACE_6	18	60	IUH *	GLOBAL_EDL_WORKSPACE_6	candidate-generated-typed-slot
+T310-S8-P4-GDP-0017	GLOBAL_EDL_WORKSPACE_7	19	64	IUH *	GLOBAL_EDL_WORKSPACE_7	candidate-generated-typed-slot
+T310-S8-P4-GDP-0018	GLOBAL_EDL_WORKSPACE_8	20	68	IUH *	GLOBAL_EDL_WORKSPACE_8	candidate-generated-typed-slot
+T310-S8-P4-GDP-0019	GLOBAL_EDL_WORKSPACE_9	21	72	IUH *	GLOBAL_EDL_WORKSPACE_9	candidate-generated-typed-slot
+T310-S8-P4-GDP-0020	GLOBAL_EDL_WORKSPACE_10	22	76	IUH *	GLOBAL_EDL_WORKSPACE_10	candidate-generated-typed-slot
+T310-S8-P4-GDP-0021	GLOBAL_EDL_WORKSPACE_11	23	80	IUH *	GLOBAL_EDL_WORKSPACE_11	candidate-generated-typed-slot
+T310-S8-P4-GDP-0022	GLOBAL_EDL_WORKSPACE_12	24	84	IUH *	GLOBAL_EDL_WORKSPACE_12	candidate-generated-typed-slot
+T310-S8-P4-GDP-0023	GLOBAL_EDL_WORKSPACE_13	25	88	IUH *	GLOBAL_EDL_WORKSPACE_13	candidate-generated-typed-slot
+T310-S8-P4-GDP-0024	GLOBAL_EDL_WORKSPACE_14	26	92	IUH *	GLOBAL_EDL_WORKSPACE_14	candidate-generated-typed-slot
+T310-S8-P4-GDP-0025	GLOBAL_EDL_WORKSPACE_15	27	96	IUH *	GLOBAL_EDL_WORKSPACE_15	candidate-generated-typed-slot
+T310-S8-P4-GDP-0026	GLOBAL_EDL_WORKSPACE_16	28	100	IUH *	GLOBAL_EDL_WORKSPACE_16	candidate-generated-typed-slot
+T310-S8-P4-GDP-0027	GLOBAL_EDL_WORKSPACE_17	29	104	IUH *	GLOBAL_EDL_WORKSPACE_17	candidate-generated-typed-slot
+T310-S8-P4-GDP-0028	GLOBAL_EDL_WORKSPACE_18	30	108	IUH *	GLOBAL_EDL_WORKSPACE_18	candidate-generated-typed-slot
+T310-S8-P4-GDP-0029	GLOBAL_EDL_WORKSPACE_19	31	112	IUH *	GLOBAL_EDL_WORKSPACE_19	candidate-generated-typed-slot
+T310-S8-P4-GDP-0030	GLOBAL_EDL_WORKSPACE_20	32	116	IUH *	GLOBAL_EDL_WORKSPACE_20	candidate-generated-typed-slot
+T310-S8-P4-GDP-0031	GLOBAL_EDL_WORKSPACE_21	33	120	IUH *	GLOBAL_EDL_WORKSPACE_21	candidate-generated-typed-slot
+T310-S8-P4-GDP-0032	GLOBAL_EDL_WORKSPACE_22	34	124	IUH *	GLOBAL_EDL_WORKSPACE_22	candidate-generated-typed-slot
+T310-S8-P4-GDP-0033	GLOBAL_EDL_WORKSPACE_23	35	128	IUH *	GLOBAL_EDL_WORKSPACE_23	candidate-generated-typed-slot
+T310-S8-P4-GDP-0034	GLOBAL_EDL_WORKSPACE_24	36	132	IUH *	GLOBAL_EDL_WORKSPACE_24	candidate-generated-typed-slot
+T310-S8-P4-GDP-0035	GLOBAL_EDL_WORKSPACE_25	37	136	IUH *	GLOBAL_EDL_WORKSPACE_25	candidate-generated-typed-slot
+T310-S8-P4-GDP-0036	GLOBAL_EDL_WORKSPACE_26	38	140	IUH *	GLOBAL_EDL_WORKSPACE_26	candidate-generated-typed-slot
+T310-S8-P4-GDP-0037	GLOBAL_EDL_WORKSPACE_27	39	144	IUH *	GLOBAL_EDL_WORKSPACE_27	candidate-generated-typed-slot
+T310-S8-P4-GDP-0038	GLOBAL_EDL_WORKSPACE_28	40	148	IUH *	GLOBAL_EDL_WORKSPACE_28	candidate-generated-typed-slot
+T310-S8-P4-GDP-0039	GLOBAL_EDL_WORKSPACE_29	41	152	IUH *	GLOBAL_EDL_WORKSPACE_29	candidate-generated-typed-slot
+T310-S8-P4-GDP-0040	GLOBAL_EDL_WORKSPACE_30	42	156	IUH *	GLOBAL_EDL_WORKSPACE_30	candidate-generated-typed-slot
+T310-S8-P4-GDP-0041	GLOBAL_EDL_WORKSPACE_31	43	160	IUH *	GLOBAL_EDL_WORKSPACE_31	candidate-generated-typed-slot
+T310-S8-P4-GDP-0042	GLOBAL_R_EAX	44	164	IUH *	GLOBAL_R_EAX	candidate-generated-typed-slot
+T310-S8-P4-GDP-0043	GLOBAL_R_EBX	45	168	IUH *	GLOBAL_R_EBX	candidate-generated-typed-slot
+T310-S8-P4-GDP-0044	GLOBAL_R_ECX	46	172	IUH *	GLOBAL_R_ECX	candidate-generated-typed-slot
+T310-S8-P4-GDP-0045	GLOBAL_R_EDX	47	176	IUH *	GLOBAL_R_EDX	candidate-generated-typed-slot
+T310-S8-P4-GDP-0046	GLOBAL_R_EBP	48	180	IUH *	GLOBAL_R_EBP	candidate-generated-typed-slot
+T310-S8-P4-GDP-0047	GLOBAL_R_ESI	49	184	IUH *	GLOBAL_R_ESI	candidate-generated-typed-slot
+T310-S8-P4-GDP-0048	GLOBAL_R_EDI	50	188	IUH *	GLOBAL_R_EDI	candidate-generated-typed-slot
+T310-S8-P4-GDP-0049	GLOBAL_EsBase	52	196	IU32 *	GLOBAL_EsBase	candidate-generated-typed-slot
+T310-S8-P4-GDP-0050	GLOBAL_EsDesc	53	200	struct GLDC_REC* *	GLOBAL_EsDesc	candidate-generated-typed-slot
+T310-S8-P4-GDP-0051	GLOBAL_EsStruct_rlimit	54	204	IU32 *	GLOBAL_EsStruct_rlimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0052	GLOBAL_EsStruct_wlimit	55	208	IU32 *	GLOBAL_EsStruct_wlimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0053	GLOBAL_EsDescSanctuary	56	212	struct GLDC_REC* *	GLOBAL_EsDescSanctuary	candidate-generated-typed-slot
+T310-S8-P4-GDP-0054	GLOBAL_CsBase	58	220	IU32 *	GLOBAL_CsBase	candidate-generated-typed-slot
+T310-S8-P4-GDP-0055	GLOBAL_CsDesc	59	224	struct GLDC_REC* *	GLOBAL_CsDesc	candidate-generated-typed-slot
+T310-S8-P4-GDP-0056	GLOBAL_CsStruct_rlimit	60	228	IU32 *	GLOBAL_CsStruct_rlimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0057	GLOBAL_CsStruct_wlimit	61	232	IU32 *	GLOBAL_CsStruct_wlimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0058	GLOBAL_CsDescSanctuary	62	236	struct GLDC_REC* *	GLOBAL_CsDescSanctuary	candidate-generated-typed-slot
+T310-S8-P4-GDP-0059	GLOBAL_SsBase	64	244	IU32 *	GLOBAL_SsBase	candidate-generated-typed-slot
+T310-S8-P4-GDP-0060	GLOBAL_SsDesc	65	248	struct GLDC_REC* *	GLOBAL_SsDesc	candidate-generated-typed-slot
+T310-S8-P4-GDP-0061	GLOBAL_SsStruct_rlimit	66	252	IU32 *	GLOBAL_SsStruct_rlimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0062	GLOBAL_SsStruct_wlimit	67	256	IU32 *	GLOBAL_SsStruct_wlimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0063	GLOBAL_SsDescSanctuary	68	260	struct GLDC_REC* *	GLOBAL_SsDescSanctuary	candidate-generated-typed-slot
+T310-S8-P4-GDP-0064	GLOBAL_DsBase	70	268	IU32 *	GLOBAL_DsBase	candidate-generated-typed-slot
+T310-S8-P4-GDP-0065	GLOBAL_DsDesc	71	272	struct GLDC_REC* *	GLOBAL_DsDesc	candidate-generated-typed-slot
+T310-S8-P4-GDP-0066	GLOBAL_DsStruct_rlimit	72	276	IU32 *	GLOBAL_DsStruct_rlimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0067	GLOBAL_DsStruct_wlimit	73	280	IU32 *	GLOBAL_DsStruct_wlimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0068	GLOBAL_DsDescSanctuary	74	284	struct GLDC_REC* *	GLOBAL_DsDescSanctuary	candidate-generated-typed-slot
+T310-S8-P4-GDP-0069	GLOBAL_FsBase	76	292	IU32 *	GLOBAL_FsBase	candidate-generated-typed-slot
+T310-S8-P4-GDP-0070	GLOBAL_FsDesc	77	296	struct GLDC_REC* *	GLOBAL_FsDesc	candidate-generated-typed-slot
+T310-S8-P4-GDP-0071	GLOBAL_FsStruct_rlimit	78	300	IU32 *	GLOBAL_FsStruct_rlimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0072	GLOBAL_FsStruct_wlimit	79	304	IU32 *	GLOBAL_FsStruct_wlimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0073	GLOBAL_FsDescSanctuary	80	308	struct GLDC_REC* *	GLOBAL_FsDescSanctuary	candidate-generated-typed-slot
+T310-S8-P4-GDP-0074	GLOBAL_GsBase	82	316	IU32 *	GLOBAL_GsBase	candidate-generated-typed-slot
+T310-S8-P4-GDP-0075	GLOBAL_GsDesc	83	320	struct GLDC_REC* *	GLOBAL_GsDesc	candidate-generated-typed-slot
+T310-S8-P4-GDP-0076	GLOBAL_GsStruct_rlimit	84	324	IU32 *	GLOBAL_GsStruct_rlimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0077	GLOBAL_GsStruct_wlimit	85	328	IU32 *	GLOBAL_GsStruct_wlimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0078	GLOBAL_GsDescSanctuary	86	332	struct GLDC_REC* *	GLOBAL_GsDescSanctuary	candidate-generated-typed-slot
+T310-S8-P4-GDP-0079	GLOBAL_CPL	87	336	IUH *	GLOBAL_CPL	candidate-generated-typed-slot
+T310-S8-P4-GDP-0080	GLOBAL_GdtrBase	88	340	IU32 *	GLOBAL_GdtrBase	candidate-generated-typed-slot
+T310-S8-P4-GDP-0081	GLOBAL_LdtrBase	91	352	IU32 *	GLOBAL_LdtrBase	candidate-generated-typed-slot
+T310-S8-P4-GDP-0082	GLOBAL_LdtrLimit	92	356	IU32 *	GLOBAL_LdtrLimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0083	GLOBAL_TrBase	94	364	IU32 *	GLOBAL_TrBase	candidate-generated-typed-slot
+T310-S8-P4-GDP-0084	GLOBAL_TrLimit	95	368	IU32 *	GLOBAL_TrLimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0085	GLOBAL_TrDescSt	96	372	IUH *	GLOBAL_TrDescSt	candidate-generated-typed-slot
+T310-S8-P4-GDP-0086	GLOBAL_TrIoBase	97	376	IU32 *	GLOBAL_TrIoBase	candidate-generated-typed-slot
+T310-S8-P4-GDP-0087	GLOBAL_TrIoLimit	98	380	IS32 *	GLOBAL_TrIoLimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0088	GLOBAL_IdtrBase	99	384	IU32 *	GLOBAL_IdtrBase	candidate-generated-typed-slot
+T310-S8-P4-GDP-0089	GLOBAL_AbortPigRun	101	392	IUH *	GLOBAL_AbortPigRun	candidate-generated-typed-slot
+T310-S8-P4-GDP-0090	GLOBAL_RegsAndFlagsUndefined	102	396	IUH *	GLOBAL_RegsAndFlagsUndefined	candidate-generated-typed-slot
+T310-S8-P4-GDP-0091	GLOBAL_SigalrmOccurred	103	400	IUH *	GLOBAL_SigalrmOccurred	candidate-generated-typed-slot
+T310-S8-P4-GDP-0092	GLOBAL_PigEnabled	104	404	IUH *	GLOBAL_PigEnabled	candidate-generated-typed-slot
+T310-S8-P4-GDP-0093	GLOBAL_EFLAGS	105	408	IUH *	GLOBAL_EFLAGS	candidate-generated-typed-slot
+T310-S8-P4-GDP-0094	GLOBAL_Ft	106	412	IUH *	GLOBAL_Ft	candidate-generated-typed-slot
+T310-S8-P4-GDP-0095	GLOBAL_F1	107	416	IUH *	GLOBAL_F1	candidate-generated-typed-slot
+T310-S8-P4-GDP-0096	GLOBAL_F2	108	420	IUH *	GLOBAL_F2	candidate-generated-typed-slot
+T310-S8-P4-GDP-0097	GLOBAL_F3	109	424	IUH *	GLOBAL_F3	candidate-generated-typed-slot
+T310-S8-P4-GDP-0098	GLOBAL_R_CR0	110	428	IUH *	GLOBAL_R_CR0	candidate-generated-typed-slot
+T310-S8-P4-GDP-0099	GLOBAL_R_CR1	111	432	IUH *	GLOBAL_R_CR1	candidate-generated-typed-slot
+T310-S8-P4-GDP-0100	GLOBAL_R_CR2	112	436	IUH *	GLOBAL_R_CR2	candidate-generated-typed-slot
+T310-S8-P4-GDP-0101	GLOBAL_R_CR3	113	440	IUH *	GLOBAL_R_CR3	candidate-generated-typed-slot
+T310-S8-P4-GDP-0102	GLOBAL_R_CR4	114	444	IUH *	GLOBAL_R_CR4	candidate-generated-typed-slot
+T310-S8-P4-GDP-0103	GLOBAL_R_CR5	115	448	IUH *	GLOBAL_R_CR5	candidate-generated-typed-slot
+T310-S8-P4-GDP-0104	GLOBAL_R_CR6	116	452	IUH *	GLOBAL_R_CR6	candidate-generated-typed-slot
+T310-S8-P4-GDP-0105	GLOBAL_R_CR7	117	456	IUH *	GLOBAL_R_CR7	candidate-generated-typed-slot
+T310-S8-P4-GDP-0106	GLOBAL_R_TR0	118	460	IUH *	GLOBAL_R_TR0	candidate-generated-typed-slot
+T310-S8-P4-GDP-0107	GLOBAL_R_TR1	119	464	IUH *	GLOBAL_R_TR1	candidate-generated-typed-slot
+T310-S8-P4-GDP-0108	GLOBAL_R_TR2	120	468	IUH *	GLOBAL_R_TR2	candidate-generated-typed-slot
+T310-S8-P4-GDP-0109	GLOBAL_R_TR3	121	472	IUH *	GLOBAL_R_TR3	candidate-generated-typed-slot
+T310-S8-P4-GDP-0110	GLOBAL_R_TR4	122	476	IUH *	GLOBAL_R_TR4	candidate-generated-typed-slot
+T310-S8-P4-GDP-0111	GLOBAL_R_TR5	123	480	IUH *	GLOBAL_R_TR5	candidate-generated-typed-slot
+T310-S8-P4-GDP-0112	GLOBAL_R_TR6	124	484	IUH *	GLOBAL_R_TR6	candidate-generated-typed-slot
+T310-S8-P4-GDP-0113	GLOBAL_R_TR7	125	488	IUH *	GLOBAL_R_TR7	candidate-generated-typed-slot
+T310-S8-P4-GDP-0114	GLOBAL_R_DR0	126	492	IUH *	GLOBAL_R_DR0	candidate-generated-typed-slot
+T310-S8-P4-GDP-0115	GLOBAL_R_DR1	127	496	IUH *	GLOBAL_R_DR1	candidate-generated-typed-slot
+T310-S8-P4-GDP-0116	GLOBAL_R_DR2	128	500	IUH *	GLOBAL_R_DR2	candidate-generated-typed-slot
+T310-S8-P4-GDP-0117	GLOBAL_R_DR3	129	504	IUH *	GLOBAL_R_DR3	candidate-generated-typed-slot
+T310-S8-P4-GDP-0118	GLOBAL_R_DR4	130	508	IUH *	GLOBAL_R_DR4	candidate-generated-typed-slot
+T310-S8-P4-GDP-0119	GLOBAL_R_DR5	131	512	IUH *	GLOBAL_R_DR5	candidate-generated-typed-slot
+T310-S8-P4-GDP-0120	GLOBAL_R_DR6	132	516	IUH *	GLOBAL_R_DR6	candidate-generated-typed-slot
+T310-S8-P4-GDP-0121	GLOBAL_R_DR7	133	520	IUH *	GLOBAL_R_DR7	candidate-generated-typed-slot
+T310-S8-P4-GDP-0122	GLOBAL_PARAM1	134	524	IUH *	GLOBAL_PARAM1	candidate-generated-typed-slot
+T310-S8-P4-GDP-0123	GLOBAL_PARAM2	135	528	IUH *	GLOBAL_PARAM2	candidate-generated-typed-slot
+T310-S8-P4-GDP-0124	GLOBAL_PARAM3	136	532	IUH *	GLOBAL_PARAM3	candidate-generated-typed-slot
+T310-S8-P4-GDP-0125	GLOBAL_BytePtr	137	536	IU8* *	GLOBAL_BytePtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0126	GLOBAL_WordPtr	138	540	IU16* *	GLOBAL_WordPtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0127	GLOBAL_DwordPtr	139	544	IU32* *	GLOBAL_DwordPtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0128	GLOBAL_EaOffs	140	548	IUH *	GLOBAL_EaOffs	candidate-generated-typed-slot
+T310-S8-P4-GDP-0129	GLOBAL_DATA1	141	552	IUH *	GLOBAL_DATA1	candidate-generated-typed-slot
+T310-S8-P4-GDP-0130	GLOBAL_DATA2	142	556	IUH *	GLOBAL_DATA2	candidate-generated-typed-slot
+T310-S8-P4-GDP-0131	GLOBAL_LastSetCopierUniverse	149	584	struct EntryPointCacheREC* *	GLOBAL_LastSetCopierUniverse	candidate-generated-typed-slot
+T310-S8-P4-GDP-0132	GLOBAL_CopierUniverse	150	588	struct EntryPointCacheREC* *	GLOBAL_CopierUniverse	candidate-generated-typed-slot
+T310-S8-P4-GDP-0133	GLOBAL_CopierBitMap	151	592	struct ConstraintBitMapREC* *	GLOBAL_CopierBitMap	candidate-generated-typed-slot
+T310-S8-P4-GDP-0134	GLOBAL_lastCopierBitMap	152	596	struct ConstraintBitMapREC* *	GLOBAL_lastCopierBitMap	candidate-generated-typed-slot
+T310-S8-P4-GDP-0135	GLOBAL_currPFragInfoRec	153	600	struct FragmentInfoREC* *	GLOBAL_currPFragInfoRec	candidate-generated-typed-slot
+T310-S8-P4-GDP-0136	GLOBAL_copierCleanups	154	604	IU8* *	GLOBAL_copierCleanups	candidate-generated-typed-slot
+T310-S8-P4-GDP-0137	GLOBAL_lastHostCleanup	155	608	IU8* *	GLOBAL_lastHostCleanup	candidate-generated-typed-slot
+T310-S8-P4-GDP-0138	GLOBAL_lastHostAddress	156	612	IU32* *	GLOBAL_lastHostAddress	candidate-generated-typed-slot
+T310-S8-P4-GDP-0139	GLOBAL_lastIntelAddress	157	616	IU32 *	GLOBAL_lastIntelAddress	candidate-generated-typed-slot
+T310-S8-P4-GDP-0140	GLOBAL_destHashTable	158	620	struct JUMP_REC** *	GLOBAL_destHashTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0141	GLOBAL_jumpHashTable	159	624	struct JUMP_REC** *	GLOBAL_jumpHashTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0142	GLOBAL_freeJumpRecPtr	160	628	struct JUMP_REC* *	GLOBAL_freeJumpRecPtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0143	GLOBAL_nextFreeJumpRec	161	632	struct JUMP_REC* *	GLOBAL_nextFreeJumpRec	candidate-generated-typed-slot
+T310-S8-P4-GDP-0144	GLOBAL_freeJumpRecCount	162	636	IU32 *	GLOBAL_freeJumpRecCount	candidate-generated-typed-slot
+T310-S8-P4-GDP-0145	GLOBAL_poolJumpRecCount	163	640	IU32 *	GLOBAL_poolJumpRecCount	candidate-generated-typed-slot
+T310-S8-P4-GDP-0146	GLOBAL_vctPtrs	164	644	struct VCT_NODE_REC** *	GLOBAL_vctPtrs	candidate-generated-typed-slot
+T310-S8-P4-GDP-0147	GLOBAL_anonPtrs	165	648	struct VCT_NODE_REC** *	GLOBAL_anonPtrs	candidate-generated-typed-slot
+T310-S8-P4-GDP-0148	GLOBAL_tuples	166	652	struct TUPLE_REC* *	GLOBAL_tuples	candidate-generated-typed-slot
+T310-S8-P4-GDP-0149	GLOBAL_cursor	167	656	struct TUPLE_REC* *	GLOBAL_cursor	candidate-generated-typed-slot
+T310-S8-P4-GDP-0150	GLOBAL_tuplePtr	168	660	struct TUPLE_REC* *	GLOBAL_tuplePtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0151	GLOBAL_patchRecPtr	169	664	IU8* *	GLOBAL_patchRecPtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0152	GLOBAL_srcPtr	170	668	IU32* *	GLOBAL_srcPtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0153	GLOBAL_dstPtr	171	672	IU32* *	GLOBAL_dstPtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0154	GLOBAL_PatchMeBodyAddr	172	676	IU32* *	GLOBAL_PatchMeBodyAddr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0155	GLOBAL_patchTable	173	680	IU32** *	GLOBAL_patchTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0156	GLOBAL_patchNames	174	684	IU8** *	GLOBAL_patchNames	candidate-generated-typed-slot
+T310-S8-P4-GDP-0157	GLOBAL_CopierFt	175	688	IUH *	GLOBAL_CopierFt	candidate-generated-typed-slot
+T310-S8-P4-GDP-0158	GLOBAL_lastLazyFt	177	696	IUH *	GLOBAL_lastLazyFt	candidate-generated-typed-slot
+T310-S8-P4-GDP-0159	GLOBAL_univVarMask	178	700	IU32 *	GLOBAL_univVarMask	candidate-generated-typed-slot
+T310-S8-P4-GDP-0160	GLOBAL_cumulativeStackMovement	183	720	ISH *	GLOBAL_cumulativeStackMovement	candidate-generated-typed-slot
+T310-S8-P4-GDP-0161	GLOBAL_ReSelectTupleSkipCnt	187	736	ISH *	GLOBAL_ReSelectTupleSkipCnt	candidate-generated-typed-slot
+T310-S8-P4-GDP-0162	GLOBAL_postPopSize	189	744	IU32 *	GLOBAL_postPopSize	candidate-generated-typed-slot
+T310-S8-P4-GDP-0163	GLOBAL_compTimeFtBitNum	190	748	IU32 *	GLOBAL_compTimeFtBitNum	candidate-generated-typed-slot
+T310-S8-P4-GDP-0164	GLOBAL_accIsReadBitMask	191	752	IU32 *	GLOBAL_accIsReadBitMask	candidate-generated-typed-slot
+T310-S8-P4-GDP-0165	GLOBAL_noFlagsBitMask	192	756	IU32 *	GLOBAL_noFlagsBitMask	candidate-generated-typed-slot
+T310-S8-P4-GDP-0166	GLOBAL_OutlyingDispatchEIPAddr	193	760	IU32* *	GLOBAL_OutlyingDispatchEIPAddr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0167	GLOBAL_PARAM1RegId	194	764	IU32 *	GLOBAL_PARAM1RegId	candidate-generated-typed-slot
+T310-S8-P4-GDP-0168	GLOBAL_stashedImmed1	195	768	IUH *	GLOBAL_stashedImmed1	candidate-generated-typed-slot
+T310-S8-P4-GDP-0169	GLOBAL_stashedImmed2	196	772	IUH *	GLOBAL_stashedImmed2	candidate-generated-typed-slot
+T310-S8-P4-GDP-0170	GLOBAL_stashedImmed3	197	776	IUH *	GLOBAL_stashedImmed3	candidate-generated-typed-slot
+T310-S8-P4-GDP-0171	GLOBAL_stashedImmed4	198	780	IUH *	GLOBAL_stashedImmed4	candidate-generated-typed-slot
+T310-S8-P4-GDP-0172	GLOBAL_stashedImmed5	199	784	IUH *	GLOBAL_stashedImmed5	candidate-generated-typed-slot
+T310-S8-P4-GDP-0173	GLOBAL_EDL_WORKSPACE_32	200	788	IUH *	GLOBAL_EDL_WORKSPACE_32	candidate-generated-typed-slot
+T310-S8-P4-GDP-0174	GLOBAL_EDL_WORKSPACE_33	201	792	IUH *	GLOBAL_EDL_WORKSPACE_33	candidate-generated-typed-slot
+T310-S8-P4-GDP-0175	GLOBAL_EDL_WORKSPACE_34	202	796	IUH *	GLOBAL_EDL_WORKSPACE_34	candidate-generated-typed-slot
+T310-S8-P4-GDP-0176	GLOBAL_CleanedRec	203	800	struct CleanedREC *	GLOBAL_CleanedRec	candidate-generated-typed-slot
+T310-S8-P4-GDP-0177	GLOBAL_Universe	204	820	struct EntryPointCacheREC* *	GLOBAL_Universe	candidate-generated-typed-slot
+T310-S8-P4-GDP-0178	GLOBAL_EntryPointCache	205	824	struct EntryPointCacheREC* *	GLOBAL_EntryPointCache	candidate-generated-typed-slot
+T310-S8-P4-GDP-0179	GLOBAL_CsLinear	206	828	IU32 *	GLOBAL_CsLinear	candidate-generated-typed-slot
+T310-S8-P4-GDP-0180	GLOBAL_JumpCounter	207	832	ISH *	GLOBAL_JumpCounter	candidate-generated-typed-slot
+T310-S8-P4-GDP-0181	GLOBAL_JumpRestart	208	836	ISH *	GLOBAL_JumpRestart	candidate-generated-typed-slot
+T310-S8-P4-GDP-0182	GLOBAL_JumpCalibrate	209	840	ISH *	GLOBAL_JumpCalibrate	candidate-generated-typed-slot
+T310-S8-P4-GDP-0183	GLOBAL_InitialJumpCounter	210	844	ISH *	GLOBAL_InitialJumpCounter	candidate-generated-typed-slot
+T310-S8-P4-GDP-0184	GLOBAL_minimumInitialVal	211	848	IUH *	GLOBAL_minimumInitialVal	candidate-generated-typed-slot
+T310-S8-P4-GDP-0185	GLOBAL_IretHookStack	212	852	struct IretHookStackREC* *	GLOBAL_IretHookStack	candidate-generated-typed-slot
+T310-S8-P4-GDP-0186	GLOBAL_IretHookStackIndex	213	856	ISH *	GLOBAL_IretHookStackIndex	candidate-generated-typed-slot
+T310-S8-P4-GDP-0187	GLOBAL_InstructionCount	214	860	IUH *	GLOBAL_InstructionCount	candidate-generated-typed-slot
+T310-S8-P4-GDP-0188	GLOBAL_CsSelectorHashTable	215	864	struct CsSelectorHashREC* *	GLOBAL_CsSelectorHashTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0189	GLOBAL_NextFreeUniverseHandle	216	868	IUH *	GLOBAL_NextFreeUniverseHandle	candidate-generated-typed-slot
+T310-S8-P4-GDP-0190	GLOBAL_UniHashTable	217	872	struct UniHashREC* *	GLOBAL_UniHashTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0191	GLOBAL_NextFreeUniHashEntry	218	876	struct UniHashREC* *	GLOBAL_NextFreeUniHashEntry	candidate-generated-typed-slot
+T310-S8-P4-GDP-0192	GLOBAL_NewUniverseBitMapRec	219	880	struct ConstraintBitMapREC *	GLOBAL_NewUniverseBitMapRec	candidate-generated-typed-slot
+T310-S8-P4-GDP-0193	GLOBAL_Constraint2CvMap	220	888	IU32* *	GLOBAL_Constraint2CvMap	candidate-generated-typed-slot
+T310-S8-P4-GDP-0194	GLOBAL_EDL_WORKSPACE_35	226	912	IUH *	GLOBAL_EDL_WORKSPACE_35	candidate-generated-typed-slot
+T310-S8-P4-GDP-0195	GLOBAL_EDL_WORKSPACE_36	227	916	IUH *	GLOBAL_EDL_WORKSPACE_36	candidate-generated-typed-slot
+T310-S8-P4-GDP-0196	GLOBAL_EDL_WORKSPACE_37	228	920	IUH *	GLOBAL_EDL_WORKSPACE_37	candidate-generated-typed-slot
+T310-S8-P4-GDP-0197	GLOBAL_EDL_WORKSPACE_38	229	924	IUH *	GLOBAL_EDL_WORKSPACE_38	candidate-generated-typed-slot
+T310-S8-P4-GDP-0198	GLOBAL_TraceRingRec	230	928	struct TraceRingREC *	GLOBAL_TraceRingRec	candidate-generated-typed-slot
+T310-S8-P4-GDP-0199	GLOBAL_EAXsaved	231	948	IUH *	GLOBAL_EAXsaved	candidate-generated-typed-slot
+T310-S8-P4-GDP-0200	GLOBAL_EBXsaved	232	952	IUH *	GLOBAL_EBXsaved	candidate-generated-typed-slot
+T310-S8-P4-GDP-0201	GLOBAL_ECXsaved	233	956	IUH *	GLOBAL_ECXsaved	candidate-generated-typed-slot
+T310-S8-P4-GDP-0202	GLOBAL_EDXsaved	234	960	IUH *	GLOBAL_EDXsaved	candidate-generated-typed-slot
+T310-S8-P4-GDP-0203	GLOBAL_ESIsaved	235	964	IUH *	GLOBAL_ESIsaved	candidate-generated-typed-slot
+T310-S8-P4-GDP-0204	GLOBAL_EDIsaved	236	968	IUH *	GLOBAL_EDIsaved	candidate-generated-typed-slot
+T310-S8-P4-GDP-0205	GLOBAL_EBPsaved	237	972	IUH *	GLOBAL_EBPsaved	candidate-generated-typed-slot
+T310-S8-P4-GDP-0206	GLOBAL_SimulateContext	240	984	IUH* *	GLOBAL_SimulateContext	candidate-generated-typed-slot
+T310-S8-P4-GDP-0207	GLOBAL_SimulateNestingLevel	241	988	IUH *	GLOBAL_SimulateNestingLevel	candidate-generated-typed-slot
+T310-S8-P4-GDP-0208	GLOBAL_tempEIP	243	996	IU32 *	GLOBAL_tempEIP	candidate-generated-typed-slot
+T310-S8-P4-GDP-0209	GLOBAL_BopTable	248	1016	IU8** *	GLOBAL_BopTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0210	GLOBAL_LxS_hackyfix	249	1020	IUH *	GLOBAL_LxS_hackyfix	candidate-generated-typed-slot
+T310-S8-P4-GDP-0211	GLOBAL_SavedFt	250	1024	IUH *	GLOBAL_SavedFt	candidate-generated-typed-slot
+T310-S8-P4-GDP-0212	GLOBAL_SavedCF	251	1028	IUH *	GLOBAL_SavedCF	candidate-generated-typed-slot
+T310-S8-P4-GDP-0213	GLOBAL_SavedZF	252	1032	IUH *	GLOBAL_SavedZF	candidate-generated-typed-slot
+T310-S8-P4-GDP-0214	GLOBAL_SavedOF	253	1036	IUH *	GLOBAL_SavedOF	candidate-generated-typed-slot
+T310-S8-P4-GDP-0215	GLOBAL_UsedD6	254	1040	IUH *	GLOBAL_UsedD6	candidate-generated-typed-slot
+T310-S8-P4-GDP-0216	GLOBAL_buildOp1	255	1044	IUH *	GLOBAL_buildOp1	candidate-generated-typed-slot
+T310-S8-P4-GDP-0217	GLOBAL_buildOp2	256	1048	IUH *	GLOBAL_buildOp2	candidate-generated-typed-slot
+T310-S8-P4-GDP-0218	GLOBAL_buildOp3	257	1052	IU32 *	GLOBAL_buildOp3	candidate-generated-typed-slot
+T310-S8-P4-GDP-0219	GLOBAL_buildOp4	258	1056	IU32 *	GLOBAL_buildOp4	candidate-generated-typed-slot
+T310-S8-P4-GDP-0220	GLOBAL_buildOp5	259	1060	IUH *	GLOBAL_buildOp5	candidate-generated-typed-slot
+T310-S8-P4-GDP-0221	GLOBAL_EDL_WORKSPACE_39	261	1068	IUH *	GLOBAL_EDL_WORKSPACE_39	candidate-generated-typed-slot
+T310-S8-P4-GDP-0222	GLOBAL_EDL_WORKSPACE_40	262	1072	IUH *	GLOBAL_EDL_WORKSPACE_40	candidate-generated-typed-slot
+T310-S8-P4-GDP-0223	GLOBAL_EDL_WORKSPACE_41	263	1076	IUH *	GLOBAL_EDL_WORKSPACE_41	candidate-generated-typed-slot
+T310-S8-P4-GDP-0224	GLOBAL_EDL_WORKSPACE_42	264	1080	IUH *	GLOBAL_EDL_WORKSPACE_42	candidate-generated-typed-slot
+T310-S8-P4-GDP-0225	GLOBAL_EDL_WORKSPACE_43	265	1084	IUH *	GLOBAL_EDL_WORKSPACE_43	candidate-generated-typed-slot
+T310-S8-P4-GDP-0226	GLOBAL_EDL_WORKSPACE_44	266	1088	IUH *	GLOBAL_EDL_WORKSPACE_44	candidate-generated-typed-slot
+T310-S8-P4-GDP-0227	GLOBAL_EDL_WORKSPACE_45	267	1092	IUH *	GLOBAL_EDL_WORKSPACE_45	candidate-generated-typed-slot
+T310-S8-P4-GDP-0228	GLOBAL_EDL_WORKSPACE_46	268	1096	IUH *	GLOBAL_EDL_WORKSPACE_46	candidate-generated-typed-slot
+T310-S8-P4-GDP-0229	GLOBAL_EDL_WORKSPACE_47	269	1100	IUH *	GLOBAL_EDL_WORKSPACE_47	candidate-generated-typed-slot
+T310-S8-P4-GDP-0230	GLOBAL_EDL_WORKSPACE_48	270	1104	IUH *	GLOBAL_EDL_WORKSPACE_48	candidate-generated-typed-slot
+T310-S8-P4-GDP-0231	GLOBAL_EDL_WORKSPACE_49	271	1108	IUH *	GLOBAL_EDL_WORKSPACE_49	candidate-generated-typed-slot
+T310-S8-P4-GDP-0232	GLOBAL_EDL_WORKSPACE_50	272	1112	IUH *	GLOBAL_EDL_WORKSPACE_50	candidate-generated-typed-slot
+T310-S8-P4-GDP-0233	GLOBAL_EDL_WORKSPACE_51	273	1116	IUH *	GLOBAL_EDL_WORKSPACE_51	candidate-generated-typed-slot
+T310-S8-P4-GDP-0234	GLOBAL_EDL_WORKSPACE_52	274	1120	IUH *	GLOBAL_EDL_WORKSPACE_52	candidate-generated-typed-slot
+T310-S8-P4-GDP-0235	GLOBAL_EDL_WORKSPACE_53	275	1124	IUH *	GLOBAL_EDL_WORKSPACE_53	candidate-generated-typed-slot
+T310-S8-P4-GDP-0236	GLOBAL_EDL_WORKSPACE_54	276	1128	IUH *	GLOBAL_EDL_WORKSPACE_54	candidate-generated-typed-slot
+T310-S8-P4-GDP-0237	GLOBAL_EDL_WORKSPACE_55	277	1132	IUH *	GLOBAL_EDL_WORKSPACE_55	candidate-generated-typed-slot
+T310-S8-P4-GDP-0238	GLOBAL_EDL_WORKSPACE_56	278	1136	IUH *	GLOBAL_EDL_WORKSPACE_56	candidate-generated-typed-slot
+T310-S8-P4-GDP-0239	GLOBAL_EDL_WORKSPACE_57	279	1140	IUH *	GLOBAL_EDL_WORKSPACE_57	candidate-generated-typed-slot
+T310-S8-P4-GDP-0240	GLOBAL_EDL_WORKSPACE_58	280	1144	IUH *	GLOBAL_EDL_WORKSPACE_58	candidate-generated-typed-slot
+T310-S8-P4-GDP-0241	GLOBAL_EDL_WORKSPACE_59	281	1148	IUH *	GLOBAL_EDL_WORKSPACE_59	candidate-generated-typed-slot
+T310-S8-P4-GDP-0242	GLOBAL_EDL_WORKSPACE_60	282	1152	IUH *	GLOBAL_EDL_WORKSPACE_60	candidate-generated-typed-slot
+T310-S8-P4-GDP-0243	GLOBAL_EDL_WORKSPACE_61	283	1156	IUH *	GLOBAL_EDL_WORKSPACE_61	candidate-generated-typed-slot
+T310-S8-P4-GDP-0244	GLOBAL_EDL_WORKSPACE_62	284	1160	IUH *	GLOBAL_EDL_WORKSPACE_62	candidate-generated-typed-slot
+T310-S8-P4-GDP-0245	GLOBAL_EDL_WORKSPACE_63	285	1164	IUH *	GLOBAL_EDL_WORKSPACE_63	candidate-generated-typed-slot
+T310-S8-P4-GDP-0246	GLOBAL_EDL_WORKSPACE_64	286	1168	IUH *	GLOBAL_EDL_WORKSPACE_64	candidate-generated-typed-slot
+T310-S8-P4-GDP-0247	GLOBAL_EDL_WORKSPACE_65	287	1172	IUH *	GLOBAL_EDL_WORKSPACE_65	candidate-generated-typed-slot
+T310-S8-P4-GDP-0248	GLOBAL_EDL_WORKSPACE_66	288	1176	IUH *	GLOBAL_EDL_WORKSPACE_66	candidate-generated-typed-slot
+T310-S8-P4-GDP-0249	GLOBAL_EDL_WORKSPACE_67	289	1180	IUH *	GLOBAL_EDL_WORKSPACE_67	candidate-generated-typed-slot
+T310-S8-P4-GDP-0250	GLOBAL_EDL_WORKSPACE_68	290	1184	IUH *	GLOBAL_EDL_WORKSPACE_68	candidate-generated-typed-slot
+T310-S8-P4-GDP-0251	GLOBAL_EDL_WORKSPACE_69	291	1188	IUH *	GLOBAL_EDL_WORKSPACE_69	candidate-generated-typed-slot
+T310-S8-P4-GDP-0252	GLOBAL_EDL_WORKSPACE_70	292	1192	IUH *	GLOBAL_EDL_WORKSPACE_70	candidate-generated-typed-slot
+T310-S8-P4-GDP-0253	GLOBAL_EDL_WORKSPACE_71	293	1196	IUH *	GLOBAL_EDL_WORKSPACE_71	candidate-generated-typed-slot
+T310-S8-P4-GDP-0254	GLOBAL_EDL_WORKSPACE_72	294	1200	IUH *	GLOBAL_EDL_WORKSPACE_72	candidate-generated-typed-slot
+T310-S8-P4-GDP-0255	GLOBAL_EDL_WORKSPACE_73	295	1204	IUH *	GLOBAL_EDL_WORKSPACE_73	candidate-generated-typed-slot
+T310-S8-P4-GDP-0256	GLOBAL_EDL_WORKSPACE_74	296	1208	IUH *	GLOBAL_EDL_WORKSPACE_74	candidate-generated-typed-slot
+T310-S8-P4-GDP-0257	GLOBAL_EDL_WORKSPACE_75	297	1212	IUH *	GLOBAL_EDL_WORKSPACE_75	candidate-generated-typed-slot
+T310-S8-P4-GDP-0258	GLOBAL_EDL_WORKSPACE_76	298	1216	IUH *	GLOBAL_EDL_WORKSPACE_76	candidate-generated-typed-slot
+T310-S8-P4-GDP-0259	GLOBAL_EDL_WORKSPACE_77	299	1220	IUH *	GLOBAL_EDL_WORKSPACE_77	candidate-generated-typed-slot
+T310-S8-P4-GDP-0260	GLOBAL_EDL_WORKSPACE_78	300	1224	IUH *	GLOBAL_EDL_WORKSPACE_78	candidate-generated-typed-slot
+T310-S8-P4-GDP-0261	GLOBAL_EDL_WORKSPACE_79	301	1228	IUH *	GLOBAL_EDL_WORKSPACE_79	candidate-generated-typed-slot
+T310-S8-P4-GDP-0262	GLOBAL_EDL_WORKSPACE_80	302	1232	IUH *	GLOBAL_EDL_WORKSPACE_80	candidate-generated-typed-slot
+T310-S8-P4-GDP-0263	GLOBAL_EDL_WORKSPACE_81	303	1236	IUH *	GLOBAL_EDL_WORKSPACE_81	candidate-generated-typed-slot
+T310-S8-P4-GDP-0264	GLOBAL_EDL_WORKSPACE_82	304	1240	IUH *	GLOBAL_EDL_WORKSPACE_82	candidate-generated-typed-slot
+T310-S8-P4-GDP-0265	GLOBAL_EDL_WORKSPACE_83	305	1244	IUH *	GLOBAL_EDL_WORKSPACE_83	candidate-generated-typed-slot
+T310-S8-P4-GDP-0266	GLOBAL_EDL_WORKSPACE_84	306	1248	IUH *	GLOBAL_EDL_WORKSPACE_84	candidate-generated-typed-slot
+T310-S8-P4-GDP-0267	GLOBAL_EDL_WORKSPACE_85	307	1252	IUH *	GLOBAL_EDL_WORKSPACE_85	candidate-generated-typed-slot
+T310-S8-P4-GDP-0268	GLOBAL_EDL_WORKSPACE_86	308	1256	IUH *	GLOBAL_EDL_WORKSPACE_86	candidate-generated-typed-slot
+T310-S8-P4-GDP-0269	GLOBAL_EDL_WORKSPACE_87	309	1260	IUH *	GLOBAL_EDL_WORKSPACE_87	candidate-generated-typed-slot
+T310-S8-P4-GDP-0270	GLOBAL_EDL_WORKSPACE_88	310	1264	IUH *	GLOBAL_EDL_WORKSPACE_88	candidate-generated-typed-slot
+T310-S8-P4-GDP-0271	GLOBAL_EDL_WORKSPACE_89	311	1268	IUH *	GLOBAL_EDL_WORKSPACE_89	candidate-generated-typed-slot
+T310-S8-P4-GDP-0272	GLOBAL_EDL_WORKSPACE_90	312	1272	IUH *	GLOBAL_EDL_WORKSPACE_90	candidate-generated-typed-slot
+T310-S8-P4-GDP-0273	GLOBAL_EDL_WORKSPACE_91	313	1276	IUH *	GLOBAL_EDL_WORKSPACE_91	candidate-generated-typed-slot
+T310-S8-P4-GDP-0274	GLOBAL_VGAGlobals	314	1280	struct VGAGLOBALSETTINGS *	GLOBAL_VGAGlobals	candidate-generated-typed-slot
+T310-S8-P4-GDP-0275	GLOBAL_VidMarkFuncTable	315	1436	IUH** *	GLOBAL_VidMarkFuncTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0276	GLOBAL_VidReadFuncTable	316	1440	IUH** *	GLOBAL_VidReadFuncTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0277	GLOBAL_VidWriteFuncTable	317	1444	IUH** *	GLOBAL_VidWriteFuncTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0278	GLOBAL_EDL_WORKSPACE_92	318	1448	IUH *	GLOBAL_EDL_WORKSPACE_92	candidate-generated-typed-slot
+T310-S8-P4-GDP-0279	GLOBAL_EDL_WORKSPACE_93	319	1452	IUH *	GLOBAL_EDL_WORKSPACE_93	candidate-generated-typed-slot
+T310-S8-P4-GDP-0280	GLOBAL_EDL_WORKSPACE_94	320	1456	IUH *	GLOBAL_EDL_WORKSPACE_94	candidate-generated-typed-slot
+T310-S8-P4-GDP-0281	GLOBAL_EDL_WORKSPACE_95	321	1460	IUH *	GLOBAL_EDL_WORKSPACE_95	candidate-generated-typed-slot
+T310-S8-P4-GDP-0282	GLOBAL_EDL_WORKSPACE_96	322	1464	IUH *	GLOBAL_EDL_WORKSPACE_96	candidate-generated-typed-slot
+T310-S8-P4-GDP-0283	GLOBAL_EDL_WORKSPACE_97	323	1468	IUH *	GLOBAL_EDL_WORKSPACE_97	candidate-generated-typed-slot
+T310-S8-P4-GDP-0284	GLOBAL_ActiveVideoWrites	324	1472	struct EVIDWRITES *	GLOBAL_ActiveVideoWrites	candidate-generated-typed-slot
+T310-S8-P4-GDP-0285	GLOBAL_EDL_WORKSPACE_98	325	1520	IUH *	GLOBAL_EDL_WORKSPACE_98	candidate-generated-typed-slot
+T310-S8-P4-GDP-0286	GLOBAL_EDL_WORKSPACE_99	326	1524	IUH *	GLOBAL_EDL_WORKSPACE_99	candidate-generated-typed-slot
+T310-S8-P4-GDP-0287	GLOBAL_EDL_WORKSPACE_100	327	1528	IUH *	GLOBAL_EDL_WORKSPACE_100	candidate-generated-typed-slot
+T310-S8-P4-GDP-0288	GLOBAL_EDL_WORKSPACE_101	328	1532	IUH *	GLOBAL_EDL_WORKSPACE_101	candidate-generated-typed-slot
+T310-S8-P4-GDP-0289	GLOBAL_ActiveVideoReads	329	1536	struct EVIDREADS *	GLOBAL_ActiveVideoReads	candidate-generated-typed-slot
+T310-S8-P4-GDP-0290	GLOBAL_EDL_WORKSPACE_102	330	1556	IUH *	GLOBAL_EDL_WORKSPACE_102	candidate-generated-typed-slot
+T310-S8-P4-GDP-0291	GLOBAL_EDL_WORKSPACE_103	331	1560	IUH *	GLOBAL_EDL_WORKSPACE_103	candidate-generated-typed-slot
+T310-S8-P4-GDP-0292	GLOBAL_EDL_WORKSPACE_104	332	1564	IUH *	GLOBAL_EDL_WORKSPACE_104	candidate-generated-typed-slot
+T310-S8-P4-GDP-0293	GLOBAL_ActiveVideoMarks	333	1568	struct EVIDMARKS *	GLOBAL_ActiveVideoMarks	candidate-generated-typed-slot
+T310-S8-P4-GDP-0294	GLOBAL_MaxIntelPageNumber	334	1584	IU32 *	GLOBAL_MaxIntelPageNumber	candidate-generated-typed-slot
+T310-S8-P4-GDP-0295	GLOBAL_PageDirectoryPtr	335	1588	IU32* *	GLOBAL_PageDirectoryPtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0296	GLOBAL_DebuggerPFLA	336	1592	IU32 *	GLOBAL_DebuggerPFLA	candidate-generated-typed-slot
+T310-S8-P4-GDP-0297	GLOBAL_DebuggerFaultAction	337	1596	IUH *	GLOBAL_DebuggerFaultAction	candidate-generated-typed-slot
+T310-S8-P4-GDP-0298	GLOBAL_InsideDebugger	338	1600	ISH *	GLOBAL_InsideDebugger	candidate-generated-typed-slot
+T310-S8-P4-GDP-0299	GLOBAL_EDL_WORKSPACE_105	339	1604	IUH *	GLOBAL_EDL_WORKSPACE_105	candidate-generated-typed-slot
+T310-S8-P4-GDP-0300	GLOBAL_EDL_WORKSPACE_106	340	1608	IUH *	GLOBAL_EDL_WORKSPACE_106	candidate-generated-typed-slot
+T310-S8-P4-GDP-0301	GLOBAL_EDL_WORKSPACE_107	341	1612	IUH *	GLOBAL_EDL_WORKSPACE_107	candidate-generated-typed-slot
+T310-S8-P4-GDP-0302	GLOBAL_EDL_WORKSPACE_108	342	1616	IUH *	GLOBAL_EDL_WORKSPACE_108	candidate-generated-typed-slot
+T310-S8-P4-GDP-0303	GLOBAL_EDL_WORKSPACE_109	343	1620	IUH *	GLOBAL_EDL_WORKSPACE_109	candidate-generated-typed-slot
+T310-S8-P4-GDP-0304	GLOBAL_EDL_WORKSPACE_110	344	1624	IUH *	GLOBAL_EDL_WORKSPACE_110	candidate-generated-typed-slot
+T310-S8-P4-GDP-0305	GLOBAL_EDL_WORKSPACE_111	345	1628	IUH *	GLOBAL_EDL_WORKSPACE_111	candidate-generated-typed-slot
+T310-S8-P4-GDP-0306	GLOBAL_EDL_WORKSPACE_112	346	1632	IUH *	GLOBAL_EDL_WORKSPACE_112	candidate-generated-typed-slot
+T310-S8-P4-GDP-0307	GLOBAL_EDL_WORKSPACE_113	347	1636	IUH *	GLOBAL_EDL_WORKSPACE_113	candidate-generated-typed-slot
+T310-S8-P4-GDP-0308	GLOBAL_EDL_WORKSPACE_114	348	1640	IUH *	GLOBAL_EDL_WORKSPACE_114	candidate-generated-typed-slot
+T310-S8-P4-GDP-0309	GLOBAL_EDL_WORKSPACE_115	349	1644	IUH *	GLOBAL_EDL_WORKSPACE_115	candidate-generated-typed-slot
+T310-S8-P4-GDP-0310	GLOBAL_EDL_WORKSPACE_116	350	1648	IUH *	GLOBAL_EDL_WORKSPACE_116	candidate-generated-typed-slot
+T310-S8-P4-GDP-0311	GLOBAL_EDL_WORKSPACE_117	351	1652	IUH *	GLOBAL_EDL_WORKSPACE_117	candidate-generated-typed-slot
+T310-S8-P4-GDP-0312	GLOBAL_EDL_WORKSPACE_118	352	1656	IUH *	GLOBAL_EDL_WORKSPACE_118	candidate-generated-typed-slot
+T310-S8-P4-GDP-0313	GLOBAL_EDL_WORKSPACE_119	353	1660	IUH *	GLOBAL_EDL_WORKSPACE_119	candidate-generated-typed-slot
+T310-S8-P4-GDP-0314	GLOBAL_VirtualisationBIOSOffsets	354	1664	struct VirtualisationBIOSOffsetsREC *	GLOBAL_VirtualisationBIOSOffsets	candidate-generated-typed-slot
+T310-S8-P4-GDP-0315	GLOBAL_DelayedPDTEoverwiteList	355	1712	struct DelayedPDTEoverwiteREC* *	GLOBAL_DelayedPDTEoverwiteList	candidate-generated-typed-slot
+T310-S8-P4-GDP-0316	GLOBAL_SasMemoryType	356	1716	IU8* *	GLOBAL_SasMemoryType	candidate-generated-typed-slot
+T310-S8-P4-GDP-0317	GLOBAL_PhysicalPageRecords	357	1720	struct PhysicalPageREC* *	GLOBAL_PhysicalPageRecords	candidate-generated-typed-slot
+T310-S8-P4-GDP-0318	GLOBAL_PhysicalPageMemory	358	1724	IU8** *	GLOBAL_PhysicalPageMemory	candidate-generated-typed-slot
+T310-S8-P4-GDP-0319	GLOBAL_MultipleRecompilationCount	360	1732	IUH *	GLOBAL_MultipleRecompilationCount	candidate-generated-typed-slot
+T310-S8-P4-GDP-0320	GLOBAL_MaxMultipleRecompilation	361	1736	IUH *	GLOBAL_MaxMultipleRecompilation	candidate-generated-typed-slot
+T310-S8-P4-GDP-0321	GLOBAL_FragCounts	366	1756	IU8* *	GLOBAL_FragCounts	candidate-generated-typed-slot
+T310-S8-P4-GDP-0322	GLOBAL_ControlBlock	367	1760	struct CompilationControlREC *	GLOBAL_ControlBlock	candidate-generated-typed-slot
+T310-S8-P4-GDP-0323	GLOBAL_EDL_WORKSPACE_120	368	1776	IUH *	GLOBAL_EDL_WORKSPACE_120	candidate-generated-typed-slot
+T310-S8-P4-GDP-0324	GLOBAL_EDL_WORKSPACE_121	369	1780	IUH *	GLOBAL_EDL_WORKSPACE_121	candidate-generated-typed-slot
+T310-S8-P4-GDP-0325	GLOBAL_EDL_WORKSPACE_122	370	1784	IUH *	GLOBAL_EDL_WORKSPACE_122	candidate-generated-typed-slot
+T310-S8-P4-GDP-0326	GLOBAL_EDL_WORKSPACE_123	371	1788	IUH *	GLOBAL_EDL_WORKSPACE_123	candidate-generated-typed-slot
+T310-S8-P4-GDP-0327	GLOBAL_CompilationBlock	372	1792	struct BLOCK_TO_COMPILE *	GLOBAL_CompilationBlock	candidate-generated-typed-slot
+T310-S8-P4-GDP-0328	GLOBAL_EDL_WORKSPACE_124	373	1824	IUH *	GLOBAL_EDL_WORKSPACE_124	candidate-generated-typed-slot
+T310-S8-P4-GDP-0329	GLOBAL_EDL_WORKSPACE_125	374	1828	IUH *	GLOBAL_EDL_WORKSPACE_125	candidate-generated-typed-slot
+T310-S8-P4-GDP-0330	GLOBAL_EDL_WORKSPACE_126	375	1832	IUH *	GLOBAL_EDL_WORKSPACE_126	candidate-generated-typed-slot
+T310-S8-P4-GDP-0331	GLOBAL_EDL_WORKSPACE_127	376	1836	IUH *	GLOBAL_EDL_WORKSPACE_127	candidate-generated-typed-slot
+T310-S8-P4-GDP-0332	GLOBAL_EDL_WORKSPACE_128	377	1840	IUH *	GLOBAL_EDL_WORKSPACE_128	candidate-generated-typed-slot
+T310-S8-P4-GDP-0333	GLOBAL_EDL_WORKSPACE_129	378	1844	IUH *	GLOBAL_EDL_WORKSPACE_129	candidate-generated-typed-slot
+T310-S8-P4-GDP-0334	GLOBAL_EDL_WORKSPACE_130	379	1848	IUH *	GLOBAL_EDL_WORKSPACE_130	candidate-generated-typed-slot
+T310-S8-P4-GDP-0335	GLOBAL_EDL_WORKSPACE_131	380	1852	IUH *	GLOBAL_EDL_WORKSPACE_131	candidate-generated-typed-slot
+T310-S8-P4-GDP-0336	GLOBAL_EDL_WORKSPACE_132	381	1856	IUH *	GLOBAL_EDL_WORKSPACE_132	candidate-generated-typed-slot
+T310-S8-P4-GDP-0337	GLOBAL_EDL_WORKSPACE_133	382	1860	IUH *	GLOBAL_EDL_WORKSPACE_133	candidate-generated-typed-slot
+T310-S8-P4-GDP-0338	GLOBAL_EDL_WORKSPACE_134	383	1864	IUH *	GLOBAL_EDL_WORKSPACE_134	candidate-generated-typed-slot
+T310-S8-P4-GDP-0339	GLOBAL_EDL_WORKSPACE_135	384	1868	IUH *	GLOBAL_EDL_WORKSPACE_135	candidate-generated-typed-slot
+T310-S8-P4-GDP-0340	GLOBAL_EDL_WORKSPACE_136	385	1872	IUH *	GLOBAL_EDL_WORKSPACE_136	candidate-generated-typed-slot
+T310-S8-P4-GDP-0341	GLOBAL_EDL_WORKSPACE_137	386	1876	IUH *	GLOBAL_EDL_WORKSPACE_137	candidate-generated-typed-slot
+T310-S8-P4-GDP-0342	GLOBAL_EDL_WORKSPACE_138	387	1880	IUH *	GLOBAL_EDL_WORKSPACE_138	candidate-generated-typed-slot
+T310-S8-P4-GDP-0343	GLOBAL_EDL_WORKSPACE_139	388	1884	IUH *	GLOBAL_EDL_WORKSPACE_139	candidate-generated-typed-slot
+T310-S8-P4-GDP-0344	GLOBAL_EDL_WORKSPACE_140	389	1888	IUH *	GLOBAL_EDL_WORKSPACE_140	candidate-generated-typed-slot
+T310-S8-P4-GDP-0345	GLOBAL_EDL_WORKSPACE_141	390	1892	IUH *	GLOBAL_EDL_WORKSPACE_141	candidate-generated-typed-slot
+T310-S8-P4-GDP-0346	GLOBAL_EDL_WORKSPACE_142	391	1896	IUH *	GLOBAL_EDL_WORKSPACE_142	candidate-generated-typed-slot
+T310-S8-P4-GDP-0347	GLOBAL_EDL_WORKSPACE_143	392	1900	IUH *	GLOBAL_EDL_WORKSPACE_143	candidate-generated-typed-slot
+T310-S8-P4-GDP-0348	GLOBAL_EDL_WORKSPACE_144	393	1904	IUH *	GLOBAL_EDL_WORKSPACE_144	candidate-generated-typed-slot
+T310-S8-P4-GDP-0349	GLOBAL_EDL_WORKSPACE_145	394	1908	IUH *	GLOBAL_EDL_WORKSPACE_145	candidate-generated-typed-slot
+T310-S8-P4-GDP-0350	GLOBAL_EDL_WORKSPACE_146	395	1912	IUH *	GLOBAL_EDL_WORKSPACE_146	candidate-generated-typed-slot
+T310-S8-P4-GDP-0351	GLOBAL_EDL_WORKSPACE_147	396	1916	IUH *	GLOBAL_EDL_WORKSPACE_147	candidate-generated-typed-slot
+T310-S8-P4-GDP-0352	GLOBAL_ProtAllocationRec	397	1920	struct ProtAllocationREC *	GLOBAL_ProtAllocationRec	candidate-generated-typed-slot
+T310-S8-P4-GDP-0353	GLOBAL_LightCompiledLRUrec	398	2016	struct BufferIndexREC* *	GLOBAL_LightCompiledLRUrec	candidate-generated-typed-slot
+T310-S8-P4-GDP-0354	GLOBAL_NextPhysicalPage	399	2020	IUH *	GLOBAL_NextPhysicalPage	candidate-generated-typed-slot
+T310-S8-P4-GDP-0355	GLOBAL_FreeMaps	400	2024	struct TranslationMapREC* *	GLOBAL_FreeMaps	candidate-generated-typed-slot
+T310-S8-P4-GDP-0356	GLOBAL_TranslationCache	401	2028	struct TranslationCacheREC* *	GLOBAL_TranslationCache	candidate-generated-typed-slot
+T310-S8-P4-GDP-0357	GLOBAL_CrossPageInstructions	402	2032	IU8* *	GLOBAL_CrossPageInstructions	candidate-generated-typed-slot
+T310-S8-P4-GDP-0358	GLOBAL_IHook	403	2036	IU32 *	GLOBAL_IHook	candidate-generated-typed-slot
+T310-S8-P4-GDP-0359	GLOBAL_InterruptRec	404	2040	struct InterruptREC *	GLOBAL_InterruptRec	candidate-generated-typed-slot
+T310-S8-P4-GDP-0360	GLOBAL_SasReInitSize	406	2052	IU32 *	GLOBAL_SasReInitSize	candidate-generated-typed-slot
+T310-S8-P4-GDP-0361	GLOBAL_EDL_WORKSPACE_148	407	2056	IUH *	GLOBAL_EDL_WORKSPACE_148	candidate-generated-typed-slot
+T310-S8-P4-GDP-0362	GLOBAL_EDL_WORKSPACE_149	408	2060	IUH *	GLOBAL_EDL_WORKSPACE_149	candidate-generated-typed-slot
+T310-S8-P4-GDP-0363	GLOBAL_EDL_WORKSPACE_150	409	2064	IUH *	GLOBAL_EDL_WORKSPACE_150	candidate-generated-typed-slot
+T310-S8-P4-GDP-0364	GLOBAL_EDL_WORKSPACE_151	410	2068	IUH *	GLOBAL_EDL_WORKSPACE_151	candidate-generated-typed-slot
+T310-S8-P4-GDP-0365	GLOBAL_EDL_WORKSPACE_152	411	2072	IUH *	GLOBAL_EDL_WORKSPACE_152	candidate-generated-typed-slot
+T310-S8-P4-GDP-0366	GLOBAL_EDL_WORKSPACE_153	412	2076	IUH *	GLOBAL_EDL_WORKSPACE_153	candidate-generated-typed-slot
+T310-S8-P4-GDP-0367	GLOBAL_QuickTickerRec	413	2080	struct QuickTickerREC *	GLOBAL_QuickTickerRec	candidate-generated-typed-slot
+T310-S8-P4-GDP-0368	GLOBAL_PigSynchCount	414	2104	IUH *	GLOBAL_PigSynchCount	candidate-generated-typed-slot
+T310-S8-P4-GDP-0369	GLOBAL_OutLinePatchBlock	416	2112	IU32* *	GLOBAL_OutLinePatchBlock	candidate-generated-typed-slot
+T310-S8-P4-GDP-0370	GLOBAL_OutLinePatchBlockSize	417	2116	IU32 *	GLOBAL_OutLinePatchBlockSize	candidate-generated-typed-slot
+T310-S8-P4-GDP-0371	GLOBAL_AllBuffers	418	2120	struct BufferIndexREC* *	GLOBAL_AllBuffers	candidate-generated-typed-slot
+T310-S8-P4-GDP-0372	GLOBAL_LightBufferLRU	419	2124	struct BufferIndexREC* *	GLOBAL_LightBufferLRU	candidate-generated-typed-slot
+T310-S8-P4-GDP-0373	GLOBAL_CompilationBuffer	420	2128	struct BufferIndexREC* *	GLOBAL_CompilationBuffer	candidate-generated-typed-slot
+T310-S8-P4-GDP-0374	GLOBAL_PendingDeletions	421	2132	struct BufferIndexREC* *	GLOBAL_PendingDeletions	candidate-generated-typed-slot
+T310-S8-P4-GDP-0375	GLOBAL_FragmentInfoArray	422	2136	struct FragmentInfoREC* *	GLOBAL_FragmentInfoArray	candidate-generated-typed-slot
+T310-S8-P4-GDP-0376	GLOBAL_HostCodeBufferLimit	423	2140	IU32* *	GLOBAL_HostCodeBufferLimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0377	GLOBAL_CopiedCleanups	424	2144	IU8* *	GLOBAL_CopiedCleanups	candidate-generated-typed-slot
+T310-S8-P4-GDP-0378	GLOBAL_FreeDebugInfoList	425	2148	struct DebugInfoREC* *	GLOBAL_FreeDebugInfoList	candidate-generated-typed-slot
+T310-S8-P4-GDP-0379	GLOBAL_CodeBufferOverrun	426	2152	IU32* *	GLOBAL_CodeBufferOverrun	candidate-generated-typed-slot
+T310-S8-P4-GDP-0380	GLOBAL_OverrunHighWaterMark	427	2156	IU32* *	GLOBAL_OverrunHighWaterMark	candidate-generated-typed-slot
+T310-S8-P4-GDP-0381	GLOBAL_BpiCompilationBuffer	429	2164	struct BufferIndexREC* *	GLOBAL_BpiCompilationBuffer	candidate-generated-typed-slot
+T310-S8-P4-GDP-0382	GLOBAL_NextFragmentIndex	430	2168	struct FragmentIndexREC* *	GLOBAL_NextFragmentIndex	candidate-generated-typed-slot
+T310-S8-P4-GDP-0383	GLOBAL_NextFragmentData	431	2172	struct FragmentDataREC* *	GLOBAL_NextFragmentData	candidate-generated-typed-slot
+T310-S8-P4-GDP-0384	GLOBAL_NpxControl	433	2180	IUH *	GLOBAL_NpxControl	candidate-generated-typed-slot
+T310-S8-P4-GDP-0385	GLOBAL_NpxStatus	434	2184	IUH *	GLOBAL_NpxStatus	candidate-generated-typed-slot
+T310-S8-P4-GDP-0386	GLOBAL_NpxFEA	435	2188	IUH *	GLOBAL_NpxFEA	candidate-generated-typed-slot
+T310-S8-P4-GDP-0387	GLOBAL_NpxFDS	436	2192	IUH *	GLOBAL_NpxFDS	candidate-generated-typed-slot
+T310-S8-P4-GDP-0388	GLOBAL_NpxFIP	437	2196	IUH *	GLOBAL_NpxFIP	candidate-generated-typed-slot
+T310-S8-P4-GDP-0389	GLOBAL_NpxFOP	438	2200	IUH *	GLOBAL_NpxFOP	candidate-generated-typed-slot
+T310-S8-P4-GDP-0390	GLOBAL_NpxFCS	439	2204	IUH *	GLOBAL_NpxFCS	candidate-generated-typed-slot
+T310-S8-P4-GDP-0391	GLOBAL_NpxLastSel	440	2208	IUH *	GLOBAL_NpxLastSel	candidate-generated-typed-slot
+T310-S8-P4-GDP-0392	GLOBAL_NpxLastOff	441	2212	IUH *	GLOBAL_NpxLastOff	candidate-generated-typed-slot
+T310-S8-P4-GDP-0393	GLOBAL_npxRounding	444	2224	IUH *	GLOBAL_npxRounding	candidate-generated-typed-slot
+T310-S8-P4-GDP-0394	GLOBAL_tag_or	445	2228	IUH *	GLOBAL_tag_or	candidate-generated-typed-slot
+T310-S8-P4-GDP-0395	GLOBAL_tag_xor	446	2232	IUH *	GLOBAL_tag_xor	candidate-generated-typed-slot
+T310-S8-P4-GDP-0396	GLOBAL_hostFpuExceptions	447	2236	IUH *	GLOBAL_hostFpuExceptions	candidate-generated-typed-slot
+T310-S8-P4-GDP-0397	GLOBAL_MaxBCDValue	448	2240	struct FPSTACKENTRY *	GLOBAL_MaxBCDValue	candidate-generated-typed-slot
+T310-S8-P4-GDP-0398	GLOBAL_FPUpload	449	2256	struct FPSTACKENTRY *	GLOBAL_FPUpload	candidate-generated-typed-slot
+T310-S8-P4-GDP-0399	GLOBAL_ConstTable	450	2272	struct FPSTACKENTRY* *	GLOBAL_ConstTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0400	GLOBAL_FPTemp	451	2276	struct FPSTACKENTRY* *	GLOBAL_FPTemp	candidate-generated-typed-slot
+T310-S8-P4-GDP-0401	GLOBAL_FPUStackBase	452	2280	struct FPSTACKENTRY* *	GLOBAL_FPUStackBase	candidate-generated-typed-slot
+T310-S8-P4-GDP-0402	GLOBAL_TOSPtr	453	2284	struct FPSTACKENTRY* *	GLOBAL_TOSPtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0403	GLOBAL_Npx64BitZero	454	2288	struct FP_I64 *	GLOBAL_Npx64BitZero	candidate-generated-typed-slot
+T310-S8-P4-GDP-0404	GLOBAL_Npx64BitMaxNeg	455	2296	struct FP_I64 *	GLOBAL_Npx64BitMaxNeg	candidate-generated-typed-slot
+T310-S8-P4-GDP-0405	GLOBAL_Npx64BitHalfMaxNeg	456	2304	struct FP_I64 *	GLOBAL_Npx64BitHalfMaxNeg	candidate-generated-typed-slot
+T310-S8-P4-GDP-0406	GLOBAL_Npx64BitVal1	457	2312	struct FP_I64 *	GLOBAL_Npx64BitVal1	candidate-generated-typed-slot
+T310-S8-P4-GDP-0407	GLOBAL_FscaleTable	458	2320	IUH* *	GLOBAL_FscaleTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0408	GLOBAL_CompZeroTable	459	2324	IU32* *	GLOBAL_CompZeroTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0409	GLOBAL_BCDLowNibble	460	2328	struct FP_I64* *	GLOBAL_BCDLowNibble	candidate-generated-typed-slot
+T310-S8-P4-GDP-0410	GLOBAL_BCDHighNibble	461	2332	struct FP_I64* *	GLOBAL_BCDHighNibble	candidate-generated-typed-slot
+T310-S8-P4-GDP-0411	GLOBAL_FpatanTable	462	2336	struct FPSTACKENTRY* *	GLOBAL_FpatanTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0412	GLOBAL_PigSynchTable	463	2340	struct PigSynchREC* *	GLOBAL_PigSynchTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0413	GLOBAL_PigMissTable	464	2344	struct PigSynchREC* *	GLOBAL_PigMissTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0414	GLOBAL_PigSynchPool	465	2348	struct PigSynchREC* *	GLOBAL_PigSynchPool	candidate-generated-typed-slot
+T310-S8-P4-GDP-0415	GLOBAL_EDL_WORKSPACE_154	466	2352	IUH *	GLOBAL_EDL_WORKSPACE_154	candidate-generated-typed-slot
+T310-S8-P4-GDP-0416	GLOBAL_EDL_WORKSPACE_155	467	2356	IUH *	GLOBAL_EDL_WORKSPACE_155	candidate-generated-typed-slot
+T310-S8-P4-GDP-0417	GLOBAL_EDL_WORKSPACE_156	468	2360	IUH *	GLOBAL_EDL_WORKSPACE_156	candidate-generated-typed-slot
+T310-S8-P4-GDP-0418	GLOBAL_EDL_WORKSPACE_157	469	2364	IUH *	GLOBAL_EDL_WORKSPACE_157	candidate-generated-typed-slot
+T310-S8-P4-GDP-0419	GLOBAL_PigCleanedRec	470	2368	struct CleanedREC *	GLOBAL_PigCleanedRec	candidate-generated-typed-slot
+T310-S8-P4-GDP-0420	GLOBAL_SadAX	472	2392	ISH *	GLOBAL_SadAX	candidate-generated-typed-slot
+T310-S8-P4-GDP-0421	GLOBAL_SadBX	473	2396	ISH *	GLOBAL_SadBX	candidate-generated-typed-slot
+T310-S8-P4-GDP-0422	GLOBAL_SadCX	474	2400	ISH *	GLOBAL_SadCX	candidate-generated-typed-slot
+T310-S8-P4-GDP-0423	GLOBAL_SadDX	475	2404	ISH *	GLOBAL_SadDX	candidate-generated-typed-slot
+T310-S8-P4-GDP-0424	GLOBAL_SadBP	476	2408	ISH *	GLOBAL_SadBP	candidate-generated-typed-slot
+T310-S8-P4-GDP-0425	GLOBAL_SadSP	477	2412	ISH *	GLOBAL_SadSP	candidate-generated-typed-slot
+T310-S8-P4-GDP-0426	GLOBAL_SadSI	478	2416	ISH *	GLOBAL_SadSI	candidate-generated-typed-slot
+T310-S8-P4-GDP-0427	GLOBAL_SadDI	479	2420	ISH *	GLOBAL_SadDI	candidate-generated-typed-slot
+T310-S8-P4-GDP-0428	GLOBAL_SadEIP	480	2424	ISH *	GLOBAL_SadEIP	candidate-generated-typed-slot
+T310-S8-P4-GDP-0429	GLOBAL_SadEFLAGS	481	2428	ISH *	GLOBAL_SadEFLAGS	candidate-generated-typed-slot
+T310-S8-P4-GDP-0430	GLOBAL_Parameter1	482	2432	ISH *	GLOBAL_Parameter1	candidate-generated-typed-slot
+T310-S8-P4-GDP-0431	GLOBAL_Parameter2	483	2436	ISH *	GLOBAL_Parameter2	candidate-generated-typed-slot
+T310-S8-P4-GDP-0432	GLOBAL_BpiKnownTable	484	2440	ISH* *	GLOBAL_BpiKnownTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0433	GLOBAL_BpiWorkTable	485	2444	ISH* *	GLOBAL_BpiWorkTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0434	GLOBAL_BpiLabelTable	486	2448	ISH* *	GLOBAL_BpiLabelTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0435	GLOBAL_BpiFragment	487	2452	struct FragmentDataREC* *	GLOBAL_BpiFragment	candidate-generated-typed-slot
+T310-S8-P4-GDP-0436	GLOBAL_BpiCompiledCode	488	2456	IU32* *	GLOBAL_BpiCompiledCode	candidate-generated-typed-slot
+T310-S8-P4-GDP-0437	GLOBAL_BpiCompiledStep	489	2460	IU32* *	GLOBAL_BpiCompiledStep	candidate-generated-typed-slot
+T310-S8-P4-GDP-0438	GLOBAL_BpiCompiledUser	490	2464	IU32* *	GLOBAL_BpiCompiledUser	candidate-generated-typed-slot
+T310-S8-P4-GDP-0439	GLOBAL_OpBpirealFt	491	2468	IUH *	GLOBAL_OpBpirealFt	candidate-generated-typed-slot
+T310-S8-P4-GDP-0440	GLOBAL_OpBpirealF1	492	2472	IUH *	GLOBAL_OpBpirealF1	candidate-generated-typed-slot
+T310-S8-P4-GDP-0441	GLOBAL_OpBpirealF2	493	2476	IUH *	GLOBAL_OpBpirealF2	candidate-generated-typed-slot
+T310-S8-P4-GDP-0442	GLOBAL_OpBpirealF3	494	2480	IUH *	GLOBAL_OpBpirealF3	candidate-generated-typed-slot
+T310-S8-P4-GDP-0443	GLOBAL_OpBpirealUniv	495	2484	struct EntryPointCacheREC* *	GLOBAL_OpBpirealUniv	candidate-generated-typed-slot
+T310-S8-P4-GDP-0444	GLOBAL_OpBpirealWhereAmI	496	2488	IU32* *	GLOBAL_OpBpirealWhereAmI	candidate-generated-typed-slot
+T310-S8-P4-GDP-0445	GLOBAL_EDL_WORKSPACE_158	497	2492	IUH *	GLOBAL_EDL_WORKSPACE_158	candidate-generated-typed-slot
+T310-S8-P4-GDP-0446	GLOBAL_EDL_WORKSPACE_159	498	2496	IUH *	GLOBAL_EDL_WORKSPACE_159	candidate-generated-typed-slot
+T310-S8-P4-GDP-0447	GLOBAL_EDL_WORKSPACE_160	499	2500	IUH *	GLOBAL_EDL_WORKSPACE_160	candidate-generated-typed-slot
+T310-S8-P4-GDP-0448	GLOBAL_EDL_WORKSPACE_161	500	2504	IUH *	GLOBAL_EDL_WORKSPACE_161	candidate-generated-typed-slot
+T310-S8-P4-GDP-0449	GLOBAL_EDL_WORKSPACE_162	501	2508	IUH *	GLOBAL_EDL_WORKSPACE_162	candidate-generated-typed-slot
+T310-S8-P4-GDP-0450	GLOBAL_EDL_WORKSPACE_163	502	2512	IUH *	GLOBAL_EDL_WORKSPACE_163	candidate-generated-typed-slot
+T310-S8-P4-GDP-0451	GLOBAL_EDL_WORKSPACE_164	503	2516	IUH *	GLOBAL_EDL_WORKSPACE_164	candidate-generated-typed-slot
+T310-S8-P4-GDP-0452	GLOBAL_EDL_WORKSPACE_165	504	2520	IUH *	GLOBAL_EDL_WORKSPACE_165	candidate-generated-typed-slot
+T310-S8-P4-GDP-0453	GLOBAL_EDL_WORKSPACE_166	505	2524	IUH *	GLOBAL_EDL_WORKSPACE_166	candidate-generated-typed-slot
+T310-S8-P4-GDP-0454	GLOBAL_EDL_WORKSPACE_167	506	2528	IUH *	GLOBAL_EDL_WORKSPACE_167	candidate-generated-typed-slot
+T310-S8-P4-GDP-0455	GLOBAL_EDL_WORKSPACE_168	507	2532	IUH *	GLOBAL_EDL_WORKSPACE_168	candidate-generated-typed-slot
+T310-S8-P4-GDP-0456	GLOBAL_EDL_WORKSPACE_169	508	2536	IUH *	GLOBAL_EDL_WORKSPACE_169	candidate-generated-typed-slot
+T310-S8-P4-GDP-0457	GLOBAL_EDL_WORKSPACE_170	509	2540	IUH *	GLOBAL_EDL_WORKSPACE_170	candidate-generated-typed-slot
+T310-S8-P4-GDP-0458	GLOBAL_EDL_WORKSPACE_171	510	2544	IUH *	GLOBAL_EDL_WORKSPACE_171	candidate-generated-typed-slot
+T310-S8-P4-GDP-0459	GLOBAL_EDL_WORKSPACE_172	511	2548	IUH *	GLOBAL_EDL_WORKSPACE_172	candidate-generated-typed-slot
+T310-S8-P4-GDP-0460	GLOBAL_EDL_WORKSPACE_173	512	2552	IUH *	GLOBAL_EDL_WORKSPACE_173	candidate-generated-typed-slot
+T310-S8-P4-GDP-0461	GLOBAL_EDL_WORKSPACE_174	513	2556	IUH *	GLOBAL_EDL_WORKSPACE_174	candidate-generated-typed-slot
+T310-S8-P4-GDP-0462	GLOBAL_NpxOpndBuff	514	2560	struct OpndBuffREC *	GLOBAL_NpxOpndBuff	candidate-generated-typed-slot
+T310-S8-P4-GDP-0463	GLOBAL_GLDC_FreeRecs	515	2688	struct GLDC_REC* *	GLOBAL_GLDC_FreeRecs	candidate-generated-typed-slot
+T310-S8-P4-GDP-0464	GLOBAL_GLDC_UsedBuffs	516	2692	struct GLDC_REC* *	GLOBAL_GLDC_UsedBuffs	candidate-generated-typed-slot
+T310-S8-P4-GDP-0465	GLOBAL_GLDC_FreeBuffs	517	2696	struct GLDC_REC* *	GLOBAL_GLDC_FreeBuffs	candidate-generated-typed-slot
+T310-S8-P4-GDP-0466	GLOBAL_NewRingOffsetPtr	518	2700	IUH* *	GLOBAL_NewRingOffsetPtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0467	GLOBAL_GLDC_Index_High_Water	519	2704	IUH *	GLOBAL_GLDC_Index_High_Water	candidate-generated-typed-slot
+T310-S8-P4-GDP-0468	GLOBAL_GLDC_Context_High_Water	520	2708	IUH *	GLOBAL_GLDC_Context_High_Water	candidate-generated-typed-slot
+T310-S8-P4-GDP-0469	GLOBAL_GLDC_IndexPtr	521	2712	struct GLDC_REC** *	GLOBAL_GLDC_IndexPtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0470	GLOBAL_GLDC_CrBase	522	2716	IUH* *	GLOBAL_GLDC_CrBase	candidate-generated-typed-slot
+T310-S8-P4-GDP-0471	GLOBAL_EDL_WORKSPACE_175	523	2720	IUH *	GLOBAL_EDL_WORKSPACE_175	candidate-generated-typed-slot
+T310-S8-P4-GDP-0472	GLOBAL_EDL_WORKSPACE_176	524	2724	IUH *	GLOBAL_EDL_WORKSPACE_176	candidate-generated-typed-slot
+T310-S8-P4-GDP-0473	GLOBAL_EDL_WORKSPACE_177	525	2728	IUH *	GLOBAL_EDL_WORKSPACE_177	candidate-generated-typed-slot
+T310-S8-P4-GDP-0474	GLOBAL_EDL_WORKSPACE_178	526	2732	IUH *	GLOBAL_EDL_WORKSPACE_178	candidate-generated-typed-slot
+T310-S8-P4-GDP-0475	GLOBAL_EDL_WORKSPACE_179	527	2736	IUH *	GLOBAL_EDL_WORKSPACE_179	candidate-generated-typed-slot
+T310-S8-P4-GDP-0476	GLOBAL_EDL_WORKSPACE_180	528	2740	IUH *	GLOBAL_EDL_WORKSPACE_180	candidate-generated-typed-slot
+T310-S8-P4-GDP-0477	GLOBAL_EDL_WORKSPACE_181	529	2744	IUH *	GLOBAL_EDL_WORKSPACE_181	candidate-generated-typed-slot
+T310-S8-P4-GDP-0478	GLOBAL_EDL_WORKSPACE_182	530	2748	IUH *	GLOBAL_EDL_WORKSPACE_182	candidate-generated-typed-slot
+T310-S8-P4-GDP-0479	GLOBAL_GLDC_DUMMY_STORE	531	2752	struct GLDC_REC *	GLOBAL_GLDC_DUMMY_STORE	candidate-generated-typed-slot
+T310-S8-P4-GDP-0480	GLOBAL_EDL_WORKSPACE_183	532	2792	IUH *	GLOBAL_EDL_WORKSPACE_183	candidate-generated-typed-slot
+T310-S8-P4-GDP-0481	GLOBAL_EDL_WORKSPACE_184	533	2796	IUH *	GLOBAL_EDL_WORKSPACE_184	candidate-generated-typed-slot
+T310-S8-P4-GDP-0482	GLOBAL_EDL_WORKSPACE_185	534	2800	IUH *	GLOBAL_EDL_WORKSPACE_185	candidate-generated-typed-slot
+T310-S8-P4-GDP-0483	GLOBAL_EDL_WORKSPACE_186	535	2804	IUH *	GLOBAL_EDL_WORKSPACE_186	candidate-generated-typed-slot
+T310-S8-P4-GDP-0484	GLOBAL_EDL_WORKSPACE_187	536	2808	IUH *	GLOBAL_EDL_WORKSPACE_187	candidate-generated-typed-slot
+T310-S8-P4-GDP-0485	GLOBAL_EDL_WORKSPACE_188	537	2812	IUH *	GLOBAL_EDL_WORKSPACE_188	candidate-generated-typed-slot
+T310-S8-P4-GDP-0486	GLOBAL_GLDC_NULL_STORE	538	2816	struct GLDC_REC *	GLOBAL_GLDC_NULL_STORE	candidate-generated-typed-slot
+T310-S8-P4-GDP-0487	GLOBAL_hackyfix	539	2856	IUH *	GLOBAL_hackyfix	candidate-generated-typed-slot
+T310-S8-P4-GDP-0488	GLOBAL_IDC_ArrayPtr	540	2860	struct IDC_REC* *	GLOBAL_IDC_ArrayPtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0489	GLOBAL_IDC_EntryTableBase	541	2864	struct IDC_ENTRY* *	GLOBAL_IDC_EntryTableBase	candidate-generated-typed-slot
+T310-S8-P4-GDP-0490	GLOBAL_IDC_IdtSeqVal	542	2868	IUH *	GLOBAL_IDC_IdtSeqVal	candidate-generated-typed-slot
+T310-S8-P4-GDP-0491	GLOBAL_IDC_IdtHighWater	543	2872	IUH *	GLOBAL_IDC_IdtHighWater	candidate-generated-typed-slot
+T310-S8-P4-GDP-0492	GLOBAL_IDC_IdtCntrlVal	544	2876	IUH *	GLOBAL_IDC_IdtCntrlVal	candidate-generated-typed-slot
+T310-S8-P4-GDP-0493	GLOBAL_IDC_IdtCntrlValNoCheck	545	2880	IUH *	GLOBAL_IDC_IdtCntrlValNoCheck	candidate-generated-typed-slot
+T310-S8-P4-GDP-0494	GLOBAL_PX_source	551	2904	IUH *	GLOBAL_PX_source	candidate-generated-typed-slot
+T310-S8-P4-GDP-0495	GLOBAL_PX_Cleaned_Eip	553	2912	IU32 *	GLOBAL_PX_Cleaned_Eip	candidate-generated-typed-slot
+T310-S8-P4-GDP-0496	GLOBAL_CInbTable	554	2916	IUH** *	GLOBAL_CInbTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0497	GLOBAL_CInwTable	555	2920	IUH** *	GLOBAL_CInwTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0498	GLOBAL_CIndTable	556	2924	IUH** *	GLOBAL_CIndTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0499	GLOBAL_COutbTable	557	2928	IUH** *	GLOBAL_COutbTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0500	GLOBAL_COutwTable	558	2932	IUH** *	GLOBAL_COutwTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0501	GLOBAL_COutdTable	559	2936	IUH** *	GLOBAL_COutdTable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0502	GLOBAL_InAdapFromPort	560	2940	IU8* *	GLOBAL_InAdapFromPort	candidate-generated-typed-slot
+T310-S8-P4-GDP-0503	GLOBAL_OutAdapFromPort	561	2944	IU8* *	GLOBAL_OutAdapFromPort	candidate-generated-typed-slot
+T310-S8-P4-GDP-0504	GLOBAL_InbFuncWrapper	562	2948	IUH** *	GLOBAL_InbFuncWrapper	candidate-generated-typed-slot
+T310-S8-P4-GDP-0505	GLOBAL_InwFuncWrapper	563	2952	IUH** *	GLOBAL_InwFuncWrapper	candidate-generated-typed-slot
+T310-S8-P4-GDP-0506	GLOBAL_IndFuncWrapper	564	2956	IUH** *	GLOBAL_IndFuncWrapper	candidate-generated-typed-slot
+T310-S8-P4-GDP-0507	GLOBAL_OutbFuncWrapper	565	2960	IUH** *	GLOBAL_OutbFuncWrapper	candidate-generated-typed-slot
+T310-S8-P4-GDP-0508	GLOBAL_OutwFuncWrapper	566	2964	IUH** *	GLOBAL_OutwFuncWrapper	candidate-generated-typed-slot
+T310-S8-P4-GDP-0509	GLOBAL_OutdFuncWrapper	567	2968	IUH** *	GLOBAL_OutdFuncWrapper	candidate-generated-typed-slot
+T310-S8-P4-GDP-0510	GLOBAL_TempDoubleDest	570	2980	IU32 *	GLOBAL_TempDoubleDest	candidate-generated-typed-slot
+T310-S8-P4-GDP-0511	GLOBAL_MaxValidAdaptor	571	2984	IUH *	GLOBAL_MaxValidAdaptor	candidate-generated-typed-slot
+T310-S8-P4-GDP-0512	GLOBAL_EDL_WORKSPACE_189	573	2992	IUH *	GLOBAL_EDL_WORKSPACE_189	candidate-generated-typed-slot
+T310-S8-P4-GDP-0513	GLOBAL_EDL_WORKSPACE_190	574	2996	IUH *	GLOBAL_EDL_WORKSPACE_190	candidate-generated-typed-slot
+T310-S8-P4-GDP-0514	GLOBAL_EDL_WORKSPACE_191	575	3000	IUH *	GLOBAL_EDL_WORKSPACE_191	candidate-generated-typed-slot
+T310-S8-P4-GDP-0515	GLOBAL_EDL_WORKSPACE_192	576	3004	IUH *	GLOBAL_EDL_WORKSPACE_192	candidate-generated-typed-slot
+T310-S8-P4-GDP-0516	GLOBAL_SegDescPtrLookupREC	577	3008	struct DYNAMIC_DESC_PTR_LOOKUP *	GLOBAL_SegDescPtrLookupREC	candidate-generated-typed-slot
+T310-S8-P4-GDP-0517	GLOBAL_EDL_WORKSPACE_193	578	3032	IUH *	GLOBAL_EDL_WORKSPACE_193	candidate-generated-typed-slot
+T310-S8-P4-GDP-0518	GLOBAL_EDL_WORKSPACE_194	579	3036	IUH *	GLOBAL_EDL_WORKSPACE_194	candidate-generated-typed-slot
+T310-S8-P4-GDP-0519	GLOBAL_SegBaseLookupREC	580	3040	struct DYNAMIC_SEG_BASE_LOOKUP *	GLOBAL_SegBaseLookupREC	candidate-generated-typed-slot
+T310-S8-P4-GDP-0520	GLOBAL_HSP	581	3064	IU8* *	GLOBAL_HSP	candidate-generated-typed-slot
+T310-S8-P4-GDP-0521	GLOBAL_ESPsanctuary	582	3068	IU32 *	GLOBAL_ESPsanctuary	candidate-generated-typed-slot
+T310-S8-P4-GDP-0522	GLOBAL_truePopLimit	583	3072	IU8* *	GLOBAL_truePopLimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0523	GLOBAL_innerPopLimit	584	3076	IU8* *	GLOBAL_innerPopLimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0524	GLOBAL_truePushLimit	585	3080	IU8* *	GLOBAL_truePushLimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0525	GLOBAL_innerPushLimit	586	3084	IU8* *	GLOBAL_innerPushLimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0526	GLOBAL_notionalSsBase	587	3088	IU8* *	GLOBAL_notionalSsBase	candidate-generated-typed-slot
+T310-S8-P4-GDP-0527	GLOBAL_stackMask	590	3100	IU32 *	GLOBAL_stackMask	candidate-generated-typed-slot
+T310-S8-P4-GDP-0528	GLOBAL_laInTopPage	592	3108	IU32 *	GLOBAL_laInTopPage	candidate-generated-typed-slot
+T310-S8-P4-GDP-0529	GLOBAL_laInBottomPage	593	3112	IU32 *	GLOBAL_laInBottomPage	candidate-generated-typed-slot
+T310-S8-P4-GDP-0530	GLOBAL_pushScratch	595	3120	IU8* *	GLOBAL_pushScratch	candidate-generated-typed-slot
+T310-S8-P4-GDP-0531	GLOBAL_popScratch	597	3128	IU8* *	GLOBAL_popScratch	candidate-generated-typed-slot
+T310-S8-P4-GDP-0532	GLOBAL_stackJumpCounterCeiling	599	3136	ISH *	GLOBAL_stackJumpCounterCeiling	candidate-generated-typed-slot
+T310-S8-P4-GDP-0533	GLOBAL_stackJumpCounterDebt	600	3140	ISH *	GLOBAL_stackJumpCounterDebt	candidate-generated-typed-slot
+T310-S8-P4-GDP-0534	GLOBAL_prevJumpCounter	601	3144	ISH *	GLOBAL_prevJumpCounter	candidate-generated-typed-slot
+T310-S8-P4-GDP-0535	GLOBAL_newNanoSafeLow	604	3156	IU32 *	GLOBAL_newNanoSafeLow	candidate-generated-typed-slot
+T310-S8-P4-GDP-0536	GLOBAL_newNanoSafeSpan	605	3160	IU32 *	GLOBAL_newNanoSafeSpan	candidate-generated-typed-slot
+T310-S8-P4-GDP-0537	GLOBAL_newHSP	606	3164	IU8* *	GLOBAL_newHSP	candidate-generated-typed-slot
+T310-S8-P4-GDP-0538	GLOBAL_newTruePopLimit	607	3168	IU8* *	GLOBAL_newTruePopLimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0539	GLOBAL_newTruePushLimit	608	3172	IU8* *	GLOBAL_newTruePushLimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0540	GLOBAL_newNotionalSsBase	609	3176	IU8* *	GLOBAL_newNotionalSsBase	candidate-generated-typed-slot
+T310-S8-P4-GDP-0541	GLOBAL_newStackMask	612	3188	IU32 *	GLOBAL_newStackMask	candidate-generated-typed-slot
+T310-S8-P4-GDP-0542	GLOBAL_newLaInBottomPage	613	3192	IU32 *	GLOBAL_newLaInBottomPage	candidate-generated-typed-slot
+T310-S8-P4-GDP-0543	GLOBAL_newPushScratch	615	3200	IU8* *	GLOBAL_newPushScratch	candidate-generated-typed-slot
+T310-S8-P4-GDP-0544	GLOBAL_EOIEnable	617	3208	IU8* *	GLOBAL_EOIEnable	candidate-generated-typed-slot
+T310-S8-P4-GDP-0545	GLOBAL_AddProfilePtr	618	3212	IUH* *	GLOBAL_AddProfilePtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0546	GLOBAL_MaxProfileData	619	3216	IUH* *	GLOBAL_MaxProfileData	candidate-generated-typed-slot
+T310-S8-P4-GDP-0547	GLOBAL_FreeContextHead	620	3220	struct ContextREC* *	GLOBAL_FreeContextHead	candidate-generated-typed-slot
+T310-S8-P4-GDP-0548	GLOBAL_ValidContextHead	621	3224	struct ContextREC* *	GLOBAL_ValidContextHead	candidate-generated-typed-slot
+T310-S8-P4-GDP-0549	GLOBAL_Context	625	3240	struct ContextREC* *	GLOBAL_Context	candidate-generated-typed-slot
+T310-S8-P4-GDP-0550	GLOBAL_tmpESP	626	3244	IUH *	GLOBAL_tmpESP	candidate-generated-typed-slot
+T310-S8-P4-GDP-0551	GLOBAL_intelPtr	627	3248	IU8* *	GLOBAL_intelPtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0552	GLOBAL_functions	628	3252	IU32** *	GLOBAL_functions	candidate-generated-typed-slot
+T310-S8-P4-GDP-0553	GLOBAL_instrCountdown	629	3256	ISH *	GLOBAL_instrCountdown	candidate-generated-typed-slot
+T310-S8-P4-GDP-0554	GLOBAL_nextPlace	630	3260	IU32* *	GLOBAL_nextPlace	candidate-generated-typed-slot
+T310-S8-P4-GDP-0555	GLOBAL_cutBackStackCounter	631	3264	IUH *	GLOBAL_cutBackStackCounter	candidate-generated-typed-slot
+T310-S8-P4-GDP-0556	GLOBAL_nanoCompParameter	632	3268	IUH *	GLOBAL_nanoCompParameter	candidate-generated-typed-slot
+T310-S8-P4-GDP-0557	GLOBAL_intelCopyPtrComp	633	3272	IU8* *	GLOBAL_intelCopyPtrComp	candidate-generated-typed-slot
+T310-S8-P4-GDP-0558	GLOBAL_nrOfBlocksToCompile	634	3276	IUH *	GLOBAL_nrOfBlocksToCompile	candidate-generated-typed-slot
+T310-S8-P4-GDP-0559	GLOBAL_first32constraints	635	3280	IU32 *	GLOBAL_first32constraints	candidate-generated-typed-slot
+T310-S8-P4-GDP-0560	GLOBAL_successorBlockPtr	637	3288	struct BLOCK_RECORD* *	GLOBAL_successorBlockPtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0561	GLOBAL_successorBlockNr	638	3292	IUH *	GLOBAL_successorBlockNr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0562	GLOBAL_nrOfInstrsParsed	639	3296	IUH *	GLOBAL_nrOfInstrsParsed	candidate-generated-typed-slot
+T310-S8-P4-GDP-0563	GLOBAL_intelPtrLimit	640	3300	IU8* *	GLOBAL_intelPtrLimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0564	GLOBAL_blockStartIntelPtr	641	3304	IU8* *	GLOBAL_blockStartIntelPtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0565	GLOBAL_blockStartCodeOffset	642	3308	IUH *	GLOBAL_blockStartCodeOffset	candidate-generated-typed-slot
+T310-S8-P4-GDP-0566	GLOBAL_finalCodeOffset	643	3312	IUH *	GLOBAL_finalCodeOffset	candidate-generated-typed-slot
+T310-S8-P4-GDP-0567	GLOBAL_blockExitCondition	644	3316	IUH *	GLOBAL_blockExitCondition	candidate-generated-typed-slot
+T310-S8-P4-GDP-0568	GLOBAL_blockNr	645	3320	IUH *	GLOBAL_blockNr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0569	GLOBAL_blockPtr	646	3324	struct BLOCK_RECORD* *	GLOBAL_blockPtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0570	GLOBAL_nextPlaceAgain	647	3328	IU32* *	GLOBAL_nextPlaceAgain	candidate-generated-typed-slot
+T310-S8-P4-GDP-0571	GLOBAL_nanoOp3	648	3332	IUH *	GLOBAL_nanoOp3	candidate-generated-typed-slot
+T310-S8-P4-GDP-0572	GLOBAL_sibByte	649	3336	IUH *	GLOBAL_sibByte	candidate-generated-typed-slot
+T310-S8-P4-GDP-0573	GLOBAL_dynamicOffset	650	3340	IU32 *	GLOBAL_dynamicOffset	candidate-generated-typed-slot
+T310-S8-P4-GDP-0574	GLOBAL_eaSegCode	651	3344	IUH *	GLOBAL_eaSegCode	candidate-generated-typed-slot
+T310-S8-P4-GDP-0575	GLOBAL_instrStartIntelPtr	652	3348	IU8* *	GLOBAL_instrStartIntelPtr	candidate-generated-typed-slot
+T310-S8-P4-GDP-0576	GLOBAL_topLevel	653	3352	IUH* *	GLOBAL_topLevel	candidate-generated-typed-slot
+T310-S8-P4-GDP-0577	GLOBAL_defaultPrimaryActions	654	3356	IU32** *	GLOBAL_defaultPrimaryActions	candidate-generated-typed-slot
+T310-S8-P4-GDP-0578	GLOBAL_actualPrimaryActions	655	3360	IU32** *	GLOBAL_actualPrimaryActions	candidate-generated-typed-slot
+T310-S8-P4-GDP-0579	GLOBAL_codeSegment	656	3364	IUH *	GLOBAL_codeSegment	candidate-generated-typed-slot
+T310-S8-P4-GDP-0580	GLOBAL_codeOffset	657	3368	IUH *	GLOBAL_codeOffset	candidate-generated-typed-slot
+T310-S8-P4-GDP-0581	GLOBAL_codeSegmentBase	658	3372	IUH *	GLOBAL_codeSegmentBase	candidate-generated-typed-slot
+T310-S8-P4-GDP-0582	GLOBAL_codeSegmentLimit	659	3376	IUH *	GLOBAL_codeSegmentLimit	candidate-generated-typed-slot
+T310-S8-P4-GDP-0583	GLOBAL_destCodeSegment	660	3380	IUH *	GLOBAL_destCodeSegment	candidate-generated-typed-slot
+T310-S8-P4-GDP-0584	GLOBAL_destCodeOffset	661	3384	IUH *	GLOBAL_destCodeOffset	candidate-generated-typed-slot
+T310-S8-P4-GDP-0585	GLOBAL_linearAddress	662	3388	IU32 *	GLOBAL_linearAddress	candidate-generated-typed-slot
+T310-S8-P4-GDP-0586	GLOBAL_nanoEax	663	3392	IU32 *	GLOBAL_nanoEax	candidate-generated-typed-slot
+T310-S8-P4-GDP-0587	GLOBAL_nanoEcx	664	3396	IU32 *	GLOBAL_nanoEcx	candidate-generated-typed-slot
+T310-S8-P4-GDP-0588	GLOBAL_nanoEdx	665	3400	IU32 *	GLOBAL_nanoEdx	candidate-generated-typed-slot
+T310-S8-P4-GDP-0589	GLOBAL_nanoEbx	666	3404	IU32 *	GLOBAL_nanoEbx	candidate-generated-typed-slot
+T310-S8-P4-GDP-0590	GLOBAL_nanoEsp	667	3408	IU32 *	GLOBAL_nanoEsp	candidate-generated-typed-slot
+T310-S8-P4-GDP-0591	GLOBAL_nanoEbp	668	3412	IU32 *	GLOBAL_nanoEbp	candidate-generated-typed-slot
+T310-S8-P4-GDP-0592	GLOBAL_nanoEsi	669	3416	IU32 *	GLOBAL_nanoEsi	candidate-generated-typed-slot
+T310-S8-P4-GDP-0593	GLOBAL_nanoEdi	670	3420	IU32 *	GLOBAL_nanoEdi	candidate-generated-typed-slot
+T310-S8-P4-GDP-0594	GLOBAL_espToRestore	671	3424	IU32 *	GLOBAL_espToRestore	candidate-generated-typed-slot
+T310-S8-P4-GDP-0595	GLOBAL_entryExitCount	672	3428	IU32 *	GLOBAL_entryExitCount	candidate-generated-typed-slot
+T310-S8-P4-GDP-0596	GLOBAL_instructionCount	673	3432	IU32 *	GLOBAL_instructionCount	candidate-generated-typed-slot
+T310-S8-P4-GDP-0597	GLOBAL_nanoDebugControl	674	3436	IU32 *	GLOBAL_nanoDebugControl	candidate-generated-typed-slot
+T310-S8-P4-GDP-0598	GLOBAL_compilationThreshold	675	3440	IU32 *	GLOBAL_compilationThreshold	candidate-generated-typed-slot
+T310-S8-P4-GDP-0599	GLOBAL_hashTableMask	676	3444	IUH *	GLOBAL_hashTableMask	candidate-generated-typed-slot
+T310-S8-P4-GDP-0600	GLOBAL_blockFreeList	677	3448	IUH *	GLOBAL_blockFreeList	candidate-generated-typed-slot
+T310-S8-P4-GDP-0601	GLOBAL_maxBlocksToCompile	678	3452	IUH *	GLOBAL_maxBlocksToCompile	candidate-generated-typed-slot
+T310-S8-P4-GDP-0602	GLOBAL_bases	679	3456	IU32* *	GLOBAL_bases	candidate-generated-typed-slot
+T310-S8-P4-GDP-0603	GLOBAL_descriptors	680	3460	struct GLDC_REC** *	GLOBAL_descriptors	candidate-generated-typed-slot
+T310-S8-P4-GDP-0604	GLOBAL_blocksToCompile	681	3464	struct BLOCK_TO_COMPILE* *	GLOBAL_blocksToCompile	candidate-generated-typed-slot
+T310-S8-P4-GDP-0605	GLOBAL_byteMemory	682	3468	IU8* *	GLOBAL_byteMemory	candidate-generated-typed-slot
+T310-S8-P4-GDP-0606	GLOBAL_wordMemory	683	3472	IU16* *	GLOBAL_wordMemory	candidate-generated-typed-slot
+T310-S8-P4-GDP-0607	GLOBAL_longMemory	684	3476	IU32* *	GLOBAL_longMemory	candidate-generated-typed-slot
+T310-S8-P4-GDP-0608	GLOBAL_blockHashChains	685	3480	IU16* *	GLOBAL_blockHashChains	candidate-generated-typed-slot
+T310-S8-P4-GDP-0609	GLOBAL_blockRecords	686	3484	struct BLOCK_RECORD* *	GLOBAL_blockRecords	candidate-generated-typed-slot
+T310-S8-P4-GDP-0610	GLOBAL_intelCopyMemoryExec	687	3488	IU8* *	GLOBAL_intelCopyMemoryExec	candidate-generated-typed-slot
+T310-S8-P4-GDP-0611	GLOBAL_intelCopyMemoryComp	688	3492	IU8* *	GLOBAL_intelCopyMemoryComp	candidate-generated-typed-slot
+T310-S8-P4-GDP-0612	GLOBAL_intelCopyMemoryCompEnd	689	3496	IU8* *	GLOBAL_intelCopyMemoryCompEnd	candidate-generated-typed-slot
+T310-S8-P4-GDP-0613	GLOBAL_SfDecrementerVal	690	3500	IUH *	GLOBAL_SfDecrementerVal	candidate-generated-typed-slot
+T310-S8-P4-GDP-0614	GLOBAL_LogicalBaseAddrForIO	692	3508	IU8* *	GLOBAL_LogicalBaseAddrForIO	candidate-generated-typed-slot
+T310-S8-P4-GDP-0615	GLOBAL_CurrentUniverse	693	3512	IU32 *	GLOBAL_CurrentUniverse	candidate-generated-typed-slot
