@@ -35,9 +35,13 @@ Actual worker routines are spun off elsewhere.
 #endif
 
 #include <c_main.h>	/* C CPU definitions-interfaces */
+/* DIVERGENCE(MVDM-HOST-DIV-072): publish the existing owner headers whose
+ * declarations the historical executor previously inferred implicitly. */
+#include <c_addr.h>	/* C CPU address calculation contract */
 #include <c_page.h>	/* Paging Interface */
 #include <c_mem.h>	/* CPU - Memory Interface */
 #include <c_intr.h>	/* Interrupt Interface */
+#include <c_seg.h>	/* Segment-cache and pseudo-descriptor contract */
 #include <c_debug.h>	/* Debug Regs and Breakpoint Interface */
 #include <c_oprnd.h>	/* Operand decoding functions(macros) */
 #include <c_xcptn.h>
@@ -49,6 +53,17 @@ Actual worker routines are spun off elsewhere.
 #include <c_bsic.h>
 #include <ccpupig.h>
 #include <fault.h>
+#include <ica.h>
+#include <timer.h>
+
+/*
+ * DIVERGENCE(MVDM-HOST-DIV-072): these are existing CCPU package bodies
+ * selected by this source profile. The historical source relied on
+ * implicit-int declarations; publish their exact void/no-argument contracts
+ * so x64 cannot infer a host int result.
+ */
+extern void force_yoda(void);
+extern void TakeNpxExceptionInt(void);
 
 #include  <aaa.h>	/* The workers */
 #include  <aad.h>	/*     ...     */
@@ -767,7 +782,9 @@ IFN1(
 
    /* somewhere for exceptions to return to */
 #ifdef NTVDM
-   setjmp(ccpu386ThrdExptnPtr());
+   /* DIVERGENCE(MVDM-HOST-DIV-073): the helper returns jmp_buf *, while
+    * modern setjmp requires the referred-to jmp_buf array object. */
+   setjmp(*ccpu386ThrdExptnPtr());
 #else
    setjmp(next_inst[simulate_level-1]);
 #endif
@@ -4836,7 +4853,7 @@ LOCAL VOID
 
       /* Save current context and invoke a new CPU level */
 #ifdef NTVDM
-      if ( setjmp(ccpu386SimulatePtr()) == 0)
+      if ( setjmp(*ccpu386SimulatePtr()) == 0)
 #else
       if ( setjmp(longjmp_env_stack[simulate_level++]) == 0 )
 #endif
@@ -4903,7 +4920,7 @@ LOCAL VOID
 
       /* Save current context and invoke a new CPU level */
 #ifdef NTVDM
-      if ( setjmp(ccpu386SimulatePtr()) == 0)
+      if ( setjmp(*ccpu386SimulatePtr()) == 0)
 #else
       if ( setjmp(longjmp_env_stack[simulate_level++]) == 0 )
 #endif

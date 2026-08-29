@@ -55,6 +55,13 @@ classified as original 32-bit scalar/signedness issues, not x86/x64 ABI
 transitions. They stay visible and unmodified rather than being hidden by
 casts or warning policy; see the [non-width disposition](etc/evidence/m0-t310-s8-p4-video-nonwidth-warning-disposition-001.md).
 
+**T310 S8 P4:** `c_main.c` now consumes its existing address, segment, PIC,
+timer, debug and NPX call contracts with exact declarations, and passes its
+existing TLS `jmp_buf` frames at the correct pointer level. Formal x86/x64
+builds close those twelve ABI records without suppressing the remaining
+fixed-width guest-scalar warnings; `EDL_fast_bop` remains a distinct undefined
+boundary. See the [executor-call closure](etc/evidence/m0-t310-s8-p4-ccpu-executor-call-contract-closure-001.md).
+
 **T310 S1 closure:** `6a46ee748` establishes the exact original `ccpu386`,
 `host/src` and `obj.vdm` roots, hashes, historical source roles and a
 per-session one-backend contract. It reverses the previous planning assumption
