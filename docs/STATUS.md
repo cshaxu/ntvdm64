@@ -129,6 +129,11 @@ are proven fixed-width byte/word video scalar conversions on both hosts, not
 native-width ABI transitions. They remain visible and source-unchanged; see
 the [fixed-width BIOS-write disposition](etc/evidence/m0-t310-s8-p4-cvidc-fixed-width-bios-write-disposition-001.md).
 
+**T310 S8 P4:** all 42 generated `SINIT012/013` C-video `crules` C4033
+records are a shared source-generated control-result form on both targets,
+not a host-width or callable-ABI transition. They remain visible and await
+C-video execution coverage; see the [generated control disposition](etc/evidence/m0-t310-s8-p4-cvidc-generated-crules-control-disposition-001.md).
+
 **T310 S8 P4:** source review classifies all 100 CCPU `c_main.c` C4057
 operand calls as original fixed 32-bit Intel state, not host-width ABI
 transitions. They remain compiler-visible but leave the x86/x64 repair
