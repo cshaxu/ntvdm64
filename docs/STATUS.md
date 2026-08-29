@@ -658,6 +658,14 @@ changing guest addressing, provider selection or warning policy; see the
 [call-contract evidence]
 (etc/evidence/m0-t310-s8-p4-rtl-fill-memory-ulong-call-contract-closure-001.md).
 
+**T310 S8 P4 original CCPU declaration closure:** selected CCPU FPU,
+addressing, interrupt and production-debug source now imports its own existing
+original declarations instead of relying on implicit calls. Formal x86/x64
+Ninja object builds clear the recovered `d_mem`, `limit_check`, `FLDENV`,
+`check_D`, `printf`, `INTx`, and `do_intrupt` records without changing CPU,
+FPU, interrupt or debug behavior; see the [closure evidence]
+(etc/evidence/m0-t310-s8-p4-ccpu-original-call-declaration-closure-001.md).
+
 **T310 S8 P4 serial/parallel native transport closure:** original SoftPC COM
 and LPT host sources retain their device request order and configuration
 semantics while their private pointer-or-scalar ioctl and worker transports
