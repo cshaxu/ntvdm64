@@ -48,6 +48,11 @@ selected `SEVID` units rebuilt from clean x86/x64 outputs without an implicit
 `CrulesRuntimeError` call; the remaining C-video table/callback and CRT
 clusters remain visible and pending. See the [C-video runtime-error closure](etc/evidence/m0-t310-s8-p4-cvidc-runtime-error-call-contract-closure-001.md).
 
+**T310 S8 P4:** all six selected original C `printf`/`sprintf` implicit-call
+records now use their native variadic declarations. The actual CCPU, C-video
+and host-root Ninja targets rebuilt on both architectures without those C4013
+records or warning suppression; see the [native C varargs closure](etc/evidence/m0-t310-s8-p4-native-c-varargs-call-contract-closure-001.md).
+
 **T310 S8 P4:** source-list recovery proved that the 31 `ga_glue.c` x86/x64
 warnings came from a historical C-video variant deliberately commented out by
 the original `base/video/sources` manifest. The Ninja manifest reader now

@@ -1,5 +1,7 @@
 #include "insignia.h"
 #include "host_def.h"
+/* DIVERGENCE(MVDM-HOST-DIV-076): preserve the native C varargs ABI. */
+#include <stdio.h>
 #include "evidgen.h"
 
 #include "cpu4.h"

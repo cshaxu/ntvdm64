@@ -17,6 +17,8 @@
 ]*/
 #include "insignia.h"
 #include "host_def.h"
+/* DIVERGENCE(MVDM-HOST-DIV-076): preserve the native C varargs ABI. */
+#include <stdio.h>
 #include <math.h>
 #include "cfpu_def.h"
 #include "ckmalloc.h"

@@ -21,6 +21,9 @@
 
 #ifdef CPU_40_STYLE
 
+/* DIVERGENCE(MVDM-HOST-DIV-076): preserve the native C varargs ABI. */
+#include <stdio.h>
+
 #if defined(DBG)
 #define DEBUG_MEM YES_PLEASE
 //#define DEBUG_MEM_DUMP 1
