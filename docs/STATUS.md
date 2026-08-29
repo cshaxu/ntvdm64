@@ -58,6 +58,11 @@ existing private CCPU/Yoda contracts without implicit calls or a conflicting
 CRT-environment redeclaration. Formal x86/x64 CCPU archive rebuilds are clean
 of those four reviewed ABI diagnostics; see the [CCPU private-call closure](etc/evidence/m0-t310-s8-p4-ccpu-private-call-contract-closure-001.md).
 
+**T310 S8 P4:** the original SoftPC startup sequence now has exact CCPU,
+`nt_msscs`, and mouse provider contracts on both host widths. Its formal
+support/host-root archives rebuild without those three implicit calls; see the
+[startup call-contract closure](etc/evidence/m0-t310-s8-p4-softpc-startup-call-contract-closure-001.md).
+
 **T310 S8 P4:** source-list recovery proved that the 31 `ga_glue.c` x86/x64
 warnings came from a historical C-video variant deliberately commented out by
 the original `base/video/sources` manifest. The Ninja manifest reader now

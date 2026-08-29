@@ -51,9 +51,13 @@
 #include "yoda.h"
 //#include "host_env.h"
 
-#ifndef CPU_40_STYLE	/* defined in CpuH */
-extern	void	host_start_cpu();	/* Start up the Intel emulation */
-#endif
+/* DIVERGENCE(MVDM-HOST-DIV-083): CPU_40_STYLE selects the same original
+ * host startup provider but hid its declaration, while the NT DOS-emulation
+ * and mouse providers have no selected public declaration carrier. Publish
+ * their exact existing contracts without changing startup order. */
+extern void host_start_cpu(void);
+extern int InitialiseDosEmulation(int argc, char **argv);
+extern void mouse_driver_initialisation(void);
 
 void init_virtual_drivers IPT0();
 
