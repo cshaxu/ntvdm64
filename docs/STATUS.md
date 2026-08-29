@@ -35,12 +35,14 @@ capability and mirror-purity acceptance**, which verifies every selected
 x86/x64 SoftPC logic path.  S10, not S8, is the final T310 closure gate.  See
 [the amended S8--S10 plan](etc/operations/m0-t310-s8-original-machine-composition-plan-001.md).
 
-**T310 S8 P4:** a fresh cleaned formal MSVC `/MT` baseline now reaches the
-same `349/349` selected-source graph on x86 and x64 with zero errors. Its
-21,547 x64 and 21,423 x86 compiler-warning records remain compiler-visible
-and are scoped only to `mvdm-host` and `mvdm-support` for whole-tree ABI
-classification. This is an audit baseline, not an S8 closure claim; see the
-[current full-tree baseline](etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md).
+**T310 S8 P4:** the refreshed formal MSVC `/MT` baseline reaches the same
+`357/357` selected-source graph on x86 and x64 with zero errors. Its complete
+compiler output was reclassified only for `mvdm-host` and `mvdm-support`:
+19,466 current unique source diagnostics, including 1,035 x86/x64 review
+candidates, remain visible. The live ledger is rebuilt from that output, so a
+warning still emitted today cannot inherit an old `closed-*` result. This is
+an audit baseline, not an S8 closure claim; see the [current full-tree
+baseline](etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md).
 
 **T310 S8 P4:** the selected CPU_40 SAS direct overwrite contract and the
 original `nt_mem` private-pointer diagnostic now compile with their actual

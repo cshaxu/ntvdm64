@@ -22,21 +22,28 @@ graphs were run independently:
 
 The complete logs are retained as disposable target-local build outputs:
 
-- `x64/current-full-r2.log`
-- `x86/current-full-r2.log`
+- `x64/s8-p4-current-full-baseline.log`
+- `x86/s8-p4-current-full-baseline.log`
 
-Each run reached `[349/349]` and reported zero compiler/linker errors.
-The x64 log contains 21,547 `warning C####` records; the x86 log contains
-21,423.  Those totals remain deliberately visible rather than being hidden by
-warning suppression.
+Each run reached `[357/357]` and reported zero compiler/linker errors. The
+same parser used for the governed compiler-warning ledger recorded 40,059 raw
+diagnostic occurrences, yielding 19,466 current unique source diagnostics.
+Of those, 1,035 remain in the x86/x64 source-review worklist. All diagnostics
+remain deliberately visible rather than being hidden by warning suppression.
 
 ## Interpretation
 
 The two targets now establish one current selected-source baseline for P4:
-the same 349-step original SoftPC/MVDM composition graph compiles completely
+the same 357-step original SoftPC/MVDM composition graph compiles completely
 on x86 and x64.  The near-equal warning populations are an audit input, not a
 parity conclusion: a warning may be historical source style, guest-width
 arithmetic, a genuine native-width issue, or a call-contract defect.
+
+The classified ledger is reconciled by exact current source identity
+(`path`, `line`, warning, message). Resolved diagnostics disappear. A warning
+that still occurs is re-opened for current source review rather than inheriting
+an earlier `closed-*` disposition. Only enduring non-width or hard-boundary
+decisions may carry forward when that exact identity still exists.
 
 Subsequent P4 work must read each complete original contract cluster
 (declaration, definition, table/initializer and reached call sites) before a
