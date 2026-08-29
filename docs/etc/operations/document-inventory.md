@@ -12,14 +12,14 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3203 |
+| Documentation records | 3224 |
 | --- | --- |
-| Generated UTC | 2026-08-29T11:36:00.000Z |
+| Generated UTC | 2026-08-29T15:05:58Z |
 
 ## Entries
 
 | Path | Classification | SHA-256 |
-| --- | --- | --- |
+| --- | --- |
 | architecture/overview.md | retained pre-governance evidence | 5a0a1f4247c24eab528da3f3b2839caa6a0743388af49c3bffbdca5480e0b761 |
 | BACKEND-ADOPTION-READINESS.md | retained pre-governance evidence | 059d954d5c10dd4da5e0cf8d57555f9fe1109d7d2e6a3d9a9f9faddd6a9a9f92 |
 | BOP-DISPATCHER-SOURCE-RECOVERY.md | retained pre-governance evidence | cc75f3e9f6051705dd7cec3aaac060d6f31c196c823e26587b795fcfdcdeac41 |
@@ -526,51 +526,53 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p2-original-delay-heartbeat-001.md | indexed supporting material | 5add68d570ce6e4e1d6494401c5056047f5b984853ee7a1b67c99d1ae768723e |
 | etc/evidence/m0-t310-s8-p2-original-ica-lock-binding-001.md | indexed supporting material | 34a03535335655501efd35d1092fa84fe387f518e0b124bce5645b7d31de93c3 |
 | etc/evidence/m0-t310-s8-p2-original-vglob-provider-selection-001.md | indexed supporting material | 99b8e9f652e415bfd25de64564916c4d2348b35e39067b88eb9bad2b3660eddf |
-| etc/evidence/m0-t310-s8-p4-ccpu-host-getenv-abi-closure-001.md | indexed supporting material | 0cb35bbb88534b9660aab09ebb5e4f33c38558b3157aad3c20d15fb78b407066 |
 | etc/evidence/m0-t310-s8-p4-ccpu-eflags-contract-closure-001.md | indexed supporting material | 3208d24a34a8ca2a7dfce91f88a8752f1177a393bcc06be6637ef52443c0f25e |
 | etc/evidence/m0-t310-s8-p4-ccpu-executor-call-contract-closure-001.md | indexed supporting material | f5218c49d000819357a8555b8494f614d6628edc100dfc03bfa98101996a21d7 |
-| etc/evidence/m0-t310-s8-p4-ccpu-original-call-declaration-closure-001.md | indexed supporting material | ff3f80f3ee21968d351d6918c28e8e6f08872888ea5ab06fd8df81ec4921d6dc |
-| etc/evidence/m0-t310-s8-p4-console-menu-call-contract-closure-001.md | indexed supporting material | 81091ca01078c23d29f8ff77efa7000d360ac709a671f907c7b588b6ddd5286e |
-| etc/evidence/m0-t310-s8-p4-console-vdm-registration-call-contract-closure-001.md | indexed supporting material | 1989669b5222b18827f33c2979a94e8ad5436801efc8d857e2d26e9f7129bde9 |
-| etc/evidence/m0-t310-s8-p4-cvidc-runtime-error-call-contract-closure-001.md | indexed supporting material | c123f215a8e046f5bcad77429df84bffcec85066dc37bc22b8fc57a50ab70c07 |
-| etc/evidence/m0-t310-s8-p4-native-c-varargs-call-contract-closure-001.md | indexed supporting material | 1163e06f751a6ba84da66e584501710c488d9a4e163385536d3d098273b3e367 |
-| etc/evidence/m0-t310-s8-p4-ccpu-private-call-contract-closure-001.md | indexed supporting material | 231c1b8793b624b1742d458b52dd4b69dd302a4e |
-| etc/evidence/m0-t310-s8-p4-softpc-startup-call-contract-closure-001.md | indexed supporting material | 930e3b34859f3709f7d860030c3c222814258296 |
-| etc/evidence/m0-t310-s8-p4-pif-lim-call-contract-closure-001.md | indexed supporting material | bad9ac37822afa3c128e216f010c2a934e630485 |
-| etc/evidence/m0-t310-s8-p4-xms-a20-call-contract-closure-001.md | indexed supporting material | 80edea71a683ecd70212b6fc3e8ba16690a74b93 |
-| etc/evidence/m0-t310-s8-p4-cmos-reset-call-contract-closure-001.md | indexed supporting material | 43d68a32afee10f6b7f142aa5523201f9ff03c60 |
-| etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md | indexed supporting material | e8810dcc86642ab470c1db8615f39387ab7c177f840b7167a2bcf74b258571f4 |
 | etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-scalar-disposition-001.md | indexed supporting material | 75c178056fc3369aa9b7a4013b79209500078bb502a7d7b0f791c1e16cdaf692 |
 | etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-signedness-disposition-001.md | indexed supporting material | 0b34d4233c4482ed3d78e37748a0d1a2fc7557ec8724719aeb28f55bf1024e80 |
+| etc/evidence/m0-t310-s8-p4-ccpu-host-getenv-abi-closure-001.md | indexed supporting material | 0cb35bbb88534b9660aab09ebb5e4f33c38558b3157aad3c20d15fb78b407066 |
+| etc/evidence/m0-t310-s8-p4-ccpu-original-call-declaration-closure-001.md | indexed supporting material | ff3f80f3ee21968d351d6918c28e8e6f08872888ea5ab06fd8df81ec4921d6dc |
+| etc/evidence/m0-t310-s8-p4-ccpu-private-call-contract-closure-001.md | indexed supporting material | 232b0bee8ba66cda2221cb12bee3732b7bf34632236d27104d06bcadf21aa832 |
 | etc/evidence/m0-t310-s8-p4-ccpu-vglob-native-pointer-contract-audit-001.md | indexed supporting material | c4aefb8319ce83928df3b34a541a2d2b338563eb30dc98322514ca7be6c46a76 |
 | etc/evidence/m0-t310-s8-p4-ccpu-video-rule-storage-closure-001.md | indexed supporting material | e34f13531503823396b4d985127c56e5010e72e1c54fd5456dc2f8331a15c980 |
+| etc/evidence/m0-t310-s8-p4-cmos-reset-call-contract-closure-001.md | indexed supporting material | 6f2385273fb3f138f9e8a7a248229f84dd82f25ce1aa89c75b4b44c600e0e842 |
+| etc/evidence/m0-t310-s8-p4-command-multisz-pointer-closure-001.md | indexed supporting material | f863b0636250d13e971695468c5603ff830e3a2f8227c8a13423e88f25b812de |
 | etc/evidence/m0-t310-s8-p4-command-rtl-environment-binding-closure-001.md | indexed supporting material | 3d977e3ca11b6d3a28ddf35d4a21a985e0e875d01059185d6218ee2b67665049 |
 | etc/evidence/m0-t310-s8-p4-comms-native-transport-closure-001.md | indexed supporting material | 3fcfe6eccc8d3d5efa5bde6958f0e3a8575bd970730231db0e6e1401980750d0 |
+| etc/evidence/m0-t310-s8-p4-config-scalar-native-width-closure-001.md | indexed supporting material | e1668da3a212bd02d4ce312b13fe186149525cf4df90a22d3397a7064ccbbbf9 |
 | etc/evidence/m0-t310-s8-p4-configuration-guest-profile-conditional-closure-001.md | indexed supporting material | 9271aaf740ce2cc82c35751d30c535bb4c4f3929902d2422cab67d12fbd41b82 |
+| etc/evidence/m0-t310-s8-p4-console-menu-call-contract-closure-001.md | indexed supporting material | 81091ca01078c23d29f8ff77efa7000d360ac709a671f907c7b588b6ddd5286e |
+| etc/evidence/m0-t310-s8-p4-console-vdm-registration-call-contract-closure-001.md | indexed supporting material | 1989669b5222b18827f33c2979a94e8ad5436801efc8d857e2d26e9f7129bde9 |
 | etc/evidence/m0-t310-s8-p4-copy-fnc-native-alignment-closure-001.md | indexed supporting material | a5f81f362cfeb385f9dacd7d8eadcae8d80e0aadc73aed9adce865995bd4d5c5 |
-| etc/evidence/m0-t310-s8-p4-cvidc-generated-interface-audit-001.md | indexed supporting material | e230e94a8be7de07ee935ef9c6382331d296d39968f4dbe567c7842adfdc38c3 |
 | etc/evidence/m0-t310-s8-p4-cvidc-direct-pointer-profile-closure-001.md | indexed supporting material | e3db5fa2325b7f8ce4630efdd3feb7c360921a7e0c043e3e6b632743896b5852 |
+| etc/evidence/m0-t310-s8-p4-cvidc-generated-interface-audit-001.md | indexed supporting material | e230e94a8be7de07ee935ef9c6382331d296d39968f4dbe567c7842adfdc38c3 |
 | etc/evidence/m0-t310-s8-p4-cvidc-generated-table-abi-audit-001.md | indexed supporting material | 8e6ad1e88fa370a11e35ac9ae1712ce56713e71596d6c41f12ff5fff282e2860 |
 | etc/evidence/m0-t310-s8-p4-cvidc-native-callback-contract-closure-002.md | indexed supporting material | ff5cd281ac98e3d6f73453ca7cb4bf6dd2196dc3404632ef5bb34ebde7b23c3b |
+| etc/evidence/m0-t310-s8-p4-cvidc-runtime-error-call-contract-closure-001.md | indexed supporting material | c123f215a8e046f5bcad77429df84bffcec85066dc37bc22b8fc57a50ab70c07 |
 | etc/evidence/m0-t310-s8-p4-cvidc-selected-glue-abi-closure-001.md | indexed supporting material | 6712c8838a1835c5098b7405d55e675bb8099a09669e56c0eca79ff9b082a6a7 |
-| etc/evidence/m0-t310-s8-p4-config-scalar-native-width-closure-001.md | indexed supporting material | e1668da3a212bd02d4ce312b13fe186149525cf4df90a22d3397a7064ccbbbf9 |
 | etc/evidence/m0-t310-s8-p4-ega-word-fill-abi-closure-001.md | indexed supporting material | 2f1222da60e42d962b36e421217f50e5bd75e5a20ba5172f340ab5b152ee6a8d |
-| etc/evidence/m0-t310-s8-p4-rom-scratch-length-closure-001.md | indexed supporting material | 8663a86e26cced3918a288a1316151f466913e0fcb19bee157d62e34d33277f2 |
-| etc/evidence/m0-t310-s8-p4-rtl-fill-memory-ulong-call-contract-closure-001.md | indexed supporting material | ca4e70be43c274f1ab24c72e4728c2e062d87d344b4281925c44a4f0f1c7b044 |
-| etc/evidence/m0-t310-s8-p4-xms-guest-address-abi-closure-001.md | indexed supporting material | be8eb01d6392f0c8257cc640001fd1278cbfeb1058db9c9c700f391c2db0b540 |
-| etc/evidence/m0-t310-s8-p4-storage-controller-call-contract-audit-001.md | indexed supporting material | 5406c783e15e01ffe027c7bc4e0f65a206287a16ca522caed15ff6548ec363db |
 | etc/evidence/m0-t310-s8-p4-emm-storage-id-native-width-closure-001.md | indexed supporting material | 1c4c9125d5f581b9877594856e57c309e0bccd990c9268165cc3d30f50c368a7 |
 | etc/evidence/m0-t310-s8-p4-error-dialog-native-callback-closure-001.md | indexed supporting material | 84dab530ad0e8d473baf72f07506ba3b166f36a9b7e66f3dccee0bc0d99ca4f9 |
 | etc/evidence/m0-t310-s8-p4-fprt-native-buffer-abi-closure-001.md | indexed supporting material | 091464e3a5608087e4b8b2edda07de6b2fda235a998ec99e753de495f0b31b01 |
 | etc/evidence/m0-t310-s8-p4-host-simulate-call-abi-closure-001.md | indexed supporting material | ebace0d79ca95b748fa8075b8f358acc862e092e07e7039145f38e2cf58aae38 |
 | etc/evidence/m0-t310-s8-p4-keyboard-vector-native-backing-abi-closure-001.md | indexed supporting material | 8a3dace306a47de77ab542f411a33725611eb51eea262e2cc79b5e0401c17a6d |
 | etc/evidence/m0-t310-s8-p4-mouse-range-callback-abi-closure-001.md | indexed supporting material | bce7011a14bf8da1bedc66cec61709b9bbffa8e9d22df8aac5c75b147d7074ae |
+| etc/evidence/m0-t310-s8-p4-native-c-varargs-call-contract-closure-001.md | indexed supporting material | 1163e06f751a6ba84da66e584501710c488d9a4e163385536d3d098273b3e367 |
 | etc/evidence/m0-t310-s8-p4-nt-cpu-generated-gdp-debug-closure-001.md | indexed supporting material | 6b07dc94686382b53cf09b11363bd63923241f453840b5b818890a78d9292e77 |
 | etc/evidence/m0-t310-s8-p4-nt-mem-page-span-audit-001.md | indexed supporting material | a6553441bd82c3b4e9515b35b218f5e83eec8219a76e32a57005887a36c626cd |
+| etc/evidence/m0-t310-s8-p4-pif-lim-call-contract-closure-001.md | indexed supporting material | 69eb868576cbf47cf4deb9fbdb40ba99a21907b64c760e502d08020976abb43a |
+| etc/evidence/m0-t310-s8-p4-rom-scratch-length-closure-001.md | indexed supporting material | 8663a86e26cced3918a288a1316151f466913e0fcb19bee157d62e34d33277f2 |
+| etc/evidence/m0-t310-s8-p4-rtl-fill-memory-ulong-call-contract-closure-001.md | indexed supporting material | ca4e70be43c274f1ab24c72e4728c2e062d87d344b4281925c44a4f0f1c7b044 |
+| etc/evidence/m0-t310-s8-p4-sas-native-pointer-call-contract-closure-001.md | indexed supporting material | 2b09d4a9cb3879c6dd9ff743f5f12489297491d02c17b105221c637179408377 |
 | etc/evidence/m0-t310-s8-p4-sas-vector-null-slot-abi-closure-001.md | indexed supporting material | db773b384eb67bf691cc62acb25bccf1040784a3cf55bf93d394485e133c604f |
 | etc/evidence/m0-t310-s8-p4-selected-ccpu-access-table-closure-001.md | indexed supporting material | b4375dba516861da6172fa0b7aa302e783b62b8ce2f3ed4ab85ed128797cd854 |
 | etc/evidence/m0-t310-s8-p4-selected-gdp-layout-audit-001.md | indexed supporting material | ecf3d47df3c26fbb30199a903cbe72e436b8fe87af5fbc7771dcc87b658ae824 |
 | etc/evidence/m0-t310-s8-p4-selected-softpc-contract-reading-001.md | indexed supporting material | 5e087c37da52fa4b2cb486d8584d78db3afde117afa54151a875c97fbea285a8 |
+| etc/evidence/m0-t310-s8-p4-softpc-startup-call-contract-closure-001.md | indexed supporting material | e9f0914f54e790461d60e7352593477725062088f7c7c897413a70c86e534fda |
+| etc/evidence/m0-t310-s8-p4-softpc-video-call-contract-closure-001.md | indexed supporting material | 257c8ade7045993e5569468e7fb3c8d88ab7945477923fde6ce2cb766e9f690c |
+| etc/evidence/m0-t310-s8-p4-softpc-video-read-contract-closure-001.md | indexed supporting material | 7f0c1b0b2ba1af8789d27dbde956810d82d391245d695888b79efa2ffe61ec70 |
+| etc/evidence/m0-t310-s8-p4-softpc-video-word-fill-contract-closure-001.md | indexed supporting material | 27a125a4ffa9ea4fcc5e25a02de7e8833809d82acfb80f013a22dccab09d714c |
+| etc/evidence/m0-t310-s8-p4-storage-controller-call-contract-audit-001.md | indexed supporting material | 5406c783e15e01ffe027c7bc4e0f65a206287a16ca522caed15ff6548ec363db |
 | etc/evidence/m0-t310-s8-p4-storage-private-backing-abi-closure-001.md | indexed supporting material | 8c7dc298328d84f4d2e0af5301fc8da6faf2baed36743ee4f532a98401be7810 |
 | etc/evidence/m0-t310-s8-p4-support-x86-conditional-contract-closure-001.md | indexed supporting material | cd70e9dac3f9de58e1754e7365088e9d4d58dc3f474c3e82cd9ee6b8e5c6bb28 |
 | etc/evidence/m0-t310-s8-p4-system-controller-callback-subcluster-audit-001.md | indexed supporting material | 7cdac3675bf2663115ba54d73bdd0b6b834cdec01c0481faa2099cc0d732db1a |
@@ -583,7 +585,10 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-video-original-call-declaration-closure-001.md | indexed supporting material | d295af69819e24ca799f293b4bdb8a456354202c0c59a2e006a6819f48ad21d0 |
 | etc/evidence/m0-t310-s8-p4-video-profile-source-selection-closure-001.md | indexed supporting material | c75d84e7fdca7cea45a9e10d32b8c954bd8b8b3d0c36f7178650eb9e0a2a2939 |
 | etc/evidence/m0-t310-s8-p4-whole-tree-current-abi-baseline-001.md | indexed supporting material | 63fa6a1564e1fcfd56c9d6262650ee098b0ee7b776c52d890f74e69234f77382 |
+| etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md | indexed supporting material | e8810dcc86642ab470c1db8615f39387ab7c177f840b7167a2bcf74b258571f4 |
 | etc/evidence/m0-t310-s8-p4-whole-tree-formal-architecture-delta-001.md | indexed supporting material | b8d943d5eb42ca920ca57e11c6f6ad60b0adf1ace0030e3a252ba94ba764dc0d |
+| etc/evidence/m0-t310-s8-p4-xms-a20-call-contract-closure-001.md | indexed supporting material | 5f40ea74175157b98ce6faab97e4d48eb93d004b593c7a8cc9ab6a73e1771629 |
+| etc/evidence/m0-t310-s8-p4-xms-guest-address-abi-closure-001.md | indexed supporting material | be8eb01d6392f0c8257cc640001fd1278cbfeb1058db9c9c700f391c2db0b540 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1247,8 +1252,8 @@ content-divergent entries.
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-audit-baseline-001.md | indexed supporting material | b878f9a100fb6862522f3a5ec35977c3d5369032b99e3c4932d25a34ab1f2c46 |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-cluster-ledger.tsv | indexed supporting material | 3b7193da3c22588dff98a25a8b1390c740cc01d3f19274c250f980bb4ca11fed |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-inventory.tsv | indexed supporting material | 9f5be57f4c4a22e0ae88de22427029fb7b4f31ca753868cc8231453109cd6eb0 |
-| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | 69f4fb2086544c9da59a112a69138b153b925b96cc7955bb5449f7852bff61f6 |
-| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification.tsv | indexed supporting material | 5e95e2f4bdd398a7dd7817f48bec5217df7fef86ffb0010dc6b7b37f8b3af0df |
+| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | 850536007068687b28aef585f8e34f909f2a9fa74c5d53f75730964c4a6f2c1c |
+| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification.tsv | indexed supporting material | 50aaab24789e202c10d982b7ed515e9feb778ee783769098bdaf8485733f94b9 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3233,7 +3238,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 48c01eb070da59f454db32f6a3e755c71c5f08addd94dabb3d7cd32fd90917c3 |
+| STATUS.md | principal control document | b3259a1929d8196ce73f9197c1c678d7cb001fda3f3a8b7f4acb427ec0259897 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

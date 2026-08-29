@@ -1130,7 +1130,11 @@ LOCAL SECTION_HEADER *addHeaderEntry IFN5(SECTION_HEADER *, prevHeader,
 
 	if(retAddr != commitAddr)
 	{
-	    printf("V.Allocate failed (%xh) [%lxh :%xh]\n",GetLastError(),commitAddr,commitSize);
+	    /* DIVERGENCE(MVDM-HOST-DIV-093): commitAddr is private native host
+	     * storage, not an Intel address.  Preserve the diagnostic values while
+	     * passing it through the CRT's width-safe pointer conversion. */
+	    printf("V.Allocate failed (%xh) [%p :%xh]\n", GetLastError(),
+	           (void *)commitAddr, commitSize);
 	}
 
 

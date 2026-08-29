@@ -42,6 +42,13 @@ and are scoped only to `mvdm-host` and `mvdm-support` for whole-tree ABI
 classification. This is an audit baseline, not an S8 closure claim; see the
 [current full-tree baseline](etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md).
 
+**T310 S8 P4:** the selected CPU_40 SAS direct overwrite contract and the
+original `nt_mem` private-pointer diagnostic now compile with their actual
+fixed-width/native-width ABIs on both targets. The kernel-VDM-only EMS
+`VdmMapDosMemory`/`VdmUnmapDosMemory` semantics remain separately pending;
+they were not hidden behind declarations. See the [SAS/native-pointer
+closure](etc/evidence/m0-t310-s8-p4-sas-native-pointer-call-contract-closure-001.md).
+
 **T310 S8 P4:** the complete generated C-video assertion-provider contract
 now retains the existing original `ev_glue.c` `void(char *)` ABI. All 31
 selected `SEVID` units rebuilt from clean x86/x64 outputs without an implicit
