@@ -579,6 +579,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-multiple-object-wait-abi-closure-001.md | indexed supporting material | 7a0b87777f69f6f6a1f67f9de82a436ddac5e9ee71884f9f1bc13a2ee0838341 |
 | etc/evidence/m0-t310-s8-p4-native-c-varargs-call-contract-closure-001.md | indexed supporting material | 1163e06f751a6ba84da66e584501710c488d9a4e163385536d3d098273b3e367 |
 | etc/evidence/m0-t310-s8-p4-nt-hard-error-boundary-disposition-001.md | indexed supporting material | 40730796a8da395efeb03d9a5751e837e9fac93660bde08ae397089f93795e88 |
+| etc/evidence/m0-t310-s8-p4-nt-sec-pseudohandle-width-closure-001.md | indexed supporting material | 8f431d21094d3df69c020f7812597b5ae60d75c1a99fc2edd6d1d8f0735fef1a |
 | etc/evidence/m0-t310-s8-p4-nt-aorc-x86-x64-classification-001.md | indexed supporting material | 95f5ebe03cc55e65c2f2c42805af541d1547846fb382e72f9b18cef1864394b1 |
 | etc/evidence/m0-t310-s8-p4-nt-cga-x86-x64-classification-001.md | indexed supporting material | f37b53f3a34e07cfb33a281d7df2f217e7941135bcea04d67f74acb4a165bdc5 |
 | etc/evidence/m0-t310-s8-p4-nt-cpu-generated-gdp-debug-closure-001.md | indexed supporting material | 6b07dc94686382b53cf09b11363bd63923241f453840b5b818890a78d9292e77 |
@@ -613,7 +614,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-video-original-call-declaration-closure-001.md | indexed supporting material | d295af69819e24ca799f293b4bdb8a456354202c0c59a2e006a6819f48ad21d0 |
 | etc/evidence/m0-t310-s8-p4-video-profile-source-selection-closure-001.md | indexed supporting material | c75d84e7fdca7cea45a9e10d32b8c954bd8b8b3d0c36f7178650eb9e0a2a2939 |
 | etc/evidence/m0-t310-s8-p4-whole-tree-current-abi-baseline-001.md | indexed supporting material | 63fa6a1564e1fcfd56c9d6262650ee098b0ee7b776c52d890f74e69234f77382 |
-| etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md | indexed supporting material | e45b02c66bc1806c1cd258414b63eadad8479f92d5d9965db84cfb15de2a80f4 |
+| etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md | indexed supporting material | 0946e6cd0560ea5519f6e0a067080476a2cde09c50a6d35062b1a9e4cccd74d8 |
 | etc/evidence/m0-t310-s8-p4-whole-tree-formal-architecture-delta-001.md | indexed supporting material | b8d943d5eb42ca920ca57e11c6f6ad60b0adf1ace0030e3a252ba94ba764dc0d |
 | etc/evidence/m0-t310-s8-p4-x86gfx-console-video-hole-disposition-001.md | indexed supporting material | 7616f4f901fc2766fd6a18ddd04dff80acb15006053cd174975f91de4c3e7a9c |
 | etc/evidence/m0-t310-s8-p4-xms-a20-call-contract-closure-001.md | indexed supporting material | 5f40ea74175157b98ce6faab97e4d48eb93d004b593c7a8cc9ab6a73e1771629 |
@@ -1282,8 +1283,8 @@ content-divergent entries.
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-audit-baseline-001.md | indexed supporting material | b878f9a100fb6862522f3a5ec35977c3d5369032b99e3c4932d25a34ab1f2c46 |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-cluster-ledger.tsv | indexed supporting material | 3b7193da3c22588dff98a25a8b1390c740cc01d3f19274c250f980bb4ca11fed |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-inventory.tsv | indexed supporting material | 9f5be57f4c4a22e0ae88de22427029fb7b4f31ca753868cc8231453109cd6eb0 |
-| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | 978862e74d46e4e9f7d1fa014a09254445e15d7459a62d8258b86ceb1a9b67cb |
-| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification.tsv | indexed supporting material | 6b1414bc07609ef9261d7d309304fe4383d7dc6e28b2a2cad764ffd6bd9b70b9 |
+| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | 64f3e563c81000345d806172466c6e1d9c55eccb2a766c3935adc7ef3a33b697 |
+| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification.tsv | indexed supporting material | 52f79009876a33ac33e47cfde90a5b2e34254476e3ce92d6476a03f8f391dd8b |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |

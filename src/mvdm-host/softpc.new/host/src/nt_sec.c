@@ -98,7 +98,10 @@ GLOBAL VOID RegainRegenMemory(VOID)
     NTSTATUS status;
 
     if (!(processHandle = NtCurrentProcess()))
-        DisplayErrorTerm(EHS_FUNC_FAILED,(DWORD)processHandle,__FILE__,__LINE__);
+        /* DIVERGENCE(MVDM-HOST-DIV-124): the original error branch can only
+         * observe a null pseudo-handle, which it passed as DWORD zero. Keep
+         * that exact error value without truncating a native HANDLE on x64. */
+        DisplayErrorTerm(EHS_FUNC_FAILED,0u,__FILE__,__LINE__);
 
     status = NtAllocateVirtualMemory(
                                 processHandle,

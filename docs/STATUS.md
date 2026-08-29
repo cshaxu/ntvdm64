@@ -141,6 +141,12 @@ visible as mirror evidence and do not authorize an invented user-mode ABI;
 see the [hard-error boundary
 disposition](etc/evidence/m0-t310-s8-p4-nt-hard-error-boundary-disposition-001.md).
 
+**T310 S8 P4:** `nt_sec` now preserves its original null pseudo-handle error
+value without truncating a native `HANDLE`. The selected non-MONITOR build
+does not thereby claim fullscreen regeneration complete; that future path
+remains a source-shaped physical-mapping recovery. See the [pseudo-handle
+width closure](etc/evidence/m0-t310-s8-p4-nt-sec-pseudohandle-width-closure-001.md).
+
 **T310 S8 P4:** the two selected C-video generated native-word bit tests now
 make their literal operand `IUH`, matching the original `IUH` carrier and its
 existing `sizeof(IUH)` bound on both architectures. Formal x86/x64 object

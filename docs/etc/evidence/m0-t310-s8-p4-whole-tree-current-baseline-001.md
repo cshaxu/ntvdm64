@@ -22,15 +22,15 @@ graphs were run independently:
 
 The complete logs are retained as disposable target-local build outputs:
 
-- `x64/s8-p4-current-full-after-cvidc-rerun.log`
-- `x86/s8-p4-current-full-after-cvidc-rerun.log`
+- `x64/s8-p4-current-full-after-nt-sec.log`
+- `x86/s8-p4-current-full-after-nt-sec.log`
 
 Each run reached `[357/357]` and reported zero compiler/linker errors. The
-same parser used for the governed compiler-warning ledger recorded 40,057 raw
-diagnostic occurrences, yielding 19,464 current unique source diagnostics.
-The two repaired C-video native-word shift records are absent from this fresh
-output. Of the remaining records, 931 are in the x86/x64 source-review
-worklist. All diagnostics
+same parser used for the governed compiler-warning ledger recorded 40,056 raw
+diagnostic occurrences, yielding 19,463 current unique source diagnostics.
+The repaired C-video native-word shift records and the `nt_sec` pseudo-handle
+truncation are absent from this fresh output. Of the remaining records, 926
+are in the x86/x64 source-review worklist. All diagnostics
 remain deliberately visible rather than being hidden by warning suppression.
 
 ## Interpretation
