@@ -30,6 +30,7 @@
 #include "nt_graph.h"
 #include "nt_event.h"
 #include "nt_reset.h"
+#include "nt_pif.h"
 #include "config.h"
 #include <nt_vdd.h>   // DO NOT USE vddsvc.h
 #include <nt_vddp.h>
@@ -40,6 +41,12 @@
 #include <mvdm_umb_address.h>
 
 #include "mvdm_softpc_firmware.h"
+
+/* DIVERGENCE(MVDM-HOST-DIV-084): `emm_mngr.c` is a selected original DOS
+ * owner but no selected public header carries its page-frame initializer.
+ * Publish its exact original boolean/LIM configuration contract here; the
+ * function and its EMS page-frame behavior remain in the original package. */
+extern boolean lim_page_frame_init(PLIM_CONFIG_DATA lim_config_data);
 
 PMEM_HOOK_DATA MemHookHead = NULL;
 PVDD_USER_HANDLERS UserHookHead= NULL;

@@ -63,6 +63,10 @@ of those four reviewed ABI diagnostics; see the [CCPU private-call closure](etc/
 support/host-root archives rebuild without those three implicit calls; see the
 [startup call-contract closure](etc/evidence/m0-t310-s8-p4-softpc-startup-call-contract-closure-001.md).
 
+**T310 S8 P4:** `nt_msscs` now binds its original PIF and EMS page-frame
+providers through their exact contracts; x86/x64 host-root and DOS archives
+rebuild without those implicit calls. See the [PIF/LIM call closure](etc/evidence/m0-t310-s8-p4-pif-lim-call-contract-closure-001.md).
+
 **T310 S8 P4:** source-list recovery proved that the 31 `ga_glue.c` x86/x64
 warnings came from a historical C-video variant deliberately commented out by
 the original `base/video/sources` manifest. The Ninja manifest reader now
