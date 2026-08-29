@@ -30,6 +30,19 @@ must not consume a session mapping-manager token.
   marks baseline records `037010`–`037020`, `037023`–`037024`, and
   `037027`–`037030` as `closed-existing-umb-numeric-address-codec`.
 
+The same current-source read closes the adjacent historical declaration rows:
+
+- `InitialiseDosEmulation` has its explicit native `int` result declaration;
+- the selected source declares `lim_page_frame_init`, `CMDInit`, `XMSInit`,
+  `DBGInit`, `GetPIFConfigFiles`, and the selected SAS binding before use;
+- EMS page-frame values remain bounded guest physical values and are converted
+  to 16-bit segments only after the existing UMB codec validates them.
+
+Those five worklist rows are respectively recorded as
+`closed-existing-source-declaration-binding` and
+`closed-fixed-width-guest-page-frame`; neither requires a new adapter nor a
+mapping-manager identity.
+
 ## Conclusion
 
 The earlier records were baseline diagnostics preceding the existing numeric
