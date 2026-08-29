@@ -459,6 +459,13 @@ small source-subset exception is registered as `MVDM-HOST-DIV-056`.  Fresh
 formal x86/x64 Ninja builds passed.  See the [conditional closure evidence]
 (etc/evidence/m0-t310-s8-p4-configuration-guest-profile-conditional-closure-001.md).
 
+**T310 S8 P4 system-controller callback reading:** the selected CMOS/RTC,
+PIC and quick-event subcluster preserves original typed callback contracts on
+both hosts.  The unselected `cmos.c` and `quick_ev.c` variants remain untouched
+audit inputs; no mapping-manager seam or adapter was invented for host-private
+controller callbacks.  See the [subcluster audit]
+(etc/evidence/m0-t310-s8-p4-system-controller-callback-subcluster-audit-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove
