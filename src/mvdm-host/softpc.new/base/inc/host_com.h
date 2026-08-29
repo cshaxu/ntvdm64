@@ -74,7 +74,7 @@ char value;
 VOID host_com_ioctl(adapter, request, arg)
 int adapter;
 int request;
-long arg;
+ intptr_t arg;
 {
 	Perform control function "request" qualified by "arg" on the
 	communications channel for "adapter".
@@ -194,7 +194,8 @@ IMPORT VOID host_com_fifo_char_read(int adapter);
 
 IMPORT VOID host_com_read IPT3(int,adapter,UTINY *,value, int *,error_mask);
 IMPORT VOID host_com_write IPT2(int,adapter, char,value);
-IMPORT VOID host_com_ioctl IPT3(int,adapter, int,request, LONG,arg);
+/* DIVERGENCE(MVDM-HOST-DIV-068): see the original host implementation. */
+IMPORT VOID host_com_ioctl IPT3(int,adapter, int,request, intptr_t,arg);
 
 #ifdef NTVDM
 extern	boolean host_com_check_adapter(int adapter);

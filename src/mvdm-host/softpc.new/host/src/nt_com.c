@@ -46,7 +46,7 @@ GLOBAL void host_com_init(int);
 GLOBAL CPU void host_com_close IPT1(int, adapter);
 GLOBAL RXCPU VOID host_com_read IPT3(int, adapter, UTINY *, data, int *, error);
 GLOBAL RXCPU void host_com_write IPT2(int, adapter, char, data);
-GLOBAL void host_com_ioctl(int, int, long);
+GLOBAL void host_com_ioctl(int, int, intptr_t);
 GLOBAL void host_com_reset(int);
 
 GLOBAL void host_com_lock(int adapter);
@@ -378,7 +378,7 @@ GLOBAL CPU int host_com_open(int adapter)
     }
     current->rxwindow_size = DEFAULT_RXWINDOW_SIZE;
     current->bytes_in_rxwindow = 0;
-    current->SyncWrite = (BOOL)config_inquire(C_COM_SYNCWRITE, NULL);
+    current->SyncWrite = (BOOL)(ULONG_PTR)config_inquire(C_COM_SYNCWRITE, NULL);
     /*:: Find out which ICA controller and line are used by this comms port */
 
     com_int_data(adapter, &current->controller, &current->line);
@@ -418,7 +418,7 @@ GLOBAL CPU int host_com_open(int adapter)
     current->SignalRXThread = (DWORD) 0;
     /*:::::::::::::::::::::::::::::::::::::::::::: Get TX buffer thresholds */
 
-    current->max_tx_threshold = (short)config_inquire(C_COM_TXBUFFER_SIZE, NULL);
+    current->max_tx_threshold = (short)(ULONG_PTR)config_inquire(C_COM_TXBUFFER_SIZE, NULL);
     if (!current->max_tx_threshold || current->max_tx_threshold > TX_MAX_BUFFER)
 	current->max_tx_threshold = TX_MAX_BUFFER;
 
@@ -600,7 +600,7 @@ GLOBAL CPU int host_com_open(int adapter)
     if(!(current->RXThreadHandle = CreateThread(NULL,
 						8192,
 						PollCommsThread,
-						(LPVOID)adapter,
+						(LPVOID)(ULONG_PTR)adapter,
 						0,
 						&current->RXThreadID)))
     {
@@ -1025,7 +1025,11 @@ CPU int SendXOFFIoctlToDriver(int adapter)
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 
-GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
+/* DIVERGENCE(MVDM-HOST-DIV-068): the original internal COM ioctl carried
+ * either a scalar or host-side output pointer through 32-bit long. Keep the
+ * command values and all source ordering, but use intptr_t as the one native
+ * transport; it is not a guest address or a durable host identity. */
+GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, intptr_t, arg)
 {
     UCHAR host_modem, error;
     MODEM_STATUS_REG MSR;
@@ -1078,16 +1082,19 @@ GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
 	/*::::::::::::::::::::::::::::::::::::::::: Process baud rate change */
 
 	case HOST_COM_BAUD:
-
-	    if (!FastCommSetBaudRate(current->handle, arg))
 	    {
-		sprintf(BaudRateStr, "(%d)", arg);
+	    DWORD baud_rate = (DWORD)arg;
+
+	    if (!FastCommSetBaudRate(current->handle, baud_rate))
+	    {
+		sprintf(BaudRateStr, "(%lu)", baud_rate);
 		host_error(EHS_UNSUPPORTED_BAUD, ERR_CONT, BaudRateStr);
-		always_trace1("set BAUD failed - SetBaudRate:%d", arg);
+		always_trace1("set BAUD failed - SetBaudRate:%lu", baud_rate);
 	    }
-	    current->ComStates.BaudRate = (DWORD)arg;
+	    current->ComStates.BaudRate = baud_rate;
 
 	    break;
+	    }
 
 	/*:::::::::::::::::::::::::::::::::::::::: Process DTR line requests */
 
@@ -1410,7 +1417,7 @@ DWORD RX GetCharsFromDriver(int adapter)
 
 DWORD PollCommsThread(PVOID pv)
 {
-   DWORD adapter = (DWORD)pv;
+   DWORD adapter = (DWORD)(ULONG_PTR)pv;
    DWORD dwRet = (WORD)-1;
 
    try {

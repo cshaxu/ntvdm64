@@ -180,7 +180,7 @@ VOID host_set_inactivate_counter(int adapter)
 
     /*::::::::::::::::::::::::::::::::::::::::::: Calculate closedown count */
 
-    close_in_ms = ((int) config_inquire(C_AUTOFLUSH_DELAY, NULL)) * 1000;
+    close_in_ms = ((int)(ULONG_PTR)config_inquire(C_AUTOFLUSH_DELAY, NULL)) * 1000;
 
     lpt->inactive_trigger = close_in_ms / (SYSTEM_TICK_INTV/1000);
 

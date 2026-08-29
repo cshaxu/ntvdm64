@@ -537,6 +537,22 @@ depends on kernel/CSRSS `NtRaiseHardError`; it is recorded as a physical
 non-runtime boundary rather than emulated in the mirror. See the
 [error-dialog evidence](etc/evidence/m0-t310-s8-p4-error-dialog-native-callback-closure-001.md).
 
+**T310 S8 P4 serial/parallel native transport closure:** original SoftPC COM
+and LPT host sources retain their device request order and configuration
+semantics while their private pointer-or-scalar ioctl and worker transports
+become native-width. Formal x86/x64 object builds clear the selected pointer
+truncation and mismatched-width diagnostics without introducing a mapping
+manager or a new adapter. See the [serial/parallel evidence]
+(etc/evidence/m0-t310-s8-p4-comms-native-transport-closure-001.md).
+
+**T310 S8 P4 serial/parallel native transport closure:** original SoftPC COM
+and LPT host sources retain their device request order and configuration
+semantics while their private pointer-or-scalar ioctl and worker transports
+become native-width. Formal x86/x64 object builds clear the selected pointer
+truncation and mismatched-width diagnostics without introducing a mapping
+manager or a new adapter. See the [serial/parallel evidence]
+(etc/evidence/m0-t310-s8-p4-comms-native-transport-closure-001.md).
+
 **T310 S8 P4 error-dialog native callback closure:** the selected original
 `nt_error.c` direct-access suppression and user-dialog paths now retain their
 original category/worker ordering while using native-width TLS, `HWND`, dialog
