@@ -334,6 +334,15 @@ alertable-thread wake-up. This does not claim heartbeat/PIC/RTC/BDA execution;
 the original timer and ICA source remains the active P2 owner. See the
 [heartbeat-alert binding](etc/evidence/m0-t310-s8-p2-heartbeat-alert-binding-001.md).
 
+**T310 S8 P2 P3:** the exact original non-`MONITOR` `DelayHeartBeat` event
+contract in `nt_timer.c` now has direct formal MSVC `/MT` x86/x64 evidence:
+the selected original body remains pending through suspend and returns
+`STATUS_SUCCESS` only after resume. This establishes the source-selected
+simple wait contract, not an architecture-derived `#ifndef i386` shortcut.
+BDA backing, PIT/RTC, PIC/ICA delivery, `TimerInit`/teardown and every
+MONITOR/X86GFX/WOW path remain unclosed original-owner work. See the
+[DelayHeartBeat evidence](etc/evidence/m0-t310-s8-p2-original-delay-heartbeat-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove
