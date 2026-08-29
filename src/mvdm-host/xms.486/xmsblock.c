@@ -12,6 +12,7 @@
  */
 
 #include "xms.h"
+#include "mvdm_xms_memory.h"
 #include <memory.h>
 #include <string.h>
 #include <xmssvc.h>
@@ -176,36 +177,14 @@ ULONG NewSize;
 
 VOID xmsMoveBlock (VOID)
 {
-PBYTE	pExtMoveInfo,pSrc,pDst;
-ULONG	cbTransfer,SoftpcBase, DstSegOff;
-
-    pExtMoveInfo = (PBYTE) GetVDMAddr(getSS(),getBP());
-    (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;
-    cbTransfer = (FETCHDWORD(*(PULONG)pExtMoveInfo));
-    cbTransfer *= 2;					// Get in bytes
-    (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;
-    (DWORD)pSrc = FETCHDWORD(*(PULONG)pExtMoveInfo);
-    (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;
-    (DWORD)pDst = FETCHDWORD(*(PULONG)pExtMoveInfo);
-
-    // Yes, we could use memmov for handling the overlapping regions
-    // but XMS spec wants memcpy behaviour.
-
-#ifdef i386
-    RtlCopyMemory (pDst,pSrc,cbTransfer);
-#else
-    SoftpcBase = (ULONG) GetVDMAddr (0,0);
-    RtlCopyMemory((PVOID)((ULONG)pDst + SoftpcBase),
-	   (PVOID)((ULONG)pSrc + SoftpcBase),
-	   cbTransfer);
-    // if we touched the intel memory, tell the emulator to flush its cache
-    // WARNING!!!! Donot use Sim32FlushVDMPoiner unless you know the exact segment
-    // address. In this case, we have no idea what the segment value is, all we
-    // know is its "linear address".
-    // BUGBUG verify whether we can ignore the case with pDst > 0x110000
-    sas_overwrite_memory(pDst, cbTransfer);
-
-#endif
+    /* DIVERGENCE MVDM-HOST-DIV-077: the original 32-bit host process mapped
+       every VDM byte into its own address space.  Preserve the descriptor
+       layout, forward-copy order and AX success contract through the current
+       session's bounded guest-memory mapping/lease instead of truncating a
+       host pointer on x64.  An unrepresentable lease is a controlled session
+       stop, not a fabricated XMS guest error code. */
+    if (!mvdm_xms_move_block(getSS(), getBP()))
+        return;
     setAX(1);
     return;
 }

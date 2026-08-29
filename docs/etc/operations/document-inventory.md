@@ -544,6 +544,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-config-scalar-native-width-closure-001.md | indexed supporting material | e1668da3a212bd02d4ce312b13fe186149525cf4df90a22d3397a7064ccbbbf9 |
 | etc/evidence/m0-t310-s8-p4-ega-word-fill-abi-closure-001.md | indexed supporting material | 2f1222da60e42d962b36e421217f50e5bd75e5a20ba5172f340ab5b152ee6a8d |
 | etc/evidence/m0-t310-s8-p4-rom-scratch-length-closure-001.md | indexed supporting material | 8663a86e26cced3918a288a1316151f466913e0fcb19bee157d62e34d33277f2 |
+| etc/evidence/m0-t310-s8-p4-xms-guest-address-abi-closure-001.md | indexed supporting material | be8eb01d6392f0c8257cc640001fd1278cbfeb1058db9c9c700f391c2db0b540 |
 | etc/evidence/m0-t310-s8-p4-storage-controller-call-contract-audit-001.md | indexed supporting material | 5406c783e15e01ffe027c7bc4e0f65a206287a16ca522caed15ff6548ec363db |
 | etc/evidence/m0-t310-s8-p4-emm-storage-id-native-width-closure-001.md | indexed supporting material | 1c4c9125d5f581b9877594856e57c309e0bccd990c9268165cc3d30f50c368a7 |
 | etc/evidence/m0-t310-s8-p4-error-dialog-native-callback-closure-001.md | indexed supporting material | 84dab530ad0e8d473baf72f07506ba3b166f36a9b7e66f3dccee0bc0d99ca4f9 |
@@ -3219,7 +3220,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 231621e4ce820ce27d88b988ab6a1b6ba670eab5162370b3eedc644e4a7b8227 |
+| STATUS.md | principal control document | 2051396cc9522a1533f747e3e8358e467a50fbe2ea3ff053391727cf61b68538 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

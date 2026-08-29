@@ -67,6 +67,14 @@ message length in native-width temporaries until its existing bounded guard
 proves the final `sys_addr` result. The x86/x64 ROM rebuild is free of the two
 former C4267 entries; see the [ROM scratch-length closure](etc/evidence/m0-t310-s8-p4-rom-scratch-length-closure-001.md).
 
+**T310 S8 P4:** the selected original XMS move and UMB paths no longer cast
+guest numeric addresses through host pointers. `xmsMoveBlock` retains its
+original descriptor order, forward-copy and AX success contract through the
+session's bounded guest-memory lease; UMB conversion reuses the existing
+numeric physical-address codec. Focused formal `/MT` x86/x64 XMS and adapter
+compiles close the former C4213/C4311/C4312 records without suppressing the
+remaining XMS call-contract warnings; see the [XMS guest-address closure](etc/evidence/m0-t310-s8-p4-xms-guest-address-abi-closure-001.md).
+
 **T310 S8 P4:** the formal full x64 graph exposed one additional selected
 base/video declaration mismatch: `ega_writ.c` declared the word-fill EVID glue
 with `IU8` even though its original body and handler slot use `IU16`.
