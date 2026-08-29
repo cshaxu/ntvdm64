@@ -116,10 +116,22 @@ typedef struct
 	ULONG	rotate;
 } VGA_GLOBALS;
 
+#ifdef C_VID
+struct VGAGLOBALSETTINGS;
+#endif
+
 extern struct EGA_CPU_GLOBALS
 {
 #ifndef	HOST_VGA_GLOBALS
+	/* DIVERGENCE(MVDM-HOST-DIV-062): the original C-video profile stores its
+	 * generated VGAGLOBALSETTINGS carrier here.  NT4's permissive C accepted
+	 * assignment to the sibling VGA_GLOBALS view; retain that view for other
+	 * profiles, but give C_VID its actual generated source type. */
+#ifdef C_VID
+	struct VGAGLOBALSETTINGS	*globals;
+#else
 	VGA_GLOBALS	*globals;
+#endif
 #endif
 	ULONG		saved_state;		/* Last value of EGA_CPU.ega_state.state */
 	ULONG		saved_mode_chain;		/* Last value of mode/chain combined */

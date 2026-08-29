@@ -709,7 +709,10 @@ setMarkPointers IFN1(IUH, markset)
 }
 
 GLOBAL void
-write_bios_byte IFN2(IU8, eaVal, IU32, eaOff)
+/* DIVERGENCE(MVDM-HOST-DIV-062): base/video declares both BIOS chain-write
+ * callbacks as `(ULONG, ULONG)`.  Keep the original low-byte C-video rule
+ * selection below, but publish that exact outer callback ABI. */
+write_bios_byte IFN2(ULONG, eaVal, ULONG, eaOff)
 {
 	jccc_parm1 = (IUH)eaOff;
 	jccc_parm2 = (IUH)eaVal;
@@ -719,7 +722,7 @@ write_bios_byte IFN2(IU8, eaVal, IU32, eaOff)
 }
 
 GLOBAL void
-write_bios_word IFN2(IU16, eaVal, IU32, eaOff)
+write_bios_word IFN2(ULONG, eaVal, ULONG, eaOff)
 {
 	jccc_parm1 = (IUH)eaOff;
 	jccc_parm2 = (IUH)eaVal;

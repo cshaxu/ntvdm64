@@ -4,6 +4,16 @@
 ]*/
 
 
+/* DIVERGENCE(MVDM-HOST-DIV-062): the generated NT4 vector represented
+ * callback values as generic IHP because 32-bit function and data pointers
+ * shared a representation.  The original C-video tables and ga_mark.h prove
+ * these four callback forms.  Preserve the generated rule-word transport,
+ * but publish the actual C callback contracts so x86 and x64 do not silently
+ * convert function pointers through void pointers. */
+typedef IU32 (*CVIDC_READ_BYTE_CALLBACK) IPT1(IU32, eaOff);
+typedef IU32 (*CVIDC_MARK_CALLBACK) IPT1(IU32, eaOff);
+typedef void (*CVIDC_MARK_STRING_CALLBACK) IPT2(IU32, eaOff, IU32, count);
+
 struct	VideoVector	{
 	IU32	(*GetVideolatches)	IPT0();
 	IU8 *	(*GetVideorplane)	IPT0();
@@ -24,9 +34,9 @@ struct	VideoVector	{
 	IU32	(*GetVideodirty_low)	IPT0();
 	IU32	(*GetVideodirty_high)	IPT0();
 	IU8 *	(*GetVideovideo_copy)	IPT0();
-	IHP	(*GetVideomark_byte)	IPT0();
-	IHP	(*GetVideomark_word)	IPT0();
-	IHP	(*GetVideomark_string)	IPT0();
+	CVIDC_MARK_CALLBACK	(*GetVideomark_byte)	IPT0();
+	CVIDC_MARK_CALLBACK	(*GetVideomark_word)	IPT0();
+	CVIDC_MARK_STRING_CALLBACK	(*GetVideomark_string)	IPT0();
 	IU32	(*GetVideoread_shift_count)	IPT0();
 	IU32	(*GetVideoread_mapped_plane)	IPT0();
 	IU32	(*GetVideocolour_comp)	IPT0();
@@ -36,7 +46,7 @@ struct	VideoVector	{
 	IU32	(*GetVideorotate)	IPT0();
 	IU32	(*GetVideocalc_data_xor)	IPT0();
 	IU32	(*GetVideocalc_latch_xor)	IPT0();
-	IHP	(*GetVideoread_byte_addr)	IPT0();
+	CVIDC_READ_BYTE_CALLBACK	(*GetVideoread_byte_addr)	IPT0();
 	IU32	(*GetVideov7_fg_latches)	IPT0();
 	IHP	(*GetVideoGC_regs)	IPT0();
 	IU8	(*GetVideolast_GC_index)	IPT0();
@@ -63,9 +73,9 @@ struct	VideoVector	{
 	void	(*SetVideodirty_low)	IPT1(IU32,	value);
 	void	(*SetVideodirty_high)	IPT1(IU32,	value);
 	void	(*SetVideovideo_copy)	IPT1(IU8 *,	value);
-	void	(*SetVideomark_byte)	IPT1(IHP,	value);
-	void	(*SetVideomark_word)	IPT1(IHP,	value);
-	void	(*SetVideomark_string)	IPT1(IHP,	value);
+	void	(*SetVideomark_byte)	IPT1(CVIDC_MARK_CALLBACK,	value);
+	void	(*SetVideomark_word)	IPT1(CVIDC_MARK_CALLBACK,	value);
+	void	(*SetVideomark_string)	IPT1(CVIDC_MARK_STRING_CALLBACK,	value);
 	void	(*SetVideoread_shift_count)	IPT1(IU32,	value);
 	void	(*SetVideoread_mapped_plane)	IPT1(IU32,	value);
 	void	(*SetVideocolour_comp)	IPT1(IU32,	value);
@@ -75,7 +85,7 @@ struct	VideoVector	{
 	void	(*SetVideorotate)	IPT1(IU32,	value);
 	void	(*SetVideocalc_data_xor)	IPT1(IU32,	value);
 	void	(*SetVideocalc_latch_xor)	IPT1(IU32,	value);
-	void	(*SetVideoread_byte_addr)	IPT1(IHP,	value);
+	void	(*SetVideoread_byte_addr)	IPT1(CVIDC_READ_BYTE_CALLBACK,	value);
 	void	(*SetVideov7_fg_latches)	IPT1(IU32,	value);
 	void	(*SetVideoGC_regs)	IPT1(IHP,	value);
 	void	(*SetVideolast_GC_index)	IPT1(IU8,	value);

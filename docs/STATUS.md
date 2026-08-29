@@ -507,6 +507,12 @@ than truncating backing pointers through NT4 `long`. It deliberately does not
 use the session mapping manager. See the [EMM storage evidence]
 (etc/evidence/m0-t310-s8-p4-emm-storage-id-native-width-closure-001.md).
 
+**T310 S8 P4 CVIDC native callback closure:** the selected original C-video
+profile now retains its true callback and generated-global types on both host
+architectures, without function/data-pointer coercion. This is compile ABI
+closure only, not runtime display validation. See the [CVIDC callback
+evidence](etc/evidence/m0-t310-s8-p4-cvidc-native-callback-contract-closure-002.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove
