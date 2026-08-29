@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3238 |
+| Documentation records | 3239 |
 | --- | --- |
-| Generated UTC | 2026-08-29T16:53:59Z |
+| Generated UTC | 2026-08-29T16:59:56Z |
 
 ## Entries
 
@@ -760,6 +760,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-keyboard-oem-rtl-binding-closure-001.md | indexed supporting material | 71ef4c1305b69b2d5a6927891dce64ecc316a396ac00d402558c2e3b84ae13ce |
 | etc/evidence/m0-t310-s8-p4-keyboard-vector-native-backing-abi-closure-001.md | indexed supporting material | 8a3dace306a47de77ab542f411a33725611eb51eea262e2cc79b5e0401c17a6d |
 | etc/evidence/m0-t310-s8-p4-mouse-console-boundary-disposition-001.md | indexed supporting material | f83bb6bbab943893dd3ac70f11514e8887df7cf5177aece955d1b8ca497beea3 |
+| etc/evidence/m0-t310-s8-p4-mouse-io-x86-x64-classification-001.md | indexed supporting material | 0d3ee68b22b414f86a0d44d91a1582647c2918f99220fc95f1b9e43d26c1f756 |
 | etc/evidence/m0-t310-s8-p4-mouse-range-callback-abi-closure-001.md | indexed supporting material | bce7011a14bf8da1bedc66cec61709b9bbffa8e9d22df8aac5c75b147d7074ae |
 | etc/evidence/m0-t310-s8-p4-multiple-object-wait-abi-closure-001.md | indexed supporting material | 7a0b87777f69f6f6a1f67f9de82a436ddac5e9ee71884f9f1bc13a2ee0838341 |
 | etc/evidence/m0-t310-s8-p4-native-c-varargs-call-contract-closure-001.md | indexed supporting material | 1163e06f751a6ba84da66e584501710c488d9a4e163385536d3d098273b3e367 |
@@ -1462,7 +1463,7 @@ content-divergent entries.
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-audit-baseline-001.md | indexed supporting material | b878f9a100fb6862522f3a5ec35977c3d5369032b99e3c4932d25a34ab1f2c46 |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-cluster-ledger.tsv | indexed supporting material | 3b7193da3c22588dff98a25a8b1390c740cc01d3f19274c250f980bb4ca11fed |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-inventory.tsv | indexed supporting material | 9f5be57f4c4a22e0ae88de22427029fb7b4f31ca753868cc8231453109cd6eb0 |
-| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | b052e52bba79191cc753497964a28660239399281f1e00e4eb2e2ef976b540e0 |
+| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | fa343d9fcce02cb56e42bcb6c4e1d3342d655533cd42c5f5af46410543133bb3 |
 | etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification.tsv | indexed supporting material | 50aaab24789e202c10d982b7ed515e9feb778ee783769098bdaf8485733f94b9 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
