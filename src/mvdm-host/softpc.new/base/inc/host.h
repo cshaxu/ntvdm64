@@ -47,7 +47,10 @@ extern boolean         host_check_read_access();
 extern void	       suspend_softpc();
 #endif
 #ifndef REAL_VGA
-IMPORT VOID memset4 IPT3( IU32, data, ULONG *, laddr, ULONG, count );
+/* DIVERGENCE MVDM-HOST-DIV-090: bind the exact original host_def.h provider
+ * carrier; `ULONG *` only happened to match `unsigned int *` on NT4. */
+IMPORT VOID memset4 IPT3( unsigned int, data, unsigned int *, laddr,
+	unsigned int, count );
 #endif
 IMPORT VOID fill_alternate_bytes IPT3( IS8 *, start, IS8 *, end, IS8, value);
 IMPORT VOID fill_both_bytes IPT3( IU16, data, IU16 *, dest, ULONG, len );

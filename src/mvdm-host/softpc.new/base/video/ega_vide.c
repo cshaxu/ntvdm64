@@ -2040,7 +2040,7 @@ void ega_sensible_graph_scroll_up IFN6(int, row,
 
 	while(lines--)
 	{
-		memset4( attr, (ULONG *)&EGA_planes[dest<<2], colsdiff );
+		memset4( attr, (unsigned int *)&EGA_planes[dest<<2], colsdiff );
 
 		if(!screen_updated)
 			(*update_alg.mark_fill)(dest, dest+colsdiff-1);
@@ -2087,7 +2087,7 @@ void ega_sensible_graph_scroll_down IFN6(int, row,
 
 	while(lines--)
 	{
-		memset4( attr, (ULONG *)&EGA_planes[dest<<2], colsdiff );
+		memset4( attr, (unsigned int *)&EGA_planes[dest<<2], colsdiff );
 
 		if(!screen_updated)
 			(*update_alg.mark_fill)(dest, dest+colsdiff-1);
