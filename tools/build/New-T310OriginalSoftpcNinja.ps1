@@ -51,7 +51,7 @@ $supportRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/support'
 $videoRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/video'
 $cvidcRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/cvidc'
 $cvidcGenerator = Join-Path $root 'tools/build/Generate-CvidcTypedTables.ps1'
-$videoGenerator = Join-Path $root 'tools/build/Generate-T310BaseVideoTypedSources.ps1'
+$videoGenerator = Join-Path $root 'tools/build/Generate-T310BaseVideoTypedSources.mjs'
 $gdpGenerator = Join-Path $root 'tools/build/Generate-T310GdpSlots.mjs'
 $gdpOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/base/cvidc'
 $umbOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/host/src'
@@ -204,7 +204,7 @@ if ([string]::IsNullOrWhiteSpace($NodeExecutable) -or !(Test-Path -LiteralPath $
 $cvidcGeneratedRoot = Join-Path $build 'generated/cvidc'
 $cvidcGenerated = & $cvidcGenerator -RepositoryRoot $root -OutputDirectory $cvidcGeneratedRoot | ConvertFrom-Json
 $videoGeneratedRoot = Join-Path $build 'generated/video'
-& $videoGenerator -RepositoryRoot $root -OutputDirectory $videoGeneratedRoot | Out-Null
+& $NodeExecutable $videoGenerator $root $videoGeneratedRoot | Out-Null
 $gdpGeneratedRoot = Join-Path $build 'generated/gdp'
 & $NodeExecutable $gdpGenerator $root $gdpGeneratedRoot | Out-Null
 $environment = Join-Path $build 'msvc-mt.cmd'
