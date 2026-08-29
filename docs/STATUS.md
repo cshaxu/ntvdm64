@@ -150,6 +150,13 @@ EIP update forms.  Focused formal x86/x64 rebuilds close the native-width
 `__int64` narrowing while retaining unrelated fixed-width Intel warnings; see
 the [CCPU instruction-delta closure](etc/evidence/m0-t310-s8-p4-ccpu-instruction-delta-width-closure-001.md).
 
+**T310 S8 P4:** owner-contract review now includes prior work rather than only
+the pending warning rows.  The generated
+[coverage ledger](etc/operations/m0-t310-s8-p4-owner-contract-coverage-ledger.tsv)
+maps every current P4 evidence file to an owner cluster and requires its
+mirror diff, overlay or adapter binding to be reread with the full original
+declaration/definition/caller contract.
+
 **T310 S8 P4:** source review classifies all 100 CCPU `c_main.c` C4057
 operand calls as original fixed 32-bit Intel state, not host-width ABI
 transitions. They remain compiler-visible but leave the x86/x64 repair
