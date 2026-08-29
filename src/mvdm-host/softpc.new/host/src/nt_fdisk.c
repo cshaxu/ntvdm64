@@ -227,7 +227,9 @@ typedef struct	_BOOTSECTOR {
 PFDISKDATA  fdisk_data_table = NULL;
 BYTE	    number_of_fdisk = 0;
 DWORD	    max_align_factor = 0;
-DWORD	    disk_buffer_pool = 0;
+/* DIVERGENCE(MVDM-HOST-DIV-069): this is private malloc backing for an
+ * aligned host I/O buffer, not a DOS address or externally visible token. */
+PBYTE	    disk_buffer_pool = NULL;
 DWORD	    cur_align_factor;
 WORD	    fdisk_open_count = 0;
 
@@ -767,11 +769,12 @@ BOOL disk_verify(
 PBYTE get_aligned_disk_buffer(void)
 {
     // if we don't have the buffer yet, get it
-    if (disk_buffer_pool == 0) {
-	disk_buffer_pool = (DWORD) malloc(MAX_DISKIO_SIZE + max_align_factor);
-	if (disk_buffer_pool == 0)
+    if (disk_buffer_pool == NULL) {
+	disk_buffer_pool = (PBYTE)malloc(MAX_DISKIO_SIZE + max_align_factor);
+	if (disk_buffer_pool == NULL)
 	    return NULL;
     }
-    return((PBYTE)((disk_buffer_pool + cur_align_factor) & ~(cur_align_factor)));
+    return (PBYTE)(((uintptr_t)disk_buffer_pool + cur_align_factor) &
+	           ~(uintptr_t)cur_align_factor);
 
 }

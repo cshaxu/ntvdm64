@@ -545,6 +545,14 @@ truncation and mismatched-width diagnostics without introducing a mapping
 manager or a new adapter. See the [serial/parallel evidence]
 (etc/evidence/m0-t310-s8-p4-comms-native-transport-closure-001.md).
 
+**T310 S8 P4 fixed-disk private-backing closure:** original `nt_fdisk.c`
+retains its lazy aligned scratch-buffer algorithm, but its private host heap
+backing is now native-width rather than a truncated `DWORD`. It is not a guest
+or external identity, so no mapping-manager route is involved. Forced formal
+x86/x64 object builds clear the selected C4311/C4312 diagnostics; unrelated
+warnings remain visible. See the [storage backing evidence]
+(etc/evidence/m0-t310-s8-p4-storage-private-backing-abi-closure-001.md).
+
 **T310 S8 P4 serial/parallel native transport closure:** original SoftPC COM
 and LPT host sources retain their device request order and configuration
 semantics while their private pointer-or-scalar ioctl and worker transports
