@@ -9,6 +9,12 @@
 #include "xt.h"
 #include <stdint.h>
 
+/* DIVERGENCE(MVDM-HOST-DIV-081): the selected modern NT headers do not
+ * publish this historical NTDLL routine.  Keep its original NTAPI import
+ * shape so the private host-buffer fill call is checked on both x86 and x64;
+ * this does not transport a guest address or an opaque resource identity. */
+VOID NTAPI RtlFillMemoryUlong(PVOID Destination, ULONG Length, ULONG Pattern);
+
 void
 bwdcopy(
     char *src,

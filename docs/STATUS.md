@@ -650,6 +650,14 @@ object builds complete without `C4311`/`C4312`; unrelated source-quality
 warnings remain visible.  See the [direct-route evidence]
 (etc/evidence/m0-t310-s8-p4-cvidc-direct-pointer-profile-closure-001.md).
 
+**T310 S8 P4 original host-fill call closure:** `copy_fnc.c` retains its
+original `RtlFillMemoryUlong` buffer-fill order but now publishes the exact
+historical `NTAPI` declaration that the selected modern header subset omits.
+Formal x86/x64 Ninja rebuilds clear the former implicit-call record without
+changing guest addressing, provider selection or warning policy; see the
+[call-contract evidence]
+(etc/evidence/m0-t310-s8-p4-rtl-fill-memory-ulong-call-contract-closure-001.md).
+
 **T310 S8 P4 serial/parallel native transport closure:** original SoftPC COM
 and LPT host sources retain their device request order and configuration
 semantics while their private pointer-or-scalar ioctl and worker transports
