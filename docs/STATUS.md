@@ -564,6 +564,13 @@ as `MVDM-HOST-DIV-051`; formal x86/x64 rebuilds clear all twelve associated
 `C4057` diagnostics.  See the [video-rule storage evidence]
 (etc/evidence/m0-t310-s8-p4-ccpu-video-rule-storage-closure-001.md).
 
+**T310 S8 P4 complete CVIDC generated-table audit:** clean formal x86/x64
+rebuilds archive all 41 selected CVIDC objects.  The existing typed-table
+overlay closes all 16 actual function/data-pointer conversion records, while
+historical generated-source style warnings remain visible and are explicitly
+outside the x86/x64-only repair scope.  See the [CVIDC table evidence]
+(etc/evidence/m0-t310-s8-p4-cvidc-generated-table-abi-audit-001.md).
+
 **T310 S8 P4 serial/parallel native transport closure:** original SoftPC COM
 and LPT host sources retain their device request order and configuration
 semantics while their private pointer-or-scalar ioctl and worker transports
