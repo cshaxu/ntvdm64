@@ -124,6 +124,11 @@ rebuilds contain no C4334 for either source; generated control-flow warnings
 remain visible. See the [native-word shift
 closure](etc/evidence/m0-t310-s8-p4-cvidc-native-word-shift-closure-001.md).
 
+**T310 S8 P4:** all four remaining selected C-video `ev_glue.c` C4244 records
+are proven fixed-width byte/word video scalar conversions on both hosts, not
+native-width ABI transitions. They remain visible and source-unchanged; see
+the [fixed-width BIOS-write disposition](etc/evidence/m0-t310-s8-p4-cvidc-fixed-width-bios-write-disposition-001.md).
+
 **T310 S8 P4:** source review classifies all 100 CCPU `c_main.c` C4057
 operand calls as original fixed 32-bit Intel state, not host-width ABI
 transitions. They remain compiler-visible but leave the x86/x64 repair
