@@ -62,6 +62,11 @@ builds close those twelve ABI records without suppressing the remaining
 fixed-width guest-scalar warnings; `EDL_fast_bop` remains a distinct undefined
 boundary. See the [executor-call closure](etc/evidence/m0-t310-s8-p4-ccpu-executor-call-contract-closure-001.md).
 
+**T310 S8 P4:** all 111 `c_main.c` C4244 narrowing records have now been
+read as fixed-width Intel instruction state, not native host-width transfers.
+They remain compiler-visible but leave the x86/x64 repair queue without casts
+or suppression; see the [fixed-width disposition](etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-scalar-disposition-001.md).
+
 **T310 S1 closure:** `6a46ee748` establishes the exact original `ccpu386`,
 `host/src` and `obj.vdm` roots, hashes, historical source roles and a
 per-session one-backend contract. It reverses the previous planning assumption
