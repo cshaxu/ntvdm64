@@ -58,6 +58,20 @@ both host architectures.
    physical binding; internal SoftPC pointers remain native-width private
    values and are not tokenized. No display entry is enabled merely because
    the static original package archives.
+
+   **P4 execution cadence.** The baseline is not a queue of individual
+   compiler diagnostics.  The generated source/call index and compiler ledger
+   are first reduced into owner-contract clusters.  A cluster is reviewed as
+   one unit: original declaration(s), definition(s), table/initializer forms,
+   selected caller forms, x86/x64 diagnostic evidence and its runtime owner
+   are read together.  The execution order is maintained in
+   `m0-t310-s8-p4-owner-contract-execution-order-001.md`: startup-critical
+   CCPU, memory/system/firmware, storage and input are considered before
+   optional video, communications, debugger and unselected product surfaces.
+   A warning may only cause a mirror correction, overlay or adapter change
+   after its entire contract cluster has that evidence.  Non-width source-form
+   records remain compiler-visible and leave the x86/x64 worklist by a
+   documented cluster disposition, never by suppression.
 5. **P5 — serial/parallel and full-profile verification.** Restore or record
    source-shaped endpoint disposition, then execute the complete original
    profile matrix on x86 and x64.
