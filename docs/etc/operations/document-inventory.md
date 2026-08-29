@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3177 |
+| Documentation records | 3178 |
 | --- | --- |
-| Generated UTC | 2026-08-29T07:57:48Z |
+| Generated UTC | 2026-08-29T08:05:32Z |
 
 ## Entries
 
@@ -541,6 +541,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-system-controller-callback-subcluster-audit-001.md | indexed supporting material | 7cdac3675bf2663115ba54d73bdd0b6b834cdec01c0481faa2099cc0d732db1a |
 | etc/evidence/m0-t310-s8-p4-system-interrupt-abi-audit-001.md | indexed supporting material | ac37a26ac1efbb30c00c0e643bf9294616996c4311c48354491d1b3478616eee |
 | etc/evidence/m0-t310-s8-p4-umb-numeric-address-audit-001.md | indexed supporting material | 4d8996c148ac65c84c3d181438d0d216e8b472caa86e1ddb6ebf5e4ef300ddee |
+| etc/evidence/m0-t310-s8-p4-vdd-umb-numeric-address-abi-closure-001.md | indexed supporting material | 1017e4ae6893f4aea6dbd20d6ebf71917d47fae40350190889a029cbae0d5a42 |
 | etc/evidence/m0-t310-s8-p4-whole-tree-current-abi-baseline-001.md | indexed supporting material | 63fa6a1564e1fcfd56c9d6262650ee098b0ee7b776c52d890f74e69234f77382 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
@@ -3191,7 +3192,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 27170a3c1d5954abcaf122f4a421293f93842a765261c9691071f029a8bed1aa |
+| STATUS.md | principal control document | 8b2d0bc4dbb9756f086cdb3e01b6b76b67104306462c0bb599317e8ee22642e8 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

@@ -513,6 +513,14 @@ architectures, without function/data-pointer coercion. This is compile ABI
 closure only, not runtime display validation. See the [CVIDC callback
 evidence](etc/evidence/m0-t310-s8-p4-cvidc-native-callback-contract-closure-002.md).
 
+**T310 S8 P4 VDD/UMB numeric-address closure:** the selected original
+`nt_msscs.c` now preserves the VDD `PVOID` interface as a numeric guest
+physical-address carrier rather than narrowing host pointers.  Its kernel-VDM
+fault-base subtraction is removed in favor of the selected user-mode Intel
+linear-address contract.  Formal x86/x64 host-root archives have no relevant
+width/call-contract diagnostics.  This is not VDD runtime completion; see the
+[VDD/UMB evidence](etc/evidence/m0-t310-s8-p4-vdd-umb-numeric-address-abi-closure-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove
