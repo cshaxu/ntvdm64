@@ -23,18 +23,26 @@ Revision History:
 
 --*/
 
+/* DIVERGENCE(MVDM-SUPPORT-DIV-003): NT4 passed typed interrupt callbacks
+ * through PVOID, a function/data-pointer conversion accepted by its compiler
+ * but not a valid x86/x64 C ABI contract.  These callbacks are internal
+ * 486-emulator control-flow entrypoints, not host-object identities. */
+typedef int (*VDM_HARDWARE_INT_HANDLER)(ULONG IntNumber);
+typedef int (*VDM_SOFTWARE_INT_HANDLER)(ULONG IntNumber);
+typedef int (*VDM_FAULT_HANDLER)(ULONG IntNumber, ULONG ErrorCode);
+
 NTSTATUS
 VdmInstallHardwareIntHandler(
-    PVOID HwIntHandler
+    VDM_HARDWARE_INT_HANDLER HwIntHandler
     );
 
 NTSTATUS
 VdmInstallSoftwareIntHandler(
-    PVOID SwIntHandler
+    VDM_SOFTWARE_INT_HANDLER SwIntHandler
     );
 
 NTSTATUS
 VdmInstallFaultHandler(
-    PVOID FaultHandler
+    VDM_FAULT_HANDLER FaultHandler
     );
 

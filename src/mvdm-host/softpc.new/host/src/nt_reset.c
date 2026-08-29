@@ -203,7 +203,7 @@ void  host_applInit(int argc,char *argv[])
             // Check for windowed graphics resize
             //
             if (*psz == 'E') {
-               int i;
+               size_t i;
 
                i = strlen(achES);
                if (!strncmp(psz, achES, i) && strlen(psz) == (size_t)i+2) {

@@ -43,15 +43,21 @@
 /* Macros and typedefs. */
 
 
+/* DIVERGENCE(MVDM-HOST-DIV-067): the shared MVDM declaration now exposes
+ * these internal interrupt callbacks as typed function pointers rather than
+ * transporting them through PVOID. See MVDM-SUPPORT-DIV-005. */
+/* DIVERGENCE(MVDM-HOST-DIV-067): the shared MVDM declaration now exposes
+ * these internal interrupt callbacks as typed function pointers rather than
+ * transporting them through PVOID. See MVDM-SUPPORT-DIV-005. */
 /* Hardware interrupt handler */
-LOCAL BOOL (*HWIntHandler)(ULONG) = NULL;
+LOCAL VDM_HARDWARE_INT_HANDLER HWIntHandler = NULL;
 
 #if defined(CCPU) || !defined(PROD)
 /* Software interrupt handler */
-LOCAL BOOL (*SWIntHandler)(ULONG) = NULL;
+LOCAL VDM_SOFTWARE_INT_HANDLER SWIntHandler = NULL;
 
 /* Exception interrupt handler */
-LOCAL BOOL (*EXIntHandler)(ULONG,ULONG) = NULL;
+LOCAL VDM_FAULT_HANDLER EXIntHandler = NULL;
 
 #endif /* CCPU */
 
@@ -109,7 +115,7 @@ OUTPUT:
 ================================================================================
 )*/
 
-GLOBAL NTSTATUS	VdmInstallHardwareIntHandler IFN1(PVOID, HardwareIntHandler)
+GLOBAL NTSTATUS	VdmInstallHardwareIntHandler IFN1(VDM_HARDWARE_INT_HANDLER, HardwareIntHandler)
 {
 #ifdef CCPU
     HWIntHandler = HardwareIntHandler;
@@ -172,7 +178,7 @@ OUTPUT:
 ================================================================================
 )*/
 
-GLOBAL NTSTATUS	VdmInstallSoftwareIntHandler IFN1(PVOID, SoftwareIntHandler)
+GLOBAL NTSTATUS	VdmInstallSoftwareIntHandler IFN1(VDM_SOFTWARE_INT_HANDLER, SoftwareIntHandler)
 {
 #ifdef CCPU
     SWIntHandler = SoftwareIntHandler;
@@ -236,7 +242,7 @@ OUTPUT:
 ================================================================================
 )*/
 
-GLOBAL NTSTATUS	VdmInstallFaultHandler IFN1(PVOID, FaultHandler)
+GLOBAL NTSTATUS	VdmInstallFaultHandler IFN1(VDM_FAULT_HANDLER, FaultHandler)
 {
 #ifdef CCPU
     EXIntHandler = FaultHandler;
