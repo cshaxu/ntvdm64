@@ -19,9 +19,9 @@ function Get-OriginalSources([string]$Manifest) {
     $raw = Get-Content -LiteralPath $Manifest -Raw
     $match = [regex]::Match($raw, '(?s)SOURCES\s*=\s*(.*?)(?=\r?\n\s*(?:!INCLUDE|UMTYPE|i386_SOURCES|MIPS_SOURCES|ALPHA_SOURCES))')
     if (!$match.Success) { throw "Cannot isolate original SOURCES block: $Manifest" }
-    $names = [regex]::Matches($match.Groups[1].Value, '\b([A-Za-z0-9_]+\.c)\b') |
+    $names = @([regex]::Matches($match.Groups[1].Value, '\b([A-Za-z0-9_]+\.c)\b') |
         ForEach-Object { $_.Groups[1].Value } |
-        Select-Object -Unique
+        Select-Object -Unique)
     if ($names.Count -eq 0) { throw "No C sources selected by original manifest: $Manifest" }
     return @($names)
 }
@@ -43,6 +43,15 @@ $systemRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/system'
 $disksRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/disks'
 $supportRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/support'
 $videoRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/video'
+$cvidcRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/cvidc'
+$cvidcGenerator = Join-Path $root 'tools/build/Generate-CvidcTypedTables.ps1'
+$videoGenerator = Join-Path $root 'tools/build/Generate-T310BaseVideoTypedSources.ps1'
+$commsRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/comms'
+$dosRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/dos'
+$demRoot = Join-Path $root 'src/mvdm-host/dos/dem'
+$commandRoot = Join-Path $root 'src/mvdm-host/dos/command'
+$xmsRoot = Join-Path $root 'src/mvdm-host/xms.486'
+$debugRoot = Join-Path $root 'src/mvdm-host/dbg'
 $hostRoot = Join-Path $root 'src/mvdm-host/softpc.new/host/src'
 $adapterSoftpcRoot = Join-Path $root 'src/adapter-mvdm-host-out/softpc'
 $adapterWin32Root = Join-Path $root 'src/adapter-mvdm-host-out/win32/source'
@@ -56,19 +65,56 @@ $systemManifest = Join-Path $systemRoot 'sources'
 $disksManifest = Join-Path $disksRoot 'sources'
 $supportManifest = Join-Path $supportRoot 'sources'
 $videoManifest = Join-Path $videoRoot 'sources'
+$cvidcManifest = Join-Path $cvidcRoot 'sources'
+$commsManifest = Join-Path $commsRoot 'sources'
+$dosManifest = Join-Path $dosRoot 'sources'
+$demManifest = Join-Path $demRoot 'sources'
+$commandManifest = Join-Path $commandRoot 'sources'
+$xmsManifest = Join-Path $xmsRoot 'sources'
+$debugManifest = Join-Path $debugRoot 'sources'
 $hostManifest = Join-Path $hostRoot 'sources'
 $ccpuNames = Get-OriginalSources $ccpuManifest
+# The original CCPU manifest omits the identical `vglob.c` carrier even though
+# the selected original video sources call its public VGLOB accessors. Select
+# the same-named original CCPU-root form rather than synthesize those globals.
+$ccpuNames = @($ccpuNames + 'vglob.c')
 $biosNames = Get-OriginalSources $biosManifest
 $keymouseNames = Get-OriginalSources $keymouseManifest
 $systemNames = Get-OriginalSources $systemManifest
 $disksNames = Get-OriginalSources $disksManifest
 $supportNames = Get-OriginalSources $supportManifest
 $videoNames = Get-OriginalSources $videoManifest
-$hostNames = @('nt_cprgs.c', 'nt_cpu.c', 'nt_aorc.c', 'nt_reset.c', 'nt_error.c',
-               'nt_msscs.c', 'sim32.c', 'nt_sas.c', 'nt_mem.c', 'nt_umb.c',
-               'config.c', 'nt_pif.c', 'nt_unix.c', 'nt_fdisk.c', 'nt_rflop.c',
-               'nt_rez.c',
-               'nt_eoi.c', 'nt_timer.c')
+# CCPU's original C-language video-memory access backend.  It complements
+# ccpu386 instruction execution and base/video device state; it is not an
+# alternate CPU. Select its complete manifest rather than substitute display
+# or video-memory shims one entrypoint at a time.
+$cvidcNames = @(Get-OriginalSources $cvidcManifest)
+# `vglfunc.c` and `evidfunc.c` publish generated tables through K&R-style
+# generic declarations.  Keep those exact originals as the mirror evidence,
+# but compile their generated, source-derived typed-table carrier below.  The
+# rule bodies remain original source selected from the original manifest.
+$cvidcTableNames = @('vglfunc.c', 'evidfunc.c')
+$cvidcRuleSourceNames = @($cvidcNames | Where-Object { $_ -notin $cvidcTableNames })
+# These are complete original library packages, selected because the current
+# BIOS/reset workset calls their public controller algorithms.  Selecting them
+# as packages preserves the original implementation rather than substituting
+# one unresolved serial/print/EMS symbol at a time.
+$commsNames = @(Get-OriginalSources $commsManifest)
+$dosNames = @(Get-OriginalSources $dosManifest)
+# The original SoftPC initialization root invokes these four MVDM provider
+# packages directly.  Select their complete source manifests as one source
+# closure rather than make `CMDInit`/`DemInit`/`XMSInit`/`DBGInit` adapters.
+$demNames = @(Get-OriginalSources $demManifest)
+$commandNames = @(Get-OriginalSources $commandManifest)
+$xmsNames = @(Get-OriginalSources $xmsManifest)
+$debugNames = @(Get-OriginalSources $debugManifest)
+# Select the complete original SoftPC host source package before deciding which
+# unresolved edges are genuine modern-boundary adapters.  Individual fixtures
+# and hand-written stand-ins are not a source-selection mechanism.
+$hostNames = @(Get-OriginalSources $hostManifest)
+# These two original carriers were selected by the historical architecture
+# conditional block and are already part of the admitted candidate profile.
+$hostNames = @($hostNames + 'nt_cprgs.c' + 'nt_aorc.c') | Select-Object -Unique
 $adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_compat.c',
                        'nt_thread_alert_compat.c')
 $adapterSoftpcNames = @('mvdm_softpc_firmware.c')
@@ -96,6 +142,27 @@ foreach ($name in $supportNames) {
 foreach ($name in $videoNames) {
     if (!(Test-Path -LiteralPath (Join-Path $videoRoot $name))) { throw "Original SoftPC video source missing: $name" }
 }
+foreach ($name in $cvidcNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $cvidcRoot $name))) { throw "Original CCPU CVIDC source missing: $name" }
+}
+foreach ($name in $commsNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $commsRoot $name))) { throw "Original SoftPC comms source missing: $name" }
+}
+foreach ($name in $dosNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $dosRoot $name))) { throw "Original SoftPC DOS source missing: $name" }
+}
+foreach ($name in $demNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $demRoot $name))) { throw "Original MVDM DEM source missing: $name" }
+}
+foreach ($name in $commandNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $commandRoot $name))) { throw "Original MVDM COMMAND source missing: $name" }
+}
+foreach ($name in $xmsNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $xmsRoot $name))) { throw "Original MVDM XMS source missing: $name" }
+}
+foreach ($name in $debugNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $debugRoot $name))) { throw "Original MVDM debugger source missing: $name" }
+}
 foreach ($name in $hostNames) {
     if (!(Test-Path -LiteralPath (Join-Path $hostRoot $name))) { throw "Original SoftPC host root missing: $name" }
 }
@@ -115,14 +182,20 @@ foreach ($name in $patchEvidenceNames) {
     if (!(Test-Path -LiteralPath (Join-Path $patchEvidenceRoot $name))) { throw "Registered SoftPC patch evidence missing: $name" }
 }
 
-New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/patch') | Out-Null
+New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/cvidc'), (Join-Path $build 'generated/video'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/patch') | Out-Null
+if (!(Test-Path -LiteralPath $cvidcGenerator -PathType Leaf)) { throw "CVIDC typed-table generator missing: $cvidcGenerator" }
+if (!(Test-Path -LiteralPath $videoGenerator -PathType Leaf)) { throw "Base/video declaration generator missing: $videoGenerator" }
+$cvidcGeneratedRoot = Join-Path $build 'generated/cvidc'
+$cvidcGenerated = & $cvidcGenerator -RepositoryRoot $root -OutputDirectory $cvidcGeneratedRoot | ConvertFrom-Json
+$videoGeneratedRoot = Join-Path $build 'generated/video'
+& $videoGenerator -RepositoryRoot $root -OutputDirectory $videoGeneratedRoot | Out-Null
 $environment = Join-Path $build 'msvc-mt.cmd'
 @('@echo off', 'set "MVDM_T310_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready',
   ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'),
   'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T310_CALLER_CWD%"', '%*') |
     Set-Content -LiteralPath $environment -Encoding ascii
 
-$includeRoots = @(
+$includeRootPaths = @(
     'src',
     # The adapter owns the modern `nt.h` type binding. Original reached NT
     # public-header subsets are restored under opennt-host below, so source
@@ -144,6 +217,7 @@ $includeRoots = @(
     # mirror source intact and express that historical selection in build
     # include order instead.
     'src/mvdm-softpc-patch/x86/prod',
+    'src/mvdm-host/xms.486',
     'src/mvdm-host/softpc.new/base/ccpu386',
     'src/mvdm-host/softpc.new/host/inc',
     # Original sas.h includes generated sas4gen.h. The selected mirror retains
@@ -153,22 +227,55 @@ $includeRoots = @(
     'src/adapter-mvdm-host-out/softpc/include',
     'src/adapter-mvdm-host-out/monitor/include',
     'src/session'
-) | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
+)
+$includeRoots = $includeRootPaths | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
+
+# `base/inc/egacpu.h` deliberately includes one of two original generated
+# `evidgen.h` variants.  The C-video and base/video translation units require
+# the C-video variant; CCPU itself keeps its own shorter generated variant.
+# This is original generated-header provenance, not a product-wide include
+# preference or a replacement API.
+$cvidcFirstRootPaths = [System.Collections.Generic.List[string]]::new()
+foreach ($path in $includeRootPaths) {
+    if ($path -eq 'src/mvdm-host/softpc.new/base/cvidc') { continue }
+    if ($path -eq 'src/mvdm-host/softpc.new/base/ccpu386') {
+        $cvidcFirstRootPaths.Add('src/mvdm-host/softpc.new/base/cvidc')
+    }
+    $cvidcFirstRootPaths.Add($path)
+}
+$cvidcFirstIncludeRoots = $cvidcFirstRootPaths | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 
 # `i386` is never a product-wide host switch. Both supported host builds use
 # the same source graph; any unavoidable historical x86-only unit must carry
 # its own registered, target-local compilation exception.
-$baseFlags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DNTVDM /DCPU_30_STYLE /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD ' +
+# `softpc.new/obj.vdm/cdefine.inc` selects CCPU's generated C video-memory
+# backend through C_VID for both the historical x86 and non-x86 CCPU paths.
+# Without that original configuration carrier cvidc's generated glue is
+# compiled out, leaving artificial same-package forced-link misses.
+$baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DNTVDM /DCPU_30_STYLE /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DANSI /DPROD ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' +
-    ($includeRoots -join ' ')
+    ''
+$baseFlags = $baseCommonFlags + ($includeRoots -join ' ')
+$cvidcFirstFlags = $baseCommonFlags + ($cvidcFirstIncludeRoots -join ' ')
+$cvidcRuleFlags = $cvidcFirstFlags + ' /DCVIDC_RULE_WORD'
 
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
 $graph.Add('build_root = ' + (NinjaPath $build))
 $graph.Add('cflags = ' + $baseFlags)
+$graph.Add('cvidc_first_cflags = ' + $cvidcFirstFlags)
+$graph.Add('cvidc_rule_cflags = ' + $cvidcRuleFlags)
 $graph.Add('')
 $graph.Add('rule cc')
 $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in')
+$graph.Add('  deps = msvc')
+$graph.Add('  msvc_deps_prefix = Note: including file:')
+$graph.Add('rule cc_cvidc')
+$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cvidc_first_cflags /Fo$out $in')
+$graph.Add('  deps = msvc')
+$graph.Add('  msvc_deps_prefix = Note: including file:')
+$graph.Add('rule cc_cvidc_rule')
+$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cvidc_rule_cflags /Fo$out $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('rule lib')
@@ -177,7 +284,7 @@ $graph.Add('rule forced_link_audit')
 # This deliberately produces a non-runnable DLL.  /WHOLEARCHIVE makes the
 # candidate's complete original membership visible to LINK; /FORCE keeps the
 # unresolved physical forms in the adjacent log for source-first ownership.
-$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-system.lib /wholearchive:original-softpc-disks.lib /wholearchive:original-softpc-support.lib /wholearchive:original-softpc-video.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-bindings.lib /wholearchive:softpc-win32-bindings.lib kernel32.lib user32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib > $out.log 2>&1')
+$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-system.lib /wholearchive:original-softpc-disks.lib /wholearchive:original-softpc-support.lib /wholearchive:original-softpc-video.lib /wholearchive:original-softpc-cvidc.lib /wholearchive:original-softpc-comms.lib /wholearchive:original-softpc-dos.lib /wholearchive:original-mvdm-dem.lib /wholearchive:original-mvdm-command.lib /wholearchive:original-mvdm-xms.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-bindings.lib /wholearchive:softpc-win32-bindings.lib kernel32.lib user32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib > $out.log 2>&1')
 
 $ccpuObjects = foreach ($name in $ccpuNames) {
     $object = 'obj/ccpu/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
@@ -211,13 +318,63 @@ $supportObjects = foreach ($name in $supportNames) {
 }
 $videoObjects = foreach ($name in $videoNames) {
     $object = 'obj/video/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $videoRoot $name)))
+    $source = if ($name -in @('egawrtm0.c', 'egwrtm12.c', 'gfx_updt.c', 'ega_writ.c', 'vga_mode.c')) { Join-Path $videoGeneratedRoot $name } else { Join-Path $videoRoot $name }
+    $graph.Add('build ' + $object + ': cc_cvidc_rule ' + (NinjaPath $source))
+    $object
+}
+$cvidcObjects = foreach ($name in $cvidcRuleSourceNames) {
+    $object = 'obj/cvidc/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc_cvidc_rule ' + (NinjaPath (Join-Path $cvidcRoot $name)))
+    $object
+}
+$cvidcGeneratedObjects = @(
+    [pscustomobject]@{ Source = $cvidcGenerated.video; Object = 'obj/cvidc/cvidc_typed_video_vector.obj' },
+    [pscustomobject]@{ Source = $cvidcGenerated.evid; Object = 'obj/cvidc/cvidc_typed_evid_tables.obj' }
+)
+foreach ($generated in $cvidcGeneratedObjects) {
+    $graph.Add('build ' + $generated.Object + ': cc_cvidc_rule ' + (NinjaPath $generated.Source))
+    $cvidcObjects += $generated.Object
+}
+$commsObjects = foreach ($name in $commsNames) {
+    $object = 'obj/comms/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $commsRoot $name)))
+    $object
+}
+$dosObjects = foreach ($name in $dosNames) {
+    $object = 'obj/dos/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $dosRoot $name)))
+    $object
+}
+$demObjects = foreach ($name in $demNames) {
+    $object = 'obj/dem/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $demRoot $name)))
+    # Exact original `sources` contract: this package exposes its Win32 and
+    # DEVL trace declarations through these compile definitions.  They do not
+    # add a new product path; the source owns the zero-initialized trace mask.
+    $graph.Add('  cflags = ' + $baseFlags + ' /DWIN_32 /DDEVL')
+    $object
+}
+$commandObjects = foreach ($name in $commandNames) {
+    $object = 'obj/command/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $commandRoot $name)))
+    $object
+}
+$xmsObjects = foreach ($name in $xmsNames) {
+    $object = 'obj/xms/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $xmsRoot $name)))
+    # Exact original XMS manifest `C_DEFINES=-DWIN_32`.
+    $graph.Add('  cflags = ' + $baseFlags + ' /DWIN_32')
+    $object
+}
+$debugObjects = foreach ($name in $debugNames) {
+    $object = 'obj/debug/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $debugRoot $name)))
     $object
 }
 $hostObjects = foreach ($name in $hostNames) {
     $object = 'obj/host/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $hostRoot $name)))
-    if ($name -eq 'nt_timer.c') {
+    if ($name -in @('nt_timer.c', 'nt_thred.c', 'nt_com.c', 'nt_event.c', 'nt_error.c')) {
         $threadCompat = NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/thread_start_compat.h')
         # `nt.h` from the modern SDK can predefine the historical include
         # guard before the original source reaches <ntexapi.h>.  Force the
@@ -225,6 +382,14 @@ $hostObjects = foreach ($name in $hostNames) {
         # declarations stay visible on both architectures.
         $ntexapiSubset = NinjaPath (Join-Path $root 'src/opennt-host/public/sdk/inc/ntexapi.h')
         $graph.Add('  cflags = ' + $baseFlags + ' /FI "' + $ntexapiSubset + '" /FI "' + $threadCompat + '"')
+    }
+    if ($name -eq 'fprt.c') {
+        # The original host diagnostic package intentionally owns printf,
+        # fprintf and selected stdio entrypoints.  Modern UCRT exposes those
+        # as inline definitions unless this documented per-unit switch is
+        # present, which turns a source-shaped interposition into a duplicate
+        # body error.  Keep the original source and its function names.
+        $graph.Add('  cflags = ' + $baseFlags + ' /D_NO_CRT_STDIO_INLINE')
     }
     $object
 }
@@ -250,12 +415,19 @@ $graph.Add('build original-softpc-system.lib: lib ' + ($systemObjects -join ' ')
 $graph.Add('build original-softpc-disks.lib: lib ' + ($disksObjects -join ' '))
 $graph.Add('build original-softpc-support.lib: lib ' + ($supportObjects -join ' '))
 $graph.Add('build original-softpc-video.lib: lib ' + ($videoObjects -join ' '))
+$graph.Add('build original-softpc-cvidc.lib: lib ' + ($cvidcObjects -join ' '))
+$graph.Add('build original-softpc-comms.lib: lib ' + ($commsObjects -join ' '))
+$graph.Add('build original-softpc-dos.lib: lib ' + ($dosObjects -join ' '))
+$graph.Add('build original-mvdm-dem.lib: lib ' + ($demObjects -join ' '))
+$graph.Add('build original-mvdm-command.lib: lib ' + ($commandObjects -join ' '))
+$graph.Add('build original-mvdm-xms.lib: lib ' + ($xmsObjects -join ' '))
+$graph.Add('build original-mvdm-debug.lib: lib ' + ($debugObjects -join ' '))
 $graph.Add('build original-softpc-host-roots.lib: lib ' + ($hostObjects -join ' '))
 $graph.Add('build softpc-bindings.lib: lib ' + ($adapterSoftpcObjects -join ' '))
 $graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' '))
 $graph.Add('build ntvdmx64-softpc-patch-evidence.lib: lib ' + ($patchBodyObjects -join ' '))
-$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-host-roots.lib softpc-bindings.lib softpc-win32-bindings.lib ntvdmx64-softpc-patch-evidence.lib')
-$graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-host-roots.lib softpc-bindings.lib softpc-win32-bindings.lib')
+$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-softpc-host-roots.lib softpc-bindings.lib softpc-win32-bindings.lib ntvdmx64-softpc-patch-evidence.lib')
+$graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-softpc-host-roots.lib softpc-bindings.lib softpc-win32-bindings.lib')
 $graph.Add('default original-softpc-candidate')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 
@@ -274,6 +446,14 @@ $graph.Add('default original-softpc-candidate')
     disksSources = @($disksNames)
     supportSources = @($supportNames)
     videoSources = @($videoNames)
+    cvidcSources = @($cvidcNames)
+    commsSources = @($commsNames)
+    dosSources = @($dosNames)
+    demSources = @($demNames)
+    commandSources = @($commandNames)
+    xmsSources = @($xmsNames)
+    debugSources = @($debugNames)
+    debugBuildDisposition = 'deferred-kernel-debug-product-boundary'
     hostRoots = @($hostNames)
     adapterSoftpcSources = @($adapterSoftpcNames)
     adapterWin32Sources = @($adapterWin32Names)

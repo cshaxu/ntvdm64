@@ -79,7 +79,14 @@ typedef UINT_PTR             IHPE;	    /* DIVERGENCE: original intent is an inte
                                            the same size as IHP; UINT_PTR preserves that
                                            internal SoftPC address arithmetic on x86/x64. */
 typedef int                  ISH;	    /* Host register sized signed quantity */
+#ifdef CVIDC_RULE_WORD
+typedef UINT_PTR             IUH;	    /* DIVERGENCE: generated C-video rules carry
+                                           native private pointers in their historical host
+                                           word slots; this target-local carrier is pointer
+                                           sized on both x86 and x64. */
+#else
 typedef unsigned int         IUH;	    /* Host register sized unsigned quantity */
+#endif
 #define LONG_SHIFT	2
 
 /*

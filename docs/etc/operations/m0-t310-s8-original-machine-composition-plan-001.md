@@ -23,7 +23,24 @@ both host architectures.
    checked numeric ranges only.
 4. **P4 — display/port and startup storage.** Recover source-shaped basic
    video/IOS port behavior plus the selected disk/floppy read path and its
-   original unavailable/media failure direction.
+   original unavailable/media failure direction. Before any `cvidc` video
+   path is enabled, this package closes the complete generated C-video ABI:
+   `cvidc/evidgen.h` vector slots, every `vglfunc.c` initializer, every
+   generated-table initializer in `evidfunc.c`, and every reached
+   `base/video` handler-table or callback assignment must agree with the actual
+   `S_*` callable signature on both x86 and x64. The original generated
+   `S_*` bodies take four generic host-word arguments, while the vector tables
+   declare typed zero- and one-argument interfaces. x86 happened to tolerate
+   that source-era mismatch; x64 cannot treat it as a runtime contract.
+   Recovery must be generated, private `mvdm-host-overlay` carriers derived
+   from the original generator output—not hand-written per-slot wrappers—and
+   they must preserve the original selected vector/table order.  The CVIDC
+   table carrier and the independently generated/base-video callback families
+   are separately audited but are one P4 ABI closure.
+   Actual guest addresses continue through the existing mapping-manager
+   physical binding; internal SoftPC pointers remain native-width private
+   values and are not tokenized. No display entry is enabled merely because
+   the static original package archives.
 5. **P5 — serial/parallel and full-profile verification.** Restore or record
    source-shaped endpoint disposition, then execute the complete original
    profile matrix on x86 and x64.

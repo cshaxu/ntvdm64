@@ -27,6 +27,46 @@ typedef struct _APPKEY {
     WORD ScanCode;
 } APPKEY, *LPAPPKEY;
 
+/* DIVERGENCE(ADAPTER-WIN32-012): These are the reached original VDM console
+ * operation selectors from OpenNT's conapi.h.  The complete historical
+ * header redeclares APIs and structures now owned by the modern SDK, so it
+ * cannot be included beside <windows.h>.  Retain only the exact selectors
+ * required by the unchanged original SoftPC host callers. */
+#define CONSOLE_GRAPHICS_BUFFER 2
+#define SYSTEM_ROOT_CONSOLE_EVENT 3
+#define VDM_HIDE_WINDOW         1
+#define VDM_IS_ICONIC           2
+#define VDM_CLIENT_RECT         3
+#define VDM_CLIENT_TO_SCREEN    4
+#define VDM_SCREEN_TO_CLIENT    5
+#define VDM_IS_HIDDEN           6
+#define VDM_FULLSCREEN_NOPAINT  7
+#define CONSOLE_UNREGISTER_VDM  0
+#define CONSOLE_REGISTER_VDM    1
+#define CONSOLE_REGISTER_WOW    2
+
+BOOL WINAPI InvalidateConsoleDIBits(HANDLE hConsoleOutput, PSMALL_RECT lpRect);
+VOID WINAPI SetLastConsoleEventActive(VOID);
+BOOL WINAPI VDMConsoleOperation(DWORD iFunction, LPVOID lpData);
+int WINAPI ShowConsoleCursor(HANDLE hConsoleOutput, BOOL bShow);
+
+#define CONSOLE_READ_NOREMOVE 0x0001
+#define CONSOLE_READ_NOWAIT   0x0002
+#define CONSOLE_READ_VALID    (CONSOLE_READ_NOREMOVE | CONSOLE_READ_NOWAIT)
+
+BOOL WINAPI ReadConsoleInputExW(
+    HANDLE hConsoleInput,
+    PINPUT_RECORD lpBuffer,
+    DWORD nLength,
+    LPDWORD lpNumberOfEventsRead,
+    USHORT wFlags);
+
+BOOL WINAPI WriteConsoleInputVDMW(
+    HANDLE hConsoleInput,
+    PINPUT_RECORD lpBuffer,
+    DWORD nLength,
+    LPDWORD lpNumberOfEventsWritten);
+
 BOOL WINAPI SetConsoleKeyShortcuts(
     BOOL bSet,
     BYTE bReserveKeys,

@@ -6,6 +6,15 @@
 #ifndef OPENNT_SUPPORT_NT_H
 #define OPENNT_SUPPORT_NT_H
 
+/* DIVERGENCE(ADAPTER-WIN32-025): selected original user-mode VDM headers
+ * expose their contract declarations when the historical NT base header's
+ * `_NTDEF_` marker is present.  The modern SDK supplies the underlying
+ * types but not that retired marker.  Preserve the declaration gate only;
+ * this does not opt into a kernel VDM implementation. */
+#ifndef _NTDEF_
+#define _NTDEF_
+#endif
+
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
@@ -63,6 +72,31 @@ typedef enum _NT_PRODUCT_TYPE {
 #endif
 #ifndef STATUS_USER_APC
 #define STATUS_USER_APC ((NTSTATUS)0x000000C0L)
+#endif
+/* DIVERGENCE(ADAPTER-WIN32-023): The original SoftPC host sources call the
+ * NTDLL wait interface with the NT4 `WAIT_TYPE` enumerator spelling.  Modern
+ * public user-mode headers omit that kernel-shaped declaration even though
+ * the reachable wait-any value and its observable ordering are unchanged.
+ * Retain the original numeric selector only; the actual wait call remains a
+ * separately bound NTDLL/public-host interface. */
+#ifndef WaitAll
+#define WaitAll 0
+#endif
+#ifndef WaitAny
+#define WaitAny 1
+#endif
+/* DIVERGENCE(ADAPTER-WIN32-021): Original SoftPC fprt.c uses the retired
+ * CRT calling-convention macro in declarations of its original diagnostic
+ * wrappers.  Modern MSVC omits that spelling.  Preserve the original ABI as
+ * cdecl without changing the source body or diagnostic behavior. */
+#ifndef _CRTAPI1
+#define _CRTAPI1 __cdecl
+#endif
+/* DIVERGENCE(ADAPTER-WIN32-024): Original SoftPC fprt.c declares both
+ * historical CRT wrapper calling-convention macros.  Current MSVC omits the
+ * second spelling as well.  Keep the source body's cdecl ABI unchanged. */
+#ifndef _CRTAPI2
+#define _CRTAPI2 __cdecl
 #endif
 /* The modern SDK leaves these historical NTSTATUS spellings out of the
  * user-mode declaration set, although the values and their failure contract

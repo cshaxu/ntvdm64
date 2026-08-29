@@ -5,13 +5,15 @@ const root = path.resolve(process.argv[2] ?? '.');
 const architecture = process.argv[3] ?? 'x86';
 const phase = process.argv[4] ?? 's2';
 if (!['x86', 'x64'].includes(architecture)) throw new Error('Architecture must be x86 or x64');
-if (!['s2', 's4-p4', 's4-p5', 's7-p2'].includes(phase)) throw new Error('Phase must be s2, s4-p4, s4-p5 or s7-p2');
+if (!['s2', 's4-p4', 's4-p5', 's7-p2', 's8-p2'].includes(phase)) throw new Error('Phase must be s2, s4-p4, s4-p5, s7-p2 or s8-p2');
 /* Read the freshly generated formal linker log.  The previous sidecar input
  * could survive a regenerated graph and report stale architecture-specific
  * hook forms after a source-shaped binding had entered both candidates. */
 const buildDirectory = phase === 's7-p2'
   ? `build/M0-T310/S7/machine/${architecture}`
-  : `build/M0-T310/S2/softpc/${architecture}`;
+  : phase === 's8-p2'
+    ? `build/M0-T310/S8/p1-machine-source/${architecture}`
+    : `build/M0-T310/S2/softpc/${architecture}`;
 const input = path.join(root, buildDirectory, 'original-softpc-forced-closure.dll.log');
 const sourceLedger = path.join(root, 'docs/etc/operations/zero-ledger1-softpc-disposition-ledger.tsv');
 const output = path.join(root, `docs/etc/operations/m0-t310-${phase}-${architecture}-forced-link-ledger.tsv`);

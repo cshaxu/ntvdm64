@@ -343,6 +343,57 @@ BDA backing, PIT/RTC, PIC/ICA delivery, `TimerInit`/teardown and every
 MONITOR/X86GFX/WOW path remain unclosed original-owner work. See the
 [DelayHeartBeat evidence](etc/evidence/m0-t310-s8-p2-original-delay-heartbeat-001.md).
 
+**T310 S8 P2 P4:** source recovery now proceeds by original owner package,
+not fixture-local stub expansion. Selecting the byte-exact original
+`ccpu386/vglob.c` carrier directly removes 75 physical VGLOB/video-accessor
+unresolved forms from both fresh formal x86 and x64 whole-archive ledgers
+(262 -> 187; 263 -> 188). The remaining x64 `IUH`/pointer-width diagnostics
+are an explicit original video-state composition boundary, not permission to
+replace that owner or claim a runnable video device. See the
+[VGLOB selection evidence](etc/evidence/m0-t310-s8-p2-original-vglob-provider-selection-001.md).
+
+**T310 S8 P2 P5:** the formal candidate now selects the complete original
+`softpc.new/host/src` package (47 manifest units plus two original
+architecture-conditional carriers), instead of growing source selection from
+fixtures. The entire x86 candidate and forced-link audit pass; `nt_event.c`
+and the original CRT diagnostic carrier `fprt.c` compile through narrow,
+source-shaped declaration/build bindings. `fprt.c` still exposes a real x64
+`DWORD`-to-pointer stream boundary, recorded for a later adapter family rather
+than hidden with a cast. See the [complete host package evidence]
+(etc/evidence/m0-t310-s8-p2-complete-original-host-package-selection-001.md).
+
+**T310 S8 P4 P1:** the original `C_VID` configuration from `obj.vdm` is now
+selected on both formal x86/x64 graphs, so the complete original `cvidc`
+package is compiled rather than silently compiled-out. Its generated function
+tables expose a real cross-architecture ABI closure: 78 `C_Video` entries and
+692 `evidfunc` entries bind typed slots to generic four-`IUH` `S_*` rule
+dispatchers. The source-era mismatch produces 167 x86 and 188 x64 incompatible
+function-pointer diagnostics. P4 will recover one source-derived generated
+private overlay/table-thunk carrier after a full slot/width ledger; it will not
+hand-write wrappers, cast away diagnostics, or use a Bochs display route. See
+the [generated-interface audit]
+(etc/evidence/m0-t310-s8-p4-cvidc-generated-interface-audit-001.md).
+
+**T310 S8 P4 P2:** the complete original CVIDC table family is now selected
+through a source-derived private generated carrier: all 81 `VideoVector` slots
+and 692 EVID entries retain original ordering while entering the original
+generated rules with a native-width private host-word ABI.  Formal MSVC x86 and
+x64 archive `original-softpc-cvidc.lib` without C4113/C4133/C4047 from that
+773-entry family.  The same audit has isolated 40 distinct x64 C4113 callback
+assignments in five `base/video` original units; they are P4's remaining
+source-shaped ABI work, so no video runtime enablement is claimed. See the
+[generated-interface audit](etc/evidence/m0-t310-s8-p4-cvidc-generated-interface-audit-001.md).
+
+**T310 S8 P4 P3:** the source-derived `base/video` carrier has reduced the
+remaining x64 callback diagnostics from 40 to one without modifying original
+video algorithms: delayed EGA declarations, polymorphic marking calls,
+chain-write pointers and the VGA update declaration now have exact typed
+contracts under the same x86/x64 selection. The sole remaining form is the
+original CVIDC EVID-to-GMI `MEM_HANDLERS` move bridge, which exposes the wider
+CCPU `ccpusas4.c` untyped handler registry and remains P4 work rather than a
+local cast. See the [base/video callback ledger]
+(etc/operations/m0-t310-s8-p4-base-video-callback-interface-ledger.tsv).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove
