@@ -198,7 +198,9 @@ char * _CRTAPI1 fgets(char *buffer, int len, FILE *input_stream)
     for(blen = 0; blen < len; blen++)
 	buffer[blen] = 0;
     nt_fgets(buffer, len, input_stream);
-    blen = strlen(buffer);
+    /* `nt_fgets` above is bounded by the original signed `len` argument, so
+     * this source-local count is representable by its original `int` type. */
+    blen = (int)strlen(buffer);
     if (blen + 1 < len)
     {
 	buffer[blen] = '\n';	/* fgets adds newline */
@@ -222,7 +224,10 @@ size_t _CRTAPI1 fwrite(const void *buf, size_t size, size_t len, FILE *stream)
 {
     char    *tmp_buf;		// Screw the compiler into avoiding const chk
 
-    tmp_buf = (char *)((DWORD)buf);
+    /* DIVERGENCE(MVDM-HOST-DIV-070): `buf` is a private native CRT buffer.
+     * The original DWORD round-trip truncates it on x64; it is not a guest
+     * address or an externally published identity. */
+    tmp_buf = (char *)buf;
 
     tmp_buf[len] = 0;		// Bullshit write into a const ptr!
 #ifndef PROD

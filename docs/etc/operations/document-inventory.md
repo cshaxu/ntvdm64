@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3184 |
+| Documentation records | 3185 |
 | --- | --- |
-| Generated UTC | 2026-08-29T08:51:07Z |
+| Generated UTC | 2026-08-29T08:54:36Z |
 
 ## Entries
 
@@ -534,6 +534,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-cvidc-native-callback-contract-closure-002.md | indexed supporting material | ff5cd281ac98e3d6f73453ca7cb4bf6dd2196dc3404632ef5bb34ebde7b23c3b |
 | etc/evidence/m0-t310-s8-p4-emm-storage-id-native-width-closure-001.md | indexed supporting material | 1c4c9125d5f581b9877594856e57c309e0bccd990c9268165cc3d30f50c368a7 |
 | etc/evidence/m0-t310-s8-p4-error-dialog-native-callback-closure-001.md | indexed supporting material | 84dab530ad0e8d473baf72f07506ba3b166f36a9b7e66f3dccee0bc0d99ca4f9 |
+| etc/evidence/m0-t310-s8-p4-fprt-native-buffer-abi-closure-001.md | indexed supporting material | 091464e3a5608087e4b8b2edda07de6b2fda235a998ec99e753de495f0b31b01 |
 | etc/evidence/m0-t310-s8-p4-host-simulate-call-abi-closure-001.md | indexed supporting material | ebace0d79ca95b748fa8075b8f358acc862e092e07e7039145f38e2cf58aae38 |
 | etc/evidence/m0-t310-s8-p4-keyboard-vector-native-backing-abi-closure-001.md | indexed supporting material | 8a3dace306a47de77ab542f411a33725611eb51eea262e2cc79b5e0401c17a6d |
 | etc/evidence/m0-t310-s8-p4-mouse-range-callback-abi-closure-001.md | indexed supporting material | bce7011a14bf8da1bedc66cec61709b9bbffa8e9d22df8aac5c75b147d7074ae |
@@ -1211,9 +1212,9 @@ content-divergent entries.
 | etc/operations/m0-t310-s8-p4-whole-tree-contract-review-index.tsv | indexed supporting material | 2fa61c7bc1ee7fccffff0eacef03eeb1167f94b768ac82fb9018269c71ccbfb3 |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-audit-baseline-001.md | indexed supporting material | b878f9a100fb6862522f3a5ec35977c3d5369032b99e3c4932d25a34ab1f2c46 |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-cluster-ledger.tsv | indexed supporting material | 3b7193da3c22588dff98a25a8b1390c740cc01d3f19274c250f980bb4ca11fed |
-| etc/operations/m0-t310-s8-p4-whole-tree-static-abi-inventory.tsv | indexed supporting material | 124015ec0036f4f2186cca12433490c28ac99626418d4a390e83fc59580d37bd |
+| etc/operations/m0-t310-s8-p4-whole-tree-static-abi-inventory.tsv | indexed supporting material | 9f5be57f4c4a22e0ae88de22427029fb7b4f31ca753868cc8231453109cd6eb0 |
 | etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification.tsv | indexed supporting material | 5e95e2f4bdd398a7dd7817f48bec5217df7fef86ffb0010dc6b7b37f8b3af0df |
-| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | d4673bbc3cc1d0ca48f0c0f67456c436a9f06dae2d37180f0fa6fef83b015918 |
+| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | 79437628c84eebca3bb60763307d64cd80bf68aa8f30ae09c4e29c5f3fbcc43e |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3198,7 +3199,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | e1de24da99d914b9c2215e7794edaafbb242a3fffa02adbb248383c8e71d9a12 |
+| STATUS.md | principal control document | c848acc1bcb09d8a4e6b85be9ec0229e1b39c98e6a275b7eac5555b558c8d26b |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
