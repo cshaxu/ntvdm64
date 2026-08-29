@@ -82,7 +82,10 @@ foreach ($provider in @('egawrtm0.c', 'egwrtm12.c')) {
 }
 $egaWritPath = Join-Path $videoRoot 'ega_writ.c'
 $egaWrit = Get-Content -Raw -LiteralPath $egaWritPath
-$egaWrit = [regex]::Replace($egaWrit, '(?m)^\s*IMPORT\s+VOID\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(\s*\)\s*;', {
+# Keep the source line boundary intact.  `\s*` after `^` can consume the
+# preceding newline under the multiline expression, concatenating consecutive
+# declarations in the generated declaration carrier.
+$egaWrit = [regex]::Replace($egaWrit, '(?m)^[ \t]*IMPORT\s+VOID\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(\s*\)\s*;', {
     param($match)
     $symbol = $match.Groups[1].Value
     if ($writeDefinitions.ContainsKey($symbol)) { return $writeDefinitions[$symbol] }
