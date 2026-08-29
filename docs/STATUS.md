@@ -323,6 +323,12 @@ recognizes its `STATUS_USER_APC` completion as the historical terminal alert.
 The existing cdecl worker-start adapter also carries the creator's
 thread-bound session only in its private Win32 context and unbinds it on
 worker exit; it preserves the original `host_timer_init` call shape.
+
+**T310 S8 P2 P2:** original `nt_eoi.c` now has focused x86/x64 direct runtime
+evidence for `InitializeIcaLock` and `host_ica_lock/unlock` mutual exclusion.
+The fixture guards all non-lock delayed-IRQ/WOW forms as unreachable test-only
+dependencies; it neither substitutes nor claims the remaining PIC/EOI path.
+See the [ICA-lock evidence](etc/evidence/m0-t310-s8-p2-original-ica-lock-binding-001.md).
 Focused formal x86/x64 Ninja tests prove invalid-target failure and real
 alertable-thread wake-up. This does not claim heartbeat/PIC/RTC/BDA execution;
 the original timer and ICA source remains the active P2 owner. See the
