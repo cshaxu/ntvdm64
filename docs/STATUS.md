@@ -134,6 +134,11 @@ records are a shared source-generated control-result form on both targets,
 not a host-width or callable-ABI transition. They remain visible and await
 C-video execution coverage; see the [generated control disposition](etc/evidence/m0-t310-s8-p4-cvidc-generated-crules-control-disposition-001.md).
 
+**T310 S8 P4:** the complete 36-record original floppy C4431 cluster is a
+shared K&R default-int source form; its declaration/definition contracts are
+identical on x86 and x64 and no native identity crosses. The mirror remains
+unchanged; see the [floppy source-form disposition](etc/evidence/m0-t310-s8-p4-floppy-default-int-disposition-001.md).
+
 **T310 S8 P4:** source review classifies all 100 CCPU `c_main.c` C4057
 operand calls as original fixed 32-bit Intel state, not host-width ABI
 transitions. They remain compiler-visible but leave the x86/x64 repair
