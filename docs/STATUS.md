@@ -501,6 +501,12 @@ null entry with that generated two-argument function-pointer type instead of a
 generic K&R callback. No memory provider or adapter was added. See the [SAS
 vector evidence](etc/evidence/m0-t310-s8-p4-sas-vector-null-slot-abi-closure-001.md).
 
+**T310 S8 P4 EMM native-width storage closure:** the original EMS allocation
+and mapping algorithm now keeps its private host storage IDs as `IHP`, rather
+than truncating backing pointers through NT4 `long`. It deliberately does not
+use the session mapping manager. See the [EMM storage evidence]
+(etc/evidence/m0-t310-s8-p4-emm-storage-id-native-width-closure-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove

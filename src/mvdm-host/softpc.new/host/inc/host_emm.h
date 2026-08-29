@@ -26,5 +26,10 @@ AMMENDMENTS	:
  * allocate a block, lock it before use and unlock it when finished.
  */
  
-#define	USEBLOCK(x)	(unsigned char *)x
+/* DIVERGENCE(MVDM-HOST-DIV-061): the original NT host happened to store
+ * its private EMM storage identifier in a 32-bit long.  The manager already
+ * treats this as an opaque host-owned block and accesses it only through this
+ * interface.  Keep that contract on both host ABIs with the existing native
+ * pointer type; it is not a guest address or a session mapping token. */
+#define	USEBLOCK(x)	(unsigned char *)(x)
 #define FORGETBLOCK(x)

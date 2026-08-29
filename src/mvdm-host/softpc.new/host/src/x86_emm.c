@@ -318,7 +318,9 @@ DESCRIPTION     : returns memory initialised to zeros.
 
 =========================================================================
 */
-long host_allocate_storage(int no_bytes)
+/* DIVERGENCE(MVDM-HOST-DIV-061): use native-width IHP for the original
+ * private host storage ID; all manager-side access remains USEBLOCK based. */
+IHP host_allocate_storage(int no_bytes)
 /*   IN  int    no_bytes                        no. of bytes required   */
 {
         // should replace this (?) - dissasembling calloc seems to
@@ -344,10 +346,10 @@ DESCRIPTION     : In this implementation storage_ID is simply a pointer
 
 =========================================================================
 */
-int host_free_storage(long storage_ID)
+int host_free_storage(IHP storage_ID)
 /*   IN  long   storage_ID                      ptr to area of memory   */
 {
-        if(storage_ID != (long)NULL)
+	if(storage_ID != (IHP)NULL)
                 free((char *)storage_ID);
 
         return(SUCCESS);
@@ -372,7 +374,7 @@ DESCRIPTION     : In this implementation storage_ID is simply a pointer
 
 =========================================================================
 */
-long host_reallocate_storage(LONG storage_ID, int size, int new_size)
+IHP host_reallocate_storage(IHP storage_ID, int size, int new_size)
 /*
     IN
 long    storage_ID       ptr to area of memory
@@ -380,7 +382,7 @@ int     size             original size - not used in this version
         new_size         new size required
 */
 {
-        return((long)realloc((char *)storage_ID, new_size));
+	return(IHP)realloc((char *)storage_ID, new_size);
 }
 
 

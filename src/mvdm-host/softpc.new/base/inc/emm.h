@@ -258,9 +258,12 @@ IMPORT void	set_name	IPT2(short, handle_no, char *, new_name);
  
 IMPORT int	host_initialise_EM	IPT1(short, size);
 IMPORT int	host_deinitialise_EM	IPT0();
-IMPORT long	host_allocate_storage	IPT1(int, no_bytes);
-IMPORT int	host_free_storage	IPT1(long, storage_ID);
-IMPORT long	host_reallocate_storage IPT3(long, storage_ID,
+/* DIVERGENCE(MVDM-HOST-DIV-061): storage IDs are private host blocks.  They
+ * were long only because NT4 pointers were long; retain all original calls
+ * and storage semantics with the existing native-width IHP abstraction. */
+IMPORT IHP	host_allocate_storage	IPT1(int, no_bytes);
+IMPORT int	host_free_storage	IPT1(IHP, storage_ID);
+IMPORT IHP	host_reallocate_storage IPT3(IHP, storage_ID,
 			int, size, int, new_size);
 IMPORT int	host_map_page 		IPT2(short, EM_page_no,
 			unsigned short, segment);
