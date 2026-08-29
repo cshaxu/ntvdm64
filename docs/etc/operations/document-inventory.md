@@ -538,6 +538,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-softpc-startup-call-contract-closure-001.md | indexed supporting material | 930e3b34859f3709f7d860030c3c222814258296 |
 | etc/evidence/m0-t310-s8-p4-pif-lim-call-contract-closure-001.md | indexed supporting material | bad9ac37822afa3c128e216f010c2a934e630485 |
 | etc/evidence/m0-t310-s8-p4-xms-a20-call-contract-closure-001.md | indexed supporting material | 80edea71a683ecd70212b6fc3e8ba16690a74b93 |
+| etc/evidence/m0-t310-s8-p4-cmos-reset-call-contract-closure-001.md | indexed supporting material | 43d68a32afee10f6b7f142aa5523201f9ff03c60 |
 | etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md | indexed supporting material | e8810dcc86642ab470c1db8615f39387ab7c177f840b7167a2bcf74b258571f4 |
 | etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-scalar-disposition-001.md | indexed supporting material | 75c178056fc3369aa9b7a4013b79209500078bb502a7d7b0f791c1e16cdaf692 |
 | etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-signedness-disposition-001.md | indexed supporting material | 0b34d4233c4482ed3d78e37748a0d1a2fc7557ec8724719aeb28f55bf1024e80 |

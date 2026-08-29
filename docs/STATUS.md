@@ -72,6 +72,10 @@ original XMS A20 interface header at their top-level boundaries. Both x86/x64
 units rebuild without the two former implicit A20 calls; see the [XMS A20 call
 closure](etc/evidence/m0-t310-s8-p4-xms-a20-call-contract-closure-001.md).
 
+**T310 S8 P4:** BIOS reset now binds the original NT CMOS shutdown-byte helper
+through its exact contract; x86/x64 BIOS and system archives rebuild without
+that implicit call. See the [CMOS reset call closure](etc/evidence/m0-t310-s8-p4-cmos-reset-call-contract-closure-001.md).
+
 **T310 S8 P4:** source-list recovery proved that the 31 `ga_glue.c` x86/x64
 warnings came from a historical C-video variant deliberately commented out by
 the original `base/video/sources` manifest. The Ninja manifest reader now

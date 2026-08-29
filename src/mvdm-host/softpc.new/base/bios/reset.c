@@ -87,6 +87,11 @@
 #include "host_lic.h"
 #endif /* LICENSING */
 
+/* DIVERGENCE(MVDM-HOST-DIV-086): the selected NT CMOS implementation exports
+ * this original reset helper without a selected public declaration carrier.
+ * Keep the existing reset call and publish its exact void contract. */
+extern void cmos_clear_shutdown_byte(void);
+
 /* Exports */
 
 /*
