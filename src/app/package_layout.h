@@ -12,9 +12,15 @@ extern "C" {
 int app_package_layout_set_firmware_root(session *owner,
     const char *executable_path);
 
+/* Configure all immutable package roots selected by the product layout:
+ * `dos`, `win16` and `softpc\\roms` under the executable directory. */
+int app_package_layout_set_media_roots(session *owner,
+    const char *executable_path);
+
 /* Resolve the current executable through the public process API, then apply
  * the same installation layout. */
 int app_package_layout_set_process_firmware_root(session *owner);
+int app_package_layout_set_process_media_roots(session *owner);
 
 #ifdef __cplusplus
 }

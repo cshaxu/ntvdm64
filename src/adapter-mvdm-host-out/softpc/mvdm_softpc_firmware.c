@@ -5,21 +5,16 @@
 
 #include "session/session.h"
 
-int mvdm_softpc_firmware_find_file(const char *name, char *path_out,
-    uint32_t path_out_bytes)
+static int mvdm_softpc_media_find_file(const char *root, const char *name,
+    char *path_out, uint32_t path_out_bytes)
 {
-    const char *root;
     size_t root_length;
     size_t name_length;
     size_t separator_length;
-    session *instance = session_thread_current();
 
     if (path_out != NULL && path_out_bytes != 0u) path_out[0] = '\0';
-    if (instance == NULL || name == NULL || name[0] == '\0' ||
+    if (root == NULL || name == NULL || name[0] == '\0' ||
         path_out == NULL || path_out_bytes == 0u) return 0;
-    root = session_firmware_root(instance);
-    if (root == NULL) return 0;
-
     root_length = strlen(root);
     name_length = strlen(name);
     separator_length = root_length != 0u && root[root_length - 1u] != '\\' &&
@@ -35,4 +30,22 @@ int mvdm_softpc_firmware_find_file(const char *name, char *path_out,
         return 0;
     }
     return 1;
+}
+
+int mvdm_softpc_firmware_find_file(const char *name, char *path_out,
+    uint32_t path_out_bytes)
+{
+    session *instance = session_thread_current();
+    return mvdm_softpc_media_find_file(instance != NULL ?
+        session_firmware_root(instance) : NULL, name, path_out,
+        path_out_bytes);
+}
+
+int mvdm_softpc_dos_find_file(const char *name, char *path_out,
+    uint32_t path_out_bytes)
+{
+    session *instance = session_thread_current();
+    return mvdm_softpc_media_find_file(instance != NULL ?
+        session_dos_media_root(instance) : NULL, name, path_out,
+        path_out_bytes);
 }

@@ -32,20 +32,22 @@ cell.
 `package_layout.{c,h}` is the app-owned installation contract for immutable
 machine inputs. Before activating a session, app resolves the executable
 directory and selects `<exe-directory>\\softpc\\roms` as that session's
-firmware root. The lookup itself remains in the original SoftPC
-`host_find_file` call shape through the named SoftPC adapter. `dos/` and
-`win16/` are sibling guest-media roots, not host libraries and not firmware
-linked into the executable.
+firmware root, with sibling `<exe-directory>\\dos` and
+`<exe-directory>\\win16` media roots. The lookup itself remains in the
+original SoftPC `host_find_file` and `InitialiseDosEmulation` call shapes
+through the named SoftPC adapter. These inputs are not host libraries and are
+not linked into the executable.
 
 ## M0 T310 S8 installed package layout
 
 `package_layout.{c,h}` is the app-owned installation contract for immutable
 machine inputs. Before activating a session, app resolves the executable
 directory and selects `<exe-directory>\\softpc\\roms` as that session's
-firmware root. The lookup itself remains in the original SoftPC
-`host_find_file` call shape through the named SoftPC adapter. `dos/` and
-`win16/` are sibling guest-media roots, not host libraries and not firmware
-linked into the executable.
+firmware root, with sibling `<exe-directory>\\dos` and
+`<exe-directory>\\win16` media roots. The lookup itself remains in the
+original SoftPC `host_find_file` and `InitialiseDosEmulation` call shapes
+through the named SoftPC adapter. These inputs are not host libraries and are
+not linked into the executable.
 
 ## M0 T310 S8 installed package layout
 

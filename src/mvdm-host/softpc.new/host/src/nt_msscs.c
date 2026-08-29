@@ -38,6 +38,8 @@
 #include <demexp.h>
 #include <vint.h>
 
+#include "mvdm_softpc_firmware.h"
+
 PMEM_HOOK_DATA MemHookHead = NULL;
 PVDD_USER_HANDLERS UserHookHead= NULL;
 
@@ -166,13 +168,15 @@ InitialiseDosEmulation(int argc, char **argv)
 
      /*................................................. Load DOSEM code */
 
-     dw = GetSystemDirectory(buffer, sizeof(buffer));
-     if (!dw || dw >= sizeof(buffer)) {
-         host_error(EG_OWNUP, ERR_QUIT, "NTVDM:InitialiseDosEmulation fails");
+     /* DIVERGENCE: MVDM-HOST-DIV-038. The original location is the NT4
+      * system directory. The original session owns a selected immutable DOS
+      * media root instead; retain the following original file/size/read/SAS
+      * and CS:IP sequence unchanged. */
+     if (!mvdm_softpc_dos_find_file("ntio.sys", buffer, sizeof(buffer))) {
+         host_error(EG_OWNUP, ERR_QUIT, "ntio.sys");
          TerminateVDM();
+         return (-1);
          }
-
-     strcat(buffer, "\\ntio.sys");
 
      hFile = CreateFile(buffer,
                         GENERIC_READ,

@@ -13,6 +13,11 @@ extern "C" {
 int mvdm_softpc_firmware_find_file(const char *name, char *path_out,
     uint32_t path_out_bytes);
 
+/* Same-shaped media-location binding for the original NTIO image loader.
+ * It returns a caller-owned path only when the selected DOS image exists. */
+int mvdm_softpc_dos_find_file(const char *name, char *path_out,
+    uint32_t path_out_bytes);
+
 #ifdef __cplusplus
 }
 #endif

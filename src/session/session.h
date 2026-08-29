@@ -60,6 +60,8 @@ typedef struct session {
     mapping_manager completion_callback_mappings;
     guest_memory_lease_context guest_memory_lease;
     char firmware_root[SESSION_FIRMWARE_ROOT_BYTES];
+    char dos_media_root[SESSION_FIRMWARE_ROOT_BYTES];
+    char win16_media_root[SESSION_FIRMWARE_ROOT_BYTES];
 } session;
 
 #ifdef __cplusplus
@@ -87,6 +89,10 @@ mapping_manager *session_completion_callback_mappings(session *instance);
 
 int session_set_firmware_root(session *instance, const char *path);
 const char *session_firmware_root(const session *instance);
+int session_set_dos_media_root(session *instance, const char *path);
+const char *session_dos_media_root(const session *instance);
+int session_set_win16_media_root(session *instance, const char *path);
+const char *session_win16_media_root(const session *instance);
 
 int session_guest_memory_begin(session *instance, void *context,
     guest_memory_read_fn read, guest_memory_write_fn write);

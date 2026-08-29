@@ -101,5 +101,16 @@ executable name. The public `GetModuleFileNameA` wrapper uses exactly the same
 path derivation for the real executable; no firmware path is read from the
 current working directory or an NT system directory.
 
+The same root contract now covers the original
+`nt_msscs.c::InitialiseDosEmulation` loader. `MVDM-HOST-DIV-038` replaces only
+its `GetSystemDirectory + "\\ntio.sys"` construction with
+`mvdm_softpc_dos_find_file("ntio.sys", ...)`; its original file validation,
+`CreateFile`, `ReadFile`, SAS destination, virtual-interrupt restore and
+`CS:IP` entry ordering are unchanged. The media fixture resolves the mirrored
+`mvdm-guest/dos/v86/doskrnl/bios/NTIO.SYS` and rejects an absent name on both
+x86 and x64. `scs_init`/`AddSystemFiles`, VDD admission and actual SAS loading
+remain separate reached prerequisites; this change does not claim the full
+loader is runnable.
+
 No Bochs device, MONITOR, kernel VDM, `src.old`, raw native identity or
 preprocessor-derived capability decision was introduced.

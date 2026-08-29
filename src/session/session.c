@@ -192,22 +192,57 @@ mapping_manager *session_completion_callback_mappings(session *instance)
     return session_valid(instance) ? &instance->completion_callback_mappings : NULL;
 }
 
-int session_set_firmware_root(session *instance, const char *path)
+static int session_set_root(session *instance, char *destination,
+    const char *path)
 {
     size_t length;
     if (!session_valid(instance) || instance->state != SESSION_STATE_READY ||
-        path == NULL || path[0] == '\0') return 0;
+        destination == NULL || path == NULL || path[0] == '\0') return 0;
     length = strlen(path);
     if (length >= SESSION_FIRMWARE_ROOT_BYTES) return 0;
-    memcpy(instance->firmware_root, path, length + 1u);
+    memcpy(destination, path, length + 1u);
     return 1;
+}
+
+static const char *session_root(const session *instance, const char *root)
+{
+    if (!session_valid(instance) || root == NULL || root[0] == '\0')
+        return NULL;
+    return root;
+}
+
+int session_set_firmware_root(session *instance, const char *path)
+{
+    return session_set_root(instance, instance != NULL ? instance->firmware_root : NULL,
+        path);
 }
 
 const char *session_firmware_root(const session *instance)
 {
-    if (!session_valid(instance) || instance->firmware_root[0] == '\0')
-        return NULL;
-    return instance->firmware_root;
+    return session_root(instance, instance != NULL ? instance->firmware_root : NULL);
+}
+
+int session_set_dos_media_root(session *instance, const char *path)
+{
+    return session_set_root(instance, instance != NULL ? instance->dos_media_root : NULL,
+        path);
+}
+
+const char *session_dos_media_root(const session *instance)
+{
+    return session_root(instance, instance != NULL ? instance->dos_media_root : NULL);
+}
+
+int session_set_win16_media_root(session *instance, const char *path)
+{
+    return session_set_root(instance,
+        instance != NULL ? instance->win16_media_root : NULL, path);
+}
+
+const char *session_win16_media_root(const session *instance)
+{
+    return session_root(instance,
+        instance != NULL ? instance->win16_media_root : NULL);
 }
 
 int session_guest_memory_begin(session *instance, void *context,

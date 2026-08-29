@@ -66,3 +66,19 @@ M0 T310 S3 disposition register:
   make one fixed-width machine-backend selection while ready. The choice is
   immutable after activation and carries neither a native pointer nor an
   executable callback; `session` does not construct either backend.
+
+M0 T310 S8 disposition register:
+
+- `session.c` and `session.h`: `small neutral extension`. A ready session may
+  retain immutable, app-selected roots for firmware, DOS media and Win16
+  media. They are UTF-8/ANSI path copies only: session neither locates files,
+  loads guest bytes nor interprets any OpenNT service. The app chooses the
+  executable-relative roots; source-shaped adapters consume them synchronously.
+
+M0 T310 S8 disposition register:
+
+- `session.c` and `session.h`: `small neutral extension`. A ready session may
+  retain immutable, app-selected roots for firmware, DOS media and Win16
+  media. They are UTF-8/ANSI path copies only: session neither locates files,
+  loads guest bytes nor interprets any OpenNT service. The app chooses the
+  executable-relative roots; source-shaped adapters consume them synchronously.

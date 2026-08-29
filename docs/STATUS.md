@@ -303,6 +303,18 @@ the executable-relative `softpc\\roms` package layout before session
 activation; `dos/` and `win16/` remain sibling guest-media roots. It is
 composition evidence only, not a runnable-machine claim.
 
+**T310 S8 P1 continuation:** original `InitialiseDosEmulation` no longer
+looks for `ntio.sys` in the host system directory. Its original open/size/read/
+SAS/entry sequence is retained, with only lookup bound to the app-selected
+session DOS-media root. Formal x86/x64 fixtures resolve the byte-exact mirrored
+`NTIO.SYS`; the full reset/provider path remains active P1 work.
+
+**T310 S8 P1 continuation:** original `InitialiseDosEmulation` no longer
+looks for `ntio.sys` in the host system directory. Its original open/size/read/
+SAS/entry sequence is retained, with only lookup bound to the app-selected
+session DOS-media root. Formal x86/x64 fixtures resolve the byte-exact mirrored
+`NTIO.SYS`; the full reset/provider path remains active P1 work.
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove
