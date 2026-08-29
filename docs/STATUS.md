@@ -35,6 +35,13 @@ capability and mirror-purity acceptance**, which verifies every selected
 x86/x64 SoftPC logic path.  S10, not S8, is the final T310 closure gate.  See
 [the amended S8--S10 plan](etc/operations/m0-t310-s8-original-machine-composition-plan-001.md).
 
+**T310 S8 P4:** a fresh cleaned formal MSVC `/MT` baseline now reaches the
+same `349/349` selected-source graph on x86 and x64 with zero errors. Its
+21,547 x64 and 21,423 x86 compiler-warning records remain compiler-visible
+and are scoped only to `mvdm-host` and `mvdm-support` for whole-tree ABI
+classification. This is an audit baseline, not an S8 closure claim; see the
+[current full-tree baseline](etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md).
+
 **T310 S8 P4:** source-list recovery proved that the 31 `ga_glue.c` x86/x64
 warnings came from a historical C-video variant deliberately commented out by
 the original `base/video/sources` manifest. The Ninja manifest reader now
