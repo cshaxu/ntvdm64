@@ -309,11 +309,13 @@ SAS/entry sequence is retained, with only lookup bound to the app-selected
 session DOS-media root. Formal x86/x64 fixtures resolve the byte-exact mirrored
 `NTIO.SYS`; the full reset/provider path remains active P1 work.
 
-**T310 S8 P1 continuation:** original `InitialiseDosEmulation` no longer
-looks for `ntio.sys` in the host system directory. Its original open/size/read/
-SAS/entry sequence is retained, with only lookup bound to the app-selected
-session DOS-media root. Formal x86/x64 fixtures resolve the byte-exact mirrored
-`NTIO.SYS`; the full reset/provider path remains active P1 work.
+**T310 S8 P1 conditional correction:** source evidence establishes that
+`MIPS_BIT_MASK` distinguishes the original x86 and MIPS VDM contracts. Both
+supported builds execute the selected x86 guest, so the original x86
+bit-clearing transition is now selected explicitly by
+`MVDM_X86_GUEST_COMPAT` on x86 and x64. `i386` remains defined only for the
+historical x86 compiler target. This is one registered mirror divergence, not
+a general override for unreviewed non-`i386` paths.
 
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer

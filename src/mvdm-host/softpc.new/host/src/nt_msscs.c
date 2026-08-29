@@ -122,10 +122,18 @@ InitialiseDosEmulation(int argc, char **argv)
               (PCHAR)&fVirtualInt,
               FIXED_NTVDMSTATE_SIZE
               );
-#ifndef i386
-    fVirtualInt |=  MIPS_BIT_MASK;
-#else
+#if defined(MVDM_X86_GUEST_COMPAT)
+    /*
+     * DIVERGENCE: MVDM-HOST-DIV-039
+     *
+     * The historical #ifndef i386 arm selects the MIPS VDM contract, not
+     * a 64-bit host contract.  Both supported builds execute an x86 guest
+     * through the selected SoftPC profile, so retain the original x86
+     * observable state on x86 and x64 without falsely defining i386 on x64.
+     */
     fVirtualInt &=  ~MIPS_BIT_MASK;
+#else
+    fVirtualInt |=  MIPS_BIT_MASK;
 #endif
     sas_storedw((ULONG)FIXED_NTVDMSTATE_LINEAR,fVirtualInt);
 

@@ -2,17 +2,27 @@
 
 ## Decision
 
-`i386` is the original **32-bit x86** source-selection macro.  It is neither
-a synonym for an x86 host nor a declaration that NT4 V86/MONITOR facilities
-exist.  In particular, the x64 candidate must not define it merely to reuse a
-historical x86 path: `#ifndef i386` is a real x64 source branch that requires
-its own later semantic-owner audit.
+`i386` is the original **32-bit x86 compilation-target** macro.  It is neither
+a synonym for an x86 guest nor a declaration that NT4 V86/MONITOR facilities
+exist.  An x64 candidate must not define it merely to reuse historical source
+selection.
+
+The first completed conditional audit is
+`nt_msscs.c::InitialiseDosEmulation`.  Its `MIPS_BIT_MASK` is documented by
+the original `mvdm/inc/vint.h` as the x86/MIPS VDM distinction.  Therefore an
+x64 host running the selected x86 SoftPC guest must retain the original x86
+transition (clear the bit), not select the historical MIPS arm merely because
+`i386` is absent.  `MVDM_X86_GUEST_COMPAT` expresses that narrow guest-machine
+fact on both supported builds; it does not change `i386` selection or approve
+other non-i386 branches without their own audit.
 
 ## Source-selected build change
 
-`tools/build/New-T310OriginalSoftpcNinja.ps1` now applies `/Di386` only for
+`tools/build/New-T310OriginalSoftpcNinja.ps1` applies `/Di386` only for
 `-Architecture x86`.  The x64 graph deliberately has no equivalent define.
-It records `i386Define=true|false` in its generated manifest and writes below
+Both graphs define the independently named, audited
+`MVDM_X86_GUEST_COMPAT` profile selector.  The graph records
+`i386Define=true|false` in its generated manifest and writes below
 `build/M0-T310/S8/p1-machine-source/<architecture>`.
 
 This is build selection only.  It does not assert that every differing branch
@@ -35,8 +45,9 @@ ninja -C build/M0-T310/S8/p1-machine-source/x64 original-softpc-candidate
 
 Both graphs archived the selected original CCPU, BIOS, keymouse, system,
 support, video and selected host-root groups.  The x64 command line contains
-no `/Di386`; the x86 command line contains it exactly once.  Existing original
-source warnings remain warnings only.
+no `/Di386`; the x86 command line contains it exactly once; both include the
+explicit guest-profile define. Existing original source warnings remain
+warnings only.
 
 ## P1 machine-source implication
 

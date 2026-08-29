@@ -154,12 +154,12 @@ $includeRoots = @(
     'src/session'
 ) | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 
-# `i386` is the original 32-bit x86 selection macro.  It is deliberately not
-# defined for x64: several historical `#ifndef i386` paths are the only source
-# evidence for a non-i386 host implementation and must be compiled/audited
-# instead of being silently forced through the 32-bit branch.
+# `i386` remains the original 32-bit compilation-target macro.  The selected
+# profile nevertheless executes an x86 guest on both supported hosts.  The
+# explicit compatibility macro is only for individually audited guest-machine
+# semantics; it is not a substitute for i386 or a blanket x64 branch override.
 $architectureFlags = if ($Architecture -eq 'x86') { '/Di386 ' } else { '' }
-$baseFlags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT ' + $architectureFlags + '/DNTVDM /DCPU_30_STYLE /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD ' +
+$baseFlags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT ' + $architectureFlags + '/DMVDM_X86_GUEST_COMPAT /DNTVDM /DCPU_30_STYLE /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' +
     ($includeRoots -join ' ')
 
