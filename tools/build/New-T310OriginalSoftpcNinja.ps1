@@ -125,7 +125,8 @@ $hostNames = @(Get-OriginalSources $hostManifest)
 # conditional block and are already part of the admitted candidate profile.
 $hostNames = @($hostNames + 'nt_cprgs.c' + 'nt_aorc.c') | Select-Object -Unique
 $adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_compat.c',
-                        'nt_thread_alert_compat.c', 'opennt_support_rtl.c')
+                        'nt_thread_alert_compat.c', 'nt_wait_compat.c',
+                        'opennt_support_rtl.c')
  $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_softpc_physical_mapping.c')
 $patchNames = @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h')
 $patchBodyNames = @('fmstubs.c')
@@ -200,6 +201,16 @@ if (!(Test-Path -LiteralPath $umbOverlayRoot -PathType Container)) { throw "UMB 
 if ([string]::IsNullOrWhiteSpace($NodeExecutable)) { $NodeExecutable = $env:MVDM_NODE22 }
 if ([string]::IsNullOrWhiteSpace($NodeExecutable) -or !(Test-Path -LiteralPath $NodeExecutable -PathType Leaf)) {
     throw 'Node 22 is required for the GDP slot generator; pass -NodeExecutable or set MVDM_NODE22.'
+}
+function Get-NodeSha256([string]$Path) {
+    # The supported desktop PowerShell host can lack Get-FileHash.  The
+    # formal graph already requires this exact Node 22 runtime for generated
+    # carriers, so use it for deterministic patch provenance as well.
+    $hash = & $NodeExecutable -e "const fs=require('fs');const crypto=require('crypto');process.stdout.write(crypto.createHash('sha256').update(fs.readFileSync(process.argv[1])).digest('hex'));" $Path
+    if ($LASTEXITCODE -ne 0 -or $hash -notmatch '^[0-9a-f]{64}$') {
+        throw "Node SHA-256 failed for: $Path"
+    }
+    return $hash
 }
 $cvidcGeneratedRoot = Join-Path $build 'generated/cvidc'
 $cvidcGenerated = & $cvidcGenerator -RepositoryRoot $root -OutputDirectory $cvidcGeneratedRoot | ConvertFrom-Json
@@ -490,20 +501,20 @@ $graph.Add('default original-softpc-candidate')
     patchInputs = @($patchNames | ForEach-Object {
         [ordered]@{
             path = 'src/mvdm-softpc-patch/x86/prod/' + $_
-            sha256 = (Get-FileHash -LiteralPath (Join-Path $patchRoot $_) -Algorithm SHA256).Hash.ToLowerInvariant()
+            sha256 = Get-NodeSha256 (Join-Path $patchRoot $_)
         }
     })
     patchBodies = @($patchBodyNames | ForEach-Object {
         [ordered]@{
             path = 'src/mvdm-softpc-patch/patches/common/' + $_
-            sha256 = (Get-FileHash -LiteralPath (Join-Path $patchBodyRoot $_) -Algorithm SHA256).Hash.ToLowerInvariant()
+            sha256 = Get-NodeSha256 (Join-Path $patchBodyRoot $_)
             buildDisposition = 'compile-and-archive-debugbreak-evidence-only'
         }
     })
     patchEvidence = @($patchEvidenceNames | ForEach-Object {
         [ordered]@{
             path = 'src/mvdm-softpc-patch/patches/' + $_
-            sha256 = (Get-FileHash -LiteralPath (Join-Path $patchEvidenceRoot $_) -Algorithm SHA256).Hash.ToLowerInvariant()
+            sha256 = Get-NodeSha256 (Join-Path $patchEvidenceRoot $_)
         }
     })
     forbiddenInputs = @('src.old', 'bochs-core', 'adapter-bochs')

@@ -88,6 +88,14 @@ typedef enum _NT_PRODUCT_TYPE {
 #ifndef WaitAny
 #define WaitAny 1
 #endif
+/* DIVERGENCE(ADAPTER-WIN32-029): selected original SoftPC host paths use
+ * NtWaitForMultipleObjects with NT4 WAIT_TYPE/alertable semantics.  The
+ * modern public Win32 wait surface exposes the same observable wait results
+ * but not the historical NTSTATUS-shaped declaration. */
+NTSTATUS NTAPI opennt_NtWaitForMultipleObjects(
+    ULONG Count, HANDLE *Handles, ULONG WaitType, BOOLEAN Alertable,
+    PLARGE_INTEGER Timeout);
+#define NtWaitForMultipleObjects opennt_NtWaitForMultipleObjects
 /* DIVERGENCE(ADAPTER-WIN32-021): Original SoftPC fprt.c uses the retired
  * CRT calling-convention macro in declarations of its original diagnostic
  * wrappers.  Modern MSVC omits that spelling.  Preserve the original ABI as
