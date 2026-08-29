@@ -514,13 +514,18 @@ VOID host_init_bda_timer(void)
 void host_GetSysTime(struct host_timeval *time)
 {
     LARGE_INTEGER liTime;
+    ULONG remainder;
 
         // Don't call kernel unless we have to.
     if (bDoingTicInterrupt) {
         liTime = RtlExtendedLargeIntegerDivide(
                                         CurrHeartBeat,
                                         1000000,
-                                        &time->tv_usec);
+                                        &remainder);
+        /* DIVERGENCE(MVDM-HOST-DIV-050): the original host_timeval field is
+         * signed IS32 while the preserved NTDLL ABI requires PULONG.  The
+         * remainder is strictly below the positive divisor. */
+        time->tv_usec = (IS32)remainder;
         time->tv_sec = liTime.LowPart;
         }
     else {

@@ -415,6 +415,9 @@ $hostObjects = foreach ($name in $hostNames) {
 $umbOverlaySource = Join-Path $umbOverlayRoot 'mvdm_umb_address.c'
 $graph.Add('build obj/host/mvdm_umb_address.obj: cc ' + (NinjaPath $umbOverlaySource))
 $hostObjects += 'obj/host/mvdm_umb_address.obj'
+$eoiOverlaySource = Join-Path $umbOverlayRoot 'mvdm_ica_eoi_bridge.c'
+$graph.Add('build obj/host/mvdm_ica_eoi_bridge.obj: cc ' + (NinjaPath $eoiOverlaySource))
+$hostObjects += 'obj/host/mvdm_ica_eoi_bridge.obj'
 $adapterWin32Objects = foreach ($name in $adapterWin32Names) {
     $object = 'obj/adapter-win32/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterWin32Root $name)))
