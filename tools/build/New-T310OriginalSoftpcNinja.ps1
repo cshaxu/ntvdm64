@@ -20,7 +20,12 @@ function Get-OriginalSources([string]$Manifest) {
     $raw = Get-Content -LiteralPath $Manifest -Raw
     $match = [regex]::Match($raw, '(?s)SOURCES\s*=\s*(.*?)(?=\r?\n\s*(?:!INCLUDE|UMTYPE|i386_SOURCES|MIPS_SOURCES|ALPHA_SOURCES))')
     if (!$match.Success) { throw "Cannot isolate original SOURCES block: $Manifest" }
-    $names = @([regex]::Matches($match.Groups[1].Value, '\b([A-Za-z0-9_]+\.c)\b') |
+    # An OpenNT `sources` block may retain a disabled candidate as a `#`
+    # comment (for example the pre-EVID C-video glue).  It is source evidence,
+    # not a selected member of this build profile.  Remove complete comment
+    # lines before extracting the selected original translation units.
+    $sourceBlock = [regex]::Replace($match.Groups[1].Value, '(?m)^\s*#.*(?:\r?\n|$)', '')
+    $names = @([regex]::Matches($sourceBlock, '\b([A-Za-z0-9_]+\.c)\b') |
         ForEach-Object { $_.Groups[1].Value } |
         Select-Object -Unique)
     if ($names.Count -eq 0) { throw "No C sources selected by original manifest: $Manifest" }

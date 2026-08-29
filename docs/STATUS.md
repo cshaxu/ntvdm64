@@ -35,6 +35,14 @@ capability and mirror-purity acceptance**, which verifies every selected
 x86/x64 SoftPC logic path.  S10, not S8, is the final T310 closure gate.  See
 [the amended S8--S10 plan](etc/operations/m0-t310-s8-original-machine-composition-plan-001.md).
 
+**T310 S8 P4:** source-list recovery proved that the 31 `ga_glue.c` x86/x64
+warnings came from a historical C-video variant deliberately commented out by
+the original `base/video/sources` manifest. The Ninja manifest reader now
+honors that comment, retaining the file as byte-identical evidence but not
+compiling it into the selected CPU_40/EVID machine. No pointer cast,
+mapping-manager route or controller shim was added; see the
+[profile source-selection closure](etc/evidence/m0-t310-s8-p4-video-profile-source-selection-closure-001.md).
+
 **T310 S1 closure:** `6a46ee748` establishes the exact original `ccpu386`,
 `host/src` and `obj.vdm` roots, hashes, historical source roles and a
 per-session one-backend contract. It reverses the previous planning assumption
