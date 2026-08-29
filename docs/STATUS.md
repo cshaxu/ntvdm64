@@ -139,6 +139,11 @@ shared K&R default-int source form; its declaration/definition contracts are
 identical on x86 and x64 and no native identity crosses. The mirror remains
 unchanged; see the [floppy source-form disposition](etc/evidence/m0-t310-s8-p4-floppy-default-int-disposition-001.md).
 
+**T310 S8 P4:** all reviewed `stubs.c`/`nt_fulsc.c` default-int records and
+the private `nt_unix.c` byte/character buffer views are source forms, not
+x86/x64 ABI transitions. They remain compiler-visible and unchanged; see the
+[host source-form disposition](etc/evidence/m0-t310-s8-p4-host-stub-source-form-disposition-001.md).
+
 **T310 S8 P4:** source review classifies all 100 CCPU `c_main.c` C4057
 operand calls as original fixed 32-bit Intel state, not host-width ABI
 transitions. They remain compiler-visible but leave the x86/x64 repair
