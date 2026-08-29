@@ -503,23 +503,15 @@ GLOBAL VOID config( VOID )
         // dpmi memory. We get this size from the registry.
         //
 
-#ifdef i386
+	 /*
+	  * DIVERGENCE(MVDM-HOST-DIV-056): the historical condition selected
+	  * the i386 guest path only when the host build defined i386; its other
+	  * branch was for the NT RISC VDM product.  This product always models an
+	  * x86 guest on both supported host architectures, so retain the original
+	  * x86 calculation without deriving guest semantics from the host ABI.
+	  */
 	 // adding 1024 below is for conventional memory
 	 vdmMemorySize = xmsMemorySize + emsMemorySize + 1024;
-#else
-	 vdmMemorySize = GetVDMSize(VDMForWOW);
-
-	 // Extend the vdm size if the user asks for it through a .PIF.
-	 // Also make sure we have at least appropriate size of dpmi
-	 // memory.
-	 //
-	 if ((xmsMemorySize + emsMemorySize +  1024 + dpmiMemorySize) >
-	      vdmMemorySize)
-	 {
-	    vdmMemorySize = xmsMemorySize + emsMemorySize + 1024 +
-			    dpmiMemorySize;
-	 }
-#endif
 
 #ifndef PROD
 	dpmiMemorySize = vdmMemorySize - (xmsMemorySize + emsMemorySize + 1024);

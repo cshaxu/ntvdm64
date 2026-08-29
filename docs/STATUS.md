@@ -451,6 +451,14 @@ ledger has no remaining return, parameter or unprototyped-slot mismatch. It is
 not a claim that the broader CCPU indirect-call family is finished; that audit
 continues under P4.
 
+**T310 S8 P4 configuration guest-profile conditional closure:** original
+`config.c` no longer uses the host compiler's `i386` marker to select between
+the x86 guest memory calculation and the historical RISC VDM branch.  The
+selected x86 calculation is now shared by both supported host targets; the
+small source-subset exception is registered as `MVDM-HOST-DIV-056`.  Fresh
+formal x86/x64 Ninja builds passed.  See the [conditional closure evidence]
+(etc/evidence/m0-t310-s8-p4-configuration-guest-profile-conditional-closure-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove
