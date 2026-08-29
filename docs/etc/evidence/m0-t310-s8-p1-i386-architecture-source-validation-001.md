@@ -94,5 +94,12 @@ Each fixture binds a session, resolves the shipped `bios1.rom`, rejects a
 missing ROM with an empty output buffer, and rejects a too-small caller
 buffer. x86 compiles with `i386`; x64 deliberately does not.
 
+The separate `New-T310PackageLayoutNinja.ps1` fixture also passed on x86 and
+x64. It proves that app derives `C:\\installed\\ntvdm64.exe` to
+`C:\\installed\\softpc\\roms` before activation and rejects a bare relative
+executable name. The public `GetModuleFileNameA` wrapper uses exactly the same
+path derivation for the real executable; no firmware path is read from the
+current working directory or an NT system directory.
+
 No Bochs device, MONITOR, kernel VDM, `src.old`, raw native identity or
 preprocessor-derived capability decision was introduced.

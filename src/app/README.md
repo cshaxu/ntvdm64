@@ -26,3 +26,43 @@ T310 S4 imports its original machine composition; it never falls back to
 Bochs. All later functional fixtures must cover both selected backends on x86
 and x64; an unavailable backend is a recorded outcome, not a skipped matrix
 cell.
+
+## M0 T310 S8 installed package layout
+
+`package_layout.{c,h}` is the app-owned installation contract for immutable
+machine inputs. Before activating a session, app resolves the executable
+directory and selects `<exe-directory>\\softpc\\roms` as that session's
+firmware root. The lookup itself remains in the original SoftPC
+`host_find_file` call shape through the named SoftPC adapter. `dos/` and
+`win16/` are sibling guest-media roots, not host libraries and not firmware
+linked into the executable.
+
+## M0 T310 S8 installed package layout
+
+`package_layout.{c,h}` is the app-owned installation contract for immutable
+machine inputs. Before activating a session, app resolves the executable
+directory and selects `<exe-directory>\\softpc\\roms` as that session's
+firmware root. The lookup itself remains in the original SoftPC
+`host_find_file` call shape through the named SoftPC adapter. `dos/` and
+`win16/` are sibling guest-media roots, not host libraries and not firmware
+linked into the executable.
+
+## M0 T310 S8 installed package layout
+
+`package_layout.{c,h}` is the app-owned installation contract for immutable
+machine inputs. Before activating a session, app resolves the executable
+directory and selects `<exe-directory>\\softpc\\roms` as that session's
+firmware root. The lookup itself remains in the original SoftPC
+`host_find_file` call shape through the named SoftPC adapter. `dos/` and
+`win16/` are sibling guest-media roots, not host libraries and not firmware
+linked into the executable.
+
+## M0 T310 S8 installed package layout
+
+`package_layout.{c,h}` is the app-owned installation contract for immutable
+machine inputs. Before activating a session, app resolves the executable
+directory and selects `<exe-directory>\\softpc\\roms` as that session's
+firmware root. The lookup itself remains in the original SoftPC
+`host_find_file` call shape through the named SoftPC adapter. `dos/` and
+`win16/` are sibling guest-media roots, not host libraries and not firmware
+linked into the executable.

@@ -298,8 +298,10 @@ firmware inputs and the complete original `base/disks/sources` plus
 The original `host_find_file` call shape is now bound to an immutable,
 session-owned firmware root rather than the host system directory; formal
 Ninja fixtures verify both `bios1.rom` resolution and the original missing
-resource failure direction on x86 and x64.  It is composition evidence only,
-not a runnable-machine claim.
+resource failure direction on x86 and x64. App now supplies that root from
+the executable-relative `softpc\\roms` package layout before session
+activation; `dos/` and `win16/` remain sibling guest-media roots. It is
+composition evidence only, not a runnable-machine claim.
 
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
