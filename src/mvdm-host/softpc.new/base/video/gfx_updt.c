@@ -97,6 +97,13 @@ GLOBALS		  :	describe what exported data objects are
 #include "ga_mark.h"
 #include "ga_defs.h"
 
+/* DIVERGENCE MVDM-HOST-DIV-087: retain the original host display update call
+ * with the exact selected nt_graph.c parameter contract.  The split source
+ * layout has no public declaration carrier for this same-package provider. */
+IMPORT void host_stream_io_update IPT2(half_word *, buffer, word, count);
+/* DIVERGENCE MVDM-HOST-DIV-088: selected C-video marker selector. */
+IMPORT void setMarkPointers IPT1(IUH, markset);
+
 /*[3.2 INTERMODULE EXPORTS]						*/ 
 
 /*
@@ -649,6 +656,10 @@ LOCAL VOID simple_update_b_move IFN4(UTINY *, laddr, UTINY *, haddr,
 	setVideodirty_total(getVideodirty_total() + 1);
 }
 
+#if !defined(CPU_40_STYLE) || !defined(C_VID)
+/* DIVERGENCE MVDM-HOST-DIV-088: this generic A2/debug table carries the
+ * historical untyped callback forms.  The selected C-video profile installs
+ * Glue_writes, so this unselected table remains outside that typed build. */
 MEM_HANDLERS vid_handlers =
 {
 	simple_handler,
@@ -658,6 +669,7 @@ MEM_HANDLERS vid_handlers =
 	simple_update_b_move,
 	simple_handler
 };
+#endif
 
 GLOBAL void dummy_calc IFN0()
 {

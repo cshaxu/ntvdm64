@@ -310,6 +310,9 @@ extern void  fill_byte_ev_glue IPT3(IU32, eaOff, IU8, eaVal, IU32, count);
 extern void  fill_word_ev_glue IPT3(IU32, eaOff, IU16, eaVal, IU32, count);
 extern void  move_byte_fwd_ev_glue IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);
 extern void  move_word_fwd_ev_glue IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);
+/* DIVERGENCE MVDM-HOST-DIV-088: use the original C-video selector body's
+ * exact no-argument contract rather than an implicit host-int call. */
+extern void setWritePointers IPT0();
 MEM_HANDLERS Glue_writes =
 {
 	write_byte_ev_glue,

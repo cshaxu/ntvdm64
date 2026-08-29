@@ -36,6 +36,13 @@ static char SccsID[]="@(#)virtual.c	1.9 07/05/95 Copyright Insignia Solutions Lt
 #include "error.h"
 #include "debug.h"
 
+/* DIVERGENCE MVDM-HOST-DIV-087: the selected SoftPC patch retains this
+ * original VM-instance lifecycle hook, but its historical header carrier is
+ * absent from the split source layout.  Publish its exact void contract at
+ * the original call boundary; the patch provider and System_Exit ordering are
+ * unchanged. */
+extern VOID ClearInstanceDataMarking(VOID);
+
 /*
    This file implements the Non-Intel Driver Data Block (NIDDB) Manager. This 
    service allows Insignia DOS Device Drivers or TSRs with C code and data to
