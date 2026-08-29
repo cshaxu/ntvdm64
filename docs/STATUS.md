@@ -573,6 +573,13 @@ x64-only excess diagnostics are now evidenced and grouped by original
 COMMAND, DEM and XMS owner packages; no diagnostic suppression was added. See
 the [formal architecture delta](etc/evidence/m0-t310-s8-p4-whole-tree-formal-architecture-delta-001.md).
 
+**T310 S8 P4 COMMAND RTL environment binding closure:** original `cmdenv.c`
+and `cmdexec.c` now compile against the selected `ntrtl.h` declarations and
+the same-shaped, host-private RTL environment adapter. x86/x64 object and
+forced-link checks clear the former implicit-declaration faults without
+altering a COMMAND mirror body. See the [RTL environment evidence]
+(etc/evidence/m0-t310-s8-p4-command-rtl-environment-binding-closure-001.md).
+
 **T310 S8 P4 serial/parallel native transport closure:** original SoftPC COM
 and LPT host sources retain their device request order and configuration
 semantics while their private pointer-or-scalar ioctl and worker transports

@@ -55,6 +55,163 @@ static NTSTATUS opennt_support_last_error_status(void)
     return error == ERROR_NOT_ENOUGH_MEMORY ? STATUS_NO_MEMORY : STATUS_INVALID_PARAMETER;
 }
 
+/* DIVERGENCE(ADAPTER-WIN32-026): NT4 supplied the Rtl environment block
+ * routines from its private RTL/PEB composition.  Retain their counted-string
+ * and mutable MULTI_SZ contract with public Win32 heap/environment APIs; the
+ * block remains host-private and is never a guest pointer or mapping token. */
+static NTSTATUS opennt_support_environment_units(PWCHAR environment, SIZE_T *units)
+{
+    SIZE_T index;
+    if (environment == NULL || units == NULL) return STATUS_INVALID_PARAMETER;
+    for (index = 0; index < 32767u; ++index) {
+        if (environment[index] == L'\0' && environment[index + 1u] == L'\0') {
+            *units = index + 2u;
+            return STATUS_SUCCESS;
+        }
+    }
+    return STATUS_INVALID_PARAMETER;
+}
+
+static SIZE_T opennt_support_environment_name_length(PCWSTR entry)
+{
+    SIZE_T index = entry[0] == L'=' ? 1u : 0u;
+    while (entry[index] != L'=' && entry[index] != L'\0') ++index;
+    return index;
+}
+
+static int opennt_support_compare_environment_name(PCWSTR entry, PCUNICODE_STRING name)
+{
+    SIZE_T entry_length = opennt_support_environment_name_length(entry);
+    SIZE_T name_length = name->Length / sizeof(WCHAR);
+    int comparison;
+    comparison = CompareStringOrdinal(entry, (int)entry_length, name->Buffer, (int)name_length, TRUE);
+    return comparison == CSTR_LESS_THAN ? -1 : comparison == CSTR_GREATER_THAN ? 1 : 0;
+}
+
+static VOID opennt_support_copy_environment_assignment(PWCHAR *destination, PCUNICODE_STRING name, PCUNICODE_STRING value)
+{
+    SIZE_T name_units = name->Length / sizeof(WCHAR);
+    SIZE_T value_units = value->Length / sizeof(WCHAR);
+    memcpy(*destination, name->Buffer, name->Length);
+    *destination += name_units;
+    *(*destination)++ = L'=';
+    if (value_units != 0u) {
+        memcpy(*destination, value->Buffer, value->Length);
+        *destination += value_units;
+    }
+    *(*destination)++ = L'\0';
+}
+
+NTSTATUS NTAPI RtlCreateEnvironment(BOOLEAN clone_current_environment, PVOID *environment)
+{
+    PWCHAR source = NULL;
+    PWCHAR copy;
+    SIZE_T units;
+    NTSTATUS status;
+    if (environment == NULL) return STATUS_INVALID_PARAMETER;
+    if (clone_current_environment) {
+        source = GetEnvironmentStringsW();
+        if (source == NULL) return opennt_support_last_error_status();
+        status = opennt_support_environment_units(source, &units);
+        if (!NT_SUCCESS(status)) {
+            FreeEnvironmentStringsW(source);
+            return status;
+        }
+    } else {
+        units = 2u;
+    }
+    if (units > SIZE_MAX / sizeof(WCHAR)) {
+        if (source != NULL) FreeEnvironmentStringsW(source);
+        return STATUS_NO_MEMORY;
+    }
+    copy = (PWCHAR)HeapAlloc(GetProcessHeap(), 0, units * sizeof(WCHAR));
+    if (copy == NULL) {
+        if (source != NULL) FreeEnvironmentStringsW(source);
+        return STATUS_NO_MEMORY;
+    }
+    if (source != NULL) {
+        memcpy(copy, source, units * sizeof(WCHAR));
+        FreeEnvironmentStringsW(source);
+    } else {
+        copy[0] = L'\0';
+        copy[1] = L'\0';
+    }
+    *environment = copy;
+    return STATUS_SUCCESS;
+}
+
+NTSTATUS NTAPI RtlDestroyEnvironment(PVOID environment)
+{
+    if (environment == NULL) return STATUS_INVALID_PARAMETER;
+    HeapFree(GetProcessHeap(), 0, environment);
+    return STATUS_SUCCESS;
+}
+
+NTSTATUS NTAPI RtlSetEnvironmentVariable(PVOID *environment, PCUNICODE_STRING name, PCUNICODE_STRING value)
+{
+    PWCHAR source;
+    PWCHAR replacement;
+    PWCHAR cursor;
+    PWCHAR output;
+    SIZE_T source_units;
+    SIZE_T name_units;
+    SIZE_T value_units = 0u;
+    SIZE_T replacement_units;
+    SIZE_T assignment_units = 0u;
+    BOOL found = FALSE;
+    BOOL inserted = FALSE;
+    NTSTATUS status;
+
+    if (environment == NULL || name == NULL || name->Buffer == NULL || name->Length == 0u || (name->Length % sizeof(WCHAR)) != 0u || (value != NULL && (value->Length % sizeof(WCHAR)) != 0u) || (value != NULL && value->Length != 0u && value->Buffer == NULL)) return STATUS_INVALID_PARAMETER;
+    if (*environment == NULL) {
+        status = RtlCreateEnvironment(FALSE, environment);
+        if (!NT_SUCCESS(status)) return status;
+    }
+    source = (PWCHAR)*environment;
+    status = opennt_support_environment_units(source, &source_units);
+    if (!NT_SUCCESS(status)) return status;
+    name_units = name->Length / sizeof(WCHAR);
+    if (value != NULL) {
+        value_units = value->Length / sizeof(WCHAR);
+        if (name_units > SIZE_MAX - value_units - 2u) return STATUS_NO_MEMORY;
+        assignment_units = name_units + value_units + 2u;
+    }
+
+    replacement_units = 1u;
+    for (cursor = source; *cursor != L'\0'; cursor += wcslen(cursor) + 1u) {
+        SIZE_T entry_units = wcslen(cursor) + 1u;
+        int comparison = opennt_support_compare_environment_name(cursor, name);
+        if (comparison == 0) {
+            found = TRUE;
+            if (value != NULL) replacement_units += assignment_units;
+        } else {
+            replacement_units += entry_units;
+        }
+    }
+    if (value != NULL && !found) replacement_units += assignment_units;
+    if (replacement_units > SIZE_MAX / sizeof(WCHAR)) return STATUS_NO_MEMORY;
+    replacement = (PWCHAR)HeapAlloc(GetProcessHeap(), 0, replacement_units * sizeof(WCHAR));
+    if (replacement == NULL) return STATUS_NO_MEMORY;
+
+    output = replacement;
+    for (cursor = source; *cursor != L'\0'; cursor += wcslen(cursor) + 1u) {
+        SIZE_T entry_units = wcslen(cursor) + 1u;
+        int comparison = opennt_support_compare_environment_name(cursor, name);
+        if (value != NULL && !inserted && comparison > 0) {
+            opennt_support_copy_environment_assignment(&output, name, value);
+            inserted = TRUE;
+        }
+        if (comparison == 0) continue;
+        memcpy(output, cursor, entry_units * sizeof(WCHAR));
+        output += entry_units;
+    }
+    if (value != NULL && !inserted) opennt_support_copy_environment_assignment(&output, name, value);
+    *output = L'\0';
+    HeapFree(GetProcessHeap(), 0, source);
+    *environment = replacement;
+    return STATUS_SUCCESS;
+}
+
 static NTSTATUS opennt_support_convert_to_unicode(PUNICODE_STRING destination, PCOEM_STRING source, UINT code_page, BOOLEAN allocate)
 {
     int characters;

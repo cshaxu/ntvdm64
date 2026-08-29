@@ -25,6 +25,9 @@
  * opennt-host.  The adapter's type binding is deliberately established
  * first, then the original historical declaration shape is made visible. */
 #include <ntpsapi.h>
+/* The selected OpenNT declaration subset is the source-facing contract for
+ * the historical RTL helpers implemented by this adapter. */
+#include <ntrtl.h>
 
 /* DIVERGENCE: The selected historical netlibnt.h declaration carrier uses
  * NT_PRODUCT_TYPE. The modern SDK's winnt.h exposes its own foundational

@@ -35,6 +35,13 @@ NTSTATUS NTAPI RtlSetCurrentDirectory_U(PCUNICODE_STRING PathName);
 ULONG NTAPI RtlNtStatusToDosError(NTSTATUS Status);
 VOID NTAPI RtlAcquirePebLock(VOID);
 VOID NTAPI RtlReleasePebLock(VOID);
+/* DIVERGENCE(OPENNT-HOST-010): original COMMAND environment code reaches
+ * these NT4 RTL declarations, while the selected subset previously stopped
+ * short of them.  Preserve only the original public function shapes; the
+ * modern mutable-block implementation is adapter-owned. */
+NTSTATUS NTAPI RtlCreateEnvironment(BOOLEAN CloneCurrentEnvironment, PVOID *Environment);
+NTSTATUS NTAPI RtlDestroyEnvironment(PVOID Environment);
+NTSTATUS NTAPI RtlSetEnvironmentVariable(PVOID *Environment, PCUNICODE_STRING Name, PCUNICODE_STRING Value);
 
 /* DIVERGENCE OPENNT-HOST-004: `nt_bop.c` reaches the exact historical
  * ntrtl.h declaration for this diagnostic-only breakpoint.  Modern SDK
