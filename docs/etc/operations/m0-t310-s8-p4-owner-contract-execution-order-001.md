@@ -10,10 +10,19 @@ all declarations, definitions, table assignments and selected callers of the
 same mechanism.
 
 The authoritative raw inputs are the whole-tree static ABI inventory, the
-compiler warning ledger, the contract review index and the reconciled warning
-worklist.  The latter currently contains 830 records grouped into the sixteen
-clusters below.  Counts are planning indicators only; closure requires source
-evidence, not a count reaching zero.
+compiler warning ledger, the contract review index, the reconciled warning
+worklist **and every existing P4 closure/disposition evidence file**.  The
+latter currently contains 830 records grouped into the sixteen clusters
+below.  Counts are planning indicators only; closure requires source evidence,
+not a count reaching zero.
+
+An already-repaired mirror line is not exempt from its owner-contract review.
+At the beginning of every cluster review, its existing `DIVERGENCE` entries,
+overlays, adapter bindings and earlier evidence are placed beside the original
+declaration, definition, slot/initializer and selected callers.  The review
+must either retain that repair as the smallest consistent form, replace it
+with an available original package/interface, or remove it.  This prevents a
+locally clean warning from being mistaken for a complete callable contract.
 
 ## Ordered clusters
 
@@ -59,7 +68,8 @@ evidence, not a count reaching zero.
 
 ## Per-cluster exit rule
 
-For every source contract in a cluster, record exactly one of: unchanged
+For every source contract in a cluster, including previously repaired source,
+record exactly one of: unchanged
 fixed-width/source form; minimal mirror correction; mirror overlay; existing
 adapter-backed binding; mapping-manager boundary; original unavailable in the
 selected profile; or not selected/not host runtime.  Then run the smallest

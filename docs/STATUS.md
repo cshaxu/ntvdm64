@@ -144,6 +144,12 @@ the private `nt_unix.c` byte/character buffer views are source forms, not
 x86/x64 ABI transitions. They remain compiler-visible and unchanged; see the
 [host source-form disposition](etc/evidence/m0-t310-s8-p4-host-stub-source-form-disposition-001.md).
 
+**T310 S8 P4:** `c_main.c` now preserves the private host decode-cursor
+difference as an explicit bounded instruction-byte count before its original
+EIP update forms.  Focused formal x86/x64 rebuilds close the native-width
+`__int64` narrowing while retaining unrelated fixed-width Intel warnings; see
+the [CCPU instruction-delta closure](etc/evidence/m0-t310-s8-p4-ccpu-instruction-delta-width-closure-001.md).
+
 **T310 S8 P4:** source review classifies all 100 CCPU `c_main.c` C4057
 operand calls as original fixed 32-bit Intel state, not host-width ABI
 transitions. They remain compiler-visible but leave the x86/x64 repair
