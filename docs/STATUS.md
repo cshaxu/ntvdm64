@@ -528,6 +528,24 @@ object builds have no relevant width/call-contract diagnostics; no adapter or
 mapping identity was added.  See the [copy-engine evidence]
 (etc/evidence/m0-t310-s8-p4-copy-fnc-native-alignment-closure-001.md).
 
+**T310 S8 P4 error-dialog native callback closure:** the selected original
+`nt_error.c` direct-access suppression and user-dialog paths now retain their
+original category/worker ordering while using native-width TLS, `HWND`, dialog
+data and public Win32 callback contracts. Formal x86/x64 object builds clear
+the selected user-mode width and callback diagnostics. `WOWpSysErrorBox` still
+depends on kernel/CSRSS `NtRaiseHardError`; it is recorded as a physical
+non-runtime boundary rather than emulated in the mirror. See the
+[error-dialog evidence](etc/evidence/m0-t310-s8-p4-error-dialog-native-callback-closure-001.md).
+
+**T310 S8 P4 error-dialog native callback closure:** the selected original
+`nt_error.c` direct-access suppression and user-dialog paths now retain their
+original category/worker ordering while using native-width TLS, `HWND`, dialog
+data and public Win32 callback contracts. Formal x86/x64 object builds clear
+the selected user-mode width and callback diagnostics. `WOWpSysErrorBox` still
+depends on kernel/CSRSS `NtRaiseHardError`; it is recorded as a physical
+non-runtime boundary rather than emulated in the mirror. See the
+[error-dialog evidence](etc/evidence/m0-t310-s8-p4-error-dialog-native-callback-closure-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove
