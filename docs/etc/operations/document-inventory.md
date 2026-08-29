@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3142 |
+| Documentation records | 3143 |
 | --- | --- |
-| Generated UTC | 2026-08-29T00:28:21Z |
+| Generated UTC | 2026-08-29T00:43:00Z |
 
 ## Entries
 
@@ -520,7 +520,8 @@ content-divergent entries.
 | etc/evidence/m0-t310-s6-v86-monitor-profile-removal-001.md | indexed supporting material | 3d7d3eb0d9e1c32d78a14868af346c7f577cf83f5bffd79c87a90754c90f04a2 |
 | etc/evidence/m0-t310-s7-p2-original-machine-host-interface-build-001.md | indexed supporting material | 1c2578aaf3ae2a052bb7f3f3654393869e58736f7c4d423cb01915c5f16f5e91 |
 | etc/evidence/m0-t310-s7-physical-page-source-recovery-audit-001.md | indexed supporting material | 6c4a4912e7d60858bad942bc36300c6b2646b8d9d24a9d170a0bb7258ef300c8 |
-| etc/evidence/m0-t310-s8-p1-i386-architecture-source-validation-001.md | indexed supporting material | 621042770b9f6de5810cdde6bf83c052ece538c03f0553fdfd785e3300d4aa6a |
+| etc/evidence/m0-t310-s8-p1-i386-architecture-source-validation-001.md | indexed supporting material | cf09da0f7b359fc9a993fa4cdd1d9c6fc1ba6b60e9aae081fbe757cf70a6622e |
+| etc/evidence/m0-t310-s8-p2-heartbeat-alert-binding-001.md | indexed supporting material | 541d969bc1b92901bf4b51bcd1e37143f5a75a99fa7e32e38fcd8377fcf03374 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1266,7 +1267,7 @@ content-divergent entries.
 | etc/operations/opennt-non-mvdm-stage1-semantic-site-ledger.tsv | indexed supporting material | e4d4936ec2f7aec51e360c39daff960b2e451c3f54be28a992e8e1ad52c3d524 |
 | etc/operations/opennt-non-mvdm-stage1-semantic-symbol-ledger.tsv | indexed supporting material | 0c281cd8ee4d7b225919ef6af7dba0105343be4c691b31725a34b22302c5bdec |
 | etc/operations/opennt-non-mvdm-stage1-true-egress-ledger.tsv | indexed supporting material | a537d68f8d63655fb89e98701058fa4f394b5924ef40d2dbc78f2e03d1f3b57b |
-| etc/operations/package-recovery-program-20260827.md | indexed supporting material | df7f3784f448e47c81afb54d533b3a0c778f8cde4861a33999b4213f2c449dff |
+| etc/operations/package-recovery-program-20260827.md | indexed supporting material | 9be9766437bdf6e1737a90eb17d641610a48edab2f060e0d947886daa97d0aed |
 | etc/operations/policy/source-policy.md | indexed supporting material | 3ca9821d9d05cb02140eb299f3b86fe37a594f33bd143315a950c2d615b586e1 |
 | etc/operations/proposal-bochs-component-identity-overlay-convergence-001.md | indexed supporting material | ac4de17a933c62d6b6adc1971345c6fe4e58860453fd894608553f2bdd6974c8 |
 | etc/operations/proposal-bochs-core-diff-overlay-minimization-001.md | indexed supporting material | 45eb3881102adb316497ec85eeac90488d95cd69c77d4555a1608a14d953db29 |
@@ -1281,7 +1282,7 @@ content-divergent entries.
 | etc/operations/proposal-dos-wow16-complete-source-build-closure-001.md | indexed supporting material | 3da5ac3935fbee1542946e0dfedf75d841836e0e0c7151536e88f5c44854f862 |
 | etc/operations/proposal-formal-build-entrypoint-and-reconstructed-monitor-fixture-repair-001.md | indexed supporting material | 8c20c430a033b448bf3de92e21f8ba32760c80fae225b5c0fa14ab4cc0814b8f |
 | etc/operations/proposal-mirror-component-conformance-reconciliation-001.md | indexed supporting material | 228bfecf66952415d1eb97730ecc994752d286741c4754dd99c32d8fb98df6c2 |
-| etc/operations/proposal-mvdm-host-i386-conditional-semantic-audit-001.md | indexed supporting material | 07429e3a52eecb8826f3ed9a086e55952edebf4a16990dd122ffbbbf32cdd4c0 |
+| etc/operations/proposal-mvdm-host-i386-conditional-semantic-audit-001.md | indexed supporting material | 3eddd095581a81066e2781596d0363ab949cbc8a06e5ab2ab9b79cdddd6efdad |
 | etc/operations/proposal-mvdm-host-support-reintegration-001.md | indexed supporting material | facad9311f82e593ea10bde3c5b71b0c728efb60ff31d2e57c536844cae7ce93 |
 | etc/operations/proposal-mvdm-package-interface-closure-tracker-001.md | indexed supporting material | 78161a8a678fd2ec48596f310c47ffafd01572a995f06012bf75f17da06d6d37 |
 | etc/operations/proposal-mvdm-runtime-support-tool-re-root-001.md | indexed supporting material | 9955eefb0e8480e99f22e0cac375325d72663293262656537f4ca8d7cbb027c4 |
@@ -3156,7 +3157,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 6f6f54ab6b100e3fcb768b942229361cd924dd6066f14925080ca2719766a9ea |
+| STATUS.md | principal control document | c6c85c5ea7602d9fa513ee005cab922e69bdbc05850b2c95806dd5154864af8d |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

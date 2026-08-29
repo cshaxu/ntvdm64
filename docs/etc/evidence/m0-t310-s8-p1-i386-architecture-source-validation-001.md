@@ -2,27 +2,24 @@
 
 ## Decision
 
-`i386` is the original **32-bit x86 compilation-target** macro.  It is neither
+`i386` is a historical **32-bit x86 compilation-target** macro. It is neither
 a synonym for an x86 guest nor a declaration that NT4 V86/MONITOR facilities
-exist.  An x64 candidate must not define it merely to reuse historical source
-selection.
+exist. Neither supported product graph defines it globally: a future original
+unit that truly requires it must receive a narrow, registered build exception.
 
 The first completed conditional audit is
-`nt_msscs.c::InitialiseDosEmulation`.  Its `MIPS_BIT_MASK` is documented by
-the original `mvdm/inc/vint.h` as the x86/MIPS VDM distinction.  Therefore an
-x64 host running the selected x86 SoftPC guest must retain the original x86
-transition (clear the bit), not select the historical MIPS arm merely because
-`i386` is absent.  `MVDM_X86_GUEST_COMPAT` expresses that narrow guest-machine
-fact on both supported builds; it does not change `i386` selection or approve
-other non-i386 branches without their own audit.
+`nt_msscs.c::InitialiseDosEmulation`. Its `MIPS_BIT_MASK` is documented by the
+original `mvdm/inc/vint.h` as the x86/MIPS VDM distinction. MIPS is not an
+admitted guest profile, so `MVDM-HOST-DIV-039` reduces this mirror body to its
+original x86 transition (clear the bit). The MIPS branch is deliberately not
+compiled in either host graph. This does not approve other `#ifndef i386`
+branches; each still requires its own semantic audit.
 
 ## Source-selected build change
 
-`tools/build/New-T310OriginalSoftpcNinja.ps1` applies `/Di386` only for
-`-Architecture x86`.  The x64 graph deliberately has no equivalent define.
-Both graphs define the independently named, audited
-`MVDM_X86_GUEST_COMPAT` profile selector.  The graph records
-`i386Define=true|false` in its generated manifest and writes below
+`tools/build/New-T310OriginalSoftpcNinja.ps1` applies no global `/Di386` on
+either `-Architecture x86` or `-Architecture x64`; its manifest records
+`i386Define=false` for both and writes below
 `build/M0-T310/S8/p1-machine-source/<architecture>`.
 
 This is build selection only.  It does not assert that every differing branch
@@ -44,10 +41,8 @@ ninja -C build/M0-T310/S8/p1-machine-source/x64 original-softpc-candidate
 ```
 
 Both graphs archived the selected original CCPU, BIOS, keymouse, system,
-support, video and selected host-root groups.  The x64 command line contains
-no `/Di386`; the x86 command line contains it exactly once; both include the
-explicit guest-profile define. Existing original source warnings remain
-warnings only.
+support, video and selected host-root groups. Neither command line contains
+`/Di386`. Existing original source warnings remain warnings only.
 
 ## P1 machine-source implication
 
@@ -103,7 +98,8 @@ ninja -C build/M0-T310/S8/p1-firmware-resource/x64 verify
 
 Each fixture binds a session, resolves the shipped `bios1.rom`, rejects a
 missing ROM with an empty output buffer, and rejects a too-small caller
-buffer. x86 compiles with `i386`; x64 deliberately does not.
+buffer. Both x86 and x64 compile without `i386`; this resource fixture needs
+no architecture-specific source selection.
 
 The separate `New-T310PackageLayoutNinja.ps1` fixture also passed on x86 and
 x64. It proves that app derives `C:\\installed\\ntvdm64.exe` to

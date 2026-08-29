@@ -61,6 +61,9 @@ typedef enum _NT_PRODUCT_TYPE {
 #ifndef STATUS_ALERTED
 #define STATUS_ALERTED ((NTSTATUS)0x00000101L)
 #endif
+#ifndef STATUS_USER_APC
+#define STATUS_USER_APC ((NTSTATUS)0x000000C0L)
+#endif
 /* The modern SDK leaves these historical NTSTATUS spellings out of the
  * user-mode declaration set, although the values and their failure contract
  * are unchanged.  Keep the original SoftPC callers source-shaped. */

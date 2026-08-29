@@ -840,7 +840,11 @@ RewaitResume:
 #endif
 
          // alerted to die
-     if (status == STATUS_ALERTED)  {
+     /* DIVERGENCE: MVDM-HOST-DIV-040. The same-shaped public Win32 adapter
+      * wakes this alertable wait through QueueUserAPC.  Modern user-mode
+      * wait completion is STATUS_USER_APC rather than NT4's private
+      * STATUS_ALERTED; both mean the original heartbeat must terminate. */
+     if (status == STATUS_ALERTED || status == STATUS_USER_APC)  {
          CloseHandle(ThreadInfo.HeartBeat.Handle);
          ThreadInfo.HeartBeat.Handle = NULL;
          ThreadInfo.HeartBeat.ID = 0;

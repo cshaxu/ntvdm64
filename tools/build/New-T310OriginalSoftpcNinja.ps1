@@ -69,7 +69,8 @@ $hostNames = @('nt_cprgs.c', 'nt_cpu.c', 'nt_aorc.c', 'nt_reset.c', 'nt_error.c'
                'config.c', 'nt_pif.c', 'nt_unix.c', 'nt_fdisk.c', 'nt_rflop.c',
                'nt_rez.c',
                'nt_eoi.c', 'nt_timer.c')
-$adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_compat.c')
+$adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_compat.c',
+                       'nt_thread_alert_compat.c')
 $adapterSoftpcNames = @('mvdm_softpc_firmware.c')
 $patchNames = @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h')
 $patchBodyNames = @('fmstubs.c')
@@ -154,12 +155,10 @@ $includeRoots = @(
     'src/session'
 ) | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 
-# `i386` remains the original 32-bit compilation-target macro.  The selected
-# profile nevertheless executes an x86 guest on both supported hosts.  The
-# explicit compatibility macro is only for individually audited guest-machine
-# semantics; it is not a substitute for i386 or a blanket x64 branch override.
-$architectureFlags = if ($Architecture -eq 'x86') { '/Di386 ' } else { '' }
-$baseFlags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT ' + $architectureFlags + '/DMVDM_X86_GUEST_COMPAT /DNTVDM /DCPU_30_STYLE /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD ' +
+# `i386` is never a product-wide host switch. Both supported host builds use
+# the same source graph; any unavoidable historical x86-only unit must carry
+# its own registered, target-local compilation exception.
+$baseFlags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DNTVDM /DCPU_30_STYLE /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' +
     ($includeRoots -join ' ')
 
@@ -264,7 +263,7 @@ $graph.Add('default original-softpc-candidate')
     schema = 'm0.t310.s8.original-softpc-machine-candidate.v2'
     architecture = $Architecture
     toolchain = 'MSVC /MT via VsDevCmd'
-    i386Define = ($Architecture -eq 'x86')
+    i386Define = $false
     originalCcpuManifest = 'src/mvdm-host/softpc.new/base/ccpu386/sources'
     originalHostManifest = 'src/mvdm-host/softpc.new/host/src/sources'
     ccpuSourceCount = @($ccpuNames).Count

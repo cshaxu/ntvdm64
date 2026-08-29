@@ -286,11 +286,12 @@ records all three direct lease consumers as independent owner contracts; none
 duplicates this physical route. S8 may consume but may not redefine the
 binding.
 
-**T310 S8 P1:** the original machine candidate no longer defines `i386` on
-x64 merely to force the historical x86 branch.  Separate formal MSVC `/MT`
-x86 and x64 Ninja source-selected archives now succeed: x86 defines `i386`,
-x64 deliberately does not.  This exposes rather than suppresses each original
-non-`i386` branch for the queued semantic-owner audit.  The P1 source order is
+**T310 S8 P1:** the original machine candidate no longer defines `i386` as a
+product-wide host switch. Separate formal MSVC `/MT` x86 and x64 Ninja
+source-selected archives now succeed without it; any future truly x86-only
+original unit requires a registered target-local exception. This exposes
+rather than suppresses each original non-`i386` branch for semantic-owner
+audit. The P1 source order is
 `reset -> ROM/CMOS -> disk POST -> host reset/event setup`; the immutable
 firmware inputs and the complete original `base/disks/sources` plus
 `nt_rez`/fixed-disk/real-floppy host group are recorded in the
@@ -310,12 +311,19 @@ session DOS-media root. Formal x86/x64 fixtures resolve the byte-exact mirrored
 `NTIO.SYS`; the full reset/provider path remains active P1 work.
 
 **T310 S8 P1 conditional correction:** source evidence establishes that
-`MIPS_BIT_MASK` distinguishes the original x86 and MIPS VDM contracts. Both
-supported builds execute the selected x86 guest, so the original x86
-bit-clearing transition is now selected explicitly by
-`MVDM_X86_GUEST_COMPAT` on x86 and x64. `i386` remains defined only for the
-historical x86 compiler target. This is one registered mirror divergence, not
-a general override for unreviewed non-`i386` paths.
+`MIPS_BIT_MASK` distinguishes the original x86 and MIPS VDM contracts. MIPS
+is outside this product profile, so `nt_msscs.c` is a registered true subset:
+it preserves only the original x86 bit-clearing transition on x86 and x64.
+This is not a general override for unreviewed non-`i386` paths.
+
+**T310 S8 P2 P1:** the original `nt_timer.c` heartbeat termination path now
+has a same-shaped public Win32 binding. `NtAlertThread(HANDLE)` is provided by
+the named Win32 adapter through `QueueUserAPC`; the original alertable wait
+recognizes its `STATUS_USER_APC` completion as the historical terminal alert.
+Focused formal x86/x64 Ninja tests prove invalid-target failure and real
+alertable-thread wake-up. This does not claim heartbeat/PIC/RTC/BDA execution;
+the original timer and ICA source remains the active P2 owner. See the
+[heartbeat-alert binding](etc/evidence/m0-t310-s8-p2-heartbeat-alert-binding-001.md).
 
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
