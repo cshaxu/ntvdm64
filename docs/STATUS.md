@@ -479,6 +479,14 @@ host definition.  Formal x86/x64 rebuilds have no former C4057 range-call
 diagnostics.  See the [range callback evidence]
 (etc/evidence/m0-t310-s8-p4-mouse-range-callback-abi-closure-001.md).
 
+**T310 S8 P4 keyboard-vector backing closure:** `kb_setup_vectors` now keeps
+NTIO table addresses as guest physical numbers until it combines them with the
+existing native SoftPC SAS backing pointer; it no longer round-trips table host
+pointers through 32-bit `sys_addr`.  Formal x86/x64 builds removed the reached
+pointer-width diagnostics.  This is not a claim that full BOP-5F device
+composition is closed.  See the [keyboard backing evidence]
+(etc/evidence/m0-t310-s8-p4-keyboard-vector-native-backing-abi-closure-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove

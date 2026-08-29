@@ -1916,16 +1916,24 @@ void kb_setup_vectors(void)
 
 
    KbdSeg     = getDS();
-   pkio_table = (word *) effective_addr(getCS(), getSI());
+   /*
+    * DIVERGENCE(MVDM-HOST-DIV-059): effective_addr is a fixed-width guest
+    * physical number, not a host pointer.  The original function already
+    * uses Start_of_M_area as the selected SoftPC SAS backing store below;
+    * use that same native-width backing path for every table pointer rather
+    * than converting the guest number directly to a host address.
+    */
+   phy_base   = effective_addr(getCS(), getSI());
+   pkio_table = (word *)(Start_of_M_area + phy_base);
 
       /* IDLE variables */
-    sas_loadw((sys_addr)(pkio_table + 12), &w);
+    sas_loadw((sys_addr)(phy_base + 12 * sizeof(word)), &w);
     pICounter		  = (word *) (Start_of_M_area + ((KbdSeg<<4)+w));
     pCharPollsPerTick	  = (word *) (Start_of_M_area + ((KbdSeg<<4)+w+4));
     pMinConsecutiveTicks = (word *)  (Start_of_M_area + ((KbdSeg<<4)+w+8));
 
 #if defined(MONITOR)
-   phy_base   = (double_word)KbdSeg << 4;
+    phy_base   = (double_word)KbdSeg << 4;
 
      /* key tables */
    shift_keys  =  phy_base + *pkio_table++;
@@ -1990,8 +1998,10 @@ void kb_setup_vectors(void)
    int13h_vector_off = *pkio_table++;
    int13h_caller_off = *pkio_table++;
    stream_io_buffer_size = *pkio_table++;
-   stream_io_buffer = (half_word *)effective_addr(*pkio_table++, 0);
-   stream_io_dirty_count_ptr = (word *)effective_addr(KbdSeg, *pkio_table++);
+    stream_io_buffer = (half_word *)(Start_of_M_area +
+        effective_addr(*pkio_table++, 0));
+    stream_io_dirty_count_ptr = (word *)(Start_of_M_area +
+        effective_addr(KbdSeg, *pkio_table++));
    stream_io_bios_busy_sysaddr = effective_addr(KbdSeg, *pkio_table++);
 #ifndef PROD
    if (*pkio_table != getAX()) {
@@ -2017,8 +2027,8 @@ void kb_setup_vectors(void)
     sas_loadw(0x13 * 4 + 2, &int13h_vector_seg);
     int13h_caller_seg = KbdSeg;
     dr_type_seg = KbdSeg;
-    sas_loadw((sys_addr)(pkio_table + 27), &int13h_caller_off);
-    sas_loadw((sys_addr)(pkio_table + 22), &dr_type_off);
+    sas_loadw((sys_addr)(phy_base + 27 * sizeof(word)), &int13h_caller_off);
+    sas_loadw((sys_addr)(phy_base + 22 * sizeof(word)), &dr_type_off);
     dr_type_addr = effective_addr(dr_type_seg, dr_type_off);
 
 #endif /* MONITOR */
