@@ -5,6 +5,12 @@
 #include <windows.h>
 #include "insignia.h"
 #include "host_def.h"
+/* DIVERGENCE(MVDM-HOST-DIV-098): the original aggregate build supplied these
+ * declarations transitively.  Including nt_eoi.h also selects an unrelated
+ * monitor-only VDMVIRTUALICA global, so retain only the two original void
+ * contracts needed by this source. */
+void host_ica_lock(void);
+void host_ica_unlock(void);
 /*
  * VPC-XT Revision 2.0
  *

@@ -136,6 +136,13 @@ NTSTATUS NTAPI opennt_NtOpenFile(
     POBJECT_ATTRIBUTES ObjectAttributes, POPENNT_IO_STATUS_BLOCK IoStatusBlock,
     ULONG ShareAccess, ULONG OpenOptions);
 
+NTSTATUS NTAPI opennt_NtCreateFile(
+    PHANDLE FileHandle, ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes, POPENNT_IO_STATUS_BLOCK IoStatusBlock,
+    PLARGE_INTEGER AllocationSize, ULONG FileAttributes, ULONG ShareAccess,
+    ULONG CreateDisposition, ULONG CreateOptions, PVOID EaBuffer,
+    ULONG EaLength);
+
 NTSTATUS NTAPI opennt_NtQueryObject(
     HANDLE Handle, ULONG ObjectInformationClass, PVOID ObjectInformation,
     ULONG ObjectInformationLength, PULONG ReturnLength);
@@ -170,6 +177,7 @@ NTSTATUS NTAPI opennt_NtDeviceIoControlFile(
 #define OBJECT_NAME_INFORMATION OPENNT_OBJECT_NAME_INFORMATION
 #define POBJECT_NAME_INFORMATION POPENNT_OBJECT_NAME_INFORMATION
 #define NtOpenFile opennt_NtOpenFile
+#define NtCreateFile opennt_NtCreateFile
 #define NtQueryObject opennt_NtQueryObject
 #define NtQueryDirectoryFile opennt_NtQueryDirectoryFile
 #define NtQueryVolumeInformationFile opennt_NtQueryVolumeInformationFile

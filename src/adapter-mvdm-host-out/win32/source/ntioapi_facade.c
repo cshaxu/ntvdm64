@@ -14,6 +14,9 @@ typedef NTSTATUS (NTAPI *PFN_NT_QUERY_SYMBOLIC_LINK_OBJECT)(
     HANDLE, PUNICODE_STRING, PULONG);
 typedef NTSTATUS (NTAPI *PFN_NT_OPEN_FILE)(
     PHANDLE, ACCESS_MASK, POBJECT_ATTRIBUTES, PIO_STATUS_BLOCK, ULONG, ULONG);
+typedef NTSTATUS (NTAPI *PFN_NT_CREATE_FILE)(
+    PHANDLE, ACCESS_MASK, POBJECT_ATTRIBUTES, PIO_STATUS_BLOCK, PLARGE_INTEGER,
+    ULONG, ULONG, ULONG, ULONG, PVOID, ULONG);
 typedef NTSTATUS (NTAPI *PFN_NT_QUERY_OBJECT)(
     HANDLE, ULONG, PVOID, ULONG, PULONG);
 typedef NTSTATUS (NTAPI *PFN_NT_QUERY_INFORMATION_FILE)(
@@ -97,6 +100,24 @@ NTSTATUS NTAPI opennt_NtOpenFile(
     PFN_NT_OPEN_FILE entry = (PFN_NT_OPEN_FILE)ntioapi_lookup("NtOpenFile");
     if (entry == NULL) return STATUS_NOT_IMPLEMENTED;
     result = entry(file, access, attributes, &native_status, share, options);
+    ntioapi_copy_status(status, &native_status);
+    return result;
+}
+
+NTSTATUS NTAPI opennt_NtCreateFile(
+    PHANDLE file, ACCESS_MASK access, POBJECT_ATTRIBUTES attributes,
+    POPENNT_IO_STATUS_BLOCK status, PLARGE_INTEGER allocation_size,
+    ULONG attributes_flags, ULONG share, ULONG disposition, ULONG options,
+    PVOID ea_buffer, ULONG ea_length)
+{
+    IO_STATUS_BLOCK native_status;
+    NTSTATUS result;
+    PFN_NT_CREATE_FILE entry =
+        (PFN_NT_CREATE_FILE)ntioapi_lookup("NtCreateFile");
+    if (entry == NULL) return STATUS_NOT_IMPLEMENTED;
+    result = entry(file, access, attributes, &native_status, allocation_size,
+                   attributes_flags, share, disposition, options, ea_buffer,
+                   ea_length);
     ntioapi_copy_status(status, &native_status);
     return result;
 }
