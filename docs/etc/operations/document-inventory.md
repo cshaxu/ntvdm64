@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3187 |
+| Documentation records | 3188 |
 | --- | --- |
-| Generated UTC | 2026-08-29T09:09:28Z |
+| Generated UTC | 2026-08-29T09:21:24Z |
 
 ## Entries
 
@@ -550,6 +550,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-system-interrupt-native-contract-closure-001.md | indexed supporting material | 59dfdad3620c31670bb912a7c4fd23aacfcc0ad245f11ced9155684dc54bee5e |
 | etc/evidence/m0-t310-s8-p4-umb-numeric-address-audit-001.md | indexed supporting material | 4d8996c148ac65c84c3d181438d0d216e8b472caa86e1ddb6ebf5e4ef300ddee |
 | etc/evidence/m0-t310-s8-p4-vdd-umb-numeric-address-abi-closure-001.md | indexed supporting material | 1017e4ae6893f4aea6dbd20d6ebf71917d47fae40350190889a029cbae0d5a42 |
+| etc/evidence/m0-t310-s8-p4-vglob-generated-slot-closure-001.md | indexed supporting material | 500c2aebd0000d7561ebdde78ce413f028307929c855bfdcc7e115d8e3109eaf |
 | etc/evidence/m0-t310-s8-p4-whole-tree-current-abi-baseline-001.md | indexed supporting material | 63fa6a1564e1fcfd56c9d6262650ee098b0ee7b776c52d890f74e69234f77382 |
 | etc/evidence/m0-t310-s8-p4-whole-tree-formal-architecture-delta-001.md | indexed supporting material | b8d943d5eb42ca920ca57e11c6f6ad60b0adf1ace0030e3a252ba94ba764dc0d |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
@@ -1216,7 +1217,7 @@ content-divergent entries.
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-cluster-ledger.tsv | indexed supporting material | 3b7193da3c22588dff98a25a8b1390c740cc01d3f19274c250f980bb4ca11fed |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-inventory.tsv | indexed supporting material | 9f5be57f4c4a22e0ae88de22427029fb7b4f31ca753868cc8231453109cd6eb0 |
 | etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification.tsv | indexed supporting material | 5e95e2f4bdd398a7dd7817f48bec5217df7fef86ffb0010dc6b7b37f8b3af0df |
-| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | 59f5380466d62e27d9ab5ffc730172341de4f73e0277cd79ed00343dc760c648 |
+| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | 7b2534ad9293ac065f4db6d868cec560fb523df9dce734cf4e6142a9ea1e5592 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3201,7 +3202,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 00d11fab4d5f3d591e1a9f139a3880c000339b5781ad365a886205df659d3026 |
+| STATUS.md | principal control document | a486d4a9de21b5f982f4e72593546996db77405b133d51eef9e8fd7aa97260b1 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

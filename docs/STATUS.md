@@ -580,6 +580,13 @@ forced-link checks clear the former implicit-declaration faults without
 altering a COMMAND mirror body. See the [RTL environment evidence]
 (etc/evidence/m0-t310-s8-p4-command-rtl-environment-binding-closure-001.md).
 
+**T310 S8 P4 VGlob generated-state closure:** the 152 historical x64
+pointer-width rows for original `ccpu386/vglob.c` are verified stale: the
+existing generated GDP-slot overlay already supplies native-width private
+`GLOBAL_VGAGlobals` storage. Forced formal x86/x64 rebuilds now emit neither
+`C4311` nor `C4312`; no mirror body or adapter was added. See the [VGlob
+evidence](etc/evidence/m0-t310-s8-p4-vglob-generated-slot-closure-001.md).
+
 **T310 S8 P4 serial/parallel native transport closure:** original SoftPC COM
 and LPT host sources retain their device request order and configuration
 semantics while their private pointer-or-scalar ioctl and worker transports
