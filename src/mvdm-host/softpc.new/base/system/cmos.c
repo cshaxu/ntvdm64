@@ -340,7 +340,8 @@ LOCAL int verify_equip_byte IFN1(half_word *, equip)
 
 	/* Check the Equipment Byte */
 	*equip = 0;
-	adapter = (ULONG) config_inquire(C_GFX_ADAPTER, NULL);
+	/* DIVERGENCE MVDM-HOST-DIV-075: config scalar is pointer-sized on x86/x64. */
+	adapter = (ULONG)(ULONG_PTR) config_inquire(C_GFX_ADAPTER, NULL);
 	if(adapter != -1)
 		*equip |= display_mask[adapter];
 

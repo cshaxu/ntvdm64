@@ -2721,7 +2721,8 @@ GLOBAL void herc_video_init IFN0()
 	sas_storew(BIOS_EXTEND_CHAR*4+2, EGA_SEG);
 	sas_move_bytes_forward(BIOS_VIDEO_IO*4, 0x42*4, 4);  /* save old INT 10 as INT 42 */ 
 #ifdef GISP_SVGA
-	if((ULONG) config_inquire(C_GFX_ADAPTER, NULL) == CGA )
+	/* DIVERGENCE MVDM-HOST-DIV-075: config scalar is pointer-sized on x86/x64. */
+	if((ULONG_PTR) config_inquire(C_GFX_ADAPTER, NULL) == CGA )
 		sas_storew(int_addr(0x10), CGA_VIDEO_IO_OFFSET);
 	else
 #endif      /* GISP_SVGA */

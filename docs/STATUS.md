@@ -56,6 +56,12 @@ with `IU8` even though its original body and handler slot use `IU16`.
 `MVDM-HOST-DIV-074` corrects that declaration only; focused formal x86/x64
 rebuilds are clean. See the [EGA word-fill ABI closure](etc/evidence/m0-t310-s8-p4-ega-word-fill-abi-closure-001.md).
 
+**T310 S8 P4:** original `config_inquire` scalar consumers now retain the
+private pointer-sized configuration carrier until their original enumerated
+destination. This closes the selected BIOS/ROM C4311 pointer truncations on
+both targets without mapping tokens or warning suppression; see the
+[configuration-scalar closure](etc/evidence/m0-t310-s8-p4-config-scalar-native-width-closure-001.md).
+
 **T310 S8 P4:** the formal full x64 graph exposed one additional selected
 base/video declaration mismatch: `ega_writ.c` declared the word-fill EVID glue
 with `IU8` even though its original body and handler slot use `IU16`.

@@ -224,7 +224,8 @@ GLOBAL void read_video_rom IFN0()
 #else /* REAL_VGA */
 	PHY_ADDR romLength = 0;
 
-	switch ((ULONG) config_inquire(C_GFX_ADAPTER, NULL))
+	/* DIVERGENCE MVDM-HOST-DIV-075: config scalar is pointer-sized on x86/x64. */
+	switch ((ULONG_PTR) config_inquire(C_GFX_ADAPTER, NULL))
 	{
 #ifndef GISP_SVGA
 #ifdef	VGG
@@ -309,7 +310,7 @@ GLOBAL void rom_init IFN0()
     
 	/* load the rom bios */
 #ifdef GISP_SVGA
-	if ((ULONG) config_inquire(C_GFX_ADAPTER, NULL) == CGA )
+	if ((ULONG_PTR) config_inquire(C_GFX_ADAPTER, NULL) == CGA )
 	{
 		read_rom (BIOS1ROM_FILENAME, BIOS_START);
 		read_rom (BIOS2ROM_FILENAME, BIOS2_START);

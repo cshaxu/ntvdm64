@@ -630,7 +630,8 @@ void nt_init_screen(void)
     /* Set current screen height to prevent the window changing shape between
        init_screen and init_adaptor */
 
-    video_adapter = (half_word) config_inquire(C_GFX_ADAPTER, NULL);
+	/* DIVERGENCE MVDM-HOST-DIV-075: config scalar is pointer-sized on x86/x64. */
+	video_adapter = (half_word)(ULONG_PTR) config_inquire(C_GFX_ADAPTER, NULL);
     switch (video_adapter)
     {
         case CGA:
@@ -644,7 +645,7 @@ void nt_init_screen(void)
 
     /*::::::::::::::::: Setup the screen dimensions for the initial adaptor */
 
-    host_set_screen_scale((SHORT) config_inquire(C_WIN_SIZE, NULL));
+	host_set_screen_scale((SHORT)(ULONG_PTR) config_inquire(C_WIN_SIZE, NULL));
     set_screen_sizes(video_adapter);
 
     /*:::: Set pixel values to be used for FG and BG (mainly in mono modes) */
