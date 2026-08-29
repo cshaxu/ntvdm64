@@ -466,6 +466,13 @@ audit inputs; no mapping-manager seam or adapter was invented for host-private
 controller callbacks.  See the [subcluster audit]
 (etc/evidence/m0-t310-s8-p4-system-controller-callback-subcluster-audit-001.md).
 
+**T310 S8 P4 common `host_simulate` call-ABI closure:** original non-MONITOR
+controller sources now see the existing `void host_simulate(void)` form through
+the common host declaration carrier, rather than relying on an implicit `int`
+declaration through `cpu4.h`.  Fresh formal x86/x64 builds contain no
+`host_simulate` diagnostic.  See the [call-ABI closure]
+(etc/evidence/m0-t310-s8-p4-host-simulate-call-abi-closure-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove

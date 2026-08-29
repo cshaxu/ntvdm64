@@ -88,6 +88,16 @@ extern	quick_event_delays	host_delays;
 #define host_rom_init()
 #define HOST_BOP_IP_FUDGE     -2
 
+/*
+ * DIVERGENCE(MVDM-HOST-DIV-057): non-MONITOR controller sources select
+ * cpu4.h, which does not carry the original host_simulate declaration even
+ * though keyboard, mouse, BIOS and storage sources invoke the same source
+ * entrypoint.  Keep the original void/no-argument contract visible to both
+ * host architectures; its selected implementation remains the existing
+ * SoftPC/CCPU path.
+ */
+extern void host_simulate(void);
+
 #ifndef EGATEST
 #ifndef MONITOR
 #define BIGWIN
