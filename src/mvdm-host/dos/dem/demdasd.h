@@ -43,7 +43,10 @@ WORD	    DirSector;			// starting sector of directory
 DWORD	    DriveAddr;			// address of the corresponding driver
 BYTE	    MediaID;			// media ID
 BYTE	    FirstAccess;		// 0xFF if this DPB is first accessed
-struct A_DPB * Next;			// next DPB
+/* DIVERGENCE(MVDM-HOST-DIV-107): DOS stores the next DPB as a 16:16
+ * guest far value.  NT4's x86 pointer spelling happened to occupy the same
+ * four bytes; retain the packet's fixed guest layout on both host widths. */
+DWORD       Next;			// next DPB (16:16 guest far value)
 WORD	    FreeCluster;		// cluster # of the last allocated
 WORD	    FreeClusters;		// number of free clusters, 0xFFFF
 					// if unknown
