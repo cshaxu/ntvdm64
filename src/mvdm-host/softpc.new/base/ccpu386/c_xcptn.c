@@ -29,6 +29,12 @@ Exception Handling Support.
 #include <c_xtrn.h>
 #include <ccpupig.h>
 #include <fault.h>
+/* DIVERGENCE(MVDM-HOST-DIV-080): use the original Yoda diagnostic interface
+ * so this CCPU exception path retains force_yoda's void/no-argument call
+ * contract on both x86 and x64. The exception-environment macro likewise
+ * uses the one host_def.h-provided CRT getenv declaration rather than redeclare
+ * its already-expanded alias with a mismatched parameter qualifier. */
+#include <yoda.h>
 
 /*
    Allow print out of exceptions or disallow it.
@@ -39,7 +45,6 @@ LOCAL  BOOL first_exception = TRUE;
 
 #define check_exception_env()						\
 {									\
-	IMPORT char *host_getenv IPT1 (char *, name);			\
 	if (first_exception)						\
 	{								\
 		char *env = host_getenv ("CCPU_SHOW_EXCEPTIONS");	\

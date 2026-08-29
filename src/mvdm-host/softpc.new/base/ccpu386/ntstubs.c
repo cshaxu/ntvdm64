@@ -6,6 +6,14 @@
 
 #include "cpu4.h"
 
+/* DIVERGENCE(MVDM-HOST-DIV-080): this selected host-facing CCPU facade is
+ * compiled without the CCPU private-interface macro, so cpu4gen.h does not
+ * publish these two existing private CCPU providers. Keep the original direct
+ * call sequence and declare the exact c_main.c / ccpusas4.c contracts rather
+ * than infer an int result on either host width. */
+IMPORT IU32 c_cpu_calc_q_ev_inst_for_time IPT1(IU32, val);
+IMPORT void c_sas_overwrite_memory IPT2(PHY_ADDR, addr, PHY_ADDR, length);
+
 #ifndef PIG
 
 extern struct VideoVector C_Video;

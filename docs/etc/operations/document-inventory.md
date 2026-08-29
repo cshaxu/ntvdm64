@@ -534,6 +534,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-console-vdm-registration-call-contract-closure-001.md | indexed supporting material | 1989669b5222b18827f33c2979a94e8ad5436801efc8d857e2d26e9f7129bde9 |
 | etc/evidence/m0-t310-s8-p4-cvidc-runtime-error-call-contract-closure-001.md | indexed supporting material | c123f215a8e046f5bcad77429df84bffcec85066dc37bc22b8fc57a50ab70c07 |
 | etc/evidence/m0-t310-s8-p4-native-c-varargs-call-contract-closure-001.md | indexed supporting material | 1163e06f751a6ba84da66e584501710c488d9a4e163385536d3d098273b3e367 |
+| etc/evidence/m0-t310-s8-p4-ccpu-private-call-contract-closure-001.md | indexed supporting material | 231c1b8793b624b1742d458b52dd4b69dd302a4e |
 | etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md | indexed supporting material | e8810dcc86642ab470c1db8615f39387ab7c177f840b7167a2bcf74b258571f4 |
 | etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-scalar-disposition-001.md | indexed supporting material | 75c178056fc3369aa9b7a4013b79209500078bb502a7d7b0f791c1e16cdaf692 |
 | etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-signedness-disposition-001.md | indexed supporting material | 0b34d4233c4482ed3d78e37748a0d1a2fc7557ec8724719aeb28f55bf1024e80 |
