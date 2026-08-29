@@ -115,6 +115,7 @@ typedef struct _DISKINFO {
 #include "dosdef.h"
 #include "dossvc.h"
 #include <mvdm_guest_location.h>
+#include <mvdm_host_identity.h>
 
 
 
@@ -153,7 +154,10 @@ extern CHAR demDebugBuffer [];
 /** DEM Macros **/
 
 #define GETULONG(hi,lo)     (DWORD)((((int) hi) << 16) + ((int) lo))
-#define GETHANDLE(hi,lo)    (HANDLE)(GETULONG(hi,lo))
+/* DIVERGENCE MVDM-HOST-DIV-103: OpenNT split a native x86 HANDLE across
+ * guest register words. Preserve that register shape, but resolve the
+ * 32-bit session host-resource identity through the sole mapping manager. */
+#define GETHANDLE(hi,lo)    (HANDLE)mvdm_host_identity_resolve_words((USHORT)(hi), (USHORT)(lo))
 #define IS_ASCII_PATH_SEPARATOR(ch)     (((ch) == '/') || ((ch) == '\\'))
 
 

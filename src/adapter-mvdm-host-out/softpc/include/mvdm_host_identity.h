@@ -16,4 +16,10 @@ int mvdm_host_identity_lookup(uintptr_t native_value,
     uint32_t *identity_out);
 int mvdm_host_identity_release(uint32_t identity);
 
+/* Preserve the historical 16-bit register-pair ABI while resolving the
+ * session-owned 32-bit host-resource identity behind it. */
+uintptr_t mvdm_host_identity_resolve_words(uint16_t high, uint16_t low);
+int mvdm_host_identity_publish_words(uintptr_t native_value,
+    uint16_t *high_out, uint16_t *low_out);
+
 #endif

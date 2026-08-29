@@ -347,7 +347,9 @@ VOID demCloseFCB (VOID)
 {
 HANDLE	hFile;
 
-    hFile = GETHANDLE (getAX(),getSI());
+    DWORD handleIdentity = GETULONG(getAX(), getSI());
+
+    hFile = GETHANDLE(getAX(), getSI());
 
     if(hFile == 0) {
 
@@ -361,6 +363,7 @@ HANDLE	hFile;
 	return;
 
     }
+    (void)mvdm_host_identity_release(handleIdentity);
     setCF(0);
     return;
 }
@@ -732,8 +735,18 @@ SECURITY_ATTRIBUTES sa;
     // Setup the exit registers
     setBX(wTime);
     setCX(wDate);
-    setBP((USHORT)hFile);
-    setAX((USHORT)((ULONG)hFile >> 16));
+    {
+        USHORT handleHigh, handleLow;
+        if (!mvdm_host_identity_publish_words((uintptr_t)hFile, &handleHigh,
+            &handleLow)) {
+            CloseHandle(hFile);
+            SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+            demClientError(INVALID_HANDLE_VALUE, *lpFileName);
+            return;
+        }
+        setBP(handleLow);
+        setAX(handleHigh);
+    }
     setSI((USHORT)dwSize);
     setDX((USHORT)(dwSize >> 16));
     setCF(0);

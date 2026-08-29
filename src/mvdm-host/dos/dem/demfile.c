@@ -328,8 +328,18 @@ errorReturn:
         setDX(0);
     }
 
-    setBP((USHORT)hFile);
-    setAX((USHORT)((ULONG)hFile >> 16));
+    {
+        USHORT handleHigh, handleLow;
+        if (!mvdm_host_identity_publish_words((uintptr_t)hFile, &handleHigh,
+            &handleLow)) {
+            CloseHandle(hFile);
+            SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+            demClientError(INVALID_HANDLE_VALUE, *lpFileName);
+            return;
+        }
+        setBP(handleLow);
+        setAX(handleHigh);
+    }
     setCF(0);
     if (dupFileName) {
         free(dupFileName);
@@ -705,7 +715,11 @@ DWORD   dwLastError;
                         if (!_strcmpi(lpDot,".TTF")) {
 
                             RtlZeroMemory(cFOTName,sizeof(cFOTName));
-                            RtlCopyMemory(cFOTName,lpFileName,(ULONG)lpDot-(ULONG)lpFileName);
+                            /* DIVERGENCE MVDM-HOST-DIV-104: this is a bounded pathname-buffer
+                             * offset, not a guest or host identity; retain pointer subtraction
+                             * until the final API length conversion. */
+                            RtlCopyMemory(cFOTName, lpFileName,
+                                (ULONG)(lpDot - lpFileName));
                             strcat(cFOTName,".FOT");
                             if ( RemoveFontResourceOem(cFOTName) ) {
                                 PostMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
@@ -730,8 +744,18 @@ DWORD   dwLastError;
     }
     setCX ((USHORT)dwFileSize);
     setBX ((USHORT)(dwFileSize >> 16 ));
-    setBP((USHORT)hFile);
-    setAX((USHORT)((ULONG)hFile >> 16));
+    {
+        USHORT handleHigh, handleLow;
+        if (!mvdm_host_identity_publish_words((uintptr_t)hFile, &handleHigh,
+            &handleLow)) {
+            CloseHandle(hFile);
+            SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+            demClientError(INVALID_HANDLE_VALUE, *lpFileName);
+            return;
+        }
+        setBP(handleLow);
+        setAX(handleHigh);
+    }
     setCF(0);
     return;
 }

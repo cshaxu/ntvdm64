@@ -127,7 +127,7 @@ $hostNames = @($hostNames + 'nt_cprgs.c' + 'nt_aorc.c') | Select-Object -Unique
 $adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_compat.c',
                         'nt_thread_alert_compat.c', 'nt_wait_compat.c',
                         'opennt_support_rtl.c')
- $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_softpc_physical_mapping.c')
+$adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_softpc_physical_mapping.c', 'mvdm_host_identity.c')
 $patchNames = @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h')
 $patchBodyNames = @('fmstubs.c')
 $patchEvidenceNames = @('minnt/callconv.patch')
