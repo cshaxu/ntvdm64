@@ -285,14 +285,37 @@ profile or evidence-backed deferral.
 registry and device capabilities through public Win32. **Exit:** source-shaped
 semantics and permission/failure matrix.
 
-## P19 — Guest DOS/WOW16 artifact matrix
+## P19 — SoftPC graphics presentation window and Alt+Enter transition
+
+**Predecessor:** the active T310 SoftPC video-controller closure, P15 and P18.
+**Delivery:** an app-owned Win32 graphics presentation window for the selected
+SoftPC video surface; a session-scoped Alt+Enter transition opens that window
+from the console session, renders the current guest display there, and closes
+it to return to the console presentation. The package owns only presentation,
+input routing, window lifecycle and deterministic fallback when the window
+cannot be created. It retains the original SoftPC video, VGA/EGA memory, port
+and controller algorithms unchanged.
+
+**Hard exclusions:** no `X86GFX`, CSRSS/Console Server registration,
+`NtVdmControl` fullscreen mapping, fixed host address reservation, direct host
+VGA aperture, MONITOR, kernel VDM, or Bochs fallback. Alt+Enter is a modern
+product interaction modeled on historical NTVDM user experience, not a claim
+to recreate the old NT4 fullscreen product shell.
+
+**Exit:** x86 and x64 local presentation tests prove console-to-window and
+window-to-console transitions, guest-frame presentation, keyboard transition
+ownership, close/error cleanup, and unchanged SoftPC machine state. An
+integration run proves a selected DOS graphics-mode workload presents through
+the window without changing the original video-controller path.
+
+## P20 — Guest DOS/WOW16 artifact matrix
 
 **Predecessor:** P08, P15. **Delivery:** validate source-built and original
 guest images as load-only inputs. **Exit:** artifact classification and
 reproducible manifest.
 
-## P20 — Product release closure
+## P21 — Product release closure
 
-**Predecessor:** P16–P19. **Delivery:** x86/x64 package, integration,
+**Predecessor:** P16–P20. **Delivery:** x86/x64 package, integration,
 stability and release manifests. **Exit:** unpack-and-run product evidence and
 remaining explicit exclusions.

@@ -51,8 +51,9 @@ that bounded packet closes is item 1 below.
 | 15 | Broker process and cross-process coordination |
 | 16 | In-process multi-session reentrancy audit |
 | 17 | Host capability expansion |
-| 18 | Guest DOS/WOW16 artifact matrix |
-| 19 | Product release closure |
+| 18 | SoftPC graphics presentation window and Alt+Enter transition |
+| 19 | Guest DOS/WOW16 artifact matrix |
+| 20 | Product release closure |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).
