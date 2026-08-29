@@ -135,6 +135,12 @@ boundaries. The source-owned failure directions remain intact; focused formal
 while non-width warnings remain visible. See the [COMMAND environment
 closure](etc/evidence/m0-t310-s8-p4-command-environment-native-width-closure-001.md).
 
+**T310 S8 P4:** COMMAND's packed guest SCS/standard-handle records no longer
+pack host-private pipe, thread, critical-section, or redirection records.
+The original guest ABI and redirection algorithm remain unchanged; focused
+formal x86/x64 rebuilds contain none of the former x64 C4366 diagnostics. See
+the [COMMAND host-record alignment closure](etc/evidence/m0-t310-s8-p4-command-host-record-alignment-closure-001.md).
+
 **T310 S8 P4:** the formal full x64 graph exposed one additional selected
 base/video declaration mismatch: `ega_writ.c` declared the word-fill EVID glue
 with `IU8` even though its original body and handler slot use `IU16`.

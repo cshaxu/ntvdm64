@@ -119,6 +119,11 @@ typedef struct _STD_HANDLES {
     ULONG   hStdIn;
 } STD_HANDLES, *PSTD_HANDLES;
 
+/* DIVERGENCE(MVDM-HOST-DIV-119): the preceding packed forms are the guest
+ * SCS/standard-handle ABI.  Pipe, thread and redirection records below are
+ * native host-private allocations and must retain their platform alignment. */
+#pragma pack()
+
 #define PIPE_INPUT_BUFFER_SIZE	512
 #define PIPE_OUTPUT_BUFFER_SIZE PIPE_INPUT_BUFFER_SIZE
 #define PIPE_INPUT_TIMEOUT		55
@@ -168,8 +173,6 @@ typedef struct	_VDMENVBLK {
     DWORD	cchRemain;
     CHAR	*lpszzEnv;
 } VDMENVBLK, *PVDMENVBLK;
-
-#pragma pack()
 
 /** Command Function Prototypes */
 
