@@ -32,6 +32,13 @@ extern IUH roll IPT2(IUH, src, IUH, rots);
 extern IUH rolw IPT2(IUH, src, IUH, rots);
 extern IUH rolb IPT2(IUH, src, IUH, rots);
 
+/* DIVERGENCE(MVDM-HOST-DIV-075): all selected generated SEVID translation
+ * units include this original support header and call the original
+ * ev_glue.c diagnostic entry.  The NT4 build accepted the missing declaration
+ * as an implicit int call; x86/x64 must retain its actual void(char *)
+ * contract instead.  This declares only the existing original provider. */
+IMPORT void CrulesRuntimeError IPT1(char *, message);
+
 #ifdef LITTLEND
 #define	UOFF_15_8(a)	(((IU8 *)(a))+1)
 #define	SOFF_15_8(a)	(((IS8 *)(a))+1)

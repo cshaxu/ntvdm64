@@ -42,6 +42,12 @@ and are scoped only to `mvdm-host` and `mvdm-support` for whole-tree ABI
 classification. This is an audit baseline, not an S8 closure claim; see the
 [current full-tree baseline](etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md).
 
+**T310 S8 P4:** the complete generated C-video assertion-provider contract
+now retains the existing original `ev_glue.c` `void(char *)` ABI. All 31
+selected `SEVID` units rebuilt from clean x86/x64 outputs without an implicit
+`CrulesRuntimeError` call; the remaining C-video table/callback and CRT
+clusters remain visible and pending. See the [C-video runtime-error closure](etc/evidence/m0-t310-s8-p4-cvidc-runtime-error-call-contract-closure-001.md).
+
 **T310 S8 P4:** source-list recovery proved that the 31 `ga_glue.c` x86/x64
 warnings came from a historical C-video variant deliberately commented out by
 the original `base/video/sources` manifest. The Ninja manifest reader now
