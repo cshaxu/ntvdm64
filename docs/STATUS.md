@@ -845,6 +845,13 @@ MSVC `/MT` x86/x64 compilation verifies the mirror callers and adapter without
 new width diagnostics. See the [EMS page-alias evidence]
 (etc/evidence/m0-t310-s8-p4-ems-page-alias-contract-closure-001.md).
 
+**T310 S8 P4 EMM storage contract closure:** the complete original
+`emm_mngr.c` now represents only its private host-dependent storage IDs with
+native `IHP`; its independent backfill count remains fixed-width `ULONG`.
+Formal x86/x64 compilation clears the affected pointer/allocator ABI forms
+without an adapter, mapping manager, or EMM algorithm rewrite. See the [EMM
+storage evidence](etc/evidence/m0-t310-s8-p4-emm-storage-contract-closure-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove

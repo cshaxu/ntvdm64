@@ -120,7 +120,7 @@ static IHP
 					/* for each handle, these are	*/
 					/* usually pointers, but this 	*/
 					/* is host dependant		*/;
-static long
+static ULONG
 	backfill;			/* backfill memory size 	*/
 static unsigned short
 	total_pages = 0,		/* no. of EM pages available	*/
