@@ -487,6 +487,14 @@ pointer-width diagnostics.  This is not a claim that full BOP-5F device
 composition is closed.  See the [keyboard backing evidence]
 (etc/evidence/m0-t310-s8-p4-keyboard-vector-native-backing-abi-closure-001.md).
 
+**T310 S8 P4 whole-tree ABI baseline refresh:** the complete `mvdm-host` and
+`mvdm-support` source scope has a current static census (1,412 files, 2,019
+candidates and 33 owner clusters) plus paired formal x86/x64 compiler
+cross-check.  All diagnostics remain visible; only width/call-contract
+candidates are repair work, and each still requires source-level contract
+reading.  See the [current ABI baseline]
+(etc/evidence/m0-t310-s8-p4-whole-tree-current-abi-baseline-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove
