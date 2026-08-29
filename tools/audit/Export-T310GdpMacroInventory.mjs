@@ -19,21 +19,44 @@ const output = path.resolve(root, process.argv[4] ??
 const lines = fs.readFileSync(input, 'utf8').split(/\r?\n/);
 const rows = [];
 const offsets = new Map();
-const macroPattern = /^#define\s+(GLOBAL_[A-Za-z0-9_]+)\s+\(\*\((.+)\)\s*\(\(IUH\)Gdp\s*\+\s*(-?\d+)\)\)$/;
+const directLvaluePattern = /^#define\s+(GLOBAL_[A-Za-z0-9_]+)\s+\(\*\((.+)\)\s*\(\(IUH\)Gdp\s*\+\s*([0-9+\s-]+)\)\)$/;
+const directPointerPattern = /^#define\s+(GLOBAL_[A-Za-z0-9_]+)\s+\(\((.+)\)\s*\(\(IUH\)Gdp\s*\+\s*([0-9+\s-]+)\)\)$/;
+
+function parseOffset(expression) {
+  if (!/^-?\d+(\s*\+\s*-?\d+)*$/.test(expression)) return null;
+  return expression.split('+').reduce((sum, term) => sum + Number(term.trim()), 0);
+}
+
+function lvalueType(castType) {
+  const value = castType.trim().replace(/\*\s*$/, '').trim();
+  if (value === castType.trim()) throw new Error(`GDP lvalue cast is not a pointer: ${castType}`);
+  return value;
+}
+
 for (let number = 0; number < lines.length; number += 1) {
-  const match = lines[number].match(macroPattern);
+  const lvalue = lines[number].match(directLvaluePattern);
+  const match = lvalue ?? lines[number].match(directPointerPattern);
   if (!match) continue;
   const [, name, type, offsetText] = match;
-  const offset = Number(offsetText);
-  const record = { name, type: type.trim(), offset, line: number + 1 };
+  const offset = parseOffset(offsetText);
+  if (offset === null) continue;
+  const record = {
+    name,
+    type: lvalue ? lvalueType(type) : type.trim(),
+    offset,
+    originalExpression: offsetText.trim(),
+    form: lvalue ? 'lvalue' : 'pointer',
+    line: number + 1
+  };
   rows.push(record);
   const group = offsets.get(offset) ?? [];
   group.push(record);
   offsets.set(offset, group);
 }
 const outputLines = [[
-  'record_id', 'macro', 'original_line', 'original_offset', 'declared_type',
-  'same_offset_macros', 'x64_overlay_disposition'
+  'record_id', 'macro', 'original_line', 'original_offset_expression',
+  'original_offset', 'declared_type', 'macro_form', 'same_offset_macros',
+  'x64_overlay_disposition'
 ].join('\t')];
 for (const [index, row] of rows.entries()) {
   const aliases = offsets.get(row.offset).map(value => value.name).join(',');
@@ -42,7 +65,8 @@ for (const [index, row] of rows.entries()) {
     : 'candidate-generated-typed-slot';
   outputLines.push([
     `T310-S8-P4-GDP-${String(index + 1).padStart(4, '0')}`,
-    row.name, row.line, row.offset, row.type, aliases, disposition
+    row.name, row.line, row.originalExpression, row.offset, row.type, row.form,
+    aliases, disposition
   ].join('\t'));
 }
 fs.mkdirSync(path.dirname(output), { recursive: true });

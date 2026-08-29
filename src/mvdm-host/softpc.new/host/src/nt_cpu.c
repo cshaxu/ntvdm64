@@ -34,6 +34,13 @@ static char SccsID[]="@(#)sun4_a3cpu.c	1.2 5/24/91 Copyright Insignia Solutions 
 
 #ifdef CPU_40_STYLE
 #include "cpu_c.h"
+/* DIVERGENCE(MVDM-HOST-DIV-048): retain the source-defined CCPU GDP field
+ * names while the private overlay supplies native-width storage.  fm_c.h is
+ * the selected generated definition of CleanedREC, which this host carrier
+ * needs to name the original EIP member rather than treating the record as
+ * an untyped 32-bit word. */
+#include "fm_c.h"
+#include <mvdm_gdp_slots.h>
 #endif
 
 /* DIVERGENCE: CCPU SAS owns Start_of_M_area and Length_of_M_area in
@@ -277,12 +284,9 @@ GLOBAL void InitNtCpuInfo IFN0()
     /* register values are kept. */
 
     /* Horrible hack, part 1. InNanoCpu is a BOOL, so GLOBAL_InNanoCpu */
-    /* is not an l-value, hence we can't take its address. */
-#ifdef ALPHA
-    nt_cpu_info.in_nano_cpu = (BOOL *) ((IHPE) GDP_PTR + 1223);
-#else /* ALPHA */
-    nt_cpu_info.in_nano_cpu = (BOOL *) ((IHPE) GDP_PTR + 631);
-#endif /* ALPHA */
+    /* DIVERGENCE(MVDM-HOST-DIV-048): the generated field is an lvalue in the
+     * private GDP carrier; avoid a historical hard-coded native offset. */
+    nt_cpu_info.in_nano_cpu = (BOOL *)&GLOBAL_InNanoCpu;
 #ifndef PROD
     gdp_bool = (BOOL *) ((IHPE) GDP_PTR + GdpOffsetFromName("InNanoCpu"));
     if (nt_cpu_info.in_nano_cpu != gdp_bool) {
@@ -291,16 +295,16 @@ GLOBAL void InitNtCpuInfo IFN0()
     nt_cpu_info.in_nano_cpu = gdp_bool;
 #endif
 
-    nt_cpu_info.universe = &GLOBAL_CurrentUniverse;
+    /* DIVERGENCE(MVDM-HOST-DIV-048): these CCPU control/register cells are
+     * fixed 32-bit Intel values.  The original IUH spelling happened to be
+     * identical to IU32 on NT4; state that source contract explicitly. */
+    nt_cpu_info.universe = (IU32 *)&GLOBAL_CurrentUniverse;
 
     /* Variables needed to get the value SP or ESP. */
 
-    /* Horrible hack, part 2: as for InNanoCpu, so for stackIsBig. */
-#ifdef ALPHA
-    nt_cpu_info.stack_is_big = (BOOL *) ((IHPE) GDP_PTR + 7047);
-#else /* ALPHA */
-    nt_cpu_info.stack_is_big = (BOOL *) ((IHPE) GDP_PTR + 4355);
-#endif /* ALPHA */
+    /* DIVERGENCE(MVDM-HOST-DIV-048): use the generated source field rather
+     * than an architecture-specific byte offset into the old packed GDP. */
+    nt_cpu_info.stack_is_big = (BOOL *)&GLOBAL_stackIsBig;
 #ifndef PROD
     gdp_bool = (BOOL *) ((IHPE) GDP_PTR + GdpOffsetFromName("stackIsBig"));
     if (nt_cpu_info.stack_is_big != gdp_bool) {
@@ -323,29 +327,29 @@ GLOBAL void InitNtCpuInfo IFN0()
     nt_cpu_info.ss = &GLOBAL_SsSel;
 
     /* EIP & flags, neither of which are likely to be very reliable. */
-    nt_cpu_info.eip = &GLOBAL_CleanedRec;
-    nt_cpu_info.flags = &GLOBAL_EFLAGS;
+    nt_cpu_info.eip = &GLOBAL_CleanedRec.EIP;
+    nt_cpu_info.flags = (IU32 *)&GLOBAL_EFLAGS;
 
-    nt_cpu_info.cr0 = &GLOBAL_R_CR0;
+    nt_cpu_info.cr0 = (IU32 *)&GLOBAL_R_CR0;
     /* General purpose registers. */
-    initNtCpuRegInfo(&nt_cpu_info.eax, &GLOBAL_nanoEax, &GLOBAL_R_EAX,
-                     &GLOBAL_EAXsaved, 1 << ConstraintRAL_LS8,
+    initNtCpuRegInfo(&nt_cpu_info.eax, &GLOBAL_nanoEax, (IU32 *)&GLOBAL_R_EAX,
+                     (IU32 *)&GLOBAL_EAXsaved, 1 << ConstraintRAL_LS8,
                      1 << ConstraintRAX_LS16);
-    initNtCpuRegInfo(&nt_cpu_info.ebx, &GLOBAL_nanoEbx, &GLOBAL_R_EBX,
-                     &GLOBAL_EBXsaved, 1 << ConstraintRBL_LS8,
+    initNtCpuRegInfo(&nt_cpu_info.ebx, &GLOBAL_nanoEbx, (IU32 *)&GLOBAL_R_EBX,
+                     (IU32 *)&GLOBAL_EBXsaved, 1 << ConstraintRBL_LS8,
                      1 << ConstraintRBX_LS16);
-    initNtCpuRegInfo(&nt_cpu_info.ecx, &GLOBAL_nanoEcx, &GLOBAL_R_ECX,
-                     &GLOBAL_ECXsaved, 1 << ConstraintRCL_LS8,
+    initNtCpuRegInfo(&nt_cpu_info.ecx, &GLOBAL_nanoEcx, (IU32 *)&GLOBAL_R_ECX,
+                     (IU32 *)&GLOBAL_ECXsaved, 1 << ConstraintRCL_LS8,
                      1 << ConstraintRCX_LS16);
-    initNtCpuRegInfo(&nt_cpu_info.edx, &GLOBAL_nanoEdx, &GLOBAL_R_EDX,
-                     &GLOBAL_EDXsaved, 1 << ConstraintRDL_LS8,
+    initNtCpuRegInfo(&nt_cpu_info.edx, &GLOBAL_nanoEdx, (IU32 *)&GLOBAL_R_EDX,
+                     (IU32 *)&GLOBAL_EDXsaved, 1 << ConstraintRDL_LS8,
                      1 << ConstraintRDX_LS16);
-    initNtCpuRegInfo(&nt_cpu_info.esi, &GLOBAL_nanoEsi, &GLOBAL_R_ESI,
-                     &GLOBAL_ESIsaved, 0, 1 << ConstraintRSI_LS16);
-    initNtCpuRegInfo(&nt_cpu_info.edi, &GLOBAL_nanoEdi, &GLOBAL_R_EDI,
-                     &GLOBAL_EDIsaved, 0, 1 << ConstraintRDI_LS16);
-    initNtCpuRegInfo(&nt_cpu_info.ebp, &GLOBAL_nanoEbp, &GLOBAL_R_EBP,
-                     &GLOBAL_EBPsaved, 0, 1 << ConstraintRBP_LS16);
+    initNtCpuRegInfo(&nt_cpu_info.esi, &GLOBAL_nanoEsi, (IU32 *)&GLOBAL_R_ESI,
+                     (IU32 *)&GLOBAL_ESIsaved, 0, 1 << ConstraintRSI_LS16);
+    initNtCpuRegInfo(&nt_cpu_info.edi, &GLOBAL_nanoEdi, (IU32 *)&GLOBAL_R_EDI,
+                     (IU32 *)&GLOBAL_EDIsaved, 0, 1 << ConstraintRDI_LS16);
+    initNtCpuRegInfo(&nt_cpu_info.ebp, &GLOBAL_nanoEbp, (IU32 *)&GLOBAL_R_EBP,
+                     (IU32 *)&GLOBAL_EBPsaved, 0, 1 << ConstraintRBP_LS16);
 }
 
 #endif /* CPU_40_STYLE */

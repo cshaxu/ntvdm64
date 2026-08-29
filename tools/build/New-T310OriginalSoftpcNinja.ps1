@@ -1,7 +1,8 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)] [ValidateSet('x86', 'x64')] [string]$Architecture,
-    [string]$RepositoryRoot = ''
+    [string]$RepositoryRoot = '',
+    [string]$NodeExecutable = ''
 )
 
 Set-StrictMode -Version Latest
@@ -46,6 +47,8 @@ $videoRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/video'
 $cvidcRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/cvidc'
 $cvidcGenerator = Join-Path $root 'tools/build/Generate-CvidcTypedTables.ps1'
 $videoGenerator = Join-Path $root 'tools/build/Generate-T310BaseVideoTypedSources.ps1'
+$gdpGenerator = Join-Path $root 'tools/build/Generate-T310GdpSlots.mjs'
+$gdpOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/base/cvidc'
 $commsRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/comms'
 $dosRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/dos'
 $demRoot = Join-Path $root 'src/mvdm-host/dos/dem'
@@ -182,13 +185,21 @@ foreach ($name in $patchEvidenceNames) {
     if (!(Test-Path -LiteralPath (Join-Path $patchEvidenceRoot $name))) { throw "Registered SoftPC patch evidence missing: $name" }
 }
 
-New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/cvidc'), (Join-Path $build 'generated/video'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/patch') | Out-Null
+New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/cvidc'), (Join-Path $build 'generated/video'), (Join-Path $build 'generated/gdp'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/patch') | Out-Null
 if (!(Test-Path -LiteralPath $cvidcGenerator -PathType Leaf)) { throw "CVIDC typed-table generator missing: $cvidcGenerator" }
 if (!(Test-Path -LiteralPath $videoGenerator -PathType Leaf)) { throw "Base/video declaration generator missing: $videoGenerator" }
+if (!(Test-Path -LiteralPath $gdpGenerator -PathType Leaf)) { throw "GDP slot generator missing: $gdpGenerator" }
+if (!(Test-Path -LiteralPath $gdpOverlayRoot -PathType Container)) { throw "GDP overlay root missing: $gdpOverlayRoot" }
+if ([string]::IsNullOrWhiteSpace($NodeExecutable)) { $NodeExecutable = $env:MVDM_NODE22 }
+if ([string]::IsNullOrWhiteSpace($NodeExecutable) -or !(Test-Path -LiteralPath $NodeExecutable -PathType Leaf)) {
+    throw 'Node 22 is required for the GDP slot generator; pass -NodeExecutable or set MVDM_NODE22.'
+}
 $cvidcGeneratedRoot = Join-Path $build 'generated/cvidc'
 $cvidcGenerated = & $cvidcGenerator -RepositoryRoot $root -OutputDirectory $cvidcGeneratedRoot | ConvertFrom-Json
 $videoGeneratedRoot = Join-Path $build 'generated/video'
 & $videoGenerator -RepositoryRoot $root -OutputDirectory $videoGeneratedRoot | Out-Null
+$gdpGeneratedRoot = Join-Path $build 'generated/gdp'
+& $NodeExecutable $gdpGenerator $root $gdpGeneratedRoot | Out-Null
 $environment = Join-Path $build 'msvc-mt.cmd'
 @('@echo off', 'set "MVDM_T310_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready',
   ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'),
@@ -223,12 +234,14 @@ $includeRootPaths = @(
     # Original sas.h includes generated sas4gen.h. The selected mirror retains
     # the CVIDC generated carrier; the historical host/genPg output is absent.
     'src/mvdm-host/softpc.new/base/cvidc',
+    'src/mvdm-host-overlay/softpc.new/base/cvidc',
     'src/mvdm-host/softpc.new/base/inc',
     'src/adapter-mvdm-host-out/softpc/include',
     'src/adapter-mvdm-host-out/monitor/include',
     'src/session'
 )
 $includeRoots = $includeRootPaths | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
+$gdpGeneratedInclude = '/I "' + (NinjaPath $gdpGeneratedRoot) + '"'
 
 # `base/inc/egacpu.h` deliberately includes one of two original generated
 # `evidgen.h` variants.  The C-video and base/video translation units require
@@ -255,8 +268,8 @@ $cvidcFirstIncludeRoots = $cvidcFirstRootPaths | ForEach-Object { '/I "' + (Ninj
 $baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DNTVDM /DCPU_30_STYLE /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DANSI /DPROD ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' +
     ''
-$baseFlags = $baseCommonFlags + ($includeRoots -join ' ')
-$cvidcFirstFlags = $baseCommonFlags + ($cvidcFirstIncludeRoots -join ' ')
+$baseFlags = $baseCommonFlags + ($includeRoots -join ' ') + ' ' + $gdpGeneratedInclude
+$cvidcFirstFlags = $baseCommonFlags + ($cvidcFirstIncludeRoots -join ' ') + ' ' + $gdpGeneratedInclude
 $cvidcRuleFlags = $cvidcFirstFlags + ' /DCVIDC_RULE_WORD'
 
 $graph = [Collections.Generic.List[string]]::new()
@@ -335,6 +348,9 @@ foreach ($generated in $cvidcGeneratedObjects) {
     $graph.Add('build ' + $generated.Object + ': cc_cvidc_rule ' + (NinjaPath $generated.Source))
     $cvidcObjects += $generated.Object
 }
+$gdpOverlaySource = Join-Path $gdpOverlayRoot 'mvdm_gdp_state.c'
+$graph.Add('build obj/cvidc/mvdm_gdp_state.obj: cc ' + (NinjaPath $gdpOverlaySource))
+$cvidcObjects += 'obj/cvidc/mvdm_gdp_state.obj'
 $commsObjects = foreach ($name in $commsNames) {
     $object = 'obj/comms/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $commsRoot $name)))

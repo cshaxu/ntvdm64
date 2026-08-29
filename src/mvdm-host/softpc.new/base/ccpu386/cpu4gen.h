@@ -7,6 +7,9 @@
 #define _CPU4GEN_H_
 
 #include <gdpvar.h>	/* For direct access getAX() etc. */
+/* DIVERGENCE(MVDM-HOST-DIV-048): retain generated GDP spellings while the
+ * matching private overlay supplies native-width slots on both host widths. */
+#include <mvdm_gdp_slots.h>
 
 struct	CpuVector	{
 #ifdef	CPU_PRIVATE

@@ -19,6 +19,9 @@
 #include "host_def.h"
 #include "Evid_c.h"
 #include "gdpvar.h"
+/* DIVERGENCE(MVDM-HOST-DIV-048): see cpu4gen.h; this direct generated-header
+ * consumer needs the same native-width private GDP slots. */
+#include <mvdm_gdp_slots.h>
 
 /*
  * Note: no interfaces produced for the following 3.0 VGlob entries as

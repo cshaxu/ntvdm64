@@ -15,7 +15,7 @@ selected `gdpvar.h` is therefore:
 
 `src/mvdm-softpc-patch/x86/prod/gdpvar.h`
 
-It has 615 direct `GLOBAL_*` lvalue macros and 615 distinct historic
+It has 692 direct `GLOBAL_*` lvalue/pointer macros and 692 distinct historic
 32-bit offsets.  The local `ccpu386/gdpvar.h` has a different, unselected
 generated layout and is not an x64 repair input for the formal profile.
 The selected header is in the same layout family as CVIDC's generated
@@ -66,6 +66,10 @@ typed state contract.
 
 ## Current disposition
 
-`GDP-GENERATED-STATE` is **overlay-required; not runtime-enabled**.  This is
-an active P4 repair cluster, not a reason to suppress C4311/C4312 or to claim
-that the CCPU/CVIDC video path is x64-closed.
+`GDP-GENERATED-STATE` is **overlay-required; build-closed, not
+runtime-enabled**.  The formal MSVC `/MT` candidate graph compiles and archives
+the same generated overlay, original CCPU, CVIDC and reached `nt_cpu` host
+carrier on x86 and x64.  This resolves the generated GDP base truncation as a
+package rather than suppressing C4311/C4312.  It does not yet claim that the
+CCPU/CVIDC video path has an enabled runtime test; `j_Gdp` / `jccc_gdp`
+generated-code consumers remain an explicit follow-on P4 audit item.
