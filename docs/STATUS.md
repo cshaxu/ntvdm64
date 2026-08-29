@@ -103,6 +103,12 @@ formal x86/x64 compilation emits none of their C4113/C4133/C4312 diagnostics;
 unrelated generated-source warnings remain visible. See the
 [selected cvidc glue closure](etc/evidence/m0-t310-s8-p4-cvidc-selected-glue-abi-closure-001.md).
 
+**T310 S8 P4:** the seventeen generated C-video mark-rule declarations now
+match their existing four-`IUH` definitions.  The source-derived typed EVID
+table carrier remains the sole table adaptation; forced formal x86/x64 carrier
+rebuilds contain no `evidfunc.h` C4431 diagnostics. See the [mark-rule
+declaration closure](etc/evidence/m0-t310-s8-p4-cvidc-mark-rule-declaration-closure-001.md).
+
 **T310 S8 P4:** the formal full x64 graph exposed one additional selected
 base/video declaration mismatch: `ega_writ.c` declared the word-fill EVID glue
 with `IU8` even though its original body and handler slot use `IU16`.

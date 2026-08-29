@@ -638,23 +638,25 @@ extern void S_3068_Chain4DwordMove_00000003_0000000f_00000001 IPT4(IU32, eaOff, 
 
 /*========= Mark Functions ============ */
 
-extern S_2126_SimpleMark IPT0();
-extern S_2127_CGAMarkByte IPT1(IU32, eaOff);
-extern S_2128_CGAMarkWord IPT1(IU32, eaOff);
-extern S_2129_CGAMarkDword IPT1(IU32, eaOff);
-extern S_2130_CGAMarkString IPT2(IU32, eaOff, IU32, count);
-extern S_2131_UnchainedMarkByte IPT1(IU32, eaOff);
-extern S_2132_UnchainedMarkWord IPT1(IU32, eaOff);
-extern S_2133_UnchainedMarkDword IPT1(IU32, eaOff);
-extern S_2134_UnchainedMarkString IPT2(IU32, eaOff, IU32, count);
-extern S_2135_Chain4MarkByte IPT1(IU32, eaOff);
-extern S_2136_Chain4MarkWord IPT1(IU32, eaOff);
-extern S_2137_Chain4MarkDword IPT1(IU32, eaOff);
-extern S_2138_Chain4MarkString IPT2(IU32, eaOff, IU32, count);
-extern S_2135_Chain4MarkByte IPT1(IU32, eaOff);
-extern S_2136_Chain4MarkWord IPT1(IU32, eaOff);
-extern S_2137_Chain4MarkDword IPT1(IU32, eaOff);
-extern S_2138_Chain4MarkString IPT2(IU32, eaOff, IU32, count);
+/* DIVERGENCE(MVDM-HOST-DIV-121): the original generated rules below are
+ * four-native-host-word functions returning IUH.  NT4's default-int
+ * declarations happened to coexist with the separately typed EVID table;
+ * the selected build derives the typed table carrier from that table, but
+ * every declaration must still match the actual generated rule ABI on x86
+ * and x64. */
+extern IUH S_2126_SimpleMark IPT4(IUH, v1, IUH, v2, IUH, v3, IUH, v4);
+extern IUH S_2127_CGAMarkByte IPT4(IUH, v1, IUH, v2, IUH, v3, IUH, v4);
+extern IUH S_2128_CGAMarkWord IPT4(IUH, v1, IUH, v2, IUH, v3, IUH, v4);
+extern IUH S_2129_CGAMarkDword IPT4(IUH, v1, IUH, v2, IUH, v3, IUH, v4);
+extern IUH S_2130_CGAMarkString IPT4(IUH, v1, IUH, v2, IUH, v3, IUH, v4);
+extern IUH S_2131_UnchainedMarkByte IPT4(IUH, v1, IUH, v2, IUH, v3, IUH, v4);
+extern IUH S_2132_UnchainedMarkWord IPT4(IUH, v1, IUH, v2, IUH, v3, IUH, v4);
+extern IUH S_2133_UnchainedMarkDword IPT4(IUH, v1, IUH, v2, IUH, v3, IUH, v4);
+extern IUH S_2134_UnchainedMarkString IPT4(IUH, v1, IUH, v2, IUH, v3, IUH, v4);
+extern IUH S_2135_Chain4MarkByte IPT4(IUH, v1, IUH, v2, IUH, v3, IUH, v4);
+extern IUH S_2136_Chain4MarkWord IPT4(IUH, v1, IUH, v2, IUH, v3, IUH, v4);
+extern IUH S_2137_Chain4MarkDword IPT4(IUH, v1, IUH, v2, IUH, v3, IUH, v4);
+extern IUH S_2138_Chain4MarkString IPT4(IUH, v1, IUH, v2, IUH, v3, IUH, v4);
 
 
 /*========= Read Functions ============ */
