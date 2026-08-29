@@ -293,6 +293,7 @@ $baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DOPENN
 $baseFlags = $baseCommonFlags + ($includeRoots -join ' ') + ' ' + $gdpGeneratedInclude
 $cvidcFirstFlags = $baseCommonFlags + ($cvidcFirstIncludeRoots -join ' ') + ' ' + $gdpGeneratedInclude
 $cvidcRuleFlags = $cvidcFirstFlags + ' /DCVIDC_RULE_WORD'
+$patchEdlFlags = $baseFlags + ' /DMVDM_SOFTPC_PATCH_EDL_FAST_BOP_ONLY'
 
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
@@ -300,6 +301,7 @@ $graph.Add('build_root = ' + (NinjaPath $build))
 $graph.Add('cflags = ' + $baseFlags)
 $graph.Add('cvidc_first_cflags = ' + $cvidcFirstFlags)
 $graph.Add('cvidc_rule_cflags = ' + $cvidcRuleFlags)
+$graph.Add('patch_edl_cflags = ' + $patchEdlFlags)
 $graph.Add('')
 $graph.Add('rule cc')
 $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in')
@@ -313,13 +315,17 @@ $graph.Add('rule cc_cvidc_rule')
 $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cvidc_rule_cflags /Fo$out $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file:')
+$graph.Add('rule cc_patch_edl')
+$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $patch_edl_cflags /Fo$out $in')
+$graph.Add('  deps = msvc')
+$graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('rule lib')
 $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' lib.exe /nologo /out:$out $in')
 $graph.Add('rule forced_link_audit')
 # This deliberately produces a non-runnable DLL.  /WHOLEARCHIVE makes the
 # candidate's complete original membership visible to LINK; /FORCE keeps the
 # unresolved physical forms in the adjacent log for source-first ownership.
-$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-system.lib /wholearchive:original-softpc-disks.lib /wholearchive:original-softpc-support.lib /wholearchive:original-softpc-video.lib /wholearchive:original-softpc-cvidc.lib /wholearchive:original-softpc-comms.lib /wholearchive:original-softpc-dos.lib /wholearchive:original-mvdm-dem.lib /wholearchive:original-mvdm-command.lib /wholearchive:original-mvdm-xms.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-bindings.lib /wholearchive:softpc-win32-bindings.lib kernel32.lib user32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib > $out.log 2>&1')
+$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-system.lib /wholearchive:original-softpc-disks.lib /wholearchive:original-softpc-support.lib /wholearchive:original-softpc-video.lib /wholearchive:original-softpc-cvidc.lib /wholearchive:original-softpc-comms.lib /wholearchive:original-softpc-dos.lib /wholearchive:original-mvdm-dem.lib /wholearchive:original-mvdm-command.lib /wholearchive:original-mvdm-xms.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-bindings.lib /wholearchive:softpc-win32-bindings.lib ntvdmx64-softpc-edl-default.lib kernel32.lib user32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib > $out.log 2>&1')
 
 $ccpuObjects = foreach ($name in $ccpuNames) {
     $object = 'obj/ccpu/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
@@ -458,6 +464,8 @@ $patchBodyObjects = @(foreach ($name in $patchBodyNames) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $patchBodyRoot $name)))
     $object
 })
+$patchEdlObject = 'obj/patch/fmstubs_edl_fast_bop.obj'
+$graph.Add('build ' + $patchEdlObject + ': cc_patch_edl ' + (NinjaPath (Join-Path $patchBodyRoot 'fmstubs.c')))
 $graph.Add('build original-ccpu386.lib: lib ' + ($ccpuObjects -join ' '))
 $graph.Add('build original-softpc-bios.lib: lib ' + ($biosObjects -join ' '))
 $graph.Add('build original-softpc-keymouse.lib: lib ' + ($keymouseObjects -join ' '))
@@ -476,8 +484,9 @@ $graph.Add('build original-softpc-host-roots.lib: lib ' + ($hostObjects -join ' 
 $graph.Add('build softpc-bindings.lib: lib ' + ($adapterSoftpcObjects -join ' '))
 $graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' '))
 $graph.Add('build ntvdmx64-softpc-patch-evidence.lib: lib ' + ($patchBodyObjects -join ' '))
-$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-softpc-host-roots.lib softpc-bindings.lib softpc-win32-bindings.lib ntvdmx64-softpc-patch-evidence.lib')
-$graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-softpc-host-roots.lib softpc-bindings.lib softpc-win32-bindings.lib')
+$graph.Add('build ntvdmx64-softpc-edl-default.lib: lib ' + $patchEdlObject)
+$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-softpc-host-roots.lib softpc-bindings.lib softpc-win32-bindings.lib ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-edl-default.lib')
+$graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-softpc-host-roots.lib softpc-bindings.lib softpc-win32-bindings.lib ntvdmx64-softpc-edl-default.lib')
 $graph.Add('default original-softpc-candidate')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 
@@ -519,6 +528,12 @@ $graph.Add('default original-softpc-candidate')
             sha256 = Get-NodeSha256 (Join-Path $patchBodyRoot $_)
             buildDisposition = 'compile-and-archive-debugbreak-evidence-only'
         }
+    })
+    patchSelectedRuntimeBodies = @([ordered]@{
+        path = 'src/mvdm-softpc-patch/patches/common/fmstubs.c'
+        selector = 'MVDM_SOFTPC_PATCH_EDL_FAST_BOP_ONLY'
+        symbol = 'EDL_fast_bop'
+        buildDisposition = 'compile-and-force-link-original-debugbreak-default-only'
     })
     patchEvidence = @($patchEvidenceNames | ForEach-Object {
         [ordered]@{

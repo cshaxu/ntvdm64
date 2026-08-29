@@ -14,6 +14,18 @@
  * break contract with the one MSVC intrinsic that emits it on both x86/x64. */
 
 
+#if defined(MVDM_SOFTPC_PATCH_EDL_FAST_BOP_ONLY)
+/* DIVERGENCE(MVDM-SOFTPC-PATCH-004): this separately selected formal-link
+ * object preserves only the reached EDL default contract. The full imported
+ * patch body below contains unrelated empty placeholder hooks and is evidence
+ * only; linking it would hide distinct unresolved SoftPC interfaces. */
+VOID EDL_fast_bop(ULONG immed)
+{
+	/* Whatever this it... Better break on it and see if it gets used */
+	__debugbreak();
+}
+#else
+
 #if !defined(PROD) && defined(CPU_40_STYLE) 
 void FmDebugBop()
 {
@@ -87,3 +99,5 @@ IUH host_get_jump_restart	IFN0()
 {
 	return 100;
 }
+
+#endif /* MVDM_SOFTPC_PATCH_EDL_FAST_BOP_ONLY */

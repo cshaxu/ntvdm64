@@ -44,6 +44,13 @@ warning still emitted today cannot inherit an old `closed-*` result. This is
 an audit baseline, not an S8 closure claim; see the [current full-tree
 baseline](etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md).
 
+**T310 S8 P4:** the source-missing CCPU `EDL_fast_bop(ULONG)` default now
+links only the imported NTVDMx64 patch's original debug-break disposition, as
+a one-symbol archive. Refreshed `359/359` x86/x64 forced links contain no
+unresolved `EDL_fast_bop`; this is not BOP semantic recovery. The repair is
+explicitly retained in the CCPU executor owner-contract cluster; see the
+[EDL default-contract closure](etc/evidence/m0-t310-s8-p4-ccpu-edl-fast-bop-default-contract-closure-001.md).
+
 **T310 S8 P4:** the selected CPU_40 SAS direct overwrite contract and the
 original `nt_mem` private-pointer diagnostic now compile with their actual
 fixed-width/native-width ABIs on both targets. The kernel-VDM-only EMS

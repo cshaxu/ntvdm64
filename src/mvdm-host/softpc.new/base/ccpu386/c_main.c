@@ -64,6 +64,11 @@ Actual worker routines are spun off elsewhere.
  */
 extern void force_yoda(void);
 extern void TakeNpxExceptionInt(void);
+/* DIVERGENCE(MVDM-HOST-DIV-127): the selected original CCPU executor reaches
+ * this source-missing extended BOP fallback. Preserve its exact void/ULONG
+ * call contract; the registered NTVDMx64 patch keeps the original debug-break
+ * disposition until an owner-approved runtime implementation exists. */
+extern void EDL_fast_bop(ULONG immed);
 
 #include  <aaa.h>	/* The workers */
 #include  <aad.h>	/*     ...     */
