@@ -587,6 +587,13 @@ existing generated GDP-slot overlay already supplies native-width private
 `C4311` nor `C4312`; no mirror body or adapter was added. See the [VGlob
 evidence](etc/evidence/m0-t310-s8-p4-vglob-generated-slot-closure-001.md).
 
+**T310 S8 P4 `nt_cpu` generated-GDP debug closure:** the invalid historical
+non-`PROD` packed-GDP assertion is removed while the selected source-named
+fields retain their original control purpose. Formal and non-product x86/x64
+builds clear all 81 historical width/call-contract rows without a mapping
+identity or warning suppression. See the [`nt_cpu` evidence]
+(etc/evidence/m0-t310-s8-p4-nt-cpu-generated-gdp-debug-closure-001.md).
+
 **T310 S8 P4 serial/parallel native transport closure:** original SoftPC COM
 and LPT host sources retain their device request order and configuration
 semantics while their private pointer-or-scalar ioctl and worker transports

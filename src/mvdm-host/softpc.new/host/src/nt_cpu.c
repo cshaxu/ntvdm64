@@ -278,8 +278,6 @@ LOCAL void initNtCpuRegInfo IFN6(
 
 GLOBAL void InitNtCpuInfo IFN0()
 {
-    BOOL *gdp_bool;
-
     /* Variables for deciding what mode we're in, and hence where the */
     /* register values are kept. */
 
@@ -287,13 +285,11 @@ GLOBAL void InitNtCpuInfo IFN0()
     /* DIVERGENCE(MVDM-HOST-DIV-048): the generated field is an lvalue in the
      * private GDP carrier; avoid a historical hard-coded native offset. */
     nt_cpu_info.in_nano_cpu = (BOOL *)&GLOBAL_InNanoCpu;
-#ifndef PROD
-    gdp_bool = (BOOL *) ((IHPE) GDP_PTR + GdpOffsetFromName("InNanoCpu"));
-    if (nt_cpu_info.in_nano_cpu != gdp_bool) {
-        always_trace0("InNanoCpu GDP offset will be wrong in PROD builds");
-    }
-    nt_cpu_info.in_nano_cpu = gdp_bool;
-#endif
+    /* DIVERGENCE(MVDM-HOST-DIV-048): the historical non-PROD assertion
+     * compared against GdpOffsetFromName(), an undeclared NT4 packed-GDP
+     * debug helper.  The selected GDP is now a generated native-width
+     * carrier, so that numeric packed-offset comparison has no valid target.
+     * The source-named field above is the single checked representation. */
 
     /* DIVERGENCE(MVDM-HOST-DIV-048): these CCPU control/register cells are
      * fixed 32-bit Intel values.  The original IUH spelling happened to be
@@ -305,13 +301,7 @@ GLOBAL void InitNtCpuInfo IFN0()
     /* DIVERGENCE(MVDM-HOST-DIV-048): use the generated source field rather
      * than an architecture-specific byte offset into the old packed GDP. */
     nt_cpu_info.stack_is_big = (BOOL *)&GLOBAL_stackIsBig;
-#ifndef PROD
-    gdp_bool = (BOOL *) ((IHPE) GDP_PTR + GdpOffsetFromName("stackIsBig"));
-    if (nt_cpu_info.stack_is_big != gdp_bool) {
-        always_trace0("stackIsBig GDP offset will be wrong in PROD builds");
-    }
-    nt_cpu_info.stack_is_big = gdp_bool;
-#endif
+    /* DIVERGENCE(MVDM-HOST-DIV-048): see the InNanoCpu note above. */
 
     nt_cpu_info.nano_esp = &GLOBAL_nanoEsp;
     nt_cpu_info.host_sp = &GLOBAL_HSP;
