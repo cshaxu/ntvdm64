@@ -49,6 +49,19 @@ BOOL WINAPI InvalidateConsoleDIBits(HANDLE hConsoleOutput, PSMALL_RECT lpRect);
 VOID WINAPI SetLastConsoleEventActive(VOID);
 BOOL WINAPI VDMConsoleOperation(DWORD iFunction, LPVOID lpData);
 int WINAPI ShowConsoleCursor(HANDLE hConsoleOutput, BOOL bShow);
+/*
+ * The original NT4 client sends this operation to Console Server, which
+ * associates the command range with the selected output buffer and returns
+ * that buffer's menu.  This declaration restores the exact source-facing
+ * ABI for the original SoftPC mouse/trapper callers.  It does not claim that
+ * modern conhost exposes the historical event-routing provider: that
+ * source-shaped provider remains a separately tracked console boundary.
+ */
+HMENU WINAPI ConsoleMenuControl(
+    HANDLE hConsoleOutput,
+    UINT dwCommandIdLow,
+    UINT dwCommandIdHigh
+    );
 
 #define CONSOLE_READ_NOREMOVE 0x0001
 #define CONSOLE_READ_NOWAIT   0x0002

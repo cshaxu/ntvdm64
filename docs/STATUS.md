@@ -666,6 +666,22 @@ Ninja object builds clear the recovered `d_mem`, `limit_check`, `FLDENV`,
 FPU, interrupt or debug behavior; see the [closure evidence]
 (etc/evidence/m0-t310-s8-p4-ccpu-original-call-declaration-closure-001.md).
 
+**T310 S8 P4 console-menu declaration closure:** original SoftPC mouse and
+host-control code now sees the exact `ConsoleMenuControl(HANDLE, UINT, UINT)
+-> HMENU` source contract on x86 and x64, eliminating its invalid implicit
+`int` return ABI. The original Console Server command-range/event route is not
+fabricated through a system-menu shim; its runtime provider remains an explicit
+console-control boundary. See the [call-contract evidence]
+(etc/evidence/m0-t310-s8-p4-console-menu-call-contract-closure-001.md).
+
+**T310 S8 P4 console-menu declaration closure:** original SoftPC mouse and
+host-control code now sees the exact `ConsoleMenuControl(HANDLE, UINT, UINT)
+-> HMENU` source contract on x86 and x64, eliminating its invalid implicit
+`int` return ABI. The original Console Server command-range/event route is not
+fabricated through a system-menu shim; its runtime provider remains an explicit
+console-control boundary. See the [call-contract evidence]
+(etc/evidence/m0-t310-s8-p4-console-menu-call-contract-closure-001.md).
+
 **T310 S8 P4 serial/parallel native transport closure:** original SoftPC COM
 and LPT host sources retain their device request order and configuration
 semantics while their private pointer-or-scalar ioctl and worker transports
