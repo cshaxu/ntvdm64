@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3240 |
+| Documentation records | 3241 |
 | --- | --- |
-| Generated UTC | 2026-08-29T17:02:33Z |
+| Generated UTC | 2026-08-29T17:05:07Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | 2612abb5f24ce5d2828603772c6f86183fae13652e937e408472d67c35ae6006 |
+| QUEUE.md | principal control document | 87ed397534bd91e9c16ea1b7e6cd3b7ecb71735b064ba7d294132b0c72110fbc |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -801,6 +801,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-x86gfx-console-video-hole-disposition-001.md | indexed supporting material | 7616f4f901fc2766fd6a18ddd04dff80acb15006053cd174975f91de4c3e7a9c |
 | etc/evidence/m0-t310-s8-p4-xms-a20-call-contract-closure-001.md | indexed supporting material | 5f40ea74175157b98ce6faab97e4d48eb93d004b593c7a8cc9ab6a73e1771629 |
 | etc/evidence/m0-t310-s8-p4-xms-guest-address-abi-closure-001.md | indexed supporting material | be8eb01d6392f0c8257cc640001fd1278cbfeb1058db9c9c700f391c2db0b540 |
+| etc/evidence/m0-t310-s8-p4-zfrsrvd-x86-x64-classification-001.md | indexed supporting material | b66af1522bbe20bad70ef0c9e2e2d30804abbea90004cca1a3b27473dc46400a |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1464,7 +1465,7 @@ content-divergent entries.
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-audit-baseline-001.md | indexed supporting material | b878f9a100fb6862522f3a5ec35977c3d5369032b99e3c4932d25a34ab1f2c46 |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-cluster-ledger.tsv | indexed supporting material | 3b7193da3c22588dff98a25a8b1390c740cc01d3f19274c250f980bb4ca11fed |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-inventory.tsv | indexed supporting material | 9f5be57f4c4a22e0ae88de22427029fb7b4f31ca753868cc8231453109cd6eb0 |
-| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | 5f42c9cbcca834756d63477e33c081823f73c5d273aecde33354b143a878f614 |
+| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | a6dad7dfe602d1d9727eb7b577212cd13c055adc82b619b385b76a79f77de212 |
 | etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification.tsv | indexed supporting material | 50aaab24789e202c10d982b7ed515e9feb778ee783769098bdaf8485733f94b9 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
