@@ -124,6 +124,12 @@ rebuilds contain no C4334 for either source; generated control-flow warnings
 remain visible. See the [native-word shift
 closure](etc/evidence/m0-t310-s8-p4-cvidc-native-word-shift-closure-001.md).
 
+**T310 S8 P4:** source review classifies all 100 CCPU `c_main.c` C4057
+operand calls as original fixed 32-bit Intel state, not host-width ABI
+transitions. They remain compiler-visible but leave the x86/x64 repair
+worklist without casts, suppression or a new adapter; see the [fixed-width
+operand disposition](etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-operand-call-disposition-001.md).
+
 **T310 S8 P4:** the two selected C-video generated native-word bit tests now
 make their literal operand `IUH`, matching the original `IUH` carrier and its
 existing `sizeof(IUH)` bound on both architectures. Formal x86/x64 object
