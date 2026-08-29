@@ -192,6 +192,24 @@ mapping_manager *session_completion_callback_mappings(session *instance)
     return session_valid(instance) ? &instance->completion_callback_mappings : NULL;
 }
 
+int session_set_firmware_root(session *instance, const char *path)
+{
+    size_t length;
+    if (!session_valid(instance) || instance->state != SESSION_STATE_READY ||
+        path == NULL || path[0] == '\0') return 0;
+    length = strlen(path);
+    if (length >= SESSION_FIRMWARE_ROOT_BYTES) return 0;
+    memcpy(instance->firmware_root, path, length + 1u);
+    return 1;
+}
+
+const char *session_firmware_root(const session *instance)
+{
+    if (!session_valid(instance) || instance->firmware_root[0] == '\0')
+        return NULL;
+    return instance->firmware_root;
+}
+
 int session_guest_memory_begin(session *instance, void *context,
     guest_memory_read_fn read, guest_memory_write_fn write)
 {

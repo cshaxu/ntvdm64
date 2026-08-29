@@ -50,7 +50,11 @@ New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj/ccpu'), (Join
 $environment = Join-Path $build 'msvc-mt.cmd'
 @('@echo off', 'set "MVDM_T310_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T310_CALLER_CWD%"', '%*') | Set-Content -LiteralPath $environment -Encoding ascii
 $includes = @('src', 'src/adapter-mvdm-host-out/win32/include', 'src/opennt-host/public/sdk/inc', 'src/opennt-abi/source/public/sdk/inc', 'src/opennt-abi/source/public/internal/base/inc', 'src/opennt-abi/source/public/internal/windows/inc', 'src/opennt-abi/source/public/ddk/inc', 'src/mvdm-support/inc', 'src/mvdm-softpc-patch/x86/prod', 'src/mvdm-host/softpc.new/base/ccpu386', 'src/mvdm-host/softpc.new/host/inc', 'src/mvdm-host/softpc.new/base/cvidc', 'src/mvdm-host/softpc.new/base/inc', 'src/adapter-mvdm-host-out/softpc/include', 'src/session') | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
-$cflags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /Di386 /DNTVDM /DCPU_30_STYLE /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' + ($includes -join ' ')
+# `i386` is a historical 32-bit x86 source-selection macro.  Do not define it
+# on x64 merely to force the old x86 branch; x64 must compile its genuine
+# non-i386 source path and receive explicit later capability disposition.
+$architectureFlags = if ($Architecture -eq 'x86') { '/Di386 ' } else { '' }
+$cflags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT ' + $architectureFlags + '/DNTVDM /DCPU_30_STYLE /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' + ($includes -join ' ')
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10'); $graph.Add('cflags = ' + $cflags); $graph.Add('')
 $graph.Add('rule cc'); $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in'); $graph.Add('  deps = msvc'); $graph.Add('  msvc_deps_prefix = Note: including file:')
@@ -66,5 +70,5 @@ $graph.Add('build original-softpc-s5-bridge.lib: lib ' + ($adapterObj -join ' ')
 $graph.Add('build ccpu-bounded-execution.exe: link ' + (($testObj + @('original-ccpu-execution.lib', 'original-softpc-s5-host.lib', 'original-softpc-s5-bridge.lib')) -join ' '))
 $graph.Add('build ccpu-bounded-execution: phony ccpu-bounded-execution.exe'); $graph.Add('default ccpu-bounded-execution')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
-[ordered]@{ schema='m0.t310.s5.original-ccpu-bounded-execution.v1'; architecture=$Architecture; executor='original softpc.new/base/ccpu386 c_cpu_simulate'; selectedCcpu=$ccpu; excludedAlternateSource=@('ntstubs.c'); hostSources=$hostSources; adapterSources=$adapterSources; test=$test; forbiddenInputs=@('src.old','bochs-core','adapter-bochs','MONITOR','V86') } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
+[ordered]@{ schema='m0.t310.s5.original-ccpu-bounded-execution.v2'; architecture=$Architecture; i386Define=($Architecture -eq 'x86'); executor='original softpc.new/base/ccpu386 c_cpu_simulate'; selectedCcpu=$ccpu; excludedAlternateSource=@('ntstubs.c'); hostSources=$hostSources; adapterSources=$adapterSources; test=$test; forbiddenInputs=@('src.old','bochs-core','adapter-bochs','MONITOR','V86') } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
 Write-Host "Generated T310 S5 original CCPU execution graph: $build"

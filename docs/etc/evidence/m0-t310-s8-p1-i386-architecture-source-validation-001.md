@@ -58,5 +58,41 @@ successfully on both architectures. It is still an initialization/source
 closure only: its actual sector I/O, media admission and guest-visible
 failure-direction verification remain later P1 implementation work.
 
+## Firmware resource binding
+
+Original `softpc.new/host/src/nt_unix.c::host_find_file` is the single source
+of truth for name lookup before `nt_rez.c::host_read_resource` opens a ROM or
+CMOS resource. Its original `GetSystemDirectory` search is an NT4 product
+installation assumption, not the current product's firmware boundary.
+
+`MVDM-HOST-DIV-037` changes only that lookup step: it calls the same-shaped
+`mvdm_softpc_firmware_find_file` adapter before retaining the original
+`host_error` failure order. The adapter receives a caller-owned ANSI buffer,
+reads an immutable root selected by the active `session`, and uses public
+`GetFileAttributesA` to accept an existing file. It owns no firmware bytes,
+Windows HANDLE, mapping-manager ID or guest state. A mapping manager is not
+applicable because no host object crosses an MVDM fixed-width ABI here.
+
+The application will resolve this root relative to its executable directory:
+`softpc/` contains firmware assets while `dos/` and `win16/` contain separate
+guest images. ROM, BIOS and data assets remain external package inputs; none
+is linked into the executable.
+
+Outside the sandbox, this formal test passed on both architectures:
+
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File tools/build/New-T310FirmwareResourceNinja.ps1 `
+  -Architecture x86 -RepositoryRoot O:\repos.hobby\ntvdm64
+ninja -C build/M0-T310/S8/p1-firmware-resource/x86 verify
+
+powershell.exe -ExecutionPolicy Bypass -File tools/build/New-T310FirmwareResourceNinja.ps1 `
+  -Architecture x64 -RepositoryRoot O:\repos.hobby\ntvdm64
+ninja -C build/M0-T310/S8/p1-firmware-resource/x64 verify
+```
+
+Each fixture binds a session, resolves the shipped `bios1.rom`, rejects a
+missing ROM with an empty output buffer, and rejects a too-small caller
+buffer. x86 compiles with `i386`; x64 deliberately does not.
+
 No Bochs device, MONITOR, kernel VDM, `src.old`, raw native identity or
 preprocessor-derived capability decision was introduced.

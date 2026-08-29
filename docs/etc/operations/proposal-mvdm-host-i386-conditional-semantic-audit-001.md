@@ -30,6 +30,16 @@ product capability decisions use a named owner and capability; no conditional
 may imply the presence or absence of V86, MONITOR, guest remapping, or device
 semantics by itself.
 
+The preferred recovery result is one architecture-neutral implementation of
+the original observable contract.  The audit must therefore first attempt to
+identify a shared x86/x64 path—just as `__debugbreak()` replaced two spellings
+of the same `int 3` contract—rather than preserve an historical `i386` split
+by default.  A retained architecture conditional is allowed only for a real
+calling-convention, object-layout, compiler-syntax, or irreducible platform
+mechanism difference.  If recovery needs a new x64 binding or a shared adapter
+to make the contract uniform, that registered divergence is preferred over
+silently accepting divergent behavior in the original branches.
+
 If a branch relied on native host pointer/handle identity, both x86 and x64
 use the session-owned mapping-manager surrogate and the established bounded
 lease rule. The x86 build never gets an identity-map shortcut. If a branch
@@ -63,6 +73,12 @@ the selected x64 behavior, source-recovery rung, capability owner and test
 obligation. Pointer-bearing forms explicitly identify the relevant session
 mapping-manager instance and the no-raw-alias rule.
 
+The ledger also records whether the final recovery is `unified`,
+`architecture-specific-required`, or `unresolved`. A
+`architecture-specific-required` row names the exact irreducible reason and
+the mirror/adapter divergence registration; absence of `i386` on x64 is never
+such a reason by itself.
+
 ### S3 — recovery and queue integration
 
 Specify the smallest same-shaped source, adapter, overlay or unavailable path
@@ -90,8 +106,8 @@ part of this candidate.
 ## Exit criteria
 
 The ledger classifies every selected `i386` conditional and its exact branch
-meaning. Every behavioral condition has a named owner and an explicit x86 and
-x64 disposition; every pointer/handle identity case names the required
-session mapping-manager path; and all later affected package proposals have a
-precise dependency note. The worktree contains only governance/evidence
-records.
+meaning. Every behavioral condition has a named owner, an explicit x86 and
+x64 disposition, and a `unified`/`architecture-specific-required` recovery
+decision; every pointer/handle identity case names the required session
+mapping-manager path; and all later affected package proposals have a precise
+dependency note. The worktree contains only governance/evidence records.

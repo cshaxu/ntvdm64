@@ -295,7 +295,11 @@ non-`i386` branch for the queued semantic-owner audit.  The P1 source order is
 firmware inputs and the complete original `base/disks/sources` plus
 `nt_rez`/fixed-disk/real-floppy host group are recorded in the
 [architecture-source validation](etc/evidence/m0-t310-s8-p1-i386-architecture-source-validation-001.md).
-It is composition evidence only, not a runnable-machine claim.
+The original `host_find_file` call shape is now bound to an immutable,
+session-owned firmware root rather than the host system directory; formal
+Ninja fixtures verify both `bios1.rom` resolution and the original missing
+resource failure direction on x86 and x64.  It is composition evidence only,
+not a runnable-machine claim.
 
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer

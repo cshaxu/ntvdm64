@@ -13,6 +13,7 @@
 
 #include <windows.h>
 #include "host_def.h"
+#include "mvdm_softpc_firmware.h"
 #include "insignia.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -369,36 +370,13 @@ char *host_find_file(file,full_path,display_error)
 char *file,*full_path;
 int display_error;
 {
-    char buffer[MAXPATHLEN];
-    WIN32_FIND_DATA match;
-    HANDLE gotit;
-    static char sysdir[MAX_PATH];
-    static int first = 1;
-
-    if (first)
-    {
-	first = 0;
-	if (GetSystemDirectory(sysdir, MAXPATHLEN) == 0)
-	{
-	    sysdir[0] = '\0';
-	    host_error(EG_SYS_MISSING_FILE, ERR_QUIT, file);
-	    return(NULL);
-	}
-    }
-
-    if (sysdir[0] != '\0')
-    {
-	strcpy(buffer, sysdir);
-	strcat(buffer, "\\");
-	strcat(buffer, file);
-    }
-
-    if ((gotit = FindFirstFile(buffer, &match)) != (HANDLE)-1)
-    {
-	FindClose(gotit);       // should check (BOOL) return & then ??
-	strcpy(full_path, buffer);
-	return (full_path);
-    }
+    /* DIVERGENCE: the NT4 system-directory resource assumption is not a
+     * portable product boundary.  Preserve this original function's name,
+     * parameters and host_error failure ordering; source the selected immutable
+     * firmware directory from the currently bound session through the named
+     * SoftPC adapter.  See MVDM-HOST-DIV-037. */
+    if (mvdm_softpc_firmware_find_file(file, full_path, MAXPATHLEN))
+        return(full_path);
 
     /* Haven't managed to find the file. Oh dear... */
     switch( display_error )

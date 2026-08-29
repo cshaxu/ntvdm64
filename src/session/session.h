@@ -11,6 +11,7 @@
 #define SESSION_MAX_TEARDOWNS 8u
 #define SESSION_MECHANICAL_STATUS_NONE UINT32_MAX
 #define SESSION_MECHANICAL_STATUS_BACKEND_UNAVAILABLE UINT32_C(0xfffffffe)
+#define SESSION_FIRMWARE_ROOT_BYTES 1024u
 
 /* A fixed-width composition choice.  The numeric value is session-local
  * state only: it is never copied to guest or MVDM storage. */
@@ -58,6 +59,7 @@ typedef struct session {
     mapping_manager host_resource_mappings;
     mapping_manager completion_callback_mappings;
     guest_memory_lease_context guest_memory_lease;
+    char firmware_root[SESSION_FIRMWARE_ROOT_BYTES];
 } session;
 
 #ifdef __cplusplus
@@ -82,6 +84,9 @@ int session_dispose(session *instance);
 mapping_manager *session_guest_memory_mappings(session *instance);
 mapping_manager *session_host_resource_mappings(session *instance);
 mapping_manager *session_completion_callback_mappings(session *instance);
+
+int session_set_firmware_root(session *instance, const char *path);
+const char *session_firmware_root(const session *instance);
 
 int session_guest_memory_begin(session *instance, void *context,
     guest_memory_read_fn read, guest_memory_write_fn write);
