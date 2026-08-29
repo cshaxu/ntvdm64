@@ -11,6 +11,7 @@
  * cdecl-to-WINAPI call boundary. */
 typedef DWORD (__cdecl *OPENNT_CDECL_THREAD_START_ROUTINE)(LPVOID parameter);
 typedef VOID (__cdecl *OPENNT_VOID_CDECL_THREAD_START_ROUTINE)(VOID);
+typedef VOID (__cdecl *OPENNT_VOID_CDECL_PARAMETER_THREAD_START_ROUTINE)(LPVOID parameter);
 
 HANDLE opennt_create_cdecl_thread(
     LPSECURITY_ATTRIBUTES attributes,
@@ -24,6 +25,14 @@ HANDLE opennt_create_void_cdecl_thread(
     LPSECURITY_ATTRIBUTES attributes,
     SIZE_T stack_bytes,
     OPENNT_VOID_CDECL_THREAD_START_ROUTINE start_routine,
+    LPVOID parameter,
+    DWORD flags,
+    LPDWORD thread_id);
+
+HANDLE opennt_create_void_cdecl_parameter_thread(
+    LPSECURITY_ATTRIBUTES attributes,
+    SIZE_T stack_bytes,
+    OPENNT_VOID_CDECL_PARAMETER_THREAD_START_ROUTINE start_routine,
     LPVOID parameter,
     DWORD flags,
     LPDWORD thread_id);

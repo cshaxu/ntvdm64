@@ -14,6 +14,15 @@
 #include <ctype.h>
 
 #include "adapter-mvdm-host-out/softpc/include/mvdm_command_redirection.h"
+/* DIVERGENCE(MVDM-HOST-DIV-120): the two original pipe workers are cdecl
+ * void(LPVOID) forms.  Bind their original calls to the same session-aware
+ * WINAPI boundary used by the selected COMMAND child worker. */
+#include "adapter-mvdm-host-out/win32/include/thread_start_compat.h"
+#undef CreateThread
+#define CreateThread(attributes, stack_bytes, start_routine, parameter, flags, thread_id) \
+    opennt_create_void_cdecl_parameter_thread((attributes), (stack_bytes), \
+        (OPENNT_VOID_CDECL_PARAMETER_THREAD_START_ROUTINE)(start_routine), \
+        (parameter), (flags), (thread_id))
 
 #define CMDREDIR_DEBUG	1
 
@@ -403,9 +412,9 @@ BOOL cmdHandleStdOutErrWithPipe(
 	pRdrInfo->ri_hStdErrFile = hFile;
 
     }
-    hThread = CreateThread ((LPSECURITY_ATTRIBUTES)NULL,
+	    hThread = CreateThread ((LPSECURITY_ATTRIBUTES)NULL,
 			    (DWORD)0,
-			    (LPTHREAD_START_ROUTINE)cmdPipeOutThread,
+			    cmdPipeOutThread,
 			    (LPVOID)pPipe,
 			    0,
 			    &ThreadId
@@ -529,9 +538,9 @@ BOOL cmdHandleStdinWithPipe (
     pPipe->hPipe = pRdrInfo->ri_hStdIn;
     pPipe->pFileName = pStdinFileName;
     InitializeCriticalSection(&pPipe->CriticalSection);
-    pPipe->hThread = CreateThread ((LPSECURITY_ATTRIBUTES)NULL,
+	    pPipe->hThread = CreateThread ((LPSECURITY_ATTRIBUTES)NULL,
 			       (DWORD)0,
-			       (LPTHREAD_START_ROUTINE)cmdPipeInThread,
+			       cmdPipeInThread,
 			       (LPVOID)pPipe,
 			       0,
 			       &ThreadId

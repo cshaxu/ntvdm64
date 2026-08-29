@@ -540,6 +540,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-command-environment-native-width-closure-001.md | indexed supporting material | ddfb57e8566b0eb88f47859e693ca5b5cab468e0b8a9d9c60196e5e731c5c577 |
 | etc/evidence/m0-t310-s8-p4-command-host-record-alignment-closure-001.md | indexed supporting material | 89119318102d8abda8757aea378b831e60e7644b919df5447cadfe1865a81c94 |
 | etc/evidence/m0-t310-s8-p4-command-multisz-pointer-closure-001.md | indexed supporting material | f863b0636250d13e971695468c5603ff830e3a2f8227c8a13423e88f25b812de |
+| etc/evidence/m0-t310-s8-p4-command-pipe-worker-callback-closure-001.md | indexed supporting material | c4907419dbda2c615a8fadc1b3debe4eafca688f63cfa7da72d0c3662d0c4ec0 |
 | etc/evidence/m0-t310-s8-p4-command-rtl-environment-binding-closure-001.md | indexed supporting material | 3d977e3ca11b6d3a28ddf35d4a21a985e0e875d01059185d6218ee2b67665049 |
 | etc/evidence/m0-t310-s8-p4-comms-native-transport-closure-001.md | indexed supporting material | 3fcfe6eccc8d3d5efa5bde6958f0e3a8575bd970730231db0e6e1401980750d0 |
 | etc/evidence/m0-t310-s8-p4-config-scalar-native-width-closure-001.md | indexed supporting material | e1668da3a212bd02d4ce312b13fe186149525cf4df90a22d3397a7064ccbbbf9 |
@@ -1275,7 +1276,7 @@ content-divergent entries.
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-audit-baseline-001.md | indexed supporting material | b878f9a100fb6862522f3a5ec35977c3d5369032b99e3c4932d25a34ab1f2c46 |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-cluster-ledger.tsv | indexed supporting material | 3b7193da3c22588dff98a25a8b1390c740cc01d3f19274c250f980bb4ca11fed |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-inventory.tsv | indexed supporting material | 9f5be57f4c4a22e0ae88de22427029fb7b4f31ca753868cc8231453109cd6eb0 |
-| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | 458e4b0fd2e44a016309cb9fe3eac300116fb02d3d3611961d0c0c94cc1f728c |
+| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | d158418984abd09639a57d5e40274748cbd7a48edf0874cdbd22229b680a8896 |
 | etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification.tsv | indexed supporting material | 50aaab24789e202c10d982b7ed515e9feb778ee783769098bdaf8485733f94b9 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
