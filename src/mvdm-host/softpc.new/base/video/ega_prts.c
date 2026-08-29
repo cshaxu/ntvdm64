@@ -366,6 +366,9 @@ ERROR RECOVERY	  :	none.
 IMPORT	void	ega_mode_init IPT0();
 IMPORT	int	get_ega_switch_setting IPT0();
 IMPORT void v7_get_banks IPT2(UTINY *, rd_bank, UTINY *, wrt_bank );
+/* DIVERGENCE(MVDM-HOST-DIV-067): retain the original cross-video calls with
+ * their actual same-package declarations; NT4 accepted their implicit forms. */
+IMPORT void setMarkPointers IPT1(IUH, markset);
 #ifndef cursor_changed
 IMPORT void cursor_changed IPT2(int, x, int, y);
 #endif /* cursor_changed */
@@ -2904,6 +2907,7 @@ register int colour_dont_care;
 **
 )*/
 #include	"cpu_vid.h"
+IMPORT VOID Glue_set_vid_wrt_ptrs IPT1(WRT_POINTERS *, handler);
 
 GLOBAL VOID ega_mask_register_changed IFN1(BOOL, gotBitProtection)
 {

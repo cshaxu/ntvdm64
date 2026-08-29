@@ -600,6 +600,13 @@ formal architectures; all four historical `C4057` rows are stale, with no
 source change or suppression. See the [access-table evidence]
 (etc/evidence/m0-t310-s8-p4-selected-ccpu-access-table-closure-001.md).
 
+**T310 S8 P4 video original-call declaration closure:** the full selected
+base/video owner group retains its original functions, tables and algorithms
+while nine implicit same-package calls now carry their exact source contracts.
+Forced formal x86/x64 builds clear all nine `C4013` rows; unrelated warnings
+remain visible. See the [video declaration evidence]
+(etc/evidence/m0-t310-s8-p4-video-original-call-declaration-closure-001.md).
+
 **T310 S8 P4 serial/parallel native transport closure:** original SoftPC COM
 and LPT host sources retain their device request order and configuration
 semantics while their private pointer-or-scalar ioctl and worker transports

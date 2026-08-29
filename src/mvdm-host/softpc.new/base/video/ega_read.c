@@ -135,6 +135,9 @@ ERROR RECOVERY	  :	none.
 #include	"ga_mark.h"
 #include	"ga_defs.h"
 #include	"cpu_vid.h"
+/* DIVERGENCE(MVDM-HOST-DIV-067): the selected C_VID function has an
+ * original `void (IUH)` shape; do not use an implicit C declaration. */
+IMPORT void setReadPointers IPT1(IUH, readset);
 
 /* [3.1.2 DECLARATIONS]                                                 */
 

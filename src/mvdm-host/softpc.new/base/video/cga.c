@@ -86,6 +86,10 @@
 #include "trace.h"
 #include "debug.h"
 #include "cpu_vid.h"
+/* DIVERGENCE(MVDM-HOST-DIV-067): restore the original C_VID selector
+ * declarations rather than relying on an implicit `int` result. */
+IMPORT void setWritePointers IPT0();
+IMPORT void setReadPointers IPT1(IUH, readset);
 #ifdef	EGG
 #include "egacpu.h"
 #endif	/* EGG */

@@ -368,6 +368,11 @@ ERROR RECOVERY	  :	none.
 
 #include	"egaports.h"
 
+/* DIVERGENCE(MVDM-HOST-DIV-067): declare original same-package EGA helpers
+ * at their consumers; historical C accepted implicit declarations. */
+IMPORT void set_index_state IPT0();
+IMPORT boolean in_index_state IPT0();
+
 #ifdef GISP_SVGA 
 #include "hwvgaio.h"
 #endif 	/* GISP_SVGA */
@@ -2119,6 +2124,7 @@ FAST TINY colour_dont_care;
 **  NB: GLOBAL for JOKER.
 )*/
 #include	"cpu_vid.h"
+IMPORT VOID Glue_set_vid_wrt_ptrs IPT1(WRT_POINTERS *, handler);
 
 GLOBAL VOID vga_mask_register_changed IFN1(BOOL, gotBitProtection)
 {
