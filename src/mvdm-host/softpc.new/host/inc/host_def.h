@@ -13,6 +13,12 @@
 \***************************************************************/
 
 #include "ctype.h"
+/*
+ * DIVERGENCE(MVDM-HOST-DIV-070): the original host header maps host_getenv
+ * to the C runtime getenv but does not expose its pointer-return declaration.
+ * Modern x64 must retain that native pointer result rather than assume int.
+ */
+#include <stdlib.h>
 
 /* put the invariant #defines for your host here, eg:*/
 

@@ -565,6 +565,13 @@ K&R default-`int` diagnostics are retained visibly because they are not
 host-width ABI faults.  See the [storage-controller evidence]
 (etc/evidence/m0-t310-s8-p4-storage-controller-call-contract-audit-001.md).
 
+**T310 S8 P4 CCPU host environment ABI closure:** the original SoftPC
+\`host_getenv\` alias now has its standard native pointer declaration in the
+selected portability header. This preserves \`c_bsic.c\`'s original
+environment predicate while removing its x64 implicit-\`int\` truncation. See
+the [CCPU environment evidence]
+(etc/evidence/m0-t310-s8-p4-ccpu-host-getenv-abi-closure-001.md).
+
 **T310 S8 P4 CCPU generated video-rule storage closure:** the unchanged
 original `vglob.c`/`egacpu.h` `IUH*` accessor ABI is restored.  The only
 required x86/x64 change is six generated private rule-storage fields, recorded
