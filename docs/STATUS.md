@@ -62,6 +62,11 @@ destination. This closes the selected BIOS/ROM C4311 pointer truncations on
 both targets without mapping tokens or warning suppression; see the
 [configuration-scalar closure](etc/evidence/m0-t310-s8-p4-config-scalar-native-width-closure-001.md).
 
+**T310 S8 P4:** `display_string` now holds the original ROM scratch-pad
+message length in native-width temporaries until its existing bounded guard
+proves the final `sys_addr` result. The x86/x64 ROM rebuild is free of the two
+former C4267 entries; see the [ROM scratch-length closure](etc/evidence/m0-t310-s8-p4-rom-scratch-length-closure-001.md).
+
 **T310 S8 P4:** the formal full x64 graph exposed one additional selected
 base/video declaration mismatch: `ega_writ.c` declared the word-fill EVID glue
 with `IU8` even though its original body and handler slot use `IU16`.
