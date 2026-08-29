@@ -105,6 +105,10 @@ static char SccsID[]="@(#)keyba.c	1.57 06/22/95 Copyright Insignia Solutions Ltd
 #ifdef NTVDM
 #include "idetect.h"
 #include "nt_eoi.h"
+/* DIVERGENCE(MVDM-HOST-DIV-085): the selected keyboard path invokes the
+ * original XMS A20 providers. Use their original xms.h declaration carrier;
+ * the historical conditional sas.h declaration is not effective here. */
+#include "xms.h"
 
 /* exported for NT host event code */
 GLOBAL VOID KbdResume(VOID);

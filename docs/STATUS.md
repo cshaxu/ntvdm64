@@ -67,6 +67,11 @@ support/host-root archives rebuild without those three implicit calls; see the
 providers through their exact contracts; x86/x64 host-root and DOS archives
 rebuild without those implicit calls. See the [PIF/LIM call closure](etc/evidence/m0-t310-s8-p4-pif-lim-call-contract-closure-001.md).
 
+**T310 S8 P4:** the selected keyboard and BIOS tape paths now consume the
+original XMS A20 interface header at their top-level boundaries. Both x86/x64
+units rebuild without the two former implicit A20 calls; see the [XMS A20 call
+closure](etc/evidence/m0-t310-s8-p4-xms-a20-call-contract-closure-001.md).
+
 **T310 S8 P4:** source-list recovery proved that the 31 `ga_glue.c` x86/x64
 warnings came from a historical C-video variant deliberately commented out by
 the original `base/video/sources` manifest. The Ninja manifest reader now

@@ -37,6 +37,9 @@
 #include "xt.h"
 #include CpuH
 #include "sas.h"
+/* DIVERGENCE(MVDM-HOST-DIV-085): preserve the original XMS-mediated A20
+ * transition by consuming the original XMS interface contract directly. */
+#include "xms.h"
 #include "ios.h"
 #include "bios.h"
 #include "tape_io.h"
