@@ -22,6 +22,11 @@ either `-Architecture x86` or `-Architecture x64`; its manifest records
 `i386Define=false` for both and writes below
 `build/M0-T310/S8/p1-machine-source/<architecture>`.
 
+The same invariant now applies to the independently generated bounded-CCPU
+graph in `tools/build/New-T310CcpuExecutionNinja.ps1`.  Its x86 and x64 source
+manifests both record `i386Define=false`, and both formal target executables
+were regenerated successfully without a command-line `/Di386`.
+
 This is build selection only.  It does not assert that every differing branch
 is semantically complete; the queued `i386` conditional audit must classify
 each behavioral branch and assign its selected x86 and x64 owner.
