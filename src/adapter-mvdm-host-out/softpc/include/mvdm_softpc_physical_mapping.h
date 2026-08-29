@@ -18,6 +18,14 @@ void VdmSetPhysRecStructs(uint32_t host_address, uint32_t intel_address,
     uint32_t byte_count);
 void mvdm_softpc_physical_mapping_set(uint32_t identifier,
     uint32_t intel_address, uint32_t byte_count);
+/* Source-shaped replacement for the NT4 kernel-VDM EMS page alias services.
+ * These page numbers always name guest physical 4 KiB pages; they are not
+ * host pointers and therefore do not enter the mapping manager. */
+int32_t VdmMapDosMemory(uint32_t dos_intel_page, uint32_t vdm_intel_page,
+    uint32_t page_count);
+int32_t VdmUnmapDosMemory(uint32_t dos_intel_page, uint32_t page_count);
+int mvdm_softpc_physical_mapping_translate(uint32_t intel_address,
+    uint32_t *translated_address_out);
 int mvdm_softpc_physical_mapping_resolve(uint32_t intel_address,
     uint8_t **host_byte_out);
 void mvdm_softpc_physical_mapping_cancel(uint32_t identifier);

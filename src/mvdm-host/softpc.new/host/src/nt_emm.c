@@ -57,6 +57,10 @@ The Following Routines are defined:
 #include "umb.h"
 #include "host_emm.h"
 #include "nt_mem.h"
+/* DIVERGENCE(MVDM-HOST-DIV-096): the original calls NT4 kernel-VDM page
+ * alias services.  Keep those exact public calls and page-number ABI, but
+ * bind their user-mode replacement through the selected SoftPC adapter. */
+#include "mvdm_softpc_physical_mapping.h"
 
 
 /*	Global Variables		*/

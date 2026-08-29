@@ -836,6 +836,15 @@ depends on kernel/CSRSS `NtRaiseHardError`; it is recorded as a physical
 non-runtime boundary rather than emulated in the mirror. See the
 [error-dialog evidence](etc/evidence/m0-t310-s8-p4-error-dialog-native-callback-closure-001.md).
 
+**T310 S8 P4 EMS page-alias closure:** original `nt_emm.c` retains its exact
+`VdmMapDosMemory` / `VdmUnmapDosMemory` page-number calls while the selected
+adapter recovers their NT4 kernel-VDM effect as a session-owned reversible
+guest-physical alias. The existing mapping manager remains exclusively for
+external host-backed spans; no host pointer crosses this EMS boundary. Formal
+MSVC `/MT` x86/x64 compilation verifies the mirror callers and adapter without
+new width diagnostics. See the [EMS page-alias evidence]
+(etc/evidence/m0-t310-s8-p4-ems-page-alias-contract-closure-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove

@@ -14,7 +14,16 @@ typedef struct physical_mapping_record {
     struct physical_mapping_record *next;
 } physical_mapping_record;
 
+typedef struct physical_alias_record {
+    session *owner;
+    uint32_t destination_base;
+    uint32_t source_base;
+    uint32_t byte_count;
+    struct physical_alias_record *next;
+} physical_alias_record;
+
 static physical_mapping_record *records;
+static physical_alias_record *aliases;
 
 static int add_overflow(uint32_t left, uint32_t right, uint32_t *sum)
 {
@@ -42,6 +51,29 @@ static void remove_record(physical_mapping_record *target)
     free(target);
 }
 
+static void remove_alias(physical_alias_record *target)
+{
+    physical_alias_record **cursor = &aliases;
+    while (*cursor != NULL && *cursor != target) cursor = &(*cursor)->next;
+    if (*cursor == target) *cursor = target->next;
+    free(target);
+}
+
+static int page_span(uint32_t page, uint32_t count, uint32_t *base_out,
+    uint32_t *size_out)
+{
+    uint32_t base;
+    uint32_t size;
+    if (page > UINT32_MAX / UINT32_C(4096) || count == 0u ||
+        count > UINT32_MAX / UINT32_C(4096)) return 0;
+    base = page * UINT32_C(4096);
+    size = count * UINT32_C(4096);
+    if (base > UINT32_MAX - size) return 0;
+    if (base_out != NULL) *base_out = base;
+    if (size_out != NULL) *size_out = size;
+    return 1;
+}
+
 static void release_owner(void *context)
 {
     session *owner = (session *)context;
@@ -54,6 +86,14 @@ static void release_owner(void *context)
             remove_record(record);
         }
         record = next;
+    }
+    {
+        physical_alias_record *alias = aliases;
+        while (alias != NULL) {
+            physical_alias_record *next = alias->next;
+            if (alias->owner == owner) remove_alias(alias);
+            alias = next;
+        }
     }
 }
 
@@ -82,6 +122,15 @@ int mvdm_softpc_physical_mapping_publish(void *host_bytes,
         if (record->owner == owner) {
             teardown_registered = 1;
             break;
+        }
+    }
+    if (!teardown_registered) {
+        physical_alias_record *alias;
+        for (alias = aliases; alias != NULL; alias = alias->next) {
+            if (alias->owner == owner) {
+                teardown_registered = 1;
+                break;
+            }
         }
     }
     record = (physical_mapping_record *)calloc(1u, sizeof(*record));
@@ -153,6 +202,97 @@ void mvdm_softpc_physical_mapping_set(uint32_t identifier,
             return;
         }
     }
+}
+
+int32_t VdmMapDosMemory(uint32_t dos_intel_page, uint32_t vdm_intel_page,
+    uint32_t page_count)
+{
+    session *owner = session_thread_current();
+    physical_alias_record *record;
+    physical_mapping_record *mapping;
+    uint32_t destination_base;
+    uint32_t source_base;
+    uint32_t byte_count;
+    int teardown_registered = 0;
+
+    if (owner == NULL || !session_valid(owner) ||
+        !page_span(dos_intel_page, page_count, &destination_base, &byte_count) ||
+        !page_span(vdm_intel_page, page_count, &source_base, NULL))
+        return (int32_t)0xc000000du; /* STATUS_INVALID_PARAMETER */
+    for (record = aliases; record != NULL; record = record->next) {
+        if (record->owner == owner && record->destination_base == destination_base &&
+            record->byte_count == byte_count) {
+            record->source_base = source_base;
+            return 0;
+        }
+    }
+    for (mapping = records; mapping != NULL; mapping = mapping->next) {
+        if (mapping->owner == owner) {
+            teardown_registered = 1;
+            break;
+        }
+    }
+    if (!teardown_registered) {
+        for (record = aliases; record != NULL; record = record->next) {
+            if (record->owner == owner) {
+                teardown_registered = 1;
+                break;
+            }
+        }
+    }
+    record = (physical_alias_record *)calloc(1u, sizeof(*record));
+    if (record == NULL) return (int32_t)0xc0000017u; /* STATUS_NO_MEMORY */
+    record->owner = owner;
+    record->destination_base = destination_base;
+    record->source_base = source_base;
+    record->byte_count = byte_count;
+    record->next = aliases;
+    aliases = record;
+    if (!teardown_registered &&
+        !session_register_teardown(owner, release_owner, owner)) {
+        remove_alias(record);
+        return (int32_t)0xc0000001u; /* STATUS_UNSUCCESSFUL */
+    }
+    return 0;
+}
+
+int32_t VdmUnmapDosMemory(uint32_t dos_intel_page, uint32_t page_count)
+{
+    session *owner = session_thread_current();
+    physical_alias_record *record;
+    uint32_t destination_base;
+    uint32_t byte_count;
+    if (owner == NULL || !session_valid(owner) ||
+        !page_span(dos_intel_page, page_count, &destination_base, &byte_count))
+        return (int32_t)0xc000000du; /* STATUS_INVALID_PARAMETER */
+    for (record = aliases; record != NULL; record = record->next) {
+        if (record->owner == owner && record->destination_base == destination_base &&
+            record->byte_count == byte_count) {
+            remove_alias(record);
+            return 0;
+        }
+    }
+    return (int32_t)0xc0000225u; /* STATUS_NOT_FOUND */
+}
+
+int mvdm_softpc_physical_mapping_translate(uint32_t intel_address,
+    uint32_t *translated_address_out)
+{
+    session *owner = session_thread_current();
+    physical_alias_record *record;
+    if (translated_address_out != NULL) *translated_address_out = intel_address;
+    if (owner == NULL || !session_valid(owner) || translated_address_out == NULL)
+        return 0;
+    for (record = aliases; record != NULL; record = record->next) {
+        uint32_t offset;
+        if (record->owner != owner || intel_address < record->destination_base)
+            continue;
+        offset = intel_address - record->destination_base;
+        if (offset >= record->byte_count) continue;
+        *translated_address_out = record->source_base + offset;
+        return 1;
+    }
+    return 0;
 }
 
 int mvdm_softpc_physical_mapping_resolve(uint32_t intel_address,
