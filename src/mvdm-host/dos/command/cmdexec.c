@@ -115,11 +115,16 @@ BOOL IsWowAppRunnable(LPSTR lpAppName)
     // Look for the file name in the registry
     //
 
+    /* DIVERGENCE(MVDM-HOST-DIV-112): the source buffer remains the same
+     * twelve-byte ANSI registry value, but RegQueryValueEx has always
+     * required its data argument to be an LPBYTE.  State that ABI exactly
+     * on both host widths instead of relying on the old x86 char-array
+     * compatibility. */
     lError = RegQueryValueEx( hKey,
                               szModName,
                               0,
                               &dwType,
-                              szHexAsciiFlags,
+                              (LPBYTE)szHexAsciiFlags,
                               &cbData
                               );
 
@@ -173,10 +178,15 @@ VOID cmdCheckBinary (VOID)
 {
 
     LPSTR  lpAppName;
-    ULONG  BinaryType;
+    /* DIVERGENCE(MVDM-HOST-DIV-112): GetBinaryType publishes a DWORD, not
+     * an LPLONG.  Both are 32-bit on the original target, but preserving
+     * the Win32 declaration removes an unproved pointer contract on x86
+     * and x64 without changing the source-visible binary classification. */
+    DWORD  BinaryType;
     PPARAMBLOCK lpParamBlock;
     PCHAR  lpCommandTail,lpTemp;
-    ULONG  AppNameLen,CommandTailLen = 0;
+    size_t AppNameLen;
+    ULONG  CommandTailLen = 0;
     USHORT CommandTailOff,CommandTailSeg,usTemp;
     mvdm_guest_location_lease scs_lease;
     PSCSINFO pSCSInfo;
@@ -203,7 +213,7 @@ VOID cmdCheckBinary (VOID)
     if ( !NT_SUCCESS(Status) ) {
         Status = RtlNtStatusToDosError(Status);
         }
-    else if (GetBinaryType (AnsiString.Buffer,(LPLONG)&BinaryType) == FALSE)
+    else if (GetBinaryType (AnsiString.Buffer,&BinaryType) == FALSE)
        {
         Status =  GetLastError();
         }
@@ -256,6 +266,9 @@ VOID cmdCheckBinary (VOID)
     // Its a 32bit exe, replace the command with "command.com /z" and add the
     // original binary name to command tail.
 
+    /* DIVERGENCE(MVDM-HOST-DIV-112): this is private host-side string
+     * arithmetic, so retain the native size_t returned by strlen until the
+     * original 128-byte guest command-tail admission check has succeeded. */
     AppNameLen = strlen (lpAppName);
 
     lpParamBlock = (PPARAMBLOCK) GetVDMAddr (getES(),getBX());
