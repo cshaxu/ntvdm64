@@ -495,6 +495,12 @@ candidates are repair work, and each still requires source-level contract
 reading.  See the [current ABI baseline]
 (etc/evidence/m0-t310-s8-p4-whole-tree-current-abi-baseline-001.md).
 
+**T310 S8 P4 SAS vector null-slot closure:** the original CCPU SAS table keeps
+its source-selected unavailable `Sas_overwrite_memory` slot, but now spells the
+null entry with that generated two-argument function-pointer type instead of a
+generic K&R callback. No memory provider or adapter was added. See the [SAS
+vector evidence](etc/evidence/m0-t310-s8-p4-sas-vector-null-slot-abi-closure-001.md).
+
 **T309 S1 P1:** the original `MS_bop_0`/`MS_bop_4` boundary is now a private
 source-shaped `mvdm-host` subset, with only the unsafe raw process-pointer
 read replaced by existing checked SAS access. Formal x86/x64 fixtures prove
