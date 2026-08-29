@@ -644,9 +644,13 @@ CHAR	ch, chDrive, achEnvDrive[] = "=?:";
 	    if(*lpszzEnv == '=' &&
 		    (chDrive = toupper(*(lpszzEnv+1))) >= 'A' &&
 		    chDrive <= 'Z' &&
-		    (*(PCHAR)((ULONG)lpszzEnv+2) == ':') &&
+		    /* DIVERGENCE(MVDM-HOST-DIV-091): the original 32-bit
+		     * process-address casts only advanced inside the same
+		     * native MULTI_SZ buffer. Keep that byte access without
+		     * truncating the host pointer on x64. */
+		    (lpszzEnv[2] == ':') &&
 		    chDrive != ch) {
-		    lpszVal = (PCHAR)((ULONG)lpszzEnv + 4);
+		    lpszVal = lpszzEnv + 4;
 		    achEnvDrive[1] = chDrive;
 		    SetEnvironmentVariable (achEnvDrive,lpszVal);
             }
