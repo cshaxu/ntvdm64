@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3236 |
+| Documentation records | 3237 |
 | --- | --- |
-| Generated UTC | 2026-08-29T16:40:39Z |
+| Generated UTC | 2026-08-29T16:47:35Z |
 
 ## Entries
 
@@ -765,6 +765,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-native-c-varargs-call-contract-closure-001.md | indexed supporting material | 1163e06f751a6ba84da66e584501710c488d9a4e163385536d3d098273b3e367 |
 | etc/evidence/m0-t310-s8-p4-nt-cpu-generated-gdp-debug-closure-001.md | indexed supporting material | 6b07dc94686382b53cf09b11363bd63923241f453840b5b818890a78d9292e77 |
 | etc/evidence/m0-t310-s8-p4-nt-mem-page-span-audit-001.md | indexed supporting material | a6553441bd82c3b4e9515b35b218f5e83eec8219a76e32a57005887a36c626cd |
+| etc/evidence/m0-t310-s8-p4-nt-unix-x86-x64-classification-001.md | indexed supporting material | 10ef2c6ff48d02d2563ab0b9b369fc71bf8077b3d8f49d07976d5db524f970b7 |
 | etc/evidence/m0-t310-s8-p4-pif-lim-call-contract-closure-001.md | indexed supporting material | 69eb868576cbf47cf4deb9fbdb40ba99a21907b64c760e502d08020976abb43a |
 | etc/evidence/m0-t310-s8-p4-rom-scratch-length-closure-001.md | indexed supporting material | 8663a86e26cced3918a288a1316151f466913e0fcb19bee157d62e34d33277f2 |
 | etc/evidence/m0-t310-s8-p4-rtl-fill-memory-ulong-call-contract-closure-001.md | indexed supporting material | ca4e70be43c274f1ab24c72e4728c2e062d87d344b4281925c44a4f0f1c7b044 |
@@ -1460,7 +1461,7 @@ content-divergent entries.
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-audit-baseline-001.md | indexed supporting material | b878f9a100fb6862522f3a5ec35977c3d5369032b99e3c4932d25a34ab1f2c46 |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-cluster-ledger.tsv | indexed supporting material | 3b7193da3c22588dff98a25a8b1390c740cc01d3f19274c250f980bb4ca11fed |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-inventory.tsv | indexed supporting material | 9f5be57f4c4a22e0ae88de22427029fb7b4f31ca753868cc8231453109cd6eb0 |
-| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | 98a67cee3b19648639ea54310a92dd09144ab58076ff9206fcb72798dcb80945 |
+| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | 9d43367e9d4481f4a89005a1054047fd496827d660e6e447456f25210b3aa557 |
 | etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification.tsv | indexed supporting material | 50aaab24789e202c10d982b7ed515e9feb778ee783769098bdaf8485733f94b9 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
