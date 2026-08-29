@@ -533,6 +533,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-signedness-disposition-001.md | indexed supporting material | 0b34d4233c4482ed3d78e37748a0d1a2fc7557ec8724719aeb28f55bf1024e80 |
 | etc/evidence/m0-t310-s8-p4-ccpu-host-getenv-abi-closure-001.md | indexed supporting material | 0cb35bbb88534b9660aab09ebb5e4f33c38558b3157aad3c20d15fb78b407066 |
 | etc/evidence/m0-t310-s8-p4-ccpu-instruction-delta-width-closure-001.md | indexed supporting material | 567855a8380b2b400c4ee9a0f8df3ae89a7cde73a3d0df5d2a64585b319d8b98 |
+| etc/evidence/m0-t310-s8-p4-ccpu-note486-call-contract-closure-001.md | indexed supporting material | f60afbdfe5376323d1acae0097a410c35805c1e5278fa6a4c9ff237442a26ca7 |
 | etc/evidence/m0-t310-s8-p4-ccpu-original-call-declaration-closure-001.md | indexed supporting material | ff3f80f3ee21968d351d6918c28e8e6f08872888ea5ab06fd8df81ec4921d6dc |
 | etc/evidence/m0-t310-s8-p4-ccpu-private-call-contract-closure-001.md | indexed supporting material | 232b0bee8ba66cda2221cb12bee3732b7bf34632236d27104d06bcadf21aa832 |
 | etc/evidence/m0-t310-s8-p4-ccpu-vglob-native-pointer-contract-audit-001.md | indexed supporting material | c4aefb8319ce83928df3b34a541a2d2b338563eb30dc98322514ca7be6c46a76 |

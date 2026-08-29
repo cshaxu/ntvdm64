@@ -150,6 +150,13 @@ EIP update forms.  Focused formal x86/x64 rebuilds close the native-width
 `__int64` narrowing while retaining unrelated fixed-width Intel warnings; see
 the [CCPU instruction-delta closure](etc/evidence/m0-t310-s8-p4-ccpu-instruction-delta-width-closure-001.md).
 
+**T310 S8 P4:** the reached original `POPFD` diagnostic now declares its
+same-package `void note_486_instruction(char *)` contract rather than relying
+on modern C's implicit `int`. The x86/x64 formal CCPU objects rebuild without
+that C4013; the separate source-missing `EDL_fast_bop` operation remains an
+unclosed CCPU-to-BOP contract. See the [note-486 call-contract
+closure](etc/evidence/m0-t310-s8-p4-ccpu-note486-call-contract-closure-001.md).
+
 **T310 S8 P4:** owner-contract review now includes prior work rather than only
 the pending warning rows.  The generated
 [coverage ledger](etc/operations/m0-t310-s8-p4-owner-contract-coverage-ledger.tsv)

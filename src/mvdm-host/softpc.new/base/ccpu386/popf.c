@@ -29,6 +29,11 @@ POPF CPU Functions.
 #include <debug.h>
 #include <config.h>
 
+/* DIVERGENCE(MVDM-HOST-DIV-126): the selected CCPU body defines this
+ * same-package diagnostic hook in c_main.c.  Publish its original void/char
+ * call contract so modern C does not infer an int result on either host width. */
+extern void note_486_instruction(char *text);
+
 
 /*
    =====================================================================
