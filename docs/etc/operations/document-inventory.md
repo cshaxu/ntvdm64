@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3263 |
+| Documentation records | 3264 |
 | --- | --- |
-| Generated UTC | 2026-08-29T23:22:48Z |
+| Generated UTC | 2026-08-29T23:29:02Z |
 
 ## Entries
 
@@ -538,6 +538,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-ccpu-original-call-declaration-closure-001.md | indexed supporting material | ff3f80f3ee21968d351d6918c28e8e6f08872888ea5ab06fd8df81ec4921d6dc |
 | etc/evidence/m0-t310-s8-p4-ccpu-private-call-contract-closure-001.md | indexed supporting material | 232b0bee8ba66cda2221cb12bee3732b7bf34632236d27104d06bcadf21aa832 |
 | etc/evidence/m0-t310-s8-p4-ccpusas4-x86-x64-classification-001.md | indexed supporting material | 7ff5755d1f69705fcdb7fa54563e5480cf39c9eab6448f8ee1969119753919f6 |
+| etc/evidence/m0-t310-s8-p4-ccpu-sas-monitor-boundary-audit-001.md | indexed supporting material | ccf54901fe6f90e4281b24e320172f1c79a790439515ea694d648eddd0dccd65 |
 | etc/evidence/m0-t310-s8-p4-ccpu-vglob-native-pointer-contract-audit-001.md | indexed supporting material | c4aefb8319ce83928df3b34a541a2d2b338563eb30dc98322514ca7be6c46a76 |
 | etc/evidence/m0-t310-s8-p4-ccpu-video-rule-storage-closure-001.md | indexed supporting material | e34f13531503823396b4d985127c56e5010e72e1c54fd5456dc2f8331a15c980 |
 | etc/evidence/m0-t310-s8-p4-cmos-reset-call-contract-closure-001.md | indexed supporting material | 6f2385273fb3f138f9e8a7a248229f84dd82f25ce1aa89c75b4b44c600e0e842 |
@@ -1283,7 +1284,7 @@ content-divergent entries.
 | etc/operations/m0-t310-s8-p4-ccpu-access-table-ledger.tsv | indexed supporting material | 012ff0295eda6c33b2181ac4936b619a3ffef1af4c72110fd7cc14e3b984d9fc |
 | etc/operations/m0-t310-s8-p4-cvidc-generated-interface-ledger.tsv | indexed supporting material | ab31ccb2aea47932461d7062942691584596c5aa34cae45202d4455a1b71fb11 |
 | etc/operations/m0-t310-s8-p4-gdp-generated-layout-inventory.tsv | indexed supporting material | 50cc2fe1a26297432196b2bf00382560c8f0b3e674680bb7cddf3fbbf21b6343 |
-| etc/operations/m0-t310-s8-p4-owner-contract-coverage-ledger.tsv | indexed supporting material | 3bfa7d2a41a0f89df8c31d469d7f541434b54964cb6de0d13cd5aefa20700c25 |
+| etc/operations/m0-t310-s8-p4-owner-contract-coverage-ledger.tsv | indexed supporting material | 66875f3f24f92b126fe2f7136c74f79ba0b9afecb6253269b973ed1820901241 |
 | etc/operations/m0-t310-s8-p4-owner-contract-execution-order-001.md | indexed supporting material | f7fee4c4a028e989d83624a713ed5bf5e7bc84db554fd30328bf99535c1a60df |
 | etc/operations/m0-t310-s8-p4-whole-tree-compiler-warning-cluster-ledger.tsv | indexed supporting material | b3419c02702df182a8071b6c6041248520cff7ec45c6764a18b928daa6ce9c94 |
 | etc/operations/m0-t310-s8-p4-whole-tree-compiler-warning-ledger.tsv | indexed supporting material | f8908d05a314ddc43904604dce87448a1ee013dc8d1d9eb9a221c5c71451231f |
