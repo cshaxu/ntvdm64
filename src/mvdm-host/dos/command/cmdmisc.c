@@ -8,6 +8,13 @@
 
 #include "cmd.h"
 
+#include <stddef.h>
+
+/* DIVERGENCE(MVDM-HOST-DIV-111): SCSINFO and SCS_ToSync were retained as
+ * process-address aliases in NT4.  Preserve their 16:16 source positions and
+ * obtain session-mapped guest leases only at the original access points. */
+#include "adapter-mvdm-host-out/softpc/include/mvdm_command_guest_state.h"
+
 #include <cmdsvc.h>
 #include <demexp.h>
 #include <softpc.h>
@@ -384,7 +391,11 @@ char    CmdLine[MAX_PATH];
     }
 
     // Tell DOS that it has to invalidate the CDSs
-    *pSCS_ToSync = (CHAR)0xff;
+    if (!mvdm_command_guest_state_set_to_sync(UINT8_C(0xff))) {
+        setCF(1);
+        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        return;
+    }
     setCF(0);
 
     return;
@@ -533,7 +544,11 @@ LPSTR    pszCmdLine;
     IsFirstCall = FALSE;
 
     // Tell DOS that it has to invalidate the CDSs
-    *pSCS_ToSync = (CHAR)0xff;
+    if (!mvdm_command_guest_state_set_to_sync(UINT8_C(0xff))) {
+        setCF(1);
+        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        return;
+    }
     setCF(0);
 
     return;
@@ -639,9 +654,13 @@ UINT  DriveType;
 VOID cmdSetInfo (VOID)
 {
 
-    pSCSInfo = (PSCSINFO) GetVDMAddr (getDS(),getDX());
-
-    pSCS_ToSync  =  (PCHAR) &pSCSInfo->SCS_ToSync;
+    if (!mvdm_command_guest_state_set_scs(getDS(), getDX(),
+            (uint32_t)sizeof(SCSINFO),
+            (uint32_t)offsetof(SCSINFO, SCS_ToSync))) {
+        setCF(1);
+        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        return;
+    }
 
     pIsDosBinary = (BYTE *) GetVDMAddr(getDS(), getBX());
 

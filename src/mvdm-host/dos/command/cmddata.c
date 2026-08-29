@@ -16,8 +16,6 @@ BOOL	 IsRepeatCall = FALSE;
 BOOL	 IsFirstWOWCheckBinary = TRUE;
 BOOL	 IsFirstVDMInSystem = FALSE;
 BOOL	 SaveWorldCreated;
-PCHAR	 pSCS_ToSync;
-PSCSINFO pSCSInfo;
 BOOL	 fBlock = FALSE;
 PCHAR	 pCommand32;
 PCHAR	 pEnv32;

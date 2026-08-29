@@ -13,6 +13,7 @@
 #include <softpc.h>
 #include <mvdm.h>
 #include <ctype.h>
+#include <stddef.h>
 #include <oemuni.h>
 #include <wowcmpat.h>
 /* DIVERGENCE(MVDM-HOST-DIV-108): standard-handle DWORDs and redirection
@@ -20,6 +21,10 @@
  * the same session-owned identities through the adapter, never by widening
  * their guest values into native HANDLEs or pointers. */
 #include "adapter-mvdm-host-out/softpc/include/mvdm_command_redirection.h"
+/* DIVERGENCE(MVDM-HOST-DIV-111): retain the original SCSINFO layout and
+ * field order, but lease its saved 16:16 guest position for this synchronous
+ * operation instead of subtracting a native GetVDMAddr process pointer. */
+#include "adapter-mvdm-host-out/softpc/include/mvdm_command_guest_state.h"
 /* DIVERGENCE(MVDM-HOST-DIV-109): cmdCreateProcess is the original void,
  * cdecl worker entry, not a WINAPI DWORD start routine.  Keep its source
  * body and original CreateThread call ordering while binding that call to
@@ -173,6 +178,8 @@ VOID cmdCheckBinary (VOID)
     PCHAR  lpCommandTail,lpTemp;
     ULONG  AppNameLen,CommandTailLen = 0;
     USHORT CommandTailOff,CommandTailSeg,usTemp;
+    mvdm_guest_location_lease scs_lease;
+    PSCSINFO pSCSInfo;
     NTSTATUS       Status;
     UNICODE_STRING Unicode;
     OEM_STRING     OemString;
@@ -276,14 +283,26 @@ VOID cmdCheckBinary (VOID)
         }
     }
 
+    if (!mvdm_command_guest_state_acquire_scs(GUEST_MEMORY_ACCESS_WRITE,
+            &scs_lease)) {
+        setCF(1);
+        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        return;
+    }
+    pSCSInfo = (PSCSINFO)scs_lease.bytes;
+
     // copy the stub command.com name
     strcpy ((PCHAR)&pSCSInfo->SCS_ComSpec,lpszComSpec+8);
-    lpTemp = (PCHAR) &pSCSInfo->SCS_ComSpec;
-    lpTemp = (PCHAR)((ULONG)lpTemp - (ULONG)GetVDMAddr(0,0));
-    usTemp = (USHORT)((ULONG)lpTemp >> 4);
+    if (!mvdm_command_guest_state_scs_field(
+            (uint32_t)offsetof(SCSINFO, SCS_ComSpec), &usTemp,
+            &CommandTailOff)) {
+        (void)mvdm_command_guest_state_release_scs(&scs_lease, 0);
+        setCF(1);
+        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        return;
+    }
     setDS(usTemp);
-    usTemp = (USHORT)((ULONG)lpTemp & 0x0f);
-    setDX((usTemp));
+    setDX(CommandTailOff);
 
     // Form the command tail, first "3" is for "/z "
     pSCSInfo->SCS_CmdTail [0] = (UCHAR)(3 +
@@ -293,7 +312,7 @@ VOID cmdCheckBinary (VOID)
     strcpy ((PCHAR)&pSCSInfo->SCS_CmdTail[4],lpAppName);
     if (CommandTailLen) {
         pSCSInfo->SCS_CmdTail[4+AppNameLen] = ' ';
-        RtlCopyMemory ((PCHAR)((ULONG)&pSCSInfo->SCS_CmdTail[4]+AppNameLen+1),
+        RtlCopyMemory ((PCHAR)&pSCSInfo->SCS_CmdTail[4]+AppNameLen+1,
                 lpCommandTail,
                 CommandTailLen);
     }
@@ -313,20 +332,33 @@ VOID cmdCheckBinary (VOID)
         STOREDWORD(pSCSInfo->SCS_ParamBlock.pFCB2,0);
     }
 
-    lpTemp = (PCHAR) &pSCSInfo->SCS_CmdTail;
-    lpTemp = (PCHAR)((ULONG)lpTemp - (ULONG)GetVDMAddr(0,0));
-    usTemp = (USHORT)((ULONG)lpTemp & 0x0f);
-    STOREWORD(pSCSInfo->SCS_ParamBlock.OffCmdTail,usTemp);
-    usTemp = (USHORT)((ULONG)lpTemp >> 4);
+    if (!mvdm_command_guest_state_scs_field(
+            (uint32_t)offsetof(SCSINFO, SCS_CmdTail), &usTemp,
+            &CommandTailOff)) {
+        (void)mvdm_command_guest_state_release_scs(&scs_lease, 0);
+        setCF(1);
+        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        return;
+    }
+    STOREWORD(pSCSInfo->SCS_ParamBlock.OffCmdTail,CommandTailOff);
     STOREWORD(pSCSInfo->SCS_ParamBlock.SegCmdTail,usTemp);
 
-    lpTemp = (PCHAR) &pSCSInfo->SCS_ParamBlock;
-    lpTemp = (PCHAR)((ULONG)lpTemp - (ULONG)GetVDMAddr(0,0));
-    usTemp = (USHORT)((ULONG)lpTemp >> 4);
+    if (!mvdm_command_guest_state_scs_field(
+            (uint32_t)offsetof(SCSINFO, SCS_ParamBlock), &usTemp,
+            &CommandTailOff)) {
+        (void)mvdm_command_guest_state_release_scs(&scs_lease, 0);
+        setCF(1);
+        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        return;
+    }
     setES (usTemp);
-    usTemp = (USHORT)((ULONG)lpTemp & 0x0f);
-    setBX (usTemp);
+    setBX (CommandTailOff);
 
+    if (!mvdm_command_guest_state_release_scs(&scs_lease, 1)) {
+        setCF(1);
+        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        return;
+    }
     setCF(0);
     return;
 }
