@@ -157,6 +157,13 @@ maps every current P4 evidence file to an owner cluster and requires its
 mirror diff, overlay or adapter binding to be reread with the full original
 declaration/definition/caller contract.
 
+**T310 S8 P4:** a new complete formal Ninja run reached `[357/357]` on both
+x86 and x64 after the CCPU decode-cursor repair. Its freshly reconciled
+compiler ledger contains 19,443 unique `mvdm-host`/`mvdm-support` diagnostics
+and 910 source-context worklist records; prior P4 evidence remains subject to
+the same owner-contract reread. See the updated [current full-tree
+baseline](etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md).
+
 **T310 S8 P4:** source review classifies all 100 CCPU `c_main.c` C4057
 operand calls as original fixed 32-bit Intel state, not host-width ABI
 transitions. They remain compiler-visible but leave the x86/x64 repair

@@ -12,9 +12,12 @@ same mechanism.
 The authoritative raw inputs are the whole-tree static ABI inventory, the
 compiler warning ledger, the contract review index, the reconciled warning
 worklist **and every existing P4 closure/disposition evidence file**.  The
-latter currently contains 830 records grouped into the sixteen clusters
-below.  Counts are planning indicators only; closure requires source evidence,
-not a count reaching zero.
+latter is assigned through the owner-contract coverage ledger. The current
+reconciled compiler worklist contains 910 records, while the coverage ledger
+tracks all 39 source-owner clusters; the priority groups below are their
+execution order, not a claim that only the displayed groups exist. Counts are
+planning indicators only; closure requires source evidence, not a count
+reaching zero.
 
 An already-repaired mirror line is not exempt from its owner-contract review.
 At the beginning of every cluster review, its existing `DIVERGENCE` entries,

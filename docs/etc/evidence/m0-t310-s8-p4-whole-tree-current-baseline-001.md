@@ -22,15 +22,16 @@ graphs were run independently:
 
 The complete logs are retained as disposable target-local build outputs:
 
-- `x64/s8-p4-current-full-after-nt-sec.log`
-- `x86/s8-p4-current-full-after-nt-sec.log`
+- `x64/s8-p4-current-full-after-ccpu-delta.log`
+- `x86/s8-p4-current-full-after-ccpu-delta.log`
 
 Each run reached `[357/357]` and reported zero compiler/linker errors. The
-same parser used for the governed compiler-warning ledger recorded 40,056 raw
-diagnostic occurrences, yielding 19,463 current unique source diagnostics.
-The repaired C-video native-word shift records and the `nt_sec` pseudo-handle
-truncation are absent from this fresh output. Of the remaining records, 926
-are in the x86/x64 source-review worklist. All diagnostics
+same parser used for the governed compiler-warning ledger recorded 41,363 raw
+diagnostic occurrences, yielding 19,443 current unique source diagnostics.
+The repaired C-video native-word shift records, the `nt_sec` pseudo-handle
+truncation, and the `c_main.c` native decode-cursor narrowing are absent from
+this fresh output. Of the remaining records, 910 are in the reconciled
+x86/x64 source-review worklist. All diagnostics
 remain deliberately visible rather than being hidden by warning suppression.
 
 ## Interpretation
@@ -51,6 +52,12 @@ Subsequent P4 work must read each complete original contract cluster
 (declaration, definition, table/initializer and reached call sites) before a
 mirror, overlay, adapter, mapping-manager or unavailable disposition is made.
 No warning may be suppressed merely to alter this baseline.
+
+The prior P4 closures are not grandfathered by their absence from this
+compiler output. The owner-contract coverage ledger assigns every earlier P4
+evidence item to a source-owner cluster; each such correction, overlay and
+adapter binding is reread alongside the current cluster before that cluster
+may close.
 
 ## Follow-up
 

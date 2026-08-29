@@ -618,7 +618,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-video-original-call-declaration-closure-001.md | indexed supporting material | d295af69819e24ca799f293b4bdb8a456354202c0c59a2e006a6819f48ad21d0 |
 | etc/evidence/m0-t310-s8-p4-video-profile-source-selection-closure-001.md | indexed supporting material | c75d84e7fdca7cea45a9e10d32b8c954bd8b8b3d0c36f7178650eb9e0a2a2939 |
 | etc/evidence/m0-t310-s8-p4-whole-tree-current-abi-baseline-001.md | indexed supporting material | 63fa6a1564e1fcfd56c9d6262650ee098b0ee7b776c52d890f74e69234f77382 |
-| etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md | indexed supporting material | 0946e6cd0560ea5519f6e0a067080476a2cde09c50a6d35062b1a9e4cccd74d8 |
+| etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md | indexed supporting material | 33f231135ae04c54128a20e73258a37e24664d0551b308396abf0079779fcf6f |
 | etc/evidence/m0-t310-s8-p4-whole-tree-formal-architecture-delta-001.md | indexed supporting material | b8d943d5eb42ca920ca57e11c6f6ad60b0adf1ace0030e3a252ba94ba764dc0d |
 | etc/evidence/m0-t310-s8-p4-x86gfx-console-video-hole-disposition-001.md | indexed supporting material | 7616f4f901fc2766fd6a18ddd04dff80acb15006053cd174975f91de4c3e7a9c |
 | etc/evidence/m0-t310-s8-p4-xms-a20-call-contract-closure-001.md | indexed supporting material | 5f40ea74175157b98ce6faab97e4d48eb93d004b593c7a8cc9ab6a73e1771629 |
@@ -1275,7 +1275,7 @@ content-divergent entries.
 | etc/operations/m0-t310-s7-p2-x64-forced-link-ledger.tsv | indexed supporting material | 9661205c2aecadb55e7fc2b1537f1279ad187b7fec37d8859128dedfb3b8a93d |
 | etc/operations/m0-t310-s7-p2-x86-forced-link-ledger.tsv | indexed supporting material | ab1f513b8221f3fa90965068237b75d79f917365bb4e9d4293b775faddd15f68 |
 | etc/operations/m0-t310-s8-original-machine-composition-plan-001.md | indexed supporting material | c794b58a3a2ecccdb9d7d7611d4b95623f40a7898bdbab347483d28b3e0c0fef |
-| etc/operations/m0-t310-s8-p4-owner-contract-execution-order-001.md | indexed supporting material | f9cb9eec9901945711a03435ae96f40647e649272fd90079e8ca4d86e6f033e6 |
+| etc/operations/m0-t310-s8-p4-owner-contract-execution-order-001.md | indexed supporting material | f7fee4c4a028e989d83624a713ed5bf5e7bc84db554fd30328bf99535c1a60df |
 | etc/operations/m0-t310-s8-p4-owner-contract-coverage-ledger.tsv | indexed supporting material | 4d98fe002dd772b91683d01ec36f1e71021e921ca831d884f395406e994cbdb8 |
 | etc/operations/m0-t310-s8-p2-x64-forced-link-ledger.tsv | indexed supporting material | 4c0be72bd1c3670b870efeb914557a582ed1edb5b09b35ba2a2896c6a7471941 |
 | etc/operations/m0-t310-s8-p2-x86-forced-link-ledger.tsv | indexed supporting material | 4d7c569dacc69fdae7e392a0f59b9b3623e5cb748e38ec12ef2913c5a05d3169 |
