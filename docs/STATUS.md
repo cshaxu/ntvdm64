@@ -50,6 +50,11 @@ formal x86/x64 compilation emits none of their C4113/C4133/C4312 diagnostics;
 unrelated generated-source warnings remain visible. See the
 [selected cvidc glue closure](etc/evidence/m0-t310-s8-p4-cvidc-selected-glue-abi-closure-001.md).
 
+**T310 S8 P4:** five residual selected video call warnings were read and
+classified as original 32-bit scalar/signedness issues, not x86/x64 ABI
+transitions. They stay visible and unmodified rather than being hidden by
+casts or warning policy; see the [non-width disposition](etc/evidence/m0-t310-s8-p4-video-nonwidth-warning-disposition-001.md).
+
 **T310 S1 closure:** `6a46ee748` establishes the exact original `ccpu386`,
 `host/src` and `obj.vdm` roots, hashes, historical source roles and a
 per-session one-backend contract. It reverses the previous planning assumption
