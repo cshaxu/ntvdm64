@@ -294,6 +294,33 @@ NTSTATUS NTAPI RtlOemStringToUnicodeString(PUNICODE_STRING destination, PCOEM_ST
     }
     return opennt_support_convert_to_unicode(destination, source, CP_OEMCP, allocate);
 }
+/* DIVERGENCE(ADAPTER-WIN32-027): preserve the original fixed-buffer RTL
+ * contract while routing its OEM conversion through the public modern API.
+ * The caller owns both buffers; no host pointer becomes a guest identity. */
+NTSTATUS NTAPI RtlOemToUnicodeN(PWSTR destination, ULONG maximum_bytes,
+                                PULONG converted_bytes, PCHAR source,
+                                ULONG source_bytes) {
+    int characters;
+    ULONG required_bytes;
+    if (converted_bytes != NULL) *converted_bytes = 0u;
+    if (source_bytes == 0u) return STATUS_SUCCESS;
+    if (source == NULL || destination == NULL || source_bytes > (ULONG)INT_MAX) {
+        return STATUS_INVALID_PARAMETER;
+    }
+    characters = MultiByteToWideChar(CP_OEMCP, 0, source, (int)source_bytes,
+                                     NULL, 0);
+    if (characters == 0 && source_bytes != 0u) return opennt_support_last_error_status();
+    if ((ULONG)characters > ULONG_MAX / (ULONG)sizeof(WCHAR)) return STATUS_BUFFER_OVERFLOW;
+    required_bytes = (ULONG)characters * (ULONG)sizeof(WCHAR);
+    if (converted_bytes != NULL) *converted_bytes = required_bytes;
+    if (required_bytes > maximum_bytes) return STATUS_BUFFER_OVERFLOW;
+    if (characters != 0 &&
+        MultiByteToWideChar(CP_OEMCP, 0, source, (int)source_bytes,
+                            destination, characters) != characters) {
+        return opennt_support_last_error_status();
+    }
+    return STATUS_SUCCESS;
+}
 NTSTATUS NTAPI RtlAnsiStringToUnicodeString(PUNICODE_STRING destination, PCANSI_STRING source, BOOLEAN allocate) { return opennt_support_convert_to_unicode(destination, (PCOEM_STRING)source, CP_ACP, allocate); }
 NTSTATUS NTAPI RtlUnicodeStringToOemString(POEM_STRING destination, PCUNICODE_STRING source, BOOLEAN allocate) { return opennt_support_convert_from_unicode((PANSI_STRING)destination, source, CP_OEMCP, allocate); }
 NTSTATUS NTAPI RtlUnicodeStringToAnsiString(PANSI_STRING destination, PCUNICODE_STRING source, BOOLEAN allocate) { return opennt_support_convert_from_unicode(destination, source, CP_ACP, allocate); }

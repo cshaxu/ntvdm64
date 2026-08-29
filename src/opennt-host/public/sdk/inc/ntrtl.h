@@ -21,6 +21,10 @@ VOID NTAPI RtlInitString(PSTRING DestinationString, PCSZ SourceString);
 VOID NTAPI RtlInitAnsiString(PANSI_STRING DestinationString, PCSZ SourceString);
 VOID NTAPI RtlInitUnicodeString(PUNICODE_STRING DestinationString, PCWSTR SourceString);
 NTSTATUS NTAPI RtlOemStringToUnicodeString(PUNICODE_STRING DestinationString, PCOEM_STRING SourceString, BOOLEAN AllocateDestinationString);
+/* DIVERGENCE(OPENNT-HOST-011): selected SoftPC keyboard conversion reaches
+ * the original fixed-buffer RTL declaration.  Keep its original public
+ * source shape in this true subset; the modern API binding is adapter-owned. */
+NTSTATUS NTAPI RtlOemToUnicodeN(PWSTR UnicodeString, ULONG MaxBytesInUnicodeString, PULONG BytesInUnicodeString, PCHAR OemString, ULONG BytesInOemString);
 NTSTATUS NTAPI RtlUnicodeStringToOemString(POEM_STRING DestinationString, PCUNICODE_STRING SourceString, BOOLEAN AllocateDestinationString);
 NTSTATUS NTAPI RtlAnsiStringToUnicodeString(PUNICODE_STRING DestinationString, PCANSI_STRING SourceString, BOOLEAN AllocateDestinationString);
 NTSTATUS NTAPI RtlUnicodeStringToAnsiString(PANSI_STRING DestinationString, PCUNICODE_STRING SourceString, BOOLEAN AllocateDestinationString);
