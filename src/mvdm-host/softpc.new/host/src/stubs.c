@@ -343,7 +343,11 @@ double get_287_reg_as_double(int i)
 
 GLOBAL BOOL sas_manage_xms IFN3(VOID *,start_addr, ULONG, cb, INT, a_or_f)
 {
-    printf("sas_manage_xms called(%lx,%lx,%lx)\n",start_addr,cb,a_or_f);
+    /* DIVERGENCE(MVDM-HOST-DIV-095): start_addr is a private native pointer
+     * in this retained diagnostic; preserve the stub's observation without
+     * routing host storage through a 32-bit format carrier. */
+    printf("sas_manage_xms called(%p,%lx,%x)\n", start_addr, cb,
+           (unsigned int)a_or_f);
     return (TRUE);
 }
 

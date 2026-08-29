@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3224 |
+| Documentation records | 3225 |
 | --- | --- |
-| Generated UTC | 2026-08-29T15:05:58Z |
+| Generated UTC | 2026-08-29T15:11:17Z |
 
 ## Entries
 
@@ -554,6 +554,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-emm-storage-id-native-width-closure-001.md | indexed supporting material | 1c4c9125d5f581b9877594856e57c309e0bccd990c9268165cc3d30f50c368a7 |
 | etc/evidence/m0-t310-s8-p4-error-dialog-native-callback-closure-001.md | indexed supporting material | 84dab530ad0e8d473baf72f07506ba3b166f36a9b7e66f3dccee0bc0d99ca4f9 |
 | etc/evidence/m0-t310-s8-p4-fprt-native-buffer-abi-closure-001.md | indexed supporting material | 091464e3a5608087e4b8b2edda07de6b2fda235a998ec99e753de495f0b31b01 |
+| etc/evidence/m0-t310-s8-p4-host-native-format-closure-001.md | indexed supporting material | 5a6a7c13dfe698c8f08846f2190702d42a63632e97e1c1e8cd71ffd65a99e67e |
 | etc/evidence/m0-t310-s8-p4-host-simulate-call-abi-closure-001.md | indexed supporting material | ebace0d79ca95b748fa8075b8f358acc862e092e07e7039145f38e2cf58aae38 |
 | etc/evidence/m0-t310-s8-p4-keyboard-vector-native-backing-abi-closure-001.md | indexed supporting material | 8a3dace306a47de77ab542f411a33725611eb51eea262e2cc79b5e0401c17a6d |
 | etc/evidence/m0-t310-s8-p4-mouse-range-callback-abi-closure-001.md | indexed supporting material | bce7011a14bf8da1bedc66cec61709b9bbffa8e9d22df8aac5c75b147d7074ae |
@@ -1252,7 +1253,7 @@ content-divergent entries.
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-audit-baseline-001.md | indexed supporting material | b878f9a100fb6862522f3a5ec35977c3d5369032b99e3c4932d25a34ab1f2c46 |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-cluster-ledger.tsv | indexed supporting material | 3b7193da3c22588dff98a25a8b1390c740cc01d3f19274c250f980bb4ca11fed |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-inventory.tsv | indexed supporting material | 9f5be57f4c4a22e0ae88de22427029fb7b4f31ca753868cc8231453109cd6eb0 |
-| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | 850536007068687b28aef585f8e34f909f2a9fa74c5d53f75730964c4a6f2c1c |
+| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | d53eda08a0d2662c02f9e14bbe68ca4c1485ca079f52172cdefdfa7f743f4f32 |
 | etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification.tsv | indexed supporting material | 50aaab24789e202c10d982b7ed515e9feb778ee783769098bdaf8485733f94b9 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
@@ -3238,7 +3239,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | b3259a1929d8196ce73f9197c1c678d7cb001fda3f3a8b7f4acb427ec0259897 |
+| STATUS.md | principal control document | 34cd90b844098f050bdcb5edfce6a19638d8aeb24f9d371c70f5ba25aa50de56 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

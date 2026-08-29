@@ -49,6 +49,11 @@ fixed-width/native-width ABIs on both targets. The kernel-VDM-only EMS
 they were not hidden behind declarations. See the [SAS/native-pointer
 closure](etc/evidence/m0-t310-s8-p4-sas-native-pointer-call-contract-closure-001.md).
 
+**T310 S8 P4:** original host-only console-title and retained XMS-stub
+diagnostics now pass native pointers through `%p` on both targets; scalar
+arguments retain their original fixed-width roles. Non-width source warnings
+remain visible. See the [host native-format closure](etc/evidence/m0-t310-s8-p4-host-native-format-closure-001.md).
+
 **T310 S8 P4:** the complete generated C-video assertion-provider contract
 now retains the existing original `ev_glue.c` `void(char *)` ABI. All 31
 selected `SEVID` units rebuilt from clean x86/x64 outputs without an implicit
