@@ -71,15 +71,19 @@ struct VGAGLOBALSETTINGS
 	IU32 plane_enable;
 	IU32 plane_enable_mask;
 	IUH *sr_lookup;
-	IU32*fwd_str_read_addr;
-	IU32*bwd_str_read_addr;
+	/* DIVERGENCE(MVDM-HOST-DIV-051): these selected CCPU rule entries carry
+	 * native code addresses.  NT4 represented them as IU32* only because its
+	 * host pointer width was 32 bits; retain the original accessor ABI while
+	 * storing the private SoftPC addresses at native width on x86 and x64. */
+	IUH *fwd_str_read_addr;
+	IUH *bwd_str_read_addr;
 	IU32 dirty_total;
 	IS32 dirty_low;
 	IS32 dirty_high;
 	IU8 *video_copy;
-	IU32*mark_byte;
-	IU32*mark_word;
-	IU32*mark_string;
+	IUH *mark_byte;
+	IUH *mark_word;
+	IUH *mark_string;
 	IU32 read_shift_count;
 	IU32 read_mapped_plane;
 	IU32 colour_comp;
@@ -92,7 +96,7 @@ struct VGAGLOBALSETTINGS
 	IU32 rotate;
 	IU32 calc_data_xor;
 	IU32 calc_latch_xor;
-	IU32*read_byte_addr;
+	IUH *read_byte_addr;
 	IU32 v7_fg_latches;
 	IUH **GCRegs;
 	IU8 lastGCindex;

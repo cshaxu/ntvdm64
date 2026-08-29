@@ -167,27 +167,23 @@ getVideosr_lookup IFN0()
 	return(GLOBAL_VGAGlobals.sr_lookup);
 }
 
-/* DIVERGENCE(MVDM-HOST-DIV-051): These six generated-rule fields are
- * declared as IU32* in the selected CCPU GDP record.  NT4 treated IUH* and
- * IU32* as interchangeable on its 32-bit host; retain the actual record
- * contract so the native pointer remains type-safe on both host widths. */
 GLOBAL void
-setVideofwd_str_read_addr IFN1(IU32 *, value)
+setVideofwd_str_read_addr IFN1(IUH *, value)
 {
 	GLOBAL_VGAGlobals.fwd_str_read_addr = value;
 }
-GLOBAL IU32 *
+GLOBAL IUH *
 getVideofwd_str_read_addr IFN0()
 {
 	return(GLOBAL_VGAGlobals.fwd_str_read_addr);
 }
 
 GLOBAL void
-setVideobwd_str_read_addr IFN1(IU32 *, value)
+setVideobwd_str_read_addr IFN1(IUH *, value)
 {
 	GLOBAL_VGAGlobals.bwd_str_read_addr = value;
 }
-GLOBAL IU32 *
+GLOBAL IUH *
 getVideobwd_str_read_addr IFN0()
 {
 	return(GLOBAL_VGAGlobals.bwd_str_read_addr);
@@ -238,33 +234,33 @@ getVideovideo_copy IFN0()
 }
 
 GLOBAL void
-setVideomark_byte IFN1(IU32 *, value)
+setVideomark_byte IFN1(IUH *, value)
 {
 	GLOBAL_VGAGlobals.mark_byte = value;
 }
-GLOBAL IU32 *
+GLOBAL IUH *
 getVideomark_byte IFN0()
 {
 	return(GLOBAL_VGAGlobals.mark_byte);
 }
 
 GLOBAL void
-setVideomark_word IFN1(IU32 *, value)
+setVideomark_word IFN1(IUH *, value)
 {
 	GLOBAL_VGAGlobals.mark_word = value;
 }
-GLOBAL IU32 *
+GLOBAL IUH *
 getVideomark_word IFN0()
 {
 	return(GLOBAL_VGAGlobals.mark_word);
 }
 
 GLOBAL void
-setVideomark_string IFN1(IU32 *, value)
+setVideomark_string IFN1(IUH *, value)
 {
 	GLOBAL_VGAGlobals.mark_string = value;
 }
-GLOBAL IU32 *
+GLOBAL IUH *
 getVideomark_string IFN0()
 {
 	return(GLOBAL_VGAGlobals.mark_string);
@@ -370,11 +366,11 @@ getVideocalc_latch_xor IFN0()
 }
 
 GLOBAL void
-setVideoread_byte_addr IFN1(IU32 *, value)
+setVideoread_byte_addr IFN1(IUH *, value)
 {
 	GLOBAL_VGAGlobals.read_byte_addr = value;
 }
-GLOBAL IU32 *
+GLOBAL IUH *
 getVideoread_byte_addr IFN0()
 {
 	return(GLOBAL_VGAGlobals.read_byte_addr);

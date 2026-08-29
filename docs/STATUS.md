@@ -557,6 +557,13 @@ depends on kernel/CSRSS `NtRaiseHardError`; it is recorded as a physical
 non-runtime boundary rather than emulated in the mirror. See the
 [error-dialog evidence](etc/evidence/m0-t310-s8-p4-error-dialog-native-callback-closure-001.md).
 
+**T310 S8 P4 CCPU generated video-rule storage closure:** the unchanged
+original `vglob.c`/`egacpu.h` `IUH*` accessor ABI is restored.  The only
+required x86/x64 change is six generated private rule-storage fields, recorded
+as `MVDM-HOST-DIV-051`; formal x86/x64 rebuilds clear all twelve associated
+`C4057` diagnostics.  See the [video-rule storage evidence]
+(etc/evidence/m0-t310-s8-p4-ccpu-video-rule-storage-closure-001.md).
+
 **T310 S8 P4 serial/parallel native transport closure:** original SoftPC COM
 and LPT host sources retain their device request order and configuration
 semantics while their private pointer-or-scalar ioctl and worker transports
