@@ -43,6 +43,13 @@ compiling it into the selected CPU_40/EVID machine. No pointer cast,
 mapping-manager route or controller shim was added; see the
 [profile source-selection closure](etc/evidence/m0-t310-s8-p4-video-profile-source-selection-closure-001.md).
 
+**T310 S8 P4:** the four selected `cvidc/ev_glue.c` function-pointer,
+generated-carrier and GDP-width records are now confirmed closed by the
+existing minimal `MVDM-HOST-DIV-062` and `...048` source changes. Fresh
+formal x86/x64 compilation emits none of their C4113/C4133/C4312 diagnostics;
+unrelated generated-source warnings remain visible. See the
+[selected cvidc glue closure](etc/evidence/m0-t310-s8-p4-cvidc-selected-glue-abi-closure-001.md).
+
 **T310 S1 closure:** `6a46ee748` establishes the exact original `ccpu386`,
 `host/src` and `obj.vdm` roots, hashes, historical source roles and a
 per-session one-backend contract. It reverses the previous planning assumption
