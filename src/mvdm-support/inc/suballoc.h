@@ -29,11 +29,11 @@ Revision History:
 //   this is done as a constant rather than a parameter
 //   to make defining data structures easier
 //
-#ifdef i386
+/* DIVERGENCE(MVDM-SUPPORT-DIV-007): the historical `i386` guard distinguished
+ * the 4-KiB x86 VDM commitment from a 64-KiB MIPS/RISC path.  SoftPC's guest
+ * page contract is 4 KiB on both formal x86 and x64 host builds; `i386` is not
+ * a host-architecture selector in this product. */
 #define COMMIT_GRANULARITY 4096
-#else
-#define COMMIT_GRANULARITY 65536
-#endif
 
 //
 // Types

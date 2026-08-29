@@ -70,17 +70,15 @@ typedef DWORD UNALIGNED *PDWORD16;
 #endif
 #define MAKEDWORD(l0,h0,l1,h1)	((DWORD)MAKEWORD(l0,h0)|((DWORD)MAKEWORD(l1,h1)<<16))
 #define GETBYTE(p)	*((PBYTE)p)++
-#ifdef	i386
+/* DIVERGENCE(MVDM-SUPPORT-DIV-006): the original `i386` guard selected the
+ * direct x86 unaligned access form and otherwise selected a MIPS/RISC form.
+ * Both x86 and x64 hosts execute the same x86 guest contract here; neither
+ * formal host build defines `i386`, so retain that source-selected x86 form
+ * explicitly instead of accidentally treating x64 as a RISC target. */
 #define FETCHWORD(s)	((WORD)(s))
 #define FETCHDWORD(s)	((DWORD)(s))
 #define STOREWORD(d,s)	(WORD)d=(WORD)s
 #define STOREDWORD(d,s) (DWORD)d=(DWORD)s
-#else
-#define FETCHWORD(s)  (*(UNALIGNED WORD *)&(s))
-#define FETCHDWORD(s) (*(UNALIGNED DWORD *)&(s))
-#define STOREWORD(d,s)  *(UNALIGNED WORD *)&(d)=(WORD)s
-#define STOREDWORD(d,s) *(UNALIGNED DWORD *)&(d)=(DWORD)s
-#endif
 #define FETCHSHORT(s)	((SHORT)(FETCHWORD(s)))
 #define FETCHLONG(s)	((LONG)(FETCHDWORD(s)))
 #define STORESHORT(d,s) STOREWORD(d,s)

@@ -553,6 +553,14 @@ x86/x64 object builds clear the selected C4311/C4312 diagnostics; unrelated
 warnings remain visible. See the [storage backing evidence]
 (etc/evidence/m0-t310-s8-p4-storage-private-backing-abi-closure-001.md).
 
+**T310 S8 P4 support x86-conditional closure:** the original `i386` branches
+in `mvdm.h` and `suballoc.h` are now correctly recognized as x86-versus-MIPS
+guest contracts, not x86-versus-x64 host selectors. The x86 fetch/store and
+4-KiB commitment semantics apply to both supported host builds. A forced
+formal original DEM build proves the header path on both architectures; no
+unrelated warning was hidden. See the [support conditional evidence]
+(etc/evidence/m0-t310-s8-p4-support-x86-conditional-contract-closure-001.md).
+
 **T310 S8 P4 serial/parallel native transport closure:** original SoftPC COM
 and LPT host sources retain their device request order and configuration
 semantics while their private pointer-or-scalar ioctl and worker transports
