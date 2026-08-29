@@ -128,6 +128,13 @@ numeric physical-address codec. Focused formal `/MT` x86/x64 XMS and adapter
 compiles close the former C4213/C4311/C4312 records without suppressing the
 remaining XMS call-contract warnings; see the [XMS guest-address closure](etc/evidence/m0-t310-s8-p4-xms-guest-address-abi-closure-001.md).
 
+**T310 S8 P4:** original COMMAND environment collection now keeps native
+host-string lengths until the existing `UNICODE_STRING`, DOS, and `VDMENVBLK`
+boundaries. The source-owned failure directions remain intact; focused formal
+`/MT` x86/x64 rebuilds contain none of this cluster's C4244/C4267 diagnostics,
+while non-width warnings remain visible. See the [COMMAND environment
+closure](etc/evidence/m0-t310-s8-p4-command-environment-native-width-closure-001.md).
+
 **T310 S8 P4:** the formal full x64 graph exposed one additional selected
 base/video declaration mismatch: `ega_writ.c` declared the word-fill EVID glue
 with `IU8` even though its original body and handler slot use `IU16`.

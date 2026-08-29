@@ -440,6 +440,9 @@ $hostObjects += 'obj/host/mvdm_ica_eoi_bridge.obj'
 $commandWriteLengthOverlaySource = Join-Path $commandOverlayRoot 'mvdm_command_write_length.c'
 $graph.Add('build obj/host/mvdm_command_write_length.obj: cc ' + (NinjaPath $commandWriteLengthOverlaySource))
 $hostObjects += 'obj/host/mvdm_command_write_length.obj'
+$commandLengthOverlaySource = Join-Path $commandOverlayRoot 'mvdm_command_length.c'
+$graph.Add('build obj/host/mvdm_command_length.obj: cc ' + (NinjaPath $commandLengthOverlaySource))
+$hostObjects += 'obj/host/mvdm_command_length.obj'
 $adapterWin32Objects = foreach ($name in $adapterWin32Names) {
     $object = 'obj/adapter-win32/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterWin32Root $name)))

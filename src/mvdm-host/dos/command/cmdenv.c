@@ -17,6 +17,10 @@
 #include <memory.h>
 #include <oemuni.h>
 
+/* DIVERGENCE(MVDM-HOST-DIV-118): native strlen/wchar deltas must remain
+ * size_t until checked at the original USHORT/DWORD DOS and VDM boundaries. */
+#include "mvdm_command_length.h"
+
 #define VDM_ENV_INC_SIZE    512
 
 CHAR windir[] = "windir";
@@ -33,7 +37,7 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
     PWCHAR	    pwch, NewEnv, CurEnv, CurEnvCopy, pTmp;
     NTSTATUS	    Status;
     BOOL	    fFoundComSpec;
-    USHORT	    NewEnvLen;
+    size_t	    NewEnvLen;
 
     if (pEnv16 == NULL)
 	return FALSE;
@@ -80,8 +84,14 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
 	    // variable names started with L'=' are current directroy settings
 	    pTmp = wcschr(pwch + 1, L'=');
 	    if (pTmp) {
-		Name_U.Buffer = pwch;
-		Name_U.Length = (pTmp - pwch) * sizeof(WCHAR);
+		    Name_U.Buffer = pwch;
+		    if (!mvdm_command_length_to_ushort(
+			    (size_t)(pTmp - pwch) * sizeof(WCHAR),
+			    &Name_U.Length)) {
+			RtlDestroyEnvironment(NewEnv);
+			free(CurEnvCopy);
+			return FALSE;
+		    }
 		RtlInitUnicodeString(&Value_U, pTmp + 1);
 		Status = RtlSetEnvironmentVariable(&NewEnv, &Name_U, &Value_U);
 		if (!NT_SUCCESS(Status)) {
@@ -139,8 +149,14 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
 	}
 	pwch = wcschr(Temp_U.Buffer, L'=');
 	if (pwch) {
-	    Name_U.Buffer = Temp_U.Buffer;
-	    Name_U.Length = (pwch - Temp_U.Buffer) * sizeof(WCHAR);
+		    Name_U.Buffer = Temp_U.Buffer;
+		    if (!mvdm_command_length_to_ushort(
+			    (size_t)(pwch - Temp_U.Buffer) * sizeof(WCHAR),
+			    &Name_U.Length)) {
+			RtlFreeUnicodeString(&Temp_U);
+			RtlDestroyEnvironment(NewEnv);
+			return FALSE;
+		    }
 	    RtlInitUnicodeString(&Value_U, pwch + 1);
 	    Status = RtlSetEnvironmentVariable( &NewEnv, &Name_U, &Value_U);
 	    RtlFreeUnicodeString(&Temp_U);
@@ -153,7 +169,11 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
 	pEnv16 += String.Length + 1;
     }
     // count the last terminated null char
-    Temp_U.Length = NewEnvLen + sizeof(WCHAR);
+    if (NewEnvLen > USHRT_MAX - sizeof(WCHAR)) {
+	RtlDestroyEnvironment(NewEnv);
+	return FALSE;
+    }
+    Temp_U.Length = (USHORT)(NewEnvLen + sizeof(WCHAR));
     Temp_U.Buffer = NewEnv;
     Status = RtlUnicodeStringToAnsiString(Env_A, &Temp_U, TRUE);
     RtlDestroyEnvironment(NewEnv);	/* don't need it anymore */
@@ -178,12 +198,14 @@ BOOL	cmdXformEnvironment(PCHAR pEnv16, PANSI_STRING Env_A)
 
 VOID cmdGetInitEnvironment(VOID)
 {
-    CHAR *lpszzEnvBuffer, *lpszEnv;
+    CHAR *lpszzEnvBuffer = NULL, *lpszEnv;
     WORD cchEnvBuffer;
     CHAR *lpszzEnvStrings, * lpszz;
-    WORD cchString;
-    WORD cchRemain;
-    WORD cchIncrement = MAX_PATH;
+    size_t cchString;
+    size_t cchRemain;
+    size_t cchIncrement = MAX_PATH;
+    DWORD cchOemString;
+    USHORT cchNext;
     BOOL fFoundComSpec = FALSE;
     BOOL fFoundWindir = FALSE;
     BOOL fVarIsWindir = FALSE;
@@ -214,7 +236,13 @@ VOID cmdGetInitEnvironment(VOID)
 	lpszzEnvStrings = GetEnvironmentStrings();
 	while (*lpszEnv) {
 	    cchString = strlen(lpszEnv) + 1;
-	    cchVDMEnv32 += cchString;
+	    if (!mvdm_command_length_add_dword(cchVDMEnv32,
+					       cchString,
+					       &cchVDMEnv32)) {
+		FreeEnvironmentStrings(lpszzEnvStrings);
+		setBX(0);
+		return;
+	    }
 	    lpszEnv += cchString;
 	}
 	lpszz = lpszzEnvStrings;
@@ -254,7 +282,16 @@ VOID cmdGetInitEnvironment(VOID)
 		    }
 		}
 
-                if (cchRemain < cchString) {
+		if (!mvdm_command_length_to_ushort(
+				cchInitEnvironment + cchString, &cchNext)) {
+		    free(lpszzInitEnvironment);
+		    lpszzInitEnvironment = NULL;
+		    cchInitEnvironment = 0;
+		    FreeEnvironmentStrings(lpszzEnvStrings);
+		    setBX(0);
+		    return;
+		}
+		if (cchRemain < cchString) {
                     if (cchIncrement < cchString)
                         cchIncrement = cchString;
 		    lpszzEnvBuffer =
@@ -274,7 +311,15 @@ VOID cmdGetInitEnvironment(VOID)
                     cchRemain += cchIncrement;
 		}
 		// the environment strings from base is in ANSI and dos needs OEM
-		AnsiToOemBuff(lpszz, lpszzEnvBuffer, cchString);
+		if (!mvdm_command_length_to_dword(cchString, &cchOemString)) {
+		    free(lpszzInitEnvironment);
+		    lpszzInitEnvironment = NULL;
+		    cchInitEnvironment = 0;
+		    FreeEnvironmentStrings(lpszzEnvStrings);
+		    setBX(0);
+		    return;
+		}
+		AnsiToOemBuff(lpszz, lpszzEnvBuffer, cchOemString);
 		// convert the name to upper case -- ONLY THE NAME, NOT VALUE.
 		if (!fVarIsWindir && (lpszEnv = strchr(lpszzEnvBuffer, '=')) != NULL){
 		    *lpszEnv = '\0';
@@ -284,19 +329,27 @@ VOID cmdGetInitEnvironment(VOID)
 		    fVarIsWindir = FALSE;
 		}
 		cchRemain -= cchString;
-		cchInitEnvironment += cchString ;
+		cchInitEnvironment = cchNext;
 		lpszzEnvBuffer += cchString;
 	    }
 	    lpszz += cchString;
 	}
 	FreeEnvironmentStrings(lpszzEnvStrings);
 
+	if (!mvdm_command_length_to_ushort(cchInitEnvironment + 1, &cchNext)) {
+	    free(lpszzInitEnvironment);
+	    lpszzInitEnvironment = NULL;
+	    cchInitEnvironment = 0;
+	    setBX(0);
+	    return;
+	}
 	lpszzEnvBuffer = (CHAR *) realloc(lpszzInitEnvironment,
-					  cchInitEnvironment + 1
-					  );
+				  cchInitEnvironment + 1
+				  );
 	if (lpszzInitEnvironment != NULL ) {
 	    lpszzInitEnvironment = lpszzEnvBuffer;
-	    lpszzInitEnvironment[cchInitEnvironment++] = '\0';
+	    lpszzInitEnvironment[cchInitEnvironment] = '\0';
+	    cchInitEnvironment = cchNext;
 	}
 	else {
 	    if (lpszzInitEnvironment != NULL) {
@@ -356,7 +409,7 @@ PCHAR	p1, p2;
 BOOL	fFoundComSpec;
 BOOL	fFoundWindir;
 BOOL	fVarIsWindir;
-DWORD	Length;
+    DWORD	Length;
 PCHAR	lpszzVDMEnv, lpszzEnv;
 CHAR	achBuffer[MAX_PATH + 1];
 
@@ -391,7 +444,11 @@ CHAR	achBuffer[MAX_PATH + 1];
 	lpszzEnv = lpszzVDMEnv32;
 
 	while (*lpszzEnv) {
-	    Length = strlen(lpszzEnv) + 1;
+	    if (!mvdm_command_length_to_dword(strlen(lpszzEnv) + 1,
+					       &Length)) {
+		free(pVDMEnvBlk->lpszzEnv);
+		return FALSE;
+	    }
 	    if (*lpszzEnv != '=' &&
 		(p1 = strchr(lpszzEnv, '=')) != NULL &&
 		(fFoundComSpec || !(fFoundComSpec = _strnicmp(lpszzEnv,
@@ -496,7 +553,7 @@ PCHAR	lpszValue
 )
 {
     PCHAR   p, p1, pEnd;
-    DWORD   ExtraLength, Length, cchValue, cchOldValue;
+    DWORD   ExtraLength, Length, cchValue = 0, cchOldValue;
 
     pVDMEnvBlk = (pVDMEnvBlk) ? pVDMEnvBlk : &cmdVDMEnvBlk;
 
@@ -506,9 +563,14 @@ PCHAR	lpszValue
 	return FALSE;
     pEnd = p + pVDMEnvBlk->cchEnv - 1;
 
-    cchValue = (lpszValue) ? strlen(lpszValue) : 0;
+    if (lpszValue && !mvdm_command_length_to_dword(strlen(lpszValue),
+						     &cchValue))
+	return FALSE;
+    if (!lpszValue)
+	cchValue = 0;
 
-    Length = strlen(lpszName);
+    if (!mvdm_command_length_to_dword(strlen(lpszName), &Length))
+	return FALSE;
     while (*p && ((p1 = strchr(p, '=')) == NULL ||
 		  (DWORD)(p1 - p) != Length ||
 		  _strnicmp(p, lpszName, Length)))
@@ -517,7 +579,8 @@ PCHAR	lpszValue
     if (*p) {
 	// name was found in the base environment, replace it
 	p1++;
-	cchOldValue = strlen(p1);
+	    if (!mvdm_command_length_to_dword(strlen(p1), &cchOldValue))
+		return FALSE;
 	if (cchValue <= cchOldValue) {
 	    if (!cchValue) {
 		RtlMoveMemory(p,
@@ -670,7 +733,8 @@ DWORD	cchValue
 	return 0;
 
     RequiredLength = 0;
-    Length = strlen(lpszName);
+    if (!mvdm_command_length_to_dword(strlen(lpszName), &Length))
+	return 0;
 
     // if the name is "windir", get its value from ntvdm process's environment
     // for DOS because we took it out of the environment block the application
@@ -685,7 +749,8 @@ DWORD	cchValue
 		     _strnicmp(lpszName, p, Length)))
 	    p += strlen(p) + 1;
        if (*p) {
-	    RequiredLength = strlen(p1 + 1);
+	    if (!mvdm_command_length_to_dword(strlen(p1 + 1), &RequiredLength))
+		return MAXDWORD;
 	    if (cchValue > RequiredLength && lpszValue)
 		RtlCopyMemory(lpszValue, p1 + 1, RequiredLength + 1);
 	    else

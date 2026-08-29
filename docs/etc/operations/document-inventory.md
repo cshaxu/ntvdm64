@@ -537,6 +537,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-ccpu-video-rule-storage-closure-001.md | indexed supporting material | e34f13531503823396b4d985127c56e5010e72e1c54fd5456dc2f8331a15c980 |
 | etc/evidence/m0-t310-s8-p4-ccpusas4-x86-x64-classification-001.md | indexed supporting material | 7ff5755d1f69705fcdb7fa54563e5480cf39c9eab6448f8ee1969119753919f6 |
 | etc/evidence/m0-t310-s8-p4-cmos-reset-call-contract-closure-001.md | indexed supporting material | 6f2385273fb3f138f9e8a7a248229f84dd82f25ce1aa89c75b4b44c600e0e842 |
+| etc/evidence/m0-t310-s8-p4-command-environment-native-width-closure-001.md | indexed supporting material | ddfb57e8566b0eb88f47859e693ca5b5cab468e0b8a9d9c60196e5e731c5c577 |
 | etc/evidence/m0-t310-s8-p4-command-multisz-pointer-closure-001.md | indexed supporting material | f863b0636250d13e971695468c5603ff830e3a2f8227c8a13423e88f25b812de |
 | etc/evidence/m0-t310-s8-p4-command-rtl-environment-binding-closure-001.md | indexed supporting material | 3d977e3ca11b6d3a28ddf35d4a21a985e0e875d01059185d6218ee2b67665049 |
 | etc/evidence/m0-t310-s8-p4-comms-native-transport-closure-001.md | indexed supporting material | 3fcfe6eccc8d3d5efa5bde6958f0e3a8575bd970730231db0e6e1401980750d0 |
@@ -1273,7 +1274,7 @@ content-divergent entries.
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-audit-baseline-001.md | indexed supporting material | b878f9a100fb6862522f3a5ec35977c3d5369032b99e3c4932d25a34ab1f2c46 |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-cluster-ledger.tsv | indexed supporting material | 3b7193da3c22588dff98a25a8b1390c740cc01d3f19274c250f980bb4ca11fed |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-inventory.tsv | indexed supporting material | 9f5be57f4c4a22e0ae88de22427029fb7b4f31ca753868cc8231453109cd6eb0 |
-| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | 5c0df4a74ae32505da5e0557541eaf23ba2a9f930c9d08418da09ffbbe47b805 |
+| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | ac9b3e8ed3ddbf99a1e71dd2394b6df130f32a5ad34799868ce1f52a66773773 |
 | etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification.tsv | indexed supporting material | 50aaab24789e202c10d982b7ed515e9feb778ee783769098bdaf8485733f94b9 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
