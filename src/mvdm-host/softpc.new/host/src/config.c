@@ -581,6 +581,9 @@ GLOBAL VOID config( VOID )
 GLOBAL VOID *
 config_inquire(UTINY hostID, ConfigValues *values)
 {
+	/* DIVERGENCE(MVDM-HOST-DIV-117): the original NT4 ABI tags SHORT
+	 * configuration values in a VOID * return.  Preserve that private
+	 * tagged-value contract through INT_PTR on both host widths. */
         /* Must be a static because returned to called */
         // BUGBUG should be change (caller provides buffer!!!)
         static ConfigValues tmp_vals;
@@ -617,23 +620,23 @@ config_inquire(UTINY hostID, ConfigValues *values)
 
                 case C_GFX_ADAPTER:
                         values->index = VGA;
-                        return ((VOID *)VGA);
+                        return ((VOID *)(INT_PTR)VGA);
 
                 case C_WIN_SIZE:
                         values->index = 2;     /* 2, 3 or 4. */
-                        return ((VOID *) values->index);
+                        return ((VOID *)(INT_PTR)values->index);
 
                 case C_EXTENDED_MEM_SIZE:
 			values->index = (SHORT)(xmsMemorySize/1024);
-                        return ((VOID *)values->index);
+                        return ((VOID *)(INT_PTR)values->index);
 
                 case C_LIM_SIZE:
 			values->index = (SHORT)(emsMemorySize/1024);
-			return ((VOID *)values->index);
+			return ((VOID *)(INT_PTR)values->index);
 
                 case C_MEM_LIMIT:
                         values->index = 640;
-                        return ((VOID *)values->index);
+                        return ((VOID *)(INT_PTR)values->index);
 
                 case C_COM1_NAME:
                         strcpy (values->string, "COM1");
@@ -675,11 +678,11 @@ config_inquire(UTINY hostID, ConfigValues *values)
 
                 case C_AUTOFLUSH:
 			values->index = TRUE;
-                        return ((VOID *)values->index);
+                        return ((VOID *)(INT_PTR)values->index);
 
                 case C_AUTOFLUSH_DELAY:
 			values->index = read_profile_int(PROFILE_LPT_AUTOFLUSH_DELAY); //Delay in secs
-                        return((VOID *)values->index);
+                        return((VOID *)(INT_PTR)values->index);
 
 //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -723,7 +726,7 @@ config_inquire(UTINY hostID, ConfigValues *values)
                     case C_NAME_RECORD:
                     case C_NUMBER_RECORD:
                         values->index = conf_tab[hostID].data->index;
-                        return ((VOID *) values->index);
+                        return ((VOID *)(INT_PTR)values->index);
                     default:
                         break;
                     }
@@ -733,11 +736,11 @@ config_inquire(UTINY hostID, ConfigValues *values)
 
 		case C_COM_SYNCWRITE:
 		    values->index = (short)read_profile_int(PROFILE_COM_SYNCWRITE);
-		    return ((VOID *)values->index);
+		    return ((VOID *)(INT_PTR)values->index);
 
 		case C_COM_TXBUFFER_SIZE:
 		    values->index = (short)read_profile_int(PROFILE_COM_TXBUFFER_SIZE);
-		    return ((VOID *)values->index);
+		    return ((VOID *)(INT_PTR)values->index);
 
                 default:        /* ie everything else */
                         /* fail */
