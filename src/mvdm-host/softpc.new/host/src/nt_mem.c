@@ -1372,7 +1372,7 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
                                     IHP *, allocAddr,
                                     IU32 *, allocSize)
 {
-    /* DIVERGENCE: these are page numbers derived from native header-table
+    /* DIVERGENCE(MVDM-HOST-DIV-034): these are page numbers derived from native header-table
      * addresses, not emulated addresses.  The original x86 IU32 temporaries
      * happened to retain every pointer bit; use the existing pointer-sized
      * IHPE carrier so the same shift/reconstruct algorithm works on x64. */
@@ -1381,7 +1381,8 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
             currentAllocLastPage,   /* Last page current chunk touches. */
             nextAllocFirstPage,     /* First page next chunk touches. */
             firstPage,              /* First page that needs committing. */
-            lastPage;               /* Last page that needs committing. */
+            lastPage,               /* Last page that needs committing. */
+            allocationBytes;        /* Native intermediate before IU32 ABI. */
 
 #ifndef PROD
 
@@ -1438,7 +1439,12 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
     if (firstPage <= lastPage)
     {
 	*allocAddr = (void *) (firstPage << commitShift);
-	*allocSize = (lastPage - firstPage + 1) << commitShift;
+	allocationBytes = (lastPage - firstPage + 1) << commitShift;
+	/* The range is inside the original IU32 MaxIntelMemorySize allocation;
+	 * make the retained fixed-width output contract explicit on x64. */
+	assert0(allocationBytes <= (IHPE)~(IU32)0,
+	        "exclusive allocation range exceeds Intel memory ABI");
+	*allocSize = (IU32)allocationBytes;
     }
     else
         *allocSize = 0;
