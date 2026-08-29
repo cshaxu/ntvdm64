@@ -640,6 +640,16 @@ historical generated-source style warnings remain visible and are explicitly
 outside the x86/x64-only repair scope.  See the [CVIDC table evidence]
 (etc/evidence/m0-t310-s8-p4-cvidc-generated-table-abi-audit-001.md).
 
+**T310 S8 P4 selected C-video direct-route closure:** the selected
+`CPU_40_STYLE` profile now excludes only the original uninstalled
+`WRT_POINTERS` string paths that carry native callback pointers through
+`ULONG`; it retains direct BIOS byte/word callbacks and all selected EVID
+logic.  Its remaining private word-buffer alignment operation uses the
+original pointer-width `IHPE` carrier.  Focused formal x86 and x64 Ninja
+object builds complete without `C4311`/`C4312`; unrelated source-quality
+warnings remain visible.  See the [direct-route evidence]
+(etc/evidence/m0-t310-s8-p4-cvidc-direct-pointer-profile-closure-001.md).
+
 **T310 S8 P4 serial/parallel native transport closure:** original SoftPC COM
 and LPT host sources retain their device request order and configuration
 semantics while their private pointer-or-scalar ioctl and worker transports

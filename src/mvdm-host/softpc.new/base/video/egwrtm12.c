@@ -161,6 +161,13 @@ IMPORT VOID	_ch2_mode1_chn_word_fill_glue();
 IMPORT VOID	_ch2_mode1_chn_byte_move_glue();
 IMPORT VOID	_ch2_mode1_chn_word_move_glue();
 
+#ifdef CPU_40_STYLE
+/* DIVERGENCE MVDM-HOST-DIV-080: CPU_40_STYLE selects C-video EVID tables.
+ * Preserve these historical table globals for EGA selection code, but do not
+ * bind their unselected ULONG-carried native-pointer string callbacks. */
+WRT_POINTERS mode1_handlers;
+WRT_POINTERS mode2_handlers;
+#else
 WRT_POINTERS mode1_handlers =
 {
 	_ch2_mode1_chn_byte_write_glue,
@@ -201,6 +208,7 @@ WRT_POINTERS mode2_handlers =
 
 #endif	/* NO_STRING_OPERATIONS */
 };
+#endif /* CPU_40_STYLE */
 #else
 VOID	ega_mode1_chn_b_write();
 VOID	ega_mode1_chn_w_write();
@@ -289,16 +297,19 @@ GLOBAL VOID
 fill_both_bytes IFN3(USHORT, data, USHORT *, dest, ULONG, len )
 {
 	USHORT swapped;
+	/* DIVERGENCE MVDM-HOST-DIV-080: `dest` is a private native video-buffer
+	 * pointer, not a guest address.  Preserve the original alignment branch
+	 * while using SoftPC's pointer-width IHPE carrier on both host widths. */
 
 #ifdef BIGEND
 	swapped = ((data & 0xff00) >> 8) | ((data & 0xff) << 8);
 #endif
 
-	if( (ULONG) dest & 1 )
+	if( (IHPE) dest & 1 )
 	{
 		*((UTINY *) dest) = first_half(data);
 
-		dest = (USHORT *) ((ULONG) dest + 1);
+		dest = (USHORT *) ((IHPE) dest + 1);
 		len--;
 
 		while( len-- )
@@ -409,6 +420,11 @@ ega_mode1_chn_w_write IFN2(ULONG, value, ULONG, offset )
 	update_alg.mark_word( offset );
 }
 
+/* DIVERGENCE MVDM-HOST-DIV-080: under CPU_40_STYLE the selected original
+ * C-video EVID tables own the string fill/move route.  These WRT_POINTERS
+ * helpers carry native pointers through legacy ULONG fields and are not
+ * installed by the CPU_40_STYLE selection path. */
+#ifndef CPU_40_STYLE
 /* used by both byte and word mode1 fill */
 
 LOCAL VOID
@@ -650,6 +666,8 @@ ega_mode1_chn_w_move IFN4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag)
 
 	update_alg.mark_string( ead, ead + count - 1 );
 }
+
+#endif /* CPU_40_STYLE */
 
 VOID
 ega_mode2_chn_b_write IFN2(ULONG, value, ULONG, offset )
@@ -1025,6 +1043,8 @@ ega_mode2_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 	update_alg.mark_wfill( offset, offset + count - 1, 0 );
 }
 
+/* DIVERGENCE MVDM-HOST-DIV-080: the CPU_40 EVID path owns string moves. */
+#ifndef CPU_40_STYLE
 LOCAL VOID
 ega_mode2_chn_move_guts IFN8(UTINY *, eas, UTINY *, ead, LONG, count,
 	UTINY *, EGA_plane, ULONG, scratch, ULONG, plane, ULONG, w,
@@ -1212,6 +1232,8 @@ ega_mode2_chn_w_move IFN4(ULONG, ead, ULONG, eas, ULONG, count,
 
   ega_mode2_chn_move(1, (UTINY *)ead, (UTINY *)eas, count, src_flag);
 }
+
+#endif /* CPU_40_STYLE */
 
 #endif
 

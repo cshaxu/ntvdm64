@@ -225,6 +225,14 @@ IMPORT VOID	_ch2_mode0_chn_word_fill_glue();
 IMPORT VOID	_ch2_mode0_chn_byte_move_glue();
 IMPORT VOID	_ch2_mode0_chn_word_move_glue();
 
+#ifdef CPU_40_STYLE
+/* DIVERGENCE MVDM-HOST-DIV-079: CPU_40_STYLE selects the original C-video
+ * EVID tables through SetWritePointers(). The older WRT_POINTERS string
+ * movers pass native pointers through ULONG and are not installed by this
+ * profile. Preserve table storage for EGA source selection only. */
+WRT_POINTERS mode0_copy_handlers;
+WRT_POINTERS mode0_gen_handlers;
+#else
 WRT_POINTERS mode0_copy_handlers =
 {
 	_ch2_copy_byte_write,
@@ -260,6 +268,7 @@ WRT_POINTERS mode0_gen_handlers =
 #endif	/* NO_STRING_OPERATIONS */
 
 };
+#endif /* CPU_40_STYLE */
 #else
 VOID  ega_copy_b_write();
 VOID  ega_copy_w_write();
@@ -464,6 +473,10 @@ ega_copy_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
     }
 }
 
+/* DIVERGENCE MVDM-HOST-DIV-079: non-CPU_40 direct-pointer string path.
+ * CPU_40 uses EVID_WRT_POINTERS, which keeps guest offsets and native source
+ * pointers in separately typed slots. */
+#ifndef CPU_40_STYLE
 LOCAL VOID
 ega_copy_move IFN6(UTINY *, dst, UTINY *, eas, ULONG, count, ULONG, src_flag,
 	ULONG, w, IBOOL, forward )
@@ -602,6 +615,8 @@ ega_copy_w_move_bwd IFN4(ULONG,  offset, ULONG, eas, ULONG, count,
 {
 	ega_copy_move( (UTINY *)offset, (UTINY *)eas, count << 1, src_flag, 1, FALSE );
 }
+
+#endif /* CPU_40_STYLE */
 
 VOID
 ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )
@@ -1082,6 +1097,8 @@ ega_mode0_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 	}
 }
 
+/* DIVERGENCE MVDM-HOST-DIV-079: non-CPU_40 direct-pointer string path. */
+#ifndef CPU_40_STYLE
 LOCAL VOID
 ega_mode0_chn_move_ram_src IFN5(UTINY *, eas, LONG, count, UTINY *, ead,
 	UTINY *, EGA_plane, ULONG, plane )
@@ -1351,6 +1368,8 @@ ega_mode0_chn_w_move_bwd IFN4(ULONG, ead, ULONG, eas, ULONG, count,
 {
 	ega_mode0_chn_move(1,(UTINY *)ead, (UTINY *)eas, count << 1, src_flag, FALSE );
 }
+
+#endif /* CPU_40_STYLE */
 
 VOID
 ega_mode0_chn_w_write IFN2(ULONG, value, ULONG, offset )
