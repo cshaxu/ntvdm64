@@ -14,6 +14,10 @@
 #include <ctype.h>
 #include <string.H>
 #include "cmdkeyb.h"
+/* DIVERGENCE(MVDM-HOST-DIV-114): preserve the source keyboard-layout
+ * sequence, but state the two Win32 binary-buffer parameters exactly and
+ * retain native fixed-buffer lengths until the original one-byte guest tail
+ * is admitted. */
 
 CHAR szPrev[5] = "US";
 INT  iPrevCP = 437;
@@ -55,7 +59,7 @@ extern BOOL bPifFastPaste;
 
 VOID cmdGetKbdLayout( VOID )
 {
-  INT  iSize,iSaveSize;
+  size_t iSize,iSaveSize;
   CHAR szKeybCode[12];
   CHAR szDir[MAX_PATH+15];
   CHAR szBuf[28];
@@ -117,7 +121,7 @@ VOID cmdGetKbdLayout( VOID )
 				szKeybCode,
 				NULL,
 				&dwType,
-				szBuf,
+				(LPBYTE)szBuf,
 				&cbData);
 
   RegCloseKey(hKey);
@@ -143,7 +147,7 @@ VOID cmdGetKbdLayout( VOID )
 			     szKeybCode,
 			     NULL,
 			     &dwType,
-			     szNewKbdID,
+			     (LPBYTE)szNewKbdID,
 			     &cbData
 			     ) != ERROR_SUCCESS)
 	    szNewKbdID[0] = '\0';
@@ -230,8 +234,11 @@ VOID cmdGetKbdLayout( VOID )
 	sprintf(&szAutoLine[iSize], " /ID:%s", szNewKbdID);
 	iSize = strlen(szAutoLine);
     }
+    if (iSize > 0xffu) {
+        goto NoInstallkb16;
+    }
     szAutoLine[iSize] = 0xd;
-    *pVDMKeyb = iSize;
+    *pVDMKeyb = (CHAR)iSize;
     RtlMoveMemory(pVDMKeyb + 1, szAutoLine, iSize + 1);
 
 
