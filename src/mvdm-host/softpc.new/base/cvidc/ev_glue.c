@@ -18,6 +18,9 @@
 #include "host_def.h"
 /* DIVERGENCE(MVDM-HOST-DIV-076): preserve the native C varargs ABI. */
 #include <stdio.h>
+/* DIVERGENCE(MVDM-HOST-DIV-122): C-video generated rules make IUH a native
+ * host word.  Keep diagnostic-only rule values width-safe on x86 and x64. */
+#include <inttypes.h>
 
 #ifdef CCPU
 #include "gmi.h"
@@ -505,7 +508,7 @@ setReadPointers IFN1(IUH, readset)
 	{
 	case 0:	/* read mode 0 */
 		chain_index = getVideochain();
-		if (cevid_verbose) printf("Set Read Pointers Mode 0, chain %d\n", chain_index);
+		if (cevid_verbose) printf("Set Read Pointers Mode 0, chain %" PRIuPTR "\n", (uintptr_t)chain_index);
 		c_ev_read_ptr.b_read = read_mode0_evid[chain_index].b_read;
 		c_ev_read_ptr.w_read = read_mode0_evid[chain_index].w_read;
 		c_ev_read_ptr.d_read = read_mode0_evid[chain_index].d_read;
@@ -516,7 +519,7 @@ setReadPointers IFN1(IUH, readset)
 
 	case 1:	/* read mode 1 */
 		chain_index = getVideochain();
-		if (cevid_verbose) printf("Set Read Pointers Mode 1, chain %d\n", chain_index);
+		if (cevid_verbose) printf("Set Read Pointers Mode 1, chain %" PRIuPTR "\n", (uintptr_t)chain_index);
 		c_ev_read_ptr.b_read = read_mode1_evid[chain_index].b_read;
 		c_ev_read_ptr.w_read = read_mode1_evid[chain_index].w_read;
 		c_ev_read_ptr.d_read = read_mode1_evid[chain_index].d_read;
