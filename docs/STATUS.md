@@ -67,6 +67,11 @@ read as fixed-width Intel instruction state, not native host-width transfers.
 They remain compiler-visible but leave the x86/x64 repair queue without casts
 or suppression; see the [fixed-width disposition](etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-scalar-disposition-001.md).
 
+**T310 S8 P4:** the 40 CCPU signed/unsigned and unary-minus diagnostics were
+also read across the executor tree. They concern fixed-width Intel arithmetic,
+not host-width transport; they remain visible and source-unchanged. See the
+[signedness disposition](etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-signedness-disposition-001.md).
+
 **T310 S1 closure:** `6a46ee748` establishes the exact original `ccpu386`,
 `host/src` and `obj.vdm` roots, hashes, historical source roles and a
 per-session one-backend contract. It reverses the previous planning assumption
