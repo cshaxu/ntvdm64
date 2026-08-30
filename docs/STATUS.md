@@ -46,6 +46,13 @@ sources remain present but are exact `PRINTER`-unselected paths in the selected
 CCPU40 configuration, with no fabricated device result.  See the
 [S23 source boundary](etc/evidence/m0-t310-s23-p1-comms-controller-source-boundary-001.md).
 
+**T310 S23 P2:** a fresh 369-edge selected x86 CCPU40 Ninja graph archived all
+five original communications sources and produced a forced-link ownership
+audit with no communications-owner unresolved symbol.  The retained printer
+result is exact `PRINTER`-unselected unavailability; host endpoints remain
+S24 and integrated behavior remains S49.  See the [S23 formal assembly
+evidence](etc/evidence/m0-t310-s23-p2-comms-controller-formal-assembly-001.md).
+
 **T310 S17 P1:** the complete selected system-controller source set is now
 split from adjacent ROM, platform, endpoint and BOP owners. The original
 controller initialization/heartbeat order stays in its source bodies; every
