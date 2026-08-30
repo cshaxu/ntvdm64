@@ -4,7 +4,25 @@
 
 ## Active Packet
 
-**No active M/T/S packet.** T312 is closed; await admission of the next package.
+**Active: M0 T313 S1**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T313 S1; Ordinary Mode (single-person dual-role implementation and review). |
+| Admission And Approval | Owner-directed sequential execution admits Queue item 1 after T312. The owner further directed that non-original material encountered in `mvdm-host` be cleaned in its owning package rather than deferred. |
+| Objective | Establish the complete selected Win32/x86 CCPU40 SoftPC capability and mirror-purity ledger which orders the remaining lifecycle recovery without trace-led work selection. |
+| Non-goals | No x64 recovery, CPU30/MONITOR profile, Bochs route, guest/BOP semantic expansion, new machine executor, kernel VDM/CSRSS reconstruction, or runtime feature implementation before the ledger identifies its original owner cohort. |
+| Reference Baseline | T310 source-owner closures, T312 retired-Bochs closure, formal 399-edge x86 CCPU40 graph, Queue item 1 and [T313 plan](etc/operations/m0-t313-softpc-capability-mirror-purity-plan-001.md). |
+| Files And ABI Surface | Selected `mvdm-host/softpc.new` source manifests, `mvdm-host-overlay`, existing same-shaped `adapter-mvdm-host-out` bindings, formal Ninja manifest, and S1 evidence only. |
+| Applicable Rules | Source-first/mirror-first recovery, one mapping manager, x86 CCPU40 profile, no `src.old`, component/mirror rules, and the package-first no-trace-selection rule. |
+| Verification | Reconcile source membership with the formal graph and T310 closures; scan reached `mvdm-host` source/overlay/adapters for non-original routes; review actual source ownership; run documentation governance and scoped diff checks. |
+| Expected Markers | One original-owner disposition and required local witness for every selected machine family; one remove/replace/retain decision for every reached non-original form; no unregistered Bochs or duplicate-machine route. |
+| Asset Needs | Pinned MVDM mirrors, T310/T312 evidence, current selected x86 Ninja generator, component READMEs and divergence registers. |
+| Reporting Requirements | Record original owner, lifecycle edge, selected source/build state, residual binding/overlay, mapping requirement, required positive/negative witness and later-owner transfer for every family. |
+| Stop Conditions | A candidate requires a second executor, source-body rewrite, unregistered mirror divergence, new generic shim, raw host identity in a historical ABI, or a scope outside selected machine lifecycle. Pause for re-admission. |
+| Exit Criteria | S1 closes with a complete finite ledger and ordered S2--S5 worksets; it must identify immediate cleanup in `mvdm-host` rather than carrying generic cleanup debt. |
+| Original Owner Request | “在 mvdm-host 里面，你碰到的话可以顺手清理掉，不必等待以后。” |
+| Similar-Issue Sweep | CCPU/FPU/SAS, EMS/UMB, firmware, controllers, input, video, storage, communications, source manifests, overlays, adapters and retired route names. |
 
 ### M0 T312 closure record
 

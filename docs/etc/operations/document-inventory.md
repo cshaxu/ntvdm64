@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3373 |
+| Documentation records | 3374 |
 | --- | --- |
-| Generated UTC | 2026-08-30T17:28:11Z |
+| Generated UTC | 2026-08-30T17:33:00Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 0b19ded344ed5c39b939d6d7155ccb61afe243dc5cd9b622a2a0efc66cac8f3e |
+| STATUS.md | principal control document | 37d1600abac9cd4cfad4f3f9a336c9887cd581f58049cacb2f4c663b786a558e |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1572,6 +1572,7 @@ content-divergent entries.
 | etc/operations/m0-t312-s2-original-softpc-binding-transfer-001.md | indexed supporting material | 167277313da231c5c114bc02acb682cce01c9f3b1b7ab0836687a1ea12d5bd9b |
 | etc/operations/m0-t312-s3-retired-bochs-tree-removal-001.md | indexed supporting material | 04570194deba4c4f25ee2a202798c6c978f6bea47f8e6474c1872e791a127f48 |
 | etc/operations/m0-t312-s4-softpc-formal-closure-001.md | indexed supporting material | be55c935cb5cfa75c116bcefdad16d76d61eb18deb7952b9f4c2689d998f2af5 |
+| etc/operations/m0-t313-softpc-capability-mirror-purity-plan-001.md | indexed supporting material | a98c9a3ec6e2f176ccabc08315f1cb35c0c0c7689e31421e7b94f02dd2a15c8d |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -1666,7 +1667,7 @@ content-divergent entries.
 | etc/operations/opennt-non-mvdm-stage1-semantic-site-ledger.tsv | indexed supporting material | e4d4936ec2f7aec51e360c39daff960b2e451c3f54be28a992e8e1ad52c3d524 |
 | etc/operations/opennt-non-mvdm-stage1-semantic-symbol-ledger.tsv | indexed supporting material | 0c281cd8ee4d7b225919ef6af7dba0105343be4c691b31725a34b22302c5bdec |
 | etc/operations/opennt-non-mvdm-stage1-true-egress-ledger.tsv | indexed supporting material | a537d68f8d63655fb89e98701058fa4f394b5924ef40d2dbc78f2e03d1f3b57b |
-| etc/operations/package-recovery-program-20260827.md | indexed supporting material | b6e9e345adfcd25c4a3fa235a1ab6b3e8d67e29bdbcabb0fa047543f982497b1 |
+| etc/operations/package-recovery-program-20260827.md | indexed supporting material | e4ab7973eec0cb65056561cc59aad315e90b2fc81b059ae3222954e798a1770d |
 | etc/operations/policy/source-policy.md | indexed supporting material | 05bd88da8a5af6adbfed6ef8b45e174139c68af92d0beeaf348059b12fa42753 |
 | etc/operations/proposal-bochs-component-identity-overlay-convergence-001.md | indexed supporting material | ac4de17a933c62d6b6adc1971345c6fe4e58860453fd894608553f2bdd6974c8 |
 | etc/operations/proposal-bochs-core-diff-overlay-minimization-001.md | indexed supporting material | 45eb3881102adb316497ec85eeac90488d95cd69c77d4555a1608a14d953db29 |

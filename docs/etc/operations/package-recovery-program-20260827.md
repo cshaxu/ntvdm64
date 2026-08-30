@@ -191,28 +191,34 @@ mapping-manager rule applies on both architectures.
 
 ## P02D — Complete SoftPC capability and mirror-purity acceptance
 
-**Predecessor:** P02B and P02C. **Purpose:** perform the complete final audit
+**Predecessor:** P02B. **Purpose:** perform the complete selected-profile
+audit
 of every selected `mvdm-host/softpc.new` machine package and reached lifecycle
 edge: CCPU/CPU, FPU, SAS/RAM, EMS/UMB, BIOS/ROM/CMOS, PIC, PIT/timer, DMA,
 keyboard, mouse, video, disk/floppy and serial/parallel.
 
 **Delivery:** one direct, binding-only, adapter-backed or
 original-unavailable disposition for each selected machine family, with
-Win32/x86 CCPU40 source and execution evidence plus the x64 recovery
-evidence established by P02C. Re-read every mirror diff and overlay;
-replace any project-authored shim with an available original package/interface
+Win32/x86 CCPU40 source and execution evidence. Re-read every mirror diff
+and overlay as the package reaches it; remove a non-original shim, stale
+Bochs-era route, duplicate adapter, or unnecessary mirror divergence at that
+point rather than carrying cleanup debt forward. Replace any project-authored
+shim with an available original package/interface
 where possible, retaining only registered minimal `DIVERGENCE:` hooks and
 private overlays.
 
 **Exit:** Win32/x86 CCPU40 compiles and runs the selected SoftPC source
-and initialization/device path; P02C supplies the corresponding x64 native
-compile/recovery evidence; all selected families have source-shaped positive/negative evidence; the
+and initialization/device path; all selected families have source-shaped
+positive/negative evidence; the
 production graph contains no Bochs, MONITOR, kernel-VDM or `src.old` route;
 and each retained diff/overlay is minimal, registered and proven necessary.
+P02C remains the later, independent x64 native-compilation recovery package;
+it is not a prerequisite or an implicit acceptance condition for this selected
+x86 product phase.
 
 ## P03 — Base VDM source-shaped broker recovery
 
-**Predecessor:** P02, P02A, P02B, P02C and P02D. The completed local profile is evidence for the broader
+**Predecessor:** P02, P02A, P02B and P02D. The completed local profile is evidence for the broader
 P02 decision; the recovered package retains the local source-shaped Base VDM
 protocol rather than importing the CSRSS-bound BaseClient/BaseSrv product
 shell.
