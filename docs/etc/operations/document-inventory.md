@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3338 |
+| Documentation records | 3339 |
 | --- | --- |
-| Generated UTC | 2026-08-30T14:25:13Z |
+| Generated UTC | 2026-08-30T14:33:59Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 2c34df75e8616806b9d5c7ab7191bea5502ca383d11e7e6840bb61e226729e15 |
+| STATUS.md | principal control document | 649025cc605ac9de65312b7db845ec84b8a2a3a37d618dac346d4eaec28a1e10 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -751,6 +751,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s27-p1-host-video-source-boundary-001.md | indexed supporting material | c8ee1a4a808e2d44386a85cc78b1be239d8cc136316b56de3823021857617276 |
 | etc/evidence/m0-t310-s27-p2-host-video-formal-assembly-001.md | indexed supporting material | 16022d8fc2d139fcd6737bbc384a5b9c44bddba0e960401ef678d35a70fbbc4b |
 | etc/evidence/m0-t310-s28-p1-host-platform-source-boundary-001.md | indexed supporting material | 2bbd3ec6fb1df7fcc2a90ee041fd44c2e3d81dd37510a7c68bfea7415be59e07 |
+| etc/evidence/m0-t310-s28-p2-host-platform-trace-and-idle-assembly-001.md | indexed supporting material | f672ec259ce1fbee234ba299ba581db17f0ae707544faf7fec4e39f41e8dad4b |
 | etc/evidence/m0-t310-s3-selected-backend-lifecycle-001.md | indexed supporting material | 6a02b307d35aebb266ea589193f39072e2c8e009b9b0b999bf636829c9cca2ce |
 | etc/evidence/m0-t310-s4-original-machine-family-audit-001.md | indexed supporting material | 9ab32c765a5e3853bc1ec4226da5680c2142d04a53fca644da8a59cd57ae6f50 |
 | etc/evidence/m0-t310-s4-p2-softpc-executable-source-reclassification-001.md | indexed supporting material | f2032226a03c8b2f74ec839061321c1b484bf7d428d5e4603d7d64da67d09890 |

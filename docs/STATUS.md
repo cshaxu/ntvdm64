@@ -33,6 +33,13 @@ formal graph.  A fresh selected Win32/x86 CCPU40 candidate completed 374 Ninja
 edges without a command-line CPU30 profile define.  S28 remains active; see
 [P1 boundary record](etc/evidence/m0-t310-s28-p1-host-platform-source-boundary-001.md).
 
+**T310 S28 P2:** the original SoftPC `base/debug/trace.c` is now the selected
+trace provider; the unrelated MVDM debugger product is excluded.  The retained
+NTVDMx64 `ActivityCheckAfterTimeSlice` no-op is linked only as its documented
+patch contract, not as an idle-policy recovery.  Fresh x86 CCPU40 candidate
+and forced-link evidence are recorded in
+[P2 assembly record](etc/evidence/m0-t310-s28-p2-host-platform-trace-and-idle-assembly-001.md).
+
 **T310 S22 P1:** the selected host-storage surface is now separated into the
 original no-fixed-disk CCPU callbacks, DEM direct DASD, local floppy and the
 unimplemented historical remote-floppy service. Existing guest-location and
