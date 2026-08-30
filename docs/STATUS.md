@@ -39,6 +39,13 @@ unavailable. A fresh 369-edge x86 CCPU40 graph and safe unavailable-name
 fixture pass. Real media behavior remains S49 work. See the
 [S22 closure record](history/m0-t310-s22-host-storage-bindings-closure-20260830.md).
 
+**T310 S23 P1:** the original UART controller and INT 14 front end remain
+separate from their later host endpoint bindings; serial reset ordering stays
+in the original BIOS and controller sources.  Printer/parallel/screen-print
+sources remain present but are exact `PRINTER`-unselected paths in the selected
+CCPU40 configuration, with no fabricated device result.  See the
+[S23 source boundary](etc/evidence/m0-t310-s23-p1-comms-controller-source-boundary-001.md).
+
 **T310 S17 P1:** the complete selected system-controller source set is now
 split from adjacent ROM, platform, endpoint and BOP owners. The original
 controller initialization/heartbeat order stays in its source bodies; every
