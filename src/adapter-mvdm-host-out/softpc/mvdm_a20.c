@@ -3,7 +3,7 @@
 /*
  * The original CCPU/SAS provider owns the A20 wrap mask.  This facade keeps
  * the historical public SAS spellings used by XMS while deliberately avoiding
- * a second machine implementation or an adapter-bochs dependency.
+ * a second machine implementation or a retired-machine dependency.
  */
 extern void c_sas_enable_20_bit_wrapping(void);
 extern void c_sas_disable_20_bit_wrapping(void);

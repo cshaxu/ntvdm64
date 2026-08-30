@@ -62,8 +62,7 @@ int session_select_machine_backend(session *instance, uint32_t backend)
 {
     if (!session_valid(instance) || instance->state != SESSION_STATE_READY ||
         instance->machine_backend != SESSION_MACHINE_BACKEND_NONE ||
-        (backend != SESSION_MACHINE_BACKEND_BOCHS &&
-         backend != SESSION_MACHINE_BACKEND_SOFTPC)) return 0;
+        backend != SESSION_MACHINE_BACKEND_SOFTPC) return 0;
     instance->machine_backend = backend;
     return 1;
 }

@@ -2,20 +2,23 @@
  * DIVERGENCE(MVDM-HOST-DIV-017): This is the private, source-shaped subset of
  * original softpc.new/host/src/nt_bop.c for MS_bop_0 and MS_bop_4. The full
  * historical translation unit also carries unrelated PIC/CCPU/XMS/DPMI/WOW
- * selector bodies and cannot enter the sole-Bochs-executor product closure.
+ * selector bodies and cannot enter the selected CCPU40 product closure.
  *
  * Both functions retain the original name, dispatcher call and IP sequencing.
  * MS_bop_0 changes only its raw Sim32GetVDMPointer dereference to the already
  * admitted checked real-mode SAS byte read: an NT4 process pointer cannot be
- * made safe on x86/x64 and would bypass Bochs guest-RAM bounds.
+ * made safe in the selected host process layout and would bypass the CCPU
+ * SAS owner.
  */
 #include <nt.h>
 
 #include "demexp.h"
 #include "cmdsvc.h"
 #include "host_idle.h"
-#include "mvdm_command_registers.h"
-#include "mvdm_sas.h"
+/* Use the selected original CCPU40 register vector and SAS interface rather
+ * than the retired recovery facades. */
+#include "host_cpu.h"
+#include "sas.h"
 
 void MS_bop_0(void)
 {

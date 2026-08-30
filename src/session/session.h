@@ -17,8 +17,7 @@
  * state only: it is never copied to guest or MVDM storage. */
 enum session_machine_backend {
     SESSION_MACHINE_BACKEND_NONE = 0u,
-    SESSION_MACHINE_BACKEND_BOCHS = 1u,
-    SESSION_MACHINE_BACKEND_SOFTPC = 2u
+    SESSION_MACHINE_BACKEND_SOFTPC = 1u
 };
 
 enum session_state {

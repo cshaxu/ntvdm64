@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3366 |
+| Documentation records | 3367 |
 | --- | --- |
-| Generated UTC | 2026-08-30T16:59:49Z |
+| Generated UTC | 2026-08-30T17:06:25Z |
 
 ## Entries
 
@@ -1566,6 +1566,7 @@ content-divergent entries.
 | etc/operations/m0-t311-s2-s3-mvdm-host-support-reroot-closure-001.md | indexed supporting material | a77e4999639af51efb0e9f8a3d7e8efb5d5bf3fb5a667ec0d68d38db13ce1ec7 |
 | etc/operations/m0-t312-s1-live-bochs-dependency-audit-001.md | indexed supporting material | 265ef3c49cd1d9218d52fd06a99ecb7ffd47312267fdfb7d97e9d8e18191e82f |
 | etc/operations/m0-t312-s1-live-bochs-dependency-ledger.tsv | indexed supporting material | b4fd686ac6dc4c12a9c25d567043cb7c138e23a14f5322deb0480f483dc56a27 |
+| etc/operations/m0-t312-s2-original-softpc-binding-transfer-001.md | indexed supporting material | 90544b454d6b4bb126482c79d22e2c2f0b9ffef2a19b810bd823dad22fc4e1ad |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |

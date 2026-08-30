@@ -8,8 +8,8 @@ implementation, or a general compatibility layer.
 
 - `win32/`: historical Win32, NTDLL and OEM source-facing call shapes over
   public modern Windows facilities.
-- `softpc/`: historical SoftPC, CCPU and SAS call shapes over typed
-  `adapter-bochs` mechanics and session-bounded services.
+- `softpc/`: historical SoftPC, CCPU and SAS call shapes over the selected
+  original CCPU40/SAS owners and session-bounded services.
 - `monitor/`: historical user-mode VDM monitor and command-record call shapes.
 - `basesrv/`: reached BaseClient/BaseSrv VDM command protocol over copied
   session-local records; never a generic CSR or CSRSS substitute.
@@ -19,9 +19,8 @@ implementation, or a general compatibility layer.
 - `debugger/`: historical BDE/DBG/VDMDBG/VDMEXTS product-interface call shapes.
 
 All implementation candidates must enter exactly one of these families through
-the T284 S1 inventory. `adapter-mvdm-host-out` never calls `bochs-core`
-directly; its `softpc` family reaches machine state only through the typed
-public operations of `adapter-bochs`.
+the T284 S1 inventory. `adapter-mvdm-host-out` preserves original SoftPC
+interface shapes and does not introduce an alternate machine facade.
 
 ## Current state
 

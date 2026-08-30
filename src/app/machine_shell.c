@@ -1,8 +1,12 @@
 #include "app/machine_shell.h"
 
-#include "adapter-bochs/machine_lifecycle.h"
-
 #include <string.h>
+
+/* These are the selected original SoftPC CCPU40 lifecycle names from
+ * softpc.new/host/src/nt_cpu.c.  App owns only session composition; it does
+ * not substitute a second machine lifecycle. */
+extern void host_cpu_init(void);
+extern void host_cpu_reset(void);
 
 void app_machine_shell_initialize(app_machine_shell *shell)
 {
@@ -41,34 +45,27 @@ static void app_machine_shell_teardown(void *context)
 enum app_machine_shell_status app_machine_shell_open(app_machine_shell *shell,
     session *owner, uint32_t ips, uint64_t machine_memory_bytes)
 {
-    struct adapter_bochs_machine_lifecycle_configuration configuration;
-
     if (!app_machine_shell_valid(shell) || owner == NULL ||
         !session_valid(owner) || owner->state != SESSION_STATE_ACTIVE ||
         ips == 0u || machine_memory_bytes == 0u)
         return APP_MACHINE_SHELL_REJECTED_INPUT;
     if (shell->active != 0u)
         return APP_MACHINE_SHELL_REJECTED_STATE;
-    if (session_machine_backend(owner) == SESSION_MACHINE_BACKEND_SOFTPC)
-        /* Original SoftPC creation is S4 work.  Do not silently compose a
-         * Bochs machine for a session which selected the original backend. */
-        return APP_MACHINE_SHELL_BACKEND_UNAVAILABLE;
-    if (session_machine_backend(owner) != SESSION_MACHINE_BACKEND_BOCHS)
+    if (session_machine_backend(owner) != SESSION_MACHINE_BACKEND_SOFTPC)
         return APP_MACHINE_SHELL_REJECTED_STATE;
 
-    memset(&configuration, 0, sizeof(configuration));
-    configuration.version = ADAPTER_BOCHS_MACHINE_LIFECYCLE_VERSION;
-    configuration.ips = ips;
-    configuration.guest_memory_bytes = machine_memory_bytes;
-    configuration.host_memory_bytes = machine_memory_bytes;
-    if (adapter_bochs_machine_lifecycle_create(&configuration) !=
-        ADAPTER_BOCHS_MACHINE_LIFECYCLE_OK)
-        return APP_MACHINE_SHELL_MACHINE_FAILURE;
+    /* nt_cpu.c owns CPU initialization.  Machine-memory configuration and
+     * execution remain in the original SoftPC config/start sequence; the
+     * app shell deliberately neither reimplements them nor selects another
+     * executor. */
+    (void)ips;
+    (void)machine_memory_bytes;
+    host_cpu_init();
 
     shell->owner = owner;
     shell->active = 1u;
     if (!session_register_teardown(owner, app_machine_shell_teardown, shell)) {
-        (void)adapter_bochs_machine_lifecycle_destroy();
+        host_cpu_reset();
         shell->owner = NULL;
         shell->active = 0u;
         return APP_MACHINE_SHELL_MACHINE_FAILURE;
@@ -78,14 +75,11 @@ enum app_machine_shell_status app_machine_shell_open(app_machine_shell *shell,
 
 enum app_machine_shell_status app_machine_shell_close(app_machine_shell *shell)
 {
-    enum adapter_bochs_machine_lifecycle_status status;
     if (!app_machine_shell_valid(shell))
         return APP_MACHINE_SHELL_REJECTED_INPUT;
     if (shell->active == 0u)
         return APP_MACHINE_SHELL_REJECTED_STATE;
-    status = adapter_bochs_machine_lifecycle_destroy();
-    if (status != ADAPTER_BOCHS_MACHINE_LIFECYCLE_OK)
-        return APP_MACHINE_SHELL_MACHINE_FAILURE;
+    host_cpu_reset();
     shell->owner = NULL;
     shell->active = 0u;
     return APP_MACHINE_SHELL_OK;

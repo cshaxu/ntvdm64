@@ -20,7 +20,7 @@ enum app_machine_shell_status {
     APP_MACHINE_SHELL_MACHINE_FAILURE
 };
 
-/* Application assembly record.  It carries no Bochs object, guest locator,
+/* Application assembly record.  It carries no CPU object, guest locator,
  * service selector, host handle, or callback across its public surface. */
 typedef struct app_machine_shell {
     uint32_t abi_version;
