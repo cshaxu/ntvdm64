@@ -3,8 +3,10 @@
 ## Selected scope
 
 The firmware *input* mirror is byte-exact under
-`mvdm-softpc-firmware/softpc.new/{bios,roms,data}`. It contains immutable
-BIOS/ROM/CMOS inputs and is neither a guest image nor a second machine.
+`mvdm-softpc-firmware/softpc.new/{bios,roms,data}`. BIOS/ROM code inputs are
+immutable; CMOS/profile records retain their original host-resource lifecycle
+but are confined to the app-selected session root. This component is neither a
+guest image nor a second machine.
 Executable original firmware/control sources remain in `mvdm-host` at their
 original-relative paths:
 
@@ -40,14 +42,15 @@ CCPU40 binding.
 
 ## Initial dispositions
 
-- Immutable ROM/BIOS/CMOS input files: `direct` mirror input.
+- ROM/BIOS code files: `direct` immutable mirror input. CMOS/profile records:
+  original host-resource input/output under the selected session root.
 - Original `host_find_file` body: `adapter-backed` at its existing minimal
   location-binding divergence.
 - Original `host_read_resource` and `read_rom` path: `binding-only` pending
   direct x86 CCPU40 formal assembly and SAS/ROM caller audit.
-- Original `host_write_resource`: not a firmware-load success path. Its
-  writable historical profile/CMOS behavior must receive an explicit policy
-  disposition; S16 must not silently enable writes to immutable package media.
+- Original `host_write_resource`: binding-only until its session-root retry
+  path and original error direction are verified; it must not fall back to a
+  process-current-directory write.
 - Original BIOS reset/BOP table: `binding-only` pending the later controller
   packets it calls. No controller is enabled simply because its table compiles.
 

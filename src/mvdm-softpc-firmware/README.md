@@ -5,8 +5,10 @@ upstream-relative package set is `softpc.new/bios`, `softpc.new/roms` and
 `softpc.new/data`.
 
 This is a separate original mirror component, not an executable DOS/WOW16
-guest image and not a parallel SoftPC machine. ROM/data inputs remain
-immutable. Executable `softpc.new/base/bios` and `base/keymouse` source is
+guest image and not a parallel SoftPC machine. ROM/BIOS code inputs remain
+immutable. CMOS/profile records retain their original runtime persistence
+semantics but must be read and written only below the app-selected session
+firmware root. Executable `softpc.new/base/bios` and `base/keymouse` source is
 rooted in `mvdm-host`, where original SoftPC composition can select it. Its
 source, makefile and manifest inputs are byte-exact mirrors; retained
 historical `obj/` products have no selected source-root counterpart and remain

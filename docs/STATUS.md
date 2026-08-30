@@ -47,6 +47,13 @@ owners rather than a replacement dispatcher or reset shim. See the
 [S16 manifest ledger](etc/evidence/m0-t310-s16-p3-bios-manifest-owner-ledger-001.tsv)
 and [reset/dispatch boundary](etc/evidence/m0-t310-s16-p3-bios-reset-dispatch-boundary-001.md).
 
+**T310 S16 P4:** original CMOS/profile persistence retains its source function
+and ordering, but the one retry after `host_find_file` now remains in the
+already selected session firmware root rather than escaping to process CWD.
+ROM/BIOS inputs remain immutable; no new resource provider exists. The changed
+original member rebuilt in the formal x86 CCPU40 graph. See the
+[S16 resource-write evidence](etc/evidence/m0-t310-s16-p4-firmware-resource-write-root-001.md).
+
 **T310 S14 closed:** the original `VdmAddVirtualMemory` / remove lifecycle
 and source-shaped DOS page alias now use the one session mapping-manager
 identity boundary. Fresh x86/x64 runs proved publication, binding, alias

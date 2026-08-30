@@ -134,8 +134,13 @@ long size;              /* Quantity of data to write */
                         host_error (EG_REZ_UPDATE,ERR_CONT,name);
 #endif
 
-                        /* Continuing => try to create a new file */
-                        file_fd = _open(name,O_RDWR|O_CREAT,S_IREAD|S_IWRITE);
+                        /* Continuing => try the selected resource location.
+                         * DIVERGENCE(MVDM-HOST-DIV-133): the original retry
+                         * used the bare resource name, which redirects an
+                         * already-resolved session resource into process CWD.
+                         * Keep the original create/retry and error ordering,
+                         * but retain the path returned by host_find_file. */
+                        file_fd = _open(hff_ret,O_RDWR|O_CREAT,S_IREAD|S_IWRITE);
 
                         if (file_fd != -1)
                         {
