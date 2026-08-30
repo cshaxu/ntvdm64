@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3278 |
+| Documentation records | 3283 |
 | --- | --- |
-| Generated UTC | 2026-08-30T06:35:54Z |
+| Generated UTC | 2026-08-30T06:38:51Z |
 
 ## Entries
 
@@ -639,6 +639,11 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-xms-guest-address-abi-closure-001.md | indexed supporting material | be8eb01d6392f0c8257cc640001fd1278cbfeb1058db9c9c700f391c2db0b540 |
 | etc/evidence/m0-t310-s8-p4-zfrsrvd-x86-x64-classification-001.md | indexed supporting material | b66af1522bbe20bad70ef0c9e2e2d30804abbea90004cca1a3b27473dc46400a |
 | etc/evidence/m0-t310-s8-p6-ccpu-executor-formal-closure-001.md | indexed supporting material | 18af3835d91675f4fdcf09a16cb2f0410a810402cc425267221c44fc1ee61938 |
+| etc/evidence/m0-t310-s8-softpc-machine-boundary-audit-001/README.md | indexed supporting material | d3dd7d05a56161ae3328605bf55c5fe119650628a199bc2383e794f2b7a8182d |
+| etc/evidence/m0-t310-s8-softpc-machine-boundary-audit-001/softpc-machine-inbound-ledger.tsv | indexed supporting material | bc7e75a666131d0e24bee36345fc0b31a2925841685e6fdf156e910595d6fc14 |
+| etc/evidence/m0-t310-s8-softpc-machine-boundary-audit-001/softpc-machine-outbound-ledger.tsv | indexed supporting material | d29701c885b0a50f8b8e4962c8363fcd991d3f7641469c3d3988b71f229d89bd |
+| etc/evidence/m0-t310-s8-softpc-machine-boundary-audit-001/softpc-machine-roots.tsv | indexed supporting material | 3b636f4523ecf261fde1c7091576337e259c403597d76e98750dbb098e75879d |
+| etc/evidence/m0-t310-s8-softpc-machine-boundary-audit-001/softpc-machine-state-ownership.md | indexed supporting material | 021445ddec2300418d08d204b0d9055ff7144a2a96969d51259e6c14afaa254d |
 | etc/evidence/m0-t310-s9-ccpu-access-table-contract-001.md | indexed supporting material | c6fa449a45a99cf0e91d041383e4ffd6b6195b66dd32ac5bb0983958fdf3b54e |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
@@ -1290,7 +1295,7 @@ content-divergent entries.
 | etc/operations/m0-t310-s7-guest-memory-lease-caller-ledger.tsv | indexed supporting material | 4fd2dc26670c7b2c3bb8cb172d59d802fcae653a571616312b5164be38322565 |
 | etc/operations/m0-t310-s7-p2-x64-forced-link-ledger.tsv | indexed supporting material | 9661205c2aecadb55e7fc2b1537f1279ad187b7fec37d8859128dedfb3b8a93d |
 | etc/operations/m0-t310-s7-p2-x86-forced-link-ledger.tsv | indexed supporting material | ab1f513b8221f3fa90965068237b75d79f917365bb4e9d4293b775faddd15f68 |
-| etc/operations/m0-t310-s8-original-machine-composition-plan-001.md | indexed supporting material | c739e8ad45c17934d2891adb3bc047523448a2da83bb6a384002f22adb1abd31 |
+| etc/operations/m0-t310-s8-original-machine-composition-plan-001.md | indexed supporting material | a2c9b6054bfa4947bf440ed423ce8462e0a59ed2b38e17e306b4c2c591cfae53 |
 | etc/operations/m0-t310-s8-p2-x64-forced-link-ledger.tsv | indexed supporting material | 4c0be72bd1c3670b870efeb914557a582ed1edb5b09b35ba2a2896c6a7471941 |
 | etc/operations/m0-t310-s8-p2-x86-forced-link-ledger.tsv | indexed supporting material | 4d7c569dacc69fdae7e392a0f59b9b3623e5cb748e38ec12ef2913c5a05d3169 |
 | etc/operations/m0-t310-s8-p4-base-video-callback-interface-ledger.tsv | indexed supporting material | 75acfb9a605d23d333a783d28b9ea707c1622ff09ebac3c27d21b28a0e87abcf |

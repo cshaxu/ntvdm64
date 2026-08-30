@@ -1,0 +1,15 @@
+id\tfrom\tobserved_dependency\tclass\tcore_disposition\tconfidence\tevidence
+O01\tbase/support/main.c\thost_applInit/config/setupEnv/command-line/process exit\tMVDM product host\texclude from machine\thigh\tmain.c: startup sequence before cpu_init
+O02\tbase/support/main.c\tInitialiseDosEmulation(argc, argv)\tMVDM semantic\texclude; session/product layer chooses guest media\thigh\tmain.c:310 under NTVDM
+O03\thost/src/nt_cpu.c:host_simulate\tNtCurrentTeb and IcaLock assertion\tNT4-private host\tscheduler/critical-section port or adapter\thigh\tnt_cpu.c:96-121
+O04\thost/src/nt_reset.c:host_reset\tConsoleInit, MouseAttachMenuItem, ResumeThread, thread handles, idle detection\thost backend plus NTVDM product behavior\tseparate display/input/scheduler ports; no direct retention\thigh\tnt_reset.c:95 onward
+O05\thost/src/nt_reset.c:host_applInit\tWOW command switches, ExitProcess, VDM session globals\tMVDM semantic\texclude\thigh\tnt_reset.c:171 onward
+O06\thost/src/nt_bop.c\tMS_bop_0 through MS_bop_F table entries\tMVDM semantic\texclude from core; outer MVDM BOP ingress owns selector service\thigh\tnt_bop.c NTVDM table entries BOP 50-5F
+O07\tbase/bios/*.c and base/system/rom.c\tBOP pseudo-instruction calls into BIOS/device C handlers\tmachine firmware trap\tretain only profile-registered mechanical/firmware handlers; typed unknown trap otherwise\thigh\tbios/bootstra.c, reset.c; rom.c:419-428
+O08\tbase/ccpu386/c_main.c\tEDL_fast_bop(ULONG)\tunresolved execution trap\tturn into typed unavailable/fault stop before claiming standalone use\thigh\tc_main.c declaration and S8 patch disposition
+O09\tCCPU/SAS physical access\tVdmSetPhysRecStructs and VdmMapDosMemory/VdmUnmapDosMemory\tmachine-control memory port\tretain as explicit externally-backed RAM/physical-alias API; no raw pointer ABI\thigh\tadapter softpc divergences 023/026
+O10\thost/src/nt_unix.c and nt_msscs.c\thost_find_file / DOS media lookup\thost backend\tmachine takes immutable configured ROM/media callbacks; DOS loader remains outer profile decision\thigh\tadapter softpc divergences 024/025
+O11\tbase keymouse/video/disks and host src\thost_simulate recursive re-entry\tmachine-control port\tprovide reentrant run/resume boundary with nesting rules\thigh\trg callers include keybd_io, mouse_io, video, floppy, rom
+O12\thost/src/nt_bop.c and BOP table\tDPMI, VDD, redirector, COMMAND and other conditional handlers\tmixed; MVDM semantic unless proven firmware mechanical\tper-selector classification required\tmedium\tnt_bop.c conditional table
+O13\tbase/system timer and host nt_timer\ttime source/event scheduling\thost backend\tinject monotonic clock/scheduling notification port\tmedium\tbase/system/sources and host/src/sources
+O14\tbase video/keymouse/comms/disks host callbacks\tdisplay, input, serial/printer, block media\thost backend\tdefine device-specific backend ports, keep device state/IO decode core-side\tmedium\tbase/dirs and caller review

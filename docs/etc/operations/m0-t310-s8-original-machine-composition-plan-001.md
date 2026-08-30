@@ -37,14 +37,14 @@ the original failure direction rather than a fabricated positive result.
 Later packets may consume a completed contract but may not reopen it with a
 local workaround. The sequence is dependency order, not warning-count order.
 
-1. S8 `SPC-CCPU-EXECUTOR-DISPATCH` (active)
-2. S9 `SPC-CCPU-ACCESS-TABLE`
-3. S10 `SPC-CCPU-SAS-MONITOR-VECTOR`
-4. S11 `SPC-CCPU-SAS-MONITOR-VECTOR-EFFECTIVE-ADDRESS`
-5. S12 `SPC-CCPU-EXTENDED-BOP-DEFAULT`
-6. S13 `SPC-SAS-MEMORY-CONTRACT`
-7. S14 `SPC-MEMORY-MAPPING-BINDINGS`
-8. S15 `MVDM-XMS.486-OWNER-PACKAGE`
+1. S8 `SPC-CCPU-EXECUTOR-DISPATCH` (closed)
+2. S9 `SPC-CCPU-ACCESS-TABLE` (closed)
+3. S10 `SPC-CCPU-SAS-MONITOR-VECTOR` (closed; historical vector name, not the MONITOR product route)
+4. S11 `SPC-CCPU-SAS-MONITOR-VECTOR-EFFECTIVE-ADDRESS` (closed)
+5. S12 `SPC-CCPU-EXTENDED-BOP-DEFAULT` (closed)
+6. S13 `SPC-SAS-MEMORY-CONTRACT` (closed)
+7. S14 `SPC-MEMORY-MAPPING-BINDINGS` (closed)
+8. S15 `MVDM-XMS.486-OWNER-PACKAGE` (active)
 9. S16 `SPC-BIOS-FIRMWARE-BINDINGS`
 10. S17 `SPC-SYSTEM-CONTROLLER-CALLBACKS`
 11. S18 `SPC-HOST-SYSTEM-INTERRUPT-BINDINGS`
@@ -78,7 +78,7 @@ local workaround. The sequence is dependency order, not warning-count order.
 39. S46 `MVDM-IEUVDDEX-OWNER-PACKAGE`
 40. S47 `SPC-DEBUG-UNSELECTED`
 41. S48 `SPC-HUNTER-UNSELECTED`
-42. S49 `P4-GLOBAL-BASELINE`: final all-cluster reread and both-host
+42. S49 `P4-GLOBAL-BASELINE`: final all-cluster reread and selected-host
     `create -> reset -> firmware/machine initialization -> bounded execution
     -> typed controlled stop -> teardown` verification.
 

@@ -1,0 +1,8 @@
+id\texternal_caller\tmachine_surface_touched\tproblem\tproposed_boundary\tevidence
+I01\tsrc/adapter-mvdm-host-out/softpc/mvdm_softpc_execution.c\thost_start_cpu\touter run has no typed budget/stop result\tmachine_run with explicit result; retain adapter only during migration\tmvdm_softpc_execution.c: host_start_cpu then records returned
+I02\tsrc/mvdm-host/wow32/{wkman.c,wcall16.c}\thost_simulate\tWOW directly resumes processor\touter WOW adapter requests bounded resume, never direct core global\trg callsites at wkman 879/1184/1413 and wcall16 780
+I03\tsrc/mvdm-host/dos/dem/demdasd.c and dpmi32/{buffer,xlathlp}.h\thost_simulate\tDOS/DEM/DPMI semantic owners invoke machine re-entry\tsemantic host emits neutral resume request; no BOP policy in core\trg callsites
+I04\tsrc/adapter-mvdm-host-out/wow/mvdm_wow_callback_transaction.c\thost_simulate\tadapter observes historical raw execution contract\tadapt to typed resume API\trg caller
+I05\tMVDM host/DOS/WOW source\tget*/set* CPU register spellings\tdirect register mutation bypasses ownership\tregister-frame transaction API or compatibility adapter with bounded transaction\tadapter-softpc README divergences 005,014,018
+I06\tMVDM host/DOS/WOW source\tSAS scalar/string and guest-pointer operations\tguest memory and pointer lifetime leak across core boundary\tphysical-copy/checked-lease APIs; no permanent alias\tadapter-softpc README divergences 003,006,011,013,016,017
+I07\tMVDM host memory code\tVdmSetPhysRecStructs / VdmMapDosMemory\texternal host backing and EMS aliases enter physical space\texplicit external-memory/alias attachment owned by machine session\tadapter-softpc README divergences 023,026
