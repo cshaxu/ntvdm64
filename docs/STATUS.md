@@ -4,25 +4,25 @@
 
 ## Active Packet
 
-**Active: M0 T310 S28**
+**Active: M0 T310 S29**
 
-### M0 T310 S28 — host-platform bindings
+### M0 T310 S29 — host-configuration bindings
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T310 S28; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | S27 closed original host-video bindings and formal assembly. S28 is the next sequential owner-contract cluster. |
-| Objective | Recover only `SPC-HOST-PLATFORM-BINDINGS`: selected original host platform, process, resource and system-service contracts for Win32/x86 CCPU40. |
-| Non-goals | No video endpoint redesign (S27 closed), configuration policy (S29), kernel VDM or MONITOR import, Bochs fallback, BOP semantic expansion, or trace-selected repair. |
-| Reference Baseline | Closed S27 host-video bindings; selected original platform caller units and reached public Win32/NTDLL forms. |
-| Files And ABI Surface | Original selected host platform sources, thread/process/resource declarations and reached host API contracts; a private mirror overlay only if a complete source-shaped contract requires it. |
+| Identifier Mode | M0 T310 S29; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | S28 closed selected host-platform bindings and assigned all remaining forced-link edges to their owner packets. S29 is the next sequential owner-contract cluster. |
+| Objective | Recover only `SPC-HOST-CONFIGURATION-BINDINGS`: selected SoftPC configuration, PIF and console-key policy contracts for Win32/x86 CCPU40. |
+| Non-goals | No private Console Server recreation, video endpoint redesign, kernel VDM or MONITOR import, Bochs fallback, BOP semantic expansion, or trace-selected repair. |
+| Reference Baseline | Closed S28 platform bindings; original `config.c`, `nt_pif.c` and their reached public/private console contracts. |
+| Files And ABI Surface | Original selected configuration/PIF caller bodies and their console, environment and host-policy declarations; a private mirror overlay only if a complete source-shaped contract requires it. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island, CPU-profile and source-recovery rules; approved T310 S8 plan and coverage ledger. |
-| Verification | Formal MSVC Win32/x86 `/MT` Ninja selected host-platform archive and forced-link review; original platform declaration/definition/caller comparison; focused source-shaped platform result or exact unavailable result. x64 compatibility is outside the active worklist. |
-| Expected Markers | One source-shaped selected host-platform contract; preserved original callback order; guest numeric addresses remain guest values and do not become host identities; no raw MONITOR/Bochs/kernel-VDM route or hand-written platform replacement. |
-| Asset Needs | Exact selected base-video and C-VID sources, source manifests, session mapping-manager rules and MSVC Build Tools/Ninja. |
-| Reporting Requirements | Per cluster: original roots, declaration/definition/table/caller relationship, recovery rung, selected x86 CCPU40 result, mapping-manager use and no-Bochs/MONITOR proof. |
-| Stop Conditions | A selected platform endpoint requires an unregistered semantic divergence; a raw host identity crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or a finding belongs to S29 or later. |
-| Exit Criteria | Every selected host-platform declaration, definition, initializer and reached caller has one direct, binding-only, private-overlay or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and focused platform-contract evidence does not select new S28 owner work. Integrated machine behavior remains mandatory S49 validation. |
+| Verification | Formal MSVC Win32/x86 `/MT` Ninja selected configuration archive and forced-link review; original declaration/definition/caller comparison; focused source-shaped result or exact unavailable result. x64 compatibility is outside the active worklist. |
+| Expected Markers | Preserved original configuration call order; no raw host identity crosses a fixed-width ABI; no raw MONITOR/Bochs/kernel-VDM route or hand-written configuration replacement. |
+| Asset Needs | Exact selected host sources, source manifests, session ownership rules and MSVC Build Tools/Ninja. |
+| Reporting Requirements | Per cluster: original roots, declaration/definition/caller relationship, recovery rung, selected x86 CCPU40 result and no-Bochs/MONITOR proof. |
+| Stop Conditions | A selected configuration endpoint requires an unregistered semantic divergence; recovery selects private Console Server/kernel VDM; or a finding belongs to S30 or later. |
+| Exit Criteria | Every selected configuration declaration, definition, initializer and reached caller has one direct, binding-only, private-overlay or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and focused configuration evidence does not select new S29 owner work. Integrated machine behavior remains mandatory S49 validation. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
 | Similar-Issue Sweep | Every selected host-platform callback, process/resource endpoint, reached caller, host handle/address form, selected compilation condition, and MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
 
@@ -39,6 +39,10 @@ NTVDMx64 `ActivityCheckAfterTimeSlice` no-op is linked only as its documented
 patch contract, not as an idle-policy recovery.  Fresh x86 CCPU40 candidate
 and forced-link evidence are recorded in
 [P2 assembly record](etc/evidence/m0-t310-s28-p2-host-platform-trace-and-idle-assembly-001.md).
+
+**T310 S28 closed:** all selected platform edges now have a direct,
+binding-only, documented patch, explicit-unavailable, or later-owner
+disposition.  See [closure](history/m0-t310-s28-host-platform-bindings-closure-20260830.md).
 
 **T310 S22 P1:** the selected host-storage surface is now separated into the
 original no-fixed-disk CCPU callbacks, DEM direct DASD, local floppy and the
