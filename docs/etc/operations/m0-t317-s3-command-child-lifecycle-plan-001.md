@@ -38,6 +38,12 @@ same-shaped Base VDM, session, SoftPC mapping, and public Win32 bindings.
   dispatcher or captured native record pointer. The Base VDM focused fixture
   invokes both operations on a detached cdecl-compatible worker and verifies
   that the count returns to zero.
+- **P3 — local exit and product-boundary disposition:** closed. The original
+  `cmdReturnExitCode` retains its local redirection-copy and Base VDM
+  `RETURN_ON_NO_COMMAND` call order; the original `cmdredir.c` mapping fixture
+  passes. `cmdExitVDM` retains the selected original SoftPC termination call.
+  Guest `EXEC`/PSP parent return, PIF presentation and remote Redirector are
+  explicitly transferred rather than replaced with local success.
 
 ## Explicit exclusions and transfers
 

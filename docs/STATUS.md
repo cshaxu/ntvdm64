@@ -4,34 +4,12 @@
 
 ## Active Packet
 
-### M0 T317 S3 — COMMAND child lifecycle and local stream endpoints
+### No active M/T/S packet
 
-**Active: M0 T317 S3.**
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T317 S3; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | T317 S1 boundary ledger and closed S2 bootstrap cohort select the remaining original COMMAND child/stream cohort. |
-| Objective | Recover the original `cmdexec`/`cmdexit`/`cmdredir`/`cmdpif` local child lifecycle with existing same-shaped Base VDM, session mapping and SoftPC CCPU40 boundaries. |
-| Non-goals | No DOS `EXEC`/PSP parent restoration, guest execution claim, remote/named-pipe Redirector, PIF or console product shell, WOW broker, CSRSS/BaseSrv server reconstruction, CPU30/V86 or Bochs input. |
-| Reference Baseline | T317 S1 [boundary ledger](etc/evidence/m0-t317-s1-dem-command-softpc-boundary-ledger-001.md); closed S2 [bootstrap evidence](etc/evidence/m0-t317-s2-command-bootstrap-cohort-closure-001.md); selected x86 CCPU40 formal graph. |
-| Files And ABI Surface | Original `mvdm-host/dos/command/{cmdexec,cmdexit,cmdredir,cmdpif}.c`; `adapter-mvdm-host-out/{basesrv,softpc,win32}`; session mapping manager; selected build/test manifests. |
-| Verification | Source-order/ABI review; focused child/re-entry/stream positive and unavailable contracts; external formal x86 CCPU40 graph; documentation governance and `git diff --check`. |
-| Stop Conditions | Pause before introducing a COMMAND-private scheduler/mapper, retaining a native handle in guest state, inventing a DOS parent return, or accepting remote Redirector/PIF/console semantics without its owner package. |
-| Exit Criteria | All four original units formally compose; every reached local lifecycle/stream boundary has a same-shaped provider or explicit source-shaped unavailable result; remaining full guest/remote product paths transfer without invented success. |
-
-**T317 S3 P1:** original COMMAND child creation preserves its source order
-while a translation-unit-local Win32 binding directs its selected standard
-streams only to the child.  The external x86 child-stream and original
-redirection/mapping fixtures pass; see the
-[P1 evidence](etc/evidence/m0-t317-s3-p1-command-child-stream-boundary-001.md).
-
-**T317 S3 P2:** the original `cmdCreateProcess` re-entry calls can now enter
-the bound Base VDM record from its cdecl child worker without a raw record
-pointer or COMMAND-private dispatcher. The neutral session owns only bounded
-thread-hook sequencing; BaseSrv owns its TLS record. The external Base VDM
-fixture and fresh formal x86 CPU40 libraries pass; see the
-[P2 evidence](etc/evidence/m0-t317-s3-p2-command-worker-base-vdm-context-001.md).
+**No active M/T/S packet.** M0 T317 is closed at its declared local COMMAND/SoftPC
+vertical-slice boundary. The [T317 closure](history/m0-t317-dem-command-softpc-vertical-slice-closure-20260830.md)
+records its evidence and the guest/PIF/Redirector/WOW/CSRSS transfers. A new
+numeric packet requires explicit owner admission.
 
 ### M0 T317 S2 closure record
 
