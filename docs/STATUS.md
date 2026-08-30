@@ -4,27 +4,27 @@
 
 ## Active Packet
 
-**Active: M0 T310 S36**
+**Active: M0 T310 S37**
 
-### M0 T310 S36 — MVDM SIM32 owner package
+### M0 T310 S37 — MVDM DPMI32 owner package
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T310 S36; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | S35 closed the selected original DEM/COMMAND package. S36 is the next sequential SIM32 owner cluster. |
-| Objective | Recover only `MVDM-SIM32-OWNER-PACKAGE`: selected original SIM32 bodies and their direct caller contracts for Win32/x86 CCPU40. |
-| Non-goals | No trace-selected leaf repair, kernel VDM or MONITOR product import, Bochs fallback, generic memory substitute, or service semantic expansion. |
-| Reference Baseline | Closed S35 DOS owner package; original selected SIM32 source manifest and coverage ledger. |
-| Files And ABI Surface | Original selected SIM32 bodies, declarations, table/initializer forms and reached callers; exact adapter boundary only where an original external binding is unavailable. |
+| Identifier Mode | M0 T310 S37; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | S36 closed the selected original SIM32 package. S37 is the next sequential DPMI32 owner cluster. |
+| Objective | Recover only `MVDM-DPMI32-OWNER-PACKAGE`: selected original DPMI32 bodies and their direct caller contracts for Win32/x86 CCPU40. |
+| Non-goals | No trace-selected leaf repair, kernel VDM/MONITOR product import, Bochs fallback, generic memory substitute, or unrelated BOP/provider expansion. |
+| Reference Baseline | Closed S36 SIM32 package; selected DPMI32 source roots, existing source-shaped overlays and coverage ledger. |
+| Files And ABI Surface | Original selected DPMI32 declarations, definitions, dispatch/initializer forms and reached callers; exact existing adapter/overlay boundary only where original external composition is unavailable. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island, CPU-profile and source-recovery rules; approved T310 S8 plan and coverage ledger. |
-| Verification | Formal MSVC Win32/x86 `/MT` Ninja selected SIM32 archive and forced-link review; original declaration/definition/initializer/caller comparison; focused source-shaped result or exact unavailable result. x64 compatibility is outside the active worklist. |
-| Expected Markers | Preserved original SIM32 provider order; no raw host identity crosses a fixed-width ABI; no raw MONITOR/Bochs/kernel-VDM route or hand-written memory substitute. |
-| Asset Needs | Exact selected host sources, source manifests, session ownership rules and MSVC Build Tools/Ninja. |
+| Verification | Formal MSVC Win32/x86 `/MT` Ninja selected DPMI32 archive and forced-link review; original declaration/definition/initializer/caller comparison; focused source-shaped result or exact unavailable result. x64 compatibility is outside the active worklist. |
+| Expected Markers | Preserved original DPMI32 provider order; no raw host identity crosses a fixed-width ABI; no raw MONITOR/Bochs/kernel-VDM route or hand-written protected-memory substitute. |
+| Asset Needs | Exact selected DPMI32 sources, source manifests, existing session mapping rules and MSVC Build Tools/Ninja. |
 | Reporting Requirements | Per cluster: original roots, declaration/definition/initializer/caller relationship, recovery rung, selected x86 CCPU40 result and no-Bochs/MONITOR proof. |
-| Stop Conditions | A selected SIM32 endpoint requires an unregistered semantic divergence; recovery selects kernel VDM; or a finding belongs to S37 or later. |
-| Exit Criteria | Every selected SIM32 declaration, definition, initializer and reached caller has one direct, binding-only, private-overlay or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and focused evidence does not select new S36 owner work. Integrated machine behavior remains mandatory S49 validation. |
+| Stop Conditions | A selected DPMI32 endpoint requires an unregistered semantic divergence; recovery selects kernel VDM; or a finding belongs to S38 or later. |
+| Exit Criteria | Every selected DPMI32 declaration, definition, initializer and reached caller has one direct, binding-only, private-overlay or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and focused evidence does not select new S37 owner work. Integrated machine behavior remains mandatory S49 validation. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
-| Similar-Issue Sweep | Every selected SIM32 declaration, initializer, reached caller, host handle/address form, selected compilation condition, and private-Console/kernel-VDM and `src.old` negative scan. |
+| Similar-Issue Sweep | Every selected DPMI32 declaration, initializer, reached caller, guest pointer/selector/address form, selected compilation condition, and private-Console/kernel-VDM and `src.old` negative scan. |
 
 **T310 S29 P1:** the original two-file OEM/Unicode support package is selected
 directly, preserving PIF `ExpandEnvironmentStringsOem` and related host-file
@@ -62,6 +62,12 @@ direct selected x86 CCPU40 support-library bodies. Their historical `UMTEST`
 programs remain outside the product graph; XMS/DPMI and DEM/PIF consumers keep
 their named owner and S49 integration obligations. See
 [closure](history/m0-t310-s34-mvdm-support-library-closure-20260830.md).
+
+**T310 S36 closed:** selected original SIM32 bodies and the exact original
+SAS invalidation facade are formally composed for x86 CCPU40. The existing
+same-shaped `VdmQueryDir` monitor binding now enters the formal graph and
+retains original slow directory-reset fallback when unbound. See
+[closure](history/m0-t310-s36-mvdm-sim32-owner-package-closure-20260830.md).
 
 **T310 S35 closed:** all selected original DEM and COMMAND provider bodies and
 dispatch tables are directly composed. The reached private keyboard-layout call
