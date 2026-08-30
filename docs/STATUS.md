@@ -55,6 +55,13 @@ the formal x86 CCPU40 candidate. The forced-link audit has no unresolved XMS
 allocator/A20/session edge; this is source-assembly closure, not runtime
 closure. See the [S15 original-owner assembly evidence](etc/evidence/m0-t310-s15-p3-xms-original-owner-assembly-001.md).
 
+**T310 S15 P4:** the XMS declaration/definition/caller ledger gives every
+selected provider one original, binding-only, adapter-backed or explicit
+unavailable disposition. `nt_msscs → XMSInit` and `nt_bop → XMSDispatch` are
+the original runtime entries; unsupported historical declarations remain
+unfabricated. The remaining gate is reachable SoftPC lifecycle behavior, not
+an unresolved XMS source edge. See the [S15 contract disposition](etc/evidence/m0-t310-s15-p4-xms-contract-disposition-001.md).
+
 **T310 S13 closed:** the selected original CPU_40 SAS-memory owner retains
 its ordinary RAM vector, type map, scalar/string/move/fill algorithms and
 private native backing without exporting a host identity. Fresh x86/x64 runs
