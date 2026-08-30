@@ -134,9 +134,10 @@ missing media, but it may not claim a runnable device profile until P2--P5.
 
 ## T310 final closure boundary
 
-T310 closes when S8 closes. Formal MSVC `/MT` x86 and x64 Ninja graphs must
-each prove the same selected SoftPC `create -> reset -> firmware/machine
-initialization -> bounded execution -> typed controlled stop -> teardown` path
-for the S8-selected machine composition. Bochs production-route removal and
-full SoftPC capability/mirror-purity acceptance are explicit subsequent T
+S8 closes only its CCPU executor/access/SAS-vector/EDL owner contracts.
+T310 closes only after the sequential S8--S15 packages complete. Formal MSVC
+`/MT` x86 and x64 Ninja graphs must then each prove the same selected SoftPC
+`create -> reset -> firmware/machine initialization -> bounded execution ->
+typed controlled stop -> teardown` path. Bochs production-route removal and
+full SoftPC capability/mirror-purity acceptance remain explicit subsequent T
 packages, not implicit T310 exit conditions.

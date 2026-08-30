@@ -15,10 +15,14 @@ turning its numeric result into a native process pointer?
   `c_main.h`.
 - Historical, excluded monitor implementation in
   `mvdm/v86/monitor/i386/sas.c`.
-- Selected original callers in `softpc.new/base/video`: `video.c`,
-  `ega_vide.c`, and `vga_vide.c`.  These callers consume the result as a
-  numeric `sys_addr`/guest-linear value; none is entitled to receive a host
-  process alias.
+- Selected original callers span the machine, not just display: `base/bios`
+  (`emm_fncs.c`, `ill_bop.c`, `reset.c`, `rtc_bios.c`, `tape_io.c`),
+  `base/disks` (`diskbios.c`, `floppy.c`), `base/dos/emm_mngr.c`,
+  `base/keymouse` (`keybd_io.c`, `mouse_io.c`), `base/system/illegalp.c`,
+  `base/video` (`video.c`, `ega_vide.c`, `vga_vide.c`) and reached host roots
+  (`nt_emm.c`, `nt_mouse.c`, `x86_emm.c`). These callers consume the result as
+  a numeric `sys_addr`/guest-linear value before their own source-shaped SAS
+  access; none is entitled to receive a host process alias.
 
 ## Recovery
 
@@ -69,7 +73,7 @@ cluster review.  `c_effective_addr` remains in the
   the full source-shaped machine transaction is proven.
 
 Before the parent is closed, the original vector initializer, all three
-members, all video callers above, `ccpusas4.c`'s physical-memory owner, and
-every prior adapter repair must be read together on both host widths.  The
-parent cluster therefore remains subject to its required full
+members, every runtime caller family above, `ccpusas4.c`'s physical-memory
+owner, and every prior adapter repair must be read together on both host
+widths. The parent cluster therefore remains subject to its required full
 owner-contract reread.
