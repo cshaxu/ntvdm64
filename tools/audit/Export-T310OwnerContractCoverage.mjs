@@ -28,7 +28,8 @@ function tsv(file) {
 }
 
 const evidenceMatchers = [
-  ['SPC-CCPU-EXECUTOR-DISPATCH', /(?:^|-)ccpu|ccpusas|zfrsrvd/i],
+  ['SPC-CCPU-EXECUTOR-DISPATCH', /(?:^|-)ccpu|zfrsrvd/i],
+  ['SPC-SAS-MEMORY-CONTRACT', /ccpusas|sas-memory/i],
   ['SPC-CVIDC-GENERATED-DISPATCH', /cvidc|gdp|copy-(?:fill|fnc)|native-c-varargs/i],
   ['SPC-VIDEO-CONTROLLER-DISPATCH', /(?:^|-)video-|ega-|cga-|aorc|x86gfx/i],
   ['SPC-SYSTEM-CONTROLLER-CALLBACKS', /system-controller|cmos-reset/i],

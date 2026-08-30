@@ -34,6 +34,9 @@ function clusterFor(relative) {
     if (byFile) return byFile;
   }
   const exact = [
+    // `ccpusas4.c` owns physical-memory handler selection; it is not an
+    // instruction-executor ABI contract merely because it is in ccpu386.
+    ['softpc.new/base/ccpu386/ccpusas4.c', 'SPC-SAS-MEMORY-CONTRACT'],
     ['softpc.new/host/src/nt_cprgs.c', 'SPC-CCPU-ACCESS-TABLE'],
     ['softpc.new/host/inc/host_cpu.h', 'SPC-CCPU-ACCESS-TABLE'],
     ['softpc.new/base/inc/host_sas.h', 'SPC-SAS-MEMORY-CONTRACT'],

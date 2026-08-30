@@ -54,6 +54,10 @@ function clusterFor(relative) {
     if (byFile) return byFile;
   }
   const exact = [
+    // Although this source is physically beside CCPU, its callback slots
+    // select SAS physical-memory/video handlers.  Keep that contract with
+    // SAS memory recovery rather than the instruction executor.
+    ['softpc.new/base/ccpu386/ccpusas4.c', 'SPC-SAS-MEMORY-CONTRACT'],
     ['softpc.new/host/src/nt_cprgs.c', 'SPC-CCPU-ACCESS-TABLE'],
     ['softpc.new/host/inc/host_cpu.h', 'SPC-CCPU-ACCESS-TABLE'],
     ['softpc.new/base/inc/host_sas.h', 'SPC-SAS-MEMORY-CONTRACT'],

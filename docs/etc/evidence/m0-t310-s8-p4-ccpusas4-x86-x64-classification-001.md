@@ -17,3 +17,15 @@ Which tracked CCPU/SAS records remain x86/x64 ABI defects after the selected ori
 ## Result
 
 Six stale ABI records are closed. Three V86 result-path records remain visible for their functional owner; no S8 source change or warning suppression is introduced.
+
+## Owner correction
+
+The follow-up complete callable-contract read establishes that `ccpusas4.c`
+does not own instruction decoding or execution.  Its `temp_func` and `vidFP`
+slots select physical SAS memory/video handlers after memory classification.
+The source is therefore tracked by `SPC-SAS-MEMORY-CONTRACT` (T310 S13), not
+by `SPC-CCPU-EXECUTOR-DISPATCH` (S8).  The static ABI inventory, compiler
+cross-check, review index and coverage ledger are generated with this exact
+file exception so the later SAS packet reviews its declaration, assignments
+and selected callers together.  This changes no original source and does not
+claim the deferred V86/physical-memory behavior is recovered.
