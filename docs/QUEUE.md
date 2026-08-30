@@ -35,22 +35,21 @@ production route nor an acceptance row.
 
 | Order | Candidate implementation package |
 | --- | --- | --- |
-| 1 | DEM/COMMAND vertical slice and child lifecycle |
-| 2 | Minimal DOS guest execution and controlled return |
-| 3 | Minimal vertical-slice integration closure |
-| 4 | XMS owner package |
-| 5 | DPMI/DPMI32 owner package |
-| 6 | Redirector owner package (including the selected `netstatus.c` mirror slice) |
-| 7 | WOW32/Win16 owner package |
-| 8 | VDD owner package |
-| 9 | Debugger/BDE/FAX owner packages |
-| 10 | Service-package cross-family closure and native integration evidence |
-| 11 | Broker process and cross-process coordination |
-| 12 | In-process multi-session reentrancy audit |
-| 13 | Host capability expansion |
-| 14 | SoftPC graphics presentation window and Alt+Enter transition |
-| 15 | Guest DOS/WOW16 artifact matrix |
-| 16 | Product release closure |
+| 1 | Minimal DOS guest execution and controlled return |
+| 2 | Minimal vertical-slice integration closure |
+| 3 | XMS owner package |
+| 4 | DPMI/DPMI32 owner package |
+| 5 | Redirector owner package (including the selected `netstatus.c` mirror slice) |
+| 6 | WOW32/Win16 owner package |
+| 7 | VDD owner package |
+| 8 | Debugger/BDE/FAX owner packages |
+| 9 | Service-package cross-family closure and native integration evidence |
+| 10 | Broker process and cross-process coordination |
+| 11 | In-process multi-session reentrancy audit |
+| 12 | Host capability expansion |
+| 13 | SoftPC graphics presentation window and Alt+Enter transition |
+| 14 | Guest DOS/WOW16 artifact matrix |
+| 15 | Product release closure |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

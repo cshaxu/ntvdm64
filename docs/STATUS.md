@@ -4,8 +4,27 @@
 
 ## Active Packet
 
-**No active M/T/S packet.** M0 T316 has closed; the next candidate requires a
-fresh owner admission from [QUEUE.md](QUEUE.md).
+### M0 T317 S1 — DEM/COMMAND SoftPC vertical-slice boundary reconciliation
+
+**Active: M0 T317 S1.**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T317 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | The owner-directed queue execution admits the former queue-head DEM/COMMAND vertical-slice package after T316. |
+| Objective | Establish one complete source-shaped boundary map for the original DEM and COMMAND dispatcher/provider cohorts, the selected Base VDM local protocol, and original SoftPC CCPU40 machine forms. |
+| Non-goals | No trace-selected service patch, invented dispatcher/provider, kernel VDM/CSRSS reconstruction, CPU30/V86 selection, Bochs input, XMS/DPMI/Redirector/WOW/VDD/debugger implementation, or guest execution claim. |
+| Reference Baseline | T316 closure; `m0-t302-s1-base-vdm-protocol-boundary-ledger.tsv`; prior T305/T309 evidence as historical inputs only; selected x86 CCPU40 formal graph. |
+| Files And ABI Surface | Original `mvdm-host/dos/{dem,command}` cohorts; `opennt-host/base/win32/{client,server}` VDM evidence slices; `adapter-mvdm-host-out/{basesrv,softpc,monitor,win32}`; `session`; current Ninja manifests. |
+| Applicable Rules | docs/README.md; docs/rules/EXECUTION.md; docs/rules/{ARCHITECTURE,CODING,DOCUMENT}.md; docs/design/{GOAL,ARCHITECTURE,CODING}.md; CONTRIBUTING.md; source policy. |
+| Verification | Complete translation-unit/caller boundary ledger; compare current source selection with original source; inspect selected CCPU40 compile flags; documentation governance and `git diff --check` at P closure. |
+| Expected Markers | Every reached external form has one original owner and exactly one disposition: direct original source, named same-shaped adapter, explicit unavailable branch, or later owner package. |
+| Asset Needs | Existing selected OpenNT union and production source only; `src.old`, Bochs and retired CPU30/V86 code are forbidden inputs. |
+| Reporting Requirements | Record per original translation unit: dispatcher/provider role, Base VDM call, SoftPC/session/Win32 boundary, selection state and next cohort order; identify any existing divergence replaceable by original source. |
+| Stop Conditions | Pause before linking a partial provider table, adding a new BOP semantic, selecting an undeclared external package, or finding a boundary without a unique owner. |
+| Exit Criteria | A current SoftPC-only whole-cohort recovery plan names each required provider package, external interface and ordered S2 closure group; S2 is bounded without trace-derived leaf work; evidence is committed and pushed. |
+| Original Owner Request | Execute the ordered queue in single-person dual-role mode; prefer minimal original-source recovery and package-level rather than trace-led implementation. |
+| Similar-Issue Sweep | DEM directory/FCB/file/error cohorts; COMMAND bootstrap/environment/current-directory/exec/return cohorts; Base VDM request/capacity/re-entry; SoftPC guest lease/register/termination; existing app/session routes. |
 
 ### M0 T316 closure record
 
