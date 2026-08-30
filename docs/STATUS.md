@@ -36,6 +36,13 @@ initialization; declaration-only NT4 registry bindings preserve the entry's
 own control flow.  This is compile evidence only; CPU/SAS/firmware/reset and
 bounded lifecycle behavior remain S2 work.  See the [P1 record](etc/evidence/m0-t313-s2-p1-original-entry-binding-001.md).
 
+**T313 S2 P2:** the selected original SoftPC host-root archive now forms
+without competing UCRT `printf`/`fprintf` definitions.  The correction is a
+graph-wide CRT declaration mode that retains `fprt.c` as the sole original
+interposer; it does not replace source bodies or hide warnings.  The fresh
+external x86 candidate completed all 54 archive inputs.  CPU/SAS/firmware/reset
+behavior is still S2 work.  See the [P2 record](etc/evidence/m0-t313-s2-p2-original-host-root-link-closure-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |

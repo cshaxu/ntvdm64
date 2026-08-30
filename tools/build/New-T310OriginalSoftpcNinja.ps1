@@ -365,7 +365,7 @@ $cvidcFirstIncludeRoots = $cvidcFirstRootPaths | ForEach-Object { '/I "' + (Ninj
 # backend through C_VID for both the historical x86 and non-x86 CCPU paths.
 # Without that original configuration carrier cvidc's generated glue is
 # compiled out, leaving artificial same-package forced-link misses.
-$baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DANSI /DPROD ' +
+$baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DANSI /DPROD ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' +
     ''
 $baseFlags = $baseCommonFlags + ($includeRoots -join ' ') + ' ' + $gdpGeneratedInclude
@@ -555,14 +555,6 @@ $hostObjects = foreach ($name in $hostNames) {
         # declarations stay visible on both architectures.
         $ntexapiSubset = NinjaPath (Join-Path $root 'src/opennt-host/public/sdk/inc/ntexapi.h')
         $graph.Add('  cflags = ' + $baseFlags + ' /FI "' + $ntexapiSubset + '" /FI "' + $threadCompat + '"')
-    }
-    if ($name -eq 'fprt.c') {
-        # The original host diagnostic package intentionally owns printf,
-        # fprintf and selected stdio entrypoints.  Modern UCRT exposes those
-        # as inline definitions unless this documented per-unit switch is
-        # present, which turns a source-shaped interposition into a duplicate
-        # body error.  Keep the original source and its function names.
-        $graph.Add('  cflags = ' + $baseFlags + ' /D_NO_CRT_STDIO_INLINE')
     }
     $object
 }
