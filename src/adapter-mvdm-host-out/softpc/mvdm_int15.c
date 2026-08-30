@@ -1,6 +1,7 @@
 #include "mvdm_int15.h"
 
-#include "mvdm_sas.h"
+/* The original CCPU40 SAS owner supplies the IVT access forms. */
+#include "sas.h"
 
 static uint16_t sp_int15_handler_segment;
 static uint16_t sp_int15_handler_offset;

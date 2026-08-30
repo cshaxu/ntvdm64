@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3367 |
+| Documentation records | 3368 |
 | --- | --- |
-| Generated UTC | 2026-08-30T17:06:25Z |
+| Generated UTC | 2026-08-30T17:13:57Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 87e78b7ff8b31564274ec61809af853f19e5b13342fda0b34d6108a96f3078c8 |
+| STATUS.md | principal control document | c3f4b4aa4c267b743d3663b8f2bd21982b4742efe7fc253608a31831e764578f |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1083,6 +1083,7 @@ content-divergent entries.
 | etc/legacy_code/opennt-bop/dpmi/dpmi-startup-import-manifest.md | indexed supporting material | 086a861fb867e5ea48791540af4f76ced9fe83a5339fb61ba2685415ba790c9b |
 | etc/legacy_code/opennt-bop/superseded-nt-bop-wrappers/README.md | indexed supporting material | f625aa52362e04cf809f7d514a6c3038653306c61919766ef4d6bcedbccc4c15 |
 | etc/legacy_code/opennt-bop/t271-s2-replaced-dem-ingress/README.md | indexed supporting material | 70ad094e2f1117bcb99c09f32531454f9f90d93cc581e76ac2fee86495ef08a4 |
+| etc/legacy_code/retired-bochs/README.md | indexed supporting material | 5665f3a3b0419749636d87579bcbf753516ebafe955b66eb130dad45ffe9fb52 |
 | etc/legacy_code/tools/historical/t225-s7/t225-s7-full-module-manifest.json | indexed supporting material | c774420149d6f00a9ebdc7287bc8340bba99a292459575d485bd9599361dd947 |
 | etc/operations/bochs-intrusion-convergence-policy.md | indexed supporting material | 0a9e60b53d021ef67e543372fee6ec835244ab48724fee3b3b33f65b067783d5 |
 | etc/operations/git-baseline-scope-20260812.md | indexed supporting material | 0eb54e634a72921ee46b69e3b319f75a82059ec28187955b5db23416db1596ec |
@@ -1566,7 +1567,7 @@ content-divergent entries.
 | etc/operations/m0-t311-s2-s3-mvdm-host-support-reroot-closure-001.md | indexed supporting material | a77e4999639af51efb0e9f8a3d7e8efb5d5bf3fb5a667ec0d68d38db13ce1ec7 |
 | etc/operations/m0-t312-s1-live-bochs-dependency-audit-001.md | indexed supporting material | 265ef3c49cd1d9218d52fd06a99ecb7ffd47312267fdfb7d97e9d8e18191e82f |
 | etc/operations/m0-t312-s1-live-bochs-dependency-ledger.tsv | indexed supporting material | b4fd686ac6dc4c12a9c25d567043cb7c138e23a14f5322deb0480f483dc56a27 |
-| etc/operations/m0-t312-s2-original-softpc-binding-transfer-001.md | indexed supporting material | 90544b454d6b4bb126482c79d22e2c2f0b9ffef2a19b810bd823dad22fc4e1ad |
+| etc/operations/m0-t312-s2-original-softpc-binding-transfer-001.md | indexed supporting material | 167277313da231c5c114bc02acb682cce01c9f3b1b7ab0836687a1ea12d5bd9b |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |

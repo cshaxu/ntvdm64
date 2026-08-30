@@ -4,19 +4,25 @@
 
 ## Active Packet
 
-**Active: M0 T312 S2**
+**Active: M0 T312 S3**
 
-### M0 T312 S2 — retired Bochs machine-facing binding transfer
+### M0 T312 S3 — retired Bochs tree and fixture removal
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T312 S2; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | S1 completed the live dependency/owner ledger at `etc/operations/m0-t312-s1-live-bochs-dependency-ledger.tsv`. |
-| Objective | Transfer each live retired machine-facade dependency to its source-shaped SoftPC/CCPU40, SAS, DPMI32 or monitor owner. |
-| Non-goals | No retired-source deletion yet, CCPU30/MONITOR work, x64 work, or new emulator. |
+| Identifier Mode | M0 T312 S3; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | S2 closed the initial owner transfers and archived former recovery facades at `etc/operations/m0-t312-s2-original-softpc-binding-transfer-001.md`. |
+| Objective | Remove retired Bochs source, build, fixture, and current-authority inputs after the source-shaped SoftPC transfer. |
+| Non-goals | No CCPU30/MONITOR work, x64 work, or new emulator. |
 | Reference Baseline | [retired-Bochs removal proposal](etc/operations/proposal-retired-bochs-source-removal-001.md); selected Win32/x86 CCPU40 graph. |
 | Verification | Original owner declarations and call contracts, selected CCPU40 build, and targeted source scans. |
-| Exit Criteria | No production source includes or calls `adapter-bochs`; each transfer uses a named original SoftPC/CCPU40 owner or explicit source-proven unavailable contract. |
+| Exit Criteria | No production/build/runtime/acceptance input reaches a retired Bochs component; necessary historical material is evidence-only with provenance. |
+
+**T312 S2 closed:** selected original SoftPC CCPU40/SAS owners now replace the
+former live machine facades. Retired register, SAS, frame, and WOW recovery
+experiments moved to `docs/etc/legacy_code/retired-bochs/`; no `mvdm-host` or
+overlay source names or includes the retired machine route. See
+[`S2 binding-transfer record`](etc/operations/m0-t312-s2-original-softpc-binding-transfer-001.md).
 
 **T310 S29 P1:** the original two-file OEM/Unicode support package is selected
 directly, preserving PIF `ExpandEnvironmentStringsOem` and related host-file
