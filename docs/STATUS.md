@@ -4,25 +4,25 @@
 
 ## Active Packet
 
-**Active: M0 T310 S15**
+**Active: M0 T310 S16**
 
-### M0 T310 S15 — XMS.486 owner-package closure
+### M0 T310 S16 — BIOS / firmware bindings
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T310 S15; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | S14 `SPC-MEMORY-MAPPING-BINDINGS` closed with physical mapping/alias behavior; current recovery is MSVC x86 `/MT` only, with the original CCPU40 configuration as the sole selected SoftPC profile. S15 is now the only active sequential cluster. |
-| Objective | Re-read and close only `MVDM-XMS.486-OWNER-PACKAGE`: original XMS declarations, definitions, selected callers and prior repairs. |
-| Non-goals | No kernel VDM or MONITOR import, Bochs device/controller fallback, BOP semantic expansion, trace-selected repair, unrelated device enablement, or claim of complete DOS/WOW product execution. |
-| Reference Baseline | Closed S4 source-family workset; closed S5 CCPU/RAM/FPU execution; closed S6 V86/MONITOR removal; closed S7 physical mapping/lease ledger; exact `mvdm-host` and `mvdm-softpc-firmware` mirrors. |
-| Files And ABI Surface | Original XMS.486 sources, headers, selected callers and named adapters only at source-proven boundaries. |
+| Identifier Mode | M0 T310 S16; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | S15 closed its original XMS owner/package source boundary with a formal x86 CCPU40 archive and complete disposition ledger. S16 is now the only active sequential cluster. |
+| Objective | Re-read and close only `SPC-BIOS-FIRMWARE-BINDINGS`: original BIOS/ROM declarations, definitions, callers, firmware inputs and prior repairs required by the selected CCPU40 machine profile. |
+| Non-goals | No kernel VDM or MONITOR import, Bochs device/controller fallback, BOP semantic expansion, trace-selected repair, unrelated controller enablement, or claim of complete DOS/WOW product execution. |
+| Reference Baseline | Closed S4 source-family workset, S5 CCPU/RAM/FPU execution, S6 V86/MONITOR removal, S7 physical mapping/lease ledger and S15 XMS owner-package source closure; exact `mvdm-host` and `mvdm-softpc-firmware` mirrors. |
+| Files And ABI Surface | Original SoftPC BIOS/ROM/firmware sources and declarations, selected CCPU40 callers, app-owned firmware location binding and named adapters only at source-proven boundaries. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island, CPU-profile and source-recovery rules; approved T310 S8 plan and coverage ledger. |
-| Verification | Formal MSVC Win32/x86 `/MT` Ninja XMS archive; source/call review and focused XMS/A20/memory behavior checks for the selected CCPU40 configuration. x64 compatibility is deferred and not an S15 gate. |
-| Expected Markers | Original XMS provider order; guest numeric address containment; mapping-manager identity only at real host crossings; no raw monitor alias; no synthetic XMS success. |
-| Asset Needs | Exact CCPU, SAS and NTVDMx64 patch manifests; closed S4--S7 evidence; mapping manager only at an actual cross-component identity boundary; MSVC Build Tools and Ninja. |
-| Reporting Requirements | Per cluster: original roots/callers, recovery rung, table/initializer order, ABI/failure contract, any mapping-manager use, selected x86 CCPU40 result, retained unavailable disposition and no-Bochs/MONITOR proof. x64 compatibility is outside the active worklist and is not audited as an S15 deliverable. |
-| Stop Conditions | A CCPU member requires an unregistered original-source divergence; an adapter would replace available CCPU logic; a raw native pointer crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or the source requires a non-CCPU device capability owned by a later S. |
-| Exit Criteria | Every XMS.486 declaration, definition, selected caller and prior repair has exactly one direct, binding-only, adapter-backed or original-unavailable disposition; formal x86 evidence passes for the selected CCPU40 configuration; and focused observation does not select new work. T310 remains active for S15--S49 and closes only after its combined SoftPC profile verifies `create -> reset -> firmware/machine initialization -> bounded execution -> typed controlled stop -> teardown`. |
+| Verification | Formal MSVC Win32/x86 `/MT` Ninja BIOS/firmware archive; original source/call review; focused selected-profile behavior only after firmware-required machine bindings are present. x64 compatibility is outside the active worklist. |
+| Expected Markers | Original firmware provider order; no hard-coded firmware/media location; app-owned location binding; mapping-manager use only at real guest/host identity crossings; no raw MONITOR alias or synthetic BIOS success. |
+| Asset Needs | Exact SoftPC BIOS/ROM/firmware manifests, selected CCPU/SAS headers, closed S4--S7/S15 evidence, app location contract, MSVC Build Tools and Ninja. |
+| Reporting Requirements | Per cluster: original roots/callers, recovery rung, table/initializer order, ABI/failure contract, any mapping-manager use, selected x86 CCPU40 result, retained unavailable disposition and no-Bochs/MONITOR proof. |
+| Stop Conditions | A BIOS/firmware member requires an unregistered original-source divergence; an adapter would replace available original firmware logic; a raw native pointer crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or the source requires a controller capability owned by a later S. |
+| Exit Criteria | Every selected BIOS/firmware declaration, definition, caller and prior repair has exactly one direct, binding-only, adapter-backed or original-unavailable disposition; formal x86 evidence passes for the selected CCPU40 configuration; and a focused package audit does not select new BIOS/firmware owner work. Machine-lifecycle behavior requiring later controller packets is recorded as deferred integration validation for S49. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
 | Similar-Issue Sweep | XMS.486 declarations, definitions, selected callers and existing adapter/overlay repair; MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
 
@@ -61,6 +61,15 @@ unavailable disposition. `nt_msscs → XMSInit` and `nt_bop → XMSDispatch` are
 the original runtime entries; unsupported historical declarations remain
 unfabricated. The remaining gate is reachable SoftPC lifecycle behavior, not
 an unresolved XMS source edge. See the [S15 contract disposition](etc/evidence/m0-t310-s15-p4-xms-contract-disposition-001.md).
+
+**T310 S15 closed:** all 25 selected XMS declaration, definition, caller and
+repair rows have a single source-shaped disposition, and the formal Win32/x86
+CCPU40 original-owner graph completes 369 edges with no unresolved XMS,
+SubAlloc, A20 or session-lease edge. The original reachable callers require
+the subsequent firmware/system machine lifecycle; historical Bochs fixtures
+are not accepted as SoftPC runtime proof. This is XMS package/source closure
+with deferred integrated behavior verification at S49, not a claim that the
+guest has run XMS. See the [closure record](history/m0-t310-s15-xms-owner-package-closure-20260830.md).
 
 **T310 S13 closed:** the selected original CPU_40 SAS-memory owner retains
 its ordinary RAM vector, type map, scalar/string/move/fill algorithms and

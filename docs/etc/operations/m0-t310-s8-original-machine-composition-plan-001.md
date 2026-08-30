@@ -82,6 +82,18 @@ local workaround. The sequence is dependency order, not warning-count order.
     `create -> reset -> firmware/machine initialization -> bounded execution
     -> typed controlled stop -> teardown` verification.
 
+### Deferred integrated behavior
+
+An owner packet normally supplies focused behavior evidence for its recovered
+contract. Where the exact original caller is unreachable until a later packet
+in this fixed dependency sequence supplies firmware, a controller or the
+machine lifecycle, the earlier packet may close its source package only when
+it records: every declaration/definition/caller disposition, a selected x86
+CCPU40 formal build, the precise later owner and the fact that no substitute
+machine/fixture was accepted as runtime proof. The deferred behavior becomes a
+mandatory S49 integration condition; it is never silently reclassified as
+success or discarded.
+
 ## Selected-profile source-contract audit rule
 
 Each packet audits the complete callable contract selected by the original
