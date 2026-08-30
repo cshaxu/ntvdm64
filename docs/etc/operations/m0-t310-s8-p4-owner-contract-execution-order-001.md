@@ -29,42 +29,46 @@ locally clean warning from being mistaken for a complete callable contract.
 
 ## Ordered clusters
 
-1. **CCPU execution contract** — `SPC-CCPU-EXECUTOR-DISPATCH` (268 records).
+1. **S8 — CCPU execution, access-table and SAS-vector contract** —
+   `SPC-CCPU-EXECUTOR-DISPATCH` (268 records),
+   `SPC-CCPU-ACCESS-TABLE`, `SPC-CCPU-SAS-MONITOR-VECTOR`, and the retained
+   `SPC-CCPU-EXTENDED-BOP-DEFAULT`.
    This is the selected CPU/FPU instruction, host-IP and exception contract.
    Resolve native pointer deltas, callable declarations and genuine host-word
    crossings first; retain fixed Intel scalar conversions as visible
    non-width evidence.
-2. **Memory and core system controller contracts** —
-   `SPC-SYSTEM-CONTROLLER-CALLBACKS` (27),
-   `SPC-MEMORY-MAPPING-BINDINGS` (0 pending) and
-   `SPC-HOST-SYSTEM-INTERRUPT-BINDINGS` (0 pending).  These own reset,
-   timer/PIC/A20 and physical guest-memory boundaries.  Any actual guest or
-   host identity crossing uses the existing session mapping manager.
-3. **Firmware/startup contracts** — `SPC-BIOS-FIRMWARE-BINDINGS` (23).
+2. **S9 — Memory/SAS/A20/EMS/XMS contracts** —
+   `SPC-SAS-MEMORY-CONTRACT`, `SPC-MEMORY-MAPPING-BINDINGS` (0 pending) and
+   `MVDM-XMS.486-OWNER-PACKAGE`. Any actual guest or host identity crossing
+   uses the existing session mapping manager.
+3. **S10 — Firmware/startup contracts** — `SPC-BIOS-FIRMWARE-BINDINGS` (23).
    Keep immutable firmware/media inputs and original unavailable direction;
    do not replace controller algorithms with startup shims.
-4. **Storage contracts** — `SPC-STORAGE-CONTROLLER-CALLBACKS` (26) and
-   `SPC-HOST-STORAGE-BINDINGS` (7).  Review disk/floppy declarations,
-   controller tables and host media binding as one device family.
-5. **Input contracts** — `SPC-INPUT-CONTROLLER-CALLBACKS` (58) and
+4. **S11 — System controller contracts** —
+   `SPC-SYSTEM-CONTROLLER-CALLBACKS` (27) and
+   `SPC-HOST-SYSTEM-INTERRUPT-BINDINGS` (0 pending). These own reset,
+   timer/PIC/DMA/ICA and physical guest-memory delivery order.
+5. **S12 — Input contracts** — `SPC-INPUT-CONTROLLER-CALLBACKS` (58) and
    `SPC-HOST-INPUT-BINDINGS` (11).  Review keyboard/mouse callbacks with
    their host input shape; no guest pointers may become host pointers.
-6. **Video contracts** — `SPC-VIDEO-CONTROLLER-DISPATCH` (154) and
+6. **S13 — Storage and communications contracts** —
+   `SPC-STORAGE-CONTROLLER-CALLBACKS` (26), `SPC-HOST-STORAGE-BINDINGS` (7)
+   and `SPC-COMMS-CONTROLLER-CALLBACKS` (17). Review disk/floppy,
+   serial/parallel declarations, controller tables, media and endpoint
+   binding as one device package.
+7. **S14 — Video contracts** — `SPC-VIDEO-CONTROLLER-DISPATCH` (154) and
    `SPC-HOST-VIDEO-BINDINGS` (134).  Keep this after startup devices: no
    video mapping is enabled until generated and base/video callable contracts
    are jointly demonstrated on x86 and x64.
-7. **Communications contracts** — `SPC-COMMS-CONTROLLER-CALLBACKS` (17).
-   Recover serial/parallel contracts only after their selected host endpoint
-   direction is established.
-8. **Host-platform residuals** — `SPC-HOST-PLATFORM-BINDINGS` (18).
+8. **S15 — Host-platform residuals** — `SPC-HOST-PLATFORM-BINDINGS` (18).
    Separate public Win32 bindings, session controlled-stop mappings and
    explicit kernel/CSRSS/fullscreen hard boundaries; do not invent direct
    NT4 private imports.
-9. **MVDM service/owner residuals** — `MVDM-DOS-OWNER-PACKAGE` (68),
+9. **S15 — MVDM service/owner residuals** — `MVDM-DOS-OWNER-PACKAGE` (68),
    `MVDM-SIM32-OWNER-PACKAGE` (2) and `MVDM-XMS.486-OWNER-PACKAGE` (1).
    These are reviewed only where the selected SoftPC machine invokes them;
    BOP/provider completion remains with its owner package.
-10. **Other machine source and configuration** —
+10. **S15 — Other machine source and configuration** —
     `SPC-OTHER-MACHINE-SOURCE` (14) and
     `SPC-HOST-CONFIGURATION-BINDINGS` (2).  They are last because they do not
     establish the CPU-to-device startup path.

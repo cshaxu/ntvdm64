@@ -9,20 +9,44 @@ physical binding, then ends only after original creation, reset, firmware
 initialization, a bounded execution interval, typed stop and teardown work on
 both host architectures.
 
-## Ordered work packages
+## Ordered S owner packages
 
-1. **P1 — reset, BIOS/ROM/CMOS and startup-media intake.** Audit and directly
-   compose the complete original reset roots, selected immutable firmware
-   inputs, ROM/CMOS initialization and their host control edges. Record exact
-   media-present and media-missing results. Do not add a controller substitute.
-2. **P2 — memory/SAS/A20 and PIC/PIT/heartbeat.** Consume S7 physical binding;
-   recover original `nt_timer.c`, `timer.c`, `ica.c` and their session/public
-   Win32 boundaries while retaining original tick, IRQ and cancellation order.
-3. **P3 — input and DMA.** Recover original keyboard/mouse controller/input
-   initialization and DMA port/range behavior with fixed-width copied input or
-   checked numeric ranges only.
-4. **P4 — whole-tree native-width ABI baseline, display/port and startup
-   storage.** Before selecting any individual generated carrier or display
+Each S is a bounded source-recovery package. Its listed clusters are atomic:
+original definition, table/initializer, callers, prior repairs, x86/x64
+diagnostics and local behavior are reviewed together. A later S may consume a
+completed public contract but may not reopen it with a local workaround.
+
+1. **S8 — CCPU executor, access table, SAS/monitor vector and extended-BOP
+   default.** `SPC-CCPU-EXECUTOR-DISPATCH`, `SPC-CCPU-ACCESS-TABLE`,
+   `SPC-CCPU-SAS-MONITOR-VECTOR` and `SPC-CCPU-EXTENDED-BOP-DEFAULT`.
+2. **S9 — memory, SAS, A20, EMS and XMS.** `SPC-SAS-MEMORY-CONTRACT`,
+   `SPC-MEMORY-MAPPING-BINDINGS`, `MVDM-XMS.486-OWNER-PACKAGE`, plus reached
+   XMS/EMS control forms. The mapping manager remains only at a true
+   host-identity boundary.
+3. **S10 — BIOS, firmware, reset and startup media.**
+   `SPC-BIOS-FIRMWARE-BINDINGS` and selected `base/bios`, ROM, CMOS, reset and
+   immutable-media forms.
+4. **S11 — PIC, PIT, DMA, timer and system controller.**
+   `SPC-SYSTEM-CONTROLLER-CALLBACKS`,
+   `SPC-HOST-SYSTEM-INTERRUPT-BINDINGS`, and reached timer/ICA/DMA chains.
+5. **S12 — keyboard, mouse and input binding.**
+   `SPC-INPUT-CONTROLLER-CALLBACKS` and `SPC-HOST-INPUT-BINDINGS`.
+6. **S13 — storage, floppy, disk, serial and parallel.**
+   `SPC-STORAGE-CONTROLLER-CALLBACKS`, `SPC-HOST-STORAGE-BINDINGS` and
+   `SPC-COMMS-CONTROLLER-CALLBACKS`.
+7. **S14 — C-video, base-video and host-video.**
+   `SPC-CVIDC-GENERATED-DISPATCH`, `SPC-VIDEO-CONTROLLER-DISPATCH` and
+   `SPC-HOST-VIDEO-BINDINGS` are one display contract.
+8. **S15 — service residuals, cross-family reread and profile verification.**
+   Reached `MVDM-DOS-OWNER-PACKAGE`, `MVDM-SIM32-OWNER-PACKAGE`,
+   `MVDM-SUPPORT-LIBRARY`, `SPC-HOST-PLATFORM-BINDINGS`,
+   `SPC-HOST-CONFIGURATION-BINDINGS`, `SPC-HOST-VDD-BINDING`, all
+   zero-diagnostic/unselected clusters, then final all-42-cluster reread and
+   full x86/x64 machine-profile verification.
+
+## Whole-tree ABI audit rule
+
+Before selecting any individual generated carrier or display repair, inventory every function-pointer declaration, table initializer,
    repair, inventory every function-pointer declaration, table initializer,
    callback cast, pointer/integer conversion and compiler ABI/type diagnostic
    in the complete `mvdm-host` and `mvdm-support` original-source trees.
@@ -72,39 +96,21 @@ both host architectures.
    after its entire contract cluster has that evidence.  Non-width source-form
    records remain compiler-visible and leave the x86/x64 worklist by a
    documented cluster disposition, never by suppression.
-5. **P5 — serial/parallel and full-profile verification.** Restore or record
-   source-shaped endpoint disposition, then execute the complete original
-   profile matrix on x86 and x64.
+## T310 S8 closure boundary
 
-## Admitted T310 completion sequence after S8
+S8 closes only when its four CCPU clusters have source-shaped dispositions and
+focused x86/x64 evidence. S9--S15 then execute in order. T310 closes only
+after S15 completes the all-42-cluster reread and the selected original SoftPC
+`create -> reset -> firmware/machine initialization -> bounded execution ->
+typed controlled stop -> teardown` profile on both host architectures. Neither
+S8 nor T310 removes the remaining Bochs production route or claims
+whole-program SoftPC capability/mirror purity.
 
-S8 is the original-machine composition package only.  It is not permission to
-close T310 while an alternate machine implementation remains in a production
-path, nor while the selected SoftPC mirror has not received a complete
-two-architecture purity review.
-
-1. **S9 — Bochs production-closure removal.** After S8 records its original
-   SoftPC machine dispositions, remove every current production selection,
-   fallback, include, link input, build-manifest input, fixture dependency and
-   runtime route for `bochs-core`, `adapter-bochs` and any Bochs overlay.
-   Existing Bochs material may remain only as indexed historical/comparison
-   evidence outside the current production source/build/runtime closure.  The
-   resulting app, session and adapter dependency graph must select SoftPC as
-   the sole machine.  This S does not modify SoftPC controller algorithms.
-2. **S10 — complete SoftPC capability and mirror-purity acceptance.** Audit
-   every selected `mvdm-host/softpc.new` machine package and its reached host
-   lifecycle edge: CCPU/CPU, FPU, SAS/RAM, EMS/UMB, BIOS/ROM/CMOS, PIC,
-   PIT/timer, DMA, keyboard, mouse, video, disk/floppy and serial/parallel.
-   Each has exactly one direct, binding-only, adapter-backed or
-   original-unavailable disposition with x86/x64 source and execution
-   evidence.  Re-read all mirror diffs and overlays: reuse an available
-   original SoftPC package/interface before retaining a project-authored shim;
-   retain only registered, minimal `DIVERGENCE:` hooks and private overlays.
-   The completed production graph has zero `bochs-core`, `adapter-bochs` and
-   Bochs-overlay references.  x86 and x64 compile the same SoftPC source and
-   initialization/device path; a target-local exception is allowed only for a
-   proven unavoidable ABI binding, is registered, and must not select a
-   different controller or guest semantic path.
+Those formerly numbered S9 and S10 scopes are intentionally separate queued T
+packages after the active packet: first production-route removal, then the
+`i386` semantic audit, then complete SoftPC capability and mirror-purity
+acceptance. Their independent proposals and ordering are authoritative in the
+package-recovery program and `QUEUE.md`.
 
 ## Recovery constraints
 
@@ -128,12 +134,9 @@ missing media, but it may not claim a runnable device profile until P2--P5.
 
 ## T310 final closure boundary
 
-T310 closes only after S8, S9 and S10 all close.  Formal MSVC `/MT` x86 and
-x64 Ninja graphs must each prove the same selected SoftPC
-`create -> reset -> firmware/machine initialization -> bounded execution ->
-typed controlled stop -> teardown` path.  The final evidence must prove that
-the complete production source/build/runtime closure contains no Bochs,
-MONITOR, kernel-VDM or `src.old` route; that all selected SoftPC machine
-families have source-shaped positive/negative evidence; and that every
-remaining mirror diff/overlay is registered, minimal and cannot be replaced
-by an available original SoftPC source/interface.
+T310 closes when S8 closes. Formal MSVC `/MT` x86 and x64 Ninja graphs must
+each prove the same selected SoftPC `create -> reset -> firmware/machine
+initialization -> bounded execution -> typed controlled stop -> teardown` path
+for the S8-selected machine composition. Bochs production-route removal and
+full SoftPC capability/mirror-purity acceptance are explicit subsequent T
+packages, not implicit T310 exit conditions.

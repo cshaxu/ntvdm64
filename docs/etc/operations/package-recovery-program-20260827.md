@@ -117,7 +117,25 @@ the removed roots.
 **Exit:** formal affected x86/x64 graphs and documentation governance pass.
 This package changes no MVDM behavior, source-shaped adapter or BOP route.
 
-## P02B — MVDM-host `i386` conditional semantic audit and capability recovery plan
+## P02B — Bochs production-closure removal
+
+**Predecessor:** P02A and the closed active original-SoftPC composition
+packet. **Purpose:** remove every production selection, fallback, include,
+link input, build-manifest input, fixture dependency and runtime route for
+`bochs-core`, `adapter-bochs` and any Bochs overlay. Existing Bochs material
+may remain only as indexed historical/comparison evidence outside the product
+source/build/runtime closure. This package does not modify a SoftPC controller
+algorithm or add a replacement machine.
+
+**Delivery:** an app, session and adapter dependency graph that selects SoftPC
+as the sole production machine; updated formal build inputs and tests; and a
+negative source/build/runtime scan for all Bochs production routes.
+
+**Exit:** x86/x64 formal graphs and documentation governance pass; all retained
+Bochs material is explicitly historical/comparison-only; no production file,
+build graph, fixture or runtime path selects it.
+
+## P02C — MVDM-host `i386` conditional semantic audit and capability recovery plan
 
 **Predecessor:** the active original-SoftPC packet. **Purpose:** prevent
 historical `#if defined(i386)`, `#ifdef i386`, and `#ifndef i386` branches
@@ -166,9 +184,28 @@ solely by the current host being x86 or x64. The resulting plan preserves the
 same mapping-manager rule on both architectures and introduces no source or
 runtime behavior change.
 
+## P02D — Complete SoftPC capability and mirror-purity acceptance
+
+**Predecessor:** P02B and P02C. **Purpose:** perform the complete final audit
+of every selected `mvdm-host/softpc.new` machine package and reached lifecycle
+edge: CCPU/CPU, FPU, SAS/RAM, EMS/UMB, BIOS/ROM/CMOS, PIC, PIT/timer, DMA,
+keyboard, mouse, video, disk/floppy and serial/parallel.
+
+**Delivery:** one direct, binding-only, adapter-backed or
+original-unavailable disposition for each selected machine family, with
+x86/x64 source and execution evidence. Re-read every mirror diff and overlay;
+replace any project-authored shim with an available original package/interface
+where possible, retaining only registered minimal `DIVERGENCE:` hooks and
+private overlays.
+
+**Exit:** x86 and x64 compile the same SoftPC source and initialization/device
+path; all selected families have source-shaped positive/negative evidence; the
+production graph contains no Bochs, MONITOR, kernel-VDM or `src.old` route;
+and each retained diff/overlay is minimal, registered and proven necessary.
+
 ## P03 — Base VDM source-shaped broker recovery
 
-**Predecessor:** P02, P02A and P02B. The completed local profile is evidence for the broader
+**Predecessor:** P02, P02A, P02B, P02C and P02D. The completed local profile is evidence for the broader
 P02 decision; the recovered package retains the local source-shaped Base VDM
 protocol rather than importing the CSRSS-bound BaseClient/BaseSrv product
 shell.
