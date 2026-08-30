@@ -121,6 +121,13 @@ product substitute.  The remaining positive endpoint is the original
 `nt_timer -> time_tick -> TimerGenerateMultipleInterrupts -> PIC` chain. See
 the [P4 record](etc/evidence/m0-t313-s3-p4-original-pic-irq-witness-001.md).
 
+**T313 S3 P5:** fresh external formal graph `r2` completes all 403 selected
+x86 CCPU40 edges and contains both original timer translation units:
+`nt_timer.c` and `base/system/timer.c`.  The original heartbeat-to-PIC call
+order is source/build closed; full PIT/BDA/EOI period behavior remains a
+separate cohesive original-device endpoint and is not inferred from the
+archive. See the [P5 record](etc/evidence/m0-t313-s3-p5-original-timer-package-formal-closure-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |
