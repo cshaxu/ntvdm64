@@ -19,9 +19,12 @@ session binding belong to `adapter-mvdm-host-out/basesrv`.
 ## M0 T310 S3 selected backend composition
 
 `machine_shell` composes only a session which made the selected SoftPC choice
-while inactive. The app invokes `host_cpu_init`/`host_cpu_reset`; original
-SoftPC configuration and execution retain ownership of memory setup and CPU
-execution. There is no alternate machine fallback.
+while inactive. CCPU40's `host_cpu_init` is an original empty compatibility
+hook, so app does not mistake it for product initialization. `machine_shell`
+enters the exact original `obj.vdm/ntvdm.c` body through the registered
+same-shaped SoftPC binding; that body retains timer, environment, NLS,
+configuration, DOS-emulation and CPU-start ordering. There is no alternate
+machine fallback.
 
 ## M0 T310 S8 installed package layout
 

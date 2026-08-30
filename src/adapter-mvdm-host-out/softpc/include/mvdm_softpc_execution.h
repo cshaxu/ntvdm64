@@ -13,4 +13,10 @@
  * does not reinterpret nested c_cpu_unsimulate() returns as session stops. */
 int mvdm_softpc_execution_run_until_return(session *owner);
 
+/* Top-level composition entry.  The original `obj.vdm/ntvdm.c` body is
+ * compiled with only its C entry symbol renamed, then retains its own
+ * TimerInit -> CpuEnvInit -> nls_init -> host_main order. */
+int mvdm_softpc_execution_run_original_entry(session *owner, int argc,
+    char **argv, int *result_out);
+
 #endif

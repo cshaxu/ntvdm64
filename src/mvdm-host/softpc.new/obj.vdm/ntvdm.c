@@ -73,7 +73,11 @@ _CRTAPI1 main(int argc, CHAR ** argv)
 // DbgBreakPoint here, instead of NTDLL.
 //
 
-VOID
+/* DIVERGENCE(MVDM-HOST-DIV-144): the selected public NTDLL declaration
+ * supplies `DbgBreakPoint` as NTAPI.  Keep this original local override and
+ * all its debugger/no-debugger branches, but spell the same public calling
+ * convention so the x86 declaration and definition agree. */
+VOID NTAPI
 DbgBreakPoint(
     VOID
     )

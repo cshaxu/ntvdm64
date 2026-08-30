@@ -1,12 +1,7 @@
 #include "app/machine_shell.h"
+#include "mvdm_softpc_execution.h"
 
 #include <string.h>
-
-/* These are the selected original SoftPC CCPU40 lifecycle names from
- * softpc.new/host/src/nt_cpu.c.  App owns only session composition; it does
- * not substitute a second machine lifecycle. */
-extern void host_cpu_init(void);
-extern void host_cpu_reset(void);
 
 void app_machine_shell_initialize(app_machine_shell *shell)
 {
@@ -54,22 +49,32 @@ enum app_machine_shell_status app_machine_shell_open(app_machine_shell *shell,
     if (session_machine_backend(owner) != SESSION_MACHINE_BACKEND_SOFTPC)
         return APP_MACHINE_SHELL_REJECTED_STATE;
 
-    /* nt_cpu.c owns CPU initialization.  Machine-memory configuration and
-     * execution remain in the original SoftPC config/start sequence; the
-     * app shell deliberately neither reimplements them nor selects another
-     * executor. */
+    /* CCPU40's original host_cpu_init() is intentionally empty.  The shell
+     * therefore only arms the session; app_machine_shell_run() enters the
+     * original ntvdm.c -> host_main lifecycle rather than pretending this is
+     * CPU initialization. */
     (void)ips;
     (void)machine_memory_bytes;
-    host_cpu_init();
 
     shell->owner = owner;
     shell->active = 1u;
     if (!session_register_teardown(owner, app_machine_shell_teardown, shell)) {
-        host_cpu_reset();
         shell->owner = NULL;
         shell->active = 0u;
         return APP_MACHINE_SHELL_MACHINE_FAILURE;
     }
+    return APP_MACHINE_SHELL_OK;
+}
+
+enum app_machine_shell_status app_machine_shell_run(app_machine_shell *shell,
+    int argc, char **argv, int *result_out)
+{
+    if (!app_machine_shell_valid(shell) || shell->active == 0u ||
+        shell->owner == NULL || result_out == NULL)
+        return APP_MACHINE_SHELL_REJECTED_INPUT;
+    if (!mvdm_softpc_execution_run_original_entry(shell->owner, argc, argv,
+            result_out))
+        return APP_MACHINE_SHELL_MACHINE_FAILURE;
     return APP_MACHINE_SHELL_OK;
 }
 
@@ -79,7 +84,6 @@ enum app_machine_shell_status app_machine_shell_close(app_machine_shell *shell)
         return APP_MACHINE_SHELL_REJECTED_INPUT;
     if (shell->active == 0u)
         return APP_MACHINE_SHELL_REJECTED_STATE;
-    host_cpu_reset();
     shell->owner = NULL;
     shell->active = 0u;
     return APP_MACHINE_SHELL_OK;

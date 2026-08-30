@@ -29,6 +29,36 @@
  * the historical RTL helpers implemented by this adapter. */
 #include <ntrtl.h>
 
+/* DIVERGENCE(ADAPTER-WIN32-035): original `obj.vdm/ntvdm.c` enumerates the
+ * NT4 CpuEnv registry key through KEY_VALUE_FULL_INFORMATION.  Modern public
+ * user-mode headers expose the query syscall but omit this historical buffer
+ * layout.  Keep the exact documented native record shape as a declaration
+ * carrier; the original source retains allocation, conversion and failure
+ * order, and no guest value crosses this boundary. */
+#ifndef OPENNT_KEY_VALUE_FULL_INFORMATION_DEFINED
+#define OPENNT_KEY_VALUE_FULL_INFORMATION_DEFINED
+typedef struct _KEY_VALUE_FULL_INFORMATION {
+    ULONG TitleIndex;
+    ULONG Type;
+    ULONG DataOffset;
+    ULONG DataLength;
+    ULONG NameLength;
+    WCHAR Name[1];
+} KEY_VALUE_FULL_INFORMATION, *PKEY_VALUE_FULL_INFORMATION;
+#endif
+#ifndef KeyValueFullInformation
+#define KeyValueFullInformation 2u
+#endif
+/* The public SDK omits these registry syscall declarations even though the
+ * selected original process-entry flow needs only its ordinary open/enumerate
+ * failure direction.  Retain their NT4 call shapes; no registry policy is
+ * created here. */
+NTSTATUS NTAPI NtOpenKey(PHANDLE KeyHandle, ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes);
+NTSTATUS NTAPI NtEnumerateValueKey(HANDLE KeyHandle, ULONG Index,
+    ULONG KeyValueInformationClass, PVOID KeyValueInformation,
+    ULONG Length, PULONG ResultLength);
+
 /* DIVERGENCE: The selected historical netlibnt.h declaration carrier uses
  * NT_PRODUCT_TYPE. The modern SDK's winnt.h exposes its own foundational
  * definitions but not this retired enum, while including ntdef.h after

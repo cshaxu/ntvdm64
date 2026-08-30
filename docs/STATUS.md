@@ -29,6 +29,13 @@ with no live retired route in `mvdm-host` or its overlay.  Every non-original
 form reached later now has a mandatory remove/replace/retain decision rather
 than generic cleanup debt.  See the [closure](etc/evidence/m0-t313-s1-softpc-capability-purity-closure-001.md).
 
+**T313 S2 P1:** the formal x86 CCPU40 graph now selects the original
+`obj.vdm/ntvdm.c` body as the source-shaped process lifecycle.  App no longer
+mistakes the original empty `host_cpu_init()` compatibility hook for machine
+initialization; declaration-only NT4 registry bindings preserve the entry's
+own control flow.  This is compile evidence only; CPU/SAS/firmware/reset and
+bounded lifecycle behavior remain S2 work.  See the [P1 record](etc/evidence/m0-t313-s2-p1-original-entry-binding-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |

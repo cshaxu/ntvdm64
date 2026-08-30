@@ -37,6 +37,8 @@ int app_machine_shell_valid(const app_machine_shell *shell);
 int app_machine_shell_select_backend(session *owner, uint32_t requested_backend);
 enum app_machine_shell_status app_machine_shell_open(app_machine_shell *shell,
     session *owner, uint32_t ips, uint64_t machine_memory_bytes);
+enum app_machine_shell_status app_machine_shell_run(app_machine_shell *shell,
+    int argc, char **argv, int *result_out);
 enum app_machine_shell_status app_machine_shell_close(app_machine_shell *shell);
 int app_machine_shell_active(const app_machine_shell *shell);
 
