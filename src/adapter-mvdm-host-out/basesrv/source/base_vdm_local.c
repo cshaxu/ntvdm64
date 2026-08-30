@@ -6,6 +6,24 @@
 
 static __declspec(thread) base_vdm_local *base_vdm_current;
 
+static int base_vdm_local_thread_bind(void *context)
+{
+    base_vdm_local *record = (base_vdm_local *)context;
+    session *owner = session_thread_current();
+    if (record == NULL || !base_vdm_local_valid(record) ||
+        record->owner != owner) return 0;
+    if (base_vdm_current == record) return 1;
+    if (base_vdm_current != NULL) return 0;
+    base_vdm_current = record;
+    return 1;
+}
+
+static void base_vdm_local_thread_unbind(void *context)
+{
+    base_vdm_local *record = (base_vdm_local *)context;
+    if (base_vdm_current == record) base_vdm_current = NULL;
+}
+
 static int valid_bytes(const uint8_t *bytes, uint32_t count, uint32_t maximum)
 {
     return count <= maximum && (count == 0u || bytes != NULL);
@@ -172,6 +190,9 @@ static void teardown(void *context)
 {
     base_vdm_local *record = (base_vdm_local *)context;
     if (record == NULL) return;
+    if (record->owner != NULL) (void)session_unregister_thread_hook(
+        record->owner, base_vdm_local_thread_bind,
+        base_vdm_local_thread_unbind, record);
     if (base_vdm_current == record) base_vdm_current = NULL;
     if (record->lock_initialized != 0u) EnterCriticalSection(&record->lock);
     if (record->current_directories != NULL) {
@@ -197,9 +218,16 @@ int base_vdm_local_bind(base_vdm_local *record, session *owner)
 {
     if (!base_vdm_local_valid(record) || record->owner != NULL || owner == NULL ||
         !session_valid(owner) || owner->state != SESSION_STATE_ACTIVE || base_vdm_current != NULL) return 0;
-    base_vdm_current = record;
-    if (!session_register_teardown(owner, teardown, record)) { base_vdm_current = NULL; return 0; }
     record->owner = owner;
+    if (!session_register_thread_hook(owner, base_vdm_local_thread_bind,
+            base_vdm_local_thread_unbind, record) ||
+        !session_register_teardown(owner, teardown, record)) {
+        (void)session_unregister_thread_hook(owner, base_vdm_local_thread_bind,
+            base_vdm_local_thread_unbind, record);
+        record->owner = NULL;
+        return 0;
+    }
+    base_vdm_current = record;
     return 1;
 }
 

@@ -75,6 +75,24 @@ M0 T310 S8 disposition register:
   loads guest bytes nor interprets any OpenNT service. The app chooses the
   executable-relative roots; source-shaped adapters consume them synchronously.
 
+M0 T317 S3 disposition register:
+
+- `session.c` and `session.h`: `small neutral extension`. An active session
+  may register a bounded sequence of owner-private thread bind/unbind hooks.
+  Session invokes those hooks only while establishing or releasing its
+  existing TLS binding and rolls back an unsuccessful bind in reverse order.
+  The facility has no BaseSrv, COMMAND, SoftPC or worker policy: each original
+  owner registers and validates its own thread-local record.
+
+M0 T317 S3 disposition register:
+
+- `session.c` and `session.h`: `small neutral extension`. An active session
+  may register a bounded sequence of owner-private thread bind/unbind hooks.
+  Session invokes those hooks only while establishing or releasing its
+  existing TLS binding and rolls back an unsuccessful bind in reverse order.
+  The facility has no BaseSrv, COMMAND, SoftPC or worker policy: each original
+  owner registers and validates its own thread-local record.
+
 M0 T310 S27 disposition register:
 
 - `session.c` and `session.h`: `small neutral extension`. An active session

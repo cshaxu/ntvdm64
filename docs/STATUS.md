@@ -26,6 +26,13 @@ streams only to the child.  The external x86 child-stream and original
 redirection/mapping fixtures pass; see the
 [P1 evidence](etc/evidence/m0-t317-s3-p1-command-child-stream-boundary-001.md).
 
+**T317 S3 P2:** the original `cmdCreateProcess` re-entry calls can now enter
+the bound Base VDM record from its cdecl child worker without a raw record
+pointer or COMMAND-private dispatcher. The neutral session owns only bounded
+thread-hook sequencing; BaseSrv owns its TLS record. The external Base VDM
+fixture and fresh formal x86 CPU40 libraries pass; see the
+[P2 evidence](etc/evidence/m0-t317-s3-p2-command-worker-base-vdm-context-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |

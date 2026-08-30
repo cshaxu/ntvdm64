@@ -8,8 +8,9 @@
 #include "guest_memory_lease.h"
 
 #define SESSION_MAGIC UINT32_C(0x53455353)
-#define SESSION_ABI_VERSION UINT32_C(1)
+#define SESSION_ABI_VERSION UINT32_C(2)
 #define SESSION_MAX_TEARDOWNS 8u
+#define SESSION_MAX_THREAD_HOOKS 8u
 #define SESSION_MECHANICAL_STATUS_NONE UINT32_MAX
 #define SESSION_MECHANICAL_STATUS_BACKEND_UNAVAILABLE UINT32_C(0xfffffffe)
 #define SESSION_FIRMWARE_ROOT_BYTES 1024u
@@ -54,11 +55,19 @@ typedef int (*session_video_event_fn)(void *context,
     const session_video_event *event);
 
 typedef void (*session_teardown_fn)(void *context);
+typedef int (*session_thread_bind_fn)(void *context);
+typedef void (*session_thread_unbind_fn)(void *context);
 
 typedef struct session_teardown {
     session_teardown_fn function;
     void *context;
 } session_teardown;
+
+typedef struct session_thread_hook {
+    session_thread_bind_fn bind;
+    session_thread_unbind_fn unbind;
+    void *context;
+} session_thread_hook;
 
 typedef struct session {
     uint32_t magic;
@@ -74,10 +83,12 @@ typedef struct session {
     uint32_t mechanical_resume_status;
     uint32_t video_event_active;
     uint32_t teardown_count;
+    uint32_t thread_hook_count;
     uint32_t termination_armed;
     volatile long binding_count;
     jmp_buf termination_escape;
     session_teardown teardowns[SESSION_MAX_TEARDOWNS];
+    session_thread_hook thread_hooks[SESSION_MAX_THREAD_HOOKS];
     mapping_manager guest_memory_mappings;
     mapping_manager host_resource_mappings;
     mapping_manager completion_callback_mappings;
@@ -100,6 +111,10 @@ int session_select_machine_backend(session *instance, uint32_t backend);
 uint32_t session_machine_backend(const session *instance);
 int session_register_teardown(session *instance, session_teardown_fn function,
     void *context);
+int session_register_thread_hook(session *instance, session_thread_bind_fn bind,
+    session_thread_unbind_fn unbind, void *context);
+int session_unregister_thread_hook(session *instance, session_thread_bind_fn bind,
+    session_thread_unbind_fn unbind, void *context);
 int session_request_cancellation(session *instance, uint32_t reason);
 void session_complete(session *instance, uint32_t completion_code);
 int session_set_mechanical_resume_budget(session *instance, uint64_t budget);

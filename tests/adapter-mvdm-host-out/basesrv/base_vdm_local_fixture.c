@@ -3,6 +3,7 @@
 
 #include "base_vdm_local.h"
 #include "session/session.h"
+#include "thread_start_compat.h"
 
 static void reset_info(VDMINFO *information)
 {
@@ -15,7 +16,10 @@ typedef struct publish_context {
     uint32_t observed_pending;
 } publish_context;
 
-static DWORD WINAPI publish_after_wait(LPVOID parameter)
+/* thread_start_compat deliberately preserves the original SoftPC cdecl
+ * CreateThread callback contract on x86.  This fixture producer enters that
+ * same boundary, so it must not use a WINAPI callback. */
+static DWORD __cdecl publish_after_wait(LPVOID parameter)
 {
     publish_context *context = (publish_context *)parameter;
     unsigned int attempt;
@@ -28,6 +32,21 @@ static DWORD WINAPI publish_after_wait(LPVOID parameter)
     }
     if (!base_vdm_local_publish(context->record, context->command)) return 1u;
     return context->observed_pending != 0u ? 0u : 2u;
+}
+
+static volatile LONG worker_reentry_result;
+
+static VOID __cdecl worker_reentry(void)
+{
+    VDMINFO information;
+    reset_info(&information);
+    information.VDMState = INCREMENT_REENTER_COUNT;
+    if (!GetNextVDMCommand(&information)) {
+        worker_reentry_result = 1;
+        return;
+    }
+    information.VDMState = DECREMENT_REENTER_COUNT;
+    worker_reentry_result = GetNextVDMCommand(&information) ? 0 : 2;
 }
 
 int main(void)
@@ -48,6 +67,7 @@ int main(void)
     CHAR directory_copy[sizeof(directories)];
     publish_context producer;
     HANDLE producer_thread;
+    HANDLE reentry_thread;
     DWORD producer_result = UINT32_MAX;
 
     reset_info(&information);
@@ -74,6 +94,13 @@ int main(void)
     if (!base_vdm_local_publish(&source, &payload) ||
         !session_activate(&instance) || !base_vdm_local_bind(&source, &instance) ||
         !session_thread_bind(&instance)) return 2;
+    worker_reentry_result = 3;
+    reentry_thread = opennt_create_void_cdecl_thread(NULL, 0u,
+        worker_reentry, NULL, 0u, NULL);
+    if (reentry_thread == NULL ||
+        WaitForSingleObject(reentry_thread, 5000u) != WAIT_OBJECT_0 ||
+        worker_reentry_result != 0 || source.reentry_count != 0u) return 24;
+    CloseHandle(reentry_thread);
     if (!GetNextVDMCommand(NULL) || GetNextVDMCommand(NULL)) return 14;
 
     reset_info(&information);
@@ -141,19 +168,31 @@ int main(void)
         CloseHandle(producer_thread);
         return 22;
     }
-    if (information.VDMState != 0u || information.iTask != payload.task ||
-        source.pending_request != 0u || producer.observed_pending == 0u ||
-        memcmp(command_buffer, command, sizeof(command)) != 0 ||
-        WaitForSingleObject(producer_thread, INFINITE) != WAIT_OBJECT_0 ||
-        !GetExitCodeThread(producer_thread, &producer_result) ||
-        producer_result != 0u) {
-        fprintf(stderr, "pending Base VDM result mismatch: state=%u task=%lu pending=%lu observed=%lu producer=%lu\n",
-            (unsigned)information.VDMState, (unsigned long)information.iTask,
-            (unsigned long)source.pending_request,
-            (unsigned long)producer.observed_pending,
-            (unsigned long)producer_result);
+    /* Join before inspecting producer-owned state.  The original client-side
+     * retry only observes the completed server signal; it does not race the
+     * publisher's bookkeeping. */
+    if (WaitForSingleObject(producer_thread, INFINITE) != WAIT_OBJECT_0 ||
+        !GetExitCodeThread(producer_thread, &producer_result)) {
+        fputs("pending Base VDM producer did not terminate\n", stderr);
         CloseHandle(producer_thread);
         return 23;
+    }
+    EnterCriticalSection(&source.lock);
+    {
+        uint32_t pending_request = source.pending_request;
+        uint32_t observed_pending = producer.observed_pending;
+        LeaveCriticalSection(&source.lock);
+        int command_matches = memcmp(command_buffer, command, sizeof(command)) == 0;
+        if (information.VDMState != 0u || information.iTask != payload.task ||
+            pending_request != 0u || observed_pending == 0u ||
+            !command_matches || producer_result != 0u) {
+            fprintf(stderr, "pending Base VDM result mismatch: state=%u task=%lu pending=%lu observed=%lu command=%d producer=%lu\n",
+                (unsigned)information.VDMState, (unsigned long)information.iTask,
+                (unsigned long)pending_request, (unsigned long)observed_pending,
+                command_matches, (unsigned long)producer_result);
+            CloseHandle(producer_thread);
+            return 23;
+        }
     }
     CloseHandle(producer_thread);
 

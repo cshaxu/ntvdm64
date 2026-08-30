@@ -39,6 +39,7 @@ int session_valid(const session *instance)
         instance->identity != 0u && instance->state <= SESSION_STATE_COMPLETED &&
         instance->machine_backend <= SESSION_MACHINE_BACKEND_SOFTPC &&
         instance->teardown_count <= SESSION_MAX_TEARDOWNS &&
+        instance->thread_hook_count <= SESSION_MAX_THREAD_HOOKS &&
         instance->termination_armed <= 1u &&
         session_binding_count(instance) <= INT32_MAX &&
         mapping_manager_valid(&instance->guest_memory_mappings,
@@ -89,6 +90,45 @@ int session_register_teardown(session *instance, session_teardown_fn function,
     instance->teardowns[instance->teardown_count].context = context;
     ++instance->teardown_count;
     return 1;
+}
+
+int session_register_thread_hook(session *instance, session_thread_bind_fn bind,
+    session_thread_unbind_fn unbind, void *context)
+{
+    uint32_t index;
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+        bind == NULL || unbind == NULL) return 0;
+    for (index = 0u; index < instance->thread_hook_count; ++index) {
+        session_thread_hook *hook = &instance->thread_hooks[index];
+        if (hook->bind == bind && hook->unbind == unbind &&
+            hook->context == context) return 1;
+    }
+    if (instance->thread_hook_count == SESSION_MAX_THREAD_HOOKS) return 0;
+    instance->thread_hooks[instance->thread_hook_count].bind = bind;
+    instance->thread_hooks[instance->thread_hook_count].unbind = unbind;
+    instance->thread_hooks[instance->thread_hook_count].context = context;
+    ++instance->thread_hook_count;
+    return 1;
+}
+
+int session_unregister_thread_hook(session *instance, session_thread_bind_fn bind,
+    session_thread_unbind_fn unbind, void *context)
+{
+    uint32_t index;
+    if (!session_valid(instance) || bind == NULL || unbind == NULL) return 0;
+    for (index = 0u; index < instance->thread_hook_count; ++index) {
+        session_thread_hook *hook = &instance->thread_hooks[index];
+        if (hook->bind == bind && hook->unbind == unbind &&
+            hook->context == context) {
+            --instance->thread_hook_count;
+            instance->thread_hooks[index] =
+                instance->thread_hooks[instance->thread_hook_count];
+            memset(&instance->thread_hooks[instance->thread_hook_count], 0,
+                sizeof(instance->thread_hooks[instance->thread_hook_count]));
+            return 1;
+        }
+    }
+    return 0;
 }
 
 int session_request_cancellation(session *instance, uint32_t reason)
@@ -186,16 +226,35 @@ int session_dispose(session *instance)
 
 int session_thread_bind(session *instance)
 {
+    uint32_t index;
     if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
         thread_instance != NULL) return 0;
     _InterlockedIncrement(&instance->binding_count);
     thread_instance = instance;
+    for (index = 0u; index < instance->thread_hook_count; ++index) {
+        session_thread_hook *hook = &instance->thread_hooks[index];
+        if (!hook->bind(hook->context)) {
+            while (index != 0u) {
+                --index;
+                instance->thread_hooks[index].unbind(
+                    instance->thread_hooks[index].context);
+            }
+            thread_instance = NULL;
+            _InterlockedDecrement(&instance->binding_count);
+            return 0;
+        }
+    }
     return 1;
 }
 
 int session_thread_unbind(session *instance)
 {
+    uint32_t index;
     if (instance == NULL || thread_instance != instance) return 0;
+    for (index = instance->thread_hook_count; index != 0u; --index) {
+        session_thread_hook *hook = &instance->thread_hooks[index - 1u];
+        hook->unbind(hook->context);
+    }
     thread_instance = NULL;
     _InterlockedDecrement(&instance->binding_count);
     return 1;

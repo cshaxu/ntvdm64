@@ -25,6 +25,20 @@ same-shaped Base VDM, session, SoftPC mapping, and public Win32 bindings.
 4. Formally compose all four original units with their existing shared state,
    then add focused positive and explicit-unavailable local-contract tests.
 
+## Progress record
+
+- **P1 — child-local standard streams:** closed. The original
+  `SetStdHandle -> CreateProcess -> restore` call order in `cmdexec.c` remains
+  intact; the translation-unit binding supplies only the child `STARTUPINFO`
+  endpoints, without mutating the CLI's process-global standard handles.
+- **P2 — Base VDM worker context:** closed. Original `cmdCreateProcess`
+  performs `INCREMENT_REENTER_COUNT` and `DECREMENT_REENTER_COUNT` on its
+  child worker. The worker receives the already-bound Base VDM record through
+  an owner-private session thread hook, rather than a COMMAND-private
+  dispatcher or captured native record pointer. The Base VDM focused fixture
+  invokes both operations on a detached cdecl-compatible worker and verifies
+  that the count returns to zero.
+
 ## Explicit exclusions and transfers
 
 - DOS `EXEC`, PSP creation, parent restoration and ordinary guest return are
