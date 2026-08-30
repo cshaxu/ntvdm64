@@ -48,24 +48,35 @@ static int current_segment_base(IU16 selector, IU32 *base_out)
     return 0;
 }
 
-IU32 c_effective_addr(IU16 selector, IU32 offset)
+int mvdm_softpc_effective_address(IU16 selector, IU32 offset, IU32 *address_out)
 {
     IU32 base;
     IU32 descriptor_address;
     CPU_DESCR descriptor;
 
+    if (address_out == 0) return 0;
     if ((c_getMSW() & CCPU_MSW_PE) == 0 ||
         (c_getEFLAGS() & CCPU_EFLAGS_VM) != 0) {
-        return ((IU32)selector << 4) + offset;
+        *address_out = ((IU32)selector << 4) + offset;
+        return 1;
     }
     if (!current_segment_base(selector, &base)) {
         /* Preserve the original CCPU descriptor-table algorithm rather than
          * reintroducing Sim32GetVDMPointer or a monitor pointer alias. */
-        if (selector_outside_table(selector, &descriptor_address) != 0) return 0u;
+        if (selector_outside_table(selector, &descriptor_address) != 0) return 0;
         read_descriptor_linear(descriptor_address, &descriptor);
         base = descriptor.base;
     }
-    return base + offset;
+    *address_out = base + offset;
+    return 1;
+}
+
+IU32 c_effective_addr(IU16 selector, IU32 offset)
+{
+    IU32 address;
+
+    if (!mvdm_softpc_effective_address(selector, offset, &address)) return 0u;
+    return address;
 }
 
 /* The original non-CCPU-facing SoftPC consumers, including base/video,

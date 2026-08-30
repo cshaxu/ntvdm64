@@ -2570,8 +2570,17 @@ if (!waiting_for_next_8042_code)
 #ifdef CPU_30_STYLE
 				cpu_interrupt(CPU_HW_RESET, 0);
 #else /* CPU_30_STYLE */
-				cpu_interrupt_map |= CPU_RESET_EXCEPTION_MASK;
-				host_cpu_interrupt();
+				/*
+				 * DIVERGENCE(MVDM-HOST-DIV-146): the original CPU40
+				 * controller branch reaches CCPU's private interrupt bitmap
+				 * directly, then asks the historical host to wake that CPU.
+				 * This composition keeps that bitmap private to c_main.c and
+				 * retains the same CPU_HW_RESET event through the original
+				 * public CCPU entrypoint.  c_cpu_interrupt performs the
+				 * original bitmap update and clears quick mode for the
+				 * selected single-session executor.
+				 */
+				cpu_interrupt(CPU_HW_RESET, 0);
 #endif /* CPU_30_STYLE */
 #endif
 				sure_note_trace0(AT_KBD_VERBOSE,"CPU RESET via keyboard");

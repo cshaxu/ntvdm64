@@ -97,6 +97,13 @@ void	host_start_cpu()
 	host_simulate: This function starts up the cpu emulation
 	for recursive CPU calls from the Insignia BIOS
 */
+/* DIVERGENCE(MVDM-HOST-DIV-150): CPU_40_STYLE selects the original
+ * host_cpu.h vector macro `host_simulate()` and nt_cprgs.c initializes
+ * host_simulate_func to c_cpu_simulate.  The historical direct function
+ * below therefore collides with that macro in the selected CCPU build and
+ * is not a callable CPU40 entrypoint.  Keep the source body intact for
+ * non-CCPU profiles, while the CPU40 profile uses its original vector. */
+#ifndef CCPU
 void	host_simulate()
 {
     ASSERT(IcaLock.OwningThread != NtCurrentTeb()->ClientId.UniqueThread);
@@ -121,6 +128,7 @@ void	host_simulate()
 
     ASSERT(IcaLock.OwningThread != NtCurrentTeb()->ClientId.UniqueThread);
 }
+#endif /* !CCPU */
 
 
 /*

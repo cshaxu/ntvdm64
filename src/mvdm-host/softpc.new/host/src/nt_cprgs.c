@@ -31,7 +31,7 @@ extern void hw_host_simulate ();		/* in hcpu/host/hostsim.c */
 #ifdef CCPU
 GLOBAL   VOID		(*setLDTR_func ) ();
 GLOBAL   word		(*getTR_func ) ();
-GLOBAL	 INT		(*getTS_func ) ();
+GLOBAL	 ISM32		(*getTS_func ) (void);
 GLOBAL   VOID		(*setEM_func ) ();
 GLOBAL   VOID		(*setGDTR_limit_func ) ();
 GLOBAL   VOID		(*setIDTR_limit_func ) ();
@@ -40,11 +40,11 @@ GLOBAL   VOID		(*setGDTR_base_func ) ();
 GLOBAL   word		(*getLDTR_func ) ();
 GLOBAL   VOID		(*setTR_func ) ();
 GLOBAL   VOID		(*setTS_func ) ();
-GLOBAL	 INT		(*getPE_func ) ();
+GLOBAL	 ISM32		(*getPE_func ) (void);
 GLOBAL	 sys_addr	(*getGDTR_base_func ) ();
 GLOBAL   word		(*getMSW_reserved_func ) ();
 GLOBAL   int		(*getCPL_func ) ();
-GLOBAL	 INT		(*getMP_func ) ();
+GLOBAL	 ISM32		(*getMP_func ) (void);
 GLOBAL   VOID		(*setPE_func ) ();
 GLOBAL   word		(*getGDTR_limit_func ) ();
 GLOBAL   word		(*getIDTR_limit_func ) ();
@@ -53,7 +53,7 @@ GLOBAL   VOID		(*setMP_func) ();
 GLOBAL   VOID		(*setIDTR_base_func) ();
 GLOBAL   word		(*getNT_func) ();
 GLOBAL   VOID		(*setCPL_func) ();
-GLOBAL	 INT		(*getEM_func) ();
+GLOBAL	 ISM32		(*getEM_func) (void);
 GLOBAL   VOID		(*setNT_func ) ();
 GLOBAL   sys_addr	(*getIDTR_base_func) ();
 #endif
@@ -124,7 +124,7 @@ GLOBAL ISM32		(*getSF_func) (void);
 GLOBAL ISM32		(*getZF_func) (void);
 GLOBAL ISM32		(*getOF_func) (void);
 GLOBAL ISM32		(*getCF_func) (void);
-GLOBAL INT		(*getIOPL_func ) ();
+GLOBAL ISM32		(*getIOPL_func ) (void);
 #endif
 
 #ifdef A3CPU
@@ -231,7 +231,14 @@ GLOBAL VOID		(*setOPR_func) ();
 
 GLOBAL VOID		(*host_simulate_func) (void);
 
-#ifdef CPU_30_STYLE
+/* DIVERGENCE(MVDM-HOST-DIV-151): the first CCPU branch is the original
+ * generated-CCPU vector initializer (the c_get, c_set and c_cpu_simulate
+ * providers).  The
+ * historical CPU_30_STYLE gate accidentally selects the unrelated
+ * soft_ccpu register-state implementation when the supported CPU_40_STYLE
+ * profile is built without CPU_30_STYLE.  Select the same CCPU vector
+ * branch explicitly for CPU40; CPU30 is neither defined nor linked. */
+#if defined(CPU_30_STYLE) || defined(CPU_40_STYLE)
 
 #ifdef CCPU
 
@@ -1850,7 +1857,7 @@ load_sw_cpu_access_functions ()
 #endif A2CPU
 
 
-#endif /* CPU_30_STYLE */
+#endif /* CPU_30_STYLE || CPU_40_STYLE */
 
 
 

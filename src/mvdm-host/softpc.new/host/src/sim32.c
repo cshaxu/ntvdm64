@@ -34,6 +34,9 @@
 #include "gmi.h"
 #include "ckmalloc.h"
 #include CpuH
+#ifdef CPU_40_STYLE
+#include "mvdm_softpc_effective_address.h"
+#endif
 
 
 #ifdef CPU_40_STYLE
@@ -227,8 +230,10 @@ GLOBAL BOOL Sim32SetVDMMemory IFN4(double_word, addr, word, size, UTINY *, buff,
 GLOBAL sys_addr sim32_effective_addr IFN2(double_word, addr, BOOL, pm)
 {
     word seg, off;
+#ifndef CPU_40_STYLE
     double_word descr_addr;
     DESCR entry;
+#endif
 
     seg = (word)(addr>>16);
     off = (word)(addr & 0xffff);
@@ -237,6 +242,21 @@ GLOBAL sys_addr sim32_effective_addr IFN2(double_word, addr, BOOL, pm)
     {
 	return ((double_word)seg << 4) + off;
     }
+#ifdef CPU_40_STYLE
+    /*
+     * DIVERGENCE(MVDM-HOST-DIV-148): CPU40 CCPU keeps descriptor decoding
+     * in its CPU_DESCR implementation, whereas this historical SIM32 body
+     * uses the CPU30 DESCR carrier. Preserve SIM32's numeric result and
+     * invalid-selector sentinel through the checked same-shaped adapter.
+     */
+    {
+        IU32 linear;
+
+        if (!mvdm_softpc_effective_address(seg, off, &linear))
+            return ((sys_addr)-1);
+        return (sys_addr)linear;
+    }
+#else
     else
     {
 	if ( selector_outside_table(seg, &descr_addr) == 1 )
@@ -257,6 +277,7 @@ GLOBAL sys_addr sim32_effective_addr IFN2(double_word, addr, BOOL, pm)
 	    return entry.base + off;
 	}
     }
+#endif /* CPU_40_STYLE */
 }
 
 

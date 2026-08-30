@@ -11,6 +11,11 @@ extern "C" {
  * numeric values; this API never returns a native pointer. */
 IMPORT IU32 c_effective_addr IPT2(IU16, selector, IU32, offset);
 
+/* Checked form for host consumers that must distinguish a valid linear
+ * address zero from an invalid protected-mode selector. */
+IMPORT int mvdm_softpc_effective_address IPT3(IU16, selector, IU32, offset,
+                                              IU32 *, address_out);
+
 #ifdef __cplusplus
 }
 #endif

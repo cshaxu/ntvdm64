@@ -72,7 +72,15 @@ half_word ica_lock;
  * The actual CCPU registers
  */
 
-#if defined(CCPU) && !defined(CPU_30_STYLE)
+/*
+ * DIVERGENCE(MVDM-HOST-DIV-147): this declaration block is the legacy
+ * x86 monitor register store.  The selected CPU_40_STYLE CCPU executor owns
+ * its register, descriptor and machine-status state privately in c_main.c;
+ * defining this second store would neither bind to it nor preserve event
+ * delivery.  Keep the original shared support data and routines below, but
+ * exclude only this obsolete CPU-state carrier from the CPU40 build.
+ */
+#if defined(CCPU) && !defined(CPU_30_STYLE) && !defined(CPU_40_STYLE)
 #ifndef MAC_LIKE
 reg A;		/* Accumulator		*/
 reg B;		/* Base			*/
@@ -143,7 +151,7 @@ int STATUS_IF;
 int STATUS_DF;
 int STATUS_NT;
 int STATUS_IOPL;
-#endif /* defined(CCPU) && !defined(CPU_30_STYLE) */
+#endif /* defined(CCPU) && !defined(CPU_30_STYLE) && !defined(CPU_40_STYLE) */
 
 /*
  * Global Flags and variables

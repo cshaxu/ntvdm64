@@ -382,12 +382,15 @@ extern word             (*getIDTR_limit_func) ();
 extern word             (*getLDTR_func) ();
 extern word             (*getTR_func) ();
 extern word             (*getMSW_reserved_func) ();
-extern word             (*getTS_func) ();
-extern word             (*getEM_func) ();
-extern word             (*getMP_func) ();
-extern word             (*getPE_func) ();
+/* DIVERGENCE(MVDM-HOST-DIV-152): selected CCPU40 providers c_getTS,
+ * c_getEM, c_getMP and c_getPE return ISM32.  Preserve vector names and
+ * call order but publish their true CPU40 result contract. */
+extern ISM32            (*getTS_func) (void);
+extern ISM32            (*getEM_func) (void);
+extern ISM32            (*getMP_func) (void);
+extern ISM32            (*getPE_func) (void);
 extern word             (*getNT_func) ();
-extern word             (*getIOPL_func) ();
+extern ISM32            (*getIOPL_func) (void);
 #endif CCPU
 
 #ifdef A2CPU
