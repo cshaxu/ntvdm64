@@ -26,6 +26,13 @@
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
 | Similar-Issue Sweep | BIOS/ROM/CMOS declarations, definitions, selected callers, firmware inputs and existing location-binding repair; MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
 
+**T310 S17 P1:** the complete selected system-controller source set is now
+split from adjacent ROM, platform, endpoint and BOP owners. The original
+controller initialization/heartbeat order stays in its source bodies; every
+source unit has a named current or later owner rather than a new generic
+scheduler. See the [S17 controller ledger](etc/evidence/m0-t310-s17-p1-system-controller-owner-ledger-001.tsv)
+and [source boundary](etc/evidence/m0-t310-s17-p1-system-controller-source-boundary-001.md).
+
 **T310 S16 P1:** the firmware owner audit separates immutable original
 `softpc.new/{bios,roms,data}` inputs from executable original BIOS, system-ROM,
 CMOS and host-resource bodies. It preserves the existing narrow app/session
