@@ -4,25 +4,21 @@
 
 ## Active Packet
 
-**Active: M0 T312 S3**
+**No active M/T/S packet.** T312 is closed; await admission of the next package.
 
-### M0 T312 S3 — retired Bochs tree and fixture removal
+### M0 T312 closure record
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T312 S3; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | S2 closed the initial owner transfers and archived former recovery facades at `etc/operations/m0-t312-s2-original-softpc-binding-transfer-001.md`. |
-| Objective | Remove retired Bochs source, build, fixture, and current-authority inputs after the source-shaped SoftPC transfer. |
-| Non-goals | No CCPU30/MONITOR work, x64 work, or new emulator. |
-| Reference Baseline | [retired-Bochs removal proposal](etc/operations/proposal-retired-bochs-source-removal-001.md); selected Win32/x86 CCPU40 graph. |
-| Verification | Original owner declarations and call contracts, selected CCPU40 build, and targeted source scans. |
-| Exit Criteria | No production/build/runtime/acceptance input reaches a retired Bochs component; necessary historical material is evidence-only with provenance. |
+| Identifier Mode | M0 T312; Ordinary Mode (single-person dual-role implementation). |
+| Result | Closed. The selected original SoftPC/CCPU40/SAS route is the only production machine route. |
+| Closure | [T312 closure](history/m0-t312-retired-bochs-removal-closure-20260830.md) |
+| Next Admission | Queue item 1: Complete SoftPC capability and mirror-purity acceptance. |
 
-**T312 S2 closed:** selected original SoftPC CCPU40/SAS owners now replace the
-former live machine facades. Retired register, SAS, frame, and WOW recovery
-experiments moved to `docs/etc/legacy_code/retired-bochs/`; no `mvdm-host` or
-overlay source names or includes the retired machine route. See
-[`S2 binding-transfer record`](etc/operations/m0-t312-s2-original-softpc-binding-transfer-001.md).
+**T312 closed:** retired Bochs source, build, fixture, and former #UD ingress
+paths are no longer product inputs. A fresh selected x86 CCPU40 formal graph
+completed its candidate and forced-link targets. See
+[`closure`](history/m0-t312-retired-bochs-removal-closure-20260830.md).
 
 **T310 S29 P1:** the original two-file OEM/Unicode support package is selected
 directly, preserving PIF `ExpandEnvironmentStringsOem` and related host-file

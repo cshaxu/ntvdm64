@@ -4,6 +4,8 @@
 
 > **本次审计基线（2026-08-23；T271 S5 后续更正）。** 203 项入口基数来自 `t219-s2` canonical inventory 与 `t225-s57` owner ledger；DEM/COMMAND/XMS 的当前判断复核了活跃 source mirror、T230/T231/T236/T237 证据和 formal manifest。原 T257 S3 DPMI 启动/表格实验已完整迁出正式 `opennt-bop` 构建图，保存于 `docs/etc/legacy_code/opennt-bop/deferred-dpmi/`；它只保留历史 source/ABI 证据，不是 active provider、formal link 或局部运行能力。DPMI、Redirector、WOW、Debugger、top-level/machine 的“未接入”是有意的 owner disposition，不是“找不到入口”。
 
+> **机器路线更正（2026-08-30；T312）。** 本表早期写下的 `Bochs`、`bochs-core`、`adapter-bochs`、`bx-*` 和 `#UD` 叙述均为历史审计证据，不是现行依赖或可执行路线。当前产品机器闭包是原始 SoftPC/CCPU40/SAS；涉及其状态、内存或执行的后续行必须以原始同名接口及其明确 adapter 处置为准，不能恢复已归档的 Bochs facade。
+
 ## 使用口径
 
 | 复通等级 | 本 tracker 的严格含义 |

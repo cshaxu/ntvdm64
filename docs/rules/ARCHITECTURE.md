@@ -138,10 +138,6 @@
     may state why it has no machine matrix.
 27. `src.old/` and comparison repositories are evidence only and must not
     enter source, build, link, runtime or acceptance manifests.
-28. Bochs 2.6 is the only mirror baseline for `bochs-core`. Existing project
-    Bochs/adapter mechanics are recovery evidence only; every retained core
-    difference is minimized, individually registered, and placed in the
-    matching private overlay when it exceeds the mirror rule's local boundary.
 29. The `mvdm-host` support paths may be linked only after the package/symbol
     tracker records their original consumer, exact interface shape, binding
     owner and x86/x64 disposition. `mvdm-tools` may never be linked into `app` or

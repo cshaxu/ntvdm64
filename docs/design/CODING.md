@@ -4,7 +4,6 @@
 
 ```text
 src/
-  bochs-core/
   mvdm-host/
   opennt-host/
   mvdm-tools/
@@ -15,7 +14,6 @@ src/
   mvdm-guest/bin86/
   mvdm-guest/wow16/
   mvdm-guest/font16/
-  adapter-bochs/
   adapter-mvdm-host-in/
   adapter-mvdm-host-out/
   adapter-opennt-host/
@@ -33,7 +31,6 @@ material and never a source, build, link or runtime input.
 
 ## Owner placement
 
-- `bochs-core` contains the adopted Bochs mirror only.
 - `mvdm-host` contains only canonical selected MVDM host-runtime
   packages, retaining package-internal paths and filenames.
 - `opennt-host` contains every complete selected original OpenNT host-service
@@ -68,8 +65,6 @@ material and never a source, build, link or runtime input.
   `mvdm-guest/font16` are the complete selected local DOS/V86, Bin86, WOW16
   and 16-bit-font carries. They remain data/load-only input roots and do not
   imply an unselected external source-universe import.
-- `adapter-bochs` contains Bochs-only composition and is the only caller of
-  `bochs-core`.
 - `adapter-mvdm-host-in` contains only its declared selector-blind typed
   machine-event boundary. `adapter-mvdm-host-out` contains the named same-shaped historical
   interface families `win32`, `softpc`, `monitor`, `redir`, `wow`, `vdd` and
@@ -89,7 +84,7 @@ Historical MVDM build tools such as `tools16`, `bin86`, `convert` and
 `dat2obj` belong under `tools/opennt`, not `src/`.
 
 Before authoring or reimplementing a project-owned mechanic, audit existing
-current and quarantined same-owner `bochs-core`, `adapter-*`, `app`, `session`
+current and quarantined same-owner `adapter-*`, `app`, `session`
 and related component code as a recovery/reference source. Reuse only the
 individually selected, provenance-recorded portion that already satisfies final
 ownership, dependency and mirror rules; never bulk-import a component tree or
@@ -154,11 +149,6 @@ executable lines, move that implementation to the matching private
 `*-overlay` and leave the smallest registered call boundary. Only the matching
 mirror may call or link its overlay.
 
-`bochs-core` is measured only against the pinned upstream Bochs 2.6 tree.
-First compress any recovered historical difference into an existing upstream
-call boundary; then place material retained mechanics in `bochs-core-overlay`.
-A prior project copy is evidence for a possible behavior, never a substitute
-mirror baseline.
 
 ## Build layout
 

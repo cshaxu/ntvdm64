@@ -27,35 +27,32 @@ reaches them.
 The detailed proposal, predecessor, delivery and exclusions for every queue
 item are in the [package recovery proposal set](etc/operations/package-recovery-program-20260827.md).
 
-The active packet remains governed only by its revised sequential original
-machine owner packages in `STATUS.md`. Its formal gate is the selected
-Win32/x86 `/MT` CCPU40 profile; x64 compatibility is deliberately deferred.
-Bochs is retired and is neither a production route nor an acceptance row. The
-first new candidate after the bounded packet closes is item 1 below.
+The next admission is governed by the original machine owner packages below.
+Its formal gate is the selected Win32/x86 `/MT` CCPU40 profile; x64
+compatibility is deliberately deferred. Bochs is retired and is neither a
+production route nor an acceptance row.
 
 | Order | Candidate implementation package |
 | --- | --- | --- |
-| 1 | MVDM host original-relative support reintegration |
-| 2 | Retired Bochs source/component removal |
-| 3 | Complete SoftPC capability and mirror-purity acceptance |
-| 4 | Base VDM source-shaped broker recovery |
-| 5 | Monitor / `NtVdmControl` user-mode contract package recovery |
-| 6 | DEM/COMMAND vertical slice and child lifecycle |
-| 7 | Minimal DOS guest execution and controlled return |
-| 8 | Minimal vertical-slice integration closure |
-| 9 | XMS owner package |
-| 10 | DPMI/DPMI32 owner package |
-| 11 | Redirector owner package (including the selected `netstatus.c` mirror slice) |
-| 12 | WOW32/Win16 owner package |
-| 13 | VDD owner package |
-| 14 | Debugger/BDE/FAX owner packages |
-| 15 | Service-package cross-family closure and native integration evidence |
-| 16 | Broker process and cross-process coordination |
-| 17 | In-process multi-session reentrancy audit |
-| 18 | Host capability expansion |
-| 19 | SoftPC graphics presentation window and Alt+Enter transition |
-| 20 | Guest DOS/WOW16 artifact matrix |
-| 21 | Product release closure |
+| 1 | Complete SoftPC capability and mirror-purity acceptance |
+| 2 | Base VDM source-shaped broker recovery |
+| 3 | Monitor / `NtVdmControl` user-mode contract package recovery |
+| 4 | DEM/COMMAND vertical slice and child lifecycle |
+| 5 | Minimal DOS guest execution and controlled return |
+| 6 | Minimal vertical-slice integration closure |
+| 7 | XMS owner package |
+| 8 | DPMI/DPMI32 owner package |
+| 9 | Redirector owner package (including the selected `netstatus.c` mirror slice) |
+| 10 | WOW32/Win16 owner package |
+| 11 | VDD owner package |
+| 12 | Debugger/BDE/FAX owner packages |
+| 13 | Service-package cross-family closure and native integration evidence |
+| 14 | Broker process and cross-process coordination |
+| 15 | In-process multi-session reentrancy audit |
+| 16 | Host capability expansion |
+| 17 | SoftPC graphics presentation window and Alt+Enter transition |
+| 18 | Guest DOS/WOW16 artifact matrix |
+| 19 | Product release closure |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

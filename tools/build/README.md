@@ -6,18 +6,13 @@ declared responsibility and may create or consume only disposable output below
 `artifacts/`.
 
 Root-level compiler/linker products are prohibited and deliberately are not
-hidden by `.gitignore`.  CMake configuration and the T260 formal Ninja graph
-reject a root containing `.obj`, `.exe`, `.pdb`, `.ilk`, `.map`, `.lib`, `.a`,
-`stdout.txt`, or `stderr.txt`.  Reusable caches remain under their declared
+hidden by `.gitignore`. Reusable caches remain under their declared
 `build/<task-id>/<run-id>/` roots.
 
-`New-T260S8FullNinjaGraph.ps1` normally creates an immutable formal graph in a
-new build root. Its explicit `-Refresh` switch is the controlled incremental
-path for an existing formal root below `build/`: it regenerates only the graph,
-manifest, response files and projected config, retaining object files for
-Ninja's normal source/header dependency checks. It is appropriate after an
-owner-preserving source move; it never imports cache output as a source or
-release input.
+`New-T310OriginalSoftpcNinja.ps1` creates the selected immutable Win32/x86
+CCPU40 formal graph in a caller-selected new build root. It rejects retired
+machine inputs and may refresh only graph metadata in an existing disposable
+root; it never imports cache output as a source or release input.
 
 An admitted fixture may declare `supportSources`, each constrained to a
 `tests/` source. Ninja compiles those objects immediately before the fixture

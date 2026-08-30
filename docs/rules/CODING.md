@@ -41,9 +41,6 @@
   belongs below the correspondingly named `adapter-opennt-host` subfamily;
   neither root may be used as a generic helper collection.
 - `mvdm-platform-abi` contains exact original declarations only.
-- `adapter-bochs` alone includes or calls `bochs-core`. Only the `softpc`
-  family of `adapter-mvdm-host-out` calls the public typed mechanics of
-  `adapter-bochs`.
 - `session` contains neutral per-instance mechanisms. `broker` contains only
   cross-process registration/queue/notification mechanics. `app` alone wires
   instances and product policy.
@@ -85,10 +82,6 @@
   the corresponding mirror README registers both the hook and overlay file.
 - Keep upstream names and paths after re-rooting. Reference/example/test code
   stays outside production roots.
-- For `bochs-core`, the pinned upstream Bochs 2.6 tree is the sole mirror
-  baseline. Existing project copies may guide a registered recovery but do not
-  justify a retained diff; first minimize the call boundary, then use the
-  private `bochs-core-overlay` when the added body is material.
 
 ## Width and mapping
 

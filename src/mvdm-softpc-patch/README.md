@@ -20,7 +20,7 @@ Rules:
 
 - This is not a generic helper, adapter, or alternative machine root.
 - A patch preserves original spelling, parameters, order and failure semantics.
-- It reaches mechanics only through `adapter-mvdm-host-out/softpc`; it cannot
-  call or include `bochs-core`, `adapter-bochs`, `session`, or `app`.
+- It reaches host-facing mechanics only through `adapter-mvdm-host-out/softpc`;
+  it cannot call or include `session` or `app`.
 - A host pointer, handle, or VDM alias conversion uses the approved mapping
   manager lease path and is documented in the register.
