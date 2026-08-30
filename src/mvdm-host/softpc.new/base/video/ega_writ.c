@@ -332,15 +332,17 @@ WRT_POINTERS simple_writes;
 WRT_POINTERS dth_md3_writes;
 #endif	/* CPU_40_STYLE - EVID */
 
-IMPORT VOID ega_copy_b_write();
-IMPORT VOID ega_mode0_chn_b_write();
-IMPORT VOID ega_mode1_chn_b_write();
-IMPORT VOID ega_mode2_chn_b_write();
+/* DIVERGENCE(MVDM-HOST-DIV-136): preserve the original writer table order,
+ * with the exact original provider parameter contracts. */
+IMPORT VOID ega_copy_b_write IPT2(ULONG, value, ULONG, offset);
+IMPORT VOID ega_mode0_chn_b_write IPT2(ULONG, value, ULONG, offset);
+IMPORT VOID ega_mode1_chn_b_write IPT2(ULONG, value, ULONG, offset);
+IMPORT VOID ega_mode2_chn_b_write IPT2(ULONG, value, ULONG, offset);
 
-IMPORT VOID ega_copy_w_write();
-IMPORT VOID ega_mode0_chn_w_write();
-IMPORT VOID ega_mode1_chn_w_write();
-IMPORT VOID ega_mode2_chn_w_write();
+IMPORT VOID ega_copy_w_write IPT2(ULONG, value, ULONG, offset);
+IMPORT VOID ega_mode0_chn_w_write IPT2(ULONG, value, ULONG, offset);
+IMPORT VOID ega_mode1_chn_w_write IPT2(ULONG, value, ULONG, offset);
+IMPORT VOID ega_mode2_chn_w_write IPT2(ULONG, value, ULONG, offset);
 
 /* Handy array to extract all 4 plane values in one go. */
 

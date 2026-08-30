@@ -270,20 +270,22 @@ WRT_POINTERS mode0_gen_handlers =
 };
 #endif /* CPU_40_STYLE */
 #else
-VOID  ega_copy_b_write();
-VOID  ega_copy_w_write();
-VOID  ega_copy_b_fill();
-VOID  ega_copy_w_fill();
+/* DIVERGENCE(MVDM-HOST-DIV-136): these local table providers retain their
+ * original bodies but expose their later original IFN parameter contracts. */
+VOID ega_copy_b_write IPT2(ULONG, value, ULONG, offset);
+VOID ega_copy_w_write IPT2(ULONG, value, ULONG, offset);
+VOID ega_copy_b_fill IPT3(ULONG, value, ULONG, offset, ULONG, count);
+VOID ega_copy_w_fill IPT3(ULONG, value, ULONG, offset, ULONG, count);
 VOID  ega_copy_b_move_fwd   IPT4(ULONG,  offset, ULONG, eas, ULONG, count, ULONG, src_flag );
 VOID  ega_copy_b_move_bwd   IPT4(ULONG,  offset, ULONG, eas, ULONG, count, ULONG, src_flag );
 VOID  ega_copy_w_move_fwd   IPT4(ULONG,  offset, ULONG, eas, ULONG, count, ULONG, src_flag );
 VOID  ega_copy_w_move_bwd   IPT4(ULONG,  offset, ULONG, eas, ULONG, count, ULONG, src_flag );
 			 
 
-VOID  ega_mode0_chn_b_write();
-VOID  ega_mode0_chn_w_write();
-VOID  ega_mode0_chn_b_fill();
-VOID  ega_mode0_chn_w_fill();
+VOID ega_mode0_chn_b_write IPT2(ULONG, value, ULONG, offset);
+VOID ega_mode0_chn_w_write IPT2(ULONG, value, ULONG, offset);
+VOID ega_mode0_chn_b_fill IPT3(ULONG, value, ULONG, offset, ULONG, count);
+VOID ega_mode0_chn_w_fill IPT3(ULONG, value, ULONG, offset, ULONG, count);
 VOID  ega_mode0_chn_b_move_fwd   IPT4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag );
 VOID  ega_mode0_chn_b_move_bwd   IPT4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag );
 VOID  ega_mode0_chn_w_move_fwd   IPT4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag );

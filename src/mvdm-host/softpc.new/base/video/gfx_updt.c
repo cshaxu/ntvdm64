@@ -217,7 +217,9 @@ GLOBAL LONG dirty_curs_y;
 
 /* [5.1.3 PROCEDURE() DECLARATIONS]					*/
 
-	LOCAL boolean simple_update IPT0();
+	/* DIVERGENCE(MVDM-HOST-DIV-135): selected marking dispatch is void; see
+	 * gfx_upd.h.  Original callers use only its dirty-state side effect. */
+	LOCAL VOID simple_update IPT0();
 	boolean	dummy_scroll IPT6(int,dummy1,int,dummy2,int,dummy3,
 			int,dummy4,int,dummy5,int,dummy6);
 #if defined(NTVDM) && defined(MONITOR)
@@ -639,10 +641,9 @@ simple_handler IFN0()
 	setVideodirty_total(getVideodirty_total() + 1);
 }
 
-LOCAL	boolean simple_update IFN0()
+LOCAL	VOID simple_update IFN0()
 {
 	setVideodirty_total(getVideodirty_total() + 1);
-	return( FALSE );
 }
 
 LOCAL VOID simple_update_b_move IFN4(UTINY *, laddr, UTINY *, haddr, 
@@ -680,11 +681,11 @@ GLOBAL void dummy_calc IFN0()
 
 UPDATE_ALG update_alg =
 {
-	(T_mark_byte)simple_update,
-	(T_mark_word)simple_update,
-	(T_mark_fill)simple_update,
-	(T_mark_wfill)simple_update,
-	(T_mark_string)simple_update,
+	simple_update,
+	simple_update,
+	simple_update,
+	simple_update,
+	simple_update,
 	dummy_calc,
 	dummy_scroll,
 	dummy_scroll,
@@ -713,11 +714,11 @@ void    flag_mode_change_required IFN0()
 {
     set_mode_change_required(YES);
 
-    update_alg.mark_byte = (T_mark_byte)simple_update;
-    update_alg.mark_word = (T_mark_word)simple_update;
-    update_alg.mark_fill = (T_mark_fill)simple_update;
-    update_alg.mark_wfill = (T_mark_wfill)simple_update;
-    update_alg.mark_string = (T_mark_string)simple_update;
+    update_alg.mark_byte = simple_update;
+    update_alg.mark_word = simple_update;
+    update_alg.mark_fill = simple_update;
+    update_alg.mark_wfill = simple_update;
+    update_alg.mark_string = simple_update;
 
     update_alg.scroll_up = dummy_scroll;
     update_alg.scroll_down = dummy_scroll;
@@ -3618,11 +3619,11 @@ set_mark_funcs IFN0()
 	switch (curr_mark_type)
 	{
 		case	SIMPLE_MARKING:
-			update_alg.mark_byte = (T_mark_byte)simple_update;
-			update_alg.mark_word = (T_mark_word)simple_update;
-			update_alg.mark_fill = (T_mark_fill)simple_update;
-			update_alg.mark_wfill = (T_mark_wfill)simple_update;
-			update_alg.mark_string = (T_mark_string)simple_update;
+			update_alg.mark_byte = simple_update;
+			update_alg.mark_word = simple_update;
+			update_alg.mark_fill = simple_update;
+			update_alg.mark_wfill = simple_update;
+			update_alg.mark_string = simple_update;
 
 #ifndef CPU_40_STYLE	/* EVID */
 			setVideomark_byte(FAST_FUNC_ADDR(_simple_mark_sml));
@@ -3635,11 +3636,11 @@ set_mark_funcs IFN0()
 			break;
 
 		case	CGA_GRAPHICS_MARKING:
-			update_alg.mark_byte = (boolean(*)())cga_mark_byte;
-			update_alg.mark_word = (boolean(*)())cga_mark_word;
-			update_alg.mark_fill = (boolean(*)())cga_mark_string;
-			update_alg.mark_wfill = (boolean(*)())cga_mark_string;
-			update_alg.mark_string = (boolean(*)())cga_mark_string;
+			update_alg.mark_byte = cga_mark_byte;
+			update_alg.mark_word = cga_mark_word;
+			update_alg.mark_fill = cga_mark_string;
+			update_alg.mark_wfill = cga_mark_string;
+			update_alg.mark_string = cga_mark_string;
 
 #ifndef CPU_40_STYLE	/* EVID */
 			setVideomark_byte(FAST_FUNC_ADDR(_cga_mark_byte));
@@ -3664,11 +3665,11 @@ set_mark_funcs IFN0()
 #endif	/* VGG */
 #endif /* GORE */
 
-			update_alg.mark_byte = (boolean(*)())ega_mark_byte;
-			update_alg.mark_word = (boolean(*)())ega_mark_word;
-			update_alg.mark_fill = (boolean(*)())ega_mark_string;
-			update_alg.mark_wfill = (boolean(*)())ega_mark_wfill;
-			update_alg.mark_string = (boolean(*)())ega_mark_string;
+			update_alg.mark_byte = ega_mark_byte;
+			update_alg.mark_word = ega_mark_word;
+			update_alg.mark_fill = ega_mark_string;
+			update_alg.mark_wfill = ega_mark_wfill;
+			update_alg.mark_string = ega_mark_string;
 
 			switch( EGA_CPU.chain )
 			{
@@ -4092,11 +4093,11 @@ LOCAL VOID inhibit_gfx_update_routines IFN0()
      */
     gfx_update_routines_inhibited = TRUE;
 
-    update_alg.mark_byte 	= (T_mark_byte)simple_update;
-    update_alg.mark_word	= (T_mark_word)simple_update;
-    update_alg.mark_fill 	= (T_mark_fill)simple_update;
-    update_alg.mark_wfill 	= (T_mark_wfill)simple_update;
-    update_alg.mark_string 	= (T_mark_string)simple_update;
+    update_alg.mark_byte 	= simple_update;
+    update_alg.mark_word	= simple_update;
+    update_alg.mark_fill 	= simple_update;
+    update_alg.mark_wfill 	= simple_update;
+    update_alg.mark_string 	= simple_update;
     update_alg.calc_update 	= dummy_calc;
     update_alg.scroll_up 	= dummy_scroll;
     update_alg.scroll_down 	= dummy_scroll;

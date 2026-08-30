@@ -73,6 +73,12 @@ unresolved symbol.  The x64-only per-slot wrapper generator was removed;
 video-controller behavior remains S26 and integrated behavior S49.  See the
 [closure record](history/m0-t310-s25-cvidc-generated-dispatch-closure-20260830.md).
 
+**T310 S26 P1:** all nineteen selected original `base/video` controller
+translation units now compile directly for the x86 CCPU40 product; the former
+generated five-file wrapper carrier was removed.  Two registered declaration
+corrections preserve the original void marking and EGA writer-table contracts.
+Fresh direct archive evidence is recorded in the [S26 source boundary](etc/evidence/m0-t310-s26-p1-video-controller-direct-source-boundary-001.md).
+
 **T310 S17 P1:** the complete selected system-controller source set is now
 split from adjacent ROM, platform, endpoint and BOP owners. The original
 controller initialization/heartbeat order stays in its source bodies; every

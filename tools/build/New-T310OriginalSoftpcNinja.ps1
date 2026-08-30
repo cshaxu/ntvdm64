@@ -55,7 +55,6 @@ $disksRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/disks'
 $supportRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/support'
 $videoRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/video'
 $cvidcRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/cvidc'
-$videoGenerator = Join-Path $root 'tools/build/Generate-T310BaseVideoTypedSources.mjs'
 $gdpGenerator = Join-Path $root 'tools/build/Generate-T310GdpSlots.mjs'
 $gdpOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/base/cvidc'
 $umbOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/host/src'
@@ -226,8 +225,7 @@ foreach ($name in $patchEvidenceNames) {
     if (!(Test-Path -LiteralPath (Join-Path $patchEvidenceRoot $name))) { throw "Registered SoftPC patch evidence missing: $name" }
 }
 
-New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/video'), (Join-Path $build 'generated/gdp'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/suballoc'), (Join-Path $build 'obj/session'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/patch') | Out-Null
-if (!(Test-Path -LiteralPath $videoGenerator -PathType Leaf)) { throw "Base/video declaration generator missing: $videoGenerator" }
+New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/gdp'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/suballoc'), (Join-Path $build 'obj/session'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/patch') | Out-Null
 if (!(Test-Path -LiteralPath $gdpGenerator -PathType Leaf)) { throw "GDP slot generator missing: $gdpGenerator" }
 if (!(Test-Path -LiteralPath $gdpOverlayRoot -PathType Container)) { throw "GDP overlay root missing: $gdpOverlayRoot" }
 if (!(Test-Path -LiteralPath $umbOverlayRoot -PathType Container)) { throw "UMB overlay root missing: $umbOverlayRoot" }
@@ -245,8 +243,6 @@ function Get-NodeSha256([string]$Path) {
     }
     return $hash
 }
-$videoGeneratedRoot = Join-Path $build 'generated/video'
-& $NodeExecutable $videoGenerator $root $videoGeneratedRoot | Out-Null
 $gdpGeneratedRoot = Join-Path $build 'generated/gdp'
 & $NodeExecutable $gdpGenerator $root $gdpGeneratedRoot | Out-Null
 $environment = Join-Path $build 'msvc-mt.cmd'
@@ -388,8 +384,10 @@ $supportObjects = foreach ($name in $supportNames) {
 }
 $videoObjects = foreach ($name in $videoNames) {
     $object = 'obj/video/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $source = if ($name -in @('egawrtm0.c', 'egwrtm12.c', 'gfx_updt.c', 'ega_writ.c', 'vga_mode.c')) { Join-Path $videoGeneratedRoot $name } else { Join-Path $videoRoot $name }
-    $graph.Add('build ' + $object + ': cc_cvidc_rule ' + (NinjaPath $source))
+    # Compile every selected original base/video translation unit directly.
+    # The removed generated source carrier existed only for deferred x64 ABI
+    # repair and must not define x86 controller behavior.
+    $graph.Add('build ' + $object + ': cc_cvidc_rule ' + (NinjaPath (Join-Path $videoRoot $name)))
     $object
 }
 $cvidcObjects = foreach ($name in $cvidcNames) {

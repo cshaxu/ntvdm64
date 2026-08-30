@@ -210,17 +210,19 @@ WRT_POINTERS mode2_handlers =
 };
 #endif /* CPU_40_STYLE */
 #else
-VOID	ega_mode1_chn_b_write();
-VOID	ega_mode1_chn_w_write();
-VOID	ega_mode1_chn_b_fill();
-VOID	ega_mode1_chn_w_fill();
-VOID	ega_mode1_chn_b_move();
-VOID	ega_mode1_chn_w_move();
+/* DIVERGENCE(MVDM-HOST-DIV-136): these local table providers retain their
+ * original bodies but expose their later original IFN parameter contracts. */
+VOID ega_mode1_chn_b_write IPT2(ULONG, value, ULONG, offset);
+VOID ega_mode1_chn_w_write IPT2(ULONG, value, ULONG, offset);
+VOID ega_mode1_chn_b_fill IPT3(ULONG, value, ULONG, offset, ULONG, count);
+VOID ega_mode1_chn_w_fill IPT3(ULONG, value, ULONG, offset, ULONG, count);
+VOID ega_mode1_chn_b_move IPT4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag);
+VOID ega_mode1_chn_w_move IPT4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag);
 
-VOID	ega_mode2_chn_b_write();
-VOID	ega_mode2_chn_w_write();
-VOID	ega_mode2_chn_b_fill();
-VOID	ega_mode2_chn_w_fill();
+VOID ega_mode2_chn_b_write IPT2(ULONG, value, ULONG, offset);
+VOID ega_mode2_chn_w_write IPT2(ULONG, value, ULONG, offset);
+VOID ega_mode2_chn_b_fill IPT3(ULONG, value, ULONG, offset, ULONG, count);
+VOID ega_mode2_chn_w_fill IPT3(ULONG, value, ULONG, offset, ULONG, count);
 VOID	ega_mode2_chn_b_move IPT4(ULONG, ead, ULONG, eas,
 				 ULONG, count, ULONG, src_flag);
 VOID	ega_mode2_chn_w_move IPT4(ULONG, ead, ULONG, eas,

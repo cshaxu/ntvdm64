@@ -21,11 +21,15 @@ typedef struct
 } PC_palette;
 
 
-typedef boolean (*T_mark_byte) IPT1(int, off_in);
-typedef boolean (*T_mark_word) IPT1(int, addr);
-typedef boolean (*T_mark_fill) IPT2(int, laddr, int, haddr);
-typedef boolean (*T_mark_wfill) IPT3(int, laddr, int, haddr, int, col);
-typedef boolean (*T_mark_string)  IPT2(int, laddr, int, haddr);
+/* DIVERGENCE(MVDM-HOST-DIV-135): every selected caller discards marking
+ * results and the CGA/EGA providers are originally VOID.  State the common
+ * marking contract directly rather than cast those providers through a
+ * boolean return slot. */
+typedef void (*T_mark_byte) IPT1(int, off_in);
+typedef void (*T_mark_word) IPT1(int, addr);
+typedef void (*T_mark_fill) IPT2(int, laddr, int, haddr);
+typedef void (*T_mark_wfill) IPT3(int, laddr, int, haddr, int, col);
+typedef void (*T_mark_string)  IPT2(int, laddr, int, haddr);
 typedef void    (*T_calc_update) IPT0();
 typedef boolean (*T_scroll_up) IPT6(int, start, int, width, int, height, int, attr, int, nlines,int,dummy);
 typedef boolean (*T_scroll_down) IPT6(int, start, int, width, int, height, int, attr, int, nlines,int,dummy);
