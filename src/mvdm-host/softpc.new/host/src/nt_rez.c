@@ -66,8 +66,6 @@ long host_read_resource(int type, char *name, byte *addr, int maxsize, int displ
         char full_path[MAXPATHLEN];
         extern char *host_find_file(char *name, char *path, int disp_err);
 
-        type = 0; // To stop unreferenced formal parameter errors
-
 #ifdef DELTA            //STF - make change to 8.3 compatible name
         if (strcmp(name, ".spcprofile") == 0)
             name = "profile.spc";
@@ -106,8 +104,6 @@ long size;              /* Quantity of data to write */
         char full_path[MAXPATHLEN];
         char *hff_ret;
         extern char *host_find_file(char *name, char *path, int disp_err);
-
-        type = 0; // To stop unreferenced formal parameter errors
 
         host_block_timer ();
 

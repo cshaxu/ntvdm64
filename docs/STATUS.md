@@ -80,6 +80,11 @@ physical-page/DOS-alias positive and negative cases.  Original EMS/XMS/UMB
 allocation bodies remain selected; no fixture-created allocator is claimed.
 See the [P8 record](etc/evidence/m0-t313-s2-p8-memory-a20-and-umb-boundary-001.md).
 
+**T313 S2 P9:** two non-original warning-suppression assignments were removed
+from the reached original firmware-resource mirror `nt_rez.c`.  The original
+source warnings are visible again and the selected host-root archive rebuilt
+cleanly.  See the [P9 record](etc/evidence/m0-t313-s2-p9-firmware-resource-mirror-cleanup-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |
