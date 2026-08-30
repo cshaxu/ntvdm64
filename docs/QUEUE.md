@@ -27,32 +27,31 @@ reaches them.
 The detailed proposal, predecessor, delivery and exclusions for every queue
 item are in the [package recovery proposal set](etc/operations/package-recovery-program-20260827.md).
 
-MVDM host mirror-topology recovery is already closed; the next admission is
-**original SoftPC CCPU30 profile recovery**. It must receive the same
-compile-and-run acceptance discipline as CCPU40 before paired-profile support
-is claimed. x64 compatibility is deliberately deferred. Bochs is retired and
-is neither a production route nor an acceptance row.
+MVDM host mirror-topology recovery is already closed. `CPU_30_STYLE` is an
+NT4 kernel-VDM V86 monitor rather than a software CCPU profile, and is
+historical-only. Production compilation selects only `CPU_40_STYLE`/CCPU40.
+x64 compatibility is deliberately deferred. Bochs is retired and is neither a
+production route nor an acceptance row.
 
 | Order | Candidate implementation package |
 | --- | --- | --- |
-| 1 | Original SoftPC CCPU30 profile recovery and bounded execution acceptance |
-| 2 | Monitor / `NtVdmControl` user-mode contract package recovery |
-| 3 | DEM/COMMAND vertical slice and child lifecycle |
-| 4 | Minimal DOS guest execution and controlled return |
-| 5 | Minimal vertical-slice integration closure |
-| 6 | XMS owner package |
-| 7 | DPMI/DPMI32 owner package |
-| 8 | Redirector owner package (including the selected `netstatus.c` mirror slice) |
-| 9 | WOW32/Win16 owner package |
-| 10 | VDD owner package |
-| 11 | Debugger/BDE/FAX owner packages |
-| 12 | Service-package cross-family closure and native integration evidence |
-| 13 | Broker process and cross-process coordination |
-| 14 | In-process multi-session reentrancy audit |
-| 15 | Host capability expansion |
-| 16 | SoftPC graphics presentation window and Alt+Enter transition |
-| 17 | Guest DOS/WOW16 artifact matrix |
-| 18 | Product release closure |
+| 1 | Monitor / `NtVdmControl` user-mode contract package recovery |
+| 2 | DEM/COMMAND vertical slice and child lifecycle |
+| 3 | Minimal DOS guest execution and controlled return |
+| 4 | Minimal vertical-slice integration closure |
+| 5 | XMS owner package |
+| 6 | DPMI/DPMI32 owner package |
+| 7 | Redirector owner package (including the selected `netstatus.c` mirror slice) |
+| 8 | WOW32/Win16 owner package |
+| 9 | VDD owner package |
+| 10 | Debugger/BDE/FAX owner packages |
+| 11 | Service-package cross-family closure and native integration evidence |
+| 12 | Broker process and cross-process coordination |
+| 13 | In-process multi-session reentrancy audit |
+| 14 | Host capability expansion |
+| 15 | SoftPC graphics presentation window and Alt+Enter transition |
+| 16 | Guest DOS/WOW16 artifact matrix |
+| 17 | Product release closure |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

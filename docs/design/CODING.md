@@ -101,11 +101,11 @@ identity, never by a bare same-spelled function name.
 
 ## Host-width coding model
 
-The current recovery build uses MSVC Win32/x86 `/MT`. The original CCPU40 row
-is currently accepted; CCPU30 is a required second original profile and must
-be compiled and run under its own configuration before paired-profile support
-is claimed. x64 is a later compatibility profile, not a current formal-build
-gate. Cross-component and broker wire records use fixed-width
+The current recovery build uses MSVC Win32/x86 `/MT` and selects only
+`CPU_40_STYLE` with the original CCPU40 executor. `CPU_30_STYLE` is an NT4
+kernel-VDM V86-monitor contract and is prohibited from product compile, link,
+runtime and acceptance inputs. x64 is a later compatibility profile, not a
+current formal-build gate. Cross-component and broker wire records use fixed-width
 integer fields.
 Native process-local implementation uses `uintptr_t`, `size_t`, `HANDLE` and
 other pointer-sized platform types.
@@ -158,6 +158,6 @@ Ninja is generated from the source-owner and package-selection manifests.
 Disposable objects, libraries, executables and logs belong under
 `build/<task-id>/<run-id>/`. Guest objects and libraries are packaging/loading
 inputs only and never enter the host link. Formal verification currently
-currently covers accepted x86 CCPU40 compilation plus architecture-neutral token behavior;
-CCPU30 verification is the next profile-recovery obligation; x64 compatibility verification is deferred until the SoftPC/MVDM execution
-path is connected.
+covers accepted x86 CCPU40 compilation plus architecture-neutral token
+behavior; `CPU_30_STYLE` is historical-only; x64 compatibility verification
+is deferred until the SoftPC/MVDM execution path is connected.

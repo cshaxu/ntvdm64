@@ -128,9 +128,9 @@ prevents permanent parallel providers.
   Its explicit internal families are `win32`, `softpc`, `monitor`, `redir`,
   `wow`, `vdd` and `debugger`. Each preserves only the corresponding reached
   original interface shape; none is an alternate MVDM provider. The `softpc`
-  family binds the original executable SoftPC/CCPU30 or CCPU40 call graph. It never
-  includes a retired Bochs type, object or global, and does not provide a
-  fallback or simultaneous executor.
+  family binds the original executable SoftPC CCPU40 call graph. It never
+  includes a retired Bochs type, object or global, an NT4 kernel-VDM
+  `CPU_30_STYLE` monitor, or a fallback/second executor.
   The `monitor` family owns same-shaped `NtVdmControl`, `VDM_TIB`, V86-event
   and interrupt/fault-handler facades, and unsupported kernel/CSRSS behavior
   fails deterministically. The remaining families preserve their named
@@ -160,12 +160,13 @@ The current runtime binds exactly one active imported MVDM host context to each
 session, original DOS `EXEC`, COMMAND child/re-entry behavior and multiple
 WOW16 tasks are guest/task lifecycles, not additional VDM sessions.
 
-Each session activates one original SoftPC machine composition: CCPU30 or
-CCPU40. There is no fallback or simultaneous executor. Current functional
-machine, guest and MVDM-host acceptance records the Win32/x86 SoftPC CCPU40
-row; CCPU30 must obtain equivalent profile-specific evidence before it is
-selected in product execution. Pure source, static-analysis and documentation
-work need not create a machine session.
+Each session activates the original SoftPC CCPU40 machine composition. There
+is no fallback or simultaneous executor. `CPU_30_STYLE` is excluded because
+its original `v86/monitor` body delegates guest execution to NT4 kernel VDM;
+it is not a CCPU profile and cannot enter this non-invasive product. Current
+functional machine, guest and MVDM-host acceptance records the Win32/x86
+CCPU40 row. Pure source, static-analysis and documentation work need not
+create a machine session.
 
 All project-owned session and adapter APIs are multi-instance-safe: no hidden
 process-global current machine, mapping table or resource registry is allowed.

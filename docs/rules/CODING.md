@@ -145,17 +145,15 @@
   evidence, an immutable external name or prose describing a historical API.
 
 ## Build and evidence hygiene
-- The current recovery build is MSVC Win32/x86 `/MT`. Every reached SoftPC
-  behavior must compile and run under its declared original CCPU30 or CCPU40
-  configuration. CCPU40 is currently accepted; CCPU30 must receive equivalent
-  profile-specific compile and bounded-run evidence before paired-profile
-  support is claimed.
+- The current recovery build is MSVC Win32/x86 `/MT` and every reached SoftPC
+  behavior must compile and run under the selected original `CPU_40_STYLE` /
+  CCPU40 configuration. `CPU_30_STYLE` is an NT4 kernel-VDM V86-monitor
+  contract, not a CCPU execution profile; it is prohibited from production
+  compilation, linking, runtime and acceptance.
   x64 compatibility is recorded as deferred debt and is not a current gate.
   Do not link objects of different architecture or CRT into one process.
 - For a functional fixture that reaches machine execution, guest state or an
-  imported MVDM-host behavior, record the selected SoftPC CCPU30 or CCPU40
-  row; a shared fixture must run separately for each profile before it is used
-  as paired-profile evidence.
+  imported MVDM-host behavior, record the selected SoftPC CCPU40 row.
   An unavailable result is passing only when the fixture asserts that exact
   source-shaped unavailable outcome; it may not be silently omitted.
 - Generate the Ninja graph from audited owner/package manifests and dependency

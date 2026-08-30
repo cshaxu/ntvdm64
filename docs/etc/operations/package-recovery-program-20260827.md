@@ -119,30 +119,21 @@ proof that no guest, firmware, tools, production source or formal graph names
 the removed roots.
 
 **Exit:** formal affected Win32/x86 `/MT` CCPU40 graph passes, with
-documentation governance. This behavior-neutral package does not claim
-CCPU30 recovery: P02E owns CCPU30 source selection, compile and bounded-run
-acceptance. x64 compatibility belongs only to P02C. This package changes no
+documentation governance. This behavior-neutral package does not claim an
+NT4 kernel-VDM monitor recovery: P02E was superseded by the `CPU_30_STYLE`
+exclusion decision. x64 compatibility belongs only to P02C. This package changes no
 MVDM behavior, source-shaped adapter or BOP route.
 
-## P02E — Original SoftPC CCPU30 profile recovery
+## P02E — `CPU_30_STYLE` V86 monitor disposition (closed M0 T315)
 
-**Predecessor:** P02A. **Purpose:** recover the original x86 CCPU30 SoftPC
-profile as a second supported machine configuration, without replacing its
-execution body with CCPU40 or a project-authored executor. Reuse the same
-original-source, mapping-manager, session-terminal and adapter boundaries
-where their contracts are genuinely identical; audit and retain source-shaped
-differences where the two original profiles differ.
-
-**Delivery:** an audited CCPU30 source/build manifest, original-profile
-adapter bindings, a formal Win32/x86 `/MT` CCPU30 graph, and bounded execution
-fixtures equivalent in intent to the accepted CCPU40 lifecycle/terminal
-evidence. Every shared fixture states which original profile it exercises.
-
-**Exit:** both CCPU30 and CCPU40 formal x86 graphs compile; each profile runs
-its applicable bounded original SoftPC execution/terminal fixture; no profile
-silently selects the other executor; and all profile-specific source,
-configuration, mapping-manager and adapter differences are registered. This
-does not claim DOS/MVDM guest continuity or x64 compatibility.
+This proposal was originally—and incorrectly—labelled an original SoftPC
+“CCPU30” profile recovery. `M0 T315` established that `CPU_30_STYLE` selects
+the NT4 `v86/monitor` kernel-VDM execution path, not a second C-language CCPU
+interpreter. Because this product neither uses nor reconstructs kernel V86,
+the original monitor is retained only as historical source evidence and is
+prohibited from production compile/link/runtime/acceptance. CCPU40 remains
+the sole selected SoftPC execution profile. See the
+[T315 closure](../../history/m0-t315-cpu30-style-v86-monitor-exclusion-closure-20260830.md).
 
 ## P02B — Bochs production-closure removal
 
