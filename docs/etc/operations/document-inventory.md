@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3420 |
+| Documentation records | 3421 |
 | --- | --- |
-| Generated UTC | 2026-08-30T22:43:55Z |
+| Generated UTC | 2026-08-30T22:48:55Z |
 
 ## Entries
 
@@ -732,6 +732,7 @@ content-divergent entries.
 | etc/evidence/m0-t317-s3-p1-command-child-stream-boundary-001.md | indexed supporting material | 21ed892959ac91839dab45613113b120c2e99f2dd22e9683dc2300feb7bbc848 |
 | etc/evidence/m0-t317-s3-p2-command-worker-base-vdm-context-001.md | indexed supporting material | 64859801d913d1be005221e9cba8505e133078f7226dfe8db06f69f0ac6fcf97 |
 | etc/evidence/m0-t317-s3-p3-command-exit-redirection-disposition-001.md | indexed supporting material | 12d2f7ca252c86f3ea5e49e7ddd4d1a47c3435c7605f997e8bffbb32d9b4ff67 |
+| etc/evidence/m0-t318-s1-ntdos-exec-parent-return-contract-freeze-001.md | indexed supporting material | dd30e0af7fb4949dbf243c8aa4241b8cfa95ebfc6a7c72c864176c3bc2276a08 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1529,7 +1530,7 @@ content-divergent entries.
 | etc/operations/proposal-mvdm-host-support-reintegration-001.md | indexed supporting material | 3618981b5be1f46c07935f5fbc9005ba0c8bea94e97bb4a8e2ebdff51946589f |
 | etc/operations/proposal-mvdm-package-interface-closure-tracker-001.md | indexed supporting material | 78161a8a678fd2ec48596f310c47ffafd01572a995f06012bf75f17da06d6d37 |
 | etc/operations/proposal-mvdm-runtime-support-tool-re-root-001.md | indexed supporting material | 9955eefb0e8480e99f22e0cac375325d72663293262656537f4ca8d7cbb027c4 |
-| etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md | indexed supporting material | e4a8f60209eda2a1ff3858641aca0f343b670174f224a6799e0b1dbec3f2f7df |
+| etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md | indexed supporting material | ae58a6e7452fb309b96ebcc4cd64891467dda51cdbe8382aa78796c1273f2972 |
 | etc/operations/proposal-opennt-bop-mirror-overlay-convergence-001.md | indexed supporting material | 2f2e91c7a491398ae23278766e5596002ae710113ff2bd5a1fb0577b2d9e12b2 |
 | etc/operations/proposal-opennt-bop-original-dispatcher-provider-recovery-001.md | indexed supporting material | b8808fef6cf0f7519c2103fdc8509c7f6f704846620537f59f0dd076af718e93 |
 | etc/operations/proposal-opennt-command-cmdexec32-full-capability-closure-001.md | indexed supporting material | 2dbce97ef0f4ad01836827a786b0a5bbb5512eabefe3937c1d49c06aef525c02 |
@@ -3434,7 +3435,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | ae3e51cb8b34a1877d49f8dce3744ecac2e71f9051b461f1d2fc0a02a19cfc2f |
+| STATUS.md | principal control document | 2b6d76357a3da0804c713ef43acf60ed916a3081f108bcb33451fda6f271ee77 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

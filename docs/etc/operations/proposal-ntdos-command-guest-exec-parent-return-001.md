@@ -1,4 +1,4 @@
-# Proposal: NTDOS/COMMAND Guest EXEC And Parent-Return Completion
+# M0 T318 — NTDOS/COMMAND Guest EXEC And Parent-Return Completion
 
 ## Purpose
 
@@ -15,18 +15,20 @@ machine prerequisites are frozen; its package boundary may not expand into a
 COMMAND host broker or a machine-device task.
 ## Boundary
 
-NTDOS/COMMAND guest sources own DOS process semantics. `bx-vdm` may only pass
-the already-defined BOP result and checked guest-memory effects; bx-core and
-bx-mantle retain CPU, interrupts and machine mechanics. No guest lifecycle is
-reimplemented in the COMMAND host shim.
+NTDOS/COMMAND guest sources own DOS process semantics. The established
+`adapter-mvdm-host-out` and `session` boundary may only pass the already
+defined BOP result and controlled session outcome. `mvdm-host` SoftPC owns
+CPU, interrupts and machine mechanics. No guest lifecycle is reimplemented in
+a host COMMAND provider, app, session, or adapter.
 
 ## Admission Plan
 
-1. Map original NTDOS/COMMAND EXEC, PSP, arena, JFN, environment and return
+1. **S1 — Source and contract freeze.** Map original NTDOS/COMMAND EXEC, PSP,
+   arena, JFN, environment and return
    code to the staged source-built guest images and existing BOP contracts.
-2. Recover each composable guest path from original source; classify missing
+2. **S2 — Original guest recovery.** Recover each composable guest path from original source; classify missing
    machine or host prerequisites to their owners.
-3. Verify one declared DOS child → parent ordinary-return profile, then link
+3. **S3 — Controlled-return evidence.** Verify one declared DOS child → parent ordinary-return profile, then link
    its remaining owner transfers into the cross-family audit.
 
 ## Exit Rule
