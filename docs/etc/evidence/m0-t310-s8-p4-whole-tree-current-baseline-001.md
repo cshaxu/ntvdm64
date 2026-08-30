@@ -14,24 +14,26 @@ trees were not modified or used as the audit scope.
 
 ## Procedure
 
-Starting with cleaned target-local Ninja trees, the formal MSVC `/MT` Ninja
-graphs were run independently:
+Starting with cleaned, isolated target-local Ninja trees, the formal MSVC
+`/MT` Ninja graphs were run independently:
 
-- `build/M0-T310/S8/p1-machine-source/x64`
-- `build/M0-T310/S8/p1-machine-source/x86`
+- `build/M0-T310/S8/p1-machine-source-cold-20260829/x64`
+- `build/M0-T310/S8/p1-machine-source-cold-20260829/x86`
 
 The complete logs are retained as disposable target-local build outputs:
 
-- `x64/s8-p4-current-full-after-ccpu-delta.log`
-- `x86/s8-p4-current-full-after-ccpu-delta.log`
+- `x64/whole-tree-selected-candidate-rebuild.log`
+- `x86/whole-tree-selected-candidate-rebuild.log`
 
-Each run reached `[357/357]` and reported zero compiler/linker errors. The
-same parser used for the governed compiler-warning ledger recorded 41,363 raw
-diagnostic occurrences, yielding 19,443 current unique source diagnostics.
-The repaired C-video native-word shift records, the `nt_sec` pseudo-handle
-truncation, and the `c_main.c` native decode-cursor narrowing are absent from
-this fresh output. Of the remaining records, 910 are in the reconciled
-x86/x64 source-review worklist. All diagnostics
+Each run reached `[362/362]` and reported zero compiler/linker errors. The
+same parser used for the governed compiler-warning ledger recorded 40,039 raw
+diagnostic occurrences and 38,831 architecture-specific source-diagnostic
+records; after exact x86/x64 source-identity reconciliation, this yields
+19,440 cross-architecture diagnostic identities. The repaired C-video
+native-word shift records, the `nt_sec` pseudo-handle truncation, and the
+`c_main.c` native decode-cursor narrowing are absent from this fresh output.
+Of the remaining records, 1,009 are in the reconciled x86/x64 source-review
+worklist. All diagnostics
 remain deliberately visible rather than being hidden by warning suppression.
 
 ## Interpretation

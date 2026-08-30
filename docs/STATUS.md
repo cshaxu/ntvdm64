@@ -37,14 +37,14 @@ capability/mirror-purity acceptance remain separate queued T packages. See the
 amended [S8 plan](etc/operations/m0-t310-s8-original-machine-composition-plan-001.md)
 and [package-recovery program](etc/operations/package-recovery-program-20260827.md).
 
-**T310 S8 P4:** the refreshed formal MSVC `/MT` baseline reaches the same
-`357/357` selected-source graph on x86 and x64 with zero errors. Its complete
-compiler output was reclassified only for `mvdm-host` and `mvdm-support`:
-19,466 current unique source diagnostics, including 1,035 x86/x64 review
-candidates, remain visible. The live ledger is rebuilt from that output, so a
-warning still emitted today cannot inherit an old `closed-*` result. This is
-an audit baseline, not an S8 closure claim; see the [current full-tree
-baseline](etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md).
+**T310 S8 P4:** a new isolated cold formal MSVC `/MT` baseline reaches the
+same `362/362` selected-source graph on x86 and x64 with zero errors. Its
+complete compiler output was reclassified only for `mvdm-host` and
+`mvdm-support`: 19,440 cross-architecture source-diagnostic identities and
+1,009 x86/x64 review records remain visible. The live ledger is rebuilt from
+that output, so a warning still emitted today cannot inherit an old
+`closed-*` result. This is an audit baseline, not an S8 closure claim; see the
+[current full-tree baseline](etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md).
 
 **T310 S8 P4:** the source-missing CCPU `EDL_fast_bop(ULONG)` default now
 links only the imported NTVDMx64 patch's original debug-break disposition, as

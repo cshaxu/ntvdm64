@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 3267 |
 | --- | --- |
-| Generated UTC | 2026-08-30T01:58:40Z |
+| Generated UTC | 2026-08-30T02:07:57Z |
 
 ## Entries
 
@@ -624,7 +624,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-video-original-call-declaration-closure-001.md | indexed supporting material | d295af69819e24ca799f293b4bdb8a456354202c0c59a2e006a6819f48ad21d0 |
 | etc/evidence/m0-t310-s8-p4-video-profile-source-selection-closure-001.md | indexed supporting material | c75d84e7fdca7cea45a9e10d32b8c954bd8b8b3d0c36f7178650eb9e0a2a2939 |
 | etc/evidence/m0-t310-s8-p4-whole-tree-current-abi-baseline-001.md | indexed supporting material | 63fa6a1564e1fcfd56c9d6262650ee098b0ee7b776c52d890f74e69234f77382 |
-| etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md | indexed supporting material | 33f231135ae04c54128a20e73258a37e24664d0551b308396abf0079779fcf6f |
+| etc/evidence/m0-t310-s8-p4-whole-tree-current-baseline-001.md | indexed supporting material | 7ddd4b55e4ed719e458bdeea479264a411efc9355f65ca5002efa08ff0787b8b |
 | etc/evidence/m0-t310-s8-p4-whole-tree-formal-architecture-delta-001.md | indexed supporting material | b8d943d5eb42ca920ca57e11c6f6ad60b0adf1ace0030e3a252ba94ba764dc0d |
 | etc/evidence/m0-t310-s8-p4-x86gfx-console-video-hole-disposition-001.md | indexed supporting material | 7616f4f901fc2766fd6a18ddd04dff80acb15006053cd174975f91de4c3e7a9c |
 | etc/evidence/m0-t310-s8-p4-xms-a20-call-contract-closure-001.md | indexed supporting material | 5f40ea74175157b98ce6faab97e4d48eb93d004b593c7a8cc9ab6a73e1771629 |
@@ -1287,16 +1287,16 @@ content-divergent entries.
 | etc/operations/m0-t310-s8-p4-ccpu-access-table-ledger.tsv | indexed supporting material | 012ff0295eda6c33b2181ac4936b619a3ffef1af4c72110fd7cc14e3b984d9fc |
 | etc/operations/m0-t310-s8-p4-cvidc-generated-interface-ledger.tsv | indexed supporting material | ab31ccb2aea47932461d7062942691584596c5aa34cae45202d4455a1b71fb11 |
 | etc/operations/m0-t310-s8-p4-gdp-generated-layout-inventory.tsv | indexed supporting material | 50cc2fe1a26297432196b2bf00382560c8f0b3e674680bb7cddf3fbbf21b6343 |
-| etc/operations/m0-t310-s8-p4-owner-contract-coverage-ledger.tsv | indexed supporting material | 07ac235997fe61f4f2e8b1b98c508b0a9a33714e29e734ef64f470412813f9b0 |
+| etc/operations/m0-t310-s8-p4-owner-contract-coverage-ledger.tsv | indexed supporting material | 529cab9f801c6e43be2d8a9de5ca954abcca807876ea191e630a680d4afee852 |
 | etc/operations/m0-t310-s8-p4-owner-contract-execution-order-001.md | indexed supporting material | dd5dbf810717a15fec2343b2fa13d2e87e3e503c1c2903ceece47e2e1cd32911 |
-| etc/operations/m0-t310-s8-p4-whole-tree-compiler-warning-cluster-ledger.tsv | indexed supporting material | bf52352bc9da1c55d33b7d95e3ad635d32d19f3e53513e7ae49b307baf052327 |
-| etc/operations/m0-t310-s8-p4-whole-tree-compiler-warning-ledger.tsv | indexed supporting material | 15ecfafe49a4cd80d54400ce282662b2c459e46d4b1e1ef77b57f05ef3441fd4 |
+| etc/operations/m0-t310-s8-p4-whole-tree-compiler-warning-cluster-ledger.tsv | indexed supporting material | cc5441fd3f901d42c568fb29f38d0b64385226a500038ba355f225a06c4de5df |
+| etc/operations/m0-t310-s8-p4-whole-tree-compiler-warning-ledger.tsv | indexed supporting material | 62ad064ad7bae4ceb0546d4fe41b03c223619fa08804edef71cb0e9b42fd6b24 |
 | etc/operations/m0-t310-s8-p4-whole-tree-contract-review-index.tsv | indexed supporting material | c3bac12324c7053f44532f96f3c6c0da2130caf8acd5538b07dd2d95c1dd9d6e |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-audit-baseline-001.md | indexed supporting material | b878f9a100fb6862522f3a5ec35977c3d5369032b99e3c4932d25a34ab1f2c46 |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-cluster-ledger.tsv | indexed supporting material | 1605b7cb92573e7fa68f88ca6d91a5801c51894bbcaaeb9c34b62a3ad029a7af |
 | etc/operations/m0-t310-s8-p4-whole-tree-static-abi-inventory.tsv | indexed supporting material | 0abc737f2828f98252efdcd64950cc1f1e87610842f8b80e1ac3e539421419d2 |
-| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification.tsv | indexed supporting material | d5144fed9957af2dcdd1c979b35e3bb2792004187ddf2fb1da354bb7ea8e77f6 |
-| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | 658ac5ce571e21e572e5a95fe830eb2e0252e02e4ec89a8f7fcfd636c2fa2338 |
+| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification.tsv | indexed supporting material | e1f4c738c755f2ed398540e515c006d62a97ea43164043a07f04047eb910bcde |
+| etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification-worklist.tsv | indexed supporting material | e78d920585f012343840b754b31c7e26183419ebb246b602df77ffdef193458c |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3281,7 +3281,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 66d46366d25fc766b8e319a08bc907f24e5f79c8b1884ef8ef1524add2f630b0 |
+| STATUS.md | principal control document | ef08aa7dc503dae742b19fbe436170064fdde21e82c520234251b1e640a982d8 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
