@@ -59,6 +59,35 @@ VOID WINAPI SetLastConsoleEventActive(VOID)
         0u);
 }
 
+BOOL WINAPI RegisterConsoleVDM(DWORD flags, HANDLE start_event,
+                               HANDLE end_event, LPWSTR state_name,
+                               DWORD state_name_length, LPDWORD state_length,
+                               PVOID *state, LPWSTR buffer_name,
+                               DWORD buffer_name_length, COORD buffer_size,
+                               PVOID *buffer)
+{
+    /* DIVERGENCE(ADAPTER-WIN32-032): NT4 Console Server owned this complete
+     * registration transaction: it duplicated the hardware events, created
+     * the state/text mappings, and paired them with a VDM record.  Modern
+     * public Console APIs expose none of that protocol.  Retain the exact
+     * source-facing ABI and report its absence; do not manufacture mappings,
+     * events, or a partial fullscreen registration that original callers
+     * could mistake for success. */
+    (void)flags;
+    (void)start_event;
+    (void)end_event;
+    (void)state_name;
+    (void)state_name_length;
+    (void)state_length;
+    (void)state;
+    (void)buffer_name;
+    (void)buffer_name_length;
+    (void)buffer_size;
+    (void)buffer;
+    SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
+    return FALSE;
+}
+
 HANDLE GetConsoleInputWaitHandle(VOID)
 {
     /* DIVERGENCE(ADAPTER-WIN32-030): NT4 supplied a Console Server wait

@@ -65,9 +65,9 @@ $includes = @($includePaths + @($gdpOverlayRoot, $gdpGeneratedRoot)) | ForEach-O
 # `i386` is never a product-wide host switch. Any original x86-only source
 # unit needs a separately registered, target-local compilation exception.
 # This is the sole selected original CCPU40 configuration. Its retained
-# CPU_30_STYLE compatibility definition is a source-level carrier, not a
-# separate CPU30/MONITOR product build.
-$cflags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_30_STYLE /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' + ($includes -join ' ')
+# CPU30 is not a product profile.  The original CCPU40 host headers retain
+# their own compatibility carrier where their selected declarations require it.
+$cflags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' + ($includes -join ' ')
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10'); $graph.Add('cflags = ' + $cflags); $graph.Add('')
 $graph.Add('rule cc'); $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in'); $graph.Add('  deps = msvc'); $graph.Add('  msvc_deps_prefix = Note: including file:')

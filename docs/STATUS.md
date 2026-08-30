@@ -26,6 +26,13 @@
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
 | Similar-Issue Sweep | Every selected host-platform callback, process/resource endpoint, reached caller, host handle/address form, selected compilation condition, and MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
 
+**T310 S28 P1:** `RegisterConsoleVDM` now has its complete original ABI and
+an explicit unavailable direction instead of an unresolved private Console
+Server edge; the already source-shaped Base-client `ExitVDM` pair enters the
+formal graph.  A fresh selected Win32/x86 CCPU40 candidate completed 374 Ninja
+edges without a command-line CPU30 profile define.  S28 remains active; see
+[P1 boundary record](etc/evidence/m0-t310-s28-p1-host-platform-source-boundary-001.md).
+
 **T310 S22 P1:** the selected host-storage surface is now separated into the
 original no-fixed-disk CCPU callbacks, DEM direct DASD, local floppy and the
 unimplemented historical remote-floppy service. Existing guest-location and
