@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3328 |
+| Documentation records | 3331 |
 | --- | --- |
-| Generated UTC | 2026-08-30T08:44:28Z |
+| Generated UTC | 2026-08-30T08:52:05Z |
 
 ## Entries
 
@@ -546,6 +546,8 @@ content-divergent entries.
 | etc/evidence/m0-t310-s23-p2-comms-controller-formal-assembly-001.md | indexed supporting material | ac99e420f53bb7f11fd9f9be9952af7190bde5c6282a78b0592c7472982d16e2 |
 | etc/evidence/m0-t310-s24-p1-host-comms-source-boundary-001.md | indexed supporting material | 8aa54f3ce2c4f57d3333c59bda00342f17199949841096cd3ccefdf371df82b8 |
 | etc/evidence/m0-t310-s24-p2-host-comms-formal-assembly-001.md | indexed supporting material | a649acc892e654b6c7b751592cb68288d610f10d76d36211d5872a6d054a7d32 |
+| etc/evidence/m0-t310-s25-p1-cvidc-generated-dispatch-source-boundary-001.md | indexed supporting material | 88ce77db15323acb34a8476c4d6c1e020a500f85639b5f510330b677f0d6bc85 |
+| etc/evidence/m0-t310-s25-p2-cvidc-generated-dispatch-formal-assembly-001.md | indexed supporting material | 39fb9d4355f0e5e3953543cd153813b58260b9a30a7bc421ed44110b87a2986a |
 | etc/evidence/m0-t310-s2-original-softpc-candidate-build-001.md | indexed supporting material | 398a96ff9360cc89521289b35ef8e7f11693f22e8fbac97e1ae735c94d8819b4 |
 | etc/evidence/m0-t310-s2-original-softpc-forced-link-audit-001.md | indexed supporting material | 194795bbc3ac0871d9716229aec9c276d44ef84cd484474df8da3a85300692d7 |
 | etc/evidence/m0-t310-s3-selected-backend-lifecycle-001.md | indexed supporting material | 6a02b307d35aebb266ea589193f39072e2c8e009b9b0b999bf636829c9cca2ce |
@@ -3055,6 +3057,7 @@ content-divergent entries.
 | history/m0-t310-s22-host-storage-bindings-closure-20260830.md | closed task history | 7891a2cedfad95dc67fb21b1fa98b27c98d2fcbe13c42baafc07180f62a0b475 |
 | history/m0-t310-s23-comms-controller-callbacks-closure-20260830.md | closed task history | aa492242c78f75e511a0a8fc9541f76b843389f53260663d1a4a76a94f8d0aa1 |
 | history/m0-t310-s24-host-comms-bindings-closure-20260830.md | closed task history | 614b2e6c4210ed661af41efc093181e0b1e021b0815057770ca360320c9c4a19 |
+| history/m0-t310-s25-cvidc-generated-dispatch-closure-20260830.md | closed task history | c3af42c764185961b2861a324c356720c43b6918127a072ecb4d20a4176794ed |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -3342,7 +3345,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | de0697c262f61345982ad7406feab8b19e7a74c185504669eff33d1ca345e63e |
+| STATUS.md | principal control document | f9c61097f3fa73a2b0430495260e95ce2997951bf225fa962587cc5f123aa946 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

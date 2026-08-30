@@ -55,7 +55,6 @@ $disksRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/disks'
 $supportRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/support'
 $videoRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/video'
 $cvidcRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/cvidc'
-$cvidcGenerator = Join-Path $root 'tools/build/Generate-CvidcTypedTables.ps1'
 $videoGenerator = Join-Path $root 'tools/build/Generate-T310BaseVideoTypedSources.mjs'
 $gdpGenerator = Join-Path $root 'tools/build/Generate-T310GdpSlots.mjs'
 $gdpOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/base/cvidc'
@@ -116,12 +115,11 @@ $videoNames = Get-OriginalSources $videoManifest
 # alternate CPU. Select its complete manifest rather than substitute display
 # or video-memory shims one entrypoint at a time.
 $cvidcNames = @(Get-OriginalSources $cvidcManifest)
-# `vglfunc.c` and `evidfunc.c` publish generated tables through K&R-style
-# generic declarations.  Keep those exact originals as the mirror evidence,
-# but compile their generated, source-derived typed-table carrier below.  The
-# rule bodies remain original source selected from the original manifest.
-$cvidcTableNames = @('vglfunc.c', 'evidfunc.c')
-$cvidcRuleSourceNames = @($cvidcNames | Where-Object { $_ -notin $cvidcTableNames })
+# The selected product is Win32/x86 CCPU40.  Compile the complete original
+# C-VID manifest, including its generated table definitions, as the source
+# owner.  The former typed-table generator existed solely for deferred x64
+# function-pointer-width recovery and must not replace the original x86 table
+# contract with per-slot wrappers.
 # These are complete original library packages, selected because the current
 # BIOS/reset workset calls their public controller algorithms.  Selecting them
 # as packages preserves the original implementation rather than substituting
@@ -228,8 +226,7 @@ foreach ($name in $patchEvidenceNames) {
     if (!(Test-Path -LiteralPath (Join-Path $patchEvidenceRoot $name))) { throw "Registered SoftPC patch evidence missing: $name" }
 }
 
-New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/cvidc'), (Join-Path $build 'generated/video'), (Join-Path $build 'generated/gdp'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/suballoc'), (Join-Path $build 'obj/session'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/patch') | Out-Null
-if (!(Test-Path -LiteralPath $cvidcGenerator -PathType Leaf)) { throw "CVIDC typed-table generator missing: $cvidcGenerator" }
+New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/video'), (Join-Path $build 'generated/gdp'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/suballoc'), (Join-Path $build 'obj/session'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/patch') | Out-Null
 if (!(Test-Path -LiteralPath $videoGenerator -PathType Leaf)) { throw "Base/video declaration generator missing: $videoGenerator" }
 if (!(Test-Path -LiteralPath $gdpGenerator -PathType Leaf)) { throw "GDP slot generator missing: $gdpGenerator" }
 if (!(Test-Path -LiteralPath $gdpOverlayRoot -PathType Container)) { throw "GDP overlay root missing: $gdpOverlayRoot" }
@@ -248,8 +245,6 @@ function Get-NodeSha256([string]$Path) {
     }
     return $hash
 }
-$cvidcGeneratedRoot = Join-Path $build 'generated/cvidc'
-$cvidcGenerated = & $cvidcGenerator -RepositoryRoot $root -OutputDirectory $cvidcGeneratedRoot | ConvertFrom-Json
 $videoGeneratedRoot = Join-Path $build 'generated/video'
 & $NodeExecutable $videoGenerator $root $videoGeneratedRoot | Out-Null
 $gdpGeneratedRoot = Join-Path $build 'generated/gdp'
@@ -397,18 +392,10 @@ $videoObjects = foreach ($name in $videoNames) {
     $graph.Add('build ' + $object + ': cc_cvidc_rule ' + (NinjaPath $source))
     $object
 }
-$cvidcObjects = foreach ($name in $cvidcRuleSourceNames) {
+$cvidcObjects = foreach ($name in $cvidcNames) {
     $object = 'obj/cvidc/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc_cvidc_rule ' + (NinjaPath (Join-Path $cvidcRoot $name)))
     $object
-}
-$cvidcGeneratedObjects = @(
-    [pscustomobject]@{ Source = $cvidcGenerated.video; Object = 'obj/cvidc/cvidc_typed_video_vector.obj' },
-    [pscustomobject]@{ Source = $cvidcGenerated.evid; Object = 'obj/cvidc/cvidc_typed_evid_tables.obj' }
-)
-foreach ($generated in $cvidcGeneratedObjects) {
-    $graph.Add('build ' + $generated.Object + ': cc_cvidc_rule ' + (NinjaPath $generated.Source))
-    $cvidcObjects += $generated.Object
 }
 $gdpOverlaySource = Join-Path $gdpOverlayRoot 'mvdm_gdp_state.c'
 $graph.Add('build obj/cvidc/mvdm_gdp_state.obj: cc ' + (NinjaPath $gdpOverlaySource))

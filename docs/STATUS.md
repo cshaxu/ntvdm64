@@ -4,27 +4,27 @@
 
 ## Active Packet
 
-**Active: M0 T310 S25**
+**Active: M0 T310 S26**
 
-### M0 T310 S25 — C-VID generated dispatch
+### M0 T310 S26 — video-controller dispatch
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T310 S25; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | S24 closed original host-communications bindings and formal source assembly. S25 is the next sequential owner-contract cluster. |
-| Objective | Recover only `SPC-CVIDC-GENERATED-DISPATCH`: the complete selected C-VID generated vector/table declaration, initializer, definition and caller contract for Win32/x86 CCPU40 SoftPC. |
-| Non-goals | No video-controller algorithm replacement (S26), host display/window binding (S27), terminal redesign, kernel VDM or MONITOR import, Bochs fallback, BOP semantic expansion, trace-selected repair, or guest-visible display claim. |
-| Reference Baseline | Closed S24 host communications assembly; original `softpc.new/base/cvidc` generated sources, `base/video` callers and selected CCPU C-video declarations. |
-| Files And ABI Surface | Original `cvidc` generated vector/table sources and headers, reached `base/video` handler/callback assignments, selected CCPU C-video call forms, and a private mirror overlay only if the whole source-shaped generated contract requires it. |
+| Identifier Mode | M0 T310 S26; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | S25 closed original C-VID generated-table source ownership and formal assembly. S26 is the next sequential owner-contract cluster. |
+| Objective | Recover only `SPC-VIDEO-CONTROLLER-DISPATCH`: selected original `softpc.new/base/video` controller initialization, register, memory-handler and C-VID selection/dispatch contracts for Win32/x86 CCPU40. |
+| Non-goals | No host display/window binding (S27), terminal redesign, kernel VDM or MONITOR import, Bochs fallback, BOP semantic expansion, trace-selected repair, or guest-visible display claim. |
+| Reference Baseline | Closed S25 generated C-VID table assembly; original `softpc.new/base/video` controllers, selected C-VID dispatch headers and original reached caller units. |
+| Files And ABI Surface | Original selected base-video sources and manifests, controller tables/initializers, C-VID selection and reached CCPU/BIOS caller contracts; a private mirror overlay only if a complete source-shaped contract requires it. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island, CPU-profile and source-recovery rules; approved T310 S8 plan and coverage ledger. |
-| Verification | Formal MSVC Win32/x86 `/MT` Ninja selected C-VID archive and forced-link review; generated declaration/definition/table/caller signature comparison; focused vector/table initialization or exact source-shaped unavailable result. x64 compatibility is outside the active worklist. |
-| Expected Markers | One source-shaped selected vector signature contract; preserved generated table order; guest numeric addresses remain guest values and do not become host identities; no raw MONITOR/Bochs/kernel-VDM route or hand-written per-slot semantic replacement. |
-| Asset Needs | Exact selected C-VID and video sources, generated source manifests, session mapping-manager rules and MSVC Build Tools/Ninja. |
-| Reporting Requirements | Per cluster: generator/original roots, declaration/definition/table/caller relationship, recovery rung, selected x86 CCPU40 result, mapping-manager use and no-Bochs/MONITOR proof. |
-| Stop Conditions | A vector requires an unregistered semantic divergence; a hand-written wrapper replaces a generated original table; a raw host identity crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or a finding belongs to S26 or later. |
-| Exit Criteria | Every selected C-VID declaration, definition, generated initializer and reached caller has one direct, binding-only, private-generated-overlay or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and focused generated-contract evidence does not select new S25 owner work. Integrated video behavior remains mandatory S49 validation. |
+| Verification | Formal MSVC Win32/x86 `/MT` Ninja selected video archive and forced-link review; original controller declaration/definition/table/caller comparison; focused source-shaped controller initialization or exact unavailable result. x64 compatibility is outside the active worklist. |
+| Expected Markers | One source-shaped selected controller dispatch contract; preserved original table order; guest numeric addresses remain guest values and do not become host identities; no raw MONITOR/Bochs/kernel-VDM route or hand-written controller replacement. |
+| Asset Needs | Exact selected base-video and C-VID sources, source manifests, session mapping-manager rules and MSVC Build Tools/Ninja. |
+| Reporting Requirements | Per cluster: original roots, declaration/definition/table/caller relationship, recovery rung, selected x86 CCPU40 result, mapping-manager use and no-Bochs/MONITOR proof. |
+| Stop Conditions | A selected controller requires an unregistered semantic divergence; a raw host identity crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or a finding belongs to S27 or later. |
+| Exit Criteria | Every selected controller declaration, definition, initializer and reached caller has one direct, binding-only, private-overlay or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and focused controller-contract evidence does not select new S26 owner work. Integrated video behavior remains mandatory S49 validation. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
-| Similar-Issue Sweep | Every C-VID vector slot, generated initializer, actual `S_*` definition, C-video declaration, base-video handler/callback caller, guest address form, selected compilation condition, and MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
+| Similar-Issue Sweep | Every selected base-video controller table, initializer, handler/callback assignment, C-VID selector, reached caller, guest address form, selected compilation condition, and MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
 
 **T310 S22 P1:** the selected host-storage surface is now separated into the
 original no-fixed-disk CCPU callbacks, DEM direct DASD, local floppy and the
@@ -64,6 +64,14 @@ communications roots and communications package with no S24-owner unresolved
 forced-link edge.  A safe impossible-COM-name fixture passes without touching
 a real endpoint; live serial behavior remains S49.  See the [S24 formal
 assembly evidence](etc/evidence/m0-t310-s24-p2-host-comms-formal-assembly-001.md).
+
+**T310 S25 closed:** original `vglfunc.c` and `evidfunc.c` again own the
+selected C-VID generated `VideoVector` and EVID tables directly: 156 vector
+slots, 14 tables and 692 generated entries.  A fresh 369-edge x86 CCPU40
+formal graph archives those original sources and has no selected table
+unresolved symbol.  The x64-only per-slot wrapper generator was removed;
+video-controller behavior remains S26 and integrated behavior S49.  See the
+[closure record](history/m0-t310-s25-cvidc-generated-dispatch-closure-20260830.md).
 
 **T310 S17 P1:** the complete selected system-controller source set is now
 split from adjacent ROM, platform, endpoint and BOP owners. The original
