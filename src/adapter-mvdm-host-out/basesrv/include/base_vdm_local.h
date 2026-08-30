@@ -8,7 +8,7 @@
 
 typedef struct session session;
 
-#define BASE_VDM_LOCAL_VERSION UINT32_C(1)
+#define BASE_VDM_LOCAL_VERSION UINT32_C(2)
 
 /* A copied DOS record for the reached BaseSrv command path. */
 typedef struct base_vdm_command {
@@ -50,6 +50,12 @@ typedef struct base_vdm_local {
     uint16_t current_directory_bytes;
     uint32_t current_directories_bytes;
     uint8_t *current_directories;
+    /* Adapter-private equivalents of the original BaseSrv DOS-record lock
+     * and `hWaitForVDM`.  They never enter VDMINFO, MVDM or guest state. */
+    CRITICAL_SECTION lock;
+    HANDLE wake_event;
+    uint32_t lock_initialized;
+    uint32_t pending_request;
     uint8_t command[MAXIMUM_VDM_COMMAND_LENGTH];
     uint8_t application[MAXIMUM_VDM_PATH_STRING];
     uint8_t environment[MAXIMUM_VDM_ENVIORNMENT];
@@ -67,6 +73,7 @@ int base_vdm_local_publish(base_vdm_local *record,
 int base_vdm_local_bind(base_vdm_local *record, session *owner);
 int base_vdm_local_unbind(base_vdm_local *record);
 BOOL base_vdm_local_dispatch(PVDMINFO information);
+int base_vdm_local_wait_for_command(PVDMINFO information);
 BOOL base_vdm_local_is_first(void);
 BOOL base_vdm_local_set_current_directories(ULONG byte_count,
     const CHAR *directories);

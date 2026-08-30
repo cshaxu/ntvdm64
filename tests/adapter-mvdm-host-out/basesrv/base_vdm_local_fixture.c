@@ -9,6 +9,27 @@ static void reset_info(VDMINFO *information)
     memset(information, 0, sizeof(*information));
 }
 
+typedef struct publish_context {
+    base_vdm_local *record;
+    const base_vdm_command *command;
+    uint32_t observed_pending;
+} publish_context;
+
+static DWORD WINAPI publish_after_wait(LPVOID parameter)
+{
+    publish_context *context = (publish_context *)parameter;
+    unsigned int attempt;
+    for (attempt = 0u; attempt != 100u; ++attempt) {
+        EnterCriticalSection(&context->record->lock);
+        context->observed_pending = context->record->pending_request;
+        LeaveCriticalSection(&context->record->lock);
+        if (context->observed_pending != 0u) break;
+        Sleep(1u);
+    }
+    if (!base_vdm_local_publish(context->record, context->command)) return 1u;
+    return context->observed_pending != 0u ? 0u : 2u;
+}
+
 int main(void)
 {
     static const uint8_t command[] = "C:\\DOS\\COMMAND.COM /C VER";
@@ -25,6 +46,9 @@ int main(void)
     uint8_t directory_buffer[MAXIMUM_VDM_CURRENT_DIR];
     static const CHAR directories[] = "=C:=C:\\DOS\0=D:=D:\\WORK\0\0";
     CHAR directory_copy[sizeof(directories)];
+    publish_context producer;
+    HANDLE producer_thread;
+    DWORD producer_result = UINT32_MAX;
 
     reset_info(&information);
     if (GetNextVDMCommand(NULL) || GetLastError() != ERROR_CALL_NOT_IMPLEMENTED)
@@ -92,6 +116,46 @@ int main(void)
         memcmp(application_buffer, application, sizeof(application)) != 0 ||
         memcmp(environment_buffer, environment, sizeof(environment)) != 0 ||
         memcmp(directory_buffer, directory, sizeof(directory)) != 0) return 5;
+
+    /* Original BaseClient waits when BaseSrv has no DOS record, then retries
+     * after the server's producer signal with ASKING_FOR_SECOND_TIME.  The
+     * publisher is deliberately a separate host thread: no caller pointer,
+     * guest pointer or native handle enters VDMINFO. */
+    producer.record = &source;
+    producer.command = &payload;
+    producer.observed_pending = 0u;
+    producer_thread = CreateThread(NULL, 0u, publish_after_wait, &producer,
+        0u, NULL);
+    if (producer_thread == NULL) return 21;
+    reset_info(&information);
+    information.CmdLine = command_buffer;
+    information.CmdSize = sizeof(command_buffer);
+    information.AppName = application_buffer;
+    information.AppLen = sizeof(application_buffer);
+    information.Enviornment = environment_buffer;
+    information.EnviornmentSize = sizeof(environment_buffer);
+    information.CurDirectory = directory_buffer;
+    information.CurDirectoryLen = sizeof(directory_buffer);
+    if (!GetNextVDMCommand(&information)) {
+        fputs("pending Base VDM request did not complete\n", stderr);
+        CloseHandle(producer_thread);
+        return 22;
+    }
+    if (information.VDMState != 0u || information.iTask != payload.task ||
+        source.pending_request != 0u || producer.observed_pending == 0u ||
+        memcmp(command_buffer, command, sizeof(command)) != 0 ||
+        WaitForSingleObject(producer_thread, INFINITE) != WAIT_OBJECT_0 ||
+        !GetExitCodeThread(producer_thread, &producer_result) ||
+        producer_result != 0u) {
+        fprintf(stderr, "pending Base VDM result mismatch: state=%u task=%lu pending=%lu observed=%lu producer=%lu\n",
+            (unsigned)information.VDMState, (unsigned long)information.iTask,
+            (unsigned long)source.pending_request,
+            (unsigned long)producer.observed_pending,
+            (unsigned long)producer_result);
+        CloseHandle(producer_thread);
+        return 23;
+    }
+    CloseHandle(producer_thread);
 
     reset_info(&information);
     information.VDMState = RETURN_ON_NO_COMMAND | ASKING_FOR_SECOND_TIME;

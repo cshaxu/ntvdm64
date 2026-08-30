@@ -3,6 +3,7 @@
 BOOL APIENTRY GetNextVDMCommand(PVDMINFO information)
 {
     VDMINFO capture;
+    VDMINFO request;
     USHORT state;
 
     /* DIVERGENCE: the original client uses a CSR capture buffer and private
@@ -11,10 +12,23 @@ BOOL APIENTRY GetNextVDMCommand(PVDMINFO information)
      * BaseSrv dispatcher.  No caller pointer survives this call. */
     if (information == NULL) return base_vdm_local_is_first();
 
-    capture = *information;
+    request = *information;
+    capture = request;
     state = information->VDMState;
     capture.VDMState = state;
+retry:
     if (!base_vdm_local_dispatch(&capture)) {
+        if (GetLastError() == ERROR_IO_PENDING &&
+            base_vdm_local_wait_for_command(&capture)) {
+            /* BaseClient retries the server request after its wait object is
+             * signalled.  The server's no-command result has no caller-owned
+             * buffers to retain, so reconstruct the captured request rather
+             * than accidentally submitting the cleared required-size fields. */
+            state = capture.VDMState;
+            capture = request;
+            capture.VDMState = state;
+            goto retry;
+        }
         information->CmdSize = capture.CmdSize;
         information->AppLen = capture.AppLen;
         information->PifLen = capture.PifLen;

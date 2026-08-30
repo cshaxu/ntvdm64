@@ -26,6 +26,9 @@ void base_vdm_local_initialize(base_vdm_local *record)
     record->version = BASE_VDM_LOCAL_VERSION;
     record->struct_bytes = (uint32_t)sizeof(*record);
     record->first_vdm_available = 1u;
+    InitializeCriticalSection(&record->lock);
+    record->lock_initialized = 1u;
+    record->wake_event = CreateEvent(NULL, TRUE, FALSE, NULL);
 }
 
 int base_vdm_local_valid(const base_vdm_local *record)
@@ -36,23 +39,28 @@ int base_vdm_local_valid(const base_vdm_local *record)
         record->application_bytes <= MAXIMUM_VDM_PATH_STRING &&
         record->environment_bytes <= MAXIMUM_VDM_ENVIORNMENT &&
         record->current_directory_bytes <= MAXIMUM_VDM_CURRENT_DIR &&
+        record->lock_initialized == 1u && record->wake_event != NULL &&
+        record->pending_request <= 1u &&
         (record->current_directories_bytes == 0u ||
          record->current_directories != NULL);
 }
 
 int base_vdm_local_publish(base_vdm_local *record, const base_vdm_command *command)
 {
+    int published = 0;
     if (!base_vdm_local_valid(record) || command == NULL ||
-        command->struct_bytes != sizeof(*command) || record->available != 0u ||
+        command->struct_bytes != sizeof(*command) ||
         command->command_bytes == 0u ||
         !valid_bytes(command->command, command->command_bytes, MAXIMUM_VDM_COMMAND_LENGTH) ||
         !valid_bytes(command->application, command->application_bytes, MAXIMUM_VDM_PATH_STRING) ||
         !valid_bytes(command->environment, command->environment_bytes, MAXIMUM_VDM_ENVIORNMENT) ||
         !valid_bytes(command->current_directory, command->current_directory_bytes, MAXIMUM_VDM_CURRENT_DIR)) return 0;
+    EnterCriticalSection(&record->lock);
+    if (record->available != 0u) goto done;
     if (!copy_bytes(record->command, command->command, command->command_bytes) ||
         !copy_bytes(record->application, command->application, command->application_bytes) ||
         !copy_bytes(record->environment, command->environment, command->environment_bytes) ||
-        !copy_bytes(record->current_directory, command->current_directory, command->current_directory_bytes)) return 0;
+        !copy_bytes(record->current_directory, command->current_directory, command->current_directory_bytes)) goto done;
     record->task = command->task;
     record->creation_flags = command->creation_flags;
     record->error_code = command->error_code;
@@ -64,7 +72,14 @@ int base_vdm_local_publish(base_vdm_local *record, const base_vdm_command *comma
     record->environment_bytes = command->environment_bytes;
     record->current_directory_bytes = command->current_directory_bytes;
     record->available = 1u;
-    return 1;
+    if (!SetEvent(record->wake_event)) {
+        record->available = 0u;
+        goto done;
+    }
+    published = 1;
+done:
+    LeaveCriticalSection(&record->lock);
+    return published;
 }
 
 static void clear_sizes(PVDMINFO information)
@@ -98,22 +113,31 @@ static NTSTATUS get_next_dos(base_vdm_local *record, PVDMINFO information)
     uint16_t state = information->VDMState;
     if (state & (ASKING_FOR_WOW_BINARY | ASKING_FOR_SEPWOW_BINARY | ASKING_FOR_PIF))
         return STATUS_NOT_IMPLEMENTED;
+    EnterCriticalSection(&record->lock);
     if (record->available == 0u) {
         clear_sizes(information);
-        return ((state & RETURN_ON_NO_COMMAND) && (state & ASKING_FOR_SECOND_TIME))
-            ? STATUS_NO_MEMORY : STATUS_NOT_IMPLEMENTED;
+        if ((state & RETURN_ON_NO_COMMAND) && (state & ASKING_FOR_SECOND_TIME)) {
+            LeaveCriticalSection(&record->lock);
+            return STATUS_NO_MEMORY;
+        }
+        record->pending_request = 1u;
+        ResetEvent(record->wake_event);
+        LeaveCriticalSection(&record->lock);
+        return STATUS_PENDING;
     }
     if (state & ASKING_FOR_ENVIRONMENT) {
         if (!has_buffer(information->Enviornment, information->EnviornmentSize,
                 record->environment_bytes)) {
             clear_sizes(information);
             information->EnviornmentSize = record->environment_bytes;
+            LeaveCriticalSection(&record->lock);
             return STATUS_INVALID_PARAMETER;
         }
         (void)copy_bytes((uint8_t *)information->Enviornment, record->environment,
             record->environment_bytes);
         clear_sizes(information);
         information->EnviornmentSize = record->environment_bytes;
+        LeaveCriticalSection(&record->lock);
         return STATUS_SUCCESS;
     }
     if (!has_buffer(information->CmdLine, information->CmdSize, record->command_bytes) ||
@@ -121,6 +145,7 @@ static NTSTATUS get_next_dos(base_vdm_local *record, PVDMINFO information)
         !has_buffer(information->Enviornment, information->EnviornmentSize, record->environment_bytes) ||
         !has_buffer(information->CurDirectory, information->CurDirectoryLen, record->current_directory_bytes)) {
         required_sizes(record, information);
+        LeaveCriticalSection(&record->lock);
         return STATUS_INVALID_PARAMETER;
     }
     (void)copy_bytes((uint8_t *)information->CmdLine, record->command, record->command_bytes);
@@ -137,6 +162,9 @@ static NTSTATUS get_next_dos(base_vdm_local *record, PVDMINFO information)
     information->ErrorCode = record->error_code;
     information->fComingFromBat = record->coming_from_bat;
     record->available = 0u;
+    record->pending_request = 0u;
+    ResetEvent(record->wake_event);
+    LeaveCriticalSection(&record->lock);
     return STATUS_SUCCESS;
 }
 
@@ -145,12 +173,24 @@ static void teardown(void *context)
     base_vdm_local *record = (base_vdm_local *)context;
     if (record == NULL) return;
     if (base_vdm_current == record) base_vdm_current = NULL;
+    if (record->lock_initialized != 0u) EnterCriticalSection(&record->lock);
     if (record->current_directories != NULL) {
         HeapFree(GetProcessHeap(), 0u, record->current_directories);
         record->current_directories = NULL;
         record->current_directories_bytes = 0u;
     }
+    if (record->wake_event != NULL) {
+        SetEvent(record->wake_event);
+        CloseHandle(record->wake_event);
+        record->wake_event = NULL;
+    }
+    record->pending_request = 0u;
     record->owner = NULL;
+    if (record->lock_initialized != 0u) {
+        LeaveCriticalSection(&record->lock);
+        DeleteCriticalSection(&record->lock);
+        record->lock_initialized = 0u;
+    }
 }
 
 int base_vdm_local_bind(base_vdm_local *record, session *owner)
@@ -193,8 +233,33 @@ BOOL base_vdm_local_dispatch(PVDMINFO information)
     status = get_next_dos(base_vdm_current, information);
     if (status == STATUS_SUCCESS) return TRUE;
     SetLastError(status == STATUS_INVALID_PARAMETER ? ERROR_INVALID_PARAMETER :
-        status == STATUS_NO_MEMORY ? ERROR_NOT_ENOUGH_MEMORY : ERROR_CALL_NOT_IMPLEMENTED);
+        status == STATUS_NO_MEMORY ? ERROR_NOT_ENOUGH_MEMORY :
+        status == STATUS_PENDING ? ERROR_IO_PENDING : ERROR_CALL_NOT_IMPLEMENTED);
     return FALSE;
+}
+
+/* The original BaseClient, not BaseSrv, waits on the server-returned DOS
+ * wait object and retries with ASKING_FOR_SECOND_TIME.  The local record
+ * retains that split: dispatch records pending state; this synchronous helper
+ * waits without retaining the caller's VDMINFO pointer and updates the local
+ * capture only after the producer signals it. */
+int base_vdm_local_wait_for_command(PVDMINFO information)
+{
+    session *owner = session_thread_current();
+    base_vdm_local *record = base_vdm_current;
+    DWORD wait_status;
+    if (information == NULL || owner == NULL || !session_valid(owner) ||
+        owner->state != SESSION_STATE_ACTIVE || record == NULL ||
+        !base_vdm_local_valid(record) || record->owner != owner)
+        return 0;
+    wait_status = WaitForSingleObject(record->wake_event, INFINITE);
+    if (wait_status != WAIT_OBJECT_0) {
+        SetLastError(ERROR_GEN_FAILURE);
+        return 0;
+    }
+    information->VDMState = (USHORT)(information->VDMState |
+        ASKING_FOR_SECOND_TIME);
+    return 1;
 }
 
 /* DIVERGENCE: BaseSrvIsFirstVDM originally owns a CSRSS-global flag. The
