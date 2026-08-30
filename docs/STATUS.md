@@ -4,25 +4,30 @@
 
 ## Active Packet
 
-**Active: M0 T313 S1**
+**Active: M0 T313 S2**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T313 S1; Ordinary Mode (single-person dual-role implementation and review). |
-| Admission And Approval | Owner-directed sequential execution admits Queue item 1 after T312. The owner further directed that non-original material encountered in `mvdm-host` be cleaned in its owning package rather than deferred. |
-| Objective | Establish the complete selected Win32/x86 CCPU40 SoftPC capability and mirror-purity ledger which orders the remaining lifecycle recovery without trace-led work selection. |
-| Non-goals | No x64 recovery, CPU30/MONITOR profile, Bochs route, guest/BOP semantic expansion, new machine executor, kernel VDM/CSRSS reconstruction, or runtime feature implementation before the ledger identifies its original owner cohort. |
-| Reference Baseline | T310 source-owner closures, T312 retired-Bochs closure, formal 399-edge x86 CCPU40 graph, Queue item 1 and [T313 plan](etc/operations/m0-t313-softpc-capability-mirror-purity-plan-001.md). |
-| Files And ABI Surface | Selected `mvdm-host/softpc.new` source manifests, `mvdm-host-overlay`, existing same-shaped `adapter-mvdm-host-out` bindings, formal Ninja manifest, and S1 evidence only. |
-| Applicable Rules | Source-first/mirror-first recovery, one mapping manager, x86 CCPU40 profile, no `src.old`, component/mirror rules, and the package-first no-trace-selection rule. |
-| Verification | Reconcile source membership with the formal graph and T310 closures; scan reached `mvdm-host` source/overlay/adapters for non-original routes; review actual source ownership; run documentation governance and scoped diff checks. |
-| Expected Markers | One original-owner disposition and required local witness for every selected machine family; one remove/replace/retain decision for every reached non-original form; no unregistered Bochs or duplicate-machine route. |
-| Asset Needs | Pinned MVDM mirrors, T310/T312 evidence, current selected x86 Ninja generator, component READMEs and divergence registers. |
-| Reporting Requirements | Record original owner, lifecycle edge, selected source/build state, residual binding/overlay, mapping requirement, required positive/negative witness and later-owner transfer for every family. |
-| Stop Conditions | A candidate requires a second executor, source-body rewrite, unregistered mirror divergence, new generic shim, raw host identity in a historical ABI, or a scope outside selected machine lifecycle. Pause for re-admission. |
-| Exit Criteria | S1 closes with a complete finite ledger and ordered S2--S5 worksets; it must identify immediate cleanup in `mvdm-host` rather than carrying generic cleanup debt. |
+| Identifier Mode | M0 T313 S2; Ordinary Mode (single-person dual-role implementation and review). |
+| Admission And Approval | S1 closed by the current ledger; owner-directed sequential execution now admits the first original machine-lifecycle cohort. The owner requires immediate owner-package cleanup of non-original material encountered in `mvdm-host`. |
+| Objective | Recover one source-shaped Win32/x86 CCPU40 `create -> CPU/SAS initialization -> ROM/CMOS/BIOS load -> reset` lifecycle with an explicit bounded stop or failure result. |
+| Non-goals | No x64 recovery, CPU30/MONITOR, Bochs route, controller/device endpoint work, guest/BOP semantic expansion, kernel VDM/CSRSS reconstruction, raw host identity in historical ABI, or second machine executor. |
+| Reference Baseline | [T313 S1 ledger](etc/evidence/m0-t313-s1-softpc-capability-purity-ledger-001.tsv), T310 S8/S13/S16 closures, T312 retired-route closure, and the T313 plan. |
+| Files And ABI Surface | Original `softpc.new/base/{ccpu386,bios,system,dos}` and `softpc.new/host/src/{nt_cpu,nt_cprgs,nt_sas,nt_msscs,nt_rez,nt_reset,nt_umb,nt_emm}` cohorts; reached overlays, same-shaped softpc bindings, app machine shell and formal Ninja manifest. |
+| Applicable Rules | Source-first/mirror-first recovery, selected x86 CCPU40 profile, one mapping manager, no `src.old`, no retired Bochs route, minimal registered divergence and package-first verification. |
+| Verification | Original caller/definition ordering review; focused bounded lifecycle fixture or source-shaped existing witness; fresh external formal Ninja candidate and forced-link run; retired-route scan; documentation governance and diff review. |
+| Expected Markers | Original `host_cpu_init`, `c_cpu_init`, ROM/CMOS load and reset order; a typed no-host-kill stop/failure; no raw host pointer across MVDM ABI; every reached divergence removed or registered. |
+| Asset Needs | Pinned MVDM source mirrors, selected CCPU40 manifests, current session mapping manager, source-shaped adapters and MSVC/Ninja x86 environment. |
+| Reporting Requirements | Record each original call edge, source/body disposition, mapping use, positive/negative outcome, immediate cleanup and any remaining later controller dependency. |
+| Stop Conditions | A required edge selects a second executor, needs a source-body rewrite, proposes an unregistered generic shim, needs guest service semantics, or cannot retain the original call order. Pause for re-admission. |
+| Exit Criteria | S2 closes only with source and bounded behavior evidence for the complete CPU/SAS/firmware/reset cohort, a fresh selected x86 CCPU40 formal build, and no deferred cleanup discovered in reached `mvdm-host` paths. |
 | Original Owner Request | “在 mvdm-host 里面，你碰到的话可以顺手清理掉，不必等待以后。” |
-| Similar-Issue Sweep | CCPU/FPU/SAS, EMS/UMB, firmware, controllers, input, video, storage, communications, source manifests, overlays, adapters and retired route names. |
+| Similar-Issue Sweep | CPU/FPU/SAS vectors, EMS/UMB mapping, firmware resource roots, first-session initialization, reset/teardown callers, reached overlays/bindings and retired-route names. |
+
+**T313 S1 closed:** the eleven-cohort selected-machine ledger is complete,
+with no live retired route in `mvdm-host` or its overlay.  Every non-original
+form reached later now has a mandatory remove/replace/retain decision rather
+than generic cleanup debt.  See the [closure](etc/evidence/m0-t313-s1-softpc-capability-purity-closure-001.md).
 
 ### M0 T312 closure record
 
