@@ -85,6 +85,12 @@ an unresolved controller/C-VID/effective-address edge.  The remaining host
 invalidation endpoint is explicitly S27; integrated display behavior remains
 S49.  See the [closure record](history/m0-t310-s26-video-controller-dispatch-closure-20260830.md).
 
+**T310 S27 P1:** the original host-video callers divide into direct public GDI
+palette forms and retired NT4 Console Server graphics/event forms.  The latter
+require one session-owned presenter capability or an exact unavailable result;
+they do not authorize a replacement controller or GUI.  See the [S27 source
+boundary](etc/evidence/m0-t310-s27-p1-host-video-source-boundary-001.md).
+
 **T310 S17 P1:** the complete selected system-controller source set is now
 split from adjacent ROM, platform, endpoint and BOP owners. The original
 controller initialization/heartbeat order stays in its source bodies; every
