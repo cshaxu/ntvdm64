@@ -18,6 +18,13 @@ int mvdm_softpc_firmware_find_file(const char *name, char *path_out,
 int mvdm_softpc_dos_find_file(const char *name, char *path_out,
     uint32_t path_out_bytes);
 
+/* Selected-product disposition for the historical first-session compatibility
+ * probe.  The original AddSystemFiles() body creates C:\\MSDOS.SYS and
+ * C:\\IO.SYS only to satisfy a legacy installer.  The current product keeps
+ * ordinary admitted host-drive access, but never creates these fake boot
+ * markers on the real host volume. */
+void mvdm_softpc_prepare_system_file_compatibility(void);
+
 #ifdef __cplusplus
 }
 #endif

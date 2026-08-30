@@ -54,6 +54,16 @@ ROM/BIOS inputs remain immutable; no new resource provider exists. The changed
 original member rebuilt in the formal x86 CCPU40 graph. See the
 [S16 resource-write evidence](etc/evidence/m0-t310-s16-p4-firmware-resource-write-root-001.md).
 
+**T310 S16 P5:** the original first-session `scs_init → AddSystemFiles` order
+and void contract remain intact, but the selected CCPU40 product explicitly
+does not create Brief-installer placeholder `C:\\MSDOS.SYS` or `C:\\IO.SYS`
+on an admitted real host drive. The complete original helper remains in the
+mirror's unselected branch; the named adapter records the narrow no-write
+disposition. A fresh formal graph completed 369/369 selected x86 CCPU40
+edges. This is a source/binding closure only; startup's COMMAND/DEM/XMS/DBG,
+reset and controller behavior remain later owner work. See the
+[S16 startup-system-file evidence](etc/evidence/m0-t310-s16-p5-startup-system-file-disposition-001.md).
+
 **T310 S14 closed:** the original `VdmAddVirtualMemory` / remove lifecycle
 and source-shaped DOS page alias now use the one session mapping-manager
 identity boundary. Fresh x86/x64 runs proved publication, binding, alias

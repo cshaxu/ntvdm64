@@ -272,6 +272,14 @@ int InitialiseDosEmulation(int argc, char **argv)
  */
 void AddSystemFiles(void)
 {
+#if defined(MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION)
+   /* DIVERGENCE(MVDM-HOST-DIV-134): preserve the original first-session
+    * call site and void completion contract, but do not create Brief's
+    * installation-only C:\\MSDOS.SYS/C:\\IO.SYS placeholders on an admitted
+    * real host drive. The selected adapter records this explicit product
+    * disposition; the original source body remains below as mirror evidence. */
+   mvdm_softpc_prepare_system_file_compatibility();
+#else
    HANDLE hFile, hFind;
    WIN32_FIND_DATA wfd;
    char *pchIOSYS    ="C:\\IO.SYS";
@@ -325,6 +333,7 @@ void AddSystemFiles(void)
            }
 
        }
+#endif
 }
 
 

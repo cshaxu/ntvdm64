@@ -49,3 +49,10 @@ int mvdm_softpc_dos_find_file(const char *name, char *path_out,
         session_dos_media_root(instance) : NULL, name, path_out,
         path_out_bytes);
 }
+
+void mvdm_softpc_prepare_system_file_compatibility(void)
+{
+    /* The historical routine has no observable result other than the two
+     * installation-only host writes.  Do not fabricate their success by
+     * mutating the admitted real host drive. */
+}
