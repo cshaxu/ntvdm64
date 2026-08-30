@@ -10,7 +10,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $required = @(
-    'src/adapter-mvdm-host-out/monitor/include/vdm.h',
+    'src/adapter-mvdm-host-out/monitor/include/monitor_context.h',
     'src/adapter-mvdm-host-out/win32/include/winbasep.h',
     'src/adapter-mvdm-host-out/monitor/source/vdm_control.c',
     'tests/adapter-mvdm-host-out/monitor/vdm_control_fixture.c',
@@ -22,7 +22,7 @@ foreach ($relative in $required) {
     if (-not (Test-Path -LiteralPath (Join-Path $root $relative) -PathType Leaf)) { throw "Missing T280 S5 artifact: $relative" }
 }
 $source = Get-Content -LiteralPath (Join-Path $root 'src/adapter-mvdm-host-out/monitor/source/vdm_control.c') -Raw
-foreach ($token in @('VdmQueryDir', 'session_dispatch_control', 'STATUS_NOT_IMPLEMENTED', 'DIVERGENCE:')) {
+foreach ($token in @('VdmQueryDir', 'adapter_vdm_monitor_bind_query_dir', 'STATUS_NOT_IMPLEMENTED', 'DIVERGENCE:')) {
     if ($source -notmatch [regex]::Escape($token)) { throw "VDM control source misses: $token" }
 }
 if ($source -match 'NtQueryDirectoryFile|CreateFile|bochs|mapping_manager') { throw 'VDM control adapter exceeds its declared session-dispatch seam.' }

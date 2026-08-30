@@ -37,7 +37,7 @@ $environmentNinja = $environment.Replace('\', '/')
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL ' +
     '/FI ' + $root + '/src/adapter-mvdm-host-out/win32/include/nt.h ' +
     '/FI ' + $root + '/src/adapter-mvdm-host-out/softpc/include/error_abi.h ' +
-    '/FI ' + $root + '/src/adapter-mvdm-host-out/monitor/include/vdm.h ' +
+    '/FI ' + $root + '/src/adapter-mvdm-host-out/monitor/include/monitor_context.h ' +
     '/I ' + $root + '/src ' +
     '/I ' + $root + '/src/adapter-mvdm-host-out/win32/include ' +
     '/I ' + $root + '/src/adapter-mvdm-host-out/softpc/include ' +

@@ -4,27 +4,24 @@
 
 ## Active Packet
 
-### M0 T316 S1 — Monitor / `NtVdmControl` user-mode contract reconciliation
+**No active M/T/S packet.** M0 T316 has closed; the next candidate requires a
+fresh owner admission from [QUEUE.md](QUEUE.md).
 
-**Active: M0 T316 S1.**
+### M0 T316 closure record
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T316 S1; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | Owner goal directs single-person dual-role execution of the ordered queue. T315 closed the invalid CPU30 premise; this admits the queue-head monitor package. |
-| Objective | Establish the exact current source-shaped user-mode `NtVdmControl`/`VDM_TIB` contract, reconcile every reached MVDM caller and service class, and bound the smallest original-source recovery plan. |
-| Non-goals | No kernel VDM/V86 recreation, CPU30/MONITOR source selection, generic control dispatcher, BOP semantics, DPMI/VDD/WOW implementation, or CCPU40 behavior change. |
-| Reference Baseline | T315 exclusion closure; retained [T308 monitor plan](etc/operations/m0-t308-s1-monitor-ntvdmcontrol-plan-001.md); current `adapter-mvdm-host-out/monitor` sources; selected x86 CCPU40 formal graph. |
-| Files And ABI Surface | `adapter-mvdm-host-out/monitor/{include,source}`, reached declarations/callers in `mvdm-host`, and selected formal manifests. S1 is read-only except evidence/governance. |
-| Applicable Rules | docs/README.md; docs/rules/EXECUTION.md; docs/rules/{ARCHITECTURE,CODING,DOCUMENT}.md; docs/design/{GOAL,ARCHITECTURE,CODING}.md; CONTRIBUTING.md; source policy. |
-| Verification | Source/path/signature review of every reached service class and `VDM_TIB` carrier; compare original OpenNT declarations and existing adapter behavior; review CCPU40 graph ownership; documentation governance and `git diff --check` at P closure. |
-| Expected Markers | One current disposition ledger assigns each reached service exactly one of direct user-mode binding, named later owner package, or kernel-VDM unavailable; no caller uses a competing route. |
-| Asset Needs | Existing selected OpenNT union and current production sources only; `src.old`, Bochs and `v86/monitor` are forbidden implementation inputs. |
-| Reporting Requirements | Record source path, service value, caller, current provider, original owner and final source-first disposition; identify any recoverable original code that can replace an adapter divergence. |
-| Stop Conditions | Pause before selecting any kernel VDM, treating an unavailable service as success, introducing a generic dispatcher, changing CCPU40 mechanics, or discovering an unnamed owner boundary. |
-| Exit Criteria | All reached monitor calls and `VDM_TIB` consumers have an exact source/binding/unavailable disposition; the next implementation S is bounded or the package can close on proof that no further user-mode recovery is admissible; evidence is committed and pushed. |
-| Original Owner Request | Continue the queue in single-person dual-role mode; retain source-first recovery, minimal mirrors/overlays and no CPU30/V86 production path. |
-| Similar-Issue Sweep | Inspect DEM directory query, SoftPC initialization/EOI, DPMI handler installation, VDD/debugger and WOW declarations so one service class is not silently routed through another. |
+| Identifier Mode | M0 T316; Ordinary Mode (single-person dual-role implementation). |
+| Result | Closed: original monitor ABI import, bounded `VdmQueryDir` binding and CPU40-only source correction verified. |
+| Closure | [T316 closure](history/m0-t316-monitor-user-mode-contract-closure-20260830.md) |
+| Next Admission | Queue item 1: DEM/COMMAND vertical slice and child lifecycle. |
+
+**T316 closed:** all reached `NtVdmControl` and `VDM_TIB` users have one
+source/binding/unavailable disposition. The duplicate adapter `vdm.h` was
+removed; the original ABI mirror is authoritative and `monitor_context.h`
+owns only session TLS. A formal x86 CCPU40 graph and both focused monitor
+fixtures pass. Kernel VDM/V86, graphics, DPMI and VDD/debugger services remain
+explicitly deferred to their named owner packages.
 
 **T313 S1 closed:** the eleven-cohort selected-machine ledger is complete,
 with no live retired route in `mvdm-host` or its overlay.  Every non-original
@@ -2572,7 +2569,7 @@ trace-derived backlog.
 **T281 S3 P1:** the complete remaining twelve-unit original DEM provider
 matrix now compiles and archives on x86 and x64 as
 `original-dem-providers.lib`. The existing same-shaped
-`adapter-mvdm-host-out/monitor/include/vdm.h` declaration carrier closes the only
+former `adapter-mvdm-host-out/monitor/include/vdm.h` declaration carrier closes the only
 matrix-specific declaration gap (`NtVdmControl(VdmQueryDir, ...)`) in
 `demsrch.c`; its implementation body is excluded. The archive is
 selector-disabled and does not invoke a provider or enable `50:xx`.

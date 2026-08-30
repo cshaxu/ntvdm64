@@ -177,7 +177,7 @@ $adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_com
 # sources.  It already has one same-shaped session-owned implementation; keep
 # it in the formal closure instead of accepting an unresolved external edge.
 $adapterBaseSrvNames = @('base_vdm_client.c', 'base_vdm_local.c')
-$adapterMonitorNames = @('vdm_control.c')
+$adapterMonitorNames = @('vdm_control.c', '../mvdm_vdm_tib.c')
 $adapterDebuggerNames = @('dbg_init.c')
 $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_physical_mapping.c', 'mvdm_host_identity.c',
                         'mvdm_guest_location.c', 'mvdm_command_redirection.c', 'mvdm_command_guest_state.c',
@@ -370,12 +370,11 @@ $baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE 
     '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' +
     ''
 $baseFlags = $baseCommonFlags + ($includeRoots -join ' ') + ' ' + $gdpGeneratedInclude
-$dpmiMonitorInclude = '/I "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/monitor/include')) + '"'
-# The DPMI source revision was built against the reached monitor VDM_TIB
-# carrier (PmStackInfo and interrupt/fault fields).  Give that original-shaped
-# monitor contract precedence for this package only; the global OpenNT ABI
-# header remains the default for unrelated original packages.
-$dpmiFlags = $baseCommonFlags + $dpmiMonitorInclude + ' ' + ($includeRoots -join ' ') + ' ' + $gdpGeneratedInclude
+# The original OpenNT ABI header exposes its user-mode VDM TIB under _X86_.
+# This is a declaration gate for the selected Win32/x86 build, not the retired
+# CPU_30_STYLE V86 monitor selection.  DPMI receives the original header from
+# opennt-abi; the adapter supplies only session TLS storage.
+$dpmiFlags = $baseCommonFlags + ' /D_X86_ ' + ($includeRoots -join ' ') + ' ' + $gdpGeneratedInclude
 $cvidcFirstFlags = $baseCommonFlags + ($cvidcFirstIncludeRoots -join ' ') + ' ' + $gdpGeneratedInclude
 $cvidcRuleFlags = $cvidcFirstFlags + ' /DCVIDC_RULE_WORD'
 # `accessfn.c` intentionally emits the complete CCPU getXX/setXX facade only

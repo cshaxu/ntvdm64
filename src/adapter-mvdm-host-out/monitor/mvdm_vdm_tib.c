@@ -1,4 +1,4 @@
-#include "vdm.h"
+#include "monitor_context.h"
 
 /* Same-shaped storage for source bodies that historically accessed the
  * user-mode VDM TIB.  It deliberately does not expose an NT kernel VDM

@@ -75,7 +75,11 @@
 #define CPU_AT_DISK_INT		6
 
  
-#ifndef CPU_30_STYLE
+/* DIVERGENCE(MVDM-HOST-DIV-146): the historical combined CCPU build defined
+ * CPU_30_STYLE even when it selected CPU_40_STYLE, solely to keep this ICA
+ * bit-number macro from replacing the CCPU interrupt enum.  CPU30 is retired
+ * in this product, so keep the original macro out of every CCPU build instead. */
+#if !defined(CPU_30_STYLE) && !defined(CCPU)
 
 /* def of bits in the CPU_INTERRUPT_MAP ?? */
 #define CPU_HW_INT		0
@@ -87,7 +91,7 @@
  
 #define CPU_SW_INT              8
 #define CPU_SW_INT_MASK         (1 << CPU_SW_INT)
-#endif /* 3.0 CPU */
+#endif /* 3.0 CPU or CCPU */
 
 #define DIVIDE_OVERFLOW_INT     0
 

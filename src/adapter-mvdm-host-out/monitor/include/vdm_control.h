@@ -1,7 +1,8 @@
 #ifndef ADAPTER_VDM_MONITOR_VDM_CONTROL_H
 #define ADAPTER_VDM_MONITOR_VDM_CONTROL_H
 
-#include "vdm.h"
+#include <nt.h>
+#include <vdm.h>
 #include "session.h"
 
 typedef NTSTATUS (*adapter_vdm_monitor_query_dir_fn)(void *context,

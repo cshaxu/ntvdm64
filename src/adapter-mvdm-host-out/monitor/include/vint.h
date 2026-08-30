@@ -1,12 +1,12 @@
 /*
  * Reached source-shaped subset of the historical VINT header.  The original
  * fixed-low-address pNtVDMState macro is intentionally not reproduced: the
- * same spelling is supplied by vdm.h as session-worker storage.
+ * same spelling is supplied by monitor_context.h as session-worker storage.
  */
 #ifndef ADAPTER_MVDM_MONITOR_VINT_H
 #define ADAPTER_MVDM_MONITOR_VINT_H
 
-#include "vdm.h"
+#include "monitor_context.h"
 
 #define INTERRUPT_PENDING_BIT 0x0003
 #define VIRTUAL_INTERRUPT_BIT 0x0200
