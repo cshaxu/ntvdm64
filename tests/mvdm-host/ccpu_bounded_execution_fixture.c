@@ -4,6 +4,7 @@
 #include <windows.h>
 
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_execution.h"
+#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_effective_address.h"
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_physical_mapping.h"
 #include "insignia.h"
 #include "host_def.h"
@@ -137,6 +138,17 @@ int main(void)
     }
     fputs("cpu-init\n", stderr);
     c_cpu_init();
+    /* `c_effective_addr` is the selected CCPU external contract: its result
+     * remains a fixed-width guest-linear number, never a host pointer. */
+    if (c_effective_addr(UINT16_C(0x1234), UINT32_C(0x5678)) !=
+        UINT32_C(0x000179b8) ||
+        c_effective_addr(UINT16_C(0), UINT32_C(0x00008000)) !=
+        UINT32_C(0x00008000)) {
+        fputs("CCPU effective-address contract did not preserve guest numerics\n",
+            stderr);
+        sas_term();
+        return 1;
+    }
     fputs("access-init\n", stderr);
     load_sw_cpu_access_functions();
     if (getAX_func != c_getAX || setAX_func != c_setAX ||

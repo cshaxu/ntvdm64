@@ -41,7 +41,7 @@ $allCcpu = GetOriginalSources $manifest
 # resolution order; this focused product link explicitly selects real fpu.c.
 $ccpu = @($allCcpu | Where-Object { $_ -ne 'ntstubs.c' })
 $hostSources = @('nt_cprgs.c', 'nt_cpu.c', 'sim32.c', 'nt_mem.c')
-$adapterSources = @('src/adapter-mvdm-host-out/softpc/mvdm_softpc_execution.c', 'src/adapter-mvdm-host-out/softpc/mvdm_softpc_physical_mapping.c', 'src/session/session.c', 'src/session/mapping_manager.c', 'src/session/guest_memory_lease.c')
+$adapterSources = @('src/adapter-mvdm-host-out/softpc/mvdm_softpc_execution.c', 'src/adapter-mvdm-host-out/softpc/mvdm_softpc_effective_address.c', 'src/adapter-mvdm-host-out/softpc/mvdm_softpc_physical_mapping.c', 'src/session/session.c', 'src/session/mapping_manager.c', 'src/session/guest_memory_lease.c')
 $overlaySources = @('mvdm_gdp_state.c')
 $test = @('tests/mvdm-host/ccpu_bounded_execution_fixture.c', 'tests/mvdm-host/ccpu_bounded_execution_fixture_seams.c')
 foreach ($name in $ccpu) { if (!(Test-Path -LiteralPath (Join-Path $ccpuRoot $name))) { throw "Missing original CCPU source: $name" } }
@@ -79,5 +79,5 @@ $graph.Add('build original-softpc-s5-bridge.lib: lib ' + ($adapterObj -join ' ')
 $graph.Add('build ccpu-bounded-execution.exe: link ' + (($testObj + $overlayObj + @('original-ccpu-execution.lib', 'original-softpc-s5-host.lib', 'original-softpc-s5-bridge.lib')) -join ' '))
 $graph.Add('build ccpu-bounded-execution: phony ccpu-bounded-execution.exe'); $graph.Add('default ccpu-bounded-execution')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
-[ordered]@{ schema='m0.t310.s5.original-ccpu-bounded-execution.v2'; architecture=$Architecture; i386Define=$false; executor='original softpc.new/base/ccpu386 c_cpu_simulate'; selectedCcpu=$ccpu; excludedAlternateSource=@('ntstubs.c'); hostSources=$hostSources; adapterSources=$adapterSources; test=$test; forbiddenInputs=@('src.old','bochs-core','adapter-bochs','MONITOR','V86') } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
+[ordered]@{ schema='m0.t310.s5.original-ccpu-bounded-execution.v3'; architecture=$Architecture; i386Define=$false; executor='original softpc.new/base/ccpu386 c_cpu_simulate'; selectedCcpu=$ccpu; excludedAlternateSource=@('ntstubs.c'); hostSources=$hostSources; adapterSources=$adapterSources; test=$test; forbiddenInputs=@('src.old','bochs-core','adapter-bochs','MONITOR','V86') } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
 Write-Host "Generated T310 S5 original CCPU execution graph: $build"
