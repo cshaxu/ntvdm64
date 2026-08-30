@@ -24,7 +24,21 @@
 | Stop Conditions | A BIOS/firmware member requires an unregistered original-source divergence; an adapter would replace available original firmware logic; a raw native pointer crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or the source requires a controller capability owned by a later S. |
 | Exit Criteria | Every selected BIOS/firmware declaration, definition, caller and prior repair has exactly one direct, binding-only, adapter-backed or original-unavailable disposition; formal x86 evidence passes for the selected CCPU40 configuration; and a focused package audit does not select new BIOS/firmware owner work. Machine-lifecycle behavior requiring later controller packets is recorded as deferred integration validation for S49. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
-| Similar-Issue Sweep | XMS.486 declarations, definitions, selected callers and existing adapter/overlay repair; MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
+| Similar-Issue Sweep | BIOS/ROM/CMOS declarations, definitions, selected callers, firmware inputs and existing location-binding repair; MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
+
+**T310 S16 P1:** the firmware owner audit separates immutable original
+`softpc.new/{bios,roms,data}` inputs from executable original BIOS, system-ROM,
+CMOS and host-resource bodies. It preserves the existing narrow app/session
+location binding while retaining original `host_find_file -> host_read_resource
+-> read_rom` control flow; writable historical resource handling is explicitly
+pending policy disposition. See the [S16 firmware audit](etc/evidence/m0-t310-s16-p1-bios-firmware-owner-audit-001.md).
+
+**T310 S16 P2:** a fresh formal Win32/x86 CCPU40 graph completed 369/369
+edges with the complete original BIOS manifest, original ROM/CMOS and host
+resource bodies, immutable firmware input mirror and current narrow location
+binding. Its forced-link audit has no unresolved `host_find_file`,
+`host_read_resource`, `read_rom` or CMOS resource edge; remaining forms are
+later owner packages. See the [S16 formal assembly evidence](etc/evidence/m0-t310-s16-p2-bios-firmware-formal-assembly-001.md).
 
 **T310 S14 closed:** the original `VdmAddVirtualMemory` / remove lifecycle
 and source-shaped DOS page alias now use the one session mapping-manager
