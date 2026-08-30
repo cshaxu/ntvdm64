@@ -22,6 +22,12 @@ static LONG WINAPI fixture_unhandled_exception(EXCEPTION_POINTERS *exception)
     return EXCEPTION_EXECUTE_HANDLER;
 }
 
+static int fixture_breakpoint_filter(DWORD exception_code)
+{
+    return exception_code == EXCEPTION_BREAKPOINT ? EXCEPTION_EXECUTE_HANDLER :
+        EXCEPTION_CONTINUE_SEARCH;
+}
+
 /* These are the original CCPU/SoftPC public spellings.  The fixture does not
  * provide an executor, memory implementation, BOP handler, or stop hook. */
 extern void sas_init(PHY_ADDR size);
@@ -44,6 +50,7 @@ extern void (*setAX_func)(uint16_t value);
 extern int32_t (*getCF_func)(void);
 extern void (*setCF_func)(int32_t value);
 extern void c_cpu_simulate(void);
+extern void EDL_fast_bop(ULONG immed);
 extern struct SasVector cSasPtrs;
 extern void host_start_cpu(void);
 extern void host_simulate(void);
@@ -138,6 +145,22 @@ int main(void)
     }
     fputs("cpu-init\n", stderr);
     c_cpu_init();
+    {
+        int observed_default_breakpoint = 0;
+
+        __try {
+            EDL_fast_bop((ULONG)0x000003fe);
+        }
+        __except (fixture_breakpoint_filter(GetExceptionCode())) {
+            observed_default_breakpoint = 1;
+        }
+        if (!observed_default_breakpoint) {
+            fputs("EDL fast-BOP default did not preserve debug-break failure\n",
+                stderr);
+            sas_term();
+            return 1;
+        }
+    }
     /* `c_effective_addr` is the selected CCPU external contract: its result
      * remains a fixed-width guest-linear number, never a host pointer. */
     if (c_effective_addr(UINT16_C(0x1234), UINT32_C(0x5678)) !=

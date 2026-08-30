@@ -32,6 +32,7 @@ if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or !(Get-Command ninja -ErrorA
 
 $ccpuRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/ccpu386'
 $hostRoot = Join-Path $root 'src/mvdm-host/softpc.new/host/src'
+$patchRoot = Join-Path $root 'src/mvdm-softpc-patch/patches/common'
 $gdpGenerator = Join-Path $root 'tools/build/Generate-T310GdpSlots.mjs'
 $gdpOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/base/cvidc'
 $manifest = Join-Path $ccpuRoot 'sources'
@@ -46,12 +47,13 @@ $overlaySources = @('mvdm_gdp_state.c')
 $test = @('tests/mvdm-host/ccpu_bounded_execution_fixture.c', 'tests/mvdm-host/ccpu_bounded_execution_fixture_seams.c')
 foreach ($name in $ccpu) { if (!(Test-Path -LiteralPath (Join-Path $ccpuRoot $name))) { throw "Missing original CCPU source: $name" } }
 foreach ($name in $hostSources) { if (!(Test-Path -LiteralPath (Join-Path $hostRoot $name))) { throw "Missing original host source: $name" } }
+if (!(Test-Path -LiteralPath (Join-Path $patchRoot 'fmstubs.c') -PathType Leaf)) { throw 'Missing admitted SoftPC EDL default patch body' }
 foreach ($name in $adapterSources) { if (!(Test-Path -LiteralPath (Join-Path $root $name))) { throw "Missing S5 adapter source: $name" } }
 if (!(Test-Path -LiteralPath $gdpGenerator -PathType Leaf)) { throw "GDP slot generator missing: $gdpGenerator" }
 foreach ($name in $overlaySources) { if (!(Test-Path -LiteralPath (Join-Path $gdpOverlayRoot $name))) { throw "Missing GDP overlay source: $name" } }
 foreach ($name in $test) { if (!(Test-Path -LiteralPath (Join-Path $root $name))) { throw "Missing focused fixture source: $name" } }
 
-New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/gdp'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter'), (Join-Path $build 'obj/overlay'), (Join-Path $build 'obj/test') | Out-Null
+New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/gdp'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter'), (Join-Path $build 'obj/patch'), (Join-Path $build 'obj/overlay'), (Join-Path $build 'obj/test') | Out-Null
 $node = 'O:\.nvm\versions\node\v22.22.1\bin\node.exe'
 if (!(Test-Path -LiteralPath $node -PathType Leaf)) { throw "Node 22 is required for GDP slot generation: $node" }
 $gdpGeneratedRoot = Join-Path $build 'generated/gdp'
@@ -66,17 +68,19 @@ $cflags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_30
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10'); $graph.Add('cflags = ' + $cflags); $graph.Add('')
 $graph.Add('rule cc'); $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in'); $graph.Add('  deps = msvc'); $graph.Add('  msvc_deps_prefix = Note: including file:')
+$graph.Add('rule cc_patch_edl'); $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /DMVDM_SOFTPC_PATCH_EDL_FAST_BOP_ONLY /Fo$out $in'); $graph.Add('  deps = msvc'); $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('rule lib'); $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' lib.exe /nologo /out:$out $in')
 $graph.Add('rule link'); $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /out:$out $in kernel32.lib user32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib')
 $ccpuObj = foreach ($name in $ccpu) { $obj = 'obj/ccpu/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'; $graph.Add('build ' + $obj + ': cc ' + (NinjaPath (Join-Path $ccpuRoot $name))); $obj }
 $hostObj = foreach ($name in $hostSources) { $obj = 'obj/host/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'; $graph.Add('build ' + $obj + ': cc ' + (NinjaPath (Join-Path $hostRoot $name))); $obj }
 $adapterObj = foreach ($name in $adapterSources) { $obj = 'obj/adapter/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'; $graph.Add('build ' + $obj + ': cc ' + (NinjaPath (Join-Path $root $name))); $obj }
+$patchEdiObject = 'obj/patch/fmstubs_edl_fast_bop.obj'; $graph.Add('build ' + $patchEdiObject + ': cc_patch_edl ' + (NinjaPath (Join-Path $patchRoot 'fmstubs.c')))
 $overlayObj = foreach ($name in $overlaySources) { $obj = 'obj/overlay/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'; $graph.Add('build ' + $obj + ': cc ' + (NinjaPath (Join-Path $gdpOverlayRoot $name))); $obj }
 $testObj = foreach ($name in $test) { $obj = 'obj/test/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'; $graph.Add('build ' + $obj + ': cc ' + (NinjaPath (Join-Path $root $name))); $obj }
 $graph.Add('build original-ccpu-execution.lib: lib ' + ($ccpuObj -join ' '))
 $graph.Add('build original-softpc-s5-host.lib: lib ' + ($hostObj -join ' '))
 $graph.Add('build original-softpc-s5-bridge.lib: lib ' + ($adapterObj -join ' '))
-$graph.Add('build ccpu-bounded-execution.exe: link ' + (($testObj + $overlayObj + @('original-ccpu-execution.lib', 'original-softpc-s5-host.lib', 'original-softpc-s5-bridge.lib')) -join ' '))
+$graph.Add('build ccpu-bounded-execution.exe: link ' + (($testObj + $overlayObj + @($patchEdiObject, 'original-ccpu-execution.lib', 'original-softpc-s5-host.lib', 'original-softpc-s5-bridge.lib')) -join ' '))
 $graph.Add('build ccpu-bounded-execution: phony ccpu-bounded-execution.exe'); $graph.Add('default ccpu-bounded-execution')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 [ordered]@{ schema='m0.t310.s5.original-ccpu-bounded-execution.v3'; architecture=$Architecture; i386Define=$false; executor='original softpc.new/base/ccpu386 c_cpu_simulate'; selectedCcpu=$ccpu; excludedAlternateSource=@('ntstubs.c'); hostSources=$hostSources; adapterSources=$adapterSources; test=$test; forbiddenInputs=@('src.old','bochs-core','adapter-bochs','MONITOR','V86') } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8

@@ -13,7 +13,6 @@ typedef void (*fixture_callback)(void);
 
 void rom_init(void) {}
 void copyROM(void) {}
-void EDL_fast_bop(uint32_t value) { (void)value; }
 /* The original nt_cpu.c host_simulate body is linked with the fixture.  The
  * D6 FE program exits before its recursive BIOS path is reached. */
 void host_timer_event(void) {}
