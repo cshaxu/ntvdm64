@@ -1,0 +1,10 @@
+id	original-owner	selected-source-and-contract	original-shape	current-disposition	next-owner
+S19-001	keymouse	keyba.c: host_key_down_fn_ptr	unprototyped original callback slot and indirect call	retain original slot; audit every assignment and host endpoint before any prototype change	S19
+S19-002	keymouse	keyba.c: host_key_up_fn_ptr	unprototyped original callback slot and indirect call	retain original slot; audit every assignment and host endpoint before any prototype change	S19
+S19-003	keymouse	keyba.c: do_key_repeats_fn_ptr	unprototyped original callback slot and indirect call	retain original slot; audit every assignment and host endpoint before any prototype change	S19
+S19-004	keymouse	keybd_io.c: BIOS[]	original BIOS function table declaration and keyboard INT 15h caller	binding-only; BIOS table ownership remains original firmware package, with the selected input caller audited here	S19
+S19-005	keymouse	mouse_io.c: mouse_function[]	original saved INT 33h function table	retain original table ordering; enumerate initializer and indirect invocation before deciding whether a declaration repair is needed	S19
+S19-006	keymouse	mouse_io.c: host_mouse_set_position	original signed mouse scalar endpoints narrowed to USHORT at the host range call	previous MVDM-HOST-DIV-058 is an x64 ABI repair; re-read definition and host binding before retain/replace decision	S19 then S20
+S19-007	keymouse	keybd_io.c: NTIO keyboard vector/stream backing	original fixed-width effective_addr result consumed against SoftPC backing	previous MVDM-HOST-DIV-059 remains source-shaped private backing; no mapping-manager identity is introduced	S19
+S19-008	host-input	nt_keycd.c: KeyMsgToKeyCode and BiosKeyToInputRecord	original key conversion and RtlOemToUnicodeN call	public-call binding is ADAPTER-WIN32-027; actual host-console admission remains S20	S20
+S19-009	host-input	nt_mouse.c: host_mouse_set_range and console/fullscreen routes	original host mouse endpoint and display calls	MVDM-HOST-DIV-058 retains endpoint ABI; console/fullscreen behavior remains S20/S27	S20
