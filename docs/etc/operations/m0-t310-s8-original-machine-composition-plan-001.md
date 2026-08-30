@@ -9,40 +9,58 @@ physical binding, then ends only after original creation, reset, firmware
 initialization, a bounded execution interval, typed stop and teardown work on
 both host architectures.
 
-## Ordered S owner packages
+## Ordered S owner-contract packets
 
-Each S is a bounded source-recovery package. Its listed clusters are atomic:
-original definition, table/initializer, callers, prior repairs, x86/x64
-diagnostics and local behavior are reviewed together. A later S may consume a
-completed public contract but may not reopen it with a local workaround.
+Every S closes exactly one coverage-ledger cluster. It is atomic: original
+definition, declaration, table/initializer, selected callers, prior repair,
+x86/x64 diagnostics and locally meaningful behavior are reread together.
+Later packets may consume a completed contract but may not reopen it with a
+local workaround. The sequence is dependency order, not warning-count order.
 
-1. **S8 — CCPU executor, access table, SAS/monitor vector and extended-BOP
-   default.** `SPC-CCPU-EXECUTOR-DISPATCH`, `SPC-CCPU-ACCESS-TABLE`,
-   `SPC-CCPU-SAS-MONITOR-VECTOR` and `SPC-CCPU-EXTENDED-BOP-DEFAULT`.
-2. **S9 — memory, SAS, A20, EMS and XMS.** `SPC-SAS-MEMORY-CONTRACT`,
-   `SPC-MEMORY-MAPPING-BINDINGS`, `MVDM-XMS.486-OWNER-PACKAGE`, plus reached
-   XMS/EMS control forms. The mapping manager remains only at a true
-   host-identity boundary.
-3. **S10 — BIOS, firmware, reset and startup media.**
-   `SPC-BIOS-FIRMWARE-BINDINGS` and selected `base/bios`, ROM, CMOS, reset and
-   immutable-media forms.
-4. **S11 — PIC, PIT, DMA, timer and system controller.**
-   `SPC-SYSTEM-CONTROLLER-CALLBACKS`,
-   `SPC-HOST-SYSTEM-INTERRUPT-BINDINGS`, and reached timer/ICA/DMA chains.
-5. **S12 — keyboard, mouse and input binding.**
-   `SPC-INPUT-CONTROLLER-CALLBACKS` and `SPC-HOST-INPUT-BINDINGS`.
-6. **S13 — storage, floppy, disk, serial and parallel.**
-   `SPC-STORAGE-CONTROLLER-CALLBACKS`, `SPC-HOST-STORAGE-BINDINGS` and
-   `SPC-COMMS-CONTROLLER-CALLBACKS`.
-7. **S14 — C-video, base-video and host-video.**
-   `SPC-CVIDC-GENERATED-DISPATCH`, `SPC-VIDEO-CONTROLLER-DISPATCH` and
-   `SPC-HOST-VIDEO-BINDINGS` are one display contract.
-8. **S15 — service residuals, cross-family reread and profile verification.**
-   Reached `MVDM-DOS-OWNER-PACKAGE`, `MVDM-SIM32-OWNER-PACKAGE`,
-   `MVDM-SUPPORT-LIBRARY`, `SPC-HOST-PLATFORM-BINDINGS`,
-   `SPC-HOST-CONFIGURATION-BINDINGS`, `SPC-HOST-VDD-BINDING`, all
-   zero-diagnostic/unselected clusters, then final all-42-cluster reread and
-   full x86/x64 machine-profile verification.
+1. S8 `SPC-CCPU-EXECUTOR-DISPATCH` (active)
+2. S9 `SPC-CCPU-ACCESS-TABLE`
+3. S10 `SPC-CCPU-SAS-MONITOR-VECTOR`
+4. S11 `SPC-CCPU-SAS-MONITOR-VECTOR-EFFECTIVE-ADDRESS`
+5. S12 `SPC-CCPU-EXTENDED-BOP-DEFAULT`
+6. S13 `SPC-SAS-MEMORY-CONTRACT`
+7. S14 `SPC-MEMORY-MAPPING-BINDINGS`
+8. S15 `MVDM-XMS.486-OWNER-PACKAGE`
+9. S16 `SPC-BIOS-FIRMWARE-BINDINGS`
+10. S17 `SPC-SYSTEM-CONTROLLER-CALLBACKS`
+11. S18 `SPC-HOST-SYSTEM-INTERRUPT-BINDINGS`
+12. S19 `SPC-INPUT-CONTROLLER-CALLBACKS`
+13. S20 `SPC-HOST-INPUT-BINDINGS`
+14. S21 `SPC-STORAGE-CONTROLLER-CALLBACKS`
+15. S22 `SPC-HOST-STORAGE-BINDINGS`
+16. S23 `SPC-COMMS-CONTROLLER-CALLBACKS`
+17. S24 `SPC-HOST-COMMS-BINDINGS`
+18. S25 `SPC-CVIDC-GENERATED-DISPATCH`
+19. S26 `SPC-VIDEO-CONTROLLER-DISPATCH`
+20. S27 `SPC-HOST-VIDEO-BINDINGS`
+21. S28 `SPC-HOST-PLATFORM-BINDINGS`
+22. S29 `SPC-HOST-CONFIGURATION-BINDINGS`
+23. S30 `SPC-HOST-VDD-BINDING`
+24. S31 `SPC-HOST-BOP-BINDING`
+25. S32 `SPC-OTHER-MACHINE-SOURCE`
+26. S33 `SPC-SUPPORT-CONTROLLER-CALLBACKS`
+27. S34 `MVDM-SUPPORT-LIBRARY`
+28. S35 `MVDM-DOS-OWNER-PACKAGE`
+29. S36 `MVDM-SIM32-OWNER-PACKAGE`
+30. S37 `MVDM-DPMI32-OWNER-PACKAGE`
+31. S38 `MVDM-VDMREDIR-OWNER-PACKAGE`
+32. S39 `MVDM-WOW32-OWNER-PACKAGE`
+33. S40 `MVDM-VDD-OWNER-PACKAGE`
+34. S41 `MVDM-BDE-OWNER-PACKAGE`
+35. S42 `MVDM-DBG-OWNER-PACKAGE`
+36. S43 `MVDM-VDMDBG-OWNER-PACKAGE`
+37. S44 `MVDM-VDMEXTS-OWNER-PACKAGE`
+38. S45 `MVDM-FAX-OWNER-PACKAGE`
+39. S46 `MVDM-IEUVDDEX-OWNER-PACKAGE`
+40. S47 `SPC-DEBUG-UNSELECTED`
+41. S48 `SPC-HUNTER-UNSELECTED`
+42. S49 `P4-GLOBAL-BASELINE`: final all-cluster reread and both-host
+    `create -> reset -> firmware/machine initialization -> bounded execution
+    -> typed controlled stop -> teardown` verification.
 
 ## Whole-tree ABI audit rule
 
@@ -98,9 +116,9 @@ Before selecting any individual generated carrier or display repair, inventory e
    documented cluster disposition, never by suppression.
 ## T310 S8 closure boundary
 
-S8 closes only when its four CCPU clusters have source-shaped dispositions and
-focused x86/x64 evidence. S9--S15 then execute in order. T310 closes only
-after S15 completes the all-42-cluster reread and the selected original SoftPC
+S8 closes only when `SPC-CCPU-EXECUTOR-DISPATCH` has a source-shaped
+disposition and focused x86/x64 evidence. S9--S49 then execute in order. T310 closes only
+after S49 completes the all-42-cluster reread and the selected original SoftPC
 `create -> reset -> firmware/machine initialization -> bounded execution ->
 typed controlled stop -> teardown` profile on both host architectures. Neither
 S8 nor T310 removes the remaining Bochs production route or claims
@@ -134,8 +152,8 @@ missing media, but it may not claim a runnable device profile until P2--P5.
 
 ## T310 final closure boundary
 
-S8 closes only its CCPU executor/access/SAS-vector/EDL owner contracts.
-T310 closes only after the sequential S8--S15 packages complete. Formal MSVC
+S8 closes only `SPC-CCPU-EXECUTOR-DISPATCH`.
+T310 closes only after the sequential S8--S49 packets complete. Formal MSVC
 `/MT` x86 and x64 Ninja graphs must then each prove the same selected SoftPC
 `create -> reset -> firmware/machine initialization -> bounded execution ->
 typed controlled stop -> teardown` path. Bochs production-route removal and

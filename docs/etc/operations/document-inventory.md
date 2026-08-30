@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 3266 |
 | --- | --- |
-| Generated UTC | 2026-08-30T00:21:44Z |
+| Generated UTC | 2026-08-30T01:23:21Z |
 
 ## Entries
 
@@ -529,7 +529,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-ccpu-edl-fast-bop-default-contract-closure-001.md | indexed supporting material | 147f5412575daec05a86aebe95612f144da4e2774111bdfd4ccd6821c01a8f8d |
 | etc/evidence/m0-t310-s8-p4-ccpu-effective-address-recovery-001.md | indexed supporting material | 46f7a3f84e44118ba7775fd555c84467135bc3afa165e3a593f66d72bfdbe991 |
 | etc/evidence/m0-t310-s8-p4-ccpu-eflags-contract-closure-001.md | indexed supporting material | 3208d24a34a8ca2a7dfce91f88a8752f1177a393bcc06be6637ef52443c0f25e |
-| etc/evidence/m0-t310-s8-p4-ccpu-executor-call-contract-closure-001.md | indexed supporting material | f5218c49d000819357a8555b8494f614d6628edc100dfc03bfa98101996a21d7 |
+| etc/evidence/m0-t310-s8-p4-ccpu-executor-call-contract-closure-001.md | indexed supporting material | b5d6c1e8d098399732049b0bf08ba3a70aa98daa69221673309c626f039c65e8 |
 | etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-operand-call-disposition-001.md | indexed supporting material | 12595b00f967cfc6624320581871f885cefd360fbf4f3dae8268727110161f25 |
 | etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-scalar-disposition-001.md | indexed supporting material | 75c178056fc3369aa9b7a4013b79209500078bb502a7d7b0f791c1e16cdaf692 |
 | etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-signedness-disposition-001.md | indexed supporting material | 0b34d4233c4482ed3d78e37748a0d1a2fc7557ec8724719aeb28f55bf1024e80 |
@@ -1279,7 +1279,7 @@ content-divergent entries.
 | etc/operations/m0-t310-s7-guest-memory-lease-caller-ledger.tsv | indexed supporting material | 4fd2dc26670c7b2c3bb8cb172d59d802fcae653a571616312b5164be38322565 |
 | etc/operations/m0-t310-s7-p2-x64-forced-link-ledger.tsv | indexed supporting material | 9661205c2aecadb55e7fc2b1537f1279ad187b7fec37d8859128dedfb3b8a93d |
 | etc/operations/m0-t310-s7-p2-x86-forced-link-ledger.tsv | indexed supporting material | ab1f513b8221f3fa90965068237b75d79f917365bb4e9d4293b775faddd15f68 |
-| etc/operations/m0-t310-s8-original-machine-composition-plan-001.md | indexed supporting material | 58849ee85ae8cf01e2fd4b1716f3f8e41d33a27ddeffe6929f698d43c5a732e0 |
+| etc/operations/m0-t310-s8-original-machine-composition-plan-001.md | indexed supporting material | 814dc57898710725f14401728ed361edb64b35ef2ee0640dd35ea1c75766b3ee |
 | etc/operations/m0-t310-s8-p2-x64-forced-link-ledger.tsv | indexed supporting material | 4c0be72bd1c3670b870efeb914557a582ed1edb5b09b35ba2a2896c6a7471941 |
 | etc/operations/m0-t310-s8-p2-x86-forced-link-ledger.tsv | indexed supporting material | 4d7c569dacc69fdae7e392a0f59b9b3623e5cb748e38ec12ef2913c5a05d3169 |
 | etc/operations/m0-t310-s8-p4-base-video-callback-interface-ledger.tsv | indexed supporting material | 75acfb9a605d23d333a783d28b9ea707c1622ff09ebac3c27d21b28a0e87abcf |
@@ -1287,7 +1287,7 @@ content-divergent entries.
 | etc/operations/m0-t310-s8-p4-cvidc-generated-interface-ledger.tsv | indexed supporting material | ab31ccb2aea47932461d7062942691584596c5aa34cae45202d4455a1b71fb11 |
 | etc/operations/m0-t310-s8-p4-gdp-generated-layout-inventory.tsv | indexed supporting material | 50cc2fe1a26297432196b2bf00382560c8f0b3e674680bb7cddf3fbbf21b6343 |
 | etc/operations/m0-t310-s8-p4-owner-contract-coverage-ledger.tsv | indexed supporting material | 44220cb372c5d93490ca1576bee73c3e2c2d1e054f78e3644f8ff32cd2d0682a |
-| etc/operations/m0-t310-s8-p4-owner-contract-execution-order-001.md | indexed supporting material | b72c6c5378a67add8996e61f6bff8bac3c519870b1e6b8f8eb9f95ee0bc1aa87 |
+| etc/operations/m0-t310-s8-p4-owner-contract-execution-order-001.md | indexed supporting material | 7ca1aae49214d638235c0d1d88a85c3af6005e6acf11d743072e83f697424999 |
 | etc/operations/m0-t310-s8-p4-whole-tree-compiler-warning-cluster-ledger.tsv | indexed supporting material | b3419c02702df182a8071b6c6041248520cff7ec45c6764a18b928daa6ce9c94 |
 | etc/operations/m0-t310-s8-p4-whole-tree-compiler-warning-ledger.tsv | indexed supporting material | f8908d05a314ddc43904604dce87448a1ee013dc8d1d9eb9a221c5c71451231f |
 | etc/operations/m0-t310-s8-p4-whole-tree-contract-review-index.tsv | indexed supporting material | 2fa61c7bc1ee7fccffff0eacef03eeb1167f94b768ac82fb9018269c71ccbfb3 |
@@ -3280,7 +3280,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | a02368745a48e9a3702b4c20a3d63ebb52c898185bd5c64b4e90f341901213da |
+| STATUS.md | principal control document | 66d46366d25fc766b8e319a08bc907f24e5f79c8b1884ef8ef1524add2f630b0 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

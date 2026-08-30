@@ -11,30 +11,30 @@
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T310 S8; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | Owner approved the eight-owner-package subdivision of T310 S8's former broad machine-composition scope. S8 is the first package: CCPU execution, access tables, SAS/monitor vector and the retained extended-BOP default. Later S9--S15 remain inactive until their predecessor S closes. |
-| Objective | Re-read and close the complete selected CCPU callable contract as one owner package: instruction/FPU executor, generated access tables, SAS vector (`c_effective_addr`, `c_sas_touch`, `c_VirtualiseInstruction`) and the retained NTVDMx64 EDL default. Every existing repair is a review input, not an automatically accepted closure. |
+| Admission And Approval | Owner approved a 42-owner-contract subdivision of T310's former broad machine-composition scope. S8 is the first and only active cluster: `SPC-CCPU-EXECUTOR-DISPATCH`. S9--S49 are sequential and inactive until their predecessor closes. Existing repair evidence is review input, not an automatically accepted closure. |
+| Objective | Re-read and close only `SPC-CCPU-EXECUTOR-DISPATCH`: instruction/FPU executor declarations, definitions, dispatch tables, selected callers and prior repairs. The access-table, SAS-vector, effective-address and EDL-default contracts are separate successor S packets. |
 | Non-goals | No kernel VDM or MONITOR import, Bochs device/controller fallback, BOP semantic expansion, trace-selected repair, unrelated device enablement, or claim of complete DOS/WOW product execution. |
 | Reference Baseline | Closed S4 source-family workset; closed S5 CCPU/RAM/FPU execution; closed S6 V86/MONITOR removal; closed S7 physical mapping/lease ledger; exact `mvdm-host` and `mvdm-softpc-firmware` mirrors. |
 | Files And ABI Surface | Original `mvdm-host/softpc.new/base/ccpu386/**`, its generated CPU/SAS headers and selected original callers; `mvdm-softpc-patch/patches/common/fmstubs.c`; named `adapter-mvdm-host-out/softpc` only where a source-proven user-mode machine seam is unavoidable. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island, CPU-profile and source-recovery rules; approved T310 S8 plan. |
-| Verification | Formal MSVC `/MT` x86/x64 Ninja CCPU archives and forced-link evidence; source/call/vector review of every member; focused execution only after all four CCPU compatibility groups have an owner-contract disposition. |
+| Verification | Formal MSVC `/MT` x86/x64 Ninja CCPU archives and forced-link evidence; source/call/table review of every executor member; focused execution only after this cluster has an owner-contract disposition. |
 | Expected Markers | Original CCPU vector order; fixed-width Intel operands; correct native pointer containment; source-shaped SAS physical backing; no raw monitor alias; retained debug-break only for still-unrecovered patch defaults. |
 | Asset Needs | Exact CCPU, SAS and NTVDMx64 patch manifests; closed S4--S7 evidence; mapping manager only at an actual cross-component identity boundary; MSVC Build Tools and Ninja. |
 | Reporting Requirements | Per cluster: original roots/callers, recovery rung, table/initializer order, ABI/failure contract, any mapping-manager use, x86/x64 result, retained unavailable disposition and no-Bochs/MONITOR proof. |
 | Stop Conditions | A CCPU member requires an unregistered original-source divergence; an adapter would replace available CCPU logic; a raw native pointer crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or the source requires a non-CCPU device capability owned by a later S. |
-| Exit Criteria | All four CCPU owner-contract clusters are reread together with every prior repair; each selected form has exactly one direct, binding-only, adapter-backed or original-unavailable disposition; x86/x64 formal CCPU evidence passes; and any bounded execution observation does not select new work. T310 remains active for S9--S15 and closes only after their combined machine profile verifies `create -> reset -> firmware/machine initialization -> bounded execution -> typed controlled stop -> teardown`. |
+| Exit Criteria | Every executor declaration, definition, dispatch-table form, selected caller and prior repair has exactly one direct, binding-only, adapter-backed or original-unavailable disposition; x86/x64 formal executor evidence passes; and any bounded execution observation does not select new work. T310 remains active for S9--S49 and closes only after their combined machine profile verifies `create -> reset -> firmware/machine initialization -> bounded execution -> typed controlled stop -> teardown`. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
 | Similar-Issue Sweep | CCPU executor/access-table/SAS/monitor-vector/EDL definitions, generated headers, vector initializers, every selected caller and existing adapter/overlay/patch repair; MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
 
-**T310 subdivision:** S8--S15 are eight sequential owner packages, not eight
-independent warning sweeps: S8 CCPU/executor/SAS; S9 memory/SAS/A20/EMS/XMS;
-S10 BIOS/firmware/startup; S11 PIC/PIT/DMA/system timing; S12 keyboard/mouse;
-S13 storage/disk/floppy/serial/parallel; S14 C-video/base-video/host-video;
-S15 DOS/COMMAND/DEM/SIM32/host platform residuals plus whole-tree re-read and
-formal profile verification. Bochs production-closure removal, `i386`
-semantic audit and complete SoftPC capability/mirror-purity acceptance remain
-separate queued T packages. See the amended
-[S8 plan](etc/operations/m0-t310-s8-original-machine-composition-plan-001.md)
+**T310 subdivision:** S8--S49 are 42 sequential owner-contract packets, one
+per cluster in the current coverage ledger. A packet first re-reads the
+complete original callable contract, then makes the smallest source-shaped
+repair, then proves x86/x64 compilation and any locally meaningful behavior.
+The final cross-cluster packet performs the machine-profile verification;
+neither a compiler warning nor a trace hit creates an extra packet. Bochs
+production-closure removal, `i386` semantic audit and complete SoftPC
+capability/mirror-purity acceptance remain separate queued T packages. See the
+amended [S8 plan](etc/operations/m0-t310-s8-original-machine-composition-plan-001.md)
 and [package-recovery program](etc/operations/package-recovery-program-20260827.md).
 
 **T310 S8 P4:** the refreshed formal MSVC `/MT` baseline reaches the same

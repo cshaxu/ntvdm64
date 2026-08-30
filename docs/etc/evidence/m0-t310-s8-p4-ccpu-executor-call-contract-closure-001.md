@@ -26,3 +26,26 @@ three selected `setjmp` calls. `EDL_fast_bop` remains a separate, genuinely
 undefined source boundary. Fixed-width guest scalar and historical source-style
 warnings remain visible for later semantic review; this closure neither
 suppresses nor reclassifies them as safe.
+
+## Bounded execution confirmation
+
+The formal bounded-execution graph initially omitted the already-required GDP
+slot overlay generation used by `cpu4gen.h`.  The graph generator now runs
+`Generate-T310GdpSlots.mjs`, exposes its generated include directory, and
+links the existing `mvdm_gdp_state.c` overlay.  This is build-graph recovery,
+not a SoftPC algorithm change.
+
+Fresh MSVC `/MT`, CPU_40 selected-profile builds completed the full 145-step
+`ccpu-bounded-execution` graph on both x86 and x64 with no compiler or linker
+errors.  On each host architecture the executable returned zero after the
+same observable sequence:
+
+```text
+sas-init -> cpu-init -> access-init -> seed -> start -> returned-start
+-> reenter -> returned-recursive
+```
+
+This confirms the limited original `c_cpu_simulate` executor path and its
+existing GDP overlay binding.  It does not claim all executor dispatch forms,
+the successor access/SAS-vector contracts, controller operation, or whole
+machine/DOS execution are closed.
