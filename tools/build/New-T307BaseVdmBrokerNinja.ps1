@@ -13,7 +13,9 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
 $build = Join-Path $root ("build/M0-T307/S1/{0}" -f $Architecture)
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 $abi = Join-Path $root 'src/opennt-abi/source/public/internal/base/inc'
+$hostSdk = Join-Path $root 'src/opennt-host/public/sdk/inc'
 $abi = $abi.Replace('\', '/')
+$hostSdk = $hostSdk.Replace('\', '/')
 New-Item -ItemType Directory -Force $build | Out-Null
 $environment = Join-Path $build ("msvc-{0}.cmd" -f $Architecture)
 @('@echo off', 'set "MVDM_T307_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T307_CALLER_CWD%"', '%*') |
@@ -21,7 +23,8 @@ $environment = Join-Path $build ("msvc-{0}.cmd" -f $Architecture)
 $cflags = '/nologo /std:c11 /MT /W4 /WX /showIncludes /I ' + $root +
     '/src /I ' + $abi + ' /I ' + $root +
     '/src/adapter-mvdm-host-out/basesrv/include /I ' + $root +
-    '/src/adapter-mvdm-host-out/win32/include /I ' + $root + '/src/session'
+    '/src/adapter-mvdm-host-out/win32/include /I ' + $root + '/src/session' +
+    ' /I ' + $hostSdk
 $content = @"
 ninja_required_version = 1.10
 root = $root

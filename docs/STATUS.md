@@ -4,9 +4,32 @@
 
 ## Active Packet
 
-**No M/T/S packet is active.** `M0 T313` is closed; implementation is paused
-until an owner admits the next package. See the
-[closure](history/m0-t313-softpc-capability-mirror-purity-closure-20260830.md).
+**Active: M0 T314 S2**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T314 S2; Ordinary Mode (single-person dual-role implementation and review). |
+| Admission And Approval | S1 closed its immediate BaseClient/BaseSrv audit. Owner-directed sequential execution admits only the local one-session DOS pending/wake/retry and terminal-record recovery described in that audit. |
+| Objective | Recover the source-shaped DOS subset of `GetNextVDMCommand`: copied request/result record, capacity/retry, one pending request, producer wake, second request and local completion/teardown state. |
+| Non-goals | No CSR/CSRSS/kernel VDM recreation, cross-process broker, WOW queue, PIF/startup-info/desktop/title/standard-handle product semantics, guest/BOP expansion, child execution, Redirector, second machine executor or x64 recovery. |
+| Reference Baseline | [T314 S1 Base VDM immediate-boundary audit](etc/evidence/m0-t314-s1-base-vdm-immediate-boundary-audit-001.md), original BaseClient/BaseSrv VDM sources, and the existing bound session-local record. |
+| Files And ABI Surface | `adapter-mvdm-host-out/basesrv/{include/base_vdm_local.h,source/base_vdm_local.c,source/base_vdm_client.c}`, session lifecycle/notification surface, focused Base VDM fixture and its formal x86 Ninja graph. |
+| Applicable Rules | Source-first/mirror-first recovery; same-shaped public `VDMINFO` ABI; one mapping manager; session-owned state only; no caller pointer/native resource retention; no private NT4 product transport. |
+| Verification | Source-order review; focused pending/wake/second-call, capacity, environment, first-VDM, reentry, completion and teardown tests; fresh x86 formal fixture; documentation governance and diff review. |
+| Expected Markers | One session-owned DOS record; no retained caller pointer or raw cross-process resource; original second-request ordering; typed pending/completion state; explicit unsupported WOW/CSR/PIF branches. |
+| Asset Needs | Pinned BaseClient/BaseSrv mirrors, current Base VDM adapter/fixture, session lifecycle and public Win32 event/wait capability. |
+| Reporting Requirements | Original branch-to-local-state map, source/adapter/overlay provenance, test outcomes, migration/retain decision for current record and explicit later owners for excluded branches. |
+| Stop Conditions | A necessary path demands CSR/CSRSS, native resource transfer, a generic app command queue, child lifecycle, WOW semantics, guest-pointer persistence or source-body rewrite. Pause for re-admission. |
+| Exit Criteria | The full admitted DOS local protocol has source-shaped positive and negative evidence, local teardown has no leaked pending resource, public ABI remains unchanged, and fresh x86 fixture/build passes. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-\*。” |
+| Similar-Issue Sweep | Base VDM client/server records, session command ownership, `ExitVDM`, `Set/GetVDMCurrentDirectories`, first-VDM state, command completion/reentry, wait handles, WOW notification and cross-process transport. |
+
+**T314 S1 closed:** the immediate BaseClient/BaseSrv VDM slice is mapped by
+source operation and caller.  The current copied DOS record is retained as the
+source-shaped starting point, while its missing pending/wake/second-call and
+completion behavior is explicitly admitted to S2.  Private CSR/CSRSS, WOW,
+PIF and cross-process paths remain later owners. See the
+[audit](etc/evidence/m0-t314-s1-base-vdm-immediate-boundary-audit-001.md).
 
 **T313 S1 closed:** the eleven-cohort selected-machine ledger is complete,
 with no live retired route in `mvdm-host` or its overlay.  Every non-original
