@@ -173,6 +173,12 @@ original CCPU40 witness proves a completion code of 37 without process death;
 a fresh selected formal graph completes 404/404 with the reached `nt_reset.c`
 body.  See the [P1 record](etc/evidence/m0-t313-s5-p1-source-shaped-controlled-termination-001.md).
 
+**T313 S5 P2:** all reached direct `ExitProcess` forms in the selected x86
+CCPU40 host path—argument rejection, `host_terminate`, console close and SAS
+allocation failure—now share the P1 session terminal boundary.  Unselected
+and console-product-shell forms remain exact source material.  The changed
+host archive rebuilds cleanly; see the [P2 record](etc/evidence/m0-t313-s5-p2-selected-direct-exit-sweep-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |

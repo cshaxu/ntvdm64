@@ -237,7 +237,11 @@ void  host_applInit(int argc,char *argv[])
 
 
     if (bSwitchF == FALSE)
-        ExitProcess (0);
+    {
+        /* DIVERGENCE(MVDM-HOST-DIV-147): see host_terminate below. */
+        (void)mvdm_softpc_terminate_current_session((uint32_t)VDMForWOW, 0u);
+        return;
+    }
 
     // If VDM Is for WOW keep showing the glass
     if (VDMForWOW) {

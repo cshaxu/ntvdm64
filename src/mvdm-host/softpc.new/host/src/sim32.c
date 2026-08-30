@@ -29,6 +29,7 @@
 #include <stdio.h>
 #include "xt.h"
 #include "sim32.h"
+#include "mvdm_softpc_termination.h"
 #include "sas.h"
 #include "gmi.h"
 #include "ckmalloc.h"
@@ -434,7 +435,12 @@ GLOBAL UTINY *host_sas_init IFN1(sys_addr, size)
        printf ("NTVDM:Failed to allocate virtual memory for sas\n");
 #endif
 
-       exit(0);
+       /* DIVERGENCE(MVDM-HOST-DIV-147): the original selected CCPU40
+        * allocation failure exits its dedicated process.  Bound product
+        * execution instead escapes through the session; an unbound caller
+        * receives the source-shaped allocation failure below. */
+       (void)mvdm_softpc_terminate_current_session(0u, 0u);
+       return(NULL);
     }
 
     Length_of_M_area = size;

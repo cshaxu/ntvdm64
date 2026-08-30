@@ -55,6 +55,7 @@
 
 #include "nt_mouse.h"
 #include "nt_event.h"
+#include "mvdm_softpc_termination.h"
 #include "nt_vdd.h"
 #include "nt_timer.h"
 
@@ -1331,9 +1332,13 @@ BOOL CntrlHandler(ULONG CtrlType)
                 }
 #endif
             if (CntrlHandlerState & CNTRL_PUSHEXIT) {
-                ExitProcess(0);
+                /* DIVERGENCE(MVDM-HOST-DIV-147): an NT4 console-control
+                 * event ended a dedicated ntvdm.exe.  End only the bound
+                 * session in the current in-process composition. */
+                (void)mvdm_softpc_terminate_current_session(
+                    (uint32_t)VDMForWOW, 0u);
                 return FALSE;
-                }
+            }
 
             if ( (CntrlHandlerState & CNTRL_PIFALLOWCLOSE) ||
                  (!(CntrlHandlerState & CNTRL_SHELLCOUNT) &&
