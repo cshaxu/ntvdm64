@@ -4,27 +4,27 @@
 
 ## Active Packet
 
-**Active: M0 T310 S27**
+**Active: M0 T310 S28**
 
-### M0 T310 S27 — host-video bindings
+### M0 T310 S28 — host-platform bindings
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T310 S27; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | S26 closed original base-video controller dispatch and formal assembly. S27 is the next sequential owner-contract cluster. |
-| Objective | Recover only `SPC-HOST-VIDEO-BINDINGS`: selected original `softpc.new/host/src` display endpoint, palette, invalidation and host-window contracts for Win32/x86 CCPU40. |
-| Non-goals | No controller replacement (S26 closed), terminal redesign, kernel VDM or MONITOR import, Bochs fallback, BOP semantic expansion, trace-selected repair, or guest-visible display claim. |
-| Reference Baseline | Closed S26 base-video controller dispatch; original `nt_vga.c`, `nt_ega.c`, `nt_cga.c`, `nt_graph.c`, `nt_hosts.c` and their reached public host API forms. |
-| Files And ABI Surface | Original selected host-video sources, palette/invalidation declarations, display endpoint callbacks and reached controller callers; a private mirror overlay only if a complete source-shaped contract requires it. |
+| Identifier Mode | M0 T310 S28; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | S27 closed original host-video bindings and formal assembly. S28 is the next sequential owner-contract cluster. |
+| Objective | Recover only `SPC-HOST-PLATFORM-BINDINGS`: selected original host platform, process, resource and system-service contracts for Win32/x86 CCPU40. |
+| Non-goals | No video endpoint redesign (S27 closed), configuration policy (S29), kernel VDM or MONITOR import, Bochs fallback, BOP semantic expansion, or trace-selected repair. |
+| Reference Baseline | Closed S27 host-video bindings; selected original platform caller units and reached public Win32/NTDLL forms. |
+| Files And ABI Surface | Original selected host platform sources, thread/process/resource declarations and reached host API contracts; a private mirror overlay only if a complete source-shaped contract requires it. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island, CPU-profile and source-recovery rules; approved T310 S8 plan and coverage ledger. |
-| Verification | Formal MSVC Win32/x86 `/MT` Ninja selected host-video archive and forced-link review; original endpoint declaration/definition/caller comparison; focused source-shaped endpoint initialization or exact unavailable result. x64 compatibility is outside the active worklist. |
-| Expected Markers | One source-shaped selected host-video contract; preserved original callback order; guest numeric addresses remain guest values and do not become host identities; no raw MONITOR/Bochs/kernel-VDM route or hand-written display replacement. |
+| Verification | Formal MSVC Win32/x86 `/MT` Ninja selected host-platform archive and forced-link review; original platform declaration/definition/caller comparison; focused source-shaped platform result or exact unavailable result. x64 compatibility is outside the active worklist. |
+| Expected Markers | One source-shaped selected host-platform contract; preserved original callback order; guest numeric addresses remain guest values and do not become host identities; no raw MONITOR/Bochs/kernel-VDM route or hand-written platform replacement. |
 | Asset Needs | Exact selected base-video and C-VID sources, source manifests, session mapping-manager rules and MSVC Build Tools/Ninja. |
 | Reporting Requirements | Per cluster: original roots, declaration/definition/table/caller relationship, recovery rung, selected x86 CCPU40 result, mapping-manager use and no-Bochs/MONITOR proof. |
-| Stop Conditions | A selected host endpoint requires an unregistered semantic divergence; a raw host identity crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or a finding belongs to S28 or later. |
-| Exit Criteria | Every selected host-video declaration, definition, initializer and reached caller has one direct, binding-only, private-overlay or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and focused endpoint-contract evidence does not select new S27 owner work. Integrated video behavior remains mandatory S49 validation. |
+| Stop Conditions | A selected platform endpoint requires an unregistered semantic divergence; a raw host identity crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or a finding belongs to S29 or later. |
+| Exit Criteria | Every selected host-platform declaration, definition, initializer and reached caller has one direct, binding-only, private-overlay or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and focused platform-contract evidence does not select new S28 owner work. Integrated machine behavior remains mandatory S49 validation. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
-| Similar-Issue Sweep | Every selected host-video callback, palette/invalidation endpoint, reached controller caller, host handle/address form, selected compilation condition, and MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
+| Similar-Issue Sweep | Every selected host-platform callback, process/resource endpoint, reached caller, host handle/address form, selected compilation condition, and MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
 
 **T310 S22 P1:** the selected host-storage surface is now separated into the
 original no-fixed-disk CCPU callbacks, DEM direct DASD, local floppy and the
@@ -90,6 +90,12 @@ palette forms and retired NT4 Console Server graphics/event forms.  The latter
 require one session-owned presenter capability or an exact unavailable result;
 they do not authorize a replacement controller or GUI.  See the [S27 source
 boundary](etc/evidence/m0-t310-s27-p1-host-video-source-boundary-001.md).
+
+**T310 S27 closed:** public GDI palette calls now link directly, while retired
+Console Server invalidation/palette/activity forms retain their original ABI
+through a session-owned presenter notification.  Unbound presentation fails
+explicitly; no GUI or controller replacement was introduced.  See the
+[closure record](history/m0-t310-s27-host-video-bindings-closure-20260830.md).
 
 **T310 S17 P1:** the complete selected system-controller source set is now
 split from adjacent ROM, platform, endpoint and BOP owners. The original

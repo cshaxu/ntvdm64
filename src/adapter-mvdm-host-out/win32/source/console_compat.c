@@ -7,6 +7,57 @@
  */
 #include <windows.h>
 #include "conapi.h"
+#include "session/session.h"
+
+static BOOL console_video_event(uint32_t kind, HANDLE output, HPALETTE palette,
+                                const SMALL_RECT *rect, DWORD flags)
+{
+    session *owner = session_thread_current();
+    session_video_event event;
+
+    if (owner == NULL) {
+        SetLastError(ERROR_INVALID_HANDLE);
+        return FALSE;
+    }
+    ZeroMemory(&event, sizeof(event));
+    event.kind = kind;
+    event.output_handle = (uintptr_t)output;
+    event.palette_handle = (uintptr_t)palette;
+    event.flags = flags;
+    if (rect != NULL) {
+        event.left = rect->Left;
+        event.top = rect->Top;
+        event.right = rect->Right;
+        event.bottom = rect->Bottom;
+    }
+    if (!session_notify_video_event(owner, &event)) {
+        SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
+        return FALSE;
+    }
+    return TRUE;
+}
+
+BOOL WINAPI InvalidateConsoleDIBits(HANDLE output, PSMALL_RECT rect)
+{
+    if (rect == NULL) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return FALSE;
+    }
+    return console_video_event(SESSION_VIDEO_EVENT_INVALIDATE, output, NULL,
+        rect, 0u);
+}
+
+BOOL WINAPI SetConsolePalette(HANDLE output, HPALETTE palette, DWORD flags)
+{
+    return console_video_event(SESSION_VIDEO_EVENT_PALETTE, output, palette,
+        NULL, flags);
+}
+
+VOID WINAPI SetLastConsoleEventActive(VOID)
+{
+    (void)console_video_event(SESSION_VIDEO_EVENT_ACTIVE, NULL, NULL, NULL,
+        0u);
+}
 
 HANDLE GetConsoleInputWaitHandle(VOID)
 {

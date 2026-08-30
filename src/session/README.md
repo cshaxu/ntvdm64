@@ -75,6 +75,15 @@ M0 T310 S8 disposition register:
   loads guest bytes nor interprets any OpenNT service. The app chooses the
   executable-relative roots; source-shaped adapters consume them synchronously.
 
+M0 T310 S27 disposition register:
+
+- `session.c` and `session.h`: `small neutral extension`. An active session
+  may dispatch a typed host-video invalidation, palette or activity event to
+  one app-installed presenter callback.  The event carries native host values
+  only within the host boundary; session neither creates a window, interprets
+  SoftPC video data nor exposes a guest identity.  An absent presenter is an
+  explicit unavailable result, preserving the original caller's failure path.
+
 M0 T310 S8 disposition register:
 
 - `session.c` and `session.h`: `small neutral extension`. A ready session may

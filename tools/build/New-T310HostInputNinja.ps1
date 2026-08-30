@@ -44,7 +44,10 @@ rule run
 
 build obj/fixture.obj: cc `$root/tests/adapter-mvdm-host-out/win32/console_input_contract_fixture.c
 build obj/console_compat.obj: cc `$root/src/adapter-mvdm-host-out/win32/source/console_compat.c
-build console_input_contract_fixture.exe: link obj/fixture.obj obj/console_compat.obj
+build obj/session.obj: cc `$root/src/session/session.c
+build obj/mapping_manager.obj: cc `$root/src/session/mapping_manager.c
+build obj/guest_memory_lease.obj: cc `$root/src/session/guest_memory_lease.c
+build console_input_contract_fixture.exe: link obj/fixture.obj obj/console_compat.obj obj/session.obj obj/mapping_manager.obj obj/guest_memory_lease.obj
 build test: run console_input_contract_fixture.exe
 default console_input_contract_fixture.exe
 "@

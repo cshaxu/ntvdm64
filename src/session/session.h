@@ -33,6 +33,26 @@ enum session_cancellation_reason {
     SESSION_CANCELLATION_REQUESTED = 1u
 };
 
+enum session_video_event_kind {
+    SESSION_VIDEO_EVENT_INVALIDATE = 1u,
+    SESSION_VIDEO_EVENT_PALETTE = 2u,
+    SESSION_VIDEO_EVENT_ACTIVE = 3u
+};
+
+typedef struct session_video_event {
+    uint32_t kind;
+    uintptr_t output_handle;
+    uintptr_t palette_handle;
+    int32_t left;
+    int32_t top;
+    int32_t right;
+    int32_t bottom;
+    uint32_t flags;
+} session_video_event;
+
+typedef int (*session_video_event_fn)(void *context,
+    const session_video_event *event);
+
 typedef void (*session_teardown_fn)(void *context);
 
 typedef struct session_teardown {
@@ -52,6 +72,7 @@ typedef struct session {
     uint32_t machine_backend;
     uint64_t mechanical_resume_budget;
     uint32_t mechanical_resume_status;
+    uint32_t video_event_active;
     uint32_t teardown_count;
     volatile long binding_count;
     session_teardown teardowns[SESSION_MAX_TEARDOWNS];
@@ -62,6 +83,8 @@ typedef struct session {
     char firmware_root[SESSION_FIRMWARE_ROOT_BYTES];
     char dos_media_root[SESSION_FIRMWARE_ROOT_BYTES];
     char win16_media_root[SESSION_FIRMWARE_ROOT_BYTES];
+    session_video_event_fn video_event_sink;
+    void *video_event_context;
 } session;
 
 #ifdef __cplusplus
@@ -82,6 +105,11 @@ uint64_t session_mechanical_resume_budget(const session *instance);
 void session_record_mechanical_resume_status(session *instance,
     uint32_t status);
 uint32_t session_mechanical_resume_status(const session *instance);
+int session_set_video_event_sink(session *instance, session_video_event_fn sink,
+    void *context);
+int session_notify_video_event(session *instance,
+    const session_video_event *event);
+uint32_t session_video_event_active(const session *instance);
 int session_dispose(session *instance);
 mapping_manager *session_guest_memory_mappings(session *instance);
 mapping_manager *session_host_resource_mappings(session *instance);

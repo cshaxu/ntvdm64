@@ -138,6 +138,33 @@ uint32_t session_mechanical_resume_status(const session *instance)
     return instance->mechanical_resume_status;
 }
 
+int session_set_video_event_sink(session *instance, session_video_event_fn sink,
+    void *context)
+{
+    if (!session_valid(instance) || instance->state != SESSION_STATE_READY)
+        return 0;
+    instance->video_event_sink = sink;
+    instance->video_event_context = context;
+    return 1;
+}
+
+int session_notify_video_event(session *instance,
+    const session_video_event *event)
+{
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+        event == NULL)
+        return 0;
+    if (event->kind == SESSION_VIDEO_EVENT_ACTIVE)
+        instance->video_event_active = 1u;
+    return instance->video_event_sink != NULL &&
+        instance->video_event_sink(instance->video_event_context, event) != 0;
+}
+
+uint32_t session_video_event_active(const session *instance)
+{
+    return session_valid(instance) ? instance->video_event_active : 0u;
+}
+
 int session_dispose(session *instance)
 {
     uint32_t index;

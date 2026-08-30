@@ -46,6 +46,8 @@ typedef struct _APPKEY {
 #define CONSOLE_REGISTER_WOW    2
 
 BOOL WINAPI InvalidateConsoleDIBits(HANDLE hConsoleOutput, PSMALL_RECT lpRect);
+BOOL WINAPI SetConsolePalette(HANDLE hConsoleOutput, HPALETTE hPalette,
+                              DWORD dwUsage);
 VOID WINAPI SetLastConsoleEventActive(VOID);
 BOOL WINAPI VDMConsoleOperation(DWORD iFunction, LPVOID lpData);
 int WINAPI ShowConsoleCursor(HANDLE hConsoleOutput, BOOL bShow);
