@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3342 |
+| Documentation records | 3343 |
 | --- | --- |
-| Generated UTC | 2026-08-30T14:41:51Z |
+| Generated UTC | 2026-08-30T14:43:05Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | d69bc58d19aaff5f1c4bcde481ef04abb0f4648a2e00a5d683d1bb2bb01fea57 |
+| STATUS.md | principal control document | c9c54a0df8fbd3115c06ef7ff15d80d3c32d0dfd376eba8e70b9f888334e01e3 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -3249,6 +3249,7 @@ content-divergent entries.
 | history/m0-t310-s26-video-controller-dispatch-closure-20260830.md | closed task history | f8ef02853a3515091db7b6a823b673390efb20ab8f2f18d686dbaa8699d39f43 |
 | history/m0-t310-s27-host-video-bindings-closure-20260830.md | closed task history | 0a5c42c9ce09a42be9ac13d86eaf9df4ec31bf7ca48e07681d7ecd07844ab30f |
 | history/m0-t310-s28-host-platform-bindings-closure-20260830.md | closed task history | 158dceaf6acb28e83f5c61d4914258e32cce84e8bd70ab26a732527f2a196816 |
+| history/m0-t310-s29-host-configuration-bindings-closure-20260830.md | closed task history | b9728350f119202250c0637d6af47b08e188b41d61f8c95079dc5e60aad42f75 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

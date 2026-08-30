@@ -4,25 +4,25 @@
 
 ## Active Packet
 
-**Active: M0 T310 S29**
+**Active: M0 T310 S30**
 
-### M0 T310 S29 — host-configuration bindings
+### M0 T310 S30 — host-VDD binding
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T310 S29; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | S28 closed selected host-platform bindings and assigned all remaining forced-link edges to their owner packets. S29 is the next sequential owner-contract cluster. |
-| Objective | Recover only `SPC-HOST-CONFIGURATION-BINDINGS`: selected SoftPC configuration, PIF and console-key policy contracts for Win32/x86 CCPU40. |
-| Non-goals | No private Console Server recreation, video endpoint redesign, kernel VDM or MONITOR import, Bochs fallback, BOP semantic expansion, or trace-selected repair. |
-| Reference Baseline | Closed S28 platform bindings; original `config.c`, `nt_pif.c` and their reached public/private console contracts. |
-| Files And ABI Surface | Original selected configuration/PIF caller bodies and their console, environment and host-policy declarations; a private mirror overlay only if a complete source-shaped contract requires it. |
+| Identifier Mode | M0 T310 S30; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | S29 closed selected host-configuration bindings. S30 is the next sequential owner-contract cluster. |
+| Objective | Recover only `SPC-HOST-VDD-BINDING`: selected SoftPC VDD installation, dispatch and host callback contracts for Win32/x86 CCPU40. |
+| Non-goals | No arbitrary VDD product expansion, kernel VDM or MONITOR import, Bochs fallback, BOP semantic expansion, or trace-selected repair. |
+| Reference Baseline | Closed S29 configuration bindings; original `nt_vdd.c` and reached VDD/host declaration forms. |
+| Files And ABI Surface | Original selected VDD caller bodies and their dispatch, I/O hook and host callback declarations; a private mirror overlay only if a complete source-shaped contract requires it. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island, CPU-profile and source-recovery rules; approved T310 S8 plan and coverage ledger. |
-| Verification | Formal MSVC Win32/x86 `/MT` Ninja selected configuration archive and forced-link review; original declaration/definition/caller comparison; focused source-shaped result or exact unavailable result. x64 compatibility is outside the active worklist. |
-| Expected Markers | Preserved original configuration call order; no raw host identity crosses a fixed-width ABI; no raw MONITOR/Bochs/kernel-VDM route or hand-written configuration replacement. |
+| Verification | Formal MSVC Win32/x86 `/MT` Ninja selected VDD archive and forced-link review; original declaration/definition/caller comparison; focused source-shaped result or exact unavailable result. x64 compatibility is outside the active worklist. |
+| Expected Markers | Preserved original VDD call order; no raw host identity crosses a fixed-width ABI; no raw MONITOR/Bochs/kernel-VDM route or hand-written VDD replacement. |
 | Asset Needs | Exact selected host sources, source manifests, session ownership rules and MSVC Build Tools/Ninja. |
 | Reporting Requirements | Per cluster: original roots, declaration/definition/caller relationship, recovery rung, selected x86 CCPU40 result and no-Bochs/MONITOR proof. |
-| Stop Conditions | A selected configuration endpoint requires an unregistered semantic divergence; recovery selects private Console Server/kernel VDM; or a finding belongs to S30 or later. |
-| Exit Criteria | Every selected configuration declaration, definition, initializer and reached caller has one direct, binding-only, private-overlay or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and focused configuration evidence does not select new S29 owner work. Integrated machine behavior remains mandatory S49 validation. |
+| Stop Conditions | A selected VDD endpoint requires an unregistered semantic divergence; recovery selects kernel VDM; or a finding belongs to S31 or later. |
+| Exit Criteria | Every selected VDD declaration, definition, initializer and reached caller has one direct, binding-only, private-overlay or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and focused VDD evidence does not select new S30 owner work. Integrated machine behavior remains mandatory S49 validation. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
 | Similar-Issue Sweep | Every selected configuration/PIF callback, reached caller, host handle/address form, selected compilation condition, and private-Console/kernel-VDM and `src.old` negative scan. |
 
@@ -31,6 +31,10 @@ directly, preserving PIF `ExpandEnvironmentStringsOem` and related host-file
 contracts. Private console shortcut/menu APIs retain their call shapes and
 explicit unavailable results. Fresh 380-edge x86 CCPU40 assembly evidence is
 in [P1](etc/evidence/m0-t310-s29-p1-host-configuration-source-assembly-001.md).
+
+**T310 S29 closed:** original OEM/PIF configuration contracts are selected and
+private Console Server-only configuration calls now have exact unavailable
+dispositions. See [closure](history/m0-t310-s29-host-configuration-bindings-closure-20260830.md).
 
 **T310 S28 P1:** `RegisterConsoleVDM` now has its complete original ABI and
 an explicit unavailable direction instead of an unresolved private Console
