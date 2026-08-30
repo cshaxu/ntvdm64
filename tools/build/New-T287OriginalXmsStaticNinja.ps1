@@ -40,7 +40,9 @@ $environmentNinja = $environment.Replace('\', '/')
 # product object; its same-shaped binding belongs to later S4.
 $units = @('xms', 'xmsa20', 'xmsblock', 'xmsdisp', 'xmsmisc', 'xmsumb')
 $sources = $units | ForEach-Object { "$root/src/mvdm-host/xms.486/$_.c" }
-$hashLines = $sources | ForEach-Object {
+$adapterSources = @('src/adapter-mvdm-host-out/softpc/mvdm_xms_memory.c')
+$adapterSourcePaths = $adapterSources | ForEach-Object { "$root/$_" }
+$hashLines = @($sources + $adapterSourcePaths) | ForEach-Object {
     $path = $_.Replace('/', '\')
     $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $path).Hash.ToLowerInvariant()
     "$($_.Substring($root.Length + 1))`t$hash"
@@ -56,18 +58,26 @@ $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /Di386 /DDEVL ' +
     '/I ' + $root + '/src/adapter-mvdm-host-out/win32/include ' +
     '/I ' + $root + '/src/adapter-mvdm-host-out/softpc/include ' +
     '/I ' + $root + '/src/adapter-mvdm-host-out/monitor/include ' +
+    '/I ' + $root + '/src/opennt-host/public/sdk/inc ' +
     '/I ' + $root + '/src/mvdm-host/xms.486 ' +
+    '/I ' + $root + '/src/mvdm-host-overlay/softpc.new/host/src ' +
     '/I ' + $root + '/src/mvdm-support/inc ' +
-    '/I ' + $root + '/src/mvdm-platform-abi/source/public/sdk/inc ' +
-    '/I ' + $root + '/src/mvdm-platform-abi/source/public/internal/base/inc ' +
-    '/I ' + $root + '/src/mvdm-platform-abi/source/public/ddk/inc ' +
+    '/I ' + $root + '/src/opennt-abi/source/public/sdk/inc ' +
+    '/I ' + $root + '/src/opennt-abi/source/public/internal/base/inc ' +
+    '/I ' + $root + '/src/opennt-abi/source/public/ddk/inc ' +
     '/I ' + $root + '/src/mvdm-host/softpc.new/host/inc ' +
     '/I ' + $root + '/src/mvdm-host/softpc.new/base/inc '
 
 $buildLines = foreach ($unit in $units) {
     "build obj/$unit.obj: cc `$root/src/mvdm-host/xms.486/$unit.c"
 }
-$objects = ($units | ForEach-Object { "obj/$_.obj" }) -join ' '
+$adapterBuildLines = foreach ($source in $adapterSources) {
+    $name = [IO.Path]::GetFileNameWithoutExtension($source)
+    "build obj/adapter_$name.obj: cc `$root/$source"
+}
+$objects = (@($units | ForEach-Object { "obj/$_.obj" }) +
+    @($adapterSources | ForEach-Object { 'obj/adapter_' +
+        [IO.Path]::GetFileNameWithoutExtension($_) + '.obj' })) -join ' '
 $content = @"
 ninja_required_version = 1.10
 root = $root
@@ -82,6 +92,7 @@ rule lib
   description = LIB `$out
 
 $($buildLines -join "`n")
+$($adapterBuildLines -join "`n")
 build original-xms-common.lib: lib $objects
 default original-xms-common.lib
 "@

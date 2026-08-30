@@ -33,6 +33,12 @@ write-through, explicit unmap failure and release before reaching
 `returned-recursive`; no raw pointer entered the historical 32-bit ABI. See
 the [S14 memory-mapping review](etc/evidence/m0-t310-s14-memory-mapping-bindings-contract-001.md).
 
+**T310 S15 P1:** the original six-unit XMS common package and the selected
+same-shaped guest-memory backend now compile in one x86/x64 formal archive.
+The direct `i386/xmsmem86.c` host-pointer backend remains source evidence only;
+runtime contract recovery is still active. See the [S15 source-closure
+baseline](etc/evidence/m0-t310-s15-p1-xms-source-closure-001.md).
+
 **T310 S13 closed:** the selected original CPU_40 SAS-memory owner retains
 its ordinary RAM vector, type map, scalar/string/move/fill algorithms and
 private native backing without exporting a host identity. Fresh x86/x64 runs

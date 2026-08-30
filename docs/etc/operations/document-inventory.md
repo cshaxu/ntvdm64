@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3276 |
+| Documentation records | 3277 |
 | --- | --- |
-| Generated UTC | 2026-08-30T05:42:46Z |
+| Generated UTC | 2026-08-30T05:48:31Z |
 
 ## Entries
 
@@ -508,6 +508,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s12-ccpu-extended-bop-default-contract-001.md | indexed supporting material | f36502253b407790cee5ab5a3fcafc343d1b357520919d4a705dc9f3b15df264 |
 | etc/evidence/m0-t310-s13-sas-memory-contract-001.md | indexed supporting material | 270049084be7a0d3d466861f16552ff7919cee84d88b973012803b7350ef976d |
 | etc/evidence/m0-t310-s14-memory-mapping-bindings-contract-001.md | indexed supporting material | 05ae98f16c40c5223f1375fcc6b77ccbc9f81f9d58d6ac4bed12046fe645ee8a |
+| etc/evidence/m0-t310-s15-p1-xms-source-closure-001.md | indexed supporting material | 4c5c0fc65ac16f9227953dff94bf5710d63399fdf04275eeb07f63145297597d |
 | etc/evidence/m0-t310-s1-softpc-selectable-backend-audit-001.md | indexed supporting material | a39180a64d82519752ea200a064d1595a0c892d1e94758a18f77bf0af3b5cb40 |
 | etc/evidence/m0-t310-s2-original-softpc-candidate-build-001.md | indexed supporting material | 398a96ff9360cc89521289b35ef8e7f11693f22e8fbac97e1ae735c94d8819b4 |
 | etc/evidence/m0-t310-s2-original-softpc-forced-link-audit-001.md | indexed supporting material | 194795bbc3ac0871d9716229aec9c276d44ef84cd484474df8da3a85300692d7 |
@@ -3290,7 +3291,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 75b7b816b55d78c2ee617b32aacd459d2787bb915aa4631a483ddca8c71f1e79 |
+| STATUS.md | principal control document | 2133b6de89004c353b1f1fef619289c63cb56f8fcaa93fae3190a1039e24cd1c |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
