@@ -4,27 +4,27 @@
 
 ## Active Packet
 
-**Active: M0 T310 S18**
+**Active: M0 T310 S19**
 
-### M0 T310 S18 — Host system interrupt bindings
+### M0 T310 S19 — Input controller callbacks
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T310 S18; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | S17 closed the selected original system-controller source boundary with exact controller-body dispositions and a formal x86 CCPU40 archive. S18 is now the only active sequential cluster. |
-| Objective | Re-read and close only `SPC-HOST-SYSTEM-INTERRUPT-BINDINGS`: the admitted original host thread/event/wait, reset-to-controller and public Win32 interrupt-delivery boundaries required by selected CCPU40 SoftPC. |
-| Non-goals | No kernel VDM or MONITOR import, Bochs fallback, BOP semantic expansion, trace-selected repair, endpoint-controller enablement, or claim of complete DOS/WOW product execution. |
-| Reference Baseline | Closed S4 source-family workset, S5 CCPU/RAM/FPU execution, S6 V86/MONITOR removal, S7 physical mapping/lease ledger, S15 XMS source closure, S16 firmware source closure and S17 controller source closure. |
-| Files And ABI Surface | Original SoftPC host timer/EOI/reset/event sources, selected CCPU40 callers, app/session lifecycle binding and named adapters only at source-proven boundaries. |
+| Identifier Mode | M0 T310 S19; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | S18 closed the selected original host-system interrupt binding boundary with the sole private alert call retained through the registered same-shaped Win32 adapter. S19 is now the only active sequential cluster. |
+| Objective | Re-read and close only `SPC-INPUT-CONTROLLER-CALLBACKS`: the selected original keyboard, mouse, input-controller table and callback contracts required by the Win32/x86 CCPU40 SoftPC profile. |
+| Non-goals | No host-input policy expansion, kernel VDM or MONITOR import, Bochs fallback, BOP semantic expansion, trace-selected repair, console/UI product behavior, or claim of complete DOS/WOW product execution. |
+| Reference Baseline | Closed S4 source-family workset, S5 CCPU/RAM/FPU execution, S6 V86/MONITOR removal, S7 physical mapping/lease ledger, S15 XMS, S16 firmware, S17 system-controller and S18 host-system-interrupt source closures. |
+| Files And ABI Surface | Original SoftPC keyboard/mouse/controller sources, generated or local callback tables, selected CCPU40 callers, prior input ABI repairs and named adapters only at source-proven boundaries. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island, CPU-profile and source-recovery rules; approved T310 S8 plan and coverage ledger. |
-| Verification | Formal MSVC Win32/x86 `/MT` Ninja host-interrupt archive; original source/call review; focused selected-profile behavior only when the host/system prerequisites exist. x64 compatibility is outside the active worklist. |
-| Expected Markers | Original host event/order and failure direction; no raw native pointer through a fixed-width ABI; mapping-manager use only at a real identity crossing; no raw MONITOR/Bochs/kernel-VDM path or synthetic interrupt success. |
-| Asset Needs | Exact selected SoftPC host system sources, CCPU/SAS/controller headers, S17 ledger, app/session lifecycle contract, MSVC Build Tools and Ninja. |
+| Verification | Formal MSVC Win32/x86 `/MT` Ninja input-controller archive; original declaration/definition/initializer/caller review and focused selected-profile behavior or original unavailable result. x64 compatibility is outside the active worklist. |
+| Expected Markers | Original input table/order and failure direction; no raw native pointer through a fixed-width ABI; mapping-manager use only at a real identity crossing; no raw MONITOR/Bochs/kernel-VDM path or synthetic input success. |
+| Asset Needs | Exact selected SoftPC keyboard/mouse/controller sources, CCPU/SAS headers, input-cluster ledger and prior evidence, app/session lifecycle contract, MSVC Build Tools and Ninja. |
 | Reporting Requirements | Per cluster: original roots/callers, recovery rung, table/initializer order, ABI/failure contract, any mapping-manager use, selected x86 CCPU40 result, retained unavailable disposition and no-Bochs/MONITOR proof. |
-| Stop Conditions | A host interrupt member requires an unregistered original-source divergence; an adapter would replace available original host logic; a raw native pointer crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or a dependency belongs to a later S. |
-| Exit Criteria | Every selected host-system-interrupt declaration, definition, caller and prior repair has exactly one direct, binding-only, adapter-backed or original-unavailable disposition; formal x86 evidence passes for the selected CCPU40 configuration; and a focused package audit does not select new S18 owner work. Integrated reset behavior remains mandatory S49 validation. |
+| Stop Conditions | An input-controller member requires an unregistered original-source divergence; an adapter would replace available original controller logic; a raw native pointer crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or a dependency belongs to a later S. |
+| Exit Criteria | Every selected input-controller declaration, definition, table/initializer, caller and prior repair has exactly one direct, binding-only, adapter-backed or original-unavailable disposition; formal x86 evidence passes for the selected CCPU40 configuration; and a focused package audit does not select new S19 owner work. Integrated device behavior remains mandatory S49 validation. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
-| Similar-Issue Sweep | BIOS/ROM/CMOS declarations, definitions, selected callers, firmware inputs and existing location-binding repair; MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
+| Similar-Issue Sweep | Keyboard/mouse declarations, definitions, selected callers, table/initializer forms, prior input ABI repairs, host-binding perimeter and MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
 
 **T310 S17 P1:** the complete selected system-controller source set is now
 split from adjacent ROM, platform, endpoint and BOP owners. The original
@@ -38,6 +38,14 @@ quick-event and selected host callback forms remain original bodies or an
 already registered same-shaped call binding. The formal x86 CCPU40 archive
 remains complete; live interrupt delivery awaits later endpoint and host
 binding packages, then S49. See the [S17 closure record](history/m0-t310-s17-system-controller-callbacks-closure-20260830.md).
+
+**T310 S18 closure:** original heartbeat creation, event initialization,
+alertable teardown and timer/controller call order remain source-shaped. The
+sole private `NtAlertThread` call keeps its registered same-shaped APC wake
+binding; local CCPU interrupt-handler tables remain local rather than becoming
+a BaseSrv route. The formal selected x86 CCPU40 graph remains complete; actual
+IRQ delivery and reset lifecycle stay mandatory S49 integration work. See the
+[S18 closure record](history/m0-t310-s18-host-system-interrupt-bindings-closure-20260830.md).
 
 **T310 S16 P1:** the firmware owner audit separates immutable original
 `softpc.new/{bios,roms,data}` inputs from executable original BIOS, system-ROM,
