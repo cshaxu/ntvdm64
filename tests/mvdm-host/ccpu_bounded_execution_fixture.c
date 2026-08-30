@@ -5,6 +5,9 @@
 
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_execution.h"
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_physical_mapping.h"
+#include "insignia.h"
+#include "host_def.h"
+#include "sas.h"
 
 static LONG WINAPI fixture_unhandled_exception(EXCEPTION_POINTERS *exception)
 {
@@ -20,11 +23,11 @@ static LONG WINAPI fixture_unhandled_exception(EXCEPTION_POINTERS *exception)
 
 /* These are the original CCPU/SoftPC public spellings.  The fixture does not
  * provide an executor, memory implementation, BOP handler, or stop hook. */
-extern void sas_init(uint32_t size);
+extern void sas_init(PHY_ADDR size);
 extern void sas_term(void);
-extern void c_sas_store(uint32_t address, uint8_t value);
-extern uint8_t c_sas_hw_at(uint32_t address);
-extern uint8_t *c_GetPhyAdd(uint32_t address);
+extern void c_sas_store(IU32 address, IU8 value);
+extern IU8 c_sas_hw_at(IU32 address);
+extern IU8 *c_GetPhyAdd(IU32 address);
 extern void c_cpu_init(void);
 extern uint16_t c_getIP(void);
 extern void c_setIP(uint16_t value);
@@ -40,6 +43,7 @@ extern void (*setAX_func)(uint16_t value);
 extern int32_t (*getCF_func)(void);
 extern void (*setCF_func)(int32_t value);
 extern void c_cpu_simulate(void);
+extern struct SasVector cSasPtrs;
 extern void host_start_cpu(void);
 extern void host_simulate(void);
 extern jmp_buf *ccpu386ThrdExptnPtr(void);
@@ -63,6 +67,20 @@ int main(void)
     }
     fputs("sas-init\n", stderr);
     sas_init(UINT32_C(0x00200000));
+    if (Sas.Sas_hw_at != cSasPtrs.Sas_hw_at ||
+        Sas.Sas_store != cSasPtrs.Sas_store ||
+        Sas.SasPtrToPhysAddrByte != cSasPtrs.SasPtrToPhysAddrByte ||
+        Sas.Sas_overwrite_memory != NULL) {
+        fputs("selected original SAS vector was not installed as expected\n", stderr);
+        sas_term();
+        return 1;
+    }
+    Sas.Sas_store(UINT32_C(0x00000123), UINT8_C(0xa6));
+    if (Sas.Sas_hw_at(UINT32_C(0x00000123)) != UINT8_C(0xa6)) {
+        fputs("selected original SAS vector did not dispatch RAM access\n", stderr);
+        sas_term();
+        return 1;
+    }
     {
         session physical_owner;
         uint8_t external_page_storage[4097] = { 0 };
