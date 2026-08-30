@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3401 |
+| Documentation records | 3403 |
 | --- | --- |
-| Generated UTC | 2026-08-30T20:06:18Z |
+| Generated UTC | 2026-08-30T20:18:21Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | e5ed250c787e1acbdc5f8d1069b6f87975a42180dc8b2bf36e739f6e6439d05d |
+| QUEUE.md | principal control document | 27758407d3c55832f30411a1012494179ac70b8a95266633f5d731b4daf070ab |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | d8ed50e20503f1f7b35eb69f7fdd05c08f14b936333500f880e76c24b95b4eb8 |
+| STATUS.md | principal control document | 27fbf256797949ff73999c66ec64bb776aa5322b17a1892c2cba78fef1969680 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -917,6 +917,7 @@ content-divergent entries.
 | etc/evidence/m0-t313-s5-p2-selected-direct-exit-sweep-001.md | indexed supporting material | 5247961a70066ca54f02a6233500f5d478aa8034a4132fe2d85aa6ebe4e7df11 |
 | etc/evidence/m0-t313-s5-p3-debugger-startup-binding-001.md | indexed supporting material | 4280096665aea5f87a75cfedbb1c31658b3a56821b4cc20d5ca6f402dde7ff6f |
 | etc/evidence/m0-t313-s5-p4-original-ems-writeback-closure-001.md | indexed supporting material | be398fe62e9c96cb6e0def4213ad00e2927e676e566f7695c59f625fcfbc19b1 |
+| etc/evidence/m0-t313-s5-p5-bounded-execution-and-purity-reread-001.md | indexed supporting material | 6429f832343068d28999047444474b12447a813dbca5a639d65baed3ceb657ff |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -3308,6 +3309,7 @@ content-divergent entries.
 | history/m0-t313-s2-cpu-memory-firmware-reset-closure-20260830.md | closed task history | 9a48216f8ace0d0b4809cc666b0044b1e50a0c62650e69e4904454aa69588f5f |
 | history/m0-t313-s3-controller-lifecycle-closure-20260830.md | closed task history | 0929577a8c9d8072612ab8f76fddd1da92852845eb34b179529b00cdeec234c2 |
 | history/m0-t313-s4-device-lifecycle-closure-20260830.md | closed task history | ec83860cc603aa7974880b1fa572fc48402c89033ea7f59fb7bfe42e99162a7d |
+| history/m0-t313-softpc-capability-mirror-purity-closure-20260830.md | closed task history | ac562c3aea4328f3655f617668014a0ff48b2f878e3158ba279a0797bbd3dc9b |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
