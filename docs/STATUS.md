@@ -4,25 +4,25 @@
 
 ## Active Packet
 
-**Active: M0 T310 S20**
+**Active: M0 T310 S21**
 
-### M0 T310 S20 — Host input bindings
+### M0 T310 S21 — Storage controller callbacks
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T310 S20; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | S19 closed the original keyboard/mouse controller tables and callback boundary without a synthetic input provider. S20 is now the only active sequential cluster. |
-| Objective | Re-read and close only `SPC-HOST-INPUT-BINDINGS`: selected original OpenNT host keyboard conversion, mouse host endpoint and public console input call contracts for Win32/x86 CCPU40 SoftPC. |
-| Non-goals | No kernel VDM or MONITOR import, Bochs fallback, BOP semantic expansion, trace-selected repair, fullscreen/display product behavior, multi-session input policy, or claim of complete DOS/WOW product execution. |
-| Reference Baseline | Closed S17 system-controller, S18 host-system-interrupt and S19 input-controller callback source boundaries; original selected host input sources and current Win32 adapter declarations. |
-| Files And ABI Surface | Original `nt_keycd.c`, `nt_mouse.c` and reached host input declarations/callers; adapter-mvdm-host-out/win32 only where public Win32 cannot directly preserve the original interface. |
+| Identifier Mode | M0 T310 S21; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | S20 closed selected host-input bindings without taking display/fullscreen product semantics. S21 is the next sequential owner-contract cluster. |
+| Objective | Re-read and close only `SPC-STORAGE-CONTROLLER-CALLBACKS`: selected original floppy/fixed-disk/EMS controller declarations, tables, callbacks and controller-side source contracts for Win32/x86 CCPU40 SoftPC. |
+| Non-goals | No host filesystem/device backend recovery (S22), kernel VDM or MONITOR import, Bochs fallback, BOP semantic expansion, trace-selected repair, media fabrication, or claim of guest disk execution. |
+| Reference Baseline | Closed S17--S20 controller and host-input source boundaries; original selected SoftPC storage-controller sources, controller headers and coverage ledger. |
+| Files And ABI Surface | Selected original `softpc.new/base/disks`, `softpc.new/base/dos` EMS controller and reached controller-side declarations/callers; adapter-mvdm-host-out/softpc only for an already proven same-shaped mechanical boundary. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island, CPU-profile and source-recovery rules; approved T310 S8 plan and coverage ledger. |
-| Verification | Formal MSVC Win32/x86 `/MT` Ninja host-input archive; original declaration/definition/caller review and focused public-input behavior or original unavailable result. x64 compatibility is outside the active worklist. |
-| Expected Markers | Original input conversion/order and failure direction; no raw native pointer through a fixed-width ABI; no raw MONITOR/Bochs/kernel-VDM path or synthetic input success. |
-| Asset Needs | Exact selected SoftPC host input sources, controller headers, input-cluster ledger and prior evidence, public Win32 API and MSVC Build Tools/Ninja. |
+| Verification | Formal MSVC Win32/x86 `/MT` Ninja selected-storage archive; original declaration/definition/initializer/caller review and focused controller behavior or exact original unavailable result. x64 compatibility is outside the active worklist. |
+| Expected Markers | Original controller table/order and failure direction; no raw native pointer through a fixed-width ABI; no raw MONITOR/Bochs/kernel-VDM path and no synthetic disk/media success. |
+| Asset Needs | Exact selected SoftPC storage sources, controller headers, storage-cluster ledger and prior evidence, public Win32 API and MSVC Build Tools/Ninja. |
 | Reporting Requirements | Per cluster: original roots/callers, recovery rung, table/initializer order, ABI/failure contract, any mapping-manager use, selected x86 CCPU40 result, retained unavailable disposition and no-Bochs/MONITOR proof. |
-| Stop Conditions | A host-input member requires an unregistered original-source divergence; an adapter would replace available original host logic; a raw native pointer crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or a dependency belongs to a later S. |
-| Exit Criteria | Every selected host-input declaration, definition, caller and prior repair has exactly one direct, binding-only, adapter-backed or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and a focused audit does not select new S20 owner work. Integrated device behavior remains mandatory S49 validation. |
+| Stop Conditions | A controller member requires an unregistered original-source divergence; an adapter would replace available original controller logic; a raw native pointer crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or a dependency belongs to S22 or later. |
+| Exit Criteria | Every selected storage-controller declaration, definition, initializer/caller and prior repair has exactly one direct, binding-only, adapter-backed or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and a focused audit does not select new S21 owner work. Integrated media behavior remains mandatory S49 validation. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
 | Similar-Issue Sweep | Keyboard conversion, host mouse endpoints, console-input declarations, selected callers, prior input ABI repairs and MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
 
@@ -52,6 +52,13 @@ INT 15h dispatch and range-checked 53-entry mouse table are source-composed
 under the selected x86 CCPU40 profile. The two retained mirror corrections
 remain minimal type/private-backing repairs; host console input is now S20 and
 integrated input delivery remains S49. See the [S19 closure record](history/m0-t310-s19-input-controller-callbacks-closure-20260830.md).
+
+**T310 S20 closure:** original keyboard conversion remains byte-exact, while
+the five reached NT4 Console Server call shapes now have a narrowly scoped,
+same-shaped public Win32 binding. Menu/fullscreen console behavior remains
+explicitly unavailable for S27. Formal x86 CCPU40 archive and forced-link
+evidence, plus a focused negative console-contract test, pass; live input
+delivery remains S49 integration work. See the [S20 closure record](history/m0-t310-s20-host-input-bindings-closure-20260830.md).
 
 **T310 S16 P1:** the firmware owner audit separates immutable original
 `softpc.new/{bios,roms,data}` inputs from executable original BIOS, system-ROM,

@@ -8,6 +8,15 @@
 #include <windows.h>
 #include "conapi.h"
 
+HANDLE GetConsoleInputWaitHandle(VOID)
+{
+    /* DIVERGENCE(ADAPTER-WIN32-030): NT4 supplied a Console Server wait
+     * object through this source-facing call.  A modern console input handle
+     * is itself waitable, so preserve the call shape and return the process
+     * console input endpoint without manufacturing an event or MVDM token. */
+    return GetStdHandle(STD_INPUT_HANDLE);
+}
+
 BOOL WINAPI ReadConsoleInputExW(HANDLE input, PINPUT_RECORD records, DWORD count,
                                 LPDWORD read, USHORT flags)
 {
@@ -43,12 +52,9 @@ BOOL WINAPI VDMConsoleOperation(DWORD operation, LPVOID data)
     HWND window = GetConsoleWindow();
     if (window == NULL || data == NULL) { SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return FALSE; }
     switch (operation) {
-    case VDM_HIDE_WINDOW: ShowWindow(window, SW_HIDE); return TRUE;
     case VDM_IS_ICONIC: *(BOOL *)data = IsIconic(window); return TRUE;
-    case VDM_IS_HIDDEN: *(BOOL *)data = !IsWindowVisible(window); return TRUE;
     case VDM_CLIENT_RECT: return GetClientRect(window, (RECT *)data);
     case VDM_CLIENT_TO_SCREEN: return ClientToScreen(window, (POINT *)data);
-    case VDM_SCREEN_TO_CLIENT: return ScreenToClient(window, (POINT *)data);
     default: SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return FALSE;
     }
 }
