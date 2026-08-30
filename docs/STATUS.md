@@ -140,6 +140,13 @@ translation units formally compose.  The whole PIT/EOI device package
 transfers to S4 without a fixture-local timer claim. See the
 [closure](history/m0-t313-s3-controller-lifecycle-closure-20260830.md).
 
+**T313 S4 P1:** the formal selected graph directly archives the complete
+original `system`, `video`/`cvidc`, `disks`, and `comms` packages.  A fresh
+forced-link audit finds no new unresolved device-owner symbol; it leaves only
+pre-existing EMS/DEM/debug/private-NT boundaries and records CCPU/C-video
+duplicate exports as a non-runnable audit result, not a `/FORCE` runtime
+solution. See the [P1 record](etc/evidence/m0-t313-s4-p1-device-package-assembly-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |
