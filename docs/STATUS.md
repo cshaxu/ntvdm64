@@ -53,6 +53,12 @@ result is exact `PRINTER`-unselected unavailability; host endpoints remain
 S24 and integrated behavior remains S49.  See the [S23 formal assembly
 evidence](etc/evidence/m0-t310-s23-p2-comms-controller-formal-assembly-001.md).
 
+**T310 S24 P1:** the original `nt_com` serial endpoint lifecycle and its
+`nt_ntfun` IOCTL/wait helpers have a finite direct public-API closure; their
+native handles/events remain private source state.  WOW callbacks remain S39,
+and the `PRINTER`/MONITOR LPT source remains condition-unselected without a
+synthetic provider.  See the [S24 source boundary](etc/evidence/m0-t310-s24-p1-host-comms-source-boundary-001.md).
+
 **T310 S17 P1:** the complete selected system-controller source set is now
 split from adjacent ROM, platform, endpoint and BOP owners. The original
 controller initialization/heartbeat order stays in its source bodies; every
