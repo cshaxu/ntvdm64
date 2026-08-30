@@ -128,6 +128,12 @@ order is source/build closed; full PIT/BDA/EOI period behavior remains a
 separate cohesive original-device endpoint and is not inferred from the
 archive. See the [P5 record](etc/evidence/m0-t313-s3-p5-original-timer-package-formal-closure-001.md).
 
+**T313 S3 P6:** a controlled original `timer.c` link probe confirms that
+`TimerGenerateMultipleInterrupts` belongs to one PIT/EOI/device cohort, with
+waveform, BDA, floppy, EOI-delay and PIF dependencies.  The probe introduced
+no shim and was fully reverted; complete live-period behavior must be handled
+only with that original cohort. See the [P6 record](etc/evidence/m0-t313-s3-p6-original-timer-device-boundary-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |
