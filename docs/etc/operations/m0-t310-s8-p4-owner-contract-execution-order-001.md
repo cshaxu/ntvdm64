@@ -14,7 +14,9 @@ compiler warning ledger, the contract review index, the reconciled warning
 worklist **and every existing P4 closure/disposition evidence file**.  The
 latter is assigned through the owner-contract coverage ledger. The current
 reconciled compiler worklist contains 910 records, while the coverage ledger
-tracks all 42 source-owner clusters. The priority groups below are dependency
+tracks all 42 source-owner clusters. It is a shared audit/planning index, not
+a per-S blocking gate: an active S consumes only the rows and prior evidence
+owned by its own contract. The priority groups below are dependency
 groups only: the authoritative plan assigns one cluster to one sequential S
 packet, rather than closing a group as one packet. Counts are
 planning indicators only; closure requires source evidence, not a count
@@ -88,4 +90,4 @@ unrelated device or guest program, but it must observe the contract's own
 state, result, or failure behavior. Compilation and forced linking prove
 composition only; they do not substitute for this behavior result.
 Only cluster completion updates the shared worklist; unrelated warnings stay
-visible.
+visible without blocking the active cluster.

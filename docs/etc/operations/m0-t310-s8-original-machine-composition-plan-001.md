@@ -116,7 +116,9 @@ Before selecting any individual generated carrier or display repair, inventory e
    CCPU, memory/system/firmware, storage and input are considered before
    optional video, communications, debugger and unselected product surfaces.
    A warning may only cause a mirror correction, overlay or adapter change
-   after its entire contract cluster has that evidence.  Non-width source-form
+   after its entire contract cluster has that evidence. The full-tree ledger is
+   a shared cross-cluster planning index, not a blocking prerequisite for each
+   S: an active S reads and closes only its own owner-contract rows. Non-width source-form
    records remain compiler-visible and leave the x86/x64 worklist by a
    documented cluster disposition, never by suppression.
 ## T310 S8 closure boundary

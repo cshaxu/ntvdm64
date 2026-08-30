@@ -30,8 +30,11 @@
 per cluster in the current coverage ledger. A packet first re-reads the
 complete original callable contract, then makes the smallest source-shaped
 repair, then proves x86/x64 compilation and any locally meaningful behavior.
-The final cross-cluster packet performs the machine-profile verification;
-neither a compiler warning nor a trace hit creates an extra packet. Bochs
+The full-tree 42-cluster warning ledger is a cross-cluster audit and planning
+baseline, not an exit gate for the active S: S8 considers only evidence whose
+owner is `SPC-CCPU-EXECUTOR-DISPATCH`; other clusters remain visible for their
+own future packet. The final cross-cluster packet performs the machine-profile
+verification; neither a compiler warning nor a trace hit creates an extra packet. Bochs
 production-closure removal, `i386` semantic audit and complete SoftPC
 capability/mirror-purity acceptance remain separate queued T packages. See the
 amended [S8 plan](etc/operations/m0-t310-s8-original-machine-composition-plan-001.md)
