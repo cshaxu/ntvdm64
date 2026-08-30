@@ -43,6 +43,12 @@ interposer; it does not replace source bodies or hide warnings.  The fresh
 external x86 candidate completed all 54 archive inputs.  CPU/SAS/firmware/reset
 behavior is still S2 work.  See the [P2 record](etc/evidence/m0-t313-s2-p2-original-host-root-link-closure-001.md).
 
+**T313 S2 P3:** the exact original CCPU40 instruction/SAS cohort completed its
+fresh external x86 archive (133 inputs) without compiler or linker error.  No
+warning was suppressed and no second executor participates.  This is formal
+package evidence only; create-to-reset and bounded guest behavior remain S2
+work.  See the [P3 record](etc/evidence/m0-t313-s2-p3-original-ccpu40-archive-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |
