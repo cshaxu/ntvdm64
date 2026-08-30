@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3351 |
+| Documentation records | 3353 |
 | --- | --- |
-| Generated UTC | 2026-08-30T14:58:58Z |
+| Generated UTC | 2026-08-30T15:04:28Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 650d8d77024db02ee8bfd93897cb5dda7d1abe629f8f3e2b4751d28463f52cef |
+| STATUS.md | principal control document | b32deb79694e3fb18941ea358d2f0bab7b00b9e3d992bb6a7771cff2b0bd1d1b |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -759,6 +759,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s31-host-bop-source-boundary-001.md | indexed supporting material | 58a80948e01368a9af3f5a1bfaf24d4ebd406c01d61276749f31d7a49cc65abe |
 | etc/evidence/m0-t310-s32-other-machine-source-boundary-001.md | indexed supporting material | e9e62488d4009b06ab0eb48ff965f7bb2bf8f45f4af6063cf8f4d7d7b647fa0e |
 | etc/evidence/m0-t310-s33-support-controller-callbacks-closure-001.md | indexed supporting material | 7da228ee1a2ec8094f66168ce71eadd302fa030d00be88891e2d48fec37685d9 |
+| etc/evidence/m0-t310-s34-mvdm-support-library-closure-001.md | indexed supporting material | 3df36f52354147918d0b7d3eb8ea8fc168f361b4d5863e349d77abd2e3bb9881 |
 | etc/evidence/m0-t310-s4-original-machine-family-audit-001.md | indexed supporting material | 9ab32c765a5e3853bc1ec4226da5680c2142d04a53fca644da8a59cd57ae6f50 |
 | etc/evidence/m0-t310-s4-p2-softpc-executable-source-reclassification-001.md | indexed supporting material | f2032226a03c8b2f74ec839061321c1b484bf7d428d5e4603d7d64da67d09890 |
 | etc/evidence/m0-t310-s4-p3-original-init-group-build-001.md | indexed supporting material | c371fa076dc141fc9632a56da41a7d002efd6dbd04922e1ceebc05f6db8a1c3b |
@@ -1547,7 +1548,7 @@ content-divergent entries.
 | etc/operations/m0-t310-s8-p4-ccpu-access-table-ledger.tsv | indexed supporting material | 012ff0295eda6c33b2181ac4936b619a3ffef1af4c72110fd7cc14e3b984d9fc |
 | etc/operations/m0-t310-s8-p4-cvidc-generated-interface-ledger.tsv | indexed supporting material | ab31ccb2aea47932461d7062942691584596c5aa34cae45202d4455a1b71fb11 |
 | etc/operations/m0-t310-s8-p4-gdp-generated-layout-inventory.tsv | indexed supporting material | 50cc2fe1a26297432196b2bf00382560c8f0b3e674680bb7cddf3fbbf21b6343 |
-| etc/operations/m0-t310-s8-p4-owner-contract-coverage-ledger.tsv | indexed supporting material | fe1d564fa07d7d802607fee4f29ab871058d8b4899f54b3c8c7f14e343ee1df2 |
+| etc/operations/m0-t310-s8-p4-owner-contract-coverage-ledger.tsv | indexed supporting material | 9aab244f120ab7c2e4cce56750d99950119eac39996a1976be8d0390b254e582 |
 | etc/operations/m0-t310-s8-p4-owner-contract-execution-order-001.md | indexed supporting material | 0e80d96c8a25fe144fbe6dcf096b408d05cd8f5c8fd0dadee1f3a8608aedf56d |
 | etc/operations/m0-t310-s8-p4-whole-tree-compiler-warning-cluster-ledger.tsv | indexed supporting material | cc5441fd3f901d42c568fb29f38d0b64385226a500038ba355f225a06c4de5df |
 | etc/operations/m0-t310-s8-p4-whole-tree-compiler-warning-ledger.tsv | indexed supporting material | 62ad064ad7bae4ceb0546d4fe41b03c223619fa08804edef71cb0e9b42fd6b24 |
@@ -3258,6 +3259,7 @@ content-divergent entries.
 | history/m0-t310-s31-host-bop-binding-closure-20260830.md | closed task history | cf897e75b546352a9912b41f0d4ed085d2c8c17c9637fd6eb15d8151d47b7823 |
 | history/m0-t310-s32-other-machine-source-closure-20260830.md | closed task history | 6a8fb043e8b99a414b4554ab6b2a07844b86838794d80284ebb75197a52db0b5 |
 | history/m0-t310-s33-support-controller-callbacks-closure-20260830.md | closed task history | ffc4127d9013164e6d03f33f6d36fd258e12a92162e62e8b7a40e4de1be6a931 |
+| history/m0-t310-s34-mvdm-support-library-closure-20260830.md | closed task history | a2b0ef9912ad210da7422df829fac9769e546d09162cd901feda088522e9b415 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
