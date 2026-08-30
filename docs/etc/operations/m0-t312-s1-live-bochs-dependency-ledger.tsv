@@ -1,0 +1,28 @@
+path	live_kind	retired_contract	original_softpc_owner	disposition
+src/app/machine_shell.c	production	adapter_bochs_machine_lifecycle create/run/destroy	softpc.new/host/src/nt_cpu.c host_cpu_init/host_simulate	transfer in S2
+src/adapter-mvdm-host-out/softpc/mvdm_command_registers.c	production	machine_facade register copy/set	softpc.new/host/src/nt_cprgs.c and base/ccpu386 register tables	transfer in S2
+src/adapter-mvdm-host-out/softpc/mvdm_sas.c	production	machine_facade checked RAM copy	softpc.new/base/ccpu386/ccpusas4.c SAS memory provider	remove self-authored facade in S2
+src/adapter-mvdm-host-out/softpc/mvdm_vdm_stack.c	production	machine_facade real-mode frame and resume	SoftPC host_simulate plus source-shaped monitor SETVDMSTACK contract	transfer requires monitor disposition in S2
+src/adapter-mvdm-host-out/softpc/mvdm_realmode_stack.c	production	machine_facade real-mode frame	SoftPC/monitor real-mode register contract	transfer requires monitor disposition in S2
+src/adapter-mvdm-host-out/softpc/mvdm_protected_frame_transaction.c	production	machine_facade protected frame	DPMI32/monitor protected-context contract	transfer requires DPMI/monitor source owner in S2
+src/adapter-mvdm-host-out/softpc/mvdm_protected_span.c	production	machine_facade protected segment/span	DPMI32 descriptor/memory contract	transfer requires DPMI32 source owner in S2
+src/adapter-mvdm-host-out/softpc/mvdm_sas.c	production	machine_facade memory range	CCPU40 SAS ordinary memory	transfer in S2
+src/adapter-mvdm-host-out/softpc/mvdm_a20.c	production	retired reference in explanatory prose	XMS xmsa20 plus same-shaped SoftPC A20 adapter	comment cleanup in S2
+src/adapter-mvdm-host-out/monitor/source/host_idle.c	production	retired reference in explanatory prose	original host idle control / explicit unavailable	comment cleanup in S2
+src/adapter-mvdm-host-in/generic_ud_bridge.h	production	Bochs-era generic #UD bridge naming	no selected SoftPC CCPU40 counterpart	remove or archive in S3
+src/mvdm-host-overlay/softpc.new/host/src/nt_bop_dem_command.c	mirror-overlay	Bochs-era ingress wording	original nt_bop source-shaped subset	comment cleanup in S2
+tools/build/New-T310OriginalSoftpcNinja.ps1	formal-build	forbidden-input assertion	selected CCPU40 build hygiene	retain assertion only; no dependency
+tools/build/New-T310CcpuExecutionNinja.ps1	formal-build	forbidden-input assertion	selected CCPU40 build hygiene	retain assertion only; no dependency
+tools/build/New-T260S8FullNinjaGraph.ps1	retired-build	Bochs component graph	retired experiment	archive/remove in S3
+tools/build/New-T286BochsBoundaryNinja.ps1	retired-build	Bochs boundary fixture graph	retired experiment	archive/remove in S3
+tools/build/New-T287S3XmsA20Ninja.ps1	retired-build	Bochs XMS fixture graph	retired experiment	archive/remove in S3
+tools/build/New-T287S5XmsUmbIvtNinja.ps1	retired-build	Bochs XMS fixture graph	retired experiment	archive/remove in S3
+tools/build/New-T289S3DpmiFoundationNinja.ps1	retired-build	Bochs DPMI fixture graph	retired experiment	archive/remove in S3
+tools/build/New-T289S5DpmiRegistrationNinja.ps1	retired-build	Bochs DPMI fixture graph	retired experiment	archive/remove in S3
+tools/build/New-T289S5RealModeFrameNinja.ps1	retired-build	Bochs DPMI fixture graph	retired experiment	archive/remove in S3
+tools/build/New-T289S5RealModeStackNinja.ps1	retired-build	Bochs DPMI fixture graph	retired experiment	archive/remove in S3
+tools/build/New-T289S6DpmiVddMiscNinja.ps1	retired-build	Bochs DPMI fixture graph	retired experiment	archive/remove in S3
+tools/build/New-T291S3WowPointerScopeNinja.ps1	retired-build	Bochs WOW fixture graph	retired experiment	archive/remove in S3
+tools/build/New-T291S3WowStackSimulationNinja.ps1	retired-build	Bochs WOW fixture graph	retired experiment	archive/remove in S3
+tools/build/New-T303TypedResumeNinja.ps1	retired-build	Bochs resume fixture graph	retired experiment	archive/remove in S3
+tools/build/New-T304MachineEventNinja.ps1	retired-build	Bochs event fixture graph	retired experiment	archive/remove in S3

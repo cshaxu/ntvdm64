@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3363 |
+| Documentation records | 3366 |
 | --- | --- |
-| Generated UTC | 2026-08-30T16:54:12Z |
+| Generated UTC | 2026-08-30T16:59:49Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 1dc31c92bffcb3a8f240430538f6d2d5f0fe561c65e1a622b385988b392bdbb0 |
+| STATUS.md | principal control document | 87e78b7ff8b31564274ec61809af853f19e5b13342fda0b34d6108a96f3078c8 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1564,6 +1564,8 @@ content-divergent entries.
 | etc/operations/m0-t311-s1-mvdm-support-provenance.tsv | indexed supporting material | b7e61ccc51d08bd981ad2143d4eb4936241b56046c0dc6b6475681e5ccbb9ee8 |
 | etc/operations/m0-t311-s2-mvdm-host-support-provenance.tsv | indexed supporting material | af11ce89201d7eba785699709f7dd5a9777179764cf58c1ad2e55fe02d94cb49 |
 | etc/operations/m0-t311-s2-s3-mvdm-host-support-reroot-closure-001.md | indexed supporting material | a77e4999639af51efb0e9f8a3d7e8efb5d5bf3fb5a667ec0d68d38db13ce1ec7 |
+| etc/operations/m0-t312-s1-live-bochs-dependency-audit-001.md | indexed supporting material | 265ef3c49cd1d9218d52fd06a99ecb7ffd47312267fdfb7d97e9d8e18191e82f |
+| etc/operations/m0-t312-s1-live-bochs-dependency-ledger.tsv | indexed supporting material | b4fd686ac6dc4c12a9c25d567043cb7c138e23a14f5322deb0480f483dc56a27 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -1706,6 +1708,7 @@ content-divergent entries.
 | etc/operations/proposal-rebootstrap-neutral-runtime-foundation-001.md | indexed supporting material | 8a5ae994a7ffffe78353d72f5448be3908d767583c3e3013b24c3005bc1057ba |
 | etc/operations/proposal-rebootstrap-opennt-source-supply-001.md | indexed supporting material | 09fff377c703e1b4a65ad3d06c8c8453b5afba1fa21f327fb08243d40762fbc3 |
 | etc/operations/proposal-repository-local-source-closure-refs-retirement-001.md | indexed supporting material | db10b8498c1f6525221b1cf86df8312ba90aa4a26f752601f5fd5b3608c70986 |
+| etc/operations/proposal-retired-bochs-source-removal-001.md | indexed supporting material | e04b11504882fa9f8739592bba5d5434b59ad05d3ccccd9209d64ff44644a5ca |
 | etc/operations/proposal-selector-blind-guest-async-completion-delivery-001.md | indexed supporting material | 3453f27990bb707109bb81db1ebbe029e3a937f3af1deb174b172f7f86780e5a |
 | etc/operations/proposal-selector-blind-protected-mode-substrate-001.md | indexed supporting material | 6353218f86907661b1dc72bb4a20067ef08f6c8e59be33e65e084a2a8b8b5598 |
 | etc/operations/proposal-selector-blind-realmode-continuity-001.md | indexed supporting material | bbdb1afc13e62af3bed756e3a22afd51e166d6662d0dfd6ff2f13512ce4a8ac9 |

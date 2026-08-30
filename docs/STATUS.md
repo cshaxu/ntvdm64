@@ -4,12 +4,19 @@
 
 ## Active Packet
 
-**No active M/T/S packet.**
+**Active: M0 T312 S2**
 
-**M0 T311 closed:** selected original MVDM support paths have been re-rooted
-under `mvdm-host`; no separate support component remains in the selected
-Win32/x86 CCPU40 graph. See
-[closure](history/m0-t311-mvdm-host-support-reintegration-closure-20260830.md).
+### M0 T312 S2 — retired Bochs machine-facing binding transfer
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T312 S2; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | S1 completed the live dependency/owner ledger at `etc/operations/m0-t312-s1-live-bochs-dependency-ledger.tsv`. |
+| Objective | Transfer each live retired machine-facade dependency to its source-shaped SoftPC/CCPU40, SAS, DPMI32 or monitor owner. |
+| Non-goals | No retired-source deletion yet, CCPU30/MONITOR work, x64 work, or new emulator. |
+| Reference Baseline | [retired-Bochs removal proposal](etc/operations/proposal-retired-bochs-source-removal-001.md); selected Win32/x86 CCPU40 graph. |
+| Verification | Original owner declarations and call contracts, selected CCPU40 build, and targeted source scans. |
+| Exit Criteria | No production source includes or calls `adapter-bochs`; each transfer uses a named original SoftPC/CCPU40 owner or explicit source-proven unavailable contract. |
 
 **T310 S29 P1:** the original two-file OEM/Unicode support package is selected
 directly, preserving PIF `ExpandEnvironmentStringsOem` and related host-file
