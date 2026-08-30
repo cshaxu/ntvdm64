@@ -15,9 +15,10 @@ OpenNT and SoftPC recovery is source-first:
    the original unit composable;
 4. author new behavior only under a recorded last-resort exception.
 
-The production architecture separates canonical original MVDM host
-runtime, support-library, standalone-tool and firmware-input mirrors:
-`mvdm-host`, `mvdm-support`, `mvdm-tools` and `mvdm-softpc-firmware`. It also
+The production architecture separates canonical original MVDM host runtime,
+standalone-tool and firmware-input mirrors: `mvdm-host`, `mvdm-tools` and
+`mvdm-softpc-firmware`. Its original support paths remain inside
+`mvdm-host` at their upstream-relative locations. It also
 keeps exact `mvdm-platform-abi`, complete load-only DOS and WOW16 guest
 mirrors, the original SoftPC/CCPU40 execution packages and their bounded
 historical-interface adapters, neutral `session`, cross-process

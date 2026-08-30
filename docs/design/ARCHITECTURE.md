@@ -90,18 +90,14 @@ prevents permanent parallel providers.
 - `mvdm-host`: the canonical original MVDM host-runtime mirror. It owns
   selected DEM, COMMAND, XMS, DPMI32, VDMREDIR, WOW32, VDD/debugger,
   executable `softpc.new` packages—including `base/bios` reset/BIOS services
-  and `base/keymouse` controller sources—and SIM/monitor providers. It does
-  not own standalone tools, common support libraries or immutable firmware
-  media inputs.
+  and `base/keymouse` controller sources—SIM/monitor providers, and original
+  package-internal `inc`, `oemuni` and `suballoc` support paths. It does not
+  own standalone tools or immutable firmware media inputs.
 - `opennt-host`: the canonical original non-MVDM OpenNT host-service mirror.
   It owns every complete, source-audited OpenNT host package accepted for use
   by `mvdm-host`; BaseSrv/client VDM is merely its first accepted service
   slice, not this component's boundary. It is neither a replacement MVDM
   provider nor a generic compatibility layer.
-- `mvdm-support`: the canonical original MVDM common support mirror:
-  shared `inc` declarations/build carriers plus original `oemuni` and
-  `suballoc` library packages. It may be independently built, but it enters a
-  host runtime only after its exact interface audit admits it.
 - `mvdm-tools`: the canonical original standalone MVDM tool mirror,
   including `vdmutils/forcedos`, `graftabl`, `pifedit` and `win` resources.
   Tools may be independently built but never enter the main `ntvdm.exe` link
@@ -195,7 +191,6 @@ app -> mvdm-guest/dos/v86 / mvdm-guest/bin86 / mvdm-guest/wow16 / mvdm-guest/fon
 
 mvdm-host -> mvdm-platform-abi
 mvdm-host -> opennt-host                           (only an admitted original host-service package)
-mvdm-host -> mvdm-support
 mvdm-host -> mvdm-softpc-patch                   (only registered SoftPC hooks)
 mvdm-host -> adapter-mvdm-host-out
 mvdm-host -> session                              (neutral contract only)
@@ -206,7 +201,7 @@ adapter-mvdm-host-out/win32 -> broker client      (only for brokered historical 
 opennt-host -> mvdm-platform-abi
 opennt-host -> adapter-opennt-host                 (only source-audited package-private bindings)
 opennt-host -> broker                              (only after package closure admits fixed-width transport)
-mvdm-tools -> mvdm-support / mvdm-platform-abi    (independent tool builds only)
+mvdm-tools -> mvdm-host / mvdm-platform-abi       (independent tool builds only)
 app -> mvdm-softpc-firmware                       (manifest-selected immutable input only)
 ```
 
@@ -228,10 +223,8 @@ order for each reached accepted-package private-host interface family. It is
 not a second generic Win32 shim and is consumed only by its owning
 `opennt-host` package.
 
-`mvdm-support` has no automatic inbound runtime edge: a host package
-may use it only after the package/symbol tracker records the original consumer,
-exact interface shape and binding disposition. `mvdm-tools` has no
-inbound production-runtime edge at all. `mvdm-softpc-firmware` has no host
+`mvdm-tools` has no inbound production-runtime edge at all.
+`mvdm-softpc-firmware` has no host
 compile or link edge; `app` stages an explicitly admitted, manifest-selected
 immutable firmware input to the selected backend's source-shaped binding.
 

@@ -23,7 +23,7 @@ Revision History:
 
 --*/
 
-/* DIVERGENCE(MVDM-SUPPORT-DIV-003): NT4 passed typed interrupt callbacks
+/* DIVERGENCE(MVDM-SUPPORT-DIV-005): NT4 passed typed interrupt callbacks
  * through PVOID, a function/data-pointer conversion accepted by its compiler
  * but not a valid x86/x64 C ABI contract.  These callbacks are internal
  * 486-emulator control-flow entrypoints, not host-object identities. */

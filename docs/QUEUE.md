@@ -35,7 +35,7 @@ first new candidate after the bounded packet closes is item 1 below.
 
 | Order | Candidate implementation package |
 | --- | --- | --- |
-| 1 | MVDM host mirror-topology recovery (`mvdm-support` reintegration) |
+| 1 | MVDM host original-relative support reintegration |
 | 2 | Retired Bochs source/component removal |
 | 3 | Complete SoftPC capability and mirror-purity acceptance |
 | 4 | Base VDM source-shaped broker recovery |

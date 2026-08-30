@@ -7,7 +7,6 @@ src/
   bochs-core/
   mvdm-host/
   opennt-host/
-  mvdm-support/
   mvdm-tools/
   mvdm-softpc-firmware/
   mvdm-softpc-patch/
@@ -46,9 +45,9 @@ material and never a source, build, link or runtime input.
   service value and a finite outward modern-binding closure; a standalone
   convenience helper, a symbol hit or a recursively required NT4 product-shell
   package never qualifies.
-- `mvdm-support` contains selected shared MVDM build/header carriers
-  and original support libraries (`inc`, `dirs`, `makefil0`, `oemuni`, and
-  `suballoc`). It has no implied default host link edge.
+- `mvdm-host` retains selected shared MVDM build/header carriers and original
+  support libraries at their original relative paths (`inc`, `dirs`,
+  `makefil0`, `oemuni`, and `suballoc`); no separate support component exists.
 - `mvdm-tools` contains selected standalone MVDM tools and their
   resources (`vdmutils`). It is a production mirror with optional independent
   tool builds, never a main-program library.
@@ -100,7 +99,7 @@ For the source-function BFS, zero-degree consists of all original definitions
 in `mvdm-host` and their transitive resolved call closure while each callee's
 physical original definition remains in the selected OpenNT `mvdm` tree and is
 already mirrored under a project `mvdm-*` component. Do not sweep every
-`mvdm-support`, tool, firmware, or guest definition into zero merely because it
+tool, firmware, or guest definition into zero merely because it
 exists locally: it must be reachable from that closure. This classification
 does not change final build ownership. Resolve by selected physical definition
 identity, never by a bare same-spelled function name.

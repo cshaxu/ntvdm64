@@ -4,7 +4,7 @@
 /* DIVERGENCE(ADAPTER-SOFTPC-REDIR-001): retain the complete original
  * declaration carrier, but replace its x86 process-address coincidence with
  * a bounded synchronous session lease. */
-#include "../../../mvdm-support/inc/softpc.h"
+#include "../../../mvdm-host/inc/softpc.h"
 #include "mvdm_redirector_pointer_scope.h"
 
 #undef GetVDMAddr

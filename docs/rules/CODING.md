@@ -26,10 +26,10 @@
 
 ## Placement and dependencies
 
-- Place each production file in one of the nineteen roots declared by the
-  architecture rules. `mvdm-host`, `opennt-host`, `mvdm-support`, `mvdm-tools`
-  and `mvdm-softpc-firmware` preserve selected MVDM runtime, accepted
-  non-MVDM OpenNT host, support, standalone-tool and firmware-input package
+- Place each production file in one of the architecture roots declared by the
+  architecture rules. `mvdm-host`, `opennt-host`, `mvdm-tools` and
+  `mvdm-softpc-firmware` preserve selected MVDM runtime (including its
+  original support paths), accepted non-MVDM OpenNT host, standalone-tool and firmware-input package
   topology respectively; package libraries do not create ad-hoc new source
   owners.
 - `mvdm-softpc-patch` is reserved for individually provenance-registered

@@ -53,11 +53,11 @@ architecture/proposal references to the new owner. Remove the old component
 roots only after a complete source/build/document scan proves that no live
 input names `mvdm-support` or `mvdm-support-overlay`.
 
-### S4 — dual-architecture mirror verification
+### S4 — selected-profile mirror verification
 
-Run the formal x86 and x64 affected build graphs, compare every moved mirror
-file with its selected original baseline, verify every overlay registration,
-and run documentation governance plus `git diff --check`.
+Run the formal selected Win32/x86 CCPU40 affected build graph, compare every
+moved mirror file with its selected original baseline, verify every overlay
+registration, and run documentation governance plus `git diff --check`.
 
 ## Non-goals
 
@@ -70,8 +70,9 @@ and run documentation governance plus `git diff --check`.
 
 ## Exit criteria
 
-`mvdm-support` and `mvdm-support-overlay` no longer exist; every former file
+The retired support roots no longer exist; every former file
 has one verified destination or a recorded owner-approved exception; all
 original `base/mvdm` relative topology is represented beneath `mvdm-host`; all
 four previously registered width divergences remain registered at their new
-owner; and the affected formal x86/x64 graphs have no live old-root reference.
+owner; and the affected formal selected-profile graph has no live old-root
+reference.

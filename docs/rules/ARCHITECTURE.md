@@ -1,7 +1,7 @@
 # Architecture Rules
 
 1. The production source owners are exactly `mvdm-host`, `opennt-host`,
-   `mvdm-support`, `mvdm-tools`, `mvdm-softpc-firmware`, `mvdm-softpc-patch`,
+   `mvdm-tools`, `mvdm-softpc-firmware`, `mvdm-softpc-patch`,
    `mvdm-platform-abi`, `mvdm-guest/dos/v86`, `mvdm-guest/bin86`,
    `mvdm-guest/wow16`, `mvdm-guest/font16`,
    `adapter-mvdm-host-in`, `adapter-mvdm-host-out`, `session`, `broker`,
@@ -18,9 +18,9 @@
    VDM, the full BaseClient/Kernel32 product, Win32k and USER/GDI server are
    stopping boundaries, not recursive import candidates. Every accepted and
    rejected candidate has a complete source/ABI/final-disposition record in
-   the shared host tracker. Shared original MVDM
-   support carriers/libraries belong to `mvdm-support`; independent historical
-   tools belong to `mvdm-tools`. A tool is never a host
+   the shared host tracker. Original MVDM support carriers/libraries remain in
+   their original-relative `mvdm-host` paths; independent historical tools
+   belong to `mvdm-tools`. A tool is never a host
    runtime dependency merely because it is independently buildable.
    `mvdm-softpc-firmware` owns only selected original immutable firmware/ROM/
    data inputs; it is neither a host-runtime library nor a machine executor.
@@ -142,9 +142,9 @@
     Bochs/adapter mechanics are recovery evidence only; every retained core
     difference is minimized, individually registered, and placed in the
     matching private overlay when it exceeds the mirror rule's local boundary.
-29. `mvdm-support` may be linked only after the package/symbol tracker
-    records its original consumer, exact interface shape, binding owner and
-    x86/x64 disposition. `mvdm-tools` may never be linked into `app` or
+29. The `mvdm-host` support paths may be linked only after the package/symbol
+    tracker records their original consumer, exact interface shape, binding
+    owner and x86/x64 disposition. `mvdm-tools` may never be linked into `app` or
     an MVDM host runtime. `mvdm-softpc-firmware` may not be compiled or linked
     as a host provider; `app` may stage its immutable inputs only through the
     selected machine backend. Executable `softpc.new/base/*` source packages

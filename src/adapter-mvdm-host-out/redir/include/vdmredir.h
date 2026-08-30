@@ -4,7 +4,7 @@
 /* DIVERGENCE(ADAPTER-REDIR-001): retain the complete original declaration
  * carrier, but turn the historical 32-bit handle coincidence into resolution
  * through the session host-resource mapping instance. */
-#include "../../../mvdm-support/inc/vdmredir.h"
+#include "../../../mvdm-host/inc/vdmredir.h"
 #include "mvdm_redirector_handle.h"
 
 #undef HANDLE_FROM_WORDS

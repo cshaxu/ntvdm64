@@ -4,15 +4,12 @@
 
 ## Active Packet
 
-**Active: none.**
+**No active M/T/S packet.**
 
-M0 T310 S37 is closed.  It restored the selected original DPMI32 bodies,
-removed their nine Bochs-era private overlay files, retained only the bounded
-session mapping identity, and produced the formal Win32/x86 CCPU40 r10 archive
-and forced-link evidence.  The full disposition and remaining non-DPMI owner
-boundaries are recorded in
-[the S37 closure record](history/m0-t310-s37-dpmi-bochs-era-cleanup-20260830.md).
-No M/T/S packet is active until the owner admits the next packet.
+**M0 T311 closed:** selected original MVDM support paths have been re-rooted
+under `mvdm-host`; no separate support component remains in the selected
+Win32/x86 CCPU40 graph. See
+[closure](history/m0-t311-mvdm-host-support-reintegration-closure-20260830.md).
 
 **T310 S29 P1:** the original two-file OEM/Unicode support package is selected
 directly, preserving PIF `ExpandEnvironmentStringsOem` and related host-file

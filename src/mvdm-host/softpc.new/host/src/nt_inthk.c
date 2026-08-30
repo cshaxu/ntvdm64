@@ -43,10 +43,7 @@
 /* Macros and typedefs. */
 
 
-/* DIVERGENCE(MVDM-HOST-DIV-067): the shared MVDM declaration now exposes
- * these internal interrupt callbacks as typed function pointers rather than
- * transporting them through PVOID. See MVDM-SUPPORT-DIV-005. */
-/* DIVERGENCE(MVDM-HOST-DIV-067): the shared MVDM declaration now exposes
+/* DIVERGENCE(MVDM-SUPPORT-DIV-005): the shared MVDM declaration now exposes
  * these internal interrupt callbacks as typed function pointers rather than
  * transporting them through PVOID. See MVDM-SUPPORT-DIV-005. */
 /* Hardware interrupt handler */

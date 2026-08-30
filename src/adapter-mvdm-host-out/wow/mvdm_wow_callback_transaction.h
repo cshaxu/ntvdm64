@@ -8,7 +8,7 @@
 #define MVDM_WOW_CALLBACK_PARAMETER_MAXIMUM 16u
 
 /* This is the numeric, packed portion of the original WOW32 CBVDMFRAME in
- * mvdm-support/inc/wow.h.  It deliberately retains the original field order
+ * mvdm-host/inc/wow.h.  It deliberately retains the original field order
  * and 16-byte PARM16 union extent, while replacing only historical typedefs
  * with fixed-width C types so its byte layout is identical on x86 and x64.
  * It is copied through a scoped guest lease; it is never a host pointer. */
