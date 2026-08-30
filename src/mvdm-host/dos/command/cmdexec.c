@@ -35,6 +35,10 @@
     opennt_create_void_cdecl_thread((attributes), (stack_bytes), \
         (OPENNT_VOID_CDECL_THREAD_START_ROUTINE)(start_routine), (parameter), \
         (flags), (thread_id))
+/* DIVERGENCE(MVDM-HOST-DIV-149): retain the source's standard-handle swap
+ * order but bind it to a child-only STARTUPINFO carrier, not this app's
+ * process-wide standard streams. */
+#include "adapter-mvdm-host-out/win32/include/command_process_compat.h"
 
 static BOOL cmdResolveStdHandle(ULONG identity, HANDLE *handle_out)
 {

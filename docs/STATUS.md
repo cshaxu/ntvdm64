@@ -20,6 +20,12 @@
 | Stop Conditions | Pause before introducing a COMMAND-private scheduler/mapper, retaining a native handle in guest state, inventing a DOS parent return, or accepting remote Redirector/PIF/console semantics without its owner package. |
 | Exit Criteria | All four original units formally compose; every reached local lifecycle/stream boundary has a same-shaped provider or explicit source-shaped unavailable result; remaining full guest/remote product paths transfer without invented success. |
 
+**T317 S3 P1:** original COMMAND child creation preserves its source order
+while a translation-unit-local Win32 binding directs its selected standard
+streams only to the child.  The external x86 child-stream and original
+redirection/mapping fixtures pass; see the
+[P1 evidence](etc/evidence/m0-t317-s3-p1-command-child-stream-boundary-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
