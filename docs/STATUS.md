@@ -74,6 +74,12 @@ selected formal candidate completed 403/403 edges.  The witness deliberately
 stops before BIOS BOP/device I/O; it does not claim a DOS boot.  See the [P7
 record](etc/evidence/m0-t313-s2-p7-original-lifecycle-witness-001.md).
 
+**T313 S2 P8:** the refreshed current x86 witness now proves the original SAS
+owner through the XMS-shaped A20 interface and the existing mapping-manager
+physical-page/DOS-alias positive and negative cases.  Original EMS/XMS/UMB
+allocation bodies remain selected; no fixture-created allocator is claimed.
+See the [P8 record](etc/evidence/m0-t313-s2-p8-memory-a20-and-umb-boundary-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |

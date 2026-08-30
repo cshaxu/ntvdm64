@@ -5,6 +5,7 @@
 #include <windows.h>
 
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_execution.h"
+#include "adapter-mvdm-host-out/softpc/include/mvdm_a20.h"
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_effective_address.h"
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_physical_mapping.h"
 #include "insignia.h"
@@ -99,6 +100,21 @@ int main(void)
     Sas.Sas_store(UINT32_C(0x00000123), UINT8_C(0xa6));
     if (Sas.Sas_hw_at(UINT32_C(0x00000123)) != UINT8_C(0xa6)) {
         fputs("selected original SAS vector did not dispatch RAM access\n", stderr);
+        sas_term();
+        return 1;
+    }
+    /* XMS retains the historical SAS A20 surface.  Its adapter only reaches
+     * the selected original CCPU/SAS owner; it does not create a second RAM
+     * implementation or a private mapping namespace. */
+    sas_enable_20_bit_wrapping();
+    if (!sas_twenty_bit_wrapping_enabled()) {
+        fputs("XMS A20 enable did not reach original SAS state\n", stderr);
+        sas_term();
+        return 1;
+    }
+    sas_disable_20_bit_wrapping();
+    if (sas_twenty_bit_wrapping_enabled()) {
+        fputs("XMS A20 disable did not reach original SAS state\n", stderr);
         sas_term();
         return 1;
     }
