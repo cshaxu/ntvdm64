@@ -126,16 +126,16 @@
     console, IPC and registry APIs under ordinary permissions. The product
     must not modify/rebuild Windows system components or require installation
     mutations to start or sustain itself.
-25. The host build matrix is MSVC Win32/x86 `/MT` and MSVC x64 `/MT`.
-    Different architectures never satisfy symbols in one process;
-    cross-process interaction uses only an admitted fixed wire ABI.
-26. Original SoftPC is the default session machine backend; Bochs is selected
-    only explicitly. A session chooses exactly one before activation and may
-    not silently fall back or execute both. Every functional test that reaches
-    machine, guest or MVDM-host behavior records the Win32/x86 × Win64/x64 ×
-    SoftPC/Bochs matrix. An intentionally unavailable or blocked backend is a
-    recorded expected result, not an omitted row. Pure source/build-audit work
-    may state why it has no machine matrix.
+25. The current host build profile is MSVC Win32/x86 `/MT`, with the original
+    SoftPC CCPU40 executor selected by `CPU_40_STYLE`. `CPU_30_STYLE` is the
+    retired NT4 kernel-VDM V86-monitor contract and must not enter compilation,
+    linking, runtime or acceptance. Different architectures never satisfy
+    symbols in one process; any later cross-process interaction uses only an
+    admitted fixed wire ABI.
+26. Original SoftPC CCPU40 is the sole session machine backend. A session has
+    no fallback or simultaneous executor. Every functional test that reaches
+    machine, guest or MVDM-host behavior records the selected Win32/x86 CCPU40
+    row. Pure source/build-audit work may state why it has no machine row.
 27. `src.old/` and comparison repositories are evidence only and must not
     enter source, build, link, runtime or acceptance manifests.
 29. The `mvdm-host` support paths may be linked only after the package/symbol

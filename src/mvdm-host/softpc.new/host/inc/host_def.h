@@ -154,7 +154,12 @@ extern void host_simulate(void);
 
 #define NTVDM	// To enable NT specific base code.
 
-#define CPU_30_STYLE
+/*
+ * DIVERGENCE(MVDM-HOST-DIV-044): the selected product compiles only the
+ * original CCPU40 software-executor route.  CPU_30_STYLE selects the separate
+ * NT4 kernel-VDM V86 monitor contract, which this non-invasive product cannot
+ * provide; it must never be selected implicitly by a common host header.
+ */
 #define PM
 
 #if !defined(MONITOR) && !defined(PROD)
