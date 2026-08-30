@@ -4,23 +4,23 @@
 
 ## Active Packet
 
-**Active: M0 T313 S2**
+**Active: M0 T313 S3**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T313 S2; Ordinary Mode (single-person dual-role implementation and review). |
-| Admission And Approval | S1 closed by the current ledger; owner-directed sequential execution now admits the first original machine-lifecycle cohort. The owner requires immediate owner-package cleanup of non-original material encountered in `mvdm-host`. |
-| Objective | Recover one source-shaped Win32/x86 CCPU40 `create -> CPU/SAS initialization -> ROM/CMOS/BIOS load -> reset` lifecycle with an explicit bounded stop or failure result. |
-| Non-goals | No x64 recovery, CPU30/MONITOR, Bochs route, controller/device endpoint work, guest/BOP semantic expansion, kernel VDM/CSRSS reconstruction, raw host identity in historical ABI, or second machine executor. |
-| Reference Baseline | [T313 S1 ledger](etc/evidence/m0-t313-s1-softpc-capability-purity-ledger-001.tsv), T310 S8/S13/S16 closures, T312 retired-route closure, and the T313 plan. |
-| Files And ABI Surface | Original `softpc.new/base/{ccpu386,bios,system,dos}` and `softpc.new/host/src/{nt_cpu,nt_cprgs,nt_sas,nt_msscs,nt_rez,nt_reset,nt_umb,nt_emm}` cohorts; reached overlays, same-shaped softpc bindings, app machine shell and formal Ninja manifest. |
+| Identifier Mode | M0 T313 S3; Ordinary Mode (single-person dual-role implementation and review). |
+| Admission And Approval | S2 closed by its recorded source and behavior evidence. Owner-directed sequential execution now admits the original controller lifecycle cohort; non-original material found in reached `mvdm-host` remains immediate cleanup work. |
+| Objective | Recover original Win32/x86 CCPU40 interrupt, timer, DMA and input initialization, bounded delivery or explicit unavailable result, and teardown contracts. |
+| Non-goals | No x64 recovery, CPU30/MONITOR, Bochs route, guest/BOP semantic expansion, full presentation/storage/communications, kernel VDM/CSRSS reconstruction, raw host identity in historical ABI, or second machine executor. |
+| Reference Baseline | [T313 S2 closure](history/m0-t313-s2-cpu-memory-firmware-reset-closure-20260830.md), [T313 S1 ledger](etc/evidence/m0-t313-s1-softpc-capability-purity-ledger-001.tsv), and the T313 plan. |
+| Files And ABI Surface | Original `softpc.new/base/{system,keymouse}` and `softpc.new/host/src/{nt_timer,nt_eoi,nt_event,nt_input,nt_keycd,nt_mouse,nt_reset}` cohorts; existing same-shaped Win32/SoftPC bindings and session controlled-stop surface. |
 | Applicable Rules | Source-first/mirror-first recovery, selected x86 CCPU40 profile, one mapping manager, no `src.old`, no retired Bochs route, minimal registered divergence and package-first verification. |
-| Verification | Original caller/definition ordering review; focused bounded lifecycle fixture or source-shaped existing witness; fresh external formal Ninja candidate and forced-link run; retired-route scan; documentation governance and diff review. |
-| Expected Markers | Original `host_cpu_init`, `c_cpu_init`, ROM/CMOS load and reset order; a typed no-host-kill stop/failure; no raw host pointer across MVDM ABI; every reached divergence removed or registered. |
+| Verification | Original caller/definition ordering review; focused bounded controller/input witness or explicit unavailable endpoint; fresh external formal Ninja candidate and forced-link run; retired-route scan; documentation governance and diff review. |
+| Expected Markers | Original timer/init/reset order; source-owned IRQ/DMA/input dispatch; typed no-host-kill stop/failure; no raw host pointer across MVDM ABI; every reached divergence removed or registered. |
 | Asset Needs | Pinned MVDM source mirrors, selected CCPU40 manifests, current session mapping manager, source-shaped adapters and MSVC/Ninja x86 environment. |
-| Reporting Requirements | Record each original call edge, source/body disposition, mapping use, positive/negative outcome, immediate cleanup and any remaining later controller dependency. |
+| Reporting Requirements | Record each original call edge, source/body disposition, mapping use, positive/negative outcome, immediate cleanup and any remaining later device dependency. |
 | Stop Conditions | A required edge selects a second executor, needs a source-body rewrite, proposes an unregistered generic shim, needs guest service semantics, or cannot retain the original call order. Pause for re-admission. |
-| Exit Criteria | S2 closes only with source and bounded behavior evidence for the complete CPU/SAS/firmware/reset cohort, a fresh selected x86 CCPU40 formal build, and no deferred cleanup discovered in reached `mvdm-host` paths. |
+| Exit Criteria | S3 closes only with source and bounded behavior evidence for the timer/interrupt/DMA/input cohort, a fresh selected x86 CCPU40 formal build, and no deferred cleanup discovered in reached `mvdm-host` paths. |
 | Original Owner Request | “在 mvdm-host 里面，你碰到的话可以顺手清理掉，不必等待以后。” |
 | Similar-Issue Sweep | CPU/FPU/SAS vectors, EMS/UMB mapping, firmware resource roots, first-session initialization, reset/teardown callers, reached overlays/bindings and retired-route names. |
 
@@ -84,6 +84,11 @@ See the [P8 record](etc/evidence/m0-t313-s2-p8-memory-a20-and-umb-boundary-001.m
 from the reached original firmware-resource mirror `nt_rez.c`.  The original
 source warnings are visible again and the selected host-root archive rebuilt
 cleanly.  See the [P9 record](etc/evidence/m0-t313-s2-p9-firmware-resource-mirror-cleanup-001.md).
+
+**T313 S2 closed:** original CPU/SAS/FPU, mapping/A20, firmware-resource and
+reset source contracts have bounded evidence plus fresh formal x86 candidate
+and forced-link audit. Controller endpoint behavior transfers only to S3. See
+the [closure](history/m0-t313-s2-cpu-memory-firmware-reset-closure-20260830.md).
 
 ### M0 T312 closure record
 
