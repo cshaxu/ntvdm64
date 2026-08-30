@@ -23,8 +23,27 @@ void c_VirtualiseInstruction(void) {}
 void host_exint_hook(void) {}
 void host_swint_hook(void) {}
 void dispatch_q_event(void) {}
-void ica_intack(void) {}
-void ica_hw_interrupt(void) {}
+void host_ica_lock(void) {}
+void host_ica_unlock(void) {}
+
+/* `ica.c` imports these original nt_eoi.c forms even though the bounded
+ * initialize/request/INTACK proof cannot reach delayed-EOI or WOW-idle
+ * scheduling.  Keep test-only hit counters so an accidental traversal fails
+ * the fixture instead of turning into an invented controller behavior. */
+unsigned fixture_eoi_hook_calls;
+unsigned fixture_wow_idle_calls;
+uint32_t DelayIrqLine;
+void host_EOI_hook(int irq_line, int call_count)
+{
+    (void)irq_line;
+    (void)call_count;
+    ++fixture_eoi_hook_calls;
+}
+void WOWIdle(int force)
+{
+    (void)force;
+    ++fixture_wow_idle_calls;
+}
 void host_terminate(void) {}
 void read_descriptor(void) {}
 int selector_outside_table(void) { return 1; }

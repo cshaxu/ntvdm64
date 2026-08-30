@@ -13,6 +13,7 @@
 #include "xt.h"
 #include "ios.h"
 #include "dma.h"
+#include "ica.h"
 #include "sas.h"
 
 static LONG WINAPI fixture_unhandled_exception(EXCEPTION_POINTERS *exception)
@@ -75,6 +76,8 @@ extern jmp_buf *ccpu386ThrdExptnPtr(void);
 extern NTSTATUS VdmAddVirtualMemory(ULONG host_address, ULONG size,
     PULONG intel_address);
 extern NTSTATUS VdmRemoveVirtualMemory(ULONG intel_address);
+extern unsigned fixture_eoi_hook_calls;
+extern unsigned fixture_wow_idle_calls;
 
 int main(void)
 {
@@ -327,6 +330,26 @@ int main(void)
         inb(DMA_FLA_PAGE_REG, &dma_value);
         if (dma_value != UINT8_C(0x56)) {
             fputs("original DMA page register did not round-trip\n", stderr);
+            sas_term();
+            return 1;
+        }
+    }
+    {
+        IU32 hook_address = 0u;
+        IS32 interrupt_vector;
+
+        /* Keep the original BIOS ICA initialization order, then make the
+         * original timer IRQ request visible through original PIC INTACK. */
+        ica0_init();
+        ica0_post();
+        ica1_init();
+        ica1_post();
+        ica_hw_interrupt(ICA_MASTER, CPU_TIMER_INT, 1);
+        interrupt_vector = ica_intack(&hook_address);
+        if (interrupt_vector != 0x08 || fixture_eoi_hook_calls != 0u ||
+            fixture_wow_idle_calls != 1u) {
+            fprintf(stderr, "original timer IRQ did not traverse original PIC INTACK: vector=%ld eoi=%u wow=%u\n",
+                (long)interrupt_vector, fixture_eoi_hook_calls, fixture_wow_idle_calls);
             sas_term();
             return 1;
         }

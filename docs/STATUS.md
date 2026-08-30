@@ -113,6 +113,14 @@ I/O-table stand-ins were deleted.  Timer-to-PIC/CCPU remains the only positive
 controller endpoint not yet witnessed. See the
 [P3 record](etc/evidence/m0-t313-s3-p3-original-dma-ios-witness-001.md).
 
+**T313 S3 P4:** original `ica.c` now runs in the same bounded x86 CCPU40
+fixture: BIOS-order master/slave initialization, IRQ0 request and original
+`ica_intack` return vector `08h` pass.  The run records the reached original
+`WOWIdle(FALSE)` notification without claiming a local WOW scheduler or EOI
+product substitute.  The remaining positive endpoint is the original
+`nt_timer -> time_tick -> TimerGenerateMultipleInterrupts -> PIC` chain. See
+the [P4 record](etc/evidence/m0-t313-s3-p4-original-pic-irq-witness-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |
