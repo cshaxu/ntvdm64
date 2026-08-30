@@ -4,23 +4,23 @@
 
 ## Active Packet
 
-**Active: M0 T313 S3**
+**Active: M0 T313 S4**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T313 S3; Ordinary Mode (single-person dual-role implementation and review). |
-| Admission And Approval | S2 closed by its recorded source and behavior evidence. Owner-directed sequential execution now admits the original controller lifecycle cohort; non-original material found in reached `mvdm-host` remains immediate cleanup work. |
-| Objective | Recover original Win32/x86 CCPU40 interrupt, timer, DMA and input initialization, bounded delivery or explicit unavailable result, and teardown contracts. |
-| Non-goals | No x64 recovery, CPU30/MONITOR, Bochs route, guest/BOP semantic expansion, full presentation/storage/communications, kernel VDM/CSRSS reconstruction, raw host identity in historical ABI, or second machine executor. |
-| Reference Baseline | [T313 S2 closure](history/m0-t313-s2-cpu-memory-firmware-reset-closure-20260830.md), [T313 S1 ledger](etc/evidence/m0-t313-s1-softpc-capability-purity-ledger-001.tsv), and the T313 plan. |
-| Files And ABI Surface | Original `softpc.new/base/{system,keymouse}` and `softpc.new/host/src/{nt_timer,nt_eoi,nt_event,nt_input,nt_keycd,nt_mouse,nt_reset}` cohorts; existing same-shaped Win32/SoftPC bindings and session controlled-stop surface. |
+| Identifier Mode | M0 T313 S4; Ordinary Mode (single-person dual-role implementation and review). |
+| Admission And Approval | S3 is closed by its recorded source, bounded-behavior, formal-build and mirror-cleanup evidence. Owner-directed sequential execution admits the complete original device cohort; non-original material found in reached `mvdm-host` remains immediate cleanup work. |
+| Objective | Recover selected original Win32/x86 CCPU40 video, storage and communications device startup, plus the source-coupled PIT/EOI timer package, with one bounded positive or explicit unavailable endpoint per owner family. |
+| Non-goals | No x64 recovery, CPU30/MONITOR, Bochs route, guest/BOP semantic expansion, presentation window, destructive-media operation, Redirector protocol, printer product shell, kernel VDM/CSRSS reconstruction, raw host identity in historical ABI, or second machine executor. |
+| Reference Baseline | [T313 S3 closure](history/m0-t313-s3-controller-lifecycle-closure-20260830.md), [T313 S1 ledger](etc/evidence/m0-t313-s1-softpc-capability-purity-ledger-001.tsv), and the T313 plan. |
+| Files And ABI Surface | Original `softpc.new/base/{system,video,disks,comms}` and corresponding `host/src` device cohorts, including the original `timer.c` PIT/EOI package; existing same-shaped Win32/SoftPC bindings, mapping manager and session controlled-stop surface. |
 | Applicable Rules | Source-first/mirror-first recovery, selected x86 CCPU40 profile, one mapping manager, no `src.old`, no retired Bochs route, minimal registered divergence and package-first verification. |
-| Verification | Original caller/definition ordering review; focused bounded controller/input witness or explicit unavailable endpoint; fresh external formal Ninja candidate and forced-link run; retired-route scan; documentation governance and diff review. |
-| Expected Markers | Original timer/init/reset order; source-owned IRQ/DMA/input dispatch; typed no-host-kill stop/failure; no raw host pointer across MVDM ABI; every reached divergence removed or registered. |
+| Verification | Original caller/definition ordering review; bounded source-owned device witness or explicit unavailable endpoint for each family; fresh external formal Ninja candidate and forced-link run; retired-route scan; documentation governance and diff review. |
+| Expected Markers | Original device initialization order; no fixture-owned device backend; typed no-host-kill failure; mapping-manager use only at genuine host/guest crossings; every reached divergence removed or registered. |
 | Asset Needs | Pinned MVDM source mirrors, selected CCPU40 manifests, current session mapping manager, source-shaped adapters and MSVC/Ninja x86 environment. |
-| Reporting Requirements | Record each original call edge, source/body disposition, mapping use, positive/negative outcome, immediate cleanup and any remaining later device dependency. |
-| Stop Conditions | A required edge selects a second executor, needs a source-body rewrite, proposes an unregistered generic shim, needs guest service semantics, or cannot retain the original call order. Pause for re-admission. |
-| Exit Criteria | S3 closes only with source and bounded behavior evidence for the timer/interrupt/DMA/input cohort, a fresh selected x86 CCPU40 formal build, and no deferred cleanup discovered in reached `mvdm-host` paths. |
+| Reporting Requirements | Record each original package edge, source/body disposition, mapping use, positive/negative outcome, immediate cleanup and any later product-shell dependency. |
+| Stop Conditions | A required edge selects a second executor, needs a source-body rewrite, proposes an unregistered generic shim, needs guest service semantics, or cannot retain original package order. Pause for re-admission. |
+| Exit Criteria | S4 closes only with source and bounded behavior/unavailable evidence for each admitted device family, a fresh selected x86 CCPU40 formal build, and no deferred cleanup discovered in reached `mvdm-host` paths. |
 | Original Owner Request | “在 mvdm-host 里面，你碰到的话可以顺手清理掉，不必等待以后。” |
 | Similar-Issue Sweep | CPU/FPU/SAS vectors, EMS/UMB mapping, firmware resource roots, first-session initialization, reset/teardown callers, reached overlays/bindings and retired-route names. |
 
@@ -133,6 +133,12 @@ archive. See the [P5 record](etc/evidence/m0-t313-s3-p5-original-timer-package-f
 waveform, BDA, floppy, EOI-delay and PIF dependencies.  The probe introduced
 no shim and was fully reverted; complete live-period behavior must be handled
 only with that original cohort. See the [P6 record](etc/evidence/m0-t313-s3-p6-original-timer-device-boundary-001.md).
+
+**T313 S3 closed:** original heartbeat suspension/resume, PIC IRQ0,
+DMA/I/O and input have bounded evidence, and the selected original timer
+translation units formally compose.  The whole PIT/EOI device package
+transfers to S4 without a fixture-local timer claim. See the
+[closure](history/m0-t313-s3-controller-lifecycle-closure-20260830.md).
 
 ### M0 T312 closure record
 
