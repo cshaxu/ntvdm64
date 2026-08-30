@@ -67,6 +67,13 @@ project-owned replacement: graph-wide no-inline mode preserves the original
 diagnostic and all genuine historical boundary symbols visible.  See the [P6
 record](etc/evidence/m0-t313-s2-p6-original-crt-binding-audit-001.md).
 
+**T313 S2 P7:** the original process-to-reset source chain is now recorded,
+and a fresh current x86 CCPU40 graph re-ran the bounded original
+CPU/SAS/FPU/`host_start_cpu` witness successfully.  A separate fresh full
+selected formal candidate completed 403/403 edges.  The witness deliberately
+stops before BIOS BOP/device I/O; it does not claim a DOS boot.  See the [P7
+record](etc/evidence/m0-t313-s2-p7-original-lifecycle-witness-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |
