@@ -147,6 +147,13 @@ pre-existing EMS/DEM/debug/private-NT boundaries and records CCPU/C-video
 duplicate exports as a non-runnable audit result, not a `/FORCE` runtime
 solution. See the [P1 record](etc/evidence/m0-t313-s4-p1-device-package-assembly-001.md).
 
+**T313 S4 P2:** original BIOS `reset()` remains the sole device-package
+startup owner: ICA, timer, video, serial, DMA, floppy and condition-selected
+printer initialization retain their source order.  A reached `reset.c`
+x64-carrier/extra-declaration diff was removed, returning those locations to
+the original mirror; a fresh selected x86 CCPU40 candidate completed 403/403.
+See the [P2 record](etc/evidence/m0-t313-s4-p2-device-reset-order-and-mirror-cleanup-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |

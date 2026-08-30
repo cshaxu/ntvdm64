@@ -87,11 +87,6 @@
 #include "host_lic.h"
 #endif /* LICENSING */
 
-/* DIVERGENCE(MVDM-HOST-DIV-086): the selected NT CMOS implementation exports
- * this original reset helper without a selected public declaration carrier.
- * Keep the existing reset call and publish its exact void contract. */
-extern void cmos_clear_shutdown_byte(void);
-
 /* Exports */
 
 /*
@@ -202,8 +197,7 @@ static void setup_ivt()
 	sas_storew(int_addr(0xE), DISKETTE_INT_OFFSET);
 	sas_storew(int_addr(0xE) + 2, DISKETTE_INT_SEGMENT);
 #ifdef	GISP_SVGA
-	/* DIVERGENCE MVDM-HOST-DIV-075: config scalar is pointer-sized on x86/x64. */
-	if((ULONG_PTR) config_inquire(C_GFX_ADAPTER, NULL) == CGA )
+	if((ULONG) config_inquire(C_GFX_ADAPTER, NULL) == CGA )
 	{
 		sas_storew(int_addr(0x10), CGA_VIDEO_IO_OFFSET);
 		sas_storew( int_addr(0x10) + 2 , VIDEO_IO_SEGMENT );
@@ -339,7 +333,7 @@ half_word *low, *high;
 
     /* set the value of the high switches from the config settings */
 
-    switch((ULONG_PTR)config_inquire(C_GFX_ADAPTER, NULL))
+    switch((ULONG)config_inquire(C_GFX_ADAPTER, NULL))
     {
     case CGA:
 #ifdef CGAMONO
@@ -860,7 +854,7 @@ void reset()
 	/* Load up the amount of memory into the BIOS. */
 	sas_storew(MEMORY_VAR, host_get_memory_size());
 
-	gfxAdapt = (IS16)(ULONG_PTR)config_inquire(C_GFX_ADAPTER, NULL);
+	gfxAdapt = (ULONG)config_inquire(C_GFX_ADAPTER, NULL);
 
 #ifdef GISP_SVGA
 
@@ -1056,7 +1050,7 @@ void reset()
 		free_expanded_memory();
 
 	backFill = (SHORT) (config_inquire(C_MEM_LIMIT, NULL)? 256: 640);
-	if (limSize = (ULONG)(ULONG_PTR)config_inquire(C_LIM_SIZE, NULL))
+	if (limSize = (ULONG)config_inquire(C_LIM_SIZE, NULL))
 		while (init_expanded_memory(limSize, backFill) != SUCCESS)
 		{
 			free_expanded_memory();
