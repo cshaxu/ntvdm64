@@ -66,6 +66,9 @@ $dosRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/dos'
 $demRoot = Join-Path $root 'src/mvdm-host/dos/dem'
 $commandRoot = Join-Path $root 'src/mvdm-host/dos/command'
 $xmsRoot = Join-Path $root 'src/mvdm-host/xms.486'
+$xmsOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/xms.486'
+$suballocRoot = Join-Path $root 'src/mvdm-support/suballoc'
+$sessionRoot = Join-Path $root 'src/session'
 $debugRoot = Join-Path $root 'src/mvdm-host/dbg'
 $hostRoot = Join-Path $root 'src/mvdm-host/softpc.new/host/src'
 $adapterSoftpcRoot = Join-Path $root 'src/adapter-mvdm-host-out/softpc'
@@ -86,6 +89,7 @@ $dosManifest = Join-Path $dosRoot 'sources'
 $demManifest = Join-Path $demRoot 'sources'
 $commandManifest = Join-Path $commandRoot 'sources'
 $xmsManifest = Join-Path $xmsRoot 'sources'
+$suballocManifest = Join-Path $suballocRoot 'sources'
 $debugManifest = Join-Path $debugRoot 'sources'
 $hostManifest = Join-Path $hostRoot 'sources'
 $ccpuNames = Get-OriginalSources $ccpuManifest
@@ -130,6 +134,12 @@ $dosNames = @(Get-OriginalSources $dosManifest)
 $demNames = @(Get-OriginalSources $demManifest)
 $commandNames = @(Get-OriginalSources $commandManifest)
 $xmsNames = @(Get-OriginalSources $xmsManifest)
+# XMS uses the complete original SubAlloc package.  Keeping it out of the
+# machine graph made its allocator algorithms look like a collection of
+# missing adapter symbols, rather than selecting their original owner.
+$suballocNames = @(Get-OriginalSources $suballocManifest)
+$xmsOverlayNames = @('xms_a20_state.c')
+$sessionNames = @('mapping_manager.c', 'guest_memory_lease.c', 'session.c')
 $debugNames = @(Get-OriginalSources $debugManifest)
 # Select the complete original SoftPC host source package before deciding which
 # unresolved edges are genuine modern-boundary adapters.  Individual fixtures
@@ -141,7 +151,7 @@ $hostNames = @($hostNames + 'nt_cprgs.c' + 'nt_aorc.c') | Select-Object -Unique
 $adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_compat.c',
                         'nt_thread_alert_compat.c', 'nt_wait_compat.c',
                         'opennt_support_rtl.c')
-$adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_softpc_physical_mapping.c', 'mvdm_host_identity.c',
+$adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_physical_mapping.c', 'mvdm_host_identity.c',
                         'mvdm_guest_location.c', 'mvdm_command_redirection.c', 'mvdm_command_guest_state.c')
 $effectiveAddressSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_effective_address.c'
 $effectiveAddressObject = 'obj/adapter-softpc/mvdm_softpc_effective_address.obj'
@@ -187,6 +197,15 @@ foreach ($name in $commandNames) {
 foreach ($name in $xmsNames) {
     if (!(Test-Path -LiteralPath (Join-Path $xmsRoot $name))) { throw "Original MVDM XMS source missing: $name" }
 }
+foreach ($name in $suballocNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $suballocRoot $name))) { throw "Original MVDM SubAlloc source missing: $name" }
+}
+foreach ($name in $xmsOverlayNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $xmsOverlayRoot $name))) { throw "MVDM XMS private overlay source missing: $name" }
+}
+foreach ($name in $sessionNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $sessionRoot $name))) { throw "Required session source missing: $name" }
+}
 foreach ($name in $debugNames) {
     if (!(Test-Path -LiteralPath (Join-Path $debugRoot $name))) { throw "Original MVDM debugger source missing: $name" }
 }
@@ -209,7 +228,7 @@ foreach ($name in $patchEvidenceNames) {
     if (!(Test-Path -LiteralPath (Join-Path $patchEvidenceRoot $name))) { throw "Registered SoftPC patch evidence missing: $name" }
 }
 
-New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/cvidc'), (Join-Path $build 'generated/video'), (Join-Path $build 'generated/gdp'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/patch') | Out-Null
+New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/cvidc'), (Join-Path $build 'generated/video'), (Join-Path $build 'generated/gdp'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/suballoc'), (Join-Path $build 'obj/session'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/patch') | Out-Null
 if (!(Test-Path -LiteralPath $cvidcGenerator -PathType Leaf)) { throw "CVIDC typed-table generator missing: $cvidcGenerator" }
 if (!(Test-Path -LiteralPath $videoGenerator -PathType Leaf)) { throw "Base/video declaration generator missing: $videoGenerator" }
 if (!(Test-Path -LiteralPath $gdpGenerator -PathType Leaf)) { throw "GDP slot generator missing: $gdpGenerator" }
@@ -340,7 +359,7 @@ $graph.Add('rule forced_link_audit')
 # This deliberately produces a non-runnable DLL.  /WHOLEARCHIVE makes the
 # candidate's complete original membership visible to LINK; /FORCE keeps the
 # unresolved physical forms in the adjacent log for source-first ownership.
-$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-system.lib /wholearchive:original-softpc-disks.lib /wholearchive:original-softpc-support.lib /wholearchive:original-softpc-video.lib /wholearchive:original-softpc-cvidc.lib /wholearchive:original-softpc-comms.lib /wholearchive:original-softpc-dos.lib /wholearchive:original-mvdm-dem.lib /wholearchive:original-mvdm-command.lib /wholearchive:original-mvdm-xms.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-bindings.lib /wholearchive:softpc-win32-bindings.lib /wholearchive:mvdm-softpc-effective-address.lib ntvdmx64-softpc-ccpu-vector-defaults.lib kernel32.lib user32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib > $out.log 2>&1')
+$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-system.lib /wholearchive:original-softpc-disks.lib /wholearchive:original-softpc-support.lib /wholearchive:original-softpc-video.lib /wholearchive:original-softpc-cvidc.lib /wholearchive:original-softpc-comms.lib /wholearchive:original-softpc-dos.lib /wholearchive:original-mvdm-dem.lib /wholearchive:original-mvdm-command.lib /wholearchive:original-mvdm-xms.lib /wholearchive:original-mvdm-support-suballoc.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-bindings.lib /wholearchive:softpc-win32-bindings.lib /wholearchive:session.lib /wholearchive:mvdm-softpc-effective-address.lib ntvdmx64-softpc-ccpu-vector-defaults.lib kernel32.lib user32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib > $out.log 2>&1')
 
 $ccpuObjects = foreach ($name in $ccpuNames) {
     $object = 'obj/ccpu/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
@@ -425,6 +444,21 @@ $xmsObjects = foreach ($name in $xmsNames) {
     $graph.Add('  cflags = ' + $baseFlags + ' /DWIN_32')
     $object
 }
+$xmsOverlayObjects = foreach ($name in $xmsOverlayNames) {
+    $object = 'obj/xms/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $xmsOverlayRoot $name)))
+    $object
+}
+$suballocObjects = foreach ($name in $suballocNames) {
+    $object = 'obj/suballoc/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $suballocRoot $name)))
+    $object
+}
+$sessionObjects = foreach ($name in $sessionNames) {
+    $object = 'obj/session/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $sessionRoot $name)))
+    $object
+}
 $debugObjects = foreach ($name in $debugNames) {
     $object = 'obj/debug/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $debugRoot $name)))
@@ -494,16 +528,18 @@ $graph.Add('build original-softpc-comms.lib: lib ' + ($commsObjects -join ' '))
 $graph.Add('build original-softpc-dos.lib: lib ' + ($dosObjects -join ' '))
 $graph.Add('build original-mvdm-dem.lib: lib ' + ($demObjects -join ' '))
 $graph.Add('build original-mvdm-command.lib: lib ' + ($commandObjects -join ' '))
-$graph.Add('build original-mvdm-xms.lib: lib ' + ($xmsObjects -join ' '))
+$graph.Add('build original-mvdm-xms.lib: lib ' + (($xmsObjects + $xmsOverlayObjects) -join ' '))
+$graph.Add('build original-mvdm-support-suballoc.lib: lib ' + ($suballocObjects -join ' '))
 $graph.Add('build original-mvdm-debug.lib: lib ' + ($debugObjects -join ' '))
 $graph.Add('build original-softpc-host-roots.lib: lib ' + ($hostObjects -join ' '))
 $graph.Add('build softpc-bindings.lib: lib ' + ($adapterSoftpcObjects -join ' '))
+$graph.Add('build session.lib: lib ' + ($sessionObjects -join ' '))
 $graph.Add('build mvdm-softpc-effective-address.lib: lib ' + $effectiveAddressObject)
 $graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' '))
 $graph.Add('build ntvdmx64-softpc-patch-evidence.lib: lib ' + ($patchBodyObjects -join ' '))
 $graph.Add('build ntvdmx64-softpc-ccpu-vector-defaults.lib: lib ' + $patchVectorDefaultsObject)
-$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-softpc-host-roots.lib softpc-bindings.lib softpc-win32-bindings.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib')
-$graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-softpc-host-roots.lib softpc-bindings.lib softpc-win32-bindings.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-ccpu-vector-defaults.lib')
+$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-support-suballoc.lib original-softpc-host-roots.lib softpc-bindings.lib softpc-win32-bindings.lib session.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib')
+$graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-support-suballoc.lib original-softpc-host-roots.lib softpc-bindings.lib softpc-win32-bindings.lib session.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-ccpu-vector-defaults.lib')
 $graph.Add('default original-softpc-candidate')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 
@@ -529,10 +565,13 @@ $graph.Add('default original-softpc-candidate')
     demSources = @($demNames)
     commandSources = @($commandNames)
     xmsSources = @($xmsNames)
+    xmsPrivateOverlaySources = @($xmsOverlayNames)
+    suballocSources = @($suballocNames)
     debugSources = @($debugNames)
     debugBuildDisposition = 'deferred-kernel-debug-product-boundary'
     hostRoots = @($hostNames)
     adapterSoftpcSources = @($adapterSoftpcNames)
+    sessionSources = @($sessionNames)
     adapterWin32Sources = @($adapterWin32Names)
     patchInputs = @($patchNames | ForEach-Object {
         [ordered]@{

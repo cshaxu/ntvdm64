@@ -48,6 +48,13 @@ scope. The original CCPU graph retains `CPU_30_STYLE` as a compatibility
 preprocessor carrier, not as a second supported profile. See the
 [S15 x86 profile evidence](etc/evidence/m0-t310-s15-p2-x86-profile-boundary-001.md).
 
+**T310 S15 P3:** the complete original `mvdm-support/suballoc` member now
+links with the original XMS package, its matching private A20 overlay, the
+same-shaped historical SAS A20 facade, and the existing session lease owner in
+the formal x86 CCPU40 candidate. The forced-link audit has no unresolved XMS
+allocator/A20/session edge; this is source-assembly closure, not runtime
+closure. See the [S15 original-owner assembly evidence](etc/evidence/m0-t310-s15-p3-xms-original-owner-assembly-001.md).
+
 **T310 S13 closed:** the selected original CPU_40 SAS-memory owner retains
 its ordinary RAM vector, type map, scalar/string/move/fill algorithms and
 private native backing without exporting a host identity. Fresh x86/x64 runs
