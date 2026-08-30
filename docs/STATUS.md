@@ -4,25 +4,25 @@
 
 ## Active Packet
 
-**Active: M0 T310 S16**
+**Active: M0 T310 S17**
 
-### M0 T310 S16 — BIOS / firmware bindings
+### M0 T310 S17 — System controller callbacks
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T310 S16; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | S15 closed its original XMS owner/package source boundary with a formal x86 CCPU40 archive and complete disposition ledger. S16 is now the only active sequential cluster. |
-| Objective | Re-read and close only `SPC-BIOS-FIRMWARE-BINDINGS`: original BIOS/ROM declarations, definitions, callers, firmware inputs and prior repairs required by the selected CCPU40 machine profile. |
-| Non-goals | No kernel VDM or MONITOR import, Bochs device/controller fallback, BOP semantic expansion, trace-selected repair, unrelated controller enablement, or claim of complete DOS/WOW product execution. |
-| Reference Baseline | Closed S4 source-family workset, S5 CCPU/RAM/FPU execution, S6 V86/MONITOR removal, S7 physical mapping/lease ledger and S15 XMS owner-package source closure; exact `mvdm-host` and `mvdm-softpc-firmware` mirrors. |
-| Files And ABI Surface | Original SoftPC BIOS/ROM/firmware sources and declarations, selected CCPU40 callers, app-owned firmware location binding and named adapters only at source-proven boundaries. |
+| Identifier Mode | M0 T310 S17; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | S16 closed the selected original BIOS/firmware source and binding boundary with formal x86 CCPU40 evidence and an explicit deferred-integration condition. S17 is now the only active sequential cluster. |
+| Objective | Re-read and close only `SPC-SYSTEM-CONTROLLER-CALLBACKS`: original selected CCPU40 CMOS/RTC, PIC/PIT, DMA, reset-call and system-event controller declarations, definitions, tables and callers. |
+| Non-goals | No kernel VDM or MONITOR import, Bochs fallback, BOP semantic expansion, trace-selected repair, unrelated input/storage/video controller enablement, or claim of complete DOS/WOW product execution. |
+| Reference Baseline | Closed S4 source-family workset, S5 CCPU/RAM/FPU execution, S6 V86/MONITOR removal, S7 physical mapping/lease ledger, S15 XMS source closure and S16 firmware source closure. |
+| Files And ABI Surface | Original SoftPC system-controller and BIOS callback sources, selected CCPU40 callers, app/session lifecycle binding and named adapters only at source-proven boundaries. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island, CPU-profile and source-recovery rules; approved T310 S8 plan and coverage ledger. |
-| Verification | Formal MSVC Win32/x86 `/MT` Ninja BIOS/firmware archive; original source/call review; focused selected-profile behavior only after firmware-required machine bindings are present. x64 compatibility is outside the active worklist. |
-| Expected Markers | Original firmware provider order; no hard-coded firmware/media location; app-owned location binding; mapping-manager use only at real guest/host identity crossings; no raw MONITOR alias or synthetic BIOS success. |
-| Asset Needs | Exact SoftPC BIOS/ROM/firmware manifests, selected CCPU/SAS headers, closed S4--S7/S15 evidence, app location contract, MSVC Build Tools and Ninja. |
+| Verification | Formal MSVC Win32/x86 `/MT` Ninja system-controller archive; original source/call review; focused selected-profile behavior only when the controller's prerequisites exist. x64 compatibility is outside the active worklist. |
+| Expected Markers | Original controller table/order and failure direction; no raw native pointer through a fixed-width ABI; mapping-manager use only at a real identity crossing; no raw MONITOR/Bochs/kernel-VDM path or synthetic controller success. |
+| Asset Needs | Exact selected SoftPC controller sources, CCPU/SAS headers, S16 BIOS caller ledger, app/session lifecycle contract, MSVC Build Tools and Ninja. |
 | Reporting Requirements | Per cluster: original roots/callers, recovery rung, table/initializer order, ABI/failure contract, any mapping-manager use, selected x86 CCPU40 result, retained unavailable disposition and no-Bochs/MONITOR proof. |
-| Stop Conditions | A BIOS/firmware member requires an unregistered original-source divergence; an adapter would replace available original firmware logic; a raw native pointer crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or the source requires a controller capability owned by a later S. |
-| Exit Criteria | Every selected BIOS/firmware declaration, definition, caller and prior repair has exactly one direct, binding-only, adapter-backed or original-unavailable disposition; formal x86 evidence passes for the selected CCPU40 configuration; and a focused package audit does not select new BIOS/firmware owner work. Machine-lifecycle behavior requiring later controller packets is recorded as deferred integration validation for S49. |
+| Stop Conditions | A system-controller member requires an unregistered original-source divergence; an adapter would replace available original controller logic; a raw native pointer crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or a dependency belongs to a later S. |
+| Exit Criteria | Every selected system-controller declaration, definition, caller and prior repair has exactly one direct, binding-only, adapter-backed or original-unavailable disposition; formal x86 evidence passes for the selected CCPU40 configuration; and a focused package audit does not select new S17 owner work. Integrated reset behavior remains mandatory S49 validation. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
 | Similar-Issue Sweep | BIOS/ROM/CMOS declarations, definitions, selected callers, firmware inputs and existing location-binding repair; MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
 
@@ -63,6 +63,13 @@ disposition. A fresh formal graph completed 369/369 selected x86 CCPU40
 edges. This is a source/binding closure only; startup's COMMAND/DEM/XMS/DBG,
 reset and controller behavior remain later owner work. See the
 [S16 startup-system-file evidence](etc/evidence/m0-t310-s16-p5-startup-system-file-disposition-001.md).
+
+**T310 S16 closed:** all selected BIOS-manifest, ROM/CMOS, resource-location
+and first-session system-file source edges now have one disposition, with a
+fresh selected x86 CCPU40 candidate and forced-link ownership audit. Reset and
+BIOS dispatch remain original, deferred controller integration work rather
+than a fabricated firmware claim. See the
+[S16 closure record](history/m0-t310-s16-bios-firmware-bindings-closure-20260830.md).
 
 **T310 S14 closed:** the original `VdmAddVirtualMemory` / remove lifecycle
 and source-shaped DOS page alias now use the one session mapping-manager
