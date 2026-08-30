@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('x86', 'x64')]
+    [ValidateSet('x86')]
     [string]$Architecture,
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = ''
@@ -15,9 +15,9 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
 if ([string]::IsNullOrWhiteSpace($BuildRoot)) {
-    $build = Join-Path $root ("build/M0-T287/S2/{0}" -f $Architecture)
+    $build = Join-Path $root ("build/M0-T310/S15/xms-static/{0}-CPU40" -f $Architecture)
 } elseif ([IO.Path]::IsPathRooted($BuildRoot)) {
-    $build = Join-Path $BuildRoot $Architecture
+    $build = Join-Path $BuildRoot ("{0}-CPU40" -f $Architecture)
 } else {
     $build = Join-Path (Join-Path $root $BuildRoot) $Architecture
 }
@@ -37,7 +37,8 @@ $environmentNinja = $environment.Replace('\', '/')
 
 # This intentionally selects only OpenNT's six common XMS translation units.
 # The i386 xmsmem86.c direct-host-pointer backend is a source witness, not a
-# product object; its same-shaped binding belongs to later S4.
+# product object. The selected x86 session callback path never uses the
+# historical i386 host-pointer condition.
 $units = @('xms', 'xmsa20', 'xmsblock', 'xmsdisp', 'xmsmisc', 'xmsumb')
 $sources = $units | ForEach-Object { "$root/src/mvdm-host/xms.486/$_.c" }
 $adapterSources = @('src/adapter-mvdm-host-out/softpc/mvdm_xms_memory.c')
@@ -50,7 +51,7 @@ $hashLines = @($sources + $adapterSourcePaths) | ForEach-Object {
 [IO.File]::WriteAllLines((Join-Path $build 'source-manifest.tsv'), $hashLines,
     (New-Object System.Text.UTF8Encoding($false)))
 
-$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /Di386 /DDEVL ' +
+$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DMVDM_XMS_SESSION_BACKEND /DDEVL /DCPU_40_STYLE ' +
     '/FI ' + $root + '/src/adapter-mvdm-host-out/win32/include/nt.h ' +
     '/FI ' + $root + '/src/adapter-mvdm-host-out/softpc/include/error_abi.h ' +
     '/FI ' + $root + '/src/adapter-mvdm-host-out/monitor/include/vdm.h ' +
@@ -98,4 +99,4 @@ default original-xms-common.lib
 "@
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'),
     $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))
-Write-Host "Wrote T287 $Architecture original-XMS static graph: $build/build.ninja"
+Write-Host "Wrote T310 S15 $Architecture CCPU40 original-XMS static graph: $build/build.ninja"

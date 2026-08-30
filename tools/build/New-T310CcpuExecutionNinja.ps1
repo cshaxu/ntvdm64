@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory = $true)] [ValidateSet('x86', 'x64')] [string]$Architecture,
+    [Parameter(Mandatory = $true)] [ValidateSet('x86')] [string]$Architecture,
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = ''
 )
@@ -64,6 +64,9 @@ $includePaths = @('src', 'src/adapter-mvdm-host-out/win32/include', 'src/opennt-
 $includes = @($includePaths + @($gdpOverlayRoot, $gdpGeneratedRoot)) | ForEach-Object { '/I "' + (NinjaPath $_) + '"' }
 # `i386` is never a product-wide host switch. Any original x86-only source
 # unit needs a separately registered, target-local compilation exception.
+# This is the sole selected original CCPU40 configuration. Its retained
+# CPU_30_STYLE compatibility definition is a source-level carrier, not a
+# separate CPU30/MONITOR product build.
 $cflags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_30_STYLE /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' + ($includes -join ' ')
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10'); $graph.Add('cflags = ' + $cflags); $graph.Add('')
@@ -83,5 +86,5 @@ $graph.Add('build original-softpc-s5-bridge.lib: lib ' + ($adapterObj -join ' ')
 $graph.Add('build ccpu-bounded-execution.exe: link ' + (($testObj + $overlayObj + @($patchEdiObject, 'original-ccpu-execution.lib', 'original-softpc-s5-host.lib', 'original-softpc-s5-bridge.lib')) -join ' '))
 $graph.Add('build ccpu-bounded-execution: phony ccpu-bounded-execution.exe'); $graph.Add('default ccpu-bounded-execution')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
-[ordered]@{ schema='m0.t310.s5.original-ccpu-bounded-execution.v3'; architecture=$Architecture; i386Define=$false; executor='original softpc.new/base/ccpu386 c_cpu_simulate'; selectedCcpu=$ccpu; excludedAlternateSource=@('ntstubs.c'); hostSources=$hostSources; adapterSources=$adapterSources; test=$test; forbiddenInputs=@('src.old','bochs-core','adapter-bochs','MONITOR','V86') } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
+[ordered]@{ schema='m0.t310.s5.original-ccpu-bounded-execution.v5'; architecture=$Architecture; cpuProfile='CCPU40'; i386Define=$false; executor='original softpc.new/base/ccpu386 c_cpu_simulate'; selectedCcpu=$ccpu; excludedAlternateSource=@('ntstubs.c'); hostSources=$hostSources; adapterSources=$adapterSources; test=$test; forbiddenInputs=@('src.old','bochs-core','adapter-bochs','MONITOR','V86') } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
 Write-Host "Generated T310 S5 original CCPU execution graph: $build"

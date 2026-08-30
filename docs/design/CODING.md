@@ -107,8 +107,10 @@ identity, never by a bare same-spelled function name.
 
 ## Host-width coding model
 
-Both MSVC Win32/x86 and MSVC x64 builds use `/MT` and the same logical code
-path. Cross-component and broker wire records use fixed-width integer fields.
+The current recovery build uses MSVC Win32/x86 `/MT`, with the original CCPU40
+configuration as its sole selected profile. x64 is a later compatibility profile, not a current
+formal-build gate. Cross-component and broker wire records use fixed-width
+integer fields.
 Native process-local implementation uses `uintptr_t`, `size_t`, `HANDLE` and
 other pointer-sized platform types.
 
@@ -117,8 +119,8 @@ in a session-owned `host_resource` or `completion_callback` mapping-manager
 instance and represented to MVDM by a 32-bit surrogate. The allocator begins
 with candidate zero, skips source-proven reserved sentinels, advances
 monotonically, keeps reverse lookup and stale tombstones, and does not reuse an
-ID during the session lifetime. The x86 build follows the same path and does
-not identity-map native 32-bit values.
+ID during the session lifetime. The x86 build follows the same mapping path
+and does not identity-map native 32-bit values.
 
 Guest 16:16 and linear32 addresses use the separate `guest_memory` instance.
 A synchronous historical pointer API may receive a native pointer only through
@@ -164,5 +166,7 @@ mirror baseline.
 Ninja is generated from the source-owner and package-selection manifests.
 Disposable objects, libraries, executables and logs belong under
 `build/<task-id>/<run-id>/`. Guest objects and libraries are packaging/loading
-inputs only and never enter the host link. Formal verification covers x86 and
-x64 compilation plus architecture-neutral token behavior.
+inputs only and never enter the host link. Formal verification currently
+covers selected x86 CCPU40 compilation plus architecture-neutral token behavior;
+x64 compatibility verification is deferred until the SoftPC/MVDM execution
+path is connected.

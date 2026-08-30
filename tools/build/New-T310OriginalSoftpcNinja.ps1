@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory = $true)] [ValidateSet('x86', 'x64')] [string]$Architecture,
+    [Parameter(Mandatory = $true)] [ValidateSet('x86')] [string]$Architecture,
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
     [string]$NodeExecutable = ''
@@ -295,8 +295,8 @@ foreach ($path in $includeRootPaths) {
 }
 $cvidcFirstIncludeRoots = $cvidcFirstRootPaths | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 
-# `i386` is never a product-wide host switch. Both supported host builds use
-# the same source graph; any unavoidable historical x86-only unit must carry
+# `i386` is never a product-wide host switch. The current CCPU recovery build
+# retains its original CPU40 compatibility carrier definitions; any unavoidable historical x86-only unit must carry
 # its own registered, target-local compilation exception.
 # `softpc.new/obj.vdm/cdefine.inc` selects CCPU's generated C video-memory
 # backend through C_VID for both the historical x86 and non-x86 CCPU paths.
@@ -508,8 +508,9 @@ $graph.Add('default original-softpc-candidate')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 
 [ordered]@{
-    schema = 'm0.t310.s8.original-softpc-machine-candidate.v2'
+    schema = 'm0.t310.original-softpc-machine-candidate.v3'
     architecture = $Architecture
+    cpuProfile = 'CCPU40'
     toolchain = 'MSVC /MT via VsDevCmd'
     i386Define = $false
     originalCcpuManifest = 'src/mvdm-host/softpc.new/base/ccpu386/sources'
@@ -561,4 +562,4 @@ $graph.Add('default original-softpc-candidate')
     forbiddenInputs = @('src.old', 'bochs-core', 'adapter-bochs')
 } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
 
-Write-Host "Generated T310 S8 P1 original SoftPC machine candidate graph: $build (CCPU sources: $(@($ccpuNames).Count))"
+Write-Host "Generated T310 original SoftPC CCPU candidate graph: $build (CCPU sources: $(@($ccpuNames).Count))"

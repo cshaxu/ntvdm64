@@ -31,23 +31,26 @@ project-owned interfaces are multi-instance-safe so future in-process multiple
 sessions do not require an ABI redesign; imported MVDM process-global state is
 made reentrant only after a dedicated original-source audit.
 
-On both x86 and x64 hosts, imported MVDM code observes a controlled 32-bit
-compatibility object space. Session-owned typed mapping-manager instances
+Imported MVDM code observes a controlled 32-bit compatibility object space.
+Session-owned typed mapping-manager instances
 associate 32-bit surrogate identities with native HANDLE/pointer-sized
 resources, while guest pointers use checked synchronous memory leases. This
 keeps 64-bit implementation details out of original MVDM control flow and
-prevents x86 builds from relying on accidental native-value identity.
+prevents x86 builds from relying on accidental native-value identity. The
+current product-recovery target is Win32/x86; x64 compatibility is a later
+profile and does not delay SoftPC/MVDM recovery.
 
 The broker recovers only required cross-process VDM registration, identity,
 command-queue, notification and cleanup contracts using public IPC. It does
 not recreate CSRSS or the NT4 kernel and never transports local native
 resources or guest pointers.
 
-Success means reproducible source and artifact provenance, a manifest-driven
-x86/x64 build, auditable package selection, minimal imported-source diffs,
+Success for the current recovery phase means reproducible source and artifact
+provenance, a manifest-driven Win32/x86 build for the selected CCPU40 profile, auditable
+package selection, minimal imported-source diffs,
 bounded one-session execution, explicit unsupported behavior, and a stable
 path to original multi-process and intra-session semantics.  Original SoftPC
 is the product-default machine backend; Bochs is an explicit alternate.  Any
 functional acceptance that exercises a machine, guest, or MVDM host behavior
-must record the x86/x64 × SoftPC/Bochs matrix.  A deliberately unavailable or
-blocked backend is an explicit cell outcome, never a skipped test dimension.
+must record the selected SoftPC CCPU40 row. x64 and alternate-machine rows are
+later compatibility work, not skipped evidence for this phase.

@@ -44,7 +44,11 @@ BOOL XMSInit (int argc, char *argv[])
 
     XmsSize = xmsMemorySize * 1024 - (64*1024);
 
-#ifndef i386
+/* DIVERGENCE MVDM-HOST-DIV-132: the historical `i386` spelling selected a
+   direct host-pointer XMS backend.  Both current host widths instead select
+   the same session-bounded callback backend; retain the original allocator
+   branch and callback order without treating host architecture as semantics. */
+#if !defined(i386) && !defined(MVDM_XMS_SESSION_BACKEND)
     Status = VdmAllocateVirtualMemory(&VdmAddress,
                                       XmsSize,
                                       FALSE);
@@ -52,7 +56,7 @@ BOOL XMSInit (int argc, char *argv[])
     if (Status == STATUS_NOT_IMPLEMENTED) {
 
         // Old emulator, just assume base address
-#endif ; //i386
+#endif ; // i386 or selected session backend
         //
         // Initialize the sub allocator
         //
@@ -64,7 +68,7 @@ BOOL XMSInit (int argc, char *argv[])
             xmsMoveMemory
             );
 
-#ifndef i386
+#if !defined(i386) && !defined(MVDM_XMS_SESSION_BACKEND)
     } else {
 
         //
@@ -93,7 +97,7 @@ BOOL XMSInit (int argc, char *argv[])
             );
             
     }
-#endif // i386
+#endif // i386 or selected session backend
 
     if (ExtMemSA == NULL) {
         return FALSE;

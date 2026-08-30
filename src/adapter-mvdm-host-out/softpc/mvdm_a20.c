@@ -1,20 +1,25 @@
 #include "mvdm_a20.h"
 
-#include "adapter-bochs/machine_facade.h"
+/*
+ * The original CCPU/SAS provider owns the A20 wrap mask.  This facade keeps
+ * the historical public SAS spellings used by XMS while deliberately avoiding
+ * a second machine implementation or an adapter-bochs dependency.
+ */
+extern void c_sas_enable_20_bit_wrapping(void);
+extern void c_sas_disable_20_bit_wrapping(void);
+extern int c_sas_twenty_bit_wrapping_enabled(void);
 
 void sas_enable_20_bit_wrapping(void)
 {
-    (void)machine_facade_set_a20(0u);
+    c_sas_enable_20_bit_wrapping();
 }
 
 void sas_disable_20_bit_wrapping(void)
 {
-    (void)machine_facade_set_a20(1u);
+    c_sas_disable_20_bit_wrapping();
 }
 
 int sas_twenty_bit_wrapping_enabled(void)
 {
-    uint32_t enabled = 0u;
-
-    return machine_facade_get_a20(&enabled) && enabled == 0u;
+    return c_sas_twenty_bit_wrapping_enabled() != 0;
 }

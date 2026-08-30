@@ -114,7 +114,8 @@ divergence register for every moved path, updated formal build paths, and
 proof that no guest, firmware, tools, production source or formal graph names
 the removed roots.
 
-**Exit:** formal affected x86/x64 graphs and documentation governance pass.
+**Exit:** formal affected Win32/x86 `/MT` CCPU40 graph passes,
+with documentation governance. x64 compatibility belongs only to P02C.
 This package changes no MVDM behavior, source-shaped adapter or BOP route.
 
 ## P02B — Bochs production-closure removal
@@ -131,58 +132,62 @@ algorithm or add a replacement machine.
 as the sole production machine; updated formal build inputs and tests; and a
 negative source/build/runtime scan for all Bochs production routes.
 
-**Exit:** x86/x64 formal graphs and documentation governance pass; all retained
+**Exit:** Win32/x86 `/MT` CCPU40 formal graph and documentation governance
+pass; all retained
 Bochs material is explicitly historical/comparison-only; no production file,
 build graph, fixture or runtime path selects it.
 
-## P02C — MVDM-host `i386` conditional semantic audit and capability recovery plan
+## P02C — x64 native-compilation audit and capability recovery
 
-**Predecessor:** the active original-SoftPC packet. **Purpose:** prevent
-historical `#if defined(i386)`, `#ifdef i386`, and `#ifndef i386` branches
-from becoming an accidental x86/x64 product-feature switch. The package
-audits every such conditional in selected `mvdm-host`, records its original
-precondition and reachable semantic effect, and gives it one owner/disposition
-before any candidate treats the inactive preprocessor side as dead code.
+**Predecessor:** P02A and P02B. **Purpose:** recover a real MSVC x64 build of
+the selected original MVDM/SoftPC closure after x86 SoftPC execution is
+connected. It audits native-width declarations, pointer/integer conversions,
+function-pointer tables, structure layout, calling conventions and historical
+`#if defined(i386)`, `#ifdef i386`, and `#ifndef i386` conditions. `i386`
+review is therefore one required input to x64 recovery, not a standalone
+host-architecture policy exercise.
 
-**S1 admission:** enumerate every physical conditional, enclosing function,
-source package, build selection and both branch bodies. Classify whether it is
-only an assembler/build-target choice; a direct host-pointer or linear-address
-identity assumption; a descriptor/page-remap requirement; a monitor/VDM
-callback or stack transaction; a CPU/CCPU/V86 product prerequisite; or an
-optional debugger, VDD, BDE, or WOW product path.
+**S1 admission:** establish one source-identity ledger for every x64 compile
+diagnostic and reached native-width contract in selected `mvdm-host` and
+`mvdm-support`; include every physical `i386` conditional, enclosing function,
+source package, build selection and both branch bodies. Classify each record as
+an assembler/build-target choice, direct host-pointer or linear-address
+identity assumption, function/table ABI, layout/calling-convention contract,
+descriptor/page-remap requirement, monitor/VDM callback or stack transaction,
+CPU/CCPU/V86 prerequisite, or optional debugger/VDD/BDE/WOW product path.
 
-**S2 recovery plan:** for every reached or future-admissible product branch,
-record the source-first recovery rung and a named capability owner. The
-default x86 and x64 builds both omit `i386`; use a narrowly registered
-unit-local definition only when compiler syntax cannot be unified. Pointer or
-handle identity must use the existing session mapping-manager route on both
-x86 and x64. A condition proven to select only an unsupported historical
-platform may be removed as a registered original-source true subset, retaining
-the shared x86-guest arm. Machine mechanics belong to the selected SoftPC call
-graph or the explicitly selected Bochs path; monitor, Win32, WOW, VDD and
-debugger semantics retain their corresponding owner packages. A conditional
-may remain only when it selects compilation syntax or an evidence-proven
-equivalent implementation, never as an unreviewed product capability decision.
+**S2 recovery:** for every reached x64 contract, use the source-first ladder:
+preserve the original body, bind an existing same-shaped adapter, use a
+registered private overlay only when needed, and author no replacement unless
+all earlier rungs are unavailable. Default x86 and x64 builds both omit
+`i386`; use a narrowly registered unit-local definition only when compiler
+syntax cannot be unified. Pointer or handle identity uses the session mapping
+manager on both hosts. A condition proven to select only an unsupported
+historical platform may become a registered true subset retaining the shared
+x86-guest arm. A condition may never remain as an unreviewed product-capability
+decision.
 
-**S3 verification and queue reconciliation:** produce a complete conditional
-ledger with original file/line, source purpose, branch classification,
-x86/x64 selection, required named capability, owner package, mapping-manager
-use when applicable, source/adapter/overlay disposition and test requirement.
-Update each affected later package proposal only with its own conditional
-rows; do not implement BOPs, change selected machine behavior, or rewrite
-historical bodies in this package.
+**S3 verification:** produce a complete x64 recovery ledger with original
+file/line, declaration/definition/caller or table identity, source purpose,
+conditional classification where applicable, required capability owner,
+mapping-manager use, source/adapter/overlay disposition and test requirement.
+Compile and run the selected x64 SoftPC initialization/execution path where a
+repaired contract is reached. Update affected later package proposals only
+with their own rows; do not implement unrelated BOP semantics or invent a
+second machine.
 
-**Delivery:** one complete semantic-condition ledger and a finite recovery
-plan. The initial high-risk review set is original SoftPC host/build selection,
+**Delivery:** one complete x64 native-contract ledger, same-shaped recovery
+implementation and finite remaining-capability plan. The initial high-risk
+review set is original SoftPC host/build selection, CCPU/video function tables,
 XMS, DPMI/DPMI32, DEM/COMMAND and WOW32; debugger/VDD extension packages
 receive explicit runtime/profile dispositions rather than silent exclusion.
 
-**Exit:** every selected `i386` conditional has an exact source location and
-one disposition: compile-only selection, explicit named capability recovery,
-owner-package deferral, or not-host-runtime. No condition remains justified
-solely by the current host being x86 or x64. The resulting plan preserves the
-same mapping-manager rule on both architectures and introduces no source or
-runtime behavior change.
+**Exit:** the selected MVDM/SoftPC closure builds natively under MSVC x64 with
+every reached width/ABI record and every selected `i386` conditional having an
+exact source location and one disposition: direct, binding-only,
+adapter-backed, overlay-required, owner-package deferral, or not-host-runtime.
+Focused x64 execution proves each recovered reachable contract. The same
+mapping-manager rule applies on both architectures.
 
 ## P02D — Complete SoftPC capability and mirror-purity acceptance
 
@@ -193,13 +198,15 @@ keyboard, mouse, video, disk/floppy and serial/parallel.
 
 **Delivery:** one direct, binding-only, adapter-backed or
 original-unavailable disposition for each selected machine family, with
-x86/x64 source and execution evidence. Re-read every mirror diff and overlay;
+Win32/x86 CCPU40 source and execution evidence plus the x64 recovery
+evidence established by P02C. Re-read every mirror diff and overlay;
 replace any project-authored shim with an available original package/interface
 where possible, retaining only registered minimal `DIVERGENCE:` hooks and
 private overlays.
 
-**Exit:** x86 and x64 compile the same SoftPC source and initialization/device
-path; all selected families have source-shaped positive/negative evidence; the
+**Exit:** Win32/x86 CCPU40 compiles and runs the selected SoftPC source
+and initialization/device path; P02C supplies the corresponding x64 native
+compile/recovery evidence; all selected families have source-shaped positive/negative evidence; the
 production graph contains no Bochs, MONITOR, kernel-VDM or `src.old` route;
 and each retained diff/overlay is minimal, registered and proven necessary.
 

@@ -6,14 +6,29 @@ Recover one selected original SoftPC/CCPU machine profile in original startup
 order. This is one integrated machine package, not a sequence of trace-driven
 device patches. The profile starts from the closed S5 CCPU interval and S7
 physical binding, then ends only after original creation, reset, firmware
-initialization, a bounded execution interval, typed stop and teardown work on
-both host architectures.
+initialization, a bounded execution interval, typed stop and teardown work in
+the current Win32/x86 recovery profile. The original CCPU40 configuration is
+the sole selected machine profile; x64 compatibility is deliberately deferred
+until SoftPC/MVDM execution is connected.
+
+## Selected x86 CCPU40 profile
+
+T310 selects the original `CPU_40_STYLE + CCPU + C_VID` configuration and its
+CCPU SAS-vector contract. A CPU30/MONITOR machine is a different historical
+product path and is explicitly outside the product and build plan. The
+selected CCPU40 preprocessing may retain `CPU_30_STYLE` where the original
+CCPU headers use it as a compatibility carrier; that is not an independent
+CPU30 build, runtime row, or acceptance obligation. In particular,
+`ccpusas4.c` requires the CPU40 generated `SasVector` contract and may not be
+compiled as a CPU30-only CCPU body.
 
 ## Ordered S owner-contract packets
 
 Every S closes exactly one coverage-ledger cluster. It is atomic: original
 definition, declaration, table/initializer, selected callers, prior repair,
-x86/x64 diagnostics and locally meaningful behavior are reread together. A
+x86 diagnostics and locally meaningful behavior are reread together for the
+selected CCPU40 profile. x64 diagnostics remain recorded compatibility debt,
+not a completion gate. A
 cluster cannot close merely because its selected objects compile or its
 warnings have a static disposition: it must also have focused functional
 verification of the recovered contract. Where the selected original profile
@@ -75,10 +90,10 @@ Before selecting any individual generated carrier or display repair, inventory e
    in the complete `mvdm-host` and `mvdm-support` original-source trees.
    Source is authoritative: every candidate requires its declaration,
    initializer/assignment, all selected call forms and original owner context
-   to be read before it receives a disposition. Compiler x86/x64 diagnostics
+   to be read before it receives a disposition. Compiler diagnostics
    are a coverage aid and cross-check, never evidence that an unreported
    source contract is safe. The audit must record source identity, original
-   owner/package, selected or unselected product profile, actual x86/x64
+   owner/package, selected or unselected product profile, actual selected x86 CCPU40
    diagnostic, pointer/address class, and one
    mirror/overlay/adapter/unavailable disposition. It must group common
    contracts into complete repair clusters, so an individual warning is never
@@ -90,10 +105,10 @@ Before selecting any individual generated carrier or display repair, inventory e
    `cvidc/evidgen.h` vector slots, every `vglfunc.c` initializer, every
    generated-table initializer in `evidfunc.c`, and every reached
    `base/video` handler-table or callback assignment must agree with the actual
-   `S_*` callable signature on both x86 and x64. The original generated
+   `S_*` callable signature on both selected x86 CCPU profiles. The original generated
    `S_*` bodies take four generic host-word arguments, while the vector tables
-   declare typed zero- and one-argument interfaces. x86 happened to tolerate
-   that source-era mismatch; x64 cannot treat it as a runtime contract.
+   declare typed zero- and one-argument interfaces. It remains a source ABI
+   contract requiring a profile-specific disposition; x64 repair is deferred.
    Recovery must be generated, private `mvdm-host-overlay` carriers derived
    from the original generator output—not hand-written per-slot wrappers—and
    they must preserve the original selected vector/table order.  The CVIDC
@@ -110,7 +125,7 @@ Before selecting any individual generated carrier or display repair, inventory e
    compiler diagnostics.  The generated source/call index and compiler ledger
    are first reduced into owner-contract clusters.  A cluster is reviewed as
    one unit: original declaration(s), definition(s), table/initializer forms,
-   selected caller forms, x86/x64 diagnostic evidence and its runtime owner
+   selected caller forms, selected x86 CCPU40 diagnostic evidence and its runtime owner
    are read together.  The execution order is maintained in
    `m0-t310-s8-p4-owner-contract-execution-order-001.md`: startup-critical
    CCPU, memory/system/firmware, storage and input are considered before
@@ -119,15 +134,15 @@ Before selecting any individual generated carrier or display repair, inventory e
    after its entire contract cluster has that evidence. The full-tree ledger is
    a shared cross-cluster planning index, not a blocking prerequisite for each
    S: an active S reads and closes only its own owner-contract rows. Non-width source-form
-   records remain compiler-visible and leave the x86/x64 worklist by a
+   records remain compiler-visible and leave the current x86 worklist by a
    documented cluster disposition, never by suppression.
 ## T310 S8 closure boundary
 
 S8 closes only when `SPC-CCPU-EXECUTOR-DISPATCH` has a source-shaped
-disposition and focused x86/x64 evidence. S9--S49 then execute in order. T310 closes only
+disposition and focused x86 CCPU40 evidence. S9--S49 then execute in order. T310 closes only
 after S49 completes the all-42-cluster reread and the selected original SoftPC
 `create -> reset -> firmware/machine initialization -> bounded execution ->
-typed controlled stop -> teardown` profile on both host architectures. Neither
+typed controlled stop -> teardown` profile on Win32/x86 for CCPU40. Neither
 S8 nor T310 removes the remaining Bochs production route or claims
 whole-program SoftPC capability/mirror purity.
 
@@ -154,7 +169,8 @@ package-recovery program and `QUEUE.md`.
   boundary result; it may not rely on an unregistered empty stub or fabricated
   success.
 - A source-bearing native pointer, handle or 32-bit identity crossing uses the
-  existing session mapping manager on both host architectures. Short-lived
+  existing session mapping manager. This remains mandatory on x86; deferring
+  x64 work never permits native identity pass-through. Short-lived
   guest leases cannot be physical backing or asynchronous device state.
 - No package selects a Bochs, MONITOR, kernel-VDM or `src.old` route.
 - Any newly authored behavior belongs in its named adapter and must preserve
@@ -172,7 +188,7 @@ missing media, but it may not claim a runnable device profile until P2--P5.
 
 S8 closes only `SPC-CCPU-EXECUTOR-DISPATCH`.
 T310 closes only after the sequential S8--S49 packets complete. Formal MSVC
-`/MT` x86 and x64 Ninja graphs must then each prove the same selected SoftPC
+`/MT` Win32/x86 Ninja graph for CCPU40 must prove the selected SoftPC
 `create -> reset -> firmware/machine initialization -> bounded execution ->
 typed controlled stop -> teardown` path. Bochs production-route removal and
 full SoftPC capability/mirror-purity acceptance remain explicit subsequent T

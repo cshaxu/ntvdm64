@@ -2,7 +2,7 @@
 
 This is the authoritative ordered queue of **unnumbered candidate T packages**.
 A candidate receives its next global `T` number only when the owner admits it
-to [STATUS.md](STATUS.md). The active Bochs/SoftPC package is deliberately
+to [STATUS.md](STATUS.md). The active SoftPC package is deliberately
 absent: its live scope and progress belong only to Status.
 
 Recovery is package-first and mirror-first: a trace, BOP hit, compiler error
@@ -29,8 +29,10 @@ item are in the [package recovery proposal set](etc/operations/package-recovery-
 
 The active packet was admitted before this reordering and remains governed
 only by its revised sequential original-machine owner packages in
-`STATUS.md`. It is not expanded to perform the new perimeter work, Bochs
-production-route removal, or final SoftPC acceptance beyond its stated
+`STATUS.md`. Its current formal gate is the selected Win32/x86 `/MT` CCPU40
+profile; x64 compatibility is deliberately deferred. It is not
+expanded to perform perimeter work, Bochs production-route removal, the x64
+native-compile recovery, or final SoftPC acceptance beyond its stated
 machine-composition closure. The first **new** candidate after that bounded
 packet closes is item 1 below.
 
@@ -38,7 +40,7 @@ packet closes is item 1 below.
 | --- | --- | --- |
 | 1 | MVDM host mirror-topology recovery (`mvdm-support` reintegration) |
 | 2 | Bochs production-closure removal |
-| 3 | MVDM-host `i386` conditional semantic audit and capability recovery plan |
+| 3 | x64 native-compilation audit and recovery (including `i386` conditional semantics) |
 | 4 | Complete SoftPC capability and mirror-purity acceptance |
 | 5 | Base VDM source-shaped broker recovery |
 | 6 | Monitor / `NtVdmControl` user-mode contract package recovery |

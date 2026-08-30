@@ -53,7 +53,8 @@
 - Import directly composable MVDM translation units before changing their
   reached function bodies. Every missing external function/interface records
   the original caller and declaration, ABI/layout and failure contract, its
-  single adapter owner, the binding change, and x86/x64 evidence. A missing
+  single adapter owner, the binding change, and current x86 evidence. x64
+  compatibility debt is recorded but does not block the recovery path. A missing
   boundary never justifies cropping or rewriting the original algorithm.
 - In MVDM source-function BFS, include every original `mvdm-host` definition
   at zero-degree, then retain its transitive resolved call closure while each
@@ -97,8 +98,9 @@
 - Never cast a native pointer or HANDLE into a 32-bit MVDM field. Register
   opaque native identity in the appropriate session mapping-manager instance
   and expose only its surrogate32.
-- Use the same mapping path on x86 and x64. Do not identity-map x86 native
-  resources.
+- Use the same mapping path for every active x86 cross-boundary identity. Do
+  not identity-map native x86 resources. x64-specific adaptation remains
+  deferred, but that deferral never permits native identity pass-through.
 - The single manager implementation is instantiated separately for
   `guest_memory`, `host_resource` and `completion_callback`. A typed wrapper
   must select the instance; a bare numeric token is insufficient.
@@ -111,7 +113,7 @@
 - A guest-memory native pointer exists only under a synchronous checked lease.
   It cannot be serialized, stored in a durable record, passed to broker IPC or
   retained by a worker.
-- Translate pointer/HANDLE-bearing OpenNT structures to native x86/x64 forms
+- Translate pointer/HANDLE-bearing OpenNT structures to native process-local forms
   inside the owning adapter, call the public/native API, then translate results
   back.
 
@@ -150,12 +152,14 @@
   evidence, an immutable external name or prose describing a historical API.
 
 ## Build and evidence hygiene
-- Build the host with MSVC Win32/x86 `/MT` and MSVC x64 `/MT`. Do not link
-  objects of different architecture or CRT into one process.
+- The current recovery build is MSVC Win32/x86 `/MT`. Every reached SoftPC
+  behavior must compile and run under the selected original CCPU40
+  configuration.
+  x64 compatibility is recorded as deferred debt and is not a current gate.
+  Do not link objects of different architecture or CRT into one process.
 - For a functional fixture that reaches machine execution, guest state or an
-  imported MVDM-host behavior, run and record SoftPC-default and
-  explicitly-selected Bochs rows on both x86 and x64.  An unavailable backend
-  is a passing negative result only when the fixture asserts that exact
+  imported MVDM-host behavior, record the selected SoftPC CCPU40 row.
+  An unavailable result is passing only when the fixture asserts that exact
   source-shaped unavailable outcome; it may not be silently omitted.
 - Generate the Ninja graph from audited owner/package manifests and dependency
   files. A configuration hash change invalidates the relevant graph/objects.
