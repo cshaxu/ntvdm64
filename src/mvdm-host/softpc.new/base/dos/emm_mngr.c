@@ -1888,7 +1888,7 @@ GLOBAL boolean activate_altreg_set(unsigned short set, short * page_in)
 }
 #endif	/* NTVDM */
 
-#ifndef NTVDM
+#if !defined(NTVDM) || defined(MVDM_SOFTPC_RECOVER_LIM_WRITEBACK)
 
 /*
 ========================================================================
@@ -2078,7 +2078,7 @@ LIM_str_write IFN2( sys_addr, intel_addr, ULONG, length )
 
 	sas_overwrite_memory( intel_addr, length );
 }
-#endif	/* !NTVDM */
+#endif	/* !NTVDM || MVDM_SOFTPC_RECOVER_LIM_WRITEBACK */
 
 #ifndef PROD
 /*

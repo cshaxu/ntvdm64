@@ -489,6 +489,12 @@ $commsObjects = foreach ($name in $commsNames) {
 $dosObjects = foreach ($name in $dosNames) {
     $object = 'obj/dos/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $dosRoot $name)))
+    if ($name -eq 'emm_mngr.c') {
+        # The CCPU40 source and its selected `LIM` profile call the exact
+        # original writeback bodies which the historical NTVDM gate excludes.
+        # This flag opens only that unchanged source block (DIV-148).
+        $graph.Add('  cflags = ' + $baseFlags + ' /DMVDM_SOFTPC_RECOVER_LIM_WRITEBACK')
+    }
     $object
 }
 $demObjects = foreach ($name in $demNames) {

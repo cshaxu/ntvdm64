@@ -187,6 +187,13 @@ unresolved set.  The remaining EMS `LIM_b_write`/`LIM_w_write` pair is an
 original macro/configuration contradiction, not a missing adapter.  See the
 [P3 record](etc/evidence/m0-t313-s5-p3-debugger-startup-binding-001.md).
 
+**T313 S5 P4:** that original EMS/CCPU configuration contradiction is now
+closed by selecting the already-present original `emm_mngr.c` LIM writeback
+block in the CCPU40 graph.  A fresh 407/407 candidate exports all three
+original `LIM_*_write` forms and removes the two CCPU unresolved edges without
+an EMS shim.  No live EMS caller is claimed; see the [P4
+record](etc/evidence/m0-t313-s5-p4-original-ems-writeback-closure-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |
