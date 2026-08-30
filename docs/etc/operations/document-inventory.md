@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3309 |
+| Documentation records | 3310 |
 | --- | --- |
-| Generated UTC | 2026-08-30T07:40:32Z |
+| Generated UTC | 2026-08-30T07:46:21Z |
 
 ## Entries
 
@@ -532,6 +532,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s19-p2-input-controller-x86-assembly-001.md | indexed supporting material | 714ec060b0b7d8d8453b3cabe6e2fa026397eeeb42fc43245fc17ea5dfd80afa |
 | etc/evidence/m0-t310-s19-p3-input-controller-contract-disposition-001.tsv | indexed supporting material | fbbb02d75688e5e356a6a0179fef4cfe5f174613283fbc0cf4a1803f6441e170 |
 | etc/evidence/m0-t310-s1-softpc-selectable-backend-audit-001.md | indexed supporting material | a39180a64d82519752ea200a064d1595a0c892d1e94758a18f77bf0af3b5cb40 |
+| etc/evidence/m0-t310-s20-p1-console-compat-assembly-001.md | indexed supporting material | c6a97a0c77fc04f2cda913093671d0f49dabe48e4a33cc2362df5a8cd43a6e03 |
 | etc/evidence/m0-t310-s2-original-softpc-candidate-build-001.md | indexed supporting material | 398a96ff9360cc89521289b35ef8e7f11693f22e8fbac97e1ae735c94d8819b4 |
 | etc/evidence/m0-t310-s2-original-softpc-forced-link-audit-001.md | indexed supporting material | 194795bbc3ac0871d9716229aec9c276d44ef84cd484474df8da3a85300692d7 |
 | etc/evidence/m0-t310-s3-selected-backend-lifecycle-001.md | indexed supporting material | 6a02b307d35aebb266ea589193f39072e2c8e009b9b0b999bf636829c9cca2ce |
