@@ -27,19 +27,16 @@ reaches them.
 The detailed proposal, predecessor, delivery and exclusions for every queue
 item are in the [package recovery proposal set](etc/operations/package-recovery-program-20260827.md).
 
-The active packet was admitted before this reordering and remains governed
-only by its revised sequential original-machine owner packages in
-`STATUS.md`. Its current formal gate is the selected Win32/x86 `/MT` CCPU40
-profile; x64 compatibility is deliberately deferred. It is not
-expanded to perform perimeter work, Bochs production-route removal, the x64
-native-compile recovery, or final SoftPC acceptance beyond its stated
-machine-composition closure. The first **new** candidate after that bounded
-packet closes is item 1 below.
+The active packet remains governed only by its revised sequential original
+machine owner packages in `STATUS.md`. Its formal gate is the selected
+Win32/x86 `/MT` CCPU40 profile; x64 compatibility is deliberately deferred.
+Bochs is retired and is neither a production route nor an acceptance row. The
+first new candidate after the bounded packet closes is item 1 below.
 
 | Order | Candidate implementation package |
 | --- | --- | --- |
 | 1 | MVDM host mirror-topology recovery (`mvdm-support` reintegration) |
-| 2 | Bochs production-closure removal |
+| 2 | Retired Bochs source/component removal |
 | 3 | Complete SoftPC capability and mirror-purity acceptance |
 | 4 | Base VDM source-shaped broker recovery |
 | 5 | Monitor / `NtVdmControl` user-mode contract package recovery |

@@ -16,7 +16,7 @@ own composition, session lifetime and cross-process coordination.
 ## Mirror-preserving recovery model
 
 Source recovery has a second product objective in addition to executable
-closure: every adopted Bochs, MVDM and non-MVDM OpenNT package must remain
+closure: every adopted MVDM and non-MVDM OpenNT package must remain
 recognisably comparable with its selected upstream source.  A successful build
 does not justify absorbing an original package into adapters or replacing its
 control flow with newly authored code.
@@ -87,8 +87,6 @@ prevents permanent parallel providers.
 
 ### Original mirrors
 
-- `bochs-core`: complete adopted Bochs 2.6 CPU, memory, firmware and PC-device
-  mechanics. It has no OpenNT, DOS, WOW, BOP or host-policy knowledge.
 - `mvdm-host`: the canonical original MVDM host-runtime mirror. It owns
   selected DEM, COMMAND, XMS, DPMI32, VDMREDIR, WOW32, VDD/debugger,
   executable `softpc.new` packages—including `base/bios` reset/BIOS services
@@ -127,23 +125,21 @@ prevents permanent parallel providers.
 
 ### Mechanical adapters
 
-- `adapter-bochs`: the only production caller of `bochs-core`; owns Bochs-only
-  machine construction, bounded run/stop/resume and opaque mechanical endpoints.
-- `adapter-mvdm-host-in`: selector-blind fixed-width Bochs-to-MVDM
-  machine-event/frame transport.
+- `adapter-mvdm-host-in`: selector-blind fixed-width machine-event/frame
+  transport into the original MVDM host. It does not select, replace or
+  execute a machine backend.
 - `adapter-mvdm-host-out`: the sole OpenNT-facing historical-interface component.
   Its explicit internal families are `win32`, `softpc`, `monitor`, `redir`,
   `wow`, `vdd` and `debugger`. Each preserves only the corresponding reached
   original interface shape; none is an alternate MVDM provider. The `softpc`
-  family binds one selected source-shaped machine path: typed `adapter-bochs`
-  mechanics for a Bochs session, or the original executable SoftPC call graph
-  for a SoftPC session. It never includes a Bochs type, object or global, and
-  selection never implies fallback or simultaneous execution.
+  family binds the original executable SoftPC/CCPU40 call graph. It never
+  includes a retired Bochs type, object or global, and does not provide a
+  fallback or simultaneous executor.
   The `monitor` family owns same-shaped `NtVdmControl`, `VDM_TIB`, V86-event
   and interrupt/fault-handler facades, and unsupported kernel/CSRSS behavior
   fails deterministically. The remaining families preserve their named
   Redirector, WOW, VDD and debugger external boundaries without importing
-  provider policy or Bochs objects.
+  provider policy or retired-machine objects.
 - `adapter-opennt-host`: the package-private OpenNT host-interface adapter.
   It owns only same-shaped substitutions for reached private-host calls from
   an accepted `opennt-host` package; it has no MVDM, guest, BOP or Bochs
@@ -168,15 +164,11 @@ The current runtime binds exactly one active imported MVDM host context to each
 session, original DOS `EXEC`, COMMAND child/re-entry behavior and multiple
 WOW16 tasks are guest/task lifecycles, not additional VDM sessions.
 
-Each session selects exactly one machine backend before activation. Original
-SoftPC is the default selected by `app` when the user omits a backend choice;
-Bochs is an explicit alternate. A session may never execute both backends or
-silently substitute one for the other. Functional machine, guest, or MVDM-host
-acceptance always records four cells—Win32/x86 SoftPC, Win32/x86 Bochs,
-Win64/x64 SoftPC and Win64/x64 Bochs. A backend that is intentionally
-unavailable or blocked is recorded with its expected outcome; it is not
-removed from the matrix. Pure source, static-analysis, and documentation work
-need not create machine sessions.
+Each session activates the original SoftPC/CCPU40 machine composition. There
+is no alternate-machine selection, fallback or simultaneous executor. Current
+functional machine, guest and MVDM-host acceptance records the Win32/x86
+SoftPC CCPU40 row. Pure source, static-analysis and documentation work need
+not create a machine session.
 
 All project-owned session and adapter APIs are multi-instance-safe: no hidden
 process-global current machine, mapping table or resource registry is allowed.
@@ -197,7 +189,6 @@ state or a fixed-width component ABI.
 ```text
 app -> session
 app -> broker client -> broker process
-app -> adapter-bochs -> bochs-core
 app -> adapter-mvdm-host-in -> mvdm-host
 app -> mvdm-guest/dos/v86 / mvdm-guest/bin86 / mvdm-guest/wow16 / mvdm-guest/font16
                                                    (data/load only)
@@ -208,8 +199,7 @@ mvdm-host -> mvdm-support
 mvdm-host -> mvdm-softpc-patch                   (only registered SoftPC hooks)
 mvdm-host -> adapter-mvdm-host-out
 mvdm-host -> session                              (neutral contract only)
-adapter-mvdm-host-out/softpc -> adapter-bochs                 (Bochs-selected only)
-adapter-mvdm-host-out/softpc -> original mvdm-host/softpc.new (SoftPC-selected only)
+adapter-mvdm-host-out/softpc -> original mvdm-host/softpc.new
 mvdm-softpc-patch -> adapter-mvdm-host-out/softpc
 adapter-mvdm-host-in -> adapter-mvdm-host-out/softpc  (typed mechanics only)
 adapter-mvdm-host-out/win32 -> broker client      (only for brokered historical calls)
@@ -220,12 +210,11 @@ mvdm-tools -> mvdm-support / mvdm-platform-abi    (independent tool builds only)
 app -> mvdm-softpc-firmware                       (manifest-selected immutable input only)
 ```
 
-`session` never calls a component-specific provider. `adapter-bochs` alone
-calls `bochs-core`. No `adapter-mvdm-host-out` family includes a Bochs type or
-global. The SoftPC-selected path remains within the original `mvdm-host`
-source-shaped composition; it does not call `adapter-bochs`.
-The broker never receives a native pointer, local HANDLE, guest pointer or
-Bochs object. It exchanges versioned fixed-width copied messages and stable
+`session` never calls a component-specific provider. No
+`adapter-mvdm-host-out` family includes a retired-machine type or global. The
+SoftPC path remains within the original `mvdm-host` source-shaped composition.
+The broker never receives a native pointer, local HANDLE or guest pointer. It
+exchanges versioned fixed-width copied messages and stable
 cross-process identities only.
 
 Each specialist adapter owns one historical external/product interface family;
@@ -308,12 +297,11 @@ matching private `*-overlay`; only that mirror may call its overlay.
 
 Existing project-owned component code is an audited recovery source, not
 discarded work. Before authoring a replacement, a packet reviews applicable
-current or quarantined `bochs-core`, `adapter-*`, `app`, `session` and related
+current or quarantined `adapter-*`, `app`, `session` and related
 owner candidates for provenance, dependency direction, behavior and tests. It
 may selectively copy a compliant pure mechanic or adapter into its final owner
-root, but never imports a whole tree by default. Bochs 2.6 remains the sole
-authority for `bochs-core` mirror identity: every retained project difference
-is minimized, registered and moved to the private overlay when it is material.
+root, but never imports a whole tree by default. Retired Bochs material is not
+an admissible production source, build or runtime input.
 `src.old/` remains outside all formal source/build/link/runtime inputs after
 such a per-file recovery.
 

@@ -6,7 +6,7 @@ and `.pif` targets and later bounded WOW16 workloads. It may use public Win32
 APIs and ordinary host resources, but never requires replacement Windows
 files, a rebuilt kernel/private subsystem, or installation-time host mutation.
 
-OpenNT and Bochs recovery is source-first:
+OpenNT and SoftPC recovery is source-first:
 
 1. compose the canonical original source package unchanged;
 2. preserve the reached historical interface, layout, ordering and failure
@@ -15,11 +15,12 @@ OpenNT and Bochs recovery is source-first:
    the original unit composable;
 4. author new behavior only under a recorded last-resort exception.
 
-The twenty-component architecture separates canonical original MVDM host
+The production architecture separates canonical original MVDM host
 runtime, support-library, standalone-tool and firmware-input mirrors:
 `mvdm-host`, `mvdm-support`, `mvdm-tools` and `mvdm-softpc-firmware`. It also
 keeps exact `mvdm-platform-abi`, complete load-only DOS and WOW16 guest
-mirrors, Bochs core and nine adapters, neutral `session`, cross-process
+mirrors, the original SoftPC/CCPU40 execution packages and their bounded
+historical-interface adapters, neutral `session`, cross-process
 `broker`, and final `app` composition. A preserved/buildable historical tool
 is never treated as a host-runtime dependency merely because it shares the
 MVDM source tree.
@@ -49,8 +50,9 @@ Success for the current recovery phase means reproducible source and artifact
 provenance, a manifest-driven Win32/x86 build for the selected CCPU40 profile, auditable
 package selection, minimal imported-source diffs,
 bounded one-session execution, explicit unsupported behavior, and a stable
-path to original multi-process and intra-session semantics.  Original SoftPC
-is the product-default machine backend; Bochs is an explicit alternate.  Any
-functional acceptance that exercises a machine, guest, or MVDM host behavior
-must record the selected SoftPC CCPU40 row. x64 and alternate-machine rows are
-later compatibility work, not skipped evidence for this phase.
+path to original multi-process and intra-session semantics. Original SoftPC/
+CCPU40 is the sole product machine backend. Any functional acceptance that
+exercises a machine, guest, or MVDM host behavior must record the selected
+Win32/x86 SoftPC CCPU40 row. x64 compatibility is later work, not skipped
+evidence for this phase. Historical Bochs material is retired comparison
+material only and is not a product backend, build input or fallback.

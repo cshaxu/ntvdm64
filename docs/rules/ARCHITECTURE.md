@@ -1,10 +1,10 @@
 # Architecture Rules
 
-1. The production source owners are exactly `bochs-core`, `mvdm-host`, `opennt-host`,
+1. The production source owners are exactly `mvdm-host`, `opennt-host`,
    `mvdm-support`, `mvdm-tools`, `mvdm-softpc-firmware`, `mvdm-softpc-patch`,
    `mvdm-platform-abi`, `mvdm-guest/dos/v86`, `mvdm-guest/bin86`,
    `mvdm-guest/wow16`, `mvdm-guest/font16`,
-   `adapter-bochs`, `adapter-mvdm-host-in`, `adapter-mvdm-host-out`, `session`, `broker`,
+   `adapter-mvdm-host-in`, `adapter-mvdm-host-out`, `session`, `broker`,
    `adapter-opennt-host`, and `app`.
 2. `mvdm-host` is the sole complete selected MVDM host-runtime mirror.
    `opennt-host` is the sole original non-MVDM OpenNT host-service mirror. It
@@ -33,14 +33,12 @@
    under a `mvdm-*` component. Existing but unreachable support, tool, firmware
    and guest definitions are not zero-degree. The rule creates no runtime link
    edge and matches source identity rather than function spelling.
-3. When a session selects Bochs, Bochs owns CPU, memory, firmware and PC-device
-   semantics and `adapter-bochs` is its only production caller. When a session
-   selects original SoftPC, the selected executable `mvdm-host/softpc.new`
-   source composition owns its original machine semantics. The `softpc` family
-   of `adapter-mvdm-host-out` binds one selected same-shaped path: typed
-   `adapter-bochs` mechanics for Bochs, or the original SoftPC call graph for
-   SoftPC. It never includes a Bochs type, object or global, and the two paths
-   neither fall back nor execute together.
+3. The selected executable `mvdm-host/softpc.new` source composition is the
+   sole production machine implementation and owns its original CPU, memory,
+   firmware and PC-device semantics. The `softpc` family of
+   `adapter-mvdm-host-out` preserves only reached historical SoftPC/CCPU
+   interface shapes and binds the original SoftPC call graph. It never includes
+   a Bochs type, object or global and never provides a fallback executor.
 4. `adapter-mvdm-host-in` transports fixed-width copied machine events and typed
    completion only. Selector, service, dispatch and provider meaning remain in
    imported `mvdm-host` source.
@@ -64,7 +62,7 @@
    mirror source is modified to bypass it.
 8. `session` is dependency-neutral and owns one independent VDM instance's
    lifecycle, mapping-manager instances, resources, completions/events and
-   teardown. It has no BOP, DOS, WOW, VDD, Redirector, Win32 or Bochs service
+   teardown. It has no BOP, DOS, WOW, VDD, Redirector or Win32 service
    vocabulary.
 9. `app` creates and wires session instances. The current product binds one
    active imported MVDM host context per process and permits multiple

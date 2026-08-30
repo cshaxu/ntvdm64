@@ -1,7 +1,0 @@
-#ifndef MVDM_HOST_OVERLAY_DPMI_INTERRUPT_REGISTRATION_H
-#define MVDM_HOST_OVERLAY_DPMI_INTERRUPT_REGISTRATION_H
-
-int mvdm_dpmi_register_protected_interrupt(void);
-int mvdm_dpmi_register_fault_handler(void);
-
-#endif

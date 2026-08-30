@@ -28,7 +28,11 @@ Revision History:
 //
 // Definition of the VdmTib
 //
-#include "\nt\private\inc\vdm.h"
+/* DIVERGENCE(MVDM-SUPPORT-DIV-008): the original build used an absolute NT
+ * source-tree include.  The identical selected VDM_TIB declaration is mirrored
+ * by the product's OpenNT ABI include root, so retain the original name and
+ * layout through normal include resolution rather than copying a declaration. */
+#include <vdm.h>
 
 
 extern VDM_TIB VdmTib;

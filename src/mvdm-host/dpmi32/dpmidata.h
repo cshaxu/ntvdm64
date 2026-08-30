@@ -55,6 +55,11 @@ Revision History:
 // is to put the definition here.
 //
 
+/* DIVERGENCE(MVDM-HOST-DIV-139): the historical NT headers intentionally
+ * hid their LDT_ENTRY declaration from this non-i386 source branch.  Modern
+ * public winnt.h exposes the identical x86 descriptor layout first.  Keep
+ * the original local definition only when that public carrier is absent. */
+#if !defined(_WINNT_)
 typedef struct _LDT_ENTRY {
     WORD    LimitLow;
     WORD    BaseLow;
@@ -79,6 +84,7 @@ typedef struct _LDT_ENTRY {
         } Bits;
     } HighWord;
 } LDT_ENTRY, *PLDT_ENTRY;
+#endif
 
 //
 // Data items

@@ -53,13 +53,12 @@ This is only a source-graph classification: it cannot make tools, firmware or
 guest inputs host-runtime providers. The match is selected source
 path/provenance/signature and content identity where applicable, never a
 name-only match.
-Bochs 2.6, from `O:\repos.external\bochs-2.6-compat\bochs-2.6`, is the
-approved third-party guest-machine backend, subject to the pinned-import and
-source-identity requirements in `design/CODING.md` and the adoption record.
-This is internal research; distribution/license review is deferred until a
-release is considered. Later source trees, `ntvdm64`, PCjs, and similar
-projects remain comparative evidence only and cannot become runtime/acceptance
-dependencies.
+The product machine backend is the selected original SoftPC/CCPU40 source
+under `mvdm-host`; it is the sole production CPU and device route.  Bochs 2.6
+under `O:\repos.external\bochs-2.6-compat\bochs-2.6` is retired comparison
+material only: it cannot be a source, build, link, runtime or acceptance
+dependency.  Later source trees, `ntvdm64`, PCjs, and similar projects remain
+comparative evidence only and cannot become runtime/acceptance dependencies.
 
 ### NTVDMx64 SoftPC patch exception
 
