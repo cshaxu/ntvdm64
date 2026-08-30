@@ -152,14 +152,14 @@ int main(void)
     }
     {
         session physical_owner;
-        uint8_t external_page_storage[4097] = { 0 };
-        uint8_t *external_page = &external_page_storage[1];
+        uint8_t *external_page = (uint8_t *)VirtualAlloc(NULL,
+            UINT32_C(4096), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
         uint8_t *resolved_page = NULL;
         uint32_t mapping_identifier;
         ULONG intel_address = 0u;
 
         session_initialize(&physical_owner, 2u);
-        if (!session_activate(&physical_owner) ||
+        if (external_page == NULL || !session_activate(&physical_owner) ||
             !session_thread_bind(&physical_owner) ||
             !mvdm_softpc_physical_mapping_publish(external_page,
                 UINT32_C(4096), &mapping_identifier) ||
@@ -167,6 +167,7 @@ int main(void)
                 &intel_address) != STATUS_SUCCESS) {
             fputs("external physical-page binding setup failed\n", stderr);
             sas_term();
+            if (external_page != NULL) (void)VirtualFree(external_page, 0u, MEM_RELEASE);
             return 1;
         }
         if (mvdm_softpc_physical_mapping_prepare(mapping_identifier, 0u,
@@ -176,14 +177,31 @@ int main(void)
             (void)session_thread_unbind(&physical_owner);
             (void)session_dispose(&physical_owner);
             sas_term();
+            (void)VirtualFree(external_page, 0u, MEM_RELEASE);
             return 1;
         }
         /* `c_GetPhyAdd` is the selected original CCPU physical-access
          * operation.  `c_sas_store` is a linear BIOS/SAS entry and is not a
          * proof that the external physical page was selected. */
         *c_GetPhyAdd(intel_address) = UINT8_C(0x6d);
-        if (external_page[0] != UINT8_C(0x6d) ||
-            *c_GetPhyAdd(intel_address) != UINT8_C(0x6d) ||
+        if (VdmMapDosMemory(UINT32_C(0x100), intel_address >> 12,
+                UINT32_C(1)) != STATUS_SUCCESS ||
+            *c_GetPhyAdd(UINT32_C(0x00100000)) != UINT8_C(0x6d)) {
+            fputs("source-shaped DOS physical-page alias was not installed\n",
+                stderr);
+            (void)session_thread_unbind(&physical_owner);
+            (void)session_dispose(&physical_owner);
+            sas_term();
+            (void)VirtualFree(external_page, 0u, MEM_RELEASE);
+            return 1;
+        }
+        *c_GetPhyAdd(UINT32_C(0x00100000)) = UINT8_C(0x7a);
+        if (external_page[0] != UINT8_C(0x7a) ||
+            *c_GetPhyAdd(intel_address) != UINT8_C(0x7a) ||
+            VdmUnmapDosMemory(UINT32_C(0x100), UINT32_C(1)) !=
+                STATUS_SUCCESS ||
+            VdmUnmapDosMemory(UINT32_C(0x100), UINT32_C(1)) !=
+                (NTSTATUS)UINT32_C(0xc0000225) ||
             VdmRemoveVirtualMemory(intel_address) != STATUS_SUCCESS ||
             session_guest_memory_mappings(&physical_owner)->active_count != 0u ||
             mvdm_softpc_physical_mapping_prepare(mapping_identifier,
@@ -195,14 +213,17 @@ int main(void)
             (void)session_thread_unbind(&physical_owner);
             (void)session_dispose(&physical_owner);
             sas_term();
+            (void)VirtualFree(external_page, 0u, MEM_RELEASE);
             return 1;
         }
         if (!session_thread_unbind(&physical_owner) ||
             !session_dispose(&physical_owner)) {
             fputs("external physical-page binding teardown failed\n", stderr);
             sas_term();
+            (void)VirtualFree(external_page, 0u, MEM_RELEASE);
             return 1;
         }
+        (void)VirtualFree(external_page, 0u, MEM_RELEASE);
     }
     fputs("cpu-init\n", stderr);
     c_cpu_init();
