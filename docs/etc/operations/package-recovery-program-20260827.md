@@ -101,7 +101,8 @@ VDM seam rather than a full BaseClient/BaseSrv import, and P11 owns the exact
 
 ## P02A — MVDM host mirror-topology recovery
 
-**Predecessor:** the active original-SoftPC packet. **Purpose:** restore the
+**Predecessor:** closed `M0 T314` and the accepted CCPU40 original-SoftPC
+packet. **Purpose:** restore the
 original `base/mvdm` host topology before further owner recovery: move the
 complete `inc`, `oemuni`, and `suballoc` package members out of the obsolete
 top-level `mvdm-support` component and back under `mvdm-host`; move the
@@ -114,9 +115,31 @@ divergence register for every moved path, updated formal build paths, and
 proof that no guest, firmware, tools, production source or formal graph names
 the removed roots.
 
-**Exit:** formal affected Win32/x86 `/MT` CCPU40 graph passes,
-with documentation governance. x64 compatibility belongs only to P02C.
-This package changes no MVDM behavior, source-shaped adapter or BOP route.
+**Exit:** formal affected Win32/x86 `/MT` CCPU40 graph passes, with
+documentation governance. This behavior-neutral package does not claim
+CCPU30 recovery: P02E owns CCPU30 source selection, compile and bounded-run
+acceptance. x64 compatibility belongs only to P02C. This package changes no
+MVDM behavior, source-shaped adapter or BOP route.
+
+## P02E — Original SoftPC CCPU30 profile recovery
+
+**Predecessor:** P02A. **Purpose:** recover the original x86 CCPU30 SoftPC
+profile as a second supported machine configuration, without replacing its
+execution body with CCPU40 or a project-authored executor. Reuse the same
+original-source, mapping-manager, session-terminal and adapter boundaries
+where their contracts are genuinely identical; audit and retain source-shaped
+differences where the two original profiles differ.
+
+**Delivery:** an audited CCPU30 source/build manifest, original-profile
+adapter bindings, a formal Win32/x86 `/MT` CCPU30 graph, and bounded execution
+fixtures equivalent in intent to the accepted CCPU40 lifecycle/terminal
+evidence. Every shared fixture states which original profile it exercises.
+
+**Exit:** both CCPU30 and CCPU40 formal x86 graphs compile; each profile runs
+its applicable bounded original SoftPC execution/terminal fixture; no profile
+silently selects the other executor; and all profile-specific source,
+configuration, mapping-manager and adapter differences are registered. This
+does not claim DOS/MVDM guest continuity or x64 compatibility.
 
 ## P02B — Bochs production-closure removal
 

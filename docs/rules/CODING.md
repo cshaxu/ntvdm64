@@ -146,12 +146,16 @@
 
 ## Build and evidence hygiene
 - The current recovery build is MSVC Win32/x86 `/MT`. Every reached SoftPC
-  behavior must compile and run under the selected original CCPU40
-  configuration.
+  behavior must compile and run under its declared original CCPU30 or CCPU40
+  configuration. CCPU40 is currently accepted; CCPU30 must receive equivalent
+  profile-specific compile and bounded-run evidence before paired-profile
+  support is claimed.
   x64 compatibility is recorded as deferred debt and is not a current gate.
   Do not link objects of different architecture or CRT into one process.
 - For a functional fixture that reaches machine execution, guest state or an
-  imported MVDM-host behavior, record the selected SoftPC CCPU40 row.
+  imported MVDM-host behavior, record the selected SoftPC CCPU30 or CCPU40
+  row; a shared fixture must run separately for each profile before it is used
+  as paired-profile evidence.
   An unavailable result is passing only when the fixture asserts that exact
   source-shaped unavailable outcome; it may not be silently omitted.
 - Generate the Ninja graph from audited owner/package manifests and dependency

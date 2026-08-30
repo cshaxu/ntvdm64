@@ -2,9 +2,9 @@
 
 ## Candidate package
 
-**MVDM host mirror-topology recovery.** This is the first candidate after the
-active T310 packet closes. It receives a numeric T identifier only when it is
-admitted into `STATUS.md`.
+**MVDM host mirror-topology recovery.** This is the first candidate after
+closed `M0 T314`. It receives a numeric T identifier only when it is admitted
+into `STATUS.md`.
 
 ## Decision
 
@@ -74,5 +74,7 @@ The retired support roots no longer exist; every former file
 has one verified destination or a recorded owner-approved exception; all
 original `base/mvdm` relative topology is represented beneath `mvdm-host`; all
 four previously registered width divergences remain registered at their new
-owner; and the affected formal selected-profile graph has no live old-root
-reference.
+owner; and the affected formal CCPU40 graph has no live old-root reference.
+CCPU30 recovery is deliberately not asserted by this behavior-neutral move:
+the immediately following CCPU30 package must establish its own original
+source selection, formal graph and bounded execution evidence.

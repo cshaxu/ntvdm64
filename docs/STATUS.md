@@ -5,8 +5,12 @@
 ## Active Packet
 
 **No active M/T/S packet.** `M0 T314` is closed for the admitted local DOS
-Base VDM broker protocol. The next queue candidate requires its own admission;
-implementation must not proceed until then. See the
+Base VDM broker protocol. The next queue candidate is MVDM host
+mirror-topology recovery (`mvdm-support` reintegration), which requires its
+own admission; implementation must not proceed until then. CCPU40 is the
+currently accepted profile; CCPU30 is newly required as the immediately
+following original-SoftPC recovery package and has not yet been compiled or
+run under this renewed paired-profile policy. See the
 [T314 closure](history/m0-t314-base-vdm-source-shaped-broker-closure-20260830.md).
 
 **T313 S1 closed:** the eleven-cohort selected-machine ledger is complete,

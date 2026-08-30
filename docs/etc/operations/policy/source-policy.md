@@ -54,8 +54,11 @@ This is only a source-graph classification: it cannot make tools, firmware or
 guest inputs host-runtime providers. The match is selected source
 path/provenance/signature and content identity where applicable, never a
 name-only match.
-The product machine backend is the selected original SoftPC/CCPU40 source
-under `mvdm-host`; it is the sole production CPU and device route.  Bochs 2.6
+The product machine backend is the original SoftPC/CCPU30 and CCPU40 source
+under `mvdm-host`; one declared profile is the sole production CPU and device
+route for each session. CCPU40 is currently accepted; CCPU30 must receive its
+own source, compile and bounded-run acceptance before paired-profile support
+is claimed. Bochs 2.6
 under `O:\repos.external\bochs-2.6-compat\bochs-2.6` is retired comparison
 material only: it cannot be a source, build, link, runtime or acceptance
 dependency.  Later source trees, `ntvdm64`, PCjs, and similar projects remain

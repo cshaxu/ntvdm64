@@ -20,7 +20,7 @@ standalone-tool and firmware-input mirrors: `mvdm-host`, `mvdm-tools` and
 `mvdm-softpc-firmware`. Its original support paths remain inside
 `mvdm-host` at their upstream-relative locations. It also
 keeps exact `mvdm-platform-abi`, complete load-only DOS and WOW16 guest
-mirrors, the original SoftPC/CCPU40 execution packages and their bounded
+mirrors, the original SoftPC/CCPU30 and CCPU40 execution packages and their bounded
 historical-interface adapters, neutral `session`, cross-process
 `broker`, and final `app` composition. A preserved/buildable historical tool
 is never treated as a host-runtime dependency merely because it shares the
@@ -48,12 +48,15 @@ not recreate CSRSS or the NT4 kernel and never transports local native
 resources or guest pointers.
 
 Success for the current recovery phase means reproducible source and artifact
-provenance, a manifest-driven Win32/x86 build for the selected CCPU40 profile, auditable
+provenance, manifest-driven Win32/x86 builds for the original CCPU30 and CCPU40 profiles, auditable
 package selection, minimal imported-source diffs,
 bounded one-session execution, explicit unsupported behavior, and a stable
 path to original multi-process and intra-session semantics. Original SoftPC/
-CCPU40 is the sole product machine backend. Any functional acceptance that
+CCPU30 and CCPU40 are the supported original SoftPC machine profiles; they
+never run simultaneously in one session. Any functional acceptance that
 exercises a machine, guest, or MVDM host behavior must record the selected
-Win32/x86 SoftPC CCPU40 row. x64 compatibility is later work, not skipped
+Win32/x86 SoftPC profile row. CCPU40 is the currently accepted row; CCPU30
+must gain equivalent profile-specific evidence before paired-profile support
+is claimed. x64 compatibility is later work, not skipped
 evidence for this phase. Historical Bochs material is retired comparison
 material only and is not a product backend, build input or fallback.
