@@ -153,7 +153,13 @@ SIGNALS ISSUED	  :	NONE
 /*
 [7.1 INTERMODULE DATA DEFINITIONS]				*/
 
-#ifdef A_VID
+/* DIVERGENCE(MVDM-HOST-DIV-080): retain the original mode-1/mode-2 table
+ * carrier for the selected CCPU40 C-VID profile instead of selecting legacy
+ * A_VID movers that have no selected CCPU40 implementation. */
+/* DIVERGENCE(MVDM-HOST-DIV-080): retain the original mode-1/mode-2 table
+ * carrier for the selected CCPU40 C-VID profile instead of selecting legacy
+ * A_VID movers that have no selected CCPU40 implementation. */
+#if defined(A_VID) || defined(CPU_40_STYLE)
 IMPORT VOID	_ch2_mode1_chn_byte_write_glue();
 IMPORT VOID	_ch2_mode1_chn_word_write_glue();
 IMPORT VOID	_ch2_mode1_chn_byte_fill_glue();
@@ -263,7 +269,7 @@ WRT_POINTERS mode2_handlers =
 #endif	/* NO_STRING_OPERATIONS */
 
 };
-#endif /* A_VID */
+#endif /* A_VID || CPU_40_STYLE */
 
 
 GLOBAL VOID

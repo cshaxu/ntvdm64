@@ -206,7 +206,13 @@ typedef	union {
 /*
 [7.1 INTERMODULE DATA DEFINITIONS]				*/
 
-#ifdef A_VID
+/* DIVERGENCE(MVDM-HOST-DIV-079): the selected CCPU40 C-VID profile needs
+ * this original writer-table declaration block.  The legacy A_VID-only
+ * condition otherwise selects an obsolete mover table with no CCPU40 body. */
+/* DIVERGENCE(MVDM-HOST-DIV-079): the selected CCPU40 C-VID profile needs
+ * this original writer-table declaration block.  The legacy A_VID-only
+ * condition otherwise selects an obsolete mover table with no CCPU40 body. */
+#if defined(A_VID) || defined(CPU_40_STYLE)
 IMPORT VOID	_ch2_copy_byte_write();
 IMPORT VOID	_ch2_copy_word_write();
 IMPORT VOID	_ch2_copy_byte_fill_glue();
@@ -325,7 +331,7 @@ WRT_POINTERS mode0_gen_handlers =
 
 #endif	/* NO_STRING_OPERATIONS */
 };
-#endif /* A_VID */
+#endif /* A_VID || CPU_40_STYLE */
 
 /*
 [7.2 INTERMODULE PROCEDURE DEFINITIONS]				*/

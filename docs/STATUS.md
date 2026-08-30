@@ -4,27 +4,27 @@
 
 ## Active Packet
 
-**Active: M0 T310 S26**
+**Active: M0 T310 S27**
 
-### M0 T310 S26 — video-controller dispatch
+### M0 T310 S27 — host-video bindings
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T310 S26; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | S25 closed original C-VID generated-table source ownership and formal assembly. S26 is the next sequential owner-contract cluster. |
-| Objective | Recover only `SPC-VIDEO-CONTROLLER-DISPATCH`: selected original `softpc.new/base/video` controller initialization, register, memory-handler and C-VID selection/dispatch contracts for Win32/x86 CCPU40. |
-| Non-goals | No host display/window binding (S27), terminal redesign, kernel VDM or MONITOR import, Bochs fallback, BOP semantic expansion, trace-selected repair, or guest-visible display claim. |
-| Reference Baseline | Closed S25 generated C-VID table assembly; original `softpc.new/base/video` controllers, selected C-VID dispatch headers and original reached caller units. |
-| Files And ABI Surface | Original selected base-video sources and manifests, controller tables/initializers, C-VID selection and reached CCPU/BIOS caller contracts; a private mirror overlay only if a complete source-shaped contract requires it. |
+| Identifier Mode | M0 T310 S27; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | S26 closed original base-video controller dispatch and formal assembly. S27 is the next sequential owner-contract cluster. |
+| Objective | Recover only `SPC-HOST-VIDEO-BINDINGS`: selected original `softpc.new/host/src` display endpoint, palette, invalidation and host-window contracts for Win32/x86 CCPU40. |
+| Non-goals | No controller replacement (S26 closed), terminal redesign, kernel VDM or MONITOR import, Bochs fallback, BOP semantic expansion, trace-selected repair, or guest-visible display claim. |
+| Reference Baseline | Closed S26 base-video controller dispatch; original `nt_vga.c`, `nt_ega.c`, `nt_cga.c`, `nt_graph.c`, `nt_hosts.c` and their reached public host API forms. |
+| Files And ABI Surface | Original selected host-video sources, palette/invalidation declarations, display endpoint callbacks and reached controller callers; a private mirror overlay only if a complete source-shaped contract requires it. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island, CPU-profile and source-recovery rules; approved T310 S8 plan and coverage ledger. |
-| Verification | Formal MSVC Win32/x86 `/MT` Ninja selected video archive and forced-link review; original controller declaration/definition/table/caller comparison; focused source-shaped controller initialization or exact unavailable result. x64 compatibility is outside the active worklist. |
-| Expected Markers | One source-shaped selected controller dispatch contract; preserved original table order; guest numeric addresses remain guest values and do not become host identities; no raw MONITOR/Bochs/kernel-VDM route or hand-written controller replacement. |
+| Verification | Formal MSVC Win32/x86 `/MT` Ninja selected host-video archive and forced-link review; original endpoint declaration/definition/caller comparison; focused source-shaped endpoint initialization or exact unavailable result. x64 compatibility is outside the active worklist. |
+| Expected Markers | One source-shaped selected host-video contract; preserved original callback order; guest numeric addresses remain guest values and do not become host identities; no raw MONITOR/Bochs/kernel-VDM route or hand-written display replacement. |
 | Asset Needs | Exact selected base-video and C-VID sources, source manifests, session mapping-manager rules and MSVC Build Tools/Ninja. |
 | Reporting Requirements | Per cluster: original roots, declaration/definition/table/caller relationship, recovery rung, selected x86 CCPU40 result, mapping-manager use and no-Bochs/MONITOR proof. |
-| Stop Conditions | A selected controller requires an unregistered semantic divergence; a raw host identity crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or a finding belongs to S27 or later. |
-| Exit Criteria | Every selected controller declaration, definition, initializer and reached caller has one direct, binding-only, private-overlay or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and focused controller-contract evidence does not select new S26 owner work. Integrated video behavior remains mandatory S49 validation. |
+| Stop Conditions | A selected host endpoint requires an unregistered semantic divergence; a raw host identity crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or a finding belongs to S28 or later. |
+| Exit Criteria | Every selected host-video declaration, definition, initializer and reached caller has one direct, binding-only, private-overlay or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and focused endpoint-contract evidence does not select new S27 owner work. Integrated video behavior remains mandatory S49 validation. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
-| Similar-Issue Sweep | Every selected base-video controller table, initializer, handler/callback assignment, C-VID selector, reached caller, guest address form, selected compilation condition, and MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
+| Similar-Issue Sweep | Every selected host-video callback, palette/invalidation endpoint, reached controller caller, host handle/address form, selected compilation condition, and MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
 
 **T310 S22 P1:** the selected host-storage surface is now separated into the
 original no-fixed-disk CCPU callbacks, DEM direct DASD, local floppy and the
@@ -78,6 +78,12 @@ translation units now compile directly for the x86 CCPU40 product; the former
 generated five-file wrapper carrier was removed.  Two registered declaration
 corrections preserve the original void marking and EGA writer-table contracts.
 Fresh direct archive evidence is recorded in the [S26 source boundary](etc/evidence/m0-t310-s26-p1-video-controller-direct-source-boundary-001.md).
+
+**T310 S26 closed:** original `base/video` controller sources, selected CCPU
+state carrier and EGA writer-table selection now compose under CCPU40 without
+an unresolved controller/C-VID/effective-address edge.  The remaining host
+invalidation endpoint is explicitly S27; integrated display behavior remains
+S49.  See the [closure record](history/m0-t310-s26-video-controller-dispatch-closure-20260830.md).
 
 **T310 S17 P1:** the complete selected system-controller source set is now
 split from adjacent ROM, platform, endpoint and BOP owners. The original

@@ -67,3 +67,12 @@ IU32 c_effective_addr(IU16 selector, IU32 offset)
     }
     return base + offset;
 }
+
+/* The original non-CCPU-facing SoftPC consumers, including base/video,
+ * retain this public spelling.  It is a same-shaped facade over the selected
+ * CCPU implementation, not a second address calculation or a host pointer
+ * conversion. */
+IU32 effective_addr(IU16 selector, IU32 offset)
+{
+    return c_effective_addr(selector, offset);
+}

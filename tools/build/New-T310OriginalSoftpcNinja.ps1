@@ -48,6 +48,7 @@ if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or !(Get-Command ninja -ErrorA
 }
 
 $ccpuRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/ccpu386'
+$ccpuOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/base/ccpu386'
 $biosRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/bios'
 $keymouseRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/keymouse'
 $systemRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/system'
@@ -102,7 +103,8 @@ $ccpuNames = @($ccpuNames | Where-Object { $_ -ne 'ntstubs.c' })
 # The original CCPU manifest omits the identical `vglob.c` carrier even though
 # the selected original video sources call its public VGLOB accessors. Select
 # the same-named original CCPU-root form rather than synthesize those globals.
-$ccpuNames = @($ccpuNames + 'vglob.c')
+$ccpuNames = @($ccpuNames + 'vglob.c' + 'localfm.c') | Select-Object -Unique
+$ccpuOverlayNames = @('localfm.c')
 $biosNames = Get-OriginalSources $biosManifest
 $keymouseNames = Get-OriginalSources $keymouseManifest
 $systemNames = Get-OriginalSources $systemManifest
@@ -157,6 +159,9 @@ $patchBodyNames = @('fmstubs.c')
 $patchEvidenceNames = @('minnt/callconv.patch')
 foreach ($name in $ccpuNames) {
     if (!(Test-Path -LiteralPath (Join-Path $ccpuRoot $name))) { throw "Original CCPU source missing: $name" }
+}
+foreach ($name in $ccpuOverlayNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $ccpuOverlayRoot $name))) { throw "Required CCPU private overlay missing: $name" }
 }
 foreach ($name in $biosNames) {
     if (!(Test-Path -LiteralPath (Join-Path $biosRoot $name))) { throw "Original SoftPC BIOS source missing: $name" }
@@ -354,7 +359,11 @@ $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' l
 
 $ccpuObjects = foreach ($name in $ccpuNames) {
     $object = 'obj/ccpu/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $ccpuRoot $name)))
+    # CCPU itself owns `Sas`; the original localfm state carrier also declares
+    # it.  The narrow overlay retains only this profile's original Gdp/Cpu/
+    # Video state declarations and avoids a second SAS owner.
+    $source = if ($name -in $ccpuOverlayNames) { Join-Path $ccpuOverlayRoot $name } else { Join-Path $ccpuRoot $name }
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath $source))
     $object
 }
 $biosObjects = foreach ($name in $biosNames) {
@@ -538,6 +547,7 @@ $graph.Add('default original-softpc-candidate')
     originalHostManifest = 'src/mvdm-host/softpc.new/host/src/sources'
     ccpuSourceCount = @($ccpuNames).Count
     ccpuSources = @($ccpuNames)
+    ccpuPrivateOverlaySources = @($ccpuOverlayNames)
     biosSources = @($biosNames)
     keymouseSources = @($keymouseNames)
     systemSources = @($systemNames)
