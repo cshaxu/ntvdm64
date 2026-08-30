@@ -179,6 +179,14 @@ allocation failure—now share the P1 session terminal boundary.  Unselected
 and console-product-shell forms remain exact source material.  The changed
 host archive rebuilds cleanly; see the [P2 record](etc/evidence/m0-t313-s5-p2-selected-direct-exit-sweep-001.md).
 
+**T313 S5 P3:** the original startup's independent `DBGInit` slice now enters
+the selected formal graph through a same-shaped debugger-boundary binding;
+full NT4 debugger BOP/event product code remains explicitly unselected.  A
+fresh 407/407 candidate and forced-link audit remove `DBGInit` from the true
+unresolved set.  The remaining EMS `LIM_b_write`/`LIM_w_write` pair is an
+original macro/configuration contradiction, not a missing adapter.  See the
+[P3 record](etc/evidence/m0-t313-s5-p3-debugger-startup-binding-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |
