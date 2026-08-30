@@ -1,5 +1,10 @@
 # R1 CCPU Host Bridge Negative Audit
 
+> **Historical evidence, not a product configuration.** `CPU_30_STYLE` below
+> identifies an archived OpenNT conditional only. It is retired; every
+> production compilation, link, runtime and acceptance path selects
+> `CPU_40_STYLE` only.
+
 状态：进行中，2026-08-09。
 
 ## 目的

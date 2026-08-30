@@ -1,5 +1,11 @@
 # R1 CCPU Profile Separation
 
+> **Historical evidence, not a product configuration.** This 2026-08-08
+> investigation records the archived source profile that defined both
+> `CPU_30_STYLE` and `CPU_40_STYLE`. Current production compilation, linking,
+> runtime, and acceptance are strictly `CPU_40_STYLE` only. CPU30/V86 is
+> retired and may appear below solely when quoting historical source evidence.
+
 ## 2026-08-08 运行证据更新
 
 本轮 reset trace 已证明本任务不是抽象的宏清理：旧 profile 令

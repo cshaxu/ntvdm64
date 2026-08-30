@@ -1,5 +1,9 @@
 # R1 CCPU Vector Assembly Audit
 
+> **Historical evidence, not a product configuration.** Any references below
+> to `CPU_30_STYLE` quote archived OpenNT source. The project selects only
+> `CPU_40_STYLE` for production compilation, linking, runtime, and acceptance.
+
 相关的 host CPU bridge 排除证据见
 `docs/R1-CCPU-HOST-BRIDGE-NEGATIVE-AUDIT.md`。
 同名 CCPU/C-VIDC generated-header 的字段级 ABI 证据见

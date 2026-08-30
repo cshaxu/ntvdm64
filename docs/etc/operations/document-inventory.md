@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 3420 |
 | --- | --- |
-| Generated UTC | 2026-08-30T22:40:32Z |
+| Generated UTC | 2026-08-30T22:43:55Z |
 
 ## Entries
 
@@ -32,7 +32,7 @@ content-divergent entries.
 | CCPU-COMPLETION-RECOVERY-AUDIT.md | retained pre-governance evidence | 173a2352b4c961127ae55d6c66249ff6644ac67b9441cbdfaf57b24da643af9f |
 | CCPU-MISSING-INTERFACE-CONTRACT.md | retained pre-governance evidence | ed7e127fa6dc71cbe3115b1b98d3f826af31744258004e2eec3ed0c77a56b862 |
 | CCPU-ORIGINAL-SELECTOR50-CHAIN-REVERIFICATION.md | retained pre-governance evidence | 5117d59c7fee12b9c39f91e48e4acc4438a5d82221edfb54d423c963d3c57c2b |
-| CCPU-SAS-GENERATED-ABI-AUDIT.md | retained pre-governance evidence | 3884f17278ab2e0f26e4d0c4a744f00b24907920c79c9239af82b9678b25cc6b |
+| CCPU-SAS-GENERATED-ABI-AUDIT.md | retained pre-governance evidence | 0511b1ecdcab3b23af9d5de0504832017cae2076b88540504bcf9516be09244b |
 | CCPU-SAS-VECTOR-TRACE-GUARD-IMPLEMENTATION.md | retained pre-governance evidence | 1a7f1d8d5cfb980dc0522d82a08e5e9564994839475f9d67fc02d9b3bed0b27d |
 | CCPU-SEMANTIC-RECONSTRUCTION-RECOVERY-MATRIX.md | retained pre-governance evidence | 0883e1182a930290b2f3f1b22cc25fc74cfd38d8ac19238d451fd7dabafa1440 |
 | CCPU-SOFTWARE-MONITOR-ROUTE.md | retained pre-governance evidence | 0400f1c1b2defe978fe01ee45aea89033641eb5d6536ad7c5625d9b3a3378d69 |
@@ -3312,9 +3312,9 @@ content-divergent entries.
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
-| R1-CCPU-HOST-BRIDGE-NEGATIVE-AUDIT.md | retained pre-governance evidence | fa7739b2c0399009dd31dc7acd576c21fe8b5f8e469444dcb4d3ed533e50ef5c |
-| R1-CCPU-PROFILE-SEPARATION.md | retained pre-governance evidence | a8f7ae7cca332708b35f8d94e1d9d9abaf02c63e8dd2661963b060a3c960b903 |
-| R1-CCPU-VECTOR-ASSEMBLY-AUDIT.md | retained pre-governance evidence | 60dde22da580cd600ebacf2e90c92d369d32d31734168f79eb2555e8e5472686 |
+| R1-CCPU-HOST-BRIDGE-NEGATIVE-AUDIT.md | retained pre-governance evidence | 9b99d496efff4e182c8df1e3749850ef0450b180671d96f14050ae905a2e8ea6 |
+| R1-CCPU-PROFILE-SEPARATION.md | retained pre-governance evidence | c326781b692597c93762be7c44791b9350ea6954a79ad836d5b7a0eac8a39a0e |
+| R1-CCPU-VECTOR-ASSEMBLY-AUDIT.md | retained pre-governance evidence | 5fb0da46a81129587933b0bc1728a27ec3052d11d7c1d4d5e9bfbc4c5986dca9 |
 | R1-CVIDC-REFERENCE-COMPARISON.md | retained pre-governance evidence | eec99a731238b909ce069caa0777aa25e68913512ad377264a5888c933f8697d |
 | R1-CVIDC-VIDEO-STARTUP-CLOSURE.md | retained pre-governance evidence | f0aaf03973981cf32889d3050e87dbcd89338148ff5e8c029bfb14e788052667 |
 | R1-GENERIC-VIDEO-RECONSTRUCTION-ADMISSION.md | retained pre-governance evidence | 754bc5de21a38aac2e019245d103707e79013e5699af1b65cda9420d783d13d7 |

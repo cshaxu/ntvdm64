@@ -1,6 +1,8 @@
 # CCPU SAS Generated ABI Audit
 
-Status: source-input admission and object-closure evidence, 2026-08-06.
+Status: historical source-input admission and object-closure evidence,
+2026-08-06.  Superseded for product selection by the CPU40-only policy:
+production builds, links, runtime, and acceptance use `CPU_40_STYLE` only.
 
 ## Question
 
@@ -14,14 +16,15 @@ replacement SAS interface or runtime-admission evidence.
 
 ## Direct Evidence
 
-The archived CCPU `sources` file defines the historical profile:
+The archived CCPU `sources` file defines the following **historical** profile:
 
 ```text
 C_DEFINES= -DCPU_30_STYLE -DCPU_40_STYLE -DNEW_CPU -DCCPU -DSPC386 -DANSI -DNTVDM
 INCLUDES=...\\host\\genPg\\inc
 ```
 
-The referenced `host/genPg/inc` directory is absent from the fixed upstream
+This line is source provenance, not an authorized current configuration.
+`CPU_30_STYLE` must not be passed to a product build.  The referenced `host/genPg/inc` directory is absent from the fixed upstream
 tree. The following retained generated inputs are therefore only nearby
 variants, not evidence of the required profile:
 
