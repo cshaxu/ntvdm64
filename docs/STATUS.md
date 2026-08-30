@@ -98,6 +98,14 @@ only additions are current GDP generation and already-registered overlay
 include/link bindings.  Timer-to-PIC/DMA/input delivery remains S3 work. See
 the [P1 record](etc/evidence/m0-t313-s3-p1-controller-source-assembly-001.md).
 
+**T313 S3 P2:** the original reset → ICA/PIT/DMA/input chain is now explicitly
+recorded and the public console-input binding witness passes on x86.  A clean
+external 403/403 CCPU40 candidate rebuild confirms that no parallel
+controller was introduced.  The reached `nt_reset.c` host-local `strlen`
+width correction is now registered rather than left as an undocumented mirror
+difference.  Live timer-to-PIC/CCPU and DMA delivery remain S3 work. See the
+[P2 record](etc/evidence/m0-t313-s3-p2-controller-chain-and-input-binding-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |
