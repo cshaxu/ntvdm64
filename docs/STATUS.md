@@ -4,27 +4,34 @@
 
 ## Active Packet
 
-**Active: M0 T310 S13**
+**Active: M0 T310 S14**
 
-### M0 T310 S13 — SAS memory-contract owner-contract closure
+### M0 T310 S14 — memory-mapping-bindings owner-contract closure
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T310 S13; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | S12 `SPC-CCPU-EXTENDED-BOP-DEFAULT` closed with fresh x86/x64 selected-profile builds and its original debug-break failure contract; S13 is now the only active sequential cluster. |
-| Objective | Re-read and close only `SPC-SAS-MEMORY-CONTRACT`: original SAS-memory declarations, definitions, selected callers and prior repairs. |
+| Identifier Mode | M0 T310 S14; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | S13 `SPC-SAS-MEMORY-CONTRACT` closed with fresh x86/x64 selected-profile builds and direct ordinary-RAM behavior; S14 is now the only active sequential cluster. |
+| Objective | Re-read and close only `SPC-MEMORY-MAPPING-BINDINGS`: original physical-memory mapping declarations, definitions, selected callers and prior repairs. |
 | Non-goals | No kernel VDM or MONITOR import, Bochs device/controller fallback, BOP semantic expansion, trace-selected repair, unrelated device enablement, or claim of complete DOS/WOW product execution. |
 | Reference Baseline | Closed S4 source-family workset; closed S5 CCPU/RAM/FPU execution; closed S6 V86/MONITOR removal; closed S7 physical mapping/lease ledger; exact `mvdm-host` and `mvdm-softpc-firmware` mirrors. |
-| Files And ABI Surface | Original SAS-memory sources, generated headers and selected callers; named adapter only at a source-proven boundary. |
+| Files And ABI Surface | Original physical-memory mapping sources, generated headers and selected callers; named adapter only at a source-proven boundary. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island, CPU-profile and source-recovery rules; approved T310 S8 plan and coverage ledger. |
-| Verification | Formal MSVC `/MT` x86/x64 Ninja SAS-memory archives; source/call review and a focused bounded SAS-memory behavior check. |
-| Expected Markers | Original CCPU vector order; fixed-width Intel operands; correct native pointer containment; source-shaped SAS physical backing; no raw monitor alias; no synthetic memory success. |
+| Verification | Formal MSVC `/MT` x86/x64 Ninja physical-mapping archives; source/call review and a focused mapping lifecycle behavior check. |
+| Expected Markers | Original CCPU vector order; fixed-width Intel operands; mapping-manager identity containment; source-shaped physical backing; no raw monitor alias; no synthetic mapping success. |
 | Asset Needs | Exact CCPU, SAS and NTVDMx64 patch manifests; closed S4--S7 evidence; mapping manager only at an actual cross-component identity boundary; MSVC Build Tools and Ninja. |
 | Reporting Requirements | Per cluster: original roots/callers, recovery rung, table/initializer order, ABI/failure contract, any mapping-manager use, x86/x64 result, retained unavailable disposition and no-Bochs/MONITOR proof. |
 | Stop Conditions | A CCPU member requires an unregistered original-source divergence; an adapter would replace available CCPU logic; a raw native pointer crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or the source requires a non-CCPU device capability owned by a later S. |
-| Exit Criteria | Every SAS-memory declaration, definition, selected caller and prior repair has exactly one direct, binding-only, adapter-backed or original-unavailable disposition; x86/x64 formal evidence passes; and focused observation does not select new work. T310 remains active for S13--S49 and closes only after their combined machine profile verifies `create -> reset -> firmware/machine initialization -> bounded execution -> typed controlled stop -> teardown`. |
+| Exit Criteria | Every physical-memory mapping declaration, definition, selected caller and prior repair has exactly one direct, binding-only, adapter-backed or original-unavailable disposition; x86/x64 formal evidence passes; and focused observation does not select new work. T310 remains active for S14--S49 and closes only after their combined machine profile verifies `create -> reset -> firmware/machine initialization -> bounded execution -> typed controlled stop -> teardown`. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
-| Similar-Issue Sweep | SAS-memory declarations, definitions, selected callers and existing adapter/overlay repair; MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
+| Similar-Issue Sweep | Physical-memory mapping declarations, definitions, selected callers and existing adapter/overlay repair; MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
+
+**T310 S13 closed:** the selected original CPU_40 SAS-memory owner retains
+its ordinary RAM vector, type map, scalar/string/move/fill algorithms and
+private native backing without exporting a host identity. Fresh x86/x64 runs
+proved that complete ordinary-RAM surface and then reached
+`returned-recursive`; A20/XMS, EMS mapping and controller consequences remain
+with their named later packets. See the [S13 SAS-memory review](etc/evidence/m0-t310-s13-sas-memory-contract-001.md).
 
 **T310 S12 closed:** the selected CCPU extended-BOP default now links the
 registered original NTVDMx64 patch's one-symbol `EDL_fast_bop(ULONG)`

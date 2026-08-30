@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <setjmp.h>
+#include <string.h>
 #include <windows.h>
 
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_execution.h"
@@ -34,6 +35,18 @@ extern void sas_init(PHY_ADDR size);
 extern void sas_term(void);
 extern void c_sas_store(IU32 address, IU8 value);
 extern IU8 c_sas_hw_at(IU32 address);
+extern IU16 c_sas_w_at(IU32 address);
+extern IU32 c_sas_dw_at(IU32 address);
+extern void c_sas_storedw(IU32 address, IU32 value);
+extern void c_sas_loads(IU32 source, IU8 *destination, IU32 length);
+extern void c_sas_stores(IU32 destination, IU8 *source, IU32 length);
+extern void c_sas_move_bytes_forward(IU32 source, IU32 destination,
+    IU32 length);
+extern void c_sas_fills(IU32 destination, IU8 value, IU32 length);
+extern void c_sas_fillsw(IU32 destination, IU16 value, IU32 length);
+extern IU32 c_sas_memory_size(void);
+extern void c_sas_connect_memory(IU32 low, IU32 high, SAS_MEM_TYPE type);
+extern SAS_MEM_TYPE c_sas_memory_type(IU32 address);
 extern IU8 *c_GetPhyAdd(IU32 address);
 extern void c_cpu_init(void);
 extern uint16_t c_getIP(void);
@@ -88,6 +101,54 @@ int main(void)
         fputs("selected original SAS vector did not dispatch RAM access\n", stderr);
         sas_term();
         return 1;
+    }
+    {
+        IU8 source_bytes[4] = { UINT8_C(0x19), UINT8_C(0x27),
+            UINT8_C(0x35), UINT8_C(0x43) };
+        IU8 loaded_bytes[4] = { 0u, 0u, 0u, 0u };
+
+        /* This is the original CCPU SAS RAM algorithm, not a controller,
+         * A20, EMS or external physical-page test. */
+        if (c_sas_memory_size() != UINT32_C(0x00200000) ||
+            c_sas_memory_type(UINT32_C(0x00000123)) != SAS_RAM) {
+            fputs("original SAS RAM size/type contract was not installed\n", stderr);
+            sas_term();
+            return 1;
+        }
+        c_sas_stores(UINT32_C(0x00000200), source_bytes,
+            (IU32)sizeof(source_bytes));
+        c_sas_loads(UINT32_C(0x00000200), loaded_bytes,
+            (IU32)sizeof(loaded_bytes));
+        if (memcmp(source_bytes, loaded_bytes, sizeof(source_bytes)) != 0) {
+            fputs("original SAS string load/store contract failed\n", stderr);
+            sas_term();
+            return 1;
+        }
+        c_sas_move_bytes_forward(UINT32_C(0x00000200), UINT32_C(0x00000210),
+            (IU32)sizeof(source_bytes));
+        c_sas_fills(UINT32_C(0x00000220), UINT8_C(0x5c), UINT32_C(3));
+        c_sas_fillsw(UINT32_C(0x00000224), UINT16_C(0x9a7e), UINT32_C(2));
+        c_sas_storedw(UINT32_C(0x00000230), UINT32_C(0xd4c3b2a1));
+        if (c_sas_hw_at(UINT32_C(0x00000210)) != UINT8_C(0x19) ||
+            c_sas_hw_at(UINT32_C(0x00000213)) != UINT8_C(0x43) ||
+            c_sas_hw_at(UINT32_C(0x00000220)) != UINT8_C(0x5c) ||
+            c_sas_hw_at(UINT32_C(0x00000222)) != UINT8_C(0x5c) ||
+            c_sas_w_at(UINT32_C(0x00000224)) != UINT16_C(0x9a7e) ||
+            c_sas_w_at(UINT32_C(0x00000226)) != UINT16_C(0x9a7e) ||
+            c_sas_dw_at(UINT32_C(0x00000230)) != UINT32_C(0xd4c3b2a1)) {
+            fputs("original SAS scalar/move/fill RAM contract failed\n", stderr);
+            sas_term();
+            return 1;
+        }
+        c_sas_connect_memory(UINT32_C(0x00000300), UINT32_C(0x000003ff),
+            SAS_ROM);
+        if (c_sas_memory_type(UINT32_C(0x00000300)) != SAS_ROM) {
+            fputs("original SAS memory-type transition failed\n", stderr);
+            sas_term();
+            return 1;
+        }
+        c_sas_connect_memory(UINT32_C(0x00000300), UINT32_C(0x000003ff),
+            SAS_RAM);
     }
     {
         session physical_owner;
