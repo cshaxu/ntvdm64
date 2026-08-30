@@ -4,27 +4,27 @@
 
 ## Active Packet
 
-**Active: M0 T310 S31**
+**Active: M0 T310 S32**
 
-### M0 T310 S31 — host-BOP binding
+### M0 T310 S32 — other-machine source
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T310 S31; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | S30 closed selected host-VDD bindings. S31 is the next sequential owner-contract cluster. |
-| Objective | Recover only `SPC-HOST-BOP-BINDING`: original SoftPC host-BOP call contracts for Win32/x86 CCPU40. |
-| Non-goals | No BOP service semantic expansion, guest trace-selected repair, kernel VDM or MONITOR import, Bochs fallback, or a hand-written BOP dispatcher. |
-| Reference Baseline | Closed S30 VDD bindings; original reached SoftPC BOP declaration, definition and caller forms. |
-| Files And ABI Surface | Original selected host-BOP caller bodies, declaration carriers and exact adapter boundary only where an original external binding is unavailable. |
+| Identifier Mode | M0 T310 S32; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | S31 closed selected host-BOP binding carriers. S32 is the next sequential owner-contract cluster. |
+| Objective | Recover only `SPC-OTHER-MACHINE-SOURCE`: selected original SoftPC machine source not owned by the preceding controller, platform, VDD or BOP clusters. |
+| Non-goals | No BOP service semantic expansion, guest trace-selected repair, kernel VDM or MONITOR import, Bochs fallback, or a hand-written machine substitute. |
+| Reference Baseline | Closed S31 host-BOP carrier boundary; original selected host-source manifest and existing coverage ledger. |
+| Files And ABI Surface | Original selected residual machine source bodies, declaration carriers and exact adapter boundary only where an original external binding is unavailable. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island, CPU-profile and source-recovery rules; approved T310 S8 plan and coverage ledger. |
-| Verification | Formal MSVC Win32/x86 `/MT` Ninja selected host-BOP archive and forced-link review; original declaration/definition/caller comparison; focused source-shaped result or exact unavailable result. x64 compatibility is outside the active worklist. |
-| Expected Markers | Preserved original host-BOP call order; no raw host identity crosses a fixed-width ABI; no raw MONITOR/Bochs/kernel-VDM route or hand-written BOP replacement. |
+| Verification | Formal MSVC Win32/x86 `/MT` Ninja selected residual-machine archive and forced-link review; original declaration/definition/caller comparison; focused source-shaped result or exact unavailable result. x64 compatibility is outside the active worklist. |
+| Expected Markers | Preserved original machine call order; no raw host identity crosses a fixed-width ABI; no raw MONITOR/Bochs/kernel-VDM route or hand-written machine replacement. |
 | Asset Needs | Exact selected host sources, source manifests, session ownership rules and MSVC Build Tools/Ninja. |
 | Reporting Requirements | Per cluster: original roots, declaration/definition/caller relationship, recovery rung, selected x86 CCPU40 result and no-Bochs/MONITOR proof. |
-| Stop Conditions | A selected host-BOP endpoint requires an unregistered semantic divergence; recovery selects kernel VDM; or a finding belongs to S32 or later. |
-| Exit Criteria | Every selected host-BOP declaration, definition, initializer and reached caller has one direct, binding-only, private-overlay or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and focused evidence does not select new S31 owner work. Integrated machine behavior remains mandatory S49 validation. |
+| Stop Conditions | A selected residual machine endpoint requires an unregistered semantic divergence; recovery selects kernel VDM; or a finding belongs to S33 or later. |
+| Exit Criteria | Every selected residual-machine declaration, definition, initializer and reached caller has one direct, binding-only, private-overlay or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and focused evidence does not select new S32 owner work. Integrated machine behavior remains mandatory S49 validation. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
-| Similar-Issue Sweep | Every selected host-BOP declaration, reached caller, host handle/address form, selected compilation condition, and private-Console/kernel-VDM and `src.old` negative scan. |
+| Similar-Issue Sweep | Every selected residual-machine declaration, reached caller, host handle/address form, selected compilation condition, and private-Console/kernel-VDM and `src.old` negative scan. |
 
 **T310 S29 P1:** the original two-file OEM/Unicode support package is selected
 directly, preserving PIF `ExpandEnvironmentStringsOem` and related host-file
@@ -40,6 +40,11 @@ dispositions. See [closure](history/m0-t310-s29-host-configuration-bindings-clos
 contracts formally link for x86 CCPU40.  The reached SFT/JFT shadow uses the
 session's only host-resource mapping-manager instance; no VDD product shell or
 machine-runtime claim is made. See [closure](history/m0-t310-s30-host-vdd-binding-closure-20260830.md).
+
+**T310 S31 closed:** original host-BOP carriers remain selected and every
+cross-owner selector has a named package disposition.  The host table stays
+source-defined empty, with no project dispatcher introduced. See
+[closure](history/m0-t310-s31-host-bop-binding-closure-20260830.md).
 
 **T310 S28 P1:** `RegisterConsoleVDM` now has its complete original ABI and
 an explicit unavailable direction instead of an unresolved private Console
