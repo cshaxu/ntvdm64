@@ -24,6 +24,34 @@ VOID EDL_fast_bop(ULONG immed)
 	/* Whatever this it... Better break on it and see if it gets used */
 	__debugbreak();
 }
+#elif defined(MVDM_SOFTPC_PATCH_CCPU_VECTOR_DEFAULTS_ONLY)
+/* DIVERGENCE(MVDM-SOFTPC-PATCH-005): the selected CCPU's generic SasVector
+ * retains two MIPS/PPC vector tail slots even though no selected x86 CCPU
+ * caller reaches them.  Retain the imported patch's immediate debug-break
+ * failure direction, but use the generated vector's exact IUH width so the
+ * x86 and x64 table call ABI is identical.  This object deliberately exports
+ * only these original defaults and EDL_fast_bop; it does not activate the
+ * patch's unrelated placeholder hooks. */
+VOID EDL_fast_bop(ULONG immed)
+{
+	/* Whatever this it... Better break on it and see if it gets used */
+	__debugbreak();
+}
+
+IU32 c_VirtualiseInstruction(IU32 eipInRom, IUH size,
+                             IU32 linearAddrOrPort, IU32 dataIn)
+{
+	/* Hopefully this is never called... */
+	__debugbreak();
+	return 0;
+}
+
+IU8 *c_sas_touch(IU32 addr, IU32 length)
+{
+	/* Hopefully this is never called... */
+	__debugbreak();
+	return NULL;
+}
 #else
 
 #if !defined(PROD) && defined(CPU_40_STYLE) 
@@ -62,14 +90,16 @@ VOID EDL_fast_bop(ULONG immed)
 	__debugbreak();
 }
 
-ULONG c_VirtualiseInstruction (ULONG eipInRom, UINT size, ULONG linearAddrOrPort, ULONG dataIn)
+/* DIVERGENCE(MVDM-SOFTPC-PATCH-005): the imported placeholder must match the
+ * generated CCPU vector's native-word size argument on both host widths. */
+IU32 c_VirtualiseInstruction (IU32 eipInRom, IUH size, IU32 linearAddrOrPort, IU32 dataIn)
 {
 	// Hopefully this is never called...
 	__debugbreak();
 	return 0;
 }
 
-PBYTE c_sas_touch (ULONG addr, ULONG length)
+IU8 *c_sas_touch (IU32 addr, IU32 length)
 {
 	// Hopefully this is never called...
 	__debugbreak();
