@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3343 |
+| Documentation records | 3345 |
 | --- | --- |
-| Generated UTC | 2026-08-30T14:43:05Z |
+| Generated UTC | 2026-08-30T14:49:29Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | c9c54a0df8fbd3115c06ef7ff15d80d3c32d0dfd376eba8e70b9f888334e01e3 |
+| STATUS.md | principal control document | 8e7f6c77c3f93d786f4a6be6d17f23659cde4815ee78cb304c2271e6141f2840 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -755,6 +755,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s28-p3-host-platform-owner-disposition-001.md | indexed supporting material | 6001aaa8b67f656a3a12490f8e471839e89d17793e160612e729606da98cedff |
 | etc/evidence/m0-t310-s29-p1-host-configuration-source-assembly-001.md | indexed supporting material | 044905b5973a2db8aa99a172c741b72ee134ad5eaf863ef8f61ebe4736f570be |
 | etc/evidence/m0-t310-s3-selected-backend-lifecycle-001.md | indexed supporting material | 6a02b307d35aebb266ea589193f39072e2c8e009b9b0b999bf636829c9cca2ce |
+| etc/evidence/m0-t310-s30-p1-host-vdd-binding-closure-001.md | indexed supporting material | 081311591116aee8970d9a2e96c9af07291400e24750afbe743033197185829a |
 | etc/evidence/m0-t310-s4-original-machine-family-audit-001.md | indexed supporting material | 9ab32c765a5e3853bc1ec4226da5680c2142d04a53fca644da8a59cd57ae6f50 |
 | etc/evidence/m0-t310-s4-p2-softpc-executable-source-reclassification-001.md | indexed supporting material | f2032226a03c8b2f74ec839061321c1b484bf7d428d5e4603d7d64da67d09890 |
 | etc/evidence/m0-t310-s4-p3-original-init-group-build-001.md | indexed supporting material | c371fa076dc141fc9632a56da41a7d002efd6dbd04922e1ceebc05f6db8a1c3b |
@@ -3250,6 +3251,7 @@ content-divergent entries.
 | history/m0-t310-s27-host-video-bindings-closure-20260830.md | closed task history | 0a5c42c9ce09a42be9ac13d86eaf9df4ec31bf7ca48e07681d7ecd07844ab30f |
 | history/m0-t310-s28-host-platform-bindings-closure-20260830.md | closed task history | 158dceaf6acb28e83f5c61d4914258e32cce84e8bd70ab26a732527f2a196816 |
 | history/m0-t310-s29-host-configuration-bindings-closure-20260830.md | closed task history | b9728350f119202250c0637d6af47b08e188b41d61f8c95079dc5e60aad42f75 |
+| history/m0-t310-s30-host-vdd-binding-closure-20260830.md | closed task history | 5b44ffef582feddb94eab41e4b47d3c3c84cf2a47c75422867e5f4b1a61cf32b |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
