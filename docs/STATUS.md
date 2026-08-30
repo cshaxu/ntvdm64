@@ -55,6 +55,11 @@ was deleted and the live session backend test now asserts the actual
 SoftPC-only contract.  This is still formal-composition evidence; bounded
 original lifecycle behavior remains S2 work.  See the [P4 record](etc/evidence/m0-t313-s2-p4-formal-candidate-and-retired-test-cleanup-001.md).
 
+**T313 S2 P5:** an encountered `nt_msscs.c` startup definition has returned to
+its original implicit-result spelling; only the necessary support-call
+declaration remains.  The affected selected host-root archive rebuilt cleanly
+with the original warning still visible.  See the [P5 record](etc/evidence/m0-t313-s2-p5-mvdm-host-startup-mirror-cleanup-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |

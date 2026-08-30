@@ -107,10 +107,7 @@ void scs_init(int argc, char **argv)
 //
 
 
-/* DIVERGENCE(MVDM-HOST-DIV-083): the original body has several status
- * returns but omits its explicit result type. Preserve its native int result
- * contract so x86/x64 callers retain the same startup sequencing. */
-int InitialiseDosEmulation(int argc, char **argv)
+InitialiseDosEmulation(int argc, char **argv)
 {
     HANDLE   hFile;
     DWORD    FileSize;
