@@ -1,0 +1,10 @@
+id	definition-initializer-and-callers	disposition	justification
+S19-001	host_key_down_fn_ptr; AT_kbd_init assigns host_key_down	original-direct	Original callback slot and assignment remain unchanged; selected x86 object rebuild succeeds.
+S19-002	host_key_up_fn_ptr; AT_kbd_init assigns host_key_up	original-direct	Original callback slot and assignment remain unchanged; selected x86 object rebuild succeeds.
+S19-003	do_key_repeats_fn_ptr; historical non-NTVDM branch assignment	original-profile-excluded	Selected NTVDM controller initialization does not depend on a new repeat provider; no synthetic callback is added.
+S19-004	keybd_io INT15 -> BIOS[0x15]; BIOS[] initializer in base/bios/bios.c	binding-only-original	Original firmware table is S16-owned and source-composed; keyboard preserves IVT compare, handler call and fallback host_simulate ordering.
+S19-005	mouse_function[0..52] initializer; mouse_io dispatcher validates range then indirect-calls	original-direct	Original 53-entry ordering and range failure branch remain intact; no per-function wrapper or replacement dispatch is admitted.
+S19-006	mouse_set_range_x/y -> host_x_range/y_range; paired definitions in nt_mouse.c	minimal-mirror-correction	Retain MVDM-HOST-DIV-058: exact MOUSE_SCALAR pointer types match both source operands and host definitions while preserving four arguments and behavior.
+S19-007	keybd_io kb_setup_vectors fixed guest addresses -> Start_of_M_area private backing	minimal-mirror-correction	Retain MVDM-HOST-DIV-059: effective_addr remains numeric guest location and selected SoftPC backing stays private native state; no external identity/token exists.
+S19-008	nt_keycd key translation and RtlOemToUnicodeN	deferred-host-binding	ADAPTER-WIN32-027 preserves the original conversion shape; console-input acquisition is S20-owned.
+S19-009	nt_mouse host console/fullscreen endpoints	deferred-host-binding	Original mouse controller calls remain source-composed; public console/fullscreen behavior is S20/S27-owned.

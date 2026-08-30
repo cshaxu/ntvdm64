@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3307 |
+| Documentation records | 3309 |
 | --- | --- |
-| Generated UTC | 2026-08-30T07:38:13Z |
+| Generated UTC | 2026-08-30T07:40:32Z |
 
 ## Entries
 
@@ -530,6 +530,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s19-p1-input-controller-contract-boundary-001.md | indexed supporting material | d0b9120e51e1715363726a0151fd0f1db167408326537fb0050e09e13f079ada |
 | etc/evidence/m0-t310-s19-p1-input-controller-contract-boundary-001.tsv | indexed supporting material | d1be877f61f877d388f1d7f1eef0351a47292fe947161a3ab2fa7bb18548e049 |
 | etc/evidence/m0-t310-s19-p2-input-controller-x86-assembly-001.md | indexed supporting material | 714ec060b0b7d8d8453b3cabe6e2fa026397eeeb42fc43245fc17ea5dfd80afa |
+| etc/evidence/m0-t310-s19-p3-input-controller-contract-disposition-001.tsv | indexed supporting material | fbbb02d75688e5e356a6a0179fef4cfe5f174613283fbc0cf4a1803f6441e170 |
 | etc/evidence/m0-t310-s1-softpc-selectable-backend-audit-001.md | indexed supporting material | a39180a64d82519752ea200a064d1595a0c892d1e94758a18f77bf0af3b5cb40 |
 | etc/evidence/m0-t310-s2-original-softpc-candidate-build-001.md | indexed supporting material | 398a96ff9360cc89521289b35ef8e7f11693f22e8fbac97e1ae735c94d8819b4 |
 | etc/evidence/m0-t310-s2-original-softpc-forced-link-audit-001.md | indexed supporting material | 194795bbc3ac0871d9716229aec9c276d44ef84cd484474df8da3a85300692d7 |
@@ -3034,6 +3035,7 @@ content-divergent entries.
 | history/m0-t310-s16-bios-firmware-bindings-closure-20260830.md | closed task history | be25841197fda18b358e68df2300f0a99d0594e0798f59f2f218905762f62369 |
 | history/m0-t310-s17-system-controller-callbacks-closure-20260830.md | closed task history | 72b71fa930dbdb0ad613244a226821835e72f4f450af8804e303f489474a6bbf |
 | history/m0-t310-s18-host-system-interrupt-bindings-closure-20260830.md | closed task history | e0f61f76297de0210de81dda868c41314017cc660e8c6d841132203ca9f55761 |
+| history/m0-t310-s19-input-controller-callbacks-closure-20260830.md | closed task history | fac40832c7b29e3c3b32efef63e8b506083342046079247e59c433f217a3be9b |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -3321,7 +3323,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 545e673c1f710c92fd8031a56f4887f8cacefa9206eb1d6cd8d312401bf7c6d0 |
+| STATUS.md | principal control document | 98f9679328d926107a2210d849554d6161197ee68ac9ffe89778061d41f83b33 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
