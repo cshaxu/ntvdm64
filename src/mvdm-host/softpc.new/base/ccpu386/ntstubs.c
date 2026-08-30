@@ -23,7 +23,10 @@ struct CpuVector Cpu;
 //struct SasVector Sas;
 struct VideoVector Video;
 
-a3_cpu_interrupt (int errupt, IU16 numint)
+/* DIVERGENCE(MVDM-HOST-DIV-129): this original dispatcher has no result
+ * path.  State its existing void ABI so modern x86/x64 callers do not infer
+ * an int result; switch order and interrupt delivery remain unchanged. */
+VOID a3_cpu_interrupt (int errupt, IU16 numint)
 {
     switch(errupt)
     {

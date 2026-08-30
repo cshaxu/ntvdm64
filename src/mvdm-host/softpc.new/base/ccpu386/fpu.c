@@ -5858,7 +5858,11 @@ GLOBAL	void NpxStackRegAsString IFN3(FPSTACKENTRY *, fpStPtr, char *, buf, IU32,
 /* this one is only ever used in trace.c and only if pure CCPU */
 GLOBAL char * getNpxStackReg IFN2(IU32, reg_num, char *, buffer)
 {
-	reg_num += TOSPtr - FPUStackBase;
+	/* DIVERGENCE(MVDM-HOST-DIV-130): TOSPtr and FPUStackBase delimit the
+	 * original eight-entry private FPU stack, so their pointer difference is
+	 * a bounded stack index, not a host identity.  Make the retained IU32
+	 * register arithmetic explicit on both host widths. */
+	reg_num += (IU32)(TOSPtr - FPUStackBase);
 	NpxStackRegAsString (&FPUStackBase[reg_num&7], buffer, 12);
 	return buffer;
 }

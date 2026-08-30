@@ -4814,8 +4814,10 @@ npx_funimp,
 npx_funimp
 };
 
-VOID ZFRSRVD(npx_instr)
-IU32 npx_instr;
+/* DIVERGENCE(MVDM-HOST-DIV-131): preserve the original IU32 instruction
+ * input and body, while replacing its K&R declarator with the same explicit
+ * callable ABI for modern x86/x64 C compilation. */
+VOID ZFRSRVD(IU32 npx_instr)
 {
 	if (!NPX_PROT_MODE) {
 		NpxInstr = npx_instr;

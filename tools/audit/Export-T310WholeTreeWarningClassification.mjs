@@ -14,8 +14,21 @@ const output = path.resolve(root, process.argv[4] ??
   'docs/etc/operations/m0-t310-s8-p4-whole-tree-warning-x86-x64-classification.tsv');
 
 function splitTsv(line) { return line.split('\t'); }
-function classificationFor(warning, architectures) {
+function classificationFor(warning, architectures, sourcePath, message) {
   const x64Only = architectures.size === 1 && architectures.has('x64');
+  // This is not a warning suppression.  The complete CCPU executor contract
+  // has been reread: c_main's operand union stores an Intel IU32 while the
+  // original instruction bodies consume the same 32 bits as signed ISM32.
+  // On both supported MSVC hosts the two scalar representations are 32 bits;
+  // no native pointer, handle, callback or cross-component identity crosses
+  // these calls.  Keep the diagnostic in the ledger but exclude this exact,
+  // source-proven non-width contract from the repair worklist.
+  if (warning === 'C4057' &&
+      sourcePath === 'src/mvdm-host/softpc.new/base/ccpu386/c_main.c' &&
+      message.includes("ISM32 *")) {
+    return ['not-x86-x64-fixed-width-ccpu-operand-contract',
+      'complete CCPU operand-contract reading proves this signed/unsigned 32-bit Intel operand view does not cross a host-width ABI boundary'];
+  }
   if (new Set(['C4311', 'C4312', 'C4313']).has(warning)) {
     return ['must-repair-width-or-pointer-abi',
       'pointer/integer or variadic-width conversion; read the exact original value class and use a same-shaped native-width binding or the mapping manager'];
@@ -81,7 +94,8 @@ for (const { row, architectures, sourceRecords } of [...grouped.values()].sort((
     Number(a.row[index.source_line]) - Number(b.row[index.source_line]) ||
     a.row[index.warning].localeCompare(b.row[index.warning]);
 })) {
-  const [disposition, nextRead] = classificationFor(row[index.warning], architectures);
+  const [disposition, nextRead] = classificationFor(
+    row[index.warning], architectures, row[index.source_path], row[index.message]);
   const classified = [
     `T310-S8-P4-CLASS-${String(++serial).padStart(6, '0')}`,
     row[index.source_path], row[index.source_line], row[index.warning], row[index.message],

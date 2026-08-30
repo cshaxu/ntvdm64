@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stdio.h>
+#include <setjmp.h>
 #include <windows.h>
 
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_execution.h"
@@ -32,6 +33,7 @@ extern void load_sw_cpu_access_functions(void);
 extern void (*host_simulate_func)(void);
 extern void host_start_cpu(void);
 extern void host_simulate(void);
+extern jmp_buf *ccpu386ThrdExptnPtr(void);
 extern NTSTATUS VdmAddVirtualMemory(ULONG host_address, ULONG size,
     PULONG intel_address);
 extern NTSTATUS VdmRemoveVirtualMemory(ULONG intel_address);
@@ -43,6 +45,13 @@ int main(void)
      * c_cpu_unsimulate(), which returns through the original CCPU TLS
      * simulation frame. */
     SetUnhandledExceptionFilter(fixture_unhandled_exception);
+    /* Before SAS/CCPU initialization there is no TLS simulation context.
+     * The original pointer-returning exception-frame API must decline this
+     * state with a typed null result, never an undefined native pointer. */
+    if (ccpu386ThrdExptnPtr() != NULL) {
+        fputs("exception-frame accessor accepted an uninitialized TLS context\n", stderr);
+        return 1;
+    }
     fputs("sas-init\n", stderr);
     sas_init(UINT32_C(0x00200000));
     {

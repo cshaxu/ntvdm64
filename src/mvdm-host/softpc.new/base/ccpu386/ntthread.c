@@ -223,13 +223,18 @@ jmp_buf *ccpu386ThrdExptnPtr()
     if (ccpuSimId == BADID)
     {
         fprintf(stderr, "ccpu386ThrdExptnPtr id:%#x called with Bad Id\n", GetCurrentThreadId());
-        return ;
+        /* DIVERGENCE(MVDM-HOST-DIV-128): this pointer-returning helper used
+         * a bare return on its two original failure paths.  Match the
+         * same-package ccpu386SimulatePtr failure contract: retain the
+         * diagnostic and failure branch, but return a typed null jmp frame. */
+        return ((jmp_buf *)0);
     }
     simstack = (ThreadSimBufPtr)TlsGetValue(ccpuSimId);
     if (simstack == (ThreadSimBufPtr)0)
     {
         fprintf(stderr, "ccpu386ThrdExptnPtr id:%#x TlsGetValue failed (err:%#x)\n", GetCurrentThreadId(), GetLastError());
-        return ;
+        /* DIVERGENCE(MVDM-HOST-DIV-128): see the BADID failure branch above. */
+        return ((jmp_buf *)0);
     }
     
     return(&simstack->excepts[simstack->level - 1]);

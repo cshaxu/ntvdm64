@@ -88,3 +88,30 @@ assertions again observed the `0x5A` guest-RAM store and the x87 `1.0f`
 four-byte result at `0x8004`.  This is the focused positive behavior result
 for `SPC-CCPU-EXECUTOR-DISPATCH`; it does not close the later access-table,
 SAS-vector, device-controller, firmware, or whole-machine packets.
+
+## Exception-frame failure contract (2026-08-29)
+
+The original `ccpu386ThrdExptnPtr()` returns `jmp_buf *`, but its `BADID` and
+missing-TLS branches used a bare `return`.  That leaves a caller with an
+undefined native pointer.  The direct sibling `ccpu386SimulatePtr()` already
+establishes the source-family failure direction: log the same class of
+diagnostic and return a typed null `jmp_buf *`.
+
+`MVDM-HOST-DIV-128` changes only those two failure returns to the typed null
+form.  It retains the existing diagnostics, TLS lookup, normal `excepts[]`
+selection, exception nesting, and `longjmp` control flow.  The bounded CCPU
+fixture now calls the accessor before initialization and asserts a null result;
+it then performs the existing RAM/x87/re-entry sequence.  Fresh MSVC `/MT`
+x86 and x64 fixture builds and runs both returned zero.  The full-tree ledger
+will be cold-refreshed after the remaining S8 executor-contract batch, rather
+than falsely treating this focused result as a whole-tree baseline.
+
+The same reread also found three declaration-only, source-shaped executor
+contracts.  `MVDM-HOST-DIV-129` publishes `a3_cpu_interrupt` as its existing
+`VOID(int, IU16)` form; `MVDM-HOST-DIV-130` narrows the difference of the
+private eight-entry FPU stack only at its original fixed-width register-index
+boundary; and `MVDM-HOST-DIV-131` gives the reserved-NPX dispatcher its
+existing `VOID ZFRSRVD(IU32)` prototype.  None creates an adapter, a mapping
+token, or a new machine behavior.  They remain covered by the same bounded
+x86/x64 executor fixture and await the next cold full-tree refresh for their
+compiler-ledger confirmation.
