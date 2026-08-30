@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3314 |
+| Documentation records | 3316 |
 | --- | --- |
-| Generated UTC | 2026-08-30T08:00:44Z |
+| Generated UTC | 2026-08-30T08:03:52Z |
 
 ## Entries
 
@@ -536,6 +536,8 @@ content-divergent entries.
 | etc/evidence/m0-t310-s20-p2-host-input-contract-ledger-001.tsv | indexed supporting material | aa4a2f39181008766f798e9923c57c9e4581f4c507c22b9b60e09cefbbe2b537 |
 | etc/evidence/m0-t310-s20-p2-host-input-contract-review-001.md | indexed supporting material | e1cd4e67309e52d2462f6b4cf5fca5ac007113a3cad7d58e967d0a705cd4590a |
 | etc/evidence/m0-t310-s20-p3-console-input-contract-result-001.md | indexed supporting material | f0ec475ff57d2481f70ec7e17f546d9ed9950643a44b1865821c3be0ec06ef16 |
+| etc/evidence/m0-t310-s21-p1-storage-controller-boundary-ledger-001.tsv | indexed supporting material | 825557a80e3b6d1b0b6e000cce2385a88d64bc368e3e93d749b7533973ed4c4e |
+| etc/evidence/m0-t310-s21-p1-storage-controller-source-boundary-001.md | indexed supporting material | 42dc62c29cb475ef88eae32cb3727a9ab7648d34f53ad7a5e6c6ee7db977f394 |
 | etc/evidence/m0-t310-s2-original-softpc-candidate-build-001.md | indexed supporting material | 398a96ff9360cc89521289b35ef8e7f11693f22e8fbac97e1ae735c94d8819b4 |
 | etc/evidence/m0-t310-s2-original-softpc-forced-link-audit-001.md | indexed supporting material | 194795bbc3ac0871d9716229aec9c276d44ef84cd484474df8da3a85300692d7 |
 | etc/evidence/m0-t310-s3-selected-backend-lifecycle-001.md | indexed supporting material | 6a02b307d35aebb266ea589193f39072e2c8e009b9b0b999bf636829c9cca2ce |
