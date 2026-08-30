@@ -90,6 +90,14 @@ reset source contracts have bounded evidence plus fresh formal x86 candidate
 and forced-link audit. Controller endpoint behavior transfers only to S3. See
 the [closure](history/m0-t313-s2-cpu-memory-firmware-reset-closure-20260830.md).
 
+**T313 S3 P1:** the original controller cohort is now re-established under
+the selected x86 CCPU40 build profile: a fresh 403-edge formal candidate, the
+original heartbeat suspend/resume witness and original ICA-lock witness all
+pass.  The reached historical fixture graphs no longer define CPU30; their
+only additions are current GDP generation and already-registered overlay
+include/link bindings.  Timer-to-PIC/DMA/input delivery remains S3 work. See
+the [P1 record](etc/evidence/m0-t313-s3-p1-controller-source-assembly-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |
