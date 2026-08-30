@@ -88,6 +88,32 @@ BOOL WINAPI RegisterConsoleVDM(DWORD flags, HANDLE start_event,
     return FALSE;
 }
 
+/* DIVERGENCE(ADAPTER-WIN32-033): these NT4 Console Server calls carried
+ * private per-console command-range and shortcut-reservation state. Modern
+ * public Console APIs expose neither operation. Preserve their source-facing
+ * forms and explicitly decline; never fabricate a system menu or globally
+ * intercept host keystrokes. */
+HMENU WINAPI ConsoleMenuControl(HANDLE output, UINT command_low,
+                                UINT command_high)
+{
+    (void)output;
+    (void)command_low;
+    (void)command_high;
+    SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
+    return NULL;
+}
+
+BOOL WINAPI SetConsoleKeyShortcuts(BOOL set, BYTE reserve_keys,
+                                   LPAPPKEY app_keys, DWORD key_count)
+{
+    (void)set;
+    (void)reserve_keys;
+    (void)app_keys;
+    (void)key_count;
+    SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
+    return FALSE;
+}
+
 HANDLE GetConsoleInputWaitHandle(VOID)
 {
     /* DIVERGENCE(ADAPTER-WIN32-030): NT4 supplied a Console Server wait

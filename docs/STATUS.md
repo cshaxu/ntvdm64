@@ -24,7 +24,13 @@
 | Stop Conditions | A selected configuration endpoint requires an unregistered semantic divergence; recovery selects private Console Server/kernel VDM; or a finding belongs to S30 or later. |
 | Exit Criteria | Every selected configuration declaration, definition, initializer and reached caller has one direct, binding-only, private-overlay or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and focused configuration evidence does not select new S29 owner work. Integrated machine behavior remains mandatory S49 validation. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
-| Similar-Issue Sweep | Every selected host-platform callback, process/resource endpoint, reached caller, host handle/address form, selected compilation condition, and MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
+| Similar-Issue Sweep | Every selected configuration/PIF callback, reached caller, host handle/address form, selected compilation condition, and private-Console/kernel-VDM and `src.old` negative scan. |
+
+**T310 S29 P1:** the original two-file OEM/Unicode support package is selected
+directly, preserving PIF `ExpandEnvironmentStringsOem` and related host-file
+contracts. Private console shortcut/menu APIs retain their call shapes and
+explicit unavailable results. Fresh 380-edge x86 CCPU40 assembly evidence is
+in [P1](etc/evidence/m0-t310-s29-p1-host-configuration-source-assembly-001.md).
 
 **T310 S28 P1:** `RegisterConsoleVDM` now has its complete original ABI and
 an explicit unavailable direction instead of an unresolved private Console
