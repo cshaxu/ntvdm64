@@ -51,8 +51,6 @@ static int current_segment_base(IU16 selector, IU32 *base_out)
 int mvdm_softpc_effective_address(IU16 selector, IU32 offset, IU32 *address_out)
 {
     IU32 base;
-    IU32 descriptor_address;
-    CPU_DESCR descriptor;
 
     if (address_out == 0) return 0;
     if ((c_getMSW() & CCPU_MSW_PE) == 0 ||
@@ -60,13 +58,11 @@ int mvdm_softpc_effective_address(IU16 selector, IU32 offset, IU32 *address_out)
         *address_out = ((IU32)selector << 4) + offset;
         return 1;
     }
-    if (!current_segment_base(selector, &base)) {
-        /* Preserve the original CCPU descriptor-table algorithm rather than
-         * reintroducing Sim32GetVDMPointer or a monitor pointer alias. */
-        if (selector_outside_table(selector, &descriptor_address) != 0) return 0;
-        read_descriptor_linear(descriptor_address, &descriptor);
-        base = descriptor.base;
-    }
+    /* The selected CCPU40 interface exports loaded segment-cache state, not
+     * the retired CPU30 monitor descriptor-table carrier.  Unknown selector
+     * lookup remains a checked failure until its original CPU40 provider is
+     * recovered; no host-pointer or synthetic descriptor fallback is valid. */
+    if (!current_segment_base(selector, &base)) return 0;
     *address_out = base + offset;
     return 1;
 }

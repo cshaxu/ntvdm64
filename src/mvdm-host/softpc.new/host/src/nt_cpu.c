@@ -98,12 +98,13 @@ void	host_start_cpu()
 	for recursive CPU calls from the Insignia BIOS
 */
 /* DIVERGENCE(MVDM-HOST-DIV-150): CPU_40_STYLE selects the original
- * host_cpu.h vector macro `host_simulate()` and nt_cprgs.c initializes
- * host_simulate_func to c_cpu_simulate.  The historical direct function
- * below therefore collides with that macro in the selected CCPU build and
- * is not a callable CPU40 entrypoint.  Keep the source body intact for
- * non-CCPU profiles, while the CPU40 profile uses its original vector. */
-#ifndef CCPU
+ * host_cpu.h vector macro `host_simulate()` for in-header callers, while
+ * original DEM/DPMI and BIOS consumers retain an external function import.
+ * Undefine the local macro only while defining that public wrapper; it keeps
+ * the original c_cpu_simulate execution body and provides no second loop. */
+#ifdef CCPU
+#undef host_simulate
+#endif
 void	host_simulate()
 {
     ASSERT(IcaLock.OwningThread != NtCurrentTeb()->ClientId.UniqueThread);
@@ -128,7 +129,18 @@ void	host_simulate()
 
     ASSERT(IcaLock.OwningThread != NtCurrentTeb()->ClientId.UniqueThread);
 }
-#endif /* !CCPU */
+
+/* DIVERGENCE(MVDM-HOST-DIV-153): BIOS BOP FE keeps the historical
+ * host_unsimulate public entry.  The selected CCPU40 implementation is the
+ * original c_cpu_unsimulate provider; publish the thin original-name bridge
+ * rather than inventing an alternate stop mechanism. */
+#ifdef CCPU
+extern void c_cpu_unsimulate(void);
+void host_unsimulate()
+{
+    c_cpu_unsimulate();
+}
+#endif /* CCPU */
 
 
 /*

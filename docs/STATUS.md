@@ -54,6 +54,14 @@ unmodified guest mirror, verifies the exact staged NTDOS/COMMAND artifact
 identities, and identifies original DEM `0x11`/`0x36`/`0x3C`, COMMAND `54:0B`,
 and CPU40 SoftPC transitions. No guest execution claim is made.
 
+**S2 P1:** selected CPU40 CCPU recursive simulation now preserves the original
+external `host_simulate` and BIOS `host_unsimulate` interfaces, while retaining
+the in-header CCPU vector.  The fresh formal archive completed 408 actions and
+the complete-member forced-link audit removed five reached CPU interfaces
+without inventing a loader or BOP provider.  The ten remaining unresolved
+whole-archive symbols are explicit nonlocal owner transfers; no NTDOS or child
+runtime claim is made.  See [P1 evidence](etc/evidence/m0-t318-s2-p1-cpu40-recursive-simulation-linkage-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
