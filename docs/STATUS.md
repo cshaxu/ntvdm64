@@ -166,6 +166,13 @@ bounded endpoints and immediate reached-mirror cleanup are recorded in the
 owns finite execution, controlled stop/teardown and the final reached-path
 purity reread.
 
+**T313 S5 P1:** the selected original `TerminateVDM -> terminate ->
+host_terminate` chain now transfers its original exit code through an
+app-owned session escape instead of calling `ExitProcess`.  The bounded
+original CCPU40 witness proves a completion code of 37 without process death;
+a fresh selected formal graph completes 404/404 with the reached `nt_reset.c`
+body.  See the [P1 record](etc/evidence/m0-t313-s5-p1-source-shaped-controlled-termination-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |

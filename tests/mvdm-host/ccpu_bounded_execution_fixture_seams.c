@@ -9,6 +9,8 @@
  */
 #include <stdint.h>
 
+#include "mvdm_softpc_termination.h"
+
 typedef void (*fixture_callback)(void);
 
 void rom_init(void) {}
@@ -67,7 +69,8 @@ void *Gdp;
  * link seam rather than pull startup/UI roots into the bounded CPU proof. */
 int mvdm_softpc_original_entry(int argc, char **argv)
 {
-    (void)argc;
     (void)argv;
+    if (argc == 37)
+        (void)mvdm_softpc_terminate_current_session(0u, 37u);
     return 1;
 }

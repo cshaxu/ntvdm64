@@ -48,6 +48,7 @@
 #include "nt_uis.h"
 #include "nt_com.h"
 #include "nt_reset.h"
+#include "mvdm_softpc_termination.h"
 #include "nt_event.h"
 #include "nt_fulsc.h"
 #include "nt_eoi.h"
@@ -330,12 +331,13 @@ void host_terminate(void)
 	CloseHandle(TrapperDump);
 #endif /* HUNTER */
 
-    if(VDMForWOW)
-	ExitVDM(VDMForWOW,(ULONG)-1);	  // Kill everything for WOW VDM
-    else
-	ExitVDM(FALSE,0);
-
-    ExitProcess(VdmExitCode);
+    /* DIVERGENCE(MVDM-HOST-DIV-147): the original NT4 product exits its
+     * dedicated ntvdm.exe after reporting through BaseSrv.  This in-process
+     * app composition retains the original host_terminate/TerminateVDM call
+     * order but transfers the same VDM outcome to the bound session escape,
+     * so a guest failure cannot terminate the application process. */
+    (void)mvdm_softpc_terminate_current_session((uint32_t)VDMForWOW,
+        (uint32_t)VdmExitCode);
 }
 
 

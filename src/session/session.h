@@ -1,6 +1,7 @@
 #ifndef SESSION_H
 #define SESSION_H
 
+#include <setjmp.h>
 #include <stdint.h>
 
 #include "mapping_manager.h"
@@ -73,7 +74,9 @@ typedef struct session {
     uint32_t mechanical_resume_status;
     uint32_t video_event_active;
     uint32_t teardown_count;
+    uint32_t termination_armed;
     volatile long binding_count;
+    jmp_buf termination_escape;
     session_teardown teardowns[SESSION_MAX_TEARDOWNS];
     mapping_manager guest_memory_mappings;
     mapping_manager host_resource_mappings;
@@ -133,6 +136,9 @@ int session_guest_memory_release(session *instance, guest_memory_lease *lease,
 int session_thread_bind(session *instance);
 int session_thread_unbind(session *instance);
 session *session_thread_current(void);
+int session_arm_termination_escape(session *instance);
+void session_disarm_termination_escape(session *instance);
+int session_terminate_current(uint32_t completion_code);
 
 #ifdef __cplusplus
 }

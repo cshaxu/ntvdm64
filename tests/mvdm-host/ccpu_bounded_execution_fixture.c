@@ -428,6 +428,28 @@ int main(void)
         sas_term();
         return 1;
     }
+
+    /* The original process entry is intentionally substituted only by this
+     * test seam.  Its source-shaped termination request must escape to the
+     * app/session boundary without calling ExitProcess. */
+    {
+        session owner;
+        char *argv[] = { NULL };
+        int exit_code = 0;
+        session_initialize(&owner, 2u);
+        if (!session_select_machine_backend(&owner,
+                SESSION_MACHINE_BACKEND_SOFTPC) || !session_activate(&owner) ||
+            !mvdm_softpc_execution_run_original_entry(&owner, 37, argv,
+                &exit_code) || owner.state != SESSION_STATE_COMPLETED ||
+            exit_code != 37 || owner.completion_code != 37u ||
+            session_mechanical_resume_status(&owner) !=
+                SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED ||
+            !session_dispose(&owner)) {
+            fputs("session-owned original termination did not return\n", stderr);
+            sas_term();
+            return 1;
+        }
+    }
     sas_term();
     return 0;
 }

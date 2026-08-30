@@ -20,11 +20,24 @@ int mvdm_softpc_execution_run_until_return(session *owner)
         did_bind = 1;
     }
 
+    if (!session_arm_termination_escape(owner)) {
+        if (did_bind) (void)session_thread_unbind(owner);
+        return 0;
+    }
+    if (setjmp(owner->termination_escape) != 0) {
+        session_record_mechanical_resume_status(owner,
+            SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED);
+        session_disarm_termination_escape(owner);
+        if (did_bind) (void)session_thread_unbind(owner);
+        return 1;
+    }
+
     /* The original host entry owns CPU execution and may return only at its
      * original CCPU boundary.  This bridge owns no CPU, BOP or BIOS meaning. */
     host_start_cpu();
     session_record_mechanical_resume_status(owner,
         SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED);
+    session_disarm_termination_escape(owner);
 
     if (did_bind) (void)session_thread_unbind(owner);
     return 1;
@@ -46,6 +59,19 @@ int mvdm_softpc_execution_run_original_entry(session *owner, int argc,
         did_bind = 1;
     }
 
+    if (!session_arm_termination_escape(owner)) {
+        if (did_bind) (void)session_thread_unbind(owner);
+        return 0;
+    }
+    if (setjmp(owner->termination_escape) != 0) {
+        *result_out = (int)owner->completion_code;
+        session_record_mechanical_resume_status(owner,
+            SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED);
+        session_disarm_termination_escape(owner);
+        if (did_bind) (void)session_thread_unbind(owner);
+        return 1;
+    }
+
     /* Do not split or reproduce the historical entry sequence here.  The
      * original `ntvdm.c` entry owns timer, environment, NLS, host_main and
      * eventual source-shaped return ordering. */
@@ -53,6 +79,7 @@ int mvdm_softpc_execution_run_original_entry(session *owner, int argc,
     *result_out = result;
     session_record_mechanical_resume_status(owner,
         SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED);
+    session_disarm_termination_escape(owner);
 
     if (did_bind) (void)session_thread_unbind(owner);
     return 1;

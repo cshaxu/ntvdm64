@@ -39,6 +39,7 @@ int session_valid(const session *instance)
         instance->identity != 0u && instance->state <= SESSION_STATE_COMPLETED &&
         instance->machine_backend <= SESSION_MACHINE_BACKEND_SOFTPC &&
         instance->teardown_count <= SESSION_MAX_TEARDOWNS &&
+        instance->termination_armed <= 1u &&
         session_binding_count(instance) <= INT32_MAX &&
         mapping_manager_valid(&instance->guest_memory_mappings,
             MAPPING_MANAGER_GUEST_MEMORY) &&
@@ -126,7 +127,8 @@ uint64_t session_mechanical_resume_budget(const session *instance)
 void session_record_mechanical_resume_status(session *instance,
     uint32_t status)
 {
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
+    if (!session_valid(instance) || (instance->state != SESSION_STATE_ACTIVE &&
+        instance->state != SESSION_STATE_COMPLETED))
         return;
     instance->mechanical_resume_status = status;
 }
@@ -167,7 +169,8 @@ uint32_t session_video_event_active(const session *instance)
 int session_dispose(session *instance)
 {
     uint32_t index;
-    if (!session_valid(instance) || session_binding_count(instance) != 0u)
+    if (!session_valid(instance) || session_binding_count(instance) != 0u ||
+        instance->termination_armed != 0u)
         return 0;
     for (index = instance->teardown_count; index != 0u; --index) {
         session_teardown teardown = instance->teardowns[index - 1u];
@@ -201,6 +204,32 @@ int session_thread_unbind(session *instance)
 session *session_thread_current(void)
 {
     return thread_instance;
+}
+
+int session_arm_termination_escape(session *instance)
+{
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+        thread_instance != instance || instance->termination_armed != 0u)
+        return 0;
+    instance->termination_armed = 1u;
+    return 1;
+}
+
+void session_disarm_termination_escape(session *instance)
+{
+    if (instance != NULL && session_valid(instance))
+        instance->termination_armed = 0u;
+}
+
+int session_terminate_current(uint32_t completion_code)
+{
+    session *instance = thread_instance;
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+        instance->termination_armed == 0u)
+        return 0;
+    instance->completion_code = completion_code;
+    instance->state = SESSION_STATE_COMPLETED;
+    longjmp(instance->termination_escape, 1);
 }
 
 mapping_manager *session_guest_memory_mappings(session *instance)
