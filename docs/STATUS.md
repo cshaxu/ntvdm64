@@ -4,27 +4,27 @@
 
 ## Active Packet
 
-**Active: M0 T310 S21**
+**Active: M0 T310 S22**
 
-### M0 T310 S21 — Storage controller callbacks
+### M0 T310 S22 — Host storage bindings
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T310 S21; Ordinary Mode (single-person dual-role review and implementation). |
-| Admission And Approval | S20 closed selected host-input bindings without taking display/fullscreen product semantics. S21 is the next sequential owner-contract cluster. |
-| Objective | Re-read and close only `SPC-STORAGE-CONTROLLER-CALLBACKS`: selected original floppy/fixed-disk/EMS controller declarations, tables, callbacks and controller-side source contracts for Win32/x86 CCPU40 SoftPC. |
-| Non-goals | No host filesystem/device backend recovery (S22), kernel VDM or MONITOR import, Bochs fallback, BOP semantic expansion, trace-selected repair, media fabrication, or claim of guest disk execution. |
-| Reference Baseline | Closed S17--S20 controller and host-input source boundaries; original selected SoftPC storage-controller sources, controller headers and coverage ledger. |
-| Files And ABI Surface | Selected original `softpc.new/base/disks`, `softpc.new/base/dos` EMS controller and reached controller-side declarations/callers; adapter-mvdm-host-out/softpc only for an already proven same-shaped mechanical boundary. |
+| Identifier Mode | M0 T310 S22; Ordinary Mode (single-person dual-role review and implementation). |
+| Admission And Approval | S21 closed original storage-controller callbacks and formal source assembly. S22 is the next sequential owner-contract cluster. |
+| Objective | Recover only `SPC-HOST-STORAGE-BINDINGS`: original host fixed-media and floppy endpoint declarations, configuration, I/O, write/failure and remote-transport contracts for Win32/x86 CCPU40 SoftPC. |
+| Non-goals | No replacement FDC/WD2010/INT 13/EMS controller algorithm, kernel VDM or MONITOR import, Bochs fallback, BOP semantic expansion, synthetic media, trace-selected repair, or claim of guest disk execution. |
+| Reference Baseline | Closed S21 original controller tables/callers and formal x86 assembly; original `nt_fdisk.c`, reached host storage declarations/callers and source-boundary ledger. |
+| Files And ABI Surface | Original `softpc.new/host/src/nt_fdisk.c`, reached configuration/host storage declarations and remote-floppy endpoint forms; `adapter-mvdm-host-out` only for a source-proven same-shaped public-host binding or exact unavailable disposition. |
 | Applicable Rules | Execution, source policy, mirror, coding/source-layout, session ownership, toolchain-island, CPU-profile and source-recovery rules; approved T310 S8 plan and coverage ledger. |
-| Verification | Formal MSVC Win32/x86 `/MT` Ninja selected-storage archive; original declaration/definition/initializer/caller review and focused controller behavior or exact original unavailable result. x64 compatibility is outside the active worklist. |
-| Expected Markers | Original controller table/order and failure direction; no raw native pointer through a fixed-width ABI; no raw MONITOR/Bochs/kernel-VDM path and no synthetic disk/media success. |
-| Asset Needs | Exact selected SoftPC storage sources, controller headers, storage-cluster ledger and prior evidence, public Win32 API and MSVC Build Tools/Ninja. |
-| Reporting Requirements | Per cluster: original roots/callers, recovery rung, table/initializer order, ABI/failure contract, any mapping-manager use, selected x86 CCPU40 result, retained unavailable disposition and no-Bochs/MONITOR proof. |
-| Stop Conditions | A controller member requires an unregistered original-source divergence; an adapter would replace available original controller logic; a raw native pointer crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or a dependency belongs to S22 or later. |
-| Exit Criteria | Every selected storage-controller declaration, definition, initializer/caller and prior repair has exactly one direct, binding-only, adapter-backed or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and a focused audit does not select new S21 owner work. Integrated media behavior remains mandatory S49 validation. |
+| Verification | Formal MSVC Win32/x86 `/MT` Ninja selected-host-storage archive and forced-link review; original declaration/definition/caller/order review; focused source-shaped public-host binding or exact original unavailable result. x64 compatibility is outside the active worklist. |
+| Expected Markers | Original host endpoint ordering and failure direction; no raw native pointer through a fixed-width cross-component ABI; no raw MONITOR/Bochs/kernel-VDM path and no synthetic disk/media success. |
+| Asset Needs | Exact selected SoftPC host-storage sources, controller headers, S21 boundary evidence, public Win32 API and MSVC Build Tools/Ninja. |
+| Reporting Requirements | Per cluster: original roots/callers, recovery rung, endpoint ABI/failure contract, any mapping-manager use, selected x86 CCPU40 result, retained unavailable disposition and no-Bochs/MONITOR proof. |
+| Stop Conditions | A host-media endpoint needs an unregistered source divergence; an adapter would replace an available original endpoint algorithm; a raw native pointer crosses a fixed-width ABI; recovery selects Bochs/MONITOR/kernel VDM; or an endpoint belongs to S23 or later. |
+| Exit Criteria | Every selected host-storage declaration, definition, caller and prior repair has exactly one direct, binding-only, adapter-backed or original-unavailable disposition; formal x86 evidence passes for selected CCPU40; and focused binding evidence does not select new S22 owner work. Integrated media behavior remains mandatory S49 validation. |
 | Original Owner Request | “当前T任务目标：导入 NTVDMx64 的补丁，完整复通 SoftPC，包括其 cpu, fpu, ram, dma, pic, pit, keyboard, mouse, video 等所有内部芯片、控制器、内外设备，并物理清除不再需要的 v86 / kernel vdm 相关代码。” |
-| Similar-Issue Sweep | Keyboard conversion, host mouse endpoints, console-input declarations, selected callers, prior input ABI repairs and MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
+| Similar-Issue Sweep | Fixed-media and remote-floppy declarations, configuration callers, read/write buffers, write policy, host resource identity, existing mapping-manager constraints, selected callers, and MONITOR/Bochs/kernel-VDM and `src.old` negative scan. |
 
 **T310 S17 P1:** the complete selected system-controller source set is now
 split from adjacent ROM, platform, endpoint and BOP owners. The original
@@ -59,6 +59,13 @@ same-shaped public Win32 binding. Menu/fullscreen console behavior remains
 explicitly unavailable for S27. Formal x86 CCPU40 archive and forced-link
 evidence, plus a focused negative console-contract test, pass; live input
 delivery remains S49 integration work. See the [S20 closure record](history/m0-t310-s20-host-input-bindings-closure-20260830.md).
+
+**T310 S21 closure:** original INT 13, WD2010, FDC, remote-floppy-client and
+EMS controller bodies retain their table/callback order. The one recovered
+`host_delays` timing global is original controller state, not a new adapter;
+fresh x86 CCPU40 formal assembly has no unresolved `original-softpc-disks.lib`
+edge. Host media semantics are now S22 and integrated guest media behavior
+remains S49. See the [S21 closure record](history/m0-t310-s21-storage-controller-callbacks-closure-20260830.md).
 
 **T310 S16 P1:** the firmware owner audit separates immutable original
 `softpc.new/{bios,roms,data}` inputs from executable original BIOS, system-ROM,
