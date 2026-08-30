@@ -58,6 +58,34 @@ GLOBAL   VOID		(*setNT_func ) ();
 GLOBAL   sys_addr	(*getIDTR_base_func) ();
 #endif
 
+/* DIVERGENCE: MVDM-HOST-DIV-102 retains the original common access-vector
+ * storage and CCPU initializer order.  The selected generated CCPU providers
+ * have exact fixed-width return contracts; NT4's empty parameter lists did
+ * not prove those contracts on either x86 or x64. */
+#ifdef CCPU
+GLOBAL IU16		(*getAX_func) (void);
+GLOBAL IU8		(*getAH_func) (void);
+GLOBAL IU8		(*getAL_func) (void);
+GLOBAL IU16		(*getBX_func) (void);
+GLOBAL IU8		(*getBH_func) (void);
+GLOBAL IU8		(*getBL_func) (void);
+GLOBAL IU16		(*getCX_func) (void);
+GLOBAL IU8		(*getCH_func) (void);
+GLOBAL IU8		(*getCL_func) (void);
+GLOBAL IU16		(*getDX_func) (void);
+GLOBAL IU8		(*getDH_func) (void);
+GLOBAL IU8		(*getDL_func) (void);
+GLOBAL IU16		(*getSP_func) (void);
+GLOBAL IU16		(*getBP_func) (void);
+GLOBAL IU16		(*getSI_func) (void);
+GLOBAL IU16		(*getDI_func) (void);
+GLOBAL IU16		(*getIP_func) (void);
+GLOBAL IU16		(*getCS_func) (void);
+GLOBAL IU16		(*getDS_func) (void);
+GLOBAL IU16		(*getES_func) (void);
+GLOBAL IU16		(*getSS_func) (void);
+GLOBAL IU16		(*getMSW_func) (void);
+#else
 GLOBAL word		(*getAX_func) ();
 GLOBAL half_word	(*getAH_func) ();
 GLOBAL half_word	(*getAL_func) ();
@@ -80,6 +108,7 @@ GLOBAL word		(*getDS_func) ();
 GLOBAL word		(*getES_func) ();
 GLOBAL word		(*getSS_func) ();
 GLOBAL word		(*getMSW_func) ();
+#endif
 
 #ifdef CCPU
 /* DIVERGENCE: the selected CCPU definitions return ISM32, not the
@@ -200,7 +229,7 @@ GLOBAL VOID		(*setOPA_func) ();
 GLOBAL VOID		(*setOPB_func) ();
 GLOBAL VOID		(*setOPR_func) ();
 
-GLOBAL VOID		(*host_simulate_func) ();
+GLOBAL VOID		(*host_simulate_func) (void);
 
 #ifdef CPU_30_STYLE
 

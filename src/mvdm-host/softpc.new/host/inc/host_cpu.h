@@ -321,6 +321,23 @@ extern char *int_table[];       /* CPU interrupt jump table       */
 
 /*  common access functions. Load at boot and cpu switch times. */
 /*  common READ functions  */
+#ifdef CCPU
+/* DIVERGENCE: MVDM-HOST-DIV-102 keeps the original common-vector names and
+ * selection order, but gives the selected generated CCPU providers their
+ * actual no-argument result contracts.  The NT4 empty parameter lists hid
+ * result-width mismatches; the non-CCPU profiles retain their original form. */
+extern IU16             (*getAX_func) (void); extern IU8 (*getAH_func) (void); extern IU8 (*getAL_func) (void);
+extern IU16             (*getBX_func) (void); extern IU8 (*getBH_func) (void); extern IU8 (*getBL_func) (void);
+extern IU16             (*getCX_func) (void); extern IU8 (*getCH_func) (void); extern IU8 (*getCL_func) (void);
+extern IU16             (*getDX_func) (void); extern IU8 (*getDH_func) (void); extern IU8 (*getDL_func) (void);
+extern IU16             (*getSP_func) (void); extern IU16 (*getBP_func) (void); extern IU16 (*getSI_func) (void);
+extern IU16             (*getDI_func) (void); extern IU16 (*getIP_func) (void);
+extern IU16             (*getCS_func) (void); extern IU16 (*getDS_func) (void); extern IU16 (*getES_func) (void); extern IU16 (*getSS_func) (void);
+extern IU16             (*getMSW_func) (void);
+extern ISM32            (*getDF_func) (void); extern ISM32 (*getIF_func) (void); extern ISM32 (*getTF_func) (void);
+extern ISM32            (*getPF_func) (void); extern ISM32 (*getAF_func) (void); extern ISM32 (*getSF_func) (void);
+extern ISM32            (*getZF_func) (void); extern ISM32 (*getOF_func) (void); extern ISM32 (*getCF_func) (void);
+#else
 extern word             (*getAX_func) ();
 extern half_word        (*getAH_func) ();
 extern half_word        (*getAL_func) ();
@@ -352,6 +369,7 @@ extern word             (*getSF_func) ();
 extern word             (*getZF_func) ();
 extern word             (*getOF_func) ();
 extern word             (*getCF_func) ();
+#endif
 extern word             (*getSTATUS_func) ();
 
 #ifdef CCPU
@@ -440,7 +458,7 @@ extern void             (*setOPR_func) ();
 
 
 /*  HOST_SIMULATE function  */
-extern void             (*host_simulate_func) ();
+extern void             (*host_simulate_func) (void);
 
 /*
  *

@@ -29,8 +29,17 @@ extern void c_cpu_init(void);
 extern uint16_t c_getIP(void);
 extern void c_setIP(uint16_t value);
 extern uintptr_t c_setDS(uint16_t value);
+extern uint16_t c_getAX(void);
+extern void c_setAX(uint16_t value);
+extern int32_t c_getCF(void);
+extern void c_setCF(int32_t value);
 extern void load_sw_cpu_access_functions(void);
 extern void (*host_simulate_func)(void);
+extern uint16_t (*getAX_func)(void);
+extern void (*setAX_func)(uint16_t value);
+extern int32_t (*getCF_func)(void);
+extern void (*setCF_func)(int32_t value);
+extern void c_cpu_simulate(void);
 extern void host_start_cpu(void);
 extern void host_simulate(void);
 extern jmp_buf *ccpu386ThrdExptnPtr(void);
@@ -112,6 +121,20 @@ int main(void)
     c_cpu_init();
     fputs("access-init\n", stderr);
     load_sw_cpu_access_functions();
+    if (getAX_func != c_getAX || setAX_func != c_setAX ||
+        getCF_func != c_getCF || setCF_func != c_setCF ||
+        host_simulate_func != c_cpu_simulate) {
+        fputs("selected CCPU access table has an unexpected provider\n", stderr);
+        sas_term();
+        return 1;
+    }
+    setAX_func(UINT16_C(0x4a21));
+    setCF_func(1);
+    if (getAX_func() != UINT16_C(0x4a21) || getCF_func() == 0) {
+        fputs("selected CCPU access table did not preserve register/flag ABI\n", stderr);
+        sas_term();
+        return 1;
+    }
     fputs("seed\n", stderr);
     (void)c_setDS(0u);
     /* mov al,5ah; mov [8000h],al; fld1; fstp dword [8004h]; d6 fe */
