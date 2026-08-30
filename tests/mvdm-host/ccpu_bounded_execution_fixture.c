@@ -10,6 +10,9 @@
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_physical_mapping.h"
 #include "insignia.h"
 #include "host_def.h"
+#include "xt.h"
+#include "ios.h"
+#include "dma.h"
 #include "sas.h"
 
 static LONG WINAPI fixture_unhandled_exception(EXCEPTION_POINTERS *exception)
@@ -285,6 +288,48 @@ int main(void)
         fputs("selected CCPU access table did not preserve register/flag ABI\n", stderr);
         sas_term();
         return 1;
+    }
+    /* The selected machine owns the I/O fabric and DMA controller in their
+     * original source files.  This is only an initialization and port-dispatch
+     * proof: it does not manufacture a device DMA request or memory backend. */
+    io_init();
+    dma_init();
+    dma_post();
+    if (Ios_in_adapter_table[DMA_CH1_ADDRESS] != DMA_ADAPTOR ||
+        Ios_out_adapter_table[DMA_CH1_ADDRESS] != DMA_ADAPTOR ||
+        Ios_in_adapter_table[DMA_CH5_ADDRESS] != DMA_ADAPTOR ||
+        Ios_out_adapter_table[DMA_CH5_ADDRESS] != DMA_ADAPTOR ||
+        Ios_in_adapter_table[DMA_FLA_PAGE_REG] != DMA_PAGE_ADAPTOR ||
+        Ios_out_adapter_table[DMA_FLA_PAGE_REG] != DMA_PAGE_ADAPTOR) {
+        fputs("original DMA ports were not installed in original I/O tables\n", stderr);
+        sas_term();
+        return 1;
+    }
+    {
+        half_word dma_value = 0u;
+
+        outb(DMA_CH1_ADDRESS, UINT8_C(0x34));
+        outb(DMA_CH1_ADDRESS, UINT8_C(0x12));
+        outb(DMA_CLEAR_FLIP_FLOP, 0u);
+        inb(DMA_CH1_ADDRESS, &dma_value);
+        if (dma_value != UINT8_C(0x34)) {
+            fputs("original DMA low address register did not round-trip\n", stderr);
+            sas_term();
+            return 1;
+        }
+        inb(DMA_CH1_ADDRESS, &dma_value);
+        if (dma_value != UINT8_C(0x12)) {
+            fputs("original DMA high address register did not round-trip\n", stderr);
+            sas_term();
+            return 1;
+        }
+        outb(DMA_FLA_PAGE_REG, UINT8_C(0x56));
+        inb(DMA_FLA_PAGE_REG, &dma_value);
+        if (dma_value != UINT8_C(0x56)) {
+            fputs("original DMA page register did not round-trip\n", stderr);
+            sas_term();
+            return 1;
+        }
     }
     fputs("seed\n", stderr);
     (void)c_setDS(0u);

@@ -106,6 +106,13 @@ width correction is now registered rather than left as an undocumented mirror
 difference.  Live timer-to-PIC/CCPU and DMA delivery remain S3 work. See the
 [P2 record](etc/evidence/m0-t313-s3-p2-controller-chain-and-input-binding-001.md).
 
+**T313 S3 P3:** original `ios.c` and `at_dma.c` now run inside the existing
+bounded x86 CCPU40 fixture.  Original DMA controller/page-register port
+registration and `inb`/`outb` address/page-register round trips pass; fixture
+I/O-table stand-ins were deleted.  Timer-to-PIC/CCPU remains the only positive
+controller endpoint not yet witnessed. See the
+[P3 record](etc/evidence/m0-t313-s3-p3-original-dma-ios-witness-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |

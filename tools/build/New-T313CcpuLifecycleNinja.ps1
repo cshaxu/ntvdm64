@@ -38,16 +38,20 @@ $gdpOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/base/cvidc'
 $gdpGenerator = Join-Path $root 'tools/build/Generate-T310GdpSlots.mjs'
 $ccpu = @(Get-OriginalSources (Join-Path $ccpuRoot 'sources') | Where-Object { $_ -ne 'ntstubs.c' })
 $hostSources = @('nt_cprgs.c', 'nt_cpu.c', 'sim32.c', 'nt_mem.c')
+$controllerSources = @('at_dma.c')
+$supportSources = @('ios.c')
 $adapterSources = @('src/adapter-mvdm-host-out/softpc/mvdm_softpc_execution.c', 'src/adapter-mvdm-host-out/softpc/mvdm_softpc_effective_address.c', 'src/adapter-mvdm-host-out/softpc/mvdm_softpc_physical_mapping.c', 'src/adapter-mvdm-host-out/softpc/mvdm_a20.c', 'src/session/session.c', 'src/session/mapping_manager.c', 'src/session/guest_memory_lease.c')
 $testSources = @('tests/mvdm-host/ccpu_bounded_execution_fixture.c', 'tests/mvdm-host/ccpu_bounded_execution_fixture_seams.c')
 $overlaySources = @('mvdm_gdp_state.c')
 foreach ($name in $ccpu) { if (!(Test-Path -LiteralPath (Join-Path $ccpuRoot $name))) { throw "Missing original CCPU source: $name" } }
 foreach ($name in $hostSources) { if (!(Test-Path -LiteralPath (Join-Path $hostRoot $name))) { throw "Missing original host source: $name" } }
+foreach ($name in $controllerSources) { if (!(Test-Path -LiteralPath (Join-Path (Join-Path $root 'src/mvdm-host/softpc.new/base/system') $name))) { throw "Missing original controller source: $name" } }
+foreach ($name in $supportSources) { if (!(Test-Path -LiteralPath (Join-Path (Join-Path $root 'src/mvdm-host/softpc.new/base/support') $name))) { throw "Missing original support source: $name" } }
 foreach ($name in $adapterSources + $testSources) { if (!(Test-Path -LiteralPath (Join-Path $root $name))) { throw "Missing selected lifecycle source: $name" } }
 foreach ($name in $overlaySources) { if (!(Test-Path -LiteralPath (Join-Path $gdpOverlayRoot $name))) { throw "Missing GDP overlay: $name" } }
 if (!(Test-Path -LiteralPath (Join-Path $patchRoot 'fmstubs.c')) -or !(Test-Path -LiteralPath $gdpGenerator)) { throw 'Required selected source is missing.' }
 
-New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/gdp'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter'), (Join-Path $build 'obj/test'), (Join-Path $build 'obj/overlay'), (Join-Path $build 'obj/patch') | Out-Null
+New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/gdp'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/controller'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/adapter'), (Join-Path $build 'obj/test'), (Join-Path $build 'obj/overlay'), (Join-Path $build 'obj/patch') | Out-Null
 & $NodeExecutable $gdpGenerator $root (Join-Path $build 'generated/gdp') | Out-Null
 $environment = Join-Path $build 'msvc-x86.cmd'
 @('@echo off', 'set "MVDM_T313_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=x86 -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T313_CALLER_CWD%"', '%*') | Set-Content -LiteralPath $environment -Encoding ascii
@@ -63,6 +67,8 @@ $graph.Add('rule link'); $graph.Add('  command = cmd.exe /d /s /c call ' + (Ninj
 function Add-Objects([string]$Group, [string]$Rule, [string]$Directory, [string[]]$Names) { $objects = @(); foreach ($name in $Names) { $object = 'obj/' + $Group + '/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'; $graph.Add('build ' + $object + ': ' + $Rule + ' ' + (NinjaPath (Join-Path $Directory $name))); $objects += $object }; return $objects }
 $ccpuObjects = Add-Objects 'ccpu' 'cc' $ccpuRoot $ccpu
 $hostObjects = Add-Objects 'host' 'cc' $hostRoot $hostSources
+$controllerObjects = Add-Objects 'controller' 'cc' (Join-Path $root 'src/mvdm-host/softpc.new/base/system') $controllerSources
+$supportObjects = Add-Objects 'support' 'cc' (Join-Path $root 'src/mvdm-host/softpc.new/base/support') $supportSources
 $adapterObjects = Add-Objects 'adapter' 'cc' $root $adapterSources
 $testObjects = Add-Objects 'test' 'cc' $root $testSources
 $overlayObjects = Add-Objects 'overlay' 'cc' $gdpOverlayRoot $overlaySources
@@ -70,8 +76,8 @@ $patchObject = 'obj/patch/fmstubs_edl_fast_bop.obj'; $graph.Add('build ' + $patc
 $graph.Add('build original-ccpu40.lib: lib ' + ($ccpuObjects -join ' '))
 $graph.Add('build original-host-lifecycle.lib: lib ' + ($hostObjects -join ' '))
 $graph.Add('build lifecycle-adapter.lib: lib ' + ($adapterObjects -join ' '))
-$graph.Add('build ccpu-lifecycle.exe: link ' + (($testObjects + $overlayObjects + @($patchObject, 'original-ccpu40.lib', 'original-host-lifecycle.lib', 'lifecycle-adapter.lib')) -join ' '))
+$graph.Add('build ccpu-lifecycle.exe: link ' + (($testObjects + $overlayObjects + $controllerObjects + $supportObjects + @($patchObject, 'original-ccpu40.lib', 'original-host-lifecycle.lib', 'lifecycle-adapter.lib')) -join ' '))
 $graph.Add('build ccpu-lifecycle: phony ccpu-lifecycle.exe'); $graph.Add('default ccpu-lifecycle')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
-[ordered]@{ schema='m0.t313.s2.ccpu40-lifecycle.v1'; architecture='x86'; cpuProfile='CCPU40'; executor='original softpc.new/base/ccpu386 c_cpu_simulate'; selectedCcpu=$ccpu; hostSources=$hostSources; adapterSources=$adapterSources; testSources=$testSources; forbiddenInputs=@('src.old','bochs-core','adapter-bochs','CPU30','MONITOR','V86') } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
+[ordered]@{ schema='m0.t313.s3.ccpu40-controller-lifecycle.v1'; architecture='x86'; cpuProfile='CCPU40'; executor='original softpc.new/base/ccpu386 c_cpu_simulate'; selectedCcpu=$ccpu; hostSources=$hostSources; controllerSources=$controllerSources; supportSources=$supportSources; adapterSources=$adapterSources; testSources=$testSources; forbiddenInputs=@('src.old','bochs-core','adapter-bochs','CPU30','MONITOR','V86') } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
 Write-Host "Generated T313 S2 CCPU40 lifecycle graph: $build"

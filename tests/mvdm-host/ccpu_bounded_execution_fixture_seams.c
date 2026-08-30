@@ -41,12 +41,6 @@ fixture_callback BIOS[256];
 fixture_callback read_pointers;
 void *trace_file;
 void *Gdp;
-void *Ios_in_adapter_table;
-fixture_callback Ios_inb_function;
-fixture_callback Ios_inw_function;
-void *Ios_out_adapter_table;
-fixture_callback Ios_outb_function;
-fixture_callback Ios_outw_function;
 
 /* The fixture exercises `mvdm_softpc_execution_run_until_return`, not the
  * process-lifetime original `obj.vdm/ntvdm.c` entry.  The execution adapter
