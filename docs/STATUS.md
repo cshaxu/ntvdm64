@@ -49,6 +49,12 @@ warning was suppressed and no second executor participates.  This is formal
 package evidence only; create-to-reset and bounded guest behavior remain S2
 work.  See the [P3 record](etc/evidence/m0-t313-s2-p3-original-ccpu40-archive-001.md).
 
+**T313 S2 P4:** the refreshed selected x86 CCPU40 formal candidate completed
+all 189 archive inputs without error.  An encountered retired backend fixture
+was deleted and the live session backend test now asserts the actual
+SoftPC-only contract.  This is still formal-composition evidence; bounded
+original lifecycle behavior remains S2 work.  See the [P4 record](etc/evidence/m0-t313-s2-p4-formal-candidate-and-retired-test-cleanup-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |

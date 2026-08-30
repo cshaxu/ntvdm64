@@ -7,9 +7,9 @@ int main(void)
 
     session_initialize(&first, 301u);
     if (session_machine_backend(&first) != SESSION_MACHINE_BACKEND_NONE ||
-        !session_select_machine_backend(&first, SESSION_MACHINE_BACKEND_BOCHS) ||
-        session_machine_backend(&first) != SESSION_MACHINE_BACKEND_BOCHS ||
-        session_select_machine_backend(&first, SESSION_MACHINE_BACKEND_SOFTPC))
+        session_select_machine_backend(&first, UINT32_C(2)) ||
+        !session_select_machine_backend(&first, SESSION_MACHINE_BACKEND_SOFTPC) ||
+        session_machine_backend(&first) != SESSION_MACHINE_BACKEND_SOFTPC)
         return 1;
     if (!session_activate(&first) ||
         session_select_machine_backend(&first, SESSION_MACHINE_BACKEND_SOFTPC) ||
