@@ -9,6 +9,18 @@
 #include "conapi.h"
 #include "session/session.h"
 
+BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR layout_name)
+{
+    /* DIVERGENCE(ADAPTER-WIN32-034): the NT4 Console Server returned the
+     * active console keyboard-layout name through this source-facing BOOL
+     * API. Modern public Win32 no longer exposes that Console Server entry,
+     * but GetKeyboardLayoutNameA has the same fixed-layout-name result and
+     * failure contract for the process input locale. Keep the original name
+     * and buffer ownership at the MVDM boundary; do not add a console broker
+     * or a separate keyboard-layout cache. */
+    return GetKeyboardLayoutNameA(layout_name);
+}
+
 static BOOL console_video_event(uint32_t kind, HANDLE output, HPALETTE palette,
                                 const SMALL_RECT *rect, DWORD flags)
 {

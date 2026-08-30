@@ -23,7 +23,12 @@ $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM ' +
     '/I ' + $root + '/src/adapter-mvdm-host-out/win32/include ' +
     '/I ' + $root + '/src/adapter-mvdm-host-out/softpc/include ' +
     '/I ' + $root + '/src/adapter-mvdm-host-out/monitor/include ' +
-    '/I ' + $root + '/src/mvdm-platform-abi/source/public/internal/windows/inc ' +
+    '/I ' + $root + '/src/opennt-host/public/sdk/inc ' +
+    '/I ' + $root + '/src/opennt-abi/source/public/sdk/inc ' +
+    '/I ' + $root + '/src/opennt-abi/source/public/internal/base/inc ' +
+    '/I ' + $root + '/src/opennt-abi/source/public/internal/windows/inc ' +
+    '/I ' + $root + '/src/opennt-abi/source/private/windows/inc ' +
+    '/I ' + $root + '/src/opennt-abi/source/public/ddk/inc ' +
     '/I ' + $root + '/src/mvdm-support/inc ' +
     '/I ' + $root + '/src/mvdm-host/dos/command ' +
     '/I ' + $root + '/src/mvdm-host/softpc.new/host/inc ' +
