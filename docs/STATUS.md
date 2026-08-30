@@ -40,6 +40,13 @@ binding. Its forced-link audit has no unresolved `host_find_file`,
 `host_read_resource`, `read_rom` or CMOS resource edge; remaining forms are
 later owner packages. See the [S16 formal assembly evidence](etc/evidence/m0-t310-s16-p2-bios-firmware-formal-assembly-001.md).
 
+**T310 S16 P3:** all fourteen members of the original `base/bios` manifest
+now have an initial source-unit owner disposition. The unchanged `BIOS[]` and
+`reset` control forms remain original and point to named later controller/BOP
+owners rather than a replacement dispatcher or reset shim. See the
+[S16 manifest ledger](etc/evidence/m0-t310-s16-p3-bios-manifest-owner-ledger-001.tsv)
+and [reset/dispatch boundary](etc/evidence/m0-t310-s16-p3-bios-reset-dispatch-boundary-001.md).
+
 **T310 S14 closed:** the original `VdmAddVirtualMemory` / remove lifecycle
 and source-shaped DOS page alias now use the one session mapping-manager
 identity boundary. Fresh x86/x64 runs proved publication, binding, alias

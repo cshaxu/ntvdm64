@@ -1,0 +1,15 @@
+id	original-source-member	primary-original-contract	selected-disposition	later-owner-or-condition
+BIOS-001	base/bios/bios.c	BIOS BOP vector and dispatch	binding-only original table	S17-S31 controller/BOP entries must bind before dispatch is enabled
+BIOS-002	base/bios/cmos_bis.c	CMOS time/configuration helpers	binding-only original body	S17 system-controller/RTC owner
+BIOS-003	base/bios/cntlbop.c	control BOP routing	binding-only original body	S17 system controller and S31 host-BOP binding
+BIOS-004	base/bios/emm_fncs.c	EMS BIOS control and page-map algorithms	binding-only original body	S14/S33 memory and support-controller boundaries
+BIOS-005	base/bios/reset.c	IVT construction and original reset ordering	binding-only original body	S17-S27 controller initialization order
+BIOS-006	base/bios/rom_basc.c	ROM BASIC unavailable error	original body	S28 host-platform error presentation boundary
+BIOS-007	base/bios/rtc_bios.c	RTC interrupt behavior	binding-only original body	S17 system-controller/RTC owner
+BIOS-008	base/bios/slave_bs.c	D11/redirect/287 BIOS stubs	binding-only original body	S17 interrupt/FPU controller boundaries
+BIOS-009	base/bios/tape_io.c	cassette/timer wait behavior	binding-only original body	S17 system controller and S19 input-controller boundaries
+BIOS-010	base/bios/equipmnt.c	equipment word service	binding-only original body	S17 CMOS/configuration state
+BIOS-011	base/bios/ill_bop.c	illegal BOP error path	binding-only original body	S31 host-BOP binding and S28 error boundary
+BIOS-012	base/bios/build_id.c	static build identifier	original body	no external callable dependency identified
+BIOS-013	base/bios/virtual.c	virtual device/NIDDB state	binding-only original body	S30 VDD binding and S40 VDD owner package
+BIOS-014	base/bios/mem_size.c	BIOS memory-size service	binding-only original body	S13 SAS-memory contract already closed; final reset caller remains S17
