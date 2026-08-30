@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3267 |
+| Documentation records | 3268 |
 | --- | --- |
-| Generated UTC | 2026-08-30T02:27:51Z |
+| Generated UTC | 2026-08-30T02:35:45Z |
 
 ## Entries
 
@@ -531,6 +531,7 @@ content-divergent entries.
 | etc/evidence/m0-t310-s8-p4-ccpu-effective-address-recovery-001.md | indexed supporting material | 46f7a3f84e44118ba7775fd555c84467135bc3afa165e3a593f66d72bfdbe991 |
 | etc/evidence/m0-t310-s8-p4-ccpu-eflags-contract-closure-001.md | indexed supporting material | 3208d24a34a8ca2a7dfce91f88a8752f1177a393bcc06be6637ef52443c0f25e |
 | etc/evidence/m0-t310-s8-p4-ccpu-executor-call-contract-closure-001.md | indexed supporting material | 4c72ec49315a03be29d568f64d95baa905033368e59dd317b3aca477d5356044 |
+| etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-executor-scalar-disposition-002.md | indexed supporting material | 1a53ad094625adda7e05b25527f7ad6ff52ea77e460e6e4038c23f77126960bf |
 | etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-operand-call-disposition-001.md | indexed supporting material | 12595b00f967cfc6624320581871f885cefd360fbf4f3dae8268727110161f25 |
 | etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-scalar-disposition-001.md | indexed supporting material | 75c178056fc3369aa9b7a4013b79209500078bb502a7d7b0f791c1e16cdaf692 |
 | etc/evidence/m0-t310-s8-p4-ccpu-fixed-width-signedness-disposition-001.md | indexed supporting material | 0b34d4233c4482ed3d78e37748a0d1a2fc7557ec8724719aeb28f55bf1024e80 |

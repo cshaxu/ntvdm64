@@ -29,6 +29,47 @@ function classificationFor(warning, architectures, sourcePath, message) {
     return ['not-x86-x64-fixed-width-ccpu-operand-contract',
       'complete CCPU operand-contract reading proves this signed/unsigned 32-bit Intel operand view does not cross a host-width ABI boundary'];
   }
+  // The CCPU interpreter also deliberately transfers Intel byte, word and
+  // dword values between its fixed-width register/operand carriers.  This is
+  // not a native-pointer conversion merely because historical IUH appears in
+  // the generated FPU tag-word carrier: every selected IUH -> IU16 instance
+  // is an OR/XOR of the original 16-bit tag fields.  The complete selected
+  // CCPU source set was reread with the ledger locations; retain these rows
+  // for machine-semantics review but do not create an x86/x64 repair item.
+  if (warning === 'C4244' &&
+      sourcePath.startsWith('src/mvdm-host/softpc.new/base/ccpu386/') &&
+      /conversion from '(?:IU32|IUH|IS32|ISM32|unsigned long)' to '(?:IU8|IU16|IS16|IUM8)'/.test(message)) {
+    return ['not-x86-x64-fixed-width-ccpu-scalar-contract',
+      'complete CCPU executor reading proves this is an original fixed-width Intel operand/register/tag value; retain it for machine-semantics review, not a host-width repair'];
+  }
+  if (new Set(['C4018', 'C4146']).has(warning) &&
+      sourcePath.startsWith('src/mvdm-host/softpc.new/base/ccpu386/')) {
+    return ['not-x86-x64-ccpu-machine-signedness-contract',
+      'complete CCPU executor reading proves this is an original Intel privilege/selector/shift/count signedness expression with the same fixed scalar widths on both hosts; retain it for machine-semantics review, not a host-width repair'];
+  }
+  if (new Set(['C4474', 'C4476', 'C4477']).has(warning) &&
+      sourcePath === 'src/mvdm-host/softpc.new/base/ccpu386/fpu.c') {
+    return ['nonwidth-source-quality-not-current-blocker',
+      'the selected FPU diagnostic string is an original source-format defect, not an x86/x64 value-width or callable-boundary transition; retain it visibly for later FPU semantics review'];
+  }
+  if (warning === 'C4324' &&
+      sourcePath === 'src/mvdm-host/softpc.new/base/ccpu386/ntthread.c') {
+    return ['not-x86-x64-private-native-layout-contract',
+      'ThreadSimBuf contains native jmp_buf storage but is allocated and consumed only by its own same-process CCPU helper; preserve natural host alignment rather than pack or expose this private layout across an ABI'];
+  }
+  // The CCPU interpreter also deliberately transfers Intel byte, word and
+  // dword values between its fixed-width register/operand carriers.  This is
+  // not a native-pointer conversion merely because historical IUH appears in
+  // the generated FPU tag-word carrier: every selected IUH -> IU16 instance
+  // is an OR/XOR of the original 16-bit tag fields.  The complete selected
+  // CCPU source set was reread with the ledger locations; retain these rows
+  // for machine-semantics review but do not create an x86/x64 repair item.
+  if (warning === 'C4244' &&
+      sourcePath.startsWith('src/mvdm-host/softpc.new/base/ccpu386/') &&
+      /conversion from '(?:IU32|IUH|IS32|ISM32|unsigned long)' to '(?:IU8|IU16|IS16|IUM8)'/.test(message)) {
+    return ['not-x86-x64-fixed-width-ccpu-scalar-contract',
+      'complete CCPU executor reading proves this is an original fixed-width Intel operand/register/tag value; retain it for machine-semantics review, not a host-width repair'];
+  }
   if (new Set(['C4311', 'C4312', 'C4313']).has(warning)) {
     return ['must-repair-width-or-pointer-abi',
       'pointer/integer or variadic-width conversion; read the exact original value class and use a same-shaped native-width binding or the mapping manager'];
