@@ -2,6 +2,7 @@
 param(
     [Parameter(Mandatory = $true)] [ValidateSet('x86', 'x64')] [string]$Architecture,
     [string]$RepositoryRoot = '',
+    [string]$BuildRoot = '',
     [string]$NodeExecutable = ''
 )
 
@@ -36,7 +37,11 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$build = Join-Path $root ("build/M0-T310/S8/p1-machine-source/{0}" -f $Architecture)
+if ([string]::IsNullOrWhiteSpace($BuildRoot)) {
+    $build = Join-Path $root ("build/M0-T310/S8/p1-machine-source/{0}" -f $Architecture)
+} else {
+    $build = [IO.Path]::GetFullPath($BuildRoot)
+}
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or !(Get-Command ninja -ErrorAction SilentlyContinue)) {
     throw 'MSVC Build Tools and Ninja are required.'

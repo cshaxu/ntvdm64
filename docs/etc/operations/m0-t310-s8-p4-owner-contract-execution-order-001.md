@@ -81,6 +81,11 @@ record exactly one of: unchanged
 fixed-width/source form; minimal mirror correction; mirror overlay; existing
 adapter-backed binding; mapping-manager boundary; original unavailable in the
 selected profile; or not selected/not host runtime.  Then run the smallest
-formal x86 and x64 object or link target that covers the changed contract.
+formal x86 and x64 object or link target that covers the changed contract, and
+run the smallest direct behavior fixture or asserted-unavailable test that
+exercises the contract on both host widths. A fixture need not execute an
+unrelated device or guest program, but it must observe the contract's own
+state, result, or failure behavior. Compilation and forced linking prove
+composition only; they do not substitute for this behavior result.
 Only cluster completion updates the shared worklist; unrelated warnings stay
 visible.

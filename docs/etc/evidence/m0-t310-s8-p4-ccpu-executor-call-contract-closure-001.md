@@ -70,3 +70,21 @@ assertions verify the `1.0f` result (`00 00 80 3F`) at guest address `8004h`.
 Thus this is a real, bounded CCPU/FPU execution confirmation on x86 and x64,
 not merely a link check.  It remains intentionally narrower than a complete
 machine-profile result.
+
+## Current S8 functional recheck (2026-08-29)
+
+The S8 plan now requires every owner-contract packet to carry focused behavior
+evidence in addition to its x86/x64 compile and link evidence.  The fixture
+was therefore regenerated from the current sources and rerun from isolated
+build roots:
+
+```text
+build/M0-T310/S8/execution-20260829/x64/ccpu-bounded-execution.exe
+build/M0-T310/S8/execution-20260829/x86/ccpu-bounded-execution.exe
+```
+
+Both returned zero and emitted the same startup/re-entry sequence.  Their
+assertions again observed the `0x5A` guest-RAM store and the x87 `1.0f`
+four-byte result at `0x8004`.  This is the focused positive behavior result
+for `SPC-CCPU-EXECUTOR-DISPATCH`; it does not close the later access-table,
+SAS-vector, device-controller, firmware, or whole-machine packets.

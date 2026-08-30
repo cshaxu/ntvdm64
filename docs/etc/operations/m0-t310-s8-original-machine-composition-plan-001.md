@@ -13,7 +13,12 @@ both host architectures.
 
 Every S closes exactly one coverage-ledger cluster. It is atomic: original
 definition, declaration, table/initializer, selected callers, prior repair,
-x86/x64 diagnostics and locally meaningful behavior are reread together.
+x86/x64 diagnostics and locally meaningful behavior are reread together. A
+cluster cannot close merely because its selected objects compile or its
+warnings have a static disposition: it must also have focused functional
+verification of the recovered contract. Where the selected original profile
+intentionally retains an unavailable path, this is an exact negative test of
+the original failure direction rather than a fabricated positive result.
 Later packets may consume a completed contract but may not reopen it with a
 local workaround. The sequence is dependency order, not warning-count order.
 
