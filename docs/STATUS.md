@@ -4,14 +4,36 @@
 
 ## Active Packet
 
-**No active M/T/S packet.** `M0 T314` is closed for the admitted local DOS
-Base VDM broker protocol. The next queue candidate is MVDM host
-mirror-topology recovery (`mvdm-support` reintegration), which requires its
-own admission; implementation must not proceed until then. CCPU40 is the
-currently accepted profile; CCPU30 is newly required as the immediately
-following original-SoftPC recovery package and has not yet been compiled or
-run under this renewed paired-profile policy. See the
-[T314 closure](history/m0-t314-base-vdm-source-shaped-broker-closure-20260830.md).
+### M0 T315 S1 — Original SoftPC CCPU30 profile source and contract audit
+
+**Active: M0 T315 S1.**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T315 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Owner approved the queue-head work with “好 开工” and explicitly required CCPU30 to compile and run like CCPU40. Read-only S1 proved P02A was already closed by `M0 T311`; this packet therefore continues with the next unclosed candidate, P02E. |
+| Objective | Establish the exact original CCPU30 source, build-configuration, machine/session contract and CCPU40-difference inventory required before any CCPU30 build-manifest or execution change. |
+| Non-goals | No CCPU30 source edit, profile fallback, BOP/provider behavior, adapter rewrite, x64 work, or claim that CCPU30 already compiles/runs. |
+| Reference Baseline | [package program P02E](etc/operations/package-recovery-program-20260827.md); closed [T311 support re-root](history/m0-t311-mvdm-host-support-reintegration-closure-20260830.md); closed T313 CCPU40 and T314 Base VDM evidence. |
+| Files And ABI Surface | Read-only inventory of selected original CCPU30 sources, original build controls, current CCPU40 manifests, session/mapping-manager and adapter interfaces. No ABI changes in S1. |
+| Applicable Rules | docs/README.md; docs/rules/EXECUTION.md; docs/rules/{ARCHITECTURE,CODING,DOCUMENT}.md; docs/design/{GOAL,ARCHITECTURE,CODING}.md; CONTRIBUTING.md; source policy. |
+| Verification | Exact original source/build-control identity review; current CCPU40 manifest comparison; profile-selection, function-table and session-terminal interface audit; independent diff review; documentation governance and `git diff --check` at P closure. |
+| Expected Markers | One S1 evidence record identifies the original CCPU30 translation-unit set, build predicates, required current bindings, profile-specific source differences and the smallest formal/fixture plan. |
+| Asset Needs | Existing selected OpenNT union, current CCPU40 manifests, original CCPU30 build controls and existing mapping-manager/session interfaces only; `src.old` is forbidden. |
+| Reporting Requirements | Report every CCPU30-only or incompatible CCPU40 assumption with original path, contract owner and proposed source-first disposition. |
+| Stop Conditions | Pause before adding any new executor, treating CCPU40 as a fallback, changing original profile semantics, or discovering a required boundary without a named owner. |
+| Exit Criteria | Exact CCPU30 source/configuration identity and all reached machine/session boundaries have a disposition; the follow-on S build/fixture plan is bounded; evidence is committed and pushed. |
+| Original Owner Request | “好 开工”; after correcting the already-completed support re-root, recover CCPU30 so it compiles and runs like CCPU40. |
+| Similar-Issue Sweep | Compare all CCPU30 and CCPU40 build controls, execution entry/terminal paths, CPU/SAS/FPU tables, mapping-manager leases and formal fixture selection. |
+
+**S1 audit result:** complete.  The original CCPU30 package is a separate
+kernel-VDM V86 monitor (`v86/monitor/i386`), not a CCPU40 build variation.
+Its reached `VdmFeatures`, `VdmStartExecution`, `VdmQueueInterrupt`,
+direct-pointer SAS and monitor-thread contracts have named dispositions in
+[the S1 evidence](etc/evidence/m0-t315-s1-ccpu30-profile-source-contract-audit-001.md).
+The packet's stop condition is reached: no CCPU30 S2 build or fixture is
+admitted until the owner chooses a product treatment for that private NT4
+monitor boundary.  CCPU40 is not used as a fallback.
 
 **T313 S1 closed:** the eleven-cohort selected-machine ledger is complete,
 with no live retired route in `mvdm-host` or its overlay.  Every non-original

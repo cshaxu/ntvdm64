@@ -99,10 +99,13 @@ identity holds. Consequently P03 begins with the retained source-shaped Base
 VDM seam rather than a full BaseClient/BaseSrv import, and P11 owns the exact
 `ntstatus.c` mirror slice alongside its Redirector binding.
 
-## P02A — MVDM host mirror-topology recovery
+## P02A — MVDM host mirror-topology recovery (completed M0 T311)
 
-**Predecessor:** closed `M0 T314` and the accepted CCPU40 original-SoftPC
-packet. **Purpose:** restore the
+**Completion:** M0 T311 already restored the selected original support paths
+under `mvdm-host`, rehomed their overlay/registers and passed the affected
+Win32/x86 CCPU40 formal graph. The retained proposal is not a candidate.
+
+**Purpose:** restore the
 original `base/mvdm` host topology before further owner recovery: move the
 complete `inc`, `oemuni`, and `suballoc` package members out of the obsolete
 top-level `mvdm-support` component and back under `mvdm-host`; move the
