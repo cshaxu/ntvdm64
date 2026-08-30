@@ -60,6 +60,13 @@ its original implicit-result spelling; only the necessary support-call
 declaration remains.  The affected selected host-root archive rebuilt cleanly
 with the original warning still visible.  See the [P5 record](etc/evidence/m0-t313-s2-p5-mvdm-host-startup-mirror-cleanup-001.md).
 
+**T313 S2 P6:** the selected original CRT call shapes are now bound without a
+project-owned replacement: graph-wide no-inline mode preserves the original
+`fprt.c` provider, while the MSVC compatibility library supplies historic
+`_sprintf`/`_sscanf`.  The forced-link audit leaves its duplicate-provider
+diagnostic and all genuine historical boundary symbols visible.  See the [P6
+record](etc/evidence/m0-t313-s2-p6-original-crt-binding-audit-001.md).
+
 ### M0 T312 closure record
 
 | Field | Record |
