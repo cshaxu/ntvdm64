@@ -1,5 +1,11 @@
 # CCPU X86 配置 Profile Trace
 
+> **Historical probe only — retired.** The configuration described below once
+> deliberately omitted `CPU_40_STYLE`; it is no longer a permitted project
+> build, fixture, link, runtime or acceptance configuration. Current and
+> future product compilation defines `CPU_40_STYLE` only. `CPU_30_STYLE` is
+> retired and appears below only where the record quotes original source.
+
 状态：已验证的默认关闭研究目标，2026-08-08。
 
 ## 目的
@@ -8,17 +14,17 @@
 `config.c` 在 `sas_init` 后调用 `InitNtCpuInfo`。该函数服务于 NTSD 的寄存器
 观察，不是 DOS 启动、BOP、DEM、BIOS 或 guest 文件加载的服务。
 
-探针不修改历史 `config.c`，也不以自写 DOS 行为绕过它；它仅建立一个不定义
+探针不修改历史 `config.c`，也不以自写 DOS 行为绕过它；它曾建立一个不定义
 `CPU_40_STYLE` 的 CCPU 软件执行研究 profile，让原始条件编译自然选择其另一
-分支。
+分支。该 profile 已退役，仅保留为历史对照。
 
 ## 输入与构建边界
 
 - 原始输入：`src/opennt/overlay/base/mvdm/softpc.new/host/src/config.c`。
   overlay 只保留已登记的可构建性变更；本次没有改动该文件。
-- 新对象目标：`ntdos64-opennt-config-x86-prefix-objects`。
-- 新 trace 可执行目标：`ntdos64-opennt-config-x86-prefix-trace-fixture`。
-- CMake 选项：`WITHOUT_CPU_40_STYLE`。其余 CCPU 研究宏保持为
+- 当时的新对象目标：`ntdos64-opennt-config-x86-prefix-objects`。
+- 当时的新 trace 可执行目标：`ntdos64-opennt-config-x86-prefix-trace-fixture`。
+- 当时的 CMake 选项：`WITHOUT_CPU_40_STYLE`。其余 CCPU 研究宏保持为
   `NTVDM CCPU PROD DEVL=1 SPC386 NEW_CPU ANSI i386`。
 - 范围：均为 `EXCLUDE_FROM_ALL` 的历史输入/trace 目标，不连接
   `ntdos64-run.exe`，不构成默认 engine 或运行时组件。

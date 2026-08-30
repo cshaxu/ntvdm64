@@ -1,5 +1,10 @@
 # 历史 Reset Trace 状态
 
+> **Historical reset-trace evidence.** References below to non-`CPU_40_STYLE`,
+> `MONITOR`, or `CPU_30_STYLE` describe retired investigations or original
+> source conditionals only. All current and future project build, link,
+> fixture, runtime and acceptance paths select `CPU_40_STYLE`/CCPU40 only.
+
 ## 2026-08-08 R1 更正
 
 已排除 SAS 未初始化与 `c_sas_overwrite_memory()` 为本次异常根因：trace

@@ -133,6 +133,12 @@ reading a protected image from repository output.
 
 **ROI: very high. Estimated scope: medium and technically risky.**
 
+> **Historical profile observation.** This roadmap section records an upstream
+> profile distinction; it does not authorize a build choice. The project now
+> compiles only the Win32/x86 `CPU_40_STYLE` CCPU40 profile. `CPU_30_STYLE`,
+> `MONITOR`, and `WITHOUT_CPU_40_STYLE` are retired from project-owned build,
+> fixture, runtime and acceptance inputs.
+
 The forced CCPU startup-prefix probe is bounded by `InitNtCpuInfo`, but the
 original build definitions establish that it is not the NT4 x86 profile: x86
 uses the V86 `MONITOR` path while `CPU_40_STYLE` belongs to non-x86 profiles.

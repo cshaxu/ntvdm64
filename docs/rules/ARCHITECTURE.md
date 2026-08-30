@@ -128,8 +128,9 @@
     mutations to start or sustain itself.
 25. The current host build profile is MSVC Win32/x86 `/MT`, with the original
     SoftPC CCPU40 executor selected by `CPU_40_STYLE`. `CPU_30_STYLE` is the
-    retired NT4 kernel-VDM V86-monitor contract and must not enter compilation,
-    linking, runtime or acceptance. Different architectures never satisfy
+    retired NT4 kernel-VDM V86-monitor contract and must not enter any
+    project-owned compilation, linking, runtime, fixture or acceptance input.
+    Different architectures never satisfy
     symbols in one process; any later cross-process interaction uses only an
     admitted fixed wire ABI.
 26. Original SoftPC CCPU40 is the sole session machine backend. A session has

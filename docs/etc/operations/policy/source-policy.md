@@ -57,9 +57,9 @@ name-only match.
 The product machine backend is the original SoftPC `CPU_40_STYLE`/CCPU40
 source under `mvdm-host`; it is the sole production CPU and device route for
 each session. `CPU_30_STYLE` is the original NT4 kernel-VDM V86 monitor rather
-than a CCPU interpreter profile. It remains historical source evidence only
-and is prohibited from product source selection, compilation, linking,
-runtime and acceptance. Bochs 2.6
+than a CCPU interpreter profile. It is retired, remains historical source
+evidence only, and is prohibited from project-owned source selection,
+compilation, linking, fixtures, runtime and acceptance. Bochs 2.6
 under `O:\repos.external\bochs-2.6-compat\bochs-2.6` is retired comparison
 material only: it cannot be a source, build, link, runtime or acceptance
 dependency.  Later source trees, `ntvdm64`, PCjs, and similar projects remain

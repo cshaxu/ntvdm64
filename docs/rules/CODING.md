@@ -148,8 +148,10 @@
 - The current recovery build is MSVC Win32/x86 `/MT` and every reached SoftPC
   behavior must compile and run under the selected original `CPU_40_STYLE` /
   CCPU40 configuration. `CPU_30_STYLE` is an NT4 kernel-VDM V86-monitor
-  contract, not a CCPU execution profile; it is prohibited from production
-  compilation, linking, runtime and acceptance.
+  contract, not a CCPU execution profile; it is retired and prohibited from
+  every project-owned production or fixture compilation, linking, runtime and
+  acceptance input. Its remaining upstream-mirror conditionals and historical
+  evidence never authorize a CPU30 build row.
   x64 compatibility is recorded as deferred debt and is not a current gate.
   Do not link objects of different architecture or CRT into one process.
 - For a functional fixture that reaches machine execution, guest state or an

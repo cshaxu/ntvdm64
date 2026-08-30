@@ -16,9 +16,9 @@ until SoftPC/MVDM execution is connected.
 T310 selects the original `CPU_40_STYLE + CCPU + C_VID` configuration and its
 CCPU SAS-vector contract. A CPU30/MONITOR machine is a different historical
 product path and is explicitly outside the product and build plan. The
-selected CCPU40 preprocessing may retain `CPU_30_STYLE` where the original
-CCPU headers use it as a compatibility carrier; that is not an independent
-CPU30 build, runtime row, or acceptance obligation. In particular,
+selected CCPU40 preprocessing never defines `CPU_30_STYLE`; original mirror
+conditionals that test its absence remain source identity only. There is no
+CPU30 build, runtime, fixture, or acceptance row. In particular,
 `ccpusas4.c` requires the CPU40 generated `SasVector` contract and may not be
 compiled as a CPU30-only CCPU body.
 

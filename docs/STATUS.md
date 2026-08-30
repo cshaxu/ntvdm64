@@ -15,6 +15,7 @@
 | Objective | Select the existing original `NTIO -> SVC_DEMLOADDOS -> NTDOS` load path and recover one declared ordinary COM or MZ guest child profile through original `EXEC` and parent-return ownership. |
 | Non-goals | No app guest loader, replacement DOS executor, host COMMAND semantic change, PIF/TSR/Redirector/WOW/DPMI expansion, additional BOP implementation, device expansion, or x64 work. |
 | Reference Baseline | [S1 contract freeze](etc/evidence/m0-t318-s1-ntdos-exec-parent-return-contract-freeze-001.md); selected CPU40 SoftPC composition; original `demLoadDos`, NTDOS and COMMAND mirrors. |
+| Machine Profile | The sole permitted build/runtime/acceptance profile is `CPU_40_STYLE`/CCPU40. `CPU_30_STYLE` is retired historical evidence and is not a fallback or deferred route. |
 | Files And ABI Surface | Reached original guest NTDOS/COMMAND sources and staged artifacts; original `demmisc.c::demLoadDos`; existing DEM `0x11`, `0x36`, `0x3C` and COMMAND `54:0B` contracts; selected SoftPC source/build inputs. |
 | Applicable Rules | `docs/rules/EXECUTION.md`, `docs/rules/ARCHITECTURE.md`, `docs/rules/CODING.md`, source policy, and mirror exception registration. |
 | Verification | Fresh selected x86 CPU40 composition; source/image identity verification; one bounded ordinary-child continuity observation with a controlled stop/result; governance verification and `git diff --check`. |

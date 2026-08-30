@@ -29,6 +29,15 @@ inputs only; tests, examples, reference copies and historical experiments stay
 under `tests/` or `docs/etc/legacy_code/`. `src.old/` is quarantined comparison
 material and never a source, build, link or runtime input.
 
+## Machine-profile selection
+
+Every product build manifest defines `CPU_40_STYLE` and selects the original
+CCPU40 source contract. `CPU_30_STYLE` is retired: it must not appear in a
+project-owned compile definition, generated Ninja graph, link input, runtime
+selection, fixture, or acceptance row. An occurrence inside an unmodified
+OpenNT mirror is retained only as source identity; an occurrence in a
+historical record is evidence, not a selectable configuration.
+
 ## Owner placement
 
 - `mvdm-host` contains only canonical selected MVDM host-runtime
@@ -103,9 +112,10 @@ identity, never by a bare same-spelled function name.
 
 The current recovery build uses MSVC Win32/x86 `/MT` and selects only
 `CPU_40_STYLE` with the original CCPU40 executor. `CPU_30_STYLE` is an NT4
-kernel-VDM V86-monitor contract and is prohibited from product compile, link,
-runtime and acceptance inputs. x64 is a later compatibility profile, not a
-current formal-build gate. Cross-component and broker wire records use fixed-width
+kernel-VDM V86-monitor contract. It is retired and prohibited from every
+project-owned compile, link, runtime, fixture and acceptance input. x64 is a
+later compatibility profile, not a current formal-build gate. Cross-component
+and broker wire records use fixed-width
 integer fields.
 Native process-local implementation uses `uintptr_t`, `size_t`, `HANDLE` and
 other pointer-sized platform types.
@@ -159,5 +169,5 @@ Disposable objects, libraries, executables and logs belong under
 `build/<task-id>/<run-id>/`. Guest objects and libraries are packaging/loading
 inputs only and never enter the host link. Formal verification currently
 covers accepted x86 CCPU40 compilation plus architecture-neutral token
-behavior; `CPU_30_STYLE` is historical-only; x64 compatibility verification
-is deferred until the SoftPC/MVDM execution path is connected.
+behavior; `CPU_30_STYLE` is retired and historical-only; x64 compatibility
+verification is deferred until the SoftPC/MVDM execution path is connected.

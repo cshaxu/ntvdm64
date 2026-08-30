@@ -76,6 +76,6 @@ has one verified destination or a recorded owner-approved exception; all
 original `base/mvdm` relative topology is represented beneath `mvdm-host`; all
 four previously registered width divergences remain registered at their new
 owner; and the affected formal CCPU40 graph has no live old-root reference.
-CCPU30 recovery is deliberately not asserted by this behavior-neutral move:
-the immediately following CCPU30 package must establish its own original
-source selection, formal graph and bounded execution evidence.
+CPU30 recovery is deliberately not asserted by this behavior-neutral move:
+`CPU_30_STYLE` is retired and no following package may establish a CPU30
+source selection, formal graph, bounded execution, or acceptance row.

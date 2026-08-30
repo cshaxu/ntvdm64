@@ -50,5 +50,6 @@ not a supported product configuration.
 - A fresh x86 build and bounded execution reach the declared stop.
 - Every unsatisfied external edge has one named owner, source contract and
   truthful unavailable/binding disposition.
-- The result explicitly states whether CCPU40 is product-admissible. x64 and
-  CPU30/MONITOR compatibility remain deferred product work.
+- The result explicitly states whether CCPU40 is product-admissible. x64
+  compatibility remains deferred product work. CPU30/MONITOR is retired
+  historical source evidence and is not a deferred product route.

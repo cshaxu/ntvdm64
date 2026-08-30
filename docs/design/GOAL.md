@@ -60,3 +60,8 @@ historical source evidence only and is prohibited from production build, link,
 runtime and acceptance inputs. x64 compatibility is later work, not skipped
 evidence for this phase. Historical Bochs material is retired comparison
 material only and is not a product backend, build input or fallback.
+
+`CPU_30_STYLE` is retired, not deferred: no current or future project build
+configuration may define it. Its remaining appearances are immutable OpenNT
+mirror conditionals or historical evidence, neither of which authorizes a
+second CPU profile.
