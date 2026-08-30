@@ -142,6 +142,17 @@ package-recovery program and `QUEUE.md`.
 - Directly compose the original translation unit first. A modern public API
   may bind a historical dependency but cannot replace an available controller
   algorithm.
+- **S8 external-boundary rule.** For an executor call that crosses into a
+  later owner packet, S8 closes the caller-side contract only: identify the
+  original declaration and call form, preserve its ABI and failure direction,
+  and give it one `binding-only`, `adapter-backed`, or
+  `original-unavailable` disposition sufficient for the selected CCPU archive,
+  forced link, and focused executor observation. S8 does not implement the
+  crossed owner's business semantics, controller behavior, or host API
+  capability. Those remain the acceptance responsibility of their named later
+  owner packet. A focused S8 fixture may use only an explicitly admitted
+  boundary result; it may not rely on an unregistered empty stub or fabricated
+  success.
 - A source-bearing native pointer, handle or 32-bit identity crossing uses the
   existing session mapping manager on both host architectures. Short-lived
   guest leases cannot be physical backing or asynchronous device state.

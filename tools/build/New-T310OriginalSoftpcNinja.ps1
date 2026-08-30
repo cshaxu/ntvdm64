@@ -89,6 +89,14 @@ $xmsManifest = Join-Path $xmsRoot 'sources'
 $debugManifest = Join-Path $debugRoot 'sources'
 $hostManifest = Join-Path $hostRoot 'sources'
 $ccpuNames = Get-OriginalSources $ccpuManifest
+# The historical manifest carries the real FPU body and a host-profile stub
+# carrier in the same lexical list.  The selected CPU_40/FPU profile is the
+# real `fpu.c` body; selecting `ntstubs.c` beside it creates duplicate FPU and
+# SAS fallback definitions during a complete-library forced link.  Retain the
+# original stub as mirror evidence, but do not select the alternate body for
+# this profile.  The separately selected NTVDMx64 CCPU-vector-default patch
+# owns only its registered default symbols.
+$ccpuNames = @($ccpuNames | Where-Object { $_ -ne 'ntstubs.c' })
 # The original CCPU manifest omits the identical `vglob.c` carrier even though
 # the selected original video sources call its public VGLOB accessors. Select
 # the same-named original CCPU-root form rather than synthesize those globals.
