@@ -19,6 +19,13 @@ machine.
   `src/mvdm-guest/dos/v86/cmd/command/tcode.asm`; its `CMDSVC
   SVC_RETURNEXITCODE` sites are the guest side of the existing COMMAND
   `54:0B` contract.
+- The staged guest artifacts are present in the mirror: `NTDOS.SYS` is
+  27,858 bytes with SHA-256
+  `957662320654ad5251c3a8b228a5dadec28aa65dddbcba38c3658a6e7f93bc84`, and
+  `COMMAND.COM` is 50,384 bytes with SHA-256
+  `908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43`.
+  These are the exact identities asserted by the retained original-toolchain
+  build recipes; S1 does not substitute either artifact.
 
 ## Original lifecycle map
 
@@ -52,6 +59,7 @@ machine.
 | Prerequisite | Owner / disposition |
 | --- | --- |
 | NTDOS EXEC, PSP, arena, JFN, environment and parent restoration | Original `mvdm-guest/dos/v86` sources. Recover only by selecting/repairing the original guest build/image path; no app, session or host COMMAND substitute. |
+| Initial NTDOS load | Original NTIO `SVC_DEMLOADDOS` (`0x11`) invokes `mvdm-host/dos/dem/demmisc.c::demLoadDos`, which resolves the established DOS location, obtains the existing VDM address, and performs the original 16 KiB read loop. App must not invent a second guest loader. |
 | Guest entry transfer and child instruction execution | Selected original x86 `CPU_40_STYLE`/CCPU40 SoftPC. It must preserve the register/stack contract from step 2; this task does not invent a second executor. |
 | `SVC_DEMENTRYDOSAPP` (`0x36`) | Original DEM `demEntryDosApp`; its VDD user-hook observation remains source-shaped and belongs to the VDD owner when nontrivial behavior is required. |
 | `SVC_PDBTERMINATE` (`0x3C`) | Original DEM `demTerminatePDB`; it is a required process-cleanup service, not an optional trace event. |
@@ -66,3 +74,10 @@ selectors are present in the selected source-shaped composition.  Failure,
 overlay, TSR, redirector, PIF, WOW and 32-bit host-child branches remain
 separate owner paths.  The first integration run is evidence only; it cannot
 select a new BOP implementation.
+
+## S1 closure
+
+The required original source, artifact identities, service selectors and
+machine/host owner dispositions are now frozen.  The only permitted S2 entry
+is the existing `NTIO -> SVC_DEMLOADDOS -> NTDOS` path followed by one declared
+original DOS child profile; no app-owned guest loader is admissible.

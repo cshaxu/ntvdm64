@@ -4,14 +4,34 @@
 
 ## Active Packet
 
-### M0 T318 S1 — NTDOS EXEC / parent-return source-and-contract freeze
+### M0 T318 S2 — Source-shaped NTDOS load and one ordinary child profile
 
-**Active: M0 T318 S1**
+**Active: M0 T318 S2**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T318 S2; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | The owner-authorized T318 proposal admits S2 after S1 froze the complete original guest/host boundary. |
+| Objective | Select the existing original `NTIO -> SVC_DEMLOADDOS -> NTDOS` load path and recover one declared ordinary COM or MZ guest child profile through original `EXEC` and parent-return ownership. |
+| Non-goals | No app guest loader, replacement DOS executor, host COMMAND semantic change, PIF/TSR/Redirector/WOW/DPMI expansion, additional BOP implementation, device expansion, or x64 work. |
+| Reference Baseline | [S1 contract freeze](etc/evidence/m0-t318-s1-ntdos-exec-parent-return-contract-freeze-001.md); selected CPU40 SoftPC composition; original `demLoadDos`, NTDOS and COMMAND mirrors. |
+| Files And ABI Surface | Reached original guest NTDOS/COMMAND sources and staged artifacts; original `demmisc.c::demLoadDos`; existing DEM `0x11`, `0x36`, `0x3C` and COMMAND `54:0B` contracts; selected SoftPC source/build inputs. |
+| Applicable Rules | `docs/rules/EXECUTION.md`, `docs/rules/ARCHITECTURE.md`, `docs/rules/CODING.md`, source policy, and mirror exception registration. |
+| Verification | Fresh selected x86 CPU40 composition; source/image identity verification; one bounded ordinary-child continuity observation with a controlled stop/result; governance verification and `git diff --check`. |
+| Expected Markers | Original `demLoadDos` performs the selected image load, NTDOS reaches original `EXEC`, the child exits through original parent restoration, and the established `54:0B` contract receives the result without a replacement lifecycle. |
+| Asset Needs | Existing NTDOS.SYS/COMMAND.COM guest artifacts, original MVDM mirrors, CPU40 SoftPC graph and existing adapter/session bindings. |
+| Reporting Requirements | Separate code/source composition from observed runtime continuity; record every missing device or service as its owner transfer. |
+| Stop Conditions | Any need for an app-owned loader, a non-original guest state machine, a new BOP route, non-CPU40 route, or a missing cross-owner package pauses for re-admission. |
+| Exit Criteria | One declared ordinary child profile has source-shaped load/EXEC/parent-return evidence, or every remaining nonlocal blocker is proven and transferred without invented recovery. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | Compare COM and MZ load branches, normal/abort exit, `0x11` load, `0x36` entry, `0x3C` cleanup and `54:0B` completion as one lifecycle. |
+
+### M0 T318 S1 closure record
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T318 S1; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | The owner's standing objective authorizes single-person execution of queue tasks. This admits queue item 1 after T317 closure. |
+| Admission And Approval | The owner's standing objective authorized queue item 1 after T317 closure. |
 | Objective | Freeze the original guest-owned `EXEC -> PSP/arena/JFN/environment -> parent restore -> 54:0B` chain and its exact SoftPC/host prerequisites before any recovery edit. |
 | Non-goals | No guest behavior change, host COMMAND provider change, BOP-by-trace patch, app/session lifecycle invention, device expansion, Redirector/WOW/DPMI work, or x64 recovery. |
 | Reference Baseline | [T317 closure](history/m0-t317-dem-command-softpc-vertical-slice-closure-20260830.md); [T318 proposal](etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md); selected x86 `CPU_40_STYLE`/CCPU40 SoftPC path. |
@@ -26,12 +46,12 @@
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | Inspect ordinary and failure returns, COM/EXE paths, parent/child JFN and environment restoration, and the host `54:0B` input handoff as one lifecycle contract. |
 
-**S1 P1:** the original NTDOS `INT 21h/4Bh` and parent-return cohort is
+**S1 closed:** the original NTDOS `INT 21h/4Bh` and parent-return cohort is
 frozen in [the contract map](etc/evidence/m0-t318-s1-ntdos-exec-parent-return-contract-freeze-001.md).
 It proves that PSP/arena/JFN/environment and parent restoration remain in the
-unmodified guest mirror; it names only the existing DEM `0x36`/`0x3C`,
-COMMAND `54:0B`, and CPU40 SoftPC transitions. No guest execution claim is
-made.
+unmodified guest mirror, verifies the exact staged NTDOS/COMMAND artifact
+identities, and identifies original DEM `0x11`/`0x36`/`0x3C`, COMMAND `54:0B`,
+and CPU40 SoftPC transitions. No guest execution claim is made.
 
 ### M0 T317 S2 closure record
 
