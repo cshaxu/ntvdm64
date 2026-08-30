@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3301 |
+| Documentation records | 3304 |
 | --- | --- |
-| Generated UTC | 2026-08-30T07:26:41Z |
+| Generated UTC | 2026-08-30T07:31:14Z |
 
 ## Entries
 
@@ -525,6 +525,8 @@ content-divergent entries.
 | etc/evidence/m0-t310-s17-p1-system-controller-source-boundary-001.md | indexed supporting material | 63af2b8d622702f688c57edd90ad7e0bcaa103fdbe35d9f9b41d07e9524ef936 |
 | etc/evidence/m0-t310-s17-p2-system-controller-contract-disposition-001.tsv | indexed supporting material | e62885d7ace338d06748ec9696a718733ce40b779867b508a4c9b462d0d55111 |
 | etc/evidence/m0-t310-s17-p2-system-controller-formal-assembly-001.md | indexed supporting material | 2beaeec643e0e181362f6694fd54608767e837ef14ad64d5bff47fbb2cc32ceb |
+| etc/evidence/m0-t310-s18-p1-host-system-interrupt-boundary-001.tsv | indexed supporting material | 3fb09dd3b0d42b54a6ab974839f1eec480dc37b793dd48b808a79a0128cfed84 |
+| etc/evidence/m0-t310-s18-p1-host-system-interrupt-formal-assembly-001.md | indexed supporting material | ea904c5e6532e72c8324f7294beed897e26f4ff8252d584d68fd56353089c51e |
 | etc/evidence/m0-t310-s1-softpc-selectable-backend-audit-001.md | indexed supporting material | a39180a64d82519752ea200a064d1595a0c892d1e94758a18f77bf0af3b5cb40 |
 | etc/evidence/m0-t310-s2-original-softpc-candidate-build-001.md | indexed supporting material | 398a96ff9360cc89521289b35ef8e7f11693f22e8fbac97e1ae735c94d8819b4 |
 | etc/evidence/m0-t310-s2-original-softpc-forced-link-audit-001.md | indexed supporting material | 194795bbc3ac0871d9716229aec9c276d44ef84cd484474df8da3a85300692d7 |
@@ -3028,6 +3030,7 @@ content-divergent entries.
 | history/m0-t310-s15-xms-owner-package-closure-20260830.md | closed task history | 1d6a552504a28c0947a7334b553d37d5c5ed08eb86d51835596c2c64d287ece4 |
 | history/m0-t310-s16-bios-firmware-bindings-closure-20260830.md | closed task history | be25841197fda18b358e68df2300f0a99d0594e0798f59f2f218905762f62369 |
 | history/m0-t310-s17-system-controller-callbacks-closure-20260830.md | closed task history | 72b71fa930dbdb0ad613244a226821835e72f4f450af8804e303f489474a6bbf |
+| history/m0-t310-s18-host-system-interrupt-bindings-closure-20260830.md | closed task history | e0f61f76297de0210de81dda868c41314017cc660e8c6d841132203ca9f55761 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

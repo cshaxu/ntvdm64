@@ -1,0 +1,11 @@
+id	original-call-shape	original-callers	modern-disposition	owner-and-notes
+S18-001	CreateThread(...HeartBeatThread...)	nt_timer.c:host_timer_init	public Win32 direct	Original heartbeat ordering/body retained; lifecycle integration remains deferred
+S18-002	CreateEvent + InitializeCriticalSection	nt_timer.c:TimerInit	public Win32 direct	Original event and critical-section initialization retained
+S18-003	NtAlertThread(HANDLE)	nt_timer.c:TerminateHeartBeat	adapter-backed same-shaped binding	ADAPTER-WIN32-020 queues an APC to wake the original alertable wait without process-global mutation
+S18-004	WaitForSingleObjectEx(HANDLE,10000,TRUE)	nt_timer.c:TerminateHeartBeat	public Win32 direct	Original bounded alertable teardown wait retained
+S18-005	NtQueryPerformanceCounter / RtlExtendedLargeIntegerDivide	nt_timer.c timing functions	OpenNT ABI direct	Original private host timer scalars retained
+S18-006	DelayHeartBeat wait flow	nt_timer.c:HeartBeatThread	original host body plus public ABI	Selected non-MONITOR branch only; no kernel VDM/MONITOR timer path
+S18-007	VdmInstallHardware/Software/ExceptionIntHandler	nt_inthk.c and CCPU callers	original local registry	Original CCPU function-pointer slots; no BaseSrv import
+S18-008	ActivityCheckAfterTimeSlice()	nt_eoi.c and nt_unix.c	deferred host-platform binding	S28 owns idle/public scheduling disposition
+S18-009	ExitVDM, console event/UI, process close	nt_reset.c	deferred host-platform binding	S28 owns controlled-stop and console/UI behavior
+S18-010	Timer event -> time_strobe / cpu_interrupt / WOWIdle	nt_timer.c	original controller call chain	S17 owns controller mechanics; later endpoint/WOW owners determine side effects
