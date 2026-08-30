@@ -26,9 +26,9 @@ compiled as a CPU30-only CCPU body.
 
 Every S closes exactly one coverage-ledger cluster. It is atomic: original
 definition, declaration, table/initializer, selected callers, prior repair,
-x86 diagnostics and locally meaningful behavior are reread together for the
-selected CCPU40 profile. x64 diagnostics remain recorded compatibility debt,
-not a completion gate. A
+selected x86 CCPU40 diagnostics and locally meaningful behavior are reread
+together. x64 compatibility is outside this recovery program: it is neither
+an acceptance gate nor a worklist for an active S. A
 cluster cannot close merely because its selected objects compile or its
 warnings have a static disposition: it must also have focused functional
 verification of the recovered contract. Where the selected original profile
@@ -82,33 +82,31 @@ local workaround. The sequence is dependency order, not warning-count order.
     `create -> reset -> firmware/machine initialization -> bounded execution
     -> typed controlled stop -> teardown` verification.
 
-## Whole-tree ABI audit rule
+## Selected-profile source-contract audit rule
 
-Before selecting any individual generated carrier or display repair, inventory every function-pointer declaration, table initializer,
-   repair, inventory every function-pointer declaration, table initializer,
-   callback cast, pointer/integer conversion and compiler ABI/type diagnostic
-   in the complete `mvdm-host` and `mvdm-support` original-source trees.
-   Source is authoritative: every candidate requires its declaration,
-   initializer/assignment, all selected call forms and original owner context
-   to be read before it receives a disposition. Compiler diagnostics
-   are a coverage aid and cross-check, never evidence that an unreported
-   source contract is safe. The audit must record source identity, original
-   owner/package, selected or unselected product profile, actual selected x86 CCPU40
-   diagnostic, pointer/address class, and one
-   mirror/overlay/adapter/unavailable disposition. It must group common
-   contracts into complete repair clusters, so an individual warning is never
-   made the next implementation task merely because a build reached it. Only
-   after that baseline is reviewed may P4 recover
-   source-shaped basic video/IOS port behavior plus the selected disk/floppy
-   read path and its original unavailable/media failure direction. Before any
+Each packet audits the complete callable contract selected by the original
+Win32/x86 CCPU40 source list: function-pointer declarations, table
+initializers, callback casts, pointer/integer conversions and compiler ABI/type
+diagnostics reached by that owner. Source is authoritative: every candidate
+requires its declaration, initializer/assignment, all selected call forms and
+original owner context before it receives a disposition. Compiler diagnostics
+are a coverage aid and cross-check, never proof that an unreported source
+contract is safe. The record must capture source identity, original
+owner/package, selected CCPU40 profile, actual x86 diagnostic where present,
+pointer/address class, and one mirror/overlay/adapter/unavailable disposition.
+Common contracts are handled as complete repair clusters, so a build hit never
+selects the next implementation packet. A selected source recovery may retain
+the original basic video/IOS port behavior and selected disk/floppy read path,
+including its original unavailable/media failure direction, only after its
+owning cluster is reviewed. Before any
    `cvidc` video path is enabled, the complete generated C-video ABI includes:
    `cvidc/evidgen.h` vector slots, every `vglfunc.c` initializer, every
    generated-table initializer in `evidfunc.c`, and every reached
    `base/video` handler-table or callback assignment must agree with the actual
-   `S_*` callable signature on both selected x86 CCPU profiles. The original generated
+   `S_*` callable signature in the selected CCPU40 profile. The original generated
    `S_*` bodies take four generic host-word arguments, while the vector tables
    declare typed zero- and one-argument interfaces. It remains a source ABI
-   contract requiring a profile-specific disposition; x64 repair is deferred.
+   contract requiring a selected-profile disposition.
    Recovery must be generated, private `mvdm-host-overlay` carriers derived
    from the original generator output—not hand-written per-slot wrappers—and
    they must preserve the original selected vector/table order.  The CVIDC
@@ -126,16 +124,17 @@ Before selecting any individual generated carrier or display repair, inventory e
    are first reduced into owner-contract clusters.  A cluster is reviewed as
    one unit: original declaration(s), definition(s), table/initializer forms,
    selected caller forms, selected x86 CCPU40 diagnostic evidence and its runtime owner
-   are read together.  The execution order is maintained in
+   are read together. The execution order is maintained in
    `m0-t310-s8-p4-owner-contract-execution-order-001.md`: startup-critical
    CCPU, memory/system/firmware, storage and input are considered before
    optional video, communications, debugger and unselected product surfaces.
    A warning may only cause a mirror correction, overlay or adapter change
    after its entire contract cluster has that evidence. The full-tree ledger is
    a shared cross-cluster planning index, not a blocking prerequisite for each
-   S: an active S reads and closes only its own owner-contract rows. Non-width source-form
+   S: an active S reads and closes only its own owner-contract rows. Source-form
    records remain compiler-visible and leave the current x86 worklist by a
-   documented cluster disposition, never by suppression.
+   documented cluster disposition, never by suppression. x64-only repair
+   work is not admitted here.
 ## T310 S8 closure boundary
 
 S8 closes only when `SPC-CCPU-EXECUTOR-DISPATCH` has a source-shaped
@@ -169,8 +168,7 @@ package-recovery program and `QUEUE.md`.
   boundary result; it may not rely on an unregistered empty stub or fabricated
   success.
 - A source-bearing native pointer, handle or 32-bit identity crossing uses the
-  existing session mapping manager. This remains mandatory on x86; deferring
-  x64 work never permits native identity pass-through. Short-lived
+  existing session mapping manager. This remains mandatory on x86. Short-lived
   guest leases cannot be physical backing or asynchronous device state.
 - No package selects a Bochs, MONITOR, kernel-VDM or `src.old` route.
 - Any newly authored behavior belongs in its named adapter and must preserve
