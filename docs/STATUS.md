@@ -59,6 +59,12 @@ native handles/events remain private source state.  WOW callbacks remain S39,
 and the `PRINTER`/MONITOR LPT source remains condition-unselected without a
 synthetic provider.  See the [S24 source boundary](etc/evidence/m0-t310-s24-p1-host-comms-source-boundary-001.md).
 
+**T310 S24 P2:** a fresh 369-edge x86 CCPU40 graph archives the original host
+communications roots and communications package with no S24-owner unresolved
+forced-link edge.  A safe impossible-COM-name fixture passes without touching
+a real endpoint; live serial behavior remains S49.  See the [S24 formal
+assembly evidence](etc/evidence/m0-t310-s24-p2-host-comms-formal-assembly-001.md).
+
 **T310 S17 P1:** the complete selected system-controller source set is now
 split from adjacent ROM, platform, endpoint and BOP owners. The original
 controller initialization/heartbeat order stays in its source bodies; every
