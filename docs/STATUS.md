@@ -4,25 +4,9 @@
 
 ## Active Packet
 
-**Active: M0 T313 S5**
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T313 S5; Ordinary Mode (single-person dual-role implementation and review). |
-| Admission And Approval | S4 is closed by its recorded original package, bounded endpoint, formal-build and immediate mirror-cleanup evidence. Owner-directed sequential execution admits the selected original SoftPC bounded execution/teardown acceptance only. |
-| Objective | Run the selected original Win32/x86 CCPU40 SoftPC route from initialized state through a finite instruction budget or typed controlled stop, then source-shaped teardown; re-read every reached `mvdm-host` divergence and overlay. |
-| Non-goals | No x64 recovery, CPU30/MONITOR, Bochs route, guest/BOP semantic expansion, presentation window, destructive-media operation, Redirector protocol, printer product shell, kernel VDM/CSRSS reconstruction, raw host identity in historical ABI, or second machine executor. |
-| Reference Baseline | [T313 S4 closure](history/m0-t313-s4-device-lifecycle-closure-20260830.md), [T313 S1 ledger](etc/evidence/m0-t313-s1-softpc-capability-purity-ledger-001.tsv), and the T313 plan. |
-| Files And ABI Surface | Selected original SoftPC process/root, CCPU40/SAS, BIOS/reset and device package bodies; existing same-shaped host bindings, session mapping manager and typed controlled-stop surface. |
-| Applicable Rules | Source-first/mirror-first recovery, selected x86 CCPU40 profile, one mapping manager, no `src.old`, no retired Bochs route, minimal registered divergence and package-first verification. |
-| Verification | Source-shaped create/reset/run/stop/teardown ordering review; one bounded execution or controlled-stop observation; fresh external formal Ninja candidate and forced-link run; reached-mirror/overlay, retired-route, documentation-governance and diff review. |
-| Expected Markers | One original executor; finite run outcome without host termination; mapping-manager use only at genuine host/guest crossings; every reached divergence removed or registered. |
-| Asset Needs | Pinned MVDM source mirrors, selected CCPU40 manifests, current session mapping manager, source-shaped adapters and MSVC/Ninja x86 environment. |
-| Reporting Requirements | Record the exact original lifecycle root and each run/stop/teardown outcome, mapping use, mirror cleanup and later product-shell dependency. |
-| Stop Conditions | A required edge selects a second executor, needs a source-body rewrite, proposes an unregistered generic shim, needs guest service semantics, or cannot retain original package order. Pause for re-admission. |
-| Exit Criteria | S5 closes only with one bounded original execution or controlled-stop result, source-shaped teardown disposition, fresh selected x86 CCPU40 formal build, and no deferred cleanup discovered in reached `mvdm-host` paths. |
-| Original Owner Request | “在 mvdm-host 里面，你碰到的话可以顺手清理掉，不必等待以后。” |
-| Similar-Issue Sweep | CPU/FPU/SAS vectors, EMS/UMB mapping, firmware resource roots, first-session initialization, reset/teardown callers, reached overlays/bindings and retired-route names. |
+**No M/T/S packet is active.** `M0 T313` is closed; implementation is paused
+until an owner admits the next package. See the
+[closure](history/m0-t313-softpc-capability-mirror-purity-closure-20260830.md).
 
 **T313 S1 closed:** the eleven-cohort selected-machine ledger is complete,
 with no live retired route in `mvdm-host` or its overlay.  Every non-original
@@ -193,6 +177,28 @@ block in the CCPU40 graph.  A fresh 407/407 candidate exports all three
 original `LIM_*_write` forms and removes the two CCPU unresolved edges without
 an EMS shim.  No live EMS caller is claimed; see the [P4
 record](etc/evidence/m0-t313-s5-p4-original-ems-writeback-closure-001.md).
+
+**T313 S5 P5:** original `host_start_cpu()` bounded execution and the typed
+session terminal have been reread with all reached CCPU/SAS/FPU, terminal and
+EMS divergences either source-selected or registered.  The full original
+debugger product was attempted, then correctly left unselected at its NT4
+private Debug Subsystem boundary; the accepted selected CCPU40 graph remains
+407/407. See the [final reread](etc/evidence/m0-t313-s5-p5-bounded-execution-and-purity-reread-001.md).
+
+### M0 T313 closure record
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T313; Ordinary Mode (single-person dual-role implementation). |
+| Result | Closed for selected Win32/x86 CCPU40 SoftPC capability and mirror-purity acceptance. |
+| Closure | [T313 closure](history/m0-t313-softpc-capability-mirror-purity-closure-20260830.md) |
+| Next Admission | Queue item 1: Base VDM source-shaped broker recovery. |
+
+**T313 closed:** the selected original SoftPC package has finite CCPU
+execution, a session-scoped terminal result, formal source composition and a
+completed reached-path purity reread.  No DOS/WOW workload or private NT4
+product shell is claimed. See the
+[closure](history/m0-t313-softpc-capability-mirror-purity-closure-20260830.md).
 
 ### M0 T312 closure record
 
