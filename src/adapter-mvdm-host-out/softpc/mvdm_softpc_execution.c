@@ -1,4 +1,5 @@
 #include "mvdm_softpc_execution.h"
+#include "mvdm_softpc_guest_memory.h"
 
 /* Original SoftPC host spelling; its body remains in mvdm-host. */
 extern void host_start_cpu(void);
@@ -9,6 +10,7 @@ extern int mvdm_softpc_original_entry(int argc, char **argv);
 int mvdm_softpc_execution_run_until_return(session *owner)
 {
     int did_bind = 0;
+    int did_memory_bind = 0;
 
     if (owner == NULL || !session_valid(owner) ||
         owner->state != SESSION_STATE_ACTIVE ||
@@ -20,7 +22,14 @@ int mvdm_softpc_execution_run_until_return(session *owner)
         did_bind = 1;
     }
 
+    if (!mvdm_softpc_guest_memory_begin(owner)) {
+        if (did_bind) (void)session_thread_unbind(owner);
+        return 0;
+    }
+    did_memory_bind = 1;
+
     if (!session_arm_termination_escape(owner)) {
+        if (did_memory_bind) mvdm_softpc_guest_memory_end(owner);
         if (did_bind) (void)session_thread_unbind(owner);
         return 0;
     }
@@ -28,6 +37,7 @@ int mvdm_softpc_execution_run_until_return(session *owner)
         session_record_mechanical_resume_status(owner,
             SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED);
         session_disarm_termination_escape(owner);
+        if (did_memory_bind) mvdm_softpc_guest_memory_end(owner);
         if (did_bind) (void)session_thread_unbind(owner);
         return 1;
     }
@@ -38,6 +48,7 @@ int mvdm_softpc_execution_run_until_return(session *owner)
     session_record_mechanical_resume_status(owner,
         SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED);
     session_disarm_termination_escape(owner);
+    if (did_memory_bind) mvdm_softpc_guest_memory_end(owner);
 
     if (did_bind) (void)session_thread_unbind(owner);
     return 1;
@@ -47,6 +58,7 @@ int mvdm_softpc_execution_run_original_entry(session *owner, int argc,
     char **argv, int *result_out)
 {
     int did_bind = 0;
+    int did_memory_bind = 0;
     int result;
 
     if (result_out == NULL || owner == NULL || !session_valid(owner) ||
@@ -59,7 +71,14 @@ int mvdm_softpc_execution_run_original_entry(session *owner, int argc,
         did_bind = 1;
     }
 
+    if (!mvdm_softpc_guest_memory_begin(owner)) {
+        if (did_bind) (void)session_thread_unbind(owner);
+        return 0;
+    }
+    did_memory_bind = 1;
+
     if (!session_arm_termination_escape(owner)) {
+        if (did_memory_bind) mvdm_softpc_guest_memory_end(owner);
         if (did_bind) (void)session_thread_unbind(owner);
         return 0;
     }
@@ -74,6 +93,7 @@ int mvdm_softpc_execution_run_original_entry(session *owner, int argc,
                 SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED);
         }
         session_disarm_termination_escape(owner);
+        if (did_memory_bind) mvdm_softpc_guest_memory_end(owner);
         if (did_bind) (void)session_thread_unbind(owner);
         return 1;
     }
@@ -86,6 +106,7 @@ int mvdm_softpc_execution_run_original_entry(session *owner, int argc,
     session_record_mechanical_resume_status(owner,
         SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED);
     session_disarm_termination_escape(owner);
+    if (did_memory_bind) mvdm_softpc_guest_memory_end(owner);
 
     if (did_bind) (void)session_thread_unbind(owner);
     return 1;

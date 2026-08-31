@@ -191,7 +191,7 @@ $adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_com
 $adapterBaseSrvNames = @('base_vdm_client.c', 'base_vdm_local.c')
 $adapterMonitorNames = @('vdm_control.c', '../mvdm_vdm_tib.c')
 $adapterDebuggerNames = @('dbg_init.c', 'dbg_unavailable.c')
-$adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_physical_mapping.c', 'mvdm_host_identity.c',
+$adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c', 'mvdm_host_identity.c',
                         'mvdm_guest_location.c', 'mvdm_command_redirection.c', 'mvdm_command_guest_state.c',
                         'mvdm_vdd_sft_shadow.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
                         'mvdm_softpc_descriptor_fields.c', 'mvdm_softpc_activity_unavailable.c',
