@@ -438,6 +438,12 @@ rerun; the next source-first boundary is the NTIO load/guest-entry transaction.
 See [P51
 evidence](etc/evidence/m0-t318-s2-p51-original-scs-pre-ntio-owner-cohort-001.md).
 
+**S2 P52:** original `config()` assigns and floors `xmsMemorySize` before
+`scs_init`, so the apparent zero-XMS `XMSInit` terminal is unreachable for
+both ordinary DOS and WOW configurations.  No mapper/profile/source change or
+unchanged-product observation is admitted.  See [P52
+evidence](etc/evidence/m0-t318-s2-p52-original-xms-configuration-prerequisite-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
