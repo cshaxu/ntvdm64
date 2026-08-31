@@ -4,24 +4,18 @@
 
 ## Active Packet
 
-### M0 T332 S3 — Original DPMI initialization, descriptor and XMEM cohorts
+### No active packet
 
-**Active: M0 T332 S3**
+**No active M/T/S packet.** The next candidate requires explicit admission
+into this file.
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T332 S3; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | Next ordered package after closed T331, admitted under the standing owner direction to execute the queue. |
-| Objective | Compose and verify the selected original initialization, selector, descriptor, XMEM and data cohorts using S2's source-shaped SoftPC span, session identity and explicit monitor contracts. |
-| Non-goals | No trace-selected DPMI leaf repair, protected-mode shortcut, kernel VDM/CSRSS/V86 reconstruction, CPU30/Bochs route, raw host pointer, second executor, guest DOSX host link, or new DPMI policy. |
-| Reference Baseline | T332 S1 source/ABI ledger; closed T331 CPU40/session XMS binding; original `mvdm-host/dpmi32` and `mvdm-host/dpmi`; current selected CPU40 product graph. |
-| Files And ABI Surface | Original `dpmi32.c`, `dpmiselr.c`, `data.c`, `register.c`, `xmem.c`, `dpmimemr.c`, `dpmimscr.c`, original `sim32.c` CCPU40/SAS/video seam, session host-resource mapping manager, original SubAlloc, and descriptor bindings. |
-| Verification | Complete cohort definition/caller/failure review; original dispatch-table consistency; focused direct XMEM/identity and descriptor boundary tests; formal x86/x64 source-selection review. |
-| Exit Criteria | Selected original initialization, descriptor and XMEM bodies have one complete source-shaped binding and local cohort proof; no row is upgraded to protected-mode runtime completion merely because it links. |
-| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
-| Similar-Issue Sweep | DPMI allocation/free, descriptor/LDT operations, protected stack/interrupt/fault state, VxD controls, address/handle lifetimes, monitor TIB/control, DOSX guest/host separation, CPU40-only and x86/x64 build conditions. |
+### M0 T332 — Original DPMI/DPMI32 owner-package recovery
 
-**S1 closed:** [source/ABI admission evidence](etc/evidence/m0-t332-s1-original-dpmi-source-abi-admission-001.md) and its [complete table/import ledger](etc/operations/m0-t332-s1-dpmi-source-abi-admission-ledger.tsv) establish the original package boundary. **S2 closed:** [the original SoftPC-span, identity and monitor contract](etc/evidence/m0-t332-s2-dpmi-span-identity-monitor-contract-001.md) distinguishes source-internal RAM aliases from true host-boundary identities. **Plan:** [M0 T332 original DPMI/DPMI32 recovery](etc/operations/m0-t332-dpmi-owner-package-recovery-plan-001.md). S3 now recovers selected original source cohorts.
+**Closed: M0 T332.** [S4 package disposition](etc/evidence/m0-t332-s4-original-dpmi-package-disposition-001.md) records the exact selected-source, monitor/debugger/VDD and DOSX runtime boundaries. [Closure record](history/m0-t332-original-dpmi-owner-package-closure-20260831.md).
+
+**S1 closed:** [source/ABI admission evidence](etc/evidence/m0-t332-s1-original-dpmi-source-abi-admission-001.md) and its [complete table/import ledger](etc/operations/m0-t332-s1-dpmi-source-abi-admission-ledger.tsv) establish the original package boundary. **S2 closed:** [the original SoftPC-span, identity and monitor contract](etc/evidence/m0-t332-s2-dpmi-span-identity-monitor-contract-001.md) distinguishes source-internal RAM aliases from true host-boundary identities. **S3 closed:** [the original source-cohort build](etc/evidence/m0-t332-s3-original-dpmi-source-cohort-build-001.md) proves both final product graphs select and link the cohort.
 
 ### M0 T331 — Original XMS owner-package closure
 
