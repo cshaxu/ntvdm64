@@ -352,6 +352,15 @@ DEM, COMMAND or EXEC result—and no source mutation or repeat observation is
 admitted. See [P40
 evidence](etc/evidence/m0-t318-s2-p40-cpu40-entry-prerequisite-audit-001.md).
 
+**S2 P41:** one fixed non-debug, console-owning container and a complete
+original startup-precondition cohort now govern every remaining observation.
+The static order from `ntvdm.c` through `scs_init`, NTIO loading and
+`host_start_cpu` separates timer, NLS/error, console, Base VDM/provider and
+SAS/CPU ownership. Formal Ninja rebuilds only changed libraries and final
+link; one fixed short observation follows a changed product; NTDOS/EXEC
+evidence is prohibited before NTIO reachability. See [P41
+evidence](etc/evidence/m0-t318-s2-p41-fixed-container-startup-prerequisite-cohort-closure-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3461 |
+| Documentation records | 3462 |
 | --- | --- |
-| Generated UTC | 2026-08-31T07:52:08Z |
+| Generated UTC | 2026-08-31T07:58:40Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 687fedb982aa8be6213a44b88af1b7ca2811b82d7e87673027c537749f34059c |
+| STATUS.md | principal control document | fb6f2f12753a54f44a56d3f090d5832703b706585e1ee30f67aa879aa2ea7871 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -964,6 +964,7 @@ content-divergent entries.
 | etc/evidence/m0-t318-s2-p39-timer-pic-cpu40-prerequisite-audit-001.md | indexed supporting material | d0064087a7bdb285f3fb8a7f131b56dbb05bb4660bcc8dfd2f28a28525eb3f62 |
 | etc/evidence/m0-t318-s2-p4-original-resource-and-startup-contract-001.md | indexed supporting material | 688539591b39b3e0bfa95a29ee62ae2d6d258bda78b01f3f0fec719186e32c92 |
 | etc/evidence/m0-t318-s2-p40-cpu40-entry-prerequisite-audit-001.md | indexed supporting material | 24d16391a2e1ccb15c0862cc77917b056610bdfb456cc484e0eb59115f102674 |
+| etc/evidence/m0-t318-s2-p41-fixed-container-startup-prerequisite-cohort-closure-001.md | indexed supporting material | 6fe24d55b28aab3ba3e05556575d410242a871b06b640aa489ea0ba4534b87d4 |
 | etc/evidence/m0-t318-s2-p5-console-observation-admission-001.md | indexed supporting material | 6326836e2f291accf9ed0aa1884c8bf125159ea95cdfb28be404338c1c9f46c0 |
 | etc/evidence/m0-t318-s2-p6-base-vdm-ordinary-child-declaration-001.md | indexed supporting material | eb1928486ac016b6fb8e0589aabbc9f6f4cc845181c03fbb812bae31ba6a312f |
 | etc/evidence/m0-t318-s2-p7-v7vga-firmware-configuration-recovery-001.md | indexed supporting material | ed2b11e329f033cc5279ed7e326e6fc6c35400fac3f9bae3b01ff2c0ef5a427a |
@@ -1766,7 +1767,7 @@ content-divergent entries.
 | etc/operations/proposal-mvdm-host-support-reintegration-001.md | indexed supporting material | a0f59b9842313e5e9ea400d1fed486b0998d8330dff8822b33b2c488487616b1 |
 | etc/operations/proposal-mvdm-package-interface-closure-tracker-001.md | indexed supporting material | 78161a8a678fd2ec48596f310c47ffafd01572a995f06012bf75f17da06d6d37 |
 | etc/operations/proposal-mvdm-runtime-support-tool-re-root-001.md | indexed supporting material | 9955eefb0e8480e99f22e0cac375325d72663293262656537f4ca8d7cbb027c4 |
-| etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md | indexed supporting material | a92d3721c714aa875fd293a1f9e6b0ba22a8ec5e93f8d746a414d231d3bf5bc5 |
+| etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md | indexed supporting material | 9b589b5f95bbd935804a007e9b1a1195561511f900f3c0ae426bc80c44798b72 |
 | etc/operations/proposal-opennt-bop-mirror-overlay-convergence-001.md | indexed supporting material | 2f2e91c7a491398ae23278766e5596002ae710113ff2bd5a1fb0577b2d9e12b2 |
 | etc/operations/proposal-opennt-bop-original-dispatcher-provider-recovery-001.md | indexed supporting material | b8808fef6cf0f7519c2103fdc8509c7f6f704846620537f59f0dd076af718e93 |
 | etc/operations/proposal-opennt-command-cmdexec32-full-capability-closure-001.md | indexed supporting material | 2dbce97ef0f4ad01836827a786b0a5bbb5512eabefe3937c1d49c06aef525c02 |

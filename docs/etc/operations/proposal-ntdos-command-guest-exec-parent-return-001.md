@@ -33,6 +33,9 @@ a host COMMAND provider, app, session, or adapter.
    is a current runtime-observation row. Runtime observation uses one fixed,
    non-debug console-owning container; startup prerequisites are recovered by
    original owner-call clusters before any NTIO/EXEC-specific observation.
+   Formal Ninja builds only affected libraries and the final link; a changed
+   product then receives one five-to-ten-second observation in that same
+   container. NTDOS/EXEC evidence is admissible only after NTIO reachability.
 3. **S3 — Controlled-return evidence.** Verify one declared DOS child → parent ordinary-return profile, then link
    its remaining owner transfers into the cross-family audit.
 
