@@ -119,3 +119,33 @@ void mvdm_softpc_record_bop_dispatch(unsigned int selector,
     (void)WriteFile(output, message, (DWORD)(sizeof(message) - 1),
                     &written, NULL);
 }
+
+void mvdm_softpc_record_cpu_state(unsigned int segment,
+                                  unsigned long instruction_pointer,
+                                  unsigned int machine_status,
+                                  unsigned int default_operand_size)
+{
+    static const char hex[] = "0123456789ABCDEF";
+    char message[] = "MVDM-CPU-STATE 0000:00000000 MSW=0000 CSX=0\r\n";
+    HANDLE output;
+    DWORD written;
+    unsigned int index;
+
+    output = GetStdHandle(STD_ERROR_HANDLE);
+    if (output == NULL || output == INVALID_HANDLE_VALUE) return;
+    for (index = 0; index != 4; ++index) {
+        unsigned int shift = (3u - index) * 4u;
+        message[15 + index] = hex[(segment >> shift) & 0x0fu];
+    }
+    for (index = 0; index != 8; ++index) {
+        unsigned int shift = (7u - index) * 4u;
+        message[20 + index] = hex[(instruction_pointer >> shift) & 0x0fu];
+    }
+    for (index = 0; index != 4; ++index) {
+        unsigned int shift = (3u - index) * 4u;
+        message[33 + index] = hex[(machine_status >> shift) & 0x0fu];
+    }
+    message[42] = hex[default_operand_size & 0x0fu];
+    (void)WriteFile(output, message, (DWORD)(sizeof(message) - 1),
+                    &written, NULL);
+}
