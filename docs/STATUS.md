@@ -53,6 +53,13 @@ shared guest-span contract—not a trace-selected DPMI service.
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | All ten `Sim32GetVDMPointer` provider files, direct pointer arithmetic, stack/IVT/DTA/FCB buffers, VDM_TIB fields, descriptor references, cancellation/teardown and x86/x64 link forms. |
 
+**S2 P1 baseline:** [the DPMI guest-span lifetime ledger](etc/evidence/m0-t323-s2-dpmi-guest-span-lifetime-ledger-001.md)
+separates immediate SoftPC-private pointer use from persistent DPMI state,
+the `IntelBase`/`FlatAddress` width contract, the unavailable kernel-monitor
+operation, and later DOS re-entry.  The next bounded recovery is the complete
+`IntelBase`/`FlatAddress` contract; no generic DPMI mapper or synthetic
+monitor success is admitted.
+
 ### M0 T322 S1 — Original XMS ownership and memory-binding baseline
 
 **Closed: M0 T322 S1**
