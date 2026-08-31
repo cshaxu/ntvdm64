@@ -195,8 +195,6 @@ Return Value:
 --*/
 
 {
-    struct I_CDNames* structurePointer;
-    LPSTR stringPointer;
     LPWSTR infoString;
     NET_API_STATUS rc1;
     NET_API_STATUS rc2;
@@ -204,7 +202,9 @@ Return Value:
     UNICODE_STRING unicodeString;
     LPWKSTA_INFO_100 wkstaInfo = NULL;
     LPWKSTA_USER_INFO_1 userInfo = NULL;
-    CHAR ansiBuf[LM20_CNLEN+1];
+    CHAR computerBuf[LM20_CNLEN+1];
+    CHAR primaryDomainBuf[LM20_CNLEN+1];
+    CHAR logonDomainBuf[LM20_CNLEN+1];
     NTSTATUS status;
     register DWORD len;
 
@@ -220,63 +220,45 @@ Return Value:
     rc1 = NetWkstaGetInfo(NULL, 100, (LPBYTE*)&wkstaInfo);
     rc2 = NetWkstaUserGetInfo(0, 1, (LPBYTE*)&userInfo);
 
-    ansiString.MaximumLength = sizeof(ansiBuf);
+    RtlZeroMemory(computerBuf, sizeof(computerBuf));
+    RtlZeroMemory(primaryDomainBuf, sizeof(primaryDomainBuf));
+    RtlZeroMemory(logonDomainBuf, sizeof(logonDomainBuf));
+    ansiString.MaximumLength = sizeof(computerBuf);
     ansiString.Length = 0;
-    ansiString.Buffer = ansiBuf;
-
-    structurePointer = (struct I_CDNames*)POINTER_FROM_WORDS(getES(), getDI());
-    stringPointer = POINTER_FROM_POINTER(&structurePointer->CDN_pszComputer);
-    if (stringPointer) {
-        *stringPointer = 0;
-        if (rc1 == NERR_Success) {
-            infoString = (LPWSTR)wkstaInfo->wki100_computername;
-            len = wcslen(infoString);
-            if (len <= LM20_CNLEN) {
-                RtlInitUnicodeString(&unicodeString, infoString);
-                status = RtlUnicodeStringToAnsiString(&ansiString, &unicodeString, FALSE);
-                if (NT_SUCCESS(status)) {
-                    RtlCopyMemory(stringPointer, ansiBuf, len+1);
-                    _strupr(stringPointer);
-                }
-            }
-
+    ansiString.Buffer = computerBuf;
+    if (rc1 == NERR_Success) {
+        infoString = (LPWSTR)wkstaInfo->wki100_computername;
+        len = wcslen(infoString);
+        if (len <= LM20_CNLEN) {
+            RtlInitUnicodeString(&unicodeString, infoString);
+            status = RtlUnicodeStringToAnsiString(&ansiString, &unicodeString, FALSE);
+            if (NT_SUCCESS(status)) _strupr(computerBuf);
+        }
+        ansiString.Buffer = primaryDomainBuf;
+        infoString = (LPWSTR)wkstaInfo->wki100_langroup;
+        len = wcslen(infoString);
+        if (len <= LM20_CNLEN) {
+            RtlInitUnicodeString(&unicodeString, infoString);
+            status = RtlUnicodeStringToAnsiString(&ansiString, &unicodeString, FALSE);
+            if (NT_SUCCESS(status)) _strupr(primaryDomainBuf);
         }
     }
-
-    stringPointer = POINTER_FROM_POINTER(&structurePointer->CDN_pszPrimaryDomain);
-    if (stringPointer) {
-        *stringPointer = 0;
-        if (rc1 == NERR_Success) {
-            infoString = (LPWSTR)wkstaInfo->wki100_langroup;
-            len = wcslen(infoString);
-            if (len <= LM20_CNLEN) {
-                RtlInitUnicodeString(&unicodeString, infoString);
-                status = RtlUnicodeStringToAnsiString(&ansiString, &unicodeString, FALSE);
-                if (NT_SUCCESS(status)) {
-                    RtlCopyMemory(stringPointer, ansiBuf, len+1);
-                    _strupr(stringPointer);
-                }
-            }
+    if (rc2 == NERR_Success) {
+        ansiString.Buffer = logonDomainBuf;
+        infoString = (LPWSTR)userInfo->wkui1_logon_domain;
+        len = wcslen(infoString);
+        if (len <= LM20_CNLEN) {
+            RtlInitUnicodeString(&unicodeString, infoString);
+            status = RtlUnicodeStringToAnsiString(&ansiString, &unicodeString, FALSE);
+            if (NT_SUCCESS(status)) _strupr(logonDomainBuf);
         }
     }
-
-    stringPointer = POINTER_FROM_POINTER(&structurePointer->CDN_pszLogonDomain);
-    if (stringPointer) {
-        *stringPointer = 0;
-        if (rc2 == NERR_Success) {
-            infoString = (LPWSTR)userInfo->wkui1_logon_domain;
-            len = wcslen(infoString);
-            if (len <= LM20_CNLEN) {
-                RtlInitUnicodeString(&unicodeString, infoString);
-                status = RtlUnicodeStringToAnsiString(&ansiString, &unicodeString, FALSE);
-                if (NT_SUCCESS(status)) {
-                    RtlCopyMemory(stringPointer, ansiBuf, len+1);
-                    _strupr(stringPointer);
-                }
-            }
-
-        }
-    }
+    /* DIVERGENCE(MVDM-HOST-DIV-176): I_CDNames is a packed trio of 16:16
+     * destinations.  The original dereferenced those as durable flat aliases;
+     * retain its result conversion and clear-then-copy order through the
+     * Redirector adapter's bounded composite write. */
+    mvdm_redirector_write_cd_names(getES(), getDI(), computerBuf,
+        primaryDomainBuf, logonDomainBuf);
 
     if (wkstaInfo) {
         NetApiBufferFree((LPVOID)wkstaInfo);
@@ -288,15 +270,9 @@ Return Value:
 #if DBG
     IF_DEBUG(NETAPI) {
         DbgPrint("VrGetCDNames: computername=%s, PDCname=%s, logon domain=%s\n\n",
-                POINTER_FROM_POINTER(&structurePointer->CDN_pszComputer)
-                    ? POINTER_FROM_POINTER(&structurePointer->CDN_pszComputer)
-                    : "",
-                POINTER_FROM_POINTER(&structurePointer->CDN_pszPrimaryDomain)
-                    ? POINTER_FROM_POINTER(&structurePointer->CDN_pszPrimaryDomain)
-                    : "",
-                POINTER_FROM_POINTER(&structurePointer->CDN_pszLogonDomain)
-                    ? POINTER_FROM_POINTER(&structurePointer->CDN_pszLogonDomain)
-                    : ""
+                computerBuf,
+                primaryDomainBuf,
+                logonDomainBuf
                 );
     }
 #endif

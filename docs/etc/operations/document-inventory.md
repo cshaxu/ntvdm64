@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3567 |
+| Documentation records | 3569 |
 | --- | --- |
-| Generated UTC | 2026-08-31T23:28:46Z |
+| Generated UTC | 2026-08-31T23:37:06Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 707f9bdfbf9d311fa7d6edad67a374287278931965727fdd761ecfaf35ab4289 |
+| STATUS.md | principal control document | b20fac3494b2bf50815541acb638141ff16731286bfddd97937a03baf1323771 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1047,6 +1047,7 @@ content-divergent entries.
 | etc/evidence/m0-t333-s3-p2-complete-redirector-package-build-001.md | indexed supporting material | eed341d180bb1e495282aac75c54794058034595feaa19b83eb4bf497fc3a3c6 |
 | etc/evidence/m0-t333-s3-p3-original-dll-dependency-boundary-001.md | indexed supporting material | a96d147d6a1de8b71e8e9cd418531b6b650837c6d37dd5a570e2afcdbcdb8db3 |
 | etc/evidence/m0-t333-s4-redirector-async-adapter-composition-001.md | indexed supporting material | 3dc953d92c395386d3324c7704844bd6a019423f44f34ef1f9cbce8549d31f2b |
+| etc/evidence/m0-t333-s5-redirector-network-assignment-disposition-001.md | indexed supporting material | 2568adaa6d3d11120bb7ec663acf2f31bef149f64756fb165d6d6ee37ed53b39 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1740,6 +1741,7 @@ content-divergent entries.
 | etc/operations/m0-t333-redirector-owner-package-recovery-plan-001.md | indexed supporting material | 49fe579d32cc78306b1afbbb3c7b7599808cde669787ef27bff0b34ad86afa8a |
 | etc/operations/m0-t333-s1-redirector-source-abi-admission-ledger.tsv | indexed supporting material | 018e8f29e24479f96f716840291b9172fad9870f807f0855c4f0ff36d303330b |
 | etc/operations/m0-t333-s2-redirector-external-form-disposition-ledger.tsv | indexed supporting material | 214efa7e3d0ffd0d04372a6ea6e9ce13a9ae22d87747d59e0f87e3e5901174b0 |
+| etc/operations/m0-t333-s5-redirector-network-assignment-disposition-ledger.tsv | indexed supporting material | 7e0fee2a00ed5ec60e9c3c57c9ff0885fb73a2a3a33c4f1268a62c8a043e0fdd |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |

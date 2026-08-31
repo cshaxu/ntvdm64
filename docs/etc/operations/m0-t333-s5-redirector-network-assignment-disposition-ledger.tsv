@@ -1,0 +1,28 @@
+entry	original_owner	original_called_boundary	T333_S5_disposition	successor_or_evidence
+57:10	VrNetTransactApi / vrnetapi.c	VrpTransactVdm and Xs NetAPI transaction	transfer; original source remains selected but no BaseSrv/RAP transaction success is fabricated	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:11	VrNetRemoteApi / vrnetapi.c + vrremote.c	RxpTransactSmb / downlevel RAP descriptors	transfer; private RAP transport has no finite public one-call equivalent	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:12	VrNetNullTransactApi / vrnetapi.c	VrpTransactVdm null-session transaction	transfer; same BaseSrv/RAP transaction owner as 57:10	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:13	VrNetServerEnum / vrnetapi.c	XsNetServerEnum and REM16 conversion	transfer; BaseSrv/RAP worker plus bounded complex guest output	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:14	VrNetUseAdd / vrnetapi.c	XsNetUseAdd	transfer; BaseSrv network provider and guest structure conversion	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:15	VrNetUseDel / vrnetapi.c	XsNetUseDel	transfer; BaseSrv network provider	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:16	VrNetUseEnum / vrnetapi.c	XsNetUseEnum	transfer; BaseSrv network provider and bounded variable guest output	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:17	VrNetUseGetInfo / vrnetapi.c	XsNetUseGetInfo	transfer; BaseSrv network provider and bounded variable guest output	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:18	VrNetWkstaGetInfo / vrnetapi.c	XsNetWkstaGetInfo plus public NetWkstaUserGetInfo	transfer; its BaseSrv result layout is not equivalent to the public user-only call	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:19	VrNetWkstaSetInfo / vrnetapi.c	original explicit unsupported branch	exact original ERROR_NOT_SUPPORTED	S5 source inspection
+57:1A	VrNetMessageBufferSend / vrnetapi.c	XsNetMessageBufferSend	transfer; BaseSrv messaging provider has no admitted replacement	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:1B	VrGetCDNames / vrnetapi.c	public NetWkstaGetInfo + NetWkstaUserGetInfo	adapter-backed direct; original conversion and no-return-code contract retained through bounded I_CDNames writes	MVDM-HOST-DIV-176; ADAPTER-REDIR-005
+57:1C	VrGetComputerName / vrnetapi.c	public GetComputerName	adapter-backed direct; existing bounded ANSI write	MVDM-HOST-DIV-171; ADAPTER-REDIR-003
+57:1D	VrGetUserName / vrnetapi.c	public NetWkstaUserGetInfo	adapter-backed direct; existing OEM bounded write	MVDM-HOST-DIV-171; ADAPTER-REDIR-003
+57:1E	VrGetDomainName / vrnetapi.c	original explicit unsupported branch	exact original ERROR_NOT_SUPPORTED	S5 source inspection
+57:1F	VrGetLogonServer / vrnetapi.c	original explicit unsupported branch	exact original ERROR_NOT_SUPPORTED	S5 source inspection
+57:22	VrNetGetDCName / vrnetapi.c	original explicit unsupported branch	exact original ERROR_NOT_SUPPORTED	S5 source inspection
+57:25	VrNetbios5c / vrnetb.c	Netbios NCB worker plus ICA/PM ANR	transfer; public NCB availability alone does not recreate the original completion/monitor contract	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:27	VrDlc5cHandler / vrdlc5c.c	DLCAPI AcsLan/NtAcsLan/DlcCallDriver	original dynamic-load failure only; no modern DLC driver contract exists	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:28	VrVdmWindowInit / vrdlcpst.c	VDD/window hooks and DLC event route	transfer; its VDD/window component is separate from Redirector policy	queue position 6: VDD owner package
+57:29	VrReturnAssignMode / vrnetapi.c	XsNetUseEnum	transfer; BaseSrv network provider	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:2A	VrSetAssignMode / vrnetapi.c	original assignment state / Net use composition	transfer; tied to the same network-assignment lifecycle	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:2B	VrGetAssignListEntry / vrnetapi.c	XsNetUseEnum	transfer; BaseSrv network provider and original list layout	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:2C	VrDefineMacro / vrnetapi.c	XsNetUseAdd	transfer; BaseSrv network provider and macro-use lifecycle	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:2D	VrBreakMacro / vrnetapi.c	XsNetUseDel	transfer; BaseSrv network provider and macro-use lifecycle	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:2E	VrNetServiceControl / vrnetapi.c	XsNetServiceControl	transfer; BaseSrv service broker has no admitted direct replacement	queue position 4: NetAPI/RAP Redirector network-boundary package
+57:31	VrCheckPmNetbiosAnr / vrinit.c	NetBIOS PM ANR and monitor state	transfer; requires the same network completion and monitor contract as 57:25	queue position 4: NetAPI/RAP Redirector network-boundary package

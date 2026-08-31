@@ -3,6 +3,7 @@
 #include "session/session.h"
 #include "vrnmpipe.h"
 #include "mvdm_redirector_async.h"
+#include "mvdm_redirector_guest_copy.h"
 
 typedef struct fixture_memory {
     uint8_t bytes[0x20000];
@@ -97,17 +98,25 @@ int main(void)
         memcmp(memory.bytes + 0x140u, buffer, 3u) != 0) return 5;
     mvdm_redirector_async_release(&request);
 
+    write_u32(memory.bytes + 0x1a0u, 0x1b0u);
+    write_u32(memory.bytes + 0x1a4u, 0x1c0u);
+    write_u32(memory.bytes + 0x1a8u, 0x1d0u);
+    if (!mvdm_redirector_write_cd_names(0u, 0x1a0u, "HOST", "DOMAIN",
+        "LOGON") || strcmp((char *)memory.bytes + 0x1b0u, "HOST") != 0 ||
+        strcmp((char *)memory.bytes + 0x1c0u, "DOMAIN") != 0 ||
+        strcmp((char *)memory.bytes + 0x1d0u, "LOGON") != 0) return 6;
+
     initialize_request(&memory, 0x100u, 0x140u, 0x180u, 0x182u, 1u);
     if (!mvdm_redirector_async_prepare(&request, 0u, 0x100u, 0x86u,
-        &buffer, &length)) return 6;
+        &buffer, &length)) return 7;
     session_guest_memory_end(&instance);
-    if (mvdm_redirector_async_complete(&request, 1u, 0u)) return 7;
+    if (mvdm_redirector_async_complete(&request, 1u, 0u)) return 8;
     mvdm_redirector_async_release(&request);
 
     mvdm_redirector_async_worker_begin();
-    if (mvdm_redirector_async_worker_stop_requested()) return 8;
+    if (mvdm_redirector_async_worker_stop_requested()) return 9;
     mvdm_redirector_async_worker_request_stop();
-    if (!mvdm_redirector_async_worker_stop_requested()) return 9;
-    if (!session_thread_unbind(&instance) || !session_dispose(&instance)) return 10;
+    if (!mvdm_redirector_async_worker_stop_requested()) return 10;
+    if (!session_thread_unbind(&instance) || !session_dispose(&instance)) return 11;
     return 0;
 }

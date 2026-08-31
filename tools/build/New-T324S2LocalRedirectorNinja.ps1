@@ -65,13 +65,14 @@ build obj/vrmslot.obj: cc `$root/src/mvdm-host/vdmredir/vrmslot.c
 build obj/cmdredir.obj: cc `$root/src/mvdm-host/dos/command/cmdredir.c
 build obj/ntstatus.obj: cc `$root/src/opennt-host/netapi/netlib/ntstatus.c
 build obj/async.obj: cc `$root/src/adapter-mvdm-host-out/redir/mvdm_redirector_async.c
+build obj/guest-copy.obj: cc `$root/src/adapter-mvdm-host-out/redir/mvdm_redirector_guest_copy.c
 build obj/location.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_guest_location.c
 build obj/thread.obj: cc `$root/src/adapter-mvdm-host-out/win32/source/thread_start_compat.c
 build obj/session.obj: cc `$root/src/session/session.c
 build obj/mapping.obj: cc `$root/src/session/mapping_manager.c
 build obj/lease.obj: cc `$root/src/session/guest_memory_lease.c
 build obj/fixture.obj: cc `$root/tests/mvdm-host/vdmredir/redirector_async_contract_fixture.c
-build bin/redirector-async-contract-fixture.exe: link obj/async.obj obj/location.obj obj/session.obj obj/mapping.obj obj/lease.obj obj/fixture.obj
+build bin/redirector-async-contract-fixture.exe: link obj/async.obj obj/guest-copy.obj obj/location.obj obj/session.obj obj/mapping.obj obj/lease.obj obj/fixture.obj
 default obj/vrnmpipe.obj obj/vrputil.obj obj/vrdisp.obj obj/vrmisc.obj obj/vrmslot.obj obj/cmdredir.obj obj/ntstatus.obj bin/redirector-async-contract-fixture.exe
 "@
 [IO.File]::WriteAllText((Join-Path $BuildRoot 'build.ninja'), $content + [Environment]::NewLine,
