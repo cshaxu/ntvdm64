@@ -27,11 +27,4 @@ void mvdm_softpc_record_startup_milestone(const char *name);
 void mvdm_softpc_record_bop_dispatch(unsigned int selector,
                                      unsigned int service);
 
-/* Fixed-container diagnostic only.  The caller supplies an already-observed
- * CPU state; this function has no machine-control effect. */
-void mvdm_softpc_record_cpu_state(unsigned int segment,
-                                  unsigned long instruction_pointer,
-                                  unsigned int machine_status,
-                                  unsigned int default_operand_size);
-
 #endif

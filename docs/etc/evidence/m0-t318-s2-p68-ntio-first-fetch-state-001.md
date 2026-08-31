@@ -37,7 +37,7 @@ MVDM-CPU-STATE 0070:00000000 MSW=0010 CSX=0
 
 `CS=0070`, `EIP=0`, and `CSX=0` establish the expected 16-bit NTIO entry.
 `MSW=0010` retains the normal real-mode coprocessor bit; it is not protected
-mode.  The bounded run still emits no reached original BOP ingress marker.
+mode.  The probe deliberately records no BOP conclusion.
 The raw records are:
 
 - `artifacts/research/m0-t318-s2-p68-ntio-first-fetch-state.txt`
@@ -47,7 +47,8 @@ The raw records are:
 ## Interpretation
 
 The evidence rejects an incorrect segment, instruction-pointer, protected-mode
-or default-operand-size entry explanation.  The remaining pre-BOP deficit is
-therefore ordinary original CCPU/SoftPC continuation after the verified first
-fetch.  It is not evidence against DEM or a particular BOP service, and no
-BOP implementation is admitted from this result.
+or default-operand-size entry explanation.  It is not evidence against DEM or
+a particular BOP service, and admits no BOP implementation.  The hot-path
+state reporter was removed after this capture because later fixed-console
+experiments showed that additional writes can perturb the observable startup
+trace; P68 remains valid only for the state it actually records.

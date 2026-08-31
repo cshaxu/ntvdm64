@@ -561,8 +561,9 @@ evidence](etc/evidence/m0-t318-s2-p67-original-bop-ingress-observation-001.md).
 **S2 P68:** the verified NTIO first fetch is `0070:00000000`, real-mode with a
 16-bit code-segment default (`MSW=0010`, `CSX=0`).  The non-reached first BOP
 cannot be attributed to a wrong CS:EIP, protected-mode, or default-operand-size
-entry state.  The remaining work is original CCPU/SoftPC continuation before
-the first NTIO service—not a BOP patch. See [P68
+entry state. It makes no BOP reachability conclusion: the state reporter was
+then removed because extra hot-path console writes perturb the fixed-container
+trace. See [P68
 evidence](etc/evidence/m0-t318-s2-p68-ntio-first-fetch-state-001.md).
 
 ### M0 T317 S2 closure record

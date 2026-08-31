@@ -4537,10 +4537,6 @@ NEXT_INST:
    if (!mvdm_first_fetch_observed)
    {
       mvdm_first_fetch_observed = TRUE;
-      mvdm_softpc_record_cpu_state((unsigned int)getCS(),
-                                   (unsigned long)getEIP(),
-                                   (unsigned int)getMSW(),
-                                   (unsigned int)GET_CS_AR_X());
       mvdm_softpc_record_startup_milestone("CCPU-FIRST-FETCH");
    }
 
