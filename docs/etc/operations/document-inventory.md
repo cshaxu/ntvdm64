@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3494 |
+| Documentation records | 3495 |
 | --- | --- |
-| Generated UTC | 2026-08-31T16:34:14Z |
+| Generated UTC | 2026-08-31T16:37:52Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | e41d72c1a5924f941f02345ca2dec16d13823ddd32fb61c3802a6d7b5a6871a7 |
+| STATUS.md | principal control document | 1b08432666835035e6e0729142cf792519453fd3047cfeff64e2e941079f519a |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -998,8 +998,9 @@ content-divergent entries.
 | etc/evidence/m0-t318-s2-p7-v7vga-firmware-configuration-recovery-001.md | indexed supporting material | ed2b11e329f033cc5279ed7e326e6fc6c35400fac3f9bae3b01ff2c0ef5a427a |
 | etc/evidence/m0-t318-s2-p70-heartbeat-provider-binding-audit-001.md | indexed supporting material | ae3c8c5a35019c73fe655821f7428e4e2e9dda8ba4f014b9041da606d18c5bf8 |
 | etc/evidence/m0-t318-s2-p71-remove-startup-observation-perturbation-001.md | indexed supporting material | 114fc8d08603c3dea3dc55c0f6b8a0e6df1380db015ea9b85f98a38d72397479 |
-| etc/evidence/m0-t318-s2-p72-command-ingress-and-host-path-carrier-001.md | indexed supporting material | ebf4d74bb812904086396e5860b763321b4facec3fc5f2f1c6edcbc40a069715 |
+| etc/evidence/m0-t318-s2-p72-command-ingress-and-host-path-carrier-001.md | indexed supporting material | 3bbbf16c2193a5bcfbe388b990ec44b17b0fdeabd42d4ef817db07359caec66c |
 | etc/evidence/m0-t318-s2-p73-short-root-command-attribution-001.md | indexed supporting material | 4545d9606f00a3ccd784f586c33422b8be3de54f87b6c72c12d568873e42aa1f |
+| etc/evidence/m0-t318-s2-p74-command-config-root-admission-correction-001.md | indexed supporting material | e37131996c74271a62dbb14b2f93b5d587c3f5fd5f63f7557da9730b96f383a9 |
 | etc/evidence/m0-t318-s2-p8-headless-console-observation-attribution-001.md | indexed supporting material | 5b2d4b1490a5c22ad740740a0fee7980dcd8e441a86aada22bf06cf533496eb4 |
 | etc/evidence/m0-t318-s2-p9-real-console-startup-liveness-001.md | indexed supporting material | a88fcc9c8bcea9e2d028db968decfc309293d4a47ecaa5cc80abeef4c6a1c87d |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |

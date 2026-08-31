@@ -595,8 +595,9 @@ original `MAX_PATH + 1` host-current-directory carrier, rather than rejecting
 the fixed package root as a guest component. The fixed non-debug observation
 therefore continues past DEM bootstrap and reaches original COMMAND `54:05`
 and `54:0C`. This proves original COMMAND bootstrap ingress for the declared
-ordinary-child profile, not yet guest `EXEC` or parent-return continuity. See
-[P72 evidence](etc/evidence/m0-t318-s2-p72-command-ingress-and-host-path-carrier-001.md).
+ordinary-child profile, not successful CONFIG preprocessing, guest `EXEC`, or
+parent-return continuity. See [P72
+evidence](etc/evidence/m0-t318-s2-p72-command-ingress-and-host-path-carrier-001.md).
 
 **S2 P73:** paired short-root fixed-container observations with and without
 the admitted `--ordinary-child` declaration both exit `0xC0000005` after the
@@ -605,6 +606,13 @@ assigned to the declared `/C VER` input, `EXEC`, or parent return.  The next
 unit is the complete original post-`cmdSetInfo` / early guest-bootstrap cohort;
 no trace-driven COMMAND/BOP repair is admitted. See [P73
 evidence](etc/evidence/m0-t318-s2-p73-short-root-command-attribution-001.md).
+
+**S2 P74:** the original `cmdconf.c` 64-byte CONFIG root carrier is distinct
+from P72's corrected `MAX_PATH + 1` Base VDM transport.  The prior long-root
+watchdog can block in original error UI and is not CONFIG-continuity evidence;
+only a source-valid short root may exercise CONFIG/AUTOEXEC preprocessing.
+The P73 short-root access violation remains unattributed. See [P74
+evidence](etc/evidence/m0-t318-s2-p74-command-config-root-admission-correction-001.md).
 
 ### M0 T317 S2 closure record
 

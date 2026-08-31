@@ -39,7 +39,10 @@ changed, and the original `cmdGetNextCmd` request shape remains intact.
 - The focused x86 `base_vdm_local_fixture.exe` passes, including its long
   executable-relative package-root declaration case.
 - In the fixed console-owning non-debug container, the corrected product no
-  longer exits with `0x45`; it remains alive to the normal 8-second watchdog.
+  longer exits with `0x45`.  That container's DOS media root is nevertheless
+  too long for the distinct original `cmdconf.c` 64-byte CONFIG carrier, so
+  its watchdog result is not CONFIG-continuity evidence; see the P74
+  correction below.
 - The neutral existing BOP observation now records original COMMAND ingress
   after it decodes the service byte: `54:05` (`cmdSetInfo`) and `54:0C`
   (`cmdGetConfigSys`) follow the DEM bootstrap sequence.  The observer leaves
@@ -55,6 +58,7 @@ The raw reports are:
 
 The declared ordinary child is now proved to enter original COMMAND bootstrap
 and consume the original Base VDM path carrier.  This is not yet evidence of
-`54:01`, guest `EXEC`, `50:36`, `50:3C`, `54:0B`, or parent restoration.  The
-next work remains the source-shaped COMMAND/guest lifecycle, not a new BOP
-implementation.
+successful CONFIG preprocessing, `54:01`, guest `EXEC`, `50:36`, `50:3C`,
+`54:0B`, or parent restoration.  P74 records the separate original CONFIG
+root constraint.  The next work remains the source-shaped COMMAND/guest
+lifecycle, not a new BOP implementation.
