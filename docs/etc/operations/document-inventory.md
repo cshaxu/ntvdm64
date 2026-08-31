@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3456 |
+| Documentation records | 3458 |
 | --- | --- |
-| Generated UTC | 2026-08-31T07:30:46Z |
+| Generated UTC | 2026-08-31T07:41:30Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 7d85706b5eb71cea92592f2d552fbdf19c74997d05e75d923875dd4586e14418 |
+| STATUS.md | principal control document | f655e02659facee8b8aac09c2040d1ff396860d36d5e356b29dbc7aa464b8f97 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -958,6 +958,8 @@ content-divergent entries.
 | etc/evidence/m0-t318-s2-p33-cpu40-first-fetch-and-dispatch-owner-audit-001.md | indexed supporting material | e81f65ed1362c14b1b7d38f5c4fd759a271ee4717960d04e59dab3f3149b0b53 |
 | etc/evidence/m0-t318-s2-p34-fixed-container-repeat-and-console-prerequisite-audit-001.md | indexed supporting material | 371d83fe9c4bd2c501fe23b096066707394e82cfc276f17874ef4f2c3a451f07 |
 | etc/evidence/m0-t318-s2-p35-host-application-worker-and-scs-init-prerequisite-audit-001.md | indexed supporting material | c1ffd697f9c0ef81e0a910c2b86fe4452839532d37ba7a2276c73dcb907c3df4 |
+| etc/evidence/m0-t318-s2-p36-scs-init-provider-cohort-audit-001.md | indexed supporting material | 52c99b46d557e2846b39d501dc8afe5d6f4c81c0c00cb2708db6d1b66ceb30b5 |
+| etc/evidence/m0-t318-s2-p37-xms-session-backend-selection-and-fixed-run-001.md | indexed supporting material | 65d85c01c160f8b4b986a4d59185b6d08929bc1e82c309d3a610bb6e21a9b88e |
 | etc/evidence/m0-t318-s2-p4-original-resource-and-startup-contract-001.md | indexed supporting material | 688539591b39b3e0bfa95a29ee62ae2d6d258bda78b01f3f0fec719186e32c92 |
 | etc/evidence/m0-t318-s2-p5-console-observation-admission-001.md | indexed supporting material | 6326836e2f291accf9ed0aa1884c8bf125159ea95cdfb28be404338c1c9f46c0 |
 | etc/evidence/m0-t318-s2-p6-base-vdm-ordinary-child-declaration-001.md | indexed supporting material | eb1928486ac016b6fb8e0589aabbc9f6f4cc845181c03fbb812bae31ba6a312f |

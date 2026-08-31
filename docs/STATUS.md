@@ -315,6 +315,21 @@ and its selected cdecl-to-WINAPI/session bridge preserves the original worker
 contract. No speculative source change is admitted. See [P35
 evidence](etc/evidence/m0-t318-s2-p35-host-application-worker-and-scs-init-prerequisite-audit-001.md).
 
+**S2 P36:** the complete original `scs_init` provider cohort is source-audited:
+Base VDM, first-session boot-file policy, COMMAND, DEM, XMS and debugger have
+one selected owner each. The audit found the formal graph omitted the existing
+XMS session-backend selection; it is a build-selection defect, not a request
+for a replacement XMS provider. See [P36
+evidence](etc/evidence/m0-t318-s2-p36-scs-init-provider-cohort-audit-001.md).
+
+**S2 P37:** the formal CPU40 graph now selects that existing XMS
+mapping-manager backend and fresh x86/x64 product links pass. A new product
+EXE was staged with byte-identical DOS media and firmware into the otherwise
+unchanged fixed non-debug console-owning container; it still exits
+`0xC0000005`. XMS selection is therefore no longer a current-startup cause,
+and no NTIO/NTDOS/EXEC claim is made. See [P37
+evidence](etc/evidence/m0-t318-s2-p37-xms-session-backend-selection-and-fixed-run-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
