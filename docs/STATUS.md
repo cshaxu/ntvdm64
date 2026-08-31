@@ -4,6 +4,51 @@
 
 ## Active Packet
 
+### M0 T322 S1 — Original XMS ownership and memory-binding baseline
+
+**Closed: M0 T322 S1**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T322 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 3, **XMS owner package**, admitted under the standing owner request to execute the ordered queue. |
+| Objective | Establish the complete original XMS owner/package boundary—dispatcher, allocator, A20, UMB, INT15 and guest-memory access—and identify the smallest same-shaped mapping/SoftPC binding for each reached external interface. |
+| Non-goals | No trace-selected BOP implementation, synthetic UMB/A20/INT15 success, guest edit, CPU40 recursion repair, Bochs route, or new family-private mapper. |
+| Reference Baseline | Queue candidate 3; original `mvdm-host/xms` mirror; shared session mapping-manager architecture; T321 closed vertical-slice matrix. |
+| Files And ABI Surface | Original `xms.c`, `xmsdisp.c`, `xmsblock.c`, `xmsumb.c`, `xmsmem86.c`, reached headers and the existing adapter-mvdm-host-out SoftPC mapping interface. |
+| Applicable Rules | Execution, architecture, coding and source policy; mapping-manager and mirror-divergence requirements. |
+| Verification | Source/definition/caller review, formal x86/x64 XMS/product graph review, focused positive/negative package checks, governance verification and diff review. |
+| Expected Markers | One source-first ledger gives each XMS external edge a direct, same-shaped adapter, explicit unavailable, or later-owner disposition. |
+| Asset Needs | Current MVDM mirrors, existing mapping manager and formal build generators; no new guest image or external machine. |
+| Reporting Requirements | Separate original XMS algorithm from historic raw host-pointer backend; record address/span/direction/lease lifetime for every mapping edge. |
+| Stop Conditions | A new mapper, changed XMS allocator semantics, synthetic hardware completion, or broad host capability expansion pauses for re-admission. |
+| Exit Criteria | A bounded source/ABI disposition permits the next XMS recovery S without an invented backend. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | Review allocation, lock/unlock, move, handle lifetime, A20, UMB and INT15 as one owner package. |
+
+**S1 closed:** [the original XMS owner/binding baseline](etc/evidence/m0-t322-s1-original-xms-owner-binding-baseline-001.md)
+keeps the XMS algorithms in their mirror and identifies only the historic raw
+host-pointer backend as replaced by the existing same-shaped shared mapping
+binding.  It does not claim UMB/INT15 runtime completion.
+
+### M0 T322 S2 — XMS dispatcher and mapped-memory package checks
+
+**Active: M0 T322 S2**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T322 S2; Ordinary Mode. |
+| Admission And Approval | T322/S1 baseline; queue candidate 3. |
+| Objective | Verify original XMS dispatcher routing and the selected same-shaped mapped-memory callbacks across supported and negative inputs. |
+| Non-goals | No new XMS provider, allocator rewrite, UMB/INT15 synthetic completion, or trace-selected repair. |
+| Reference Baseline | T322/S1 evidence and formal `MVDM_XMS_SESSION_BACKEND` graph. |
+| Files And ABI Surface | Original XMS sources, existing XMS memory/A20/UMB bindings, shared session mapping manager and focused tests only. |
+| Verification | Formal x86/x64 XMS/product links and focused dispatcher/callback tests including invalid span/descriptor cases. |
+| Expected Markers | Original table routing; bounded lease success and rejection; original register failure behavior. |
+| Stop Conditions | Any need for an XMS-private mapper or invented machine interrupt behavior. |
+| Exit Criteria | Checked source-shaped XMS memory/dispatcher closure or an exact UMB/INT15 owner transfer. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | Move overlap/direction, invalid descriptor, stale session, A20 state, UMB no-space and INT15 hook edges. |
 ### M0 T321 S1 — Vertical-slice ownership and bypass baseline
 
 **Closed: M0 T321 S1**

@@ -62,7 +62,7 @@ $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DMVDM_XMS_SESSION_BA
     '/I ' + $root + '/src/opennt-host/public/sdk/inc ' +
     '/I ' + $root + '/src/mvdm-host/xms.486 ' +
     '/I ' + $root + '/src/mvdm-host-overlay/softpc.new/host/src ' +
-    '/I ' + $root + '/src/mvdm-support/inc ' +
+    '/I ' + $root + '/src/mvdm-host/inc ' +
     '/I ' + $root + '/src/opennt-abi/source/public/sdk/inc ' +
     '/I ' + $root + '/src/opennt-abi/source/public/internal/base/inc ' +
     '/I ' + $root + '/src/opennt-abi/source/public/ddk/inc ' +
