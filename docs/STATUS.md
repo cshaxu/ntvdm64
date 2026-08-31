@@ -4,29 +4,29 @@
 
 ## Active Packet
 
-### M0 T331 S3 — Original XMS package contract matrix
+### M0 T331 S4 — Original XMS formal product closure
 
-**Active: M0 T331 S3**
+**Active: M0 T331 S4**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T331 S3; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | S1/S2 closed under T331’s persistent owner-approved whole-package plan; this S exercises the admitted original XMS package as a whole. |
-| Objective | Exercise original initialization, all selected dispatch/allocator/move, A20, UMB and INT15 contracts against the selected CPU40/session boundary. |
+| Identifier Mode | M0 T331 S4; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | S1–S3 closed under T331’s persistent owner-approved whole-package plan; this final S closes the selected product source/link path. |
+| Objective | Formally link the selected original SoftPC/XMS product on x86 and x64, then perform at most one fixed-container x86 observation if the changed XMS binding reaches that path. |
 | Non-goals | No new XMS policy, trace-selected service work, guest/device success shortcut, new allocator, CPU/FDC/ROM/vector repair, MONITOR/kernel-VDM/Bochs route, raw host pointer ABI, or unrelated BOP work. |
-| Reference Baseline | T331 S1 owner/ABI ledger; T331 S2 CPU40/session binding evidence; original `xms.486` source set; selected CPU40 session and mapping manager. |
+| Reference Baseline | T331 S1 owner/ABI ledger; T331 S2 CPU40/session binding; T331 S3 package matrix; original `xms.486` source set. |
 | Files And ABI Surface | Original `xms.c`, `xmsblock.c`, `xmsa20.c`, `xmsumb.c`, original SubAlloc and dispatch; CPU40/session lease provider; original SAS/ReserveUMB/UpdateKbdInt15 declarations. |
 | Applicable Rules | Execution, source policy, original-source-first recovery, mirror/overlay, architecture, mapping-manager, session and paired-host build rules. |
-| Verification | Source-shaped package harness or equivalent selected-body exercise for initialization, dispatch, allocation/free/reallocation, move, A20, UMB and INT15; paired x86/x64 formal rebuild; record exact original unavailable transfer where a machine prerequisite is absent. |
-| Expected Markers | Original XMS and SubAlloc bodies remain policy owners; selected callback transitions operate over the CPU40 lease; no direct host pointer or retired Bochs input survives. |
+| Verification | Regenerate and link the same selected product target on x86 and x64 without `/FORCE`; record one bounded fixed-container observation only if it is applicable. |
+| Expected Markers | Original XMS and SubAlloc bodies remain policy owners; no duplicate CRT symbol is suppressed; any observation result is attributed without selecting a new repair. |
 | Asset Needs | Current original MVDM mirrors, adapter/session source, existing formal graph and source-selected x86/x64 products; no new guest media or host installation. |
-| Reporting Requirements | Record every selected original body/table entry exercised, its result/register or callback effect, lease lifetime, exact failure direction and any machine-owner transfer. |
+| Reporting Requirements | Record both link results, any source-shaped product binding required for them, and the bounded observation result if one is performed. |
 | Stop Conditions | Need for a new XMS policy, synthetic success, a new mapping manager, a Bochs resurrection, kernel/CSRSS reconstruction, a broad source import, or a behavior change outside the complete XMS package pauses for re-admission. |
-| Exit Criteria | Each selected original XMS/SubAlloc entry has positive or exact source-defined unavailable evidence; paired formal x86/x64 closure remains green; no unclassified machine prerequisite remains. |
+| Exit Criteria | Both product links pass, no duplicate CRT symbol is suppressed, and any observation result is recorded without selecting a new repair. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | Callback parameter types, callback registration order, guest-memory lease acquire/release, move overlap, commit/decommit observability, A20 state-byte write, UMB numeric carrier and INT15 provider availability. |
 
-**S3 plan:** [the original SoftPC XMS owner-package proposal](etc/operations/proposal-original-softpc-xms-owner-package-001.md) exercises the whole source-owned package after S2’s CPU40/session binding recovery.
+**S3 closed:** [the original XMS package contract matrix](etc/evidence/m0-t331-s3-original-xms-package-contract-matrix-001.md) records original allocation/move/A20/UMB/INT15 ownership and the paired adapter-boundary witness. S4 now owns formal product closure.
 
 ### M0 T331 S2 — Original XMS body binding recovery
 

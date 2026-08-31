@@ -84,6 +84,7 @@ $hostRoot = Join-Path $root 'src/mvdm-host/softpc.new/host/src'
 $hostEntryRoot = Join-Path $root 'src/mvdm-host/softpc.new/obj.vdm'
 $adapterSoftpcRoot = Join-Path $root 'src/adapter-mvdm-host-out/softpc'
 $adapterWin32Root = Join-Path $root 'src/adapter-mvdm-host-out/win32/source'
+$hostCrtRedirect = Join-Path $root 'src/adapter-mvdm-host-out/win32/include/mvdm_crt_redirect.h'
 $appRoot = Join-Path $root 'src/app'
 $adapterBaseSrvRoot = Join-Path $root 'src/adapter-mvdm-host-out/basesrv/source'
 $adapterMonitorRoot = Join-Path $root 'src/adapter-mvdm-host-out/monitor/source'
@@ -394,6 +395,7 @@ $baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE 
     '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' +
     ''
 $baseFlags = $baseCommonFlags + ($includeRoots -join ' ') + ' ' + $gdpGeneratedInclude
+$hostFlags = $baseFlags + ' /FI "' + (NinjaPath $hostCrtRedirect) + '"'
 # The original OpenNT ABI header exposes its user-mode VDM TIB under _X86_.
 # This is a declaration gate for the selected Win32/x86 build, not the retired
 # CPU_30_STYLE V86 monitor selection.  The x64 row must not impersonate that
@@ -416,6 +418,7 @@ $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
 $graph.Add('build_root = ' + (NinjaPath $build))
 $graph.Add('cflags = ' + $baseFlags)
+$graph.Add('host_cflags = ' + $hostFlags)
 $graph.Add('dpmi_cflags = ' + $dpmiFlags)
 $graph.Add('cvidc_first_cflags = ' + $cvidcFirstFlags)
 $graph.Add('cvidc_rule_cflags = ' + $cvidcRuleFlags)
@@ -426,6 +429,11 @@ $graph.Add('')
 $graph.Add('rule cc')
 $graph.Add('  command = cl.exe $cflags /Fo$out $in')
 $graph.Add('  description = CC $in')
+$graph.Add('  deps = msvc')
+$graph.Add('  msvc_deps_prefix = Note: including file:')
+$graph.Add('rule cc_host')
+$graph.Add('  command = cl.exe $host_cflags /Fo$out $in')
+$graph.Add('  description = CC-HOST $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('rule cc_cvidc')
@@ -607,7 +615,7 @@ $baseDebugObjects = foreach ($name in $baseDebugNames) {
 }
 $hostObjects = foreach ($name in $hostNames) {
     $object = 'obj/host/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $hostRoot $name)))
+    $graph.Add('build ' + $object + ': cc_host ' + (NinjaPath (Join-Path $hostRoot $name)))
     if ($name -in @('nt_timer.c', 'nt_thred.c', 'nt_com.c', 'nt_event.c', 'nt_error.c')) {
         $threadCompat = NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/thread_start_compat.h')
         # `nt.h` from the modern SDK can predefine the historical include
@@ -615,7 +623,7 @@ $hostObjects = foreach ($name in $hostNames) {
         # selected opennt-host subset after nt.h so the original timer's
         # declarations stay visible on both architectures.
         $ntexapiSubset = NinjaPath (Join-Path $root 'src/opennt-host/public/sdk/inc/ntexapi.h')
-        $graph.Add('  cflags = ' + $baseFlags + ' /FI "' + $ntexapiSubset + '" /FI "' + $threadCompat + '"')
+        $graph.Add('  host_cflags = ' + $hostFlags + ' /FI "' + $ntexapiSubset + '" /FI "' + $threadCompat + '"')
     }
     $object
 }
@@ -626,11 +634,11 @@ $eoiOverlaySource = Join-Path $umbOverlayRoot 'mvdm_ica_eoi_bridge.c'
 $graph.Add('build obj/host/mvdm_ica_eoi_bridge.obj: cc ' + (NinjaPath $eoiOverlaySource))
 $hostObjects += 'obj/host/mvdm_ica_eoi_bridge.obj'
 $hostEntryObject = 'obj/host/ntvdm_entry.obj'
-$graph.Add('build ' + $hostEntryObject + ': cc ' + (NinjaPath $hostEntrySource))
+$graph.Add('build ' + $hostEntryObject + ': cc_host ' + (NinjaPath $hostEntrySource))
 # Preserve the exact original entry body while reserving the executable entry
 # point for app.  This is a build binding only, not a source edit or a second
 # startup implementation.
-$graph.Add('  cflags = ' + $baseFlags + ' /Dmain=mvdm_softpc_original_entry')
+$graph.Add('  host_cflags = ' + $hostFlags + ' /Dmain=mvdm_softpc_original_entry')
 $graph.Add('build obj/host/softpc-resource.res: rc ' + (NinjaPath $hostEntryResourceSource))
 $hostObjects += $hostEntryObject
 $commandWriteLengthOverlaySource = Join-Path $commandOverlayRoot 'mvdm_command_write_length.c'
