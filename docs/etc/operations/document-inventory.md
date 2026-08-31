@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3518 |
+| Documentation records | 3519 |
 | --- | --- |
-| Generated UTC | 2026-08-31T18:52:34Z |
+| Generated UTC | 2026-08-31T18:59:13Z |
 
 ## Entries
 
@@ -823,6 +823,7 @@ content-divergent entries.
 | etc/evidence/m0-t323-s2-dpmi-guest-span-lifetime-ledger-001.md | indexed supporting material | 1d0a7bead3e5f081547e16b3c4506a85da81c4ce5f8fcc9dad93011b833f84ec |
 | etc/evidence/m0-t324-s1-original-redirector-owner-binding-baseline-001.md | indexed supporting material | 99c61799d2381549e5db678f2c280433845e133203c2a981d0c4297b7e229447 |
 | etc/evidence/m0-t324-s1-redirector-unit-disposition-ledger-001.md | indexed supporting material | 235d6d2c48a9e5bfa26aa016988040d9274eabfa6f673229f77e0e6acf1a8a59 |
+| etc/evidence/m0-t324-s2-local-redirector-guest-span-ica-binding-001.md | indexed supporting material | 66e1730d02b02789755709ad9877211d14a5cfcdf818c7eb894f5c453d6a274a |
 | etc/evidence/m0-t324-s2-named-pipe-completion-contract-001.md | indexed supporting material | 07d53d19d07982794c9556a8a7328f154fa75a216f654ec9b4c0208e3e044ddd |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
@@ -1507,7 +1508,7 @@ content-divergent entries.
 | etc/operations/m0-t317-s1-dem-command-softpc-vertical-slice-plan-001.md | indexed supporting material | 475e167fecf6ebc4f11555ba421cc30636eb40972f41acd9da68cb87ff55a1f8 |
 | etc/operations/m0-t317-s2-command-bootstrap-cohort-plan-001.md | indexed supporting material | de2d34ba2d8cdbdc15b2342657a889162b691ede7f5bc4fb7b5d1003acd749bf |
 | etc/operations/m0-t317-s3-command-child-lifecycle-plan-001.md | indexed supporting material | 796429f621db02afbc0b759df50eb06c6dcfcdcab8b76e775808e492cfe3eeb5 |
-| etc/operations/m0-t324-s2-local-redirector-binding-recovery-plan-001.md | indexed supporting material | 02a63e0728705c2b57f965ff894237ac972bf52278d0783f1152de8d4512cf86 |
+| etc/operations/m0-t324-s2-local-redirector-binding-recovery-plan-001.md | indexed supporting material | 40a75fa968c25f345fc5427f629bf2e7e17799e113abce14a66c0760284e5d8c |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3532,7 +3533,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 01bb61af94fd5f93a658cb3c02fff277c609c7e0b78819aa3e7d4c637066efab |
+| STATUS.md | principal control document | 70d0a23a76b7f20b6f4236cd144b7ffa6b013ec7c6015efb962e3a19f7bd0952 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

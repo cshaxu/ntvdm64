@@ -74,6 +74,13 @@ the original completion persists guest locations and requires its SoftPC/ICA
 interrupt route. The existing unavailable worker remains the exact safe result
 until a source-shaped copied completion transaction is admitted.
 
+**S2 P2:** [the local Redirector guest-span and ICA binding](etc/evidence/m0-t324-s2-local-redirector-guest-span-ica-binding-001.md)
+proves that the selected original SoftPC ICA route already exists, while
+`GetVDMAddr`'s historical durable-pointer assumption does not. The only
+admitted recovery is a private `mvdm-host-overlay/vdmredir` transaction that
+uses existing session leases at every guest-memory crossing; it preserves the
+original VDMREDIR queue and interrupt sequence without creating a provider.
+
 ### M0 T323 S1 — Original DPMI/DPMI32 owner and boundary baseline
 
 **Closed: M0 T323 S1**

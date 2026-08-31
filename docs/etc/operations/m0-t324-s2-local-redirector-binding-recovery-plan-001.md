@@ -20,8 +20,11 @@ completion transaction. No other VDMREDIR body may be enabled by this S.
 1. Select directly composable original source and public Win32 calls first.
 2. Reuse the existing same-shaped `adapter-mvdm-host-out/redir`, SoftPC and
    session bindings where they preserve the source call and failure shape.
-3. If the original async callback cannot compose directly, record the exact
-   required completion transaction before writing a bounded adapter body.
+3. Recover the local cohort through a private `mvdm-host-overlay/vdmredir`
+   guest-span binding: retain the original source queue, worker ordering and
+   ICA delivery, but stage every cross-call buffer and reacquire the existing
+   session lease for each guest read/write.  The overlay is callable only by
+   its matching original mirror; it is not a Redirector adapter or provider.
 4. Do not create a second Redirector provider, new mapping manager, raw
    pointer/handle ABI or synthetic device/network success.
 
