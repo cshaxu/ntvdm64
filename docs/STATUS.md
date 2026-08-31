@@ -151,6 +151,14 @@ They do not establish a guest blocker or weaken the P12 source route. Future
 runtime observation must be independently console-owned and debugger-neutral.
 See [P14 evidence](etc/evidence/m0-t318-s2-p14-external-observer-negative-result-001.md).
 
+**S2 P15:** the current formal r4 product now has a reproducible immutable
+sidecar-media staging tool matching the app-owned executable-relative package
+contract. With current firmware and DOS media present, the previous missing
+resource path is absent; a debugger-neutral bounded observation remains alive
+but does not yet establish guest load. The current startup wait is retained as
+an unclassified original-host execution issue rather than a DEM/COMMAND/BOP
+failure. See [P15 evidence](etc/evidence/m0-t318-s2-p15-current-package-staging-and-startup-observation-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
