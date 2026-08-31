@@ -509,6 +509,15 @@ row links.  A changed-product r33 run still exposes `0xC0000005`, so this is
 source/ABI closure only, not guest-continuity evidence. See [P61
 evidence](etc/evidence/m0-t318-s2-p61-basesrv-first-command-contract-closure-001.md).
 
+**S2 P62:** the fixed startup container now launches the stage-resident product
+beside the manifest-verified DOS and SoftPC media, rather than the separately
+located formal build output.  The product EXE is the container's sole mutable
+input; every media asset is hash-verified before launch and the exact staged
+product hash is recorded.  The corrected, non-debug eight-second observation
+still exits `0xC0000005`; missing adjacent media is therefore excluded, while
+the original escaped access violation remains unlocated. See [P62
+evidence](etc/evidence/m0-t318-s2-p62-fixed-runtime-product-adjacency-closure-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |

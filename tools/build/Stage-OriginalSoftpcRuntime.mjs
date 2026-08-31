@@ -62,7 +62,10 @@ function stage(source, destination) {
 stage(executablePath, 'original-softpc-process.exe');
 for (const [source, destination] of requiredAssets) stage(join(scriptRoot, source), destination);
 writeFileSync(join(outputPath, 'runtime-manifest.json'), `${JSON.stringify({
-  format: 1,
-  assets: manifest
+  format: 2,
+  /* The EXE is intentionally replaced by each formal product observation.
+   * Everything in mediaAssets is immutable fixed-container input. */
+  product: manifest[0],
+  mediaAssets: manifest.slice(1)
 }, null, 2)}\n`);
 console.log(outputPath);
