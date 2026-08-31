@@ -42,12 +42,15 @@ bind the existing same-shaped adapters; identify exact unavailable results;
 remove a current adapter path only if an original body supersedes it.  No new
 Redirector provider policy.
 
-### S3 — Original lifecycle, synchronous named-pipe and local broker cohort
+### S3 — Original DLL lifecycle, synchronous named-pipe and local broker cohort
 
-Compose the original `vrinit`, `vrmisc`, `vrnmpipe`, `vrputil` and reached
-`cmdredir`/DEM paths through the admitted forms.  Preserve original error
-ordering, handle identity and no-second-broker rule.  Run x86/x64 cohort
-build/link and local source-contract tests.
+Compose the original `VDMREDIR.DLL` source package, including `vrinit`,
+`vrmisc`, `vrnmpipe`, `vrputil`, `vrdll`, and every source unit selected by
+the original `vdmredir/sources` manifest.  Preserve the original deferred
+`LoadVdmRedir`/`GetProcAddress` contract, error ordering, handle identity and
+no-second-broker rule.  First prove the complete source package compiles on
+x86/x64, then separately admit its original DLL entry/link/load composition;
+a static library is evidence only and is not a substitute for the DLL.
 
 ### S4 — Original mailslot and asynchronous completion cohort
 

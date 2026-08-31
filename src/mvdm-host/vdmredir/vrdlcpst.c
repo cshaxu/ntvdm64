@@ -91,6 +91,11 @@ Revision History:
 #include <dlcapi.h>     // Official DLC API definition
 #include <ntdddlc.h>    // IOCTL commands
 #include <dlcio.h>      // Internal IOCTL API interface structures
+#include "adapter-mvdm-host-out/win32/include/thread_start_compat.h"
+/* DIVERGENCE(MVDM-HOST-DIV-175): the original DLC event handler has the
+ * historical cdecl DWORD(LPVOID) form, while current x86 CreateThread
+ * requires WINAPI.  Preserve its source-level call and callback form through
+ * the established translation-unit-local adapter bridge. */
 #include "vrdlc.h"
 #include "vrdlcdbg.h"
 #define BOOL
