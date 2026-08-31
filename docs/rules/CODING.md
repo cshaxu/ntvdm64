@@ -145,15 +145,17 @@
   evidence, an immutable external name or prose describing a historical API.
 
 ## Build and evidence hygiene
-- The current recovery build is MSVC Win32/x86 `/MT` and every reached SoftPC
-  behavior must compile and run under the selected original `CPU_40_STYLE` /
-  CCPU40 configuration. `CPU_30_STYLE` is an NT4 kernel-VDM V86-monitor
-  contract, not a CCPU execution profile; it is retired and prohibited from
-  every project-owned production or fixture compilation, linking, runtime and
-  acceptance input. Its remaining upstream-mirror conditionals and historical
-  evidence never authorize a CPU30 build row.
-  x64 compatibility is recorded as deferred debt and is not a current gate.
-  Do not link objects of different architecture or CRT into one process.
+- The current recovery build has MSVC `/MT` Win32/x86 and Win32/x64 compile
+  rows. Every reached SoftPC source/package must compile and normally link
+  under selected original `CPU_40_STYLE` / CCPU40 in both rows. The x86 row is
+  the only current guest-runtime/functional-observation row; x64 compile/link
+  closure must not be misreported as x64 guest execution. `CPU_30_STYLE` is an
+  NT4 kernel-VDM V86-monitor contract, not a CCPU execution profile; it is
+  retired and prohibited from every project-owned production or fixture
+  compilation, linking, runtime and acceptance input. Its remaining
+  upstream-mirror conditionals and historical evidence never authorize a CPU30
+  build row. Do not link objects of different architecture or CRT into one
+  process.
 - For a functional fixture that reaches machine execution, guest state or an
   imported MVDM-host behavior, record the selected SoftPC CCPU40 row.
   An unavailable result is passing only when the fixture asserts that exact

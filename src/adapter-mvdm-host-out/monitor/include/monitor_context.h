@@ -9,12 +9,13 @@
 
 /*
  * DIVERGENCE(ADAPTER-MONITOR-003): OpenNT's public/internal vdm.h exposes
- * its x86 user-mode TIB records through the historical _X86_ declaration
- * gate.  This source file is a Win32/x86 session context carrier, not a
- * CPU_30_STYLE or MONITOR selection, so select only that original ABI gate
- * while importing the byte-for-byte declaration mirror.
+ * its user-mode TIB records through the historical _X86_ declaration gate.
+ * The selected guest ABI remains x86 on both supported host widths; this
+ * adapter-local declaration gate exposes the original record on x86 and x64
+ * without selecting CPU_30_STYLE, a kernel VDM, or an x86 host-code path.
+ * It is removed immediately after importing the byte-for-byte mirror.
  */
-#if defined(_M_IX86) && !defined(_X86_)
+#if !defined(_X86_)
 #define ADAPTER_MVDM_MONITOR_UNDEF_X86_GATE
 #define _X86_
 #endif

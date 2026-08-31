@@ -26,6 +26,10 @@ same-shaped SoftPC binding; that body retains timer, environment, NLS,
 configuration, DOS-emulation and CPU-start ordering. There is no alternate
 machine fallback.
 
+`entry.c` is the sole product process entry. It configures only the immutable
+package roots, selects the already fixed SoftPC backend and invokes the shell.
+It does not load guest bytes or reproduce any original `ntvdm.c` startup step.
+
 ## M0 T310 S8 installed package layout
 
 `package_layout.{c,h}` is the app-owned installation contract for immutable

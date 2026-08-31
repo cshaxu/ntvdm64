@@ -26,8 +26,11 @@ a host COMMAND provider, app, session, or adapter.
 1. **S1 — Source and contract freeze.** Map original NTDOS/COMMAND EXEC, PSP,
    arena, JFN, environment and return
    code to the staged source-built guest images and existing BOP contracts.
-2. **S2 — Original guest recovery.** Recover each composable guest path from original source; classify missing
-   machine or host prerequisites to their owners.
+2. **S2 — Original guest recovery and dual-width source closure.** Recover each
+   composable guest path from original source; classify missing machine or
+   host prerequisites to their owners. The same selected CPU40 package graph
+   must compile and normally link under both Win32/x86 and Win32/x64. Only x86
+   is a current runtime-observation row.
 3. **S3 — Controlled-return evidence.** Verify one declared DOS child → parent ordinary-return profile, then link
    its remaining owner transfers into the cross-family audit.
 
@@ -35,4 +38,5 @@ a host COMMAND provider, app, session, or adapter.
 
 Do not claim `54:0B` ordinary guest-parent continuity merely because the host
 child worker returned an exit code. The declared guest profile must execute and
-restore its parent state through original ownership.
+restore its parent state through original ownership. Do not claim x64 guest
+execution from its required same-source compile/link closure.

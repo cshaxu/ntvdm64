@@ -38,9 +38,11 @@ Session-owned typed mapping-manager instances
 associate 32-bit surrogate identities with native HANDLE/pointer-sized
 resources, while guest pointers use checked synchronous memory leases. This
 keeps 64-bit implementation details out of original MVDM control flow and
-prevents x86 builds from relying on accidental native-value identity. The
-current product-recovery target is Win32/x86; x64 compatibility is a later
-profile and does not delay SoftPC/MVDM recovery.
+prevents either host architecture from relying on accidental native-value
+identity. Every admitted recovery package builds and links its reached closure
+under both Win32/x86 and x64; a host-runnable repaired path receives paired
+architecture evidence unless the package records an exact source-shaped
+unavailable result.
 
 The broker recovers only required cross-process VDM registration, identity,
 command-queue, notification and cleanup contracts using public IPC. It does
@@ -48,17 +50,17 @@ not recreate CSRSS or the NT4 kernel and never transports local native
 resources or guest pointers.
 
 Success for the current recovery phase means reproducible source and artifact
-provenance, manifest-driven Win32/x86 builds for the original CCPU40 profile,
+provenance, manifest-driven Win32/x86 and x64 builds for the original CCPU40 profile,
 auditable package selection, minimal imported-source diffs,
 bounded one-session execution, explicit unsupported behavior, and a stable
 path to original multi-process and intra-session semantics. Original SoftPC/
 CCPU40 is the sole supported original SoftPC machine profile. Any functional
 acceptance that exercises a machine, guest, or MVDM host behavior must record
-the selected Win32/x86 CCPU40 profile row. `CPU_30_STYLE` is an NT4
+the selected CCPU40 architecture row and the paired x64 row whenever that
+reached behavior is x64-runnable. `CPU_30_STYLE` is an NT4
 kernel-VDM V86 monitor contract, not a CCPU interpreter profile; it is
 historical source evidence only and is prohibited from production build, link,
-runtime and acceptance inputs. x64 compatibility is later work, not skipped
-evidence for this phase. Historical Bochs material is retired comparison
+runtime and acceptance inputs. Historical Bochs material is retired comparison
 material only and is not a product backend, build input or fallback.
 
 `CPU_30_STYLE` is retired, not deferred: no current or future project build

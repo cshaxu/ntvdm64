@@ -110,12 +110,14 @@ identity, never by a bare same-spelled function name.
 
 ## Host-width coding model
 
-The current recovery build uses MSVC Win32/x86 `/MT` and selects only
-`CPU_40_STYLE` with the original CCPU40 executor. `CPU_30_STYLE` is an NT4
-kernel-VDM V86-monitor contract. It is retired and prohibited from every
-project-owned compile, link, runtime, fixture and acceptance input. x64 is a
-later compatibility profile, not a current formal-build gate. Cross-component
-and broker wire records use fixed-width
+The current recovery build has two MSVC `/MT` compilation rows: Win32/x86 and
+Win32/x64. Both select only `CPU_40_STYLE` with the original CCPU40 executor.
+The x86 row is the sole current guest-runtime observation row; x64 must reach
+the same selected source/build closure before a change is accepted, but does
+not imply x64 guest-runtime equivalence. `CPU_30_STYLE` is an NT4 kernel-VDM
+V86-monitor contract. It is retired and prohibited from every project-owned
+compile, link, runtime, fixture and acceptance input. Cross-component and
+broker wire records use fixed-width
 integer fields.
 Native process-local implementation uses `uintptr_t`, `size_t`, `HANDLE` and
 other pointer-sized platform types.

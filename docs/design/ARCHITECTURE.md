@@ -164,9 +164,11 @@ Each session activates the original SoftPC CCPU40 machine composition. There
 is no fallback or simultaneous executor. `CPU_30_STYLE` is excluded because
 its original `v86/monitor` body delegates guest execution to NT4 kernel VDM;
 it is not a CCPU profile and cannot enter this non-invasive product. Current
-functional machine, guest and MVDM-host acceptance records the Win32/x86
-CCPU40 row. Pure source, static-analysis and documentation work need not
-create a machine session.
+functional machine, guest and MVDM-host acceptance records its selected
+Win32/x86 or x64 CCPU40 row; a host-runnable x64 behavior also records the
+paired row. Pure source, static-analysis and documentation work need not
+create a machine session, but every selected translation unit must compile and
+link under both independent host graphs.
 
 All project-owned session and adapter APIs are multi-instance-safe: no hidden
 process-global current machine, mapping table or resource registry is allowed.

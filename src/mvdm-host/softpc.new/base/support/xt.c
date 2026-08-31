@@ -351,7 +351,13 @@ GLOBAL boolean selector_outside_table IFN2(IU16, selector, LIN_ADDR *, descr_add
  * The following is a table lookup for finding parity of a byte
  */
 
-#if !defined(MAC_LIKE) && !defined(CPU_30_STYLE)
+/*
+ * DIVERGENCE(MVDM-HOST-DIV-155): CPU40 CCPU owns this table in c_main.c.
+ * The historical support copy serves the non-CCPU monitor path; retaining it
+ * in the selected CCPU40 product produces a second provider with no distinct
+ * consumer. Keep the source's original table for every other profile.
+ */
+#if !defined(MAC_LIKE) && !defined(CPU_30_STYLE) && !defined(CPU_40_STYLE)
 
 half_word pf_table[] = {
 	1,	/* 00 */

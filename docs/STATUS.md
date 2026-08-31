@@ -13,12 +13,12 @@
 | Identifier Mode | M0 T318 S2; Ordinary Mode (single-person dual-role implementation). |
 | Admission And Approval | The owner-authorized T318 proposal admits S2 after S1 froze the complete original guest/host boundary. |
 | Objective | Select the existing original `NTIO -> SVC_DEMLOADDOS -> NTDOS` load path and recover one declared ordinary COM or MZ guest child profile through original `EXEC` and parent-return ownership. |
-| Non-goals | No app guest loader, replacement DOS executor, host COMMAND semantic change, PIF/TSR/Redirector/WOW/DPMI expansion, additional BOP implementation, device expansion, or x64 work. |
+| Non-goals | No app guest loader, replacement DOS executor, host COMMAND semantic change, PIF/TSR/Redirector/WOW/DPMI expansion, additional BOP implementation, or device expansion. x64 is a required same-source compile/link row, not a guest-runtime claim. |
 | Reference Baseline | [S1 contract freeze](etc/evidence/m0-t318-s1-ntdos-exec-parent-return-contract-freeze-001.md); selected CPU40 SoftPC composition; original `demLoadDos`, NTDOS and COMMAND mirrors. |
 | Machine Profile | The sole permitted build/runtime/acceptance profile is `CPU_40_STYLE`/CCPU40. `CPU_30_STYLE` is retired historical evidence and is not a fallback or deferred route. |
 | Files And ABI Surface | Reached original guest NTDOS/COMMAND sources and staged artifacts; original `demmisc.c::demLoadDos`; existing DEM `0x11`, `0x36`, `0x3C` and COMMAND `54:0B` contracts; selected SoftPC source/build inputs. |
 | Applicable Rules | `docs/rules/EXECUTION.md`, `docs/rules/ARCHITECTURE.md`, `docs/rules/CODING.md`, source policy, and mirror exception registration. |
-| Verification | Fresh selected x86 CPU40 composition; source/image identity verification; one bounded ordinary-child continuity observation with a controlled stop/result; governance verification and `git diff --check`. |
+| Verification | Fresh selected CPU40 x86 and x64 compile/link compositions; source/image identity verification; one bounded x86 ordinary-child continuity observation with a controlled stop/result; governance verification and `git diff --check`. |
 | Expected Markers | Original `demLoadDos` performs the selected image load, NTDOS reaches original `EXEC`, the child exits through original parent restoration, and the established `54:0B` contract receives the result without a replacement lifecycle. |
 | Asset Needs | Existing NTDOS.SYS/COMMAND.COM guest artifacts, original MVDM mirrors, CPU40 SoftPC graph and existing adapter/session bindings. |
 | Reporting Requirements | Separate code/source composition from observed runtime continuity; record every missing device or service as its owner transfer. |
@@ -67,6 +67,13 @@ media root as the existing NTIO loader, without changing its original NTDOS
 filename, file-I/O, or guest-write sequence.  Formal CPU40 archives and the
 existing bounded media-resource verification both pass; this is a loader-root
 closure, not a `50:11` or NTDOS execution claim.  See [P2 evidence](etc/evidence/m0-t318-s2-p2-original-dem-media-root-001.md).
+
+**S2 P3:** the current selected CPU40 source graph archives under both x86 and
+x64 through the generated one-time-MSVC, Ninja-`-j 8` runner. Three historic
+host-local RTL spellings and the original CCPU descriptor decoder now have one
+same-shaped binding each; the non-`/FORCE` product link leaves only named
+debugger/WOW/VDD/generated-CCPU owner boundaries. No empty provider or runtime
+claim was introduced. See [P3 evidence](etc/evidence/m0-t318-s2-p3-dual-width-normal-link-boundary-001.md).
 
 ### M0 T317 S2 closure record
 

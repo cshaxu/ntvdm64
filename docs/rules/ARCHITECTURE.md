@@ -126,17 +126,20 @@
     console, IPC and registry APIs under ordinary permissions. The product
     must not modify/rebuild Windows system components or require installation
     mutations to start or sustain itself.
-25. The current host build profile is MSVC Win32/x86 `/MT`, with the original
-    SoftPC CCPU40 executor selected by `CPU_40_STYLE`. `CPU_30_STYLE` is the
+25. The current host build profiles are independent MSVC Win32/x86 `/MT` and
+    x64 `/MT` graphs, with the original SoftPC CCPU40 executor selected by
+    `CPU_40_STYLE`. `CPU_30_STYLE` is the
     retired NT4 kernel-VDM V86-monitor contract and must not enter any
     project-owned compilation, linking, runtime, fixture or acceptance input.
     Different architectures never satisfy
     symbols in one process; any later cross-process interaction uses only an
     admitted fixed wire ABI.
 26. Original SoftPC CCPU40 is the sole session machine backend. A session has
-    no fallback or simultaneous executor. Every functional test that reaches
-    machine, guest or MVDM-host behavior records the selected Win32/x86 CCPU40
-    row. Pure source/build-audit work may state why it has no machine row.
+    no fallback or simultaneous executor. Every functional test records its
+    selected CCPU40 architecture row and, when the reached behavior is
+    x64-runnable, a paired x64 row. Pure source/build-audit work may state why
+    it has no machine row; every selected translation unit still compiles and
+    links on both profiles.
 27. `src.old/` and comparison repositories are evidence only and must not
     enter source, build, link, runtime or acceptance manifests.
 29. The `mvdm-host` support paths may be linked only after the package/symbol

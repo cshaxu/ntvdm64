@@ -30,8 +30,11 @@ item are in the [package recovery proposal set](etc/operations/package-recovery-
 MVDM host mirror-topology recovery is already closed. `CPU_30_STYLE` is an
 NT4 kernel-VDM V86 monitor rather than a software CCPU profile, and is
 historical-only. Production compilation selects only `CPU_40_STYLE`/CCPU40.
-x64 compatibility is deliberately deferred. Bochs is retired and is neither a
-production route nor an acceptance row.
+Every candidate package must repair and verify its reached closure on both
+independent MSVC Win32/x86 and x64 graphs. A source-shaped unavailable runtime
+result may be retained only with paired compile/link evidence and an exact
+owner transfer; x64 may not be accumulated as later compatibility debt. Bochs
+is retired and is neither a production route nor an acceptance row.
 
 | Order | Candidate implementation package |
 | --- | --- | --- |

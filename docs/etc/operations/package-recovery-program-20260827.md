@@ -42,6 +42,25 @@ unbounded whole-program BFS before functional recovery starts. Each recovery
 package performs only its bounded immediate-boundary S1 review, then recovers
 and locally verifies the selected original owner slice within that same
 implementation package.
+
+### Mandatory paired-host recovery contract
+
+Every active and future implementation package uses independent MSVC
+Win32/x86 and x64 CCPU40 graphs for the same selected source closure. The
+owner package must repair all reached x64 compile/link, native-width,
+calling-convention, function-table, layout, conditional-selection and
+pointer/HANDLE-boundary defects as part of that package; it may not pass them
+to a later generic x64 task. The source-first ladder, mirror/overlay limits and
+mapping-manager rules apply identically on both architectures.
+
+Where a focused host, adapter or machine behavior is runnable on both hosts,
+the package supplies paired runtime evidence. A guest-continuity observation
+that is not yet x64-runnable may retain an explicitly x86-only runtime row only
+after the paired x64 graph compiles and links the same reached source closure,
+and after the proposal states that no x64 runtime equivalence is claimed. An
+unavailable outcome is acceptable only when it is the exact original failure
+contract with a named owner transfer. Completed predecessors retain their
+historical evidence; this contract governs every active and later package.
 The decision record is [the owner-directed package-first replan]
 (../evidence/m0-t301-owner-directed-package-first-queue-replan-001.md).
 
@@ -118,10 +137,10 @@ divergence register for every moved path, updated formal build paths, and
 proof that no guest, firmware, tools, production source or formal graph names
 the removed roots.
 
-**Exit:** formal affected Win32/x86 `/MT` CCPU40 graph passes, with
+**Exit:** formal affected Win32/x86 and x64 `/MT` CCPU40 graphs pass, with
 documentation governance. This behavior-neutral package does not claim an
 NT4 kernel-VDM monitor recovery: P02E was superseded by the `CPU_30_STYLE`
-exclusion decision. x64 compatibility belongs only to P02C. This package changes no
+exclusion decision. This package changes no
 MVDM behavior, source-shaped adapter or BOP route.
 
 ## P02E — `CPU_30_STYLE` V86 monitor disposition (closed M0 T315)
@@ -149,31 +168,31 @@ algorithm or add a replacement machine.
 as the sole production machine; updated formal build inputs and tests; and a
 negative source/build/runtime scan for all Bochs production routes.
 
-**Exit:** Win32/x86 `/MT` CCPU40 formal graph and documentation governance
+**Exit:** Win32/x86 and x64 `/MT` CCPU40 formal graphs and documentation governance
 pass; all retained
 Bochs material is explicitly historical/comparison-only; no production file,
 build graph, fixture or runtime path selects it.
 
-## P02C — x64 native-compilation audit and capability recovery
+## Dual-architecture recovery rule
 
-**Predecessor:** P02A and P02B. **Purpose:** recover a real MSVC x64 build of
-the selected original MVDM/SoftPC closure after x86 SoftPC execution is
-connected. It audits native-width declarations, pointer/integer conversions,
+**Purpose:** define the mandatory x64 recovery protocol used by every active
+and future owner package. Each package audits its native-width declarations,
+pointer/integer conversions,
 function-pointer tables, structure layout, calling conventions and historical
 `#if defined(i386)`, `#ifdef i386`, and `#ifndef i386` conditions. `i386`
 review is therefore one required input to x64 recovery, not a standalone
 host-architecture policy exercise.
 
-**S1 admission:** establish one source-identity ledger for every x64 compile
-diagnostic and reached native-width contract in selected `mvdm-host` and
-`mvdm-support`; include every physical `i386` conditional, enclosing function,
-source package, build selection and both branch bodies. Classify each record as
+**Package admission:** establish source-identity rows for every reached x64
+compile diagnostic and native-width contract in the admitted package; include
+every physical `i386` conditional, enclosing function, source package, build
+selection and both branch bodies. Classify each record as
 an assembler/build-target choice, direct host-pointer or linear-address
 identity assumption, function/table ABI, layout/calling-convention contract,
 descriptor/page-remap requirement, monitor/VDM callback or stack transaction,
 CPU/CCPU/V86 prerequisite, or optional debugger/VDD/BDE/WOW product path.
 
-**S2 recovery:** for every reached x64 contract, use the source-first ladder:
+**Package recovery:** for every reached x64 contract, use the source-first ladder:
 preserve the original body, bind an existing same-shaped adapter, use a
 registered private overlay only when needed, and author no replacement unless
 all earlier rungs are unavailable. Default x86 and x64 builds both omit
@@ -184,27 +203,25 @@ historical platform may become a registered true subset retaining the shared
 x86-guest arm. A condition may never remain as an unreviewed product-capability
 decision.
 
-**S3 verification:** produce a complete x64 recovery ledger with original
+**Package verification:** record each repaired x64 contract with original
 file/line, declaration/definition/caller or table identity, source purpose,
-conditional classification where applicable, required capability owner,
-mapping-manager use, source/adapter/overlay disposition and test requirement.
-Compile and run the selected x64 SoftPC initialization/execution path where a
-repaired contract is reached. Update affected later package proposals only
-with their own rows; do not implement unrelated BOP semantics or invent a
-second machine.
+conditional classification, capability owner, mapping-manager use,
+source/adapter/overlay disposition and test requirement. Compile and run the
+selected x64 path wherever that recovered behavior is host-runnable. Do not
+implement unrelated BOP semantics or invent a second machine.
 
-**Delivery:** one complete x64 native-contract ledger, same-shaped recovery
-implementation and finite remaining-capability plan. The initial high-risk
-review set is original SoftPC host/build selection, CCPU/video function tables,
-XMS, DPMI/DPMI32, DEM/COMMAND and WOW32; debugger/VDD extension packages
-receive explicit runtime/profile dispositions rather than silent exclusion.
+**Delivery:** this protocol is realized by package-owned x64 native-contract
+rows, same-shaped recovery implementations and finite owner transfers. The
+initial high-risk review set is original SoftPC host/build selection,
+CCPU/video function tables, XMS, DPMI/DPMI32, DEM/COMMAND and WOW32;
+debugger/VDD extension packages receive explicit runtime/profile dispositions
+rather than silent exclusion.
 
-**Exit:** the selected MVDM/SoftPC closure builds natively under MSVC x64 with
-every reached width/ABI record and every selected `i386` conditional having an
-exact source location and one disposition: direct, binding-only,
-adapter-backed, overlay-required, owner-package deferral, or not-host-runtime.
-Focused x64 execution proves each recovered reachable contract. The same
-mapping-manager rule applies on both architectures.
+**Exit:** this is not a standalone delayed recovery task. It is satisfied only
+when each admitted package closes its own x64 graph and every reached width/ABI
+record and selected `i386` conditional has an exact source location and one
+disposition: direct, binding-only, adapter-backed, overlay-required,
+source-shaped unavailable with owner transfer, or not-host-runtime.
 
 ## P02D — Complete SoftPC capability and mirror-purity acceptance
 
@@ -215,8 +232,8 @@ edge: CCPU/CPU, FPU, SAS/RAM, EMS/UMB, BIOS/ROM/CMOS, PIC, PIT/timer, DMA,
 keyboard, mouse, video, disk/floppy and serial/parallel.
 
 **Delivery:** one direct, binding-only, adapter-backed or
-original-unavailable disposition for each selected machine family, with
-Win32/x86 CCPU40 source and execution evidence. Re-read every mirror diff
+original-unavailable disposition for each selected machine family, with paired
+Win32/x86 and x64 CCPU40 source and execution evidence. Re-read every mirror diff
 and overlay as the package reaches it; remove a non-original shim, stale
 Bochs-era route, duplicate adapter, or unnecessary mirror divergence at that
 point rather than carrying cleanup debt forward. Replace any project-authored
@@ -224,14 +241,13 @@ shim with an available original package/interface
 where possible, retaining only registered minimal `DIVERGENCE:` hooks and
 private overlays.
 
-**Exit:** Win32/x86 CCPU40 compiles and runs the selected SoftPC source
+**Exit:** Win32/x86 and x64 CCPU40 compile and run the selected SoftPC source
 and initialization/device path; all selected families have source-shaped
 positive/negative evidence; the
 production graph contains no Bochs, MONITOR, kernel-VDM or `src.old` route;
 and each retained diff/overlay is minimal, registered and proven necessary.
-P02C remains the later, independent x64 native-compilation recovery package;
-it is not a prerequisite or an implicit acceptance condition for this selected
-x86 product phase.
+The dual-architecture recovery rule applies to this and every later package;
+it is an explicit acceptance condition, not deferred compatibility work.
 
 ## P03 — Base VDM source-shaped broker recovery
 

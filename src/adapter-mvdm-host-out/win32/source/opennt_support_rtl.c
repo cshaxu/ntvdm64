@@ -335,3 +335,44 @@ NTSTATUS NTAPI RtlSetCurrentDirectory_U(PCUNICODE_STRING path) { WCHAR local[MAX
 ULONG NTAPI RtlNtStatusToDosError(NTSTATUS status) { if (status == 0) return ERROR_SUCCESS; if (status == STATUS_NO_MEMORY) return ERROR_NOT_ENOUGH_MEMORY; if (status == STATUS_BUFFER_OVERFLOW) return ERROR_FILENAME_EXCED_RANGE; return ERROR_INVALID_PARAMETER; }
 VOID NTAPI RtlAcquirePebLock(VOID) { InitOnceExecuteOnce(&opennt_support_lock_once, opennt_support_initialize_lock, NULL, NULL); EnterCriticalSection(&opennt_support_lock); }
 VOID NTAPI RtlReleasePebLock(VOID) { LeaveCriticalSection(&opennt_support_lock); }
+
+/* DIVERGENCE(ADAPTER-WIN32-038): the selected original SoftPC timer and
+ * CCPU copy helpers use the documented NT4 RTL integer/fill entrypoints.
+ * Current x64 NTDLL import libraries do not expose all three historical
+ * spellings.  Keep their source-facing ABI and perform only host-local,
+ * fixed-width arithmetic/copying; neither result is a guest pointer or a
+ * host-identity token. */
+LARGE_INTEGER NTAPI RtlExtendedLargeIntegerDivide(LARGE_INTEGER dividend,
+                                                   ULONG divisor,
+                                                   PULONG remainder)
+{
+    LARGE_INTEGER quotient;
+    LONGLONG value;
+
+    value = dividend.QuadPart;
+    quotient.QuadPart = divisor == 0u ? 0 : value / (LONGLONG)divisor;
+    if (remainder != NULL) {
+        *remainder = divisor == 0u ? 0u : (ULONG)(value % (LONGLONG)divisor);
+    }
+    return quotient;
+}
+
+LARGE_INTEGER NTAPI RtlExtendedIntegerMultiply(LARGE_INTEGER multiplicand,
+                                                LONG multiplier)
+{
+    LARGE_INTEGER result;
+    result.QuadPart = multiplicand.QuadPart * (LONGLONG)multiplier;
+    return result;
+}
+
+VOID NTAPI RtlFillMemoryUlong(PVOID destination, SIZE_T length, ULONG pattern)
+{
+    unsigned char *cursor = (unsigned char *)destination;
+
+    while (length >= sizeof(pattern)) {
+        memcpy(cursor, &pattern, sizeof(pattern));
+        cursor += sizeof(pattern);
+        length -= sizeof(pattern);
+    }
+    if (length != 0u) memcpy(cursor, &pattern, length);
+}

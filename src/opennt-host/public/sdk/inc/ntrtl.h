@@ -94,6 +94,10 @@ LARGE_INTEGER NTAPI RtlExtendedLargeIntegerDivide(
 LARGE_INTEGER NTAPI RtlExtendedIntegerMultiply(
     LARGE_INTEGER Multiplicand,
     LONG Multiplier);
+VOID NTAPI RtlFillMemoryUlong(
+    PVOID Destination,
+    SIZE_T Length,
+    ULONG Pattern);
 NTSTATUS NTAPI RtlEnterCriticalSection(PRTL_CRITICAL_SECTION CriticalSection);
 NTSTATUS NTAPI RtlLeaveCriticalSection(PRTL_CRITICAL_SECTION CriticalSection);
 NTSTATUS NTAPI RtlInitializeCriticalSection(PRTL_CRITICAL_SECTION CriticalSection);
