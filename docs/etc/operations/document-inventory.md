@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3442 |
+| Documentation records | 3444 |
 | --- | --- |
-| Generated UTC | 2026-08-31T05:19:12Z |
+| Generated UTC | 2026-08-31T06:10:29Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 1241dc4492d5ef01185f9c78ebd8d08d79b7169a5a690e2b7203f96b3d8a35db |
+| STATUS.md | principal control document | 585f9129fbb8f86a016d7d15c8ea1c65ef68ffc9dd2970517e58e0bf89bf6e13 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -943,6 +943,8 @@ content-divergent entries.
 | etc/evidence/m0-t318-s2-p2-original-dem-media-root-001.md | indexed supporting material | 5cfc748024d879b5e5c970d65b3b5d7d80f251a50538d3ab58122b99a3226113 |
 | etc/evidence/m0-t318-s2-p20-nondebug-console-observation-attribution-001.md | indexed supporting material | a87c49b6bbf74626dc146580c8930029bf15c0468a9ed5e4c5fa5dfad65e07de |
 | etc/evidence/m0-t318-s2-p21-fixed-console-startup-baseline-001.md | indexed supporting material | 8ff1d44e5343ff7375678f223edfb6e45fd9a7384a1051b2d8bdaf72f3fc7f98 |
+| etc/evidence/m0-t318-s2-p22-fixed-container-admission-and-ccpu-fault-001.md | indexed supporting material | 7d69a920a3e130dfa494e6923e983f7494735d1b418a1f33b5344e2567ddf5cd |
+| etc/evidence/m0-t318-s2-p23-cvidc-generated-vector-contract-001.md | indexed supporting material | 8e4ef4f5ec5bc18b800227b72c2fd2f8690f9b6089affa5e3378174a116798a5 |
 | etc/evidence/m0-t318-s2-p3-dual-width-normal-link-boundary-001.md | indexed supporting material | d3e76724e741499cdbea8406f8aa136f7cfaa5b1b4ddefc95d87eb4659b2cff5 |
 | etc/evidence/m0-t318-s2-p4-original-resource-and-startup-contract-001.md | indexed supporting material | 688539591b39b3e0bfa95a29ee62ae2d6d258bda78b01f3f0fec719186e32c92 |
 | etc/evidence/m0-t318-s2-p5-console-observation-admission-001.md | indexed supporting material | 6326836e2f291accf9ed0aa1884c8bf125159ea95cdfb28be404338c1c9f46c0 |

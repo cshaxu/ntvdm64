@@ -28,8 +28,10 @@ explicit null/unavailable: `ClearHwInt`, `InitIOS`, `DefineInb`, `DefineInw`,
 `SetCpuState`, `InitNanoCpu`, `PrepareBlocksToCompile`, `SetRegConstraint`,
 `TrashIntelRegisters`, `GrowRecPool`, `BpiCompileBPI`,
 `FmDeleteAllStructures`, `ConstraintsFromUnivEpcPtr`, and
-`ConstraintsFromUnivHandle`. They are an owner-contract recovery cohort, not
-fallback behavior.
+`ConstraintsFromUnivHandle`. This is 26 slots. Some bodies are absent from
+the selected CPU40 profile only because original source gates them under `PIG`
+or `SPC486`; they are not all missing-source claims. They are an
+owner-contract recovery cohort, not fallback behavior.
 
 ## Verification
 
