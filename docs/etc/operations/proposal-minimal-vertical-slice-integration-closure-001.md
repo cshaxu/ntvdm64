@@ -32,6 +32,16 @@ immutable short-root media container, run one bounded x86 observation and
 record either an original declared-command/guest boundary or the next exact
 source-defined owner transfer.
 
+## T328 disposition
+
+S1 established that the FDC/INT15/ROM/vector portion of this package is
+already fully selected from original owners. No earliest missing binding exists
+for S2 to recover, and a second unchanged runtime observation would not add a
+new variable. The reported return point instead transfers to the complete
+CPU40 recursive-frame and guest re-entry contract. That contract is a
+successor owner package; it may not be replaced by an FDC result, BOP leaf,
+ROM/vector patch or a base-level `longjmp` guard.
+
 ## Exit
 
 Close only with a fixed-container original guest-result boundary or a narrow

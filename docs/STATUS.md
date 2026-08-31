@@ -4,9 +4,33 @@
 
 ## Active Packet
 
+### M0 T329 S1 — Original CCPU recursive-frame lifecycle contract
+
+**Active: M0 T329 S1**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T329 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 1, admitted under the standing owner direction to execute the ordered queue after T328 closure. |
+| Objective | Establish the complete original CPU40 recursive `setjmp`/`longjmp` frame, TLS and guest re-entry contract that T328 identified as the exact successor owner. |
+| Non-goals | No FDC/ROM/vector/BOP leaf repair, guest-image rewrite, synthetic device result, new executor, Bochs/CPU30/MONITOR/kernel-VDM/CSRSS route, new mapper, raw native identity, WOW/VDD/debugger or product-shell redesign. |
+| Reference Baseline | T319 ROM/termination attribution; T327 configuration transfer; T328 complete FDC/INT15 owner map and paired formal links. |
+| Files And ABI Surface | Original CPU40 `c_cpu_init`, `c_cpu_simulate`, `c_cpu_unsimulate`, `ccpu386InitThreadStuff`, `ccpu386SimulatePtr`, `ccpu386Unsimulate`, exception frame helpers and direct original re-entry callers. |
+| Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, architecture, mapping-manager, session and paired-host build rules. |
+| Verification | Ordered original source/definition/caller walk; selected source-manifest review; paired x86/x64 formal product links after a complete owner recovery; one short-root immutable-media x86 observation only after a behavior change. |
+| Expected Markers | One complete recursive-frame owner/lifetime map and either one source-shaped recovery cohort or one narrower named original owner transfer. |
+| Asset Needs | Existing selected MVDM mirror/media, CPU40 formal graph, short-root fixed observer, session and adapter families; no new guest or host installation. |
+| Reporting Requirements | Record initial frame setup, TLS owner/lifetime, entry/return depth, BOP-FE route, null/base-level behavior, changed mirror locations and successor owner. |
+| Stop Conditions | Need for an invented device/BOP result, FDC/ROM/vector rework, kernel/CSRSS reconstruction, persistent guest/native pointer, unreviewed source import or change outside the selected complete owner cohort pauses for re-admission. |
+| Exit Criteria | A fixed-container original guest-result boundary or one narrow source-defined CPU40 recursive-frame/guest-re-entry owner transfer, with paired formal links. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | CPU40 initialization, TLS allocation and teardown, frame acquire/release, BOP-FE immediate and extended paths, exception frame return, nested FDC/keyboard/WOW re-entry callers, and the first post-frame return. |
+
+**S1 plan:** [the CPU40 recursive-frame closure proposal](etc/operations/proposal-cpu40-recursive-frame-guest-reentry-closure-001.md) starts with the complete original lifecycle map and forbids FDC/BOP-led recovery.
+
 ### M0 T328 S1 — Original FDC/INT15 wait-continuation contract
 
-**Active: M0 T328 S1**
+**Closed: M0 T328 S1 and M0 T328.**
 
 | Field | Record |
 | --- | --- |
@@ -26,7 +50,9 @@
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | CPU40 wait/unsimulate, FDC and INT15 callback installation, PIC/ICA completion, ROM wait vector, source-owned null callback result, and the first post-configuration return. |
 
-**S1 plan:** [the minimal vertical-slice integration proposal](etc/operations/proposal-minimal-vertical-slice-integration-closure-001.md) begins with a complete original wait-continuation contract and explicitly forbids BOP-led recovery.
+**S1 evidence:** [the original FDC/INT15 wait-continuation contract](etc/evidence/m0-t328-s1-original-fdc-int15-wait-continuation-contract-001.md) resolves the complete FDC, ICA, ROM, vector and BOP-FE chain as already sourced from original owners. It establishes a narrower successor: CPU40 recursive-frame and guest re-entry integrity. Both unchanged formal x86/x64 selected-source product links pass; no x64 runtime claim is made.
+
+**T328 closure:** no original FDC/INT15 binding was missing, therefore S2 had no admissible implementation and S3 had no changed product to observe. T328 closes through its exact source-defined owner-transfer exit. The next package is limited to the original CPU40 recursive frame contract; it may not reopen FDC/ROM/vector or BOP work.
 
 ### M0 T327 — Minimal DOS guest execution and controlled return
 
