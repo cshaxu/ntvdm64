@@ -101,6 +101,8 @@ The monitor and DOS re-entry transfers remain visible for later owner work.
 `MVDM-HOST-DIV-140` changes only the private address carrier:
 
 - `IntelBase` and `FlatAddress` use `ULONG_PTR`;
+- the imported `softpc.h` declaration uses the same private host-width
+  carrier, so all reached DPMI declarations agree;
 - DPMI initialisation retains the original `Sim32GetVDMPointer(0, 1, FALSE)`
   and conversion order;
 - descriptor, IVT, DTA-range and flat/segmented arithmetic retain native
