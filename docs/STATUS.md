@@ -92,6 +92,14 @@ Both product links pass, but bounded liveness remains only liveness; the next
 owner boundary is original `scs_init` / Base VDM command acquisition. See
 [P5 evidence](etc/evidence/m0-t318-s2-p5-console-observation-admission-001.md).
 
+**S2 P6:** app now binds the existing source-shaped Base VDM adapter before
+original `scs_init`; explicit `--ordinary-child` declares the selected
+`dos/COMMAND.COM /C VER` through its copied `VDMINFO` record and is stripped
+before original argument parsing. The selected CPU40 product links in both
+widths and both graphs are incrementally clean. The bounded x86 run is still
+liveness only: it does not prove NTIO, NTDOS, EXEC or parent return. See
+[P6 evidence](etc/evidence/m0-t318-s2-p6-base-vdm-ordinary-child-declaration-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |

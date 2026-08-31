@@ -187,7 +187,7 @@ $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20
                         'mvdm_vdd_sft_shadow.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
                         'mvdm_softpc_descriptor_fields.c', 'mvdm_softpc_activity_unavailable.c',
                         'mvdm_softpc_vdd_unavailable.c', 'mvdm_softpc_vdd_configuration.c')
-$appNames = @('machine_shell.c', 'package_layout.c', 'entry.c')
+$appNames = @('machine_shell.c', 'package_layout.c', 'launch_declaration.c', 'entry.c')
 $effectiveAddressSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_effective_address.c'
 $effectiveAddressObject = 'obj/adapter-softpc/mvdm_softpc_effective_address.obj'
 $patchNames = @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h')

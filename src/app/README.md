@@ -16,6 +16,19 @@ The app no longer owns a Base VDM command protocol. It may declare launch
 input, but the copied command record, `VDMINFO` shape, dispatch ordering and
 session binding belong to `adapter-mvdm-host-out/basesrv`.
 
+`launch_declaration.{c,h}` is the corresponding thin assembly owner: it
+creates no command protocol and no guest state. It initializes and binds the
+adapter-owned record before original `scs_init` asks `GetNextVDMCommand(NULL)`
+whether this is the first DOS VDM. A declared command payload remains owned by
+the Base VDM adapter.
+
+For the admitted one-child integration profile, `--ordinary-child` declares
+the selected session's immutable `dos/COMMAND.COM /C VER` image through that
+same copied record. App removes only this composition option before entering
+the original SoftPC argument parser. It derives the command, application,
+environment and current directory from the session-selected DOS media root;
+it does not load, execute, emulate or return the child itself.
+
 ## M0 T310 S3 selected backend composition
 
 `machine_shell` composes only a session which made the selected SoftPC choice
