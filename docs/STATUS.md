@@ -573,6 +573,14 @@ cross-owner candidate after that transfer; it is an audit target, not a proven
 fault and not a BOP change. See [P69
 evidence](etc/evidence/m0-t318-s2-p69-first-control-transfer-heartbeat-owner-audit-001.md).
 
+**S2 P70:** the original heartbeat cohort has a complete selected provider
+binding before CPU start: `host_applInit` binds `working_video_funcs` to the
+original `nt_video_funcs`, and the worker is created suspended then resumed
+only by the original post-reset order. No missing vector, replacement provider,
+or initialisation inversion supports a repair. The fixed-container trace must
+not be perturbed with new hot-path console probes. See [P70
+evidence](etc/evidence/m0-t318-s2-p70-heartbeat-provider-binding-audit-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
