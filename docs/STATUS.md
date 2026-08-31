@@ -337,6 +337,13 @@ heartbeat starts only after that prefix and transfers the next static cohort to
 original timer/PIC mechanics. No observation was repeated. See [P38
 evidence](etc/evidence/m0-t318-s2-p38-reset-console-heartbeat-owner-audit-001.md).
 
+**S2 P39:** the complete original heartbeat machine cohort is source-proven:
+BIOS reset initializes `SWTMR_time_tick`; NTVDM/CPU40 retains direct original
+PIC delivery; and `CPU_TIMER_TICK` enters original CCPU40
+`c_cpu_interrupt`. No BaseSrv/CSR/console or new adapter boundary occurs in
+this path, so no source change or repeated observation is justified. See [P39
+evidence](etc/evidence/m0-t318-s2-p39-timer-pic-cpu40-prerequisite-audit-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
