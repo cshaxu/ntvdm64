@@ -346,6 +346,7 @@ Return Value:
     ANSI_STRING aString;
     LPWSTR uncName;
     NTSTATUS ntstatus;
+    int computerNameBytes;
 
 
     //
@@ -669,13 +670,21 @@ Return Value:
         } else {
             computerName[0] = computerName[1] = '\\';
 
-            //
-            // BUGBUG - Unicode - ASCII conversion here
-            //
-
-            strcpy(computerName+2,
-                    ((LPWKSTA_INFO_100)wkstaInfo)->wki100_computername);
+            /* DIVERGENCE(MVDM-HOST-DIV-172): the original intentionally
+             * treated the Unicode NetAPI result as ASCII. Preserve its local
+             * fixed-size OEM computer-name temporary, but use the public
+             * conversion API before the original RAP branch consumes it. */
+            computerNameBytes = WideCharToMultiByte(CP_OEMCP, 0,
+                ((LPWKSTA_INFO_100)wkstaInfo)->wki100_computername, -1,
+                computerName + 2, (int)(sizeof(computerName) - 2u), NULL,
+                NULL);
             NetApiBufferFree(wkstaInfo);
+            if (computerNameBytes == 0) {
+                if (alloc_flag) {
+                    LocalFree(send_data_ptr);
+                }
+                return ERROR_INVALID_DATA;
+            }
             serverName = computerName;
 #ifdef VR_DIAGNOSE
             DbgPrint("VrRemoteApi: computername is %s\n", serverName);

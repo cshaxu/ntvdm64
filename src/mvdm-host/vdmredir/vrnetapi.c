@@ -84,6 +84,7 @@ Revision History:
 #include <netlibnt.h>   // NetpNtStatusToApiStatus()
 #include "vrputil.h"    // VrpMapDosError()
 #include "vrdebug.h"    // VrDebugFlags etc
+#include "adapter-mvdm-host-out/redir/include/mvdm_redirector_guest_copy.h"
 #include "dlstruct.h"   // down-level structures
 #include <rxuser.h>     // RxNetUser...
 #include <lmaccess.h>   // USER_PASSWORD_PARMNUM
@@ -348,9 +349,16 @@ Return Value:
             }
 #endif
         } else {
-            strcpy(LPSTR_FROM_WORDS(getES(), getDI()), nameBuf);
-            setAX(0);
-            setCF(0);
+            /* DIVERGENCE(MVDM-HOST-DIV-171): the original direct guest alias
+             * has no release point.  Retain its exact bounded copy and result
+             * order through the session-owned synchronous lease instead. */
+            if (!mvdm_redirector_copy_ansi_to_guest(getES(), getDI(), nameBuf,
+                nameLen + 1u)) {
+                SET_ERROR(ERROR_INVALID_ADDRESS);
+            } else {
+                setAX(0);
+                setCF(0);
+            }
 #if DBG
             IF_DEBUG(NETAPI) {
                 DbgPrint("VrGetComputerName returning %s\n", nameBuf);
@@ -492,7 +500,10 @@ Return Value:
     status = NetWkstaUserGetInfo(NULL, 0, &buffer);
     if (status == NERR_Success) {
         pInfo = (LPWKSTA_USER_INFO_0)buffer;
-        len = (DWORD)STRLEN(pInfo->wkui0_username);
+        /* DIVERGENCE(MVDM-HOST-DIV-171): the selected public NetAPI carrier
+         * exposes the returned user name as Unicode even though this source
+         * is compiled without the historical global UNICODE switch. */
+        len = (DWORD)wcslen(pInfo->wkui0_username);
         if (getBX()) {
             itFits = (len) <= (DWORD)getCX()-1;
             if (itFits) {
@@ -504,7 +515,12 @@ Return Value:
             itFits = TRUE;
         }
         if (itFits) {
-            NetpCopyTStrToStr(LPSTR_FROM_WORDS(getES(), getDI()), pInfo->wkui0_username);
+            /* DIVERGENCE(MVDM-HOST-DIV-171): use one exact synchronous lease
+             * rather than retain the original unbounded guest pointer. */
+            if (!mvdm_redirector_copy_wide_to_guest(getES(), getDI(),
+                pInfo->wkui0_username)) {
+                SET_ERROR(ERROR_INVALID_ADDRESS);
+            }
         }
         NetApiBufferFree(buffer);
     } else {

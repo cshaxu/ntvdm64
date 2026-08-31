@@ -4,6 +4,9 @@
 
 ## Active Packet
 
+**No active M/T/S packet.** M0 T325 is closed; the next queue item requires a
+fresh admitted packet before implementation begins.
+
 ### M0 T325 S1 — NetAPI/RAP Redirector original-owner baseline
 
 **Closed: M0 T325 S1**
@@ -41,7 +44,7 @@ because its private pointer scope has been retired.
 
 ### M0 T325 S2 — Public workstation-query lease recovery
 
-**Active: M0 T325 S2**
+**Closed: M0 T325 S2**
 
 | Field | Record |
 | --- | --- |
@@ -62,6 +65,16 @@ because its private pointer scope has been retired.
 | Similar-Issue Sweep | All selected `ES:DI` string writes, `NetApiBufferFree` pairing, explicit capacity gates, register/carry result paths, session teardown and source-selection inputs. |
 
 **S2 plan:** [the public workstation-query lease recovery plan](etc/operations/m0-t325-s2-public-workstation-query-lease-recovery-plan-001.md) retains the original code body and confines each required change to a registered, copied synchronous guest-memory crossing.
+
+**S2 closed:** [the workstation-query lease recovery evidence](etc/evidence/m0-t325-s2-public-workstation-query-lease-recovery-001.md)
+records the two selected `ES:DI` result writes, the local RAP fallback's
+fixed-capacity OEM conversion, the declaration-only `apiworke.h` import and
+formal x86/x64 build-plus-fixture evidence. The later RAP/SMB request is still
+an explicit unavailable boundary; no remote-network claim is made.
+
+**T325 closed:** its complete selected public workstation-query subset is now
+source-shaped, bounded and verified on both target architectures. The package
+does not include the unselected RAP/SMB/Xs/Rx/NetBIOS/DLC/VDD provider families.
 
 ### M0 T324 S1 — Original Redirector owner and boundary baseline
 

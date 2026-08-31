@@ -72,6 +72,11 @@ package-selection record and per-file source/hash manifest are
 and
 [here](../../docs/etc/operations/m0-t290-s5-ds-declaration-package-manifest-001.tsv).
 
+T325 S2 selected byte-identical `apiworke.h` under
+`source/private/ds/netapi/rpcxlate` for the original `vrremote.c` local
+computer fallback. It supplies only API-worker constants; it does not select
+or enable RAP, Xs, Rx, SMB, or a network provider.
+
 The same S5 compilation closure selected exact OpenNT
 `public/internal/base/inc` and `public/internal/net/inc` declaration cohorts.
 They supply the original `smbgtpt.h` and `tstring.h` dependencies of the DS
