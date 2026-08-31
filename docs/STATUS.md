@@ -598,6 +598,14 @@ and `54:0C`. This proves original COMMAND bootstrap ingress for the declared
 ordinary-child profile, not yet guest `EXEC` or parent-return continuity. See
 [P72 evidence](etc/evidence/m0-t318-s2-p72-command-ingress-and-host-path-carrier-001.md).
 
+**S2 P73:** paired short-root fixed-container observations with and without
+the admitted `--ordinary-child` declaration both exit `0xC0000005` after the
+same original DEM/COMMAND bootstrap markers.  The failure therefore cannot be
+assigned to the declared `/C VER` input, `EXEC`, or parent return.  The next
+unit is the complete original post-`cmdSetInfo` / early guest-bootstrap cohort;
+no trace-driven COMMAND/BOP repair is admitted. See [P73
+evidence](etc/evidence/m0-t318-s2-p73-short-root-command-attribution-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
