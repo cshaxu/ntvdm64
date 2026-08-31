@@ -27,6 +27,14 @@
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | Compare both FDC wait vectors, reset and interrupt completion paths, direct and recursive CPU40 simulation, ROM/table initialization order and all reached zero-transfer guard paths as one machine contract. |
 
+**S1 P1:** the selected CPU40 `NTVDM + X86GFX` source branch makes original
+`rom_init()` delegate firmware residency to `host_rom_init()`, while the
+selected host header supplies only an empty hook.  The retained byte-exact
+`bios4` input contains the exact `F000:E970` and `FE00:0CE0` recursive
+instructions used by `floppy.c::wait_int`.  Therefore firmware residency is
+the first source-shaped recovery seam; FDC/PIC is downstream and not yet
+diagnosed.  See [S1 P1 evidence](etc/evidence/m0-t319-s1-softpc-rom-vector-contract-freeze-001.md).
+
 ## Historical retained T318 delivery sequence
 
 T318 is closed by its declared owner-transfer exit.  Its compact closure is

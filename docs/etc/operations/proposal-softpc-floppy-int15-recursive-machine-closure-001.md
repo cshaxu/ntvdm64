@@ -33,9 +33,13 @@ changes occur in S1.
 
 ### S2 — Source-shaped reached-cohort composition
 
-Compose or restore only the source-defined FDC/PIC/table/recursive-run pieces
-shown necessary by S1.  Preserve original call ordering and negative behavior;
-do not expand unrelated disks, DMA, BIOS services, or devices.
+First compose the original `host_rom_init` firmware-residency seam identified
+by S1: the retained byte-exact firmware becomes resident in the existing
+SoftPC SAS backing store before the original recursive FDC wait runs.  Only
+after that fixed input is proven may this S inspect the next source-defined
+FDC/PIC/table/recursive-run piece.  Preserve original call ordering and
+negative behavior; do not expand unrelated disks, DMA, BIOS services, or
+devices.
 
 ### S3 — Fixed-container integration proof
 
