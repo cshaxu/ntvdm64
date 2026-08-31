@@ -6,6 +6,7 @@
  */
 #include <insignia.h>
 #include <host_def.h>
+#include "evidgen.h"
 #define CCPU
 #define CPU_PRIVATE
 #include "cpu4.h"
@@ -14,6 +15,27 @@
 extern struct VideoVector C_Video;
 extern struct VideoVector Video;
 extern struct SasVector Sas;
+
+/* The selected original sources retain the C-VID access shims but omit this
+ * generated CCPU timing provider.  Keeping the timing value beside the
+ * vector binding prevents the public access shims from being rebound to
+ * themselves.  qevnt.c's original initial qevJumpRestart value is 100. */
+static IUH mvdm_cvidc_jump_restart = 100;
+
+IUH mvdm_cvidc_get_jump_calibration(void)
+{
+    return mvdm_cvidc_jump_restart;
+}
+
+IUH mvdm_cvidc_get_jump_restart(void)
+{
+    return mvdm_cvidc_jump_restart;
+}
+
+void mvdm_cvidc_set_jump_restart(IUH value)
+{
+    mvdm_cvidc_jump_restart = value;
+}
 
 static struct CpuPrivateVector CvidCpuPrivate;
 
@@ -39,6 +61,11 @@ void mvdm_cvidc_bind_vectors(void)
     Cpu.Private = &CvidCpuPrivate;
     Cpu.Sas = &Sas;
     mvdm_cvidc_bind_cpu_public();
-    Video = C_Video;
+    mvdm_cvidc_bind_video_vector();
     Cpu.Video = (IHP)&Video;
+}
+
+void mvdm_cvidc_bind_video_vector(void)
+{
+    Video = C_Video;
 }

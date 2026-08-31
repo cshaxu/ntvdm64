@@ -528,6 +528,22 @@ InitScreenDesc/SetupConsoleMode → nt_start_event_thread`; no observer or
 container variation is admitted.  See [P63
 evidence](etc/evidence/m0-t318-s2-p63-pre-ntio-host-ui-timer-owner-audit-001.md).
 
+**S2 P64:** an exception-context diagnostic localized the fixed product's
+escaped `0xC0000005` to the first indirect C-VID video-vector call during
+original EGA configuration.  A video-only, source-shaped pre-configuration
+binder now supplies the original `C_Video` table without prematurely binding
+the CPU vector.  See [P64
+evidence](etc/evidence/m0-t318-s2-p64-cvidc-first-vector-fault-001.md).
+
+**S2 P65:** the retained C-VID metadata exposed three missing generated
+quick-event timing slots.  Their original forwarding shims had been bound back
+to themselves, causing the next stack overflow.  The registered narrow timing
+provider restores the original initial value and setter contract.  Formal x86
+and x64 links pass, and the unchanged x86 fixed container now remains alive to
+its eight-second timeout.  This is only startup liveness—not NTIO, NTDOS,
+EXEC, or child-completion evidence. See [P65
+evidence](etc/evidence/m0-t318-s2-p65-cvidc-timing-provider-and-startup-liveness-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |

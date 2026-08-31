@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3484 |
+| Documentation records | 3486 |
 | --- | --- |
-| Generated UTC | 2026-08-31T14:07:28Z |
+| Generated UTC | 2026-08-31T14:59:58Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | fa44db92141dacb297ca603966bcd22e6486cfee6d8cf0935adcd2fd82b04ab6 |
+| STATUS.md | principal control document | ac0ecea1560b4ac1ff3fee605ae2cb0214b4c0f4696126a19248f3eadca1c428 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -989,6 +989,8 @@ content-divergent entries.
 | etc/evidence/m0-t318-s2-p61-basesrv-first-command-contract-closure-001.md | indexed supporting material | 9eb1811e23f1d8632ccb3ead38d9dafcf262ff8bbe02f4cf9144079050b69f5b |
 | etc/evidence/m0-t318-s2-p62-fixed-runtime-product-adjacency-closure-001.md | indexed supporting material | da3ef841caff36ed9a38ea9d7db3bece65182e67c7fc0ced9e28c755cb18b3e5 |
 | etc/evidence/m0-t318-s2-p63-pre-ntio-host-ui-timer-owner-audit-001.md | indexed supporting material | 4268223d2eb5760bbeba78d64db148526b810bfdb5e5e7402087b2c1ad93ed16 |
+| etc/evidence/m0-t318-s2-p64-cvidc-first-vector-fault-001.md | indexed supporting material | 6d1d4db995a24c78cf99a059c311d85bd8798751714ab0bd0513279abd8dd67c |
+| etc/evidence/m0-t318-s2-p65-cvidc-timing-provider-and-startup-liveness-001.md | indexed supporting material | 72591fb2ddebaa8ed7248fe43037f1d75790448e77eaab88076623743482dc13 |
 | etc/evidence/m0-t318-s2-p7-v7vga-firmware-configuration-recovery-001.md | indexed supporting material | ed2b11e329f033cc5279ed7e326e6fc6c35400fac3f9bae3b01ff2c0ef5a427a |
 | etc/evidence/m0-t318-s2-p8-headless-console-observation-attribution-001.md | indexed supporting material | 5b2d4b1490a5c22ad740740a0fee7980dcd8e441a86aada22bf06cf533496eb4 |
 | etc/evidence/m0-t318-s2-p9-real-console-startup-liveness-001.md | indexed supporting material | a88fcc9c8bcea9e2d028db968decfc309293d4a47ecaa5cc80abeef4c6a1c87d |

@@ -47,6 +47,9 @@
 #include "gfx_upd.h"
 #include "cmos.h"
 #include "gfi.h"
+/* DIVERGENCE(MVDM-HOST-DIV-162): selected CCPU40/C-VID sources retain their
+ * original tables but not the historical generated pre-config binder. */
+#include "mvdm_cvidc_vector_binding.h"
 #include "timer.h"
 #include "yoda.h"
 //#include "host_env.h"
@@ -188,6 +191,11 @@ INT      main IFN2(INT, argc, CHAR **, argv)
    * Setup the initial gfi funtion pointers before going into config
    */
   gfi_init();
+
+  /* DIVERGENCE(MVDM-HOST-DIV-162): config() can initialise EGA before the
+   * original later setup_vga_globals() hook. Bind the selected original
+   * C-VID vector table before that first controller call. */
+  mvdm_cvidc_bind_video_vector();
 
   /*
    * Initialise any Windows 3.x compliant DOS Drivers.

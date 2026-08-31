@@ -13,7 +13,7 @@ const publicSpecial = {
   Simulate: 'c_cpu_simulate', Interrupt: 'c_cpu_interrupt', ClearHwInt: 'c_cpu_clearHwInt', EndOfApplication: 'c_cpu_EOA_hook', Terminate: 'c_cpu_terminate', Initialise: 'c_cpu_init',
   SetQuickEventCount: 'c_cpu_q_ev_set_count', GetQuickEventCount: 'c_cpu_q_ev_get_count', CalcQuickEventInstTime: 'c_cpu_calc_q_ev_inst_for_time', InitIOS: 'c_cpu_init_ios_in',
   DefineInb: 'c_cpu_define_inb', DefineInw: 'c_cpu_define_inw', DefineInd: 'c_cpu_define_ind', DefineOutb: 'c_cpu_define_outb', DefineOutw: 'c_cpu_define_outw', DefineOutd: 'c_cpu_define_outd',
-  GetJumpCalibrateVal: 'host_get_q_calib_val', GetJumpInitialVal: 'host_get_jump_restart', SetJumpInitialVal: 'host_set_jump_restart', SetEOIEnable: 'setEOIEnableAddr',
+  GetJumpCalibrateVal: 'mvdm_cvidc_get_jump_calibration', GetJumpInitialVal: 'mvdm_cvidc_get_jump_restart', SetJumpInitialVal: 'mvdm_cvidc_set_jump_restart', SetEOIEnable: 'setEOIEnableAddr',
   SetAddProfileData: 'setAddProfileDataPtr', SetMaxProfileData: 'setMaxProfileDataAddr', GetAddProfileDataAddr: 'getAddProfileDataAddr', PurgeLostIretHookLine: 'PurgeLostIretHookLine',
   ClearHwInt: '0', InitIOS: '0', DefineInb: '0', DefineInw: '0', DefineInd: '0', DefineOutb: '0', DefineOutw: '0', DefineOutd: '0',
   SetSTATUS: '0', SetAC: '0', GetAC: '0', GetET: '0', GetNE: '0', GetWP: '0',
