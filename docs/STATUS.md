@@ -430,6 +430,14 @@ is original SCS command acquisition plus DBG/VDD setup, before any newly
 linked product receives one fixed-container observation.  See [P50
 evidence](etc/evidence/m0-t318-s2-p50-fixed-container-console-startup-owner-cohort-001.md).
 
+**S2 P51:** original SCS/Base VDM/COMMAND/DEM/XMS/DBG/VDD pre-NTIO startup
+paths are now audited as one cohort.  Each has an original or already-registered
+same-shaped binding and no remaining unclassified local terminal branch for
+the declared profile.  The product is unchanged, so the fixed container is not
+rerun; the next source-first boundary is the NTIO load/guest-entry transaction.
+See [P51
+evidence](etc/evidence/m0-t318-s2-p51-original-scs-pre-ntio-owner-cohort-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |

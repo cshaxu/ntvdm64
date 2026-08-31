@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3471 |
+| Documentation records | 3472 |
 | --- | --- |
-| Generated UTC | 2026-08-31T08:54:19Z |
+| Generated UTC | 2026-08-31T08:56:44Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 960d4b73ef87eda516a6f6daeebe00298375ad7f7a4df2fbd80161105f965156 |
+| STATUS.md | principal control document | 1165b8dea27647a217e7697b5656d3f677dcf362e6ca08451c75bf2dba49073c |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -975,6 +975,7 @@ content-divergent entries.
 | etc/evidence/m0-t318-s2-p49-selected-configuration-directive-owner-cohort-001.md | indexed supporting material | 2136ce7c947fa9e655548d3ce64e5eee58cdc197987dc94e2c1b27026aea5065 |
 | etc/evidence/m0-t318-s2-p5-console-observation-admission-001.md | indexed supporting material | 6326836e2f291accf9ed0aa1884c8bf125159ea95cdfb28be404338c1c9f46c0 |
 | etc/evidence/m0-t318-s2-p50-fixed-container-console-startup-owner-cohort-001.md | indexed supporting material | 3fabda891ca404d36da85a55653ff29e843ce12e8081c7954be12a3c83c1ebd2 |
+| etc/evidence/m0-t318-s2-p51-original-scs-pre-ntio-owner-cohort-001.md | indexed supporting material | abc70feabfcfd5395c404db590e7bb0edf99b82d1701a87b0e2ad065630aa463 |
 | etc/evidence/m0-t318-s2-p6-base-vdm-ordinary-child-declaration-001.md | indexed supporting material | eb1928486ac016b6fb8e0589aabbc9f6f4cc845181c03fbb812bae31ba6a312f |
 | etc/evidence/m0-t318-s2-p7-v7vga-firmware-configuration-recovery-001.md | indexed supporting material | ed2b11e329f033cc5279ed7e326e6fc6c35400fac3f9bae3b01ff2c0ef5a427a |
 | etc/evidence/m0-t318-s2-p8-headless-console-observation-attribution-001.md | indexed supporting material | 5b2d4b1490a5c22ad740740a0fee7980dcd8e441a86aada22bf06cf533496eb4 |
