@@ -78,7 +78,7 @@ bypass.  T321/S2 is limited to the fixed matrix on that same graph.
 
 ### M0 T321 S2 — Fixed vertical-slice integration matrix
 
-**No active M/T/S packet.** M0 T321 is closed.
+**Closed: M0 T321.**
 
 | Field | Record |
 | --- | --- |
@@ -103,7 +103,7 @@ candidate's exact-owner-transfer exit without introducing a bypass.
 
 ### M0 T320 — closure record
 
-**No active M/T/S packet.** M0 T320 is closed.
+**Closed: M0 T320.**
 
 | Field | Record |
 | --- | --- |
