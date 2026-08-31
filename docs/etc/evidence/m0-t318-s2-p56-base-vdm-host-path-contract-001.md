@@ -48,11 +48,11 @@ After the final source changes, formal selected CPU40 final-link rows passed:
   `original-softpc-process.exe`.
 
 The prior fixed-container p56--p59 reports remain retained research evidence:
-p56--p58 show the successive app-side rejection removals; p59 reaches the
-later original COMMAND consumption phase and exits with `0xC0000005`.
-The latter is source-attributed to the original receiving-buffer mismatch
-above, but is not retroactively treated as runtime closure.
+p56--p58 show the successive app-side rejection removals; p59 exits with
+`0xC0000005` after publishing the declared host path.  The report cannot prove
+which original caller consumed that path, so the receiving-buffer mismatch is
+a source-proven safety repair, not a runtime-attributed crash root.
 
 The next valid runtime action is exactly one newly linked x86 product in the
-unchanged `runtime-r33-config-system-media` container, subject to explicit
-owner authorization after the p59 observation quota.
+unchanged `runtime-r33-config-system-media` container, subject to the fixed
+observation policy.

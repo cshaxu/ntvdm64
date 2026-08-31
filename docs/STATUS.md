@@ -472,8 +472,14 @@ application and path-string current-directory capacities; original COMMAND's
 matching `MAX_PATH + 1` receiver is corrected as registered
 `MVDM-HOST-DIV-160`.  The focused fixed-package declaration fixture and final
 CPU40 x86/x64 links pass.  The retained p56--p59 runs are not runtime closure;
-the next fixed-container observation requires explicit authorization.  See
+the receiving-buffer mismatch is source-safe but not a proven crash root. See
 [P56 evidence](etc/evidence/m0-t318-s2-p56-base-vdm-host-path-contract-001.md).
+
+**S2 P57:** the approved unchanged-container p60 observation of the P56
+product still exits `0xC0000005` with no console output.  The COMMAND buffer
+repair remains source/link valid but is not runtime-attributed; recovery
+returns to the next complete original pre-NTIO owner cohort rather than a
+trace-selected BOP patch. See [P57 evidence](etc/evidence/m0-t318-s2-p57-fixed-container-command-buffer-result-001.md).
 
 ### M0 T317 S2 closure record
 
