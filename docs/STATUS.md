@@ -421,6 +421,15 @@ shim or BOP implementation is admitted, and no unchanged product is rerun.
 See [P49
 evidence](etc/evidence/m0-t318-s2-p49-selected-configuration-directive-owner-cohort-001.md).
 
+**S2 P50:** the complete direct early-console/display cohort from original
+`ntvdm.c` through `host_main`, `host_applInit`, console/event setup and CPU
+entry is now source-audited.  The fixed real-console container satisfies its
+original public Win32 prerequisites; no executable CSR/BaseSrv call occurs
+there, so no new adapter or source edit is admitted.  The next static boundary
+is original SCS command acquisition plus DBG/VDD setup, before any newly
+linked product receives one fixed-container observation.  See [P50
+evidence](etc/evidence/m0-t318-s2-p50-fixed-container-console-startup-owner-cohort-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
