@@ -1,0 +1,18 @@
+{
+  "container": "console-owning-nondebug",
+  "command": [
+    "O:\\repos.hobby\\ntvdm64\\build\\tools\\console-startup-observer.exe",
+    "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r36-command-ingress-after-host-path-fix\\original-softpc-process.exe",
+    "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r36-command-ingress-after-host-path-fix",
+    "O:\\repos.hobby\\ntvdm64\\artifacts\\research\\m0-t318-s2-p72-command-ingress-after-host-path-fix.txt"
+  ],
+  "stageManifestSha256": "d735283a0747dd4654eb173ed7857dbe99b25a7903999f157524f1e721442299",
+  "fixedMediaManifestSha256": "b46ad6c47e692ba3b1213dd11b9c1a9b3c686410028c3d70e172086b26b62ce2",
+  "productSource": "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\formal-x86\\original-softpc-process.exe",
+  "productStage": "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r36-command-ingress-after-host-path-fix\\original-softpc-process.exe",
+  "productSha256": "0efbe1dd2433bea9a37af82651d5d89032ec57e176488ea5136d09a6933d2462",
+  "launcherExitCode": 0,
+  "launcherSignal": null,
+  "stdout": "",
+  "stderr": ""
+}

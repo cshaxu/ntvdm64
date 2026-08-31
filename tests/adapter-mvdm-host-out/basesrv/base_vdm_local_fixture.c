@@ -56,9 +56,9 @@ static int verify_long_package_launch_declaration(void)
     static char ordinary[] = "--ordinary-child";
     char *argv[] = { program, ordinary, NULL };
     const char *root =
-        "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r33-config-system-media\\dos";
+        "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r37-command-ingress-after-complete-host-path-fix\\dos";
     const char *application =
-        "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r33-config-system-media\\dos\\COMMAND.COM";
+        "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r37-command-ingress-after-complete-host-path-fix\\dos\\COMMAND.COM";
     int argc = 2;
     session instance;
     app_launch_declaration declaration;

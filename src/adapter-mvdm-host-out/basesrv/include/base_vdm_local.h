@@ -62,9 +62,10 @@ typedef struct base_vdm_local {
      * path storage for this host-side value. */
     uint8_t application[MAX_PATH];
     uint8_t environment[MAXIMUM_VDM_ENVIORNMENT];
-    /* Original COMMAND requests a path-string-sized current-directory buffer,
-     * not the smaller drive-relative component limit. */
-    uint8_t current_directory[MAXIMUM_VDM_PATH_STRING];
+    /* `VDMINFO.CurDirectory` is a host-side BaseClient/BaseSrv carrier.
+     * Original COMMAND advertises MAX_PATH + 1 bytes for it, independently of
+     * the smaller guest drive-relative component limit. */
+    uint8_t current_directory[MAX_PATH + 1u];
 } base_vdm_local;
 
 #ifdef __cplusplus

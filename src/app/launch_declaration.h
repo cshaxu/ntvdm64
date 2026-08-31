@@ -12,7 +12,10 @@ typedef struct app_launch_declaration {
     char command[MAXIMUM_VDM_COMMAND_LENGTH];
     char application[MAX_PATH];
     char environment[MAXIMUM_VDM_ENVIORNMENT];
-    char current_directory[MAXIMUM_VDM_PATH_STRING];
+    /* The original BaseClient current-directory carrier is a host path, not a
+     * guest drive-relative component.  It must match the MAX_PATH + 1 buffer
+     * advertised by original COMMAND's cmdGetNextCmd. */
+    char current_directory[MAX_PATH + 1u];
 } app_launch_declaration;
 
 void app_launch_declaration_initialize(app_launch_declaration *declaration);

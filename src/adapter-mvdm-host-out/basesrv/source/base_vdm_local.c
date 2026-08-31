@@ -56,7 +56,7 @@ int base_vdm_local_valid(const base_vdm_local *record)
         record->command_bytes <= MAXIMUM_VDM_COMMAND_LENGTH &&
         record->application_bytes <= MAX_PATH &&
         record->environment_bytes <= MAXIMUM_VDM_ENVIORNMENT &&
-        record->current_directory_bytes <= MAXIMUM_VDM_PATH_STRING &&
+        record->current_directory_bytes <= MAX_PATH + 1u &&
         record->lock_initialized == 1u && record->wake_event != NULL &&
         record->pending_request <= 1u &&
         (record->current_directories_bytes == 0u ||
@@ -73,10 +73,10 @@ int base_vdm_local_publish(base_vdm_local *record, const base_vdm_command *comma
         !valid_bytes(command->application, command->application_bytes, MAX_PATH) ||
         !valid_bytes(command->environment, command->environment_bytes, MAXIMUM_VDM_ENVIORNMENT) ||
         /* CurDirectory is a host path carried to the original BaseClient
-         * caller.  Its ABI buffer is MAXIMUM_VDM_PATH_STRING, not the
+         * caller.  Original COMMAND advertises MAX_PATH + 1 bytes, not the
          * guest-visible MAXIMUM_VDM_CURRENT_DIR DOS directory limit. */
         !valid_bytes(command->current_directory, command->current_directory_bytes,
-            MAXIMUM_VDM_PATH_STRING)) return 0;
+            MAX_PATH + 1u)) return 0;
     EnterCriticalSection(&record->lock);
     if (record->available != 0u) goto done;
     if (!copy_bytes(record->command, command->command, command->command_bytes) ||

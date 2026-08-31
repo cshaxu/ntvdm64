@@ -590,6 +590,14 @@ bootstrap progress, not yet ordinary-child `EXEC` / parent-return evidence.
 See [P71
 evidence](etc/evidence/m0-t318-s2-p71-remove-startup-observation-perturbation-001.md).
 
+**S2 P72:** the local Base VDM record and app declaration now preserve the
+original `MAX_PATH + 1` host-current-directory carrier, rather than rejecting
+the fixed package root as a guest component. The fixed non-debug observation
+therefore continues past DEM bootstrap and reaches original COMMAND `54:05`
+and `54:0C`. This proves original COMMAND bootstrap ingress for the declared
+ordinary-child profile, not yet guest `EXEC` or parent-return continuity. See
+[P72 evidence](etc/evidence/m0-t318-s2-p72-command-ingress-and-host-path-carrier-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
