@@ -412,6 +412,15 @@ One new x86 stage times out rather than reproducing the old immediate terminal;
 it remains liveness only.  See [P48
 evidence](etc/evidence/m0-t318-s2-p48-original-configuration-system-media-closure-001.md).
 
+**S2 P49:** the fixed `config.nt` directives `DOS=HIGH,UMB`,
+`DEVICE=HIMEM.SYS`, and `FILES=20` now have one source-shaped original owner
+audit: guest `sysconf.asm`, the original XMS/HIMEM service table and host
+`XMSInit`, plus the original DEM/COMMAND dispatch endpoints.  The selected
+x86 graph already links that cohort and its session mapping backend; no local
+shim or BOP implementation is admitted, and no unchanged product is rerun.
+See [P49
+evidence](etc/evidence/m0-t318-s2-p49-selected-configuration-directive-owner-cohort-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
