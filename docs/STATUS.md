@@ -248,6 +248,14 @@ subset from the production overlay. The formal CPU40 graph already selects the
 complete original `nt_bop.c`; there is now one selected DEM/COMMAND ingress,
 not a parallel reconstructed route. See [P27 evidence](etc/evidence/m0-t318-s2-p27-retire-unselected-bop-ingress-subset-001.md).
 
+**S2 P28:** the one opt-in passive original-dispatch recorder was rejected and
+removed after its otherwise unchanged fixed-container product exited
+`0xC0000005` with no record, while the normal P25 product timed out.  The
+instrumented binary therefore changes an observation variable and cannot prove
+pre-BOP reachability.  Recovery returns to P24/P26's static original startup
+owner clusters; no BOP or guest-execution claim is made. See [P28
+evidence](etc/evidence/m0-t318-s2-p28-passive-dispatch-observer-rejection-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
