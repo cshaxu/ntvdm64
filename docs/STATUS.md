@@ -481,6 +481,12 @@ repair remains source/link valid but is not runtime-attributed; recovery
 returns to the next complete original pre-NTIO owner cohort rather than a
 trace-selected BOP patch. See [P57 evidence](etc/evidence/m0-t318-s2-p57-fixed-container-command-buffer-result-001.md).
 
+**S2 P58:** the selected original top-level exception filter preserves an
+escaped primary exception code through `NtTerminateProcess`; `0xC0000005` is
+therefore not an app/BaseVDM synthetic exit.  It remains an unlocated original
+host/CPU branch failure and requires owner-contract audit, not BOP repair. See
+[P58 evidence](etc/evidence/m0-t318-s2-p58-top-level-exception-result-contract-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
