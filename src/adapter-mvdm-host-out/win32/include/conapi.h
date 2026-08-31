@@ -67,8 +67,10 @@ HMENU WINAPI ConsoleMenuControl(
 
 /*
  * This is the original client-side registration ABI.  NT4 Console Server
- * owned the paired hardware events and mapped state/text buffers; the modern
- * declaration bridge deliberately does not fabricate that private provider.
+ * owned the paired hardware events and mapped state/text buffers.  The
+ * adapter retains the full ABI; its selected windowed CPU40 provider returns
+ * only the source caller's host-local text buffer and zero hardware state.
+ * It does not fabricate the private fullscreen/controller provider.
  * Keep the pointer-bearing signature exact so selected original callers do
  * not fall back to an implicit int declaration on either host architecture.
  */

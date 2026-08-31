@@ -9,6 +9,50 @@
 #include "conapi.h"
 #include "session/session.h"
 
+/*
+ * The historical Console Server owned the allocation and lifetime of the VDM
+ * registration buffers.  The selected windowed CPU40 profile needs only the
+ * text-buffer portion of that contract: original nt_det.c writes characters
+ * into the returned host-local buffer, and no pointer crosses into guest
+ * state.  Keep that state session-owned so a later session cannot observe or
+ * reuse a previous registration.
+ */
+typedef struct console_vdm_registration {
+    session *owner;
+    PVOID state;
+    PVOID buffer;
+    struct console_vdm_registration *next;
+} console_vdm_registration;
+
+static console_vdm_registration *console_vdm_registrations;
+
+static console_vdm_registration *detach_console_vdm_registration(session *owner)
+{
+    console_vdm_registration **cursor = &console_vdm_registrations;
+    while (*cursor != NULL) {
+        if ((*cursor)->owner == owner) {
+            console_vdm_registration *result = *cursor;
+            *cursor = result->next;
+            result->next = NULL;
+            return result;
+        }
+        cursor = &(*cursor)->next;
+    }
+    return NULL;
+}
+
+static void dispose_console_vdm_registration(void *context)
+{
+    console_vdm_registration *registration =
+        detach_console_vdm_registration((session *)context);
+    if (registration == NULL) return;
+    if (registration->buffer != NULL)
+        HeapFree(GetProcessHeap(), 0u, registration->buffer);
+    if (registration->state != NULL)
+        HeapFree(GetProcessHeap(), 0u, registration->state);
+    HeapFree(GetProcessHeap(), 0u, registration);
+}
+
 BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR layout_name)
 {
     /* DIVERGENCE(ADAPTER-WIN32-034): the NT4 Console Server returned the
@@ -78,26 +122,71 @@ BOOL WINAPI RegisterConsoleVDM(DWORD flags, HANDLE start_event,
                                DWORD buffer_name_length, COORD buffer_size,
                                PVOID *buffer)
 {
-    /* DIVERGENCE(ADAPTER-WIN32-032): NT4 Console Server owned this complete
-     * registration transaction: it duplicated the hardware events, created
-     * the state/text mappings, and paired them with a VDM record.  Modern
-     * public Console APIs expose none of that protocol.  Retain the exact
-     * source-facing ABI and report its absence; do not manufacture mappings,
-     * events, or a partial fullscreen registration that original callers
-     * could mistake for success. */
-    (void)flags;
+    session *owner = session_thread_current();
+    console_vdm_registration *registration;
+    SIZE_T buffer_bytes;
+
+    /* DIVERGENCE(ADAPTER-WIN32-032): preserve the full NT4 source-facing
+     * registration ABI.  Modern public Console APIs do not expose the
+     * Console-Server controller/fullscreen protocol, but the selected
+     * windowed CPU40 path requires its host-local text-buffer result.  Supply
+     * only that result with HeapAlloc-owned, session-scoped storage.  The
+     * state mapping remains absent (length zero), exactly as original nt_det
+     * accepts when fullscreen hardware is unavailable. */
     (void)start_event;
     (void)end_event;
     (void)state_name;
     (void)state_name_length;
-    (void)state_length;
-    (void)state;
     (void)buffer_name;
     (void)buffer_name_length;
-    (void)buffer_size;
-    (void)buffer;
-    SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
-    return FALSE;
+    if (owner == NULL || !session_valid(owner) ||
+        owner->state != SESSION_STATE_ACTIVE) {
+        SetLastError(ERROR_INVALID_HANDLE);
+        return FALSE;
+    }
+    if (flags == CONSOLE_UNREGISTER_VDM) {
+        dispose_console_vdm_registration(owner);
+        return TRUE;
+    }
+    if ((flags != CONSOLE_REGISTER_VDM && flags != CONSOLE_REGISTER_WOW) ||
+        state_length == NULL || state == NULL || buffer == NULL ||
+        buffer_size.X <= 0 || buffer_size.Y <= 0) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return FALSE;
+    }
+    if ((SIZE_T)buffer_size.X > ((SIZE_T)-1) /
+            ((SIZE_T)buffer_size.Y * sizeof(WORD))) {
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+        return FALSE;
+    }
+    buffer_bytes = (SIZE_T)buffer_size.X * (SIZE_T)buffer_size.Y * sizeof(WORD);
+    registration = (console_vdm_registration *)HeapAlloc(GetProcessHeap(),
+        HEAP_ZERO_MEMORY, sizeof(*registration));
+    if (registration == NULL) {
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+        return FALSE;
+    }
+    registration->buffer = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
+        buffer_bytes);
+    if (registration->buffer == NULL) {
+        HeapFree(GetProcessHeap(), 0u, registration);
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+        return FALSE;
+    }
+    dispose_console_vdm_registration(owner);
+    registration->owner = owner;
+    registration->next = console_vdm_registrations;
+    console_vdm_registrations = registration;
+    if (!session_register_teardown(owner, dispose_console_vdm_registration,
+            owner)) {
+        dispose_console_vdm_registration(owner);
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+        return FALSE;
+    }
+    *state_length = 0u;
+    *state = NULL;
+    *buffer = registration->buffer;
+    return TRUE;
 }
 
 /* DIVERGENCE(ADAPTER-WIN32-033): these NT4 Console Server calls carried

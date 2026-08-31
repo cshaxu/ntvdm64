@@ -180,6 +180,15 @@ gone: a real-console observation instead reaches a later original
 “This function is not supported on this system” dialog. This is C-VID assembly
 closure, not an NTDOS/EXEC claim. See [P18 evidence](etc/evidence/m0-t318-s2-p18-cvidc-vector-assembly-closure-001.md).
 
+**S2 P19:** original `nt_det.c::initTextSection` now retains its
+`RegisterConsoleVDM` call through the same-shaped adapter.  The selected
+windowed CPU40 profile receives only the original caller's required,
+session-owned text buffer; no NT4 Console Server fullscreen/controller
+protocol is claimed. Both formal product links pass, and the fresh bounded
+x86 real-console run no longer shows the former 120 error dialog. This is a
+startup prerequisite closure, not NTIO/NTDOS/EXEC evidence. See [P19
+evidence](etc/evidence/m0-t318-s2-p19-windowed-console-registration-closure-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
