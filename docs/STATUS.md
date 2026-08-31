@@ -382,6 +382,13 @@ The next continuity cohort is guest-owned NTDOS `DOSINIT`/configuration, not
 a missing app, mapper or BOP provider.  See [P44
 evidence](etc/evidence/m0-t318-s2-p44-ntio-ntdos-postload-owner-cohort-001.md).
 
+**S2 P45:** the first NTDOS configuration-to-COMMAND crossing is source/build
+closed: original `CMDSVC SVC_GETCONFIGSYS` reaches `54h:0Ch`, original
+`MS_bop_4`, `CmdDispatch`, and `cmdGetConfigSys` in the selected graphs.  Its
+temporary-config and console-init behavior remains a single original COMMAND
+owner cohort; no new BOP route or app loader is admissible.  See [P45
+evidence](etc/evidence/m0-t318-s2-p45-ntdos-configuration-command-owner-cohort-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
