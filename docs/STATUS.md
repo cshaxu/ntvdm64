@@ -4,26 +4,28 @@
 
 ## Active Packet
 
-### M0 T333 S3 — Redirector lifecycle and synchronous named-pipe cohort
+### M0 T333 S4 — Redirector mailslot and asynchronous completion cohort
 
-**Active: M0 T333 S3**
+**Active: M0 T333 S4**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T333 S3; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | S2 external-form admission is closed under the owner-approved T333 plan; S3 is its sequential first source-recovery cohort. |
-| Objective | Compose the complete original Redirector source package and recover its source-shaped DLL lifecycle/synchronous named-pipe/local broker boundary without enabling async, RAP, NetBIOS, DLC or broader VDD/window behavior. |
+| Identifier Mode | M0 T333 S4; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | S3 source-package/lifecycle boundary is closed under the owner-approved T333 plan; S4 is its sequential original mailslot/async cohort. |
+| Objective | Compose original mailslot and asynchronous completion bodies through the admitted session identity, copied guest span and teardown forms, while preserving original unavailable results where CPU40 interrupt completion cannot be delivered. |
 | Non-goals | No trace-selected `57:xx` work, source-derived Redirector policy, raw host handle or pointer, second COMMAND broker, kernel VDM/CSRSS/RAP/DLC reconstruction, CPU30/Bochs route, or `src.old` input. |
 | Reference Baseline | [S1 source/ABI admission](etc/evidence/m0-t333-s1-original-redirector-source-abi-admission-001.md), its [row ledger](etc/operations/m0-t333-s1-redirector-source-abi-admission-ledger.tsv), and [S2 form admission](etc/evidence/m0-t333-s2-redirector-external-form-admission-001.md). |
-| Files And ABI Surface | Every original `vdmredir/sources` unit; `vrinit.c`, `vrdll.c`, `vrmisc.c`, `vrnmpipe.c`, `vrputil.c`, reached `cmdredir.c`/DEM call forms, public pipe calls, session identities, bounded synchronous guest spans and CPU40 mechanical calls. |
-| Verification | Current source-selection/build-manifest design; original call-order review; x86/x64 cohort build/link and local source-contract tests; retired-route/no-second-broker scan. |
-| Exit Criteria | The complete original source package is formally selected and linked on x86/x64; DLL entry/load composition has one explicit original-shaped disposition; and no async or excluded product mechanism is silently enabled. |
+| Files And ABI Surface | Original `vrmslot.c`, `vrnmpipe.c` async body, session host-resource/completion mappings, copied-span staging, worker binding/teardown and the source CPU40 completion form. |
+| Verification | Original definition/caller/state walk; existing adapter lifetime audit; paired x86/x64 selected-source build; focused source-contract tests; no-second-broker/retired-route scan. |
+| Exit Criteria | Original mailslot and async state ownership has one source-shaped composition or exact unavailable result per reached operation; no host handle/pointer or durable guest pointer crosses a worker boundary; and no async completion is fabricated. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | Named pipes, mailslots, handle/token width, guest copied spans, async completion, DEM/COMMAND stream lifecycle, NetAPI/RAP, NetBIOS/DLC, VDD/window/monitor state, x86/x64 source selection and original failure directions. |
 
-**Plan:** [M0 T333 original Redirector recovery](etc/operations/m0-t333-redirector-owner-package-recovery-plan-001.md). **S1 closed:** [source/ABI admission evidence](etc/evidence/m0-t333-s1-original-redirector-source-abi-admission-001.md) and its [row ledger](etc/operations/m0-t333-s1-redirector-source-abi-admission-ledger.tsv). **S2 closed:** [external-form admission](etc/evidence/m0-t333-s2-redirector-external-form-admission-001.md) and its [disposition ledger](etc/operations/m0-t333-s2-redirector-external-form-disposition-ledger.tsv). S3 is the limited original lifecycle/synchronous-pipe cohort.
+**Plan:** [M0 T333 original Redirector recovery](etc/operations/m0-t333-redirector-owner-package-recovery-plan-001.md). **S1 closed:** [source/ABI admission evidence](etc/evidence/m0-t333-s1-original-redirector-source-abi-admission-001.md) and its [row ledger](etc/operations/m0-t333-s1-redirector-source-abi-admission-ledger.tsv). **S2 closed:** [external-form admission](etc/evidence/m0-t333-s2-redirector-external-form-admission-001.md) and its [disposition ledger](etc/operations/m0-t333-s2-redirector-external-form-disposition-ledger.tsv). **S3 closed:** complete source selection/build and the original DLL dependency boundary are recorded below. S4 owns only the original mailslot/asynchronous cohort.
 
 **S3 P1:** [the paired original synchronous-source build](etc/evidence/m0-t333-s3-p1-redirector-synchronous-source-build-001.md) retains the initial narrow-cohort evidence. **S3 P2:** [the complete original-package build and lifecycle correction](etc/evidence/m0-t333-s3-p2-complete-redirector-package-build-001.md) supersedes its package-selection conclusion: every original `vdmredir/sources` unit now compiles into `original-mvdm-redir.lib` on x86 and x64. `VDDInstallUserHook` itself is an already-selected original SoftPC body; the remaining lifecycle predecessor is the original `VDMREDIR.DLL` entry/load composition, with NetBIOS/DLC behavior still not enabled.
+
+**S3 P3:** [the original DLL dependency boundary](etc/evidence/m0-t333-s3-p3-original-dll-dependency-boundary-001.md) records the direct non-`/FORCE` x86 link probe. It establishes that `VrDllInitialize` is not independently linkable before CPU40, mailslot/async, NetAPI/RAP, NetBIOS/DLC and original host/VDD cohorts receive their own dispositions; source-shaped `LoadVdmRedir` failure remains the current behavior. Final DLL packaging is therefore S6 work, not a Redirector-local shim.
 
 | Field | Record |
 | --- | --- |

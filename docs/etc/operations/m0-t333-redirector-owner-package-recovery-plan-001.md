@@ -46,11 +46,13 @@ Redirector provider policy.
 
 Compose the original `VDMREDIR.DLL` source package, including `vrinit`,
 `vrmisc`, `vrnmpipe`, `vrputil`, `vrdll`, and every source unit selected by
-the original `vdmredir/sources` manifest.  Preserve the original deferred
+the original `vdmredir/sources` manifest. Preserve the original deferred
 `LoadVdmRedir`/`GetProcAddress` contract, error ordering, handle identity and
-no-second-broker rule.  First prove the complete source package compiles on
-x86/x64, then separately admit its original DLL entry/link/load composition;
-a static library is evidence only and is not a substitute for the DLL.
+no-second-broker rule. Prove the complete source package compiles on x86/x64,
+then run one direct non-`/FORCE` module-link probe to classify the actual
+cross-cohort dependencies. A static library is evidence only and is not a
+substitute for the DLL; the final original DLL entry/link/load product is
+admitted only at S6 after its S4/S5 provider cohorts have a disposition.
 
 ### S4 — Original mailslot and asynchronous completion cohort
 
@@ -65,12 +67,14 @@ Compose public modern-capability paths while retaining original algorithms.
 Keep RAP/private broker/DLC driver branches source-shaped unavailable unless a
 finite same-shaped adapter is proven.  Run the whole cohort x86/x64 matrix.
 
-### S6 — Whole package reconciliation and bounded observation
+### S6 — Whole package reconciliation, original DLL product and bounded observation
 
 Reconcile all 32 table rows, direct DEM/COMMAND consumers, mirror
-divergences, mapping lifetimes and build selection.  Run the declared
-whole-package matrix and one fixed observation only after every owner cohort
-has a result.  Trace cannot choose a new leaf repair.
+divergences, mapping lifetimes and build selection. Build and stage the
+original `VDMREDIR.DLL` using its original `.def`, exports and an
+adapter-owned loader ABI boundary only if required by the public PE loader.
+Run the declared whole-package matrix and one fixed observation only after
+every owner cohort has a result. Trace cannot choose a new leaf repair.
 
 ## Exit
 

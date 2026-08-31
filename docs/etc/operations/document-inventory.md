@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3565 |
+| Documentation records | 3566 |
 | --- | --- |
-| Generated UTC | 2026-08-31T23:13:54Z |
+| Generated UTC | 2026-08-31T23:19:09Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 511bedaed194b675574c81928221f7b8e82c98a3edd30368c91b69a751e2cc79 |
+| STATUS.md | principal control document | 2b0984d8a4969bd6c46a824ece36d67afb026c3726c25a9f84232a296ac0b197 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1045,6 +1045,7 @@ content-divergent entries.
 | etc/evidence/m0-t333-s2-redirector-external-form-admission-001.md | indexed supporting material | e9ba7dcba895598d1f369bb67806d7ce81634591742258451d9c06ee1bab93d5 |
 | etc/evidence/m0-t333-s3-p1-redirector-synchronous-source-build-001.md | indexed supporting material | a7e821953011baf50fd2720ec7e26fbc2bcabdb97f83233837769416ee166542 |
 | etc/evidence/m0-t333-s3-p2-complete-redirector-package-build-001.md | indexed supporting material | eed341d180bb1e495282aac75c54794058034595feaa19b83eb4bf497fc3a3c6 |
+| etc/evidence/m0-t333-s3-p3-original-dll-dependency-boundary-001.md | indexed supporting material | a96d147d6a1de8b71e8e9cd418531b6b650837c6d37dd5a570e2afcdbcdb8db3 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1735,7 +1736,7 @@ content-divergent entries.
 | etc/operations/m0-t326-softpc-pre-bop-startup-continuity-plan-001.md | indexed supporting material | 6a121614874fd551f83da94b138db48524ac6f83855de4a33570f139e4eae354 |
 | etc/operations/m0-t332-dpmi-owner-package-recovery-plan-001.md | indexed supporting material | 6fa27a932fef777a0011ee0c6650bc4766c90bab03689eb801caecf6082ae203 |
 | etc/operations/m0-t332-s1-dpmi-source-abi-admission-ledger.tsv | indexed supporting material | 427dc8883647852c61549a7351f259433547d5aca2a9ae63a4e5c82958daf910 |
-| etc/operations/m0-t333-redirector-owner-package-recovery-plan-001.md | indexed supporting material | b70e83a73be93b24eaa10c9f70ba4b04d371430fe93afe32f3b2a6c2070a60bb |
+| etc/operations/m0-t333-redirector-owner-package-recovery-plan-001.md | indexed supporting material | 49fe579d32cc78306b1afbbb3c7b7599808cde669787ef27bff0b34ad86afa8a |
 | etc/operations/m0-t333-s1-redirector-source-abi-admission-ledger.tsv | indexed supporting material | 018e8f29e24479f96f716840291b9172fad9870f807f0855c4f0ff36d303330b |
 | etc/operations/m0-t333-s2-redirector-external-form-disposition-ledger.tsv | indexed supporting material | 214efa7e3d0ffd0d04372a6ea6e9ce13a9ae22d87747d59e0f87e3e5901174b0 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
