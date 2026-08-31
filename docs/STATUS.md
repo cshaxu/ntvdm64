@@ -230,6 +230,12 @@ complete original call cluster rather than one observer-dependent symptom at a
 time.  The current `0xC0000005` is still unassigned. See [P24
 evidence](etc/evidence/m0-t318-s2-p24-fixed-container-startup-owner-clusters-001.md).
 
+**S2 P25:** a repeat in that exact container and its P22 short stage now times
+out after eight seconds; the observer's `0x53504354` is not a product crash.
+P22/P24's `0xC0000005` remains historical evidence but is superseded as the
+current baseline. The product is not yet proven to reach NTIO, NTDOS, EXEC or
+parent return. See [P25 evidence](etc/evidence/m0-t318-s2-p25-fixed-container-baseline-correction-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
