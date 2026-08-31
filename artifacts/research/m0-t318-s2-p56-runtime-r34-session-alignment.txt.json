@@ -1,0 +1,14 @@
+{
+  "container": "console-owning-nondebug",
+  "command": [
+    "O:\\repos.hobby\\ntvdm64\\build\\tools\\console-startup-observer.exe",
+    "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r34-session-alignment\\original-softpc-process.exe",
+    "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r34-session-alignment",
+    "O:\\repos.hobby\\ntvdm64\\artifacts\\research\\m0-t318-s2-p56-runtime-r34-session-alignment.txt"
+  ],
+  "stageManifestSha256": "28ad6a5e6aeec620bd9c315e960da6c1d6606d9141752fb4a924c3b415261c32",
+  "launcherExitCode": 0,
+  "launcherSignal": null,
+  "stdout": "",
+  "stderr": ""
+}

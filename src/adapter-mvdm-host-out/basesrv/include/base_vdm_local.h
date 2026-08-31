@@ -57,9 +57,14 @@ typedef struct base_vdm_local {
     uint32_t lock_initialized;
     uint32_t pending_request;
     uint8_t command[MAXIMUM_VDM_COMMAND_LENGTH];
-    uint8_t application[MAXIMUM_VDM_PATH_STRING];
+    /* BaseClient/BaseSrv carry the host application path independently of
+     * the DOS-shaped guest path fields.  The original client uses MAX_PATH
+     * path storage for this host-side value. */
+    uint8_t application[MAX_PATH];
     uint8_t environment[MAXIMUM_VDM_ENVIORNMENT];
-    uint8_t current_directory[MAXIMUM_VDM_CURRENT_DIR];
+    /* Original COMMAND requests a path-string-sized current-directory buffer,
+     * not the smaller drive-relative component limit. */
+    uint8_t current_directory[MAXIMUM_VDM_PATH_STRING];
 } base_vdm_local;
 
 #ifdef __cplusplus

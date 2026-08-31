@@ -70,6 +70,10 @@ typedef struct session_thread_hook {
 } session_thread_hook;
 
 typedef struct session {
+    /* `jmp_buf` has a stricter x64 alignment than scalar session state.
+     * Keeping it first expresses that requirement in the ABI rather than
+     * relying on compiler-inserted interior padding. */
+    jmp_buf termination_escape;
     uint32_t magic;
     uint32_t abi_version;
     uint32_t struct_bytes;
@@ -86,7 +90,6 @@ typedef struct session {
     uint32_t thread_hook_count;
     uint32_t termination_armed;
     volatile long binding_count;
-    jmp_buf termination_escape;
     session_teardown teardowns[SESSION_MAX_TEARDOWNS];
     session_thread_hook thread_hooks[SESSION_MAX_THREAD_HOOKS];
     mapping_manager guest_memory_mappings;

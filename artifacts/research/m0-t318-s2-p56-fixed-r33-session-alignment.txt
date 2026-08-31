@@ -1,0 +1,5 @@
+container=console-owning-nondebug
+pid=24012
+result=exited
+exit=0x00000045
+timeout-ms=8000

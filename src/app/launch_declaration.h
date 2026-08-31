@@ -10,9 +10,9 @@ typedef struct app_launch_declaration {
     uint32_t bound;
     uint32_t ordinary_child;
     char command[MAXIMUM_VDM_COMMAND_LENGTH];
-    char application[MAXIMUM_VDM_PATH_STRING];
+    char application[MAX_PATH];
     char environment[MAXIMUM_VDM_ENVIORNMENT];
-    char current_directory[MAXIMUM_VDM_CURRENT_DIR];
+    char current_directory[MAXIMUM_VDM_PATH_STRING];
 } app_launch_declaration;
 
 void app_launch_declaration_initialize(app_launch_declaration *declaration);

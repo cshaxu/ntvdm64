@@ -2,6 +2,7 @@
 #include <string.h>
 
 #include "base_vdm_local.h"
+#include "app/launch_declaration.h"
 #include "session/session.h"
 #include "thread_start_compat.h"
 
@@ -49,6 +50,34 @@ static VOID __cdecl worker_reentry(void)
     worker_reentry_result = GetNextVDMCommand(&information) ? 0 : 2;
 }
 
+static int verify_long_package_launch_declaration(void)
+{
+    static char program[] = "fixture";
+    static char ordinary[] = "--ordinary-child";
+    char *argv[] = { program, ordinary, NULL };
+    const char *root =
+        "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r33-config-system-media\\dos";
+    const char *application =
+        "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r33-config-system-media\\dos\\COMMAND.COM";
+    int argc = 2;
+    session instance;
+    app_launch_declaration declaration;
+
+    session_initialize(&instance, 2u);
+    app_launch_declaration_initialize(&declaration);
+    if (!app_launch_declaration_consume_options(&declaration, &argc, argv)) return 25;
+    if (!session_set_dos_media_root(&instance, root)) return 26;
+    if (!session_activate(&instance)) return 27;
+    if (!app_launch_declaration_bind(&declaration, &instance)) return 28;
+    if (!app_launch_declaration_publish(&declaration, &instance)) return 29;
+    if (declaration.base_vdm.available != 1u) return 30;
+    if (declaration.base_vdm.current_directory_bytes != strlen(root) + 1u) return 31;
+    if (declaration.base_vdm.application_bytes != strlen(application) + 1u) return 32;
+    if (!base_vdm_local_unbind(&declaration.base_vdm)) return 33;
+    if (!session_dispose(&instance)) return 34;
+    return 0;
+}
+
 int main(void)
 {
     static const uint8_t command[] = "C:\\DOS\\COMMAND.COM /C VER";
@@ -69,7 +98,10 @@ int main(void)
     HANDLE producer_thread;
     HANDLE reentry_thread;
     DWORD producer_result = UINT32_MAX;
+    int launch_declaration_result;
 
+    launch_declaration_result = verify_long_package_launch_declaration();
+    if (launch_declaration_result != 0) return launch_declaration_result;
     reset_info(&information);
     if (GetNextVDMCommand(NULL) || GetLastError() != ERROR_CALL_NOT_IMPLEMENTED)
         return 1;

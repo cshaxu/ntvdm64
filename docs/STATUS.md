@@ -467,6 +467,14 @@ remain clean.  This removes an alternate `GetVDMAddr` contract rather than
 changing the original DEM/SoftPC route, so no fixed-container run is admitted.
 See [P55 evidence](etc/evidence/m0-t318-s2-p55-retire-unselected-redirector-pointer-scope-001.md).
 
+**S2 P56:** the Base VDM host-path carrier now preserves original `MAX_PATH`
+application and path-string current-directory capacities; original COMMAND's
+matching `MAX_PATH + 1` receiver is corrected as registered
+`MVDM-HOST-DIV-160`.  The focused fixed-package declaration fixture and final
+CPU40 x86/x64 links pass.  The retained p56--p59 runs are not runtime closure;
+the next fixed-container observation requires explicit authorization.  See
+[P56 evidence](etc/evidence/m0-t318-s2-p56-base-vdm-host-path-contract-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |

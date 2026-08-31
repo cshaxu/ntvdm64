@@ -50,7 +50,13 @@ PREDIRCOMPLETE_INFO pRdrInfo;
 VDMINFO MyVDMInfo;
 
 char    *pSrc, *pDst;
-char    achCurDirectory[MAXIMUM_VDM_CURRENT_DIR + 4];
+/* DIVERGENCE(MVDM-HOST-DIV-160): the original request advertises
+ * `MAX_PATH + 1` bytes to BaseSrv but allocates only the guest DOS
+ * current-directory limit.  The modern package root is a valid host path
+ * longer than that guest-only limit.  Keep the original VDMINFO request and
+ * SetCurrentDirectory semantics, but make the receiving host buffer match
+ * the stated ABI capacity. */
+char    achCurDirectory[MAX_PATH + 1];
 char    CmdLine[MAX_PATH];
 
     //

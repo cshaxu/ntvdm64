@@ -54,9 +54,9 @@ int base_vdm_local_valid(const base_vdm_local *record)
     return record != NULL && record->version == BASE_VDM_LOCAL_VERSION &&
         record->struct_bytes == sizeof(*record) && record->reserved0 == 0u &&
         record->command_bytes <= MAXIMUM_VDM_COMMAND_LENGTH &&
-        record->application_bytes <= MAXIMUM_VDM_PATH_STRING &&
+        record->application_bytes <= MAX_PATH &&
         record->environment_bytes <= MAXIMUM_VDM_ENVIORNMENT &&
-        record->current_directory_bytes <= MAXIMUM_VDM_CURRENT_DIR &&
+        record->current_directory_bytes <= MAXIMUM_VDM_PATH_STRING &&
         record->lock_initialized == 1u && record->wake_event != NULL &&
         record->pending_request <= 1u &&
         (record->current_directories_bytes == 0u ||
@@ -70,9 +70,13 @@ int base_vdm_local_publish(base_vdm_local *record, const base_vdm_command *comma
         command->struct_bytes != sizeof(*command) ||
         command->command_bytes == 0u ||
         !valid_bytes(command->command, command->command_bytes, MAXIMUM_VDM_COMMAND_LENGTH) ||
-        !valid_bytes(command->application, command->application_bytes, MAXIMUM_VDM_PATH_STRING) ||
+        !valid_bytes(command->application, command->application_bytes, MAX_PATH) ||
         !valid_bytes(command->environment, command->environment_bytes, MAXIMUM_VDM_ENVIORNMENT) ||
-        !valid_bytes(command->current_directory, command->current_directory_bytes, MAXIMUM_VDM_CURRENT_DIR)) return 0;
+        /* CurDirectory is a host path carried to the original BaseClient
+         * caller.  Its ABI buffer is MAXIMUM_VDM_PATH_STRING, not the
+         * guest-visible MAXIMUM_VDM_CURRENT_DIR DOS directory limit. */
+        !valid_bytes(command->current_directory, command->current_directory_bytes,
+            MAXIMUM_VDM_PATH_STRING)) return 0;
     EnterCriticalSection(&record->lock);
     if (record->available != 0u) goto done;
     if (!copy_bytes(record->command, command->command, command->command_bytes) ||
