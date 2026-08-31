@@ -88,20 +88,6 @@ void mvdm_softpc_record_unhandled_exception(
     (void)WriteFile(output, message, (DWORD)(cursor - message), &written, NULL);
 }
 
-void mvdm_softpc_record_startup_milestone(const char *name)
-{
-    static const char prefix[] = "MVDM-STARTUP-MILESTONE ";
-    HANDLE output;
-    DWORD written;
-
-    if (name == NULL) return;
-    output = GetStdHandle(STD_ERROR_HANDLE);
-    if (output == NULL || output == INVALID_HANDLE_VALUE) return;
-    (void)WriteFile(output, prefix, (DWORD)(sizeof(prefix) - 1), &written, NULL);
-    (void)WriteFile(output, name, (DWORD)strlen(name), &written, NULL);
-    (void)WriteFile(output, "\r\n", 2, &written, NULL);
-}
-
 void mvdm_softpc_record_bop_dispatch(unsigned int selector,
                                      unsigned int service)
 {

@@ -581,6 +581,15 @@ or initialisation inversion supports a repair. The fixed-container trace must
 not be perturbed with new hot-path console probes. See [P70
 evidence](etc/evidence/m0-t318-s2-p70-heartbeat-provider-binding-audit-001.md).
 
+**S2 P71:** the three completed startup console milestones were removed from
+the product because they perturb the fixed-container execution observation.
+The freshly linked, uninstrumented x86 CPU40 product then reaches original DEM
+`50:11`, `50:3B`, `50:0F`, and `50:1B` dispatches in one fixed eight-second
+run. P67's former non-observation of `50:11` is thereby superseded; this is
+bootstrap progress, not yet ordinary-child `EXEC` / parent-return evidence.
+See [P71
+evidence](etc/evidence/m0-t318-s2-p71-remove-startup-observation-perturbation-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |

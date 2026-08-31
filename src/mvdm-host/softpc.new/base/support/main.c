@@ -50,10 +50,6 @@
 /* DIVERGENCE(MVDM-HOST-DIV-162): selected CCPU40/C-VID sources retain their
  * original tables but not the historical generated pre-config binder. */
 #include "mvdm_cvidc_vector_binding.h"
-/* DIVERGENCE(MVDM-HOST-DIV-164): fixed-container diagnostics use an adapter
- * sink so the original NTIO/CPU control flow and its return values remain
- * unchanged. */
-#include "mvdm_softpc_termination.h"
 #include "timer.h"
 #include "yoda.h"
 //#include "host_env.h"
@@ -320,7 +316,6 @@ INT      main IFN2(INT, argc, CHAR **, argv)
  * to start execution at it's initialisation entry point.
  */
     InitialiseDosEmulation(argc, argv);
-    mvdm_softpc_record_startup_milestone("NTIO-LOADED");
 #endif	/* NTVDM */
 
 /*

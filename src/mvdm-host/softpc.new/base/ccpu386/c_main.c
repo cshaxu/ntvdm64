@@ -14,7 +14,6 @@ Actual worker routines are spun off elsewhere.
 
 #include <insignia.h>
 #include <host_def.h>
-#include "mvdm_softpc_termination.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -622,9 +621,6 @@ GLOBAL	PHY_ADDR	SasWrapMask = 0xfffff;
    pg_end = AddCpuPtrLS8(CeilingIntelPageLS8(x), 1);
 #else /* !PIG */
 GLOBAL UTINY *CCPU_M;
-/* DIVERGENCE(MVDM-HOST-DIV-164): one fixed-container diagnostic latch.  It
- * observes the original first-fetch boundary without changing CPU state. */
-LOCAL IBOOL mvdm_first_fetch_observed = FALSE;
 #ifdef BACK_M
 #define SETUP_HOST_IP(x)							\
    ip_phy_addr = usr_chk_byte(GET_CS_BASE() + GET_EIP(), PG_R) &		\
@@ -4534,12 +4530,6 @@ NEXT_INST:
    took_absolute_toc = FALSE;
 
    SETUP_HOST_IP(p);
-   if (!mvdm_first_fetch_observed)
-   {
-      mvdm_first_fetch_observed = TRUE;
-      mvdm_softpc_record_startup_milestone("CCPU-FIRST-FETCH");
-   }
-
    /*
       THIS IS A CHEAT.
       The Intel documentation says RF is cleared AFTER all instructions
@@ -4878,7 +4868,6 @@ LOCAL VOID
 #endif
 	 {
 	 in_C = 0;
-	 mvdm_softpc_record_startup_milestone("CPU-SIMULATE");
 	 ccpu(FALSE);
 	 }
       }
