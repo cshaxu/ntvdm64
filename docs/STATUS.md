@@ -4,19 +4,40 @@
 
 ## Active Packet
 
-### No M/T/S packet is active
+### M0 T320 — closure record
 
-**No active M/T/S packet.**
+**No active M/T/S packet.** M0 T320 is closed.
 
-**Most recent closure:** [M0 T319 SoftPC ROM residency and termination
-attribution](history/m0-t319-softpc-rom-residency-and-termination-closure-20260831.md).
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T320 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 1, **Minimal DOS guest execution and controlled return**, follows T318's frozen guest-return contract and T319's source-defined CPU40 raw-worker transfer. |
+| Objective | Establish the exact original CPU40 machine/worker prerequisite between the reached startup markers and the frozen first DOS guest load/return boundary, before any behavior change. |
+| Non-goals | No BOP/DEM/COMMAND/XMS provider patch, guest source change, app-owned execution replacement, synthetic FDC/PIC/device success, debugger attachment, changed fixed observation container, or speculative worker rewrite. |
+| Reference Baseline | [T318 EXEC contract](etc/evidence/m0-t318-s1-ntdos-exec-parent-return-contract-freeze-001.md); [T319 closure](history/m0-t319-softpc-rom-residency-and-termination-closure-20260831.md); [T320 proposal](etc/operations/proposal-minimal-dos-guest-execution-controlled-return-001.md). |
+| Machine Profile | Selected original `CPU_40_STYLE`/CCPU40 only; CPU30 and Bochs are retired evidence, never an implementation or fallback route. |
+| Files And ABI Surface | Original CPU40 entry/recursive execution, original raw `CreateThread` users, original worker filters/lifetimes, ROM/BIOS callback paths, and frozen NTDOS/COMMAND return source contracts. |
+| Applicable Rules | `docs/rules/EXECUTION.md`, `docs/rules/ARCHITECTURE.md`, `docs/rules/CODING.md`, source policy and mirror exception registration. |
+| Verification | Source call/definition review, selected build-manifest review, reusable current fixed observation evidence, documentation governance verification and `git diff --check`. |
+| Expected Markers | One source map distinguishes current-thread CPU40 execution from each reachable raw-worker route and names the first prerequisite before guest load; it does not claim execution from BOP markers alone. |
+| Asset Needs | Existing original MVDM/guest mirrors, CPU40 graph, staged immutable media, T318/T319 evidence. |
+| Reporting Requirements | Record every reachable path's owner/disposition and name a single earliest recovery cohort or exact owner transfer. |
+| Stop Conditions | Need for a debugger, changed observer/media/arguments, guest/BOP/device behavior change, or a second machine backend pauses S1 for explicit re-admission. |
+| Exit Criteria | A source-defined first prerequisite and its complete immediate caller/callee contract are recorded, with no new runtime behavior. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | Compare original main-thread CPU40 execution, host-created filtered threads, raw event/heartbeat/floppy/detection/comms threads, and guest-entry call sites as one machine-to-guest gate. |
 
-T319 selected the original CPU40 ROM-residency body and established, in an
-unchanged fixed container, that the remaining `0xc0000005` bypasses both the
-original top-level return and its known-thread exception filter.  The bounded
-remaining owner is the original CPU40 raw-worker/execution cohort; no device,
-BOP, guest, or synthetic-success repair was made.  A later package requires
-fresh admission before changing that cohort.
+**S1 closed:** [the CPU40-to-guest prerequisite contract](etc/evidence/m0-t320-s1-cpu40-to-guest-prerequisite-contract-001.md)
+proves NTIO load/CS:IP assignment precedes the original CCPU run and narrows
+the remaining immediate recovery scope to the original FDC/INT15 recursive
+CPU40 cohort.  It does not claim declared-DOS-program execution.
+
+**S2 closed:** [the FDC/INT15 disposition](etc/evidence/m0-t320-s2-fdc-vector-prerequisite-disposition-001.md)
+proves that ROM residency and the original default `wait_int`/INT15 vector are
+already present.  It records the remaining raw CPU40 recursive-execution and
+device-event owner transfer without introducing synthetic FDC, PIC, BOP, or
+guest behavior.  This satisfies T320 exit 2; no declared-DOS-program execution
+is claimed.
 
 ## Historical retained T318 delivery sequence
 
