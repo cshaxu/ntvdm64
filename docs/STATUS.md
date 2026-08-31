@@ -138,6 +138,12 @@ CCPU, BIOS, host BOP, and DEM units. This proves no replacement loader/router
 is required; it does not yet prove guest arrival or NTDOS execution. See
 [P12 evidence](etc/evidence/m0-t318-s2-p12-original-ntio-demload-dos-dispatch-map-001.md).
 
+**S2 P13:** formal x86/x64 Ninja runners now initialize MSVC once and default
+to bounded parallel scheduling (`min(12, processor count)`), with an explicit
+`MVDM_BUILD_JOBS` override. The generated graphs and compiler/source choices
+are unchanged; both runners accept the product dry run. See [P13
+evidence](etc/evidence/m0-t318-s2-p13-formal-ninja-parallel-runner-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |

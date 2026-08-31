@@ -3,7 +3,8 @@ param(
     [Parameter(Mandatory = $true)] [ValidateSet('x86', 'x64')] [string]$Architecture,
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
-    [string]$NodeExecutable = ''
+    [string]$NodeExecutable = '',
+    [ValidateRange(0, 64)] [int]$ParallelJobs = 0
 )
 
 Set-StrictMode -Version Latest
@@ -41,6 +42,14 @@ if ([string]::IsNullOrWhiteSpace($BuildRoot)) {
     $build = Join-Path $root ("build/M0-T310/S8/p1-machine-source/{0}" -f $Architecture)
 } else {
     $build = [IO.Path]::GetFullPath($BuildRoot)
+}
+if ($ParallelJobs -eq 0) {
+    # Historical SoftPC units have substantial include fan-out.  Cap the
+    # default at 12 jobs: enough parallelism to keep a modern compiler busy
+    # without turning a cold 400+ TU build into avoidable memory/IO contention.
+    # The runner accepts an explicit MVDM_BUILD_JOBS override for hosts with a
+    # different capacity.
+    $ParallelJobs = [Math]::Min(12, [Environment]::ProcessorCount)
 }
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or !(Get-Command ninja -ErrorAction SilentlyContinue)) {
@@ -307,7 +316,8 @@ $parallelRunner = Join-Path $build 'run-ninja-parallel.cmd'
 @('@echo off',
   ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'),
   'if errorlevel 1 exit /b %errorlevel%',
-  ('ninja -C "' + $build + '" -j 8 %*')) |
+  ('if "%MVDM_BUILD_JOBS%"=="" set "MVDM_BUILD_JOBS=' + $ParallelJobs + '"'),
+  ('ninja -C "' + $build + '" -j %MVDM_BUILD_JOBS% %*')) |
     Set-Content -LiteralPath $parallelRunner -Encoding ascii
 
 $includeRootPaths = @(
@@ -691,6 +701,8 @@ $graph.Add('default original-softpc-candidate')
     architecture = $Architecture
     cpuProfile = 'CCPU40'
     toolchain = 'MSVC /MT via VsDevCmd'
+    ninjaParallelDefault = $ParallelJobs
+    ninjaParallelOverride = 'MVDM_BUILD_JOBS'
     i386Define = $false
     originalCcpuManifest = 'src/mvdm-host/softpc.new/base/ccpu386/sources'
     originalHostManifest = 'src/mvdm-host/softpc.new/host/src/sources'
