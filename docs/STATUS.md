@@ -107,6 +107,12 @@ are incrementally clean. An isolated x86 run passed that former firmware
 block, then exposed the later original `The handle is invalid` startup error.
 This is not an NTIO/NTDOS/COMMAND/EXEC claim. See [P7 evidence](etc/evidence/m0-t318-s2-p7-v7vga-firmware-configuration-recovery-001.md).
 
+**S2 P8:** the later `The handle is invalid` dialog is now attributed to the
+pipe-owned observer supplying no usable standard console handles to original
+`InitScreenDesc`/console-mode setup; it is not a product-side blocker. No
+source change was admitted. Further continuity observation requires a genuine
+console-owning harness or interactive console. See [P8 evidence](etc/evidence/m0-t318-s2-p8-headless-console-observation-attribution-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
