@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3497 |
+| Documentation records | 3499 |
 | --- | --- |
-| Generated UTC | 2026-08-31T17:05:37Z |
+| Generated UTC | 2026-08-31T17:10:04Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 0d7dea508aab09bba1248d2baaebd476cbf0cf9507a3b6fa5b561dd2818d3e5d |
+| STATUS.md | principal control document | 855979c18e3f7f926b235464962758014088cb69e5a1a92e09119a0e5c886494 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1836,6 +1836,7 @@ content-divergent entries.
 | etc/operations/proposal-selector-blind-realmode-continuity-001.md | indexed supporting material | bbdb1afc13e62af3bed756e3a22afd51e166d6662d0dfd6ff2f13512ce4a8ac9 |
 | etc/operations/proposal-seven-component-source-layout-reorganization-001.md | indexed supporting material | 27e9d29fe5e7b9436e25defcb8c071e5adc91903d5055f275e1b13a4c16d6526 |
 | etc/operations/proposal-softpc-bios-conventional-memory-recovery-001.md | indexed supporting material | 3e4c68d258fa9e18ef6fbec2513bf52fc928f13afd9ddfd81f5de217cfa71a6b |
+| etc/operations/proposal-softpc-floppy-int15-recursive-machine-closure-001.md | indexed supporting material | 2c9591c4baef9f86c81291e843f4bd64fc39f8d46364b09187eb9a80acb742e4 |
 | etc/operations/proposal-source-built-guest-low-memory-runtime-provenance-001.md | indexed supporting material | 02ed77f18bf4e4018a96be67bcf25b637185eda97c0f132316718a8def3639a4 |
 | etc/operations/t188-bop-ingress-composition-plan.md | indexed supporting material | 76e13591247ef15c3c3999216011ffee2799de1b5e7fb1ccac98f053ed8c2402 |
 | etc/operations/t199-s37-dem-package-completion-proposal-001.md | indexed supporting material | d8bf32ab641bb0148d37c6da42db51bdf834c960bf00b53bbfdf692a21caba05 |
@@ -3404,6 +3405,7 @@ content-divergent entries.
 | history/m0-t315-cpu30-style-v86-monitor-exclusion-closure-20260830.md | closed task history | 73fa762fc67cfc19aeb7fee3a0e0f1363e4d11803a2ce1ba5505336b60a5db7e |
 | history/m0-t316-monitor-user-mode-contract-closure-20260830.md | closed task history | 8d667938f4a1889694859d6b2f564d53cf3fb099f47a0d8437513a0f6cbc0a8c |
 | history/m0-t317-dem-command-softpc-vertical-slice-closure-20260830.md | closed task history | e1fdefadf1a07ab80343699faa472b03547cd9e7e0fee4671e3bef423ca2bbc7 |
+| history/m0-t318-ntdos-ordinary-child-owner-transfer-closure-20260831.md | closed task history | 9a0fb959fd97228207efd613cdde2a5dab073fbb5e67ab1ecf6d98a4c7844329 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

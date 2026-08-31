@@ -4,28 +4,35 @@
 
 ## Active Packet
 
-### M0 T318 S2 — Source-shaped NTDOS load and one ordinary child profile
+### M0 T319 S1 — Reached SoftPC FDC/INT15 recursive machine-contract freeze
 
-**Active: M0 T318 S2**
+**Active: M0 T319 S1**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T318 S2; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | The owner-authorized T318 proposal admits S2 after S1 froze the complete original guest/host boundary. |
-| Objective | Select the existing original `NTIO -> SVC_DEMLOADDOS -> NTDOS` load path and recover one declared ordinary COM or MZ guest child profile through original `EXEC` and parent-return ownership. |
-| Non-goals | No app guest loader, replacement DOS executor, host COMMAND semantic change, PIF/TSR/Redirector/WOW/DPMI expansion, additional BOP implementation, or device expansion. x64 is a required same-source compile/link row, not a guest-runtime claim. |
-| Reference Baseline | [S1 contract freeze](etc/evidence/m0-t318-s1-ntdos-exec-parent-return-contract-freeze-001.md); selected CPU40 SoftPC composition; original `demLoadDos`, NTDOS and COMMAND mirrors. |
+| Identifier Mode | M0 T319 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | The owner-authorized queue continuation admits candidate 2 after T318's P76 proved the exact original FDC/INT15 recursive-machine transfer. |
+| Objective | Freeze the complete reached original SoftPC contract for `floppy.c::wait_int`, FDC/PIC completion, `int15`/`wait_int` vector initialization and recursive CPU40 `host_simulate()` return before composing any machine recovery. |
+| Non-goals | No BOP, DEM, COMMAND, XMS, DOS/guest, app-loader, replacement-executor, synthetic-device-success, unrelated disk/DMA/BIOS expansion, or new machine. |
+| Reference Baseline | [T318 closure](history/m0-t318-ntdos-ordinary-child-owner-transfer-closure-20260831.md); [P76 evidence](etc/evidence/m0-t318-s2-p76-floppy-recursive-simulation-owner-transfer-001.md); [T319 proposal](etc/operations/proposal-softpc-floppy-int15-recursive-machine-closure-001.md). |
 | Machine Profile | The sole permitted build/runtime/acceptance profile is `CPU_40_STYLE`/CCPU40. `CPU_30_STYLE` is retired historical evidence and is not a fallback or deferred route. |
-| Files And ABI Surface | Reached original guest NTDOS/COMMAND sources and staged artifacts; original `demmisc.c::demLoadDos`; existing DEM `0x11`, `0x36`, `0x3C` and COMMAND `54:0B` contracts; selected SoftPC source/build inputs. |
+| Files And ABI Surface | Original `softpc.new/base/disks/floppy.c`, reached FDC/PIC and keyboard/ROM table initializers, CPU40 `host_simulate`/`host_unsimulate` interfaces, selected firmware/table inputs and the fixed observation container. |
 | Applicable Rules | `docs/rules/EXECUTION.md`, `docs/rules/ARCHITECTURE.md`, `docs/rules/CODING.md`, source policy, and mirror exception registration. |
-| Verification | Fresh selected CPU40 x86 and x64 compile/link compositions; source/image identity verification; one bounded x86 ordinary-child continuity observation with a controlled stop/result; governance verification and `git diff --check`. |
-| Expected Markers | Original `demLoadDos` performs the selected image load, NTDOS reaches original `EXEC`, the child exits through original parent restoration, and the established `54:0B` contract receives the result without a replacement lifecycle. |
-| Asset Needs | Existing NTDOS.SYS/COMMAND.COM guest artifacts, original MVDM mirrors, CPU40 SoftPC graph and existing adapter/session bindings. |
-| Reporting Requirements | Separate code/source composition from observed runtime continuity; record every missing device or service as its owner transfer. |
-| Stop Conditions | Any need for an app-owned loader, a non-original guest state machine, a new BOP route, non-CPU40 route, or a missing cross-owner package pauses for re-admission. |
-| Exit Criteria | One declared ordinary child profile has source-shaped load/EXEC/parent-return evidence, or every remaining nonlocal blocker is proven and transferred without invented recovery. |
+| Verification | Static source/contract review in S1; later fresh CPU40 x86/x64 compile/link and one bounded x86 fixed-container observation; governance verification and `git diff --check`. |
+| Expected Markers | One original-source map states who initializes both vector pairs, how FDC/PIC completion reaches them, and what state recursive CPU40 simulation must preserve/return. |
+| Asset Needs | Existing original MVDM mirrors, CPU40 SoftPC graph, retained firmware/table inputs and fixed console-owning observation harness. |
+| Reporting Requirements | Separate static owner attribution, source composition and observed runtime continuity; record any remaining boundary as an exact machine-owner transfer. |
+| Stop Conditions | A required BOP/guest change, app-owned device behavior, new CPU profile, synthetic success path, or missing package outside the reached cohort pauses for re-admission. |
+| Exit Criteria | A complete source-shaped dependency/disposition record admits S2, or proves that no safe same-package composition exists and transfers the exact remaining owner. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
-| Similar-Issue Sweep | Compare COM and MZ load branches, normal/abort exit, `0x11` load, `0x36` entry, `0x3C` cleanup and `54:0B` completion as one lifecycle. |
+| Similar-Issue Sweep | Compare both FDC wait vectors, reset and interrupt completion paths, direct and recursive CPU40 simulation, ROM/table initialization order and all reached zero-transfer guard paths as one machine contract. |
+
+## Historical retained T318 delivery sequence
+
+T318 is closed by its declared owner-transfer exit.  Its compact closure is
+in [history](history/m0-t318-ntdos-ordinary-child-owner-transfer-closure-20260831.md);
+the retained P records below are indexed delivery evidence, not an active
+packet.
 
 ### M0 T318 S1 closure record
 
