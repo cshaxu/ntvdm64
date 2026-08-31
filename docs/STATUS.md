@@ -4,14 +4,17 @@
 
 ## Active Packet
 
-### M0 T331 S4 — Original XMS formal product closure
+**No active M/T/S packet.** T331 is closed; the next queued candidate requires
+explicit admission.
 
-**Active: M0 T331 S4**
+### M0 T331 — Original XMS owner-package closure
+
+**Closed: M0 T331.** [S4 formal product closure](etc/evidence/m0-t331-s4-original-xms-formal-product-closure-001.md) records the paired non-`/FORCE` product links and the one unchanged fixed-container observation. [Closure record](history/m0-t331-original-xms-owner-package-closure-20260831.md).
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T331 S4; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | S1–S3 closed under T331’s persistent owner-approved whole-package plan; this final S closes the selected product source/link path. |
+| Admission And Approval | Closed under T331’s persistent owner-approved whole-package plan. |
 | Objective | Formally link the selected original SoftPC/XMS product on x86 and x64, then perform at most one fixed-container x86 observation if the changed XMS binding reaches that path. |
 | Non-goals | No new XMS policy, trace-selected service work, guest/device success shortcut, new allocator, CPU/FDC/ROM/vector repair, MONITOR/kernel-VDM/Bochs route, raw host pointer ABI, or unrelated BOP work. |
 | Reference Baseline | T331 S1 owner/ABI ledger; T331 S2 CPU40/session binding; T331 S3 package matrix; original `xms.486` source set. |
@@ -26,7 +29,7 @@
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | Callback parameter types, callback registration order, guest-memory lease acquire/release, move overlap, commit/decommit observability, A20 state-byte write, UMB numeric carrier and INT15 provider availability. |
 
-**S3 closed:** [the original XMS package contract matrix](etc/evidence/m0-t331-s3-original-xms-package-contract-matrix-001.md) records original allocation/move/A20/UMB/INT15 ownership and the paired adapter-boundary witness. S4 now owns formal product closure.
+**S3 closed:** [the original XMS package contract matrix](etc/evidence/m0-t331-s3-original-xms-package-contract-matrix-001.md) records original allocation/move/A20/UMB/INT15 ownership and the paired adapter-boundary witness. **S4 closed:** paired product links and the one allowed fixed-container observation are recorded above.
 
 ### M0 T331 S2 — Original XMS body binding recovery
 
