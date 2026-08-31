@@ -17,4 +17,9 @@ int mvdm_softpc_terminate_current_session(uint32_t vdm_for_wow,
 void mvdm_softpc_record_unhandled_exception(
     const struct _EXCEPTION_POINTERS *exception_info);
 
+/* Fixed-container diagnostic only.  A milestone is emitted once from an
+ * original control-flow boundary and never alters CPU, guest, or session
+ * state. */
+void mvdm_softpc_record_startup_milestone(const char *name);
+
 #endif

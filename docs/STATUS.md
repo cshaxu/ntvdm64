@@ -544,6 +544,13 @@ its eight-second timeout.  This is only startup liveness—not NTIO, NTDOS,
 EXEC, or child-completion evidence. See [P65
 evidence](etc/evidence/m0-t318-s2-p65-cvidc-timing-provider-and-startup-liveness-001.md).
 
+**S2 P66:** the unchanged fixed CPU40 runtime container now proves that the
+original `InitialiseDosEmulation` completed its NTIO setup/load path, followed
+by original `c_cpu_simulate` and CCPU's first `SETUP_HOST_IP` fetch. This is
+guest-execution reachability only: it makes no BOP, NTDOS, `EXEC`, or
+parent-return claim. See [P66
+evidence](etc/evidence/m0-t318-s2-p66-ntio-first-fetch-milestones-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
