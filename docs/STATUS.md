@@ -222,6 +222,14 @@ formal CPU40 x86 and x64 products link; the immutable real-console container
 still exits `0xC0000005`, without a new runtime attribution or NTIO claim. See
 [P23 evidence](etc/evidence/m0-t318-s2-p23-cvidc-generated-vector-contract-001.md).
 
+**S2 P24:** runtime observation is now fixed to one non-debug,
+console-owning, eight-second CPU40 container.  A source scan freezes the
+pre-NTIO owner order—console/display, common error termination, Base VDM
+command acquisition, machine/media and CCPU/C-VID assembly—so recovery is by
+complete original call cluster rather than one observer-dependent symptom at a
+time.  The current `0xC0000005` is still unassigned. See [P24
+evidence](etc/evidence/m0-t318-s2-p24-fixed-container-startup-owner-clusters-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
