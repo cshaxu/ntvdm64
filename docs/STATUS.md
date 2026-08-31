@@ -614,6 +614,14 @@ only a source-valid short root may exercise CONFIG/AUTOEXEC preprocessing.
 The P73 short-root access violation remains unattributed. See [P74
 evidence](etc/evidence/m0-t318-s2-p74-command-config-root-admission-correction-001.md).
 
+**S2 P75:** the complete original post-`54:05 cmdSetInfo` cohort is now
+bounded: NTDOS executes its own stack/device strategy-and-interrupt far-call
+initialization before the next explicit `50:48 demGetDPBList` crossing; the
+later `54:0C` CONFIG crossing is separate. P73's partial capture cannot assign
+the unlocated failure to either later service, HIMEM/XMS, or EXEC. The next
+owner unit is CPU40 guest device-call/stack semantics, not a BOP patch. See
+[P75 evidence](etc/evidence/m0-t318-s2-p75-post-cmdsetinfo-guest-device-bootstrap-owner-cohort-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
