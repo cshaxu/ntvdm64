@@ -14,6 +14,7 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 if ([string]::IsNullOrWhiteSpace($BuildRoot)) {
     $BuildRoot = Join-Path $root ("build/M0-T324/S2/local-redir-{0}" -f $Architecture)
 }
+$BuildRoot = [IO.Path]::GetFullPath($BuildRoot)
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or !(Get-Command ninja -ErrorAction SilentlyContinue)) {
     throw 'MSVC Build Tools and Ninja are required.'
@@ -26,7 +27,6 @@ $environment = Join-Path $BuildRoot ("msvc-{0}.cmd" -f $Architecture)
     Set-Content -LiteralPath $environment -Encoding ascii
 $includeRoots = @(
     'src', 'src/adapter-mvdm-host-out/redir/include', 'src/mvdm-host/inc', 'src/mvdm-host/vdmredir',
-    'src/mvdm-host-overlay/vdmredir',
     'src/mvdm-host/dos/command', 'src/opennt-host/netapi/netlib',
     'src/mvdm-host/softpc.new/base/inc', 'src/mvdm-host/softpc.new/host/inc',
     'src/adapter-mvdm-host-out/softpc/include',
@@ -64,7 +64,7 @@ build obj/vrmisc.obj: cc `$root/src/mvdm-host/vdmredir/vrmisc.c
 build obj/vrmslot.obj: cc `$root/src/mvdm-host/vdmredir/vrmslot.c
 build obj/cmdredir.obj: cc `$root/src/mvdm-host/dos/command/cmdredir.c
 build obj/ntstatus.obj: cc `$root/src/opennt-host/netapi/netlib/ntstatus.c
-build obj/async.obj: cc `$root/src/mvdm-host-overlay/vdmredir/mvdm_redirector_async.c
+build obj/async.obj: cc `$root/src/adapter-mvdm-host-out/redir/mvdm_redirector_async.c
 build obj/location.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_guest_location.c
 build obj/thread.obj: cc `$root/src/adapter-mvdm-host-out/win32/source/thread_start_compat.c
 build obj/session.obj: cc `$root/src/session/session.c

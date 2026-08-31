@@ -143,8 +143,9 @@ Revision History:
 #include "adapter-mvdm-host-out/win32/include/thread_start_compat.h"
 /* DIVERGENCE(MVDM-HOST-DIV-167): original async requests retained flat
  * GetVDMAddr aliases. Keep dispatch, queue and ICA control flow in the
- * mirror; enter the matching private overlay at the request lifetime seam. */
-#include "../../mvdm-host-overlay/vdmredir/mvdm_redirector_async.h"
+ * mirror; enter the Redirector adapter only at the guest-memory lifetime
+ * seam. */
+#include "adapter-mvdm-host-out/redir/include/mvdm_redirector_async.h"
 
 #include <stdio.h>
 

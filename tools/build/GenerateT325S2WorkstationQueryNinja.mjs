@@ -18,7 +18,7 @@ const includeRoots = [
   "src/adapter-mvdm-host-out/win32/include",
   "src/mvdm-host/inc",
   "src/mvdm-host/vdmredir",
-  "src/mvdm-host-overlay/vdmredir",
+  "src/adapter-mvdm-host-out/redir/include",
   "src/mvdm-host/dos/command",
   "src/mvdm-host/softpc.new/base/inc",
   "src/mvdm-host/softpc.new/host/inc",

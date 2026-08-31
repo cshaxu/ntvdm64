@@ -4,24 +4,24 @@
 
 ## Active Packet
 
-### M0 T333 S4 — Redirector mailslot and asynchronous completion cohort
+### M0 T333 S5 — Redirector NetAPI, NetBIOS, DLC and assignment-mode cohort
 
-**Active: M0 T333 S4**
+**Active: M0 T333 S5**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T333 S4; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | S3 source-package/lifecycle boundary is closed under the owner-approved T333 plan; S4 is its sequential original mailslot/async cohort. |
-| Objective | Compose original mailslot and asynchronous completion bodies through the admitted session identity, copied guest span and teardown forms, while preserving original unavailable results where CPU40 interrupt completion cannot be delivered. |
-| Non-goals | No trace-selected `57:xx` work, source-derived Redirector policy, raw host handle or pointer, second COMMAND broker, kernel VDM/CSRSS/RAP/DLC reconstruction, CPU30/Bochs route, or `src.old` input. |
+| Identifier Mode | M0 T333 S5; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | S4 local mailslot/async composition is closed under the owner-approved T333 plan; S5 is its sequential NetAPI/NetBIOS/DLC/assignment cohort. |
+| Objective | Compose the original Redirector NetAPI and assignment-mode algorithms through public modern capability paths; retain RAP/private broker/NetBIOS/DLC driver branches as exact source-shaped unavailable results unless a finite same-shaped adapter is proven. |
+| Non-goals | No trace-selected `57:xx` work, source-derived Redirector policy, raw host handle or pointer, second COMMAND broker, kernel VDM/CSRSS/RAP/DLC driver reconstruction, CPU30/Bochs route, or `src.old` input. |
 | Reference Baseline | [S1 source/ABI admission](etc/evidence/m0-t333-s1-original-redirector-source-abi-admission-001.md), its [row ledger](etc/operations/m0-t333-s1-redirector-source-abi-admission-ledger.tsv), and [S2 form admission](etc/evidence/m0-t333-s2-redirector-external-form-admission-001.md). |
-| Files And ABI Surface | Original `vrmslot.c`, `vrnmpipe.c` async body, session host-resource/completion mappings, copied-span staging, worker binding/teardown and the source CPU40 completion form. |
-| Verification | Original definition/caller/state walk; existing adapter lifetime audit; paired x86/x64 selected-source build; focused source-contract tests; no-second-broker/retired-route scan. |
-| Exit Criteria | Original mailslot and async state ownership has one source-shaped composition or exact unavailable result per reached operation; no host handle/pointer or durable guest pointer crosses a worker boundary; and no async completion is fabricated. |
+| Files And ABI Surface | Original `vrnetapi.c`, `vrnetb.c`, `vrremote.c`, `vrdlc5c.c`, `vrdlcbuf.c`, `vrdlcpst.c` and assignment-mode callers; existing NetAPI/NetLib source, public Win32 capability forms and the S2 disposition ledger. |
+| Verification | Original definition/caller/failure-path walk; public capability and hard-boundary classification; paired x86/x64 selected-source build; focused local negative/positive tests where a public path is admitted; no-second-broker scan. |
+| Exit Criteria | Every reached NetAPI/NetBIOS/DLC/assignment operation has an original public composition, exact source-shaped unavailable result, or a named S6 transfer; no RAP/private broker/DLC-driver result is fabricated. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | Named pipes, mailslots, handle/token width, guest copied spans, async completion, DEM/COMMAND stream lifecycle, NetAPI/RAP, NetBIOS/DLC, VDD/window/monitor state, x86/x64 source selection and original failure directions. |
 
-**Plan:** [M0 T333 original Redirector recovery](etc/operations/m0-t333-redirector-owner-package-recovery-plan-001.md). **S1 closed:** [source/ABI admission evidence](etc/evidence/m0-t333-s1-original-redirector-source-abi-admission-001.md) and its [row ledger](etc/operations/m0-t333-s1-redirector-source-abi-admission-ledger.tsv). **S2 closed:** [external-form admission](etc/evidence/m0-t333-s2-redirector-external-form-admission-001.md) and its [disposition ledger](etc/operations/m0-t333-s2-redirector-external-form-disposition-ledger.tsv). **S3 closed:** complete source selection/build and the original DLL dependency boundary are recorded below. S4 owns only the original mailslot/asynchronous cohort.
+**Plan:** [M0 T333 original Redirector recovery](etc/operations/m0-t333-redirector-owner-package-recovery-plan-001.md). **S1 closed:** [source/ABI admission evidence](etc/evidence/m0-t333-s1-original-redirector-source-abi-admission-001.md) and its [row ledger](etc/operations/m0-t333-s1-redirector-source-abi-admission-ledger.tsv). **S2 closed:** [external-form admission](etc/evidence/m0-t333-s2-redirector-external-form-admission-001.md) and its [disposition ledger](etc/operations/m0-t333-s2-redirector-external-form-disposition-ledger.tsv). **S3 closed:** complete source selection/build and the original DLL dependency boundary are recorded below. **S4 closed:** [mailslot and asynchronous adapter composition](etc/evidence/m0-t333-s4-redirector-async-adapter-composition-001.md) moves the durable copied-span seam to the Redirector adapter without changing the original queue/ICA owner. S5 now owns public NetAPI and assignment-mode composition plus exact unavailable NetBIOS/DLC/RAP dispositions.
 
 **S3 P1:** [the paired original synchronous-source build](etc/evidence/m0-t333-s3-p1-redirector-synchronous-source-build-001.md) retains the initial narrow-cohort evidence. **S3 P2:** [the complete original-package build and lifecycle correction](etc/evidence/m0-t333-s3-p2-complete-redirector-package-build-001.md) supersedes its package-selection conclusion: every original `vdmredir/sources` unit now compiles into `original-mvdm-redir.lib` on x86 and x64. `VDDInstallUserHook` itself is an already-selected original SoftPC body; the remaining lifecycle predecessor is the original `VDMREDIR.DLL` entry/load composition, with NetBIOS/DLC behavior still not enabled.
 
@@ -348,9 +348,9 @@ until a source-shaped copied completion transaction is admitted.
 **S2 P2:** [the local Redirector guest-span and ICA binding](etc/evidence/m0-t324-s2-local-redirector-guest-span-ica-binding-001.md)
 proves that the selected original SoftPC ICA route already exists, while
 `GetVDMAddr`'s historical durable-pointer assumption does not. The only
-admitted recovery is a private `mvdm-host-overlay/vdmredir` transaction that
-uses existing session leases at every guest-memory crossing; it preserves the
-original VDMREDIR queue and interrupt sequence without creating a provider.
+admitted recovery is a narrow Redirector-adapter transaction that uses existing
+session leases at every guest-memory crossing; it preserves the original
+VDMREDIR queue and interrupt sequence without creating a provider.
 
 **S2 P3:** [the local Redirector source closure](etc/evidence/m0-t324-s2-local-redirector-source-closure-001.md)
 selects and compiles the complete admitted local cohort on x86 and x64, links
