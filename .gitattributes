@@ -19,6 +19,7 @@ docs/history/m0-t1*.md -whitespace
 src/bochs-core/README.md text
 # T266 S3 exact OpenNT inputs retained for current local staging and source maps.
 src/opennt-bop/inc/** -text -whitespace
+src/opennt-host/** -text -whitespace
 src/opennt-softpc/bios/** -text -whitespace
 src/opennt-guest/wow16/fonts/** -text -whitespace
 docs/etc/legacy_code/opennt-bop/original/** -text -whitespace

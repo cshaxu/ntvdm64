@@ -54,14 +54,15 @@ be recovered without replacing the package with a second redirector?
 
 The three original `ntstatus.c` candidates are byte-identical: 12,382 bytes,
 SHA-256 `3db640c6cdc48e0835cc6a54c69bd12196245fba3feeb486a79e45a7c9abbf86`.
-The source policy already selects this exact `netlib` slice. It is missing from
-`src/opennt-host`; importing it byte-for-byte is required mirror completeness,
-not permission to import NetAPI, NetRAP or CSRSS product shells.
+The source policy selects this exact `netlib` slice. It is now mirrored
+byte-for-byte at `src/opennt-host/netapi/netlib/ntstatus.c`; the local hash
+matches all three selected candidates. This import is required mirror
+completeness, not permission to import NetAPI, NetRAP or CSRSS product shells.
 
 ## Interpretation and follow-up
 
 The package has a local host cohort (dispatcher/utilities, file, standard
 stream, named-pipe/mailslot and status conversion) and a non-local cohort
-(VDD/DLC/NetBIOS plus remote/RAP). Import `ntstatus.c` under
-`src/opennt-host/netapi/netlib/` with provenance/README registration, then
-recover one local source-shaped cohort. No per-BOP provider is admitted.
+(VDD/DLC/NetBIOS plus remote/RAP). The selected status-conversion source is
+now complete in `opennt-host`; recover one local source-shaped cohort next.
+No per-BOP provider is admitted.

@@ -35,6 +35,15 @@ same-shaped disposition. A later package-named subfamily under
 owning original source proves cannot compose directly; it must not absorb
 MVDM or generic Win32 semantics.
 
+`netapi/netlib/ntstatus.c` is the second selected package slice. It is the
+complete, byte-identical status-conversion unit directly reached by original
+`mvdm-host/vdmredir/vrnetapi.c`. It preserves only the original
+`NetpNtStatusToApiStatus` and `NetpApiStatusToNtStatus` algorithms; it does
+not admit NetAPI services, RAP transport, NetBIOS, CSRSS, or a network
+provider. Its identical three-source provenance and bounded disposition are
+recorded in
+[`m0-t324-s1-original-redirector-owner-binding-baseline-001.md`](../../docs/etc/evidence/m0-t324-s1-original-redirector-owner-binding-baseline-001.md).
+
 ## Divergence register
 
 | Identifier | Original purpose | Reason for divergence | Selected implementation | Files |
