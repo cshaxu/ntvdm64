@@ -76,6 +76,13 @@ Private debugger/WOW/VDD/generated-CCPU boundaries retain their original
 callable ABI but controlled-stop only a session when actually reached; no empty
 provider or runtime-completeness claim was introduced. See [P3 evidence](etc/evidence/m0-t318-s2-p3-dual-width-normal-link-boundary-001.md).
 
+**S2 P4:** the first original product-entry observation found an omitted
+original SoftPC string resource, not a CPU or DOS failure. The unchanged
+`obj.vdm/resource.rc` now compiles and links per host width; both normal product
+links pass. The original `-f` direct-launch contract is confirmed, and a
+watchdog-bounded x86 `-f` run stays alive without a crash. It is liveness only,
+not NTIO/NTDOS or child-return evidence. See [P4 evidence](etc/evidence/m0-t318-s2-p4-original-resource-and-startup-contract-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |

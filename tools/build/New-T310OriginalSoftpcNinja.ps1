@@ -99,6 +99,7 @@ $suballocManifest = Join-Path $suballocRoot 'sources'
 $oemuniManifest = Join-Path $oemuniRoot 'sources'
 $hostManifest = Join-Path $hostRoot 'sources'
 $hostEntrySource = Join-Path $hostEntryRoot 'ntvdm.c'
+$hostEntryResourceSource = Join-Path $hostEntryRoot 'resource.rc'
 $ccpuNames = Get-OriginalSources $ccpuManifest
 # The historical manifest carries the real FPU body and a host-profile stub
 # carrier in the same lexical list.  The selected CPU_40/FPU profile is the
@@ -170,6 +171,7 @@ $hostNames = @(Get-OriginalSources $hostManifest)
 # by DPMI; the complete original bridge is generated in CVIDC `accessfn.c`.
 $hostNames = @($hostNames + 'nt_cprgs.c') | Select-Object -Unique
 if (!(Test-Path -LiteralPath $hostEntrySource)) { throw "Original SoftPC host entry missing: $hostEntrySource" }
+if (!(Test-Path -LiteralPath $hostEntryResourceSource)) { throw "Original SoftPC resource source missing: $hostEntryResourceSource" }
 $adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_compat.c',
                           'nt_thread_alert_compat.c', 'nt_wait_compat.c',
                           'opennt_support_rtl.c', 'console_compat.c', 'crt_compat.c',
@@ -412,6 +414,7 @@ $graph.Add('cvidc_first_cflags = ' + $cvidcFirstFlags)
 $graph.Add('cvidc_rule_cflags = ' + $cvidcRuleFlags)
 $graph.Add('cvidc_access_cflags = ' + $cvidcAccessFlags)
 $graph.Add('patch_vector_defaults_cflags = ' + $patchVectorDefaultsFlags)
+$graph.Add('rcflags = ' + ($includeRoots -join ' '))
 $graph.Add('')
 $graph.Add('rule cc')
 $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in')
@@ -443,6 +446,9 @@ $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' c
 $graph.Add('  description = CC-PATCH $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file:')
+$graph.Add('rule rc')
+$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' rc.exe /nologo $rcflags /fo$out $in')
+$graph.Add('  description = RC $in')
 $graph.Add('rule lib')
 $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' lib.exe /nologo /out:$out $in')
 $graph.Add('  description = LIB $out')
@@ -604,6 +610,7 @@ $graph.Add('build ' + $hostEntryObject + ': cc ' + (NinjaPath $hostEntrySource))
 # point for app.  This is a build binding only, not a source edit or a second
 # startup implementation.
 $graph.Add('  cflags = ' + $baseFlags + ' /Dmain=mvdm_softpc_original_entry')
+$graph.Add('build obj/host/softpc-resource.res: rc ' + (NinjaPath $hostEntryResourceSource))
 $hostObjects += $hostEntryObject
 $commandWriteLengthOverlaySource = Join-Path $commandOverlayRoot 'mvdm_command_write_length.c'
 $graph.Add('build obj/host/mvdm_command_write_length.obj: cc ' + (NinjaPath $commandWriteLengthOverlaySource))
@@ -679,7 +686,7 @@ $graph.Add('build debugger-bindings.lib: lib ' + ($adapterDebuggerObjects -join 
 $graph.Add('build ntvdmx64-softpc-patch-evidence.lib: lib ' + ($patchBodyObjects -join ' '))
 $graph.Add('build ntvdmx64-softpc-ccpu-vector-defaults.lib: lib ' + $patchVectorDefaultsObject)
 $graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib')
-$graph.Add('build original-softpc-process.exe: process_link obj/app/entry.obj app-machine-shell.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib softpc-bindings.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-ccpu-vector-defaults.lib original-ccpu386.lib')
+$graph.Add('build original-softpc-process.exe: process_link obj/app/entry.obj app-machine-shell.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib softpc-bindings.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-ccpu-vector-defaults.lib original-ccpu386.lib obj/host/softpc-resource.res')
 $graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib')
 $graph.Add('default original-softpc-candidate')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
@@ -716,6 +723,11 @@ $graph.Add('default original-softpc-candidate')
     baseDebugBuildDisposition = 'selected-original-softpc-trace-only; mvdm-debugger product excluded'
     hostRoots = @($hostNames)
     hostEntrySource = 'src/mvdm-host/softpc.new/obj.vdm/ntvdm.c'
+    hostEntryResource = [ordered]@{
+        path = 'src/mvdm-host/softpc.new/obj.vdm/resource.rc'
+        sha256 = Get-NodeSha256 $hostEntryResourceSource
+        buildDisposition = 'selected-original-resource-source; compiled unchanged per host-width row'
+    }
     adapterSoftpcSources = @($adapterSoftpcNames)
     appSources = @($appNames)
     sessionSources = @($sessionNames)
