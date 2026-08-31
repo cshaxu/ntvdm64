@@ -265,6 +265,14 @@ CPU engine.  Subsequent recovery must select one unresolved original owner
 cluster before another unchanged-container observation. See [P29
 evidence](etc/evidence/m0-t318-s2-p29-original-startup-prerequisite-owner-scan-001.md).
 
+**S2 P30:** P25's mutable-r4 product identity was no longer reproducible, so
+it is historical evidence only. Fresh current-source CPU40 x86/x64 products
+both link, and the x86 product plus hash-verified media are now staged once in
+immutable `runtime-r30`. The sole current real-console baseline exits
+`0xC0000005` before any NTIO/BOP claim; P29's original owner clusters remain
+the recovery order. See [P30
+evidence](etc/evidence/m0-t318-s2-p30-current-source-immutable-runtime-baseline-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
