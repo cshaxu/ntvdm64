@@ -52,6 +52,14 @@ already established that adding console writes to the execution hot path
 changes the observed trace; P70 consequently makes no dynamic claim and adds
 no instrumentation.
 
+The unmodified x86 product was nevertheless re-observed once in that fixed
+container after this audit.  It timed out at the expected eight seconds and
+preserved the existing `NTIO-LOADED`, `CPU-SIMULATE`, and `CCPU-FIRST-FETCH`
+milestones, with no new guest milestone.  The raw report, console capture, and
+identity manifest are retained as
+`artifacts/research/m0-t318-s2-p70-fixed-container-after-binding-audit.txt`
+and its `.console.txt` / `.json` companions.
+
 ## Result and next boundary
 
 P69's heartbeat cohort is eliminated as a **missing-binding** explanation for
