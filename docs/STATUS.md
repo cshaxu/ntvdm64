@@ -236,6 +236,13 @@ P22/P24's `0xC0000005` remains historical evidence but is superseded as the
 current baseline. The product is not yet proven to reach NTIO, NTDOS, EXEC or
 parent return. See [P25 evidence](etc/evidence/m0-t318-s2-p25-fixed-container-baseline-correction-001.md).
 
+**S2 P26:** the source-defined gate from live SoftPC startup to guest command
+consumption is fixed. `scs_init` only queries first-VDM state; the declared
+ordinary child is consumed later by original guest COMMAND `54:01` through
+`cmdGetNextCmd` and the existing Base VDM contract. The next observation is a
+passive original-dispatch reach record, not another changed startup container
+or BOP implementation. See [P26 evidence](etc/evidence/m0-t318-s2-p26-startup-to-guest-observation-gate-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3446 |
+| Documentation records | 3447 |
 | --- | --- |
-| Generated UTC | 2026-08-31T06:26:10Z |
+| Generated UTC | 2026-08-31T06:30:59Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | a41f27bc3215be9016c00824f970eccd9b0c1886846be5158624c48d50076c06 |
+| STATUS.md | principal control document | 22b4d246b76f9051ef9a20611767373640e64ad399f10a86bd9cf4025055090e |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -947,6 +947,7 @@ content-divergent entries.
 | etc/evidence/m0-t318-s2-p23-cvidc-generated-vector-contract-001.md | indexed supporting material | 33feae011407173e63215cf1f45e75a3fb6221d01c5aac7f7e444fa0ad97e7a3 |
 | etc/evidence/m0-t318-s2-p24-fixed-container-startup-owner-clusters-001.md | indexed supporting material | 45b5aa3be6470d5c943eabcf6b23d2dc78e1074d52d6827a0c06df47b30b3713 |
 | etc/evidence/m0-t318-s2-p25-fixed-container-baseline-correction-001.md | indexed supporting material | d05970a190773f29fd53e02905efe0abccf96e8613ce0914bfd74a425faa2dce |
+| etc/evidence/m0-t318-s2-p26-startup-to-guest-observation-gate-001.md | indexed supporting material | aa66ab8054fc9833a0b5fac5f971b115e7ae28991e543d26b57e13deae65168f |
 | etc/evidence/m0-t318-s2-p3-dual-width-normal-link-boundary-001.md | indexed supporting material | d3e76724e741499cdbea8406f8aa136f7cfaa5b1b4ddefc95d87eb4659b2cff5 |
 | etc/evidence/m0-t318-s2-p4-original-resource-and-startup-contract-001.md | indexed supporting material | 688539591b39b3e0bfa95a29ee62ae2d6d258bda78b01f3f0fec719186e32c92 |
 | etc/evidence/m0-t318-s2-p5-console-observation-admission-001.md | indexed supporting material | 6326836e2f291accf9ed0aa1884c8bf125159ea95cdfb28be404338c1c9f46c0 |
