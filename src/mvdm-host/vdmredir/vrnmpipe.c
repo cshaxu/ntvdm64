@@ -135,6 +135,12 @@ Revision History:
 #include <idetect.h>    // WaitIfIdle
 #include <vrica.h>      // call_ica_hw_interrupt
 #include <vrnmpipe.h>   // routine prototypes
+/* DIVERGENCE(MVDM-HOST-DIV-173): VrpAsyncNmPipeThread retains the original
+ * cdecl DWORD(LPVOID) body and original CreateThread call order. Modern x86
+ * requires a WINAPI callback at the public CreateThread boundary; the shared
+ * same-shaped thread adapter performs only that ABI transition and binds the
+ * creator session for the worker lifetime. */
+#include "adapter-mvdm-host-out/win32/include/thread_start_compat.h"
 /* DIVERGENCE(MVDM-HOST-DIV-167): original async requests retained flat
  * GetVDMAddr aliases. Keep dispatch, queue and ICA control flow in the
  * mirror; enter the matching private overlay at the request lifetime seam. */

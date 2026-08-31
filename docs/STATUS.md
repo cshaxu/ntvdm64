@@ -23,6 +23,8 @@
 
 **Plan:** [M0 T333 original Redirector recovery](etc/operations/m0-t333-redirector-owner-package-recovery-plan-001.md). **S1 closed:** [source/ABI admission evidence](etc/evidence/m0-t333-s1-original-redirector-source-abi-admission-001.md) and its [row ledger](etc/operations/m0-t333-s1-redirector-source-abi-admission-ledger.tsv). **S2 closed:** [external-form admission](etc/evidence/m0-t333-s2-redirector-external-form-admission-001.md) and its [disposition ledger](etc/operations/m0-t333-s2-redirector-external-form-disposition-ledger.tsv). S3 is the limited original lifecycle/synchronous-pipe cohort.
 
+**S3 P1:** [the paired original synchronous-source build](etc/evidence/m0-t333-s3-p1-redirector-synchronous-source-build-001.md) compiled and linked `vrinit`, `vrmisc`, `vrnmpipe`, `vrputil` and `vrdll` as `original-mvdm-redir-sync.lib` on x86 and x64. It also establishes that lifecycle runtime is blocked by source-owned VDD, NetBIOS and DLC initialization; this is not a runnable provider claim.
+
 | Field | Record |
 | --- | --- |
 ### M0 T332 — Original DPMI/DPMI32 owner-package recovery

@@ -226,7 +226,11 @@ Return Value:
     // the known address
     //
 
-    lpVdmVrInitialized = LPBYTE_FROM_WORDS(getCS(), (DWORD)(&(((VDM_LOAD_INFO*)0)->VrInitialized)));
+    /* DIVERGENCE(MVDM-HOST-DIV-174): this is a numeric field offset in the
+     * original VDM load record, not a host pointer. FIELD_OFFSET retains that
+     * 16-bit guest-offset meaning without first narrowing a native pointer. */
+    lpVdmVrInitialized = LPBYTE_FROM_WORDS(getCS(),
+                                            FIELD_OFFSET(VDM_LOAD_INFO, VrInitialized));
     *lpVdmVrInitialized = 1;
 
     //

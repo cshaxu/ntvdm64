@@ -73,6 +73,7 @@ $commsRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/comms'
 $dosRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/dos'
 $demRoot = Join-Path $root 'src/mvdm-host/dos/dem'
 $commandRoot = Join-Path $root 'src/mvdm-host/dos/command'
+$redirRoot = Join-Path $root 'src/mvdm-host/vdmredir'
 $xmsRoot = Join-Path $root 'src/mvdm-host/xms.486'
 $dpmiRoot = Join-Path $root 'src/mvdm-host/dpmi32'
 $xmsOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/xms.486'
@@ -103,6 +104,7 @@ $commsManifest = Join-Path $commsRoot 'sources'
 $dosManifest = Join-Path $dosRoot 'sources'
 $demManifest = Join-Path $demRoot 'sources'
 $commandManifest = Join-Path $commandRoot 'sources'
+$redirManifest = Join-Path $redirRoot 'sources'
 $xmsManifest = Join-Path $xmsRoot 'sources'
 $dpmiManifest = Join-Path $dpmiRoot 'sources'
 $suballocManifest = Join-Path $suballocRoot 'sources'
@@ -152,6 +154,16 @@ $dosNames = @(Get-OriginalSources $dosManifest)
 # closure rather than make `CMDInit`/`DemInit`/`XMSInit`/`DBGInit` adapters.
 $demNames = @(Get-OriginalSources $demManifest)
 $commandNames = @(Get-OriginalSources $commandManifest)
+# T333/S3 selects only the original lifecycle and synchronous named-pipe
+# cohort.  The remaining original VDMREDIR units are still retained in the
+# mirror and are admitted only by their later async, NetAPI/RAP, NetBIOS, DLC
+# and VDD owner cohorts.  Do not replace them with adapter providers.
+$redirSynchronousNames = @('vrinit.c', 'vrmisc.c', 'vrnmpipe.c', 'vrputil.c', 'vrdll.c')
+foreach ($name in $redirSynchronousNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $redirRoot $name))) {
+        throw "Original Redirector S3 source missing: $name"
+    }
+}
 $xmsNames = @(Get-OriginalSources $xmsManifest)
 # `i386_SOURCES` is an NT4 kernel-VDM host variant: it writes the host LDT,
 # queries VDM kernel feature bits and mutates the fixed NTVDM V86-state page.
@@ -323,6 +335,11 @@ $parallelRunner = Join-Path $build 'run-ninja-parallel.cmd'
 
 $includeRootPaths = @(
     'src',
+    # Preserve the original vdmredir.h declarations while binding only its
+    # historical HANDLE_FROM_WORDS carrier to the existing session identity
+    # facade.  This must precede mvdm-host/inc so the selected original
+    # Redirector bodies never cast a guest-visible DWORD to a native HANDLE.
+    'src/adapter-mvdm-host-out/redir/include',
     # The adapter owns the modern `nt.h` type binding. Original reached NT
     # public-header subsets are restored under opennt-host below, so source
     # files still resolve historical short names without an adapter copy.
@@ -348,6 +365,7 @@ $includeRootPaths = @(
     # bodies.  Select the original directory rather than copying the carrier
     # into an adapter or overlay.
     'src/mvdm-host/dpmi32',
+    'src/mvdm-host/vdmredir',
     'src/mvdm-host/softpc.new/base/ccpu386',
     'src/mvdm-host/softpc.new/host/inc',
     # Original sas.h includes generated sas4gen.h. The selected mirror retains
@@ -573,6 +591,12 @@ $commandObjects = foreach ($name in $commandNames) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $commandRoot $name)))
     $object
 }
+$redirSynchronousObjects = foreach ($name in $redirSynchronousNames) {
+    $object = 'obj/redir-sync/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $redirRoot $name)))
+    $graph.Add('  cflags = ' + $baseFlags + ' /DWIN_32 /DVDMREDIR_DLL')
+    $object
+}
 $xmsObjects = foreach ($name in $xmsNames) {
     $object = 'obj/xms/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $xmsRoot $name)))
@@ -698,6 +722,7 @@ $graph.Add('build original-softpc-comms.lib: lib ' + ($commsObjects -join ' '))
 $graph.Add('build original-softpc-dos.lib: lib ' + ($dosObjects -join ' '))
 $graph.Add('build original-mvdm-dem.lib: lib ' + ($demObjects -join ' '))
 $graph.Add('build original-mvdm-command.lib: lib ' + ($commandObjects -join ' '))
+$graph.Add('build original-mvdm-redir-sync.lib: lib ' + ($redirSynchronousObjects -join ' '))
 $graph.Add('build original-mvdm-xms.lib: lib ' + (($xmsObjects + $xmsOverlayObjects) -join ' '))
 $graph.Add('build original-mvdm-dpmi32.lib: lib ' + ($dpmiObjects -join ' '))
 $graph.Add('build original-mvdm-host-suballoc.lib: lib ' + ($suballocObjects -join ' '))
@@ -714,7 +739,7 @@ $graph.Add('build monitor-bindings.lib: lib ' + ($adapterMonitorObjects -join ' 
 $graph.Add('build debugger-bindings.lib: lib ' + ($adapterDebuggerObjects -join ' '))
 $graph.Add('build ntvdmx64-softpc-patch-evidence.lib: lib ' + ($patchBodyObjects -join ' '))
 $graph.Add('build ntvdmx64-softpc-ccpu-vector-defaults.lib: lib ' + $patchVectorDefaultsObject)
-$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib')
+$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir-sync.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib')
 $graph.Add('build original-softpc-process.exe: process_link obj/app/entry.obj app-machine-shell.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib softpc-bindings.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-ccpu-vector-defaults.lib original-ccpu386.lib obj/host/softpc-resource.res')
 $graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib')
 $graph.Add('default original-softpc-candidate')
@@ -745,6 +770,7 @@ $graph.Add('default original-softpc-candidate')
     dosSources = @($dosNames)
     demSources = @($demNames)
     commandSources = @($commandNames)
+    redirectorSynchronousSources = @($redirSynchronousNames)
     xmsSources = @($xmsNames)
     dpmiSources = @($dpmiNames)
     xmsPrivateOverlaySources = @($xmsOverlayNames)
