@@ -397,6 +397,13 @@ observation changed from immediate exit to the bounded timeout, without
 claiming NTIO reachability.  See [P46
 evidence](etc/evidence/m0-t318-s2-p46-original-configuration-media-binding-closure-001.md).
 
+**S2 P47:** the complete source-shaped CONFIG/AUTOEXEC media cohort is now
+classified before another run: original `cmdconf` also requires a bounded
+DOS-visible system-directory projection and its selected country, HIMEM,
+COMMAND and optional AUTOEXEC payloads.  This is one media/path owner repair,
+not a BOP series; no second observation of the P46 EXE is admissible.  See
+[P47 evidence](etc/evidence/m0-t318-s2-p47-original-configuration-media-dependency-cohort-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
