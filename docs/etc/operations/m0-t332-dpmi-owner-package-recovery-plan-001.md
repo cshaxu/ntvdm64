@@ -33,13 +33,18 @@ overlay as retain, replace with original source, migrate, delete or named
 later-owner transfer. The deliverable is one auditable ledger; no DPMI
 behavior is changed.
 
-### S2 — Shared guest-span, identity and monitor/TIB closure
+### S2 — Shared SoftPC-span, identity and monitor/TIB closure
 
-Recover the common `Sim32GetVDMPointer` users through the session mapping
-manager's bounded leases/copies, and reconcile source-shaped `VDM_TIB`/
-`NtVdmControl` calls with the monitor adapter. Preserve original numeric
-guest values and failure directions. No raw host pointer, family-private
-mapper, kernel-VDM recreation or fabricated control success is admitted.
+Classify the common `Sim32GetVDMPointer` users against their actual original
+owner before changing them.  The selected original `sim32.c` implementation
+is a CPU40/SAS/video **in-machine** pointer seam; DPMI uses it in the same
+host execution frame, so it must retain that source-shaped lifetime rather
+than be mechanically rewritten as per-expression bounce leases.  Reconcile
+only values which cross the host boundary (XMEM/PM-stack opaque identities)
+through the session mapping manager, and reconcile source-shaped `VDM_TIB`/
+`NtVdmControl` calls with the monitor adapter.  Preserve original numeric
+guest values and failure directions. No family-private mapper, kernel-VDM
+recreation or fabricated control success is admitted.
 
 ### S3 — Original initialization, descriptor and XMEM source cohorts
 
