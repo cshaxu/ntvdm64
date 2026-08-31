@@ -68,6 +68,12 @@ invent a remote/device backend.
 fixes the whole selected local cohort before any source change, and reserves
 all remote/device families for their named owners.
 
+**S2 P1:** [the original named-pipe completion contract](etc/evidence/m0-t324-s2-named-pipe-completion-contract-001.md)
+proves that a cdecl thread thunk alone cannot enable `VrReadWriteAsyncNmPipe`:
+the original completion persists guest locations and requires its SoftPC/ICA
+interrupt route. The existing unavailable worker remains the exact safe result
+until a source-shaped copied completion transaction is admitted.
+
 ### M0 T323 S1 — Original DPMI/DPMI32 owner and boundary baseline
 
 **Closed: M0 T323 S1**
