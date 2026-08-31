@@ -566,6 +566,13 @@ then removed because extra hot-path console writes perturb the fixed-container
 trace. See [P68
 evidence](etc/evidence/m0-t318-s2-p68-ntio-first-fetch-state-001.md).
 
+**S2 P69:** the first original NTIO `E9` is a CCPU control transfer that forces
+the original inter-instruction event check before the `0070:0370` `msinit`
+fetch.  The complete original heartbeat cohort is the first conditional
+cross-owner candidate after that transfer; it is an audit target, not a proven
+fault and not a BOP change. See [P69
+evidence](etc/evidence/m0-t318-s2-p69-first-control-transfer-heartbeat-owner-audit-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
