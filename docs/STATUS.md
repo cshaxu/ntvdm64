@@ -4,9 +4,38 @@
 
 ## Active Packet
 
+**No active M/T/S packet.** T330 is closed; the next queue package requires
+normal admission before implementation begins.
+
+### M0 T330 S1 — Original exception-filter context contract
+
+**Closed: M0 T330 S1–S3 and M0 T330.**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T330 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 1, admitted under the standing owner direction to execute the ordered queue after T329 closure. |
+| Objective | Establish the original unhandled-exception filter and optional-report contract, then attribute the fixed-container exception using copied actual context. |
+| Non-goals | No BOP/guest/FDC/ROM/vector/CPU behavior repair, synthetic device result, new executor, Bochs/CPU30/MONITOR/kernel-VDM/CSRSS route, new mapper, raw native identity, WOW/VDD/debugger or product-shell redesign. |
+| Reference Baseline | T327 fixed configuration transfer; T328 FDC/INT15 closure; T329 CPU40 recursive-frame closure. |
+| Files And ABI Surface | Original `VdmUnhandledExceptionFilter`, existing report-path diagnostic seam, fixed-width copied `EXCEPTION_RECORD`/`CONTEXT` fields, selected product entry and observer. |
+| Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, architecture, mapping-manager, session and paired-host build rules. |
+| Verification | Original filter/definition/caller walk; report-seam review; paired x86/x64 formal product links; one immutable short-root x86 observation with the report gate proven behavior-neutral. |
+| Expected Markers | One exact exception context and mapped original source owner, or proof that the selected original filter is unavailable before it receives an exception record. |
+| Asset Needs | Existing selected MVDM mirror/media, CPU40 formal graph, short-root fixed observer and existing exception report path; no new guest or host installation. |
+| Reporting Requirements | Record copied fields, report gate, original exception disposition, timer effects, source map result, changed locations and successor owner. |
+| Stop Conditions | Need for a behavior-changing catch/continue, FDC/ROM/vector/BOP or CPU fix, kernel/CSRSS reconstruction, persistent guest/native pointer, unreviewed source import or change outside the exception cohort pauses for re-admission. |
+| Exit Criteria | An exact fixed-container original exception owner transfer with paired formal links; no x64 runtime claim. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | Original main/thread filter callers, timer suspend/resume, report gate/lifetime, exception record/context copying, source-map arithmetic and bounded observer behavior. |
+
+**S1–S3 evidence:** [the original exception-context attribution](etc/evidence/m0-t330-s1-s3-original-exception-context-attribution-001.md) records the original filter semantics, the opt-in copied report boundary, paired formal links and the fixed-container result.
+
+**T330 closure:** the fixed observation did not traverse the selected original filter, so no exact `EXCEPTION_POINTERS` exists for this package to map. The task closes at that source-defined unavailable boundary; it does not authorize an exception catch, CPU-frame, FDC, ROM, vector or BOP workaround. [Closure record](history/m0-t330-exception-context-attribution-closure-20260831.md).
+
 ### M0 T329 S1 — Original CCPU recursive-frame lifecycle contract
 
-**Active: M0 T329 S1**
+**Closed: M0 T329 S1 and M0 T329.**
 
 | Field | Record |
 | --- | --- |
@@ -26,7 +55,9 @@
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | CPU40 initialization, TLS allocation and teardown, frame acquire/release, BOP-FE immediate and extended paths, exception frame return, nested FDC/keyboard/WOW re-entry callers, and the first post-frame return. |
 
-**S1 plan:** [the CPU40 recursive-frame closure proposal](etc/operations/proposal-cpu40-recursive-frame-guest-reentry-closure-001.md) starts with the complete original lifecycle map and forbids FDC/BOP-led recovery.
+**S1 evidence:** [the original CPU40 recursive-frame lifecycle contract](etc/evidence/m0-t329-s1-original-cpu40-recursive-frame-lifecycle-contract-001.md) records the selected initialization, TLS/frame ownership, all direct re-entry callers, historical underflow disposition and current x86/x64 bounded recursive execution recheck.
+
+**T329 closure:** no CCPU binding was missing and the bounded original recursive route passes, so S2 had no admissible behavior change. The only remaining question is actual fixed-container exception context; T330 owns that diagnostic-only attribution and may not add a frame guard.
 
 ### M0 T328 S1 — Original FDC/INT15 wait-continuation contract
 

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3539 |
+| Documentation records | 3544 |
 | --- | --- |
-| Generated UTC | 2026-08-31T21:29:39Z |
+| Generated UTC | 2026-08-31T21:44:01Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | dca9466a0e92f16718622d1830a051d692c13cc7e30374dff86a8f3f0c19c5d1 |
+| QUEUE.md | principal control document | 49dcb0c6fbc765c7c31db57c207761efe391bbbe5030da13c8aaa939a327879e |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | bf1a7dfd80cf39db9927305b099dc5a7b6eb548e1fe3458e7b8ae18844241675 |
+| STATUS.md | principal control document | 31b72e79fc4db8c356429bdb0be0dd233ef43128dc0b50b0672385271c29f41e |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1030,6 +1030,8 @@ content-divergent entries.
 | etc/evidence/m0-t327-s2-cpu40-wait-prerequisite-disposition-001.md | indexed supporting material | 734413151a2feb72263c9f3a8553ead742ae861008d808b37b2ffcca6df3c41e |
 | etc/evidence/m0-t327-s3-command-configuration-owner-transfer-001.md | indexed supporting material | 91e1cf7e6bcfae10eab84967df454e78fba5a40cf23741bf469b9663a908ed7d |
 | etc/evidence/m0-t328-s1-original-fdc-int15-wait-continuation-contract-001.md | indexed supporting material | 2274e5207538c1a5508d099e62bebcaa43df24d92d4df2d62404269706b3aade |
+| etc/evidence/m0-t329-s1-original-cpu40-recursive-frame-lifecycle-contract-001.md | indexed supporting material | 3808e03f7ff160911dbff0afb10e85d8b5b80679a99260ec26dd2177122765a6 |
+| etc/evidence/m0-t330-s1-s3-original-exception-context-attribution-001.md | indexed supporting material | 238472ff0e67d3ae3735f8d4c1975425c3be46e6949991d1a8566a7914f4bd17 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1824,7 +1826,7 @@ content-divergent entries.
 | etc/operations/proposal-bx-vdm-pending-bop-session-lifecycle-001.md | indexed supporting material | b3c5072c395c22475973085e337d757366b49e1769c3fb81fde9c12a38f7adf2 |
 | etc/operations/proposal-cli-run-entry-and-opennt-pif-handoff-001.md | indexed supporting material | 472164739c7fe38ba4ccb20c64a0b72c13aa81d8df972786371c50c762c8393a |
 | etc/operations/proposal-cpu40-ccpu-original-profile-closure-001.md | indexed supporting material | f029c4a25bf86ce42a568865c20f8ff3d8f18e06cc5c3645e21a76cef03f4532 |
-| etc/operations/proposal-cpu40-recursive-frame-guest-reentry-closure-001.md | indexed supporting material | 4204bfd3d77095088d19143e5e0a31d2ee855833b0d80872e92f58199ad662ab |
+| etc/operations/proposal-cpu40-recursive-frame-guest-reentry-closure-001.md | indexed supporting material | d25d052c69494729b58ea8b30835a2e68ef057a0ff6d64bcd9b2c5c58399d33c |
 | etc/operations/proposal-current-naming-convergence-001.md | indexed supporting material | 214c6356a2a52f218e4d128d1598f7b6956e6bddc397db8b597d56bff63d7e23 |
 | etc/operations/proposal-dos-wow16-complete-source-build-closure-001.md | indexed supporting material | 3da5ac3935fbee1542946e0dfedf75d841836e0e0c7151536e88f5c44854f862 |
 | etc/operations/proposal-formal-build-entrypoint-and-reconstructed-monitor-fixture-repair-001.md | indexed supporting material | 8c20c430a033b448bf3de92e21f8ba32760c80fae225b5c0fa14ab4cc0814b8f |
@@ -1855,6 +1857,7 @@ content-divergent entries.
 | etc/operations/proposal-opennt-wow16-owner-package-completion-001.md | indexed supporting material | cad78b521e3fd3edb645002ed7986082d45082dcbba54f153d11dc61ef65c07e |
 | etc/operations/proposal-opennt-xms-owner-package-completion-001.md | indexed supporting material | 63d5209a8032bff793219242257dd8ab637d833f66c17c969939e6a5e56d3d3d |
 | etc/operations/proposal-original-component-mirror-conformance-001.md | indexed supporting material | faa3f9df4ede9fbc8c66144d7c3b9dedc7b8e41d1ede15997d93c82e29e9f1c1 |
+| etc/operations/proposal-original-exception-context-attribution-001.md | indexed supporting material | eb0d259be0a40550b2e6834ae9688be76c7051ac0561bd1099bfcc0b3041fde7 |
 | etc/operations/proposal-overlay-mutation-capability-completion-001.md | indexed supporting material | f7ffebc5d2e99ecef44e029526afbaddbcce02d05d66819e544d02d2ce929cff |
 | etc/operations/proposal-project-code-filename-normalization-001.md | indexed supporting material | 8a42536533fd68114f575dc49f3d02213778a8ecb6e80e8cc797d2f70df2382a |
 | etc/operations/proposal-public-win32-crt-source-shaped-binding-recovery-001.md | indexed supporting material | 87a7cc8c3d415bb1df012ec4a5be8d2d005c31bb4085133236cf52847baffb3e |
@@ -3446,6 +3449,8 @@ content-divergent entries.
 | history/m0-t326-softpc-pre-bop-startup-continuity-closure-20260831.md | closed task history | 523e9ee022d2ef743fc3bce9353a9ed4827ef4c944810eccc962d12a857f6a6f |
 | history/m0-t327-minimal-dos-guest-execution-controlled-return-closure-20260831.md | closed task history | 7f50f92477152036b6c61eb8b8d4817ec6a643f694433ab1db319f02ab95bb7f |
 | history/m0-t328-fdc-int15-wait-continuation-closure-20260831.md | closed task history | 62fa6d5b4193cf4d5e0395a1676a9996b0b34bef9fa453b975a9eb51effcab1e |
+| history/m0-t329-cpu40-recursive-frame-closure-20260831.md | closed task history | 6599716f074a178dc5d6ee01d05ffc19f55ad29b62a2e82df422c3e3bf7ecd70 |
+| history/m0-t330-exception-context-attribution-closure-20260831.md | closed task history | bcd87c457f48e81e9624e3711b054e761208fcd279bb27fb7ac8c7192388a2e7 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

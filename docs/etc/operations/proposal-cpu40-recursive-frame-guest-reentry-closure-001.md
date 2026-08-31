@@ -37,3 +37,11 @@ owner transfer.
 
 Close only with a source-shaped CCPU frame result and paired formal links. An
 x64 link is not a guest runtime claim.
+
+## T329 disposition
+
+S1 found no missing CCPU lifecycle binding and its focused original nested
+execution witness passes on both architectures. There is consequently no
+admissible S2 behavior change. The successor is diagnostic-only capture at the
+original unhandled-exception boundary, so a real context—not a speculative
+base-level guard—selects the next source owner.

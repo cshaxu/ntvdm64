@@ -55,9 +55,16 @@ void mvdm_softpc_record_unhandled_exception(
     const CONTEXT *context;
     ULONG_PTR instruction_pointer;
     ULONG_PTR stack_pointer;
+    ULONG_PTR frame_pointer;
     ULONG_PTR return_address;
     ULONG_PTR image_base;
-    char message[128];
+    ULONG_PTR access_kind;
+    ULONG_PTR access_target;
+    ULONG_PTR stack_words[8];
+    DWORD code_segment;
+    unsigned int stack_word_count;
+    unsigned int stack_index;
+    char message[512];
     char *cursor;
     HANDLE output;
     DWORD written;
@@ -69,20 +76,38 @@ void mvdm_softpc_record_unhandled_exception(
     context = exception_info->ContextRecord;
     instruction_pointer = 0;
     stack_pointer = 0;
+    frame_pointer = 0;
     return_address = 0;
+    access_kind = 0;
+    access_target = 0;
+    code_segment = 0;
+    stack_word_count = 0;
+    memset(stack_words, 0, sizeof(stack_words));
     image_base = (ULONG_PTR)GetModuleHandle(NULL);
     if (context != NULL) {
 #if defined(_M_IX86)
         instruction_pointer = context->Eip;
         stack_pointer = context->Esp;
+        frame_pointer = context->Ebp;
+        code_segment = context->SegCs;
 #elif defined(_M_X64)
         instruction_pointer = context->Rip;
         stack_pointer = context->Rsp;
+        frame_pointer = context->Rbp;
+        code_segment = context->SegCs;
 #endif
     }
-    if (stack_pointer != 0)
+    if (record->NumberParameters >= 2u) {
+        access_kind = record->ExceptionInformation[0];
+        access_target = record->ExceptionInformation[1];
+    }
+    if (stack_pointer != 0) {
         (void)ReadProcessMemory(GetCurrentProcess(), (const void *)stack_pointer,
             &return_address, sizeof(return_address), &copied);
+        if (ReadProcessMemory(GetCurrentProcess(), (const void *)stack_pointer,
+                stack_words, sizeof(stack_words), &copied))
+            stack_word_count = (unsigned int)(copied / sizeof(stack_words[0]));
+    }
     /* The fixed observer owns the standard console and snapshots it after
      * process exit. Do not allocate, translate, resume, or otherwise alter
      * the original exception path here. */
@@ -98,6 +123,25 @@ void mvdm_softpc_record_unhandled_exception(
     cursor += 6;
     cursor = mvdm_softpc_append_hex(cursor, instruction_pointer,
         sizeof(ULONG_PTR) * 2);
+    memcpy(cursor, " sp=0x", 6);
+    cursor += 6;
+    cursor = mvdm_softpc_append_hex(cursor, stack_pointer,
+        sizeof(ULONG_PTR) * 2);
+    memcpy(cursor, " fp=0x", 6);
+    cursor += 6;
+    cursor = mvdm_softpc_append_hex(cursor, frame_pointer,
+        sizeof(ULONG_PTR) * 2);
+    memcpy(cursor, " cs=0x", 6);
+    cursor += 6;
+    cursor = mvdm_softpc_append_hex(cursor, code_segment, 4);
+    memcpy(cursor, " access=0x", 10);
+    cursor += 10;
+    cursor = mvdm_softpc_append_hex(cursor, access_kind,
+        sizeof(ULONG_PTR) * 2);
+    memcpy(cursor, " target=0x", 10);
+    cursor += 10;
+    cursor = mvdm_softpc_append_hex(cursor, access_target,
+        sizeof(ULONG_PTR) * 2);
     memcpy(cursor, " return=0x", 10);
     cursor += 10;
     cursor = mvdm_softpc_append_hex(cursor, return_address,
@@ -106,6 +150,14 @@ void mvdm_softpc_record_unhandled_exception(
     cursor += 8;
     cursor = mvdm_softpc_append_hex(cursor, image_base,
         sizeof(ULONG_PTR) * 2);
+    memcpy(cursor, " stack=", 7);
+    cursor += 7;
+    for (stack_index = 0; stack_index != stack_word_count; ++stack_index) {
+        if (stack_index != 0)
+            *cursor++ = ',';
+        cursor = mvdm_softpc_append_hex(cursor, stack_words[stack_index],
+            sizeof(ULONG_PTR) * 2);
+    }
     *cursor++ = '\r';
     *cursor++ = '\n';
     output = GetStdHandle(STD_ERROR_HANDLE);

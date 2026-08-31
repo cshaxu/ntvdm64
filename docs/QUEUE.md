@@ -38,7 +38,7 @@ is retired and is neither a production route nor an acceptance row.
 
 | Order | Candidate implementation package |
 | --- | --- | --- |
-| 1 | CPU40 recursive-frame and guest re-entry contract closure |
+| 1 | Original exception-context attribution |
 | 2 | XMS owner package |
 | 3 | DPMI/DPMI32 owner package |
 | 4 | Redirector owner package (including the selected `netstatus.c` mirror slice) |
