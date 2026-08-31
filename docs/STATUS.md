@@ -330,6 +330,13 @@ unchanged fixed non-debug console-owning container; it still exits
 and no NTIO/NTDOS/EXEC claim is made. See [P37
 evidence](etc/evidence/m0-t318-s2-p37-xms-session-backend-selection-and-fixed-run-001.md).
 
+**S2 P38:** the fixed `-o` profile is source-proven to select original
+windowed `ConsoleInit`, not stream I/O or an X86GFX/Console-Server route. Its
+real-console prerequisite and P19 text registration are already satisfied;
+heartbeat starts only after that prefix and transfers the next static cohort to
+original timer/PIC mechanics. No observation was repeated. See [P38
+evidence](etc/evidence/m0-t318-s2-p38-reset-console-heartbeat-owner-audit-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
