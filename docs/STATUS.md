@@ -6,7 +6,7 @@
 
 ### M0 T324 S1 — Original Redirector owner and boundary baseline
 
-**Active: M0 T324 S1**
+**Closed: M0 T324 S1**
 
 | Field | Record |
 | --- | --- |
@@ -36,6 +36,37 @@ already-selected byte-identical `ntstatus.c` slice, now complete in
 now records every original unit, the COMMAND caller and the selected external
 status source. It distinguishes the bounded local cohort from explicit
 VDD/DLC/NetBIOS/RAP transfers without enabling a 57:xx leaf.
+
+**S1 closed:** the selected Redirector package has a complete source/ABI/failure
+ledger and a byte-identical `ntstatus.c` mirror. Its only admitted next step is
+the complete local source cohort; it may not enable a standalone service or
+invent a remote/device backend.
+
+### M0 T324 S2 — Original local Redirector binding recovery
+
+**Active: M0 T324 S2**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T324 S2; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | T324/S1 closure and the standing owner request to execute the ordered queue. |
+| Objective | Recover the complete original local Redirector cohort—dispatcher, utilities, mailslots, named-pipe control flow, COMMAND redirection caller and selected status conversion—only through original source and same-shaped bounded bindings. |
+| Non-goals | No trace-selected 57:xx leaf, RAP/remote/NetBIOS/DLC provider, VDD hook success, generic adapter, new mapping manager, raw host identity, guest edit, or synthetic interrupt/network result. |
+| Reference Baseline | T324/S1 ledgers; `m0-t324-s2-local-redirector-binding-recovery-plan-001.md`; original `vdmredir`/`cmdredir.c`; selected `ntstatus.c`; existing session, SoftPC and Redirector identity bindings. |
+| Files And ABI Surface | `vrdisp.c`, `vrmisc.c`, `vrputil.c`, `vrmslot.c`, `vrnmpipe.c`, `cmdredir.c`, `ntstatus.c`, `vdmredir.h`, original async records, current mapping identity facade and SoftPC/ICA completion boundary. |
+| Applicable Rules | Execution, source-first recovery, mirror/overlay, source-policy, session mapping-manager and host-capability rules. |
+| Verification | Source/declaration/definition/caller comparison, source-shaped completion-contract record, selected x86/x64 graph review, focused local positive/negative checks, governance and diff review. |
+| Expected Markers | Original dispatch and request layouts remain authoritative; every external identity uses the existing session mapping; asynchronous completion has one explicit source-shaped owner/teardown result. |
+| Asset Needs | Existing selected mirrors, current session and same-shaped adapters, formal CPU40 product graph; no new guest media, network service, VDD or kernel facility. |
+| Reporting Requirements | For every local source edge, record original call order, request/result fields, host/guest identity and span lifetime, pending/resume/cancel order, public API/failure disposition and later owner. |
+| Stop Conditions | Need for a second Redirector provider, private Network/RAP/CSRSS/VDD recreation, unbounded pointer/handle alias, invented interrupt completion or unreviewed external import pauses for re-admission. |
+| Exit Criteria | The complete local cohort is bound through original source or transferred with exact source-shaped evidence; focused checks and formal graph review distinguish link closure from any guest runtime claim. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | All local dispatcher, file/pipe/mailslot, COMMAND redirection, identity, mapping lease, worker, completion, cancel and teardown forms; reject all remote, VDD, DLC and NetBIOS shortcuts. |
+
+**S2 plan:** [the original local Redirector binding recovery plan](etc/operations/m0-t324-s2-local-redirector-binding-recovery-plan-001.md)
+fixes the whole selected local cohort before any source change, and reserves
+all remote/device families for their named owners.
 
 ### M0 T323 S1 — Original DPMI/DPMI32 owner and boundary baseline
 
