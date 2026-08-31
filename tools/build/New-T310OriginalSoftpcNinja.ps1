@@ -373,10 +373,12 @@ $cvidcFirstIncludeRoots = $cvidcFirstRootPaths | ForEach-Object { '/I "' + (Ninj
 # retains its original CPU40 compatibility carrier definitions; any unavoidable historical x86-only unit must carry
 # its own registered, target-local compilation exception.
 # `softpc.new/obj.vdm/cdefine.inc` selects CCPU's generated C video-memory
-# backend through C_VID for both the historical x86 and non-x86 CCPU paths.
-# Without that original configuration carrier cvidc's generated glue is
-# compiled out, leaving artificial same-package forced-link misses.
-$baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DANSI /DPROD ' +
+# backend and V7 VGA firmware profile for the non-V86 CPU40 configuration.
+# The selected CCPU40 product has no hardware-V86 route, so it retains those
+# original carriers on both host-width rows. This selects the byte-exact
+# `v7vga.rom` package already retained by mvdm-softpc-firmware rather than
+# fabricating an unavailable `vga.rom` alias.
+$baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' +
     ''
 $baseFlags = $baseCommonFlags + ($includeRoots -join ' ') + ' ' + $gdpGeneratedInclude
