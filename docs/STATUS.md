@@ -206,6 +206,15 @@ machine/media and complete CCPU-table assembly; follow-up work proceeds by
 those owner clusters, not by changing observers. See [P21
 evidence](etc/evidence/m0-t318-s2-p21-fixed-console-startup-baseline-001.md).
 
+**S2 P22:** the P21 stage path itself exceeded the original 64-byte VDM current
+directory contract, so its app-side command declaration correctly returned
+`69`. A same-media, short-path formal stage now keeps the P21 observer,
+arguments, console ownership and timeout fixed; it reaches the original host
+path and reproducibly exits `0xC0000005` without debugging. CCPU/C-VID vector
+composition is the next complete owner-contract audit; no NTIO, NTDOS, EXEC or
+parent-return claim is made. See [P22
+evidence](etc/evidence/m0-t318-s2-p22-fixed-container-admission-and-ccpu-fault-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
