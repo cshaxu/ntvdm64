@@ -29,7 +29,13 @@
 **S1 P1 baseline:** [the original Redirector owner/binding baseline](etc/evidence/m0-t324-s1-original-redirector-owner-binding-baseline-001.md)
 preserves all 16 original VDMREDIR source units as one owner family, separates
 the local file/pipe cohort from VDD/device/RAP boundaries, and identifies the
-already-selected but not-yet-mirrored byte-identical `ntstatus.c` slice.
+already-selected byte-identical `ntstatus.c` slice, now complete in
+`opennt-host`.
+
+**S1 P2:** [the Redirector source-unit disposition ledger](etc/evidence/m0-t324-s1-redirector-unit-disposition-ledger-001.md)
+now records every original unit, the COMMAND caller and the selected external
+status source. It distinguishes the bounded local cohort from explicit
+VDD/DLC/NetBIOS/RAP transfers without enabling a 57:xx leaf.
 
 ### M0 T323 S1 — Original DPMI/DPMI32 owner and boundary baseline
 
