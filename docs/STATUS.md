@@ -375,6 +375,13 @@ CPU40/SAS support; no opcode, mapping or adapter repair is justified before
 the existing `0x50:0x11 -> demLoadDos` crossing.  See [P43
 evidence](etc/evidence/m0-t318-s2-p43-ntio-entry-cpu40-instruction-contract-audit-001.md).
 
+**S2 P44:** the first post-load `NTIO -> NTDOS sysinit` cohort is source/build
+closed: original BIOS `0x12` and `0x15/AH=88h` memory paths plus DEM `0x0D`
+boot-drive service are selected and linked with their original ownership.
+The next continuity cohort is guest-owned NTDOS `DOSINIT`/configuration, not
+a missing app, mapper or BOP provider.  See [P44
+evidence](etc/evidence/m0-t318-s2-p44-ntio-ntdos-postload-owner-cohort-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
