@@ -28,6 +28,12 @@
 
 **S1 plan:** [the NetAPI/RAP Redirector network-boundary proposal](etc/operations/proposal-netapi-rap-redirector-network-boundary-recovery-001.md) is the binding package plan. S1 first turns its complete original cohort into a physical caller/ABI/lifetime/failure ledger; no implementation is selected by a trace or one convenient API.
 
+**S1 P1:** [the NetAPI/RAP physical-boundary baseline](etc/evidence/m0-t325-s1-netapi-rap-physical-boundary-baseline-001.md)
+and its [18-row physical-edge ledger](etc/operations/m0-t325-s1-netapi-rap-physical-edge-ledger.tsv)
+separate the bounded public `NetWksta*`/`NetApiBufferFree` candidates and the
+selected original `ntstatus.c` mapper from every Xactsrv/Rx/SMB-RAP protocol
+edge. No host-side API is yet claimed guest-network equivalent.
+
 ### M0 T324 S1 — Original Redirector owner and boundary baseline
 
 **Closed: M0 T324 S1**
