@@ -35,6 +35,10 @@
 /* DIVERGENCE(MVDM-HOST-DIV-048): the selected generated GDP names remain
  * unchanged; native-width private slot storage is supplied by the overlay. */
 #include <mvdm_gdp_slots.h>
+/* DIVERGENCE(MVDM-HOST-DIV-156): the retained source tree lacks the historical
+ * product-generated CCPU/C-VID vector binder; invoke its private same-shaped
+ * replacement at this original C-VID setup point. */
+#include <mvdm_cvidc_vector_binding.h>
 
 #undef FORWARDS		/* all these redefined in EDL code */
 #undef BACKWARDS
@@ -773,6 +777,7 @@ OUTPUT: None.
 GLOBAL void
 setup_vga_globals IFN0()
 {
+	mvdm_cvidc_bind_vectors();
 	EGA_CPU.globals = &(GLOBAL_VGAGlobals);
         GLOBAL_SubrRingLowIncl = &SubrRingBuffer[0];
         GLOBAL_SubrRingHighIncl = GLOBAL_SubrRingLowIncl + (SUBRRINGBUFFERSIZE-1

@@ -519,6 +519,9 @@ $cvidcObjects = foreach ($name in $cvidcNames) {
 $gdpOverlaySource = Join-Path $gdpOverlayRoot 'mvdm_gdp_state.c'
 $graph.Add('build obj/cvidc/mvdm_gdp_state.obj: cc ' + (NinjaPath $gdpOverlaySource))
 $cvidcObjects += 'obj/cvidc/mvdm_gdp_state.obj'
+$cvidcVectorBindingSource = Join-Path $gdpOverlayRoot 'mvdm_cvidc_vector_binding.c'
+$graph.Add('build obj/cvidc/mvdm_cvidc_vector_binding.obj: cc ' + (NinjaPath $cvidcVectorBindingSource))
+$cvidcObjects += 'obj/cvidc/mvdm_cvidc_vector_binding.obj'
 $commsObjects = foreach ($name in $commsNames) {
     $object = 'obj/comms/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $commsRoot $name)))

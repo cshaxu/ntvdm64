@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3438 |
+| Documentation records | 3439 |
 | --- | --- |
-| Generated UTC | 2026-08-31T04:18:35Z |
+| Generated UTC | 2026-08-31T04:33:32Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 63d9d8b631c390cc0bfe30cb05448782eba691d1337fd3933488c77dc1db1702 |
+| STATUS.md | principal control document | 1714bdf8f9490575f609ca9c0f0064b292cf1a20ae3e3c4bcc229bbfe76aeb4d |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -938,6 +938,7 @@ content-divergent entries.
 | etc/evidence/m0-t318-s2-p15-current-package-staging-and-startup-observation-001.md | indexed supporting material | 4bd40130784d22e958dc8eeb03b54946989e407f65dca66d4efe32408765b557 |
 | etc/evidence/m0-t318-s2-p16-original-x86-gdp-carrier-restoration-001.md | indexed supporting material | 39b4d4fd0bfacc064c9d8be08f75ae719b7a74a8d63580eb0c88cbe9157beb2e |
 | etc/evidence/m0-t318-s2-p17-incremental-gdp-generator-001.md | indexed supporting material | ecdb92fdc43aec25eb18f31ec5ee60f569604b30b1f65e8c2875109abf8bd5ef |
+| etc/evidence/m0-t318-s2-p18-cvidc-vector-assembly-closure-001.md | indexed supporting material | 7b07eb9b9fd85be7b3c8880e80458ec3188aaea3c2e47e7578ea2f3276ce1595 |
 | etc/evidence/m0-t318-s2-p2-original-dem-media-root-001.md | indexed supporting material | 5cfc748024d879b5e5c970d65b3b5d7d80f251a50538d3ab58122b99a3226113 |
 | etc/evidence/m0-t318-s2-p3-dual-width-normal-link-boundary-001.md | indexed supporting material | d3e76724e741499cdbea8406f8aa136f7cfaa5b1b4ddefc95d87eb4659b2cff5 |
 | etc/evidence/m0-t318-s2-p4-original-resource-and-startup-contract-001.md | indexed supporting material | 688539591b39b3e0bfa95a29ee62ae2d6d258bda78b01f3f0fec719186e32c92 |

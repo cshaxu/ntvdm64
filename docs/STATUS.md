@@ -173,6 +173,13 @@ x86 parallel formal product rebuild completed 215 actions and a second
 configure plus dry-run reported `ninja: no work to do`; source selection and
 compiler flags are unchanged. See [P17 evidence](etc/evidence/m0-t318-s2-p17-incremental-gdp-generator-001.md).
 
+**S2 P18:** the selected CCPU carrier now binds its original `Cpu` state to
+the complete generated original C-VID table at C-VID's existing setup point.
+The formal x86/x64 product links pass, and the former x86 VGA null transfer is
+gone: a real-console observation instead reaches a later original
+“This function is not supported on this system” dialog. This is C-VID assembly
+closure, not an NTDOS/EXEC claim. See [P18 evidence](etc/evidence/m0-t318-s2-p18-cvidc-vector-assembly-closure-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
