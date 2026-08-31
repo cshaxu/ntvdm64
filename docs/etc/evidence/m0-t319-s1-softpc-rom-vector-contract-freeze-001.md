@@ -61,6 +61,10 @@ loader and must not fabricate a vector or successful wait.
 After that source-shaped ROM residency proof, a fixed-container run may
 attribute the next reached condition to the original FDC/PIC/interrupt path.
 
+Successor: [S2 P1](m0-t319-s2-p1-original-rom-loader-selection-001.md)
+established that the same-shaped binding is unnecessary: the existing
+original generic `rom_init()` body is directly composable and takes priority.
+
 ## Confidence and follow-up
 
 High confidence that the first missing source-shaped prerequisite is ROM

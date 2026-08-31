@@ -280,7 +280,13 @@ GLOBAL void read_video_rom IFN0()
 
 GLOBAL void rom_init IFN0()
 {
-#if !defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) )
+#if !defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) ) || defined(MVDM_SOFTPC_RECOVER_ROM_RESIDENCY)
+	/* DIVERGENCE(MVDM-HOST-DIV-165): the historical NTVDM+X86GFX branch
+	 * expected the retired kernel-VDM product shell to make BIOS ROMs resident
+	 * before this function.  The retained original generic body already has
+	 * the required host_find_file -> host_read_resource -> SAS RAM -> SAS ROM
+	 * sequence.  Select that unchanged body for the modern CPU40 product
+	 * instead of replacing it with a second firmware loader. */
 	 /*
      * Fill up all of ROM (Intel C0000 upwards) with bad op-codes.
      * This is the Expansion ROM and the BIOS ROM.

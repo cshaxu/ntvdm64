@@ -492,6 +492,13 @@ $keymouseObjects = foreach ($name in $keymouseNames) {
 $systemObjects = foreach ($name in $systemNames) {
     $object = 'obj/system/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $systemRoot $name)))
+    if ($name -eq 'rom.c') {
+        # The original generic ROM-loader body is selected only for this
+        # translation unit.  NT4 kernel VDM used a pre-resident-ROM product
+        # shell for NTVDM+X86GFX; the current product instead retains the
+        # original host resource and SAS copy contract (DIV-165).
+        $graph.Add('  cflags = ' + $baseFlags + ' /DMVDM_SOFTPC_RECOVER_ROM_RESIDENCY')
+    }
     $object
 }
 $disksObjects = foreach ($name in $disksNames) {
