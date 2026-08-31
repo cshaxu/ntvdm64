@@ -80,7 +80,9 @@ every owner cohort has a result. Trace cannot choose a new leaf repair.
 
 Every original table row and direct provider dependency has one source-shaped
 implementation, exact unavailable result or named successor owner.  Both
-MSVC x86 and x64 final product graphs link without `/FORCE`.  Runtime claims
-are limited to observed complete cohorts; no raw host handle/pointer crosses a
-guest boundary, no CPU30/Bochs route or `src.old` input exists, and no
-Redirector-local mapping manager or duplicate COMMAND broker is added.
+MSVC x86 and x64 selected source/product graphs link without `/FORCE`; the
+separate original DLL is built only after its NetBIOS/DLC/VDD/RAP owner
+predecessors have a complete disposition.  Runtime claims are limited to
+observed complete cohorts; no raw host handle/pointer crosses a guest boundary,
+no CPU30/Bochs route or `src.old` input exists, and no Redirector-local mapping
+manager or duplicate COMMAND broker is added.

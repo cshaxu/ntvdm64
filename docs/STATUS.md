@@ -4,24 +4,21 @@
 
 ## Active Packet
 
-### M0 T333 S6 — Redirector package reconciliation, original DLL product and bounded observation
+**No active M/T/S packet.** M0 T333 is closed below; the next queue admission
+must begin the NetAPI/RAP Redirector network-boundary package from its retained
+source and T333/S5 ledger.
 
-**Active: M0 T333 S6**
+### M0 T333 — Redirector owner package closure
+
+**Closed: M0 T333**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T333 S6; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | S5 network/assignment disposition is closed under the owner-approved T333 plan; S6 is its sequential whole-package reconciliation and bounded product work. |
-| Objective | Reconcile all original Redirector table rows and direct consumers, establish whether the original DLL product can now use a narrow loader ABI bridge, and run only the declared fixed observation after package ownership is complete. |
-| Non-goals | No trace-selected `57:xx` work, source-derived Redirector policy, raw host handle or pointer, second COMMAND broker, kernel VDM/CSRSS/RAP/DLC driver reconstruction, CPU30/Bochs route, or `src.old` input. |
-| Reference Baseline | [S1 source/ABI admission](etc/evidence/m0-t333-s1-original-redirector-source-abi-admission-001.md), its [row ledger](etc/operations/m0-t333-s1-redirector-source-abi-admission-ledger.tsv), and [S2 form admission](etc/evidence/m0-t333-s2-redirector-external-form-admission-001.md). |
-| Files And ABI Surface | Complete `vdmredir/sources` package, original `.def`/entry, S1 row ledger, S2 form ledger, S3 dependency probe, S4/S5 evidence, DEM/COMMAND direct consumers and formal x86/x64 product graphs. |
-| Verification | All-ledger reconciliation; source/adapter/reference scan; non-`/FORCE` DLL product probe with only a narrow loader-ABI bridge if still required; paired formal builds; one fixed observation only if the product link has a complete owner disposition. |
-| Exit Criteria | Every original Redirector entry and direct dependency has one source-shaped implementation, exact unavailable result or named successor; any final DLL bridge is selector-blind and loader-only; no retired overlay route or duplicate broker remains. |
-| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
-| Similar-Issue Sweep | Named pipes, mailslots, handle/token width, guest copied spans, async completion, DEM/COMMAND stream lifecycle, NetAPI/RAP, NetBIOS/DLC, VDD/window/monitor state, x86/x64 source selection and original failure directions. |
+| Result | Complete original package selection and dispatch disposition; formal x86/x64 static source graphs; source-owned local cohorts; exact unsupported branches; named owner transfers for BaseSrv/RAP, NetBIOS, DLC and VDD. |
+| DLL Decision | No false DllMain bridge: original attach would immediately enter unresolved NetBIOS/DLC/VDD initialization. The original deferred `LoadVdmRedir` failure remains the correct current product behavior. |
+| Evidence | [S6 package reconciliation](etc/evidence/m0-t333-s6-redirector-package-reconciliation-001.md), with S1/S2/S3/S4/S5 ledgers and evidence retained below. |
 
-**Plan:** [M0 T333 original Redirector recovery](etc/operations/m0-t333-redirector-owner-package-recovery-plan-001.md). **S1 closed:** [source/ABI admission evidence](etc/evidence/m0-t333-s1-original-redirector-source-abi-admission-001.md) and its [row ledger](etc/operations/m0-t333-s1-redirector-source-abi-admission-ledger.tsv). **S2 closed:** [external-form admission](etc/evidence/m0-t333-s2-redirector-external-form-admission-001.md) and its [disposition ledger](etc/operations/m0-t333-s2-redirector-external-form-disposition-ledger.tsv). **S3 closed:** complete source selection/build and the original DLL dependency boundary are recorded below. **S4 closed:** [mailslot and asynchronous adapter composition](etc/evidence/m0-t333-s4-redirector-async-adapter-composition-001.md) moves the durable copied-span seam to the Redirector adapter without changing the original queue/ICA owner. **S5 closed:** [network and assignment disposition](etc/evidence/m0-t333-s5-redirector-network-assignment-disposition-001.md) closes every remaining network row as direct, exact original unavailable, or a named owner-package transfer. S6 now reconciles the final package/DLL product boundary.
+**Plan:** [M0 T333 original Redirector recovery](etc/operations/m0-t333-redirector-owner-package-recovery-plan-001.md). **S1 closed:** [source/ABI admission evidence](etc/evidence/m0-t333-s1-original-redirector-source-abi-admission-001.md) and its [row ledger](etc/operations/m0-t333-s1-redirector-source-abi-admission-ledger.tsv). **S2 closed:** [external-form admission](etc/evidence/m0-t333-s2-redirector-external-form-admission-001.md) and its [disposition ledger](etc/operations/m0-t333-s2-redirector-external-form-disposition-ledger.tsv). **S3 closed:** complete source selection/build and the original DLL dependency boundary are recorded below. **S4 closed:** [mailslot and asynchronous adapter composition](etc/evidence/m0-t333-s4-redirector-async-adapter-composition-001.md) moves the durable copied-span seam to the Redirector adapter without changing the original queue/ICA owner. **S5 closed:** [network and assignment disposition](etc/evidence/m0-t333-s5-redirector-network-assignment-disposition-001.md) closes every remaining network row as direct, exact original unavailable, or a named owner-package transfer. **S6 closed:** [package reconciliation](etc/evidence/m0-t333-s6-redirector-package-reconciliation-001.md) retains original dynamic-load failure until the named network/VDD owner packages close.
 
 **S3 P1:** [the paired original synchronous-source build](etc/evidence/m0-t333-s3-p1-redirector-synchronous-source-build-001.md) retains the initial narrow-cohort evidence. **S3 P2:** [the complete original-package build and lifecycle correction](etc/evidence/m0-t333-s3-p2-complete-redirector-package-build-001.md) supersedes its package-selection conclusion: every original `vdmredir/sources` unit now compiles into `original-mvdm-redir.lib` on x86 and x64. `VDDInstallUserHook` itself is an already-selected original SoftPC body; the remaining lifecycle predecessor is the original `VDMREDIR.DLL` entry/load composition, with NetBIOS/DLC behavior still not enabled.
 
