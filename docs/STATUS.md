@@ -4,9 +4,29 @@
 
 ## Active Packet
 
-**No active M/T/S packet.** M0 T333 is closed below; the next queue admission
-must begin the NetAPI/RAP Redirector network-boundary package from its retained
-source and T333/S5 ledger.
+### M0 T334 S1 — NetAPI/RAP Redirector physical boundary rebaseline
+
+**Active: M0 T334 S1**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T334 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Owner's standing direction to execute the ordered queue, following T333 closure; T333/S5 transfers are the binding predecessor. |
+| Objective | Produce one complete, physical source/ABI/lifetime/failure ledger for the original NetAPI/RAP Redirector cohort, before selecting any modern public binding or changing recovered source. |
+| Non-goals | No SMB/RAP/NetBIOS/DLC/VDD/RPC/CSRSS recreation; no remote guest-network success; no trace-selected `57:xx` leaf; no new mapping manager, raw host identity, guest edit, or generic adapter. |
+| Reference Baseline | T333/S5 disposition ledger and reconciliation evidence; original `mvdm-host/vdmredir/vrnetapi.c`, `vrremote.c`, `cmdredir.c`, `vdmredir.h`; selected original `opennt-host/netapi/netlib/ntstatus.c`. |
+| Files And ABI Surface | Reached callers, declarations, NetAPI/RAP forms, `ntstatus.c` conversion, NetAPI allocation/free ownership, `ES:DI` guest writes, adapter Redirector/Win32 and session lease surfaces. |
+| Applicable Rules | `docs/rules/EXECUTION.md`, source policy, architecture/coding rules, mirror-component rules and T333 owner-transfer evidence. |
+| Verification | Original declaration/definition/caller review; every physical exit ledgered; source-selection/build-input review; documentation governance and `git diff --check`. |
+| Expected Markers | Each physical external edge has an original owner, caller, ABI/layout, lifetime, failure behavior and one of direct, adapter-backed, unavailable, or named owner-transfer dispositions. |
+| Asset Needs | Current OpenNT mirrors, selected source graph, current adapter/session sources; no external network service, guest-media change, host installation or kernel facility. |
+| Reporting Requirements | Record runnable public bindings separately from source-shaped unavailable RAP/remote forms; state that source/link closure does not claim guest-network execution. |
+| Stop Conditions | Any need for project-authored SMB/RAP, private RPC/CSRSS/kernel recreation, a family-private mapper, raw pointer/handle transfer, or an unreviewed OpenNT import pauses for re-admission. |
+| Exit Criteria | A reviewed physical ledger and recovery-rung decision for every reached interface, sufficient to admit only the bounded binding cohort of S2. |
+| Original Owner Request | Continue the queue in single-person dual-role mode, retain source-mirror minimal divergence, and use source-shaped adapters rather than additive provider rewrites. |
+| Similar-Issue Sweep | Workstation/user/computer forms, downlevel `XsNet*` and `Rx*` calls, `NetApiBufferFree`, status maps, guest buffers, mapping leases, disabled outcomes and NetBIOS/DLC/VDD transfers. |
+
+**Plan:** [M0 T334 NetAPI/RAP Redirector recovery](etc/operations/m0-t334-netapi-rap-redirector-network-boundary-plan-001.md). **S1 active:** physical boundary rebaseline only; no provider implementation is admitted yet.
 
 ### M0 T333 — Redirector owner package closure
 
