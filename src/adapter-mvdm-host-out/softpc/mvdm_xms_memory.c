@@ -14,20 +14,29 @@ static uint32_t mvdm_xms_read_u32(uint8_t const *bytes)
         ((uint32_t)bytes[2] << 16) | ((uint32_t)bytes[3] << 24);
 }
 
-static int mvdm_xms_copy_forward(session *owner, uint32_t destination,
+static int mvdm_xms_copy(session *owner, uint32_t destination,
     uint32_t source, uint32_t byte_count)
 {
     uint8_t bytes[MVDM_XMS_MOVE_CHUNK_BYTES];
-    uint32_t offset = 0u;
+    uint32_t remaining = byte_count;
 
-    while (offset < byte_count) {
+    /* The original x86 backends call RtlMoveMemory(destination, source,
+       count).  A session lease is bounded, so preserve that overlap contract
+       explicitly when a transfer spans more than one lease-sized chunk. */
+    while (remaining != 0u) {
         guest_memory_lease *source_lease;
         guest_memory_lease *destination_lease;
         uint8_t *source_bytes;
         uint8_t *destination_bytes;
-        uint32_t chunk = byte_count - offset;
+        uint32_t chunk = remaining;
+        uint32_t offset;
 
         if (chunk > (uint32_t)sizeof(bytes)) chunk = (uint32_t)sizeof(bytes);
+        if (destination > source && destination - source < byte_count) {
+            offset = remaining - chunk;
+        } else {
+            offset = byte_count - remaining;
+        }
         if (!session_guest_memory_acquire(owner, source + offset, chunk,
             GUEST_MEMORY_ACCESS_READ, &source_lease, &source_bytes)) return 0;
         memcpy(bytes, source_bytes, chunk);
@@ -37,7 +46,7 @@ static int mvdm_xms_copy_forward(session *owner, uint32_t destination,
             &destination_bytes)) return 0;
         memcpy(destination_bytes, bytes, chunk);
         if (!session_guest_memory_release(owner, destination_lease, 1)) return 0;
-        offset += chunk;
+        remaining -= chunk;
     }
     return 1;
 }
@@ -87,7 +96,7 @@ VOID xmsMoveMemory(ULONG destination, ULONG source, ULONG byte_count)
 
     if (owner == NULL || byte_count > UINT32_MAX - source ||
         byte_count > UINT32_MAX - destination ||
-        !mvdm_xms_copy_forward(owner, destination, source, byte_count)) {
+        !mvdm_xms_copy(owner, destination, source, byte_count)) {
         if (owner != NULL) (void)session_request_cancellation(owner,
             SESSION_CANCELLATION_REQUESTED);
     }
@@ -126,7 +135,7 @@ int mvdm_xms_move_block(uint16_t stack_segment, uint16_t stack_offset)
     byte_count = word_count * 2u;
     if (byte_count > UINT32_MAX - source ||
         byte_count > UINT32_MAX - destination ||
-        !mvdm_xms_copy_forward(owner, destination, source, byte_count)) {
+        !mvdm_xms_copy(owner, destination, source, byte_count)) {
         (void)session_request_cancellation(owner, SESSION_CANCELLATION_REQUESTED);
         return 0;
     }

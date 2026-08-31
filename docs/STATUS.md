@@ -4,6 +4,9 @@
 
 ## Active Packet
 
+**No active M/T/S packet.** M0 T322 is closed; the next admission is the
+ordered DPMI/DPMI32 owner package in [QUEUE.md](QUEUE.md).
+
 ### M0 T322 S1 — Original XMS ownership and memory-binding baseline
 
 **Closed: M0 T322 S1**
@@ -33,7 +36,7 @@ binding.  It does not claim UMB/INT15 runtime completion.
 
 ### M0 T322 S2 — XMS dispatcher and mapped-memory package checks
 
-**Active: M0 T322 S2**
+**Closed: M0 T322 S2**
 
 | Field | Record |
 | --- | --- |
@@ -49,6 +52,21 @@ binding.  It does not claim UMB/INT15 runtime completion.
 | Exit Criteria | Checked source-shaped XMS memory/dispatcher closure or an exact UMB/INT15 owner transfer. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | Move overlap/direction, invalid descriptor, stale session, A20 state, UMB no-space and INT15 hook edges. |
+
+**S2 P1:** [the original XMS static build](etc/evidence/m0-t322-s2-original-xms-static-build-001.md)
+compiled all six original common units together with the selected same-shaped
+memory callback binding. It did not claim a dispatcher or runtime result.
+
+**S2 P2 / S2 closed:** [the dispatcher and mapped-memory checks](etc/evidence/m0-t322-s2-xms-dispatcher-mapped-memory-checks-001.md)
+retain the original dispatcher table and callback order, prove the shared
+session lease binding on x86 and x64 (including a cross-lease overlap move and
+negative descriptor), and relink both selected products. UMB/INT15 hardware
+delivery remains the pre-existing named CPU40/SAS/ICA owner transfer; no
+synthetic completion was added.
+
+**Closed: M0 T322.** The original XMS owner package has its common source,
+dispatcher, and only required guest-address adapter closure. This closure is
+local source/ABI evidence, not a claim of guest-wide XMS runtime completion.
 ### M0 T321 S1 — Vertical-slice ownership and bypass baseline
 
 **Closed: M0 T321 S1**
