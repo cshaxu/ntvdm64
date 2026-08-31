@@ -404,6 +404,14 @@ COMMAND and optional AUTOEXEC payloads.  This is one media/path owner repair,
 not a BOP series; no second observation of the P46 EXE is admissible.  See
 [P47 evidence](etc/evidence/m0-t318-s2-p47-original-configuration-media-dependency-cohort-001.md).
 
+**S2 P48:** the whole selected CONFIG/AUTOEXEC system-media cohort is now
+source/build closed: original `cmdconf` uses the existing selected DOS-media
+root binding, the immutable stage carries the original COUNTRY/HIMEM/COMMAND
+payload plus established REDIR/DOSX artifacts, and x86/x64 products link.
+One new x86 stage times out rather than reproducing the old immediate terminal;
+it remains liveness only.  See [P48
+evidence](etc/evidence/m0-t318-s2-p48-original-configuration-system-media-closure-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |

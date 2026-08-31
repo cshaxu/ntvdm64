@@ -10,6 +10,11 @@ const requiredAssets = [
   ['src/mvdm-guest/dos/v86/cmd/command/COMMAND.COM', 'dos/COMMAND.COM'],
   ['src/mvdm-guest/bin86/config.nt', 'dos/config.nt'],
   ['src/mvdm-guest/bin86/autoexec.nt', 'dos/autoexec.nt'],
+  ['src/mvdm-guest/dos/v86/cmd/command/COMMAND.COM', 'dos/system32/COMMAND.COM'],
+  ['src/mvdm-guest/dos/v86/dev/country/COUNTRY.SYS', 'dos/system32/COUNTRY.SYS'],
+  ['src/mvdm-guest/dos/v86/dev/himem/HIMEM.SYS', 'dos/system32/HIMEM.SYS'],
+  ['build/output/dos/REDIR.EXE', 'dos/system32/REDIR.EXE'],
+  ['build/output/dos/DOSX.EXE', 'dos/system32/DOSX.EXE'],
   ['src/mvdm-softpc-firmware/softpc.new/roms/bios1.rom', 'softpc/roms/bios1.rom'],
   ['src/mvdm-softpc-firmware/softpc.new/roms/bios2.rom', 'softpc/roms/bios2.rom'],
   ['src/mvdm-softpc-firmware/softpc.new/roms/bios4.rom', 'softpc/roms/bios4.rom'],
@@ -44,6 +49,7 @@ if (!existsSync(executablePath)) throw new Error(`product executable does not ex
 if (existsSync(outputPath)) throw new Error(`refusing to overwrite runtime package: ${outputPath}`);
 
 mkdirSync(join(outputPath, 'dos'), { recursive: true });
+mkdirSync(join(outputPath, 'dos', 'system32'), { recursive: true });
 mkdirSync(join(outputPath, 'softpc', 'roms'), { recursive: true });
 const manifest = [];
 function stage(source, destination) {
