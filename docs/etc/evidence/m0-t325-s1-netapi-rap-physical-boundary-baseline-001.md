@@ -37,3 +37,15 @@ call groups and gives each exactly one source-first disposition. It proves
 that the next recovery S can concentrate on the bounded public workstation
 query bindings and original status mapping without importing an SMB/RAP stack
 or silently expanding into NetBIOS, DLC, VDD, RPC, CSRSS or kernel facilities.
+
+## Current Binding Correction
+
+Historical T290 fixtures showed `VrGetComputerName` and bounded
+`VrGetUserName(BX=1)` on both architectures, but they used the now-retired
+`mvdm_redirector_pointer_scope` experiment. They are historical evidence, not
+the current production binding. The retained original bodies remain valid
+recovery candidates; the next S must invoke them only through the existing
+`mvdm_guest_location` synchronous lease API at their actual `ES:DI` crossing.
+That preserves the real-mode numeric address and uses the session's existing
+guest-memory mapping manager without reviving a Redirector-private mapper or
+pointer-scope lifecycle.
