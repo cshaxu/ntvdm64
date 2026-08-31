@@ -52,7 +52,7 @@ build/M0-T318/S2/cpu40-v7vga-r4/run-ninja-parallel.cmd original-softpc-process.e
 build/M0-T318/S2/cpu40-v7vga-r4-x64/run-ninja-parallel.cmd original-softpc-process.exe
 ```
 
-A fresh debugger-neutral, console-owning x86 observation of the staged
+A fresh console-owning, debugger-attached x86 observation of the staged
 product remained alive for the bounded interval and consumed 2859 ms CPU;
 the previous error dialog was absent:
 
@@ -67,7 +67,8 @@ It does not establish NTIO, NTDOS, guest `EXEC`, parent restoration, or
 
 ## Disposition
 
-The P18-to-P19 startup blocker is closed for the selected windowed CPU40
-profile.  Fullscreen Console Server protocol remains a separately explicit
-host-capability boundary; the next runtime observation must classify the next
-original stop without extending the console adapter beyond this contract.
+The P18-to-P19 startup blocker is closed for source/build composition and is
+absent from this debugger-attached observation.  Fullscreen Console Server
+protocol remains a separately explicit host-capability boundary. A
+non-debug, console-owning observation remains required before claiming this
+runtime symptom is absent in the ordinary product process.

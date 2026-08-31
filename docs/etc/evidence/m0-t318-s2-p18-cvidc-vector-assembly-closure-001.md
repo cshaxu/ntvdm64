@@ -47,7 +47,7 @@ build/M0-T318/S2/cpu40-v7vga-r4-x64/run-ninja-parallel.cmd original-softpc-proce
 The rebuild touched only the affected CCPU carrier, C-VID glue/binder and
 their archives before relinking.
 
-A real-console, debugger-neutral x86 observation of the staged package no
+A console-owning, debugger-attached x86 observation of the staged package no
 longer exits with the prior `0xC0000005` null transfer.  Its bounded report
 instead reaches the original `16 bit MS-DOS Subsystem` error dialog:
 
@@ -59,6 +59,7 @@ Terminate / Retry / Ignore
 ## Disposition
 
 The CCPU/C-VID table assembly prerequisite is closed for compile/link and its
-former null-transfer symptom is removed in the x86 observation.  The newly
+former null-transfer symptom is removed in this debugger-attached x86
+observation.  The newly
 reached original host-capability error is not attributed here and does not
 prove NTIO, NTDOS, child `EXEC`, or parent return.
