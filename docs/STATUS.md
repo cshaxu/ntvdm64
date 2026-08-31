@@ -451,6 +451,15 @@ It introduces no local terminal or private-transport gap before NTIO entry;
 no unchanged product is rerun.  See [P53
 evidence](etc/evidence/m0-t318-s2-p53-original-configuration-owner-cohort-001.md).
 
+**S2 P54:** the selected first NTIO host transaction is source-closed as one
+original owner cohort: `50h:11h → MS_bop_0 → DemDispatch → demLoadDos` retains
+the original SAS destination, NTDOS filename and read-loop contract, while the
+already-selected DOS-media binding supplies its sole modern path seam. Formal
+dependency records confirm the original SoftPC/Sim32 headers, not a redirector
+pointer-scope header. This is not runtime reachability evidence; the fixed
+container may run only after a separately justified new product repair. See
+[P54 evidence](etc/evidence/m0-t318-s2-p54-ntio-demload-dos-owner-closure-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
