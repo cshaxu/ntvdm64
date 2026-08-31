@@ -444,6 +444,13 @@ both ordinary DOS and WOW configurations.  No mapper/profile/source change or
 unchanged-product observation is admitted.  See [P52
 evidence](etc/evidence/m0-t318-s2-p52-original-xms-configuration-prerequisite-001.md).
 
+**S2 P53:** the whole original `config()` cohort—Base VDM PIF request,
+no-PIF defaults, PIF console policy, SAS/CPU40 state, ROM/BIOS mapping, UMB
+list and runtime setup—is source-audited for the fixed ordinary-child profile.
+It introduces no local terminal or private-transport gap before NTIO entry;
+no unchanged product is rerun.  See [P53
+evidence](etc/evidence/m0-t318-s2-p53-original-configuration-owner-cohort-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
