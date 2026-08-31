@@ -487,6 +487,13 @@ therefore not an app/BaseVDM synthetic exit.  It remains an unlocated original
 host/CPU branch failure and requires owner-contract audit, not BOP repair. See
 [P58 evidence](etc/evidence/m0-t318-s2-p58-top-level-exception-result-contract-001.md).
 
+**S2 P59:** the complete selected CPU40 CCPU/C-VID startup contract confirms
+that original main-thread simulation TLS and C-VID binding both precede
+`host_start_cpu`.  The generated generic C-VID vector tail has 26 explicit
+CPU40/SPC386-unavailable slots; it is a bounded future caller-capability
+cohort, not a justified first-fetch crash repair.  No BOP, mapping or observer
+path changes. See [P59 evidence](etc/evidence/m0-t318-s2-p59-cpu40-cvidc-vector-contract-audit-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
