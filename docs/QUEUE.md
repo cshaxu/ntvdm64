@@ -38,23 +38,21 @@ is retired and is neither a production route nor an acceptance row.
 
 | Order | Candidate implementation package |
 | --- | --- | --- |
-| 1 | SoftPC pre-BOP startup continuity |
-| 2 | Minimal DOS guest execution and controlled return |
-| 3 | Minimal vertical-slice integration closure |
-| 4 | XMS owner package |
-| 5 | DPMI/DPMI32 owner package |
-| 6 | Redirector owner package (including the selected `netstatus.c` mirror slice) |
-| 7 | NetAPI/RAP Redirector network-boundary package |
-| 8 | WOW32/Win16 owner package |
-| 9 | VDD owner package |
-| 10 | Debugger/BDE/FAX owner packages |
-| 11 | Service-package cross-family closure and native integration evidence |
-| 12 | Broker process and cross-process coordination |
-| 13 | In-process multi-session reentrancy audit |
-| 14 | Host capability expansion |
-| 15 | SoftPC graphics presentation window and Alt+Enter transition |
-| 16 | Guest DOS/WOW16 artifact matrix |
-| 17 | Product release closure |
+| 1 | Minimal vertical-slice integration closure |
+| 2 | XMS owner package |
+| 3 | DPMI/DPMI32 owner package |
+| 4 | Redirector owner package (including the selected `netstatus.c` mirror slice) |
+| 5 | NetAPI/RAP Redirector network-boundary package |
+| 6 | WOW32/Win16 owner package |
+| 7 | VDD owner package |
+| 8 | Debugger/BDE/FAX owner packages |
+| 9 | Service-package cross-family closure and native integration evidence |
+| 10 | Broker process and cross-process coordination |
+| 11 | In-process multi-session reentrancy audit |
+| 12 | Host capability expansion |
+| 13 | SoftPC graphics presentation window and Alt+Enter transition |
+| 14 | Guest DOS/WOW16 artifact matrix |
+| 15 | Product release closure |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

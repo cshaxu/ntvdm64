@@ -90,7 +90,7 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     if (!make_path(declaration->application, sizeof(declaration->application),
             root, "COMMAND.COM") ||
         !append_text(declaration->command, sizeof(declaration->command),
-            &command_length, "/C VER\r\n") ||
+        &command_length, "/C EXIT\r\n") ||
         !append_text(declaration->environment, sizeof(declaration->environment),
             &environment_length, "COMSPEC=") ||
         !append_text(declaration->environment, sizeof(declaration->environment),

@@ -4,40 +4,36 @@
 
 ## Active Packet
 
-### M0 T327 S3 — Declared DOS program and controlled return
+### M0 T328 S1 — Original FDC/INT15 wait-continuation contract
 
-**Active: M0 T327 S3**
+**Active: M0 T328 S1**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T327 S3; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | Queue candidate 2, admitted under the standing owner direction to execute the ordered queue. |
-| Objective | Use the existing declared original COMMAND request to establish one DOS guest execution/controlled-return boundary, or name one narrower original owner transfer. |
+| Identifier Mode | M0 T328 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 1, admitted under the standing owner direction to execute the ordered queue. |
+| Objective | Establish the complete original CPU40 FDC/INT15 wait-continuation and callback contract that follows T327's completed COMMAND configuration package. |
 | Non-goals | No BOP leaf implementation, guest-image rewrite, synthetic device result, new executor, Bochs/CPU30/MONITOR/kernel-VDM/CSRSS route, new mapper, raw native identity, WOW/VDD/debugger or product-shell redesign. |
-| Reference Baseline | T318 frozen NTDOS `EXEC`/parent-return contract; T319 ROM/termination attribution; T326 fixed-container `50:11 → demLoadDos` crossing; T327 S1 source contract and T327 S2 wait-prerequisite disposition. |
-| Files And ABI Surface | Original COMMAND `cmdGetNextCmd`/guest command continuation, BaseClient/BaseSrv copied `VDMINFO` contract, original NTDOS `EXEC`/return path, CPU40 execution return and fixed observer. |
+| Reference Baseline | T319 ROM/termination attribution; T326 fixed pre-BOP cut; T327 source-defined COMMAND configuration transfer and paired formal links. |
+| Files And ABI Surface | Original CPU40 `wait_int`, FDC/INT15 callbacks and function-pointer slots, `c_cpu_unsimulate`/CCPU return, selected original machine bindings, fixed observer. |
 | Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, architecture, mapping-manager, session and paired-host build rules. |
-| Verification | Source-first declared-command/guest-return audit; paired x86/x64 product link; one unchanged-media fixed-container observation only after the complete owner cohort is ready. |
-| Expected Markers | One original declared guest-program return or one narrower named original guest/host owner transfer. |
-| Asset Needs | Existing selected MVDM mirror/media, CPU40 formal graph, fixed observer, session and adapter families; no new guest or host installation. |
-| Reporting Requirements | Record original command publication/consumption, guest transfer and return contract, branch/failure routes, changed mirror locations and exact successor owner. |
+| Verification | Ordered original source/definition/caller walk; selected source-manifest review; paired x86/x64 formal product links after a complete owner recovery; one short-root immutable-media x86 observation only then. |
+| Expected Markers | One complete callback-slot/owner map and either one source-shaped recovery cohort or one narrower named original owner transfer. |
+| Asset Needs | Existing selected MVDM mirror/media, CPU40 formal graph, short-root fixed observer, session and adapter families; no new guest or host installation. |
+| Reporting Requirements | Record original callback registration, ownership, lifetime, null/failure direction, changed mirror locations and successor owner. |
 | Stop Conditions | Need for invented guest/device success, a trace-selected BOP change, kernel/CSRSS reconstruction, persistent guest/native pointer, unreviewed source import or change outside the selected complete owner cohort pauses for re-admission. |
-| Exit Criteria | The fixed container proves the declared program's original controlled return or transfers one narrower source-defined original owner. |
+| Exit Criteria | A fixed-container original guest-result boundary or one narrow source-defined FDC/INT15/CPU40 owner transfer, with paired formal links. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
-| Similar-Issue Sweep | BaseClient/BaseSrv publication and consume, COMMAND `CMDINFO` registration, NTDOS EXEC/parent-return, CCPU return reasons, guest console/termination and the selected command's source-defined failure paths. |
+| Similar-Issue Sweep | CPU40 wait/unsimulate, FDC and INT15 callback installation, PIC/ICA completion, ROM wait vector, source-owned null callback result, and the first post-configuration return. |
 
-**S1 closed:** [the CPU40-to-guest prerequisite contract](etc/evidence/m0-t327-s1-cpu40-to-guest-prerequisite-contract-001.md)
-reconfirms the post-`demLoadDos` terminal as the original SoftPC recursive
-FDC/INT15/CPU40 cohort; it makes no guest-execution claim.
+**S1 plan:** [the minimal vertical-slice integration proposal](etc/operations/proposal-minimal-vertical-slice-integration-closure-001.md) begins with a complete original wait-continuation contract and explicitly forbids BOP-led recovery.
 
-**S2 closed:** [the CPU40 wait-prerequisite disposition](etc/evidence/m0-t327-s2-cpu40-wait-prerequisite-disposition-001.md)
-proves that the proposed ROM/KIO wait-vector/CPU40 frame repair is not
-admissible and records the repeated fixed-container transition through the
-predeclared first COMMAND request.
+### M0 T327 — Minimal DOS guest execution and controlled return
 
-**S3 plan:** [the minimal DOS guest execution and controlled-return proposal](etc/operations/proposal-minimal-dos-guest-execution-controlled-return-001.md)
-defines the bounded source-first guest-return audit and fixed-container
-verification.
+**Closed: M0 T327.** The fixed short-root container crossed original `54:0C`
+and its CONFIG.NT DEM file-operation cohort, but it did not consume the
+declared command. The next failure is the already classified original
+CPU40/FDC `wait_int` continuation. [S3 evidence](etc/evidence/m0-t327-s3-command-configuration-owner-transfer-001.md) and [closure record](history/m0-t327-minimal-dos-guest-execution-controlled-return-closure-20260831.md) preserve the exact transfer.
 
 ### M0 T326 S1 — Fixed SoftPC pre-BOP startup cut
 

@@ -30,7 +30,7 @@ Those proposed repairs are rejected.
 ## Fixed-container repetition
 
 The existing fixed observer launches the product with `-f -o
---ordinary-child`.  `app/launch_declaration.c` publishes the declared
+--ordinary-child`.  `app/launch_declaration.c` published the declared
 `COMMAND.COM /C VER` record before original entry.  The selected BaseClient
 and local BaseSrv preserve the original copied `VDMINFO` request/result and
 pending/retry split.
@@ -44,10 +44,10 @@ result=timeout (8 seconds)
 ```
 
 It did not reproduce the earlier access violation and emitted no controlled
-exception record.  The single reached `54:05` is consistent with the
-pre-published first COMMAND request being consumed; the remaining timeout is
-inside the declared guest COMMAND execution/return path, not evidence that
-the command was never supplied.
+exception record.  This observation established only that the command record
+was pre-published and that original `54:05` registration was reached.  It did
+not reach `54:01`, and therefore did not prove command consumption.  That
+question is resolved only by the later S3 configuration-package observation.
 
 Raw fixed-container report, console snapshot, and command metadata are kept
 in `artifacts/research/m0-t327-s2-cpu40-wait-diagnostic.txt{,.console.txt,.json}`.

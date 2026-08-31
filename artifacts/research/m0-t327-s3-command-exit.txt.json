@@ -1,0 +1,18 @@
+{
+  "container": "console-owning-nondebug",
+  "command": [
+    "O:\\repos.hobby\\ntvdm64\\build\\tools\\console-startup-observer.exe",
+    "O:\\repos.hobby\\ntvdm64\\build\\M0-T327\\S3\\runtime-cpu40-command-exit\\original-softpc-process.exe",
+    "O:\\repos.hobby\\ntvdm64\\build\\M0-T327\\S3\\runtime-cpu40-command-exit",
+    "O:\\repos.hobby\\ntvdm64\\artifacts\\research\\m0-t327-s3-command-exit.txt"
+  ],
+  "stageManifestSha256": "5490b9c036e88c40ad577c9b6b9605cbf3c2e5d3f8cef6d1678844afa705de4a",
+  "fixedMediaManifestSha256": "b46ad6c47e692ba3b1213dd11b9c1a9b3c686410028c3d70e172086b26b62ce2",
+  "productSource": "O:\\repos.hobby\\ntvdm64\\build\\M0-T319\\S3\\termination-x86\\original-softpc-process.exe",
+  "productStage": "O:\\repos.hobby\\ntvdm64\\build\\M0-T327\\S3\\runtime-cpu40-command-exit\\original-softpc-process.exe",
+  "productSha256": "5ebadd3510de12a7a394b79ec6c0b862ac0830ec7cabc39e95db95e81bf033fd",
+  "launcherExitCode": 0,
+  "launcherSignal": null,
+  "stdout": "",
+  "stderr": ""
+}
