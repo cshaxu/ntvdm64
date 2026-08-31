@@ -551,6 +551,13 @@ guest-execution reachability only: it makes no BOP, NTDOS, `EXEC`, or
 parent-return claim. See [P66
 evidence](etc/evidence/m0-t318-s2-p66-ntio-first-fetch-milestones-001.md).
 
+**S2 P67:** the original CPU40 BOP carrier is now observed at its existing
+`MS_bop_0` boundary without introducing a new dispatcher. The same fixed
+eight-second x86 container reaches NTIO and CCPU first fetch but not the first
+NTIO `0x50:0x11` BOP. This assigns the next audit to pre-BOP NTIO/SoftPC
+execution prerequisites, not DEM or a single BOP service. See [P67
+evidence](etc/evidence/m0-t318-s2-p67-original-bop-ingress-observation-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |

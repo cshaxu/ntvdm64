@@ -22,4 +22,9 @@ void mvdm_softpc_record_unhandled_exception(
  * state. */
 void mvdm_softpc_record_startup_milestone(const char *name);
 
+/* Fixed-container diagnostic only.  `selector` and `service` were already
+ * decoded by original MVDM code; this records them without routing them. */
+void mvdm_softpc_record_bop_dispatch(unsigned int selector,
+                                     unsigned int service);
+
 #endif

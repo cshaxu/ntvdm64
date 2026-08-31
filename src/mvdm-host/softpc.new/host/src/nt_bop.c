@@ -78,6 +78,9 @@ DATA OBJECTS      : None
 #include "nt_eoi.h"
 #include <nt_com.h>
 #include "yoda.h"
+/* DIVERGENCE(MVDM-HOST-DIV-164): fixed-container observation sink only;
+   the original selector/service routing and return sequence remain unchanged. */
+#include "mvdm_softpc_termination.h"
 
 
 /* [3.1.2 DECLARATIONS]                                                 */
@@ -150,6 +153,7 @@ void MS_bop_0(void) {
                                          1,
                                          FALSE
                                          ));
+    mvdm_softpc_record_bop_dispatch(0x50u, (unsigned int)DemCmd);
     DemDispatch( DemCmd );
     setIP((USHORT)(getIP() + 1));
 

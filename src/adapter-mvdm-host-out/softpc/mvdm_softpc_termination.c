@@ -101,3 +101,21 @@ void mvdm_softpc_record_startup_milestone(const char *name)
     (void)WriteFile(output, name, (DWORD)strlen(name), &written, NULL);
     (void)WriteFile(output, "\r\n", 2, &written, NULL);
 }
+
+void mvdm_softpc_record_bop_dispatch(unsigned int selector,
+                                     unsigned int service)
+{
+    static const char hex[] = "0123456789ABCDEF";
+    char message[] = "MVDM-BOP-DISPATCH 00:00\r\n";
+    HANDLE output;
+    DWORD written;
+
+    output = GetStdHandle(STD_ERROR_HANDLE);
+    if (output == NULL || output == INVALID_HANDLE_VALUE) return;
+    message[18] = hex[(selector >> 4) & 0x0fu];
+    message[19] = hex[selector & 0x0fu];
+    message[21] = hex[(service >> 4) & 0x0fu];
+    message[22] = hex[service & 0x0fu];
+    (void)WriteFile(output, message, (DWORD)(sizeof(message) - 1),
+                    &written, NULL);
+}

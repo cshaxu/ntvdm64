@@ -1,0 +1,18 @@
+{
+  "container": "console-owning-nondebug",
+  "command": [
+    "O:\\repos.hobby\\ntvdm64\\build\\tools\\console-startup-observer.exe",
+    "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r33-config-system-media\\original-softpc-process.exe",
+    "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r33-config-system-media",
+    "O:\\repos.hobby\\ntvdm64\\artifacts\\research\\m0-t318-s2-p67-original-bop-ingress.txt"
+  ],
+  "stageManifestSha256": "e40dd218968ddfa009a9751cd534b3e1a5a243b20c61b5d43fe2eeaa94bcd11b",
+  "fixedMediaManifestSha256": "b46ad6c47e692ba3b1213dd11b9c1a9b3c686410028c3d70e172086b26b62ce2",
+  "productSource": "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\formal-x86\\original-softpc-process.exe",
+  "productStage": "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r33-config-system-media\\original-softpc-process.exe",
+  "productSha256": "a4eb34960fe436b354d172d8f1c5bf39bd307ae4e27907da7d9c4120783936ad",
+  "launcherExitCode": 0,
+  "launcherSignal": null,
+  "stdout": "",
+  "stderr": ""
+}
