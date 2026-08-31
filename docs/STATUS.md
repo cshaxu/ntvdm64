@@ -282,6 +282,14 @@ non-invasive event channel, so the next work is one static CPU40
 execution-start owner cluster—not a BOP patch or observer variation. See [P31
 evidence](etc/evidence/m0-t318-s2-p31-original-unhandled-exception-boundary-audit-001.md).
 
+**S2 P32:** original CPU40 SAS/RAM initialization is now separated from later
+external physical-page mapping: `InitIntelMemory` supplies the contiguous
+`Start_of_M_area`/`CCPU_M` backing used by the first normal CCPU fetch, while
+the session mapping manager is only an external-page alias seam. No RAM/token
+attribution or source change is admitted. The next static unit is original
+`c_cpu_simulate → ccpu(FALSE)` first dispatch; see [P32
+evidence](etc/evidence/m0-t318-s2-p32-cpu40-memory-and-first-dispatch-boundary-audit-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
