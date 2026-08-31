@@ -361,6 +361,13 @@ link; one fixed short observation follows a changed product; NTDOS/EXEC
 evidence is prohibited before NTIO reachability. See [P41
 evidence](etc/evidence/m0-t318-s2-p41-fixed-container-startup-prerequisite-cohort-closure-001.md).
 
+**S2 P42:** the source-built guest's exact first host-service boundary is now
+fixed: `NTIO.SYS` maps its `0000:0370` entry to original `msinit.asm::init`,
+whose IVT/stack/DOS-data prefix first crosses owners only at original
+`SVC_DEMLOADDOS`. It reaches the selected original `demLoadDos` route—never a
+replacement loader, COMMAND acquisition or EXEC path. See [P42
+evidence](etc/evidence/m0-t318-s2-p42-ntio-first-service-boundary-audit-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
