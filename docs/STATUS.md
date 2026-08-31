@@ -273,6 +273,15 @@ immutable `runtime-r30`. The sole current real-console baseline exits
 the recovery order. See [P30
 evidence](etc/evidence/m0-t318-s2-p30-current-source-immutable-runtime-baseline-001.md).
 
+**S2 P31:** original process/thread exception wrappers now establish that the
+fixed r30 `0xC0000005` identifies only an escaped access violation, not its
+source. The selected CPU40 initialization still creates CCPU's main-thread TLS
+simulation state before `c_cpu_simulate`, while the C-VID binding remains
+ordered before DOS initialization. No r30 crash frame is available from the
+non-invasive event channel, so the next work is one static CPU40
+execution-start owner cluster—not a BOP patch or observer variation. See [P31
+evidence](etc/evidence/m0-t318-s2-p31-original-unhandled-exception-boundary-audit-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
