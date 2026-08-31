@@ -215,6 +215,13 @@ composition is the next complete owner-contract audit; no NTIO, NTDOS, EXEC or
 parent-return claim is made. See [P22
 evidence](etc/evidence/m0-t318-s2-p22-fixed-container-admission-and-ccpu-fault-001.md).
 
+**S2 P23:** the omitted historical CCPU-to-C-VID generated vector assembly is
+now recovered from original `c2cpusad.h`: all 154 public and 55 private slots
+receive a typed original-provider or explicit unavailable disposition. The
+formal CPU40 x86 and x64 products link; the immutable real-console container
+still exits `0xC0000005`, without a new runtime attribution or NTIO claim. See
+[P23 evidence](etc/evidence/m0-t318-s2-p23-cvidc-generated-vector-contract-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |

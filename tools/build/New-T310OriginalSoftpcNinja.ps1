@@ -363,6 +363,8 @@ $includeRootPaths = @(
 )
 $includeRoots = $includeRootPaths | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $gdpGeneratedInclude = '/I "' + (NinjaPath $gdpGeneratedRoot) + '"'
+$cvidcGeneratedRoot = Join-Path $build 'generated'
+$cvidcGeneratedInclude = '/I "' + (NinjaPath $cvidcGeneratedRoot) + '"'
 
 # `base/inc/egacpu.h` deliberately includes one of two original generated
 # `evidgen.h` variants.  The C-video and base/video translation units require
@@ -400,7 +402,7 @@ $baseFlags = $baseCommonFlags + ($includeRoots -join ' ') + ' ' + $gdpGeneratedI
 # adapter supplies only session TLS storage.
 $dpmiArchitectureFlags = if ($Architecture -eq 'x86') { ' /D_X86_ ' } else { ' ' }
 $dpmiFlags = $baseCommonFlags + $dpmiArchitectureFlags + ($includeRoots -join ' ') + ' ' + $gdpGeneratedInclude
-$cvidcFirstFlags = $baseCommonFlags + ($cvidcFirstIncludeRoots -join ' ') + ' ' + $gdpGeneratedInclude
+$cvidcFirstFlags = $baseCommonFlags + ($cvidcFirstIncludeRoots -join ' ') + ' ' + $gdpGeneratedInclude + ' ' + $cvidcGeneratedInclude
 $cvidcRuleFlags = $cvidcFirstFlags + ' /DCVIDC_RULE_WORD'
 # `accessfn.c` is selected by the original C-VID manifest as the non-CCPU
 # vector facade for host/DPMI callers.  It must keep its original non-PROD
@@ -520,7 +522,11 @@ $gdpOverlaySource = Join-Path $gdpOverlayRoot 'mvdm_gdp_state.c'
 $graph.Add('build obj/cvidc/mvdm_gdp_state.obj: cc ' + (NinjaPath $gdpOverlaySource))
 $cvidcObjects += 'obj/cvidc/mvdm_gdp_state.obj'
 $cvidcVectorBindingSource = Join-Path $gdpOverlayRoot 'mvdm_cvidc_vector_binding.c'
-$graph.Add('build obj/cvidc/mvdm_cvidc_vector_binding.obj: cc ' + (NinjaPath $cvidcVectorBindingSource))
+$cvidcCpuBindingInclude = Join-Path $build 'generated/cvidc_cpu_binding.inc'
+$cvidcCpuBindingGenerator = Join-Path $root 'tools/build/GenerateCvidcCpuBinding.mjs'
+& $NodeExecutable $cvidcCpuBindingGenerator $cvidcCpuBindingInclude (Split-Path $cvidcRoot -Parent)
+if ($LASTEXITCODE -ne 0) { throw 'C-VID CPU binding generation failed.' }
+$graph.Add('build obj/cvidc/mvdm_cvidc_vector_binding.obj: cc_cvidc_rule ' + (NinjaPath $cvidcVectorBindingSource) + ' | ' + (NinjaPath $cvidcCpuBindingInclude))
 $cvidcObjects += 'obj/cvidc/mvdm_cvidc_vector_binding.obj'
 $commsObjects = foreach ($name in $commsNames) {
     $object = 'obj/comms/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
