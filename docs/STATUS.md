@@ -6,7 +6,7 @@
 
 ### M0 T321 S1 — Vertical-slice ownership and bypass baseline
 
-**Active: M0 T321 S1**
+**Closed: M0 T321 S1**
 
 | Field | Record |
 | --- | --- |
