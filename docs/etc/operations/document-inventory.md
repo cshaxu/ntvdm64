@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3544 |
+| Documentation records | 3547 |
 | --- | --- |
-| Generated UTC | 2026-08-31T21:44:01Z |
+| Generated UTC | 2026-08-31T21:50:53Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | 49dcb0c6fbc765c7c31db57c207761efe391bbbe5030da13c8aaa939a327879e |
+| QUEUE.md | principal control document | 4ae3ce37d7d12302f46194ceaba2de3a8d9e4b6dba6abd1b879defb4d032c001 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 31b72e79fc4db8c356429bdb0be0dd233ef43128dc0b50b0672385271c29f41e |
+| STATUS.md | principal control document | 68cceacef479bd86796f26125e3093652db614bb772ead36ba1a38ede4288909 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1032,6 +1032,8 @@ content-divergent entries.
 | etc/evidence/m0-t328-s1-original-fdc-int15-wait-continuation-contract-001.md | indexed supporting material | 2274e5207538c1a5508d099e62bebcaa43df24d92d4df2d62404269706b3aade |
 | etc/evidence/m0-t329-s1-original-cpu40-recursive-frame-lifecycle-contract-001.md | indexed supporting material | 3808e03f7ff160911dbff0afb10e85d8b5b80679a99260ec26dd2177122765a6 |
 | etc/evidence/m0-t330-s1-s3-original-exception-context-attribution-001.md | indexed supporting material | 238472ff0e67d3ae3735f8d4c1975425c3be46e6949991d1a8566a7914f4bd17 |
+| etc/evidence/m0-t331-s1-current-original-xms-owner-abi-rebaseline-001.md | indexed supporting material | d65245044f9ffd6afeff14da30879c5401876d121c5d407f8e0e24efe0efa361 |
+| etc/evidence/m0-t331-s1-xms-owner-abi-rebaseline-001.tsv | indexed supporting material | 728b086c2e81612e078888c7f8c93777bc5a3a8ec2a25d559c6bb87dad37a51c |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1858,6 +1860,7 @@ content-divergent entries.
 | etc/operations/proposal-opennt-xms-owner-package-completion-001.md | indexed supporting material | 63d5209a8032bff793219242257dd8ab637d833f66c17c969939e6a5e56d3d3d |
 | etc/operations/proposal-original-component-mirror-conformance-001.md | indexed supporting material | faa3f9df4ede9fbc8c66144d7c3b9dedc7b8e41d1ede15997d93c82e29e9f1c1 |
 | etc/operations/proposal-original-exception-context-attribution-001.md | indexed supporting material | eb0d259be0a40550b2e6834ae9688be76c7051ac0561bd1099bfcc0b3041fde7 |
+| etc/operations/proposal-original-softpc-xms-owner-package-001.md | indexed supporting material | 44e5d00b93fec9cbfd8e798a4e7a5b6d9aadda5e4d065e09842d8fd4e12244e8 |
 | etc/operations/proposal-overlay-mutation-capability-completion-001.md | indexed supporting material | f7ffebc5d2e99ecef44e029526afbaddbcce02d05d66819e544d02d2ce929cff |
 | etc/operations/proposal-project-code-filename-normalization-001.md | indexed supporting material | 8a42536533fd68114f575dc49f3d02213778a8ecb6e80e8cc797d2f70df2382a |
 | etc/operations/proposal-public-win32-crt-source-shaped-binding-recovery-001.md | indexed supporting material | 87a7cc8c3d415bb1df012ec4a5be8d2d005c31bb4085133236cf52847baffb3e |

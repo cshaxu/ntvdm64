@@ -1,0 +1,24 @@
+id	original-source-and-symbol	selected-role	current-disposition	current-binding-or-divergence	required-machine-or-session-condition
+XMS-001	xms.486/xms.c:XMSInit	original startup owner from nt_msscs.c	original body with selected backend branch	MVDM-HOST-DIV-132; original SAInitialize call/order retained; direct-host-pointer i386 backend is not selected	active session-backed guest-memory range and original SubAlloc
+XMS-002	xms.486/xmsdisp.c:XMSDispatch	original 52:xx dispatcher from nt_bop.c	byte-identical original body/table	no adapter policy; typed BOP byte fetch remains nt_bop owner	active CPU40 BOP ingress
+XMS-003	xms.486/xmsdisp.c:slot0/xmsA20	A20 service	original body with bounded state-byte overlay	MVDM-HOST-DIV-010; original AX/BL order retained	original SAS A20 provider plus session lease for optional state byte
+XMS-004	xms.486/xmsdisp.c:slot1/xmsMoveBlock	move service	original body with same-shaped descriptor seam	MVDM-HOST-DIV-077; current adapter reads original SS:BP layout through mapping leases	active guest-memory lease and original register facade
+XMS-005	xms.486/xmsdisp.c:slot2/xmsAllocBlock	allocation service	byte-identical original body	original SAAllocate callback table	XMSInit-created ExtMemSA
+XMS-006	xms.486/xmsdisp.c:slot3/xmsFreeBlock	free service	byte-identical original body	original SAFree callback table	XMSInit-created ExtMemSA
+XMS-007	xms.486/xmsdisp.c:slot4/xmsSysPageSize	system page query	byte-identical original body	original register/SAS calls	active original register facade
+XMS-008	xms.486/xmsdisp.c:slot5/xmsQueryExtMem	extended-memory query	byte-identical original body	original xmsMemorySize scalar	configured xmsMemorySize
+XMS-009	xms.486/xmsdisp.c:slot6/xmsInitUMB	UMB initialization	original list algorithm with numeric-address/A20 overlays	MVDM-HOST-DIV-010 and -078	original ReserveUMB machine provider and active session
+XMS-010	xms.486/xmsdisp.c:slot7/xmsRequestUMB	UMB allocation	byte-identical original list algorithm	original UMB list	completed xmsInitUMB/ReserveUMB lifecycle
+XMS-011	xms.486/xmsdisp.c:slot8/xmsReleaseUMB	UMB release	byte-identical original list algorithm	original UMB list	completed xmsInitUMB/ReserveUMB lifecycle
+XMS-012	xms.486/xmsdisp.c:slot9/xmsNotifyHookI15	INT15 notification	byte-identical original body	original UpdateKbdInt15 call	original keymouse/INT15 owner installed
+XMS-013	xms.486/xmsdisp.c:slot10/xmsQueryFreeExtMem	allocator free query	byte-identical original body	original SAQueryFree	XMSInit-created ExtMemSA
+XMS-014	xms.486/xmsdisp.c:slot11/xmsReallocBlock	allocator realloc	byte-identical original body	original SAReallocate	XMSInit-created ExtMemSA
+XMS-015	xms.486/i386/xmsmem86.c:xmsCommitBlock	historical direct-address allocation callback	original evidence only; not selected host runtime	adapter-mvdm-host-out/softpc:mvdm_xms_memory.c supplies exact named callback through mapping leases	active session guest-memory range
+XMS-016	xms.486/i386/xmsmem86.c:xmsDecommitBlock	historical direct-address decommit callback	original evidence only; not selected host runtime	adapter-mvdm-host-out/softpc:mvdm_xms_memory.c supplies exact named callback through mapping leases	active session guest-memory range
+XMS-017	xms.486/i386/xmsmem86.c:xmsMoveMemory	historical direct-address move callback	original evidence only; not selected host runtime	adapter-mvdm-host-out/softpc:mvdm_xms_memory.c supplies exact named callback through mapping leases	active session guest-memory range
+XMS-018	mvdm-host-overlay/xms.486:xms_a20_state	retained native-pointer replacement	private mirror overlay	MVDM-HOST-DIV-010; stores only AX:BX numeric location and leases it per write	active session and original A20 call order
+XMS-019	mvdm-host-overlay/softpc.new/host/src:mvdm_umb_address	legacy PVOID numeric carrier codec	private mirror overlay	MVDM-HOST-DIV-078; converts only Intel numeric physical value, never a host identity	original ReserveUMB machine provider
+XMS-020	mvdm-host/suballoc:SAInitialize/SAAllocate/SAFree/SAReallocate/SAQueryFree	original shared allocation support	original selected support package	no project allocator; XMS calls original callback contract	XMSInit callback installation
+XMS-021	xms.486/xms.h:xmsGetMemorySize	declaration-only historical form	original-unavailable declaration	no current caller/definition; must not be invented	not selected
+XMS-022	xms.486/xms.h:xmsGetDefaultVDMSize	declaration-only historical form	original-unavailable declaration	no current caller/definition; must not be invented	not selected
+XMS-023	xms.486/xms.h:sas_manage_xms	conditional historical form	original-unavailable declaration	selected CPU40 path does not select it; must not be fabricated	not selected

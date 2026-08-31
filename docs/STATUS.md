@@ -4,8 +4,53 @@
 
 ## Active Packet
 
-**No active M/T/S packet.** T330 is closed; the next queue package requires
-normal admission before implementation begins.
+### M0 T331 S2 — Original XMS body binding recovery
+
+**Active: M0 T331 S2**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T331 S2; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | S1 closed under T331’s persistent owner-approved whole-package plan; this S is limited to its enumerated original XMS/adapter binding cohort. |
+| Objective | Prove and, only where necessary, recover the same-shaped original XMS callback binding over the current CPU40/session guest-memory provider. |
+| Non-goals | No new XMS policy, trace-selected service work, guest/device success shortcut, new allocator, CPU/FDC/ROM/vector repair, MONITOR/kernel-VDM/Bochs route, raw host pointer ABI, or unrelated BOP work. |
+| Reference Baseline | T331 S1 XMS owner/ABI ledger; original `xms.486` source set; T327–T330 CPU40 fixed-container evidence; selected session mapping manager. |
+| Files And ABI Surface | Original `xms.c`, `xmsblock.c`, `xmsa20.c`, `xmsumb.c`, original SubAlloc; current `mvdm_xms_memory`, A20-state and UMB-address overlays; original SAS/ReserveUMB/UpdateKbdInt15 declarations. |
+| Applicable Rules | Execution, source policy, original-source-first recovery, mirror/overlay, architecture, mapping-manager, session and paired-host build rules. |
+| Verification | Re-read callback declarations/definitions/table installation and immediate callers; x86/x64 rebuild of every affected XMS/support/adapter target; focused positive/negative contract evidence only after source binding is complete. |
+| Expected Markers | Original XMS and SubAlloc bodies remain policy owners; every selected callback has one parameter/return/lifetime contract; no direct host pointer or retired Bochs input survives. |
+| Asset Needs | Current original MVDM mirrors, adapter/session source, existing formal graph and source-selected x86/x64 products; no new guest media or host installation. |
+| Reporting Requirements | Record each changed or retained callback, original source path, ABI identity, mapping lease lifetime, exact failure direction, test result and any machine-owner transfer. |
+| Stop Conditions | Need for a new XMS policy, synthetic success, a new mapping manager, a Bochs resurrection, kernel/CSRSS reconstruction, a broad source import, or a behavior change outside the XMS callback cohort pauses for re-admission. |
+| Exit Criteria | All composable original XMS/SubAlloc callback bodies and their required minimal bindings are source-reviewed and formally linked on both architectures; any unavailable machine effect has a named original owner transfer. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | Callback parameter types, callback registration order, guest-memory lease acquire/release, move overlap, commit/decommit observability, A20 state-byte write, UMB numeric carrier and INT15 provider availability. |
+
+**S2 plan:** [the original SoftPC XMS owner-package proposal](etc/operations/proposal-original-softpc-xms-owner-package-001.md) applies the S1 ledger without moving XMS policy into an adapter.
+
+### M0 T331 S1 — Current original XMS ownership and ABI rebaseline
+
+**Closed: M0 T331 S1.**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T331 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 1, admitted under the persistent owner request to execute the ordered queue in single-person dual-role mode. |
+| Objective | Establish one current, complete original XMS source/ABI/machine-owner baseline before changing any XMS provider behavior. |
+| Non-goals | No trace-selected `52:xx` repair, guest loader, new XMS allocator, synthetic service result, CPU/FDC/ROM/vector repair, MONITOR/kernel-VDM/Bochs route, raw pointer ABI, or unrelated BOP work. |
+| Reference Baseline | T310 XMS static ledger/closure; T327–T330 fixed CPU40 guest-path evidence; selected `CPU_40_STYLE` original SoftPC product and current mapping manager. |
+| Files And ABI Surface | `xms.486/{xms,xmsa20,xmsblock,xmsdisp,xmsmisc,xmsumb}.c`, `xms.h`, `i386/xmsmem86.c`, `mvdm-support/suballoc`, `nt_msscs.c`, `nt_bop.c`, the mapping-manager backend and A20/UMB/INT15 machine declarations. |
+| Applicable Rules | Execution, source policy, original-source-first recovery, mirror/overlay, architecture, mapping-manager, session and paired-host build rules. |
+| Verification | Original declaration/definition/table/caller walk; retired-route scan; current formal source-manifest review; exact adapter/overlay disposition ledger; governance and diff review. |
+| Expected Markers | Every selected XMS entry has one original body and one current machine/adapter disposition; direct host-pointer backend is not selected; all former Bochs routes are either absent or named historical evidence. |
+| Asset Needs | Current MVDM host/support mirrors, current adapter/session code, prior XMS ledgers and selected CPU40 formal build graph; no new guest media or host installation. |
+| Reporting Requirements | Record source identity, table slot, caller, original policy owner, callback ABI, mapping use, current composition status, retained divergence and exact successor owner for every unavailable effect. |
+| Stop Conditions | A need for new XMS policy, guest/device success shortcut, a new mapping manager, a Bochs resurrection, kernel/CSRSS reconstruction, unreviewed source import, or a behavior change outside the complete XMS package pauses for re-admission. |
+| Exit Criteria | A current package baseline supports S2 original-body binding recovery without carrying a stale Bochs-era route or an unclassified XMS callback. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | Startup `XMSInit`, BOP `XMSDispatch`, all dispatch slots, SubAlloc callbacks, A20 state/query, move descriptors, UMB lifecycle, INT15 hook, direct-pointer body and all source/build routes mentioning retired Bochs ownership. |
+
+**S1 evidence:** [the current original XMS owner/ABI rebaseline](etc/evidence/m0-t331-s1-current-original-xms-owner-abi-rebaseline-001.md) and its [complete ledger](etc/evidence/m0-t331-s1-xms-owner-abi-rebaseline-001.tsv) establish the only admitted S2 binding cohort. The selected `original-mvdm-xms.lib` target was reproducibly up to date on both current formal x86/x64 graphs.
 
 ### M0 T330 S1 — Original exception-filter context contract
 
