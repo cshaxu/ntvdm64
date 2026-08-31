@@ -299,6 +299,15 @@ no current evidence that one caused r30's escaped access violation. The next
 action is one unchanged formal r30 observation; see [P33
 evidence](etc/evidence/m0-t318-s2-p33-cpu40-first-fetch-and-dispatch-owner-audit-001.md).
 
+**S2 P34:** the one permitted unchanged r30 repeat again exits
+`0xC0000005`. The source-defined pre-NTIO console cluster is now mapped as
+`host_applInit → init_host_uis → nt_start_event_thread`: the fixed real-console
+container is its normal prerequisite, while no `DisplayErrorTerm`, return-120
+or private Console/CSR failure branch is yet proven reached. Next is a whole
+`host_applInit` worker/locking compatibility audit, not a new observer or BOP
+probe; see [P34
+evidence](etc/evidence/m0-t318-s2-p34-fixed-container-repeat-and-console-prerequisite-audit-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
