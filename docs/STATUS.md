@@ -4,6 +4,58 @@
 
 ## Active Packet
 
+### M0 T321 S1 — Vertical-slice ownership and bypass baseline
+
+**Active: M0 T321 S1**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T321 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 2, **Minimal vertical-slice integration closure**, admitted under the standing owner request to execute the ordered queue after T320 closed. |
+| Objective | Establish one current, source-defined ownership/bypass baseline for the selected first slice: original CPU40, Base VDM, DEM/COMMAND, immutable guest media, and the declared return contract. |
+| Non-goals | No new BOP/provider, guest edit, synthetic FDC/PIC completion, debugger, alternate CPU/machine, or source-wide interface sweep. |
+| Reference Baseline | T318 frozen guest return; T319 ROM/termination evidence; T320 CPU40 recursive/device-event owner transfer; Queue candidate 2. |
+| Files And ABI Surface | Current selected formal Ninja manifests, original CPU40/BOP/Base VDM/DEM/COMMAND call surfaces, session mapping leases, staged firmware/media manifest, and fixed observer only. |
+| Applicable Rules | `docs/rules/EXECUTION.md`, source policy, architecture/coding rules, and mirror exception registers. |
+| Verification | Static source/build-edge review, x86/x64 formal normal-link checks, fixed x86 console-owning observation, documentation governance gate, and `git diff --check`. |
+| Expected Markers | One ledger distinguishes original completed edges from the still-open CPU40 recursive execution/device-event edge, and proves no app/adapter bypass has replaced it. |
+| Asset Needs | Existing mirrored source, staged immutable firmware/DOS media, T318--T320 evidence, and current formal build scripts. |
+| Reporting Requirements | Report every slice edge as direct original, same-shaped binding, explicit unavailable path, or remaining owner transfer; distinguish link closure from runtime continuity. |
+| Stop Conditions | A required new provider, synthetic device result, changed guest media/container, or broadened external package pauses for re-admission. |
+| Exit Criteria | A complete first-slice owner/bypass ledger and fixed integration matrix are recorded; any remaining failure is one exact original owner transfer. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | Check CPU entry/recursive re-entry, BOP ingress, Base VDM command source, DEM/COMMAND media use, guest artifact provenance, result return, and app/session ownership together. |
+
+**S1 closed:** [the vertical-slice owner/bypass baseline](etc/evidence/m0-t321-s1-vertical-slice-owner-bypass-baseline-001.md)
+confirms that the selected formal product retains one original CPU40-to-guest
+path and no Bochs, `src.old`, app-owned BOP/DEM/COMMAND, or guest-loader
+bypass.  T321/S2 is limited to the fixed matrix on that same graph.
+
+### M0 T321 S2 — Fixed vertical-slice integration matrix
+
+**No active M/T/S packet.** M0 T321 is closed.
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T321 S2; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | T321/S1 closed the selected source/bypass baseline; this S executes only its stated fixed matrix. |
+| Objective | Rebuild/link the selected CPU40 product under x86 and x64, then run one unchanged fixed x86 console-owning observation to classify current first-slice continuity. |
+| Non-goals | No source repair, BOP/provider change, guest/media/container/debugger change, synthetic device event, or alternate machine route. |
+| Reference Baseline | T318--T320 evidence and T321/S1 baseline. |
+| Files And ABI Surface | Formal Ninja generator, immutable staging manifest, existing console observer, and the selected original process link only. |
+| Verification | Fresh x86/x64 normal links; fixed staged x86 observation; manifest/output review; documentation governance and `git diff --check`. |
+| Expected Markers | Two normal link rows and one bounded observation result attributable to the existing CPU40 owner transfer or an advance beyond it. |
+| Stop Conditions | Any required product behavior change or altered observation input pauses S2. |
+| Exit Criteria | Exact fixed-matrix evidence, with no overclaim beyond observed continuity. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | Confirm x86/x64 graph identity, media manifest identity, observer arguments, and absence of retired inputs. |
+
+**S2 closed:** [the fixed vertical-slice matrix](etc/evidence/m0-t321-s2-fixed-vertical-slice-integration-matrix-001.md)
+records both normal x86/x64 links and the unchanged x86 `0xc0000005` result.
+It confirms the T320 CPU40 recursive-execution/device-event owner transfer;
+it does not claim DOS execution or controlled return.  This meets the
+candidate's exact-owner-transfer exit without introducing a bypass.
+
 ### M0 T320 — closure record
 
 **No active M/T/S packet.** M0 T320 is closed.
