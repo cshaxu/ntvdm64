@@ -308,6 +308,13 @@ or private Console/CSR failure branch is yet proven reached. Next is a whole
 probe; see [P34
 evidence](etc/evidence/m0-t318-s2-p34-fixed-container-repeat-and-console-prerequisite-audit-001.md).
 
+**S2 P35:** the complete original `host_applInit` worker/ICA-lock cohort is
+source-audited through the first `scs_init` call. The event worker remains
+suspended at that point; the heartbeat is the sole later concurrent worker,
+and its selected cdecl-to-WINAPI/session bridge preserves the original worker
+contract. No speculative source change is admitted. See [P35
+evidence](etc/evidence/m0-t318-s2-p35-host-application-worker-and-scs-init-prerequisite-audit-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
