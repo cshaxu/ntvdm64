@@ -4,11 +4,32 @@
 
 ## Active Packet
 
-**No active M/T/S packet.** M0 T323 closed with its bounded DPMI source and
-host-address recovery scope.  The [closure record](history/m0-t323-closure-20260831.md)
-retains the exact completed contract and the monitor/DOS-runtime work that was
-correctly transferred rather than invented.  A subsequent queue task requires
-its own admission before implementation resumes.
+### M0 T324 S1 — Original Redirector owner and boundary baseline
+
+**Active: M0 T324 S1**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T324 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 5, admitted under the standing owner request to execute the ordered queue after T323 closure. |
+| Objective | Establish the complete original VDMREDIR/Redirector package boundary, including local file, pipe, NetAPI/RAP, lifecycle, handle and selected `opennt-host/netapi/netlib/ntstatus.c` dependencies, with one source-shaped disposition per reached external edge. |
+| Non-goals | No trace-selected 57:xx provider, network redirector rewrite, private NetAPI/RAP/CSRSS reconstruction, host global handle mutation, new mapping manager, guest change, or synthetic remote success. |
+| Reference Baseline | T323 closure; queue candidate 5; selected original `mvdm-host/vdmredir` package, `dos/command/cmdredir.c`, `inc/vdmredir.h`, selected `opennt-host/netapi/netlib/ntstatus.c` mirror slice, session mappings and existing host-out adapter families. |
+| Files And ABI Surface | Original VDMREDIR dispatcher, init, local completion, named-pipe, mailslot, NetBIOS, remote and buffer sources; BOP/COMMAND callers; original/modern file, pipe, module, NetAPI and status declarations. |
+| Applicable Rules | Execution, source-first recovery, mirror/overlay, architecture, source-policy, session mapping-manager and host-capability rules. |
+| Verification | Complete source/definition/caller review, original source-selection and build-manifest review, reached external declaration comparison, focused source disposition checks, formal x86/x64 graph review, governance and diff review. |
+| Expected Markers | A bounded ledger separates original local file/pipe paths, public-modern bindings, selected `ntstatus.c` mirror calls, explicit remote/RAP/device unavailability and all host/guest identity lifetimes. |
+| Asset Needs | Existing selected mirrors, current adapter/session components and formal CPU40 product graph; no new guest media, host installation or kernel facility. |
+| Reporting Requirements | Record original caller, package/file, request/response layout, handle or pointer lifetime, direct public API candidate, selected original mirror dependency, failure disposition and later owner for every reached edge. |
+| Stop Conditions | A need for a second redirector implementation, a generic adapter, unbounded guest/native pointer alias, kernel/CSRSS recreation, unreviewed external package import or invented network success pauses for re-admission. |
+| Exit Criteria | A complete source/ABI/failure ledger covers the selected Redirector owner family and permits one bounded recovery S without an invented backend. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | File/pipe/mailslot/NetBIOS/remote branches, `cmdredir.c` completion records, token lifetime, local versus remote state, module loading, legacy host APIs, x86/x64 width and source-shaped unavailable paths. |
+
+**S1 P1 baseline:** [the original Redirector owner/binding baseline](etc/evidence/m0-t324-s1-original-redirector-owner-binding-baseline-001.md)
+preserves all 16 original VDMREDIR source units as one owner family, separates
+the local file/pipe cohort from VDD/device/RAP boundaries, and identifies the
+already-selected but not-yet-mirrored byte-identical `ntstatus.c` slice.
 
 ### M0 T323 S1 — Original DPMI/DPMI32 owner and boundary baseline
 
