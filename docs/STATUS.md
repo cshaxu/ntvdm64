@@ -344,6 +344,14 @@ PIC delivery; and `CPU_TIMER_TICK` enters original CCPU40
 this path, so no source change or repeated observation is justified. See [P39
 evidence](etc/evidence/m0-t318-s2-p39-timer-pic-cpu40-prerequisite-audit-001.md).
 
+**S2 P40:** the complete original pre-decode CPU40 cohort is source-proven:
+`cpu_init` establishes CCPU TLS/simulation state before DOS initialization,
+and `host_start_cpu` enters only original `c_cpu_simulate`. The fixed
+`0xC0000005` remains an unlocated original top-level exception—not an NTIO,
+DEM, COMMAND or EXEC result—and no source mutation or repeat observation is
+admitted. See [P40
+evidence](etc/evidence/m0-t318-s2-p40-cpu40-entry-prerequisite-audit-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
