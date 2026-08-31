@@ -1,4 +1,4 @@
-# M0 T320 — Minimal DOS guest execution and controlled return
+# M0 T327 — Minimal DOS guest execution and controlled return
 
 ## Purpose
 
@@ -12,13 +12,17 @@ execution.
 
 - T318 froze the original NTDOS `EXEC -> PSP/arena/JFN/environment -> parent
   restore -> 54:0B` contract and the selected original host route.
-- T319 restored original ROM residency and established that the current fixed
-  x86 container reaches `50:11`, `50:3B`, `50:0F`, `50:1B` and `54:05`, then
-  exits `0xc0000005` outside the original main and known-thread exception
-  paths.
+- T319 restored original ROM residency and attributed its then-current
+  termination boundary.
+- T326 refreshed the selected CPU40 product on both host architectures and
+  observed the unchanged fixed x86 container through original
+  `50:11 → MS_bop_0 → DemDispatch → demLoadDos`, then through `50:3B`,
+  `50:0F`, `50:1B` and `54:05`, before a post-crossing `0xc0000005` at
+  address zero.
 
-Thus the task begins with the source-defined CPU40 raw-worker/execution
-prerequisite.  It must not turn a new trace hit into an ad hoc BOP provider.
+Thus the task begins at the source-defined CPU40-to-guest continuation after
+the original `demLoadDos` crossing. It must not turn a new trace hit into an
+ad hoc BOP provider.
 
 ## S plan
 

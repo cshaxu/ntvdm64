@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3531 |
+| Documentation records | 3532 |
 | --- | --- |
-| Generated UTC | 2026-08-31T20:36:56Z |
+| Generated UTC | 2026-08-31T20:45:08Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 6f2a4f35e440612f66f7ce4dae1c569c1fd1faf4586f6e9f0d122fa2c10613cd |
+| STATUS.md | principal control document | 4eb9c2c4eb21bb1a731faa40db75c5f686c0f22b9724e9c64daf53794ab342a3 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1026,6 +1026,7 @@ content-divergent entries.
 | etc/evidence/m0-t325-s1-netapi-rap-physical-boundary-baseline-001.md | indexed supporting material | ef85b27a570901c0719bf51770d1a688df0bacdbeae4e079367e229bea9ee22f |
 | etc/evidence/m0-t325-s2-public-workstation-query-lease-recovery-001.md | indexed supporting material | c5210d3aab33dc56b2bb4151856500a1ee85b14ba7678e08aefe24f113b4b5e8 |
 | etc/evidence/m0-t326-s1-fixed-softpc-pre-bop-startup-cut-001.md | indexed supporting material | 26a85f89742cd8df95d23e7e6b2276d4bc740e637984ca3811e4a52d61a23628 |
+| etc/evidence/m0-t327-s1-cpu40-to-guest-prerequisite-contract-001.md | indexed supporting material | 9a6d2358417d520219f2d6782bf0c2404342fde7be034f6d59356fd1e2223cc6 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1823,7 +1824,7 @@ content-divergent entries.
 | etc/operations/proposal-current-naming-convergence-001.md | indexed supporting material | 214c6356a2a52f218e4d128d1598f7b6956e6bddc397db8b597d56bff63d7e23 |
 | etc/operations/proposal-dos-wow16-complete-source-build-closure-001.md | indexed supporting material | 3da5ac3935fbee1542946e0dfedf75d841836e0e0c7151536e88f5c44854f862 |
 | etc/operations/proposal-formal-build-entrypoint-and-reconstructed-monitor-fixture-repair-001.md | indexed supporting material | 8c20c430a033b448bf3de92e21f8ba32760c80fae225b5c0fa14ab4cc0814b8f |
-| etc/operations/proposal-minimal-dos-guest-execution-controlled-return-001.md | indexed supporting material | 95a8e9a292bcc48c23330e9499ea9c7f186ecf02f05f35fa97e1d76608852ff7 |
+| etc/operations/proposal-minimal-dos-guest-execution-controlled-return-001.md | indexed supporting material | 809fd9e5eb963c786a3f26fbc64cda76e015c00e292b1639963d475706a5abba |
 | etc/operations/proposal-mirror-component-conformance-reconciliation-001.md | indexed supporting material | 228bfecf66952415d1eb97730ecc994752d286741c4754dd99c32d8fb98df6c2 |
 | etc/operations/proposal-mvdm-host-i386-conditional-semantic-audit-001.md | indexed supporting material | 3eddd095581a81066e2781596d0363ab949cbc8a06e5ab2ab9b79cdddd6efdad |
 | etc/operations/proposal-mvdm-host-support-reintegration-001.md | indexed supporting material | a0f59b9842313e5e9ea400d1fed486b0998d8330dff8822b33b2c488487616b1 |

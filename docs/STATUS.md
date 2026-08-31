@@ -4,8 +4,34 @@
 
 ## Active Packet
 
-**No active M/T/S packet.** M0 T326 is closed; queue candidate 2 requires a
-fresh admitted packet before implementation begins.
+### M0 T327 S2 — Earliest source-shaped prerequisite recovery
+
+**Active: M0 T327 S2**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T327 S2; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 2, admitted under the standing owner direction to execute the ordered queue. |
+| Objective | Recover only the first proven prerequisite in the original recursive CPU40/FDC/INT15 transaction that blocks the declared DOS-program path. |
+| Non-goals | No BOP leaf implementation, guest-image rewrite, synthetic FDC/PIC/BIOS result, new executor, Bochs/CPU30/MONITOR/kernel-VDM/CSRSS route, new mapper, raw native identity, WOW/VDD/debugger or product-shell redesign. |
+| Reference Baseline | T318 frozen NTDOS `EXEC`/parent-return contract; T319 ROM/termination attribution; T326 fixed-container `50:11 → demLoadDos` crossing; T327 S1 source contract. |
+| Files And ABI Surface | Original `floppy.c::wait_int`, `keybd_io.c::kb_setup_vectors`, `nt_cpu.c::host_simulate`, CPU40 `c_main.c` and `ntthread.c`, plus the reached FDC/PIC/INT15 initializer/caller chain. |
+| Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, architecture, mapping-manager, session and paired-host build rules. |
+| Verification | Source-first vector/frame/lifecycle audit; selected original recovery only; paired x86/x64 product link; one unchanged-media fixed-container observation only after the complete cohort is ready. |
+| Expected Markers | One source-shaped recursive CPU return or one narrower named original-machine owner transfer. |
+| Asset Needs | Existing selected MVDM mirror/media, CPU40 formal graph, fixed observer, session and adapter families; no new guest or host installation. |
+| Reporting Requirements | Record source order, vector and frame initialization, lifecycle/return contract, branch/failure routes, changed mirror locations and exact successor owner. |
+| Stop Conditions | Need for invented guest/device success, a trace-selected BOP change, kernel/CSRSS reconstruction, persistent guest/native pointer, unreviewed source import or change outside the selected complete owner cohort pauses for re-admission. |
+| Exit Criteria | The complete recursive cohort either returns past the former terminal under the fixed container or transfers one narrower source-defined original machine owner. It does not claim a DOS program ran. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | Both `wait_int` recursive calls, `int15`/`wait_int` table setup, CCPU main-thread and worker frame setup, FDC/PIC completion, timer/event/comms workers, CPU return reasons and original BOP postconditions. |
+
+**S1 closed:** [the CPU40-to-guest prerequisite contract](etc/evidence/m0-t327-s1-cpu40-to-guest-prerequisite-contract-001.md)
+reconfirms the post-`demLoadDos` terminal as the original SoftPC recursive
+FDC/INT15/CPU40 cohort; it makes no guest-execution claim.
+
+**S2 plan:** [the minimal DOS guest execution and controlled-return proposal](etc/operations/proposal-minimal-dos-guest-execution-controlled-return-001.md)
+defines the bounded source-first recovery and fixed-container verification.
 
 ### M0 T326 S1 — Fixed SoftPC pre-BOP startup cut
 
