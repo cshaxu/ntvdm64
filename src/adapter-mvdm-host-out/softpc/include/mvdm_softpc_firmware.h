@@ -18,6 +18,11 @@ int mvdm_softpc_firmware_find_file(const char *name, char *path_out,
 int mvdm_softpc_dos_find_file(const char *name, char *path_out,
     uint32_t path_out_bytes);
 
+/* Copy the configured immutable DOS media directory into the original
+ * caller-owned buffer.  This is the directory-shaped counterpart of the
+ * existing file lookup; it neither opens media nor changes host state. */
+int mvdm_softpc_dos_copy_root(char *path_out, uint32_t path_out_bytes);
+
 /* Selected-product disposition for the historical first-session compatibility
  * probe.  The original AddSystemFiles() body creates C:\\MSDOS.SYS and
  * C:\\IO.SYS only to satisfy a legacy installer.  The current product keeps

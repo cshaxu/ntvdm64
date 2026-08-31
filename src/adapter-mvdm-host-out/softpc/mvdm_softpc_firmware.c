@@ -50,6 +50,20 @@ int mvdm_softpc_dos_find_file(const char *name, char *path_out,
         path_out_bytes);
 }
 
+int mvdm_softpc_dos_copy_root(char *path_out, uint32_t path_out_bytes)
+{
+    session *instance = session_thread_current();
+    const char *root = instance != NULL ? session_dos_media_root(instance) : NULL;
+    size_t root_bytes;
+
+    if (path_out != NULL && path_out_bytes != 0u) path_out[0] = '\0';
+    if (root == NULL || path_out == NULL || path_out_bytes == 0u) return 0;
+    root_bytes = strlen(root) + 1u;
+    if (root_bytes > path_out_bytes) return 0;
+    memcpy(path_out, root, root_bytes);
+    return 1;
+}
+
 void mvdm_softpc_prepare_system_file_compatibility(void)
 {
     /* The historical routine has no observable result other than the two

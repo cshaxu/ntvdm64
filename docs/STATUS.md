@@ -62,6 +62,12 @@ without inventing a loader or BOP provider.  The ten remaining unresolved
 whole-archive symbols are explicit nonlocal owner transfers; no NTDOS or child
 runtime claim is made.  See [P1 evidence](etc/evidence/m0-t318-s2-p1-cpu40-recursive-simulation-linkage-001.md).
 
+**S2 P2:** original DEM now receives the same session-selected immutable DOS
+media root as the existing NTIO loader, without changing its original NTDOS
+filename, file-I/O, or guest-write sequence.  Formal CPU40 archives and the
+existing bounded media-resource verification both pass; this is a loader-root
+closure, not a `50:11` or NTDOS execution claim.  See [P2 evidence](etc/evidence/m0-t318-s2-p2-original-dem-media-root-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
