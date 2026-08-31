@@ -4,7 +4,7 @@
 
 ## Active Packet
 
-**No M/T/S packet is active.** M0 T324 closed after its local Redirector
+**No active M/T/S packet.** M0 T324 closed after its local Redirector
 source-binding recovery. The next packet must be admitted from `docs/QUEUE.md`
 under the execution rules; closed records remain below as evidence.
 
