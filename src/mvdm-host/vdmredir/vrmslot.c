@@ -97,7 +97,10 @@ Revision History:
 #define LOCAL_MAILSLOT_PREFIX           "\\\\."
 #define LOCAL_MAILSLOT_NAMELEN          LM20_PATHLEN
 
-#define HANDLE_FUNCTION_FAILED          ((HANDLE)0xffffffff)
+/* DIVERGENCE(MVDM-HOST-DIV-170): CreateMailslot/CreateFile use the public
+ * invalid-handle sentinel.  Preserve the original comparison without the
+ * x86-only DWORD-to-HANDLE cast. */
+#define HANDLE_FUNCTION_FAILED          INVALID_HANDLE_VALUE
 
 //
 // local macros
@@ -364,7 +367,7 @@ Return Value:
     PVR_MAILSLOT_INFO   ptr;
     WORD    Handle16;
     HANDLE  Handle32;
-    DWORD   NameLength;
+    size_t  NameLength;
     LPSTR   lpName;
     CHAR    LocalMailslot[LOCAL_MAILSLOT_NAMELEN+1];
     BOOL    Ok;
@@ -408,6 +411,12 @@ Return Value:
     //
 
     NameLength -= MAILSLOT_PREFIX_LENGTH;
+    /* DIVERGENCE(MVDM-HOST-DIV-170): this is a native string measurement.
+     * Do not narrow it before the original DWORD record/allocation boundary. */
+    if (NameLength > MAXDWORD) {
+        SET_ERROR(ERROR_PATH_NOT_FOUND);
+        return;
+    }
 
     //
     // grab a structure in which to store the info. If we can't get one(!)
@@ -527,7 +536,7 @@ Return Value:
         // strcmp
         //
 
-        ptr->NameLength = NameLength;
+        ptr->NameLength = (DWORD)NameLength;
         strcpy(ptr->Name, lpName + MAILSLOT_PREFIX_LENGTH);
         VrpLinkMailslotStructure(ptr);
         setAX(Handle16);
@@ -1213,7 +1222,7 @@ Return Value:
 
 {
     PVR_MAILSLOT_INFO   ptr;
-    DWORD   NameLength;
+    size_t  NameLength;
 
     NameLength = strlen(Name) - MAILSLOT_PREFIX_LENGTH;
     for (ptr = MailslotInfoList; ptr; ptr = ptr->Next) {

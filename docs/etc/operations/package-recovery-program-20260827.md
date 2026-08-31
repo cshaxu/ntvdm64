@@ -323,6 +323,45 @@ paths plus the P02-selected exact `opennt-host/netapi/netlib/ntstatus.c` mirror
 slice, with explicit network/device unavailable paths. **Exit:** owner-family
 regression without NetAPI/CSRSS shell reconstruction.
 
+## P11A — NetAPI/RAP Redirector network-boundary package
+
+**Predecessor:** P11 (local Redirector owner package), P03 (Base VDM
+source-shaped broker), and the existing session host-resource mapping contract.
+**S1 admission:** inspect the complete reached original network cohort as one
+owner package: `mvdm-host/vdmredir/vrnetapi.c`, `vrremote.c`, their reached
+`cmdredir.c` callers and declarations, plus the selected
+`opennt-host/netapi/netlib/ntstatus.c` status-map mirror. Classify each service
+as a direct public modern API binding, a same-shaped bounded
+`adapter-mvdm-host-out/{win32,redir}` binding, or an exact original unavailable
+path. `vrnetb.c` and `vrdlc*` remain NetBIOS/DLC/VDD device owners and are not
+silently absorbed by this package.
+
+**Delivery:** retain the original NetAPI/RAP source control flow and request /
+response layouts. Bind only individual public, documented APIs whose caller
+validation, result layout, lifetime and failure mapping can be proven
+equivalent—for example the reached workstation-information queries through
+their modern public `NetWksta*` contracts. Keep the original `ntstatus.c`
+algorithms as the status conversion owner. For `XsNet*`, `RxNet*`,
+`RxRemoteApi`, legacy SMB/RAP transport, NetBIOS, DLC, private NetAPI RPC and
+server-side account/remote-management operations, retain the original failure
+direction with a named unavailable disposition unless a later bounded public
+API equivalence is separately proved. The package may not implement SMB/RAP,
+scan a network, create a generic network provider, reconstruct RPC/CSRSS, or
+claim remote success from a local API call.
+
+**Exit:** every reached `vrnetapi.c`/`vrremote.c` external interface has one
+physical-identity disposition and a corresponding source/adapter binding or
+exact unavailable result. Public bindings preserve session-owned opaque handle
+and buffer lifetimes through the existing mapping manager; native network
+buffers and handles never enter MVDM fields. Selected source compiles and
+links on both Win32/x86 and x64 CCPU40 graphs, focused local tests cover the
+status conversion and each admitted public-API failure/success contract, and
+the package records explicit VDD/NetBIOS/DLC transfers. It does not claim a
+networked guest integration run merely from host-side link closure.
+
+The detailed owner plan is [the NetAPI/RAP Redirector network-boundary
+proposal](proposal-netapi-rap-redirector-network-boundary-recovery-001.md).
+
 ## P12 — WOW32/Win16 owner package
 
 **Predecessor:** P03–P05, P10. **S1 admission:** inspect only reached callback,

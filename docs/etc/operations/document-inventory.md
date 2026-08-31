@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3519 |
+| Documentation records | 3521 |
 | --- | --- |
-| Generated UTC | 2026-08-31T18:59:13Z |
+| Generated UTC | 2026-08-31T19:29:35Z |
 
 ## Entries
 
@@ -824,6 +824,7 @@ content-divergent entries.
 | etc/evidence/m0-t324-s1-original-redirector-owner-binding-baseline-001.md | indexed supporting material | 99c61799d2381549e5db678f2c280433845e133203c2a981d0c4297b7e229447 |
 | etc/evidence/m0-t324-s1-redirector-unit-disposition-ledger-001.md | indexed supporting material | 235d6d2c48a9e5bfa26aa016988040d9274eabfa6f673229f77e0e6acf1a8a59 |
 | etc/evidence/m0-t324-s2-local-redirector-guest-span-ica-binding-001.md | indexed supporting material | 66e1730d02b02789755709ad9877211d14a5cfcdf818c7eb894f5c453d6a274a |
+| etc/evidence/m0-t324-s2-local-redirector-source-closure-001.md | indexed supporting material | 78f9de21ec6f7f19d65a3173883f4157c6583434648821c2152bbbf71ffa65bd |
 | etc/evidence/m0-t324-s2-named-pipe-completion-contract-001.md | indexed supporting material | 07d53d19d07982794c9556a8a7328f154fa75a216f654ec9b4c0208e3e044ddd |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
@@ -1603,7 +1604,7 @@ content-divergent entries.
 | etc/operations/opennt-non-mvdm-stage1-semantic-site-ledger.tsv | indexed supporting material | e4d4936ec2f7aec51e360c39daff960b2e451c3f54be28a992e8e1ad52c3d524 |
 | etc/operations/opennt-non-mvdm-stage1-semantic-symbol-ledger.tsv | indexed supporting material | 0c281cd8ee4d7b225919ef6af7dba0105343be4c691b31725a34b22302c5bdec |
 | etc/operations/opennt-non-mvdm-stage1-true-egress-ledger.tsv | indexed supporting material | a537d68f8d63655fb89e98701058fa4f394b5924ef40d2dbc78f2e03d1f3b57b |
-| etc/operations/package-recovery-program-20260827.md | indexed supporting material | b97b5b45dcb68f3fc7c6bbde1a0782f672270459155d7155a838b409c933e3ab |
+| etc/operations/package-recovery-program-20260827.md | indexed supporting material | b65a452f96e1b1a2f45ecfd3a4d9ea44847f702057550a731487086a43633c39 |
 | etc/operations/policy/source-policy.md | indexed supporting material | 14ce70e4eab1b7b3ffb7fd3bf06519c83cc15d09df6bb83635f42c0e6df309dc |
 | etc/operations/proposal-bochs-component-identity-overlay-convergence-001.md | indexed supporting material | ac4de17a933c62d6b6adc1971345c6fe4e58860453fd894608553f2bdd6974c8 |
 | etc/operations/proposal-bochs-core-diff-overlay-minimization-001.md | indexed supporting material | 45eb3881102adb316497ec85eeac90488d95cd69c77d4555a1608a14d953db29 |
@@ -1624,6 +1625,7 @@ content-divergent entries.
 | etc/operations/proposal-mvdm-host-support-reintegration-001.md | indexed supporting material | a0f59b9842313e5e9ea400d1fed486b0998d8330dff8822b33b2c488487616b1 |
 | etc/operations/proposal-mvdm-package-interface-closure-tracker-001.md | indexed supporting material | 78161a8a678fd2ec48596f310c47ffafd01572a995f06012bf75f17da06d6d37 |
 | etc/operations/proposal-mvdm-runtime-support-tool-re-root-001.md | indexed supporting material | 9955eefb0e8480e99f22e0cac375325d72663293262656537f4ca8d7cbb027c4 |
+| etc/operations/proposal-netapi-rap-redirector-network-boundary-recovery-001.md | indexed supporting material | df3cef8be8b0923781e82443a87609bb4cf1b2d21012812350b61994a95da5f5 |
 | etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md | indexed supporting material | 9b589b5f95bbd935804a007e9b1a1195561511f900f3c0ae426bc80c44798b72 |
 | etc/operations/proposal-opennt-bop-mirror-overlay-convergence-001.md | indexed supporting material | 2f2e91c7a491398ae23278766e5596002ae710113ff2bd5a1fb0577b2d9e12b2 |
 | etc/operations/proposal-opennt-bop-original-dispatcher-provider-recovery-001.md | indexed supporting material | b8808fef6cf0f7519c2103fdc8509c7f6f704846620537f59f0dd076af718e93 |
@@ -3407,7 +3409,7 @@ content-divergent entries.
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
 | planning/status.md | retained pre-governance evidence | fbfa3a202453ef9a31c0549310ff6ce96d822ac85e2cbbfb6a9c6c032e516f0c |
-| QUEUE.md | principal control document | 257a75b29c04ef8f1d0759ea749d8e8357f96fa43313f2772d21f85363f49575 |
+| QUEUE.md | principal control document | 49c8006d203e761acc70e1ab402e2c30985e917244f6b3474f077b1b43c4b1ae |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -3533,7 +3535,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 70d0a23a76b7f20b6f4236cd144b7ffa6b013ec7c6015efb962e3a19f7bd0952 |
+| STATUS.md | principal control document | a877f996fba77930bef1262db59466fbf34aeed42f1f6b4f597a8d4b946088fb |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

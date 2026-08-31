@@ -81,6 +81,13 @@ admitted recovery is a private `mvdm-host-overlay/vdmredir` transaction that
 uses existing session leases at every guest-memory crossing; it preserves the
 original VDMREDIR queue and interrupt sequence without creating a provider.
 
+**S2 P3:** [the local Redirector source closure](etc/evidence/m0-t324-s2-local-redirector-source-closure-001.md)
+selects and compiles the complete admitted local cohort on x86 and x64, links
+and executes its one staging/lease/termination contract fixture, and records
+the source-owned worker teardown and existing ICA boundary. It is strictly a
+local source closure: it neither enables a 57:xx BOP nor claims remote,
+device, VDD or guest-runtime completion.
+
 ### M0 T323 S1 — Original DPMI/DPMI32 owner and boundary baseline
 
 **Closed: M0 T323 S1**

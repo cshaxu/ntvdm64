@@ -135,6 +135,10 @@ Revision History:
 #include <idetect.h>    // WaitIfIdle
 #include <vrica.h>      // call_ica_hw_interrupt
 #include <vrnmpipe.h>   // routine prototypes
+/* DIVERGENCE(MVDM-HOST-DIV-167): original async requests retained flat
+ * GetVDMAddr aliases. Keep dispatch, queue and ICA control flow in the
+ * mirror; enter the matching private overlay at the request lifetime seam. */
+#include "../../mvdm-host-overlay/vdmredir/mvdm_redirector_async.h"
 
 #include <stdio.h>
 
@@ -1235,6 +1239,12 @@ CRITICAL_SECTION VrNmpRequestQueueCritSec;
 PDOS_ASYNC_NAMED_PIPE_INFO RequestQueueHead = NULL;
 PDOS_ASYNC_NAMED_PIPE_INFO RequestQueueTail = NULL;
 HANDLE VrpNmpSomethingToDo;
+/* DIVERGENCE(MVDM-HOST-DIV-169): retain the original process-wide worker
+ * shape, but make its owner and termination handle visible to the original
+ * DOS-process termination entry below. The private stop state stays in the
+ * matching Redirector overlay. */
+HANDLE VrpNmpThread = NULL;
+DWORD VrpNmpThreadId = 0;
 
 
 VOID
@@ -1288,13 +1298,6 @@ Return Value:
     DWORD   Type;
 
     //
-    // StructurePointer is 32-bit flat pointer to structure in DOS memory
-    // containing request parameters
-    //
-
-    PDOS_ASYNC_NAMED_PIPE_STRUCT StructurePointer;
-
-    //
     // pAsyncInfo is a pointer to the request packet we stick on the request
     // queue
     //
@@ -1321,9 +1324,6 @@ Return Value:
     // SuspendThread as we may see fit
     //
 
-    static HANDLE hThread = NULL;
-    static DWORD tid;
-
     //
     // get info from registers and the async named pipe structure
     //
@@ -1331,23 +1331,11 @@ Return Value:
     Handle = HANDLE_FROM_WORDS(getBP(), getBX());
     pipeInfo = VrpGetOpenNamedPipeInfo(Handle);
     Type = (DWORD)getAX() & 0xff;   // 0x86, 0x8f, 0x90 or 0x91
-    StructurePointer = (PDOS_ASYNC_NAMED_PIPE_STRUCT)POINTER_FROM_WORDS(getDS(), getSI());
-    length = READ_WORD(&StructurePointer->BufferLength);
-    buffer = READ_FAR_POINTER(&StructurePointer->lpBuffer);
 
 #if DBG
     IF_DEBUG(NAMEPIPE) {
         DbgPrint(   "\n"
-                    "VrReadWriteAsyncNmPipe (%04x) [%s]:\n"
-                    "DOS_READ_ASYNC_NAMED_PIPE_STRUCT @ %08x:\n"
-                    "32-bit named pipe handle . . . . %08x\n"
-                    "Address of returned bytes read . %04x:%04x\n"
-                    "Size of caller's buffer. . . . . %04x\n"
-                    "Address of caller's buffer . . . %04x:%04x\n"
-                    "Address of returned error code . %04x:%04x\n"
-                    "Address of ANR . . . . . . . . . %04x:%04x\n"
-                    "Named pipe handle. . . . . . . . %04x\n"
-                    "Address of caller's semaphore. . %04x:%04x\n"
+                    "VrReadWriteAsyncNmPipe (%04x) [%s] request @ %04x:%04x, handle %08x\n"
                     "\n",
                     (DWORD)getAX(), // type of read/write request
                     Type == ANP_READ
@@ -1359,20 +1347,7 @@ Return Value:
                                 : Type == ANP_WRITE2
                                     ? "WRITE2"
                                     : "?????",
-                    StructurePointer,
-                    Handle,
-                    (DWORD)GET_SELECTOR(&StructurePointer->lpBytesRead),
-                    (DWORD)GET_OFFSET(&StructurePointer->lpBytesRead),
-                    (DWORD)StructurePointer->BufferLength,
-                    (DWORD)GET_SELECTOR(&StructurePointer->lpBuffer),
-                    (DWORD)GET_OFFSET(&StructurePointer->lpBuffer),
-                    (DWORD)GET_SELECTOR(&StructurePointer->lpErrorCode),
-                    (DWORD)GET_OFFSET(&StructurePointer->lpErrorCode),
-                    (DWORD)GET_SELECTOR(&StructurePointer->lpANR),
-                    (DWORD)GET_OFFSET(&StructurePointer->lpANR),
-                    (DWORD)StructurePointer->PipeHandle,
-                    (DWORD)GET_SELECTOR(&StructurePointer->lpSemaphore),
-                    (DWORD)GET_OFFSET(&StructurePointer->lpSemaphore)
+                    getDS(), getSI(), Handle
                     );
     }
 #endif
@@ -1401,7 +1376,7 @@ Return Value:
     // not-signalled state
     //
 
-    if (hThread == NULL) {
+    if (VrpNmpThread == NULL) {
         VrpNmpSomethingToDo = CreateEvent(NULL, FALSE, FALSE, NULL);
         if (VrpNmpSomethingToDo == NULL) {
 
@@ -1425,14 +1400,14 @@ Return Value:
         // we have the "something to do" event. Now create the thread
         //
 
-        hThread = CreateThread(NULL,
-                               0,
-                               VrpAsyncNmPipeThread,
-                               NULL,
-                               0,
-                               &tid
-                               );
-        if (hThread == NULL) {
+        VrpNmpThread = CreateThread(NULL,
+                                    0,
+                                    VrpAsyncNmPipeThread,
+                                    NULL,
+                                    0,
+                                    &VrpNmpThreadId
+                                    );
+        if (VrpNmpThread == NULL) {
 
 #if DBG
             IF_DEBUG(NAMEPIPE) {
@@ -1443,9 +1418,11 @@ Return Value:
 #endif
 
             CloseHandle(VrpNmpSomethingToDo);
+            VrpNmpSomethingToDo = NULL;
             SET_ERROR(ERROR_NOT_ENOUGH_MEMORY);
             return;
         }
+        mvdm_redirector_async_worker_begin();
     }
 
     //
@@ -1467,6 +1444,9 @@ Return Value:
     }
 
     RtlZeroMemory(&pAsyncInfo->Overlapped, sizeof(pAsyncInfo->Overlapped));
+    /* DIVERGENCE(MVDM-HOST-DIV-167): LocalAlloc does not promise a zeroed
+     * private field. The overlay uses this member solely as ownership state. */
+    pAsyncInfo->PrivateAsyncState = NULL;
 
     //
     // create a new event for this request - there can be multiple simultaneous
@@ -1504,22 +1484,12 @@ Return Value:
 
     pAsyncInfo->Completed = FALSE;
     pAsyncInfo->Handle = Handle;
-    pAsyncInfo->Buffer = (DWORD)StructurePointer->lpBuffer;
-    pAsyncInfo->pBytesTransferred = READ_FAR_POINTER(&StructurePointer->lpBytesRead);
-    pAsyncInfo->pErrorCode = READ_FAR_POINTER(&StructurePointer->lpErrorCode);
-    pAsyncInfo->ANR = READ_DWORD(&StructurePointer->lpANR);
-
-    //
-    // if this is an AsyncNmPipe2 call then it has an associated semaphore
-    // handle. Earlier versions don't have a semaphore
-    //
-
-    if (Type == ANP_READ2 || Type == ANP_WRITE2) {
-        pAsyncInfo->Type2 = TRUE;
-        pAsyncInfo->Semaphore = READ_DWORD(&StructurePointer->lpSemaphore);
-    } else {
-        pAsyncInfo->Type2 = FALSE;
-        pAsyncInfo->Semaphore = (DWORD)NULL;
+    if (!mvdm_redirector_async_prepare(pAsyncInfo, getDS(), getSI(), Type,
+            &buffer, &length)) {
+        CloseHandle(hEvent);
+        LocalFree(pAsyncInfo);
+        SET_ERROR(ERROR_INVALID_ADDRESS);
+        return;
     }
 
 #if DBG
@@ -1599,6 +1569,7 @@ Return Value:
 
         VrpDequeueAsyncRequest(pAsyncInfo);
         CloseHandle(hEvent);
+        mvdm_redirector_async_release(pAsyncInfo);
         LocalFree(pAsyncInfo);
         SET_ERROR((WORD)error);
     } else {
@@ -1703,6 +1674,7 @@ Return Value:
 
         VrpDequeueAsyncRequest(pAsyncInfo);
         CloseHandle(pAsyncInfo->Overlapped.hEvent);
+        mvdm_redirector_async_release(pAsyncInfo);
         LocalFree(pAsyncInfo);
 
 #if DBG
@@ -1751,11 +1723,36 @@ Return Value:
 --*/
 
 {
+    PDOS_ASYNC_NAMED_PIPE_INFO request;
 #if DBG
     IF_DEBUG(NAMEPIPE) {
         DbgPrint("VrTerminateNamedPipes\n");
     }
 #endif
+
+    /* DIVERGENCE(MVDM-HOST-DIV-169): the original source declares this
+     * process-termination cleanup but the retained body is empty. Preserve
+     * its owner and cleanup order: stop/join the original worker before
+     * releasing its original queue records. */
+    if (VrpNmpThread != NULL) {
+        mvdm_redirector_async_worker_request_stop();
+        if (VrpNmpSomethingToDo != NULL) SetEvent(VrpNmpSomethingToDo);
+        if (GetCurrentThreadId() != VrpNmpThreadId)
+            (void)WaitForSingleObject(VrpNmpThread, INFINITE);
+        CloseHandle(VrpNmpThread);
+        VrpNmpThread = NULL;
+        VrpNmpThreadId = 0;
+    }
+    while ((request = VrpDequeueAsyncRequest(RequestQueueHead)) != NULL) {
+        (void)CancelIoEx(request->Handle, &request->Overlapped);
+        CloseHandle(request->Overlapped.hEvent);
+        mvdm_redirector_async_release(request);
+        LocalFree(request);
+    }
+    if (VrpNmpSomethingToDo != NULL) {
+        CloseHandle(VrpNmpSomethingToDo);
+        VrpNmpSomethingToDo = NULL;
+    }
 }
 
 
@@ -1839,7 +1836,7 @@ Return Value:
     }
 #endif
 
-    while (TRUE) {
+    while (!mvdm_redirector_async_worker_stop_requested()) {
 
         //
         // create an array of event handles. The first handle in the array is
@@ -1849,6 +1846,8 @@ Return Value:
 
         numberOfHandles = VrpSnapshotEventList(eventList);
         index = WaitForMultipleObjects(numberOfHandles, eventList, FALSE, INFINITE);
+
+        if (mvdm_redirector_async_worker_stop_requested()) break;
 
         //
         // if the index is 0, then the "something to do" event has been signalled,
@@ -2089,8 +2088,16 @@ Return Value:
     // update the VDM variables
     //
 
-    WRITE_WORD(pAsyncInfo->pErrorCode, error);
-    WRITE_WORD(pAsyncInfo->pBytesTransferred, bytesTransferred);
+    if (!mvdm_redirector_async_complete(pAsyncInfo, bytesTransferred, error)) {
+        /* DIVERGENCE(MVDM-HOST-DIV-167): guest memory may have disappeared
+         * with its session while host I/O was completing. Do not publish a
+         * stale completion or keep an alias past that event. */
+        VrpDequeueAsyncRequest(pAsyncInfo);
+        CloseHandle(pAsyncInfo->Overlapped.hEvent);
+        mvdm_redirector_async_release(pAsyncInfo);
+        LocalFree(pAsyncInfo);
+        return;
+    }
 
 #if DBG
 
@@ -2127,6 +2134,7 @@ Return Value:
 #endif
 
         CloseHandle(pAsyncInfo->Overlapped.hEvent);
+        mvdm_redirector_async_release(pAsyncInfo);
         LocalFree(pAsyncInfo);
     } else {
 
@@ -2933,8 +2941,10 @@ Return Value:
 --*/
 
 {
-    DWORD prefixLength; // length of \\computername
-    DWORD pipeLength;   // length of pipe name without computername/device prefix
+    /* DIVERGENCE(MVDM-HOST-DIV-168): these measure one private host string,
+     * not a DOS field.  Preserve native pointer-difference width. */
+    size_t prefixLength; // length of \\computername
+    size_t pipeLength;   // length of pipe name without computername/device prefix
     LPSTR pipeName;     // \PIPE\name...
     static char ThisComputerName[MAX_COMPUTERNAME_LENGTH+1] = {0};
     static DWORD ThisComputerNameLength = 0xffffffff;
@@ -2966,7 +2976,7 @@ Return Value:
         }
         ASSERT(pipeName);
         pipeLength = strlen(pipeName);
-        prefixLength = (DWORD)pipeName - (DWORD)Name;
+        prefixLength = (size_t)(pipeName - Name);
         if (ThisComputerNameLength && (prefixLength - 2 == ThisComputerNameLength)) {
             if (!_strnicmp(ThisComputerName, &Name[2], ThisComputerNameLength)) {
                 strcpy(Buffer, LOCAL_DEVICE_PREFIX);
@@ -3049,13 +3059,17 @@ Return Value:
 
 {
     POPEN_NAMED_PIPE_INFO PipeInfo;
-    DWORD NameLength;
+    size_t NameLength;
 
     //
     // grab a OPEN_NAMED_PIPE_INFO structure
     //
 
     NameLength = strlen(PipeName) + 1;
+    if (NameLength > MAXDWORD) {
+        SetLastError(ERROR_FILENAME_EXCED_RANGE);
+        return FALSE;
+    }
     PipeInfo = (POPEN_NAMED_PIPE_INFO)
                 LocalAlloc(LMEM_FIXED,
                     ROUND_UP_COUNT((sizeof(OPEN_NAMED_PIPE_INFO) + NameLength),
@@ -3086,7 +3100,7 @@ Return Value:
 
     PipeInfo->Next = NULL;
     PipeInfo->Handle = Handle;
-    PipeInfo->NameLength = NameLength;
+    PipeInfo->NameLength = (DWORD)NameLength;
     strcpy(PipeInfo->Name, PipeName);   // from DOS, so its old-fashioned ASCII
 
     //

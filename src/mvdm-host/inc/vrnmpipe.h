@@ -260,13 +260,21 @@ typedef struct _DOS_ASYNC_NAMED_PIPE_INFO {
     HANDLE  Handle;             // 32-bit named pipe handle
     DWORD   Buffer;             // 16:16 address of buffer
     DWORD   BytesTransferred;   // actual number of bytes read/written
-    LPWORD  pBytesTransferred;  // flat-32 pointer to returned read/write count in VDM
-    LPWORD  pErrorCode;         // flat-32 pointer to returned error code in VDM
+    /* DIVERGENCE(MVDM-HOST-DIV-167): these are original 16:16 guest
+     * locations, not durable flat host pointers.  Keep their four-byte
+     * representation; the matching private Redirector overlay acquires a
+     * fresh session lease only when it reads or writes either location. */
+    DWORD   pBytesTransferred;
+    DWORD   pErrorCode;
     DWORD   ANR;                // 16:16 address of ANR
     DWORD   Semaphore;          // 16:16 address of 'semaphore' in VDM
 #if DBG
     DWORD   RequestType;
 #endif
+    /* DIVERGENCE(MVDM-HOST-DIV-167): private host-only staging state for one
+     * outstanding original async request.  It never enters a guest, MVDM or
+     * adapter ABI and is released at the original request cleanup points. */
+    PVOID   PrivateAsyncState;
 } DOS_ASYNC_NAMED_PIPE_INFO, *PDOS_ASYNC_NAMED_PIPE_INFO;
 
 //

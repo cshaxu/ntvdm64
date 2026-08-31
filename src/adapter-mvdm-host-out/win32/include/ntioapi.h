@@ -78,12 +78,10 @@ typedef enum _ADAPTER_FS_INFORMATION_CLASS {
 #define DOS_DOT (L'"')
 #endif
 
-/* Reached unchanged SoftPC fixed-disk source needs this exact NT4 input
- * layout.  It remains process-local host I/O data and never crosses a guest
- * or component ABI. */
-typedef struct _FSCTL_QUERY_FAT_BPB_BUFFER {
-    UCHAR First0x24BytesOfBootSector[0x24];
-} FSCTL_QUERY_FAT_BPB_BUFFER, *PFSCTL_QUERY_FAT_BPB_BUFFER;
+/* The public modern SDK's winioctl.h now supplies the byte-identical
+ * FSCTL_QUERY_FAT_BPB_BUFFER layout.  Do not redeclare an OpenNT copy here:
+ * original fixed-disk code continues to use the same name and host-local
+ * 0x24-byte contract through that public declaration. */
 
 typedef struct _FILE_ALIGNMENT_INFORMATION {
     ULONG AlignmentRequirement;
