@@ -494,6 +494,13 @@ CPU40/SPC386-unavailable slots; it is a bounded future caller-capability
 cohort, not a justified first-fetch crash repair.  No BOP, mapping or observer
 path changes. See [P59 evidence](etc/evidence/m0-t318-s2-p59-cpu40-cvidc-vector-contract-audit-001.md).
 
+**S2 P60:** P57's retained `0xC0000005` came from the distinct
+`original-softpc-process-p60.exe` copy, not the current manifest-selected
+formal product.  The current fixed container's normal record is a bounded
+timeout.  P57's source repair remains valid, but its runtime result is
+historical only; no NTIO/NTDOS/EXEC claim is made. See [P60
+evidence](etc/evidence/m0-t318-s2-p60-runtime-product-identity-reconciliation-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
