@@ -4,8 +4,42 @@
 
 ## Active Packet
 
-**No active M/T/S packet.** M0 T325 is closed; the next queue item requires a
+**No active M/T/S packet.** M0 T326 is closed; queue candidate 2 requires a
 fresh admitted packet before implementation begins.
+
+### M0 T326 S1 — Fixed SoftPC pre-BOP startup cut
+
+**Closed: M0 T326 S1**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T326 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 1, admitted under the standing owner direction to execute the ordered queue. |
+| Objective | Establish one fixed original-SoftPC CPU40 pre-BOP startup cut and identify the exact original owner of the first continuity stop or first BOP ingress. |
+| Non-goals | No BOP service, DOS/guest, controller-result, WOW, VDD, debugger, Bochs, CPU30/MONITOR, kernel-VDM, new mapper, raw pointer, synthetic device success or product-shell redesign. |
+| Reference Baseline | T313 SoftPC source closure; T318 NTDOS owner transfer; T319 ROM/termination attribution; selected CPU40 source graph and staged immutable media. |
+| Files And ABI Surface | Original product entry, SoftPC startup, media/firmware staging, CPU40 entry, timer/event/error sources and directly created raw workers; fixed observer and formal Ninja source selection. |
+| Applicable Rules | Execution, source policy, original-source-first recovery, mirror/overlay, architecture, mapping-manager, session and paired-host build rules. |
+| Verification | Ordered original source walk; fixed-container manifest review; paired x86/x64 compile graphs; one bounded x86 observation; governance and diff review. |
+| Expected Markers | One named source owner or one first original BOP ingress, with no changed observer variable, no synthetic success and no inferred trace repair. |
+| Asset Needs | Existing selected MVDM mirror/media, CPU40 formal graph, fixed observer and session/adapter boundaries; no new guest or host installation. |
+| Reporting Requirements | Record original call order, worker creation/lifetime, terminal route, exact media/firmware inputs, architecture result and the named next owner transfer. |
+| Stop Conditions | Need for a second executor, kernel/CSRSS reconstruction, invented device success, persistent native pointer, unreviewed source import or change outside the selected complete owner cluster pauses for re-admission. |
+| Exit Criteria | The fixed pre-BOP cut and one observed result identify a bounded owner-recovery S or an exact source-owned transfer; no BOP/business-runtime claim is made from startup evidence alone. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | Product entry, media/firmware discovery, console/error initialization, timer/event/raw-worker creation, CPU40 start/return, termination and pre-BOP exception paths. |
+
+**S1 plan:** [the SoftPC pre-BOP startup-continuity plan](etc/operations/m0-t326-softpc-pre-bop-startup-continuity-plan-001.md)
+fixes the container and original-source cut before selecting any implementation.
+
+**S1 closed:** [the fixed SoftPC startup-cut evidence](etc/evidence/m0-t326-s1-fixed-softpc-pre-bop-startup-cut-001.md)
+records the original `50:11 → MS_bop_0 → DemDispatch → demLoadDos` crossing,
+the unchanged fixed container, paired successful product links and the
+post-crossing successor exception.
+
+**T326 closed:** no pre-BOP owner recovery was admissible after S1 reached the
+original boundary. The post-crossing ordinary guest control flow transfers to
+queue candidate 2, Minimal DOS guest execution and controlled return.
 
 ### M0 T325 S1 — NetAPI/RAP Redirector original-owner baseline
 

@@ -290,17 +290,60 @@ mirrors with the Base VDM protocol, closed local child lifecycle and machine
 interfaces. **Exit:** local package matrix and explicit unavailable historical
 product-shell branches; no new app-owned command semantics.
 
+## P06A — SoftPC pre-BOP startup continuity
+
+**Predecessor:** P06 and the completed CPU40 source-owner transfer record.
+**Purpose:** close the actual original machine-to-guest startup continuity gap
+that remains after static ownership and normal-link evidence: the fixed
+CPU40 runtime must execute the selected immutable `NTIO.SYS` entry through
+its first original `50h:11h` host-service crossing. This package owns the
+complete reached original pre-BOP cohort together—CPU40 recursive execution,
+FDC/INT15 memory and disk prerequisites, heartbeat/PIT/ICA event delivery,
+and their original thread/lifetime gates. It is not permission to make a
+trace-selected BOP provider change.
+
+**S1 admission:** freeze one normal, console-owning runtime container and
+map the original call/definition/worker sequence from `InitialiseDosEmulation`
+through the unreached `MS_bop_0` carrier. The admission must identify the
+first missing or wrong original owner edge before implementation, and assess
+the complete sibling FDC/INT15/heartbeat cohort rather than repairing one
+observed instruction or event.
+
+**Delivery:** recover the first usable original source body through the
+smallest same-shaped adapter or registered overlay; preserve CPU40, SoftPC,
+SAS, BIOS, PIC and timer ownership. No app-owned guest loader, synthetic
+BOP result, invented DOS service, alternate CPU/machine or changed guest
+media is permitted.
+
+**Exit:** the unchanged declared runtime container reaches the original
+`NTIO` `50h:11h → MS_bop_0 → DemDispatch → demLoadDos` crossing at least
+once, with a bounded observation proving its original register/frame and
+owner sequence. Paired x86/x64 source graphs compile and link; x64 runtime
+is claimed only if it is actually observed. A source-shaped unavailable
+result is acceptable only if it occurs after the crossing and has an exact
+owner transfer. The detailed admission and evidence requirements are in
+[the pre-BOP startup continuity proposal](proposal-softpc-pre-bop-startup-continuity-001.md).
+
 ## P07 — Minimal DOS guest execution and controlled return
 
-**Predecessor:** P06. **S1 admission:** verify only reached guest load and
-return contracts. **Delivery:** load and run one declared DOS program
-through the completed vertical slice. **Exit:** controlled result-return
-evidence; a trace verifies this package and does not select repairs.
+**Predecessor:** P06A. **S1 admission:** verify the reached guest load,
+local namespace/file, NTDOS `EXEC`, PSP/arena/JFN/environment and parent
+return contracts after the pre-BOP continuity package has reached the
+original `demLoadDos` crossing. **Delivery:** load and run one declared local
+DOS `.COM` or minimal `.EXE` through the completed vertical slice. Its
+observable exit status must return through the original parent/COMMAND
+contract. **Exit:** controlled program result-return evidence from one
+unchanged runtime container; a trace verifies this complete package and does
+not select repairs. Link closure, NTIO first fetch, or BOP ingress alone is
+not an execution claim.
 
 ## P08 — Minimal vertical-slice integration closure
 
-**Predecessor:** P07. **Delivery:** x86/x64 positive/negative matrix and
-reversion sweep. **Exit:** no unowned bypass in the completed first slice.
+**Predecessor:** P07. **Delivery:** fixed x86/x64 positive/negative matrix,
+including the declared DOS-program execution and controlled-return result,
+plus a reversion sweep. **Exit:** no unowned bypass in the completed first
+slice; a compiled or host-only package check does not substitute for the
+required x86 guest-runtime observation.
 
 ## P09 — XMS owner package
 

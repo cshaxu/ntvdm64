@@ -41,14 +41,17 @@ failure disposition in both host graphs.
 ## Phase 2 — Minimal runnable vertical slice
 
 Recover the Base VDM client/server vertical slice through its bounded private
-host adapter, then connect original DEM/COMMAND to the Bochs machine and run
-one declared DOS program. Original code stays intact except for recorded
+host adapter, then close the original SoftPC/CPU40 pre-BOP startup cohort
+before attempting DOS execution. That cohort must reach the original NTIO
+`50h:11h` crossing; only then load and run one declared DOS program and prove
+its controlled return. Original code stays intact except for recorded
 same-shaped binding changes. CSR/CSRSS, kernel VDM and a second CPU executor
 remain outside the boundary.
 
-**Gate:** command/control protocol and source-shaped machine entry/stop
-contracts have local x86/x64 proof with explicit unavailable product-shell
-branches.
+**Gate:** the fixed x86 runtime container reaches the original `50h:11h`
+crossing and completes one declared DOS program's controlled return;
+command/control and source-shaped machine entry/stop contracts have paired
+x86/x64 source proof with explicit unavailable product-shell branches.
 
 ## Phase 3 — Original MVDM service packages
 
