@@ -23,6 +23,7 @@ This line causes this file to be build with a checkin of NT_PIF.H
 #include "nt_reset.h"
 #include <oemuni.h>
 #include "error.h"
+#include "mvdm_softpc_firmware.h"
 
 
  //
@@ -66,10 +67,17 @@ VOID GetPIFConfigFiles(BOOL bConfig, char *pchFileName)
    ppch = bConfig ? &pchConfigFile : &pchAutoexecFile;
    if (!*ppch)
       {
-       dw = GetSystemDirectory(pchFileName, MAX_PATH);
-       if (!dw || *(pchFileName+dw-1) != achSlash[0])
-           strcat(pchFileName, achSlash);
-       strcat(pchFileName, bConfig ? achConfigNT : achAutoexecNT);
+       /* DIVERGENCE(MVDM-HOST-DIV-157): The NT4 product defaulted to a
+        * system-directory config.nt/autoexec.nt pair.  Those files are not
+        * an installed modern-Windows contract.  Preserve the original PIF
+        * override branch and caller-owned output buffer, but resolve the
+        * no-PIF default from the immutable DOS media root selected by app.
+        * A missing selected file still returns the original bad-name result
+        * and therefore follows cmdconf.c's existing fatal path. */
+       if (!mvdm_softpc_dos_find_file(
+               bConfig ? achConfigNT : achAutoexecNT,
+               pchFileName, MAX_PATH + 12))
+           *pchFileName = '\0';
        }
    else {
        dw = ExpandEnvironmentStringsOem(*ppch, pchFileName, MAX_PATH+12);

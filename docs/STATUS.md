@@ -389,6 +389,14 @@ temporary-config and console-init behavior remains a single original COMMAND
 owner cohort; no new BOP route or app loader is admissible.  See [P45
 evidence](etc/evidence/m0-t318-s2-p45-ntdos-configuration-command-owner-cohort-001.md).
 
+**S2 P46:** the original PIF configuration selector's obsolete system-directory
+default is now bound to the already-selected immutable DOS media root; PIF
+overrides and the original failure path remain unchanged.  The fixed stage now
+carries byte-identical `config.nt`/`autoexec.nt`; the one new-product
+observation changed from immediate exit to the bounded timeout, without
+claiming NTIO reachability.  See [P46
+evidence](etc/evidence/m0-t318-s2-p46-original-configuration-media-binding-closure-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |

@@ -8,6 +8,8 @@ const requiredAssets = [
   ['src/mvdm-guest/dos/v86/doskrnl/bios/NTIO.SYS', 'dos/NTIO.SYS'],
   ['src/mvdm-guest/dos/v86/doskrnl/dos/NTDOS.SYS', 'dos/NTDOS.SYS'],
   ['src/mvdm-guest/dos/v86/cmd/command/COMMAND.COM', 'dos/COMMAND.COM'],
+  ['src/mvdm-guest/bin86/config.nt', 'dos/config.nt'],
+  ['src/mvdm-guest/bin86/autoexec.nt', 'dos/autoexec.nt'],
   ['src/mvdm-softpc-firmware/softpc.new/roms/bios1.rom', 'softpc/roms/bios1.rom'],
   ['src/mvdm-softpc-firmware/softpc.new/roms/bios2.rom', 'softpc/roms/bios2.rom'],
   ['src/mvdm-softpc-firmware/softpc.new/roms/bios4.rom', 'softpc/roms/bios4.rom'],
