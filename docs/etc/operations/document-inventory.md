@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3453 |
+| Documentation records | 3454 |
 | --- | --- |
-| Generated UTC | 2026-08-31T07:16:58Z |
+| Generated UTC | 2026-08-31T07:21:40Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 74f1e654adec9c0e0bed228763bd6ac8827527724f38c85ba5cc63b93df02437 |
+| STATUS.md | principal control document | 6c02bf5229a059cd42437e6a5f8123d5509f51e77ddbc3f12903ecad815a03c6 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -955,6 +955,7 @@ content-divergent entries.
 | etc/evidence/m0-t318-s2-p30-current-source-immutable-runtime-baseline-001.md | indexed supporting material | ceaf7de0a665bb98a05ba8d0178148a308983673bb87b09a54d876e727c75f52 |
 | etc/evidence/m0-t318-s2-p31-original-unhandled-exception-boundary-audit-001.md | indexed supporting material | 11bf16b3a8f15dd2ed32d8bc3d5798d4dddb9816896113882149907798fa2ed9 |
 | etc/evidence/m0-t318-s2-p32-cpu40-memory-and-first-dispatch-boundary-audit-001.md | indexed supporting material | 4596f2f3411e4a723c7580773967c70d6ee0c4a14deeb01409ece3848684add3 |
+| etc/evidence/m0-t318-s2-p33-cpu40-first-fetch-and-dispatch-owner-audit-001.md | indexed supporting material | e81f65ed1362c14b1b7d38f5c4fd759a271ee4717960d04e59dab3f3149b0b53 |
 | etc/evidence/m0-t318-s2-p4-original-resource-and-startup-contract-001.md | indexed supporting material | 688539591b39b3e0bfa95a29ee62ae2d6d258bda78b01f3f0fec719186e32c92 |
 | etc/evidence/m0-t318-s2-p5-console-observation-admission-001.md | indexed supporting material | 6326836e2f291accf9ed0aa1884c8bf125159ea95cdfb28be404338c1c9f46c0 |
 | etc/evidence/m0-t318-s2-p6-base-vdm-ordinary-child-declaration-001.md | indexed supporting material | eb1928486ac016b6fb8e0589aabbc9f6f4cc845181c03fbb812bae31ba6a312f |

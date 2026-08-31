@@ -290,6 +290,15 @@ attribution or source change is admitted. The next static unit is original
 `c_cpu_simulate → ccpu(FALSE)` first dispatch; see [P32
 evidence](etc/evidence/m0-t318-s2-p32-cpu40-memory-and-first-dispatch-boundary-audit-001.md).
 
+**S2 P33:** the selected CCPU40 direct first-fetch path is now source-closed:
+`host_start_cpu → c_cpu_simulate → ccpu → SETUP_HOST_IP` reads the loaded NTIO
+address from the original contiguous `CCPU_M` allocation. It neither requires
+the mapping manager nor the historical register-vector initializer. CCPU TLS,
+exception-frame, timer and C-VID branches have defined later ownership, with
+no current evidence that one caused r30's escaped access violation. The next
+action is one unchanged formal r30 observation; see [P33
+evidence](etc/evidence/m0-t318-s2-p33-cpu40-first-fetch-and-dispatch-owner-audit-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
