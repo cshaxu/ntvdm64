@@ -33,6 +33,12 @@ the selected CPU40 profile only because original source gates them under `PIG`
 or `SPC486`; they are not all missing-source claims. They are an
 owner-contract recovery cohort, not fallback behavior.
 
+The original `obj.vdm/cdefine.inc` confirms that the retail CCPU40 profile
+selects `PROD`, `SPC386`, `CPU_40_STYLE`, `CCPU`, and `C_VID`; `PIG` is a
+checked-build option and `SPC486` is not selected.  Consequently the
+`PIG`/`SPC486` slots are original profile exclusions, not candidates for a
+global compile-definition change.
+
 ## Verification
 
 - Generated x86 CPU40 graph and linked `original-softpc-process.exe`: pass.
