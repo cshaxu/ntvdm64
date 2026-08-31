@@ -4,6 +4,12 @@
 
 ## Active Packet
 
+**No active M/T/S packet.** M0 T323 closed with its bounded DPMI source and
+host-address recovery scope.  The [closure record](history/m0-t323-closure-20260831.md)
+retains the exact completed contract and the monitor/DOS-runtime work that was
+correctly transferred rather than invented.  A subsequent queue task requires
+its own admission before implementation resumes.
+
 ### M0 T323 S1 — Original DPMI/DPMI32 owner and boundary baseline
 
 **Closed: M0 T323 S1**
@@ -33,7 +39,7 @@ shared guest-span contract—not a trace-selected DPMI service.
 
 ### M0 T323 S2 — DPMI shared guest-span and monitor binding recovery
 
-**Active: M0 T323 S2**
+**Closed: M0 T323 S2**
 
 | Field | Record |
 | --- | --- |
@@ -64,8 +70,15 @@ monitor success is admitted.
 `IntelBase`/`FlatAddress` host-width contract in the original DPMI32 mirror.
 The selected original DPMI library and product link pass on x86 and x64.  The
 same evidence retains `VdmSetInt21Handler` and DOS/DEM re-entry as exact
-later-owner transfers; S2 remains active pending its scoped-span review and
-final closure decision.
+later-owner transfers.  The source/lifetime ledger plus formal x86/x64 build
+matrix meet this bounded S's closure evidence; they do not claim DPMI guest
+runtime, protected interrupt delivery or DOSX/DEM re-entry completion.
+
+**Closed: M0 T323.** The original DPMI/DPMI32 provider now has a complete
+selected-source boundary ledger and its one shared guest-span/host-address
+cohort is source-shaped, registered and formally linked.  The next work must
+admit an owner package for one of the named monitor or DOS-runtime transfers,
+not reopen this closure as a per-BOP repair.
 
 ### M0 T322 S1 — Original XMS ownership and memory-binding baseline
 

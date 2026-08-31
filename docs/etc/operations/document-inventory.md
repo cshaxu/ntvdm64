@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3513 |
+| Documentation records | 3514 |
 | --- | --- |
-| Generated UTC | 2026-08-31T18:35:05Z |
+| Generated UTC | 2026-08-31T18:36:50Z |
 
 ## Entries
 
@@ -3240,6 +3240,7 @@ content-divergent entries.
 | history/m0-t317-dem-command-softpc-vertical-slice-closure-20260830.md | closed task history | e1fdefadf1a07ab80343699faa472b03547cd9e7e0fee4671e3bef423ca2bbc7 |
 | history/m0-t318-ntdos-ordinary-child-owner-transfer-closure-20260831.md | closed task history | 9a0fb959fd97228207efd613cdde2a5dab073fbb5e67ab1ecf6d98a4c7844329 |
 | history/m0-t319-softpc-rom-residency-and-termination-closure-20260831.md | closed task history | 7f96f92ea44c934f037807cbe558548dff7f706ddcdcac5feced3f7b3a1da495 |
+| history/m0-t323-closure-20260831.md | closed task history | 4fddc3202622ec942d6cee1351804fd5c4de365f615bde366c6d109faabf223e |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -3527,7 +3528,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 5709e2516a165b1c0b8176a743c5cb1451a803362ae2de9b7259eaf582cf1eed |
+| STATUS.md | principal control document | 691736260d1a1bb7f739bdcd191c14c9c367609733113b09243955199daa01cc |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
