@@ -256,6 +256,15 @@ pre-BOP reachability.  Recovery returns to P24/P26's static original startup
 owner clusters; no BOP or guest-execution claim is made. See [P28
 evidence](etc/evidence/m0-t318-s2-p28-passive-dispatch-observer-rejection-001.md).
 
+**S2 P29:** the original startup predecessor scan now fixes the complete
+`ntvdm.c → host_main → host_applInit → InitialiseDosEmulation →
+host_start_cpu` owner order.  It separates console/display, CCPU/VGA,
+DOS-media/Base-VDM and CPU handoff clusters, and proves no selected
+startup-side `120` return or BOP service lies between `host_start_cpu` and the
+CPU engine.  Subsequent recovery must select one unresolved original owner
+cluster before another unchanged-container observation. See [P29
+evidence](etc/evidence/m0-t318-s2-p29-original-startup-prerequisite-owner-scan-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
