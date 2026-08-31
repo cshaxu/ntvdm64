@@ -162,18 +162,33 @@ static NTSTATUS get_next_dos(base_vdm_local *record, PVDMINFO information)
         LeaveCriticalSection(&record->lock);
         return STATUS_SUCCESS;
     }
+    /* BaseSrv's normal command response makes CmdLine mandatory, but each
+     * other capture buffer is optional.  In particular, original
+     * cmdGetNextCmd obtains its first DOS environment from guest state and
+     * calls with ASKING_FOR_FIRST_COMMAND plus Env == NULL/EnvLen == 0.
+     * Do not turn that original client/server contract into a local
+     * requirement for a host environment buffer. */
     if (!has_buffer(information->CmdLine, information->CmdSize, record->command_bytes) ||
-        !has_buffer(information->AppName, information->AppLen, record->application_bytes) ||
-        !has_buffer(information->Enviornment, information->EnviornmentSize, record->environment_bytes) ||
-        !has_buffer(information->CurDirectory, information->CurDirectoryLen, record->current_directory_bytes)) {
+        (information->AppName != NULL && !has_buffer(information->AppName,
+            information->AppLen, record->application_bytes)) ||
+        (information->Enviornment != NULL && !has_buffer(information->Enviornment,
+            information->EnviornmentSize, record->environment_bytes)) ||
+        (information->CurDirectory != NULL && !has_buffer(information->CurDirectory,
+            information->CurDirectoryLen, record->current_directory_bytes))) {
         required_sizes(record, information);
         LeaveCriticalSection(&record->lock);
         return STATUS_INVALID_PARAMETER;
     }
     (void)copy_bytes((uint8_t *)information->CmdLine, record->command, record->command_bytes);
-    (void)copy_bytes((uint8_t *)information->AppName, record->application, record->application_bytes);
-    (void)copy_bytes((uint8_t *)information->Enviornment, record->environment, record->environment_bytes);
-    (void)copy_bytes((uint8_t *)information->CurDirectory, record->current_directory, record->current_directory_bytes);
+    if (information->AppName != NULL)
+        (void)copy_bytes((uint8_t *)information->AppName, record->application,
+            record->application_bytes);
+    if (information->Enviornment != NULL)
+        (void)copy_bytes((uint8_t *)information->Enviornment, record->environment,
+            record->environment_bytes);
+    if (information->CurDirectory != NULL)
+        (void)copy_bytes((uint8_t *)information->CurDirectory,
+            record->current_directory, record->current_directory_bytes);
     required_sizes(record, information);
     information->VDMState = 0u;
     information->CurDrive = record->current_drive;

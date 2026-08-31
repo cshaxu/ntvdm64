@@ -73,6 +73,11 @@ static int verify_long_package_launch_declaration(void)
     if (declaration.base_vdm.available != 1u) return 30;
     if (declaration.base_vdm.current_directory_bytes != strlen(root) + 1u) return 31;
     if (declaration.base_vdm.application_bytes != strlen(application) + 1u) return 32;
+    if (strcmp((const char *)declaration.base_vdm.command, "/C VER\r\n") != 0) return 36;
+    if (declaration.base_vdm.command_bytes < 3u ||
+        declaration.base_vdm.command[declaration.base_vdm.command_bytes - 3u] != '\r' ||
+        declaration.base_vdm.command[declaration.base_vdm.command_bytes - 2u] != '\n' ||
+        declaration.base_vdm.command[declaration.base_vdm.command_bytes - 1u] != '\0') return 35;
     if (!base_vdm_local_unbind(&declaration.base_vdm)) return 33;
     if (!session_dispose(&instance)) return 34;
     return 0;
@@ -80,7 +85,7 @@ static int verify_long_package_launch_declaration(void)
 
 int main(void)
 {
-    static const uint8_t command[] = "C:\\DOS\\COMMAND.COM /C VER";
+    static const uint8_t command[] = "C:\\DOS\\COMMAND.COM /C VER\r\n";
     static const uint8_t application[] = "C:\\DOS\\COMMAND.COM";
     static const uint8_t environment[] = "COMSPEC=C:\\DOS\\COMMAND.COM\0PATH=C:\\DOS\0\0";
     static const uint8_t directory[] = "C:\\DOS\0";
@@ -162,8 +167,12 @@ int main(void)
     information.CmdSize = sizeof(command_buffer);
     information.AppName = application_buffer;
     information.AppLen = sizeof(application_buffer);
-    information.Enviornment = environment_buffer;
-    information.EnviornmentSize = sizeof(environment_buffer);
+    /* Original cmdGetNextCmd's ASKING_FOR_FIRST_COMMAND does not capture a
+     * host environment: COMMAND.COM already supplied its guest environment.
+     * BaseSrv returns the command record without requiring this optional
+     * buffer. */
+    information.Enviornment = NULL;
+    information.EnviornmentSize = 0u;
     information.CurDirectory = directory_buffer;
     information.CurDirectoryLen = sizeof(directory_buffer);
     if (!GetNextVDMCommand(&information) || information.VDMState != 0u ||
@@ -173,7 +182,6 @@ int main(void)
         information.StdIn != NULL || information.StdOut != NULL || information.StdErr != NULL ||
         memcmp(command_buffer, command, sizeof(command)) != 0 ||
         memcmp(application_buffer, application, sizeof(application)) != 0 ||
-        memcmp(environment_buffer, environment, sizeof(environment)) != 0 ||
         memcmp(directory_buffer, directory, sizeof(directory)) != 0) return 5;
 
     /* Original BaseClient waits when BaseSrv has no DOS record, then retries

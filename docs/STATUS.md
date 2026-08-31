@@ -501,6 +501,14 @@ timeout.  P57's source repair remains valid, but its runtime result is
 historical only; no NTIO/NTDOS/EXEC claim is made. See [P60
 evidence](etc/evidence/m0-t318-s2-p60-runtime-product-identity-reconciliation-001.md).
 
+**S2 P61:** the one-child composition now honors the original Base VDM
+first-command contract: separate `AppName`, CR/LF-terminated `CmdLine`, and
+an optional host environment capture buffer.  The original BaseSrv server
+source is the direct evidence; the local x86 regression passes and the x64
+row links.  A changed-product r33 run still exposes `0xC0000005`, so this is
+source/ABI closure only, not guest-continuity evidence. See [P61
+evidence](etc/evidence/m0-t318-s2-p61-basesrv-first-command-contract-closure-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |

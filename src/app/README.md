@@ -23,7 +23,8 @@ whether this is the first DOS VDM. A declared command payload remains owned by
 the Base VDM adapter.
 
 For the admitted one-child integration profile, `--ordinary-child` declares
-the selected session's immutable `dos/COMMAND.COM /C VER` image through that
+the selected session's immutable `dos/COMMAND.COM /C VER` image, with the
+original Base VDM `CmdLine` CR/LF terminator, through that
 same copied record. App removes only this composition option before entering
 the original SoftPC argument parser. It derives the command, application,
 environment and current directory from the session-selected DOS media root;

@@ -90,9 +90,7 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     if (!make_path(declaration->application, sizeof(declaration->application),
             root, "COMMAND.COM") ||
         !append_text(declaration->command, sizeof(declaration->command),
-            &command_length, declaration->application) ||
-        !append_text(declaration->command, sizeof(declaration->command),
-            &command_length, " /C VER") ||
+            &command_length, "/C VER\r\n") ||
         !append_text(declaration->environment, sizeof(declaration->environment),
             &environment_length, "COMSPEC=") ||
         !append_text(declaration->environment, sizeof(declaration->environment),
@@ -117,6 +115,10 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     command.code_page = 437u;
     command.current_drive = (uint16_t)(drive_letter - 'A');
     command.command = (const uint8_t *)declaration->command;
+    /* Original cmdGetNextCmd treats VDMINFO.CmdLine as a command line with
+     * a mandatory CR/LF tail, followed by this transport NUL.  Keep that
+     * BaseSrv/BaseClient contract at the app composition boundary rather
+     * than making the original COMMAND body accept a new string shape. */
     command.command_bytes = (uint16_t)(command_length + 1u);
     command.application = (const uint8_t *)declaration->application;
     command.application_bytes = (uint16_t)(strlen(declaration->application) + 1u);
