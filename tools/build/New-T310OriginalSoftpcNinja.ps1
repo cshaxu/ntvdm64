@@ -173,17 +173,18 @@ if (!(Test-Path -LiteralPath $hostEntrySource)) { throw "Original SoftPC host en
 $adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_compat.c',
                           'nt_thread_alert_compat.c', 'nt_wait_compat.c',
                           'opennt_support_rtl.c', 'console_compat.c', 'crt_compat.c',
-                          'command_process_compat.c')
+                          'command_process_compat.c', 'wow_private_unavailable.c')
 # ExitVDM is an original Base client call reached by selected SoftPC teardown
 # sources.  It already has one same-shaped session-owned implementation; keep
 # it in the formal closure instead of accepting an unresolved external edge.
 $adapterBaseSrvNames = @('base_vdm_client.c', 'base_vdm_local.c')
 $adapterMonitorNames = @('vdm_control.c', '../mvdm_vdm_tib.c')
-$adapterDebuggerNames = @('dbg_init.c')
+$adapterDebuggerNames = @('dbg_init.c', 'dbg_unavailable.c')
 $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_physical_mapping.c', 'mvdm_host_identity.c',
                         'mvdm_guest_location.c', 'mvdm_command_redirection.c', 'mvdm_command_guest_state.c',
                         'mvdm_vdd_sft_shadow.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
-                        'mvdm_softpc_descriptor_fields.c')
+                        'mvdm_softpc_descriptor_fields.c', 'mvdm_softpc_activity_unavailable.c',
+                        'mvdm_softpc_vdd_unavailable.c')
 $appNames = @('machine_shell.c', 'package_layout.c', 'entry.c')
 $effectiveAddressSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_effective_address.c'
 $effectiveAddressObject = 'obj/adapter-softpc/mvdm_softpc_effective_address.obj'

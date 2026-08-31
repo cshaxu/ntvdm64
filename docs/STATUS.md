@@ -71,9 +71,10 @@ closure, not a `50:11` or NTDOS execution claim.  See [P2 evidence](etc/evidence
 **S2 P3:** the current selected CPU40 source graph archives under both x86 and
 x64 through the generated one-time-MSVC, Ninja-`-j 8` runner. Three historic
 host-local RTL spellings and the original CCPU descriptor decoder now have one
-same-shaped binding each; the non-`/FORCE` product link leaves only named
-debugger/WOW/VDD/generated-CCPU owner boundaries. No empty provider or runtime
-claim was introduced. See [P3 evidence](etc/evidence/m0-t318-s2-p3-dual-width-normal-link-boundary-001.md).
+same-shaped binding each, and the non-`/FORCE` product now links in both rows.
+Private debugger/WOW/VDD/generated-CCPU boundaries retain their original
+callable ABI but controlled-stop only a session when actually reached; no empty
+provider or runtime-completeness claim was introduced. See [P3 evidence](etc/evidence/m0-t318-s2-p3-dual-width-normal-link-boundary-001.md).
 
 ### M0 T317 S2 closure record
 

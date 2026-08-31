@@ -52,32 +52,41 @@ the retired CPU30/V86 route; session TLS remains the sole runtime storage.
 ## Normal-product link result
 
 `original-softpc-process.exe` deliberately performs a non-`/FORCE` link with
-the real app entry and selected original static libraries.  It does **not**
-yet link.  The remaining names are exact cross-owner boundaries, not generic
-archive omissions:
+the real app entry and selected original static libraries.  It now links in
+both rows.  The final x86 incremental relink required only three Ninja actions
+(the changed Win32 adapter object, its static library, and the executable),
+while the fresh x64 product graph completed 89 selected actions under the
+one-time-MSVC, eight-job runner.
+
+The prior unresolved names are no longer left as accidental linker gaps.  They
+are source-shaped unavailable boundaries with their original callable ABI
+retained:
 
 - `ActivityCheckAfterTimeSlice`: source-unavailable generated CCPU activity
-  callback; the original source does not establish a safe no-op, yield or
-  timer replacement.
-- `ClearInstanceDataMarking`: historical VxD instance-data lifecycle;
-  ordinary DOS does not establish its required mapping/cleanup semantics.
+  callback.  An actual reached callback controlled-stops the bound session;
+  it is not a no-op, yield, timer or fabricated scheduler.
+- `ClearInstanceDataMarking`: historical VxD instance-data lifecycle.  An
+  actual reached cleanup controlled-stops the bound session rather than
+  claiming the absent VDD product released its state.
 - `DBGDispatch`, `ModuleLoad`, `ModuleFree`, `ModuleSegmentMove`, and
   `DbgPrompt`: the private NT4 VDM debugger event product.  Its original
-  `dbg.c` package requires the private debugger/CSR transport and is not
-  silently selected.
+  `dbg.c` package requires private debugger/CSR transport; an actual debug
+  operation controlled-stops the bound non-debug session.
 - `ShowStartGlass` and `NtRaiseHardError`: historical WOW/GUI hard-error
-  product-shell forms, outside the declared ordinary non-WOW child profile.
+  product-shell forms.  Public modern Win32 cannot reproduce their private
+  USER/CSRSS broker contracts; an actual reached operation controlled-stops
+  the bound ordinary non-WOW session without manufacturing a dialog response
+  or ending the application process.
 
-After the descriptor bridge, the x86 normal link has nine residuals and the
-x64 normal link has seven. The x86 row additionally surfaces `DbgPrompt` and
-`NtRaiseHardError`; the x64 row has the same selected source archive closure
-and its own normal-link residual set. No empty provider, `/FORCE` executable,
-app-owned loader, or substituted BOP was added to turn these boundaries green.
+The session execution bridge preserves a recorded
+`BACKEND_UNAVAILABLE` result across its existing controlled non-local return;
+it no longer relabels it as an ordinary SoftPC return.  No empty provider,
+`/FORCE` executable, app-owned loader, substituted BOP, or process-wide
+termination was added to turn these boundaries green.
 
 ## Consequence
 
-The dual-width archive gate is closed.  The normal-product link and the
-ordinary child observation remain open until the named owner packages have a
-source-shaped adapter or an explicitly admitted profile disposition.  This
-record transfers no debugger, WOW, VDD, generated CCPU callback, or firmware
-semantics into T318 S2.
+The dual-width archive and normal-product-link gates are closed.  The ordinary
+child observation remains open.  A successful link proves source composition,
+not debugger, WOW, VDD, generated-CCPU callback or firmware functionality;
+those operations are explicitly unavailable in this profile when reached.

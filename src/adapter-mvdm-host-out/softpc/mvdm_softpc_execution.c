@@ -65,8 +65,14 @@ int mvdm_softpc_execution_run_original_entry(session *owner, int argc,
     }
     if (setjmp(owner->termination_escape) != 0) {
         *result_out = (int)owner->completion_code;
-        session_record_mechanical_resume_status(owner,
-            SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED);
+        /* A source-shaped unavailable boundary may have already recorded the
+         * reason for this non-local return.  Do not relabel that controlled
+         * stop as an ordinary SoftPC return. */
+        if (session_mechanical_resume_status(owner) ==
+            SESSION_MECHANICAL_STATUS_NONE) {
+            session_record_mechanical_resume_status(owner,
+                SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED);
+        }
         session_disarm_termination_escape(owner);
         if (did_bind) (void)session_thread_unbind(owner);
         return 1;
