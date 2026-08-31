@@ -56,7 +56,12 @@ const generated = [
   '#include "mvdm_gdp_state.h"',
   '',
   '/* Replace only direct fixed-base forms after the historical header has',
-  ' * established every original spelling and helper macro. */'
+  ' * established every original spelling and helper macro.  The selected x86',
+  ' * runtime deliberately retains the original contiguous 64 KiB GDP layout:',
+  ' * CCPU-generated rules address that layout directly through jccc_gdp.',
+  ' * Native-width slot storage is therefore an x64 compile/link carrier only.',
+  ' */',
+  '#if !defined(_M_IX86)'
 ];
 for (const record of records) {
   generated.push(`#undef ${record.name}`);
@@ -70,7 +75,7 @@ for (const record of records) {
       `${record.name}Size))`);
   }
 }
-generated.push('', '#endif /* MVDM_T310_GDP_SLOTS_H */', '');
+generated.push('#endif /* !_M_IX86 */', '', '#endif /* MVDM_T310_GDP_SLOTS_H */', '');
 fs.mkdirSync(outputDirectory, { recursive: true });
 fs.writeFileSync(output, generated.join('\r\n'), 'utf8');
 console.log(JSON.stringify({ source, output, slots: records.length }, null, 2));

@@ -24,14 +24,24 @@ typedef struct mvdm_gdp_state {
 
 void *mvdm_gdp_create(void)
 {
+#if defined(_M_IX86)
+    /* The selected runtime is the original 32-bit CCPU carrier.  Its generated
+     * rules address Gdp directly, so retain the source allocation shape rather
+     * than substituting independent native-width fields. */
+    return malloc(64u * 1024u);
+#else
     mvdm_gdp_state *state = (mvdm_gdp_state *)calloc(1u, sizeof(*state));
 
     if (state != NULL) state->magic = MVDM_GDP_MAGIC;
     return state;
+#endif
 }
 
 void mvdm_gdp_destroy(void *value)
 {
+#if defined(_M_IX86)
+    free(value);
+#else
     mvdm_gdp_state *state = (mvdm_gdp_state *)value;
     unsigned int index;
 
@@ -39,6 +49,7 @@ void mvdm_gdp_destroy(void *value)
     for (index = 0u; index < state->count; ++index) free(state->slots[index].storage);
     state->magic = 0u;
     free(state);
+#endif
 }
 
 void *mvdm_gdp_slot(const void *value, unsigned int original_offset,

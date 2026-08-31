@@ -159,6 +159,13 @@ but does not yet establish guest load. The current startup wait is retained as
 an unclassified original-host execution issue rather than a DEM/COMMAND/BOP
 failure. See [P15 evidence](etc/evidence/m0-t318-s2-p15-current-package-staging-and-startup-observation-001.md).
 
+**S2 P16:** the selected x86 CCPU/CVIDC runtime again retains its original
+contiguous 64 KiB GDP carrier; the native-width GDP-slot form is restricted to
+the required x64 compile/link carrier. Both formal product links pass. The
+next x86 observation exposes a separate original VGA-initialization null
+transfer, without admitting a dummy video shim or changing guest/BOP logic.
+See [P16 evidence](etc/evidence/m0-t318-s2-p16-original-x86-gdp-carrier-restoration-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
