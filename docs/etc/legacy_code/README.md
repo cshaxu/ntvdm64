@@ -24,3 +24,8 @@ corresponding row to that component's `README.md` register.
   kernel-monitor and standalone-product-shell evidence moved by T310 S6.
   They are intentionally outside `mvdm-host`, every formal Ninja graph and
   all session/app runtime paths.
+- `retired-redirector-pointer-scope/` holds the superseded T290 experimental
+  generators and fixtures.  They referred to a deliberately retired
+  `mvdm_redirector_pointer_scope` facade that had no production caller.  The
+  selected local Redirector path is now the source-shaped T324/S2 transaction;
+  these files must not be restored merely to make an obsolete harness build.

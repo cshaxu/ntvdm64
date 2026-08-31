@@ -4,6 +4,10 @@
 
 ## Active Packet
 
+**No M/T/S packet is active.** M0 T324 closed after its local Redirector
+source-binding recovery. The next packet must be admitted from `docs/QUEUE.md`
+under the execution rules; closed records remain below as evidence.
+
 ### M0 T324 S1 — Original Redirector owner and boundary baseline
 
 **Closed: M0 T324 S1**
@@ -44,7 +48,7 @@ invent a remote/device backend.
 
 ### M0 T324 S2 — Original local Redirector binding recovery
 
-**Active: M0 T324 S2**
+**Closed: M0 T324 S2**
 
 | Field | Record |
 | --- | --- |
@@ -87,6 +91,20 @@ and executes its one staging/lease/termination contract fixture, and records
 the source-owned worker teardown and existing ICA boundary. It is strictly a
 local source closure: it neither enables a 57:xx BOP nor claims remote,
 device, VDD or guest-runtime completion.
+
+**S2 P4:** retired the stale T290 pointer-scope generators and fixtures into
+`docs/etc/legacy_code/retired-redirector-pointer-scope/`.  They referenced a
+deliberately retired, unselected facade; the active local cohort uses the
+source-shaped T324/S2 overlay transaction instead.  The active T310 lease
+ledger now records that disposition, so no current build or test input is
+allowed to revive the obsolete path.
+
+**S2 closed / T324 closed:** the entire admitted local Redirector cohort now
+has one source-owned local binding route, checked asynchronous guest-span
+transactions, source-shaped ICA completion and teardown, selected x86/x64
+source-graph closure, a focused contract fixture, and no live dependency on
+the rejected pointer-scope experiment.  Remote/RAP/NetBIOS/DLC/VDD and a
+native guest 57:xx execution claim remain explicitly outside this closure.
 
 ### M0 T323 S1 — Original DPMI/DPMI32 owner and boundary baseline
 

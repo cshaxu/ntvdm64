@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3521 |
+| Documentation records | 3522 |
 | --- | --- |
-| Generated UTC | 2026-08-31T19:29:35Z |
+| Generated UTC | 2026-08-31T19:37:34Z |
 
 ## Entries
 
@@ -826,6 +826,7 @@ content-divergent entries.
 | etc/evidence/m0-t324-s2-local-redirector-guest-span-ica-binding-001.md | indexed supporting material | 66e1730d02b02789755709ad9877211d14a5cfcdf818c7eb894f5c453d6a274a |
 | etc/evidence/m0-t324-s2-local-redirector-source-closure-001.md | indexed supporting material | 78f9de21ec6f7f19d65a3173883f4157c6583434648821c2152bbbf71ffa65bd |
 | etc/evidence/m0-t324-s2-named-pipe-completion-contract-001.md | indexed supporting material | 07d53d19d07982794c9556a8a7328f154fa75a216f654ec9b4c0208e3e044ddd |
+| etc/evidence/m0-t324-s2-retired-redirector-pointer-scope-cleanup-001.md | indexed supporting material | 2134c0c67b542b9aed74754dfd45ecfd8c12550fc210e583383085ee0e22cf42 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1015,7 +1016,7 @@ content-divergent entries.
 | etc/legacy_code/opennt-bop/dpmi/dpmi-startup-import-manifest.md | indexed supporting material | 086a861fb867e5ea48791540af4f76ced9fe83a5339fb61ba2685415ba790c9b |
 | etc/legacy_code/opennt-bop/superseded-nt-bop-wrappers/README.md | indexed supporting material | f625aa52362e04cf809f7d514a6c3038653306c61919766ef4d6bcedbccc4c15 |
 | etc/legacy_code/opennt-bop/t271-s2-replaced-dem-ingress/README.md | indexed supporting material | 70ad094e2f1117bcb99c09f32531454f9f90d93cc581e76ac2fee86495ef08a4 |
-| etc/legacy_code/README.md | indexed supporting material | e285ca04489d83c7324f9724aea4c66b196926f2e7fc8e269181d87fcfb70d9d |
+| etc/legacy_code/README.md | indexed supporting material | 0a70abb7477985743b58685819f2c8dc88d69ba359ab0b34577f0fbc46b5f499 |
 | etc/legacy_code/retired-bochs/README.md | indexed supporting material | 5665f3a3b0419749636d87579bcbf753516ebafe955b66eb130dad45ffe9fb52 |
 | etc/legacy_code/retired-bochs/src/adapter-mvdm-host-in/README.md | indexed supporting material | 205ab706d49061ef93976b0c8b316dc1edcb54843c571ff135fa64a423828c83 |
 | etc/legacy_code/retired-bochs/tools/build/t260-s8-component-manifest.json | indexed supporting material | 265b27faf8c91cac85fa51391c58c02dd60b8867cd5c4cbc01092359e0a3ce86 |
@@ -1476,7 +1477,7 @@ content-divergent entries.
 | etc/operations/m0-t310-s4-p5-x64-forced-link-ledger.tsv | indexed supporting material | 1b3f5ddf2b2741c28e26fd1881f454a1bfc868c958d6536e240c79580d8b94b1 |
 | etc/operations/m0-t310-s4-p5-x86-forced-link-ledger.tsv | indexed supporting material | c0cbc0836b0fc51b19f3744545d9db0c96595c83277d6834519c0a2c130623d6 |
 | etc/operations/m0-t310-s6-v86-monitor-production-input-ledger.tsv | indexed supporting material | 0675745e96a02ade16a8dedf715fcc6e9cc1a1f90f672c02bc54681e12f8eb20 |
-| etc/operations/m0-t310-s7-guest-memory-lease-caller-ledger.tsv | indexed supporting material | 4fd2dc26670c7b2c3bb8cb172d59d802fcae653a571616312b5164be38322565 |
+| etc/operations/m0-t310-s7-guest-memory-lease-caller-ledger.tsv | indexed supporting material | 77f9b88cbef7ce84a172c1c67ae5a66a882b73ccb840c4eedf0e696ff6c42fd3 |
 | etc/operations/m0-t310-s7-p2-x64-forced-link-ledger.tsv | indexed supporting material | 9661205c2aecadb55e7fc2b1537f1279ad187b7fec37d8859128dedfb3b8a93d |
 | etc/operations/m0-t310-s7-p2-x86-forced-link-ledger.tsv | indexed supporting material | ab1f513b8221f3fa90965068237b75d79f917365bb4e9d4293b775faddd15f68 |
 | etc/operations/m0-t310-s8-original-machine-composition-plan-001.md | indexed supporting material | 2c453477dbcc3b1d254f8dc50d7d6ef9c8021e88764e51835155a6e720bda30d |
@@ -3535,7 +3536,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | a877f996fba77930bef1262db59466fbf34aeed42f1f6b4f597a8d4b946088fb |
+| STATUS.md | principal control document | 9bb96765eb360b34539854792aedd7472a0ae71087bd76d9b5eb69ae4801bee1 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
