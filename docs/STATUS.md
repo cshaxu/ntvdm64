@@ -4,34 +4,40 @@
 
 ## Active Packet
 
-### M0 T327 S2 — Earliest source-shaped prerequisite recovery
+### M0 T327 S3 — Declared DOS program and controlled return
 
-**Active: M0 T327 S2**
+**Active: M0 T327 S3**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T327 S2; Ordinary Mode (single-person dual-role implementation). |
+| Identifier Mode | M0 T327 S3; Ordinary Mode (single-person dual-role implementation). |
 | Admission And Approval | Queue candidate 2, admitted under the standing owner direction to execute the ordered queue. |
-| Objective | Recover only the first proven prerequisite in the original recursive CPU40/FDC/INT15 transaction that blocks the declared DOS-program path. |
-| Non-goals | No BOP leaf implementation, guest-image rewrite, synthetic FDC/PIC/BIOS result, new executor, Bochs/CPU30/MONITOR/kernel-VDM/CSRSS route, new mapper, raw native identity, WOW/VDD/debugger or product-shell redesign. |
-| Reference Baseline | T318 frozen NTDOS `EXEC`/parent-return contract; T319 ROM/termination attribution; T326 fixed-container `50:11 → demLoadDos` crossing; T327 S1 source contract. |
-| Files And ABI Surface | Original `floppy.c::wait_int`, `keybd_io.c::kb_setup_vectors`, `nt_cpu.c::host_simulate`, CPU40 `c_main.c` and `ntthread.c`, plus the reached FDC/PIC/INT15 initializer/caller chain. |
+| Objective | Use the existing declared original COMMAND request to establish one DOS guest execution/controlled-return boundary, or name one narrower original owner transfer. |
+| Non-goals | No BOP leaf implementation, guest-image rewrite, synthetic device result, new executor, Bochs/CPU30/MONITOR/kernel-VDM/CSRSS route, new mapper, raw native identity, WOW/VDD/debugger or product-shell redesign. |
+| Reference Baseline | T318 frozen NTDOS `EXEC`/parent-return contract; T319 ROM/termination attribution; T326 fixed-container `50:11 → demLoadDos` crossing; T327 S1 source contract and T327 S2 wait-prerequisite disposition. |
+| Files And ABI Surface | Original COMMAND `cmdGetNextCmd`/guest command continuation, BaseClient/BaseSrv copied `VDMINFO` contract, original NTDOS `EXEC`/return path, CPU40 execution return and fixed observer. |
 | Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, architecture, mapping-manager, session and paired-host build rules. |
-| Verification | Source-first vector/frame/lifecycle audit; selected original recovery only; paired x86/x64 product link; one unchanged-media fixed-container observation only after the complete cohort is ready. |
-| Expected Markers | One source-shaped recursive CPU return or one narrower named original-machine owner transfer. |
+| Verification | Source-first declared-command/guest-return audit; paired x86/x64 product link; one unchanged-media fixed-container observation only after the complete owner cohort is ready. |
+| Expected Markers | One original declared guest-program return or one narrower named original guest/host owner transfer. |
 | Asset Needs | Existing selected MVDM mirror/media, CPU40 formal graph, fixed observer, session and adapter families; no new guest or host installation. |
-| Reporting Requirements | Record source order, vector and frame initialization, lifecycle/return contract, branch/failure routes, changed mirror locations and exact successor owner. |
+| Reporting Requirements | Record original command publication/consumption, guest transfer and return contract, branch/failure routes, changed mirror locations and exact successor owner. |
 | Stop Conditions | Need for invented guest/device success, a trace-selected BOP change, kernel/CSRSS reconstruction, persistent guest/native pointer, unreviewed source import or change outside the selected complete owner cohort pauses for re-admission. |
-| Exit Criteria | The complete recursive cohort either returns past the former terminal under the fixed container or transfers one narrower source-defined original machine owner. It does not claim a DOS program ran. |
+| Exit Criteria | The fixed container proves the declared program's original controlled return or transfers one narrower source-defined original owner. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
-| Similar-Issue Sweep | Both `wait_int` recursive calls, `int15`/`wait_int` table setup, CCPU main-thread and worker frame setup, FDC/PIC completion, timer/event/comms workers, CPU return reasons and original BOP postconditions. |
+| Similar-Issue Sweep | BaseClient/BaseSrv publication and consume, COMMAND `CMDINFO` registration, NTDOS EXEC/parent-return, CCPU return reasons, guest console/termination and the selected command's source-defined failure paths. |
 
 **S1 closed:** [the CPU40-to-guest prerequisite contract](etc/evidence/m0-t327-s1-cpu40-to-guest-prerequisite-contract-001.md)
 reconfirms the post-`demLoadDos` terminal as the original SoftPC recursive
 FDC/INT15/CPU40 cohort; it makes no guest-execution claim.
 
-**S2 plan:** [the minimal DOS guest execution and controlled-return proposal](etc/operations/proposal-minimal-dos-guest-execution-controlled-return-001.md)
-defines the bounded source-first recovery and fixed-container verification.
+**S2 closed:** [the CPU40 wait-prerequisite disposition](etc/evidence/m0-t327-s2-cpu40-wait-prerequisite-disposition-001.md)
+proves that the proposed ROM/KIO wait-vector/CPU40 frame repair is not
+admissible and records the repeated fixed-container transition through the
+predeclared first COMMAND request.
+
+**S3 plan:** [the minimal DOS guest execution and controlled-return proposal](etc/operations/proposal-minimal-dos-guest-execution-controlled-return-001.md)
+defines the bounded source-first guest-return audit and fixed-container
+verification.
 
 ### M0 T326 S1 — Fixed SoftPC pre-BOP startup cut
 
