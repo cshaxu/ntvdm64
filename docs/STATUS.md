@@ -368,6 +368,13 @@ whose IVT/stack/DOS-data prefix first crosses owners only at original
 replacement loader, COMMAND acquisition or EXEC path. See [P42
 evidence](etc/evidence/m0-t318-s2-p42-ntio-first-service-boundary-audit-001.md).
 
+**S2 P43:** the complete original `NTIO.SYS` entry prefix is now checked
+against the selected CPU40 decoder.  Its `FCLI`/`FSTI` virtual-interrupt
+macros, IVT/stack operations and ordinary BOP encoding all have original
+CPU40/SAS support; no opcode, mapping or adapter repair is justified before
+the existing `0x50:0x11 -> demLoadDos` crossing.  See [P43
+evidence](etc/evidence/m0-t318-s2-p43-ntio-entry-cpu40-instruction-contract-audit-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
