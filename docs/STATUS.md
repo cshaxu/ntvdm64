@@ -4,24 +4,24 @@
 
 ## Active Packet
 
-### M0 T333 S2 — Redirector external forms and original failure admission
+### M0 T333 S3 — Redirector lifecycle and synchronous named-pipe cohort
 
-**Active: M0 T333 S2**
+**Active: M0 T333 S3**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T333 S2; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | S1 source/table/ABI admission is closed under the owner-approved T333 plan; S2 is its sequential external-boundary classification. |
-| Objective | Classify every immediate Redirector external form as directly composable, same-shaped adapter-backed, exact original unavailable, or named later-owner work before selecting a provider cohort. |
+| Identifier Mode | M0 T333 S3; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | S2 external-form admission is closed under the owner-approved T333 plan; S3 is its sequential first source-recovery cohort. |
+| Objective | Select and compose the original lifecycle and synchronous named-pipe/local broker cohort without enabling async, RAP, NetBIOS, DLC or VDD behavior. |
 | Non-goals | No trace-selected `57:xx` work, source-derived Redirector policy, raw host handle or pointer, second COMMAND broker, kernel VDM/CSRSS/RAP/DLC reconstruction, CPU30/Bochs route, or `src.old` input. |
-| Reference Baseline | [S1 source/ABI admission](etc/evidence/m0-t333-s1-original-redirector-source-abi-admission-001.md) and [row ledger](etc/operations/m0-t333-s1-redirector-source-abi-admission-ledger.tsv); original `mvdm-host/vdmredir`; current `adapter-mvdm-host-out/{redir,softpc,win32}`; session mapping managers; selected `opennt-host/netapi/netlib/ntstatus.c`. |
-| Files And ABI Surface | Original public pipe/mailslot/NetAPI calls; RAP, NetBIOS, DLC, VDD/window, CPU40/ICA and async completion forms; current Redir/SoftPC/Win32/session adapter boundaries and original failure paths. |
-| Verification | Declaration/definition/caller walks; public API availability and current-adapter review; original failure-path review; retired-route scan and current build-input review. |
-| Exit Criteria | The next provider cohort can be selected from source evidence with every immediate external form already classified; no unavailable historical boundary is silently treated as a modern success. |
+| Reference Baseline | [S1 source/ABI admission](etc/evidence/m0-t333-s1-original-redirector-source-abi-admission-001.md), its [row ledger](etc/operations/m0-t333-s1-redirector-source-abi-admission-ledger.tsv), and [S2 form admission](etc/evidence/m0-t333-s2-redirector-external-form-admission-001.md). |
+| Files And ABI Surface | Original `vrinit.c`, `vrmisc.c`, `vrnmpipe.c`, `vrputil.c`, reached `cmdredir.c`/DEM call forms, public pipe calls, session identities, bounded synchronous guest spans and CPU40 mechanical calls. |
+| Verification | Current source-selection/build-manifest design; original call-order review; x86/x64 cohort build/link and local source-contract tests; retired-route/no-second-broker scan. |
+| Exit Criteria | The original selected cohort is formally selected and linked on x86/x64 with its original ordering and explicit failure boundaries; no async or excluded product mechanism is silently enabled. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | Named pipes, mailslots, handle/token width, guest copied spans, async completion, DEM/COMMAND stream lifecycle, NetAPI/RAP, NetBIOS/DLC, VDD/window/monitor state, x86/x64 source selection and original failure directions. |
 
-**Plan:** [M0 T333 original Redirector recovery](etc/operations/m0-t333-redirector-owner-package-recovery-plan-001.md). **S1 closed:** [source/ABI admission evidence](etc/evidence/m0-t333-s1-original-redirector-source-abi-admission-001.md) and its [row ledger](etc/operations/m0-t333-s1-redirector-source-abi-admission-ledger.tsv). S2 is external-form and original-failure classification only.
+**Plan:** [M0 T333 original Redirector recovery](etc/operations/m0-t333-redirector-owner-package-recovery-plan-001.md). **S1 closed:** [source/ABI admission evidence](etc/evidence/m0-t333-s1-original-redirector-source-abi-admission-001.md) and its [row ledger](etc/operations/m0-t333-s1-redirector-source-abi-admission-ledger.tsv). **S2 closed:** [external-form admission](etc/evidence/m0-t333-s2-redirector-external-form-admission-001.md) and its [disposition ledger](etc/operations/m0-t333-s2-redirector-external-form-disposition-ledger.tsv). S3 is the limited original lifecycle/synchronous-pipe cohort.
 
 | Field | Record |
 | --- | --- |
