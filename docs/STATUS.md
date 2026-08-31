@@ -460,6 +460,13 @@ pointer-scope header. This is not runtime reachability evidence; the fixed
 container may run only after a separately justified new product repair. See
 [P54 evidence](etc/evidence/m0-t318-s2-p54-ntio-demload-dos-owner-closure-001.md).
 
+**S2 P55:** the unselected Redirector pointer-scope experiment is removed from
+the production adapter and test tree.  It had no production call site, formal
+source selection or selected-object dependency; both x86/x64 final-link rows
+remain clean.  This removes an alternate `GetVDMAddr` contract rather than
+changing the original DEM/SoftPC route, so no fixed-container run is admitted.
+See [P55 evidence](etc/evidence/m0-t318-s2-p55-retire-unselected-redirector-pointer-scope-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
