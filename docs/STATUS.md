@@ -243,6 +243,11 @@ ordinary child is consumed later by original guest COMMAND `54:01` through
 passive original-dispatch reach record, not another changed startup container
 or BOP implementation. See [P26 evidence](etc/evidence/m0-t318-s2-p26-startup-to-guest-observation-gate-001.md).
 
+**S2 P27:** retired an unselected hand-maintained `MS_bop_0`/`MS_bop_4`
+subset from the production overlay. The formal CPU40 graph already selects the
+complete original `nt_bop.c`; there is now one selected DEM/COMMAND ingress,
+not a parallel reconstructed route. See [P27 evidence](etc/evidence/m0-t318-s2-p27-retire-unselected-bop-ingress-subset-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
