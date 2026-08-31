@@ -125,6 +125,12 @@ the process only when the admitted `--ordinary-child` declaration is present.
 No `/C VER` completion was observed, so guest EXEC/parent return remains open.
 See [P10 evidence](etc/evidence/m0-t318-s2-p10-original-input-counterfactuals-001.md).
 
+**S2 P11:** the intact real-console CPU40 profile accumulated approximately
+2703 ms of CPU time within a five-second window while remaining alive. Together
+with the original `InitialiseDosEmulation → host_start_cpu → cpu_simulate`
+sequence and P10 counterfactual, this proves entry into original CCPU execution,
+not COMMAND completion. See [P11 evidence](etc/evidence/m0-t318-s2-p11-original-cpu-execution-admission-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
