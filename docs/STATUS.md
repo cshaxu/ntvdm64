@@ -4,8 +4,27 @@
 
 ## Active Packet
 
-**No active M/T/S packet.** M0 T322 is closed; the next admission is the
-ordered DPMI/DPMI32 owner package in [QUEUE.md](QUEUE.md).
+### M0 T323 S1 — Original DPMI/DPMI32 owner and boundary baseline
+
+**Active: M0 T323 S1**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T323 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Ordered queue candidate 4, admitted under the standing owner request to execute the queue. |
+| Objective | Establish the complete original DPMI and DPMI32 source/package boundary, its protected-context, monitor, mapping and SoftPC interfaces, and the smallest source-shaped disposition for every reached external edge. |
+| Non-goals | No protected-mode execution rewrite, BOP trace repair, new CPU/monitor, synthetic interrupt, new guest-pointer mapper, or direct kernel-VDM/CSRSS recreation. |
+| Reference Baseline | T322 closure; `mvdm-host/dpmi` original Win16/DOSX source and `mvdm-host/dpmi32` original host provider source; selected CPU40 product graph. |
+| Files And ABI Surface | Original `dpmi32` source manifest plus `dpmimemr.c`/`dpmimscr.c`, original `dpmi` assembly carrier, OpenNT `VDM_TIB` declarations, existing monitor/SoftPC/session binding surfaces, and formal product source selection. |
+| Applicable Rules | Execution, architecture, coding, mirror-divergence, source-policy and shared mapping-manager rules. |
+| Verification | Source/definition/caller review, original source-selection review, x86/x64 formal DPMI/product graph review, documentation governance and diff review. |
+| Expected Markers | One owner ledger classifies protected context, LDT, interrupt/exception, memory, VxD and DOSX/guest edges as direct, same-shaped adapter, source-shaped unavailable or later-owner transfer. |
+| Asset Needs | Existing OpenNT mirrors, OpenNT ABI mirror, selected CPU40 product graph, session mapping manager and current adapters; no guest or external machine change. |
+| Reporting Requirements | Separate DPMI32 host provider from the DOSX/guest assembly carrier; record each raw pointer/address conversion, monitor dependency, architecture conditional, external owner and failure disposition. |
+| Stop Conditions | Need for a DPMI-private mapper, kernel VDM recreation, CPU semantics change, invented protected-mode exception success, or a second executor pauses for re-admission. |
+| Exit Criteria | A bounded source/ABI/failure ledger covers the complete selected DPMI/DPMI32 family and permits the next recovery S without an invented backend. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | DPMI allocation/free, descriptor/LDT operations, interrupt/fault registration, VxD controls, address/handle lifetimes, stale session, x86/x64 architecture gates and DOSX guest/host separation. |
 
 ### M0 T322 S1 — Original XMS ownership and memory-binding baseline
 
