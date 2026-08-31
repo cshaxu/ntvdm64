@@ -622,6 +622,15 @@ the unlocated failure to either later service, HIMEM/XMS, or EXEC. The next
 owner unit is CPU40 guest device-call/stack semantics, not a BOP patch. See
 [P75 evidence](etc/evidence/m0-t318-s2-p75-post-cmdsetinfo-guest-device-bootstrap-owner-cohort-001.md).
 
+**S2 P76:** a single fixed-container exception-only observation now attributes
+the `0xC0000005` to an attempted zero transfer on the original
+`floppy.c::wait_int → host_simulate` recursive CPU40 path. The marker prefix
+still excludes the declared child/EXEC lifecycle; the remaining blocker is the
+original SoftPC FDC/INT15 guest-vector and interrupt-return owner package.
+Because S2 excludes device expansion, it transfers to the queued minimal
+vertical-slice integration package without a BOP, DEM, COMMAND or XMS patch.
+See [P76 evidence](etc/evidence/m0-t318-s2-p76-floppy-recursive-simulation-owner-transfer-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |

@@ -1,0 +1,18 @@
+{
+  "container": "console-owning-nondebug",
+  "command": [
+    "O:\\repos.hobby\\ntvdm64\\build\\tools\\console-startup-observer.exe",
+    "O:\\repos.hobby\\ntvdm64\\build\\runtime-t318-cpu40\\original-softpc-process.exe",
+    "O:\\repos.hobby\\ntvdm64\\build\\runtime-t318-cpu40",
+    "O:\\repos.hobby\\ntvdm64\\artifacts\\research\\m0-t318-s2-p76-exception-path-observation.txt"
+  ],
+  "stageManifestSha256": "d735283a0747dd4654eb173ed7857dbe99b25a7903999f157524f1e721442299",
+  "fixedMediaManifestSha256": "b46ad6c47e692ba3b1213dd11b9c1a9b3c686410028c3d70e172086b26b62ce2",
+  "productSource": "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\formal-x86\\original-softpc-process.exe",
+  "productStage": "O:\\repos.hobby\\ntvdm64\\build\\runtime-t318-cpu40\\original-softpc-process.exe",
+  "productSha256": "82ff33db5d6719e0e56c30be470ec280f2019b77a52568340506e6eb965cd1bc",
+  "launcherExitCode": 0,
+  "launcherSignal": null,
+  "stdout": "",
+  "stderr": ""
+}

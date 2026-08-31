@@ -53,6 +53,10 @@ int main(int argc, char **argv)
     DWORD wait_status;
     DWORD exit_code = STILL_ACTIVE;
     char command_line[MAX_PATH * 2];
+    char exception_report_path[MAX_PATH];
+    char previous_exception_report_path[MAX_PATH];
+    DWORD previous_exception_report_length;
+    BOOL had_previous_exception_report;
     FILE *report = NULL;
 
     if (argc != 4) return 64;
@@ -75,12 +79,31 @@ int main(int argc, char **argv)
     startup.hStdError = output;
     snprintf(command_line, sizeof(command_line), "\"%s\" -f -o --ordinary-child", argv[1]);
 
+    snprintf(exception_report_path, sizeof(exception_report_path), "%s.exception.txt",
+             argv[3]);
+    previous_exception_report_length = GetEnvironmentVariableA(
+        "MVDM_EXCEPTION_REPORT_PATH", previous_exception_report_path,
+        (DWORD)sizeof(previous_exception_report_path));
+    had_previous_exception_report = previous_exception_report_length != 0 &&
+        previous_exception_report_length < sizeof(previous_exception_report_path);
+    SetEnvironmentVariableA("MVDM_EXCEPTION_REPORT_PATH", exception_report_path);
+
     if (!CreateProcessA(NULL, command_line, NULL, NULL, TRUE, 0, NULL, argv[2],
                         &startup, &child)) {
+        if (had_previous_exception_report)
+            SetEnvironmentVariableA("MVDM_EXCEPTION_REPORT_PATH",
+                                    previous_exception_report_path);
+        else
+            SetEnvironmentVariableA("MVDM_EXCEPTION_REPORT_PATH", NULL);
         CloseHandle(input);
         CloseHandle(output);
         return 67;
     }
+    if (had_previous_exception_report)
+        SetEnvironmentVariableA("MVDM_EXCEPTION_REPORT_PATH",
+                                previous_exception_report_path);
+    else
+        SetEnvironmentVariableA("MVDM_EXCEPTION_REPORT_PATH", NULL);
     CloseHandle(child.hThread);
     wait_status = WaitForSingleObject(child.hProcess, OBSERVATION_TIMEOUT_MS);
     if (wait_status == WAIT_TIMEOUT) {

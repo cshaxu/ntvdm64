@@ -16,6 +16,30 @@ static char *mvdm_softpc_append_hex(char *output, ULONG_PTR value,
     return output;
 }
 
+static void mvdm_softpc_write_exception_report(const char *message,
+    DWORD message_bytes)
+{
+    char report_path[MAX_PATH];
+    DWORD report_path_bytes;
+    HANDLE report;
+    DWORD written;
+
+    /* The fixed non-debug observation container may supply a report path.
+     * This is exception-only diagnostic output: it neither changes the
+     * original filter result nor makes a normal execution depend on a host
+     * file.  The console remains the historical diagnostic destination. */
+    report_path_bytes = GetEnvironmentVariableA("MVDM_EXCEPTION_REPORT_PATH",
+        report_path, (DWORD)sizeof(report_path));
+    if (report_path_bytes == 0 || report_path_bytes >= sizeof(report_path))
+        return;
+    report = CreateFileA(report_path, GENERIC_WRITE, FILE_SHARE_READ, NULL,
+        CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (report == INVALID_HANDLE_VALUE)
+        return;
+    (void)WriteFile(report, message, message_bytes, &written, NULL);
+    CloseHandle(report);
+}
+
 int mvdm_softpc_terminate_current_session(uint32_t vdm_for_wow,
     uint32_t completion_code)
 {
@@ -84,8 +108,9 @@ void mvdm_softpc_record_unhandled_exception(
     *cursor++ = '\r';
     *cursor++ = '\n';
     output = GetStdHandle(STD_ERROR_HANDLE);
-    if (output == NULL || output == INVALID_HANDLE_VALUE) return;
-    (void)WriteFile(output, message, (DWORD)(cursor - message), &written, NULL);
+    if (output != NULL && output != INVALID_HANDLE_VALUE)
+        (void)WriteFile(output, message, (DWORD)(cursor - message), &written, NULL);
+    mvdm_softpc_write_exception_report(message, (DWORD)(cursor - message));
 }
 
 void mvdm_softpc_record_bop_dispatch(unsigned int selector,
