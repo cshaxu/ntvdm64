@@ -6,7 +6,7 @@
 
 ### M0 T325 S1 — NetAPI/RAP Redirector original-owner baseline
 
-**Active: M0 T325 S1**
+**Closed: M0 T325 S1**
 
 | Field | Record |
 | --- | --- |
@@ -33,6 +33,35 @@ and its [18-row physical-edge ledger](etc/operations/m0-t325-s1-netapi-rap-physi
 separate the bounded public `NetWksta*`/`NetApiBufferFree` candidates and the
 selected original `ntstatus.c` mapper from every Xactsrv/Rx/SMB-RAP protocol
 edge. No host-side API is yet claimed guest-network equivalent.
+
+**S1 closed:** the complete reached cohort now has one physical source-first
+disposition per call group. The only next recovery is the bounded public
+workstation-query subset; its predecessor fixture route is historical-only
+because its private pointer scope has been retired.
+
+### M0 T325 S2 — Public workstation-query lease recovery
+
+**Active: M0 T325 S2**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T325 S2; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | T325/S1 closure under the standing owner direction to execute the ordered queue. |
+| Objective | Restore the original `VrGetComputerName`, bounded `VrGetUserName(BX=1)` and `VrRemoteApi` local-computer fallback through the existing synchronous session guest-memory lease, preserving original calls, register results, sizes and status branches. |
+| Non-goals | No `BX=0` unbounded username form, RAP/SMB/Xs/Rx success, remote API, NetBIOS/DLC/VDD/RPC/CSRSS recreation, new mapper/pointer scope, raw host identity, guest edit or other local Redirector redesign. |
+| Reference Baseline | T325/S1 physical ledger; T324 local closure; original `vrnetapi.c`/`vrremote.c`; historical T290 evidence retained only as archival comparison; existing `mvdm_guest_location` API. |
+| Files And ABI Surface | The two original `ES:DI` copies and `vrremote.c` local-computer fallback; current SoftPC location/lease facade; a minimal Redirector overlay or registered mirror divergence; focused x86/x64 fixture and Ninja source selection. |
+| Applicable Rules | Execution, source-first recovery, mirror/overlay, source policy, architecture and session mapping-manager rules. |
+| Verification | Original-call/order/diff review; x86/x64 compile/link; focused positive/negative lease fixture; stale-session negative check; governance and diff review. |
+| Expected Markers | One acquire/copy/release transaction at each selected original guest write; no lease crosses asynchronous work; original insufficient-buffer and error registers remain observable. |
+| Asset Needs | Existing selected mirrors, session guest-memory lease, public `netapi32` APIs and formal Ninja; no external network service. |
+| Reporting Requirements | State every retained original branch, lease access/size/commit, public buffer free, error mapping and explicit non-admitted sibling path. |
+| Stop Conditions | A need for a private guest mapper, durable native pointer, source-wide `LPSTR_FROM_WORDS` rewrite, changed DOS ABI, public-API semantic mismatch or remote/RAP enablement pauses for re-admission. |
+| Exit Criteria | All three selected public branches compile and pass focused positive/negative tests on x86/x64 through the existing lease; no historical pointer-scope production reference remains. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | All selected `ES:DI` string writes, `NetApiBufferFree` pairing, explicit capacity gates, register/carry result paths, session teardown and source-selection inputs. |
+
+**S2 plan:** [the public workstation-query lease recovery plan](etc/operations/m0-t325-s2-public-workstation-query-lease-recovery-plan-001.md) retains the original code body and confines each required change to a registered, copied synchronous guest-memory crossing.
 
 ### M0 T324 S1 — Original Redirector owner and boundary baseline
 
