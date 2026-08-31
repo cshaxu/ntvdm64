@@ -4,8 +4,24 @@
 
 ## Active Packet
 
-**No active M/T/S packet.** T331 is closed; the next queued candidate requires
-explicit admission.
+### M0 T332 S2 — Shared DPMI guest-span, identity and monitor/TIB closure
+
+**Active: M0 T332 S2**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T332 S2; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Next ordered package after closed T331, admitted under the standing owner direction to execute the queue. |
+| Objective | Replace the current unclassified raw DPMI guest spans with the one session guest-memory mapping-manager contract, verify the existing host-resource identity wrapper's lifecycle, and record original-layout `VDM_TIB`/`NtVdmControl` disposition without fabricating monitor success. |
+| Non-goals | No trace-selected DPMI leaf repair, protected-mode shortcut, kernel VDM/CSRSS/V86 reconstruction, CPU30/Bochs route, raw host pointer, second executor, guest DOSX host link, or new DPMI policy. |
+| Reference Baseline | T332 S1 source/ABI ledger; closed T331 CPU40/session XMS binding; original `mvdm-host/dpmi32` and `mvdm-host/dpmi`; current selected CPU40 product graph. |
+| Files And ABI Surface | Original `dpmi32` shared pointer uses, session guest-memory and host-resource mapping-manager instances, `mvdm_host_identity_*`, original-layout `VDM_TIB`, `NtVdmControl`, CCPU40/SAS forms, and monitor adapter. |
+| Verification | Source/definition/caller lifetime walk; mapping-manager instance and namespace review; original failure-path review; focused boundary tests before any full package build. |
+| Exit Criteria | Every DPMI raw span and identity carrier has one bounded session-owner disposition, current monitor unavailable branches remain explicit, and S3 can compose original source cohorts without a private mapper or raw native pointer ABI. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | DPMI allocation/free, descriptor/LDT operations, protected stack/interrupt/fault state, VxD controls, address/handle lifetimes, monitor TIB/control, DOSX guest/host separation, CPU40-only and x86/x64 build conditions. |
+
+**S1 closed:** [source/ABI admission evidence](etc/evidence/m0-t332-s1-original-dpmi-source-abi-admission-001.md) and its [complete table/import ledger](etc/operations/m0-t332-s1-dpmi-source-abi-admission-ledger.tsv) establish the original package boundary. **Plan:** [M0 T332 original DPMI/DPMI32 recovery](etc/operations/m0-t332-dpmi-owner-package-recovery-plan-001.md). S2 now recovers shared contracts before any provider cohort changes.
 
 ### M0 T331 — Original XMS owner-package closure
 

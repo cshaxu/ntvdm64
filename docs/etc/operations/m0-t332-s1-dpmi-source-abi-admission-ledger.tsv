@@ -1,0 +1,34 @@
+record	original_source_or_contract	entry_or_callers	current_selection	current_disposition	blocking_or_successor_owner
+HOST-PACKAGE	mvdm-host/dpmi32/sources	25 dispatcher entries	13 common C sources + dpmimemr.c + dpmimscr.c under LINKED_INTO_MONITOR	selected original mirror; source selection only	S2 shared guest spans and monitor/TIB contract
+GUEST-CARRIER	mvdm-host/dpmi/dx*.asm and includes	DOSX invokes 53:00..53:18	preserved as guest source/media; not host-linked	guest-only	S4 guest transfer boundary after protected-machine contract
+53:00	Dpmiselr.c::DpmiSetDescriptorEntry	DpmiDispatchTable[00]	selected original body	adapter-backed; source algorithm retained	S2 guest span plus adapter-mvdm-host-out/softpc descriptor form
+53:01	modesw.c::switch_to_protected_mode	DpmiDispatchTable[01]	selected original body	adapter-backed	S2 frame/TIB transaction; S3 mode cohort
+53:02	dpmiint.c::DpmiSetProtectedmodeInterrupt	DpmiDispatchTable[02]	selected original body	partially bound; VdmSetInt21Handler is unavailable	monitor owner: source-shaped NtVdmControl request recovery
+53:03	i386/dpmi386.c::DpmiGetFastBopEntry	DpmiDispatchTable[03]	not selected by current CPU40 graph	unresolved original CPU/monitor fast path	S4 protected monitor recovery or explicit unavailable result
+53:04	dpmi32.c::DpmiInitDosx	DpmiDispatchTable[04]	selected original body	blocked on raw shared-table aliases	S2 bounded guest-span contract
+53:05	dpmi32.c::DpmiInitApp	DpmiDispatchTable[05]	selected original body	blocked on raw stack/TIB aliases	S2 bounded guest-span and TIB contract
+53:06	int21map.c::DpmiXlatInt21Call	DpmiDispatchTable[06]	selected original body	deferred cross-package integration	S3/S4 after DPMI span contract and existing DEM/COMMAND owner contracts
+53:07	xmem.c::DpmiAllocateXmem	DpmiDispatchTable[07]	selected original body	adapter-backed through session host-resource mapping	review identity lifecycle in S2; S3 XMEM cohort
+53:08	xmem.c::DpmiFreeXmem	DpmiDispatchTable[08]	selected original body	adapter-backed through session host-resource mapping	review identity lifecycle in S2; S3 XMEM cohort
+53:09	xmem.c::DpmiReallocateXmem	DpmiDispatchTable[09]	selected original body	adapter-backed through session host-resource mapping	review identity lifecycle in S2; S3 XMEM cohort
+53:0A	dpmiint.c::DpmiSetFaultHandler	DpmiDispatchTable[0A]	selected original body	blocked on protected exception/monitor delivery	S4 interrupt/fault cohort
+53:0B	dpmimemr.c::DpmiGetMemoryInfo	DpmiDispatchTable[0B]	selected fallback original body	blocked on output guest span	S2 then S3 memory cohort
+53:0C	dpmimscr.c::DpmiDpmiInUse	DpmiDispatchTable[0C]	selected fallback original body	selected original body; runtime result unproven	S4 lifecycle cohort
+53:0D	dpmimscr.c::DpmiDpmiNoLongerInUse	DpmiDispatchTable[0D]	selected fallback original body	selected original body; runtime result unproven	S4 lifecycle cohort
+53:0E	i386/dpmi386.c::DpmiSetDebugRegisters	DpmiDispatchTable[0E]	not selected by current CPU40 graph	unresolved debugger/CPU register path	future debugger/monitor owner, no fabricated result
+53:0F	dpmi32.c::DpmiPassTableAddress	DpmiDispatchTable[0F]	selected original body	blocked on LDT/IntelBase aliases	S2 span contract and S3 descriptor cohort
+53:10	xmem.c::DpmiFreeAppXmem	DpmiDispatchTable[10]	selected original body	adapter-backed through session host-resource mapping	review identity lifecycle in S2; S3 XMEM cohort
+53:11	dpmiint.c::DpmiPassPmStackInfo	DpmiDispatchTable[11]	selected original body	partial: host pointer publication converted to 32-bit identity	S2 identity/TIB lifecycle closure
+53:12	vxd.c::DpmiVcdPmSvcCall32	DpmiDispatchTable[12]	selected original body	deferred VDD/VCD path	future VDD owner; unavailable must remain source-shaped
+53:13	xmem.c::DpmiFreeAllXmem	DpmiDispatchTable[13]	selected original body	adapter-backed through session host-resource mapping	review identity lifecycle in S2; S3 XMEM cohort
+53:14	dpmiint.c::DpmiIntHandlerIret16	DpmiDispatchTable[14]	selected original body	blocked on protected IRET/stack mechanics	S4 interrupt/fault cohort
+53:15	dpmiint.c::DpmiIntHandlerIret32	DpmiDispatchTable[15]	selected original body	blocked on protected IRET/stack mechanics	S4 interrupt/fault cohort
+53:16	dpmiint.c::DpmiFaultHandlerIret16	DpmiDispatchTable[16]	selected original body	blocked on protected IRET/fault mechanics	S4 interrupt/fault cohort
+53:17	dpmiint.c::DpmiFaultHandlerIret32	DpmiDispatchTable[17]	selected original body	blocked on protected IRET/fault mechanics	S4 interrupt/fault cohort
+53:18	dpmiint.c::DpmiUnhandledExceptionHandler	DpmiDispatchTable[18]	selected original body	blocked on protected fault/monitor mechanics	S4 interrupt/fault cohort
+SIM32	Sim32GetVDMPointer	DpmiDispatch plus ten selected provider files	current raw source-shaped aliases	must not become a DPMI-private mapper	S2: session guest-memory mapping-manager bounded lease/copy seam
+TIB	VDM_TIB / VdmTib	DpmiInitApp, DpmiPassPmStackInfo, interrupt/fault bodies	TLS layout binding present	partial original layout recovery only	S2: monitor adapter-owned session/TIB lifecycle
+CONTROL	NtVdmControl(VdmSetInt21Handler)	dpmiint.c protected interrupt registration	current adapter only implements VdmQueryDir	known unavailable; no synthetic success	S2 monitor control disposition then S4 as applicable
+HOST-IDENTITY	mvdm_host_identity_* -> session_host_resource_mappings	xmem.c, dpmiint.c	one wrapper over session host-resource mapping-manager instance	retain; not a second mapping manager	S2 lifecycle/namespace review
+DIVERGENCE	MVDM-HOST-DIV-018	dpmiint.c CX:DX PM-stack-info publication	present	retain pending S2 verification	must use same session host-resource mapper, no host pointer crosses registers
+DIVERGENCE	MVDM-HOST-DIV-012 / MVDM-HOST-DIV-139	xmem.c / dpmidata.h	present	retain pending S2/S3 verification	pointer width/binding change only; original algorithm stays owner
