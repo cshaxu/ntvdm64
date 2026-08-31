@@ -144,6 +144,13 @@ to bounded parallel scheduling (`min(12, processor count)`), with an explicit
 are unchanged; both runners accept the product dry run. See [P13
 evidence](etc/evidence/m0-t318-s2-p13-formal-ninja-parallel-runner-001.md).
 
+**S2 P14:** two external `demLoadDos`/NTDOS observation forms produced only
+non-attributable negatives: debugger attachment changes the historical host
+contract, while the inherited console carried unrelated background traffic.
+They do not establish a guest blocker or weaken the P12 source route. Future
+runtime observation must be independently console-owned and debugger-neutral.
+See [P14 evidence](etc/evidence/m0-t318-s2-p14-external-observer-negative-result-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
