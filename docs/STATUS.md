@@ -4,9 +4,29 @@
 
 ## Active Packet
 
-**No active M/T/S packet.** M0 T324 closed after its local Redirector
-source-binding recovery. The next packet must be admitted from `docs/QUEUE.md`
-under the execution rules; closed records remain below as evidence.
+### M0 T325 S1 — NetAPI/RAP Redirector original-owner baseline
+
+**Active: M0 T325 S1**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T325 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 6, admitted after T324 closure under the standing owner direction to execute the ordered queue. |
+| Objective | Establish one complete source/ABI/lifetime/failure baseline for the original NetAPI/RAP Redirector network cohort before selecting any public modern binding or source change. |
+| Non-goals | No remote guest-network success, SMB/RAP/NetBIOS/DLC/VDD/RPC/CSRSS recreation, 57:xx leaf enablement, generic adapter, new mapping manager, native identity exposure, guest edit or unrelated local Redirector rework. |
+| Reference Baseline | T324/S2 local Redirector closure; `proposal-netapi-rap-redirector-network-boundary-recovery-001.md`; T306 NetAPI cohort audit; selected original `vrnetapi.c`, `vrremote.c`, `cmdredir.c`, `vdmredir.h` and byte-identical `opennt-host/netapi/netlib/ntstatus.c`. |
+| Files And ABI Surface | Original `vrnetapi.c`/`vrremote.c` callers, NetAPI/RAP declarations and layouts, `ntstatus.c` status conversion, `cmdredir.c` caller forms, session host-resource mapping and existing Redirector/Win32 facades. |
+| Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, architecture, session mapping-manager and host-capability rules. |
+| Verification | Original declaration/definition/caller review; physical NetAPI/RAP edge ledger; exact status/lifetime/failure disposition; source-selection/build-manifest review; governance and diff review. |
+| Expected Markers | Every reached network-management call has an original caller, layout, identity/buffer lifetime, selected public binding or source-shaped unavailable result, and named later owner where needed. |
+| Asset Needs | Existing MVDM and `ntstatus.c` mirrors, T306 ledgers, current session and adapter families; no network service, kernel facility, VDD or guest-media change. |
+| Reporting Requirements | Record original call order, request/result fields, allocation/release, public API equivalence or exact failure, mapping ownership and any transfer to NetBIOS/DLC/VDD/WOW/broker packages. |
+| Stop Conditions | Any need for an invented network provider, project-authored RAP/SMB stack, private RPC/CSRSS/kernel recreation, raw pointer/handle identity, new mapping manager or unreviewed source import pauses for re-admission. |
+| Exit Criteria | A complete selected NetAPI/RAP owner baseline permits one bounded binding-recovery S without treating a host-side link as guest network success. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | Workstation/user/computer queries, downlevel `XsNet*` and `Rx*` paths, remote request handling, status maps, fixed guest buffers, NetAPI allocations, mapping leases, feature-disabled outcomes and transfers to NetBIOS/DLC/VDD. |
+
+**S1 plan:** [the NetAPI/RAP Redirector network-boundary proposal](etc/operations/proposal-netapi-rap-redirector-network-boundary-recovery-001.md) is the binding package plan. S1 first turns its complete original cohort into a physical caller/ABI/lifetime/failure ledger; no implementation is selected by a trace or one convenient API.
 
 ### M0 T324 S1 — Original Redirector owner and boundary baseline
 
