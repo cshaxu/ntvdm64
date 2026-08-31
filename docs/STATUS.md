@@ -518,6 +518,16 @@ still exits `0xC0000005`; missing adjacent media is therefore excluded, while
 the original escaped access violation remains unlocated. See [P62
 evidence](etc/evidence/m0-t318-s2-p62-fixed-runtime-product-adjacency-closure-001.md).
 
+**S2 P63:** static CPU40 source order now separates the pre-NTIO synchronous
+host UI/console cluster from later reset/heartbeat execution.  `TimerInit`
+does not start the heartbeat thread, the selected `/DPROD` image excludes the
+checked-build `DbgBreakPoint` access-violation branch, and the direct VDD
+memory-fault raise is post-lookup rather than an early startup candidate.  The
+next bounded owner unit is original `host_applInit → init_host_uis →
+InitScreenDesc/SetupConsoleMode → nt_start_event_thread`; no observer or
+container variation is admitted.  See [P63
+evidence](etc/evidence/m0-t318-s2-p63-pre-ntio-host-ui-timer-owner-audit-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
