@@ -30,7 +30,9 @@ a host COMMAND provider, app, session, or adapter.
    composable guest path from original source; classify missing machine or
    host prerequisites to their owners. The same selected CPU40 package graph
    must compile and normally link under both Win32/x86 and Win32/x64. Only x86
-   is a current runtime-observation row.
+   is a current runtime-observation row. Runtime observation uses one fixed,
+   non-debug console-owning container; startup prerequisites are recovered by
+   original owner-call clusters before any NTIO/EXEC-specific observation.
 3. **S3 — Controlled-return evidence.** Verify one declared DOS child → parent ordinary-return profile, then link
    its remaining owner transfers into the cross-family audit.
 

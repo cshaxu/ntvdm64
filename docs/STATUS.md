@@ -175,18 +175,19 @@ compiler flags are unchanged. See [P17 evidence](etc/evidence/m0-t318-s2-p17-inc
 
 **S2 P18:** the selected CCPU carrier now binds its original `Cpu` state to
 the complete generated original C-VID table at C-VID's existing setup point.
-The formal x86/x64 product links pass, and the former x86 VGA null transfer is
-gone: a debugger-attached real-console observation instead reaches a later original
-“This function is not supported on this system” dialog. This is C-VID assembly
-closure, not an NTDOS/EXEC claim. See [P18 evidence](etc/evidence/m0-t318-s2-p18-cvidc-vector-assembly-closure-001.md).
+The formal x86/x64 product links pass. The earlier debugger-attached observation
+is superseded as runtime evidence by P20/P21; P18 is source/link closure only,
+not an NTDOS/EXEC or execution-reachability claim. See [P18
+evidence](etc/evidence/m0-t318-s2-p18-cvidc-vector-assembly-closure-001.md).
 
 **S2 P19:** original `nt_det.c::initTextSection` now retains its
 `RegisterConsoleVDM` call through the same-shaped adapter.  The selected
 windowed CPU40 profile receives only the original caller's required,
 session-owned text buffer; no NT4 Console Server fullscreen/controller
 protocol is claimed. Both formal product links pass, and the fresh bounded
-x86 debugger-attached real-console run no longer shows the former 120 error dialog. This is a
-startup prerequisite closure, not NTIO/NTDOS/EXEC evidence. See [P19
+x86 debugger-attached real-console run no longer shows the former 120 error dialog.
+That debugger observation is superseded as runtime evidence by P20/P21; P19 remains
+source/link closure, not NTIO/NTDOS/EXEC evidence. See [P19
 evidence](etc/evidence/m0-t318-s2-p19-windowed-console-registration-closure-001.md).
 
 **S2 P20:** the existing non-debug `plain` observer changes console ownership
@@ -195,6 +196,15 @@ as well as debugger attachment, then exits before CPU execution with
 The required next row is a non-debug, console-owning bounded observation;
 no product instrumentation or new BOP route is admitted. See [P20
 evidence](etc/evidence/m0-t318-s2-p20-nondebug-console-observation-attribution-001.md).
+
+**S2 P21:** a tracked, non-debug, console-owning fixed observation container
+now holds media, firmware, standard handles, command line and an eight-second
+timeout constant. Its first baseline exits with `0x00000001`, before any
+NTIO claim. The static source scan groups the startup prerequisites into
+console/display, error termination, Base VDM command acquisition,
+machine/media and complete CCPU-table assembly; follow-up work proceeds by
+those owner clusters, not by changing observers. See [P21
+evidence](etc/evidence/m0-t318-s2-p21-fixed-console-startup-baseline-001.md).
 
 ### M0 T317 S2 closure record
 
