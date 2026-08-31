@@ -119,6 +119,12 @@ process remained alive for the bounded five-second interval (`STILL_ACTIVE`)
 with no error dialog. This confirms P8's headless attribution, but is still
 not an NTIO/NTDOS/COMMAND/EXEC/parent-return claim. See [P9 evidence](etc/evidence/m0-t318-s2-p9-real-console-startup-liveness-001.md).
 
+**S2 P10:** real-console counterfactuals now prove the selected process reaches
+the original `ntio.sys` load decision, and that removing `COMMAND.COM` affects
+the process only when the admitted `--ordinary-child` declaration is present.
+No `/C VER` completion was observed, so guest EXEC/parent return remains open.
+See [P10 evidence](etc/evidence/m0-t318-s2-p10-original-input-counterfactuals-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
