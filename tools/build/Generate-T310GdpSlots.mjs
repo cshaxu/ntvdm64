@@ -77,5 +77,12 @@ for (const record of records) {
 }
 generated.push('#endif /* !_M_IX86 */', '', '#endif /* MVDM_T310_GDP_SLOTS_H */', '');
 fs.mkdirSync(outputDirectory, { recursive: true });
-fs.writeFileSync(output, generated.join('\r\n'), 'utf8');
-console.log(JSON.stringify({ source, output, slots: records.length }, null, 2));
+const outputText = generated.join('\r\n');
+// This generator runs while the formal graph is configured.  Preserve the
+// timestamp when its source-shaped output is byte-identical: otherwise every
+// configure step makes all translation units that include this carrier stale,
+// defeating Ninja's normal incremental dependency tracking.
+const existing = fs.existsSync(output) ? fs.readFileSync(output, 'utf8') : null;
+const changed = existing !== outputText;
+if (changed) fs.writeFileSync(output, outputText, 'utf8');
+console.log(JSON.stringify({ source, output, slots: records.length, changed }, null, 2));

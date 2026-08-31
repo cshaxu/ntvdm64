@@ -166,6 +166,13 @@ next x86 observation exposes a separate original VGA-initialization null
 transfer, without admitting a dummy video shim or changing guest/BOP logic.
 See [P16 evidence](etc/evidence/m0-t318-s2-p16-original-x86-gdp-carrier-restoration-001.md).
 
+**S2 P17:** the GDP-carrier generator now preserves its generated header's
+timestamp when its byte content is unchanged. This prevents a no-op formal
+graph configure from invalidating every dependent translation unit. A fresh
+x86 parallel formal product rebuild completed 215 actions and a second
+configure plus dry-run reported `ninja: no work to do`; source selection and
+compiler flags are unchanged. See [P17 evidence](etc/evidence/m0-t318-s2-p17-incremental-gdp-generator-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
