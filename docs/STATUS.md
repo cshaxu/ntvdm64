@@ -131,6 +131,13 @@ with the original `InitialiseDosEmulation → host_start_cpu → cpu_simulate`
 sequence and P10 counterfactual, this proves entry into original CCPU execution,
 not COMMAND completion. See [P11 evidence](etc/evidence/m0-t318-s2-p11-original-cpu-execution-admission-001.md).
 
+**S2 P12:** the selected CPU40 source/composition path from BOP `0x50` through
+original `MS_bop_0`, `SVC_DEMLOADDOS (0x11)`, `DemDispatch`, and `demLoadDos`
+is now fixed in evidence. Both formal product graphs include the original
+CCPU, BIOS, host BOP, and DEM units. This proves no replacement loader/router
+is required; it does not yet prove guest arrival or NTDOS execution. See
+[P12 evidence](etc/evidence/m0-t318-s2-p12-original-ntio-demload-dos-dispatch-map-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
