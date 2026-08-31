@@ -113,6 +113,12 @@ pipe-owned observer supplying no usable standard console handles to original
 source change was admitted. Further continuity observation requires a genuine
 console-owning harness or interactive console. See [P8 evidence](etc/evidence/m0-t318-s2-p8-headless-console-observation-attribution-001.md).
 
+**S2 P9:** a disposable console-owning x86 observation launcher supplied
+original `CONIN$`/`CONOUT$` handles to the CPU40/V7 VGA product. The original
+process remained alive for the bounded five-second interval (`STILL_ACTIVE`)
+with no error dialog. This confirms P8's headless attribution, but is still
+not an NTIO/NTDOS/COMMAND/EXEC/parent-return claim. See [P9 evidence](etc/evidence/m0-t318-s2-p9-real-console-startup-liveness-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
