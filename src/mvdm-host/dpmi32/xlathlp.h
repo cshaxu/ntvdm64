@@ -32,8 +32,10 @@ Revision History:
 // )
 
 #define DPMI_FLAT_TO_SEGMENTED(buffer, seg, off) {  \
-    *seg = (USHORT)(((ULONG)buffer-IntelBase) >> 4);            \
-    *off = (USHORT)(((ULONG)buffer-IntelBase) & 0xf);           \
+    /* DIVERGENCE(MVDM-HOST-DIV-140): retain host-pointer width until the \
+       original result is intentionally narrowed into 16:16 guest form. */ \
+    *seg = (USHORT)(((ULONG_PTR)buffer-IntelBase) >> 4);        \
+    *off = (USHORT)(((ULONG_PTR)buffer-IntelBase) & 0xf);       \
 }
 
 

@@ -495,7 +495,9 @@ Arguments:
     VdmSP -= 2;
     *(PWORD16)(VdmStackPointer+VdmSP) = (WORD) getIP();
     setSP(VdmSP);
-    pIVT = (PWORD16) (IntelBase + IntNumber*4);
+    /* DIVERGENCE(MVDM-HOST-DIV-140): IntelBase remains a host-private
+     * pointer-width value; the IVT offset itself remains original 16-bit. */
+    pIVT = (PWORD16) (IntelBase + (ULONG_PTR)IntNumber * 4);
     setIP(*pIVT++);
     setCS(*pIVT);
 }

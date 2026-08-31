@@ -60,6 +60,13 @@ operation, and later DOS re-entry.  The next bounded recovery is the complete
 `IntelBase`/`FlatAddress` contract; no generic DPMI mapper or synthetic
 monitor success is admitted.
 
+**S2 P2:** `MVDM-HOST-DIV-140` restores the complete private
+`IntelBase`/`FlatAddress` host-width contract in the original DPMI32 mirror.
+The selected original DPMI library and product link pass on x86 and x64.  The
+same evidence retains `VdmSetInt21Handler` and DOS/DEM re-entry as exact
+later-owner transfers; S2 remains active pending its scoped-span review and
+final closure decision.
+
 ### M0 T322 S1 — Original XMS ownership and memory-binding baseline
 
 **Closed: M0 T322 S1**

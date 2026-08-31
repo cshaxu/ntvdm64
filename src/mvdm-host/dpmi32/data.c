@@ -117,7 +117,11 @@ PULONG ExpSelectorLimit = NULL;
 //
 // Start of intel address space in process memory
 //
-ULONG IntelBase;
+/* DIVERGENCE(MVDM-HOST-DIV-140): this is a host-private base pointer for
+ * the selected SoftPC memory backing, not a 32-bit guest address.  NT4/x86
+ * stored it in ULONG because the two widths coincided.  Preserve all DPMI
+ * address arithmetic while retaining the native host width. */
+ULONG_PTR IntelBase;
 
 //
 // Variables used for supporting stack switching 

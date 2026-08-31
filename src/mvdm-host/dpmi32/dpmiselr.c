@@ -38,7 +38,7 @@ USHORT CheckValue=0;
 #endif
 
 #ifndef i386
-ULONG
+ULONG_PTR
 GetDescriptorMapping(
     USHORT Sel,
     ULONG LdtBase
@@ -48,7 +48,7 @@ typedef struct _DESC_MAPPING {
     USHORT Sel;
     USHORT SelCount;
     ULONG LdtBase;
-    ULONG FlatBase;
+    ULONG_PTR FlatBase;
     struct _DESC_MAPPING* pNext;
 } DESC_MAPPING, *PDESC_MAPPING;
 
@@ -95,7 +95,7 @@ Return Value:
 {
     LDT_ENTRY UNALIGNED *Descriptors;
     USHORT i;
-    ULONG  Base;
+    ULONG_PTR Base;
     ULONG Limit;
     USHORT registerCX;
     USHORT registerAX;
@@ -131,7 +131,11 @@ Return Value:
         //
 
         if ((Limit > 0x7FFEFFFF) || (Base + Limit > 0x7FFEFFFF)) {
-            Limit = 0x7FFEFFFF - (Base + 0xFFF);
+            /* DIVERGENCE(MVDM-HOST-DIV-140): descriptor bases are still
+             * original 32-bit guest values at this point; make that
+             * intentional narrowing explicit before storing the 32-bit
+             * selector limit. */
+            Limit = 0x7FFEFFFF - ((ULONG)Base + 0xFFF);
             if (!Descriptors[i].HighWord.Bits.Granularity) {
                 Descriptors[i].LimitLow = (USHORT)(Limit & 0x0000FFFF);
                 Descriptors[i].HighWord.Bits.LimitHi =
@@ -146,10 +150,13 @@ Return Value:
         if ((registerAX >> 3) != 0) {
 #ifndef i386
             {
-                ULONG BaseOrig = Base;
-                Base = GetDescriptorMapping(registerAX+i*8, Base);
+                ULONG_PTR BaseOrig = Base;
+                Base = GetDescriptorMapping(registerAX+i*8, (ULONG)Base);
                 if (BaseOrig == Base) {
-                    Base += (ULONG)IntelBase;
+                    /* DIVERGENCE(MVDM-HOST-DIV-140): the original RISC
+                     * branch combined a guest descriptor base with the
+                     * native SoftPC base.  Keep that host-private sum wide. */
+                    Base += IntelBase;
                 }
             }
 #endif
@@ -189,7 +196,7 @@ VdmAddDescriptorMapping(
     USHORT SelectorStart,
     USHORT SelectorCount,
     ULONG LdtBase,
-    ULONG Flat
+    ULONG_PTR Flat
     )
 /*++
 
@@ -241,7 +248,7 @@ Return Value:
     return TRUE;
 }
 
-ULONG
+ULONG_PTR
 GetDescriptorMapping(
     USHORT sel,
     ULONG LdtBase
@@ -263,7 +270,7 @@ Return Value:
 --*/
 {
     PDESC_MAPPING pdm, pdmprev;
-    ULONG Base = LdtBase;
+    ULONG_PTR Base = LdtBase;
 
     sel &= ~7;                      // and off lower 3 bits
     pdm = pDescMappingHead;

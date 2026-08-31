@@ -94,7 +94,47 @@ partial DPMI width edit from silently claiming a monitor or DOS runtime.
 
 ## Follow-up
 
-Recover and test the `IntelBase`/`FlatAddress` declaration, initialization and
-conversion contract as one overlay-backed P.  Then perform formal x86/x64
-selected-source links.  Keep the monitor and DOS re-entry transfers visible
-in the T323 closure evidence.
+The monitor and DOS re-entry transfers remain visible for later owner work.
+
+## Recovery P2
+
+`MVDM-HOST-DIV-140` changes only the private address carrier:
+
+- `IntelBase` and `FlatAddress` use `ULONG_PTR`;
+- DPMI initialisation retains the original `Sim32GetVDMPointer(0, 1, FALSE)`
+  and conversion order;
+- descriptor, IVT, DTA-range and flat/segmented arithmetic retain native
+  width until the original code intentionally narrows a verified guest value;
+- guest structures, register values, selector fields and mapping-token ABIs
+  remain unchanged.
+
+The changes are source-mirror modifications rather than an overlay because
+they are small type/cast corrections inside the original declarations and
+conversion expressions.  Each changed original location carries the same
+`DIVERGENCE(MVDM-HOST-DIV-140)` marker and the mirror README registers it.
+
+## Verification
+
+With Node 22 supplied explicitly to the graph generator, the following
+commands succeeded from the repository root:
+
+```text
+New-T310OriginalSoftpcNinja.ps1 -Architecture x86 -BuildRoot build/M0-T323/S2/p2-x86
+run-ninja-parallel.cmd original-mvdm-dpmi32.lib
+run-ninja-parallel.cmd original-softpc-process.exe
+
+New-T310OriginalSoftpcNinja.ps1 -Architecture x64 -BuildRoot build/M0-T323/S2/p2-x64
+run-ninja-parallel.cmd original-mvdm-dpmi32.lib
+run-ninja-parallel.cmd original-softpc-process.exe
+```
+
+Both rows built `original-mvdm-dpmi32.lib` and linked the selected original
+SoftPC product.  The incremental x64 DPMI rebuild no longer produced the
+`IntelBase`/`FlatAddress` pointer-width conversion warnings introduced by the
+historical `ULONG` carrier.  Existing original warnings (for example
+uninitialised historical locals and source macro redefinitions) remained
+visible and were neither suppressed nor changed by this P.
+
+This verification is a static source/link result.  It does not exercise a
+protected-mode guest, install a real INT21 handler, or claim DOSX/DEM re-entry
+completion.
