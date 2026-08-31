@@ -186,7 +186,7 @@ $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20
                         'mvdm_guest_location.c', 'mvdm_command_redirection.c', 'mvdm_command_guest_state.c',
                         'mvdm_vdd_sft_shadow.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
                         'mvdm_softpc_descriptor_fields.c', 'mvdm_softpc_activity_unavailable.c',
-                        'mvdm_softpc_vdd_unavailable.c')
+                        'mvdm_softpc_vdd_unavailable.c', 'mvdm_softpc_vdd_configuration.c')
 $appNames = @('machine_shell.c', 'package_layout.c', 'entry.c')
 $effectiveAddressSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_effective_address.c'
 $effectiveAddressObject = 'obj/adapter-softpc/mvdm_softpc_effective_address.obj'
@@ -299,17 +299,10 @@ function Get-NodeSha256([string]$Path) {
 }
 $gdpGeneratedRoot = Join-Path $build 'generated/gdp'
 & $NodeExecutable $gdpGenerator $root $gdpGeneratedRoot | Out-Null
-$environment = Join-Path $build 'msvc-mt.cmd'
-@('@echo off', 'set "MVDM_T310_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready',
-  ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'),
-  'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T310_CALLER_CWD%"', '%*') |
-    Set-Content -LiteralPath $environment -Encoding ascii
-
-# Ninja schedules translation units itself.  Initializing the Visual Studio
-# environment once here lets each rule above take the `VSCMD_VER` fast path,
-# instead of running VsDevCmd once per object.  Keep /MP absent: nesting it
-# below Ninja's job scheduler would oversubscribe the host and make builds
-# less predictable.
+# Ninja schedules translation units itself.  The runner initializes the Visual
+# Studio environment exactly once before Ninja starts, so rules invoke the MSVC
+# tools directly.  Do not add /MP: nesting it below Ninja's job scheduler would
+# oversubscribe the host and make builds less predictable.
 $parallelRunner = Join-Path $build 'run-ninja-parallel.cmd'
 @('@echo off',
   ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'),
@@ -417,48 +410,48 @@ $graph.Add('patch_vector_defaults_cflags = ' + $patchVectorDefaultsFlags)
 $graph.Add('rcflags = ' + ($includeRoots -join ' '))
 $graph.Add('')
 $graph.Add('rule cc')
-$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in')
+$graph.Add('  command = cl.exe $cflags /Fo$out $in')
 $graph.Add('  description = CC $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('rule cc_cvidc')
-$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cvidc_first_cflags /Fo$out $in')
+$graph.Add('  command = cl.exe $cvidc_first_cflags /Fo$out $in')
 $graph.Add('  description = CC-CVIDC $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('rule cc_dpmi')
-$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $dpmi_cflags /Fo$out $in')
+$graph.Add('  command = cl.exe $dpmi_cflags /Fo$out $in')
 $graph.Add('  description = CC-DPMI $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('rule cc_cvidc_rule')
-$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cvidc_rule_cflags /Fo$out $in')
+$graph.Add('  command = cl.exe $cvidc_rule_cflags /Fo$out $in')
 $graph.Add('  description = CC-CVIDC-RULE $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('rule cc_cvidc_access')
-$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cvidc_access_cflags /Fo$out $in')
+$graph.Add('  command = cl.exe $cvidc_access_cflags /Fo$out $in')
 $graph.Add('  description = CC-CVIDC-ACCESS $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('rule cc_patch_vector_defaults')
-$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $patch_vector_defaults_cflags /Fo$out $in')
+$graph.Add('  command = cl.exe $patch_vector_defaults_cflags /Fo$out $in')
 $graph.Add('  description = CC-PATCH $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('rule rc')
-$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' rc.exe /nologo $rcflags /fo$out $in')
+$graph.Add('  command = rc.exe /nologo $rcflags /fo$out $in')
 $graph.Add('  description = RC $in')
 $graph.Add('rule lib')
-$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' lib.exe /nologo /out:$out $in')
+$graph.Add('  command = lib.exe /nologo /out:$out $in')
 $graph.Add('  description = LIB $out')
 $graph.Add('rule forced_link_audit')
 # This deliberately produces a non-runnable DLL.  /WHOLEARCHIVE makes the
 # candidate's complete original membership visible to LINK; /FORCE keeps the
 # unresolved physical forms in the adjacent log for source-first ownership.
-$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-system.lib /wholearchive:original-softpc-disks.lib /wholearchive:original-softpc-support.lib /wholearchive:original-softpc-video.lib /wholearchive:original-softpc-cvidc.lib /wholearchive:original-softpc-comms.lib /wholearchive:original-softpc-dos.lib /wholearchive:original-mvdm-dem.lib /wholearchive:original-mvdm-command.lib /wholearchive:original-mvdm-xms.lib /wholearchive:original-mvdm-dpmi32.lib /wholearchive:original-mvdm-host-suballoc.lib /wholearchive:original-mvdm-host-oemuni.lib /wholearchive:original-softpc-base-trace.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-bindings.lib /wholearchive:softpc-win32-bindings.lib /wholearchive:basesrv-bindings.lib /wholearchive:monitor-bindings.lib /wholearchive:debugger-bindings.lib /wholearchive:session.lib /wholearchive:mvdm-softpc-effective-address.lib /wholearchive:ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib > $out.log 2>&1')
+$graph.Add('  command = link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-system.lib /wholearchive:original-softpc-disks.lib /wholearchive:original-softpc-support.lib /wholearchive:original-softpc-video.lib /wholearchive:original-softpc-cvidc.lib /wholearchive:original-softpc-comms.lib /wholearchive:original-softpc-dos.lib /wholearchive:original-mvdm-dem.lib /wholearchive:original-mvdm-command.lib /wholearchive:original-mvdm-xms.lib /wholearchive:original-mvdm-dpmi32.lib /wholearchive:original-mvdm-host-suballoc.lib /wholearchive:original-mvdm-host-oemuni.lib /wholearchive:original-softpc-base-trace.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-bindings.lib /wholearchive:softpc-win32-bindings.lib /wholearchive:basesrv-bindings.lib /wholearchive:monitor-bindings.lib /wholearchive:debugger-bindings.lib /wholearchive:session.lib /wholearchive:mvdm-softpc-effective-address.lib /wholearchive:ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib > $out.log 2>&1')
 $graph.Add('rule process_link')
-$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
+$graph.Add('  command = link.exe /nologo /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
 
 $ccpuObjects = foreach ($name in $ccpuNames) {
     $object = 'obj/ccpu/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'

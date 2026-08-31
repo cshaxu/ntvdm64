@@ -16,10 +16,12 @@ root; it never imports cache output as a source or release input.
 
 The generated `run-ninja-parallel.cmd` is the formal execution entry point for
 that graph. It initializes the matching MSVC environment once, then invokes
-Ninja with eight translation-unit jobs. Build rules consequently take the
-existing-environment fast path; `/MP` remains deliberately absent because
-Ninja owns parallel scheduling. Pass a narrow library or fixture target during
-iteration and use the complete candidate target only for a packet gate.
+Ninja with eight translation-unit jobs. Build rules invoke `cl`, `rc`, `lib`,
+and `link` directly from that inherited environment; they do not start a
+per-translation-unit shell or environment script. `/MP` remains deliberately
+absent because Ninja owns parallel scheduling. Pass a narrow library or
+fixture target during iteration and use the complete candidate target only for
+a packet gate.
 
 An admitted fixture may declare `supportSources`, each constrained to a
 `tests/` source. Ninja compiles those objects immediately before the fixture

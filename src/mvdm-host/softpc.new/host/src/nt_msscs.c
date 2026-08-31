@@ -41,6 +41,7 @@
 #include <mvdm_umb_address.h>
 
 #include "mvdm_softpc_firmware.h"
+#include "mvdm_softpc_vdd_configuration.h"
 
 /* DIVERGENCE(MVDM-HOST-DIV-084): `emm_mngr.c` is a selected original DOS
  * owner but no selected public header carries its page-frame initializer.
@@ -679,12 +680,16 @@ PCHAR  pszName,pszValue;
 FILETIME ft;
 PCHAR  pKeyName = "SYSTEM\\CurrentControlSet\\Control\\VirtualDeviceDrivers";
 
-    if (RegOpenKeyEx ( HKEY_LOCAL_MACHINE,
-                       pKeyName,
-		       0,
-		       KEY_QUERY_VALUE,
-		       &VDDKey
-		     ) != ERROR_SUCCESS){
+    /* DIVERGENCE(MVDM-HOST-DIV-148): NT4 installed this product-global VDD
+     * registry key. The product retains its original query, enumeration and
+     * SafeLoadLibrary body, but a missing retired key now means that the
+     * current session selects no installable VDDs. Other registry failures
+     * retain the original dialog/error path through the same adapter result. */
+    if (mvdm_softpc_open_installable_vdd_registry(&VDDKey) ==
+        MVDM_SOFTPC_VDD_CONFIGURATION_NONE) {
+        return;
+    }
+    if (VDDKey == NULL) {
         RcErrorDialogBox(ED_REGVDD, pKeyName, NULL);
         return;
     }

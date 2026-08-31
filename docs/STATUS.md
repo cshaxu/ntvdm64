@@ -83,6 +83,15 @@ links pass. The original `-f` direct-launch contract is confirmed, and a
 watchdog-bounded x86 `-f` run stays alive without a crash. It is liveness only,
 not NTIO/NTDOS or child-return evidence. See [P4 evidence](etc/evidence/m0-t318-s2-p4-original-resource-and-startup-contract-001.md).
 
+**S2 P5:** pipe-captured and hidden-console `-f -o` observations, including a
+single missing-`NTIO.SYS` counterfactual, do not validly test the DOS-media
+loader. The original retired installable-VDD registry key is absent on the
+modern host; its selected original query/enumeration body now accepts an empty
+set only for that absence, while other failures retain the original error path.
+Both product links pass, but bounded liveness remains only liveness; the next
+owner boundary is original `scs_init` / Base VDM command acquisition. See
+[P5 evidence](etc/evidence/m0-t318-s2-p5-console-observation-admission-001.md).
+
 ### M0 T317 S2 closure record
 
 | Field | Record |
