@@ -6,7 +6,7 @@
 
 ### M0 T323 S1 — Original DPMI/DPMI32 owner and boundary baseline
 
-**Active: M0 T323 S1**
+**Closed: M0 T323 S1**
 
 | Field | Record |
 | --- | --- |
@@ -25,6 +25,33 @@
 | Exit Criteria | A bounded source/ABI/failure ledger covers the complete selected DPMI/DPMI32 family and permits the next recovery S without an invented backend. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | DPMI allocation/free, descriptor/LDT operations, interrupt/fault registration, VxD controls, address/handle lifetimes, stale session, x86/x64 architecture gates and DOSX guest/host separation. |
+
+**S1 closed:** [the original DPMI owner/binding baseline](etc/evidence/m0-t323-s1-original-dpmi-owner-binding-baseline-001.md)
+separates the host DPMI32 provider from the DOSX guest carrier, preserves the
+original 25-entry table, and identifies the real next boundary: the complete
+shared guest-span contract—not a trace-selected DPMI service.
+
+### M0 T323 S2 — DPMI shared guest-span and monitor binding recovery
+
+**Active: M0 T323 S2**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T323 S2; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | T323/S1 source baseline and standing ordered-queue authority. |
+| Objective | Recover one complete source-shaped DPMI guest-span and monitor-binding cohort for the original provider without turning `Sim32GetVDMPointer` into a durable raw host alias. |
+| Non-goals | No per-BOP provider, second mapper, raw guest pointer publication, synthetic protected interrupt/fault delivery, DOSX guest change, or kernel VDM recreation. |
+| Reference Baseline | T323/S1 baseline; existing session mapping manager, monitor TIB binding, original `dpmi32` source and formal CPU40 product graph. |
+| Files And ABI Surface | Reached `Sim32GetVDMPointer` call sites in `buffer.c`, `dpmi32.c`, `dpmiint.c`, `dpmiselr.c`, `int21map.c`, `modesw.c`, `stack.c`, `dpmimemr.c` and x86 comparison bodies; monitor `VdmTib`/`NtVdmControl` interfaces and original source headers. |
+| Applicable Rules | Execution, source-first recovery, mirror/overlay, architecture and shared mapping-manager rules. |
+| Verification | Call-site lifetime classification, original/adapter declaration comparison, focused positive/negative scoped-span proof, formal x86/x64 selected source links, governance and diff review. |
+| Expected Markers | Every reached raw pointer form has a direct scoped binding, a minimal mirror overlay with registered divergence, or exact named unavailable transfer; no native pointer crosses a DPMI/guest ABI. |
+| Asset Needs | Existing mirrors and adapter/session components only; no new guest media, kernel facility or emulator. |
+| Reporting Requirements | Record address form, length, read/write direction, pointer arithmetic lifetime, flush/free behavior, TIB relation and exact continuation/failure rule for each classified call site. |
+| Stop Conditions | A requirement for a generic durable alias, new DPMI-private mapping manager, implicit cross-thread lease, changed CCPU execution semantics, or invented `NtVdmControl` success pauses for re-admission. |
+| Exit Criteria | One complete source-shaped guest-span cohort is bound or transferred with focused evidence; it permits later dispatcher/mode integration without a hidden raw-pointer backend. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | All ten `Sim32GetVDMPointer` provider files, direct pointer arithmetic, stack/IVT/DTA/FCB buffers, VDM_TIB fields, descriptor references, cancellation/teardown and x86/x64 link forms. |
 
 ### M0 T322 S1 — Original XMS ownership and memory-binding baseline
 
