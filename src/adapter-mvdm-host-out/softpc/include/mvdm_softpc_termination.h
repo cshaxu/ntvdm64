@@ -17,6 +17,10 @@ int mvdm_softpc_terminate_current_session(uint32_t vdm_for_wow,
 void mvdm_softpc_record_unhandled_exception(
     const struct _EXCEPTION_POINTERS *exception_info);
 
+/* Fixed-container diagnostic only.  It observes the original top-level main
+ * return after host_main/SEH have already selected the result. */
+void mvdm_softpc_record_main_return(int result);
+
 /* Fixed-container diagnostic only.  `selector` and `service` were already
  * decoded by original MVDM code; this records them without routing them. */
 void mvdm_softpc_record_bop_dispatch(unsigned int selector,

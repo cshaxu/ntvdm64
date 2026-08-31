@@ -4,44 +4,19 @@
 
 ## Active Packet
 
-### M0 T319 S2 — Source-shaped SoftPC ROM residency composition
+### No M/T/S packet is active
 
-**Active: M0 T319 S2**
+**No active M/T/S packet.**
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T319 S2; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | S1 closed its source-contract exit in P1; the owner-approved T319 proposal admits its bounded same-shaped firmware-residency recovery. |
-| Objective | Select the existing original `rom_init()` resource/SAS body so retained byte-exact SoftPC ROM input is resident before the reached recursive `wait_int` call. |
-| Non-goals | No BOP, DEM, COMMAND, XMS, DOS/guest, app-loader, replacement-executor, synthetic-device-success, FDC/PIC behavioral change, unrelated disk/DMA/BIOS expansion, or new machine. |
-| Reference Baseline | [T319 S1/P1 source contract](etc/evidence/m0-t319-s1-softpc-rom-vector-contract-freeze-001.md); [P76 evidence](etc/evidence/m0-t318-s2-p76-floppy-recursive-simulation-owner-transfer-001.md); [T319 proposal](etc/operations/proposal-softpc-floppy-int15-recursive-machine-closure-001.md). |
-| Machine Profile | The sole permitted build/runtime/acceptance profile is `CPU_40_STYLE`/CCPU40. `CPU_30_STYLE` is retired historical evidence and is not a fallback or deferred route. |
-| Files And ABI Surface | Original `softpc.new/base/system/rom.c` resource/SAS ordering; staged `bios1.rom`/`bios4.rom`/`v7vga.rom`; selected SAS memory interfaces and the existing application runtime-root contract. |
-| Applicable Rules | `docs/rules/EXECUTION.md`, `docs/rules/ARCHITECTURE.md`, `docs/rules/CODING.md`, source policy, and mirror exception registration. |
-| Verification | Fresh CPU40 x86/x64 compile/link; focused proof that each selected input is copied into the correct SAS span before ROM protection; one bounded x86 fixed-container observation; governance verification and `git diff --check`. |
-| Expected Markers | Original `rom_init` resource lookup, read, SAS RAM copy and ROM-protection ordering runs; the two recursive vector instruction spans contain retained ROM bytes rather than zero/uninitialized data; later FDC/PIC behavior remains original. |
-| Asset Needs | Existing original MVDM mirrors, CPU40 SoftPC graph, retained firmware/table inputs, runtime-root binding and fixed console-owning observation harness. |
-| Reporting Requirements | Record source identity, target address/span, write-protection order, mapping/teardown disposition and any subsequent original-machine owner transfer. |
-| Stop Conditions | A need to modify guest DOS/BOP/FDC/PIC semantics, bypass SAS memory, synthesize a wait result, add a second machine, or depend on an unstaged firmware input pauses for re-admission. |
-| Exit Criteria | Same-shaped ROM residency is proved on both compile rows and the former zero-transfer observation either advances or yields a narrower original-machine owner transfer. |
-| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
-| Similar-Issue Sweep | Compare BIOS1/BIOS4/video-ROM source identity, address/span validation, SAS write protection, runtime-root lookup, teardown, and both recursive vector locations as one firmware-residency contract. |
+**Most recent closure:** [M0 T319 SoftPC ROM residency and termination
+attribution](history/m0-t319-softpc-rom-residency-and-termination-closure-20260831.md).
 
-**S1 P1:** the selected CPU40 `NTVDM + X86GFX` source branch makes original
-`rom_init()` delegate firmware residency to `host_rom_init()`, while the
-selected host header supplies only an empty hook.  The retained byte-exact
-`bios4` input contains the exact `F000:E970` and `FE00:0CE0` recursive
-instructions used by `floppy.c::wait_int`.  Therefore firmware residency is
-the first source-shaped recovery seam; FDC/PIC is downstream and not yet
-diagnosed.  See [S1 P1 evidence](etc/evidence/m0-t319-s1-softpc-rom-vector-contract-freeze-001.md).
-
-**S2 P1:** the available original `rom.c::rom_init` resource/SAS body is now
-selected only for this CPU40 translation unit, replacing the retired
-kernel-VDM pre-resident-ROM assumption without a new loader.  Fresh x86/x64
-products link, and both `rom.obj` files import original `host_read_resource`
-and `c_sas_stores`.  One fixed x86 observation still exits `0xC0000005`, but
-does not emit a valid original exception report; no FDC/PIC/CCPU diagnosis is
-claimed.  See [S2 P1 evidence](etc/evidence/m0-t319-s2-p1-original-rom-loader-selection-001.md).
+T319 selected the original CPU40 ROM-residency body and established, in an
+unchanged fixed container, that the remaining `0xc0000005` bypasses both the
+original top-level return and its known-thread exception filter.  The bounded
+remaining owner is the original CPU40 raw-worker/execution cohort; no device,
+BOP, guest, or synthetic-success repair was made.  A later package requires
+fresh admission before changing that cohort.
 
 ## Historical retained T318 delivery sequence
 

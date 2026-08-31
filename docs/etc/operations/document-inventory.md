@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3501 |
+| Documentation records | 3503 |
 | --- | --- |
-| Generated UTC | 2026-08-31T17:30:51Z |
+| Generated UTC | 2026-08-31T17:44:55Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 32c519c83dc4ea26ee6bf5f33054fd21535d80a9b666b13020c37346b68914d0 |
+| STATUS.md | principal control document | da505c7f934da10a9d635fc3db5f4ae9d275a5c7d18982f8cdd3ded2122178de |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1007,6 +1007,7 @@ content-divergent entries.
 | etc/evidence/m0-t318-s2-p9-real-console-startup-liveness-001.md | indexed supporting material | a88fcc9c8bcea9e2d028db968decfc309293d4a47ecaa5cc80abeef4c6a1c87d |
 | etc/evidence/m0-t319-s1-softpc-rom-vector-contract-freeze-001.md | indexed supporting material | f9919120317a871b5d6b8aa7a2a58519dc4e4bd3bde9c563ab0437536c141f0e |
 | etc/evidence/m0-t319-s2-p1-original-rom-loader-selection-001.md | indexed supporting material | 6e7bc06823413c74afd178f8c48ff8e447fa66ad61b298f8011d38a2f69ea981 |
+| etc/evidence/m0-t319-s3-post-rom-termination-attribution-001.md | indexed supporting material | 8e5d7dd7ff9f8cfd91d3c16831d5f3a83af26eff19156d6accf2fc1e092c5c23 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -3408,6 +3409,7 @@ content-divergent entries.
 | history/m0-t316-monitor-user-mode-contract-closure-20260830.md | closed task history | 8d667938f4a1889694859d6b2f564d53cf3fb099f47a0d8437513a0f6cbc0a8c |
 | history/m0-t317-dem-command-softpc-vertical-slice-closure-20260830.md | closed task history | e1fdefadf1a07ab80343699faa472b03547cd9e7e0fee4671e3bef423ca2bbc7 |
 | history/m0-t318-ntdos-ordinary-child-owner-transfer-closure-20260831.md | closed task history | 9a0fb959fd97228207efd613cdde2a5dab073fbb5e67ab1ecf6d98a4c7844329 |
+| history/m0-t319-softpc-rom-residency-and-termination-closure-20260831.md | closed task history | 7f96f92ea44c934f037807cbe558548dff7f706ddcdcac5feced3f7b3a1da495 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

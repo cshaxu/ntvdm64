@@ -10,6 +10,7 @@
 #include "host_rrr.h"
 #include "host_nls.h"
 #include "nt_timer.h"
+#include "mvdm_softpc_termination.h"
 
 
 
@@ -60,6 +61,12 @@ _CRTAPI1 main(int argc, CHAR ** argv)
         ;  // we shouldn't arrive here
         }
 
+    /* DIVERGENCE(MVDM-HOST-DIV-166): the fixed non-debug observation
+     * container needs to distinguish a normal original top-level return from
+     * a thread/process termination that bypasses it.  The adapter records
+     * only an already-selected return value when explicitly requested; it
+     * does not alter SEH, ret, process lifetime or guest state. */
+    mvdm_softpc_record_main_return(ret);
     return ret;
 }
 

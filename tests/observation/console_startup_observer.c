@@ -55,8 +55,12 @@ int main(int argc, char **argv)
     char command_line[MAX_PATH * 2];
     char exception_report_path[MAX_PATH];
     char previous_exception_report_path[MAX_PATH];
+    char main_return_report_path[MAX_PATH];
+    char previous_main_return_report_path[MAX_PATH];
     DWORD previous_exception_report_length;
+    DWORD previous_main_return_report_length;
     BOOL had_previous_exception_report;
+    BOOL had_previous_main_return_report;
     FILE *report = NULL;
 
     if (argc != 4) return 64;
@@ -81,12 +85,20 @@ int main(int argc, char **argv)
 
     snprintf(exception_report_path, sizeof(exception_report_path), "%s.exception.txt",
              argv[3]);
+    snprintf(main_return_report_path, sizeof(main_return_report_path), "%s.return.txt",
+             argv[3]);
     previous_exception_report_length = GetEnvironmentVariableA(
         "MVDM_EXCEPTION_REPORT_PATH", previous_exception_report_path,
         (DWORD)sizeof(previous_exception_report_path));
     had_previous_exception_report = previous_exception_report_length != 0 &&
         previous_exception_report_length < sizeof(previous_exception_report_path);
+    previous_main_return_report_length = GetEnvironmentVariableA(
+        "MVDM_MAIN_RETURN_REPORT_PATH", previous_main_return_report_path,
+        (DWORD)sizeof(previous_main_return_report_path));
+    had_previous_main_return_report = previous_main_return_report_length != 0 &&
+        previous_main_return_report_length < sizeof(previous_main_return_report_path);
     SetEnvironmentVariableA("MVDM_EXCEPTION_REPORT_PATH", exception_report_path);
+    SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH", main_return_report_path);
 
     if (!CreateProcessA(NULL, command_line, NULL, NULL, TRUE, 0, NULL, argv[2],
                         &startup, &child)) {
@@ -95,6 +107,11 @@ int main(int argc, char **argv)
                                     previous_exception_report_path);
         else
             SetEnvironmentVariableA("MVDM_EXCEPTION_REPORT_PATH", NULL);
+        if (had_previous_main_return_report)
+            SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH",
+                                    previous_main_return_report_path);
+        else
+            SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH", NULL);
         CloseHandle(input);
         CloseHandle(output);
         return 67;
@@ -104,6 +121,11 @@ int main(int argc, char **argv)
                                 previous_exception_report_path);
     else
         SetEnvironmentVariableA("MVDM_EXCEPTION_REPORT_PATH", NULL);
+    if (had_previous_main_return_report)
+        SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH",
+                                previous_main_return_report_path);
+    else
+        SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH", NULL);
     CloseHandle(child.hThread);
     wait_status = WaitForSingleObject(child.hProcess, OBSERVATION_TIMEOUT_MS);
     if (wait_status == WAIT_TIMEOUT) {

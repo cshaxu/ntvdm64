@@ -2,6 +2,7 @@
 
 #include "session/session.h"
 
+#include <stdio.h>
 #include <string.h>
 #include <windows.h>
 
@@ -111,6 +112,33 @@ void mvdm_softpc_record_unhandled_exception(
     if (output != NULL && output != INVALID_HANDLE_VALUE)
         (void)WriteFile(output, message, (DWORD)(cursor - message), &written, NULL);
     mvdm_softpc_write_exception_report(message, (DWORD)(cursor - message));
+}
+
+void mvdm_softpc_record_main_return(int result)
+{
+    char report_path[MAX_PATH];
+    char message[64];
+    DWORD report_path_bytes;
+    HANDLE report;
+    DWORD written;
+    int formatted;
+
+    report_path_bytes = GetEnvironmentVariableA(
+        "MVDM_MAIN_RETURN_REPORT_PATH", report_path, (DWORD)sizeof(report_path));
+    if (report_path_bytes == 0 || report_path_bytes >= sizeof(report_path))
+        return;
+    report = CreateFileA(report_path, GENERIC_WRITE, FILE_SHARE_READ, NULL,
+        CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (report == INVALID_HANDLE_VALUE)
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-ORIGINAL-MAIN-RETURN code=0x%08lx\r\n",
+        (unsigned long)(uint32_t)result);
+    if (formatted > 0 && (size_t)formatted < sizeof(message)) {
+        DWORD message_bytes = (DWORD)formatted;
+        (void)WriteFile(report, message, message_bytes, &written, NULL);
+    }
+    CloseHandle(report);
 }
 
 void mvdm_softpc_record_bop_dispatch(unsigned int selector,
