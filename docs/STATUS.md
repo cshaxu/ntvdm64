@@ -4,29 +4,29 @@
 
 ## Active Packet
 
-### M0 T336 S3 — FDC/INT15 post-vector completion-cohort admission
+### M0 T336 S4 — Post-vector wait-owner attribution
 
-**Active: M0 T336 S3.**
+**Active: M0 T336 S4.**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T336 S3; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | S2 closed the exact null-vector recovery under the owner’s standing direction. S3 is its source-defined successor, not a trace-selected BOP task. |
-| Objective | Map the original FDC `wait_int` → INT15 → ICA/heartbeat completion path reached after the CCPU40 recursive vector is installed, then select only a complete source-owned cohort if one is missing. |
-| Non-goals | No BOP repair, guest loader, synthetic result, DOS/NTDOS rewrite, new mapping manager, alternate executor, Bochs route, GUI/WOW/CSRSS/kernel-VDM recreation, `EXEC`/PSP work, or arbitrary runtime retry. |
-| Reference Baseline | T336 S1 [source/cohort admission](etc/evidence/m0-t336-s1-post-cmdsetinfo-source-cohort-admission-001.md), its [ledger](etc/operations/m0-t336-s1-post-cmdsetinfo-cohort-ledger.tsv), and S2 [recursive-vector recovery](etc/evidence/m0-t336-s2-cpu40-recursive-vector-recovery-001.md) with [ledger](etc/operations/m0-t336-s2-cpu40-recursive-vector-recovery-ledger.tsv). |
-| Files And ABI Surface | Original `floppy.c`, INT15 BIOS exchange, ICA/PIT/heartbeat original sources and CCPU40 recursive execution; only an exact source-owned completion sibling if proven required. |
+| Identifier Mode | M0 T336 S4; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | S3 closed the complete original FDC/INT15/ICA/heartbeat source cohort and ruled out a guest-loader repair. Its fixed observation left a source-owned wait attribution, not a BOP leaf, as the exact remaining question. |
+| Objective | Identify the owner and contract of the current formal product's post-vector host wait state, including the main CCPU thread and original timer/event/comms companion workers, before selecting any further original source cohort. |
+| Non-goals | No BOP repair, guest loader, synthetic result, DOS/NTDOS rewrite, new mapping manager, alternate executor, Bochs route, GUI/WOW/CSRSS/kernel-VDM recreation, `EXEC`/PSP work, arbitrary runtime retry, or product instrumentation. |
+| Reference Baseline | T336 S1 [source/cohort admission](etc/evidence/m0-t336-s1-post-cmdsetinfo-source-cohort-admission-001.md), S2 [recursive-vector recovery](etc/evidence/m0-t336-s2-cpu40-recursive-vector-recovery-001.md), and S3 [FDC/INT15 completion cohort](etc/evidence/m0-t336-s3-fdc-int15-completion-cohort-audit-001.md) with its [ledger](etc/operations/m0-t336-s3-fdc-int15-completion-cohort-ledger.tsv). |
+| Files And ABI Surface | Original `nt_cpu.c`, CCPU40 execution, `nt_timer.c`, `nt_event.c`, `nt_com.c`, their original waits/events, and the external fixed observer's read-only process-context snapshot. |
 | Applicable Rules | Execution, source policy, original-source-first recovery, mirror/overlay, session mapping, CCPU40-only, architecture, coding and documentation rules. |
-| Verification | Original definition/caller/completion walk; fixed-container evidence only after a complete cohort is selected; paired formal x86/x64 manifest review; focused negative proof; governance and diff checks. |
-| Expected Markers | One exact FDC/INT15 completion edge or source-owned terminal result, each reached sibling has one owner/disposition, and no trace-selected BOP or loader route is selected. |
+| Verification | Original definition/caller/wait-object walk; one unchanged fixed-container observation only if it can discriminate an owner; paired formal x86/x64 manifest review; focused negative proof; governance and diff checks. |
+| Expected Markers | One exact wait owner or source-shaped terminal result, each reached sibling has one owner/disposition, and no trace-selected BOP or loader route is selected. |
 | Asset Needs | Existing selected MVDM/DOS mirrors, T335 evidence, current fixed container and paired formal CCPU40 product graphs; no new guest media or host installation. |
-| Reporting Requirements | Separate observations from source inference; name the exact completion/terminal edge, every reached sibling prerequisite and the recovery rung selected or rejected. |
+| Reporting Requirements | Separate observations from source inference; name the exact wait/terminal edge, every reached sibling prerequisite and the recovery rung selected or rejected. |
 | Stop Conditions | Any need for a new BOP provider, guest loader, second mapper/executor, raw host pointer, guest-media rewrite, unreviewed source import, or a diagnosis that reaches a different owner package requires re-admission. |
-| Exit Criteria | A committed evidence/ledger names the actual FDC/INT15 completion edge and a complete source-owned recovery cohort, or records a source-shaped terminal result; no generic DOS completion claim is made. |
+| Exit Criteria | A committed evidence/ledger names the observed wait owner and its complete original cohort, or records a source-shaped terminal result; no generic DOS completion claim is made. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | `cmdSetInfo` service-byte/IP return, NTDOS register/segment restoration, DOS/BIOS exchange fields, SAS span and stack conversion, CPU40 faults, disk stack, Win386/DOSWOW fields, timer/PIT/ICA prerequisites and stale Bochs-era routes. |
 
-**Plan:** [CPU40/NTDOS post-`54:05` startup continuity](etc/operations/proposal-cpu40-ntdos-post-cmdsetinfo-continuity-001.md). **S1 closed:** [source/cohort admission](etc/evidence/m0-t336-s1-post-cmdsetinfo-source-cohort-admission-001.md) and [ten-row ledger](etc/operations/m0-t336-s1-post-cmdsetinfo-cohort-ledger.tsv) establish that guest media is already loaded. **S2 closed:** [recursive-vector recovery](etc/evidence/m0-t336-s2-cpu40-recursive-vector-recovery-001.md) and its [six-row ledger](etc/operations/m0-t336-s2-cpu40-recursive-vector-recovery-ledger.tsv) restore the original CCPU40 `host_simulate_func` vector and turn the former null-IP crash into a bounded live-process timeout.
+**Plan:** [CPU40/NTDOS post-`54:05` startup continuity](etc/operations/proposal-cpu40-ntdos-post-cmdsetinfo-continuity-001.md). **S1 closed:** [source/cohort admission](etc/evidence/m0-t336-s1-post-cmdsetinfo-source-cohort-admission-001.md) and [ten-row ledger](etc/operations/m0-t336-s1-post-cmdsetinfo-cohort-ledger.tsv) establish that guest media is already loaded. **S2 closed:** [recursive-vector recovery](etc/evidence/m0-t336-s2-cpu40-recursive-vector-recovery-001.md) and its [six-row ledger](etc/operations/m0-t336-s2-cpu40-recursive-vector-recovery-ledger.tsv) restore the original CCPU40 `host_simulate_func` vector and turn the former null-IP crash into a bounded live-process timeout. **S3 closed:** [FDC/INT15 completion-cohort audit](etc/evidence/m0-t336-s3-fdc-int15-completion-cohort-audit-001.md) and [ledger](etc/operations/m0-t336-s3-fdc-int15-completion-cohort-ledger.tsv) select the complete original source chain, reject a speculative physical-floppy or loader repair, and record the external all-thread wait snapshot as attribution evidence only.
 
 ### M0 T335 — Original WOW32/Win16 owner-package recovery
 

@@ -7,11 +7,58 @@
  */
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <tlhelp32.h>
 #include <stdio.h>
 #include <string.h>
 
 #define OBSERVATION_TIMEOUT_MS 8000u
 #define OBSERVATION_TIMEOUT_EXIT 0x53504354u
+#define OBSERVATION_STACK_WORDS 16u
+#define OBSERVATION_THREAD_LIMIT 16u
+
+typedef struct observation_thread_context {
+    DWORD thread_id;
+    BOOL context_available;
+    CONTEXT context;
+} observation_thread_context;
+
+static DWORD capture_process_threads(DWORD process_id,
+                                     observation_thread_context *records,
+                                     DWORD record_capacity)
+{
+    HANDLE snapshot;
+    THREADENTRY32 entry;
+    DWORD record_count = 0;
+
+    snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
+    if (snapshot == INVALID_HANDLE_VALUE) return 0;
+    entry.dwSize = sizeof(entry);
+    if (Thread32First(snapshot, &entry)) {
+        do {
+            HANDLE thread;
+            if (entry.th32OwnerProcessID != process_id ||
+                record_count == record_capacity) continue;
+            records[record_count].thread_id = entry.th32ThreadID;
+            records[record_count].context_available = FALSE;
+            memset(&records[record_count].context, 0,
+                   sizeof(records[record_count].context));
+            thread = OpenThread(THREAD_SUSPEND_RESUME | THREAD_GET_CONTEXT,
+                                FALSE, entry.th32ThreadID);
+            if (thread != NULL) {
+                if (SuspendThread(thread) != (DWORD)-1) {
+                    records[record_count].context.ContextFlags =
+                        CONTEXT_CONTROL | CONTEXT_INTEGER;
+                    records[record_count].context_available =
+                        GetThreadContext(thread, &records[record_count].context);
+                }
+                CloseHandle(thread);
+            }
+            ++record_count;
+        } while (Thread32Next(snapshot, &entry));
+    }
+    CloseHandle(snapshot);
+    return record_count;
+}
 
 static void write_console_snapshot(HANDLE output, const char *report_path)
 {
@@ -53,6 +100,14 @@ int main(int argc, char **argv)
     HANDLE output;
     DWORD wait_status;
     DWORD exit_code = STILL_ACTIVE;
+    CONTEXT timed_context = { 0 };
+    DWORD timed_stack[OBSERVATION_STACK_WORDS] = { 0 };
+    observation_thread_context timed_threads[OBSERVATION_THREAD_LIMIT] = { 0 };
+    BOOL have_timed_context = FALSE;
+    BOOL have_timed_stack = FALSE;
+    SIZE_T timed_stack_bytes = 0;
+    DWORD timed_thread_count = 0;
+    DWORD suspend_result = (DWORD)-1;
     char command_line[MAX_PATH * 2];
     char exception_report_path[MAX_PATH];
     char previous_exception_report_path[MAX_PATH];
@@ -145,9 +200,28 @@ int main(int argc, char **argv)
                                 previous_main_return_report_path);
     else
         SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH", NULL);
-    CloseHandle(child.hThread);
     wait_status = WaitForSingleObject(child.hProcess, OBSERVATION_TIMEOUT_MS);
     if (wait_status == WAIT_TIMEOUT) {
+        /* The fixed container observes the product without a debugger.  A
+         * bounded suspension gives the evidence record one architectural
+         * stop state before the existing watchdog terminates the process.
+         * It neither changes product inputs nor resumes/modifies the thread.
+         */
+        suspend_result = SuspendThread(child.hThread);
+        if (suspend_result != (DWORD)-1) {
+            memset(&timed_context, 0, sizeof(timed_context));
+            timed_context.ContextFlags = CONTEXT_CONTROL | CONTEXT_INTEGER;
+            have_timed_context = GetThreadContext(child.hThread, &timed_context);
+            if (have_timed_context) {
+                have_timed_stack = ReadProcessMemory(
+                    child.hProcess, (LPCVOID)(ULONG_PTR)timed_context.Esp,
+                    timed_stack, sizeof(timed_stack), &timed_stack_bytes) &&
+                    timed_stack_bytes == sizeof(timed_stack);
+            }
+            timed_thread_count = capture_process_threads(child.dwProcessId,
+                                                         timed_threads,
+                                                         OBSERVATION_THREAD_LIMIT);
+        }
         TerminateProcess(child.hProcess, OBSERVATION_TIMEOUT_EXIT);
         WaitForSingleObject(child.hProcess, 1000);
     }
@@ -159,8 +233,51 @@ int main(int argc, char **argv)
         fprintf(report, "result=%s\n", wait_status == WAIT_TIMEOUT ? "timeout" : "exited");
         fprintf(report, "exit=0x%08lx\n", (unsigned long)exit_code);
         fprintf(report, "timeout-ms=%u\n", OBSERVATION_TIMEOUT_MS);
+        if (have_timed_context) {
+            fprintf(report, "stop-eip=0x%08lx\n", (unsigned long)timed_context.Eip);
+            fprintf(report, "stop-esp=0x%08lx\n", (unsigned long)timed_context.Esp);
+            fprintf(report, "stop-ebp=0x%08lx\n", (unsigned long)timed_context.Ebp);
+            fprintf(report, "stop-eax=0x%08lx\n", (unsigned long)timed_context.Eax);
+            fprintf(report, "stop-ebx=0x%08lx\n", (unsigned long)timed_context.Ebx);
+            fprintf(report, "stop-ecx=0x%08lx\n", (unsigned long)timed_context.Ecx);
+            fprintf(report, "stop-edx=0x%08lx\n", (unsigned long)timed_context.Edx);
+            if (have_timed_stack) {
+                DWORD stack_index;
+                for (stack_index = 0; stack_index < OBSERVATION_STACK_WORDS;
+                     ++stack_index) {
+                    fprintf(report, "stop-stack-%02lu=0x%08lx\n",
+                            (unsigned long)stack_index,
+                            (unsigned long)timed_stack[stack_index]);
+                }
+            } else {
+                fprintf(report, "stop-stack=unavailable\n");
+            }
+            {
+                DWORD thread_index;
+                for (thread_index = 0; thread_index < timed_thread_count;
+                     ++thread_index) {
+                    observation_thread_context *thread =
+                        &timed_threads[thread_index];
+                    if (thread->context_available) {
+                        fprintf(report,
+                                "thread-%02lu=id:0x%08lx,eip:0x%08lx,esp:0x%08lx\n",
+                                (unsigned long)thread_index,
+                                (unsigned long)thread->thread_id,
+                                (unsigned long)thread->context.Eip,
+                                (unsigned long)thread->context.Esp);
+                    } else {
+                        fprintf(report, "thread-%02lu=id:0x%08lx,context:unavailable\n",
+                                (unsigned long)thread_index,
+                                (unsigned long)thread->thread_id);
+                    }
+                }
+            }
+        } else if (wait_status == WAIT_TIMEOUT) {
+            fprintf(report, "stop-context=unavailable\n");
+        }
         fclose(report);
     }
+    CloseHandle(child.hThread);
     CloseHandle(child.hProcess);
     CloseHandle(input);
     CloseHandle(output);
