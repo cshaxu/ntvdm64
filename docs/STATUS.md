@@ -118,6 +118,12 @@ session-owned presentation-buffer capability or a retained public-console
 buffer route; it may not expose private pointers or treat handles as frame
 buffers.
 
+**S1 P4:** original source separates two payloads that must remain separate in
+any recovery design: `nt_cga.c` writes a bounded 80x50 character/attribute
+`textBuffer`, while `nt_graph.c` owns a Console-Server graphics DIB/screen
+buffer. Neither is recoverable from the current event handles. T346 will not
+invent a universal framebuffer or reinterpret a handle as pixels.
+
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
 **T343 closure:** [broker/process coordination closure](history/m0-t343-broker-process-cross-process-coordination-closure-20260901.md).
