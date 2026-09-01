@@ -2,10 +2,11 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T342 is closed: the only startup-reached
-debugger form is the original `DBGInit` shape through its bounded adapter;
-BDE, VDMDBG, VDMEXTS and FAX remain their original tool/product packages. T341
-is closed: the complete original VDD host-service surface remains selected in
+**Active: M0 T343 S1.** T342 is closed: the only startup-reached debugger form
+is the original `DBGInit` shape through its bounded adapter; BDE, VDMDBG,
+VDMEXTS and FAX remain their original tool/product packages. T343 now begins
+the next ordered broker/process source-ABI-failure audit only. T341 is closed:
+the complete original VDD host-service surface remains selected in
 the formal CPU40/x86 link, while the current profile explicitly selects no
 external installable VDD. T340 is
 closed: initial resident DOS-BIOS headers are
@@ -17,6 +18,21 @@ and
 [T341 closure](history/m0-t341-vdd-owner-package-recovery-closure-20260831.md).
 
 ## Active Packet
+
+### M0 T343 S1 — Original broker / process / ABI / failure admission
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T343 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 4, admitted under the standing direction to execute ordered queue packages after T342 closure. |
+| Objective | Establish complete MVDM broker/process boundary: Base VDM client callers, VDM control, record layouts, waits/events, cross-process identity, failure paths and existing session binding. |
+| Non-goals | No CSRSS/BaseSrv server recreation, kernel VDM, global session state, process discovery/control, raw identity IPC, BOP leaf, guest mutation, machine rewrite, Bochs or CPU30 route. |
+| Verification | Complete source/declaration/caller/failure walk plus current formal-build/binding review; no runtime observation in S1. |
+| Exit Criteria | Every reached source form has one unique owner/disposition; S1 selects at most one bounded public-API/same-shaped client cohort or named hard transfer. |
+| Stop Conditions | Any server implementation, process enumeration, cross-user broker, native pointer/HANDLE serialization, guest behavior change or unreviewed source import requires re-admission. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+
+**Plan:** [M0 T343 broker/process recovery](etc/operations/m0-t343-broker-process-cross-process-coordination-recovery-plan-001.md).
 
 ### M0 T342 S1 — Original Debugger / BDE / FAX source / ABI / failure admission (closed)
 
