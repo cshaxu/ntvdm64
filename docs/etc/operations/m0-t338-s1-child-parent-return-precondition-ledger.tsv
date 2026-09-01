@@ -1,0 +1,11 @@
+id	original-owner	original-source	contract	current-disposition	next-owner
+T338-01	NTDOS sysinit	dos/v86/doskrnl/bios/sysinit1.asm + sysinit2.asm	Default \\COMMAND.COM is replaced by config shell before initial EXEC when config processing succeeds.	direct original guest mirror	NTDOS/COMMAND
+T338-02	COMMAND configuration	dos/command/cmdconf.c	Original generated shell is %SystemRoot%\\System32\\command.com /p with optional original arguments.	binding-only divergence: app-selected MVDM root supplies SystemRoot	mvdm-host command
+T338-03	SoftPC configuration	softpc.new/host/src/nt_pif.c:GetPIFConfigFiles	No-PIF config/autoexec source is the selected MVDM system root.	adapter-backed same-shaped system-root lookup	adapter-mvdm-host-out/softpc
+T338-04	NTDOS file open	dos/v86/doskrnl/dos/file.asm:OpenCall	Guest open enters original SVC_DEMOPEN.	direct original guest mirror	NTDOS/DEM
+T338-05	DEM file provider	dos/dem/demfile.c:demOpen	Original canonical OEM guest path reaches CreateFileOem and original DOS failure mapping.	adapter-backed original body	mvdm-host DEM + adapter-win32/softpc
+T338-06	NTDOS EXEC	dos/v86/doskrnl/dos/msproc.asm:$Exec	Original COM/MZ classification, arena/PSP/JFN/environment and child transfer.	direct original guest mirror	NTDOS + CPU40
+T338-07	DEM entry	dos/dem/demmisc.c:demEntryDosApp	Original child-entry notification remains before guest child transfer.	original provider / VDD branches separately owned	DEM/VDD
+T338-08	NTDOS parent return	dos/v86/doskrnl/dos/msctrlc.asm:reset_environment	Original PDB/search cleanup, arena release, parent PSP/stack restoration.	direct original guest mirror	NTDOS/DEM
+T338-09	COMMAND result return	dos/command/cmdexec.c:cmdReturnExitCode	Original 54:0B consumes DX/AL/BX:CX and returns CF re-entry or AL completion.	original provider with existing Base VDM binding	COMMAND/Base VDM
+T338-10	Current observation	build/M0-T337/S4/mvdm-system-root-observation.txt	Post-T337 fixed x86 run is timeout, not prior 50:3D terminal.	observed but not attributed	CPU40/guest continuation

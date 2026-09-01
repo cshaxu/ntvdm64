@@ -2,11 +2,32 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T337 closed the executable-relative MVDM
-system-root composition; its closure record is
-[here](history/m0-t337-packaged-mvdm-system-root-composition-closure-20260831.md).
+**Active: M0 T338 S2.** It performs one fixed post-configuration
+continuation attribution after S1 proved the packaged original shell path.
 
 ## Active Packet
+
+### M0 T338 S2 — Fixed post-configuration continuation attribution
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T338 S2; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | T338/S1 closed under the standing owner direction to execute the ordered queue; S1 proved that original config processing constructs the packaged shell path. |
+| Objective | Attribute the first source owner after that original configuration-shell transition using one unchanged fixed x86 container. |
+| Non-goals | No BOP leaf/provider patch, guest-media mutation, synthetic device result, alternate CPU/executor, Bochs route, kernel/CSRSS reconstruction, or newly authored child lifecycle. |
+| Reference Baseline | T318 EXEC/parent-return contract; T336 exact `50:3D -> demExitVDM` attribution; T337 unified `mvdm` system root; T338/S1 source contract. |
+| Files And ABI Surface | Existing fixed observer, selected CPU40 product, original configuration/DEM/COMMAND sources and existing session mapping leases. |
+| Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, architecture, coding, mapping-manager and paired-build rules. |
+| Verification | One unchanged fixed x86 observation, source-frame/owner walk, selected build-edge review, governance and diff checks. |
+| Expected Markers | One exact post-configuration source owner or an explicit bounded observation limit; no changed runtime variable. |
+| Asset Needs | Existing immutable staged `mvdm` media and firmware, selected original mirrors and current formal CPU40 graphs; no new assets. |
+| Reporting Requirements | Distinguish source facts from runtime inference; retain original failure and return semantics; state any exact owner transfer. |
+| Stop Conditions | A new guest loader/BOP service/device result, guest-media rewrite, unreviewed import, raw pointer lifetime or a different owner package requires re-admission. |
+| Exit Criteria | One fixed attribution selects a finite S3 recovery candidate or records an exact source-defined owner transfer. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | CPU40 main/worker threads, configuration shell construction, DEM/COMMAND service boundaries, timer/event workers, system-root media and termination dialog paths. |
+
+**Plan:** [M0 T338 plan](etc/operations/m0-t338-minimal-dos-guest-execution-controlled-return-plan-001.md). **S1 closed:** [original child/parent-return precondition contract](etc/evidence/m0-t338-s1-original-child-parent-return-precondition-contract-001.md) and its [ten-row ledger](etc/operations/m0-t338-s1-child-parent-return-precondition-ledger.tsv) confirm original SystemRoot shell construction and transfer only the post-configuration continuation boundary.
 
 ### M0 T337 — Packaged MVDM system-root composition
 
