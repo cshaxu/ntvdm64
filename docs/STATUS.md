@@ -2,32 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T338 S2.** It performs one fixed post-configuration
-continuation attribution after S1 proved the packaged original shell path.
+**Active: M0 T338 S3.** It identifies the exact original configuration-error
+predicate attributed by S2 before selecting any same-shaped recovery.
 
 ## Active Packet
 
-### M0 T338 S2 — Fixed post-configuration continuation attribution
+### M0 T338 S3 — Original configuration-error predicate and earliest recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T338 S2; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | T338/S1 closed under the standing owner direction to execute the ordered queue; S1 proved that original config processing constructs the packaged shell path. |
-| Objective | Attribute the first source owner after that original configuration-shell transition using one unchanged fixed x86 container. |
-| Non-goals | No BOP leaf/provider patch, guest-media mutation, synthetic device result, alternate CPU/executor, Bochs route, kernel/CSRSS reconstruction, or newly authored child lifecycle. |
-| Reference Baseline | T318 EXEC/parent-return contract; T336 exact `50:3D -> demExitVDM` attribution; T337 unified `mvdm` system root; T338/S1 source contract. |
-| Files And ABI Surface | Existing fixed observer, selected CPU40 product, original configuration/DEM/COMMAND sources and existing session mapping leases. |
+| Identifier Mode | M0 T338 S3; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | T338/S2 closed under the standing owner direction to execute the ordered queue.  It attributed the fixed product to original `cmdconf.c::ExpandConfigFiles` and disproved a misplaced-`config.nt` theory. |
+| Objective | Identify the exact original configuration-expansion fatal predicate, then recover only its same-shaped prerequisite if source evidence proves one. |
+| Non-goals | No BOP leaf/provider patch, guest-media mutation, configuration-service bypass, synthetic device result, alternate CPU/executor, Bochs route, kernel/CSRSS reconstruction, or newly authored child lifecycle. |
+| Reference Baseline | T318 EXEC/parent-return contract; T336 exact `50:3D -> demExitVDM` attribution; T337 unified `mvdm` system root; T338/S1 source contract and T338/S2 frame attribution. |
+| Files And ABI Surface | Existing fixed observer, selected CPU40 product, original `cmdconf.c`/`nt_pif.c` configuration sources and existing session system-root bindings. |
 | Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, architecture, coding, mapping-manager and paired-build rules. |
-| Verification | One unchanged fixed x86 observation, source-frame/owner walk, selected build-edge review, governance and diff checks. |
-| Expected Markers | One exact post-configuration source owner or an explicit bounded observation limit; no changed runtime variable. |
+| Verification | Source predicate/caller walk, selected build-edge review, then at most one unchanged fixed x86 observation; governance and diff checks. |
+| Expected Markers | One exact original fatal predicate and either a same-shaped recovery candidate or an explicit owner transfer; no changed runtime variable before the predicate is known. |
 | Asset Needs | Existing immutable staged `mvdm` media and firmware, selected original mirrors and current formal CPU40 graphs; no new assets. |
 | Reporting Requirements | Distinguish source facts from runtime inference; retain original failure and return semantics; state any exact owner transfer. |
 | Stop Conditions | A new guest loader/BOP service/device result, guest-media rewrite, unreviewed import, raw pointer lifetime or a different owner package requires re-admission. |
-| Exit Criteria | One fixed attribution selects a finite S3 recovery candidate or records an exact source-defined owner transfer. |
+| Exit Criteria | One exact original predicate is selected before any recovery; a later fixed observation either advances into the original child contract or records the next exact original owner transfer. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | CPU40 main/worker threads, configuration shell construction, DEM/COMMAND service boundaries, timer/event workers, system-root media and termination dialog paths. |
 
-**Plan:** [M0 T338 plan](etc/operations/m0-t338-minimal-dos-guest-execution-controlled-return-plan-001.md). **S1 closed:** [original child/parent-return precondition contract](etc/evidence/m0-t338-s1-original-child-parent-return-precondition-contract-001.md) and its [ten-row ledger](etc/operations/m0-t338-s1-child-parent-return-precondition-ledger.tsv) confirm original SystemRoot shell construction and transfer only the post-configuration continuation boundary.
+**Plan:** [M0 T338 plan](etc/operations/m0-t338-minimal-dos-guest-execution-controlled-return-plan-001.md). **S1 closed:** [original child/parent-return precondition contract](etc/evidence/m0-t338-s1-original-child-parent-return-precondition-contract-001.md) and its [ten-row ledger](etc/operations/m0-t338-s1-child-parent-return-precondition-ledger.tsv) confirm original SystemRoot shell construction. **S2 closed:** [post-configuration continuation attribution](etc/evidence/m0-t338-s2-post-configuration-continuation-attribution-001.md) locates the current path in original COMMAND configuration expansion and records that `config.nt` is processed from `mvdm`, while its generated shell is correctly under `mvdm\\system32`.
 
 ### M0 T337 — Packaged MVDM system-root composition
 

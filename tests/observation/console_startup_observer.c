@@ -26,6 +26,36 @@ typedef struct observation_thread_context {
     DWORD64 frames[OBSERVATION_FRAME_LIMIT];
 } observation_thread_context;
 
+typedef struct observation_image_identity {
+    BOOL available;
+    DWORD base_address;
+    DWORD image_size;
+    char module_name[MAX_MODULE_NAME32 + 1];
+    char module_path[MAX_PATH];
+} observation_image_identity;
+
+static void capture_process_image(DWORD process_id,
+                                  observation_image_identity *identity)
+{
+    HANDLE snapshot;
+    MODULEENTRY32 entry;
+
+    memset(identity, 0, sizeof(*identity));
+    snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, process_id);
+    if (snapshot == INVALID_HANDLE_VALUE) return;
+    entry.dwSize = sizeof(entry);
+    if (Module32First(snapshot, &entry)) {
+        identity->available = TRUE;
+        identity->base_address = (DWORD)(ULONG_PTR)entry.modBaseAddr;
+        identity->image_size = entry.modBaseSize;
+        strncpy_s(identity->module_name, sizeof(identity->module_name),
+                  entry.szModule, _TRUNCATE);
+        strncpy_s(identity->module_path, sizeof(identity->module_path),
+                  entry.szExePath, _TRUNCATE);
+    }
+    CloseHandle(snapshot);
+}
+
 static DWORD capture_process_threads(HANDLE process, DWORD process_id,
                                      observation_thread_context *records,
                                      DWORD record_capacity)
@@ -133,6 +163,7 @@ int main(int argc, char **argv)
     BOOL have_timed_stack = FALSE;
     SIZE_T timed_stack_bytes = 0;
     DWORD timed_thread_count = 0;
+    observation_image_identity image_identity = { 0 };
     BOOL symbols_initialized = FALSE;
     DWORD suspend_result = (DWORD)-1;
     char command_line[MAX_PATH * 2];
@@ -228,6 +259,7 @@ int main(int argc, char **argv)
     else
         SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH", NULL);
     wait_status = WaitForSingleObject(child.hProcess, OBSERVATION_TIMEOUT_MS);
+    capture_process_image(child.dwProcessId, &image_identity);
     if (wait_status == WAIT_TIMEOUT) {
         /* The fixed container observes the product without a debugger.  A
          * bounded suspension gives the evidence record one architectural
@@ -262,6 +294,16 @@ int main(int argc, char **argv)
         fprintf(report, "result=%s\n", wait_status == WAIT_TIMEOUT ? "timeout" : "exited");
         fprintf(report, "exit=0x%08lx\n", (unsigned long)exit_code);
         fprintf(report, "timeout-ms=%u\n", OBSERVATION_TIMEOUT_MS);
+        if (image_identity.available) {
+            fprintf(report, "image-module=%s\n", image_identity.module_name);
+            fprintf(report, "image-path=%s\n", image_identity.module_path);
+            fprintf(report, "image-base=0x%08lx\n",
+                    (unsigned long)image_identity.base_address);
+            fprintf(report, "image-size=0x%08lx\n",
+                    (unsigned long)image_identity.image_size);
+        } else {
+            fprintf(report, "image-identity=unavailable\n");
+        }
         if (have_timed_context) {
             fprintf(report, "stop-eip=0x%08lx\n", (unsigned long)timed_context.Eip);
             fprintf(report, "stop-esp=0x%08lx\n", (unsigned long)timed_context.Esp);

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3618 |
+| Documentation records | 3619 |
 | --- | --- |
-| Generated UTC | 2026-09-01T05:19:51Z |
+| Generated UTC | 2026-09-01T05:30:45Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | a2203c17fa578a42ab8f15cb2707f2b6a9875c71d0573e0341e0951279e04d8a |
+| STATUS.md | principal control document | 3ad21b03a0c50980b04680cc844af129fbb1c9b8863cb8461ff15992fbff8553 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1077,6 +1077,7 @@ content-divergent entries.
 | etc/evidence/m0-t337-s3-unified-mvdm-system-root-composition-001.md | indexed supporting material | b5df48243626269970933177ff0415d3a94f8b2ebf487b66db16b6a39ccbd7b0 |
 | etc/evidence/m0-t337-s4-fixed-mvdm-system-root-observation-001.md | indexed supporting material | 2b54f4e7e634a2e2d4fcbb673ce1997ba83f6ee3dc04566d3786154a1a642d2d |
 | etc/evidence/m0-t338-s1-original-child-parent-return-precondition-contract-001.md | indexed supporting material | 886875603c5b945c3f678da83beb340880cafe1f6dc36722774db5401dea2b73 |
+| etc/evidence/m0-t338-s2-post-configuration-continuation-attribution-001.md | indexed supporting material | 8026662144fa0d803a396b2115221554dcec482e3a59591d47bd9046f4cebe7d |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1783,7 +1784,7 @@ content-divergent entries.
 | etc/operations/m0-t336-s3-fdc-int15-completion-cohort-ledger.tsv | indexed supporting material | ee82405f2be10cf677cb92010d51e5953be127d49bdd265525f6e78cef145587 |
 | etc/operations/m0-t336-s4-post-vector-terminal-attribution-ledger.tsv | indexed supporting material | 55b425c17fb30d9eb11d92c14e13f43bad5893e71d8f179010b64814e145b28f |
 | etc/operations/m0-t337-s1-packaged-system-file-root-contract-ledger.tsv | indexed supporting material | a295866e2a46ed3f3327aa4d22d1fce4b2df11fc000e40f54cba2ecc93a2aa39 |
-| etc/operations/m0-t338-minimal-dos-guest-execution-controlled-return-plan-001.md | indexed supporting material | 977202f4210155ae2cec8b3fac725f1fbcc07f4a721ecdfbc584e0db72d25c58 |
+| etc/operations/m0-t338-minimal-dos-guest-execution-controlled-return-plan-001.md | indexed supporting material | fb0690f8e974e60c2f8c4580e3a19815a6fdd3dfe9ddd367df0ef8fff3d3e2a1 |
 | etc/operations/m0-t338-s1-child-parent-return-precondition-ledger.tsv | indexed supporting material | ff4495f645361b629a0f4e3eb7e14d9990856a78c980e7c91c47a572f51deac8 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |

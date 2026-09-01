@@ -37,12 +37,15 @@ the smallest recovery candidate for S3; otherwise record its exact owner
 transfer.  No invented BOP, guest loader, device success, or alternate
 executor is permitted.
 
-### S3 — Earliest recovery and fixed child execution/return observation
+### S3 — Original configuration-error predicate and earliest recovery
 
-Recover only an S2-proven finite prerequisite, then run one fixed
-console-owning x86 container using unchanged staged media and the declared DOS
-program.  Rebuild/link the selected product under x86 and x64, then record
-original child/parent return or the exact remaining original owner transfer.
+First identify the exact original `cmdconf.c::ExpandConfigFiles` fatal
+predicate reached by S2, without changing packaged guest media or bypassing
+the original configuration service.  Recover only an S2-proven same-shaped
+binding prerequisite, then run one fixed console-owning x86 container using
+unchanged staged media and the declared DOS program.  Rebuild/link the
+selected product under x86 and x64, then record original child/parent return
+or the exact remaining original owner transfer.
 
 ## Exit
 
