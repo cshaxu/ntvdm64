@@ -1,0 +1,21 @@
+file	OpenNT_baseline	relative_mirror_state	external_diff_added_removed	registered_divergence_or_reason	current_binding	disposition
+dos/dem/dem.c	O:/repos.external/OpenNT/base/mvdm/dos/dem/dem.c	modified original mirror	7/3	MVDM-HOST-DIV-154 selects the app/session immutable MVDM system root instead of installed NT system directory	adapter-mvdm-host-out/softpc mvdm_softpc_system_find_file	source-shaped selected root binding
+dos/dem/demdata.c	O:/repos.external/OpenNT/base/mvdm/dos/dem/demdata.c	modified original mirror	13/4	MVDM-HOST-DIV-005/006/007 retain DTA/PDB/SFT locations numerically rather than retaining guest/native pointers	adapter-mvdm-host-out/softpc guest-memory lease and VDD SFT shadow	source-shaped required mapping boundary
+dos/dem/demdir.c	O:/repos.external/OpenNT/base/mvdm/dos/dem/demdir.c	byte-identical original mirror	0/0	none	public OEM/current-directory declarations through adapter-mvdm-host-out/win32	source body unchanged
+dos/dem/demdisp.c	O:/repos.external/OpenNT/base/mvdm/dos/dem/demdisp.c	byte-identical original mirror	0/0	none	original selector table/source imports	source body unchanged
+dos/dem/demerror.c	O:/repos.external/OpenNT/base/mvdm/dos/dem/demerror.c	byte-identical original mirror	0/0	none	original error conversion and public/adapter declarations	source body unchanged
+dos/dem/demfcb.c	O:/repos.external/OpenNT/base/mvdm/dos/dem/demfcb.c	modified original mirror	40/9	MVDM-HOST-DIV-005 obtains each DTA through a bounded current guest-memory lease	adapter-mvdm-host-out/softpc guest-memory lease	source-shaped required mapping boundary
+dos/dem/demfile.c	O:/repos.external/OpenNT/base/mvdm/dos/dem/demfile.c	modified original mirror	115/15	MVDM-HOST-DIV-006/007/103/104 replace retained guest/native pointers and raw host HANDLE register transport with session mapping identity; VDD helper tail remains source-shaped through SFT shadow	adapter-mvdm-host-out/softpc mvdm_host_identity and mvdm_vdd_sft_shadow; adapter-mvdm-host-out/win32 ntioapi/current Win32 imports	source-shaped ordinary file path; VDD helper transfer stays explicit
+dos/dem/demgset.c	O:/repos.external/OpenNT/base/mvdm/dos/dem/demgset.c	modified original mirror	35/13	MVDM-HOST-DIV-005/006/007 retain original guest descriptors numerically and acquire current values at each use	adapter-mvdm-host-out/softpc guest-memory lease; adapter-mvdm-host-out/win32 current-directory binding	source-shaped required mapping boundary
+dos/dem/demhndl.c	O:/repos.external/OpenNT/base/mvdm/dos/dem/demhndl.c	modified original mirror	33/7	MVDM-HOST-DIV-005 takes fresh guest DTA lease; DIV-105 corrects same-width SetFilePointer high-offset declaration	adapter-mvdm-host-out/softpc guest-memory lease and mvdm_host_identity	source-shaped required mapping boundary
+dos/dem/demsrch.c	O:/repos.external/OpenNT/base/mvdm/dos/dem/demsrch.c	modified original mirror	130/30	MVDM-HOST-DIV-002/003/005 retain original search/FCB ordering while converting persistent host find-list/HANDLE and guest DTA aliases to opaque identity, native local arithmetic and bounded leases	adapter-mvdm-host-out/softpc mvdm_host_identity plus guest-memory lease; adapter-mvdm-host-out/win32 ntioapi facade	source-shaped required mapping boundary
+
+# Scope conclusion
+#
+# The selected ordinary DEM filesystem/drive/search cohort has no parallel
+# provider to delete: its live provider bodies are these original mirrors.
+# Every non-identical line group is registered in src/mvdm-host/README.md and
+# belongs to a single required boundary: immutable MVDM media root, current
+# guest-memory lease, or session host-resource identity. Raw DASD/IOCTL/media,
+# VDD helper continuation and COMMAND/Redirector pipe behavior remain outside
+# this cohort and retain their named owner transfers.

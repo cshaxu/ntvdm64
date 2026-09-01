@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3658 |
+| Documentation records | 3659 |
 | --- | --- |
-| Generated UTC | 2026-09-01T07:53:04Z |
+| Generated UTC | 2026-09-01T07:55:51Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 1da638e1709d215e1f0546b69cd75cec67028cf17407cb269fbebfe550856685 |
+| STATUS.md | principal control document | 950cb2e3032e02d9b8cfc78f9af9268cdaeee3648f5936c4b8e66fb77b1300b4 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1817,6 +1817,7 @@ content-divergent entries.
 | etc/operations/m0-t344-in-process-multi-session-reentrancy-audit-plan-001.md | indexed supporting material | 113fe50c1df570e3117da29c9b8f294089b632804b1ba4720e54f46a1e596c91 |
 | etc/operations/m0-t344-s1-state-owner-ledger.tsv | indexed supporting material | 49895d5c437f24b82db6aeb11925fc387b238a2e64895f47b144cd67964caed0 |
 | etc/operations/m0-t345-host-capability-expansion-plan-001.md | indexed supporting material | 2141edab81174de65c876b020476245680e9f5e1d40dd196da4811d4e2a7fab5 |
+| etc/operations/m0-t345-s1-dem-host-capability-mirror-binding-ledger.tsv | indexed supporting material | 9093f20c376b22eb0810439df878310889456419245b388ca0c58ece340fb5f5 |
 | etc/operations/m0-t345-s1-host-capability-owner-ledger.tsv | indexed supporting material | ee56639f0850d7ebbbbd9b14e5064f69666f14cb7ecf78c695efe7a5ec7d6035 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |

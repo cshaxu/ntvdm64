@@ -51,6 +51,12 @@ Redirector and child/parent execution with their existing owners, leaving the
 ordinary DEM filesystem/drive/search owner package as the only coherent
 low-dependency candidate: [T345 capability ledger](etc/operations/m0-t345-s1-host-capability-owner-ledger.tsv).
 
+**S1 P2:** the selected ordinary DEM cohort is confirmed as live original
+mirrors, not a leftover self-written provider. Three files are byte-identical
+to the OpenNT baseline; each remaining difference is registered and limited to
+the immutable media root, the sole session mapping manager or a required
+same-width ABI correction: [DEM mirror/binding ledger](etc/operations/m0-t345-s1-dem-host-capability-mirror-binding-ledger.tsv).
+
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
 **T343 closure:** [broker/process coordination closure](history/m0-t343-broker-process-cross-process-coordination-closure-20260901.md).
