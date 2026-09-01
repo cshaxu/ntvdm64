@@ -30,6 +30,12 @@ calls. Classify each dependency as direct original selected body,
 same-shaped existing adapter, pending original owner package, hard boundary,
 or non-reached. Include the first post-chain `SVC_DEMGETDPBLIST` transfer.
 
+**Closed.** The complete initial resident chain is source-proven to be an
+original function-00 no-op-success cohort. Its first selected non-trivial
+successor is the configuration-loaded original `HIMEM.SYS` package; see the
+[S1 evidence](../evidence/m0-t340-s1-resident-device-initialization-contract-001.md)
+and [ledger](m0-t340-s1-resident-device-initialization-contract-ledger.tsv).
+
 ### S2 — Complete original cohort recovery
 
 After S1 identifies one complete smallest cohort, recover it as a whole using
@@ -37,6 +43,11 @@ original source and same-shaped binding first. Preserve device order, packet
 layout, strategy/interrupt convention, status flags and failure path. Any
 machine behavior change must remain owned by original SoftPC/firmware or a
 named adapter and be separately admitted if it crosses S1's boundary.
+
+**Selected cohort.** S2 is limited to the original guest `HIMEM.SYS`
+initialization and its direct original SoftPC XMS, A20, INT 15, HMA and UMB
+interfaces. It does not reopen resident console/serial/parallel devices or
+select a trace-derived BOP leaf.
 
 ### S3 — Local and fixed-container verification
 

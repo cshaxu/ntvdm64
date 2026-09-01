@@ -2,10 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T340 S1.** T339 is closed at a source-defined resident
-DOS-BIOS device-initialization owner transfer. T340 begins with a whole
-original-package source/ABI/failure inventory; it admits no device behavior
-change or repeat runtime observation.
+**Active: M0 T340 S2.** T340/S1 is closed: the complete original resident
+DOS-BIOS init chain is a direct no-op-success cohort for function 00, and the
+first non-trivial selected successor is the original HIMEM/SoftPC
+XMS-A20-INT15-HMA package. S2 may recover that complete owner cohort; it may
+not change configuration media or pursue an individual trace leaf.
 
 ## Active Packet
 
@@ -47,11 +48,31 @@ change or repeat runtime observation.
 | Asset Needs | Existing selected MVDM guest/host mirrors, staged firmware/media manifests, formal CPU40 graph and T339 evidence; no new imports or media. |
 | Reporting Requirements | Separate original guest source facts, current composition facts and runtime inference; retain original device order and failure behavior; record rejected recovery rungs. |
 | Stop Conditions | A need to alter guest media/configuration, enable a device, change CPU behavior, create a new mapper, import unreviewed source, or cross into a different owner package requires re-admission. |
-| Exit Criteria | A complete package ledger identifies the current resident device chain, strategy/interrupt flow, machine dependencies and one source-backed next disposition; no device success is claimed without an admitted follow-up S. |
+| Exit Criteria | Met: the complete package ledger identifies all eleven current resident headers, their strategy/interrupt flow, direct function-00 result, configuration-linked successor and the source-backed HIMEM/SoftPC next cohort. No runtime device success is claimed. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | CON/AUX/PRN/CLOCK/COM/LPT headers, BIOS request dispatch, A20, timer/PIC/keyboard/video/serial/parallel interfaces, configured device chain and first post-device DEM BOP. |
 
-**Plan:** [M0 T340 resident device-initialization recovery](etc/operations/m0-t340-resident-device-initialization-recovery-plan-001.md).
+**Evidence:** [resident device-initialization contract](etc/evidence/m0-t340-s1-resident-device-initialization-contract-001.md) and [row ledger](etc/operations/m0-t340-s1-resident-device-initialization-contract-ledger.tsv). **Plan:** [M0 T340 resident device-initialization recovery](etc/operations/m0-t340-resident-device-initialization-recovery-plan-001.md).
+
+### M0 T340 S2 — Original HIMEM / SoftPC XMS-A20-INT15-HMA cohort recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T340 S2; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T340/S1's source-defined disposition under the standing direction to execute the ordered queue. |
+| Objective | Recover the complete reached original `HIMEM.SYS` initialization contract together with its direct original SoftPC XMS, A20, INT 15, HMA and UMB dependency interfaces, using the selected guest and host sources before any new replacement logic. |
+| Non-goals | No configuration/media rewrite, host-drive policy, guest loader, standalone XMS/BOP leaf patch, synthetic memory success, CPU semantic change, alternate executor, Bochs route, kernel/CSRSS recreation, GUI work or trace-driven individual repair. |
+| Reference Baseline | T340/S1 resident-device ledger and evidence; T337 packaged MVDM root; selected CPU40 graph; original guest HIMEM source and binary. |
+| Files And ABI Surface | Original guest `dev/himem/*`, `sysconf.asm`/`sysinit1.asm`, original MVDM XMS provider and SoftPC INT 15/A20/physical-memory interfaces, existing mapping-manager boundary only where an original host/guest pointer seam actually exists. |
+| Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, mapping-manager, CPU40-only, architecture and coding rules. |
+| Verification | Complete definition/caller/failure walk; original package/binary selection review; focused formal CPU40 build and source-contract tests; at most one unchanged fixed-container observation after the whole cohort is recovered. |
+| Expected Markers | Every HIMEM init branch and direct machine dependency has one original owner/disposition; any recovery preserves original request/status/failure behavior; no raw native identity crosses the guest boundary. |
+| Asset Needs | Existing selected MVDM guest/host mirrors, staged immutable `HIMEM.SYS`, selected firmware/media and formal CPU40 graph; no new assets. |
+| Reporting Requirements | Separate source facts, current composition facts and runtime inference; record each rejected replacement rung and any required same-shaped adapter boundary. |
+| Stop Conditions | A need for changed guest media/configuration, a second mapper, raw host pointer, new BOP provider, unreviewed import, unrelated device family or synthetic success requires re-admission. |
+| Exit Criteria | Complete original HIMEM and SoftPC machine cohort is source-mapped and either recovered with focused evidence or transferred at one explicit hard boundary; only then may S3 perform its single fixed observation. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | XMS allocation/move/UMB, A20 gate, INT 15 extended-memory behavior, HMA relocation, DOS high/low selection, SoftPC mouse/EMM post-HIMEM paths and configuration-device failure returns. |
 
 ### M0 T339 S2 — Passive predecessor discriminator and cohort selection (closed)
 

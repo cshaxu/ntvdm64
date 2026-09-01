@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3627 |
+| Documentation records | 3629 |
 | --- | --- |
-| Generated UTC | 2026-09-01T06:18:30Z |
+| Generated UTC | 2026-09-01T06:31:14Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 0597dc4eaa38c8cc3cb1f74c12f16e059c415b4956e498d1fc2799a626754ede |
+| STATUS.md | principal control document | c2b786801440d493d397da478b44cb4c59b2dcab75aba8e8853bfd1c5e02dbbc |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1081,6 +1081,7 @@ content-divergent entries.
 | etc/evidence/m0-t338-s3-original-configuration-path-capacity-transfer-001.md | indexed supporting material | cb39e7886fc38afb3db30d2ea3ced67e6304c7a1e4be6acf153f00d35bc85abf |
 | etc/evidence/m0-t339-s1-original-guest-predecessor-contract-001.md | indexed supporting material | fcf8e91d7979e5e6efc05e8f6e9e91cd1fd0c0c8e1169f688ac07cfdb8a367b8 |
 | etc/evidence/m0-t339-s2-passive-terminal-discriminator-001.md | indexed supporting material | 9bd1428f51c601c606bdecaf5fccd792f1bd488be650922ca1e50051d7aac224 |
+| etc/evidence/m0-t340-s1-resident-device-initialization-contract-001.md | indexed supporting material | 3cb92a303e07de214389656a0896c805974a3b9d6ab53c7b33e41a3c82c82c06 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1791,7 +1792,8 @@ content-divergent entries.
 | etc/operations/m0-t338-s1-child-parent-return-precondition-ledger.tsv | indexed supporting material | ff4495f645361b629a0f4e3eb7e14d9990856a78c980e7c91c47a572f51deac8 |
 | etc/operations/m0-t339-minimal-vertical-slice-integration-closure-plan-001.md | indexed supporting material | e9c018646d4e8f110dbc7796d82513079eb33b69ef80146660c6d99a76f2e306 |
 | etc/operations/m0-t339-s1-guest-predecessor-contract-ledger.tsv | indexed supporting material | 576df2f05b0085daee89e29ca4a4cbf6114cd1ce3ec267db245acb9ebc003a9e |
-| etc/operations/m0-t340-resident-device-initialization-recovery-plan-001.md | indexed supporting material | 4dbc524c9f26547efd393a5209e85cf7f580bff7b509b354d3e0029329190edc |
+| etc/operations/m0-t340-resident-device-initialization-recovery-plan-001.md | indexed supporting material | 22866aa7f37f9ce5403a0b59e1046f2ddff98a44db95c510277856eea9116e4a |
+| etc/operations/m0-t340-s1-resident-device-initialization-contract-ledger.tsv | indexed supporting material | 4307a4b0d0c6a0b86af340b05dfe82b7addf35383b683964b02409e0ead5bd4d |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
