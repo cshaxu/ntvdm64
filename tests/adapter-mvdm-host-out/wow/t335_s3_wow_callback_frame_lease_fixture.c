@@ -10,6 +10,14 @@ typedef struct fixture_memory {
     uint32_t writes;
 } fixture_memory;
 
+int mvdm_softpc_effective_address(uint16_t selector, uint32_t offset,
+    uint32_t *address_out)
+{
+    if (address_out == NULL || selector != 0x1234u) return 0;
+    *address_out = offset;
+    return 1;
+}
+
 static int read_memory(void *context, uint32_t address, uint8_t *bytes,
     uint32_t byte_count)
 {
@@ -44,14 +52,16 @@ int main(void)
     if (!session_activate(&owner) ||
         !session_guest_memory_begin(&owner, &memory, read_memory, write_memory) ||
         !session_thread_bind(&owner) ||
-        !wow_callback_frame_acquire(8u, 4u, GUEST_MEMORY_ACCESS_READ, &view) ||
+        !wow_callback_frame_acquire_vp(0x12340008u, 4u,
+        GUEST_MEMORY_ACCESS_READ, &view) ||
         view.bytes[0] != 0x42u || wow_callback_frame_release(&view, 1) ||
         !wow_callback_frame_release(&view, 0)) return 1;
-    if (!wow_callback_frame_acquire(16u, 4u, GUEST_MEMORY_ACCESS_WRITE, &view))
+    if (!wow_callback_frame_acquire_linear(16u, 4u,
+        GUEST_MEMORY_ACCESS_WRITE, &view))
         return 2;
     view.bytes[0] = 0x99u;
     if (!wow_callback_frame_release(&view, 1) || memory.bytes[16] != 0x99u ||
-        memory.writes != 1u || !wow_callback_frame_acquire(20u, 4u,
+        memory.writes != 1u || !wow_callback_frame_acquire_linear(20u, 4u,
         GUEST_MEMORY_ACCESS_WRITE, &view)) return 3;
     view.bytes[0] = 0x11u;
     if (!wow_callback_frame_release(&view, 0) || memory.bytes[20] != 0u ||

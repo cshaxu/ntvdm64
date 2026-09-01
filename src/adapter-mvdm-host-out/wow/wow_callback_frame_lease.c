@@ -4,7 +4,14 @@
 
 #include "session/session.h"
 
-int wow_callback_frame_acquire(uint32_t guest_address, uint32_t byte_count,
+/* This is the fixed-width source contract exported by the SoftPC adapter.
+ * Do not include the full historical SoftPC macro environment here: that
+ * environment is owned by original mirror translation units, while this
+ * narrow WOW binding only consumes this one numeric conversion. */
+extern int mvdm_softpc_effective_address(uint16_t selector, uint32_t offset,
+    uint32_t *address_out);
+
+int wow_callback_frame_acquire_linear(uint32_t guest_address, uint32_t byte_count,
     uint32_t access, wow_callback_frame_lease *view_out)
 {
     session *owner = session_thread_current();
@@ -23,6 +30,17 @@ int wow_callback_frame_acquire(uint32_t guest_address, uint32_t byte_count,
     view_out->byte_count = byte_count;
     view_out->access = access;
     return 1;
+}
+
+int wow_callback_frame_acquire_vp(uint32_t vp, uint32_t byte_count,
+    uint32_t access, wow_callback_frame_lease *view_out)
+{
+    uint32_t linear;
+
+    if (!mvdm_softpc_effective_address((uint16_t)(vp >> 16),
+        (uint16_t)vp, &linear)) return 0;
+    return wow_callback_frame_acquire_linear(linear, byte_count, access,
+        view_out);
 }
 
 int wow_callback_frame_release(wow_callback_frame_lease *view, int commit)

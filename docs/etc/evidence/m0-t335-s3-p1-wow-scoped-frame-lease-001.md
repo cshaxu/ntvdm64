@@ -3,10 +3,11 @@
 ## Delivered boundary
 
 `adapter-mvdm-host-out/wow/wow_callback_frame_lease.{h,c}` is the sole new
-WOW binding in this packet.  It adapts only the original temporary
+WOW binding in this packet. It adapts only the original temporary
 `GETFRAMEPTR` / `FLUSHVDMPTR` / `FREEVDMPTR` lifetime:
 
-- acquire a bounded read or write view by numeric guest address;
+- resolve an original packed 16:16 `vp` through the selected CCPU40
+  `mvdm_softpc_effective_address` contract, then acquire a bounded view;
 - commit only a write view;
 - clear the view after every release.
 
@@ -24,9 +25,10 @@ Fresh disposable Ninja graphs and the focused fixture completed successfully:
 - `build/M0-T335/S3/wow-callback-frame-x64`: 6 compile/link actions, fixture
   exit status 0.
 
-The fixture proves all three source-required lease directions: an acquired
-read view cannot commit, a written callback-frame view commits exactly once,
-and an uncommitted write view does not change guest memory.
+The fixture proves the source-facing 16:16 resolution form and all three
+source-required lease directions: an acquired read view cannot commit, a
+written callback-frame view commits exactly once, and an uncommitted write
+view does not change guest memory.
 
 ## Limit
 

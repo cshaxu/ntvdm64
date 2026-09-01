@@ -19,7 +19,15 @@ typedef struct wow_callback_frame_lease {
     uint32_t access;
 } wow_callback_frame_lease;
 
-int wow_callback_frame_acquire(uint32_t guest_address, uint32_t byte_count,
+/* The `vp` form is the source-facing entry: it receives the original packed
+ * 16:16 stack value and resolves it through the selected CCPU40 segment
+ * contract before acquiring a session lease. */
+int wow_callback_frame_acquire_vp(uint32_t vp, uint32_t byte_count,
+    uint32_t access, wow_callback_frame_lease *view_out);
+
+/* The linear form is reserved for callers that already obtained a checked
+ * CCPU/SIM32 linear guest address. */
+int wow_callback_frame_acquire_linear(uint32_t guest_address, uint32_t byte_count,
     uint32_t access, wow_callback_frame_lease *view_out);
 int wow_callback_frame_release(wow_callback_frame_lease *view, int commit);
 
