@@ -52,11 +52,16 @@ full span but initially commits only the conventional-memory/A20 region; later
 XMS and EMS allocation callbacks own additional commits.  `0x00110000` is the
 first byte beyond the historical 1 MiB plus 64 KiB initial range.
 
-The selected formal graph defines `MVDM_XMS_SESSION_BACKEND`.  Consequently
-original `xms.486/xms.c::XMSInit` selects original `xmsmemr.c` callbacks,
-whose `xmsCommitBlock` calls `sas_manage_xms`.  The currently selected
-CPU40 `softpc.new/host/src/stubs.c::sas_manage_xms` is only a diagnostic
-success stub: it reports success but does not commit the reserved Intel range.
+The selected formal graph defines `MVDM_XMS_SESSION_BACKEND`.  That selects
+the original `xms.486/xms.c::XMSInit` callback shape, but the formal graph
+does **not** compile `xmsmemr.c`: `xmsCommitBlock`, `xmsDecommitBlock`, and
+`xmsMoveMemory` resolve to
+`adapter-mvdm-host-out/softpc/mvdm_xms_memory.c`.  Its former
+`xmsCommitBlock` obtains a write lease before clearing the range.  The shared
+lease contract reads the backing bytes first, so its call to `c_sas_loads` at
+`0x00110000` reaches uncommitted SoftPC direct RAM before the clear can occur.
+The retained `softpc.new/host/src/stubs.c::sas_manage_xms` is not the selected
+callback implementation and is not the cause of this observation.
 
 The original caller is retained in `nt_msscs.c::scs_init`, which invokes
 `XMSInit` after DEM initialization.  The immediate next owner is therefore
@@ -65,7 +70,7 @@ the original XMS allocation/commit lifecycle, not a CCPU dereference repair.
 ## Disposition
 
 S18 closes with one unambiguous owner transfer.  S19 must audit the original
-`XMSInit -> SAInitialize -> xmsCommitBlock -> sas_manage_xms` lifecycle,
-including selected compilation conditions and the actual original allocation
-callers, before any recovery is admitted.  It must not pre-commit the full
-M-area or force `c_GetPhyAdd` to another path.
+`XMSInit -> SAInitialize -> commit callback` lifecycle, including selected
+compilation conditions and the actual original allocation callers, before any
+recovery is admitted.  It must not pre-commit the full M-area or force
+`c_GetPhyAdd` to another path.

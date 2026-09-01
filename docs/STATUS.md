@@ -488,7 +488,7 @@ and
 
 ## Active Packet
 
-**Active: M0 T355 S19 — original XMS allocation/commit lifecycle audit.**
+**Active: M0 T355 S20 — original XMS backing-lifecycle selection recovery.**
 
 ### M0 T355 S1 — Closed short-path permanent COMMAND fixed-container verification
 
@@ -930,17 +930,49 @@ proves that the original normal-RAM fallback requested physical address
 initial conventional/A20 commit range; the sole successor owner is original
 XMS allocation/commit lifecycle, not CCPU, C-VID, mapping, EMS or `50:42`.
 
-### M0 T355 S19 — Active original XMS allocation/commit lifecycle audit
+### M0 T355 S19 — Closed original XMS allocation/commit lifecycle audit
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T355 S19; ordinary mode (single-person dual-role implementation). |
-| Objective | Reconstruct the complete original CPU40 startup path from `scs_init -> XMSInit -> SAInitialize -> xmsCommitBlock -> sas_manage_xms` and its selected `InitIntelMemory` commit contract; determine the smallest original-compatible binding that makes allocated XMS address `0x00110000` accessible without changing CCPU fallback semantics. |
+| Objective | Reconstruct the complete original CPU40 startup path from `scs_init -> XMSInit -> SAInitialize -> commit callback` and its selected `InitIntelMemory` commit contract; determine the smallest original-compatible binding that makes allocated XMS address `0x00110000` accessible without changing CCPU fallback semantics. |
 | Non-goals | No CCPU/`c_GetPhyAdd` workaround, eager full-span commit, synthetic physical mapping, BOP/DEM result change, guest/firmware mutation, mapper redesign, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or runtime run. |
-| Reference Baseline | S18 scalar evidence; original `softpc.new/host/src/{nt_msscs.c,stubs.c,nt_mem.c,sim32.c}`, `xms.486/{xms.c,xmsmemr.c,xmsblock.c}`, and selected CPU40/x86 formal graph. |
-| Files And ABI Surface | Original `XMSInit`, `SAInitialize` callback shape, original `xmsCommitBlock`/`xmsDecommitBlock` and existing `sas_manage_xms` SoftPC interface.  S19 starts as source/caller/build-selection audit only. |
+| Reference Baseline | S18 scalar evidence; original `softpc.new/host/src/{nt_msscs.c,nt_mem.c,sim32.c}`, `xms.486/{xms.c,xmsblock.c}`, `suballoc/suballoc.c`, the session lease contract, and selected CPU40/x86 formal graph. |
+| Files And ABI Surface | Original `XMSInit`, `SAInitialize` callback shape, original `VdmAllocateVirtualMemory`/`VdmCommitVirtualMemory`, and the selected adapter `xmsMoveMemory` transfer seam.  S19 starts as source/caller/build-selection audit only. |
 | Verification | Original definition/caller/conditional-compilation walk; original-versus-mirror/overlay comparison; formal graph/source selection review; documentation governance and diff review. No runtime execution in S19 admission. |
 | Exit Criteria | Every lifecycle edge has a source owner and final disposition; the selected successor is an original interface binding or a documented exact terminal.  No commitment behavior changes until a separately bounded recovery S is admitted. |
+
+**S19 closure:** [XMS allocation/commit lifecycle audit](etc/evidence/m0-t355-s19-xms-allocation-commit-lifecycle-audit-001.md)
+corrects S18's callback attribution.  The selected session `xmsCommitBlock`
+acquires a read-before-write lease and reaches CCPU before the requested XMS
+backing can be cleared.  The original non-`i386` `XMSInit` allocation/commit
+branch is the sole S20 recovery candidate.
+
+### M0 T355 S20 — Active original XMS backing-lifecycle selection recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S20; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from S19's source-defined original binding selection under the standing owner direction to continue the active SoftPC package. |
+| Objective | Restore the already mirrored original CPU40/x86 non-`i386` `XMSInit -> VdmAllocateVirtualMemory -> VdmCommitVirtualMemory` backing lifecycle by removing only the formal `MVDM_XMS_SESSION_BACKEND` build selection. |
+| Non-goals | No CCPU fallback change, eager M-area commit, synthetic physical mapping, XMS body rewrite, mapping-manager redesign, BOP/DEM `50:42` behavior change, guest/firmware mutation, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or runtime execution. |
+| Reference Baseline | S17/S18 direct-RAM evidence and S19 source/graph audit; original `xms.c`, `suballoc.c`, and `nt_mem.c`; formal CPU40/x86 Ninja graph. |
+| Files And ABI Surface | `tools/build/New-T310OriginalSoftpcNinja.ps1` build selection only. Original XMS and SoftPC source bodies remain unchanged; `xmsMoveMemory` remains the existing mapping-manager-bound transfer seam. |
+| Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, mapping-manager, CPU40-only, architecture and coding rules. |
+| Verification | Regenerate the formal x86 graph; verify no selected compile command defines `MVDM_XMS_SESSION_BACKEND`; verify original `xms.c` non-`i386` source branch and `nt_mem.c` commit callers; run formal Ninja compile/link; documentation governance and diff review. No runtime invocation. |
+| Expected Markers | Generated x86 graph has no session-backend macro; original `VdmAllocateVirtualMemory`, `VdmCommitVirtualMemory`, and `VdmDeCommitVirtualMemory` are the selected XMS allocation callbacks; `xmsMoveMemory` remains mapped through the current adapter; final link passes without `/FORCE`. |
+| Asset Needs | Existing mirrors, source-shaped adapter, formal Ninja generator, MSVC x86 toolchain and disposable `build/M0-T355/S20/formal-x86` root. |
+| Reporting Requirements | Record macro/branch selection separately from compile/link output; state explicitly that no runtime continuity or `50:42` behavior claim follows from this S. |
+| Stop Conditions | Any need to edit an original XMS/SoftPC function body, alter lease semantics, introduce raw host pointers, modify guest/firmware, add CCPU fallback behavior, or run a container observation pauses for owner re-admission. |
+| Exit Criteria | One regenerated CPU40/x86 graph selects the original allocation/commit branch, the formal product compiles and links, and source/diff/governance evidence proves no unintended ownership change. |
+| Original Owner Request | “正确修复不是‘强迫所有读都走慢速路径’，而是让 `50:42` 在现代用户态中恢复原始合同：能真正读则读；无法安全处理则返回 `CF=1`，让原始 DOS 自己走 `50:16`。” |
+| Similar-Issue Sweep | `MVDM_XMS_SESSION_BACKEND`, `xmsCommitBlock`, `xmsDecommitBlock`, `xmsMoveMemory`, `VdmAllocateVirtualMemory`, `VdmCommitVirtualMemory`, `VdmDeCommitVirtualMemory`, `SAAllocate`, lease read-before-write order and `50:42` fast-read behavior. |
+
+**S20 P1:** [original XMS backing-selection build](etc/evidence/m0-t355-s20-p1-original-xms-backing-selection-build-001.md)
+regenerated the formal CPU40/x86 graph without
+`MVDM_XMS_SESSION_BACKEND` and linked all 426 actions successfully.  The
+original `VdmAllocateVirtualMemory`/`VdmCommitVirtualMemory` lifecycle is
+selected; no runtime observation or `50:42` behavior claim is made.
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 

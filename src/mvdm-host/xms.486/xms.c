@@ -45,9 +45,9 @@ BOOL XMSInit (int argc, char *argv[])
     XmsSize = xmsMemorySize * 1024 - (64*1024);
 
 /* DIVERGENCE MVDM-HOST-DIV-132: the historical `i386` spelling selected a
-   direct host-pointer XMS backend.  Both current host widths instead select
-   the same session-bounded callback backend; retain the original allocator
-   branch and callback order without treating host architecture as semantics. */
+   direct host-pointer XMS backend.  The CPU40/x86 product deliberately does
+   not define that host-architecture proxy, so it retains the original
+   virtual-memory allocator branch and callback order instead. */
 #if !defined(i386) && !defined(MVDM_XMS_SESSION_BACKEND)
     Status = VdmAllocateVirtualMemory(&VdmAddress,
                                       XmsSize,
