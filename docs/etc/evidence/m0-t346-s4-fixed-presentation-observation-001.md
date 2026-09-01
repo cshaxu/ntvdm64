@@ -28,10 +28,12 @@ repaint, Alt+Enter, graphics-mode workload, or a later guest continuation.
 This is a valid unchanged-profile non-regression observation of the selected
 x86 product, but it is not graphics proof. `54:05` is original
 `SVC_CMDSETINFO` / `cmdSetInfo`, the registration of the DOS `SCSINFO` state;
-it is not CONFIG processing. `CONFIG.NT` is the later `54:0C`
-`SVC_GETCONFIGSYS` / `cmdGetConfigSys` service and was not reached. The active
-blocking edge is therefore the pre-configuration original registration/startup
-continuation after `54:05`; it must be recovered by that owner package, not by
-adding a trace-selected display, video or window workaround. T346 keeps its
-S4 runtime workload exit condition open until that upstream continuation
-permits it.
+it is not CONFIG processing. The current trace record is emitted immediately
+before `CmdDispatch()` enters its body, so it proves ingress only: it neither
+proves `cmdSetInfo` completion nor attributes the timeout to any one of its
+branches. `CONFIG.NT` is the later `54:0C` `SVC_GETCONFIGSYS` /
+`cmdGetConfigSys` service and was not reached. The earliest unresolved owner
+boundary is therefore the pre-configuration startup continuation at or after
+`54:05`; it must be diagnosed as an owner package, not by adding a
+trace-selected display, video or window workaround. T346 keeps its S4 runtime
+workload exit condition open until that upstream continuity permits it.
