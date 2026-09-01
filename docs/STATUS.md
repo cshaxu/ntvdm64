@@ -2,14 +2,36 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T340 is closed: initial resident DOS-BIOS headers are
+**Active: M0 T341 S1.** T340 is closed: initial resident DOS-BIOS headers are
 the original function-00 no-op-success cohort, and the selected original
 HIMEM/SoftPC XMS-A20-INT15-HMA successor is source/formal-build closed. Its
-single unchanged fixed observation did not reach HIMEM, so later execution
-work must begin at the earlier CPU/host continuation rather than reopen XMS by
-trace-selected repair.
+single unchanged fixed observation did not reach HIMEM. T341 now begins the
+next ordered owner package with an original VDD source/ABI/failure audit only;
+it may not select a sample, private monitor shell or trace-derived leaf.
 
 ## Active Packet
+
+### M0 T341 S1 — Original VDD owner source / ABI / failure admission
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T341 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 2, admitted under the standing owner direction to execute the ordered queue after T340 closure. |
+| Objective | Establish the complete original VDD owner boundary: public VDD entrypoints, state, callback tables, callers, machine/monitor/public-host dependencies, result/failure contracts and runtime/tool dispositions. |
+| Non-goals | No VDD sample loading, generic VDD dispatcher, kernel/CSRSS/VDM monitor recreation, device or interrupt synthesis, guest-media change, BOP leaf enablement, new mapper, raw host identity, Bochs route, CPU30 route, GUI redesign or runtime trace repair. |
+| Reference Baseline | T333 Redirector VDD transfer, T340 closure, selected CPU40 formal graph, original `nt_vdd.c`/headers and existing adapter-mvdm-host-out VDD declarations. |
+| Files And ABI Surface | Original `softpc.new/host/src/nt_vdd.c`, `nt_vddp.h`, public VDD declarations, direct callers, `vdd/` and `ieuvddex/` source classification, existing SoftPC/monitor/session adapters. |
+| Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, architecture, coding, mapping-manager and CPU40-only rules. |
+| Verification | Complete source/declaration/definition/caller/failure walk, selected build-input review, documentation governance and diff checks; no runtime observation in S1. |
+| Expected Markers | Every VDD entry and direct caller has one unique owner/disposition; samples and debugger extensions are explicitly excluded from runtime selection; hard monitor/kernel boundaries are named. |
+| Asset Needs | Existing original MVDM host mirror, formal source manifests and adapters; no new VDD binary, host installation, guest media or private system component. |
+| Reporting Requirements | Preserve original API names/layout/order; distinguish source facts from current binding facts; record all unavailable and later-owner transfers without inventing service behavior. |
+| Stop Conditions | A need to create a generic VDD provider, load a sample DLL, expose native pointers/HANDLEs, recreate private monitor/kernel/CSRSS behavior, or alter the guest requires re-admission. |
+| Exit Criteria | A full original VDD source/ABI/failure ledger selects at most one bounded source-shaped recovery cohort or transfers all nonlocal forms to named owners. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | IO hooks, memory hooks, IRQ/DMA, timers, VDD handles, printer/device binding, BaseSrv/monitor linkage, VDD samples, debugger extensions, WOW/FAX/Redirector callers and teardown. |
+
+**Plan:** [M0 T341 VDD owner-package recovery](etc/operations/m0-t341-vdd-owner-package-recovery-plan-001.md).
 
 ### M0 T339 S1 — Original `50:3D` guest-predecessor contract (closed)
 

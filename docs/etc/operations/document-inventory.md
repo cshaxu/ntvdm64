@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3633 |
+| Documentation records | 3636 |
 | --- | --- |
-| Generated UTC | 2026-09-01T06:39:08Z |
+| Generated UTC | 2026-09-01T06:46:07Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | a67065bd813d9832a8be3577bd95ef332471641fc526fe406abf7f35acae046b |
+| STATUS.md | principal control document | 39697436777d48a1788514d0b9d5b05be5b3ee828c3c838c63458f46e7029fac |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1084,6 +1084,7 @@ content-divergent entries.
 | etc/evidence/m0-t340-s1-resident-device-initialization-contract-001.md | indexed supporting material | 3cb92a303e07de214389656a0896c805974a3b9d6ab53c7b33e41a3c82c82c06 |
 | etc/evidence/m0-t340-s2-himem-softpc-xms-a20-int15-hma-recovery-001.md | indexed supporting material | 9b657ea796679013a111d3155ba81db380df938d27d2c2a2f3df74336a940be1 |
 | etc/evidence/m0-t340-s3-fixed-himem-cohort-observation-001.md | indexed supporting material | dcf7c7488bc901e011c87a07504129a7b0b37a7871e53a8268f43196cc8ba462 |
+| etc/evidence/m0-t341-s1-vdd-owner-package-admission-001.md | indexed supporting material | 1ff7b96b7fb128e6fb4bab4327920b8c438306f2877fdd3a74090778e334e335 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1797,6 +1798,8 @@ content-divergent entries.
 | etc/operations/m0-t340-resident-device-initialization-recovery-plan-001.md | indexed supporting material | 22866aa7f37f9ce5403a0b59e1046f2ddff98a44db95c510277856eea9116e4a |
 | etc/operations/m0-t340-s1-resident-device-initialization-contract-ledger.tsv | indexed supporting material | 4307a4b0d0c6a0b86af340b05dfe82b7addf35383b683964b02409e0ead5bd4d |
 | etc/operations/m0-t340-s2-himem-softpc-xms-a20-int15-hma-contract-ledger.tsv | indexed supporting material | c4e62b0492d8cab6c05a6c83beff6c9b5f5562801341b69c9a8d411f990f3736 |
+| etc/operations/m0-t341-s1-vdd-owner-contract-ledger.tsv | indexed supporting material | 4f85bb3b1eda5f34b32e05b0d1a400e2ca22b98c824b92b897190b0dd96e80cb |
+| etc/operations/m0-t341-vdd-owner-package-recovery-plan-001.md | indexed supporting material | 2542cd96de04a0dca166d23a6400d67daa0ced2d46644a122b38f006de569d14 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
