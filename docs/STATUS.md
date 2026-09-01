@@ -2,10 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T351 S2.** T351 S1 establishes that `54:05` is part of a complete
+**Active: M0 T351 S3.** T351 S1/S2 establish that `54:05` is part of a complete
 original COMMAND/NTDOS/CPU40 scalar-lifecycle package, not a trace-selected
-provider. S2 now reviews and formally closes the existing same-shaped binding
-without adding a new mapper, BOP result or guest behavior.
+provider.  S3 freezes the complete local source-shaped contract before the one
+fixed-container observation; it adds no mapper, BOP result or guest behavior.
 
 ### M0 T351 S2 — original SCS scalar-lifecycle binding recovery
 
@@ -32,6 +32,31 @@ without adding a new mapper, BOP result or guest behavior.
 **S1 closure:** [owner admission](etc/evidence/m0-t351-s1-command-ntdos-bootstrap-owner-admission-001.md)
 and its [owner ledger](etc/operations/m0-t351-s1-command-ntdos-bootstrap-owner-ledger.tsv)
 select the whole SCS scalar lifecycle and explicitly transfer WOW/graphics work.
+
+**S2 closure:** [SCS scalar-lifecycle binding closure](etc/evidence/m0-t351-s2-scs-scalar-lifecycle-binding-closure-001.md)
+records the complete selected consumer sweep, existing x86 lifecycle fixture,
+and fresh 425-action CPU40/x86 formal link.  It does not claim post-`54:05`
+guest continuation.
+
+### M0 T351 S3 — original bootstrap local-contract and formal closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T351 S3; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T351 S2's complete selected scalar-binding closure under the standing ordered-package owner direction. |
+| Objective | Freeze the complete local original `MS_bop_4 -> CmdDispatch -> cmdSetInfo -> CPU40/SAS` contract and its selected failure boundaries before the one runtime observation. |
+| Non-goals | No new provider, guest rewrite, runtime trace repair, alternate executor, mapper, CPU30, Bochs, x64 runtime, kernel/CSRSS/BaseSrv or WOW global alias. |
+| Reference Baseline | T351 S1 owner ledger, T351 S2 scalar-lifecycle closure, current original COMMAND/DEM/SoftPC mirrors, selected CPU40/x86 formal graph and fixed T350 observation classification. |
+| Files And ABI Surface | Existing original COMMAND dispatcher/register bridge, scalar state facade, CPU40/SAS binding and existing source-shaped register fixture. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, architecture, coding and CPU40-only rules. |
+| Verification | Rebuild/run the existing source-shaped register-boundary fixture; recheck all selected source/adapter ownership and S2 formal-link identity; documentation governance and diff review. |
+| Expected Markers | One original dispatcher/registration path, one bounded scalar-state route, no durable selected host alias, and no alternative CPU or BOP result path. |
+| Asset Needs | Existing original mirrors, existing fixture, selected formal graph and current immutable staged media; no new guest artifact or host-system change. |
+| Reporting Requirements | State the exact contract proven, every retained failure boundary, and the boundary S4 may observe without treating it as a next leaf implementation request. |
+| Exit Criteria | The selected original control/registration contract and all explicit lease/failure boundaries are recorded as one local CPU40 package; no unowned selected alias remains; S4 observation input is frozen. |
+| Stop Conditions | Any need to alter a BOP return, synthesize DOS state, create a durable pointer, add a mapper, change media or select a leaf repair stops and transfers to a separately admitted owner package. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | COMMAND register facade, CMDINFO setup, scalar-state consumers, DEM/device FD access, CPU40 outer binding, SAS lease lifetime and deferred WOW synchronization. |
 
 ### M0 T350 — Closed CPU40/NTDOS guest-bootstrap continuity
 
