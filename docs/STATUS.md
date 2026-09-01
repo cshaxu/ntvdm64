@@ -79,27 +79,43 @@ configuration-to-`commnd` source path, not `50:12`.
 proves that the 40-character package root generates a 114-character original
 `shell=` value for the 64-byte firmware `commnd` buffer.  This is an invalid
 historical SystemRoot input, not a DEM leaf failure.  A session-owned short
-MVDM SystemRoot projection is the next entire recovery cohort.
+MVDM SystemRoot projection was rejected: the next cohort is strict app-owned
+package-path admission that preserves the original host and guest code.
 
-### M0 T354 S4 — Active short MVDM SystemRoot projection design admission
+### M0 T354 S4 — Closed original COMMAND package-path admission enforcement
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T354 S4; ordinary mode (single-person dual-role implementation). |
 | Admission And Approval | Admitted by T354 S3's source-defined 64-byte `commnd` contract under the owner-approved ordered queue execution. |
-| Objective | Select and specify one session-owned, short, DOS-reachable MVDM SystemRoot projection that preserves original `cmdconf.c` and NTDOS `shell=` behavior while resolving only package media through an explicit host namespace seam. |
-| Non-goals | No real-host C-drive media copy or mutation, virtual boot volume, `demOpen`/BOP special case, guest/firmware byte change, new mapper, CPU/machine change, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or interactive COMMAND claim. |
+| Objective | Enforce the exact original NTDOS `commnd` 64-byte `shell=` input contract at app package admission; show a user-visible explanation and stop before original host startup when the executable-relative MVDM root cannot satisfy it. |
+| Non-goals | No DOS-device/drive-letter projection, host path alias, real-host C-drive media copy or mutation, virtual boot volume, `demOpen`/BOP special case, guest/firmware byte change, new mapper, CPU/machine change, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or interactive COMMAND claim. |
 | Reference Baseline | T354 S1 bootstrap ledger; T354 S2 canonical `C:\\COMMAND.COM` failure proof; T354 S3 source proof that the current 40-character package root violates the original 64-byte `commnd` input bound. |
-| Files And ABI Surface | App package-layout/SystemRoot selection, session-owned namespace/mapping contract, retained original `cmdconf.c`/NTDOS parser, and existing Direct host-drive namespace. No direct DEM provider ABI change. |
+| Files And ABI Surface | App package-layout validation and app-owned user-visible reporting; retained original `cmdconf.c`/NTDOS parser and existing Direct host-drive namespace. No session namespace, direct DEM provider or guest ABI change. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
-| Verification | Candidate collision/lifetime/path-length audit, source-call and host-namespace ownership review, original-versus-mirror review, formal graph/import review, governance/export and diff review. No runtime observation until a single projection contract is admitted. |
-| Expected Markers | A unique short spelling with a proved `shell=` length <= 63, explicit package-media-only resolution, no collision with selected real host drives, and a named owner/lifetime/teardown contract. |
-| Asset Needs | Existing staged immutable media, app/session namespace facilities and original MVDM code; no source import, host installation or host filesystem mutation. |
-| Reporting Requirements | State projected DOS spelling, exact length arithmetic, host collision policy, visibility to original `cmdconf` and DEM, package-media mapping lifetime, and rejection behavior. |
-| Stop Conditions | Any need for an implicit global drive alias, external `subst`/junction, real C media copy, a second mapping manager, changed guest bytes, a DEM/BOP special case, or an unowned host namespace expansion pauses for new admission. |
-| Exit Criteria | One source-compatible short-projection design is selected with no unowned edge, or the package root contract is rejected with an exact user-visible admission requirement. |
+| Verification | Source-call and exact length review, focused package-layout build/fixture, formal graph/import review, governance/export and diff review. No runtime observation is required: a long package root must not enter original host startup. |
+| Expected Markers | The unchanged `cmdconf.c` format is measured against `sysconf.asm::commnd`; a root yielding more than 63 visible `shell=` value bytes produces the app-owned explanation and `APP_STARTUP_MEDIA_REJECTED`. |
+| Asset Needs | Existing staged immutable media, app code and original MVDM code; no source import, host installation, host namespace or filesystem mutation. |
+| Reporting Requirements | State the exact shell-value arithmetic, original source storage bound, selected app failure status and user-visible rejection text; distinguish host admission from a guest/DEM error. |
+| Stop Conditions | Any drive alias, `subst`/junction, real C media copy, second mapping manager, changed guest bytes, DEM/BOP special case, or host namespace expansion pauses for new admission. |
+| Exit Criteria | The invalid package-root contract is rejected before original host startup with an exact user-visible requirement, while a valid short spelling retains unchanged original `cmdconf.c`/NTDOS behavior. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `achSysRoot`, `commnd`, `pathstring`, `shell=` value parsing, root short-name availability, Direct host C and all-drive semantics, package media identity, session teardown and app launch root selection. |
+
+**S4 closure:** [original COMMAND package-path admission enforcement](etc/evidence/m0-t354-s4-command-package-path-admission-enforcement-001.md)
+preserves `cmdconf.c` and NTDOS unchanged. It rejects the current long package
+root before original host startup and states the exact 63-visible-character
+installation constraint to the user.
+
+**S4 closure:** [original COMMAND package-path admission enforcement](etc/evidence/m0-t354-s4-command-package-path-admission-enforcement-001.md)
+preserves `cmdconf.c` and NTDOS unchanged. It rejects the current long package
+root before original host startup and states the exact 63-visible-character
+installation constraint to the user.
+
+**S4 closure:** [original COMMAND package-path admission enforcement](etc/evidence/m0-t354-s4-command-package-path-admission-enforcement-001.md)
+preserves `cmdconf.c` and NTDOS unchanged. It rejects the current long package
+root before original host startup and states the exact 63-visible-character
+installation constraint to the user.
 
 ### M0 T353 S1 — Closed post-`SVC_CMDGETCONFIGSYS` owner admission
 
@@ -472,7 +488,9 @@ and
 
 ## Active Packet
 
-**Active: M0 T354 S3 — configuration-to-`commnd` cohort attribution.**
+**No active M/T/S packet.** T354 is closed by the
+[permanent COMMAND package-path closure](history/m0-t354-cpu40-ntdos-permanent-command-package-path-closure-20260901.md).
+The next product package requires owner admission.
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 

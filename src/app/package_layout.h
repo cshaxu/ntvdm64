@@ -19,9 +19,11 @@ int app_package_layout_set_media_roots(session *owner,
 
 /* Product admission for the unchanged original COMMAND configuration form.
  * The selected MVDM root must exist, have a 1..63-byte short-path spelling,
- * and leave room for every original default system-media filename in the
- * caller's MAX_PATH+12 buffer.  This does not test media existence: a PIF may
- * replace CONFIG.NT/AUTOEXEC.NT, and original MVDM owns missing-file errors. */
+ * and produce the original cmdconf.c SHELL value within NTDOS's 64-byte
+ * `commnd` buffer (63 visible bytes plus NUL).  It must also leave room for
+ * each original default system-media filename in the caller's MAX_PATH+12
+ * buffer.  This does not test media existence: a PIF may replace
+ * CONFIG.NT/AUTOEXEC.NT, and original MVDM owns missing-file errors. */
 int app_package_layout_validate_command_configuration_root(
     const session *owner);
 

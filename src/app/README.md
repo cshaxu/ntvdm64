@@ -65,6 +65,19 @@ named SoftPC adapter. DOS and Win16 remain separate source mirrors but share
 this installed MVDM media root; none of their bytes is linked into the
 executable.
 
+## M0 T354 original COMMAND path admission
+
+`package_layout` preserves the original `cmdconf.c` generated `shell=` form
+and the NTDOS `sysconf.asm::commnd` 64-byte storage contract. It rejects a
+package root unless its public Windows short spelling makes the generated
+COMMAND value at most 63 visible bytes. `entry.c` then displays an app-owned
+user-visible installation-path explanation before original host startup. It
+neither creates a DOS-device alias nor changes guest/firmware bytes.
+
+| Exception | Original purpose | Reason | Implementation | Files |
+| --- | --- | --- | --- | --- |
+| `APP-DIV-014` | Original NT installations supplied a short `%SystemRoot%` to `cmdconf.c`; NTDOS stored the generated shell value in `commnd`. | Modern portable package roots can exceed the original 63-visible-byte shell-value capacity and otherwise overflow the unchanged guest contract. | App computes the unchanged original generated-value length, rejects an invalid package before startup, and shows an app-owned explanatory dialog. | `package_layout.c`, `package_layout.h`, `entry.c` |
+
 ## M0 T346 S3 presentation window
 
 `presentation_window.{c,h}` is app-owned public Win32 presentation only.  It

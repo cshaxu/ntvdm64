@@ -14,6 +14,17 @@ the unique original `sysinit1.asm::comerr -> badfil -> stall -> 50:3D`
 terminal. This is a permanent command-name/open failure, not an unimplemented
 `50:12` or `50:3D` provider.
 
+## T354 S4 decision
+
+The product will not create a temporary drive letter, DOS-device alias,
+`subst` mapping, junction, virtual boot volume, or guest overlay to conceal a
+long installed package path. The original `cmdconf.c` source writes the
+literal `shell=` value and original NTDOS stores that value in its fixed
+64-byte `sysconf.asm::commnd` field. A package is therefore admissible only
+when its public short path makes that unchanged value no more than 63 visible
+bytes. Otherwise app shows a clear installation-path error and returns its
+media-admission outcome before original host startup.
+
 ## Scope
 
 - Audit one whole original NTDOS permanent-command cohort: pathname source,

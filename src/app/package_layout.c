@@ -5,6 +5,22 @@
 
 #define APP_COMMAND_SHORT_ROOT_BYTES 64u
 #define APP_COMMAND_SYSTEM_FILE_BYTES (MAX_PATH + 12u)
+#define APP_NTDOS_COMMAND_VALUE_BYTES 64u
+
+/* `sysconf.asm::commnd` receives the SHELL value, not the "shell=" key.
+ * Keep this expression alongside the unchanged original format in cmdconf.c:
+ * "%s%s /p %s\\system32". */
+static int app_package_layout_command_value_fits(const char *short_root)
+{
+    static const char command_suffix[] = "\\system32\\command.com /p ";
+    static const char directory_suffix[] = "\\system32";
+    size_t root_bytes;
+
+    if (short_root == NULL || short_root[0] == '\0') return 0;
+    root_bytes = strlen(short_root);
+    return root_bytes + sizeof(command_suffix) - 1u + root_bytes +
+        sizeof(directory_suffix) <= APP_NTDOS_COMMAND_VALUE_BYTES;
+}
 
 static int app_package_layout_make_root(const char *executable_path,
     const char *suffix, char *root, size_t root_bytes)
@@ -82,7 +98,8 @@ int app_package_layout_validate_command_configuration_root(
         (DWORD)sizeof(short_root));
     if (short_root_bytes == 0u || short_root_bytes >= sizeof(short_root))
         return 0;
-    return app_package_layout_command_file_fits(root, "config.nt") &&
+    return app_package_layout_command_value_fits(short_root) &&
+        app_package_layout_command_file_fits(root, "config.nt") &&
         app_package_layout_command_file_fits(root, "autoexec.nt") &&
         app_package_layout_command_file_fits(root, "ntio.sys");
 }

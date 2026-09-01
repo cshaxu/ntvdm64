@@ -3,6 +3,8 @@
 #include "app/package_layout.h"
 #include "app/presentation_window.h"
 
+#include <windows.h>
+
 /* App owns these process-assembly outcomes.  They deliberately do not
  * describe an original SoftPC/guest result: a result returned by the
  * original entry remains untouched below.  Keeping the early outcomes
@@ -20,6 +22,17 @@ enum app_startup_status {
     APP_STARTUP_MACHINE_FAILURE = 71,
     APP_STARTUP_DISPOSE_FAILURE = 72
 };
+
+static void app_report_media_root_rejected(void)
+{
+    MessageBoxA(NULL,
+        "NTVDM64 cannot start from this package location.\r\n\r\n"
+        "The original NTDOS COMMAND startup buffer accepts at most 63 "
+        "characters for its generated shell path. Install or move the "
+        "package so its mvdm directory has a shorter Windows path, then "
+        "start NTVDM64 again.",
+        "NTVDM64 package path too long", MB_OK | MB_ICONERROR);
+}
 
 /* The application owns only process/session assembly.  Guest loading,
  * host initialization and CPU execution stay in the original SoftPC entry
@@ -45,6 +58,7 @@ int main(int argc, char **argv)
         goto finish;
     }
     if (!app_package_layout_validate_command_configuration_root(&owner)) {
+        app_report_media_root_rejected();
         result = APP_STARTUP_MEDIA_REJECTED;
         goto finish;
     }

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3724 |
+| Documentation records | 3726 |
 | --- | --- |
-| Generated UTC | 2026-09-01T17:41:54Z |
+| Generated UTC | 2026-09-01T18:59:08Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 643b74f5d09dae1424cc2d4c759e14eab273d27099b9614d1ac105c654890045 |
+| STATUS.md | principal control document | 98b3301b1a33c5bde9405d11b88319d2828ffa05b3346176b68ce3cab35d770f |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1132,6 +1132,7 @@ content-divergent entries.
 | etc/evidence/m0-t354-s1-permanent-command-bootstrap-owner-admission-001.md | indexed supporting material | 8a56a422f64798302f5868765698916c8e93c29d287c2a1871b44599888917b4 |
 | etc/evidence/m0-t354-s2-permanent-command-open-observation-001.md | indexed supporting material | ab7d83f4dbe4875048731f363453dbf6366e7ca1f1e38a2a08a9ed966fdcd010 |
 | etc/evidence/m0-t354-s3-config-to-commnd-cohort-attribution-001.md | indexed supporting material | 4a12a67d180793e1aa68edc480fda24c2c2a70b534a522699e684e03b654d371 |
+| etc/evidence/m0-t354-s4-command-package-path-admission-enforcement-001.md | indexed supporting material | 0a7d29765bf1be1dfc6a86c6c5d449ca29693301aa6e58221e7abfea6b65d532 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1977,7 +1978,7 @@ content-divergent entries.
 | etc/operations/proposal-command-ntdos-bootstrap-runtime-continuity-001.md | indexed supporting material | 6bd71999a1111a97db7e74a6201cd98906edbfacc5b647cd1c3f8d81fdc519c7 |
 | etc/operations/proposal-cpu40-ccpu-original-profile-closure-001.md | indexed supporting material | f029c4a25bf86ce42a568865c20f8ff3d8f18e06cc5c3645e21a76cef03f4532 |
 | etc/operations/proposal-cpu40-ntdos-guest-bootstrap-continuity-002.md | indexed supporting material | 73b300781ba276d5aa363edb5f1cd775c48f0f386f4661577239ef569f3e5fc7 |
-| etc/operations/proposal-cpu40-ntdos-permanent-command-bootstrap-001.md | indexed supporting material | 6908c6f93e944d39688cc81074918926c30c87d720cda2595a261e76813321f5 |
+| etc/operations/proposal-cpu40-ntdos-permanent-command-bootstrap-001.md | indexed supporting material | b3d6111992df923c28c4e2012e2d7c5a8ff320ef64a5c49fa0cd377898fa5875 |
 | etc/operations/proposal-cpu40-ntdos-post-cmdgetconfigsys-continuity-001.md | indexed supporting material | bf77dd8d4a1e7455c1c129e60a8c92ee4a871adcf8f44b9188d585254528d783 |
 | etc/operations/proposal-cpu40-ntdos-post-cmdsetinfo-continuity-001.md | indexed supporting material | 82bc1bceb4dbd66e670e3d7b113a988facdb20f2796476ea7cc215df9c123d92 |
 | etc/operations/proposal-cpu40-recursive-frame-guest-reentry-closure-001.md | indexed supporting material | d25d052c69494729b58ea8b30835a2e68ef057a0ff6d64bcd9b2c5c58399d33c |
@@ -3631,6 +3632,7 @@ content-divergent entries.
 | history/m0-t351-command-ntdos-bootstrap-runtime-continuity-closure-20260901.md | closed task history | 9f1a122a1e63225f27409ee22dcd1ce2ffe4e9fe35437cad8a5399ff4ce174e4 |
 | history/m0-t352-cpu40-command-post-cmdsetinfo-continuity-closure-20260901.md | closed task history | 347b772a9bfbc0a3a648c349258a2743a18b25d112921f1baa6c015302b24fd0 |
 | history/m0-t353-cpu40-ntdos-post-cmdgetconfigsys-continuity-closure-20260901.md | closed task history | 994f02f1853770bc97b329b3b18a52d8ea57491a57a10ce4bf576c64fbc17e05 |
+| history/m0-t354-cpu40-ntdos-permanent-command-package-path-closure-20260901.md | closed task history | e9f576b3194691bfe72e104cc82acfd87ebc6b3956d274de18eec2813152c441 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
