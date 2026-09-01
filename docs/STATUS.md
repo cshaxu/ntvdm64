@@ -196,15 +196,17 @@ S4 now owns only real selected-profile startup and graphics-workload evidence.
 uses the unchanged console-owning x86 runtime container once. It again reaches
 only the pre-graphics `50:11/3B/0F/1B`, `54:05` boundary and then the bounded
 timeout. It neither exercises nor regresses the new presentation route; an
-actual DOS graphics workload remains blocked by that earlier original startup
-continuity owner.
+actual DOS graphics workload remains blocked by that earlier original
+`cmdSetInfo` registration/startup-continuity owner. `CONFIG.NT` preprocessing
+is the later `54:0C` service and was not reached.
 
 **S4 P1:** [fixed presentation observation](etc/evidence/m0-t346-s4-fixed-presentation-observation-001.md)
 uses the unchanged console-owning x86 runtime container once. It again reaches
 only the pre-graphics `50:11/3B/0F/1B`, `54:05` boundary and then the bounded
 timeout. It neither exercises nor regresses the new presentation route; an
-actual DOS graphics workload remains blocked by that earlier original startup
-continuity owner.
+actual DOS graphics workload remains blocked by that earlier original
+`cmdSetInfo` registration/startup-continuity owner. `CONFIG.NT` preprocessing
+is the later `54:0C` service and was not reached.
 
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
