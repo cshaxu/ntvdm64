@@ -488,7 +488,7 @@ and
 
 ## Active Packet
 
-**Active: M0 T355 S13 — original CONFIG post-IOCTL guest-continuation audit.**
+**Active: M0 T355 S14 — original kernel FastRead composition recovery.**
 
 ### M0 T355 S1 — Closed short-path permanent COMMAND fixed-container verification
 
@@ -793,15 +793,15 @@ proves three original removable-media requests for drive `C:` return fixed
 (`AX=1`, `CF=0`).  DEM open, EOF seek and temporary-CDS IOCTL are all source
 and runtime-successful; no host-drive workaround is selected.
 
-### M0 T355 S13 — Active original CONFIG post-IOCTL guest-continuation audit
+### M0 T355 S13 — Closed original CONFIG post-IOCTL guest-continuation audit
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T355 S13; ordinary mode (single-person dual-role implementation). |
 | Admission And Approval | Admitted by T355 S12's successful whole original IOCTL owner result under the owner-approved ordered queue execution. |
-| Objective | Reconstruct original `tempcds` return, temporary CDS write loop, `doconf` `DS/ES/confbot/CX` setup and exact DOS-read transfer; identify whether a guest control/data precondition—not a host file/drive result—prevents `demRead`. |
+| Objective | Reconstruct original `tempcds` return, temporary CDS write loop, `doconf` `DS/ES/confbot/CX` setup and exact DOS-read transfer; identify the exact original read owner after the preceding successful host services. |
 | Non-goals | No new host capability, DEM/IOCTL/parser result rewrite, guest/media mutation, mapper, CPU/machine change, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics claim. |
-| Reference Baseline | T355 S8 successful open/absent read; T355 S10 successful EOF seek; T355 S12 successful original removable-media IOCTL results. |
+| Reference Baseline | T355 S8 successful open/absent slow read; T355 S10 successful EOF seek; T355 S12 successful original removable-media IOCTL results. |
 | Files And ABI Surface | Original `sysinit1.asm::tempcds`, `sysconf.asm::doconf`, original DOS INT21 read dispatcher and selected CPU40 execution semantics. No code change in S13. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
 | Verification | Original source/caller/register/memory-span audit and existing evidence review only. A new diagnostic, build or runtime run requires a separately bounded S14 admission. |
@@ -812,6 +812,30 @@ and runtime-successful; no host-drive workaround is selected.
 | Exit Criteria | The post-IOCTL/pre-read continuation has no unowned immediate edge and selects one bounded successor or exact original terminal. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `tempcds`, `foogo`, `fixed_drv`, `EndProc TempCDS`, `confbot`, `alloclim`, `DS/ES`, `CX`, `AH=3Fh`, DOS read dispatcher, `demRead` and CPU40 return/control state. |
+
+**S13 closure:** [CONFIG fast-read route correction](etc/evidence/m0-t355-s13-config-fastread-route-correction-001.md)
+supersedes the predecessor inference that no `demRead` meant no DOS read.
+The observed `50:42` is the reached original kernel-fast-I/O seam.
+
+### M0 T355 S14 — Active original kernel FastRead composition recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S14; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by S13's complete source correction under the standing owner direction to execute the active packet. |
+| Objective | Restore the original `SVC_DEMFASTREAD` normal-file result contract for the CPU40/x86 user-mode composition from `base/ntos/vdm/x86/rdwr.c::NTFastDOSIO`, without importing NT4 kernel VDM. |
+| Non-goals | No kernel VDM/CSRSS/IRQL/PVDM_TIB recreation, guest/media mutation, parser/IOCTL/seek rewrite, generic BOP work, CPU/machine semantic change, CPU30, Bochs, x64 runtime, pipe/console fast I/O, EXEC or graphics claim. |
+| Reference Baseline | S13 source correction; unchanged original `handle.asm::$READ`, `demRead` fallback and session mapping-manager contracts; fixed `O:\ntvdm` media. |
+| Files And ABI Surface | Original `demdisp.c` dispatch selection, a bounded adapter-owned kernel-fast-I/O compatibility seam if required, existing host-resource mapping and synchronous guest-memory lease. No guest ABI shape change. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original kernel/user-source comparison; focused normal-file, EOF and fallback/error contract fixtures; formal CPU40/x86 link and one unchanged fixed-container observation only after the provider proof passes; governance/export and diff review. |
+| Expected Markers | `50:42` transfers bytes and returns their count/CF contract for a normal mapped file, or returns CF set for a case delegated to original `50:16`; no raw host handle/pointer crosses the boundary. |
+| Asset Needs | Existing mirrors, session mapping instances, formal graph and immutable stage; no new source import, kernel component or host-system mutation. |
+| Reporting Requirements | Separate kernel-source contract, user-mode replacement boundary and observed result; record every deliberate non-kernel disposition, especially console/std-handle, pipe and seek behavior. |
+| Stop Conditions | Any need for a raw native handle/pointer in DOS state, retained guest pointer beyond a checked lease, kernel API/IRQL/TEB recreation, a family-private mapper, guest rewrite or a second run pauses for new admission. |
+| Exit Criteria | The selected normal-file FastRead contract is source-attributed, mapping-safe, formally linked and observed once in the fixed container; all unrecovered kernel-only branches have an exact CF/fallback disposition. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `SVC_DEMFASTREAD`, `SVC_DEMFASTWRITE`, `$READ`, `FastOrSlow`, `demRead`, mapped host resource identity, guest-memory lease, EOF, console/std handles, pipes, seek/ZF and `MS_bop_0` dispatch. |
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 
