@@ -1,9 +1,12 @@
-# Proposal — COMMAND/DEM/SoftPC guest scalar-alias lifecycle recovery
+# M0 T347 — COMMAND/DEM/SoftPC guest scalar-alias lifecycle recovery
 
-## Candidate status
+## Admission status
 
-This is an **unnumbered queue candidate**, not an active T/S packet.  It does
-not authorize source or behavior changes while M0 T346/S4 remains active.
+M0 T347/S1 is active. The owner admitted this package on 2026-09-01 after
+T346/S4 established that its selected graphics workload is gated before
+graphics by a source-defined scalar-alias lifecycle cohort. S1 is an audit
+packet only; implementation begins only when its selected contract is
+recorded and admitted as the next S.
 
 ## Objective
 
@@ -46,7 +49,7 @@ original access point, commits if necessary, and releases before returning.
 
 ## Proposed S sequence
 
-### S1 — Original registration/use/lifetime ledger
+### S1 — Original registration/use/lifetime ledger (active)
 
 Record the three positions, their widths, exact registrations, every
 original host and guest read/write, thread/session lifetime, teardown result,

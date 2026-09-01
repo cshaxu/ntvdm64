@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3672 |
+| Documentation records | 3673 |
 | --- | --- |
-| Generated UTC | 2026-09-01T14:36:34Z |
+| Generated UTC | 2026-09-01T14:46:21Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | 38bbbae1938092de394d909493eac77994bde80017d75ff2b1186f90679469f9 |
+| QUEUE.md | principal control document | cf0e28c2bf83ee9e5421c037fb22d4be8ff9046fd573eaa479a1063ad1731ef3 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 412399f0abe8e77c34e974a9624f8e7b7b5c418a12df74ff60b2da58a0b05866 |
+| STATUS.md | principal control document | 320a98303b4e670c4a64f0e6a0137de1b9138217712a42c3d4567cc9d9178291 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1830,6 +1830,7 @@ content-divergent entries.
 | etc/operations/m0-t346-s1-graphics-presentation-owner-ledger.tsv | indexed supporting material | db0ae996f487020b37d25b9bfc00c0d7b0e1c123692a8d7a52977e5cf8b75f8a |
 | etc/operations/m0-t346-s3-window-lifecycle-contract-001.md | indexed supporting material | d2a4c3275dbcef897ac4c8a371d46f3de4531d887b7b71f185a7759895d25a38 |
 | etc/operations/m0-t346-softpc-graphics-presentation-plan-001.md | indexed supporting material | 115e1f3e7434634cadadd6b8ac5e4e483d66ac220423ac07483b71407ba52a37 |
+| etc/operations/m0-t347-command-dem-softpc-scalar-alias-lifecycle-recovery-plan-001.md | indexed supporting material | e4faf109e482ec7f8c05b68b121d8d24da9aa49c0390ebf0bd32135f8617cd5e |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -1935,7 +1936,6 @@ content-divergent entries.
 | etc/operations/proposal-bx-machine-bios-selector-owner-package-completion-001.md | indexed supporting material | 5156fbca45c3108049c06757e1f7b937f47975a9875a64cb2c2cd970ac35384f |
 | etc/operations/proposal-bx-vdm-pending-bop-session-lifecycle-001.md | indexed supporting material | b3c5072c395c22475973085e337d757366b49e1769c3fb81fde9c12a38f7adf2 |
 | etc/operations/proposal-cli-run-entry-and-opennt-pif-handoff-001.md | indexed supporting material | 472164739c7fe38ba4ccb20c64a0b72c13aa81d8df972786371c50c762c8393a |
-| etc/operations/proposal-command-dem-softpc-scalar-alias-lifecycle-recovery-001.md | indexed supporting material | 10ca6baa5357c88172990612b32c6053d1d322ea3b4263f3aba763073892cadf |
 | etc/operations/proposal-cpu40-ccpu-original-profile-closure-001.md | indexed supporting material | f029c4a25bf86ce42a568865c20f8ff3d8f18e06cc5c3645e21a76cef03f4532 |
 | etc/operations/proposal-cpu40-ntdos-post-cmdsetinfo-continuity-001.md | indexed supporting material | 07d720b5f3a3a66f7869a7de1867fbcf8e8d999c9e3a134f4703799025077624 |
 | etc/operations/proposal-cpu40-recursive-frame-guest-reentry-closure-001.md | indexed supporting material | d25d052c69494729b58ea8b30835a2e68ef057a0ff6d64bcd9b2c5c58399d33c |
@@ -3579,6 +3579,7 @@ content-divergent entries.
 | history/m0-t343-broker-process-cross-process-coordination-closure-20260901.md | closed task history | 48af84ea1bb52c3c1989e6240a63efa10ae0df0d6a0c5252f2c460832be4efd4 |
 | history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md | closed task history | 2bed3cb33e7524871d56451f72e93df2ccfda6c470d8aa1e3fe266c6f6c00c27 |
 | history/m0-t345-host-capability-expansion-closure-20260901.md | closed task history | c60b0b3fff89171c1b4cab7e54ca39ce66eb635560f96bf72ef284b632da3928 |
+| history/m0-t346-softpc-graphics-presentation-closure-20260901.md | closed task history | ec0c67e7b072caf979923815c9d1a116982859914bdd3c97327eb158170bf105 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

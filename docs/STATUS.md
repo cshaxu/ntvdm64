@@ -2,12 +2,34 @@
 
 ## Current Work
 
-**Active: M0 T346 S4.** T345 is closed: its selected ordinary DEM
-filesystem/handle, directory/drive/volume and search/FCB package has retained
-original source ownership and paired CPU40 x86/x64 formal linkage. T346 has
-closed its source/ABI inventory, session-surface and app-window implementation
-packets; only S4's selected-profile graphics-workload verification remains
-active.
+**Active: M0 T347 S1.** T346 is closed with its original SoftPC
+presentation source inventory, bounded session surface, and app-window
+lifecycle implemented and locally verified. It does not claim a guest DOS
+graphics workload: the selected fixed observation remains pre-graphics and
+has transferred the source-defined scalar-alias lifecycle predecessor to T347.
+See the [T346 closure](history/m0-t346-softpc-graphics-presentation-closure-20260901.md).
+
+### M0 T347 S1 — Original scalar-alias registration/use/lifetime ledger
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T347 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate “COMMAND/DEM/SoftPC guest scalar-alias lifecycle recovery”, admitted by the owner on 2026-09-01 after T346/S4 transferred its pre-graphics source finding. |
+| Objective | Establish the complete original registration, use, lifetime, error and teardown ledger for `SCS_ToSync`, `SCS_Is_Dos_Binary`, and `SCS_FDACCESS`, then select the smallest unified same-shaped adapter contract. |
+| Non-goals | No BOP leaf workaround, graphics repair, CONFIG.NT behavior change, new mapping manager, guest-media modification, DOS policy, FDC/BIOS behavior, CPU30, Bochs route, durable guest pointer or raw host identity transport. |
+| Reference Baseline | T346/S4 P3 owner-transfer evidence; original NTDOS, COMMAND, DEM and SoftPC mirror bodies; the existing session mapping manager and `adapter-mvdm-host-out/softpc` guest-location seams. |
+| Files And ABI Surface | `msinit.asm`, `msproc.asm`, `macro.asm`, `misc.asm`, `cmdmisc.c`, `cmdpif.c`, `demmisc.c`, `nt_fdisk.c`, `nt_rflop.c`, related declarations, current guest-state adapter and mapping-manager lifecycle interfaces. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, architecture, coding and CPU40-only rules. |
+| Verification | Source/declaration/definition/caller/lifetime/failure walk; existing-binding comparison; document governance and diff checks. S1 makes no behavior change. |
+| Expected Markers | Every retained guest scalar location, access width/direction and lifetime has one original owner, caller set, teardown rule and proposed adapter disposition; no raw durable-pointer path is silently accepted. |
+| Asset Needs | Existing original mirrors, existing mapping manager and formal CPU40 graphs; no imported source, guest image, host installation or system configuration change. |
+| Reporting Requirements | Separate original-source facts from current bindings; identify every source divergence and mapping lease requirement; transfer any unlisted owner family rather than expanding the cohort. |
+| Stop Conditions | A need for a second mapper, new guest ABI, raw pointer persistence, filesystem/drive policy, new machine behavior, guest source change or unreviewed import pauses for re-admission. |
+| Exit Criteria | A complete S1 ledger selects one minimal source-shaped scalar-location/short-lease API or transfers every unresolved item to a named owner; no code changes are made under S1. |
+| Original Owner Request | “批准” to pause/close T346 and admit the scalar-alias lifecycle task. |
+| Similar-Issue Sweep | All durable `GetVDMAddr` aliases in the selected COMMAND/DEM/SoftPC cohort; access direction, reset/increment/decrement behavior, stale epoch/session teardown, and current guest-state carrier ownership. |
+
+**Plan:** [M0 T347 scalar-alias lifecycle recovery](etc/operations/m0-t347-command-dem-softpc-scalar-alias-lifecycle-recovery-plan-001.md).
 T342 is closed: the only startup-reached debugger form
 is the original `DBGInit` shape through its bounded adapter; BDE, VDMDBG,
 VDMEXTS and FAX remain their original tool/product packages. T341 is closed:
@@ -213,6 +235,13 @@ keeps the observed `54:05` ingress out of T346 implementation. It establishes
 that the original registration of `SCS_ToSync`, `SCS_Is_Dos_Binary` and
 `SCS_FDACCESS` is one future mapping-manager lifecycle cohort, not a graphics
 or CONFIG.NT leaf; it does not attribute the current timeout to that cohort.
+
+**S4 closure:** T346 has completed its admitted source inventory, bounded
+session surface, app-owned presentation window, Alt+Enter lifecycle and local
+noninterference verification. The selected DOS graphics-workload criterion is
+not met because the fixed original startup observation remains before graphics.
+That prerequisite is explicitly transferred to T347's scalar-alias owner
+cohort; it is not repaired as a T346 trace leaf.
 
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
