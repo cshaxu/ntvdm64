@@ -54,6 +54,11 @@ dispositions are mapped in the [copied-record ledger](etc/operations/m0-t343-s2-
 fixed-width, focused-test and paired-formal-build closed.  It has no transport
 or original caller binding yet; see the [P1 copied-record result](etc/evidence/m0-t343-s3-p1-copied-record-core-001.md).
 
+**S3 P2:** the selected app declaration now crosses the adapter-owned copied
+broker record before the existing source-shaped local BaseVDM result.  The
+peek/copy/consume ordering is covered on x86/x64; it remains an in-process
+binding, not a BaseSrv transport. See the [P2 binding result](etc/evidence/m0-t343-s3-p2-basesrv-broker-binding-001.md).
+
 ### M0 T342 S1 — Original Debugger / BDE / FAX source / ABI / failure admission (closed)
 
 | Field | Record |

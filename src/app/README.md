@@ -16,6 +16,16 @@ The app no longer owns a Base VDM command protocol. It may declare launch
 input, but the copied command record, `VDMINFO` shape, dispatch ordering and
 session binding belong to `adapter-mvdm-host-out/basesrv`.
 
+The current declaration first copies its selected DOS command into that
+adapter's transport-neutral broker record and delivers it into the local
+BaseVDM record only after the copy succeeds.  This is not an app-owned broker
+protocol and does not claim named-pipe or cross-process operation.
+
+The current declaration first copies its selected DOS command into that
+adapter's transport-neutral broker record and delivers it into the local
+BaseVDM record only after the copy succeeds.  This is not an app-owned broker
+protocol and does not claim named-pipe or cross-process operation.
+
 `launch_declaration.{c,h}` is the corresponding thin assembly owner: it
 creates no command protocol and no guest state. It initializes and binds the
 adapter-owned record before original `scs_init` asks `GetNextVDMCommand(NULL)`

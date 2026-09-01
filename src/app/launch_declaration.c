@@ -9,6 +9,7 @@ void app_launch_declaration_initialize(app_launch_declaration *declaration)
     if (declaration == NULL) return;
     memset(declaration, 0, sizeof(*declaration));
     base_vdm_local_initialize(&declaration->base_vdm);
+    base_vdm_broker_initialize(&declaration->broker);
 }
 
 int app_launch_declaration_consume_options(app_launch_declaration *declaration,
@@ -38,6 +39,13 @@ int app_launch_declaration_bind(app_launch_declaration *declaration,
     if (declaration == NULL || declaration->bound != 0u ||
         !base_vdm_local_valid(&declaration->base_vdm)) return 0;
     if (!base_vdm_local_bind(&declaration->base_vdm, owner)) return 0;
+    /* The current app has a single local broker instance.  Its stable broker
+     * identity is not a guest or host pointer; a later public transport may
+     * assign this value externally without changing the original MVDM caller. */
+    if (!base_vdm_broker_bind(&declaration->broker, owner, 1u)) {
+        (void)base_vdm_local_unbind(&declaration->base_vdm);
+        return 0;
+    }
     declaration->bound = 1u;
     return 1;
 }
@@ -126,5 +134,7 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     command.environment_bytes = (uint32_t)environment_length;
     command.current_directory = (const uint8_t *)declaration->current_directory;
     command.current_directory_bytes = (uint16_t)(directory_length + 1u);
-    return base_vdm_local_publish(&declaration->base_vdm, &command);
+    if (!base_vdm_broker_publish(&declaration->broker, &command)) return 0;
+    return base_vdm_broker_deliver(&declaration->broker,
+        &declaration->base_vdm) == BASE_VDM_BROKER_DELIVERY_COMPLETE;
 }

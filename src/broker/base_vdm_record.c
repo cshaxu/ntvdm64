@@ -86,9 +86,9 @@ uint32_t broker_base_vdm_publish(broker_base_vdm_state *state,
     return BROKER_BASE_VDM_STATUS_OK;
 }
 
-uint32_t broker_base_vdm_get_next(broker_base_vdm_state *state,
+static uint32_t broker_base_vdm_select_next(broker_base_vdm_state *state,
     uint32_t broker_id, uint32_t session_id, uint16_t request_vdm_state,
-    broker_base_vdm_record *result)
+    broker_base_vdm_record *result, int consume)
 {
     broker_base_vdm_slot *slot;
     if (!state_valid(state) || broker_id == 0u || session_id == 0u ||
@@ -106,6 +106,39 @@ uint32_t broker_base_vdm_get_next(broker_base_vdm_state *state,
         return BROKER_BASE_VDM_STATUS_PENDING;
     }
     *result = slot->record;
+    if (consume != 0) {
+        slot->available = 0u;
+        slot->pending = 0u;
+    }
+    return BROKER_BASE_VDM_STATUS_OK;
+}
+
+uint32_t broker_base_vdm_get_next(broker_base_vdm_state *state,
+    uint32_t broker_id, uint32_t session_id, uint16_t request_vdm_state,
+    broker_base_vdm_record *result)
+{
+    return broker_base_vdm_select_next(state, broker_id, session_id,
+        request_vdm_state, result, 1);
+}
+
+uint32_t broker_base_vdm_peek_next(broker_base_vdm_state *state,
+    uint32_t broker_id, uint32_t session_id, uint16_t request_vdm_state,
+    broker_base_vdm_record *result)
+{
+    return broker_base_vdm_select_next(state, broker_id, session_id,
+        request_vdm_state, result, 0);
+}
+
+uint32_t broker_base_vdm_consume(broker_base_vdm_state *state,
+    const broker_base_vdm_record *record)
+{
+    broker_base_vdm_slot *slot;
+    if (!state_valid(state) || !record_valid(record))
+        return BROKER_BASE_VDM_STATUS_INVALID;
+    slot = find_slot(state, record->broker_id, record->session_id);
+    if (slot == NULL) return BROKER_BASE_VDM_STATUS_UNKNOWN;
+    if (slot->available == 0u || slot->record.request_id != record->request_id)
+        return BROKER_BASE_VDM_STATUS_BUSY;
     slot->available = 0u;
     slot->pending = 0u;
     return BROKER_BASE_VDM_STATUS_OK;

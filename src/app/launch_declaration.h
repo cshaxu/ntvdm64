@@ -3,10 +3,11 @@
 
 #include <stdint.h>
 
-#include "base_vdm_local.h"
+#include "base_vdm_broker.h"
 
 typedef struct app_launch_declaration {
     base_vdm_local base_vdm;
+    base_vdm_broker broker;
     uint32_t bound;
     uint32_t ordinary_child;
     char command[MAXIMUM_VDM_COMMAND_LENGTH];

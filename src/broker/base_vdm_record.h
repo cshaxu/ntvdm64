@@ -72,6 +72,11 @@ uint32_t broker_base_vdm_publish(broker_base_vdm_state *state,
 uint32_t broker_base_vdm_get_next(broker_base_vdm_state *state,
     uint32_t broker_id, uint32_t session_id, uint16_t request_vdm_state,
     broker_base_vdm_record *result);
+uint32_t broker_base_vdm_peek_next(broker_base_vdm_state *state,
+    uint32_t broker_id, uint32_t session_id, uint16_t request_vdm_state,
+    broker_base_vdm_record *result);
+uint32_t broker_base_vdm_consume(broker_base_vdm_state *state,
+    const broker_base_vdm_record *record);
 uint32_t broker_base_vdm_disconnect(broker_base_vdm_state *state,
     uint32_t broker_id, uint32_t session_id);
 

@@ -41,21 +41,24 @@ int main(void)
     if (broker_base_vdm_publish(&state, &source) != BROKER_BASE_VDM_STATUS_OK)
         return 4;
     memset(&result, 0, sizeof(result));
-    if (broker_base_vdm_get_next(&state, broker_id, session_id,
+    if (broker_base_vdm_peek_next(&state, broker_id, session_id,
         ASKING_FOR_DOS_BINARY, &result) != BROKER_BASE_VDM_STATUS_OK ||
         memcmp(&source, &result, sizeof(source)) != 0)
         return 5;
+    if (broker_base_vdm_consume(&state, &result) != BROKER_BASE_VDM_STATUS_OK ||
+        broker_base_vdm_consume(&state, &result) != BROKER_BASE_VDM_STATUS_BUSY)
+        return 6;
     if (broker_base_vdm_get_next(&state, broker_id, session_id,
         ASKING_FOR_DOS_BINARY | ASKING_FOR_WOW_BINARY, &result) !=
         BROKER_BASE_VDM_STATUS_INVALID)
-        return 6;
+        return 7;
     if (broker_base_vdm_get_next(&state, broker_id, session_id + 1u,
         ASKING_FOR_DOS_BINARY, &result) != BROKER_BASE_VDM_STATUS_UNKNOWN)
-        return 7;
+        return 8;
     if (broker_base_vdm_disconnect(&state, broker_id, session_id) !=
         BROKER_BASE_VDM_STATUS_OK ||
         broker_base_vdm_disconnect(&state, broker_id, session_id) !=
         BROKER_BASE_VDM_STATUS_UNKNOWN)
-        return 8;
+        return 9;
     return 0;
 }

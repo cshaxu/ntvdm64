@@ -87,6 +87,7 @@ $oemuniRoot = Join-Path $root 'src/mvdm-host/oemuni'
 $sessionRoot = Join-Path $root 'src/session'
 $brokerRoot = Join-Path $root 'src/broker'
 $brokerRecordTestSource = Join-Path $root 'tests/broker/base_vdm_record_test.c'
+$baseVdmBrokerTestSource = Join-Path $root 'tests/adapter-basesrv/base_vdm_broker_test.c'
 $baseDebugRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/debug'
 $hostRoot = Join-Path $root 'src/mvdm-host/softpc.new/host/src'
 $hostEntryRoot = Join-Path $root 'src/mvdm-host/softpc.new/obj.vdm'
@@ -211,7 +212,7 @@ $adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_com
 # ExitVDM is an original Base client call reached by selected SoftPC teardown
 # sources.  It already has one same-shaped session-owned implementation; keep
 # it in the formal closure instead of accepting an unresolved external edge.
-$adapterBaseSrvNames = @('base_vdm_client.c', 'base_vdm_local.c')
+$adapterBaseSrvNames = @('base_vdm_client.c', 'base_vdm_local.c', 'base_vdm_broker.c')
 $adapterMonitorNames = @('vdm_control.c', '../mvdm_vdm_tib.c')
 $adapterDebuggerNames = @('dbg_init.c', 'dbg_unavailable.c')
 $adapterRedirNames = @('mvdm_redirector_handle.c', 'mvdm_redirector_mailslot.c',
@@ -290,6 +291,9 @@ foreach ($name in $brokerNames) {
 }
 if (!(Test-Path -LiteralPath $brokerRecordTestSource -PathType Leaf)) {
     throw "Required broker record test missing: $brokerRecordTestSource"
+}
+if (!(Test-Path -LiteralPath $baseVdmBrokerTestSource -PathType Leaf)) {
+    throw "Required BaseVDM broker test missing: $baseVdmBrokerTestSource"
 }
 foreach ($name in $baseDebugNames) {
     if (!(Test-Path -LiteralPath (Join-Path $baseDebugRoot $name))) { throw "Original SoftPC base debug source missing: $name" }
@@ -682,6 +686,8 @@ $brokerObjects = foreach ($name in $brokerNames) {
 }
 $brokerRecordTestObject = 'obj/tests/base_vdm_record_test.obj'
 $graph.Add('build ' + $brokerRecordTestObject + ': cc ' + (NinjaPath $brokerRecordTestSource))
+$baseVdmBrokerTestObject = 'obj/tests/base_vdm_broker_test.obj'
+$graph.Add('build ' + $baseVdmBrokerTestObject + ': cc ' + (NinjaPath $baseVdmBrokerTestSource))
 $baseDebugObjects = foreach ($name in $baseDebugNames) {
     $object = 'obj/base-debug/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $baseDebugRoot $name)))
@@ -790,6 +796,7 @@ $graph.Add('build app-machine-shell.lib: lib ' + ($appObjects -join ' '))
 $graph.Add('build session.lib: lib ' + ($sessionObjects -join ' '))
 $graph.Add('build broker.lib: lib ' + ($brokerObjects -join ' '))
 $graph.Add('build broker-base-vdm-record-test.exe: broker_test_link ' + $brokerRecordTestObject + ' broker.lib')
+$graph.Add('build basesrv-base-vdm-broker-test.exe: broker_test_link ' + $baseVdmBrokerTestObject + ' basesrv-bindings.lib broker.lib session.lib')
 $graph.Add('build mvdm-softpc-effective-address.lib: lib ' + $effectiveAddressObject)
 $graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' '))
 $graph.Add('build basesrv-bindings.lib: lib ' + ($adapterBaseSrvObjects -join ' '))
