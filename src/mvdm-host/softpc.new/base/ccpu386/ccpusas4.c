@@ -1325,6 +1325,7 @@ c_GetPhyAdd IFN1(PHY_ADDR, addr)
 {
 	IU8 *retVal;
 	uint32_t translated_address;
+	PHY_ADDR requested_address = addr;
 
 	/* DIVERGENCE MVDM-HOST-DIV-036: preserve the original CCPU fast path for
 	 * normal SoftPC RAM, but first ask the source-shaped adapter whether this
@@ -1337,6 +1338,14 @@ c_GetPhyAdd IFN1(PHY_ADDR, addr)
 		addr = (PHY_ADDR)translated_address;
 	if (mvdm_softpc_physical_mapping_resolve(addr, &retVal))
 		return(retVal);
+	/* DIVERGENCE(MVDM-HOST-DIV-190): a fixed-container source audit may
+	 * observe only the scalar state of the original normal-RAM fallback.  The
+	 * default-off helper executes after both existing adapter probes miss and
+	 * before the unchanged pointer calculation; it cannot change the mapping,
+	 * retain the pointer or access guest memory. */
+	mvdm_softpc_record_direct_ram_access((uint32_t)requested_address,
+		(uint32_t)addr, (uint32_t)SasWrapMask, (uint32_t)Length_of_M_area,
+		(uintptr_t)Start_of_M_area);
 
 #ifdef BACK_M
 	retVal = (IU8 *)((IHPE)end_of_M - (IHPE)addr);

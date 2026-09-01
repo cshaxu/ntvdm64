@@ -50,6 +50,63 @@ static void mvdm_softpc_write_exception_report(const char *message,
         message_bytes);
 }
 
+typedef struct mvdm_softpc_direct_ram_observation {
+    LONG initialized;
+    LONG enabled;
+    LONG observed;
+    uint32_t requested_physical_address;
+    uint32_t direct_physical_address;
+    uint32_t wrap_mask;
+    uint32_t m_area_length;
+    uintptr_t m_area_base;
+} mvdm_softpc_direct_ram_observation;
+
+static mvdm_softpc_direct_ram_observation mvdm_direct_ram_observation;
+
+void mvdm_softpc_record_direct_ram_access(uint32_t requested_physical_address,
+    uint32_t direct_physical_address, uint32_t wrap_mask,
+    uint32_t m_area_length, uintptr_t m_area_base)
+{
+    if (InterlockedCompareExchange(&mvdm_direct_ram_observation.initialized,
+            1, 0) == 0 &&
+        GetEnvironmentVariableA("MVDM_SAS_DIRECT_RAM_REPORT_PATH", NULL,
+            0u) != 0u) {
+        InterlockedExchange(&mvdm_direct_ram_observation.enabled, 1);
+    }
+    if (mvdm_direct_ram_observation.enabled == 0)
+        return;
+    mvdm_direct_ram_observation.requested_physical_address =
+        requested_physical_address;
+    mvdm_direct_ram_observation.direct_physical_address =
+        direct_physical_address;
+    mvdm_direct_ram_observation.wrap_mask = wrap_mask;
+    mvdm_direct_ram_observation.m_area_length = m_area_length;
+    mvdm_direct_ram_observation.m_area_base = m_area_base;
+    InterlockedExchange(&mvdm_direct_ram_observation.observed, 1);
+}
+
+static void mvdm_softpc_write_direct_ram_observation(void)
+{
+    char message[256];
+    int formatted;
+
+    if (mvdm_direct_ram_observation.enabled == 0 ||
+        mvdm_direct_ram_observation.observed == 0)
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-SAS-DIRECT-RAM requested=%08lX direct=%08lX wrap=%08lX length=%08lX base=%0*llX resolver=miss state=copied\r\n",
+        (unsigned long)mvdm_direct_ram_observation.requested_physical_address,
+        (unsigned long)mvdm_direct_ram_observation.direct_physical_address,
+        (unsigned long)mvdm_direct_ram_observation.wrap_mask,
+        (unsigned long)mvdm_direct_ram_observation.m_area_length,
+        (int)(sizeof(uintptr_t) * 2u),
+        (unsigned long long)mvdm_direct_ram_observation.m_area_base);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message))
+        return;
+    mvdm_softpc_write_optional_report("MVDM_SAS_DIRECT_RAM_REPORT_PATH",
+        message, (DWORD)formatted);
+}
+
 int mvdm_softpc_terminate_current_session(uint32_t vdm_for_wow,
     uint32_t completion_code)
 {
@@ -172,6 +229,7 @@ void mvdm_softpc_record_unhandled_exception(
     output = GetStdHandle(STD_ERROR_HANDLE);
     if (output != NULL && output != INVALID_HANDLE_VALUE)
         (void)WriteFile(output, message, (DWORD)(cursor - message), &written, NULL);
+    mvdm_softpc_write_direct_ram_observation();
     mvdm_softpc_write_exception_report(message, (DWORD)(cursor - message));
 }
 

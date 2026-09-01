@@ -488,7 +488,7 @@ and
 
 ## Active Packet
 
-**Active: M0 T355 S16 — fixed-container C-VID prerequisite observation.**
+**Active: M0 T355 S19 — original XMS allocation/commit lifecycle audit.**
 
 ### M0 T355 S1 — Closed short-path permanent COMMAND fixed-container verification
 
@@ -887,6 +887,60 @@ proves the S15 null-vector terminal is gone and that original `50:42` is now
 reached.  The one allowed run transfers the succeeding access violation to the
 original CPU40 `ccpusas4.c::_phyR` physical-read owner; it does not authorize a
 retry or a repair in this packet.
+
+### M0 T355 S17 — Active original CCPU SAS physical-memory lifecycle audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S17; ordinary mode (single-person dual-role implementation). |
+| Objective | Reconstruct the reached original `config -> sas_term -> sas_init -> host_sas_init -> InitIntelMemory -> c_GetPhyAdd -> phyR` lifecycle and identify the exact source-owned reason that a physical read targeted the formally allocated M-area base. |
+| Non-goals | No BOP/DEM repair, synthetic memory, unconditional slow path, guest/firmware mutation, mapping-manager redesign, CPU profile change, vector completion, new runtime run, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics claim. |
+| Reference Baseline | S16's one fixed-container exception at link address `0x00409651`; original CPU40 `ccpusas4.c`, `sim32.c`, `nt_mem.c`, `config.c` and selected startup composition. |
+| Files And ABI Surface | Original SAS/CCPU memory lifecycle and existing physical-mapping adapter only. S17 is a source/definition/caller audit and does not change production ABI. |
+| Verification | Original definition/initializer/caller/lifetime walk, source-versus-mirror/overlay review, formal-map attribution and documentation governance/diff review. No runtime execution. |
+| Exit Criteria | Every selected lifecycle handoff has an owner and an original, binding-only, adapter-backed, overlay-required or exact unavailable disposition; S17 selects at most one source-shaped repair cohort or records an exact terminal. |
+
+**S17 closure:** [CCPU SAS physical-memory lifecycle audit](etc/evidence/m0-t355-s17-ccpu-sas-physical-memory-lifecycle-audit-001.md)
+proves that the S16 `_phyR` access is the original `Start_of_M_area + addr`
+RAM fallback, not an external mapping or an EMS alias.  Static source cannot
+identify the Intel address/lifecycle state at the faulting access; it admits
+the bounded S18 scalar observation only.
+
+### M0 T355 S18 — Closed original CCPU SAS direct-RAM state observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S18; ordinary mode (single-person dual-role implementation). |
+| Objective | Add one default-off, state-neutral record at the existing original CCPU `c_GetPhyAdd` normal-RAM seam, then make one fixed-container observation sufficient to distinguish invalid Intel address, uncommitted selected span, or invalidated SAS backing. |
+| Non-goals | No BOP/DEM repair, synthetic memory, guest/firmware mutation, memory commit/decommit change, mapping-manager redesign, CPU semantics/profile change, vector completion, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics claim. |
+| Reference Baseline | S16 exact `_phyR` exception and S17 source proof that no external physical mapping is active on the selected startup path. |
+| Files And ABI Surface | Existing original `ccpusas4.c::c_GetPhyAdd`, one default-off observer binding and existing child-only fixed-container reporter. The record contains copied scalar values only; no guest pointer or host HANDLE crosses an ABI. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original call/source order, focused observer positive/negative review, formal CPU40/x86 link, exactly one fixed-container observation, documentation governance/export and diff review. |
+| Expected Markers | The first direct-RAM access that reaches the observed fault target reports Intel address, M-area base, span, wrap mask, and alias/resolver dispositions before the existing source exception or a source-owned successor. |
+| Asset Needs | Existing immutable `O:\\ntvdm` package, formal CPU40/x86 product and fixed observer only. No source/media import or host-system mutation. |
+| Reporting Requirements | Distinguish source fact from runtime scalar fact; state whether the direct address is in range and whether the target derives from the current M-area base. Do not infer a repair from an unclassified exception. |
+| Stop Conditions | Any need to change memory allocation/commit behavior, provide a synthetic physical page, alter CPU/BOP result, record a pointer, retry, or broaden to another device pauses for a separate admission. |
+| Exit Criteria | One valid scalar observation attributes the physical-access branch and selects at most one original-compatible repair cohort or exact terminal. |
+
+**S18 closure:** [CCPU SAS direct-RAM state observation](etc/evidence/m0-t355-s18-ccpu-sas-direct-ram-state-observation-001.md)
+proves that the original normal-RAM fallback requested physical address
+`0x00110000`, inside the reserved 16 MiB M-area, and derived the fault target
+`0x039e0000` from its current base.  The reached address is just beyond the
+initial conventional/A20 commit range; the sole successor owner is original
+XMS allocation/commit lifecycle, not CCPU, C-VID, mapping, EMS or `50:42`.
+
+### M0 T355 S19 — Active original XMS allocation/commit lifecycle audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S19; ordinary mode (single-person dual-role implementation). |
+| Objective | Reconstruct the complete original CPU40 startup path from `scs_init -> XMSInit -> SAInitialize -> xmsCommitBlock -> sas_manage_xms` and its selected `InitIntelMemory` commit contract; determine the smallest original-compatible binding that makes allocated XMS address `0x00110000` accessible without changing CCPU fallback semantics. |
+| Non-goals | No CCPU/`c_GetPhyAdd` workaround, eager full-span commit, synthetic physical mapping, BOP/DEM result change, guest/firmware mutation, mapper redesign, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or runtime run. |
+| Reference Baseline | S18 scalar evidence; original `softpc.new/host/src/{nt_msscs.c,stubs.c,nt_mem.c,sim32.c}`, `xms.486/{xms.c,xmsmemr.c,xmsblock.c}`, and selected CPU40/x86 formal graph. |
+| Files And ABI Surface | Original `XMSInit`, `SAInitialize` callback shape, original `xmsCommitBlock`/`xmsDecommitBlock` and existing `sas_manage_xms` SoftPC interface.  S19 starts as source/caller/build-selection audit only. |
+| Verification | Original definition/caller/conditional-compilation walk; original-versus-mirror/overlay comparison; formal graph/source selection review; documentation governance and diff review. No runtime execution in S19 admission. |
+| Exit Criteria | Every lifecycle edge has a source owner and final disposition; the selected successor is an original interface binding or a documented exact terminal.  No commitment behavior changes until a separately bounded recovery S is admitted. |
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 

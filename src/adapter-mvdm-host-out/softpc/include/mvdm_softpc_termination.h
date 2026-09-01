@@ -91,4 +91,12 @@ void mvdm_softpc_record_config_done(uint16_t guest_cs);
 void mvdm_softpc_record_config_command_store(uint32_t guest_linear_address,
     uint8_t value);
 
+/* Default-off CCPU SAS observation.  The original caller has already decided
+ * that the normal RAM calculation is required.  This copies scalar lifecycle
+ * state only; it neither retains nor exposes a guest/native pointer, changes
+ * the mapping decision, or touches the memory being read. */
+void mvdm_softpc_record_direct_ram_access(uint32_t requested_physical_address,
+    uint32_t direct_physical_address, uint32_t wrap_mask,
+    uint32_t m_area_length, uintptr_t m_area_base);
+
 #endif
