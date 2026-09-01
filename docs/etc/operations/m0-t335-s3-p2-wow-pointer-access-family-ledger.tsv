@@ -1,0 +1,11 @@
+macro	selected_wow32_source_uses	original_role	lease-compatible_shape	package_disposition
+GETARGPTR	763	Derive a parameter pointer from an already resolved VDMFRAME.	Yes, only as a byte offset inside the still-live parent frame lease.	Must not independently acquire or release; source-wide pointer-plane contract required.
+FREEVDMPTR	402	End a temporary VDM alias lifetime.	Yes, if it resolves the exact active scoped lease and rejects an unknown pointer.	Must be paired with each acquisition across selected WOW32 sources; a callback-only override is prohibited.
+GETVDMPTR	273	Resolve a fixed-size guest object from a 32-bit VDM pointer.	Yes, with required byte count and an access-selected scoped lease.	Candidate for a same-named macro bridge after full nested-lifetime audit.
+FLUSHVDMPTR	178	Commit a modified guest object before its original alias release.	Yes, by marking the exact active write lease for commit.	Commit must occur before FREEVDMPTR and cannot survive host_simulate or another async boundary.
+GETPSZPTR	164	Resolve an optional terminated guest string.	Partially; maximum scan/read and termination failure must be source-defined.	Requires separate bounded-string policy; not enabled by frame bridge.
+GETMISCPTR	148	Resolve an optional variable-sized guest object.	Partially; original call sites supply only the minimal initial extent.	Requires source-family audit before any selected source is enabled.
+GETOPTPTR	95	Resolve optional fixed/variable guest object.	Partially; zero/null test is source-preserved, extent remains call-site-specific.	Requires source-family audit before any selected source is enabled.
+GETFRAMEPTR	36	Resolve VDMFRAME/CBVDMFRAME from a numeric stack location.	Yes, because each reached pointer type has a fixed original structure size.	T335 S3 P1 establishes this smallest bridge; S3 P2 forbids making it a private callback-only macro override.
+ALLOCVDMPTR	20	Resolve an output-only guest object.	Yes for fixed extent, but all release/flush sites must be paired.	Shares the source-wide pointer-plane contract.
+GETSTRPTR	3	Resolve and log a bounded guest string.	Partially; logging and variable length require a bounded source policy.	Deferred with the string access family.

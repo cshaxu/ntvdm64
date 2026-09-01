@@ -12,21 +12,21 @@
 | --- | --- |
 | Identifier Mode | M0 T335 S3; Ordinary Mode (single-person dual-role implementation). |
 | Admission And Approval | T335/S1 source/profile closure under the owner’s standing direction to execute ordered queue packages. |
-| Objective | Implement and locally verify the smallest declared non-GUI original WOW32 vertical profile: scoped original callback frame, CPU40 recursive resume/return and exact unavailable boundaries. |
+| Objective | Recover one source-wide, same-shaped WOW32 temporary-pointer plane, then use it to implement and locally verify the smallest declared non-GUI original callback/frame profile. |
 | Non-goals | No generic Win16 API, GUI/USER/GDI, WOWEXEC/CSRSS/kernel-VDM recreation, BOP leaf patch, new mapper, guest-media change, arbitrary guest load, raw native identity or Bochs route. |
 | Reference Baseline | T335/S1 source/profile rebaseline and T335/S2 `CallBack16` contract ledger; original `wow32/wcall16.c`; CCPU40 SoftPC/monitor/session mapping contracts. |
-| Files And ABI Surface | The source-shaped scoped-frame bridge, original `CBVDMFRAME`/`VDMFRAME`, CPU40 `host_simulate`, task-frame binding and source-contract fixtures. |
+| Files And ABI Surface | Original `wow32.h` temporary-pointer macro family, scoped-frame bridge, `CBVDMFRAME`/`VDMFRAME`, CPU40 `host_simulate`, task-frame binding and source-contract fixtures. |
 | Applicable Rules | Execution, source policy, mirror/overlay, architecture, coding, documentation, session mapping and CCPU40-only machine rules. |
 | Verification | Narrow source-shaped bridge and original-source selection review; focused frame/lease/nested-return tests; x86/x64 selected-source build review. |
-| Expected Markers | Original source ordering and failure behavior with bounded guest leases; no callback scheduler, raw pointer or business semantics in an adapter. |
+| Expected Markers | One package-local original-pointer binding with bounded guest leases, then original callback ordering and failure behavior; no callback scheduler, raw pointer or business semantics in an adapter. |
 | Asset Needs | Existing source mirrors, adapter/session code and current CCPU40 formal graph; no new guest media or private host service. |
 | Reporting Requirements | Distinguish the declared non-GUI transaction from generic Win16/WOW product claims; name every unresolved monitor/broker/guest prerequisite. |
 | Stop Conditions | The required profile would need a generic adapter, raw host pointer/HANDLE, second mapping manager, changed CCPU semantics, invented callback scheduler or private product-shell recreation. |
-| Exit Criteria | One original-source-shaped non-GUI callback transaction is locally verified with bounded lease lifetime and original CCPU40 return ordering; all other WOW routes remain explicitly unavailable or transferred. |
+| Exit Criteria | The complete selected WOW32 temporary-pointer family has one lease/commit/lifetime contract; one original-source-shaped non-GUI callback transaction is then locally verified with original CCPU40 return ordering; all other WOW routes remain explicitly unavailable or transferred. |
 | Original Owner Request | Execute the queue in single-person dual-role mode, use original source first, minimize mirror divergence and keep adapters narrow. |
 | Similar-Issue Sweep | WOW32/FAX hosts, selected manifest versus inactive forms, callbacks, frame layouts, CCPU/SAS/monitor calls, command broker calls, guest/resource identity, public Win32, private USER/GDI, VDD, cross-process and guest-media boundaries. |
 
-**Plan:** [M0 T335 WOW32/Win16 owner package recovery](etc/operations/m0-t335-wow32-win16-owner-package-recovery-plan-001.md). **S1 closed:** [current source/ABI/profile rebaseline](etc/evidence/m0-t335-s1-wow-source-abi-profile-rebaseline-001.md) and its [315-row mirror/profile ledger](etc/operations/m0-t335-s1-wow-source-profile-ledger.tsv). **S2 closed:** [callback/frame contract](etc/evidence/m0-t335-s2-wow-callback-frame-contract-001.md) and its [twelve-element ledger](etc/operations/m0-t335-s2-wow-callback-frame-contract-ledger.tsv). **S3 P1 closed:** [scoped-frame lease](etc/evidence/m0-t335-s3-p1-wow-scoped-frame-lease-001.md) passes focused x86/x64 tests. **S3 active:** only the original-source hook and CPU40 recursive-return proof remain.
+**Plan:** [M0 T335 WOW32/Win16 owner package recovery](etc/operations/m0-t335-wow32-win16-owner-package-recovery-plan-001.md). **S1 closed:** [current source/ABI/profile rebaseline](etc/evidence/m0-t335-s1-wow-source-abi-profile-rebaseline-001.md) and its [315-row mirror/profile ledger](etc/operations/m0-t335-s1-wow-source-profile-ledger.tsv). **S2 closed:** [callback/frame contract](etc/evidence/m0-t335-s2-wow-callback-frame-contract-001.md) and its [twelve-element ledger](etc/operations/m0-t335-s2-wow-callback-frame-contract-ledger.tsv). **S3 P1 closed:** [scoped-frame lease](etc/evidence/m0-t335-s3-p1-wow-scoped-frame-lease-001.md) passes focused x86/x64 tests. **S3 P2 closed:** [pointer-access family audit](etc/evidence/m0-t335-s3-p2-wow-pointer-access-family-audit-001.md) rejects a callback-only macro change. **S3 active:** source-wide pointer binding, then original-source hook and CPU40 recursive-return proof.
 
 **No other active M/T/S packet.** M0 T334 is closed below.
 
