@@ -2,38 +2,25 @@
 
 ## Current Work
 
-**Active: M0 T350 S3.** T349 is closed. T350 has re-admitted the complete
-CPU40/SAS/BIOS-exchange bootstrap cohort after original `SVC_CMDSETINFO`.
-The older T336 terminal record is not being reopened: T347/T340/T345/T349
-closed its named prerequisites. No trace-selected BOP repair is admitted.
+**No active M/T/S packet.** M0 T350 is closed.  Its source/formal CPU40/SAS
+bootstrap cohort and one fixed-container observation are recorded in the
+[T350 closure](history/m0-t350-cpu40-ntdos-guest-bootstrap-continuity-closure-20260901.md).
+The next candidate remains Queue item 4, SoftPC graphics-workload integration
+continuation.  It requires a new owner admission; no trace-selected BOP repair
+is authorized between packets.
 
-### M0 T350 S3 — CPU40/SAS/BIOS-exchange local-contract and formal closure
+### M0 T350 — Closed CPU40/NTDOS guest-bootstrap continuity
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T350 S3; ordinary mode (single-person dual-role implementation). |
-| Objective | Verify the declared original COMMAND-return → CPU40/SAS → NTDOS stack-transition cohort without widening it. |
-| Non-goals | No trace-selected BOP leaf, guest rewrite/rebuild, loader replacement, virtual media, second mapper, CPU30, Bochs, x64 runtime, host installation or kernel/CSRSS product shell. |
-| Source Baseline | T350 S2 recovery evidence; selected OpenNT COMMAND/NTDOS/SoftPC CPU40 source; T340/T345/T347/T349 closures. |
-| Files And ABI Surface | Existing CPU40 access-vector, SAS, original CPU wrapper and session execution/lease bindings; no new production ABI. |
-| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only and coding rules. |
-| Verification | Existing focused CPU40/SAS execution contract, fresh formal CPU40/x86 product link, documentation governance and diff review. |
-| Expected Markers | Original vector selects `c_cpu_simulate`; original SAS performs bounded RAM access; selected product links the unchanged cohort. |
-| Asset Needs | Existing fixture, selected source/media and formal Ninja generator; no guest rebuild or host-system mutation. |
-| Reporting Requirements | Separate formal/link facts from the later fixed-container runtime observation; record no COMMAND.COM or child-execution claim. |
-| Stop Conditions | A test requiring guest alteration, a new BOP semantic, new mapper, alternate executor or host-policy change pauses for re-admission. |
-| Exit Criteria | The local contract and selected formal CPU40/x86 link pass with no new source-derived behavior; S4's fixed observation scope is frozen. |
-| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
-| Similar-Issue Sweep | CPU vector initialization, direct/recursive executor entry, SAS fetch/write, guest-memory lease boundaries, BIOS exchange ownership and post-service stack effects. |
+| Identifier Mode | M0 T350; closed ordinary-mode packet. |
+| Delivered Result | Original COMMAND-to-CPU40/SAS/bootstrap source cohort is source/formal closed; one frozen non-debug console-owning run is classified. |
+| Verification | Passed existing CPU40/SAS lifecycle fixture, fresh 425-action CPU40/x86 formal link, and one immutable-media eight-second observation. |
+| Runtime Boundary | Observation reaches original `54:05` ingress then times out; it neither proves `cmdSetInfo` return nor NTDOS/COMMAND child execution. |
+| Successor | Queue item 4: SoftPC graphics-workload integration continuation. |
 
 **Plan:** [CPU40/NTDOS guest-bootstrap continuity](etc/operations/proposal-cpu40-ntdos-guest-bootstrap-continuity-002.md).
-
-**S1 closure:** [current source/state re-admission](etc/evidence/m0-t350-s1-post-cmdsetinfo-current-source-state-readmission-001.md)
-and its cohort ledger distinguish T336's old terminal record from the
-currently unproven original CPU40/SAS/BIOS-exchange bootstrap mechanics.
-**S2 closure:** [CPU40/SAS/BIOS bootstrap recovery](etc/evidence/m0-t350-s2-cpu40-sas-bios-bootstrap-recovery-001.md)
-proves that the complete first post-service cohort already has one original or
-same-shaped route and rejects a second BOP, mapper or executor.
+**Closure:** [T350 history](history/m0-t350-cpu40-ntdos-guest-bootstrap-continuity-closure-20260901.md).
 
 ### M0 T349 — Closed package-path capacity record
 

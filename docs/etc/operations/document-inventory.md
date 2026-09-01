@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3694 |
+| Documentation records | 3697 |
 | --- | --- |
-| Generated UTC | 2026-09-01T16:07:46Z |
+| Generated UTC | 2026-09-01T16:15:41Z |
 
 ## Entries
 
@@ -918,6 +918,8 @@ content-divergent entries.
 | etc/evidence/m0-t349-s3-command-package-path-capacity-closure-001.md | indexed supporting material | 5bedf6df0fa05c42fd32520c830cee8360a33394ffd14058353e261d0a953624 |
 | etc/evidence/m0-t350-s1-post-cmdsetinfo-current-source-state-readmission-001.md | indexed supporting material | a4dcd38fe93345c71cde8f24814642ad1cf64a357904c5afc55bdf47ffa45f50 |
 | etc/evidence/m0-t350-s2-cpu40-sas-bios-bootstrap-recovery-001.md | indexed supporting material | 18b00cc48351b5264f2cd5b584db258a001fcc9998d769b3798d05ea3e4845d3 |
+| etc/evidence/m0-t350-s3-cpu40-sas-bootstrap-formal-closure-001.md | indexed supporting material | 1f94708bb6f7bb3a421e17b9e4e1a5c81f7ada9d70b03f5ef013efa8e2530244 |
+| etc/evidence/m0-t350-s4-fixed-bootstrap-observation-001.md | indexed supporting material | a25c20fe5d412ddf93cc25bdc66ec5b03b283625ea2d70bd9b90ce330ba5878c |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -3421,6 +3423,7 @@ content-divergent entries.
 | history/m0-t347-command-dem-softpc-scalar-alias-lifecycle-closure-20260901.md | closed task history | 4c8c4d7d2c220a94d0be4350e02d61a37f1666518833191efdcef70fd26eb368 |
 | history/m0-t348-guest-dos-wow16-artifact-matrix-closure-20260901.md | closed task history | 183f2d09415a1fbd139a3d9cd4baa7e1d080b7251d014c9340db8681f8b535c4 |
 | history/m0-t349-executable-relative-mvdm-package-path-capacity-closure-20260901.md | closed task history | a39230a74b2274f0c1aed9dd5ffcda4f9a01a9aa02dc831b565fcfcc0eff0657 |
+| history/m0-t350-cpu40-ntdos-guest-bootstrap-continuity-closure-20260901.md | closed task history | 7e1fe4f53fcb9fe827bf052c8efbff9fddc90c277fcacf379832ad6a82d349c5 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -3708,7 +3711,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | e05882595bc7f6e4ec3a88a1130881456dcdeeddfb68b2d74ec5f87e3290db75 |
+| STATUS.md | principal control document | 881a9fb42edb7e716f02c538fe50d3a14312d1dc1095335183112736f3d52bcd |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
