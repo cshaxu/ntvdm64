@@ -2,11 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T339 S2.** S1 has completed the source map of both direct
-`50:3D` callsites and the distinct `mem_err -> stall` family. S2's one
-permitted passive observation stopped at original `54:05`, before `50:3D`;
-it selected no recovery cohort and its resulting admission boundary is now
-recorded as evidence.
+**Active: M0 T340 S1.** T339 is closed at a source-defined resident
+DOS-BIOS device-initialization owner transfer. T340 begins with a whole
+original-package source/ABI/failure inventory; it admits no device behavior
+change or repeat runtime observation.
 
 ## Active Packet
 
@@ -32,7 +31,29 @@ recorded as evidence.
 
 **Evidence:** [original guest-predecessor contract](etc/evidence/m0-t339-s1-original-guest-predecessor-contract-001.md) and [row ledger](etc/operations/m0-t339-s1-guest-predecessor-contract-ledger.tsv).
 
-### M0 T339 S2 — Passive predecessor discriminator and cohort selection
+### M0 T340 S1 — Resident DOS-BIOS device-initialization contract
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T340 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 1, admitted under the standing owner direction to execute the ordered queue after T339's source-defined transfer. |
+| Objective | Build the complete original `charinit -> DEVIOCALL2 -> strategy/interrupt` package map, identify every resident device and original machine/firmware dependency, and classify the first smallest source-shaped recovery cohort without implementing it. |
+| Non-goals | No BOP/provider patch, guest/media/configuration change, device behavior change, FDC/INT15 repair, CPU semantic change, host-drive policy, alternate executor, Bochs route, kernel/CSRSS recreation, GUI/presentation work, or additional runtime observation. |
+| Reference Baseline | T337 package composition; T338 configuration/root evidence; T339 closure; selected original CPU40 graph and fixed short-root stage. |
+| Files And ABI Surface | Original DOS `msinit.asm`/`dev.asm`, BIOS `msinit.asm`/`msbio1.asm`, resident device headers and request packets, original SoftPC firmware/device interfaces, and existing machine/session mappings. |
+| Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, architecture, coding, mapping-manager and CPU40-only rules. |
+| Verification | Complete definition/caller/failure walk, resident-header and firmware ownership ledger, existing composition review, documentation governance and diff checks; no runtime retry. |
+| Expected Markers | Every reached resident header has a unique strategy/interrupt owner, every direct machine dependency has a disposition, and one complete earliest cohort or explicit hard boundary. |
+| Asset Needs | Existing selected MVDM guest/host mirrors, staged firmware/media manifests, formal CPU40 graph and T339 evidence; no new imports or media. |
+| Reporting Requirements | Separate original guest source facts, current composition facts and runtime inference; retain original device order and failure behavior; record rejected recovery rungs. |
+| Stop Conditions | A need to alter guest media/configuration, enable a device, change CPU behavior, create a new mapper, import unreviewed source, or cross into a different owner package requires re-admission. |
+| Exit Criteria | A complete package ledger identifies the current resident device chain, strategy/interrupt flow, machine dependencies and one source-backed next disposition; no device success is claimed without an admitted follow-up S. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | CON/AUX/PRN/CLOCK/COM/LPT headers, BIOS request dispatch, A20, timer/PIC/keyboard/video/serial/parallel interfaces, configured device chain and first post-device DEM BOP. |
+
+**Plan:** [M0 T340 resident device-initialization recovery](etc/operations/m0-t340-resident-device-initialization-recovery-plan-001.md).
+
+### M0 T339 S2 — Passive predecessor discriminator and cohort selection (closed)
 
 | Field | Record |
 | --- | --- |
@@ -42,7 +63,7 @@ recorded as evidence.
 | Required result | A recorded original callsite/family discriminator and a single source-backed S3 recovery disposition, or an evidence-backed admission blocker. |
 | Verification | One unchanged short-root container observation, compared only to the S1 source map; no product behavior change. |
 
-**Current evidence:** [passive terminal discriminator observation](etc/evidence/m0-t339-s2-passive-terminal-discriminator-001.md). The sole observation was a fixed-container timeout after `54:05`, not a `50:3D` callsite record; S2 remains active only to govern its no-selection disposition. No S3 repair is admitted.
+**Evidence:** [passive terminal discriminator observation](etc/evidence/m0-t339-s2-passive-terminal-discriminator-001.md) and [T339 closure](history/m0-t339-minimal-vertical-slice-integration-closure-20260831.md). The sole observation was a fixed-container timeout after `54:05`, not a `50:3D` callsite record; it selected no `demExitVDM` repair and transferred the exact original resident-device owner to T340.
 
 **Plan:** [M0 T339 plan](etc/operations/m0-t339-minimal-vertical-slice-integration-closure-plan-001.md). T339 starts from T338's closed short-root `50:3D` transfer and does not reopen configuration capacity, FDC/INT15, or BOP leaf work.
 

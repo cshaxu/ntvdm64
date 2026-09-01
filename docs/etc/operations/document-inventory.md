@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3625 |
+| Documentation records | 3627 |
 | --- | --- |
-| Generated UTC | 2026-09-01T06:12:08Z |
+| Generated UTC | 2026-09-01T06:18:30Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | bf48a03116b168d01e20a4aa0b2e23f900292ee75d5b639f3a317b74e72bb0e5 |
+| QUEUE.md | principal control document | 10c0bc6b4cbed3b03a769d0a16fc24159fb3596fbce78fa4d58db4853d863ee7 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | b7c736b2d817437a5f97c12f55a0850d7a57c66789e97b8f1107d7fc33bb6352 |
+| STATUS.md | principal control document | 0597dc4eaa38c8cc3cb1f74c12f16e059c415b4956e498d1fc2799a626754ede |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1789,8 +1789,9 @@ content-divergent entries.
 | etc/operations/m0-t337-s1-packaged-system-file-root-contract-ledger.tsv | indexed supporting material | a295866e2a46ed3f3327aa4d22d1fce4b2df11fc000e40f54cba2ecc93a2aa39 |
 | etc/operations/m0-t338-minimal-dos-guest-execution-controlled-return-plan-001.md | indexed supporting material | 72174937f035fea87a5ec81d505fbb742cfeda0cbca6e2e53b5074667cd07534 |
 | etc/operations/m0-t338-s1-child-parent-return-precondition-ledger.tsv | indexed supporting material | ff4495f645361b629a0f4e3eb7e14d9990856a78c980e7c91c47a572f51deac8 |
-| etc/operations/m0-t339-minimal-vertical-slice-integration-closure-plan-001.md | indexed supporting material | 0e8330d159a69bb52450bc5343e0136881b800b8a3f629a12e7708a6f3756fac |
+| etc/operations/m0-t339-minimal-vertical-slice-integration-closure-plan-001.md | indexed supporting material | e9c018646d4e8f110dbc7796d82513079eb33b69ef80146660c6d99a76f2e306 |
 | etc/operations/m0-t339-s1-guest-predecessor-contract-ledger.tsv | indexed supporting material | 576df2f05b0085daee89e29ca4a4cbf6114cd1ce3ec267db245acb9ebc003a9e |
+| etc/operations/m0-t340-resident-device-initialization-recovery-plan-001.md | indexed supporting material | 4dbc524c9f26547efd393a5209e85cf7f580bff7b509b354d3e0029329190edc |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3532,6 +3533,7 @@ content-divergent entries.
 | history/m0-t336-cpu40-ntdos-post-cmdsetinfo-continuity-closure-20260831.md | closed task history | 7e0e1996c540d418a9c255d4912c15c9b243dfa3b5c1790c9ba4d1b97493c541 |
 | history/m0-t337-packaged-mvdm-system-root-composition-closure-20260831.md | closed task history | 8428aaff94bfc81fdedebea3d058ad82de1ec94b71d25832a0992463e7da1f48 |
 | history/m0-t338-minimal-dos-guest-execution-controlled-return-closure-20260831.md | closed task history | fcd58d1dc5bfa88c205747815a753fcd27a3bbe660a7d20830fbf5b96f66ba0c |
+| history/m0-t339-minimal-vertical-slice-integration-closure-20260831.md | closed task history | 1495f7622fd0383b455c4066f9e3533d3c4ef8ad04968db54b12c7b9e1ec896f |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

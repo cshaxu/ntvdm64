@@ -45,7 +45,7 @@ is retired and is neither a production route nor an acceptance row.
 
 | Order | Candidate implementation package |
 | --- | --- |
-| 1 | Minimal vertical-slice integration closure — fixed short-root x86 runtime observation plus paired x86/x64 build/link matrix, negative cases and no-bypass reversion review for the completed configuration/DEM slice. |
+| 1 | Resident DOS-BIOS device-initialization recovery — whole original `charinit -> DEVIOCALL2 -> strategy/interrupt` owner-package source/ABI/failure review before any device repair; transferred by the preceding vertical-slice closure. |
 | 2 | VDD owner package |
 | 3 | Debugger/BDE/FAX owner packages |
 | 4 | Broker process and cross-process coordination |

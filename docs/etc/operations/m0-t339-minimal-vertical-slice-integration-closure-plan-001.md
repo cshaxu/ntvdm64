@@ -49,16 +49,18 @@ source contract; it may not be inferred from the terminal service alone.
 original BOP ingress through `54:05` and then timed out; it did not reach
 `50:3D`, so its copied register discriminator was not emitted. The resulting
 [S2 evidence](../evidence/m0-t339-s2-passive-terminal-discriminator-001.md)
-selects no recovery cohort. A subsequent task must first admit the exact
-post-`54:05` continuation boundary; it must not convert this timeout into a
-speculative `demExitVDM` repair or rerun changed containers.
+selects no `demExitVDM` recovery cohort. Static source review establishes the
+post-`54:05` continuation as original resident DOS-BIOS device initialization:
+`charinit -> DEVIOCALL2 -> strategy/interrupt` runs before the next
+`SVC_DEMGETDPBLIST` BOP. That is a complete machine/firmware owner transfer,
+not a `demExitVDM` inference. **Closed:** the transfer is recorded in the
+[T339 closure](../../history/m0-t339-minimal-vertical-slice-integration-closure-20260831.md).
 
 ### S3 — Fixed vertical-slice result
 
-Rebuild/link the selected x86 and x64 formal product graphs. Run at most one
-unchanged short-root, console-owning x86 container and record either an
-original declared-command/guest boundary or the next exact source-defined
-owner transfer.
+Not admitted. S2 selected no recovery change and already established the next
+exact source-defined owner transfer. A second fixed-container run would not
+meet the one-observation rule and is expressly excluded.
 
 ## Exit
 
