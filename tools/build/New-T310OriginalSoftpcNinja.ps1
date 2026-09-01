@@ -400,6 +400,19 @@ $includeRootPaths = @(
     'src/session'
 )
 $includeRoots = $includeRootPaths | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
+$softpcIncludeRootPaths = [System.Collections.Generic.List[string]]::new()
+foreach ($path in $includeRootPaths) {
+    if ($path -eq 'src/mvdm-host/softpc.new/base/inc') { continue }
+    $softpcIncludeRootPaths.Add($path)
+    if ($path -eq 'src/adapter-mvdm-host-out/win32/include') {
+        # SoftPC's original `config.h` must precede the unrelated OpenNT Net
+        # `config.h`.  This is an original header-basename disambiguation,
+        # not a source divergence.  Non-SoftPC MVDM packages retain the
+        # ordinary OpenNT include order below.
+        $softpcIncludeRootPaths.Add('src/mvdm-host/softpc.new/base/inc')
+    }
+}
+$softpcIncludeRoots = $softpcIncludeRootPaths | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $gdpGeneratedInclude = '/I "' + (NinjaPath $gdpGeneratedRoot) + '"'
 $cvidcGeneratedRoot = Join-Path $build 'generated'
 $cvidcGeneratedInclude = '/I "' + (NinjaPath $cvidcGeneratedRoot) + '"'
@@ -410,7 +423,7 @@ $cvidcGeneratedInclude = '/I "' + (NinjaPath $cvidcGeneratedRoot) + '"'
 # This is original generated-header provenance, not a product-wide include
 # preference or a replacement API.
 $cvidcFirstRootPaths = [System.Collections.Generic.List[string]]::new()
-foreach ($path in $includeRootPaths) {
+foreach ($path in $softpcIncludeRootPaths) {
     if ($path -eq 'src/mvdm-host/softpc.new/base/cvidc') { continue }
     if ($path -eq 'src/mvdm-host/softpc.new/base/ccpu386') {
         $cvidcFirstRootPaths.Add('src/mvdm-host/softpc.new/base/cvidc')
@@ -431,7 +444,7 @@ $cvidcFirstIncludeRoots = $cvidcFirstRootPaths | ForEach-Object { '/I "' + (Ninj
 $baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DMVDM_XMS_SESSION_BACKEND /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' +
     ''
-$baseFlags = $baseCommonFlags + ($includeRoots -join ' ') + ' ' + $gdpGeneratedInclude
+$baseFlags = $baseCommonFlags + ($softpcIncludeRoots -join ' ') + ' ' + $gdpGeneratedInclude
 $hostFlags = $baseFlags + ' /FI "' + (NinjaPath $hostCrtRedirect) + '"'
 # The original OpenNT ABI header exposes its user-mode VDM TIB under _X86_.
 # This is a declaration gate for the selected Win32/x86 build, not the retired

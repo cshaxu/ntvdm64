@@ -3,7 +3,7 @@ import path from "node:path";
 
 const root = path.resolve(process.argv[2] ?? process.cwd());
 const architecture = process.argv[3] ?? "x86";
-const buildRoot = path.resolve(process.argv[4] ?? path.join(root, "build", "M0-T325", "S2", architecture));
+const buildRoot = path.resolve(process.argv[4] ?? path.join(root, "build", "M0-T334", "S2", architecture));
 const vsDevCmd = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat";
 
 if (architecture !== "x86" && architecture !== "x64") throw new Error("architecture must be x86 or x64");
@@ -13,7 +13,6 @@ fs.mkdirSync(path.join(buildRoot, "obj"), { recursive: true });
 const toNinja = value => value.replaceAll("\\", "/").replace(":", "$:");
 const includeRoots = [
   "src",
-  "src/adapter-mvdm-host-out/redir/include",
   "src/adapter-mvdm-host-out/softpc/include",
   "src/adapter-mvdm-host-out/win32/include",
   "src/mvdm-host/inc",
@@ -72,4 +71,4 @@ const ninja = [
   ""
 ].join("\n");
 fs.writeFileSync(path.join(buildRoot, "build.ninja"), ninja, "utf8");
-console.log(`Generated T325 S2 workstation-query graph: ${buildRoot}`);
+console.log(`Generated Redirector workstation-query graph: ${buildRoot}`);

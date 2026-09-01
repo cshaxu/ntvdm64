@@ -22,11 +22,15 @@
 
 ## Observations
 
-- Four public capability cohorts remain bounded candidates: session-key
-  preparation, username, logon-server data, and local computer-name fallback.
+- Three public capability cohorts remain bounded candidates: session-key
+  preparation, username, and local computer-name fallback.
   They use `NetWkstaGetInfo`, `NetWkstaUserGetInfo` and matching
   `NetApiBufferFree`; they must retain original conversion and checked guest
   copy behavior.
+- `VrGetLogonServer` is not a candidate: the selected original source body is
+  itself an explicit `ERROR_NOT_SUPPORTED` service. The earlier historical
+  ledger's proposed public query path was therefore corrected rather than
+  revived as an invented provider.
 - `VrGetUserName` already reaches the selected public carrier through the
   existing synchronous lease divergence (`MVDM-HOST-DIV-171`). It is not a
   new provider. S2 must prove its capacity-negative and positive contracts.
@@ -41,7 +45,7 @@
 
 ## Result and S2 admission boundary
 
-S1 closes its physical-boundary objective. S2 may exercise only the four
+S1 closes its physical-boundary objective. S2 may exercise only the three
 bounded public cohorts and their original NetAPI allocation, character
 conversion, status and checked guest-copy contracts. It may not enable a
 RAP/SMB transaction, a remote guest request, NetBIOS/DLC/VDD behavior or a

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3573 |
+| Documentation records | 3577 |
 | --- | --- |
-| Generated UTC | 2026-08-31T23:46:49Z |
+| Generated UTC | 2026-09-01T00:07:02Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 2038f007251c89467486aba24a2edea0e7c980519eeaeb1859e3fed5e25fd14a |
+| STATUS.md | principal control document | 73b402a3b950f95c018a480e5fc18061991e137590439db87d056b874e884a9f |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1049,7 +1049,10 @@ content-divergent entries.
 | etc/evidence/m0-t333-s4-redirector-async-adapter-composition-001.md | indexed supporting material | 3dc953d92c395386d3324c7704844bd6a019423f44f34ef1f9cbce8549d31f2b |
 | etc/evidence/m0-t333-s5-redirector-network-assignment-disposition-001.md | indexed supporting material | 2568adaa6d3d11120bb7ec663acf2f31bef149f64756fb165d6d6ee37ed53b39 |
 | etc/evidence/m0-t333-s6-redirector-package-reconciliation-001.md | indexed supporting material | 15231d7a9c73f3099e94b2d749197d2941142cb48279c62e9ce9ccf1dcf7c850 |
-| etc/evidence/m0-t334-s1-netapi-rap-physical-boundary-rebaseline-001.md | indexed supporting material | d34a4fee05e1ab5c6d145d28146e487abf5f28659877dbf95365032fb36f5066 |
+| etc/evidence/m0-t334-s1-netapi-rap-physical-boundary-rebaseline-001.md | indexed supporting material | a112f6135c92acc539bcfa11cb47194b8102cf75b06083f1b12dfd13cf2d71e0 |
+| etc/evidence/m0-t334-s2-public-workstation-query-contract-001.md | indexed supporting material | 727c73b363f9cc133bb3d13897f5d01cecbd2b6ef9e759039bcc9dbc419fb93c |
+| etc/evidence/m0-t334-s3-redirector-negative-contract-reconciliation-001.md | indexed supporting material | d68dfebb75b826cbc4207a411d91f76784d2246e566fa8bfae940070f736e330 |
+| etc/evidence/m0-t334-s4-netapi-rap-package-reconciliation-001.md | indexed supporting material | 24b99249885c7571c5ab12ce848dc16acb68bda78b87f935f4751d8624e3a87f |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1745,7 +1748,7 @@ content-divergent entries.
 | etc/operations/m0-t333-s2-redirector-external-form-disposition-ledger.tsv | indexed supporting material | 214efa7e3d0ffd0d04372a6ea6e9ce13a9ae22d87747d59e0f87e3e5901174b0 |
 | etc/operations/m0-t333-s5-redirector-network-assignment-disposition-ledger.tsv | indexed supporting material | 7e0fee2a00ed5ec60e9c3c57c9ff0885fb73a2a3a33c4f1268a62c8a043e0fdd |
 | etc/operations/m0-t334-netapi-rap-redirector-network-boundary-plan-001.md | indexed supporting material | f533501102334e819ddcae23ce5921fdfc92bc5a9cd5c3a868ae4d3088dae7e1 |
-| etc/operations/m0-t334-s1-netapi-rap-physical-edge-ledger.tsv | indexed supporting material | 897787cb4b11e812a217e6ae8a34c29433ceb541fbfa58a72079e47ebd2cf705 |
+| etc/operations/m0-t334-s1-netapi-rap-physical-edge-ledger.tsv | indexed supporting material | d12a853b60537016c3754617a8b90cb2c87eb50bd8589d760eb13425a735c2ad |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3480,6 +3483,7 @@ content-divergent entries.
 | history/m0-t330-exception-context-attribution-closure-20260831.md | closed task history | bcd87c457f48e81e9624e3711b054e761208fcd279bb27fb7ac8c7192388a2e7 |
 | history/m0-t331-original-xms-owner-package-closure-20260831.md | closed task history | d4e9172e10ca479e5d30fb42bed7fdda2d8eef0e56a29783df951432807b4f7e |
 | history/m0-t332-original-dpmi-owner-package-closure-20260831.md | closed task history | 1cda17c07c43209ee44286f72907dc19735dc56ba17821c1ea6de3d8251bbf21 |
+| history/m0-t334-netapi-rap-redirector-network-boundary-closure-20260831.md | closed task history | 8ca052d19392d4f7b2504dc24314c6113c61bbc8091963b6c9bfad3fa49559cd |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
