@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T346 S3.** T345 is closed: its selected ordinary DEM
+**Active: M0 T346 S4.** T345 is closed: its selected ordinary DEM
 filesystem/handle, directory/drive/volume and search/FCB package has retained
 original source ownership and paired CPU40 x86/x64 formal linkage. T346 begins
 the next ordered graphics-presentation package with source/ABI/failure
@@ -187,6 +187,10 @@ copies under the original source mutex, resolved only inside the Win32 adapter
 through the existing session host-resource mapping manager.  The selected x86
 fixture and the formal `original-softpc-process.exe` link pass.  This is not a
 DOS graphics workload, a native guest-continuity claim, or an x64 claim.
+
+**S3 closure:** the app/session/adapter ownership and the selected public
+window lifecycle are code-complete with x86 local and formal-link evidence.
+S4 now owns only real selected-profile startup and graphics-workload evidence.
 
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 

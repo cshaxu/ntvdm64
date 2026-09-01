@@ -28,11 +28,13 @@ Implement the app-owned public Win32 window, keyboard routing, open/close and
 deterministic creation-failure fallback. Alt+Enter selects this app lifecycle;
 it never enters original X86GFX/fullscreen code.
 
-### S4 — Local, paired and integration verification
+### S4 — Selected x86 integration verification
 
 Prove console-to-window/window-to-console transition, guest-frame presentation,
-keyboard ownership, close/error cleanup and unchanged SoftPC machine state on
-x86 and x64; then run one selected DOS graphics-mode workload.
+keyboard ownership, close/error cleanup and unchanged SoftPC machine state in
+the selected x86/CPU40 profile; then run one selected DOS graphics-mode
+workload. x64 is outside the current product build decision and is not an S4
+exit condition.
 
 ## Prohibitions
 

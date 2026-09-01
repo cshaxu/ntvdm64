@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 3668 |
 | --- | --- |
-| Generated UTC | 2026-09-01T14:08:00Z |
+| Generated UTC | 2026-09-01T14:11:34Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 9b52f55b2464b9858d34780cda1295822636d4e32c33f63344ef2c223ea246f8 |
+| STATUS.md | principal control document | 27244f0b5807bd2185ba48fd425fc7b6cbd3878cc3dfd56fc6f04f2d767bc618 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1826,7 +1826,7 @@ content-divergent entries.
 | etc/operations/m0-t345-s1-host-capability-owner-ledger.tsv | indexed supporting material | ee56639f0850d7ebbbbd9b14e5064f69666f14cb7ecf78c695efe7a5ec7d6035 |
 | etc/operations/m0-t346-s1-graphics-presentation-owner-ledger.tsv | indexed supporting material | db0ae996f487020b37d25b9bfc00c0d7b0e1c123692a8d7a52977e5cf8b75f8a |
 | etc/operations/m0-t346-s3-window-lifecycle-contract-001.md | indexed supporting material | d2a4c3275dbcef897ac4c8a371d46f3de4531d887b7b71f185a7759895d25a38 |
-| etc/operations/m0-t346-softpc-graphics-presentation-plan-001.md | indexed supporting material | cde23b107047f3a52a6ce3c5d00ccfb3b20e6d99c377192944e9335422bf3cb3 |
+| etc/operations/m0-t346-softpc-graphics-presentation-plan-001.md | indexed supporting material | 115e1f3e7434634cadadd6b8ac5e4e483d66ac220423ac07483b71407ba52a37 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
