@@ -8,6 +8,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <tlhelp32.h>
+#include <dbghelp.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -15,14 +16,17 @@
 #define OBSERVATION_TIMEOUT_EXIT 0x53504354u
 #define OBSERVATION_STACK_WORDS 16u
 #define OBSERVATION_THREAD_LIMIT 16u
+#define OBSERVATION_FRAME_LIMIT 16u
 
 typedef struct observation_thread_context {
     DWORD thread_id;
     BOOL context_available;
     CONTEXT context;
+    DWORD frame_count;
+    DWORD64 frames[OBSERVATION_FRAME_LIMIT];
 } observation_thread_context;
 
-static DWORD capture_process_threads(DWORD process_id,
+static DWORD capture_process_threads(HANDLE process, DWORD process_id,
                                      observation_thread_context *records,
                                      DWORD record_capacity)
 {
@@ -40,6 +44,7 @@ static DWORD capture_process_threads(DWORD process_id,
                 record_count == record_capacity) continue;
             records[record_count].thread_id = entry.th32ThreadID;
             records[record_count].context_available = FALSE;
+            records[record_count].frame_count = 0;
             memset(&records[record_count].context, 0,
                    sizeof(records[record_count].context));
             thread = OpenThread(THREAD_SUSPEND_RESUME | THREAD_GET_CONTEXT,
@@ -50,6 +55,27 @@ static DWORD capture_process_threads(DWORD process_id,
                         CONTEXT_CONTROL | CONTEXT_INTEGER;
                     records[record_count].context_available =
                         GetThreadContext(thread, &records[record_count].context);
+                    if (records[record_count].context_available) {
+                        STACKFRAME64 frame = { 0 };
+                        CONTEXT walk_context = records[record_count].context;
+                        frame.AddrPC.Offset = walk_context.Eip;
+                        frame.AddrPC.Mode = AddrModeFlat;
+                        frame.AddrStack.Offset = walk_context.Esp;
+                        frame.AddrStack.Mode = AddrModeFlat;
+                        frame.AddrFrame.Offset = walk_context.Ebp;
+                        frame.AddrFrame.Mode = AddrModeFlat;
+                        while (records[record_count].frame_count <
+                               OBSERVATION_FRAME_LIMIT &&
+                               StackWalk64(IMAGE_FILE_MACHINE_I386, process,
+                                           thread, &frame, &walk_context, NULL,
+                                           SymFunctionTableAccess64,
+                                           SymGetModuleBase64, NULL)) {
+                            records[record_count].frames[
+                                records[record_count].frame_count++] =
+                                frame.AddrPC.Offset;
+                            if (frame.AddrReturn.Offset == 0) break;
+                        }
+                    }
                 }
                 CloseHandle(thread);
             }
@@ -107,6 +133,7 @@ int main(int argc, char **argv)
     BOOL have_timed_stack = FALSE;
     SIZE_T timed_stack_bytes = 0;
     DWORD timed_thread_count = 0;
+    BOOL symbols_initialized = FALSE;
     DWORD suspend_result = (DWORD)-1;
     char command_line[MAX_PATH * 2];
     char exception_report_path[MAX_PATH];
@@ -218,7 +245,9 @@ int main(int argc, char **argv)
                     timed_stack, sizeof(timed_stack), &timed_stack_bytes) &&
                     timed_stack_bytes == sizeof(timed_stack);
             }
-            timed_thread_count = capture_process_threads(child.dwProcessId,
+            symbols_initialized = SymInitialize(child.hProcess, NULL, TRUE);
+            timed_thread_count = capture_process_threads(child.hProcess,
+                                                         child.dwProcessId,
                                                          timed_threads,
                                                          OBSERVATION_THREAD_LIMIT);
         }
@@ -259,12 +288,20 @@ int main(int argc, char **argv)
                     observation_thread_context *thread =
                         &timed_threads[thread_index];
                     if (thread->context_available) {
+                        DWORD frame_index;
                         fprintf(report,
                                 "thread-%02lu=id:0x%08lx,eip:0x%08lx,esp:0x%08lx\n",
                                 (unsigned long)thread_index,
                                 (unsigned long)thread->thread_id,
                                 (unsigned long)thread->context.Eip,
                                 (unsigned long)thread->context.Esp);
+                        for (frame_index = 0; frame_index < thread->frame_count;
+                             ++frame_index) {
+                            fprintf(report, "thread-%02lu-frame-%02lu=0x%08llx\n",
+                                    (unsigned long)thread_index,
+                                    (unsigned long)frame_index,
+                                    (unsigned long long)thread->frames[frame_index]);
+                        }
                     } else {
                         fprintf(report, "thread-%02lu=id:0x%08lx,context:unavailable\n",
                                 (unsigned long)thread_index,
@@ -277,6 +314,7 @@ int main(int argc, char **argv)
         }
         fclose(report);
     }
+    if (symbols_initialized) SymCleanup(child.hProcess);
     CloseHandle(child.hThread);
     CloseHandle(child.hProcess);
     CloseHandle(input);

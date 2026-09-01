@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3605 |
+| Documentation records | 3608 |
 | --- | --- |
-| Generated UTC | 2026-09-01T03:49:54Z |
+| Generated UTC | 2026-09-01T04:02:23Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 685d025ee417a8c80bb7654507ee0e76f9e66eb4217d57e1757812f038d65d2b |
+| STATUS.md | principal control document | 91ed062871ffab273a93b6daebce0cab5aaec25dfe5cac0804eaca085a1378d0 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1071,6 +1071,7 @@ content-divergent entries.
 | etc/evidence/m0-t336-s1-post-cmdsetinfo-source-cohort-admission-001.md | indexed supporting material | 33183f4a72562e2eeb6feff403650a1e4bae3a6d39109bf4574c66ae30b1ebb6 |
 | etc/evidence/m0-t336-s2-cpu40-recursive-vector-recovery-001.md | indexed supporting material | fbb5e5d60d5fdee63398fe20252688a699470c90898de7b1a4392545c9981b93 |
 | etc/evidence/m0-t336-s3-fdc-int15-completion-cohort-audit-001.md | indexed supporting material | da22deec3e3481946c1b48a8a52f005d50bf5523002f48c832291be14e91e62b |
+| etc/evidence/m0-t336-s4-post-vector-terminal-attribution-001.md | indexed supporting material | e261c558f42d34f24a69e0c1cb6b5e16d7f80d0290cdf5ca45680e9e0cdf0062 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1775,6 +1776,7 @@ content-divergent entries.
 | etc/operations/m0-t336-s1-post-cmdsetinfo-cohort-ledger.tsv | indexed supporting material | d597008e35c3436d8d57c638de0d281f4326b708921586637a9561b4c069f8cd |
 | etc/operations/m0-t336-s2-cpu40-recursive-vector-recovery-ledger.tsv | indexed supporting material | 6c4b73113c9fefa01048d018dcf35e06dc623eacdcb6042f03e5f706cd21a4fd |
 | etc/operations/m0-t336-s3-fdc-int15-completion-cohort-ledger.tsv | indexed supporting material | ee82405f2be10cf677cb92010d51e5953be127d49bdd265525f6e78cef145587 |
+| etc/operations/m0-t336-s4-post-vector-terminal-attribution-ledger.tsv | indexed supporting material | 55b425c17fb30d9eb11d92c14e13f43bad5893e71d8f179010b64814e145b28f |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3512,6 +3514,7 @@ content-divergent entries.
 | history/m0-t332-original-dpmi-owner-package-closure-20260831.md | closed task history | 1cda17c07c43209ee44286f72907dc19735dc56ba17821c1ea6de3d8251bbf21 |
 | history/m0-t334-netapi-rap-redirector-network-boundary-closure-20260831.md | closed task history | 8ca052d19392d4f7b2504dc24314c6113c61bbc8091963b6c9bfad3fa49559cd |
 | history/m0-t335-wow32-win16-owner-package-closure-20260831.md | closed task history | 0eb40192961a73db29f83772cabcdc3fcf78ac402d2c19d224d47b6bd8dbad05 |
+| history/m0-t336-cpu40-ntdos-post-cmdsetinfo-continuity-closure-20260831.md | closed task history | 7e0e1996c540d418a9c255d4912c15c9b243dfa3b5c1790c9ba4d1b97493c541 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

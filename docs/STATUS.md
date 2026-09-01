@@ -4,9 +4,9 @@
 
 ## Active Packet
 
-### M0 T336 S4 — Post-vector wait-owner attribution
+### M0 T336 — CPU40/NTDOS post-`54:05` startup continuity
 
-**Active: M0 T336 S4.**
+**Closed: M0 T336.**
 
 | Field | Record |
 | --- | --- |
@@ -22,11 +22,11 @@
 | Asset Needs | Existing selected MVDM/DOS mirrors, T335 evidence, current fixed container and paired formal CCPU40 product graphs; no new guest media or host installation. |
 | Reporting Requirements | Separate observations from source inference; name the exact wait/terminal edge, every reached sibling prerequisite and the recovery rung selected or rejected. |
 | Stop Conditions | Any need for a new BOP provider, guest loader, second mapper/executor, raw host pointer, guest-media rewrite, unreviewed source import, or a diagnosis that reaches a different owner package requires re-admission. |
-| Exit Criteria | A committed evidence/ledger names the observed wait owner and its complete original cohort, or records a source-shaped terminal result; no generic DOS completion claim is made. |
+| Exit Criteria | Met: the committed evidence/ledger names the original `50:3D -> demExitVDM` terminal owner, its two guest caller possibilities, and the next host-composition boundary; no generic DOS completion claim is made. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | `cmdSetInfo` service-byte/IP return, NTDOS register/segment restoration, DOS/BIOS exchange fields, SAS span and stack conversion, CPU40 faults, disk stack, Win386/DOSWOW fields, timer/PIT/ICA prerequisites and stale Bochs-era routes. |
 
-**Plan:** [CPU40/NTDOS post-`54:05` startup continuity](etc/operations/proposal-cpu40-ntdos-post-cmdsetinfo-continuity-001.md). **S1 closed:** [source/cohort admission](etc/evidence/m0-t336-s1-post-cmdsetinfo-source-cohort-admission-001.md) and [ten-row ledger](etc/operations/m0-t336-s1-post-cmdsetinfo-cohort-ledger.tsv) establish that guest media is already loaded. **S2 closed:** [recursive-vector recovery](etc/evidence/m0-t336-s2-cpu40-recursive-vector-recovery-001.md) and its [six-row ledger](etc/operations/m0-t336-s2-cpu40-recursive-vector-recovery-ledger.tsv) restore the original CCPU40 `host_simulate_func` vector and turn the former null-IP crash into a bounded live-process timeout. **S3 closed:** [FDC/INT15 completion-cohort audit](etc/evidence/m0-t336-s3-fdc-int15-completion-cohort-audit-001.md) and [ledger](etc/operations/m0-t336-s3-fdc-int15-completion-cohort-ledger.tsv) select the complete original source chain, reject a speculative physical-floppy or loader repair, and record the external all-thread wait snapshot as attribution evidence only.
+**Plan:** [CPU40/NTDOS post-`54:05` startup continuity](etc/operations/proposal-cpu40-ntdos-post-cmdsetinfo-continuity-001.md). **S1 closed:** [source/cohort admission](etc/evidence/m0-t336-s1-post-cmdsetinfo-source-cohort-admission-001.md) and [ten-row ledger](etc/operations/m0-t336-s1-post-cmdsetinfo-cohort-ledger.tsv) establish that guest media is already loaded. **S2 closed:** [recursive-vector recovery](etc/evidence/m0-t336-s2-cpu40-recursive-vector-recovery-001.md) and its [six-row ledger](etc/operations/m0-t336-s2-cpu40-recursive-vector-recovery-ledger.tsv) restore the original CCPU40 `host_simulate_func` vector and turn the former null-IP crash into a bounded live-process timeout. **S3 closed:** [FDC/INT15 completion-cohort audit](etc/evidence/m0-t336-s3-fdc-int15-completion-cohort-audit-001.md) and [ledger](etc/operations/m0-t336-s3-fdc-int15-completion-cohort-ledger.tsv) select the complete original source chain, reject a speculative physical-floppy or loader repair, and record the external all-thread wait snapshot as attribution evidence only. **S4 closed:** [post-vector terminal attribution](etc/evidence/m0-t336-s4-post-vector-terminal-attribution-001.md) and its [ledger](etc/operations/m0-t336-s4-post-vector-terminal-attribution-ledger.tsv) prove the current state is original `50:3D -> demExitVDM`, not an FDC wait, and transfer the portable guest drive-root decision without selecting an unreviewed implementation. [T336 closure](history/m0-t336-cpu40-ntdos-post-cmdsetinfo-continuity-closure-20260831.md).
 
 ### M0 T335 — Original WOW32/Win16 owner-package recovery
 
