@@ -31,13 +31,20 @@ an existing source-shaped mechanism, and name the smallest complete owner
 cohort. Do not change product, guest media, BOP routing, devices or host
 drive policy.
 
+**Closed.** The source/build identity walk records both guest callers in the
+S1 ledger. The staged NTDOS/COMMAND pair matches the retained source-built
+hashes and the selected 5.00 source pair, so a binary-version mismatch is not
+the admitted recovery cohort. S2 owns the original initial NTDOS command
+bootstrap.
+
 ### S2 — Earliest complete original owner recovery
 
-Recover only the S1-proven earliest incomplete original binding. Prefer an
-already selected original MVDM/OpenNT body and a same-shaped adapter. Preserve
-guest file/EXEC ordering, original failures and mapping-manager leases. A
-host namespace or boot-drive change requires its own source contract; it may
-not be inferred from the terminal service alone.
+Recover only the S1-proven earliest incomplete original binding in the initial
+`ProcessConfig -> SHELL -> initial COMMAND EXEC` cohort. Prefer an already
+selected original MVDM/OpenNT body and a same-shaped adapter. Preserve guest
+file/EXEC ordering, original failures and mapping-manager leases. A host
+namespace or boot-drive change requires its own source contract; it may not
+be inferred from the terminal service alone.
 
 ### S3 — Fixed vertical-slice result
 

@@ -2,13 +2,14 @@
 
 ## Current Work
 
-**Active: M0 T339 S1.** It establishes the complete original guest-predecessor
-contract for T338's short-root `50:3D -> demExitVDM` boundary before selecting
-any recovery.
+**Active: M0 T339 S2.** S1 closed the original guest-predecessor contract for
+T338's short-root `50:3D -> demExitVDM` boundary. S2 now reviews only the
+selected original NTDOS `ProcessConfig -> SHELL -> initial COMMAND EXEC`
+cohort and its existing DEM file-service binding.
 
 ## Active Packet
 
-### M0 T339 S1 — Original `50:3D` guest-predecessor contract
+### M0 T339 S1 — Original `50:3D` guest-predecessor contract (closed)
 
 | Field | Record |
 | --- | --- |
@@ -24,9 +25,21 @@ any recovery.
 | Asset Needs | Selected original MVDM mirrors, current formal graph and recorded short-root observation; no new assets. |
 | Reporting Requirements | Separate source fact from runtime inference; retain original failure and ordering; record every rejected recovery rung. |
 | Stop Conditions | A need for synthetic guest/device success, media change, a new mapper/executor, unreviewed import, host-drive policy or a different owner package requires re-admission. |
-| Exit Criteria | Both guest callers and immediate host/service dependencies have one original owner/disposition; S2 can select at most one complete original cohort. |
+| Exit Criteria | Met: both guest callers and immediate host/service dependencies have one original owner/disposition. Staged `NTDOS.SYS` and `COMMAND.COM` match the retained source-built hashes, so a mixed version pair is rejected and S2 selects one complete original bootstrap cohort. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | `sysinit1` command bootstrap, COMMAND initialization/version checks, DEM terminal service, file/drive/COMSPEC paths, configuration and Base VDM inputs. |
+
+**Evidence:** [original guest-predecessor contract](etc/evidence/m0-t339-s1-original-guest-predecessor-contract-001.md) and [row ledger](etc/operations/m0-t339-s1-guest-predecessor-contract-ledger.tsv).
+
+### M0 T339 S2 — Initial COMMAND bootstrap cohort
+
+| Field | Record |
+| --- | --- |
+| Objective | Recover or explicitly retain the earliest source-proven original binding in `ProcessConfig -> SHELL -> initial COMMAND EXEC`, including its existing DEM file-service path. |
+| Scope | Original `sysinit1.asm`/`sysinit2.asm`, host `cmdconf.c`/`nt_pif.c`, NTDOS file/EXEC contracts, and reached original DEM open/seek/read/close services. |
+| Non-goals | No new BOP provider, guest/media rewrite, virtual drive or guessed drive policy, synthetic EXEC success, device/FDC/INT15 work, or alternate CPU executor. |
+| Required result | One source-shaped binding recovery or an explicit source-defined transfer, with the guest caller and failure condition identified without using `demExitVDM`'s nondiagnostic message as proof. |
+| Verification | Original source/caller/failure walk; focused source/build check proportionate to an actual binding change; no arbitrary observation retry. |
 
 **Plan:** [M0 T339 plan](etc/operations/m0-t339-minimal-vertical-slice-integration-closure-plan-001.md). T339 starts from T338's closed short-root `50:3D` transfer and does not reopen configuration capacity, FDC/INT15, or BOP leaf work.
 
