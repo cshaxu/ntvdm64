@@ -2,7 +2,12 @@
 
 ## Current Work
 
-### M0 T353 S1 — active post-`SVC_CMDGETCONFIGSYS` owner admission
+**No active M/T/S packet.** M0 T353 is closed after it source-maps the complete
+original post-`54:0C` configuration continuation and observes the exact
+original permanent-COMMAND `50:3D` terminal. Its scope, valid observation and
+successor are in [the T353 closure](history/m0-t353-cpu40-ntdos-post-cmdgetconfigsys-continuity-closure-20260901.md).
+
+### M0 T353 S1 — Closed post-`SVC_CMDGETCONFIGSYS` owner admission
 
 | Field | Record |
 | --- | --- |
@@ -28,7 +33,7 @@
 and its [owner ledger](etc/operations/m0-t353-s1-post-cmdgetconfigsys-owner-ledger.tsv)
 select original NTDOS `ProcessConfig -> doconf`, not a leaf BOP repair.
 
-### M0 T353 S2 — active NTDOS `ProcessConfig` continuation boundary audit
+### M0 T353 S2 — Closed NTDOS `ProcessConfig` continuation boundary audit
 
 | Field | Record |
 | --- | --- |
@@ -53,7 +58,7 @@ and its [continuation ledger](etc/operations/m0-t353-s2-processconfig-continuati
 select the original `doconf` pre-scan through first parser handoff; it excludes
 later device/INSTALL/UMB work and makes no runtime claim.
 
-### M0 T353 S3 — active original CONFIG pre-scan durable attribution
+### M0 T353 S3 — Closed original CONFIG pre-scan durable attribution
 
 | Field | Record |
 | --- | --- |
@@ -72,6 +77,36 @@ later device/INSTALL/UMB work and makes no runtime claim.
 | Exit Criteria | One unchanged source cohort is formally linked and observed once (or source proves current durable records sufficient); its earliest unproven successor is assigned to one complete owner package without a leaf repair. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | COMMAND BOP return report, NTDOS configuration pre-scan entry/return, DOS open/seek/read/close dispatch, DEM file bridge, CPU40 interrupt return, error/carry paths and observer report lifetime. |
+
+**S3 closure:** [CONFIG pre-scan observation admission result](etc/evidence/m0-t353-s3-config-prescan-observation-admission-001.md)
+records the three-action formal link and one invalid observation: its report
+directory was absent, so it produces no runtime attribution.  It does not
+license a retry inside S3.
+
+### M0 T353 S4 — Closed fixed CONFIG pre-scan observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T353 S4; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted after T353 S3's formally linked but non-evidentiary one-run result; owner approval covers the ordered recovery sequence. |
+| Objective | Pre-create a new observer report directory and make exactly one durable, non-debug observation of the already-linked, unchanged CPU40/x86 product in its already-staged 39-character system-root container. |
+| Non-goals | No source, BOP/provider, guest/media/configuration, file-service, mapping, CPU/CCPU/SAS/BIOS, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, device/INSTALL/EXEC or workload change; no build relink and no second S4 observation. |
+| Reference Baseline | T353 S1–S3; selected already-linked CPU40/x86 product; existing `build/T353S` immutable stage; existing console observer and 39-character system-root invariant. |
+| Files And ABI Surface | No production source file.  Existing observer report paths and default-off `MVDM-HOST-DIV-164` records only. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Confirm product/staged media identity; pre-create only disposable report directory; exactly one observer launch; preserve report/sidecars and review marker order; governance/diff review. |
+| Expected Markers | A durable `54:0C` return followed by either an original DEM/COMMAND ingress or a source-owned terminal/exception record, all without state mutation. |
+| Asset Needs | Existing staged product/media and existing observer; a new disposable report directory only. |
+| Reporting Requirements | Record why S3 was invalid, prove S4 container identity is unchanged, quote one durable result, and select one next source owner rather than a leaf repair. |
+| Stop Conditions | Missing directory/report, changed product/media/root length/arguments, failed observer launch, or any need for source/semantic modification ends S4 without a retry and requires a new admission. |
+| Exit Criteria | One valid fixed observation is preserved and source-attributed, or an explicit non-evidentiary stop is recorded with no retry; the next owner cohort is bounded. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | Observer report-parent creation, child-only environment/report ownership, staged media identity, 54:0C return, post-return ingress, exception/main-return records and timeout classification. |
+
+**S4 closure:** [fixed CONFIG pre-scan observation](etc/evidence/m0-t353-s4-fixed-config-prescan-observation-001.md)
+proves the original post-configuration NTDOS pre-scan reaches the exact
+permanent-COMMAND `comerr -> stall -> 50:3D` terminal. **T353 closure:**
+[CPU40/NTDOS post-`54:0C` startup continuity](history/m0-t353-cpu40-ntdos-post-cmdgetconfigsys-continuity-closure-20260901.md).
 
 ### M0 T352 S1 — Closed CPU40/COMMAND post-`SVC_CMDSETINFO` owner admission
 

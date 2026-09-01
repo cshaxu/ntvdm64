@@ -237,10 +237,18 @@ void mvdm_softpc_record_bop_dispatch(unsigned int selector,
         terminal_message[54] = hex[guest_dx & 0x0fu];
         (void)WriteFile(output, terminal_message,
             (DWORD)(sizeof(terminal_message) - 1), &written, NULL);
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            message, (DWORD)(sizeof(message) - 1));
         return;
     }
     (void)WriteFile(output, message, (DWORD)(sizeof(message) - 1),
                     &written, NULL);
+    /* DIVERGENCE(MVDM-HOST-DIV-164): the original ingress observer is
+     * default-off.  A fixed-container child may request the same already
+     * decoded scalar record through its durable report, so a later console
+     * repaint cannot hide which original BOP followed a completed return. */
+    mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH", message,
+        (DWORD)(sizeof(message) - 1));
 }
 
 void mvdm_softpc_record_bop_return(unsigned int selector,

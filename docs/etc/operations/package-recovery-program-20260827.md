@@ -372,9 +372,23 @@ durable observation reaches the next original guest ingress or exact
 source-owned terminal result.  The detailed boundary is in
 [the P06C proposal](proposal-cpu40-ntdos-post-cmdgetconfigsys-continuity-001.md).
 
+## P06D — CPU40/NTDOS permanent COMMAND bootstrap recovery
+
+**Predecessor:** completed P06C / M0 T353. **Purpose:** T353 proves the
+original `54:0C` configuration return reaches NTDOS `ProcessConfig -> doconf`
+and then the exact original `comerr -> badfil -> 50:3D` terminal. This package
+recovers the complete permanent `COMMAND.COM` DOS-name, file-open and
+image-handoff owner cohort. It must not treat `50:12` or `50:3D` as standalone
+providers or invent a successful file result.
+
+**Exit:** selected CPU40/x86 formal graph compiles/links and one fixed durable
+observation proves either original permanent-command image handoff or a later
+exact source-owned terminal. The detailed boundary is in
+[the P06D proposal](proposal-cpu40-ntdos-permanent-command-bootstrap-001.md).
+
 ## P07 — Minimal DOS guest execution and controlled return
 
-**Predecessor:** P06C. **S1 admission:** verify the reached guest load,
+**Predecessor:** P06D. **S1 admission:** verify the reached guest load,
 local namespace/file, NTDOS `EXEC`, PSP/arena/JFN/environment and parent
 return contracts after the pre-BOP continuity package has reached the
 original `demLoadDos` crossing. **Delivery:** load and run one declared local

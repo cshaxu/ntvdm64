@@ -45,8 +45,8 @@ production route nor an acceptance row.
 
 | Order | Candidate implementation package |
 | --- | --- |
-| 1 | CPU40/COMMAND post-`SVC_CMDGETCONFIGSYS` continuation attribution — P06C; select and recover the complete original owner package after the now-proven `54:05 -> 54:0C` returns, through the next NTDOS bootstrap transition before any workload attempt; no trace-selected BOP leaf repair. |
-| 2 | SoftPC graphics-workload integration continuation — only after its named CPU40/COMMAND continuation predecessor proves a reachable selected DOS workload, run the fixed selected CPU40/x86 container through one graphics-mode workload and close the remaining presentation-runtime criterion without changing controller or guest semantics. |
+| 1 | CPU40/NTDOS permanent COMMAND bootstrap recovery — P06D; recover the complete original DOS-name, file-open and image-handoff cohort selected by the closed post-configuration `comerr -> 50:3D` terminal; no trace-selected DEM leaf repair. |
+| 2 | SoftPC graphics-workload integration continuation — only after its named permanent-COMMAND bootstrap predecessor proves a reachable selected DOS workload, run the fixed selected CPU40/x86 container through one graphics-mode workload and close the remaining presentation-runtime criterion without changing controller or guest semantics. |
 | 3 | Product release closure |
 
 Historical queue/proposal material is indexed in
