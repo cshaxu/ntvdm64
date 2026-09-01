@@ -2,10 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T345 S1.** T344 is closed: its source-defined state-owner audit
+**Active: M0 T345 S2.** T344 is closed: its source-defined state-owner audit
 retains one active SoftPC machine/session per process, rather than treating
-thread-local CCPU buffers as a multi-session guarantee. T345 begins the next
-ordered host-capability package with source/ABI/failure inventory only.
+thread-local CCPU buffers as a multi-session guarantee. T345/S1 has closed its
+source/ABI/failure inventory and selected the original ordinary DEM
+filesystem/directory/drive/search package as the sole low-dependency cohort.
 T342 is closed: the only startup-reached debugger form
 is the original `DBGInit` shape through its bounded adapter; BDE, VDMDBG,
 VDMEXTS and FAX remain their original tool/product packages. T341 is closed:
@@ -56,6 +57,23 @@ mirrors, not a leftover self-written provider. Three files are byte-identical
 to the OpenNT baseline; each remaining difference is registered and limited to
 the immutable media root, the sole session mapping manager or a required
 same-width ABI correction: [DEM mirror/binding ledger](etc/operations/m0-t345-s1-dem-host-capability-mirror-binding-ledger.tsv).
+
+**S1 closure:** the inventory proves that `cmdconf.c` handles the selected
+`CONFIG.NT` input rather than providing a missing-file fallback, retains DEM's
+original result paths and transfers non-ordinary-device capability families to
+their named owners: [host capability inventory closure](etc/evidence/m0-t345-s1-host-capability-inventory-closure-001.md).
+
+### M0 T345 S2 — Original ordinary DEM host-capability recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T345 S2; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T345/S1's source-defined cohort selection under the standing direction to execute ordered owner packages. |
+| Objective | Recover and formally close one complete original DEM cohort: ordinary host filesystem/handle, directory/drive/volume and search/FCB operations, through existing same-shaped Win32 and session-mapping bindings. |
+| Non-goals | No generic provider, virtual filesystem/drive, readonly policy, raw DASD/IOCTL/media, serial/printer/pipe device, Redirector lifecycle, child/PSP lifecycle, new mapper, guest/BOP change, CPU30, Bochs route, host installation or system mutation. |
+| Verification | Recheck original body and adapter seams package-wide; verify the selected formal CPU40 x86/x64 graphs and only current local contract coverage. No trace-selected leaf repair or broad runtime claim. |
+| Exit Criteria | All selected files have one source-shaped binding and no parallel v1/self-written provider; local contract evidence covers the original success and failure ownership boundaries; paired formal graphs link the same cohort. |
+| Stop Conditions | A needed new filesystem policy, raw identity transport, new mapping manager, non-ordinary device behavior, guest behavior or unreviewed source import requires re-admission. |
 
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
