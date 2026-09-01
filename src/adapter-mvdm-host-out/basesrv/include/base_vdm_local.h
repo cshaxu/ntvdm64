@@ -8,9 +8,15 @@
 
 typedef struct session session;
 
-#define BASE_VDM_LOCAL_VERSION UINT32_C(2)
+#define BASE_VDM_LOCAL_VERSION UINT32_C(3)
 
-/* A copied DOS record for the reached BaseSrv command path. */
+/* These identify which original BaseSrv command queue owns a copied record.
+ * They are not guest values and never enter VDMINFO: the original client
+ * derives the same choice from its VDMState and ConsoleHandle. */
+#define BASE_VDM_COMMAND_DOS UINT16_C(0)
+#define BASE_VDM_COMMAND_WOW ASKING_FOR_WOW_BINARY
+
+/* A copied record for one reached original BaseSrv command path. */
 typedef struct base_vdm_command {
     uint32_t struct_bytes;
     uint32_t task;
@@ -20,6 +26,8 @@ typedef struct base_vdm_command {
     uint16_t current_drive;
     uint8_t coming_from_bat;
     uint8_t reserved0;
+    uint16_t command_owner;
+    uint16_t reserved1;
     const uint8_t *command;
     uint16_t command_bytes;
     const uint8_t *application;
@@ -44,6 +52,8 @@ typedef struct base_vdm_local {
     uint16_t current_drive;
     uint8_t coming_from_bat;
     uint8_t reserved0;
+    uint16_t command_owner;
+    uint16_t reserved1;
     uint16_t command_bytes;
     uint16_t application_bytes;
     uint32_t environment_bytes;

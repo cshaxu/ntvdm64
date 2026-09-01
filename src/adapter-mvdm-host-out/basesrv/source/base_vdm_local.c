@@ -53,6 +53,9 @@ int base_vdm_local_valid(const base_vdm_local *record)
 {
     return record != NULL && record->version == BASE_VDM_LOCAL_VERSION &&
         record->struct_bytes == sizeof(*record) && record->reserved0 == 0u &&
+        record->reserved1 == 0u &&
+        (record->command_owner == BASE_VDM_COMMAND_DOS ||
+         record->command_owner == BASE_VDM_COMMAND_WOW) &&
         record->command_bytes <= MAXIMUM_VDM_COMMAND_LENGTH &&
         record->application_bytes <= MAX_PATH &&
         record->environment_bytes <= MAXIMUM_VDM_ENVIORNMENT &&
@@ -67,7 +70,10 @@ int base_vdm_local_publish(base_vdm_local *record, const base_vdm_command *comma
 {
     int published = 0;
     if (!base_vdm_local_valid(record) || command == NULL ||
-        command->struct_bytes != sizeof(*command) ||
+        command->struct_bytes != sizeof(*command) || command->reserved0 != 0u ||
+        command->reserved1 != 0u ||
+        (command->command_owner != BASE_VDM_COMMAND_DOS &&
+         command->command_owner != BASE_VDM_COMMAND_WOW) ||
         command->command_bytes == 0u ||
         !valid_bytes(command->command, command->command_bytes, MAXIMUM_VDM_COMMAND_LENGTH) ||
         !valid_bytes(command->application, command->application_bytes, MAX_PATH) ||
@@ -89,6 +95,7 @@ int base_vdm_local_publish(base_vdm_local *record, const base_vdm_command *comma
     record->code_page = command->code_page;
     record->current_drive = command->current_drive;
     record->coming_from_bat = command->coming_from_bat;
+    record->command_owner = command->command_owner;
     record->command_bytes = command->command_bytes;
     record->application_bytes = command->application_bytes;
     record->environment_bytes = command->environment_bytes;
@@ -126,18 +133,34 @@ static int has_buffer(const void *destination, uint32_t capacity, uint32_t requi
     return required == 0u || (destination != NULL && capacity >= required);
 }
 
-/* DIVERGENCE: source-derived DOS-only BaseSrvGetNextVDMCommand slice. The
- * original body requires CSRSS console/DOS records and duplicated handles.
- * This retains copy, capacity, environment and status order; WOW/PIF/child
- * and global server branches remain unavailable. */
-static NTSTATUS get_next_dos(base_vdm_local *record, PVDMINFO information)
+static int is_wow_request(USHORT state)
+{
+    return (state & ASKING_FOR_WOW_BINARY) != 0u;
+}
+
+/* DIVERGENCE: source-derived single-session BaseSrvGetNextVDMCommand slice.
+ * `srvvdm.c` distinguishes DOS console records from the separate WOW record:
+ * an empty WOW queue returns successful zero lengths without blocking, while
+ * DOS waits for its own record.  CSRSS queues/duplicated handles remain
+ * unavailable, but this copied record preserves that source-visible choice,
+ * capacity checks and copy order without accepting the other queue's item. */
+static NTSTATUS get_next_command(base_vdm_local *record, PVDMINFO information)
 {
     uint16_t state = information->VDMState;
-    if (state & (ASKING_FOR_WOW_BINARY | ASKING_FOR_SEPWOW_BINARY | ASKING_FOR_PIF))
+    int wow_request = is_wow_request(state);
+    if (state & (ASKING_FOR_SEPWOW_BINARY | ASKING_FOR_PIF))
         return STATUS_NOT_IMPLEMENTED;
     EnterCriticalSection(&record->lock);
-    if (record->available == 0u) {
+    if (record->available == 0u ||
+        (wow_request && record->command_owner != BASE_VDM_COMMAND_WOW) ||
+        (!wow_request && record->command_owner != BASE_VDM_COMMAND_DOS)) {
         clear_sizes(information);
+        /* Original BaseSrv never blocks WOWEXEC when its WOW queue is
+         * empty; it reports an empty successful response instead. */
+        if (wow_request) {
+            LeaveCriticalSection(&record->lock);
+            return STATUS_SUCCESS;
+        }
         if ((state & RETURN_ON_NO_COMMAND) && (state & ASKING_FOR_SECOND_TIME)) {
             LeaveCriticalSection(&record->lock);
             return STATUS_NO_MEMORY;
@@ -277,7 +300,7 @@ BOOL base_vdm_local_dispatch(PVDMINFO information)
         }
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
-    status = get_next_dos(base_vdm_current, information);
+    status = get_next_command(base_vdm_current, information);
     if (status == STATUS_SUCCESS) return TRUE;
     SetLastError(status == STATUS_INVALID_PARAMETER ? ERROR_INVALID_PARAMETER :
         status == STATUS_NO_MEMORY ? ERROR_NOT_ENOUGH_MEMORY :

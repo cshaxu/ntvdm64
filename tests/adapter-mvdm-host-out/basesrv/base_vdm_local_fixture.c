@@ -73,7 +73,7 @@ static int verify_long_package_launch_declaration(void)
     if (declaration.base_vdm.available != 1u) return 30;
     if (declaration.base_vdm.current_directory_bytes != strlen(root) + 1u) return 31;
     if (declaration.base_vdm.application_bytes != strlen(application) + 1u) return 32;
-    if (strcmp((const char *)declaration.base_vdm.command, "/C VER\r\n") != 0) return 36;
+    if (strcmp((const char *)declaration.base_vdm.command, "/C EXIT\r\n") != 0) return 36;
     if (declaration.base_vdm.command_bytes < 3u ||
         declaration.base_vdm.command[declaration.base_vdm.command_bytes - 3u] != '\r' ||
         declaration.base_vdm.command[declaration.base_vdm.command_bytes - 2u] != '\n' ||
@@ -247,10 +247,34 @@ int main(void)
     if (!GetNextVDMCommand(&information)) return 8;
     if (GetNextVDMCommand(&information) || GetLastError() != ERROR_INVALID_PARAMETER)
         return 9;
+    /* BaseSrv has distinct DOS and WOW records.  A WOW request cannot
+     * consume a DOS record and, unlike a DOS request, returns a successful
+     * empty result when its own queue is empty. */
     reset_info(&information);
     information.VDMState = ASKING_FOR_WOW_BINARY;
-    if (GetNextVDMCommand(&information) || GetLastError() != ERROR_CALL_NOT_IMPLEMENTED)
+    if (!GetNextVDMCommand(&information) || information.CmdSize != 0u ||
+        information.AppLen != 0u || information.EnviornmentSize != 0u)
         return 10;
+    payload.command_owner = BASE_VDM_COMMAND_WOW;
+    if (!base_vdm_local_publish(&source, &payload)) return 25;
+    reset_info(&information);
+    information.VDMState = ASKING_FOR_WOW_BINARY;
+    information.CmdLine = command_buffer;
+    information.CmdSize = sizeof(command_buffer);
+    information.AppName = application_buffer;
+    information.AppLen = sizeof(application_buffer);
+    information.Enviornment = environment_buffer;
+    information.EnviornmentSize = sizeof(environment_buffer);
+    information.CurDirectory = directory_buffer;
+    information.CurDirectoryLen = sizeof(directory_buffer);
+    if (!GetNextVDMCommand(&information) || information.VDMState != 0u ||
+        information.iTask != payload.task ||
+        memcmp(command_buffer, command, sizeof(command)) != 0)
+        return 26;
+    reset_info(&information);
+    information.VDMState = ASKING_FOR_SEPWOW_BINARY;
+    if (GetNextVDMCommand(&information) || GetLastError() != ERROR_CALL_NOT_IMPLEMENTED)
+        return 27;
     if (!SetVDMCurrentDirectories((ULONG)sizeof(directories), (CHAR *)directories))
         return 15;
     if (GetVDMCurrentDirectories(1u, directory_copy) != sizeof(directories) ||

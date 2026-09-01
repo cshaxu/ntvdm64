@@ -34,8 +34,11 @@ guest half and would be false evidence.
 
 ## Reached startup boundary
 
-`app/entry.c` deliberately does not load guest bytes or provide a guest
-lifecycle.  The original BOP `51h` body in
+The repository already carries the immutable DOS and Win16 guest media below
+`build/output/` and the selected `mvdm-guest` mirror.  Separately,
+`app/entry.c` deliberately does not yet select, read and install a Win16 image
+into the active SoftPC guest address space or provide its guest lifecycle.
+The original BOP `51h` body in
 `mvdm-host/softpc.new/host/src/nt_bop.c:MS_bop_1` also retains its original
 dynamic `WOW32` provider load (`W32Init`, `W32Dispatch`) rather than a static
 host substitute.  No current product route loads `kernel31/krnl386.exe`,
@@ -44,17 +47,17 @@ trampoline.
 
 Therefore the active profile has an exact, source-backed unavailable
 boundary at guest-WOW activation; it has not reached a callback return.  This
-is narrower than a GUI/WOWEXEC/CSRSS claim and does not authorize an
-app-owned loader, synthetic guest bytes, BOP leaf patch, or host callback
-stub.
+is narrower than a GUI/WOWEXEC/CSRSS claim and does not authorize a newly
+authored loader, synthetic guest bytes, BOP leaf patch, or host callback stub.
 
 ## Remaining S3 work
 
 The remaining direct S3 question is whether the existing original owner
 sources can establish a declared, immutable-media guest activation route
-without broadening the profile.  That route must load the original Win16
-kernel media, retain `MS_bop_1`'s source-shaped `W32Init`/`W32Dispatch`
-ordering, and demonstrate the real `CallBack16 -> CCPU40 ->
+without broadening the profile.  That route must select and install the
+already-carried original Win16 kernel media, retain `MS_bop_1`'s
+source-shaped `W32Init`/`W32Dispatch` ordering, and demonstrate the real
+`CallBack16 -> CCPU40 ->
 WOW16_From_CallBack16` return.
 
 If source/ABI inspection proves that this necessarily requires the separate

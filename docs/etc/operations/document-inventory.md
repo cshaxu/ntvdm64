@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3593 |
+| Documentation records | 3594 |
 | --- | --- |
-| Generated UTC | 2026-09-01T01:45:10Z |
+| Generated UTC | 2026-09-01T01:52:44Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | c06c97329ed27f6fc993d0ddc739e25b6c5cfd56e150f1fb14487002d5758c61 |
+| STATUS.md | principal control document | b77961e66a33ec901b8b0bca728cca3f87dba0c4212b1e74335e242506d44c07 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1056,6 +1056,7 @@ content-divergent entries.
 | etc/evidence/m0-t335-s1-wow-source-abi-profile-rebaseline-001.md | indexed supporting material | 145b44c967c366fdb822517fa4eb8903f8c494c059f2430c570639d2f1306fcc |
 | etc/evidence/m0-t335-s2-wow-callback-frame-contract-001.md | indexed supporting material | e2f46ba1a9f5c3e635192e54b26365825040f71a975018bd0398fc9b4aa82abe |
 | etc/evidence/m0-t335-s3-p1-wow-scoped-frame-lease-001.md | indexed supporting material | a987474fec676eac729baa28cfa1cefd08ac88523cc388de5a3d8e703fdb539b |
+| etc/evidence/m0-t335-s3-p10-basesrv-wow-command-route-001.md | indexed supporting material | 1bade15939a3a6a24f811fd9e36e1dcb8e9a69eac969a66c5754a0afd296d120 |
 | etc/evidence/m0-t335-s3-p2-wow-pointer-access-family-audit-001.md | indexed supporting material | d4e7360693f1681b23507b7ae7700ff7d5d39dc11604befcaa7b1a78b67886ad |
 | etc/evidence/m0-t335-s3-p3-wow-current-task-teb-binding-001.md | indexed supporting material | 8cc6a4dc3f2fdfdba6d040de5e6d62ba8f0ac4265c7ccc9bc6ae6d2ce6e4b192 |
 | etc/evidence/m0-t335-s3-p4-wow-softpc-pointer-seam-correction-001.md | indexed supporting material | 870caa13662bed0a9b52df08ca5b8a240c3bc0784b7d489e80a017d44da896fe |
@@ -1063,7 +1064,7 @@ content-divergent entries.
 | etc/evidence/m0-t335-s3-p6-wow-cpu40-selector-resolution-001.md | indexed supporting material | e7277d708f92412288572a4ab4d4e678ab8b3df893ef197e91353f09f6b9cb6c |
 | etc/evidence/m0-t335-s3-p7-wow-two-frame-lease-shape-001.md | indexed supporting material | 4db084a22f9881974b1cd27c1583899c22297500ca7a65cf3bea279f3fc07c1d |
 | etc/evidence/m0-t335-s3-p8-wow-callback-source-binding-001.md | indexed supporting material | d4c989ed87788f3d747ec0da5e2c4f21c56539dbf5b548843c96dcdb30fdcb22 |
-| etc/evidence/m0-t335-s3-p9-wow-guest-return-boundary-001.md | indexed supporting material | 6681b4af033d42e34da9fc0ec04eac038ea02b7dbd6ed3dd3d55009dc6676807 |
+| etc/evidence/m0-t335-s3-p9-wow-guest-return-boundary-001.md | indexed supporting material | efd2c9f7deecc20431d5c34a74cd93eff9047084786a39924c23f72485bda580 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
