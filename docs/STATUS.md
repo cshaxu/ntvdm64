@@ -2,11 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T345 S2.** T344 is closed: its source-defined state-owner audit
-retains one active SoftPC machine/session per process, rather than treating
-thread-local CCPU buffers as a multi-session guarantee. T345/S1 has closed its
-source/ABI/failure inventory and selected the original ordinary DEM
-filesystem/directory/drive/search package as the sole low-dependency cohort.
+**Active: M0 T346 S1.** T345 is closed: its selected ordinary DEM
+filesystem/handle, directory/drive/volume and search/FCB package has retained
+original source ownership and paired CPU40 x86/x64 formal linkage. T346 begins
+the next ordered graphics-presentation package with source/ABI/failure
+inventory only.
 T342 is closed: the only startup-reached debugger form
 is the original `DBGInit` shape through its bounded adapter; BDE, VDMDBG,
 VDMEXTS and FAX remain their original tool/product packages. T341 is closed:
@@ -74,6 +74,28 @@ their named owners: [host capability inventory closure](etc/evidence/m0-t345-s1-
 | Verification | Recheck original body and adapter seams package-wide; verify the selected formal CPU40 x86/x64 graphs and only current local contract coverage. No trace-selected leaf repair or broad runtime claim. |
 | Exit Criteria | All selected files have one source-shaped binding and no parallel v1/self-written provider; local contract evidence covers the original success and failure ownership boundaries; paired formal graphs link the same cohort. |
 | Stop Conditions | A needed new filesystem policy, raw identity transport, new mapping manager, non-ordinary device behavior, guest behavior or unreviewed source import requires re-admission. |
+
+**S2 closure:** the complete ordinary DEM filesystem/handle, directory/drive
+and search/FCB package retains its original bodies, has exactly one selected
+mapping/Win32 binding route and is present in both formal CPU40 graphs:
+[ordinary DEM recovery](etc/evidence/m0-t345-s2-ordinary-dem-host-capability-recovery-001.md).
+
+### M0 T345 S3 — Ordinary DEM local-contract and paired formal closure (closed)
+
+**Evidence:** [ordinary DEM formal closure](etc/evidence/m0-t345-s3-ordinary-dem-formal-closure-001.md).
+**Closure:** [T345 host capability expansion](history/m0-t345-host-capability-expansion-closure-20260901.md).
+
+### M0 T346 S1 — Original SoftPC graphics-presentation source / ABI / failure inventory
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T346 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 7, admitted after the T345 closure under the standing direction to execute ordered owner packages. |
+| Objective | Establish the original SoftPC graphics-presentation boundary: `nt_det`, `nt_graph`, `nt_fulsc`, console events, Alt+Enter and their public/obsolete host dependencies before selecting any bounded source-shaped recovery cohort. |
+| Non-goals | No GUI redesign, generic event loop, synthetic video device, guest/BOP change, new mapper, raw pointer/HANDLE transport, CPU30, Bochs route, private console-server/CSRSS recreation or runtime trace-driven repair. |
+| Verification | Complete source/declaration/definition/caller/failure walk, current-binding comparison, documentation governance and diff checks. No presentation implementation or native observation in S1. |
+| Exit Criteria | Each reached presentation edge has one original owner/disposition and one bounded source-shaped cohort is selected or every form is transferred to a named later owner. |
+| Stop Conditions | A new window framework, private Console Server contract, video-device behavior, guest change or unreviewed import requires a further S admission. |
 
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
