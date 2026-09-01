@@ -24,12 +24,14 @@ static void mvdm_wow_private_product_unavailable(void)
 
 /* DIVERGENCE(ADAPTER-WIN32-039): original USER client `ShowStartGlass`
  * invokes the private `NtUserCallOneParam(SFI__SHOWSTARTGLASS)` compound
- * server action.  Preserve the source name and argument; only an actually
- * reached WOW presentation operation stops the bound session. */
+ * server action.  That void call has no result or MVDM-visible state and is
+ * presentation-only.  The declared non-GUI profile therefore preserves its
+ * name, parameter and caller ordering while intentionally provides no
+ * presentation.  It must not be generalized into a USER/GDI provider.
+ * Hard-error handling below remains an unavailable, controlled-stop path. */
 void ShowStartGlass(DWORD timeout)
 {
     (void)timeout;
-    mvdm_wow_private_product_unavailable();
 }
 
 /* DIVERGENCE(ADAPTER-WIN32-040): original `nt_error.c` forwards this exact

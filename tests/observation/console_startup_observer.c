@@ -8,6 +8,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <stdio.h>
+#include <string.h>
 
 #define OBSERVATION_TIMEOUT_MS 8000u
 #define OBSERVATION_TIMEOUT_EXIT 0x53504354u
@@ -63,7 +64,7 @@ int main(int argc, char **argv)
     BOOL had_previous_main_return_report;
     FILE *report = NULL;
 
-    if (argc != 4) return 64;
+    if (argc < 4) return 64;
     if (!AllocConsole() && GetLastError() != ERROR_ACCESS_DENIED) return 65;
     input = CreateFileA("CONIN$", GENERIC_READ | GENERIC_WRITE,
                         FILE_SHARE_READ | FILE_SHARE_WRITE, &inherit,
@@ -81,7 +82,25 @@ int main(int argc, char **argv)
     startup.hStdInput = input;
     startup.hStdOutput = output;
     startup.hStdError = output;
-    snprintf(command_line, sizeof(command_line), "\"%s\" -f -o --ordinary-child", argv[1]);
+    if (argc == 4) {
+        snprintf(command_line, sizeof(command_line),
+                 "\"%s\" -f -o --ordinary-child", argv[1]);
+    } else {
+        size_t command_length;
+        int argument_index;
+
+        snprintf(command_line, sizeof(command_line), "\"%s\"", argv[1]);
+        command_length = strlen(command_line);
+        for (argument_index = 4; argument_index < argc; ++argument_index) {
+            size_t argument_length = strlen(argv[argument_index]);
+            if (command_length + 1u + argument_length >= sizeof(command_line))
+                return 68;
+            command_line[command_length++] = ' ';
+            memcpy(command_line + command_length, argv[argument_index],
+                   argument_length + 1u);
+            command_length += argument_length;
+        }
+    }
 
     snprintf(exception_report_path, sizeof(exception_report_path), "%s.exception.txt",
              argv[3]);

@@ -35,30 +35,34 @@ guest half and would be false evidence.
 ## Reached startup boundary
 
 The repository already carries the immutable DOS and Win16 guest media below
-`build/output/` and the selected `mvdm-guest` mirror.  Separately,
-`app/entry.c` deliberately does not yet select, read and install a Win16 image
-into the active SoftPC guest address space or provide its guest lifecycle.
-The original BOP `51h` body in
-`mvdm-host/softpc.new/host/src/nt_bop.c:MS_bop_1` also retains its original
-dynamic `WOW32` provider load (`W32Init`, `W32Dispatch`) rather than a static
-host substitute.  No current product route loads `kernel31/krnl386.exe`,
-installs the original WOW32 provider, or reaches the guest callback
-trampoline.
+`build/output/` and the selected `mvdm-guest` mirror.  The default portable
+stage contains the selected DOS and firmware assets, but it does not yet place
+`kernel31/krnl386.exe` beside the product.  That packaging fact is distinct
+from the original activation contract: app removes only its own declaration
+option and transparently passes original `-f`, `-w`, and `-a <kernel>` tokens
+to the original SoftPC entry.  `cmdmisc.c::GetWowKernelCmdLine` remains the
+original owner that reads the process command line and builds the guest EXEC
+record from `-a`.
 
-Therefore the active profile has an exact, source-backed unavailable
-boundary at guest-WOW activation; it has not reached a callback return.  This
-is narrower than a GUI/WOWEXEC/CSRSS claim and does not authorize a newly
-authored loader, synthetic guest bytes, BOP leaf patch, or host callback stub.
+The original BOP `51h` body in
+`mvdm-host/softpc.new/host/src/nt_bop.c:MS_bop_1` retains its original dynamic
+`WOW32` provider load (`W32Init`, `W32Dispatch`) rather than a static host
+substitute.  P11 subsequently proves that a console-owning run with the
+already-carried retail `krnl386.exe` supplied through that original `-a`
+contract reaches original DOS BOP dispatch.  It does not reach BOP 51 or a
+callback return, so the callback boundary remains unproven.  This does not
+authorize a newly authored loader, synthetic guest bytes, BOP leaf patch, or
+host callback stub.
 
 ## Remaining S3 work
 
 The remaining direct S3 question is whether the existing original owner
-sources can establish a declared, immutable-media guest activation route
-without broadening the profile.  That route must select and install the
-already-carried original Win16 kernel media, retain `MS_bop_1`'s
-source-shaped `W32Init`/`W32Dispatch` ordering, and demonstrate the real
-`CallBack16 -> CCPU40 ->
-WOW16_From_CallBack16` return.
+sources can continue from the now-reached DOS execution path through the
+declared original `-a` target, retain `MS_bop_1`'s source-shaped
+`W32Init`/`W32Dispatch` ordering, and demonstrate the real
+`CallBack16 -> CCPU40 -> WOW16_From_CallBack16` return.  A later package
+layout task may place the selected immutable Win16 media beside the product;
+it must not change the original command/guest lifecycle.
 
 If source/ABI inspection proves that this necessarily requires the separate
 WOWEXEC/BaseSrv or GUI product shells, it is an exact successor-owner
