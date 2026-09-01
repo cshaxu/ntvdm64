@@ -25,7 +25,7 @@ client/server contract and the operations that remain assigned to COMMAND or
 WOW.  The current session-local client remains a valid one-session form; this
 audit does not enable a transport.
 
-### S3 — Selected BaseVDM copied-record broker binding
+### S3 — Selected BaseVDM copied-record broker binding (closed)
 
 Extend the existing `broker` component only with the selected DOS
 request/wait/retry, identity and disconnect cohort.  Bind original callers
@@ -35,7 +35,12 @@ process/event/pipe facilities only behind the broker implementation.  Do not
 admit PIF/separate-WOW, shared-WOW registration, COMMAND parent lifecycle or
 any raw handle/pointer transport.
 
-### S4 — Formal graph and contract closure
+**Result:** the selected DOS record now has a fixed-width core and an
+adapter-owned peek/copy/consume binding into the original caller's local
+record. It is intentionally transport-neutral and in-process; it does not
+claim the omitted BaseSrv product forms.
+
+### S4 — Formal graph and contract closure (active)
 
 Verify both formal CPU40 rows and focused copied-record/lifecycle contracts.
 Runtime observation may validate a completed broker package but may not choose

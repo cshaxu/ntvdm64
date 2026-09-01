@@ -2,14 +2,13 @@
 
 ## Current Work
 
-**Active: M0 T343 S3.** T343/S1 and S2 are closed: their source ledgers prove
-that the
-current copied `VDMINFO` client is only a single-process recovery and records
-the original BaseSrv cross-process broker as a separately bounded contract.
+**Active: M0 T344 S1.** T343 is closed: its selected DOS BaseVDM copied-record
+core, source-shaped adapter binding and paired formal verification are
+complete, without claiming CSRSS/BaseSrv or cross-process transport. T344 now
+begins the next ordered package as an original-state/reentrancy audit only.
 T342 is closed: the only startup-reached debugger form
 is the original `DBGInit` shape through its bounded adapter; BDE, VDMDBG,
-VDMEXTS and FAX remain their original tool/product packages. T343 now begins
-the next ordered broker/process source-ABI-failure audit only. T341 is closed:
+VDMEXTS and FAX remain their original tool/product packages. T341 is closed:
 the complete original VDD host-service surface remains selected in
 the formal CPU40/x86 link, while the current profile explicitly selects no
 external installable VDD. T340 is
@@ -23,41 +22,29 @@ and
 
 ## Active Packet
 
-### M0 T343 S3 — Selected BaseVDM copied-record broker binding
+### M0 T344 S1 — Original state / caller / ownership inventory
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T343 S3; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | Selected by the closed T343/S2 copied-record ledger under the standing direction to execute the ordered queue. |
-| Objective | Implement the selected original DOS BaseVDM copied-request/result, same-record wake/retry, broker identity and disconnect cohort through `broker` and `adapter-mvdm-host-out/basesrv`. |
-| Non-goals | No CSRSS/BaseSrv server recreation, kernel VDM, arbitrary process enumeration/control, cross-user broker, raw native pointer/HANDLE IPC, PIF/separate-WOW, shared-WOW registration, COMMAND parent lifecycle, BOP leaf, guest mutation, machine rewrite, Bochs or CPU30 route. |
-| Reference Baseline | Closed T343/S1 boundary evidence, closed T343/S2 copied-record ledger, original BaseClient/BaseSrv `vdm.c`/`srvvdm.c`, existing `broker` fixed-width fixture and current session-local BaseVDM binding. |
-| Files And ABI Surface | `broker` versioned wire/state/transport boundary, basesrv same-shaped callers, session registration/teardown; original `VDMINFO`, DOS/console records and GetNext/Exit/Reenter contracts. |
+| Identifier Mode | M0 T344 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 5, admitted under the standing direction to execute ordered owner packages after T343 closure. |
+| Objective | Establish the complete source/ABI/owner inventory for original MVDM process, thread, VDM and worker state before any in-process multi-session enablement. |
+| Non-goals | No multi-session activation, CSRSS/BaseSrv recreation, process broker expansion, cross-user control, guest/BOP change, CPU30, Bochs route, alternate executor or speculative scheduler. |
+| Reference Baseline | T343 closure, original MVDM BaseClient/BaseSrv, COMMAND/WOW/monitor/SoftPC state carriers, current session/mapping-manager and CPU40 formal graphs. |
+| Files And ABI Surface | Original static/TLS/TEB/worker/record state, `session` state and hooks, `broker` records, SoftPC/monitor state carriers and their direct callers. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, architecture, coding and CPU40-only rules. |
-| Verification | Original contract review, focused broker request/wait/retry/disconnect tests, fixed-width negative ABI tests, both formal CPU40 maps, documentation governance and diff checks. |
-| Expected Markers | A named broker operation carries only copied fixed-width values; same-record wait/retry and disconnect are deterministic; original callers retain their function shape; raw pointer/HANDLE and cross-record wake attempts fail. |
-| Asset Needs | Existing original mirrors, broker/session/basesrv source and public Win32 process/event/pipe APIs; no host installation, guest-media change or source import. |
-| Reporting Requirements | Preserve original ordering, capacity/error and close-once behavior; distinguish broker record IDs from mapping IDs; document every explicit unavailable owner transfer. |
-| Stop Conditions | Need for CSRSS implementation, process discovery/control, cross-user access, raw native identity transport, PIF/WOW/COMMAND semantic implementation, guest change, unreviewed source import or machine rewrite requires re-admission. |
-| Exit Criteria | The selected DOS cohort is source-shaped, fixed-width and formally linked/tested; all omitted original message forms retain their named owner transfers; no current claim exceeds the implemented broker cohort. |
+| Verification | Complete source/declaration/definition/caller/state-scope walk, current owner comparison, formal-build selection review, documentation governance and diff checks; no runtime behavior change in S1. |
+| Expected Markers | Every reached state carrier has process/thread/session scope and a unique owner/disposition; no project state is mistaken for original MVDM state. |
+| Asset Needs | Existing original mirrors, formal graph, broker/session and adapter source; no guest/media import or host installation. |
+| Reporting Requirements | Separate original facts from current binding facts; preserve source owner terminology and record all deferred/hard-boundary transfers. |
+| Stop Conditions | Any implementation, state migration, new scheduler, thread/process control, raw identity transport, guest change or unreviewed source import requires S2 admission. |
+| Exit Criteria | Every reached original state carrier has a source owner and current disposition; S1 selects at most one coherent follow-up lifecycle cohort or explicitly retains the single-session profile. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
-| Similar-Issue Sweep | COMMAND and WOW `GetNextVDMCommand` callers, VDM control, event block/resume, process teardown, console records, CurrentMonitorTeb/FastWOW, VDD/Redirector broker callers, broker ID lifecycle and formal-map ownership. |
+| Similar-Issue Sweep | COMMAND/WOW BaseVDM callers, `CurrentMonitorTeb`, TEB/VDM_TIB, CCPU worker state, SoftPC globals, mapper ownership, BaseSrv records, VDD/Redirector/WOW callbacks, teardown and formal-map state. |
 
-**Plan:** [M0 T343 broker/process recovery](etc/operations/m0-t343-broker-process-cross-process-coordination-recovery-plan-001.md).
+**Plan:** [M0 T344 multi-session reentrancy audit](etc/operations/m0-t344-in-process-multi-session-reentrancy-audit-plan-001.md).
 
-**S1 evidence:** [broker/process ledger](etc/operations/m0-t343-s1-broker-process-contract-ledger.tsv) and [cross-process boundary result](etc/evidence/m0-t343-s1-broker-process-boundary-001.md).
-
-**S2 P1:** original BaseSrv records, message cases and their current local
-dispositions are mapped in the [copied-record ledger](etc/operations/m0-t343-s2-basesrv-record-message-contract-ledger.tsv) and its [source boundary result](etc/evidence/m0-t343-s2-basesrv-record-message-contract-001.md). No transport is enabled by this audit.
-
-**S3 P1:** the selected DOS `VDMINFO` copied-record core is source-shaped,
-fixed-width, focused-test and paired-formal-build closed.  It has no transport
-or original caller binding yet; see the [P1 copied-record result](etc/evidence/m0-t343-s3-p1-copied-record-core-001.md).
-
-**S3 P2:** the selected app declaration now crosses the adapter-owned copied
-broker record before the existing source-shaped local BaseVDM result.  The
-peek/copy/consume ordering is covered on x86/x64; it remains an in-process
-binding, not a BaseSrv transport. See the [P2 binding result](etc/evidence/m0-t343-s3-p2-basesrv-broker-binding-001.md).
+**T343 closure:** [broker/process coordination closure](history/m0-t343-broker-process-cross-process-coordination-closure-20260901.md).
 
 ### M0 T342 S1 — Original Debugger / BDE / FAX source / ABI / failure admission (closed)
 

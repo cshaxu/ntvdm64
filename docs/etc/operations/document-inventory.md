@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3650 |
+| Documentation records | 3653 |
 | --- | --- |
-| Generated UTC | 2026-09-01T07:32:33Z |
+| Generated UTC | 2026-09-01T07:40:05Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | e39ba4ef8219132ab1caa02126ec4ebd1f3b665681d2019a14d645dbab0352e9 |
+| STATUS.md | principal control document | 883554f3c86a5f69b33a6cb1fa2019f60fb06943a9407685dbe2fea5eccca3cb |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1092,6 +1092,7 @@ content-divergent entries.
 | etc/evidence/m0-t343-s2-basesrv-record-message-contract-001.md | indexed supporting material | 0cbb59d9822e5dc5e41e32959d35e981ffa18be31c55886024b2524496742f5f |
 | etc/evidence/m0-t343-s3-p1-copied-record-core-001.md | indexed supporting material | 0dd5c9e2a79685e3b6bee6f36b411b00487df35847fc98b1c10f788eeaa3f4e6 |
 | etc/evidence/m0-t343-s3-p2-basesrv-broker-binding-001.md | indexed supporting material | 474aa989dcc51cf82d744797918805bb28499cf3fba6bbb70103fce76f05f30f |
+| etc/evidence/m0-t343-s3-p3-copied-record-formal-closure-001.md | indexed supporting material | 8c8b562ddfba350b5857bd8c9181114c6009895aea96bdcf210f3244b078d243 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1809,9 +1810,10 @@ content-divergent entries.
 | etc/operations/m0-t341-vdd-owner-package-recovery-plan-001.md | indexed supporting material | 2542cd96de04a0dca166d23a6400d67daa0ced2d46644a122b38f006de569d14 |
 | etc/operations/m0-t342-debugger-bde-fax-owner-package-recovery-plan-001.md | indexed supporting material | 7bd3a49398b790f59e5b93532e51e66cdc4453ef0ea873451cd67cd1f980f543 |
 | etc/operations/m0-t342-s1-debugger-bde-fax-owner-contract-ledger.tsv | indexed supporting material | a28521637759924ba4d4798d0932fcaf7ddc3acde19ad92775b399f7c49995bc |
-| etc/operations/m0-t343-broker-process-cross-process-coordination-recovery-plan-001.md | indexed supporting material | 13b45503ff28acb2f27e110cb16c8f77ee0255aec3abda9229d4e67234e8761f |
+| etc/operations/m0-t343-broker-process-cross-process-coordination-recovery-plan-001.md | indexed supporting material | 63cc149393d873c506bea008ac0c04aa6c5e394bae98bf6da156b261877be69d |
 | etc/operations/m0-t343-s1-broker-process-contract-ledger.tsv | indexed supporting material | 674f117374ba23d4951f924356ab11defc6b8bf5165057352531e918e7cd2d79 |
 | etc/operations/m0-t343-s2-basesrv-record-message-contract-ledger.tsv | indexed supporting material | e46569ce5647c76198d34593bbd1a8918de1557fa0d9a14ec90636afff659a62 |
+| etc/operations/m0-t344-in-process-multi-session-reentrancy-audit-plan-001.md | indexed supporting material | e0c547a64fe928b6224b12373f4c721970107ed40d95194963ad24c9bb28a0f5 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3557,6 +3559,7 @@ content-divergent entries.
 | history/m0-t340-resident-device-initialization-recovery-closure-20260831.md | closed task history | 5aaf9c99f41153f318d08a4ea89eb1b05010db9e0fa631bfd5acafe5bbc1e564 |
 | history/m0-t341-vdd-owner-package-recovery-closure-20260831.md | closed task history | 8080bf683a7c54b0b42973ec604f2453c18c6107657bd5996800a3c50b33c413 |
 | history/m0-t342-debugger-bde-fax-owner-package-recovery-closure-20260831.md | closed task history | 0c46a0d7c91489776d435acc795b8000922e3c6e84bc8d580e5ca3e0171a4246 |
+| history/m0-t343-broker-process-cross-process-coordination-closure-20260901.md | closed task history | 48af84ea1bb52c3c1989e6240a63efa10ae0df0d6a0c5252f2c460832be4efd4 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
