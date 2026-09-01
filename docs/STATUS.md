@@ -202,6 +202,12 @@ continuity boundary. `54:05` is the `cmdSetInfo` ingress record; it does not
 by itself prove that the body failed or completed. `CONFIG.NT` preprocessing
 is the later `54:0C` service and was not reached.
 
+**S4 P2:** [bounded presentation noninterference fixture](etc/evidence/m0-t346-s4-p2-presentation-noninterference-fixture-001.md)
+selects SoftPC before the app window opens and proves that the window lifecycle
+leaves that backend selection and the active session state unchanged. This is
+local composition evidence only; it does not meet the still-blocked guest
+graphics-workload criterion.
+
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
 **T343 closure:** [broker/process coordination closure](history/m0-t343-broker-process-cross-process-coordination-closure-20260901.md).
