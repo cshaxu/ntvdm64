@@ -155,15 +155,15 @@ failure on both x86 and x64; both paired formal CPU40 graphs rebuild the
 affected session/adapter libraries successfully. No graphics framebuffer or
 window was introduced.
 
-**S2 P2:** the original graphics output has now been separated from its
+**S2 P2 / S2 closed:** the original graphics output has now been separated from its
 retired Console-Server carrier. `nt_graph.c` still owns DIB construction,
 palette/update order and every original CGA/EGA/VGA writer; its sole private
 graphics-buffer request binds that DIB descriptor to bounded session storage
 through adapter-mvdm-host-out. The app-facing side remains snapshot-only. The
 x86/x64 local contract verifies descriptor validation, writable original
-pointer, snapshot content and deterministic cleanup. The formal full graph
-currently needs separate build-process diagnosis after a no-output stall; S2
-does not treat that as a source/ABI failure.
+pointer, snapshot content and deterministic cleanup. Both formal CPU40 graphs
+rebuild the affected objects and relink `softpc-win32-bindings.lib`. See the
+[S2 closure evidence](etc/evidence/m0-t346-s2-p2-graphics-session-surface-closure-001.md).
 
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
