@@ -2,10 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T343 S2.** T343/S1 is closed: its source ledger proves that the
+**Active: M0 T343 S3.** T343/S1 and S2 are closed: their source ledgers prove
+that the
 current copied `VDMINFO` client is only a single-process recovery and records
-the original BaseSrv cross-process broker as a separate, unimplemented
-contract. T342 is closed: the only startup-reached debugger form
+the original BaseSrv cross-process broker as a separately bounded contract.
+T342 is closed: the only startup-reached debugger form
 is the original `DBGInit` shape through its bounded adapter; BDE, VDMDBG,
 VDMEXTS and FAX remain their original tool/product packages. T343 now begins
 the next ordered broker/process source-ABI-failure audit only. T341 is closed:
@@ -22,25 +23,25 @@ and
 
 ## Active Packet
 
-### M0 T343 S2 — Original BaseSrv copied-record broker contract audit
+### M0 T343 S3 — Selected BaseVDM copied-record broker binding
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T343 S2; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | Selected by T343/S1's source-backed boundary result under the standing direction to execute the ordered queue. |
-| Objective | Recover the finite original BaseSrv client/server record, message, wait, identity and disconnect contract that a public-API copied-record broker must retain; select one bounded cohort for a later implementation. |
-| Non-goals | No CSRSS/BaseSrv server recreation, kernel VDM, process enumeration, cross-user broker, raw native pointer/HANDLE IPC, BOP leaf, guest mutation, machine rewrite, Bochs or CPU30 route. |
-| Reference Baseline | T343/S1 broker/process contract ledger and boundary evidence; original `base/win32/client/vdm.c` and `base/win32/server/srvvdm.c`; current `base_vdm_client.c`/`base_vdm_local.c` selected local client. |
-| Files And ABI Surface | Original `VDMINFO` client capture, BaseSrv console/DOS/WOW record fields, Check/Exit/IsFirst/GetNext message cases, process/identity/disconnect lifetime, current basesrv adapter and session binding declarations. |
-| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, architecture and CPU40-only rules. |
-| Verification | Definition/caller/message/failure walk; exact record-field and ownership ledger; explicit public-API versus private-CSRSS disposition; documentation governance and diff checks. No runtime transport implementation in S2. |
-| Expected Markers | Every selected original record field/message case has a retained, deferred, or hard-boundary disposition; the selected later cohort has fixed-width copied inputs/results and no raw identity transfer. |
-| Asset Needs | Existing MVDM/opennt-host mirrors and selected formal maps only; no new process service, host installation, guest media or source import. |
-| Reporting Requirements | Preserve original client/server ordering, wait, error and disconnect semantics; distinguish source facts from future implementation; record rejected direct-server and ad-hoc IPC routes. |
-| Stop Conditions | Any need to implement a server, enumerate/control arbitrary processes, serialize native pointers/HANDLEs, alter guest behavior, or import an unreviewed source package requires re-admission. |
-| Exit Criteria | The original BaseSrv cohort has a complete source-shaped record/message/failure ledger and one bounded future binding selection or a named hard transfer; no current local route is overstated as cross-process completion. |
+| Identifier Mode | M0 T343 S3; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Selected by the closed T343/S2 copied-record ledger under the standing direction to execute the ordered queue. |
+| Objective | Implement the selected original DOS BaseVDM copied-request/result, same-record wake/retry, broker identity and disconnect cohort through `broker` and `adapter-mvdm-host-out/basesrv`. |
+| Non-goals | No CSRSS/BaseSrv server recreation, kernel VDM, arbitrary process enumeration/control, cross-user broker, raw native pointer/HANDLE IPC, PIF/separate-WOW, shared-WOW registration, COMMAND parent lifecycle, BOP leaf, guest mutation, machine rewrite, Bochs or CPU30 route. |
+| Reference Baseline | Closed T343/S1 boundary evidence, closed T343/S2 copied-record ledger, original BaseClient/BaseSrv `vdm.c`/`srvvdm.c`, existing `broker` fixed-width fixture and current session-local BaseVDM binding. |
+| Files And ABI Surface | `broker` versioned wire/state/transport boundary, basesrv same-shaped callers, session registration/teardown; original `VDMINFO`, DOS/console records and GetNext/Exit/Reenter contracts. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, architecture, coding and CPU40-only rules. |
+| Verification | Original contract review, focused broker request/wait/retry/disconnect tests, fixed-width negative ABI tests, both formal CPU40 maps, documentation governance and diff checks. |
+| Expected Markers | A named broker operation carries only copied fixed-width values; same-record wait/retry and disconnect are deterministic; original callers retain their function shape; raw pointer/HANDLE and cross-record wake attempts fail. |
+| Asset Needs | Existing original mirrors, broker/session/basesrv source and public Win32 process/event/pipe APIs; no host installation, guest-media change or source import. |
+| Reporting Requirements | Preserve original ordering, capacity/error and close-once behavior; distinguish broker record IDs from mapping IDs; document every explicit unavailable owner transfer. |
+| Stop Conditions | Need for CSRSS implementation, process discovery/control, cross-user access, raw native identity transport, PIF/WOW/COMMAND semantic implementation, guest change, unreviewed source import or machine rewrite requires re-admission. |
+| Exit Criteria | The selected DOS cohort is source-shaped, fixed-width and formally linked/tested; all omitted original message forms retain their named owner transfers; no current claim exceeds the implemented broker cohort. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
-| Similar-Issue Sweep | COMMAND and WOW `GetNextVDMCommand` callers, VDM control, event block/resume, process teardown, console records, CurrentMonitorTeb/FastWOW, VDD/Redirector broker callers and formal-map ownership. |
+| Similar-Issue Sweep | COMMAND and WOW `GetNextVDMCommand` callers, VDM control, event block/resume, process teardown, console records, CurrentMonitorTeb/FastWOW, VDD/Redirector broker callers, broker ID lifecycle and formal-map ownership. |
 
 **Plan:** [M0 T343 broker/process recovery](etc/operations/m0-t343-broker-process-cross-process-coordination-recovery-plan-001.md).
 

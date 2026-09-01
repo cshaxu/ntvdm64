@@ -9,21 +9,33 @@ or BOP into an ad-hoc IPC protocol.
 
 ## S plan
 
-### S1 — Original broker / process / ABI / failure admission
+### S1 — Original broker / process / ABI / failure admission (closed)
 
 Map every selected MVDM caller of Base VDM client, CSR/BaseSrv, VDM control,
 process discovery, command delivery and cross-process event interfaces. Record
 the original record layouts, ownership, public Win32 alternatives, existing
 session/broker bindings and hard private boundaries.
 
-### S2 — Selected local broker cohort
+### S2 — Original BaseSrv copied-record broker contract audit (closed)
 
-If S1 selects a finite original client cohort, retain its original body and
-bind only the necessary copied/versioned session records and public Win32
-operations. Preserve caller order, wait/disconnect/error behavior and mapping
-rules; do not invent process scanning or global session state.
+Map the selected BaseSrv DOS, console, WOW, PIF, parent-wait, re-entry,
+directory, batch and disconnect records/messages.  Determine the exact
+fixed-width copied-record wire content that preserves the original
+client/server contract and the operations that remain assigned to COMMAND or
+WOW.  The current session-local client remains a valid one-session form; this
+audit does not enable a transport.
 
-### S3 — Formal graph and contract closure
+### S3 — Selected BaseVDM copied-record broker binding
+
+Extend the existing `broker` component only with the selected DOS
+request/wait/retry, identity and disconnect cohort.  Bind original callers
+through `adapter-mvdm-host-out/basesrv`; preserve copied request/result,
+same-record wake/retry, capacity/error and close-once contracts.  Use public
+process/event/pipe facilities only behind the broker implementation.  Do not
+admit PIF/separate-WOW, shared-WOW registration, COMMAND parent lifecycle or
+any raw handle/pointer transport.
+
+### S4 — Formal graph and contract closure
 
 Verify both formal CPU40 rows and focused copied-record/lifecycle contracts.
 Runtime observation may validate a completed broker package but may not choose
