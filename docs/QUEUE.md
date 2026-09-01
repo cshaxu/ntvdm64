@@ -24,6 +24,13 @@ unrelated package remains unclassified. Cross-package interface and perimeter
 ledgers remain shared evidence and are updated only where the active package
 reaches them.
 
+The former XMS, DPMI/DPMI32, Redirector and NetAPI/RAP owner-package
+candidates are closed and therefore do not remain in this candidate-only
+queue. Their closure records remain in `STATUS.md` and `docs/history/`. The next
+vertical objective is deliberately explicit: static package closure and a
+reached BOP are not evidence that `COMMAND.COM`, a DOS child program, or its
+parent return has executed.
+
 The detailed proposal, predecessor, delivery and exclusions for every queue
 item are in the [package recovery proposal set](etc/operations/package-recovery-program-20260827.md).
 
@@ -37,21 +44,18 @@ owner transfer; x64 may not be accumulated as later compatibility debt. Bochs
 is retired and is neither a production route nor an acceptance row.
 
 | Order | Candidate implementation package |
-| --- | --- | --- |
-| 1 | XMS owner package |
-| 2 | DPMI/DPMI32 owner package |
-| 3 | Redirector owner package (including the selected `netstatus.c` mirror slice) |
-| 4 | NetAPI/RAP Redirector network-boundary package |
-| 5 | WOW32/Win16 owner package |
-| 6 | VDD owner package |
-| 7 | Debugger/BDE/FAX owner packages |
-| 8 | Service-package cross-family closure and native integration evidence |
-| 9 | Broker process and cross-process coordination |
-| 10 | In-process multi-session reentrancy audit |
-| 11 | Host capability expansion |
-| 12 | SoftPC graphics presentation window and Alt+Enter transition |
-| 13 | Guest DOS/WOW16 artifact matrix |
-| 14 | Product release closure |
+| --- | --- |
+| 1 | SoftPC pre-BOP startup continuity — recover the source-defined CPU40/FDC/INT15/PIT/ICA/heartbeat cohort to a stable original `50h:11h → MS_bop_0 → DemDispatch → demLoadDos` crossing. |
+| 2 | Minimal DOS guest execution and controlled return — execute one declared immutable `.COM`/minimal `.EXE` via the original NTIO/NTDOS/COMMAND path and prove child exit through the original parent/COMMAND return contract. |
+| 3 | Minimal vertical-slice integration closure — fixed x86 runtime observation plus paired x86/x64 build/link matrix, negative cases and no-bypass reversion review for the completed DOS child slice. |
+| 4 | VDD owner package |
+| 5 | Debugger/BDE/FAX owner packages |
+| 6 | Broker process and cross-process coordination |
+| 7 | In-process multi-session reentrancy audit |
+| 8 | Host capability expansion |
+| 9 | SoftPC graphics presentation window and Alt+Enter transition |
+| 10 | Guest DOS/WOW16 artifact matrix |
+| 11 | Product release closure |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

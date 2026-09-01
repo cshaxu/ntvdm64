@@ -49,6 +49,35 @@ MVDM-BOP-DISPATCH 50:1B
 MVDM-BOP-DISPATCH 54:05
 ```
 
+The selected original dispatch tables give this sequence a precise startup
+meaning, rather than treating it as a list of independently selected BOP
+repairs:
+
+- `50:11` is `demLoadDos`, the original `NTDOS.SYS` load service.
+- `50:3B` is `demIsDebug`, the original DOS debugger-state query.
+- `50:0F` is `demGetDrives`, the original host-drive enumeration service.
+- `50:1B` is `demSetDTALocation`, the original DOS DTA/current-PDB address
+  registration service.
+- `54:05` is `cmdSetInfo`, which records the original COMMAND `SCSINFO`,
+  `IsDosBinary`, and `FDAccess` guest addresses.
+
+`MS_bop_4` calls the original `CmdDispatch`, advances the original guest IP by
+one service byte, and returns to CCPU40.  No subsequent BOP marker is
+observed.  The current evidence therefore places the `0xC0000005` after the
+successful return from this initialization sequence and before the next BOP
+ingress; it does not identify a failed DEM/COMMAND service, a missing guest
+file, or a missing Win16 loader.  It is a guest/CPU-continuity attribution
+only, so no leaf BOP provider is changed by this observation.
+
+The matching original guest continuation in
+`mvdm-guest/dos/v86/doskrnl/dos/msinit.asm` makes the attribution narrower:
+after `CMDSVC SVC_CMDSETINFO`, NTDOS restores saved registers, records the
+BIOS exchange block, publishes DOSDATA segment pointers, switches to the DOS
+disk stack, and initializes its Win386/DOSWOW instance-pointer fields.  The
+current observation ends within that original NTDOS initialization continuation
+or its CCPU40 execution, before a later DOS/COMMAND or WOW ingress can be
+observed.  It cannot support a loader or BOP-provider repair.
+
 The process subsequently exited with `0xC0000005`.  No BOP 51/WOW provider
 load or `CallBack16` return is claimed.  The observation proves only that
 existing guest media plus the original command-line contract reaches the
@@ -57,6 +86,7 @@ the later need to package Win16 media beside a released executable.
 
 ## Disposition
 
-No guest loader was created.  The next S3 work remains source-shaped diagnosis
-of the reached post-`54:05` continuity failure and, only after that path is
-stable, the original BOP 51/WOW provider boundary.
+No guest loader was created.  S3/P12 subsequently closed the narrow original
+`CallBack16`/CCPU40 return transaction, and S4 formally reconciled the selected
+non-GUI package.  The reached post-`54:05` failure transfers to the CPU40/guest
+continuity package; it does not authorize a BOP-provider or loader repair.
