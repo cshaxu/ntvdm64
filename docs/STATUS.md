@@ -2,19 +2,23 @@
 
 ## Current Work
 
-**Active: M0 T342 S1.** T341 is closed: the complete original VDD host-service
-surface remains selected in the formal CPU40/x86 link, while the current
-profile explicitly selects no external installable VDD. T342 now begins the
-next ordered Debugger/BDE/FAX source/ABI/failure audit only. T340 is
+**No active M/T/S packet.** M0 T342 is closed: the only startup-reached
+debugger form is the original `DBGInit` shape through its bounded adapter;
+BDE, VDMDBG, VDMEXTS and FAX remain their original tool/product packages. T341
+is closed: the complete original VDD host-service surface remains selected in
+the formal CPU40/x86 link, while the current profile explicitly selects no
+external installable VDD. T340 is
 closed: initial resident DOS-BIOS headers are
 the original function-00 no-op-success cohort, and the selected original
 HIMEM/SoftPC XMS-A20-INT15-HMA successor is source/formal-build closed. Its
 single unchanged fixed observation did not reach HIMEM. See the
+[T342 closure](history/m0-t342-debugger-bde-fax-owner-package-recovery-closure-20260831.md)
+and
 [T341 closure](history/m0-t341-vdd-owner-package-recovery-closure-20260831.md).
 
 ## Active Packet
 
-### M0 T342 S1 — Original Debugger / BDE / FAX source / ABI / failure admission
+### M0 T342 S1 — Original Debugger / BDE / FAX source / ABI / failure admission (closed)
 
 | Field | Record |
 | --- | --- |
@@ -30,6 +34,10 @@ single unchanged fixed observation did not reach HIMEM. See the
 | Similar-Issue Sweep | `DBGInit`, debug notifications, BDE/VDD contracts, FAX samples, WOW/Redirector debugger callers, monitor/kernel events, console/UI, thread lifecycle and teardown. |
 
 **Plan:** [M0 T342 Debugger/BDE/FAX owner-package recovery](etc/operations/m0-t342-debugger-bde-fax-owner-package-recovery-plan-001.md).
+
+### M0 T342 S2 — Selected original debugger startup formal closure (closed)
+
+**Evidence:** [S2 debugger startup closure](etc/evidence/m0-t342-s2-debugger-startup-formal-closure-001.md). **Closure:** [T342 debugger/BDE/FAX package](history/m0-t342-debugger-bde-fax-owner-package-recovery-closure-20260831.md).
 
 ### M0 T341 S1 — Original VDD owner source / ABI / failure admission (closed)
 
