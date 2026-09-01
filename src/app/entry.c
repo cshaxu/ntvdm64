@@ -3,6 +3,7 @@
 #include "app/package_layout.h"
 #include "app/presentation_window.h"
 
+#include <stdio.h>
 #include <windows.h>
 
 /* App owns these process-assembly outcomes.  They deliberately do not
@@ -34,6 +35,46 @@ static void app_report_media_root_rejected(void)
         "NTVDM64 package path too long", MB_OK | MB_ICONERROR);
 }
 
+static const char *app_dispose_reason_name(uint32_t reason)
+{
+    switch (reason) {
+    case SESSION_DISPOSE_REASON_INVALID:
+        return "invalid";
+    case SESSION_DISPOSE_REASON_BINDING_COUNT:
+        return "binding-count";
+    case SESSION_DISPOSE_REASON_TERMINATION_ARMED:
+        return "termination-armed";
+    default:
+        return "none";
+    }
+}
+
+static void app_record_dispose_failure(uint32_t reason)
+{
+    char path[MAX_PATH];
+    char message[128];
+    DWORD path_bytes;
+    DWORD written;
+    HANDLE output;
+    int formatted;
+
+    /* Default-off fixed-container observation only.  It neither changes the
+     * dispose result nor attempts recovery; the report contains no guest,
+     * MVDM, host-handle or pointer state. */
+    path_bytes = GetEnvironmentVariableA("MVDM_SESSION_DISPOSE_REPORT_PATH",
+        path, (DWORD)sizeof(path));
+    if (path_bytes == 0u || path_bytes >= sizeof(path)) return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-SESSION-DISPOSE reason=%s code=%lu\r\n",
+        app_dispose_reason_name(reason), (unsigned long)reason);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
+    output = CreateFileA(path, GENERIC_WRITE, FILE_SHARE_READ, NULL,
+        CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (output == INVALID_HANDLE_VALUE) return;
+    (void)WriteFile(output, message, (DWORD)formatted, &written, NULL);
+    CloseHandle(output);
+}
+
 /* The application owns only process/session assembly.  Guest loading,
  * host initialization and CPU execution stay in the original SoftPC entry
  * selected by app_machine_shell_run(). */
@@ -43,6 +84,7 @@ int main(int argc, char **argv)
     app_launch_declaration declaration;
     app_presentation_window presentation;
     session owner;
+    uint32_t dispose_reason;
     int result = 1;
 
     session_initialize(&owner, 1u);
@@ -111,6 +153,9 @@ int main(int argc, char **argv)
 
 finish:
     (void)app_presentation_window_close(&presentation);
-    if (!session_dispose(&owner)) return APP_STARTUP_DISPOSE_FAILURE;
+    if (!session_dispose_with_reason(&owner, &dispose_reason)) {
+        app_record_dispose_failure(dispose_reason);
+        return APP_STARTUP_DISPOSE_FAILURE;
+    }
     return result;
 }

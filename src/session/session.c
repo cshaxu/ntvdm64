@@ -412,12 +412,23 @@ uint32_t session_presentation_graphics_mutex_identifier(const session *instance)
         instance->presentation_graphics_mutex_identifier : 0u;
 }
 
-int session_dispose(session *instance)
+static uint32_t session_dispose_reason(const session *instance)
+{
+    if (!session_valid(instance)) return SESSION_DISPOSE_REASON_INVALID;
+    if (session_binding_count(instance) != 0u)
+        return SESSION_DISPOSE_REASON_BINDING_COUNT;
+    if (instance->termination_armed != 0u)
+        return SESSION_DISPOSE_REASON_TERMINATION_ARMED;
+    return SESSION_DISPOSE_REASON_NONE;
+}
+
+int session_dispose_with_reason(session *instance, uint32_t *reason_out)
 {
     uint32_t index;
-    if (!session_valid(instance) || session_binding_count(instance) != 0u ||
-        instance->termination_armed != 0u)
-        return 0;
+    uint32_t reason = session_dispose_reason(instance);
+
+    if (reason_out != NULL) *reason_out = reason;
+    if (reason != SESSION_DISPOSE_REASON_NONE) return 0;
     for (index = instance->teardown_count; index != 0u; --index) {
         session_teardown teardown = instance->teardowns[index - 1u];
         teardown.function(teardown.context);
@@ -430,6 +441,11 @@ int session_dispose(session *instance)
     mapping_manager_dispose(&instance->completion_callback_mappings);
     memset(instance, 0, sizeof(*instance));
     return 1;
+}
+
+int session_dispose(session *instance)
+{
+    return session_dispose_with_reason(instance, NULL);
 }
 
 int session_thread_bind(session *instance)

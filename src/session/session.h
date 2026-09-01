@@ -35,6 +35,16 @@ enum session_cancellation_reason {
     SESSION_CANCELLATION_REQUESTED = 1u
 };
 
+/* A session-owned explanation of the existing dispose precondition.  These
+ * values are app-local diagnostics; they are never copied into guest/MVDM
+ * state and do not alter dispose ordering or failure behavior. */
+enum session_dispose_reason {
+    SESSION_DISPOSE_REASON_NONE = 0u,
+    SESSION_DISPOSE_REASON_INVALID = 1u,
+    SESSION_DISPOSE_REASON_BINDING_COUNT = 2u,
+    SESSION_DISPOSE_REASON_TERMINATION_ARMED = 3u
+};
+
 enum session_video_event_kind {
     SESSION_VIDEO_EVENT_INVALIDATE = 1u,
     SESSION_VIDEO_EVENT_PALETTE = 2u,
@@ -180,6 +190,9 @@ int session_presentation_graphics_set_mutex_identifier(session *instance,
     uint32_t identifier);
 uint32_t session_presentation_graphics_mutex_identifier(const session *instance);
 int session_dispose(session *instance);
+/* Same dispose operation with an optional fixed-width failure explanation.
+ * `reason_out` is written before any teardown and is `NONE` on success. */
+int session_dispose_with_reason(session *instance, uint32_t *reason_out);
 mapping_manager *session_guest_memory_mappings(session *instance);
 mapping_manager *session_host_resource_mappings(session *instance);
 mapping_manager *session_completion_callback_mappings(session *instance);

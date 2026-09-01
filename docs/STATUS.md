@@ -490,8 +490,9 @@ and
 
 **No active M/T/S packet.**
 
-T355 is paused after S23 rejected a false console-worker cohort; a follow-on
-session-disposal predicate observer requires a distinct admission.
+T355 awaits a separately admitted fixed-container environment-forwarding
+diagnostic packet after S24's one run proved the current observer does not
+forward optional child environment entries.
 
 ### M0 T355 S1 — Closed short-path permanent COMMAND fixed-container verification
 
@@ -1052,6 +1053,32 @@ no source change.
 proves that the direct original event worker does not bind `session`; its
 temporary cleanup change was removed.  A disposal-predicate observer needs a
 new admission before any further lifecycle work.
+
+### M0 T355 S24 — Active session-disposal predicate observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S24; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted after S22/S23 proved that source reading and exit status `72` cannot distinguish the three existing `session_dispose` rejection predicates. The standing owner direction authorizes ordered recovery, source-first minimal adapters and one fixed-container observation. |
+| Objective | Add one default-off, fixed-width app/session diagnostic which atomically records the already-existing reason that `session_dispose` rejects, then make exactly one unchanged-container observation. |
+| Non-goals | No change to the return value, teardown order, session state, worker scheduling, BOP/DEM/COMMAND/XMS/CCPU behavior, guest/firmware/media, mapping-manager semantics, host mutation, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics work. |
+| Reference Baseline | S21 proves original XMS lifecycle progress and records only app result `72`; S22/S23 prove event/heartbeat workers cannot explain binding count. `session_dispose` currently has exactly invalid-instance, nonzero-binding-count and armed-termination predicates. |
+| Files And ABI Surface | `session/session.{h,c}` adds a source-owned fixed-width diagnostic result to the existing dispose operation; `app/entry.c` consumes it only after the unchanged failure result and writes an optional child-only report. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Review predicate ordering and original app result preservation; focused session/app build; formal CPU40/x86 graph/link; one fixed-container observation with only a report-path environment addition; documentation governance/export and diff review. |
+| Expected Markers | An optional record identifies exactly one of `invalid`, `binding-count`, or `termination-armed` before app returns `72`; absence of the report path leaves output and behavior unchanged. |
+| Asset Needs | Existing session/app source, selected S20 formal product, fixed `O:\\ntvdm` media/observer and Node 22; no new media or source import. |
+| Reporting Requirements | Record result-code format, predicate order, source file/line ownership, product/media identity and one observation. Distinguish a diagnosis from a repair or guest-continuity claim. |
+| Stop Conditions | Any need to change a predicate, add a lifecycle worker, take a second runtime observation, alter container/media/timeout, inspect guest data, or select a repair from an unclassified report pauses for a new admission. |
+| Exit Criteria | One report or an explicit report-unavailable result identifies the existing predicate; no original MVDM mirror changes are retained; S24 transfers at most one complete original/source-owned lifecycle cohort. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `session_valid`, `binding_count`, `termination_armed`, execution bridge normal/nonlocal return, COMMAND/Redirector thread wrappers, app finish path and optional diagnostic writers. |
+
+**S24 closure:** [session-disposal predicate observation](etc/evidence/m0-t355-s24-session-disposal-predicate-observation-001.md)
+adds the default-off fixed-width reason without changing app result `72` or
+SoftPC/MVDM behavior.  Its one admitted container run is report-unavailable:
+the existing observer ignores unknown `--environment` arguments and did not
+pass the requested child variable.  No retry occurs in S24.
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 
