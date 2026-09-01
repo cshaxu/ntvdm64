@@ -9,25 +9,25 @@ graphics workload: the selected fixed observation remains pre-graphics and
 has transferred the source-defined scalar-alias lifecycle predecessor to T347.
 See the [T346 closure](history/m0-t346-softpc-graphics-presentation-closure-20260901.md).
 
-### M0 T347 S1 — Original scalar-alias registration/use/lifetime ledger
+### M0 T347 S2 — Scalar-location adapter contract and local lifecycle proof
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T347 S1; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | Queue candidate “COMMAND/DEM/SoftPC guest scalar-alias lifecycle recovery”, admitted by the owner on 2026-09-01 after T346/S4 transferred its pre-graphics source finding. |
-| Objective | Establish the complete original registration, use, lifetime, error and teardown ledger for `SCS_ToSync`, `SCS_Is_Dos_Binary`, and `SCS_FDACCESS`, then select the smallest unified same-shaped adapter contract. |
+| Identifier Mode | M0 T347 S2; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T347/S1's committed source-lifecycle ledger under the owner-approved scalar-alias package. |
+| Objective | Extend the existing `mvdm_command_guest_state` adapter with complete byte/word scalar-location operations for the three original registrations, while exposing no guest pointer. |
 | Non-goals | No BOP leaf workaround, graphics repair, CONFIG.NT behavior change, new mapping manager, guest-media modification, DOS policy, FDC/BIOS behavior, CPU30, Bochs route, durable guest pointer or raw host identity transport. |
-| Reference Baseline | T346/S4 P3 owner-transfer evidence; original NTDOS, COMMAND, DEM and SoftPC mirror bodies; the existing session mapping manager and `adapter-mvdm-host-out/softpc` guest-location seams. |
-| Files And ABI Surface | `msinit.asm`, `msproc.asm`, `macro.asm`, `misc.asm`, `cmdmisc.c`, `cmdpif.c`, `demmisc.c`, `nt_fdisk.c`, `nt_rflop.c`, related declarations, current guest-state adapter and mapping-manager lifecycle interfaces. |
+| Reference Baseline | T347/S1 ledger; current partial `SCSINFO`/`SCS_ToSync` state and session guest-memory lease behavior. |
+| Files And ABI Surface | `adapter-mvdm-host-out/softpc/include/mvdm_command_guest_state.h`, `mvdm_command_guest_state.c`, local tests, session lifecycle/lease interfaces and component README registration. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, architecture, coding and CPU40-only rules. |
-| Verification | Source/declaration/definition/caller/lifetime/failure walk; existing-binding comparison; document governance and diff checks. S1 makes no behavior change. |
-| Expected Markers | Every retained guest scalar location, access width/direction and lifetime has one original owner, caller set, teardown rule and proposed adapter disposition; no raw durable-pointer path is silently accepted. |
-| Asset Needs | Existing original mirrors, existing mapping manager and formal CPU40 graphs; no imported source, guest image, host installation or system configuration change. |
-| Reporting Requirements | Separate original-source facts from current bindings; identify every source divergence and mapping lease requirement; transfer any unlisted owner family rather than expanding the cohort. |
+| Verification | Focused positive byte/word write/read/add/reset tests plus unmapped, cross-session, stale-epoch and inactive-memory failures; selected x86/CPU40 adapter build; governance and diff checks. |
+| Expected Markers | One atomic registration route retains all three 16:16 locations; byte and word operations use only short leases, preserve fixed width/modular word semantics and reject stale state. |
+| Asset Needs | Existing original mirrors, existing session mapping manager and formal CPU40 graphs; no imported source, guest image, host installation or system configuration change. |
+| Reporting Requirements | Register the adapter-only divergence, distinguish local adapter proof from original-source migration, and transfer no unrelated pointer aliases into this S. |
 | Stop Conditions | A need for a second mapper, new guest ABI, raw pointer persistence, filesystem/drive policy, new machine behavior, guest source change or unreviewed import pauses for re-admission. |
-| Exit Criteria | A complete S1 ledger selects one minimal source-shaped scalar-location/short-lease API or transfers every unresolved item to a named owner; no code changes are made under S1. |
+| Exit Criteria | The selected adapter API and focused lifecycle tests pass; no original mirror dereference is migrated in S2; S3 alone owns mirror-site migration. |
 | Original Owner Request | “批准” to pause/close T346 and admit the scalar-alias lifecycle task. |
-| Similar-Issue Sweep | All durable `GetVDMAddr` aliases in the selected COMMAND/DEM/SoftPC cohort; access direction, reset/increment/decrement behavior, stale epoch/session teardown, and current guest-state carrier ownership. |
+| Similar-Issue Sweep | `SCS_ToSync`, binary-classification and disk-access locations; registration atomicity, byte/word access width, guest-memory epochs, thread binding and session teardown. |
 
 **Plan:** [M0 T347 scalar-alias lifecycle recovery](etc/operations/m0-t347-command-dem-softpc-scalar-alias-lifecycle-recovery-plan-001.md).
 
@@ -37,6 +37,12 @@ original DOSDATA registration cohort. It selects a single extension to the
 existing `adapter-mvdm-host-out/softpc` location/lease seam; no new mapper,
 BOP provider or guest change is required. The next S may implement only the
 selected scalar operations and their local lifecycle tests.
+
+**S2 P1 / S2 closure:** [the scalar-location adapter closure](etc/evidence/m0-t347-s2-scalar-location-adapter-closure-001.md)
+adds atomic numeric registration and byte/word short-lease operations with
+session and guest-memory epoch rejection. The focused x86 fixture and the
+selected formal CPU40/x86 product link pass. Original pointer-retention sites
+are deliberately untouched; S3 alone owns their source-ordered migration.
 T342 is closed: the only startup-reached debugger form
 is the original `DBGInit` shape through its bounded adapter; BDE, VDMDBG,
 VDMEXTS and FAX remain their original tool/product packages. T341 is closed:
