@@ -128,6 +128,68 @@ BOOL WINAPI RegisterConsoleVDM(DWORD flags, HANDLE start_event,
     return TRUE;
 }
 
+BOOL WINAPI MvdmPresentationGraphicsBuffer(HANDLE output,
+                                           PCONSOLE_GRAPHICS_BUFFER_INFO info,
+                                           HANDLE *screen_buffer)
+{
+    session *owner = session_thread_current();
+    BITMAPINFOHEADER *header;
+    uint64_t bits_per_line;
+    uint64_t stride;
+    uint64_t height;
+    uint8_t *pixels;
+    HANDLE duplicate;
+    HANDLE mutex;
+
+    if (screen_buffer != NULL) *screen_buffer = NULL;
+    if (owner == NULL || !session_valid(owner) ||
+        owner->state != SESSION_STATE_ACTIVE || info == NULL ||
+        info->lpBitMapInfo == NULL || screen_buffer == NULL) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return FALSE;
+    }
+    header = &info->lpBitMapInfo->bmiHeader;
+    if (header->biWidth <= 0 || header->biHeight == 0 ||
+        header->biBitCount == 0u || header->biCompression != BI_RGB) {
+        SetLastError(ERROR_NOT_SUPPORTED);
+        return FALSE;
+    }
+    height = header->biHeight < 0 ? -(int64_t)header->biHeight :
+        (uint64_t)header->biHeight;
+    bits_per_line = (uint64_t)(uint32_t)header->biWidth *
+        (uint64_t)header->biBitCount;
+    stride = ((bits_per_line + 31u) / 32u) * sizeof(DWORD);
+    if (height == 0u || height > UINT32_MAX || stride == 0u ||
+        stride > UINT32_MAX ||
+        !session_presentation_graphics_acquire_writable(owner,
+            (uint32_t)header->biWidth, (uint32_t)height,
+            (uint32_t)header->biBitCount, (uint32_t)stride, &pixels)) {
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+        return FALSE;
+    }
+    if (!DuplicateHandle(GetCurrentProcess(), output, GetCurrentProcess(),
+            &duplicate, 0u, FALSE, DUPLICATE_SAME_ACCESS)) {
+        session_presentation_graphics_clear(owner);
+        return FALSE;
+    }
+    mutex = CreateMutexW(NULL, FALSE, NULL);
+    if (mutex == NULL) {
+        CloseHandle(duplicate);
+        session_presentation_graphics_clear(owner);
+        return FALSE;
+    }
+    info->hMutex = mutex;
+    info->lpBitMap = pixels;
+    *screen_buffer = duplicate;
+    return TRUE;
+}
+
+VOID WINAPI MvdmPresentationGraphicsClear(VOID)
+{
+    session *owner = session_thread_current();
+    if (owner != NULL) session_presentation_graphics_clear(owner);
+}
+
 /* DIVERGENCE(ADAPTER-WIN32-033): these NT4 Console Server calls carried
  * private per-console command-range and shortcut-reservation state. Modern
  * public Console APIs expose neither operation. Preserve their source-facing

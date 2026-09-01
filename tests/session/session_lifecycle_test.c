@@ -16,6 +16,7 @@ int main(void)
     const uint32_t two = 2u;
     uint8_t *text_writer;
     uint8_t text_copy[8];
+    uint8_t graphics_copy[16];
     uint32_t text_columns;
     uint32_t text_rows;
     uint32_t text_bytes;
@@ -44,6 +45,19 @@ int main(void)
     if (session_presentation_text_snapshot(&first, text_copy,
             (uint32_t)sizeof(text_copy), NULL, NULL, NULL) != 0)
         return 9;
+    if (session_presentation_graphics_acquire_writable(&first, 2u, 2u, 8u,
+            4u, &text_writer) == 0 || text_writer == NULL)
+        return 10;
+    text_writer[0] = 0x5au;
+    if (session_presentation_graphics_snapshot(&first, graphics_copy,
+            (uint32_t)sizeof(graphics_copy), NULL, NULL, NULL, NULL,
+            &text_bytes) == 0 || text_bytes != 8u || graphics_copy[0] != 0x5au)
+        return 11;
+    session_presentation_graphics_clear(&first);
+    if (session_presentation_graphics_snapshot(&first, graphics_copy,
+            (uint32_t)sizeof(graphics_copy), NULL, NULL, NULL, NULL,
+            NULL) != 0)
+        return 12;
     if (session_register_teardown(&first, record_teardown, (void *)&one) == 0 ||
         session_register_teardown(&first, record_teardown, (void *)&two) == 0 ||
         session_register_teardown(&first, record_teardown, (void *)&one) == 0 ||

@@ -88,6 +88,17 @@ BOOL WINAPI RegisterConsoleVDM(
     PVOID *lpVDMBuffer
     );
 
+/* This is not an NT4 Console Server export.  It is the deliberately narrow
+ * modern binding for the one private graphics-buffer allocation site in
+ * original nt_graph.c.  The original controller code retains ownership of
+ * the DIB description and writes the returned bytes unchanged. */
+BOOL WINAPI MvdmPresentationGraphicsBuffer(
+    HANDLE hConsoleOutput,
+    PCONSOLE_GRAPHICS_BUFFER_INFO lpGraphicsInfo,
+    HANDLE *lpScreenBuffer
+    );
+VOID WINAPI MvdmPresentationGraphicsClear(VOID);
+
 #define CONSOLE_READ_NOREMOVE 0x0001
 #define CONSOLE_READ_NOWAIT   0x0002
 #define CONSOLE_READ_VALID    (CONSOLE_READ_NOREMOVE | CONSOLE_READ_NOWAIT)

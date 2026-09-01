@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T346 S1.** T345 is closed: its selected ordinary DEM
+**Active: M0 T346 S2.** T345 is closed: its selected ordinary DEM
 filesystem/handle, directory/drive/volume and search/FCB package has retained
 original source ownership and paired CPU40 x86/x64 formal linkage. T346 begins
 the next ordered graphics-presentation package with source/ABI/failure
@@ -154,6 +154,16 @@ lifecycle test now proves write, snapshot dimensions/content and post-clear
 failure on both x86 and x64; both paired formal CPU40 graphs rebuild the
 affected session/adapter libraries successfully. No graphics framebuffer or
 window was introduced.
+
+**S2 P2:** the original graphics output has now been separated from its
+retired Console-Server carrier. `nt_graph.c` still owns DIB construction,
+palette/update order and every original CGA/EGA/VGA writer; its sole private
+graphics-buffer request binds that DIB descriptor to bounded session storage
+through adapter-mvdm-host-out. The app-facing side remains snapshot-only. The
+x86/x64 local contract verifies descriptor validation, writable original
+pointer, snapshot content and deterministic cleanup. The formal full graph
+currently needs separate build-process diagnosis after a no-output stall; S2
+does not treat that as a source/ABI failure.
 
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 

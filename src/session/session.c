@@ -263,6 +263,76 @@ void session_presentation_text_clear(session *instance)
     instance->presentation_text_bytes = 0u;
 }
 
+int session_presentation_graphics_acquire_writable(session *instance,
+    uint32_t width, uint32_t height, uint32_t bits_per_pixel,
+    uint32_t stride, uint8_t **bytes_out)
+{
+    uint64_t required;
+    uint8_t *replacement;
+
+    if (bytes_out != NULL) *bytes_out = NULL;
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+        bytes_out == NULL || width == 0u || height == 0u ||
+        bits_per_pixel == 0u || stride == 0u) return 0;
+    required = (uint64_t)stride * (uint64_t)height;
+    if (required == 0u || required > UINT32_MAX) return 0;
+    if (instance->presentation_graphics_storage != NULL &&
+        instance->presentation_graphics_width == width &&
+        instance->presentation_graphics_height == height &&
+        instance->presentation_graphics_bits_per_pixel == bits_per_pixel &&
+        instance->presentation_graphics_stride == stride) {
+        *bytes_out = instance->presentation_graphics_storage;
+        return 1;
+    }
+    replacement = (uint8_t *)calloc(1u, (size_t)required);
+    if (replacement == NULL) return 0;
+    session_presentation_graphics_clear(instance);
+    instance->presentation_graphics_storage = replacement;
+    instance->presentation_graphics_width = width;
+    instance->presentation_graphics_height = height;
+    instance->presentation_graphics_bits_per_pixel = bits_per_pixel;
+    instance->presentation_graphics_stride = stride;
+    instance->presentation_graphics_bytes = (uint32_t)required;
+    *bytes_out = replacement;
+    return 1;
+}
+
+int session_presentation_graphics_snapshot(const session *instance,
+    uint8_t *destination, uint32_t destination_bytes, uint32_t *width_out,
+    uint32_t *height_out, uint32_t *bits_per_pixel_out, uint32_t *stride_out,
+    uint32_t *bytes_out)
+{
+    if (width_out != NULL) *width_out = 0u;
+    if (height_out != NULL) *height_out = 0u;
+    if (bits_per_pixel_out != NULL) *bits_per_pixel_out = 0u;
+    if (stride_out != NULL) *stride_out = 0u;
+    if (bytes_out != NULL) *bytes_out = 0u;
+    if (!session_valid(instance) || destination == NULL ||
+        instance->presentation_graphics_storage == NULL ||
+        destination_bytes < instance->presentation_graphics_bytes) return 0;
+    memcpy(destination, instance->presentation_graphics_storage,
+        instance->presentation_graphics_bytes);
+    if (width_out != NULL) *width_out = instance->presentation_graphics_width;
+    if (height_out != NULL) *height_out = instance->presentation_graphics_height;
+    if (bits_per_pixel_out != NULL)
+        *bits_per_pixel_out = instance->presentation_graphics_bits_per_pixel;
+    if (stride_out != NULL) *stride_out = instance->presentation_graphics_stride;
+    if (bytes_out != NULL) *bytes_out = instance->presentation_graphics_bytes;
+    return 1;
+}
+
+void session_presentation_graphics_clear(session *instance)
+{
+    if (instance == NULL) return;
+    free(instance->presentation_graphics_storage);
+    instance->presentation_graphics_storage = NULL;
+    instance->presentation_graphics_width = 0u;
+    instance->presentation_graphics_height = 0u;
+    instance->presentation_graphics_bits_per_pixel = 0u;
+    instance->presentation_graphics_stride = 0u;
+    instance->presentation_graphics_bytes = 0u;
+}
+
 int session_dispose(session *instance)
 {
     uint32_t index;
@@ -274,6 +344,7 @@ int session_dispose(session *instance)
         teardown.function(teardown.context);
     }
     session_presentation_text_clear(instance);
+    session_presentation_graphics_clear(instance);
     session_guest_memory_end(instance);
     mapping_manager_dispose(&instance->guest_memory_mappings);
     mapping_manager_dispose(&instance->host_resource_mappings);

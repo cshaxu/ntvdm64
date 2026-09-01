@@ -23,6 +23,10 @@ int main(void)
     BOOL state = FALSE;
     SMALL_RECT rect = { 1, 2, 3, 4 };
     session instance;
+    BITMAPINFO graphics_info;
+    CONSOLE_GRAPHICS_BUFFER_INFO graphics_buffer;
+    HANDLE graphics_screen;
+    uint8_t graphics_copy[8];
 
     if (ReadConsoleInputExW(INVALID_HANDLE_VALUE, NULL, 0u, &count, 0x8000u) ||
         GetLastError() != ERROR_INVALID_PARAMETER) return 1;
@@ -48,7 +52,32 @@ int main(void)
     SetLastConsoleEventActive();
     if (observed_count != 3u || observed_event.kind != SESSION_VIDEO_EVENT_ACTIVE ||
         session_video_event_active(&instance) != 1u) return 9;
-    if (!session_thread_unbind(&instance) || !session_dispose(&instance)) return 10;
+    ZeroMemory(&graphics_info, sizeof(graphics_info));
+    graphics_info.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+    graphics_info.bmiHeader.biWidth = 2;
+    graphics_info.bmiHeader.biHeight = -2;
+    graphics_info.bmiHeader.biPlanes = 1;
+    graphics_info.bmiHeader.biBitCount = 8;
+    graphics_info.bmiHeader.biCompression = BI_RGB;
+    ZeroMemory(&graphics_buffer, sizeof(graphics_buffer));
+    graphics_buffer.dwBitMapInfoLength = sizeof(graphics_info);
+    graphics_buffer.lpBitMapInfo = &graphics_info;
+    graphics_buffer.dwUsage = DIB_PAL_COLORS;
+    if (!MvdmPresentationGraphicsBuffer(GetStdHandle(STD_OUTPUT_HANDLE),
+            &graphics_buffer, &graphics_screen) || graphics_screen == NULL ||
+        graphics_buffer.hMutex == NULL || graphics_buffer.lpBitMap == NULL)
+        return 10;
+    ((uint8_t *)graphics_buffer.lpBitMap)[0] = 0x5au;
+    if (!session_presentation_graphics_snapshot(&instance, graphics_copy,
+            (uint32_t)sizeof(graphics_copy), NULL, NULL, NULL, NULL, &count) ||
+        count != sizeof(graphics_copy) || graphics_copy[0] != 0x5au)
+        return 11;
+    CloseHandle(graphics_screen);
+    CloseHandle(graphics_buffer.hMutex);
+    MvdmPresentationGraphicsClear();
+    if (session_presentation_graphics_snapshot(&instance, graphics_copy,
+            (uint32_t)sizeof(graphics_copy), NULL, NULL, NULL, NULL, NULL) ||
+        !session_thread_unbind(&instance) || !session_dispose(&instance)) return 12;
 
     puts("PASS: console compatibility input and video contracts");
     return 0;

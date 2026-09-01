@@ -8,7 +8,7 @@
 #include "guest_memory_lease.h"
 
 #define SESSION_MAGIC UINT32_C(0x53455353)
-#define SESSION_ABI_VERSION UINT32_C(3)
+#define SESSION_ABI_VERSION UINT32_C(4)
 #define SESSION_MAX_TEARDOWNS 8u
 #define SESSION_MAX_THREAD_HOOKS 8u
 #define SESSION_MECHANICAL_STATUS_NONE UINT32_MAX
@@ -108,6 +108,15 @@ typedef struct session {
     uint32_t presentation_text_columns;
     uint32_t presentation_text_rows;
     uint32_t presentation_text_bytes;
+    /* The original SoftPC CGA/EGA/VGA update routines render directly into
+     * this host-local DIB byte plane.  As with text, app receives snapshots
+     * rather than the writable pointer. */
+    uint8_t *presentation_graphics_storage;
+    uint32_t presentation_graphics_width;
+    uint32_t presentation_graphics_height;
+    uint32_t presentation_graphics_bits_per_pixel;
+    uint32_t presentation_graphics_stride;
+    uint32_t presentation_graphics_bytes;
 } session;
 
 #ifdef __cplusplus
@@ -143,6 +152,14 @@ int session_presentation_text_snapshot(const session *instance,
     uint8_t *destination, uint32_t destination_bytes, uint32_t *columns_out,
     uint32_t *rows_out, uint32_t *bytes_out);
 void session_presentation_text_clear(session *instance);
+int session_presentation_graphics_acquire_writable(session *instance,
+    uint32_t width, uint32_t height, uint32_t bits_per_pixel,
+    uint32_t stride, uint8_t **bytes_out);
+int session_presentation_graphics_snapshot(const session *instance,
+    uint8_t *destination, uint32_t destination_bytes, uint32_t *width_out,
+    uint32_t *height_out, uint32_t *bits_per_pixel_out, uint32_t *stride_out,
+    uint32_t *bytes_out);
+void session_presentation_graphics_clear(session *instance);
 int session_dispose(session *instance);
 mapping_manager *session_guest_memory_mappings(session *instance);
 mapping_manager *session_host_resource_mappings(session *instance);
