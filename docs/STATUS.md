@@ -2,12 +2,12 @@
 
 ## Current Work
 
-**Active: M0 T352 S3.** T352 admits the queue-head complete original
+**Active: M0 T352 S5.** T352 admits the queue-head complete original
 CPU40/COMMAND post-`SVC_CMDSETINFO` continuation package.  S1 first maps the
 full original post-`54:05` control and machine cohort to one earliest missing
-or wrong owner edge; S2's final-screen observation is inconclusive.  S3 has
-selected a durable child-only return record; no trace-selected service repair
-is allowed.
+or wrong owner edge; S4 proves the current timeout occurs before the original
+COMMAND indirect call returns.  S5 now attributes that bounded source cohort;
+no trace-selected service repair is allowed.
 
 ### M0 T352 S1 — Closed CPU40/COMMAND post-`SVC_CMDSETINFO` owner admission
 
@@ -103,6 +103,30 @@ child-only observer report rather than a trace-derived behavior change.
 | Exit Criteria | The durable record is source-ordered and absent-path safe, focused/formal checks pass, one observation is preserved and accurately classified, and the next owner package is selected without a leaf repair. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | Main-return/exception report paths, BOP ingress/return diagnostics, observer environment restoration, report handle ownership, console-snapshot limitations and child-only watchdog behavior. |
+
+**S4 closure:** [durable original COMMAND return observation](etc/evidence/m0-t352-s4-durable-command-return-observation-001.md)
+records a fresh linked/staged product and one child-only durable report.  Its
+absence proves the original COMMAND indirect call has not returned.
+
+### M0 T352 S5 — complete COMMAND indirect-call attribution
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T352 S5; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T352 S4's durable return boundary under the owner-approved ordered queue execution. |
+| Objective | Attribute the complete reached original COMMAND indirect-call cohort—`CmdDispatch` table call, `cmdSetInfo`, and scalar registration—to its earliest non-returning source edge without changing COMMAND or BOP semantics. |
+| Non-goals | No BOP/provider behavior, guest/media/mapping change, synthetic state, CCPU/SAS/BIOS/NTDOS repair, CPU30, Bochs, x64 runtime, BaseSrv/CSRSS/WOW, or speculative unrelated service marker. |
+| Reference Baseline | T351 scalar binding closure and T352 S1–S4 source/formal/durable observation records. |
+| Files And ABI Surface | Original `dos/command/{cmddisp.c,cmdmisc.c}`; existing scalar facade and return recorder; fixed observer. Only state-neutral, fixed-width diagnostic report records are eligible. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Complete source ordering/edge review; focused durable marker ordering/absent-path check; fresh CPU40/x86 formal link; exactly one fixed-container observation; governance/diff review. |
+| Expected Markers | Durable ordered records around the original table call and selected `cmdSetInfo` scalar registration, sufficient to identify one next source owner edge. |
+| Asset Needs | Existing selected sources, adapter recorder, observer, formal graph and immutable media; no new import or host-system mutation. |
+| Reporting Requirements | Record each marker's original call order and copied values, prove no marker changes a result, and name the exact next owner cohort rather than a leaf service repair. |
+| Stop Conditions | Any marker requiring guest-memory access, raw host alias, result/register/IP change, source/provider rewrite, altered guest/media/container, or a second observation matrix pauses for renewed admission. |
+| Exit Criteria | One bounded original COMMAND call cohort is source-ordered, durable and one-run observed; the earliest non-returning edge is assigned to a complete source owner package with no unowned selected sibling. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | All `PFNSVC` COMMAND table slots, function-pointer conventions, `cmdSetInfo` entry/failure/return, scalar facade validation, observer report ownership and BOP post-return ordering. |
 
 ### M0 T351 S2 — original SCS scalar-lifecycle binding recovery
 

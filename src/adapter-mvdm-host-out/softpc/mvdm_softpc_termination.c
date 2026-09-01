@@ -17,28 +17,33 @@ static char *mvdm_softpc_append_hex(char *output, ULONG_PTR value,
     return output;
 }
 
-static void mvdm_softpc_write_exception_report(const char *message,
-    DWORD message_bytes)
+static void mvdm_softpc_write_optional_report(const char *environment_name,
+    const char *message, DWORD message_bytes)
 {
     char report_path[MAX_PATH];
     DWORD report_path_bytes;
     HANDLE report;
     DWORD written;
 
-    /* The fixed non-debug observation container may supply a report path.
-     * This is exception-only diagnostic output: it neither changes the
-     * original filter result nor makes a normal execution depend on a host
-     * file.  The console remains the historical diagnostic destination. */
-    report_path_bytes = GetEnvironmentVariableA("MVDM_EXCEPTION_REPORT_PATH",
+    /* An observer may supply a child-only diagnostic path.  Absence or a
+     * file failure is deliberately non-fatal to the original code path. */
+    report_path_bytes = GetEnvironmentVariableA(environment_name,
         report_path, (DWORD)sizeof(report_path));
     if (report_path_bytes == 0 || report_path_bytes >= sizeof(report_path))
         return;
-    report = CreateFileA(report_path, GENERIC_WRITE, FILE_SHARE_READ, NULL,
-        CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    report = CreateFileA(report_path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
+        OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     if (report == INVALID_HANDLE_VALUE)
         return;
     (void)WriteFile(report, message, message_bytes, &written, NULL);
     CloseHandle(report);
+}
+
+static void mvdm_softpc_write_exception_report(const char *message,
+    DWORD message_bytes)
+{
+    mvdm_softpc_write_optional_report("MVDM_EXCEPTION_REPORT_PATH", message,
+        message_bytes);
 }
 
 int mvdm_softpc_terminate_current_session(uint32_t vdm_for_wow,
@@ -272,4 +277,6 @@ void mvdm_softpc_record_bop_return(unsigned int selector,
     message[49] = guest_cf ? '1' : '0';
     (void)WriteFile(output, message, (DWORD)(sizeof(message) - 1),
                     &written, NULL);
+    mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH", message,
+        (DWORD)(sizeof(message) - 1));
 }

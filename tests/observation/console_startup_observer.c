@@ -171,10 +171,14 @@ int main(int argc, char **argv)
     char previous_exception_report_path[MAX_PATH];
     char main_return_report_path[MAX_PATH];
     char previous_main_return_report_path[MAX_PATH];
+    char bop_return_report_path[MAX_PATH];
+    char previous_bop_return_report_path[MAX_PATH];
     DWORD previous_exception_report_length;
     DWORD previous_main_return_report_length;
+    DWORD previous_bop_return_report_length;
     BOOL had_previous_exception_report;
     BOOL had_previous_main_return_report;
+    BOOL had_previous_bop_return_report;
     char fixed_system_root[MAX_PATH];
     char fixed_system_root_short[MAX_PATH];
     DWORD fixed_system_root_short_length = 0;
@@ -226,6 +230,8 @@ int main(int argc, char **argv)
              argv[3]);
     snprintf(main_return_report_path, sizeof(main_return_report_path), "%s.return.txt",
              argv[3]);
+    snprintf(bop_return_report_path, sizeof(bop_return_report_path), "%s.bop-return.txt",
+             argv[3]);
     previous_exception_report_length = GetEnvironmentVariableA(
         "MVDM_EXCEPTION_REPORT_PATH", previous_exception_report_path,
         (DWORD)sizeof(previous_exception_report_path));
@@ -236,8 +242,14 @@ int main(int argc, char **argv)
         (DWORD)sizeof(previous_main_return_report_path));
     had_previous_main_return_report = previous_main_return_report_length != 0 &&
         previous_main_return_report_length < sizeof(previous_main_return_report_path);
+    previous_bop_return_report_length = GetEnvironmentVariableA(
+        "MVDM_BOP_RETURN_REPORT_PATH", previous_bop_return_report_path,
+        (DWORD)sizeof(previous_bop_return_report_path));
+    had_previous_bop_return_report = previous_bop_return_report_length != 0 &&
+        previous_bop_return_report_length < sizeof(previous_bop_return_report_path);
     SetEnvironmentVariableA("MVDM_EXCEPTION_REPORT_PATH", exception_report_path);
     SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH", main_return_report_path);
+    SetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH", bop_return_report_path);
 
     if (!CreateProcessA(NULL, command_line, NULL, NULL, TRUE, 0, NULL, argv[2],
                         &startup, &child)) {
@@ -251,6 +263,11 @@ int main(int argc, char **argv)
                                     previous_main_return_report_path);
         else
             SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH", NULL);
+        if (had_previous_bop_return_report)
+            SetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH",
+                                    previous_bop_return_report_path);
+        else
+            SetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH", NULL);
         CloseHandle(input);
         CloseHandle(output);
         return 67;
@@ -265,6 +282,11 @@ int main(int argc, char **argv)
                                 previous_main_return_report_path);
     else
         SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH", NULL);
+    if (had_previous_bop_return_report)
+        SetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH",
+                                previous_bop_return_report_path);
+    else
+        SetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH", NULL);
     wait_status = WaitForSingleObject(child.hProcess, OBSERVATION_TIMEOUT_MS);
     capture_process_image(child.dwProcessId, &image_identity);
     if (wait_status == WAIT_TIMEOUT) {
