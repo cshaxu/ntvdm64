@@ -837,6 +837,12 @@ The observed `50:42` is the reached original kernel-fast-I/O seam.
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `SVC_DEMFASTREAD`, `SVC_DEMFASTWRITE`, `$READ`, `FastOrSlow`, `demRead`, mapped host resource identity, guest-memory lease, EOF, console/std handles, pipes, seek/ZF and `MS_bop_0` dispatch. |
 
+**S14 P1:** [FastRead user-mode recovery and reachability limit](etc/evidence/m0-t355-s14-fastread-recovery-p1-001.md)
+records the source-shaped dispatch recovery and formal link. Its one permitted
+run was preempted before `50:42` by the already-owned CCPU/C-VID
+`Sas_overwrite_memory` null-vector condition; S14 remains active and does not
+claim runtime FastRead completion.
+
 ### Indexed predecessor record — M0 T345 host capability expansion
 
 | Field | Record |
