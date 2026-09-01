@@ -488,7 +488,7 @@ and
 
 ## Active Packet
 
-**Active: M0 T355 S2 — original CONFIG multi-pass `SHELL` persistence audit.**
+**Active: M0 T355 S9 — original CONFIG post-open seek/pre-read cohort attribution.**
 
 ### M0 T355 S1 — Closed short-path permanent COMMAND fixed-container verification
 
@@ -541,7 +541,7 @@ proves that source-defined pass one must reach `trys` and replace `commnd`.
 It selects a single source-positioned, state-neutral `ConfigDone` observation;
 it does not authorize a path, DEM, parser, or machine repair.
 
-### M0 T355 S3 — Active `ConfigDone` state-neutral `commnd` observation
+### M0 T355 S3 — Closed `ConfigDone` state-neutral `commnd` observation
 
 | Field | Record |
 | --- | --- |
@@ -560,6 +560,156 @@ it does not authorize a path, DEM, parser, or machine repair.
 | Exit Criteria | One valid copied notification observation or a source-backed inability result classifies `commnd` as unwritten, incorrectly written, or correctly written before later loss/context; it selects exactly one next whole recovery cohort. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `BOP_NOTIFICATION`, `MS_bop_E`, `UMBNotify`, `demDasdInit`, `ConfigDone`, `multi_pass_id`, `commnd`, `command_line`, selected `NTIO.SYS` map addresses, checked lease and durable observation lifetime. |
+
+**S3 closure:** [ConfigDone observation relocation attribution](etc/evidence/m0-t355-s3-configdone-observation-relocation-attribution-001.md)
+proves that the first recorder read map-file locations without the original
+`NTIO_LOAD_SEGMENT` base. Its `commnd` bytes are therefore non-evidence; no
+guest conclusion, BOP repair or parser change is authorized.
+
+### M0 T355 S4 — Closed loaded-NTIO `ConfigDone` state observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S4; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T355 S3's source-backed map-to-loader attribution under the owner-approved ordered queue execution. |
+| Objective | Correct only the default-off `ConfigDone` recorder's selected-map-to-loaded-NTIO address translation by using the already-live original `MS_bop_E` `CS`, then obtain one copied `multi_pass_id`/`commnd` observation in the fixed container. |
+| Non-goals | No `doconf`/`organize`/`multi_pass`/`trys`/`dfil` change; no guest or firmware mutation, DEM/BOP result adjustment, path projection, mapper, CPU/machine change, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics claim. |
+| Reference Baseline | T355 S2 source ledger; T355 S3 proof that map `009D:*` is a file-layout identity while original `nt_msscs.c` loads the file at `0070:0000`; unchanged selected NTIO/media identity. |
+| Files And ABI Surface | Existing original `MS_bop_E` `getCS()` state, selected map offsets, existing session checked guest-memory leases and default-off durable observer. No public BOP or guest pointer ABI change. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original loader/map/current-CS arithmetic review; focused default-off and copied-read fixture; formal CPU40/x86 link; exactly one new fixed-container observation; governance/export and diff review. |
+| Expected Markers | A copied `AL=0` record that includes the live `CS`, map offsets, `multi_pass_id` and a bounded `commnd` value from the loaded selected NTIO image, followed by unchanged original notification handling. |
+| Asset Needs | Existing mirrors, maps, CPU40/x86 formal graph and immutable `O:\ntvdm` staged media; no source/media import or host-system mutation. |
+| Reporting Requirements | State map-file versus loaded-image arithmetic, exact segment/offsets and lease scope; distinguish an unwritten shell from a recorder inability; do not infer a repair from timeout. |
+| Stop Conditions | Any need for a second input variant, retained guest pointer, changed guest/CPU/BOP/DEM state, generic map resolver, or additional state recorder pauses for a new admission. |
+| Exit Criteria | One corrected copied observation classifies whether `trys` wrote a valid `commnd` before `dfil` and selects exactly one next whole recovery cohort. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `NTIO_LOAD_SEGMENT`, `getCS`, `ConfigDone`, `BOP_NOTIFICATION`, map-file offsets, `multi_pass_id`, `commnd`, synchronous read leases, durable observer and staged binary identity. |
+
+**S4 closure:** [loaded-NTIO ConfigDone state observation](etc/evidence/m0-t355-s4-loaded-ntio-configdone-state-observation-001.md)
+proves that valid generated configuration text has not replaced the original
+default `commnd` by the source-defined end of CONFIG processing. The next
+owner is NTDOS/CPU execution of the `organize -> multi_pass -> trys` cohort,
+not DEM or package layout.
+
+### M0 T355 S5 — Active NTDOS `SHELL` pass-one execution cohort audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S5; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T355 S4's valid loaded-state observation under the owner-approved ordered queue execution. |
+| Objective | Reconstruct the original in-guest `organize -> confbot/org_count -> multi_pass_id=1 -> ordinary dispatch -> trys` execution cohort and the selected CPU40/SoftPC instruction/data contracts required to carry a generated `SHELL` record to `commnd`. |
+| Non-goals | No guest/parser/firmware modification or rebuild, no new runtime observation, DEM/BOP result adjustment, pathname projection, mapper, CPU/machine semantic patch, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics claim. |
+| Reference Baseline | T355 S2 source ledger; T355 S4 proof that original loaded `commnd` remains `\\COMMAND.COM` at `ConfigDone` after pass two; selected CPU40/x86 binary/map identity. |
+| Files And ABI Surface | Original `sysinit1.asm`, `sysinit2.asm`, `sysconf.asm`, selected NTIO map/binary and reached CPU40 instruction/memory primitives only. No production ABI change. |
+| Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original definition/caller/branch/data-lifetime walk; selected source-versus-binary/map review; reached CPU40 instruction/segment/string/stack contract review; governance/export and diff review. No build or runtime execution. |
+| Expected Markers | A source-owned ledger names every required `S` record byte/layout, the pass-one branch sequence, the CCPU mechanical primitives that preserve it, and one bounded next owner/disposition. |
+| Asset Needs | Existing original mirrors, selected binaries/maps, T355 durable records and CPU40 source/formal graph; no source import, media mutation or host-system mutation. |
+| Reporting Requirements | Separate original guest source facts, selected binary facts, CPU40 mechanical facts and runtime facts; distinguish a parser skip from a memory/segment/string execution mismatch without inferring from timeout. |
+| Stop Conditions | Any need to alter guest bytes, add a general instruction tracer, change CPU semantics, rerun runtime, fabricate a host result, or cross into unrelated BOP owners pauses for new admission. |
+| Exit Criteria | The complete pass-one `SHELL` execution cohort has no unowned immediate edge and selects exactly one source-shaped next S or a precise source terminal. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `comtab`, `cmd_indicator`, `org_file`, `org_count`, `confbot`, `getchr`, `chrptr`, `count`, `multi_pass_id`, `tryi`, `tryb`, `trys`, `getCS`, `DS/ES`, string operations and selected CPU40 memory/segment primitives. |
+
+**S5 closure:** [NTDOS `SHELL` pass-one execution cohort audit](etc/evidence/m0-t355-s5-ntdos-shell-pass-one-execution-cohort-audit-001.md)
+proves the original source route is complete through `trys`, but static evidence
+cannot distinguish its live input/reorganization/CPU execution predecessor.
+
+### M0 T355 S6 — Active original NTDOS `SHELL` pass-one execution-position observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S6; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T355 S5's source-complete static cohort audit under the owner-approved ordered queue execution. |
+| Objective | Add the narrowest default-off, selector-blind CPU40 observation sufficient to classify original NTDOS `organize`, ordinary pass-one dispatch and `trys` reachability in the fixed `O:\\ntvdm` container. |
+| Non-goals | No guest/parser/firmware change or rebuild, CPU semantic repair, DEM/BOP result adjustment, pathname projection, mapper, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics claim. |
+| Reference Baseline | T355 S4 copied loaded-state result and T355 S5 original source/map/CPU40 cohort audit. |
+| Files And ABI Surface | Selected CPU40 instruction-position facility, original NTDOS map/binary identity, existing synchronous copied guest-memory leases and durable observer only. No guest pointer, host handle or public BOP ABI escapes. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Source/map/binary address attribution; focused default-off and copied-record tests; formal CPU40/x86 link; exactly one fixed-container observation; governance/export and diff review. |
+| Expected Markers | Bounded copied markers distinguish `organize` entry, pass-one ordinary dispatch, `trys` entry and any `commnd` write before ConfigDone without changing original control flow. |
+| Asset Needs | Existing selected mirrors, map/binary, CPU40/x86 formal graph and immutable `O:\\ntvdm` staged media; no source/media import or host-system mutation. |
+| Reporting Requirements | Record exact map/binary address attribution, live CS/IP basis, copied-byte bounds, lease lifetime and the one observation outcome; distinguish absent marker from a parser repair. |
+| Stop Conditions | Any need for general tracing, retained guest pointer, guest/CPU state change, second input/container, instruction semantic modification, additional runtime run or cross-owner repair pauses for a new admission. |
+| Exit Criteria | One valid source-positioned observation identifies the earliest absent/present configuration transition and selects exactly one source-owned recovery cohort or exact terminal. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `organize`, `comtab`, `org_file`, `multi_pass`, `tryi`, `tryb`, `trys`, `commnd`, CPU40 CS/IP, DS/ES, SAS reads/writes and durable observer lifetime. |
+
+**S6 closure:** [CONFIG command first-store observation](etc/evidence/m0-t355-s6-config-command-first-store-observation-001.md)
+proves the selected `commnd` location receives an original zero store, but the
+first-write-only diagnostic cannot determine whether a later `trys` store
+occurred. It selects only the bounded same-address sequence correction.
+
+### M0 T355 S7 — Active bounded original NTDOS `commnd` write-sequence observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S7; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T355 S6's single valid first-store result under the owner-approved ordered queue execution. |
+| Objective | Correct the default-off selected-address observer to retain at most eight post-store address/value records, then make one fixed-container observation to determine whether original `trys` writes `S` to `commnd`. |
+| Non-goals | No guest/parser/firmware modification or rebuild, general instruction tracing, CPU semantic repair, DEM/BOP result adjustment, pathname projection, mapper, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics claim. |
+| Reference Baseline | T355 S5 original pass-one cohort audit; T355 S6 first store at the exact selected `commnd` linear address. |
+| Files And ABI Surface | Existing `c_sas_store` one-call observer seam, existing adapter report helper, fixed observer environment and existing formal CPU40/x86 product only. No guest pointer, mapping, CPU-control or public ABI change. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Default-off and bounded positive fixture; formal CPU40/x86 link; exactly one fixed-container observation; source-order review; governance/export and diff review. |
+| Expected Markers | Ordered, bounded copied values at `0x914e6`; an `S` entry proves `trys` reached its original first filename store, while its absence selects a preceding original branch/data owner. |
+| Asset Needs | Existing selected source/map/binary, formal graph and immutable `O:\\ntvdm` container; no import, media or host-system change. |
+| Reporting Requirements | Record fixed address derivation, maximum records, original-write ordering, fixture bounds and the single observation; distinguish observer correction from any guest repair. |
+| Stop Conditions | More than eight records, a generic trace facility, guest/CPU state change, address inference beyond the selected identity, second input/container, or a second runtime observation pauses for a new admission. |
+| Exit Criteria | One valid bounded sequence determines whether the original `trys` first store occurred and selects exactly one source-owned recovery cohort or exact predecessor terminal. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `commnd` initialization, `trys` first filename store, `command_line`, `c_sas_store`, selected CPU40 linear address, report gating and sequence bounds. |
+
+**S7 closure:** [CONFIG command write-sequence observation](etc/evidence/m0-t355-s7-config-command-write-sequence-observation-001.md)
+proves that no original `trys` store occurred. Its first unresolved predecessor
+is the original `doconf` full-read equality branch.
+
+### M0 T355 S8 — Active original CONFIG temporary-file DEM read-result observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S8; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T355 S7's source-backed absence of a `trys` store under the owner-approved ordered queue execution. |
+| Objective | Add one default-off observation at the original DEM `demRead` success/failure boundary and make one fixed-container observation sufficient to establish the original `doconf` `CX == AX` full-read precondition for the configuration temporary file. |
+| Non-goals | No DEM result/path rewrite, parser/firmware change or rebuild, CPU semantic repair, guest/media mutation, mapper, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics claim. |
+| Reference Baseline | T355 S7 source proof that original `trys` did not execute; original `sysconf.asm::doconf` open/seek/read/`AX == CX -> getcom` contract; existing temporary-file open records. |
+| Files And ABI Surface | Original `dos/dem/demhndl.c::demRead`, existing scalar CPU accessors and default-off durable report helper only. No guest pointer, host handle, read buffer or BOP routing ABI escapes. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original source-order review; focused default-off/scalar report fixture; formal CPU40/x86 link; exactly one fixed-container observation; governance/export and diff review. |
+| Expected Markers | Existing `DS:DX`, requested `CX`, file-position `BX:SI`, completed count, carry/error state and original success/failure phase distinguish a complete config-file read from an earlier source terminal. |
+| Asset Needs | Existing selected mirrors, formal graph and immutable `O:\\ntvdm` container; no new import, guest asset or host-system mutation. |
+| Reporting Requirements | Record only copied scalar results after the original operation; identify the temporary-file transaction by source-order correlation with existing open records; never copy file content or retain guest/host pointers. |
+| Stop Conditions | Any need to alter a result, inspect/copy guest payload, special-case a pathname, add another observer family, use a second input/container, or make a second runtime observation pauses for a new admission. |
+| Exit Criteria | One valid read-result observation classifies the original `AX == CX` precondition and selects exactly one source-owned predecessor/repair cohort or exact source terminal. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `doconf`, `open/lseek/read/close`, `demRead`, `ReadFile`, `AX/BP`, `CX`, `BX/SI`, `DS/DX`, carry/error, `getcom`, `conferr` and durable report lifetime. |
+
+**S8 closure:** [CONFIG temporary-file DEM-read observation](etc/evidence/m0-t355-s8-config-temporary-dem-read-observation-001.md)
+proves that the original temporary-file `demOpen` succeeds but the selected
+execution does not reach `demRead`.  It does not establish a short read or
+authorize a DEM repair; the remaining original predecessor is the post-open
+seek/allocation/pre-read cohort.
+
+### M0 T355 S9 — Active original CONFIG post-open seek/pre-read cohort attribution
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S9; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T355 S8's single fixed-container negative `demRead` result under the owner-approved ordered queue execution. |
+| Objective | Reconstruct the original `doconf` sequence after successful temporary CONFIG open through seek-to-end, `confbot` allocation, seek-to-start and the call boundary to DOS read; select one source-owned next seam without changing a result. |
+| Non-goals | No DEM/seek/read result rewrite, parser or firmware change/rebuild, CPU semantic repair, guest/media mutation, mapper, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics claim. |
+| Reference Baseline | T355 S7's absent `trys` store; T355 S8's successful temporary `demOpen` and absent `demRead`; original `sysconf.asm::doconf` source order. |
+| Files And ABI Surface | Original `sysconf.asm`, DOS file-pointer service and original DEM `demChgFilePtr` boundary; no ABI change in this attribution S. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original source/caller/register audit and existing evidence review only.  A new observer, build or runtime run requires a separately bounded S10 admission. |
+| Expected Markers | One source-owned immediate predecessor or exact source terminal between the successful open and `demRead`, including its registers, carry/error continuation and owner. |
+| Asset Needs | Existing mirrors and T355 durable reports; no new source import, asset, build or host-system mutation. |
+| Reporting Requirements | Separate source facts from S8 runtime facts; retain the conclusion that no `demRead` was reached and do not infer a repair from the timeout. |
+| Stop Conditions | Any need to add an observer, execute a second runtime observation, alter a result, copy guest content, special-case a pathname or change CPU/machine semantics pauses for a new admission. |
+| Exit Criteria | The whole original post-open/pre-read cohort has one bounded successor seam or an exact source terminal, with no unowned immediate edge. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `doconf`, DOS `42h` seek, `demChgFilePtr`, SFT/JFN handle binding, `confbot`, DOS allocation, `CX/AX`, carry/error and `conferr`. |
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 

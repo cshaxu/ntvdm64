@@ -41,6 +41,7 @@
 #include <sas.h>
 #include <sasp.h>
 #include <ccpusas4.h>
+#include "mvdm_softpc_termination.h"
 #include <gmi.h>
 #include CpuH
 #include <cpu_vid.h>
@@ -850,6 +851,9 @@ IFN2(LIN_ADDR, addr, IU8, val)
 {
 	sub_note_trace2(SAS_VERBOSE, "c_sas_store addr=%x, val=%x\n", addr, val);
 	bios_write_byte(addr, val);
+	/* DIVERGENCE(MVDM-HOST-DIV-184): default-off selected-image observation
+	 * follows the original byte write and receives no CPU control capability. */
+	mvdm_softpc_record_config_command_store((uint32_t)addr, (uint8_t)val);
 }
 
 /* store a word at the given address */

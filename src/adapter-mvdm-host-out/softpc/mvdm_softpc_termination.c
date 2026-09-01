@@ -4,6 +4,7 @@
 
 #include <ctype.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <windows.h>
 
@@ -351,4 +352,125 @@ void mvdm_softpc_record_dem_open(uint16_t guest_ds, uint16_t guest_si,
     if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
     mvdm_softpc_write_optional_report("MVDM_DEM_OPEN_REPORT_PATH", message,
         (DWORD)formatted);
+}
+
+void mvdm_softpc_record_dem_read(uint16_t guest_ds, uint16_t guest_dx,
+    uint16_t requested_bytes, uint16_t file_offset_high,
+    uint16_t file_offset_low, uint16_t completed_bytes,
+    unsigned int phase, unsigned int guest_ax, unsigned int guest_cf)
+{
+    char message[224];
+    int formatted;
+
+    if (GetEnvironmentVariableA("MVDM_DEM_READ_REPORT_PATH", NULL, 0u) == 0u)
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-DEM-READ phase=%u ds=%04X dx=%04X requested=%04X offset=%04X:%04X completed=%04X ax=%04X cf=%u state=copied\r\n",
+        phase, (unsigned int)guest_ds, (unsigned int)guest_dx,
+        (unsigned int)requested_bytes, (unsigned int)file_offset_high,
+        (unsigned int)file_offset_low, (unsigned int)completed_bytes,
+        guest_ax, guest_cf);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
+    mvdm_softpc_write_optional_report("MVDM_DEM_READ_REPORT_PATH", message,
+        (DWORD)formatted);
+}
+
+void mvdm_softpc_record_config_done(uint16_t guest_cs)
+{
+    /* These are offsets in the exact selected NTIO.SYS map, not a general
+     * DOS ABI. The map is file-relative; caller-provided CS is the original
+     * loaded SYSINIT segment at this BOP. */
+    enum {
+        mvdm_config_done_pass_offset = 0x03d8u,
+        mvdm_config_done_command_offset = 0x3466u,
+        mvdm_config_done_command_bytes = 64u
+    };
+    mvdm_guest_location pass_location;
+    mvdm_guest_location command_location;
+    mvdm_guest_location_lease lease;
+    uint8_t pass_value = 0u;
+    uint8_t command[mvdm_config_done_command_bytes];
+    char text[mvdm_config_done_command_bytes + 1u];
+    char message[256];
+    uint32_t index;
+    int command_terminated = 0;
+    int pass_available = 0;
+    int command_available = 0;
+    int formatted;
+
+    if (GetEnvironmentVariableA("MVDM_CONFIG_DONE_REPORT_PATH", NULL, 0u) == 0u)
+        return;
+    memset(command, 0, sizeof(command));
+    memset(text, 0, sizeof(text));
+    if (mvdm_guest_location_set_real_mode(&pass_location, guest_cs,
+        mvdm_config_done_pass_offset) &&
+        mvdm_guest_location_acquire(&pass_location, 1u,
+            GUEST_MEMORY_ACCESS_READ, &lease)) {
+        pass_value = lease.bytes[0];
+        pass_available = mvdm_guest_location_release(&lease, 0);
+    }
+    if (mvdm_guest_location_set_real_mode(&command_location, guest_cs,
+        mvdm_config_done_command_offset) &&
+        mvdm_guest_location_acquire(&command_location,
+            mvdm_config_done_command_bytes, GUEST_MEMORY_ACCESS_READ, &lease)) {
+        memcpy(command, lease.bytes, sizeof(command));
+        command_available = mvdm_guest_location_release(&lease, 0);
+    }
+    for (index = 0u; index < sizeof(command); ++index) {
+        if (command[index] == 0u) {
+            command_terminated = 1;
+            break;
+        }
+        text[index] = isprint(command[index]) ? (char)command[index] : '?';
+    }
+    if (command_terminated)
+        text[index] = '\0';
+    else
+        memcpy(text, "<unterminated>", sizeof("<unterminated>"));
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CONFIG-DONE al=00 cs=%04X pass=%s%02X command=%s command-state=%s\r\n",
+        (unsigned int)guest_cs, pass_available ? "" : "?", pass_value, text,
+        command_available ? "copied" : "unavailable");
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
+    mvdm_softpc_write_optional_report("MVDM_CONFIG_DONE_REPORT_PATH", message,
+        (DWORD)formatted);
+}
+
+void mvdm_softpc_record_config_command_store(uint32_t guest_linear_address,
+    uint8_t value)
+{
+    static LONG initialized;
+    static uint32_t expected_address;
+    static int enabled;
+    static unsigned int record_count;
+    char configured_address[16];
+    char message[128];
+    char *end;
+    unsigned long parsed_address;
+    int formatted;
+
+    if (initialized == 0) {
+        if (GetEnvironmentVariableA("MVDM_CONFIG_COMMAND_STORE_REPORT_PATH",
+                NULL, 0u) != 0u &&
+            GetEnvironmentVariableA("MVDM_CONFIG_COMMAND_LINEAR",
+                configured_address, (DWORD)sizeof(configured_address)) != 0u) {
+            parsed_address = strtoul(configured_address, &end, 0);
+            if (end != configured_address && *end == '\0' &&
+                parsed_address <= UINT32_MAX) {
+                expected_address = (uint32_t)parsed_address;
+                enabled = 1;
+                InterlockedExchange(&initialized, 1);
+            }
+        }
+    }
+    if (!enabled || guest_linear_address != expected_address ||
+        record_count == 8u)
+        return;
+    ++record_count;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CONFIG-COMMAND-STORE ordinal=%u linear=%05lX value=%02X state=copied\r\n",
+        record_count, (unsigned long)guest_linear_address, (unsigned int)value);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
+    mvdm_softpc_write_optional_report("MVDM_CONFIG_COMMAND_STORE_REPORT_PATH",
+        message, (DWORD)formatted);
 }

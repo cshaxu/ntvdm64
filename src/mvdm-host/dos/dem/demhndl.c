@@ -21,6 +21,7 @@
 #include <vrnmpipe.h>
 #include <exterr.h>
 #include <mvdm.h>
+#include <mvdm_softpc_termination.h>
 
 BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
 extern BOOL IsVdmRedirLoaded(VOID);
@@ -148,6 +149,8 @@ LONG    lLoc;
     hFile = GETHANDLE (getAX(),getBP());
     usDS = getDS();
     usDX = getDX();
+    mvdm_softpc_record_dem_read(usDS, usDX, getCX(), getBX(), getSI(), 0u,
+        0u, getAX(), getCF());
     lpBuf  = (LPVOID) GetVDMAddr (usDS,usDX);
 
     //
@@ -237,9 +240,13 @@ readFailureExit:
         if (GetLastError() == ERROR_BROKEN_PIPE)  {
              setAX(0);
              setCF(0);
+             mvdm_softpc_record_dem_read(usDS, usDX, getCX(), getBX(), getSI(),
+                 0u, 2u, getAX(), getCF());
              return;
          }
         demClientError(hFile, (CHAR)-1);
+        mvdm_softpc_record_dem_read(usDS, usDX, getCX(), getBX(), getSI(),
+            0u, 2u, getAX(), getCF());
         return ;
     }
 
@@ -250,6 +257,8 @@ readSuccessExit:
                          (PBYTE )lpBuf, FALSE);
     setCF(0);
     setAX((USHORT)dwBytesRead);
+    mvdm_softpc_record_dem_read(usDS, usDX, getCX(), getBX(), getSI(),
+        (USHORT)dwBytesRead, 1u, getAX(), getCF());
     return;
 }
 

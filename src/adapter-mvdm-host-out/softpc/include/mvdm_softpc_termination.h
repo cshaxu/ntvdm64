@@ -55,4 +55,26 @@ void mvdm_softpc_record_dem_open(uint16_t guest_ds, uint16_t guest_si,
     unsigned int phase, unsigned int status, unsigned int guest_ax,
     unsigned int guest_cf);
 
+/* Default-off original DEM read observation. It receives only already-live
+ * scalar register/result values; no guest buffer, host handle or token escapes
+ * the original handler. */
+void mvdm_softpc_record_dem_read(uint16_t guest_ds, uint16_t guest_dx,
+    uint16_t requested_bytes, uint16_t file_offset_high,
+    uint16_t file_offset_low, uint16_t completed_bytes,
+    unsigned int phase, unsigned int guest_ax, unsigned int guest_cf);
+
+/* Default-off, fixed-container CONFIG completion observation.  It copies the
+ * exact selected NTDOS map's pass byte and 64-byte shell filename through
+ * short read leases, then releases them before the original notification BOP
+ * returns.  It neither routes nor modifies CONFIG, UMB, DEM, CPU or guest
+ * state. */
+void mvdm_softpc_record_config_done(uint16_t guest_cs);
+
+/* Default-off, selected-image CPU40 observation. The original CPU byte-store
+ * caller supplies its already-calculated guest linear address and byte; this
+ * helper records a bounded sequence of writes to an explicitly configured
+ * `commnd` address. It neither translates, retains, nor writes guest memory. */
+void mvdm_softpc_record_config_command_store(uint32_t guest_linear_address,
+    uint8_t value);
+
 #endif

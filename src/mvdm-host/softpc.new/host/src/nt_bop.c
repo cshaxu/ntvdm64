@@ -733,6 +733,12 @@ void MS_bop_E(void)
    if (code == 0) {
        UMBNotify(0);
        demDasdInit();
+       /* DIVERGENCE(MVDM-HOST-DIV-183): default-off fixed-container
+        * observation runs only after the original notification work. It
+        * copies selected-map offsets under the live original CS through
+        * bounded leases and cannot alter this BOP's return, UMB, DEM, CPU or
+        * guest state. */
+       mvdm_softpc_record_config_done((uint16_t)getCS());
        }
    else {
 #ifndef PROD
