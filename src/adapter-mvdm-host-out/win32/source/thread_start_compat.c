@@ -3,6 +3,7 @@
 #include "session/session.h"
 
 #undef CreateThread
+#undef ExitThread
 
 typedef struct _OPENNT_CDECL_THREAD_CONTEXT {
     OPENNT_CDECL_THREAD_START_ROUTINE start_routine;
@@ -20,6 +21,13 @@ typedef struct _OPENNT_VOID_CDECL_PARAMETER_THREAD_CONTEXT {
     LPVOID parameter;
     session *owner;
 } OPENNT_VOID_CDECL_PARAMETER_THREAD_CONTEXT;
+
+VOID WINAPI opennt_exit_thread(DWORD exit_code)
+{
+    session *owner = session_thread_current();
+    if (owner != NULL) (void)session_thread_unbind(owner);
+    ExitThread(exit_code);
+}
 
 static DWORD WINAPI opennt_cdecl_thread_thunk(LPVOID parameter)
 {

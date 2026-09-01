@@ -37,8 +37,15 @@ HANDLE opennt_create_void_cdecl_parameter_thread(
     DWORD flags,
     LPDWORD thread_id);
 
+/* Original worker bodies can call ExitThread rather than return to the
+ * session-aware thunk.  Preserve that Win32 termination contract, but release
+ * the host-local binding immediately before the real exit. */
+VOID WINAPI opennt_exit_thread(DWORD exit_code);
+
 #define CreateThread(attributes, stack_bytes, start_routine, parameter, flags, thread_id) \
     opennt_create_cdecl_thread((attributes), (stack_bytes), \
         (OPENNT_CDECL_THREAD_START_ROUTINE)(start_routine), (parameter), (flags), (thread_id))
+
+#define ExitThread(exit_code) opennt_exit_thread((exit_code))
 
 #endif

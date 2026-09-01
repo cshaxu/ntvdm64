@@ -490,8 +490,9 @@ and
 
 **No active M/T/S packet.**
 
-M0 T355 S26 is closed with a source-attributed original-worker binding leak.
-The resulting worker-termination repair requires a separately admitted S.
+M0 T355 S27 is closed.  The remaining live binding belongs to the original
+Redirector asynchronous worker stop-and-join lifecycle and requires a separate
+source-owned recovery S.
 
 ### M0 T355 S1 — Closed short-path permanent COMMAND fixed-container verification
 
@@ -1128,6 +1129,32 @@ worker or original-host lifecycle repair.
 proves the residual count belongs exclusively to the original-worker thread
 facade (`entry=0`, `worker=1`).  It transfers only the complete worker
 termination cohort to a separately admitted repair S.
+
+### M0 T355 S27 — Closed source-shaped worker binding release
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S27; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by S26's exclusive original-worker attribution under the standing owner direction for ordered source-first CPU40/x86 recovery. |
+| Objective | Restore balanced session lifetime for every original worker routed through the existing thread facade, including source `ExitThread` paths, while preserving the original worker termination result. |
+| Non-goals | No worker scheduling, BOP/DEM/COMMAND/Redirector business semantics, guest/media/firmware, original SoftPC execution, mapping, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW or graphics change. |
+| Reference Baseline | S26 proves `worker=1` and `entry=0`; `cmdredir.c` source explicitly calls `ExitThread`, which bypasses an ordinary C thunk return. |
+| Files And ABI Surface | Existing adapter-owned `thread_start_compat.{h,c}` plus affected mirror include binding only. No new thread ABI and no original algorithm rewrite. |
+| Applicable Rules | Execution, source policy, CPU40-only, mirror/overlay, mapping-manager, architecture and coding rules. |
+| Verification | Original worker exit/caller audit, focused adapter lifetime review, formal CPU40/x86 link, one fixed-container observation, governance and diff checks. |
+| Expected Markers | A source `ExitThread` releases the current facade binding then retains its original thread exit code; fixed-container disposal no longer reports a worker binding. |
+| Asset Needs | Existing formal graph and immutable `O:\\ntvdm` stage; no source/media import. |
+| Reporting Requirements | Record every facade translation unit, original exit form, adapter release ordering and one observation; distinguish cleanup closure from guest-continuity. |
+| Stop Conditions | Any need to alter a source worker's business ordering, introduce a new worker family, or repair a later guest/host terminal requires a new S. |
+| Exit Criteria | All reached facade exit forms have one source-shaped release path, formal link passes, one observation removes the proven worker binding or names a new source-owned terminal. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | COMMAND exec/pipe worker exits, Redirector DLC/named-pipe workers, wrapper return paths, `ExitThread` paths, BaseVDM hook and session dispose. |
+
+**S27 closure:** [source-shaped worker binding release](etc/evidence/m0-t355-s27-source-shaped-worker-binding-release-001.md)
+recovers every facade `ExitThread` release path without changing original
+worker termination semantics.  The one observation proves the remaining
+binding is a still-live source-shaped Redirector async worker, not an exit-path
+leak.
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 
