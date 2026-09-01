@@ -9,17 +9,20 @@ typedef struct _OPENNT_CDECL_THREAD_CONTEXT {
     OPENNT_CDECL_THREAD_START_ROUTINE start_routine;
     LPVOID parameter;
     session *owner;
+    const char *source_name;
 } OPENNT_CDECL_THREAD_CONTEXT;
 
 typedef struct _OPENNT_VOID_CDECL_THREAD_CONTEXT {
     OPENNT_VOID_CDECL_THREAD_START_ROUTINE start_routine;
     session *owner;
+    const char *source_name;
 } OPENNT_VOID_CDECL_THREAD_CONTEXT;
 
 typedef struct _OPENNT_VOID_CDECL_PARAMETER_THREAD_CONTEXT {
     OPENNT_VOID_CDECL_PARAMETER_THREAD_START_ROUTINE start_routine;
     LPVOID parameter;
     session *owner;
+    const char *source_name;
 } OPENNT_VOID_CDECL_PARAMETER_THREAD_CONTEXT;
 
 VOID WINAPI opennt_exit_thread(DWORD exit_code)
@@ -35,6 +38,7 @@ static DWORD WINAPI opennt_cdecl_thread_thunk(LPVOID parameter)
     OPENNT_CDECL_THREAD_START_ROUTINE start_routine = context->start_routine;
     LPVOID start_parameter = context->parameter;
     session *owner = context->owner;
+    const char *source_name = context->source_name;
     int did_bind = 0;
     DWORD result;
 
@@ -43,8 +47,8 @@ static DWORD WINAPI opennt_cdecl_thread_thunk(LPVOID parameter)
      * creator's process-local binding and establish it for this worker; no
      * guest pointer, MVDM field, or callback ABI is changed. */
     if (owner != NULL) {
-        if (!session_thread_bind_owned(owner,
-                SESSION_THREAD_BINDING_ORIGINAL_WORKER)) return ERROR_INVALID_STATE;
+        if (!session_thread_bind_owned_source(owner,
+                SESSION_THREAD_BINDING_ORIGINAL_WORKER, source_name)) return ERROR_INVALID_STATE;
         did_bind = 1;
     }
     result = start_routine(start_parameter);
@@ -59,12 +63,13 @@ static DWORD WINAPI opennt_void_cdecl_thread_thunk(LPVOID parameter)
     OPENNT_VOID_CDECL_THREAD_START_ROUTINE start_routine =
         context->start_routine;
     session *owner = context->owner;
+    const char *source_name = context->source_name;
     int did_bind = 0;
 
     HeapFree(GetProcessHeap(), 0, context);
     if (owner != NULL) {
-        if (!session_thread_bind_owned(owner,
-                SESSION_THREAD_BINDING_ORIGINAL_WORKER)) return ERROR_INVALID_STATE;
+        if (!session_thread_bind_owned_source(owner,
+                SESSION_THREAD_BINDING_ORIGINAL_WORKER, source_name)) return ERROR_INVALID_STATE;
         did_bind = 1;
     }
     start_routine();
@@ -80,12 +85,13 @@ static DWORD WINAPI opennt_void_cdecl_parameter_thread_thunk(LPVOID parameter)
         context->start_routine;
     LPVOID start_parameter = context->parameter;
     session *owner = context->owner;
+    const char *source_name = context->source_name;
     int did_bind = 0;
 
     HeapFree(GetProcessHeap(), 0, context);
     if (owner != NULL) {
-        if (!session_thread_bind_owned(owner,
-                SESSION_THREAD_BINDING_ORIGINAL_WORKER)) return ERROR_INVALID_STATE;
+        if (!session_thread_bind_owned_source(owner,
+                SESSION_THREAD_BINDING_ORIGINAL_WORKER, source_name)) return ERROR_INVALID_STATE;
         did_bind = 1;
     }
     start_routine(start_parameter);
@@ -100,6 +106,19 @@ HANDLE opennt_create_cdecl_thread(
     LPVOID parameter,
     DWORD flags,
     LPDWORD thread_id)
+{
+    return opennt_create_cdecl_thread_named(attributes, stack_bytes,
+        start_routine, parameter, flags, thread_id, NULL);
+}
+
+HANDLE opennt_create_cdecl_thread_named(
+    LPSECURITY_ATTRIBUTES attributes,
+    SIZE_T stack_bytes,
+    OPENNT_CDECL_THREAD_START_ROUTINE start_routine,
+    LPVOID parameter,
+    DWORD flags,
+    LPDWORD thread_id,
+    const char *source_name)
 {
     OPENNT_CDECL_THREAD_CONTEXT *context;
     HANDLE thread;
@@ -119,6 +138,7 @@ HANDLE opennt_create_cdecl_thread(
     context->start_routine = start_routine;
     context->parameter = parameter;
     context->owner = session_thread_current();
+    context->source_name = source_name;
     thread = CreateThread(attributes, stack_bytes, opennt_cdecl_thread_thunk,
         context, flags, thread_id);
     if (thread == NULL) {
@@ -135,6 +155,19 @@ HANDLE opennt_create_void_cdecl_thread(
     DWORD flags,
     LPDWORD thread_id)
 {
+    return opennt_create_void_cdecl_thread_named(attributes, stack_bytes,
+        start_routine, parameter, flags, thread_id, NULL);
+}
+
+HANDLE opennt_create_void_cdecl_thread_named(
+    LPSECURITY_ATTRIBUTES attributes,
+    SIZE_T stack_bytes,
+    OPENNT_VOID_CDECL_THREAD_START_ROUTINE start_routine,
+    LPVOID parameter,
+    DWORD flags,
+    LPDWORD thread_id,
+    const char *source_name)
+{
     OPENNT_VOID_CDECL_THREAD_CONTEXT *context;
     HANDLE thread;
 
@@ -150,6 +183,7 @@ HANDLE opennt_create_void_cdecl_thread(
     }
     context->start_routine = start_routine;
     context->owner = session_thread_current();
+    context->source_name = source_name;
     thread = CreateThread(attributes, stack_bytes, opennt_void_cdecl_thread_thunk,
         context, flags, thread_id);
     if (thread == NULL) HeapFree(GetProcessHeap(), 0, context);
@@ -163,6 +197,19 @@ HANDLE opennt_create_void_cdecl_parameter_thread(
     LPVOID parameter,
     DWORD flags,
     LPDWORD thread_id)
+{
+    return opennt_create_void_cdecl_parameter_thread_named(attributes, stack_bytes,
+        start_routine, parameter, flags, thread_id, NULL);
+}
+
+HANDLE opennt_create_void_cdecl_parameter_thread_named(
+    LPSECURITY_ATTRIBUTES attributes,
+    SIZE_T stack_bytes,
+    OPENNT_VOID_CDECL_PARAMETER_THREAD_START_ROUTINE start_routine,
+    LPVOID parameter,
+    DWORD flags,
+    LPDWORD thread_id,
+    const char *source_name)
 {
     OPENNT_VOID_CDECL_PARAMETER_THREAD_CONTEXT *context;
     HANDLE thread;
@@ -180,6 +227,7 @@ HANDLE opennt_create_void_cdecl_parameter_thread(
     context->start_routine = start_routine;
     context->parameter = parameter;
     context->owner = session_thread_current();
+    context->source_name = source_name;
     thread = CreateThread(attributes, stack_bytes,
         opennt_void_cdecl_parameter_thread_thunk, context, flags, thread_id);
     if (thread == NULL) HeapFree(GetProcessHeap(), 0, context);

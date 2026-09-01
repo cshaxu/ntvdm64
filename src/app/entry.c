@@ -67,11 +67,13 @@ static void app_record_dispose_failure(const session *owner, uint32_t reason)
     if (path_bytes == 0u || path_bytes >= sizeof(path)) return;
     if (!session_binding_diagnostic_snapshot(owner, &binding)) return;
     formatted = snprintf(message, sizeof(message),
-        "MVDM-SESSION-DISPOSE reason=%s code=%lu total=%lu entry=%lu worker=%lu unspecified=%lu\r\n",
+        "MVDM-SESSION-DISPOSE reason=%s code=%lu total=%lu entry=%lu worker=%lu unspecified=%lu worker-source=%s\r\n",
         app_dispose_reason_name(reason), (unsigned long)reason,
         (unsigned long)binding.total, (unsigned long)binding.softpc_entry,
         (unsigned long)binding.original_worker,
-        (unsigned long)binding.unspecified);
+        (unsigned long)binding.unspecified,
+        binding.original_worker_source[0] != '\0' ?
+            binding.original_worker_source : "unattributed");
     if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
     output = CreateFileA(path, GENERIC_WRITE, FILE_SHARE_READ, NULL,
         CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);

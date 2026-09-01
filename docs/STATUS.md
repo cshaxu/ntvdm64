@@ -490,9 +490,34 @@ and
 
 **No active M/T/S packet.**
 
-M0 T355 S27 is closed.  The remaining live binding belongs to the original
-Redirector asynchronous worker stop-and-join lifecycle and requires a separate
-source-owned recovery S.
+M0 T355 S28 is closed. The live binding is the original SoftPC
+`HeartBeatThread`; the next recovery, if admitted, is its complete
+source-owned timer alert-and-join lifecycle.
+
+### M0 T355 S28 — Closed original-worker source attribution
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S28; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by S27's source-owned successor under the standing owner direction for ordered source-first CPU40/x86 recovery. |
+| Objective | Attribute the live original-worker session binding to its exact source worker before selecting a source-owned termination recovery. |
+| Non-goals | No BOP, DEM, COMMAND, Redirector request/pipe, guest/media/firmware, CCPU/SoftPC, mapping-manager, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, graphics or host-system change. |
+| Reference Baseline | S26 attributes the sole disposal binding to an original worker; S27 proves its `ExitThread` path is not reached in the fixed startup observation.  S28's formal link audit disproves the preliminary Redirector hypothesis: `vrnmpipe.obj` is not linked by the formal product, so its worker cannot be the observed binding. |
+| Files And ABI Surface | Existing generic original-worker thread facade, session-local diagnostic snapshot and app default-off disposal report. The observation carries a bounded source spelling only; no guest register, PDB, native worker handle or pointer crosses a boundary. |
+| Applicable Rules | Execution, source policy, source-first recovery, CPU40-only, mirror/overlay, mapping-manager, architecture and coding rules. |
+| Verification | Formal CPU40/x86 final-link selection review; focused source-to-facade label review; one fixed `O:\\ntvdm` observation with the default-off disposal report; governance/export and diff review. |
+| Expected Markers | The prior `worker=1` report includes the exact source worker spelling, or records an exact attribution impossibility without changing worker lifetime. |
+| Asset Needs | Existing selected source mirrors, formal CPU40/x86 graph, immutable `O:\\ntvdm` stage and fixed observer; no new source import, guest/media mutation or host-system mutation. |
+| Reporting Requirements | Separate formal link-selection fact, source/facade binding fact and single runtime result. Explicitly state that source attribution is not worker termination or broader guest continuity. |
+| Stop Conditions | Any need to fabricate a guest PDB/register, force-unbind a live worker, change worker/Redirector business behavior, alter guest/media/firmware, retry/vary the fixed container, or modify a machine/BOP semantics pauses for new admission. |
+| Exit Criteria | The observed live worker is source-attributed without a lifetime change, or an exact bounded attribution impossibility is recorded and transfers a complete owner cohort. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `cmdCreateProcess`, COMMAND pipe workers, Redirector workers, generic thread facade, session binding categories, app disposal report and final-link object selection. |
+
+**S28 closure:** [original-worker source attribution](etc/evidence/m0-t355-s28-original-worker-source-attribution-001.md)
+disproves the unlinked Redirector hypothesis and attributes the existing live
+worker binding to original SoftPC `HeartBeatThread`.  It selects the complete
+timer termination cohort without changing that worker's lifetime.
 
 ### M0 T355 S1 — Closed short-path permanent COMMAND fixed-container verification
 

@@ -20,6 +20,14 @@ HANDLE opennt_create_cdecl_thread(
     LPVOID parameter,
     DWORD flags,
     LPDWORD thread_id);
+HANDLE opennt_create_cdecl_thread_named(
+    LPSECURITY_ATTRIBUTES attributes,
+    SIZE_T stack_bytes,
+    OPENNT_CDECL_THREAD_START_ROUTINE start_routine,
+    LPVOID parameter,
+    DWORD flags,
+    LPDWORD thread_id,
+    const char *source_name);
 
 HANDLE opennt_create_void_cdecl_thread(
     LPSECURITY_ATTRIBUTES attributes,
@@ -28,6 +36,14 @@ HANDLE opennt_create_void_cdecl_thread(
     LPVOID parameter,
     DWORD flags,
     LPDWORD thread_id);
+HANDLE opennt_create_void_cdecl_thread_named(
+    LPSECURITY_ATTRIBUTES attributes,
+    SIZE_T stack_bytes,
+    OPENNT_VOID_CDECL_THREAD_START_ROUTINE start_routine,
+    LPVOID parameter,
+    DWORD flags,
+    LPDWORD thread_id,
+    const char *source_name);
 
 HANDLE opennt_create_void_cdecl_parameter_thread(
     LPSECURITY_ATTRIBUTES attributes,
@@ -36,6 +52,14 @@ HANDLE opennt_create_void_cdecl_parameter_thread(
     LPVOID parameter,
     DWORD flags,
     LPDWORD thread_id);
+HANDLE opennt_create_void_cdecl_parameter_thread_named(
+    LPSECURITY_ATTRIBUTES attributes,
+    SIZE_T stack_bytes,
+    OPENNT_VOID_CDECL_PARAMETER_THREAD_START_ROUTINE start_routine,
+    LPVOID parameter,
+    DWORD flags,
+    LPDWORD thread_id,
+    const char *source_name);
 
 /* Original worker bodies can call ExitThread rather than return to the
  * session-aware thunk.  Preserve that Win32 termination contract, but release
@@ -43,8 +67,9 @@ HANDLE opennt_create_void_cdecl_parameter_thread(
 VOID WINAPI opennt_exit_thread(DWORD exit_code);
 
 #define CreateThread(attributes, stack_bytes, start_routine, parameter, flags, thread_id) \
-    opennt_create_cdecl_thread((attributes), (stack_bytes), \
-        (OPENNT_CDECL_THREAD_START_ROUTINE)(start_routine), (parameter), (flags), (thread_id))
+    opennt_create_cdecl_thread_named((attributes), (stack_bytes), \
+        (OPENNT_CDECL_THREAD_START_ROUTINE)(start_routine), (parameter), (flags), (thread_id), \
+        #start_routine)
 
 #define ExitThread(exit_code) opennt_exit_thread((exit_code))
 

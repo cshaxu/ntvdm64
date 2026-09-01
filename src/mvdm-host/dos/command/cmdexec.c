@@ -28,13 +28,15 @@
 /* DIVERGENCE(MVDM-HOST-DIV-109): cmdCreateProcess is the original void,
  * cdecl worker entry, not a WINAPI DWORD start routine.  Keep its source
  * body and original CreateThread call ordering while binding that call to
- * the adapter's void-worker bridge, which carries the creator session. */
+ * the adapter's void-worker bridge, which carries the creator session and
+ * records only the original worker spelling for a default-off disposal
+ * diagnostic. */
 #include "adapter-mvdm-host-out/win32/include/thread_start_compat.h"
 #undef CreateThread
 #define CreateThread(attributes, stack_bytes, start_routine, parameter, flags, thread_id) \
-    opennt_create_void_cdecl_thread((attributes), (stack_bytes), \
+    opennt_create_void_cdecl_thread_named((attributes), (stack_bytes), \
         (OPENNT_VOID_CDECL_THREAD_START_ROUTINE)(start_routine), (parameter), \
-        (flags), (thread_id))
+        (flags), (thread_id), #start_routine)
 /* DIVERGENCE(MVDM-HOST-DIV-149): retain the source's standard-handle swap
  * order but bind it to a child-only STARTUPINFO carrier, not this app's
  * process-wide standard streams. */

@@ -16,13 +16,15 @@
 #include "adapter-mvdm-host-out/softpc/include/mvdm_command_redirection.h"
 /* DIVERGENCE(MVDM-HOST-DIV-120): the two original pipe workers are cdecl
  * void(LPVOID) forms.  Bind their original calls to the same session-aware
- * WINAPI boundary used by the selected COMMAND child worker. */
+ * WINAPI boundary used by the selected COMMAND child worker.  The bridge also
+ * records only the original worker spelling for a default-off disposal
+ * diagnostic. */
 #include "adapter-mvdm-host-out/win32/include/thread_start_compat.h"
 #undef CreateThread
 #define CreateThread(attributes, stack_bytes, start_routine, parameter, flags, thread_id) \
-    opennt_create_void_cdecl_parameter_thread((attributes), (stack_bytes), \
+    opennt_create_void_cdecl_parameter_thread_named((attributes), (stack_bytes), \
         (OPENNT_VOID_CDECL_PARAMETER_THREAD_START_ROUTINE)(start_routine), \
-        (parameter), (flags), (thread_id))
+        (parameter), (flags), (thread_id), #start_routine)
 
 #define CMDREDIR_DEBUG	1
 

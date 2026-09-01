@@ -53,11 +53,14 @@ enum session_thread_binding_owner {
     SESSION_THREAD_BINDING_ORIGINAL_WORKER = 2u
 };
 
+#define SESSION_WORKER_SOURCE_MAX 64u
+
 typedef struct session_binding_diagnostic {
     uint32_t total;
     uint32_t softpc_entry;
     uint32_t original_worker;
     uint32_t unspecified;
+    char original_worker_source[SESSION_WORKER_SOURCE_MAX];
 } session_binding_diagnostic;
 
 enum session_video_event_kind {
@@ -119,6 +122,7 @@ typedef struct session {
     volatile long binding_softpc_entry_count;
     volatile long binding_original_worker_count;
     volatile long binding_unspecified_count;
+    char original_worker_source[SESSION_WORKER_SOURCE_MAX];
     session_teardown teardowns[SESSION_MAX_TEARDOWNS];
     session_thread_hook thread_hooks[SESSION_MAX_THREAD_HOOKS];
     mapping_manager guest_memory_mappings;
@@ -233,6 +237,8 @@ int session_guest_memory_release(session *instance, guest_memory_lease *lease,
 
 int session_thread_bind(session *instance);
 int session_thread_bind_owned(session *instance, uint32_t binding_owner);
+int session_thread_bind_owned_source(session *instance, uint32_t binding_owner,
+    const char *source_name);
 int session_thread_unbind(session *instance);
 session *session_thread_current(void);
 int session_binding_diagnostic_snapshot(const session *instance,

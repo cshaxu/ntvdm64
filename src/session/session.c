@@ -464,7 +464,22 @@ static volatile long *session_binding_owner_counter(session *instance,
     }
 }
 
-int session_thread_bind_owned(session *instance, uint32_t binding_owner)
+static void session_record_original_worker_source(session *instance,
+    const char *source_name)
+{
+    size_t index;
+
+    memset(instance->original_worker_source, 0,
+        sizeof(instance->original_worker_source));
+    if (source_name == NULL) return;
+    for (index = 0u; index + 1u < sizeof(instance->original_worker_source) &&
+            source_name[index] != '\0'; ++index) {
+        instance->original_worker_source[index] = source_name[index];
+    }
+}
+
+int session_thread_bind_owned_source(session *instance, uint32_t binding_owner,
+    const char *source_name)
 {
     uint32_t index;
     volatile long *owner_counter;
@@ -476,6 +491,8 @@ int session_thread_bind_owned(session *instance, uint32_t binding_owner)
     _InterlockedIncrement(owner_counter);
     thread_instance = instance;
     thread_binding_owner = binding_owner;
+    if (binding_owner == SESSION_THREAD_BINDING_ORIGINAL_WORKER)
+        session_record_original_worker_source(instance, source_name);
     for (index = 0u; index < instance->thread_hook_count; ++index) {
         session_thread_hook *hook = &instance->thread_hooks[index];
         if (!hook->bind(hook->context)) {
@@ -492,6 +509,11 @@ int session_thread_bind_owned(session *instance, uint32_t binding_owner)
         }
     }
     return 1;
+}
+
+int session_thread_bind_owned(session *instance, uint32_t binding_owner)
+{
+    return session_thread_bind_owned_source(instance, binding_owner, NULL);
 }
 
 int session_thread_bind(session *instance)
@@ -535,6 +557,9 @@ int session_binding_diagnostic_snapshot(const session *instance,
         (volatile long *)&instance->binding_original_worker_count, 0, 0);
     diagnostic_out->unspecified = (uint32_t)_InterlockedCompareExchange(
         (volatile long *)&instance->binding_unspecified_count, 0, 0);
+    memcpy(diagnostic_out->original_worker_source,
+        instance->original_worker_source,
+        sizeof(diagnostic_out->original_worker_source));
     return 1;
 }
 
