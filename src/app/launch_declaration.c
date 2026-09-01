@@ -83,12 +83,12 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
         declaration->ordinary_child == 0u || owner == NULL ||
         !session_valid(owner) || owner->state != SESSION_STATE_ACTIVE ||
         declaration->base_vdm.available != 0u) return 0;
-    root = session_dos_media_root(owner);
+    root = session_mvdm_system_root(owner);
     if (root == NULL || root[0] == '\0' || root[1] != ':') return 0;
     drive_letter = (unsigned char)toupper((unsigned char)root[0]);
     if (drive_letter < 'A' || drive_letter > 'Z') return 0;
     if (!make_path(declaration->application, sizeof(declaration->application),
-            root, "COMMAND.COM") ||
+            root, "system32\\COMMAND.COM") ||
         !append_text(declaration->command, sizeof(declaration->command),
         &command_length, "/C EXIT\r\n") ||
         !append_text(declaration->environment, sizeof(declaration->environment),

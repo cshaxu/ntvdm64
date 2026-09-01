@@ -41,19 +41,19 @@ int mvdm_softpc_firmware_find_file(const char *name, char *path_out,
         path_out_bytes);
 }
 
-int mvdm_softpc_dos_find_file(const char *name, char *path_out,
+int mvdm_softpc_system_find_file(const char *name, char *path_out,
     uint32_t path_out_bytes)
 {
     session *instance = session_thread_current();
     return mvdm_softpc_media_find_file(instance != NULL ?
-        session_dos_media_root(instance) : NULL, name, path_out,
+        session_mvdm_system_root(instance) : NULL, name, path_out,
         path_out_bytes);
 }
 
-int mvdm_softpc_dos_copy_root(char *path_out, uint32_t path_out_bytes)
+int mvdm_softpc_system_copy_root(char *path_out, uint32_t path_out_bytes)
 {
     session *instance = session_thread_current();
-    const char *root = instance != NULL ? session_dos_media_root(instance) : NULL;
+    const char *root = instance != NULL ? session_mvdm_system_root(instance) : NULL;
     size_t root_bytes;
 
     if (path_out != NULL && path_out_bytes != 0u) path_out[0] = '\0';

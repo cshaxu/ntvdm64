@@ -214,10 +214,10 @@ void ExpandConfigFiles(BOOLEAN bConfig)
    /* DIVERGENCE(MVDM-HOST-DIV-158): The original system root is an NT4
     * installation directory.  Preserve its short-path normalization and all
     * configuration expansion below, but obtain the current product's
-    * app-selected DOS media root through the same adapter already used by
+    * app-selected MVDM system root through the same adapter already used by
     * original DEM.  A missing/oversize root retains the original zero-length
     * error direction. */
-   dw = mvdm_softpc_dos_copy_root(achRawFile, sizeof(achRawFile))
+   dw = mvdm_softpc_system_copy_root(achRawFile, sizeof(achRawFile))
        ? (DWORD)strlen(achRawFile) : 0;
    dwLenSysRoot = GetShortPathNameA(achRawFile, achSysRoot, sizeof(achSysRoot));
    if (dwLenSysRoot >= sizeof(achSysRoot)) {

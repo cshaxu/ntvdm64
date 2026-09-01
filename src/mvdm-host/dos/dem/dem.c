@@ -41,12 +41,12 @@ BOOL DemInit (int argc, char *argv[])
 
     pszDefaultDOSDirectory =  (PCHAR) malloc(MAX_PATH+14);
     /* DIVERGENCE(MVDM-HOST-DIV-154): the original NT4 system directory is
-     * not this product's immutable DOS-media installation root.  Preserve
+     * not this product's immutable MVDM system root.  Preserve
      * the original caller-owned directory buffer and every later DEM path
      * operation; obtain only its initial directory through the established
      * session media binding. */
     if (!pszDefaultDOSDirectory ||
-        !mvdm_softpc_dos_copy_root(pszDefaultDOSDirectory, MAX_PATH+14))
+        !mvdm_softpc_system_copy_root(pszDefaultDOSDirectory, MAX_PATH+14))
       {
         return FALSE;
         }

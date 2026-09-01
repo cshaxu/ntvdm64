@@ -2,32 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T337 S2 is pending owner boundary approval.** S1 closed the
-source/ABI audit and did not select a host namespace behavior on its own.
+**No active M/T/S packet.** M0 T337 closed the executable-relative MVDM
+system-root composition; its closure record is
+[here](history/m0-t337-packaged-mvdm-system-root-composition-closure-20260831.md).
 
 ## Active Packet
 
-### M0 T337 S2 (pending) — Packaged guest system-file-root binding selection
+### M0 T337 — Packaged MVDM system-root composition
+
+**Closed: M0 T337.**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T337 S1 closed; S2 requires a new owner approval because it selects a guest-visible host namespace behavior. Ordinary Mode remains selected. |
-| Admission And Approval | The owner admitted T337 and directed preservation of original guest binaries beside the executable. S1 found no direct composition for later guest system-file lookup; S2 has not yet been approved. |
-| Objective | Select and implement, only after approval, the smallest source-shaped binding between later original guest system-file lookup and the immutable executable-relative DOS media root. |
+| Identifier Mode | M0 T337 S2/S3/S4; Ordinary Mode. |
+| Admission And Approval | The owner admitted T337, directed preservation of original guest binaries beside the executable, confirmed a unified MVDM root for DOS/Win16 media, and selected `mvdm\\softpc` rather than a separate ROM directory. |
+| Objective | Make original MVDM `SystemRoot`/`SystemDirectory` consumers see one executable-relative `mvdm` root, retain `mvdm\\system32` system media and `mvdm\\softpc` external SoftPC firmware, then locally prove the selected/missing/unrelated-path contract. |
 | Non-goals | No virtual volume, whole-drive `C:` substitution, guest-media or guest-binary mutation, loader/BOP/COMMAND/NTDOS rewrite, CPU/BIOS/FDC repair, new mapping manager, Bochs route, host installation, or runtime retry. |
-| Reference Baseline | [T337 S1 audit](etc/evidence/m0-t337-s1-packaged-system-file-root-contract-audit-001.md) and its [ledger](etc/operations/m0-t337-s1-packaged-system-file-root-contract-ledger.tsv); T336/S4 terminal attribution. |
-| Files And ABI Surface | Candidate only: original `demGetBootDrive`/`demOpen`, established app/session media-root binding, and any same-shaped adapter boundary selected after owner approval. |
+| Reference Baseline | [T337 S1 audit](etc/evidence/m0-t337-s1-packaged-system-file-root-contract-audit-001.md), [S1 ledger](etc/operations/m0-t337-s1-packaged-system-file-root-contract-ledger.tsv), [S2 rebaseline](etc/evidence/m0-t337-s2-original-system-root-binding-rebaseline-001.md), and T336/S4 terminal attribution. |
+| Files And ABI Surface | Original `dos/command/cmdconf.c`, `dos/dem/dem.c`, `nt_pif.c`, `nt_msscs.c`; session/app system-root binding; `mvdm_softpc_system_*`; and `Stage-OriginalSoftpcRuntime.mjs`. |
 | Applicable Rules | Execution, source policy, original-source-first recovery, mirror/overlay, architecture, coding and documentation rules. |
-| Verification | S2 will require focused selected-root/missing-root/unrelated-host-path proof plus paired formal x86/x64 links. |
-| Expected Markers | One narrowly selected root identity, original DEM ownership retained, and explicit rejection of full-drive virtualization. |
-| Asset Needs | Existing immutable `dos/` and `win16/` package media, selected MVDM mirrors, app/session sources and current formal graphs; no new assets. |
+| Verification | Package manifest inspection, source sweep, paired formal x86/x64 links, then one unchanged fixed x86 observation. |
+| Expected Markers | One executable-relative MVDM system-root identity, original DEM ownership retained, and explicit rejection of full-drive virtualization. |
+| Asset Needs | Existing immutable DOS/Win16 package media, selected MVDM mirrors, app/session sources and current formal graphs; no new assets. |
 | Reporting Requirements | Separate host package layout from guest drive semantics; distinguish original facts from product inference; name every rejected virtual/root policy. |
-| Stop Conditions | S2 must not start without owner selection of the namespace policy. Any guest-media/binary alteration, whole-drive virtualization, altered original DEM ordering or unreviewed import requires re-admission. |
-| Exit Criteria | S1 met: a committed source/ABI/failure ledger identifies the complete root-selection chain, the exact missing seam, and a bounded S2 decision. |
-| Original Owner Request | “批准” to admit and execute the queue-leading packaged guest system-file-root / DOS drive-root composition task. |
-| Similar-Issue Sweep | `NTIO.SYS`/`NTDOS.SYS` media load, `config.nt`/`autoexec.nt`, `COMMAND.COM`/COMSPEC, boot-drive registry/default behavior, canonical guest path conversion, app package layout and missing-file terminal paths. |
+| Stop Conditions | Any guest-media/binary alteration, whole-drive virtualization, altered original DEM ordering or unreviewed import requires re-admission. |
+| Exit Criteria | Met: one session MVDM system root replaces split DOS/Win16 roots; original MVDM system-file consumers retain their original algorithms through same-shaped binding; package staging preserves `mvdm/system32` and `mvdm/softpc`; paired formal links and one fixed observation are recorded. |
+| Original Owner Request | “DOS和win16的guest内容其实都已经在 build/output/dos, win16目录里面了” and “既然如此，那就还是放在mvdm/softpc下吧，不用加rom目录了”. |
+| Similar-Issue Sweep | `NTIO.SYS`/`NTDOS.SYS` media load, `config.nt`/`autoexec.nt`, `COMMAND.COM`/COMSPEC, `COUNTRY.SYS`, boot-drive registry/default behavior, canonical guest path conversion, app package layout and missing-file terminal paths. |
 
-**Plan:** [packaged guest system-file-root / DOS drive-root composition](etc/operations/proposal-packaged-guest-system-file-root-drive-root-composition-001.md). **S1 closed:** [source/ABI/failure audit](etc/evidence/m0-t337-s1-packaged-system-file-root-contract-audit-001.md) and its [ledger](etc/operations/m0-t337-s1-packaged-system-file-root-contract-ledger.tsv) prove that startup media selection exists but later `\\COMMAND.COM` lookup has no selected guest-root binding. S2 is pending owner approval of that bounded namespace behavior.
+**Plan:** [packaged guest system-file-root / DOS drive-root composition](etc/operations/proposal-packaged-guest-system-file-root-drive-root-composition-001.md). **S1 closed:** [source/ABI/failure audit](etc/evidence/m0-t337-s1-packaged-system-file-root-contract-audit-001.md) and its [ledger](etc/operations/m0-t337-s1-packaged-system-file-root-contract-ledger.tsv) retain the initial path scan. **S2 closed:** [original system-root binding rebaseline](etc/evidence/m0-t337-s2-original-system-root-binding-rebaseline-001.md) corrects S1's omitted `cmdconf.c` producer. **S3 closed:** [unified MVDM system-root composition](etc/evidence/m0-t337-s3-unified-mvdm-system-root-composition-001.md). **S4 closed:** [fixed observation](etc/evidence/m0-t337-s4-fixed-mvdm-system-root-observation-001.md). [T337 closure](history/m0-t337-packaged-mvdm-system-root-composition-closure-20260831.md).
 
 ### M0 T336 — CPU40/NTDOS post-`54:05` startup continuity
 

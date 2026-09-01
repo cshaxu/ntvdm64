@@ -26,7 +26,7 @@ int app_package_layout_set_firmware_root(session *owner,
     const char *executable_path)
 {
     char root[SESSION_FIRMWARE_ROOT_BYTES];
-    if (!app_package_layout_make_root(executable_path, "\\softpc\\roms", root,
+    if (!app_package_layout_make_root(executable_path, "\\mvdm\\softpc", root,
             sizeof(root))) return 0;
     return session_set_firmware_root(owner, root);
 }
@@ -34,18 +34,14 @@ int app_package_layout_set_firmware_root(session *owner,
 int app_package_layout_set_media_roots(session *owner,
     const char *executable_path)
 {
-    char dos_root[SESSION_FIRMWARE_ROOT_BYTES];
-    char win16_root[SESSION_FIRMWARE_ROOT_BYTES];
+    char system_root[SESSION_FIRMWARE_ROOT_BYTES];
     char firmware_root[SESSION_FIRMWARE_ROOT_BYTES];
 
-    if (!app_package_layout_make_root(executable_path, "\\dos", dos_root,
-            sizeof(dos_root)) ||
-        !app_package_layout_make_root(executable_path, "\\win16", win16_root,
-            sizeof(win16_root)) ||
-        !app_package_layout_make_root(executable_path, "\\softpc\\roms",
+    if (!app_package_layout_make_root(executable_path, "\\mvdm", system_root,
+            sizeof(system_root)) ||
+        !app_package_layout_make_root(executable_path, "\\mvdm\\softpc",
             firmware_root, sizeof(firmware_root))) return 0;
-    return session_set_dos_media_root(owner, dos_root) &&
-        session_set_win16_media_root(owner, win16_root) &&
+    return session_set_mvdm_system_root(owner, system_root) &&
         session_set_firmware_root(owner, firmware_root);
 }
 

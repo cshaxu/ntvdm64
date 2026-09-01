@@ -179,9 +179,9 @@ InitialiseDosEmulation(int argc, char **argv)
 
      /* DIVERGENCE: MVDM-HOST-DIV-038. The original location is the NT4
       * system directory. The original session owns a selected immutable DOS
-      * media root instead; retain the following original file/size/read/SAS
+      * system root instead; retain the following original file/size/read/SAS
       * and CS:IP sequence unchanged. */
-     if (!mvdm_softpc_dos_find_file("ntio.sys", buffer, sizeof(buffer))) {
+     if (!mvdm_softpc_system_find_file("ntio.sys", buffer, sizeof(buffer))) {
          host_error(EG_OWNUP, ERR_QUIT, "ntio.sys");
          TerminateVDM();
          return (-1);

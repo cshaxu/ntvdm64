@@ -56,9 +56,9 @@ static int verify_long_package_launch_declaration(void)
     static char ordinary[] = "--ordinary-child";
     char *argv[] = { program, ordinary, NULL };
     const char *root =
-        "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r37-command-ingress-after-complete-host-path-fix\\dos";
+        "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r37-command-ingress-after-complete-host-path-fix\\mvdm";
     const char *application =
-        "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r37-command-ingress-after-complete-host-path-fix\\dos\\COMMAND.COM";
+        "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r37-command-ingress-after-complete-host-path-fix\\mvdm\\system32\\COMMAND.COM";
     int argc = 2;
     session instance;
     app_launch_declaration declaration;
@@ -66,7 +66,7 @@ static int verify_long_package_launch_declaration(void)
     session_initialize(&instance, 2u);
     app_launch_declaration_initialize(&declaration);
     if (!app_launch_declaration_consume_options(&declaration, &argc, argv)) return 25;
-    if (!session_set_dos_media_root(&instance, root)) return 26;
+    if (!session_set_mvdm_system_root(&instance, root)) return 26;
     if (!session_activate(&instance)) return 27;
     if (!app_launch_declaration_bind(&declaration, &instance)) return 28;
     if (!app_launch_declaration_publish(&declaration, &instance)) return 29;

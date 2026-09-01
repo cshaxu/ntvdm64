@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3611 |
+| Documentation records | 3615 |
 | --- | --- |
-| Generated UTC | 2026-09-01T04:35:07Z |
+| Generated UTC | 2026-09-01T05:07:58Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 999a3bdee5afcb388b87700fb81b89f60a335087ceeecdca9bccb4e644f154ff |
+| STATUS.md | principal control document | 0b8e0f2126fae5fba97bd9c5a5ffa8304e67db2fc9e86fd96985ef7b951bda88 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1073,6 +1073,9 @@ content-divergent entries.
 | etc/evidence/m0-t336-s3-fdc-int15-completion-cohort-audit-001.md | indexed supporting material | da22deec3e3481946c1b48a8a52f005d50bf5523002f48c832291be14e91e62b |
 | etc/evidence/m0-t336-s4-post-vector-terminal-attribution-001.md | indexed supporting material | e261c558f42d34f24a69e0c1cb6b5e16d7f80d0290cdf5ca45680e9e0cdf0062 |
 | etc/evidence/m0-t337-s1-packaged-system-file-root-contract-audit-001.md | indexed supporting material | b7c0b386e93e2deb53a38513e09e847f3bba7791f4cee7fe14ae786ce781ff3e |
+| etc/evidence/m0-t337-s2-original-system-root-binding-rebaseline-001.md | indexed supporting material | c3e704d840c59b7f855a07418ac22d53c7794df26efb402cc77517dcc31aca36 |
+| etc/evidence/m0-t337-s3-unified-mvdm-system-root-composition-001.md | indexed supporting material | b5df48243626269970933177ff0415d3a94f8b2ebf487b66db16b6a39ccbd7b0 |
+| etc/evidence/m0-t337-s4-fixed-mvdm-system-root-observation-001.md | indexed supporting material | 8f28717df344737c46c04a180224f9cbaba0c152380485bb374873d5bf92f141 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1920,7 +1923,7 @@ content-divergent entries.
 | etc/operations/proposal-original-exception-context-attribution-001.md | indexed supporting material | eb0d259be0a40550b2e6834ae9688be76c7051ac0561bd1099bfcc0b3041fde7 |
 | etc/operations/proposal-original-softpc-xms-owner-package-001.md | indexed supporting material | 44e5d00b93fec9cbfd8e798a4e7a5b6d9aadda5e4d065e09842d8fd4e12244e8 |
 | etc/operations/proposal-overlay-mutation-capability-completion-001.md | indexed supporting material | f7ffebc5d2e99ecef44e029526afbaddbcce02d05d66819e544d02d2ce929cff |
-| etc/operations/proposal-packaged-guest-system-file-root-drive-root-composition-001.md | indexed supporting material | f0b0b75dea6a1f2f7043045709322ae7be5763cf2ee56ea5c54bbd5ab3a0001e |
+| etc/operations/proposal-packaged-guest-system-file-root-drive-root-composition-001.md | indexed supporting material | b6705194674be9b89aa2dd304874337e572adc1d1559ca0f152137e5a2f5d416 |
 | etc/operations/proposal-project-code-filename-normalization-001.md | indexed supporting material | 8a42536533fd68114f575dc49f3d02213778a8ecb6e80e8cc797d2f70df2382a |
 | etc/operations/proposal-public-win32-crt-source-shaped-binding-recovery-001.md | indexed supporting material | 87a7cc8c3d415bb1df012ec4a5be8d2d005c31bb4085133236cf52847baffb3e |
 | etc/operations/proposal-rebootstrap-bochs-machine-foundation-001.md | indexed supporting material | 8b9960658a8a271b7d5b0ebac3c435cccf9f3a136e0332266b7159a720d49be5 |
@@ -3518,6 +3521,7 @@ content-divergent entries.
 | history/m0-t334-netapi-rap-redirector-network-boundary-closure-20260831.md | closed task history | 8ca052d19392d4f7b2504dc24314c6113c61bbc8091963b6c9bfad3fa49559cd |
 | history/m0-t335-wow32-win16-owner-package-closure-20260831.md | closed task history | 0eb40192961a73db29f83772cabcdc3fcf78ac402d2c19d224d47b6bd8dbad05 |
 | history/m0-t336-cpu40-ntdos-post-cmdsetinfo-continuity-closure-20260831.md | closed task history | 7e0e1996c540d418a9c255d4912c15c9b243dfa3b5c1790c9ba4d1b97493c541 |
+| history/m0-t337-packaged-mvdm-system-root-composition-closure-20260831.md | closed task history | 9799976cee3277076881d0ebdf19a1607720a98cf69581649298c381b6d4c0d9 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

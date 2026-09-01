@@ -336,27 +336,16 @@ const char *session_firmware_root(const session *instance)
     return session_root(instance, instance != NULL ? instance->firmware_root : NULL);
 }
 
-int session_set_dos_media_root(session *instance, const char *path)
+int session_set_mvdm_system_root(session *instance, const char *path)
 {
-    return session_set_root(instance, instance != NULL ? instance->dos_media_root : NULL,
+    return session_set_root(instance, instance != NULL ? instance->mvdm_system_root : NULL,
         path);
 }
 
-const char *session_dos_media_root(const session *instance)
-{
-    return session_root(instance, instance != NULL ? instance->dos_media_root : NULL);
-}
-
-int session_set_win16_media_root(session *instance, const char *path)
-{
-    return session_set_root(instance,
-        instance != NULL ? instance->win16_media_root : NULL, path);
-}
-
-const char *session_win16_media_root(const session *instance)
+const char *session_mvdm_system_root(const session *instance)
 {
     return session_root(instance,
-        instance != NULL ? instance->win16_media_root : NULL);
+        instance != NULL ? instance->mvdm_system_root : NULL);
 }
 
 int session_guest_memory_begin(session *instance, void *context,

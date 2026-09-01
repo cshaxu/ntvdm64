@@ -23,11 +23,11 @@ whether this is the first DOS VDM. A declared command payload remains owned by
 the Base VDM adapter.
 
 For the admitted one-child integration profile, `--ordinary-child` declares
-the selected session's immutable `dos/COMMAND.COM /C EXIT` image, with the
+the selected session's immutable `mvdm/system32/COMMAND.COM /C EXIT` image, with the
 original Base VDM `CmdLine` CR/LF terminator, through that
 same copied record. App removes only this composition option before entering
 the original SoftPC argument parser. It derives the command, application,
-environment and current directory from the session-selected DOS media root;
+environment and current directory from the session-selected MVDM system root;
 it does not load, execute, emulate or return the child itself.
 
 ## M0 T310 S3 selected backend composition
@@ -48,8 +48,9 @@ It does not load guest bytes or reproduce any original `ntvdm.c` startup step.
 
 `package_layout.{c,h}` is the app-owned installation contract for immutable
 machine inputs. Before activating a session, app resolves the executable
-directory and selects `<exe-directory>\\softpc\\roms` as that session's
-firmware root. The lookup itself remains in the original SoftPC
-`host_find_file` call shape through the named SoftPC adapter. `dos/` and
-`win16/` are sibling guest-media roots, not host libraries and not firmware
-linked into the executable.
+directory and selects `<exe-directory>\\mvdm` as that session's MVDM system
+root and `<exe-directory>\\mvdm\\softpc` as its firmware root. The lookup
+itself remains in the original SoftPC `host_find_file` call shape through the
+named SoftPC adapter. DOS and Win16 remain separate source mirrors but share
+this installed MVDM media root; none of their bytes is linked into the
+executable.

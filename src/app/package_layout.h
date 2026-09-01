@@ -12,8 +12,8 @@ extern "C" {
 int app_package_layout_set_firmware_root(session *owner,
     const char *executable_path);
 
-/* Configure all immutable package roots selected by the product layout:
- * `dos`, `win16` and `softpc\\roms` under the executable directory. */
+/* Configure the immutable MVDM system root and its SoftPC firmware child:
+ * `mvdm` and `mvdm\\softpc` under the executable directory. */
 int app_package_layout_set_media_roots(session *owner,
     const char *executable_path);
 

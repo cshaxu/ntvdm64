@@ -5,22 +5,22 @@ import { fileURLToPath } from 'node:url';
 
 const scriptRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const requiredAssets = [
-  ['src/mvdm-guest/dos/v86/doskrnl/bios/NTIO.SYS', 'dos/NTIO.SYS'],
-  ['src/mvdm-guest/dos/v86/doskrnl/dos/NTDOS.SYS', 'dos/NTDOS.SYS'],
-  ['src/mvdm-guest/dos/v86/cmd/command/COMMAND.COM', 'dos/COMMAND.COM'],
-  ['src/mvdm-guest/bin86/config.nt', 'dos/config.nt'],
-  ['src/mvdm-guest/bin86/autoexec.nt', 'dos/autoexec.nt'],
-  ['src/mvdm-guest/dos/v86/cmd/command/COMMAND.COM', 'dos/system32/COMMAND.COM'],
-  ['src/mvdm-guest/dos/v86/dev/country/COUNTRY.SYS', 'dos/system32/COUNTRY.SYS'],
-  ['src/mvdm-guest/dos/v86/dev/himem/HIMEM.SYS', 'dos/system32/HIMEM.SYS'],
-  ['build/output/dos/REDIR.EXE', 'dos/system32/REDIR.EXE'],
-  ['build/output/dos/DOSX.EXE', 'dos/system32/DOSX.EXE'],
-  ['src/mvdm-softpc-firmware/softpc.new/roms/bios1.rom', 'softpc/roms/bios1.rom'],
-  ['src/mvdm-softpc-firmware/softpc.new/roms/bios2.rom', 'softpc/roms/bios2.rom'],
-  ['src/mvdm-softpc-firmware/softpc.new/roms/bios4.rom', 'softpc/roms/bios4.rom'],
-  ['src/mvdm-softpc-firmware/softpc.new/roms/v7vga.rom', 'softpc/roms/v7vga.rom'],
-  ['src/mvdm-softpc-firmware/softpc.new/roms/profile.spc', 'softpc/roms/profile.spc'],
-  ['src/mvdm-softpc-firmware/softpc.new/roms/cmos.ram', 'softpc/roms/cmos.ram']
+  ['src/mvdm-guest/dos/v86/doskrnl/bios/NTIO.SYS', 'mvdm/NTIO.SYS'],
+  ['src/mvdm-guest/dos/v86/doskrnl/dos/NTDOS.SYS', 'mvdm/NTDOS.SYS'],
+  ['src/mvdm-guest/dos/v86/cmd/command/COMMAND.COM', 'mvdm/COMMAND.COM'],
+  ['src/mvdm-guest/bin86/config.nt', 'mvdm/config.nt'],
+  ['src/mvdm-guest/bin86/autoexec.nt', 'mvdm/autoexec.nt'],
+  ['src/mvdm-guest/dos/v86/cmd/command/COMMAND.COM', 'mvdm/system32/COMMAND.COM'],
+  ['src/mvdm-guest/dos/v86/dev/country/COUNTRY.SYS', 'mvdm/system32/COUNTRY.SYS'],
+  ['src/mvdm-guest/dos/v86/dev/himem/HIMEM.SYS', 'mvdm/system32/HIMEM.SYS'],
+  ['build/output/dos/REDIR.EXE', 'mvdm/system32/REDIR.EXE'],
+  ['build/output/dos/DOSX.EXE', 'mvdm/system32/DOSX.EXE'],
+  ['src/mvdm-softpc-firmware/softpc.new/roms/bios1.rom', 'mvdm/softpc/bios1.rom'],
+  ['src/mvdm-softpc-firmware/softpc.new/roms/bios2.rom', 'mvdm/softpc/bios2.rom'],
+  ['src/mvdm-softpc-firmware/softpc.new/roms/bios4.rom', 'mvdm/softpc/bios4.rom'],
+  ['src/mvdm-softpc-firmware/softpc.new/roms/v7vga.rom', 'mvdm/softpc/v7vga.rom'],
+  ['src/mvdm-softpc-firmware/softpc.new/roms/profile.spc', 'mvdm/softpc/profile.spc'],
+  ['src/mvdm-softpc-firmware/softpc.new/roms/cmos.ram', 'mvdm/softpc/cmos.ram']
 ];
 
 function usage() {
@@ -48,9 +48,9 @@ const outputPath = isAbsolute(output) ? output : resolve(process.cwd(), output);
 if (!existsSync(executablePath)) throw new Error(`product executable does not exist: ${executablePath}`);
 if (existsSync(outputPath)) throw new Error(`refusing to overwrite runtime package: ${outputPath}`);
 
-mkdirSync(join(outputPath, 'dos'), { recursive: true });
-mkdirSync(join(outputPath, 'dos', 'system32'), { recursive: true });
-mkdirSync(join(outputPath, 'softpc', 'roms'), { recursive: true });
+mkdirSync(join(outputPath, 'mvdm'), { recursive: true });
+mkdirSync(join(outputPath, 'mvdm', 'system32'), { recursive: true });
+mkdirSync(join(outputPath, 'mvdm', 'softpc'), { recursive: true });
 const manifest = [];
 function stage(source, destination) {
   if (!existsSync(source)) throw new Error(`required source asset does not exist: ${source}`);
@@ -62,7 +62,7 @@ function stage(source, destination) {
 stage(executablePath, 'original-softpc-process.exe');
 for (const [source, destination] of requiredAssets) stage(join(scriptRoot, source), destination);
 writeFileSync(join(outputPath, 'runtime-manifest.json'), `${JSON.stringify({
-  format: 2,
+  format: 3,
   /* The EXE is intentionally replaced by each formal product observation.
    * Everything in mediaAssets is immutable fixed-container input. */
   product: manifest[0],

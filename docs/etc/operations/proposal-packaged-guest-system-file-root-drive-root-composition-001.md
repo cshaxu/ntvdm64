@@ -3,24 +3,26 @@
 ## Purpose
 
 Recover the source-shaped composition contract that makes immutable DOS and
-Win16 media installed beside the product executable available to the original
-guest after `NTIO.SYS` has loaded.  This is a deployment-root binding problem,
-not a replacement DOS, virtual disk, loader, BOP provider, or guest binary
-change.
+Win16 media installed beneath one MVDM system root beside the product
+executable available to the original guest after `NTIO.SYS` has loaded. This
+is a deployment-root binding problem, not a replacement DOS, virtual disk,
+loader, BOP provider, or guest binary change.
 
 The installed layout remains:
 
 ```
 <product-directory>\ntvdm64.exe
-<product-directory>\dos\...
-<product-directory>\win16\...
-<product-directory>\softpc\roms\...
+<product-directory>\mvdm\...
+<product-directory>\mvdm\system32\...
+<product-directory>\mvdm\softpc\...
 ```
 
-`dos/` is the immutable host-side root for selected original guest media.  It
-is not assumed to be physical `C:\`, nor does this package create a virtual
-`C:` drive.  The task must establish how original DOS paths such as
-`\COMMAND.COM` acquire the intended guest-visible boot/root meaning.
+`mvdm/` is the immutable host-side MVDM system root for selected original DOS
+and Win16 media. It is not assumed to be physical `C:\`, nor does this package
+create a virtual `C:` drive. Its `system32/` child carries original system
+media expected by original `%SystemRoot%` expansion. Its `softpc/` child
+carries the external SoftPC ROM/CMOS/profile files consumed by original
+`host_find_file`/`host_read_resource` logic.
 
 ## Predecessor evidence
 
@@ -28,11 +30,11 @@ is not assumed to be physical `C:\`, nor does this package create a virtual
   `50:3D -> demExitVDM`; it does not wait on FDC/INT15 and does not lack
   `NTIO.SYS`, `NTDOS.SYS`, `COMMAND.COM`, `config.nt`, `autoexec.nt`, or
   `HIMEM.SYS`.
-- `app/package_layout.c` already registers executable-relative `dos/` and
-  `win16/` media roots in the session.
+- `app/package_layout.c` owns the executable-relative MVDM system root and
+  its `softpc/` firmware child in the session.
 - Original `softpc.new/host/src/nt_msscs.c::InitialiseDosEmulation`, original
   `dos/dem/demmisc.c::demLoadDos`, and original `softpc.new/host/src/nt_pif.c`
-  already use the selected DOS media root for startup inputs.
+  already use the selected MVDM system root for startup inputs.
 - Original `dos/dem/demgset.c::demGetBootDrive` and
   `dos/dem/demfile.c::demOpen` remain the required later guest path/host-file
   contract.  Their relationship to the staged system-file root is not yet
@@ -57,11 +59,13 @@ or a same-shaped adapter binding; any project-authored policy needs a
 registered exception.  No guest binary, BOP, CPU, BIOS, FDC, or generic DOS
 filesystem rewrite is allowed.
 
-### S3 — Local contract verification
+### S3 — Unified MVDM system-root composition and local contract verification
 
-Exercise selected-root success, missing-system-file failure and unrelated
-host-drive behavior with focused source/adapter tests.  Rebuild and link the
-affected formal x86 and x64 graphs.
+Replace the experimental split DOS/Win16 media roots with the one
+executable-relative MVDM system root and its `softpc/` firmware child. Exercise
+selected-root success, missing-system-file failure and unrelated host-drive
+behavior with focused source/adapter tests. Rebuild and link the affected
+formal x86 and x64 graphs.
 
 ### S4 — Fixed-container integration attribution
 

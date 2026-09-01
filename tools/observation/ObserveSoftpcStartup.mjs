@@ -12,7 +12,7 @@ function sha256(path) {
 }
 
 function normalizeManifest(manifest) {
-  if (manifest.format === 2 && manifest.product && Array.isArray(manifest.mediaAssets)) {
+  if ((manifest.format === 2 || manifest.format === 3) && manifest.product && Array.isArray(manifest.mediaAssets)) {
     return { product: manifest.product, mediaAssets: manifest.mediaAssets };
   }
   if (manifest.format === 1 && Array.isArray(manifest.assets) && manifest.assets.length !== 0) {
@@ -49,7 +49,7 @@ for (const asset of layout.mediaAssets) {
   }
 }
 /* The product is deliberately the one mutable item in the fixed container.
- * App resolves DOS and firmware relative to its own executable, so starting
+ * App resolves MVDM system media and firmware relative to its own executable, so starting
  * the formal build output from outside this directory would silently sever
  * the product from the verified adjacent media. */
 const stagedProduct = resolve(options.stage, layout.product.destination);

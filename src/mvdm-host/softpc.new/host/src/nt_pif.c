@@ -71,10 +71,10 @@ VOID GetPIFConfigFiles(BOOL bConfig, char *pchFileName)
         * system-directory config.nt/autoexec.nt pair.  Those files are not
         * an installed modern-Windows contract.  Preserve the original PIF
         * override branch and caller-owned output buffer, but resolve the
-        * no-PIF default from the immutable DOS media root selected by app.
+        * no-PIF default from the immutable MVDM system root selected by app.
         * A missing selected file still returns the original bad-name result
         * and therefore follows cmdconf.c's existing fatal path. */
-       if (!mvdm_softpc_dos_find_file(
+       if (!mvdm_softpc_system_find_file(
                bConfig ? achConfigNT : achAutoexecNT,
                pchFileName, MAX_PATH + 12))
            *pchFileName = '\0';
