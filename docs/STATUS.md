@@ -488,7 +488,7 @@ and
 
 ## Active Packet
 
-**Active: M0 T355 S15 — original CCPU/C-VID SAS-vector composition recovery.**
+**Active: M0 T355 S16 — fixed-container C-VID prerequisite observation.**
 
 ### M0 T355 S1 — Closed short-path permanent COMMAND fixed-container verification
 
@@ -869,6 +869,24 @@ transfers that machine prerequisite without a FastRead runtime claim.
 binds only the reached `Sas.Sas_overwrite_memory` member to the exact original
 CPU40 no-cache-invalidation provider.  The formal CPU40/x86 product remains
 linked; no new runtime observation or unrelated vector completion is claimed.
+
+### M0 T355 S16 — Active fixed-container C-VID prerequisite observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S16; ordinary mode (single-person dual-role implementation). |
+| Objective | Replace only the formal product executable in the immutable `O:\\ntvdm` package and perform one console-owning, non-debug observation to establish whether the earlier reached C-VID null-vector exception is gone. |
+| Non-goals | No second execution, BOP leaf repair, guest/media/firmware mutation, vector completion beyond S15, mapper or CPU semantic change, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC, graphics or continuity claim. |
+| Reference Baseline | S14's sole pre-`50:42` C-VID null-slot exception, S15's one-slot original-provider binding, unchanged `O:\\ntvdm` media manifest and existing console observer. |
+| Files And ABI Surface | Formal `original-softpc-process.exe`, immutable stage manifest/media, existing observer and durable report only. No production source/ABI change. |
+| Verification | Verify the staged media manifest before launch; one bounded observer run; preserve its report and copied exception/BOP markers; governance and diff review. |
+| Exit Criteria | One valid fixed-container result distinguishes removal of the exact earlier null-vector terminal from a successor owner or bounded timeout. It neither retries nor repairs the successor. |
+
+**S16 closure:** [fixed-container C-VID prerequisite observation](etc/evidence/m0-t355-s16-cvidc-prerequisite-observation-001.md)
+proves the S15 null-vector terminal is gone and that original `50:42` is now
+reached.  The one allowed run transfers the succeeding access violation to the
+original CPU40 `ccpusas4.c::_phyR` physical-read owner; it does not authorize a
+retry or a repair in this packet.
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 
