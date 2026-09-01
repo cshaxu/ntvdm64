@@ -2,11 +2,12 @@
 
 ## Current Work
 
-**Active: M0 T340 S2.** T340/S1 is closed: the complete original resident
-DOS-BIOS init chain is a direct no-op-success cohort for function 00, and the
-first non-trivial selected successor is the original HIMEM/SoftPC
-XMS-A20-INT15-HMA package. S2 may recover that complete owner cohort; it may
-not change configuration media or pursue an individual trace leaf.
+**No active M/T/S packet.** M0 T340 is closed: initial resident DOS-BIOS headers are
+the original function-00 no-op-success cohort, and the selected original
+HIMEM/SoftPC XMS-A20-INT15-HMA successor is source/formal-build closed. Its
+single unchanged fixed observation did not reach HIMEM, so later execution
+work must begin at the earlier CPU/host continuation rather than reopen XMS by
+trace-selected repair.
 
 ## Active Packet
 
@@ -73,6 +74,8 @@ not change configuration media or pursue an individual trace leaf.
 | Exit Criteria | Complete original HIMEM and SoftPC machine cohort is source-mapped and either recovered with focused evidence or transferred at one explicit hard boundary; only then may S3 perform its single fixed observation. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | XMS allocation/move/UMB, A20 gate, INT 15 extended-memory behavior, HMA relocation, DOS high/low selection, SoftPC mouse/EMM post-HIMEM paths and configuration-device failure returns. |
+
+**Closed:** [S2 original HIMEM/SoftPC recovery](etc/evidence/m0-t340-s2-himem-softpc-xms-a20-int15-hma-recovery-001.md) and [row ledger](etc/operations/m0-t340-s2-himem-softpc-xms-a20-int15-hma-contract-ledger.tsv) establish the source/build closure. [S3 fixed observation](etc/evidence/m0-t340-s3-fixed-himem-cohort-observation-001.md) records no HIMEM reach and no XMS attribution. See the [T340 closure](history/m0-t340-resident-device-initialization-recovery-closure-20260831.md).
 
 ### M0 T339 S2 — Passive predecessor discriminator and cohort selection (closed)
 

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3629 |
+| Documentation records | 3633 |
 | --- | --- |
-| Generated UTC | 2026-09-01T06:31:14Z |
+| Generated UTC | 2026-09-01T06:39:08Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | c2b786801440d493d397da478b44cb4c59b2dcab75aba8e8853bfd1c5e02dbbc |
+| STATUS.md | principal control document | a67065bd813d9832a8be3577bd95ef332471641fc526fe406abf7f35acae046b |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1082,6 +1082,8 @@ content-divergent entries.
 | etc/evidence/m0-t339-s1-original-guest-predecessor-contract-001.md | indexed supporting material | fcf8e91d7979e5e6efc05e8f6e9e91cd1fd0c0c8e1169f688ac07cfdb8a367b8 |
 | etc/evidence/m0-t339-s2-passive-terminal-discriminator-001.md | indexed supporting material | 9bd1428f51c601c606bdecaf5fccd792f1bd488be650922ca1e50051d7aac224 |
 | etc/evidence/m0-t340-s1-resident-device-initialization-contract-001.md | indexed supporting material | 3cb92a303e07de214389656a0896c805974a3b9d6ab53c7b33e41a3c82c82c06 |
+| etc/evidence/m0-t340-s2-himem-softpc-xms-a20-int15-hma-recovery-001.md | indexed supporting material | 9b657ea796679013a111d3155ba81db380df938d27d2c2a2f3df74336a940be1 |
+| etc/evidence/m0-t340-s3-fixed-himem-cohort-observation-001.md | indexed supporting material | dcf7c7488bc901e011c87a07504129a7b0b37a7871e53a8268f43196cc8ba462 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1794,6 +1796,7 @@ content-divergent entries.
 | etc/operations/m0-t339-s1-guest-predecessor-contract-ledger.tsv | indexed supporting material | 576df2f05b0085daee89e29ca4a4cbf6114cd1ce3ec267db245acb9ebc003a9e |
 | etc/operations/m0-t340-resident-device-initialization-recovery-plan-001.md | indexed supporting material | 22866aa7f37f9ce5403a0b59e1046f2ddff98a44db95c510277856eea9116e4a |
 | etc/operations/m0-t340-s1-resident-device-initialization-contract-ledger.tsv | indexed supporting material | 4307a4b0d0c6a0b86af340b05dfe82b7addf35383b683964b02409e0ead5bd4d |
+| etc/operations/m0-t340-s2-himem-softpc-xms-a20-int15-hma-contract-ledger.tsv | indexed supporting material | c4e62b0492d8cab6c05a6c83beff6c9b5f5562801341b69c9a8d411f990f3736 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3536,6 +3539,7 @@ content-divergent entries.
 | history/m0-t337-packaged-mvdm-system-root-composition-closure-20260831.md | closed task history | 8428aaff94bfc81fdedebea3d058ad82de1ec94b71d25832a0992463e7da1f48 |
 | history/m0-t338-minimal-dos-guest-execution-controlled-return-closure-20260831.md | closed task history | fcd58d1dc5bfa88c205747815a753fcd27a3bbe660a7d20830fbf5b96f66ba0c |
 | history/m0-t339-minimal-vertical-slice-integration-closure-20260831.md | closed task history | 1495f7622fd0383b455c4066f9e3533d3c4ef8ad04968db54b12c7b9e1ec896f |
+| history/m0-t340-resident-device-initialization-recovery-closure-20260831.md | closed task history | 5aaf9c99f41153f318d08a4ea89eb1b05010db9e0fa631bfd5acafe5bbc1e564 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
