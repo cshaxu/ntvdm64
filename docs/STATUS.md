@@ -490,9 +490,9 @@ and
 
 **No active M/T/S packet.**
 
-T355 awaits a separately admitted fixed-container environment-forwarding
-diagnostic packet after S24's one run proved the current observer does not
-forward optional child environment entries.
+M0 T355 S25 is closed at the fixed-container diagnostic boundary.  Its
+successor requires an owner-approved binding-lifetime repair brief before
+implementation.
 
 ### M0 T355 S1 — Closed short-path permanent COMMAND fixed-container verification
 
@@ -1079,6 +1079,31 @@ adds the default-off fixed-width reason without changing app result `72` or
 SoftPC/MVDM behavior.  Its one admitted container run is report-unavailable:
 the existing observer ignores unknown `--environment` arguments and did not
 pass the requested child variable.  No retry occurs in S24.
+
+### M0 T355 S25 — Closed fixed-container diagnostic environment forwarding
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S25; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by S24's source-proven report-unavailable result under the standing owner direction to continue the selected CPU40/x86 recovery without changing original MVDM behavior. |
+| Objective | Add one explicit, allowlisted child-environment entry to the fixed-container observer so a default-off diagnostic report can reach the already-linked product without changing its arguments, media, current directory, console ownership or inherited environment otherwise. |
+| Non-goals | No product source/ABI change, generic environment injection, second product configuration, BOP/DEM/COMMAND/XMS/CCPU behavior change, guest/firmware/media mutation, mapping change, host mutation, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics work. |
+| Reference Baseline | S24 proves the observer currently ignores unknown options and therefore invokes its child with no diagnostic variable. The formal CPU40/x86 product already contains the default-off app/session observer. |
+| Files And ABI Surface | `tools/observation/ObserveSoftpcStartup.mjs` only; one allowlisted `MVDM_SESSION_DISPOSE_REPORT_PATH=<absolute path>` option is copied into the child environment and durable JSON metadata. |
+| Applicable Rules | Execution, source policy, CPU40-only, build/output hygiene, architecture and coding rules. |
+| Verification | Option-parser/allowlist and unchanged-command review; Node syntax/run review; one fixed-container observation with the selected report variable; documentation governance/export and diff review. |
+| Expected Markers | Durable JSON names the allowlisted variable; the child returns unchanged `72` and writes one fixed-width disposal reason, or an explicit child report failure is recorded. |
+| Asset Needs | Existing Node 22, observer, selected S24-linked product and unchanged `O:\\ntvdm` media/stage. |
+| Reporting Requirements | Record the exact allowlist, child command/environment identity, product/media hashes, one result and report content. Do not call this a lifecycle repair. |
+| Stop Conditions | Any request for an arbitrary variable, multiple entries, a changed product/media/container/timeout, a second run, source repair selected from the result, or guest/host-state inspection pauses for a new admission. |
+| Exit Criteria | The allowlisted forwarder is source-reviewed and one newly admitted observation either yields a reason or records report-unavailable without retry; at most one whole source-owned successor is selected. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | Observer option parser, spawned child command, inherited environment, durable JSON, result report path and app's default-off report writer. |
+
+**S25 closure:** [fixed-container diagnostic environment forwarding](etc/evidence/m0-t355-s25-fixed-container-diagnostic-environment-forwarding-001.md)
+proves that the existing exit `72` is specifically the nonzero
+`binding_count` predicate.  It selects a binding-lifetime ledger before any
+worker or original-host lifecycle repair.
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 
