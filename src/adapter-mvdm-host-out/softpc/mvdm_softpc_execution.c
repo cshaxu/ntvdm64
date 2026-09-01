@@ -18,7 +18,8 @@ int mvdm_softpc_execution_run_until_return(session *owner)
         return 0;
 
     if (session_thread_current() != owner) {
-        if (!session_thread_bind(owner)) return 0;
+        if (!session_thread_bind_owned(owner,
+                SESSION_THREAD_BINDING_SOFTPC_ENTRY)) return 0;
         did_bind = 1;
     }
 
@@ -67,7 +68,8 @@ int mvdm_softpc_execution_run_original_entry(session *owner, int argc,
         return 0;
 
     if (session_thread_current() != owner) {
-        if (!session_thread_bind(owner)) return 0;
+        if (!session_thread_bind_owned(owner,
+                SESSION_THREAD_BINDING_SOFTPC_ENTRY)) return 0;
         did_bind = 1;
     }
 

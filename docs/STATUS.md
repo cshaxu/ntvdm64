@@ -490,9 +490,8 @@ and
 
 **No active M/T/S packet.**
 
-M0 T355 S25 is closed at the fixed-container diagnostic boundary.  Its
-successor requires an owner-approved binding-lifetime repair brief before
-implementation.
+M0 T355 S26 is closed with a source-attributed original-worker binding leak.
+The resulting worker-termination repair requires a separately admitted S.
 
 ### M0 T355 S1 — Closed short-path permanent COMMAND fixed-container verification
 
@@ -1104,6 +1103,31 @@ pass the requested child variable.  No retry occurs in S24.
 proves that the existing exit `72` is specifically the nonzero
 `binding_count` predicate.  It selects a binding-lifetime ledger before any
 worker or original-host lifecycle repair.
+
+### M0 T355 S26 — Closed session binding-lifetime attribution
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S26; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted under the standing owner direction for ordered, source-first CPU40/x86 recovery after S25 identified the existing binding-count predicate. |
+| Objective | Attribute the existing session binding count to its two source-owned entrances—outer SoftPC entry and original-worker thread facade—without changing lifecycle behavior, then make one fixed-container observation. |
+| Non-goals | No worker scheduling, BOP/DEM/COMMAND/XMS behavior, guest/media/firmware, original SoftPC control-flow, mapping, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW or graphics change. |
+| Reference Baseline | S25 fixed container reports `binding-count`; direct source audit identifies only `mvdm_softpc_execution` and `thread_start_compat` as bind entrances. |
+| Files And ABI Surface | Project-owned `session` diagnostic state, the two existing adapter call sites, and app's default-off disposal report. No MVDM mirror body changes. |
+| Applicable Rules | Execution, source policy, CPU40-only, mirror/overlay, mapping-manager, architecture and coding rules. |
+| Verification | Definition/caller review, focused session contract, formal CPU40/x86 link, one unchanged-container observation, governance and diff checks. |
+| Expected Markers | A fixed-width default-off report identifies the outstanding binding owner class or proves both categories balanced. |
+| Asset Needs | Existing formal product, Node observer and immutable `O:\\ntvdm` stage; no new source/media import. |
+| Reporting Requirements | Preserve the existing `72` and record only count/category values; distinguish attribution from repair. |
+| Stop Conditions | A request to repair a proven owner, alter original worker exit or add a third binding entrance requires a new S admission. |
+| Exit Criteria | One source-reviewed ledger and one observation attribute the remaining count to a complete owner cohort (or prove the diagnostic premise false) without a behavior repair. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | outer original-entry bridge, all `thread_start_compat` thunks, BaseVDM hook, original timer/event workers, and app disposal order. |
+
+**S26 closure:** [session binding-lifetime attribution](etc/evidence/m0-t355-s26-session-binding-lifetime-attribution-001.md)
+proves the residual count belongs exclusively to the original-worker thread
+facade (`entry=0`, `worker=1`).  It transfers only the complete worker
+termination cohort to a separately admitted repair S.
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 

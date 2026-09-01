@@ -45,6 +45,21 @@ enum session_dispose_reason {
     SESSION_DISPOSE_REASON_TERMINATION_ARMED = 3u
 };
 
+/* Source-owned categories for the existing per-thread session binding.  They
+ * are host-local diagnostics only, never guest/MVDM values. */
+enum session_thread_binding_owner {
+    SESSION_THREAD_BINDING_UNSPECIFIED = 0u,
+    SESSION_THREAD_BINDING_SOFTPC_ENTRY = 1u,
+    SESSION_THREAD_BINDING_ORIGINAL_WORKER = 2u
+};
+
+typedef struct session_binding_diagnostic {
+    uint32_t total;
+    uint32_t softpc_entry;
+    uint32_t original_worker;
+    uint32_t unspecified;
+} session_binding_diagnostic;
+
 enum session_video_event_kind {
     SESSION_VIDEO_EVENT_INVALIDATE = 1u,
     SESSION_VIDEO_EVENT_PALETTE = 2u,
@@ -101,6 +116,9 @@ typedef struct session {
     uint32_t thread_hook_count;
     uint32_t termination_armed;
     volatile long binding_count;
+    volatile long binding_softpc_entry_count;
+    volatile long binding_original_worker_count;
+    volatile long binding_unspecified_count;
     session_teardown teardowns[SESSION_MAX_TEARDOWNS];
     session_thread_hook thread_hooks[SESSION_MAX_THREAD_HOOKS];
     mapping_manager guest_memory_mappings;
@@ -214,8 +232,11 @@ int session_guest_memory_release(session *instance, guest_memory_lease *lease,
     int commit);
 
 int session_thread_bind(session *instance);
+int session_thread_bind_owned(session *instance, uint32_t binding_owner);
 int session_thread_unbind(session *instance);
 session *session_thread_current(void);
+int session_binding_diagnostic_snapshot(const session *instance,
+    session_binding_diagnostic *diagnostic_out);
 int session_arm_termination_escape(session *instance);
 void session_disarm_termination_escape(session *instance);
 int session_terminate_current(uint32_t completion_code);

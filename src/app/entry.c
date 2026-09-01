@@ -49,10 +49,11 @@ static const char *app_dispose_reason_name(uint32_t reason)
     }
 }
 
-static void app_record_dispose_failure(uint32_t reason)
+static void app_record_dispose_failure(const session *owner, uint32_t reason)
 {
+    session_binding_diagnostic binding;
     char path[MAX_PATH];
-    char message[128];
+    char message[256];
     DWORD path_bytes;
     DWORD written;
     HANDLE output;
@@ -64,9 +65,13 @@ static void app_record_dispose_failure(uint32_t reason)
     path_bytes = GetEnvironmentVariableA("MVDM_SESSION_DISPOSE_REPORT_PATH",
         path, (DWORD)sizeof(path));
     if (path_bytes == 0u || path_bytes >= sizeof(path)) return;
+    if (!session_binding_diagnostic_snapshot(owner, &binding)) return;
     formatted = snprintf(message, sizeof(message),
-        "MVDM-SESSION-DISPOSE reason=%s code=%lu\r\n",
-        app_dispose_reason_name(reason), (unsigned long)reason);
+        "MVDM-SESSION-DISPOSE reason=%s code=%lu total=%lu entry=%lu worker=%lu unspecified=%lu\r\n",
+        app_dispose_reason_name(reason), (unsigned long)reason,
+        (unsigned long)binding.total, (unsigned long)binding.softpc_entry,
+        (unsigned long)binding.original_worker,
+        (unsigned long)binding.unspecified);
     if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
     output = CreateFileA(path, GENERIC_WRITE, FILE_SHARE_READ, NULL,
         CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
@@ -154,7 +159,7 @@ int main(int argc, char **argv)
 finish:
     (void)app_presentation_window_close(&presentation);
     if (!session_dispose_with_reason(&owner, &dispose_reason)) {
-        app_record_dispose_failure(dispose_reason);
+        app_record_dispose_failure(&owner, dispose_reason);
         return APP_STARTUP_DISPOSE_FAILURE;
     }
     return result;

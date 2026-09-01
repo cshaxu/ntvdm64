@@ -35,7 +35,8 @@ static DWORD WINAPI opennt_cdecl_thread_thunk(LPVOID parameter)
      * creator's process-local binding and establish it for this worker; no
      * guest pointer, MVDM field, or callback ABI is changed. */
     if (owner != NULL) {
-        if (!session_thread_bind(owner)) return ERROR_INVALID_STATE;
+        if (!session_thread_bind_owned(owner,
+                SESSION_THREAD_BINDING_ORIGINAL_WORKER)) return ERROR_INVALID_STATE;
         did_bind = 1;
     }
     result = start_routine(start_parameter);
@@ -54,7 +55,8 @@ static DWORD WINAPI opennt_void_cdecl_thread_thunk(LPVOID parameter)
 
     HeapFree(GetProcessHeap(), 0, context);
     if (owner != NULL) {
-        if (!session_thread_bind(owner)) return ERROR_INVALID_STATE;
+        if (!session_thread_bind_owned(owner,
+                SESSION_THREAD_BINDING_ORIGINAL_WORKER)) return ERROR_INVALID_STATE;
         did_bind = 1;
     }
     start_routine();
@@ -74,7 +76,8 @@ static DWORD WINAPI opennt_void_cdecl_parameter_thread_thunk(LPVOID parameter)
 
     HeapFree(GetProcessHeap(), 0, context);
     if (owner != NULL) {
-        if (!session_thread_bind(owner)) return ERROR_INVALID_STATE;
+        if (!session_thread_bind_owned(owner,
+                SESSION_THREAD_BINDING_ORIGINAL_WORKER)) return ERROR_INVALID_STATE;
         did_bind = 1;
     }
     start_routine(start_parameter);

@@ -5,6 +5,7 @@
 #include <string.h>
 
 static __declspec(thread) session *thread_instance;
+static __declspec(thread) uint32_t thread_binding_owner;
 
 static uint32_t session_binding_count(const session *instance)
 {
@@ -448,13 +449,33 @@ int session_dispose(session *instance)
     return session_dispose_with_reason(instance, NULL);
 }
 
-int session_thread_bind(session *instance)
+static volatile long *session_binding_owner_counter(session *instance,
+    uint32_t binding_owner)
+{
+    switch (binding_owner) {
+    case SESSION_THREAD_BINDING_SOFTPC_ENTRY:
+        return &instance->binding_softpc_entry_count;
+    case SESSION_THREAD_BINDING_ORIGINAL_WORKER:
+        return &instance->binding_original_worker_count;
+    case SESSION_THREAD_BINDING_UNSPECIFIED:
+        return &instance->binding_unspecified_count;
+    default:
+        return NULL;
+    }
+}
+
+int session_thread_bind_owned(session *instance, uint32_t binding_owner)
 {
     uint32_t index;
+    volatile long *owner_counter;
     if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
-        thread_instance != NULL) return 0;
+        thread_instance != NULL ||
+        (owner_counter = session_binding_owner_counter(instance, binding_owner)) == NULL)
+        return 0;
     _InterlockedIncrement(&instance->binding_count);
+    _InterlockedIncrement(owner_counter);
     thread_instance = instance;
+    thread_binding_owner = binding_owner;
     for (index = 0u; index < instance->thread_hook_count; ++index) {
         session_thread_hook *hook = &instance->thread_hooks[index];
         if (!hook->bind(hook->context)) {
@@ -464,6 +485,8 @@ int session_thread_bind(session *instance)
                     instance->thread_hooks[index].context);
             }
             thread_instance = NULL;
+            thread_binding_owner = SESSION_THREAD_BINDING_UNSPECIFIED;
+            _InterlockedDecrement(owner_counter);
             _InterlockedDecrement(&instance->binding_count);
             return 0;
         }
@@ -471,15 +494,26 @@ int session_thread_bind(session *instance)
     return 1;
 }
 
+int session_thread_bind(session *instance)
+{
+    return session_thread_bind_owned(instance,
+        SESSION_THREAD_BINDING_UNSPECIFIED);
+}
+
 int session_thread_unbind(session *instance)
 {
     uint32_t index;
+    volatile long *owner_counter;
     if (instance == NULL || thread_instance != instance) return 0;
+    owner_counter = session_binding_owner_counter(instance, thread_binding_owner);
+    if (owner_counter == NULL) return 0;
     for (index = instance->thread_hook_count; index != 0u; --index) {
         session_thread_hook *hook = &instance->thread_hooks[index - 1u];
         hook->unbind(hook->context);
     }
     thread_instance = NULL;
+    thread_binding_owner = SESSION_THREAD_BINDING_UNSPECIFIED;
+    _InterlockedDecrement(owner_counter);
     _InterlockedDecrement(&instance->binding_count);
     return 1;
 }
@@ -487,6 +521,21 @@ int session_thread_unbind(session *instance)
 session *session_thread_current(void)
 {
     return thread_instance;
+}
+
+int session_binding_diagnostic_snapshot(const session *instance,
+    session_binding_diagnostic *diagnostic_out)
+{
+    if (!session_valid(instance) || diagnostic_out == NULL) return 0;
+    diagnostic_out->total = (uint32_t)_InterlockedCompareExchange(
+        (volatile long *)&instance->binding_count, 0, 0);
+    diagnostic_out->softpc_entry = (uint32_t)_InterlockedCompareExchange(
+        (volatile long *)&instance->binding_softpc_entry_count, 0, 0);
+    diagnostic_out->original_worker = (uint32_t)_InterlockedCompareExchange(
+        (volatile long *)&instance->binding_original_worker_count, 0, 0);
+    diagnostic_out->unspecified = (uint32_t)_InterlockedCompareExchange(
+        (volatile long *)&instance->binding_unspecified_count, 0, 0);
+    return 1;
 }
 
 int session_arm_termination_escape(session *instance)
