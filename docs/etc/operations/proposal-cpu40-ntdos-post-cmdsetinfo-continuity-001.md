@@ -8,11 +8,12 @@ the fixed normal runtime container to continue from original
 
 ## Evidence baseline
 
-Existing DOS and Win16 media under `build/output` is already consumed through
-the original `-f/-w/-a` activation. The fixed container observes original
-`50:11`, `50:3B`, `50:0F`, `50:1B`, and `54:05`, then exits `0xC0000005`
-before the next BOP ingress. This is not a missing guest loader or failed BOP
-provider; see [T335 startup observation](../evidence/m0-t335-s3-p11-original-wow-startup-activation-observation-001.md).
+Existing DOS and Win16 media are already consumed through the original
+activation path.  T351's fixed container observes original `50:11`, `50:3B`,
+`50:0F`, `50:1B`, and `54:05`, then its immutable eight-second watchdog ends
+the child with `0x53504354`.  This neither proves `cmdSetInfo` return nor
+identifies a missing guest loader or failed BOP provider; see [T351 S4 fixed
+observation](../evidence/m0-t351-s4-fixed-container-bootstrap-observation-001.md).
 
 ## Scope
 
@@ -24,8 +25,9 @@ provider; see [T335 startup observation](../evidence/m0-t335-s3-p11-original-wow
   overlay. Do not use the trace to choose a BOP service change.
 - Preserve load-only guest media and original NTDOS/COMMAND ownership; use the
   existing session mapping manager for guest spans.
-- Require paired x86/x64 formal compile/link evidence. Runtime is claimed only
-  for an architecture that was actually observed.
+- Require the selected CPU40/x86 formal compile/link evidence.  x64 is not a
+  current acceptance row; architecture-neutral mapping-manager rules remain
+  mandatory wherever an identity crosses the MVDM boundary.
 
 ## Exclusions
 

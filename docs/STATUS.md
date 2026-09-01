@@ -2,11 +2,32 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T351 is closed: its complete original
-COMMAND/NTDOS scalar-lifecycle source/binding/formal package is closed and
-its one fixed-container observation remains accurately limited to a reached
-`54:05` ingress followed by timeout.  The next packet requires owner admission
-before implementation.
+**Active: M0 T352 S1.** T352 admits the queue-head complete original
+CPU40/COMMAND post-`SVC_CMDSETINFO` continuation package.  S1 first maps the
+full original post-`54:05` control and machine cohort to one earliest missing
+or wrong owner edge; no trace-selected service repair is allowed.
+
+### M0 T352 S1 — CPU40/COMMAND post-`SVC_CMDSETINFO` owner admission
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T352 S1; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Owner goal directs ordered queue execution; Queue item 1 / P06B is admitted after T351's closed source/binding/formal/one-observation record. |
+| Objective | Trace the complete original `cmdSetInfo` return through `MS_bop_4`, CCPU40/SAS continuation, guest `msinit.asm`, BIOS/stack exchange and every reached immediate machine predecessor, then select one coherent earliest owner cohort. |
+| Non-goals | No BOP leaf provider, guest rewrite/rebuild, loader replacement, media change, new mapping manager, synthetic DOS state, alternate executor, CPU30, Bochs, x64 runtime, kernel VDM, CSRSS/BaseSrv or WOW global alias. |
+| Reference Baseline | T351 S1–S4 closures; P06B proposal; current original MVDM/SoftPC/NTDOS mirrors; selected x86 CPU40 formal product and fixed-container report. |
+| Files And ABI Surface | Original `nt_bop.c`, COMMAND `cmddisp.c`/`cmdmisc.c`, CCPU40/SAS return and execution forms, NTDOS `msinit.asm`, immediate BIOS/FDC/INT15/heartbeat/PIT/ICA callers, and existing session mapping boundary only. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Source declaration/definition/caller/continuation walk; original-versus-mirror comparison; current formal graph/build selection review; documentation governance and diff review. No new runtime retry in S1. |
+| Expected Markers | One complete source call/return chain, every direct dependency assigned an original owner and disposition, one earliest complete recovery cohort or explicit source-owned terminal boundary. |
+| Asset Needs | Existing selected mirrors, prior fixed report, source indexes and formal CPU40/x86 build inputs; no source import, guest asset or host-system change. |
+| Reporting Requirements | Separate static source facts from runtime facts; name exact return/register/stack expectations; identify every sibling dependency inspected and why it is inside/outside the selected cohort. |
+| Stop Conditions | Any need to alter BOP result, guest bytes, media, CPU semantics, add a mapper or infer a repair from the timeout pauses for a new S admission. |
+| Exit Criteria | A source-backed owner ledger identifies the first recovery cohort and its full immediate dependency/failure boundary, with no unowned selected edge; S2 is bounded before any code change. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | COMMAND service return, BOP IP advance, CCPU40 frame/unsimulate, SAS fetch/store, real-mode segment/stack setup, NTDOS BIOS exchange, FDC/INT15, timer/PIT/ICA and session lease teardown. |
+
+**Plan:** [CPU40/NTDOS post-`54:05` startup continuity](etc/operations/proposal-cpu40-ntdos-post-cmdsetinfo-continuity-001.md).
 
 ### M0 T351 S2 — original SCS scalar-lifecycle binding recovery
 
