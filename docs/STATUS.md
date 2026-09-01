@@ -104,6 +104,12 @@ corrects three stale mvdm-host divergence registrations so current mirror
 state—not prior experiments—drives the cohort decision:
 [graphics-presentation owner ledger](etc/operations/m0-t346-s1-graphics-presentation-owner-ledger.tsv).
 
+**S1 P2:** the session video event boundary has no registered production app
+sink. Consequently the existing Console API façade is only an unconsumed
+same-shaped event translation—not a graphics window, repaint, fullscreen or
+Alt+Enter implementation. T346 must design that explicit app composition
+boundary before selecting any recovery cohort.
+
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
 **T343 closure:** [broker/process coordination closure](history/m0-t343-broker-process-cross-process-coordination-closure-20260901.md).
