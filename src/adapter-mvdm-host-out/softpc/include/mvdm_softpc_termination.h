@@ -32,4 +32,13 @@ void mvdm_softpc_record_bop_dispatch(unsigned int selector,
                                      unsigned int guest_ds,
                                      unsigned int guest_dx);
 
+/* Fixed-container diagnostic only.  Called after the original BOP handler
+ * and its original service-byte IP advance; copies already-live CPU words. */
+void mvdm_softpc_record_bop_return(unsigned int selector,
+                                   unsigned int service,
+                                   unsigned int guest_cs,
+                                   unsigned int guest_ip,
+                                   unsigned int guest_ax,
+                                   unsigned int guest_cf);
+
 #endif

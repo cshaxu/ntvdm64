@@ -2,11 +2,12 @@
 
 ## Current Work
 
-**Active: M0 T352 S2.** T352 admits the queue-head complete original
+**Active: M0 T352 S3.** T352 admits the queue-head complete original
 CPU40/COMMAND post-`SVC_CMDSETINFO` continuation package.  S1 first maps the
 full original post-`54:05` control and machine cohort to one earliest missing
-or wrong owner edge; S2 now adds the bounded, state-neutral return observer
-selected by that source review.  No trace-selected service repair is allowed.
+or wrong owner edge; S2 proves the current timeout occurs before the original
+COMMAND return.  S3 now audits that complete original indirect-call cohort;
+no trace-selected service repair is allowed.
 
 ### M0 T352 S1 — Closed CPU40/COMMAND post-`SVC_CMDSETINFO` owner admission
 
@@ -47,13 +48,38 @@ continuation claim.
 | Files And ABI Surface | Original `softpc.new/host/src/nt_bop.c`; existing `adapter-mvdm-host-out/softpc` diagnostic recorder and `MVDM-HOST-DIV-164`; no production BOP ABI. |
 | Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, mapping-manager, CPU40-only, architecture and coding rules. |
 | Verification | Compare original/mirror source and register order; focused recorder test if present; fresh selected CPU40/x86 formal build/link; exactly one fixed-container observation after formal identity is frozen; governance/diff review. |
-| Expected Markers | Existing ingress record plus one post-dispatch record with already-live fixed-width selector/service/CS:IP/AX/flags values; no altered guest or CPU result. |
+| Expected Markers | Existing ingress record plus one post-dispatch record with already-live fixed-width selector/service/CS:IP/AX/CF values; no altered guest or CPU result. |
 | Asset Needs | Existing selected original mirrors, adapter recorder, formal Ninja graph, fixed container and immutable staged media; no new import or host-system mutation. |
 | Reporting Requirements | Record source ordering, exact copied values, original/facade/intrusion/new-behavior disposition, build identity, one run result, and every still-unproven successor edge. |
 | Stop Conditions | Any need to read guest memory, retain a guest pointer, change `CmdDispatch`, IP, flags, AX, CPU execution, guest bytes, media, container or introduce an alternate executor pauses for new admission. |
 | Exit Criteria | The marker is source-ordered and registered, focused/formal checks pass, one fixed observation classifies return versus the next source owner, and no semantic BOP change is present. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | Original DEM `MS_bop_0` return, COMMAND `MS_bop_4` return, CPU40 BOP decode/resume, setIP service consumption, scalar facade failure direction, SAS fetch/store and first `msinit` post-SVC stack operations. |
+
+**S2 closure:** [original `MS_bop_4` return attribution](etc/evidence/m0-t352-s2-post-cmdsetinfo-return-attribution-001.md)
+records the fresh 425-action CPU40/x86 link and one fixed observation.  It
+proves the original COMMAND call has not reached its post-return marker; it
+does not select a repair.
+
+### M0 T352 S3 — COMMAND indirect-call and `cmdSetInfo` return audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T352 S3; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T352 S2's source-ordered return attribution under the owner-approved ordered queue execution. |
+| Objective | Establish the earliest complete original owner edge inside `CmdDispatch(5) -> cmdSetInfo` that can prevent return to `MS_bop_4`, including table storage, function-pointer ABI, selected register accessors and scalar-binding failure direction. |
+| Non-goals | No BOP leaf change, guest/media change, new mapper, synthetic state, CCPU/SAS/BIOS repair, CPU30, Bochs, x64 runtime, kernel VDM, BaseSrv/CSRSS, WOW global alias, or runtime retry. |
+| Reference Baseline | T351 scalar-binding closure, T352 S1 ledger and T352 S2 formal/one-observation evidence; selected original COMMAND/SoftPC mirrors. |
+| Files And ABI Surface | Original `dos/command/{cmddisp.c,cmdmisc.c,cmd.h}` and reached declaration carriers; existing scalar state facade/session lease; selected CPU40 call/register declarations; no new public ABI. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original-versus-mirror declaration/definition/table/call walk; selected x86 object/map/import inspection; scalar fixture evidence review; documentation governance and diff review. No build or runtime run in S3. |
+| Expected Markers | One per-edge source ledger with exact calling convention, function-pointer type, table slot and return/failure ownership; one bounded S4 source cohort or explicit terminal external boundary. |
+| Asset Needs | Current formal build map/object files and source mirrors; no new guest asset, provider or host-system modification. |
+| Reporting Requirements | Separate static proof from the S2 timeout; name every inspected sibling table/handler and each reason it is selected, retained, or excluded. |
+| Stop Conditions | Any proposed semantic command change, guest-memory read/write, durable pointer, new mapper, CPU/guest/media change, or diagnosis inferred solely from timeout pauses for renewed admission. |
+| Exit Criteria | Complete indirect-call/handler/scalar-facade audit identifies an earliest source-owned cohort with no unowned selected edge; only then may S4 change code or run a new observation. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | COMMAND SVC table slots 00–10, original `PFNSVC` calling forms, CPU40 register accessors, scalar state owner/epoch validity, function-table storage, and DEBUG/non-DEBUG range behavior. |
 
 ### M0 T351 S2 — original SCS scalar-lifecycle binding recovery
 

@@ -333,6 +333,10 @@ void MS_bop_4(void)
         (unsigned int)getDS(), (unsigned int)getDX());
     CmdDispatch((ULONG) Command);
     setIP((USHORT)(getIP() + 1));
+    /* DIVERGENCE(MVDM-HOST-DIV-164): state-neutral post-return evidence. */
+    mvdm_softpc_record_bop_return(0x54u, (unsigned int)Command,
+        (unsigned int)getCS(), (unsigned int)getIP(),
+        (unsigned int)getAX(), (unsigned int)getCF());
 }
 
 

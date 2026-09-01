@@ -237,3 +237,39 @@ void mvdm_softpc_record_bop_dispatch(unsigned int selector,
     (void)WriteFile(output, message, (DWORD)(sizeof(message) - 1),
                     &written, NULL);
 }
+
+void mvdm_softpc_record_bop_return(unsigned int selector,
+                                   unsigned int service,
+                                   unsigned int guest_cs,
+                                   unsigned int guest_ip,
+                                   unsigned int guest_ax,
+                                   unsigned int guest_cf)
+{
+    static const char hex[] = "0123456789ABCDEF";
+    char message[] =
+        "MVDM-BOP-RETURN 00:00 cs=0000 ip=0000 ax=0000 cf=0\r\n";
+    HANDLE output;
+    DWORD written;
+
+    output = GetStdHandle(STD_ERROR_HANDLE);
+    if (output == NULL || output == INVALID_HANDLE_VALUE) return;
+    message[16] = hex[(selector >> 4) & 0x0fu];
+    message[17] = hex[selector & 0x0fu];
+    message[19] = hex[(service >> 4) & 0x0fu];
+    message[20] = hex[service & 0x0fu];
+    message[25] = hex[(guest_cs >> 12) & 0x0fu];
+    message[26] = hex[(guest_cs >> 8) & 0x0fu];
+    message[27] = hex[(guest_cs >> 4) & 0x0fu];
+    message[28] = hex[guest_cs & 0x0fu];
+    message[33] = hex[(guest_ip >> 12) & 0x0fu];
+    message[34] = hex[(guest_ip >> 8) & 0x0fu];
+    message[35] = hex[(guest_ip >> 4) & 0x0fu];
+    message[36] = hex[guest_ip & 0x0fu];
+    message[41] = hex[(guest_ax >> 12) & 0x0fu];
+    message[42] = hex[(guest_ax >> 8) & 0x0fu];
+    message[43] = hex[(guest_ax >> 4) & 0x0fu];
+    message[44] = hex[guest_ax & 0x0fu];
+    message[49] = guest_cf ? '1' : '0';
+    (void)WriteFile(output, message, (DWORD)(sizeof(message) - 1),
+                    &written, NULL);
+}

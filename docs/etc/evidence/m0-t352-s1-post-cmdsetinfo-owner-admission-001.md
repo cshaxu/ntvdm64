@@ -36,9 +36,9 @@ CPU40/SAS/guest failure.
 ## Selected S2 cohort
 
 S2 may extend the existing diagnostic seam with a source-shaped
-post-`CmdDispatch` record in `MS_bop_4`, immediately before the original
-`setIP`.  It may copy only already-live fixed-width values needed to establish
-return attribution: selector, service, CS:IP, AX and flags.  It must not read
+post-`CmdDispatch` record in `MS_bop_4`, immediately after the unchanged
+original `setIP`.  It may copy only already-live fixed-width values needed to
+establish return attribution: selector, service, CS:IP, AX and CF.  It must not read
 guest memory, retain a guest pointer, write CPU/guest/session state, change
 the `CmdDispatch` result, change IP order, or add a COMMAND provider branch.
 
