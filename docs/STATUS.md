@@ -516,7 +516,7 @@ unchanged observation still opens original default `C:\COMMAND.COM`. This
 selects the original NTDOS multi-pass `SHELL` persistence cohort, not a path
 projection or DEM repair.
 
-### M0 T355 S2 — Active original CONFIG multi-pass `SHELL` persistence audit
+### M0 T355 S2 — Closed original CONFIG multi-pass `SHELL` persistence audit
 
 | Field | Record |
 | --- | --- |
@@ -535,6 +535,31 @@ projection or DEM repair.
 | Exit Criteria | The full reached multi-pass cohort has owner/disposition evidence and selects exactly one minimal source-shaped next S or records an exact source terminal; no unowned branch remains in the selected explanation. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `config`, `confbot`, `org_count`, `multi_pass_id`, `organize`, `trys`, `commnd`, `command_line`, `dfil`, NTDOS load/map identity and source-defined configuration pass ordering. |
+
+**S2 closure:** [CONFIG multi-pass `SHELL` persistence audit](etc/evidence/m0-t355-s2-config-multipass-shell-persistence-audit-001.md)
+proves that source-defined pass one must reach `trys` and replace `commnd`.
+It selects a single source-positioned, state-neutral `ConfigDone` observation;
+it does not authorize a path, DEM, parser, or machine repair.
+
+### M0 T355 S3 — Active `ConfigDone` state-neutral `commnd` observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S3; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T355 S2's complete original control/data-flow audit under the owner-approved ordered queue execution. |
+| Objective | Add one default-off observation at original NTDOS `ConfigDone` / `BOP_NOTIFICATION(5Eh, AL=0)` that copies the selected `NTIO.SYS` `multi_pass_id` and bounded `commnd` state after CONFIG multi-pass processing but before permanent-command `dfil`. |
+| Non-goals | No parser/`trys`/`dfil` rewrite, guest or firmware mutation, DEM/BOP result adjustment, pathname projection, new mapper, CPU/machine change, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics claim. |
+| Reference Baseline | T355 S1's sole valid short-root observation; T355 S2's original `doconf -> organize -> multi_pass -> trys -> commnd -> dfil` source ledger; exact selected NTIO binary/map identity. |
+| Files And ABI Surface | Existing original `MS_bop_E` notification path, exact NTIO map symbols, existing session checked guest-memory lease and existing default-off durable observer records. No guest pointer, host handle or public BOP ABI escapes the call. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Source/map-to-binary identity review; lease lifetime review; focused positive/negative copied-record proof; formal CPU40/x86 link; exactly one fixed-container observation; governance/export and diff review. |
+| Expected Markers | A copied `AL=0` notification record containing `multi_pass_id`, a bounded NUL-terminated `commnd` snapshot and selected NTIO identity, followed by unchanged original notification handling. |
+| Asset Needs | Existing original mirrors, maps, CPU40/x86 formal graph and the immutable `O:\ntvdm` staged package; no new source/media import or host-system mutation. |
+| Reporting Requirements | Separate source boundary, binary/map identity and observed bytes; record maximum copied bytes, lease scope, notification code and whether original `MS_bop_E` ran; do not interpret an exception as a repair. |
+| Stop Conditions | Any need for a second observer input variant, retained guest pointer, guest/CPU/BOP/DEM state change, map inference without exact selected identity, or a second result recorder pauses for a new admission. |
+| Exit Criteria | One valid copied notification observation or a source-backed inability result classifies `commnd` as unwritten, incorrectly written, or correctly written before later loss/context; it selects exactly one next whole recovery cohort. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `BOP_NOTIFICATION`, `MS_bop_E`, `UMBNotify`, `demDasdInit`, `ConfigDone`, `multi_pass_id`, `commnd`, `command_line`, selected `NTIO.SYS` map addresses, checked lease and durable observation lifetime. |
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 
