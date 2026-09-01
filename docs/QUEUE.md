@@ -45,7 +45,7 @@ is retired and is neither a production route nor an acceptance row.
 
 | Order | Candidate implementation package |
 | --- | --- |
-| 1 | SoftPC pre-BOP startup continuity — recover the source-defined CPU40/FDC/INT15/PIT/ICA/heartbeat cohort to a stable original `50h:11h → MS_bop_0 → DemDispatch → demLoadDos` crossing. |
+| 1 | CPU40/NTDOS post-`54:05` startup continuity — recover the source-defined CCPU40, SAS/frame, NTDOS `msinit` continuation and reached BIOS-exchange cohort from the original `cmdSetInfo` return to the next original guest ingress or exact source-owned terminal result. |
 | 2 | Minimal DOS guest execution and controlled return — execute one declared immutable `.COM`/minimal `.EXE` via the original NTIO/NTDOS/COMMAND path and prove child exit through the original parent/COMMAND return contract. |
 | 3 | Minimal vertical-slice integration closure — fixed x86 runtime observation plus paired x86/x64 build/link matrix, negative cases and no-bypass reversion review for the completed DOS child slice. |
 | 4 | VDD owner package |

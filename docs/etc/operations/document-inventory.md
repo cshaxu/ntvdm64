@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3598 |
+| Documentation records | 3599 |
 | --- | --- |
-| Generated UTC | 2026-09-01T03:03:39Z |
+| Generated UTC | 2026-09-01T03:08:15Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | 161e57a464d0978da4d8124940d64807c8ba15b7cf1ba6c52cb5e31144c2b338 |
+| QUEUE.md | principal control document | 8e2bd0d4f56798426db670ce4c947fa30f0e8ace00b0cefb8671edf741e25574 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -1863,7 +1863,7 @@ content-divergent entries.
 | etc/operations/opennt-non-mvdm-stage1-semantic-site-ledger.tsv | indexed supporting material | e4d4936ec2f7aec51e360c39daff960b2e451c3f54be28a992e8e1ad52c3d524 |
 | etc/operations/opennt-non-mvdm-stage1-semantic-symbol-ledger.tsv | indexed supporting material | 0c281cd8ee4d7b225919ef6af7dba0105343be4c691b31725a34b22302c5bdec |
 | etc/operations/opennt-non-mvdm-stage1-true-egress-ledger.tsv | indexed supporting material | a537d68f8d63655fb89e98701058fa4f394b5924ef40d2dbc78f2e03d1f3b57b |
-| etc/operations/package-recovery-program-20260827.md | indexed supporting material | c885e18a3e79e9ba0d8b4f16a1e01c7ab2ed925129c0b88c740177dc80d6ed1b |
+| etc/operations/package-recovery-program-20260827.md | indexed supporting material | 3e041451a16f94046bcc1fd70f781414ddedb085ab391d22069076d4a653285f |
 | etc/operations/policy/source-policy.md | indexed supporting material | 14ce70e4eab1b7b3ffb7fd3bf06519c83cc15d09df6bb83635f42c0e6df309dc |
 | etc/operations/proposal-bochs-component-identity-overlay-convergence-001.md | indexed supporting material | ac4de17a933c62d6b6adc1971345c6fe4e58860453fd894608553f2bdd6974c8 |
 | etc/operations/proposal-bochs-core-diff-overlay-minimization-001.md | indexed supporting material | 45eb3881102adb316497ec85eeac90488d95cd69c77d4555a1608a14d953db29 |
@@ -1875,6 +1875,7 @@ content-divergent entries.
 | etc/operations/proposal-bx-vdm-pending-bop-session-lifecycle-001.md | indexed supporting material | b3c5072c395c22475973085e337d757366b49e1769c3fb81fde9c12a38f7adf2 |
 | etc/operations/proposal-cli-run-entry-and-opennt-pif-handoff-001.md | indexed supporting material | 472164739c7fe38ba4ccb20c64a0b72c13aa81d8df972786371c50c762c8393a |
 | etc/operations/proposal-cpu40-ccpu-original-profile-closure-001.md | indexed supporting material | f029c4a25bf86ce42a568865c20f8ff3d8f18e06cc5c3645e21a76cef03f4532 |
+| etc/operations/proposal-cpu40-ntdos-post-cmdsetinfo-continuity-001.md | indexed supporting material | 07d720b5f3a3a66f7869a7de1867fbcf8e8d999c9e3a134f4703799025077624 |
 | etc/operations/proposal-cpu40-recursive-frame-guest-reentry-closure-001.md | indexed supporting material | d25d052c69494729b58ea8b30835a2e68ef057a0ff6d64bcd9b2c5c58399d33c |
 | etc/operations/proposal-current-naming-convergence-001.md | indexed supporting material | 214c6356a2a52f218e4d128d1598f7b6956e6bddc397db8b597d56bff63d7e23 |
 | etc/operations/proposal-dos-wow16-complete-source-build-closure-001.md | indexed supporting material | 3da5ac3935fbee1542946e0dfedf75d841836e0e0c7151536e88f5c44854f862 |

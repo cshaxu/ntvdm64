@@ -324,9 +324,39 @@ result is acceptable only if it occurs after the crossing and has an exact
 owner transfer. The detailed admission and evidence requirements are in
 [the pre-BOP startup continuity proposal](proposal-softpc-pre-bop-startup-continuity-001.md).
 
+## P06B — CPU40/NTDOS post-`54:05` startup continuity
+
+**Predecessor:** the completed P06A crossing and the completed CPU40
+source-owner transfer record. **Purpose:** the fixed runtime already reaches
+the original `50h:11h` through `54:05` startup sequence. This package starts
+at the return from original `cmdSetInfo` and recovers the source-defined
+CCPU40 frame/segment/stack, SAS and BIOS-exchange state, NTDOS `msinit`
+continuation, and any actually reached FDC/INT15/heartbeat/PIT/ICA
+prerequisite. It must reach the next original guest ingress or an exact
+source-owned terminal result; it may not select a trace-driven BOP repair.
+
+**S1 admission:** freeze the normal console-owning container and map the
+original call/definition/guest-continuation sequence from
+`CmdDispatch/cmdSetInfo` into NTDOS `msinit.asm`. Identify the first incorrect
+or missing original owner edge, then inspect its complete reached sibling
+cohort rather than one observed instruction or event.
+
+**Delivery:** recover the first usable original source body through a
+same-shaped binding or registered minimal overlay. Keep guest media load-only,
+retain original NTDOS/COMMAND source ownership, use the existing session
+mapping manager for guest spans, and do not introduce a loader, synthetic BOP
+result, alternate machine/executor, Bochs route or generic WOW scheduler.
+
+**Exit:** the unchanged container executes past `cmdSetInfo` and reaches the
+next original guest ingress or an exact source-owned terminal result, with a
+bounded observation of original CPU/frame and owner sequence. Paired x86/x64
+source graphs compile and link; x64 runtime is claimed only when observed.
+The detailed admission requirements are in [the post-cmdSetInfo startup
+continuity proposal](proposal-cpu40-ntdos-post-cmdsetinfo-continuity-001.md).
+
 ## P07 — Minimal DOS guest execution and controlled return
 
-**Predecessor:** P06A. **S1 admission:** verify the reached guest load,
+**Predecessor:** P06B. **S1 admission:** verify the reached guest load,
 local namespace/file, NTDOS `EXEC`, PSP/arena/JFN/environment and parent
 return contracts after the pre-BOP continuity package has reached the
 original `demLoadDos` crossing. **Delivery:** load and run one declared local
