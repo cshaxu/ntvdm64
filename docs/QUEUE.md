@@ -47,8 +47,9 @@ production route nor an acceptance row.
 | 1 | Guest DOS/WOW16 artifact matrix — classify the complete original and source-built DOS/WOW16 media sets as load-only inputs, establish their reproducible executable-relative manifest, and distinguish product assets from historical build intermediates. |
 | 2 | Executable-relative MVDM package-path capacity disposition — retain the original COMMAND configuration capacity contract and decide the explicit product behavior for installations whose selected `mvdm` root cannot fit it. |
 | 3 | CPU40/NTDOS post-`SVC_CMDSETINFO` guest-bootstrap continuity — recover the next complete original guest/machine owner cohort only after source review; no trace-selected BOP leaf repair. |
-| 4 | SoftPC graphics-workload integration continuation — after its named guest-bootstrap predecessor is closed, run the fixed selected CPU40/x86 container through one DOS graphics-mode workload and close the remaining presentation-runtime criterion without changing controller or guest semantics. |
-| 5 | Product release closure |
+| 4 | COMMAND/NTDOS bootstrap runtime continuity — recover the complete original `SVC_CMDSETINFO` return, CPU40/SAS and NTDOS `msinit` owner package before attempting any graphics workload; no trace-selected BOP leaf repair. |
+| 5 | SoftPC graphics-workload integration continuation — after its named bootstrap-runtime predecessor is closed, run the fixed selected CPU40/x86 container through one DOS graphics-mode workload and close the remaining presentation-runtime criterion without changing controller or guest semantics. |
+| 6 | Product release closure |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

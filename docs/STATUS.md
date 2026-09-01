@@ -2,12 +2,36 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T350 is closed.  Its source/formal CPU40/SAS
-bootstrap cohort and one fixed-container observation are recorded in the
-[T350 closure](history/m0-t350-cpu40-ntdos-guest-bootstrap-continuity-closure-20260901.md).
-The next candidate remains Queue item 4, SoftPC graphics-workload integration
-continuation.  It requires a new owner admission; no trace-selected BOP repair
-is authorized between packets.
+**Active: M0 T351 S2.** T351 S1 establishes that `54:05` is part of a complete
+original COMMAND/NTDOS/CPU40 scalar-lifecycle package, not a trace-selected
+provider. S2 now reviews and formally closes the existing same-shaped binding
+without adding a new mapper, BOP result or guest behavior.
+
+### M0 T351 S2 — original SCS scalar-lifecycle binding recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T351 S2; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | T351 S1 selects the complete original SCS scalar lifecycle under the standing ordered-package owner direction. |
+| Objective | Recover and formally close original SCS scalar registration and all reached COMMAND/DEM/selected SoftPC consumers through the existing one-session mapping lease. |
+| Non-goals | No `54:05` leaf provider, graphics workload, guest rewrite/rebuild, loader replacement, altered media, new mapper, CPU30, Bochs, x64 runtime, host installation, kernel VDM, CSRSS/BaseSrv or WOW global alias. |
+| Reference Baseline | T351 S1 owner ledger/evidence, T350 closure, current selected original COMMAND/DEM/SoftPC mirrors and session mapping manager. |
+| Files And ABI Surface | Existing original `cmdmisc.c`, `cmdexec.c`, `cmdpif.c`, `demmisc.c`, `nt_fdisk.c`, `nt_rflop.c`, CPU40/session binding and command guest-state facade; no new public production ABI. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Full original declaration/definition/caller comparison for all selected alias consumers; existing scalar lifecycle fixture plus fresh CPU40/x86 formal product link; documentation governance and diff review. |
+| Expected Markers | Each original direct pointer dereference maps to a same-width short lease with a source-shaped success and stale/absent-lease result; no raw alias remains in selected runtime code. |
+| Asset Needs | Existing original mirrors, adapter/session fixture and formal Ninja generator; no guest assets or host-system change. |
+| Reporting Requirements | Record original-to-binding mapping for every selected consumer; distinguish the selected one-session profile from deferred WOW semantics. |
+| Stop Conditions | Any need for a durable native pointer, global session, new mapper, guest mutation, alternate executor or unreviewed source import pauses for re-admission. |
+| Exit Criteria | The selected direct-alias cohort has one coherent binding, its source behavior/failure direction is reviewed, focused fixture/formal link pass, and S3 scope is frozen. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | COMMAND scalar registration, later COMMAND/DEM/device consumers, session lease epoch/teardown, CPU40 return/re-entry, SAS access, BIOS exchange and deferred WOW alias consumers. |
+
+**Plan:** [COMMAND/NTDOS bootstrap runtime continuity](etc/operations/proposal-command-ntdos-bootstrap-runtime-continuity-001.md).
+
+**S1 closure:** [owner admission](etc/evidence/m0-t351-s1-command-ntdos-bootstrap-owner-admission-001.md)
+and its [owner ledger](etc/operations/m0-t351-s1-command-ntdos-bootstrap-owner-ledger.tsv)
+select the whole SCS scalar lifecycle and explicitly transfer WOW/graphics work.
 
 ### M0 T350 — Closed CPU40/NTDOS guest-bootstrap continuity
 
