@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3639 |
+| Documentation records | 3641 |
 | --- | --- |
-| Generated UTC | 2026-09-01T06:50:54Z |
+| Generated UTC | 2026-09-01T06:53:53Z |
 
 ## Entries
 
@@ -1086,6 +1086,7 @@ content-divergent entries.
 | etc/evidence/m0-t340-s3-fixed-himem-cohort-observation-001.md | indexed supporting material | dcf7c7488bc901e011c87a07504129a7b0b37a7871e53a8268f43196cc8ba462 |
 | etc/evidence/m0-t341-s1-vdd-owner-package-admission-001.md | indexed supporting material | 1ff7b96b7fb128e6fb4bab4327920b8c438306f2877fdd3a74090778e334e335 |
 | etc/evidence/m0-t341-s2-vdd-no-provider-formal-closure-001.md | indexed supporting material | d2c6156889706a2341500131ebce68c1eb160d2da013a7d8d445eae8c863198c |
+| etc/evidence/m0-t342-s1-debugger-bde-fax-owner-package-admission-001.md | indexed supporting material | 05e4e08a3531d846cc73daf48500946f524c14927028705de143dba8299c2bbf |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1802,6 +1803,7 @@ content-divergent entries.
 | etc/operations/m0-t341-s1-vdd-owner-contract-ledger.tsv | indexed supporting material | 4f85bb3b1eda5f34b32e05b0d1a400e2ca22b98c824b92b897190b0dd96e80cb |
 | etc/operations/m0-t341-vdd-owner-package-recovery-plan-001.md | indexed supporting material | 2542cd96de04a0dca166d23a6400d67daa0ced2d46644a122b38f006de569d14 |
 | etc/operations/m0-t342-debugger-bde-fax-owner-package-recovery-plan-001.md | indexed supporting material | 7bd3a49398b790f59e5b93532e51e66cdc4453ef0ea873451cd67cd1f980f543 |
+| etc/operations/m0-t342-s1-debugger-bde-fax-owner-contract-ledger.tsv | indexed supporting material | a28521637759924ba4d4798d0932fcaf7ddc3acde19ad92775b399f7c49995bc |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
