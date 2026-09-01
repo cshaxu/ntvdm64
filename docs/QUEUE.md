@@ -51,7 +51,7 @@ is retired and is neither a production route nor an acceptance row.
 | 4 | Broker process and cross-process coordination |
 | 5 | In-process multi-session reentrancy audit |
 | 6 | Host capability expansion |
-| 7 | COMMAND/DEM/SoftPC guest scalar-alias lifecycle recovery — recover the complete original `cmdSetInfo` registration cohort (`SCS_ToSync`, `SCS_Is_Dos_Binary`, `SCS_FDACCESS`) through the existing session mapping manager; no BOP leaf workaround or second mapper. |
+| 7 | [COMMAND/DEM/SoftPC guest scalar-alias lifecycle recovery](etc/operations/proposal-command-dem-softpc-scalar-alias-lifecycle-recovery-001.md) — recover the complete original `cmdSetInfo` registration cohort (`SCS_ToSync`, `SCS_Is_Dos_Binary`, `SCS_FDACCESS`) through the existing session mapping manager; no BOP leaf workaround or second mapper. |
 | 8 | Guest DOS/WOW16 artifact matrix |
 | 9 | Product release closure |
 | 10 | Executable-relative MVDM package-path capacity disposition — retain the original COMMAND configuration capacity contract and decide the explicit product behavior for installations whose selected `mvdm` root cannot fit it. |
