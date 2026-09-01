@@ -97,6 +97,8 @@ mapping/Win32 binding route and is present in both formal CPU40 graphs:
 | Exit Criteria | Each reached presentation edge has one original owner/disposition and one bounded source-shaped cohort is selected or every form is transferred to a named later owner. |
 | Stop Conditions | A new window framework, private Console Server contract, video-device behavior, guest change or unreviewed import requires a further S admission. |
 
+**Plan:** [M0 T346 SoftPC graphics presentation](etc/operations/m0-t346-softpc-graphics-presentation-plan-001.md).
+
 **S1 P1:** the presentation ledger separates source-owned display controllers,
 public-console input and title forms, session video-event handoff, and the
 unavailable private Console-Server fullscreen/controller protocol. It also
@@ -125,10 +127,24 @@ buffer. Neither is recoverable from the current event handles. T346 will not
 invent a universal framebuffer or reinterpret a handle as pixels.
 
 **S1 P5:** the paired formal CPU40 graphs do not define `X86GFX`; the original
-hardware fullscreen/detect-thread/Alt+Enter branches are condition-unselected.
-They are not a current runtime repair target and cannot be enabled merely by
-adding an app sink. Any future `X86GFX` profile requires separate build and
-private-console-boundary admission.
+hardware fullscreen/detect-thread route is condition-unselected. Per P19, the
+selected Alt+Enter behavior is instead an app-owned, session-scoped modern
+window transition, without enabling X86GFX or private Console Server behavior.
+
+**S1 closure:** the selected cohort assigns source-facing bindings to
+adapter-mvdm-host-out, bounded surface lifetime to session and presentation/
+input/window ownership to app, leaving original SoftPC video code unchanged.
+
+### M0 T346 S2 — Session presentation-surface contract
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T346 S2; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T346/S1's P19-aligned source boundary under the standing direction to execute ordered owner packages. |
+| Objective | Establish the bounded session-owned text/graphics presentation-surface contract required by an app-owned window, while retaining original SoftPC video/controller source code and adapter source-facing call shapes. |
+| Non-goals | No X86GFX, Console Server/CSRSS, direct host VGA, generic framebuffer, raw internal pointer exposure, guest/controller rewrite, new mapper, CPU30 or Bochs route. |
+| Verification | Contract tests prove dimensions, lifetime, bounded snapshot/lease access and deterministic unavailable result without a window. |
+| Exit Criteria | A single session-owned surface route exists for the selected presentation cohort; no adapter-private pointer or host HANDLE is the data ABI; original SoftPC paths remain unchanged. |
 
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
