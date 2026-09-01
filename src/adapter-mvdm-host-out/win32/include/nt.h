@@ -177,6 +177,12 @@ typedef struct _OPENNT_SUPPORT_TEB {
      * per-thread VDM TIB through this spelling. The value is assigned only
      * by the monitor's bound-thread carrier and is never a guest value. */
     PVOID Vdm;
+    /* DIVERGENCE(ADAPTER-WIN32-041): the selected original WOW32 source
+     * stores its per-thread TD through the NT4 TEB's WOW32Reserved slot.
+     * A modern public TEB does not expose that retired product field.  This
+     * adapter-private TLS carrier preserves the source spelling and its
+     * thread-local lifetime; it is host-private and is never a guest value. */
+    PVOID WOW32Reserved;
 } OPENNT_SUPPORT_TEB, *POPENNT_SUPPORT_TEB;
 
 POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID);

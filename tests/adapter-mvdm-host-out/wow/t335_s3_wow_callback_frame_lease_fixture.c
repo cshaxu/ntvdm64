@@ -2,6 +2,7 @@
 
 #include <string.h>
 
+#include <nt.h>
 #include "session/session.h"
 
 typedef struct fixture_memory {
@@ -45,8 +46,14 @@ int main(void)
     session owner;
     fixture_memory memory;
     wow_callback_frame_lease view;
+    POPENNT_SUPPORT_TEB teb;
 
     memset(&memory, 0, sizeof(memory));
+    teb = opennt_support_current_teb();
+    if (teb == NULL || teb->WOW32Reserved != NULL) return 7;
+    teb->WOW32Reserved = &owner;
+    if (opennt_support_current_teb()->WOW32Reserved != &owner) return 8;
+    teb->WOW32Reserved = NULL;
     memory.bytes[8] = 0x42u;
     session_initialize(&owner, 335u);
     if (!session_activate(&owner) ||

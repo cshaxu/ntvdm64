@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3585 |
+| Documentation records | 3586 |
 | --- | --- |
-| Generated UTC | 2026-09-01T00:36:01Z |
+| Generated UTC | 2026-09-01T00:43:18Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 2e7f6f528ec8bc55b58e4d4be70e8375bc171f5d040e406fa8213f8829cdde5d |
+| STATUS.md | principal control document | 7ce9c771a26ec5829648387a5759e44cf6d3845e5a0974d2b72d75f4b5b7efa3 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1057,6 +1057,7 @@ content-divergent entries.
 | etc/evidence/m0-t335-s2-wow-callback-frame-contract-001.md | indexed supporting material | e2f46ba1a9f5c3e635192e54b26365825040f71a975018bd0398fc9b4aa82abe |
 | etc/evidence/m0-t335-s3-p1-wow-scoped-frame-lease-001.md | indexed supporting material | a987474fec676eac729baa28cfa1cefd08ac88523cc388de5a3d8e703fdb539b |
 | etc/evidence/m0-t335-s3-p2-wow-pointer-access-family-audit-001.md | indexed supporting material | d4e7360693f1681b23507b7ae7700ff7d5d39dc11604befcaa7b1a78b67886ad |
+| etc/evidence/m0-t335-s3-p3-wow-current-task-teb-binding-001.md | indexed supporting material | 8cc6a4dc3f2fdfdba6d040de5e6d62ba8f0ac4265c7ccc9bc6ae6d2ce6e4b192 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
