@@ -5,9 +5,9 @@
 **Active: M0 T352 S3.** T352 admits the queue-head complete original
 CPU40/COMMAND post-`SVC_CMDSETINFO` continuation package.  S1 first maps the
 full original post-`54:05` control and machine cohort to one earliest missing
-or wrong owner edge; S2 proves the current timeout occurs before the original
-COMMAND return.  S3 now audits that complete original indirect-call cohort;
-no trace-selected service repair is allowed.
+or wrong owner edge; S2's final-screen observation is inconclusive.  S3 has
+selected a durable child-only return record; no trace-selected service repair
+is allowed.
 
 ### M0 T352 S1 — Closed CPU40/COMMAND post-`SVC_CMDSETINFO` owner admission
 
@@ -57,29 +57,52 @@ continuation claim.
 | Similar-Issue Sweep | Original DEM `MS_bop_0` return, COMMAND `MS_bop_4` return, CPU40 BOP decode/resume, setIP service consumption, scalar facade failure direction, SAS fetch/store and first `msinit` post-SVC stack operations. |
 
 **S2 closure:** [original `MS_bop_4` return attribution](etc/evidence/m0-t352-s2-post-cmdsetinfo-return-attribution-001.md)
-records the fresh 425-action CPU40/x86 link and one fixed observation.  It
-proves the original COMMAND call has not reached its post-return marker; it
-does not select a repair.
+records the fresh 425-action CPU40/x86 link and one fixed observation.  Its
+final console surface cannot prove a missing return, so it selects no repair.
 
-### M0 T352 S3 — COMMAND indirect-call and `cmdSetInfo` return audit
+### M0 T352 S3 — Closed COMMAND return/observer durability audit
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T352 S3; ordinary mode (single-person dual-role implementation). |
 | Admission And Approval | Admitted by T352 S2's source-ordered return attribution under the owner-approved ordered queue execution. |
-| Objective | Establish the earliest complete original owner edge inside `CmdDispatch(5) -> cmdSetInfo` that can prevent return to `MS_bop_4`, including table storage, function-pointer ABI, selected register accessors and scalar-binding failure direction. |
-| Non-goals | No BOP leaf change, guest/media change, new mapper, synthetic state, CCPU/SAS/BIOS repair, CPU30, Bochs, x64 runtime, kernel VDM, BaseSrv/CSRSS, WOW global alias, or runtime retry. |
+| Objective | Audit the complete original `CmdDispatch(5) -> cmdSetInfo` indirect-call cohort and establish whether the final-console observer can prove its return. |
+| Non-goals | No BOP leaf change, guest/media change, new mapper, synthetic state, CCPU/SAS/BIOS repair, CPU30, Bochs, x64 runtime, kernel VDM, BaseSrv/CSRSS, WOW global alias, build, or runtime retry. |
 | Reference Baseline | T351 scalar-binding closure, T352 S1 ledger and T352 S2 formal/one-observation evidence; selected original COMMAND/SoftPC mirrors. |
 | Files And ABI Surface | Original `dos/command/{cmddisp.c,cmdmisc.c,cmd.h}` and reached declaration carriers; existing scalar state facade/session lease; selected CPU40 call/register declarations; no new public ABI. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
 | Verification | Original-versus-mirror declaration/definition/table/call walk; selected x86 object/map/import inspection; scalar fixture evidence review; documentation governance and diff review. No build or runtime run in S3. |
-| Expected Markers | One per-edge source ledger with exact calling convention, function-pointer type, table slot and return/failure ownership; one bounded S4 source cohort or explicit terminal external boundary. |
+| Expected Markers | One source ledger with exact calling convention, function-pointer type, table slot and return/failure ownership; one bounded durable S4 observer cohort. |
 | Asset Needs | Current formal build map/object files and source mirrors; no new guest asset, provider or host-system modification. |
 | Reporting Requirements | Separate static proof from the S2 timeout; name every inspected sibling table/handler and each reason it is selected, retained, or excluded. |
 | Stop Conditions | Any proposed semantic command change, guest-memory read/write, durable pointer, new mapper, CPU/guest/media change, or diagnosis inferred solely from timeout pauses for renewed admission. |
-| Exit Criteria | Complete indirect-call/handler/scalar-facade audit identifies an earliest source-owned cohort with no unowned selected edge; only then may S4 change code or run a new observation. |
+| Exit Criteria | The original indirect-call/handler/scalar-facade audit finds no unowned edge and demonstrates that final-console output is non-durable; only then may S4 add the bounded report path and run a new observation. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | COMMAND SVC table slots 00–10, original `PFNSVC` calling forms, CPU40 register accessors, scalar state owner/epoch validity, function-table storage, and DEBUG/non-DEBUG range behavior. |
+
+**S3 closure:** [COMMAND return/observer durability audit](etc/evidence/m0-t352-s3-command-return-durability-audit-001.md)
+finds the original COMMAND cohort structurally complete and selects a durable
+child-only observer report rather than a trace-derived behavior change.
+
+### M0 T352 S4 — durable original COMMAND return observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T352 S4; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T352 S3's complete source and observer-durability audit under the owner-approved ordered queue execution. |
+| Objective | Preserve the existing source-ordered `MS_bop_4` return observation while recording it through a child-only durable report, then make one fixed-container observation that conclusively classifies the reached return boundary. |
+| Non-goals | No BOP/provider semantic change, guest/media change, synthetic state, new mapper, CPU/CCPU/SAS/BIOS repair, CPU30, Bochs, x64 runtime, kernel VDM, CSRSS/BaseSrv or second observation matrix. |
+| Reference Baseline | T352 S1 owner ledger, S2 formal link/one observation and S3 COMMAND/observer audit. |
+| Files And ABI Surface | Existing `MVDM-HOST-DIV-164` observer in `nt_bop.c`, its adapter recorder, and `tests/observation/console_startup_observer.c`; an observer-only environment variable and fixed-width report text. |
+| Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, mapping-manager, CPU40-only, architecture and coding rules. |
+| Verification | Source-order review; focused report-path positive/absent-path negative check; fresh formal CPU40/x86 build/link; one staged fixed-container observation; governance/diff review. |
+| Expected Markers | A durable `MVDM-BOP-RETURN 54:05` record or its unambiguous absence, alongside the existing ingress/report identities; no guest-visible state change. |
+| Asset Needs | Existing observer, selected original sources, formal graph and immutable media; no new source package or host mutation. |
+| Reporting Requirements | Record report-path lifetime/ownership, original record ordering, build/media hashes, one result, and exact successor owner disposition. |
+| Stop Conditions | Any guest-memory access, guest handle/object, BOP return/result change, CPU state write, media/container variation, or more than one run pauses for new admission. |
+| Exit Criteria | The durable record is source-ordered and absent-path safe, focused/formal checks pass, one observation is preserved and accurately classified, and the next owner package is selected without a leaf repair. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | Main-return/exception report paths, BOP ingress/return diagnostics, observer environment restoration, report handle ownership, console-snapshot limitations and child-only watchdog behavior. |
 
 ### M0 T351 S2 — original SCS scalar-lifecycle binding recovery
 

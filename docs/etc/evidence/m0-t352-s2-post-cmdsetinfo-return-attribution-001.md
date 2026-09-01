@@ -48,19 +48,22 @@ the console snapshot SHA-256 is
 `28de9c8bd523e9d06ea52c48f5fc40b53c1e33285c2c257533046024c419cacb`.
 
 The observer ended the child only with its normal timeout result
-`0x53504354`.  The console retains `MVDM-BOP-DISPATCH 54:05` but contains no
-`MVDM-BOP-RETURN 54:05` record.
+`0x53504354`.  The final console surface retains `MVDM-BOP-DISPATCH 54:05`
+but contains no `MVDM-BOP-RETURN 54:05` record.
 
 ## Classification
 
-This proves that, under the one frozen current product/container, execution
-has entered original `MS_bop_4` and has **not reached the diagnostic point
-after its original `CmdDispatch` plus `setIP(+1)` sequence** before timeout.
-It does not prove why: the remaining source-owned region includes the indirect
-COMMAND dispatch table/call ABI, `cmdSetInfo`, and its already-admitted scalar
-binding boundary.  It explicitly does not authorize a new BOP provider, CCPU,
-SAS, BIOS, or guest repair.
+This proves only original `54:05` ingress.  It does **not** prove absence of
+the return marker: the observer's `.console.txt` is a final
+`ReadConsoleOutputCharacterA` screen snapshot, not an append-only child output
+log, and later guest display output may overwrite or scroll an earlier record.
+The attempted return attribution is therefore inconclusive rather than a
+COMMAND failure classification.
 
-S3 is therefore limited to a complete static original COMMAND indirect-call
-and `cmdSetInfo` ABI/return audit.  It must establish the earliest wrong or
-missing owner edge before any further code change or another observation.
+The source call itself was reviewed: the original `PFNSVC` is `VOID (*)(VOID)`,
+slot five is original `cmdSetInfo`, the selected map resolves both
+`CmdDispatch` and `cmdSetInfo` from `original-mvdm-command`, and `cmdSetInfo`
+plus its selected numeric scalar facade has no wait, I/O, lock, callback or
+loop.  S3 must now select a durable, child-only report boundary.  It must not
+turn this inconclusive console snapshot into a BOP, CCPU, SAS, BIOS or guest
+repair.
