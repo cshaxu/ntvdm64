@@ -488,7 +488,7 @@ and
 
 ## Active Packet
 
-**Active: M0 T355 S20 — original XMS backing-lifecycle selection recovery.**
+**Active: M0 T355 S21 — fixed-container original XMS allocation observation.**
 
 ### M0 T355 S1 — Closed short-path permanent COMMAND fixed-container verification
 
@@ -948,7 +948,7 @@ acquires a read-before-write lease and reaches CCPU before the requested XMS
 backing can be cleared.  The original non-`i386` `XMSInit` allocation/commit
 branch is the sole S20 recovery candidate.
 
-### M0 T355 S20 — Active original XMS backing-lifecycle selection recovery
+### M0 T355 S20 — Closed original XMS backing-lifecycle selection recovery
 
 | Field | Record |
 | --- | --- |
@@ -973,6 +973,38 @@ regenerated the formal CPU40/x86 graph without
 `MVDM_XMS_SESSION_BACKEND` and linked all 426 actions successfully.  The
 original `VdmAllocateVirtualMemory`/`VdmCommitVirtualMemory` lifecycle is
 selected; no runtime observation or `50:42` behavior claim is made.
+
+**S20 closure:** the source-selected original XMS backing lifecycle is formally
+compiled and linked.  Its next evidence is one fixed-container observation;
+that observation may classify a new source owner but may not authorize an
+in-run repair.
+
+### M0 T355 S21 — Closed fixed-container original XMS allocation observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S21; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from S20's formally linked source-selection closure under the standing owner direction to continue the active SoftPC package. |
+| Objective | Make exactly one console-owning, non-debug fixed-container observation of the S20 x86 product and classify whether the first original XMS allocation now progresses beyond the prior uncommitted-direct-RAM terminal. |
+| Non-goals | No source or ABI change, retry, alternate observer, timeout change, media/firmware change, guest mutation, `50:42` semantic change, CCPU workaround, eager allocation, mapper change, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics claim. |
+| Reference Baseline | S16/S18 fixed-container reports, S19 source audit and S20 formal x86 linked product. The product executable is the sole mutable fixed-container member; media and observer contract remain fixed. |
+| Files And ABI Surface | Existing `ObserveSoftpcStartup.mjs`, existing `console-startup-observer.exe`, existing `O:\ntvdm` media manifest, and S20 formal `original-softpc-process.exe`. No production source is changed. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Verify fixed media identity before launch; replace only the staged product through the existing observation script; make one 8-second fixed-container observation; retain exact report/json/exception excerpts; source/map classify only the reached terminal; governance/export and diff review. |
+| Expected Markers | Either the prior `0x00110000` direct-RAM fault is absent and a later original owner is reached, or the exact terminal remains with current product identity. |
+| Asset Needs | S20 x86 executable, current fixed `O:\ntvdm` package, existing observer and Node 22. |
+| Reporting Requirements | Record product and fixed-media hashes, command/timeout identity, result and exact successor ownership. Distinguish an observed later boundary from continuous guest execution or `50:42` completion. |
+| Stop Conditions | Any need for a second run, changed observer/container/media/timeout, source change, host mutation, raw guest/host pointer capture, or repair selected from the trace stops this S for separate admission. |
+| Exit Criteria | One valid fixed-container observation has either disproved the former XMS-backing terminal or reproduced it with exact current identity and has transferred at most one source-owned successor. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | Fixed media hashes, observer command/timeout, staged product identity, `XMSInit`, `SAAllocate`, `VdmCommitVirtualMemory`, `c_GetPhyAdd`, first direct-RAM report, original exception report and reached BOP records. |
+
+**S21 closure:** one immutable-container observation proves that the selected
+original XMS allocation/commit lifecycle has progressed beyond the former
+`0x00110000` direct-RAM terminal.  The later `0x48` process result is exactly
+the app/session disposal-failure result, not an XMS or `50:42` result.  Its
+specific invariant remains unobserved and transfers only to a separately
+admitted app/session lifecycle audit: [S21 fixed-container evidence](etc/evidence/m0-t355-s21-original-xms-backing-fixed-container-observation-001.md).
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 
