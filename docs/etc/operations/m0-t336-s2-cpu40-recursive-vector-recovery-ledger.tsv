@@ -1,0 +1,7 @@
+id	original_location	contract	disposition	verification	next_owner
+T336-S2-01	softpc.new/base/disks/floppy.c:wait_int	Save CPU state, install original INT 15h device-busy entry and invoke host_simulate.	original-source-reuse	Return address maps to the host_simulate vector call.	FDC/INT15 completion
+T336-S2-02	softpc.new/host/inc/host_cpu.h:host_simulate	Dispatch recursive CPU re-entry through host_simulate_func.	original-source-reuse	Null target recorded before recovery; no target fault after recovery.	CCPU40 vector
+T336-S2-03	softpc.new/host/src/nt_cprgs.c:load_sw_cpu_access_functions	Install original CCPU access vector and c_cpu_simulate recursive provider.	original-source-reuse with DIV-151	Selected CPU40 body assigns host_simulate_func.	CPU startup
+T336-S2-04	softpc.new/base/support/main.c:host_main	Run original cpu_init before DOS/firmware startup.	minimal mirror divergence DIV-182	Fresh x86/x64 formal links select call; x86 fixed observation survives it.	FDC/INT15 completion
+T336-S2-05	softpc.new/base/ccpu386/c_main.c:c_cpu_simulate	Run recursive CCPU40 simulation frame.	original-source-reuse	Selected as vector target; no alternate executor linked.	FDC/INT15 completion
+T336-S2-06	fixed x86 container	Observe unchanged media and ordinary child after vector recovery.	evidence-only	BOP markers through 54:05 followed by timeout, not C0000005/IP=0.	T336 S3 source admission

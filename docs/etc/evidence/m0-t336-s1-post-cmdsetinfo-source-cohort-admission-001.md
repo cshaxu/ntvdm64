@@ -21,8 +21,9 @@ The source walk was:
 4. CCPU40 register/SAS definitions and the source-wide consumers of the two
    retained SCS aliases; and
 5. one unchanged, console-owning, non-debug x86 observation with
-   `MVDM_EXCEPTION_REPORT_PATH` set solely to determine whether the existing
-   timer-thread filter saw the final process exception.
+   `MVDM_EXCEPTION_REPORT_PATH` set solely to distinguish a captured original
+   top-level exception from the timer-thread filter's narrower exception
+   path.
 
 The complete per-contract result is in the adjacent
 [`ledger`](../operations/m0-t336-s1-post-cmdsetinfo-cohort-ledger.tsv).
@@ -45,11 +46,11 @@ The complete per-contract result is in the adjacent
   consumers occur in DEM and SoftPC disk/floppy code.  This is a shared,
   later-use mapping-lifetime issue, not evidence that `cmdSetInfo` failed the
   next guest instruction.
-- The unchanged fixed container again ended with `0xC0000005`.  No
-  `exception-report.txt` was emitted, so the existing
-  `VdmUnhandledExceptionFilter` instrumentation did not receive this process
-  exception.  That filter belongs to the original timer path and cannot be
-  used to identify the CPU40 fault location.
+- The unchanged fixed container again ended with `0xC0000005`.  It emitted
+  the original top-level exception report with `IP=0` and return address
+  `0x00e08ef8`; that report is sufficient for the successor packet to map the
+  originating indirect call, but does not by itself identify the source-owned
+  vector or its initialization predecessor.
 
 ## Disposition
 
@@ -62,7 +63,7 @@ instruction.
 
 The immediate successor is therefore a bounded CCPU40/SAS observation and
 source-contract packet.  It must preserve the original BOP and NTDOS paths,
-observe the original instruction/stack state without changing it, and decide
+map the recorded return address to its original indirect call, and decide
 whether the first failing edge is CCPU40 execution, SAS span state, or an
 already-required BIOS exchange prerequisite.  It must not add a BOP provider,
 guest loader, synthetic result, secondary mapper, alternate executor or Bochs
@@ -72,7 +73,7 @@ route.
 
 Confidence is high for the static transition and owner mapping because both
 sides are selected original source and the fixed observation independently
-reaches `54:05`.  Confidence is intentionally low for exact fault attribution:
-the observed `0xC0000005` is process-level only and the timer-thread filter is
-not on that exception path.  No claim is made for continuous DOS execution,
-child-program execution, a new guest ingress, or x64 runtime execution.
+reaches `54:05`.  The top-level report proves only an indirect call to a null
+target; precise vector and initialization attribution remains S2 work.  No
+claim is made for continuous DOS execution, child-program execution, a new
+guest ingress, or x64 runtime execution.
