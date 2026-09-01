@@ -173,14 +173,18 @@ int main(int argc, char **argv)
     char previous_main_return_report_path[MAX_PATH];
     char bop_return_report_path[MAX_PATH];
     char previous_bop_return_report_path[MAX_PATH];
+    char dem_open_report_path[MAX_PATH];
+    char previous_dem_open_report_path[MAX_PATH];
     char report_base_path[MAX_PATH];
     DWORD report_base_path_length;
     DWORD previous_exception_report_length;
     DWORD previous_main_return_report_length;
     DWORD previous_bop_return_report_length;
+    DWORD previous_dem_open_report_length;
     BOOL had_previous_exception_report;
     BOOL had_previous_main_return_report;
     BOOL had_previous_bop_return_report;
+    BOOL had_previous_dem_open_report;
     char fixed_system_root[MAX_PATH];
     char fixed_system_root_short[MAX_PATH];
     DWORD fixed_system_root_short_length = 0;
@@ -238,6 +242,8 @@ int main(int argc, char **argv)
              report_base_path);
     snprintf(bop_return_report_path, sizeof(bop_return_report_path), "%s.bop-return.txt",
              report_base_path);
+    snprintf(dem_open_report_path, sizeof(dem_open_report_path), "%s.dem-open.txt",
+             report_base_path);
     previous_exception_report_length = GetEnvironmentVariableA(
         "MVDM_EXCEPTION_REPORT_PATH", previous_exception_report_path,
         (DWORD)sizeof(previous_exception_report_path));
@@ -253,9 +259,15 @@ int main(int argc, char **argv)
         (DWORD)sizeof(previous_bop_return_report_path));
     had_previous_bop_return_report = previous_bop_return_report_length != 0 &&
         previous_bop_return_report_length < sizeof(previous_bop_return_report_path);
+    previous_dem_open_report_length = GetEnvironmentVariableA(
+        "MVDM_DEM_OPEN_REPORT_PATH", previous_dem_open_report_path,
+        (DWORD)sizeof(previous_dem_open_report_path));
+    had_previous_dem_open_report = previous_dem_open_report_length != 0 &&
+        previous_dem_open_report_length < sizeof(previous_dem_open_report_path);
     SetEnvironmentVariableA("MVDM_EXCEPTION_REPORT_PATH", exception_report_path);
     SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH", main_return_report_path);
     SetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH", bop_return_report_path);
+    SetEnvironmentVariableA("MVDM_DEM_OPEN_REPORT_PATH", dem_open_report_path);
 
     if (!CreateProcessA(NULL, command_line, NULL, NULL, TRUE, 0, NULL, argv[2],
                         &startup, &child)) {
@@ -274,6 +286,11 @@ int main(int argc, char **argv)
                                     previous_bop_return_report_path);
         else
             SetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH", NULL);
+        if (had_previous_dem_open_report)
+            SetEnvironmentVariableA("MVDM_DEM_OPEN_REPORT_PATH",
+                                    previous_dem_open_report_path);
+        else
+            SetEnvironmentVariableA("MVDM_DEM_OPEN_REPORT_PATH", NULL);
         CloseHandle(input);
         CloseHandle(output);
         return 67;
@@ -293,6 +310,11 @@ int main(int argc, char **argv)
                                 previous_bop_return_report_path);
     else
         SetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH", NULL);
+    if (had_previous_dem_open_report)
+        SetEnvironmentVariableA("MVDM_DEM_OPEN_REPORT_PATH",
+                                previous_dem_open_report_path);
+    else
+        SetEnvironmentVariableA("MVDM_DEM_OPEN_REPORT_PATH", NULL);
     wait_status = WaitForSingleObject(child.hProcess, OBSERVATION_TIMEOUT_MS);
     capture_process_image(child.dwProcessId, &image_identity);
     if (wait_status == WAIT_TIMEOUT) {

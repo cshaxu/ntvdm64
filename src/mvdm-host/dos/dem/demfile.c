@@ -21,6 +21,7 @@
 #include <nt_vdd.h>
 
 #include <mvdm_vdd_sft_shadow.h>
+#include <mvdm_softpc_termination.h>
 
 BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
 extern BOOL LoadVdmRedir(VOID);
@@ -174,6 +175,10 @@ SECURITY_ATTRIBUTES sa;
     }
 
     lpFileName = (LPSTR) GetVDMAddr (getDS(),getSI());
+    /* DIVERGENCE(MVDM-HOST-DIV-177): default-off copied observation only.
+     * Preserve the original DS:SI alias and all file-service behavior; the
+     * helper independently leases the numeric address and never retains it. */
+    mvdm_softpc_record_dem_open(getDS(), getSI(), 0u, 0u, getAX(), getCF());
 
 #if DBG
     if(fShowSVCMsg & DEMFILIO){
@@ -297,6 +302,8 @@ SECURITY_ATTRIBUTES sa;
 errorReturn:
 
             demClientError(INVALID_HANDLE_VALUE, *lpFileName);
+            mvdm_softpc_record_dem_open(getDS(), getSI(), 2u,
+                (unsigned int)GetLastError(), getAX(), getCF());
             if (dupFileName) {
                 free(dupFileName);
             } else if (ItsANamedPipe && lpFileName) {
@@ -307,6 +314,8 @@ errorReturn:
         else
             break;
     }
+
+    mvdm_softpc_record_dem_open(getDS(), getSI(), 1u, 0u, getAX(), getCF());
 
     //
     // we have to keep some info around when we open a named pipe

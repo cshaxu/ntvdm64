@@ -29,7 +29,7 @@ and its [bootstrap ledger](etc/operations/m0-t354-s1-permanent-command-bootstrap
 prove that a source-shaped canonical filename observation—not a `50:12` leaf
 repair—is the next bounded seam.
 
-### M0 T354 S2 — Active permanent COMMAND canonical-name attribution
+### M0 T354 S2 — Closed permanent COMMAND canonical-name attribution
 
 | Field | Record |
 | --- | --- |
@@ -48,6 +48,32 @@ repair—is the next bounded seam.
 | Exit Criteria | One valid copied observation or an explicit source-backed inability result identifies the live path/outcome and selects exactly one whole recovery cohort for S3 without a leaf BOP implementation. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `SVC_DEMOPEN` callers, WFP path lifetime, `demOpen` normal/error paths, 16/32-bit host-handle return, source-generated `shell=`, staged root/system32 image identity and existing BOP-return reporting. |
+
+**S2 closure:** [permanent COMMAND canonical-open observation](etc/evidence/m0-t354-s2-permanent-command-open-observation-001.md)
+proves that the reached permanent path is the original default
+`C:\\COMMAND.COM`, not the staged `mvdm\\system32\\COMMAND.COM`; original DEM
+returns `ERROR_FILE_NOT_FOUND` unchanged.  The bounded next cohort is the
+configuration-to-`commnd` source path, not `50:12`.
+
+### M0 T354 S3 — Active configuration-to-`commnd` cohort attribution
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T354 S3; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T354 S2's single valid canonical-open observation under the owner-approved ordered queue execution. |
+| Objective | Audit the complete original `cmdGetConfigSys`/`cmdconf.c` transformation, NTDOS `doconf` parser, default `commnd` fallback, and app SystemRoot binding to select the minimal source-shaped recovery of the permanent COMMAND pathname. |
+| Non-goals | No `demOpen` rewrite, BOP leaf result fabrication, guest/media mutation, real-host C-drive write, virtual boot volume, CPU/machine change, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or interactive COMMAND claim. |
+| Reference Baseline | T353 post-configuration source terminal; T354 S1 owner ledger; T354 S2 proof that `C:\\COMMAND.COM` is the original live failing path despite the unchanged staged `mvdm\\system32\\COMMAND.COM`. |
+| Files And ABI Surface | Original `cmdconf.c` configuration text transformation, original NTDOS configuration parser and `commnd` storage, app-selected SystemRoot/profile inputs, plus any already-owned adapter binding selected by source. No new guest-memory mapping or file-provider ABI. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Definition/caller/data-flow audit across original MVDM and app inputs; original-versus-mirror comparison; exact config-text identity inspection; formal graph/import review; governance/export and diff review. Runtime evidence is admitted only after a complete cohort seam is selected. |
+| Expected Markers | A source-owned explanation of why `shell=` does or does not reach `doconf`, an exact pathname/result contract, and one bounded recovery seam that preserves the original DOS/DEM error direction. |
+| Asset Needs | Existing original mirrors, T354 stage manifest, source index and selected CPU40/x86 graph; no new component or host mutation. |
+| Reporting Requirements | Separate source behavior, staged file identity, current app binding and observed path; record every configuration parser branch required to explain `C:\\COMMAND.COM`. |
+| Stop Conditions | Any conclusion based only on timeout; need to alter DEM/BOP result, write guest media to real C, invent a parser, change CPU/machine behavior, or broaden into interactive COMMAND work pauses for new admission. |
+| Exit Criteria | The entire configuration-to-default pathname cohort is source-owned and selects one minimal original-compatible recovery implementation, or identifies an exact further source terminal. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `config.nt` source/staged identity, `cmdGetConfigSys`, `ExpandConfigFiles`, `doconf`, `SHELL=` grammar, `sysinit1.asm::commnd`, `sysinit2.asm` default, SystemRoot and `system32\\COMMAND.COM` selection. |
 
 ### M0 T353 S1 — Closed post-`SVC_CMDGETCONFIGSYS` owner admission
 
@@ -419,6 +445,8 @@ and
 [T341 closure](history/m0-t341-vdd-owner-package-recovery-closure-20260831.md).
 
 ## Active Packet
+
+**Active: M0 T354 S3 — configuration-to-`commnd` cohort attribution.**
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 

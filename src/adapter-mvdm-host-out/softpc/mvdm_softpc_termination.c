@@ -2,9 +2,12 @@
 
 #include "session/session.h"
 
+#include <ctype.h>
 #include <stdio.h>
 #include <string.h>
 #include <windows.h>
+
+#include "mvdm_guest_location.h"
 
 static char *mvdm_softpc_append_hex(char *output, ULONG_PTR value,
     unsigned int digits)
@@ -313,4 +316,39 @@ void mvdm_softpc_record_command_call(unsigned int service,
                         &written, NULL);
     mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH", message,
         (DWORD)(sizeof(message) - 1));
+}
+
+void mvdm_softpc_record_dem_open(uint16_t guest_ds, uint16_t guest_si,
+    unsigned int phase, unsigned int status, unsigned int guest_ax,
+    unsigned int guest_cf)
+{
+    mvdm_guest_location location;
+    uint8_t copied[260];
+    char text[sizeof(copied)];
+    char message[512];
+    uint32_t copied_bytes = 0u;
+    uint32_t index;
+    int formatted;
+
+    if (GetEnvironmentVariableA("MVDM_DEM_OPEN_REPORT_PATH", NULL, 0u) == 0u)
+        return;
+    memset(copied, 0, sizeof(copied));
+    if (!mvdm_guest_location_set_real_mode(&location, guest_ds, guest_si) ||
+        !mvdm_guest_location_copy_c_string(&location, copied,
+            (uint32_t)sizeof(copied), &copied_bytes)) {
+        memcpy(text, "<unavailable>", sizeof("<unavailable>"));
+    } else {
+        for (index = 0u; index + 1u < copied_bytes && index + 1u < sizeof(text);
+            ++index) {
+            text[index] = isprint(copied[index]) ? (char)copied[index] : '?';
+        }
+        text[index] = '\0';
+    }
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-DEM-OPEN phase=%u ds=%04X si=%04X status=%08X ax=%04X cf=%u path=%s\r\n",
+        phase, (unsigned int)guest_ds, (unsigned int)guest_si, status,
+        guest_ax, guest_cf, text);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
+    mvdm_softpc_write_optional_report("MVDM_DEM_OPEN_REPORT_PATH", message,
+        (DWORD)formatted);
 }

@@ -48,4 +48,11 @@ void mvdm_softpc_record_command_call(unsigned int service,
                                     unsigned int guest_ax,
                                     unsigned int guest_cf);
 
+/* Default-off, fixed-container DEM observation.  The caller passes only the
+ * original numeric DS:SI form; this helper takes and releases its own bounded
+ * session lease before recording copied text and scalar outcome. */
+void mvdm_softpc_record_dem_open(uint16_t guest_ds, uint16_t guest_si,
+    unsigned int phase, unsigned int status, unsigned int guest_ax,
+    unsigned int guest_cf);
+
 #endif
