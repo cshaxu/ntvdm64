@@ -8,7 +8,7 @@
 #include "guest_memory_lease.h"
 
 #define SESSION_MAGIC UINT32_C(0x53455353)
-#define SESSION_ABI_VERSION UINT32_C(2)
+#define SESSION_ABI_VERSION UINT32_C(3)
 #define SESSION_MAX_TEARDOWNS 8u
 #define SESSION_MAX_THREAD_HOOKS 8u
 #define SESSION_MECHANICAL_STATUS_NONE UINT32_MAX
@@ -100,6 +100,14 @@ typedef struct session {
     char mvdm_system_root[SESSION_FIRMWARE_ROOT_BYTES];
     session_video_event_fn video_event_sink;
     void *video_event_context;
+    /* Internal storage for the original SoftPC 80x50 character/attribute
+     * text plane.  Only the source-facing adapter may acquire a writable
+     * host-local lease; app presentation receives copies through the snapshot
+     * API and never this pointer. */
+    uint8_t *presentation_text_storage;
+    uint32_t presentation_text_columns;
+    uint32_t presentation_text_rows;
+    uint32_t presentation_text_bytes;
 } session;
 
 #ifdef __cplusplus
@@ -129,6 +137,12 @@ int session_set_video_event_sink(session *instance, session_video_event_fn sink,
 int session_notify_video_event(session *instance,
     const session_video_event *event);
 uint32_t session_video_event_active(const session *instance);
+int session_presentation_text_acquire_writable(session *instance,
+    uint32_t columns, uint32_t rows, uint8_t **bytes_out);
+int session_presentation_text_snapshot(const session *instance,
+    uint8_t *destination, uint32_t destination_bytes, uint32_t *columns_out,
+    uint32_t *rows_out, uint32_t *bytes_out);
+void session_presentation_text_clear(session *instance);
 int session_dispose(session *instance);
 mapping_manager *session_guest_memory_mappings(session *instance);
 mapping_manager *session_host_resource_mappings(session *instance);

@@ -146,6 +146,15 @@ input/window ownership to app, leaving original SoftPC video code unchanged.
 | Verification | Contract tests prove dimensions, lifetime, bounded snapshot/lease access and deterministic unavailable result without a window. |
 | Exit Criteria | A single session-owned surface route exists for the selected presentation cohort; no adapter-private pointer or host HANDLE is the data ABI; original SoftPC paths remain unchanged. |
 
+**S2 P1:** `RegisterConsoleVDM` now obtains its original host-local 80x50
+text write buffer from session rather than allocating adapter-private storage.
+The source-facing pointer remains internal to the adapter/SoftPC call path;
+future app code receives only a bounded snapshot. The existing session
+lifecycle test now proves write, snapshot dimensions/content and post-clear
+failure on both x86 and x64; both paired formal CPU40 graphs rebuild the
+affected session/adapter libraries successfully. No graphics framebuffer or
+window was introduced.
+
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
 **T343 closure:** [broker/process coordination closure](history/m0-t343-broker-process-cross-process-coordination-closure-20260901.md).

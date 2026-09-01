@@ -14,6 +14,11 @@ int main(void)
     session second;
     const uint32_t one = 1u;
     const uint32_t two = 2u;
+    uint8_t *text_writer;
+    uint8_t text_copy[8];
+    uint32_t text_columns;
+    uint32_t text_rows;
+    uint32_t text_bytes;
 
     session_initialize(&first, 101u);
     session_initialize(&second, 202u);
@@ -24,6 +29,21 @@ int main(void)
         session_thread_bind(&second) != 0 || session_thread_unbind(&second) != 0 ||
         session_dispose(&first) != 0 || session_thread_unbind(&first) == 0)
         return 2;
+    if (session_presentation_text_acquire_writable(&first, 2u, 2u,
+            &text_writer) == 0 || text_writer == NULL)
+        return 7;
+    text_writer[0] = 'N';
+    text_writer[1] = 7u;
+    if (session_presentation_text_snapshot(&first, text_copy,
+            (uint32_t)sizeof(text_copy), &text_columns, &text_rows,
+            &text_bytes) == 0 || text_columns != 2u || text_rows != 2u ||
+        text_bytes != sizeof(text_copy) || text_copy[0] != 'N' ||
+        text_copy[1] != 7u)
+        return 8;
+    session_presentation_text_clear(&first);
+    if (session_presentation_text_snapshot(&first, text_copy,
+            (uint32_t)sizeof(text_copy), NULL, NULL, NULL) != 0)
+        return 9;
     if (session_register_teardown(&first, record_teardown, (void *)&one) == 0 ||
         session_register_teardown(&first, record_teardown, (void *)&two) == 0 ||
         session_register_teardown(&first, record_teardown, (void *)&one) == 0 ||
