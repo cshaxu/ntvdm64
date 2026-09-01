@@ -49,6 +49,13 @@ thread, monitor, WOW, CCPU and machine carriers from the project's session,
 BaseVDM and broker state. It is an inventory checkpoint, not a multi-session
 enablement: [T344 state-owner ledger](etc/operations/m0-t344-s1-state-owner-ledger.tsv).
 
+**S1 P2:** the CCPU worker walk now separates the per-thread `ThreadSimBuf`
+TLS allocation from the process-wide TLS-slot, new-thread registry and SAS
+machine vector. The original monitor identity and optional PIG observation
+carriers are likewise recorded as process-global blockers. This narrows the
+next audit to source-defined machine/monitor lifecycle, rather than treating
+all TLS use as session-safe.
+
 **T343 closure:** [broker/process coordination closure](history/m0-t343-broker-process-cross-process-coordination-closure-20260901.md).
 
 ### M0 T342 S1 — Original Debugger / BDE / FAX source / ABI / failure admission (closed)

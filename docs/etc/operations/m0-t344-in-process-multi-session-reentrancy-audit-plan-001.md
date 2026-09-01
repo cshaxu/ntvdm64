@@ -17,6 +17,11 @@ For each, record original owner, direct callers, scope (process/thread/VDM),
 current product owner and whether it is a blocker, source-shaped binding or
 explicitly one-session-only state.
 
+P1 establishes the cross-package carrier catalogue. P2 must read the actual
+CCPU worker, SAS/vector, monitor identity and WOW task definitions—not merely
+their declarations—so that a per-thread buffer is not mistaken for a
+per-session machine and a process-global carrier is not silently multiplied.
+
 ### S2 — Selected reentrancy cohort
 
 Only after S1 selects a coherent cohort, recover its source-shaped lifecycle
