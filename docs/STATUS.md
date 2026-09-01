@@ -110,6 +110,14 @@ same-shaped event translation—not a graphics window, repaint, fullscreen or
 Alt+Enter implementation. T346 must design that explicit app composition
 boundary before selecting any recovery cohort.
 
+**S1 P3:** the event ABI also lacks the registered VDM text/graphics buffer:
+it carries only host handles, rectangle and flags while `RegisterConsoleVDM`
+retains the allocated buffer privately. A minimal app sink alone therefore
+cannot render source-owned output. Any S2 cohort must first select a bounded,
+session-owned presentation-buffer capability or a retained public-console
+buffer route; it may not expose private pointers or treat handles as frame
+buffers.
+
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
 **T343 closure:** [broker/process coordination closure](history/m0-t343-broker-process-cross-process-coordination-closure-20260901.md).
