@@ -23,7 +23,7 @@ if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or !(Get-Command ninja -ErrorA
 New-Item -ItemType Directory -Force -Path $build | Out-Null
 $environment = Join-Path $build ("msvc-{0}.cmd" -f $Architecture)
 @('@echo off', 'set "MVDM_T335_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T335_CALLER_CWD%"', '%*') | Set-Content -LiteralPath $environment -Encoding ascii
-$cflags = '/nologo /std:c11 /MT /W4 /WX /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/adapter-mvdm-host-out/wow/include /I ' + $root + '/src/adapter-mvdm-host-out/win32/include /I ' + $root + '/src/opennt-host/public/sdk/inc'
+$cflags = '/nologo /std:c11 /MT /W4 /WX /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/adapter-mvdm-host-out/wow/include /I ' + $root + '/src/adapter-mvdm-host-out/softpc/include /I ' + $root + '/src/adapter-mvdm-host-out/win32/include /I ' + $root + '/src/opennt-host/public/sdk/inc'
 $content = @"
 ninja_required_version = 1.10
 root = $root
@@ -39,10 +39,11 @@ rule link
 build obj/mapping_manager.obj: cc `$root/src/session/mapping_manager.c
 build obj/guest_memory_lease.obj: cc `$root/src/session/guest_memory_lease.c
 build obj/session.obj: cc `$root/src/session/session.c
+build obj/mvdm_softpc_guest_memory.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_softpc_guest_memory.c
 build obj/wow_callback_frame_lease.obj: cc `$root/src/adapter-mvdm-host-out/wow/wow_callback_frame_lease.c
 build obj/opennt_support_rtl.obj: cc `$root/src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c
 build obj/fixture.obj: cc `$root/tests/adapter-mvdm-host-out/wow/t335_s3_wow_callback_frame_lease_fixture.c
-build bin/t335-s3-wow-callback-frame-fixture.exe: link obj/mapping_manager.obj obj/guest_memory_lease.obj obj/session.obj obj/wow_callback_frame_lease.obj obj/opennt_support_rtl.obj obj/fixture.obj
+build bin/t335-s3-wow-callback-frame-fixture.exe: link obj/mapping_manager.obj obj/guest_memory_lease.obj obj/session.obj obj/mvdm_softpc_guest_memory.obj obj/wow_callback_frame_lease.obj obj/opennt_support_rtl.obj obj/fixture.obj
 default bin/t335-s3-wow-callback-frame-fixture.exe
 "@
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))

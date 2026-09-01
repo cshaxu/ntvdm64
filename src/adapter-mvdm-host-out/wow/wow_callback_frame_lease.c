@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-#include "session/session.h"
+#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_guest_memory.h"
 
 /* This is the fixed-width source contract exported by the SoftPC adapter.
  * Do not include the full historical SoftPC macro environment here: that
@@ -14,15 +14,14 @@ extern int mvdm_softpc_effective_address(uint16_t selector, uint32_t offset,
 int wow_callback_frame_acquire_linear(uint32_t guest_address, uint32_t byte_count,
     uint32_t access, wow_callback_frame_lease *view_out)
 {
-    session *owner = session_thread_current();
     guest_memory_lease *lease;
     uint8_t *bytes;
 
-    if (view_out == NULL || owner == NULL || byte_count == 0u ||
+    if (view_out == NULL || byte_count == 0u ||
         (access != GUEST_MEMORY_ACCESS_READ &&
          access != GUEST_MEMORY_ACCESS_WRITE)) return 0;
     memset(view_out, 0, sizeof(*view_out));
-    if (!session_guest_memory_acquire(owner, guest_address, byte_count,
+    if (!mvdm_softpc_guest_memory_acquire(guest_address, byte_count,
         access, &lease, &bytes)) return 0;
     view_out->lease = lease;
     view_out->bytes = bytes;
@@ -45,16 +44,15 @@ int wow_callback_frame_acquire_vp(uint32_t vp, uint32_t byte_count,
 
 int wow_callback_frame_release(wow_callback_frame_lease *view, int commit)
 {
-    session *owner = session_thread_current();
     int result;
 
-    if (view == NULL || owner == NULL || view->lease == NULL ||
+    if (view == NULL || view->lease == NULL ||
         view->bytes == NULL || view->byte_count == 0u ||
         (view->access != GUEST_MEMORY_ACCESS_READ &&
          view->access != GUEST_MEMORY_ACCESS_WRITE) ||
         (commit != 0 && commit != 1) ||
         (commit != 0 && view->access != GUEST_MEMORY_ACCESS_WRITE)) return 0;
-    result = session_guest_memory_release(owner, view->lease, commit);
+    result = mvdm_softpc_guest_memory_release(view->lease, commit);
     memset(view, 0, sizeof(*view));
     return result;
 }

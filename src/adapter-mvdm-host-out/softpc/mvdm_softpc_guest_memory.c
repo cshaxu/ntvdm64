@@ -50,3 +50,21 @@ void mvdm_softpc_guest_memory_end(session *owner)
 {
     if (owner != NULL) session_guest_memory_end(owner);
 }
+
+int mvdm_softpc_guest_memory_acquire(uint32_t address, uint32_t byte_count,
+    uint32_t access, guest_memory_lease **lease_out, uint8_t **bytes_out)
+{
+    session *owner = session_thread_current();
+
+    if (owner == NULL) return 0;
+    return session_guest_memory_acquire(owner, address, byte_count, access,
+        lease_out, bytes_out);
+}
+
+int mvdm_softpc_guest_memory_release(guest_memory_lease *lease, int commit)
+{
+    session *owner = session_thread_current();
+
+    if (owner == NULL) return 0;
+    return session_guest_memory_release(owner, lease, commit);
+}

@@ -11,6 +11,29 @@ typedef struct fixture_memory {
     uint32_t writes;
 } fixture_memory;
 
+static fixture_memory *cpu_memory;
+
+uint32_t c_sas_memory_size(void)
+{
+    return cpu_memory != NULL ? (uint32_t)sizeof(cpu_memory->bytes) : 0u;
+}
+
+void c_sas_loads(uint32_t address, uint8_t *bytes, uint32_t byte_count)
+{
+    if (cpu_memory == NULL || bytes == NULL || address > sizeof(cpu_memory->bytes) ||
+        byte_count > sizeof(cpu_memory->bytes) - address) return;
+    memcpy(bytes, cpu_memory->bytes + address, byte_count);
+    cpu_memory->reads++;
+}
+
+void c_sas_stores(uint32_t address, uint8_t *bytes, uint32_t byte_count)
+{
+    if (cpu_memory == NULL || bytes == NULL || address > sizeof(cpu_memory->bytes) ||
+        byte_count > sizeof(cpu_memory->bytes) - address) return;
+    memcpy(cpu_memory->bytes + address, bytes, byte_count);
+    cpu_memory->writes++;
+}
+
 int mvdm_softpc_effective_address(uint16_t selector, uint32_t offset,
     uint32_t *address_out)
 {
@@ -49,6 +72,7 @@ int main(void)
     POPENNT_SUPPORT_TEB teb;
 
     memset(&memory, 0, sizeof(memory));
+    cpu_memory = &memory;
     teb = opennt_support_current_teb();
     if (teb == NULL || teb->WOW32Reserved != NULL) return 7;
     teb->WOW32Reserved = &owner;
