@@ -49,6 +49,15 @@ private Console/CSRSS operations remain named adapter or product-boundary
 decisions and this import enables neither a console product shell nor a VDM
 route.
 
+T335 S3 selected byte-exact public internal `wowuserp.h` for the reached
+original WOW32 declaration closure of `walias.h` / `wcall16.c`. It carries
+USER-to-WOW function-table declarations only; it neither imports USER/GDI
+implementation nor enables a GUI, WOWEXEC, CSRSS, or callback-product route.
+
+The same selected WOW32 compile closure carries byte-exact public internal
+`winuserp.h`; it supplies the historical `PFNW32ET` declaration consumed by
+`wowuserp.h`. It does not import USER/GDI behavior or enable a GUI route.
+
 T291 S5 P3 selected byte-exact public SDK `ntcsrsrv.h` for the original
 OpenNT BaseSrv VDM package now mirrored in `opennt-host`. It is only the
 declaration carrier for the original CSR server shapes; it neither recreates

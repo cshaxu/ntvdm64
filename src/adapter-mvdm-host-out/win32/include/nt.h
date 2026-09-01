@@ -21,6 +21,7 @@
 #include <windows.h>
 #include <devioctl.h>
 #include <winternl.h>
+#include "wow_user_declarations.h"
 /* `ntpsapi.h` is a selected original OpenNT declaration subset under
  * opennt-host.  The adapter's type binding is deliberately established
  * first, then the original historical declaration shape is made visible. */

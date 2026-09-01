@@ -18,7 +18,24 @@
 --*/
 
 #include <stddef.h>
+/* DIVERGENCE(MVDM-HOST-DIV-180): modern `windows.h` includes its incompatible
+ * post-NT4 WOW export declarations. The original WOW32 body remains the
+ * selected provider, so keep that unrelated SDK declaration carrier out. */
+#ifndef _WOWNT32_
+#define _WOWNT32_
+#endif
 #include <nt.h>
+/* DIVERGENCE(MVDM-HOST-DIV-179): the original build's private include-root
+ * made these declaration carriers implicit.  The split mirror uses the
+ * byte-identical opennt-abi carriers; this selects no USER/GDI behavior. */
+#include <winuserp.h>
+/* DIVERGENCE(MVDM-HOST-DIV-181): the SDK's host-architecture `_X86_` marker
+ * selects a native-VDM register alias in original WOW32. The selected
+ * CPU40 SoftPC path is emulated on both host widths and must retain the
+ * original simulator `getSS`/`setSS` stack form instead. */
+#ifdef _X86_
+#undef _X86_
+#endif
 #include "wow32.h"
 #include "wowtbl.h"
 #include "doswow.h"
@@ -92,7 +109,7 @@
 #include "wmsgsbm.h"
 #include "wumsg.h"
 #include "wuman.h"
-#include "..\..\inc\vdm.h"
+#include <vdm.h>
 #include "wucaret.h"
 #include "wucursor.h"
 #include "wuhook.h"

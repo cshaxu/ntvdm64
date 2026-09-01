@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3591 |
+| Documentation records | 3592 |
 | --- | --- |
-| Generated UTC | 2026-09-01T01:15:11Z |
+| Generated UTC | 2026-09-01T01:36:07Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 28f3ef83c302cbda578197f4514041745f190d97d821ece1ffbb20ac2f8967b7 |
+| STATUS.md | principal control document | 817d45975c12670f0f33e7d5bf9addb4b0ada614e1040f8e410b6c3094fa10a7 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1062,6 +1062,7 @@ content-divergent entries.
 | etc/evidence/m0-t335-s3-p5-wow-source-wide-pointer-plane-audit-001.md | indexed supporting material | f98233ee182b999f8b65ea021a0cfccd45c2e51e55eefe7ba2ae4ef23010dff3 |
 | etc/evidence/m0-t335-s3-p6-wow-cpu40-selector-resolution-001.md | indexed supporting material | e7277d708f92412288572a4ab4d4e678ab8b3df893ef197e91353f09f6b9cb6c |
 | etc/evidence/m0-t335-s3-p7-wow-two-frame-lease-shape-001.md | indexed supporting material | 4db084a22f9881974b1cd27c1583899c22297500ca7a65cf3bea279f3fc07c1d |
+| etc/evidence/m0-t335-s3-p8-wow-callback-source-binding-001.md | indexed supporting material | d4c989ed87788f3d747ec0da5e2c4f21c56539dbf5b548843c96dcdb30fdcb22 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1598,7 +1599,7 @@ content-divergent entries.
 | etc/operations/m0-t283-s1-platform-abi-candidate-inventory-001.tsv | indexed supporting material | 38151bf5b6f097a8abfc7fa9ce61cb32740e7b32d0f0336e4007faf6da93772b |
 | etc/operations/m0-t283-s1-platform-abi-canonical-union-inventory-plan-001.md | indexed supporting material | f843345b365bf5b35b26a9b39ea61b231dde214be1c84af0af4ac492c0cfef24 |
 | etc/operations/m0-t283-s1-platform-abi-selection-ledger-001.tsv | indexed supporting material | 73f7eae4881f184ec0eacc2c14c2b83e8413b14c8c824bee4b6db9508f9a3c3d |
-| etc/operations/m0-t283-s2-platform-abi-canonical-import-manifest-001.tsv | indexed supporting material | dbf9bacef73243d919e959860cbff27a159dac066f02cdb4bee325b4df4b08b5 |
+| etc/operations/m0-t283-s2-platform-abi-canonical-import-manifest-001.tsv | indexed supporting material | 4341755f6cdd8a824cb172e0c5821861f73599fcd22a0ae89cb9ec0a7e7e54a0 |
 | etc/operations/m0-t283-s2-platform-abi-canonical-reroot-plan-001.md | indexed supporting material | 3f97eb9c51ccb5967d8fd23c6cd55ff7a7e1a3760aa1081bdfd932485710cbf1 |
 | etc/operations/m0-t284-s1-adapter-convergence-consumer-inventory-001.tsv | indexed supporting material | 0ea0a85773b0444a247e919cc7b314631a7cc952374181c13454850758d5d81d |
 | etc/operations/m0-t284-s1-adapter-convergence-file-inventory-001.tsv | indexed supporting material | 9ebafe8f21d068a14385f8093e661a071e4960db59e16fd15eb5fc2541c5b3ba |
