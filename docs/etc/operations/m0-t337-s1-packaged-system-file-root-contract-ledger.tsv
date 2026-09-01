@@ -1,0 +1,13 @@
+row_id	owner	original_source_or_contract	current_binding	input_or_result	status	recovery_rung	next_disposition
+T337-S1-01	app	app package layout	app/package_layout.c::app_package_layout_set_process_media_roots	executable sibling dos/win16/softpc\\roms roots	closed	product composition	root registration is present
+T337-S1-02	session	session media-root storage	session/session.{h,c}	thread-bound immutable dos_media_root	closed	existing session seam	no second media root or mapper is needed
+T337-S1-03	adapter-mvdm-host-out/softpc	original startup file-location boundary	mvdm_softpc_dos_find_file and mvdm_softpc_dos_copy_root	caller-owned host path under selected dos root	closed	same-shaped binding	covers startup inputs only
+T337-S1-04	original SoftPC host	softpc.new/host/src/nt_msscs.c::InitialiseDosEmulation	mvdm_softpc_dos_find_file("ntio.sys")	selected NTIO.SYS path	closed	original body plus binding	guest loader is not absent
+T337-S1-05	original DEM	dos/dem/dem.c::demInitialize	mvdm_softpc_dos_copy_root	pszDefaultDOSDirectory	closed	original body plus binding	covers demLoadDos NTDOS lookup
+T337-S1-06	original DEM	dos/dem/demmisc.c::demLoadDos	pszDefaultDOSDirectory + \\ntdos.sys	selected NTDOS.SYS path	closed	original body plus binding	preserves file/read/load ordering
+T337-S1-07	original guest DOS	dos/v86/doskrnl/bios/sysinit1.asm	SVC_DEMGETBOOTDRIVE -> default_drive and sysi_boot_drive	DOS-visible boot-drive scalar	closed	original guest body	must retain original SVC result shape
+T337-S1-08	original DEM	dos/dem/demgset.c::demGetBootDrive	NT setup BootDir registry then C: fallback	AL = boot drive number	closed	original direct host behavior	current result is independent of session dos_media_root
+T337-S1-09	original guest DOS	dos/v86/doskrnl/bios/sysinit{1,2}.asm	boot-drive-rooted \\COMMAND.COM open/lseek/exec	later command startup lookup	closed	original guest body	T336 proves this is a terminal-caller candidate
+T337-S1-10	original DEM	dos/dem/demfile.c::demOpen	canonicalize slashes then CreateFileOem(lpFileName)	guest full DOS/host file path	closed	original direct host behavior	no selected transformation to session dos_media_root exists
+T337-S1-11	original COMMAND	softpc.new/host/src/nt_pif.c and dos/command/cmdconf.c	selected dos root for config.nt/autoexec.nt	configuration host paths	closed	original body plus binding	configuration root does not prove COMMAND.COM guest-root projection
+T337-S1-12	T337 synthesis	T336 terminal plus rows 01-11	no current cross-contract binding	guest system-file root after DOS boot drive selection	gap confirmed	unselected	S2 must select a narrow system-file-root path binding or source-defined transfer; full C: projection is rejected

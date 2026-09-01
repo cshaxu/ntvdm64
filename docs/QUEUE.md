@@ -45,17 +45,16 @@ is retired and is neither a production route nor an acceptance row.
 
 | Order | Candidate implementation package |
 | --- | --- |
-| 1 | Portable guest boot-media / drive-root composition — audit and select the source-shaped contract by which the immutable package `dos/`/`win16/` media becomes the reached DOS-visible drive root after `NTIO.SYS` has loaded. The package must distinguish original loader success from later `\\COMMAND.COM` lookup, preserve original DEM/host-file ordering and failure behavior, and name any admitted session/app/host capability seam. It must not assume virtual `C:`, rewrite a guest loader/BOP, install or mutate host files, or select a drive-projection implementation before the contract evidence is complete. |
-| 2 | Minimal DOS guest execution and controlled return — execute one declared immutable `.COM`/minimal `.EXE` via the original NTIO/NTDOS/COMMAND path and prove child exit through the original parent/COMMAND return contract. |
-| 3 | Minimal vertical-slice integration closure — fixed x86 runtime observation plus paired x86/x64 build/link matrix, negative cases and no-bypass reversion review for the completed DOS child slice. |
-| 4 | VDD owner package |
-| 5 | Debugger/BDE/FAX owner packages |
-| 6 | Broker process and cross-process coordination |
-| 7 | In-process multi-session reentrancy audit |
-| 8 | Host capability expansion |
-| 9 | SoftPC graphics presentation window and Alt+Enter transition |
-| 10 | Guest DOS/WOW16 artifact matrix |
-| 11 | Product release closure |
+| 1 | Minimal DOS guest execution and controlled return — execute one declared immutable `.COM`/minimal `.EXE` via the original NTIO/NTDOS/COMMAND path and prove child exit through the original parent/COMMAND return contract. |
+| 2 | Minimal vertical-slice integration closure — fixed x86 runtime observation plus paired x86/x64 build/link matrix, negative cases and no-bypass reversion review for the completed DOS child slice. |
+| 3 | VDD owner package |
+| 4 | Debugger/BDE/FAX owner packages |
+| 5 | Broker process and cross-process coordination |
+| 6 | In-process multi-session reentrancy audit |
+| 7 | Host capability expansion |
+| 8 | SoftPC graphics presentation window and Alt+Enter transition |
+| 9 | Guest DOS/WOW16 artifact matrix |
+| 10 | Product release closure |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

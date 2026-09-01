@@ -2,10 +2,32 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T336 is closed; the next candidate remains
-in [QUEUE.md](QUEUE.md) until owner admission creates a new active packet.
+**Active: M0 T337 S2 is pending owner boundary approval.** S1 closed the
+source/ABI audit and did not select a host namespace behavior on its own.
 
 ## Active Packet
+
+### M0 T337 S2 (pending) — Packaged guest system-file-root binding selection
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T337 S1 closed; S2 requires a new owner approval because it selects a guest-visible host namespace behavior. Ordinary Mode remains selected. |
+| Admission And Approval | The owner admitted T337 and directed preservation of original guest binaries beside the executable. S1 found no direct composition for later guest system-file lookup; S2 has not yet been approved. |
+| Objective | Select and implement, only after approval, the smallest source-shaped binding between later original guest system-file lookup and the immutable executable-relative DOS media root. |
+| Non-goals | No virtual volume, whole-drive `C:` substitution, guest-media or guest-binary mutation, loader/BOP/COMMAND/NTDOS rewrite, CPU/BIOS/FDC repair, new mapping manager, Bochs route, host installation, or runtime retry. |
+| Reference Baseline | [T337 S1 audit](etc/evidence/m0-t337-s1-packaged-system-file-root-contract-audit-001.md) and its [ledger](etc/operations/m0-t337-s1-packaged-system-file-root-contract-ledger.tsv); T336/S4 terminal attribution. |
+| Files And ABI Surface | Candidate only: original `demGetBootDrive`/`demOpen`, established app/session media-root binding, and any same-shaped adapter boundary selected after owner approval. |
+| Applicable Rules | Execution, source policy, original-source-first recovery, mirror/overlay, architecture, coding and documentation rules. |
+| Verification | S2 will require focused selected-root/missing-root/unrelated-host-path proof plus paired formal x86/x64 links. |
+| Expected Markers | One narrowly selected root identity, original DEM ownership retained, and explicit rejection of full-drive virtualization. |
+| Asset Needs | Existing immutable `dos/` and `win16/` package media, selected MVDM mirrors, app/session sources and current formal graphs; no new assets. |
+| Reporting Requirements | Separate host package layout from guest drive semantics; distinguish original facts from product inference; name every rejected virtual/root policy. |
+| Stop Conditions | S2 must not start without owner selection of the namespace policy. Any guest-media/binary alteration, whole-drive virtualization, altered original DEM ordering or unreviewed import requires re-admission. |
+| Exit Criteria | S1 met: a committed source/ABI/failure ledger identifies the complete root-selection chain, the exact missing seam, and a bounded S2 decision. |
+| Original Owner Request | “批准” to admit and execute the queue-leading packaged guest system-file-root / DOS drive-root composition task. |
+| Similar-Issue Sweep | `NTIO.SYS`/`NTDOS.SYS` media load, `config.nt`/`autoexec.nt`, `COMMAND.COM`/COMSPEC, boot-drive registry/default behavior, canonical guest path conversion, app package layout and missing-file terminal paths. |
+
+**Plan:** [packaged guest system-file-root / DOS drive-root composition](etc/operations/proposal-packaged-guest-system-file-root-drive-root-composition-001.md). **S1 closed:** [source/ABI/failure audit](etc/evidence/m0-t337-s1-packaged-system-file-root-contract-audit-001.md) and its [ledger](etc/operations/m0-t337-s1-packaged-system-file-root-contract-ledger.tsv) prove that startup media selection exists but later `\\COMMAND.COM` lookup has no selected guest-root binding. S2 is pending owner approval of that bounded namespace behavior.
 
 ### M0 T336 — CPU40/NTDOS post-`54:05` startup continuity
 
