@@ -2,6 +2,9 @@
 
 ## Current Work
 
+**No active M/T/S packet.** M0 T336 is closed; the next candidate remains
+in [QUEUE.md](QUEUE.md) until owner admission creates a new active packet.
+
 ## Active Packet
 
 ### M0 T336 — CPU40/NTDOS post-`54:05` startup continuity
