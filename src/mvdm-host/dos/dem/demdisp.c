@@ -163,12 +163,10 @@ PFNSVC  apfnSVC [] = {
      demNotYetImplemented,      //SVC_DEMNOTYETIMPLEMENTED
      demGetComputerName,        //SVC_DEMGETCOMPUTERNAME
      /* DIVERGENCE(MVDM-HOST-DIV-188): NT4 x86 intercepts this normal-file
-        service in kernel `NTFastDOSIO`; the selected user-mode product has
-        no kernel VDM interceptor.  `demRead` has the identical DOS register
-        ABI and preserves the mapped-resource/checked-guest-memory transfer,
-        AX count and CF fallback contract for this reachable regular-file
-        path. */
-     demRead,                   //SVC_DEMFASTREAD
+        service in kernel `NTFastDOSIO`.  The user-mode overlay reproduces
+        only its safe regular-file fast path; every declined or failed path
+        returns CF=1 so unchanged DOS `$READ` falls back to SVC_DEMREAD. */
+     demFastRead,               //SVC_DEMFASTREAD
      demNotYetImplemented,	//SVC_DEMFASTWRITE
      demCheckPath,		//SVC_DEMCHECKPATH
      demSystemSymbolOp,		//SVC_DEMSYSTEMSYMBOLOP

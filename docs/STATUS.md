@@ -833,15 +833,20 @@ The observed `50:42` is the reached original kernel-fast-I/O seam.
 | Asset Needs | Existing mirrors, session mapping instances, formal graph and immutable stage; no new source import, kernel component or host-system mutation. |
 | Reporting Requirements | Separate kernel-source contract, user-mode replacement boundary and observed result; record every deliberate non-kernel disposition, especially console/std-handle, pipe and seek behavior. |
 | Stop Conditions | Any need for a raw native handle/pointer in DOS state, retained guest pointer beyond a checked lease, kernel API/IRQL/TEB recreation, a family-private mapper, guest rewrite or a second run pauses for new admission. |
-| Exit Criteria | The selected normal-file FastRead contract is source-attributed, mapping-safe, formally linked and observed once in the fixed container; all unrecovered kernel-only branches have an exact CF/fallback disposition. |
+| Exit Criteria | The selected normal-file FastRead contract is source-attributed, mapping-safe and formally linked; if its one fixed-container observation is preempted before `50:42`, it transfers the exact earlier owner without claiming runtime completion. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `SVC_DEMFASTREAD`, `SVC_DEMFASTWRITE`, `$READ`, `FastOrSlow`, `demRead`, mapped host resource identity, guest-memory lease, EOF, console/std handles, pipes, seek/ZF and `MS_bop_0` dispatch. |
 
 **S14 P1:** [FastRead user-mode recovery and reachability limit](etc/evidence/m0-t355-s14-fastread-recovery-p1-001.md)
-records the source-shaped dispatch recovery and formal link. Its one permitted
-run was preempted before `50:42` by the already-owned CCPU/C-VID
-`Sas_overwrite_memory` null-vector condition; S14 remains active and does not
-claim runtime FastRead completion.
+is retained as an auditable superseded composition attempt: direct selection of
+`demRead` does not preserve `NTFastDOSIO`'s fast-failure-to-slow-read contract.
+
+**S14 P2:** the active correction restores that contract in a mirror-relative
+overlay: safe regular-file reads complete through one bounded mapping lease;
+every decline or fast-read failure sets only `CF=1` for unchanged DOS `$READ`
+to continue through `50:16`. The existing one fixed-container run remains
+preempted before `50:42` by the separately owned C-VID SAS-vector condition;
+it is not a FastRead result claim.
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 

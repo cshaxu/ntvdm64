@@ -1,4 +1,4 @@
-# M0 T355 S14 P1 — FastRead user-mode recovery and reachability limit
+# M0 T355 S14 P1 — superseded FastRead user-mode composition attempt
 
 ## Implemented boundary
 
@@ -7,14 +7,13 @@ The original NT4 x86 product handles `SVC_DEMFASTREAD` in
 table.  The non-invasive CPU40/x86 product cannot compose the kernel trap
 handler, VDM TIB or native kernel I/O calls.
 
-For the reachable normal-file ABI, `dos/dem/demdisp.c` now selects the
-existing original `demRead` body for `0x42`.  This is a one-entry
-source-derived composition seam, registered as `MVDM-HOST-DIV-188`; it does
-not create a second provider.  `demRead` already retains the same register
-form (`AX:BP`, `DS:DX`, `CX`, `BX:SI`, ZF), resolves the opaque resource with
-the session host-resource mapping manager, uses a bounded synchronous guest
-lease, and returns the original `AX`/carry result.  A carry result still lets
-the unmodified DOS `$READ` follow its original error/fallback control flow.
+The first composition attempt selected the existing original `demRead` body
+for `0x42`.  It had the right register form (`AX:BP`, `DS:DX`, `CX`, `BX:SI`,
+ZF), but it was not semantically sufficient: a fast-path `ReadFile` failure
+would enter `demClientError` before DOS could take its original `50:16`
+fallback.  It therefore did not preserve `NTFastDOSIO`'s distinguishing
+contract and is superseded by S14 P2.  The committed P1 table change remains
+as historical evidence; P2 replaces it with a dedicated mirror overlay.
 
 Console, standard-handle, pipe, trap-frame, VDM-TIB, IRQL and kernel-native
 branches remain explicitly outside this user-mode normal-file replacement.
@@ -43,7 +42,7 @@ or a reason to add another runtime observation.
 
 ## Status
 
-S14 P1 has source, mapping and formal-link closure.  S14 itself remains open:
+P1 has source, mapping and formal-link evidence only. S14 itself remains open:
 the one permitted product observation was preempted before `50:42`.  Any
 runtime claim needs the existing CCPU/C-VID SAS-vector owner to resolve the
 null `Sas_overwrite_memory` contract as a whole, followed by a separately

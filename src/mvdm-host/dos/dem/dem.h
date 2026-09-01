@@ -195,6 +195,7 @@ VOID demQueryCurrentDir (VOID);
 VOID demQueryDate       (VOID);
 VOID demQueryTime       (VOID);
 VOID demRead            (VOID);
+VOID demFastRead        (VOID);
 VOID demRename          (VOID);
 VOID demRenameFCB       (VOID);
 VOID demRetry           (VOID);

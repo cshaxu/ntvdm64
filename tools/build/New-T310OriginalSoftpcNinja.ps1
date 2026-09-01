@@ -74,6 +74,7 @@ $gdpGenerator = Join-Path $root 'tools/build/Generate-T310GdpSlots.mjs'
 $gdpOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/base/cvidc'
 $umbOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/host/src'
 $commandOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/dos/command'
+$demOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/dos/dem'
 $commsRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/comms'
 $dosRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/dos'
 $demRoot = Join-Path $root 'src/mvdm-host/dos/dem'
@@ -189,6 +190,7 @@ $dpmiNames = @((Get-OriginalSources $dpmiManifest) + 'dpmimemr.c' + 'dpmimscr.c'
 $suballocNames = @(Get-OriginalSources $suballocManifest)
 $oemuniNames = @(Get-OriginalSources $oemuniManifest)
 $xmsOverlayNames = @('xms_a20_state.c')
+$demOverlayNames = @('demfastio.c')
 $sessionNames = @('mapping_manager.c', 'guest_memory_lease.c', 'session.c')
 $brokerNames = @('broker.c', 'wire.c', 'base_vdm_record.c')
 # `trace_file` belongs to the selected SoftPC base debug implementation.  The
@@ -282,6 +284,9 @@ foreach ($name in $oemuniNames) {
 }
 foreach ($name in $xmsOverlayNames) {
     if (!(Test-Path -LiteralPath (Join-Path $xmsOverlayRoot $name))) { throw "MVDM XMS private overlay source missing: $name" }
+}
+foreach ($name in $demOverlayNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $demOverlayRoot $name))) { throw "MVDM DEM private overlay source missing: $name" }
 }
 foreach ($name in $sessionNames) {
     if (!(Test-Path -LiteralPath (Join-Path $sessionRoot $name))) { throw "Required session source missing: $name" }
@@ -406,6 +411,8 @@ $includeRootPaths = @(
     'src/mvdm-host-overlay/softpc.new/base/cvidc',
     'src/mvdm-host-overlay/softpc.new/host/src',
     'src/mvdm-host-overlay/dos/command',
+    'src/mvdm-host-overlay/dos/dem',
+    'src/mvdm-host/dos/dem',
     'src/mvdm-host/softpc.new/base/inc',
     'src/adapter-mvdm-host-out/softpc/include',
     'src/adapter-mvdm-host-out/basesrv/include',
@@ -633,6 +640,11 @@ $demObjects = foreach ($name in $demNames) {
     $graph.Add('  cflags = ' + $baseFlags + ' /DWIN_32 /DDEVL')
     $object
 }
+$demOverlayObjects = foreach ($name in $demOverlayNames) {
+    $object = 'obj/dem/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $demOverlayRoot $name)))
+    $object
+}
 $commandObjects = foreach ($name in $commandNames) {
     $object = 'obj/command/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $commandRoot $name)))
@@ -781,7 +793,7 @@ $graph.Add('build original-softpc-video.lib: lib ' + ($videoObjects -join ' '))
 $graph.Add('build original-softpc-cvidc.lib: lib ' + ($cvidcObjects -join ' '))
 $graph.Add('build original-softpc-comms.lib: lib ' + ($commsObjects -join ' '))
 $graph.Add('build original-softpc-dos.lib: lib ' + ($dosObjects -join ' '))
-$graph.Add('build original-mvdm-dem.lib: lib ' + ($demObjects -join ' '))
+$graph.Add('build original-mvdm-dem.lib: lib ' + (($demObjects + $demOverlayObjects) -join ' '))
 $graph.Add('build original-mvdm-command.lib: lib ' + ($commandObjects -join ' '))
 $graph.Add('build original-mvdm-redir.lib: lib ' + ($redirObjects -join ' '))
 $graph.Add('build original-mvdm-xms.lib: lib ' + (($xmsObjects + $xmsOverlayObjects) -join ' '))
@@ -839,6 +851,7 @@ $graph.Add('default original-softpc-candidate')
     xmsSources = @($xmsNames)
     dpmiSources = @($dpmiNames)
     xmsPrivateOverlaySources = @($xmsOverlayNames)
+    demPrivateOverlaySources = @($demOverlayNames)
     suballocSources = @($suballocNames)
     oemuniSources = @($oemuniNames)
     baseDebugSources = @($baseDebugNames)
