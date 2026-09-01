@@ -46,6 +46,9 @@ and
 
 **S1 evidence:** [broker/process ledger](etc/operations/m0-t343-s1-broker-process-contract-ledger.tsv) and [cross-process boundary result](etc/evidence/m0-t343-s1-broker-process-boundary-001.md).
 
+**S2 P1:** original BaseSrv records, message cases and their current local
+dispositions are mapped in the [copied-record ledger](etc/operations/m0-t343-s2-basesrv-record-message-contract-ledger.tsv) and its [source boundary result](etc/evidence/m0-t343-s2-basesrv-record-message-contract-001.md). No transport is enabled by this audit.
+
 ### M0 T342 S1 — Original Debugger / BDE / FAX source / ABI / failure admission (closed)
 
 | Field | Record |
