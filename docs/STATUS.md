@@ -55,7 +55,7 @@ proves that the reached permanent path is the original default
 returns `ERROR_FILE_NOT_FOUND` unchanged.  The bounded next cohort is the
 configuration-to-`commnd` source path, not `50:12`.
 
-### M0 T354 S3 — Active configuration-to-`commnd` cohort attribution
+### M0 T354 S3 — Closed configuration-to-`commnd` cohort attribution
 
 | Field | Record |
 | --- | --- |
@@ -74,6 +74,32 @@ configuration-to-`commnd` source path, not `50:12`.
 | Exit Criteria | The entire configuration-to-default pathname cohort is source-owned and selects one minimal original-compatible recovery implementation, or identifies an exact further source terminal. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `config.nt` source/staged identity, `cmdGetConfigSys`, `ExpandConfigFiles`, `doconf`, `SHELL=` grammar, `sysinit1.asm::commnd`, `sysinit2.asm` default, SystemRoot and `system32\\COMMAND.COM` selection. |
+
+**S3 closure:** [configuration-to-`commnd` cohort attribution](etc/evidence/m0-t354-s3-config-to-commnd-cohort-attribution-001.md)
+proves that the 40-character package root generates a 114-character original
+`shell=` value for the 64-byte firmware `commnd` buffer.  This is an invalid
+historical SystemRoot input, not a DEM leaf failure.  A session-owned short
+MVDM SystemRoot projection is the next entire recovery cohort.
+
+### M0 T354 S4 — Active short MVDM SystemRoot projection design admission
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T354 S4; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T354 S3's source-defined 64-byte `commnd` contract under the owner-approved ordered queue execution. |
+| Objective | Select and specify one session-owned, short, DOS-reachable MVDM SystemRoot projection that preserves original `cmdconf.c` and NTDOS `shell=` behavior while resolving only package media through an explicit host namespace seam. |
+| Non-goals | No real-host C-drive media copy or mutation, virtual boot volume, `demOpen`/BOP special case, guest/firmware byte change, new mapper, CPU/machine change, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or interactive COMMAND claim. |
+| Reference Baseline | T354 S1 bootstrap ledger; T354 S2 canonical `C:\\COMMAND.COM` failure proof; T354 S3 source proof that the current 40-character package root violates the original 64-byte `commnd` input bound. |
+| Files And ABI Surface | App package-layout/SystemRoot selection, session-owned namespace/mapping contract, retained original `cmdconf.c`/NTDOS parser, and existing Direct host-drive namespace. No direct DEM provider ABI change. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Candidate collision/lifetime/path-length audit, source-call and host-namespace ownership review, original-versus-mirror review, formal graph/import review, governance/export and diff review. No runtime observation until a single projection contract is admitted. |
+| Expected Markers | A unique short spelling with a proved `shell=` length <= 63, explicit package-media-only resolution, no collision with selected real host drives, and a named owner/lifetime/teardown contract. |
+| Asset Needs | Existing staged immutable media, app/session namespace facilities and original MVDM code; no source import, host installation or host filesystem mutation. |
+| Reporting Requirements | State projected DOS spelling, exact length arithmetic, host collision policy, visibility to original `cmdconf` and DEM, package-media mapping lifetime, and rejection behavior. |
+| Stop Conditions | Any need for an implicit global drive alias, external `subst`/junction, real C media copy, a second mapping manager, changed guest bytes, a DEM/BOP special case, or an unowned host namespace expansion pauses for new admission. |
+| Exit Criteria | One source-compatible short-projection design is selected with no unowned edge, or the package root contract is rejected with an exact user-visible admission requirement. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `achSysRoot`, `commnd`, `pathstring`, `shell=` value parsing, root short-name availability, Direct host C and all-drive semantics, package media identity, session teardown and app launch root selection. |
 
 ### M0 T353 S1 — Closed post-`SVC_CMDGETCONFIGSYS` owner admission
 
