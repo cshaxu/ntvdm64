@@ -124,6 +124,12 @@ any recovery design: `nt_cga.c` writes a bounded 80x50 character/attribute
 buffer. Neither is recoverable from the current event handles. T346 will not
 invent a universal framebuffer or reinterpret a handle as pixels.
 
+**S1 P5:** the paired formal CPU40 graphs do not define `X86GFX`; the original
+hardware fullscreen/detect-thread/Alt+Enter branches are condition-unselected.
+They are not a current runtime repair target and cannot be enabled merely by
+adding an app sink. Any future `X86GFX` profile requires separate build and
+private-console-boundary admission.
+
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
 **T343 closure:** [broker/process coordination closure](history/m0-t343-broker-process-cross-process-coordination-closure-20260901.md).
