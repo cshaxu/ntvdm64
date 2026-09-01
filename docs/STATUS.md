@@ -2,16 +2,18 @@
 
 ## Current Work
 
-**Active: M0 T341 S1.** T340 is closed: initial resident DOS-BIOS headers are
+**No active M/T/S packet.** M0 T341 is closed: the complete original VDD
+host-service surface remains selected in the formal CPU40/x86 link, while the
+current profile explicitly selects no external installable VDD. T340 is
+closed: initial resident DOS-BIOS headers are
 the original function-00 no-op-success cohort, and the selected original
 HIMEM/SoftPC XMS-A20-INT15-HMA successor is source/formal-build closed. Its
-single unchanged fixed observation did not reach HIMEM. T341 now begins the
-next ordered owner package with an original VDD source/ABI/failure audit only;
-it may not select a sample, private monitor shell or trace-derived leaf.
+single unchanged fixed observation did not reach HIMEM. See the
+[T341 closure](history/m0-t341-vdd-owner-package-recovery-closure-20260831.md).
 
 ## Active Packet
 
-### M0 T341 S1 — Original VDD owner source / ABI / failure admission
+### M0 T341 S1 — Original VDD owner source / ABI / failure admission (closed)
 
 | Field | Record |
 | --- | --- |
@@ -32,6 +34,16 @@ it may not select a sample, private monitor shell or trace-derived leaf.
 | Similar-Issue Sweep | IO hooks, memory hooks, IRQ/DMA, timers, VDD handles, printer/device binding, BaseSrv/monitor linkage, VDD samples, debugger extensions, WOW/FAX/Redirector callers and teardown. |
 
 **Plan:** [M0 T341 VDD owner-package recovery](etc/operations/m0-t341-vdd-owner-package-recovery-plan-001.md).
+
+### M0 T341 S2 — Selected original VDD no-provider formal closure (closed)
+
+| Field | Record |
+| --- | --- |
+| Objective | Verify the source-selected, no-installable-VDD profile without loading a sample, creating a provider, or recreating a monitor/kernel path. |
+| Result | The fixed formal CPU40/x86 target retains original `nt_vdd.c` and `nt_msscs.c` VDD surfaces plus the narrow configuration/SFT boundaries; Ninja reported `no work to do`. |
+| Explicit non-claim | No VDD DLL/device lifecycle, sample, kernel fault route or monitor behavior was enabled or inferred. |
+
+**Evidence:** [S2 VDD formal closure](etc/evidence/m0-t341-s2-vdd-no-provider-formal-closure-001.md). **Closure:** [T341 VDD owner package](history/m0-t341-vdd-owner-package-recovery-closure-20260831.md).
 
 ### M0 T339 S1 — Original `50:3D` guest-predecessor contract (closed)
 
