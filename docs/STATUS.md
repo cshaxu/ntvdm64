@@ -2,12 +2,28 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T349 is closed: it made executable-relative
-MVDM package admission explicit while retaining original COMMAND short-path
-capacity, PIF selection and configuration processing.  Its focused x86 check
-and 425-action formal CPU40 link pass; neither is a guest-continuity claim.
-The next candidate is CPU40/NTDOS post-`SVC_CMDSETINFO` guest-bootstrap
-continuity.  See the [T349 closure](history/m0-t349-executable-relative-mvdm-package-path-capacity-closure-20260901.md).
+**Active: M0 T350 S2.** T349 is closed. T350 has re-admitted the complete
+CPU40/SAS/BIOS-exchange bootstrap cohort after original `SVC_CMDSETINFO`.
+The older T336 terminal record is not being reopened: T347/T340/T345/T349
+closed its named prerequisites. No trace-selected BOP repair is admitted.
+
+### M0 T350 S2 — CPU40/SAS/BIOS-exchange bootstrap recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T350 S2; ordinary mode (single-person dual-role implementation). |
+| Objective | Recover the admitted original CPU40/SAS/BIOS-exchange mechanics required by the first NTDOS instructions after `SVC_CMDSETINFO`. |
+| Non-goals | No trace-selected BOP leaf, guest rewrite/rebuild, loader replacement, virtual media, second mapper, CPU30, Bochs, x64 runtime, host installation or kernel/CSRSS product shell. |
+| Source Baseline | Selected OpenNT COMMAND/NTDOS/SoftPC CPU40 source, T336 terminal-boundary evidence, and T340/T345/T347/T349 closures. |
+| Verification | Source/ABI/caller walk of every admitted mechanic, focused owner evidence and selected CPU40/x86 formal link. |
+| Exit Criteria | The complete cohort has one original/same-shaped binding route and an S3 local-contract scope; no repair is selected from a trace alone. |
+| Stop Condition | A required guest alteration, new BOP semantic, new mapper, alternate executor or host-policy change pauses for re-admission. |
+
+**Plan:** [CPU40/NTDOS guest-bootstrap continuity](etc/operations/proposal-cpu40-ntdos-guest-bootstrap-continuity-002.md).
+
+**S1 closure:** [current source/state re-admission](etc/evidence/m0-t350-s1-post-cmdsetinfo-current-source-state-readmission-001.md)
+and its cohort ledger distinguish T336's old terminal record from the
+currently unproven original CPU40/SAS/BIOS-exchange bootstrap mechanics.
 
 ### M0 T349 — Closed package-path capacity record
 
