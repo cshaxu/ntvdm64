@@ -10,11 +10,13 @@
 #define CCPU
 #define CPU_PRIVATE
 #include "cpu4.h"
+#include "sas.h"
 #include "mvdm_cvidc_vector_binding.h"
 
 extern struct VideoVector C_Video;
 extern struct VideoVector Video;
 extern struct SasVector Sas;
+IMPORT void c_sas_overwrite_memory IPT2(PHY_ADDR, addr, PHY_ADDR, length);
 
 /* The selected original sources retain the C-VID access shims but omit this
  * generated CCPU timing provider.  Keeping the timing value beside the
@@ -60,6 +62,10 @@ void mvdm_cvidc_bind_vectors(void)
     mvdm_cvidc_bind_cpu_private();
     Cpu.Private = &CvidCpuPrivate;
     Cpu.Sas = &Sas;
+    /* DIVERGENCE(MVDM-HOST-DIV-189): the generated source carrier leaves
+     * this reached slot null although the selected CPU40 source supplies the
+     * exact same-shaped no-cache-invalidation provider. */
+    Sas.Sas_overwrite_memory = c_sas_overwrite_memory;
     mvdm_cvidc_bind_cpu_public();
     mvdm_cvidc_bind_video_vector();
     Cpu.Video = (IHP)&Video;

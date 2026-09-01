@@ -488,7 +488,7 @@ and
 
 ## Active Packet
 
-**Active: M0 T355 S14 — original kernel FastRead composition recovery.**
+**Active: M0 T355 S15 — original CCPU/C-VID SAS-vector composition recovery.**
 
 ### M0 T355 S1 — Closed short-path permanent COMMAND fixed-container verification
 
@@ -847,6 +847,28 @@ every decline or fast-read failure sets only `CF=1` for unchanged DOS `$READ`
 to continue through `50:16`. The existing one fixed-container run remains
 preempted before `50:42` by the separately owned C-VID SAS-vector condition;
 it is not a FastRead result claim.
+
+**S14 closure:** the corrected `50:42` provider is source-attributed,
+mapping-safe and formally linked. The sole admitted runtime observation was
+preempted before this service at the exact C-VID null-vector owner, so S14
+transfers that machine prerequisite without a FastRead runtime claim.
+
+### M0 T355 S15 — Active original CCPU/C-VID SAS-vector composition recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S15; ordinary mode (single-person dual-role implementation). |
+| Objective | Bind only the reached C-VID `Sas.Sas_overwrite_memory` vector entry to its existing original CPU40 provider, then formally verify the product closure. |
+| Non-goals | No other vector completion, cache behavior, guest-memory change, BOP/DEM result change, CPU profile change, guest/media mutation or new runtime observation. |
+| Reference Baseline | S14 prerequisite audit; original `sascdef.c`, `ccpusas4.c`, `sas4gen.h` and `accessfn.c`; selected CPU40/x86 graph. |
+| Files And ABI Surface | Existing C-VID overlay vector-composition point and original fixed-width `TYPE_sas_overwrite_memory` contract only. |
+| Verification | Declaration/provider/initializer/caller review; formal CPU40/x86 product link; documentation governance and diff review. |
+| Exit Criteria | The sole reached slot is non-null and points to the original CCPU40 provider; all other unavailable slots are unchanged and the formal product links. |
+
+**S15 closure:** [C-VID SAS overwrite-vector binding](etc/evidence/m0-t355-s15-cvidc-sas-overwrite-vector-binding-001.md)
+binds only the reached `Sas.Sas_overwrite_memory` member to the exact original
+CPU40 no-cache-invalidation provider.  The formal CPU40/x86 product remains
+linked; no new runtime observation or unrelated vector completion is claimed.
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 
