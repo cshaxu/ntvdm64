@@ -2,10 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T351 S3.** T351 S1/S2 establish that `54:05` is part of a complete
+**Active: M0 T351 S4.** T351 S1/S2/S3 establish that `54:05` is part of a complete
 original COMMAND/NTDOS/CPU40 scalar-lifecycle package, not a trace-selected
-provider.  S3 freezes the complete local source-shaped contract before the one
-fixed-container observation; it adds no mapper, BOP result or guest behavior.
+provider.  S4 performs exactly one immutable fixed-container observation and
+classifies its source-defined boundary; it adds no mapper, BOP result or guest
+behavior.
 
 ### M0 T351 S2 — original SCS scalar-lifecycle binding recovery
 
@@ -57,6 +58,31 @@ guest continuation.
 | Stop Conditions | Any need to alter a BOP return, synthesize DOS state, create a durable pointer, add a mapper, change media or select a leaf repair stops and transfers to a separately admitted owner package. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | COMMAND register facade, CMDINFO setup, scalar-state consumers, DEM/device FD access, CPU40 outer binding, SAS lease lifetime and deferred WOW synchronization. |
+
+**S3 closure:** [original bootstrap local-contract closure](etc/evidence/m0-t351-s3-original-bootstrap-local-contract-closure-001.md)
+records a fresh current-source x86 scalar-lifecycle pass, freezes the one
+selected original route, and accurately rejects a stale pre-consolidation
+register fixture as evidence.
+
+### M0 T351 S4 — fixed-container COMMAND/NTDOS bootstrap observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T351 S4; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted after the T351 S3 frozen original/bootstrap local contract under the standing ordered-package owner direction. |
+| Objective | Make one non-debug, console-owning observation of the unchanged formally linked CPU40/x86 product and accurately classify its first source-defined boundary. |
+| Non-goals | No retry matrix, trace-selected repair, BOP/provider implementation, guest/media change, loader replacement, alternate executor, CPU30, Bochs, x64 runtime, kernel/CSRSS/BaseSrv or WOW global alias. |
+| Reference Baseline | T351 S1 owner ledger; T351 S2/S3 closures; existing eight-second observer and immutable stage manifest; prior T350 `54:05` observation. |
+| Files And ABI Surface | Staged `original-softpc-process.exe`, immutable `mvdm` media, observer only; no production source or ABI change. |
+| Applicable Rules | Execution, source policy, source-first recovery, CPU40-only, fixed-container observation, architecture and coding rules. |
+| Verification | One fresh formal-stage manifest, one observer launch with `-f -o --ordinary-child`, preserved report excerpt/hash, documentation governance and diff review. |
+| Expected Markers | Exactly one child process, owned `CONIN$`/`CONOUT$`, eight-second watchdog, unchanged media hash set and one accurately classified exit/timeout/return marker. |
+| Asset Needs | Existing formal CPU40/x86 product, Node staging script, existing observer, original immutable DOS/firmware media. |
+| Reporting Requirements | Record the exact command/container, product and media identities, output, result and confidence; explicitly state what remains unproven. |
+| Stop Conditions | Any need to alter arguments, media, timeout, observer, source, guest state or select a repair from the trace stops this S. |
+| Exit Criteria | One compliant observation is recorded and classified without a trace-derived implementation; T351 completion is then assessed against its documented source/binding/formal/observation scope. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | Fixed container identity, console ownership, child-only watchdog, media staging, original BOP ingress observation, outer CPU40 return and post-`54:05` guest continuation. |
 
 ### M0 T350 — Closed CPU40/NTDOS guest-bootstrap continuity
 
