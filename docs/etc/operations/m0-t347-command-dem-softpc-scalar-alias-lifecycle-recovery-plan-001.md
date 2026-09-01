@@ -2,11 +2,12 @@
 
 ## Admission status
 
-M0 T347/S1 is active. The owner admitted this package on 2026-09-01 after
+M0 T347 is closed. The owner admitted this package on 2026-09-01 after
 T346/S4 established that its selected graphics workload is gated before
-graphics by a source-defined scalar-alias lifecycle cohort. S1 is an audit
-packet only; implementation begins only when its selected contract is
-recorded and admitted as the next S.
+graphics by a source-defined scalar-alias lifecycle cohort. S1 through S3 are
+committed: they selected and proved the scalar contract, then migrated the
+original source uses. S4 recorded the one unchanged fixed observation; it did
+not identify a scalar failure and added no trace-led repair.
 
 ## Objective
 
