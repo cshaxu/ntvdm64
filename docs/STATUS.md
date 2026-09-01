@@ -44,6 +44,13 @@ and
 
 **Plan:** [M0 T345 host capability expansion](etc/operations/m0-t345-host-capability-expansion-plan-001.md).
 
+**S1 P1:** the owner ledger partitions configuration expansion, ordinary DEM
+filesystem/drive/search, console/keyboard, registry, serial/printer, raw
+media, Redirector and child-lifecycle forms. It keeps raw media, fullscreen,
+Redirector and child/parent execution with their existing owners, leaving the
+ordinary DEM filesystem/drive/search owner package as the only coherent
+low-dependency candidate: [T345 capability ledger](etc/operations/m0-t345-s1-host-capability-owner-ledger.tsv).
+
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
 **T343 closure:** [broker/process coordination closure](history/m0-t343-broker-process-cross-process-coordination-closure-20260901.md).
