@@ -2,10 +2,76 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T352 is closed after it proves the complete
-original `54:05` COMMAND path returns through CPU40 and reaches/returns from
-the next original `54:0C` ingress.  Its precise runtime limits and successor
-are in [the T352 closure](history/m0-t352-cpu40-command-post-cmdsetinfo-continuity-closure-20260901.md).
+### M0 T353 S1 — active post-`SVC_CMDGETCONFIGSYS` owner admission
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T353 S1; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Owner directs ordered queue execution.  P06C is admitted after T352's closed durable proof that original `54:05` and the reached `54:0C` both return. |
+| Objective | Reconstruct the complete original `54:0C -> cmdGetConfigSys -> cmdconf` configuration cohort and the returned NTDOS `ProcessConfig -> doconf` continuation, then select one complete next owner cohort before implementation. |
+| Non-goals | No leaf BOP repair, guest/media rewrite, configuration semantic change, CPU/CCPU/SAS/BIOS change, new mapper, CPU30, Bochs, x64 runtime, kernel VDM, CSRSS/BaseSrv, WOW, workload, `EXEC`, or runtime retry. |
+| Reference Baseline | T352 closure; P06C; selected original MVDM/firmware mirrors; current CPU40/x86 formal product and fixed 39-character system-root container. |
+| Files And ABI Surface | Original `dos/command/{cmddisp.c,cmdconf.c,cmd.h}`, `softpc.new/host/src/nt_pif.c`, original `nt_bop.c`, NTDOS `softpc.new/bios/sysinit1.asm`, reached DEM file-service and existing system-root/guest-address adapter declarations. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original-versus-mirror declaration/definition/caller/continuation walk; current binding/formal-graph review; documentation governance and diff review. No build or runtime observation in S1. |
+| Expected Markers | One source call/return ledger that names `54:0C`'s complete host configuration subgraph, its exact guest continuation and every immediate dependency's owner/disposition; one bounded S2 or an explicit source terminal boundary. |
+| Asset Needs | Existing mirrors, source indexes, previous immutable report and formal CPU40/x86 inputs; no new source/media import or host-system mutation. |
+| Reporting Requirements | Separate historical source fact, current binding fact and runtime fact; record the configuration filename buffer contract, fatal path, `setIP` consumption and NTDOS caller continuation. |
+| Stop Conditions | Any need to change original configuration result, guest bytes/media, CPU state, machine semantics, mapping ownership, or infer repair from a timeout pauses for a new S admission. |
+| Exit Criteria | A complete source-backed owner ledger has no unowned selected edge, selects a whole recovery cohort (or source terminal), and bounds S2 before any production change. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `54:0C/0D` configuration pair, `ExpandConfigFiles`, PIF/default media selection, short-root and temporary-file constraints, `GetVDMAddr` guest-buffer lifetime, `MS_bop_4` IP advance, NTDOS `doconf`, CONFIG device/load sequence and original fatal paths. |
+
+**Plan:** [CPU40/NTDOS post-`54:0C` startup continuity](etc/operations/proposal-cpu40-ntdos-post-cmdgetconfigsys-continuity-001.md).
+
+**S1 closure:** [post-`SVC_CMDGETCONFIGSYS` owner admission](etc/evidence/m0-t353-s1-post-cmdgetconfigsys-owner-admission-001.md)
+and its [owner ledger](etc/operations/m0-t353-s1-post-cmdgetconfigsys-owner-ledger.tsv)
+select original NTDOS `ProcessConfig -> doconf`, not a leaf BOP repair.
+
+### M0 T353 S2 — active NTDOS `ProcessConfig` continuation boundary audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T353 S2; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T353 S1's source-backed complete post-`54:0C` owner ledger under the owner-approved ordered queue execution. |
+| Objective | Audit the complete original `ProcessConfig -> doconf` immediate execution and DOS file/parser dependency cohort, determine its first observable/repairable owner boundary, and select a single bounded source-shaped next step. |
+| Non-goals | No `54:0C` provider rewrite, BOP leaf repair, guest/media/configuration change, synthetic CONFIG state, new mapper, CPU/CCPU/SAS/BIOS alteration, CPU30, Bochs, x64 runtime, BaseSrv/CSRSS, WOW, workload, `EXEC`, or runtime run. |
+| Reference Baseline | T353 S1 owner ledger; T352 fixed CPU40/x86 durable return observation; selected original MVDM/firmware mirrors and existing configuration/media bindings. |
+| Files And ABI Surface | Original `softpc.new/bios/{sysinit1.asm,sysconf.asm}`, referenced DOS parser/INT21 declarations, original DEM file-service declarations, CPU40/SAS execution and the existing session mapping interface; no production ABI change. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original declaration/definition/caller walk, original-versus-mirror comparison, selected x86 graph/import review, documentation governance and diff review. No build or runtime observation in S2. |
+| Expected Markers | One immediate NTDOS continuation ledger that separates `doconf` parser logic, DOS INT21/DEM file operation contracts, CPU40/SAS prerequisites and later device/load phases; one fully bounded S3. |
+| Asset Needs | Existing source mirrors and indexes; no asset import, media change or host-system mutation. |
+| Reporting Requirements | Name the exact post-`CMDSVC` register/stack restoration, all source-defined first calls, every retained original failure direction, and the reason each later phase is inside or outside the selected next cohort. |
+| Stop Conditions | Any need to infer control flow from a timeout, modify guest/config files, add a file/BOP/machine shim, change a mapping lease or touch runtime execution pauses for renewed admission. |
+| Exit Criteria | The first post-`54:0C` original NTDOS cohort and all its immediate source edges have an owner/disposition, no machine or BOP leaf is smuggled into scope, and S3 is bounded before a production change. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `ProcessConfig`, `doconf`, pre-scan and multi-pass CONFIG flow, DOS open/read/close/seek/memory allocation, DEM file adapter bindings, `CMDSVC` return register/stack restoration, CPU40/SAS continuation and original CONFIG terminal errors. |
+
+**S2 closure:** [NTDOS `ProcessConfig` continuation boundary audit](etc/evidence/m0-t353-s2-processconfig-continuation-boundary-audit-001.md)
+and its [continuation ledger](etc/operations/m0-t353-s2-processconfig-continuation-ledger.tsv)
+select the original `doconf` pre-scan through first parser handoff; it excludes
+later device/INSTALL/UMB work and makes no runtime claim.
+
+### M0 T353 S3 — active original CONFIG pre-scan durable attribution
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T353 S3; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T353 S2's complete immediate continuation ledger under the owner-approved ordered queue execution. |
+| Objective | Add at most one state-neutral, source-ordered durable observation only if needed to distinguish original NTDOS `doconf` pre-scan progress from its first CPU40/DOS file owner boundary, then perform one frozen-container observation. |
+| Non-goals | No BOP/provider, configuration/media, guest-byte, file-service, mapping, CPU/CCPU/SAS/BIOS, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, device/INSTALL/EXEC or workload behavior change. |
+| Reference Baseline | T352 durable `54:0C` return proof; T353 S1–S2 source ledgers; selected immutable 39-character system-root CPU40/x86 container. |
+| Files And ABI Surface | Existing original `sysinit1.asm`/`sysconf.asm`, current CPU40/SAS diagnostics, observer report path and selected original DOS/DEM bindings.  A marker is eligible only at a source-defined entry/return boundary and only with copied scalar state. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Source-order review and focused absent-path test if a recorder is needed; fresh formal CPU40/x86 build/link; exactly one fixed-container durable observation; governance and diff review. |
+| Expected Markers | Either existing evidence is sufficient, or fixed-width records identify `doconf` entry/return and the earliest next original owner boundary without guest-memory access or state mutation. |
+| Asset Needs | Existing original mirrors, recorder/observer, formal Ninja graph and immutable staged media; no new media or host-system mutation. |
+| Reporting Requirements | Record marker ordering/ownership, product and media identity, exactly one run outcome, and a source-based next disposition; distinguish execution continuity from CONFIG semantic completion. |
+| Stop Conditions | Any marker needing guest-memory access, pointer retention, register/IP/flag mutation, BOP result change, source-provider rewrite, container variation or a second runtime matrix pauses for renewed admission. |
+| Exit Criteria | One unchanged source cohort is formally linked and observed once (or source proves current durable records sufficient); its earliest unproven successor is assigned to one complete owner package without a leaf repair. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | COMMAND BOP return report, NTDOS configuration pre-scan entry/return, DOS open/seek/read/close dispatch, DEM file bridge, CPU40 interrupt return, error/carry paths and observer report lifetime. |
 
 ### M0 T352 S1 — Closed CPU40/COMMAND post-`SVC_CMDSETINFO` owner admission
 
