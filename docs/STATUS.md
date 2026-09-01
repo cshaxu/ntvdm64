@@ -2,10 +2,52 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T353 is closed after it source-maps the complete
-original post-`54:0C` configuration continuation and observes the exact
-original permanent-COMMAND `50:3D` terminal. Its scope, valid observation and
-successor are in [the T353 closure](history/m0-t353-cpu40-ntdos-post-cmdgetconfigsys-continuity-closure-20260901.md).
+### M0 T354 S1 — Closed permanent COMMAND bootstrap owner admission
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T354 S1; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Owner permanently authorizes ordinary queue/proposal governance and directs ordered queue execution. P06D is admitted after T353's closed source-attributed `comerr -> badfil -> 50:3D` terminal. |
+| Objective | Reconstruct the entire original permanent `COMMAND.COM` bootstrap cohort from `sysinit1.asm::commnd` through DOS-name resolution, INT 21h open/seek/read/close/handle operations, DEM host boundary, staged image identity and original handoff/error continuation; select one bounded recovery seam before changing production code. |
+| Non-goals | No BOP leaf repair or fabricated `50:12/50:3D` result; no guest rewrite/rebuild, media mutation, virtual boot volume, CPU/CCPU/SAS/BIOS semantic change, new mapper, CPU30, Bochs, x64 runtime, BaseSrv/CSRSS, WOW, interactive COMMAND execution, child/parent EXEC, device/INSTALL or graphics claim. |
+| Reference Baseline | T353 closure and S4 fixed durable observation; P06D; original NTDOS `softpc.new/bios/{sysinit1.asm,sysinit2.asm}`; selected CPU40/x86 product and its 39-character staged system-root container. |
+| Files And ABI Surface | Original NTDOS `sysinit1.asm`, `sysinit2.asm` and reached DOS INT 21h file/handle dispatch; original DEM open/read/seek/close provider and host namespace/root bindings; app staging manifest and session mapping boundary. No ABI change in S1. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original declaration/definition/caller walk from `commnd`; original-versus-mirror and staged-media identity review; selected formal graph/import review; documentation governance/export and diff review. No build or runtime observation in S1. |
+| Expected Markers | A source-owned ledger names every immediate permanent-command bootstrap edge, its owner/disposition, exact DOS pathname contract, original handle/error behavior and one bounded S2 recovery target (or an exact source terminal). |
+| Asset Needs | Existing original mirrors, source indexes, T353 evidence, CPU40/x86 formal graph and staged media; no new source import, guest rebuild, media mutation or host-system mutation. |
+| Reporting Requirements | Separate original-source, current-binding and runtime facts; identify why the staged `COMMAND.COM` is or is not reachable from original `\\COMMAND.COM`; preserve `comerr/badfil/demExitVDM` failure direction. |
+| Stop Conditions | Any need to change guest bytes/media, synthesize a BOP success, alter CPU/machine semantics, introduce family-private mapping, infer a repair from a timeout, or broaden into interactive EXEC pauses for a new admission. |
+| Exit Criteria | The selected original cohort has no unowned immediate edge; every rejected recovery rung is recorded; one recovery S is bounded without smuggling a DEM leaf, media rewrite or machine change into scope. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `COMSPEC`/`commnd` pathname construction, app system-root staging, DOS `3D/42/3F/3E` flow, JFN/SFT/DEM file bindings, Direct namespace root semantics, `dfil`/EXEC handoff, `badfil` and `SVC_DEMEXITVDM` terminals. |
+
+**Plan:** [CPU40/NTDOS permanent COMMAND bootstrap recovery](etc/operations/proposal-cpu40-ntdos-permanent-command-bootstrap-001.md).
+
+**S1 closure:** [permanent COMMAND bootstrap owner admission](etc/evidence/m0-t354-s1-permanent-command-bootstrap-owner-admission-001.md)
+and its [bootstrap ledger](etc/operations/m0-t354-s1-permanent-command-bootstrap-ledger.tsv)
+prove that a source-shaped canonical filename observation—not a `50:12` leaf
+repair—is the next bounded seam.
+
+### M0 T354 S2 — Active permanent COMMAND canonical-name attribution
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T354 S2; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T354 S1's complete permanent-command owner ledger under the owner-approved ordered queue execution. |
+| Objective | Add one default-off, state-neutral observation at original `SVC_DEMOPEN` sufficient to distinguish the canonical pathname and original scalar outcome for the permanent-command open in the fixed CPU40/x86 container. |
+| Non-goals | No BOP result/path rewrite, file-service special case, guest/media mutation, virtual boot volume, new mapper, CPU/machine change, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or interactive COMMAND claim. |
+| Reference Baseline | T353 fixed post-configuration terminal; T354 S1 bootstrap ledger; original NTDOS file route, original DEM `demOpen`, selected package root and staged root/system32 COMMAND media. |
+| Files And ABI Surface | Existing DEM `demfile.c`/dispatcher boundary, shared session mapping-manager copied-read lease, existing default-off durable observer only.  No guest pointer, host handle or routing ABI escapes the call. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Source-order and lease review; focused positive/negative copied-string proof; formal CPU40/x86 link; exactly one fixed-container durable observation; governance/export and diff review. |
+| Expected Markers | A bounded canonical path plus `CF`/`AX` result associated with the original permanent `SVC_DEMOPEN`, followed by the existing original terminal or a source-owned successor. |
+| Asset Needs | Existing mirrors, session mapping manager, formal Ninja graph and unchanged staged media; no new asset or host mutation. |
+| Reporting Requirements | Record exact byte bound, lease lifetime, selector ownership, source path, product/media identity and one run; explicitly distinguish default, source-generated and other parser-derived pathname outcomes. |
+| Stop Conditions | Any need to retain a guest pointer, mutate state, inspect unrelated DEM calls, vary the container, add a second run, or modify source behavior pauses for a new admission. |
+| Exit Criteria | One valid copied observation or an explicit source-backed inability result identifies the live path/outcome and selects exactly one whole recovery cohort for S3 without a leaf BOP implementation. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `SVC_DEMOPEN` callers, WFP path lifetime, `demOpen` normal/error paths, 16/32-bit host-handle return, source-generated `shell=`, staged root/system32 image identity and existing BOP-return reporting. |
 
 ### M0 T353 S1 — Closed post-`SVC_CMDGETCONFIGSYS` owner admission
 
