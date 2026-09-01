@@ -44,6 +44,11 @@ and
 
 **Plan:** [M0 T344 multi-session reentrancy audit](etc/operations/m0-t344-in-process-multi-session-reentrancy-audit-plan-001.md).
 
+**S1 P1:** the initial state-owner ledger distinguishes original server,
+thread, monitor, WOW, CCPU and machine carriers from the project's session,
+BaseVDM and broker state. It is an inventory checkpoint, not a multi-session
+enablement: [T344 state-owner ledger](etc/operations/m0-t344-s1-state-owner-ledger.tsv).
+
 **T343 closure:** [broker/process coordination closure](history/m0-t343-broker-process-cross-process-coordination-closure-20260901.md).
 
 ### M0 T342 S1 — Original Debugger / BDE / FAX source / ABI / failure admission (closed)
