@@ -1,6 +1,7 @@
 #include "app/machine_shell.h"
 #include "app/launch_declaration.h"
 #include "app/package_layout.h"
+#include "app/presentation_window.h"
 
 /* App owns these process-assembly outcomes.  They deliberately do not
  * describe an original SoftPC/guest result: a result returned by the
@@ -27,12 +28,14 @@ int main(int argc, char **argv)
 {
     app_machine_shell shell;
     app_launch_declaration declaration;
+    app_presentation_window presentation;
     session owner;
     int result = 1;
 
     session_initialize(&owner, 1u);
     app_machine_shell_initialize(&shell);
     app_launch_declaration_initialize(&declaration);
+    app_presentation_window_initialize(&presentation);
     if (!app_launch_declaration_consume_options(&declaration, &argc, argv)) {
         result = APP_STARTUP_OPTIONS_REJECTED;
         goto finish;
@@ -45,6 +48,18 @@ int main(int argc, char **argv)
             SESSION_MACHINE_BACKEND_NONE)) {
         result = APP_STARTUP_MACHINE_REJECTED;
         goto finish;
+    }
+    /* The optional app presentation surface is opened while session is still
+     * ready so its event sink can bind without changing original SoftPC
+     * startup. Failure deliberately falls back to the existing console-only
+     * composition and never changes guest or controller state. */
+    if (app_presentation_window_prepare(&presentation, &owner) &&
+        app_presentation_window_open(&presentation)) {
+        /* The selected app-owned public window is now ready before source
+         * graphics output can invalidate its DIB. */
+    } else {
+        (void)app_presentation_window_close(&presentation);
+        (void)session_set_video_event_sink(&owner, NULL, NULL);
     }
     if (!session_activate(&owner)) {
         result = APP_STARTUP_SESSION_REJECTED;
@@ -77,6 +92,7 @@ int main(int argc, char **argv)
     }
 
 finish:
+    (void)app_presentation_window_close(&presentation);
     if (!session_dispose(&owner)) return APP_STARTUP_DISPOSE_FAILURE;
     return result;
 }

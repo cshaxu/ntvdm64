@@ -253,6 +253,20 @@ int session_presentation_text_snapshot(const session *instance,
     return 1;
 }
 
+int session_presentation_text_describe(const session *instance,
+    uint32_t *columns_out, uint32_t *rows_out, uint32_t *bytes_out)
+{
+    if (columns_out != NULL) *columns_out = 0u;
+    if (rows_out != NULL) *rows_out = 0u;
+    if (bytes_out != NULL) *bytes_out = 0u;
+    if (!session_valid(instance) || instance->presentation_text_storage == NULL)
+        return 0;
+    if (columns_out != NULL) *columns_out = instance->presentation_text_columns;
+    if (rows_out != NULL) *rows_out = instance->presentation_text_rows;
+    if (bytes_out != NULL) *bytes_out = instance->presentation_text_bytes;
+    return 1;
+}
+
 void session_presentation_text_clear(session *instance)
 {
     if (instance == NULL) return;
@@ -321,6 +335,26 @@ int session_presentation_graphics_snapshot(const session *instance,
     return 1;
 }
 
+int session_presentation_graphics_describe(const session *instance,
+    uint32_t *width_out, uint32_t *height_out, uint32_t *bits_per_pixel_out,
+    uint32_t *stride_out, uint32_t *bytes_out)
+{
+    if (width_out != NULL) *width_out = 0u;
+    if (height_out != NULL) *height_out = 0u;
+    if (bits_per_pixel_out != NULL) *bits_per_pixel_out = 0u;
+    if (stride_out != NULL) *stride_out = 0u;
+    if (bytes_out != NULL) *bytes_out = 0u;
+    if (!session_valid(instance) ||
+        instance->presentation_graphics_storage == NULL) return 0;
+    if (width_out != NULL) *width_out = instance->presentation_graphics_width;
+    if (height_out != NULL) *height_out = instance->presentation_graphics_height;
+    if (bits_per_pixel_out != NULL)
+        *bits_per_pixel_out = instance->presentation_graphics_bits_per_pixel;
+    if (stride_out != NULL) *stride_out = instance->presentation_graphics_stride;
+    if (bytes_out != NULL) *bytes_out = instance->presentation_graphics_bytes;
+    return 1;
+}
+
 void session_presentation_graphics_clear(session *instance)
 {
     if (instance == NULL) return;
@@ -332,6 +366,7 @@ void session_presentation_graphics_clear(session *instance)
     instance->presentation_graphics_stride = 0u;
     instance->presentation_graphics_bytes = 0u;
     instance->presentation_graphics_palette_entries = 0u;
+    instance->presentation_graphics_mutex_identifier = 0u;
     memset(instance->presentation_graphics_palette_rgb, 0,
         sizeof(instance->presentation_graphics_palette_rgb));
 }
@@ -360,6 +395,21 @@ int session_presentation_graphics_palette_snapshot(const session *instance,
         (size_t)entries * sizeof(*rgb));
     if (entries_out != NULL) *entries_out = entries;
     return 1;
+}
+
+int session_presentation_graphics_set_mutex_identifier(session *instance,
+    uint32_t identifier)
+{
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
+        return 0;
+    instance->presentation_graphics_mutex_identifier = identifier;
+    return 1;
+}
+
+uint32_t session_presentation_graphics_mutex_identifier(const session *instance)
+{
+    return session_valid(instance) ?
+        instance->presentation_graphics_mutex_identifier : 0u;
 }
 
 int session_dispose(session *instance)

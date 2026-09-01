@@ -64,3 +64,19 @@ itself remains in the original SoftPC `host_find_file` call shape through the
 named SoftPC adapter. DOS and Win16 remain separate source mirrors but share
 this installed MVDM media root; none of their bytes is linked into the
 executable.
+
+## M0 T346 S3 presentation window
+
+`presentation_window.{c,h}` is app-owned public Win32 presentation only.  It
+creates one bounded window per prepared session, renders copied text or
+graphics snapshots, and forwards ordinary keyboard records through the
+original `CONIN$` input endpoint.  `Alt+Enter` changes this app window's
+public window style; it does not select `X86GFX`, Console Server fullscreen,
+or any original fullscreen path.
+
+The app never receives a source DIB pointer, `HPALETTE`, or source mutex.
+The source-facing adapter resolves the original DIB mutex through the
+session's existing host-resource mapping manager, waits and copies the
+graphics/palette snapshot before app paints.  User close requests a typed
+session cancellation; normal app teardown posts a distinct shutdown message
+and waits for the UI thread before session disposal.

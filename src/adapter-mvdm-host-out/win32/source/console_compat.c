@@ -7,6 +7,7 @@
  */
 #include <windows.h>
 #include "conapi.h"
+#include "presentation_surface.h"
 #include "session/session.h"
 
 /*
@@ -166,6 +167,7 @@ BOOL WINAPI MvdmPresentationGraphicsBuffer(HANDLE output,
     uint8_t *pixels;
     HANDLE duplicate;
     HANDLE mutex;
+    uint32_t mutex_identifier = 0u;
 
     if (screen_buffer != NULL) *screen_buffer = NULL;
     if (owner == NULL || !session_valid(owner) ||
@@ -204,6 +206,19 @@ BOOL WINAPI MvdmPresentationGraphicsBuffer(HANDLE output,
         session_presentation_graphics_clear(owner);
         return FALSE;
     }
+    if (!mapping_manager_publish(session_host_resource_mappings(owner),
+            (uintptr_t)mutex, &mutex_identifier) ||
+        !session_presentation_graphics_set_mutex_identifier(owner,
+            mutex_identifier)) {
+        if (mutex_identifier != 0u)
+            (void)mapping_manager_release(session_host_resource_mappings(owner),
+                mutex_identifier);
+        CloseHandle(mutex);
+        CloseHandle(duplicate);
+        session_presentation_graphics_clear(owner);
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+        return FALSE;
+    }
     info->hMutex = mutex;
     info->lpBitMap = pixels;
     *screen_buffer = duplicate;
@@ -213,7 +228,58 @@ BOOL WINAPI MvdmPresentationGraphicsBuffer(HANDLE output,
 VOID WINAPI MvdmPresentationGraphicsClear(VOID)
 {
     session *owner = session_thread_current();
-    if (owner != NULL) session_presentation_graphics_clear(owner);
+    uint32_t mutex_identifier;
+    if (owner == NULL) return;
+    mutex_identifier = session_presentation_graphics_mutex_identifier(owner);
+    if (mutex_identifier != 0u)
+        (void)mapping_manager_release(session_host_resource_mappings(owner),
+            mutex_identifier);
+    session_presentation_graphics_clear(owner);
+}
+
+static HANDLE presentation_mutex(session *owner)
+{
+    uintptr_t native_value;
+    uint32_t identifier;
+    if (owner == NULL || !session_valid(owner) ||
+        (identifier = session_presentation_graphics_mutex_identifier(owner)) == 0u ||
+        !mapping_manager_lookup_value(session_host_resource_mappings(owner),
+            identifier, &native_value)) return NULL;
+    return (HANDLE)native_value;
+}
+
+int mvdm_presentation_graphics_describe(session *owner, uint32_t *width_out,
+    uint32_t *height_out, uint32_t *bits_per_pixel_out, uint32_t *stride_out,
+    uint32_t *bytes_out)
+{
+    HANDLE mutex = presentation_mutex(owner);
+    int result;
+    if (mutex == NULL || WaitForSingleObject(mutex, INFINITE) != WAIT_OBJECT_0)
+        return 0;
+    result = session_presentation_graphics_describe(owner, width_out, height_out,
+        bits_per_pixel_out, stride_out, bytes_out);
+    ReleaseMutex(mutex);
+    return result;
+}
+
+int mvdm_presentation_graphics_snapshot(session *owner, uint8_t *bytes,
+    uint32_t capacity, uint32_t *width_out, uint32_t *height_out,
+    uint32_t *bits_per_pixel_out, uint32_t *stride_out, uint32_t *bytes_out,
+    uint32_t *palette, uint32_t palette_capacity,
+    uint32_t *palette_entries_out)
+{
+    HANDLE mutex = presentation_mutex(owner);
+    int result;
+    if (mutex == NULL || WaitForSingleObject(mutex, INFINITE) != WAIT_OBJECT_0)
+        return 0;
+    result = session_presentation_graphics_snapshot(owner, bytes, capacity,
+        width_out, height_out, bits_per_pixel_out, stride_out, bytes_out);
+    if (palette_entries_out != NULL) *palette_entries_out = 0u;
+    if (result && palette != NULL && palette_capacity != 0u)
+        (void)session_presentation_graphics_palette_snapshot(owner, palette,
+            palette_capacity, palette_entries_out);
+    ReleaseMutex(mutex);
+    return result;
 }
 
 /* DIVERGENCE(ADAPTER-WIN32-033): these NT4 Console Server calls carried

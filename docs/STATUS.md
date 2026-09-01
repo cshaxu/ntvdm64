@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T346 S2.** T345 is closed: its selected ordinary DEM
+**Active: M0 T346 S3.** T345 is closed: its selected ordinary DEM
 filesystem/handle, directory/drive/volume and search/FCB package has retained
 original source ownership and paired CPU40 x86/x64 formal linkage. T346 begins
 the next ordered graphics-presentation package with source/ABI/failure
@@ -172,13 +172,6 @@ Console/graphics fixtures pass, and the formal `session.lib` plus
 `softpc-win32-bindings.lib` relink. The public fixture generator now links
 `gdi32.lib` for the corresponding documented public palette APIs.
 
-**S2 P3 correction:** S2's graphics surface also copies the public RGB values
-from the original `SetConsolePalette` call into session storage. This removes
-the last implied app dependency on an `HPALETTE`; the selected x86 session and
-Console/graphics fixtures pass, and the formal `session.lib` plus
-`softpc-win32-bindings.lib` relink. The public fixture generator now links
-`gdi32.lib` for the corresponding documented public palette APIs.
-
 ### M0 T346 S3 — App window and session-scoped Alt+Enter lifecycle
 
 **S3 P1:** [the app window lifecycle contract](etc/operations/m0-t346-s3-window-lifecycle-contract-001.md)
@@ -186,6 +179,14 @@ confirms that every selected original controller invalidates only after its
 existing DIB mutex is released, preserves original console-input consumption,
 and assigns public-window lifecycle exclusively to app. It excludes X86GFX,
 Console Server fullscreen and `nt_fulsc.c` from the modern Alt+Enter route.
+
+**S3 P2:** [app presentation-window closure](etc/evidence/m0-t346-s3-app-presentation-window-closure-001.md)
+adds the app-owned public window, keyboard forwarding, public Alt+Enter style
+transition and deterministic normal/user-close separation.  Graphics repaint
+copies under the original source mutex, resolved only inside the Win32 adapter
+through the existing session host-resource mapping manager.  The selected x86
+fixture and the formal `original-softpc-process.exe` link pass.  This is not a
+DOS graphics workload, a native guest-continuity claim, or an x64 claim.
 
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
