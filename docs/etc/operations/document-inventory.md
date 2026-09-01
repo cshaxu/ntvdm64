@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3644 |
+| Documentation records | 3645 |
 | --- | --- |
-| Generated UTC | 2026-09-01T06:56:33Z |
+| Generated UTC | 2026-09-01T06:58:21Z |
 
 ## Entries
 
@@ -1806,6 +1806,7 @@ content-divergent entries.
 | etc/operations/m0-t342-debugger-bde-fax-owner-package-recovery-plan-001.md | indexed supporting material | 7bd3a49398b790f59e5b93532e51e66cdc4453ef0ea873451cd67cd1f980f543 |
 | etc/operations/m0-t342-s1-debugger-bde-fax-owner-contract-ledger.tsv | indexed supporting material | a28521637759924ba4d4798d0932fcaf7ddc3acde19ad92775b399f7c49995bc |
 | etc/operations/m0-t343-broker-process-cross-process-coordination-recovery-plan-001.md | indexed supporting material | 3a067f052c0388b72df8cd49d93be3b9b293f72f2bff406b5b3553b53e790665 |
+| etc/operations/m0-t343-s1-broker-process-contract-ledger.tsv | indexed supporting material | a404f24919f8875cb7fa998f4a4a38929711d415f38bb81740be26b425850f90 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
