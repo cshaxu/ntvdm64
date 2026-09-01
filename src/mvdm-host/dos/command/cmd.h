@@ -276,8 +276,6 @@ extern CHAR	*lpszzInitEnvironment;
 extern WORD	cchInitEnvironment;
 extern CHAR	*lpszzCurrentDirectories;
 extern DWORD	cchCurrentDirectories;
-extern BYTE	* pIsDosBinary;
-extern WORD	* pFDAccess;
 extern CHAR	*lpszzcmdEnv16;
 extern BOOL	DosEnvCreated;
 extern BOOL	IsFirstVDM;

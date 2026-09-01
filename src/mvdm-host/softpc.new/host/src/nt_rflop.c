@@ -32,6 +32,7 @@
 #include "insignia.h"
 #include "host_def.h"
 #include <mvdm_guest_location.h>
+#include <mvdm_command_guest_state.h>
 
 
 #include <stdio.h>
@@ -519,8 +520,11 @@ GLOBAL void host_flpy_heart_beat(void)
 
     UTINY drive;
     FLP   flp;
+    WORD  fd_access;
 
-    if (pFDAccess && *pFDAccess) {
+    /* DIVERGENCE MVDM-HOST-DIV-111: read the SCS counter through a fresh
+     * session lease instead of dereferencing a retained guest alias. */
+    if (mvdm_command_guest_state_read_fd_access(&fd_access) && fd_access) {
 	if (floppy_open_count) {
 	    for (drive = 0; drive < number_of_floppy; drive++) {
 		flp = & floppy_data[drive];
@@ -858,8 +862,17 @@ HANDLE get_drive_handle(UTINY drive, USHORT pdb, BOOL auto_lock)
 	    floppy_open_count++;
 	    flp->auto_locked = auto_lock;
 	    flp->owner_pdb = pdb;
-	    (*(pFDAccess))++;
-	    break;
+		    /* DIVERGENCE MVDM-HOST-DIV-111: preserve the original increment
+		     * while keeping the guest location session-scoped. */
+		    if (!mvdm_command_guest_state_add_fd_access(1u)) {
+			CloseHandle(flp->diskette_fd);
+			flp->diskette_fd = INVALID_HANDLE_VALUE;
+			flp->auto_locked = FALSE;
+			flp->owner_pdb = 0;
+			floppy_open_count--;
+			return INVALID_HANDLE_VALUE;
+		    }
+		    break;
 	}
 	if (auto_lock && GetLastError() == ERROR_SHARING_VIOLATION &&
 	    DiskOpenRetry((char)(drive + (UTINY)'A')) == RMB_RETRY)
@@ -909,7 +922,10 @@ BOOL nt_floppy_close(UTINY drive)
     if (flp->diskette_fd != INVALID_HANDLE_VALUE) {
 	CloseHandle(flp->diskette_fd);
 	flp->diskette_fd = INVALID_HANDLE_VALUE;
-	(*(pFDAccess))--;
+	/* DIVERGENCE MVDM-HOST-DIV-111: preserve the original decrement through
+	 * the registered scalar rather than a durable process pointer. */
+	if (!mvdm_command_guest_state_add_fd_access(UINT16_MAX))
+	    return FALSE;
 	flp->auto_locked = FALSE;
 	flp->owner_pdb = 0;
 	floppy_open_count--;

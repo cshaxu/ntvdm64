@@ -42,7 +42,6 @@ CHAR	 *lpszzInitEnvironment = NULL;
 WORD	 cchInitEnvironment = 0;
 CHAR	 *lpszzCurrentDirectories = NULL;
 DWORD	 cchCurrentDirectories = 0;
-BYTE	 * pIsDosBinary;
 CHAR	 *lpszzcmdEnv16 = NULL;
 CHAR	 *lpszzVDMEnv32 = NULL;
 DWORD	 cchVDMEnv32;

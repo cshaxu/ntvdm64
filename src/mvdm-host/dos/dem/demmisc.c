@@ -17,6 +17,7 @@
 #include <mvdm.h>
 #include <dbgsvc.h>
 #include <nt_vdd.h>
+#include "adapter-mvdm-host-out/softpc/include/mvdm_command_guest_state.h"
 
 
 #if DEVL
@@ -608,11 +609,12 @@ VOID demIsDebug(void)
 
 VOID demDiskReset (VOID)
 {
-    extern WORD * pFDAccess;	    // defined in SoftPC.
-
     HostFloppyReset();
     HostFdiskReset();
-    *pFDAccess = 0;
+    /* DIVERGENCE MVDM-HOST-DIV-111: the registered SCS word is a scoped
+     * guest location, not a persistent process pointer. */
+    if (!mvdm_command_guest_state_write_fd_access(0u))
+        TerminateVDM();
 
     return;
 }

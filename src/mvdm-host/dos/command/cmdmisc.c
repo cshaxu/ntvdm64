@@ -265,7 +265,13 @@ char    CmdLine[MAX_PATH];
 
     // tell DOS that this is a dos executable and no further checking is
     // necessary
-    *pIsDosBinary = 1;
+    /* DIVERGENCE MVDM-HOST-DIV-111: the original durable guest alias is
+     * represented by a fresh session-scoped scalar lease. */
+    if (!mvdm_command_guest_state_write_is_dos_binary(UINT8_C(1))) {
+        setCF(1);
+        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        return;
+    }
 
 
     // Check for PIF files. If a pif file is being executed extract the
@@ -276,6 +282,11 @@ char    CmdLine[MAX_PATH];
     // will come back to cmdGettNextCmd with proper error code.
 
     cmdCheckForPIF (&VDMInfo);
+    if (VDMInfo.ErrorCode == ERROR_INVALID_ADDRESS) {
+        setCF(1);
+        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        return;
+    }
 
 
     //
@@ -548,7 +559,13 @@ LPSTR    pszCmdLine;
     strcpy(pch, "\x0d\x0a");
 
 
-    *pIsDosBinary = 1;
+    /* DIVERGENCE MVDM-HOST-DIV-111: do not retain the SCS binary byte as a
+     * process pointer between this command BOP and its guest consumer. */
+    if (!mvdm_command_guest_state_write_is_dos_binary(UINT8_C(1))) {
+        setCF(1);
+        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        return;
+    }
     IsRepeatCall = FALSE;
     IsFirstCall = FALSE;
 
@@ -663,17 +680,17 @@ UINT  DriveType;
 VOID cmdSetInfo (VOID)
 {
 
-    if (!mvdm_command_guest_state_set_scs(getDS(), getDX(),
+    /* DIVERGENCE MVDM-HOST-DIV-111: record all three original SCS scalar
+     * locations numerically; their values are acquired only at each use. */
+    if (!mvdm_command_guest_state_set_scs_scalars(getDS(), getDX(),
             (uint32_t)sizeof(SCSINFO),
-            (uint32_t)offsetof(SCSINFO, SCS_ToSync))) {
+            (uint32_t)offsetof(SCSINFO, SCS_ToSync),
+            getDS(), getBX(), getDS(), getCX())) {
         setCF(1);
         setAX((USHORT)ERROR_INVALID_ADDRESS);
         return;
     }
 
-    pIsDosBinary = (BYTE *) GetVDMAddr(getDS(), getBX());
-
-    pFDAccess = (WORD *) GetVDMAddr(getDS(), getCX());
     return;
 }
 

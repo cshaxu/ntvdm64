@@ -3,7 +3,6 @@
 */
 
 // from nt_fdisk.c
-extern WORD *pFDAccess;
 extern BYTE number_of_fdisk;
 extern DWORD max_align_factor;
 extern DWORD cur_align_factor;

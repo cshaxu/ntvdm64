@@ -17,6 +17,7 @@
 #include <mvdm.h>
 #include <oemuni.h>
 #include "nt_pif.h"
+#include "adapter-mvdm-host-out/softpc/include/mvdm_command_guest_state.h"
 
 VOID cmdCheckForPIF (PVDMINFO pvi)
 {
@@ -260,7 +261,10 @@ CHAR	AppFullPathName[MAX_PATH + 1];
 
     if (IsPIFFile)
 	// we don't know the binary type at this point.
-	*pIsDosBinary = 0;
+	/* DIVERGENCE MVDM-HOST-DIV-111: write the registered guest scalar through
+	 * a session lease instead of the historical retained host alias. */
+	if (!mvdm_command_guest_state_write_is_dos_binary(UINT8_C(0)))
+	    pvi->ErrorCode = ERROR_INVALID_ADDRESS;
 
     if (pfdata.WinTitle)
 	SetConsoleTitle(pfdata.WinTitle);
