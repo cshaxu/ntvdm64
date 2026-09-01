@@ -4,6 +4,30 @@
 
 ## Active Packet
 
+### M0 T336 S2 — CPU40/NTDOS post-`54:05` execution-contract observation
+
+**Active: M0 T336 S2.**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T336 S2; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | S1 completed its evidence-only admission under the owner’s standing direction; S2 is the plan-defined successor for the exact first unproven CCPU40/SAS edge. |
+| Objective | Use source-shaped, state-neutral observation to identify the first CCPU40/SAS/BIOS execution-contract failure after the original `54:05` return, then select only its complete source-owned recovery cohort. |
+| Non-goals | No BOP repair, guest loader, synthetic result, DOS/NTDOS rewrite, new mapping manager, alternate executor, Bochs route, GUI/WOW/CSRSS/kernel-VDM recreation, `EXEC`/PSP work, or arbitrary runtime retry. |
+| Reference Baseline | T336 S1 [source/cohort admission](etc/evidence/m0-t336-s1-post-cmdsetinfo-source-cohort-admission-001.md) and [ledger](etc/operations/m0-t336-s1-post-cmdsetinfo-cohort-ledger.tsv): original `54:05` returns to NTDOS register restoration and the DOS `SS:SP` disk-stack transition. |
+| Files And ABI Surface | Original `nt_bop.c`, `cmdmisc.c`, CCPU40 register/SAS execution, NTDOS `msinit.asm`, and only the exact BIOS exchange/termination sibling proven necessary by the observation. |
+| Applicable Rules | Execution, source policy, original-source-first recovery, mirror/overlay, session mapping, CCPU40-only, architecture, coding and documentation rules. |
+| Verification | State-neutral source-shaped observation at the original CPU40/SAS edge; original definition/caller/guest-continuation walk; current formal x86/x64 product-manifest review; focused negative proof; governance and diff checks. |
+| Expected Markers | One exact first failing state transition or source-owned terminal result, each reached sibling has one owner/disposition, and no trace-selected BOP or loader route is selected. |
+| Asset Needs | Existing selected MVDM/DOS mirrors, T335 evidence, current fixed container and paired formal CCPU40 product graphs; no new guest media or host installation. |
+| Reporting Requirements | Separate observations from source inference; name the exact first faulted or terminal edge, all sibling prerequisites and the recovery rung selected or rejected. |
+| Stop Conditions | Any need for a new BOP provider, guest loader, second mapper/executor, raw host pointer, guest-media rewrite, unreviewed source import, or a diagnosis that reaches a different owner package requires re-admission. |
+| Exit Criteria | A committed evidence/ledger names the actual CCPU40/SAS/BIOS edge and a complete source-owned recovery cohort, or records a source-shaped terminal result; no generic DOS completion claim is made. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | `cmdSetInfo` service-byte/IP return, NTDOS register/segment restoration, DOS/BIOS exchange fields, SAS span and stack conversion, CPU40 faults, disk stack, Win386/DOSWOW fields, timer/PIT/ICA prerequisites and stale Bochs-era routes. |
+
+**Plan:** [CPU40/NTDOS post-`54:05` startup continuity](etc/operations/proposal-cpu40-ntdos-post-cmdsetinfo-continuity-001.md). **S1 closed:** [source/cohort admission](etc/evidence/m0-t336-s1-post-cmdsetinfo-source-cohort-admission-001.md) and [ten-row ledger](etc/operations/m0-t336-s1-post-cmdsetinfo-cohort-ledger.tsv) establish that guest media is already loaded and the first unproven edge is CCPU40/SAS execution after the original BOP return.
+
 ### M0 T335 — Original WOW32/Win16 owner-package recovery
 
 **Closed: M0 T335.**
@@ -30,7 +54,7 @@
 
 **S3 P8 closed:** [original callback source binding](etc/evidence/m0-t335-s3-p8-wow-callback-source-binding-001.md) compiles the selected `wcall16.c` body on x86/x64 with original declaration and CCPU40 stack selection. **S3 P9 closed:** [guest-return boundary](etc/evidence/m0-t335-s3-p9-wow-guest-return-boundary-001.md) proves that a real callback return requires the original `WOW16_From_CallBack16` guest trampoline; Win16 media is already carried and app transparently forwards the original `-w/-a` activation contract, while BOP `51h` retains the original dynamic provider boundary. **S3 P10 closed:** [BaseSrv WOW command-route binding](etc/evidence/m0-t335-s3-p10-basesrv-wow-command-route-001.md) restores the original distinct shared-WOW nonblocking record behavior through the existing same-shaped local BaseVDM boundary; paired Ninja fixtures pass. **S3 P11 closed:** [original WOW startup activation observation](etc/evidence/m0-t335-s3-p11-original-wow-startup-activation-observation-001.md) links the formal x86/x64 products and proves original `-f/-w/-a` startup reaches DOS BOP dispatch after the bounded non-GUI presentation disposition; it records, but does not repair, the later `0xC0000005` continuity failure. **S3 P12 closed:** [original `CallBack16`/CCPU40 bounded return](etc/evidence/m0-t335-s3-p12-original-callback-ccpu40-return-001.md) runs the original `wcall16.c` transaction through original CCPU40 return ordering on x86; it deliberately does not claim execution of the Win16 callback trampoline. **S4 closed:** [package reconciliation](etc/evidence/m0-t335-s4-wow-package-reconciliation-001.md) records fresh 419-action x86/x64 formal product builds and the one fixed-container observation.
 
-**No active M/T/S packet.** T335's [closure record](history/m0-t335-wow32-win16-owner-package-closure-20260831.md) preserves its declared non-GUI profile and the named CPU40/guest-continuity successor boundary.
+T335's [closure record](history/m0-t335-wow32-win16-owner-package-closure-20260831.md) preserves its declared non-GUI profile and the named CPU40/guest-continuity successor boundary.
 
 ### M0 T334 — NetAPI/RAP Redirector network-boundary recovery
 

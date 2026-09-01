@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3599 |
+| Documentation records | 3601 |
 | --- | --- |
-| Generated UTC | 2026-09-01T03:08:15Z |
+| Generated UTC | 2026-09-01T03:17:06Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | df7cf2459b6ea5a45bc4494ae9150613b1970e591963c42653f0bb1c93e77120 |
+| STATUS.md | principal control document | 5add5188088b486eb70fc99a77e2825bcb6eeca3e184ba09a2302c09774753a1 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1068,6 +1068,7 @@ content-divergent entries.
 | etc/evidence/m0-t335-s3-p8-wow-callback-source-binding-001.md | indexed supporting material | d4c989ed87788f3d747ec0da5e2c4f21c56539dbf5b548843c96dcdb30fdcb22 |
 | etc/evidence/m0-t335-s3-p9-wow-guest-return-boundary-001.md | indexed supporting material | f33a8ab89f8034bf4edfe4733bb3a17b4c1f89fdb744e409abc02bf3b92b8511 |
 | etc/evidence/m0-t335-s4-wow-package-reconciliation-001.md | indexed supporting material | c67ed4ffca04aaf1c4adcae403097ac8c805c838ac6ca6ed9bc181e13ac0161c |
+| etc/evidence/m0-t336-s1-post-cmdsetinfo-source-cohort-admission-001.md | indexed supporting material | 6446585985a498ace65b1a245c36885b3558d437f6e6528e46bbc6c0fc116839 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1769,6 +1770,7 @@ content-divergent entries.
 | etc/operations/m0-t335-s3-p2-wow-pointer-access-family-ledger.tsv | indexed supporting material | 1bd8708f02c69db9f8169ccd35503d837d5ebfc991a970f1f8c119a4b6d3b6e3 |
 | etc/operations/m0-t335-s3-p5-wow-pointer-plane-source-usage-ledger.tsv | indexed supporting material | 9889915d3fe34e922a56bbb62e4b1a0bc40bdaf3b55f14d713966b19dbea7b9e |
 | etc/operations/m0-t335-wow32-win16-owner-package-recovery-plan-001.md | indexed supporting material | cb3ccfeaa482e4c09a3f079720907b6e47590338eec0734f92ba2b6df0b5e6d5 |
+| etc/operations/m0-t336-s1-post-cmdsetinfo-cohort-ledger.tsv | indexed supporting material | 14b910a8dee28f91e7986d3d007f5b8c093483c27a0d866d23349860988dd0e8 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
