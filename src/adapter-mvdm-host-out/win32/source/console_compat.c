@@ -69,6 +69,32 @@ BOOL WINAPI InvalidateConsoleDIBits(HANDLE output, PSMALL_RECT rect)
 
 BOOL WINAPI SetConsolePalette(HANDLE output, HPALETTE palette, DWORD flags)
 {
+    session *owner = session_thread_current();
+    PALETTEENTRY entries[SESSION_PRESENTATION_PALETTE_ENTRIES];
+    uint32_t rgb[SESSION_PRESENTATION_PALETTE_ENTRIES];
+    UINT count;
+    uint32_t index;
+
+    /* DIVERGENCE(ADAPTER-WIN32-043): the historical Console Server consumed
+     * this HPALETTE itself.  The app must not receive that host handle, so
+     * preserve the source call and copy only its public RGB values into the
+     * bounded session presentation plane. */
+    if (owner == NULL || palette == NULL) {
+        SetLastError(ERROR_INVALID_HANDLE);
+        return FALSE;
+    }
+    count = GetPaletteEntries(palette, 0u,
+        SESSION_PRESENTATION_PALETTE_ENTRIES, entries);
+    if (count == 0u) return FALSE;
+    for (index = 0u; index < count; ++index) {
+        rgb[index] = ((uint32_t)entries[index].peRed << 16u) |
+            ((uint32_t)entries[index].peGreen << 8u) |
+            (uint32_t)entries[index].peBlue;
+    }
+    if (!session_presentation_graphics_set_palette(owner, rgb, count)) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
     return console_video_event(SESSION_VIDEO_EVENT_PALETTE, output, palette,
         NULL, flags);
 }

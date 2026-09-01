@@ -31,12 +31,16 @@ The focused `console_input_contract_fixture` and
 - rejecting an invalid DIB descriptor;
 - a source-facing writable DIB pointer only while the session is active;
 - a copied graphics snapshot with the expected aligned stride and byte value;
+- copied RGB palette values from the original `SetConsolePalette` call, with
+  no app-visible `HPALETTE`;
 - deterministic clear and unavailable result after teardown;
 - no transfer of the raw pointer or console handle to the app-facing API.
 
-The formally generated CPU40 Ninja graphs additionally rebuilt the affected
+The formally generated CPU40 Ninja graph rebuilt the affected
 `obj/session/session.obj` and `obj/adapter-win32/console_compat.obj`, then
-relinked `softpc-win32-bindings.lib`, under both `record-x86` and `record-x64`.
+relinked both `session.lib` and `softpc-win32-bindings.lib` under the selected
+x86 CPU40 configuration. The focused public Console fixture generator links
+`gdi32.lib`, the required public palette API import library.
 
 ## Result
 

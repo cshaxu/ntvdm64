@@ -11,6 +11,7 @@
 #define SESSION_ABI_VERSION UINT32_C(4)
 #define SESSION_MAX_TEARDOWNS 8u
 #define SESSION_MAX_THREAD_HOOKS 8u
+#define SESSION_PRESENTATION_PALETTE_ENTRIES 256u
 #define SESSION_MECHANICAL_STATUS_NONE UINT32_MAX
 #define SESSION_MECHANICAL_STATUS_BACKEND_UNAVAILABLE UINT32_C(0xfffffffe)
 #define SESSION_FIRMWARE_ROOT_BYTES 1024u
@@ -117,6 +118,11 @@ typedef struct session {
     uint32_t presentation_graphics_bits_per_pixel;
     uint32_t presentation_graphics_stride;
     uint32_t presentation_graphics_bytes;
+    /* RGB values copied from the source palette.  These are values, never a
+     * host HPALETTE, so app presentation has no host-handle dependency. */
+    uint32_t presentation_graphics_palette_entries;
+    uint32_t presentation_graphics_palette_rgb[
+        SESSION_PRESENTATION_PALETTE_ENTRIES];
 } session;
 
 #ifdef __cplusplus
@@ -160,6 +166,10 @@ int session_presentation_graphics_snapshot(const session *instance,
     uint32_t *height_out, uint32_t *bits_per_pixel_out, uint32_t *stride_out,
     uint32_t *bytes_out);
 void session_presentation_graphics_clear(session *instance);
+int session_presentation_graphics_set_palette(session *instance,
+    const uint32_t *rgb, uint32_t entries);
+int session_presentation_graphics_palette_snapshot(const session *instance,
+    uint32_t *rgb, uint32_t capacity, uint32_t *entries_out);
 int session_dispose(session *instance);
 mapping_manager *session_guest_memory_mappings(session *instance);
 mapping_manager *session_host_resource_mappings(session *instance);

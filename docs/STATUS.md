@@ -165,6 +165,20 @@ pointer, snapshot content and deterministic cleanup. Both formal CPU40 graphs
 rebuild the affected objects and relink `softpc-win32-bindings.lib`. See the
 [S2 closure evidence](etc/evidence/m0-t346-s2-p2-graphics-session-surface-closure-001.md).
 
+**S2 P3 correction:** S2's graphics surface also copies the public RGB values
+from the original `SetConsolePalette` call into session storage. This removes
+the last implied app dependency on an `HPALETTE`; the selected x86 session and
+Console/graphics fixtures pass, and the formal `session.lib` plus
+`softpc-win32-bindings.lib` relink. The public fixture generator now links
+`gdi32.lib` for the corresponding documented public palette APIs.
+
+**S2 P3 correction:** S2's graphics surface also copies the public RGB values
+from the original `SetConsolePalette` call into session storage. This removes
+the last implied app dependency on an `HPALETTE`; the selected x86 session and
+Console/graphics fixtures pass, and the formal `session.lib` plus
+`softpc-win32-bindings.lib` relink. The public fixture generator now links
+`gdi32.lib` for the corresponding documented public palette APIs.
+
 ### M0 T346 S3 — App window and session-scoped Alt+Enter lifecycle
 
 **S3 P1:** [the app window lifecycle contract](etc/operations/m0-t346-s3-window-lifecycle-contract-001.md)

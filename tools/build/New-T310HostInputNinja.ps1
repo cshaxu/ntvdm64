@@ -36,7 +36,7 @@ rule cc
   deps = msvc
   description = CC `$out
 rule link
-  command = cmd /d /s /c call `$environment link /nologo /out:`$out `$in kernel32.lib user32.lib
+  command = cmd /d /s /c call `$environment link /nologo /out:`$out `$in kernel32.lib user32.lib gdi32.lib
   description = LINK `$out
 rule run
   command = `$in

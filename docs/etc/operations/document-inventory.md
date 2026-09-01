@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 3667 |
 | --- | --- |
-| Generated UTC | 2026-09-01T08:52:02Z |
+| Generated UTC | 2026-09-01T08:59:39Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 8d1b6e8926e8cbcd43d9f7bcdffccd779337d99d3b047bd8440b93b1cce551b9 |
+| STATUS.md | principal control document | 3a1c725495884074500b9a415266277d1ca9386b2db0659588ab5708442fba8d |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1097,7 +1097,7 @@ content-divergent entries.
 | etc/evidence/m0-t345-s1-host-capability-inventory-closure-001.md | indexed supporting material | 403ffafb9ae6c88ff5f3e26d9ac1046520d28459c2b34dbf65f4405aad4052d5 |
 | etc/evidence/m0-t345-s2-ordinary-dem-host-capability-recovery-001.md | indexed supporting material | f4a5436e218008c28fa317e6409a3d4db427d924b04407ac468da5e046c1ee28 |
 | etc/evidence/m0-t345-s3-ordinary-dem-formal-closure-001.md | indexed supporting material | b3327bdc3dc7b3ee15696a211ad8b45835c6651c364dff7bca824d9a0a005c35 |
-| etc/evidence/m0-t346-s2-p2-graphics-session-surface-closure-001.md | indexed supporting material | 3f198b8b073810e8c17b3ea55db5913746af7e9fdec5da6162cc30df4fb18558 |
+| etc/evidence/m0-t346-s2-p2-graphics-session-surface-closure-001.md | indexed supporting material | d978038f6b82aa4e0e7cf8bf448a46b707fd118ab63b2a42e46ffe0a89f2540e |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
