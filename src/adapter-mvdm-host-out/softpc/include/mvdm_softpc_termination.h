@@ -71,6 +71,12 @@ void mvdm_softpc_record_dem_seek(uint16_t requested_high,
     uint16_t result_high, uint16_t result_low, unsigned int guest_ax,
     unsigned int guest_cf);
 
+/* Default-off original DEM IOCTL observation. It copies only the existing
+ * selector/register result contract and cannot inspect a drive or alter it. */
+void mvdm_softpc_record_dem_ioctl(unsigned int subfunction,
+    unsigned int drive, unsigned int phase, unsigned int guest_ax,
+    unsigned int guest_dx, unsigned int guest_cf);
+
 /* Default-off, fixed-container CONFIG completion observation.  It copies the
  * exact selected NTDOS map's pass byte and 64-byte shell filename through
  * short read leases, then releases them before the original notification BOP

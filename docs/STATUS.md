@@ -488,7 +488,7 @@ and
 
 ## Active Packet
 
-**Active: M0 T355 S12 — original CONFIG temporary-CDS IOCTL observation.**
+**Active: M0 T355 S13 — original CONFIG post-IOCTL guest-continuation audit.**
 
 ### M0 T355 S1 — Closed short-path permanent COMMAND fixed-container verification
 
@@ -787,6 +787,31 @@ source-owned seam is the whole existing `SVC_DEMIOCTL` owner path.
 | Exit Criteria | One valid IOCTL observation selects exactly one source-owned successor or terminal without a fabricated host capability result. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `tempcds`, `AH=44h`, `AL=08`, `ioctl_removable_media`, `SVC_DEMIOCTL`, `demIOCTL`, `demIoctlChangeable`, `BL`, `AX`, `DX`, carry and fixed-drive selection. |
+
+**S12 closure:** [CONFIG temporary-CDS IOCTL observation](etc/evidence/m0-t355-s12-config-temporary-cds-ioctl-observation-001.md)
+proves three original removable-media requests for drive `C:` return fixed
+(`AX=1`, `CF=0`).  DEM open, EOF seek and temporary-CDS IOCTL are all source
+and runtime-successful; no host-drive workaround is selected.
+
+### M0 T355 S13 — Active original CONFIG post-IOCTL guest-continuation audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S13; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T355 S12's successful whole original IOCTL owner result under the owner-approved ordered queue execution. |
+| Objective | Reconstruct original `tempcds` return, temporary CDS write loop, `doconf` `DS/ES/confbot/CX` setup and exact DOS-read transfer; identify whether a guest control/data precondition—not a host file/drive result—prevents `demRead`. |
+| Non-goals | No new host capability, DEM/IOCTL/parser result rewrite, guest/media mutation, mapper, CPU/machine change, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics claim. |
+| Reference Baseline | T355 S8 successful open/absent read; T355 S10 successful EOF seek; T355 S12 successful original removable-media IOCTL results. |
+| Files And ABI Surface | Original `sysinit1.asm::tempcds`, `sysconf.asm::doconf`, original DOS INT21 read dispatcher and selected CPU40 execution semantics. No code change in S13. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original source/caller/register/memory-span audit and existing evidence review only. A new diagnostic, build or runtime run requires a separately bounded S14 admission. |
+| Expected Markers | A complete source-owned continuation from successful IOCTL through `tempcds` return and the `AH=3Fh` transfer, with one exact next seam or original terminal. |
+| Asset Needs | Existing original mirrors and T355 durable evidence; no new source import, asset, build or host-system mutation. |
+| Reporting Requirements | Treat the three S12 successes as bounded facts only; do not infer that `tempcds` returned or that DOS read was dispatched without source evidence. |
+| Stop Conditions | Any need to add an observer, execute a second run, alter guest state, rewrite host results or change CPU/machine semantics pauses for a new admission. |
+| Exit Criteria | The post-IOCTL/pre-read continuation has no unowned immediate edge and selects one bounded successor or exact original terminal. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `tempcds`, `foogo`, `fixed_drv`, `EndProc TempCDS`, `confbot`, `alloclim`, `DS/ES`, `CX`, `AH=3Fh`, DOS read dispatcher, `demRead` and CPU40 return/control state. |
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 

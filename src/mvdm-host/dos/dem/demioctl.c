@@ -14,6 +14,7 @@
 #include <softpc.h>
 #include <winbase.h>
 #include "demdasd.h"
+#include <mvdm_softpc_termination.h>
 
 PFNSVC	apfnSVCIoctl [] = {
     demIoctlInvalid,		// IOCTL_GET_DEVICE_INFO    0
@@ -63,6 +64,8 @@ VOID demIOCTL (VOID)
 ULONG	iIoctl;
 
     iIoctl = (ULONG) getAL();
+    mvdm_softpc_record_dem_ioctl((unsigned int)iIoctl, getBL(), 0u,
+        getAX(), getDX(), getCF());
 
 #if DBG
     if (iIoctl >= MAX_IOCTL_INDEX){
@@ -73,6 +76,8 @@ ULONG	iIoctl;
 #endif
 
     (apfnSVCIoctl [iIoctl])();
+    mvdm_softpc_record_dem_ioctl((unsigned int)iIoctl, getBL(), 1u,
+        getAX(), getDX(), getCF());
 
     return;
 }
