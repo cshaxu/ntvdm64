@@ -30,6 +30,13 @@ See the [T346 closure](history/m0-t346-softpc-graphics-presentation-closure-2026
 | Similar-Issue Sweep | All durable `GetVDMAddr` aliases in the selected COMMAND/DEM/SoftPC cohort; access direction, reset/increment/decrement behavior, stale epoch/session teardown, and current guest-state carrier ownership. |
 
 **Plan:** [M0 T347 scalar-alias lifecycle recovery](etc/operations/m0-t347-command-dem-softpc-scalar-alias-lifecycle-recovery-plan-001.md).
+
+**S1 P1 / S1 closure:** [the scalar-alias registration and lifetime ledger](etc/evidence/m0-t347-s1-scalar-alias-registration-lifetime-ledger-001.md)
+confirms that `SCS_ToSync`, `SCS_Is_Dos_Binary` and `SCS_FDACCESS` are one
+original DOSDATA registration cohort. It selects a single extension to the
+existing `adapter-mvdm-host-out/softpc` location/lease seam; no new mapper,
+BOP provider or guest change is required. The next S may implement only the
+selected scalar operations and their local lifecycle tests.
 T342 is closed: the only startup-reached debugger form
 is the original `DBGInit` shape through its bounded adapter; BDE, VDMDBG,
 VDMEXTS and FAX remain their original tool/product packages. T341 is closed:
