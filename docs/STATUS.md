@@ -4,9 +4,10 @@
 
 **Active: M0 T346 S4.** T345 is closed: its selected ordinary DEM
 filesystem/handle, directory/drive/volume and search/FCB package has retained
-original source ownership and paired CPU40 x86/x64 formal linkage. T346 begins
-the next ordered graphics-presentation package with source/ABI/failure
-inventory only.
+original source ownership and paired CPU40 x86/x64 formal linkage. T346 has
+closed its source/ABI inventory, session-surface and app-window implementation
+packets; only S4's selected-profile graphics-workload verification remains
+active.
 T342 is closed: the only startup-reached debugger form
 is the original `DBGInit` shape through its bounded adapter; BDE, VDMDBG,
 VDMEXTS and FAX remain their original tool/product packages. T341 is closed:
