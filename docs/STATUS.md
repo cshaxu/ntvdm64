@@ -2,9 +2,10 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T341 is closed: the complete original VDD
-host-service surface remains selected in the formal CPU40/x86 link, while the
-current profile explicitly selects no external installable VDD. T340 is
+**Active: M0 T342 S1.** T341 is closed: the complete original VDD host-service
+surface remains selected in the formal CPU40/x86 link, while the current
+profile explicitly selects no external installable VDD. T342 now begins the
+next ordered Debugger/BDE/FAX source/ABI/failure audit only. T340 is
 closed: initial resident DOS-BIOS headers are
 the original function-00 no-op-success cohort, and the selected original
 HIMEM/SoftPC XMS-A20-INT15-HMA successor is source/formal-build closed. Its
@@ -12,6 +13,23 @@ single unchanged fixed observation did not reach HIMEM. See the
 [T341 closure](history/m0-t341-vdd-owner-package-recovery-closure-20260831.md).
 
 ## Active Packet
+
+### M0 T342 S1 — Original Debugger / BDE / FAX source / ABI / failure admission
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T342 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 3, admitted under the standing direction to execute ordered queue packages after T341 closure. |
+| Objective | Establish complete original debugger, BDE and FAX owner boundaries: source forms, public entrypoints, direct callers, callbacks, selected build input, failure results and external owner transfers. |
+| Non-goals | No debugger/FAX activation, VDD sample loading, generic debugger broker, synthetic event, GUI redesign, kernel/CSRSS/monitor recreation, guest change, BOP leaf, new mapper, alternate executor, Bochs route or CPU30 route. |
+| Files And ABI Surface | Original `dbg`, `bde`, `vdmdbg`, `vdmexts`, `fax`, directly reached host debugger sources and their declarations; current adapters and formal CPU40 x86/x64 manifests. |
+| Verification | Complete source/declaration/definition/caller/failure walk, build-selection review, documentation governance and diff checks; no runtime observation in S1. |
+| Exit Criteria | Every reached source form has one owner/disposition; samples/tools and monitor/kernel/CSRSS forms have explicit transfers; S1 selects at most one bounded original local cohort. |
+| Stop Conditions | Any need to enable an arbitrary debugger/FAX DLL, create an event broker, expose native pointer/HANDLE identity, alter guest behavior, recreate private NT4 infrastructure or add an unreviewed source package requires re-admission. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | `DBGInit`, debug notifications, BDE/VDD contracts, FAX samples, WOW/Redirector debugger callers, monitor/kernel events, console/UI, thread lifecycle and teardown. |
+
+**Plan:** [M0 T342 Debugger/BDE/FAX owner-package recovery](etc/operations/m0-t342-debugger-bde-fax-owner-package-recovery-plan-001.md).
 
 ### M0 T341 S1 — Original VDD owner source / ABI / failure admission (closed)
 
