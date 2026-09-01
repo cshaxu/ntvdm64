@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3756 |
+| Documentation records | 3758 |
 | --- | --- |
-| Generated UTC | 2026-09-01T23:11:08Z |
+| Generated UTC | 2026-09-01T23:29:15Z |
 
 ## Entries
 
@@ -959,7 +959,9 @@ content-divergent entries.
 | etc/evidence/m0-t355-s26-session-binding-lifetime-attribution-001.md | indexed supporting material | 9b414661561be693695c2cd387139c8839ff63cc15d9c59f663f78af54ec9e9c |
 | etc/evidence/m0-t355-s27-source-shaped-worker-binding-release-001.md | indexed supporting material | fe5b2d90f1081b89f427aadf0e2bf0c84bd923a7e89a061a75e6bce21df808d2 |
 | etc/evidence/m0-t355-s28-original-worker-source-attribution-001.md | indexed supporting material | 84e8b5291813923a1ff4064aad2a080f2a14588ac4e61d2711b51e4b72e87e2f |
+| etc/evidence/m0-t355-s29-original-heartbeat-shutdown-reachability-audit-001.md | indexed supporting material | 627743822bd24d1b53dff857f5c0016ff7a08313b14defcb1d98f6aeeae761c6 |
 | etc/evidence/m0-t355-s2-config-multipass-shell-persistence-audit-001.md | indexed supporting material | 462162f5f568fdc74354f44e242711478fa46aa90ce0fcc00c4d19f18d8ec58a |
+| etc/evidence/m0-t355-s30-source-owned-direct-termination-cleanup-recovery-001.md | indexed supporting material | 5774802b7e2c1ec1a482e018e08a970c34441be40f784373ec6663967018fb56 |
 | etc/evidence/m0-t355-s3-configdone-observation-relocation-attribution-001.md | indexed supporting material | c937a4a88d6e81c8959f70fedea163d0e913e6c4de21c779dd69b8b446e77814 |
 | etc/evidence/m0-t355-s4-loaded-ntio-configdone-state-observation-001.md | indexed supporting material | 18d43ce1fbf28f1b4dd67857e5e3dfc9e8158678757a7890472b5fcab191a80b |
 | etc/evidence/m0-t355-s5-ntdos-shell-pass-one-execution-cohort-audit-001.md | indexed supporting material | 3c0d3fbca415626f9bd43ed68d26a84394e01448b25b7fd0c040f389a5fc44ef |
@@ -3770,7 +3772,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | f93d954b22cd28d435d0305d50388b6f3d630a666cf829df8a023eaf6f5f1abf |
+| STATUS.md | principal control document | b8b63d02cf2bf2552e5cb039cce57ebf6dfb13dce6ec9e57be3c2cbb3acae3db |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |

@@ -488,11 +488,44 @@ and
 
 ## Active Packet
 
-**No active M/T/S packet.**
+**No active M/T/S packet.** S30 is closed; the next packet requires explicit
+admission from the queue rather than an implicit continuation of lifecycle
+diagnostics.
 
-M0 T355 S28 is closed. The live binding is the original SoftPC
-`HeartBeatThread`; the next recovery, if admitted, is its complete
-source-owned timer alert-and-join lifecycle.
+### M0 T355 S29 — Closed original heartbeat shutdown reachability audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S29; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by S28's source-attributed `HeartBeatThread` successor under the standing owner direction for ordered source-first CPU40/x86 recovery. |
+| Objective | Reconstruct the complete original `host_start_cpu → host_applClose → TerminateHeartBeat → NtAlertThread → alertable wait → ExitThread` route and identify the smallest source-shaped reason the observed heartbeat binding remains live. |
+| Non-goals | No new timer model, BOP/DEM/COMMAND/Redirector business change, guest/media/firmware mutation, CCPU execution change, mapper redesign, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW or graphics work. |
+| Reference Baseline | S28 proves the sole live worker is original `HeartBeatThread`; `main.c` nominally invokes `host_applClose` after `host_start_cpu`, and the selected timer source already has same-shaped public alert/wait bindings. |
+| Files And ABI Surface | Original `main.c`, `nt_reset.c`, `nt_timer.c`, selected thread/alert/wait adapters, existing session report and app composition. No new guest or public product ABI. |
+| Applicable Rules | Execution, source policy, source-first recovery, CPU40-only, mirror/overlay, mapping-manager, architecture and coding rules. |
+| Verification | Original definition/caller/return-path audit; selected build-preprocessor/link inspection; one fixed-container observation. |
+| Expected Markers | A source-owned explanation whether original `host_applClose` is reached, whether `TerminateHeartBeat` reaches its existing alert binding, and one bounded implementation successor or an exact terminal. |
+| Asset Needs | Existing selected mirrors, S28 product/link evidence and source indexes only; no asset import, rebuild or host mutation. |
+| Reporting Requirements | Separate original-source control flow, selected build binding and runtime fact. State explicitly that static reachability does not prove an alert was delivered. |
+| Stop Conditions | Any need to insert generic timer cancellation, force-unbind, add a parallel worker, retry/vary the container, alter guest/media, or change a CPU/BOP/machine semantic pauses for new admission. |
+| Exit Criteria | Met: the direct `ExitProcess(0)` replacement is source-recovered but was not the observed exit route. Original `base/bios/reset.c` can call `host_terminate()` directly; NT4 relied on process exit for worker destruction. The next complete cohort is idempotent `host_applClose` before every selected `host_terminate`. See `etc/evidence/m0-t355-s29-original-heartbeat-shutdown-reachability-audit-001.md`. |
+
+### M0 T355 S30 — Closed source-owned direct-termination cleanup recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S30; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by S29's complete original source reachability audit under the standing owner direction for ordered source-first CPU40/x86 recovery. |
+| Objective | Recover the original process-exit cleanup contract for every selected direct `host_terminate()` route by making original `host_applClose()` a once-per-host-start cohort and invoking it before session termination. |
+| Non-goals | No new timer model, force-unbind, parallel worker, BOP/DEM/COMMAND/Redirector business change, guest/media/firmware mutation, CCPU execution change, mapper redesign, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW or graphics work. |
+| Reference Baseline | S28 attributes the live worker to original `HeartBeatThread`; S29 proves direct reset can reach `host_terminate()` without `terminate()` while NT4's `ExitProcess` implicitly destroyed workers. |
+| Files And ABI Surface | Original `softpc.new/host/src/nt_reset.c`, existing timer/alert/wait adapters, session termination boundary and fixed-container observer. No guest or public product ABI changes. |
+| Applicable Rules | Execution, source policy, source-first recovery, CPU40-only, mirror/overlay, architecture and coding rules. |
+| Verification | Formal CPU40/x86 Ninja link and one fixed-container disposal observation. The app returns `0x48` only when disposal finds a retained binding; the observed original-entry result was `0x78` and no disposal report was emitted, proving the binding count reached zero. |
+| Stop Conditions | Any need to force-unbind, add a generic cancellation scheme, vary the container, alter guest/media, or change CPU/BOP/machine semantics pauses for new admission. |
+| Exit Criteria | Met: the source-owned closure is called at most once per original host start on both `terminate()` and direct `host_terminate()` routes; formal build passed; one fixed observation returned the original-entry `0x78`, not app disposal `0x48`, and emitted no disposal failure report; mirror divergences are registered. See [S30 evidence](etc/evidence/m0-t355-s30-source-owned-direct-termination-cleanup-recovery-001.md). |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `host_main`, `host_applClose`, `TerminateHeartBeat`, `NtAlertThread`, `WaitForSingleObjectEx`, `DelayHeartBeat`, `ExitThread`, outer SEH and app disposal ordering. |
 
 ### M0 T355 S28 — Closed original-worker source attribution
 

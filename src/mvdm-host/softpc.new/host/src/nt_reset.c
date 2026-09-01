@@ -84,6 +84,13 @@ GLOBAL ULONG DosSessionId = 0;
 GLOBAL UINT VdmExitCode = 0xFF;
 GLOBAL BOOL StreamIoSwitchOn = TRUE;
 
+/* DIVERGENCE(MVDM-HOST-DIV-147): NT4 may reach host_terminate directly and
+ * then rely on ExitProcess to destroy outstanding SoftPC workers. The app
+ * terminates only the current session, so retain one source-owned close cohort
+ * for both the ordinary terminate() route and the direct-reset route. */
+static BOOL HostApplicationClosed = FALSE;
+static BOOL HostApplicationStarted = FALSE;
+
 /*
  *
  * ============================================================================
@@ -173,6 +180,10 @@ void  host_applInit(int argc,char *argv[])
 {
     char	*psz;
     int  temp_argc = argc;
+
+    /* A fresh original host start owns a fresh close cohort. */
+    HostApplicationClosed = FALSE;
+    HostApplicationStarted = TRUE;
     char         **temp_argv = argv;
     BOOL         bSwitchF = FALSE;
 
@@ -238,7 +249,14 @@ void  host_applInit(int argc,char *argv[])
 
     if (bSwitchF == FALSE)
     {
-        /* DIVERGENCE(MVDM-HOST-DIV-147): see host_terminate below. */
+        /* DIVERGENCE(MVDM-HOST-DIV-147): the original process-owned branch
+         * ends with ExitProcess(0), which atomically destroys its heartbeat
+         * and all other process resources.  A session cannot end the app
+         * process.  Preserve the source-owned close cohort before transferring
+         * the same completion to the session boundary; otherwise the direct
+         * session escape bypasses TerminateHeartBeat and leaves its worker
+         * binding live. */
+        host_applClose();
         (void)mvdm_softpc_terminate_current_session((uint32_t)VDMForWOW, 0u);
         return;
     }
@@ -293,6 +311,9 @@ void  host_applInit(int argc,char *argv[])
 void
 host_applClose(void)
 {
+  if (!HostApplicationStarted || HostApplicationClosed)
+      return;
+  HostApplicationClosed = TRUE;
   nt_remove_event_thread();
   InitSound(FALSE);
   TerminateHeartBeat();
@@ -329,6 +350,10 @@ host_applClose(void)
  */
 void host_terminate(void)
 {
+
+    /* Preserve process-exit cleanup for source paths, such as reset.c,
+     * which historically entered host_terminate directly. */
+    host_applClose();
 
 #ifdef HUNTER
     if (TrapperDump != (HANDLE) -1)
