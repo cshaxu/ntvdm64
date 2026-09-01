@@ -182,6 +182,7 @@ int main(int argc, char **argv)
     char previous_config_command_linear[16];
     char dem_read_report_path[MAX_PATH];
     char previous_dem_read_report_path[MAX_PATH];
+    char dem_seek_report_path[MAX_PATH];
     char report_base_path[MAX_PATH];
     DWORD report_base_path_length;
     DWORD previous_exception_report_length;
@@ -266,6 +267,8 @@ int main(int argc, char **argv)
              "%s.config-command-store.txt", report_base_path);
     snprintf(dem_read_report_path, sizeof(dem_read_report_path),
              "%s.dem-read.txt", report_base_path);
+    snprintf(dem_seek_report_path, sizeof(dem_seek_report_path),
+             "%s.dem-seek.txt", report_base_path);
     previous_exception_report_length = GetEnvironmentVariableA(
         "MVDM_EXCEPTION_REPORT_PATH", previous_exception_report_path,
         (DWORD)sizeof(previous_exception_report_path));
@@ -321,6 +324,7 @@ int main(int argc, char **argv)
      * input, not a guest ABI or an address translation facility. */
     SetEnvironmentVariableA("MVDM_CONFIG_COMMAND_LINEAR", "0x914e6");
     SetEnvironmentVariableA("MVDM_DEM_READ_REPORT_PATH", dem_read_report_path);
+    SetEnvironmentVariableA("MVDM_DEM_SEEK_REPORT_PATH", dem_seek_report_path);
 
     if (!CreateProcessA(NULL, command_line, NULL, NULL, TRUE, 0, NULL, argv[2],
                         &startup, &child)) {

@@ -408,18 +408,24 @@ DWORD   dwLoc;
 #endif
     hFile =  GETHANDLE (getAX(),getBP());
     lLoc  = (LONG)((((int)getCX()) << 16) + (int)getDX());
+    mvdm_softpc_record_dem_seek(getCX(), getDX(), getBL(), 0u, 0u, 0u,
+        getAX(), getCF());
 
     if ((dwLoc = SetFilePointer (hFile,
                                lLoc,
                                NULL,
                                (DWORD)getBL())) == -1L){
         demClientError(hFile, (CHAR)-1);
+        mvdm_softpc_record_dem_seek(getCX(), getDX(), getBL(), 2u, 0u, 0u,
+            getAX(), getCF());
         return ;
     }
 
     setCF(0);
     setAX((USHORT)dwLoc);
     setDX((USHORT)(dwLoc >> 16));
+    mvdm_softpc_record_dem_seek(getCX(), getDX(), getBL(), 1u,
+        (USHORT)(dwLoc >> 16), (USHORT)dwLoc, getAX(), getCF());
     return;
 }
 

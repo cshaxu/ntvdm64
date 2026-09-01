@@ -488,7 +488,7 @@ and
 
 ## Active Packet
 
-**Active: M0 T355 S9 — original CONFIG post-open seek/pre-read cohort attribution.**
+**Active: M0 T355 S11 — original CONFIG post-seek guest preparation audit.**
 
 ### M0 T355 S1 — Closed short-path permanent COMMAND fixed-container verification
 
@@ -710,6 +710,58 @@ seek/allocation/pre-read cohort.
 | Exit Criteria | The whole original post-open/pre-read cohort has one bounded successor seam or an exact source terminal, with no unowned immediate edge. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `doconf`, DOS `42h` seek, `demChgFilePtr`, SFT/JFN handle binding, `confbot`, DOS allocation, `CX/AX`, carry/error and `conferr`. |
+
+**S9 closure:** [CONFIG post-open seek/pre-read cohort attribution](etc/evidence/m0-t355-s9-config-post-open-seek-cohort-attribution-001.md)
+proves that the first `AH=42h/AL=2` EOF seek is the unique host-service
+predecessor of the absent read; the reset seek is guest-local.  The next
+bounded seam is the original `demChgFilePtr` result, not a parser or DEM-read
+repair.
+
+### M0 T355 S10 — Active original CONFIG EOF-seek result observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S10; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T355 S9's complete original post-open source attribution under the owner-approved ordered queue execution. |
+| Objective | Add one default-off, scalar-only observer at original `demChgFilePtr` and make one fixed-container observation sufficient to classify the `doconf` EOF-seek success/failure before CONFIG read. |
+| Non-goals | No file-pointer/DEM/parser result rewrite, guest or media mutation, mapper, CPU/machine change, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics claim. |
+| Reference Baseline | T355 S8 successful temporary open with absent read; T355 S9 original `AH=42h/AL=2 -> LSeekEOF -> SVC_DEMCHGFILEPTR` proof. |
+| Files And ABI Surface | Original `dos/dem/demhndl.c::demChgFilePtr`, existing scalar CPU accessors and default-off durable report helper only. No guest pointer, host handle or file payload escapes. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original source-order review; focused default-off scalar report fixture; formal CPU40/x86 link; exactly one fixed-container observation; governance/export and diff review. |
+| Expected Markers | Original `CX:DX`, `BL`, `CF`, `AX:DX` and phase identify whether the EOF seek reaches the read/guest-local reset cohort or its exact error continuation. |
+| Asset Needs | Existing selected mirrors, formal graph and immutable `O:\ntvdm` container; no new import, guest asset or host-system mutation. |
+| Reporting Requirements | Record only copied scalar results after the original operation; correlate the transaction to S8's temporary-file open by source order; never copy file content or retain guest/host pointers. |
+| Stop Conditions | Any need to alter a result, inspect/copy guest payload, special-case a pathname, add another observer family, use a second input/container or make a second runtime observation pauses for a new admission. |
+| Exit Criteria | One valid seek-result observation selects exactly one source-owned successor or source terminal without a DEM leaf repair. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `doconf`, DOS `42h`, `LSeekEOF`, `SVC_DEMCHGFILEPTR`, `SetFilePointer`, `AX/BP`, `CX/DX`, `BL`, `CF`, `AX:DX`, `confbot` and `conferr`. |
+
+**S10 closure:** [CONFIG EOF-seek observation](etc/evidence/m0-t355-s10-config-eof-seek-observation-001.md)
+proves original `SVC_DEMCHGFILEPTR` succeeds and returns `0x0A47`.  The
+remaining pre-read interval is original guest-only `count/config_size`,
+`pararound`, `confbot` and `tempcds` preparation; no host file-service repair
+is selected.
+
+### M0 T355 S11 — Active original CONFIG post-seek guest preparation audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S11; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T355 S10's successful original EOF-seek observation under the owner-approved ordered queue execution. |
+| Objective | Reconstruct the complete original guest-only `doconf` sequence from successful EOF seek through `count/config_size`, `pararound`, `confbot` relocation and `tempcds` to the DOS read call; identify one exact predecessor or source terminal. |
+| Non-goals | No DEM/parser/firmware result rewrite or rebuild, guest/media mutation, mapper, CPU/machine change, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics claim. |
+| Reference Baseline | T355 S8 successful temporary open/absent read; T355 S10 successful `SVC_DEMCHGFILEPTR` EOF seek; original `sysconf.asm::doconf`. |
+| Files And ABI Surface | Original NTDOS CONFIG code and its immediate original helpers only. No adapter, DEM or BOP ABI change in S11. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original declaration/definition/caller/register/memory-span audit and existing evidence review only. A runtime observer or product change requires a separately bounded successor S. |
+| Expected Markers | A complete source-owned account of every post-seek instruction group, its memory preconditions and its direct transfer to read or original terminal. |
+| Asset Needs | Existing original mirrors and T355 durable evidence; no new source import, asset, build or host-system mutation. |
+| Reporting Requirements | Keep S10's proved success separate from unobserved guest state; do not infer a repair from the timeout or add a diagnostic during the audit. |
+| Stop Conditions | Any need to alter guest memory, add an observer, run a second fixed-container execution, change a file-service result or CPU/machine semantics pauses for a new admission. |
+| Exit Criteria | The entire post-seek/pre-read guest cohort has no unowned immediate edge and selects one bounded successor seam or exact original terminal. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `doconf`, `count`, `config_size`, `confbot`, `pararound`, `tempcds`, CDS relocation, memory bounds, `DS/ES`, `AH=3Fh`, `CX`, `AX` and `conferr`. |
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 

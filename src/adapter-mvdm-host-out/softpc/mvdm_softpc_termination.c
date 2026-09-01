@@ -375,6 +375,26 @@ void mvdm_softpc_record_dem_read(uint16_t guest_ds, uint16_t guest_dx,
         (DWORD)formatted);
 }
 
+void mvdm_softpc_record_dem_seek(uint16_t requested_high,
+    uint16_t requested_low, unsigned int origin, unsigned int phase,
+    uint16_t result_high, uint16_t result_low, unsigned int guest_ax,
+    unsigned int guest_cf)
+{
+    char message[192];
+    int formatted;
+
+    if (GetEnvironmentVariableA("MVDM_DEM_SEEK_REPORT_PATH", NULL, 0u) == 0u)
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-DEM-SEEK phase=%u requested=%04X:%04X origin=%02X result=%04X:%04X ax=%04X cf=%u state=copied\r\n",
+        phase, (unsigned int)requested_high, (unsigned int)requested_low,
+        origin, (unsigned int)result_high, (unsigned int)result_low,
+        guest_ax, guest_cf);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
+    mvdm_softpc_write_optional_report("MVDM_DEM_SEEK_REPORT_PATH", message,
+        (DWORD)formatted);
+}
+
 void mvdm_softpc_record_config_done(uint16_t guest_cs)
 {
     /* These are offsets in the exact selected NTIO.SYS map, not a general

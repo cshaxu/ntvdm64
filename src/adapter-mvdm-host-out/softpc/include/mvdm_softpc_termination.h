@@ -63,6 +63,14 @@ void mvdm_softpc_record_dem_read(uint16_t guest_ds, uint16_t guest_dx,
     uint16_t file_offset_low, uint16_t completed_bytes,
     unsigned int phase, unsigned int guest_ax, unsigned int guest_cf);
 
+/* Default-off original DEM file-pointer observation. It receives only the
+ * already-live DOS scalar contract; no host handle, guest pointer or payload
+ * is retained by the observer. */
+void mvdm_softpc_record_dem_seek(uint16_t requested_high,
+    uint16_t requested_low, unsigned int origin, unsigned int phase,
+    uint16_t result_high, uint16_t result_low, unsigned int guest_ax,
+    unsigned int guest_cf);
+
 /* Default-off, fixed-container CONFIG completion observation.  It copies the
  * exact selected NTDOS map's pass byte and 64-byte shell filename through
  * short read leases, then releases them before the original notification BOP

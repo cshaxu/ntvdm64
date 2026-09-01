@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3728 |
+| Documentation records | 3736 |
 | --- | --- |
-| Generated UTC | 2026-09-01T20:25:35Z |
+| Generated UTC | 2026-09-01T21:11:49Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 2d1453d55a1532635c56e669134f99166669aa5faef8280617edba9b297f9342 |
+| STATUS.md | principal control document | f22703fe60ea2c45b1a21a6fb4764b9a554dad1f2c8bf4aabd0a438272413c8c |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1134,7 +1134,15 @@ content-divergent entries.
 | etc/evidence/m0-t354-s3-config-to-commnd-cohort-attribution-001.md | indexed supporting material | 4a12a67d180793e1aa68edc480fda24c2c2a70b534a522699e684e03b654d371 |
 | etc/evidence/m0-t354-s4-command-package-path-admission-enforcement-001.md | indexed supporting material | 0a7d29765bf1be1dfc6a86c6c5d449ca29693301aa6e58221e7abfea6b65d532 |
 | etc/evidence/m0-t355-s1-short-path-permanent-command-observation-001.md | indexed supporting material | e9cf228018b1e802b1ebba67815c66ed56d01c7444a5bebf17eaa12127404dda |
+| etc/evidence/m0-t355-s10-config-eof-seek-observation-001.md | indexed supporting material | c0a30cef3f0ad60d2a77b5fad37ad63e9e1254e99264ec34848480498081c2c1 |
 | etc/evidence/m0-t355-s2-config-multipass-shell-persistence-audit-001.md | indexed supporting material | 462162f5f568fdc74354f44e242711478fa46aa90ce0fcc00c4d19f18d8ec58a |
+| etc/evidence/m0-t355-s3-configdone-observation-relocation-attribution-001.md | indexed supporting material | c937a4a88d6e81c8959f70fedea163d0e913e6c4de21c779dd69b8b446e77814 |
+| etc/evidence/m0-t355-s4-loaded-ntio-configdone-state-observation-001.md | indexed supporting material | 18d43ce1fbf28f1b4dd67857e5e3dfc9e8158678757a7890472b5fcab191a80b |
+| etc/evidence/m0-t355-s5-ntdos-shell-pass-one-execution-cohort-audit-001.md | indexed supporting material | 3c0d3fbca415626f9bd43ed68d26a84394e01448b25b7fd0c040f389a5fc44ef |
+| etc/evidence/m0-t355-s6-config-command-first-store-observation-001.md | indexed supporting material | b820bafdf301c29ed2c19563250d80b5c685dd115d0cbdb8bb1ebd583d75e9cd |
+| etc/evidence/m0-t355-s7-config-command-write-sequence-observation-001.md | indexed supporting material | 976da77e3eeb49dbd2ded35bd880f3f83db77a1392a9cd69398ca95ad69ab153 |
+| etc/evidence/m0-t355-s8-config-temporary-dem-read-observation-001.md | indexed supporting material | 2f70e841c10542490467146aefc7192950b01dfa987149b3b6ec6ddbf0fa0a84 |
+| etc/evidence/m0-t355-s9-config-post-open-seek-cohort-attribution-001.md | indexed supporting material | 6ee5692995ee1b92ecec7dda2340d9497134c57dc1451823c4f013e921f9763d |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
