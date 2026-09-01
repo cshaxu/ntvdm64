@@ -24,12 +24,13 @@ unrelated package remains unclassified. Cross-package interface and perimeter
 ledgers remain shared evidence and are updated only where the active package
 reaches them.
 
-The former XMS, DPMI/DPMI32, Redirector and NetAPI/RAP owner-package
-candidates are closed and therefore do not remain in this candidate-only
-queue. Their closure records remain in `STATUS.md` and `docs/history/`. The next
-vertical objective is deliberately explicit: static package closure and a
-reached BOP are not evidence that `COMMAND.COM`, a DOS child program, or its
-parent return has executed.
+The former guest-artifact, package-path, CPU40/NTDOS bootstrap, XMS,
+DPMI/DPMI32, Redirector and NetAPI/RAP owner-package candidates are closed and
+therefore do not remain in this candidate-only queue. Their closure records
+remain in `STATUS.md` and `docs/history/`. The next vertical objective is
+deliberately explicit: static package closure and a reached BOP are not
+evidence that `COMMAND.COM`, a DOS child program, or its parent return has
+executed.
 
 The detailed proposal, predecessor, delivery and exclusions for every queue
 item are in the [package recovery proposal set](etc/operations/package-recovery-program-20260827.md).
@@ -44,12 +45,9 @@ production route nor an acceptance row.
 
 | Order | Candidate implementation package |
 | --- | --- |
-| 1 | Guest DOS/WOW16 artifact matrix — classify the complete original and source-built DOS/WOW16 media sets as load-only inputs, establish their reproducible executable-relative manifest, and distinguish product assets from historical build intermediates. |
-| 2 | Executable-relative MVDM package-path capacity disposition — retain the original COMMAND configuration capacity contract and decide the explicit product behavior for installations whose selected `mvdm` root cannot fit it. |
-| 3 | CPU40/NTDOS post-`SVC_CMDSETINFO` guest-bootstrap continuity — recover the next complete original guest/machine owner cohort only after source review; no trace-selected BOP leaf repair. |
-| 4 | COMMAND/NTDOS bootstrap runtime continuity — recover the complete original `SVC_CMDSETINFO` return, CPU40/SAS and NTDOS `msinit` owner package before attempting any graphics workload; no trace-selected BOP leaf repair. |
-| 5 | SoftPC graphics-workload integration continuation — after its named bootstrap-runtime predecessor is closed, run the fixed selected CPU40/x86 container through one DOS graphics-mode workload and close the remaining presentation-runtime criterion without changing controller or guest semantics. |
-| 6 | Product release closure |
+| 1 | CPU40/COMMAND post-`SVC_CMDSETINFO` continuation attribution — P06B; select and recover the complete original owner package that proves the already-reached `54:05` return, resumed CPU40 stream, and first NTDOS bootstrap transition before any workload attempt; no trace-selected BOP leaf repair. |
+| 2 | SoftPC graphics-workload integration continuation — only after its named CPU40/COMMAND continuation predecessor proves a reachable selected DOS workload, run the fixed selected CPU40/x86 container through one graphics-mode workload and close the remaining presentation-runtime criterion without changing controller or guest semantics. |
+| 3 | Product release closure |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

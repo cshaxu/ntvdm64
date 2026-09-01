@@ -2,11 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T351 S4.** T351 S1/S2/S3 establish that `54:05` is part of a complete
-original COMMAND/NTDOS/CPU40 scalar-lifecycle package, not a trace-selected
-provider.  S4 performs exactly one immutable fixed-container observation and
-classifies its source-defined boundary; it adds no mapper, BOP result or guest
-behavior.
+**No active M/T/S packet.** M0 T351 is closed: its complete original
+COMMAND/NTDOS scalar-lifecycle source/binding/formal package is closed and
+its one fixed-container observation remains accurately limited to a reached
+`54:05` ingress followed by timeout.  The next packet requires owner admission
+before implementation.
 
 ### M0 T351 S2 — original SCS scalar-lifecycle binding recovery
 
@@ -83,6 +83,10 @@ register fixture as evidence.
 | Exit Criteria | One compliant observation is recorded and classified without a trace-derived implementation; T351 completion is then assessed against its documented source/binding/formal/observation scope. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | Fixed container identity, console ownership, child-only watchdog, media staging, original BOP ingress observation, outer CPU40 return and post-`54:05` guest continuation. |
+
+**S4 closure:** [fixed-container bootstrap observation](etc/evidence/m0-t351-s4-fixed-container-bootstrap-observation-001.md)
+records the sole staged product/media identity, observer result and scope
+limit.  **T351 closure:** [COMMAND/NTDOS bootstrap runtime continuity](history/m0-t351-command-ntdos-bootstrap-runtime-continuity-closure-20260901.md).
 
 ### M0 T350 — Closed CPU40/NTDOS guest-bootstrap continuity
 

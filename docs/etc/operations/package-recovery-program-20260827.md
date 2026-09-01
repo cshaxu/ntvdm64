@@ -327,13 +327,16 @@ owner transfer. The detailed admission and evidence requirements are in
 ## P06B — CPU40/NTDOS post-`54:05` startup continuity
 
 **Predecessor:** the completed P06A crossing and the completed CPU40
-source-owner transfer record. **Purpose:** the fixed runtime already reaches
-the original `50h:11h` through `54:05` startup sequence. This package starts
-at the return from original `cmdSetInfo` and recovers the source-defined
-CCPU40 frame/segment/stack, SAS and BIOS-exchange state, NTDOS `msinit`
-continuation, and any actually reached FDC/INT15/heartbeat/PIT/ICA
-prerequisite. It must reach the next original guest ingress or an exact
-source-owned terminal result; it may not select a trace-driven BOP repair.
+source-owner transfer record. **Current predecessor record:** M0 T351 has
+closed the complete original `cmdSetInfo` scalar binding and one immutable
+observation; that observation again reaches `54:05` but does not establish
+its return. **Purpose:** the fixed runtime already reaches the original
+`50h:11h` through `54:05` startup sequence. This package starts at the return
+from original `cmdSetInfo` and recovers the source-defined CCPU40
+frame/segment/stack, SAS and BIOS-exchange state, NTDOS `msinit` continuation,
+and any actually reached FDC/INT15/heartbeat/PIT/ICA prerequisite. It must
+reach the next original guest ingress or an exact source-owned terminal result;
+it may not select a trace-driven BOP repair.
 
 **S1 admission:** freeze the normal console-owning container and map the
 original call/definition/guest-continuation sequence from
@@ -349,10 +352,11 @@ result, alternate machine/executor, Bochs route or generic WOW scheduler.
 
 **Exit:** the unchanged container executes past `cmdSetInfo` and reaches the
 next original guest ingress or an exact source-owned terminal result, with a
-bounded observation of original CPU/frame and owner sequence. Paired x86/x64
-source graphs compile and link; x64 runtime is claimed only when observed.
-The detailed admission requirements are in [the post-cmdSetInfo startup
-continuity proposal](proposal-cpu40-ntdos-post-cmdsetinfo-continuity-001.md).
+bounded observation of original CPU/frame and owner sequence. The selected
+CPU40/x86 formal graph compiles and links. x64 is not a current acceptance
+row; architecture-neutral mapping-manager rules remain mandatory wherever an
+identity crosses a MVDM boundary. The detailed admission requirements are in
+[the post-cmdSetInfo startup continuity proposal](proposal-cpu40-ntdos-post-cmdsetinfo-continuity-001.md).
 
 ## P07 — Minimal DOS guest execution and controlled return
 
