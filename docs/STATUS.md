@@ -2,12 +2,13 @@
 
 ## Current Work
 
-**Active: M0 T352 S1.** T352 admits the queue-head complete original
+**Active: M0 T352 S2.** T352 admits the queue-head complete original
 CPU40/COMMAND post-`SVC_CMDSETINFO` continuation package.  S1 first maps the
 full original post-`54:05` control and machine cohort to one earliest missing
-or wrong owner edge; no trace-selected service repair is allowed.
+or wrong owner edge; S2 now adds the bounded, state-neutral return observer
+selected by that source review.  No trace-selected service repair is allowed.
 
-### M0 T352 S1 — CPU40/COMMAND post-`SVC_CMDSETINFO` owner admission
+### M0 T352 S1 — Closed CPU40/COMMAND post-`SVC_CMDSETINFO` owner admission
 
 | Field | Record |
 | --- | --- |
@@ -28,6 +29,31 @@ or wrong owner edge; no trace-selected service repair is allowed.
 | Similar-Issue Sweep | COMMAND service return, BOP IP advance, CCPU40 frame/unsimulate, SAS fetch/store, real-mode segment/stack setup, NTDOS BIOS exchange, FDC/INT15, timer/PIT/ICA and session lease teardown. |
 
 **Plan:** [CPU40/NTDOS post-`54:05` startup continuity](etc/operations/proposal-cpu40-ntdos-post-cmdsetinfo-continuity-001.md).
+
+**S1 closure:** [post-`SVC_CMDSETINFO` owner admission](etc/evidence/m0-t352-s1-post-cmdsetinfo-owner-admission-001.md)
+and its [owner ledger](etc/operations/m0-t352-s1-post-cmdsetinfo-owner-ledger.tsv)
+select the source-shaped post-dispatch observation seam.  It makes no runtime
+continuation claim.
+
+### M0 T352 S2 — original `MS_bop_4` return attribution
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T352 S2; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T352 S1's source-backed owner ledger under the owner-approved ordered queue execution. |
+| Objective | Add the smallest source-shaped, state-neutral observation that distinguishes original `CmdDispatch/cmdSetInfo` return from a later CPU40/SAS/guest continuation boundary. |
+| Non-goals | No BOP provider change, guest/media change, synthetic state, new mapping manager, CPU semantics change, CPU30, Bochs, x64 runtime, kernel VDM, CSRSS/BaseSrv, WOW global alias, or trace-selected repair. |
+| Reference Baseline | T351 closures and fixed observation; T352 S1 owner ledger/evidence; selected CPU40/x86 source and formal graph. |
+| Files And ABI Surface | Original `softpc.new/host/src/nt_bop.c`; existing `adapter-mvdm-host-out/softpc` diagnostic recorder and `MVDM-HOST-DIV-164`; no production BOP ABI. |
+| Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, mapping-manager, CPU40-only, architecture and coding rules. |
+| Verification | Compare original/mirror source and register order; focused recorder test if present; fresh selected CPU40/x86 formal build/link; exactly one fixed-container observation after formal identity is frozen; governance/diff review. |
+| Expected Markers | Existing ingress record plus one post-dispatch record with already-live fixed-width selector/service/CS:IP/AX/flags values; no altered guest or CPU result. |
+| Asset Needs | Existing selected original mirrors, adapter recorder, formal Ninja graph, fixed container and immutable staged media; no new import or host-system mutation. |
+| Reporting Requirements | Record source ordering, exact copied values, original/facade/intrusion/new-behavior disposition, build identity, one run result, and every still-unproven successor edge. |
+| Stop Conditions | Any need to read guest memory, retain a guest pointer, change `CmdDispatch`, IP, flags, AX, CPU execution, guest bytes, media, container or introduce an alternate executor pauses for new admission. |
+| Exit Criteria | The marker is source-ordered and registered, focused/formal checks pass, one fixed observation classifies return versus the next source owner, and no semantic BOP change is present. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | Original DEM `MS_bop_0` return, COMMAND `MS_bop_4` return, CPU40 BOP decode/resume, setIP service consumption, scalar facade failure direction, SAS fetch/store and first `msinit` post-SVC stack operations. |
 
 ### M0 T351 S2 — original SCS scalar-lifecycle binding recovery
 
