@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3670 |
+| Documentation records | 3671 |
 | --- | --- |
-| Generated UTC | 2026-09-01T14:31:14Z |
+| Generated UTC | 2026-09-01T14:34:49Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | 10c0bc6b4cbed3b03a769d0a16fc24159fb3596fbce78fa4d58db4853d863ee7 |
+| QUEUE.md | principal control document | 53c3fa0f50488541cbe9694036c85b9c0cc5f898b28158cd0015c3b8eea56a7f |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 0e4b2bc2b07d346828847985d9ee466b482b60bcaad5312f4b3f4ff1da6cc1b4 |
+| STATUS.md | principal control document | 412399f0abe8e77c34e974a9624f8e7b7b5c418a12df74ff60b2da58a0b05866 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1101,6 +1101,7 @@ content-divergent entries.
 | etc/evidence/m0-t346-s3-app-presentation-window-closure-001.md | indexed supporting material | 54ae1b2bcc1c4dea3fa2c65418cdb02735c08edd78d2fc691de9b0bd7b5c156b |
 | etc/evidence/m0-t346-s4-fixed-presentation-observation-001.md | indexed supporting material | 3a0140c7f403a27aff50d6eb6dbb04c85f4430574b47ea82f0100f6b122717a4 |
 | etc/evidence/m0-t346-s4-p2-presentation-noninterference-fixture-001.md | indexed supporting material | b6cb521c47631ec87573473937437c97f817a1d12bef30ad4746bca88e754556 |
+| etc/evidence/m0-t346-s4-p3-command-scalar-alias-owner-transfer-001.md | indexed supporting material | 8f7ba3ca2fc5e5816d56619edb2f589f24139c7eaf0757ed7f47d0572294fdb9 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |

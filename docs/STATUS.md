@@ -208,6 +208,12 @@ leaves that backend selection and the active session state unchanged. This is
 local composition evidence only; it does not meet the still-blocked guest
 graphics-workload criterion.
 
+**S4 P3:** [COMMAND/DEM scalar-alias owner transfer](etc/evidence/m0-t346-s4-p3-command-scalar-alias-owner-transfer-001.md)
+keeps the observed `54:05` ingress out of T346 implementation. It establishes
+that the original registration of `SCS_ToSync`, `SCS_Is_Dos_Binary` and
+`SCS_FDACCESS` is one future mapping-manager lifecycle cohort, not a graphics
+or CONFIG.NT leaf; it does not attribute the current timeout to that cohort.
+
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
 **T343 closure:** [broker/process coordination closure](history/m0-t343-broker-process-cross-process-coordination-closure-20260901.md).
