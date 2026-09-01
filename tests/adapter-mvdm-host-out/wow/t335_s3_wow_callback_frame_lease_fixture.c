@@ -68,7 +68,8 @@ int main(void)
 {
     session owner;
     fixture_memory memory;
-    wow_callback_frame_lease view;
+    wow_callback_frame_lease source_frame;
+    wow_callback_frame_lease callback_frame;
     POPENNT_SUPPORT_TEB teb;
 
     memset(&memory, 0, sizeof(memory));
@@ -84,19 +85,25 @@ int main(void)
         !session_guest_memory_begin(&owner, &memory, read_memory, write_memory) ||
         !session_thread_bind(&owner) ||
         !wow_callback_frame_acquire_vp(0x12340008u, 4u,
-        GUEST_MEMORY_ACCESS_READ, &view) ||
-        view.bytes[0] != 0x42u || wow_callback_frame_release(&view, 1) ||
-        !wow_callback_frame_release(&view, 0)) return 1;
-    if (!wow_callback_frame_acquire_linear(16u, 4u,
-        GUEST_MEMORY_ACCESS_WRITE, &view))
+        GUEST_MEMORY_ACCESS_READ, &source_frame) ||
+        source_frame.bytes[0] != 0x42u ||
+        !wow_callback_frame_acquire_linear(16u, 4u,
+        GUEST_MEMORY_ACCESS_WRITE, &callback_frame)) return 1;
+    /* Original CallBack16 observes its caller VDMFRAME while preparing a
+     * separate writable CBVDMFRAME.  They must be two bounded aliases from
+     * the one session guest-memory lease context, not a replacement mapper
+     * or a retained native SoftPC pointer. */
+    callback_frame.bytes[0] = 0x99u;
+    if (!wow_callback_frame_release(&callback_frame, 1) ||
+        !wow_callback_frame_release(&source_frame, 0) ||
+        memory.bytes[16] != 0x99u || memory.writes != 1u) return 2;
+    if (wow_callback_frame_release(&source_frame, 0)) return 3;
+    if (!wow_callback_frame_acquire_linear(20u, 4u,
+        GUEST_MEMORY_ACCESS_WRITE, &callback_frame))
         return 2;
-    view.bytes[0] = 0x99u;
-    if (!wow_callback_frame_release(&view, 1) || memory.bytes[16] != 0x99u ||
-        memory.writes != 1u || !wow_callback_frame_acquire_linear(20u, 4u,
-        GUEST_MEMORY_ACCESS_WRITE, &view)) return 3;
-    view.bytes[0] = 0x11u;
-    if (!wow_callback_frame_release(&view, 0) || memory.bytes[20] != 0u ||
-        memory.writes != 1u) return 4;
+    callback_frame.bytes[0] = 0x11u;
+    if (!wow_callback_frame_release(&callback_frame, 0) ||
+        memory.bytes[20] != 0u || memory.writes != 1u) return 4;
     if (!session_thread_unbind(&owner)) return 5;
     session_guest_memory_end(&owner);
     return session_dispose(&owner) ? 0 : 6;
