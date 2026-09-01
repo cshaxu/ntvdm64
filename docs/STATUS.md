@@ -488,7 +488,7 @@ and
 
 ## Active Packet
 
-**Active: M0 T355 S11 — original CONFIG post-seek guest preparation audit.**
+**Active: M0 T355 S12 — original CONFIG temporary-CDS IOCTL observation.**
 
 ### M0 T355 S1 — Closed short-path permanent COMMAND fixed-container verification
 
@@ -762,6 +762,31 @@ is selected.
 | Exit Criteria | The entire post-seek/pre-read guest cohort has no unowned immediate edge and selects one bounded successor seam or exact original terminal. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `doconf`, `count`, `config_size`, `confbot`, `pararound`, `tempcds`, CDS relocation, memory bounds, `DS/ES`, `AH=3Fh`, `CX`, `AX` and `conferr`. |
+
+**S11 closure:** [CONFIG post-seek guest-preparation audit](etc/evidence/m0-t355-s11-config-post-seek-guest-preparation-audit-001.md)
+proves that `pararound` and relocation are guest-local, but original
+`tempcds` calls `AH=44h/AL=08` removable-media IOCTL before the read.  The next
+source-owned seam is the whole existing `SVC_DEMIOCTL` owner path.
+
+### M0 T355 S12 — Active original CONFIG temporary-CDS IOCTL observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S12; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T355 S11's original `tempcds` source-boundary audit under the owner-approved ordered queue execution. |
+| Objective | Add one default-off scalar observation at original `demIOCTL`/`demIoctlChangeable` and make one fixed-container observation sufficient to classify the CONFIG temporary-CDS removable-media request before read. |
+| Non-goals | No IOCTL/drive-policy result rewrite, parser/firmware change, guest/media mutation, mapper, CPU/machine change, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics claim. |
+| Reference Baseline | T355 S10 successful EOF seek; T355 S11 original `tempcds -> AH=4408 -> SVC_DEMIOCTL` route proof; T355 S8 absent read. |
+| Files And ABI Surface | Original `dos/dem/demioctl.c`, existing scalar CPU accessors and a default-off durable report helper only. No guest pointer, host drive path or data payload escapes. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original source-order review; focused default-off scalar report fixture; formal CPU40/x86 link; exactly one fixed-container observation; governance/export and diff review. |
+| Expected Markers | Original subfunction, drive number, result `AX/DX` and carry classify whether temporary-CDS preparation reaches its guest-local continuation or exact error path. |
+| Asset Needs | Existing selected mirrors, formal graph and immutable `O:\ntvdm` container; no new import, guest asset or host-system mutation. |
+| Reporting Requirements | Record only copied scalar results at original owner boundaries; do not infer a repair from timeout or inspect host-drive contents. |
+| Stop Conditions | Any need to alter a result, special-case a drive/path, inspect guest payload, use another container or make a second runtime observation pauses for a new admission. |
+| Exit Criteria | One valid IOCTL observation selects exactly one source-owned successor or terminal without a fabricated host capability result. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `tempcds`, `AH=44h`, `AL=08`, `ioctl_removable_media`, `SVC_DEMIOCTL`, `demIOCTL`, `demIoctlChangeable`, `BL`, `AX`, `DX`, carry and fixed-drive selection. |
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 
