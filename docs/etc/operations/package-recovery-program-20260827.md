@@ -369,9 +369,12 @@ not an execution claim.
 
 ## P08 — Minimal vertical-slice integration closure
 
-**Predecessor:** P07. **Delivery:** fixed x86/x64 positive/negative matrix,
-including the declared DOS-program execution and controlled-return result,
-plus a reversion sweep. **Exit:** no unowned bypass in the completed first
+**Predecessor:** P07. **Current rebaseline:** T338 crossed the original
+configuration package only from the immutable short-root container and then
+reached original `50:3D -> demExitVDM`. **Delivery:** first distinguish the
+two original guest predecessors of that terminal service, recover only the
+earliest complete owner cohort, then run the fixed x86/x64 matrix with one
+short-root observation. **Exit:** no unowned bypass in the completed first
 slice; a compiled or host-only package check does not substitute for the
 required x86 guest-runtime observation.
 

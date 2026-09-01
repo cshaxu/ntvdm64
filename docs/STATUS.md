@@ -2,11 +2,33 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T338 closed through its narrow original
-configuration-capacity owner transfer. The next candidate is Minimal
-vertical-slice integration closure; it requires fresh owner admission.
+**Active: M0 T339 S1.** It establishes the complete original guest-predecessor
+contract for T338's short-root `50:3D -> demExitVDM` boundary before selecting
+any recovery.
 
 ## Active Packet
+
+### M0 T339 S1 — Original `50:3D` guest-predecessor contract
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T339 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 1, admitted under the standing owner direction to execute the ordered queue after T338's closure. |
+| Objective | Map both original guest predecessors of reached `50:3D -> demExitVDM` and identify the smallest source-shaped owner cohort that can distinguish them. |
+| Non-goals | No BOP/provider patch, guest or media rewrite, device/FDC/INT15 work, guest loader, guessed drive policy, alternate CPU/executor, Bochs route, kernel/CSRSS recreation, raw identity or new child lifecycle. |
+| Reference Baseline | T337 package composition, T338 S1–S3, current original `demExitVDM` source attribution, selected CPU40 graph and short-root immutable stage. |
+| Files And ABI Surface | Original guest `sysinit1.asm`/COMMAND `init.asm`, DEM `demExitVDM` and dispatch, original file/version/EXEC contracts, existing session mapping and media bindings. |
+| Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, architecture, coding, mapping-manager and paired-build rules. |
+| Verification | Complete definition/caller/failure walk, source-identity and current-build review, governance and diff checks; no runtime retry in S1. |
+| Expected Markers | Two caller contracts, their discriminating inputs, one earliest owner/cohort or explicit unobservable boundary. |
+| Asset Needs | Selected original MVDM mirrors, current formal graph and recorded short-root observation; no new assets. |
+| Reporting Requirements | Separate source fact from runtime inference; retain original failure and ordering; record every rejected recovery rung. |
+| Stop Conditions | A need for synthetic guest/device success, media change, a new mapper/executor, unreviewed import, host-drive policy or a different owner package requires re-admission. |
+| Exit Criteria | Both guest callers and immediate host/service dependencies have one original owner/disposition; S2 can select at most one complete original cohort. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | `sysinit1` command bootstrap, COMMAND initialization/version checks, DEM terminal service, file/drive/COMSPEC paths, configuration and Base VDM inputs. |
+
+**Plan:** [M0 T339 plan](etc/operations/m0-t339-minimal-vertical-slice-integration-closure-plan-001.md). T339 starts from T338's closed short-root `50:3D` transfer and does not reopen configuration capacity, FDC/INT15, or BOP leaf work.
 
 ### M0 T338 — Minimal DOS guest execution and controlled return
 
