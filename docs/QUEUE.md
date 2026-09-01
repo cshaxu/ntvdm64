@@ -45,9 +45,8 @@ production route nor an acceptance row.
 
 | Order | Candidate implementation package |
 | --- | --- |
-| 1 | Conditional CPU40/NTDOS permanent COMMAND bootstrap runtime verification — only after the owner supplies the unchanged package below a Windows path whose public short spelling satisfies the original 63-visible-character `commnd` limit, run one fixed-container observation of the already source-owned DOS-name, file-open and image-handoff cohort; no trace-selected DEM leaf repair. |
-| 2 | SoftPC graphics-workload integration continuation — only after its named permanent-COMMAND bootstrap predecessor proves a reachable selected DOS workload, run the fixed selected CPU40/x86 container through one graphics-mode workload and close the remaining presentation-runtime criterion without changing controller or guest semantics. |
-| 3 | Product release closure |
+| 1 | SoftPC graphics-workload integration continuation — only after its named permanent-COMMAND bootstrap predecessor proves a reachable selected DOS workload, run the fixed selected CPU40/x86 container through one graphics-mode workload and close the remaining presentation-runtime criterion without changing controller or guest semantics. |
+| 2 | Product release closure |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

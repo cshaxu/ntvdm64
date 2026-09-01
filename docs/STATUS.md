@@ -488,9 +488,53 @@ and
 
 ## Active Packet
 
-**No active M/T/S packet.** T354 is closed by the
-[permanent COMMAND package-path closure](history/m0-t354-cpu40-ntdos-permanent-command-package-path-closure-20260901.md).
-The next product package requires owner admission.
+**Active: M0 T355 S2 — original CONFIG multi-pass `SHELL` persistence audit.**
+
+### M0 T355 S1 — Closed short-path permanent COMMAND fixed-container verification
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S1; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Owner explicitly admitted the queue head with “准入” after T354's closed original package-path admission enforcement. |
+| Objective | Create one owner-approved disposable output package at `O:\ntvdm`, validate its unchanged formal product/media identity against the original NTDOS `commnd` contract, then make exactly one fixed-container observation of the original permanent `COMMAND.COM` bootstrap. |
+| Non-goals | No use of an existing host directory, drive alias, `subst`, junction, media mutation after staging, guest/firmware modification, DEM/BOP special case, mapper, CPU/machine alteration, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics claim. |
+| Reference Baseline | T354 closure; unchanged original `cmdconf.c` and NTDOS `commnd` contract; formal CPU40/x86 product; current long workspace path is expressly inadmissible. |
+| Files And ABI Surface | No production source change is expected. The selected package's executable/media manifest, existing app package-layout admission, original COMMAND/DEM bootstrap and fixed observer report are evidence surfaces only. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Record the output path and hashes; use app's exact path admission; verify unchanged executable/media identity; formal graph manifest review; run one non-debug fixed-container observation only after admission succeeds; governance/export and diff review. |
+| Expected Markers | Admission succeeds; original generated `shell=` value is within 63 visible bytes; one durable report attributes the permanent command image open/handoff or one further original terminal. |
+| Asset Needs | The owner-approved empty `O:\ntvdm` output root, existing formally linked CPU40/x86 executable and selected immutable staged media. The standard staging script creates the disposable package once and refuses to overwrite it. |
+| Reporting Requirements | Record the exact output path, public short spelling, computed original shell length, executable/media hashes, one run outcome and any source-owned successor; distinguish environment admission from guest execution. |
+| Stop Conditions | An occupied output root, a path exceeding the original limit, any request to mutate media after staging, a second run, timeout-driven repair, or a need to alter a source/ABI pauses for a new admission. |
+| Exit Criteria | One valid immutable package has passed app admission and produced exactly one fixed-container observation, or the supplied asset is rejected with exact source-compatible evidence. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `GetShortPathNameA`, app media-root derivation, original `cmdconf.c` format, NTDOS `commnd`, package staging manifest, COMMAND/DEM open result and observer-container identity. |
+
+**S1 closure:** [short-path permanent COMMAND observation](etc/evidence/m0-t355-s1-short-path-permanent-command-observation-001.md)
+proves that the package-path admission succeeds at `O:\ntvdm`, but the one
+unchanged observation still opens original default `C:\COMMAND.COM`. This
+selects the original NTDOS multi-pass `SHELL` persistence cohort, not a path
+projection or DEM repair.
+
+### M0 T355 S2 — Active original CONFIG multi-pass `SHELL` persistence audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S2; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T355 S1's single valid short-path observation under the owner-approved ordered queue execution. |
+| Objective | Reconstruct the complete original `doconf -> organize -> multi_pass -> trys -> commnd -> dfil` cohort and identify why a valid source-generated `shell=` value did not replace the default permanent command pathname. |
+| Non-goals | No second runtime observation, path projection, app/package change, guest/firmware change, DEM/BOP repair, mapper, CPU/machine change, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC or graphics claim. |
+| Reference Baseline | T354 source path-contract closure; T355 S1 valid `O:\ntvdm` package evidence with a 60-character generated shell value, valid transformed config file, and unchanged observed `C:\COMMAND.COM` failure. |
+| Files And ABI Surface | Original `sysinit1.asm`, `sysinit2.asm`, `sysconf.asm`, original `cmdconf.c` and exact selected guest binaries/maps only. No production ABI change. |
+| Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original definition/caller/data-lifetime audit; original-versus-mirror and source-versus-staged identity review; bounded binary/map symbol review; existing S1 evidence review; governance/export and diff review. No build or runtime execution. |
+| Expected Markers | An owner ledger identifies each pass, `multi_pass_id` state, configuration-buffer lifetime, `SHELL` parser reachability, `commnd` write/read locations, and one bounded source-shaped next disposition. |
+| Asset Needs | Existing original mirrors, maps, staged manifest and S1 durable reports; no new media, source import or host mutation. |
+| Reporting Requirements | Separate source control-flow facts, selected binary identity and runtime facts; explain all plausible conditions by which `trys` is skipped, overwritten or not reached; do not infer a repair solely from the exception code. |
+| Stop Conditions | Need for a new observation, guest memory/state recorder, source/ABI change, third-party media, DEM/BOP result adjustment or an unowned machine semantic pauses for new admission. |
+| Exit Criteria | The full reached multi-pass cohort has owner/disposition evidence and selects exactly one minimal source-shaped next S or records an exact source terminal; no unowned branch remains in the selected explanation. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `config`, `confbot`, `org_count`, `multi_pass_id`, `organize`, `trys`, `commnd`, `command_line`, `dfil`, NTDOS load/map identity and source-defined configuration pass ordering. |
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 
