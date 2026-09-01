@@ -8,17 +8,19 @@
 #include <windows.h>
 
 #include "nt.h"
+#include "mvdm_softpc_termination.h"
 #include "session/session.h"
 
 static void mvdm_wow_private_product_unavailable(void)
 {
     session *owner = session_thread_current();
 
-    if (owner != NULL) {
+    if (owner != NULL)
         session_record_mechanical_resume_status(owner,
             SESSION_MECHANICAL_STATUS_BACKEND_UNAVAILABLE);
-        (void)session_terminate_current((uint32_t)ERROR_CALL_NOT_IMPLEMENTED);
-    }
+    mvdm_softpc_set_termination_origin("wow:private-hard-error");
+    (void)mvdm_softpc_terminate_current_session(0u,
+        (uint32_t)ERROR_CALL_NOT_IMPLEMENTED);
     SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
 }
 

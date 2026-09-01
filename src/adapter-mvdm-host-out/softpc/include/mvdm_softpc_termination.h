@@ -11,6 +11,11 @@ struct _EXCEPTION_POINTERS;
 int mvdm_softpc_terminate_current_session(uint32_t vdm_for_wow,
     uint32_t completion_code);
 
+/* Default-off diagnostic context for the existing selected termination
+ * boundary.  The string is a static source-entry label only; it neither
+ * changes the completion code nor escapes the current host thread. */
+void mvdm_softpc_set_termination_origin(const char *origin);
+
 /* Diagnostic-only companion to the original top-level VDM exception filter.
  * It records the original exception identity without changing the filter's
  * result, selected termination path, or guest/CPU state. */

@@ -7,17 +7,19 @@
 
 #include <windows.h>
 
+#include "mvdm_softpc_termination.h"
 #include "session/session.h"
 
-static void mvdm_debugger_product_unavailable(void)
+static void mvdm_debugger_product_unavailable(const char *origin)
 {
     session *owner = session_thread_current();
 
-    if (owner != NULL) {
+    if (owner != NULL)
         session_record_mechanical_resume_status(owner,
             SESSION_MECHANICAL_STATUS_BACKEND_UNAVAILABLE);
-        (void)session_terminate_current((uint32_t)ERROR_CALL_NOT_IMPLEMENTED);
-    }
+    mvdm_softpc_set_termination_origin(origin);
+    (void)mvdm_softpc_terminate_current_session(0u,
+        (uint32_t)ERROR_CALL_NOT_IMPLEMENTED);
     SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
 }
 
@@ -34,7 +36,7 @@ void ModuleLoad(char *module_name, char *path_name, unsigned short segment,
     (void)path_name;
     (void)segment;
     (void)length;
-    mvdm_debugger_product_unavailable();
+    mvdm_debugger_product_unavailable("debugger:ModuleLoad");
 }
 
 void ModuleSegmentMove(char *module_name, char *path_name,
@@ -44,19 +46,19 @@ void ModuleSegmentMove(char *module_name, char *path_name,
     (void)path_name;
     (void)old_selector;
     (void)new_selector;
-    mvdm_debugger_product_unavailable();
+    mvdm_debugger_product_unavailable("debugger:ModuleSegmentMove");
 }
 
 void ModuleFree(char *module_name, char *path_name)
 {
     (void)module_name;
     (void)path_name;
-    mvdm_debugger_product_unavailable();
+    mvdm_debugger_product_unavailable("debugger:ModuleFree");
 }
 
 void DBGDispatch(void)
 {
-    mvdm_debugger_product_unavailable();
+    mvdm_debugger_product_unavailable("debugger:DBGDispatch");
 }
 
 unsigned long DbgPrompt(char *prompt, char *response,
@@ -65,6 +67,6 @@ unsigned long DbgPrompt(char *prompt, char *response,
     (void)prompt;
     (void)response;
     (void)maximum_response_length;
-    mvdm_debugger_product_unavailable();
+    mvdm_debugger_product_unavailable("debugger:DbgPrompt");
     return 0u;
 }

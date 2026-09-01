@@ -10,6 +10,9 @@
 
 #include "mvdm_guest_location.h"
 
+static __declspec(thread) const char *mvdm_softpc_termination_origin =
+    "unattributed";
+
 static char *mvdm_softpc_append_hex(char *output, ULONG_PTR value,
     unsigned int digits)
 {
@@ -107,10 +110,24 @@ static void mvdm_softpc_write_direct_ram_observation(void)
         message, (DWORD)formatted);
 }
 
+void mvdm_softpc_set_termination_origin(const char *origin)
+{
+    mvdm_softpc_termination_origin = origin != NULL ? origin : "unattributed";
+}
+
 int mvdm_softpc_terminate_current_session(uint32_t vdm_for_wow,
     uint32_t completion_code)
 {
+    char message[192];
+    int formatted;
+
     (void)vdm_for_wow;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-SESSION-TERMINATION origin=%s code=0x%08lX\r\n",
+        mvdm_softpc_termination_origin, (unsigned long)completion_code);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_optional_report("MVDM_SESSION_TERMINATION_REPORT_PATH",
+            message, (DWORD)formatted);
     return session_terminate_current(completion_code);
 }
 

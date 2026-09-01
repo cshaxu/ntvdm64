@@ -488,9 +488,72 @@ and
 
 ## Active Packet
 
-**No active M/T/S packet.** S30 is closed; the next packet requires explicit
-admission from the queue rather than an implicit continuation of lifecycle
-diagnostics.
+### M0 T355 S31 — Closed original `0x78` entry-result attribution
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S31; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted after S30's verified source-owned heartbeat cleanup under the standing owner direction for ordered source-first CPU40/x86 recovery. |
+| Objective | Reconstruct the complete original source route that selects the returned `0x78` result, from all reached `VdmExitCode`/original-entry result writers through `host_terminate` or normal return, and select at most one source-owned successor. |
+| Non-goals | No BOP/DEM/COMMAND result fabrication, guest/media/firmware mutation, CPU/CCPU/SAS/device semantic change, new worker, force-unbind, mapper change, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC, graphics or retry. |
+| Reference Baseline | S30 proves session disposal succeeds: the fixed CPU40/x86 container returns `0x78`, not app-owned disposal `0x48`. The result is therefore an original-entry outcome rather than a retained original worker binding. |
+| Files And ABI Surface | Original `softpc.new/{obj.vdm,host/src,base}` result/termination callers, existing bounded execution bridge and app result propagation. No new public or guest ABI. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original definition/caller/control-flow audit; selected formal graph/import review; documentation governance/export and diff review. No runtime observation or production change in S31. |
+| Expected Markers | One source ledger gives every reached writer/return path a physical identity, condition, selected-build status and owner disposition; it either selects one bounded source-shaped recovery S32 or records an exact original terminal. |
+| Asset Needs | Existing original mirrors, S30 report/evidence, selected CPU40/x86 graph and source index only; no asset import, guest rebuild or host-system mutation. |
+| Reporting Requirements | Distinguish raw `VdmExitCode`, original `main` return, app result propagation and observer exit; do not infer a failure cause from the number alone. |
+| Stop Conditions | Any need to alter a guest byte, manufacture a success, add a diagnostic/fixture or run a second container observation pauses for a separately admitted successor. |
+| Exit Criteria | The selected original `0x78` route has no unowned immediate source edge and names only one minimal recovery successor, or proves a source-owned terminal with no permitted recovery. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `VdmExitCode`, `VDMForWOW`, `host_terminate`, `TerminateVDM`, `terminate`, `host_main`, original `main`, application result propagation and all selected direct reset/error terminals. |
+
+**S31 closure:** [original `0x78` entry-result attribution](etc/evidence/m0-t355-s31-original-0x78-entry-result-attribution-001.md)
+proves that the observed result is a selected session controlled-stop rather
+than normal `main` return or S30's disposal failure.  It deliberately does
+not guess which linked `ERROR_CALL_NOT_IMPLEMENTED` entry was reached.
+
+### M0 T355 S33 — Active original debugger dispatch package audit
+
+**Active: M0 T355 S33.**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S33; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by S32's exact source attribution under the standing owner direction for ordered source-first CPU40/x86 recovery. |
+| Objective | Audit the complete original `mvdm-host/dbg` dispatch package reached through `MS_bop_6 -> DBGDispatch`: source ownership, selected functions, VDM-frame/SoftPC dependencies, debugger/CSR transport boundary, and original success/failure directions. Produce one whole-package recovery disposition before changing any debugger behavior. |
+| Non-goals | No debugger provider, synthetic reply, BOP-specific success, guest/firmware/media mutation, CPU/CCPU/SAS/device/timer change, mapper redesign, CPU30, Bochs, x64, BaseSrv/CSRSS reconstruction, WOW, EXEC, graphics or retry. |
+| Reference Baseline | S32 fixed observation: `0x00000078` is `debugger:DBGDispatch`, reached from original `MS_bop_6`. |
+| Files And ABI Surface | Original `mvdm-host/dbg` and its selected OpenNT declarations/callers; existing debugger, adapter-softpc, adapter-win32 and session boundaries as evidence only. No product ABI change. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Definition/caller/import audit across selected original source baselines; formal graph membership review; documentation governance/export and diff review. No runtime execution and no production behavior change. |
+| Expected Markers | A package ledger separates functions that can retain original source shape from private debugger/CSR transport operations, identifies every required adapter owner, and selects either a bounded source-shaped recovery S34 or an exact original unavailable disposition. |
+| Asset Needs | Existing original mirrors and source indexes only; no new source import, guest rebuild, host-system mutation or new fixture. |
+| Reporting Requirements | Distinguish the original `DBGDispatch` frame contract from its individual debugger modes; identify static dependencies rather than inferring behavior from the single runtime terminal. |
+| Stop Conditions | A need to change `DBGDispatch`, add any debugger transport, revive CSRSS/CSR, alter a BOP result, or vary the fixed execution container pauses for a new admission. |
+| Exit Criteria | One source ledger covers the whole reached debugger package, establishes the minimum viable non-debug behavior and names any next owner package; it must not claim that the debugger product is recovered. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `MS_bop_6`, `DBGDispatch`, `ModuleLoad`, `ModuleSegmentMove`, `ModuleFree`, `DbgPrompt`, VDM-stack frame access, `DbgInit`, `NtRaiseHardError`, debugger/CSR imports and session controlled-stop provenance. |
+
+### M0 T355 S32 — Closed controlled-stop provenance observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S32; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by S31's complete static attribution ledger under the standing owner direction for ordered source-first CPU40/x86 recovery. |
+| Objective | Add a default-off, source-entry provenance record at the existing controlled session-termination boundary and use one unchanged fixed-container observation to identify the actual `0x78` caller. |
+| Non-goals | No BOP/DEM/COMMAND result fabrication; no guest/media/firmware mutation; no CPU/CCPU/SAS/device/timer behavior change; no source-provider replacement, mapper change, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC, graphics or retry. |
+| Reference Baseline | S30 successful disposal result `0x78`; S31 proves it is a non-local controlled stop with several static `ERROR_CALL_NOT_IMPLEMENTED` candidates. |
+| Files And ABI Surface | Existing session termination bridge and the selected adapter terminal callers only; the record carries copied source ID and completion code and introduces no guest or public ABI. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Source/ordering review; default-off report-path inspection; formal CPU40/x86 link; one unchanged fixed-container observation; documentation governance/export and diff review. |
+| Expected Markers | Met: the fixed result names `debugger:DBGDispatch` plus `120`; without the explicit report-path environment variable, the terminal writes no record and preserves the prior completion path. |
+| Asset Needs | Existing original mirrors, formal graph, fixed `O:\\ntvdm` stage and observer; no new source import, guest rebuild or host-system mutation. |
+| Reporting Requirements | Distinguish selected source-entry identity from the generic completion code; prove that writing the record happens before the existing `longjmp` without modifying the selected terminal. |
+| Stop Conditions | A need to change the caller's source result, to recover the identified provider before attribution, to add a second diagnostic class, or to alter guest/machine state pauses for a new admission. |
+| Exit Criteria | Met: exactly one fixed observation attributes `0x78` to original `MS_bop_6 -> DBGDispatch` and selects the whole debugger dispatch cohort; no inferred repair is implemented in this S. See [S32 evidence](etc/evidence/m0-t355-s32-controlled-stop-provenance-observation-001.md). |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `VdmExitCode`, original `host_terminate`, all `session_terminate_current(120)` callers, unavailable adapters, observer report isolation and ordinary-return/exception reporters. |
 
 ### M0 T355 S29 — Closed original heartbeat shutdown reachability audit
 

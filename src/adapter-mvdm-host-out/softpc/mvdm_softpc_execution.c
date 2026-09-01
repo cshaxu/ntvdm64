@@ -117,6 +117,7 @@ int mvdm_softpc_execution_run_original_entry(session *owner, int argc,
     /* Do not split or reproduce the historical entry sequence here.  The
      * original `ntvdm.c` entry owns timer, environment, NLS, host_main and
      * eventual source-shaped return ordering. */
+    mvdm_softpc_set_termination_origin("original-entry-unattributed");
     result = mvdm_softpc_original_entry(argc, argv);
     *result_out = result;
     session_record_mechanical_resume_status(owner,
