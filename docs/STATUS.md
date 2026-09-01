@@ -4,8 +4,31 @@
 
 ## Active Packet
 
-**No active M/T/S packet.** M0 T334 is closed.  The next admission begins the
-queued WOW32/Win16 owner package from its original source/ABI boundary.
+### M0 T335 S2 — WOW32 thunk/frame callback contract
+
+**Active: M0 T335 S2**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T335 S2; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | T335/S1 source/profile closure under the owner’s standing direction to execute ordered queue packages. |
+| Objective | Establish the complete original `CallBack16`/`VDMFRAME` ABI, lifetime, machine postcondition and failure contract for the twelve-body WOW32 thunk/frame/structure cohort before enabling any body. |
+| Non-goals | No generic Win16 API, GUI/USER/GDI, WOWEXEC/CSRSS/kernel-VDM recreation, BOP leaf patch, new mapper, guest-media change, arbitrary guest load, raw native identity or Bochs route. |
+| Reference Baseline | T335/S1 source/profile rebaseline; original `wow32/wcall16.c`, cohort peers and interface-family ledger; CCPU40 SoftPC/monitor/session mapping contracts. |
+| Files And ABI Surface | `CallBack16`, `CBVDMFRAME`/`VDMFRAME`, current task frame/stack fields, `SETVDMSTACK`, `host_simulate`, guest memory lease boundaries and source callers across the twelve-body cohort. |
+| Applicable Rules | Execution, source policy, mirror/overlay, architecture, coding, documentation, session mapping and CCPU40-only machine rules. |
+| Verification | Original declaration/definition/caller/field walk; existing adapter declaration/implementation audit; explicit lifetime/postcondition/failure ledger; source-selection review and documentation gates. |
+| Expected Markers | One typed source-shaped transaction contract with a single owner for guest ranges, CPU execution and continuation; no callback scheduler, raw pointer or business semantics in an adapter. |
+| Asset Needs | Existing source mirrors, adapter/session code and current CCPU40 formal graph; no new guest media or private host service. |
+| Reporting Requirements | Distinguish a contract that is defined and mechanically composable from an enabled Win16 route; name every unresolved monitor/broker/guest prerequisite. |
+| Stop Conditions | The required contract would need a generic adapter, raw host pointer/HANDLE, second mapping manager, changed CCPU semantics, invented callback scheduler or private product-shell recreation. |
+| Exit Criteria | A complete source/ABI/failure map proves the smallest legal same-shaped binding or exact unavailable result for every `CallBack16` transaction element, and selects the next owner implementation step without enabling a leaf service. |
+| Original Owner Request | Execute the queue in single-person dual-role mode, use original source first, minimize mirror divergence and keep adapters narrow. |
+| Similar-Issue Sweep | WOW32/FAX hosts, selected manifest versus inactive forms, callbacks, frame layouts, CCPU/SAS/monitor calls, command broker calls, guest/resource identity, public Win32, private USER/GDI, VDD, cross-process and guest-media boundaries. |
+
+**Plan:** [M0 T335 WOW32/Win16 owner package recovery](etc/operations/m0-t335-wow32-win16-owner-package-recovery-plan-001.md). **S1 closed:** [current source/ABI/profile rebaseline](etc/evidence/m0-t335-s1-wow-source-abi-profile-rebaseline-001.md) and its [315-row mirror/profile ledger](etc/operations/m0-t335-s1-wow-source-profile-ledger.tsv). **S2 active:** callback/frame contract only; no provider implementation is admitted yet.
+
+**No other active M/T/S packet.** M0 T334 is closed below.
 
 ### M0 T334 — NetAPI/RAP Redirector network-boundary recovery
 
