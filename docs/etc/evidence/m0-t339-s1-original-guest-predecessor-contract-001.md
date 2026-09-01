@@ -2,9 +2,10 @@
 
 ## Result
 
-The reached `50:3D -> demExitVDM` host terminal has two original guest
-predecessors.  The fixed short-root observation proves that original
-configuration expansion ran, but it does not select either predecessor.
+The reached `50:3D -> demExitVDM` host terminal has two direct original guest
+callsites, and one of them has more than one predecessor family. The fixed
+short-root observation proves that original configuration expansion ran, but
+it does not select a callsite or predecessor family.
 No product or guest change is admitted by this packet.
 
 The companion [ledger](../operations/m0-t339-s1-guest-predecessor-contract-ledger.tsv)
@@ -35,7 +36,7 @@ so the observed run has crossed this configuration cohort.  It therefore
 does not justify an invented root-level `COMMAND.COM` or a different guest
 drive policy.
 
-## The two original guest callers
+## Direct callsites and original predecessors
 
 1. `sysinit1.asm` uses the configured `commnd` value to open and EXEC the
    initial command interpreter.  Any failure of that open/EXEC sequence
@@ -48,6 +49,27 @@ drive policy.
    DOS implementation returns the current PDB version word, so the relevant
    inputs are the NTDOS-created PDB and the matched NTDOS/COMMAND binary
    pair—not a host BOP result.
+3. `sysinit1.asm::stall` is not only the file/EXEC terminal. Its original
+   `mem_err` predecessors in `sysinit1.asm`, `sysinit2.asm`, and
+   `sysconf.asm` print the guest memory error and then jump to `stall`.
+   They include command allocation/fit checks and CONFIG.SYS device-load or
+   break-address allocation paths. These are a third source family and need
+   a guest-memory/allocation contract before an initial COMMAND recovery can
+   be selected.
+
+The original memory input is also mapped. `sysinit1.asm` invokes BIOS BOP
+`12h` before it establishes `memory_size`; the original SoftPC BIOS
+`memory_size()` reads the guest BDA `MEMORY_VAR`, which original `reset.c`
+initializes from `host_get_memory_size()` (the selected host header supplies
+640 KiB). That machine/firmware contract constrains the initial-command fit
+test and allocation limits. It remains an owner-specific candidate, not a
+reason to invent a DEM service or alter guest media.
+
+The selected normal `config.nt` also contains `dos=high, umb` and
+`device=%SystemRoot%\system32\himem.sys`; the staged `himem.sys` exists.
+Consequently SysConf's original device-load and break-address allocation paths
+are source-valid. The current trace does not state whether either was taken,
+so neither configuration removal nor a memory repair is selected yet.
 
 The selected source definitions declare DOS version 5.00 in
 `dos/v86/inc/versiona.inc`.  The current stage's `NTDOS.SYS`
@@ -72,8 +94,9 @@ root drive or loader.
 
 ## S2 admission boundary
 
-S2 may select one smallest original cohort only after reviewing the staged
-NTDOS/COMMAND identity and the original guest file/EXEC and PDB-version
-contracts.  It may recover an existing original binding through a same-shaped
-adapter, but may not introduce a BOP leaf, modify guest media, invent a drive
-mapping, or synthesize a successful EXEC result.
+S1's static map is now complete. S2 may select one smallest original cohort
+only after obtaining a non-mutating, source-shaped discriminator among the
+staged NTDOS/COMMAND identity, guest file/EXEC, PDB-version, and
+memory/allocation contracts. It may recover an existing original binding
+through a same-shaped adapter, but may not introduce a BOP leaf, modify guest
+media, invent a drive mapping, or synthesize a successful EXEC result.

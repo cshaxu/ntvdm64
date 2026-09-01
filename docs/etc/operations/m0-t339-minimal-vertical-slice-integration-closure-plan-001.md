@@ -15,36 +15,35 @@ a guest-loader rewrite or a new DOS-drive policy.
 - T338 proved the original `cmdconf.c` 64-byte system-root capacity condition.
   Its byte-identical 38-character stage crosses the configuration cohort and
   reaches `50:3D -> demExitVDM`.
-- `demExitVDM` has two current original guest callers: initial NTDOS
-  `sysinit1.asm::stall` after command-file failure, and COMMAND `init.asm`
-  after its own started-path version rejection. The current external
-  observation does not distinguish them.
+- `demExitVDM` has two direct original guest callsites: initial NTDOS
+  `sysinit1.asm::stall`, and COMMAND `init.asm` after its own started-path
+  version rejection. `stall` also has original file/EXEC *and* `mem_err`
+  predecessors. The current external observation does not distinguish them.
 
 ## S plan
 
 ### S1 — Original `50:3D` guest-predecessor contract
 
 Build the complete source/ABI/failure map from each original guest caller of
-`SVC_DEMEXITVDM` through its immediate NTDOS/COMMAND file, version, DEM and
-host-path inputs. Classify which facts can distinguish the two callers using
-an existing source-shaped mechanism, and name the smallest complete owner
-cohort. Do not change product, guest media, BOP routing, devices or host
-drive policy.
+`SVC_DEMEXITVDM` through its immediate NTDOS/COMMAND file, version, memory,
+DEM and host-path inputs. Classify which facts can distinguish the callsites
+and `stall` predecessor families using an existing source-shaped mechanism,
+and name the smallest complete owner cohort. Do not change product, guest
+media, BOP routing, devices or host drive policy.
 
-**Closed.** The source/build identity walk records both guest callers in the
-S1 ledger. The staged NTDOS/COMMAND pair matches the retained source-built
-hashes and the selected 5.00 source pair, so a binary-version mismatch is not
-the admitted recovery cohort. S2 owns the original initial NTDOS command
-bootstrap.
+**Closed.** The source/build identity walk rejects a mixed NTDOS/COMMAND
+version pair and classifies the additional original `mem_err -> stall` family,
+including its BIOS BOP 12h and selected configuration-device inputs. S2 must
+obtain a passive source-shaped discriminator before selecting a cohort.
 
 ### S2 — Earliest complete original owner recovery
 
-Recover only the S1-proven earliest incomplete original binding in the initial
-`ProcessConfig -> SHELL -> initial COMMAND EXEC` cohort. Prefer an already
-selected original MVDM/OpenNT body and a same-shaped adapter. Preserve guest
-file/EXEC ordering, original failures and mapping-manager leases. A host
-namespace or boot-drive change requires its own source contract; it may not
-be inferred from the terminal service alone.
+Obtain one passive, source-shaped callsite/family discriminator from the
+unchanged short-root container, then select only the earliest S1-proven
+incomplete original binding. Prefer an already selected original MVDM/OpenNT
+body and a same-shaped adapter. Preserve guest ordering, original failures and
+mapping-manager leases. A host namespace or boot-drive change requires its own
+source contract; it may not be inferred from the terminal service alone.
 
 ### S3 — Fixed vertical-slice result
 

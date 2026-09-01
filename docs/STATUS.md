@@ -2,10 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T339 S2.** S1 closed the original guest-predecessor contract for
-T338's short-root `50:3D -> demExitVDM` boundary. S2 now reviews only the
-selected original NTDOS `ProcessConfig -> SHELL -> initial COMMAND EXEC`
-cohort and its existing DEM file-service binding.
+**Active: M0 T339 S2.** S1 has completed the source map of both direct
+`50:3D` callsites and the distinct `mem_err -> stall` family. S2 may obtain
+one passive, source-shaped discriminator before selecting a recovery cohort.
 
 ## Active Packet
 
@@ -25,21 +24,21 @@ cohort and its existing DEM file-service binding.
 | Asset Needs | Selected original MVDM mirrors, current formal graph and recorded short-root observation; no new assets. |
 | Reporting Requirements | Separate source fact from runtime inference; retain original failure and ordering; record every rejected recovery rung. |
 | Stop Conditions | A need for synthetic guest/device success, media change, a new mapper/executor, unreviewed import, host-drive policy or a different owner package requires re-admission. |
-| Exit Criteria | Met: both guest callers and immediate host/service dependencies have one original owner/disposition. Staged `NTDOS.SYS` and `COMMAND.COM` match the retained source-built hashes, so a mixed version pair is rejected and S2 selects one complete original bootstrap cohort. |
+| Exit Criteria | Met: direct callsites, file/EXEC, version, `mem_err`, BIOS BOP 12h and selected configuration-device dependencies have unique original owners/dispositions. The staged `NTDOS.SYS` and `COMMAND.COM` match retained source-built hashes, rejecting a mixed version pair. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
 | Similar-Issue Sweep | `sysinit1` command bootstrap, COMMAND initialization/version checks, DEM terminal service, file/drive/COMSPEC paths, configuration and Base VDM inputs. |
 
 **Evidence:** [original guest-predecessor contract](etc/evidence/m0-t339-s1-original-guest-predecessor-contract-001.md) and [row ledger](etc/operations/m0-t339-s1-guest-predecessor-contract-ledger.tsv).
 
-### M0 T339 S2 — Initial COMMAND bootstrap cohort
+### M0 T339 S2 — Passive predecessor discriminator and cohort selection
 
 | Field | Record |
 | --- | --- |
-| Objective | Recover or explicitly retain the earliest source-proven original binding in `ProcessConfig -> SHELL -> initial COMMAND EXEC`, including its existing DEM file-service path. |
-| Scope | Original `sysinit1.asm`/`sysinit2.asm`, host `cmdconf.c`/`nt_pif.c`, NTDOS file/EXEC contracts, and reached original DEM open/seek/read/close services. |
-| Non-goals | No new BOP provider, guest/media rewrite, virtual drive or guessed drive policy, synthetic EXEC success, device/FDC/INT15 work, or alternate CPU executor. |
-| Required result | One source-shaped binding recovery or an explicit source-defined transfer, with the guest caller and failure condition identified without using `demExitVDM`'s nondiagnostic message as proof. |
-| Verification | Original source/caller/failure walk; focused source/build check proportionate to an actual binding change; no arbitrary observation retry. |
+| Objective | Use one passive, source-shaped observation to distinguish the S1 file/EXEC, COMMAND-version, or `mem_err` predecessor family; only then select the smallest original owner cohort. |
+| Scope | Existing fixed-width CPU/BOP observation boundary, original `sysinit1.asm`/`sysinit2.asm`/`sysconf.asm`/`command/init.asm`, and S1 ledger source locations. |
+| Non-goals | No BOP provider, changed guest media, changed machine memory, host-drive policy, synthetic EXEC success, or alternate CPU executor. |
+| Required result | A recorded original callsite/family discriminator and a single source-backed S3 recovery disposition, or an evidence-backed admission blocker. |
+| Verification | One unchanged short-root container observation, compared only to the S1 source map; no product behavior change. |
 
 **Plan:** [M0 T339 plan](etc/operations/m0-t339-minimal-vertical-slice-integration-closure-plan-001.md). T339 starts from T338's closed short-root `50:3D` transfer and does not reopen configuration capacity, FDC/INT15, or BOP leaf work.
 
