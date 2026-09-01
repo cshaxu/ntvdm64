@@ -175,9 +175,16 @@ int main(int argc, char **argv)
     DWORD previous_main_return_report_length;
     BOOL had_previous_exception_report;
     BOOL had_previous_main_return_report;
+    char fixed_system_root[MAX_PATH];
+    char fixed_system_root_short[MAX_PATH];
+    DWORD fixed_system_root_short_length = 0;
     FILE *report = NULL;
 
     if (argc < 4) return 64;
+    if (snprintf(fixed_system_root, sizeof(fixed_system_root), "%s\\mvdm",
+                 argv[2]) < 0) return 68;
+    fixed_system_root_short_length = GetShortPathNameA(fixed_system_root,
+        fixed_system_root_short, (DWORD)sizeof(fixed_system_root_short));
     if (!AllocConsole() && GetLastError() != ERROR_ACCESS_DENIED) return 65;
     input = CreateFileA("CONIN$", GENERIC_READ | GENERIC_WRITE,
                         FILE_SHARE_READ | FILE_SHARE_WRITE, &inherit,
@@ -294,6 +301,15 @@ int main(int argc, char **argv)
         fprintf(report, "result=%s\n", wait_status == WAIT_TIMEOUT ? "timeout" : "exited");
         fprintf(report, "exit=0x%08lx\n", (unsigned long)exit_code);
         fprintf(report, "timeout-ms=%u\n", OBSERVATION_TIMEOUT_MS);
+        fprintf(report, "fixed-system-root=%s\n", fixed_system_root);
+        fprintf(report, "fixed-system-root-chars=%lu\n",
+                (unsigned long)strlen(fixed_system_root));
+        fprintf(report, "fixed-system-root-short-chars=%lu\n",
+                (unsigned long)fixed_system_root_short_length);
+        if (fixed_system_root_short_length != 0 &&
+            fixed_system_root_short_length < sizeof(fixed_system_root_short))
+            fprintf(report, "fixed-system-root-short=%s\n",
+                    fixed_system_root_short);
         if (image_identity.available) {
             fprintf(report, "image-module=%s\n", image_identity.module_name);
             fprintf(report, "image-path=%s\n", image_identity.module_path);

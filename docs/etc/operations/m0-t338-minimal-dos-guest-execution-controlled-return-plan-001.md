@@ -53,3 +53,10 @@ The package closes only with fixed-container proof of the declared DOS child
 returning through the original parent/COMMAND contract, or one narrow,
 source-defined earlier prerequisite transfer.  Both formal architecture rows
 must compile/link; x64 link closure does not claim x64 guest execution.
+
+## Closure
+
+S3 selected the original 64-byte `cmdconf.c` system-root-capacity predicate
+and proved that a byte-identical short-root stage crosses configuration to the
+already known `50:3D -> demExitVDM` boundary. This is the permitted narrow
+owner-transfer exit, not a DOS child-execution claim.

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3619 |
+| Documentation records | 3621 |
 | --- | --- |
-| Generated UTC | 2026-09-01T05:30:45Z |
+| Generated UTC | 2026-09-01T05:37:08Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | 7f6e47ea83a88140dfb8a0008efb9a1559de4503344299472192aade98ef04bd |
+| QUEUE.md | principal control document | bf48a03116b168d01e20a4aa0b2e23f900292ee75d5b639f3a317b74e72bb0e5 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 3ad21b03a0c50980b04680cc844af129fbb1c9b8863cb8461ff15992fbff8553 |
+| STATUS.md | principal control document | ce55b694cdfec3d6bb22acd4290aae0e4a1ae23c51b155391d3b36ac7f339035 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1078,6 +1078,7 @@ content-divergent entries.
 | etc/evidence/m0-t337-s4-fixed-mvdm-system-root-observation-001.md | indexed supporting material | 2b54f4e7e634a2e2d4fcbb673ce1997ba83f6ee3dc04566d3786154a1a642d2d |
 | etc/evidence/m0-t338-s1-original-child-parent-return-precondition-contract-001.md | indexed supporting material | 886875603c5b945c3f678da83beb340880cafe1f6dc36722774db5401dea2b73 |
 | etc/evidence/m0-t338-s2-post-configuration-continuation-attribution-001.md | indexed supporting material | 8026662144fa0d803a396b2115221554dcec482e3a59591d47bd9046f4cebe7d |
+| etc/evidence/m0-t338-s3-original-configuration-path-capacity-transfer-001.md | indexed supporting material | cb39e7886fc38afb3db30d2ea3ced67e6304c7a1e4be6acf153f00d35bc85abf |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1784,7 +1785,7 @@ content-divergent entries.
 | etc/operations/m0-t336-s3-fdc-int15-completion-cohort-ledger.tsv | indexed supporting material | ee82405f2be10cf677cb92010d51e5953be127d49bdd265525f6e78cef145587 |
 | etc/operations/m0-t336-s4-post-vector-terminal-attribution-ledger.tsv | indexed supporting material | 55b425c17fb30d9eb11d92c14e13f43bad5893e71d8f179010b64814e145b28f |
 | etc/operations/m0-t337-s1-packaged-system-file-root-contract-ledger.tsv | indexed supporting material | a295866e2a46ed3f3327aa4d22d1fce4b2df11fc000e40f54cba2ecc93a2aa39 |
-| etc/operations/m0-t338-minimal-dos-guest-execution-controlled-return-plan-001.md | indexed supporting material | fb0690f8e974e60c2f8c4580e3a19815a6fdd3dfe9ddd367df0ef8fff3d3e2a1 |
+| etc/operations/m0-t338-minimal-dos-guest-execution-controlled-return-plan-001.md | indexed supporting material | 72174937f035fea87a5ec81d505fbb742cfeda0cbca6e2e53b5074667cd07534 |
 | etc/operations/m0-t338-s1-child-parent-return-precondition-ledger.tsv | indexed supporting material | ff4495f645361b629a0f4e3eb7e14d9990856a78c980e7c91c47a572f51deac8 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
@@ -3526,6 +3527,7 @@ content-divergent entries.
 | history/m0-t335-wow32-win16-owner-package-closure-20260831.md | closed task history | 0eb40192961a73db29f83772cabcdc3fcf78ac402d2c19d224d47b6bd8dbad05 |
 | history/m0-t336-cpu40-ntdos-post-cmdsetinfo-continuity-closure-20260831.md | closed task history | 7e0e1996c540d418a9c255d4912c15c9b243dfa3b5c1790c9ba4d1b97493c541 |
 | history/m0-t337-packaged-mvdm-system-root-composition-closure-20260831.md | closed task history | 8428aaff94bfc81fdedebea3d058ad82de1ec94b71d25832a0992463e7da1f48 |
+| history/m0-t338-minimal-dos-guest-execution-controlled-return-closure-20260831.md | closed task history | fcd58d1dc5bfa88c205747815a753fcd27a3bbe660a7d20830fbf5b96f66ba0c |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

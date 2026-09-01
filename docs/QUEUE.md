@@ -45,16 +45,16 @@ is retired and is neither a production route nor an acceptance row.
 
 | Order | Candidate implementation package |
 | --- | --- |
-| 1 | Minimal DOS guest execution and controlled return — execute one declared immutable `.COM`/minimal `.EXE` via the original NTIO/NTDOS/COMMAND path and prove child exit through the original parent/COMMAND return contract. |
-| 2 | Minimal vertical-slice integration closure — fixed x86 runtime observation plus paired x86/x64 build/link matrix, negative cases and no-bypass reversion review for the completed DOS child slice. |
-| 3 | VDD owner package |
-| 4 | Debugger/BDE/FAX owner packages |
-| 5 | Broker process and cross-process coordination |
-| 6 | In-process multi-session reentrancy audit |
-| 7 | Host capability expansion |
-| 8 | SoftPC graphics presentation window and Alt+Enter transition |
-| 9 | Guest DOS/WOW16 artifact matrix |
-| 10 | Product release closure |
+| 1 | Minimal vertical-slice integration closure — fixed short-root x86 runtime observation plus paired x86/x64 build/link matrix, negative cases and no-bypass reversion review for the completed configuration/DEM slice. |
+| 2 | VDD owner package |
+| 3 | Debugger/BDE/FAX owner packages |
+| 4 | Broker process and cross-process coordination |
+| 5 | In-process multi-session reentrancy audit |
+| 6 | Host capability expansion |
+| 7 | SoftPC graphics presentation window and Alt+Enter transition |
+| 8 | Guest DOS/WOW16 artifact matrix |
+| 9 | Product release closure |
+| 10 | Executable-relative MVDM package-path capacity disposition — retain the original COMMAND configuration capacity contract and decide the explicit product behavior for installations whose selected `mvdm` root cannot fit it. |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).
