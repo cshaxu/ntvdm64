@@ -14,6 +14,8 @@
  * process-address aliases in NT4.  Preserve their 16:16 source positions and
  * obtain session-mapped guest leases only at the original access points. */
 #include "adapter-mvdm-host-out/softpc/include/mvdm_command_guest_state.h"
+/* DIVERGENCE(MVDM-HOST-DIV-177): diagnostic-only COMMAND call recorder. */
+#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_termination.h"
 
 #include <cmdsvc.h>
 #include <demexp.h>
@@ -680,6 +682,9 @@ UINT  DriveType;
 VOID cmdSetInfo (VOID)
 {
 
+    /* DIVERGENCE(MVDM-HOST-DIV-177): state-neutral selected-handler entry. */
+    mvdm_softpc_record_command_call(5u, 2u, (unsigned int)getAX(),
+        (unsigned int)getCF());
     /* DIVERGENCE MVDM-HOST-DIV-111: record all three original SCS scalar
      * locations numerically; their values are acquired only at each use. */
     if (!mvdm_command_guest_state_set_scs_scalars(getDS(), getDX(),
@@ -688,9 +693,15 @@ VOID cmdSetInfo (VOID)
             getDS(), getBX(), getDS(), getCX())) {
         setCF(1);
         setAX((USHORT)ERROR_INVALID_ADDRESS);
+        /* DIVERGENCE(MVDM-HOST-DIV-177): state-neutral failure return. */
+        mvdm_softpc_record_command_call(5u, 3u, (unsigned int)getAX(),
+            (unsigned int)getCF());
         return;
     }
 
+    /* DIVERGENCE(MVDM-HOST-DIV-177): state-neutral success return. */
+    mvdm_softpc_record_command_call(5u, 3u, (unsigned int)getAX(),
+        (unsigned int)getCF());
     return;
 }
 

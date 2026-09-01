@@ -358,9 +358,23 @@ row; architecture-neutral mapping-manager rules remain mandatory wherever an
 identity crosses a MVDM boundary. The detailed admission requirements are in
 [the post-cmdSetInfo startup continuity proposal](proposal-cpu40-ntdos-post-cmdsetinfo-continuity-001.md).
 
+## P06C — CPU40/NTDOS post-`54:0C` startup continuity
+
+**Predecessor:** completed P06B / M0 T352. **Purpose:** the fixed CPU40/x86
+container now proves original `54:05` and `54:0C` COMMAND returns.  This
+package begins at the post-`cmdGetConfigSys` continuation and selects the
+complete original COMMAND/CPU40/SAS/NTDOS owner cohort needed to reach the
+next guest bootstrap transition.  It must not select a trace-driven BOP leaf
+repair or claim DOS workload execution.
+
+**Exit:** selected CPU40/x86 formal graph compiles/links and one fixed,
+durable observation reaches the next original guest ingress or exact
+source-owned terminal result.  The detailed boundary is in
+[the P06C proposal](proposal-cpu40-ntdos-post-cmdgetconfigsys-continuity-001.md).
+
 ## P07 — Minimal DOS guest execution and controlled return
 
-**Predecessor:** P06B. **S1 admission:** verify the reached guest load,
+**Predecessor:** P06C. **S1 admission:** verify the reached guest load,
 local namespace/file, NTDOS `EXEC`, PSP/arena/JFN/environment and parent
 return contracts after the pre-BOP continuity package has reached the
 original `demLoadDos` crossing. **Delivery:** load and run one declared local

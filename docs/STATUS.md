@@ -2,12 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T352 S5.** T352 admits the queue-head complete original
-CPU40/COMMAND post-`SVC_CMDSETINFO` continuation package.  S1 first maps the
-full original post-`54:05` control and machine cohort to one earliest missing
-or wrong owner edge; S4 proves the current timeout occurs before the original
-COMMAND indirect call returns.  S5 now attributes that bounded source cohort;
-no trace-selected service repair is allowed.
+**No active M/T/S packet.** M0 T352 is closed after it proves the complete
+original `54:05` COMMAND path returns through CPU40 and reaches/returns from
+the next original `54:0C` ingress.  Its precise runtime limits and successor
+are in [the T352 closure](history/m0-t352-cpu40-command-post-cmdsetinfo-continuity-closure-20260901.md).
 
 ### M0 T352 S1 — Closed CPU40/COMMAND post-`SVC_CMDSETINFO` owner admission
 
@@ -108,7 +106,7 @@ child-only observer report rather than a trace-derived behavior change.
 records a fresh linked/staged product and one child-only durable report.  Its
 absence proves the original COMMAND indirect call has not returned.
 
-### M0 T352 S5 — complete COMMAND indirect-call attribution
+### M0 T352 S5 — Closed complete COMMAND indirect-call attribution
 
 | Field | Record |
 | --- | --- |
@@ -127,6 +125,10 @@ absence proves the original COMMAND indirect call has not returned.
 | Exit Criteria | One bounded original COMMAND call cohort is source-ordered, durable and one-run observed; the earliest non-returning edge is assigned to a complete source owner package with no unowned selected sibling. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | All `PFNSVC` COMMAND table slots, function-pointer conventions, `cmdSetInfo` entry/failure/return, scalar facade validation, observer report ownership and BOP post-return ordering. |
+
+**S5 closure:** [complete COMMAND indirect-call attribution](etc/evidence/m0-t352-s5-command-call-cohort-attribution-001.md)
+proves original `54:05` and reached `54:0C` returns in the fixed CPU40/x86
+container.  **T352 closure:** [CPU40/COMMAND post-`SVC_CMDSETINFO` continuity](history/m0-t352-cpu40-command-post-cmdsetinfo-continuity-closure-20260901.md).
 
 ### M0 T351 S2 — original SCS scalar-lifecycle binding recovery
 

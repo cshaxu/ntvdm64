@@ -173,6 +173,8 @@ int main(int argc, char **argv)
     char previous_main_return_report_path[MAX_PATH];
     char bop_return_report_path[MAX_PATH];
     char previous_bop_return_report_path[MAX_PATH];
+    char report_base_path[MAX_PATH];
+    DWORD report_base_path_length;
     DWORD previous_exception_report_length;
     DWORD previous_main_return_report_length;
     DWORD previous_bop_return_report_length;
@@ -185,6 +187,10 @@ int main(int argc, char **argv)
     FILE *report = NULL;
 
     if (argc < 4) return 64;
+    report_base_path_length = GetFullPathNameA(argv[3],
+        (DWORD)sizeof(report_base_path), report_base_path, NULL);
+    if (report_base_path_length == 0 ||
+        report_base_path_length >= sizeof(report_base_path)) return 68;
     if (snprintf(fixed_system_root, sizeof(fixed_system_root), "%s\\mvdm",
                  argv[2]) < 0) return 68;
     fixed_system_root_short_length = GetShortPathNameA(fixed_system_root,
@@ -227,11 +233,11 @@ int main(int argc, char **argv)
     }
 
     snprintf(exception_report_path, sizeof(exception_report_path), "%s.exception.txt",
-             argv[3]);
+             report_base_path);
     snprintf(main_return_report_path, sizeof(main_return_report_path), "%s.return.txt",
-             argv[3]);
+             report_base_path);
     snprintf(bop_return_report_path, sizeof(bop_return_report_path), "%s.bop-return.txt",
-             argv[3]);
+             report_base_path);
     previous_exception_report_length = GetEnvironmentVariableA(
         "MVDM_EXCEPTION_REPORT_PATH", previous_exception_report_path,
         (DWORD)sizeof(previous_exception_report_path));

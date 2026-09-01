@@ -280,3 +280,29 @@ void mvdm_softpc_record_bop_return(unsigned int selector,
     mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH", message,
         (DWORD)(sizeof(message) - 1));
 }
+
+void mvdm_softpc_record_command_call(unsigned int service,
+                                    unsigned int stage,
+                                    unsigned int guest_ax,
+                                    unsigned int guest_cf)
+{
+    static const char hex[] = "0123456789ABCDEF";
+    char message[] = "MVDM-CMD-CALL svc=00 stage=0 ax=0000 cf=0\r\n";
+    HANDLE output;
+    DWORD written;
+
+    message[18] = hex[(service >> 4) & 0x0fu];
+    message[19] = hex[service & 0x0fu];
+    message[27] = hex[stage & 0x0fu];
+    message[32] = hex[(guest_ax >> 12) & 0x0fu];
+    message[33] = hex[(guest_ax >> 8) & 0x0fu];
+    message[34] = hex[(guest_ax >> 4) & 0x0fu];
+    message[35] = hex[guest_ax & 0x0fu];
+    message[40] = guest_cf ? '1' : '0';
+    output = GetStdHandle(STD_ERROR_HANDLE);
+    if (output != NULL && output != INVALID_HANDLE_VALUE)
+        (void)WriteFile(output, message, (DWORD)(sizeof(message) - 1),
+                        &written, NULL);
+    mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH", message,
+        (DWORD)(sizeof(message) - 1));
+}

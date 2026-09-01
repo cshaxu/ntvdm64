@@ -10,6 +10,8 @@
 
 #include <cmdsvc.h>
 #include <softpc.h>
+/* DIVERGENCE(MVDM-HOST-DIV-177): diagnostic-only COMMAND call recorder. */
+#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_termination.h"
 
 
 PFNSVC	apfnSVCCmd [] = {
@@ -50,7 +52,13 @@ BOOL CmdDispatch (ULONG iSvc)
 	return FALSE;
     }
 #endif
+    /* DIVERGENCE(MVDM-HOST-DIV-177): state-neutral table-call attribution. */
+    mvdm_softpc_record_command_call((unsigned int)iSvc, 0u,
+        (unsigned int)getAX(), (unsigned int)getCF());
     (apfnSVCCmd [iSvc])();
+    /* DIVERGENCE(MVDM-HOST-DIV-177): state-neutral table-return attribution. */
+    mvdm_softpc_record_command_call((unsigned int)iSvc, 1u,
+        (unsigned int)getAX(), (unsigned int)getCF());
 
     return TRUE;
 }

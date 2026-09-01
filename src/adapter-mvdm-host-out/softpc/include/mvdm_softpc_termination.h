@@ -41,4 +41,11 @@ void mvdm_softpc_record_bop_return(unsigned int selector,
                                    unsigned int guest_ax,
                                    unsigned int guest_cf);
 
+/* Fixed-container diagnostic only.  `stage` identifies an already-selected
+ * original COMMAND call boundary; it does not route or alter that call. */
+void mvdm_softpc_record_command_call(unsigned int service,
+                                    unsigned int stage,
+                                    unsigned int guest_ax,
+                                    unsigned int guest_cf);
+
 #endif
