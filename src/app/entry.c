@@ -44,6 +44,10 @@ int main(int argc, char **argv)
         result = APP_STARTUP_MEDIA_REJECTED;
         goto finish;
     }
+    if (!app_package_layout_validate_command_configuration_root(&owner)) {
+        result = APP_STARTUP_MEDIA_REJECTED;
+        goto finish;
+    }
     if (!app_machine_shell_select_backend(&owner,
             SESSION_MACHINE_BACKEND_NONE)) {
         result = APP_STARTUP_MACHINE_REJECTED;

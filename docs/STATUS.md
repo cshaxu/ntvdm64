@@ -2,12 +2,30 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T348 is closed: its complete DOS/WOW16 guest
-and SoftPC-firmware artifact inventory has one reproducible final disposition
-per path and an exact executable-relative staging proof.  It is explicitly a
-load-only media closure, not a guest rebuild or execution-continuity claim.
-The next candidate is the bounded MVDM package-path capacity disposition.
-See the [T348 closure](history/m0-t348-guest-dos-wow16-artifact-matrix-closure-20260901.md).
+**No active M/T/S packet.** M0 T349 is closed: it made executable-relative
+MVDM package admission explicit while retaining original COMMAND short-path
+capacity, PIF selection and configuration processing.  Its focused x86 check
+and 425-action formal CPU40 link pass; neither is a guest-continuity claim.
+The next candidate is CPU40/NTDOS post-`SVC_CMDSETINFO` guest-bootstrap
+continuity.  See the [T349 closure](history/m0-t349-executable-relative-mvdm-package-path-capacity-closure-20260901.md).
+
+### M0 T349 — Closed package-path capacity record
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T349; closed ordinary-mode packet. |
+| Delivered Result | One app-owned early rejection for roots outside original COMMAND short-path/caller capacity; original mirror algorithms remain unchanged. |
+| Verification | Focused accepted/rejected x86 contract plus fresh 425-action formal CPU40/x86 link. |
+| Successor | Queue item 3: CPU40/NTDOS post-`SVC_CMDSETINFO` guest-bootstrap continuity. |
+
+**Plan:** [Executable-relative MVDM package-path capacity disposition](etc/operations/proposal-executable-relative-mvdm-path-capacity-001.md).
+
+**S1 closure:** [original COMMAND capacity audit](etc/evidence/m0-t349-s1-original-command-package-path-capacity-audit-001.md)
+and its ledger identify the unchanged 64-byte short-root form and every
+reached original caller buffer.  **S2 closure:** [package admission](etc/evidence/m0-t349-s2-command-package-path-admission-001.md)
+proves one app-only accepted/rejected preflight with a staged product root.
+**S3 closure:** [formal capacity closure](etc/evidence/m0-t349-s3-command-package-path-capacity-closure-001.md)
+records the selected formal link without claiming execution continuity.
 
 ### M0 T348 — Closed guest artifact matrix record
 

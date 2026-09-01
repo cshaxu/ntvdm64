@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3684 |
+| Documentation records | 3690 |
 | --- | --- |
-| Generated UTC | 2026-09-01T15:42:07Z |
+| Generated UTC | 2026-09-01T15:56:34Z |
 
 ## Entries
 
@@ -913,6 +913,9 @@ content-divergent entries.
 | etc/evidence/m0-t348-s1-guest-media-provenance-inventory-001.md | indexed supporting material | 46c98bdc9fcc3ea022ab01f946c7b0c6f5252abb09935cdd587e5e08c45c8307 |
 | etc/evidence/m0-t348-s2-executable-relative-staging-reconciliation-001.md | indexed supporting material | f8117bbc0d89d4b17b0bff6751158356d072fc56e2d74f02318c232f9d2e1ba6 |
 | etc/evidence/m0-t348-s3-guest-artifact-matrix-closure-001.md | indexed supporting material | b77e4dad9adfbfa81e3c1145023a4400760186d1b7b2656130645ed2f7d2b902 |
+| etc/evidence/m0-t349-s1-original-command-package-path-capacity-audit-001.md | indexed supporting material | 72753c6e0fe678fc0e56bc735e7612850a56d390a3a7e9ba31bcb2b58f2a7355 |
+| etc/evidence/m0-t349-s2-command-package-path-admission-001.md | indexed supporting material | 611666d3be77e52e28a186f7d6088b687c268a0e48d89c18ad8a5acba6bb1f7f |
+| etc/evidence/m0-t349-s3-command-package-path-capacity-closure-001.md | indexed supporting material | 5bedf6df0fa05c42fd32520c830cee8360a33394ffd14058353e261d0a953624 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1643,6 +1646,7 @@ content-divergent entries.
 | etc/operations/m0-t346-softpc-graphics-presentation-plan-001.md | indexed supporting material | 115e1f3e7434634cadadd6b8ac5e4e483d66ac220423ac07483b71407ba52a37 |
 | etc/operations/m0-t347-command-dem-softpc-scalar-alias-lifecycle-recovery-plan-001.md | indexed supporting material | 7b8517351088167b57fcf78583e1ee87fa1d1fc746e68752858029793cfdaa41 |
 | etc/operations/m0-t348-s1-guest-artifact-matrix.tsv | indexed supporting material | 29f304ed164e89a6bd780f28009987c4ecc94504b4a9de7ab6f52ad72b7338f1 |
+| etc/operations/m0-t349-s1-mvdm-package-path-capacity-ledger.tsv | indexed supporting material | 0bd11c28b346bca63d8e03001303e9f9739b9f65697dac12b8638e6f571a3fd4 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -1753,6 +1757,7 @@ content-divergent entries.
 | etc/operations/proposal-cpu40-recursive-frame-guest-reentry-closure-001.md | indexed supporting material | d25d052c69494729b58ea8b30835a2e68ef057a0ff6d64bcd9b2c5c58399d33c |
 | etc/operations/proposal-current-naming-convergence-001.md | indexed supporting material | 214c6356a2a52f218e4d128d1598f7b6956e6bddc397db8b597d56bff63d7e23 |
 | etc/operations/proposal-dos-wow16-complete-source-build-closure-001.md | indexed supporting material | 3da5ac3935fbee1542946e0dfedf75d841836e0e0c7151536e88f5c44854f862 |
+| etc/operations/proposal-executable-relative-mvdm-path-capacity-001.md | indexed supporting material | 784693aac2355b21998698d1bf8368079278b271e15e61a0f34b8374a85b12d5 |
 | etc/operations/proposal-formal-build-entrypoint-and-reconstructed-monitor-fixture-repair-001.md | indexed supporting material | 8c20c430a033b448bf3de92e21f8ba32760c80fae225b5c0fa14ab4cc0814b8f |
 | etc/operations/proposal-guest-dos-wow16-artifact-matrix-001.md | indexed supporting material | b2610632d748b4f71b7cef749e34fc454cccb4fddd96948d9151f0b8b9c493a0 |
 | etc/operations/proposal-minimal-dos-guest-execution-controlled-return-001.md | indexed supporting material | 809fd9e5eb963c786a3f26fbc64cda76e015c00e292b1639963d475706a5abba |
@@ -3411,6 +3416,7 @@ content-divergent entries.
 | history/m0-t346-softpc-graphics-presentation-closure-20260901.md | closed task history | ec0c67e7b072caf979923815c9d1a116982859914bdd3c97327eb158170bf105 |
 | history/m0-t347-command-dem-softpc-scalar-alias-lifecycle-closure-20260901.md | closed task history | 4c8c4d7d2c220a94d0be4350e02d61a37f1666518833191efdcef70fd26eb368 |
 | history/m0-t348-guest-dos-wow16-artifact-matrix-closure-20260901.md | closed task history | 183f2d09415a1fbd139a3d9cd4baa7e1d080b7251d014c9340db8681f8b535c4 |
+| history/m0-t349-executable-relative-mvdm-package-path-capacity-closure-20260901.md | closed task history | a39230a74b2274f0c1aed9dd5ffcda4f9a01a9aa02dc831b565fcfcc0eff0657 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -3698,7 +3704,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 8da5faa198468cce4e59e45164d816ec431f5fbcdc73bfed0969de4242a699f8 |
+| STATUS.md | principal control document | 11d092ab418354a3e5d62ee5a0ce23d170fddfaeeaf9d2625f40407d5bbc5a73 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
