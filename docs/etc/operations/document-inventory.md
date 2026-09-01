@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3666 |
+| Documentation records | 3667 |
 | --- | --- |
-| Generated UTC | 2026-09-01T08:49:39Z |
+| Generated UTC | 2026-09-01T08:52:02Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 928f2673ace25fcf83ee7621535fcabe77d83dba58aff6da841009e6b6bd0a9e |
+| STATUS.md | principal control document | 8d1b6e8926e8cbcd43d9f7bcdffccd779337d99d3b047bd8440b93b1cce551b9 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1824,6 +1824,7 @@ content-divergent entries.
 | etc/operations/m0-t345-s1-dem-host-capability-mirror-binding-ledger.tsv | indexed supporting material | 9093f20c376b22eb0810439df878310889456419245b388ca0c58ece340fb5f5 |
 | etc/operations/m0-t345-s1-host-capability-owner-ledger.tsv | indexed supporting material | ee56639f0850d7ebbbbd9b14e5064f69666f14cb7ecf78c695efe7a5ec7d6035 |
 | etc/operations/m0-t346-s1-graphics-presentation-owner-ledger.tsv | indexed supporting material | db0ae996f487020b37d25b9bfc00c0d7b0e1c123692a8d7a52977e5cf8b75f8a |
+| etc/operations/m0-t346-s3-window-lifecycle-contract-001.md | indexed supporting material | d2a4c3275dbcef897ac4c8a371d46f3de4531d887b7b71f185a7759895d25a38 |
 | etc/operations/m0-t346-softpc-graphics-presentation-plan-001.md | indexed supporting material | cde23b107047f3a52a6ce3c5d00ccfb3b20e6d99c377192944e9335422bf3cb3 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |

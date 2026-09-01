@@ -165,6 +165,14 @@ pointer, snapshot content and deterministic cleanup. Both formal CPU40 graphs
 rebuild the affected objects and relink `softpc-win32-bindings.lib`. See the
 [S2 closure evidence](etc/evidence/m0-t346-s2-p2-graphics-session-surface-closure-001.md).
 
+### M0 T346 S3 — App window and session-scoped Alt+Enter lifecycle
+
+**S3 P1:** [the app window lifecycle contract](etc/operations/m0-t346-s3-window-lifecycle-contract-001.md)
+confirms that every selected original controller invalidates only after its
+existing DIB mutex is released, preserves original console-input consumption,
+and assigns public-window lifecycle exclusively to app. It excludes X86GFX,
+Console Server fullscreen and `nt_fulsc.c` from the modern Alt+Enter route.
+
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
 **T343 closure:** [broker/process coordination closure](history/m0-t343-broker-process-cross-process-coordination-closure-20260901.md).
