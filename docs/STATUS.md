@@ -488,7 +488,10 @@ and
 
 ## Active Packet
 
-**Active: M0 T355 S21 — fixed-container original XMS allocation observation.**
+**No active M/T/S packet.**
+
+T355 is paused after S23 rejected a false console-worker cohort; a follow-on
+session-disposal predicate observer requires a distinct admission.
 
 ### M0 T355 S1 — Closed short-path permanent COMMAND fixed-container verification
 
@@ -1005,6 +1008,50 @@ original XMS allocation/commit lifecycle has progressed beyond the former
 the app/session disposal-failure result, not an XMS or `50:42` result.  Its
 specific invariant remains unobserved and transfers only to a separately
 admitted app/session lifecycle audit: [S21 fixed-container evidence](etc/evidence/m0-t355-s21-original-xms-backing-fixed-container-observation-001.md).
+
+### M0 T355 S22 — Active original return and session-disposal lifecycle audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S22; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from the S21 source-classified successor under the standing owner direction to continue the active SoftPC package. |
+| Objective | Audit the complete source-shaped transition from original `ntvdm.c -> host_main` return or original `ExitVDM` through the current execution bridge, app shell teardown, thread binding, termination escape and `session_dispose`; identify the sole owner of the observed `APP_STARTUP_DISPOSE_FAILURE` predicate. |
+| Non-goals | No runtime execution, retry, trace-selected patch, BOP/DEM/COMMAND/XMS behavior change, CCPU workaround, guest/firmware mutation, mapper change, new asynchronous worker, CPU30, Bochs, x64, BaseSrv/CSRSS recreation, WOW, EXEC or graphics work. |
+| Reference Baseline | S21 fixed-container evidence; original `softpc.new/obj.vdm/ntvdm.c`, `base/support/main.c`, DEM/COMMAND exit callers, imported Base VDM client/server forms; current app/session and SoftPC execution bridge. |
+| Files And ABI Surface | Original `main`, `host_main`, `ExitVDM`, `demExitVDM`, `cmdExitVDM`; current `mvdm_softpc_execution_run_original_entry`, `session_thread_bind/unbind`, termination escape, `session_complete`, app shell teardown and `session_dispose`. |
+| Verification | Definition/caller/return-path and static predicate walk; original-versus-current lifecycle comparison; build-selection review; documentation governance and diff review. No runtime invocation. |
+| Expected Markers | Either one source-shaped lifecycle repair cohort is selected with original ordering preserved, or the exact unobservable predicate is recorded as an explicit later owner. |
+| Asset Needs | Existing source mirrors, current formal graph and the immutable S21 evidence only. |
+| Reporting Requirements | Distinguish original exit semantics, current app/session mechanics and runtime facts. Do not infer the individual disposal predicate from exit code 72 alone. |
+| Stop Conditions | Any source change, new observer, retry, changed media/container, new generic lifecycle API, BaseSrv/CSRSS reconstruction or unreviewed source import requires a separate recovery admission. |
+| Exit Criteria | Every original and current exit edge has an owner and ordering disposition; S22 transfers at most one source-defined recovery cohort or one explicit deferred boundary. |
+| Similar-Issue Sweep | `host_main`, `ExitVDM`, `BaseSrvExitVDM`, `demExitVDM`, `cmdExitVDM`, `session_complete`, thread binding count, teardown order, termination escape and app process return. |
+
+**S22 corrected closure:** [original return/session-disposal lifecycle audit](etc/evidence/m0-t355-s22-original-return-session-disposal-lifecycle-audit-001.md)
+proves that exit status 72 alone cannot identify the disposal predicate and
+that the original event/heartbeat workers do not bind the session.  It selects
+no source change.
+
+### M0 T355 S23 — Closed rejected console-event worker cohort
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S23; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from S22's single original cleanup cohort under the standing owner direction to continue the active SoftPC package. |
+| Objective | Test whether the original console-event worker is a source-owned cause of the app disposal terminal, and retain no change if its session-binding premise is false. |
+| Non-goals | No event interpretation, console API redesign, BOP/DEM/COMMAND/XMS/CCPU behavior change, guest/firmware mutation, mapper/session-ABI redesign, generic worker framework, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW or EXEC work. |
+| Reference Baseline | Original `softpc.new/host/src/{nt_event.c,nt_reset.c,nt_timer.c}`, S22 lifecycle audit, current same-shaped thread-start compatibility binding and S21 fixed-container evidence. |
+| Files And ABI Surface | Original `nt_start_event_thread`, `nt_remove_event_thread`, `ConsoleEventThread`, original `CreateThread`, existing thread-start compatibility source and `session_dispose` predicate only. |
+| Verification | Compare original creation/callback declarations and current include path; formal CPU40/x86 link; one unchanged-container observation of the temporary experiment; remove the experiment; documentation governance and diff review. |
+| Expected Markers | Either the original event worker demonstrably increments `binding_count`, or source proves that it does not and the original mirror is restored. |
+| Stop Conditions | Any need to alter event semantics, add a new worker, change timeout/container/media, touch guest or BOP state, change BaseSrv/CCPU behavior or retry a failed observation pauses for a new admission. |
+| Exit Criteria | The source premise is accepted or rejected, every temporary change is either registered or removed, and the next diagnostic requirement is stated without claiming a lifecycle repair. |
+| Similar-Issue Sweep | `nt_start_event_thread`, `nt_remove_event_thread`, `ConsoleEventThread`, `host_applClose`, `TerminateHeartBeat`, COMMAND/Redirector thread-start binding and `session_dispose`. |
+
+**S23 closure:** [console-worker cohort rejection](etc/evidence/m0-t355-s23-console-worker-cohort-rejection-001.md)
+proves that the direct original event worker does not bind `session`; its
+temporary cleanup change was removed.  A disposal-predicate observer needs a
+new admission before any further lifecycle work.
 
 ### Indexed predecessor record — M0 T345 host capability expansion
 

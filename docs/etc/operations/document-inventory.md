@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3749 |
+| Documentation records | 3751 |
 | --- | --- |
-| Generated UTC | 2026-09-01T22:27:04Z |
+| Generated UTC | 2026-09-01T22:37:36Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | e369afc335985ef3c396906193978c5ff4a0c9afe13ae3327ed9b480af67da14 |
+| STATUS.md | principal control document | 897867a5da78080e4cd27b3618354eb348063245ba1088de11034cea16834dc8 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1149,6 +1149,8 @@ content-divergent entries.
 | etc/evidence/m0-t355-s2-config-multipass-shell-persistence-audit-001.md | indexed supporting material | 462162f5f568fdc74354f44e242711478fa46aa90ce0fcc00c4d19f18d8ec58a |
 | etc/evidence/m0-t355-s20-p1-original-xms-backing-selection-build-001.md | indexed supporting material | b4f10df04f13eee324565130134ad0a2d3ae43c8a450466bb87bc6f5cacf7078 |
 | etc/evidence/m0-t355-s21-original-xms-backing-fixed-container-observation-001.md | indexed supporting material | b944e9ef393ca335a5b42082c98cfd9714d528663813069df12141c5bfd74314 |
+| etc/evidence/m0-t355-s22-original-return-session-disposal-lifecycle-audit-001.md | indexed supporting material | 6dbb5da21e65ea0376c5ef3eff24d454f5d6a1051d82549163280d7f7dfad1fa |
+| etc/evidence/m0-t355-s23-console-worker-cohort-rejection-001.md | indexed supporting material | 685df6984475542247a9b39104f7aeb68c7c9cbc4bfe134c31ba6a153cc230d3 |
 | etc/evidence/m0-t355-s3-configdone-observation-relocation-attribution-001.md | indexed supporting material | c937a4a88d6e81c8959f70fedea163d0e913e6c4de21c779dd69b8b446e77814 |
 | etc/evidence/m0-t355-s4-loaded-ntio-configdone-state-observation-001.md | indexed supporting material | 18d43ce1fbf28f1b4dd67857e5e3dfc9e8158678757a7890472b5fcab191a80b |
 | etc/evidence/m0-t355-s5-ntdos-shell-pass-one-execution-cohort-audit-001.md | indexed supporting material | 3c0d3fbca415626f9bd43ed68d26a84394e01448b25b7fd0c040f389a5fc44ef |
