@@ -11,6 +11,8 @@
 #include <windows.h>
 #include <winternl.h>
 
+#include "adapter-mvdm-host-out/debugger/include/dbg_state.h"
+
 #ifndef STATUS_NOT_IMPLEMENTED
 #define STATUS_NOT_IMPLEMENTED ((NTSTATUS)0xC0000002L)
 #endif
@@ -24,8 +26,6 @@
 typedef NTSTATUS (NTAPI *MVDM_NT_QUERY_INFORMATION_PROCESS)(
     HANDLE process, ULONG information_class, PVOID information, ULONG length,
     PULONG return_length);
-
-static BOOL mvdm_debugged = FALSE;
 
 BOOL DBGInit(int argc, char *argv[])
 {
@@ -48,9 +48,9 @@ BOOL DBGInit(int argc, char *argv[])
         query_information_process(process, 7u, &debug_port,
             (ULONG)sizeof(debug_port), NULL);
     if (status >= 0) {
-        mvdm_debugged = (debug_port != NULL);
+        mvdm_debugger_set_debugged(debug_port != NULL);
     } else {
-        mvdm_debugged = FALSE;
+        mvdm_debugger_set_debugged(FALSE);
     }
     return TRUE;
 }

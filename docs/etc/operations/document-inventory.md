@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3760 |
+| Documentation records | 3762 |
 | --- | --- |
-| Generated UTC | 2026-09-01T23:46:38Z |
+| Generated UTC | 2026-09-01T23:56:29Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 782033b2df78cbd6abf9c5e9aa7dcfce6bc2c4121d90026e9aaa98556fb94a83 |
+| STATUS.md | principal control document | ce70b09de824616d372830984703dde4f45fbc2b7faed3938c97b9112d361478 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1161,6 +1161,8 @@ content-divergent entries.
 | etc/evidence/m0-t355-s30-source-owned-direct-termination-cleanup-recovery-001.md | indexed supporting material | 5774802b7e2c1ec1a482e018e08a970c34441be40f784373ec6663967018fb56 |
 | etc/evidence/m0-t355-s31-original-0x78-entry-result-attribution-001.md | indexed supporting material | c2d34648373358fa24593bac8a0c30f85ad499e11e765d780467d9e61d3cf235 |
 | etc/evidence/m0-t355-s32-controlled-stop-provenance-observation-001.md | indexed supporting material | c4e9f828162dd204e26d67874f81046b8c79b1259605fe5f791061ed44168300 |
+| etc/evidence/m0-t355-s33-original-debugger-dispatch-package-audit-001.md | indexed supporting material | a1aa82e2e343f9b49923b8a5f0b993e0bc5b3e41ab7b144b84ba8f58f4431b1d |
+| etc/evidence/m0-t355-s34-original-ordinary-debugger-dispatch-recovery-001.md | indexed supporting material | cd82dc02cf7c6222ed0bbbaa5b06d469c46f0fa51bc88fb387c27bb8fb0294f7 |
 | etc/evidence/m0-t355-s4-loaded-ntio-configdone-state-observation-001.md | indexed supporting material | 18d43ce1fbf28f1b4dd67857e5e3dfc9e8158678757a7890472b5fcab191a80b |
 | etc/evidence/m0-t355-s5-ntdos-shell-pass-one-execution-cohort-audit-001.md | indexed supporting material | 3c0d3fbca415626f9bd43ed68d26a84394e01448b25b7fd0c040f389a5fc44ef |
 | etc/evidence/m0-t355-s6-config-command-first-store-observation-001.md | indexed supporting material | b820bafdf301c29ed2c19563250d80b5c685dd115d0cbdb8bb1ebd583d75e9cd |

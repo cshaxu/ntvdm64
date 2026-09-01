@@ -10,7 +10,9 @@
 #include "mvdm_softpc_termination.h"
 #include "session/session.h"
 
-static void mvdm_debugger_product_unavailable(const char *origin)
+#include "adapter-mvdm-host-out/debugger/include/dbg_state.h"
+
+void mvdm_debugger_private_transport_unavailable(const char *origin)
 {
     session *owner = session_thread_current();
 
@@ -36,7 +38,8 @@ void ModuleLoad(char *module_name, char *path_name, unsigned short segment,
     (void)path_name;
     (void)segment;
     (void)length;
-    mvdm_debugger_product_unavailable("debugger:ModuleLoad");
+    if (mvdm_debugger_is_debugged())
+        mvdm_debugger_private_transport_unavailable("debugger:ModuleLoad");
 }
 
 void ModuleSegmentMove(char *module_name, char *path_name,
@@ -46,19 +49,16 @@ void ModuleSegmentMove(char *module_name, char *path_name,
     (void)path_name;
     (void)old_selector;
     (void)new_selector;
-    mvdm_debugger_product_unavailable("debugger:ModuleSegmentMove");
+    if (mvdm_debugger_is_debugged())
+        mvdm_debugger_private_transport_unavailable("debugger:ModuleSegmentMove");
 }
 
 void ModuleFree(char *module_name, char *path_name)
 {
     (void)module_name;
     (void)path_name;
-    mvdm_debugger_product_unavailable("debugger:ModuleFree");
-}
-
-void DBGDispatch(void)
-{
-    mvdm_debugger_product_unavailable("debugger:DBGDispatch");
+    if (mvdm_debugger_is_debugged())
+        mvdm_debugger_private_transport_unavailable("debugger:ModuleFree");
 }
 
 unsigned long DbgPrompt(char *prompt, char *response,
@@ -67,6 +67,6 @@ unsigned long DbgPrompt(char *prompt, char *response,
     (void)prompt;
     (void)response;
     (void)maximum_response_length;
-    mvdm_debugger_product_unavailable("debugger:DbgPrompt");
+    mvdm_debugger_private_transport_unavailable("debugger:DbgPrompt");
     return 0u;
 }

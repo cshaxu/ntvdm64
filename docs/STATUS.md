@@ -513,9 +513,49 @@ proves that the observed result is a selected session controlled-stop rather
 than normal `main` return or S30's disposal failure.  It deliberately does
 not guess which linked `ERROR_CALL_NOT_IMPLEMENTED` entry was reached.
 
-### M0 T355 S33 — Active original debugger dispatch package audit
+### M0 T355 S35 — Active original COMMAND command-acquisition/wait cohort audit
 
-**Active: M0 T355 S33.**
+**Active: M0 T355 S35.**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S35; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by S34's successful debugger-boundary continuation under the standing owner direction for ordered source-first CPU40/x86 recovery. |
+| Objective | Audit the complete original COMMAND command-acquisition, wait, resume and lifecycle cohort reached after S34, including `cmdGetNextCmd`, `GetNextVDMCommand`, Base VDM client/broker bindings, console/worker state and original ordinary failure/continuation results. Select a whole source-owner recovery or an exact unchanged terminal. |
+| Non-goals | No individual trace-hit BOP patch, command fabrication, guest/media/firmware mutation, CPU/CCPU/SAS/device/timer change, mapper redesign, CPU30, Bochs, x64, BaseSrv/CSRSS reconstruction, WOW, EXEC, graphics or retry. |
+| Reference Baseline | S34 fixed observation continues beyond `DBGDispatch` and reaches repeated original COMMAND `54:01` activity before the fixed watchdog. |
+| Files And ABI Surface | Original `mvdm-host/dos/command`, Base VDM client/broker adapter and session command source/broker as evidence only. No product ABI change. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original definition/caller/order audit, selected graph/import review, documentation governance/export and diff review. No runtime execution or production behavior change. |
+| Expected Markers | One package ledger distinguishes original local command acquisition from BaseSrv/CSR broker requirements, explains the observed continuation/wait shape, and selects one bounded owner package or exact terminal. |
+| Asset Needs | Existing original mirrors, source indexes and S34 observation only; no new source import, guest rebuild, host-system mutation or new fixture. |
+| Reporting Requirements | Treat the trace as ordering evidence only; record all member entrypoints and lifecycle calls before selecting a recovery. |
+| Stop Conditions | A need to fabricate a command, change guest COMMAND/DOS semantics, create a BaseSrv/CSR broker, or vary the fixed container pauses for a new admission. |
+| Exit Criteria | One source ledger covers the full reached COMMAND acquisition/wait cohort and names one source-shaped successor without claiming end-to-end command execution. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `cmdGetNextCmd`, `cmdGetNextCmdInfo`, `GetNextVDMCommand`, `BaseCheckVDM`, `ExitVDM`, Base VDM broker/client, `cmdExec32`, command re-entry, console worker and session command source. |
+
+### M0 T355 S34 — Closed original ordinary-debugger dispatch recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S34; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by S33's complete source package audit under the standing owner direction for ordered source-first CPU40/x86 recovery. |
+| Objective | Recover the complete original ordinary non-debug `DBGDispatch` disposition: shared debug-state, bounded source-order `SS:SP` frame read, `DBG_TOOLHELP` registration, no-event paths and the original unknown-mode `AX=0` result; leave the actual NT4 debugger/CSR event transport unavailable. |
+| Non-goals | No debugger broker, `STATUS_VDM_EVENT` substitute, synthetic debugger reply, new BOP-specific success, guest/media/firmware mutation beyond the original ToolHelp state read, CPU/CCPU/SAS/device/timer change, mapper redesign, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, EXEC, graphics or retry. |
+| Reference Baseline | S32 exact `debugger:DBGDispatch` terminal and S33's original-mode/source/caller audit. |
+| Files And ABI Surface | Existing debugger adapter sources, shared adapter-local state and existing adapter-softpc guest-memory/effective-address interfaces. Original BOP selector, CCPU registers and guest frame ABI remain unchanged. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original branch/order review; formal CPU40/x86 link; one unchanged fixed-container observation; documentation governance/export and diff review. |
+| Expected Markers | Met: `DBG_TOOLHELP` no longer reaches `ERROR_CALL_NOT_IMPLEMENTED`; unavailable private debugger transport remains distinguishable and does not falsely succeed. |
+| Asset Needs | Existing original mirrors, formal graph, fixed `O:\\ntvdm` stage and observer; no new source import, guest rebuild or host-system mutation. |
+| Reporting Requirements | Record original mode/caller evidence, guest-frame bounds and lease lifetime, non-debug versus debugged outcomes, and the explicit remaining transport boundary. |
+| Stop Conditions | A need to create a debugger broker, recover CSRSS/CSR, alter guest frame layout, change CPU semantics, or vary the execution container beyond the one fixed observation pauses for a new admission. |
+| Exit Criteria | Met: original ordinary non-debug dispatch outcome is source-shaped and formally verified; exactly one fixed observation passes the former `DBGDispatch` terminal and reaches later COMMAND/DEM activity; debugger/CSR transport remains explicitly unavailable. See [S34 evidence](etc/evidence/m0-t355-s34-original-ordinary-debugger-dispatch-recovery-001.md). |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `MS_bop_6`, `DBGDispatch`, `DBG_TOOLHELP`, `DBG_ATTACH`, unknown modes, `ModuleLoad`, `ModuleSegmentMove`, `ModuleFree`, `DbgPrompt`, `DBGNotifyDebugged`, `SendVDMEvent`, guest-memory lease and CCPU `SS:SP` conversion. |
+
+### M0 T355 S33 — Closed original debugger dispatch package audit
 
 | Field | Record |
 | --- | --- |
@@ -527,11 +567,11 @@ not guess which linked `ERROR_CALL_NOT_IMPLEMENTED` entry was reached.
 | Files And ABI Surface | Original `mvdm-host/dbg` and its selected OpenNT declarations/callers; existing debugger, adapter-softpc, adapter-win32 and session boundaries as evidence only. No product ABI change. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
 | Verification | Definition/caller/import audit across selected original source baselines; formal graph membership review; documentation governance/export and diff review. No runtime execution and no production behavior change. |
-| Expected Markers | A package ledger separates functions that can retain original source shape from private debugger/CSR transport operations, identifies every required adapter owner, and selects either a bounded source-shaped recovery S34 or an exact original unavailable disposition. |
+| Expected Markers | Met: the package ledger separates source-shaped non-debug branches from private debugger/CSR transport and selects S34's bounded recovery. |
 | Asset Needs | Existing original mirrors and source indexes only; no new source import, guest rebuild, host-system mutation or new fixture. |
 | Reporting Requirements | Distinguish the original `DBGDispatch` frame contract from its individual debugger modes; identify static dependencies rather than inferring behavior from the single runtime terminal. |
 | Stop Conditions | A need to change `DBGDispatch`, add any debugger transport, revive CSRSS/CSR, alter a BOP result, or vary the fixed execution container pauses for a new admission. |
-| Exit Criteria | One source ledger covers the whole reached debugger package, establishes the minimum viable non-debug behavior and names any next owner package; it must not claim that the debugger product is recovered. |
+| Exit Criteria | Met: one source ledger covers the reached debugger package, establishes the ordinary non-debug contract and admits S34 without claiming debugger-product recovery. See [S33 evidence](etc/evidence/m0-t355-s33-original-debugger-dispatch-package-audit-001.md). |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `MS_bop_6`, `DBGDispatch`, `ModuleLoad`, `ModuleSegmentMove`, `ModuleFree`, `DbgPrompt`, VDM-stack frame access, `DbgInit`, `NtRaiseHardError`, debugger/CSR imports and session controlled-stop provenance. |
 

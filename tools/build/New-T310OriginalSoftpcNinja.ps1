@@ -216,7 +216,7 @@ $adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_com
 # it in the formal closure instead of accepting an unresolved external edge.
 $adapterBaseSrvNames = @('base_vdm_client.c', 'base_vdm_local.c', 'base_vdm_broker.c')
 $adapterMonitorNames = @('vdm_control.c', '../mvdm_vdm_tib.c')
-$adapterDebuggerNames = @('dbg_init.c', 'dbg_unavailable.c')
+$adapterDebuggerNames = @('dbg_init.c', 'dbg_state.c', 'dbg_dispatch.c', 'dbg_unavailable.c')
 $adapterRedirNames = @('mvdm_redirector_handle.c', 'mvdm_redirector_mailslot.c',
                        'mvdm_redirector_guest_copy.c', 'mvdm_redirector_async.c')
 $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c', 'mvdm_host_identity.c',
