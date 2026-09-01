@@ -2,13 +2,33 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T347 is closed with its complete
-source-shaped COMMAND/DEM/SoftPC scalar-alias cohort: one existing session
-mapping-manager route, original-source migration, raw-alias removal, focused
-lease proof, and selected CPU40/x86 formal link. Its one unchanged fixed
-observation remained at `54:05` and timed out, so it neither proves nor
-attributes `cmdSetInfo` guest completion. It creates no trace-selected repair.
-See the [T347 closure](history/m0-t347-command-dem-softpc-scalar-alias-lifecycle-closure-20260901.md).
+**No active M/T/S packet.** M0 T348 is closed: its complete DOS/WOW16 guest
+and SoftPC-firmware artifact inventory has one reproducible final disposition
+per path and an exact executable-relative staging proof.  It is explicitly a
+load-only media closure, not a guest rebuild or execution-continuity claim.
+The next candidate is the bounded MVDM package-path capacity disposition.
+See the [T348 closure](history/m0-t348-guest-dos-wow16-artifact-matrix-closure-20260901.md).
+
+### M0 T348 — Closed guest artifact matrix record
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T348; closed ordinary-mode packet. |
+| Delivered Result | 2,719 guest/firmware paths have a reproducible final disposition; the 16 selected stage destinations have exact hash and refusal evidence. |
+| Boundary | Load-only media; no guest source rewrite/rebuild or host execution-continuity claim. |
+| Successor | Queue item 2: executable-relative MVDM package-path capacity disposition. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
+| Similar-Issue Sweep | Runtime destination list, original `COMMAND.COM` dual placement, source-built cross-check non-substitution, ROM/profile/CMOS adjacency and stage refusal behavior. |
+
+**Plan:** [Guest DOS/WOW16 artifact matrix](etc/operations/proposal-guest-dos-wow16-artifact-matrix-001.md).
+
+**S1 closure:** [guest media provenance inventory](etc/evidence/m0-t348-s1-guest-media-provenance-inventory-001.md)
+records 2,719 current media paths and their unique dispositions.  **S2
+closure:** [staging reconciliation](etc/evidence/m0-t348-s2-executable-relative-staging-reconciliation-001.md)
+proves the exact 16-destination selection, hash parity, and refusal behavior.
+**S3 closure:** [matrix closure](etc/evidence/m0-t348-s3-guest-artifact-matrix-closure-001.md)
+records byte-stable regeneration and complete unique-disposition coverage.
+Neither changes guest content or claims guest runtime behavior.
 T342 is closed: the only startup-reached debugger form
 is the original `DBGInit` shape through its bounded adapter; BDE, VDMDBG,
 VDMEXTS and FAX remain their original tool/product packages. T341 is closed:
@@ -25,7 +45,7 @@ and
 
 ## Active Packet
 
-### M0 T345 S1 — Original host capability / caller / failure inventory
+### Indexed predecessor record — M0 T345 host capability expansion
 
 | Field | Record |
 | --- | --- |

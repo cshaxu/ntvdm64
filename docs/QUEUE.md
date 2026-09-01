@@ -36,25 +36,19 @@ item are in the [package recovery proposal set](etc/operations/package-recovery-
 
 MVDM host mirror-topology recovery is already closed. `CPU_30_STYLE` is an
 NT4 kernel-VDM V86 monitor rather than a software CCPU profile, and is
-historical-only. Production compilation selects only `CPU_40_STYLE`/CCPU40.
-Every candidate package must repair and verify its reached closure on both
-independent MSVC Win32/x86 and x64 graphs. A source-shaped unavailable runtime
-result may be retained only with paired compile/link evidence and an exact
-owner transfer; x64 may not be accumulated as later compatibility debt. Bochs
-is retired and is neither a production route nor an acceptance row.
+historical-only. Production compilation and runtime acceptance currently select
+only Win32/x86 `CPU_40_STYLE`/CCPU40. Existing mapping-manager seams remain
+architecture-neutral source constraints, but x64 compile/link is not a gate for
+this current SoftPC recovery sequence. Bochs is retired and is neither a
+production route nor an acceptance row.
 
 | Order | Candidate implementation package |
 | --- | --- |
-| 1 | Resident DOS-BIOS device-initialization recovery — whole original `charinit -> DEVIOCALL2 -> strategy/interrupt` owner-package source/ABI/failure review before any device repair; transferred by the preceding vertical-slice closure. |
-| 2 | VDD owner package |
-| 3 | Debugger/BDE/FAX owner packages |
-| 4 | Broker process and cross-process coordination |
-| 5 | In-process multi-session reentrancy audit |
-| 6 | Host capability expansion |
-| 7 | SoftPC graphics-workload integration continuation — after its named startup predecessor is closed, run the fixed selected CPU40/x86 container through one DOS graphics-mode workload and close the remaining presentation-runtime criterion without changing controller or guest semantics. |
-| 8 | Guest DOS/WOW16 artifact matrix |
-| 9 | Product release closure |
-| 10 | Executable-relative MVDM package-path capacity disposition — retain the original COMMAND configuration capacity contract and decide the explicit product behavior for installations whose selected `mvdm` root cannot fit it. |
+| 1 | Guest DOS/WOW16 artifact matrix — classify the complete original and source-built DOS/WOW16 media sets as load-only inputs, establish their reproducible executable-relative manifest, and distinguish product assets from historical build intermediates. |
+| 2 | Executable-relative MVDM package-path capacity disposition — retain the original COMMAND configuration capacity contract and decide the explicit product behavior for installations whose selected `mvdm` root cannot fit it. |
+| 3 | CPU40/NTDOS post-`SVC_CMDSETINFO` guest-bootstrap continuity — recover the next complete original guest/machine owner cohort only after source review; no trace-selected BOP leaf repair. |
+| 4 | SoftPC graphics-workload integration continuation — after its named guest-bootstrap predecessor is closed, run the fixed selected CPU40/x86 container through one DOS graphics-mode workload and close the remaining presentation-runtime criterion without changing controller or guest semantics. |
+| 5 | Product release closure |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).
