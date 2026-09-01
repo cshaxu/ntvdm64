@@ -48,6 +48,22 @@ static int current_segment_base(IU16 selector, IU32 *base_out)
     return 0;
 }
 
+/* CPU40 keeps descriptor state inside the original CCPU core.  Its original
+ * `selector_outside_GDT_LDT` and `read_descriptor_linear` routines are the
+ * same CCPU40 mechanism used by protected-mode instruction paths.  Do not
+ * recreate a CPU30 monitor descriptor table in this adapter. */
+static int descriptor_segment_base(IU16 selector, IU32 *base_out)
+{
+    IU32 descriptor_address;
+    CPU_DESCR descriptor;
+
+    if (base_out == 0 || selector_outside_GDT_LDT(selector,
+        &descriptor_address)) return 0;
+    read_descriptor_linear(descriptor_address, &descriptor);
+    *base_out = descriptor.base;
+    return 1;
+}
+
 int mvdm_softpc_effective_address(IU16 selector, IU32 offset, IU32 *address_out)
 {
     IU32 base;
@@ -58,11 +74,11 @@ int mvdm_softpc_effective_address(IU16 selector, IU32 offset, IU32 *address_out)
         *address_out = ((IU32)selector << 4) + offset;
         return 1;
     }
-    /* The selected CCPU40 interface exports loaded segment-cache state, not
-     * the retired CPU30 monitor descriptor-table carrier.  Unknown selector
-     * lookup remains a checked failure until its original CPU40 provider is
-     * recovered; no host-pointer or synthetic descriptor fallback is valid. */
-    if (!current_segment_base(selector, &base)) return 0;
+    /* Prefer the current segment cache, then use the original CCPU40 GDT/LDT
+     * descriptor walker. Both results remain numeric guest-linear values;
+     * neither path exposes a SoftPC backing pointer. */
+    if (!current_segment_base(selector, &base) &&
+        !descriptor_segment_base(selector, &base)) return 0;
     *address_out = base + offset;
     return 1;
 }

@@ -244,10 +244,11 @@ GLOBAL sys_addr sim32_effective_addr IFN2(double_word, addr, BOOL, pm)
     }
 #ifdef CPU_40_STYLE
     /*
-     * DIVERGENCE(MVDM-HOST-DIV-148): CPU40 CCPU keeps descriptor decoding
+     * DIVERGENCE(MVDM-HOST-DIV-177): CPU40 CCPU keeps descriptor decoding
      * in its CPU_DESCR implementation, whereas this historical SIM32 body
      * uses the CPU30 DESCR carrier. Preserve SIM32's numeric result and
-     * invalid-selector sentinel through the checked same-shaped adapter.
+     * invalid-selector sentinel through the checked adapter, which uses the
+     * original CPU40 GDT/LDT descriptor walker rather than recreating CPU30.
      */
     {
         IU32 linear;
