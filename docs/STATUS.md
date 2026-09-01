@@ -97,6 +97,13 @@ mapping/Win32 binding route and is present in both formal CPU40 graphs:
 | Exit Criteria | Each reached presentation edge has one original owner/disposition and one bounded source-shaped cohort is selected or every form is transferred to a named later owner. |
 | Stop Conditions | A new window framework, private Console Server contract, video-device behavior, guest change or unreviewed import requires a further S admission. |
 
+**S1 P1:** the presentation ledger separates source-owned display controllers,
+public-console input and title forms, session video-event handoff, and the
+unavailable private Console-Server fullscreen/controller protocol. It also
+corrects three stale mvdm-host divergence registrations so current mirror
+state—not prior experiments—drives the cohort decision:
+[graphics-presentation owner ledger](etc/operations/m0-t346-s1-graphics-presentation-owner-ledger.tsv).
+
 **T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
 **T343 closure:** [broker/process coordination closure](history/m0-t343-broker-process-cross-process-coordination-closure-20260901.md).
