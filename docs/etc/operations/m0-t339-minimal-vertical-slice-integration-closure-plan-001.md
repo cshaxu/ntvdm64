@@ -45,6 +45,14 @@ body and a same-shaped adapter. Preserve guest ordering, original failures and
 mapping-manager leases. A host namespace or boot-drive change requires its own
 source contract; it may not be inferred from the terminal service alone.
 
+**Current observation limit.** The one allowed fixed-container run recorded
+original BOP ingress through `54:05` and then timed out; it did not reach
+`50:3D`, so its copied register discriminator was not emitted. The resulting
+[S2 evidence](../evidence/m0-t339-s2-passive-terminal-discriminator-001.md)
+selects no recovery cohort. A subsequent task must first admit the exact
+post-`54:05` continuation boundary; it must not convert this timeout into a
+speculative `demExitVDM` repair or rerun changed containers.
+
 ### S3 — Fixed vertical-slice result
 
 Rebuild/link the selected x86 and x64 formal product graphs. Run at most one

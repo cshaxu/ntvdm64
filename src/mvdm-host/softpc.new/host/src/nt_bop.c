@@ -154,7 +154,9 @@ void MS_bop_0(void) {
                                          FALSE
                                          ));
     /* DIVERGENCE(MVDM-HOST-DIV-164): state-neutral reached-ingress evidence. */
-    mvdm_softpc_record_bop_dispatch(0x50u, (unsigned int)DemCmd);
+    mvdm_softpc_record_bop_dispatch(0x50u, (unsigned int)DemCmd,
+        (unsigned int)getCS(), (unsigned int)getIP(),
+        (unsigned int)getDS(), (unsigned int)getDX());
     DemDispatch( DemCmd );
     setIP((USHORT)(getIP() + 1));
 
@@ -326,7 +328,9 @@ void MS_bop_4(void)
 
     sas_load( ((ULONG)getCS()<<4) + getIP(), &Command);
     /* DIVERGENCE(MVDM-HOST-DIV-164): state-neutral reached-ingress evidence. */
-    mvdm_softpc_record_bop_dispatch(0x54u, (unsigned int)Command);
+    mvdm_softpc_record_bop_dispatch(0x54u, (unsigned int)Command,
+        (unsigned int)getCS(), (unsigned int)getIP(),
+        (unsigned int)getDS(), (unsigned int)getDX());
     CmdDispatch((ULONG) Command);
     setIP((USHORT)(getIP() + 1));
 }

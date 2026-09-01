@@ -194,7 +194,11 @@ void mvdm_softpc_record_main_return(int result)
 }
 
 void mvdm_softpc_record_bop_dispatch(unsigned int selector,
-                                     unsigned int service)
+                                     unsigned int service,
+                                     unsigned int guest_cs,
+                                     unsigned int guest_ip,
+                                     unsigned int guest_ds,
+                                     unsigned int guest_dx)
 {
     static const char hex[] = "0123456789ABCDEF";
     char message[] = "MVDM-BOP-DISPATCH 00:00\r\n";
@@ -207,6 +211,29 @@ void mvdm_softpc_record_bop_dispatch(unsigned int selector,
     message[19] = hex[selector & 0x0fu];
     message[21] = hex[(service >> 4) & 0x0fu];
     message[22] = hex[service & 0x0fu];
+    if (selector == 0x50u && service == 0x3du) {
+        char terminal_message[] =
+            "MVDM-BOP-DISPATCH 50:3D cs=0000 ip=0000 ds=0000 dx=0000\r\n";
+        terminal_message[27] = hex[(guest_cs >> 12) & 0x0fu];
+        terminal_message[28] = hex[(guest_cs >> 8) & 0x0fu];
+        terminal_message[29] = hex[(guest_cs >> 4) & 0x0fu];
+        terminal_message[30] = hex[guest_cs & 0x0fu];
+        terminal_message[35] = hex[(guest_ip >> 12) & 0x0fu];
+        terminal_message[36] = hex[(guest_ip >> 8) & 0x0fu];
+        terminal_message[37] = hex[(guest_ip >> 4) & 0x0fu];
+        terminal_message[38] = hex[guest_ip & 0x0fu];
+        terminal_message[43] = hex[(guest_ds >> 12) & 0x0fu];
+        terminal_message[44] = hex[(guest_ds >> 8) & 0x0fu];
+        terminal_message[45] = hex[(guest_ds >> 4) & 0x0fu];
+        terminal_message[46] = hex[guest_ds & 0x0fu];
+        terminal_message[51] = hex[(guest_dx >> 12) & 0x0fu];
+        terminal_message[52] = hex[(guest_dx >> 8) & 0x0fu];
+        terminal_message[53] = hex[(guest_dx >> 4) & 0x0fu];
+        terminal_message[54] = hex[guest_dx & 0x0fu];
+        (void)WriteFile(output, terminal_message,
+            (DWORD)(sizeof(terminal_message) - 1), &written, NULL);
+        return;
+    }
     (void)WriteFile(output, message, (DWORD)(sizeof(message) - 1),
                     &written, NULL);
 }

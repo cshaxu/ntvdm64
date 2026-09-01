@@ -3,8 +3,10 @@
 ## Current Work
 
 **Active: M0 T339 S2.** S1 has completed the source map of both direct
-`50:3D` callsites and the distinct `mem_err -> stall` family. S2 may obtain
-one passive, source-shaped discriminator before selecting a recovery cohort.
+`50:3D` callsites and the distinct `mem_err -> stall` family. S2's one
+permitted passive observation stopped at original `54:05`, before `50:3D`;
+it selected no recovery cohort and its resulting admission boundary is now
+recorded as evidence.
 
 ## Active Packet
 
@@ -39,6 +41,8 @@ one passive, source-shaped discriminator before selecting a recovery cohort.
 | Non-goals | No BOP provider, changed guest media, changed machine memory, host-drive policy, synthetic EXEC success, or alternate CPU executor. |
 | Required result | A recorded original callsite/family discriminator and a single source-backed S3 recovery disposition, or an evidence-backed admission blocker. |
 | Verification | One unchanged short-root container observation, compared only to the S1 source map; no product behavior change. |
+
+**Current evidence:** [passive terminal discriminator observation](etc/evidence/m0-t339-s2-passive-terminal-discriminator-001.md). The sole observation was a fixed-container timeout after `54:05`, not a `50:3D` callsite record; S2 remains active only to govern its no-selection disposition. No S3 repair is admitted.
 
 **Plan:** [M0 T339 plan](etc/operations/m0-t339-minimal-vertical-slice-integration-closure-plan-001.md). T339 starts from T338's closed short-root `50:3D` transfer and does not reopen configuration capacity, FDC/INT15, or BOP leaf work.
 

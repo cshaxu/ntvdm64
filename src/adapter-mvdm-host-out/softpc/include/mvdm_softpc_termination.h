@@ -21,9 +21,15 @@ void mvdm_softpc_record_unhandled_exception(
  * return after host_main/SEH have already selected the result. */
 void mvdm_softpc_record_main_return(int result);
 
-/* Fixed-container diagnostic only.  `selector` and `service` were already
- * decoded by original MVDM code; this records them without routing them. */
+/* Fixed-container diagnostic only. `selector` and `service` were already
+ * decoded by original MVDM code. The four guest words are copied at that
+ * ingress and are observational only; this function neither routes nor
+ * changes guest state. */
 void mvdm_softpc_record_bop_dispatch(unsigned int selector,
-                                     unsigned int service);
+                                     unsigned int service,
+                                     unsigned int guest_cs,
+                                     unsigned int guest_ip,
+                                     unsigned int guest_ds,
+                                     unsigned int guest_dx);
 
 #endif
