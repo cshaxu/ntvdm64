@@ -2,10 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T344 S1.** T343 is closed: its selected DOS BaseVDM copied-record
-core, source-shaped adapter binding and paired formal verification are
-complete, without claiming CSRSS/BaseSrv or cross-process transport. T344 now
-begins the next ordered package as an original-state/reentrancy audit only.
+**Active: M0 T345 S1.** T344 is closed: its source-defined state-owner audit
+retains one active SoftPC machine/session per process, rather than treating
+thread-local CCPU buffers as a multi-session guarantee. T345 begins the next
+ordered host-capability package with source/ABI/failure inventory only.
 T342 is closed: the only startup-reached debugger form
 is the original `DBGInit` shape through its bounded adapter; BDE, VDMDBG,
 VDMEXTS and FAX remain their original tool/product packages. T341 is closed:
@@ -22,39 +22,29 @@ and
 
 ## Active Packet
 
-### M0 T344 S1 — Original state / caller / ownership inventory
+### M0 T345 S1 — Original host capability / caller / failure inventory
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T344 S1; Ordinary Mode (single-person dual-role implementation). |
-| Admission And Approval | Queue candidate 5, admitted under the standing direction to execute ordered owner packages after T343 closure. |
-| Objective | Establish the complete source/ABI/owner inventory for original MVDM process, thread, VDM and worker state before any in-process multi-session enablement. |
-| Non-goals | No multi-session activation, CSRSS/BaseSrv recreation, process broker expansion, cross-user control, guest/BOP change, CPU30, Bochs route, alternate executor or speculative scheduler. |
-| Reference Baseline | T343 closure, original MVDM BaseClient/BaseSrv, COMMAND/WOW/monitor/SoftPC state carriers, current session/mapping-manager and CPU40 formal graphs. |
-| Files And ABI Surface | Original static/TLS/TEB/worker/record state, `session` state and hooks, `broker` records, SoftPC/monitor state carriers and their direct callers. |
+| Identifier Mode | M0 T345 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Queue candidate 6, admitted under the standing direction to execute ordered owner packages after T344 closure. |
+| Objective | Establish the source/ABI/caller/failure inventory for original MVDM drive, filesystem, console, registry and device capabilities before selecting any one recoverable owner cohort. |
+| Non-goals | No generic capability dispatcher, virtual filesystem, drive-policy change, host installation, registry mutation merely to run the product, CSRSS/kernel VDM recreation, guest/BOP change, CPU30, Bochs route or speculative device behavior. |
+| Reference Baseline | T344 closure; current original MVDM DOS/SoftPC host mirrors; existing adapter-mvdm-host-out Win32, Redirector, monitor and SoftPC bindings; session mapping-manager and paired CPU40 formal graphs. |
+| Files And ABI Surface | Original host capability source forms, public declarations, direct callers, existing adapters, public Win32 candidates, and source-defined permission/unavailable results. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, architecture, coding and CPU40-only rules. |
-| Verification | Complete source/declaration/definition/caller/state-scope walk, current owner comparison, formal-build selection review, documentation governance and diff checks; no runtime behavior change in S1. |
-| Expected Markers | Every reached state carrier has process/thread/session scope and a unique owner/disposition; no project state is mistaken for original MVDM state. |
-| Asset Needs | Existing original mirrors, formal graph, broker/session and adapter source; no guest/media import or host installation. |
-| Reporting Requirements | Separate original facts from current binding facts; preserve source owner terminology and record all deferred/hard-boundary transfers. |
-| Stop Conditions | Any implementation, state migration, new scheduler, thread/process control, raw identity transport, guest change or unreviewed source import requires S2 admission. |
-| Exit Criteria | Every reached original state carrier has a source owner and current disposition; S1 selects at most one coherent follow-up lifecycle cohort or explicitly retains the single-session profile. |
+| Verification | Complete selected capability source/declaration/definition/caller/failure walk, current-binding comparison, documentation governance and diff checks; no runtime behavior change in S1. |
+| Expected Markers | Each reached capability edge has an original owner, a current disposition and an exact success/permission/unavailable contract; S1 selects at most one coherent lowest-dependency cohort. |
+| Asset Needs | Existing original mirrors, formal graph, session and adapter sources; no host installation, guest/media import or system configuration change. |
+| Reporting Requirements | Separate original source facts from current binding facts; preserve original owner terminology and record all deferred/hard-boundary transfers. |
+| Stop Conditions | Any new generic provider, virtual drive, new mapper, raw host identity transport, guest change, host mutation or unreviewed source import requires S2 admission. |
+| Exit Criteria | Every reached candidate capability has an owner/disposition and source-defined result; one bounded source-shaped cohort is selected or all items are transferred to named later owners. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。” |
-| Similar-Issue Sweep | COMMAND/WOW BaseVDM callers, `CurrentMonitorTeb`, TEB/VDM_TIB, CCPU worker state, SoftPC globals, mapper ownership, BaseSrv records, VDD/Redirector/WOW callbacks, teardown and formal-map state. |
+| Similar-Issue Sweep | DEM/COMMAND file and drive paths, host COM/console, PIF/configuration, current-directory/registry, printer/serial/device endpoints, permission results, Redirector transfer, session mapping and teardown. |
 
-**Plan:** [M0 T344 multi-session reentrancy audit](etc/operations/m0-t344-in-process-multi-session-reentrancy-audit-plan-001.md).
+**Plan:** [M0 T345 host capability expansion](etc/operations/m0-t345-host-capability-expansion-plan-001.md).
 
-**S1 P1:** the initial state-owner ledger distinguishes original server,
-thread, monitor, WOW, CCPU and machine carriers from the project's session,
-BaseVDM and broker state. It is an inventory checkpoint, not a multi-session
-enablement: [T344 state-owner ledger](etc/operations/m0-t344-s1-state-owner-ledger.tsv).
-
-**S1 P2:** the CCPU worker walk now separates the per-thread `ThreadSimBuf`
-TLS allocation from the process-wide TLS-slot, new-thread registry and SAS
-machine vector. The original monitor identity and optional PIG observation
-carriers are likewise recorded as process-global blockers. This narrows the
-next audit to source-defined machine/monitor lifecycle, rather than treating
-all TLS use as session-safe.
+**T344 closure:** [in-process multi-session reentrancy audit](history/m0-t344-in-process-multi-session-reentrancy-audit-closure-20260901.md) and its [formal closure evidence](etc/evidence/m0-t344-s3-single-session-formal-closure-001.md).
 
 **T343 closure:** [broker/process coordination closure](history/m0-t343-broker-process-cross-process-coordination-closure-20260901.md).
 

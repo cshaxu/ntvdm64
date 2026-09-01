@@ -22,6 +22,12 @@ CCPU worker, SAS/vector, monitor identity and WOW task definitions—not merely
 their declarations—so that a per-thread buffer is not mistaken for a
 per-session machine and a process-global carrier is not silently multiplied.
 
+P3 groups the selected CPU40 machine's CCPU, video, interrupt/timer and host
+lifecycle state. Its result is a bounded negative decision: retain one active
+SoftPC machine/session per process. S2 is not admitted unless a later owner
+package supplies a complete source-shaped machine-instance lifecycle; it may
+not copy these globals into a new scheduler.
+
 ### S2 — Selected reentrancy cohort
 
 Only after S1 selects a coherent cohort, recover its source-shaped lifecycle
