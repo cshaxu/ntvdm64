@@ -2,6 +2,34 @@
 
 ## Current Work
 
+### M0 T368 S3 — Active formal COMMAND boundary closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T368 S3; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from T367's closed frozen original `LOADFIX.COM` observation under the owner's standing instruction to execute the ordered queue. |
+| Objective | Rebuild and inspect the selected CPU40/x86 final product so the original COMMAND cohort and Base VDM/session bindings are formal inputs. |
+| Non-goals | No app command parser, synthetic no-next record, host DOS loader, BOP leaf patch, guest-media mutation, CPU/device change, `cmdExec32`, native child, WOW, Redirector, CSRSS or runtime observation. |
+| Reference Baseline | T368 S1/S2 evidence; original `dos/command` mirror; existing BaseClient/BaseSrv/session binding; selected CPU40/x86 product. |
+| Files And ABI Surface | Formal CPU40/x86 graph inputs: original COMMAND objects, Base VDM/session binding library and the final product only; guest NTDOS remains load-only. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Formal Ninja rebuild/link, selected input query and source-shaped contract checks. No fixed runtime observation. |
+| Expected Markers | `original-mvdm-command.lib`, `basesrv-bindings.lib` and the final CPU40/x86 product are current and selected final inputs. |
+| Asset Needs | Existing formal x86 build root, source mirrors and T368 S1/S2 evidence only. |
+| Reporting Requirements | Record executed formal command, product identity and exact input proof; separate link closure from runtime proof. |
+| Stop Conditions | Need to alter command record semantics, construct a command parser/child/PSP, patch an isolated BOP, alter guest media or run the product requires new S admission. |
+| Exit Criteria | Formal final product links with the original COMMAND and Base VDM/session inputs, and focused static contract checks pass. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `54:01`, `cmdGetNextCmd`, `CmdDispatch`, CMDINFO, command-tail/environment, `IsFirstCall`, `IsRepeatCall`, Base VDM record, no-next wait, transient COMMAND and guest `$Exec` handoff. |
+
+**Plan:** [M0 T368 COMMAND post-record execution continuity](etc/operations/m0-t368-command-post-record-execution-continuity-001.md).
+
+**S1 evidence:** [original COMMAND post-record topology ledger](etc/evidence/m0-t368-s1-original-command-post-record-topology-001.md).
+
+**S2 evidence:** [COMMAND record-binding closure](etc/evidence/m0-t368-s2-command-record-binding-closure-001.md).
+
+**Active: M0 T368 S3.**
+
 ### M0 T367 S1 — Closed original DOS EXEC/parent-return owner ledger
 
 | Field | Record |
@@ -97,9 +125,9 @@ S4 closure: [frozen original `LOADFIX.COM` observation](etc/evidence/m0-t367-s4-
 
 T367 is closed; see its [closure record](history/m0-t367-original-dos-exec-parent-return-closure-20260902.md).
 
-**No active M/T/S packet.** The next packet begins at original COMMAND's
-post-record `54:01` execution-continuity owner, not at a DEM or DOS leaf
-service.
+T367 transferred to original COMMAND's post-record `54:01`
+execution-continuity owner, now active as M0 T368; it did not authorize a DEM
+or DOS leaf-service repair.
 
 ### M0 T366 S1 — Closed declared DOS workload command-record owner ledger
 
