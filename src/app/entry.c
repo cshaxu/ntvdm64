@@ -140,7 +140,7 @@ int main(int argc, char **argv)
         result = APP_STARTUP_DECLARATION_REJECTED;
         goto finish;
     }
-    if (declaration.ordinary_child != 0u &&
+    if (declaration.command_declared != 0u &&
         !app_launch_declaration_publish(&declaration, &owner)) {
         result = APP_STARTUP_COMMAND_REJECTED;
         goto finish;

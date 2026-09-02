@@ -32,13 +32,13 @@ adapter-owned record before original `scs_init` asks `GetNextVDMCommand(NULL)`
 whether this is the first DOS VDM. A declared command payload remains owned by
 the Base VDM adapter.
 
-For the admitted one-child integration profile, `--ordinary-child` declares
-the selected session's immutable `mvdm/system32/COMMAND.COM /C EXIT` image, with the
-original Base VDM `CmdLine` CR/LF terminator, through that
-same copied record. App removes only this composition option before entering
-the original SoftPC argument parser. It derives the command, application,
-environment and current directory from the session-selected MVDM system root;
-it does not load, execute, emulate or return the child itself.
+`--command <text>` declares one ordinary DOS command for the selected session.
+App forms the original Base VDM `CmdLine` shape `/C <text>\r\n`, then publishes
+it with the selected immutable `mvdm/system32/COMMAND.COM` application identity
+through that same copied record. App removes only this composition option before
+entering the original SoftPC argument parser. It derives the command, application,
+environment and current directory from the session-selected MVDM system root; it
+does not load, execute, emulate or return the command itself.
 
 ## M0 T310 S3 selected backend composition
 

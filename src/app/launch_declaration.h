@@ -9,7 +9,8 @@ typedef struct app_launch_declaration {
     base_vdm_local base_vdm;
     base_vdm_broker broker;
     uint32_t bound;
-    uint32_t ordinary_child;
+    uint32_t command_declared;
+    char requested_command[MAXIMUM_VDM_COMMAND_LENGTH];
     char command[MAXIMUM_VDM_COMMAND_LENGTH];
     char application[MAX_PATH];
     char environment[MAXIMUM_VDM_ENVIORNMENT];

@@ -22,9 +22,18 @@ int app_launch_declaration_consume_options(app_launch_declaration *declaration,
         return 0;
     write_index = 1;
     for (read_index = 1; read_index < *argc; ++read_index) {
-        if (strcmp(argv[read_index], "--ordinary-child") == 0) {
-            if (declaration->ordinary_child != 0u) return 0;
-            declaration->ordinary_child = 1u;
+        if (strcmp(argv[read_index], "--command") == 0) {
+            size_t command_bytes;
+            if (declaration->command_declared != 0u ||
+                read_index + 1 >= *argc) return 0;
+            command_bytes = strlen(argv[read_index + 1]);
+            if (command_bytes == 0u || command_bytes >=
+                    sizeof(declaration->requested_command) ||
+                strpbrk(argv[read_index + 1], "\r\n") != NULL) return 0;
+            memcpy(declaration->requested_command, argv[read_index + 1],
+                command_bytes + 1u);
+            declaration->command_declared = 1u;
+            ++read_index;
             continue;
         }
         argv[write_index++] = argv[read_index];
@@ -88,7 +97,7 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     unsigned char drive_letter;
 
     if (declaration == NULL || declaration->bound == 0u ||
-        declaration->ordinary_child == 0u || owner == NULL ||
+        declaration->command_declared == 0u || owner == NULL ||
         !session_valid(owner) || owner->state != SESSION_STATE_ACTIVE ||
         declaration->base_vdm.available != 0u) return 0;
     root = session_mvdm_system_root(owner);
@@ -98,7 +107,11 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     if (!make_path(declaration->application, sizeof(declaration->application),
             root, "system32\\COMMAND.COM") ||
         !append_text(declaration->command, sizeof(declaration->command),
-        &command_length, "/C EXIT\r\n") ||
+        &command_length, "/C ") ||
+        !append_text(declaration->command, sizeof(declaration->command),
+        &command_length, declaration->requested_command) ||
+        !append_text(declaration->command, sizeof(declaration->command),
+        &command_length, "\r\n") ||
         !append_text(declaration->environment, sizeof(declaration->environment),
             &environment_length, "COMSPEC=") ||
         !append_text(declaration->environment, sizeof(declaration->environment),

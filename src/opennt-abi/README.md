@@ -32,7 +32,7 @@ baseline after checking the reached `VdmServiceClass` layout used by original
 same manifest. This supplies declarations only and does not admit monitor,
 selector, or provider behavior.
 
-T282 S2 selected byte-exact public internal `vdmapi.h` and PIF `pif.h` for
+T282 S2 selected public internal `vdmapi.h` and byte-exact PIF `pif.h` for
 the original COMMAND package. `vdmapi.h` supplies the `VDMINFO` and
 `GetNextVDMCommand` declarations; `pif.h` supplies only the historical PIF
 layouts. Neither import supplies a callable VDM API, PIF provider, selector or
@@ -107,5 +107,6 @@ and
 
 ## Divergence register
 
-None. Every current file below `source/` is byte-identical to the exact source
-path and hash recorded in the import manifest.
+| ID | Original purpose | Reason | Implementation | Files |
+| --- | --- | --- | --- | --- |
+| OPENNT-ABI-001 | `vdmapi.h` declares the original `VDMINFO` structure and Base VDM client API. | The original declaration carrier has no include guard, but the selected broker and Base VDM adapter both legitimately include it in one modern translation unit. | Add only an outer preprocessor guard. All original declarations, layout, constants and API names remain unchanged. | `source/public/internal/base/inc/vdmapi.h` |

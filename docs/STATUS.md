@@ -513,9 +513,43 @@ proves that the observed result is a selected session controlled-stop rather
 than normal `main` return or S30's disposal failure.  It deliberately does
 not guess which linked `ERROR_CALL_NOT_IMPLEMENTED` entry was reached.
 
-### M0 T355 S35 — Active original COMMAND command-acquisition/wait cohort audit
+### M0 T355 S35 — Closed original COMMAND command-acquisition/wait cohort audit
 
-**Active: M0 T355 S35.**
+**S35 closure:** [original COMMAND command-acquisition/wait cohort audit](etc/evidence/m0-t355-s35-original-command-command-acquisition-wait-cohort-audit-001.md)
+establishes that the selected local Base VDM path already preserves the
+original consumer-side `GetNextVDMCommand` capture/wait/retry contract, but
+that `--ordinary-child` is only an observation producer—not the normal
+BaseSrv-like command producer.  The next packet is limited to that app-to-
+Base-VDM declaration seam; it may not repair a BOP leaf or recreate CSRSS.
+
+### M0 T355 S36 — Closed source-shaped normal DOS command declaration recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T355 S36; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by S35's complete original COMMAND/BaseClient/BaseSrv cohort audit under the standing owner direction to continue the active packet. |
+| Objective | Replace only the fixed-observation `--ordinary-child` producer with one explicit app-owned normal DOS launch declaration that publishes a source-shaped copied Base VDM DOS record to the existing local BaseClient/BaseSrv recovery. |
+| Non-goals | No interactive console command reader, fabricated BOP result, guest/media mutation, DEM/FastRead change, CPU/CCPU/BIOS change, CPU30, Bochs, x64 runtime, CSRSS/BaseSrv reconstruction, WOW notification, PIF, redirection/standard-handle duplication, child/parent EXEC, device or graphics claim. |
+| Reference Baseline | S35 source ledger; unchanged original `cmdGetNextCmd`, selected BaseClient/BaseSrv mirror evidence, existing one-session copied local record and fixed package-media admission. |
+| Files And ABI Surface | `src/app/launch_declaration.[ch]`, `src/app/entry.c`, existing `base_vdm_command`/broker/local declarations and their local fixture.  No MVDM mirror function body or guest ABI changes. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original command/capture shape review; positive/negative app declaration fixture; existing Base VDM local contract fixture; formal CPU40/x86 link; one fixed-container observation only after local composition closes; governance/export and diff review. |
+| Expected Markers | A declared ordinary DOS command arrives through the existing copied record with original CR/LF, application, environment, directory and DOS wait/retry semantics; invalid declaration is rejected before original host startup. |
+| Asset Needs | Existing original mirrors, app, adapter, session, formal Ninja graph and immutable staged media; no new import or host-system mutation. |
+| Reporting Requirements | Separate app declaration, original BaseClient/COMMAND contract and runtime observation; state every intentionally unavailable BaseSrv product-shell capability. |
+| Stop Conditions | Any need for an ambient console reader, raw host/guest pointer, direct `cmdGetNextCmd` edit, CSRSS/CSR API, guest rewrite, media mutation, BOP leaf repair or runtime retry stops for new admission. |
+| Exit Criteria | One explicit product launch declaration reaches the existing local Base VDM producer with source-shaped record contents; normal and rejected cases have focused evidence and the formal product links.  A later runtime observation may only classify its first successor. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `BaseSrvUpdateVDMEntry`, `VDM_TO_TAKE_A_COMMAND`, `GetNextVDMCommand`, `ASKING_FOR_SECOND_TIME`, `CmdLine` CR/LF, `VDMINFO` capacity, DOS versus WOW queue ownership, app argument parsing and immutable package root. |
+
+**S36 closure:** [source-shaped normal DOS command declaration recovery](etc/evidence/m0-t355-s36-source-shaped-normal-dos-command-declaration-recovery-001.md)
+adds one explicit copied `--command <text>` producer to the existing local Base
+VDM contract. The positive and rejected forms pass its forced x86 fixture; the
+formal CPU40/x86 product links; one fixed observation times out without a
+trace-selected repair or guest-execution claim.
+
+**No active M/T/S packet.**  S36 is closed; a subsequent packet requires a
+fresh owner-defined source cohort rather than a trace-selected leaf repair.
 
 | Field | Record |
 | --- | --- |

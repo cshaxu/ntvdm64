@@ -53,13 +53,14 @@ static VOID __cdecl worker_reentry(void)
 static int verify_long_package_launch_declaration(void)
 {
     static char program[] = "fixture";
-    static char ordinary[] = "--ordinary-child";
-    char *argv[] = { program, ordinary, NULL };
+    static char command_option[] = "--command";
+    static char command_text[] = "EXIT";
+    char *argv[] = { program, command_option, command_text, NULL };
     const char *root =
         "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r37-command-ingress-after-complete-host-path-fix\\mvdm";
     const char *application =
         "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r37-command-ingress-after-complete-host-path-fix\\mvdm\\system32\\COMMAND.COM";
-    int argc = 2;
+    int argc = 3;
     session instance;
     app_launch_declaration declaration;
 
@@ -80,6 +81,40 @@ static int verify_long_package_launch_declaration(void)
         declaration.base_vdm.command[declaration.base_vdm.command_bytes - 1u] != '\0') return 35;
     if (!base_vdm_local_unbind(&declaration.base_vdm)) return 33;
     if (!session_dispose(&instance)) return 34;
+    return 0;
+}
+
+static int verify_rejected_launch_declarations(void)
+{
+    static char program[] = "fixture";
+    static char option[] = "--command";
+    static char empty[] = "";
+    static char line_break[] = "EXIT\n";
+    static char first[] = "VER";
+    static char second[] = "EXIT";
+    app_launch_declaration declaration;
+    int argc;
+    char *missing[] = { program, option, NULL };
+    char *empty_value[] = { program, option, empty, NULL };
+    char *multiline_value[] = { program, option, line_break, NULL };
+    char *duplicate[] = { program, option, first, option, second, NULL };
+
+    app_launch_declaration_initialize(&declaration);
+    argc = 2;
+    if (app_launch_declaration_consume_options(&declaration, &argc, missing))
+        return 37;
+    app_launch_declaration_initialize(&declaration);
+    argc = 3;
+    if (app_launch_declaration_consume_options(&declaration, &argc, empty_value))
+        return 38;
+    app_launch_declaration_initialize(&declaration);
+    argc = 3;
+    if (app_launch_declaration_consume_options(&declaration, &argc, multiline_value))
+        return 39;
+    app_launch_declaration_initialize(&declaration);
+    argc = 5;
+    if (app_launch_declaration_consume_options(&declaration, &argc, duplicate))
+        return 40;
     return 0;
 }
 
@@ -106,6 +141,8 @@ int main(void)
     int launch_declaration_result;
 
     launch_declaration_result = verify_long_package_launch_declaration();
+    if (launch_declaration_result != 0) return launch_declaration_result;
+    launch_declaration_result = verify_rejected_launch_declarations();
     if (launch_declaration_result != 0) return launch_declaration_result;
     reset_info(&information);
     if (GetNextVDMCommand(NULL) || GetLastError() != ERROR_CALL_NOT_IMPLEMENTED)

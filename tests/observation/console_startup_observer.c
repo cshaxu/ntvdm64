@@ -235,7 +235,7 @@ int main(int argc, char **argv)
     startup.hStdError = output;
     if (argc == 4) {
         snprintf(command_line, sizeof(command_line),
-                 "\"%s\" -f -o --ordinary-child", argv[1]);
+                 "\"%s\" -f -o --command EXIT", argv[1]);
     } else {
         size_t command_length;
         int argument_index;
