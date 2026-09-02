@@ -41,17 +41,21 @@ closure and trace-selected individual service patches.
    records through same-shaped adapter bindings.  Preserve initialization,
    cleanup and unavailable order; no static command substitute.
 3. **S3 — USER registration contract cohort.** Recover the original Base
-   global-memory hook lifetime and the complete 21-slot
+   global-memory hook lifetime and the complete 20-callback plus metadata
    `UserRegisterWowHandlers` input/output contract as one source-shaped
    cohort.  Classify each private USER output as public binding, retained
    private boundary or source-shaped unavailable before selecting an
    initialization form; no leaf WOW service may be enabled.
-4. **S4 — Selected task/UI service cohort and formal CPU40/x86 link.** Recover
-   one complete source-owned service subdomain admitted by S3, then link the
+4. **S4 — Same-shaped USER registration and Base hook recovery.** Implement
+   the full original registration-table boundary selected by S3 and the
+   coupled original Base `GlobalFree` hook lifetime.  Preserve complete
+   success/failure ordering; do not enable a service leaf.
+5. **S5 — Selected task/UI service cohort and formal CPU40/x86 link.** Recover
+   one complete source-owned service subdomain admitted by S4, then link the
    selected original provider cohort and run source-defined positive and
    unavailable focused tests.  Verify every guest-memory access uses the
    shared mapping-manager instance.
-5. **S5 — Fixed WOW16 integration observation.** Only if S1--S4 select the
+6. **S6 — Fixed WOW16 integration observation.** Only if S1--S5 select the
    complete original provider cohort and immutable WOW16 media, run exactly
    one fixed workload observation.  Otherwise close the reached earlier
    source-shaped unavailable boundary without a substitute.

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3896 |
+| Documentation records | 3897 |
 | --- | --- |
-| Generated UTC | 2026-09-02T12:58:01Z |
+| Generated UTC | 2026-09-02T13:03:09Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 9a2aee8989dd012347dcfc07c9ceda0c98d5ea4d5842acf8181584bb1f46d00b |
+| STATUS.md | principal control document | 1653f68885d1dbb7440a7bf0e370ce95aa258b4a379a97a531644880b53749aa |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1265,7 +1265,8 @@ content-divergent entries.
 | etc/evidence/m0-t373-s4-win16-ne-lifecycle-boundary-001.md | indexed supporting material | 4b8768c55ba54052bd4914d408479c12dcc6a0c03208bdc6d21202127f4a5193 |
 | etc/evidence/m0-t373-s5-formal-selection-stage-reconciliation-001.md | indexed supporting material | 225e6847005aa16b08c548a35a713cc10496c914b3c3a6efef65f22cea6708d5 |
 | etc/evidence/m0-t374-s1-whole-wow32-provider-matrix-001.md | indexed supporting material | 8ad57c25c45e83b4ed5a26752be9316e9d868c5030d502c331aeab5caf2b333a |
-| etc/evidence/m0-t374-s2-original-wow32-init-boundary-decision-001.md | indexed supporting material | 3a9f62481d47e25634f53458b875cbc1322de53551decebe058243e06daddbe6 |
+| etc/evidence/m0-t374-s2-original-wow32-init-boundary-decision-001.md | indexed supporting material | d936afdc51e5ed76fd0a6d4b0d2e618586a7259a1c553154d10984c2abdd7e8f |
+| etc/evidence/m0-t374-s3-wow-user-registration-contract-matrix-001.md | indexed supporting material | 6dd32d41b22b0deecb68b92ba50eda1e961a3b963fbf6e7dd1a298e3f9d9f426 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -2022,7 +2023,7 @@ content-divergent entries.
 | etc/operations/m0-t371-xms-dpmi-dos-extender-execution-001.md | indexed supporting material | 15305510c111bac06be0b7d53fbd85241c1d902f658537eac72dd5cb2fcf65b4 |
 | etc/operations/m0-t372-redirector-host-resource-execution-001.md | indexed supporting material | c3523515cb0adb0b780542571ebe3085c4f3d5279302a9aa4df852df2fb802f3 |
 | etc/operations/m0-t373-wow16-bootstrap-callback-ne-lifecycle-001.md | indexed supporting material | 2ebcfa215f5b9c61c3d03c0da1f1e0f6d7efb27c2a1f74a8d27cebfabbdcd2f6 |
-| etc/operations/m0-t374-wow16-service-ui-host-integration-001.md | indexed supporting material | af15d49d413c8db3c28ccc296b441a9f51318069d8b3fb3836acb28c4085d098 |
+| etc/operations/m0-t374-wow16-service-ui-host-integration-001.md | indexed supporting material | 23b830080ee39847caa649c9ad831d76e800711d3082fcd1f0dc39df891f4da4 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
