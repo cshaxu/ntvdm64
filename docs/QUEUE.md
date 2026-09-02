@@ -26,21 +26,23 @@ reaches them.
 
 Earlier guest-artifact, package-path, CPU40/NTDOS bootstrap, XMS,
 DPMI/DPMI32, Redirector and NetAPI/RAP packages have source/build or bounded
-local closures. They are not runtime-complete. The queue below turns those
-closures into proved original NTVDM behavior; static package closure and a
-reached BOP are not evidence that COMMAND, a DOS child, a native child or a
-Win16 program executed.
+local closures. They are **runtime baselines**, not compatibility completion.
+The queue below turns them into proved original single-process NTVDM behavior;
+static package closure and a reached BOP are not evidence that COMMAND, a DOS
+child, a DOS extender, a native child or a Win16 program executed.
 
 The detailed proposal, predecessor, delivery and exclusions for every queue
 item are in the [runtime recovery program](etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md).
 
-The prior minimal-DOS packets recorded exact source, formal-link and bounded
-observation facts, but did not fulfill their functional DOS-execution
-objective.  The owner has therefore directed that pure DOS execution takes
-precedence over WOW/Win16 recovery: recover a real CPU40/SoftPC boot-to-DOS
-path first, then prove original guest `.COM` and MZ execution and return.  A
-WOW package may retain a precise unavailable boundary, but must not consume
-the active slot while that DOS baseline remains unproved.
+The owner-directed product sequence is: first restore one process's original
+MVDM functionality as closely as public modern Win32 and non-invasive host
+constraints permit; only after its DOS, DOS-extender, COMMAND and WOW
+contracts have real workload evidence may the project add cross-process
+coordination.  A broker is never a prerequisite or a substitute for a
+single-process provider, guest lifecycle or machine behavior.  Every selected
+mirror retains its original owner source where composable, then the smallest
+same-shaped adapter, then a registered private overlay; newly authored
+behavior remains last resort.
 
 MVDM host mirror-topology recovery is already closed. `CPU_30_STYLE` is an
 NT4 kernel-VDM V86 monitor rather than a software CCPU profile, and is
@@ -57,14 +59,16 @@ complete source/binding/formal-link/runtime closure immediately before all
 later candidates. Resume the blocked candidate afterward. Do not continue a
 later package merely because an earlier linked component has no runtime proof.
 
-| Order | Candidate implementation package |
+| Next order | Candidate implementation package |
 | --- | --- |
-| 0 | Pure DOS CPU40/SoftPC startup and command baseline — establish one fixed, non-debug, console-owning executable-relative runtime container; recover the earliest missing original SoftPC host/console/timer/device owner only when it blocks the boot → NTIO/NTDOS → COMMAND chain; prove original `COMMAND.COM` starts and completes a declared built-in without synthetic guest input or loader. |
-| 1 | Pure DOS external program execution and parent return — use immutable original DOS media and original `$Exec`/JFN/SFT/PSP/arena/environment/termination paths to run at least one `.COM` and one MZ `.EXE`, then prove original parent and COMMAND continuation.  Missing immediate original owners are inserted before this package under the dependency-first rule. |
-| 2 | Pure DOS device, file and graphics workload closure — prove keyboard/console, file/seek/IOCTL, timer/IRQ and original SoftPC video paths with representative DOS workloads; this admits only the owner package directly blocking the selected workload. |
-| 3 | COMMAND native-child and control-broker closure — reconcile `cmdExec32`, native child lifecycle, command events/cleanup and the bounded command-control broker after the DOS baseline is real. |
-| 4 | WOW16 service, UI and host integration — resume only after the DOS baseline and COMMAND control contract are proved; retain the exact USER/CSRSS private boundary unless a complete same-shaped original cohort is admitted. |
-| 5 | Cross-family execution, runtime matrix and product release — reconcile enabled DOS/native-child/WOW families, then prove the selected DOS/Win16 matrices, complete x64 profile work and package the product. |
+| 1 | DOS extender runtime closure — turn the XMS/A20/UMB/INT15 and DPMI/DPMI32/DOSX source/link baseline into real original extender workload execution. |
+| 2 | Redirector and host-resource runtime closure — prove the selected original local VDMREDIR/file/resource contract with real DOS workloads; retain source-shaped unavailable legacy network branches. |
+| 3 | COMMAND native-child local lifecycle closure — recover `cmdExec32`, public `CreateProcess`, per-child stream/exit/cleanup and original re-entry semantics inside one `ntvdm.exe` process. It must not create a broker. |
+| 4 | WOW16 bootstrap, callback and NE lifecycle closure — prove one-process WOWEXEC command routing, callback/re-entry, task lifetime and original Win16 NE start/exit. |
+| 5 | WOW16 service, UI and host integration closure — recover selected original WOW32 providers through public APIs while retaining exact USER/CSRSS/Win32k private-boundary failures. |
+| 6 | Single-process NTVDM compatibility matrix — run selected DOS, DOS-extender, COMMAND-native-child and Win16 workloads against the completed original-owner contracts; reopen only the immediate source owner proven by a failure. |
+| 7 | Cross-process broker closure — recover only required BaseSrv-style registration, command-queue, notification and disconnect-cleanup semantics through public IPC. It cannot own guest, COMMAND, SoftPC or WOW behavior. |
+| 8 | Multi-process matrix, x64 compatibility and product release — prove the brokered multi-process profile, paired x86/x64 behavior where runnable, portable media layout and release packaging. |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

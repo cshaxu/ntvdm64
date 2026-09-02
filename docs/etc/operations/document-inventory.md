@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3912 |
+| Documentation records | 3914 |
 | --- | --- |
-| Generated UTC | 2026-09-02T15:23:05Z (manual incremental update) |
+| Generated UTC | 2026-09-02T16:15:00Z (manual incremental update) |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | 43b23fe12b6b3ccac0c49fc185f60a237e291cdbb1cb3ba55bbdde37c3976779 |
+| QUEUE.md | principal control document | 98c4771df7d764c3380ea550b8cc2b68386261e60666771b4617e85ccace1ef1 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 297a4bd76f87753060307a28ec68357f9c25b640bf48853248914c4c20834a6b |
+| STATUS.md | principal control document | 25ea75deae8bd73532aad593061df37edc296ebcc2d01001c213cad73dc3d33a |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1277,6 +1277,7 @@ content-divergent entries.
 | etc/evidence/m0-t376-s4-alternate-root-mz-container-disposition-001.md | indexed supporting material | e61c8b5b0cb0d25e604dee2ed45930b16efd0e7e023785f2be09dafb87210dab |
 | etc/evidence/m0-t376-s5-fixed-root-immutable-media-extension-001.md | indexed supporting material | bc58ff281145bff8097af11d0e0743e8a6cd03297004ff2ea419a69b39580e9d |
 | etc/evidence/m0-t376-s6-fixed-root-mz-exec-observation-001.md | indexed supporting material | c82227fc80f36f46ce67e492a1dc86fe16e8e60f9cb571c19a660ae82a737071 |
+| etc/evidence/m0-t377-s1-dos-device-workload-owner-admission-001.md | indexed supporting material | 92986bfc77c52e22b122d0a3d62afbb880b93318c51a880b12613679df64d6f4 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -2036,6 +2037,7 @@ content-divergent entries.
 | etc/operations/m0-t374-wow16-service-ui-host-integration-001.md | indexed supporting material | 23b830080ee39847caa649c9ad831d76e800711d3082fcd1f0dc39df891f4da4 |
 | etc/operations/m0-t375-pure-dos-cpu40-softpc-command-baseline-001.md | indexed supporting material | 630d29f4f40be5b6b15a0af2c362557b170d9bf6f252cb87823285ab177e0407 |
 | etc/operations/m0-t376-pure-dos-external-exec-parent-return-001.md | indexed supporting material | eff3f5298fd3af0dffec8f6dde2fcbd1b24b83ac6d8934e08267a396f5e87767 |
+| etc/operations/m0-t377-pure-dos-device-file-graphics-workload-001.md | indexed supporting material | 5b35d7538604e3b9cce479d408dca7ca10b8ed8627284c6eff6f6870a87943c6 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -2165,7 +2167,7 @@ content-divergent entries.
 | etc/operations/proposal-mvdm-runtime-support-tool-re-root-001.md | indexed supporting material | 9955eefb0e8480e99f22e0cac375325d72663293262656537f4ca8d7cbb027c4 |
 | etc/operations/proposal-netapi-rap-redirector-network-boundary-recovery-001.md | indexed supporting material | df3cef8be8b0923781e82443a87609bb4cf1b2d21012812350b61994a95da5f5 |
 | etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md | indexed supporting material | 9b589b5f95bbd935804a007e9b1a1195561511f900f3c0ae426bc80c44798b72 |
-| etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md | indexed supporting material | 500b36bd990d2446e30ce3c3e108522447a181aa246653f140124b5643cbb58e |
+| etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md | indexed supporting material | e489c53e83430ba4ff57b2dc0314bd08daa8b20acfcb6e070521f86f5178567b |
 | etc/operations/proposal-opennt-bop-mirror-overlay-convergence-001.md | indexed supporting material | 2f2e91c7a491398ae23278766e5596002ae710113ff2bd5a1fb0577b2d9e12b2 |
 | etc/operations/proposal-opennt-bop-original-dispatcher-provider-recovery-001.md | indexed supporting material | b8808fef6cf0f7519c2103fdc8509c7f6f704846620537f59f0dd076af718e93 |
 | etc/operations/proposal-opennt-command-cmdexec32-full-capability-closure-001.md | indexed supporting material | 2dbce97ef0f4ad01836827a786b0a5bbb5512eabefe3937c1d49c06aef525c02 |
