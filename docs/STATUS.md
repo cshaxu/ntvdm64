@@ -26,7 +26,7 @@
 
 S1 closed source/owner audit: [owner ledger](etc/evidence/m0-t367-s1-original-dos-exec-parent-return-owner-ledger-001.md).
 
-### M0 T367 S2 — Active original DOS `$Exec` file-to-guest transfer closure
+### M0 T367 S2 — Closed original DOS `$Exec` file-to-guest transfer closure
 
 | Field | Record |
 | --- | --- |
@@ -47,7 +47,59 @@ S1 closed source/owner audit: [owner ledger](etc/evidence/m0-t367-s1-original-do
 
 **Plan:** [M0 T367 original DOS EXEC and parent return](etc/operations/m0-t367-original-dos-exec-parent-return-001.md).
 
-**Active: M0 T367 S2.**
+S2 closed static/link route: [original DOS read provider route](etc/evidence/m0-t367-s2-original-dos-read-provider-route-001.md).
+
+### M0 T367 S3 — Closed formal original DOS EXEC boundary closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T367 S3; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from T367 S2's closed original provider-route proof under the owner's standing ordered-queue authority. |
+| Objective | Rebuild and link the selected CPU40/x86 final product without source changes, proving the original COMMAND, DEM and SoftPC inputs form the current formal boundary before one immutable guest workload observation. |
+| Non-goals | No source behavior change, BOP patch, new fixture, guest-media mutation, host child, CPU/device change, x64 runtime, WOW, Redirector or runtime observation. |
+| Reference Baseline | T367 S1/S2 evidence; T365 formal product graph; selected CPU40/x86 final product. |
+| Files And ABI Surface | Existing formal Ninja graph and its already selected original `original-mvdm-dem.lib`, `original-mvdm-command.lib`, CPU40/SIM32, app/session and BaseVDM libraries. |
+| Verification | One formal incremental Ninja final-product build, `ninja -t query` final-input audit, and unchanged-source/diff checks. |
+| Expected Markers | The final executable links the original DEM table/`demRead`, original COMMAND package and original CPU40 host composition without pulling `src.old` or a synthetic DOS loader. |
+| Asset Needs | Existing `build/M0-T365/S2/x86` graph and MSVC x86 toolchain only. |
+| Reporting Requirements | Record exact target and selected library inputs; distinguish link proof from runtime EXEC/parent-return proof. |
+| Stop Conditions | A source failure that requires changing EXEC/guest/CPU semantics, adding a loader or changing runtime media requires a separate S admission. |
+| Exit Criteria | The formal target links and query proves all required original owner libraries, or the first unresolved original symbol is recorded with its owner. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | Final link inputs, original DEM/COMMAND archives, CPU40/SIM32, BaseVDM/session links, `src.old` exclusion and synthetic-loader exclusion. |
+
+**Plan:** [M0 T367 original DOS EXEC and parent return](etc/operations/m0-t367-original-dos-exec-parent-return-001.md).
+
+S3 closed formal boundary: [formal original DOS EXEC boundary](etc/evidence/m0-t367-s3-formal-original-dos-exec-boundary-001.md).
+
+### M0 T367 S4 — Closed frozen original `.COM` EXEC observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T367 S4; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from T367 S3's closed CPU40/x86 boundary under the owner's standing ordered-queue authority. |
+| Objective | Stage one byte-identical original `LOADFIX.COM` and make one fixed-container observation of `COMMAND.COM /C LOADFIX.COM`, recording only the earliest source-owned `$Exec`, DEM read, child entry/return or terminal. |
+| Non-goals | No generated test COM, guest-media modification, host loader, second observation, BOP leaf repair, changed CPU/device semantics, native child, MZ claim, x64 runtime, WOW or Redirector. |
+| Reference Baseline | T367 S1–S3 evidence; existing `Stage-OriginalSoftpcRuntime.mjs`; immutable original `src/mvdm-guest/dos/v86/cmd/loadfix/LOADFIX.COM`; fixed `O:\ntvdm64` stage. |
+| Files And ABI Surface | App staging manifest, immutable original `LOADFIX.COM`, existing observer transport and current final product only. |
+| Verification | Source/output SHA-256 equality; regenerated fixed manifest; one observer invocation; preserve raw JSON/text sidecars. |
+| Expected Markers | One classified original successor: `$Exec`, `50:16`, child entry, `$EXIT`/parent restoration/`54:0B`, or the exact earlier original terminal. |
+| Asset Needs | Existing original guest COM source/artifact, user-designated `O:\ntvdm64` stage, formal x86 product and console-owning observer. |
+| Reporting Requirements | Report the exact command, source artifact hash and the one result without claiming unobserved execution or return. |
+| Stop Conditions | Missing/mismatched immutable asset, stage failure, product/observer exception, or need for a second run stops S4; no trace-derived repair is admitted. |
+| Exit Criteria | Exactly one reproducible fixed observation is retained and its earliest source-owned result is classified. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | Stage manifest identity, `LOADFIX.COM` identity, `/C` declaration, `$Exec`, `50:12`, `50:16`, child termination, `$EXIT`, parent restoration and `54:0B`. |
+
+**Plan:** [M0 T367 original DOS EXEC and parent return](etc/operations/m0-t367-original-dos-exec-parent-return-001.md).
+
+S4 closure: [frozen original `LOADFIX.COM` observation](etc/evidence/m0-t367-s4-frozen-original-loadfix-observation-001.md).
+
+T367 is closed; see its [closure record](history/m0-t367-original-dos-exec-parent-return-closure-20260902.md).
+
+**No active M/T/S packet.** The next packet begins at original COMMAND's
+post-record `54:01` execution-continuity owner, not at a DEM or DOS leaf
+service.
 
 ### M0 T366 S1 — Closed declared DOS workload command-record owner ledger
 

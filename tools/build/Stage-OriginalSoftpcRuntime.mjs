@@ -8,6 +8,11 @@ const requiredAssets = [
   ['src/mvdm-guest/dos/v86/doskrnl/bios/NTIO.SYS', 'NTIO.SYS'],
   ['src/mvdm-guest/dos/v86/doskrnl/dos/NTDOS.SYS', 'NTDOS.SYS'],
   ['src/mvdm-guest/dos/v86/cmd/command/COMMAND.COM', 'COMMAND.COM'],
+  /* Immutable original .COM workload used only by the bounded DOS EXEC
+   * observation.  It is byte-identical to the source-built output, so the
+   * staged media contract remains an original guest artifact, not a harness
+   * program or a host-side loader input. */
+  ['src/mvdm-guest/dos/v86/cmd/loadfix/LOADFIX.COM', 'LOADFIX.COM'],
   ['src/mvdm-guest/bin86/config.nt', 'config.nt'],
   ['src/mvdm-guest/bin86/autoexec.nt', 'autoexec.nt'],
   ['src/mvdm-guest/dos/v86/cmd/command/COMMAND.COM', 'system32/COMMAND.COM'],
