@@ -35,9 +35,9 @@ overwriting still-live transient code?
    environment through the original `GetEnvironmentStrings` loop. It does
    not impose a COMMAND transient-safe capacity limit.
 
-## Direct observation
+## Superseded direct observation
 
-The fixed direct run retained these source-owned records:
+The first direct run retained the records below:
 
 ```text
 MVDM-CMD-CALL svc=0F stage=0 ax=049F cf=0
@@ -46,29 +46,56 @@ MVDM-BOP-RETURN 54:0F cs=03F4 ip=03AA ax=049F cf=0
 MVDM-BOP-RETURN 54:0F cs=03F4 ip=03CF ax=049F cf=0
 ```
 
-The first allocation is `0010` paragraphs. The restored original provider
-requests `0270` paragraphs and the guest retries at the same `ES=049F`. The
-resulting `[0x49f0, 0x70f0)` destination covers later transient execution;
-the observed stop is `CS:03F4 IP:1F94` with overwritten environment text as
-instruction bytes. The BOP return itself at `03F4:03CF` is intact, so this is
-not a BOP-resume defect.
+That run linked stale experimental environment objects which are not in the
+selected source manifest.  It cannot establish the selected product's DOS
+arena contract and is retained only as a rejected observation.
+
+## Corrected direct observation
+
+After removing the stale `mvdm_command_environment.obj` links from the
+ignored formal build graph and relinking the selected source set, the same
+fixed console-owning CPU40/x86 container produced:
+
+```text
+MVDM-CMD-ENV svc=0F stage=0 es=049F bx=0010 ax=049F cf=0
+MVDM-CMD-ENV svc=0F stage=1 es=049F bx=0161 ax=049F cf=0
+MVDM-CMD-ENV svc=0F stage=0 es=049F bx=0161 ax=049F cf=0
+MVDM-CMD-ENV svc=0F stage=1 es=049F bx=0161 ax=049F cf=0
+```
+
+This is the original `COMMAND.COM` retry contract: the initial sixteen
+paragraph buffer is rejected, the guest reallocates 0x0161 paragraphs, and
+the original provider writes its result on the second call.  No BOP resume
+failure or `EndInit` overwrite is observed in this run.
+
+The bounded run subsequently stops at `CS:03F4 IP:20F7`, whose matching
+immutable `COMMAND.map` location is `BadVerMsg` (offset `20F4`), not the
+environment payload.  That correlation identifies the next investigation as
+the source-owned DOS-version/PSP and stack-continuity chain.  It is not proof
+that the version mismatch itself is the sole fault, because reaching message
+data as an instruction address can also result from an earlier stack/control
+transfer failure.
 
 ## Disposition
 
 - `MVDM-HOST-DIV-200` stays removed. Returning `BX=0` is not the original
   provider contract and cannot be the final recovery.
-- The selected original environment provider plus the selected original
-  guest first-fit arena does **not** establish safe operation for the current
-  host-environment size. This is a proven compatibility boundary, not an
-  unresolved BOP selector.
+- The corrected selected-source run proves that the original environment
+  provider and guest retry execute as designed for the observed 0x0161
+  paragraph request.  The former conclusion that this retry necessarily
+  overwrites `EndInit` is withdrawn.
 - No in-scope repair may modify `COMMAND.COM`, NTDOS/NTIO guest media, or
   substitute the DOS allocator.
-- Before code selection, the remaining owner audit must determine whether an
-  original host startup environment projection exists outside `cmdenv.c`.
-  If none exists, a session-owned, explicitly bounded host-environment
-  projection is the only remaining non-guest repair class. It would be a
-  registered host divergence, not a claim of byte-for-byte OpenNT behavior,
-  and requires a separate admission before implementation.
+- `base/win32/client/vdm.c::BaseCreateVDMEnvironment` is the original
+  BaseCheckVDM pre-launch environment projection. It is relevant when a new
+  historical NTVDM process is created, but it must not replace
+  `cmdStart`/`cmdGetInitEnvironment` inside the already-running CLI process.
+  Its source contract preserves the source environment and adds VDM drive
+  state; it is not a generic environment-shortening workaround.
+- Before code selection, the remaining owner audit must prove the initial
+  DOS process/PSP version and stack/control transfer observed before
+  `BadVerMsg`. No environment projection or guest allocator substitute is
+  admitted on the basis of the withdrawn observation.
 
 ## Immediate next audit
 
