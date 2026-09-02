@@ -41,9 +41,12 @@ individual `57:xx` trace hits into a provider design.
    same-shaped modern facade, registered external intrusion, then new logic
    only if no historical route remains. Freeze local named-pipe/lifecycle,
    mailslot/async, and public NetAPI/remote group boundaries.
-3. **S3 — Local host-resource owner groups.** Compose original lifecycle,
-   local broker and synchronous named-pipe groups through those accepted
-   facades; add focused original-owner tests and formal CPU40/x86 link proof.
+3. **S3 — Original DLL host-import ABI closure.** First recover the one
+   source-shaped `ntvdm.lib`-equivalent import surface required to compose the
+   original `VDMREDIR.dll` without a second SoftPC instance. Then compose the
+   lifecycle, local broker and synchronous named-pipe groups through those
+   accepted imports; add focused original-owner tests and formal CPU40/x86
+   link proof.
 4. **S4 — Mailslot and completion owner groups.** Compose original mailslot
    and asynchronous-completion groups with copied completion records and
    checked leases; prove stale, cancellation and disconnect failure paths.

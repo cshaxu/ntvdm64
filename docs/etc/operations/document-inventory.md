@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3871 |
+| Documentation records | 3872 |
 | --- | --- |
-| Generated UTC | 2026-09-02T10:28:40Z |
+| Generated UTC | 2026-09-02T10:33:51Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 46e2be2aa88b87eb6d74efa3bc696ee99f80df099114fcc24a1eba478d6201d1 |
+| STATUS.md | principal control document | 08f14513d473af33474c005f2e342c0deefa9c0cdd9f815ecbc589c216c774b2 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1245,6 +1245,7 @@ content-divergent entries.
 | etc/evidence/m0-t371-s4-fixed-xms-dpmi-integration-observation-001.md | indexed supporting material | 49f80d5cf9dd2d40320ef36775e0416c28d42003a6f5cc851618d13f509b2afd |
 | etc/evidence/m0-t372-s1-redirector-runtime-topology-001.md | indexed supporting material | c7f54ef9ce0f49a4983bffe9d38b4dc3ecf7c7d493c82798ccdb2c7f2234f2af |
 | etc/evidence/m0-t372-s2-redirector-source-first-interface-closure-001.md | indexed supporting material | cdb8ada3b1c1c0dc0dfb777ebfcdf62973a9e8de011090dbe74696f50c3e8e88 |
+| etc/evidence/m0-t372-s3-p1-redirector-dll-import-topology-001.md | indexed supporting material | c5a8a852cb7723a5a238493eea97515ffa0d12ec2df0924a8c7f31dc1037b201 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1999,7 +2000,7 @@ content-divergent entries.
 | etc/operations/m0-t369-original-dos-exec-parent-return-001.md | indexed supporting material | 3477b20d8733ea2bccff39498565af57ae15d5528937fec39c58bd8fa6e4e3f9 |
 | etc/operations/m0-t370-original-command-native-child-lifecycle-001.md | indexed supporting material | 884dbf48f532918aaba037fa1f4c88d24c11602356ee37ef19fe18523734ab88 |
 | etc/operations/m0-t371-xms-dpmi-dos-extender-execution-001.md | indexed supporting material | 15305510c111bac06be0b7d53fbd85241c1d902f658537eac72dd5cb2fcf65b4 |
-| etc/operations/m0-t372-redirector-host-resource-execution-001.md | indexed supporting material | d8b9d11d7195065305bb55cedf11a2d90f2c01d6b32debff99ffbab09f295ee0 |
+| etc/operations/m0-t372-redirector-host-resource-execution-001.md | indexed supporting material | 864d94ad10286cf0b7ecc84742519bbb76ff59ea782af479745ff2ed76940c7d |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |

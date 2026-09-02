@@ -8,17 +8,17 @@
 | --- | --- |
 | Identifier Mode | M0 T372 S3; Ordinary Mode (single-person dual-role implementation and review). |
 | Admission And Approval | Admitted after closed T372 S2 under the owner's standing instruction to execute the dependency-ordered queue, with ordinary Git delivery permanently authorized. |
-| Objective | Construct and formally link the original `VDMREDIR.dll` export/lifecycle composition for the lifecycle, local broker and synchronous named-pipe owner groups, without enabling unrelated selector groups. |
+| Objective | Recover the single original `ntvdm.lib`-equivalent host-import ABI required to compose `VDMREDIR.dll` without a second SoftPC instance, then link its lifecycle, local broker and synchronous named-pipe owner groups. |
 | Non-goals | No isolated `57:xx` enablement; no synthetic Redirector provider; no guest-media mutation; no new COMMAND broker; no CSR/BaseSrv/kernel-VDM recreation; no CPU/device/Bochs/x64 recovery. |
 | Reference Baseline | Closed T372 S1/S2; original `vdmredir.def` and `sources`; T290 local owner-group tests; current CPU40/x86 build generator. |
-| Files And ABI Surface | Formal build generator, product stage/manifest and focused original-owner test(s); no provider-body rewrite and no `nt_bop.c` static-link alteration. |
+| Files And ABI Surface | Formal build generator, one same-shaped SoftPC host-import surface, product stage/manifest and focused original-owner test(s); no provider-body rewrite and no `nt_bop.c` static-link alteration. |
 | Applicable Rules | Execution, source policy, source-first recovery, immutable guest, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and document rules. |
 | Verification | Generate and execute the formal CPU40/x86 dynamic-DLL build; verify its ten exports and source-shaped successful/failed original load behavior with a bounded local test; run documentation inventory and `git diff --check`. |
-| Expected Markers | `VDMREDIR.dll`, all ten original exports, original lifecycle entry, session-safe named-pipe binding, no static `nt_bop.c` substitution. |
+| Expected Markers | One source-shaped host-import ledger, `VDMREDIR.dll`, all ten original exports, original lifecycle entry, session-safe named-pipe binding, no static `nt_bop.c` substitution. |
 | Asset Needs | Current original provider mirror, `vdmredir.def`, adapter/session libraries and disposable `build/M0-T372/S3` root. |
 | Reporting Requirements | Distinguish a load/export/lifecycle proof from any guest `57:xx` execution claim. |
-| Stop Conditions | An unresolved dependency outside lifecycle/local broker/synchronous named pipe, a required source rewrite, changed mapping lifetime, or selector activation pauses for revised admission. |
-| Exit Criteria | One actual original DLL image with its original exports formally links and passes its bounded lifecycle/load test; wider provider groups remain unenabled. |
+| Stop Conditions | A required source rewrite, new host policy, changed mapping lifetime, selector activation, or an import requiring an unadmitted external OpenNT package pauses for revised admission. |
+| Exit Criteria | The original host-import surface has a source-first disposition; one actual original DLL image with its original exports formally links and passes its bounded lifecycle/load test; wider provider groups remain unenabled. |
 | Original Owner Request | Continue the ordered queue in single-person dual-role mode; preserve original mirror-first recovery and do not use trace-selected leaf patches. |
 | Similar-Issue Sweep | `.def` exports, DLL entry, `LoadVdmRedir` success/failure, all nine resolved imports, named-pipe handle identity and stage placement. |
 
@@ -27,6 +27,8 @@
 **S1:** [original Redirector runtime topology revalidation](etc/evidence/m0-t372-s1-redirector-runtime-topology-001.md).
 
 **S2:** [Redirector source-first interface closure](etc/evidence/m0-t372-s2-redirector-source-first-interface-closure-001.md).
+
+**S3 P1:** [original Redirector DLL import topology](etc/evidence/m0-t372-s3-p1-redirector-dll-import-topology-001.md).
 
 ### M0 T371 — Closed XMS, DPMI and DOS-extender execution
 
