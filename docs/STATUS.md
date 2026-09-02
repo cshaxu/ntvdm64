@@ -2,33 +2,26 @@
 
 ## Current Work
 
-### M0 T371 S3 — Active original DPMI/DOS-extender runtime cohort
+### No active packet
 
-**Active: M0 T371 S3.**
+M0 T371 is closed.  The ordered queue awaits admission of its next candidate;
+no product source is active under this record.
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T371 S3; ordinary mode (single-person dual-role implementation). |
-| Admission And Approval | Admitted from T371 S2's closed original XMS startup cohort under the owner's standing ordered-queue authority. |
-| Objective | Recover and prove the next whole original DPMI/DPMI32 initialization, descriptor/memory and DOSX handoff cohort without turning a table entry into an autonomous provider. |
-| Non-goals | No synthetic `53:xx` result, guest-media mutation, new guest loader, CPU/device change, CPU30, Bochs, x64 recovery, WOW, Redirector, COMMAND/native-child or cross-family broker work. |
-| Reference Baseline | T371 S1 topology and S2 XMS evidence; selected original DPMI/DPMI32 mirror, existing CPU40/monitor/session bindings and CPU40/x86 formal product. |
-| Files And ABI Surface | Original `mvdm-host/dpmi32`, immutable `mvdm-host/dpmi` DOSX carrier, selected CPU40/SIM32, monitor/session and mapping-manager seams. |
-| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Original DPMI dispatch/table/caller/data-flow audit; source-shaped complete DPMI cohort proof; formal CPU40/x86 final link. No general guest workload observation unless separately admitted. |
-| Expected Markers | Every selected initialization/descriptor/memory edge has an original owner and exact failure direction; no raw host pointer, second dispatcher or invented DOSX host provider enters the cohort. |
-| Asset Needs | Existing original DPMI/DOSX mirrors, package ledgers, CPU40/x86 graph, selected monitor/session bindings and focused test infrastructure. |
-| Reporting Requirements | Distinguish DPMI source/link proof from protected-mode/DOSX guest-runtime proof; record unavailable original monitor branches exactly. |
-| Stop Conditions | A need to alter guest media, make a leaf BOP result, create a private mapper, alter CPU/device semantics, or run a workload requires later S admission. |
-| Exit Criteria | The selected complete original DPMI/DOSX cohort has source/focused/link evidence, or its earliest original terminal is precisely recorded without replacement behavior. |
-| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
-| Similar-Issue Sweep | `MS_bop_3`, `DpmiDispatch`, selector/descriptor table, DPMI initialization, XMEM, stack/fault/interrupt, `NtVdmControl`, DOSX immutable handoff, CPU40/SIM32 and mapping-manager ownership. |
+**No active M/T/S packet.**
+
+### M0 T371 — Closed XMS, DPMI and DOS-extender execution
 
 **Plan:** [M0 T371 XMS, DPMI and DOS-extender execution](etc/operations/m0-t371-xms-dpmi-dos-extender-execution-001.md).
 
-**S1 closure:** [original XMS, DPMI and DOS-extender execution topology](etc/evidence/m0-t371-s1-original-xms-dpmi-execution-topology-001.md).
+**Closure:** [T371 history record](history/m0-t371-xms-dpmi-dos-extender-execution-closure-20260902.md).
 
-**S2 closure:** [original XMS startup cohort](etc/evidence/m0-t371-s2-original-xms-startup-cohort-001.md).
+**S1:** [original XMS, DPMI and DOS-extender execution topology](etc/evidence/m0-t371-s1-original-xms-dpmi-execution-topology-001.md).
+
+**S2:** [original XMS startup cohort](etc/evidence/m0-t371-s2-original-xms-startup-cohort-001.md).
+
+**S3:** [original DPMI/DOSX current closure](etc/evidence/m0-t371-s3-original-dpmi-dosx-current-closure-001.md).
+
+**S4:** [fixed XMS/DPMI integration observation](etc/evidence/m0-t371-s4-fixed-xms-dpmi-integration-observation-001.md).
 
 ### M0 T370 — Closed original COMMAND native-child lifecycle
 

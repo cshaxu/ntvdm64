@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3865 |
+| Documentation records | 3868 |
 | --- | --- |
-| Generated UTC | 2026-09-02T10:10:41Z |
+| Generated UTC | 2026-09-02T10:17:10Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 1dbfdaea2de091ebe902babca1889c214dd4c4341a2371d2999e8015e51862a3 |
+| STATUS.md | principal control document | 99037e7a594d5fc42364e416eb8df75a281678a9e04488fc1f8f5a523c122360 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1241,6 +1241,8 @@ content-divergent entries.
 | etc/evidence/m0-t370-s4-fixed-native-child-observation-001.md | indexed supporting material | 8cf0d5baaaa82953b78d7c213c11d8c28d6f320d5a70a1cd003af048e30d3787 |
 | etc/evidence/m0-t371-s1-original-xms-dpmi-execution-topology-001.md | indexed supporting material | 45362af0169d414a64c27170cf3554f3b61e54bdc384713ad8f33089d81a2d67 |
 | etc/evidence/m0-t371-s2-original-xms-startup-cohort-001.md | indexed supporting material | 60e49c9415baabfb4a02feb1217b1d3ca17fe261cf4d90d57c11d48cc191dc87 |
+| etc/evidence/m0-t371-s3-original-dpmi-dosx-current-closure-001.md | indexed supporting material | 98ee1dd141e17a87b67c57461f3ae5874bde6acdc48489cb80888256f15c37d3 |
+| etc/evidence/m0-t371-s4-fixed-xms-dpmi-integration-observation-001.md | indexed supporting material | 49f80d5cf9dd2d40320ef36775e0416c28d42003a6f5cc851618d13f509b2afd |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -3772,6 +3774,7 @@ content-divergent entries.
 | history/m0-t368-command-post-record-execution-continuity-closure-20260902.md | closed task history | 29f6e96e3e44892929888c398c4239af125a43bfac3b401e08fe186adde67a02 |
 | history/m0-t369-original-dos-exec-parent-return-closure-20260902.md | closed task history | ab89ee827fc52216d326e9b0c37dfd4f6705d85406ea086aaefd916d6ecbf91e |
 | history/m0-t370-original-command-native-child-lifecycle-closure-20260902.md | closed task history | 1672f5d285a6da3a01c434724cfbcea8d203a155fa2ba2869684201997a18958 |
+| history/m0-t371-xms-dpmi-dos-extender-execution-closure-20260902.md | closed task history | da2c61bbd0e34c8b501e108b230b97156d8bb6b840a9eefaf3e57746a8901e15 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
