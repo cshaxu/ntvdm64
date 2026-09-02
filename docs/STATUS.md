@@ -2,29 +2,31 @@
 
 ## Current Work
 
-### M0 T372 S1 — Active Redirector runtime topology revalidation
+### M0 T372 S2 — Active Redirector source-first interface closure
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T372 S1; Ordinary Mode (single-person dual-role implementation and review). |
-| Admission And Approval | Admitted from queue candidate 0 under the owner's standing instruction to execute the dependency-ordered queue, with ordinary Git delivery permanently authorized. |
-| Objective | Revalidate the complete original `vdmredir` provider topology for the CPU40/x86 product: all `57:00..31` entries, local-resource groups, public-network groups, their formal-link state and the earliest immutable-workload reachability gate. |
+| Identifier Mode | M0 T372 S2; Ordinary Mode (single-person dual-role implementation and review). |
+| Admission And Approval | Admitted after closed T372 S1 under the owner's standing instruction to execute the dependency-ordered queue, with ordinary Git delivery permanently authorized. |
+| Objective | Freeze the source-first interface and product-composition contract for the original `VDMREDIR` DLL: its ten original exports, dynamic loader behavior, local-resource facades and explicit unavailable external branches. |
 | Non-goals | No isolated `57:xx` enablement; no synthetic Redirector provider; no guest-media mutation; no new COMMAND broker; no CSR/BaseSrv/kernel-VDM recreation; no CPU/device/Bochs/x64 recovery. |
-| Reference Baseline | T290 Redirector source/ABI ledgers and local package closure; T369--T371 fixed CPU40/x86 runtime observations; current queue/runtime-recovery program. |
-| Files And ABI Surface | `docs/etc/operations/m0-t372-redirector-host-resource-execution-001.md`; S1 evidence and any necessary shared-ledger corrections only. No production ABI change in S1. |
+| Reference Baseline | Closed T372 S1; T290 provider/interface ledgers and focused local package evidence; current CPU40/x86 build generator and current adapter/session source. |
+| Files And ABI Surface | S2 evidence and any necessary T372 plan/shared-ledger correction only. The original `vdmredir.def` export ABI is evidence, not yet a changed production ABI. |
 | Applicable Rules | Execution, source policy, source-first recovery, immutable guest, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and document rules. |
-| Verification | Reconcile the original dispatcher table, provider bodies, current Ninja graph and existing focused fixtures against exact source paths; run documentation inventory and `git diff --check`. |
-| Expected Markers | One source-shaped disposition per 50-entry selector and provider group; explicit formal graph/query result; one named immediate gate for a later integration observation. |
-| Asset Needs | Current `mvdm-host/vdmredir` mirror, T290 ledgers, current formal CPU40/x86 graph and immutable `O:\\ntvdm64` stage. |
-| Reporting Requirements | State source/build/runtime status separately; retain unavailable private interfaces as original failure dispositions, not adapter inventions. |
-| Stop Conditions | A required source body outside selected `vdmredir`/existing bounded interface families, a new external package, a changed mapping lifetime, or any need to enable a selector before package admission pauses for a revised S brief. |
-| Exit Criteria | A current S1 evidence record supersedes stale topology claims, preserves source-first grouping and makes S2's interface-closure boundary mechanically actionable. |
+| Verification | Inspect the source exports, all current redir facade headers/bodies, session mapping use and generated build graph; run documentation inventory and `git diff --check`. |
+| Expected Markers | One recovery-rung disposition per external family; exact export set; explicit dynamic-DLL build/stage seam; no raw host identity or stale Bochs owner. |
+| Asset Needs | Current original `vdmredir.def`, `sources`, provider mirror, adapter/session sources and formal CPU40/x86 graph. |
+| Reporting Requirements | State original behavior, current composition gap and retained explicit unavailable branches separately. |
+| Stop Conditions | A need for new host policy, a new external OpenNT package, changed session mapping lifetime, or selector activation before local group closure pauses for revised admission. |
+| Exit Criteria | A current source-first interface ledger provides a safe, bounded implementation contract for S3 without a duplicate provider or static `nt_bop.c` substitution. |
 | Original Owner Request | Continue the ordered queue in single-person dual-role mode; preserve original mirror-first recovery and do not use trace-selected leaf patches. |
-| Similar-Issue Sweep | `cmdredir`, DEM pipe callers, named pipe, mailslot, NetAPI, NetBIOS, DLC, lifecycle/teardown, formal static library and product-link queries. |
+| Similar-Issue Sweep | Original `.def` exports, dynamic load errors, `cmdredir`/DEM consumers, named pipe, mailslot, NetAPI, NetBIOS, DLC, session mapping and process/DLL staging. |
 
 **Plan:** [M0 T372 Redirector and host-resource execution](etc/operations/m0-t372-redirector-host-resource-execution-001.md).
 
 **S1:** [original Redirector runtime topology revalidation](etc/evidence/m0-t372-s1-redirector-runtime-topology-001.md).
+
+**S2:** [Redirector source-first interface closure](etc/evidence/m0-t372-s2-redirector-source-first-interface-closure-001.md).
 
 ### M0 T371 — Closed XMS, DPMI and DOS-extender execution
 
