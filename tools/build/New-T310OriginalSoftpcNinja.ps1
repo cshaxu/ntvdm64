@@ -125,6 +125,8 @@ $hostManifest = Join-Path $hostRoot 'sources'
 $hostEntrySource = Join-Path $hostEntryRoot 'ntvdm.c'
 $hostEntryResourceSource = Join-Path $hostEntryRoot 'resource.rc'
 $hostExportDefinition = Join-Path $hostEntryRoot 'obj/i386/ntvdm.def'
+$redirResourceSource = Join-Path $redirRoot 'vdmredir.rc'
+$redirExportDefinition = Join-Path $redirRoot 'vdmredir.def'
 $ccpuNames = Get-OriginalSources $ccpuManifest
 # The historical manifest carries the real FPU body and a host-profile stub
 # carrier in the same lexical list.  The selected CPU_40/FPU profile is the
@@ -211,6 +213,8 @@ $hostNames = @($hostNames + 'nt_cprgs.c') | Select-Object -Unique
 if (!(Test-Path -LiteralPath $hostEntrySource)) { throw "Original SoftPC host entry missing: $hostEntrySource" }
 if (!(Test-Path -LiteralPath $hostEntryResourceSource)) { throw "Original SoftPC resource source missing: $hostEntryResourceSource" }
 if (!(Test-Path -LiteralPath $hostExportDefinition)) { throw "Original SoftPC export definition missing: $hostExportDefinition" }
+if (!(Test-Path -LiteralPath $redirResourceSource)) { throw "Original Redirector resource missing: $redirResourceSource" }
+if (!(Test-Path -LiteralPath $redirExportDefinition)) { throw "Original Redirector export definition missing: $redirExportDefinition" }
 $adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_compat.c',
                           'nt_thread_alert_compat.c', 'nt_wait_compat.c',
                           'opennt_support_rtl.c', 'console_compat.c', 'crt_compat.c',
@@ -222,7 +226,8 @@ $adapterBaseSrvNames = @('base_vdm_client.c', 'base_vdm_local.c', 'base_vdm_brok
 $adapterMonitorNames = @('vdm_control.c', '../mvdm_vdm_tib.c')
 $adapterDebuggerNames = @('dbg_init.c', 'dbg_state.c', 'dbg_dispatch.c', 'dbg_unavailable.c')
 $adapterRedirNames = @('mvdm_redirector_handle.c', 'mvdm_redirector_mailslot.c',
-                       'mvdm_redirector_guest_copy.c', 'mvdm_redirector_async.c')
+                       'mvdm_redirector_guest_copy.c', 'mvdm_redirector_async.c',
+                       'mvdm_redirector_remote_unavailable.c')
 # `vrnetapi.c` directly consumes this original OpenNT status-to-LAN-Manager
 # conversion algorithm.  Keep it in its separately mirrored non-MVDM owner
 # rather than duplicating a status table in Redirector or an adapter.
@@ -565,6 +570,11 @@ $graph.Add('rule process_link')
 # in the parent process so a DLL imports the one already-running machine rather
 # than linking a second SoftPC instance into itself.
 $graph.Add('  command = link.exe /nologo /map:$out.map /def:' + (NinjaPath $hostExportDefinition) + ' /implib:original-softpc-process-import.lib /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
+$graph.Add('rule redir_dll_link')
+# Keep the original VDMREDIR DLL boundary.  The parent import library is an
+# implicit output of the original process link, so this rule cannot create a
+# second CCPU/SoftPC executor inside the DLL.
+$graph.Add('  command = link.exe /nologo /dll /def:' + (NinjaPath $redirExportDefinition) + ' /implib:$out.lib /out:$out $in kernel32.lib advapi32.lib netapi32.lib rpcrt4.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $graph.Add('rule broker_test_link')
 $graph.Add('  command = link.exe /nologo /out:$out $in libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib')
 
@@ -822,6 +832,8 @@ $patchBodyObjects = @(foreach ($name in $patchBodyNames) {
 })
 $patchVectorDefaultsObject = 'obj/patch/fmstubs_ccpu_vector_defaults.obj'
 $graph.Add('build ' + $patchVectorDefaultsObject + ': cc_patch_vector_defaults ' + (NinjaPath (Join-Path $patchBodyRoot 'fmstubs.c')))
+$redirResourceObject = 'obj/redir/vdmredir.res'
+$graph.Add('build ' + $redirResourceObject + ': rc ' + (NinjaPath $redirResourceSource))
 $graph.Add('build original-ccpu386.lib: lib ' + ($ccpuObjects -join ' '))
 $graph.Add('build original-softpc-bios.lib: lib ' + ($biosObjects -join ' '))
 $graph.Add('build original-softpc-keymouse.lib: lib ' + ($keymouseObjects -join ' '))
@@ -858,7 +870,8 @@ $graph.Add('build debugger-bindings.lib: lib ' + ($adapterDebuggerObjects -join 
 $graph.Add('build ntvdmx64-softpc-patch-evidence.lib: lib ' + ($patchBodyObjects -join ' '))
 $graph.Add('build ntvdmx64-softpc-ccpu-vector-defaults.lib: lib ' + $patchVectorDefaultsObject)
 $graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib softpc-bindings.lib redirector-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib')
-$graph.Add('build original-softpc-process.exe: process_link obj/app/entry.obj app-machine-shell.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib softpc-bindings.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-ccpu-vector-defaults.lib original-ccpu386.lib obj/host/softpc-resource.res')
+$graph.Add('build original-softpc-process.exe | original-softpc-process-import.lib: process_link obj/app/entry.obj app-machine-shell.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib softpc-bindings.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-ccpu-vector-defaults.lib original-ccpu386.lib obj/host/softpc-resource.res')
+$graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' original-softpc-process-import.lib redirector-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib softpc-bindings.lib softpc-win32-bindings.lib session.lib broker.lib')
 $graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib')
 $graph.Add('default original-softpc-candidate')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
