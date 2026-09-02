@@ -570,7 +570,7 @@ the original COMMAND-ready boundary.  It did not prove a completed COMMAND
 candidate is therefore the already ordered COMMAND built-in and batch
 lifecycle package; no immediate missing owner component was proven.
 
-### M0 T358 S1 — Active original COMMAND workload and return topology
+### M0 T358 S1 — Closed original COMMAND workload and return topology
 
 | Field | Record |
 | --- | --- |
@@ -592,7 +592,81 @@ lifecycle package; no immediate missing owner component was proven.
 
 **Plan:** [M0 T358 COMMAND built-in and batch lifecycle](etc/operations/m0-t358-command-built-in-batch-lifecycle-plan-001.md).
 
-**Active: M0 T358 S1.**
+**Result:** [COMMAND built-in and batch topology](etc/evidence/m0-t358-s1-command-built-in-batch-topology-001.md).
+
+### M0 T358 S2 — Closed immediate owner recovery disposition
+
+The formal source manifest selects the full original COMMAND cohort, Base-VDM
+binding and same-shaped termination binding needed by `/C EXIT`. No immediate
+original owner is missing, so this recovery subtask has no implementation
+work. The batch boundary is explicitly transferred to T359 rather than
+inventing a COMMAND-local replacement.
+
+### M0 T358 S3 — Closed fixed `/C EXIT` control-flow boundary observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T358 S3; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | T358 S1/S2 established that the selected original `/C EXIT` route is complete in the formal graph. |
+| Objective | Run a fixed console-owning observation from a fresh capacity-valid stage and prove or precisely classify original COMMAND `/C EXIT` delivery and completion. |
+| Non-goals | No batch execution, DOS child/EXEC, cmdExec32, WOW, CPU/device change, guest mutation, CPU30, Bochs, x64, CSRSS/kernel VDM, Redirector or graphics work. |
+| Reference Baseline | T357 capacity-valid package contract and T358 S1 source topology. |
+| Files And ABI Surface | Existing stage/observation tools, original COMMAND guest and host dispatcher, termination binding and disposable evidence output. No new ABI. |
+| Applicable Rules | Execution, source policy, package-first recovery, fixed-container observation, CPU40-only, mirror/divergence and output-hygiene rules. |
+| Verification | New manifest identity/hash review; fixed `--command EXIT` observer sequence, with one observer-only identical rerun to copy original modal-error text; inspect `54:01`, `54:00`, BOP return and controlled-stop reports. |
+| Expected Markers | Original `54:01` followed by `54:00`/controlled return; if not reached, record the exact preceding original marker without repair. |
+| Asset Needs | Formal T356 product, immutable media, new short-path stage, existing observer and Node 22. |
+| Reporting Requirements | Distinguish command-ready from delivered/complete EXIT; do not infer DOS EXEC, batch, native child or WOW execution. |
+| Stop Conditions | Stage identity/capacity failure, output mutation, more than one valid observation, or repair proposed before source attribution. |
+| Exit Criteria | A capacity-valid observation sequence is recorded with source attribution; T358 either proves built-in completion or pauses at its exact next original owner boundary. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+| Similar-Issue Sweep | `54:01`, `54:00`, Base-VDM declaration, `SINGLECOM`, controlled stop, NTDOS EXEC and batch external-program boundary. |
+
+**Plan:** [M0 T358 COMMAND built-in and batch lifecycle](etc/operations/m0-t358-command-built-in-batch-lifecycle-plan-001.md).
+
+**S3 closure:** [COMMAND `/C EXIT` control-flow boundary](etc/evidence/m0-t358-s3-command-exit-control-flow-boundary-001.md)
+proves that selected original COMMAND and DEM code continue past `54:0F`, then
+the selected CPU40 path attempts to execute immutable `COMMAND.COM` data at
+`03F4:2171`.  T358 is paused, not closed, until T359 resolves that predecessor.
+
+### M0 T359 S1 — Closed CPU40 COMMAND-initialization source and image map
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T359 S1; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted under the ordered dependency-first execution rule after T358 S3 proved the exact selected CPU40 boundary. |
+| Objective | Reconstruct the original CPU40/SAS/COMMAND-image control-transfer path from the last reached BOP return to `illegal_op_int`, and select at most one complete recovery cohort. |
+| Non-goals | No COMMAND or DEM provider rewrite, BOP leaf repair, DOS EXEC, batch, guest/firmware mutation, CPU30, Bochs, x64 runtime, CSRSS/kernel VDM, WOW, Redirector, graphics or broad CPU rewrite. |
+| Reference Baseline | T358 S3's fixed stage, product SHA-256, `03F4:2171` fault record, immutable COMMAND.COM and selected CPU40 formal manifest. |
+| Files And ABI Surface | Original `c_main.c`, instruction/interrupt/return owners, SAS `.COM` image layout, `illegalp.c`, selected CCPU40 vectors and any formally selected same-shaped support binding. No new guest ABI. |
+| Applicable Rules | Execution, source policy, package-first recovery, component activation registry, CPU40-only, mirror/divergence, mapping-manager and fixed-observation rules. |
+| Verification | Original definition/caller/image map; mirror-versus-source comparison; formal graph/import review; no runtime retry or source change in S1. |
+| Expected Markers | One source ledger classifies the first data control transfer as source-defined input/state, a mirror divergence, an omitted original provider, or a bounded same-shaped adapter seam. |
+| Asset Needs | Existing original mirrors, immutable T358 stage evidence, source map and Node 22 tools; no media rebuild or host-system mutation. |
+| Reporting Requirements | Separate the loaded immutable COMMAND bytes, faulting CPU state, prior BOP route and every candidate control-transfer writer; do not infer a repair from the timeout. |
+| Stop Conditions | Any need to change guest bytes, manufacture a COMMAND return, add an unbounded CPU trace, alter a BOP result or proceed to a later workload pauses for renewed admission. |
+| Exit Criteria | The first bad control-transfer owner and all immediate selected edges have a source disposition, and one S2 recovery cohort (or exact terminal) is bounded. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+| Similar-Issue Sweep | `.COM` PSP/IP convention, CCPU `CALL`/`RET`/`IRET`/interrupt delivery, BOP IP advancement, CS:IP state publication, SAS reads and original COMMAND data/code map. |
+
+**Plan:** [M0 T359 CPU40 COMMAND-initialization control-flow recovery](etc/operations/m0-t359-cpu40-command-initialization-control-flow-plan-001.md).
+
+**S1 closure:** [original COMMAND transient control-flow map](etc/evidence/m0-t359-s1-command-transient-control-flow-map-001.md) establishes the whole original COMMAND resident-to-transient allocation/move/reload and NTDOS prerequisite cohort as the owner.  CCPU transfer files, immutable image identity, and the BOP result are not the repair seam.
+
+### M0 T359 S2 — Active original COMMAND transient lifecycle recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T359 S2; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by closed T359 S1 under ordered dependency-first execution. |
+| Objective | Restore the complete original `EndInit`/`LodCom`/`HavCom` transient lifecycle and its normal NTDOS allocation and `50:12/00/16/02` file prerequisites without a guest-address seed or BOP-specific success. |
+| Non-goals | No CPU instruction rewrite, BOP leaf repair, guest-media mutation, direct transient copy, DOS EXEC, batch semantics, CPU30, Bochs, x64 runtime, CSRSS/kernel VDM, WOW, Redirector or graphics work. |
+| Files And ABI Surface | Original COMMAND `rdata.asm`, `command2.asm`, `tcode.asm`, `tspc.asm`, original NTDOS allocation/INT 21h flow, selected DEM file bindings and existing mapping-manager leases. |
+| Verification | Whole source definition/caller/error map; original-versus-mirror and formal selection review; bounded owner-package local tests; formal link.  A renewed frozen observation is S4 only. |
+| Exit Criteria | Every owner edge has a selected original body or a same-shaped binding, local lifecycle evidence preserves normal and failure paths, and S3 has a bounded formal-link input list. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+
+**Active: M0 T359 S2.**
 
 ### M0 T355 S31 — Closed original `0x78` entry-result attribution
 

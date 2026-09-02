@@ -147,6 +147,39 @@ static void clear_console(HANDLE output)
     (void)SetConsoleCursorPosition(output, (COORD){ 0, 0 });
 }
 
+/* The product's original illegal-opcode path formats a bounded `CS:... OP:`
+ * diagnostic before it enters its historical modal error dialog.  A timeout
+ * can therefore leave the fixed observation container stopped inside user32.
+ * This observer-only helper copies that already-formatted host-stack text; it
+ * neither reads guest RAM nor changes the child process. */
+static BOOL capture_fault_text(HANDLE process, DWORD stack_pointer,
+                               char *text, size_t text_capacity)
+{
+    char stack_bytes[8192];
+    SIZE_T copied = 0;
+    SIZE_T index;
+
+    if (text_capacity == 0u) return FALSE;
+    text[0] = '\0';
+    if (!ReadProcessMemory(process, (LPCVOID)(ULONG_PTR)stack_pointer,
+                           stack_bytes, sizeof(stack_bytes), &copied) ||
+        copied < 3u) return FALSE;
+    for (index = 0u; index + 3u <= copied; ++index) {
+        SIZE_T output = 0u;
+        if (memcmp(stack_bytes + index, "CS:", 3u) != 0) continue;
+        while (index + output < copied && output + 1u < text_capacity) {
+            unsigned char value = (unsigned char)stack_bytes[index + output];
+            if (value == '\0' || value == '\r' || value == '\n') break;
+            if (value < 0x20u || value > 0x7eu) break;
+            text[output++] = (char)value;
+        }
+        text[output] = '\0';
+        if (output >= 8u && strstr(text, " OP:") != NULL) return TRUE;
+        text[0] = '\0';
+    }
+    return FALSE;
+}
+
 int main(int argc, char **argv)
 {
     STARTUPINFOA startup = { sizeof(startup) };
@@ -163,6 +196,8 @@ int main(int argc, char **argv)
     BOOL have_timed_stack = FALSE;
     SIZE_T timed_stack_bytes = 0;
     DWORD timed_thread_count = 0;
+    char timed_fault_text[256] = { 0 };
+    BOOL have_timed_fault_text = FALSE;
     observation_image_identity image_identity = { 0 };
     BOOL symbols_initialized = FALSE;
     DWORD suspend_result = (DWORD)-1;
@@ -434,6 +469,9 @@ int main(int argc, char **argv)
                     child.hProcess, (LPCVOID)(ULONG_PTR)timed_context.Esp,
                     timed_stack, sizeof(timed_stack), &timed_stack_bytes) &&
                     timed_stack_bytes == sizeof(timed_stack);
+                have_timed_fault_text = capture_fault_text(child.hProcess,
+                    timed_context.Esp, timed_fault_text,
+                    sizeof(timed_fault_text));
             }
             symbols_initialized = SymInitialize(child.hProcess, NULL, TRUE);
             timed_thread_count = capture_process_threads(child.hProcess,
@@ -479,6 +517,8 @@ int main(int argc, char **argv)
             fprintf(report, "stop-ebx=0x%08lx\n", (unsigned long)timed_context.Ebx);
             fprintf(report, "stop-ecx=0x%08lx\n", (unsigned long)timed_context.Ecx);
             fprintf(report, "stop-edx=0x%08lx\n", (unsigned long)timed_context.Edx);
+            if (have_timed_fault_text)
+                fprintf(report, "stop-fault=%s\n", timed_fault_text);
             if (have_timed_stack) {
                 DWORD stack_index;
                 for (stack_index = 0; stack_index < OBSERVATION_STACK_WORDS;

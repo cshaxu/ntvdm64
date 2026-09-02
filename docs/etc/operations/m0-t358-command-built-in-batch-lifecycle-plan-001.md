@@ -20,8 +20,11 @@ WOW.
    source and same-shaped bindings; prove local behavior and the formal CPU40
    link.  Do not substitute a BOP leaf or guest behavior.
 3. **S3 — fixed built-in observation.** Use a fresh capacity-valid stage and
-   one fixed console-owning observation.  Require a source-owned completion
-   or return marker, not merely BOP ingress.
+   a fixed console-owning observation.  Require a source-owned completion or
+   return marker, not merely BOP ingress.  If the original modal error path
+   prevents attribution, one observer-only rerun with identical product,
+   stage, command and timeout may copy its already-formatted host-stack fault
+   text; it does not modify product state or inputs.
 4. **S4 — optional immutable batch observation and closure.** Run a batch
    only if S1 proves it does not need external DOS EXEC.  Otherwise record the
    exact handoff to the next DOS EXEC package without claiming batch closure.
@@ -37,5 +40,8 @@ Redirector or graphics work.
 T358 closes only when the selected built-in completes through original
 COMMAND and a source-owned return marker is observed.  A batch is included
 only when its complete owner path stays inside this package; otherwise the
-precise boundary is transferred to T359.
-
+precise boundary is transferred to the DOS EXEC package.  If the fixed
+observation instead proves an earlier selected CPU40/SoftPC owner boundary,
+T358 pauses and resumes only after that dependency-first package has closed;
+it must not claim COMMAND completion merely because its host dispatcher was
+linked.

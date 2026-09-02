@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3777 |
+| Documentation records | 3781 |
 | --- | --- |
-| Generated UTC | 2026-09-02T03:28:56Z |
+| Generated UTC | 2026-09-02T03:53:57Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | 81e58d013e53102152e2d4c711a87cf9af105c5f9f99f4f18a7effbe6964d682 |
+| QUEUE.md | principal control document | 4d07e227b9d349bfd2924b21d95dcdc9b7e58c3f5260d0965a6f2a71b0bc75fe |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 4a19db25e042a13b9cf0b68d34cfcabcd384e34908e4e1039075826b9cd6ee03 |
+| STATUS.md | principal control document | 3322ba3ef5b7ded62b4830335e0084f86ffdb4273df3ea41a90cb66e26af2ca9 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1177,6 +1177,9 @@ content-divergent entries.
 | etc/evidence/m0-t356-s4-fixed-command-observation-001.md | indexed supporting material | a6fb4147d56718546742873513b1cb88ee696aa02ea2cebd8213cb66478134e4 |
 | etc/evidence/m0-t357-s1-staged-runtime-identity-001.md | indexed supporting material | eab43e90c513ed1f85639caa43dbf15a1fb0f38b74670dfbe0b3f7d0bd8e74ee |
 | etc/evidence/m0-t357-s2-s3-staged-command-ready-observation-001.md | indexed supporting material | 2a3e65159d191530d6a2d6b869ff37b280828b4ca9351629fea3db22bb3542ac |
+| etc/evidence/m0-t358-s1-command-built-in-batch-topology-001.md | indexed supporting material | a466455e48519e22b7bdfef347b38ccabb4337f0103897a40fbc7d33174f5c30 |
+| etc/evidence/m0-t358-s3-command-exit-control-flow-boundary-001.md | indexed supporting material | f91ae71755f71ff694456b55bc717dab0d7dc306be5a38446bab5fe2e70dc487 |
+| etc/evidence/m0-t359-s1-command-transient-control-flow-map-001.md | indexed supporting material | cd1dbb6e53f34f92f877b800c8ad93139e14065ea843a3c8d5920dbd167114a0 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1916,7 +1919,8 @@ content-divergent entries.
 | etc/operations/m0-t354-s1-permanent-command-bootstrap-ledger.tsv | indexed supporting material | 6fc045eebf8c419e46f35b57680077c5668099be0a68c212ddfea1450a8a131f |
 | etc/operations/m0-t356-minimal-dos-execution-controlled-return-plan-001.md | indexed supporting material | 32128e010dd7c54cd80998258a2de9ae83ff350f05302d15190ea8ae311a5512 |
 | etc/operations/m0-t357-cpu40-staged-boot-command-ready-plan-001.md | indexed supporting material | 6140fa28f32d6c3f94d24367a4dda8d980b816e1ab748e6c5b053f8f33f185d3 |
-| etc/operations/m0-t358-command-built-in-batch-lifecycle-plan-001.md | indexed supporting material | 7fb4eb0b7c413eb7a7f9658a457e69916d22174a030cc2f95dcee656ca3e54a4 |
+| etc/operations/m0-t358-command-built-in-batch-lifecycle-plan-001.md | indexed supporting material | f05dbd593cd9e15ba3dbd4dafa764d85b6f1a5ac5ea3edac8e5daeb7e6cf027a |
+| etc/operations/m0-t359-cpu40-command-initialization-control-flow-plan-001.md | indexed supporting material | d8fe3ed6a9d97f0044e1785260a8b9c05da94aae3b178ba13dadaef59464d391 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -2046,7 +2050,7 @@ content-divergent entries.
 | etc/operations/proposal-mvdm-runtime-support-tool-re-root-001.md | indexed supporting material | 9955eefb0e8480e99f22e0cac375325d72663293262656537f4ca8d7cbb027c4 |
 | etc/operations/proposal-netapi-rap-redirector-network-boundary-recovery-001.md | indexed supporting material | df3cef8be8b0923781e82443a87609bb4cf1b2d21012812350b61994a95da5f5 |
 | etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md | indexed supporting material | 9b589b5f95bbd935804a007e9b1a1195561511f900f3c0ae426bc80c44798b72 |
-| etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md | indexed supporting material | 0442a2126ce9f542a98c241c49d9010feddfe574eb9eb1587e80cad9510e3667 |
+| etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md | indexed supporting material | 83f2e0d55723614041f51861573f7d58bfe3011249f6d988753b1f9f2f64ab03 |
 | etc/operations/proposal-opennt-bop-mirror-overlay-convergence-001.md | indexed supporting material | 2f2e91c7a491398ae23278766e5596002ae710113ff2bd5a1fb0577b2d9e12b2 |
 | etc/operations/proposal-opennt-bop-original-dispatcher-provider-recovery-001.md | indexed supporting material | b8808fef6cf0f7519c2103fdc8509c7f6f704846620537f59f0dd076af718e93 |
 | etc/operations/proposal-opennt-command-cmdexec32-full-capability-closure-001.md | indexed supporting material | 2dbce97ef0f4ad01836827a786b0a5bbb5512eabefe3937c1d49c06aef525c02 |
