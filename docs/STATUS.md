@@ -1097,7 +1097,29 @@ and
 
 ## Active Packet
 
-**No active M/T/S packet.**
+### M0 T378 S1 — Active DOS-extender workload and owner admission
+
+**Active: M0 T378 S1**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T378 S1; ordinary mode (single-person dual-role original-owner admission). |
+| Admission And Approval | T377 closed the pure-DOS device matrix. The ordered queue now admits the next whole package: DOS-extender runtime closure. |
+| Objective | Reconcile the current formal CPU40/SoftPC product with original HIMEM, XMS, DPMI32 and DOSX source/artifact identities; choose one smallest non-interactive immutable workload and map its complete immediate owner chain. |
+| Non-goals | No product run, source change, stage update, individual `52:xx`/`53:xx` repair, synthetic XMS/DPMI dispatcher, guest rewrite, CPU30, Bochs, x64 guest runtime, native child, Redirector or WOW work. |
+| Reference Baseline | T371 source/link closure; T375--T377 fixed CPU40/SoftPC product closures; original `mvdm-host/xms.486`, `dpmi32`, immutable HIMEM/DOSX media and formal source manifest. |
+| Files And ABI Surface | Original XMS/DPMI/DOSX source and guest artifacts, CONFIG.NT declaration, existing formal manifest/stage manifest and mapping-manager boundary records only. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, immutable-media staging, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Source/artifact hashes; original caller/definition/control-flow map; formal graph ownership review; owner/failure disposition ledger; documentation governance and diff review. No product run. |
+| Expected Markers | A single declared workload has an immutable artifact, complete original guest/host chain, all immediate owner bodies or named unavailable boundaries, and no unowned synthetic route. |
+| Asset Needs | Existing OpenNT mirrors, staged `HIMEM.SYS`/`DOSX.EXE`, current formal product/manifest and source indexes. |
+| Reporting Requirements | Distinguish static source/binding proof from runtime reach; name every retained source-shaped unavailable boundary and any project diff that direct original code can replace. |
+| Stop Conditions | The selected route needs modified guest media, a host executable loader, a synthetic protected-mode result, kernel/CSR recreation, a second machine, or a trace-selected leaf repair; pause for revised package admission. |
+| Exit Criteria | One complete original extender workload route and its smallest S2 recovery cohort are source-proven, identity-proven and recorded, or the earliest exact original boundary is recorded without inventing a replacement. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | CONFIG.NT device load, HIMEM.SYS, XMSInit, A20, UMB, INT15, DOSX guest handoff, `MS_bop_2`, `MS_bop_3`, DpmiDispatch, protected-mode frame/stack, mapping-manager boundaries and normal return. |
+
+**Plan:** [M0 T378 DOS-extender runtime closure](etc/operations/m0-t378-dos-extender-runtime-closure-001.md).
 
 ### M0 T377 — Closed pure DOS device, file and graphics workload matrix
 
