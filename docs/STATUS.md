@@ -1097,31 +1097,33 @@ and
 
 ## Active Packet
 
-### M0 T380 S2 — Active COMMAND native-child source-shaped lifecycle confirmation
+### M0 T380 S3 — Active COMMAND native-child formal product confirmation
 
-**Active: M0 T380 S2**
+**Active: M0 T380 S3**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T380 S2; ordinary mode (single-person dual-role original-owner recovery). |
-| Admission And Approval | Admitted by S1's whole original lifecycle/predecessor ledger. |
-| Objective | Revalidate the complete existing source-shaped `54:07/08/0A/0B` lifecycle cohort and focused x86 evidence against the selected public native-child workload; change production code only if that whole owner cohort is incomplete. |
+| Identifier Mode | M0 T380 S3; ordinary mode (single-person dual-role original-owner recovery). |
+| Admission And Approval | Admitted by S2's current-source and focused-x86 lifecycle closure. |
+| Objective | Formally link the current CPU40/x86 product with the selected original COMMAND native-child cohort, then prove its exact final inputs before S4's sole workload observation. |
 | Non-goals | No BOP leaf patch, app-owned child launcher, guest-media mutation, CPU30, Bochs, x64 recovery, DOS PSP synthesis, WOW, Redirector protocol, CSRSS/BaseSrv broker or runtime observation. |
-| Reference Baseline | S1 ledger; T370 source/binding/local-proof closure; current original COMMAND mirror and CPU40/x86 formal graph. |
-| Files And ABI Surface | Original `cmdexec.c`, `cmdmisc.c`, `cmddisp.c`, `cmdenv.c`, native-child/Base VDM/thread/process bindings and the existing focused fixture. |
+| Reference Baseline | S1/S2 closure, T379 formal product identity, original COMMAND mirror and current CPU40/x86 graph. |
+| Files And ABI Surface | Existing formal Ninja graph, original COMMAND archive, Base VDM/session/softpc/win32 binding libraries and final product only. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, immutable-media staging, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Fresh focused x86 lifecycle fixture, original-versus-current body/binding review, formal input review and governance checks. No product run. |
-| Expected Markers | One complete cohort passes command/environment/stream snapshot, worker re-entry, completion, cancellation and cleanup evidence without adding a new launcher. |
-| Asset Needs | S1 ledger, existing original mirrors/bindings and existing focused fixture generator. |
-| Reporting Requirements | Record whether a current diff is still required, can be replaced by original code, or must remain a registered adapter boundary; distinguish focused proof from runtime proof. |
+| Verification | Fresh formal x86 Ninja build/query, final-input identity map and governance checks. No product run. |
+| Expected Markers | The original COMMAND archive and every selected same-shaped binding are final-link inputs of one CPU40/SoftPC process. |
+| Asset Needs | Existing formal generator, current source mirrors/bindings and selected product output. |
+| Reporting Requirements | Record exact build/query output and distinguish formal link evidence from S4 runtime evidence. |
 | Stop Conditions | A required second broker, guest mutation, private CSRSS/kernel recreation, raw pointer/handle carrier, CPU change or trace-selected leaf repair requires revised admission. |
-| Exit Criteria | The complete selected lifecycle cohort is source/binding/focused-test closed, or one whole original prerequisite is precisely documented for S3. |
+| Exit Criteria | The selected formal CPU40 product and input graph are identity-proven, and S4 may make the one fixed workload observation. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `54:08`, `54:0A`, `54:0B`, `cmdExec`, `cmdExecComspec32`, `cmdExec32`, `cmdCreateProcess`, `cmdGetNextCmd`, `cmdReturnExitCode`, Base VDM, worker/re-entry, standard handles, session child records, cancellation and completion. |
 
 **Plan:** [M0 T380 COMMAND native-child runtime activation](etc/operations/m0-t380-command-native-child-runtime-activation-001.md).
 
 **S1 closure:** [COMMAND native-child owner and predecessor rebaseline](etc/evidence/m0-t380-s1-command-native-child-owner-predecessor-rebaseline-001.md).
+
+**S2 closure:** [COMMAND native-child lifecycle confirmation](etc/evidence/m0-t380-s2-command-native-child-lifecycle-confirmation-001.md).
 
 ### M0 T379 — Closed original VDMREDIR runtime product activation
 
