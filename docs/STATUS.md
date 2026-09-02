@@ -70,6 +70,8 @@ XACTSRV groups are retained as explicit original unavailable paths rather than
 being replaced by a private LAN/RAP implementation.  No `57:xx` execution or
 dynamic `VDMREDIR.dll` claim is made by S5.
 
+**S6 P1:** [original dynamic-load and dispatch reconciliation](etc/evidence/m0-t372-s6-p1-original-dynamic-load-dispatch-reconciliation-001.md).
+
 ### M0 T371 — Closed XMS, DPMI and DOS-extender execution
 
 **Plan:** [M0 T371 XMS, DPMI and DOS-extender execution](etc/operations/m0-t371-xms-dpmi-dos-extender-execution-001.md).
