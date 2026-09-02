@@ -67,7 +67,7 @@ later package merely because an earlier linked component has no runtime proof.
 | 8 | WOW16 bootstrap, callback and Win16 NE lifecycle — prove selected WOWEXEC/Win16 startup and return paths. |
 | 9 | WOW16 service, UI and host integration matrix — recover selected WOW32 provider subpackages and public bindings. |
 | 10 | Cross-family execution and control-broker closure — reconcile COMMAND/DOS/native-child/WOW lifecycle, events and cleanup. |
-| 11 | SoftPC graphics presentation and workload integration — run an already-proven DOS graphics workload through original video and app presentation. |
+| 11 | SoftPC graphics workload integration — after the admitted original-font/exact-client presentation package, run an already-proven DOS graphics workload through original video and app presentation. |
 | 12 | Runtime matrix, x64 compatibility and product release — prove DOS/Win16 matrices, finish x64 profile work and package the product. |
 
 Historical queue/proposal material is indexed in

@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3805 |
+| Documentation records | 3806 |
 | --- | --- |
-| Generated UTC | 2026-09-02T05:45:32Z |
+| Generated UTC | 2026-09-02T05:50:50Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | 829c10ca3bc8cff7fdc20a2194c83e1f10e651f9ae61044a5282ec9992bf113e |
+| QUEUE.md | principal control document | 0f54a757a6b9d859d077bc7e543b4cc634b9ed4ebb74a94ac1e2ca0b55b9ec7a |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | e1b7633553bcfc8d999af8be0cfcb4f67f680cb5e27aa27954785b16d8a7102c |
+| STATUS.md | principal control document | 8126388e315c7b505e993224dca1dafcd13c2dc399ef65e1862bac21daa0ca86 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1945,6 +1945,7 @@ content-divergent entries.
 | etc/operations/m0-t358-command-built-in-batch-lifecycle-plan-001.md | indexed supporting material | f05dbd593cd9e15ba3dbd4dafa764d85b6f1a5ac5ea3edac8e5daeb7e6cf027a |
 | etc/operations/m0-t359-cpu40-command-initialization-control-flow-plan-001.md | indexed supporting material | 6de402b73c8ce63ceded5cb63866d7a78c92323c88f1835b73d213e9907e1ae7 |
 | etc/operations/m0-t360-original-systemroot-package-layout-recovery-001.md | indexed supporting material | b28e9358cad8711da118efb3484023c02cec1dcebdb3f018266f7176186d2c1f |
+| etc/operations/m0-t361-softpc-window-font-and-client-contract-plan-001.md | indexed supporting material | c8284c7b7ef74892222bd9e694021606ad5ec7677c713a6649a3b5de5e984524 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
