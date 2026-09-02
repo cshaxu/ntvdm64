@@ -12,7 +12,7 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3897 |
+| Documentation records | 3898 |
 | --- | --- |
 | Generated UTC | 2026-09-02T13:03:09Z |
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | 64f070fc5ec91909bea67b998c9b528c2f9d1763b89940bec94a573b97a3d24f |
+| QUEUE.md | principal control document | 43b23fe12b6b3ccac0c49fc185f60a237e291cdbb1cb3ba55bbdde37c3976779 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 1653f68885d1dbb7440a7bf0e370ce95aa258b4a379a97a531644880b53749aa |
+| STATUS.md | principal control document | c1ed774450a8cb49bdf24c45a6b958a6ded3e73c82f5e77378e158ad79b8aae6 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -2153,7 +2153,7 @@ content-divergent entries.
 | etc/operations/proposal-mvdm-runtime-support-tool-re-root-001.md | indexed supporting material | 9955eefb0e8480e99f22e0cac375325d72663293262656537f4ca8d7cbb027c4 |
 | etc/operations/proposal-netapi-rap-redirector-network-boundary-recovery-001.md | indexed supporting material | df3cef8be8b0923781e82443a87609bb4cf1b2d21012812350b61994a95da5f5 |
 | etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md | indexed supporting material | 9b589b5f95bbd935804a007e9b1a1195561511f900f3c0ae426bc80c44798b72 |
-| etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md | indexed supporting material | 40b716697b87ce21d3f46e47007173934900da8b143c239dd63ef8ee6f1308cc |
+| etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md | indexed supporting material | 500b36bd990d2446e30ce3c3e108522447a181aa246653f140124b5643cbb58e |
 | etc/operations/proposal-opennt-bop-mirror-overlay-convergence-001.md | indexed supporting material | 2f2e91c7a491398ae23278766e5596002ae710113ff2bd5a1fb0577b2d9e12b2 |
 | etc/operations/proposal-opennt-bop-original-dispatcher-provider-recovery-001.md | indexed supporting material | b8808fef6cf0f7519c2103fdc8509c7f6f704846620537f59f0dd076af718e93 |
 | etc/operations/proposal-opennt-command-cmdexec32-full-capability-closure-001.md | indexed supporting material | 2dbce97ef0f4ad01836827a786b0a5bbb5512eabefe3937c1d49c06aef525c02 |
@@ -3804,6 +3804,7 @@ content-divergent entries.
 | history/m0-t371-xms-dpmi-dos-extender-execution-closure-20260902.md | closed task history | da2c61bbd0e34c8b501e108b230b97156d8bb6b840a9eefaf3e57746a8901e15 |
 | history/m0-t372-redirector-host-resource-execution-closure-20260902.md | closed task history | 5181802b9b96818e3476cd087800749c61ba448f4ec8c31888e6022b0a016689 |
 | history/m0-t373-wow16-bootstrap-callback-ne-lifecycle-closure-20260902.md | closed task history | d9bcec484899282f6a1e5ee0252c973bd135954c14fad5c267842fd48f0f1fd4 |
+| history/m0-t374-wow16-service-ui-private-host-boundary-closure-20260902.md | closed task history | 9bbff187660ad00afe5fc1291a301827cdabf85f07ced3790a91cb054c6bc24a |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

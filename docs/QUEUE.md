@@ -34,10 +34,13 @@ Win16 program executed.
 The detailed proposal, predecessor, delivery and exclusions for every queue
 item are in the [runtime recovery program](etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md).
 
-The prior minimal-DOS packet recorded an exact app package-stage transfer but
-did not fulfill its functional DOS-execution objective. That objective is
-deliberately retained, in dependency order, by the first three candidates
-below.
+The prior minimal-DOS packets recorded exact source, formal-link and bounded
+observation facts, but did not fulfill their functional DOS-execution
+objective.  The owner has therefore directed that pure DOS execution takes
+precedence over WOW/Win16 recovery: recover a real CPU40/SoftPC boot-to-DOS
+path first, then prove original guest `.COM` and MZ execution and return.  A
+WOW package may retain a precise unavailable boundary, but must not consume
+the active slot while that DOS baseline remains unproved.
 
 MVDM host mirror-topology recovery is already closed. `CPU_30_STYLE` is an
 NT4 kernel-VDM V86 monitor rather than a software CCPU profile, and is
@@ -56,9 +59,12 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Order | Candidate implementation package |
 | --- | --- |
-| 0 | Cross-family execution and control-broker closure — reconcile COMMAND/DOS/native-child/WOW lifecycle, events and cleanup. |
-| 1 | SoftPC graphics workload integration — after the closed original-font/exact-client presentation package, run an already-proven DOS graphics workload through original video and app presentation. |
-| 2 | Runtime matrix, x64 compatibility and product release — prove DOS/Win16 matrices, finish x64 profile work and package the product. |
+| 0 | Pure DOS CPU40/SoftPC startup and command baseline — establish one fixed, non-debug, console-owning executable-relative runtime container; recover the earliest missing original SoftPC host/console/timer/device owner only when it blocks the boot → NTIO/NTDOS → COMMAND chain; prove original `COMMAND.COM` starts and completes a declared built-in without synthetic guest input or loader. |
+| 1 | Pure DOS external program execution and parent return — use immutable original DOS media and original `$Exec`/JFN/SFT/PSP/arena/environment/termination paths to run at least one `.COM` and one MZ `.EXE`, then prove original parent and COMMAND continuation.  Missing immediate original owners are inserted before this package under the dependency-first rule. |
+| 2 | Pure DOS device, file and graphics workload closure — prove keyboard/console, file/seek/IOCTL, timer/IRQ and original SoftPC video paths with representative DOS workloads; this admits only the owner package directly blocking the selected workload. |
+| 3 | COMMAND native-child and control-broker closure — reconcile `cmdExec32`, native child lifecycle, command events/cleanup and the bounded command-control broker after the DOS baseline is real. |
+| 4 | WOW16 service, UI and host integration — resume only after the DOS baseline and COMMAND control contract are proved; retain the exact USER/CSRSS private boundary unless a complete same-shaped original cohort is admitted. |
+| 5 | Cross-family execution, runtime matrix and product release — reconcile enabled DOS/native-child/WOW families, then prove the selected DOS/Win16 matrices, complete x64 profile work and package the product. |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

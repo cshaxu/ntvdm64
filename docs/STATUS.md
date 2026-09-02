@@ -2,15 +2,22 @@
 
 ## Current Work
 
-### M0 T374 S4 — Active same-shaped USER registration and Base hook recovery
+### **No active M/T/S packet.**
 
-**Active: M0 T374 S4**
+The owner has closed `M0 T374` at its exact original WOW16 private-host
+boundary and reprioritized the queue to prove pure DOS execution before
+resuming Win16/WOW work.  No implementation packet is active until the owner
+admits the new queue-head pure-DOS package.
+
+### M0 T374 S4 — Closed exact USER registration and Base hook boundary
+
+**Closed: M0 T374 S4**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T374 S4; ordinary mode (single-person dual-role implementation and review). |
-| Admission And Approval | Admitted after S3's complete output matrix selected one indivisible original USER registration contract, under the owner's standing queue-execution and ordinary-delivery authority. |
-| Objective | Recover the complete same-shaped USER registration overlay and original Base global-memory hook lifetime selected by S3, without faking a partial callback table, private shared-info identity or static dispatcher. |
+| Identifier Mode | M0 T374 S4; ordinary mode (single-person dual-role review; closed). |
+| Admission And Approval | Admitted after S3's complete output matrix selected one indivisible original USER registration contract. The owner subsequently directed that pure DOS execution take priority before WOW/Win16 recovery. |
+| Objective | Determine whether the complete same-shaped USER registration and original Base global-memory hook lifetime can be recovered without faking a partial callback table, private shared-info identity or static dispatcher. |
 | Non-goals | No service-leaf enablement, static `W32Dispatch` route, substitute DLL, synthetic task/NE loader, guest mutation, fast WOW, CSRSS/kernel VDM, general unrelated USER/GDI implementation, CPU/device/x64 work or runtime observation. |
 | Reference Baseline | T374 S1--S3 evidence; original `client.c`, `gmem.c`, `wowuserp.h`, `sharewow.h`; existing adapter-win32/WOW and session mapping rules. |
 | Files And ABI Surface | New minimal adapter-win32/WOW registration overlay and selected original Base source slice; original `wow32` caller source remains mirror-shaped, with registered divergences only at named binding sites. |
@@ -20,7 +27,7 @@
 | Asset Needs | Original NTUSER/Base source, OpenNT ABI declarations, current adapter/session sources and formal graph. |
 | Reporting Requirements | Record every source divergence and the retained original result/order; distinguish original subset import from adapter-owned modern binding. |
 | Stop Conditions | A required implementation expands into unbounded general USER/CSRSS recreation, changes a provider leaf, needs media/runtime observation or changes machine semantics; pause for a revised package decision. |
-| Exit Criteria | The full registration contract and Base hook lifetime are source/link-ready with complete positive/negative local proof, or the exact first non-composable original behavior is recorded without synthetic success. |
+| Exit Criteria | Met by the recorded first non-composable original behavior: `UserRegisterWowHandlers` returns a single 20-callback-plus-metadata table whose targets and `gSharedInfo` identity depend on private NTUSER/Win32k/CSRSS product machinery. `RegisterWowBaseHandlers` additionally requires the coupled Base `GlobalFree` hook consumer. Neither may report synthetic success. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | every `PFNWOWHANDLERSOUT` field, `UserRegisterWowHandlers`, `RegisterWowBaseHandlers`, `GlobalFree`, `gSharedInfo`, `LOCKSHAREWOW`, `CURRENTPTD`, handles, callback identities and mapping-manager ownership. |
 
@@ -33,6 +40,8 @@
 **S2 closure:** [original WOW32 initialization boundary decision](etc/evidence/m0-t374-s2-original-wow32-init-boundary-decision-001.md).
 
 **S3 closure:** [WOW USER registration-contract matrix](etc/evidence/m0-t374-s3-wow-user-registration-contract-matrix-001.md).
+
+**T374 closure:** [WOW16 service/UI private-host boundary closure](history/m0-t374-wow16-service-ui-private-host-boundary-closure-20260902.md).
 
 ### M0 T372 — Closed Redirector and host-resource execution
 

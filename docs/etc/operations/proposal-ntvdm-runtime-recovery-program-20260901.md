@@ -19,28 +19,45 @@ prevents a known missing component from being deferred behind unrelated work.
 
 ## Ordered capability packages
 
-1. **COMMAND command delivery and built-in dispatch:** T363 proves the
-   original conventional-device owner and returns a first `54:01`; the next
-   later `54:01` continuation becomes the current source owner. Recover the
-   original command source/queue, `/C` declaration delivery, built-in dispatch
-   and return/failure direction before asserting DOS EXEC behavior.
-2. **DOS `.COM`/MZ `.EXE` execution and parent return:** original `$Exec`,
-   file/JFN/SFT, PSP/arena/environment, relocation, child exit and COMMAND
-   continuation using immutable low-dependency workloads.
-3. **COMMAND native-child (`cmdExec32`) lifecycle:** reached `54:08/0A/0B`,
+### Owner-directed execution priority revision — 2026-09-02
+
+Static package closure, BOP ingress, and a fixed observation are not DOS
+execution results.  The active WOW16 service package reached a real private
+NTUSER/CSRSS registration boundary before the product has proved that
+`COMMAND.COM` can execute an external DOS program.  The owner has directed
+that this ordering be corrected.  WOW keeps its exact unavailable evidence;
+no synthetic `W32Init`, partial handler table or private-shell replacement is
+permitted.  It resumes only after the first two pure-DOS packages below have
+their stated runtime proof.
+
+1. **Pure DOS CPU40/SoftPC startup and COMMAND baseline:** freeze one
+   console-owning, non-debug, executable-relative media container.  Follow the
+   original CPU40/SoftPC boot path through NTIO/NTDOS and COMMAND, recovering
+   only the first complete original host/device/console/timer owner that
+   prevents it.  Prove a declared original COMMAND built-in completes; do not
+   synthesize guest input, a DOS loader or a machine result.
+2. **Pure DOS `.COM` and MZ `.EXE` execution and parent return:** original
+   `$Exec`, file/JFN/SFT, PSP/arena/environment, relocation, child exit and
+   COMMAND continuation using immutable low-dependency workloads.  The proof
+   requires both a `.COM` and MZ program, each returning by the original guest
+   parent/COMMAND path.
+3. **Pure DOS device and graphics workload closure:** original keyboard,
+   console, file/seek/IOCTL, timer/IRQ and SoftPC video paths under selected
+   DOS workloads.  The package starts from the proven program-execution
+   baseline and admits only the original owner immediately blocking its
+   workload.
+4. **COMMAND native-child (`cmdExec32`) lifecycle:** reached `54:08/0A/0B`,
    public `CreateProcess` child lifecycle, original re-entry/event/return and
    explicit unavailable CSRSS-era branches.
-4. **XMS, DPMI and DOS-extender execution:** original XMS/A20/UMB/INT15 and
+5. **XMS, DPMI and DOS-extender execution:** original XMS/A20/UMB/INT15 and
    DPMI/DPMI32 runtime paths with mapping-manager identity boundaries.
-5. **Redirector and host-resource execution:** local VDMREDIR first, then
+6. **Redirector and host-resource execution:** local VDMREDIR first, then
    bounded public NetAPI; legacy NetBIOS/DLC/private-RPC remains explicit.
-6. **WOW16 bootstrap, callback and Win16 NE lifecycle:** original WOWEXEC
+7. **WOW16 bootstrap, callback and Win16 NE lifecycle:** original WOWEXEC
    command route, task/callback/monitor, single-session UI and NE start/exit.
-7. **WOW16 service, UI and host integration matrix:** selected WOW32 provider
+8. **WOW16 service, UI and host integration matrix:** selected WOW32 provider
    packages through public APIs, preserving private-shell failures.
-8. **Cross-family execution and control-broker closure:** COMMAND/DOS/native
+9. **Cross-family execution and control-broker closure:** COMMAND/DOS/native
     child/WOW lifecycle, event and cleanup; public IPC only when reached.
-9. **SoftPC graphics presentation and workload integration:** selected DOS
-    graphics workload through original video and app presentation.
 10. **Runtime matrix, x64 compatibility and product release:** selected DOS and
     Win16 matrix, x64 profile work, unpack-and-run manifests/release.
