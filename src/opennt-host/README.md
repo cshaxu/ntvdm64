@@ -44,6 +44,28 @@ provider. Its identical three-source provenance and bounded disposition are
 recorded in
 [`m0-t324-s1-original-redirector-owner-binding-baseline-001.md`](../../docs/etc/evidence/m0-t324-s1-original-redirector-owner-binding-baseline-001.md).
 
+`netapi/netlib/copystr.c` is the third selected NetLib slice.  It is the
+complete, byte-identical OpenNT and OpenNT-4.5 conversion unit directly
+reached by original `mvdm-host/vdmredir/vrnetapi.c` through
+`NetpCopyWStrToStr`.  Its source-defined OEM conversion and bounded
+destination contract remain in the original translation unit; it does not
+admit a NetAPI/RAP transport or a replacement Redirector provider.  Its
+secondary NetLib references are intentionally exposed to the formal link
+audit rather than reimplemented in an adapter.
+
+`netapi/netlib/allocstr.c` and `netapi/netlib/initoem.c` are the complete,
+byte-identical OpenNT/OpenNT-4.5 direct NetLib support units reached by that
+same `copystr.c` body.  They retain the original allocation, OEM-string
+initialisation and error direction; their remaining NetLib dependencies are
+likewise admitted only when the formal link audit proves a finite original
+source path.
+
+`netapi/api/apibuff.c` retains the source-identified `NetapipBufferAllocate`
+true subset required by the selected `allocstr.c` unit.  It preserves the
+original internal forwarding contract to public `NetApiBufferAllocate`; the
+unreached RPC/MIDL allocator routines from the same original file are not
+admitted merely to make the larger historical API product shell link.
+
 ## Divergence register
 
 | Identifier | Original purpose | Reason for divergence | Selected implementation | Files |
@@ -59,3 +81,5 @@ recorded in
 | OPENNT-HOST-009 | `public/sdk/inc/ptypes32.h` carries the small historical 16/32 portability declaration set used by original SoftPC serial sources. | `nt_com.c` and `nt_wcom.c` directly include it, while the modern SDK has no same-named carrier. | Preserve the byte-exact selected OpenNT public header (SHA-256 `fbc65366df6b091aadbdc0ce12eb842bbd48691ccb1b9ce34c6d503226a7139b`); it contributes declarations only and no serial provider behavior. | `public/sdk/inc/ptypes32.h` |
 | OPENNT-HOST-010 | `ntrtl.h` declares the original mutable RTL environment APIs reached by COMMAND. | The selected declaration subset initially omitted this small source-facing cluster, leaving original callers to compile by implicit declaration. | Retain the original declaration shapes only; the same-named public-Win32 implementation remains in `adapter-mvdm-host-out/win32`. | `public/sdk/inc/ntrtl.h` |
 | OPENNT-HOST-011 | `ntrtl.h` declares `RtlOemToUnicodeN`, reached by original SoftPC keyboard conversion. | The selected true subset omitted this fixed-buffer OEM-to-Unicode form although the original `nt_keycd.c` includes and calls it. | Restore only the original declaration shape; the public Win32 implementation remains adapter-owned. | `public/sdk/inc/ntrtl.h`; `../mvdm-host/softpc.new/host/src/nt_keycd.c` |
+| OPENNT-HOST-012 | `ntrtl.h` declares OEM conversion forms reached by original NetLib `copystr.c`. | The admitted true subset omitted the fixed-buffer conversion and size contracts although the selected original Redirector dependency includes them. | Restore only the original signatures; the selected x86 NTDLL/import-library binding is verified as part of the Redirector network closure. | `public/sdk/inc/ntrtl.h`; `netapi/netlib/copystr.c` |
+| OPENNT-HOST-013 | `netapi/api/apibuff.c` provides historical public and internal NetAPI buffer entry points. | The selected Redirector NetLib closure reaches only its `NetapipBufferAllocate` compatibility forwarder; importing the other functions falsely pulls an RPC/MIDL product shell. | Preserve the original function unchanged as a source-identified true subset and call the public modern `NetApiBufferAllocate` contract. | `netapi/api/apibuff.c`; `netapi/netlib/allocstr.c` |

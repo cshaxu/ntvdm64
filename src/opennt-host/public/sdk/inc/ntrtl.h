@@ -26,6 +26,13 @@ NTSTATUS NTAPI RtlOemStringToUnicodeString(PUNICODE_STRING DestinationString, PC
  * source shape in this true subset; the modern API binding is adapter-owned. */
 NTSTATUS NTAPI RtlOemToUnicodeN(PWSTR UnicodeString, ULONG MaxBytesInUnicodeString, PULONG BytesInUnicodeString, PCHAR OemString, ULONG BytesInOemString);
 NTSTATUS NTAPI RtlUnicodeStringToOemString(POEM_STRING DestinationString, PCUNICODE_STRING SourceString, BOOLEAN AllocateDestinationString);
+/* DIVERGENCE(OPENNT-HOST-012): the selected byte-identical NetLib CopyStr
+ * unit reaches these two original OEM conversion declarations.  The full
+ * NT4 NTRTL header is outside the accepted host closure; retain the reached
+ * signatures only.  The selected x86 NTDLL/import-library binding is verified
+ * by the Redirector network package. */
+NTSTATUS NTAPI RtlUnicodeToOemN(PCHAR OemString, ULONG MaxBytesInOemString, PULONG BytesInOemString, PWSTR UnicodeString, ULONG BytesInUnicodeString);
+ULONG NTAPI RtlUnicodeStringToOemSize(PCUNICODE_STRING UnicodeString);
 NTSTATUS NTAPI RtlAnsiStringToUnicodeString(PUNICODE_STRING DestinationString, PCANSI_STRING SourceString, BOOLEAN AllocateDestinationString);
 NTSTATUS NTAPI RtlUnicodeStringToAnsiString(PANSI_STRING DestinationString, PCUNICODE_STRING SourceString, BOOLEAN AllocateDestinationString);
 VOID NTAPI RtlFreeUnicodeString(PUNICODE_STRING UnicodeString);

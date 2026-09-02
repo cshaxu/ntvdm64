@@ -4,6 +4,8 @@
 
 ### M0 T372 S5 — Active Redirector public network owner groups
 
+**Active: M0 T372 S5**
+
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T372 S5; Ordinary Mode (single-person dual-role implementation and review). |
@@ -56,6 +58,8 @@ remain deferred to S6.
 **S5 P3:** [original NetLib status conversion closure](etc/evidence/m0-t372-s5-p3-original-netlib-status-closure-001.md).
 
 **S5 P4:** [Advapi crypt-contract closure](etc/evidence/m0-t372-s5-p4-advapi-crypt-contract-closure-001.md).
+
+**S5 P5:** [original NetLib copy/alloc closure](etc/evidence/m0-t372-s5-p5-original-netlib-copy-closure-001.md).
 
 ### M0 T371 — Closed XMS, DPMI and DOS-extender execution
 
