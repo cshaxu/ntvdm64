@@ -76,7 +76,7 @@ reacquisition after the one bootstrap record has been consumed.  Its pending
 wait is a source-shaped BaseClient/BaseSrv contract, not a COMMAND BOP or
 machine defect.
 
-### M0 T364 S2 — Active bounded original command-source recovery
+### M0 T364 S2 — Closed bounded original command-source recovery
 
 | Field | Record |
 | --- | --- |
@@ -96,7 +96,57 @@ machine defect.
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `GetNextVDMCommand`, `BaseSrvGetNextVDMCommand`, BaseClient capture/retry, `VDMINFO` state flags, command-record consume/wake, app declaration, session teardown and COMMAND.COM `/C` handoff. |
 
-**Active: M0 T364 S2.**
+**S2 closure:** [COMMAND source lifecycle verification](etc/evidence/m0-t364-s2-command-source-lifecycle-verification-001.md)
+compares the imported original BaseClient/BaseSrv lifecycle with the selected
+same-shaped local slice and records an executed formal x86 fixture.  It proves
+the one bootstrap record and later no-next-record wait are not a COMMAND
+provider defect.
+
+### M0 T364 S3 — Closed COMMAND delivery formal closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T364 S3; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from the closed T364 S2 source/lifecycle verification under the owner’s standing ordered-queue authority. |
+| Objective | Prove the exact original COMMAND delivery package, BaseClient-shaped adapter, app declaration, session and broker inputs are formally linked into the selected CPU40/x86 product. |
+| Non-goals | No source/ABI behavior change, parser, BOP repair, guest/media mutation, DOS EXEC, cmdExec32, BaseSrv/CSRSS recreation, CPU/device change, CPU30, Bochs, x64 runtime, WOW, Redirector, graphics, printer or product run. |
+| Reference Baseline | T364 S1 owner ledger; T364 S2 x86 fixture result; selected `original-softpc-process.exe` formal graph. |
+| Files And ABI Surface | Ninja manifest/product link closure only: original `mvdm-command`, `basesrv-bindings`, `session`, `broker`, app and selected CPU40 machine roots. |
+| Applicable Rules | Execution, source policy, CPU40-only, mirror/overlay, build/evidence, architecture, coding and documentation rules. |
+| Verification | `ninja -t query` product-input review, selected target build without reconfiguration, source-unit/archive membership review and governance checks. No product run. |
+| Expected Markers | Each source-shaped command-delivery owner appears exactly once in the final product path; no retired Bochs/CPU30 or standalone command-provider substitute appears. |
+| Asset Needs | Existing formal x86 build root, selected source manifests and T364 evidence; no new asset. |
+| Reporting Requirements | Record direct product inputs and any archive-level proof; distinguish link closure from native guest runtime. |
+| Stop Conditions | Missing selected owner, source replacement, required behavior change, graph reconfiguration, unrelated package repair or product execution requires new admission. |
+| Exit Criteria | Formal graph and target build prove the selected package is linked, with source owner and adapter disposition recorded. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `original-mvdm-command.lib`, `basesrv-bindings.lib`, `session.lib`, `broker.lib`, `app-machine-shell.lib`, CPU30/Bochs exclusions and final process link inputs. |
+
+**S3 closure:** [COMMAND delivery formal closure](etc/evidence/m0-t364-s3-command-delivery-formal-closure-001.md)
+proves the original COMMAND archive, BaseClient-shaped binding, session and
+broker are final CPU40/x86 process inputs.  This is formal link proof only.
+
+### M0 T364 S4 — Active frozen COMMAND delivery observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T364 S4; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from the closed T364 S3 formal closure under the owner’s standing ordered-queue authority. |
+| Objective | Make one fixed CPU40/x86 product observation of the selected `/C EXIT` COMMAND delivery workload and classify its first source-owned successor. |
+| Non-goals | No workload/container variation or retry; no source/ABI change; no BOP repair, command parser, guest/media mutation, DOS EXEC, cmdExec32, BaseSrv/CSRSS recreation, CPU/device change, CPU30, Bochs, x64 runtime, WOW, Redirector, printer or graphics work. |
+| Reference Baseline | T363 S4 fixed package observation; T364 S1 source ledger; T364 S2 lifecycle fixture; T364 S3 formal link closure. |
+| Files And ABI Surface | Existing product, fixed app declaration, fixed observer and child-only diagnostic report only. No production file change. |
+| Applicable Rules | Execution, source policy, source-first recovery, CPU40-only, fixed-observation, architecture, coding and documentation rules. |
+| Verification | One eight-second controlled observer invocation with unchanged product/root/`--command EXIT`; retain only concise result evidence. |
+| Expected Markers | Original first command delivery, later ordinary reacquisition/wait or one earlier original terminal, with no changed runtime variable. |
+| Asset Needs | Existing `O:\\ntvdm64` fixed package root and T362 CPU40/x86 product; no guest or host-system mutation. |
+| Reporting Requirements | Record exact command, product/root identity, timeout/outcome and earliest source-owned transfer; distinguish a controlled wait from completion. |
+| Stop Conditions | Any need for a retry, different command, changed root/console/observer, leaf patch, source change, guest execution claim or successor-family implementation ends this S. |
+| Exit Criteria | One valid frozen observation is recorded and transfers to the correct next owner package or source terminal. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | First/repeat `54:01`, `54:04`, `54:0E`, Base VDM record state, app declaration bytes, original COMMAND dispatch return and earliest next original BOP/host owner. |
+
+**Active: M0 T364 S4.**
 
 ### M0 T354 S1 — Closed permanent COMMAND bootstrap owner admission
 
