@@ -2,10 +2,48 @@
 
 ## Current Work
 
-**No active M/T/S packet.**  The latest closure is
-[M0 T362 original COMMAND built-in/batch lifecycle](history/m0-t362-original-command-built-in-batch-lifecycle-closure-20260902.md):
-the one permitted frozen observation selected the earlier original SoftPC
-conventional-device owner.  The next candidate requires explicit admission.
+### M0 T363 S1 — Closed SoftPC conventional-device owner ledger
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T363 S1; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from T362's exact source-owner transfer under the standing direction to execute the ordered queue. |
+| Objective | Establish the complete source-shaped ownership and immediate closure of the reached CPU40 `c_IOVirtualised -> inb -> printer_io` conventional-device path. |
+| Non-goals | No printer leaf patch, virtual printer, guest/media mutation, BOP fabrication, DOS EXEC, cmdExec32, BaseSrv/CSRSS, CPU/device semantic change before ledger closure, CPU30, Bochs, x64 runtime, WOW, Redirector or graphics feature. |
+| Reference Baseline | T362 S3 [corrected same-run observation](etc/evidence/m0-t362-s3-frozen-command-observation-correction-002.md); selected original SoftPC CPU40 sources, existing LPT/IOS/timer/ICA bindings, fixed `/C EXIT` short-root container and formal original SoftPC graph. |
+| Files And ABI Surface | Original SoftPC `ccpusas4`, `ios`, BIOS printer entry, `printer_`, `nt_lpt`, timer/ICA headers and existing adapter/session bindings; no production source change in S1. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Definition/caller/data-flow review, original-versus-mirror inspection, formal graph membership review, owner/failure ledger and governance checks. No product run. |
+| Expected Markers | A finite ledger names BIOS/selector/ordinary-I/O entry paths, BDA values, IOS vector owner, LPT backend, timer/ICA relationship and one complete recovery cohort or source terminal. |
+| Asset Needs | Existing original mirrors, source indexes, selected CPU40 graph and T362 evidence only; no guest or host-system mutation. |
+| Reporting Requirements | Separate source fact, current binding and T362 runtime fact; identify any formerly implemented shim that original source can supersede. |
+| Stop Conditions | Need to change a port result, add an ad-hoc printer policy, rerun T362, vary workload/container, enter another owner family, or infer a repair from timeout requires a new packet. |
+| Exit Criteria | Every immediate reached device edge has one owner/disposition; the selected S2 cohort is complete and source-shaped, or an exact earlier source terminal is recorded. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | INT 17, selector 17, `printer_io`, `host_lpt_*`, BDA LPT ports/timeouts, IOS/CCPU I/O virtualisation, ICA/PIT timer and app/session device policy. |
+
+**Plan:** [M0 T363 SoftPC conventional-device and DOS workload matrix](etc/operations/m0-t363-softpc-conventional-device-matrix-001.md).
+
+**S1 closure:** [SoftPC conventional-device owner ledger](etc/evidence/m0-t363-s1-conventional-device-owner-ledger-001.md)
+proves that the reached INT 17 path remains within the selected original
+CPU40/IOS/LPT cohort.  The `MONITOR`-only printer transport is compiled out;
+no missing printer binding, virtual printer, or leaf BOP repair is admitted.
+
+### M0 T363 S2 — Active original conventional-device cohort verification
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T363 S2; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T363 S1's complete original-owner ledger under the standing ordered-queue direction. |
+| Objective | Verify, as one original CPU40 SoftPC cohort, that `reset -> printer_init/printer_post -> IOS tables -> printer_io/printer_inb -> host_lpt[]` retains the source-defined status and timeout direction in the selected non-MONITOR product profile. |
+| Non-goals | No printer leaf patch, virtual printer, host printer or dongle implementation, guest/media mutation, BOP fabrication, command/EXEC work, monitor transport, CPU30, Bochs, x64 runtime, WOW, Redirector or graphics feature. |
+| Reference Baseline | T363 S1 owner ledger; corrected T362 same-run observation; selected original CPU40/x86 formal graph. |
+| Files And ABI Surface | Original `reset.c`, `ios.c`, `printer.c`, `printer_.c`, `nt_lpt.c`, the existing SAS/session backing and formal build manifest.  No new device ABI. |
+| Verification | Static graph/profile review plus bounded local original-cohort checks for BDA initialization, LPT port registration and local no-device/timeout status direction.  No product observation. |
+| Exit Criteria | A formal selected graph and local source-shaped checks establish the complete non-MONITOR conventional-device initialization/status cohort, or identify one exact earlier original binding for S3. |
+| Stop Conditions | Need to emulate a physical printer, expose direct port I/O, make a guest-visible policy decision, alter CPU/BOP behavior, or run the frozen workload before S4 requires a new packet. |
+
+**Active: M0 T363 S2.**
 
 ### M0 T354 S1 — Closed permanent COMMAND bootstrap owner admission
 

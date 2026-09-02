@@ -20,16 +20,20 @@ COMMAND built-in, batch file, DOS child, native child or Win16 program ran.
 
 ## Frozen runtime result
 
-The one permitted fixed-container `/C EXIT` observation reached original
-`54:05`, but not `54:01` or `54:00`.  Its complete map/source attribution is
-recorded in [T362 S3](../etc/evidence/m0-t362-s3-frozen-command-observation-001.md):
-the stopped execution stack is the original CCPU40
+The one permitted fixed-container `/C EXIT` observation returned normally
+from original `54:05`, then continued through the original configuration and
+environment service path, but did not reach `54:01` or `54:00`.  The initial
+console-only marker summary is superseded by the same-run
+[S3 correction](../etc/evidence/m0-t362-s3-frozen-command-observation-correction-002.md).
+The complete map/source attribution still shows the stopped execution stack as
+the original CCPU40
 `c_IOVirtualised -> inb -> printer_io` conventional-device path.
 
 ## Disposition
 
 This is not evidence that T362's COMMAND mapping changes caused the timeout.
-It is one exact earlier source owner, so no COMMAND BOP leaf, guest change,
+It is one exact earlier source owner after the mapped first-call cohort
+returned, so no COMMAND BOP leaf, guest change,
 or second observation was admitted.  The queue now prioritizes the complete
 SoftPC conventional-device/DOS workload package.  Once that package has a
 source-shaped runtime closure, a new COMMAND lifecycle packet may resume from

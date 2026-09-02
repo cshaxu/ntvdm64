@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3813 |
+| Documentation records | 3816 |
 | --- | --- |
-| Generated UTC | 2026-09-02T07:11:40Z |
+| Generated UTC | 2026-09-02T07:21:00Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 2aff3a7ccae11959631ca42136a3c3f84f080bd6b2dff949c295a22978e198e9 |
+| STATUS.md | principal control document | b09eec0b9055fd949ef6c3f08c2b567e3ef30d681b42bb84fe6d832f27251dd9 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1206,6 +1206,8 @@ content-divergent entries.
 | etc/evidence/m0-t361-s1-original-font-client-contract-001.md | indexed supporting material | 2f2511b1786b8dbdd39e488f384ba8a987a9e75792ea0ae8bfab1c322b057547 |
 | etc/evidence/m0-t362-s2-first-call-guest-memory-cohort-closure-001.md | indexed supporting material | 818a95b4543224c969beb512d2da19ef75d320f5df2cbebcc5ec677d8edff3c7 |
 | etc/evidence/m0-t362-s3-frozen-command-observation-001.md | indexed supporting material | 9b930355aade23adda8d958c77587e5bb8f16c4cf87f02e878009ef855549f9f |
+| etc/evidence/m0-t362-s3-frozen-command-observation-correction-002.md | indexed supporting material | 84d51afdd3f92b2ffa075f25271c583001ffe3c9f2b1517a39987eb45e6ad83c |
+| etc/evidence/m0-t363-s1-conventional-device-owner-ledger-001.md | indexed supporting material | 13296f1923b88c9f2ec29bc273f738852f63a9448d8a7e4568da07f5d7d3c593 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1951,6 +1953,7 @@ content-divergent entries.
 | etc/operations/m0-t361-softpc-window-font-and-client-contract-plan-001.md | indexed supporting material | 3fc27e6812817d8fbf0b4624e88c296939081ac2f55d526a99aae75402c5dd5c |
 | etc/operations/m0-t362-command-built-in-batch-lifecycle-001.md | indexed supporting material | 0ce021b1af20c4dd755960d1d48ad7a835dd64b6f41745ee32e90b62359d38fe |
 | etc/operations/m0-t362-s1-command-initialization-owner-ledger-001.md | indexed supporting material | f114b89c122a4ba8f644af1011a19351892fed74fa0bd3138dd3d28079b2f46a |
+| etc/operations/m0-t363-softpc-conventional-device-matrix-001.md | indexed supporting material | e3252c1a53cc526652f18e9334d223fd779144c8937cd0fb94307663bc5bb6ef |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3719,7 +3722,7 @@ content-divergent entries.
 | history/m0-t353-cpu40-ntdos-post-cmdgetconfigsys-continuity-closure-20260901.md | closed task history | 994f02f1853770bc97b329b3b18a52d8ea57491a57a10ce4bf576c64fbc17e05 |
 | history/m0-t354-cpu40-ntdos-permanent-command-package-path-closure-20260901.md | closed task history | e9f576b3194691bfe72e104cc82acfd87ebc6b3956d274de18eec2813152c441 |
 | history/m0-t361-softpc-window-font-client-contract-closure-20260902.md | closed task history | b48f043119ef02c739a537781de360807fd6c803810b69ffce727a500908e08c |
-| history/m0-t362-original-command-built-in-batch-lifecycle-closure-20260902.md | closed task history | 02d0afd1ab4ab8150594fcecd85ff45de6727b5fda6aaa5ac7c47f4fd3adbd83 |
+| history/m0-t362-original-command-built-in-batch-lifecycle-closure-20260902.md | closed task history | 9bcdbd6a06703605ec5a90d606784e6b275e47d92e00a8b2e3fa071a90df1a2f |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
