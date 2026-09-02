@@ -182,7 +182,7 @@ return route.  Its first finite host recovery cohort is the original `.COM`
 file lifecycle (`DEMOPEN`/`DEMREAD`/`DEMCLOSE`) with a bounded guest-memory
 lease; it is not an app loader or `cmdReturnExitCode` route.
 
-### M0 T365 S2 — Active original `.COM` file-lifecycle binding recovery
+### M0 T365 S2 — Closed original `.COM` file-lifecycle binding recovery
 
 | Field | Record |
 | --- | --- |
@@ -197,7 +197,27 @@ lease; it is not an app loader or `cmdReturnExitCode` route.
 | Stop Conditions | Need to modify guest `$Exec`, parse/load an image in app, add a BOP leaf, change CPU/device semantics, start MZ relocation, use a private mapper, retain a guest/native pointer, or run the product requires a new admission. |
 | Exit Criteria | The complete `.COM` file-lifecycle provider cohort is source-shaped, locally evidenced and formally linked, or an exact earlier source terminal is recorded. |
 
-**Active: M0 T365 S2.**
+**S2 closure:** [original `.COM` DEM file-lifecycle lease closure](etc/evidence/m0-t365-s2-dem-com-file-lifecycle-lease-closure-001.md)
+proves that the selected original `DEMOPEN`/`DEMREAD`/`DEMCLOSE` cohort uses
+the shared session mapping manager and bounded guest-memory lease without a
+retained `GetVDMAddr` alias.  It includes one focused local file lifecycle
+fixture and a successful formal CPU40/x86 product link; it makes no guest
+execution or product runtime claim.
+
+### M0 T365 S3 — Active formal DOS EXEC product closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T365 S3; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted after the closed T365 S2 source/binding recovery under the owner’s standing ordered-queue authority. |
+| Objective | Prove the selected original DOS `.COM` file-lifecycle cohort and its shared session bindings are present in the formal CPU40/x86 product input closure. |
+| Non-goals | No product run, guest/media change, loader/parser, MZ relocation, BOP change, native child, Redirector/WOW/CPU/device work, CPU30, Bochs or x64 claim. |
+| Reference Baseline | T365 S2 closure, generated CPU40/x86 Ninja graph and selected original source manifests. |
+| Files And ABI Surface | `demfile.c`, `demhndl.c`, `mvdm_host_identity.c`, `mvdm_guest_location.c`, `original-mvdm-dem.lib`, `softpc-bindings.lib`, `original-softpc-process.exe`. |
+| Verification | Rebuild/inspect the formal x86 graph and its selected archive/final-link inputs; no runtime observation. |
+| Exit Criteria | One reproducible graph/input record proves every selected S2 source and binding enters the final product, or records an exact linker terminal. |
+
+**Active: M0 T365 S3.**
 
 ### M0 T354 S1 — Closed permanent COMMAND bootstrap owner admission
 

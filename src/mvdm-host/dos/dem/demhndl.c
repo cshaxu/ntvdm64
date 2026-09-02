@@ -145,13 +145,27 @@ DWORD   dwReadError;
 BOOL    ok;
 UCHAR   locus, action, class;
 LONG    lLoc;
+mvdm_guest_location bufferLocation;
+mvdm_guest_location_lease bufferLease;
+BOOL    bufferLeaseActive;
 
     hFile = GETHANDLE (getAX(),getBP());
     usDS = getDS();
     usDX = getDX();
+    bufferLeaseActive = FALSE;
     mvdm_softpc_record_dem_read(usDS, usDX, getCX(), getBX(), getSI(), 0u,
         0u, getAX(), getCF());
-    lpBuf  = (LPVOID) GetVDMAddr (usDS,usDX);
+    /* DIVERGENCE(MVDM-HOST-DIV-195): the source passes a durable guest alias
+     * to synchronous host I/O.  Retain its ReadFile/named-pipe/CF/AX order,
+     * but hold one bounded writable session lease only for this call. */
+    if (!mvdm_guest_location_set_real_mode(&bufferLocation, usDS, usDX) ||
+        !mvdm_guest_location_acquire(&bufferLocation, (DWORD)getCX(),
+            GUEST_MEMORY_ACCESS_WRITE, &bufferLease)) {
+        SetLastError(ERROR_INVALID_ADDRESS);
+        goto readFailureExit;
+    }
+    bufferLeaseActive = TRUE;
+    lpBuf = (LPVOID)bufferLease.bytes;
 
     //
     // if this handle is a named pipe then use VrReadNamedPipe since we have
@@ -232,10 +246,10 @@ LONG    lLoc;
                   NULL) == FALSE){
 
 readFailureExit:
-        Sim32FlushVDMPointer (((ULONG)(usDS << 16)) | usDX, getCX(),
-                               (PBYTE )lpBuf, FALSE);
-        Sim32FreeVDMPointer (((ULONG)(usDS << 16)) | usDX, getCX(),
-                               (PBYTE )lpBuf, FALSE);
+        if (bufferLeaseActive) {
+            (void)mvdm_guest_location_release(&bufferLease, FALSE);
+            bufferLeaseActive = FALSE;
+        }
 
         if (GetLastError() == ERROR_BROKEN_PIPE)  {
              setAX(0);
@@ -251,10 +265,14 @@ readFailureExit:
     }
 
 readSuccessExit:
-    Sim32FlushVDMPointer (((ULONG)(usDS << 16)) | usDX, getCX(),
-                          (PBYTE )lpBuf, FALSE);
-    Sim32FreeVDMPointer (((ULONG)(usDS << 16)) | usDX, getCX(),
-                         (PBYTE )lpBuf, FALSE);
+    if (bufferLeaseActive) {
+        if (!mvdm_guest_location_release(&bufferLease, TRUE)) {
+            bufferLeaseActive = FALSE;
+            SetLastError(ERROR_INVALID_ADDRESS);
+            goto readFailureExit;
+        }
+        bufferLeaseActive = FALSE;
+    }
     setCF(0);
     setAX((USHORT)dwBytesRead);
     mvdm_softpc_record_dem_read(usDS, usDX, getCX(), getBX(), getSI(),

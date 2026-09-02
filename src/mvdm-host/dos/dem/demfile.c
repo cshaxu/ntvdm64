@@ -168,13 +168,27 @@ BOOL    IsFirst;
 LPSTR   dupFileName;
 DWORD   dwFileSize,dwSizeHigh;
 SECURITY_ATTRIBUTES sa;
+CHAR    fileName[MAX_PATH];
+ULONG   fileNameBytes;
+mvdm_guest_location fileNameLocation;
 
     if (getAL()){
         demPrintMsg (MSG_EAS);
         return;
     }
 
-    lpFileName = (LPSTR) GetVDMAddr (getDS(),getSI());
+    /* DIVERGENCE(MVDM-HOST-DIV-195): the source uses a durable host alias
+     * for the DOS pathname.  Preserve its local pathname, canonicalization,
+     * CreateFile and error sequence, but copy at most MAX_PATH bytes through
+     * one synchronous session lease before the original body uses it. */
+    if (!mvdm_guest_location_set_real_mode(&fileNameLocation, getDS(),
+        getSI()) || !mvdm_guest_location_copy_c_string(&fileNameLocation,
+        (uint8_t *)fileName, (uint32_t)sizeof(fileName), &fileNameBytes)) {
+        SetLastError(ERROR_INVALID_ADDRESS);
+        demClientError(INVALID_HANDLE_VALUE, (CHAR)-1);
+        return;
+    }
+    lpFileName = fileName;
     /* DIVERGENCE(MVDM-HOST-DIV-177): default-off copied observation only.
      * Preserve the original DS:SI alias and all file-service behavior; the
      * helper independently leases the numeric address and never retains it. */
