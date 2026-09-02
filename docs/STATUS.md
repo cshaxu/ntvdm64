@@ -840,7 +840,7 @@ the selected CPU40 path attempts to execute immutable `COMMAND.COM` data at
 
 **S4 closure:** [Base VDM command-record lifecycle audit](etc/evidence/m0-t358-s4-base-vdm-command-record-lifecycle-audit-001.md) proves that the first `54:01` consumes the unique declared `/C EXIT` record.  The later wait is the original empty-queue path; it is not a Base VDM defect.
 
-### M0 T358 S5 — Active guest COMMAND `/C` exit-path topology audit
+### M0 T358 S5 — Closed guest COMMAND `/C` exit-path topology audit
 
 | Field | Record |
 | --- | --- |
@@ -850,10 +850,25 @@ the selected CPU40 path attempts to execute immutable `COMMAND.COM` data at
 | Non-goals | No Base VDM broker change, BOP leaf repair, retry, DOS external EXEC, cmdExec32, guest/media mutation, CPU/SoftPC semantic change, CPU30, Bochs, x64, CSRSS/BaseSrv, WOW, Redirector or graphics work. |
 | Files And ABI Surface | Original guest `mvdm-guest/dos/v86/cmd/command` source/map/binary; original COMMAND host `cmdmisc.c`, `cmdexit.c`, `cmdexec.c`; NTDOS execution/return sources as evidence only. No ABI change in S5. |
 | Verification | Original guest/host control-flow and image/map audit; selected-source/provenance and formal graph review; governance/export and diff review. No new runtime run or production change in S5. |
-| Exit Criteria | One source-owned ledger distinguishes a correct `/C EXIT` execution/exit from a fall-through to a second `54:01`, names the earliest missing or misbound owner if any, and bounds one whole recovery cohort. |
+| Exit Criteria | Closed: one source-owned ledger distinguishes the guest `/C` route from the child-return Base VDM lifecycle and bounds one whole recovery cohort. |
 | Original Owner Request | “非常好，按照这个顺序执行。” |
 
-**Active: M0 T358 S5.**
+**S5 closure:** [guest COMMAND `/C EXIT` topology audit](etc/evidence/m0-t358-s5-command-c-exit-topology-audit-001.md) proves that the current wait belongs to the missing BaseSrv DOS parent/child record lifecycle after the correct first delivery, not to `/C` parsing or a COMMAND BOP leaf.
+
+### M0 T358 S6 — Active single-session Base VDM DOS record-lifecycle recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T358 S6; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by closed S5 under the existing T358 package objective and ordered dependency-first execution. |
+| Objective | Recover the complete reached single-session DOS record lifecycle from original BaseSrv/BaseClient: initial command, busy child, return exit code, parent/no-command disposition, wake/retry and record cleanup; then formally link and locally test it. |
+| Non-goals | No CSRSS/CSR transport, cross-process or multi-session broker, WOW notification, raw handle transfer, generic scheduler, BOP leaf repair, guest/media mutation, DOS external EXEC, cmdExec32, CPU/SoftPC semantic change, CPU30, Bochs, x64, Redirector or graphics work. |
+| Files And ABI Surface | Original `opennt-host/base/win32/{server/srvvdm.c,client/vdm.c}` as control-flow authority; `adapter-mvdm-host-out/basesrv` local broker/client; session event lifecycle and existing app declaration. Guest and MVDM mirror function bodies remain unchanged. |
+| Verification | State/caller/failure ledger; focused local Base VDM record-lifecycle fixture; formal CPU40/x86 link; governance/export and diff review. Runtime observation is separately admitted only after local/formal closure. |
+| Exit Criteria | The selected one-session state machine preserves all reached initial/return/retry outcomes with no retained guest pointer or raw native handle, its fixture covers record transitions and cleanup, and the formal product links. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+
+**Active: M0 T358 S6.**
 
 
 ### M0 T355 S31 — Closed original `0x78` entry-result attribution
