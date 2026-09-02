@@ -888,12 +888,31 @@ environment requests return before the first `54:01`.  The fixed run then
 reaches original guest `Alloc_error`; it does not reach the S6 Base VDM
 child-return state or COMMAND completion.
 
-**M0 T358 disposition:** Paused at the original COMMAND initial-environment
-and NTDOS allocation cohort.
+### M0 T358 S8 — Closed original initial-environment allocation cohort audit
 
-**No active M/T/S packet.** A bounded source map of the `54:0F` `ES:0`/`BX`
-delivery, NTDOS allocation result and resident integrity must be admitted
-before changing production code or running another workload.
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T358 S8; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted under the owner-approved ordered queue execution after S7's fixed observation selected this immediate original predecessor; no product behavior is changed in this audit. |
+| Objective | Reconstruct the complete original `54:0F` initial-environment delivery, guest two-call allocation/reallocation, NTDOS arena allocation and `Alloc_error` continuation; select one bounded source-shaped recovery or exact terminal. |
+| Non-goals | No new runtime observation, provider/BOP leaf rewrite, guest/media change, BaseSrv change, DOS external EXEC, cmdExec32, CPU/SoftPC semantic change, CPU30, Bochs, x64, CSRSS/BaseSrv, WOW, Redirector or graphics work. |
+| Reference Baseline | S7 fixed root/media/product evidence: two successful original `54:0F` returns, no first `54:01`, and stopped `03F4:1F8F` at the mapped `Alloc_error` entry. |
+| Files And ABI Surface | Original `dos/command/{cmdenv.c,cmddata.c,cmdmisc.c}`, guest `command/{rdata.asm,init.asm,envdata.asm}` and reached NTDOS allocation/arena source; current same-shaped command length and guest-memory bindings as comparison only. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original definition/caller/register/data-flow map; mirror-versus-source diff; selected formal graph/import review; documentation governance/export and diff review. No build or runtime execution in S8. |
+| Expected Markers | A source ledger states both `54:0F` calls' `ES:0`/`BX` contract, all allocation/error branches, current binding and the earliest recoverable owner; it distinguishes a paragraph-count mismatch, allocator failure and resident-memory integrity failure. |
+| Asset Needs | Existing source mirrors, selected external OpenNT source, S7 report/map, formal CPU40/x86 graph and Node 22; no new guest artifact or host-system mutation. |
+| Reporting Requirements | Separate source fact, current binding and S7 observation; record all ABI values required in a later state-neutral observation and retain original NTDOS/COMMAND failure behavior. |
+| Stop Conditions | Any conclusion from timeout alone, need to alter guest bytes, fabricate `54:01`, introduce an environment policy, change CPU/machine semantics or broaden into a runtime repair pauses for a new S admission. |
+| Exit Criteria | Closed: the complete environment/allocation cohort has no unowned immediate edge. The later fixed root-layout observation proves its source continuation reaches `54:01`, so no recovery is selected. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `cmdGetInitEnvironment`, `cmdSetInfo`, `lpszComSpec`, host environment enumeration, `ES:0`/`BX`, INT 21h allocation/deallocation, arena/SFT state, `rdata.asm` second-call comparison, `Alloc_error` and resident image integrity. |
+
+**S8 closure:** [original initial-environment allocation cohort audit](etc/evidence/m0-t358-s8-initial-environment-allocation-cohort-audit-001.md) proves that `54:0F` preserves its original two-call allocation contract and is no longer the live blocker in the valid root-layout package. The earlier `Alloc_error` observation remains historical evidence only.
+
+**M0 T358 disposition:** The environment/allocation predecessor is closed, but the package has not yet observed the required original `/C EXIT` completion or return marker. The next S must source-map the reached first-command-to-later-`54:01` continuation before another workload observation.
+
+**No active M/T/S packet.**
 
 
 ### M0 T355 S31 — Closed original `0x78` entry-result attribution

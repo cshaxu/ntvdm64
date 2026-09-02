@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3799 |
+| Documentation records | 3800 |
 | --- | --- |
-| Generated UTC | 2026-09-02T05:09:31Z |
+| Generated UTC | 2026-09-02T05:17:43Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | e4de69b5bda09d7f23311dd1b086c12e1cf4388ab3d25f43b694dab201556781 |
+| STATUS.md | principal control document | fb2d5b55e39b59ae38a6c2a45c15e6c2fc3404e1e80d824c73b03cc4901b43d4 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1183,6 +1183,7 @@ content-divergent entries.
 | etc/evidence/m0-t358-s5-command-c-exit-topology-audit-001.md | indexed supporting material | 20872bd5fa472b92d9924c6246d1c27f9492790ab1f753ff0344b28ed9731b94 |
 | etc/evidence/m0-t358-s6-single-session-base-vdm-dos-record-lifecycle-recovery-001.md | indexed supporting material | c8bc63f3ba949e9a186c13e97cbe0b9dcf75a07e997c798fc8987eb05638314e |
 | etc/evidence/m0-t358-s7-fixed-exit-lifecycle-observation-001.md | indexed supporting material | 931f4b9a18e4c119059df69f6e00ace67335c6f6afd050c671a1ed2fd8d85c36 |
+| etc/evidence/m0-t358-s8-initial-environment-allocation-cohort-audit-001.md | indexed supporting material | 004d6aa0eed282de73a98fa7c19db99490c293069175a3f36071ad2afc77ca9a |
 | etc/evidence/m0-t359-s1-command-transient-control-flow-map-001.md | indexed supporting material | cd1dbb6e53f34f92f877b800c8ad93139e14065ea843a3c8d5920dbd167114a0 |
 | etc/evidence/m0-t359-s2-command-transient-owner-binding-closure-001.md | indexed supporting material | 61af07b63ab55f50d3b7247be9aa0d17fbad34558e5a72030b80841615d20852 |
 | etc/evidence/m0-t359-s2-command-transient-sas-write-binding-001.md | indexed supporting material | fcbc90e1fce4194a7e76a34e8ff6eb330bd0b015ea5711dca4bcb301e62ef38e |
