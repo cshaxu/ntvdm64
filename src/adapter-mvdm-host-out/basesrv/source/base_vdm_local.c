@@ -372,6 +372,22 @@ BOOL base_vdm_local_is_first(void)
     return TRUE;
 }
 
+uint32_t base_vdm_local_observe_dos_record_state(void)
+{
+    session *owner = session_thread_current();
+    base_vdm_local *record = base_vdm_current;
+    uint32_t state;
+
+    if (owner == NULL || !session_valid(owner) ||
+        owner->state != SESSION_STATE_ACTIVE || record == NULL ||
+        record->owner != owner || record->lock_initialized != 1u)
+        return UINT32_MAX;
+    EnterCriticalSection(&record->lock);
+    state = record->dos_record_state;
+    LeaveCriticalSection(&record->lock);
+    return state;
+}
+
 /* DIVERGENCE: BaseSrvSetVDMCurDirs stores a captured MULTI_SZ on a CSRSS
  * console record. Keep that copied allocation in the bound one-session record
  * and retain the client API's zero-length no-op behavior. */

@@ -12,6 +12,9 @@
 #include <softpc.h>
 /* DIVERGENCE(MVDM-HOST-DIV-177): diagnostic-only COMMAND call recorder. */
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_termination.h"
+/* DIVERGENCE(MVDM-HOST-DIV-191): read-only Base VDM record-state snapshot for
+ * the default-off 54:01 continuation discriminator. */
+#include "adapter-mvdm-host-out/basesrv/include/base_vdm_local.h"
 
 
 PFNSVC	apfnSVCCmd [] = {
@@ -55,10 +58,25 @@ BOOL CmdDispatch (ULONG iSvc)
     /* DIVERGENCE(MVDM-HOST-DIV-177): state-neutral table-call attribution. */
     mvdm_softpc_record_command_call((unsigned int)iSvc, 0u,
         (unsigned int)getAX(), (unsigned int)getCF());
+    /* DIVERGENCE(MVDM-HOST-DIV-191): the original GetNextCmd call remains
+     * untouched.  Copy only existing register/COMMAND/Base-VDM scalars so a
+     * fixed observation can distinguish first delivery from reacquisition. */
+    if (iSvc == SVC_CMDGETNEXTCMD)
+        mvdm_softpc_record_command_continuation(0u, (unsigned int)getCS(),
+            (unsigned int)getIP(), (unsigned int)getAX(),
+            (unsigned int)getBX(), (unsigned int)getCF(),
+            IsFirstCall ? 1u : 0u, IsRepeatCall ? 1u : 0u,
+            base_vdm_local_observe_dos_record_state());
     (apfnSVCCmd [iSvc])();
     /* DIVERGENCE(MVDM-HOST-DIV-177): state-neutral table-return attribution. */
     mvdm_softpc_record_command_call((unsigned int)iSvc, 1u,
         (unsigned int)getAX(), (unsigned int)getCF());
+    if (iSvc == SVC_CMDGETNEXTCMD)
+        mvdm_softpc_record_command_continuation(1u, (unsigned int)getCS(),
+            (unsigned int)getIP(), (unsigned int)getAX(),
+            (unsigned int)getBX(), (unsigned int)getCF(),
+            IsFirstCall ? 1u : 0u, IsRepeatCall ? 1u : 0u,
+            base_vdm_local_observe_dos_record_state());
 
     return TRUE;
 }

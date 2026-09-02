@@ -101,6 +101,10 @@ int base_vdm_local_unbind(base_vdm_local *record);
 BOOL base_vdm_local_dispatch(PVDMINFO information);
 int base_vdm_local_wait_for_command(PVDMINFO information);
 BOOL base_vdm_local_is_first(void);
+/* Read-only diagnostic snapshot for a bound local DOS record.  This does not
+ * participate in BaseClient dispatch, change a wait state, or expose a
+ * record pointer.  UINT32_MAX denotes that no valid bound record exists. */
+uint32_t base_vdm_local_observe_dos_record_state(void);
 BOOL base_vdm_local_set_current_directories(ULONG byte_count,
     const CHAR *directories);
 ULONG base_vdm_local_get_current_directories(ULONG byte_count,

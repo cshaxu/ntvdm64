@@ -394,6 +394,32 @@ void mvdm_softpc_record_command_call(unsigned int service,
         (DWORD)(sizeof(message) - 1));
 }
 
+void mvdm_softpc_record_command_continuation(unsigned int stage,
+    unsigned int guest_cs, unsigned int guest_ip, unsigned int guest_ax,
+    unsigned int guest_bx, unsigned int guest_cf, unsigned int first_call,
+    unsigned int repeat_call, uint32_t dos_record_state)
+{
+    char message[192];
+    int formatted;
+
+    /* This is deliberately a separate default-off channel.  The established
+     * generic COMMAND recorder writes its historic diagnostics to stderr;
+     * this continuation discriminator must leave ordinary output untouched
+     * unless the fixed container explicitly asks for a report. */
+    if (GetEnvironmentVariableA("MVDM_COMMAND_CONTINUATION_REPORT_PATH",
+            NULL, 0u) == 0u)
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CMD-CONT svc=01 stage=%u cs=%04X ip=%04X ax=%04X bx=%04X cf=%u first=%u repeat=%u dos-state=%08lX\\r\\n",
+        stage, guest_cs & 0xffffu, guest_ip & 0xffffu,
+        guest_ax & 0xffffu, guest_bx & 0xffffu, guest_cf ? 1u : 0u,
+        first_call ? 1u : 0u, repeat_call ? 1u : 0u,
+        (unsigned long)dos_record_state);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
+    mvdm_softpc_write_optional_report("MVDM_COMMAND_CONTINUATION_REPORT_PATH",
+        message, (DWORD)formatted);
+}
+
 void mvdm_softpc_record_dem_open(uint16_t guest_ds, uint16_t guest_si,
     unsigned int phase, unsigned int status, unsigned int guest_ax,
     unsigned int guest_cf)

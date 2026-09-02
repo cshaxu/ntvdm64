@@ -53,6 +53,15 @@ void mvdm_softpc_record_command_call(unsigned int service,
                                     unsigned int guest_ax,
                                     unsigned int guest_cf);
 
+/* Default-off, fixed-container continuation observation for the original
+ * COMMAND GetNextCmd table entry.  All arguments are copied scalars at the
+ * existing table boundary; no command bytes, record pointer or guest/native
+ * address crosses into the observer. */
+void mvdm_softpc_record_command_continuation(unsigned int stage,
+    unsigned int guest_cs, unsigned int guest_ip, unsigned int guest_ax,
+    unsigned int guest_bx, unsigned int guest_cf, unsigned int first_call,
+    unsigned int repeat_call, uint32_t dos_record_state);
+
 /* Default-off, fixed-container DEM observation.  The caller passes only the
  * original numeric DS:SI form; this helper takes and releases its own bounded
  * session lease before recording copied text and scalar outcome. */

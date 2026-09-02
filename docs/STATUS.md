@@ -912,7 +912,62 @@ child-return state or COMMAND completion.
 
 **M0 T358 disposition:** The environment/allocation predecessor is closed, but the package has not yet observed the required original `/C EXIT` completion or return marker. The next S must source-map the reached first-command-to-later-`54:01` continuation before another workload observation.
 
-**No active M/T/S packet.**
+### M0 T358 S9 — Closed `/C EXIT` completion-versus-reacquisition audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T358 S9; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by closed S8 under the owner-approved ordered queue execution. |
+| Objective | Reconstruct the exact original guest/host continuation from the first delivered `/C EXIT` record through the later `54:01`, distinguishing source-owned built-in completion, intended command reacquisition, Base VDM lifecycle, and any missing return marker before another workload observation. |
+| Non-goals | No runtime observation, guest/media change, BOP leaf/provider rewrite, BaseSrv/CSRSS expansion, DOS external EXEC, cmdExec32, CPU/SoftPC semantic change, CPU30, Bochs, x64, WOW, Redirector, graphics, or new mapper. |
+| Reference Baseline | T358 S4--S8 and T360 S7: the valid root-layout run delivers the first record, reaches `54:0E` and `54:04`, then reaches a later `54:01`; S8 proves `54:0F` allocation is not the active predecessor. |
+| Files And ABI Surface | Original guest `dos/v86/cmd/command/{init.asm,tcode.asm,rdata.asm}` and maps; original host `dos/command/{cmdmisc.c,cmdexit.c,cmddisp.c}`; original BaseClient/BaseSrv VDM record contract and current bounded local binding as comparison only. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Original definition/caller/register/control-flow map; original-versus-mirror review; current record-state/binding review; formal graph/import review; documentation governance/export and diff review. No build or runtime execution in S9. |
+| Expected Markers | A source-owned ledger explains every transition between the two `54:01` calls, names the exact completion/return marker required for T358, and selects one bounded recovery or observation packet without conflating command wait with completion. |
+| Asset Needs | Existing selected sources, guest maps/binaries, T358/T360 durable reports and formal CPU40/x86 graph; no new artifact or host mutation. |
+| Reporting Requirements | Separate original source facts, current binding facts and frozen observation facts; state what a later observer must record to prove (or disprove) `/C EXIT` completion. |
+| Stop Conditions | Any attempt to infer completion from BOP ingress or timeout, alter command records, add a producer, mutate guest media, synthesize termination, or broaden into DOS EXEC pauses for a new S admission. |
+| Exit Criteria | Closed: the complete reached continuation has no unowned immediate edge and selects one state-neutral observation packet that can prove T358's required completion/return marker. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `SingleCom`, `/C` parser, `$EXIT`, permanent versus transient COMMAND, `SVC_CMDEXITVDM`, `cmdExitVDM`, `cmdReturnExitCode`, `RETURN_ON_NO_COMMAND`, `ASKING_FOR_SECOND_TIME`, Base VDM record transitions, and controlled session stop. |
+
+**S9 closure:** [COMMAND `/C EXIT` completion-versus-reacquisition audit](etc/evidence/m0-t358-s9-command-exit-reacquisition-audit-001.md) proves that `54:00` is not the selected `/C` terminal and that the later `54:01` may be the source-defined parent reacquisition. It selects an observer-only discriminator.
+
+### M0 T358 S10 — Closed original COMMAND continuation discriminator
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T358 S10; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by closed S9 under the owner-approved ordered queue execution. |
+| Objective | Extend the existing default-off COMMAND observer with fixed scalar provenance sufficient to distinguish first delivery, parent reacquisition and return behavior; formally link it without running a workload. |
+| Non-goals | No guest/media mutation, command-text capture, pointer retention, Base VDM state change, producer, BOP/provider rewrite, BaseSrv/CSRSS, DOS EXEC, cmdExec32, CPU/SoftPC semantic change, CPU30, Bochs, x64, WOW, Redirector or graphics work. |
+| Files And ABI Surface | Existing `cmddisp.c` diagnostic call boundary and default-off `mvdm_softpc_termination` observer interface only. New fields are copied scalars and not a product ABI. |
+| Verification | Source ownership/order review; focused observer format proof; formal CPU40/x86 link; governance/export and diff review. No product workload in S10. |
+| Expected Markers | Default-off entry/return records identify `CS:IP`, `AX`, `BX`, `CF`, first/repeat flags and bounded local DOS-record state for service `54:01`. |
+| Stop Conditions | Any command string, guest/native pointer, BOP result, record state, session behavior, worker, guest byte or media mutation pauses for a new admission. |
+| Exit Criteria | Closed: a formally linked default-off observer captures only the admitted scalars and leaves disabled output byte-for-byte behavior unchanged. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+
+**S10 closure:** [original COMMAND continuation observer](etc/evidence/m0-t358-s10-command-continuation-observer-001.md) proves the source-shaped observer records entry/return provenance without altering the original dispatcher or Base VDM record.
+
+### M0 T358 S11 — Active frozen `/C EXIT` continuation observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T358 S11; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by closed S10 under the owner-approved ordered queue execution. |
+| Objective | Run exactly one frozen valid-root CPU40/x86 container with the new default-off continuation report and classify whether the second original `54:01` is parent reacquisition after the selected `/C EXIT`, a different source-owned continuation, or an earlier selected owner boundary. |
+| Non-goals | No source, guest/media, package-layout, command-record, BOP/provider, BaseSrv/CSRSS, DOS EXEC, cmdExec32, CPU/SoftPC, CPU30, Bochs, x64, WOW, Redirector or graphics change. |
+| Reference Baseline | T360 S7 valid root-layout report; closed T358 S8--S10; formal selected CPU40/x86 product. |
+| Files And ABI Surface | No production file changes.  Existing app fixed-container observer and `MVDM_COMMAND_CONTINUATION_REPORT_PATH` only. |
+| Verification | One fixed executable, root media, command declaration, console-owning container and timeout; durable report review; documentation governance/export and diff review. |
+| Expected Markers | Entry/return `MVDM-CMD-CONT svc=01` records contain the admitted scalar provenance; their order and state classify the continuation without inferring a result from timeout alone. |
+| Stop Conditions | A second run, any changed runtime input, or any production/source behavior change pauses for a new packet. |
+| Exit Criteria | One immutable observation either proves the source-owned `/C EXIT` completion/parent reacquisition marker required by T358 or identifies one earlier source-owned dependency; T358 then closes or transfers only that dependency. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+
+**Active: M0 T358 S11.**
 
 
 ### M0 T355 S31 — Closed original `0x78` entry-result attribution
