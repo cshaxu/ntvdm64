@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3931 |
+| Documentation records | 3933 |
 | --- | --- |
-| Generated UTC | 2026-09-02T16:57:22Z |
+| Generated UTC | 2026-09-02T17:02:53Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | b58b028e2185ed4cc141d84e4df994a276f994180b31157402b8a190416d2fe2 |
+| STATUS.md | principal control document | 3b2779a28a52b1f6491ae451108095e1afa6ebaed097c853c2d9d5af39731bf1 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1291,6 +1291,7 @@ content-divergent entries.
 | etc/evidence/m0-t379-s2-original-vdmredir-dll-parent-loader-closure-001.md | indexed supporting material | 1666d6a21c11869d9e595bb43efec8f70ad79cd93ef31be3107bbb1293756324 |
 | etc/evidence/m0-t379-s3-local-resource-lifecycle-closure-001.md | indexed supporting material | 57a90b7a0529a58523f642eda9561e16857e0c71260fd10b5025eadac90d8093 |
 | etc/evidence/m0-t379-s4-formal-vdmredir-activation-matrix-001.md | indexed supporting material | cc0f5f153eefae7c893fccd098e5f27672a6288da7b4b574cc125fc99f77f2de |
+| etc/evidence/m0-t379-s5-frozen-original-redir-observation-001.md | indexed supporting material | 439fa29253ab2663d188de81204f17873d67da682755afcba96ab968271a27b9 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -3838,6 +3839,7 @@ content-divergent entries.
 | history/m0-t376-pure-dos-external-exec-parent-return-closure-20260902.md | closed task history | 82b8fc205e3d50af213af2a376902977f06344bce610b41cbd32b662087be628 |
 | history/m0-t377-pure-dos-device-file-graphics-workload-closure-20260902.md | closed task history | 92c27cf99912648760d569169f1ba508e56b932466bf9b0073f79a0a0d5e9f4f |
 | history/m0-t378-dos-extender-runtime-closure-20260902.md | closed task history | b8588937b518d65ae90e24e81fed21f7a7b8587c7e1c8fcc6bebd496c6ce6407 |
+| history/m0-t379-original-vdmredir-runtime-product-activation-closure-20260902.md | closed task history | e65a7f004f0eaadbf003b79775d3e43a9d40b5522eeeca32e38a5f384ccd9139 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
