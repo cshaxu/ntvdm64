@@ -12,3 +12,9 @@ T382's complete source/data-flow audit then proved that this is an ordinary
 single-ready-status read, not a supported LPT blocking inference.  T381
 therefore resumes immediately; no child-process, exit-37, or `54:08` runtime
 completion is claimed by this history correction.
+
+The resumed review preserves a separate earlier fact from the same frozen
+observation: the current product has returned from `54:0F` but has not reached
+the first `54:01`.  That is the distinct original COMMAND/Base VDM startup
+delivery cohort.  T381 consequently transfers to T383; see
+[the startup predecessor record](m0-t381-cmdexec32-startup-predecessor-transfer-20260902.md).

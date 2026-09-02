@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3947 |
+| Documentation records | 3949 |
 | --- | --- |
-| Generated UTC | 2026-09-02T18:19:06Z |
+| Generated UTC | 2026-09-02T18:21:46Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | bb5405cb2c1d1d15058b7ee26c133672d8129af36c6ee14655c37de99141d557 |
+| QUEUE.md | principal control document | 13e1886a264d4d4c9e01dce0254f99240dda8b7537586cea65613af642f360a3 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 5e3bc7709ee708cfb221d483a38efb35ff9303f4ebe729fd2896b0804b407181 |
+| STATUS.md | principal control document | 181eeb75a9f9daf9646f5957923b97ebc31f2675382ff9bfb4fd954353be409d |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -2065,6 +2065,7 @@ content-divergent entries.
 | etc/operations/m0-t380-command-native-child-runtime-activation-001.md | indexed supporting material | e94867d55a452f7fda4ab1066567a8b5bc3408ec2bdd048dd18dba54ab664d8f |
 | etc/operations/m0-t381-original-cmdexec32-stage-return-recovery-001.md | indexed supporting material | 938dbebe2b3e1a2d8cfa0b54c3826ec481e9c1dc631f58d3d32af6d800193c21 |
 | etc/operations/m0-t382-current-softpc-lpt-runtime-recovery-001.md | indexed supporting material | 98ca09eef0fc96ccbb1b1ba397cfb715edbffbb1a829aede564da2aa03f2196f |
+| etc/operations/m0-t383-original-command-startup-delivery-recovery-001.md | indexed supporting material | d807fe66e054b4423ea423e4e41899c9a81f452956d19027ef4a5a91177fc712 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3852,7 +3853,8 @@ content-divergent entries.
 | history/m0-t378-dos-extender-runtime-closure-20260902.md | closed task history | b8588937b518d65ae90e24e81fed21f7a7b8587c7e1c8fcc6bebd496c6ce6407 |
 | history/m0-t379-original-vdmredir-runtime-product-activation-closure-20260902.md | closed task history | e65a7f004f0eaadbf003b79775d3e43a9d40b5522eeeca32e38a5f384ccd9139 |
 | history/m0-t380-command-native-child-runtime-activation-closure-20260902.md | closed task history | c6f66d6a7cbd4a0aa8a48f70e5a12820d1615dba560efd6edfded09158f36c9b |
-| history/m0-t381-cmdexec32-predecessor-transfer-20260902.md | closed task history | 7e472b8428336459d3602e6ae1f5bae1788f0c993089ef515727bfc4445b2564 |
+| history/m0-t381-cmdexec32-predecessor-transfer-20260902.md | closed task history | 6055107102b0e760cacce1e639107ae5b7e0ba00124aa0080ee98cf50b1c19e2 |
+| history/m0-t381-cmdexec32-startup-predecessor-transfer-20260902.md | closed task history | f0aecae677d5648fcfc50d3d6babd743c16f80a9c2777ab0ed4dbbbada06ad4f |
 | history/m0-t382-softpc-lpt-false-predecessor-closure-20260902.md | closed task history | 6e0338accd557595e96d0b5273507a75b2fcf68e1ede3187209eb05558e0cd19 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |

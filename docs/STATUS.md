@@ -1097,17 +1097,19 @@ and
 
 ## Active Packet
 
-### M0 T381 S2 — Active original `cmdExec32` worker/re-entry cohort recovery
+### M0 T381 S2 — Transferred original `cmdExec32` worker/re-entry cohort recovery
 
-**Active: M0 T381 S2.**  The current-formal snapshot did not reach `54:08`, but
-[T382's LPT owner ledger](etc/evidence/m0-t382-s1-current-softpc-lpt-owner-ledger-001.md)
-proved that its `inb(0x3BD)` frame is a single original ready-status read, not
-a machine blocker.  T381 therefore resumes without an LPT source change.
+**Transferred:** [T382's LPT owner ledger](etc/evidence/m0-t382-s1-current-softpc-lpt-owner-ledger-001.md)
+proved that its `inb(0x3BD)` frame is not a machine blocker.  The same frozen
+observation has an earlier unclosed COMMAND/Base VDM startup interval between
+the completed `54:0F` and the absent first `54:01`; that interval is now M0
+T383.  T381 remains the `54:08` continuation and makes no child-completion
+claim.
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T381 S2; ordinary mode (single-person dual-role original-owner recovery). |
-| Admission And Approval | S1 completed the complete original source/ABI/failure ledger and selected one inseparable guest-tail/COMMAND-worker/Base-VDM cohort.  T382 corrected the unsupported LPT predecessor inference. |
+| Admission And Approval | S1 completed the complete original source/ABI/failure ledger and selected one inseparable guest-tail/COMMAND-worker/Base-VDM cohort.  T382 corrected the unsupported LPT predecessor inference; T383 now owns the earlier command-delivery interval. |
 | Objective | Prove and, only if necessary, recover exact original command payload, worker creation, child completion, Base VDM retry and `54:08` return as one whole cohort. |
 | Non-goals | No BOP leaf patch, app-owned child launcher, synthetic completion, guest-media mutation, changed workload/media/container, CPU30, Bochs, x64 recovery, DOS PSP return, WOW, Redirector protocol or CSRSS/BaseSrv cross-process broker. One corrective fixed-container observation is permitted only after the current formal CPU40/x86 product is linked, because the earlier recorded image is not the current formal product. |
 | Reference Baseline | T381 S1 ledger; T370 source/binding closure; T380 S1--S4 evidence; current formal CPU40/x86 product and staged package. |
@@ -1130,7 +1132,31 @@ a machine blocker.  T381 therefore resumes without an LPT source change.
 
 **S2 P2:** [current-formal predecessor observation](etc/evidence/m0-t381-s2-p2-current-formal-predecessor-observation-001.md).
 
-**Transfer and correction:** [T381 predecessor transfer](history/m0-t381-cmdexec32-predecessor-transfer-20260902.md), [T382 closure](history/m0-t382-softpc-lpt-false-predecessor-closure-20260902.md).
+**Transfer and correction:** [T381 LPT transfer](history/m0-t381-cmdexec32-predecessor-transfer-20260902.md), [T382 closure](history/m0-t382-softpc-lpt-false-predecessor-closure-20260902.md), [T381 startup transfer](history/m0-t381-cmdexec32-startup-predecessor-transfer-20260902.md).
+
+### M0 T383 S1 — Active original COMMAND startup command-delivery owner ledger
+
+**Active: M0 T383 S1**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T383 S1; ordinary mode (single-person dual-role original-owner recovery). |
+| Admission And Approval | The frozen current-formal observation returns from original `54:0F` but does not reach the first original `54:01`.  T382 has ruled out the sampled LPT frame as a blocker. |
+| Objective | Establish the exact original `cmdGetInitEnvironment -> cmdGetNextCmd -> GetNextVDMCommand -> 54:01` source, VDMINFO and Base VDM command-record ownership; select one complete recovery cohort or original terminal. |
+| Non-goals | No app launcher, BOP leaf patch, synthetic guest record, guest/media mutation, LPT change, `cmdExec32` change, DOS PSP/child, WOW, Redirector, CPU30, Bochs, x64 recovery or product run. |
+| Reference Baseline | T381 S1/S2 evidence, T382 S1 LPT classification, current formal CPU40/x86 graph, original COMMAND `cmdmisc.c` and original Base VDM client/server source. |
+| Files And ABI Surface | Original `cmdmisc.c`, `cmddisp.c`, guest COMMAND service contract, `VDMINFO`, `GetNextVDMCommand`, first-VDM/current-directory/environment/capacity/wait-retry state, app declaration and current same-shaped Base VDM binding. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, immutable-media, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Static definition/caller/data-flow and source-identity/formal-graph review.  No product run. |
+| Expected Markers | Every pre-`54:01` command record, first-VDM, command-tail, capacity and retry edge has one original owner/disposition, without treating a missing trace marker as a BOP leaf defect. |
+| Asset Needs | Current original COMMAND/Base VDM/session/Win32 sources, current formal graph/product identity and fixed observation evidence. |
+| Reporting Requirements | Separate original source facts, current binding facts and frozen runtime fact; record complete failure directions and any necessary same-shaped adapter binding. |
+| Stop Conditions | A proposal consumes the command in app, adds a guest record, changes guest/media/CPU semantics, repairs `cmdExec32`, reruns the product, or expands into WOW/Redirector/CSRSS broker behavior; pause and revise. |
+| Exit Criteria | The complete immediate original startup cohort and its binding/terminal disposition are proved, with a finite S2 recovery cohort or exact original terminal. |
+| Original Owner Request | “先让纯dos和dos调用32位程序跑通”。 |
+| Similar-Issue Sweep | `54:0F`, `54:01`, `cmdGetInitEnvironment`, `cmdGetNextCmd`, `GetNextVDMCommand`, `BaseSrvGetNextVDMCommand`, first-VDM, `VDMINFO`, command/environment/current-directory buffers, initial/retry/wait/return state and guest COMMAND continuation. |
+
+**Plan:** [M0 T383 original COMMAND startup command-delivery recovery](etc/operations/m0-t383-original-command-startup-delivery-recovery-001.md).
 
 ### M0 T380 — Closed COMMAND native-child runtime activation
 
