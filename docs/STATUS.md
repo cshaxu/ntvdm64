@@ -1134,29 +1134,48 @@ claim.
 
 **Transfer and correction:** [T381 LPT transfer](history/m0-t381-cmdexec32-predecessor-transfer-20260902.md), [T382 closure](history/m0-t382-softpc-lpt-false-predecessor-closure-20260902.md), [T381 startup transfer](history/m0-t381-cmdexec32-startup-predecessor-transfer-20260902.md).
 
-### M0 T383 S1 — Active original COMMAND startup command-delivery owner ledger
+### M0 T383 — Closed original COMMAND startup command-delivery recovery
 
-**Active: M0 T383 S1**
+**Closure:** [T383 history record](history/m0-t383-original-command-startup-delivery-closure-20260902.md).
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T383 S1; ordinary mode (single-person dual-role original-owner recovery). |
-| Admission And Approval | The frozen current-formal observation returns from original `54:0F` but does not reach the first original `54:01`.  T382 has ruled out the sampled LPT frame as a blocker. |
-| Objective | Establish the exact original `cmdGetInitEnvironment -> cmdGetNextCmd -> GetNextVDMCommand -> 54:01` source, VDMINFO and Base VDM command-record ownership; select one complete recovery cohort or original terminal. |
-| Non-goals | No app launcher, BOP leaf patch, synthetic guest record, guest/media mutation, LPT change, `cmdExec32` change, DOS PSP/child, WOW, Redirector, CPU30, Bochs, x64 recovery or product run. |
+| Result | S1/S2 source audit and S3 focused x86 proof closed the original COMMAND/Base VDM first-command cohort.  S4's one fixed pure-DOS `EXIT` observation reached an earlier CPU40 `illegal_op_int -> host_error -> ErrorDialogBox` path after `54:0F`; it did not reach `54:01`. |
 | Reference Baseline | T381 S1/S2 evidence, T382 S1 LPT classification, current formal CPU40/x86 graph, original COMMAND `cmdmisc.c` and original Base VDM client/server source. |
 | Files And ABI Surface | Original `cmdmisc.c`, `cmddisp.c`, guest COMMAND service contract, `VDMINFO`, `GetNextVDMCommand`, first-VDM/current-directory/environment/capacity/wait-retry state, app declaration and current same-shaped Base VDM binding. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, immutable-media, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Static definition/caller/data-flow and source-identity/formal-graph review.  No product run. |
-| Expected Markers | Every pre-`54:01` command record, first-VDM, command-tail, capacity and retry edge has one original owner/disposition, without treating a missing trace marker as a BOP leaf defect. |
+| S4 evidence | [fixed pure-DOS startup observation](etc/evidence/m0-t383-s4-fixed-pure-dos-startup-observation-001.md). |
 | Asset Needs | Current original COMMAND/Base VDM/session/Win32 sources, current formal graph/product identity and fixed observation evidence. |
 | Reporting Requirements | Separate original source facts, current binding facts and frozen runtime fact; record complete failure directions and any necessary same-shaped adapter binding. |
-| Stop Conditions | A proposal consumes the command in app, adds a guest record, changes guest/media/CPU semantics, repairs `cmdExec32`, reruns the product, or expands into WOW/Redirector/CSRSS broker behavior; pause and revise. |
-| Exit Criteria | The complete immediate original startup cohort and its binding/terminal disposition are proved, with a finite S2 recovery cohort or exact original terminal. |
 | Original Owner Request | “先让纯dos和dos调用32位程序跑通”。 |
 | Similar-Issue Sweep | `54:0F`, `54:01`, `cmdGetInitEnvironment`, `cmdGetNextCmd`, `GetNextVDMCommand`, `BaseSrvGetNextVDMCommand`, first-VDM, `VDMINFO`, command/environment/current-directory buffers, initial/retry/wait/return state and guest COMMAND continuation. |
 
 **Plan:** [M0 T383 original COMMAND startup command-delivery recovery](etc/operations/m0-t383-original-command-startup-delivery-recovery-001.md).
+
+**S1/S2 closure:** [original first-command owner ledger](etc/evidence/m0-t383-s1-original-command-startup-owner-ledger-001.md).  The complete original cohort was already present; S2 required no source change.
+
+**S3 closure:** [formal original command-delivery proof](etc/evidence/m0-t383-s3-original-command-delivery-formal-closure-001.md).
+
+### M0 T384 S1 — Active CPU40 illegal-operation source/guest-state ledger
+
+**Active: M0 T384 S1**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T384 S1; ordinary mode (single-person dual-role original-owner recovery). |
+| Admission And Approval | T383's one allowed fixed pure-DOS observation resolved its earliest blocker to original CPU40 `illegal_op_int` at guest `03f4:2128`, before the first `54:01`. |
+| Objective | Establish the complete original CPU40 opcode-`0x63` dispatch, interrupt-frame, `illegal_op_int`, `unexpected_int` and error-dialog ownership chain; determine the source owner of the reached `codex` bytes and select one finite recovery cohort. |
+| Non-goals | No COMMAND/Base VDM repair, error-ignore policy, guest-media change, app executor, `cmdExec32`, DOS PSP/child, WOW, Redirector, CPU30, Bochs, x64 work or product run. |
+| Reference Baseline | T383 S4 evidence; current formal CPU40/x86 map/product; original CPU40 `illegalp.c`, decoder/interrupt source and original SoftPC error source. |
+| Files And ABI Surface | Original CPU40 opcode dispatch, system interrupt frame, `illegal_op_int`, `unexpected_int`, `host_error`/error-dialog call contract and source-owned guest-control state only. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, immutable-media, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Static source/map/caller/data-flow audit only.  No product run. |
+| Expected Markers | One complete original owner chain and a finite S2 cohort, without replacing an unknown guest-control defect with an error-dialog workaround. |
+| Exit Criteria | The opcode/frame/error chain and `03f4:2128` origin each have a source-backed disposition, and S2 has exactly one complete selected CPU40 cohort. |
+| Original Owner Request | “先让纯dos和dos调用32位程序跑通”。 |
+| Similar-Issue Sweep | opcode `0x63`, real/protected mode dispatch, INT 6 frame, `illegal_op_int`, `unexpected_int`, `host_error`, error-dialog choice, `CS:IP`, SAS access and preceding guest control transfers. |
+
+**Plan:** [M0 T384 CPU40 illegal-operation startup recovery](etc/operations/m0-t384-cpu40-illegal-operation-startup-recovery-001.md).
 
 ### M0 T380 — Closed COMMAND native-child runtime activation
 
