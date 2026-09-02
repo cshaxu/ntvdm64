@@ -56,6 +56,7 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Order | Candidate implementation package |
 | --- | --- |
+| 0 | Original SystemRoot package-layout recovery — restore the original NTVDM media-root contract in app/staging: `SystemRoot` itself carries original `system32` and configuration media; `softpc` is the firmware child. Prove all root consumers before moving or relinking media; then resume the paused CPU40 COMMAND-transient observation. |
 | 1 | CPU40 COMMAND-initialization control-flow recovery — recover the complete original COMMAND transient allocation/move/reload and NTDOS prerequisite cohort that currently enters immutable COMMAND data before `54:01`; then resume the paused COMMAND package. |
 | 2 | COMMAND built-in and batch lifecycle — resume the paused COMMAND package and prove selected `/C` built-in/batch behavior and COMMAND return, without claiming external DOS EXEC. |
 | 3 | DOS `.COM`/MZ `.EXE` execution and parent return — prove original `$Exec`, file/JFN/SFT, PSP/arena/environment, child exit and COMMAND continuation. |

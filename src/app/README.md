@@ -34,7 +34,7 @@ the Base VDM adapter.
 
 `--command <text>` declares one ordinary DOS command for the selected session.
 App forms the original Base VDM `CmdLine` shape `/C <text>\r\n`, then publishes
-it with the selected immutable `mvdm/system32/COMMAND.COM` application identity
+it with the selected immutable `system32/COMMAND.COM` application identity
 through that same copied record. App removes only this composition option before
 entering the original SoftPC argument parser. It derives the command, application,
 environment and current directory from the session-selected MVDM system root; it
@@ -58,8 +58,9 @@ It does not load guest bytes or reproduce any original `ntvdm.c` startup step.
 
 `package_layout.{c,h}` is the app-owned installation contract for immutable
 machine inputs. Before activating a session, app resolves the executable
-directory and selects `<exe-directory>\\mvdm` as that session's MVDM system
-root and `<exe-directory>\\mvdm\\softpc` as its firmware root. The lookup
+directory and selects it unchanged as that session's MVDM system root, with
+`<exe-directory>\\softpc` as its firmware root. This matches the original
+SystemRoot-relative `system32`, configuration and DOS media shape. The lookup
 itself remains in the original SoftPC `host_find_file` call shape through the
 named SoftPC adapter. DOS and Win16 remain separate source mirrors but share
 this installed MVDM media root; none of their bytes is linked into the

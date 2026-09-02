@@ -247,7 +247,10 @@ int main(int argc, char **argv)
         (DWORD)sizeof(report_base_path), report_base_path, NULL);
     if (report_base_path_length == 0 ||
         report_base_path_length >= sizeof(report_base_path)) return 68;
-    if (snprintf(fixed_system_root, sizeof(fixed_system_root), "%s\\mvdm",
+    /* App derives SystemRoot from the image directory itself.  Keep this
+     * observer report aligned with that original-layout package contract;
+     * argv[2] is the stage and product working directory. */
+    if (snprintf(fixed_system_root, sizeof(fixed_system_root), "%s",
                  argv[2]) < 0) return 68;
     fixed_system_root_short_length = GetShortPathNameA(fixed_system_root,
         fixed_system_root_short, (DWORD)sizeof(fixed_system_root_short));

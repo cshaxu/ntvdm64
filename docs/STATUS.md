@@ -712,7 +712,7 @@ the selected CPU40 path attempts to execute immutable `COMMAND.COM` data at
 
 **S5 closure:** [invalid suffixed-root observation disposition](etc/evidence/m0-t359-s5-invalid-suffixed-root-observation-001.md) corrects the capacity metric.  The 65-character full `shell=` value made the new subdirectory stage invalid; mapped frames prove app-owned path rejection, not a COMMAND result.
 
-### M0 T359 S6 — Active verified-root product-replacement observation
+### M0 T359 S6 — Closed verified-root app-layout boundary
 
 | Field | Record |
 | --- | --- |
@@ -720,11 +720,126 @@ the selected CPU40 path attempts to execute immutable `COMMAND.COM` data at
 | Admission And Approval | Admitted by T359 S5's capacity disposition under ordered dependency-first execution and the user-designated `O:\ntvdm64` format-3 runtime container. |
 | Objective | Replace only the explicitly mutable product in the hash-verified `O:\ntvdm64` fixed-media container, then make exactly one CPU40/x86 resumed `/C EXIT` observation with the original `TrnSeg` two-byte watch. |
 | Non-goals | No media replacement, restaging, deletion, retry, source or BOP/DEM/COMMAND/CPU repair, new mapping, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, Redirector, EXEC or graphics work. |
-| Verification | Verify all 16 fixed media hashes and the 36-character complete `shell=` value; one product replacement; exactly one bounded console-owning run; copied observer and terminal reports. |
-| Exit Criteria | One valid run from the verified root either reaches original `54:01` or identifies one exact preceding original owner boundary. |
+| Verification | Verify all 16 fixed media hashes; one product replacement; exactly one bounded console-owning run; copied observer and terminal reports. The complete original `shell=` format is evaluated with both SystemRoot occurrences. |
+| Exit Criteria | Closed: the verified root still maps to app-owned layout rejection before SoftPC/COMMAND execution; an app-owned package-layout predecessor is admitted. |
 | Original Owner Request | “非常好，按照这个顺序执行。” |
 
-**Active: M0 T359 S6.**
+**S6 closure:** [verified-root app-layout boundary](etc/evidence/m0-t359-s6-verified-root-app-layout-boundary-001.md) proves that the 15-byte `O:\ntvdm64\mvdm` root produces a 65-byte complete original `shell=` value. The app rejects it before SoftPC/COMMAND execution. T359 is paused behind M0 T360.
+
+### M0 T360 S1 — Closed original SystemRoot package-layout source map
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T360 S1; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T359 S6 under the dependency-first execution rule. |
+| Objective | Map every immediate original MVDM loader, configuration and firmware pathname that consumes SystemRoot or firmware root; compare it with current app staging; select one original-shaped package layout before code or media changes. |
+| Non-goals | No original MVDM, guest or firmware edit; no BOP/DEM/COMMAND/CPU repair; no host drive alias; no media byte mutation; no CPU30, Bochs, x64, CSRSS/BaseSrv, WOW, EXEC or graphics claim. |
+| Files And ABI Surface | Original `cmdconf.c`, NTDOS configuration/loader callers, original SoftPC file-location callers, app `package_layout.c`, launch declarations and `Stage-OriginalSoftpcRuntime.mjs`. |
+| Verification | Source declaration/caller/path-format ledger; current staged-media topology and manifest review; documentation governance/export and diff review. No product build or runtime run in S1. |
+| Exit Criteria | Every reached immediate root consumer has an owner and exact pathname contract; S2 is limited to an app/staging layout change that restores the original directory shape without changing media bytes or original source. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+
+**S1 closure:** [original SystemRoot root-consumer map](etc/evidence/m0-t360-s1-original-systemroot-root-consumer-map-001.md) closes the reached root-consumer inventory.  It selects an executable-directory SystemRoot and its `softpc` firmware child; the prior `mvdm` child has no original owner.
+
+### M0 T360 S2 — Closed app/staging original-layout binding
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T360 S2; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by closed T360 S1 under ordered dependency-first execution. |
+| Objective | Restore the source-defined package shape by binding session SystemRoot to the executable directory, firmware to its `softpc` child, and staging the unchanged media at those relative paths. |
+| Non-goals | No original MVDM/guest/firmware source or byte modification; no path alias, drive mapping, BOP/DEM/COMMAND/CPU repair, CPU30, Bochs, x64, CSRSS/BaseSrv, WOW, EXEC or graphics work. |
+| Verification | Static source/stage destination review, focused package-layout fixture, formal graph/import review, governance/export and diff review. No runtime observation in S2. |
+| Exit Criteria | App and stager agree on every S1 media path; `cmdconf.c`, guest `commnd`, DEM NTDOS loading and original `host_find_file` require no new pathname divergence. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+
+**S2 closure:** [app/staging original-layout binding](etc/evidence/m0-t360-s2-app-staging-original-layout-binding-001.md) moves no media bytes semantically: the same sixteen source assets now stage at the original SystemRoot-relative and `softpc`-relative destinations. App selects the matching roots.
+
+### M0 T360 S3 — Closed package-layout conformance
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T360 S3; ordinary mode (single-person dual-role implementation). |
+| Objective | Prove the app package-layout contract and staging manifest agree with each S1 root consumer and the original `commnd` capacity rule. |
+| Verification | x86 Ninja package-layout fixture; fixed `O:\ntvdm64` root arithmetic; fresh non-runtime staging destination inspection. |
+| Exit Criteria | Closed: the fixture passes, `O:\ntvdm64` produces a 54-byte complete `shell=` value, and all sixteen required immutable assets occur exactly at their selected root-relative paths. |
+
+**S3 closure:** [original SystemRoot package-layout conformance](etc/evidence/m0-t360-s3-original-systemroot-package-layout-conformance-001.md) records the 5-action x86 fixture pass, 54-byte root result and 16/16 staged-media path verification.
+
+### M0 T360 S4 — Closed formal product/package closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T360 S4; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by closed T360 S2/S3 under ordered dependency-first execution. |
+| Objective | Formally rebuild the original CPU40/x86 product with the app-layout change and stage one fresh immutable SystemRoot-shaped package with recorded product/media identity. |
+| Non-goals | No runtime observation, original source/media mutation, BOP/DEM/COMMAND/CPU repair, CPU30, Bochs, x64, CSRSS/BaseSrv, WOW, EXEC or graphics work. |
+| Verification | Formal Ninja target, staged manifest hash review, documentation governance/export and diff review. |
+| Exit Criteria | A formally linked product and a new format-3 package carry exactly the original SystemRoot directory shape; S5 alone may execute the frozen workload. |
+
+**S4 closure:** [formal original-SystemRoot package closure](etc/evidence/m0-t360-s4-formal-original-systemroot-package-closure-001.md) records the 4-action formal x86 re-link and a fresh format-3 package with all sixteen immutable hashes verified under root/System32/softpc paths.
+
+### M0 T360 S5 — Closed invalid observer-output attempt
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T360 S5; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by closed T360 S4 under ordered dependency-first execution. |
+| Objective | Make one console-owned CPU40/x86 `/C EXIT` observation from the new hash-verified original-SystemRoot package, preserving T359's bounded SAS-store watch. |
+| Non-goals | No retry, source/media mutation, BOP/DEM/COMMAND/CPU repair, new mapping, CPU30, Bochs, x64, CSRSS/BaseSrv, WOW, EXEC or graphics work. |
+| Verification | One bounded product run; product/media identity; terminal, exception and SAS-store reports; frame mapping only if required. |
+| Exit Criteria | Closed invalid: observer output-parent absence prevents its required report/JSON records. No product inference is retained; one replacement observation is admitted only after its report directory is pre-created. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+
+**S5 closure:** [invalid observer-output disposition](etc/evidence/m0-t360-s5-invalid-observer-output-disposition-001.md) records that the observer executed but its required report parent did not exist, so it produced no durable evidence. It makes no product claim.
+
+### M0 T360 S6 — Closed invalid long-stage-root observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T360 S6; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by closed invalid T360 S5 under ordered dependency-first execution. |
+| Objective | Make exactly one replacement observation with the same frozen formal product and immutable package, after pre-creating the observer report directory. |
+| Non-goals | No product or media change, retry with changed workload, BOP/DEM/COMMAND/CPU repair, new mapping, CPU30, Bochs, x64, CSRSS/BaseSrv, WOW, EXEC or graphics work. |
+| Verification | Report-parent existence check before launch; one console-owned run; required terminal/exception/SAS-store report collection and product/media identity review. |
+| Exit Criteria | Closed invalid: although relative paths were correct, the repository stage root was 67 bytes and violated the original `commnd` contract before product execution. One replacement may use the owner-designated short root. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+
+**S6 closure:** [invalid long-stage-root observation disposition](etc/evidence/m0-t360-s6-invalid-long-stage-root-observation-001.md) retains the complete observer record but makes no SoftPC/COMMAND inference from the app-owned capacity rejection.
+
+### M0 T360 S7 — Closed owner-root original-layout observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T360 S7; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by closed invalid T360 S6 under ordered dependency-first execution and the owner-designated `O:\ntvdm64` short output root. |
+| Objective | Materialize the already verified root/System32/softpc media layout directly at `O:\ntvdm64` without deleting its prior `mvdm` subtree, then make exactly one console-owned CPU40 `/C EXIT` observation. |
+| Non-goals | No MVDM/guest/firmware source or byte change, no deletion or reinterpretation of the pre-existing `mvdm` subtree, no BOP/DEM/COMMAND/CPU repair, new mapping, CPU30, Bochs, x64, CSRSS/BaseSrv, WOW, EXEC or graphics work. |
+| Verification | Explicit 54-byte complete `shell=` preflight; hash verification of all sixteen selected root-layout media entries; one durable observation report. |
+| Exit Criteria | Closed: the selected short-root observation reaches original `54:01` after the complete transient/configuration path; its current wait is a separate Base VDM command-delivery owner boundary. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+
+**S7 closure:** [owner-root original-layout observation](etc/evidence/m0-t360-s7-owner-root-original-layout-observation-001.md) verifies the root package and reaches original `54:01`, `54:0E` and a second `54:01` entry. The active wait maps to original `base_vdm_local_wait_for_command`, not app admission or SoftPC failure.
+
+**M0 T360 closure:** Original SystemRoot package-layout recovery is closed. The user-designated `O:\ntvdm64` now contains the source-defined root/System32/softpc package layout, preserving its previous unused `mvdm` subtree. All original root consumers reached by this workload resolve without path rewriting.
+
+**M0 T359 closure:** The valid T360 S7 observation proves the selected original transient lifecycle no longer transfers into immutable COMMAND data and reaches `54:01`. T359 is closed; no additional CPU or COMMAND repair is admitted by its result.
+
+### M0 T358 S4 — Active Base VDM `/C` command-delivery owner admission
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T358 S4; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | T360 S7 closed T359's predecessor and resumed T358's unchanged `/C EXIT` workload. |
+| Objective | Reconstruct the original Base VDM command-delivery path from reached `54:01` through `GetNextVDMCommand` and `base_vdm_local_wait_for_command`, identify why the declared `/C EXIT` record is not consumed, and select one whole source-owned recovery cohort. |
+| Non-goals | No BOP leaf repair, retry, DOS EXEC, cmdExec32, guest/media mutation, CPU/SoftPC semantic change, CPU30, Bochs, x64, CSRSS/BaseSrv, WOW, Redirector or graphics work. |
+| Files And ABI Surface | Original COMMAND `cmdGetNextCmd`, imported Base VDM contract, current app launch declaration, Base VDM broker and session command-source binding. No ABI change in S4. |
+| Verification | Original definition/caller/queue-state audit; current record lifecycle review; formal graph/import review; governance/export and diff review. No new runtime run in S4. |
+| Exit Criteria | One exact source-owned command-record lifecycle ledger identifies the missing/incorrect owner (or proves delivery complete) and bounds the next whole recovery S. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+
+**Active: M0 T358 S4.**
+
 
 ### M0 T355 S31 — Closed original `0x78` entry-result attribution
 

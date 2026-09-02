@@ -13,7 +13,7 @@ int app_package_layout_set_firmware_root(session *owner,
     const char *executable_path);
 
 /* Configure the immutable MVDM system root and its SoftPC firmware child:
- * `mvdm` and `mvdm\\softpc` under the executable directory. */
+ * the executable directory itself and its `softpc` child. */
 int app_package_layout_set_media_roots(session *owner,
     const char *executable_path);
 

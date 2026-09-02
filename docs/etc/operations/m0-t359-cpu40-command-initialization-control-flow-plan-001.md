@@ -40,7 +40,9 @@ Redirector, graphics or broad CPU rewrite.
 
 ## Completion
 
-T359 closes only when the selected original COMMAND/NTDOS cohort no longer
-transfers into immutable COMMAND data and the resumed fixed observation reaches
-the original `54:01` boundary (or proves a narrower source-owned predecessor).
-T358 then resumes from its unchanged `/C EXIT` workload contract.
+T359 is paused behind the app-owned original-SystemRoot package-layout
+predecessor. Its selected original COMMAND/NTDOS cohort remains unchanged;
+the invalid S4/S5/S6 layout observations make no claim about transient
+execution. After the predecessor closes, one fresh original-layout observation
+may resume this plan and determine whether the original `54:01` boundary is
+reached.

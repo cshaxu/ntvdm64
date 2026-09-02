@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3786 |
+| Documentation records | 3795 |
 | --- | --- |
-| Generated UTC | 2026-09-02T04:22:57Z |
+| Generated UTC | 2026-09-02T04:46:31Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | 4d07e227b9d349bfd2924b21d95dcdc9b7e58c3f5260d0965a6f2a71b0bc75fe |
+| QUEUE.md | principal control document | 829c10ca3bc8cff7fdc20a2194c83e1f10e651f9ae61044a5282ec9992bf113e |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 620b84dfd225667eb7cc3921bc2d4e46e89b3e92351dea9ccc9b3626a5d8f30b |
+| STATUS.md | principal control document | a96844c7ab32bc7f01ea92419d1289f6cb5b1d9f688333e4946af6c9189703cc |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1184,7 +1184,15 @@ content-divergent entries.
 | etc/evidence/m0-t359-s2-command-transient-sas-write-binding-001.md | indexed supporting material | fcbc90e1fce4194a7e76a34e8ff6eb330bd0b015ea5711dca4bcb301e62ef38e |
 | etc/evidence/m0-t359-s3-sas-store-observer-local-conformance-001.md | indexed supporting material | c63da0db7e715f471aa4185215da4c9fbf625aed784d15dfa82092d0cf17bc85 |
 | etc/evidence/m0-t359-s4-invalid-long-root-observation-001.md | indexed supporting material | c88c01837395564fa93b2348b3b8145d0b2876568f65094663b1261e9dfcd7a5 |
-| etc/evidence/m0-t359-s5-invalid-suffixed-root-observation-001.md | indexed supporting material | 240dbdec043672163f718541320c4fc58b1cde8ac9b1f13522f8c66bc51c647c |
+| etc/evidence/m0-t359-s5-invalid-suffixed-root-observation-001.md | indexed supporting material | aa27863203d33b232691ed4f02e32ccb4356d404ec5d45eded6043f3b7bb69ae |
+| etc/evidence/m0-t359-s6-verified-root-app-layout-boundary-001.md | indexed supporting material | 3b5aa9fed4ce0939c04150f1b2cda8396c981bb269e2fdbca72591a88fb0fdac |
+| etc/evidence/m0-t360-s1-original-systemroot-root-consumer-map-001.md | indexed supporting material | b6e6d3611e6fb621fa37f433eb0dd026a5b18727515e59d4d98ea7decfaf7c26 |
+| etc/evidence/m0-t360-s2-app-staging-original-layout-binding-001.md | indexed supporting material | 5db10dfc893dbccbc9b0bf657b9384171fb18534f0906ace86e405dbf06f25ca |
+| etc/evidence/m0-t360-s3-original-systemroot-package-layout-conformance-001.md | indexed supporting material | f3de210d5659603669a348f851f84f2e574d10ae803c275a9b529d6cb2a2f13b |
+| etc/evidence/m0-t360-s4-formal-original-systemroot-package-closure-001.md | indexed supporting material | fe2f5ce93b2f3fe57ba98dd52361448996a74acfb3dddb651e63ab0f5731c137 |
+| etc/evidence/m0-t360-s5-invalid-observer-output-disposition-001.md | indexed supporting material | b48bffe2cc65cf8eb23adc08b103ece22b858a9ddc48e025da89ff7e42a27e12 |
+| etc/evidence/m0-t360-s6-invalid-long-stage-root-observation-001.md | indexed supporting material | 9cf5e98b7aa9e92b92d84cfc0be20da4924cf6c56a77295fb2a1306edce57778 |
+| etc/evidence/m0-t360-s7-owner-root-original-layout-observation-001.md | indexed supporting material | 5f988024627f78a26f5daa568e3d51448ef6d2e676c4e7327987a8c35cc4e300 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1925,7 +1933,8 @@ content-divergent entries.
 | etc/operations/m0-t356-minimal-dos-execution-controlled-return-plan-001.md | indexed supporting material | 32128e010dd7c54cd80998258a2de9ae83ff350f05302d15190ea8ae311a5512 |
 | etc/operations/m0-t357-cpu40-staged-boot-command-ready-plan-001.md | indexed supporting material | 6140fa28f32d6c3f94d24367a4dda8d980b816e1ab748e6c5b053f8f33f185d3 |
 | etc/operations/m0-t358-command-built-in-batch-lifecycle-plan-001.md | indexed supporting material | f05dbd593cd9e15ba3dbd4dafa764d85b6f1a5ac5ea3edac8e5daeb7e6cf027a |
-| etc/operations/m0-t359-cpu40-command-initialization-control-flow-plan-001.md | indexed supporting material | da000a213588006742d1fbd8d0a71b25e03c729a060afb0e91f44114368e89b0 |
+| etc/operations/m0-t359-cpu40-command-initialization-control-flow-plan-001.md | indexed supporting material | 6de402b73c8ce63ceded5cb63866d7a78c92323c88f1835b73d213e9907e1ae7 |
+| etc/operations/m0-t360-original-systemroot-package-layout-recovery-001.md | indexed supporting material | b28e9358cad8711da118efb3484023c02cec1dcebdb3f018266f7176186d2c1f |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
