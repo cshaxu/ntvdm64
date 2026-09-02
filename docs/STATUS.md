@@ -548,8 +548,29 @@ VDM contract. The positive and rejected forms pass its forced x86 fixture; the
 formal CPU40/x86 product links; one fixed observation times out without a
 trace-selected repair or guest-execution claim.
 
-**No active M/T/S packet.**  S36 is closed; a subsequent packet requires a
-fresh owner-defined source cohort rather than a trace-selected leaf repair.
+### M0 T356 S1 — Active minimal DOS guest execution / controlled-return topology audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T356 S1; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | Owner admitted the next queue task with “准入.”  The graphics candidate remains source-gated by workload reachability, so this admissible P07 predecessor is selected first. |
+| Objective | Establish the complete original source/ABI/failure topology from one copied Base VDM DOS command record through guest load, NTDOS `EXEC`, PSP/arena/JFN/environment, parent return, SoftPC re-entry and COMMAND completion; select the earliest complete recoverable owner cohort. |
+| Non-goals | No BOP leaf repair, fabricated command or result, ambient console reader, guest/media rewrite, CPU/CCPU/BIOS change, graphics/presentation work, CPU30, Bochs, x64 runtime gate, CSRSS/kernel VDM recreation, WOW/PIF/cross-process-broker completion or runtime retry. |
+| Reference Baseline | T354 permanent-command bootstrap closure; T355 S35/S36 source-shaped Base VDM consumer/producer evidence; P07 in the package recovery program; fixed CPU40/x86 package. |
+| Files And ABI Surface | Original `mvdm-host/dos/command`, selected NTDOS/DOS guest execution sources and maps, original SoftPC entry/re-entry interfaces, Base VDM client/local/broker boundary, session mapping/lifecycle surfaces and exact accepted non-MVDM host evidence. No production ABI change in S1. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Definition/caller/data-layout/failure audit of all named owners; physical selected-source/provenance check; current source/binding review; documentation inventory/governance and diff review. No build or runtime execution in S1. |
+| Expected Markers | A finite ordered ledger distinguishes record consumption, image load, `EXEC`, parent/child state, guest return, Base VDM completion and their exact unsupported product-shell edges; every immediate edge has one owner/disposition. |
+| Asset Needs | Existing MVDM/OpenNT mirrors, guest maps/products as read-only source evidence, formal graph and T355 records; no new source import, guest rebuild, host mutation or runtime output. |
+| Reporting Requirements | Separate source behavior from current composition; identify whether the first recovery belongs to original guest/DOS, original MVDM host, a same-shaped adapter, or an unavailable NT4 product shell; do not treat reachability inference as execution evidence. |
+| Stop Conditions | Need for a new command semantic, guest change, raw pointer/HANDLE transfer, family-private mapping, alternate executor, CSRSS/kernel recreation, source import or trace-derived leaf repair pauses for renewed S admission. |
+| Exit Criteria | One auditable package ledger covers every immediate edge and selects exactly one earliest complete source-owned recovery cohort (or an exact source-shaped unavailable terminal) without claiming a DOS workload ran. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `GetNextVDMCommand`, `cmdGetNextCmd`, `cmdExec`, `cmdReturnExitCode`, `demLoadDos`, DOS `EXEC`, PSP, MCB/arena, JFN/SFT, environment/COMSPEC, `host_simulate`, CPU40 re-entry, `ExitVDM`, `BaseSrvUpdateVDMEntry`, session completion and controlled stop. |
+
+**Plan:** [M0 T356 minimal DOS guest execution and controlled return](etc/operations/m0-t356-minimal-dos-execution-controlled-return-plan-001.md).
+
+**Active: M0 T356 S1.**
 
 | Field | Record |
 | --- | --- |

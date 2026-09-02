@@ -35,6 +35,10 @@ executed.
 The detailed proposal, predecessor, delivery and exclusions for every queue
 item are in the [package recovery proposal set](etc/operations/package-recovery-program-20260827.md).
 
+**Minimal DOS guest execution and controlled return** is the required
+predecessor of the first candidate below.  It is already active and therefore
+deliberately absent from this candidate-only queue.
+
 MVDM host mirror-topology recovery is already closed. `CPU_30_STYLE` is an
 NT4 kernel-VDM V86 monitor rather than a software CCPU profile, and is
 historical-only. Production compilation and runtime acceptance currently select
