@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3785 |
+| Documentation records | 3786 |
 | --- | --- |
-| Generated UTC | 2026-09-02T04:18:21Z |
+| Generated UTC | 2026-09-02T04:22:57Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 46aeb18b531450f0d28dcc443e25ac7aaecf19778124010a41fcd6ccfa7264a3 |
+| STATUS.md | principal control document | 620b84dfd225667eb7cc3921bc2d4e46e89b3e92351dea9ccc9b3626a5d8f30b |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1184,6 +1184,7 @@ content-divergent entries.
 | etc/evidence/m0-t359-s2-command-transient-sas-write-binding-001.md | indexed supporting material | fcbc90e1fce4194a7e76a34e8ff6eb330bd0b015ea5711dca4bcb301e62ef38e |
 | etc/evidence/m0-t359-s3-sas-store-observer-local-conformance-001.md | indexed supporting material | c63da0db7e715f471aa4185215da4c9fbf625aed784d15dfa82092d0cf17bc85 |
 | etc/evidence/m0-t359-s4-invalid-long-root-observation-001.md | indexed supporting material | c88c01837395564fa93b2348b3b8145d0b2876568f65094663b1261e9dfcd7a5 |
+| etc/evidence/m0-t359-s5-invalid-suffixed-root-observation-001.md | indexed supporting material | 240dbdec043672163f718541320c4fc58b1cde8ac9b1f13522f8c66bc51c647c |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1924,7 +1925,7 @@ content-divergent entries.
 | etc/operations/m0-t356-minimal-dos-execution-controlled-return-plan-001.md | indexed supporting material | 32128e010dd7c54cd80998258a2de9ae83ff350f05302d15190ea8ae311a5512 |
 | etc/operations/m0-t357-cpu40-staged-boot-command-ready-plan-001.md | indexed supporting material | 6140fa28f32d6c3f94d24367a4dda8d980b816e1ab748e6c5b053f8f33f185d3 |
 | etc/operations/m0-t358-command-built-in-batch-lifecycle-plan-001.md | indexed supporting material | f05dbd593cd9e15ba3dbd4dafa764d85b6f1a5ac5ea3edac8e5daeb7e6cf027a |
-| etc/operations/m0-t359-cpu40-command-initialization-control-flow-plan-001.md | indexed supporting material | 990f23e9bc2e5fa71221e7b90b65d4980125bf7dfaf76bd83e8dfe9405f4d8d8 |
+| etc/operations/m0-t359-cpu40-command-initialization-control-flow-plan-001.md | indexed supporting material | da000a213588006742d1fbd8d0a71b25e03c729a060afb0e91f44114368e89b0 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |

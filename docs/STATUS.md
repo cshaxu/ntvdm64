@@ -698,7 +698,7 @@ the selected CPU40 path attempts to execute immutable `COMMAND.COM` data at
 
 **S4 closure:** [invalid long-root observation disposition](etc/evidence/m0-t359-s4-invalid-long-root-observation-001.md) records the one attempted stage as capacity-invalid (74-character `mvdm` root versus the original 63-byte contract).  Its timeout and absent reports are not used as lifecycle evidence.
 
-### M0 T359 S5 — Active replacement short-root frozen observation
+### M0 T359 S5 — Closed invalid suffixed-root observation
 
 | Field | Record |
 | --- | --- |
@@ -707,10 +707,24 @@ the selected CPU40 path attempts to execute immutable `COMMAND.COM` data at
 | Objective | Make one replacement immutable CPU40/x86 resumed `/C EXIT` observation from a new non-overwriting short-root stage, watching only original `TrnSeg` two-byte writes and recording the next source-owned boundary. |
 | Non-goals | No reuse or interpretation of the invalid stage; no retry, source change, media mutation, BOP/DEM/COMMAND/CPU repair, new mapping, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, Redirector, EXEC or graphics work. |
 | Verification | Short-root capacity check; fresh product/media manifest; exactly one bounded console-owning run; copied observer report and terminal report. |
-| Exit Criteria | The stage has at most 63 visible `mvdm` root characters and its single run either reaches original `54:01` or identifies one exact source-owned predecessor. |
+| Exit Criteria | The complete original generated `shell=` value is at most 63 visible characters and its single run either reaches original `54:01` or identifies one exact source-owned predecessor. |
 | Original Owner Request | “非常好，按照这个顺序执行。” |
 
-**Active: M0 T359 S5.**
+**S5 closure:** [invalid suffixed-root observation disposition](etc/evidence/m0-t359-s5-invalid-suffixed-root-observation-001.md) corrects the capacity metric.  The 65-character full `shell=` value made the new subdirectory stage invalid; mapped frames prove app-owned path rejection, not a COMMAND result.
+
+### M0 T359 S6 — Active verified-root product-replacement observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T359 S6; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T359 S5's capacity disposition under ordered dependency-first execution and the user-designated `O:\ntvdm64` format-3 runtime container. |
+| Objective | Replace only the explicitly mutable product in the hash-verified `O:\ntvdm64` fixed-media container, then make exactly one CPU40/x86 resumed `/C EXIT` observation with the original `TrnSeg` two-byte watch. |
+| Non-goals | No media replacement, restaging, deletion, retry, source or BOP/DEM/COMMAND/CPU repair, new mapping, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, Redirector, EXEC or graphics work. |
+| Verification | Verify all 16 fixed media hashes and the 36-character complete `shell=` value; one product replacement; exactly one bounded console-owning run; copied observer and terminal reports. |
+| Exit Criteria | One valid run from the verified root either reaches original `54:01` or identifies one exact preceding original owner boundary. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+
+**Active: M0 T359 S6.**
 
 ### M0 T355 S31 — Closed original `0x78` entry-result attribution
 
