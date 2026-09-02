@@ -44,9 +44,10 @@ and a synthetic Win16 loader.
    single-session bootstrap cohort; no source body changes or runtime run.
 2. **S2 — Original command and task bootstrap binding.** Compose the selected
    original WOW command acquisition and task-start/lifecycle bodies through
-   the source-shaped Base VDM and monitor boundaries. Preserve original
-   `VDMINFO`, task identity, failure and cleanup order; prove positive and
-   unavailable forms locally.
+   the source-shaped Base VDM and monitor boundaries, retaining original
+   `MS_bop_1 → WOW32.dll → W32Init/W32Dispatch` dynamic ingress rather than a
+   static parallel route. Preserve original `VDMINFO`, task identity, failure
+   and cleanup order; prove positive and unavailable forms locally.
 3. **S3 — Non-fast callback and CPU40 re-entry closure.** Complete the
    original `wcall16.c` transaction using the existing short mapping leases,
    original `SETVDMSTACK → host_simulate → VDMSTACK` order and typed task
