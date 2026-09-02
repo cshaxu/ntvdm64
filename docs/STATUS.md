@@ -1097,25 +1097,25 @@ and
 
 ## Active Packet
 
-### M0 T378 S3 — Active original DOSX/DPMI handoff recovery
+### M0 T378 S4 — Active formal DOS-extender workload matrix closure
 
-**Active: M0 T378 S3**
+**Active: M0 T378 S4**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T378 S3; ordinary mode (single-person dual-role original-owner recovery). |
-| Admission And Approval | S1 froze byte-identical HIMEM/DOSX media; S2 now source/binding/formal-link closes the complete original CONFIG/HIMEM/XMS A20/UMB/INT15 cohort. |
-| Objective | Recover or verify the complete original DOSX guest `$Exec` to host `MS_bop_3 -> DpmiDispatch` handoff, DPMI table, protected-mode frame/stack and source-shaped exit/return direction under the current CPU40/SoftPC product. |
-| Non-goals | No protected-mode success fabrication, individual `53:xx` repair, synthetic DOSX, guest rewrite, stage update, CPU30, Bochs, x64 guest runtime, native child, Redirector or WOW work. |
-| Reference Baseline | T378 S1--S2; T371 DPMI source/link closure; T375--T377 fixed product; immutable original DOSX and original `nt_bop.c`/`dpmi32` bodies. |
-| Files And ABI Surface | Original DOSX media, original guest EXEC route, `MS_bop_3`, DPMI32 table/support bodies, source-shaped machine/frame boundaries and current CPU40 formal graph. |
+| Identifier Mode | M0 T378 S4; ordinary mode (single-person dual-role formal-owner closure). |
+| Admission And Approval | S1--S3 now freeze immutable media and source/binding/formal ownership for the original CONFIG/HIMEM/XMS and DOSX/DPMI cohorts. |
+| Objective | Reconcile the whole selected immutable extender workload with the formal CPU40 graph and runtime stage; verify the formal product, media identities and original owner matrix before one frozen observation. |
+| Non-goals | No product observation, protected-mode fabrication, individual BOP repair, synthetic DOSX/device, guest rewrite, CPU30, Bochs, x64 guest runtime, native child, Redirector or WOW work. |
+| Reference Baseline | T378 S1--S3, current formal CPU40 product, current stage manifest, and selected original guest/host sources. |
+| Files And ABI Surface | Existing formal graph, immutable HIMEM/DOSX/configuration media, product/stage manifest and focused source-shaped checks only. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, immutable-media staging, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Original definition/caller/table/return review; source-shaped positive and unavailable-direction checks; formal CPU40/x86 link; documentation governance and diff review. No frozen product observation. |
-| Expected Markers | Original DOSX reaches either its complete original DPMI ownership route or a named earlier original terminal; no isolated BOP success is invented. |
-| Asset Needs | S1 identity-proven media, S2-closed XMS cohort, selected original DPMI32 sources, formal CPU40 graph and existing focused test infrastructure. |
-| Reporting Requirements | Record every DOSX/EXEC/BOP/DPMI edge, table ownership, protected-mode/frame boundary and retained unavailable/return direction. |
-| Stop Conditions | Required behavior needs a synthetic DPMI table, altered guest media, kernel/CSR recreation, raw host pointer carrier, second machine or leaf-level BOP repair; pause for package revision. |
-| Exit Criteria | The complete original DOSX/DPMI handoff cohort is source/binding/formal-link closed or an earlier exact original terminal is identified; S4 may then own the full extender matrix. |
+| Verification | Reconfirm formal product link; compare each selected staged artifact with its authoritative original source; record the complete owner matrix, governance and diff checks. No product run. |
+| Expected Markers | One matrix proves the final product and every selected workload input are current, original and owner-complete, or names an exact mismatch. |
+| Asset Needs | Current formal product, fixed `O:\\ntvdm64` stage, immutable media and prior source/binding evidence. |
+| Reporting Requirements | Record identities, build selection, source-owner cohorts, any mismatch refusal and the exact S5 invocation inputs. |
+| Stop Conditions | Any guest/firmware mismatch, product replacement without explicit stage opt-in, added workload, source repair or runtime observation requires revised admission. |
+| Exit Criteria | Formal product and full selected stage matrix are identity-proven; S5 then owns exactly one bounded no-diagnostic observation. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | CONFIG.NT device load, HIMEM.SYS, XMSInit, A20, UMB, INT15, DOSX guest handoff, `MS_bop_2`, `MS_bop_3`, DpmiDispatch, protected-mode frame/stack, mapping-manager boundaries and normal return. |
 
@@ -1124,6 +1124,8 @@ and
 **S1 closure:** [DOS-extender workload and owner admission](etc/evidence/m0-t378-s1-dos-extender-workload-owner-admission-001.md).
 
 **S2 closure:** [original XMS boot/HMA/UMB lifecycle closure](etc/evidence/m0-t378-s2-original-xms-boot-hma-umb-lifecycle-closure-001.md).
+
+**S3 closure:** [original DOSX/DPMI handoff closure](etc/evidence/m0-t378-s3-original-dosx-dpmi-handoff-closure-001.md).
 
 ### M0 T377 — Closed pure DOS device, file and graphics workload matrix
 
