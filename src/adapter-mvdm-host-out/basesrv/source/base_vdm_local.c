@@ -169,17 +169,25 @@ static NTSTATUS get_next_command(base_vdm_local *record, PVDMINFO information)
         if ((state & RETURN_ON_NO_COMMAND) &&
             (record->dos_record_state == BASE_VDM_DOS_RECORD_BUSY ||
              record->dos_record_state == BASE_VDM_DOS_RECORD_HAS_RETURNED_ERROR_CODE)) {
-            if (record->native_child_launch_pending != 0u ||
-                record->reentry_count != 0u) {
-                /* Original cmdExec32 starts a worker, then asks BaseSrv for
-                 * another record.  BaseSrv holds that request until the
-                 * matching worker re-entry completes or a new record exists.
-                 * The local seam preserves that relation without publishing
-                 * a synthetic guest command. */
+            if ((state & NO_PARENT_TO_WAKE) != 0u &&
+                (state & ASKING_FOR_SECOND_TIME) == 0u) {
+                /* `srvvdm.c` returns a wait object for the first
+                 * NO_PARENT_TO_WAKE request.  BaseClient waits, then retries
+                 * with ASKING_FOR_SECOND_TIME before it observes the empty
+                 * RETURN_ON_NO_COMMAND result.  The one-session seam has no
+                 * duplicated CSRSS handle, but preserves that observable
+                 * request/retry order through its private events. */
                 record->pending_request = 1u;
                 ResetEvent(record->wake_event);
                 LeaveCriticalSection(&record->lock);
                 return STATUS_PENDING;
+            }
+            if ((state & ASKING_FOR_SECOND_TIME) != 0u) {
+                /* On the retried request, `srvvdm.c` does not rewrite the
+                 * busy DOS record.  It falls through to its no-record
+                 * RETURN_ON_NO_COMMAND terminal below. */
+                LeaveCriticalSection(&record->lock);
+                return STATUS_NO_MEMORY;
             }
             /* DIVERGENCE: the original BaseSrv marks a VDM_BUSY child as
              * returned, wakes its external parent record, then its

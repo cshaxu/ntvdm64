@@ -223,19 +223,18 @@ int main(void)
         memcmp(application_buffer, application, sizeof(application)) != 0 ||
         memcmp(directory_buffer, directory, sizeof(directory)) != 0) return 5;
 
-    /* A completed local `/C` child has no NT4 parent process to wake.  The
-     * source-shaped one-session record therefore returns the original empty
-     * `RETURN_ON_NO_COMMAND` outcome directly instead of waiting forever for
-     * a non-existent parent/producer event. */
+    /* The second client request is the original no-command terminal probe.
+     * A one-session record has no external parent process to wake, so this
+     * source-shaped check verifies its empty `RETURN_ON_NO_COMMAND` result
+     * without inventing a command record. */
     reset_info(&information);
-    information.VDMState = RETURN_ON_NO_COMMAND;
+    information.VDMState = RETURN_ON_NO_COMMAND | ASKING_FOR_SECOND_TIME;
     information.ErrorCode = 91u;
     if (GetNextVDMCommand(&information) ||
         GetLastError() != ERROR_NOT_ENOUGH_MEMORY ||
         information.CmdSize != 0u || information.EnviornmentSize != 0u ||
         source.dos_record_state !=
-            BASE_VDM_DOS_RECORD_HAS_RETURNED_ERROR_CODE ||
-        source.error_code != 91u || source.pending_request != 0u) return 41;
+            BASE_VDM_DOS_RECORD_BUSY || source.pending_request != 0u) return 41;
 
     /* Original BaseClient waits when BaseSrv has no DOS record, then retries
      * after the server's producer signal with ASKING_FOR_SECOND_TIME.  The

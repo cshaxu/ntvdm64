@@ -2,31 +2,33 @@
 
 ## Current Work
 
-### M0 T375 S2 — Active original Base VDM DOS-record lifecycle recovery
+### M0 T375 S3 — Active fixed original COMMAND built-in observation
 
-**Active: M0 T375 S2**
+**Active: M0 T375 S3**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T375 S2; ordinary mode (single-person dual-role source recovery and implementation). |
-| Admission And Approval | Admitted from T375 S1's source and fixed-container closure under the owner's approval of the queue-head pure-DOS package. |
-| Objective | Recover the complete reached original BaseClient/BaseSrv DOS-record lifecycle behind `GetNextVDMCommand`/`ExitVDM`: record selection, busy/return transition, no-command wait, `RETURN_ON_NO_COMMAND`, wake/cleanup and one-session terminal disposition. |
-| Non-goals | No `.COM`/MZ external-program claim, host executable loader, synthetic command record, unconditional session cancellation, guest-media mutation, BOP leaf patch, native child, WOW/Win16, CSRSS/kernel-VDM recreation, CPU30, Bochs or x64 runtime work. |
-| Reference Baseline | T375 S1 closure; original `base/win32/client/vdm.c` and `base/win32/server/srvvdm.c`; current Base VDM adapter/broker; T365--T369 evidence and formal CPU40/x86 graph. |
-| Files And ABI Surface | `opennt-host` accepted Base VDM client/server mirror slices where directly composable; `adapter-mvdm-host-out/basesrv` same-shaped transport/state binding; app/session binding only if selected original state requires it. Original COMMAND and guest files remain unchanged. |
+| Identifier Mode | M0 T375 S3; ordinary mode (single-person dual-role fixed-container observation). |
+| Admission And Approval | Admitted after T375 S2's source-shaped BaseVDM lifecycle correction and formal x86 link under the owner's approval of the queue-head pure-DOS package. |
+| Objective | Make exactly one bounded, non-debug run of the rebuilt CPU40/SoftPC product against immutable media and determine whether original `COMMAND.COM` completes the declared `EXIT` built-in. |
+| Non-goals | No production repair, `.COM`/MZ execution claim, host executable loader, synthetic command record, guest-media mutation, BOP leaf patch, native child, WOW/Win16, CSRSS/kernel-VDM recreation, CPU30, Bochs or x64 runtime work. |
+| Reference Baseline | T375 S1 topology; T375 S2 BaseVDM lifecycle closure; rebuilt formal CPU40/x86 product SHA-256 `350d4a84db26972132ba728703d2af1275c1ed1d609f40b6eaec900b05ef11fb`; immutable `O:\ntvdm64` stage. |
+| Files And ABI Surface | Existing observer, staged selected product and immutable media only. No source or ABI is changed in S3. |
 | Applicable Rules | Execution, source policy, source-first recovery, guest-load-only, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and document rules. |
-| Verification | Original client/server state-machine comparison; positive first-record and terminal/no-command local tests; formal CPU40/x86 selected link; one fixed non-debug `/C EXIT` observation only after the complete lifecycle form is linked. |
-| Expected Markers | No caller pointer crosses a wait; no record transitions from available to busy without original ordering; interactive no-command waits remain waitable; one-shot terminal behavior follows original `RETURN_ON_NO_COMMAND`/`ExitVDM` disposition; no partial BaseSrv success. |
-| Asset Needs | Original Base VDM client/server sources, current Base VDM adapter/broker, session bindings, current formal CPU40/x86 graph and immutable stage. |
-| Reporting Requirements | Cite the original line-level state and failure order; distinguish retained source subset from adapter transport; record every private CSR/console dependency and its bounded same-shaped modern disposition. |
-| Stop Conditions | A need to recreate generic CSRSS/console-server machinery, provide an unbounded multi-session broker, mutate guest media, invent a command result, change CPU/device semantics, start `.COM`/MZ execution, or expand into native-child/WOW requires a revised S admission. |
-| Exit Criteria | Every reached DOS-record lifecycle state has original source disposition, the selected one-session state machine is source/link-ready with local positive/negative proof, and the fixed `/C EXIT` observation either completes or reports one later exact original owner. |
+| Verification | Product/stage hash check and one console-owning, non-debug observation with `--command EXIT`; attribute its first post-S2 original owner. |
+| Expected Markers | Original boot, COMMAND acquisition, and either controlled session completion or an exact later source-owned wait/failure. No debugger, media change, second workload or repair is permitted. |
+| Asset Needs | Existing observer, rebuilt product, fixed stage and durable external report path. |
+| Reporting Requirements | Record the exact command, hashes, outcome and source attribution. Distinguish a timeout from command completion. |
+| Stop Conditions | A need to modify source/media, retry with another workload/container, add a loader, alter CPU/device semantics, or expand into external DOS execution/WOW requires a revised S admission. |
+| Exit Criteria | One valid fixed observation is retained and either proves `EXIT` completion or names the next exact original owner; its result selects S4 handoff only, not a trace-leaf repair. |
 | Original Owner Request | “没错 那为啥你要做win16现在？我们先把纯dos程序跑通。你治理一下队列” followed by approval to start the next task. |
-| Similar-Issue Sweep | `BaseSrvGetNextVDMCommand`, `GetNextVDMCommand`, `BaseSrvExitVDM`, `ExitVDM`, DOS record/console state, first/second/repeat calls, `RETURN_ON_NO_COMMAND`, parent wake, local broker publish/deliver, event waits, session completion and WOW isolation. |
+| Similar-Issue Sweep | Stage/product identity, CLI serialization of `EXIT` to `/C EXIT`, original `54:01`/`cmdGetNextCmd`, BaseVDM record state, session completion and absence of external DOS child execution. |
 
 **Plan:** [M0 T375 pure DOS CPU40/SoftPC boot and COMMAND baseline](etc/operations/m0-t375-pure-dos-cpu40-softpc-command-baseline-001.md).
 
 **S1 closure:** [pure DOS boot/COMMAND topology and fixed-container admission](etc/evidence/m0-t375-s1-pure-dos-boot-command-topology-001.md).
+
+**S2 closure:** [original Base VDM DOS-record lifecycle recovery](etc/evidence/m0-t375-s2-original-base-vdm-dos-record-lifecycle-001.md).
 
 ### M0 T374 S4 — Closed exact USER registration and Base hook boundary
 

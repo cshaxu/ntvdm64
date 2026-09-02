@@ -27,6 +27,10 @@ retry:
             state = capture.VDMState;
             capture = request;
             capture.VDMState = state;
+            /* `vdm.c` clears ExitCode before the client reissues the
+             * server request.  A completed wait is a command-acquisition
+             * retry, not a second parent-return report. */
+            capture.ErrorCode = 0u;
             goto retry;
         }
         information->CmdSize = capture.CmdSize;
