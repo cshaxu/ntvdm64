@@ -570,9 +570,29 @@ the original COMMAND-ready boundary.  It did not prove a completed COMMAND
 candidate is therefore the already ordered COMMAND built-in and batch
 lifecycle package; no immediate missing owner component was proven.
 
-**No active M/T/S packet.** M0 T357 closed with staged original COMMAND-ready
-evidence. The next admission must take the first queue candidate, COMMAND
-built-in and batch lifecycle, unless a newer owner directive changes it.
+### M0 T358 S1 — Active original COMMAND workload and return topology
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T358 S1; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Owner approved ordered execution; T357 reached the required COMMAND-ready boundary. |
+| Objective | Establish a source-defined original COMMAND `/C` built-in/batch completion-and-return path, select the lowest-dependency immutable workload and identify any immediate missing original owner. |
+| Non-goals | No runtime observation, source mutation, external DOS EXEC, cmdExec32, WOW, CPU/device change, guest mutation, CPU30, Bochs, x64, CSRSS/kernel VDM, Redirector or graphics work. |
+| Reference Baseline | T357 final staged COMMAND-ready evidence; original `dos/command/{cmdmisc.c,cmddisp.c,cmdexec.c,cmdconf.c}` and app Base-VDM declaration route. |
+| Files And ABI Surface | Original COMMAND route, Base-VDM `VDMINFO`, COMMAND BOP services, original guest completion markers and formal graph selection. No new ABI. |
+| Applicable Rules | Execution, source policy, package-first recovery, component activation registry, CPU40-only, mirror/divergence and fixed-observation rules. |
+| Verification | Static source/graph ownership map; selected workload identity; explicit proof whether batch stays inside COMMAND or crosses to DOS EXEC. |
+| Expected Markers | One exact built-in route/return marker and a classified batch disposition; no runtime claim in S1. |
+| Asset Needs | T357 source-identical stage evidence, OpenNT COMMAND sources, formal source manifest and Node 22 search tooling. |
+| Reporting Requirements | Separate COMMAND-internal completion from DOS child/native child/WOW paths; name a missing original owner only with source and formal-graph evidence. |
+| Stop Conditions | Selected route crosses external DOS EXEC or missing owner without a bounded package; runtime execution proposed before topology is closed. |
+| Exit Criteria | Immutable built-in workload and return contract are source-defined; batch is either included with a complete owner path or explicitly handed to T359; S2 is admitted only for an exact missing owner. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+| Similar-Issue Sweep | `/C` declaration, `cmdGetNextCmd`, Base-VDM command handoff, COMMAND BOPs, batch-file path, `cmdReturnExitCode` and DOS EXEC boundary. |
+
+**Plan:** [M0 T358 COMMAND built-in and batch lifecycle](etc/operations/m0-t358-command-built-in-batch-lifecycle-plan-001.md).
+
+**Active: M0 T358 S1.**
 
 ### M0 T355 S31 — Closed original `0x78` entry-result attribution
 
