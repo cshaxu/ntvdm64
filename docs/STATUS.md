@@ -2,6 +2,53 @@
 
 ## Current Work
 
+### M0 T367 S1 — Closed original DOS EXEC/parent-return owner ledger
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T367 S1; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from T366's closed declared-DOS-record observation under the owner's standing instruction to execute the ordered queue. |
+| Objective | Establish the complete original guest-owned `.COM`/MZ `$Exec` → JFN/SFT → PSP/arena/environment → child termination → parent/COMMAND return chain, including the exact current host/guest boundary and one finite S2 owner cohort. |
+| Non-goals | No BOP leaf patch, synthetic EXEC/PSP/child, guest-media mutation, new guest loader, native child, BaseSrv/CSRSS recreation, CPU/device/video change, CPU30, Bochs, x64 runtime, WOW, Redirector or runtime observation. |
+| Reference Baseline | T366 S4 successful original staged `COMMAND.COM` DEM-open; original immutable NTDOS/COMMAND guest mirrors and output artifacts; T365 DEM lifecycle closure; selected CPU40/x86 host product. |
+| Files And ABI Surface | Guest NTDOS `$Exec`, JFN/SFT, PSP/arena/environment and termination/`retf` code; COMMAND `54:0B`; reached DEM file bridge and session guest-memory mapping lease. No guest byte, host pointer or ABI change in S1. |
+| Applicable Rules | Execution, source policy, source-first recovery, guest-load-only, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Original guest source/artifact identity, definition/caller/data-flow audit, host binding comparison, owner/failure ledger and governance checks. No product run. |
+| Expected Markers | One ordered ledger distinguishes guest-owned mechanics from host DEM file services, names every `50:xx`/`54:0B` crossing already present or required, and selects one complete earliest original cohort. |
+| Asset Needs | Existing selected guest mirrors/artifacts, T365/T366 evidence, formal CPU40/x86 graph and source indexes only. |
+| Reporting Requirements | State exact source path/artifact identity, preserve guest load-only boundary, distinguish current evidence from runtime proof, and identify any project diff that direct original code can replace. |
+| Stop Conditions | Need to change guest media, implement one isolated BOP, introduce a guest pointer or host loader, alter CPU/device semantics, run the fixed container, or expand into native/WOW/Redirector requires new S admission. |
+| Exit Criteria | Every immediate EXEC chain edge has one source owner/disposition and the smallest S2 cohort is complete, or one earlier original source terminal is precisely recorded. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `$Exec`, `Exec`, JFN/SFT, PSP, arena, environment, INT 21h/4Ch, `retf`, `50:3C`, `54:0B`, `demOpen`, `demRead`, `demClose` and guest-memory lease boundaries. |
+
+**Plan:** [M0 T367 original DOS EXEC and parent return](etc/operations/m0-t367-original-dos-exec-parent-return-001.md).
+
+S1 closed source/owner audit: [owner ledger](etc/evidence/m0-t367-s1-original-dos-exec-parent-return-owner-ledger-001.md).
+
+### M0 T367 S2 — Active original DOS `$Exec` file-to-guest transfer closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T367 S2; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from T367 S1's closed original owner ledger under the owner's standing ordered-queue authority. |
+| Objective | Prove or recover the smallest complete, source-shaped original cohort that carries a declared DOS executable through unchanged guest JFN/SFT `$Read` and the existing original `50:16 demRead` provider into guest memory, preserving AX/CF and file position. |
+| Non-goals | No host-side executable loader, guest-media mutation, synthetic PSP/child/termination, BOP leaf substitute, new fast-read semantics, CPU/device change, native child, x64 runtime, WOW or Redirector. |
+| Reference Baseline | T367 S1 owner ledger; T365 original DEM open/read/close bounded-lifecycle closure; T366 declared command-record delivery; selected CPU40/x86 product. |
+| Files And ABI Surface | Original guest `handle.asm:$Read`, original `msproc.asm:$Exec`, original `demdisp.c`/`demhndl.c:demRead`, session guest-memory lease and host-resource identity only. |
+| Verification | Static route/link audit, one focused original-provider contract test, formal CPU40/x86 final link. No general runtime observation in S2. |
+| Expected Markers | A real guest `$Read` normal-file request reaches the original `demRead` table provider, transfers only the reported bytes to the requested guest range, advances original SFT position by AX, and preserves original failure/fallback behavior. |
+| Asset Needs | Existing immutable selected guest image, existing host DEM closure, CPU40/x86 formal graph and existing focused test infrastructure. |
+| Reporting Requirements | Name the precise original source bodies and result contracts; distinguish static/local proof from guest EXEC/parent-return proof; record any retained divergence. |
+| Stop Conditions | Need to invent an executable loader, alter guest bytes, alter `$Exec`/PSP behavior, emulate a BOP outcome outside its original provider, or broaden into MZ/parent return requires a new S admission. |
+| Exit Criteria | The full original guest read-to-provider cohort has source/link/local evidence, or the earliest original route terminal is proved and recorded without replacement behavior. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `$Read`, `SVC_DEMFASTREAD`, `SVC_DEMREAD`, JFN/SFT position update, `demRead`, buffer lease, host-resource identity, short read, EOF and `AX/CF`. |
+
+**Plan:** [M0 T367 original DOS EXEC and parent return](etc/operations/m0-t367-original-dos-exec-parent-return-001.md).
+
+**Active: M0 T367 S2.**
+
 ### M0 T366 S1 — Closed declared DOS workload command-record owner ledger
 
 | Field | Record |
@@ -107,8 +154,8 @@ It makes no child-execution or parent-return claim.
 
 T366 is closed; see its [closure record](history/m0-t366-declared-dos-workload-command-delivery-closure-20260902.md).
 
-**No active M/T/S packet.** The next packet must begin at the original DOS
-`$Exec`/JFN/SFT/PSP owner cohort; T366's fixed runtime terminal does not
+T366's fixed runtime terminal transferred to the original DOS
+`$Exec`/JFN/SFT/PSP owner cohort, now active as M0 T367.  It does not
 authorize a trace-derived BOP repair.
 
 ### M0 T363 S1 — Closed SoftPC conventional-device owner ledger
