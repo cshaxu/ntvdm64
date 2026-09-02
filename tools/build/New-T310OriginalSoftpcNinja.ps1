@@ -122,6 +122,7 @@ $oemuniManifest = Join-Path $oemuniRoot 'sources'
 $hostManifest = Join-Path $hostRoot 'sources'
 $hostEntrySource = Join-Path $hostEntryRoot 'ntvdm.c'
 $hostEntryResourceSource = Join-Path $hostEntryRoot 'resource.rc'
+$hostExportDefinition = Join-Path $hostEntryRoot 'obj/i386/ntvdm.def'
 $ccpuNames = Get-OriginalSources $ccpuManifest
 # The historical manifest carries the real FPU body and a host-profile stub
 # carrier in the same lexical list.  The selected CPU_40/FPU profile is the
@@ -207,6 +208,7 @@ $hostNames = @(Get-OriginalSources $hostManifest)
 $hostNames = @($hostNames + 'nt_cprgs.c') | Select-Object -Unique
 if (!(Test-Path -LiteralPath $hostEntrySource)) { throw "Original SoftPC host entry missing: $hostEntrySource" }
 if (!(Test-Path -LiteralPath $hostEntryResourceSource)) { throw "Original SoftPC resource source missing: $hostEntryResourceSource" }
+if (!(Test-Path -LiteralPath $hostExportDefinition)) { throw "Original SoftPC export definition missing: $hostExportDefinition" }
 $adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_compat.c',
                           'nt_thread_alert_compat.c', 'nt_wait_compat.c',
                           'opennt_support_rtl.c', 'console_compat.c', 'crt_compat.c',
@@ -545,7 +547,11 @@ $graph.Add('rule forced_link_audit')
 # unresolved physical forms in the adjacent log for source-first ownership.
 $graph.Add('  command = link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-system.lib /wholearchive:original-softpc-disks.lib /wholearchive:original-softpc-support.lib /wholearchive:original-softpc-video.lib /wholearchive:original-softpc-cvidc.lib /wholearchive:original-softpc-comms.lib /wholearchive:original-softpc-dos.lib /wholearchive:original-mvdm-dem.lib /wholearchive:original-mvdm-command.lib /wholearchive:original-mvdm-xms.lib /wholearchive:original-mvdm-dpmi32.lib /wholearchive:original-mvdm-host-suballoc.lib /wholearchive:original-mvdm-host-oemuni.lib /wholearchive:original-softpc-base-trace.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-bindings.lib /wholearchive:softpc-win32-bindings.lib /wholearchive:basesrv-bindings.lib /wholearchive:monitor-bindings.lib /wholearchive:debugger-bindings.lib /wholearchive:session.lib /wholearchive:broker.lib /wholearchive:mvdm-softpc-effective-address.lib /wholearchive:ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $graph.Add('rule process_link')
-$graph.Add('  command = link.exe /nologo /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
+# The historical `ntvdm.exe` exported this source-defined CCPU/SoftPC ABI for
+# late-loaded owner DLLs such as VDMREDIR.  Retain the original export surface
+# in the parent process so a DLL imports the one already-running machine rather
+# than linking a second SoftPC instance into itself.
+$graph.Add('  command = link.exe /nologo /map:$out.map /def:' + (NinjaPath $hostExportDefinition) + ' /implib:original-softpc-process-import.lib /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $graph.Add('rule broker_test_link')
 $graph.Add('  command = link.exe /nologo /out:$out $in libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib')
 

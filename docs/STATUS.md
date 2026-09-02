@@ -30,6 +30,8 @@
 
 **S3 P1:** [original Redirector DLL import topology](etc/evidence/m0-t372-s3-p1-redirector-dll-import-topology-001.md).
 
+**S3 P2:** [parent SoftPC import ABI closure](etc/evidence/m0-t372-s3-p2-parent-softpc-import-abi-001.md).
+
 ### M0 T371 — Closed XMS, DPMI and DOS-extender execution
 
 **Plan:** [M0 T371 XMS, DPMI and DOS-extender execution](etc/operations/m0-t371-xms-dpmi-dos-extender-execution-001.md).

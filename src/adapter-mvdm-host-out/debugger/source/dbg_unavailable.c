@@ -70,3 +70,26 @@ unsigned long DbgPrompt(char *prompt, char *response,
     mvdm_debugger_private_transport_unavailable("debugger:DbgPrompt");
     return 0u;
 }
+
+/* DIVERGENCE(ADAPTER-MVDM-DEBUGGER-004): `dbg.c::DBGNotifyNewTask` and
+ * `DBGNotifyRemoteThreadAddress` belong to the same private NT4 VDM debugger
+ * transport as the module notifications above.  Keep the original exported
+ * entrypoints and their no-event ordinary-profile result.  A debugged session
+ * takes the already-declared typed-unavailable direction rather than being
+ * silently accepted or causing process-wide termination. */
+VOID DBGNotifyNewTask(LPVOID nt_frame, UINT frame_size)
+{
+    (void)nt_frame;
+    (void)frame_size;
+    if (mvdm_debugger_is_debugged())
+        mvdm_debugger_private_transport_unavailable("debugger:DBGNotifyNewTask");
+}
+
+VOID DBGNotifyRemoteThreadAddress(LPVOID address, DWORD block)
+{
+    (void)address;
+    (void)block;
+    if (mvdm_debugger_is_debugged())
+        mvdm_debugger_private_transport_unavailable(
+            "debugger:DBGNotifyRemoteThreadAddress");
+}
