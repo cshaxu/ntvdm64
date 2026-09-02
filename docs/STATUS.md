@@ -2,7 +2,31 @@
 
 ## Current Work
 
-**No active M/T/S packet.**
+**Active: M0 T386 S1**
+
+## Active Packet
+
+### M0 T386 S1 — Original COMMAND HMA/arena startup-chain audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T386 S1; Ordinary Mode (single-person dual-role review). |
+| Admission And Approval | Owner rejected T385's boundary-only closure and directed that the task be reopened: `COMMAND.COM` must genuinely run before closure; guest `COMMAND.COM` must not be modified. |
+| Objective | Establish the complete original NTIO/NTDOS/SoftPC HMA, A20, DOS-high, resident-size and MCB/arena chain that precedes permanent COMMAND's initial environment and its first command-loop acquisition. Classify whether `MVDM-HOST-DIV-200` is a correct retained source-shaped binding or an obsolete workaround. |
+| Non-goals | No edit, rebuild, replacement or patch of guest `COMMAND.COM` or any guest image; no isolated BOP patch; no synthetic DOS loader/input; no `cmdExec32`, external child, WOW, Redirector, CPU30, Bochs or x64-runtime work. |
+| Reference Baseline | T384/T385 records; immutable selected COMMAND hash `908A77AC617C2D741F0AA1B73F73973DCF29ADC91F092E5BCB02173C8C732C43`; original `msint13.asm`, `msbio1.asm`, `sysinit1.asm`, COMMAND `init.asm`/`rdata.asm`; selected CPU40/x86 product. |
+| Files And ABI Surface | Read-only S1: original guest NTIO/NTDOS/COMMAND source and maps; original SoftPC CPU40/A20/SAS/guest-memory initialization; current `cmdenv.c` binding and formal manifests. No production edit is admitted in S1. |
+| Applicable Rules | Execution, source policy, source-recovery audit, guest-load-only, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Source/call/layout audit of `INT 2Fh 4A01/4A02`, `HMAPtr`, `MoveDOSIntoHMA`, `FTryToMovDOSHi`, `FreeHMAPtr`, `ResSize`, MCB allocation and first `54:0F`; current product/configuration identity check. No runtime retry in S1. |
+| Expected Markers | One ordered owner ledger with exact state variables, memory intervals, initialization/caller order, A20/HMA requirement, and a disposition for the prior `BX=0` fallback. |
+| Asset Needs | Selected immutable DOS/COMMAND media, original guest maps/listings, selected SoftPC sources, existing T384/T385 evidence and formal x86 manifest. |
+| Reporting Requirements | Preserve source/artifact identities; distinguish observed facts from hypotheses; identify the smallest original host/machine owner cohort if repair is needed; state explicitly that no guest bytes changed. |
+| Stop Conditions | Any proposed guest `COMMAND.COM` change, unbounded CPU/device rewrite, synthetic command delivery, or a repair beyond the verified owner cohort pauses for a revised S admission. |
+| Exit Criteria | The whole pre-command HMA/arena chain is source-owned and its actual current configuration is classified; a subsequent S can select one smallest source-first repair or retain the fallback with a proved reason. T386 itself cannot close merely on `54:01`: it requires a later immutable COMMAND command-loop/built-in runtime proof. |
+| Original Owner Request | “那你重开这个任务 重做审计 这不合格 你要让command真正跑起来才能收口” and “禁止你修改command.com！”。 |
+| Similar-Issue Sweep | `4A01`, `4A02`, INT 2F vector installation, A20/HMA access, `FreeHMAPtr`, `SysinitPresent`, `MoveDOSIntoHMA`, `FTryToMovDOSHi`, `ResSize`, `ComInHMA`, `INT 21h/48h`, MCB/endmem, `54:0F`, `54:01`, and current fallback entry. |
+
+**Plan:** [M0 T386 original COMMAND runtime recovery](etc/operations/m0-t386-original-command-runtime-recovery-001.md).
 
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 
@@ -1097,7 +1121,7 @@ single unchanged fixed observation did not reach HIMEM. See the
 and
 [T341 closure](history/m0-t341-vdd-owner-package-recovery-closure-20260831.md).
 
-## Active Packet
+## Historical transferred packet — M0 T381 S2
 
 ### M0 T381 S2 — Transferred original `cmdExec32` worker/re-entry cohort recovery
 
