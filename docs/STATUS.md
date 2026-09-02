@@ -1097,8 +1097,29 @@ and
 
 ## Active Packet
 
-**No active M/T/S packet.** M0 T379 is closed; the owner may admit the next
-ordered candidate from `docs/QUEUE.md`.
+### M0 T380 S1 — Active COMMAND native-child owner and predecessor rebaseline
+
+**Active: M0 T380 S1**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T380 S1; ordinary mode (single-person dual-role original-owner recovery). |
+| Admission And Approval | Admitted from T379 closure under the owner's standing direction to execute the ordered runtime queue. |
+| Objective | Re-establish the full original `54:08/0A/0B` COMMAND native-child lifecycle and current runtime predecessors, then select one complete public native-child workload without altering source or running the product. |
+| Non-goals | No BOP leaf patch, app-owned child launcher, guest-media mutation, CPU30, Bochs, x64 recovery, DOS PSP synthesis, WOW, Redirector protocol, CSRSS/BaseSrv broker or runtime observation. |
+| Reference Baseline | T370 source/binding/local-proof closure; T375--T379 runtime closures; original COMMAND mirror and current CPU40/x86 formal graph. |
+| Files And ABI Surface | Original `cmdexec.c`, `cmdmisc.c`, `cmddisp.c`, `cmdenv.c`, Base VDM/session/Win32 same-shaped bindings and formal graph as evidence only. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, immutable-media staging, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Whole definition/caller/state/failure/binding audit; current formal graph review; explicit workload/predecessor ledger and governance checks. No product run. |
+| Expected Markers | One original-owner transition map distinguishes `54:08`, `54:0A`, `54:0B`, worker/re-entry, stream identities, Base VDM record lifecycle and the earliest unproved predecessor. |
+| Asset Needs | Original MVDM source mirrors, T370/T375--T379 evidence, current formal CPU40/x86 graph and source indexes. |
+| Reporting Requirements | Preserve original names/order/results; distinguish existing focused evidence from real native-child runtime proof; identify any direct original source that can replace an existing adapter diff. |
+| Stop Conditions | A required second broker, guest mutation, private CSRSS/kernel recreation, raw pointer/handle carrier, CPU change or trace-selected leaf repair requires revised admission. |
+| Exit Criteria | Every immediate original edge has one owner/disposition and S2's smallest complete source cohort is selected, or an earlier original terminal is precisely documented. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `54:08`, `54:0A`, `54:0B`, `cmdExec`, `cmdExecComspec32`, `cmdExec32`, `cmdCreateProcess`, `cmdGetNextCmd`, `cmdReturnExitCode`, Base VDM, worker/re-entry, standard handles, session child records, cancellation and completion. |
+
+**Plan:** [M0 T380 COMMAND native-child runtime activation](etc/operations/m0-t380-command-native-child-runtime-activation-001.md).
 
 ### M0 T379 — Closed original VDMREDIR runtime product activation
 
