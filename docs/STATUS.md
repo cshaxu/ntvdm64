@@ -488,9 +488,91 @@ and
 
 ## Active Packet
 
-**No active M/T/S packet.** M0 T356 is closed by the exact app-owned
-package-stage transfer recorded below.  The next candidate remains in
-`docs/QUEUE.md` pending owner admission.
+### M0 T357 S1 — Closed staged runtime identity and owner admission
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T357 S1; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Owner directed execution in the newly ordered component-activation sequence: “按照这个顺序执行.” |
+| Objective | Produce and verify one new task-owned executable-relative CPU40/x86 runtime stage containing the formal product and immutable MVDM media, ready for one later frozen observation. |
+| Non-goals | No runtime observation in S1; no source/guest/media mutation, BOP repair, CPU/device change, CPU30, Bochs, x64, CSRSS/kernel VDM, WOW, native child or graphics work. |
+| Reference Baseline | T356 S3's manifest-identified formal CPU40/x86 product; T356 S4's app-owned rejection; current component activation registry and runtime recovery program. |
+| Files And ABI Surface | `tools/build/Stage-OriginalSoftpcRuntime.mjs`, staged manifest/output and existing app executable-relative package contract. No production source or ABI change. |
+| Applicable Rules | Execution, source policy, component activation registry, source-first recovery, CPU40-only, build-output hygiene, architecture and coding rules. |
+| Verification | Product/hash/source-manifest review; new stage manifest media-hash review; tool output review; documentation governance and diff review. |
+| Expected Markers | A new stage holds `original-softpc-process.exe`, sibling `mvdm` media and a format-3 manifest whose immutable media hashes match selected inputs. |
+| Asset Needs | Existing T356 formal product, Node 22, selected guest/firmware media and task-owned `build/M0-T357/S1/` output. |
+| Reporting Requirements | Record product and media identities separately; state whether reuse is identity-proven; do not call staging or app admission proof a guest-execution result. |
+| Stop Conditions | Formal product identity cannot be proven; required immutable asset is missing; the stage tool needs source changes; or any observation/source repair is proposed before S2. |
+| Exit Criteria | New stage and manifest are complete, immutable inputs are hash-verified, all app-visible paths are adjacent to the executable, and S2's single fixed observation command is frozen. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+| Similar-Issue Sweep | EXE-relative system/firmware roots, stage manifest format, COMMAND path bound, media source identity, observer staging behavior and prior invalid external-EXE observation. |
+
+**Plan:** [M0 T357 staged boot and COMMAND-ready boundary](etc/operations/m0-t357-cpu40-staged-boot-command-ready-plan-001.md).
+
+**Result:** [staged runtime identity](etc/evidence/m0-t357-s1-staged-runtime-identity-001.md).
+
+### M0 T357 S2 — Closed frozen staged boot observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T357 S2; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | T357 S1 closed under the owner-directed dependency-first activation sequence. |
+| Objective | Execute exactly one fixed console-owning observation of the T357 task-owned stage and classify its first original boundary or terminal result. |
+| Non-goals | No source/media mutation, alternate package root, BOP repair, CPU/device semantic change, CPU30, Bochs, x64, CSRSS/kernel VDM, WOW, external child or graphics work. |
+| Reference Baseline | T357 S1 stage manifest and T356 S4's invalid external-product observation diagnosis. |
+| Files And ABI Surface | Existing `tools/observation/ObserveSoftpcStartup.mjs`, console-owning observer, staged product and observation report. No production ABI change. |
+| Applicable Rules | Execution, source policy, component activation registry, fixed-container observation discipline, CPU40-only and build-output hygiene. |
+| Verification | One observer command against the stage; report/exit review; source attribution only after a concrete marker is observed. |
+| Expected Markers | A source-defined original startup marker, or one exact terminal/rejection marker that is not the previously invalid external-EXE package rejection. |
+| Asset Needs | T357 S1 stage, T356 formal product identity and the existing console-owning observer. |
+| Reporting Requirements | Preserve exact command/output/exit evidence; identify the first original owner boundary; do not infer guest execution from staging or formal linking. |
+| Stop Conditions | Observer/stage identity mismatch; product/media mutation; more than one observation; or a proposed repair before marker attribution. |
+| Exit Criteria | One fixed staged observation is recorded and classified; S3 is either admitted for its named missing owner or T357 reaches its source-defined COMMAND-ready boundary. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+| Similar-Issue Sweep | Stage adjacency, observer product copy, console ownership, media identity and app startup markers. |
+
+**Plan:** [M0 T357 staged boot and COMMAND-ready boundary](etc/operations/m0-t357-cpu40-staged-boot-command-ready-plan-001.md).
+
+**Result:** The one fixed observation reached the app's original-command-path
+admission dialog and timed out there; its 58-character stage root cannot fit
+the existing 64-byte generated shell contract.  This is an app package-stage
+terminal, not a SoftPC, BOP or guest result.  S3 owns the one permitted
+short-path re-stage using the same immutable inputs.
+
+### M0 T357 S3 — Closed capacity-valid stage correction and resumed observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T357 S3; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | T357 S2 identified a source-defined app package-path-capacity terminal under the approved dependency-first sequence. |
+| Objective | Create one new short-path executable-relative stage from the same formal product and immutable media, then resume the identical fixed observation once. |
+| Non-goals | No product/guest/media mutation, host alias, BOP repair, CPU/device semantic change, CPU30, Bochs, x64, CSRSS/kernel VDM, WOW, native child or graphics work. |
+| Reference Baseline | T357 S1 manifest identity, T357 S2 timeout report and `app_package_layout_command_value_fits`'s existing 64-byte original COMMAND contract. |
+| Files And ABI Surface | Existing staging/observation tools, disposable short-path output and observation report only. No production ABI change. |
+| Applicable Rules | Execution, source policy, component activation registry, fixed-container observation discipline, output hygiene and CPU40-only. |
+| Verification | New manifest product/media hashes equal T357 S1; one resumed fixed observer command; exact first original boundary or terminal attribution. |
+| Expected Markers | The app reaches original SoftPC entry rather than the path-capacity dialog, then records either an original startup marker, a named missing owner, or a classified terminal. |
+| Asset Needs | T356 formal product, selected immutable media, Node 22, fixed console-owning observer and new `O:\\t357` stage output. |
+| Reporting Requirements | Record both stage paths, identity equality and exactly one resumed command; do not claim guest execution unless its marker is written. |
+| Stop Conditions | Short output already exists; input hashes change; stage tool/source change is required; or a repair is proposed before source attribution. |
+| Exit Criteria | One capacity-valid stage and one resumed observation are recorded; T357 either reaches a source-defined COMMAND-ready boundary or identifies its single exact immediate missing owner. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+| Similar-Issue Sweep | Original 64-byte shell buffer, executable-relative roots, product/media hashes, short-path identity and observer invariants. |
+
+**Plan:** [M0 T357 staged boot and COMMAND-ready boundary](etc/operations/m0-t357-cpu40-staged-boot-command-ready-plan-001.md).
+
+**Result:** [staged COMMAND-ready observation](etc/evidence/m0-t357-s2-s3-staged-command-ready-observation-001.md).
+
+**T357 closure:** The capacity-valid, immutable staged CPU40 product reached
+the original COMMAND-ready boundary.  It did not prove a completed COMMAND
+`/C` workload, guest child, native child or Win16 execution.  The next
+candidate is therefore the already ordered COMMAND built-in and batch
+lifecycle package; no immediate missing owner component was proven.
+
+**No active M/T/S packet.** M0 T357 closed with staged original COMMAND-ready
+evidence. The next admission must take the first queue candidate, COMMAND
+built-in and batch lifecycle, unless a newer owner directive changes it.
 
 ### M0 T355 S31 — Closed original `0x78` entry-result attribution
 

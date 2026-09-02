@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3773 |
+| Documentation records | 3776 |
 | --- | --- |
-| Generated UTC | 2026-09-02T03:09:14Z |
+| Generated UTC | 2026-09-02T03:26:45Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | 6f414691840d156b2b061285050c6fd1856a6cdee156ac69ce9d9c21518631d4 |
+| QUEUE.md | principal control document | 81e58d013e53102152e2d4c711a87cf9af105c5f9f99f4f18a7effbe6964d682 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 1f7ea6a54451df86e1ecf1ee8d1cab94d02bd72f5d9a3190dbf0d24f486f742e |
+| STATUS.md | principal control document | 6c4efaa27660bf386147d978ab83d28272dcd2fd5922f006d15df6665626ae98 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1175,6 +1175,8 @@ content-divergent entries.
 | etc/evidence/m0-t356-s2-selected-command-recovery-001.md | indexed supporting material | dc801a607595ffabbf8ef28ddd6249e282cb0ae84da9dc549b4c865436ec6358 |
 | etc/evidence/m0-t356-s3-local-and-formal-closure-001.md | indexed supporting material | 1862b92016a11397719f0d7d1e951992c7347b1637c6dbfa76a27cdffea351e4 |
 | etc/evidence/m0-t356-s4-fixed-command-observation-001.md | indexed supporting material | a6fb4147d56718546742873513b1cb88ee696aa02ea2cebd8213cb66478134e4 |
+| etc/evidence/m0-t357-s1-staged-runtime-identity-001.md | indexed supporting material | eab43e90c513ed1f85639caa43dbf15a1fb0f38b74670dfbe0b3f7d0bd8e74ee |
+| etc/evidence/m0-t357-s2-s3-staged-command-ready-observation-001.md | indexed supporting material | 2a3e65159d191530d6a2d6b869ff37b280828b4ca9351629fea3db22bb3542ac |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1913,6 +1915,7 @@ content-divergent entries.
 | etc/operations/m0-t353-s2-processconfig-continuation-ledger.tsv | indexed supporting material | 2e9854b5426af736076b4754ec4a23ba3262e23195150d86d0d66cb218f95cd8 |
 | etc/operations/m0-t354-s1-permanent-command-bootstrap-ledger.tsv | indexed supporting material | 6fc045eebf8c419e46f35b57680077c5668099be0a68c212ddfea1450a8a131f |
 | etc/operations/m0-t356-minimal-dos-execution-controlled-return-plan-001.md | indexed supporting material | 32128e010dd7c54cd80998258a2de9ae83ff350f05302d15190ea8ae311a5512 |
+| etc/operations/m0-t357-cpu40-staged-boot-command-ready-plan-001.md | indexed supporting material | 6140fa28f32d6c3f94d24367a4dda8d980b816e1ab748e6c5b053f8f33f185d3 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
