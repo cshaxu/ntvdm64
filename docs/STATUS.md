@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T386 S1**
+**Active: M0 T386 S3**
 
 ## Active Packet
 
-### M0 T386 S1 — Original COMMAND HMA/arena startup-chain audit
+### M0 T386 S3 — Recover the original COMMAND DOS-arena/layout precondition
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T386 S1; Ordinary Mode (single-person dual-role review). |
-| Admission And Approval | Owner rejected T385's boundary-only closure and directed that the task be reopened: `COMMAND.COM` must genuinely run before closure; guest `COMMAND.COM` must not be modified. |
-| Objective | Establish the complete original NTIO/NTDOS/SoftPC HMA, A20, DOS-high, resident-size and MCB/arena chain that precedes permanent COMMAND's initial environment and its first command-loop acquisition. Classify whether `MVDM-HOST-DIV-200` is a correct retained source-shaped binding or an obsolete workaround. |
-| Non-goals | No edit, rebuild, replacement or patch of guest `COMMAND.COM` or any guest image; no isolated BOP patch; no synthetic DOS loader/input; no `cmdExec32`, external child, WOW, Redirector, CPU30, Bochs or x64-runtime work. |
-| Reference Baseline | T384/T385 records; immutable selected COMMAND hash `908A77AC617C2D741F0AA1B73F73973DCF29ADC91F092E5BCB02173C8C732C43`; original `msint13.asm`, `msbio1.asm`, `sysinit1.asm`, COMMAND `init.asm`/`rdata.asm`; selected CPU40/x86 product. |
-| Files And ABI Surface | Read-only S1: original guest NTIO/NTDOS/COMMAND source and maps; original SoftPC CPU40/A20/SAS/guest-memory initialization; current `cmdenv.c` binding and formal manifests. No production edit is admitted in S1. |
+| Identifier Mode | M0 T386 S3; Ordinary Mode (single-person dual-role implementation/review). |
+| Admission And Approval | Owner rejected closure without actual original COMMAND execution and prohibits modifying `COMMAND.COM`. S2 restored the original `BX` capacity result; its direct observation proved that the present DOS arena/layout lets a `0270`-paragraph retry overwrite still-live `EndInit`. |
+| Objective | Establish and recover the earliest original DOS arena/layout precondition that makes `COMMAND`'s own `SVC_GETINITENVIRONMENT` retry safe, while retaining the original host capacity contract. |
+| Non-goals | No edit, rebuild, replacement or patch of guest `COMMAND.COM` or any guest image; no synthetic DOS loader/input; no environment shortening/fallback; no `cmdExec32`, external child, WOW, Redirector, CPU30, Bochs or x64-runtime work. |
+| Reference Baseline | [corrected S1 HMA/arena audit](etc/evidence/m0-t386-s1-original-command-hma-arena-startup-chain-audit-001.md); immutable selected COMMAND hash `908A77AC617C2D741F0AA1B73F73973DCF29ADC91F092E5BCB02173C8C732C43`; original OpenNT `rdata.asm` and DOS `alloc.asm`; selected CPU40/x86 product. |
+| Files And ABI Surface | Original DOS resident resize/MCB/allocation strategy and host startup bindings proven by the audit; a minimal same-shaped binding or overlay only after the owner is identified; focused evidence and formal build manifest. |
 | Applicable Rules | Execution, source policy, source-recovery audit, guest-load-only, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Source/call/layout audit of `INT 2Fh 4A01/4A02`, `HMAPtr`, `MoveDOSIntoHMA`, `FTryToMovDOSHi`, `FreeHMAPtr`, `ResSize`, MCB allocation and first `54:0F`; current product/configuration identity check. No runtime retry in S1. |
-| Expected Markers | One ordered owner ledger with exact state variables, memory intervals, initialization/caller order, A20/HMA requirement, and a disposition for the prior `BX=0` fallback. |
-| Asset Needs | Selected immutable DOS/COMMAND media, original guest maps/listings, selected SoftPC sources, existing T384/T385 evidence and formal x86 manifest. |
-| Reporting Requirements | Preserve source/artifact identities; distinguish observed facts from hypotheses; identify the smallest original host/machine owner cohort if repair is needed; state explicitly that no guest bytes changed. |
-| Stop Conditions | Any proposed guest `COMMAND.COM` change, unbounded CPU/device rewrite, synthetic command delivery, or a repair beyond the verified owner cohort pauses for a revised S admission. |
-| Exit Criteria | The whole pre-command HMA/arena chain is source-owned and its actual current configuration is classified; a subsequent S can select one smallest source-first repair or retain the fallback with a proved reason. T386 itself cannot close merely on `54:01`: it requires a later immutable COMMAND command-loop/built-in runtime proof. |
+| Verification | Compare original/current source; trace the source-defined resident resize, arena scan and transient relocation order; prove the selected precondition in both directions; guest artifact hash; affected formal build. |
+| Expected Markers | One source-defined MCB/allocation disposition explains the `ES=049F` retry placement; the selected repair keeps the original `BX` result and prevents the live `EndInit` continuation from being overwritten. |
+| Asset Needs | Selected immutable DOS/COMMAND media, original source/maps, current mapping-manager diagnostic support and formal x86 manifest. |
+| Reporting Requirements | Record the source call/layout order, actual allocation intervals, original owner/adapter disposition, precise divergence, and guest identity. |
+| Stop Conditions | Any need to alter COMMAND, synthesize a replacement allocator, shrink the host environment, or change MCB/HMA/device semantics beyond the proven original owner pauses this S. |
+| Exit Criteria | The source owner and immediate missing precondition are proven; the smallest source-shaped recovery is implemented and tested in both directions; the guest stays immutable; formal link remains available for S4. T386 itself cannot close merely on `54:01`: it requires later immutable COMMAND built-in runtime proof. |
 | Original Owner Request | “那你重开这个任务 重做审计 这不合格 你要让command真正跑起来才能收口” and “禁止你修改command.com！”。 |
-| Similar-Issue Sweep | `4A01`, `4A02`, INT 2F vector installation, A20/HMA access, `FreeHMAPtr`, `SysinitPresent`, `MoveDOSIntoHMA`, `FTryToMovDOSHi`, `ResSize`, `ComInHMA`, `INT 21h/48h`, MCB/endmem, `54:0F`, `54:01`, and current fallback entry. |
+| Similar-Issue Sweep | Original `54:0F` required-size returns, all `BX=0` uses, ES:0 mapping leases, COMMAND `EnvSiz` retry, `EndInit`/Pipe overlay, resident `SETBLOCK`, `INT 21h/48h` allocation strategy, MCB spans, transient relocation, and guest identity. |
 
 **Plan:** [M0 T386 original COMMAND runtime recovery](etc/operations/m0-t386-original-command-runtime-recovery-001.md).
 

@@ -21,24 +21,30 @@ binary.
    `FreeHMAPtr`, DOS-high resident sizing, MCB construction/allocation, and
    COMMAND's environment/first-command handoff. Classify the actual
    disposition of `MVDM-HOST-DIV-200`; do not write production code.
-2. **S2 — Smallest original precondition recovery.** Recover only the
-   earliest proven SoftPC/NTIO/NTDOS/host binding missing from S1's original
-   chain. Prefer a directly composable original body, then a same-shaped
-   adapter binding, then a registered minimal overlay. Guest media remains
-   immutable. A capacity fallback may remain only when S1 proves it is the
-   original correct result after all required initialization is present.
-3. **S3 — Formal CPU40/x86 closure.** Link the affected formal product and
+2. **S2 — Original capacity-contract recovery.** Restore the original
+   `cmdGetInitEnvironment` required-paragraph result and establish whether
+   the guest's own retry remains safe in the current layout. This step is
+   complete only as a negative runtime result: the original response is
+   restored, but the resulting large allocation overwrites the still-live
+   `EndInit` continuation.
+3. **S3 — Original DOS arena/layout precondition recovery.** Audit the
+   source-owned resident resize, MCB construction, allocation strategy and
+   transient relocation contract that must make the original retry safe.
+   Recover only the earliest proven owner through an original body,
+   same-shaped binding, or registered minimal overlay. Do not shrink or
+   replace the host environment, and do not alter guest bytes.
+4. **S4 — Formal CPU40/x86 closure.** Link the affected formal product and
    prove the repaired precondition, both valid and failure directions, with
    focused source-shaped checks. Verify no guest source/artifact hash changed
    and no guest object enters the host link graph.
-4. **S4 — Immutable COMMAND runtime proof.** In one fixed console-owning,
+5. **S5 — Immutable COMMAND runtime proof.** In one fixed console-owning,
    non-debug container, prove original COMMAND reaches a real command-loop
    operation: a declared original built-in command is accepted, emits its
    original console result, and follows the original command continuation or
    documented original terminal route. The observation must demonstrate more
    than `54:01`/BOP ingress and must retain product/media/container identity.
-5. **S5 — Closure review.** Review source/adapter ladder, actual diff,
-   immutable COMMAND identity, formal build, focused tests and S4 runtime
+6. **S6 — Closure review.** Review source/adapter ladder, actual diff,
+   immutable COMMAND identity, formal build, focused tests and S5 runtime
    observation. Update the runtime program only after the full proof passes;
    otherwise keep T386 active with the immediate original owner named.
 
