@@ -2,25 +2,25 @@
 
 ## Current Work
 
-### M0 T372 S3 — Active Redirector local-resource DLL composition
+### M0 T372 S4 — Active Redirector mailslot and completion owner groups
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T372 S3; Ordinary Mode (single-person dual-role implementation and review). |
-| Admission And Approval | Admitted after closed T372 S2 under the owner's standing instruction to execute the dependency-ordered queue, with ordinary Git delivery permanently authorized. |
-| Objective | Recover the single original `ntvdm.lib`-equivalent host-import ABI required to compose `VDMREDIR.dll` without a second SoftPC instance, then link its lifecycle, local broker and synchronous named-pipe owner groups. |
+| Identifier Mode | M0 T372 S4; Ordinary Mode (single-person dual-role implementation and review). |
+| Admission And Approval | Admitted after closed T372 S3 under the owner's standing instruction to execute the dependency-ordered queue, with ordinary Git delivery permanently authorized. |
+| Objective | Recover original `vdmredir` mailslot and asynchronous-completion owner groups through the already-closed parent SoftPC import ABI, then prove their checked guest-memory and session-completion behavior. |
 | Non-goals | No isolated `57:xx` enablement; no synthetic Redirector provider; no guest-media mutation; no new COMMAND broker; no CSR/BaseSrv/kernel-VDM recreation; no CPU/device/Bochs/x64 recovery. |
-| Reference Baseline | Closed T372 S1/S2; original `vdmredir.def` and `sources`; T290 local owner-group tests; current CPU40/x86 build generator. |
-| Files And ABI Surface | Formal build generator, one same-shaped SoftPC host-import surface, product stage/manifest and focused original-owner test(s); no provider-body rewrite and no `nt_bop.c` static-link alteration. |
+| Reference Baseline | Closed T372 S1--S3; original `vdmredir.def`, `sources`, `vrmslot.c`, `vrnmpipe.c` and `vrdlcpst.c`; current CPU40/x86 build generator. |
+| Files And ABI Surface | Original mailslot/asynchronous owner bodies, existing same-shaped Redirector/session bindings, focused owner tests and formal CPU40/x86 link audit; no provider-body rewrite and no `nt_bop.c` static-link alteration. |
 | Applicable Rules | Execution, source policy, source-first recovery, immutable guest, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and document rules. |
-| Verification | Generate and execute the formal CPU40/x86 dynamic-DLL build; verify its ten exports and source-shaped successful/failed original load behavior with a bounded local test; run documentation inventory and `git diff --check`. |
-| Expected Markers | One source-shaped host-import ledger, `VDMREDIR.dll`, all ten original exports, original lifecycle entry, session-safe named-pipe binding, no static `nt_bop.c` substitution. |
+| Verification | Compile the original owner bodies, verify completion/cancellation/stale-handle behavior through the checked session mappings, then run the formal CPU40/x86 link audit; run documentation inventory and `git diff --check`. |
+| Expected Markers | Original completion records and ordering, bounded guest leases, session-safe mailslot/pipe identities, no static `nt_bop.c` substitution. |
 | Asset Needs | Current original provider mirror, `vdmredir.def`, adapter/session libraries and disposable `build/M0-T372/S3` root. |
 | Reporting Requirements | Distinguish a load/export/lifecycle proof from any guest `57:xx` execution claim. |
 | Stop Conditions | A required source rewrite, new host policy, changed mapping lifetime, selector activation, or an import requiring an unadmitted external OpenNT package pauses for revised admission. |
-| Exit Criteria | The original host-import surface has a source-first disposition; one actual original DLL image with its original exports formally links and passes its bounded lifecycle/load test; wider provider groups remain unenabled. |
+| Exit Criteria | The original mailslot and asynchronous owner groups have source-first dispositions and focused stale/cancellation/disconnect proof. The complete `VDMREDIR.dll` image remains a T372 S6 whole-package result because its export image also contains the S5 NetAPI/NetBIOS/DLC bodies. |
 | Original Owner Request | Continue the ordered queue in single-person dual-role mode; preserve original mirror-first recovery and do not use trace-selected leaf patches. |
-| Similar-Issue Sweep | `.def` exports, DLL entry, `LoadVdmRedir` success/failure, all nine resolved imports, named-pipe handle identity and stage placement. |
+| Similar-Issue Sweep | Completion record lifetime, mailbox identity, stale/duplicate release, cancellation, disconnect and bounded guest-copy failure. |
 
 **Plan:** [M0 T372 Redirector and host-resource execution](etc/operations/m0-t372-redirector-host-resource-execution-001.md).
 
@@ -31,6 +31,12 @@
 **S3 P1:** [original Redirector DLL import topology](etc/evidence/m0-t372-s3-p1-redirector-dll-import-topology-001.md).
 
 **S3 P2:** [parent SoftPC import ABI closure](etc/evidence/m0-t372-s3-p2-parent-softpc-import-abi-001.md).
+
+**S3 closure:** the original parent `ntvdm.def` surface formally links and
+emits its import library. The initial actual-DLL condition was too early: the
+complete original DLL necessarily contains the later S4 and S5 bodies. It is
+therefore moved to the S6 whole-package reconciliation, without narrowing the
+original provider selection.
 
 ### M0 T371 — Closed XMS, DPMI and DOS-extender execution
 

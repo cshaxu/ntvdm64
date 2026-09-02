@@ -41,12 +41,14 @@ individual `57:xx` trace hits into a provider design.
    same-shaped modern facade, registered external intrusion, then new logic
    only if no historical route remains. Freeze local named-pipe/lifecycle,
    mailslot/async, and public NetAPI/remote group boundaries.
-3. **S3 — Original DLL host-import ABI closure.** First recover the one
+3. **S3 — Original DLL host-import ABI closure.** Recover the one
    source-shaped `ntvdm.lib`-equivalent import surface required to compose the
-   original `VDMREDIR.dll` without a second SoftPC instance. Then compose the
-   lifecycle, local broker and synchronous named-pipe groups through those
-   accepted imports; add focused original-owner tests and formal CPU40/x86
-   link proof.
+   original `VDMREDIR.dll` without a second SoftPC instance. Formally link the
+   parent export table and record any remaining imports by owner group. A
+   complete DLL image is deliberately deferred to S6: the original export
+   image contains the later mailslot/asynchronous and NetAPI/NetBIOS/DLC
+   bodies, so an earlier "local-only DLL" would be a hand-selected product
+   subset rather than the source-defined owner package.
 4. **S4 — Mailslot and completion owner groups.** Compose original mailslot
    and asynchronous-completion groups with copied completion records and
    checked leases; prove stale, cancellation and disconnect failure paths.
@@ -55,8 +57,9 @@ individual `57:xx` trace hits into a provider design.
    source-proven unavailable results for private/downlevel-only paths.
 6. **S6 — Whole-family reconciliation and frozen observation.** Reconcile
    every `57:00..31` entry, brokered DEM/COMMAND consumers, mirror exceptions
-   and adapter ownership; run the declared family matrix and exactly the
-   allowed fixed integration observation.
+   and adapter ownership; formally link the one original `VDMREDIR.dll` image
+   with its source-defined entry and ten exports; then run the declared family
+   matrix and exactly the allowed fixed integration observation.
 
 ## Exit criteria
 
