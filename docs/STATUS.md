@@ -204,7 +204,7 @@ retained `GetVDMAddr` alias.  It includes one focused local file lifecycle
 fixture and a successful formal CPU40/x86 product link; it makes no guest
 execution or product runtime claim.
 
-### M0 T365 S3 — Active formal DOS EXEC product closure
+### M0 T365 S3 — Closed formal DOS EXEC product closure
 
 | Field | Record |
 | --- | --- |
@@ -217,7 +217,33 @@ execution or product runtime claim.
 | Verification | Rebuild/inspect the formal x86 graph and its selected archive/final-link inputs; no runtime observation. |
 | Exit Criteria | One reproducible graph/input record proves every selected S2 source and binding enters the final product, or records an exact linker terminal. |
 
-**Active: M0 T365 S3.**
+**S3 closure:** [formal `.COM` DEM product closure](etc/evidence/m0-t365-s3-formal-dem-com-product-closure-001.md)
+proves that the original DEM objects and their shared session bindings are
+inputs to `original-softpc-process.exe`.  It is a link/input result only.
+
+### M0 T365 S4 — Closed frozen DOS workload observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T365 S4; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted after the closed T365 S3 formal product closure under the owner’s standing ordered-queue authority. |
+| Objective | Run one immutable, low-dependency DOS `.COM` workload in the fixed CPU40/x86 container and record the first source-owned continuation or terminal after the selected file lifecycle. |
+| Non-goals | No trace-derived repair, workload/container variation, guest/media mutation, app loader/parser, native child, MZ relocation, BOP change, CPU/device change, CPU30, Bochs, x64, WOW or Redirector work. |
+| Reference Baseline | T365 S1/S2/S3 closures; existing fixed runtime/media layout and selected `original-softpc-process.exe`. |
+| Files And ABI Surface | Existing app/session launch contract, fixed system media, original guest `$Exec` and selected DEM lifecycle; no source change is admitted in S4. |
+| Verification | One non-debug fixed-container run with controlled timeout and sidecar capture; classify only the first source-owned result after the S2 cohort. |
+| Exit Criteria | The immutable workload has one reproducible observation and exact earliest owner/terminal disposition, or a fixed-container admission failure is recorded. |
+
+**S4 closure:** [frozen `.COM` workload observation](etc/evidence/m0-t365-s4-frozen-com-workload-observation-001.md)
+records the one permitted fixed-container run.  The current bootstrap `/C EXIT`
+record is consumed, then the pre-existing original no-next-command `54:01`
+wait times out before `$Exec`; no trace-derived repair is admitted.
+
+T365 is closed; see its [closure record](history/m0-t365-dos-com-mz-exec-parent-return-closure-20260902.md).
+
+**No active M/T/S packet.** The next packet must be admitted from the
+ordered queue; the frozen S4 terminal does not authorize a trace-driven
+repair.
 
 ### M0 T354 S1 — Closed permanent COMMAND bootstrap owner admission
 
