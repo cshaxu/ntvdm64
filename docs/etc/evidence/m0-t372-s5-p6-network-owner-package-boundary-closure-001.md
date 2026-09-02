@@ -136,3 +136,15 @@ COMMAND, DOS-child or WOW execution follows from this closure.
 * Re-read the post-P5 whole-archive audit.  It lists precisely the owner
   imports enumerated in this record and no unresolved NetLib copy/alloc/status
   helper.
+* Regenerate the formal CPU40/x86 graph and run:
+
+  ```text
+  build\M0-T371\S2\formal-x86\run-ninja-parallel.cmd \
+    original-softpc-candidate
+  ```
+
+  The command completed all 458 formal graph actions successfully.  A
+  subsequent `ninja -t query original-softpc-candidate` named both
+  `original-mvdm-redir.lib` and the selected original
+  `original-opennt-netlib.lib` / `original-opennt-netapi-api.lib` inputs;
+  `ninja -n original-softpc-candidate` reported `no work to do`.

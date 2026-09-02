@@ -2,25 +2,25 @@
 
 ## Current Work
 
-### M0 T372 S5 — Active Redirector public network owner groups
+### M0 T372 S6 — Active Redirector whole-family reconciliation and frozen observation
 
-**Active: M0 T372 S5**
+**Active: M0 T372 S6**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T372 S5; Ordinary Mode (single-person dual-role implementation and review). |
-| Admission And Approval | Admitted after closed T372 S4 under the owner's standing instruction to execute the dependency-ordered queue, with ordinary Git delivery permanently authorized. |
-| Objective | Recover original `vdmredir` public NetAPI, NetBIOS and DLC owner groups through the closed parent SoftPC import ABI; classify private/downlevel-only paths by original failure direction. |
-| Non-goals | No isolated `57:xx` enablement; no synthetic Redirector provider; no guest-media mutation; no new COMMAND broker; no CSR/BaseSrv/kernel-VDM recreation; no CPU/device/Bochs/x64 recovery. |
-| Reference Baseline | Closed T372 S1--S4; original `vdmredir.def`, `sources`, `vrnetapi.c`, `vrnetbios.c` and `vrdlcpst.c`; current CPU40/x86 build generator. |
-| Files And ABI Surface | Original network owner bodies, existing same-shaped Redirector/session bindings, focused source/link evidence and formal CPU40/x86 audit; no provider-body rewrite and no `nt_bop.c` static-link alteration. |
+| Identifier Mode | M0 T372 S6; Ordinary Mode (single-person dual-role implementation and review). |
+| Admission And Approval | Admitted after closed T372 S5 under the owner's standing instruction to execute the dependency-ordered queue, with ordinary Git delivery permanently authorized. |
+| Objective | Reconcile all original `VDMREDIR` exports and `57:00..31` owner entries against S1--S5 source/link dispositions; determine the source-defined dynamic-load result for the selected profile, then run exactly one allowed immutable fixed-container observation. |
+| Non-goals | No isolated `57:xx` enablement; no synthetic Redirector provider; no guest-media mutation; no new COMMAND broker; no CSR/BaseSrv/kernel-VDM recreation; no CPU/device/Bochs/x64 recovery; no invented SMB/RAP, Browser, NetBIOS or DLC product shell. |
+| Reference Baseline | Closed T372 S1--S5; original `vdmredir.def`, `sources`, all provider bodies, parent import ABI and current CPU40/x86 build generator. |
+| Files And ABI Surface | Original `VDMREDIR` export/load contract, existing same-shaped parent/session bindings, full owner/disposition ledger, formal CPU40/x86 graph and fixed observation harness only. No provider-body rewrite and no `nt_bop.c` static-link alteration. |
 | Applicable Rules | Execution, source policy, source-first recovery, immutable guest, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and document rules. |
-| Verification | Compile the original network owner bodies, classify external imports by owner and public availability, run focused source/link proof and the formal CPU40/x86 link audit; run documentation inventory and `git diff --check`. |
-| Expected Markers | Original network owner control flow, public capability bindings or source-proven unavailable paths, bounded guest leases, no static `nt_bop.c` substitution. |
-| Asset Needs | Current original provider mirror, `vdmredir.def`, adapter/session libraries and disposable formal x86 root. |
-| Reporting Requirements | Distinguish a source/link disposition from any guest `57:xx` execution claim. |
-| Stop Conditions | A required source rewrite, changed mapping lifetime, selector activation, or an import requiring an unadmitted external OpenNT package pauses for revised admission. |
-| Exit Criteria | Every S5 network/NetBIOS/DLC owner import has a source-first public binding, source-proven unavailable disposition, or a specific S6 whole-image deferral; no private NT4 transport is silently replaced. |
+| Verification | Reconcile every original export and dispatcher row against the closed source/link evidence; prove the selected parent/DLL loading result without forcing an unresolved product image; run one declared fixed-container observation only after identities and the selected load disposition are frozen; run documentation inventory and `git diff --check`. |
+| Expected Markers | One source-defined `VDMREDIR` availability result, original owner control flow where available, bounded guest leases, no static `nt_bop.c` substitution, and no fabricated remote-network success. |
+| Asset Needs | Current original provider mirror, `vdmredir.def`, parent import ABI, adapter/session libraries, disposable formal x86 root and fixed immutable observation stage. |
+| Reporting Requirements | Distinguish static package closure, dynamic-load disposition and guest observation; never report source-proven unavailable network protocol as executed. |
+| Stop Conditions | A required source rewrite, changed mapping lifetime, selector activation, or an external OpenNT package admission outside the already-recorded owner proposals pauses for revised admission. |
+| Exit Criteria | Every `57:00..31` / export row has one source owner/disposition; the original dynamic-load contract is proven for the selected profile; exactly one immutable fixed observation is classified without claiming unobserved network, COMMAND, DOS-child or WOW behavior. |
 | Original Owner Request | Continue the ordered queue in single-person dual-role mode; preserve original mirror-first recovery and do not use trace-selected leaf patches. |
 | Similar-Issue Sweep | NetAPI/RAP conversion, NetBIOS/DLC completion, public/downlevel API distinction, guest pointer lease, service unavailable and error translation. |
 
@@ -62,6 +62,13 @@ remain deferred to S6.
 **S5 P5:** [original NetLib copy/alloc closure](etc/evidence/m0-t372-s5-p5-original-netlib-copy-closure-001.md).
 
 **S5 P6:** [network owner-package boundary closure](etc/evidence/m0-t372-s5-p6-network-owner-package-boundary-closure-001.md).
+
+**S5 closure:** the original NetLib subset is formally compiled and linked;
+all remaining public-network, NetBIOS and DLC imports have a non-overlapping
+source-first owner disposition.  In particular, the unresolved RpcXlate and
+XACTSRV groups are retained as explicit original unavailable paths rather than
+being replaced by a private LAN/RAP implementation.  No `57:xx` execution or
+dynamic `VDMREDIR.dll` claim is made by S5.
 
 ### M0 T371 — Closed XMS, DPMI and DOS-extender execution
 
