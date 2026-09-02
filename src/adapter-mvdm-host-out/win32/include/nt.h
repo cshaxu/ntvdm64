@@ -30,6 +30,31 @@
  * the historical RTL helpers implemented by this adapter. */
 #include <ntrtl.h>
 
+/* DIVERGENCE(ADAPTER-WIN32-044): modern winternl.h may define the historical
+ * `_NTRTL_` guard before the selected OpenNT ntrtl.h carrier is reached.  In
+ * that case the two source-used list macros are absent and the C compiler
+ * emits external calls.  Retain their original macro shapes here, guarded so
+ * an SDK or selected original declaration wins when present.  These operate
+ * only on caller-owned host-local LIST_ENTRY values; no list service, guest
+ * identity or runtime policy is introduced. */
+#ifndef InsertTailList
+#define InsertTailList(ListHead,Entry) {\
+    PLIST_ENTRY _EX_Blink;\
+    PLIST_ENTRY _EX_ListHead;\
+    _EX_ListHead = (ListHead);\
+    _EX_Blink = _EX_ListHead->Blink;\
+    (Entry)->Flink = _EX_ListHead;\
+    (Entry)->Blink = _EX_Blink;\
+    _EX_Blink->Flink = (Entry);\
+    _EX_ListHead->Blink = (Entry);\
+    }
+#endif
+#ifndef RemoveHeadList
+#define RemoveHeadList(ListHead) \
+    (ListHead)->Flink;\
+    {RemoveEntryList((ListHead)->Flink)}
+#endif
+
 /* DIVERGENCE(ADAPTER-WIN32-035): original `obj.vdm/ntvdm.c` enumerates the
  * NT4 CpuEnv registry key through KEY_VALUE_FULL_INFORMATION.  Modern public
  * user-mode headers expose the query syscall but omit this historical buffer

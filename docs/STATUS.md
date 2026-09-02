@@ -51,6 +51,8 @@ remain deferred to S6.
 
 **S5 P1:** [network owner import disposition](etc/evidence/m0-t372-s5-p1-network-owner-import-disposition-001.md).
 
+**S5 P2:** [RTL list-contract closure](etc/evidence/m0-t372-s5-p2-rtl-list-contract-closure-001.md).
+
 ### M0 T371 — Closed XMS, DPMI and DOS-extender execution
 
 **Plan:** [M0 T371 XMS, DPMI and DOS-extender execution](etc/operations/m0-t371-xms-dpmi-dos-extender-execution-001.md).
