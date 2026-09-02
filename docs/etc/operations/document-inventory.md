@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3808 |
+| Documentation records | 3811 |
 | --- | --- |
-| Generated UTC | 2026-09-02T06:41:00Z |
+| Generated UTC | 2026-09-02T07:00:59Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | fd4965bcc13927f7cb22f20e35e37ca2d243f0013be05d8ed044c6b452b183bd |
+| QUEUE.md | principal control document | 095d60a0e3283b09a7caff4c1c670a8a5c38e05a8c64b2403bb6d1265acb84d7 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 4f2ba64eae33fd995b436656c233f9d926b82e7efa5f13e4a1b0585b25700e3c |
+| STATUS.md | principal control document | 4ea0583bd77d6c3f1c5b362b0c4e423255058f014b6be08a93e9fa7056f655e5 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1204,6 +1204,7 @@ content-divergent entries.
 | etc/evidence/m0-t360-s6-invalid-long-stage-root-observation-001.md | indexed supporting material | 9cf5e98b7aa9e92b92d84cfc0be20da4924cf6c56a77295fb2a1306edce57778 |
 | etc/evidence/m0-t360-s7-owner-root-original-layout-observation-001.md | indexed supporting material | 5f988024627f78a26f5daa568e3d51448ef6d2e676c4e7327987a8c35cc4e300 |
 | etc/evidence/m0-t361-s1-original-font-client-contract-001.md | indexed supporting material | 2f2511b1786b8dbdd39e488f384ba8a987a9e75792ea0ae8bfab1c322b057547 |
+| etc/evidence/m0-t362-s2-first-call-guest-memory-cohort-closure-001.md | indexed supporting material | 818a95b4543224c969beb512d2da19ef75d320f5df2cbebcc5ec677d8edff3c7 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1947,6 +1948,8 @@ content-divergent entries.
 | etc/operations/m0-t359-cpu40-command-initialization-control-flow-plan-001.md | indexed supporting material | 6de402b73c8ce63ceded5cb63866d7a78c92323c88f1835b73d213e9907e1ae7 |
 | etc/operations/m0-t360-original-systemroot-package-layout-recovery-001.md | indexed supporting material | b28e9358cad8711da118efb3484023c02cec1dcebdb3f018266f7176186d2c1f |
 | etc/operations/m0-t361-softpc-window-font-and-client-contract-plan-001.md | indexed supporting material | 3fc27e6812817d8fbf0b4624e88c296939081ac2f55d526a99aae75402c5dd5c |
+| etc/operations/m0-t362-command-built-in-batch-lifecycle-001.md | indexed supporting material | 0ce021b1af20c4dd755960d1d48ad7a835dd64b6f41745ee32e90b62359d38fe |
+| etc/operations/m0-t362-s1-command-initialization-owner-ledger-001.md | indexed supporting material | f114b89c122a4ba8f644af1011a19351892fed74fa0bd3138dd3d28079b2f46a |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |

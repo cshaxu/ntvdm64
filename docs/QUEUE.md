@@ -56,17 +56,16 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Order | Candidate implementation package |
 | --- | --- |
-| 0 | COMMAND built-in and batch lifecycle — resume from the source-shaped `54:05`-before-`54:01` boundary, recover its earliest complete original owner cohort, and prove selected `/C` built-in/batch completion and COMMAND return without claiming external DOS EXEC. |
-| 1 | DOS `.COM`/MZ `.EXE` execution and parent return — prove original `$Exec`, file/JFN/SFT, PSP/arena/environment, child exit and COMMAND continuation. |
-| 2 | COMMAND native-child (`cmdExec32`) lifecycle — prove reached original `54:08/0A/0B` public-CreateProcess/re-entry/return behavior. |
-| 3 | SoftPC conventional-device and DOS workload matrix — prove CPU40 device and I/O contracts reached by bounded DOS workloads. |
-| 4 | XMS, DPMI and DOS-extender execution — prove original XMS/A20/UMB/INT15 and DPMI/DPMI32 runtime paths. |
-| 5 | Redirector and host-resource execution — prove original local resources and bounded public network bindings. |
-| 6 | WOW16 bootstrap, callback and Win16 NE lifecycle — prove selected WOWEXEC/Win16 startup and return paths. |
-| 7 | WOW16 service, UI and host integration matrix — recover selected WOW32 provider subpackages and public bindings. |
-| 8 | Cross-family execution and control-broker closure — reconcile COMMAND/DOS/native-child/WOW lifecycle, events and cleanup. |
-| 9 | SoftPC graphics workload integration — after the closed original-font/exact-client presentation package, run an already-proven DOS graphics workload through original video and app presentation. |
-| 10 | Runtime matrix, x64 compatibility and product release — prove DOS/Win16 matrices, finish x64 profile work and package the product. |
+| 0 | DOS `.COM`/MZ `.EXE` execution and parent return — prove original `$Exec`, file/JFN/SFT, PSP/arena/environment, child exit and COMMAND continuation. |
+| 1 | COMMAND native-child (`cmdExec32`) lifecycle — prove reached original `54:08/0A/0B` public-CreateProcess/re-entry/return behavior. |
+| 2 | SoftPC conventional-device and DOS workload matrix — prove CPU40 device and I/O contracts reached by bounded DOS workloads. |
+| 3 | XMS, DPMI and DOS-extender execution — prove original XMS/A20/UMB/INT15 and DPMI/DPMI32 runtime paths. |
+| 4 | Redirector and host-resource execution — prove original local resources and bounded public network bindings. |
+| 5 | WOW16 bootstrap, callback and Win16 NE lifecycle — prove selected WOWEXEC/Win16 startup and return paths. |
+| 6 | WOW16 service, UI and host integration matrix — recover selected WOW32 provider subpackages and public bindings. |
+| 7 | Cross-family execution and control-broker closure — reconcile COMMAND/DOS/native-child/WOW lifecycle, events and cleanup. |
+| 8 | SoftPC graphics workload integration — after the closed original-font/exact-client presentation package, run an already-proven DOS graphics workload through original video and app presentation. |
+| 9 | Runtime matrix, x64 compatibility and product release — prove DOS/Win16 matrices, finish x64 profile work and package the product. |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).
