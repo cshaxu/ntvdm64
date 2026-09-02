@@ -1097,7 +1097,31 @@ and
 
 ## Active Packet
 
-**No active M/T/S packet.**
+### M0 T381 S2 — Active original `cmdExec32` worker/re-entry cohort recovery
+
+**Active: M0 T381 S2**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T381 S2; ordinary mode (single-person dual-role original-owner recovery). |
+| Admission And Approval | S1 completed the complete original source/ABI/failure ledger and selected one inseparable guest-tail/COMMAND-worker/Base-VDM cohort. |
+| Objective | Prove and, only if necessary, recover exact original command payload, worker creation, child completion, Base VDM retry and `54:08` return as one whole cohort. |
+| Non-goals | No BOP leaf patch, app-owned child launcher, synthetic completion, guest-media mutation, product run, CPU30, Bochs, x64 recovery, DOS PSP return, WOW, Redirector protocol or CSRSS/BaseSrv cross-process broker. |
+| Reference Baseline | T381 S1 ledger; T370 source/binding closure; T380 S1--S4 evidence; current formal CPU40/x86 product and staged package. |
+| Files And ABI Surface | Original `cmdexec.c`/`cmdenv.c`, COMMAND dispatch/callers, Base VDM client/local shapes, session native-child snapshot, cdecl worker bridge, child-only CreateProcess binding and focused source-owner fixture/build input. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, immutable-media, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Focused original-owner proof covers exact child command/arguments, exit 37, `INCREMENT/DECREMENT_REENTER_COUNT`, Base VDM retry, invalid input, cancellation, cleanup and parent-standard-handle isolation; formal source membership remains verified. |
+| Expected Markers | Original `cmdExec` payload and original worker return are observed without raw guest-pointer escape; no process created by app; exact completion result reaches original caller. |
+| Asset Needs | Current original COMMAND/Base VDM/session/Win32 sources, T381 S1 ledger, formal graph and MSVC x86/Ninja build root. |
+| Reporting Requirements | Record every retained/changed binding, payload/result evidence and limitation; distinguish focused proof from later guest runtime proof. |
+| Stop Conditions | A proposed solution substitutes app-owned launch, changes guest media or CPU semantics, introduces a fake completion, expands to DOS PSP/WOW/Redirector/broker behavior or requires a second observation; pause and revise. |
+| Exit Criteria | The whole S1 cohort is source-level proved or repaired with original names/order/failure retained, and one focused original-caller test proves command arguments and exit 37 return. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `54:08`, `54:0A`, `54:0B`, `cmdExec`, `cmdExec32`, `cmdCreateProcess`, `cmdExecComspec32`, `cmdReturnExitCode`, `cmdGetNextCmd`, Base VDM wait/re-entry, worker/thread lifetime, process/stream tokens, cancellation, cleanup and final COMMAND result. |
+
+**Plan:** [M0 T381 original `cmdExec32` stage-to-return recovery](etc/operations/m0-t381-original-cmdexec32-stage-return-recovery-001.md).
+
+**S1 closure:** [original `cmdExec32` stage-to-return ledger](etc/evidence/m0-t381-s1-original-cmdexec32-stage-return-ledger-001.md).
 
 ### M0 T380 — Closed COMMAND native-child runtime activation
 

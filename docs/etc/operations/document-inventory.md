@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3939 |
+| Documentation records | 3941 |
 | --- | --- |
-| Generated UTC | 2026-09-02T17:19:15Z |
+| Generated UTC | 2026-09-02T17:31:57Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | c821dc099b1cb475ca5280f5f40985a718cd477f16388e6e211e4f9b89d3a482 |
+| QUEUE.md | principal control document | 599caf888611bf0f997dbfe1ae71562006b58b45b3aacd5ef19aa5de00aed3a2 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 89a834a0b88037f81e662927e33aeacdc45d3c593473164c7bc412319827797b |
+| STATUS.md | principal control document | bb8ab8eb98a037013b2d4f28d77277bdb439666e25de3bb9bc67435080211e38 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1296,6 +1296,7 @@ content-divergent entries.
 | etc/evidence/m0-t380-s2-command-native-child-lifecycle-confirmation-001.md | indexed supporting material | e7eca167531ea5cc0706eaf902b4a8557befb23632816a65b26d3493ce8a640c |
 | etc/evidence/m0-t380-s3-command-native-child-formal-product-001.md | indexed supporting material | 62656b0017ad52cc99a6415c7f53d528e01bf05e43ca66bbb1cb03428154ceba |
 | etc/evidence/m0-t380-s4-frozen-native-child-observation-001.md | indexed supporting material | ba37ed39fc93dca846d7db35b18bce78816e44adab6e95f1462268ea0d0194f9 |
+| etc/evidence/m0-t381-s1-original-cmdexec32-stage-return-ledger-001.md | indexed supporting material | 478fdb592c9f1ceee357f3b736e89ea16e4c3880616f3b13bd6c96d5c194eb0a |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -2059,6 +2060,7 @@ content-divergent entries.
 | etc/operations/m0-t378-dos-extender-runtime-closure-001.md | indexed supporting material | 776d6e094067a8752f3f8f896015b3908482b51a8932e81b62133836f2a5fb7c |
 | etc/operations/m0-t379-original-vdmredir-runtime-product-activation-001.md | indexed supporting material | 45d92feb207264ba7334d57ec209bf2ef36dd3a36548495fb25ad7d14d538157 |
 | etc/operations/m0-t380-command-native-child-runtime-activation-001.md | indexed supporting material | e94867d55a452f7fda4ab1066567a8b5bc3408ec2bdd048dd18dba54ab664d8f |
+| etc/operations/m0-t381-original-cmdexec32-stage-return-recovery-001.md | indexed supporting material | 938dbebe2b3e1a2d8cfa0b54c3826ec481e9c1dc631f58d3d32af6d800193c21 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
