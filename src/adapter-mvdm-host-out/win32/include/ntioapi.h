@@ -81,7 +81,9 @@ typedef enum _ADAPTER_FS_INFORMATION_CLASS {
 /* Current public winioctl.h already provides OpenNT's exact
  * FSCTL_QUERY_FAT_BPB_BUFFER name and 0x24-byte layout.  Do not redeclare it
  * here: this source-facing adapter must bind the SDK carrier rather than
- * shadow it with an identical private type. */
+ * shadow it with an identical private type.  Some original host units include
+ * only ntioapi.h, so expose the public declaration at this boundary. */
+#include <winioctl.h>
 
 typedef struct _FILE_ALIGNMENT_INFORMATION {
     ULONG AlignmentRequirement;
