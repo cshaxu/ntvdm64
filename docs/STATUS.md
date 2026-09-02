@@ -2,12 +2,31 @@
 
 ## Current Work
 
-### No active packet
+### M0 T371 S2 — Active original XMS startup cohort
 
-M0 T370 is closed.  The ordered queue awaits admission of its next candidate;
-no product source is active under this record.
+**Active: M0 T371 S2.**
 
-**No active M/T/S packet.**
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T371 S2; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from T371 S1's closed source/owner topology audit under the owner's standing ordered-queue authority. |
+| Objective | Recover and prove the earliest whole original XMS startup cohort: selected configuration/UMB setup, `XMSInit`, original VDM/suballoc callback selection and `ExtMemSA` initialization. |
+| Non-goals | No isolated `52:xx` service, synthetic XMS/DPMI result, guest-media mutation, new guest loader, CPU/device change, CPU30, Bochs, x64 recovery, WOW, Redirector, COMMAND/native-child, DPMI/DOSX or cross-family broker work. |
+| Reference Baseline | T371 S1 topology evidence; T370 closure; selected original XMS/suballoc mirrors, existing mapping-manager/CPU40 adapter seam and CPU40/x86 formal product. |
+| Files And ABI Surface | Original `mvdm-host/xms.486`, selected `mvdm-support/suballoc` sources, original configuration/UMB callers and their existing bounded CPU40/session binding. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Original `suballoc` callback declaration/definition/call audit; source-shaped focused XMS initialization proof; formal CPU40/x86 final link. No general guest workload observation. |
+| Expected Markers | The callback argument order is source-proved; original `XMSInit` reaches one source-shaped callback selection, initializes `ExtMemSA`, and preserves its original false/error result; the formal product consumes the selected original XMS archive. |
+| Asset Needs | Existing original mirrors, package ledgers, CPU40/x86 graph, mapping-manager/session binding and focused test infrastructure. |
+| Reporting Requirements | Distinguish focused initialization proof from `52:xx` or guest-runtime proof; record any retained source ambiguity and its disposition. |
+| Stop Conditions | A need to change guest media, make a leaf BOP result, create a private mapper, alter CPU/device semantics, or run a workload requires later S admission. |
+| Exit Criteria | The complete original XMS startup cohort has source/focused/link evidence, or an earlier original terminal is precisely recorded without replacement behavior. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `XMSInit`, `xmsMemorySize`, UMB reservation, `VdmAllocateVirtualMemory`, `SAInitialize`, move/commit/decommit callback signatures, `ExtMemSA`, CPU40/SAS and mapping-manager ownership. |
+
+**Plan:** [M0 T371 XMS, DPMI and DOS-extender execution](etc/operations/m0-t371-xms-dpmi-dos-extender-execution-001.md).
+
+**S1 closure:** [original XMS, DPMI and DOS-extender execution topology](etc/evidence/m0-t371-s1-original-xms-dpmi-execution-topology-001.md).
 
 ### M0 T370 — Closed original COMMAND native-child lifecycle
 

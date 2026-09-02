@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3862 |
+| Documentation records | 3864 |
 | --- | --- |
-| Generated UTC | 2026-09-02T09:51:50Z |
+| Generated UTC | 2026-09-02T10:02:33Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | 26e17913947e71d759d9f8beed601854b36055ccc3251929c6647418e44df2e7 |
+| QUEUE.md | principal control document | 553deaa4fff1d9e4db0c8da0d8c4fff391375409dadcc4f46383fded1fea0e22 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 48c84d1f2c808f87985d019f42b8cbb987ded27d39c0700338b601905a6c024a |
+| STATUS.md | principal control document | 6a41adef01a9f67e220cb903bd7061bfd4b25add890106d725825f758c67c2b7 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1239,6 +1239,7 @@ content-divergent entries.
 | etc/evidence/m0-t370-s2-source-shaped-native-child-recovery-001.md | indexed supporting material | c4599823a83f49f5cdadb9276ecbd5d13a6c36dcf7aafd39be8b360153ac3da3 |
 | etc/evidence/m0-t370-s3-formal-native-child-link-001.md | indexed supporting material | 9573e087db514a719b993953b7bc42e63d2f25971c8b1dc8584de53235c615f4 |
 | etc/evidence/m0-t370-s4-fixed-native-child-observation-001.md | indexed supporting material | 8cf0d5baaaa82953b78d7c213c11d8c28d6f320d5a70a1cd003af048e30d3787 |
+| etc/evidence/m0-t371-s1-original-xms-dpmi-execution-topology-001.md | indexed supporting material | 45362af0169d414a64c27170cf3554f3b61e54bdc384713ad8f33089d81a2d67 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1992,6 +1993,7 @@ content-divergent entries.
 | etc/operations/m0-t368-command-post-record-execution-continuity-001.md | indexed supporting material | f0c5c11b8428e2d7aeae376482409873b165a3c6ce58073739a3c77c812653c0 |
 | etc/operations/m0-t369-original-dos-exec-parent-return-001.md | indexed supporting material | 3477b20d8733ea2bccff39498565af57ae15d5528937fec39c58bd8fa6e4e3f9 |
 | etc/operations/m0-t370-original-command-native-child-lifecycle-001.md | indexed supporting material | 884dbf48f532918aaba037fa1f4c88d24c11602356ee37ef19fe18523734ab88 |
+| etc/operations/m0-t371-xms-dpmi-dos-extender-execution-001.md | indexed supporting material | 15305510c111bac06be0b7d53fbd85241c1d902f658537eac72dd5cb2fcf65b4 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
