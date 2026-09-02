@@ -2,14 +2,31 @@
 
 ## Current Work
 
-### No M/T/S packet is active
+### M0 T374 S1 — Active whole WOW32 provider matrix and admission cohort
 
-**No active M/T/S packet.**
+**Active: M0 T374 S1**
 
-M0 T373 is closed as source-shaped unavailable: the formal CPU40/x86 graph
-selects neither the original WOW32 product cohort nor WOW16 media, so the
-original `MS_bop_1` dynamic-load failure direction is the exact current
-disposition.  See the [T373 closure](history/m0-t373-wow16-bootstrap-callback-ne-lifecycle-closure-20260902.md).
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T374 S1; ordinary mode (single-person dual-role implementation and review). |
+| Admission And Approval | Admitted from T373's exact original WOW32 dynamic-ingress boundary under the owner's standing instruction to execute the dependency-ordered queue, preserve mirror-first recovery and deliver ordinary Git commits. |
+| Objective | Produce a complete source-first matrix for all active original WOW32 provider bodies, generated dispatch rows and immediate historical host edges; select one smallest complete dynamic-ingress cohort or prove the earlier non-composable boundary. |
+| Non-goals | No static `W32Dispatch` route, partial service enablement, substitute WOW32 DLL, synthetic task/NE loader, guest mutation, fast WOW, CurrentMonitorTeb, CSRSS/kernel VDM, second broker, arbitrary USER/GDI emulation, CPU/device/Bochs/x64 work or runtime observation. |
+| Reference Baseline | T373 S1--S5 evidence; `m0-t276-s25-wow32-provider-final-disposition-baseline-001.md`; `m0-t277-divergence-exclusion-ledger.tsv`; selected CPU40/x86 formal graph. |
+| Files And ABI Surface | Evidence/plan/governance only in S1; original `wow32` sources, dispatch declarations, adapter boundary declarations and current build manifests are read-only inputs. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and document rules. |
+| Verification | Full active-WOW32 source/dispatch/import inventory; compare selected prerequisites with the formal graph; document four-rung recovery disposition and potential mapping-manager spans. No product run. |
+| Expected Markers | Each active provider has owner/subdomain, direct dependency class, product-selection status and one disposition; one complete cohort or exact earlier boundary is selected without a trace-derived leaf list. |
+| Asset Needs | Existing immutable `mvdm-host/wow32` mirror, T276/T277 ledgers, source indexes and formal CPU40/x86 manifest only. |
+| Reporting Requirements | Distinguish source inventory from a selected runtime cohort; retain original layout/order evidence; name every private dependency that prevents direct composition. |
+| Stop Conditions | A need to modify a provider, add a DLL/media, implement an individual service, alter a guest/machine behavior or broaden to an unreviewed owner package pauses for a later S admission. |
+| Exit Criteria | The entire active provider/dispatch surface has source-first disposition and the smallest complete `W32Init`/`W32Dispatch` cohort or exact earlier unavailable boundary is recorded. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `MS_bop_1`, `W32Init`, `W32Dispatch`, `WK32WOWInitTask`, `aw32WOW`, USER/GDI registration, shared WOW state, shell/provider rows, mapping-manager identity and formal source selection. |
+
+**Plan:** [M0 T374 WOW16 service, UI and host integration](etc/operations/m0-t374-wow16-service-ui-host-integration-001.md).
+
+**Predecessor:** [T373 WOW16 bootstrap, callback and NE lifecycle closure](history/m0-t373-wow16-bootstrap-callback-ne-lifecycle-closure-20260902.md).
 
 ### M0 T372 — Closed Redirector and host-resource execution
 
