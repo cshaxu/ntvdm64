@@ -2,6 +2,40 @@
 
 ## Current Work
 
+### M0 T369 S4 — Closed fixed original workload observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T369 S4; ordinary mode (single-person dual-role implementation; closed). |
+| Admission And Approval | Admitted by T369 S3's formal original EXEC boundary under the owner's standing instruction to execute the ordered queue. |
+| Objective | Make one non-debug fixed-container observation using the rebuilt observer, current formal product, current `O:\\ntvdm64` package and immutable original `LOADFIX.COM`; classify the earliest source-owned result. |
+| Non-goals | No host executable loader, synthetic PSP/child/parent, guest-media mutation, BOP leaf patch, command-parser change, CPU/device change, native child, WOW, Redirector, graphics or product run. |
+| Reference Baseline | T369 S1--S3 evidence; current formal CPU40/x86 product; rebuilt observer and immutable staged media. |
+| Files And ABI Surface | Existing observer, current formal product, fixed stage and reports only; no production source/ABI change. |
+| Applicable Rules | Execution, source policy, source-first recovery, guest-load-only, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Product/media hash comparison and exactly one bounded console-owning, non-debug observation. |
+| Expected Markers | `$Exec`, `50:16`, child entry, `$Exit`/parent recovery, an earlier original terminal or a later exact owner. |
+| Asset Needs | Current formal x86 product, rebuilt observer, fixed `O:\\ntvdm64` stage and immutable original `LOADFIX.COM`. |
+| Reporting Requirements | Record the single command and exact identities; distinguish observation from universal DOS/MZ completion. |
+| Stop Conditions | A need to modify guest media, add a loader or synthetic child, alter CPU/device semantics, patch an isolated BOP or run the product requires a later S admission. |
+| Exit Criteria | One valid fixed observation is retained and classified against S1's source topology. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | Stage/product/observer identity, `$Exec`, normal `50:16`, child entry, `$Exit`, parent restoration, COMMAND continuation and controlled timeout. |
+
+**Plan:** [M0 T369 original DOS EXEC and parent return](etc/operations/m0-t369-original-dos-exec-parent-return-001.md).
+
+**S1 evidence:** [revalidated original DOS EXEC and parent-return ledger](etc/evidence/m0-t369-s1-revalidated-original-dos-exec-parent-return-ledger-001.md).
+
+**S2 evidence:** [current observation-container closure](etc/evidence/m0-t369-s2-current-observation-container-closure-001.md).
+
+**S3 evidence:** [formal original EXEC-boundary closure](etc/evidence/m0-t369-s3-formal-original-exec-boundary-closure-001.md).
+
+**S4 evidence:** [current-layout original LOADFIX observation](etc/evidence/m0-t369-s4-current-layout-original-loadfix-observation-001.md).
+
+**T369 closure:** [original DOS EXEC and parent-return closure](history/m0-t369-original-dos-exec-parent-return-closure-20260902.md).
+
+**No active M/T/S packet.** The next candidate is COMMAND native-child lifecycle in [QUEUE.md](QUEUE.md).
+
 ### M0 T368 S4 — Closed identity-proven fixed original `.COM` observation
 
 | Field | Record |
@@ -34,7 +68,7 @@
 
 **T368 closure:** [COMMAND post-record execution continuity closure](history/m0-t368-command-post-record-execution-continuity-closure-20260902.md).
 
-**No active M/T/S packet.** The next candidate is the original DOS `.COM`/MZ execution and parent-return package in [QUEUE.md](QUEUE.md).
+At T368 closure there was no active packet; T369 now owns the original DOS `.COM`/MZ execution and parent-return package.
 
 ### M0 T367 S1 — Closed original DOS EXEC/parent-return owner ledger
 
