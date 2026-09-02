@@ -1097,25 +1097,25 @@ and
 
 ## Active Packet
 
-### M0 T379 S3 — Active original VDMREDIR local resource/lifecycle closure
+### M0 T379 S4 — Active original VDMREDIR formal activation matrix
 
-**Active: M0 T379 S3**
+**Active: M0 T379 S4**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T379 S3; ordinary mode (single-person dual-role original-owner recovery). |
-| Admission And Approval | Admitted by S2's formal original DLL/parent-loader closure. |
-| Objective | Close the original local file/pipe/mailslot/completion lifecycle cohort selected by S1, including stale/cancel/disconnect directions, before an activation observation. |
+| Identifier Mode | M0 T379 S4; ordinary mode (single-person dual-role original-owner recovery). |
+| Admission And Approval | Admitted by S3's complete local resource/lifecycle owner matrix and focused x86 proof. |
+| Objective | Package the formally linked original `VDMREDIR.dll` beside the selected CPU40 parent and immutable `REDIR.EXE`; prove normal loader and retained failure directions without a product observation. |
 | Non-goals | No `57:xx` leaf patch, synthetic Redirector, guest-media rewrite, runtime observation, CPU30, Bochs, x64 recovery, broker, native-child, WOW, SMB/RAP client or selective XACTSRV import. |
-| Reference Baseline | S1/S2 evidence, T372 closure, original `mvdm-host/vdmredir` mirror, current CPU40 DLL and existing same-shaped Redir/session bindings. |
-| Files And ABI Surface | Original `vrmslot.c`, `vrnmpipe.c`, `vrinit.c` and their existing local same-shaped binding interfaces; remote sources retain S2's explicit package-level unavailable direction. |
+| Reference Baseline | S1--S3 evidence, T372 closure, formal original CPU40 parent/DLL and immutable selected workload. |
+| Files And ABI Surface | Existing stager/package manifest, original parent dynamic loader, original DLL and selected immutable `REDIR.EXE`; no provider-body change. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, immutable-media staging, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Whole lifecycle source/adapter audit, focused local positive/negative ownership proof and formal CPU40 DLL re-link. No product run. |
-| Expected Markers | One local lifecycle matrix covers creation, completion, cancellation, stale handle/session teardown and original failure ordering without a raw guest/native identity escape. |
+| Verification | Formal parent/DLL package matrix, product and media identity check, loader normal/failed path proof and governance checks. No product run. |
+| Expected Markers | One staged parent/DLL pair with an exact dependency location; successful original loader eligibility and retained `ERROR_INVALID_FUNCTION` direction for absent/invalid activation. |
 | Asset Needs | Current original mirror, T372 evidence, formal CPU40 graph, current stage and immutable workload candidates. |
-| Reporting Requirements | Record every reached local lifecycle transition, owner and exact unavailable/failure direction; distinguish local host resources from remote RAP/network routes. |
+| Reporting Requirements | Record parent/DLL/workload identities and the loader paths; distinguish formal/package proof from S5 runtime observation. |
 | Stop Conditions | A required second provider, private CSR/RPC recreation, guest rewrite, raw host pointer carrier, CPU/machine change or trace-selected leaf implementation requires revised package admission. |
-| Exit Criteria | The selected local lifecycle cohort has one complete source-shaped owner/disposition matrix and focused evidence; S4 may package the original DLL beside the parent. |
+| Exit Criteria | The formal parent/DLL/workload activation matrix has source/package evidence and S5 may make the one frozen observation. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `MS_bop_7`, `LoadVdmRedir`, `GetProcAddress`, `.def`, exports, `VrDispatch`, `cmdredir`, DEM consumers, local handles/leases, pipes, mailslots, completions, NetAPI, NetBIOS, DLC, RAP and private RPC. |
 
@@ -1124,6 +1124,8 @@ and
 **S1 closure:** [original VDMREDIR product admission](etc/evidence/m0-t379-s1-original-vdmredir-product-admission-001.md).
 
 **S2 closure:** [original VDMREDIR DLL and parent-loader closure](etc/evidence/m0-t379-s2-original-vdmredir-dll-parent-loader-closure-001.md).
+
+**S3 closure:** [original VDMREDIR local resource/lifecycle closure](etc/evidence/m0-t379-s3-local-resource-lifecycle-closure-001.md).
 
 ### M0 T378 — Closed DOS-extender runtime closure
 
