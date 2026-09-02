@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3768 |
+| Documentation records | 3770 |
 | --- | --- |
-| Generated UTC | 2026-09-02T01:20:58Z |
+| Generated UTC | 2026-09-02T01:27:02Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | be024a4078cfe2fe5062d31aadac7f08fd837a15d63fb28c776122bf423f0bfd |
+| QUEUE.md | principal control document | 1347c0a4542e25ecc74a7ae626e6519dcd60d1c4305d0666a6e3bd3aa1a8a1cb |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 34488da6c8bdd25a291d31e4c3b3c5c73582d507fd9180ec512a750a0f0ddd49 |
+| STATUS.md | principal control document | 33fa39203e0e18a89c2d782959d711467916338e529d1b3f36e1a32963235a9d |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1174,6 +1174,7 @@ content-divergent entries.
 | etc/evidence/m0-t356-s1-minimal-dos-execution-controlled-return-topology-audit-001.md | indexed supporting material | 158df661ea0915bdbe91d26eaac355b526526836f3948573ec2b0127bd803603 |
 | etc/evidence/m0-t356-s2-selected-command-recovery-001.md | indexed supporting material | dc801a607595ffabbf8ef28ddd6249e282cb0ae84da9dc549b4c865436ec6358 |
 | etc/evidence/m0-t356-s3-local-and-formal-closure-001.md | indexed supporting material | 1862b92016a11397719f0d7d1e951992c7347b1637c6dbfa76a27cdffea351e4 |
+| etc/evidence/m0-t356-s4-fixed-command-observation-001.md | indexed supporting material | a6fb4147d56718546742873513b1cb88ee696aa02ea2cebd8213cb66478134e4 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -2023,6 +2024,7 @@ content-divergent entries.
 | etc/operations/proposal-cpu40-ntdos-permanent-command-bootstrap-001.md | indexed supporting material | b3d6111992df923c28c4e2012e2d7c5a8ff320ef64a5c49fa0cd377898fa5875 |
 | etc/operations/proposal-cpu40-ntdos-post-cmdgetconfigsys-continuity-001.md | indexed supporting material | bf77dd8d4a1e7455c1c129e60a8c92ee4a871adcf8f44b9188d585254528d783 |
 | etc/operations/proposal-cpu40-ntdos-post-cmdsetinfo-continuity-001.md | indexed supporting material | 82bc1bceb4dbd66e670e3d7b113a988facdb20f2796476ea7cc215df9c123d92 |
+| etc/operations/proposal-cpu40-package-stage-observation-001.md | indexed supporting material | a855b5a083b8021191ca8326be84e7707f42041449cb900071507972392ad7ec |
 | etc/operations/proposal-cpu40-recursive-frame-guest-reentry-closure-001.md | indexed supporting material | d25d052c69494729b58ea8b30835a2e68ef057a0ff6d64bcd9b2c5c58399d33c |
 | etc/operations/proposal-current-naming-convergence-001.md | indexed supporting material | 214c6356a2a52f218e4d128d1598f7b6956e6bddc397db8b597d56bff63d7e23 |
 | etc/operations/proposal-dos-wow16-complete-source-build-closure-001.md | indexed supporting material | 3da5ac3935fbee1542946e0dfedf75d841836e0e0c7151536e88f5c44854f862 |

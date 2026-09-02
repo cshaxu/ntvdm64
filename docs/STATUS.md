@@ -488,6 +488,10 @@ and
 
 ## Active Packet
 
+**No active M/T/S packet.** M0 T356 is closed by the exact app-owned
+package-stage transfer recorded below.  The next candidate remains in
+`docs/QUEUE.md` pending owner admission.
+
 ### M0 T355 S31 — Closed original `0x78` entry-result attribution
 
 | Field | Record |
@@ -614,7 +618,7 @@ trace-selected repair or guest-execution claim.
 
 **S3 closure:** [Local and formal closure evidence](etc/evidence/m0-t356-s3-local-and-formal-closure-001.md) records a passing task-owned x86 Base VDM fixture and a fresh 428-action CPU40/x86 formal link.  Neither is guest-execution evidence.
 
-### M0 T356 S4 — Active fixed-container selected DOS command observation
+### M0 T356 S4 — Closed fixed-container selected DOS command observation
 
 | Field | Record |
 | --- | --- |
@@ -636,7 +640,20 @@ trace-selected repair or guest-execution claim.
 
 **Plan:** [M0 T356 minimal DOS guest execution and controlled return](etc/operations/m0-t356-minimal-dos-execution-controlled-return-plan-001.md).
 
-**Active: M0 T356 S4.**
+**S4 closure:** [fixed command observation](etc/evidence/m0-t356-s4-fixed-command-observation-001.md)
+records one non-timeout `0x41` exit.  It source-attributes that exit to the
+app's image-relative package-media admission, before original SoftPC or guest
+execution.  It does not claim that `COMMAND.COM`, NTDOS `EXEC`, or `EXIT` ran.
+
+### M0 T356 — Closed by exact package-stage transfer
+
+T356 is source and formal-build closed for its selected original COMMAND/NTDOS
+cohort, but it did not establish its requested guest execution/controlled
+return.  Its single fixed observation instead proved a prior app package-stage
+terminal: the fresh formal executable was not placed beside its immutable
+`mvdm` media.  The bounded successor is
+[CPU40 package-stage observation closure](etc/operations/proposal-cpu40-package-stage-observation-001.md).
+No trace-selected source repair is authorized by this closure.
 
 | Field | Record |
 | --- | --- |

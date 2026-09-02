@@ -35,9 +35,11 @@ executed.
 The detailed proposal, predecessor, delivery and exclusions for every queue
 item are in the [package recovery proposal set](etc/operations/package-recovery-program-20260827.md).
 
-**Minimal DOS guest execution and controlled return** is the required
-predecessor of the first candidate below.  It is already active and therefore
-deliberately absent from this candidate-only queue.
+**Minimal DOS guest execution and controlled return** is closed by an exact
+app package-stage transfer.  Its one observation proved that the formal
+executable must first be staged beside the immutable `mvdm` media; it made no
+guest-execution claim.  The first candidate below is therefore the required
+predecessor of graphics-workload integration.
 
 MVDM host mirror-topology recovery is already closed. `CPU_30_STYLE` is an
 NT4 kernel-VDM V86 monitor rather than a software CCPU profile, and is
@@ -49,8 +51,9 @@ production route nor an acceptance row.
 
 | Order | Candidate implementation package |
 | --- | --- |
-| 1 | SoftPC graphics-workload integration continuation — only after its named permanent-COMMAND bootstrap predecessor proves a reachable selected DOS workload, run the fixed selected CPU40/x86 container through one graphics-mode workload and close the remaining presentation-runtime criterion without changing controller or guest semantics. |
-| 2 | Product release closure |
+| 1 | CPU40 package-stage observation closure — stage a fresh CPU40/x86 formal executable beside its hash-verified immutable `mvdm` media with the existing product-stage tool, then make one fixed non-debug observation and source-classify its first post-admission result. |
+| 2 | SoftPC graphics-workload integration continuation — only after its named permanent-COMMAND/bootstrap and package-stage predecessors prove a reachable selected DOS workload, run the fixed selected CPU40/x86 container through one graphics-mode workload and close the remaining presentation-runtime criterion without changing controller or guest semantics. |
+| 3 | Product release closure |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).
