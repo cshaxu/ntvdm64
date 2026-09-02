@@ -653,7 +653,7 @@ the selected CPU40 path attempts to execute immutable `COMMAND.COM` data at
 
 **S1 closure:** [original COMMAND transient control-flow map](etc/evidence/m0-t359-s1-command-transient-control-flow-map-001.md) establishes the whole original COMMAND resident-to-transient allocation/move/reload and NTDOS prerequisite cohort as the owner.  CCPU transfer files, immutable image identity, and the BOP result are not the repair seam.
 
-### M0 T359 S2 — Active original COMMAND transient lifecycle recovery
+### M0 T359 S2 — Closed original COMMAND transient lifecycle recovery
 
 | Field | Record |
 | --- | --- |
@@ -666,9 +666,37 @@ the selected CPU40 path attempts to execute immutable `COMMAND.COM` data at
 | Exit Criteria | Every owner edge has a selected original body or a same-shaped binding, local lifecycle evidence preserves normal and failure paths, and S3 has a bounded formal-link input list. |
 | Original Owner Request | “非常好，按照这个顺序执行。” |
 
-**Active: M0 T359 S2.**
-
 **S2 P1:** [COMMAND transient SAS-write binding](etc/evidence/m0-t359-s2-command-transient-sas-write-binding-001.md) expands the existing default-off, selector-blind CCPU SAS observer from one CONFIG byte to the one original byte/word/dword write contract needed to observe `TrnSeg` and `HavCom` control data.  A fresh CPU40/x86 formal graph linked all 428 actions; no renewed runtime observation or lifecycle-completion claim is made.
+
+**S2 closure:** [COMMAND transient owner/binding closure](etc/evidence/m0-t359-s2-command-transient-owner-binding-closure-001.md) proves that the selected original `MS_bop_0 -> DemDispatch -> 50:00/02/12/16` cohort has no missing immediate same-shaped NTDOS/DEM binding.  Its normal and failure directions remain original; the remaining question is runtime state, not a permitted synthetic repair.
+
+### M0 T359 S3 — Closed local SAS-store conformance and formal link
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T359 S3; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by closed T359 S2 under ordered dependency-first execution. |
+| Objective | Prove the bounded SAS write observer's local default-off and overlap contract, and formally link the selected original COMMAND/NTDOS/DEM/CPU40 cohort before one renewed frozen observation. |
+| Non-goals | No guest execution, COMMAND/NTDOS/DEM semantic change, CPU rewrite, BOP leaf repair, media mutation, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, Redirector, EXEC or graphics work. |
+| Verification | Reproducible x86 Ninja fixture plus fresh CPU40/x86 formal product link; governance/export and diff review. |
+| Exit Criteria | The observer proves no hidden session/guest-memory dependency and the selected product links without converting a local result into a lifecycle claim. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+
+**S3 closure:** [SAS-store observer local conformance](etc/evidence/m0-t359-s3-sas-store-observer-local-conformance-001.md) passes its 5-action x86 Ninja graph.  The formal product remains linked at 428 actions.  Neither result is guest-runtime evidence.
+
+### M0 T359 S4 — Active frozen resumed observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T359 S4; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by closed T359 S3 under ordered dependency-first execution. |
+| Objective | Make exactly one immutable CPU40/x86 resumed `/C EXIT` observation, watching only the source-mapped `TrnSeg` control-word range, and record whether original execution reaches `54:01` or a narrower source-owned boundary. |
+| Non-goals | No retry, no second workload, no COMMAND/NTDOS/DEM/CPU/BOP repair, no guest or media mutation, no new mapping, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, Redirector, EXEC or graphics work. |
+| Verification | Fresh staged capacity-valid package; product and media identity; one bounded run; copied observer report and terminal report; governance/export and diff review. |
+| Exit Criteria | One immutable run records the configured post-store controls and either reaches original `54:01` or names one exact preceding original owner boundary. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+
+**Active: M0 T359 S4.**
 
 ### M0 T355 S31 — Closed original `0x78` entry-result attribution
 
