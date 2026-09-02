@@ -56,7 +56,7 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Order | Candidate implementation package |
 | --- | --- |
-| 0 | COMMAND command delivery and built-in dispatch — recover the later original `54:01` continuation reached by the closed conventional-device workload, including source queue/continuation state, `/C` declaration delivery, built-in dispatch and original return/failure direction. |
+| 0 | Declared DOS workload command delivery — publish one immutable, source-shaped DOS `.COM` command record through the existing BaseClient/COMMAND route, then prove the handoff reaches original `$Exec` or one exact earlier original terminal. |
 | 1 | DOS `.COM`/MZ `.EXE` execution and parent return — prove original `$Exec`, file/JFN/SFT, PSP/arena/environment, child exit and COMMAND continuation. |
 | 2 | COMMAND native-child (`cmdExec32`) lifecycle — prove reached original `54:08/0A/0B` public-CreateProcess/re-entry/return behavior. |
 | 3 | XMS, DPMI and DOS-extender execution — prove original XMS/A20/UMB/INT15 and DPMI/DPMI32 runtime paths. |

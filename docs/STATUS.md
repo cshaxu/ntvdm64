@@ -2,6 +2,54 @@
 
 ## Current Work
 
+### M0 T366 S1 — Closed declared DOS workload command-record owner ledger
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T366 S1; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from the dependency-first queue after T365's closed frozen observation, under the owner's standing instruction to execute the ordered queue. |
+| Objective | Establish the complete original BaseClient/BaseSrv/COMMAND contract for publishing one immutable declared DOS `.COM` workload record, and select the whole bounded S2 recovery cohort or an exact earlier source terminal. |
+| Non-goals | No new command parser, synthetic guest loader, guest/media mutation, BOP leaf repair, DEM/JFN change, MZ relocation, native child, BaseSrv/CSRSS recreation, CPU/device/video change, CPU30, Bochs, x64 runtime, WOW or Redirector work. |
+| Reference Baseline | T364 command-delivery closures; T365 S1–S4 closures; original `base/win32/client/vdm.c`, `base/win32/server/srvvdm.c`, `dos/command/cmdmisc.c`; current app launch declaration and selected CPU40/x86 product. |
+| Files And ABI Surface | Original `VDMINFO`/Base VDM command record and copy/retry contract; app launch declaration; `adapter-mvdm-host-out/basesrv`; session broker. No guest pointer, host HANDLE or CPU ABI change. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Original definition/caller/data-flow audit, current route comparison, focused record-lifecycle fixture/negative cases, formal graph inspection and governance checks. No product observation in S1. |
+| Expected Markers | One source-shaped record distinguishes COMMAND.COM bootstrap from a declared DOS workload; exact application, command, environment, directory, copy, consume and unavailable/wait behavior each have an owner. |
+| Asset Needs | Existing immutable guest/media root, original mirrors, current formal CPU40/x86 manifest and source indexes only; no new guest bytes or host mutation. |
+| Reporting Requirements | Separate original source fact from current app/broker binding; record whether the selected record needs only an existing direct body, a same-shaped adapter binding, or an exact later owner. |
+| Stop Conditions | A need to invent DOS parsing, change original COMMAND/DEM behavior, add a guest byte, retain a raw pointer, alter CPU/device/video behavior, rerun the fixed container, or enter an unrelated package requires a new S admission. |
+| Exit Criteria | Every immediate command-record edge has one original/source-shaped owner and disposition, and S2 is a finite whole record-delivery cohort or an earlier terminal is precisely recorded. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `GetNextVDMCommand`, `BaseSrvGetNextVDMCommand`, `VDMINFO`, BaseClient capture/copy, `CMDINFO`, app `--command` declaration, record consume/wake and ordinary no-next-command wait. |
+
+**Plan:** [M0 T366 declared DOS workload command delivery](etc/operations/m0-t366-declared-dos-workload-command-delivery-001.md).
+
+**S1 closure:** [declared DOS workload record owner ledger](etc/evidence/m0-t366-s1-declared-dos-workload-record-ledger-001.md)
+proves the app already emits the source-shaped `COMMAND.COM /C …` record but
+omits its existing DOS owner discriminant before the selected BaseVDM broker.
+
+### M0 T366 S2 — Active source-shaped declared DOS record recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T366 S2; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from closed T366 S1 under the owner's standing ordered-queue authority. |
+| Objective | Restore the omitted DOS owner discriminant at the sole app record-construction point and prove the existing copied BaseClient/BaseSrv-shaped route publishes, delivers and consumes one declared `.COM` record. |
+| Non-goals | No parser, guest/media mutation, BOP/DEM/COMMAND body change, DOS execution, MZ/native child, BaseSrv/CSRSS recreation, CPU/device/video change, CPU30, Bochs, x64 runtime, WOW or Redirector work. |
+| Reference Baseline | T366 S1 ledger; existing original COMMAND/BaseClient/BaseSrv mirrors; app launch declaration; selected formal CPU40/x86 graph. |
+| Files And ABI Surface | `app/launch_declaration.c`; existing `base_vdm_command` owner field and broker/local record fixture only. No new public ABI. |
+| Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Focused declared-record positive/negative lifecycle fixture; formal CPU40/x86 link inspection; governance checks. No product run. |
+| Expected Markers | One app-created `BASE_VDM_COMMAND_DOS` record reaches the copied local BaseVDM store, preserves command/application/environment/directory bytes, then follows the existing consume/empty result. |
+| Asset Needs | Existing source/tree and formal x86 build root only; no new media or host mutation. |
+| Reporting Requirements | Record the single changed field, original source contract, local test result and formal-input result; distinguish it from guest `$Exec`. |
+| Stop Conditions | Any need for a new command grammar, source-body rewrite, new guest byte, raw pointer, BOP behavior, runtime observation or other owner package requires a new admission. |
+| Exit Criteria | Existing route accepts and delivers one declared DOS record with positive/negative evidence and formal product inclusion, or an exact preexisting source terminal is recorded. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | Every `base_vdm_command` producer, broker owner discriminator, DOS/WOW record selection, app `--command` validation and local record fixture. |
+
+**Active: M0 T366 S2.**
+
 ### M0 T363 S1 — Closed SoftPC conventional-device owner ledger
 
 | Field | Record |
@@ -240,10 +288,6 @@ record is consumed, then the pre-existing original no-next-command `54:01`
 wait times out before `$Exec`; no trace-derived repair is admitted.
 
 T365 is closed; see its [closure record](history/m0-t365-dos-com-mz-exec-parent-return-closure-20260902.md).
-
-**No active M/T/S packet.** The next packet must be admitted from the
-ordered queue; the frozen S4 terminal does not authorize a trace-driven
-repair.
 
 ### M0 T354 S1 — Closed permanent COMMAND bootstrap owner admission
 

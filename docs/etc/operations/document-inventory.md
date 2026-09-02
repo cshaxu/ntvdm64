@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3832 |
+| Documentation records | 3834 |
 | --- | --- |
-| Generated UTC | 2026-09-02T08:15:21Z |
+| Generated UTC | 2026-09-02T08:20:47Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | 93c4698bbf93d268cd47379088c0067d194cd171171c7391680a27888b3bc136 |
+| QUEUE.md | principal control document | e4d59d29e4d678a41881095ae96e99b20aa2dd07c08de4f2d72ae27f331c74df |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 56a061065e930a8fa3a3bcff35f6dfed51dceb8981c7f17b8e1e4e1c48fd332a |
+| STATUS.md | principal control document | d931677b7e1782f78d1b1cd58d1885199a08c73769ea4fd1e407c370a550b677 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1219,6 +1219,7 @@ content-divergent entries.
 | etc/evidence/m0-t365-s2-dem-com-file-lifecycle-lease-closure-001.md | indexed supporting material | 1d9d3ebaa64b8e590990e6777847b7538fd36e0ef45c9d2191f6b4c7bc81539e |
 | etc/evidence/m0-t365-s3-formal-dem-com-product-closure-001.md | indexed supporting material | e048703cbfe5ab77fa41207fc98f1e270ca5fce01edc7f05ca6a7955c29e4dfd |
 | etc/evidence/m0-t365-s4-frozen-com-workload-observation-001.md | indexed supporting material | 0bcb427ac3385533279b8b75c7800ad58577423d068c97c9c289fb90fd20e419 |
+| etc/evidence/m0-t366-s1-declared-dos-workload-record-ledger-001.md | indexed supporting material | 1a94cea9dd84d22c3194366ff436c0632e9eb22ebb28eb12159095737e6fbf2e |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1967,6 +1968,7 @@ content-divergent entries.
 | etc/operations/m0-t363-softpc-conventional-device-matrix-001.md | indexed supporting material | e3252c1a53cc526652f18e9334d223fd779144c8937cd0fb94307663bc5bb6ef |
 | etc/operations/m0-t364-command-delivery-and-built-in-dispatch-001.md | indexed supporting material | 3b9219b497996dd9e4fe7cb618e912a24d11b7e56c3fd589b7fb20c0323face7 |
 | etc/operations/m0-t365-dos-exec-and-parent-return-001.md | indexed supporting material | 909097e873ed770d0ed13526c7524ec6588da1f10495cdcdc17f1a2fed3d93cf |
+| etc/operations/m0-t366-declared-dos-workload-command-delivery-001.md | indexed supporting material | 614fea3d6c10ee8036436a90d0cef68d53b78644d820d8fb3e70f28056f5614a |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
