@@ -1097,25 +1097,25 @@ and
 
 ## Active Packet
 
-### M0 T380 S3 — Active COMMAND native-child formal product confirmation
+### M0 T380 S4 — Active COMMAND native-child frozen observation
 
-**Active: M0 T380 S3**
+**Active: M0 T380 S4**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T380 S3; ordinary mode (single-person dual-role original-owner recovery). |
-| Admission And Approval | Admitted by S2's current-source and focused-x86 lifecycle closure. |
-| Objective | Formally link the current CPU40/x86 product with the selected original COMMAND native-child cohort, then prove its exact final inputs before S4's sole workload observation. |
-| Non-goals | No BOP leaf patch, app-owned child launcher, guest-media mutation, CPU30, Bochs, x64 recovery, DOS PSP synthesis, WOW, Redirector protocol, CSRSS/BaseSrv broker or runtime observation. |
-| Reference Baseline | S1/S2 closure, T379 formal product identity, original COMMAND mirror and current CPU40/x86 graph. |
-| Files And ABI Surface | Existing formal Ninja graph, original COMMAND archive, Base VDM/session/softpc/win32 binding libraries and final product only. |
+| Identifier Mode | M0 T380 S4; ordinary mode (single-person dual-role original-owner recovery). |
+| Admission And Approval | Admitted by S3's current formal CPU40 product/input closure. |
+| Objective | Make one bounded non-debug fixed-container request for `C:\Windows\System32\cmd.exe /c exit 37` through original guest command classification and `54:08` lifecycle; classify the first source-owned result. |
+| Non-goals | No BOP leaf patch, app-owned child launcher, guest-media mutation, source repair, CPU30, Bochs, x64 recovery, DOS PSP synthesis, WOW, Redirector protocol or CSRSS/BaseSrv broker. |
+| Reference Baseline | S1--S3 closure, T379 format-4 package identity and existing console-owning observer. |
+| Files And ABI Surface | Existing observer, identity-proven staged `ntvdm.exe`/`VDMREDIR.DLL`, immutable media and durable report only. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, immutable-media staging, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Fresh formal x86 Ninja build/query, final-input identity map and governance checks. No product run. |
-| Expected Markers | The original COMMAND archive and every selected same-shaped binding are final-link inputs of one CPU40/SoftPC process. |
-| Asset Needs | Existing formal generator, current source mirrors/bindings and selected product output. |
-| Reporting Requirements | Record exact build/query output and distinguish formal link evidence from S4 runtime evidence. |
-| Stop Conditions | A required second broker, guest mutation, private CSRSS/kernel recreation, raw pointer/handle carrier, CPU change or trace-selected leaf repair requires revised admission. |
-| Exit Criteria | The selected formal CPU40 product and input graph are identity-proven, and S4 may make the one fixed workload observation. |
+| Verification | Stage/parent/companion/media identity verification and exactly one bounded console-owning non-debug observation. |
+| Expected Markers | Original `54:07` classification, `/z` route, `54:08` lifecycle and child result, or an earlier original source-owned terminal. |
+| Asset Needs | S3 product, fixed format-4 stage and existing observer. |
+| Reporting Requirements | Record exact command, manifest/product identities, durable report and earliest owner classification; do not turn a trace result into a repair. |
+| Stop Conditions | Retry, changed workload/stage/timeout/observer, debugger, guest mutation, source repair, second broker or trace-selected implementation ends S4 without a result claim. |
+| Exit Criteria | One valid identity-proven frozen observation is retained and classified; T380 may then close or transfer only an exact earlier original owner. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `54:08`, `54:0A`, `54:0B`, `cmdExec`, `cmdExecComspec32`, `cmdExec32`, `cmdCreateProcess`, `cmdGetNextCmd`, `cmdReturnExitCode`, Base VDM, worker/re-entry, standard handles, session child records, cancellation and completion. |
 
@@ -1124,6 +1124,8 @@ and
 **S1 closure:** [COMMAND native-child owner and predecessor rebaseline](etc/evidence/m0-t380-s1-command-native-child-owner-predecessor-rebaseline-001.md).
 
 **S2 closure:** [COMMAND native-child lifecycle confirmation](etc/evidence/m0-t380-s2-command-native-child-lifecycle-confirmation-001.md).
+
+**S3 closure:** [COMMAND native-child formal product confirmation](etc/evidence/m0-t380-s3-command-native-child-formal-product-001.md).
 
 ### M0 T379 — Closed original VDMREDIR runtime product activation
 
