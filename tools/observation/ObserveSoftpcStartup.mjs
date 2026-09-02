@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 function usage() {
-  throw new Error('usage: node tools/observation/ObserveSoftpcStartup.mjs --launcher <observer.exe> --product <product.exe> --stage <runtime-dir> --report <result.txt> [--child-environment MVDM_SESSION_DISPOSE_REPORT_PATH=<absolute-path>|MVDM_COMMAND_CONTINUATION_REPORT_PATH=<absolute-path>]');
+  throw new Error('usage: node tools/observation/ObserveSoftpcStartup.mjs --launcher <observer.exe> --product <product.exe> --stage <runtime-dir> --report <result.txt> [--product-command <declared-DOS-command>] [--child-environment MVDM_SESSION_DISPOSE_REPORT_PATH=<absolute-path>|MVDM_COMMAND_CONTINUATION_REPORT_PATH=<absolute-path>]');
 }
 
 function sha256(path) {
@@ -29,9 +29,15 @@ for (let index = 2; index < process.argv.length; index += 2) {
   options[key.slice(2)] = value;
 }
 for (const key of Object.keys(options)) {
-  if (!['launcher', 'product', 'stage', 'report', 'child-environment'].includes(key)) {
+  if (!['launcher', 'product', 'stage', 'report', 'product-command', 'child-environment'].includes(key)) {
     throw new Error(`unsupported observer option: --${key}`);
   }
+}
+if (options['product-command'] !== undefined &&
+    (options['product-command'].length === 0 ||
+     options['product-command'].length > 1024 ||
+     /[\r\n]/.test(options['product-command']))) {
+  throw new Error('product command must be one non-empty line no longer than 1024 bytes');
 }
 for (const key of ['launcher', 'product', 'stage', 'report']) {
   if (!options[key]) usage();
@@ -79,7 +85,14 @@ copyFileSync(options.product, stagedProduct);
 const productSha256 = sha256(stagedProduct);
 const fixedMediaManifestSha256 = createHash('sha256').update(JSON.stringify(
   layout.mediaAssets)).digest('hex');
-const result = spawnSync(options.launcher, [stagedProduct, options.stage, options.report], {
+const launcherArguments = [stagedProduct, options.stage, options.report];
+if (options['product-command'] !== undefined) {
+  /* The observer is a transport-only fixed-container harness. It forwards one
+   * already-declared string to the existing app --command boundary; it neither
+   * parses DOS syntax nor adds guest bytes. */
+  launcherArguments.push('-f', '-o', '--command', options['product-command']);
+}
+const result = spawnSync(options.launcher, launcherArguments, {
   cwd: options.stage,
   encoding: 'utf8',
   windowsHide: false,
@@ -90,7 +103,7 @@ const result = spawnSync(options.launcher, [stagedProduct, options.stage, option
 });
 writeFileSync(`${options.report}.json`, `${JSON.stringify({
   container: 'console-owning-nondebug',
-  command: [options.launcher, stagedProduct, options.stage, options.report],
+  command: [options.launcher, ...launcherArguments],
   childEnvironment: childEnvironment === undefined ? [] : [childEnvironment.name],
   stageManifestSha256: createHash('sha256').update(manifest).digest('hex'),
   fixedMediaManifestSha256,

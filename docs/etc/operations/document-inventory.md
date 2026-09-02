@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3834 |
+| Documentation records | 3838 |
 | --- | --- |
-| Generated UTC | 2026-09-02T08:20:47Z |
+| Generated UTC | 2026-09-02T08:28:54Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | d931677b7e1782f78d1b1cd58d1885199a08c73769ea4fd1e407c370a550b677 |
+| STATUS.md | principal control document | 02e5b865d37fde82f16e7ff071b695c1cbc92ef44ac0bfbd9937ab45099a1037 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1220,6 +1220,9 @@ content-divergent entries.
 | etc/evidence/m0-t365-s3-formal-dem-com-product-closure-001.md | indexed supporting material | e048703cbfe5ab77fa41207fc98f1e270ca5fce01edc7f05ca6a7955c29e4dfd |
 | etc/evidence/m0-t365-s4-frozen-com-workload-observation-001.md | indexed supporting material | 0bcb427ac3385533279b8b75c7800ad58577423d068c97c9c289fb90fd20e419 |
 | etc/evidence/m0-t366-s1-declared-dos-workload-record-ledger-001.md | indexed supporting material | 1a94cea9dd84d22c3194366ff436c0632e9eb22ebb28eb12159095737e6fbf2e |
+| etc/evidence/m0-t366-s2-declared-dos-record-recovery-001.md | indexed supporting material | f49c31e7a400834d66a06aec47ba408c2a0257719f03dba75ef9c2da2086e78c |
+| etc/evidence/m0-t366-s3-formal-declared-dos-record-closure-001.md | indexed supporting material | 59e3772390b0a56c03be83e57b3446f2f7166997cbcabc1a488bbbae81571a98 |
+| etc/evidence/m0-t366-s4-frozen-declared-com-observation-001.md | indexed supporting material | 3702a4016728667964d4f2cff1b54bba1cf855f8b03ed6dce76fadbc1371e999 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -3741,6 +3744,7 @@ content-divergent entries.
 | history/m0-t363-softpc-conventional-device-matrix-closure-20260902.md | closed task history | 5796119e1ea1993afbcfe5a1c50fa931ef281dc427f318dfb33df897bbe1762f |
 | history/m0-t364-command-delivery-and-built-in-dispatch-closure-20260902.md | closed task history | 4ebfaff4248c7c7a9be891b901e5c26ea506d82cae24e008d8853316d28a6f61 |
 | history/m0-t365-dos-com-mz-exec-parent-return-closure-20260902.md | closed task history | 8734b1f3ce7c76a1de3c1341b18151372d9ddf9d2006404d3867513452714294 |
+| history/m0-t366-declared-dos-workload-command-delivery-closure-20260902.md | closed task history | 569faf66fdea4efc8a6f11e39dfed3799bfcb4efa3b3b1c0adc41c9b068e5607 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

@@ -28,7 +28,7 @@
 proves the app already emits the source-shaped `COMMAND.COM /C …` record but
 omits its existing DOS owner discriminant before the selected BaseVDM broker.
 
-### M0 T366 S2 — Active source-shaped declared DOS record recovery
+### M0 T366 S2 — Closed source-shaped declared DOS record recovery
 
 | Field | Record |
 | --- | --- |
@@ -48,7 +48,68 @@ omits its existing DOS owner discriminant before the selected BaseVDM broker.
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | Every `base_vdm_command` producer, broker owner discriminator, DOS/WOW record selection, app `--command` validation and local record fixture. |
 
-**Active: M0 T366 S2.**
+**S2 admission:** M0 T366 S2 proceeded from this closed ledger.
+
+**S2 closure:** [declared DOS record recovery](etc/evidence/m0-t366-s2-declared-dos-record-recovery-001.md)
+proves the app emits `BASE_VDM_COMMAND_DOS` before the existing copied
+BaseVDM route and that the selected CPU40/x86 product relinks.
+
+### M0 T366 S3 — Closed formal declared DOS record closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T366 S3; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from closed T366 S2 under the owner's standing ordered-queue authority. |
+| Objective | Prove the selected app record constructor, BaseVDM broker/local/client, session and original COMMAND package are final inputs to the CPU40/x86 product. |
+| Non-goals | No source behavior change, guest/media mutation, product observation, `$Exec`, MZ/native child, BaseSrv/CSRSS, CPU/device/video, CPU30, Bochs, x64 runtime, WOW or Redirector work. |
+| Reference Baseline | T366 S1 owner ledger and T366 S2 focused fixture/product link. |
+| Files And ABI Surface | Ninja manifest/archive/final process inputs only; no source or ABI change. |
+| Applicable Rules | Execution, source policy, CPU40-only, mirror/overlay, architecture, coding and documentation rules. |
+| Verification | `ninja -t query` for product and selected archives plus clean selected-target build and governance checks. |
+| Expected Markers | App, BaseVDM, session/broker and original COMMAND owners appear in the same final process input graph exactly once. |
+| Asset Needs | Existing formal x86 build root and S2 source set only. |
+| Reporting Requirements | Record archive/object input proof and distinguish link evidence from runtime execution. |
+| Stop Conditions | Missing selected owner, graph reconfiguration, required source change, runtime observation or unrelated owner repair requires a new S admission. |
+| Exit Criteria | Formal graph records every selected S2 source/binding as a final product input, or states the exact link terminal. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `app-machine-shell.lib`, `basesrv-bindings.lib`, `session.lib`, `broker.lib`, `original-mvdm-command.lib` and final process link inputs. |
+
+**S3 admission:** M0 T366 S3 proceeded from the closed S2 recovery.
+
+**S3 closure:** [formal declared DOS record closure](etc/evidence/m0-t366-s3-formal-declared-dos-record-closure-001.md)
+proves the selected app, BaseVDM, session/broker and original COMMAND owners
+are inputs to the final CPU40/x86 process.
+
+### M0 T366 S4 — Closed frozen declared `.COM` observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T366 S4; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from closed T366 S3 under the owner's standing ordered-queue authority. |
+| Objective | Make one fixed-container CPU40/x86 observation with an existing immutable `COMMAND.COM` child declared through the recovered app/BaseVDM record route, and classify the earliest original `$Exec` edge or source terminal. |
+| Non-goals | No guest/media mutation, new DOS parser/loader, BOP/DEM/COMMAND source change, MZ/native child, BaseSrv/CSRSS, CPU/device/video change, CPU30, Bochs, x64 runtime, WOW or Redirector work. |
+| Reference Baseline | T365 S4 fixed container; T366 S1–S3 closures; staged `O:\ntvdm64\COMMAND.COM`; existing console-owning observer. |
+| Files And ABI Surface | Observation harness may forward one validated opaque app `--command` string; product/app/BaseVDM ABI and guest bytes remain unchanged. |
+| Applicable Rules | Execution, source policy, fixed-observation, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Rebuild the observation launcher, make exactly one fixed-container invocation using `COMMAND.COM /C EXIT`, preserve manifest/product hashes and sidecars, then classify only the earliest original result. |
+| Expected Markers | The runner forwards one opaque declared command; the product either reaches original `$Exec`/file lifecycle/return or records an exact earlier source owner. |
+| Asset Needs | Existing fixed stage and immutable `COMMAND.COM`; no added guest workload. |
+| Reporting Requirements | Record exact invocation, command transport, hashes, first original markers and whether `$Exec` was reached; distinguish transport evidence from execution success. |
+| Stop Conditions | A retry, changed command/media/root/console, product source change, guest byte, BOP repair or successor owner work ends S4. |
+| Exit Criteria | One reproducible fixed observation identifies the earliest source-owned successor or terminal for the declared `.COM` workload. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | Existing observer default command, `--product-command` validation, app `--command` transport, stage manifest verification and sidecar capture. |
+
+**S4 closure:** [frozen declared `.COM` observation](etc/evidence/m0-t366-s4-frozen-declared-com-observation-001.md)
+records successful original DEM opens of the immutable staged `COMMAND.COM`
+after the recovered declaration, then a later original no-next-record wait.
+It makes no child-execution or parent-return claim.
+
+T366 is closed; see its [closure record](history/m0-t366-declared-dos-workload-command-delivery-closure-20260902.md).
+
+**No active M/T/S packet.** The next packet must begin at the original DOS
+`$Exec`/JFN/SFT/PSP owner cohort; T366's fixed runtime terminal does not
+authorize a trace-derived BOP repair.
 
 ### M0 T363 S1 — Closed SoftPC conventional-device owner ledger
 

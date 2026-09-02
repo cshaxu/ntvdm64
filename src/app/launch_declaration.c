@@ -135,6 +135,10 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     command.task = 1u;
     command.code_page = 437u;
     command.current_drive = (uint16_t)(drive_letter - 'A');
+    /* The original BaseSrv chooses a DOS record independently from a WOW
+     * record before it copies VDMINFO.  Preserve that existing discriminant
+     * at the sole app-owned initial declaration boundary. */
+    command.command_owner = BASE_VDM_COMMAND_DOS;
     command.command = (const uint8_t *)declaration->command;
     /* Original cmdGetNextCmd treats VDMINFO.CmdLine as a command line with
      * a mandatory CR/LF tail, followed by this transport NUL.  Keep that

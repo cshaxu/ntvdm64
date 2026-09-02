@@ -54,7 +54,7 @@ static int verify_long_package_launch_declaration(void)
 {
     static char program[] = "fixture";
     static char command_option[] = "--command";
-    static char command_text[] = "EXIT";
+    static char command_text[] = "T365TEST.COM";
     char *argv[] = { program, command_option, command_text, NULL };
     const char *root =
         "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r37-command-ingress-after-complete-host-path-fix\\mvdm";
@@ -74,7 +74,9 @@ static int verify_long_package_launch_declaration(void)
     if (declaration.base_vdm.available != 1u) return 30;
     if (declaration.base_vdm.current_directory_bytes != strlen(root) + 1u) return 31;
     if (declaration.base_vdm.application_bytes != strlen(application) + 1u) return 32;
-    if (strcmp((const char *)declaration.base_vdm.command, "/C EXIT\r\n") != 0) return 36;
+    if (declaration.base_vdm.command_owner != BASE_VDM_COMMAND_DOS) return 36;
+    if (strcmp((const char *)declaration.base_vdm.command,
+            "/C T365TEST.COM\r\n") != 0) return 41;
     if (declaration.base_vdm.command_bytes < 3u ||
         declaration.base_vdm.command[declaration.base_vdm.command_bytes - 3u] != '\r' ||
         declaration.base_vdm.command[declaration.base_vdm.command_bytes - 2u] != '\n' ||
