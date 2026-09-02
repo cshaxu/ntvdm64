@@ -151,7 +151,7 @@ proves the source-shaped initial `/C EXIT` delivery and the later ordinary
 no-next-command wait.  It does not claim an interactive session or child
 execution.
 
-**No active M/T/S packet.** T364 is closed; see its
+T364 is closed; see its
 [closure record](history/m0-t364-command-delivery-and-built-in-dispatch-closure-20260902.md).
 
 ### M0 T365 S1 — Active original DOS EXEC/parent-return owner ledger
