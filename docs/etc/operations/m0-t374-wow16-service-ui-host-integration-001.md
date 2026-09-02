@@ -40,13 +40,17 @@ closure and trace-selected individual service patches.
    selected `W32Init`/`W32Dispatch` bodies and their required original task
    records through same-shaped adapter bindings.  Preserve initialization,
    cleanup and unavailable order; no static command substitute.
-3. **S3 — Selected task/UI service cohort.** Recover one complete source-owned
-   service subdomain required by the selected dispatch table, including its
-   public UI/console capability facade and negative paths.  Keep private
-   USER/GDI transport explicit where it remains unavailable.
-4. **S4 — Formal CPU40/x86 link and local matrix.** Link the selected original
-   provider cohort, run source-defined positive and unavailable focused tests,
-   and verify all guest-memory access uses the shared mapping-manager instance.
+3. **S3 — USER registration contract cohort.** Recover the original Base
+   global-memory hook lifetime and the complete 21-slot
+   `UserRegisterWowHandlers` input/output contract as one source-shaped
+   cohort.  Classify each private USER output as public binding, retained
+   private boundary or source-shaped unavailable before selecting an
+   initialization form; no leaf WOW service may be enabled.
+4. **S4 — Selected task/UI service cohort and formal CPU40/x86 link.** Recover
+   one complete source-owned service subdomain admitted by S3, then link the
+   selected original provider cohort and run source-defined positive and
+   unavailable focused tests.  Verify every guest-memory access uses the
+   shared mapping-manager instance.
 5. **S5 — Fixed WOW16 integration observation.** Only if S1--S4 select the
    complete original provider cohort and immutable WOW16 media, run exactly
    one fixed workload observation.  Otherwise close the reached earlier

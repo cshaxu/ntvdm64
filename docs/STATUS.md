@@ -2,33 +2,35 @@
 
 ## Current Work
 
-### M0 T374 S2 — Active original WOW32 initialization and dispatch product cohort
+### M0 T374 S3 — Active original USER registration contract cohort
 
-**Active: M0 T374 S2**
+**Active: M0 T374 S3**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T374 S2; ordinary mode (single-person dual-role implementation and review). |
-| Admission And Approval | Admitted after S1 selected the full original 77-body WOW32 DLL product plus four same-shaped boundary families, under the owner's standing queue-execution and ordinary-delivery authority. |
-| Objective | Compose the original `W32Init`/`W32Dispatch` product boundary without a static substitute: define the smallest same-shaped treatment for USER handler registration, Base handler registration, shared WOW state and current-task identity, then formally determine its selected source disposition. |
-| Non-goals | No individual provider enablement, static `W32Dispatch` route, substitute DLL, synthetic task/NE loader, guest mutation, fast WOW, CurrentMonitorTeb, CSRSS/kernel VDM, arbitrary USER/GDI reimplementation, CPU/device/x64 work or runtime observation. |
-| Reference Baseline | T373 S1--S5; T374 S1 matrix; original `wow32.c`, `wowtbl.c`, `wkman.c`; T276/T277 provider identities. |
-| Files And ABI Surface | Original WOW32 initialization/dispatch declarations and the four named adapter boundary declarations only; no guest ABI or provider-table semantic change. |
+| Identifier Mode | M0 T374 S3; ordinary mode (single-person dual-role implementation and review). |
+| Admission And Approval | Admitted after S2 found original `UserRegisterWowHandlers` as the first uncomposed complete contract, under the owner's standing queue-execution and ordinary-delivery authority. |
+| Objective | Recover or exactly classify the whole 21-slot original USER registration contract and the coupled original Base global-memory hook lifetime, preserving input/output table shape, ordering and failure behavior. |
+| Non-goals | No per-service success stub, static dispatch route, substitute DLL, synthetic task/NE loader, guest mutation, fast WOW, CurrentMonitorTeb, CSRSS/kernel VDM, general USER/GDI recreation, CPU/device/x64 work or runtime observation. |
+| Reference Baseline | T374 S1 matrix/S2 decision; original `client.c:UserRegisterWowHandlers`; original `gmem.c:RegisterWowBaseHandlers`; selected original WOW32 source. |
+| Files And ABI Surface | Original `wowuserp.h` registration structures, `gmem.c` hook lifetime, narrowly named adapter-win32/WOW overlay declarations, and no guest ABI. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and document rules. |
-| Verification | Original definition/caller/import audit, current adapter search, boundary ownership review and formal graph-selection proposal. No provider implementation or product run. |
-| Expected Markers | Every direct W32Init prerequisite has an original owner and one of direct facade/overlay-required/exact-unavailable dispositions; no unowned replacement dispatcher exists. |
-| Asset Needs | Original WOW32 mirror, current adapter/session source, formal manifest and S1 ledger only. |
-| Reporting Requirements | State which original body remains selected, exact private dependency and why any facade retains the original init/failure order; record mapping-manager implications. |
-| Stop Conditions | A need to implement a broad USER/GDI/CSRSS product, add a provider DLL/media, modify a service leaf or run the product requires a new S admission. |
-| Exit Criteria | The original W32Init/W32Dispatch product boundary has a source-first, same-shaped composition decision and an exact next cohort; or its earliest non-composable private edge is recorded without a substitute. |
+| Verification | Audit all 21 output slots, their original targets and current public/private replacement availability; prove Base hook storage/consumption pairing; compile only if a complete same-shaped cohort is selected. |
+| Expected Markers | Every slot has an owner and direct/public-binding/private-overlay/unavailable disposition; neither a fake success table nor a dropped global-free hook exists. |
+| Asset Needs | Original NTUSER client and Base-client source, WOW32 mirror, current adapters/session and source indexes. |
+| Reporting Requirements | Preserve original ordering and result shape; distinguish public API replacement from private USER behavior; document all handle/identity mapping implications. |
+| Stop Conditions | A need for broad unreconciled USER/CSRSS machinery, a partial output table, a changed provider leaf, guest/media changes or runtime observation requires a later S admission. |
+| Exit Criteria | A complete same-shaped registration cohort is source/link-ready with all 21 slots accounted for, or the earliest uncomposable output is precisely recorded with original failure direction and no synthetic success. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
-| Similar-Issue Sweep | `UserRegisterWowHandlers`, `RegisterWowBaseHandlers`, `LOCKSHAREWOW`, `CURRENTPTD`, `InitCBFormats`, `InitVisRgn`, hung-app support, `WK32WOWInitTask`, `aw32WOW`, adapter ownership and mapping-manager identity. |
+| Similar-Issue Sweep | all `PFNWOWHANDLERSIN/OUT` slots, `UserRegisterWowHandlers`, `RegisterWowBaseHandlers`, `GlobalFree`, `gSharedInfo`, `LOCKSHAREWOW`, `CURRENTPTD`, handles, callback identities and mapping-manager ownership. |
 
 **Plan:** [M0 T374 WOW16 service, UI and host integration](etc/operations/m0-t374-wow16-service-ui-host-integration-001.md).
 
 **Predecessor:** [T373 WOW16 bootstrap, callback and NE lifecycle closure](history/m0-t373-wow16-bootstrap-callback-ne-lifecycle-closure-20260902.md).
 
 **S1 closure:** [whole WOW32 provider matrix and admission cohort](etc/evidence/m0-t374-s1-whole-wow32-provider-matrix-001.md).
+
+**S2 closure:** [original WOW32 initialization boundary decision](etc/evidence/m0-t374-s2-original-wow32-init-boundary-decision-001.md).
 
 ### M0 T372 — Closed Redirector and host-resource execution
 
