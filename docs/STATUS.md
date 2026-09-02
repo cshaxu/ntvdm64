@@ -2,12 +2,29 @@
 
 ## Current Work
 
-### **No active M/T/S packet.**
+### M0 T375 S1 — Active pure DOS boot/COMMAND topology and container admission
 
-The owner has closed `M0 T374` at its exact original WOW16 private-host
-boundary and reprioritized the queue to prove pure DOS execution before
-resuming Win16/WOW work.  No implementation packet is active until the owner
-admits the new queue-head pure-DOS package.
+**Active: M0 T375 S1**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T375 S1; ordinary mode (single-person dual-role source and runtime review). |
+| Admission And Approval | Owner approved the queue-head pure-DOS package after closing T374's WOW private-host boundary. |
+| Objective | Establish the one reproducible CPU40/SoftPC x86 runtime container and the complete original startup-to-COMMAND owner topology; select the first finite original owner cohort that prevents `COMMAND.COM` from completing a declared built-in. |
+| Non-goals | No `.COM`/MZ external-program claim, host executable loader, synthetic guest input or command result, BOP leaf patch, guest-media mutation, native child, WOW/Win16, CSRSS/kernel-VDM recreation, CPU30, Bochs or x64 runtime work. |
+| Reference Baseline | T365--T369 DOS/COMMAND source and bounded-observation records; current formal CPU40/x86 graph; immutable executable-relative DOS/SoftPC media layout; runtime recovery program. |
+| Files And ABI Surface | Existing app stage/container, CPU40/SoftPC startup sources, original NTIO/NTDOS/COMMAND mirrors, existing session/adapters and formal build manifests. S1 changes documentation/evidence only unless an exact owner cohort is selected for S2. |
+| Applicable Rules | Execution, source policy, source-first recovery, guest-load-only, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and document rules. |
+| Verification | Reconcile formal executable, stage/media hashes and invocation; static source call-chain audit from startup through first command acquisition; one bounded non-debug container observation only after identity and ownership are frozen. |
+| Expected Markers | Fixed console ownership, executable-relative selected media, exact startup call order, first source-owned terminal or completion marker, and one named smallest S2 owner cohort. |
+| Asset Needs | Current formal CPU40/x86 product, selected immutable DOS and SoftPC media, existing observer, source mirrors and prior T365--T369 evidence. |
+| Reporting Requirements | Separate static/link/container facts from guest-execution proof; cite original source owner for every candidate repair; state whether the reached result is pre-NTIO, NTIO/NTDOS, COMMAND acquisition, built-in execution or an earlier exact terminal. |
+| Stop Conditions | A need to alter guest bytes/media, invent a guest loader/input/result, patch an isolated BOP, change CPU/device semantics, start `.COM`/MZ execution, or expand into native-child/WOW requires a new S admission. |
+| Exit Criteria | A complete evidence record fixes the product/container identity, maps the original boot-to-COMMAND chain, classifies the earliest actual terminal, and admits one finite same-owner S2 cohort or records that the frozen container already completed the declared built-in. |
+| Original Owner Request | “没错 那为啥你要做win16现在？我们先把纯dos程序跑通。你治理一下队列” followed by approval to start the next task. |
+| Similar-Issue Sweep | executable-relative root, DOS/SoftPC media resolution, console ownership, `ntvdm.c`, `scs_init`, `host_start_cpu`, timer/display/termination, NTIO, NTDOS, `54:01`, COMMAND record/built-in acquisition and fixed-observer identity. |
+
+**Plan:** [M0 T375 pure DOS CPU40/SoftPC boot and COMMAND baseline](etc/operations/m0-t375-pure-dos-cpu40-softpc-command-baseline-001.md).
 
 ### M0 T374 S4 — Closed exact USER registration and Base hook boundary
 
