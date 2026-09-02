@@ -16,6 +16,16 @@
 
 **S4 closure:** [original COMMAND bootstrap payload closure](etc/evidence/m0-t375-s4-original-command-bootstrap-payload-closure-001.md).
 
+### M0 T376 — Closed pure DOS external execution and parent return
+
+**Plan:** [M0 T376 pure DOS external execution and parent return](etc/operations/m0-t376-pure-dos-external-exec-parent-return-001.md).
+
+**Closure:** [T376 history record](history/m0-t376-pure-dos-external-exec-parent-return-closure-20260902.md).
+
+**S1--S6 closure:** original `.COM` and MZ guest execution/parent-return
+evidence, rejected alternate-root disposition and identity-proven fixed-root
+media extension are linked from the closure record.
+
 ### M0 T374 S4 — Closed exact USER registration and Base hook boundary
 
 **Closed: M0 T374 S4**
@@ -1087,7 +1097,7 @@ and
 
 ## Active Packet
 
-**No active M/T/S packet.** T375 is closed; the queue must be reviewed and a
+**No active M/T/S packet.** T376 is closed; the queue must be reviewed and a
 new packet admitted before further implementation work begins.
 
 ### M0 T357 S1 — Closed staged runtime identity and owner admission

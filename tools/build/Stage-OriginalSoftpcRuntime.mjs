@@ -13,6 +13,10 @@ const requiredAssets = [
    * staged media contract remains an original guest artifact, not a harness
    * program or a host-side loader input. */
   ['src/mvdm-guest/dos/v86/cmd/loadfix/LOADFIX.COM', 'LOADFIX.COM'],
+  /* Small original MZ workload paired with LOADFIX.COM for the same bounded
+   * DOS EXEC package.  FASTOPEN is the original no-op NT stub; it exercises
+   * the guest MZ path without introducing a new host implementation. */
+  ['src/mvdm-guest/dos/v86/cmd/fastopen/FASTOPEN.EXE', 'FASTOPEN.EXE'],
   ['src/mvdm-guest/bin86/config.nt', 'config.nt'],
   ['src/mvdm-guest/bin86/autoexec.nt', 'autoexec.nt'],
   ['src/mvdm-guest/dos/v86/cmd/command/COMMAND.COM', 'system32/COMMAND.COM'],
@@ -29,7 +33,7 @@ const requiredAssets = [
 ];
 
 function usage() {
-  throw new Error('usage: node tools/build/Stage-OriginalSoftpcRuntime.mjs --executable <product.exe> --output <new-directory>');
+  throw new Error('usage: node tools/build/Stage-OriginalSoftpcRuntime.mjs --executable <product.exe> --output <directory> [--update]');
 }
 
 function sha256(path) {
@@ -38,12 +42,17 @@ function sha256(path) {
 
 let executable = null;
 let output = null;
-for (let index = 2; index < process.argv.length; index += 2) {
+let update = false;
+for (let index = 2; index < process.argv.length; index += 1) {
   const option = process.argv[index];
-  const value = process.argv[index + 1];
-  if (value === undefined) usage();
-  if (option === '--executable') executable = value;
-  else if (option === '--output') output = value;
+  if (option === '--update') update = true;
+  else if (option === '--executable' || option === '--output') {
+    const value = process.argv[index + 1];
+    if (value === undefined) usage();
+    if (option === '--executable') executable = value;
+    else output = value;
+    index += 1;
+  }
   else usage();
 }
 if (executable === null || output === null) usage();
@@ -51,7 +60,10 @@ if (executable === null || output === null) usage();
 const executablePath = isAbsolute(executable) ? executable : resolve(process.cwd(), executable);
 const outputPath = isAbsolute(output) ? output : resolve(process.cwd(), output);
 if (!existsSync(executablePath)) throw new Error(`product executable does not exist: ${executablePath}`);
-if (existsSync(outputPath)) throw new Error(`refusing to overwrite runtime package: ${outputPath}`);
+if (existsSync(outputPath) && !update) throw new Error(`refusing to overwrite runtime package: ${outputPath}`);
+if (update && !existsSync(join(outputPath, 'runtime-manifest.json'))) {
+  throw new Error(`refusing to update a directory without a runtime manifest: ${outputPath}`);
+}
 
 mkdirSync(join(outputPath, 'system32'), { recursive: true });
 mkdirSync(join(outputPath, 'softpc'), { recursive: true });
@@ -59,7 +71,14 @@ const manifest = [];
 function stage(source, destination) {
   if (!existsSync(source)) throw new Error(`required source asset does not exist: ${source}`);
   const target = join(outputPath, destination);
-  copyFileSync(source, target);
+  if (existsSync(target)) {
+    if (sha256(target) !== sha256(source)) {
+      throw new Error(`refusing to replace different staged asset: ${target}`);
+    }
+  } else {
+    mkdirSync(dirname(target), { recursive: true });
+    copyFileSync(source, target);
+  }
   manifest.push({ source, destination, sha256: sha256(source) });
 }
 

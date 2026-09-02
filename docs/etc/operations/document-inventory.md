@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3905 |
+| Documentation records | 3912 |
 | --- | --- |
-| Generated UTC | 2026-09-02T14:08:00Z (manual incremental update) |
+| Generated UTC | 2026-09-02T15:23:05Z (manual incremental update) |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 57947bb32866f76d6a27e946e0da55011439128ac569e02ceef1f701f1d3599c |
+| STATUS.md | principal control document | 297a4bd76f87753060307a28ec68357f9c25b640bf48853248914c4c20834a6b |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1271,6 +1271,12 @@ content-divergent entries.
 | etc/evidence/m0-t375-s2-original-base-vdm-dos-record-lifecycle-001.md | indexed supporting material | e7ffb19509753cb8100d7ab980ed9bde739065ad06cf3d9f34cd9a2ab2654504 |
 | etc/evidence/m0-t375-s3-fixed-command-exit-observation-001.md | indexed supporting material | 598207ab501b4ceebcce2d40c97a3f3c2824ecf679f7b7f1f5ee09683b7cd702 |
 | etc/evidence/m0-t375-s4-original-command-bootstrap-payload-closure-001.md | indexed supporting material | 48448ec69a59c56efe31e8b968a5d70656daa4c2d63530d353b69081185958e5 |
+| etc/evidence/m0-t376-s1-external-dos-exec-owner-admission-001.md | indexed supporting material | 24ae1a9401ce0b77149cfdca7a6d52db34a2e3439da1995585354f1cf41d292f |
+| etc/evidence/m0-t376-s2-external-dos-file-lifecycle-binding-001.md | indexed supporting material | 7f58966e09da30ee3089b7bb8222d201f708e9f28da39f9d09b0958422eddf27 |
+| etc/evidence/m0-t376-s3-immutable-com-exec-observation-001.md | indexed supporting material | d52175cd9de486948c5b60a321db8fee8a686554b893edba64955f620fdc7b74 |
+| etc/evidence/m0-t376-s4-alternate-root-mz-container-disposition-001.md | indexed supporting material | e61c8b5b0cb0d25e604dee2ed45930b16efd0e7e023785f2be09dafb87210dab |
+| etc/evidence/m0-t376-s5-fixed-root-immutable-media-extension-001.md | indexed supporting material | bc58ff281145bff8097af11d0e0743e8a6cd03297004ff2ea419a69b39580e9d |
+| etc/evidence/m0-t376-s6-fixed-root-mz-exec-observation-001.md | indexed supporting material | c82227fc80f36f46ce67e492a1dc86fe16e8e60f9cb571c19a660ae82a737071 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -2029,6 +2035,7 @@ content-divergent entries.
 | etc/operations/m0-t373-wow16-bootstrap-callback-ne-lifecycle-001.md | indexed supporting material | 2ebcfa215f5b9c61c3d03c0da1f1e0f6d7efb27c2a1f74a8d27cebfabbdcd2f6 |
 | etc/operations/m0-t374-wow16-service-ui-host-integration-001.md | indexed supporting material | 23b830080ee39847caa649c9ad831d76e800711d3082fcd1f0dc39df891f4da4 |
 | etc/operations/m0-t375-pure-dos-cpu40-softpc-command-baseline-001.md | indexed supporting material | 630d29f4f40be5b6b15a0af2c362557b170d9bf6f252cb87823285ab177e0407 |
+| etc/operations/m0-t376-pure-dos-external-exec-parent-return-001.md | indexed supporting material | eff3f5298fd3af0dffec8f6dde2fcbd1b24b83ac6d8934e08267a396f5e87767 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3811,6 +3818,7 @@ content-divergent entries.
 | history/m0-t373-wow16-bootstrap-callback-ne-lifecycle-closure-20260902.md | closed task history | d9bcec484899282f6a1e5ee0252c973bd135954c14fad5c267842fd48f0f1fd4 |
 | history/m0-t374-wow16-service-ui-private-host-boundary-closure-20260902.md | closed task history | 9bbff187660ad00afe5fc1291a301827cdabf85f07ced3790a91cb054c6bc24a |
 | history/m0-t375-pure-dos-cpu40-softpc-command-baseline-closure-20260902.md | closed task history | 5128a8b1731cae16dfcacdeda96baffc7f3ba09a9f5338ca727ab5877a5d2338 |
+| history/m0-t376-pure-dos-external-exec-parent-return-closure-20260902.md | closed task history | 82b8fc205e3d50af213af2a376902977f06344bce610b41cbd32b662087be628 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
