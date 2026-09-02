@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3955 |
+| Documentation records | 3957 |
 | --- | --- |
-| Generated UTC | 2026-09-02T18:45:41Z |
+| Generated UTC | 2026-09-02T19:05:39Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | b0f3c586cc3c47ad0343c22d8d7cd95af6f8e0fbff9d2fbc27ce7d5b615939b0 |
+| STATUS.md | principal control document | 7bbbba841d4df709c961f7aec32de800e4723915787981af19b0fbc3e92aa9b8 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -2071,6 +2071,7 @@ content-divergent entries.
 | etc/operations/m0-t382-current-softpc-lpt-runtime-recovery-001.md | indexed supporting material | 98ca09eef0fc96ccbb1b1ba397cfb715edbffbb1a829aede564da2aa03f2196f |
 | etc/operations/m0-t383-original-command-startup-delivery-recovery-001.md | indexed supporting material | d807fe66e054b4423ea423e4e41899c9a81f452956d19027ef4a5a91177fc712 |
 | etc/operations/m0-t384-cpu40-illegal-operation-startup-recovery-001.md | indexed supporting material | 24d8b800d9cb10298c86014871ab63c6743d24e915a18efc37106911db7d1110 |
+| etc/operations/m0-t385-original-dos-arena-startup-recovery-001.md | indexed supporting material | ce8b10026f90dc18d2f9a0faf34f87dd1001fb2c5ee1ca6206f5306b8c0cd188 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3862,6 +3863,7 @@ content-divergent entries.
 | history/m0-t381-cmdexec32-startup-predecessor-transfer-20260902.md | closed task history | f0aecae677d5648fcfc50d3d6babd743c16f80a9c2777ab0ed4dbbbada06ad4f |
 | history/m0-t382-softpc-lpt-false-predecessor-closure-20260902.md | closed task history | 6e0338accd557595e96d0b5273507a75b2fcf68e1ede3187209eb05558e0cd19 |
 | history/m0-t383-original-command-startup-delivery-closure-20260902.md | closed task history | fcaba89717e23c7b0fee634fe2f20d6cd2b8d957ef73e048c7402e2ac567fdd8 |
+| history/m0-t384-cpu40-illegal-operation-startup-recovery-closure-20260902.md | closed task history | 8364863ca48ccc8e29f3880cdcbebcd52199519293330d71834df51b123d9562 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

@@ -1156,35 +1156,30 @@ claim.
 
 **S3 closure:** [formal original command-delivery proof](etc/evidence/m0-t383-s3-original-command-delivery-formal-closure-001.md).
 
-### M0 T384 S1 — Active CPU40 illegal-operation source/guest-state ledger
+### M0 T385 S1 — Active original DOS arena and machine-memory owner ledger
 
-**Active: M0 T384 S1**
+**Active: M0 T385 S1**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T384 S1; ordinary mode (single-person dual-role original-owner recovery). |
-| Admission And Approval | T383's one allowed fixed pure-DOS observation resolved its earliest blocker to original CPU40 `illegal_op_int` at guest `03f4:2128`, before the first `54:01`. |
-| Objective | Establish the complete original CPU40 opcode-`0x63` dispatch, interrupt-frame, `illegal_op_int`, `unexpected_int` and error-dialog ownership chain; determine the source owner of the reached `codex` bytes and select one finite recovery cohort. |
-| Non-goals | No COMMAND/Base VDM repair, error-ignore policy, guest-media change, app executor, `cmdExec32`, DOS PSP/child, WOW, Redirector, CPU30, Bochs, x64 work or product run. |
-| Reference Baseline | T383 S4 evidence; current formal CPU40/x86 map/product; original CPU40 `illegalp.c`, decoder/interrupt source and original SoftPC error source. |
-| Files And ABI Surface | Original CPU40 opcode dispatch, system interrupt frame, `illegal_op_int`, `unexpected_int`, `host_error`/error-dialog call contract and source-owned guest-control state only. |
+| Identifier Mode | M0 T385 S1; ordinary mode (single-person dual-role original-owner recovery). |
+| Admission And Approval | Owner request: “先让纯dos和dos调用32位程序跑通” and later direction to defer 16-bit support. T384 established that CPU40 is downstream of an original DOS arena/SoftPC memory condition. |
+| Objective | Establish the complete original DOS `INT 21h/AH=48h` caller, `$ALLOC`, `sysinit` MCB construction, `endmem`, BIOS `BOP 12h` memory-size result and SoftPC/SAS memory-init chain; identify the one source-owned recovery cohort that prevents `54:0F` from overwriting resident COMMAND memory. |
+| Non-goals | No COMMAND provider rewrite, guest-media change, error-ignore policy, CPU opcode patch, BaseSrv repair, `cmdExec32`, DOS PSP/child return, WOW16/Win16, Redirector, CPU30, Bochs or x64 work. |
+| Reference Baseline | T383 fixed pure-DOS observation; T384 environment/resident-overwrite ledger; current formal CPU40/x86 product; immutable DOS `alloc.asm`/`msinit.asm`/`sysinit1.asm`; current SoftPC BIOS/SAS/memory startup source. |
+| Files And ABI Surface | Original DOS `rdata.asm`, `alloc.asm`, `msinit.asm`, `sysinit1.asm`, arena/MCB data and original SoftPC BIOS `memory_size`/reset and `host_sas_init`/SAS initialization chain; scalar `ES/BX/AX/CF` at the already-existing `54:0F` table boundary only. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, immutable-media, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Static source/map/caller/data-flow audit only.  No product run. |
-| Expected Markers | One complete original owner chain and a finite S2 cohort, without replacing an unknown guest-control defect with an error-dialog workaround. |
-| Exit Criteria | The opcode/frame/error chain and `03f4:2128` origin each have a source-backed disposition, and S2 has exactly one complete selected CPU40 cohort. |
+| Verification | Static source/map/caller/data-flow audit; default-off scalar observer build only if needed for the exact allocation edge. No provider or guest-media behavioral change in S1. |
+| Expected Markers | One complete original DOS-arena/SoftPC-memory owner chain and a finite S2 cohort, without replacing an allocator/MCB defect with a COMMAND or error-dialog workaround. |
+| Exit Criteria | The allocator/MCB initialization and SoftPC RAM chain have source-backed dispositions; the required `54:0F` scalar observation is either already sufficient or has a documented, default-off source-shaped insertion; S2 names exactly one complete cohort. |
 | Original Owner Request | “先让纯dos和dos调用32位程序跑通”。 |
-| Similar-Issue Sweep | opcode `0x63`, real/protected mode dispatch, INT 6 frame, `illegal_op_int`, `unexpected_int`, `host_error`, error-dialog choice, `CS:IP`, SAS access and preceding guest control transfers. |
+| Similar-Issue Sweep | BIOS `BOP 12h`, `MEMORY_VAR`, `endmem`, `arena_head`, MCB header construction, `CurrentPDB`, `$ALLOC`, free/realloc handshake, `ES:0` provider destination, SAS memory initialization, conventional-memory limit and guest-memory mapping lease. |
 
-**Plan:** [M0 T384 CPU40 illegal-operation startup recovery](etc/operations/m0-t384-cpu40-illegal-operation-startup-recovery-001.md).
+**Plan:** [M0 T385 original DOS arena startup recovery](etc/operations/m0-t385-original-dos-arena-startup-recovery-001.md).
 
-**S1 finding / stop condition:** [COMMAND environment/resident-overwrite
-ledger](etc/evidence/m0-t384-s1-command-environment-resident-overwrite-ledger-001.md).
-The static audit found that CPU40 is the correct downstream reporter for a
-pre-CPU40 COMMAND resident-memory overwrite.  This activates the packet's
-changed-owner stop condition: the required repair belongs to original DOS
-`INT 21h` arena/allocation and its SoftPC-backed memory precondition, which
-is outside T384's CPU40-only boundary.  No S2 change, build or product run is
-admitted until the owner approves the successor boundary.
+**Predecessor closure:** [T384 CPU40 illegal-operation startup recovery](history/m0-t384-cpu40-illegal-operation-startup-recovery-closure-20260902.md).
+
+**S1 baseline:** [COMMAND environment/resident-overwrite ledger](etc/evidence/m0-t384-s1-command-environment-resident-overwrite-ledger-001.md). It proves CPU40 is the downstream reporter and transfers the source-owned repair boundary to original DOS arena/SoftPC memory setup.
 
 ### M0 T380 — Closed COMMAND native-child runtime activation
 
