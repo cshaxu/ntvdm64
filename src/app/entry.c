@@ -30,7 +30,7 @@ static void app_report_media_root_rejected(void)
         "NTVDM64 cannot start from this package location.\r\n\r\n"
         "The original NTDOS COMMAND startup buffer accepts at most 63 "
         "characters for its generated shell path. Install or move the "
-        "package so its mvdm directory has a shorter Windows path, then "
+        "package so its root directory has a shorter Windows path, then "
         "start NTVDM64 again.",
         "NTVDM64 package path too long", MB_OK | MB_ICONERROR);
 }
