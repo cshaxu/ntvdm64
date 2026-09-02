@@ -78,6 +78,8 @@ neither creates a DOS-device alias nor changes guest/firmware bytes.
 | Exception | Original purpose | Reason | Implementation | Files |
 | --- | --- | --- | --- | --- |
 | `APP-DIV-014` | Original NT installations supplied a short `%SystemRoot%` to `cmdconf.c`; NTDOS stored the generated shell value in `commnd`. | Modern portable package roots can exceed the original 63-visible-byte shell-value capacity and otherwise overflow the unchanged guest contract. | App computes the unchanged original generated-value length, rejects an invalid package before startup, and shows an app-owned explanatory dialog. | `package_layout.c`, `package_layout.h`, `entry.c` |
+| `APP-DIV-015` | Original COMMAND environment initialization enumerates its inherited host environment. | A host-only continuation-observer path must not enter the original guest environment/allocation input. | App captures the explicitly optional path before original startup, deletes that one inherited variable, and the adapter uses only its private bounded copy. | `entry.c`; `../adapter-mvdm-host-out/softpc/{include/mvdm_softpc_termination.h,mvdm_softpc_termination.c}` |
+| `APP-DIV-015` | Original COMMAND environment initialization enumerates its inherited host environment. | A host-only continuation-observer path must not enter the original guest environment/allocation input. | App captures the explicitly optional path before original startup, deletes that one inherited variable, and the adapter uses only its private bounded copy. | `entry.c`; `../adapter-mvdm-host-out/softpc/{include/mvdm_softpc_termination.h,mvdm_softpc_termination.c}` |
 
 ## M0 T346 S3 presentation window
 

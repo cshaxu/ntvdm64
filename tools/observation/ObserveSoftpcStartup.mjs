@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 function usage() {
-  throw new Error('usage: node tools/observation/ObserveSoftpcStartup.mjs --launcher <observer.exe> --product <product.exe> --stage <runtime-dir> --report <result.txt> [--child-environment MVDM_SESSION_DISPOSE_REPORT_PATH=<absolute-path>]');
+  throw new Error('usage: node tools/observation/ObserveSoftpcStartup.mjs --launcher <observer.exe> --product <product.exe> --stage <runtime-dir> --report <result.txt> [--child-environment MVDM_SESSION_DISPOSE_REPORT_PATH=<absolute-path>|MVDM_COMMAND_CONTINUATION_REPORT_PATH=<absolute-path>]');
 }
 
 function sha256(path) {
@@ -39,16 +39,20 @@ for (const key of ['launcher', 'product', 'stage', 'report']) {
 }
 let childEnvironment = undefined;
 if (options['child-environment'] !== undefined) {
-  const prefix = 'MVDM_SESSION_DISPOSE_REPORT_PATH=';
-  if (!options['child-environment'].startsWith(prefix) ||
-      options['child-environment'].length === prefix.length) {
-    throw new Error('only MVDM_SESSION_DISPOSE_REPORT_PATH=<absolute-path> is permitted');
+  const names = [
+    'MVDM_SESSION_DISPOSE_REPORT_PATH',
+    'MVDM_COMMAND_CONTINUATION_REPORT_PATH'
+  ];
+  const separator = options['child-environment'].indexOf('=');
+  const name = separator < 0 ? '' : options['child-environment'].slice(0, separator);
+  const reportPath = separator < 0 ? '' : options['child-environment'].slice(separator + 1);
+  if (!names.includes(name) || reportPath.length === 0) {
+    throw new Error('only an approved absolute diagnostic report path is permitted');
   }
-  const reportPath = options['child-environment'].slice(prefix.length);
   if (!resolve(reportPath) || resolve(reportPath) !== reportPath) {
     throw new Error('child diagnostic report path must be absolute');
   }
-  childEnvironment = { name: 'MVDM_SESSION_DISPOSE_REPORT_PATH', value: reportPath };
+  childEnvironment = { name, value: reportPath };
 }
 if (!existsSync(options.launcher) || !existsSync(options.product) || !existsSync(options.stage)) {
   throw new Error('launcher, product, and stage must already exist');

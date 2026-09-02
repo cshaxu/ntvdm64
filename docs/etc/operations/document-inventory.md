@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3802 |
+| Documentation records | 3804 |
 | --- | --- |
-| Generated UTC | 2026-09-02T05:28:07Z |
+| Generated UTC | 2026-09-02T05:41:06Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | ef9ed4e1b4600aa7b20772d7bb78b2a590e08a7f57982ecc4e1d2d570e32ed35 |
+| STATUS.md | principal control document | 3abedf2340404f7383372152ba5ae00ae88e6f71d8c5b78d4f21a5aa7f5c948f |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1179,6 +1179,8 @@ content-divergent entries.
 | etc/evidence/m0-t357-s2-s3-staged-command-ready-observation-001.md | indexed supporting material | 2a3e65159d191530d6a2d6b869ff37b280828b4ca9351629fea3db22bb3542ac |
 | etc/evidence/m0-t358-s1-command-built-in-batch-topology-001.md | indexed supporting material | a466455e48519e22b7bdfef347b38ccabb4337f0103897a40fbc7d33174f5c30 |
 | etc/evidence/m0-t358-s10-command-continuation-observer-001.md | indexed supporting material | ad9589432f867b0cf8816b8837b2048652c457222336770b2218aa1843098198 |
+| etc/evidence/m0-t358-s11-diagnostic-environment-isolation-001.md | indexed supporting material | 862d067636a5cde64e669f3e65405ae3b69db915539277e24a360fc40bd10b8d |
+| etc/evidence/m0-t358-s12-command-continuation-environment-isolation-001.md | indexed supporting material | d6bd7f0c4c3f44465bb84eb706d2202501542717c8b90dd4ea964ed4c2d7048d |
 | etc/evidence/m0-t358-s3-command-exit-control-flow-boundary-001.md | indexed supporting material | f91ae71755f71ff694456b55bc717dab0d7dc306be5a38446bab5fe2e70dc487 |
 | etc/evidence/m0-t358-s4-base-vdm-command-record-lifecycle-audit-001.md | indexed supporting material | 9b1f45528723d730692082405f705751bc90763c97ea31f5aadf235501678159 |
 | etc/evidence/m0-t358-s5-command-c-exit-topology-audit-001.md | indexed supporting material | 20872bd5fa472b92d9924c6246d1c27f9492790ab1f753ff0344b28ed9731b94 |

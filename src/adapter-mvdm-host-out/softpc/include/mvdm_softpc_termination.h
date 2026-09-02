@@ -62,6 +62,11 @@ void mvdm_softpc_record_command_continuation(unsigned int stage,
     unsigned int guest_bx, unsigned int guest_cf, unsigned int first_call,
     unsigned int repeat_call, uint32_t dos_record_state);
 
+/* App captures the optional continuation-report path before original MVDM
+ * reads its inherited environment, then removes that diagnostic variable.
+ * The retained path is adapter-private and is never made guest-visible. */
+void mvdm_softpc_capture_command_continuation_report_path(void);
+
 /* Default-off, fixed-container DEM observation.  The caller passes only the
  * original numeric DS:SI form; this helper takes and releases its own bounded
  * session lease before recording copied text and scalar outcome. */

@@ -21,15 +21,17 @@ int main(void)
     if (GetFileAttributesA(report_path) != INVALID_FILE_ATTRIBUTES) return 11;
     if (!SetEnvironmentVariableA("MVDM_COMMAND_CONTINUATION_REPORT_PATH",
             report_path)) return 12;
+    mvdm_softpc_capture_command_continuation_report_path();
+    if (GetEnvironmentVariableA("MVDM_COMMAND_CONTINUATION_REPORT_PATH",
+            report, (DWORD)sizeof(report)) != 0u) return 13;
     mvdm_softpc_record_command_continuation(1u, 0x0070u, 0x047Cu,
         0x0037u, 0x0020u, 1u, 0u, 1u, 2u);
-    SetEnvironmentVariableA("MVDM_COMMAND_CONTINUATION_REPORT_PATH", NULL);
-    if (fopen_s(&file, report_path, "rb") != 0 || file == NULL) return 13;
+    if (fopen_s(&file, report_path, "rb") != 0 || file == NULL) return 14;
     bytes_read = fread(report, 1u, sizeof(report) - 1u, file);
     fclose(file);
     report[bytes_read] = '\0';
     DeleteFileA(report_path);
     return strstr(report,
         "svc=01 stage=1 cs=0070 ip=047C ax=0037 bx=0020 cf=1 first=0 repeat=1 dos-state=00000002")
-        != NULL ? 0 : 14;
+        != NULL ? 0 : 15;
 }

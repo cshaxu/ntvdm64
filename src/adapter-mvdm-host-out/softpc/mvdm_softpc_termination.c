@@ -12,6 +12,7 @@
 
 static __declspec(thread) const char *mvdm_softpc_termination_origin =
     "unattributed";
+static char mvdm_softpc_command_continuation_report_path[MAX_PATH];
 
 static char *mvdm_softpc_append_hex(char *output, ULONG_PTR value,
     unsigned int digits)
@@ -44,6 +45,24 @@ static void mvdm_softpc_write_optional_report(const char *environment_name,
         return;
     (void)WriteFile(report, message, message_bytes, &written, NULL);
     CloseHandle(report);
+}
+
+void mvdm_softpc_capture_command_continuation_report_path(void)
+{
+    DWORD bytes;
+
+    /* DIVERGENCE(APP-DIV-015): original cmdenv.c copies inherited variables
+     * into the guest DOS environment.  A host-only observation selector must
+     * be captured before original startup and then removed, rather than
+     * becoming a new guest/environment allocation input. */
+    mvdm_softpc_command_continuation_report_path[0] = '\0';
+    bytes = GetEnvironmentVariableA("MVDM_COMMAND_CONTINUATION_REPORT_PATH",
+        mvdm_softpc_command_continuation_report_path,
+        (DWORD)sizeof(mvdm_softpc_command_continuation_report_path));
+    (void)SetEnvironmentVariableA("MVDM_COMMAND_CONTINUATION_REPORT_PATH",
+        NULL);
+    if (bytes == 0u || bytes >= sizeof(mvdm_softpc_command_continuation_report_path))
+        mvdm_softpc_command_continuation_report_path[0] = '\0';
 }
 
 static void mvdm_softpc_write_exception_report(const char *message,
@@ -402,12 +421,10 @@ void mvdm_softpc_record_command_continuation(unsigned int stage,
     char message[192];
     int formatted;
 
-    /* This is deliberately a separate default-off channel.  The established
-     * generic COMMAND recorder writes its historic diagnostics to stderr;
-     * this continuation discriminator must leave ordinary output untouched
-     * unless the fixed container explicitly asks for a report. */
-    if (GetEnvironmentVariableA("MVDM_COMMAND_CONTINUATION_REPORT_PATH",
-            NULL, 0u) == 0u)
+    /* This is deliberately a separate default-off channel.  Its path was
+     * captured and removed before original cmdenv.c saw the environment, so
+     * an enabled observer cannot alter original guest input or allocation. */
+    if (mvdm_softpc_command_continuation_report_path[0] == '\0')
         return;
     formatted = snprintf(message, sizeof(message),
         "MVDM-CMD-CONT svc=01 stage=%u cs=%04X ip=%04X ax=%04X bx=%04X cf=%u first=%u repeat=%u dos-state=%08lX\\r\\n",
@@ -416,8 +433,15 @@ void mvdm_softpc_record_command_continuation(unsigned int stage,
         first_call ? 1u : 0u, repeat_call ? 1u : 0u,
         (unsigned long)dos_record_state);
     if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
-    mvdm_softpc_write_optional_report("MVDM_COMMAND_CONTINUATION_REPORT_PATH",
-        message, (DWORD)formatted);
+    {
+        HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
+            FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
+            FILE_ATTRIBUTE_NORMAL, NULL);
+        DWORD written;
+        if (report == INVALID_HANDLE_VALUE) return;
+        (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
+        CloseHandle(report);
+    }
 }
 
 void mvdm_softpc_record_dem_open(uint16_t guest_ds, uint16_t guest_si,

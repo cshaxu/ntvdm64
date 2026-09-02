@@ -951,7 +951,7 @@ child-return state or COMMAND completion.
 
 **S10 closure:** [original COMMAND continuation observer](etc/evidence/m0-t358-s10-command-continuation-observer-001.md) proves the source-shaped observer records entry/return provenance without altering the original dispatcher or Base VDM record.
 
-### M0 T358 S11 — Active frozen `/C EXIT` continuation observation
+### M0 T358 S11 — Closed invalid continuation-observation isolation audit
 
 | Field | Record |
 | --- | --- |
@@ -964,10 +964,39 @@ child-return state or COMMAND completion.
 | Verification | One fixed executable, root media, command declaration, console-owning container and timeout; durable report review; documentation governance/export and diff review. |
 | Expected Markers | Entry/return `MVDM-CMD-CONT svc=01` records contain the admitted scalar provenance; their order and state classify the continuation without inferring a result from timeout alone. |
 | Stop Conditions | A second run, any changed runtime input, or any production/source behavior change pauses for a new packet. |
-| Exit Criteria | One immutable observation either proves the source-owned `/C EXIT` completion/parent reacquisition marker required by T358 or identifies one earlier source-owned dependency; T358 then closes or transfers only that dependency. |
+| Exit Criteria | Closed invalid: the sole run proved that the report environment variable was an unadmitted original `cmdenv.c` input. It establishes no runtime classification and selects one diagnostic-isolation correction before any replacement observation. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 
-**Active: M0 T358 S11.**
+**S11 closure:** [invalid continuation observation and diagnostic isolation](etc/evidence/m0-t358-s11-diagnostic-environment-isolation-001.md) records the invalid run without attributing it to product behavior.
+
+### M0 T358 S12 — Closed observer environment-isolation correction
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T358 S12; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by closed S11 under the owner-approved ordered queue execution. |
+| Objective | Capture the optional host-only continuation-report path before original MVDM reads inherited variables, remove it from that process environment, and retain only a bounded adapter-private report path; then formally link and prove the default-off/enabled format. |
+| Non-goals | No `cmdenv.c`/guest/media/command-record/BOP/provider/BaseSrv/CPU/SoftPC semantic change, command filtering, mapper, CPU30, Bochs, x64, WOW, Redirector or product workload. |
+| Files And ABI Surface | App startup assembly and existing continuation observer only. The report path is adapter-private, not a guest or product ABI. |
+| Verification | Focused default-off/capture/removal/format proof, formal CPU40/x86 link, governance/export and diff review. No product workload in S12. |
+| Exit Criteria | Closed: the disabled observer produces no record; the enabled observer removes only its host-only selector before original startup and writes the same fixed scalar record; S13 may make one valid frozen run. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+
+**S12 closure:** [continuation observer environment isolation](etc/evidence/m0-t358-s12-command-continuation-environment-isolation-001.md) proves capture/removal/format in the focused x86 fixture and a formal CPU40/x86 product link.
+
+### M0 T358 S13 — Active valid frozen continuation observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T358 S13; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by closed S12 under the owner-approved ordered queue execution. |
+| Objective | Make exactly one fixed-root CPU40/x86 `/C EXIT` observation with the default-off continuation report captured outside original MVDM environment; classify the first source-owned successor after the two original `54:0F` returns. |
+| Non-goals | No source, guest/media, package-layout, command-record, BOP/provider, BaseSrv/CSRSS, DOS EXEC, cmdExec32, CPU/SoftPC, CPU30, Bochs, x64, WOW, Redirector or graphics change. |
+| Verification | One fixed executable, root media, command declaration, console-owning container and timeout; durable BOP/continuation report review; documentation governance and diff review. |
+| Exit Criteria | One valid run either records original `54:01` provenance or establishes an earlier source-owned boundary without diagnostic environment contamination. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+
+**Active: M0 T358 S13.**
 
 
 ### M0 T355 S31 — Closed original `0x78` entry-result attribution
