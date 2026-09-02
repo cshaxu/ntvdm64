@@ -1097,27 +1097,15 @@ and
 
 ## Active Packet
 
-### M0 T377 S5 — Active frozen original workload-matrix observation
+**No active M/T/S packet.**
 
-**Active: M0 T377 S5**
+### M0 T377 — Closed pure DOS device, file and graphics workload matrix
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T377 S5; ordinary mode (single-person dual-role fixed-container observation). |
-| Admission And Approval | S4 closed the source/formal/staging contract.  S5 is admitted solely to execute the three predeclared original DOS workload commands without optional diagnostic environment changes. |
-| Objective | Run the bounded `MEM.EXE`, `KB16.COM US` and `GRAPHICS.COM` observations in the fixed console-owning CPU40/SoftPC container; retain product/media identity and classify only the first source-owned result. |
-| Non-goals | No repair during observation, retry under a changed container, guest/media mutation, BOP/port leaf patch, synthetic keyboard/PrintScreen, controller replacement, CPU30, Bochs, x64 guest runtime, native child, Redirector or WOW work. |
-| Reference Baseline | T376 closure; T377 S1--S4 evidence; current formal CPU40/x86 product and staged `O:\\ntvdm64` runtime. |
-| Files And ABI Surface | Existing observer, staged original media, formal product and observation report only. No production source or ABI change. |
-| Applicable Rules | Execution, source policy, source-first recovery, immutable-media staging, fixed-container observation, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Exactly one bounded console-owning observation for each predeclared workload with no `--child-environment`; compare product/media hashes and classify an original return or earliest source-defined boundary. |
-| Expected Markers | Original DOS command path, normal return, or an exact original device/file/video boundary.  A program result alone never proves general device compatibility. |
-| Asset Needs | S4-fixed formal product/media stage, Node 22 observer and existing console-owning launcher. |
-| Reporting Requirements | Preserve exact commands, identities, timeout and result; distinguish the three workload outcomes and never infer a repair target from one trace. |
-| Stop Conditions | Any identity mismatch, need for diagnostic environment variable, altered timeout/root/media/product, source edit, or a proposed leaf repair invalidates this S and requires a new admission. |
-| Exit Criteria | All three frozen observations are retained, source-classified and reported; T377 either closes on the matrix standard or records a single exact original boundary for a later package. |
-| Original Owner Request | “批准开始下一条的任务” together with the standing objective to execute the queue in single-person dual-role mode and retain minimal mirror/source-first recovery. |
-| Similar-Issue Sweep | `nt_timer`, `TimerInit`, `Win32_host_timer`, `SuspendTimerThread`, timer/ICA IRQ, `video.c`, VGA/EGA/CGA tables, C-video dispatch, font memory and app presentation handoff. |
+| Closure | [T377 history record](history/m0-t377-pure-dos-device-file-graphics-workload-closure-20260902.md) |
+| Result | Original `MEM.EXE` and `KB16.COM US` returned zero in the immutable CPU40/SoftPC container. `GRAPHICS.COM` returned the app/session cleanup status `0x48`; it is not attributed to a graphics controller or BOP leaf. |
+| Transfer | Any later recovery of `0x48` is a separately admitted whole session-lifecycle package. The ordered next product package remains DOS-extender runtime closure. |
 
 **Plan:** [M0 T377 pure DOS device, file and graphics workload closure](etc/operations/m0-t377-pure-dos-device-file-graphics-workload-001.md).
 
@@ -1128,6 +1116,10 @@ and
 **S3 closure:** [timer, IRQ and video owner recovery](etc/evidence/m0-t377-s3-timer-irq-video-owner-recovery-001.md).
 
 **S4 closure:** [formal workload-matrix closure](etc/evidence/m0-t377-s4-formal-workload-matrix-closure-001.md).
+
+**S5 closure:** [frozen DOS device workload observation](etc/evidence/m0-t377-s5-frozen-dos-device-workload-observation-001.md).
+
+**T377 closure:** [pure DOS device/file/graphics workload closure](history/m0-t377-pure-dos-device-file-graphics-workload-closure-20260902.md).
 
 ### M0 T357 S1 — Closed staged runtime identity and owner admission
 
