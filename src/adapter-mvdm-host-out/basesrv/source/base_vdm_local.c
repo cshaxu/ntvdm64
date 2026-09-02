@@ -62,6 +62,7 @@ int base_vdm_local_valid(const base_vdm_local *record)
         record->current_directory_bytes <= MAX_PATH + 1u &&
         record->lock_initialized == 1u && record->wake_event != NULL &&
         record->pending_request <= 1u &&
+        record->dos_record_state <= BASE_VDM_DOS_RECORD_HAS_RETURNED_ERROR_CODE &&
         (record->current_directories_bytes == 0u ||
          record->current_directories != NULL);
 }
@@ -101,6 +102,8 @@ int base_vdm_local_publish(base_vdm_local *record, const base_vdm_command *comma
     record->environment_bytes = command->environment_bytes;
     record->current_directory_bytes = command->current_directory_bytes;
     record->available = 1u;
+    record->dos_record_state = command->command_owner == BASE_VDM_COMMAND_DOS ?
+        BASE_VDM_DOS_RECORD_TO_TAKE_A_COMMAND : BASE_VDM_DOS_RECORD_EMPTY;
     if (!SetEvent(record->wake_event)) {
         record->available = 0u;
         goto done;
@@ -160,6 +163,25 @@ static NTSTATUS get_next_command(base_vdm_local *record, PVDMINFO information)
         if (wow_request) {
             LeaveCriticalSection(&record->lock);
             return STATUS_SUCCESS;
+        }
+        if ((state & RETURN_ON_NO_COMMAND) &&
+            (record->dos_record_state == BASE_VDM_DOS_RECORD_BUSY ||
+             record->dos_record_state == BASE_VDM_DOS_RECORD_HAS_RETURNED_ERROR_CODE)) {
+            /* DIVERGENCE: the original BaseSrv marks a VDM_BUSY child as
+             * returned, wakes its external parent record, then its
+             * BaseClient retry observes no next command.  This one-session
+             * composition has no external parent or duplicated wait handle.
+             * Preserve the same caller-visible terminal result directly:
+             * no command buffers, failure return, and no retained request.
+             * Do not turn this into a synthetic guest command or a generic
+             * scheduler wake. */
+            record->error_code = information->ErrorCode;
+            record->dos_record_state =
+                BASE_VDM_DOS_RECORD_HAS_RETURNED_ERROR_CODE;
+            record->pending_request = 0u;
+            ResetEvent(record->wake_event);
+            LeaveCriticalSection(&record->lock);
+            return STATUS_NO_MEMORY;
         }
         if ((state & RETURN_ON_NO_COMMAND) && (state & ASKING_FOR_SECOND_TIME)) {
             LeaveCriticalSection(&record->lock);
@@ -222,6 +244,8 @@ static NTSTATUS get_next_command(base_vdm_local *record, PVDMINFO information)
     information->ErrorCode = record->error_code;
     information->fComingFromBat = record->coming_from_bat;
     record->available = 0u;
+    if (!wow_request)
+        record->dos_record_state = BASE_VDM_DOS_RECORD_BUSY;
     record->pending_request = 0u;
     ResetEvent(record->wake_event);
     LeaveCriticalSection(&record->lock);

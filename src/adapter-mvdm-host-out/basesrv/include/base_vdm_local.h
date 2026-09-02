@@ -8,13 +8,22 @@
 
 typedef struct session session;
 
-#define BASE_VDM_LOCAL_VERSION UINT32_C(3)
+#define BASE_VDM_LOCAL_VERSION UINT32_C(4)
 
 /* These identify which original BaseSrv command queue owns a copied record.
  * They are not guest values and never enter VDMINFO: the original client
  * derives the same choice from its VDMState and ConsoleHandle. */
 #define BASE_VDM_COMMAND_DOS UINT16_C(0)
 #define BASE_VDM_COMMAND_WOW ASKING_FOR_WOW_BINARY
+
+/* Reached BaseSrv DOS-record states.  These are adapter-private host state,
+ * never VDMINFO or guest state.  A one-session record has no NT4 parent
+ * process/wait-handle pair, but it must still distinguish a command waiting
+ * to run, an active child, and the child's completed return. */
+#define BASE_VDM_DOS_RECORD_EMPTY UINT32_C(0)
+#define BASE_VDM_DOS_RECORD_TO_TAKE_A_COMMAND UINT32_C(1)
+#define BASE_VDM_DOS_RECORD_BUSY UINT32_C(2)
+#define BASE_VDM_DOS_RECORD_HAS_RETURNED_ERROR_CODE UINT32_C(3)
 
 /* A copied record for one reached original BaseSrv command path. */
 typedef struct base_vdm_command {
@@ -66,6 +75,7 @@ typedef struct base_vdm_local {
     HANDLE wake_event;
     uint32_t lock_initialized;
     uint32_t pending_request;
+    uint32_t dos_record_state;
     uint8_t command[MAXIMUM_VDM_COMMAND_LENGTH];
     /* BaseClient/BaseSrv carry the host application path independently of
      * the DOS-shaped guest path fields.  The original client uses MAX_PATH
