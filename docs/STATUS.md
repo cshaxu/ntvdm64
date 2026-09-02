@@ -28,6 +28,8 @@
 
 **Plan:** [M0 T386 original COMMAND runtime recovery](etc/operations/m0-t386-original-command-runtime-recovery-001.md).
 
+**S3 evidence:** [COMMAND arena/layout disposition](etc/evidence/m0-t386-s3-command-arena-layout-disposition-001.md).
+
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 
 **Plan:** [M0 T375 pure DOS CPU40/SoftPC boot and COMMAND baseline](etc/operations/m0-t375-pure-dos-cpu40-softpc-command-baseline-001.md).
