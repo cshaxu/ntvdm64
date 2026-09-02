@@ -2,25 +2,25 @@
 
 ## Current Work
 
-### M0 T372 S4 — Active Redirector mailslot and completion owner groups
+### M0 T372 S5 — Active Redirector public network owner groups
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T372 S4; Ordinary Mode (single-person dual-role implementation and review). |
-| Admission And Approval | Admitted after closed T372 S3 under the owner's standing instruction to execute the dependency-ordered queue, with ordinary Git delivery permanently authorized. |
-| Objective | Recover original `vdmredir` mailslot and asynchronous-completion owner groups through the already-closed parent SoftPC import ABI, then prove their checked guest-memory and session-completion behavior. |
+| Identifier Mode | M0 T372 S5; Ordinary Mode (single-person dual-role implementation and review). |
+| Admission And Approval | Admitted after closed T372 S4 under the owner's standing instruction to execute the dependency-ordered queue, with ordinary Git delivery permanently authorized. |
+| Objective | Recover original `vdmredir` public NetAPI, NetBIOS and DLC owner groups through the closed parent SoftPC import ABI; classify private/downlevel-only paths by original failure direction. |
 | Non-goals | No isolated `57:xx` enablement; no synthetic Redirector provider; no guest-media mutation; no new COMMAND broker; no CSR/BaseSrv/kernel-VDM recreation; no CPU/device/Bochs/x64 recovery. |
-| Reference Baseline | Closed T372 S1--S3; original `vdmredir.def`, `sources`, `vrmslot.c`, `vrnmpipe.c` and `vrdlcpst.c`; current CPU40/x86 build generator. |
-| Files And ABI Surface | Original mailslot/asynchronous owner bodies, existing same-shaped Redirector/session bindings, focused owner tests and formal CPU40/x86 link audit; no provider-body rewrite and no `nt_bop.c` static-link alteration. |
+| Reference Baseline | Closed T372 S1--S4; original `vdmredir.def`, `sources`, `vrnetapi.c`, `vrnetbios.c` and `vrdlcpst.c`; current CPU40/x86 build generator. |
+| Files And ABI Surface | Original network owner bodies, existing same-shaped Redirector/session bindings, focused source/link evidence and formal CPU40/x86 audit; no provider-body rewrite and no `nt_bop.c` static-link alteration. |
 | Applicable Rules | Execution, source policy, source-first recovery, immutable guest, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and document rules. |
-| Verification | Compile the original owner bodies, verify completion/cancellation/stale-handle behavior through the checked session mappings, then run the formal CPU40/x86 link audit; run documentation inventory and `git diff --check`. |
-| Expected Markers | Original completion records and ordering, bounded guest leases, session-safe mailslot/pipe identities, no static `nt_bop.c` substitution. |
-| Asset Needs | Current original provider mirror, `vdmredir.def`, adapter/session libraries and disposable `build/M0-T372/S3` root. |
-| Reporting Requirements | Distinguish a load/export/lifecycle proof from any guest `57:xx` execution claim. |
-| Stop Conditions | A required source rewrite, new host policy, changed mapping lifetime, selector activation, or an import requiring an unadmitted external OpenNT package pauses for revised admission. |
-| Exit Criteria | The original mailslot and asynchronous owner groups have source-first dispositions and focused stale/cancellation/disconnect proof. The complete `VDMREDIR.dll` image remains a T372 S6 whole-package result because its export image also contains the S5 NetAPI/NetBIOS/DLC bodies. |
+| Verification | Compile the original network owner bodies, classify external imports by owner and public availability, run focused source/link proof and the formal CPU40/x86 link audit; run documentation inventory and `git diff --check`. |
+| Expected Markers | Original network owner control flow, public capability bindings or source-proven unavailable paths, bounded guest leases, no static `nt_bop.c` substitution. |
+| Asset Needs | Current original provider mirror, `vdmredir.def`, adapter/session libraries and disposable formal x86 root. |
+| Reporting Requirements | Distinguish a source/link disposition from any guest `57:xx` execution claim. |
+| Stop Conditions | A required source rewrite, changed mapping lifetime, selector activation, or an import requiring an unadmitted external OpenNT package pauses for revised admission. |
+| Exit Criteria | Every S5 network/NetBIOS/DLC owner import has a source-first public binding, source-proven unavailable disposition, or a specific S6 whole-image deferral; no private NT4 transport is silently replaced. |
 | Original Owner Request | Continue the ordered queue in single-person dual-role mode; preserve original mirror-first recovery and do not use trace-selected leaf patches. |
-| Similar-Issue Sweep | Completion record lifetime, mailbox identity, stale/duplicate release, cancellation, disconnect and bounded guest-copy failure. |
+| Similar-Issue Sweep | NetAPI/RAP conversion, NetBIOS/DLC completion, public/downlevel API distinction, guest pointer lease, service unavailable and error translation. |
 
 **Plan:** [M0 T372 Redirector and host-resource execution](etc/operations/m0-t372-redirector-host-resource-execution-001.md).
 
@@ -41,6 +41,13 @@ original provider selection.
 **S4 P1:** [local completion source build](etc/evidence/m0-t372-s4-p1-local-completion-source-build-001.md).
 
 **S4 P2:** [formal CPU40 regression](etc/evidence/m0-t372-s4-p2-formal-cpu40-regression-001.md).
+
+**S4 P3:** [original termination-cleanup closure](etc/evidence/m0-t372-s4-p3-original-termination-cleanup-001.md).
+
+**S4 closure:** original `VrTerminateDosProcess` preserves its PDB-to-
+mailslot/pipe cleanup order; the same-shaped session binding supplies only the
+required checked worker/lease cleanup.  Dynamic DLL and live `57:xx` claims
+remain deferred to S6.
 
 ### M0 T371 — Closed XMS, DPMI and DOS-extender execution
 
