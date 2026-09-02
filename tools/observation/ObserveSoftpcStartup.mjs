@@ -12,11 +12,15 @@ function sha256(path) {
 }
 
 function normalizeManifest(manifest) {
-  if ((manifest.format === 2 || manifest.format === 3) && manifest.product && Array.isArray(manifest.mediaAssets)) {
-    return { product: manifest.product, mediaAssets: manifest.mediaAssets };
+  if ((manifest.format === 2 || manifest.format === 3 || manifest.format === 4) && manifest.product && Array.isArray(manifest.mediaAssets)) {
+    return {
+      product: manifest.product,
+      runtimeCompanions: Array.isArray(manifest.runtimeCompanions) ? manifest.runtimeCompanions : [],
+      mediaAssets: manifest.mediaAssets
+    };
   }
   if (manifest.format === 1 && Array.isArray(manifest.assets) && manifest.assets.length !== 0) {
-    return { product: manifest.assets[0], mediaAssets: manifest.assets.slice(1) };
+    return { product: manifest.assets[0], runtimeCompanions: [], mediaAssets: manifest.assets.slice(1) };
   }
   throw new Error('unsupported runtime stage manifest');
 }
@@ -70,13 +74,19 @@ const manifestPath = resolve(options.stage, 'runtime-manifest.json');
 if (!existsSync(manifestPath)) throw new Error(`missing fixed stage manifest: ${manifestPath}`);
 const manifest = readFileSync(manifestPath);
 const layout = normalizeManifest(JSON.parse(manifest));
-if (layout.product.destination !== 'original-softpc-process.exe') {
+if (layout.product.destination !== 'ntvdm.exe') {
   throw new Error('runtime stage product destination is not the fixed product name');
 }
 for (const asset of layout.mediaAssets) {
   const stagedAsset = resolve(options.stage, asset.destination);
   if (!existsSync(stagedAsset) || sha256(stagedAsset) !== asset.sha256) {
     throw new Error(`fixed runtime media identity mismatch: ${asset.destination}`);
+  }
+}
+for (const companion of layout.runtimeCompanions) {
+  const stagedCompanion = resolve(options.stage, companion.destination);
+  if (!existsSync(stagedCompanion) || sha256(stagedCompanion) !== companion.sha256) {
+    throw new Error(`runtime companion identity mismatch: ${companion.destination}`);
   }
 }
 /* The product is deliberately the one mutable item in the fixed container.
@@ -88,6 +98,8 @@ copyFileSync(options.product, stagedProduct);
 const productSha256 = sha256(stagedProduct);
 const fixedMediaManifestSha256 = createHash('sha256').update(JSON.stringify(
   layout.mediaAssets)).digest('hex');
+const runtimeCompanionsManifestSha256 = createHash('sha256').update(JSON.stringify(
+  layout.runtimeCompanions)).digest('hex');
 const launcherArguments = [stagedProduct, options.stage, options.report];
 if (options['product-command'] !== undefined) {
   /* The observer is a transport-only fixed-container harness. It forwards one
@@ -110,6 +122,7 @@ writeFileSync(`${options.report}.json`, `${JSON.stringify({
   childEnvironment: childEnvironment === undefined ? [] : [childEnvironment.name],
   stageManifestSha256: createHash('sha256').update(manifest).digest('hex'),
   fixedMediaManifestSha256,
+  runtimeCompanionsManifestSha256,
   productSource: options.product,
   productStage: stagedProduct,
   productSha256,

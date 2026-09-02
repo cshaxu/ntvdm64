@@ -41,7 +41,7 @@ const requiredAssets = [
 ];
 
 function usage() {
-  throw new Error('usage: node tools/build/Stage-OriginalSoftpcRuntime.mjs --executable <product.exe> --output <directory> [--update --replace-product]');
+  throw new Error('usage: node tools/build/Stage-OriginalSoftpcRuntime.mjs --executable <product.exe> --output <directory> [--redirector-dll <VDMREDIR.dll>] [--update --replace-product]');
 }
 
 function sha256(path) {
@@ -50,17 +50,19 @@ function sha256(path) {
 
 let executable = null;
 let output = null;
+let redirectorDll = null;
 let update = false;
 let replaceProduct = false;
 for (let index = 2; index < process.argv.length; index += 1) {
   const option = process.argv[index];
   if (option === '--update') update = true;
   else if (option === '--replace-product') replaceProduct = true;
-  else if (option === '--executable' || option === '--output') {
+  else if (option === '--executable' || option === '--output' || option === '--redirector-dll') {
     const value = process.argv[index + 1];
     if (value === undefined) usage();
     if (option === '--executable') executable = value;
-    else output = value;
+    else if (option === '--output') output = value;
+    else redirectorDll = value;
     index += 1;
   }
   else usage();
@@ -70,7 +72,12 @@ if (replaceProduct && !update) usage();
 
 const executablePath = isAbsolute(executable) ? executable : resolve(process.cwd(), executable);
 const outputPath = isAbsolute(output) ? output : resolve(process.cwd(), output);
+const redirectorDllPath = redirectorDll === null ? null :
+  (isAbsolute(redirectorDll) ? redirectorDll : resolve(process.cwd(), redirectorDll));
 if (!existsSync(executablePath)) throw new Error(`product executable does not exist: ${executablePath}`);
+if (redirectorDllPath !== null && !existsSync(redirectorDllPath)) {
+  throw new Error(`redirector DLL does not exist: ${redirectorDllPath}`);
+}
 if (existsSync(outputPath) && !update) throw new Error(`refusing to overwrite runtime package: ${outputPath}`);
 if (update && !existsSync(join(outputPath, 'runtime-manifest.json'))) {
   throw new Error(`refusing to update a directory without a runtime manifest: ${outputPath}`);
@@ -96,13 +103,24 @@ function stage(source, destination, replace = false) {
 
 /* The executable is the sole replaceable fixed-container input: callers must
  * opt in after a formal link. Guest and firmware bytes never use this path. */
-stage(executablePath, 'original-softpc-process.exe', replaceProduct);
+/* The original late-loaded owner DLLs import the parent as ntvdm.exe.  The
+ * formal build output may retain a descriptive filename, but the staged,
+ * launched product must retain this original module identity. */
+stage(executablePath, 'ntvdm.exe', replaceProduct);
+const runtimeCompanions = [];
+if (redirectorDllPath !== null) {
+  /* VDMREDIR is a parent-product companion, not mutable guest media.  The
+   * original nt_bop loader resolves it beside the selected parent EXE. */
+  stage(redirectorDllPath, 'VDMREDIR.DLL', replaceProduct);
+  runtimeCompanions.push(manifest[manifest.length - 1]);
+}
 for (const [source, destination] of requiredAssets) stage(join(scriptRoot, source), destination);
 writeFileSync(join(outputPath, 'runtime-manifest.json'), `${JSON.stringify({
-  format: 3,
+  format: 4,
   /* The EXE is intentionally replaced by each formal product observation.
    * Everything in mediaAssets is immutable fixed-container input. */
   product: manifest[0],
-  mediaAssets: manifest.slice(1)
+  runtimeCompanions,
+  mediaAssets: manifest.slice(1 + runtimeCompanions.length)
 }, null, 2)}\n`);
 console.log(outputPath);

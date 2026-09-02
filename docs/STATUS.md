@@ -1097,27 +1097,27 @@ and
 
 ## Active Packet
 
-### M0 T379 S4 — Active original VDMREDIR formal activation matrix
+### M0 T379 S5 — Active original VDMREDIR frozen local-resource observation
 
-**Active: M0 T379 S4**
+**Active: M0 T379 S5**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T379 S4; ordinary mode (single-person dual-role original-owner recovery). |
-| Admission And Approval | Admitted by S3's complete local resource/lifecycle owner matrix and focused x86 proof. |
-| Objective | Package the formally linked original `VDMREDIR.dll` beside the selected CPU40 parent and immutable `REDIR.EXE`; prove normal loader and retained failure directions without a product observation. |
-| Non-goals | No `57:xx` leaf patch, synthetic Redirector, guest-media rewrite, runtime observation, CPU30, Bochs, x64 recovery, broker, native-child, WOW, SMB/RAP client or selective XACTSRV import. |
-| Reference Baseline | S1--S3 evidence, T372 closure, formal original CPU40 parent/DLL and immutable selected workload. |
-| Files And ABI Surface | Existing stager/package manifest, original parent dynamic loader, original DLL and selected immutable `REDIR.EXE`; no provider-body change. |
+| Identifier Mode | M0 T379 S5; ordinary mode (single-person dual-role original-owner recovery). |
+| Admission And Approval | Admitted by S4's closed formal parent/DLL activation matrix. |
+| Objective | Make exactly one bounded non-debug observation of immutable `REDIR.EXE` from the S4 identity-proven package; classify its first original Redirector result or earlier owner boundary. |
+| Non-goals | No `57:xx` leaf patch, synthetic Redirector, guest-media rewrite, source repair, CPU30, Bochs, x64 recovery, broker, native-child, WOW, SMB/RAP client or selective XACTSRV import. |
+| Reference Baseline | S1--S4 evidence, T372 closure, S4 format-4 parent/DLL/media manifest and existing fixed console-owning observer. |
+| Files And ABI Surface | Existing observer, S4 staged `ntvdm.exe`/`VDMREDIR.DLL`, immutable selected `REDIR.EXE` and durable report only; no production source or ABI change. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, immutable-media staging, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Formal parent/DLL package matrix, product and media identity check, loader normal/failed path proof and governance checks. No product run. |
-| Expected Markers | One staged parent/DLL pair with an exact dependency location; successful original loader eligibility and retained `ERROR_INVALID_FUNCTION` direction for absent/invalid activation. |
-| Asset Needs | Current original mirror, T372 evidence, formal CPU40 graph, current stage and immutable workload candidates. |
-| Reporting Requirements | Record parent/DLL/workload identities and the loader paths; distinguish formal/package proof from S5 runtime observation. |
-| Stop Conditions | A required second provider, private CSR/RPC recreation, guest rewrite, raw host pointer carrier, CPU/machine change or trace-selected leaf implementation requires revised package admission. |
-| Exit Criteria | The formal parent/DLL/workload activation matrix has source/package evidence and S5 may make the one frozen observation. |
+| Verification | Stage/parent/DLL/workload identity comparison and exactly one bounded console-owning observation. |
+| Expected Markers | An original Redirector result, or an earlier source-owned terminal with no repair implied by the trace. |
+| Asset Needs | S4 format-4 package, current formal CPU40 parent/DLL, immutable original workload and existing observer. |
+| Reporting Requirements | Record exact command, identities, durable observer result and first owner classification; distinguish one observation from general `57:xx` completion. |
+| Stop Conditions | Retry, changed stage/workload/timeout/observer, debugger, guest mutation, a source repair, second provider or trace-selected implementation ends S5 without a result claim. |
+| Exit Criteria | One valid identity-proven frozen observation is retained and classified against the original route topology. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
-| Similar-Issue Sweep | `MS_bop_7`, `LoadVdmRedir`, `GetProcAddress`, `.def`, exports, `VrDispatch`, `cmdredir`, DEM consumers, local handles/leases, pipes, mailslots, completions, NetAPI, NetBIOS, DLC, RAP and private RPC. |
+| Similar-Issue Sweep | Stage parent identity, `VDMREDIR.DLL`, `MS_bop_7`, `LoadVdmRedir`, `GetProcAddress`, exports, `VrDispatch`, `cmdredir`, DEM consumers, local handles/leases, pipes, mailslots, completions, NetAPI, NetBIOS, DLC, RAP and private RPC. |
 
 **Plan:** [M0 T379 original VDMREDIR runtime product activation](etc/operations/m0-t379-original-vdmredir-runtime-product-activation-001.md).
 
@@ -1126,6 +1126,8 @@ and
 **S2 closure:** [original VDMREDIR DLL and parent-loader closure](etc/evidence/m0-t379-s2-original-vdmredir-dll-parent-loader-closure-001.md).
 
 **S3 closure:** [original VDMREDIR local resource/lifecycle closure](etc/evidence/m0-t379-s3-local-resource-lifecycle-closure-001.md).
+
+**S4 closure:** [formal VDMREDIR activation matrix](etc/evidence/m0-t379-s4-formal-vdmredir-activation-matrix-001.md).
 
 ### M0 T378 — Closed DOS-extender runtime closure
 
