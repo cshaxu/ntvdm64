@@ -548,7 +548,7 @@ VDM contract. The positive and rejected forms pass its forced x86 fixture; the
 formal CPU40/x86 product links; one fixed observation times out without a
 trace-selected repair or guest-execution claim.
 
-### M0 T356 S1 — Active minimal DOS guest execution / controlled-return topology audit
+### M0 T356 S1 — Closed minimal DOS guest execution / controlled-return topology audit
 
 | Field | Record |
 | --- | --- |
@@ -568,9 +568,31 @@ trace-selected repair or guest-execution claim.
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `GetNextVDMCommand`, `cmdGetNextCmd`, `cmdExec`, `cmdReturnExitCode`, `demLoadDos`, DOS `EXEC`, PSP, MCB/arena, JFN/SFT, environment/COMSPEC, `host_simulate`, CPU40 re-entry, `ExitVDM`, `BaseSrvUpdateVDMEntry`, session completion and controlled stop. |
 
+**S1 closure:** [Topology audit](etc/evidence/m0-t356-s1-minimal-dos-execution-controlled-return-topology-audit-001.md) proves the source-defined split between the Base-VDM command record, guest COMMAND/NTDOS execution and non-DOS `cmdExec32`.  It selects the complete original vertical guest cohort and records no S1 runtime claim.
+
+### M0 T356 S2 — Active selected original DOS command / controlled-return recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T356 S2; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | T356 was owner-admitted as one source-first package. S1 selected this exact cohort; S2 remains within its recorded plan and does not expand product scope. |
+| Objective | Make one already packaged, immutable local DOS `.COM` command route source-complete from the declared Base VDM record through guest COMMAND, original NTDOS `$Exec`, original parent return and `cmdReturnExitCode`, using the smallest existing source-shaped composition seam. |
+| Non-goals | No substitute executor, host child-process surrogate, guest binary/source mutation, ambient command input, BOP leaf repair, new media format, CPU/CCPU/BIOS change, CPU30, Bochs, CSRSS/kernel recreation, WOW/PIF/cross-process completion or speculative runtime workaround. |
+| Reference Baseline | [S1 topology audit](etc/evidence/m0-t356-s1-minimal-dos-execution-controlled-return-topology-audit-001.md); T355 declared command contract; original selected `COMMAND.COM`, `NTIO.SYS` and `NTDOS.SYS` package media. |
+| Files And ABI Surface | Original COMMAND/NTDOS/DEM paths and their existing Base VDM, session mapping and CPU40 bindings. A changed file, if any, must preserve original name, argument/layout/order and failure contract with registered divergence. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture and coding rules. |
+| Verification | Static original-caller/data-layout/failure review; focused original-owner positive/negative fixture only if an existing seam changes; formal CPU40/x86 link only after source recovery; no integration observation until S4. |
+| Expected Markers | One immutable selected command representation, one owner/disposition for every record/guest/return edge, and no `cmdExec32` or fabricated completion in the DOS path. |
+| Asset Needs | Existing staged `mvdm/system32/COMMAND.COM`, `NTIO.SYS` and `NTDOS.SYS`, plus the formal CPU40/x86 product graph; no copied or rewritten guest payload. |
+| Reporting Requirements | State whether a source change was necessary; identify exact remaining historical product-shell exclusions; distinguish code/source closure from runtime evidence. |
+| Stop Conditions | Need to alter guest media/source, create an alternate command protocol/executor, make a family-private mapper, depend on ambient input, recreate CSRSS/kernel behavior, or address a non-DOS host-child path pauses for new S admission. |
+| Exit Criteria | The selected DOS command cohort has one source-attributed, locally testable normal and failure direction or an exact original unavailable terminal; all touched mirror divergences and adapter rows are reviewed. |
+| Original Owner Request | “准入” — execute the next queue task in single-person dual-role mode while keeping mirror changes minimal and adapter logic outside mirrors. |
+| Similar-Issue Sweep | Base VDM delivery/consume, command record capacities, `CMDINFO` layout, `$Exec`, PSP/arena/JFN/environment, DEM entry notification, redirection result, command return/re-entry, SoftPC outer return and controlled termination. |
+
 **Plan:** [M0 T356 minimal DOS guest execution and controlled return](etc/operations/m0-t356-minimal-dos-execution-controlled-return-plan-001.md).
 
-**Active: M0 T356 S1.**
+**Active: M0 T356 S2.**
 
 | Field | Record |
 | --- | --- |
