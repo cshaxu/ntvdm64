@@ -83,6 +83,27 @@ environment.  `SS:SP` remained `03F4:060D` at entry and return for both
 environment; the source contract is the two-call required-size protocol, not
 a fixed numeric constant.
 
+## Resident HMA binding observation
+
+A subsequent selected-image run retained the following read-only, child-only
+records immediately after each unchanged `54:0F` table return:
+
+```text
+MVDM-CMD-STUB name=TrnLodCom1 entry=03F4:011C target=FFFF:60F1 state=copied
+MVDM-CMD-STUB name=LodCom entry=03F4:0120 target=FFFF:5E5E state=copied
+MVDM-CMD-STUB name=MsgRetrv entry=03F4:0124 target=FFFF:644A state=copied
+MVDM-CMD-HMA cominhma=1 a20-wrap=0 state=copied
+```
+
+The three values are the original patched resident jump-table entries.  They
+exclude the earlier hypothesis that `LodCom_Trap` jumps to transient message
+data: its `LodCom_Entry` target is the resident HMA entry at `FFFF:5E5E`, not
+the conventional `BadVerMsg` location.  `stub.asm::CheckA20` requires A20
+when `ComInHMA` is nonzero; the CPU40 read-only query reports `a20-wrap=0`,
+which means 20-bit wrapping is disabled and A20 is already enabled.  The
+observer uses short mapping-manager read leases only; it neither changes the
+stub table, A20, CPU state nor any BOP result.
+
 ## Disposition
 
 - `MVDM-HOST-DIV-200` stays removed. Returning `BX=0` is not the original
@@ -100,16 +121,17 @@ a fixed numeric constant.
   `cmdStart`/`cmdGetInitEnvironment` inside the already-running CLI process.
   Its source contract preserves the source environment and adds VDM drive
   state; it is not a generic environment-shortening workaround.
-- Before code selection, the remaining owner audit must prove the initial
-  DOS process/PSP version and stack/control transfer observed before
-  `BadVerMsg`. No environment projection or guest allocator substitute is
-  admitted on the basis of the withdrawn observation.
+- The completed `54:0F` records, resident table and A20 state exclude the
+  environment, BOP return stack, table-patching and HMA-enable hypotheses.
+  No environment projection or guest allocator substitute is admitted on the
+  basis of the withdrawn observation.
 
 ## Immediate next audit
 
-Trace the original post-`EndInit` relocation/control sequence:
-`EndInit -> LodCom_Trap -> LodCom -> LodCom1`, including the DOS `ALLOC`/
-`DEALLOC` arena returns, transient copy/checksum and the first process PSP
-version/stack control transfer. The audit must distinguish a guest arena,
-CCPU string/control execution, and process/PSP precondition; it must not use
-a reduced environment run as acceptance evidence.
+Trace the original post-`EndInit` relocation/control sequence after the
+now-proven `LodCom_Trap` HMA transfer: maximum-size DOS `ALLOC`, reverse
+`rep movsb` transient copy, `DEALLOC`, resident re-allocation, checksum and
+the first command-loop handoff.  The audit must distinguish a guest arena
+return, CPU40 string/control execution and the subsequent process/PSP
+precondition; it must not use a reduced-environment run as acceptance
+evidence.

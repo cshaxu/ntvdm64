@@ -70,6 +70,12 @@ void mvdm_softpc_record_command_environment(unsigned int stage,
     unsigned int guest_es, unsigned int guest_bx, unsigned int guest_ax,
     unsigned int guest_cf, unsigned int guest_ss, unsigned int guest_sp);
 
+/* Default-off, selected-image observation of original COMMAND's resident
+ * transient-entry table.  It reads the three original 16:16 entries through
+ * short session leases after the existing environment table call; it never
+ * retains a guest alias or changes guest/CPU/BOP state. */
+void mvdm_softpc_record_command_stub_table(uint16_t guest_cs);
+
 /* App captures the optional continuation-report path before original MVDM
  * reads its inherited environment, then removes that diagnostic variable.
  * The retained path is adapter-private and is never made guest-visible. */

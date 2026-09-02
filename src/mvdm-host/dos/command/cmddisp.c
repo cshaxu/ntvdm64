@@ -90,6 +90,12 @@ BOOL CmdDispatch (ULONG iSvc)
             (unsigned int)getBX(), (unsigned int)getAX(),
             (unsigned int)getCF(), (unsigned int)getSS(),
             (unsigned int)getSP());
+    /* DIVERGENCE(MVDM-HOST-DIV-202): a fixed-image, default-off read of the
+     * original resident stub table after its unchanged 54:0F call.  It uses
+     * short mapping-manager leases and cannot modify the table or any CPU
+     * state. */
+    if (iSvc == SVC_GETINITENVIRONMENT)
+        mvdm_softpc_record_command_stub_table((uint16_t)getCS());
 
     return TRUE;
 }

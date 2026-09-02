@@ -10,6 +10,10 @@
 
 #include "mvdm_guest_location.h"
 
+/* Original CPU40 query; its nonzero result means 20-bit wrapping is active
+ * (therefore A20 is off).  This observer never changes that state. */
+extern int c_sas_twenty_bit_wrapping_enabled(void);
+
 static __declspec(thread) const char *mvdm_softpc_termination_origin =
     "unattributed";
 static char mvdm_softpc_command_continuation_report_path[MAX_PATH];
@@ -470,6 +474,60 @@ void mvdm_softpc_record_command_environment(unsigned int stage,
         DWORD written;
         if (report == INVALID_HANDLE_VALUE)
             return;
+        (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
+        CloseHandle(report);
+    }
+}
+
+void mvdm_softpc_record_command_stub_table(uint16_t guest_cs)
+{
+    static const uint16_t offsets[] = { 0x011cu, 0x0120u, 0x0124u };
+    static const char * const names[] = {
+        "TrnLodCom1", "LodCom", "MsgRetrv"
+    };
+    unsigned int index;
+    char message[256];
+    int formatted;
+    mvdm_guest_location entry;
+    mvdm_guest_location target;
+    uint16_t com_in_hma_word = 0u;
+    unsigned int a20_wrap;
+
+    if (mvdm_softpc_command_continuation_report_path[0] == '\0')
+        return;
+    for (index = 0u; index < sizeof(offsets) / sizeof(offsets[0]); ++index) {
+        if (!mvdm_guest_location_set_real_mode(&entry, guest_cs,
+                offsets[index]) || !mvdm_guest_location_read_far(&entry,
+                &target))
+            return;
+        formatted = snprintf(message, sizeof(message),
+            "MVDM-CMD-STUB name=%s entry=%04X:%04X target=%04X:%04X state=copied\r\n",
+            names[index], (unsigned int)guest_cs, (unsigned int)offsets[index],
+            (unsigned int)target.segment, (unsigned int)target.offset);
+        if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
+        {
+            HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
+                FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
+                FILE_ATTRIBUTE_NORMAL, NULL);
+            DWORD written;
+            if (report == INVALID_HANDLE_VALUE) return;
+            (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
+            CloseHandle(report);
+        }
+    }
+    if (!mvdm_guest_location_set_real_mode(&entry, guest_cs, 0x0134u) ||
+        !mvdm_guest_location_read_u16(&entry, &com_in_hma_word)) return;
+    a20_wrap = c_sas_twenty_bit_wrapping_enabled() ? 1u : 0u;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CMD-HMA cominhma=%u a20-wrap=%u state=copied\r\n",
+        (unsigned int)(com_in_hma_word & 0xffu), a20_wrap);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
+    {
+        HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
+            FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
+            FILE_ATTRIBUTE_NORMAL, NULL);
+        DWORD written;
+        if (report == INVALID_HANDLE_VALUE) return;
         (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
         CloseHandle(report);
     }
