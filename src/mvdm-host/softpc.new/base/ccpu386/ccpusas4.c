@@ -852,8 +852,8 @@ IFN2(LIN_ADDR, addr, IU8, val)
 	sub_note_trace2(SAS_VERBOSE, "c_sas_store addr=%x, val=%x\n", addr, val);
 	bios_write_byte(addr, val);
 	/* DIVERGENCE(MVDM-HOST-DIV-184): default-off selected-image observation
-	 * follows the original byte write and receives no CPU control capability. */
-	mvdm_softpc_record_config_command_store((uint32_t)addr, (uint8_t)val);
+	 * follows the original completed store and receives no CPU control capability. */
+	mvdm_softpc_record_sas_store((uint32_t)addr, 1u, (uint32_t)val);
 }
 
 /* store a word at the given address */
@@ -934,6 +934,8 @@ c_sas_storew IFN2(LIN_ADDR, addr, IU16, val)
 		bios_write_byte(addr+1, val >> 8);
 		bios_write_byte(addr, val & 0xFF);
 	}
+	/* DIVERGENCE(MVDM-HOST-DIV-184): records only scalar post-store state. */
+	mvdm_softpc_record_sas_store((uint32_t)addr, 2u, (uint32_t)val);
 }
 
 /* store a double word at the given address */
@@ -949,6 +951,8 @@ IFN2(LIN_ADDR, addr, IU32, val)
 		bios_write_word(addr+2, val >> 16);
 		bios_write_word(addr, val & 0xFFFF);
 	}
+	/* DIVERGENCE(MVDM-HOST-DIV-184): records only scalar post-store state. */
+	mvdm_softpc_record_sas_store((uint32_t)addr, 4u, (uint32_t)val);
 }
 
 /*********** STRING OPS ***********/

@@ -548,41 +548,58 @@ void mvdm_softpc_record_config_done(uint16_t guest_cs)
         (DWORD)formatted);
 }
 
-void mvdm_softpc_record_config_command_store(uint32_t guest_linear_address,
-    uint8_t value)
+void mvdm_softpc_record_sas_store(uint32_t guest_linear_address,
+    uint32_t byte_count, uint32_t value)
 {
     static LONG initialized;
-    static uint32_t expected_address;
+    static uint32_t watched_address;
+    static uint32_t watched_length;
     static int enabled;
     static unsigned int record_count;
     char configured_address[16];
+    char configured_length[16];
     char message[128];
     char *end;
     unsigned long parsed_address;
+    uint64_t write_end;
+    uint64_t watched_end;
     int formatted;
 
     if (initialized == 0) {
-        if (GetEnvironmentVariableA("MVDM_CONFIG_COMMAND_STORE_REPORT_PATH",
+        if (GetEnvironmentVariableA("MVDM_SAS_STORE_REPORT_PATH",
                 NULL, 0u) != 0u &&
-            GetEnvironmentVariableA("MVDM_CONFIG_COMMAND_LINEAR",
+            GetEnvironmentVariableA("MVDM_SAS_STORE_LINEAR",
                 configured_address, (DWORD)sizeof(configured_address)) != 0u) {
             parsed_address = strtoul(configured_address, &end, 0);
             if (end != configured_address && *end == '\0' &&
                 parsed_address <= UINT32_MAX) {
-                expected_address = (uint32_t)parsed_address;
+                watched_address = (uint32_t)parsed_address;
+                watched_length = 1u;
+                if (GetEnvironmentVariableA("MVDM_SAS_STORE_LENGTH",
+                        configured_length, (DWORD)sizeof(configured_length)) != 0u) {
+                    parsed_address = strtoul(configured_length, &end, 0);
+                    if (end == configured_length || *end != '\0' ||
+                        parsed_address == 0u || parsed_address > UINT32_MAX)
+                        return;
+                    watched_length = (uint32_t)parsed_address;
+                }
                 enabled = 1;
                 InterlockedExchange(&initialized, 1);
             }
         }
     }
-    if (!enabled || guest_linear_address != expected_address ||
+    write_end = (uint64_t)guest_linear_address + (uint64_t)byte_count;
+    watched_end = (uint64_t)watched_address + (uint64_t)watched_length;
+    if (!enabled || byte_count == 0u ||
+        write_end <= watched_address || watched_end <= guest_linear_address ||
         record_count == 8u)
         return;
     ++record_count;
     formatted = snprintf(message, sizeof(message),
-        "MVDM-CONFIG-COMMAND-STORE ordinal=%u linear=%05lX value=%02X state=copied\r\n",
-        record_count, (unsigned long)guest_linear_address, (unsigned int)value);
+        "MVDM-SAS-STORE ordinal=%u linear=%05lX width=%lu value=%08lX state=copied\r\n",
+        record_count, (unsigned long)guest_linear_address,
+        (unsigned long)byte_count, (unsigned long)value);
     if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
-    mvdm_softpc_write_optional_report("MVDM_CONFIG_COMMAND_STORE_REPORT_PATH",
+    mvdm_softpc_write_optional_report("MVDM_SAS_STORE_REPORT_PATH",
         message, (DWORD)formatted);
 }

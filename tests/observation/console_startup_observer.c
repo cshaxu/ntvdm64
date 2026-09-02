@@ -333,7 +333,7 @@ int main(int argc, char **argv)
     had_previous_config_done_report = previous_config_done_report_length != 0 &&
         previous_config_done_report_length < sizeof(previous_config_done_report_path);
     previous_config_command_store_report_length = GetEnvironmentVariableA(
-        "MVDM_CONFIG_COMMAND_STORE_REPORT_PATH",
+        "MVDM_SAS_STORE_REPORT_PATH",
         previous_config_command_store_report_path,
         (DWORD)sizeof(previous_config_command_store_report_path));
     had_previous_config_command_store_report =
@@ -341,7 +341,7 @@ int main(int argc, char **argv)
         previous_config_command_store_report_length <
             sizeof(previous_config_command_store_report_path);
     previous_config_command_linear_length = GetEnvironmentVariableA(
-        "MVDM_CONFIG_COMMAND_LINEAR", previous_config_command_linear,
+        "MVDM_SAS_STORE_LINEAR", previous_config_command_linear,
         (DWORD)sizeof(previous_config_command_linear));
     had_previous_config_command_linear = previous_config_command_linear_length != 0 &&
         previous_config_command_linear_length < sizeof(previous_config_command_linear);
@@ -355,12 +355,13 @@ int main(int argc, char **argv)
     SetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH", bop_return_report_path);
     SetEnvironmentVariableA("MVDM_DEM_OPEN_REPORT_PATH", dem_open_report_path);
     SetEnvironmentVariableA("MVDM_CONFIG_DONE_REPORT_PATH", config_done_report_path);
-    SetEnvironmentVariableA("MVDM_CONFIG_COMMAND_STORE_REPORT_PATH",
+    SetEnvironmentVariableA("MVDM_SAS_STORE_REPORT_PATH",
         config_command_store_report_path);
     /* S5 attributes this selected image's original trys `commnd` store to
      * live CS 8E08 plus map offset 3466. This is a fixed-image observer
      * input, not a guest ABI or an address translation facility. */
-    SetEnvironmentVariableA("MVDM_CONFIG_COMMAND_LINEAR", "0x914e6");
+    if (!had_previous_config_command_linear)
+        SetEnvironmentVariableA("MVDM_SAS_STORE_LINEAR", "0x914e6");
     SetEnvironmentVariableA("MVDM_DEM_READ_REPORT_PATH", dem_read_report_path);
     SetEnvironmentVariableA("MVDM_DEM_SEEK_REPORT_PATH", dem_seek_report_path);
     SetEnvironmentVariableA("MVDM_DEM_IOCTL_REPORT_PATH", dem_ioctl_report_path);
@@ -393,15 +394,15 @@ int main(int argc, char **argv)
         else
             SetEnvironmentVariableA("MVDM_CONFIG_DONE_REPORT_PATH", NULL);
         if (had_previous_config_command_store_report)
-            SetEnvironmentVariableA("MVDM_CONFIG_COMMAND_STORE_REPORT_PATH",
+            SetEnvironmentVariableA("MVDM_SAS_STORE_REPORT_PATH",
                                     previous_config_command_store_report_path);
         else
-            SetEnvironmentVariableA("MVDM_CONFIG_COMMAND_STORE_REPORT_PATH", NULL);
+            SetEnvironmentVariableA("MVDM_SAS_STORE_REPORT_PATH", NULL);
         if (had_previous_config_command_linear)
-            SetEnvironmentVariableA("MVDM_CONFIG_COMMAND_LINEAR",
+            SetEnvironmentVariableA("MVDM_SAS_STORE_LINEAR",
                                     previous_config_command_linear);
         else
-            SetEnvironmentVariableA("MVDM_CONFIG_COMMAND_LINEAR", NULL);
+            SetEnvironmentVariableA("MVDM_SAS_STORE_LINEAR", NULL);
         if (had_previous_dem_read_report)
             SetEnvironmentVariableA("MVDM_DEM_READ_REPORT_PATH",
                                     previous_dem_read_report_path);
@@ -437,15 +438,15 @@ int main(int argc, char **argv)
     else
         SetEnvironmentVariableA("MVDM_CONFIG_DONE_REPORT_PATH", NULL);
     if (had_previous_config_command_store_report)
-        SetEnvironmentVariableA("MVDM_CONFIG_COMMAND_STORE_REPORT_PATH",
+        SetEnvironmentVariableA("MVDM_SAS_STORE_REPORT_PATH",
                                 previous_config_command_store_report_path);
     else
-        SetEnvironmentVariableA("MVDM_CONFIG_COMMAND_STORE_REPORT_PATH", NULL);
+        SetEnvironmentVariableA("MVDM_SAS_STORE_REPORT_PATH", NULL);
     if (had_previous_config_command_linear)
-        SetEnvironmentVariableA("MVDM_CONFIG_COMMAND_LINEAR",
+        SetEnvironmentVariableA("MVDM_SAS_STORE_LINEAR",
                                 previous_config_command_linear);
     else
-        SetEnvironmentVariableA("MVDM_CONFIG_COMMAND_LINEAR", NULL);
+        SetEnvironmentVariableA("MVDM_SAS_STORE_LINEAR", NULL);
     if (had_previous_dem_read_report)
         SetEnvironmentVariableA("MVDM_DEM_READ_REPORT_PATH",
                                 previous_dem_read_report_path);

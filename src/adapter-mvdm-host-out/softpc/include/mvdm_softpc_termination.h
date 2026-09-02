@@ -89,12 +89,13 @@ void mvdm_softpc_record_dem_ioctl(unsigned int subfunction,
  * state. */
 void mvdm_softpc_record_config_done(uint16_t guest_cs);
 
-/* Default-off, selected-image CPU40 observation. The original CPU byte-store
- * caller supplies its already-calculated guest linear address and byte; this
- * helper records a bounded sequence of writes to an explicitly configured
- * `commnd` address. It neither translates, retains, nor writes guest memory. */
-void mvdm_softpc_record_config_command_store(uint32_t guest_linear_address,
-    uint8_t value);
+/* Default-off, selected-image CPU40 SAS-write observation.  The original
+ * caller supplies its already-calculated guest linear address, write width and
+ * scalar value after the original store completed.  The helper records only a
+ * bounded configured span; it neither translates, retains, nor writes guest
+ * memory. */
+void mvdm_softpc_record_sas_store(uint32_t guest_linear_address,
+    uint32_t byte_count, uint32_t value);
 
 /* Default-off CCPU SAS observation.  The original caller has already decided
  * that the normal RAM calculation is required.  This copies scalar lifecycle

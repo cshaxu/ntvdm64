@@ -668,6 +668,8 @@ the selected CPU40 path attempts to execute immutable `COMMAND.COM` data at
 
 **Active: M0 T359 S2.**
 
+**S2 P1:** [COMMAND transient SAS-write binding](etc/evidence/m0-t359-s2-command-transient-sas-write-binding-001.md) expands the existing default-off, selector-blind CCPU SAS observer from one CONFIG byte to the one original byte/word/dword write contract needed to observe `TrnSeg` and `HavCom` control data.  A fresh CPU40/x86 formal graph linked all 428 actions; no renewed runtime observation or lifecycle-completion claim is made.
+
 ### M0 T355 S31 — Closed original `0x78` entry-result attribution
 
 | Field | Record |
