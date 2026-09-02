@@ -61,14 +61,13 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Next order | Candidate implementation package |
 | --- | --- |
-| 1 | DOS extender runtime closure — turn the XMS/A20/UMB/INT15 and DPMI/DPMI32/DOSX source/link baseline into real original extender workload execution. |
-| 2 | Redirector and host-resource runtime closure — prove the selected original local VDMREDIR/file/resource contract with real DOS workloads; retain source-shaped unavailable legacy network branches. |
-| 3 | COMMAND native-child local lifecycle closure — recover `cmdExec32`, public `CreateProcess`, per-child stream/exit/cleanup and original re-entry semantics inside one `ntvdm.exe` process. It must not create a broker. |
-| 4 | WOW16 bootstrap, callback and NE lifecycle closure — prove one-process WOWEXEC command routing, callback/re-entry, task lifetime and original Win16 NE start/exit. |
-| 5 | WOW16 service, UI and host integration closure — recover selected original WOW32 providers through public APIs while retaining exact USER/CSRSS/Win32k private-boundary failures. |
-| 6 | Single-process NTVDM compatibility matrix — run selected DOS, DOS-extender, COMMAND-native-child and Win16 workloads against the completed original-owner contracts; reopen only the immediate source owner proven by a failure. |
-| 7 | Cross-process broker closure — recover only required BaseSrv-style registration, command-queue, notification and disconnect-cleanup semantics through public IPC. It cannot own guest, COMMAND, SoftPC or WOW behavior. |
-| 8 | Multi-process matrix, x64 compatibility and product release — prove the brokered multi-process profile, paired x86/x64 behavior where runnable, portable media layout and release packaging. |
+| 1 | Original VDMREDIR runtime product activation — resume after the closed Redirector source/binding baseline by composing the original `VDMREDIR.dll`, retaining its dynamic loader and proving one local-resource workload. |
+| 2 | COMMAND native-child runtime activation — turn the closed `cmdExec32` source/binding baseline into one actual public-CreateProcess child/re-entry/return workload, without a broker. |
+| 3 | WOW16 bootstrap, callback and NE lifecycle activation — prove one-process WOWEXEC command routing, callback/re-entry, task lifetime and original Win16 NE start/exit. |
+| 4 | WOW16 service, UI and host integration activation — recover selected original WOW32 providers through public APIs while retaining exact USER/CSRSS/Win32k private-boundary failures. |
+| 5 | Single-process NTVDM compatibility matrix — run selected DOS, extender, Redirector, COMMAND-native-child and Win16 workloads against the completed original-owner contracts; reopen only the immediate original owner proven by a failure. |
+| 6 | Cross-process broker closure — recover only required BaseSrv-style registration, command-queue, notification and disconnect-cleanup semantics through public IPC. It cannot own guest, COMMAND, SoftPC or WOW behavior. |
+| 7 | Multi-process matrix, x64 compatibility and product release — prove the brokered multi-process profile, paired x86/x64 behavior where runnable, portable media layout and release packaging. |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

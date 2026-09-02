@@ -69,8 +69,11 @@ its stated runtime proof.
 4. **DOS extender execution:** original XMS/A20/UMB/INT15 and
    DPMI/DPMI32/DOSX runtime paths with mapping-manager identity boundaries and
    real extender workload return.
-5. **Redirector and host-resource execution:** local VDMREDIR first, then
-   bounded public NetAPI; legacy NetBIOS/DLC/private-RPC remains explicit.
+5. **Redirector and host-resource execution:** T372 is the closed
+   source/binding baseline only: it did not ship `VDMREDIR.dll`.  The next
+   activation package must compose that original DLL product first, then prove
+   local VDMREDIR and bounded public NetAPI behavior; legacy
+   NetBIOS/DLC/private-RPC remains explicit.
 6. **COMMAND native-child local lifecycle:** reached `54:08/0A/0B`, public
    `CreateProcess` child lifecycle, original re-entry/event/return and
    explicit unavailable CSRSS-era branches. This remains inside one process;
