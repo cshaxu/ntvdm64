@@ -592,7 +592,7 @@ trace-selected repair or guest-execution claim.
 
 **S2 closure:** [Selected-command recovery disposition](etc/evidence/m0-t356-s2-selected-command-recovery-001.md) selects the already packaged `COMMAND.COM /C EXIT` DOS `.COM` workload.  The four-rung review found no missing source binding and introduced no shim or mirror change; code/source closure remains distinct from S3/S4 verification.
 
-### M0 T356 S3 — Active local and formal selected-cohort closure
+### M0 T356 S3 — Closed local and formal selected-cohort closure
 
 | Field | Record |
 | --- | --- |
@@ -612,9 +612,31 @@ trace-selected repair or guest-execution claim.
 | Original Owner Request | “准入” — execute the next queue task in single-person dual-role mode while keeping mirror changes minimal and adapter logic outside mirrors. |
 | Similar-Issue Sweep | Base VDM record normal/reject/capacity/wait, current-directory and re-entry records, command application/tail layout, formal selected owner object set and CPU40-only profile selection. |
 
+**S3 closure:** [Local and formal closure evidence](etc/evidence/m0-t356-s3-local-and-formal-closure-001.md) records a passing task-owned x86 Base VDM fixture and a fresh 428-action CPU40/x86 formal link.  Neither is guest-execution evidence.
+
+### M0 T356 S4 — Active fixed-container selected DOS command observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T356 S4; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | This is the final observation step explicitly contained in the admitted T356 plan, following S3's positive local and formal closure. |
+| Objective | Make exactly one fixed, non-debug, console-owning observation of the fresh CPU40/x86 product with the already selected immutable `--command EXIT` Base VDM declaration. |
+| Non-goals | No retry with changed inputs, no debugger, breakpoint, guest-memory read, command/media/source mutation, trace-selected repair, host-child surrogate, BOP/CPU/device change, CPU30, Bochs, x64, CSRSS/kernel/WOW recreation or graphics work. |
+| Reference Baseline | S1/S2 source disposition; S3 fresh linked `original-softpc-process.exe`; fixed staged root `O:\ntvdm` containing the selected MVDM media. |
+| Files And ABI Surface | Existing `tests/observation/console_startup_observer.c` and its task-owned output only. The observer has no production ABI or guest-state write surface. |
+| Applicable Rules | Execution, source-first recovery, CPU40-only, build-output hygiene, fixed-container observation and architecture rules. |
+| Verification | Compile the existing observer in x86, invoke it once with fresh product path, fixed root and task-owned report base; retain only concise reviewed evidence. |
+| Expected Markers | One exit or bounded timeout report, console snapshot and any existing default-off source reports; one source-defined subsequent owner disposition only. |
+| Asset Needs | Fresh S3 product executable, unchanged `O:\ntvdm\mvdm` media and existing observer source; no new runtime asset. |
+| Reporting Requirements | Report exact command, SHA-256/product identity, result and reached source marker if any. A timeout must remain a limitation, never a repair selector or execution claim. |
+| Stop Conditions | Need to vary root/media/command/timeout/observer, attach a debugger, add a new report hook, or repair a trace-selected leaf pauses this task for renewed admission. |
+| Exit Criteria | One fixed observation is recorded with its exact result and next source-owner disposition; T356 closes only if it proves the controlled route or records an exact source-shaped transfer/terminal. |
+| Original Owner Request | “准入” — execute the next queue task in single-person dual-role mode while keeping mirror changes minimal and adapter logic outside mirrors. |
+| Similar-Issue Sweep | Product identity, command declaration, package root, console ownership, watchdog disposition, Base VDM wait, command record consumption, NTDOS EXEC/parent return and source report markers. |
+
 **Plan:** [M0 T356 minimal DOS guest execution and controlled return](etc/operations/m0-t356-minimal-dos-execution-controlled-return-plan-001.md).
 
-**Active: M0 T356 S3.**
+**Active: M0 T356 S4.**
 
 | Field | Record |
 | --- | --- |
