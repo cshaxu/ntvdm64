@@ -1097,31 +1097,33 @@ and
 
 ## Active Packet
 
-### M0 T378 S2 — Active original XMS boot and HMA/UMB lifecycle recovery
+### M0 T378 S3 — Active original DOSX/DPMI handoff recovery
 
-**Active: M0 T378 S2**
+**Active: M0 T378 S3**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T378 S2; ordinary mode (single-person dual-role original-owner recovery). |
-| Admission And Approval | S1 froze byte-identical HIMEM/DOSX media and the original CONFIG.NT -> XMS -> DOSX/DPMI owner route. S2 begins with the whole predecessor boot cohort. |
-| Objective | Recover or verify original CONFIG device execution, HIMEM XMS entry, A20/HMA/UMB/INT15 registration and original cleanup direction under the current CPU40/SoftPC product. |
-| Non-goals | No DOSX or DPMI runtime observation, protected-mode fabrication, individual `52:xx` repair, synthetic device, guest rewrite, stage update, CPU30, Bochs, x64 guest runtime, native child, Redirector or WOW work. |
-| Reference Baseline | T378 S1 admission; T371 XMS source/link closure; T375--T377 fixed product; original `cmdconf.c`, `nt_msscs.c`, XMS package and HIMEM source/artifact mirror. |
-| Files And ABI Surface | Original CONFIG/device, HIMEM, XMS/A20/UMB/INT15 bodies; existing mapping-manager backing seam and current CPU40 formal graph only. |
+| Identifier Mode | M0 T378 S3; ordinary mode (single-person dual-role original-owner recovery). |
+| Admission And Approval | S1 froze byte-identical HIMEM/DOSX media; S2 now source/binding/formal-link closes the complete original CONFIG/HIMEM/XMS A20/UMB/INT15 cohort. |
+| Objective | Recover or verify the complete original DOSX guest `$Exec` to host `MS_bop_3 -> DpmiDispatch` handoff, DPMI table, protected-mode frame/stack and source-shaped exit/return direction under the current CPU40/SoftPC product. |
+| Non-goals | No protected-mode success fabrication, individual `53:xx` repair, synthetic DOSX, guest rewrite, stage update, CPU30, Bochs, x64 guest runtime, native child, Redirector or WOW work. |
+| Reference Baseline | T378 S1--S2; T371 DPMI source/link closure; T375--T377 fixed product; immutable original DOSX and original `nt_bop.c`/`dpmi32` bodies. |
+| Files And ABI Surface | Original DOSX media, original guest EXEC route, `MS_bop_3`, DPMI32 table/support bodies, source-shaped machine/frame boundaries and current CPU40 formal graph. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, immutable-media staging, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Original definition/caller/registration review; source-shaped positive and failure-direction checks; formal CPU40/x86 link; documentation governance and diff review. No DOSX runtime observation. |
-| Expected Markers | Original device load reaches original HIMEM/XMS registration, preserves original A20/UMB/INT15 result/cleanup order, and retains a named boundary rather than a synthetic service. |
-| Asset Needs | S1 identity-proven media, selected original sources, formal CPU40 graph, existing mapping manager and focused test infrastructure. |
-| Reporting Requirements | Record each original device/XMS edge, backing/identity ownership, retained failure direction, and any direct original code that permits rollback of an existing project diff. |
-| Stop Conditions | Required behavior needs a synthetic XMS dispatcher/device, altered guest media, kernel/CSR recreation, raw host pointer carrier, second machine or leaf-level BOP repair; pause for package revision. |
-| Exit Criteria | The full original CONFIG/HIMEM/XMS A20/UMB/INT15 boot cohort is source/binding/formal-link closed or one earlier exact original terminal is identified; S3 may then own DOSX/DPMI handoff. |
+| Verification | Original definition/caller/table/return review; source-shaped positive and unavailable-direction checks; formal CPU40/x86 link; documentation governance and diff review. No frozen product observation. |
+| Expected Markers | Original DOSX reaches either its complete original DPMI ownership route or a named earlier original terminal; no isolated BOP success is invented. |
+| Asset Needs | S1 identity-proven media, S2-closed XMS cohort, selected original DPMI32 sources, formal CPU40 graph and existing focused test infrastructure. |
+| Reporting Requirements | Record every DOSX/EXEC/BOP/DPMI edge, table ownership, protected-mode/frame boundary and retained unavailable/return direction. |
+| Stop Conditions | Required behavior needs a synthetic DPMI table, altered guest media, kernel/CSR recreation, raw host pointer carrier, second machine or leaf-level BOP repair; pause for package revision. |
+| Exit Criteria | The complete original DOSX/DPMI handoff cohort is source/binding/formal-link closed or an earlier exact original terminal is identified; S4 may then own the full extender matrix. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | CONFIG.NT device load, HIMEM.SYS, XMSInit, A20, UMB, INT15, DOSX guest handoff, `MS_bop_2`, `MS_bop_3`, DpmiDispatch, protected-mode frame/stack, mapping-manager boundaries and normal return. |
 
 **Plan:** [M0 T378 DOS-extender runtime closure](etc/operations/m0-t378-dos-extender-runtime-closure-001.md).
 
 **S1 closure:** [DOS-extender workload and owner admission](etc/evidence/m0-t378-s1-dos-extender-workload-owner-admission-001.md).
+
+**S2 closure:** [original XMS boot/HMA/UMB lifecycle closure](etc/evidence/m0-t378-s2-original-xms-boot-hma-umb-lifecycle-closure-001.md).
 
 ### M0 T377 — Closed pure DOS device, file and graphics workload matrix
 
