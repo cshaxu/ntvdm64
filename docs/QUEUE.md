@@ -56,12 +56,11 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Order | Candidate implementation package |
 | --- | --- |
-| 0 | Redirector and host-resource execution — prove original local resources and bounded public network bindings. |
-| 1 | WOW16 bootstrap, callback and Win16 NE lifecycle — prove selected WOWEXEC/Win16 startup and return paths. |
-| 2 | WOW16 service, UI and host integration matrix — recover selected WOW32 provider subpackages and public bindings. |
-| 3 | Cross-family execution and control-broker closure — reconcile COMMAND/DOS/native-child/WOW lifecycle, events and cleanup. |
-| 4 | SoftPC graphics workload integration — after the closed original-font/exact-client presentation package, run an already-proven DOS graphics workload through original video and app presentation. |
-| 5 | Runtime matrix, x64 compatibility and product release — prove DOS/Win16 matrices, finish x64 profile work and package the product. |
+| 0 | WOW16 bootstrap, callback and Win16 NE lifecycle — prove selected WOWEXEC/Win16 startup and return paths. |
+| 1 | WOW16 service, UI and host integration matrix — recover selected WOW32 provider subpackages and public bindings. |
+| 2 | Cross-family execution and control-broker closure — reconcile COMMAND/DOS/native-child/WOW lifecycle, events and cleanup. |
+| 3 | SoftPC graphics workload integration — after the closed original-font/exact-client presentation package, run an already-proven DOS graphics workload through original video and app presentation. |
+| 4 | Runtime matrix, x64 compatibility and product release — prove DOS/Win16 matrices, finish x64 profile work and package the product. |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

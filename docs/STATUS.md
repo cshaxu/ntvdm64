@@ -2,12 +2,29 @@
 
 ## Current Work
 
-### No active packet
+### M0 T372 S1 — Active Redirector runtime topology revalidation
 
-M0 T371 is closed.  The ordered queue awaits admission of its next candidate;
-no product source is active under this record.
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T372 S1; Ordinary Mode (single-person dual-role implementation and review). |
+| Admission And Approval | Admitted from queue candidate 0 under the owner's standing instruction to execute the dependency-ordered queue, with ordinary Git delivery permanently authorized. |
+| Objective | Revalidate the complete original `vdmredir` provider topology for the CPU40/x86 product: all `57:00..31` entries, local-resource groups, public-network groups, their formal-link state and the earliest immutable-workload reachability gate. |
+| Non-goals | No isolated `57:xx` enablement; no synthetic Redirector provider; no guest-media mutation; no new COMMAND broker; no CSR/BaseSrv/kernel-VDM recreation; no CPU/device/Bochs/x64 recovery. |
+| Reference Baseline | T290 Redirector source/ABI ledgers and local package closure; T369--T371 fixed CPU40/x86 runtime observations; current queue/runtime-recovery program. |
+| Files And ABI Surface | `docs/etc/operations/m0-t372-redirector-host-resource-execution-001.md`; S1 evidence and any necessary shared-ledger corrections only. No production ABI change in S1. |
+| Applicable Rules | Execution, source policy, source-first recovery, immutable guest, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and document rules. |
+| Verification | Reconcile the original dispatcher table, provider bodies, current Ninja graph and existing focused fixtures against exact source paths; run documentation inventory and `git diff --check`. |
+| Expected Markers | One source-shaped disposition per 50-entry selector and provider group; explicit formal graph/query result; one named immediate gate for a later integration observation. |
+| Asset Needs | Current `mvdm-host/vdmredir` mirror, T290 ledgers, current formal CPU40/x86 graph and immutable `O:\\ntvdm64` stage. |
+| Reporting Requirements | State source/build/runtime status separately; retain unavailable private interfaces as original failure dispositions, not adapter inventions. |
+| Stop Conditions | A required source body outside selected `vdmredir`/existing bounded interface families, a new external package, a changed mapping lifetime, or any need to enable a selector before package admission pauses for a revised S brief. |
+| Exit Criteria | A current S1 evidence record supersedes stale topology claims, preserves source-first grouping and makes S2's interface-closure boundary mechanically actionable. |
+| Original Owner Request | Continue the ordered queue in single-person dual-role mode; preserve original mirror-first recovery and do not use trace-selected leaf patches. |
+| Similar-Issue Sweep | `cmdredir`, DEM pipe callers, named pipe, mailslot, NetAPI, NetBIOS, DLC, lifecycle/teardown, formal static library and product-link queries. |
 
-**No active M/T/S packet.**
+**Plan:** [M0 T372 Redirector and host-resource execution](etc/operations/m0-t372-redirector-host-resource-execution-001.md).
+
+**S1:** [original Redirector runtime topology revalidation](etc/evidence/m0-t372-s1-redirector-runtime-topology-001.md).
 
 ### M0 T371 — Closed XMS, DPMI and DOS-extender execution
 
