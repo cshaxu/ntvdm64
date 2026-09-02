@@ -1123,6 +1123,8 @@ and
 
 **S1 closure:** [original `cmdExec32` stage-to-return ledger](etc/evidence/m0-t381-s1-original-cmdexec32-stage-return-ledger-001.md).
 
+**S2 P1:** [native-child payload boundary](etc/evidence/m0-t381-s2-p1-native-child-payload-boundary-001.md).
+
 ### M0 T380 — Closed COMMAND native-child runtime activation
 
 | Field | Record |

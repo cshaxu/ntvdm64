@@ -2,6 +2,7 @@
 #include "app/launch_declaration.h"
 #include "app/package_layout.h"
 #include "app/presentation_window.h"
+#include "adapter-mvdm-host-out/softpc/include/mvdm_command_native_child.h"
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_termination.h"
 
 #include <stdio.h>
@@ -102,6 +103,7 @@ int main(int argc, char **argv)
     /* Capture default-off host diagnostics before original cmdenv.c obtains
      * inherited process variables for the guest DOS environment. */
     mvdm_softpc_capture_command_continuation_report_path();
+    mvdm_command_native_child_capture_report_path();
     if (!app_launch_declaration_consume_options(&declaration, &argc, argv)) {
         result = APP_STARTUP_OPTIONS_REJECTED;
         goto finish;

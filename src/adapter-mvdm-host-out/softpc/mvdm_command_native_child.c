@@ -1,5 +1,6 @@
 #include "mvdm_command_native_child.h"
 
+#include <stdio.h>
 #include <string.h>
 
 #include "mvdm_guest_location.h"
@@ -8,6 +9,47 @@
 #define MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES 128u
 #define MVDM_COMMAND_NATIVE_CHILD_ENVIRONMENT_BYTES (32u * 1024u)
 #define MVDM_COMMAND_NATIVE_CHILD_STANDARD_BYTES 12u
+
+static char native_child_report_path[MAX_PATH];
+
+static void record_command(const char *origin, const char *command)
+{
+    char message[320];
+    char text[257];
+    size_t index;
+    int formatted;
+    HANDLE report;
+    DWORD written;
+
+    if (native_child_report_path[0] == '\0' || origin == NULL || command == NULL)
+        return;
+    for (index = 0u; index + 1u < sizeof(text) && command[index] != '\0'; ++index)
+        text[index] = (command[index] >= ' ' && command[index] <= '~') ?
+            command[index] : '?';
+    text[index] = '\0';
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CMD-PAYLOAD origin=%s bytes=%lu command=%s%s\\r\\n", origin,
+        (unsigned long)strlen(command), text,
+        command[index] == '\0' ? "" : "<truncated>");
+    if (formatted < 0) return;
+    report = CreateFileA(native_child_report_path, FILE_APPEND_DATA,
+        FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (report == INVALID_HANDLE_VALUE) return;
+    (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
+    CloseHandle(report);
+}
+
+void mvdm_command_native_child_capture_report_path(void)
+{
+    DWORD bytes;
+
+    native_child_report_path[0] = '\0';
+    bytes = GetEnvironmentVariableA("MVDM_NATIVE_CHILD_REPORT_PATH",
+        native_child_report_path, (DWORD)sizeof(native_child_report_path));
+    (void)SetEnvironmentVariableA("MVDM_NATIVE_CHILD_REPORT_PATH", NULL);
+    if (bytes == 0u || bytes >= sizeof(native_child_report_path))
+        native_child_report_path[0] = '\0';
+}
 
 typedef struct mvdm_command_native_child_state {
     session *owner;
@@ -194,6 +236,7 @@ static int capture_locations(mvdm_command_native_child_state *state,
         return 0;
     }
     state->active = 1u;
+    record_command(host_command != NULL ? "comspec" : "guest-tail", state->command);
     return 1;
 }
 
@@ -284,6 +327,7 @@ int mvdm_command_native_child_replace_command(const char *command)
     SecureZeroMemory(state->command, sizeof(state->command));
     memcpy(state->command, command, bytes + 1u);
     state->command_bytes = (uint32_t)bytes + 1u;
+    record_command("worker", state->command);
     return 1;
 }
 

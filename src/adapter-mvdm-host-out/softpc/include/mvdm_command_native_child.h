@@ -27,5 +27,8 @@ const char *mvdm_command_native_child_environment(void);
 int mvdm_command_native_child_replace_command(const char *command);
 void mvdm_command_native_child_finish(void);
 void mvdm_command_native_child_abort(void);
+/* Capture and remove the default-off, host-private payload report selector
+ * before original COMMAND imports inherited variables into guest state. */
+void mvdm_command_native_child_capture_report_path(void);
 
 #endif
