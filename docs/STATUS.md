@@ -825,20 +825,35 @@ the selected CPU40 path attempts to execute immutable `COMMAND.COM` data at
 
 **M0 T359 closure:** The valid T360 S7 observation proves the selected original transient lifecycle no longer transfers into immutable COMMAND data and reaches `54:01`. T359 is closed; no additional CPU or COMMAND repair is admitted by its result.
 
-### M0 T358 S4 — Active Base VDM `/C` command-delivery owner admission
+### M0 T358 S4 — Closed Base VDM `/C` command-record lifecycle audit
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T358 S4; ordinary mode (single-person dual-role implementation). |
 | Admission And Approval | T360 S7 closed T359's predecessor and resumed T358's unchanged `/C EXIT` workload. |
-| Objective | Reconstruct the original Base VDM command-delivery path from reached `54:01` through `GetNextVDMCommand` and `base_vdm_local_wait_for_command`, identify why the declared `/C EXIT` record is not consumed, and select one whole source-owned recovery cohort. |
+| Objective | Reconstruct the original Base VDM command-delivery path from reached `54:01` through `GetNextVDMCommand` and `base_vdm_local_wait_for_command`, determine whether the declared `/C EXIT` record is consumed, and select one whole source-owned recovery cohort. |
 | Non-goals | No BOP leaf repair, retry, DOS EXEC, cmdExec32, guest/media mutation, CPU/SoftPC semantic change, CPU30, Bochs, x64, CSRSS/BaseSrv, WOW, Redirector or graphics work. |
 | Files And ABI Surface | Original COMMAND `cmdGetNextCmd`, imported Base VDM contract, current app launch declaration, Base VDM broker and session command-source binding. No ABI change in S4. |
 | Verification | Original definition/caller/queue-state audit; current record lifecycle review; formal graph/import review; governance/export and diff review. No new runtime run in S4. |
-| Exit Criteria | One exact source-owned command-record lifecycle ledger identifies the missing/incorrect owner (or proves delivery complete) and bounds the next whole recovery S. |
+| Exit Criteria | Closed: one exact source-owned command-record lifecycle ledger proves delivery complete and bounds the next whole recovery S. |
 | Original Owner Request | “非常好，按照这个顺序执行。” |
 
-**Active: M0 T358 S4.**
+**S4 closure:** [Base VDM command-record lifecycle audit](etc/evidence/m0-t358-s4-base-vdm-command-record-lifecycle-audit-001.md) proves that the first `54:01` consumes the unique declared `/C EXIT` record.  The later wait is the original empty-queue path; it is not a Base VDM defect.
+
+### M0 T358 S5 — Active guest COMMAND `/C` exit-path topology audit
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T358 S5; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by closed S4 under the existing T358 package objective and ordered dependency-first execution. |
+| Objective | Map the selected original guest `COMMAND.COM` `/C EXIT` parser, built-in exit, DOS/host return and second command-acquisition paths after the first successful `54:01`, then select one complete earliest owner cohort. |
+| Non-goals | No Base VDM broker change, BOP leaf repair, retry, DOS external EXEC, cmdExec32, guest/media mutation, CPU/SoftPC semantic change, CPU30, Bochs, x64, CSRSS/BaseSrv, WOW, Redirector or graphics work. |
+| Files And ABI Surface | Original guest `mvdm-guest/dos/v86/cmd/command` source/map/binary; original COMMAND host `cmdmisc.c`, `cmdexit.c`, `cmdexec.c`; NTDOS execution/return sources as evidence only. No ABI change in S5. |
+| Verification | Original guest/host control-flow and image/map audit; selected-source/provenance and formal graph review; governance/export and diff review. No new runtime run or production change in S5. |
+| Exit Criteria | One source-owned ledger distinguishes a correct `/C EXIT` execution/exit from a fall-through to a second `54:01`, names the earliest missing or misbound owner if any, and bounds one whole recovery cohort. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+
+**Active: M0 T358 S5.**
 
 
 ### M0 T355 S31 — Closed original `0x78` entry-result attribution
