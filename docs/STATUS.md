@@ -48,9 +48,55 @@ records the one permitted run. It passes the reached device cohort, returns a
 first original `54:01`, and transfers to the later original COMMAND command
 delivery/continuation cohort.
 
-**No active M/T/S packet.** T363 is closed; see its
-[closure record](history/m0-t363-softpc-conventional-device-matrix-closure-20260902.md).
-The next candidate requires fresh owner admission.
+### M0 T364 S1 — Active original COMMAND command-delivery owner ledger
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T364 S1; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from the T363 source-owned workload transfer under the owner’s standing direction to execute the ordered queue. |
+| Objective | Establish the full original `54:01` first/repeat command-delivery, app declaration, BaseClient-shaped transport and built-in-dispatch ownership chain; select one whole S2 cohort or exact source terminal. |
+| Non-goals | No BOP leaf repair, guest/media mutation, virtual command source, DOS EXEC, cmdExec32, BaseSrv/CSRSS recreation, CPU/device change, CPU30, Bochs, x64 runtime, WOW, Redirector, printer or graphics work. |
+| Reference Baseline | T363 S4 frozen observation; original COMMAND `cmddisp.c`, `cmdmisc.c`, `cmddata.c`, `cmdexec.c`; existing app launch declaration, BaseClient adapter and session command record. |
+| Files And ABI Surface | Original COMMAND `CMDINFO`/`VDMINFO` state, BaseClient `GetNextVDMCommand`, app launch declaration and session-owned route; no source or ABI change in S1. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Original declaration/definition/caller/data-flow review; mirror-versus-source comparison; selected formal graph membership; source/adapter boundary ledger and governance checks. No product run. |
+| Expected Markers | One ledger distinguishes first, repeat, command consumed/available, `/C` delivery, built-in handoff, block/resume and original error/exit paths, with every immediate edge owned. |
+| Asset Needs | Existing original mirrors, formal CPU40/x86 graph, T363 sidecar and source indexes only; no guest or host-system mutation. |
+| Reporting Requirements | Separate original source facts, current binding facts and frozen runtime facts; identify any self-authored route that an original body or same-shaped adapter can supersede. |
+| Stop Conditions | Need to invent a command parser, change a BOP result, retain a guest pointer, alter app/declaration behavior, rerun T363, enter DOS EXEC/native child, or infer a repair from timeout requires a new packet. |
+| Exit Criteria | Every immediate command-delivery edge has an original/source-shaped owner and disposition; S2 is a finite whole cohort or the exact earlier source terminal is recorded. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `cmdGetNextCmd`, `cmdGetNextCmdForSeparateWow`, `GetNextVDMCommand`, `VDMINFO`, `CMDINFO`, `IsFirstCall`, `IsRepeatCall`, app launch declaration, BaseClient capture/copy, `fBlock`, built-in dispatch and `cmdReturnExitCode`. |
+
+**Plan:** [M0 T364 COMMAND command delivery and built-in dispatch](etc/operations/m0-t364-command-delivery-and-built-in-dispatch-001.md).
+
+**S1 closure:** [original COMMAND command-delivery owner ledger](etc/evidence/m0-t364-s1-command-delivery-owner-ledger-001.md)
+proves that the later `54:01` is the original ordinary DOS command
+reacquisition after the one bootstrap record has been consumed.  Its pending
+wait is a source-shaped BaseClient/BaseSrv contract, not a COMMAND BOP or
+machine defect.
+
+### M0 T364 S2 — Active bounded original command-source recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T364 S2; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from the closed T364 S1 owner ledger under the owner’s standing direction to execute the ordered queue. |
+| Objective | Recover the complete source-shaped app/session command-input, copied Base VDM record, DOS wake/retry and original COMMAND handoff cohort selected by the later `54:01`. |
+| Non-goals | No command parser, fabricated BOP result, guest/media mutation, virtual command source, DOS EXEC, cmdExec32, BaseSrv/CSRSS recreation, CPU/device change, CPU30, Bochs, x64 runtime, WOW, Redirector, printer, graphics or runtime observation. |
+| Reference Baseline | T364 S1 ledger; T363 S4 frozen observation; original COMMAND `cmdGetNextCmd`; existing source-shaped BaseClient/Base VDM local/broker and app launch declaration. |
+| Files And ABI Surface | Original `CMDINFO`/`VDMINFO` callers; `app` declaration/input boundary; copied Base VDM command/broker records; session wake/teardown. No guest-pointer, raw-handle or BOP ABI change. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Original caller/data-flow review; focused command-record lifecycle tests covering first delivery, consumed/empty, publication/wake/retry and source failure; formal CPU40/x86 link. No product run. |
+| Expected Markers | One whole command-input contract has original owner/disposition; no app command parser; copied records and session wake lifecycle are bounded; original COMMAND return/failure behavior is locally evidenced. |
+| Asset Needs | Existing original mirrors, formal CPU40/x86 graph, app/session/adapters and source indexes only; no host-system or guest-media mutation. |
+| Reporting Requirements | Record original source versus BaseSrv/CSR-unavailable boundary, record lifecycle state before/after consume and teardown, and name the next exact owner without claiming DOS EXEC. |
+| Stop Conditions | Need to parse commands in app, synthesize an additional command without an admitted input source, alter a BOP result, retain guest/native pointers, change CPU/device behavior, enter child/WOW/Redirector semantics, or run the product requires new admission. |
+| Exit Criteria | The selected ordinary DOS command-source cohort is source-shaped and locally tested, or an exact earlier source terminal is recorded with every immediate edge owned. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `GetNextVDMCommand`, `BaseSrvGetNextVDMCommand`, BaseClient capture/retry, `VDMINFO` state flags, command-record consume/wake, app declaration, session teardown and COMMAND.COM `/C` handoff. |
+
+**Active: M0 T364 S2.**
 
 ### M0 T354 S1 — Closed permanent COMMAND bootstrap owner admission
 
