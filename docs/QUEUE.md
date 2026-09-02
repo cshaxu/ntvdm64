@@ -56,7 +56,7 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Order | Candidate implementation package |
 | --- | --- |
-| 0 | SoftPC conventional-device and DOS workload matrix — re-prioritized by the latest exact `c_IOVirtualised -> inb -> printer_io` transfer; prove CPU40 device and I/O contracts reached by the unchanged bounded DOS workload. |
+| 0 | COMMAND command delivery and built-in dispatch — recover the later original `54:01` continuation reached by the closed conventional-device workload, including source queue/continuation state, `/C` declaration delivery, built-in dispatch and original return/failure direction. |
 | 1 | DOS `.COM`/MZ `.EXE` execution and parent return — prove original `$Exec`, file/JFN/SFT, PSP/arena/environment, child exit and COMMAND continuation. |
 | 2 | COMMAND native-child (`cmdExec32`) lifecycle — prove reached original `54:08/0A/0B` public-CreateProcess/re-entry/return behavior. |
 | 3 | XMS, DPMI and DOS-extender execution — prove original XMS/A20/UMB/INT15 and DPMI/DPMI32 runtime paths. |

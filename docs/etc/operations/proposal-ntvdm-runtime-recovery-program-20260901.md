@@ -19,10 +19,11 @@ prevents a known missing component from being deferred behind unrelated work.
 
 ## Ordered capability packages
 
-1. **SoftPC conventional-device and DOS workload matrix:** T362 transfers the
-   frozen `/C EXIT` workload at the exact original
-   `c_IOVirtualised -> inb -> printer_io` owner.  Recover/test the complete
-   CPU40 device path before resuming COMMAND runtime claims.
+1. **COMMAND command delivery and built-in dispatch:** T363 proves the
+   original conventional-device owner and returns a first `54:01`; the next
+   later `54:01` continuation becomes the current source owner. Recover the
+   original command source/queue, `/C` declaration delivery, built-in dispatch
+   and return/failure direction before asserting DOS EXEC behavior.
 2. **DOS `.COM`/MZ `.EXE` execution and parent return:** original `$Exec`,
    file/JFN/SFT, PSP/arena/environment, relocation, child exit and COMMAND
    continuation using immutable low-dependency workloads.

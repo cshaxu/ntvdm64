@@ -29,21 +29,28 @@ proves that the reached INT 17 path remains within the selected original
 CPU40/IOS/LPT cohort.  The `MONITOR`-only printer transport is compiled out;
 no missing printer binding, virtual printer, or leaf BOP repair is admitted.
 
-### M0 T363 S2 — Active original conventional-device cohort verification
+### M0 T363 S2 — Closed original conventional-device cohort verification
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T363 S2; ordinary mode (single-person dual-role implementation). |
-| Admission And Approval | Admitted by T363 S1's complete original-owner ledger under the standing ordered-queue direction. |
-| Objective | Verify, as one original CPU40 SoftPC cohort, that `reset -> printer_init/printer_post -> IOS tables -> printer_io/printer_inb -> host_lpt[]` retains the source-defined status and timeout direction in the selected non-MONITOR product profile. |
-| Non-goals | No printer leaf patch, virtual printer, host printer or dongle implementation, guest/media mutation, BOP fabrication, command/EXEC work, monitor transport, CPU30, Bochs, x64 runtime, WOW, Redirector or graphics feature. |
-| Reference Baseline | T363 S1 owner ledger; corrected T362 same-run observation; selected original CPU40/x86 formal graph. |
-| Files And ABI Surface | Original `reset.c`, `ios.c`, `printer.c`, `printer_.c`, `nt_lpt.c`, the existing SAS/session backing and formal build manifest.  No new device ABI. |
-| Verification | Static graph/profile review plus bounded local original-cohort checks for BDA initialization, LPT port registration and local no-device/timeout status direction.  No product observation. |
-| Exit Criteria | A formal selected graph and local source-shaped checks establish the complete non-MONITOR conventional-device initialization/status cohort, or identify one exact earlier original binding for S3. |
-| Stop Conditions | Need to emulate a physical printer, expose direct port I/O, make a guest-visible policy decision, alter CPU/BOP behavior, or run the frozen workload before S4 requires a new packet. |
+**S2 closure:** [original conventional-device cohort verification](etc/evidence/m0-t363-s2-conventional-device-cohort-verification-001.md)
+proves the source-shaped reset/BDA/IOS/LPT status and timeout cohort with the
+selected `NTVDM`/non-`MONITOR` profile. No new device behavior was needed.
 
-**Active: M0 T363 S2.**
+### M0 T363 S3 — Closed conventional-device formal closure
+
+**S3 closure:** [conventional-device formal closure](etc/evidence/m0-t363-s3-conventional-device-formal-closure-001.md)
+proves the source units and existing bindings are in the selected CPU40/x86
+product. It makes no physical-printer claim.
+
+### M0 T363 S4 — Closed frozen conventional-device workload observation
+
+**S4 closure:** [frozen conventional-device workload observation](etc/evidence/m0-t363-s4-frozen-conventional-device-observation-001.md)
+records the one permitted run. It passes the reached device cohort, returns a
+first original `54:01`, and transfers to the later original COMMAND command
+delivery/continuation cohort.
+
+**No active M/T/S packet.** T363 is closed; see its
+[closure record](history/m0-t363-softpc-conventional-device-matrix-closure-20260902.md).
+The next candidate requires fresh owner admission.
 
 ### M0 T354 S1 — Closed permanent COMMAND bootstrap owner admission
 
