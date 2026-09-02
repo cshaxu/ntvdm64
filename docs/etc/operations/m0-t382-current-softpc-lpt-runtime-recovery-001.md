@@ -50,3 +50,11 @@ has a source-shaped recovery or exact source-defined terminal with local and
 formal proof, and the one frozen observation is classified.  Its runtime
 success marker is progress beyond `printer_io` into the next original COMMAND
 boundary; it does not claim child execution.
+
+## Outcome
+
+S1 proved that the admission snapshot was a single original ready-status read,
+not evidence of a blocking LPT cohort.  No recovery is justified, so S2--S4
+are intentionally not executed.  See
+[the S1 ledger](../evidence/m0-t382-s1-current-softpc-lpt-owner-ledger-001.md)
+and [closure](../../history/m0-t382-softpc-lpt-false-predecessor-closure-20260902.md).

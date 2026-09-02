@@ -1097,14 +1097,17 @@ and
 
 ## Active Packet
 
-### M0 T381 S2 — Transferred original `cmdExec32` worker/re-entry cohort recovery
+### M0 T381 S2 — Active original `cmdExec32` worker/re-entry cohort recovery
 
-**Transferred:** [current-formal predecessor observation](etc/evidence/m0-t381-s2-p2-current-formal-predecessor-observation-001.md) proved that the fixed workload has not reached `54:08`; its current original CPU40 LPT/IOS predecessor is now M0 T382.  T381 remains the blocked COMMAND continuation and makes no child-completion claim.
+**Active: M0 T381 S2.**  The current-formal snapshot did not reach `54:08`, but
+[T382's LPT owner ledger](etc/evidence/m0-t382-s1-current-softpc-lpt-owner-ledger-001.md)
+proved that its `inb(0x3BD)` frame is a single original ready-status read, not
+a machine blocker.  T381 therefore resumes without an LPT source change.
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T381 S2; ordinary mode (single-person dual-role original-owner recovery). |
-| Admission And Approval | S1 completed the complete original source/ABI/failure ledger and selected one inseparable guest-tail/COMMAND-worker/Base-VDM cohort. |
+| Admission And Approval | S1 completed the complete original source/ABI/failure ledger and selected one inseparable guest-tail/COMMAND-worker/Base-VDM cohort.  T382 corrected the unsupported LPT predecessor inference. |
 | Objective | Prove and, only if necessary, recover exact original command payload, worker creation, child completion, Base VDM retry and `54:08` return as one whole cohort. |
 | Non-goals | No BOP leaf patch, app-owned child launcher, synthetic completion, guest-media mutation, changed workload/media/container, CPU30, Bochs, x64 recovery, DOS PSP return, WOW, Redirector protocol or CSRSS/BaseSrv cross-process broker. One corrective fixed-container observation is permitted only after the current formal CPU40/x86 product is linked, because the earlier recorded image is not the current formal product. |
 | Reference Baseline | T381 S1 ledger; T370 source/binding closure; T380 S1--S4 evidence; current formal CPU40/x86 product and staged package. |
@@ -1114,7 +1117,7 @@ and
 | Expected Markers | Original `cmdExec` payload and original worker return are observed without raw guest-pointer escape; no process created by app; exact completion result reaches original caller. |
 | Asset Needs | Current original COMMAND/Base VDM/session/Win32 sources, T381 S1 ledger, formal graph and MSVC x86/Ninja build root. |
 | Reporting Requirements | Record every retained/changed binding, payload/result evidence and limitation; distinguish focused proof from later guest runtime proof. |
-| Stop Conditions | A proposed solution substitutes app-owned launch, changes guest media or CPU semantics, introduces a fake completion, expands to DOS PSP/WOW/Redirector/broker behavior, changes the declared workload/container, or requires another observation after the permitted current-product observation; pause and revise. |
+| Stop Conditions | A proposed solution substitutes app-owned launch, changes guest media or CPU semantics, introduces a fake completion, expands to DOS PSP/WOW/Redirector/broker behavior, changes the declared workload/container, or requires an unadmitted additional observation; pause and revise. |
 | Exit Criteria | The whole S1 cohort is source-level proved or repaired with original names/order/failure retained, and one focused original-caller test proves command arguments and exit 37 return. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `54:08`, `54:0A`, `54:0B`, `cmdExec`, `cmdExec32`, `cmdCreateProcess`, `cmdExecComspec32`, `cmdReturnExitCode`, `cmdGetNextCmd`, Base VDM wait/re-entry, worker/thread lifetime, process/stream tokens, cancellation, cleanup and final COMMAND result. |
@@ -1127,31 +1130,7 @@ and
 
 **S2 P2:** [current-formal predecessor observation](etc/evidence/m0-t381-s2-p2-current-formal-predecessor-observation-001.md).
 
-**Transfer:** [T381 predecessor transfer](history/m0-t381-cmdexec32-predecessor-transfer-20260902.md).
-
-### M0 T382 S1 — Active current-formal SoftPC LPT owner ledger
-
-**Active: M0 T382 S1**
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T382 S1; ordinary mode (single-person dual-role original-owner recovery). |
-| Admission And Approval | T381 S2 P2's one current-formal fixed observation identifies the complete earlier original CPU40 LPT/IOS cohort.  The owner-directed priority is pure DOS progress before DOS-to-32-bit child execution. |
-| Objective | Establish the exact current original BIOS/BDA/IOS/printer/host-LPT source, binding and timeout/status ownership that stops at `inb(0x3BD)`, and select one complete recovery cohort or exact original terminal. |
-| Non-goals | No port-value leaf patch, virtual printer, direct-port policy, app command workaround, BOP fabrication, guest/media mutation, `cmdExec32` source change, DOS PSP/child, WOW, Redirector, CPU30, Bochs, x64 recovery or product run. |
-| Reference Baseline | T381 P2 current-formal observation; old T363 evidence (identity comparison only); original CPU40 `reset.c`, `ios.c`, `printer.c`, `printer_.c`, `nt_lpt.c`, configuration/timer callers; current formal CPU40/x86 graph. |
-| Files And ABI Surface | Original BIOS BDA LPT setup, IOS adapter/vector tables, `printer_init`/`printer_io`/`printer_inb`, `host_lpt_*`, config and timer inputs; any same-shaped public Win32 host-device binding. |
-| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, immutable-media, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Definition/caller/data-flow and current-map review; source-identity and formal-graph membership comparison; complete status/timeout/failure ledger. No product run. |
-| Expected Markers | Every immediate BDA, IOS, printer and host transport edge has one original owner/disposition; the difference from old T363 evidence is classified without assuming a missing printer or fabricating a ready result. |
-| Asset Needs | Current formal map/product manifest, fixed observation record, original mirrors and current source/build indexes only. |
-| Reporting Requirements | Separate source facts, current formal binding facts and the frozen runtime observation; record original no-device, busy, timeout and cleanup behavior and any retained adapter boundary. |
-| Stop Conditions | A proposed per-port result, virtual printer, direct host-port access, guest/media change, COMMAND workaround, second observation or non-LPT owner expansion requires a later S admission. |
-| Exit Criteria | The complete immediate original LPT cohort and its current binding/terminal disposition are proved, with a finite S2 recovery cohort or exact earlier source terminal. |
-| Original Owner Request | “先让纯dos和dos调用32位程序跑通”。 |
-| Similar-Issue Sweep | LPT1 BDA address/timeout, `printer_init`, `printer_post`, `printer_io`, `printer_inb`, `inb`, IOS adapters, `host_lpt_status`, `host_read_printer_status_port`, `nt_lpt` open/close/heartbeat, reset/config/timer and no-device handling. |
-
-**Plan:** [M0 T382 current-formal SoftPC LPT runtime recovery](etc/operations/m0-t382-current-softpc-lpt-runtime-recovery-001.md).
+**Transfer and correction:** [T381 predecessor transfer](history/m0-t381-cmdexec32-predecessor-transfer-20260902.md), [T382 closure](history/m0-t382-softpc-lpt-false-predecessor-closure-20260902.md).
 
 ### M0 T380 — Closed COMMAND native-child runtime activation
 

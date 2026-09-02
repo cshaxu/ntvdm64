@@ -61,7 +61,7 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Next order | Candidate implementation package |
 | --- | --- |
-| 1 | Original COMMAND `cmdExec32` stage-to-return recovery — resume the blocked `54:08` worker, Base VDM re-entry, child completion and original return only after the active current-formal CPU40 machine predecessor passes. |
+| 1 | Original COMMAND `cmdExec32` stage-to-return recovery — recover `54:08` worker, Base VDM re-entry, child completion and original return.  The prior LPT snapshot has been proved not to be a machine blocker. |
 | 2 | WOW16 bootstrap, callback and NE lifecycle activation — prove one-process WOWEXEC command routing, callback/re-entry, task lifetime and original Win16 NE start/exit. |
 | 3 | WOW16 service, UI and host integration activation — recover selected original WOW32 providers through public APIs while retaining exact USER/CSRSS/Win32k private-boundary failures. |
 | 4 | Single-process NTVDM compatibility matrix — run selected DOS, extender, Redirector, COMMAND-native-child and Win16 workloads against the completed original-owner contracts; reopen only the immediate original owner proven by a failure. |
