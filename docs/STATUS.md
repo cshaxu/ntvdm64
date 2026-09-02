@@ -2,33 +2,19 @@
 
 ## Current Work
 
-### M0 T375 S3 — Active fixed original COMMAND built-in observation
-
-**Active: M0 T375 S3**
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T375 S3; ordinary mode (single-person dual-role fixed-container observation). |
-| Admission And Approval | Admitted after T375 S2's source-shaped BaseVDM lifecycle correction and formal x86 link under the owner's approval of the queue-head pure-DOS package. |
-| Objective | Make exactly one bounded, non-debug run of the rebuilt CPU40/SoftPC product against immutable media and determine whether original `COMMAND.COM` completes the declared `EXIT` built-in. |
-| Non-goals | No production repair, `.COM`/MZ execution claim, host executable loader, synthetic command record, guest-media mutation, BOP leaf patch, native child, WOW/Win16, CSRSS/kernel-VDM recreation, CPU30, Bochs or x64 runtime work. |
-| Reference Baseline | T375 S1 topology; T375 S2 BaseVDM lifecycle closure; rebuilt formal CPU40/x86 product SHA-256 `350d4a84db26972132ba728703d2af1275c1ed1d609f40b6eaec900b05ef11fb`; immutable `O:\ntvdm64` stage. |
-| Files And ABI Surface | Existing observer, staged selected product and immutable media only. No source or ABI is changed in S3. |
-| Applicable Rules | Execution, source policy, source-first recovery, guest-load-only, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and document rules. |
-| Verification | Product/stage hash check and one console-owning, non-debug observation with `--command EXIT`; attribute its first post-S2 original owner. |
-| Expected Markers | Original boot, COMMAND acquisition, and either controlled session completion or an exact later source-owned wait/failure. No debugger, media change, second workload or repair is permitted. |
-| Asset Needs | Existing observer, rebuilt product, fixed stage and durable external report path. |
-| Reporting Requirements | Record the exact command, hashes, outcome and source attribution. Distinguish a timeout from command completion. |
-| Stop Conditions | A need to modify source/media, retry with another workload/container, add a loader, alter CPU/device semantics, or expand into external DOS execution/WOW requires a revised S admission. |
-| Exit Criteria | One valid fixed observation is retained and either proves `EXIT` completion or names the next exact original owner; its result selects S4 handoff only, not a trace-leaf repair. |
-| Original Owner Request | “没错 那为啥你要做win16现在？我们先把纯dos程序跑通。你治理一下队列” followed by approval to start the next task. |
-| Similar-Issue Sweep | Stage/product identity, CLI serialization of `EXIT` to `/C EXIT`, original `54:01`/`cmdGetNextCmd`, BaseVDM record state, session completion and absence of external DOS child execution. |
+### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 
 **Plan:** [M0 T375 pure DOS CPU40/SoftPC boot and COMMAND baseline](etc/operations/m0-t375-pure-dos-cpu40-softpc-command-baseline-001.md).
+
+**Closure:** [T375 history record](history/m0-t375-pure-dos-cpu40-softpc-command-baseline-closure-20260902.md).
 
 **S1 closure:** [pure DOS boot/COMMAND topology and fixed-container admission](etc/evidence/m0-t375-s1-pure-dos-boot-command-topology-001.md).
 
 **S2 closure:** [original Base VDM DOS-record lifecycle recovery](etc/evidence/m0-t375-s2-original-base-vdm-dos-record-lifecycle-001.md).
+
+**S3 closure:** [fixed original COMMAND `EXIT` observation](etc/evidence/m0-t375-s3-fixed-command-exit-observation-001.md).
+
+**S4 closure:** [original COMMAND bootstrap payload closure](etc/evidence/m0-t375-s4-original-command-bootstrap-payload-closure-001.md).
 
 ### M0 T374 S4 — Closed exact USER registration and Base hook boundary
 
@@ -1100,6 +1086,9 @@ and
 [T341 closure](history/m0-t341-vdd-owner-package-recovery-closure-20260831.md).
 
 ## Active Packet
+
+**No active M/T/S packet.** T375 is closed; the queue must be reviewed and a
+new packet admitted before further implementation work begins.
 
 ### M0 T357 S1 — Closed staged runtime identity and owner admission
 

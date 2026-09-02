@@ -209,6 +209,20 @@ static NTSTATUS get_next_command(base_vdm_local *record, PVDMINFO information)
             LeaveCriticalSection(&record->lock);
             return STATUS_NO_MEMORY;
         }
+        /* DIVERGENCE(ADAPTER-BASESRV-007): BaseSrv normally leaves an
+         * ordinary DOS VDM waiting for another console command.  The app's
+         * explicitly declared one-shot CLI command has no such producer.
+         * Reach this only after the copied DOS record became BUSY and original
+         * COMMAND made its next BaseVDM request; end the bound session at that
+         * source-visible command boundary instead of inventing a guest input
+         * record or changing COMMAND. */
+        if (!wow_request && record->terminal_on_command_exhaustion != 0u &&
+            record->dos_record_state == BASE_VDM_DOS_RECORD_BUSY) {
+            LeaveCriticalSection(&record->lock);
+            if (session_terminate_current(0u)) return STATUS_NO_MEMORY;
+            SetLastError(ERROR_INVALID_STATE);
+            return STATUS_INVALID_PARAMETER;
+        }
         record->pending_request = 1u;
         ResetEvent(record->wake_event);
         LeaveCriticalSection(&record->lock);
@@ -369,6 +383,17 @@ BOOL base_vdm_local_dispatch(PVDMINFO information)
         status == STATUS_NO_MEMORY ? ERROR_NOT_ENOUGH_MEMORY :
         status == STATUS_PENDING ? ERROR_IO_PENDING : ERROR_CALL_NOT_IMPLEMENTED);
     return FALSE;
+}
+
+int base_vdm_local_set_terminal_on_command_exhaustion(base_vdm_local *record,
+    int enabled)
+{
+    if (!base_vdm_local_valid(record) || record->owner == NULL ||
+        record->available != 0u || record->dos_record_state !=
+            BASE_VDM_DOS_RECORD_EMPTY)
+        return 0;
+    record->terminal_on_command_exhaustion = enabled != 0 ? 1u : 0u;
+    return 1;
 }
 
 /* The original BaseClient, not BaseSrv, waits on the server-returned DOS

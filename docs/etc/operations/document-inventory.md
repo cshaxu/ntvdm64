@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3901 |
+| Documentation records | 3905 |
 | --- | --- |
-| Generated UTC | 2026-09-02T13:03:09Z (manual incremental update) |
+| Generated UTC | 2026-09-02T14:08:00Z (manual incremental update) |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 1a48a49e5d7adf0a36810fb554c056a4de362c7461dc9093635ba2b0ba745aa9 |
+| STATUS.md | principal control document | 57947bb32866f76d6a27e946e0da55011439128ac569e02ceef1f701f1d3599c |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1269,6 +1269,8 @@ content-divergent entries.
 | etc/evidence/m0-t374-s3-wow-user-registration-contract-matrix-001.md | indexed supporting material | 6dd32d41b22b0deecb68b92ba50eda1e961a3b963fbf6e7dd1a298e3f9d9f426 |
 | etc/evidence/m0-t375-s1-pure-dos-boot-command-topology-001.md | indexed supporting material | ba6e74e39d5dbe4bec2dd424c099d77a7f3c67632c280eae280c10ff62a52f85 |
 | etc/evidence/m0-t375-s2-original-base-vdm-dos-record-lifecycle-001.md | indexed supporting material | e7ffb19509753cb8100d7ab980ed9bde739065ad06cf3d9f34cd9a2ab2654504 |
+| etc/evidence/m0-t375-s3-fixed-command-exit-observation-001.md | indexed supporting material | 598207ab501b4ceebcce2d40c97a3f3c2824ecf679f7b7f1f5ee09683b7cd702 |
+| etc/evidence/m0-t375-s4-original-command-bootstrap-payload-closure-001.md | indexed supporting material | 48448ec69a59c56efe31e8b968a5d70656daa4c2d63530d353b69081185958e5 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -3808,6 +3810,7 @@ content-divergent entries.
 | history/m0-t372-redirector-host-resource-execution-closure-20260902.md | closed task history | 5181802b9b96818e3476cd087800749c61ba448f4ec8c31888e6022b0a016689 |
 | history/m0-t373-wow16-bootstrap-callback-ne-lifecycle-closure-20260902.md | closed task history | d9bcec484899282f6a1e5ee0252c973bd135954c14fad5c267842fd48f0f1fd4 |
 | history/m0-t374-wow16-service-ui-private-host-boundary-closure-20260902.md | closed task history | 9bbff187660ad00afe5fc1291a301827cdabf85f07ced3790a91cb054c6bc24a |
+| history/m0-t375-pure-dos-cpu40-softpc-command-baseline-closure-20260902.md | closed task history | 5128a8b1731cae16dfcacdeda96baffc7f3ba09a9f5338ca727ab5877a5d2338 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

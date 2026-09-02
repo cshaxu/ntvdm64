@@ -52,7 +52,9 @@ CMDINFO CmdInfo;
 mvdm_guest_location cmdinfo_location;
 mvdm_guest_location cmdline_location;
 mvdm_guest_location environment_location;
+mvdm_guest_location execpath_location;
 mvdm_guest_location_lease command_lease;
+mvdm_guest_location_lease execpath_lease;
 /* DIVERGENCE(MVDM-HOST-DIV-115): retain local title and command-line
  * lengths at their native width.  The existing guest byte write remains at
  * the source's already asserted 127-byte boundary. */
@@ -349,6 +351,29 @@ char    AppName[MAX_PATH + 13];
     }
     else
 	STOREWORD(pCMDInfo->ExecExtType, UNKNOWN_EXTENTION);
+
+    /* DIVERGENCE(MVDM-HOST-DIV-194): original `VDMInfo.AppName` is the
+     * guest `ExecPathSeg:ExecPathOff` alias, so BaseClient writes its result
+     * directly into COMMAND's buffer.  The bounded local capture above must
+     * commit that same post-PIF/post-uppercase value before COMMAND resumes. */
+    if (VDMInfo.AppLen != 0u) {
+        if (VDMInfo.AppLen > FETCHWORD(pCMDInfo->ExecPathSize) ||
+            !mvdm_guest_location_set_real_mode(&execpath_location,
+                FETCHWORD(pCMDInfo->ExecPathSeg),
+                FETCHWORD(pCMDInfo->ExecPathOff)) ||
+            !mvdm_guest_location_acquire(&execpath_location, VDMInfo.AppLen,
+                GUEST_MEMORY_ACCESS_WRITE, &execpath_lease)) {
+            setCF(1);
+            setAX((USHORT)ERROR_INVALID_ADDRESS);
+            return;
+        }
+        RtlMoveMemory(execpath_lease.bytes, VDMInfo.AppName, VDMInfo.AppLen);
+        if (!mvdm_guest_location_release(&execpath_lease, 1)) {
+            setCF(1);
+            setAX((USHORT)ERROR_INVALID_ADDRESS);
+            return;
+        }
+    }
 
     // tell command.com the length of the app full path name.
     STOREWORD(pCMDInfo->ExecPathSize, VDMInfo.AppLen);

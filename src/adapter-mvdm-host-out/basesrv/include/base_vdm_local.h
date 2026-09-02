@@ -8,7 +8,7 @@
 
 typedef struct session session;
 
-#define BASE_VDM_LOCAL_VERSION UINT32_C(5)
+#define BASE_VDM_LOCAL_VERSION UINT32_C(6)
 
 /* These identify which original BaseSrv command queue owns a copied record.
  * They are not guest values and never enter VDMINFO: the original client
@@ -78,6 +78,9 @@ typedef struct base_vdm_local {
     uint32_t pending_request;
     uint32_t native_child_launch_pending;
     uint32_t dos_record_state;
+    /* App may opt one declared CLI command into a terminal session outcome.
+     * This is host composition state, never a BaseVDM or guest field. */
+    uint32_t terminal_on_command_exhaustion;
     uint8_t command[MAXIMUM_VDM_COMMAND_LENGTH];
     /* BaseClient/BaseSrv carry the host application path independently of
      * the DOS-shaped guest path fields.  The original client uses MAX_PATH
@@ -100,6 +103,10 @@ int base_vdm_local_publish(base_vdm_local *record,
     const base_vdm_command *command);
 int base_vdm_local_bind(base_vdm_local *record, session *owner);
 int base_vdm_local_unbind(base_vdm_local *record);
+/* The app-owned one-shot CLI contract is terminal only after a copied DOS
+ * command was consumed and original COMMAND asks BaseVDM for another one. */
+int base_vdm_local_set_terminal_on_command_exhaustion(base_vdm_local *record,
+    int enabled);
 BOOL base_vdm_local_dispatch(PVDMINFO information);
 int base_vdm_local_wait_for_command(PVDMINFO information);
 /* Source-shaped local counterpart of the narrow interval between original

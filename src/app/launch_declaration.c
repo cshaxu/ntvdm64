@@ -48,6 +48,15 @@ int app_launch_declaration_bind(app_launch_declaration *declaration,
     if (declaration == NULL || declaration->bound != 0u ||
         !base_vdm_local_valid(&declaration->base_vdm)) return 0;
     if (!base_vdm_local_bind(&declaration->base_vdm, owner)) return 0;
+    /* A declared CLI command is a one-shot product request.  Keep the
+     * original COMMAND/BaseVDM exchange unchanged: only its next request
+     * after consuming that command completes this app-owned session. */
+    if (declaration->command_declared != 0u &&
+        !base_vdm_local_set_terminal_on_command_exhaustion(
+            &declaration->base_vdm, 1)) {
+        (void)base_vdm_local_unbind(&declaration->base_vdm);
+        return 0;
+    }
     /* The current app has a single local broker instance.  Its stable broker
      * identity is not a guest or host pointer; a later public transport may
      * assign this value externally without changing the original MVDM caller. */
