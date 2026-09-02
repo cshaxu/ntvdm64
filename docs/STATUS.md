@@ -126,7 +126,7 @@ provider defect.
 proves the original COMMAND archive, BaseClient-shaped binding, session and
 broker are final CPU40/x86 process inputs.  This is formal link proof only.
 
-### M0 T364 S4 — Active frozen COMMAND delivery observation
+### M0 T364 S4 — Closed frozen COMMAND delivery observation
 
 | Field | Record |
 | --- | --- |
@@ -146,7 +146,14 @@ broker are final CPU40/x86 process inputs.  This is formal link proof only.
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | First/repeat `54:01`, `54:04`, `54:0E`, Base VDM record state, app declaration bytes, original COMMAND dispatch return and earliest next original BOP/host owner. |
 
-**Active: M0 T364 S4.**
+**S4 closure:** [frozen COMMAND delivery observation](etc/evidence/m0-t364-s4-frozen-command-delivery-observation-001.md)
+proves the source-shaped initial `/C EXIT` delivery and the later ordinary
+no-next-command wait.  It does not claim an interactive session or child
+execution.
+
+**No active M/T/S packet.** T364 is closed; see its
+[closure record](history/m0-t364-command-delivery-and-built-in-dispatch-closure-20260902.md).
+The next candidate requires fresh owner admission.
 
 ### M0 T354 S1 — Closed permanent COMMAND bootstrap owner admission
 
