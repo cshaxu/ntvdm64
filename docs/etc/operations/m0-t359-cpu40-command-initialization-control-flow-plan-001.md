@@ -26,6 +26,9 @@ a predecessor of T358, not a COMMAND BOP implementation task.
 4. **S4 — frozen resumed observation.** Use one new capacity-valid immutable
    stage with the same `--command EXIT` workload.  Require progress through
    original `54:01`, or record the next exact source-owned boundary.
+   A stage that violates the original 63-byte `commnd` input contract is
+   invalid evidence and must be closed without interpretation; one separately
+   admitted replacement S may use a new short-root stage.
 
 ## Exclusions
 

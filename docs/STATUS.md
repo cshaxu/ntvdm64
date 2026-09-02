@@ -684,7 +684,7 @@ the selected CPU40 path attempts to execute immutable `COMMAND.COM` data at
 
 **S3 closure:** [SAS-store observer local conformance](etc/evidence/m0-t359-s3-sas-store-observer-local-conformance-001.md) passes its 5-action x86 Ninja graph.  The formal product remains linked at 428 actions.  Neither result is guest-runtime evidence.
 
-### M0 T359 S4 — Active frozen resumed observation
+### M0 T359 S4 — Closed invalid long-root observation
 
 | Field | Record |
 | --- | --- |
@@ -693,10 +693,24 @@ the selected CPU40 path attempts to execute immutable `COMMAND.COM` data at
 | Objective | Make exactly one immutable CPU40/x86 resumed `/C EXIT` observation, watching only the source-mapped `TrnSeg` control-word range, and record whether original execution reaches `54:01` or a narrower source-owned boundary. |
 | Non-goals | No retry, no second workload, no COMMAND/NTDOS/DEM/CPU/BOP repair, no guest or media mutation, no new mapping, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, Redirector, EXEC or graphics work. |
 | Verification | Fresh staged capacity-valid package; product and media identity; one bounded run; copied observer report and terminal report; governance/export and diff review. |
-| Exit Criteria | One immutable run records the configured post-store controls and either reaches original `54:01` or names one exact preceding original owner boundary. |
+| Exit Criteria | One immutable run records the configured post-store controls and either reaches original `54:01` or names one exact preceding original owner boundary; a capacity-invalid stage closes with no semantic result. |
 | Original Owner Request | “非常好，按照这个顺序执行。” |
 
-**Active: M0 T359 S4.**
+**S4 closure:** [invalid long-root observation disposition](etc/evidence/m0-t359-s4-invalid-long-root-observation-001.md) records the one attempted stage as capacity-invalid (74-character `mvdm` root versus the original 63-byte contract).  Its timeout and absent reports are not used as lifecycle evidence.
+
+### M0 T359 S5 — Active replacement short-root frozen observation
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T359 S5; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted by T359 S4's capacity-invalid-stage disposition under ordered dependency-first execution and the previously approved `O:\ntvdm64` short output root. |
+| Objective | Make one replacement immutable CPU40/x86 resumed `/C EXIT` observation from a new non-overwriting short-root stage, watching only original `TrnSeg` two-byte writes and recording the next source-owned boundary. |
+| Non-goals | No reuse or interpretation of the invalid stage; no retry, source change, media mutation, BOP/DEM/COMMAND/CPU repair, new mapping, CPU30, Bochs, x64, BaseSrv/CSRSS, WOW, Redirector, EXEC or graphics work. |
+| Verification | Short-root capacity check; fresh product/media manifest; exactly one bounded console-owning run; copied observer report and terminal report. |
+| Exit Criteria | The stage has at most 63 visible `mvdm` root characters and its single run either reaches original `54:01` or identifies one exact source-owned predecessor. |
+| Original Owner Request | “非常好，按照这个顺序执行。” |
+
+**Active: M0 T359 S5.**
 
 ### M0 T355 S31 — Closed original `0x78` entry-result attribution
 
