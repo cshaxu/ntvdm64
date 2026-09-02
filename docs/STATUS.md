@@ -2,29 +2,11 @@
 
 ## Current Work
 
-### M0 T361 S1 — Active original font and window-contract provenance
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T361 S1; ordinary mode (single-person dual-role implementation). |
-| Admission And Approval | Owner directed that the SoftPC BIOS/VGA glyph source and NXVM-compatible exact-client window contract become the current task. |
-| Objective | Establish the original SoftPC source/ABI/data provenance for default CP437 8x16 glyphs and the exact text/graphics client-area contract before changing app presentation. |
-| Non-goals | No host font fallback, X86GFX, Console Server/CSRSS/kernel VDM route, guest-byte change, SoftPC controller rewrite, Bochs route, mapper, CPU30, x64 runtime claim or DOS workload repair. |
-| Reference Baseline | Closed T346 app window lifecycle; `app/presentation_window.c` currently uses `ANSI_FIXED_FONT` and a fixed outer 960x720 creation size; selected SoftPC CPU40/VGA sources and NXVM comparison evidence. |
-| Files And ABI Surface | Selected original `mvdm-host/softpc.new/{base/inc,base/video,bios}` font/dimension sources; session presentation contract; app window; package asset manifest. No source behavior change in S1. |
-| Applicable Rules | Execution, source policy, source-first recovery, mirror/overlay, architecture, coding and documentation rules. |
-| Verification | Definition/data-flow/selected-build walk; original-versus-mirror identity; NXVM comparison-only review; current session/app sizing review; governance/export and diff review. |
-| Expected Markers | One ledger names the exact original font byte owner, CP437 order, 8x16 selection state, approved export path, output contract, and exact client dimensions for text and graphics. |
-| Asset Needs | Existing selected SoftPC BIOS/VGA inputs, existing session/app source and NXVM comparison checkout only; no new external source or host mutation. |
-| Reporting Requirements | Separate original source, current app behavior, selected adapter boundary and NXVM comparison facts; identify any unavailable original font-export edge before proposing code. |
-| Stop Conditions | Any need to copy NXVM runtime code, use a Windows font, write guest font memory, introduce direct VGA aliases, alter SoftPC font/controller behavior, or infer from a timeout pauses for renewed admission. |
-| Exit Criteria | A complete source-shaped font/client-contract ledger selects exactly one S2 seam or records an exact unavailable original dependency; no unowned immediate edge remains. |
-| Original Owner Request | “窗口字体处理：使用 SoftPC 已加载的原版 BIOS/VGA 字体导出 CP437 8×16 字模并按 bitblt 绘制；窗口客户区必须等于实际 SoftPC 画面尺寸，不保留白边。” |
-| Similar-Issue Sweep | `EGA_FONTS`/`EGA_HIFONT`, VGA font loads, text-plane character/attribute snapshots, 8x8/8x14/8x16 heights, graphics resize events, `CreateWindowEx`, `AdjustWindowRectExForDpi`, `WM_SIZE`, `WM_PAINT` and Alt+Enter restoration. |
-
-**Plan:** [M0 T361 SoftPC window font and client contract](etc/operations/m0-t361-softpc-window-font-and-client-contract-plan-001.md).
-
-**Active: M0 T361 S1.**
+**No active M/T/S packet.** The last closed packet is [M0 T361 — SoftPC
+window font and exact-client presentation](history/m0-t361-softpc-window-font-client-contract-closure-20260902.md).
+It now reads the selected original 8x16 V7 VGA table through a bounded
+SoftPC SAS copy and presents exact source-sized text/graphics clients.  It
+does not claim a DOS graphics workload; queue item 11 owns that integration.
 
 ### M0 T354 S1 — Closed permanent COMMAND bootstrap owner admission
 

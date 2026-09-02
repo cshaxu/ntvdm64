@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3806 |
+| Documentation records | 3808 |
 | --- | --- |
-| Generated UTC | 2026-09-02T05:50:50Z |
+| Generated UTC | 2026-09-02T06:12:55Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 8126388e315c7b505e993224dca1dafcd13c2dc399ef65e1862bac21daa0ca86 |
+| STATUS.md | principal control document | 4f2ba64eae33fd995b436656c233f9d926b82e7efa5f13e4a1b0585b25700e3c |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1203,6 +1203,7 @@ content-divergent entries.
 | etc/evidence/m0-t360-s5-invalid-observer-output-disposition-001.md | indexed supporting material | b48bffe2cc65cf8eb23adc08b103ece22b858a9ddc48e025da89ff7e42a27e12 |
 | etc/evidence/m0-t360-s6-invalid-long-stage-root-observation-001.md | indexed supporting material | 9cf5e98b7aa9e92b92d84cfc0be20da4924cf6c56a77295fb2a1306edce57778 |
 | etc/evidence/m0-t360-s7-owner-root-original-layout-observation-001.md | indexed supporting material | 5f988024627f78a26f5daa568e3d51448ef6d2e676c4e7327987a8c35cc4e300 |
+| etc/evidence/m0-t361-s1-original-font-client-contract-001.md | indexed supporting material | 2f2511b1786b8dbdd39e488f384ba8a987a9e75792ea0ae8bfab1c322b057547 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1945,7 +1946,7 @@ content-divergent entries.
 | etc/operations/m0-t358-command-built-in-batch-lifecycle-plan-001.md | indexed supporting material | f05dbd593cd9e15ba3dbd4dafa764d85b6f1a5ac5ea3edac8e5daeb7e6cf027a |
 | etc/operations/m0-t359-cpu40-command-initialization-control-flow-plan-001.md | indexed supporting material | 6de402b73c8ce63ceded5cb63866d7a78c92323c88f1835b73d213e9907e1ae7 |
 | etc/operations/m0-t360-original-systemroot-package-layout-recovery-001.md | indexed supporting material | b28e9358cad8711da118efb3484023c02cec1dcebdb3f018266f7176186d2c1f |
-| etc/operations/m0-t361-softpc-window-font-and-client-contract-plan-001.md | indexed supporting material | c8284c7b7ef74892222bd9e694021606ad5ec7677c713a6649a3b5de5e984524 |
+| etc/operations/m0-t361-softpc-window-font-and-client-contract-plan-001.md | indexed supporting material | 3fc27e6812817d8fbf0b4624e88c296939081ac2f55d526a99aae75402c5dd5c |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3713,6 +3714,7 @@ content-divergent entries.
 | history/m0-t352-cpu40-command-post-cmdsetinfo-continuity-closure-20260901.md | closed task history | 347b772a9bfbc0a3a648c349258a2743a18b25d112921f1baa6c015302b24fd0 |
 | history/m0-t353-cpu40-ntdos-post-cmdgetconfigsys-continuity-closure-20260901.md | closed task history | 994f02f1853770bc97b329b3b18a52d8ea57491a57a10ce4bf576c64fbc17e05 |
 | history/m0-t354-cpu40-ntdos-permanent-command-package-path-closure-20260901.md | closed task history | e9f576b3194691bfe72e104cc82acfd87ebc6b3956d274de18eec2813152c441 |
+| history/m0-t361-softpc-window-font-client-contract-closure-20260902.md | closed task history | b48f043119ef02c739a537781de360807fd6c803810b69ffce727a500908e08c |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |
@@ -3747,7 +3749,7 @@ content-divergent entries.
 | history/m0-td-s1-p4-bop-owner-package-sequencing-20260818.md | closed task history | 15ac68f64790ba73f7f4f0c78b15a32453e3d0795190dc632e44420225f0b1cf |
 | history/m0-td-s1-p5-no-external-bop-governance-20260822.md | closed task history | 1517b746fd44c160ddba4fecd9bcd9c288902fe9794a9551525feac40eedbbe0 |
 | history/m0-td-s1-p6-no-external-bop-freeze-20260822.md | closed task history | b971db4a1d9850a414ce98e9ec662c11b5907f8a5fa1cc089269ccf371604a28 |
-| history/task-index.md | closed task history | 741f10b93cb24c1e316c606c521555697d466bb80cb4a57250544443e9273e95 |
+| history/task-index.md | closed task history | bcf2c98a0b7acdd6618f71c8915864f7e8bc435b2fa5a72b344e0470be7b755e |
 | history/td-mvdm-zero-degree-root-correction-20260827.md | closed task history | a42360a5dc2f08b63e2c21db5c42389fb56ac77c3177ed9ab03e829065752cec |
 | history/td-opennt-host-package-root-governance-20260827.md | closed task history | 529cac51be701e269cecd45bf3253333625d23c2280e3f02e34d0cbc6179a3d5 |
 | opennt-mvdm-artifact-inventory.json | retained pre-governance evidence | 43712e98023476df3b00977f5b54fbb6331716c6eea7535ac2f493ec3f9d257e |

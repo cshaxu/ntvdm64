@@ -1,5 +1,6 @@
 #include "app/presentation_window.h"
 #include "presentation_surface.h"
+#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_presentation_font.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -8,9 +9,68 @@
 #define APP_PRESENTATION_WINDOW_READY_TIMEOUT 5000u
 #define APP_PRESENTATION_MESSAGE_REPAINT (WM_APP + 1u)
 #define APP_PRESENTATION_MESSAGE_SHUTDOWN (WM_APP + 2u)
+#define APP_PRESENTATION_TEXT_COLUMNS 80u
+#define APP_PRESENTATION_TEXT_ROWS 25u
+#define APP_PRESENTATION_WINDOW_STYLE \
+    (WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX)
 
 static LRESULT CALLBACK presentation_window_proc(HWND handle, UINT message,
     WPARAM wparam, LPARAM lparam);
+
+static const uint32_t presentation_ega_rgb[16] = {
+    0x00000000u, 0x000000aau, 0x0000aa00u, 0x0000aaaau,
+    0x00aa0000u, 0x00aa00aau, 0x00aa5500u, 0x00aaaaaau,
+    0x00555555u, 0x005555ffu, 0x0055ff55u, 0x0055ffffu,
+    0x00ff5555u, 0x00ff55ffu, 0x00ffff55u, 0x00ffffffu
+};
+
+static int presentation_surface_dimensions(app_presentation_window *window,
+    uint32_t *width_out, uint32_t *height_out)
+{
+    uint32_t width, height, bits, stride, bytes;
+    uint32_t columns, rows, text_bytes;
+
+    if (window == NULL || width_out == NULL || height_out == NULL) return 0;
+    if (mvdm_presentation_graphics_describe(window->owner, &width, &height,
+            &bits, &stride, &bytes) && width != 0u && height != 0u &&
+        bits != 0u && bytes != 0u) {
+        *width_out = width;
+        *height_out = height;
+        return 1;
+    }
+    if (session_presentation_text_describe(window->owner, &columns, &rows,
+            &text_bytes) && columns != 0u && rows != 0u) {
+        *width_out = columns * APP_PRESENTATION_GLYPH_WIDTH;
+        *height_out = rows * APP_PRESENTATION_GLYPH_HEIGHT;
+        return 1;
+    }
+    *width_out = APP_PRESENTATION_TEXT_COLUMNS * APP_PRESENTATION_GLYPH_WIDTH;
+    *height_out = APP_PRESENTATION_TEXT_ROWS * APP_PRESENTATION_GLYPH_HEIGHT;
+    return 1;
+}
+
+static void presentation_resize_client(app_presentation_window *window,
+    HWND handle)
+{
+    RECT client;
+    RECT outer;
+    uint32_t width, height;
+    DWORD style;
+    DWORD extended_style;
+
+    if (window == NULL || handle == NULL ||
+        InterlockedCompareExchange(&window->fullscreen, 0, 0) != 0 ||
+        !presentation_surface_dimensions(window, &width, &height)) return;
+    if (GetClientRect(handle, &client) &&
+        (uint32_t)(client.right - client.left) == width &&
+        (uint32_t)(client.bottom - client.top) == height) return;
+    SetRect(&outer, 0, 0, (int)width, (int)height);
+    style = (DWORD)GetWindowLongPtrW(handle, GWL_STYLE);
+    extended_style = (DWORD)GetWindowLongPtrW(handle, GWL_EXSTYLE);
+    if (!AdjustWindowRectEx(&outer, style, FALSE, extended_style)) return;
+    SetWindowPos(handle, NULL, 0, 0, outer.right - outer.left,
+        outer.bottom - outer.top, SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE);
+}
 
 static int presentation_event(void *context, const session_video_event *event)
 {
@@ -86,6 +146,72 @@ static void presentation_input_key(app_presentation_window *window,
     (void)WriteConsoleInputW(window->input, &record, 1u, &written);
 }
 
+static void presentation_paint_text(app_presentation_window *window, HDC target)
+{
+    uint32_t columns, rows, text_bytes, row, column, glyph_row;
+    uint8_t *text;
+    uint32_t *pixels;
+    uint32_t width, height;
+    BITMAPINFO info;
+
+    if (window == NULL ||
+        !session_presentation_text_describe(window->owner, &columns, &rows,
+            &text_bytes) || columns == 0u || rows == 0u ||
+        columns > UINT32_MAX / APP_PRESENTATION_GLYPH_WIDTH ||
+        rows > UINT32_MAX / APP_PRESENTATION_GLYPH_HEIGHT) return;
+    width = columns * APP_PRESENTATION_GLYPH_WIDTH;
+    height = rows * APP_PRESENTATION_GLYPH_HEIGHT;
+    if (width == 0u || height == 0u ||
+        (size_t)width > SIZE_MAX / height / sizeof(*pixels)) return;
+    text = (uint8_t *)malloc(text_bytes);
+    pixels = (uint32_t *)malloc((size_t)width * height * sizeof(*pixels));
+    if (text == NULL || pixels == NULL ||
+        !session_presentation_text_snapshot(window->owner, text, text_bytes,
+            &columns, &rows, &text_bytes)) {
+        free(pixels);
+        free(text);
+        return;
+    }
+    if (!mvdm_softpc_presentation_font_snapshot(window->owner, window->current_font,
+            APP_PRESENTATION_FONT_BYTES)) {
+        free(pixels);
+        free(text);
+        return;
+    }
+    window->current_font_loaded = 1u;
+    for (row = 0u; row < rows; ++row) {
+        for (column = 0u; column < columns; ++column) {
+            uint8_t character = text[(row * columns + column) * 2u];
+            uint8_t attribute = text[(row * columns + column) * 2u + 1u];
+            uint32_t foreground = presentation_ega_rgb[attribute & 0x0fu];
+            uint32_t background = presentation_ega_rgb[(attribute >> 4u) & 0x07u];
+            const uint8_t *glyph = window->current_font +
+                (size_t)character * APP_PRESENTATION_GLYPH_HEIGHT;
+            for (glyph_row = 0u; glyph_row < APP_PRESENTATION_GLYPH_HEIGHT;
+                ++glyph_row) {
+                uint32_t bit;
+                uint32_t *destination = pixels +
+                    (size_t)(row * APP_PRESENTATION_GLYPH_HEIGHT + glyph_row) *
+                    width + column * APP_PRESENTATION_GLYPH_WIDTH;
+                for (bit = 0u; bit < APP_PRESENTATION_GLYPH_WIDTH; ++bit)
+                    destination[bit] = (glyph[glyph_row] & (0x80u >> bit)) != 0u ?
+                        foreground : background;
+            }
+        }
+    }
+    ZeroMemory(&info, sizeof(info));
+    info.bmiHeader.biSize = sizeof(info.bmiHeader);
+    info.bmiHeader.biWidth = (LONG)width;
+    info.bmiHeader.biHeight = -(LONG)height;
+    info.bmiHeader.biPlanes = 1u;
+    info.bmiHeader.biBitCount = 32u;
+    info.bmiHeader.biCompression = BI_RGB;
+    (void)SetDIBitsToDevice(target, 0, 0, width, height, 0, 0, 0, height,
+        pixels, &info, DIB_RGB_COLORS);
+    free(pixels);
+    free(text);
+}
+
 static void presentation_paint(app_presentation_window *window, HDC target)
 {
     uint32_t width, height, bits, stride, bytes;
@@ -96,36 +222,15 @@ static void presentation_paint(app_presentation_window *window, HDC target)
     uint32_t palette_entries;
     uint32_t index;
 
+    RECT client;
     InterlockedExchange(&window->repaint_pending, 0);
+    if (GetClientRect((HWND)InterlockedCompareExchangePointer(
+            (PVOID volatile *)&window->window, NULL, NULL), &client)) {
+        (void)FillRect(target, &client, (HBRUSH)GetStockObject(BLACK_BRUSH));
+    }
     if (!mvdm_presentation_graphics_describe(window->owner,
             &width, &height, &bits, &stride, &bytes)) {
-        uint32_t columns, rows, text_bytes, row, column;
-        uint8_t *text;
-        char *characters;
-        HFONT previous;
-        if (!session_presentation_text_describe(window->owner, &columns, &rows,
-                &text_bytes) || columns == 0u || rows == 0u) return;
-        text = (uint8_t *)malloc(text_bytes);
-        characters = (char *)malloc((size_t)columns + 1u);
-        if (text == NULL || characters == NULL ||
-            !session_presentation_text_snapshot(window->owner, text,
-                text_bytes, &columns, &rows, &text_bytes)) {
-            free(characters);
-            free(text);
-            return;
-        }
-        previous = (HFONT)SelectObject(target, GetStockObject(ANSI_FIXED_FONT));
-        SetBkColor(target, RGB(0, 0, 0));
-        SetTextColor(target, RGB(192, 192, 192));
-        for (row = 0u; row < rows; ++row) {
-            for (column = 0u; column < columns; ++column)
-                characters[column] = (char)text[(row * columns + column) * 2u];
-            characters[columns] = '\0';
-            TextOutA(target, 0, (int)(row * 16u), characters, (int)columns);
-        }
-        SelectObject(target, previous);
-        free(characters);
-        free(text);
+        presentation_paint_text(window, target);
         return;
     }
     if (width == 0u || height == 0u || bytes == 0u || bits == 0u) return;
@@ -159,9 +264,8 @@ static void presentation_paint(app_presentation_window *window, HDC target)
         }
         info->bmiHeader.biClrUsed = palette_entries;
     }
-    (void)StretchDIBits(target, 0, 0, (int)width, (int)height,
-        0, 0, (int)width, (int)height, pixels, info, DIB_RGB_COLORS,
-        SRCCOPY);
+    (void)SetDIBitsToDevice(target, 0, 0, width, height,
+        0, 0, 0u, height, pixels, info, DIB_RGB_COLORS);
     free(info);
     free(pixels);
 }
@@ -202,6 +306,9 @@ static DWORD WINAPI presentation_thread(void *context)
     WNDCLASSW window_class;
     MSG message;
     HWND handle;
+    RECT outer;
+    uint32_t width;
+    uint32_t height;
 
     ZeroMemory(&window_class, sizeof(window_class));
     window_class.lpfnWndProc = presentation_window_proc;
@@ -210,9 +317,14 @@ static DWORD WINAPI presentation_thread(void *context)
     window_class.lpszClassName = APP_PRESENTATION_WINDOW_CLASS;
     if (RegisterClassW(&window_class) == 0u && GetLastError() != ERROR_CLASS_ALREADY_EXISTS)
         goto failed;
+    if (!presentation_surface_dimensions(window, &width, &height)) goto failed;
+    SetRect(&outer, 0, 0, (int)width, (int)height);
+    if (!AdjustWindowRectEx(&outer, APP_PRESENTATION_WINDOW_STYLE, FALSE, 0u))
+        goto failed;
     handle = CreateWindowExW(0u, APP_PRESENTATION_WINDOW_CLASS,
-        L"MVDM presentation", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
-        960, 720, NULL, NULL, window_class.hInstance, window);
+        L"MVDM presentation", APP_PRESENTATION_WINDOW_STYLE,
+        CW_USEDEFAULT, CW_USEDEFAULT, outer.right - outer.left,
+        outer.bottom - outer.top, NULL, NULL, window_class.hInstance, window);
     if (handle == NULL) goto failed;
     window->input = CreateFileW(L"CONIN$", GENERIC_READ | GENERIC_WRITE,
         FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0u, NULL);
@@ -252,10 +364,16 @@ static LRESULT CALLBACK presentation_window_proc(HWND handle, UINT message,
     case APP_PRESENTATION_MESSAGE_REPAINT:
         InvalidateRect(handle, NULL, FALSE);
         return 0;
+    case WM_ERASEBKGND:
+        /* WM_PAINT fills the exact client surface from copied SoftPC data.
+         * Suppress User32's class-background erase so it cannot flash or
+         * introduce a host-coloured border between source frames. */
+        return 1;
     case WM_PAINT:
         if (window != NULL) {
             PAINTSTRUCT paint;
             HDC target = BeginPaint(handle, &paint);
+            presentation_resize_client(window, handle);
             presentation_paint(window, target);
             EndPaint(handle, &paint);
         }
