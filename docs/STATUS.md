@@ -1097,27 +1097,14 @@ and
 
 ## Active Packet
 
-### M0 T380 S4 — Active COMMAND native-child frozen observation
+**No active M/T/S packet.**
 
-**Active: M0 T380 S4**
+### M0 T380 — Closed COMMAND native-child runtime activation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T380 S4; ordinary mode (single-person dual-role original-owner recovery). |
-| Admission And Approval | Admitted by S3's current formal CPU40 product/input closure. |
-| Objective | Make one bounded non-debug fixed-container request for `C:\Windows\System32\cmd.exe /c exit 37` through original guest command classification and `54:08` lifecycle; classify the first source-owned result. |
-| Non-goals | No BOP leaf patch, app-owned child launcher, guest-media mutation, source repair, CPU30, Bochs, x64 recovery, DOS PSP synthesis, WOW, Redirector protocol or CSRSS/BaseSrv broker. |
-| Reference Baseline | S1--S3 closure, T379 format-4 package identity and existing console-owning observer. |
-| Files And ABI Surface | Existing observer, identity-proven staged `ntvdm.exe`/`VDMREDIR.DLL`, immutable media and durable report only. |
-| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, immutable-media staging, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Stage/parent/companion/media identity verification and exactly one bounded console-owning non-debug observation. |
-| Expected Markers | Original `54:07` classification, `/z` route, `54:08` lifecycle and child result, or an earlier original source-owned terminal. |
-| Asset Needs | S3 product, fixed format-4 stage and existing observer. |
-| Reporting Requirements | Record exact command, manifest/product identities, durable report and earliest owner classification; do not turn a trace result into a repair. |
-| Stop Conditions | Retry, changed workload/stage/timeout/observer, debugger, guest mutation, source repair, second broker or trace-selected implementation ends S4 without a result claim. |
-| Exit Criteria | One valid identity-proven frozen observation is retained and classified; T380 may then close or transfer only an exact earlier original owner. |
-| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
-| Similar-Issue Sweep | `54:08`, `54:0A`, `54:0B`, `cmdExec`, `cmdExecComspec32`, `cmdExec32`, `cmdCreateProcess`, `cmdGetNextCmd`, `cmdReturnExitCode`, Base VDM, worker/re-entry, standard handles, session child records, cancellation and completion. |
+| Closure | [T380 history record](history/m0-t380-command-native-child-runtime-activation-closure-20260902.md) |
+| Result | The fixed formal run reaches original COMMAND `54:07` and `54:08` stage 0 after an original DEM open of `CMD.EXE`, then times out before a child result. It is not a native-child success claim. |
 
 **Plan:** [M0 T380 COMMAND native-child runtime activation](etc/operations/m0-t380-command-native-child-runtime-activation-001.md).
 
@@ -1126,6 +1113,8 @@ and
 **S2 closure:** [COMMAND native-child lifecycle confirmation](etc/evidence/m0-t380-s2-command-native-child-lifecycle-confirmation-001.md).
 
 **S3 closure:** [COMMAND native-child formal product confirmation](etc/evidence/m0-t380-s3-command-native-child-formal-product-001.md).
+
+**S4 closure:** [COMMAND native-child frozen observation](etc/evidence/m0-t380-s4-frozen-native-child-observation-001.md).
 
 ### M0 T379 — Closed original VDMREDIR runtime product activation
 
