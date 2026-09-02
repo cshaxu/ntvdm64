@@ -2,23 +2,23 @@
 
 ## Current Work
 
-### M0 T368 S3 — Active formal COMMAND boundary closure
+### M0 T368 S4 — Active fixed original `.COM` continuation observation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T368 S3; ordinary mode (single-person dual-role implementation). |
+| Identifier Mode | M0 T368 S4; ordinary mode (single-person dual-role implementation). |
 | Admission And Approval | Admitted from T367's closed frozen original `LOADFIX.COM` observation under the owner's standing instruction to execute the ordered queue. |
-| Objective | Rebuild and inspect the selected CPU40/x86 final product so the original COMMAND cohort and Base VDM/session bindings are formal inputs. |
+| Objective | Make one fixed-container observation using staged byte-identical `LOADFIX.COM` and classify the first source-owned continuation after the original COMMAND record route. |
 | Non-goals | No app command parser, synthetic no-next record, host DOS loader, BOP leaf patch, guest-media mutation, CPU/device change, `cmdExec32`, native child, WOW, Redirector, CSRSS or runtime observation. |
 | Reference Baseline | T368 S1/S2 evidence; original `dos/command` mirror; existing BaseClient/BaseSrv/session binding; selected CPU40/x86 product. |
-| Files And ABI Surface | Formal CPU40/x86 graph inputs: original COMMAND objects, Base VDM/session binding library and the final product only; guest NTDOS remains load-only. |
+| Files And ABI Surface | Existing final CPU40/x86 executable, staged byte-identical `LOADFIX.COM`, existing fixed stage and observer only; no production source/ABI change. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Formal Ninja rebuild/link, selected input query and source-shaped contract checks. No fixed runtime observation. |
-| Expected Markers | `original-mvdm-command.lib`, `basesrv-bindings.lib` and the final CPU40/x86 product are current and selected final inputs. |
-| Asset Needs | Existing formal x86 build root, source mirrors and T368 S1/S2 evidence only. |
-| Reporting Requirements | Record executed formal command, product identity and exact input proof; separate link closure from runtime proof. |
-| Stop Conditions | Need to alter command record semantics, construct a command parser/child/PSP, patch an isolated BOP, alter guest media or run the product requires new S admission. |
-| Exit Criteria | Formal final product links with the original COMMAND and Base VDM/session inputs, and focused static contract checks pass. |
+| Verification | One non-debug, fixed-container observation with the existing watchdog and sidecars; classify only the first source-defined result. |
+| Expected Markers | Guest `$Exec` handoff, an exact earlier original COMMAND terminal, or a reproducible earlier source-owned wait/failure. |
+| Asset Needs | Existing formal x86 product, fixed `O:\ntvdm64` stage, unchanged media manifest and existing observer only. |
+| Reporting Requirements | Record one command, product/media identity and first source-owned result; do not create trace-selected repair work. |
+| Stop Conditions | Retry, changed workload/container/timeout, debugger, media mutation, source repair or expanded runtime scope requires new S admission. |
+| Exit Criteria | Exactly one valid fixed observation is retained and classified against the S1 source topology. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `54:01`, `cmdGetNextCmd`, `CmdDispatch`, CMDINFO, command-tail/environment, `IsFirstCall`, `IsRepeatCall`, Base VDM record, no-next wait, transient COMMAND and guest `$Exec` handoff. |
 
@@ -28,7 +28,9 @@
 
 **S2 evidence:** [COMMAND record-binding closure](etc/evidence/m0-t368-s2-command-record-binding-closure-001.md).
 
-**Active: M0 T368 S3.**
+**S3 evidence:** [formal COMMAND boundary closure](etc/evidence/m0-t368-s3-formal-command-boundary-closure-001.md).
+
+**Active: M0 T368 S4.**
 
 ### M0 T367 S1 — Closed original DOS EXEC/parent-return owner ledger
 
