@@ -7,6 +7,7 @@
  */
 #include <nt.h>
 #include <ntrtl.h>
+#include <crypt.h>
 
 #include <limits.h>
 #include <stdlib.h>
@@ -53,6 +54,47 @@ static NTSTATUS opennt_support_last_error_status(void)
 {
     DWORD error = GetLastError();
     return error == ERROR_NOT_ENOUGH_MEMORY ? STATUS_NO_MEMORY : STATUS_INVALID_PARAMETER;
+}
+
+/* DIVERGENCE(ADAPTER-WIN32-045): OpenNT Redirector reaches three historical
+ * CryptoAPI entrypoint spellings through crypt.h.  Modern x86 Advapi32 still
+ * exports them (forwarded to CRYPTSP), but its SDK import library deliberately
+ * omits those internal names.  Preserve the original NTSTATUS contracts and
+ * resolve only the existing public DLL exports; a missing export retains the
+ * original unavailable direction rather than synthesizing password material. */
+static FARPROC opennt_support_crypt_entry(PCSTR name)
+{
+    HMODULE module = GetModuleHandleW(L"advapi32.dll");
+    if (module == NULL) module = LoadLibraryW(L"advapi32.dll");
+    return module == NULL ? NULL : GetProcAddress(module, name);
+}
+
+NTSTATUS SystemFunction006(PLM_PASSWORD password,
+    PLM_OWF_PASSWORD owf_password)
+{
+    typedef NTSTATUS (*entry_type)(PLM_PASSWORD, PLM_OWF_PASSWORD);
+    entry_type entry = (entry_type)opennt_support_crypt_entry("SystemFunction006");
+    return entry == NULL ? STATUS_NOT_IMPLEMENTED : entry(password, owf_password);
+}
+
+NTSTATUS SystemFunction012(PLM_OWF_PASSWORD data_password,
+    PLM_OWF_PASSWORD key_password, PENCRYPTED_LM_OWF_PASSWORD encrypted_password)
+{
+    typedef NTSTATUS (*entry_type)(PLM_OWF_PASSWORD, PLM_OWF_PASSWORD,
+        PENCRYPTED_LM_OWF_PASSWORD);
+    entry_type entry = (entry_type)opennt_support_crypt_entry("SystemFunction012");
+    return entry == NULL ? STATUS_NOT_IMPLEMENTED : entry(data_password,
+        key_password, encrypted_password);
+}
+
+NTSTATUS SystemFunction016(PLM_OWF_PASSWORD owf_password,
+    PLM_SESSION_KEY session_key, PENCRYPTED_LM_OWF_PASSWORD encrypted_password)
+{
+    typedef NTSTATUS (*entry_type)(PLM_OWF_PASSWORD, PLM_SESSION_KEY,
+        PENCRYPTED_LM_OWF_PASSWORD);
+    entry_type entry = (entry_type)opennt_support_crypt_entry("SystemFunction016");
+    return entry == NULL ? STATUS_NOT_IMPLEMENTED : entry(owf_password,
+        session_key, encrypted_password);
 }
 
 /* DIVERGENCE(ADAPTER-WIN32-026): NT4 supplied the Rtl environment block
