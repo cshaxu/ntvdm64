@@ -153,7 +153,30 @@ execution.
 
 **No active M/T/S packet.** T364 is closed; see its
 [closure record](history/m0-t364-command-delivery-and-built-in-dispatch-closure-20260902.md).
-The next candidate requires fresh owner admission.
+
+### M0 T365 S1 — Active original DOS EXEC/parent-return owner ledger
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T365 S1; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from T364’s source-owned successor and the owner’s standing direction to execute the ordered queue. |
+| Objective | Establish the complete original low-dependency DOS `.COM`/MZ `$Exec`, JFN/SFT, PSP/arena/environment, termination/parent-return and COMMAND-continuation ownership chain; select one finite S2 cohort or exact source terminal. |
+| Non-goals | No executable/BOP leaf repair, app-defined loader, guest/media mutation, host native child, cmdExec32, interactive command producer, BaseSrv/CSRSS recreation, CPU/device change, CPU30, Bochs, x64 runtime, WOW, Redirector or runtime observation. |
+| Reference Baseline | T364 closure; selected original NTDOS/DOS/DEM/COMMAND mirrors; existing CPU40/x86 graph, DEM provider records and shared session mapping manager. |
+| Files And ABI Surface | Original DOS `$Exec`/termination/PSP/arena sources, DEM JFN/SFT/file route, original COMMAND child-return call sites, shared mapping lease and same-shaped SoftPC/Win32 bindings. No source or ABI change in S1. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Original definition/caller/data-flow review, mirror-versus-source/provenance review, formal graph membership inspection, complete owner/failure ledger and governance checks. No build or runtime observation. |
+| Expected Markers | Every immediate loader/return edge has an original owner and disposition; the first immutable low-dependency workload and one complete S2 boundary are chosen without trace-driven leaf work. |
+| Asset Needs | Existing original mirrors, source indexes, selected CPU40/x86 graph and immutable guest media only; no host-system mutation. |
+| Reporting Requirements | Separate source facts, current binding facts and prior runtime facts; identify any self-authored loader/return work that original source can supersede; record mapping manager scope where reached. |
+| Stop Conditions | Need to edit a DOS BOP result, parse/load executable in app, mutate guest media, use a family-private mapper, change CPU/device semantics, infer a repair from runtime, or broaden to native/WOW child requires new admission. |
+| Exit Criteria | The entire immediate original EXEC/parent-return chain is owned and one S2 cohort is finite, or an exact earlier source terminal is recorded. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `$Exec`, `exec`, `load`, `JFN`, `SFT`, `MCB`, `PSP`, environment/FCB/command-tail records, COM/MZ relocation, `terminate`, parent restoration, `cmdReturnExitCode`, DEM open/read/seek/close and all reached `GetVDMAddr` seams. |
+
+**Plan:** [M0 T365 DOS EXEC and parent return](etc/operations/m0-t365-dos-exec-and-parent-return-001.md).
+
+**Active: M0 T365 S1.**
 
 ### M0 T354 S1 — Closed permanent COMMAND bootstrap owner admission
 
