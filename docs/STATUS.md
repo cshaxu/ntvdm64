@@ -1177,6 +1177,15 @@ claim.
 
 **Plan:** [M0 T384 CPU40 illegal-operation startup recovery](etc/operations/m0-t384-cpu40-illegal-operation-startup-recovery-001.md).
 
+**S1 finding / stop condition:** [COMMAND environment/resident-overwrite
+ledger](etc/evidence/m0-t384-s1-command-environment-resident-overwrite-ledger-001.md).
+The static audit found that CPU40 is the correct downstream reporter for a
+pre-CPU40 COMMAND resident-memory overwrite.  This activates the packet's
+changed-owner stop condition: the required repair belongs to original DOS
+`INT 21h` arena/allocation and its SoftPC-backed memory precondition, which
+is outside T384's CPU40-only boundary.  No S2 change, build or product run is
+admitted until the owner approves the successor boundary.
+
 ### M0 T380 — Closed COMMAND native-child runtime activation
 
 | Field | Record |
