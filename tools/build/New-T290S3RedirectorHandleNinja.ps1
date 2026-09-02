@@ -39,8 +39,9 @@ build obj/guest_memory_lease.obj: cc `$root/src/session/guest_memory_lease.c
 build obj/session.obj: cc `$root/src/session/session.c
 build obj/mvdm_host_identity.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_host_identity.c
 build obj/mvdm_redirector_handle.obj: cc `$root/src/adapter-mvdm-host-out/redir/mvdm_redirector_handle.c
+build obj/mvdm_redirector_mailslot.obj: cc `$root/src/adapter-mvdm-host-out/redir/mvdm_redirector_mailslot.c
 build obj/fixture.obj: cc `$root/tests/adapter-mvdm-host-out/redir/t290_s3_redirector_handle_fixture.c
-build bin/t290-s3-redirector-handle-fixture.exe: link obj/mapping_manager.obj obj/guest_memory_lease.obj obj/session.obj obj/mvdm_host_identity.obj obj/mvdm_redirector_handle.obj obj/fixture.obj
+build bin/t290-s3-redirector-handle-fixture.exe: link obj/mapping_manager.obj obj/guest_memory_lease.obj obj/session.obj obj/mvdm_host_identity.obj obj/mvdm_redirector_handle.obj obj/mvdm_redirector_mailslot.obj obj/fixture.obj
 default bin/t290-s3-redirector-handle-fixture.exe
 "@
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))

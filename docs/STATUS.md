@@ -38,6 +38,8 @@ complete original DLL necessarily contains the later S4 and S5 bodies. It is
 therefore moved to the S6 whole-package reconciliation, without narrowing the
 original provider selection.
 
+**S4 P1:** [local completion source build](etc/evidence/m0-t372-s4-p1-local-completion-source-build-001.md).
+
 ### M0 T371 — Closed XMS, DPMI and DOS-extender execution
 
 **Plan:** [M0 T371 XMS, DPMI and DOS-extender execution](etc/operations/m0-t371-xms-dpmi-dos-extender-execution-001.md).

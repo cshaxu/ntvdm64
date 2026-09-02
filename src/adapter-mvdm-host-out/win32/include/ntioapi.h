@@ -78,14 +78,10 @@ typedef enum _ADAPTER_FS_INFORMATION_CLASS {
 #define DOS_DOT (L'"')
 #endif
 
-/* DIVERGENCE(ADAPTER-WIN32-016): current public SDK headers retain the
- * FSCTL_QUERY_FAT_BPB control code but no longer publish its historical
- * 0x24-byte response carrier.  Preserve OpenNT's exact source-facing name
- * and layout here so the original fixed-disk caller stays unchanged.  This
- * is host-local I/O completion storage, never a guest pointer or identity. */
-typedef struct _FSCTL_QUERY_FAT_BPB_BUFFER {
-    UCHAR First0x24BytesOfBootSector[0x24];
-} FSCTL_QUERY_FAT_BPB_BUFFER, *PFSCTL_QUERY_FAT_BPB_BUFFER;
+/* Current public winioctl.h already provides OpenNT's exact
+ * FSCTL_QUERY_FAT_BPB_BUFFER name and 0x24-byte layout.  Do not redeclare it
+ * here: this source-facing adapter must bind the SDK carrier rather than
+ * shadow it with an identical private type. */
 
 typedef struct _FILE_ALIGNMENT_INFORMATION {
     ULONG AlignmentRequirement;
