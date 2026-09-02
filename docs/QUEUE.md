@@ -56,9 +56,9 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Order | Candidate implementation package |
 | --- | --- |
-| 0 | DOS `.COM`/MZ `.EXE` execution and parent return — prove original `$Exec`, file/JFN/SFT, PSP/arena/environment, child exit and COMMAND continuation. |
-| 1 | COMMAND native-child (`cmdExec32`) lifecycle — prove reached original `54:08/0A/0B` public-CreateProcess/re-entry/return behavior. |
-| 2 | SoftPC conventional-device and DOS workload matrix — prove CPU40 device and I/O contracts reached by bounded DOS workloads. |
+| 0 | SoftPC conventional-device and DOS workload matrix — re-prioritized by the latest exact `c_IOVirtualised -> inb -> printer_io` transfer; prove CPU40 device and I/O contracts reached by the unchanged bounded DOS workload. |
+| 1 | DOS `.COM`/MZ `.EXE` execution and parent return — prove original `$Exec`, file/JFN/SFT, PSP/arena/environment, child exit and COMMAND continuation. |
+| 2 | COMMAND native-child (`cmdExec32`) lifecycle — prove reached original `54:08/0A/0B` public-CreateProcess/re-entry/return behavior. |
 | 3 | XMS, DPMI and DOS-extender execution — prove original XMS/A20/UMB/INT15 and DPMI/DPMI32 runtime paths. |
 | 4 | Redirector and host-resource execution — prove original local resources and bounded public network bindings. |
 | 5 | WOW16 bootstrap, callback and Win16 NE lifecycle — prove selected WOWEXEC/Win16 startup and return paths. |

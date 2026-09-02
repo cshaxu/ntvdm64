@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3811 |
+| Documentation records | 3813 |
 | --- | --- |
-| Generated UTC | 2026-09-02T07:00:59Z |
+| Generated UTC | 2026-09-02T07:11:40Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | 095d60a0e3283b09a7caff4c1c670a8a5c38e05a8c64b2403bb6d1265acb84d7 |
+| QUEUE.md | principal control document | b2ed64fbf00462e343eec501f41b36fe6ecfef65c9cd33455268b37f2e8221ce |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 4ea0583bd77d6c3f1c5b362b0c4e423255058f014b6be08a93e9fa7056f655e5 |
+| STATUS.md | principal control document | 2aff3a7ccae11959631ca42136a3c3f84f080bd6b2dff949c295a22978e198e9 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1205,6 +1205,7 @@ content-divergent entries.
 | etc/evidence/m0-t360-s7-owner-root-original-layout-observation-001.md | indexed supporting material | 5f988024627f78a26f5daa568e3d51448ef6d2e676c4e7327987a8c35cc4e300 |
 | etc/evidence/m0-t361-s1-original-font-client-contract-001.md | indexed supporting material | 2f2511b1786b8dbdd39e488f384ba8a987a9e75792ea0ae8bfab1c322b057547 |
 | etc/evidence/m0-t362-s2-first-call-guest-memory-cohort-closure-001.md | indexed supporting material | 818a95b4543224c969beb512d2da19ef75d320f5df2cbebcc5ec677d8edff3c7 |
+| etc/evidence/m0-t362-s3-frozen-command-observation-001.md | indexed supporting material | 9b930355aade23adda8d958c77587e5bb8f16c4cf87f02e878009ef855549f9f |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -2079,7 +2080,7 @@ content-divergent entries.
 | etc/operations/proposal-mvdm-runtime-support-tool-re-root-001.md | indexed supporting material | 9955eefb0e8480e99f22e0cac375325d72663293262656537f4ca8d7cbb027c4 |
 | etc/operations/proposal-netapi-rap-redirector-network-boundary-recovery-001.md | indexed supporting material | df3cef8be8b0923781e82443a87609bb4cf1b2d21012812350b61994a95da5f5 |
 | etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md | indexed supporting material | 9b589b5f95bbd935804a007e9b1a1195561511f900f3c0ae426bc80c44798b72 |
-| etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md | indexed supporting material | f92150fe164c39c5dc9394e802d93cfceb11b246a6012c592d106bd2e6148634 |
+| etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md | indexed supporting material | 820322db912c8a591bd3eb549dddbcfb54e01c80474350365d218f79125aa69a |
 | etc/operations/proposal-opennt-bop-mirror-overlay-convergence-001.md | indexed supporting material | 2f2e91c7a491398ae23278766e5596002ae710113ff2bd5a1fb0577b2d9e12b2 |
 | etc/operations/proposal-opennt-bop-original-dispatcher-provider-recovery-001.md | indexed supporting material | b8808fef6cf0f7519c2103fdc8509c7f6f704846620537f59f0dd076af718e93 |
 | etc/operations/proposal-opennt-command-cmdexec32-full-capability-closure-001.md | indexed supporting material | 2dbce97ef0f4ad01836827a786b0a5bbb5512eabefe3937c1d49c06aef525c02 |
@@ -3718,6 +3719,7 @@ content-divergent entries.
 | history/m0-t353-cpu40-ntdos-post-cmdgetconfigsys-continuity-closure-20260901.md | closed task history | 994f02f1853770bc97b329b3b18a52d8ea57491a57a10ce4bf576c64fbc17e05 |
 | history/m0-t354-cpu40-ntdos-permanent-command-package-path-closure-20260901.md | closed task history | e9f576b3194691bfe72e104cc82acfd87ebc6b3956d274de18eec2813152c441 |
 | history/m0-t361-softpc-window-font-client-contract-closure-20260902.md | closed task history | b48f043119ef02c739a537781de360807fd6c803810b69ffce727a500908e08c |
+| history/m0-t362-original-command-built-in-batch-lifecycle-closure-20260902.md | closed task history | 02d0afd1ab4ab8150594fcecd85ff45de6727b5fda6aaa5ac7c47f4fd3adbd83 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

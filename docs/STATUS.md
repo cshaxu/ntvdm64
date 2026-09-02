@@ -2,33 +2,10 @@
 
 ## Current Work
 
-### M0 T362 S3 — Active frozen built-in observation
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T362 S3; ordinary mode (single-person dual-role implementation). |
-| Admission And Approval | Admitted by T362 S2's source/build closure under the standing direction to execute the ordered queue. |
-| Objective | Run exactly one frozen console-owning CPU40/x86 `/C EXIT` workload in the approved short-root container and attribute whether original `54:01` reaches `54:00`/controlled session stop or an earlier original owner. |
-| Non-goals | No BOP leaf patch, guest/media mutation, synthetic command, BaseSrv/CSRSS recreation, DOS EXEC, cmdExec32, device/CPU semantic change, CPU30, Bochs, x64 runtime claim, WOW, Redirector, graphics change or a second run. |
-| Reference Baseline | T362 S1 owner ledger; T362 S2 mapped cohort closure; fixed T358 S13 `54:05`-before-`54:01` observation; selected original COMMAND/NTDOS/SoftPC/BASEVDM graph. |
-| Files And ABI Surface | Existing selected executable and immutable package manifest, existing default-off COMMAND/session observation records, no production ABI or source change. |
-| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
-| Verification | One fresh hash-verified staged package, fixed console-owning container and one bounded 5–10 second run; copied source-order markers only.  No alternate observer or configuration variation. |
-| Expected Markers | Reached original `54:01` and either `54:00` plus controlled session stop, or one earlier source-owned marker sufficient to select a complete next cohort. |
-| Asset Needs | Existing immutable package media and observer only; no new source import, guest artifact or host-system mutation. |
-| Reporting Requirements | Record product/media hashes, fixed root, exact command line, console owner, timeout, ordered markers and terminal reason; distinguish source facts from run facts. |
-| Stop Conditions | A second run, changed workload/container/observer, guest/media mutation, BOP result fabrication, CPU/device change, or need to recover another owner cohort pauses for a new packet. |
-| Exit Criteria | Exactly one valid run yields the required source-owned terminal or one exact earlier transfer; its evidence selects S4 or a new dependency-first T. |
-| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
-| Similar-Issue Sweep | COMMAND `54:05/0F/01/00`, `SCS_PAUSE`, `CMDINFO`, Base VDM first record, `/C EXIT`, observer/console ownership and controlled-stop marker. |
-
-**Plan:** [M0 T362 original COMMAND built-in/batch lifecycle](etc/operations/m0-t362-command-built-in-batch-lifecycle-001.md).
-
-**S1 closure:** [original COMMAND initialization owner ledger](etc/operations/m0-t362-s1-command-initialization-owner-ledger-001.md) proves the first-call guest-memory cohort is the immediate whole source owner; it makes no runtime-causality claim.
-
-**S2 closure:** [first-call guest-memory cohort closure](etc/evidence/m0-t362-s2-first-call-guest-memory-cohort-closure-001.md) proves the selected source cohort is lease-bound and formal-build closed; it makes no runtime-continuity claim.
-
-**Active: M0 T362 S3.**
+**No active M/T/S packet.**  The latest closure is
+[M0 T362 original COMMAND built-in/batch lifecycle](history/m0-t362-original-command-built-in-batch-lifecycle-closure-20260902.md):
+the one permitted frozen observation selected the earlier original SoftPC
+conventional-device owner.  The next candidate requires explicit admission.
 
 ### M0 T354 S1 — Closed permanent COMMAND bootstrap owner admission
 

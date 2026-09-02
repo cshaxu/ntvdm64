@@ -19,28 +19,27 @@ prevents a known missing component from being deferred behind unrelated work.
 
 ## Ordered capability packages
 
-1. **COMMAND built-in and batch lifecycle:** resume from the validated
-   `54:05`-before-`54:01` boundary, then prove selected `/C` built-in/batch
-   behavior and COMMAND return; no external DOS EXEC claim.
+1. **SoftPC conventional-device and DOS workload matrix:** T362 transfers the
+   frozen `/C EXIT` workload at the exact original
+   `c_IOVirtualised -> inb -> printer_io` owner.  Recover/test the complete
+   CPU40 device path before resuming COMMAND runtime claims.
 2. **DOS `.COM`/MZ `.EXE` execution and parent return:** original `$Exec`,
    file/JFN/SFT, PSP/arena/environment, relocation, child exit and COMMAND
    continuation using immutable low-dependency workloads.
 3. **COMMAND native-child (`cmdExec32`) lifecycle:** reached `54:08/0A/0B`,
    public `CreateProcess` child lifecycle, original re-entry/event/return and
    explicit unavailable CSRSS-era branches.
-4. **SoftPC conventional-device and DOS workload matrix:** CPU40, memory,
-   timer/PIC/PIT, keyboard, filesystem and video contracts reached by DOS.
-5. **XMS, DPMI and DOS-extender execution:** original XMS/A20/UMB/INT15 and
+4. **XMS, DPMI and DOS-extender execution:** original XMS/A20/UMB/INT15 and
    DPMI/DPMI32 runtime paths with mapping-manager identity boundaries.
-6. **Redirector and host-resource execution:** local VDMREDIR first, then
+5. **Redirector and host-resource execution:** local VDMREDIR first, then
    bounded public NetAPI; legacy NetBIOS/DLC/private-RPC remains explicit.
-7. **WOW16 bootstrap, callback and Win16 NE lifecycle:** original WOWEXEC
+6. **WOW16 bootstrap, callback and Win16 NE lifecycle:** original WOWEXEC
    command route, task/callback/monitor, single-session UI and NE start/exit.
-8. **WOW16 service, UI and host integration matrix:** selected WOW32 provider
+7. **WOW16 service, UI and host integration matrix:** selected WOW32 provider
    packages through public APIs, preserving private-shell failures.
-9. **Cross-family execution and control-broker closure:** COMMAND/DOS/native
+8. **Cross-family execution and control-broker closure:** COMMAND/DOS/native
     child/WOW lifecycle, event and cleanup; public IPC only when reached.
-10. **SoftPC graphics presentation and workload integration:** selected DOS
+9. **SoftPC graphics presentation and workload integration:** selected DOS
     graphics workload through original video and app presentation.
-11. **Runtime matrix, x64 compatibility and product release:** selected DOS and
+10. **Runtime matrix, x64 compatibility and product release:** selected DOS and
     Win16 matrix, x64 profile work, unpack-and-run manifests/release.
