@@ -649,11 +649,12 @@ execution.  It does not claim that `COMMAND.COM`, NTDOS `EXEC`, or `EXIT` ran.
 
 T356 is source and formal-build closed for its selected original COMMAND/NTDOS
 cohort, but it did not establish its requested guest execution/controlled
-return.  Its single fixed observation instead proved a prior app package-stage
+return. Its single fixed observation instead proved a prior app package-stage
 terminal: the fresh formal executable was not placed beside its immutable
-`mvdm` media.  The bounded successor is
-[CPU40 package-stage observation closure](etc/operations/proposal-cpu40-package-stage-observation-001.md).
-No trace-selected source repair is authorized by this closure.
+`mvdm` media. The functional objective is retained, in dependency order, by
+the [runtime recovery program](etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md),
+beginning with staged CPU40 boot. No trace-selected source repair is
+authorized by this closure.
 
 | Field | Record |
 | --- | --- |

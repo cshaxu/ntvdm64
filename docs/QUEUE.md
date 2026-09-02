@@ -24,22 +24,20 @@ unrelated package remains unclassified. Cross-package interface and perimeter
 ledgers remain shared evidence and are updated only where the active package
 reaches them.
 
-The former guest-artifact, package-path, CPU40/NTDOS bootstrap, XMS,
-DPMI/DPMI32, Redirector and NetAPI/RAP owner-package candidates are closed and
-therefore do not remain in this candidate-only queue. Their closure records
-remain in `STATUS.md` and `docs/history/`. The next vertical objective is
-deliberately explicit: static package closure and a reached BOP are not
-evidence that `COMMAND.COM`, a DOS child program, or its parent return has
-executed.
+Earlier guest-artifact, package-path, CPU40/NTDOS bootstrap, XMS,
+DPMI/DPMI32, Redirector and NetAPI/RAP packages have source/build or bounded
+local closures. They are not runtime-complete. The queue below turns those
+closures into proved original NTVDM behavior; static package closure and a
+reached BOP are not evidence that COMMAND, a DOS child, a native child or a
+Win16 program executed.
 
 The detailed proposal, predecessor, delivery and exclusions for every queue
-item are in the [package recovery proposal set](etc/operations/package-recovery-program-20260827.md).
+item are in the [runtime recovery program](etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md).
 
-**Minimal DOS guest execution and controlled return** is closed by an exact
-app package-stage transfer.  Its one observation proved that the formal
-executable must first be staged beside the immutable `mvdm` media; it made no
-guest-execution claim.  The first candidate below is therefore the required
-predecessor of graphics-workload integration.
+The prior minimal-DOS packet recorded an exact app package-stage transfer but
+did not fulfill its functional DOS-execution objective. That objective is
+deliberately retained, in dependency order, by the first three candidates
+below.
 
 MVDM host mirror-topology recovery is already closed. `CPU_30_STYLE` is an
 NT4 kernel-VDM V86 monitor rather than a software CCPU profile, and is
@@ -51,9 +49,18 @@ production route nor an acceptance row.
 
 | Order | Candidate implementation package |
 | --- | --- |
-| 1 | CPU40 package-stage observation closure — stage a fresh CPU40/x86 formal executable beside its hash-verified immutable `mvdm` media with the existing product-stage tool, then make one fixed non-debug observation and source-classify its first post-admission result. |
-| 2 | SoftPC graphics-workload integration continuation — only after its named permanent-COMMAND/bootstrap and package-stage predecessors prove a reachable selected DOS workload, run the fixed selected CPU40/x86 container through one graphics-mode workload and close the remaining presentation-runtime criterion without changing controller or guest semantics. |
-| 3 | Product release closure |
+| 1 | CPU40 staged boot and COMMAND-ready boundary — fresh EXE beside immutable media; prove app admission through SoftPC/NTIO/NTDOS bootstrap to a COMMAND-ready boundary. |
+| 2 | COMMAND built-in and batch lifecycle — prove selected `/C` built-in/batch behavior and COMMAND return, without claiming external DOS EXEC. |
+| 3 | DOS `.COM`/MZ `.EXE` execution and parent return — prove original `$Exec`, file/JFN/SFT, PSP/arena/environment, child exit and COMMAND continuation. |
+| 4 | COMMAND native-child (`cmdExec32`) lifecycle — prove reached original `54:08/0A/0B` public-CreateProcess/re-entry/return behavior. |
+| 5 | SoftPC conventional-device and DOS workload matrix — prove CPU40 device and I/O contracts reached by bounded DOS workloads. |
+| 6 | XMS, DPMI and DOS-extender execution — prove original XMS/A20/UMB/INT15 and DPMI/DPMI32 runtime paths. |
+| 7 | Redirector and host-resource execution — prove original local resources and bounded public network bindings. |
+| 8 | WOW16 bootstrap, callback and Win16 NE lifecycle — prove selected WOWEXEC/Win16 startup and return paths. |
+| 9 | WOW16 service, UI and host integration matrix — recover selected WOW32 provider subpackages and public bindings. |
+| 10 | Cross-family execution and control-broker closure — reconcile COMMAND/DOS/native-child/WOW lifecycle, events and cleanup. |
+| 11 | SoftPC graphics presentation and workload integration — run an already-proven DOS graphics workload through original video and app presentation. |
+| 12 | Runtime matrix, x64 compatibility and product release — prove DOS/Win16 matrices, finish x64 profile work and package the product. |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

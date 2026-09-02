@@ -38,20 +38,21 @@ whole reached interface set is owned and topologically ordered.
 shared support and every cross-package adapter contract have a source/ABI/
 failure disposition in both host graphs.
 
-## Phase 2 — Minimal runnable vertical slice
+## Phase 2 — Staged boot and DOS execution vertical slice
 
 Recover the Base VDM client/server vertical slice through its bounded private
-host adapter, then close the original SoftPC/CPU40 pre-BOP startup cohort
-before attempting DOS execution. That cohort must reach the original NTIO
-`50h:11h` crossing; only then load and run one declared DOS program and prove
-its controlled return. Original code stays intact except for recorded
-same-shaped binding changes. CSR/CSRSS, kernel VDM and a second CPU executor
-remain outside the boundary.
+host adapter, stage the formal product beside its immutable executable-relative
+media, and close the original SoftPC/CPU40 pre-BOP startup cohort before DOS
+execution. Then separately prove COMMAND built-ins, DOS `.COM` and MZ `.EXE`
+`$Exec`, and parent/COMMAND controlled return. Original code stays intact
+except for recorded same-shaped binding changes. CSR/CSRSS, kernel VDM and a
+second CPU executor remain outside the boundary.
 
-**Gate:** the fixed x86 runtime container reaches the original `50h:11h`
-crossing and completes one declared DOS program's controlled return;
-command/control and source-shaped machine entry/stop contracts have paired
-x86/x64 source proof with explicit unavailable product-shell branches.
+**Gate:** a staged fixed x86 runtime container reaches the original `50h:11h`
+crossing, COMMAND completes a declared command, and one external DOS program
+returns through original parent/COMMAND ownership. Command/control and
+source-shaped machine entry/stop contracts have explicit unavailable
+product-shell branches.
 
 ## Phase 3 — Original MVDM service packages
 
@@ -64,11 +65,12 @@ CSRSS internals.
 **Gate:** each complete owner package passes its declared local matrix before
 one integrated guest trace is used to observe behavior change.
 
-## Phase 4 — Brokered COMMAND and cross-family lifecycle
+## Phase 4 — COMMAND native-child, WOW16 and cross-family lifecycle
 
-Complete original COMMAND child/return, DOS EXEC parent restoration, brokered
-`GetNextVDMCommand`, console/event and WOW lifecycle after their package owners
-are available. Remove only project-owned paths that the Phase 0 reversion
+Complete original COMMAND native-child (`cmdExec32`) lifecycle, DOS EXEC parent
+restoration, brokered `GetNextVDMCommand`, WOWEXEC/Win16 callback/task
+lifecycle, console/event ownership and only then required cross-family
+coordination. Remove only project-owned paths that the Phase 0 reversion
 ledger marks as superseded. Preserve one active imported MVDM session per
 process unless a separate reentrancy audit admits in-process multiple contexts.
 
