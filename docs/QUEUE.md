@@ -47,6 +47,13 @@ architecture-neutral source constraints, but x64 compile/link is not a gate for
 this current SoftPC recovery sequence. Bochs is retired and is neither a
 production route nor an acceptance row.
 
+**Dependency-first activation rule:** execute the earliest candidate's frozen
+runtime workload. If evidence proves that a named original owner component is
+not in the formal graph and is the immediate blocker, insert that component's
+complete source/binding/formal-link/runtime closure immediately before all
+later candidates. Resume the blocked candidate afterward. Do not continue a
+later package merely because an earlier linked component has no runtime proof.
+
 | Order | Candidate implementation package |
 | --- | --- |
 | 1 | CPU40 staged boot and COMMAND-ready boundary — fresh EXE beside immutable media; prove app admission through SoftPC/NTIO/NTDOS bootstrap to a COMMAND-ready boundary. |

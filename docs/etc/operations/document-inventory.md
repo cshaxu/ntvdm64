@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3772 |
+| Documentation records | 3773 |
 | --- | --- |
-| Generated UTC | 2026-09-02T01:41:54Z |
+| Generated UTC | 2026-09-02T03:09:14Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | a13fd250aa0bc915f14130a89d750155d50845c9f497a09d050800f89ad0fe1e |
+| QUEUE.md | principal control document | 6f414691840d156b2b061285050c6fd1856a6cdee156ac69ce9d9c21518631d4 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -1982,6 +1982,7 @@ content-divergent entries.
 | etc/operations/mvdm-zero-degree-rebase-expansion-unparsed-body-ledger.tsv | indexed supporting material | 26da36b9e6c48a7751534bb562a5221887403c76b378def0dce6aa0215d06931 |
 | etc/operations/mvdm-zero-degree-root-exclusion-ledger.tsv | indexed supporting material | bc6bbb1dfbff4533160e0ac9b6e125288aab3b08feba13d841841c780662ba19 |
 | etc/operations/mvdm-zero-degree-variant-family-ledger.tsv | indexed supporting material | 2188f97e173b53a1a5e96e075fc0641fb8569541a2bb9a30a1e66d074ce8ccff |
+| etc/operations/ntvdm-component-activation-registry-001.md | indexed supporting material | d504a0100f7a9babe6c71fc9fa16134d9fe0be25a3d9d720c1dd5c43db6aa6bd |
 | etc/operations/ntvdm-runtime-capability-baseline-001.md | indexed supporting material | 90f8d8459edbd2ddf184fc867ab7ed5fff4a2c0af30bbaf357db580b6febd2f7 |
 | etc/operations/one-ledger1-caller-include-frontier.tsv | indexed supporting material | 7962ee2c2330e5deebe320864b5d2d848b7792a5c365b1b0b5994efedd0b4598 |
 | etc/operations/one-ledger1-declaration-binding-ledger.tsv | indexed supporting material | 59066eac8e75752a98df79908e94e4af8fd251de928d80e139e7c6d7c6c89df8 |
@@ -2041,7 +2042,7 @@ content-divergent entries.
 | etc/operations/proposal-mvdm-runtime-support-tool-re-root-001.md | indexed supporting material | 9955eefb0e8480e99f22e0cac375325d72663293262656537f4ca8d7cbb027c4 |
 | etc/operations/proposal-netapi-rap-redirector-network-boundary-recovery-001.md | indexed supporting material | df3cef8be8b0923781e82443a87609bb4cf1b2d21012812350b61994a95da5f5 |
 | etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md | indexed supporting material | 9b589b5f95bbd935804a007e9b1a1195561511f900f3c0ae426bc80c44798b72 |
-| etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md | indexed supporting material | 2164c60de3671b3013ccd7856730a9b2c81915bd192f5101e1e3b8cbacb7a54b |
+| etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md | indexed supporting material | 0442a2126ce9f542a98c241c49d9010feddfe574eb9eb1587e80cad9510e3667 |
 | etc/operations/proposal-opennt-bop-mirror-overlay-convergence-001.md | indexed supporting material | 2f2e91c7a491398ae23278766e5596002ae710113ff2bd5a1fb0577b2d9e12b2 |
 | etc/operations/proposal-opennt-bop-original-dispatcher-provider-recovery-001.md | indexed supporting material | b8808fef6cf0f7519c2103fdc8509c7f6f704846620537f59f0dd076af718e93 |
 | etc/operations/proposal-opennt-command-cmdexec32-full-capability-closure-001.md | indexed supporting material | 2dbce97ef0f4ad01836827a786b0a5bbb5512eabefe3937c1d49c06aef525c02 |

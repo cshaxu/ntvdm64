@@ -10,6 +10,13 @@ proof. CPU30 and Bochs are not runtime alternatives; guest media stays
 immutable. CSRSS/kernel-VDM recreation is excluded: only bounded public
 Win32/session equivalents retaining original caller results are admissible.
 
+The ordered list is an **activation frontier**, not a fixed promise to test
+every currently linked library before recovery. When the earliest workload is
+blocked by a named original owner component missing from the formal graph, the
+next T is immediately that component's complete adoption/binding/formal-link/
+same-workload-runtime closure. Only then does the predecessor resume. This
+prevents a known missing component from being deferred behind unrelated work.
+
 ## Ordered capability packages
 
 1. **CPU40 staged boot and COMMAND-ready boundary:** fresh EXE beside immutable
