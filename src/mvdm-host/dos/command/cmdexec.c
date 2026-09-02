@@ -25,6 +25,17 @@
  * field order, but lease its saved 16:16 guest position for this synchronous
  * operation instead of subtracting a native GetVDMAddr process pointer. */
 #include "adapter-mvdm-host-out/softpc/include/mvdm_command_guest_state.h"
+/* DIVERGENCE(MVDM-HOST-DIV-196): original cmdExec32 leaves guest command,
+ * environment and STD_HANDLES aliases in globals until its detached worker
+ * runs.  Snapshot those same bounded inputs in the session adapter before
+ * the worker starts; the original COMMAND worker remains the owner of every
+ * conversion, process, wait, exit-code and re-entry decision. */
+#include "adapter-mvdm-host-out/softpc/include/mvdm_command_native_child.h"
+/* DIVERGENCE(MVDM-HOST-DIV-197): original BaseSrv holds RETURN_ON_NO_COMMAND
+ * during the narrow CreateThread-to-INCREMENT_REENTER_COUNT interval.  The
+ * one-session Base VDM seam records only that source-shaped pending interval;
+ * it neither publishes a command nor changes COMMAND's VDMINFO states. */
+#include "adapter-mvdm-host-out/basesrv/include/base_vdm_local.h"
 /* DIVERGENCE(MVDM-HOST-DIV-109): cmdCreateProcess is the original void,
  * cdecl worker entry, not a WINAPI DWORD start routine.  Keep its source
  * body and original CreateThread call ordering while binding that call to
@@ -390,7 +401,7 @@ VOID cmdCreateProcess ( VOID )
     VDMINFO VDMInfoForCount;
     STARTUPINFO StartupInfo;
     PROCESS_INFORMATION ProcessInformation;
-    HANDLE hStd16In,hStd16Out,hStd16Err;
+    HANDLE hStd16In = (HANDLE)-1,hStd16Out = (HANDLE)-1,hStd16Err = (HANDLE)-1;
     CHAR CurDirVar [] = "=?:";
     CHAR Buffer [MAX_DIR];
     CHAR *CurDir = Buffer;
@@ -402,6 +413,7 @@ VOID cmdCreateProcess ( VOID )
     OEM_STRING	   OemString;
     LPVOID lpNewEnv=NULL;
     PSTD_HANDLES pStdHandles;
+    ULONG SnapshotStdHandles[3];
     ANSI_STRING Env_A;
 
     // we have one more 32 executable active
@@ -421,8 +433,9 @@ VOID cmdCreateProcess ( VOID )
     if (dwRet == 0 || dwRet == MAX_DIR)
 	CurDir = NULL;
 
-    pStdHandles = (PSTD_HANDLES) GetVDMAddr (getSS(), getBP());
-    if (!cmdResolveStdHandle(FETCHDWORD(pStdHandles->hStdIn), &hStd16In))
+    pStdHandles = (PSTD_HANDLES)SnapshotStdHandles;
+    if (!mvdm_command_native_child_std_handles(SnapshotStdHandles) ||
+        !cmdResolveStdHandle(FETCHDWORD(pStdHandles->hStdIn), &hStd16In))
         StdHandlesValid = FALSE;
     else if (hStd16In != (HANDLE)-1)
         SetStdHandle (STD_INPUT_HANDLE, hStd16In);
@@ -507,6 +520,8 @@ VOID cmdCreateProcess ( VOID )
     if (Env_A.Buffer)
 	RtlFreeAnsiString(&Env_A);
 
+    mvdm_command_native_child_finish();
+
     // Decrement the Re-enterancy count for the VDM
     VDMInfoForCount.VDMState = DECREMENT_REENTER_COUNT;
     GetNextVDMCommand (&VDMInfoForCount);
@@ -524,9 +539,17 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
 
     DWORD dwThreadId;
     HANDLE hThread;
+    const char *capturedCommand;
+    const char *capturedEnvironment;
 
-    pCommand32 = pCmd32;
-    pEnv32 = pEnv;
+    if (!mvdm_command_native_child_activate(pCmd32, pEnv,
+            &capturedCommand, &capturedEnvironment)) {
+        setCF(0);
+        setAL((UCHAR)ERROR_INVALID_ADDRESS);
+        return;
+    }
+    pCommand32 = (PCHAR)capturedCommand;
+    pEnv32 = (PCHAR)capturedEnvironment;
 
     CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
                          (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))+1);
@@ -534,6 +557,18 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
     nt_block_event_thread(0);
     fSoftpcRedirectionOnShellOut = fSoftpcRedirection;
     fBlock = TRUE;
+
+    if (!base_vdm_local_native_child_begin()) {
+        setCF(0);
+        setAL((UCHAR)ERROR_BUSY);
+        nt_resume_event_thread();
+        nt_std_handle_notification(fSoftpcRedirectionOnShellOut);
+        fBlock = FALSE;
+        CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
+                         (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))-1);
+        mvdm_command_native_child_abort();
+        return;
+    }
 
     if((hThread = CreateThread (NULL,
                      0,
@@ -546,6 +581,8 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
         nt_resume_event_thread();
         nt_std_handle_notification(fSoftpcRedirectionOnShellOut);
         fBlock = FALSE;
+        base_vdm_local_native_child_cancel();
+        mvdm_command_native_child_abort();
         CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
                          (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))-1);
         return;
@@ -606,7 +643,13 @@ VOID cmdExecComspec32 (VOID)
 	return;
     }
 
-    pEnv = (PCHAR) GetVDMAddr ((USHORT)getES(),0);
+    if (!mvdm_command_native_child_capture_host_command(Buffer,
+            (USHORT)getES(), 0u, (USHORT)getSS(), (USHORT)getBP())) {
+        setCF(0);
+        setAL((UCHAR)ERROR_INVALID_ADDRESS);
+        return;
+    }
+    pEnv = (PCHAR)mvdm_command_native_child_environment();
 
     chDefaultDrive = (CHAR)(getAL() + 'A');
 
@@ -631,22 +674,22 @@ VOID cmdExecComspec32 (VOID)
 VOID cmdExec (VOID)
 {
 
-    DWORD   i;
     DWORD   dwRet;
     PCHAR   pCommandTail;
     PCHAR   pEnv;
     CHAR Buffer[MAX_PATH];
 
-    pCommandTail = (PCHAR) GetVDMAddr ((USHORT)getDS(),(USHORT)getSI());
-    pEnv = (PCHAR) GetVDMAddr ((USHORT)getES(),0);
-    for (i=0 ; i<124 ; i++) {
-        if (pCommandTail[i] == 0x0d){
-            pCommandTail[i] = 0;
-            break;
-        }
+    if (!mvdm_command_native_child_capture_guest((USHORT)getDS(),
+            (USHORT)getSI(), (USHORT)getES(), 0u, (USHORT)getSS(),
+            (USHORT)getBP())) {
+        setCF(0);
+        setAL((UCHAR)ERROR_INVALID_ADDRESS);
+        return;
     }
-
-    if (i == 124){
+    pCommandTail = (PCHAR)mvdm_command_native_child_command();
+    pEnv = (PCHAR)mvdm_command_native_child_environment();
+    if (pCommandTail == NULL || pEnv == NULL) {
+        mvdm_command_native_child_abort();
         setCF(0);
         setAL((UCHAR)ERROR_BAD_FORMAT);
         return;
@@ -661,12 +704,14 @@ VOID cmdExec (VOID)
         dwRet = GetEnvironmentVariable ("COMSPEC",Buffer,MAX_PATH);
 
         if (dwRet == 0 || dwRet >= MAX_PATH){
+            mvdm_command_native_child_abort();
             setCF(0);
             setAL((UCHAR)ERROR_BAD_ENVIRONMENT);
             return;
         }
 
         if ((dwRet + 4 + strlen(pCommandTail)) > MAX_PATH) {
+            mvdm_command_native_child_abort();
             setCF(0);
             setAL((UCHAR)ERROR_BAD_ENVIRONMENT);
             return;
@@ -674,6 +719,12 @@ VOID cmdExec (VOID)
 
         strcat (Buffer, " /c ");
         strcat (Buffer, pCommandTail);
+        if (!mvdm_command_native_child_replace_command(Buffer)) {
+            mvdm_command_native_child_abort();
+            setCF(0);
+            setAL((UCHAR)ERROR_BAD_FORMAT);
+            return;
+        }
         cmdExec32 (Buffer,pEnv);
     }
 

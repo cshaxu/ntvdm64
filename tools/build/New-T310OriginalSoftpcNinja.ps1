@@ -221,6 +221,7 @@ $adapterRedirNames = @('mvdm_redirector_handle.c', 'mvdm_redirector_mailslot.c',
                        'mvdm_redirector_guest_copy.c', 'mvdm_redirector_async.c')
 $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c', 'mvdm_host_identity.c',
                         'mvdm_guest_location.c', 'mvdm_command_redirection.c', 'mvdm_command_guest_state.c',
+                        'mvdm_command_native_child.c',
                         'mvdm_vdd_sft_shadow.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
                         'mvdm_softpc_presentation_font.c',
                         'mvdm_softpc_descriptor_fields.c', 'mvdm_softpc_activity_unavailable.c',

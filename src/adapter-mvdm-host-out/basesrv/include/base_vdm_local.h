@@ -8,7 +8,7 @@
 
 typedef struct session session;
 
-#define BASE_VDM_LOCAL_VERSION UINT32_C(4)
+#define BASE_VDM_LOCAL_VERSION UINT32_C(5)
 
 /* These identify which original BaseSrv command queue owns a copied record.
  * They are not guest values and never enter VDMINFO: the original client
@@ -73,8 +73,10 @@ typedef struct base_vdm_local {
      * and `hWaitForVDM`.  They never enter VDMINFO, MVDM or guest state. */
     CRITICAL_SECTION lock;
     HANDLE wake_event;
+    HANDLE reentry_event;
     uint32_t lock_initialized;
     uint32_t pending_request;
+    uint32_t native_child_launch_pending;
     uint32_t dos_record_state;
     uint8_t command[MAXIMUM_VDM_COMMAND_LENGTH];
     /* BaseClient/BaseSrv carry the host application path independently of
@@ -100,6 +102,10 @@ int base_vdm_local_bind(base_vdm_local *record, session *owner);
 int base_vdm_local_unbind(base_vdm_local *record);
 BOOL base_vdm_local_dispatch(PVDMINFO information);
 int base_vdm_local_wait_for_command(PVDMINFO information);
+/* Source-shaped local counterpart of the narrow interval between original
+ * cmdExec32's CreateThread and cmdCreateProcess's INCREMENT_REENTER_COUNT. */
+int base_vdm_local_native_child_begin(void);
+void base_vdm_local_native_child_cancel(void);
 BOOL base_vdm_local_is_first(void);
 /* Read-only diagnostic snapshot for a bound local DOS record.  This does not
  * participate in BaseClient dispatch, change a wait state, or expose a

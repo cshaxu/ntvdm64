@@ -2,6 +2,27 @@
 
 ## Current Work
 
+### No active packet
+
+M0 T370 is closed.  The ordered queue awaits admission of its next candidate;
+no product source is active under this record.
+
+**No active M/T/S packet.**
+
+### M0 T370 — Closed original COMMAND native-child lifecycle
+
+**Plan:** [original COMMAND native-child lifecycle](etc/operations/m0-t370-original-command-native-child-lifecycle-001.md).
+
+**Closure:** [T370 history record](history/m0-t370-original-command-native-child-lifecycle-closure-20260902.md).
+
+**S1:** [original COMMAND native-child topology](etc/evidence/m0-t370-s1-original-command-native-child-topology-001.md).
+
+**S2:** [source-shaped native-child recovery](etc/evidence/m0-t370-s2-source-shaped-native-child-recovery-001.md).
+
+**S3:** [formal native-child link and focused proof](etc/evidence/m0-t370-s3-formal-native-child-link-001.md).
+
+**S4:** [fixed native-child observation](etc/evidence/m0-t370-s4-fixed-native-child-observation-001.md).
+
 ### M0 T369 S4 — Closed fixed original workload observation
 
 | Field | Record |
@@ -33,8 +54,6 @@
 **S4 evidence:** [current-layout original LOADFIX observation](etc/evidence/m0-t369-s4-current-layout-original-loadfix-observation-001.md).
 
 **T369 closure:** [original DOS EXEC and parent-return closure](history/m0-t369-original-dos-exec-parent-return-closure-20260902.md).
-
-**No active M/T/S packet.** The next candidate is COMMAND native-child lifecycle in [QUEUE.md](QUEUE.md).
 
 ### M0 T368 S4 — Closed identity-proven fixed original `.COM` observation
 

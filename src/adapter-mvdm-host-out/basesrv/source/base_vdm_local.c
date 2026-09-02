@@ -47,6 +47,7 @@ void base_vdm_local_initialize(base_vdm_local *record)
     InitializeCriticalSection(&record->lock);
     record->lock_initialized = 1u;
     record->wake_event = CreateEvent(NULL, TRUE, FALSE, NULL);
+    record->reentry_event = CreateEvent(NULL, TRUE, TRUE, NULL);
 }
 
 int base_vdm_local_valid(const base_vdm_local *record)
@@ -61,7 +62,8 @@ int base_vdm_local_valid(const base_vdm_local *record)
         record->environment_bytes <= MAXIMUM_VDM_ENVIORNMENT &&
         record->current_directory_bytes <= MAX_PATH + 1u &&
         record->lock_initialized == 1u && record->wake_event != NULL &&
-        record->pending_request <= 1u &&
+        record->reentry_event != NULL && record->pending_request <= 1u &&
+        record->native_child_launch_pending <= 1u &&
         record->dos_record_state <= BASE_VDM_DOS_RECORD_HAS_RETURNED_ERROR_CODE &&
         (record->current_directories_bytes == 0u ||
          record->current_directories != NULL);
@@ -167,6 +169,18 @@ static NTSTATUS get_next_command(base_vdm_local *record, PVDMINFO information)
         if ((state & RETURN_ON_NO_COMMAND) &&
             (record->dos_record_state == BASE_VDM_DOS_RECORD_BUSY ||
              record->dos_record_state == BASE_VDM_DOS_RECORD_HAS_RETURNED_ERROR_CODE)) {
+            if (record->native_child_launch_pending != 0u ||
+                record->reentry_count != 0u) {
+                /* Original cmdExec32 starts a worker, then asks BaseSrv for
+                 * another record.  BaseSrv holds that request until the
+                 * matching worker re-entry completes or a new record exists.
+                 * The local seam preserves that relation without publishing
+                 * a synthetic guest command. */
+                record->pending_request = 1u;
+                ResetEvent(record->wake_event);
+                LeaveCriticalSection(&record->lock);
+                return STATUS_PENDING;
+            }
             /* DIVERGENCE: the original BaseSrv marks a VDM_BUSY child as
              * returned, wakes its external parent record, then its
              * BaseClient retry observes no next command.  This one-session
@@ -271,7 +285,13 @@ static void teardown(void *context)
         CloseHandle(record->wake_event);
         record->wake_event = NULL;
     }
+    if (record->reentry_event != NULL) {
+        SetEvent(record->reentry_event);
+        CloseHandle(record->reentry_event);
+        record->reentry_event = NULL;
+    }
     record->pending_request = 0u;
+    record->native_child_launch_pending = 0u;
     record->owner = NULL;
     if (record->lock_initialized != 0u) {
         LeaveCriticalSection(&record->lock);
@@ -316,12 +336,23 @@ BOOL base_vdm_local_dispatch(PVDMINFO information)
         SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return FALSE;
     }
     if (information->VDMState == INCREMENT_REENTER_COUNT || information->VDMState == DECREMENT_REENTER_COUNT) {
+        EnterCriticalSection(&base_vdm_current->lock);
         if (information->VDMState == INCREMENT_REENTER_COUNT && base_vdm_current->reentry_count != UINT32_MAX) {
-            ++base_vdm_current->reentry_count; return TRUE;
+            base_vdm_current->native_child_launch_pending = 0u;
+            ++base_vdm_current->reentry_count;
+            ResetEvent(base_vdm_current->reentry_event);
+            LeaveCriticalSection(&base_vdm_current->lock);
+            return TRUE;
         }
         if (information->VDMState == DECREMENT_REENTER_COUNT && base_vdm_current->reentry_count != 0u) {
-            --base_vdm_current->reentry_count; return TRUE;
+            --base_vdm_current->reentry_count;
+            if (base_vdm_current->reentry_count == 0u &&
+                base_vdm_current->native_child_launch_pending == 0u)
+                SetEvent(base_vdm_current->reentry_event);
+            LeaveCriticalSection(&base_vdm_current->lock);
+            return TRUE;
         }
+        LeaveCriticalSection(&base_vdm_current->lock);
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     status = get_next_command(base_vdm_current, information);
@@ -341,19 +372,54 @@ int base_vdm_local_wait_for_command(PVDMINFO information)
 {
     session *owner = session_thread_current();
     base_vdm_local *record = base_vdm_current;
+    HANDLE wait_handles[2];
     DWORD wait_status;
     if (information == NULL || owner == NULL || !session_valid(owner) ||
         owner->state != SESSION_STATE_ACTIVE || record == NULL ||
         !base_vdm_local_valid(record) || record->owner != owner)
         return 0;
-    wait_status = WaitForSingleObject(record->wake_event, INFINITE);
-    if (wait_status != WAIT_OBJECT_0) {
+    wait_handles[0] = record->wake_event;
+    wait_handles[1] = record->reentry_event;
+    wait_status = WaitForMultipleObjects(2u, wait_handles, FALSE, INFINITE);
+    if (wait_status != WAIT_OBJECT_0 && wait_status != WAIT_OBJECT_0 + 1u) {
         SetLastError(ERROR_GEN_FAILURE);
         return 0;
     }
     information->VDMState = (USHORT)(information->VDMState |
         ASKING_FOR_SECOND_TIME);
     return 1;
+}
+
+int base_vdm_local_native_child_begin(void)
+{
+    session *owner = session_thread_current();
+    base_vdm_local *record = base_vdm_current;
+
+    if (owner == NULL || !session_valid(owner) || owner->state != SESSION_STATE_ACTIVE ||
+        record == NULL || !base_vdm_local_valid(record) || record->owner != owner)
+        return 0;
+    EnterCriticalSection(&record->lock);
+    if (record->native_child_launch_pending != 0u || record->reentry_count != 0u) {
+        LeaveCriticalSection(&record->lock);
+        return 0;
+    }
+    record->native_child_launch_pending = 1u;
+    ResetEvent(record->reentry_event);
+    LeaveCriticalSection(&record->lock);
+    return 1;
+}
+
+void base_vdm_local_native_child_cancel(void)
+{
+    session *owner = session_thread_current();
+    base_vdm_local *record = base_vdm_current;
+
+    if (owner == NULL || record == NULL || !base_vdm_local_valid(record) ||
+        record->owner != owner) return;
+    EnterCriticalSection(&record->lock);
+    record->native_child_launch_pending = 0u;
+    if (record->reentry_count == 0u) SetEvent(record->reentry_event);
+    LeaveCriticalSection(&record->lock);
 }
 
 /* DIVERGENCE: BaseSrvIsFirstVDM originally owns a CSRSS-global flag. The
