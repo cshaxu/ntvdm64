@@ -2,6 +2,11 @@
 
 ## Current Work
 
+**No M/T/S packet is active.** M0 T358 closed at the valid isolated
+COMMAND-continuation observation boundary. The next unnumbered Queue
+candidate is DOS `.COM`/MZ `.EXE` execution and parent return; it requires
+owner admission before implementation begins.
+
 ### M0 T354 S1 — Closed permanent COMMAND bootstrap owner admission
 
 | Field | Record |
