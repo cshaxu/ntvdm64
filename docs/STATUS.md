@@ -28,6 +28,8 @@
 
 **S1 closure:** [WOW16 bootstrap topology ledger](etc/evidence/m0-t373-s1-wow16-bootstrap-topology-ledger-001.md).
 
+**S2 P1:** [original WOW command-binding dependency closure](etc/evidence/m0-t373-s2-p1-wow-command-binding-dependency-closure-001.md).
+
 ### M0 T372 — Closed Redirector and host-resource execution
 
 **Plan:** [M0 T372 Redirector and host-resource execution](etc/operations/m0-t372-redirector-host-resource-execution-001.md).
