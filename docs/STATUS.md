@@ -1097,25 +1097,25 @@ and
 
 ## Active Packet
 
-### M0 T377 S3 — Active timer/IRQ and video owner recovery
+### M0 T377 S5 — Active frozen original workload-matrix observation
 
-**Active: M0 T377 S3**
+**Active: M0 T377 S5**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T377 S3; ordinary mode (single-person dual-role original-owner recovery). |
-| Admission And Approval | Admitted after S2 returned the selected keyboard and DEM IOCTL paths to their original source owners and formally linked the product. |
-| Objective | Recover or verify the complete original CPU40/SoftPC timer/IRQ and VGA/video owner cohorts required by `GRAPHICS.COM`, preserving original controller, interrupt, font and presentation interfaces, failure order and cleanup rules. |
-| Non-goals | No synthetic PrintScreen/input, runtime observation, media stage update, app loader, BOP/port leaf patch, guest rewrite, CPU30, Bochs, x64 guest runtime, native child, Redirector or WOW work. |
-| Reference Baseline | T376 closure; T377 S1/S2 evidence; current formal CPU40/x86 manifest and existing SoftPC timer/video/presentation closures. |
-| Files And ABI Surface | Selected original `nt_timer.c`, system timer/ICA sources, original video/cvidc cohorts, host video bindings, existing session mapping and app presentation boundary only. |
-| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Complete original definition/caller/binding review; focused source-shaped positive and negative tests; formal graph/link review; documentation governance and diff review. No product run. |
-| Expected Markers | Every selected call has an original body or named same-shaped boundary, no raw pointer/HANDLE reaches guest state, and original carry/error/cleanup order is covered. |
-| Asset Needs | Existing selected original source/media, formal manifest, mapping manager and current source indexes. No generated guest program or external host service. |
-| Reporting Requirements | Record each original call edge, adapter/mapping ownership, unchanged source result/order, any exact unavailable result and all rejected local replacement paths. |
-| Stop Conditions | A reached owner requires a synthetic device/controller, guest mutation, non-original video mode behavior, an unbounded console/CSR shell, or changes keyboard/file semantics; pause for package revision. |
-| Exit Criteria | Timer/IRQ and video cohorts are source/binding/test/formal-link closed or each names its earliest exact original boundary; S4 may then establish the complete formal matrix. |
+| Identifier Mode | M0 T377 S5; ordinary mode (single-person dual-role fixed-container observation). |
+| Admission And Approval | S4 closed the source/formal/staging contract.  S5 is admitted solely to execute the three predeclared original DOS workload commands without optional diagnostic environment changes. |
+| Objective | Run the bounded `MEM.EXE`, `KB16.COM US` and `GRAPHICS.COM` observations in the fixed console-owning CPU40/SoftPC container; retain product/media identity and classify only the first source-owned result. |
+| Non-goals | No repair during observation, retry under a changed container, guest/media mutation, BOP/port leaf patch, synthetic keyboard/PrintScreen, controller replacement, CPU30, Bochs, x64 guest runtime, native child, Redirector or WOW work. |
+| Reference Baseline | T376 closure; T377 S1--S4 evidence; current formal CPU40/x86 product and staged `O:\\ntvdm64` runtime. |
+| Files And ABI Surface | Existing observer, staged original media, formal product and observation report only. No production source or ABI change. |
+| Applicable Rules | Execution, source policy, source-first recovery, immutable-media staging, fixed-container observation, CPU40-only, architecture, coding and documentation rules. |
+| Verification | Exactly one bounded console-owning observation for each predeclared workload with no `--child-environment`; compare product/media hashes and classify an original return or earliest source-defined boundary. |
+| Expected Markers | Original DOS command path, normal return, or an exact original device/file/video boundary.  A program result alone never proves general device compatibility. |
+| Asset Needs | S4-fixed formal product/media stage, Node 22 observer and existing console-owning launcher. |
+| Reporting Requirements | Preserve exact commands, identities, timeout and result; distinguish the three workload outcomes and never infer a repair target from one trace. |
+| Stop Conditions | Any identity mismatch, need for diagnostic environment variable, altered timeout/root/media/product, source edit, or a proposed leaf repair invalidates this S and requires a new admission. |
+| Exit Criteria | All three frozen observations are retained, source-classified and reported; T377 either closes on the matrix standard or records a single exact original boundary for a later package. |
 | Original Owner Request | “批准开始下一条的任务” together with the standing objective to execute the queue in single-person dual-role mode and retain minimal mirror/source-first recovery. |
 | Similar-Issue Sweep | `nt_timer`, `TimerInit`, `Win32_host_timer`, `SuspendTimerThread`, timer/ICA IRQ, `video.c`, VGA/EGA/CGA tables, C-video dispatch, font memory and app presentation handoff. |
 
@@ -1124,6 +1124,10 @@ and
 **S1 closure:** [DOS device workload matrix and owner admission](etc/evidence/m0-t377-s1-dos-device-workload-owner-admission-001.md).
 
 **S2 closure:** [console, keyboard, file and IOCTL owner recovery](etc/evidence/m0-t377-s2-console-keyboard-file-ioctl-owner-recovery-001.md).
+
+**S3 closure:** [timer, IRQ and video owner recovery](etc/evidence/m0-t377-s3-timer-irq-video-owner-recovery-001.md).
+
+**S4 closure:** [formal workload-matrix closure](etc/evidence/m0-t377-s4-formal-workload-matrix-closure-001.md).
 
 ### M0 T357 S1 — Closed staged runtime identity and owner admission
 

@@ -17,6 +17,14 @@ const requiredAssets = [
    * DOS EXEC package.  FASTOPEN is the original no-op NT stub; it exercises
    * the guest MZ path without introducing a new host implementation. */
   ['src/mvdm-guest/dos/v86/cmd/fastopen/FASTOPEN.EXE', 'FASTOPEN.EXE'],
+  /* T377's immutable device matrix.  The original programs resolve their
+   * companions from the selected DOS system root; no guest payload is made
+   * or patched by staging. */
+  ['src/mvdm-guest/dos/v86/cmd/mem/mem.exe', 'MEM.EXE'],
+  ['src/mvdm-guest/dos/v86/cmd/keyb/KB16.COM', 'KB16.COM'],
+  ['src/mvdm-guest/dos/v86/dev/keyboard/KEYBOARD.SYS', 'KEYBOARD.SYS'],
+  ['src/mvdm-guest/dos/v86/cmd/graphics/GRAPHICS.COM', 'GRAPHICS.COM'],
+  ['src/mvdm-guest/dos/v86/cmd/graphics/graphics.pro', 'GRAPHICS.PRO'],
   ['src/mvdm-guest/bin86/config.nt', 'config.nt'],
   ['src/mvdm-guest/bin86/autoexec.nt', 'autoexec.nt'],
   ['src/mvdm-guest/dos/v86/cmd/command/COMMAND.COM', 'system32/COMMAND.COM'],
@@ -33,7 +41,7 @@ const requiredAssets = [
 ];
 
 function usage() {
-  throw new Error('usage: node tools/build/Stage-OriginalSoftpcRuntime.mjs --executable <product.exe> --output <directory> [--update]');
+  throw new Error('usage: node tools/build/Stage-OriginalSoftpcRuntime.mjs --executable <product.exe> --output <directory> [--update --replace-product]');
 }
 
 function sha256(path) {
@@ -43,9 +51,11 @@ function sha256(path) {
 let executable = null;
 let output = null;
 let update = false;
+let replaceProduct = false;
 for (let index = 2; index < process.argv.length; index += 1) {
   const option = process.argv[index];
   if (option === '--update') update = true;
+  else if (option === '--replace-product') replaceProduct = true;
   else if (option === '--executable' || option === '--output') {
     const value = process.argv[index + 1];
     if (value === undefined) usage();
@@ -56,6 +66,7 @@ for (let index = 2; index < process.argv.length; index += 1) {
   else usage();
 }
 if (executable === null || output === null) usage();
+if (replaceProduct && !update) usage();
 
 const executablePath = isAbsolute(executable) ? executable : resolve(process.cwd(), executable);
 const outputPath = isAbsolute(output) ? output : resolve(process.cwd(), output);
@@ -68,13 +79,14 @@ if (update && !existsSync(join(outputPath, 'runtime-manifest.json'))) {
 mkdirSync(join(outputPath, 'system32'), { recursive: true });
 mkdirSync(join(outputPath, 'softpc'), { recursive: true });
 const manifest = [];
-function stage(source, destination) {
+function stage(source, destination, replace = false) {
   if (!existsSync(source)) throw new Error(`required source asset does not exist: ${source}`);
   const target = join(outputPath, destination);
   if (existsSync(target)) {
-    if (sha256(target) !== sha256(source)) {
+    if (sha256(target) !== sha256(source) && !replace) {
       throw new Error(`refusing to replace different staged asset: ${target}`);
     }
+    if (sha256(target) !== sha256(source) && replace) copyFileSync(source, target);
   } else {
     mkdirSync(dirname(target), { recursive: true });
     copyFileSync(source, target);
@@ -82,7 +94,9 @@ function stage(source, destination) {
   manifest.push({ source, destination, sha256: sha256(source) });
 }
 
-stage(executablePath, 'original-softpc-process.exe');
+/* The executable is the sole replaceable fixed-container input: callers must
+ * opt in after a formal link. Guest and firmware bytes never use this path. */
+stage(executablePath, 'original-softpc-process.exe', replaceProduct);
 for (const [source, destination] of requiredAssets) stage(join(scriptRoot, source), destination);
 writeFileSync(join(outputPath, 'runtime-manifest.json'), `${JSON.stringify({
   format: 3,

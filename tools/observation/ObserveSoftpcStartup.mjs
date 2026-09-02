@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 function usage() {
-  throw new Error('usage: node tools/observation/ObserveSoftpcStartup.mjs --launcher <observer.exe> --product <product.exe> --stage <runtime-dir> --report <result.txt> [--product-command <declared-DOS-command>] [--child-environment MVDM_SESSION_DISPOSE_REPORT_PATH=<absolute-path>|MVDM_COMMAND_CONTINUATION_REPORT_PATH=<absolute-path>]');
+  throw new Error('usage: node tools/observation/ObserveSoftpcStartup.mjs --launcher <observer.exe> --product <product.exe> --stage <runtime-dir> --report <result.txt> [--product-command <declared-DOS-command>] [--child-environment MVDM_SESSION_DISPOSE_REPORT_PATH=<absolute-path>|MVDM_COMMAND_CONTINUATION_REPORT_PATH=<absolute-path>|MVDM_DEM_OPEN_REPORT_PATH=<absolute-path>]');
 }
 
 function sha256(path) {
@@ -47,7 +47,10 @@ let childEnvironment = undefined;
 if (options['child-environment'] !== undefined) {
   const names = [
     'MVDM_SESSION_DISPOSE_REPORT_PATH',
-    'MVDM_COMMAND_CONTINUATION_REPORT_PATH'
+    'MVDM_COMMAND_CONTINUATION_REPORT_PATH',
+    /* An already-existing default-off original DEM observer. This records
+     * only the source-owned path/scalar call boundary for fixed media. */
+    'MVDM_DEM_OPEN_REPORT_PATH'
   ];
   const separator = options['child-environment'].indexOf('=');
   const name = separator < 0 ? '' : options['child-environment'].slice(0, separator);
