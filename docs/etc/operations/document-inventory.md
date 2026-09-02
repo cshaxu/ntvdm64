@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3891 |
+| Documentation records | 3893 |
 | --- | --- |
-| Generated UTC | 2026-09-02T12:40:46Z |
+| Generated UTC | 2026-09-02T12:47:38Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | 70e7f009d2970da16914a1d59ab81444a6b7c279c40e8593130f9d9d30a6e30e |
+| QUEUE.md | principal control document | efb2e1d83ff3ace7ae667adcb0387e798f092c19d0d118adeef05075689ff690 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 6b77a895ff868e899fff8982661eed75f6e13ff4359032b2ecc3c11ec0697aa8 |
+| STATUS.md | principal control document | 2c15f2444a7cb09b91600880697a1170fbfef30f081642654f5ae644b4eabc41 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1263,6 +1263,7 @@ content-divergent entries.
 | etc/evidence/m0-t373-s2-p2-wow32-dynamic-ingress-boundary-001.md | indexed supporting material | 7d617067283f575dc50a3aeb841edf9c7fd4ea9091defac67ab642cd088879a4 |
 | etc/evidence/m0-t373-s3-p1-nonfast-callback-source-revalidation-001.md | indexed supporting material | 16e8e5c5c060cf0fead20eb9d29a7257b40c1ebe2dc3d218170f6069450e17c3 |
 | etc/evidence/m0-t373-s4-win16-ne-lifecycle-boundary-001.md | indexed supporting material | 4b8768c55ba54052bd4914d408479c12dcc6a0c03208bdc6d21202127f4a5193 |
+| etc/evidence/m0-t373-s5-formal-selection-stage-reconciliation-001.md | indexed supporting material | 225e6847005aa16b08c548a35a713cc10496c914b3c3a6efef65f22cea6708d5 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -2018,7 +2019,7 @@ content-divergent entries.
 | etc/operations/m0-t370-original-command-native-child-lifecycle-001.md | indexed supporting material | 884dbf48f532918aaba037fa1f4c88d24c11602356ee37ef19fe18523734ab88 |
 | etc/operations/m0-t371-xms-dpmi-dos-extender-execution-001.md | indexed supporting material | 15305510c111bac06be0b7d53fbd85241c1d902f658537eac72dd5cb2fcf65b4 |
 | etc/operations/m0-t372-redirector-host-resource-execution-001.md | indexed supporting material | c3523515cb0adb0b780542571ebe3085c4f3d5279302a9aa4df852df2fb802f3 |
-| etc/operations/m0-t373-wow16-bootstrap-callback-ne-lifecycle-001.md | indexed supporting material | 49f662c4c3f0433520d06553ba356150351abc3b46a4c77dfd6ea9387142ce43 |
+| etc/operations/m0-t373-wow16-bootstrap-callback-ne-lifecycle-001.md | indexed supporting material | 2ebcfa215f5b9c61c3d03c0da1f1e0f6d7efb27c2a1f74a8d27cebfabbdcd2f6 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3798,6 +3799,7 @@ content-divergent entries.
 | history/m0-t370-original-command-native-child-lifecycle-closure-20260902.md | closed task history | 1672f5d285a6da3a01c434724cfbcea8d203a155fa2ba2869684201997a18958 |
 | history/m0-t371-xms-dpmi-dos-extender-execution-closure-20260902.md | closed task history | da2c61bbd0e34c8b501e108b230b97156d8bb6b840a9eefaf3e57746a8901e15 |
 | history/m0-t372-redirector-host-resource-execution-closure-20260902.md | closed task history | 5181802b9b96818e3476cd087800749c61ba448f4ec8c31888e6022b0a016689 |
+| history/m0-t373-wow16-bootstrap-callback-ne-lifecycle-closure-20260902.md | closed task history | d9bcec484899282f6a1e5ee0252c973bd135954c14fad5c267842fd48f0f1fd4 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

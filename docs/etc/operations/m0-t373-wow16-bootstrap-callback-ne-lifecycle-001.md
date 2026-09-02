@@ -58,19 +58,19 @@ and a synthetic Win16 loader.
    original NE bootstrap, module/task start and normal return teardown path.
    A modern public API may only appear behind a same-shaped required facade;
    it cannot replace the original NE/task algorithm.
-5. **S5 — Formal link, focused matrix and one fixed observation.** Formally
-   build/link the selected CPU40/x86 WOW cohort, run source-defined focused
-   positive/negative tests, then make exactly one immutable guest observation
-   with a selected original Win16 workload. Classify the earliest source owner
-   without creating a trace-selected repair.
+5. **S5 — Formal selection, staging and exact disposition.** Reconcile the
+   selected CPU40/x86 graph and its fixed media manifest with S1--S4.  If the
+   complete original WOW32 cohort and WOW16 media are selected, a later
+   admitted packet may define focused proof and one immutable observation.  If
+   they are not selected, record the original `MS_bop_1` dynamic-load failure
+   direction and close this vertical as unavailable without a substitute.
 
 ## Exit criteria
 
-The selected original non-fast one-session WOWEXEC/NE lifecycle has one
-source-first disposition per reached body and boundary; original algorithmic
-bodies are directly composed wherever their dependencies permit; every
-adapter is same-shaped and mapping-safe; the cohort formally links under
-CPU40/x86; and one immutable observation distinguishes a proved lifecycle
-result from a precise earlier original owner. No claim is made for fast WOW,
-general Win16 UI, private shell/CSR behavior, multiple sessions or unselected
-WOW provider families.
+Every reached original body and boundary has a source-first disposition.  If
+the complete original non-fast one-session WOWEXEC/NE cohort is selected, it
+must formally link and one immutable observation must classify its first
+source-owned result.  Otherwise, selection and staging must agree with the
+precise original unavailable direction, without a substitute.  No claim is
+made for fast WOW, general Win16 UI, private shell/CSR behavior, multiple
+sessions or unselected WOW provider families.

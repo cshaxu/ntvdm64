@@ -2,39 +2,14 @@
 
 ## Current Work
 
-### M0 T373 S5 — Active formal WOW package reconciliation and fixed disposition
+### No M/T/S packet is active
 
-**Active: M0 T373 S5**
+**No active M/T/S packet.**
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T373 S5; ordinary mode (single-person dual-role implementation and review). |
-| Admission And Approval | Admitted after T373 S4 identified the earlier original WOW32 product-shell boundary for the entire WOWEXEC/NE vertical, under the owner's standing instruction to execute the dependency-ordered queue and permanently authorized ordinary Git delivery. |
-| Objective | Reconcile current formal CPU40/x86 selection, runtime staging and one fixed-observation eligibility against the source-owned WOW32 boundary; close T373 with an exact product disposition rather than claim a WOWEXEC/NE execution path that is not selected. |
-| Non-goals | No WOW command dispatch activation, general WOW export activation, full `WK32WOWInitTask`, synthetic NE loader/task/callback, guest mutation, fast WOW, CurrentMonitorTeb, CSRSS/kernel VDM, second broker, USER/GDI recovery, CPU/device/Bochs/x64 work or a new product observation. |
-| Reference Baseline | T373 S1--S4 evidence; selected original CPU40/x86 formal graph; current staging manifest; existing fixed-container observation controls. |
-| Files And ABI Surface | Formal CPU40/x86 build/stage manifests and retained WOW source dispositions only; no production source, guest-media or runtime ABI change. |
-| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and document rules. |
-| Verification | Re-run the formal CPU40/x86 target selection check and compare its staged runtime manifest with S1--S4 source disposition; record whether a fixed WOW observation is eligible. No product observation. |
-| Expected Markers | Formal graph selects no WOW32 provider; staging contains no WOW16 media; the original `MS_bop_1` failure direction is the exact current product disposition. |
-| Asset Needs | Existing formal CPU40/x86 graph and current immutable staging inputs only. |
-| Reporting Requirements | Record build/stage identities and exact unavailable direction; do not call S5 a runtime observation or a complete WOW/NE profile. |
-| Stop Conditions | Need to add a WOW32 DLL, stage WOW media, run a changed workload, alter CPU/device behavior or introduce a source change pauses for a later T admission. |
-| Exit Criteria | Formal selection and stage agree with the source boundary; T373's complete vertical is closed as source-shaped unavailable without a substitute. |
-| Original Owner Request | Continue the dependency-ordered queue in single-person dual-role mode while preserving original mirror-first recovery and avoiding trace-selected leaf patches. |
-| Similar-Issue Sweep | WOW32 provider selection, `MS_bop_1`, `W32Init`, formal graph, stage manifest, WOWEXEC media, current fixed observer and source-shaped unavailable termination. |
-
-**Plan:** [M0 T373 WOW16 bootstrap, callback and NE lifecycle](etc/operations/m0-t373-wow16-bootstrap-callback-ne-lifecycle-001.md).
-
-**S1 closure:** [WOW16 bootstrap topology ledger](etc/evidence/m0-t373-s1-wow16-bootstrap-topology-ledger-001.md).
-
-**S2 P1:** [original WOW command-binding dependency closure](etc/evidence/m0-t373-s2-p1-wow-command-binding-dependency-closure-001.md).
-
-**S2 P2 closure:** [WOW32 dynamic-ingress source boundary](etc/evidence/m0-t373-s2-p2-wow32-dynamic-ingress-boundary-001.md). The original `W32Init` private USER/shared-product shell is the earlier selected unavailable boundary; no static command route or placeholder WOW32 DLL was added.
-
-**S3 P1 closure:** [non-fast callback source revalidation](etc/evidence/m0-t373-s3-p1-nonfast-callback-source-revalidation-001.md). The prior original CCPU40 bounded-return proof remains current; actual task/trampoline execution remains behind S2's original WOW32 product-shell boundary.
-
-**S4 P1 closure:** [Win16 NE lifecycle source boundary](etc/evidence/m0-t373-s4-win16-ne-lifecycle-boundary-001.md). Guest WOWEXEC/Kernel NE code is immutable and original, but its first host task/dispatch prerequisite remains the earlier original `W32Init` product shell.
+M0 T373 is closed as source-shaped unavailable: the formal CPU40/x86 graph
+selects neither the original WOW32 product cohort nor WOW16 media, so the
+original `MS_bop_1` dynamic-load failure direction is the exact current
+disposition.  See the [T373 closure](history/m0-t373-wow16-bootstrap-callback-ne-lifecycle-closure-20260902.md).
 
 ### M0 T372 — Closed Redirector and host-resource execution
 
