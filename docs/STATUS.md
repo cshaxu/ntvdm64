@@ -2,33 +2,35 @@
 
 ## Current Work
 
-### M0 T373 S2 — Active original WOW command and task bootstrap binding
+### M0 T373 S3 — Active original non-fast callback and CPU40 re-entry closure
 
-**Active: M0 T373 S2**
+**Active: M0 T373 S3**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T373 S2; ordinary mode (single-person dual-role implementation and review). |
-| Admission And Approval | Admitted after T373 S1 closed the source/build/runtime topology under the owner's standing instruction to execute the dependency-ordered queue and permanently authorized ordinary Git delivery. |
-| Objective | Compose the selected original WOW command-acquisition and task-bootstrap cohort through the source-shaped Base VDM record and bounded mapping/task seams, preserving `VDMINFO`, capacity/error and cleanup order. |
-| Non-goals | No general WOW export activation, full `WK32WOWInitTask`, synthetic NE loader/task/callback, guest mutation, fast WOW, CurrentMonitorTeb, CSRSS/kernel VDM, second broker, USER/GDI recovery, CPU/device/Bochs/x64 work or product observation. |
-| Reference Baseline | T373 S1 topology ledger; original `wkman.c`; immutable `mvdm-guest/wow16`; source-shaped Base VDM local WOW record; current CPU40/x86 graph and callback-frame evidence. |
-| Files And ABI Surface | Immutable WOW guest-media manifest; app WOW command declaration; selected original `WK32WowGetNextVdmCommand` true subset; Base VDM `VDMINFO`; mapping leases and copied task projection. |
+| Identifier Mode | M0 T373 S3; ordinary mode (single-person dual-role implementation and review). |
+| Admission And Approval | Admitted after T373 S2 recorded the earliest original WOW32 product-shell unavailable boundary, under the owner's standing instruction to execute the dependency-ordered queue and permanently authorized ordinary Git delivery. |
+| Objective | Reconcile the selected original non-fast `wcall16.c` callback transaction with CPU40 `host_simulate`, bounded guest-memory leases and typed task projection; establish precisely which call/return preconditions are already source-shaped and which still depend on the unavailable WOW32 task shell. |
+| Non-goals | No WOW command dispatch activation, general WOW export activation, full `WK32WOWInitTask`, synthetic NE loader/task/callback, guest mutation, fast WOW, CurrentMonitorTeb, CSRSS/kernel VDM, second broker, USER/GDI recovery, CPU/device/Bochs/x64 work or product observation. |
+| Reference Baseline | T373 S1 topology ledger; T373 S2 command and dynamic-ingress boundaries; original `wcall16.c`; immutable `mvdm-guest/wow16`; current CPU40/x86 callback-frame evidence. |
+| Files And ABI Surface | Selected original `wcall16.c`; original `SETVDMSTACK -> host_simulate -> VDMSTACK` transaction; existing adapter-softpc guest lease and monitor copied task projection only. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and document rules. |
-| Verification | Source-order/link audit and local positive, empty-WOW-queue, wrong-owner and insufficient-capacity proofs; formal focused link when the cohort is complete. No product observation. |
-| Expected Markers | One app-owned WOW record reaches the original command algorithm without a raw guest alias; zero-length success stays distinct from DOS wait; capacity and wrong-owner forms preserve source failure behavior. |
-| Asset Needs | Existing immutable WOW32/WOWEXEC mirror, original guest artifacts, current Base VDM/session mappings and CPU40/x86 build infrastructure. |
-| Reporting Requirements | Identify every true-subset omission and divergence; preserve source bodies, same-shaped bindings and unavailable historical shells; do not call S2 a complete WOW/NE runtime. |
+| Verification | Source-order/link audit and focused original callback-frame/CCPU40 return proof; distinguish the existing mechanical return from a complete Win16 callback trampoline. No product observation. |
+| Expected Markers | Original stack switching and synchronous lease lifetime remain intact; CPU40 returns through the typed SoftPC boundary; any first task/guest-trampoline prerequisite is precisely owner-classified. |
+| Asset Needs | Existing immutable WOW32/WOWEXEC mirror, original guest artifacts, current CPU40 callback-frame source/evidence, session mapping manager and adapter-softpc bindings. |
+| Reporting Requirements | Identify every true-subset omission and divergence; preserve original transaction order; do not call S3 a complete WOW/NE runtime or a substitute for the unavailable WOW32 product shell. |
 | Stop Conditions | Need for full `WK32WOWInitTask`, private USER/TEB/CSR behavior, a raw durable guest pointer, an NE parser/task invention, CPU/device change or product run pauses for a later S admission. |
-| Exit Criteria | The finite S1-selected cohort has source/link/local proof for its normal and negative forms, or its earliest original unavailable boundary is recorded without a replacement. |
+| Exit Criteria | Every selected `wcall16.c` callback transition has source/link/local proof, or its earliest original task/trampoline boundary is recorded without a replacement. |
 | Original Owner Request | Continue the dependency-ordered queue in single-person dual-role mode while preserving original mirror-first recovery and avoiding trace-selected leaf patches. |
-| Similar-Issue Sweep | WOWEXEC media, `WK32WowGetNextVdmCommand`, `GetNextVDMCommand`, `VDMINFO`, WOW command declaration, task projection, guest leases, empty queue, capacity failure, fast WOW and BaseSrv/CSR boundaries. |
+| Similar-Issue Sweep | `CallBack16`, `CallBack16Ex`, `SETVDMSTACK`, `VDMSTACK`, `host_simulate`, CPU40 return, callback trampoline, current task projection, guest lease lifetime, fast WOW and BaseSrv/CSR boundaries. |
 
 **Plan:** [M0 T373 WOW16 bootstrap, callback and NE lifecycle](etc/operations/m0-t373-wow16-bootstrap-callback-ne-lifecycle-001.md).
 
 **S1 closure:** [WOW16 bootstrap topology ledger](etc/evidence/m0-t373-s1-wow16-bootstrap-topology-ledger-001.md).
 
 **S2 P1:** [original WOW command-binding dependency closure](etc/evidence/m0-t373-s2-p1-wow-command-binding-dependency-closure-001.md).
+
+**S2 P2 closure:** [WOW32 dynamic-ingress source boundary](etc/evidence/m0-t373-s2-p2-wow32-dynamic-ingress-boundary-001.md). The original `W32Init` private USER/shared-product shell is the earlier selected unavailable boundary; no static command route or placeholder WOW32 DLL was added.
 
 ### M0 T372 — Closed Redirector and host-resource execution
 
