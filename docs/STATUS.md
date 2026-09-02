@@ -870,7 +870,7 @@ the selected CPU40 path attempts to execute immutable `COMMAND.COM` data at
 
 **S6 closure:** [single-session Base VDM DOS-record lifecycle recovery](etc/evidence/m0-t358-s6-single-session-base-vdm-dos-record-lifecycle-recovery-001.md) records the complete reached local state transition, focused x86 fixture pass and formal CPU40/x86 product link.
 
-### M0 T358 S7 — Active fixed `/C EXIT` lifecycle observation
+### M0 T358 S7 — Closed fixed `/C EXIT` lifecycle observation
 
 | Field | Record |
 | --- | --- |
@@ -882,7 +882,18 @@ the selected CPU40 path attempts to execute immutable `COMMAND.COM` data at
 | Exit Criteria | One frozen observation either reaches a source-owned built-in completion/controlled session termination marker, or identifies one exact earliest source-owned predecessor for the next whole recovery cohort. |
 | Original Owner Request | “非常好，按照这个顺序执行。” |
 
-**Active: M0 T358 S7.**
+**S7 closure:** [fixed `/C EXIT` lifecycle observation](etc/evidence/m0-t358-s7-fixed-exit-lifecycle-observation-001.md)
+proves the root/SystemRoot package is accepted and that two original `54:0F`
+environment requests return before the first `54:01`.  The fixed run then
+reaches original guest `Alloc_error`; it does not reach the S6 Base VDM
+child-return state or COMMAND completion.
+
+**M0 T358 disposition:** Paused at the original COMMAND initial-environment
+and NTDOS allocation cohort.
+
+**No active M/T/S packet.** A bounded source map of the `54:0F` `ES:0`/`BX`
+delivery, NTDOS allocation result and resident integrity must be admitted
+before changing production code or running another workload.
 
 
 ### M0 T355 S31 — Closed original `0x78` entry-result attribution
