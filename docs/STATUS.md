@@ -2,31 +2,33 @@
 
 ## Current Work
 
-### M0 T374 S1 — Active whole WOW32 provider matrix and admission cohort
+### M0 T374 S2 — Active original WOW32 initialization and dispatch product cohort
 
-**Active: M0 T374 S1**
+**Active: M0 T374 S2**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T374 S1; ordinary mode (single-person dual-role implementation and review). |
-| Admission And Approval | Admitted from T373's exact original WOW32 dynamic-ingress boundary under the owner's standing instruction to execute the dependency-ordered queue, preserve mirror-first recovery and deliver ordinary Git commits. |
-| Objective | Produce a complete source-first matrix for all active original WOW32 provider bodies, generated dispatch rows and immediate historical host edges; select one smallest complete dynamic-ingress cohort or prove the earlier non-composable boundary. |
-| Non-goals | No static `W32Dispatch` route, partial service enablement, substitute WOW32 DLL, synthetic task/NE loader, guest mutation, fast WOW, CurrentMonitorTeb, CSRSS/kernel VDM, second broker, arbitrary USER/GDI emulation, CPU/device/Bochs/x64 work or runtime observation. |
-| Reference Baseline | T373 S1--S5 evidence; `m0-t276-s25-wow32-provider-final-disposition-baseline-001.md`; `m0-t277-divergence-exclusion-ledger.tsv`; selected CPU40/x86 formal graph. |
-| Files And ABI Surface | Evidence/plan/governance only in S1; original `wow32` sources, dispatch declarations, adapter boundary declarations and current build manifests are read-only inputs. |
+| Identifier Mode | M0 T374 S2; ordinary mode (single-person dual-role implementation and review). |
+| Admission And Approval | Admitted after S1 selected the full original 77-body WOW32 DLL product plus four same-shaped boundary families, under the owner's standing queue-execution and ordinary-delivery authority. |
+| Objective | Compose the original `W32Init`/`W32Dispatch` product boundary without a static substitute: define the smallest same-shaped treatment for USER handler registration, Base handler registration, shared WOW state and current-task identity, then formally determine its selected source disposition. |
+| Non-goals | No individual provider enablement, static `W32Dispatch` route, substitute DLL, synthetic task/NE loader, guest mutation, fast WOW, CurrentMonitorTeb, CSRSS/kernel VDM, arbitrary USER/GDI reimplementation, CPU/device/x64 work or runtime observation. |
+| Reference Baseline | T373 S1--S5; T374 S1 matrix; original `wow32.c`, `wowtbl.c`, `wkman.c`; T276/T277 provider identities. |
+| Files And ABI Surface | Original WOW32 initialization/dispatch declarations and the four named adapter boundary declarations only; no guest ABI or provider-table semantic change. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and document rules. |
-| Verification | Full active-WOW32 source/dispatch/import inventory; compare selected prerequisites with the formal graph; document four-rung recovery disposition and potential mapping-manager spans. No product run. |
-| Expected Markers | Each active provider has owner/subdomain, direct dependency class, product-selection status and one disposition; one complete cohort or exact earlier boundary is selected without a trace-derived leaf list. |
-| Asset Needs | Existing immutable `mvdm-host/wow32` mirror, T276/T277 ledgers, source indexes and formal CPU40/x86 manifest only. |
-| Reporting Requirements | Distinguish source inventory from a selected runtime cohort; retain original layout/order evidence; name every private dependency that prevents direct composition. |
-| Stop Conditions | A need to modify a provider, add a DLL/media, implement an individual service, alter a guest/machine behavior or broaden to an unreviewed owner package pauses for a later S admission. |
-| Exit Criteria | The entire active provider/dispatch surface has source-first disposition and the smallest complete `W32Init`/`W32Dispatch` cohort or exact earlier unavailable boundary is recorded. |
+| Verification | Original definition/caller/import audit, current adapter search, boundary ownership review and formal graph-selection proposal. No provider implementation or product run. |
+| Expected Markers | Every direct W32Init prerequisite has an original owner and one of direct facade/overlay-required/exact-unavailable dispositions; no unowned replacement dispatcher exists. |
+| Asset Needs | Original WOW32 mirror, current adapter/session source, formal manifest and S1 ledger only. |
+| Reporting Requirements | State which original body remains selected, exact private dependency and why any facade retains the original init/failure order; record mapping-manager implications. |
+| Stop Conditions | A need to implement a broad USER/GDI/CSRSS product, add a provider DLL/media, modify a service leaf or run the product requires a new S admission. |
+| Exit Criteria | The original W32Init/W32Dispatch product boundary has a source-first, same-shaped composition decision and an exact next cohort; or its earliest non-composable private edge is recorded without a substitute. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
-| Similar-Issue Sweep | `MS_bop_1`, `W32Init`, `W32Dispatch`, `WK32WOWInitTask`, `aw32WOW`, USER/GDI registration, shared WOW state, shell/provider rows, mapping-manager identity and formal source selection. |
+| Similar-Issue Sweep | `UserRegisterWowHandlers`, `RegisterWowBaseHandlers`, `LOCKSHAREWOW`, `CURRENTPTD`, `InitCBFormats`, `InitVisRgn`, hung-app support, `WK32WOWInitTask`, `aw32WOW`, adapter ownership and mapping-manager identity. |
 
 **Plan:** [M0 T374 WOW16 service, UI and host integration](etc/operations/m0-t374-wow16-service-ui-host-integration-001.md).
 
 **Predecessor:** [T373 WOW16 bootstrap, callback and NE lifecycle closure](history/m0-t373-wow16-bootstrap-callback-ne-lifecycle-closure-20260902.md).
+
+**S1 closure:** [whole WOW32 provider matrix and admission cohort](etc/evidence/m0-t374-s1-whole-wow32-provider-matrix-001.md).
 
 ### M0 T372 — Closed Redirector and host-resource execution
 
