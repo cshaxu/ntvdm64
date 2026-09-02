@@ -79,4 +79,3 @@ documents each deliberate private-product divergence.  This record does not
 claim interactive COMMAND execution, a CSRSS replacement, cross-process
 broker completion, WOW wake notification, child lifecycle or a runtime guest
 continuity result.
-
