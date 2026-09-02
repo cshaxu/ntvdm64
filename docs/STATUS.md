@@ -1097,31 +1097,33 @@ and
 
 ## Active Packet
 
-### M0 T377 S2 — Active console, keyboard and file/IOCTL owner recovery
+### M0 T377 S3 — Active timer/IRQ and video owner recovery
 
-**Active: M0 T377 S2**
+**Active: M0 T377 S3**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T377 S2; ordinary mode (single-person dual-role original-owner recovery). |
-| Admission And Approval | Admitted after S1 froze the smallest source-identified workload matrix and immediate owner map. |
-| Objective | Recover or verify the complete original console/keyboard and file/seek/IOCTL owner cohorts required by `MEM.EXE` and `KB16.COM US`, preserving original interface shape, failure order, mapping and cleanup rules. |
-| Non-goals | No timer/IRQ or video recovery, runtime observation, media stage update, app loader, synthetic keyboard event, BOP/port leaf patch, guest rewrite, CPU30, Bochs, x64 guest runtime, native child, Redirector or WOW work. |
-| Reference Baseline | T376 closure; T377 S1 workload ledger; current formal CPU40/x86 manifest and existing DEM/mapping-manager closures. |
-| Files And ABI Surface | Selected original `demfile.c`, `demhndl.c`, `demioctl.c`, SoftPC keymouse sources, same-shaped adapter bindings, session mapping leases and focused tests only. |
+| Identifier Mode | M0 T377 S3; ordinary mode (single-person dual-role original-owner recovery). |
+| Admission And Approval | Admitted after S2 returned the selected keyboard and DEM IOCTL paths to their original source owners and formally linked the product. |
+| Objective | Recover or verify the complete original CPU40/SoftPC timer/IRQ and VGA/video owner cohorts required by `GRAPHICS.COM`, preserving original controller, interrupt, font and presentation interfaces, failure order and cleanup rules. |
+| Non-goals | No synthetic PrintScreen/input, runtime observation, media stage update, app loader, BOP/port leaf patch, guest rewrite, CPU30, Bochs, x64 guest runtime, native child, Redirector or WOW work. |
+| Reference Baseline | T376 closure; T377 S1/S2 evidence; current formal CPU40/x86 manifest and existing SoftPC timer/video/presentation closures. |
+| Files And ABI Surface | Selected original `nt_timer.c`, system timer/ICA sources, original video/cvidc cohorts, host video bindings, existing session mapping and app presentation boundary only. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
 | Verification | Complete original definition/caller/binding review; focused source-shaped positive and negative tests; formal graph/link review; documentation governance and diff review. No product run. |
 | Expected Markers | Every selected call has an original body or named same-shaped boundary, no raw pointer/HANDLE reaches guest state, and original carry/error/cleanup order is covered. |
 | Asset Needs | Existing selected original source/media, formal manifest, mapping manager and current source indexes. No generated guest program or external host service. |
 | Reporting Requirements | Record each original call edge, adapter/mapping ownership, unchanged source result/order, any exact unavailable result and all rejected local replacement paths. |
-| Stop Conditions | A reached owner requires an unbounded console/CSR shell, synthetic input, guest mutation, a non-original controller implementation, or changes timer/video semantics; pause for package revision. |
-| Exit Criteria | Console/keyboard and file/seek/IOCTL cohorts are source/binding/test/formal-link closed or each names its earliest exact original boundary; S3 may then address separate timer/video mechanics. |
+| Stop Conditions | A reached owner requires a synthetic device/controller, guest mutation, non-original video mode behavior, an unbounded console/CSR shell, or changes keyboard/file semantics; pause for package revision. |
+| Exit Criteria | Timer/IRQ and video cohorts are source/binding/test/formal-link closed or each names its earliest exact original boundary; S4 may then establish the complete formal matrix. |
 | Original Owner Request | “批准开始下一条的任务” together with the standing objective to execute the queue in single-person dual-role mode and retain minimal mirror/source-first recovery. |
-| Similar-Issue Sweep | `KEYBOARD.SYS` open/seek/close, INT 2F/9/16, console handles, DEM read/seek/IOCTL, host-resource IDs, guest-memory leases, error carry and cleanup. |
+| Similar-Issue Sweep | `nt_timer`, `TimerInit`, `Win32_host_timer`, `SuspendTimerThread`, timer/ICA IRQ, `video.c`, VGA/EGA/CGA tables, C-video dispatch, font memory and app presentation handoff. |
 
 **Plan:** [M0 T377 pure DOS device, file and graphics workload closure](etc/operations/m0-t377-pure-dos-device-file-graphics-workload-001.md).
 
 **S1 closure:** [DOS device workload matrix and owner admission](etc/evidence/m0-t377-s1-dos-device-workload-owner-admission-001.md).
+
+**S2 closure:** [console, keyboard, file and IOCTL owner recovery](etc/evidence/m0-t377-s2-console-keyboard-file-ioctl-owner-recovery-001.md).
 
 ### M0 T357 S1 — Closed staged runtime identity and owner admission
 

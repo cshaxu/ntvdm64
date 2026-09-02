@@ -520,23 +520,6 @@ void mvdm_softpc_record_dem_seek(uint16_t requested_high,
         (DWORD)formatted);
 }
 
-void mvdm_softpc_record_dem_ioctl(unsigned int subfunction,
-    unsigned int drive, unsigned int phase, unsigned int guest_ax,
-    unsigned int guest_dx, unsigned int guest_cf)
-{
-    char message[160];
-    int formatted;
-
-    if (GetEnvironmentVariableA("MVDM_DEM_IOCTL_REPORT_PATH", NULL, 0u) == 0u)
-        return;
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-DEM-IOCTL phase=%u subfunction=%02X drive=%02X ax=%04X dx=%04X cf=%u state=copied\r\n",
-        phase, subfunction, drive, guest_ax, guest_dx, guest_cf);
-    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
-    mvdm_softpc_write_optional_report("MVDM_DEM_IOCTL_REPORT_PATH", message,
-        (DWORD)formatted);
-}
-
 void mvdm_softpc_record_config_done(uint16_t guest_cs)
 {
     /* These are offsets in the exact selected NTIO.SYS map, not a general
