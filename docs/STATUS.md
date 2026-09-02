@@ -1097,29 +1097,31 @@ and
 
 ## Active Packet
 
-### M0 T379 S1 — Active original VDMREDIR product admission
+### M0 T379 S2 — Active original VDMREDIR DLL product and parent loader closure
 
-**Active: M0 T379 S1**
+**Active: M0 T379 S2**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T379 S1; ordinary mode (single-person dual-role original-owner recovery). |
-| Admission And Approval | Admitted after T378's closed immutable DOSX result and queue correction that distinguishes T372's source/binding baseline from actual VDMREDIR product activation. |
-| Objective | Reconcile the complete original `VDMREDIR.dll` source/entry/ten-export/import topology, current CPU40 graph and one immutable local-resource workload; identify one complete earliest owner group for activation. |
-| Non-goals | No `57:xx` leaf patch, static `VrDispatch` link into `nt_bop`, synthetic Redirector, guest-media rewrite, runtime observation, CPU30, Bochs, x64 recovery, broker, native-child or WOW work. |
-| Reference Baseline | T372 closure, T378 closure, original `mvdm-host/vdmredir` mirror, current CPU40 product and existing same-shaped Redir/session bindings. |
-| Files And ABI Surface | Original VDMREDIR source, original `.def`/entry/export declarations, `nt_bop` dynamic loader, parent imports and selected immutable resource workload; no source change in S1. |
+| Identifier Mode | M0 T379 S2; ordinary mode (single-person dual-role original-owner recovery). |
+| Admission And Approval | Admitted by S1's complete DLL entry/export/import/workload ledger. |
+| Objective | Formally compose the whole original `VDMREDIR.dll` through `VrDllInitialize` and all ten original exports, preserving the dynamic parent loader and giving every remaining import one package-shaped disposition. |
+| Non-goals | No `57:xx` leaf patch, static `VrDispatch` link into `nt_bop`, synthetic Redirector, guest-media rewrite, runtime observation, CPU30, Bochs, x64 recovery, broker, native-child, WOW, SMB/RAP client or selective XACTSRV import. |
+| Reference Baseline | S1 product-admission evidence, T372 closure, original `mvdm-host/vdmredir` mirror, current CPU40 product and existing same-shaped Redir/session bindings. |
+| Files And ABI Surface | Original VDMREDIR source, original `.def`/entry/export declarations, `nt_bop` dynamic loader, parent import library and package-level unavailable boundary; no service-leaf substitute. |
 | Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, immutable-media staging, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Whole source/export/import/caller/build selection audit, source identity review, owner/disposition ledger and governance checks. No product run. |
-| Expected Markers | One complete product admission matrix distinguishes direct original source, same-shaped binding, retained unavailable branch and one earliest activation owner group. |
+| Verification | Formal original DLL/export/import link beside the parent CPU40 product; exact import-owner matrix and focused normal/failed loader proof. No product run. |
+| Expected Markers | One original DLL identity, all ten exports, original `LoadVdmRedir` retained, no second SoftPC executor, and one source-shaped remote owner result. |
 | Asset Needs | Current original mirror, T372 evidence, formal CPU40 graph, current stage and immutable workload candidates. |
-| Reporting Requirements | Record every export/import, original loader edge, source owner and exact unavailable/failure direction; distinguish static package evidence from actual DLL product activation. |
+| Reporting Requirements | Record every export/import, original loader edge, source owner and exact unavailable/failure direction; distinguish a product DLL from T372's static evidence archive. |
 | Stop Conditions | A required second provider, private CSR/RPC recreation, guest rewrite, raw host pointer carrier, CPU/machine change or trace-selected leaf implementation requires revised package admission. |
-| Exit Criteria | The original product boundary and one full earliest owner cohort are admitted with source/build/workload evidence; S2 may compose the original DLL product. |
+| Exit Criteria | The original DLL links with all ten exports and the parent loader preserves its source-shaped load/result behavior, or the exact first full-package composition boundary is recorded. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `MS_bop_7`, `LoadVdmRedir`, `GetProcAddress`, `.def`, exports, `VrDispatch`, `cmdredir`, DEM consumers, local handles/leases, pipes, mailslots, completions, NetAPI, NetBIOS, DLC, RAP and private RPC. |
 
 **Plan:** [M0 T379 original VDMREDIR runtime product activation](etc/operations/m0-t379-original-vdmredir-runtime-product-activation-001.md).
+
+**S1 closure:** [original VDMREDIR product admission](etc/evidence/m0-t379-s1-original-vdmredir-product-admission-001.md).
 
 ### M0 T378 — Closed DOS-extender runtime closure
 
