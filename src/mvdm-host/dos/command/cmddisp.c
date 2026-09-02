@@ -67,6 +67,13 @@ BOOL CmdDispatch (ULONG iSvc)
             (unsigned int)getBX(), (unsigned int)getCF(),
             IsFirstCall ? 1u : 0u, IsRepeatCall ? 1u : 0u,
             base_vdm_local_observe_dos_record_state());
+    /* DIVERGENCE(MVDM-HOST-DIV-199): default-off scalar evidence for the
+     * original 54:0F ES:0/BX contract.  It observes the existing table call,
+     * does not read its buffer, and cannot alter the original provider. */
+    if (iSvc == SVC_GETINITENVIRONMENT)
+        mvdm_softpc_record_command_environment(0u, (unsigned int)getES(),
+            (unsigned int)getBX(), (unsigned int)getAX(),
+            (unsigned int)getCF());
     (apfnSVCCmd [iSvc])();
     /* DIVERGENCE(MVDM-HOST-DIV-177): state-neutral table-return attribution. */
     mvdm_softpc_record_command_call((unsigned int)iSvc, 1u,
@@ -77,6 +84,10 @@ BOOL CmdDispatch (ULONG iSvc)
             (unsigned int)getBX(), (unsigned int)getCF(),
             IsFirstCall ? 1u : 0u, IsRepeatCall ? 1u : 0u,
             base_vdm_local_observe_dos_record_state());
+    if (iSvc == SVC_GETINITENVIRONMENT)
+        mvdm_softpc_record_command_environment(1u, (unsigned int)getES(),
+            (unsigned int)getBX(), (unsigned int)getAX(),
+            (unsigned int)getCF());
 
     return TRUE;
 }

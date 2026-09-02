@@ -2,6 +2,8 @@
 
 ## Current Work
 
+**No active M/T/S packet.**
+
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 
 **Plan:** [M0 T375 pure DOS CPU40/SoftPC boot and COMMAND baseline](etc/operations/m0-t375-pure-dos-cpu40-softpc-command-baseline-001.md).
@@ -1156,30 +1158,17 @@ claim.
 
 **S3 closure:** [formal original command-delivery proof](etc/evidence/m0-t383-s3-original-command-delivery-formal-closure-001.md).
 
-### M0 T385 S1 — Active original DOS arena and machine-memory owner ledger
-
-**Active: M0 T385 S1**
+### M0 T385 — Closed original DOS arena startup recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T385 S1; ordinary mode (single-person dual-role original-owner recovery). |
-| Admission And Approval | Owner request: “先让纯dos和dos调用32位程序跑通” and later direction to defer 16-bit support. T384 established that CPU40 is downstream of an original DOS arena/SoftPC memory condition. |
-| Objective | Establish the complete original DOS `INT 21h/AH=48h` caller, `$ALLOC`, `sysinit` MCB construction, `endmem`, BIOS `BOP 12h` memory-size result and SoftPC/SAS memory-init chain; identify the one source-owned recovery cohort that prevents `54:0F` from overwriting resident COMMAND memory. |
-| Non-goals | No COMMAND provider rewrite, guest-media change, error-ignore policy, CPU opcode patch, BaseSrv repair, `cmdExec32`, DOS PSP/child return, WOW16/Win16, Redirector, CPU30, Bochs or x64 work. |
-| Reference Baseline | T383 fixed pure-DOS observation; T384 environment/resident-overwrite ledger; current formal CPU40/x86 product; immutable DOS `alloc.asm`/`msinit.asm`/`sysinit1.asm`; current SoftPC BIOS/SAS/memory startup source. |
-| Files And ABI Surface | Original DOS `rdata.asm`, `alloc.asm`, `msinit.asm`, `sysinit1.asm`, arena/MCB data and original SoftPC BIOS `memory_size`/reset and `host_sas_init`/SAS initialization chain; scalar `ES/BX/AX/CF` at the already-existing `54:0F` table boundary only. |
-| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, immutable-media, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Static source/map/caller/data-flow audit; default-off scalar observer build only if needed for the exact allocation edge. No provider or guest-media behavioral change in S1. |
-| Expected Markers | One complete original DOS-arena/SoftPC-memory owner chain and a finite S2 cohort, without replacing an allocator/MCB defect with a COMMAND or error-dialog workaround. |
-| Exit Criteria | The allocator/MCB initialization and SoftPC RAM chain have source-backed dispositions; the required `54:0F` scalar observation is either already sufficient or has a documented, default-off source-shaped insertion; S2 names exactly one complete cohort. |
-| Original Owner Request | “先让纯dos和dos调用32位程序跑通”。 |
-| Similar-Issue Sweep | BIOS `BOP 12h`, `MEMORY_VAR`, `endmem`, `arena_head`, MCB header construction, `CurrentPDB`, `$ALLOC`, free/realloc handshake, `ES:0` provider destination, SAS memory initialization, conventional-memory limit and guest-memory mapping lease. |
+| Closure | [T385 history record](history/m0-t385-original-dos-arena-startup-recovery-closure-20260902.md) |
+| Result | The allocator/SoftPC chain was valid. A large modern inherited environment would overwrite the live COMMAND transient during the original grow-and-retry route; the registered original `BX=0` fallback reaches first `54:01` and exits `0` in the fixed container. |
+| Next owner | Queue item 1: original COMMAND `cmdExec32` stage-to-return recovery. WOW16/Win16 remains deferred. |
 
 **Plan:** [M0 T385 original DOS arena startup recovery](etc/operations/m0-t385-original-dos-arena-startup-recovery-001.md).
 
-**Predecessor closure:** [T384 CPU40 illegal-operation startup recovery](history/m0-t384-cpu40-illegal-operation-startup-recovery-closure-20260902.md).
-
-**S1 baseline:** [COMMAND environment/resident-overwrite ledger](etc/evidence/m0-t384-s1-command-environment-resident-overwrite-ledger-001.md). It proves CPU40 is the downstream reporter and transfers the source-owned repair boundary to original DOS arena/SoftPC memory setup.
+**Evidence:** [T385 S1–S4 environment/transient recovery ledger](etc/evidence/m0-t385-s1-s4-command-environment-transient-recovery-001.md).
 
 ### M0 T380 — Closed COMMAND native-child runtime activation
 

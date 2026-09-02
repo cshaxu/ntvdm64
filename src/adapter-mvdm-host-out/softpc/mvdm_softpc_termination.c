@@ -444,6 +444,36 @@ void mvdm_softpc_record_command_continuation(unsigned int stage,
     }
 }
 
+void mvdm_softpc_record_command_environment(unsigned int stage,
+    unsigned int guest_es, unsigned int guest_bx, unsigned int guest_ax,
+    unsigned int guest_cf)
+{
+    char message[128];
+    int formatted;
+
+    /* Reuse the captured-and-scrubbed path: unlike the generic BOP report
+     * selector, this diagnostic can never be copied into the initial DOS
+     * environment by original cmdenv.c. */
+    if (mvdm_softpc_command_continuation_report_path[0] == '\0')
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CMD-ENV svc=0F stage=%u es=%04X bx=%04X ax=%04X cf=%u\r\n",
+        stage, guest_es & 0xffffu, guest_bx & 0xffffu,
+        guest_ax & 0xffffu, guest_cf ? 1u : 0u);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message))
+        return;
+    {
+        HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
+            FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
+            FILE_ATTRIBUTE_NORMAL, NULL);
+        DWORD written;
+        if (report == INVALID_HANDLE_VALUE)
+            return;
+        (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
+        CloseHandle(report);
+    }
+}
+
 void mvdm_softpc_record_dem_open(uint16_t guest_ds, uint16_t guest_si,
     unsigned int phase, unsigned int status, unsigned int guest_ax,
     unsigned int guest_cf)

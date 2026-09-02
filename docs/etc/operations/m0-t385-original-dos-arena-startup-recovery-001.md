@@ -2,10 +2,10 @@
 
 ## Purpose
 
-Restore the original DOS arena/MCB and SoftPC guest-memory preconditions that
-allow COMMAND to allocate a non-resident initial environment, pass it to the
-unchanged `54:0F` provider, and continue to the original first `54:01`
-command acquisition.
+Prove or restore the source-owned DOS arena/MCB and SoftPC guest-memory
+preconditions around permanent COMMAND's initial environment, then continue
+to the original first `54:01` command acquisition without transient-code
+corruption.
 
 ## Ordered subtasks
 
@@ -16,8 +16,10 @@ command acquisition.
    `54:0F` table boundary for `ES`, `BX`, `AX` and `CF`; it must not read
    command bytes or alter guest state.
 2. **S2 — Source-shaped arena/memory prerequisite recovery.** Recover the one
-   proved original DOS or SoftPC initialization prerequisite. Preserve the
-   guest allocator, COMMAND image and `cmdGetInitEnvironment` contract. A
+   proved original DOS, COMMAND or SoftPC initialization prerequisite. Preserve
+   the guest allocator and COMMAND image; a narrowly registered original
+   COMMAND fallback is permitted when source evidence proves the historical
+   grow/retry path would overwrite a still-live transient return site. A
    same-shaped SoftPC binding is permitted only after the source-recovery
    ledger rules out direct composition.
 3. **S3 — Formal x86 link and allocator contract proof.** Build only the
@@ -39,6 +41,6 @@ DOS allocator/sysinit plus original SoftPC/SAS guest-memory initialization.
 ## Completion handoff
 
 After S4 reaches the first `54:01` or identifies its next source owner without
-resident corruption, return to Queue item 1: original COMMAND `cmdExec32`
+transient corruption, return to Queue item 1: original COMMAND `cmdExec32`
 stage-to-return recovery. Only then may the project prove DOS-initiated native
 32-bit child execution.

@@ -367,7 +367,16 @@ VOID cmdGetInitEnvironment(VOID)
     }
     cchEnvBuffer =  (WORD)getBX() << 4;
     if (cchEnvBuffer < cchInitEnvironment + cbComSpec) {
-        setBX((USHORT)((cchInitEnvironment + cbComSpec + 15) >> 4));
+	/* DIVERGENCE(MVDM-HOST-DIV-200): the original provider asks COMMAND
+	 * to release and enlarge this first temporary environment block.  Its
+	 * M004 EndInit transient remains executable until the existing BOP
+	 * return site, so a modern inherited environment larger than EnvSiz can
+	 * overwrite that return site before EndInit reaches LodCom_Trap.  Take
+	 * the original COMMAND-owned BX==0 fallback instead: it preserves the
+	 * initial DOS environment and avoids corrupting guest code.  This is
+	 * limited to the unsafe first-buffer expansion; ordinary fitting
+	 * environments retain the original provider byte-for-byte behavior. */
+	setBX(0);
 	return;
     }
     else {
