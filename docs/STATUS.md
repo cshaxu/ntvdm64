@@ -1097,37 +1097,19 @@ and
 
 ## Active Packet
 
-### M0 T378 S5 — Active frozen original DOS-extender observation
+**No active M/T/S packet.**
 
-**Active: M0 T378 S5**
+### M0 T378 — Closed DOS-extender runtime closure
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T378 S5; ordinary mode (single-person dual-role fixed-observation closure). |
-| Admission And Approval | S1--S4 freeze byte-identical media, original XMS/DPMI owner cohorts and the formal CPU40 product/stage matrix. |
-| Objective | Make exactly one bounded console-owning, non-debug observation of declared immutable `DOSX.EXE`; record its first actual original source-owned result. |
-| Non-goals | No retry, changed workload/container/timeout, diagnostics, BOP repair, protected-mode fabrication, synthetic DOSX/device, guest rewrite, stage update, CPU30, Bochs, x64 guest runtime, native child, Redirector or WOW work. |
-| Reference Baseline | T378 S1--S4, current `original-softpc-process.exe`, fixed `O:\\ntvdm64` manifest and existing observer. |
-| Files And ABI Surface | Existing observer, fixed EXE and stage only; no production source/ABI change. |
-| Applicable Rules | Execution, source policy, immutable-media staging, CPU40-only, architecture, coding and documentation rules. |
-| Verification | One standard bounded observer invocation; record product/media identity, exit/timeout and first source-owned marker or earlier terminal. |
-| Expected Markers | Original CONFIG/HIMEM/DOSX/DPMI marker, normal return, or one exact earlier source-owned boundary. |
-| Asset Needs | Current formal product, current fixed stage, existing console observer and immutable DOSX command. |
-| Reporting Requirements | Retain the one command, identities and raw result; distinguish an observation from an extender compatibility claim. |
-| Stop Conditions | Any request for another run, diagnostics, changed input or source repair requires a later packet. |
-| Exit Criteria | One valid frozen observation is classified; T378 then closes with no claim beyond the selected original workload. |
-| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
-| Similar-Issue Sweep | CONFIG.NT device load, HIMEM.SYS, XMSInit, A20, UMB, INT15, DOSX guest handoff, `MS_bop_2`, `MS_bop_3`, DpmiDispatch, protected-mode frame/stack, mapping-manager boundaries and normal return. |
+| Closure | [T378 history record](history/m0-t378-dos-extender-runtime-closure-20260902.md) |
+| Result | The one frozen original `DOSX.EXE` run opened original HIMEM and DOSX through the original DEM route and returned `0`. It did not emit `MS_bop_3`/`53:xx`; no protected-mode compatibility claim is made. |
+| Transfer | The ordered next candidate remains Redirector and host-resource runtime closure. A later DPMI-client workload requires its own package. |
 
 **Plan:** [M0 T378 DOS-extender runtime closure](etc/operations/m0-t378-dos-extender-runtime-closure-001.md).
 
-**S1 closure:** [DOS-extender workload and owner admission](etc/evidence/m0-t378-s1-dos-extender-workload-owner-admission-001.md).
-
-**S2 closure:** [original XMS boot/HMA/UMB lifecycle closure](etc/evidence/m0-t378-s2-original-xms-boot-hma-umb-lifecycle-closure-001.md).
-
-**S3 closure:** [original DOSX/DPMI handoff closure](etc/evidence/m0-t378-s3-original-dosx-dpmi-handoff-closure-001.md).
-
-**S4 closure:** [formal DOS-extender workload matrix closure](etc/evidence/m0-t378-s4-formal-dos-extender-workload-matrix-001.md).
+**S1--S5 evidence:** [admission](etc/evidence/m0-t378-s1-dos-extender-workload-owner-admission-001.md), [XMS boot](etc/evidence/m0-t378-s2-original-xms-boot-hma-umb-lifecycle-closure-001.md), [DOSX/DPMI](etc/evidence/m0-t378-s3-original-dosx-dpmi-handoff-closure-001.md), [formal matrix](etc/evidence/m0-t378-s4-formal-dos-extender-workload-matrix-001.md), [frozen observation](etc/evidence/m0-t378-s5-frozen-original-dosx-observation-001.md).
 
 ### M0 T377 — Closed pure DOS device, file and graphics workload matrix
 
