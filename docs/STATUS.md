@@ -2,10 +2,29 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T372 is closed: its complete source-first
-Redirector family reconciliation and one immutable observation are recorded in
-the [T372 closure](history/m0-t372-redirector-host-resource-execution-closure-20260902.md).
-The next packet requires explicit admission from the ordered candidate queue.
+### M0 T373 S1 — Active WOW16 whole-package bootstrap topology audit
+
+**Active: M0 T373 S1**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T373 S1; ordinary mode (single-person dual-role implementation and review). |
+| Admission And Approval | Admitted from the queue's first candidate after T372 closure under the owner's standing instruction to execute the dependency-ordered queue and permanently authorized ordinary Git delivery. |
+| Objective | Establish one current source/build/ABI ledger for the complete original WOW16 bootstrap, non-fast callback and selected Win16 NE lifecycle, then select the smallest complete source-defined S2 cohort. |
+| Non-goals | No isolated WOW export activation, no source rewrite, guest mutation, synthetic NE loader/task/callback, fast WOW, CurrentMonitorTeb, CSRSS/kernel VDM, second broker, general USER/GDI recovery, CPU/device/Bochs/x64 work or runtime observation. |
+| Reference Baseline | Closed T372; `mvdm-host/wow32`, `mvdm-host/wowexec`, immutable `mvdm-guest/wow16`, prior callback frame/tier evidence, Base VDM local route and formal CPU40/x86 generator. |
+| Files And ABI Surface | Source/build manifests and evidence only: WOWEXEC, `wkman`, `wow32`, `wcall16`, task/NE lifecycle, original exports, Base VDM command records, monitor and CPU40 callback seams. |
+| Applicable Rules | Execution, source policy, source-first recovery, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and document rules. |
+| Verification | Reconcile source identity, original call/return order, build membership, current binding ownership, existing divergence registers and selected guest artifact identities; run documentation inventory/governance and `git diff --check`. No product run. |
+| Expected Markers | A complete selected-bootstrap owner ledger, explicit source/build/runtime distinction, finite S2 body cohort and explicit non-selected private/fast/UI owner dispositions. |
+| Asset Needs | Existing original WOW32/WOWEXEC mirror, selected guest files, prior callback evidence, current formal CPU40/x86 graph and source indexes only. |
+| Reporting Requirements | Preserve the distinction between original source bodies, same-shaped boundary bindings and unavailable historical product shells; do not call an existing callback foundation a completed WOW runtime. |
+| Stop Conditions | Any need to modify a WOW body, guest media, session mapping lifetime, command broker, CPU/device semantics or execute a product pauses for S2 admission. |
+| Exit Criteria | Every immediate WOW bootstrap/NE/callback edge has one owner/disposition and S2 has one minimal complete original body cohort; no trace-selected provider is selected. |
+| Original Owner Request | Continue the dependency-ordered queue in single-person dual-role mode while preserving original mirror-first recovery and avoiding trace-selected leaf patches. |
+| Similar-Issue Sweep | WOWEXEC, `GetNextVDMCommand`, `wkman`, `wcall16`, `CURRENTPTD`, task lifecycle, NE startup/return, `SETVDMSTACK`, `host_simulate`, fast WOW, BaseSrv/CSR and guest mapping lease. |
+
+**Plan:** [M0 T373 WOW16 bootstrap, callback and NE lifecycle](etc/operations/m0-t373-wow16-bootstrap-callback-ne-lifecycle-001.md).
 
 ### M0 T372 — Closed Redirector and host-resource execution
 
