@@ -984,7 +984,7 @@ child-return state or COMMAND completion.
 
 **S12 closure:** [continuation observer environment isolation](etc/evidence/m0-t358-s12-command-continuation-environment-isolation-001.md) proves capture/removal/format in the focused x86 fixture and a formal CPU40/x86 product link.
 
-### M0 T358 S13 — Active valid frozen continuation observation
+### M0 T358 S13 — Closed valid frozen continuation observation
 
 | Field | Record |
 | --- | --- |
@@ -993,10 +993,15 @@ child-return state or COMMAND completion.
 | Objective | Make exactly one fixed-root CPU40/x86 `/C EXIT` observation with the default-off continuation report captured outside original MVDM environment; classify the first source-owned successor after the two original `54:0F` returns. |
 | Non-goals | No source, guest/media, package-layout, command-record, BOP/provider, BaseSrv/CSRSS, DOS EXEC, cmdExec32, CPU/SoftPC, CPU30, Bochs, x64, WOW, Redirector or graphics change. |
 | Verification | One fixed executable, root media, command declaration, console-owning container and timeout; durable BOP/continuation report review; documentation governance and diff review. |
-| Exit Criteria | One valid run either records original `54:01` provenance or establishes an earlier source-owned boundary without diagnostic environment contamination. |
+| Exit Criteria | Closed: one valid run reached original `54:05` but not `54:01`, with no diagnostic environment contamination; it transfers the earlier control-flow boundary without attributing a cause from timeout. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 
-**Active: M0 T358 S13.**
+**S13 closure:** [valid continuation observation](etc/evidence/m0-t358-s13-valid-command-continuation-observation-001.md) records the one admissible run and its bounded, non-completion result.
+
+**M0 T358 closure:** The COMMAND built-in/batch continuation packet is closed
+as a correctly isolated observation boundary.  It makes no claim that `/C
+EXIT` completed; its valid `54:05`-before-`54:01` result transfers to the
+already queued CPU40/COMMAND initialization-control-flow recovery.
 
 
 ### M0 T355 S31 — Closed original `0x78` entry-result attribution
