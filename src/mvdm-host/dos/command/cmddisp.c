@@ -73,7 +73,8 @@ BOOL CmdDispatch (ULONG iSvc)
     if (iSvc == SVC_GETINITENVIRONMENT)
         mvdm_softpc_record_command_environment(0u, (unsigned int)getES(),
             (unsigned int)getBX(), (unsigned int)getAX(),
-            (unsigned int)getCF());
+            (unsigned int)getCF(), (unsigned int)getSS(),
+            (unsigned int)getSP());
     (apfnSVCCmd [iSvc])();
     /* DIVERGENCE(MVDM-HOST-DIV-177): state-neutral table-return attribution. */
     mvdm_softpc_record_command_call((unsigned int)iSvc, 1u,
@@ -87,7 +88,8 @@ BOOL CmdDispatch (ULONG iSvc)
     if (iSvc == SVC_GETINITENVIRONMENT)
         mvdm_softpc_record_command_environment(1u, (unsigned int)getES(),
             (unsigned int)getBX(), (unsigned int)getAX(),
-            (unsigned int)getCF());
+            (unsigned int)getCF(), (unsigned int)getSS(),
+            (unsigned int)getSP());
 
     return TRUE;
 }

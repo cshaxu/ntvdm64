@@ -4,7 +4,7 @@
 
 Can the selected immutable original `COMMAND.COM` consume the complete modern
 host environment through its original `SVC_GETINITENVIRONMENT` retry without
-overwriting still-live transient code?
+overwriting still-live transient code or disturbing its return stack?
 
 ## Fixed inputs
 
@@ -76,14 +76,22 @@ that the version mismatch itself is the sole fault, because reaching message
 data as an instruction address can also result from an earlier stack/control
 transfer failure.
 
+A second fixed-container run, with the same original provider and a
+default-off SS:SP observer, produced `0010 -> 015F` for its recorded inherited
+environment.  `SS:SP` remained `03F4:060D` at entry and return for both
+`54:0F` calls.  The required size may legitimately vary with the inherited
+environment; the source contract is the two-call required-size protocol, not
+a fixed numeric constant.
+
 ## Disposition
 
 - `MVDM-HOST-DIV-200` stays removed. Returning `BX=0` is not the original
   provider contract and cannot be the final recovery.
-- The corrected selected-source run proves that the original environment
-  provider and guest retry execute as designed for the observed 0x0161
-  paragraph request.  The former conclusion that this retry necessarily
-  overwrites `EndInit` is withdrawn.
+- The corrected selected-source runs prove that the original environment
+  provider and guest retry execute as designed for their observed required
+  paragraph requests, and that the BOP service does not alter SS:SP. The
+  former conclusion that this retry necessarily overwrites `EndInit` is
+  withdrawn.
 - No in-scope repair may modify `COMMAND.COM`, NTDOS/NTIO guest media, or
   substitute the DOS allocator.
 - `base/win32/client/vdm.c::BaseCreateVDMEnvironment` is the original
@@ -99,8 +107,9 @@ transfer failure.
 
 ## Immediate next audit
 
-Trace the original host startup path that creates the permanent COMMAND
-process environment and compare it with the local app/session launch input.
-The audit must distinguish an existing original Base/host composition policy
-from a new projection policy; it must not use a reduced environment run as
-acceptance evidence.
+Trace the original post-`EndInit` relocation/control sequence:
+`EndInit -> LodCom_Trap -> LodCom -> LodCom1`, including the DOS `ALLOC`/
+`DEALLOC` arena returns, transient copy/checksum and the first process PSP
+version/stack control transfer. The audit must distinguish a guest arena,
+CCPU string/control execution, and process/PSP precondition; it must not use
+a reduced environment run as acceptance evidence.

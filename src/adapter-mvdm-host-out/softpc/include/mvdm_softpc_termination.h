@@ -68,7 +68,7 @@ void mvdm_softpc_record_command_continuation(unsigned int stage,
  * environment before original COMMAND can copy it into guest memory. */
 void mvdm_softpc_record_command_environment(unsigned int stage,
     unsigned int guest_es, unsigned int guest_bx, unsigned int guest_ax,
-    unsigned int guest_cf);
+    unsigned int guest_cf, unsigned int guest_ss, unsigned int guest_sp);
 
 /* App captures the optional continuation-report path before original MVDM
  * reads its inherited environment, then removes that diagnostic variable.

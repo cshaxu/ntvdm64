@@ -23,10 +23,10 @@ binary.
    disposition of `MVDM-HOST-DIV-200`; do not write production code.
 2. **S2 — Original capacity-contract recovery.** Restore the original
    `cmdGetInitEnvironment` required-paragraph result and establish whether
-   the guest's own retry remains safe in the current layout. This step is
-   complete only as a negative runtime result: the original response is
-   restored, but the resulting large allocation overwrites the still-live
-   `EndInit` continuation.
+   the guest's own retry remains safe in the current layout. The corrected
+   selected-product observation proves the original `0010 -> 015F` retry
+   and its BOP stack return; the earlier `0270` overwrite claim came from a
+   stale experimental build graph and is not an admissible result.
 3. **S3 — Original DOS arena/layout precondition recovery.** Audit the
    source-owned resident resize, MCB construction, allocation strategy and
    transient relocation contract that must make the original retry safe.

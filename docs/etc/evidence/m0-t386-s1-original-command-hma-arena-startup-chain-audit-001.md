@@ -54,28 +54,29 @@ current `MVDM-HOST-DIV-200` `BX=0` fallback an admissible result?
   paragraph count when the supplied `BX` capacity is too small. The current
   mirror instead has `MVDM-HOST-DIV-200`, returning `BX=0` for exactly this
   normal retry path.
-- **Correction after the direct runtime observation:** `EndInit` is not
-  safely outside the first COMMAND environment allocation. The original
-  source deliberately overlays `EndInit` on `Pipe1` (`rdata.asm`), and the
-  map places that area in the still-live transient image. With the current
-  modern host environment, the original required-size response is `BX=0270`;
-  freeing the initial `0010`-paragraph block and reallocating at `ES=049F`
-  yields `[0x49f0, 0x70f0)`, which covers the BOP return continuation. Thus
-  the earlier inference that the retry protocol was independently safe was
-  incorrect. The original retry protocol exists, but its safety depends on
-  an arena/layout precondition that this product has not yet restored.
+- **Superseded stale-build observation:** an earlier report claimed a
+  `BX=0270` response and an `EndInit` overwrite. It was produced by an
+  ignored experimental build graph that still linked deleted environment
+  provider objects, and is not evidence for the selected product.
+- **Correct selected-product observation:** after rebuilding the formal graph
+  without those stale objects, the original two-call protocol returns
+  `BX=0010 -> 015F` at `ES=049F`. The final environment interval is
+  `[0x49f0, 0x5fe0)`. The selected map places `BadVerMsg` at physical
+  `0x6034`, outside that interval; the `54:0F` stack stays `03F4:060D` before
+  and after both calls. Therefore the later execution of `BadVerMsg` bytes is
+  not evidence that the original environment retry overwrote `EndInit` or
+  altered the BOP return stack.
 
 ## Interpretation and confidence
 
 High confidence: `MVDM-HOST-DIV-200` is not source-shaped. The original guest
 explicitly owns the required-size retry protocol, so suppressing it cannot be
-the final product behavior. The direct observation additionally proves that
-the retry alone is insufficient under the current arena/layout: it overwrites
-the still-live transient continuation before the later relocation sequence.
-This audit does **not** claim that HMA, A20, or the MCB arena is already
-runtime-proven. The next recovery must establish the original arena/layout
-precondition without changing guest bytes or silently shrinking the host
-environment.
+the final product behavior. The corrected observation proves the retry and
+BOP stack return are safe for the selected interval. This audit does **not**
+claim that HMA, A20, or the MCB arena is already runtime-proven. The remaining
+failure is a later original COMMAND control-flow/arena or CPU-execution
+precondition, which must be isolated without changing guest bytes or silently
+shrinking the host environment.
 
 ## Four-rung disposition
 
@@ -93,7 +94,7 @@ environment.
 
 ## Follow-up
 
-S2 restored the original required-size return and its direct runtime
-observation disproved the assumed arena safety. The next admitted work must
-audit and recover the original DOS arena/layout precondition, then repeat the
-formal link and immutable COMMAND built-in execution proof.
+S2 restored the original required-size return. The corrected selected-product
+observation proves its retry and BOP return stack; the next admitted work must
+audit the later original COMMAND relocation/control-flow precondition, then
+repeat the formal link and immutable COMMAND built-in execution proof.

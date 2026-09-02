@@ -446,7 +446,7 @@ void mvdm_softpc_record_command_continuation(unsigned int stage,
 
 void mvdm_softpc_record_command_environment(unsigned int stage,
     unsigned int guest_es, unsigned int guest_bx, unsigned int guest_ax,
-    unsigned int guest_cf)
+    unsigned int guest_cf, unsigned int guest_ss, unsigned int guest_sp)
 {
     char message[128];
     int formatted;
@@ -457,9 +457,10 @@ void mvdm_softpc_record_command_environment(unsigned int stage,
     if (mvdm_softpc_command_continuation_report_path[0] == '\0')
         return;
     formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-ENV svc=0F stage=%u es=%04X bx=%04X ax=%04X cf=%u\r\n",
+        "MVDM-CMD-ENV svc=0F stage=%u es=%04X bx=%04X ax=%04X cf=%u ss=%04X sp=%04X\r\n",
         stage, guest_es & 0xffffu, guest_bx & 0xffffu,
-        guest_ax & 0xffffu, guest_cf ? 1u : 0u);
+        guest_ax & 0xffffu, guest_cf ? 1u : 0u,
+        guest_ss & 0xffffu, guest_sp & 0xffffu);
     if (formatted <= 0 || (size_t)formatted >= sizeof(message))
         return;
     {
