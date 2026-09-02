@@ -570,7 +570,7 @@ trace-selected repair or guest-execution claim.
 
 **S1 closure:** [Topology audit](etc/evidence/m0-t356-s1-minimal-dos-execution-controlled-return-topology-audit-001.md) proves the source-defined split between the Base-VDM command record, guest COMMAND/NTDOS execution and non-DOS `cmdExec32`.  It selects the complete original vertical guest cohort and records no S1 runtime claim.
 
-### M0 T356 S2 — Active selected original DOS command / controlled-return recovery
+### M0 T356 S2 — Closed selected original DOS command / controlled-return recovery
 
 | Field | Record |
 | --- | --- |
@@ -590,9 +590,31 @@ trace-selected repair or guest-execution claim.
 | Original Owner Request | “准入” — execute the next queue task in single-person dual-role mode while keeping mirror changes minimal and adapter logic outside mirrors. |
 | Similar-Issue Sweep | Base VDM delivery/consume, command record capacities, `CMDINFO` layout, `$Exec`, PSP/arena/JFN/environment, DEM entry notification, redirection result, command return/re-entry, SoftPC outer return and controlled termination. |
 
+**S2 closure:** [Selected-command recovery disposition](etc/evidence/m0-t356-s2-selected-command-recovery-001.md) selects the already packaged `COMMAND.COM /C EXIT` DOS `.COM` workload.  The four-rung review found no missing source binding and introduced no shim or mirror change; code/source closure remains distinct from S3/S4 verification.
+
+### M0 T356 S3 — Active local and formal selected-cohort closure
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T356 S3; Ordinary Mode (single-person dual-role implementation). |
+| Admission And Approval | T356's approved plan admits the selected-cohort closure after S2's no-new-shim disposition. |
+| Objective | Verify the selected existing Base VDM → guest COMMAND/NTDOS contract in a focused x86 local fixture, then produce a fresh formal CPU40/x86 link containing its source owners. |
+| Non-goals | No product behavior change, integration observation, source/media alteration, BOP repair, host child execution, guest execution claim, CPU/device change, CPU30, Bochs, x64 gate, CSRSS/kernel/WOW recreation or unrelated test cleanup. |
+| Reference Baseline | S1 topology audit; S2 selected-command disposition; current formal CPU40/x86 graph and existing Base VDM fixture source. |
+| Files And ABI Surface | Existing focused Base VDM fixture/build graph and formal CPU40/x86 build graph. No production source/ABI modification is authorized by S3. |
+| Applicable Rules | Execution, source-first recovery, CPU40-only, mirror/overlay, build-output hygiene, architecture and coding rules. |
+| Verification | A fresh task-owned x86 fixture build/run for record normal/reject/capacity/wait directions; a fresh task-owned formal CPU40/x86 Ninja link; inspect selected source manifest and actual outputs. |
+| Expected Markers | Fixture prints its pass marker; formal graph selects `cmdmisc.c`, `cmdexec.c`, `demmisc.c`, Base VDM and original SoftPC composition and links the product. |
+| Asset Needs | MSVC x86, Ninja and existing selected source/media files. No runtime container is used in S3. |
+| Reporting Requirements | Report fixtures and formal link separately; neither may be presented as a successful guest execution or controlled return. |
+| Stop Conditions | A fixture needs synthetic guest CPU/PSP result, a build needs product-source changes, an unrelated compile error, or an execution observation beyond local fixture scope pauses for new admission. |
+| Exit Criteria | Fresh focused fixture and formal CPU40/x86 product link pass, their source selection is reviewed, and no unsupported runtime claim is made. |
+| Original Owner Request | “准入” — execute the next queue task in single-person dual-role mode while keeping mirror changes minimal and adapter logic outside mirrors. |
+| Similar-Issue Sweep | Base VDM record normal/reject/capacity/wait, current-directory and re-entry records, command application/tail layout, formal selected owner object set and CPU40-only profile selection. |
+
 **Plan:** [M0 T356 minimal DOS guest execution and controlled return](etc/operations/m0-t356-minimal-dos-execution-controlled-return-plan-001.md).
 
-**Active: M0 T356 S2.**
+**Active: M0 T356 S3.**
 
 | Field | Record |
 | --- | --- |
