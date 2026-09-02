@@ -176,7 +176,28 @@ T364 is closed; see its
 
 **Plan:** [M0 T365 DOS EXEC and parent return](etc/operations/m0-t365-dos-exec-and-parent-return-001.md).
 
-**Active: M0 T365 S1.**
+**S1 closure:** [DOS EXEC and parent-return owner ledger](etc/evidence/m0-t365-s1-dos-exec-parent-return-owner-ledger-001.md)
+proves that normal DOS child execution is a guest-owned `$Exec`/PSP/parent
+return route.  Its first finite host recovery cohort is the original `.COM`
+file lifecycle (`DEMOPEN`/`DEMREAD`/`DEMCLOSE`) with a bounded guest-memory
+lease; it is not an app loader or `cmdReturnExitCode` route.
+
+### M0 T365 S2 — Active original `.COM` file-lifecycle binding recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T365 S2; ordinary mode (single-person dual-role implementation). |
+| Admission And Approval | Admitted from the closed T365 S1 owner ledger under the owner’s standing ordered-queue authority. |
+| Objective | Recover the complete source-shaped low-dependency `.COM` `DEMOPEN`/`DEMREAD`/`DEMCLOSE` host file lifecycle using the existing session mapping manager and bounded guest-memory lease, without changing original guest `$Exec`/PSP/parent-return logic. |
+| Non-goals | No app loader, executable parser, guest/media mutation, MZ relocation/seek claim, native child, cmdExec32, new BOP provider, BaseSrv/CSRSS recreation, CPU/device change, CPU30, Bochs, x64 runtime, WOW, Redirector or product run. |
+| Reference Baseline | T365 S1 ledger; selected guest NTDOS `$Exec`/JFN/SFT sources; original DEM `demfile.c`/`demhndl.c`; existing session host-resource mapping manager and guest-location lease. |
+| Files And ABI Surface | Original `demOpen`, `demRead`, `demClose`, their existing same-shaped handle facade and bounded guest-location lease. Original guest `AX:BP`, SFT and CF/AX contracts remain unchanged. |
+| Verification | Source/order review; focused positive/negative local file lifecycle and lease evidence; formal CPU40/x86 link. No product run. |
+| Expected Markers | `.COM` open/read/close retains original provider/error ordering; native handles never leave the session mapping manager; guest bytes live only inside a checked synchronous lease. |
+| Stop Conditions | Need to modify guest `$Exec`, parse/load an image in app, add a BOP leaf, change CPU/device semantics, start MZ relocation, use a private mapper, retain a guest/native pointer, or run the product requires a new admission. |
+| Exit Criteria | The complete `.COM` file-lifecycle provider cohort is source-shaped, locally evidenced and formally linked, or an exact earlier source terminal is recorded. |
+
+**Active: M0 T365 S2.**
 
 ### M0 T354 S1 — Closed permanent COMMAND bootstrap owner admission
 
