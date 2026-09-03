@@ -107,6 +107,10 @@ void mvdm_softpc_record_dem_open(uint16_t guest_ds, uint16_t guest_si,
     unsigned int phase, unsigned int status, unsigned int guest_ax,
     unsigned int guest_cf);
 
+void mvdm_softpc_record_dem_create(uint16_t guest_ds, uint16_t guest_si,
+    unsigned int phase, unsigned int status, unsigned int guest_ax,
+    unsigned int guest_cf);
+
 /* Default-off original DEM read observation. It receives only already-live
  * scalar register/result values; no guest buffer, host handle or token escapes
  * the original handler. */
@@ -114,6 +118,11 @@ void mvdm_softpc_record_dem_read(uint16_t guest_ds, uint16_t guest_dx,
     uint16_t requested_bytes, uint16_t file_offset_high,
     uint16_t file_offset_low, uint16_t completed_bytes,
     unsigned int phase, unsigned int guest_ax, unsigned int guest_cf);
+
+void mvdm_softpc_record_dem_write(uint16_t guest_ds, uint16_t guest_dx,
+    uint16_t requested_bytes, uint16_t file_offset_high,
+    uint16_t file_offset_low, unsigned int phase, unsigned int guest_ax,
+    unsigned int guest_cf);
 
 /* Default-off original DEM file-pointer observation. It receives only the
  * already-live DOS scalar contract; no host handle, guest pointer or payload

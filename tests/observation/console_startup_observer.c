@@ -180,6 +180,70 @@ static BOOL capture_fault_text(HANDLE process, DWORD stack_pointer,
     return FALSE;
 }
 
+/* CreateProcess receives one command-line string, whereas this observer
+ * receives already-tokenized argv.  Re-quote every forwarded token using the
+ * Microsoft backslash/quote rule so a product option such as
+ * --command "echo marker > file" remains one option value. */
+static BOOL append_command_line_argument(char *line, size_t capacity,
+                                         size_t *length, const char *argument)
+{
+    const char *cursor;
+    BOOL quote;
+    size_t backslashes = 0u;
+
+    if (line == NULL || length == NULL || argument == NULL) return FALSE;
+    if (*length != 0u) {
+        if (*length + 1u >= capacity) return FALSE;
+        line[(*length)++] = ' ';
+    }
+    quote = argument[0] == '\0' || strpbrk(argument, " \t\"") != NULL;
+    if (!quote) {
+        size_t bytes = strlen(argument);
+        if (*length + bytes >= capacity) return FALSE;
+        memcpy(line + *length, argument, bytes + 1u);
+        *length += bytes;
+        return TRUE;
+    }
+    if (*length + 1u >= capacity) return FALSE;
+    line[(*length)++] = '\"';
+    for (cursor = argument; *cursor != '\0'; ++cursor) {
+        if (*cursor == '\\') {
+            ++backslashes;
+            continue;
+        }
+        if (*cursor == '\"') {
+            while (backslashes != 0u) {
+                if (*length + 2u >= capacity) return FALSE;
+                line[(*length)++] = '\\';
+                line[(*length)++] = '\\';
+                --backslashes;
+            }
+            if (*length + 2u >= capacity) return FALSE;
+            line[(*length)++] = '\\';
+            line[(*length)++] = '\"';
+            backslashes = 0u;
+            continue;
+        }
+        while (backslashes != 0u) {
+            if (*length + 1u >= capacity) return FALSE;
+            line[(*length)++] = '\\';
+            --backslashes;
+        }
+        if (*length + 1u >= capacity) return FALSE;
+        line[(*length)++] = *cursor;
+    }
+    while (backslashes != 0u) {
+        if (*length + 2u >= capacity) return FALSE;
+        line[(*length)++] = '\\';
+        line[(*length)++] = '\\';
+        --backslashes;
+    }
+    if (*length + 2u > capacity) return FALSE;
+    line[(*length)++] = '\"';
+    line[*length] = '\0';
+    return TRUE;
+}
+
 int main(int argc, char **argv)
 {
     STARTUPINFOA startup = { sizeof(startup) };
@@ -271,23 +335,29 @@ int main(int argc, char **argv)
     startup.hStdInput = input;
     startup.hStdOutput = output;
     startup.hStdError = output;
-    if (argc == 4) {
-        snprintf(command_line, sizeof(command_line),
-                 "\"%s\" -f -o --command EXIT", argv[1]);
-    } else {
-        size_t command_length;
+    {
+        size_t command_length = 0u;
         int argument_index;
 
-        snprintf(command_line, sizeof(command_line), "\"%s\"", argv[1]);
-        command_length = strlen(command_line);
-        for (argument_index = 4; argument_index < argc; ++argument_index) {
-            size_t argument_length = strlen(argv[argument_index]);
-            if (command_length + 1u + argument_length >= sizeof(command_line))
-                return 68;
-            command_line[command_length++] = ' ';
-            memcpy(command_line + command_length, argv[argument_index],
-                   argument_length + 1u);
-            command_length += argument_length;
+        command_line[0] = '\0';
+        if (!append_command_line_argument(command_line, sizeof(command_line),
+                                          &command_length, argv[1])) return 68;
+        if (argc == 4) {
+            if (!append_command_line_argument(command_line, sizeof(command_line),
+                                              &command_length, "-f") ||
+                !append_command_line_argument(command_line, sizeof(command_line),
+                                              &command_length, "-o") ||
+                !append_command_line_argument(command_line, sizeof(command_line),
+                                              &command_length, "--command") ||
+                !append_command_line_argument(command_line, sizeof(command_line),
+                                              &command_length, "EXIT")) return 68;
+        } else {
+            for (argument_index = 4; argument_index < argc; ++argument_index) {
+                if (!append_command_line_argument(command_line,
+                                                  sizeof(command_line),
+                                                  &command_length,
+                                                  argv[argument_index])) return 68;
+            }
         }
     }
 

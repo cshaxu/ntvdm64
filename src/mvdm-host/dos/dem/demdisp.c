@@ -167,7 +167,10 @@ PFNSVC  apfnSVC [] = {
         only its safe regular-file fast path; every declined or failed path
         returns CF=1 so unchanged DOS `$READ` falls back to SVC_DEMREAD. */
      demFastRead,               //SVC_DEMFASTREAD
-     demNotYetImplemented,	//SVC_DEMFASTWRITE
+     /* DIVERGENCE(MVDM-HOST-DIV-204): the original NT4 kernel fast-I/O
+        interceptor is unavailable in this user-mode product.  Decline so
+        unchanged NTDOS `$WRITE` takes its original SVC_DEMWRITE fallback. */
+     demFastWrite,              //SVC_DEMFASTWRITE
      demCheckPath,		//SVC_DEMCHECKPATH
      demSystemSymbolOp,		//SVC_DEMSYSTEMSYMBOLOP
      demGetDPBList,		//SVC_DEMBUILDDPBLIST

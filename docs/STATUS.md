@@ -2,37 +2,12 @@
 
 ## Current Work
 
-**Active: M0 T386 S3**
-
-## Active Packet
-
-### M0 T386 S3 — Recover the original COMMAND DOS-arena/layout precondition
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T386 S3; Ordinary Mode (single-person dual-role implementation/review). |
-| Admission And Approval | Owner rejected closure without actual original COMMAND execution, prohibits modifying `COMMAND.COM`, and explicitly requires direct use of original `BaseCreateVDMEnvironment`. S3's fresh selected-source observation proves the `015F` retry can overwrite released transient storage; the original Base prelaunch projection is now admitted as the source-owned recovery. |
-| Objective | Recover the original Base-client VDM environment projection and its current direct-entry lifecycle so immutable `COMMAND` receives the historical prelaunch environment before its own `SVC_GETINITENVIRONMENT` retry. |
-| Non-goals | No edit, rebuild, replacement or patch of guest `COMMAND.COM` or any guest image; no synthetic DOS loader/input; no arbitrary environment shortening/cap/fallback; no `cmdExec32`, external child, WOW, Redirector, CPU30, Bochs or x64-runtime work. |
-| Reference Baseline | [corrected S1 HMA/arena audit](etc/evidence/m0-t386-s1-original-command-hma-arena-startup-chain-audit-001.md); immutable selected COMMAND hash `908A77AC617C2D741F0AA1B73F73973DCF29ADC91F092E5BCB02173C8C732C43`; original OpenNT `rdata.asm` and DOS `alloc.asm`; selected CPU40/x86 product. |
-| Files And ABI Surface | Original `BaseCreateVDMEnvironment`, `BaseDestroyVDMEnvironment`, and `BaseGetEnvNameType_U` true subset; a minimal current-process install/restore binding; app startup ordering; formal build manifest and focused evidence. |
-| Applicable Rules | Execution, source policy, source-recovery audit, guest-load-only, mapping-manager, mirror/overlay, CPU40-only, architecture, coding and documentation rules. |
-| Verification | Compare original/current source; trace the source-defined resident resize, arena scan and transient relocation order; prove the selected precondition in both directions; guest artifact hash; affected formal build. |
-| Expected Markers | The selected product retains the original `ES=049F`, `BX=0010 -> required-size` retry; the second return preserves `EnvSiz`, then reaches original `54:01` continuation. Its original `LodCom_Entry` remains a valid HMA target and A20 is enabled. |
-| Asset Needs | Selected immutable DOS/COMMAND media, original source/maps, current mapping-manager diagnostic support and formal x86 manifest. |
-| Reporting Requirements | Record the source call/layout order, actual allocation intervals, original owner/adapter disposition, precise divergence, and guest identity. |
-| Stop Conditions | Any need to alter COMMAND, synthesize a replacement allocator, filter/cap environment variables, or change MCB/HMA/device semantics beyond the proven original owner pauses this S. |
-| Exit Criteria | The source owner and immediate missing precondition are proven; the smallest source-shaped recovery is implemented and tested in both directions; the guest stays immutable; formal link remains available for S4. T386 itself cannot close merely on `54:01`: it requires later immutable COMMAND built-in runtime proof. |
-| Original Owner Request | “那你重开这个任务 重做审计 这不合格 你要让command真正跑起来才能收口” and “禁止你修改command.com！”。 |
-| Similar-Issue Sweep | Original `54:0F` required-size returns, all `BX=0` uses, ES:0 mapping leases, COMMAND `EnvSiz` retry, `EndInit`/Pipe overlay, resident `SETBLOCK`, `INT 21h/48h` allocation strategy, MCB spans, transient relocation, initial process PDB creation/version, `INT 21h/30h`, `RPrint` stack return, and guest identity. |
-
-**Plan:** [M0 T386 original COMMAND runtime recovery](etc/operations/m0-t386-original-command-runtime-recovery-001.md).
-
-**S3 evidence:** [COMMAND arena/layout disposition](etc/evidence/m0-t386-s3-command-arena-layout-disposition-001.md).
-
-**S3 recovery:** [original Base VDM environment recovery](etc/evidence/m0-t386-s3-original-base-vdm-environment-recovery-001.md).
-
-**S3 continuation disposition:** [original COMMAND post-environment continuation](etc/evidence/m0-t386-s3-original-command-continuation-disposition-001.md) proves the first copied DOS record is consumed and immutable COMMAND returns original DOS code zero, but the requested file/redirection effect still lacks observable proof; S3 remains active.
+**No active M/T/S packet.** M0 T386 is closed: immutable original
+`COMMAND.COM` executed a real built-in and completed a DOS redirection write
+in the selected CPU40/x86 SoftPC product. See the
+[T386 closure](history/m0-t386-original-command-runtime-recovery-closure-20260902.md).
+The next owner admission chooses from the ordered candidate queue; current
+product work must not continue until then.
 
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 

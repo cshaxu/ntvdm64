@@ -83,3 +83,13 @@ demFastRead(VOID)
     setAX((USHORT)bytesRead);
     setCF(0);
 }
+
+/* See NTFastDOSIO in base/ntos/vdm/x86/rdwr.c.  Unlike read, this product
+ * has no admitted user-mode fast-write worker.  The original NTDOS caller
+ * explicitly retries SVC_DEMWRITE when this service returns carry, so retain
+ * that source-owned slow path instead of a false-success no-op. */
+VOID
+demFastWrite(VOID)
+{
+    setCF(1);
+}

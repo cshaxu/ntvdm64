@@ -648,6 +648,9 @@ DWORD   dwLastError;
 
     lpFileName = (LPSTR) GetVDMAddr (getDS(),getSI());
     dwAttr = (DWORD)getCX();
+    /* DIVERGENCE(MVDM-HOST-DIV-205): default-off, bounded source-path
+       observation used only to establish the original create contract. */
+    mvdm_softpc_record_dem_create(getDS(), getSI(), 0u, 0u, getAX(), getCF());
 
     if ((dwAttr & 0xff) == 0)
     dwAttr = FILE_ATTRIBUTE_NORMAL;
@@ -780,6 +783,7 @@ DWORD   dwLastError;
         setAX(handleHigh);
     }
     setCF(0);
+    mvdm_softpc_record_dem_create(getDS(), getSI(), 1u, 0u, getAX(), getCF());
     return;
 }
 

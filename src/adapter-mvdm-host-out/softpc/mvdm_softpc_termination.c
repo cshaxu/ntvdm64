@@ -762,7 +762,8 @@ void mvdm_softpc_record_command_stub_table(uint16_t guest_cs)
     }
 }
 
-void mvdm_softpc_record_dem_open(uint16_t guest_ds, uint16_t guest_si,
+static void mvdm_softpc_record_dem_path(const char *environment_name,
+    const char *record_name, uint16_t guest_ds, uint16_t guest_si,
     unsigned int phase, unsigned int status, unsigned int guest_ax,
     unsigned int guest_cf)
 {
@@ -774,7 +775,8 @@ void mvdm_softpc_record_dem_open(uint16_t guest_ds, uint16_t guest_si,
     uint32_t index;
     int formatted;
 
-    if (GetEnvironmentVariableA("MVDM_DEM_OPEN_REPORT_PATH", NULL, 0u) == 0u)
+    if (environment_name == NULL || record_name == NULL ||
+        GetEnvironmentVariableA(environment_name, NULL, 0u) == 0u)
         return;
     memset(copied, 0, sizeof(copied));
     if (!mvdm_guest_location_set_real_mode(&location, guest_ds, guest_si) ||
@@ -789,12 +791,27 @@ void mvdm_softpc_record_dem_open(uint16_t guest_ds, uint16_t guest_si,
         text[index] = '\0';
     }
     formatted = snprintf(message, sizeof(message),
-        "MVDM-DEM-OPEN phase=%u ds=%04X si=%04X status=%08X ax=%04X cf=%u path=%s\r\n",
-        phase, (unsigned int)guest_ds, (unsigned int)guest_si, status,
+        "%s phase=%u ds=%04X si=%04X status=%08X ax=%04X cf=%u path=%s\r\n",
+        record_name, phase, (unsigned int)guest_ds, (unsigned int)guest_si, status,
         guest_ax, guest_cf, text);
     if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
-    mvdm_softpc_write_optional_report("MVDM_DEM_OPEN_REPORT_PATH", message,
-        (DWORD)formatted);
+    mvdm_softpc_write_optional_report(environment_name, message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_dem_open(uint16_t guest_ds, uint16_t guest_si,
+    unsigned int phase, unsigned int status, unsigned int guest_ax,
+    unsigned int guest_cf)
+{
+    mvdm_softpc_record_dem_path("MVDM_DEM_OPEN_REPORT_PATH", "MVDM-DEM-OPEN",
+        guest_ds, guest_si, phase, status, guest_ax, guest_cf);
+}
+
+void mvdm_softpc_record_dem_create(uint16_t guest_ds, uint16_t guest_si,
+    unsigned int phase, unsigned int status, unsigned int guest_ax,
+    unsigned int guest_cf)
+{
+    mvdm_softpc_record_dem_path("MVDM_DEM_CREATE_REPORT_PATH", "MVDM-DEM-CREATE",
+        guest_ds, guest_si, phase, status, guest_ax, guest_cf);
 }
 
 void mvdm_softpc_record_dem_read(uint16_t guest_ds, uint16_t guest_dx,
@@ -815,6 +832,26 @@ void mvdm_softpc_record_dem_read(uint16_t guest_ds, uint16_t guest_dx,
         guest_ax, guest_cf);
     if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
     mvdm_softpc_write_optional_report("MVDM_DEM_READ_REPORT_PATH", message,
+        (DWORD)formatted);
+}
+
+void mvdm_softpc_record_dem_write(uint16_t guest_ds, uint16_t guest_dx,
+    uint16_t requested_bytes, uint16_t file_offset_high,
+    uint16_t file_offset_low, unsigned int phase, unsigned int guest_ax,
+    unsigned int guest_cf)
+{
+    char message[224];
+    int formatted;
+
+    if (GetEnvironmentVariableA("MVDM_DEM_WRITE_REPORT_PATH", NULL, 0u) == 0u)
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-DEM-WRITE phase=%u ds=%04X dx=%04X requested=%04X offset=%04X:%04X ax=%04X cf=%u state=copied\r\n",
+        phase, (unsigned int)guest_ds, (unsigned int)guest_dx,
+        (unsigned int)requested_bytes, (unsigned int)file_offset_high,
+        (unsigned int)file_offset_low, guest_ax, guest_cf);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
+    mvdm_softpc_write_optional_report("MVDM_DEM_WRITE_REPORT_PATH", message,
         (DWORD)formatted);
 }
 

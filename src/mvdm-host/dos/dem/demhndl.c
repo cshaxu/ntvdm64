@@ -312,6 +312,10 @@ DWORD	dwErrCode;
 
     hFile = GETHANDLE (getAX(),getBP());
     lpBuf  = (LPVOID) GetVDMAddr (getDS(),getDX());
+    /* DIVERGENCE(MVDM-HOST-DIV-205): default-off scalar-only observation;
+       it neither retains the guest buffer nor changes this write contract. */
+    mvdm_softpc_record_dem_write(getDS(), getDX(), getCX(), getBX(), getSI(),
+        0u, getAX(), getCF());
 
 
     //
@@ -387,6 +391,8 @@ writeFailureExit:
 writeSuccessExit:
     setCF(0);
     setAX((USHORT)dwBytesWritten);
+    mvdm_softpc_record_dem_write(getDS(), getDX(), getCX(), getBX(), getSI(),
+        1u, getAX(), getCF());
     return;
 }
 

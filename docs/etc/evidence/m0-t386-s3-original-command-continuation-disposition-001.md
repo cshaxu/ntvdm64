@@ -24,7 +24,7 @@ The answer is not inferred from a BOP selector alone.
   continuation after the first record, but by itself does not prove that the
   guest command had the intended observable effect.
 
-## Fixed observation
+## Superseded early observation
 
 The fresh formal `original-softpc-process.exe` was staged in the fixed
 `O:\ntvdm64` package container and invoked through the console-owning,
@@ -34,8 +34,10 @@ non-debug observer with the sole declared command:
 echo M0T386 > O:\ntvdm64\m0-t386-command-marker.txt
 ```
 
-The marker name was absent before the run and remains absent after it.  The
-durable report is
+The marker name was absent before and after that early run. This result is
+**superseded**: the observer forwarded tokenized argv by raw concatenation, so
+the multiword `--command` value was split before the product received it. The
+durable report is retained as historical evidence only:
 `artifacts/research/m0-t386-s3-command-marker.txt` and its continuation
 sidecar is `artifacts/research/m0-t386-s3-command-marker.txt.command.txt`.
 
@@ -71,6 +73,41 @@ immutable `COMMAND.COM /C` lifecycle: the copied first DOS record was consumed
 and the guest returned a zero DOS code before re-entering the original
 one-session continuation path.  It is stronger than mere `54:01` reachability,
 but it is not proof that the requested redirection reached the host file.
+
+## Corrected fixed observation and actual result
+
+The observer now re-quotes every forwarded argv item using the Windows
+`CreateProcess` command-line rule. The fixed, console-owning non-debug
+container used the same staged CPU40/x86 product and immutable guest media:
+
+```text
+--command "echo M0T386 > M0386.TXT"
+```
+
+This is an original `COMMAND.COM` built-in command. The selected immutable
+binary remains SHA-256
+`908A77AC617C2D741F0AA1B73F73973DCF29ADC91F092E5BCB02173C8C732C43`.
+The run exited zero and created `O:\\ntvdm64\\M0387.TXT`; its exact bytes are
+`M0T386 <space>\\r\\n`, which is the original COMMAND `echo` spelling used by
+this command line. The formally linked candidate was published as
+`build/output/ntvdm64-0237.exe`, SHA-256
+`1CC9DF57CFEF1296FB3512F9C391945582DEDBAA5577E4106A6AE2E21406A95D`.
+
+The final fixed-result report is
+`artifacts/research/m0-t386-s6-command-marker-83.txt` with its BOP sidecars;
+it records original `50:03` create, then `50:43` followed by `50:1E`, then
+`50:02` close. The separate default-off contract report
+`artifacts/research/m0-t386-s3-create-write.{create,write}.txt` records the
+normalized create pathname and successful 7-byte then 2-byte writes. `50:43`
+is the NT4 kernel `NTFastDOSIO` fast-write interception point. The current
+user-mode table cannot own it; returning carry selects the unchanged NTDOS
+`$WRITE` slow fallback at `50:1E`. This explains the observed original
+`demWrite` result without inventing a user-mode fast-write worker.
+
+The earlier long filename test created `M0-T386-.TXT`, not the requested long
+name, because this guest DOS path applies its original 8.3 normalization. The
+short `M0386.TXT` control avoids treating that normal guest behavior as a host
+file-service failure.
 
 ## Relative-path control
 
@@ -110,16 +147,12 @@ as a successful `echo` result.
 
 ## Disposition
 
-`BaseCreateVDMEnvironment` is a real improvement: the previous released
-transient environment retry is gone, the first `54:01` succeeds, and the
-returned nested immutable COMMAND lifecycle reports its original zero DOS
-return code.  It does not close T386.  There is still no observable proof that
-the immutable COMMAND built-in completed its intended DOS file/redirection
-operation.
+`BaseCreateVDMEnvironment` remains the source-shaped prelaunch recovery. The
+corrected observer and the `50:43 -> 50:1E` source-owned fallback now provide
+the missing observable proof: immutable COMMAND executes its built-in, the
+original DOS path creates and writes the redirection target, and the command
+then returns through the documented one-shot continuation.
 
-The next investigation must stay on the original pre-file portion of the
-post-`cmdGetNextCmd` chain: `COMMAND.COM run_cmd/DOCOM -> standard-handle /
-execution dispatch`.  Only after source and bounded evidence prove passage
-through that boundary may it investigate `DOS INT 21h -> original DEM file
-owner`.  It may not replace the guest parser, add a host command executor, or
-alter `COMMAND.COM`.
+This closes only T386's pure-DOS COMMAND built-in scope. It is not evidence of
+external `.COM`/MZ execution, host-native child execution, Redirector, or
+Win16 behavior.
