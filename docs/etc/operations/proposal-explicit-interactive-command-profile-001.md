@@ -42,13 +42,14 @@ The following are source-established conclusions, not product guesses:
   `SCS_FIRSTCOM=1`, suppresses its own copyright header, and normally requests
   declared work through `SVC_CMDGETNEXTCMD` / `BOP 54:01`.
 * A positional DOS target is delivered to that first shell through the Base VDM
-  record contract.  Its one-target product behavior is analogous to
-  `COMMAND.COM /C <target>`, but the product must not claim that the original
-  guest receives a literal `/C` command line when the source-shaped record
-  supplies equivalent launch information.
-* A declared `COMMAND.COM` target creates a second, non-first command shell.
-  It is not a recursively resubmitted bootstrap.  Subject to its original
-  flags, it prints `CopyrightMsg`; with `SCS_CMDPROMPT != 1` it follows
+  record contract as the literal source-shaped `/C <target>` command tail.
+  The first resident shell consumes `/C`; it is not passed as an argument to
+  the target executable.
+* A declared `COMMAND.COM` target is delivered as `/C command.com` to the
+  first resident shell. It creates a second, non-first command shell, and the
+  outer shell's `SingleCom` state is not inherited by that child. It is not a
+  recursively resubmitted bootstrap. Subject to its original flags, the child
+  prints `CopyrightMsg`; with `SCS_CMDPROMPT != 1` it follows
   `DoReEnter → Do16BitPrompt`, prints the guest prompt and reads DOS `CON`.
 * `NTCMDPROMPT` is an original `CONFIG.NT`/SCS setting for shell-out and TSR
   prompt disposition.  If enabled, the original child path requests the
@@ -144,11 +145,11 @@ marker alone is not sufficient.
 1. **Static original-control-flow proof.** Record the selected guest-binary
    identity and source-to-binary provenance.  Trace the first permanent
    `COMMAND.COM` through its one Base VDM record, then prove the child has
-   `SCS_FIRSTCOM != 1`, is not `SingleCom`, and has the selected
-   `SCS_CMDPROMPT` disposition.  The retained source path must show
+   `SCS_FIRSTCOM != 1`, has no inherited `SingleCom`, and has the selected
+   `SCS_CMDPROMPT` disposition. The proof must distinguish the outer literal
+   `/C command.com` record from the child process's no-`/C` argument state. The retained source path must show
    `DoReEnter → Do16BitPrompt → PRINT_PROMPT → INT 21h/AH=0Ah`; it must also
-   show the exact original `CopyrightMsg` condition and distinguish the
-   record-shaped positional launch from a literal guest `/C` switch.
+   show the exact original `CopyrightMsg` condition.
 2. **Focused local boundary proof.** With the real record layout, assert that
    exactly one initial `COMMAND.COM` target record is delivered and that no
    second record is fabricated after child completion.  Exercise the original

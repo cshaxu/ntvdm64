@@ -2,16 +2,36 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T388 is closed as a source-owned correction:
-its S7 matrix assumed that the first permanent `COMMAND.COM` would expose a
-DOS `CON` prompt. Original source instead sends that first shell through
-`54:01` / `GetNextVDMCommand`. The next candidate owns the distinct,
-explicit second-`COMMAND.COM` profile and its runtime proof.
+**Active: M0 T389 S3** — Explicit interactive COMMAND profile, fixed-container
+second-shell observation; ordinary mode (single-person dual-role implementation and review).
 
-**Latest closure:** [M0 T388 fixed interactive runtime matrix and corrected
-shell boundary](history/m0-t388-fixed-interactive-runtime-matrix-closure-20260903.md).
+## Active Packet
 
-**S7 evidence:** [fixed-container interactive COMMAND observation](etc/evidence/m0-t388-s7-interactive-fixed-container-observation-001.md).
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T389 S3; ordinary mode. |
+| Admission And Approval | Owner approved the next queue package after T388 closure: [explicit interactive COMMAND profile](etc/operations/proposal-explicit-interactive-command-profile-001.md). |
+| Objective | Run one fixed CPU40/x86 product with the S2-proven `/C command.com` record and immutable media; identify the first original owner reached after the outer shell consumes `/C`, without changing guest input or record shape. |
+| Non-goals | No guest-media change, app prompt reader, synthetic BOP record, direct guest-input injection, BaseSrv/CSRSS transport, PIF implementation, WOW or `cmdExec32` expansion. |
+| Reference Baseline | T389 S1 static child contract, T389 S2 record proof, T388 closure, selected CPU40/x86 product/media. |
+| Files And ABI Surface | Formal x86 product, fixed runtime package, bounded observer and reports only; existing Base VDM, SCS and `VDMINFO` layouts remain unchanged. |
+| Applicable Rules | Execution, source, architecture, coding, document, mapping-manager, mirror/overlay and CPU40-only rules. |
+| Verification | One bounded non-debug observation with recorded product/media identity and fixed Console/container state; classify the earliest original transition after the S2 record is consumed. |
+| Expected Markers | One Base VDM record; outer `SingleCom` execute/exit evidence; child initialization, `DoReEnter`/DOS-CON marker, or the exact earlier original owner; no host DOS line parser. |
+| Asset Needs | T389 S1/S2 evidence, current formal x86 product, immutable staged package and fixed observer. |
+| Reporting Requirements | Record exact launch command, identities, earliest marker and whether the result proves or blocks the second-shell path. |
+| Stop Conditions | Any need to alter guest media, implement host input, change Base VDM/guest structures, or expand into PIF/WOW/BaseSrv transport pauses for a new S. |
+| Exit Criteria | One fixed observation is classified with a source owner and all product/media identities; no claim of interactive completion without banner/prompt/CON evidence. |
+| Original Owner Request | “好的，准入下一个任务。” |
+| Similar-Issue Sweep | no-target, positional, `--command`, case-insensitive child token, `SCS_FIRSTCOM`, `SCS_REENTERED`, `SCS_CMDPROMPT`, `SCS_PROMPT16`, `SingleCom`, copyright/header, DOS `CON`, child exit, EOF/cancellation and terminal-on-return state. |
+
+**Predecessor:** [M0 T388 fixed interactive runtime matrix and corrected shell boundary](history/m0-t388-fixed-interactive-runtime-matrix-closure-20260903.md).
+
+**S1 closure:** [explicit COMMAND child static contract](etc/evidence/m0-t389-s1-explicit-command-child-static-contract-001.md).
+
+**S2 closure:** [explicit COMMAND record contract](etc/evidence/m0-t389-s2-explicit-command-record-contract-001.md).
+
+**S3 current observation:** [positional `command.com` fixed observation](etc/evidence/m0-t389-s3-positional-command-fixed-observation-001.md). It is a classified negative result, not S3 closure.
 
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 

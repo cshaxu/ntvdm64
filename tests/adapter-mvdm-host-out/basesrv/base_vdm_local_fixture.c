@@ -204,6 +204,42 @@ static int verify_interactive_initial_launch_record(void)
     return 0;
 }
 
+static int verify_explicit_command_child_record(void)
+{
+    static char program[] = "fixture";
+    static char command_name[] = "command.com";
+    char *argv[] = { program, command_name, NULL };
+    const char *root = "C:\\MVDM";
+    int argc = 2;
+    session instance;
+    app_launch_declaration declaration;
+
+    session_initialize(&instance, 10u);
+    app_launch_declaration_initialize(&declaration);
+    if (!app_launch_declaration_consume_options(&declaration, &argc, argv) ||
+        argc != 1 || declaration.command_declared != 1u ||
+        strcmp(declaration.requested_command, "command.com") != 0 ||
+        !session_set_mvdm_system_root(&instance, root) ||
+        !session_activate(&instance) ||
+        !app_launch_declaration_bind(&declaration, &instance) ||
+        !app_launch_declaration_publish(&declaration, &instance)) return 57;
+    /* `/C` is consumed by the first resident COMMAND.COM.  The second
+     * COMMAND.COM is its original executable child, so app must publish no
+     * second record and no special child-tail format. */
+    if (declaration.base_vdm.terminal_on_command_exhaustion != 1u ||
+        declaration.base_vdm.command_owner != BASE_VDM_COMMAND_DOS ||
+        strcmp((const char *)declaration.base_vdm.command,
+            "/C command.com\r\n") != 0 ||
+        declaration.base_vdm.command_bytes != sizeof("/C command.com\r\n")) {
+        (void)base_vdm_local_unbind(&declaration.base_vdm);
+        (void)session_dispose(&instance);
+        return 58;
+    }
+    if (!base_vdm_local_unbind(&declaration.base_vdm) ||
+        !session_dispose(&instance)) return 59;
+    return 0;
+}
+
 static int verify_explicit_softpc_and_command_options(void)
 {
     static char program[] = "fixture";
@@ -267,6 +303,8 @@ int main(void)
     launch_declaration_result = verify_empty_launch_declaration();
     if (launch_declaration_result != 0) return launch_declaration_result;
     launch_declaration_result = verify_interactive_initial_launch_record();
+    if (launch_declaration_result != 0) return launch_declaration_result;
+    launch_declaration_result = verify_explicit_command_child_record();
     if (launch_declaration_result != 0) return launch_declaration_result;
     launch_declaration_result = verify_explicit_softpc_and_command_options();
     if (launch_declaration_result != 0) return launch_declaration_result;

@@ -58,6 +58,15 @@ prepends the application name and lets `COMMAND.COM` select its interactive
 mode.  The later Console/keyboard package owns delivery of prompt input; this
 initial-record binding neither writes guest input nor changes guest media.
 
+`ntvdm.exe command.com` deliberately remains the ordinary positional form:
+the first resident `COMMAND.COM` receives `/C command.com` through the same
+Base VDM record as every other declared target. In the immutable guest, that
+outer `/C` instance owns `SingleCom`, executes the second `COMMAND.COM`, then
+exits. The second child does not inherit `/C`; it retains its original
+non-first shell-out path (`DoReEnter -> Do16BitPrompt`) and therefore owns its
+banner/prompt/DOS-CON behavior. App does not print a prompt, read a Console
+line, write guest input or resubmit the record after child exit.
+
 ## M0 T310 S3 selected backend composition
 
 `machine_shell` composes only a session which made the selected SoftPC choice
