@@ -2,28 +2,30 @@
 
 ## Current Work
 
-**Active: M0 T388 S2** — source-shaped interactive initial DOS-record binding;
-ordinary mode (single-person dual-role implementation and review).
+**Active: M0 T388 S4** — Console input through original SoftPC keyboard and
+IRQ1; ordinary mode (single-person dual-role implementation and review).
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T388 S2; ordinary mode. |
-| Admission And Approval | T388 S1 source-contract closure and the admitted ordered interactive COMMAND package. |
-| Objective | Publish an original-shaped interactive `COMMAND.COM` initial record through the existing one-session Base VDM seam, while preserving T387 positional `/C` behavior. |
-| Non-goals | No guest-media change; no prompt parser, Console pump, keyboard/IRQ, window/PIF implementation, BaseSrv/CSRSS transport, WOW, `cmdExec32` or runtime matrix. |
-| Reference Baseline | [T388 S1 startup-contract audit](etc/evidence/m0-t388-s1-original-interactive-command-startup-contract-001.md), T387 selected CLI route and existing local Base VDM broker. |
-| Files And ABI Surface | `src/app/launch_declaration.{c,h}`, its focused Base VDM fixture, and potentially the app README. Existing Base VDM/COMMAND source and guest bytes remain unchanged. |
+| Identifier Mode | M0 T388 S4; ordinary mode. |
+| Admission And Approval | T388 S3 Console-first closure and the admitted ordered interactive COMMAND package. |
+| Objective | Recover one session-owned public-Console input route through original SoftPC keyboard-controller and IRQ1 semantics, without translating input into COMMAND text or writing guest input buffers directly. |
+| Non-goals | No guest-media change; no prompt parser, synthetic BOP record, Alt+Enter, display selection, PIF fullscreen policy, BaseSrv/CSRSS transport, WOW, `cmdExec32` or runtime matrix. |
+| Reference Baseline | T388 S1--S3 evidence, selected CPU40/x86 SoftPC product, original SoftPC Console/keyboard/IRQ sources, current adapter-softpc mapping manager and session lifecycle. |
+| Files And ABI Surface | Original SoftPC Console/keyboard input callers, same-shaped adapter-softpc/session binding only where source proof requires it, `src/app` only as public Console-handle lifecycle owner, and focused source/local evidence. |
 | Applicable Rules | Execution, source, architecture, coding, document, mapping-manager, mirror/overlay and CPU40-only rules. |
-| Verification | Focused positive interactive/positional declaration tests; negative mixed/invalid declaration tests; formal x86 link when source changes; governance and diff checks. |
-| Expected Markers | An interactive record has `COMMAND.COM` application and a CR/LF/NUL tail, no terminal-on-exhaustion flag; positional command remains `/C <command>`. |
-| Asset Needs | Existing selected CPU40/x86 formal graph and immutable guest/media baseline; no new imported source. |
-| Reporting Requirements | Record exact record bytes, environment/current-directory ownership, retained failure behavior and the later Console/keyboard handoff. |
-| Stop Conditions | Need to parse prompt text, write guest memory, create a new BaseSrv protocol, modify guest media, or implement Console/IRQ behavior. Pause for a separate S. |
-| Exit Criteria | Both source-shaped initial-record forms have local positive/negative evidence; no-declared command no longer takes T387's terminal disposition; guest bytes remain unchanged. |
+| Verification | Original declaration/definition/table/caller walk; focused positive/negative input-lifecycle proof; formal x86 link when source changes; governance and diff checks. No prompt claim until S7. |
+| Expected Markers | Public Console events enter only the original SoftPC keyboard path; one original IRQ1 consequence is observable; cancellation/teardown leaves no input worker or guest pointer/HANDLE lease. |
+| Asset Needs | Existing selected CPU40/x86 graph, immutable media baseline, original Console/keyboard source, current session mapping-manager instances; no new guest source import. |
+| Reporting Requirements | Record source owner, Console handle ownership, keyboard/IRQ calling sequence, every mapping-manager lease and all deferred display/PIF behavior. |
+| Stop Conditions | Need to parse DOS lines, write COMMAND/guest input buffers directly, retain an asynchronous guest pointer/HANDLE, alter guest media, infer video from filename, or change PIF semantics. Pause for a separate S. |
+| Exit Criteria | One source-shaped input route and teardown contract are implemented with focused proof. It must not claim prompt/editing/Ctrl+C runtime success, graphics selection, or complete Console UX. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
-| Similar-Issue Sweep | `BaseCheckVDM`, `GetNextVDMCommand`, `VDMINFO`, `cmdGetNextCmd`, `cmdGetStartInfo`, `scs_init`, `srvvdm`, Console create/attach, current directory, environment and re-entry fields. |
+| Similar-Issue Sweep | `ReadConsoleInput`, `CONIN$`, keyboard controller tables, scan-code translation, `cpu_interrupt`, IRQ1/PIC delivery, stream I/O, cancellation, worker teardown, mapping-manager lease ownership and existing app window input forwarding. |
+
+**S3 closure:** [Console-first startup disposition](etc/evidence/m0-t388-s3-console-first-startup-disposition-001.md).
 
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 

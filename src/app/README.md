@@ -100,12 +100,15 @@ neither creates a DOS-device alias nor changes guest/firmware bytes.
 
 ## M0 T346 S3 presentation window
 
-`presentation_window.{c,h}` is app-owned public Win32 presentation only.  It
-creates one bounded window per prepared session, renders copied text or
-graphics snapshots, and forwards ordinary keyboard records through the
-original `CONIN$` input endpoint.  `Alt+Enter` changes this app window's
-public window style; it does not select `X86GFX`, Console Server fullscreen,
-or any original fullscreen path.
+`presentation_window.{c,h}` is an app-owned public Win32 presentation
+component. It renders copied text or graphics snapshots and forwards ordinary
+keyboard records through the original `CONIN$` input endpoint when its owning
+display-arbitration path has prepared it. It is deliberately **not** opened by
+normal product startup: original SoftPC acquires the process Console for the
+default character route. T388 S5 will admit a window only after original
+graphics/fullscreen or PIF state selects it. `Alt+Enter` changes this app
+window's public window style; it does not select `X86GFX`, Console Server
+fullscreen, or any original fullscreen path.
 
 The app never receives a source DIB pointer, `HPALETTE`, or source mutex.
 The source-facing adapter resolves the original DIB mutex through the

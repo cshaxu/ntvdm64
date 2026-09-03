@@ -1,7 +1,6 @@
 #include "app/machine_shell.h"
 #include "app/launch_declaration.h"
 #include "app/package_layout.h"
-#include "app/presentation_window.h"
 #include "adapter-mvdm-host-out/softpc/include/mvdm_command_native_child.h"
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_termination.h"
 #include "adapter-mvdm-host-out/win32/include/mvdm_base_vdm_environment.h"
@@ -93,7 +92,6 @@ int main(int argc, char **argv)
 {
     app_machine_shell shell;
     app_launch_declaration declaration;
-    app_presentation_window presentation;
     mvdm_base_vdm_environment vdm_environment;
     session owner;
     char **softpc_argv = NULL;
@@ -104,7 +102,6 @@ int main(int argc, char **argv)
     session_initialize(&owner, 1u);
     app_machine_shell_initialize(&shell);
     app_launch_declaration_initialize(&declaration);
-    app_presentation_window_initialize(&presentation);
     mvdm_base_vdm_environment_initialize(&vdm_environment);
     /* Capture default-off host diagnostics before original cmdenv.c obtains
      * inherited process variables for the guest DOS environment. */
@@ -140,18 +137,12 @@ int main(int argc, char **argv)
         result = APP_STARTUP_MACHINE_REJECTED;
         goto finish;
     }
-    /* The optional app presentation surface is opened while session is still
-     * ready so its event sink can bind without changing original SoftPC
-     * startup. Failure deliberately falls back to the existing console-only
-     * composition and never changes guest or controller state. */
-    if (app_presentation_window_prepare(&presentation, &owner) &&
-        app_presentation_window_open(&presentation)) {
-        /* The selected app-owned public window is now ready before source
-         * graphics output can invalidate its DIB. */
-    } else {
-        (void)app_presentation_window_close(&presentation);
-        (void)session_set_video_event_sink(&owner, NULL, NULL);
-    }
+    /* Original SoftPC's normal character route acquires the process Console
+     * itself (InitScreenDesc/SetupConsoleMode).  Do not pre-open the app
+     * presentation window or bind a video sink here: doing so produces a
+     * second guest-facing surface before original graphics/fullscreen or PIF
+     * state has selected one.  T388 S5 owns that later source-shaped display
+     * arbitration. */
     if (!session_activate(&owner)) {
         result = APP_STARTUP_SESSION_REJECTED;
         goto finish;
@@ -183,7 +174,6 @@ int main(int argc, char **argv)
 
 finish:
     app_launch_declaration_release_softpc_arguments(softpc_argv);
-    (void)app_presentation_window_close(&presentation);
     mvdm_base_vdm_environment_restore(&vdm_environment);
     if (!session_dispose_with_reason(&owner, &dispose_reason)) {
         app_record_dispose_failure(&owner, dispose_reason);
