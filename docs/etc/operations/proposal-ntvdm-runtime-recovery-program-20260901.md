@@ -65,6 +65,20 @@ its stated runtime proof.
    line editing, Ctrl+C and `exit` in one fixed package. Do not make every
    prompt line a `GetNextVDMCommand` record, modify `COMMAND.COM`, or recreate
    CSRSS/BaseSrv transport; cross-process delivery remains package 11.
+
+   The product display contract has one active guest surface at a time.
+   Normal character-mode DOS begins in the process Console: that Console
+   receives guest-visible output and input, while app does not pre-open a
+   presentation window. Original SoftPC graphics/fullscreen state, original
+   PIF fullscreen disposition, or explicit Alt+Enter transfers the active
+   guest surface to the app presentation window; its keyboard route then
+   becomes active and the Console is only the dormant host cursor/wait
+   surface. Returning from fullscreen restores the prior character-mode
+   Console route. App obtains these selections through original
+   SoftPC/COMMAND/PIF state and the existing machine-facing boundary, not by
+   independently guessing an executable type. Project diagnostics remain
+   default-off explicit report files or debugger output; they never share
+   guest Console output.
 3. **Pure DOS `.COM` and MZ `.EXE` execution and parent return:** original
    `$Exec`, file/JFN/SFT, PSP/arena/environment, relocation, child exit and
    COMMAND continuation using immutable low-dependency workloads.  The proof

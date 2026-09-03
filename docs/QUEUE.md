@@ -61,7 +61,7 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Next order | Candidate implementation package |
 | --- | --- |
-| 1 | Single-process interactive COMMAND console recovery — start original `COMMAND.COM` without `/C`, recover the original initial DOS record and the public-Win32 console → SoftPC keyboard/IRQ → DOS `CON` path, then prove prompt, command, editing, Ctrl+C and `exit`. It is not a cross-process BaseSrv broker and must not modify guest media. |
+| 1 | Single-process interactive COMMAND console recovery — start original `COMMAND.COM` without `/C`, recover the original initial DOS record and the public-Win32 console → SoftPC keyboard/IRQ → DOS `CON` path, then prove prompt, command, editing, Ctrl+C and `exit`. Character mode uses one Console; a presentation window is entered only for Alt+Enter, original graphics/fullscreen selection, or original PIF fullscreen selection. It is not a cross-process BaseSrv broker and must not modify guest media. |
 | 2 | Original COMMAND `cmdExec32` stage-to-return recovery — recover `54:08` worker, Base VDM re-entry, child completion and original return after pure-DOS startup is proven. |
 | 3 | WOW16 bootstrap, callback and NE lifecycle activation — prove one-process WOWEXEC command routing, callback/re-entry, task lifetime and original Win16 NE start/exit. |
 | 4 | WOW16 service, UI and host integration activation — recover selected original WOW32 providers through public APIs while retaining exact USER/CSRSS/Win32k private-boundary failures. |
