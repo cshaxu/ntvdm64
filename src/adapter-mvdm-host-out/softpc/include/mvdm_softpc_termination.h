@@ -62,6 +62,19 @@ void mvdm_softpc_record_command_continuation(unsigned int stage,
     unsigned int guest_bx, unsigned int guest_cf, unsigned int first_call,
     unsigned int repeat_call, uint32_t dos_record_state);
 
+/* Default-off, scalar-only observation of the original cmdGetNextCmd
+ * BaseClient request/result.  It distinguishes a command-record completion
+ * from a command-returned DOS error without reading command bytes, retaining
+ * a VDMINFO pointer, or changing the request. */
+void mvdm_softpc_record_command_vdm_result(unsigned int stage,
+    unsigned int error_code, unsigned int vdm_state, unsigned int succeeded,
+    unsigned int first_call, unsigned int repeat_call);
+
+/* Default-off, scalar-only observation of the original guest CMDINFO return
+ * code when COMMAND re-enters cmdGetNextCmd. */
+void mvdm_softpc_record_command_guest_return(unsigned int return_code,
+    unsigned int first_call, unsigned int repeat_call);
+
 /* Default-off, fixed-container observation of the original COMMAND
  * GetInitEnvironment table entry.  The caller supplies only already-live
  * scalar registers; the captured report path was removed from inherited host

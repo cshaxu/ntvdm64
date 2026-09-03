@@ -47,6 +47,31 @@ The sidecar records:
 54:01 stage=0 first=0 dos-state=BUSY
 ```
 
+## Follow-up scalar result observation
+
+The same fixed container was then observed with the default-off scalar-only
+observer at the existing original `cmdGetNextCmd -> GetNextVDMCommand`
+boundary.  It neither reads command text nor retains a guest/host pointer and
+does not alter the guest request or result.  The durable sidecar is
+`artifacts/research/m0-t386-s3-command-marker-vdminfo.txt.command.txt` and
+records:
+
+```text
+MVDM-CMD-CONT svc=01 stage=0 ... first=1 ... DOS TO_TAKE_A_COMMAND
+MVDM-CMD-GUEST-RETURN code=0000 first=1 repeat=0
+MVDM-CMD-VDMINFO stage=0 error=0000 state=0005 success=0 first=1 repeat=0
+MVDM-CMD-VDMINFO stage=1 error=0000 state=0000 success=1 first=1 repeat=0
+MVDM-CMD-CONT svc=01 stage=1 ... first=0 ... DOS BUSY
+MVDM-CMD-CONT svc=01 stage=0 ... first=0 ... DOS BUSY
+MVDM-CMD-GUEST-RETURN code=0000 first=0 repeat=0
+```
+
+The second `CMDINFO.ReturnCode == 0` is a source-owned result of the nested
+immutable `COMMAND.COM /C` lifecycle: the copied first DOS record was consumed
+and the guest returned a zero DOS code before re-entering the original
+one-session continuation path.  It is stronger than mere `54:01` reachability,
+but it is not proof that the requested redirection reached the host file.
+
 The product then exits zero through the already declared one-shot command
 exhaustion boundary.  The empty terminal result is deliberately not treated
 as a successful `echo` result.
@@ -54,9 +79,11 @@ as a successful `echo` result.
 ## Disposition
 
 `BaseCreateVDMEnvironment` is a real improvement: the previous released
-transient environment retry is gone and the first `54:01` succeeds.  It does
-not close T386.  There is still no observable proof that the immutable
-COMMAND built-in completed its intended DOS file/redirection operation.
+transient environment retry is gone, the first `54:01` succeeds, and the
+returned nested immutable COMMAND lifecycle reports its original zero DOS
+return code.  It does not close T386.  There is still no observable proof that
+the immutable COMMAND built-in completed its intended DOS file/redirection
+operation.
 
 The next investigation must stay on the original post-`cmdGetNextCmd` chain:
 `COMMAND.COM run_cmd/DOCOM -> DOS INT 21h -> original device or file owner`.

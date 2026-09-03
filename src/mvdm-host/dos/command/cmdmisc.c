@@ -100,6 +100,13 @@ char    AppName[MAX_PATH + 13];
     }
     pCMDInfo = &CmdInfo;
 
+    /* DIVERGENCE(MVDM-HOST-DIV-203): CMDINFO.ReturnCode is the original
+     * 16-bit guest result supplied by the prior command lifecycle.  Copy
+     * only that scalar for a default-off observer; do not inspect or alter
+     * command text, guest buffers, record ownership, or the return flow. */
+    mvdm_softpc_record_command_guest_return(FETCHWORD(pCMDInfo->ReturnCode),
+        IsFirstCall ? 1u : 0u, IsRepeatCall ? 1u : 0u);
+
     VDMInfo.ErrorCode = FETCHWORD(pCMDInfo->ReturnCode);
     VDMInfo.CmdSize = sizeof(CmdLine);
     VDMInfo.CmdLine = CmdLine;
@@ -275,10 +282,23 @@ char    AppName[MAX_PATH + 13];
     if (DosEnvCreated)
 	VDMInfo.VDMState |= ASKING_FOR_SECOND_TIME;
 
+    /* DIVERGENCE(MVDM-HOST-DIV-203): observe only the original VDMINFO
+     * scalar request/result at this existing BaseClient boundary.  The
+     * observer is default-off, retains no pointer or payload, and cannot
+     * alter COMMAND's request, record, or error direction. */
+    mvdm_softpc_record_command_vdm_result(0u, (unsigned int)VDMInfo.ErrorCode,
+        (unsigned int)VDMInfo.VDMState, 0u, IsFirstCall ? 1u : 0u,
+        IsRepeatCall ? 1u : 0u);
     if(!GetNextVDMCommand(&VDMInfo)){
+       mvdm_softpc_record_command_vdm_result(1u,
+           (unsigned int)VDMInfo.ErrorCode, (unsigned int)VDMInfo.VDMState,
+           0u, IsFirstCall ? 1u : 0u, IsRepeatCall ? 1u : 0u);
        RcErrorDialogBox(EG_ENVIRONMENT_ERR, NULL, NULL);
        TerminateVDM();
     }
+    mvdm_softpc_record_command_vdm_result(1u, (unsigned int)VDMInfo.ErrorCode,
+        (unsigned int)VDMInfo.VDMState, 1u, IsFirstCall ? 1u : 0u,
+        IsRepeatCall ? 1u : 0u);
 
 
     IsRepeatCall = FALSE;

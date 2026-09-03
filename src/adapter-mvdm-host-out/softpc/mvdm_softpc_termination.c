@@ -453,6 +453,58 @@ void mvdm_softpc_record_command_continuation(unsigned int stage,
     }
 }
 
+void mvdm_softpc_record_command_vdm_result(unsigned int stage,
+    unsigned int error_code, unsigned int vdm_state, unsigned int succeeded,
+    unsigned int first_call, unsigned int repeat_call)
+{
+    char message[176];
+    int formatted;
+
+    if (mvdm_softpc_command_continuation_report_path[0] == '\0')
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CMD-VDMINFO stage=%u error=%04X state=%04X success=%u first=%u repeat=%u\\r\\n",
+        stage, error_code & 0xffffu, vdm_state & 0xffffu, succeeded ? 1u : 0u,
+        first_call ? 1u : 0u, repeat_call ? 1u : 0u);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message))
+        return;
+    {
+        HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
+            FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
+            FILE_ATTRIBUTE_NORMAL, NULL);
+        DWORD written;
+        if (report == INVALID_HANDLE_VALUE)
+            return;
+        (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
+        CloseHandle(report);
+    }
+}
+
+void mvdm_softpc_record_command_guest_return(unsigned int return_code,
+    unsigned int first_call, unsigned int repeat_call)
+{
+    char message[144];
+    int formatted;
+
+    if (mvdm_softpc_command_continuation_report_path[0] == '\0')
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CMD-GUEST-RETURN code=%04X first=%u repeat=%u\\r\\n",
+        return_code & 0xffffu, first_call ? 1u : 0u, repeat_call ? 1u : 0u);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message))
+        return;
+    {
+        HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
+            FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
+            FILE_ATTRIBUTE_NORMAL, NULL);
+        DWORD written;
+        if (report == INVALID_HANDLE_VALUE)
+            return;
+        (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
+        CloseHandle(report);
+    }
+}
+
 void mvdm_softpc_record_command_environment_return_code(unsigned int guest_cs,
     unsigned int guest_ip)
 {
