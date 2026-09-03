@@ -105,13 +105,16 @@ its stated runtime proof.
    `CreateProcess` child lifecycle, original re-entry/event/return and
    explicit unavailable CSRSS-era branches. This remains inside one process;
    it does not create or depend on a broker.
-8. **WOW16 bootstrap, callback and Win16 NE lifecycle:** original WOWEXEC
+8. **Single-process NTVDM compatibility matrix:** selected DOS, extender,
+   Redirector and COMMAND-native-child workloads execute against their
+   recovered owner contracts; a failure reopens only its immediate original
+   owner. Win16 is deliberately absent from this first matrix because its
+   original owner packages are still queued below; their rows join the same
+   matrix only after packages 9 and 10 close.
+9. **WOW16 bootstrap, callback and Win16 NE lifecycle:** original WOWEXEC
    command route, task/callback/monitor, single-session UI and NE start/exit.
-9. **WOW16 service, UI and host integration matrix:** selected WOW32 provider
+10. **WOW16 service, UI and host integration matrix:** selected WOW32 provider
    packages through public APIs, preserving private-shell failures.
-10. **Single-process NTVDM compatibility matrix:** selected DOS, extender,
-   COMMAND-native-child and Win16 workloads execute against their recovered
-   owner contracts; a failure reopens only its immediate original owner.
 11. **Cross-process control-broker closure:** after the single-process matrix,
    recover BaseSrv-style multi-process registration, command delivery,
    notification and cleanup through public IPC only.
