@@ -47,7 +47,6 @@ void base_vdm_local_initialize(base_vdm_local *record)
     InitializeCriticalSection(&record->lock);
     record->lock_initialized = 1u;
     record->wake_event = CreateEvent(NULL, TRUE, FALSE, NULL);
-    record->reentry_event = CreateEvent(NULL, TRUE, TRUE, NULL);
 }
 
 int base_vdm_local_valid(const base_vdm_local *record)
@@ -62,7 +61,7 @@ int base_vdm_local_valid(const base_vdm_local *record)
         record->environment_bytes <= MAXIMUM_VDM_ENVIORNMENT &&
         record->current_directory_bytes <= MAX_PATH + 1u &&
         record->lock_initialized == 1u && record->wake_event != NULL &&
-        record->reentry_event != NULL && record->pending_request <= 1u &&
+        record->pending_request <= 1u &&
         record->native_child_launch_pending <= 1u &&
         record->dos_record_state <= BASE_VDM_DOS_RECORD_HAS_RETURNED_ERROR_CODE &&
         (record->current_directories_bytes == 0u ||
@@ -307,11 +306,6 @@ static void teardown(void *context)
         CloseHandle(record->wake_event);
         record->wake_event = NULL;
     }
-    if (record->reentry_event != NULL) {
-        SetEvent(record->reentry_event);
-        CloseHandle(record->reentry_event);
-        record->reentry_event = NULL;
-    }
     record->pending_request = 0u;
     record->native_child_launch_pending = 0u;
     record->owner = NULL;
@@ -362,7 +356,6 @@ BOOL base_vdm_local_dispatch(PVDMINFO information)
         if (information->VDMState == INCREMENT_REENTER_COUNT && base_vdm_current->reentry_count != UINT32_MAX) {
             base_vdm_current->native_child_launch_pending = 0u;
             ++base_vdm_current->reentry_count;
-            ResetEvent(base_vdm_current->reentry_event);
             LeaveCriticalSection(&base_vdm_current->lock);
             return TRUE;
         }
@@ -370,7 +363,7 @@ BOOL base_vdm_local_dispatch(PVDMINFO information)
             --base_vdm_current->reentry_count;
             if (base_vdm_current->reentry_count == 0u &&
                 base_vdm_current->native_child_launch_pending == 0u)
-                SetEvent(base_vdm_current->reentry_event);
+                SetEvent(base_vdm_current->wake_event);
             LeaveCriticalSection(&base_vdm_current->lock);
             return TRUE;
         }
@@ -405,16 +398,13 @@ int base_vdm_local_wait_for_command(PVDMINFO information)
 {
     session *owner = session_thread_current();
     base_vdm_local *record = base_vdm_current;
-    HANDLE wait_handles[2];
     DWORD wait_status;
     if (information == NULL || owner == NULL || !session_valid(owner) ||
         owner->state != SESSION_STATE_ACTIVE || record == NULL ||
         !base_vdm_local_valid(record) || record->owner != owner)
         return 0;
-    wait_handles[0] = record->wake_event;
-    wait_handles[1] = record->reentry_event;
-    wait_status = WaitForMultipleObjects(2u, wait_handles, FALSE, INFINITE);
-    if (wait_status != WAIT_OBJECT_0 && wait_status != WAIT_OBJECT_0 + 1u) {
+    wait_status = WaitForSingleObject(record->wake_event, INFINITE);
+    if (wait_status != WAIT_OBJECT_0) {
         SetLastError(ERROR_GEN_FAILURE);
         return 0;
     }
@@ -437,7 +427,7 @@ int base_vdm_local_native_child_begin(void)
         return 0;
     }
     record->native_child_launch_pending = 1u;
-    ResetEvent(record->reentry_event);
+    ResetEvent(record->wake_event);
     LeaveCriticalSection(&record->lock);
     return 1;
 }
@@ -451,7 +441,7 @@ void base_vdm_local_native_child_cancel(void)
         record->owner != owner) return;
     EnterCriticalSection(&record->lock);
     record->native_child_launch_pending = 0u;
-    if (record->reentry_count == 0u) SetEvent(record->reentry_event);
+    if (record->reentry_count == 0u) SetEvent(record->wake_event);
     LeaveCriticalSection(&record->lock);
 }
 

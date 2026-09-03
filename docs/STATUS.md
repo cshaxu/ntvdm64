@@ -19,11 +19,16 @@
 | Verification | Formal x86 product/media identity; bounded procedure for each matrix row; retained Console and display evidence; governance and diff checks. |
 | Expected Markers | Prompt/command observations carry product and media identity; every failure names the immediate original owner; no scenario silently changes the container. |
 | Asset Needs | Existing selected CPU40/x86 graph, immutable media baseline, fixed Console-owning launch container and report location. |
+
 | Reporting Requirements | Record executable hash, guest-media identity, launch form, bounded command procedure, Console/window state and immediate source owner of any failure. |
 | Stop Conditions | Need to alter guest media, infer execution mode from a filename, introduce a prompt parser, or vary container/debugger ownership between matrix rows. Pause for a separate S. |
 | Exit Criteria | Every planned matrix row has a reproducible observation or source-owned blocker; no unsupported result is published. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | original Console/text/graphics/fullscreen branches, PIF state, `Alt+Enter`, presentation-window lifetime, graphics buffer, focus, keyboard forwarding, Console handle ownership, session lifecycle and mapping-manager lease ownership. |
+
+**S7 current evidence:** [fixed-container interactive COMMAND observation](etc/evidence/m0-t388-s7-interactive-fixed-container-observation-001.md)
+records the source-owned split between the inherited-environment transient
+failure and the clean-environment early lifecycle exit. S7 remains active.
 
 **S3 closure:** [Console-first startup disposition](etc/evidence/m0-t388-s3-console-first-startup-disposition-001.md).
 

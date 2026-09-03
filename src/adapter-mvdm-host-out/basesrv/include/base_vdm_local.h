@@ -72,8 +72,10 @@ typedef struct base_vdm_local {
     /* Adapter-private equivalents of the original BaseSrv DOS-record lock
      * and `hWaitForVDM`.  They never enter VDMINFO, MVDM or guest state. */
     CRITICAL_SECTION lock;
+    /* DIVERGENCE(ADAPTER-BASESRV-008): this is the one local counterpart of
+     * BaseSrv's hWaitForVDM.  A published command and a re-entry transition
+     * both signal this same object, matching the original server contract. */
     HANDLE wake_event;
-    HANDLE reentry_event;
     uint32_t lock_initialized;
     uint32_t pending_request;
     uint32_t native_child_launch_pending;

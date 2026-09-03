@@ -312,11 +312,12 @@ void mvdm_softpc_record_bop_dispatch(unsigned int selector,
 {
     static const char hex[] = "0123456789ABCDEF";
     char message[] = "MVDM-BOP-DISPATCH 00:00\r\n";
-    HANDLE output;
-    DWORD written;
 
-    output = GetStdHandle(STD_ERROR_HANDLE);
-    if (output == NULL || output == INVALID_HANDLE_VALUE) return;
+    /* DIVERGENCE(ADAPTER-SOFTPC-046): this is an observer-only copy of an
+     * already-decoded original ingress.  It must never use the guest-facing
+     * Console: original COMMAND owns that surface.  The bounded report path
+     * is captured and removed before original environment processing, and an
+     * absent path makes the observation a no-op. */
     message[18] = hex[(selector >> 4) & 0x0fu];
     message[19] = hex[selector & 0x0fu];
     message[21] = hex[(service >> 4) & 0x0fu];
@@ -340,18 +341,10 @@ void mvdm_softpc_record_bop_dispatch(unsigned int selector,
         terminal_message[52] = hex[(guest_dx >> 8) & 0x0fu];
         terminal_message[53] = hex[(guest_dx >> 4) & 0x0fu];
         terminal_message[54] = hex[guest_dx & 0x0fu];
-        (void)WriteFile(output, terminal_message,
-            (DWORD)(sizeof(terminal_message) - 1), &written, NULL);
         mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
-            message, (DWORD)(sizeof(message) - 1));
+            terminal_message, (DWORD)(sizeof(terminal_message) - 1));
         return;
     }
-    (void)WriteFile(output, message, (DWORD)(sizeof(message) - 1),
-                    &written, NULL);
-    /* DIVERGENCE(MVDM-HOST-DIV-164): the original ingress observer is
-     * default-off.  A fixed-container child may request the same already
-     * decoded scalar record through its durable report, so a later console
-     * repaint cannot hide which original BOP followed a completed return. */
     mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH", message,
         (DWORD)(sizeof(message) - 1));
 }
@@ -366,11 +359,6 @@ void mvdm_softpc_record_bop_return(unsigned int selector,
     static const char hex[] = "0123456789ABCDEF";
     char message[] =
         "MVDM-BOP-RETURN 00:00 cs=0000 ip=0000 ax=0000 cf=0\r\n";
-    HANDLE output;
-    DWORD written;
-
-    output = GetStdHandle(STD_ERROR_HANDLE);
-    if (output == NULL || output == INVALID_HANDLE_VALUE) return;
     message[16] = hex[(selector >> 4) & 0x0fu];
     message[17] = hex[selector & 0x0fu];
     message[19] = hex[(service >> 4) & 0x0fu];
@@ -388,8 +376,6 @@ void mvdm_softpc_record_bop_return(unsigned int selector,
     message[43] = hex[(guest_ax >> 4) & 0x0fu];
     message[44] = hex[guest_ax & 0x0fu];
     message[49] = guest_cf ? '1' : '0';
-    (void)WriteFile(output, message, (DWORD)(sizeof(message) - 1),
-                    &written, NULL);
     mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH", message,
         (DWORD)(sizeof(message) - 1));
     if (selector == 0x54u && service == 0x0fu)
@@ -403,8 +389,6 @@ void mvdm_softpc_record_command_call(unsigned int service,
 {
     static const char hex[] = "0123456789ABCDEF";
     char message[] = "MVDM-CMD-CALL svc=00 stage=0 ax=0000 cf=0\r\n";
-    HANDLE output;
-    DWORD written;
 
     message[18] = hex[(service >> 4) & 0x0fu];
     message[19] = hex[service & 0x0fu];
@@ -414,10 +398,6 @@ void mvdm_softpc_record_command_call(unsigned int service,
     message[34] = hex[(guest_ax >> 4) & 0x0fu];
     message[35] = hex[guest_ax & 0x0fu];
     message[40] = guest_cf ? '1' : '0';
-    output = GetStdHandle(STD_ERROR_HANDLE);
-    if (output != NULL && output != INVALID_HANDLE_VALUE)
-        (void)WriteFile(output, message, (DWORD)(sizeof(message) - 1),
-                        &written, NULL);
     mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH", message,
         (DWORD)(sizeof(message) - 1));
 }
