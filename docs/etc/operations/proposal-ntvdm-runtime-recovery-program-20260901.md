@@ -73,8 +73,12 @@ its stated runtime proof.
    PIF fullscreen disposition, or explicit Alt+Enter transfers the active
    guest surface to the app presentation window; its keyboard route then
    becomes active and the Console is only the dormant host cursor/wait
-   surface. Returning from fullscreen restores the prior character-mode
-   Console route. App obtains these selections through original
+   surface. Alt+Enter from that window closes the window and restores the
+   Console route; it does not change the guest video mode or fabricate a text
+   rendering. Consequently, a graphics-only/window-only program can correctly
+   leave only the Console cursor/wait surface after that return. A program
+   whose original guest video state is text-capable resumes normal Console
+   presentation. App obtains these selections through original
    SoftPC/COMMAND/PIF state and the existing machine-facing boundary, not by
    independently guessing an executable type. Project diagnostics remain
    default-off explicit report files or debugger output; they never share
