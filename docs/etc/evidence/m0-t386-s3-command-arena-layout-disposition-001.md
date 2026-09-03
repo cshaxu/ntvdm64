@@ -68,13 +68,14 @@ paragraph buffer is rejected, the guest reallocates 0x0161 paragraphs, and
 the original provider writes its result on the second call.  No BOP resume
 failure or `EndInit` overwrite is observed in this run.
 
-The bounded run subsequently stops at `CS:03F4 IP:20F7`, whose matching
-immutable `COMMAND.map` location is `BadVerMsg` (offset `20F4`), not the
-environment payload.  That correlation identifies the next investigation as
-the source-owned DOS-version/PSP and stack-continuity chain.  It is not proof
-that the version mismatch itself is the sole fault, because reaching message
-data as an instruction address can also result from an earlier stack/control
-transfer failure.
+The bounded runs later stop in the immutable COMMAND resident address range,
+but the map offsets are link-map addresses rather than direct COM-file/runtime
+offsets. They must not be used as a direct `IP -> message-label` diagnosis
+without an explicit source/binary relocation correlation. In particular, the
+original `ConProc` version check occurs before the reached `54:0F`
+environment calls; the read-only `PDB_Version=0005` record is consistent with
+that source order, but does not independently prove every DOS interrupt
+return.
 
 A second fixed-container run, with the same original provider and a
 default-off SS:SP observer, produced `0010 -> 015F` for its recorded inherited
@@ -108,6 +109,44 @@ A20 when `ComInHMA` is nonzero; the CPU40 read-only query reports
 enabled.  The observer uses short mapping-manager read leases only; it neither
 changes the stub table, A20, CPU state nor any BOP result.
 
+## Resident-block scalar discrepancy observation
+
+A later fixed-container run records the source-owned scalar immediately after
+each original `54:0F` table return. On the first return, the immutable guest
+has `BX=0254h` and `DS:EnvSiz=0010h`, so its unchanged code correctly enters
+the free/reallocate/retry branch. On the second return, `BX` is still `0254h`,
+and `DS`, `SS`, and `SP` remain `03F4h`, `03F4h`, and `060Dh`; the BOP has not
+clobbered the guest register contract. However, the unchanged comparison word
+is then `DS:203Ch = 6570h`, rather than the `0254h` written by the original
+`mov EnvSiz,bx` before the second BOP.
+
+The follow-up selected-image observation establishes the missing identity:
+
+```text
+MVDM-CMD-ENV-DS msw=0010 selector=03F4 base=00003F40 limit=0000FFFF expected-base=00003F40
+MVDM-CMD-ARENA ds=03F4 ressize=00A2 mcb-size=00A2
+```
+
+CPU40 is in real mode and its hidden `DS` base exactly equals the mapping
+manager's `03F4h << 4`; the original COMMAND `ResSize` input and the NTDOS MCB
+result also agree.  Thus NTDOS has correctly performed the source-defined
+`SETBLOCK` request, and the large `0254h`-paragraph environment beginning at
+`049Fh` does reach the no-longer-retained `DS:203Ch` initialization scalar.
+This is not a BOP, CPU-cache, or generic NTDOS allocator failure.
+
+OpenNT does contain the expected provider-side retry protocol in
+`cmdenv.c::cmdGetInitEnvironment`: it snapshots/transforms the inherited
+environment, returns its paragraph count in `BX`, and lets immutable
+`COMMAND.COM` free/reallocate/retry.  `base/win32/client/vdm.c::BaseCreateVDMEnvironment`
+also projects the process environment before VDM creation, but it preserves the
+complete variable set while converting path values; it is not an arbitrary
+size cap.  The historical composition therefore does not supply a safe
+placement mechanism once a modern inherited environment exceeds the space the
+released initialization layout happens to leave below its live data.
+
+The original `COMMAND.COM` retry remains correct and immutable.  No allocator
+repair, environment truncation, or guest patch has been selected.
+
 ## Disposition
 
 - `MVDM-HOST-DIV-200` stays removed. Returning `BX=0` is not the original
@@ -126,17 +165,22 @@ changes the stub table, A20, CPU state nor any BOP result.
   Its source contract preserves the source environment and adds VDM drive
   state; it is not a generic environment-shortening workaround.
 - The completed `54:0F` records, resident table, resident HMA code and A20
-  state exclude the environment, BOP return stack, table-patching and
-  HMA-enable hypotheses.
+  state exclude an environment-capacity failure, BOP-return-stack change,
+  table-patching failure and HMA-enable failure as explanations for the
+  observed retry.  CPU40 real-mode binding and the original `SETBLOCK` MCB
+  result have now also been verified; the remaining issue is historical
+  initial-environment placement, not an unproven CPU or allocator defect.
   No environment projection or guest allocator substitute is admitted on the
   basis of the withdrawn observation.
 
 ## Immediate next audit
 
-Trace the original post-`EndInit` relocation/control sequence after the
-now-proven `LodCom_Trap` HMA transfer: maximum-size DOS `ALLOC`, reverse
-`rep movsb` transient copy, `DEALLOC`, resident re-allocation, checksum and
-the first command-loop handoff.  The audit must distinguish a guest arena
-return, CPU40 string/control execution and the subsequent process/PSP
-precondition; it must not use a reduced-environment run as acceptance
-evidence.
+Select a source-shaped placement design for the complete environment before
+the immutable `EndInit` retry runs.  The design must preserve the complete
+environment, leave `COMMAND.COM`/NTDOS/NTIO bytes untouched, and state which
+historical composition boundary owns any placement policy.  Only then trace
+the original relocation/control sequence: maximum-size DOS allocation, reverse
+`rep movsb` transient copy, `DEALLOC`, resident re-allocation, checksum and the
+first command-loop handoff.  It must establish an explicit
+source-to-immutable-binary address relation and must not use a reduced-
+environment run as acceptance evidence.
