@@ -171,6 +171,39 @@ static int verify_empty_launch_declaration(void)
     return 0;
 }
 
+static int verify_interactive_initial_launch_record(void)
+{
+    static char program[] = "fixture";
+    char *argv[] = { program, NULL };
+    const char *root = "C:\\MVDM";
+    const char *application = "C:\\MVDM\\system32\\COMMAND.COM";
+    int argc = 1;
+    session instance;
+    app_launch_declaration declaration;
+
+    session_initialize(&instance, 9u);
+    app_launch_declaration_initialize(&declaration);
+    if (!app_launch_declaration_consume_options(&declaration, &argc, argv) ||
+        declaration.command_declared != 0u) return 53;
+    if (!session_set_mvdm_system_root(&instance, root) ||
+        !session_activate(&instance) ||
+        !app_launch_declaration_bind(&declaration, &instance) ||
+        !app_launch_declaration_publish(&declaration, &instance)) return 54;
+    if (declaration.base_vdm.terminal_on_command_exhaustion != 0u ||
+        declaration.base_vdm.command_owner != BASE_VDM_COMMAND_DOS ||
+        declaration.base_vdm.command_bytes != 3u ||
+        memcmp(declaration.base_vdm.command, "\r\n\0", 3u) != 0 ||
+        declaration.base_vdm.application_bytes != strlen(application) + 1u ||
+        strcmp((const char *)declaration.base_vdm.application, application) != 0) {
+        (void)base_vdm_local_unbind(&declaration.base_vdm);
+        (void)session_dispose(&instance);
+        return 55;
+    }
+    if (!base_vdm_local_unbind(&declaration.base_vdm) ||
+        !session_dispose(&instance)) return 56;
+    return 0;
+}
+
 static int verify_explicit_softpc_and_command_options(void)
 {
     static char program[] = "fixture";
@@ -231,6 +264,8 @@ int main(void)
     launch_declaration_result = verify_positional_launch_declaration();
     if (launch_declaration_result != 0) return launch_declaration_result;
     launch_declaration_result = verify_empty_launch_declaration();
+    if (launch_declaration_result != 0) return launch_declaration_result;
+    launch_declaration_result = verify_interactive_initial_launch_record();
     if (launch_declaration_result != 0) return launch_declaration_result;
     launch_declaration_result = verify_explicit_softpc_and_command_options();
     if (launch_declaration_result != 0) return launch_declaration_result;

@@ -51,12 +51,12 @@ marker and otherwise exits. App supplies it once in a private forwarded argv
 vector before calling the original entry, which preserves the original parser
 and lets ordinary direct CLI launch use the historical foreground path.
 
-No declared command is not silently sent into the original host startup.
-The present local Base VDM broker has no interactive command producer, so the
-app displays a clear usage message and exits successfully.  This is an
-app-owned product limitation, not a modification of `COMMAND.COM`, NTDOS or
-SoftPC; a later interactive broker can replace this disposition without
-changing the declared-command path.
+No declared command is published as the source-shaped first COMMAND record:
+the selected `COMMAND.COM` application path plus a `CR/LF/NUL` command tail.
+This is not an app-owned empty command or parser.  Original `cmdGetNextCmd`
+prepends the application name and lets `COMMAND.COM` select its interactive
+mode.  The later Console/keyboard package owns delivery of prompt input; this
+initial-record binding neither writes guest input nor changes guest media.
 
 ## M0 T310 S3 selected backend composition
 

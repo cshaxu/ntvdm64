@@ -2,26 +2,26 @@
 
 ## Current Work
 
-**Active: M0 T388 S1** — single-process interactive COMMAND startup-contract
-audit; ordinary mode (single-person dual-role implementation and review).
+**Active: M0 T388 S2** — source-shaped interactive initial DOS-record binding;
+ordinary mode (single-person dual-role implementation and review).
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T388 S1; ordinary mode. |
-| Admission And Approval | The owner-directed queue objective and the first candidate after the closed T387 positional-command package. The detailed plan is [interactive COMMAND recovery](etc/operations/proposal-single-process-interactive-command-console-recovery-001.md). |
-| Objective | Establish the complete original initial-interactive COMMAND record contract, before any input, presentation or guest implementation. |
-| Non-goals | No guest-media change; no Console pump, keyboard/IRQ, presentation-window, PIF, BaseSrv/CSRSS, cross-process broker, WOW, `cmdExec32`, or runtime run. |
-| Reference Baseline | T387 closure; selected CPU40/x86 SoftPC product; original Base VDM and COMMAND mirrors; the existing local Base VDM binding. |
-| Files And ABI Surface | Original source and existing app/BaseVDM binding are read-only audit inputs. Expected delivery is one evidence ledger and governance updates only. |
+| Identifier Mode | M0 T388 S2; ordinary mode. |
+| Admission And Approval | T388 S1 source-contract closure and the admitted ordered interactive COMMAND package. |
+| Objective | Publish an original-shaped interactive `COMMAND.COM` initial record through the existing one-session Base VDM seam, while preserving T387 positional `/C` behavior. |
+| Non-goals | No guest-media change; no prompt parser, Console pump, keyboard/IRQ, window/PIF implementation, BaseSrv/CSRSS transport, WOW, `cmdExec32` or runtime matrix. |
+| Reference Baseline | [T388 S1 startup-contract audit](etc/evidence/m0-t388-s1-original-interactive-command-startup-contract-001.md), T387 selected CLI route and existing local Base VDM broker. |
+| Files And ABI Surface | `src/app/launch_declaration.{c,h}`, its focused Base VDM fixture, and potentially the app README. Existing Base VDM/COMMAND source and guest bytes remain unchanged. |
 | Applicable Rules | Execution, source, architecture, coding, document, mapping-manager, mirror/overlay and CPU40-only rules. |
-| Verification | Source-definition/caller/field audit, original-vs-current comparison, documentation-governance verification and `git diff --check`. |
-| Expected Markers | One source path, owner and result for every field that distinguishes interactive initial launch from `/C`; no synthetic record or implementation diff. |
-| Asset Needs | Selected `mvdm-host`, `opennt-host`, adapter/session mirrors and their OpenNT provenance; no new source import. |
-| Reporting Requirements | Record initial record, console, current-directory, environment, re-entry and failure semantics; identify the smallest S2 binding seam and all hard exclusions. |
-| Stop Conditions | A required dependency expands into private BaseSrv/CSRSS transport, guest mutation, a new product parser or a non-source-shaped provider. Pause for owner decision. |
-| Exit Criteria | A source-path/field/result ledger gives one owner and disposition to every reached initial-launch edge, identifies the S2 seam and passes governance checks. |
+| Verification | Focused positive interactive/positional declaration tests; negative mixed/invalid declaration tests; formal x86 link when source changes; governance and diff checks. |
+| Expected Markers | An interactive record has `COMMAND.COM` application and a CR/LF/NUL tail, no terminal-on-exhaustion flag; positional command remains `/C <command>`. |
+| Asset Needs | Existing selected CPU40/x86 formal graph and immutable guest/media baseline; no new imported source. |
+| Reporting Requirements | Record exact record bytes, environment/current-directory ownership, retained failure behavior and the later Console/keyboard handoff. |
+| Stop Conditions | Need to parse prompt text, write guest memory, create a new BaseSrv protocol, modify guest media, or implement Console/IRQ behavior. Pause for a separate S. |
+| Exit Criteria | Both source-shaped initial-record forms have local positive/negative evidence; no-declared command no longer takes T387's terminal disposition; guest bytes remain unchanged. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | `BaseCheckVDM`, `GetNextVDMCommand`, `VDMINFO`, `cmdGetNextCmd`, `cmdGetStartInfo`, `scs_init`, `srvvdm`, Console create/attach, current directory, environment and re-entry fields. |
 

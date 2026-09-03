@@ -39,22 +39,6 @@ static void app_report_media_root_rejected(void)
         "NTVDM64 package path too long", MB_OK | MB_ICONERROR);
 }
 
-static void app_report_no_command(void)
-{
-    /* The current Base VDM broker deliberately has no interactive command
-     * producer.  Do not enter original SoftPC with an empty record: that
-     * would look like a silent product crash rather than the present CLI
-     * capability boundary.  A declared command still follows the untouched
-     * BaseClient/COMMAND path below. */
-    MessageBoxA(NULL,
-        "NTVDM64 currently starts one DOS command per invocation.\r\n\r\n"
-        "Examples:\r\n"
-        "  ntvdm.exe dir\r\n"
-        "  ntvdm.exe program.com argument\r\n\r\n"
-        "An interactive COMMAND session is not available in this build.",
-        "NTVDM64 command required", MB_OK | MB_ICONINFORMATION);
-}
-
 static const char *app_dispose_reason_name(uint32_t reason)
 {
     switch (reason) {
@@ -151,11 +135,6 @@ int main(int argc, char **argv)
         result = APP_STARTUP_ENVIRONMENT_REJECTED;
         goto finish;
     }
-    if (declaration.command_declared == 0u) {
-        app_report_no_command();
-        result = 0;
-        goto finish;
-    }
     if (!app_machine_shell_select_backend(&owner,
             SESSION_MACHINE_BACKEND_NONE)) {
         result = APP_STARTUP_MACHINE_REJECTED;
@@ -185,8 +164,7 @@ int main(int argc, char **argv)
         result = APP_STARTUP_DECLARATION_REJECTED;
         goto finish;
     }
-    if (declaration.command_declared != 0u &&
-        !app_launch_declaration_publish(&declaration, &owner)) {
+    if (!app_launch_declaration_publish(&declaration, &owner)) {
         result = APP_STARTUP_COMMAND_REJECTED;
         goto finish;
     }

@@ -197,8 +197,7 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     size_t directory_length;
     unsigned char drive_letter;
 
-    if (declaration == NULL || declaration->bound == 0u ||
-        declaration->command_declared == 0u || owner == NULL ||
+    if (declaration == NULL || declaration->bound == 0u || owner == NULL ||
         !session_valid(owner) || owner->state != SESSION_STATE_ACTIVE ||
         declaration->base_vdm.available != 0u) return 0;
     root = session_mvdm_system_root(owner);
@@ -207,12 +206,13 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     if (drive_letter < 'A' || drive_letter > 'Z') return 0;
     if (!make_path(declaration->application, sizeof(declaration->application),
             root, "system32\\COMMAND.COM") ||
+        (declaration->command_declared != 0u &&
+         (!append_text(declaration->command, sizeof(declaration->command),
+             &command_length, "/C ") ||
+          !append_text(declaration->command, sizeof(declaration->command),
+             &command_length, declaration->requested_command))) ||
         !append_text(declaration->command, sizeof(declaration->command),
-        &command_length, "/C ") ||
-        !append_text(declaration->command, sizeof(declaration->command),
-        &command_length, declaration->requested_command) ||
-        !append_text(declaration->command, sizeof(declaration->command),
-        &command_length, "\r\n") ||
+            &command_length, "\r\n") ||
         !append_text(declaration->environment, sizeof(declaration->environment),
             &environment_length, "COMSPEC=") ||
         !append_text(declaration->environment, sizeof(declaration->environment),
