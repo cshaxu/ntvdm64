@@ -25,12 +25,14 @@ marker before offering `ver`.
 * `MVDM-BASEVDM state=0104 available=1` followed by
   `state=0000 available=0` proves that the one DOS BaseVDM record was
   requested and consumed.
-* The original configuration path copied `00` to guest linear address
-  `914E6` (`MVDM-SAS-STORE ordinal=1 ... value=00000000`).  This is the
-  observed `SCS_CMDPROMPT` query result: the staged `CONFIG.NT` contains only
-  the commented `NTCMDPROMPT` documentation, and the original guest default
-  remains the 16-bit `COMMAND.COM` shell-out disposition.  The observation
-  therefore did not legitimately select the 32-bit COMSPEC branch.
+* The staged `CONFIG.NT` contains only the commented `NTCMDPROMPT`
+  documentation, so the selected media does not request the 32-bit COMSPEC
+  disposition.  The original guest default is `SCS_CMDPROMPT == 0`.
+  The retained `MVDM-SAS-STORE ... linear=914E6 value=00000000` marker is
+  deliberately **not** used as a runtime `SCS_CMDPROMPT` proof: the prior
+  fixed-image mapping identifies that address as the `commnd` startup-command
+  buffer.  A future runtime claim about the SCS flag must observe its actual
+  source-defined storage or result contract.
 * The original command path reached `54:01`, then original keyboard-layout
   (`54:0E`) and current-directory (`54:04`) service boundaries. The selected
   package also opened the immutable `system32\COMMAND.COM` more than once.
@@ -41,11 +43,12 @@ marker before offering `ver`.
 
 This proves neither the second child shell nor its banner/prompt. It does
 prove that the S2 literal `/C command.com` record reaches and passes the
-original BaseVDM handoff, and that `SCS_CMDPROMPT` is not diverting the child
-to COMSPEC; an app-level no-`/C` record exception is not the missing
-capability. The next repair investigation must begin in the original
-post-`54:01` COMMAND/SoftPC startup and child-EXEC chain before `DoReEnter`,
-not by adding a host command reader or changing guest media.
+original BaseVDM handoff; an app-level no-`/C` record exception is not the
+missing capability. The static media selects the normal 16-bit shell-out
+default, but this observation does not independently prove the runtime SCS
+flag. The next repair investigation must begin in the original post-`54:01`
+COMMAND/SoftPC startup and child-EXEC chain before `DoReEnter`, not by adding
+a host command reader or changing guest media.
 
 ## Exact retained reports
 
