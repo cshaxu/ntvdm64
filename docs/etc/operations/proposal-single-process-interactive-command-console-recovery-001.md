@@ -82,14 +82,18 @@ pollute it.
 
 ### S4 — Console input through SoftPC keyboard and IRQ1
 
-Implement one session-owned public-Console input pump.  Route key events by
-the original SoftPC keyboard-controller/interface and IRQ1 path, using the
-session mapping manager only where a host identity crosses an ABI.  Do not
-retain guest pointers or native handles in asynchronous state.
+Recover and verify the original SoftPC public-Console event worker, which
+already owns `ReadConsoleInput`-style acquisition, scan-code conversion,
+keyboard-controller insertion and IRQ1 delivery.  Its worker must carry a
+bounded session binding and must be alertable and joined during teardown.
+`app` must not create a second input pump, parse DOS lines, synthesize BOP
+records or write guest input buffers.  Use the session mapping manager only
+where an identity actually crosses a guest or original-ABI boundary; a
+process-local Console worker HANDLE is not a guest handle.
 
-Exit: focused checks cover ordinary keys, Enter, Backspace, Ctrl+C, repeats,
-cancellation and teardown; the app contains no DOS-line parsing or direct
-guest-buffer write.
+Exit: source and focused checks cover ordinary keys, Enter, Backspace, Ctrl+C,
+repeats, alertable cancellation and joined teardown; the app contains no
+DOS-line parsing, direct guest-buffer write or parallel input pump.
 
 ### S5 — Display-backend arbitration
 
