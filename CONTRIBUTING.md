@@ -42,3 +42,9 @@ The root CMake catalogue has been removed; it is not a supported configuration e
 Do not invoke a compiler from the repository root without an explicit output
 path under `build/<task-id>/<run-id>/`; do not use `artifacts/` as a temporary build
 directory.
+
+After a product EXE has passed its admitted architecture-specific verification
+and makes a recorded improvement over the preceding published candidate, copy
+that tested x86 or x64 EXE and its required runnable package inputs to
+`build/output/` for owner testing. Record any known limitation beside it; do
+not publish an unverified candidate or one with a clear regression.

@@ -22,7 +22,8 @@ carriers:
 - `base/win32/client/vdm.c` and `basedll.h`; and
 - `base/win32/inc/base.h`, `basevdm.h`, and `basemsg.h`.
 
-Every file above is byte-identical to its canonical selected OpenNT source.
+Every file above is byte-identical to its canonical selected OpenNT source
+except registered true subsets required by a selected formal runtime.
 The source selection, rejected OpenNT-4.5 `vdm.c` candidate and initial
 interface dispositions are recorded in
 [`m0-t291-s5-p2-basesrv-source-package-audit-001.md`](../../docs/etc/evidence/m0-t291-s5-p2-basesrv-source-package-audit-001.md)
@@ -83,3 +84,4 @@ admitted merely to make the larger historical API product shell link.
 | OPENNT-HOST-011 | `ntrtl.h` declares `RtlOemToUnicodeN`, reached by original SoftPC keyboard conversion. | The selected true subset omitted this fixed-buffer OEM-to-Unicode form although the original `nt_keycd.c` includes and calls it. | Restore only the original declaration shape; the public Win32 implementation remains adapter-owned. | `public/sdk/inc/ntrtl.h`; `../mvdm-host/softpc.new/host/src/nt_keycd.c` |
 | OPENNT-HOST-012 | `ntrtl.h` declares OEM conversion forms reached by original NetLib `copystr.c`. | The admitted true subset omitted the fixed-buffer conversion and size contracts although the selected original Redirector dependency includes them. | Restore only the original signatures; the selected x86 NTDLL/import-library binding is verified as part of the Redirector network closure. | `public/sdk/inc/ntrtl.h`; `netapi/netlib/copystr.c` |
 | OPENNT-HOST-013 | `netapi/api/apibuff.c` provides historical public and internal NetAPI buffer entry points. | The selected Redirector NetLib closure reaches only its `NetapipBufferAllocate` compatibility forwarder; importing the other functions falsely pulls an RPC/MIDL product shell. | Preserve the original function unchanged as a source-identified true subset and call the public modern `NetApiBufferAllocate` contract. | `netapi/api/apibuff.c`; `netapi/netlib/allocstr.c` |
+| OPENNT-HOST-014 | `base/win32/client/vdm.c` supplies `BaseCreateVDMEnvironment`, `BaseDestroyVDMEnvironment`, and `BaseGetEnvNameType_U` before original Base creates an NTVDM child. | The full source file pulls the excluded Base/CSR process-creation product shell, while the selected CLI needs this exact environment projection before its direct SoftPC entry. | Preserve the three original bodies as a source-identified true subset. The only local declaration/tag bindings retain source-facing behavior through the existing adapter RTL; the separate adapter owns current-process installation and restoration. | `base/win32/client/vdm.c`; `../adapter-mvdm-host-out/win32/source/mvdm_base_vdm_environment.c` |

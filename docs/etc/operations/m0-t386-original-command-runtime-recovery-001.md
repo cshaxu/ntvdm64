@@ -30,9 +30,10 @@ binary.
 3. **S3 — Original DOS arena/layout precondition recovery.** Audit the
    source-owned resident resize, MCB construction, allocation strategy and
    transient relocation contract that must make the original retry safe.
-   Recover only the earliest proven owner through an original body,
-   same-shaped binding, or registered minimal overlay. Do not shrink or
-   replace the host environment, and do not alter guest bytes.
+   Recover the original Base-client `BaseCreateVDMEnvironment` projection as
+   the earliest proven owner, with only a same-shaped direct-entry lifecycle
+   binding. Do not filter, cap, replace or otherwise shorten variables, and
+   do not alter guest bytes.
 4. **S4 — Formal CPU40/x86 closure.** Link the affected formal product and
    prove the repaired precondition, both valid and failure directions, with
    focused source-shaped checks. Verify no guest source/artifact hash changed

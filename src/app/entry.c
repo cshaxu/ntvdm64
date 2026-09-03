@@ -4,6 +4,7 @@
 #include "app/presentation_window.h"
 #include "adapter-mvdm-host-out/softpc/include/mvdm_command_native_child.h"
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_termination.h"
+#include "adapter-mvdm-host-out/win32/include/mvdm_base_vdm_environment.h"
 
 #include <stdio.h>
 #include <windows.h>
@@ -23,7 +24,8 @@ enum app_startup_status {
     APP_STARTUP_COMMAND_REJECTED = 69,
     APP_STARTUP_SHELL_REJECTED = 70,
     APP_STARTUP_MACHINE_FAILURE = 71,
-    APP_STARTUP_DISPOSE_FAILURE = 72
+    APP_STARTUP_DISPOSE_FAILURE = 72,
+    APP_STARTUP_ENVIRONMENT_REJECTED = 73
 };
 
 static void app_report_media_root_rejected(void)
@@ -92,6 +94,7 @@ int main(int argc, char **argv)
     app_machine_shell shell;
     app_launch_declaration declaration;
     app_presentation_window presentation;
+    mvdm_base_vdm_environment vdm_environment;
     session owner;
     uint32_t dispose_reason;
     int result = 1;
@@ -100,6 +103,7 @@ int main(int argc, char **argv)
     app_machine_shell_initialize(&shell);
     app_launch_declaration_initialize(&declaration);
     app_presentation_window_initialize(&presentation);
+    mvdm_base_vdm_environment_initialize(&vdm_environment);
     /* Capture default-off host diagnostics before original cmdenv.c obtains
      * inherited process variables for the guest DOS environment. */
     mvdm_softpc_capture_command_continuation_report_path();
@@ -115,6 +119,13 @@ int main(int argc, char **argv)
     if (!app_package_layout_validate_command_configuration_root(&owner)) {
         app_report_media_root_rejected();
         result = APP_STARTUP_MEDIA_REJECTED;
+        goto finish;
+    }
+    /* Original BaseCheckVDM supplies this exact BaseCreateVDMEnvironment
+     * result to its new NTVDM child.  The selected direct-entry composition
+     * installs it before any original MVDM host code reads its environment. */
+    if (!mvdm_base_vdm_environment_prepare(&vdm_environment)) {
+        result = APP_STARTUP_ENVIRONMENT_REJECTED;
         goto finish;
     }
     if (!app_machine_shell_select_backend(&owner,
@@ -166,6 +177,7 @@ int main(int argc, char **argv)
 
 finish:
     (void)app_presentation_window_close(&presentation);
+    mvdm_base_vdm_environment_restore(&vdm_environment);
     if (!session_dispose_with_reason(&owner, &dispose_reason)) {
         app_record_dispose_failure(&owner, dispose_reason);
         return APP_STARTUP_DISPOSE_FAILURE;

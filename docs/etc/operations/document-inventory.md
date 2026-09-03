@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3960 |
+| Documentation records | 3963 |
 | --- | --- |
-| Generated UTC | 2026-09-02T20:43:50Z |
+| Generated UTC | 2026-09-03T02:20:35Z |
 
 ## Entries
 
@@ -1109,6 +1109,9 @@ content-divergent entries.
 | etc/evidence/m0-t383-s4-fixed-pure-dos-startup-observation-001.md | indexed supporting material | 741f46d5a06533982fe7deff2c1c321d606c5a7b93978cc3065c74588e006701 |
 | etc/evidence/m0-t384-s1-command-environment-resident-overwrite-ledger-001.md | indexed supporting material | 7c0ed4645ef230c35401cc823df267700fff3239af5d641a0e43b4fa38aecb91 |
 | etc/evidence/m0-t385-s1-s4-command-environment-transient-recovery-001.md | indexed supporting material | d25bcdf43b0383101ec8702d422921bfddeaeea8b9dbe3f208f66c4c18ac48ae |
+| etc/evidence/m0-t386-s1-original-command-hma-arena-startup-chain-audit-001.md | indexed supporting material | 9da70ada989bbe7832fdd30bf2a943a30f8b18c770c09325dc1564e2f4f7005e |
+| etc/evidence/m0-t386-s3-command-arena-layout-disposition-001.md | indexed supporting material | e5987e1b18b6c20808fed9a1ceb0bb229dac3de61b4003218c82f51c8b3d92fc |
+| etc/evidence/m0-t386-s3-original-base-vdm-environment-recovery-001.md | indexed supporting material | 8924d0d2c2a4f57d4fcc6078aa5d1cf3226a3c41522dad16d397099bd91e7ad7 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -1877,7 +1880,7 @@ content-divergent entries.
 | etc/operations/m0-t383-original-command-startup-delivery-recovery-001.md | indexed supporting material | d807fe66e054b4423ea423e4e41899c9a81f452956d19027ef4a5a91177fc712 |
 | etc/operations/m0-t384-cpu40-illegal-operation-startup-recovery-001.md | indexed supporting material | 24d8b800d9cb10298c86014871ab63c6743d24e915a18efc37106911db7d1110 |
 | etc/operations/m0-t385-original-dos-arena-startup-recovery-001.md | indexed supporting material | 2f8620631f67a073eace44e266ff3e2b28dd359926795edd7dd8f2cb71f2e1fb |
-| etc/operations/m0-t386-original-command-runtime-recovery-001.md | indexed supporting material | 08fe6d108644ef6c4411820dd1ac3b0d61bf8d6133076ce9c05822f2964820aa |
+| etc/operations/m0-t386-original-command-runtime-recovery-001.md | indexed supporting material | f287e520c3f9fc91d8fdc1bc224ca5d70a2bd59695d06ce69027cc854f902932 |
 | etc/operations/m0-t95-subtask-plan.md | indexed supporting material | 189158d2ea7422b53a6dabdc7369420ded6f08156fd7d4338f800426ff28c850 |
 | etc/operations/m0-t96-subtask-plan.md | indexed supporting material | 2ace68d92afb0a94b7691a52b7f5f61f42889e5b7cdb0809655f577e0cf70803 |
 | etc/operations/m0-t97-subtask-plan.md | indexed supporting material | 0e7b90d42255a110fe89df9a3cb3ff8814ed756de62e6270e658e040eb07f754 |
@@ -3974,7 +3977,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
 | source-policy.md | retained pre-governance evidence | 93c81b69d96400107aa018e39f8c53b34a9fe4f0758a013dcbda2e4f617f9b27 |
-| STATUS.md | principal control document | 6a200a4c3c68fcb0dc76b7deb6282b5b393faf15a8b55fc2e2fd38779e7ca774 |
+| STATUS.md | principal control document | a6fa593b60277f194bda3b8a1806f4f9f99857c2df419f3cb89074d2086ce064 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
