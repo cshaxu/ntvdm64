@@ -61,12 +61,13 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Next order | Candidate implementation package |
 | --- | --- |
-| 1 | Original COMMAND `cmdExec32` stage-to-return recovery — recover `54:08` worker, Base VDM re-entry, child completion and original return after pure-DOS startup is proven. |
-| 2 | WOW16 bootstrap, callback and NE lifecycle activation — prove one-process WOWEXEC command routing, callback/re-entry, task lifetime and original Win16 NE start/exit. |
-| 3 | WOW16 service, UI and host integration activation — recover selected original WOW32 providers through public APIs while retaining exact USER/CSRSS/Win32k private-boundary failures. |
-| 4 | Single-process NTVDM compatibility matrix — run selected DOS, extender, Redirector, COMMAND-native-child and Win16 workloads against the completed original-owner contracts; reopen only the immediate original owner proven by a failure. |
-| 5 | Cross-process broker closure — recover only required BaseSrv-style registration, command-queue, notification and disconnect-cleanup semantics through public IPC. It cannot own guest, COMMAND, SoftPC or WOW behavior. |
-| 6 | Multi-process matrix, x64 compatibility and product release — prove the brokered multi-process profile, paired x86/x64 behavior where runnable, portable media layout and release packaging. |
+| 1 | Single-process interactive COMMAND console recovery — start original `COMMAND.COM` without `/C`, recover the original initial DOS record and the public-Win32 console → SoftPC keyboard/IRQ → DOS `CON` path, then prove prompt, command, editing, Ctrl+C and `exit`. It is not a cross-process BaseSrv broker and must not modify guest media. |
+| 2 | Original COMMAND `cmdExec32` stage-to-return recovery — recover `54:08` worker, Base VDM re-entry, child completion and original return after pure-DOS startup is proven. |
+| 3 | WOW16 bootstrap, callback and NE lifecycle activation — prove one-process WOWEXEC command routing, callback/re-entry, task lifetime and original Win16 NE start/exit. |
+| 4 | WOW16 service, UI and host integration activation — recover selected original WOW32 providers through public APIs while retaining exact USER/CSRSS/Win32k private-boundary failures. |
+| 5 | Single-process NTVDM compatibility matrix — run selected DOS, extender, Redirector, COMMAND-native-child and Win16 workloads against the completed original-owner contracts; reopen only the immediate original owner proven by a failure. |
+| 6 | Cross-process broker closure — recover only required BaseSrv-style registration, command-queue, notification and disconnect-cleanup semantics through public IPC. It cannot own guest, COMMAND, SoftPC or WOW behavior. |
+| 7 | Multi-process matrix, x64 compatibility and product release — prove the brokered multi-process profile, paired x86/x64 behavior where runnable, portable media layout and release packaging. |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

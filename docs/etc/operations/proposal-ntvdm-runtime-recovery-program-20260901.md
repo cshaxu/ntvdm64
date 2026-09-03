@@ -56,38 +56,47 @@ its stated runtime proof.
    only the first complete original host/device/console/timer owner that
    prevents it.  Prove a declared original COMMAND built-in completes; do not
    synthesize guest input, a DOS loader or a machine result.
-2. **Pure DOS `.COM` and MZ `.EXE` execution and parent return:** original
+2. **Single-process interactive COMMAND console:** recover original
+   interactive `COMMAND.COM` bootstrap without `/C`, not an app command
+   parser. Preserve the original Base VDM `VDMINFO` initial-DOS-record and
+   `cmdGetNextCmd`/`cmdGetStartInfo` distinction between existing and new
+   console. Then recover the public-Win32 console-input to original SoftPC
+   keyboard-controller/IRQ and guest DOS `CON` path. Prove one prompt, `dir`,
+   line editing, Ctrl+C and `exit` in one fixed package. Do not make every
+   prompt line a `GetNextVDMCommand` record, modify `COMMAND.COM`, or recreate
+   CSRSS/BaseSrv transport; cross-process delivery remains package 11.
+3. **Pure DOS `.COM` and MZ `.EXE` execution and parent return:** original
    `$Exec`, file/JFN/SFT, PSP/arena/environment, relocation, child exit and
    COMMAND continuation using immutable low-dependency workloads.  The proof
    requires both a `.COM` and MZ program, each returning by the original guest
    parent/COMMAND path.
-3. **Pure DOS device, file and graphics workload closure:** original keyboard,
+4. **Pure DOS device, file and graphics workload closure:** original keyboard,
    console, file/seek/IOCTL, timer/IRQ and SoftPC video paths under selected
    DOS workloads.  The package starts from the proven program-execution
    baseline and admits only the original owner immediately blocking its
    workload.
-4. **DOS extender execution:** original XMS/A20/UMB/INT15 and
+5. **DOS extender execution:** original XMS/A20/UMB/INT15 and
    DPMI/DPMI32/DOSX runtime paths with mapping-manager identity boundaries and
    real extender workload return.
-5. **Redirector and host-resource execution:** T372 is the closed
+6. **Redirector and host-resource execution:** T372 is the closed
    source/binding baseline only: it did not ship `VDMREDIR.dll`.  The next
    activation package must compose that original DLL product first, then prove
    local VDMREDIR and bounded public NetAPI behavior; legacy
    NetBIOS/DLC/private-RPC remains explicit.
-6. **COMMAND native-child local lifecycle:** reached `54:08/0A/0B`, public
+7. **COMMAND native-child local lifecycle:** reached `54:08/0A/0B`, public
    `CreateProcess` child lifecycle, original re-entry/event/return and
    explicit unavailable CSRSS-era branches. This remains inside one process;
    it does not create or depend on a broker.
-7. **WOW16 bootstrap, callback and Win16 NE lifecycle:** original WOWEXEC
+8. **WOW16 bootstrap, callback and Win16 NE lifecycle:** original WOWEXEC
    command route, task/callback/monitor, single-session UI and NE start/exit.
-8. **WOW16 service, UI and host integration matrix:** selected WOW32 provider
+9. **WOW16 service, UI and host integration matrix:** selected WOW32 provider
    packages through public APIs, preserving private-shell failures.
-9. **Single-process NTVDM compatibility matrix:** selected DOS, extender,
+10. **Single-process NTVDM compatibility matrix:** selected DOS, extender,
    COMMAND-native-child and Win16 workloads execute against their recovered
    owner contracts; a failure reopens only its immediate original owner.
-10. **Cross-process control-broker closure:** after the single-process matrix,
-    recover BaseSrv-style multi-process registration, command delivery,
-    notification and cleanup through public IPC only.
-11. **Multi-process matrix, x64 compatibility and product release:** selected
-    multi-process DOS/Win16 matrix, paired x86/x64 behavior where runnable,
-    unpack-and-run manifests and release packaging.
+11. **Cross-process control-broker closure:** after the single-process matrix,
+   recover BaseSrv-style multi-process registration, command delivery,
+   notification and cleanup through public IPC only.
+12. **Multi-process matrix, x64 compatibility and product release:** selected
+   multi-process DOS/Win16 matrix, paired x86/x64 behavior where runnable,
+   unpack-and-run manifests and release packaging.
