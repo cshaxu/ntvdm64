@@ -32,6 +32,8 @@
 
 **S3 recovery:** [original Base VDM environment recovery](etc/evidence/m0-t386-s3-original-base-vdm-environment-recovery-001.md).
 
+**S3 continuation disposition:** [original COMMAND post-environment continuation](etc/evidence/m0-t386-s3-original-command-continuation-disposition-001.md) proves the first copied DOS record returns successfully, but the immutable built-in command still has no observable completion; S3 remains active.
+
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 
 **Plan:** [M0 T375 pure DOS CPU40/SoftPC boot and COMMAND baseline](etc/operations/m0-t375-pure-dos-cpu40-softpc-command-baseline-001.md).
