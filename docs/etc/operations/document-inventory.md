@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 3967 |
 | --- | --- |
-| Generated UTC | 2026-09-03T04:38:26Z |
+| Generated UTC | 2026-09-03T05:03:46Z |
 
 ## Entries
 
@@ -2209,7 +2209,7 @@ content-divergent entries.
 | etc/operations/proposal-mvdm-runtime-support-tool-re-root-001.md | indexed supporting material | 9955eefb0e8480e99f22e0cac375325d72663293262656537f4ca8d7cbb027c4 |
 | etc/operations/proposal-netapi-rap-redirector-network-boundary-recovery-001.md | indexed supporting material | df3cef8be8b0923781e82443a87609bb4cf1b2d21012812350b61994a95da5f5 |
 | etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md | indexed supporting material | 9b589b5f95bbd935804a007e9b1a1195561511f900f3c0ae426bc80c44798b72 |
-| etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md | indexed supporting material | cbdc21e5f5844ab4f74e65b73251a4f281326e6ec288ff812a4941ebbe7d9659 |
+| etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md | indexed supporting material | 0d03e1ba1377191840e9c3a60607da01e779558153173aa055faaabc3a96eeba |
 | etc/operations/proposal-opennt-bop-mirror-overlay-convergence-001.md | indexed supporting material | 2f2e91c7a491398ae23278766e5596002ae710113ff2bd5a1fb0577b2d9e12b2 |
 | etc/operations/proposal-opennt-bop-original-dispatcher-provider-recovery-001.md | indexed supporting material | b8808fef6cf0f7519c2103fdc8509c7f6f704846620537f59f0dd076af718e93 |
 | etc/operations/proposal-opennt-command-cmdexec32-full-capability-closure-001.md | indexed supporting material | 2dbce97ef0f4ad01836827a786b0a5bbb5512eabefe3937c1d49c06aef525c02 |

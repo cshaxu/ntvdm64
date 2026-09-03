@@ -83,6 +83,40 @@ its stated runtime proof.
    independently guessing an executable type. Project diagnostics remain
    default-off explicit report files or debugger output; they never share
    guest Console output.
+
+   **Planned S sequence after admission:**
+
+   1. **S1 — Original interactive startup-contract audit.** Map
+      `BaseCheckVDM`, `VDMINFO`, `srvvdm`, `cmdGetNextCmd` and
+      `cmdGetStartInfo`; record every field difference between an interactive
+      initial DOS record and the existing `/C` record. No source change.
+   2. **S2 — Interactive initial DOS-record binding.** Publish the exact
+      source-shaped no-argument record through the existing local Base VDM
+      route; retain positional input as `COMMAND.COM /C <command>`. Verify
+      copy, first-call, re-entry and failure results locally.
+   3. **S3 — Console-first startup and diagnostic isolation.** Do not create a
+      presentation window for normal character mode; recover the original
+      SoftPC Console/stream ordering and move project observation output to
+      explicit report files or debugger output.
+   4. **S4 — Console-input to SoftPC keyboard/IRQ1.** Implement the session
+      input pump using public Console events and the source-shaped SoftPC
+      keyboard path. Verify ordinary keys, Enter, Backspace, Ctrl+C, repeat,
+      and cancellation without app-level DOS parsing.
+   5. **S5 — Display-backend arbitration.** Recover the one-active-surface
+      contract for text, graphics, Alt+Enter and return-to-Console, including
+      output/focus ownership and no fabricated text rendering.
+   6. **S6 — Original PIF fullscreen disposition.** Audit and bind the original
+      PIF Console/fullscreen fields; verify text, fullscreen and source-shaped
+      failure results without extension-based program classification.
+   7. **S7 — Fixed interactive runtime matrix.** In one fixed Console
+      container prove prompt, `ver`, `dir`, editing, Ctrl+C and `exit`. Run
+      `ntvdm.exe edit.com` and prompt-local `edit.com` as integration rows;
+      attribute any external-EXEC failure to its immediate original owner
+      rather than treating it as Console completion.
+   8. **S8 — Closure and publication.** Audit all routes and default
+      diagnostics, run the formal Ninja and fixed-container checks, and
+      publish only a verified improvement to both `build/output` and the
+      runnable `O:\\ntvdm64` root.
 3. **Pure DOS `.COM` and MZ `.EXE` execution and parent return:** original
    `$Exec`, file/JFN/SFT, PSP/arena/environment, relocation, child exit and
    COMMAND continuation using immutable low-dependency workloads.  The proof
