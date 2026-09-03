@@ -2,17 +2,28 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T387 is closed: the selected CPU40/x86
-package accepts a positional declared DOS command and the published `ntvdm.exe`
-performed the original COMMAND redirection write from `O:\\ntvdm64`. Direct
-no-argument launch now has an explicit app-owned user-visible disposition;
-interactive COMMAND remains the first queue candidate. See the
-[T387 closure](history/m0-t387-positional-command-cli-closure-20260903.md).
+**Active: M0 T388 S1** — single-process interactive COMMAND startup-contract
+audit; ordinary mode (single-person dual-role implementation and review).
 
 ## Active Packet
 
-None. The next task requires a fresh admission from the ordered candidate
-queue.
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T388 S1; ordinary mode. |
+| Admission And Approval | The owner-directed queue objective and the first candidate after the closed T387 positional-command package. The detailed plan is [interactive COMMAND recovery](etc/operations/proposal-single-process-interactive-command-console-recovery-001.md). |
+| Objective | Establish the complete original initial-interactive COMMAND record contract, before any input, presentation or guest implementation. |
+| Non-goals | No guest-media change; no Console pump, keyboard/IRQ, presentation-window, PIF, BaseSrv/CSRSS, cross-process broker, WOW, `cmdExec32`, or runtime run. |
+| Reference Baseline | T387 closure; selected CPU40/x86 SoftPC product; original Base VDM and COMMAND mirrors; the existing local Base VDM binding. |
+| Files And ABI Surface | Original source and existing app/BaseVDM binding are read-only audit inputs. Expected delivery is one evidence ledger and governance updates only. |
+| Applicable Rules | Execution, source, architecture, coding, document, mapping-manager, mirror/overlay and CPU40-only rules. |
+| Verification | Source-definition/caller/field audit, original-vs-current comparison, documentation-governance verification and `git diff --check`. |
+| Expected Markers | One source path, owner and result for every field that distinguishes interactive initial launch from `/C`; no synthetic record or implementation diff. |
+| Asset Needs | Selected `mvdm-host`, `opennt-host`, adapter/session mirrors and their OpenNT provenance; no new source import. |
+| Reporting Requirements | Record initial record, console, current-directory, environment, re-entry and failure semantics; identify the smallest S2 binding seam and all hard exclusions. |
+| Stop Conditions | A required dependency expands into private BaseSrv/CSRSS transport, guest mutation, a new product parser or a non-source-shaped provider. Pause for owner decision. |
+| Exit Criteria | A source-path/field/result ledger gives one owner and disposition to every reached initial-launch edge, identifies the S2 seam and passes governance checks. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
+| Similar-Issue Sweep | `BaseCheckVDM`, `GetNextVDMCommand`, `VDMINFO`, `cmdGetNextCmd`, `cmdGetStartInfo`, `scs_init`, `srvvdm`, Console create/attach, current directory, environment and re-entry fields. |
 
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 
