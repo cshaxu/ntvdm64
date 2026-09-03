@@ -72,6 +72,38 @@ and the guest returned a zero DOS code before re-entering the original
 one-session continuation path.  It is stronger than mere `54:01` reachability,
 but it is not proof that the requested redirection reached the host file.
 
+## Relative-path control
+
+The same product, stage, container, timeout and observer were used for a
+second command that differs only in its target spelling:
+
+```text
+echo M0T386 > m0-t386-relative-marker.txt
+```
+
+`O:\ntvdm64\m0-t386-relative-marker.txt` was absent before and after the run.
+Its sidecars are
+`artifacts/research/m0-t386-s3-command-relative-marker.txt` and
+`artifacts/research/m0-t386-s3-command-relative-marker.txt.command.txt`.
+They retain the same successful first `54:01` result and zero second guest
+return, but the BOP dispatch list still ends before any of the original DOS
+file-service selectors:
+
+```text
+50:03  SVC_DEMCREATE
+50:1E  SVC_DEMWRITE
+50:02  SVC_DEMCLOSE
+```
+
+The original guest source makes those ownership boundaries explicit:
+`doskrnl/dos/file.asm` dispatches create through `SVC_DEMCREATE`, while
+`doskrnl/dos/handle.asm` dispatches the slow write through `SVC_DEMWRITE` and
+the handle close through `SVC_DEMCLOSE`.  Neither selector is reached by either
+the absolute or relative command control.  The remaining failure is therefore
+earlier than DEM file I/O: it lies in the original post-`54:01` COMMAND
+execution/standard-handle path.  This evidence does not authorize a new DEM
+provider or a drive-mapping workaround.
+
 The product then exits zero through the already declared one-shot command
 exhaustion boundary.  The empty terminal result is deliberately not treated
 as a successful `echo` result.
@@ -85,8 +117,9 @@ return code.  It does not close T386.  There is still no observable proof that
 the immutable COMMAND built-in completed its intended DOS file/redirection
 operation.
 
-The next investigation must stay on the original post-`cmdGetNextCmd` chain:
-`COMMAND.COM run_cmd/DOCOM -> DOS INT 21h -> original device or file owner`.
-It must identify the first failing owner from source and bounded evidence;
-it may not replace the guest parser, add a host command executor, or alter
-`COMMAND.COM`.
+The next investigation must stay on the original pre-file portion of the
+post-`cmdGetNextCmd` chain: `COMMAND.COM run_cmd/DOCOM -> standard-handle /
+execution dispatch`.  Only after source and bounded evidence prove passage
+through that boundary may it investigate `DOS INT 21h -> original DEM file
+owner`.  It may not replace the guest parser, add a host command executor, or
+alter `COMMAND.COM`.
