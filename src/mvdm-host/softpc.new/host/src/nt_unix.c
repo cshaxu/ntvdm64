@@ -169,8 +169,16 @@ void HostIdleNoActivity(void)
 
     IdleNoActivity=0;
 
-    if (NowWaiting)                  // critical path do inline....
-	PulseEvent(IdleEvent);
+    /* DIVERGENCE(MVDM-HOST-DIV-208): NT4 used PulseEvent only while the
+     * original CPU thread was observed waiting.  PulseEvent is explicitly
+     * unreliable on current Win32: an activity notification in the small
+     * interval before NowWaiting becomes visible is lost, leaving the CPU
+     * asleep despite IdleNoActivity having been cleared.  IdleEvent was
+     * already created as the source's auto-reset event.  SetEvent preserves
+     * the same one-waiter wake contract, while retaining one pending wake
+     * until the CPU reaches its next original WaitForSingleObject call. */
+    if (IdleEvent != NULL)
+	SetEvent(IdleEvent);
 }
 
 

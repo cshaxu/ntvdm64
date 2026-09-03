@@ -1,5 +1,6 @@
 #include "insignia.h"
 #include "host_def.h"
+#include "mvdm_softpc_termination.h"
 
 /*
  *    O/S include files.
@@ -443,9 +444,15 @@ ica_eoi IFN3(IU32, adapter, IS32 *, line, IBOOL, rotate)
     /*
      * CallOut to device registered EOI Hooks
      */
-    if (EoiLineNo != -1)
-	host_EOI_hook(EoiLineNo + (adapter << 3), asp->ica_count[EoiLineNo]);
+	if (EoiLineNo != -1)
+		host_EOI_hook(EoiLineNo + (adapter << 3), asp->ica_count[EoiLineNo]);
 #endif /* EOI_HOOKS */
+
+    /* DIVERGENCE(MVDM-HOST-DIV-207): default-off scalar-only witness after
+     * the unchanged original EOI line selection.  It neither changes the
+     * original EOI, hook, PIC scan nor any machine state. */
+    mvdm_softpc_record_ica_eoi((unsigned int)adapter, (int)EoiLineNo,
+        (unsigned int)asp->ica_cpu_int);
 
     /*
      * There may be a lower priority interrupt pending, so check
@@ -656,6 +663,10 @@ ica_interrupt_cpu IFN2(IU32, adapter, IU32, line)
 
     if (asp->ica_cpu_int)
     {
+        /* DIVERGENCE(MVDM-HOST-DIV-207): scalar-only witness for the
+         * unchanged original already-high suppression path. */
+        mvdm_softpc_record_keyboard_ica_already_high((unsigned int)adapter,
+            (unsigned int)asp->ica_int_line, (unsigned int)line);
 #ifndef PROD
 	if ((io_verbose & ICA_VERBOSE) && (asp->ica_int_line != line))
 	{
@@ -677,6 +688,11 @@ ica_interrupt_cpu IFN2(IU32, adapter, IU32, line)
 
     if (asp->ica_master)		/* If ICA is Master */
     {
+        /* DIVERGENCE(MVDM-HOST-DIV-207): default-off witness of the existing
+         * IRQ1 handoff. It observes only the selected scalar PIC line before
+         * the unchanged original CPU notification. */
+        mvdm_softpc_record_keyboard_ica_irq((unsigned int)adapter,
+            (unsigned int)line);
 #ifndef PROD
         if (io_verbose & ICA_VERBOSE)
         {
@@ -1324,7 +1340,16 @@ void SWPIC_hw_interrupt IFN3(IU32, adapter, IU32, line_no, IS32, call_count)
      * Now scan the IRR to see if we can raise a CPU interrupt.
      */
 
-    if ((line = ica_scan_irr(adapter)) & 0x80)
+
+    line = ica_scan_irr(adapter);
+    /* DIVERGENCE(MVDM-HOST-DIV-207): default-off scalar witness of the
+     * original IRQ1 request selection result.  It leaves the following
+     * source-owned promotion predicate unchanged. */
+    if (adapter == ICA_MASTER && line_no == 1)
+        mvdm_softpc_record_keyboard_ica_request((unsigned int)asp->ica_irr,
+            (unsigned int)asp->ica_isr, (unsigned int)asp->ica_imr,
+            (unsigned int)line);
+    if (line & 0x80)
 	ica_interrupt_cpu(adapter, line & 0x07);
 
     ica_lock_set(0);

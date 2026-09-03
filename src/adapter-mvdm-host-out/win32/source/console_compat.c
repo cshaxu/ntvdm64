@@ -6,6 +6,7 @@
  * parameters and ordering; unsupported operations fail explicitly.
  */
 #include <windows.h>
+#include <stdlib.h>
 #include "conapi.h"
 #include "presentation_surface.h"
 #include "session/session.h"
@@ -58,12 +59,103 @@ static BOOL console_video_event(uint32_t kind, HANDLE output, HPALETTE palette,
     return TRUE;
 }
 
+/*
+ * The original Console Server owned this operation.  SoftPC's nt_text()
+ * copies character/attribute cells into the buffer returned by
+ * RegisterConsoleVDM, then invalidates precisely this rectangle.  On NT4 the
+ * Console Server made that shared buffer visible itself.  Public Console has
+ * no shared-VDM text-buffer facility, so preserve the caller's buffer and
+ * rectangle contract and copy only the invalidated cells to CONOUT$ here.
+ *
+ * Return 1 when this is the active text Console surface, 0 when `output`
+ * names another source-owned presentation surface, and -1 on a real Console
+ * failure.  In particular, a graphics-buffer duplicate must continue to use
+ * the app presentation event below rather than being mistaken for text.
+ */
+static int present_text_invalidation(HANDLE output, const SMALL_RECT *rect)
+{
+    session *owner = session_thread_current();
+    uint32_t columns = 0u, rows = 0u, text_bytes = 0u;
+    uint8_t *text = NULL;
+    CHAR_INFO *cells = NULL;
+    uint32_t row, column;
+    int width, height;
+    COORD source_size;
+    COORD source_origin = { 0, 0 };
+    SMALL_RECT destination;
+    BOOL wrote;
+
+    if (output != GetStdHandle(STD_OUTPUT_HANDLE)) return 0;
+    if (owner == NULL || rect == NULL ||
+        !session_presentation_text_describe(owner, &columns, &rows,
+                                            &text_bytes)) return 0;
+    if (rect->Left < 0 || rect->Top < 0 || rect->Right < rect->Left ||
+        rect->Bottom < rect->Top || (uint32_t)rect->Right >= columns ||
+        (uint32_t)rect->Bottom >= rows) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return -1;
+    }
+    width = rect->Right - rect->Left + 1;
+    height = rect->Bottom - rect->Top + 1;
+    if (width <= 0 || height <= 0 || width > SHRT_MAX || height > SHRT_MAX ||
+        text_bytes == 0u || (size_t)width > SIZE_MAX / (size_t)height ||
+        (size_t)width * (size_t)height > SIZE_MAX / sizeof(*cells)) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return -1;
+    }
+    text = (uint8_t *)malloc(text_bytes);
+    cells = (CHAR_INFO *)calloc((size_t)width * (size_t)height, sizeof(*cells));
+    if (text == NULL || cells == NULL ||
+        !session_presentation_text_snapshot(owner, text, text_bytes, NULL,
+                                            NULL, NULL)) {
+        free(cells);
+        free(text);
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+        return -1;
+    }
+    for (row = 0u; row < (uint32_t)height; ++row) {
+        for (column = 0u; column < (uint32_t)width; ++column) {
+            uint32_t source_cell =
+                ((uint32_t)rect->Top + row) * columns +
+                (uint32_t)rect->Left + column;
+            CHAR_INFO *destination_cell = &cells[row * (uint32_t)width + column];
+            destination_cell->Char.AsciiChar = text[source_cell * 2u];
+            destination_cell->Attributes = text[source_cell * 2u + 1u];
+        }
+    }
+    source_size.X = (SHORT)width;
+    source_size.Y = (SHORT)height;
+    destination = *rect;
+    wrote = WriteConsoleOutputA(output, cells, source_size, source_origin,
+                                &destination);
+    free(cells);
+    free(text);
+    return wrote ? 1 : -1;
+}
+
 BOOL WINAPI InvalidateConsoleDIBits(HANDLE output, PSMALL_RECT rect)
 {
+    int text_result;
+
     if (rect == NULL) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }
+    /* DIVERGENCE(ADAPTER-WIN32-048): public Console lacks the NT4 shared VDM
+     * text-buffer presentation server.  Re-present the exact original text
+     * buffer rectangle at the same invalidation boundary.  This does not
+     * parse DOS output or guest memory; the original SoftPC text painter has
+     * already selected and populated the cells. */
+    text_result = present_text_invalidation(output, rect);
+    if (text_result > 0) {
+        /* A bound app surface may also repaint the copied text plane after an
+         * Alt+Enter transfer.  Its absence must not turn a successful Console
+         * presentation into an original-call failure. */
+        (void)console_video_event(SESSION_VIDEO_EVENT_INVALIDATE, output,
+            NULL, rect, 0u);
+        return TRUE;
+    }
+    if (text_result < 0) return FALSE;
     return console_video_event(SESSION_VIDEO_EVENT_INVALIDATE, output, NULL,
         rect, 0u);
 }

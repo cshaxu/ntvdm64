@@ -46,6 +46,91 @@ void mvdm_softpc_record_bop_return(unsigned int selector,
                                    unsigned int guest_ax,
                                    unsigned int guest_cf);
 
+/* Default-off fixed-container observation of the original CCPU BOP FE
+ * unwind.  The CPU has already decoded and advanced past the instruction;
+ * this copies only its live CS:IP immediately before the unchanged original
+ * c_cpu_unsimulate transition. */
+void mvdm_softpc_record_cpu_unsimulate(unsigned int guest_cs,
+                                       unsigned int guest_ip);
+
+/* Default-off fixed-container observation at the completed original CPU40
+ * invocation boundary.  It copies only already-live CS:IP after CCPU has
+ * selected its ordinary return path. */
+void mvdm_softpc_record_cpu_simulate_return(unsigned int guest_cs,
+                                            unsigned int guest_ip);
+
+/* Default-off fixed-container observation at the original host text-output
+ * boundary.  `count` is the already selected byte count; no guest text or
+ * buffer pointer crosses the observation boundary. */
+void mvdm_softpc_record_stream_io_update(const uint8_t *buffer,
+    unsigned int count);
+void mvdm_softpc_record_stream_io_result(unsigned int count,
+    unsigned int wrote, unsigned int bytes_written, unsigned long error_code);
+
+/* Default-off fixed-container observation of the original Console-to-8042
+ * keyboard route.  Arguments are source-owned scalar state only. */
+void mvdm_softpc_record_console_key(unsigned int scan_code,
+                                    unsigned int key_down);
+void mvdm_softpc_record_keyboard_offer(unsigned int scan_code,
+                                       unsigned int accepted,
+                                       unsigned int scanning_stopped,
+                                       unsigned int keyboard_disabled,
+                                       unsigned int queue_depth);
+/* Default-off witness of original keyboard interrupt gating. `stage` is
+ * source-owned: 1 is KbdResume and 2 is KbdIntDelay. */
+void mvdm_softpc_record_keyboard_gate(unsigned int stage,
+                                      unsigned int eoi_pending,
+                                      unsigned int interrupts_enabled,
+                                      unsigned int output_full,
+                                      unsigned int keyboard_disabled);
+/* Default-off scalar-only witnesses for the existing master PIC IRQ1 and
+ * CPU40 hardware-interrupt handoff. */
+void mvdm_softpc_record_keyboard_ica_irq(unsigned int adapter,
+                                         unsigned int line);
+void mvdm_softpc_record_keyboard_ica_already_high(unsigned int adapter,
+                                                   unsigned int previous_line,
+                                                   unsigned int requested_line);
+void mvdm_softpc_record_keyboard_ica_request(unsigned int irr,
+                                              unsigned int isr,
+                                              unsigned int imr,
+                                              unsigned int scan_result);
+void mvdm_softpc_record_cpu_hw_interrupt(void);
+/* Default-off CPU40 observation when an already-pending hardware interrupt
+ * cannot yet be acknowledged because the guest IF flag is clear. */
+void mvdm_softpc_record_cpu_hw_interrupt_deferred(unsigned int interrupts_enabled,
+    unsigned int guest_cs, unsigned int guest_ip);
+/* Default-off observation after the unchanged CPU40 interrupt acknowledge.
+ * `vector` is the original PIC result; this function cannot alter the CPU,
+ * PIC, BIOS or guest state. */
+void mvdm_softpc_record_cpu_hw_interrupt_service(unsigned int vector);
+/* Default-off observation at the original BIOS keyboard waitio BOP.  This is
+ * emitted only after the unchanged guest INT 16h path has selected its own
+ * `AH == 2` idle operation; it does not queue, read, or alter a key. */
+void mvdm_softpc_record_keyboard_waitio(void);
+/* Default-off observation after the original PIC EOI selection.  It copies
+ * only the original adapter/line result and cannot alter PIC, CPU, BIOS or
+ * guest state. */
+void mvdm_softpc_record_ica_eoi(unsigned int adapter, int line,
+                                unsigned int cpu_interrupt_pending);
+void mvdm_softpc_record_host_eoi_hook(int irq_line, int call_count,
+                                      unsigned int registered);
+void mvdm_softpc_record_keyboard_port_read(unsigned int value,
+                                           unsigned int output_full);
+void mvdm_softpc_record_keyboard_eoi_state(unsigned int bios_owns_hardware,
+                                            unsigned int bios_buffer_space);
+void mvdm_softpc_record_keyboard_delay(unsigned int stage,
+                                       unsigned int delay_us,
+                                       unsigned int delay_mask);
+/* Default-off scalar observation of the source-owned 6805-to-8042 output
+ * pump.  It is deliberately selector- and guest-data-blind. */
+void mvdm_softpc_record_keyboard_pump(unsigned int stage,
+                                      unsigned int eoi_pending,
+                                      unsigned int output_full,
+                                      unsigned int pending_8042,
+                                      unsigned int queue_depth,
+                                      unsigned int keyboard_disabled,
+                                      unsigned int waiting_for_upcode);
+
 /* Fixed-container diagnostic only.  `stage` identifies an already-selected
  * original COMMAND call boundary; it does not route or alter that call. */
 void mvdm_softpc_record_command_call(unsigned int service,
@@ -95,9 +180,10 @@ void mvdm_softpc_record_command_stub_table(uint16_t guest_cs);
 void mvdm_softpc_record_command_environment_return_code(unsigned int guest_cs,
     unsigned int guest_ip);
 
-/* App captures the optional continuation-report path before original MVDM
- * reads its inherited environment, then removes that diagnostic variable.
- * The retained path is adapter-private and is never made guest-visible. */
+/* App captures optional continuation and stream-I/O report paths before
+ * original MVDM reads its inherited environment, then removes those
+ * diagnostic variables. The retained paths are adapter-private and are never
+ * made guest-visible. */
 void mvdm_softpc_capture_command_continuation_report_path(void);
 
 /* Default-off, fixed-container DEM observation.  The caller passes only the

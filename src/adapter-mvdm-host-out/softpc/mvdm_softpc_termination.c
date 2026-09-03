@@ -20,6 +20,7 @@ extern unsigned int c_getDS_LIMIT(void);
 static __declspec(thread) const char *mvdm_softpc_termination_origin =
     "unattributed";
 static char mvdm_softpc_command_continuation_report_path[MAX_PATH];
+static char mvdm_softpc_stream_io_report_path[MAX_PATH];
 
 static char *mvdm_softpc_append_hex(char *output, ULONG_PTR value,
     unsigned int digits)
@@ -54,6 +55,20 @@ static void mvdm_softpc_write_optional_report(const char *environment_name,
     CloseHandle(report);
 }
 
+static void mvdm_softpc_write_captured_report(const char *report_path,
+    const char *message, DWORD message_bytes)
+{
+    HANDLE report;
+    DWORD written;
+
+    if (report_path == NULL || report_path[0] == '\0') return;
+    report = CreateFileA(report_path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
+        OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (report == INVALID_HANDLE_VALUE) return;
+    (void)WriteFile(report, message, message_bytes, &written, NULL);
+    CloseHandle(report);
+}
+
 void mvdm_softpc_capture_command_continuation_report_path(void)
 {
     DWORD bytes;
@@ -70,6 +85,15 @@ void mvdm_softpc_capture_command_continuation_report_path(void)
         NULL);
     if (bytes == 0u || bytes >= sizeof(mvdm_softpc_command_continuation_report_path))
         mvdm_softpc_command_continuation_report_path[0] = '\0';
+
+    mvdm_softpc_stream_io_report_path[0] = '\0';
+    bytes = GetEnvironmentVariableA("MVDM_STREAM_IO_REPORT_PATH",
+        mvdm_softpc_stream_io_report_path,
+        (DWORD)sizeof(mvdm_softpc_stream_io_report_path));
+    (void)SetEnvironmentVariableA("MVDM_STREAM_IO_REPORT_PATH", NULL);
+    if (bytes == 0u || bytes >= sizeof(mvdm_softpc_stream_io_report_path))
+        mvdm_softpc_stream_io_report_path[0] = '\0';
+
 }
 
 static void mvdm_softpc_write_exception_report(const char *message,
@@ -380,6 +404,451 @@ void mvdm_softpc_record_bop_return(unsigned int selector,
         (DWORD)(sizeof(message) - 1));
     if (selector == 0x54u && service == 0x0fu)
         mvdm_softpc_record_command_environment_return_code(guest_cs, guest_ip);
+}
+
+void mvdm_softpc_record_keyboard_waitio(void)
+{
+    static const char ready[] = "MVDM-COMMAND-INPUT-READY\r\n";
+
+    mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path, ready,
+        (DWORD)(sizeof(ready) - 1));
+}
+
+void mvdm_softpc_record_cpu_unsimulate(unsigned int guest_cs,
+    unsigned int guest_ip)
+{
+    char message[64];
+    int formatted;
+
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CPU-UNSIMULATE cs=%04X ip=%04X\r\n",
+        guest_cs & 0xffffu, guest_ip & 0xffffu);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_cpu_simulate_return(unsigned int guest_cs,
+    unsigned int guest_ip)
+{
+    char message[64];
+    int formatted;
+
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CPU-SIMULATE-RETURN cs=%04X ip=%04X\r\n",
+        guest_cs & 0xffffu, guest_ip & 0xffffu);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_stream_io_update(const uint8_t *buffer,
+    unsigned int count)
+{
+    char message[160];
+    int formatted;
+    unsigned int index;
+    unsigned int printable = 0u;
+    unsigned int sample_count;
+    size_t used;
+
+    for (index = 0u; buffer != NULL && index < count; ++index) {
+        if (buffer[index] >= 0x20u && buffer[index] != 0x7fu) {
+            printable = 1u;
+            break;
+        }
+    }
+
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-STREAM-UPDATE count=%u printable=%u", count, printable);
+    used = formatted > 0 && (size_t)formatted < sizeof(message)
+        ? (size_t)formatted : 0u;
+    sample_count = count < 16u ? count : 16u;
+    for (index = 0u; used != 0u && buffer != NULL && index < sample_count;
+        ++index) {
+        formatted = snprintf(message + used, sizeof(message) - used,
+            "%s%02X", index == 0u ? " bytes=" : ",", buffer[index]);
+        if (formatted <= 0 || (size_t)formatted >= sizeof(message) - used) {
+            used = 0u;
+            break;
+        }
+        used += (size_t)formatted;
+    }
+    if (used != 0u && used + 2u < sizeof(message)) {
+        message[used++] = '\r';
+        message[used++] = '\n';
+        message[used] = '\0';
+        formatted = (int)used;
+    }
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            message, (DWORD)formatted);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+            message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_stream_io_result(unsigned int count,
+    unsigned int wrote, unsigned int bytes_written, unsigned long error_code)
+{
+    char message[128];
+    int formatted;
+
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-STREAM-RESULT count=%u wrote=%u bytes=%u error=%lu\r\n",
+        count, wrote ? 1u : 0u, bytes_written, error_code);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+            message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_console_key(unsigned int scan_code,
+    unsigned int key_down)
+{
+    char message[64];
+    int formatted;
+
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CONSOLE-KEY scan=%02X down=%u\r\n",
+        scan_code & 0xffu, key_down != 0u ? 1u : 0u);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            message, (DWORD)formatted);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+            message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_keyboard_offer(unsigned int scan_code,
+    unsigned int accepted, unsigned int scanning_stopped,
+    unsigned int keyboard_disabled, unsigned int queue_depth)
+{
+    char message[128];
+    int formatted;
+
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-KBD-OFFER scan=%02X accepted=%u stopped=%u disabled=%u depth=%u\r\n",
+        scan_code & 0xffu, accepted != 0u ? 1u : 0u,
+        scanning_stopped != 0u ? 1u : 0u,
+        keyboard_disabled != 0u ? 1u : 0u, queue_depth);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            message, (DWORD)formatted);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+            message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_keyboard_gate(unsigned int stage,
+    unsigned int eoi_pending, unsigned int interrupts_enabled,
+    unsigned int output_full, unsigned int keyboard_disabled)
+{
+    char message[128];
+    int formatted;
+
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-KBD-GATE stage=%u eoi=%u int=%u full=%u disabled=%u\r\n",
+        stage, eoi_pending != 0u ? 1u : 0u,
+        interrupts_enabled != 0u ? 1u : 0u,
+        output_full != 0u ? 1u : 0u,
+        keyboard_disabled != 0u ? 1u : 0u);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            message, (DWORD)formatted);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+            message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_keyboard_ica_irq(unsigned int adapter,
+    unsigned int line)
+{
+    const char message[] = "MVDM-KBD-ICA-IRQ adapter=0 line=1\r\n";
+
+    if (adapter != 0u || line != 1u)
+        return;
+    mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+        message, (DWORD)(sizeof(message) - 1));
+    mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+        message, (DWORD)(sizeof(message) - 1));
+}
+
+void mvdm_softpc_record_keyboard_ica_already_high(unsigned int adapter,
+    unsigned int previous_line, unsigned int requested_line)
+{
+    char message[96];
+    int formatted;
+
+    if (adapter != 0u || requested_line != 1u)
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-KBD-ICA-ALREADY-HIGH previous=%u requested=%u\r\n",
+        previous_line, requested_line);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            message, (DWORD)formatted);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+            message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_keyboard_ica_request(unsigned int irr,
+    unsigned int isr, unsigned int imr, unsigned int scan_result)
+{
+    char message[112];
+    int formatted = snprintf(message, sizeof(message),
+        "MVDM-KBD-ICA-REQUEST irr=%02X isr=%02X imr=%02X scan=%02X\r\n",
+        irr & 0xffu, isr & 0xffu, imr & 0xffu, scan_result & 0xffu);
+
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            message, (DWORD)formatted);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+            message, (DWORD)formatted);
+}
+
+static volatile LONG mvdm_softpc_cpu_hwirq_epoch;
+static volatile LONG mvdm_softpc_cpu_hwirq_deferred_epoch;
+
+void mvdm_softpc_record_cpu_hw_interrupt(void)
+{
+    static LONG reported;
+    char message[] = "MVDM-CPU-HW-INT ordinal=00\r\n";
+    static const char hex[] = "0123456789ABCDEF";
+    LONG ordinal;
+
+    /* This remains a bounded, default-off observer.  Recording the first
+     * request alone cannot distinguish a lost request from one that reached
+     * CPU40 while IF was clear later in the same startup. */
+    (void)InterlockedIncrement(&mvdm_softpc_cpu_hwirq_epoch);
+    ordinal = InterlockedIncrement(&reported);
+    if (ordinal > 64)
+        return;
+    message[24] = hex[((unsigned long)ordinal >> 4) & 0x0f];
+    message[25] = hex[(unsigned long)ordinal & 0x0f];
+    mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+        message, (DWORD)(sizeof(message) - 1));
+}
+
+void mvdm_softpc_record_cpu_hw_interrupt_deferred(unsigned int interrupts_enabled,
+    unsigned int guest_cs, unsigned int guest_ip)
+{
+    LONG epoch;
+    LONG observed;
+    char message[160];
+    int formatted;
+    mvdm_guest_location int1c_vector;
+    mvdm_guest_location int1c_target;
+    mvdm_guest_location_lease int1c_code;
+    mvdm_guest_location current_code;
+    mvdm_guest_location_lease current_code_lease;
+
+    (void)interrupts_enabled;
+    epoch = InterlockedCompareExchange(&mvdm_softpc_cpu_hwirq_epoch, 0, 0);
+    observed = InterlockedCompareExchange(
+        &mvdm_softpc_cpu_hwirq_deferred_epoch, 0, 0);
+    if (epoch == 0 || observed == epoch ||
+        InterlockedCompareExchange(&mvdm_softpc_cpu_hwirq_deferred_epoch,
+            epoch, observed) != observed)
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CPU-HW-INT-DEFERRED if=0 cs=%04X ip=%04X\r\n",
+        guest_cs & 0xffffu, guest_ip & 0xffffu);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message))
+        return;
+    mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+        message, (DWORD)formatted);
+    mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+        message, (DWORD)formatted);
+
+    if (mvdm_guest_location_set_real_mode(&current_code,
+            (uint16_t)guest_cs, (uint16_t)guest_ip) &&
+        mvdm_guest_location_acquire(&current_code, 8u,
+            GUEST_MEMORY_ACCESS_READ, &current_code_lease)) {
+        formatted = snprintf(message, sizeof(message),
+            "MVDM-CPU-HW-INT-CODE cs=%04X ip=%04X bytes=%02X %02X %02X %02X %02X %02X %02X %02X\r\n",
+            guest_cs & 0xffffu, guest_ip & 0xffffu,
+            current_code_lease.bytes[0], current_code_lease.bytes[1],
+            current_code_lease.bytes[2], current_code_lease.bytes[3],
+            current_code_lease.bytes[4], current_code_lease.bytes[5],
+            current_code_lease.bytes[6], current_code_lease.bytes[7]);
+        if (mvdm_guest_location_release(&current_code_lease, 0) &&
+            formatted > 0 && (size_t)formatted < sizeof(message)) {
+            mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+                message, (DWORD)formatted);
+            mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+                message, (DWORD)formatted);
+        }
+    }
+
+    /* INT 08h keeps IF clear by design while it directly invokes INT 1Ch.
+     * Capture the already-installed original vector and a bounded instruction
+     * window only: this distinguishes a stuck callback target from a CPU40
+     * scheduling fault without modifying IVT, guest code, PIC or flags. */
+    if (!mvdm_guest_location_set_real_mode(&int1c_vector, 0u, 0x0070u) ||
+        !mvdm_guest_location_read_far(&int1c_vector, &int1c_target) ||
+        !mvdm_guest_location_acquire(&int1c_target, 8u,
+            GUEST_MEMORY_ACCESS_READ, &int1c_code))
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CPU-INT1C target=%04X:%04X bytes=%02X %02X %02X %02X %02X %02X %02X %02X\r\n",
+        (unsigned int)int1c_target.segment, (unsigned int)int1c_target.offset,
+        int1c_code.bytes[0], int1c_code.bytes[1], int1c_code.bytes[2],
+        int1c_code.bytes[3], int1c_code.bytes[4], int1c_code.bytes[5],
+        int1c_code.bytes[6], int1c_code.bytes[7]);
+    if (!mvdm_guest_location_release(&int1c_code, 0) || formatted <= 0 ||
+        (size_t)formatted >= sizeof(message))
+        return;
+    mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+        message, (DWORD)formatted);
+    mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+        message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_cpu_hw_interrupt_service(unsigned int vector)
+{
+    static LONG reported;
+    char message[] = "MVDM-CPU-HW-INT-SERVICE vector=00\r\n";
+    static const char hex[] = "0123456789ABCDEF";
+
+    /* This is bounded because the fixed observer needs to distinguish the
+     * pre-input device interrupts from the later keyboard IRQ. */
+    if (InterlockedIncrement(&reported) > 64)
+        return;
+    message[31] = hex[(vector >> 4) & 0x0fu];
+    message[32] = hex[vector & 0x0fu];
+    mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+        message, (DWORD)(sizeof(message) - 1));
+    mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+        message, (DWORD)(sizeof(message) - 1));
+}
+
+void mvdm_softpc_record_ica_eoi(unsigned int adapter, int line,
+    unsigned int cpu_interrupt_pending)
+{
+    static LONG reports;
+    char message[96];
+    int formatted;
+
+    /* The fixed observer only needs the master timer/keyboard cases.  The
+     * bounded record is deliberately emitted after original EOI selection,
+     * before its unchanged follow-on interrupt scan. */
+    if (adapter != 0u || (line != 0 && line != 1) ||
+        InterlockedIncrement(&reports) > 64)
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-ICA-EOI adapter=%u line=%d pending=%u\r\n",
+        adapter, line, cpu_interrupt_pending != 0u ? 1u : 0u);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            message, (DWORD)formatted);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+            message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_host_eoi_hook(int irq_line, int call_count,
+    unsigned int registered)
+{
+    char message[112];
+    int formatted;
+
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-HOST-EOI-HOOK line=%d count=%d registered=%u\r\n",
+        irq_line, call_count, registered != 0u ? 1u : 0u);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            message, (DWORD)formatted);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+            message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_keyboard_port_read(unsigned int value,
+    unsigned int output_full)
+{
+    static LONG reports;
+    char message[96];
+    int formatted;
+
+    if (InterlockedIncrement(&reports) > 64)
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-KBD-PORT60 value=%02X full=%u\r\n", value & 0xffu,
+        output_full != 0u ? 1u : 0u);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            message, (DWORD)formatted);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+            message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_keyboard_eoi_state(unsigned int bios_owns_hardware,
+    unsigned int bios_buffer_space)
+{
+    static LONG reports;
+    char message[96];
+    int formatted;
+
+    if (InterlockedIncrement(&reports) > 64)
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-KBD-EOI bios-owns=%u buffer-space=%u\r\n",
+        bios_owns_hardware != 0u ? 1u : 0u,
+        bios_buffer_space != 0u ? 1u : 0u);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            message, (DWORD)formatted);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+            message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_keyboard_delay(unsigned int stage,
+    unsigned int delay_us, unsigned int delay_mask)
+{
+    static LONG reports;
+    char message[112];
+    int formatted;
+
+    if (InterlockedIncrement(&reports) > 64)
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-KBD-DELAY stage=%u us=%u mask=%08X\r\n", stage, delay_us,
+        delay_mask);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            message, (DWORD)formatted);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+            message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_keyboard_pump(unsigned int stage,
+    unsigned int eoi_pending, unsigned int output_full,
+    unsigned int pending_8042, unsigned int queue_depth,
+    unsigned int keyboard_disabled, unsigned int waiting_for_upcode)
+{
+    static LONG reports;
+    char message[160];
+    int formatted;
+
+    if (InterlockedIncrement(&reports) > 96)
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-KBD-PUMP stage=%u eoi=%u full=%u pending=%u depth=%u disabled=%u up=%u\\r\\n",
+        stage, eoi_pending != 0u ? 1u : 0u, output_full != 0u ? 1u : 0u,
+        pending_8042 != 0u ? 1u : 0u, queue_depth,
+        keyboard_disabled != 0u ? 1u : 0u,
+        waiting_for_upcode != 0u ? 1u : 0u);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            message, (DWORD)formatted);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+            message, (DWORD)formatted);
 }
 
 void mvdm_softpc_record_command_call(unsigned int service,

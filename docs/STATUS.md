@@ -2,41 +2,16 @@
 
 ## Current Work
 
-**Active: M0 T388 S7** — Fixed interactive runtime matrix; ordinary mode
-(single-person dual-role implementation and review).
+**No active M/T/S packet.** M0 T388 is closed as a source-owned correction:
+its S7 matrix assumed that the first permanent `COMMAND.COM` would expose a
+DOS `CON` prompt. Original source instead sends that first shell through
+`54:01` / `GetNextVDMCommand`. The next candidate owns the distinct,
+explicit second-`COMMAND.COM` profile and its runtime proof.
 
-## Active Packet
+**Latest closure:** [M0 T388 fixed interactive runtime matrix and corrected
+shell boundary](history/m0-t388-fixed-interactive-runtime-matrix-closure-20260903.md).
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T388 S7; ordinary mode. |
-| Admission And Approval | T388 S1--S6 closures and the admitted ordered interactive COMMAND package. |
-| Objective | Use one formal EXE and immutable runnable root to observe an interactive original COMMAND session: prompt, `ver`, `dir`, editing, Ctrl+C and `exit`. |
-| Non-goals | No guest-media change; no prompt parser, synthetic BOP record, direct input injection, BaseSrv/CSRSS transport, WOW or `cmdExec32` expansion. |
-| Reference Baseline | T388 S1--S6 evidence, selected CPU40/x86 SoftPC product, Console/keyboard/display bindings and immutable runnable media. |
-| Files And ABI Surface | Formal app/product launch, fixed runtime container and observational evidence only unless an immediate original owner is proven. |
-| Applicable Rules | Execution, source, architecture, coding, document, mapping-manager, mirror/overlay and CPU40-only rules. |
-| Verification | Formal x86 product/media identity; bounded procedure for each matrix row; retained Console and display evidence; governance and diff checks. |
-| Expected Markers | Prompt/command observations carry product and media identity; every failure names the immediate original owner; no scenario silently changes the container. |
-| Asset Needs | Existing selected CPU40/x86 graph, immutable media baseline, fixed Console-owning launch container and report location. |
-
-| Reporting Requirements | Record executable hash, guest-media identity, launch form, bounded command procedure, Console/window state and immediate source owner of any failure. |
-| Stop Conditions | Need to alter guest media, infer execution mode from a filename, introduce a prompt parser, or vary container/debugger ownership between matrix rows. Pause for a separate S. |
-| Exit Criteria | Every planned matrix row has a reproducible observation or source-owned blocker; no unsupported result is published. |
-| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
-| Similar-Issue Sweep | original Console/text/graphics/fullscreen branches, PIF state, `Alt+Enter`, presentation-window lifetime, graphics buffer, focus, keyboard forwarding, Console handle ownership, session lifecycle and mapping-manager lease ownership. |
-
-**S7 current evidence:** [fixed-container interactive COMMAND observation](etc/evidence/m0-t388-s7-interactive-fixed-container-observation-001.md)
-records the source-owned split between the inherited-environment transient
-failure and the clean-environment early lifecycle exit. S7 remains active.
-
-**S3 closure:** [Console-first startup disposition](etc/evidence/m0-t388-s3-console-first-startup-disposition-001.md).
-
-**S4 closure:** [Original SoftPC Console keyboard route](etc/evidence/m0-t388-s4-original-softpc-console-keyboard-route-001.md).
-
-**S5 closure:** [Source-shaped display arbitration](etc/evidence/m0-t388-s5-source-shaped-display-arbitration-001.md).
-
-**S6 closure:** [Original PIF fullscreen disposition](etc/evidence/m0-t388-s6-original-pif-fullscreen-disposition-001.md).
+**S7 evidence:** [fixed-container interactive COMMAND observation](etc/evidence/m0-t388-s7-interactive-fixed-container-observation-001.md).
 
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 

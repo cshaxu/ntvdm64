@@ -4,6 +4,7 @@
 #include <windows.h>
 #include "insignia.h"
 #include "host_def.h"
+#include "mvdm_softpc_termination.h"
 /*
  * SoftPC Revision 3.0
  *
@@ -149,6 +150,9 @@ void host_unsimulate()
 */
 void	host_set_hw_int()
 {
+	/* DIVERGENCE(MVDM-HOST-DIV-207): default-off witness immediately before
+	 * the unchanged original CPU40 hardware-interrupt request. */
+	mvdm_softpc_record_cpu_hw_interrupt();
 	cpu_interrupt(CPU_HW_INT, 0);
 }
 

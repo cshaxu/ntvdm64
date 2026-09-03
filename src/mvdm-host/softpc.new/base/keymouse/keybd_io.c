@@ -1485,6 +1485,11 @@ void kb_idle_poll()
 
 
 #ifdef NTVDM
+/* DIVERGENCE(MVDM-HOST-DIV-215): default-off observer marker at the original
+ * BIOS keyboard waitio edge.  It runs only after the source-selected AH=2
+ * operation; it neither creates input nor changes the idle call below. */
+#include "mvdm_softpc_termination.h"
+
    /*
     *  Ntvdm has a 16-bit int 16 handler
     *  it requires a few services for idle
@@ -1519,6 +1524,7 @@ void keyboard_io()
              * App is starting a waitio
              */
      case 2:
+       mvdm_softpc_record_keyboard_waitio();
        IDLE_waitio();
        break;
 

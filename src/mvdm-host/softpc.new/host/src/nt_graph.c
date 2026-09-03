@@ -63,6 +63,13 @@
 #include "nt_fulsc.h"
 #include "nt_det.h"
 
+/* DIVERGENCE(MVDM-HOST-DIV-203): default-off fixed-container observation
+ * hooks are kept out of the original display decision.  The hook below sees
+ * only the already-selected scalar count immediately before unchanged
+ * WriteConsoleA; it never reads guest text, modifies the buffer, or changes
+ * the original console call. */
+#include "mvdm_softpc_termination.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
@@ -2312,12 +2319,21 @@ void nt_scroll_complete()        { }
 void host_stream_io_update(half_word * buffer, word count)
 {
     DWORD dwBytesWritten;
+    BOOL wrote;
 
-    WriteConsoleA(sc.OutputHandle,
+    mvdm_softpc_record_stream_io_update((const uint8_t *)buffer,
+        (unsigned int)count);
+    wrote = WriteConsoleA(sc.OutputHandle,
 		  buffer,
 		  count,
 		  &dwBytesWritten,
 		  NULL
 		  );
+    /* DIVERGENCE(MVDM-HOST-DIV-216): preserve the original Console write;
+     * record its result only through the default-off, captured host observer
+     * path so a failed modern Console binding is not mistaken for COMMAND. */
+    mvdm_softpc_record_stream_io_result((unsigned int)count,
+        wrote ? 1u : 0u, (unsigned int)dwBytesWritten,
+        wrote ? ERROR_SUCCESS : GetLastError());
     flush_count = 0;
 }

@@ -946,8 +946,13 @@ void nt_key_down_action(PKEY_EVENT_RECORD KeyEvent)
 
     ATcode = KeyMsgToKeyCode(KeyEvent);
 
-    if(ATcode)
+    if(ATcode) {
+       /* DIVERGENCE(MVDM-HOST-DIV-207): fixed-container diagnostic only.
+        * The original scan-code conversion and callback remain unchanged;
+        * copy only the resulting byte before the original device call. */
+       mvdm_softpc_record_console_key((unsigned int)ATcode, 1u);
        (*host_key_down_fn_ptr)(ATcode);
+    }
 
 }
 
@@ -961,8 +966,12 @@ void nt_key_up_action(PKEY_EVENT_RECORD KeyEvent)
 
     ATcode = KeyMsgToKeyCode(KeyEvent);
 
-    if(ATcode)
+    if(ATcode) {
+       /* DIVERGENCE(MVDM-HOST-DIV-207): same scalar-only witness for the
+        * original key-up callback; no event, device, or guest state changes. */
+       mvdm_softpc_record_console_key((unsigned int)ATcode, 0u);
        (*host_key_up_fn_ptr)(ATcode);
+    }
 
 }
 

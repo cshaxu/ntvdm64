@@ -32,6 +32,7 @@ Actual worker routines are spun off elsewhere.
 #include  <config.h>
 #ifdef NTVDM
 #include <ntthread.h>
+#include <mvdm_softpc_termination.h>
 #endif
 
 #include <c_main.h>	/* C CPU definitions-interfaces */
@@ -246,7 +247,7 @@ LOCAL IU16 cpu_hw_interrupt_number;
 #if defined(SFELLOW)
 extern IU32	cpu_interrupt_map ;
 #else
-LOCAL IUM32	cpu_interrupt_map = 0;
+LOCAL volatile IUM32	cpu_interrupt_map = 0;
 #endif	/* SFELLOW */
 
 
@@ -268,7 +269,42 @@ LOCAL IBOOL single_instruction_delay_enable ;
 
 GLOBAL VOID clear_any_thingies IFN0()
 {
-	cpu_interrupt_map &= ~CPU_SIGALRM_EXCEPTION_MASK;
+	InterlockedAnd((volatile LONG *)&cpu_interrupt_map,
+		~(LONG)CPU_SIGALRM_EXCEPTION_MASK);
+}
+
+/* DIVERGENCE(MVDM-HOST-DIV-214): CPU40 receives timer, reset, host-I/O and
+ * PIC notifications from host threads.  The original 32-bit source used
+ * ordinary read/modify/write operations on this shared bit map, which can
+ * lose an unrelated notification on current preemptive hosts.  Keep the
+ * original event bits and their consumers, but make snapshot, raise and
+ * consume atomic.  This is not a PIC, BIOS, or guest-state replacement. */
+LOCAL IUM32 c_cpu_event_snapshot IFN0()
+{
+   return (IUM32)InterlockedCompareExchange(
+      (volatile LONG *)&cpu_interrupt_map, 0, 0);
+}
+
+LOCAL VOID c_cpu_raise_event IFN1(IUM32, mask)
+{
+   InterlockedOr((volatile LONG *)&cpu_interrupt_map, (LONG)mask);
+}
+
+LOCAL IBOOL c_cpu_take_event IFN1(IUM32, mask)
+{
+   IUM32 observed;
+   IUM32 desired;
+
+   do {
+      observed = c_cpu_event_snapshot();
+      if (!(observed & mask))
+         return FALSE;
+      desired = observed & ~mask;
+   } while ((IUM32)InterlockedCompareExchange(
+      (volatile LONG *)&cpu_interrupt_map, (LONG)desired,
+      (LONG)observed) != observed);
+
+   return TRUE;
 }
 
 
@@ -3364,8 +3400,13 @@ TYPEC4:
 			    SfscatterGatherSasTouch();
 			    break;
 #endif /* SFELLOW */
-		  case 0xfe:
-			  c_cpu_unsimulate();
+	  case 0xfe:
+		  /* DIVERGENCE(MVDM-HOST-DIV-203): fixed-container diagnosis
+		   * needs the source-owned CS:IP immediately before BOP FE takes
+		   * the original CCPU unwind.  This default-off scalar observer
+		   * neither routes the BOP nor changes CPU, guest, or session state. */
+		  mvdm_softpc_record_cpu_unsimulate(getCS(), getIP());
+		  c_cpu_unsimulate();
 			  /* Never returns (?) */
 		  default:
 			  EDL_fast_bop(immed);
@@ -3665,6 +3706,12 @@ TYPED4:
 #ifndef	PIG
       if (ops[0].sng == 0xfe)
       {
+	      /* DIVERGENCE(MVDM-HOST-DIV-203): the ordinary decoded BOP path
+	       * reaches the same original CCPU unwind as the fast path above.
+	       * Keep the default-off scalar observation at both sites so a
+	       * fixed-container report identifies the actual source-owned exit
+	       * point without changing the decoded BOP or unwind semantics. */
+	      mvdm_softpc_record_cpu_unsimulate(getCS(), getIP());
 	      c_cpu_unsimulate();
       }
       in_C = 1;
@@ -4011,24 +4058,22 @@ TYPEE8:
        while ( TRUE )
 	 {
 	 /* RESET ends the halt state. */
-	 if ( cpu_interrupt_map & CPU_RESET_EXCEPTION_MASK )
+	 if ( c_cpu_take_event(CPU_RESET_EXCEPTION_MASK) )
 	    break;
 
 	 /* An enabled INTR ends the halt state. */
-	 if ( GET_IF() && cpu_interrupt_map & CPU_HW_INT_MASK )
+	 if ( GET_IF() && (c_cpu_event_snapshot() & CPU_HW_INT_MASK) )
 	    break;
 
 	 /* As time goes by. */
-	 if (cpu_interrupt_map & CPU_SIGALRM_EXCEPTION_MASK)
+	 if (c_cpu_take_event(CPU_SIGALRM_EXCEPTION_MASK))
 	    {
-	    cpu_interrupt_map &= ~CPU_SIGALRM_EXCEPTION_MASK;
 	    host_timer_event();
 	    }
 
 #ifndef	PROD
-	 if (cpu_interrupt_map & CPU_SAD_EXCEPTION_MASK)
+	 if (c_cpu_take_event(CPU_SAD_EXCEPTION_MASK))
 	    {
-	    cpu_interrupt_map &= ~CPU_SAD_EXCEPTION_MASK;
 	    force_yoda();
 	    }
 #endif	/* PROD */
@@ -4362,9 +4407,8 @@ TYPEFF_3:
 #ifdef SYNCH_TIMERS
    if (took_absolute_toc || took_relative_jump)
 #endif /* SYNCH_TIMERS */
-   if (cpu_interrupt_map & CPU_RESET_EXCEPTION_MASK)
+   if (c_cpu_take_event(CPU_RESET_EXCEPTION_MASK))
       {
-      cpu_interrupt_map &= ~CPU_RESET_EXCEPTION_MASK;
       c_cpu_reset();
       doing_contributory = FALSE;
       doing_page_fault = FALSE;
@@ -4380,15 +4424,13 @@ TYPEFF_3:
 #ifdef SYNCH_TIMERS
    if (took_absolute_toc || took_relative_jump)
 #endif /* SYNCH_TIMERS */
-   if (cpu_interrupt_map & CPU_SIGALRM_EXCEPTION_MASK)
+   if (c_cpu_take_event(CPU_SIGALRM_EXCEPTION_MASK))
       {
-      cpu_interrupt_map &= ~CPU_SIGALRM_EXCEPTION_MASK;
       host_timer_event();
       }
 
-   if (cpu_interrupt_map & CPU_SAD_EXCEPTION_MASK)
+   if (c_cpu_take_event(CPU_SAD_EXCEPTION_MASK))
       {
-      cpu_interrupt_map &= ~CPU_SAD_EXCEPTION_MASK;
       force_yoda();
       }
 
@@ -4427,7 +4469,13 @@ TYPEFF_3:
    if (took_absolute_toc || took_relative_jump)
 #endif /* SYNCH_TIMERS */
 #ifndef SFELLOW
-   if (GET_IF() && (cpu_interrupt_map & CPU_HW_INT_MASK))
+   /* DIVERGENCE(MVDM-HOST-DIV-213): bounded, default-off scalar witness for
+    * the original CPU40 condition below.  It does not alter the interrupt
+    * map, guest flags, PIC state, instruction path, or acknowledge order. */
+   if ((c_cpu_event_snapshot() & CPU_HW_INT_MASK) && !GET_IF())
+      mvdm_softpc_record_cpu_hw_interrupt_deferred((unsigned int)GET_IF(),
+         (unsigned int)getCS(), (unsigned int)getIP());
+   if (GET_IF() && c_cpu_take_event(CPU_HW_INT_MASK))
       {
 
 /*
@@ -4438,7 +4486,10 @@ TYPEFF_3:
 	 IU32 hook_address;	
 
 	 cpu_hw_interrupt_number = ica_intack(&hook_address);
-	 cpu_interrupt_map &= ~CPU_HW_INT_MASK;
+	 /* DIVERGENCE(MVDM-HOST-DIV-207): default-off scalar-only witness after
+	  * the unchanged original PIC acknowledge and before the unchanged BIOS
+	  * interrupt transfer. */
+	 mvdm_softpc_record_cpu_hw_interrupt_service(cpu_hw_interrupt_number);
 	 EXT = EXTERNAL;
 	 SYNCH_TICK();
 	 do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);
@@ -4547,7 +4598,7 @@ NEXT_INST:
    start_trap = GET_TF();
 
    /* Determine if we can go into quick mode */
-   if ( cpu_interrupt_map == 0 &&
+   if ( c_cpu_event_snapshot() == 0 &&
 	start_trap == 0 &&
 	nr_inst_break == 0
 #ifdef PIG
@@ -4733,19 +4784,19 @@ LOCAL VOID
       switch ( type )
 	 {
       case CPU_HW_RESET:
-	 cpu_interrupt_map |= CPU_RESET_EXCEPTION_MASK;
+	 c_cpu_raise_event(CPU_RESET_EXCEPTION_MASK);
 	 break;
       case CPU_TIMER_TICK:
-	 cpu_interrupt_map |= CPU_SIGALRM_EXCEPTION_MASK;
+	 c_cpu_raise_event(CPU_SIGALRM_EXCEPTION_MASK);
 	 break;
       case CPU_SIGIO_EVENT:
-	 cpu_interrupt_map |= CPU_SIGIO_EXCEPTION_MASK;
+	 c_cpu_raise_event(CPU_SIGIO_EXCEPTION_MASK);
 	 break;
       case CPU_HW_INT:
-	 cpu_interrupt_map |= CPU_HW_INT_MASK;
+	 c_cpu_raise_event(CPU_HW_INT_MASK);
 	 break;
       case CPU_SAD_INT:
-	 cpu_interrupt_map |= CPU_SAD_EXCEPTION_MASK;
+	 c_cpu_raise_event(CPU_SAD_EXCEPTION_MASK);
 	 break;
 	 }
       quick_mode = FALSE;
@@ -4870,6 +4921,10 @@ LOCAL VOID
 	 in_C = 0;
 	 ccpu(FALSE);
 	 }
+	/* DIVERGENCE(MVDM-HOST-DIV-203): after the unchanged CCPU invocation
+	 * returns, record only its live scalar position for the fixed-container
+	 * diagnosis.  This does not select, resume, or terminate a CPU path. */
+	mvdm_softpc_record_cpu_simulate_return(getCS(), getIP());
       }
 
    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

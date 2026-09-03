@@ -2,9 +2,42 @@
 
 #include "session/session.h"
 
+#include <stdio.h>
 #include <string.h>
 
 static __declspec(thread) base_vdm_local *base_vdm_current;
+
+/* Default-off fixed-container witness for the source-shaped BaseVDM request
+ * boundary.  It deliberately records only scalar queue/request state: no
+ * VDMINFO buffer, guest address, host handle, or pointer crosses this
+ * diagnostic boundary. */
+static void base_vdm_local_record_request(const base_vdm_local *record,
+    USHORT state, NTSTATUS status)
+{
+    char path[MAX_PATH];
+    char line[192];
+    DWORD path_bytes;
+    HANDLE file;
+    DWORD written;
+    int formatted;
+
+    path_bytes = GetEnvironmentVariableA("MVDM_BASE_VDM_REPORT_PATH", path,
+        (DWORD)sizeof(path));
+    if (path_bytes == 0u || path_bytes >= sizeof(path) || record == NULL)
+        return;
+    formatted = snprintf(line, sizeof(line),
+        "MVDM-BASEVDM state=%04X available=%lu owner=%lu dos-state=%lu pending=%lu status=%08lX\\r\\n",
+        (unsigned int)state, (unsigned long)record->available,
+        (unsigned long)record->command_owner,
+        (unsigned long)record->dos_record_state,
+        (unsigned long)record->pending_request, (unsigned long)status);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(line)) return;
+    file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
+        OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (file == INVALID_HANDLE_VALUE) return;
+    (void)WriteFile(file, line, (DWORD)formatted, &written, NULL);
+    CloseHandle(file);
+}
 
 static int base_vdm_local_thread_bind(void *context)
 {
@@ -142,6 +175,56 @@ static int is_wow_request(USHORT state)
     return (state & ASKING_FOR_WOW_BINARY) != 0u;
 }
 
+/* DIVERGENCE(ADAPTER-BASESRV-010): source-shaped one-session counterpart of
+ * BaseSrvFillPifInfo in base/win32/server/srvvdm.c.  The original server
+ * serves this query from the DOS record without consuming that record.  This
+ * product has no CSRSS console-record list, but its copied record retains the
+ * same host-side PIF/title/current-directory fields.  There is no PIF payload
+ * in the admitted launch declaration, so PifFile and Reserved are reported as
+ * empty; Title follows the original AppName fallback. */
+static NTSTATUS fill_pif_info(const base_vdm_local *record,
+    PVDMINFO information)
+{
+    uint32_t title_bytes = record->application_bytes;
+    uint32_t directory_bytes = record->current_directory_bytes;
+
+    if (information->PifLen != 0u && information->PifFile == NULL)
+        return STATUS_INVALID_PARAMETER;
+    if (information->TitleLen != 0u && information->Title == NULL)
+        return STATUS_INVALID_PARAMETER;
+    if (information->CurDirectoryLen != 0u && information->CurDirectory == NULL)
+        return STATUS_INVALID_PARAMETER;
+    if (information->ReservedLen != 0u && information->Reserved == NULL)
+        return STATUS_INVALID_PARAMETER;
+    if ((information->TitleLen != 0u && title_bytes > information->TitleLen) ||
+        (information->CurDirectoryLen != 0u &&
+            directory_bytes > information->CurDirectoryLen))
+        return STATUS_INVALID_PARAMETER;
+
+    if (information->PifLen != 0u) ((CHAR *)information->PifFile)[0] = '\0';
+    if (information->ReservedLen != 0u) ((CHAR *)information->Reserved)[0] = '\0';
+    if (information->TitleLen != 0u) {
+        if (title_bytes != 0u)
+            (void)copy_bytes((uint8_t *)information->Title,
+                record->application, title_bytes);
+        else
+            ((CHAR *)information->Title)[0] = '\0';
+    }
+    if (information->CurDirectoryLen != 0u) {
+        if (directory_bytes != 0u)
+            (void)copy_bytes((uint8_t *)information->CurDirectory,
+                record->current_directory, directory_bytes);
+        else
+            ((CHAR *)information->CurDirectory)[0] = '\0';
+    }
+
+    information->PifLen = 0u;
+    information->TitleLen = (USHORT)title_bytes;
+    information->CurDirectoryLen = (USHORT)directory_bytes;
+    information->ReservedLen = 0u;
+    return STATUS_SUCCESS;
+}
+
 /* DIVERGENCE: source-derived single-session BaseSrvGetNextVDMCommand slice.
  * `srvvdm.c` distinguishes DOS console records from the separate WOW record:
  * an empty WOW queue returns successful zero lengths without blocking, while
@@ -152,9 +235,21 @@ static NTSTATUS get_next_command(base_vdm_local *record, PVDMINFO information)
 {
     uint16_t state = information->VDMState;
     int wow_request = is_wow_request(state);
-    if (state & (ASKING_FOR_SEPWOW_BINARY | ASKING_FOR_PIF))
+    if ((state & ASKING_FOR_SEPWOW_BINARY) && !(state & ASKING_FOR_PIF))
         return STATUS_NOT_IMPLEMENTED;
     EnterCriticalSection(&record->lock);
+    if (state & ASKING_FOR_PIF) {
+        NTSTATUS status;
+        if (record->available == 0u ||
+            (wow_request && record->command_owner != BASE_VDM_COMMAND_WOW) ||
+            (!wow_request && record->command_owner != BASE_VDM_COMMAND_DOS)) {
+            LeaveCriticalSection(&record->lock);
+            return STATUS_INVALID_PARAMETER;
+        }
+        status = fill_pif_info(record, information);
+        LeaveCriticalSection(&record->lock);
+        return status;
+    }
     if (record->available == 0u ||
         (wow_request && record->command_owner != BASE_VDM_COMMAND_WOW) ||
         (!wow_request && record->command_owner != BASE_VDM_COMMAND_DOS)) {
@@ -371,6 +466,8 @@ BOOL base_vdm_local_dispatch(PVDMINFO information)
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     status = get_next_command(base_vdm_current, information);
+    base_vdm_local_record_request(base_vdm_current, information->VDMState,
+        status);
     if (status == STATUS_SUCCESS) return TRUE;
     SetLastError(status == STATUS_INVALID_PARAMETER ? ERROR_INVALID_PARAMETER :
         status == STATUS_NO_MEMORY ? ERROR_NOT_ENOUGH_MEMORY :

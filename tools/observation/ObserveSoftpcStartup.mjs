@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 function usage() {
-  throw new Error('usage: node tools/observation/ObserveSoftpcStartup.mjs --launcher <observer.exe> --product <product.exe> --stage <runtime-dir> --report <result.txt> [--product-command <declared-DOS-command>] [--child-environment MVDM_SESSION_DISPOSE_REPORT_PATH=<absolute-path>|MVDM_COMMAND_CONTINUATION_REPORT_PATH=<absolute-path>|MVDM_DEM_OPEN_REPORT_PATH=<absolute-path>]');
+  throw new Error('usage: node tools/observation/ObserveSoftpcStartup.mjs --launcher <observer.exe> --product <product.exe> --stage <runtime-dir> --report <result.txt> [--interactive | --interactive-script | --interactive-script-ver-only | --product-command <declared-DOS-command>] [--observation-timeout-ms 10000..30000] [--minimal-host-environment] [--child-environment MVDM_SESSION_DISPOSE_REPORT_PATH=<absolute-path>|MVDM_COMMAND_CONTINUATION_REPORT_PATH=<absolute-path>|MVDM_DEM_OPEN_REPORT_PATH=<absolute-path>]');
 }
 
 function sha256(path) {
@@ -26,16 +26,44 @@ function normalizeManifest(manifest) {
 }
 
 const options = {};
-for (let index = 2; index < process.argv.length; index += 2) {
+for (let index = 2; index < process.argv.length; index += 1) {
   const key = process.argv[index];
+  if (key === '--interactive') {
+    if (options.interactive !== undefined) usage();
+    options.interactive = true;
+    continue;
+  }
+  if (key === '--interactive-script') {
+    if (options.interactiveScript !== undefined) usage();
+    options.interactiveScript = true;
+    continue;
+  }
+  if (key === '--interactive-script-ver-only') {
+    if (options.interactiveScriptVerOnly !== undefined) usage();
+    options.interactiveScriptVerOnly = true;
+    continue;
+  }
+  if (key === '--minimal-host-environment') {
+    if (options.minimalHostEnvironment !== undefined) usage();
+    options.minimalHostEnvironment = true;
+    continue;
+  }
   const value = process.argv[index + 1];
   if (!key?.startsWith('--') || value === undefined) usage();
   options[key.slice(2)] = value;
+  index += 1;
 }
 for (const key of Object.keys(options)) {
-  if (!['launcher', 'product', 'stage', 'report', 'product-command', 'child-environment'].includes(key)) {
+  if (!['launcher', 'product', 'stage', 'report', 'interactive', 'interactiveScript', 'interactiveScriptVerOnly', 'minimalHostEnvironment', 'product-command', 'observation-timeout-ms', 'child-environment'].includes(key)) {
     throw new Error(`unsupported observer option: --${key}`);
   }
+}
+if (options['observation-timeout-ms'] !== undefined &&
+    (!/^(10000|[12][0-9]{4}|30000)$/.test(options['observation-timeout-ms']))) {
+  throw new Error('observation timeout must be an integer from 10000 through 30000 ms');
+}
+if ((options.interactive !== undefined || options.interactiveScript !== undefined || options.interactiveScriptVerOnly !== undefined) && options['product-command'] !== undefined) {
+  throw new Error('interactive modes and --product-command are mutually exclusive');
 }
 if (options['product-command'] !== undefined &&
     (options['product-command'].length === 0 ||
@@ -102,24 +130,50 @@ const fixedMediaManifestSha256 = createHash('sha256').update(JSON.stringify(
 const runtimeCompanionsManifestSha256 = createHash('sha256').update(JSON.stringify(
   layout.runtimeCompanions)).digest('hex');
 const launcherArguments = [stagedProduct, options.stage, options.report];
-if (options['product-command'] !== undefined) {
+if (options.interactive !== undefined || options.interactiveScript !== undefined || options.interactiveScriptVerOnly !== undefined) {
+  /* S7's no-argument product contract still needs the original SoftPC
+   * foreground admission switch.  Passing it explicitly prevents the C
+   * observer's historical argc==4 fallback from manufacturing `/C EXIT`.
+   * This is a launch-container selector only: it never supplies a DOS line,
+   * guest byte, BOP record, or Console input event. */
+  launcherArguments.push('-f');
+  if (options.interactiveScript !== undefined)
+    launcherArguments.push('--observe-console-input');
+  else if (options.interactiveScriptVerOnly !== undefined)
+    launcherArguments.push('--observe-console-input-ver-only');
+} else if (options['product-command'] !== undefined) {
   /* The observer is a transport-only fixed-container harness. It forwards one
    * already-declared string to the existing app --command boundary; it neither
    * parses DOS syntax nor adds guest bytes. */
   launcherArguments.push('-f', '-o', '--command', options['product-command']);
 }
+if (options['observation-timeout-ms'] !== undefined)
+  launcherArguments.push('--observation-timeout-ms', options['observation-timeout-ms']);
 const result = spawnSync(options.launcher, launcherArguments, {
   cwd: options.stage,
   encoding: 'utf8',
   windowsHide: false,
-  env: childEnvironment === undefined ? process.env : {
-    ...process.env,
-    [childEnvironment.name]: childEnvironment.value
-  }
+  env: options.minimalHostEnvironment === undefined ?
+    (childEnvironment === undefined ? process.env : {
+      ...process.env,
+      [childEnvironment.name]: childEnvironment.value
+    }) : (() => {
+      const systemRoot = process.env.SystemRoot || process.env.SYSTEMROOT || 'C:\\Windows';
+      const environment = {
+        SystemRoot: systemRoot,
+        windir: systemRoot,
+        ComSpec: `${systemRoot}\\System32\\cmd.exe`,
+        PATH: `${systemRoot}\\System32`
+      };
+      if (childEnvironment !== undefined)
+        environment[childEnvironment.name] = childEnvironment.value;
+      return environment;
+    })()
 });
 writeFileSync(`${options.report}.json`, `${JSON.stringify({
   container: 'console-owning-nondebug',
   command: [options.launcher, ...launcherArguments],
+  minimalHostEnvironment: options.minimalHostEnvironment === true,
   childEnvironment: childEnvironment === undefined ? [] : [childEnvironment.name],
   stageManifestSha256: createHash('sha256').update(manifest).digest('hex'),
   fixedMediaManifestSha256,

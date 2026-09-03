@@ -249,6 +249,7 @@ int main(void)
     uint8_t application_buffer[MAXIMUM_VDM_PATH_STRING];
     uint8_t environment_buffer[MAXIMUM_VDM_ENVIORNMENT];
     uint8_t directory_buffer[MAXIMUM_VDM_CURRENT_DIR];
+    uint8_t reserved_buffer[64];
     static const CHAR directories[] = "=C:=C:\\DOS\0=D:=D:\\WORK\0\0";
     CHAR directory_copy[sizeof(directories)];
     publish_context producer;
@@ -309,6 +310,30 @@ int main(void)
     if (!GetNextVDMCommand(&information) ||
         information.EnviornmentSize != sizeof(environment) ||
         memcmp(environment_buffer, environment, sizeof(environment)) != 0) return 3;
+
+    /* The original SoftPC bootstrap queries PIF/title/current-directory
+     * before it obtains the first DOS command.  BaseSrvFillPifInfo answers
+     * from the queued DOS record without consuming that record. */
+    reset_info(&information);
+    information.VDMState = ASKING_FOR_PIF | ASKING_FOR_DOS_BINARY;
+    information.PifFile = command_buffer;
+    information.PifLen = sizeof(command_buffer);
+    information.Title = application_buffer;
+    information.TitleLen = sizeof(application_buffer);
+    information.CurDirectory = directory_buffer;
+    information.CurDirectoryLen = sizeof(directory_buffer);
+    information.Reserved = reserved_buffer;
+    information.ReservedLen = sizeof(reserved_buffer);
+    if (!GetNextVDMCommand(&information) || information.PifLen != 0u ||
+        information.ReservedLen != 0u ||
+        information.TitleLen != sizeof(application) ||
+        information.CurDirectoryLen != sizeof(directory) ||
+        command_buffer[0] != '\0' || reserved_buffer[0] != '\0' ||
+        memcmp(application_buffer, application, sizeof(application)) != 0 ||
+        memcmp(directory_buffer, directory, sizeof(directory)) != 0 ||
+        source.available != 1u ||
+        source.dos_record_state != BASE_VDM_DOS_RECORD_TO_TAKE_A_COMMAND)
+        return 42;
 
     reset_info(&information);
     information.CmdLine = command_buffer;
