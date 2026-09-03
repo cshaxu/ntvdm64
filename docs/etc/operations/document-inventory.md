@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3967 |
+| Documentation records | 3968 |
 | --- | --- |
-| Generated UTC | 2026-09-03T05:03:46Z |
+| Generated UTC | 2026-09-03T05:56:58Z |
 
 ## Entries
 
@@ -2209,7 +2209,7 @@ content-divergent entries.
 | etc/operations/proposal-mvdm-runtime-support-tool-re-root-001.md | indexed supporting material | 9955eefb0e8480e99f22e0cac375325d72663293262656537f4ca8d7cbb027c4 |
 | etc/operations/proposal-netapi-rap-redirector-network-boundary-recovery-001.md | indexed supporting material | df3cef8be8b0923781e82443a87609bb4cf1b2d21012812350b61994a95da5f5 |
 | etc/operations/proposal-ntdos-command-guest-exec-parent-return-001.md | indexed supporting material | 9b589b5f95bbd935804a007e9b1a1195561511f900f3c0ae426bc80c44798b72 |
-| etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md | indexed supporting material | 0d03e1ba1377191840e9c3a60607da01e779558153173aa055faaabc3a96eeba |
+| etc/operations/proposal-ntvdm-runtime-recovery-program-20260901.md | indexed supporting material | 57669e555cdfdfdb5c24f91dbbd36924a30295338ebad94281423998002ef3e1 |
 | etc/operations/proposal-opennt-bop-mirror-overlay-convergence-001.md | indexed supporting material | 2f2e91c7a491398ae23278766e5596002ae710113ff2bd5a1fb0577b2d9e12b2 |
 | etc/operations/proposal-opennt-bop-original-dispatcher-provider-recovery-001.md | indexed supporting material | b8808fef6cf0f7519c2103fdc8509c7f6f704846620537f59f0dd076af718e93 |
 | etc/operations/proposal-opennt-command-cmdexec32-full-capability-closure-001.md | indexed supporting material | 2dbce97ef0f4ad01836827a786b0a5bbb5512eabefe3937c1d49c06aef525c02 |
@@ -2245,6 +2245,7 @@ content-divergent entries.
 | etc/operations/proposal-selector-blind-protected-mode-substrate-001.md | indexed supporting material | 6353218f86907661b1dc72bb4a20067ef08f6c8e59be33e65e084a2a8b8b5598 |
 | etc/operations/proposal-selector-blind-realmode-continuity-001.md | indexed supporting material | bbdb1afc13e62af3bed756e3a22afd51e166d6662d0dfd6ff2f13512ce4a8ac9 |
 | etc/operations/proposal-seven-component-source-layout-reorganization-001.md | indexed supporting material | 27e9d29fe5e7b9436e25defcb8c071e5adc91903d5055f275e1b13a4c16d6526 |
+| etc/operations/proposal-single-process-interactive-command-console-recovery-001.md | indexed supporting material | 660d25ac08f88c0e2346a43f2c53fbab10883252b308fb1bba62be3a4e571f7f |
 | etc/operations/proposal-softpc-bios-conventional-memory-recovery-001.md | indexed supporting material | 3e4c68d258fa9e18ef6fbec2513bf52fc928f13afd9ddfd81f5de217cfa71a6b |
 | etc/operations/proposal-softpc-floppy-int15-recursive-machine-closure-001.md | indexed supporting material | daaf85b06c14c5078e9fa2ae296c06457ec7ef5a63cd9218f26285d18ede0aa3 |
 | etc/operations/proposal-softpc-pre-bop-startup-continuity-001.md | indexed supporting material | 3e3408ef4c791d93bd920c7b66de036c2ac3fbd0a9f4b8f00e0f7abfd2fdd472 |

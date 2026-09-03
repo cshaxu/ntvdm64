@@ -86,6 +86,9 @@ its stated runtime proof.
 
    **Planned S sequence after admission:**
 
+   The complete candidate execution contract is maintained in
+   [single-process interactive COMMAND console recovery](proposal-single-process-interactive-command-console-recovery-001.md).
+
    1. **S1 — Original interactive startup-contract audit.** Map
       `BaseCheckVDM`, `VDMINFO`, `srvvdm`, `cmdGetNextCmd` and
       `cmdGetStartInfo`; record every field difference between an interactive
