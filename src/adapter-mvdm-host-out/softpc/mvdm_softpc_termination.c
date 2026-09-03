@@ -490,6 +490,8 @@ void mvdm_softpc_record_command_stub_table(uint16_t guest_cs)
     int formatted;
     mvdm_guest_location entry;
     mvdm_guest_location target;
+    mvdm_guest_location lodcom_target;
+    mvdm_guest_location_lease code_lease;
     uint16_t com_in_hma_word = 0u;
     unsigned int a20_wrap;
 
@@ -500,6 +502,8 @@ void mvdm_softpc_record_command_stub_table(uint16_t guest_cs)
                 offsets[index]) || !mvdm_guest_location_read_far(&entry,
                 &target))
             return;
+        if (index == 1u)
+            lodcom_target = target;
         formatted = snprintf(message, sizeof(message),
             "MVDM-CMD-STUB name=%s entry=%04X:%04X target=%04X:%04X state=copied\r\n",
             names[index], (unsigned int)guest_cs, (unsigned int)offsets[index],
@@ -522,6 +526,30 @@ void mvdm_softpc_record_command_stub_table(uint16_t guest_cs)
         "MVDM-CMD-HMA cominhma=%u a20-wrap=%u state=copied\r\n",
         (unsigned int)(com_in_hma_word & 0xffu), a20_wrap);
     if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
+    {
+        HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
+            FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
+            FILE_ATTRIBUTE_NORMAL, NULL);
+        DWORD written;
+        if (report == INVALID_HANDLE_VALUE) return;
+        (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
+        CloseHandle(report);
+    }
+
+    /* The far pointer itself is insufficient evidence: source immediately
+     * transfers through LodCom_Entry.  Copy its first instruction bytes via
+     * a bounded lease, so HMA mapping is verified without changing it. */
+    if (!mvdm_guest_location_acquire(&lodcom_target, 8u,
+            GUEST_MEMORY_ACCESS_READ,
+            &code_lease)) return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CMD-HMA-CODE target=%04X:%04X bytes=%02X %02X %02X %02X %02X %02X %02X %02X state=copied\r\n",
+        (unsigned int)lodcom_target.segment, (unsigned int)lodcom_target.offset,
+        code_lease.bytes[0], code_lease.bytes[1], code_lease.bytes[2],
+        code_lease.bytes[3], code_lease.bytes[4], code_lease.bytes[5],
+        code_lease.bytes[6], code_lease.bytes[7]);
+    if (!mvdm_guest_location_release(&code_lease, 0) || formatted <= 0 ||
+        (size_t)formatted >= sizeof(message)) return;
     {
         HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
             FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,

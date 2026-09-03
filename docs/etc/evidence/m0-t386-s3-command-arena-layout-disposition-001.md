@@ -93,16 +93,20 @@ MVDM-CMD-STUB name=TrnLodCom1 entry=03F4:011C target=FFFF:60F1 state=copied
 MVDM-CMD-STUB name=LodCom entry=03F4:0120 target=FFFF:5E5E state=copied
 MVDM-CMD-STUB name=MsgRetrv entry=03F4:0124 target=FFFF:644A state=copied
 MVDM-CMD-HMA cominhma=1 a20-wrap=0 state=copied
+MVDM-CMD-HMA-CODE target=FFFF:5E5E bytes=1F 83 C4 02 80 3E A6 02 state=copied
 ```
 
 The three values are the original patched resident jump-table entries.  They
 exclude the earlier hypothesis that `LodCom_Trap` jumps to transient message
 data: its `LodCom_Entry` target is the resident HMA entry at `FFFF:5E5E`, not
-the conventional `BadVerMsg` location.  `stub.asm::CheckA20` requires A20
-when `ComInHMA` is nonzero; the CPU40 read-only query reports `a20-wrap=0`,
-which means 20-bit wrapping is disabled and A20 is already enabled.  The
-observer uses short mapping-manager read leases only; it neither changes the
-stub table, A20, CPU state nor any BOP result.
+the conventional `BadVerMsg` location.  The first eight bytes at that exact
+target decode as the opening source instructions of `command2.asm::LodCom`
+(`pop ds; add sp,2; cmp ExtCom,0`), proving the HMA far target is executable
+resident code rather than an alias into text.  `stub.asm::CheckA20` requires
+A20 when `ComInHMA` is nonzero; the CPU40 read-only query reports
+`a20-wrap=0`, which means 20-bit wrapping is disabled and A20 is already
+enabled.  The observer uses short mapping-manager read leases only; it neither
+changes the stub table, A20, CPU state nor any BOP result.
 
 ## Disposition
 
@@ -121,8 +125,9 @@ stub table, A20, CPU state nor any BOP result.
   `cmdStart`/`cmdGetInitEnvironment` inside the already-running CLI process.
   Its source contract preserves the source environment and adds VDM drive
   state; it is not a generic environment-shortening workaround.
-- The completed `54:0F` records, resident table and A20 state exclude the
-  environment, BOP return stack, table-patching and HMA-enable hypotheses.
+- The completed `54:0F` records, resident table, resident HMA code and A20
+  state exclude the environment, BOP return stack, table-patching and
+  HMA-enable hypotheses.
   No environment projection or guest allocator substitute is admitted on the
   basis of the withdrawn observation.
 
