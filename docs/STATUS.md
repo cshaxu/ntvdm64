@@ -2,12 +2,17 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T386 is closed: immutable original
-`COMMAND.COM` executed a real built-in and completed a DOS redirection write
-in the selected CPU40/x86 SoftPC product. See the
-[T386 closure](history/m0-t386-original-command-runtime-recovery-closure-20260902.md).
-The next owner admission chooses from the ordered candidate queue; current
-product work must not continue until then.
+**No active M/T/S packet.** M0 T387 is closed: the selected CPU40/x86
+package accepts a positional declared DOS command and the published `ntvdm.exe`
+performed the original COMMAND redirection write from `O:\\ntvdm64`. Direct
+no-argument launch now has an explicit app-owned user-visible disposition;
+interactive COMMAND remains the first queue candidate. See the
+[T387 closure](history/m0-t387-positional-command-cli-closure-20260903.md).
+
+## Active Packet
+
+None. The next task requires a fresh admission from the ordered candidate
+queue.
 
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 

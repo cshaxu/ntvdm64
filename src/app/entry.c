@@ -39,6 +39,22 @@ static void app_report_media_root_rejected(void)
         "NTVDM64 package path too long", MB_OK | MB_ICONERROR);
 }
 
+static void app_report_no_command(void)
+{
+    /* The current Base VDM broker deliberately has no interactive command
+     * producer.  Do not enter original SoftPC with an empty record: that
+     * would look like a silent product crash rather than the present CLI
+     * capability boundary.  A declared command still follows the untouched
+     * BaseClient/COMMAND path below. */
+    MessageBoxA(NULL,
+        "NTVDM64 currently starts one DOS command per invocation.\r\n\r\n"
+        "Examples:\r\n"
+        "  ntvdm.exe dir\r\n"
+        "  ntvdm.exe program.com argument\r\n\r\n"
+        "An interactive COMMAND session is not available in this build.",
+        "NTVDM64 command required", MB_OK | MB_ICONINFORMATION);
+}
+
 static const char *app_dispose_reason_name(uint32_t reason)
 {
     switch (reason) {
@@ -96,6 +112,8 @@ int main(int argc, char **argv)
     app_presentation_window presentation;
     mvdm_base_vdm_environment vdm_environment;
     session owner;
+    char **softpc_argv = NULL;
+    int softpc_argc = 0;
     uint32_t dispose_reason;
     int result = 1;
 
@@ -109,6 +127,11 @@ int main(int argc, char **argv)
     mvdm_softpc_capture_command_continuation_report_path();
     mvdm_command_native_child_capture_report_path();
     if (!app_launch_declaration_consume_options(&declaration, &argc, argv)) {
+        result = APP_STARTUP_OPTIONS_REJECTED;
+        goto finish;
+    }
+    if (!app_launch_declaration_prepare_softpc_arguments(argc, argv,
+            &softpc_argc, &softpc_argv)) {
         result = APP_STARTUP_OPTIONS_REJECTED;
         goto finish;
     }
@@ -126,6 +149,11 @@ int main(int argc, char **argv)
      * installs it before any original MVDM host code reads its environment. */
     if (!mvdm_base_vdm_environment_prepare(&vdm_environment)) {
         result = APP_STARTUP_ENVIRONMENT_REJECTED;
+        goto finish;
+    }
+    if (declaration.command_declared == 0u) {
+        app_report_no_command();
+        result = 0;
         goto finish;
     }
     if (!app_machine_shell_select_backend(&owner,
@@ -170,12 +198,13 @@ int main(int argc, char **argv)
         result = APP_STARTUP_SHELL_REJECTED;
         goto finish;
     }
-    if (app_machine_shell_run(&shell, argc, argv, &result) !=
+    if (app_machine_shell_run(&shell, softpc_argc, softpc_argv, &result) !=
             APP_MACHINE_SHELL_OK) {
         result = APP_STARTUP_MACHINE_FAILURE;
     }
 
 finish:
+    app_launch_declaration_release_softpc_arguments(softpc_argv);
     (void)app_presentation_window_close(&presentation);
     mvdm_base_vdm_environment_restore(&vdm_environment);
     if (!session_dispose_with_reason(&owner, &dispose_reason)) {

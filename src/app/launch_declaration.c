@@ -2,7 +2,11 @@
 #include "session/session.h"
 
 #include <ctype.h>
+#include <stdlib.h>
 #include <string.h>
+
+static int append_text(char *destination, size_t capacity, size_t *length,
+    const char *source);
 
 void app_launch_declaration_initialize(app_launch_declaration *declaration)
 {
@@ -12,20 +16,71 @@ void app_launch_declaration_initialize(app_launch_declaration *declaration)
     base_vdm_broker_initialize(&declaration->broker);
 }
 
+static int is_softpc_option(const char *argument)
+{
+    return argument != NULL && (argument[0] == '-' || argument[0] == '/') &&
+        argument[1] != '\0';
+}
+
+static int append_dos_argument(char *destination, size_t capacity,
+    size_t *length, const char *argument)
+{
+    int quote;
+
+    if (argument == NULL || argument[0] == '\0' ||
+        strpbrk(argument, "\r\n\"") != NULL) return 0;
+    quote = strpbrk(argument, " \t") != NULL;
+    if (quote && !append_text(destination, capacity, length, "\"")) return 0;
+    if (!append_text(destination, capacity, length, argument)) return 0;
+    return !quote || append_text(destination, capacity, length, "\"");
+}
+
+static int set_positional_command(app_launch_declaration *declaration,
+    int argc, char **argv, int start_index)
+{
+    int index;
+    size_t length = 0u;
+
+    if (declaration == NULL || argv == NULL || start_index < 1 ||
+        start_index >= argc) return 0;
+    declaration->requested_command[0] = '\0';
+    if (start_index + 1 == argc) {
+        size_t bytes = strlen(argv[start_index]);
+        if (bytes == 0u || bytes >= sizeof(declaration->requested_command) ||
+            strpbrk(argv[start_index], "\r\n") != NULL) return 0;
+        memcpy(declaration->requested_command, argv[start_index], bytes + 1u);
+        declaration->command_declared = 1u;
+        return 1;
+    }
+    for (index = start_index; index < argc; ++index) {
+        if (index != start_index &&
+            !append_text(declaration->requested_command,
+                sizeof(declaration->requested_command), &length, " ")) return 0;
+        if (!append_dos_argument(declaration->requested_command,
+                sizeof(declaration->requested_command), &length, argv[index]))
+            return 0;
+    }
+    declaration->command_declared = 1u;
+    return 1;
+}
+
 int app_launch_declaration_consume_options(app_launch_declaration *declaration,
     int *argc, char **argv)
 {
     int read_index;
     int write_index;
+    int original_argc;
+    int positional_start = -1;
 
     if (declaration == NULL || argc == NULL || argv == NULL || *argc < 1)
         return 0;
+    original_argc = *argc;
     write_index = 1;
-    for (read_index = 1; read_index < *argc; ++read_index) {
+    for (read_index = 1; read_index < original_argc; ++read_index) {
         if (strcmp(argv[read_index], "--command") == 0) {
             size_t command_bytes;
             if (declaration->command_declared != 0u ||
-                read_index + 1 >= *argc) return 0;
+                positional_start >= 0 || read_index + 1 >= original_argc) return 0;
             command_bytes = strlen(argv[read_index + 1]);
             if (command_bytes == 0u || command_bytes >=
                     sizeof(declaration->requested_command) ||
@@ -36,10 +91,47 @@ int app_launch_declaration_consume_options(app_launch_declaration *declaration,
             ++read_index;
             continue;
         }
-        argv[write_index++] = argv[read_index];
+        if (positional_start >= 0) continue;
+        if (is_softpc_option(argv[read_index])) {
+            argv[write_index++] = argv[read_index];
+            continue;
+        }
+        if (declaration->command_declared != 0u) return 0;
+        positional_start = read_index;
     }
+    if (positional_start >= 0 &&
+        !set_positional_command(declaration, original_argc, argv,
+            positional_start)) return 0;
     *argc = write_index;
     return 1;
+}
+
+int app_launch_declaration_prepare_softpc_arguments(int argc, char **argv,
+    int *softpc_argc, char ***softpc_argv)
+{
+    static char foreground_option[] = "-f";
+    char **forwarded;
+    int index;
+    int has_foreground = 0;
+
+    if (argc < 1 || argv == NULL || softpc_argc == NULL ||
+        softpc_argv == NULL) return 0;
+    forwarded = (char **)calloc((size_t)argc + 2u, sizeof(*forwarded));
+    if (forwarded == NULL) return 0;
+    for (index = 0; index < argc; ++index) {
+        forwarded[index] = argv[index];
+        if (is_softpc_option(argv[index]) && tolower((unsigned char)argv[index][1]) == 'f')
+            has_foreground = 1;
+    }
+    if (!has_foreground) forwarded[argc++] = foreground_option;
+    *softpc_argc = argc;
+    *softpc_argv = forwarded;
+    return 1;
+}
+
+void app_launch_declaration_release_softpc_arguments(char **softpc_argv)
+{
+    free(softpc_argv);
 }
 
 int app_launch_declaration_bind(app_launch_declaration *declaration,

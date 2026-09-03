@@ -23,6 +23,9 @@ typedef struct app_launch_declaration {
 void app_launch_declaration_initialize(app_launch_declaration *declaration);
 int app_launch_declaration_consume_options(app_launch_declaration *declaration,
     int *argc, char **argv);
+int app_launch_declaration_prepare_softpc_arguments(int argc, char **argv,
+    int *softpc_argc, char ***softpc_argv);
+void app_launch_declaration_release_softpc_arguments(char **softpc_argv);
 int app_launch_declaration_bind(app_launch_declaration *declaration,
     session *owner);
 int app_launch_declaration_publish(app_launch_declaration *declaration,

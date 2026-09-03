@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3968 |
+| Documentation records | 3970 |
 | --- | --- |
-| Generated UTC | 2026-09-03T05:56:58Z |
+| Generated UTC | 2026-09-03T12:49:38Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 59cad53ecfac44d0ec83dea6f13cc1e57279b49a988708c32cfcdd49fafc0dcf |
+| STATUS.md | principal control document | 3e7fdcd44138eea3198952003ad7baff600f5168ce0fb2d1b5a8c47885fe4e66 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1310,6 +1310,7 @@ content-divergent entries.
 | etc/evidence/m0-t386-s3-original-base-vdm-environment-recovery-001.md | indexed supporting material | 8924d0d2c2a4f57d4fcc6078aa5d1cf3226a3c41522dad16d397099bd91e7ad7 |
 | etc/evidence/m0-t386-s3-original-command-continuation-disposition-001.md | indexed supporting material | 7cc5ee1ebaea88087254dc37f39c7d0cfd800823d0e83fedcab6db4a6164af4b |
 | etc/evidence/m0-t387-s1-positional-command-declaration-001.md | indexed supporting material | 0ea88b8198008f066c1159c58a40d5c0cfb598dbe60a87618f2d5afe3a07eb3b |
+| etc/evidence/m0-t387-s2-runnable-package-publication-001.md | indexed supporting material | 30cfd73f262b0678ab93cb1129254e68cfc402db7a10abc4a7dea04afc3cc801 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -3875,6 +3876,7 @@ content-divergent entries.
 | history/m0-t384-cpu40-illegal-operation-startup-recovery-closure-20260902.md | closed task history | 8364863ca48ccc8e29f3880cdcbebcd52199519293330d71834df51b123d9562 |
 | history/m0-t385-original-dos-arena-startup-recovery-closure-20260902.md | closed task history | e44cc3852bbe4c3bc158236820f24685b27f8d2e050c37fd6b5ed3c23239b668 |
 | history/m0-t386-original-command-runtime-recovery-closure-20260902.md | closed task history | 378fb608f4ba47c73888a6bd2b392d508565e7c37c36ded8815bb219fc5355a6 |
+| history/m0-t387-positional-command-cli-closure-20260903.md | closed task history | 6e74d8fcfc6c1784140e24819eb91e32112b186301b47a08ad7cc3263563fe75 |
 | history/m0-t95-closure-20260811.md | closed task history | 23e4f6c90cb90a6f336e30f155e6221734d00d08ad610319c3b49cf75d212993 |
 | history/m0-t96-closure-20260812.md | closed task history | 468198ed0af4ecf9cfa54faef354f1c5454dc2cd9557b0e3e74de51d55b804dc |
 | history/m0-t96-s1-p1-20260811.md | closed task history | e9c6dbc52b74114fa88530d7211cdad934f3a8d09dab79116432f82fa32ac7e8 |

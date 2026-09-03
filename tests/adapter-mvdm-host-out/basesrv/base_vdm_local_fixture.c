@@ -120,6 +120,88 @@ static int verify_rejected_launch_declarations(void)
     return 0;
 }
 
+static int verify_positional_launch_declaration(void)
+{
+    static char program[] = "fixture";
+    static char stream_option[] = "-o";
+    static char echo[] = "echo";
+    static char message[] = "hello world";
+    char *argv[] = { program, stream_option, echo, message, NULL };
+    char **softpc_argv = NULL;
+    int argc = 4;
+    int softpc_argc = 0;
+    app_launch_declaration declaration;
+
+    app_launch_declaration_initialize(&declaration);
+    if (!app_launch_declaration_consume_options(&declaration, &argc, argv)) return 42;
+    if (argc != 2 || strcmp(argv[1], "-o") != 0 ||
+        !declaration.command_declared ||
+        strcmp(declaration.requested_command, "echo \"hello world\"") != 0)
+        return 43;
+    if (!app_launch_declaration_prepare_softpc_arguments(argc, argv,
+            &softpc_argc, &softpc_argv)) return 44;
+    if (softpc_argc != 3 || strcmp(softpc_argv[1], "-o") != 0 ||
+        strcmp(softpc_argv[2], "-f") != 0) {
+        app_launch_declaration_release_softpc_arguments(softpc_argv);
+        return 45;
+    }
+    app_launch_declaration_release_softpc_arguments(softpc_argv);
+    return 0;
+}
+
+static int verify_empty_launch_declaration(void)
+{
+    static char program[] = "fixture";
+    char *argv[] = { program, NULL };
+    char **softpc_argv = NULL;
+    int argc = 1;
+    int softpc_argc = 0;
+    app_launch_declaration declaration;
+
+    app_launch_declaration_initialize(&declaration);
+    if (!app_launch_declaration_consume_options(&declaration, &argc, argv) ||
+        argc != 1 || declaration.command_declared != 0u) return 46;
+    if (!app_launch_declaration_prepare_softpc_arguments(argc, argv,
+            &softpc_argc, &softpc_argv)) return 47;
+    if (softpc_argc != 2 || strcmp(softpc_argv[1], "-f") != 0) {
+        app_launch_declaration_release_softpc_arguments(softpc_argv);
+        return 48;
+    }
+    app_launch_declaration_release_softpc_arguments(softpc_argv);
+    return 0;
+}
+
+static int verify_explicit_softpc_and_command_options(void)
+{
+    static char program[] = "fixture";
+    static char foreground_option[] = "-f";
+    static char stream_option[] = "-o";
+    static char command_option[] = "--command";
+    static char command_text[] = "VER";
+    char *argv[] = { program, foreground_option, stream_option,
+        command_option, command_text, NULL };
+    char **softpc_argv = NULL;
+    int argc = 5;
+    int softpc_argc = 0;
+    app_launch_declaration declaration;
+
+    app_launch_declaration_initialize(&declaration);
+    if (!app_launch_declaration_consume_options(&declaration, &argc, argv))
+        return 49;
+    if (argc != 3 || strcmp(argv[1], "-f") != 0 ||
+        strcmp(argv[2], "-o") != 0 || !declaration.command_declared ||
+        strcmp(declaration.requested_command, "VER") != 0) return 50;
+    if (!app_launch_declaration_prepare_softpc_arguments(argc, argv,
+            &softpc_argc, &softpc_argv)) return 51;
+    if (softpc_argc != 3 || strcmp(softpc_argv[1], "-f") != 0 ||
+        strcmp(softpc_argv[2], "-o") != 0) {
+        app_launch_declaration_release_softpc_arguments(softpc_argv);
+        return 52;
+    }
+    app_launch_declaration_release_softpc_arguments(softpc_argv);
+    return 0;
+}
+
 int main(void)
 {
     static const uint8_t command[] = "C:\\DOS\\COMMAND.COM /C VER\r\n";
@@ -145,6 +227,12 @@ int main(void)
     launch_declaration_result = verify_long_package_launch_declaration();
     if (launch_declaration_result != 0) return launch_declaration_result;
     launch_declaration_result = verify_rejected_launch_declarations();
+    if (launch_declaration_result != 0) return launch_declaration_result;
+    launch_declaration_result = verify_positional_launch_declaration();
+    if (launch_declaration_result != 0) return launch_declaration_result;
+    launch_declaration_result = verify_empty_launch_declaration();
+    if (launch_declaration_result != 0) return launch_declaration_result;
+    launch_declaration_result = verify_explicit_softpc_and_command_options();
     if (launch_declaration_result != 0) return launch_declaration_result;
     reset_info(&information);
     if (GetNextVDMCommand(NULL) || GetLastError() != ERROR_CALL_NOT_IMPLEMENTED)
