@@ -46,8 +46,8 @@ typedef struct app_presentation_window {
 void app_presentation_window_initialize(app_presentation_window *window);
 int app_presentation_window_valid(const app_presentation_window *window);
 /* Prepare and open are deliberately separate: the sink binds while session is
- * ready, then the UI thread must either be ready or fail before original host
- * startup begins. */
+ * ready, but source-owned graphics or an explicit host display gesture opens
+ * the UI only after original host startup has activated the session. */
 int app_presentation_window_prepare(app_presentation_window *window,
     session *owner);
 int app_presentation_window_open(app_presentation_window *window);

@@ -105,10 +105,10 @@ component. It renders copied text or graphics snapshots and forwards ordinary
 keyboard records through the original `CONIN$` input endpoint when its owning
 display-arbitration path has prepared it. It is deliberately **not** opened by
 normal product startup: original SoftPC acquires the process Console for the
-default character route. T388 S5 will admit a window only after original
-graphics/fullscreen or PIF state selects it. `Alt+Enter` changes this app
-window's public window style; it does not select `X86GFX`, Console Server
-fullscreen, or any original fullscreen path.
+default character route. T388 S5 opens it only after the original
+`graphicsResize` boundary or a Console-consumed Alt+Enter request. Alt+Enter
+from this window returns to Console; it does not select `X86GFX`, fabricate a
+Console Server fullscreen mapping, or change original SoftPC fullscreen state.
 
 The app never receives a source DIB pointer, `HPALETTE`, or source mutex.
 The source-facing adapter resolves the original DIB mutex through the
@@ -116,3 +116,9 @@ session's existing host-resource mapping manager, waits and copies the
 graphics/palette snapshot before app paints.  User close requests a typed
 session cancellation; normal app teardown posts a distinct shutdown message
 and waits for the UI thread before session disposal.
+
+## M0 T388 S5 display arbitration divergence
+
+| Exception | Original purpose | Reason | Implementation | Files |
+| --- | --- | --- | --- | --- |
+| `APP-DIV-016` | NT4 Console Server selected graphics/fullscreen surfaces and consumed Alt+Enter before the original SoftPC keyboard worker. | Modern public Console has no private VDM graphics controller or hardware-fullscreen transfer. | App binds a passive sink before activation, opens only on the adapter's original-graphics or consumed-Alt+Enter event, and returns focus to Console when the presentation window handles Alt+Enter. It never parses DOS, emits BOP, or writes guest memory. | `entry.c`, `presentation_window.[ch]`; adapter peer `../adapter-mvdm-host-out/win32/source/console_compat.c` |

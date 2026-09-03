@@ -87,6 +87,8 @@ int main(void)
             &graphics_buffer, &graphics_screen) || graphics_screen == NULL ||
         graphics_buffer.hMutex == NULL || graphics_buffer.lpBitMap == NULL)
         return 11;
+    if (observed_count != 4u ||
+        observed_event.kind != SESSION_VIDEO_EVENT_GRAPHICS_READY) return 14;
     ((uint8_t *)graphics_buffer.lpBitMap)[0] = 0x5au;
     if (!session_presentation_graphics_snapshot(&instance, graphics_copy,
             (uint32_t)sizeof(graphics_copy), NULL, NULL, NULL, NULL, &count) ||

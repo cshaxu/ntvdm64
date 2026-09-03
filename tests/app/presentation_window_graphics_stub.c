@@ -1,9 +1,9 @@
-#include <windows.h>
-
-#include "app/presentation_window.h"
 #include "adapter-mvdm-host-out/win32/include/presentation_surface.h"
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_presentation_font.h"
 
+/* The toggle fixture validates app/session surface lifetime only.  It has no
+ * original graphicsResize producer, so force the app down its text-surface
+ * fallback without introducing a second product implementation. */
 int mvdm_presentation_graphics_describe(session *owner, uint32_t *width_out,
     uint32_t *height_out, uint32_t *bits_out, uint32_t *stride_out,
     uint32_t *bytes_out)
@@ -44,31 +44,4 @@ int mvdm_softpc_presentation_font_snapshot(session *owner, uint8_t *bytes,
         capacity != MVDM_SOFTPC_PRESENTATION_FONT_BYTES) return 0;
     for (index = 0u; index < capacity; ++index) bytes[index] = 0u;
     return 1;
-}
-
-int main(void)
-{
-    session owner;
-    app_presentation_window window;
-    RECT client;
-
-    session_initialize(&owner, 361u);
-    app_presentation_window_initialize(&window);
-    if (!session_valid(&owner) || !session_select_machine_backend(&owner,
-            SESSION_MACHINE_BACKEND_SOFTPC) ||
-        !app_presentation_window_prepare(&window, &owner)) return 1;
-    if (!session_activate(&owner)) return 2;
-    {
-        session_video_event event;
-        ZeroMemory(&event, sizeof(event));
-        event.kind = SESSION_VIDEO_EVENT_GRAPHICS_READY;
-        if (!session_notify_video_event(&owner, &event)) return 3;
-    }
-    if (!app_presentation_window_active(&window) || window.window == NULL)
-        return 4;
-    if (!GetClientRect(window.window, &client) || client.right != 640 ||
-        client.bottom != 400) return 5;
-    if (!app_presentation_window_close(&window)) return 6;
-    if (!session_dispose(&owner)) return 7;
-    return 0;
 }

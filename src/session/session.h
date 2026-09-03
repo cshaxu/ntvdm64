@@ -66,7 +66,16 @@ typedef struct session_binding_diagnostic {
 enum session_video_event_kind {
     SESSION_VIDEO_EVENT_INVALIDATE = 1u,
     SESSION_VIDEO_EVENT_PALETTE = 2u,
-    SESSION_VIDEO_EVENT_ACTIVE = 3u
+    SESSION_VIDEO_EVENT_ACTIVE = 3u,
+    /* The original SoftPC graphicsResize path has obtained a writable
+     * graphics plane.  This is a host presentation boundary, not guest
+     * state or a Console Server selector. */
+    SESSION_VIDEO_EVENT_GRAPHICS_READY = 4u,
+    /* Modern Console no longer owns NT4's Alt+Enter hardware fullscreen
+     * transition.  The console adapter reports the consumed host gesture so
+     * app can transfer its one presentation surface without injecting a DOS
+     * key event. */
+    SESSION_VIDEO_EVENT_DISPLAY_TOGGLE = 5u
 };
 
 typedef struct session_video_event {

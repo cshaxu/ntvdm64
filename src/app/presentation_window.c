@@ -77,8 +77,24 @@ static int presentation_event(void *context, const session_video_event *event)
     app_presentation_window *window = (app_presentation_window *)context;
     HWND handle;
 
-    (void)event;
     if (!app_presentation_window_valid(window)) return 0;
+    if (event == NULL) return 0;
+    if (event->kind == SESSION_VIDEO_EVENT_GRAPHICS_READY) {
+        /* The original graphicsResize call is the only automatic entry into
+         * the app surface.  Once Alt+Enter returned a graphics guest to the
+         * Console, later paint notifications must not silently reopen it. */
+        if (InterlockedCompareExchange(&window->state, 0, 0) ==
+            APP_PRESENTATION_WINDOW_READY)
+            return app_presentation_window_open(window);
+        return 1;
+    }
+    if (event->kind == SESSION_VIDEO_EVENT_DISPLAY_TOGGLE) {
+        LONG state = InterlockedCompareExchange(&window->state, 0, 0);
+        if (state == APP_PRESENTATION_WINDOW_READY ||
+            state == APP_PRESENTATION_WINDOW_CLOSED)
+            return app_presentation_window_open(window);
+        return 1;
+    }
     if (InterlockedCompareExchange(&window->state, 0, 0) ==
             APP_PRESENTATION_WINDOW_CLOSING ||
         InterlockedCompareExchange(&window->state, 0, 0) ==
@@ -86,7 +102,7 @@ static int presentation_event(void *context, const session_video_event *event)
         return 1;
     handle = (HWND)InterlockedCompareExchangePointer(
         (PVOID volatile *)&window->window, NULL, NULL);
-    if (handle == NULL) return 0;
+    if (handle == NULL) return 1;
     if (InterlockedExchange(&window->repaint_pending, 1) == 0)
         (void)PostMessageW(handle, APP_PRESENTATION_MESSAGE_REPAINT, 0u, 0);
     return 1;
@@ -270,36 +286,6 @@ static void presentation_paint(app_presentation_window *window, HDC target)
     free(pixels);
 }
 
-static void presentation_toggle_fullscreen(app_presentation_window *window,
-    HWND handle)
-{
-    MONITORINFO monitor;
-    if (InterlockedCompareExchange(&window->fullscreen, 0, 0) == 0) {
-        window->windowed_style = GetWindowLongPtrW(handle, GWL_STYLE);
-        (void)GetWindowRect(handle, &window->windowed_rect);
-        ZeroMemory(&monitor, sizeof(monitor));
-        monitor.cbSize = sizeof(monitor);
-        if (GetMonitorInfoW(MonitorFromWindow(handle,
-                MONITOR_DEFAULTTONEAREST), &monitor)) {
-            SetWindowLongPtrW(handle, GWL_STYLE, WS_POPUP | WS_VISIBLE);
-            SetWindowPos(handle, HWND_TOP, monitor.rcMonitor.left,
-                monitor.rcMonitor.top,
-                monitor.rcMonitor.right - monitor.rcMonitor.left,
-                monitor.rcMonitor.bottom - monitor.rcMonitor.top,
-                SWP_FRAMECHANGED | SWP_SHOWWINDOW);
-            InterlockedExchange(&window->fullscreen, 1);
-        }
-    } else {
-        SetWindowLongPtrW(handle, GWL_STYLE, window->windowed_style);
-        SetWindowPos(handle, HWND_NOTOPMOST, window->windowed_rect.left,
-            window->windowed_rect.top,
-            window->windowed_rect.right - window->windowed_rect.left,
-            window->windowed_rect.bottom - window->windowed_rect.top,
-            SWP_FRAMECHANGED | SWP_SHOWWINDOW);
-        InterlockedExchange(&window->fullscreen, 0);
-    }
-}
-
 static DWORD WINAPI presentation_thread(void *context)
 {
     app_presentation_window *window = (app_presentation_window *)context;
@@ -310,6 +296,11 @@ static DWORD WINAPI presentation_thread(void *context)
     uint32_t width;
     uint32_t height;
 
+    /* The client rectangle is the emulated SoftPC surface, not a host-scaled
+     * suggestion.  Use the public system-DPI process mode before this first
+     * app window; if another host surface has already selected awareness this
+     * harmlessly fails and that existing mode remains authoritative. */
+    (void)SetProcessDPIAware();
     ZeroMemory(&window_class, sizeof(window_class));
     window_class.lpfnWndProc = presentation_window_proc;
     window_class.hInstance = GetModuleHandleW(NULL);
@@ -331,9 +322,11 @@ static DWORD WINAPI presentation_thread(void *context)
     if (window->input == INVALID_HANDLE_VALUE) window->input = NULL;
     InterlockedExchangePointer((PVOID volatile *)&window->window, handle);
     InterlockedExchange(&window->state, APP_PRESENTATION_WINDOW_OPEN);
-    SetEvent(window->ready_event);
     ShowWindow(handle, SW_SHOW);
     UpdateWindow(handle);
+    /* The ready contract includes the source-sized client surface; signal
+     * only after User32 has applied ShowWindow/UpdateWindow. */
+    SetEvent(window->ready_event);
     while (GetMessageW(&message, NULL, 0u, 0u) > 0) {
         TranslateMessage(&message);
         DispatchMessageW(&message);
@@ -381,7 +374,15 @@ static LRESULT CALLBACK presentation_window_proc(HWND handle, UINT message,
     case WM_SYSKEYDOWN:
         if (window != NULL && wparam == VK_RETURN &&
             (GetKeyState(VK_MENU) & 0x8000) != 0) {
-            presentation_toggle_fullscreen(window, handle);
+            /* This is the reverse half of the same host-only Alt+Enter
+             * transition consumed by console_compat.c.  Do not manufacture
+             * a guest key; returning to Console is a presentation decision.
+             * A graphics-only guest may therefore leave Console blank. */
+            DestroyWindow(handle);
+            {
+                HWND console = GetConsoleWindow();
+                if (console != NULL) (void)SetForegroundWindow(console);
+            }
             return 0;
         }
         /* FALLTHROUGH */
@@ -412,8 +413,20 @@ int app_presentation_window_open(app_presentation_window *window)
 {
     DWORD wait;
     if (!app_presentation_window_valid(window) || window->owner == NULL ||
-        window->owner->state != SESSION_STATE_READY ||
-        window->state != APP_PRESENTATION_WINDOW_READY) return 0;
+        window->owner->state != SESSION_STATE_ACTIVE) return 0;
+    if (window->state == APP_PRESENTATION_WINDOW_CLOSED) {
+        if (window->thread != NULL &&
+            WaitForSingleObject(window->thread, INFINITE) != WAIT_OBJECT_0)
+            return 0;
+        if (window->thread != NULL) CloseHandle(window->thread);
+        if (window->ready_event != NULL) CloseHandle(window->ready_event);
+        if (window->closed_event != NULL) CloseHandle(window->closed_event);
+        window->thread = NULL;
+        window->ready_event = NULL;
+        window->closed_event = NULL;
+        InterlockedExchange(&window->state, APP_PRESENTATION_WINDOW_READY);
+    }
+    if (window->state != APP_PRESENTATION_WINDOW_READY) return 0;
     window->ready_event = CreateEventW(NULL, TRUE, FALSE, NULL);
     window->closed_event = CreateEventW(NULL, TRUE, FALSE, NULL);
     if (window->ready_event == NULL || window->closed_event == NULL) return 0;

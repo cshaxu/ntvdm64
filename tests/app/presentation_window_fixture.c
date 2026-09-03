@@ -14,7 +14,6 @@ int main(void)
     if (!session_valid(&owner) || !session_select_machine_backend(&owner,
             SESSION_MACHINE_BACKEND_SOFTPC) ||
         !app_presentation_window_prepare(&window, &owner) ||
-        !app_presentation_window_open(&window) ||
         session_machine_backend(&owner) != SESSION_MACHINE_BACKEND_SOFTPC)
         return 1;
     if (!session_activate(&owner) || !session_presentation_text_acquire_writable(
@@ -24,14 +23,20 @@ int main(void)
     text[2] = 'K';
     text[3] = 7u;
     ZeroMemory(&event, sizeof(event));
-    event.kind = SESSION_VIDEO_EVENT_INVALIDATE;
+    event.kind = SESSION_VIDEO_EVENT_DISPLAY_TOGGLE;
     if (!session_notify_video_event(&owner, &event)) return 3;
     Sleep(25u);
     if (!app_presentation_window_active(&window) ||
+        !app_presentation_window_close(&window)) return 4;
+    /* A later Console-owned Alt+Enter display request can reopen a surface
+     * that was returned to Console.  The sink remains session-owned; neither
+     * direction creates a DOS key or a guest-memory write. */
+    if (!session_notify_video_event(&owner, &event) ||
+        !app_presentation_window_active(&window) ||
         !app_presentation_window_close(&window) ||
         owner.state != SESSION_STATE_ACTIVE ||
         session_machine_backend(&owner) != SESSION_MACHINE_BACKEND_SOFTPC ||
         !session_dispose(&owner))
-        return 4;
+        return 5;
     return 0;
 }

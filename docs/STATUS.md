@@ -2,32 +2,34 @@
 
 ## Current Work
 
-**Active: M0 T388 S5** — Original display-backend arbitration; ordinary mode
+**Active: M0 T388 S6** — Original PIF fullscreen disposition; ordinary mode
 (single-person dual-role implementation and review).
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T388 S5; ordinary mode. |
-| Admission And Approval | T388 S4 original SoftPC Console-keyboard/IRQ closure and the admitted ordered interactive COMMAND package. |
-| Objective | Recover one source-owned display selection contract: normal character mode remains on the process Console; the app presentation window is eligible only after original graphics/fullscreen state, PIF fullscreen state or an explicit Alt+Enter transition selects it. |
-| Non-goals | No guest-media change; no prompt parser, synthetic BOP record, direct input injection, PIF policy completion, BaseSrv/CSRSS transport, WOW, `cmdExec32` or runtime matrix. |
-| Reference Baseline | T388 S1--S4 evidence, selected CPU40/x86 SoftPC product, original SoftPC display/fullscreen sources, current app presentation component and session lifecycle. |
-| Files And ABI Surface | Original SoftPC graphics/fullscreen callers, same-shaped adapter-win32/session binding only where source proof requires it, `src/app` presentation lifecycle and focused source/local evidence. |
+| Identifier Mode | M0 T388 S6; ordinary mode. |
+| Admission And Approval | T388 S5 source-shaped display-arbitration closure and the admitted ordered interactive COMMAND package. |
+| Objective | Audit and bind the original PIF fullscreen/window fields and failure ordering to the completed display-arbitration contract. An unavailable private-shell field must retain a source-shaped unavailable result rather than silently selecting a surface. |
+| Non-goals | No guest-media change; no prompt parser, synthetic BOP record, direct input injection, BaseSrv/CSRSS transport, WOW, `cmdExec32` or runtime matrix. |
+| Reference Baseline | T388 S1--S5 evidence, selected CPU40/x86 SoftPC product, original `nt_pif.c`/fullscreen sources, completed adapter-win32/session presentation seam. |
+| Files And ABI Surface | Original PIF/fullscreen callers, existing same-shaped adapter-win32/session binding only where source proof requires it, focused source/local evidence. |
 | Applicable Rules | Execution, source, architecture, coding, document, mapping-manager, mirror/overlay and CPU40-only rules. |
-| Verification | Original declaration/definition/table/caller walk; focused state-transition proof; formal x86 link when source changes; governance and diff checks. No prompt claim until S7. |
-| Expected Markers | Normal text mode has one Console surface; any app window transition has an original graphics/fullscreen or explicit Alt+Enter owner; no filename inference exists. |
-| Asset Needs | Existing selected CPU40/x86 graph, immutable media baseline, original graphics/fullscreen sources, current app/session presentation state; no new guest source import. |
-| Reporting Requirements | Record display-state owner, Console/window handle ownership, every session mapping-manager lease and all deferred PIF behavior. |
-| Stop Conditions | Need to infer video from filename, parse DOS lines, alter guest media, fabricate PIF state, retain a guest pointer/HANDLE asynchronously, or change original fullscreen semantics. Pause for a separate S. |
-| Exit Criteria | One source-shaped display-arbitration contract is implemented with focused proof. It must not claim PIF disposition, prompt/editing/Ctrl+C runtime success or complete Console UX. |
+| Verification | Original PIF field/definition/caller walk; focused disposition proof; formal x86 link only if source changes; governance and diff checks. No prompt claim until S7. |
+| Expected Markers | Each reached PIF text/window/fullscreen value has one original owner and one available/unavailable disposition; no filename inference exists. |
+| Asset Needs | Existing selected CPU40/x86 graph, immutable media baseline, original PIF/fullscreen sources and current app/session presentation state; no new guest source import. |
+| Reporting Requirements | Record original PIF field, consumer, failure order, display disposition, Console/window handle ownership and any session mapping-manager lease. |
+| Stop Conditions | Need to infer mode from filename, parse DOS lines, alter guest media, fabricate an absent PIF field, retain a guest pointer/HANDLE asynchronously, or change original fullscreen semantics. Pause for a separate S. |
+| Exit Criteria | Text/fullscreen/unavailable PIF inputs have an original-owner disposition and focused proof; no generic PIF rewrite is introduced. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | original Console/text/graphics/fullscreen branches, PIF state, `Alt+Enter`, presentation-window lifetime, graphics buffer, focus, keyboard forwarding, Console handle ownership, session lifecycle and mapping-manager lease ownership. |
 
 **S3 closure:** [Console-first startup disposition](etc/evidence/m0-t388-s3-console-first-startup-disposition-001.md).
 
 **S4 closure:** [Original SoftPC Console keyboard route](etc/evidence/m0-t388-s4-original-softpc-console-keyboard-route-001.md).
+
+**S5 closure:** [Source-shaped display arbitration](etc/evidence/m0-t388-s5-source-shaped-display-arbitration-001.md).
 
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 

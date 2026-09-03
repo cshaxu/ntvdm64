@@ -222,6 +222,14 @@ BOOL WINAPI MvdmPresentationGraphicsBuffer(HANDLE output,
     info->hMutex = mutex;
     info->lpBitMap = pixels;
     *screen_buffer = duplicate;
+    /* DIVERGENCE(ADAPTER-WIN32-047): the private Console Server would have
+     * selected a graphics presentation surface as part of its graphics-buffer
+     * protocol.  Public Console has no equivalent controller.  Report only
+     * the already-completed original graphicsResize boundary to the bound
+     * app surface; a missing presentation consumer does not invalidate the
+     * original graphics buffer. */
+    (void)console_video_event(SESSION_VIDEO_EVENT_GRAPHICS_READY, output,
+        NULL, NULL, 0u);
     return TRUE;
 }
 
@@ -321,13 +329,40 @@ BOOL WINAPI ReadConsoleInputExW(HANDLE input, PINPUT_RECORD records, DWORD count
                                 LPDWORD read, USHORT flags)
 {
     DWORD available;
+    DWORD index;
+    DWORD delivered;
     if ((flags & ~CONSOLE_READ_VALID) != 0u) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     if ((flags & CONSOLE_READ_NOWAIT) != 0u) {
         if (!GetNumberOfConsoleInputEvents(input, &available)) return FALSE;
         if (available == 0u) { if (read != NULL) *read = 0u; return TRUE; }
     }
-    if ((flags & CONSOLE_READ_NOREMOVE) != 0u) return PeekConsoleInputW(input, records, count, read);
-    return ReadConsoleInputW(input, records, count, read);
+    if ((flags & CONSOLE_READ_NOREMOVE) != 0u)
+        return PeekConsoleInputW(input, records, count, read);
+    if (!ReadConsoleInputW(input, records, count, read)) return FALSE;
+
+    /* DIVERGENCE(ADAPTER-WIN32-047): NT4 Console Server consumed Alt+Enter
+     * for its fullscreen controller before the VDM keyboard worker observed
+     * it.  Modern Console has no hardware fullscreen controller.  Preserve
+     * that non-guest direction by removing only an Alt+Enter key-down from
+     * the source-shaped input batch and reporting a typed host display
+     * request.  No DOS text, BOP record or guest-memory write is created. */
+    delivered = 0u;
+    for (index = 0u; read != NULL && index < *read; ++index) {
+        PINPUT_RECORD record = &records[index];
+        if (record->EventType == KEY_EVENT &&
+            record->Event.KeyEvent.bKeyDown &&
+            record->Event.KeyEvent.wVirtualKeyCode == VK_RETURN &&
+            (record->Event.KeyEvent.dwControlKeyState &
+                (LEFT_ALT_PRESSED | RIGHT_ALT_PRESSED)) != 0u) {
+            (void)console_video_event(SESSION_VIDEO_EVENT_DISPLAY_TOGGLE,
+                NULL, NULL, NULL, 0u);
+            continue;
+        }
+        if (delivered != index) records[delivered] = records[index];
+        ++delivered;
+    }
+    if (read != NULL) *read = delivered;
+    return TRUE;
 }
 
 BOOL WINAPI WriteConsoleInputVDMW(HANDLE input, PINPUT_RECORD records, DWORD count,
