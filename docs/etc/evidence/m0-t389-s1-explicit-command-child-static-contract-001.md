@@ -47,6 +47,15 @@ guest, not a replacement `COMMAND.COM`.
    own original INT 2F handler: `rucode.asm:994-1004` handles
    `GET_COMMAND_STATE` and explicitly clears AX. The child `init.asm:399-417`
    therefore does not take `first_com`; it retains `SCS_FIRSTCOM == 0`.
+7. The two command-acquisition mechanisms are intentionally disjoint.  The
+   resident first shell reaches `CMDSVC SVC_CMDGETNEXTCMD` at
+   `tcode.asm:553-558`, then follows `run_cmd`/`GotCom` into its ordinary
+   command parser.  For the declared `command.com` token, that original parser
+   reaches `tmisc1.asm:360-461` (`EXTERNAL` through `EXECUTE`) and invokes the
+   guest DOS EXEC path.  Only after that child image starts can its independent
+   `init.asm`/`DoReEnter` path call `Do16BitPrompt`.  The child has no normal
+   `54:01` acquisition loop; treating a missing child prompt as a request for
+   a second BOP record would therefore change the original lifecycle.
 
 ## Existing product binding and required successor seam
 

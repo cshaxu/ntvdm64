@@ -14,7 +14,7 @@ content-divergent entries.
 
 | Documentation records | 3982 |
 | --- | --- |
-| Generated UTC | 2026-09-03T23:36:50Z |
+| Generated UTC | 2026-09-03T23:39:20Z |
 
 ## Entries
 
@@ -1318,7 +1318,7 @@ content-divergent entries.
 | etc/evidence/m0-t388-s5-source-shaped-display-arbitration-001.md | indexed supporting material | 73b42be2ca979748b5d66b1d418fc89d3f93450ae84373c81a31a8e1149ec8c6 |
 | etc/evidence/m0-t388-s6-original-pif-fullscreen-disposition-001.md | indexed supporting material | d4c406c945d004536e1eefdb6cca52ca0c444c6d277dda845bb8bc500c90d72b |
 | etc/evidence/m0-t388-s7-interactive-fixed-container-observation-001.md | indexed supporting material | 21d484160a0f8698c738e00f52b6d2ad96ce2f38e863743403f113798400021d |
-| etc/evidence/m0-t389-s1-explicit-command-child-static-contract-001.md | indexed supporting material | 278c4657f38eb1bda6445e28cc7f4306a246d7d6fe6f4ca0f084b1e7016602de |
+| etc/evidence/m0-t389-s1-explicit-command-child-static-contract-001.md | indexed supporting material | b2b37eb7c8fb9130c77d0b6c6f744d3fc514941553e21172c8542dac67e6b288 |
 | etc/evidence/m0-t389-s2-explicit-command-record-contract-001.md | indexed supporting material | f5444ada3c2a397d9b9a8107d135871b1c733e248a7686ac6cecfd5938ef2253 |
 | etc/evidence/m0-t389-s3-positional-command-fixed-observation-001.md | indexed supporting material | ece7c31d6881ccfec708d9340c2b36b7f0b3ccaa8ccd13bbde7217025e1e88f1 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
