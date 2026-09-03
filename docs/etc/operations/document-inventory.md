@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3975 |
+| Documentation records | 3976 |
 | --- | --- |
-| Generated UTC | 2026-09-03T13:45:38Z |
+| Generated UTC | 2026-09-03T13:53:02Z |
 
 ## Entries
 
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | b373c4fe41e6d3aa552af4b3c07763dd1f903aaf5d45c7a947036f9d8c995aed |
+| STATUS.md | principal control document | 069a273ad0a302236e66197c8d2b4bfadad3eb091f12f3b593483d0d19954ae6 |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1316,6 +1316,7 @@ content-divergent entries.
 | etc/evidence/m0-t388-s3-console-first-startup-disposition-001.md | indexed supporting material | 8aa921047c60db03c8c3cc77cde1cdb732e815256ef0c971c45cee7556f065fa |
 | etc/evidence/m0-t388-s4-original-softpc-console-keyboard-route-001.md | indexed supporting material | 3649f79ef2229e1fd77ed078c39c49ce7f7e773271e83b429bafe78bf817969d |
 | etc/evidence/m0-t388-s5-source-shaped-display-arbitration-001.md | indexed supporting material | 73b42be2ca979748b5d66b1d418fc89d3f93450ae84373c81a31a8e1149ec8c6 |
+| etc/evidence/m0-t388-s6-original-pif-fullscreen-disposition-001.md | indexed supporting material | d4c406c945d004536e1eefdb6cca52ca0c444c6d277dda845bb8bc500c90d72b |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -2251,7 +2252,7 @@ content-divergent entries.
 | etc/operations/proposal-selector-blind-protected-mode-substrate-001.md | indexed supporting material | 6353218f86907661b1dc72bb4a20067ef08f6c8e59be33e65e084a2a8b8b5598 |
 | etc/operations/proposal-selector-blind-realmode-continuity-001.md | indexed supporting material | bbdb1afc13e62af3bed756e3a22afd51e166d6662d0dfd6ff2f13512ce4a8ac9 |
 | etc/operations/proposal-seven-component-source-layout-reorganization-001.md | indexed supporting material | 27e9d29fe5e7b9436e25defcb8c071e5adc91903d5055f275e1b13a4c16d6526 |
-| etc/operations/proposal-single-process-interactive-command-console-recovery-001.md | indexed supporting material | 7198bc734c8477c93de47c06b171b84ef5387d5b235cfba8ce2c71cbf922b955 |
+| etc/operations/proposal-single-process-interactive-command-console-recovery-001.md | indexed supporting material | a912151882757e83d893a62aeb5fd407d0809ea56da12ec61a2266549c013f94 |
 | etc/operations/proposal-softpc-bios-conventional-memory-recovery-001.md | indexed supporting material | 3e4c68d258fa9e18ef6fbec2513bf52fc928f13afd9ddfd81f5de217cfa71a6b |
 | etc/operations/proposal-softpc-floppy-int15-recursive-machine-closure-001.md | indexed supporting material | daaf85b06c14c5078e9fa2ae296c06457ec7ef5a63cd9218f26285d18ede0aa3 |
 | etc/operations/proposal-softpc-pre-bop-startup-continuity-001.md | indexed supporting material | 3e3408ef4c791d93bd920c7b66de036c2ac3fbd0a9f4b8f00e0f7abfd2fdd472 |

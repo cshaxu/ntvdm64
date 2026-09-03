@@ -2,26 +2,26 @@
 
 ## Current Work
 
-**Active: M0 T388 S6** — Original PIF fullscreen disposition; ordinary mode
+**Active: M0 T388 S7** — Fixed interactive runtime matrix; ordinary mode
 (single-person dual-role implementation and review).
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T388 S6; ordinary mode. |
-| Admission And Approval | T388 S5 source-shaped display-arbitration closure and the admitted ordered interactive COMMAND package. |
-| Objective | Audit and bind the original PIF fullscreen/window fields and failure ordering to the completed display-arbitration contract. An unavailable private-shell field must retain a source-shaped unavailable result rather than silently selecting a surface. |
-| Non-goals | No guest-media change; no prompt parser, synthetic BOP record, direct input injection, BaseSrv/CSRSS transport, WOW, `cmdExec32` or runtime matrix. |
-| Reference Baseline | T388 S1--S5 evidence, selected CPU40/x86 SoftPC product, original `nt_pif.c`/fullscreen sources, completed adapter-win32/session presentation seam. |
-| Files And ABI Surface | Original PIF/fullscreen callers, existing same-shaped adapter-win32/session binding only where source proof requires it, focused source/local evidence. |
+| Identifier Mode | M0 T388 S7; ordinary mode. |
+| Admission And Approval | T388 S1--S6 closures and the admitted ordered interactive COMMAND package. |
+| Objective | Use one formal EXE and immutable runnable root to observe an interactive original COMMAND session: prompt, `ver`, `dir`, editing, Ctrl+C and `exit`. |
+| Non-goals | No guest-media change; no prompt parser, synthetic BOP record, direct input injection, BaseSrv/CSRSS transport, WOW or `cmdExec32` expansion. |
+| Reference Baseline | T388 S1--S6 evidence, selected CPU40/x86 SoftPC product, Console/keyboard/display bindings and immutable runnable media. |
+| Files And ABI Surface | Formal app/product launch, fixed runtime container and observational evidence only unless an immediate original owner is proven. |
 | Applicable Rules | Execution, source, architecture, coding, document, mapping-manager, mirror/overlay and CPU40-only rules. |
-| Verification | Original PIF field/definition/caller walk; focused disposition proof; formal x86 link only if source changes; governance and diff checks. No prompt claim until S7. |
-| Expected Markers | Each reached PIF text/window/fullscreen value has one original owner and one available/unavailable disposition; no filename inference exists. |
-| Asset Needs | Existing selected CPU40/x86 graph, immutable media baseline, original PIF/fullscreen sources and current app/session presentation state; no new guest source import. |
-| Reporting Requirements | Record original PIF field, consumer, failure order, display disposition, Console/window handle ownership and any session mapping-manager lease. |
-| Stop Conditions | Need to infer mode from filename, parse DOS lines, alter guest media, fabricate an absent PIF field, retain a guest pointer/HANDLE asynchronously, or change original fullscreen semantics. Pause for a separate S. |
-| Exit Criteria | Text/fullscreen/unavailable PIF inputs have an original-owner disposition and focused proof; no generic PIF rewrite is introduced. |
+| Verification | Formal x86 product/media identity; bounded procedure for each matrix row; retained Console and display evidence; governance and diff checks. |
+| Expected Markers | Prompt/command observations carry product and media identity; every failure names the immediate original owner; no scenario silently changes the container. |
+| Asset Needs | Existing selected CPU40/x86 graph, immutable media baseline, fixed Console-owning launch container and report location. |
+| Reporting Requirements | Record executable hash, guest-media identity, launch form, bounded command procedure, Console/window state and immediate source owner of any failure. |
+| Stop Conditions | Need to alter guest media, infer execution mode from a filename, introduce a prompt parser, or vary container/debugger ownership between matrix rows. Pause for a separate S. |
+| Exit Criteria | Every planned matrix row has a reproducible observation or source-owned blocker; no unsupported result is published. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
 | Similar-Issue Sweep | original Console/text/graphics/fullscreen branches, PIF state, `Alt+Enter`, presentation-window lifetime, graphics buffer, focus, keyboard forwarding, Console handle ownership, session lifecycle and mapping-manager lease ownership. |
 
@@ -30,6 +30,8 @@
 **S4 closure:** [Original SoftPC Console keyboard route](etc/evidence/m0-t388-s4-original-softpc-console-keyboard-route-001.md).
 
 **S5 closure:** [Source-shaped display arbitration](etc/evidence/m0-t388-s5-source-shaped-display-arbitration-001.md).
+
+**S6 closure:** [Original PIF fullscreen disposition](etc/evidence/m0-t388-s6-original-pif-fullscreen-disposition-001.md).
 
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 

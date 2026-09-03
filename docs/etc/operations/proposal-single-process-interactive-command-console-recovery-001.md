@@ -39,10 +39,13 @@ M0 T number only when it is admitted into `docs/STATUS.md`.
    guest execution paths.
 3. Normal character-mode DOS has exactly one guest-facing surface: the
    process Console.  Project diagnostics never share it.
-4. A presentation window is created only when the original machine/PIF state
-   selects graphics/fullscreen or the user requests Alt+Enter.  Alt+Enter back
-   closes that window and restores Console routing without inventing a text
-   frame for a graphics-only guest.
+4. A presentation window is created only when the original machine selects
+   graphics or the user requests Alt+Enter.  The selected CPU40 graph does
+   not enable the original `X86GFX` Console-Server hardware-fullscreen
+   package; therefore a PIF `PF_FULLSCREEN` request remains explicitly
+   unavailable rather than being silently reinterpreted as an app window.
+   Alt+Enter back closes that window and restores Console routing without
+   inventing a text frame for a graphics-only guest.
 5. Public Win32 Console input is converted into source-shaped SoftPC keyboard
    operations and IRQ1.  The application does not translate input into
    COMMAND text, BOP records or guest-memory writes.
@@ -98,9 +101,10 @@ DOS-line parsing, direct guest-buffer write or parallel input pump.
 ### S5 — Display-backend arbitration
 
 Implement the single-active-surface state machine.  It selects Console for
-text and the app presentation window only for original graphics/fullscreen,
-PIF fullscreen or Alt+Enter.  It transfers focus and keyboard ownership and
-returns to Console exactly as stated in the product contract.
+text and the app presentation window only for original graphics or Alt+Enter.
+PIF disposition remains an original-owner S6 decision.  It transfers focus
+and keyboard ownership and returns to Console exactly as stated in the
+product contract.
 
 Exit: local state-transition tests cover text, graphics, Alt+Enter in both
 directions, a window-only result and close/cancellation behavior.  File-name
