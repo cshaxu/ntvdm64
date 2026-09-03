@@ -43,6 +43,10 @@ guest, not a replacement `COMMAND.COM`.
    record is thus the source-shaped outer-shell operation: the first resident
    shell consumes `/C`, executes a second `COMMAND.COM` with no `/C` tail, then
    exits. The second shell retains `SingleCom == 0` and its `DoReEnter` path.
+6. The non-first classification is implemented by the first resident shell's
+   own original INT 2F handler: `rucode.asm:994-1004` handles
+   `GET_COMMAND_STATE` and explicitly clears AX. The child `init.asm:399-417`
+   therefore does not take `first_com`; it retains `SCS_FIRSTCOM == 0`.
 
 ## Existing product binding and required successor seam
 
