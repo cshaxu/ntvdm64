@@ -70,6 +70,16 @@ The retained local reports are
 observations only.  In particular, they neither invoke nor imply a working
 `cmdExec32` route.
 
+## Product acceptance observation
+
+The owner manually ran the staged product from `O:\ntvdm64` with the explicit
+`command.com` target and confirmed that the ordinary second guest
+`COMMAND.COM` displays its banner and executes commands correctly.  This is
+direct product acceptance of the PermCom-to-normal-child shell behavior; it
+matches the fixed-container Console/keyboard evidence above.  It remains a
+pure-DOS result and does not claim that a DOS program can yet launch a native
+32-bit child through `cmdExec32`.
+
 ## Result
 
 S5 is closed: the initial record reaches original DOS `EXEC`, a normal second
