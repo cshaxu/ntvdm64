@@ -52,11 +52,24 @@ The captured Console is empty.  Therefore this evidence proves neither an
 interactive shell nor keyboard input.  It locates the remaining work after
 the declared record and before the source-defined child DOS-CON path.
 
+## Gated Console-row check
+
+The same product, media root and declared `command.com` target were then run
+for 30 seconds with the observer armed to submit `ver` only after the original
+`MVDM-COMMAND-INPUT-READY` marker.  The result was
+`scripted-console-input-ready=no` and no input record was written.  The BOP
+sequence again ended after successful `54:01`, `54:0E` and `54:04` returns.
+
+This excludes an app prompt reader, a synthetic BOP record and a prematurely
+queued Console key as explanations or repairs.  It also means the current
+keyboard worker is not the first missing transition: the original child has
+not reached its BIOS `INT 16h` wait boundary.
+
 ## Disposition
 
 This is a guest/CPU40 execution-continuity boundary, not a BaseVDM record,
-path-layout, app prompt-reader, or BOP leaf defect.  No S6 source change is
-selected from this one observation.  A later owner package must statically
-map the post-`54:04` guest transition and repair the first missing original
-machine/guest prerequisite before attempting another interactive input run.
-
+path-layout, app prompt-reader, keyboard-input bridge or BOP leaf defect.  No
+S6 product-source change is selected from these observations.  A later
+CPU40/guest-continuity owner package must statically map the post-`54:04`
+transition and repair the first missing original machine/guest prerequisite
+before attempting another interactive input run.

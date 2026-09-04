@@ -40,7 +40,7 @@ post-`54:01` parent/child COMMAND lifecycle cohort; ordinary mode
 
 **S6 recovery:** [original COMMAND nesting static correction](etc/evidence/m0-t389-s6-command-nesting-static-correction-001.md). `ntvdm.exe command.com` now publishes the source-shaped normal-child record (`AppName=COMMAND.COM`, empty CR/LF `CmdLine`), so the special first resident shell guest-EXECs one ordinary second shell; it alone owns prompt and DOS `CON` input.
 
-**S6 current observation:** [formal x86 explicit COMMAND child observation](etc/evidence/m0-t389-s6-current-x86-command-child-observation-001.md). The current product consumes exactly one normal-child record and returns through `54:01`, `54:0E` and `54:04`, but does not yet reach the second shell's banner, `Do16BitPrompt`, or DOS `CON`; the remaining boundary is guest/CPU40 continuity after the successful `54:04` return.
+**S6 current observation:** [formal x86 explicit COMMAND child observation](etc/evidence/m0-t389-s6-current-x86-command-child-observation-001.md). The current product consumes exactly one normal-child record and returns through `54:01`, `54:0E` and `54:04`, but does not yet reach the second shell's banner, `Do16BitPrompt`, BIOS `INT 16h` wait, or DOS `CON`; a gated `ver` row was therefore not injected. The remaining boundary is guest/CPU40 continuity after the successful `54:04` return.
 
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 

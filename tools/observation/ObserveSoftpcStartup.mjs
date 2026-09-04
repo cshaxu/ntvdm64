@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 function usage() {
-  throw new Error('usage: node tools/observation/ObserveSoftpcStartup.mjs --launcher <observer.exe> --product <product.exe> --stage <runtime-dir> --report <result.txt> [--interactive | --interactive-script | --interactive-script-ver-only | --product-command <declared-DOS-command>] [--observation-timeout-ms 10000..30000] [--minimal-host-environment] [--child-environment MVDM_SESSION_DISPOSE_REPORT_PATH=<absolute-path>|MVDM_COMMAND_CONTINUATION_REPORT_PATH=<absolute-path>|MVDM_DEM_OPEN_REPORT_PATH=<absolute-path>]');
+  throw new Error('usage: node tools/observation/ObserveSoftpcStartup.mjs --launcher <observer.exe> --product <product.exe> --stage <runtime-dir> --report <result.txt> [--interactive | --interactive-script | --interactive-script-ver-only] [--product-command <declared-DOS-command>] [--observation-timeout-ms 10000..30000] [--minimal-host-environment] [--child-environment MVDM_SESSION_DISPOSE_REPORT_PATH=<absolute-path>|MVDM_COMMAND_CONTINUATION_REPORT_PATH=<absolute-path>|MVDM_DEM_OPEN_REPORT_PATH=<absolute-path>]');
 }
 
 function sha256(path) {
@@ -61,9 +61,6 @@ for (const key of Object.keys(options)) {
 if (options['observation-timeout-ms'] !== undefined &&
     (!/^(10000|[12][0-9]{4}|30000)$/.test(options['observation-timeout-ms']))) {
   throw new Error('observation timeout must be an integer from 10000 through 30000 ms');
-}
-if ((options.interactive !== undefined || options.interactiveScript !== undefined || options.interactiveScriptVerOnly !== undefined) && options['product-command'] !== undefined) {
-  throw new Error('interactive modes and --product-command are mutually exclusive');
 }
 if (options['product-command'] !== undefined &&
     (options['product-command'].length === 0 ||
@@ -130,23 +127,23 @@ const fixedMediaManifestSha256 = createHash('sha256').update(JSON.stringify(
 const runtimeCompanionsManifestSha256 = createHash('sha256').update(JSON.stringify(
   layout.runtimeCompanions)).digest('hex');
 const launcherArguments = [stagedProduct, options.stage, options.report];
-if (options.interactive !== undefined || options.interactiveScript !== undefined || options.interactiveScriptVerOnly !== undefined) {
+if (options['product-command'] !== undefined) {
+  /* A declared command and a later Console row are independent product
+   * contracts.  The command crosses only the existing app/BaseVDM boundary;
+   * observer input remains gated on original BIOS waitio below. */
+  launcherArguments.push('-f', '-o', '--command', options['product-command']);
+} else if (options.interactive !== undefined || options.interactiveScript !== undefined || options.interactiveScriptVerOnly !== undefined) {
   /* S7's no-argument product contract still needs the original SoftPC
    * foreground admission switch.  Passing it explicitly prevents the C
    * observer's historical argc==4 fallback from manufacturing `/C EXIT`.
    * This is a launch-container selector only: it never supplies a DOS line,
    * guest byte, BOP record, or Console input event. */
   launcherArguments.push('-f');
-  if (options.interactiveScript !== undefined)
-    launcherArguments.push('--observe-console-input');
-  else if (options.interactiveScriptVerOnly !== undefined)
-    launcherArguments.push('--observe-console-input-ver-only');
-} else if (options['product-command'] !== undefined) {
-  /* The observer is a transport-only fixed-container harness. It forwards one
-   * already-declared string to the existing app --command boundary; it neither
-   * parses DOS syntax nor adds guest bytes. */
-  launcherArguments.push('-f', '-o', '--command', options['product-command']);
 }
+if (options.interactiveScript !== undefined)
+  launcherArguments.push('--observe-console-input');
+else if (options.interactiveScriptVerOnly !== undefined)
+  launcherArguments.push('--observe-console-input-ver-only');
 if (options['observation-timeout-ms'] !== undefined)
   launcherArguments.push('--observation-timeout-ms', options['observation-timeout-ms']);
 const result = spawnSync(options.launcher, launcherArguments, {
