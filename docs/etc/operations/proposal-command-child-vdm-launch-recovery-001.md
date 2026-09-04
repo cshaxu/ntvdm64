@@ -40,6 +40,13 @@ implementation or a new shell parser.
   to DOS with carry clear. `SCS_WOW_BINARY` retains original WOW compatibility
   checks; native formats construct `COMMAND.COM /z <target>` for the original
   host execution path.
+- `mvdm-guest/dos/v86/cmd/command/tcode.asm::check_command` and
+  `tdata.asm::NT_INTRNL_CMND`: before `Do16BitPrompt` can issue
+  `SVC_CMDEXEC`/`54:08`, the original second-shell code retains `EXIT`,
+  `PROMPT`, `SET`, `PATH`, `CD`, `CHDIR`, and drive-letter changes in the
+  guest. They resume normal guest COMMAND internal-command handling and never
+  enter the host-process adapter. `VER` and every command absent from that
+  narrow table retain the source-selected later `54:08` route.
 
 The second guest shell's `ver` printing the host Windows version is expected:
 it is a host `cmd.exe` built-in on the original `COMSPEC /c` branch, not proof
@@ -60,6 +67,12 @@ later COMMAND Do16BitPrompt / DOS CON -> SVC_CMDEXEC -> original cmdExec
   -> original cmdReturnExitCode / BOP 54:0B
   -> original guest parent prompt
 ```
+
+The adapter is therefore reached only after the guest's source-owned narrow
+internal-command gate. It must not reclassify, emulate or redirect `EXIT`,
+`PROMPT`, `SET`, `PATH`, `CD`, `CHDIR`, or a drive change. In particular,
+`SET` changes the guest shell environment and `CD` changes the guest DOS
+current-directory state; neither is a host `cmd.exe` operation in this path.
 
 The new bounded adapter belongs to the COMMAND owner subfamily below
 `adapter-mvdm-host-out`; it is not an app command parser, a new app launcher,
@@ -86,18 +99,22 @@ the executables.
 
 ## Disposition
 
-1. **Native Win32:** retain the exact original direct or `COMSPEC /c <tail>`
-   form selected by COMMAND, then its `cmdExec32` worker route. This includes
-   host built-ins such as `ver`.
-2. **DOS:** launch the exact current product executable, obtained through
+1. **Guest internal command:** preserve the preceding original
+   `NT_INTRNL_CMND` gate and its guest COMMAND processing. It is outside the
+   image-disposition adapter.
+2. **Native Win32 or host-shell command:** retain the exact original direct or
+   `COMSPEC /c <tail>` form selected by COMMAND, then its `cmdExec32` worker
+   route. This includes host built-ins such as `ver`, plus compound shell
+   syntax.
+3. **DOS:** launch the exact current product executable, obtained through
    `GetModuleFileNameA`, followed by the normal positional DOS target and its
    copied arguments. The child follows the same existing pure-DOS profile and
    returns its ordinary process exit code to the unchanged parent worker.
-3. **Win16:** use the same ordinary product invocation and a Win16 profile. Before the
+4. **Win16:** use the same ordinary product invocation and a Win16 profile. Before the
    later DOSX/WOW bootstrap is complete, return an explicit recorded
    unavailable result; never fall through to host `cmd.exe` or its unsupported
    16-bit dialog.
-4. **Compound or unresolved:** do not guess at quoting, expansion, pipes,
+5. **Compound or unresolved:** do not guess at quoting, expansion, pipes,
    redirection, batch syntax or a non-resolvable first image. Preserve the
    native COMSPEC branch unless a simple legacy image is positively resolved.
 
