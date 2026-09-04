@@ -82,3 +82,22 @@ is explicitly outside this map and cannot satisfy it.
 
 These are not failures of the selected `cmdExec32` worker chain and must not
 be silently supplied by a launcher or guest modification.
+
+## S2 verification
+
+- The formal CPU40/x86 graph at
+  `build/M0-T389/S6/formal-x86-r2` was invoked through its checked-in
+  `run-ninja-parallel.cmd` wrapper, which initializes the pinned VS 2022
+  x86 environment once and then runs Ninja. `original-mvdm-command.lib`
+  rebuilt all twelve original COMMAND translation units, including
+  `cmdexec.c`, and `lib.exe` produced the archive successfully.
+- `build/M0-T317/S3/x86/command_process_compat_fixture.exe` passed its
+  child-only standard-stream binding contract.
+- `build/M0-T302/S2/x86/base_vdm_local_fixture.exe` passed its local Base VDM
+  broker contract.
+
+The archive warnings are retained as visible historical-source diagnostics;
+this packet neither suppresses them nor treats their absence as proof of
+runtime behavior. These checks prove only S2’s source/ABI/build-entry
+baseline. They do not run `54:08` from the product guest or prove native child
+completion.
