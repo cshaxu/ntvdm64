@@ -312,8 +312,6 @@ char    AppName[MAX_PATH + 13];
     // Sync VDMs enviornment variables for current directories
     cmdSetDirectories (lpszzVDMEnv32, &VDMInfo);
 
-    // tell DOS that this is a dos executable and no further checking is
-    // necessary
     /* DIVERGENCE MVDM-HOST-DIV-111: the original durable guest alias is
      * represented by a fresh session-scoped scalar lease. */
     if (!mvdm_command_guest_state_write_is_dos_binary(UINT8_C(1))) {

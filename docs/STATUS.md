@@ -2,11 +2,10 @@
 
 ## Current Work
 
-**M0 T391 S6 is active.** S4 closed the no-argument product hang. Subsequent
-source review proved that the first `COMMAND.COM` must instead remain PermCom:
-an explicit target belongs in original BaseVDM `AppName`, with only its
-argument tail in `CmdLine`. S5 recovers and verifies that source-shaped
-initial-record contract before native-child result proof resumes as S6.
+**M0 T391 S6 is active.** S4 closed the no-argument product hang. Source
+review now distinguishes the two original execution planes: the direct product
+entry classifies one host image before any VDM exists, while a DOS program
+started by guest `COMMAND.COM` remains a same-VDM DOS `EXEC` child.
 
 ## Latest Closure
 
@@ -14,25 +13,25 @@ initial-record contract before native-child result proof resumes as S6.
 
 ## Active Packet
 
-**Active: M0 T391 S6 — original COMMAND native-child result recovery.**
+**Active: M0 T391 S6 — original image-disposition and COMMAND execution recovery.**
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T391 S6; ordinary single-person dual-role implementation, review and closure. |
-| Admission And Approval | T391/S4 closed against a formal CPU40/x86 rebuild and fixed-console observation. The owner-established priority is pure DOS and DOS-initiated native children before Win16; [the re-admitted T391 plan](etc/operations/m0-t391-original-cmdexec32-stage-return-recovery-001.md) supplies S5–S6. |
-| Objective | Prove a guest-originated, non-zero native child reaches the original `cmdExec32` worker completion and exposes its result through the original COMMAND return path. |
-| Non-goals | No guest `COMMAND.COM` change; no app-owned command parser or direct guest launch; no keyboard/BOP lifecycle change; no DOS EXEC/PSP return recovery; no WOW, Redirector, CSRSS/BaseSrv broker or fullscreen product-shell recovery. |
-| Reference Baseline | [T391/S5 PermCom initial-record recovery](etc/evidence/m0-t391-s5-permcom-initial-record-recovery-001.md); [S6 native-child profile admission](etc/evidence/m0-t391-s6-native-child-profile-admission-001.md); original `cmdexec.c` / `cmdCreateProcess` / `cmdReturnExitCode`; current source-shaped BaseVDM local broker. |
-| Files And ABI Surface | Original COMMAND `cmdExec*`, `cmdCreateProcess`, `cmdReturnExitCode`, BaseVDM local broker, native-child adapter and formal CPU40/x86 build manifests. |
+| Admission And Approval | The owner approved original owner separation: direct native PE is a Windows product-entry request; DOS COM/MZ stays in the current VDM; Win16 stays on the original WOW route. This S6 correction is governed by [the disposition proposal](etc/operations/proposal-command-child-vdm-launch-recovery-001.md). |
+| Objective | Preserve the first-PermCom `IsFirstCall → GetNextVDMCommand` record path for DOS only; classify one direct CLI image before VDM creation; retain original guest DOS `get_binary_type` / `SVC_CMDCHECKBINARY` / `cmdCheckBinary` behavior without a product-child DOS launcher. |
+| Non-goals | No guest `COMMAND.COM` change; no app-owned shell parser, direct guest-memory launch or synthetic completion; no DOS EXEC/PSP rewrite; no WOW bootstrap, Redirector, CSRSS/BaseSrv broker or fullscreen product-shell recovery. |
+| Reference Baseline | [T391/S5 PermCom initial-record recovery](etc/evidence/m0-t391-s5-permcom-initial-record-recovery-001.md); [same-VDM EXEC evidence](etc/evidence/m0-t391-s6-image-disposition-and-same-vdm-exec-001.md); original `msproc.asm` `$EXEC`, `cmdCheckBinary`, `cmdExec32`; current source-shaped BaseVDM local broker; [the disposition proposal](etc/operations/proposal-command-child-vdm-launch-recovery-001.md). |
+| Files And ABI Surface | Original guest `$EXEC`, COMMAND `cmdCheckBinary`/`cmdExec*`; app launch declaration; BaseVDM local broker and direct-image adapter; formal CPU40 build manifests and `StageProductExecutable.mjs`. |
 | Applicable Rules | `docs/rules/EXECUTION.md`, source policy, architecture/coding rules, mapping-manager rule and mirror/overlay discipline. |
-| Verification | Initial-record/PIF/SCS classification audit; reached guest-originated `54:07` before worker/result tests; formal CPU40/x86 product build and identity check; a DOS-originated `exit 37` observation from the sole short `O:\\ntvdm64` runtime container; `git diff --check`; documentation gate subject to the recorded inventory exception. |
-| Expected Markers | Guest-originated original classification at `54:07`, then original `54:08` worker start, pending/re-entry, native-child completion, original `54:0B` / result return, and guest-visible `37`. |
-| Asset Needs | Existing selected DOS media and `cmd.exe /c exit 37` workload, original MVDM source union, current formal build manifests and the sole `O:\\ntvdm64` runtime container. |
+| Verification | Formal CPU40/x86 product build and identity check; direct native `cmd.exe /c exit 37`; original DOS COM/MZ recognition and same-VDM parent return; Win16 explicit bootstrap-gated result; one fixed runtime observation; stage only matching architecture links; `git diff --check`. |
+| Expected Markers | Native direct entry returns `37` without creating a VDM. DOS reaches original `$EXEC` and returns to its parent PSP in the same VDM. Win16 reaches the original WOW disposition and never host unsupported-16-bit launch. |
+| Asset Needs | Existing selected DOS media and `cmd.exe /c exit 37` workload, original MVDM source union, current formal build manifests and the sole `O:\\ntvdm64` runtime container. The retained product pair is `ntvdm32.exe` and `ntvdm64.exe` at both the repository `build/output` root and that runtime root. |
 | Reporting Requirements | Record every original import, existing adapter binding, changed mirror reference, failure/completion result and any remaining whole-owner boundary. |
-| Stop Conditions | Stop only at an identified complete original owner boundary. Do not replace it with an app text parser, direct guest write, trace-selected BOP patch or guest rewrite. |
-| Exit Criteria | S6 proves a DOS-originated non-zero native child reaches the original worker completion and exposes `37`; S7 repeats that lifecycle once in the frozen Console-owning container. |
-| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。”；“先让纯dos和dos调用32位程序跑通；16位支持先放放。” |
-| Similar-Issue Sweep | `54:08`/`54:0A`/`54:0B`, `cmdExec*`, `cmdCreateProcess`, `cmdReturnExitCode`, Base VDM completion/re-entry, session worker, stream handles and cancellation. |
+| Stop Conditions | Stop at a complete original owner boundary, ambiguous command grammar or an unrecorded process/stream ABI. Do not replace it with an app shell parser, direct guest write, trace-selected BOP patch, guest rewrite or a cross-process pointer/HANDLE transfer. |
+| Exit Criteria | Direct native `exit 37` remains proven without VDM startup; a DOS target is proven as same-VDM `EXEC`/parent return; Win16 is bootstrap-gated with an explicit result; S7 repeats selected paths in the frozen Console-owning container. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。”；“先让纯dos和dos调用32位程序跑通；16位支持先放放。”；“如果是32位程序，按照原来设计方案走；win16和dos程序需要自己按照最合适的语义自己来处理。” |
+| Similar-Issue Sweep | guest `$EXEC`, `SCS_Is_Dos_Binary`, `SCS_DOSONLY`, `54:07`, `cmdCheckBinary`, `cmdExec*`, BaseVDM record production and direct app image disposition. |
 
 **S1 closure:** [reached DOSX dependency closure](etc/evidence/m0-t391-s1-dosx-dependency-closure-001.md). The default DOSX route is a combined DPMI/WOW bootstrap, not a standalone pure-DOS extender client; it is retained as the next complete bootstrap package after COMMAND native-child recovery.
 

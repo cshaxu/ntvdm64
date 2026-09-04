@@ -224,7 +224,8 @@ $adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_com
 # ExitVDM is an original Base client call reached by selected SoftPC teardown
 # sources.  It already has one same-shaped session-owned implementation; keep
 # it in the formal closure instead of accepting an unresolved external edge.
-$adapterBaseSrvNames = @('base_vdm_client.c', 'base_vdm_local.c', 'base_vdm_broker.c')
+$adapterBaseSrvNames = @('base_vdm_client.c', 'base_vdm_local.c', 'base_vdm_broker.c',
+                          'mvdm_image_classification.c')
 $adapterMonitorNames = @('vdm_control.c', '../mvdm_vdm_tib.c')
 $adapterDebuggerNames = @('dbg_init.c', 'dbg_state.c', 'dbg_dispatch.c', 'dbg_unavailable.c')
 $adapterRedirNames = @('mvdm_redirector_handle.c', 'mvdm_redirector_mailslot.c',

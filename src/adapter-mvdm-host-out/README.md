@@ -38,3 +38,10 @@ generic host-service shortcut.
   selection, while replacing private CSRSS storage and wait handles with
   session-owned state. It neither parses PIF data nor exposes host data to the
   guest; original `GetPIFData` remains its parser/owner.
+- `ADAPTER-BASESRV-011` — `basesrv/source/mvdm_image_classification.c` is the
+  direct product-entry counterpart of the Windows loader's pre-VDM image
+  selection. It recognizes one concrete DOS, Win16 or native image without
+  parsing shell syntax. Native PE is launched by public `CreateProcessA`
+  before any VDM exists; DOS proceeds through the unchanged BaseVDM record and
+  first PermCom; Win16 is explicitly bootstrap-gated. No classification bit
+  enters `VDMINFO`, guest memory or original `cmdmisc.c`.

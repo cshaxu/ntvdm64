@@ -108,6 +108,14 @@ int app_launch_declaration_consume_options(app_launch_declaration *declaration,
     return 1;
 }
 
+mvdm_image_kind app_launch_declaration_requested_image(
+    const app_launch_declaration *declaration)
+{
+    if (declaration == NULL || declaration->command_declared == 0u)
+        return MVDM_IMAGE_UNKNOWN;
+    return mvdm_image_classify_command_line(declaration->requested_command);
+}
+
 int app_launch_declaration_prepare_softpc_arguments(int argc, char **argv,
     int *softpc_argc, char ***softpc_argv)
 {

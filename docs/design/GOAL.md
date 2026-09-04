@@ -1,7 +1,9 @@
 # Project Goal
 
-Deliver a self-contained, non-invasive `ntvdm.exe` CLI for modern 32-bit and
-64-bit Windows hosts. It directly launches admitted DOS `.com`, `.exe`, `.bat`
+Deliver a self-contained, non-invasive NTVDM CLI for modern 32-bit and
+64-bit Windows hosts. Its architecture-specific product executables are
+`ntvdm32.exe` and `ntvdm64.exe`; they are published together, never by
+cross-architecture substitution. It directly launches admitted DOS `.com`, `.exe`, `.bat`
 and `.pif` targets and later bounded WOW16 workloads. It may use public Win32
 APIs and ordinary host resources, but never requires replacement Windows
 files, a rebuilt kernel/private subsystem, or installation-time host mutation.

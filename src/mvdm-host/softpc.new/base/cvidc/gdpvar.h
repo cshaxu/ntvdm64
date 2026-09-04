@@ -695,4 +695,11 @@
 #define GDP_SIZE 43513
 #define GDP_CHECKSUM 23234201
 extern IHP Gdp;
+/* DIVERGENCE(MVDM-HOST-DIV-048): every generated CVideo rule includes this
+ * common header.  On x64, redirect the original fixed-offset GDP forms to
+ * the existing private native-width slot carrier here, rather than relying
+ * on individual generated-rule translation units to remember the overlay.
+ * The x86 CCPU40 build keeps the byte-identical contiguous GDP layout. */
+#include <mvdm_gdp_slots.h>
+
 #endif /* _gdpvar_h */

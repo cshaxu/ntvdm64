@@ -98,6 +98,8 @@ int main(int argc, char **argv)
     session owner;
     char **softpc_argv = NULL;
     int softpc_argc = 0;
+    mvdm_image_kind requested_image;
+    DWORD native_exit_code = 0u;
     uint32_t dispose_reason;
     int result = 1;
 
@@ -112,6 +114,24 @@ int main(int argc, char **argv)
     mvdm_command_native_child_capture_report_path();
     if (!app_launch_declaration_consume_options(&declaration, &argc, argv)) {
         result = APP_STARTUP_OPTIONS_REJECTED;
+        goto finish;
+    }
+    /* The Windows product boundary classifies a declared image before an
+     * MVDM process exists.  Native PE never becomes a BaseVDM/PermCom record;
+     * DOS remains the original first-PermCom route and Win16 is explicitly
+     * bootstrap-gated until the source-shaped WOW composition is admitted. */
+    requested_image = app_launch_declaration_requested_image(&declaration);
+    if (requested_image == MVDM_IMAGE_NATIVE) {
+        if (!mvdm_image_launch_native(declaration.requested_command,
+                &native_exit_code, NULL)) {
+            result = APP_STARTUP_COMMAND_REJECTED;
+        } else {
+            result = (int)native_exit_code;
+        }
+        goto finish;
+    }
+    if (requested_image == MVDM_IMAGE_WIN16) {
+        result = APP_STARTUP_COMMAND_REJECTED;
         goto finish;
     }
     if (!app_launch_declaration_prepare_softpc_arguments(argc, argv,

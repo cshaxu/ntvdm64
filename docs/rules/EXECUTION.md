@@ -96,8 +96,39 @@ debug logs remain in that disposable root. Once a diagnosis is closed, retain
 only a concise reviewed excerpt, hash, manifest, or conclusion in `docs/etc/`;
 remove the raw debug log. `artifacts/` may receive only an owner-requested
 report or `artifacts/build/<task-id>-<version>/`, which is reserved for an
-explicitly approved versioned executable publication and its manifest, not for
-a configure tree, retry root, object cache, or probe.
+  explicitly approved versioned executable publication and its manifest, not for
+  a configure tree, retry root, object cache, or probe.
+
+### Product Executable Pair
+
+The product publication contract has exactly two architecture-named executable
+slots:
+
+- `build/output/ntvdm32.exe` — the formal Win32/x86 product link;
+- `build/output/ntvdm64.exe` — the formal Win64/x64 product link.
+
+The deployable local package mirrors those exact names at its root. The
+currently selected owner test root is `O:\ntvdm64`, so its required executable
+paths are `O:\ntvdm64\ntvdm32.exe` and `O:\ntvdm64\ntvdm64.exe`.
+
+`O:\ntvdm64` is a runtime-package root, not a diagnostic workspace. JSON, TXT,
+LOG, MAP, PDB and other observation/debug records must be written below
+`O:\ntvdm64\logs\` (or the disposable admitted build root), never beside the
+two product executables or guest media at the package root.
+
+A build run may use a descriptive temporary executable name inside its
+disposable `build/<task-id>/<run-id>/` root, but that name is never a product
+publication name. A staging step may replace only the matching architecture
+slot after that architecture's formal final link succeeds. It must never copy
+an x86 binary into `ntvdm64.exe`, an x64 binary into `ntvdm32.exe`, or publish a
+generic `ntvdm.exe` / task-specific diagnostic executable in place of either
+slot. The publication record names the source run, architecture and hashes of
+both staged files.
+
+Use `node tools/build/StageProductExecutable.mjs --architecture <x86|x64>
+--input <formal-final-link.exe>` for the architecture-specific staging action.
+The tool reads the PE machine field before it writes either destination and
+therefore rejects a mislabeled or cross-architecture input.
 
 ### Historical Recovery Audit Gate
 

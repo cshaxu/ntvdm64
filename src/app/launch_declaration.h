@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #include "base_vdm_broker.h"
+#include "adapter-mvdm-host-out/basesrv/include/mvdm_image_classification.h"
 
 typedef struct app_launch_declaration {
     base_vdm_local base_vdm;
@@ -29,6 +30,8 @@ typedef struct app_launch_declaration {
 void app_launch_declaration_initialize(app_launch_declaration *declaration);
 int app_launch_declaration_consume_options(app_launch_declaration *declaration,
     int *argc, char **argv);
+mvdm_image_kind app_launch_declaration_requested_image(
+    const app_launch_declaration *declaration);
 int app_launch_declaration_prepare_softpc_arguments(int argc, char **argv,
     int *softpc_argc, char ***softpc_argv);
 void app_launch_declaration_release_softpc_arguments(char **softpc_argv);

@@ -62,12 +62,13 @@ later package merely because an earlier linked component has no runtime proof.
 | Next order | Candidate implementation package |
 | --- | --- |
 | 1 | Original COMMAND `cmdExec32` stage-to-return recovery — recover the original `54:08` worker, Base VDM re-entry, child completion and original return for a DOS-initiated native child. This is the established pure-DOS/native-child priority and precedes WOW bootstrap work. The active packet is recorded only in `STATUS.md`. |
-| 2 | DOSX/DPMI/WOW bootstrap activation — recover the original `AUTOEXEC.NT → DOSX.EXE → SYSTEM.INI → KRNL?86.EXE` bootstrap as one complete owner chain. It is not a generic pure-DOS extender route. See [the DOSX/DPMI/WOW proposal](etc/operations/proposal-dosx-dpmi-runtime-activation-001.md). |
-| 3 | Single-process NTVDM compatibility matrix — run selected DOS, extender, Redirector and COMMAND-native-child workloads against completed original-owner contracts; add Win16 rows only after the two WOW packages below complete. Reopen only the immediate original owner proven by a failure. |
-| 4 | WOW16 bootstrap, callback and NE lifecycle activation — prove one-process WOWEXEC command routing, callback/re-entry, task lifetime and original Win16 NE start/exit. |
-| 5 | WOW16 service, UI and host integration activation — recover selected original WOW32 providers through public APIs while retaining exact USER/CSRSS/Win32k private-boundary failures. |
-| 6 | Cross-process broker closure — recover only required BaseSrv-style registration, command-queue, notification and disconnect-cleanup semantics through public IPC. It cannot own guest, COMMAND, SoftPC or WOW behavior. |
-| 7 | Multi-process matrix, x64 compatibility and product release — prove the brokered multi-process profile, paired x86/x64 behavior where runnable, portable media layout and release packaging. |
+| 2 | Original image disposition and COMMAND execution recovery — classify a direct product target before VDM creation: native PE uses Windows directly, DOS enters the first-PermCom/BaseVDM record route, and Win16 is WOW-gated. Within guest COMMAND, retain original DOS `EXEC` and parent-PSP return; `SCS_DOSONLY=0` permits original `cmdCheckBinary` only for unknown formats, not a replacement product-child DOS launcher. See [the disposition proposal](etc/operations/proposal-command-child-vdm-launch-recovery-001.md). |
+| 3 | DOSX/DPMI/WOW bootstrap activation — recover the original `AUTOEXEC.NT → DOSX.EXE → SYSTEM.INI → KRNL?86.EXE` bootstrap as one complete owner chain. It is not a generic pure-DOS extender route. See [the DOSX/DPMI/WOW proposal](etc/operations/proposal-dosx-dpmi-runtime-activation-001.md). |
+| 4 | Single-process NTVDM compatibility matrix — run selected DOS, extender, Redirector and COMMAND-native-child workloads against completed original-owner contracts; add Win16 rows only after the two WOW packages below complete. Reopen only the immediate original owner proven by a failure. |
+| 5 | WOW16 bootstrap, callback and NE lifecycle activation — prove one-process WOWEXEC command routing, callback/re-entry, task lifetime and original Win16 NE start/exit. |
+| 6 | WOW16 service, UI and host integration activation — recover selected original WOW32 providers through public APIs while retaining exact USER/CSRSS/Win32k private-boundary failures. |
+| 7 | Cross-process broker closure — recover only required BaseSrv-style registration, command-queue, notification and disconnect-cleanup semantics through public IPC. It cannot own guest, COMMAND, SoftPC or WOW behavior. |
+| 8 | Multi-process matrix, x64 compatibility and product release — prove the brokered multi-process profile, paired x86/x64 behavior where runnable, portable media layout and release packaging. |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](etc/archive/2026-08-27-pre-package-roadmap/README.md).

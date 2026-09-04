@@ -27,16 +27,20 @@ adapter-owned record before original `scs_init` asks `GetNextVDMCommand(NULL)`
 whether this is the first DOS VDM. A declared command payload remains owned by
 the Base VDM adapter.
 
-`--command <text>` declares one ordinary DOS target for the selected session.
-App preserves the original Base VDM split: `AppName` is the target image and
-`CmdLine` is only that target's argument tail plus `\r\n`. The first resident
-`COMMAND.COM` receives this record through its original BOP and performs the
-DOS EXEC; app does not wrap the target in `COMMAND.COM /C`. App removes only
-this composition option before entering the original SoftPC argument parser.
+`--command <text>` declares one concrete product-entry target. Before a VDM
+exists, app's BaseVDM-facing adapter classifies it without shell parsing:
+native PE starts directly through public Windows process creation, DOS uses the
+original Base VDM split (`AppName` image plus `CmdLine` argument tail), and NE
+is held at the explicit WOW-bootstrap gate. The first resident `COMMAND.COM`
+receives a DOS record through its original BOP and performs the original DOS
+`EXEC`; app does not wrap it in `COMMAND.COM /C`.
 
 ## M0 T387 positional command declaration
 
-The ordinary product spelling is `ntvdm.exe <command> [argument ...]`.
+The ordinary product spelling is either
+`ntvdm32.exe <command> [argument ...]` or
+`ntvdm64.exe <command> [argument ...]`, matching the published host
+architecture. The command contract is otherwise identical.
 The first non-SoftPC option and the remainder form one app-declared DOS command
 that travels through the existing Base VDM record. Earlier original SoftPC
 options remain untouched. A one-token command preserves that token verbatim;
@@ -57,12 +61,18 @@ resident PermCom; an explicit positional target is copied into the original
 boundary ends the session only after its copied record has been consumed and
 PermCom makes its next original request.
 
-Every positional target, including `ntvdm.exe command.com`, is therefore an
+Every DOS positional target, including `ntvdm32.exe command.com` or
+`ntvdm64.exe command.com`, is therefore an
 ordinary guest EXEC target. A second `COMMAND.COM` receives no app/session/BOP
 specific handling:
 it retains the same `DoReEnter -> Do16BitPrompt` route, banner, prompt and
 DOS-CON behavior as any ordinary guest shell. App does not print a prompt,
 read a Console line, write guest input or resubmit a record after child exit.
+
+For a guest COMMAND `EXEC`, the guest DOS kernel remains the format owner.
+Recognized DOS COM/MZ images run in the same VDM and return through the
+original parent PSP; only an unknown format reaches `cmdCheckBinary`. `DOSONLY`
+is an original guest policy and is not an app image-classification switch.
 
 ## M0 T310 S3 selected backend composition
 
