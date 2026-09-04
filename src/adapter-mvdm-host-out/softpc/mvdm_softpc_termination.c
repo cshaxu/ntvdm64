@@ -378,11 +378,12 @@ void mvdm_softpc_record_bop_return(unsigned int selector,
                                    unsigned int guest_cs,
                                    unsigned int guest_ip,
                                    unsigned int guest_ax,
-                                   unsigned int guest_cf)
+                                   unsigned int guest_cf,
+                                   unsigned int guest_if)
 {
     static const char hex[] = "0123456789ABCDEF";
     char message[] =
-        "MVDM-BOP-RETURN 00:00 cs=0000 ip=0000 ax=0000 cf=0\r\n";
+        "MVDM-BOP-RETURN 00:00 cs=0000 ip=0000 ax=0000 cf=0 if=0\r\n";
     message[16] = hex[(selector >> 4) & 0x0fu];
     message[17] = hex[selector & 0x0fu];
     message[19] = hex[(service >> 4) & 0x0fu];
@@ -400,6 +401,7 @@ void mvdm_softpc_record_bop_return(unsigned int selector,
     message[43] = hex[(guest_ax >> 4) & 0x0fu];
     message[44] = hex[guest_ax & 0x0fu];
     message[49] = guest_cf ? '1' : '0';
+    message[54] = guest_if ? '1' : '0';
     mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH", message,
         (DWORD)(sizeof(message) - 1));
     if (selector == 0x54u && service == 0x0fu)

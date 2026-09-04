@@ -52,6 +52,8 @@ controller, ICA or CPU frame with a host parser or direct guest write.
 
 **S7 INT 16 owner audit:** [INT 16 idle BOP and IRQ1 owner audit](etc/evidence/m0-t389-s7-int16-idle-and-irq-owner-audit-002.md). Original `BOP 16h` is BIOS idle accounting, while port-60 drain belongs to the distinct IRQ1 source path. The current `AH=1` marker is consequently not a prompt-ready contract; the unresolved prerequisite remains post-`54:04` NTDOS/CPU40 continuity.
 
+**S7 IF provenance observation:** [post-BOP IF provenance](etc/evidence/m0-t389-s7-post-bop-if-provenance-003.md). The unchanged original BOP return records `IF=0` at both `54:01` and `54:04`; the later NTDOS load/path continuation still has IF clear when the normal Console key reaches 8042/ICA.  This rules out forcing IF, synthetic IRQ1 or a keyboard-controller repair from the current probe and leaves the second-shell `DOS CON` transition as the first prerequisite.
+
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 
 **Plan:** [M0 T375 pure DOS CPU40/SoftPC boot and COMMAND baseline](etc/operations/m0-t375-pure-dos-cpu40-softpc-command-baseline-001.md).

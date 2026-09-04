@@ -44,7 +44,8 @@ void mvdm_softpc_record_bop_return(unsigned int selector,
                                    unsigned int guest_cs,
                                    unsigned int guest_ip,
                                    unsigned int guest_ax,
-                                   unsigned int guest_cf);
+                                   unsigned int guest_cf,
+                                   unsigned int guest_if);
 
 /* Default-off fixed-container observation of the original CCPU BOP FE
  * unwind.  The CPU has already decoded and advanced past the instruction;

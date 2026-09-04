@@ -336,7 +336,8 @@ void MS_bop_4(void)
     /* DIVERGENCE(MVDM-HOST-DIV-164): state-neutral post-return evidence. */
     mvdm_softpc_record_bop_return(0x54u, (unsigned int)Command,
         (unsigned int)getCS(), (unsigned int)getIP(),
-        (unsigned int)getAX(), (unsigned int)getCF());
+        (unsigned int)getAX(), (unsigned int)getCF(),
+        (unsigned int)getIF());
 }
 
 
