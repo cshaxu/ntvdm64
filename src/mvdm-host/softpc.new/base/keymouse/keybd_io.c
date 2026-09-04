@@ -1486,8 +1486,9 @@ void kb_idle_poll()
 
 #ifdef NTVDM
 /* DIVERGENCE(MVDM-HOST-DIV-215): default-off observer marker at the original
- * BIOS keyboard waitio edge.  It runs only after the source-selected AH=2
- * operation; it neither creates input nor changes the idle call below. */
+ * BIOS keyboard-read edges.  It records the actually reached AH=0 polling
+ * edge and the AH=2 waitio edge; it neither creates input nor changes the
+ * source-selected idle call below. */
 #include "mvdm_softpc_termination.h"
 
    /*
@@ -1503,8 +1504,9 @@ void keyboard_io()
             * The 16 bit thread has not reached idle status yet
             * but it is polling the kbd, so do some brief waits.
             */
-     case 0:
-       WaitIfIdle();
+      case 0:
+        mvdm_softpc_record_keyboard_poll();
+        WaitIfIdle();
 #ifndef NTVDM
        if (!WaitKbdHdw(0)) {
            TryKbdInt();
@@ -1516,8 +1518,9 @@ void keyboard_io()
            /*
             *  App wants to idle, so consult idle algorithm
             */
-     case 1:
-       IDLE_poll();
+      case 1:
+        mvdm_softpc_record_keyboard_poll();
+        IDLE_poll();
        break;
 
             /*

@@ -130,7 +130,7 @@ const launcherArguments = [stagedProduct, options.stage, options.report];
 if (options['product-command'] !== undefined) {
   /* A declared command and a later Console row are independent product
    * contracts.  The command crosses only the existing app/BaseVDM boundary;
-   * observer input remains gated on original BIOS waitio below. */
+   * observer input remains gated on an original BIOS keyboard edge below. */
   launcherArguments.push('-f', '-o', '--command', options['product-command']);
 } else if (options.interactive !== undefined || options.interactiveScript !== undefined || options.interactiveScriptVerOnly !== undefined) {
   /* S7's no-argument product contract still needs the original SoftPC

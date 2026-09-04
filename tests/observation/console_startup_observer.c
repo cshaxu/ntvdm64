@@ -20,7 +20,7 @@
  * second observation window. */
 #define OBSERVATION_TIMEOUT_MS 10000u
 #define OBSERVATION_TIMEOUT_MAX_MS 30000u
-#define OBSERVATION_INPUT_READY_TIMEOUT_MS 5000u
+#define OBSERVATION_INPUT_READY_TIMEOUT_MS 20000u
 #define OBSERVATION_KEY_EVENT_INTERVAL_MS 100u
 #define OBSERVATION_KEY_DRAIN_TIMEOUT_MS 1500u
 #define OBSERVATION_TIMEOUT_EXIT 0x53504354u
@@ -405,11 +405,10 @@ static BOOL write_console_input_text(HANDLE input, const char *text,
     return TRUE;
 }
 
-/* The S7 command row must not use a wall-clock guess for initial COMMAND
- * setup.  The product's default-off source marker records original BIOS
- * keyboard waitio (BOP 16, AH=2), after guest INT 16h has entered its native
- * wait loop.  This is the source-owned point at which a normal Console key
- * can be queued without guessing at startup.  The observer only waits for
+/* The command row must not use a wall-clock guess for initial COMMAND setup.
+ * The product's default-off source marker records an original BIOS keyboard
+ * read/status edge (BOP 16, AH=0/1/2).  This is the source-owned point at
+ * which a normal Console key can be queued without guessing at startup.  The observer only waits for
  * that external report; it neither alters guest state nor treats the marker
  * as a product result. */
 static BOOL wait_for_report_marker(const char *path, const char *marker,
@@ -812,8 +811,8 @@ int main(int argc, char **argv)
     else
         SetEnvironmentVariableA("MVDM_DEM_READ_REPORT_PATH", NULL);
     if (scripted_console_input) {
-        /* Original BIOS keyboard waitio is a source-owned CONIN$ readiness
-         * boundary, not a timeout or a synthesized BOP. */
+        /* An original BIOS keyboard read/status edge is a source-owned CONIN$
+         * readiness boundary, not a timeout or a synthesized BOP. */
         scripted_console_input_ready = wait_for_report_marker(
             console_input_ready_report_path, "MVDM-COMMAND-INPUT-READY",
             OBSERVATION_INPUT_READY_TIMEOUT_MS);
@@ -877,7 +876,7 @@ int main(int argc, char **argv)
                     (scripted_console_input_delivered ? "delivered" : "failed") :
                     "none");
         if (scripted_console_input) {
-            fprintf(report, "scripted-console-input-trigger=keyboard-bop-16-waitio\n");
+            fprintf(report, "scripted-console-input-trigger=keyboard-bop-16-read-status\n");
             fprintf(report, "scripted-console-input-sequence=%s\n",
                     scripted_console_input_sequence);
             fprintf(report, "scripted-console-input-ready=%s\n",

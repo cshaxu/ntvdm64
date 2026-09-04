@@ -107,6 +107,7 @@ void mvdm_softpc_record_cpu_hw_interrupt_service(unsigned int vector);
  * emitted only after the unchanged guest INT 16h path has selected its own
  * `AH == 2` idle operation; it does not queue, read, or alter a key. */
 void mvdm_softpc_record_keyboard_waitio(void);
+void mvdm_softpc_record_keyboard_poll(void);
 /* Default-off observation after the original PIC EOI selection.  It copies
  * only the original adapter/line result and cannot alter PIC, CPU, BIOS or
  * guest state. */

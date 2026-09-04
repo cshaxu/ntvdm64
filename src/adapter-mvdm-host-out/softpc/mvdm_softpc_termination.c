@@ -414,6 +414,20 @@ void mvdm_softpc_record_keyboard_waitio(void)
         (DWORD)(sizeof(ready) - 1));
 }
 
+void mvdm_softpc_record_keyboard_poll(void)
+{
+    static LONG reported;
+    static const char ready[] = "MVDM-COMMAND-INPUT-READY\r\n";
+
+    /* The original AH=00h polling edge can execute many times before the
+     * Console worker supplies a key.  The observer needs one edge, not a
+     * diagnostic write per poll. */
+    if (InterlockedCompareExchange(&reported, 1, 0) == 0) {
+        mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+            ready, (DWORD)(sizeof(ready) - 1));
+    }
+}
+
 void mvdm_softpc_record_cpu_unsimulate(unsigned int guest_cs,
     unsigned int guest_ip)
 {
