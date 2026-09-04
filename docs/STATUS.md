@@ -2,27 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T390 S5.** The pure-DOS first-shell profile has reached the
-source-shaped normal child `COMMAND.COM` record without DOSX/DPMI bootstrap.
-T390 remains active until the second shell's original banner/prompt/DOS `CON`
-path is observed; it does not change guest code.
+**No active M/T/S packet.** M0 T390 closed after the fixed pure-DOS profile
+reached the original second `COMMAND.COM` banner, prompt and DOS `CON` path,
+then accepted and completed an ordinary Console `ver` line. No implementation
+may begin until the owner admits the next queue candidate.
 
 ## Latest Closure
 
-[M0 T389 explicit interactive COMMAND profile boundary](history/m0-t389-explicit-interactive-command-profile-boundary-closure-20260903.md).
+[M0 T390 pure-DOS first-shell profile](history/m0-t390-pure-dos-first-shell-profile-closure-20260904.md).
 
 ## Active Packet
 
-**Active: M0 T390 S5 — original second-COMMAND console proof.**
+**Closed: M0 T390 S5 — original second-COMMAND Console proof.**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T390 S1; ordinary single-person dual-role implementation/review. |
-| Objective | Prove the original OpenNT owner and selection path for the `config.nt`/`autoexec.nt` pair needed to avoid the staged `AUTOEXEC.NT -> DOSX.EXE` DPMI/WOW predecessor before the explicit second `COMMAND.COM` proof resumes. |
+| Identifier Mode | M0 T390 S5; ordinary single-person dual-role implementation/review, closed. |
+| Objective | Prove the selected original second `COMMAND.COM` banner/prompt/DOS `CON` route and one ordinary Console-key delivery without changing guest code. |
 | Reference Baseline | T389 S8 closure; `softpc.new/host/src/nt_pif.c:GetPIFConfigFiles`; `dos/command/cmdconf.c:ExpandConfigFiles`; current `O:\\ntvdm64` stage. |
 | Scope | Original PIF/config carrier, app-owned profile selection boundary, immutable named pure-DOS stage assets and their manifest/provenance. |
 | Non-goals | No `COMMAND.COM`, NTDOS, NTIO, BOP, CPU, keyboard, DPMI/WOW, synthetic prompt, or host command-parser change. No overwrite of the default stage configuration during audit. |
-| Exit Criteria | Record one source-shaped configuration selection contract; classify whether an existing PIF field can carry it for the selected launch profile; identify exact pure-DOS assets and their provenance; define the minimal next binding and fixed-observation proof. |
+| Exit Criteria | Met: original normal child `COMMAND.COM` banner/prompt/DOS `CON` wait and one normal Console command route are evidenced by S5 P2. Broader shell lifecycle/workload behavior remains explicitly outside T390. |
 | Stop Conditions | If selection requires private CSRSS/PIF product machinery, a guest-media modification, or a new parser, stop and record that source-owned boundary rather than substitute behavior. |
 
 **S1 closure:** [pure-DOS configuration-carrier audit](etc/evidence/m0-t390-s1-pure-dos-configuration-carrier-audit-001.md). Original PIF fields already carry the needed configuration pair; the currently admitted local Base VDM adapter omits that capture, so S2 must restore only the original `PifFile`/`PifLen` binding before a pure-DOS profile can be selected.
@@ -48,6 +48,8 @@ host command parser, synthetic BOP, direct guest-memory write, guest change or
 CPU workaround.
 
 **S5 P1 evidence:** [pure-DOS normal Console key observation](etc/evidence/m0-t390-s5-p1-pure-dos-normal-console-key-observation-001.md). The original worker accepts the ordinary `v` key and queues it through 8042/ICA, but CPU40 records the pending hardware interrupt with `IF=0`; no port-60 read, DOS `CON` consumption, `VER` output or prompt is claimed. S5 continues with the original CLI/STI/IRET and CPU40 continuity audit.
+
+**S5 closure:** [original second-COMMAND Console proof](etc/evidence/m0-t390-s5-original-second-command-console-proof-002.md).  After the source-shaped profile binding and the signed PIC-rejection correction, original `COMMAND.COM` displays its banner/prompt, consumes normal Console `ver` through worker/8042/ICA/IRQ1/BIOS/DOS, displays the result and returns to the prompt.  The product `exit` lifecycle is not claimed.
 
 **S5 P1 evidence:** [pure-DOS normal Console key observation](etc/evidence/m0-t390-s5-p1-pure-dos-normal-console-key-observation-001.md). The original worker accepts the ordinary `v` key and queues it through 8042/ICA, but CPU40 records the pending hardware interrupt with `IF=0`; no port-60 read, DOS `CON` consumption, `VER` output or prompt is claimed. S5 continues with the original CLI/STI/IRET and CPU40 continuity audit.
 

@@ -1427,7 +1427,9 @@ BOOL CntrlHandler(ULONG CtrlType)
 
 
 	if (sc.ScreenState == STREAM_IO)
+	    {
 	    stream_io_update();
+	    }
 	else {
 	    if (sc.ScreenState != FULLSCREEN)
 		(*update_alg.calc_update)();

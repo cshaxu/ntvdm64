@@ -227,7 +227,13 @@ BOOL WINAPI RegisterConsoleVDM(DWORD flags, HANDLE start_event,
         return FALSE;
     }
     if (flags == CONSOLE_UNREGISTER_VDM) {
-        session_presentation_text_clear(owner);
+        /* DIVERGENCE(ADAPTER-WIN32-032): the NT4 console-server unregister
+         * operation detached the VDM from its presentation registration; it
+         * did not revoke the caller's text-buffer mapping.  SoftPC retains
+         * textBuffer across doNullRegister()/subsequent registration and may
+         * write it while the host child is blocked.  Keep this session-owned
+         * backing allocation alive until session disposal or a later safe
+         * replacement, so the source-facing pointer lifetime is preserved. */
         return TRUE;
     }
     if ((flags != CONSOLE_REGISTER_VDM && flags != CONSOLE_REGISTER_WOW) ||

@@ -25,6 +25,7 @@ INT andISM323 CPU Functions.
 #include <c_reg.h>
 #include <intx.h>
 #include <c_intr.h>
+#include "mvdm_softpc_termination.h"
 
 /*
    =====================================================================
@@ -45,6 +46,12 @@ IFN1(
 
 
    {
+   /* DIVERGENCE(MVDM-HOST-DIV-218): a default-off observer recognizes the
+    * original real-mode DOS buffered-console-input contract.  It reads only
+    * the already-live interrupt number and AH; it cannot alter the original
+    * INTx transfer, CPU state, guest memory, or DOS result. */
+   if (!GET_PE() && op1 == 0x21 && GET_AH() == 0x0a)
+      mvdm_softpc_record_dos_console_line_input();
 #ifdef NTVDM
    extern BOOL host_swint_hook IPT1(IS32, int_no);
 

@@ -21,6 +21,7 @@ static __declspec(thread) const char *mvdm_softpc_termination_origin =
     "unattributed";
 static char mvdm_softpc_command_continuation_report_path[MAX_PATH];
 static char mvdm_softpc_stream_io_report_path[MAX_PATH];
+static volatile LONG mvdm_softpc_dos_console_line_input_seen;
 
 static char *mvdm_softpc_append_hex(char *output, ULONG_PTR value,
     unsigned int digits)
@@ -430,6 +431,53 @@ void mvdm_softpc_record_keyboard_poll(void)
     }
 }
 
+void mvdm_softpc_record_dos_console_line_input(void)
+{
+    static LONG reported;
+    static const char ready[] = "MVDM-DOS-CON-LINE-INPUT\r\n";
+
+    InterlockedExchange(&mvdm_softpc_dos_console_line_input_seen, 1);
+    if (InterlockedCompareExchange(&reported, 1, 0) == 0) {
+        mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+            ready, (DWORD)(sizeof(ready) - 1));
+    }
+}
+
+void mvdm_softpc_record_cpu_interrupt_enable(void)
+{
+    static LONG reports;
+    static const char marker[] = "MVDM-CPU-STI\r\n";
+
+    if (InterlockedCompareExchange(&mvdm_softpc_dos_console_line_input_seen,
+            0, 0) == 0 || InterlockedIncrement(&reports) > 64)
+        return;
+    mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+        marker, (DWORD)(sizeof(marker) - 1));
+}
+
+void mvdm_softpc_record_idle_activity(unsigned int phase,
+    unsigned int now_waiting, unsigned int event_present,
+    unsigned int wait_result)
+{
+    static LONG reports;
+    char message[112];
+    int formatted;
+
+    /* Pre-input idle/timer activity is deliberately irrelevant to the
+     * second-COMMAND proof. Keep this observer bounded after the actual
+     * source-owned DOS line-input edge. */
+    if (InterlockedCompareExchange(&mvdm_softpc_dos_console_line_input_seen,
+            0, 0) == 0 || InterlockedIncrement(&reports) > 64)
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-IDLE phase=%u waiting=%u event=%u result=%08X\r\n",
+        phase, now_waiting != 0u ? 1u : 0u, event_present != 0u ? 1u : 0u,
+        wait_result);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+            message, (DWORD)formatted);
+}
+
 void mvdm_softpc_record_cpu_unsimulate(unsigned int guest_cs,
     unsigned int guest_ip)
 {
@@ -681,6 +729,11 @@ void mvdm_softpc_record_cpu_hw_interrupt_deferred(unsigned int interrupts_enable
     mvdm_guest_location int1c_vector;
     mvdm_guest_location int1c_target;
     mvdm_guest_location_lease int1c_code;
+    mvdm_guest_location int16_vector;
+    mvdm_guest_location int16_target;
+    mvdm_guest_location_lease int16_code;
+    mvdm_guest_location vdm_state_location;
+    mvdm_guest_location_lease vdm_state;
     mvdm_guest_location current_code;
     mvdm_guest_location_lease current_code_lease;
 
@@ -701,6 +754,54 @@ void mvdm_softpc_record_cpu_hw_interrupt_deferred(unsigned int interrupts_enable
         message, (DWORD)formatted);
     mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
         message, (DWORD)formatted);
+
+    /* The original WOW_x86 FSTI/FCLI macros publish virtual interrupt state
+     * at this fixed guest address.  Capture it read-only at the exact point
+     * CPU40 defers a real IRQ; it distinguishes a missing monitor bridge from
+     * an ordinary CLI-protected interval without changing guest state. */
+    if (mvdm_guest_location_set_real_mode(&vdm_state_location, 0u, 0x0714u) &&
+        mvdm_guest_location_acquire(&vdm_state_location, 4u,
+            GUEST_MEMORY_ACCESS_READ, &vdm_state)) {
+        uint32_t vdm_state_value = (uint32_t)vdm_state.bytes[0] |
+            ((uint32_t)vdm_state.bytes[1] << 8) |
+            ((uint32_t)vdm_state.bytes[2] << 16) |
+            ((uint32_t)vdm_state.bytes[3] << 24);
+        formatted = snprintf(message, sizeof(message),
+            "MVDM-CPU-VDMSTATE value=%08X vif=%u pending=%u\r\n",
+            (unsigned int)vdm_state_value,
+            (vdm_state_value & 0x0200u) != 0u ? 1u : 0u,
+            (vdm_state_value & 0x0003u) != 0u ? 1u : 0u);
+        if (mvdm_guest_location_release(&vdm_state, 0) && formatted > 0 &&
+            (size_t)formatted < sizeof(message)) {
+            mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+                message, (DWORD)formatted);
+            mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+                message, (DWORD)formatted);
+        }
+    }
+
+    /* The installed INT 16h vector distinguishes the ROM handler from the
+     * original NTIO resident SpcKbd handler.  Read the existing IVT only;
+     * this observer neither selects nor changes the vector. */
+    if (mvdm_guest_location_set_real_mode(&int16_vector, 0u, 0x0058u) &&
+        mvdm_guest_location_read_far(&int16_vector, &int16_target) &&
+        mvdm_guest_location_acquire(&int16_target, 8u,
+            GUEST_MEMORY_ACCESS_READ, &int16_code)) {
+        formatted = snprintf(message, sizeof(message),
+            "MVDM-CPU-INT16 target=%04X:%04X bytes=%02X %02X %02X %02X %02X %02X %02X %02X\r\n",
+            (unsigned int)int16_target.segment,
+            (unsigned int)int16_target.offset,
+            int16_code.bytes[0], int16_code.bytes[1], int16_code.bytes[2],
+            int16_code.bytes[3], int16_code.bytes[4], int16_code.bytes[5],
+            int16_code.bytes[6], int16_code.bytes[7]);
+        if (mvdm_guest_location_release(&int16_code, 0) && formatted > 0 &&
+            (size_t)formatted < sizeof(message)) {
+            mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+                message, (DWORD)formatted);
+            mvdm_softpc_write_captured_report(mvdm_softpc_stream_io_report_path,
+                message, (DWORD)formatted);
+        }
+    }
 
     if (mvdm_guest_location_set_real_mode(&current_code,
             (uint16_t)guest_cs, (uint16_t)guest_ip) &&

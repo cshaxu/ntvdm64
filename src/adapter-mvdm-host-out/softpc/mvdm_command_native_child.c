@@ -39,6 +39,29 @@ static void record_command(const char *origin, const char *command)
     CloseHandle(report);
 }
 
+/* Default-off lifecycle evidence for the unchanged COMMAND worker.  These
+ * are the three 32-bit source ABI values copied from its existing STD_HANDLES
+ * record; no native HANDLE is exposed or changed here. */
+static void record_standard_handles(const ULONG handles[3])
+{
+    char message[176];
+    HANDLE report;
+    DWORD written;
+    int formatted;
+
+    if (native_child_report_path[0] == '\0' || handles == NULL) return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CMD-STDHANDLES in=%08lX out=%08lX err=%08lX\\r\\n",
+        (unsigned long)handles[0], (unsigned long)handles[1],
+        (unsigned long)handles[2]);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
+    report = CreateFileA(native_child_report_path, FILE_APPEND_DATA,
+        FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (report == INVALID_HANDLE_VALUE) return;
+    (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
+    CloseHandle(report);
+}
+
 void mvdm_command_native_child_capture_report_path(void)
 {
     DWORD bytes;
@@ -237,6 +260,7 @@ static int capture_locations(mvdm_command_native_child_state *state,
     }
     state->active = 1u;
     record_command(host_command != NULL ? "comspec" : "guest-tail", state->command);
+    record_standard_handles(state->standard_handles);
     return 1;
 }
 
@@ -344,4 +368,24 @@ void mvdm_command_native_child_finish(void)
 void mvdm_command_native_child_abort(void)
 {
     mvdm_command_native_child_finish();
+}
+
+void mvdm_command_native_child_record_execution(unsigned int phase,
+    unsigned int status, unsigned int value)
+{
+    char message[144];
+    HANDLE report;
+    DWORD written;
+    int formatted;
+
+    if (native_child_report_path[0] == '\0') return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CMD-EXEC phase=%u status=%u value=%08X\\r\\n", phase,
+        status != 0u ? 1u : 0u, value);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
+    report = CreateFileA(native_child_report_path, FILE_APPEND_DATA,
+        FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (report == INVALID_HANDLE_VALUE) return;
+    (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
+    CloseHandle(report);
 }

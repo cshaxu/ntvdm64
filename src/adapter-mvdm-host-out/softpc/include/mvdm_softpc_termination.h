@@ -118,6 +118,21 @@ void mvdm_softpc_record_keyboard_waitio(void);
 /* Default-off latched observation at original BIOS keyboard `AH == 0/1`
  * polling edges.  It does not queue, read, or alter a key. */
 void mvdm_softpc_record_keyboard_poll(void);
+/* Default-off observation at the original real-mode DOS buffered-console
+ * input interrupt (`INT 21h`, `AH=0Ah`).  It copies no guest bytes and has
+ * no control over the interrupt transfer or its result. */
+void mvdm_softpc_record_dos_console_line_input(void);
+/* Default-off observation after the original CPU40 STI instruction.  It is
+ * gated by the existing DOS-console-input observation and cannot change the
+ * CPU flags, interrupt map, PIC, BIOS, or guest control flow. */
+void mvdm_softpc_record_cpu_interrupt_enable(void);
+/* Default-off observer for the source-owned SoftPC idle event.  It starts
+ * recording only after the original DOS buffered-console-input boundary has
+ * been reached, and never owns or changes the event, CPU, PIC, or guest. */
+void mvdm_softpc_record_idle_activity(unsigned int phase,
+                                      unsigned int now_waiting,
+                                      unsigned int event_present,
+                                      unsigned int wait_result);
 /* Default-off observation after the original PIC EOI selection.  It copies
  * only the original adapter/line result and cannot alter PIC, CPU, BIOS or
  * guest state. */

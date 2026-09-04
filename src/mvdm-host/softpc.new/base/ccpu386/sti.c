@@ -23,6 +23,7 @@ STI CPU functions.
 #include <c_xcptn.h>
 #include	<c_reg.h>
 #include <sti.h>
+#include "mvdm_softpc_termination.h"
 
 
 /*
@@ -36,4 +37,8 @@ GLOBAL VOID
 STI()
    {
    SET_IF(1);
+   /* DIVERGENCE(MVDM-HOST-DIV-220): default-off scalar-only witness after
+    * the unchanged original STI state update. It is gated by the existing
+    * DOS CON boundary and cannot alter CPU flags, PIC, BIOS, or guest flow. */
+   mvdm_softpc_record_cpu_interrupt_enable();
    }

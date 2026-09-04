@@ -4484,16 +4484,28 @@ TYPEFF_3:
  */
 
 	 IU32 hook_address;	
+	 IS32 acknowledged_interrupt;
 
-	 cpu_hw_interrupt_number = ica_intack(&hook_address);
-	 /* DIVERGENCE(MVDM-HOST-DIV-207): default-off scalar-only witness after
-	  * the unchanged original PIC acknowledge and before the unchanged BIOS
-	  * interrupt transfer. */
-	 mvdm_softpc_record_cpu_hw_interrupt_service(cpu_hw_interrupt_number);
-	 EXT = EXTERNAL;
-	 SYNCH_TICK();
-	 do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);
-	 CCPU_save_EIP = GET_EIP();   /* to reflect IP change */
+	 acknowledged_interrupt = ica_intack(&hook_address);
+	 /* DIVERGENCE(MVDM-HOST-DIV-221): the source PIC explicitly returns -1
+	  * when a host-thread notification becomes stale before CCPU accepts it.
+	  * The historical x86 monitor prevented that race outside this CCPU body;
+	  * a modern user-mode session can reach it.  Preserve the original
+	  * acknowledge and all real-interrupt mechanics, but do not narrow its
+	  * signed rejection sentinel into the original IU16 vector and dispatch
+	  * a fabricated INT FF. */
+	 if (acknowledged_interrupt != -1)
+	 {
+	     cpu_hw_interrupt_number = (IU16)acknowledged_interrupt;
+	     /* DIVERGENCE(MVDM-HOST-DIV-207): default-off scalar-only witness after
+	      * the unchanged original PIC acknowledge and before the unchanged BIOS
+	      * interrupt transfer. */
+	     mvdm_softpc_record_cpu_hw_interrupt_service(cpu_hw_interrupt_number);
+	     EXT = EXTERNAL;
+	     SYNCH_TICK();
+	     do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);
+	     CCPU_save_EIP = GET_EIP();   /* to reflect IP change */
+	 }
       }
 #else	/* SFELLOW */
    if (GET_IF() && (cpu_interrupt_map & (CPU_HW_INT_MASK | CPU_HW_NPX_INT_MASK)))

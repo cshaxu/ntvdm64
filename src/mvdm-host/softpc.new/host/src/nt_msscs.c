@@ -131,11 +131,19 @@ InitialiseDosEmulation(int argc, char **argv)
               (host_addr)&fVirtualInt,
               FIXED_NTVDMSTATE_SIZE
               );
-    /* DIVERGENCE: MVDM-HOST-DIV-039. The original MIPS branch is outside
-     * this x86-guest product profile. Retain only the original x86 state
-     * transition on both supported host architectures; do not use the
-     * historical i386 compilation-target macro as a product-wide switch. */
-    fVirtualInt &=  ~MIPS_BIT_MASK;
+    /* DIVERGENCE(MVDM-HOST-DIV-039): in the original build, `i386` selected
+     * NT's kernel-V86 monitor while the non-i386 body selected the software
+     * CCPU machine.  This product deliberately selects CPU_40_STYLE on an
+     * x86 host, so preserve the original software-CPU state transition based
+     * on the machine owner rather than host ISA.  MIPS_BIT_MASK here names
+     * the historical FSTI/FCLI fallback selector; it does not enable MIPS
+     * guest code or a second CPU.
+     */
+#ifdef CPU_40_STYLE
+    fVirtualInt |= MIPS_BIT_MASK;
+#else
+    fVirtualInt &= ~MIPS_BIT_MASK;
+#endif
     sas_storedw((ULONG)FIXED_NTVDMSTATE_LINEAR,fVirtualInt);
 
     io_init();

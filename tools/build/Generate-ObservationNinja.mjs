@@ -18,7 +18,7 @@ writeFileSync(resolve(build, 'build.ninja'), [
   '  deps = msvc',
   '  msvc_deps_prefix = Note: including file:',
   'rule link',
-  '  command = link.exe /nologo /OUT:$out $in kernel32.lib dbghelp.lib',
+  '  command = link.exe /nologo /OUT:$out $in kernel32.lib user32.lib dbghelp.lib',
   'build console-startup-observer.obj: cc ' +
     source('tests/observation/console_startup_observer.c'),
   'build console-startup-observer.exe: link console-startup-observer.obj',

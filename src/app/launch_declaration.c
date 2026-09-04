@@ -151,10 +151,14 @@ int app_launch_declaration_bind(app_launch_declaration *declaration,
     if (declaration == NULL || declaration->bound != 0u ||
         !base_vdm_local_valid(&declaration->base_vdm)) return 0;
     if (!base_vdm_local_bind(&declaration->base_vdm, owner)) return 0;
-    /* A declared CLI command is a one-shot product request.  Keep the
-     * original COMMAND/BaseVDM exchange unchanged: only its next request
-     * after consuming that command completes this app-owned session. */
+    /* A declared non-COMMAND CLI target is a one-shot product request.  The
+     * explicit COMMAND.COM case deliberately remains a normal second DOS
+     * shell: its original prompt loop must be able to request and execute
+     * more commands, rather than having app terminate the session after its
+     * first host-execution return.  Keep the COMMAND/BaseVDM exchange itself
+     * unchanged in both cases. */
     if (declaration->command_declared != 0u &&
+        !is_interactive_command_target(declaration) &&
         !base_vdm_local_set_terminal_on_command_exhaustion(
             &declaration->base_vdm, 1)) {
         (void)base_vdm_local_unbind(&declaration->base_vdm);

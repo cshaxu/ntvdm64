@@ -811,10 +811,11 @@ int main(int argc, char **argv)
     else
         SetEnvironmentVariableA("MVDM_DEM_READ_REPORT_PATH", NULL);
     if (scripted_console_input) {
-        /* An original BIOS keyboard read/status edge is a source-owned CONIN$
-         * readiness boundary, not a timeout or a synthesized BOP. */
+        /* The original real-mode DOS buffered-console-input interrupt is the
+         * source-owned CONIN$ line boundary, not a timeout, a BIOS startup
+         * poll, or a synthesized BOP. */
         scripted_console_input_ready = wait_for_report_marker(
-            console_input_ready_report_path, "MVDM-COMMAND-INPUT-READY",
+            console_input_ready_report_path, "MVDM-DOS-CON-LINE-INPUT",
             OBSERVATION_INPUT_READY_TIMEOUT_MS);
         if (scripted_console_input_ready) {
             /* Snapshot the exact shared CONOUT$ buffer after original guest
@@ -876,7 +877,7 @@ int main(int argc, char **argv)
                     (scripted_console_input_delivered ? "delivered" : "failed") :
                     "none");
         if (scripted_console_input) {
-            fprintf(report, "scripted-console-input-trigger=keyboard-bop-16-read-status\n");
+            fprintf(report, "scripted-console-input-trigger=dos-int21-buffered-console-input\n");
             fprintf(report, "scripted-console-input-sequence=%s\n",
                     scripted_console_input_sequence);
             fprintf(report, "scripted-console-input-ready=%s\n",
