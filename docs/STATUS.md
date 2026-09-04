@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T389 S5** — Explicit interactive COMMAND profile, original
-SoftPC Console-input and guest-keyboard delivery cohort; ordinary mode
+**Active: M0 T389 S6** — Explicit interactive COMMAND profile, original
+post-`54:01` parent/child COMMAND lifecycle cohort; ordinary mode
 (single-person dual-role implementation and review).
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T389 S5; ordinary mode. |
-| Admission And Approval | Immediate dependency-first continuation after S4 source-recovered the reached activity/timeslice callback and the unchanged fixed observation no longer produces its `0x78` controlled stop. |
-| Objective | Audit the complete original SoftPC Console-input and guest-keyboard delivery cohort—Console event worker, keyboard controller, IRQ1/BIOS/DOS `CON` path, wait/readiness observation and presentation ownership—then recover the first missing source-owned transition without an app/session input parser. |
+| Identifier Mode | M0 T389 S6; ordinary mode. |
+| Admission And Approval | S5 proved the original Console worker is created and resumed through an actual `54:05`; its later waitio marker is not reached because the guest has not yet entered the child shell prompt path. |
+| Objective | Audit the complete original `54:01` post-record parent/child COMMAND lifecycle—record consumption, EXEC, child first/non-first state, `DoReEnter`, `SCS_FIRSTCOM`, `SingleCom`, return/termination and its host dependencies—then identify and recover the first source-owned missing transition before the child DOS-CON path. |
 | Non-goals | No guest-media change, app prompt reader, synthetic BOP record, direct guest-input injection, BaseSrv/CSRSS transport, PIF implementation, WOW or `cmdExec32` expansion. |
-| Reference Baseline | T389 S1--S4, selected CPU40/x86 product/media and the unchanged S4 timeout at `keyboard-bop-16-waitio` with no activity termination report. |
-| Files And ABI Surface | Original SoftPC Console/event/keyboard/ICA/BIOS/DOS-CON callers and their same-shaped host bindings; Base VDM, SCS and `VDMINFO` layouts remain unchanged. |
+| Reference Baseline | T389 S1--S5, selected CPU40/x86 product/media and fixed trace showing successful `54:01`, `54:0E`, `54:04` and `54:05`. |
+| Files And ABI Surface | Original guest `COMMAND.COM` execution path, mirrored COMMAND/DEM provider lifecycle and necessary same-shaped SoftPC/Win32/Base-VDM bindings; no guest layout changes. |
 | Applicable Rules | Execution, source, architecture, coding, document, mapping-manager, mirror/overlay and CPU40-only rules. |
-| Verification | Static whole-cohort call/contract audit, focused original-provider test, then one unchanged fixed-container rerun only if a source-shaped provider is selected. |
-| Expected Markers | One Console-input owner, original event/IRQ/BIOS/DOS-CON ordering, a precise first missing transition, and no newly invented BOP or Console-line behavior. |
-| Asset Needs | T389 S1--S4 evidence, current formal x86 product, immutable staged package and selected original source union. |
-| Reporting Requirements | Record every reached Console/event/keyboard caller, provider provenance, retained ABI, proposed behavior and the relation to the second-shell continuation. |
-| Stop Conditions | Any need to alter guest media, write a host line parser, inject guest input, alter Base VDM/guest structures, or expand into PIF/WOW/BaseSrv transport pauses for a revised package decision. |
-| Exit Criteria | The first source-owned Console/keyboard delivery blocker has one owner-package disposition and focused evidence. No interactive completion claim without banner/prompt/DOS-CON evidence. |
+| Verification | Static full-lifecycle/owner audit, focused selected-provider test, then one unchanged fixed-container rerun only if a source-shaped recovery is selected. |
+| Expected Markers | Exact outer `/C command.com` record versus child no-`/C` state, original parent/child transition, a precise first missing transition, and no invented shell behavior. |
+| Asset Needs | T389 S1--S5 evidence, current formal x86 product, immutable staged package and selected original source union. |
+| Reporting Requirements | Record each original transition, source owner, provider provenance, retained ABI and relation to child banner/prompt/DOS-CON. |
+| Stop Conditions | Any need to alter guest media, write a host DOS parser, inject guest input, alter Base VDM/guest structures, or expand into PIF/WOW/BaseSrv transport pauses for a revised package decision. |
+| Exit Criteria | The first source-owned post-record parent/child lifecycle blocker has one owner-package disposition and focused evidence. No interactive completion claim without banner/prompt/DOS-CON evidence. |
 | Original Owner Request | “好的，准入下一个任务。” |
-| Similar-Issue Sweep | Console event worker, keyboard host input, keyboard controller, IRQ1, BIOS INT 16h, DOS `CON`, `SCS_PROMPT16`, text/window ownership, Ctrl+C and EOF. |
+| Similar-Issue Sweep | `cmdGetNextCmd`, `cmdSetInfo`, `cmdCheckBinary`, `cmdExec`, `cmdReturnExitCode`, guest `EXEC`, `SCS_FIRSTCOM`, `SingleCom`, `SCS_REENTERED`, `SCS_CMDPROMPT`, `DoReEnter`, parent return and DOS `CON`. |
 
 **Predecessor:** [M0 T388 fixed interactive runtime matrix and corrected shell boundary](history/m0-t388-fixed-interactive-runtime-matrix-closure-20260903.md).
 
@@ -35,6 +35,8 @@ SoftPC Console-input and guest-keyboard delivery cohort; ordinary mode
 **S3 closure:** [positional `command.com` fixed observation](etc/evidence/m0-t389-s3-positional-command-fixed-observation-001.md). The fixed observation attributes the first post-record stop to the source-unavailable SoftPC `ActivityCheckAfterTimeSlice` callback; it does not claim an interactive child shell.
 
 **S4 closure:** [SoftPC activity/timeslice source recovery](etc/evidence/m0-t389-s4-softpc-activity-timeslice-source-recovery-001.md). The source-selected patch body removes the prior `0x78` controlled stop; the fixed observation still does not claim an interactive child shell.
+
+**S5 closure:** [Console worker and guest keyboard source cohort](etc/evidence/m0-t389-s5-console-worker-source-cohort-001.md). Original `54:05` starts the source-owned worker; it is not the missing child-shell transition.
 
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 
