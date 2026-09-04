@@ -103,10 +103,11 @@ void mvdm_softpc_record_cpu_hw_interrupt_deferred(unsigned int interrupts_enable
  * `vector` is the original PIC result; this function cannot alter the CPU,
  * PIC, BIOS or guest state. */
 void mvdm_softpc_record_cpu_hw_interrupt_service(unsigned int vector);
-/* Default-off observation at the original BIOS keyboard waitio BOP.  This is
- * emitted only after the unchanged guest INT 16h path has selected its own
- * `AH == 2` idle operation; it does not queue, read, or alter a key. */
+/* Default-off observation at the original BIOS keyboard `AH == 2` waitio
+ * edge.  It does not queue, read, or alter a key. */
 void mvdm_softpc_record_keyboard_waitio(void);
+/* Default-off latched observation at original BIOS keyboard `AH == 0/1`
+ * polling edges.  It does not queue, read, or alter a key. */
 void mvdm_softpc_record_keyboard_poll(void);
 /* Default-off observation after the original PIC EOI selection.  It copies
  * only the original adapter/line result and cannot alter PIC, CPU, BIOS or
