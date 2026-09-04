@@ -50,6 +50,12 @@ or CPU repair?
   `PathSepGotCh+7`, `DEVNAME+3b`, and `GetCDSFromDrv+5e`) rather than a proved
   second-shell prompt frame.  This is classification evidence only; runtime
   relocation remains unproved.
+* The selected `NTDOS.SYS` also confirms the important `$READ` classification
+  without inventing a host interpretation: the byte sequence at mapped
+  `$READ+83` is the original `SVC_DEMFASTREAD` return branch.  It tests carry
+  after `BOP 50:42` and, only on carry, enters the original `BOP 50:16`
+  normal-read fallback.  The sampled `IF=0` location is that branch, not a
+  keyboard instruction or an interrupt-frame return.
 
 ## Interpretation and confidence
 
