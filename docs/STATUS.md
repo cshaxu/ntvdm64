@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T389 S7** — Explicit interactive COMMAND profile, original
-CPU40/SoftPC keyboard-controller and IRQ-delivery cohort; ordinary mode
+**Active: M0 T389 S8** — Explicit interactive COMMAND profile, original
+second-`COMMAND.COM` initialization/AUTOEXEC-to-`DOS CON` cohort; ordinary mode
 (single-person dual-role implementation and review).
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T389 S7; ordinary mode. |
-| Admission And Approval | S6 recovered the source-shaped normal-child COMMAND declaration and then proved an ordinary Console key reaches the original worker/8042 offer/ICA-request chain, but not port-60 drain. Owner directs continuation (“可以，继续”). |
-| Objective | Recover the first original CPU40/SoftPC keyboard-delivery transition preventing the explicit child `COMMAND.COM` from consuming an ordinary Console key: Console worker event -> keyboard controller offer/port-60 drain -> ICA IRQ1 request/service -> CPU interrupt-frame continuation. |
+| Identifier Mode | M0 T389 S8; ordinary mode. |
+| Admission And Approval | S7 proved the source-shaped child EXEC transfer (`50:36`) after the normal-child record and excludes the BOP-return/keyboard cohort as its first missing owner. Owner directs continuation (“可以，继续”). |
+| Objective | Recover the first original second-`COMMAND.COM` initialization continuation which must complete the selected CONFIG/AUTOEXEC work and reach `DoReEnter -> Do16BitPrompt -> DOS CON` before an ordinary Console key may be used as interactive evidence. |
 | Non-goals | No guest-media change, `COMMAND.COM` modification, app prompt reader, synthetic BOP record, direct guest-memory input, BaseSrv/CSRSS transport, PIF/WOW/`cmdExec32` expansion, unrelated timer/device repair, or new keyboard semantics. |
-| Reference Baseline | T389 S1--S6; current formal x86 CPU40 graph and immutable `O:\ntvdm64` package; 002 proves `AH=1` status polling, accepted normal Console key, 8042 offer and ICA request, with no port-60 drain. x64 compile/link remains non-gating for the selected x86 CPU40 runtime sequence. |
-| Files And ABI Surface | Original SoftPC keyboard worker/controller, ICA and CPU40 interrupt/event code plus the smallest same-shaped adapter bindings and default-off observer only; retain original Console, IRQ and guest-state contracts. |
+| Reference Baseline | T389 S1--S7; formal x86 CPU40 graph and immutable `O:\ntvdm64` package; S7 proves NTDOS reaches `SVC_DEMENTRYDOSAPP (50:36)` in original `$Exec`, immediately before original `DOCLI -> STI -> retf`. x64 compile/link remains non-gating for the selected x86 CPU40 runtime sequence. |
+| Files And ABI Surface | Original NTDOS `$Exec`, original COMMAND initialization/AUTOEXEC path, existing DEM/COMMAND file/current-directory providers, and only the smallest same-shaped default-off observer if a source-defined transition cannot otherwise be attributed. |
 | Applicable Rules | Execution, source, architecture, coding, document, mapping-manager, mirror/overlay and CPU40-only rules. |
 | Verification | Static source/control-flow audit of the full delivery chain; focused source-shaped local checks; formal x86 CPU40 link; fixed non-debug Console-owning declared-`command.com` observation. |
-| Expected Markers | An accepted Console key, original offer, port-60 drain, original IRQ1 request/service and source-shaped guest continuation; any failure must identify its first original owner/condition. |
+| Expected Markers | Original `50:36` child transfer, second COMMAND initialization, original AUTOEXEC disposition, `DoReEnter`, `Do16BitPrompt`, and then a source-proven BIOS/DOS `CON` wait; any failure must identify its first original owner/condition. |
 | Asset Needs | T389 S6 evidence, selected CPU40 source union, current x86 formal graph, immutable staged media and existing default-off observer reports. |
-| Reporting Requirements | Record definitions/callers and retained original ordering for worker, controller, ICA and CPU-frame transitions; distinguish a source invariant from a missing binding; retain the exact input/IRQ/IF/EOI evidence. |
-| Stop Conditions | Any need to modify guest media, invent a keyboard/controller protocol, bypass SoftPC with direct guest writes, change generic CPU instruction semantics, or expand into another device/profile pauses for revised package decision. |
-| Exit Criteria | One complete original keyboard-delivery cohort either reaches port-60/IRQ1/source continuation under the fixed declared-`command.com` row or has its first non-composable original dependency and owner disposition recorded. No claim of prompt, `ver`, line editing, Ctrl+C or child return without direct evidence. |
+| Reporting Requirements | Record original definitions/callers and retained order across `$Exec`, COMMAND initialization, configuration batch and input transition; distinguish a source invariant from a missing binding; retain exact BOP/file/CPU/Console evidence. |
+| Stop Conditions | Any need to modify guest media, invent a command parser or keyboard/controller protocol, bypass SoftPC with direct guest writes, change generic CPU instruction semantics, or expand into another device/profile pauses for revised package decision. |
+| Exit Criteria | The fixed declared-`command.com` row reaches the original `Do16BitPrompt`/DOS `CON` wait, or its first non-composable original initialization/AUTOEXEC dependency and owner disposition is recorded. No claim of prompt text, `ver`, line editing, Ctrl+C or child return without direct evidence. |
 | Original Owner Request | “可以，继续。” |
-| Similar-Issue Sweep | `nt_event`, Console worker, `KeyMsgToKeyCode`, `keyboard_io`, `idetect`, keyboard controller status/port 60, `TryKbdInt`, ICA request/ack/EOI, CPU40 event latch, IF, interrupt-frame entry/return and guest keyboard buffer. |
+| Similar-Issue Sweep | NTDOS `$Exec`/`Xfer_To_User`, `demEntryDosApp`, COMMAND init/`Drv0`, `SVC_GETAUTOEXECBAT`, `cmdGetAutoexecBat`, generated boot file, `LH`/`MSCDexNT`/`REDIR`/`DOSX` launch sequence, child process return, `DoReEnter`, `Do16BitPrompt`, BIOS INT 16 and DOS CON. |
 
 **Predecessor:** [M0 T388 fixed interactive runtime matrix and corrected shell boundary](history/m0-t388-fixed-interactive-runtime-matrix-closure-20260903.md).
 
@@ -53,6 +53,10 @@ controller, ICA or CPU frame with a host parser or direct guest write.
 **S7 INT 16 owner audit:** [INT 16 idle BOP and IRQ1 owner audit](etc/evidence/m0-t389-s7-int16-idle-and-irq-owner-audit-002.md). Original `BOP 16h` is BIOS idle accounting, while port-60 drain belongs to the distinct IRQ1 source path. The current `AH=1` marker is consequently not a prompt-ready contract; the unresolved prerequisite remains post-`54:04` NTDOS/CPU40 continuity.
 
 **S7 IF provenance observation:** [post-BOP IF provenance](etc/evidence/m0-t389-s7-post-bop-if-provenance-003.md). The unchanged original BOP return records `IF=0` at both `54:01` and `54:04`; the later NTDOS load/path continuation still has IF clear when the normal Console key reaches 8042/ICA.  This rules out forcing IF, synthetic IRQ1 or a keyboard-controller repair from the current probe and leaves the second-shell `DOS CON` transition as the first prerequisite.
+
+**S7 closure:** [original child EXEC transfer audit](etc/evidence/m0-t389-s7-child-exec-transfer-audit-004.md). The fixed run reaches source-defined `SVC_DEMENTRYDOSAPP (50:36)` in NTDOS `$Exec`, immediately before original `DOCLI -> STI -> retf`; no keyboard or BOP semantic repair is admissible from the prior accepted-key result.
+
+**S8 admission:** recover and observe the original child `COMMAND.COM` initialization and generated AUTOEXEC path up to the source-defined `Do16BitPrompt`/DOS `CON` wait.  The prior `AH=1` status marker remains unsuitable as a prompt trigger.
 
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 
