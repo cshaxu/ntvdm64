@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**M0 T391 S5 is active.** S4 closed the no-argument product hang. Subsequent
+**M0 T391 S6 is active.** S4 closed the no-argument product hang. Subsequent
 source review proved that the first `COMMAND.COM` must instead remain PermCom:
 an explicit target belongs in original BaseVDM `AppName`, with only its
 argument tail in `CmdLine`. S5 recovers and verifies that source-shaped
@@ -14,23 +14,23 @@ initial-record contract before native-child result proof resumes as S6.
 
 ## Active Packet
 
-**Active: M0 T391 S5 — original PermCom initial-record recovery.**
+**Active: M0 T391 S6 — original COMMAND native-child result recovery.**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T391 S5; ordinary single-person dual-role implementation, review and closure. |
+| Identifier Mode | M0 T391 S6; ordinary single-person dual-role implementation, review and closure. |
 | Admission And Approval | T391/S4 closed against a formal CPU40/x86 rebuild and fixed-console observation. The owner-established priority is pure DOS and DOS-initiated native children before Win16; [the re-admitted T391 plan](etc/operations/m0-t391-original-cmdexec32-stage-return-recovery-001.md) supplies S5–S6. |
-| Objective | Recover the original PermCom initial-record contract: first `COMMAND.COM` uses no `/C`; BaseVDM `AppName` names the requested target and `CmdLine` holds only its CR/LF-terminated arguments; queue exhaustion stops only after PermCom's next request. |
+| Objective | Prove a DOS-originated non-zero native child reaches the original `cmdExec32` worker completion and exposes its result through the original COMMAND return path. |
 | Non-goals | No guest `COMMAND.COM` change; no app-owned command parser or direct guest launch; no keyboard/BOP lifecycle change; no DOS EXEC/PSP return recovery; no WOW, Redirector, CSRSS/BaseSrv broker or fullscreen product-shell recovery. |
-| Reference Baseline | M0 T391/S4 no-argument closure; original COMMAND `cmdmisc.c` BaseVDM `AppName`/`CmdLine` copy logic; current BaseVDM local broker; fixed Console probe evidence. |
-| Files And ABI Surface | App launch declaration, BaseVDM record/broker, original COMMAND `cmdGetNextCmd`, focused record fixture and formal CPU40/x86 build manifests. |
+| Reference Baseline | [T391/S5 PermCom initial-record recovery](etc/evidence/m0-t391-s5-permcom-initial-record-recovery-001.md); original `cmdexec.c` / `cmdCreateProcess` / `cmdReturnExitCode`; current source-shaped BaseVDM local broker. |
+| Files And ABI Surface | Original COMMAND `cmdExec*`, `cmdCreateProcess`, `cmdReturnExitCode`, BaseVDM local broker, native-child adapter and formal CPU40/x86 build manifests. |
 | Applicable Rules | `docs/rules/EXECUTION.md`, source policy, architecture/coding rules, mapping-manager rule and mirror/overlay discipline. |
-| Verification | Focused BaseVDM record test; formal CPU40/x86 product build and identity check; one fixed Console-owning `command.com` observation reaching original DOS EXEC; `git diff --check`; documentation gate subject to the recorded inventory exception. |
-| Expected Markers | First record `AppName=command.com`, `CmdLine=CR/LF`; `54:01`, `50:36` and second COMMAND initialization without an app `/C` wrapper. |
-| Asset Needs | Existing selected DOS media and `cmd.exe /c exit 37` workload, original MVDM source union, current formal build manifests and fixed runtime container. |
+| Verification | Focused worker/result tests; formal CPU40/x86 product build and identity check; a DOS-originated `exit 37` observation from the sole short `O:\\ntvdm64` runtime container; `git diff --check`; documentation gate subject to the recorded inventory exception. |
+| Expected Markers | Original `54:08` worker start, pending/re-entry, native-child completion, original `54:0B` / result return, and guest-visible `37`. |
+| Asset Needs | Existing selected DOS media and `cmd.exe /c exit 37` workload, original MVDM source union, current formal build manifests and the sole `O:\\ntvdm64` runtime container. |
 | Reporting Requirements | Record every original import, existing adapter binding, changed mirror reference, failure/completion result and any remaining whole-owner boundary. |
 | Stop Conditions | Stop only at an identified complete original owner boundary. Do not replace it with an app text parser, direct guest write, trace-selected BOP patch or guest rewrite. |
-| Exit Criteria | S5 proves the original PermCom record/EXEC path in a fixed explicit-`command.com` run. S6 then proves a DOS-originated non-zero native child reaches the original worker completion and exposes `37`; S7 repeats that lifecycle once in the frozen Console-owning container. |
+| Exit Criteria | S6 proves a DOS-originated non-zero native child reaches the original worker completion and exposes `37`; S7 repeats that lifecycle once in the frozen Console-owning container. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。”；“先让纯dos和dos调用32位程序跑通；16位支持先放放。” |
 | Similar-Issue Sweep | `54:08`/`54:0A`/`54:0B`, `cmdExec*`, `cmdCreateProcess`, `cmdReturnExitCode`, Base VDM completion/re-entry, session worker, stream handles and cancellation. |
 

@@ -59,6 +59,12 @@ an implicit host command.
 
 ### S5 — Original PermCom initial-record recovery
 
+All product observations and user-testable product staging for this packet use
+the single short runtime root `O:\ntvdm64`.  Formal build directories remain
+build-only inputs; they are never `SystemRoot`/runtime containers.  This keeps
+the source-shaped DOS path contract below its fixed-size limits and prevents a
+diagnostic or nested build path from becoming a false COMMAND failure.
+
 The first `COMMAND.COM` is the original permanent shell (PermCom), not a
 one-shot `/C` shell. Recover the BaseVDM startup record as one original
 contract:
@@ -75,6 +81,11 @@ wrapper. A bare invocation may use a bounded child `/C` tail solely to end the
 otherwise commandless session after PermCom's next original request. No guest
 change, app command parser, keyboard change, synthetic BOP or direct
 guest-memory write is allowed.
+
+**S5 closure:** the record/EXEC path is proven in
+[the S5 evidence](../evidence/m0-t391-s5-permcom-initial-record-recovery-001.md).
+The sole product container is `O:\ntvdm64`; a nested build runtime path is
+not a valid product observation.
 
 ### S6 — Formal link and local non-zero-exit lifecycle proof
 
