@@ -1010,6 +1010,14 @@ void mvdm_softpc_record_command_call(unsigned int service,
     message[40] = guest_cf ? '1' : '0';
     mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH", message,
         (DWORD)(sizeof(message) - 1));
+    /* The continuation report path is captured and removed before cmdenv.c
+     * imports the host environment.  Mirroring this already-decoded scalar
+     * BOP observation there lets one fixed interactive run distinguish an
+     * internal COMMAND table hit (no SVC_CMDCHECKBINARY) from an external
+     * unknown-image handoff, without placing a diagnostic selector in the
+     * guest environment or altering dispatch. */
+    mvdm_softpc_write_captured_report(mvdm_softpc_command_continuation_report_path,
+        message, (DWORD)(sizeof(message) - 1));
 }
 
 void mvdm_softpc_record_command_continuation(unsigned int stage,
