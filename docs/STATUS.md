@@ -14,12 +14,12 @@ post-`54:01` parent/child COMMAND lifecycle cohort; ordinary mode
 | Admission And Approval | S5 proved the original Console worker is created and resumed through an actual `54:05`; its later waitio marker is not reached because the guest has not yet entered the child shell prompt path. |
 | Objective | Audit the complete original `54:01` post-record parent/child COMMAND lifecycle—record consumption, EXEC, child first/non-first state, `DoReEnter`, `SCS_FIRSTCOM`, `SingleCom`, return/termination and its host dependencies—then identify and recover the first source-owned missing transition before the child DOS-CON path. |
 | Non-goals | No guest-media change, app prompt reader, synthetic BOP record, direct guest-input injection, BaseSrv/CSRSS transport, PIF implementation, WOW or `cmdExec32` expansion. |
-| Reference Baseline | T389 S1--S5, selected CPU40/x86 product/media and fixed trace showing successful `54:01`, `54:0E`, `54:04` and `54:05`. |
+| Reference Baseline | T389 S1--S5, selected CPU40 source/media and fixed trace showing successful `54:01`, `54:0E`, `54:04` and `54:05`. The current formal-link priority is x64; x86 product execution is deferred, not removed. |
 | Files And ABI Surface | Original guest `COMMAND.COM` execution path, mirrored COMMAND/DEM provider lifecycle and necessary same-shaped SoftPC/Win32/Base-VDM bindings; no guest layout changes. |
 | Applicable Rules | Execution, source, architecture, coding, document, mapping-manager, mirror/overlay and CPU40-only rules. |
-| Verification | Static full-lifecycle/owner audit, focused selected-provider test, then one unchanged fixed-container rerun only if a source-shaped recovery is selected. |
+| Verification | Static full-lifecycle/owner audit, focused selected-provider test and fresh x64 formal CPU40 source build. A fixed-container execution rerun remains x86-only and is deferred until its Ninja execution path is available. |
 | Expected Markers | One explicit `COMMAND.COM` record with an empty CR/LF tail (distinct from positional `/C <target>`), an original first-to-second-shell guest EXEC transition, a no-`/C`/no-`SingleCom` second shell, a precise first missing transition, and no invented shell behavior. |
-| Asset Needs | T389 S1--S5 evidence, current formal x86 product, immutable staged package and selected original source union. |
+| Asset Needs | T389 S1--S5 evidence, current formal x64 graph, immutable staged package and selected original source union. |
 | Reporting Requirements | Record each original transition, source owner, provider provenance, retained ABI and relation to child banner/prompt/DOS-CON. |
 | Stop Conditions | Any need to alter guest media, write a host DOS parser, inject guest input, alter Base VDM/guest structures, or expand into PIF/WOW/BaseSrv transport pauses for a revised package decision. |
 | Exit Criteria | The first source-owned post-record parent/child lifecycle blocker has one owner-package disposition and focused evidence. No interactive completion claim without banner/prompt/DOS-CON evidence. |

@@ -164,8 +164,11 @@ marker alone is not sufficient.
    including the selected terminate-after-return disposition.
    These checks may observe fixed-width states only; they may not modify guest
    state or consume a second Console input stream.
-3. **Fixed-container runtime proof.** Use one formal x86 CPU40 product and
-   immutable media.  Launch `ntvdm.exe command.com`, retain hashes and the
+3. **Formal-link then fixed-container runtime proof.** First link the selected
+   CPU40 source set as an x64 formal product. This is source/link evidence
+   only and makes no guest-runtime claim. The later fixed-container proof uses
+   one formal x86 CPU40 product and immutable media. Launch
+   `ntvdm.exe command.com`, retain hashes and the
    exact command line, then record: original copyright header, original prompt,
    `ver`, `dir`, line editing/Backspace, a guest key-consuming program such as
    `EDIT.COM`, Ctrl+C, and `exit`.  For each step capture Console/window state,
