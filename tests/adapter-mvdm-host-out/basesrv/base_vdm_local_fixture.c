@@ -171,7 +171,7 @@ static int verify_empty_launch_declaration(void)
     return 0;
 }
 
-static int verify_interactive_initial_launch_record(void)
+static int verify_empty_one_shot_launch_record(void)
 {
     static char program[] = "fixture";
     char *argv[] = { program, NULL };
@@ -189,10 +189,10 @@ static int verify_interactive_initial_launch_record(void)
         !session_activate(&instance) ||
         !app_launch_declaration_bind(&declaration, &instance) ||
         !app_launch_declaration_publish(&declaration, &instance)) return 54;
-    if (declaration.base_vdm.terminal_on_command_exhaustion != 0u ||
+    if (declaration.base_vdm.terminal_on_command_exhaustion != 1u ||
         declaration.base_vdm.command_owner != BASE_VDM_COMMAND_DOS ||
-        declaration.base_vdm.command_bytes != 3u ||
-        memcmp(declaration.base_vdm.command, "\r\n\0", 3u) != 0 ||
+        declaration.base_vdm.command_bytes != sizeof("/C\r\n") ||
+        memcmp(declaration.base_vdm.command, "/C\r\n\0", sizeof("/C\r\n")) != 0 ||
         declaration.base_vdm.application_bytes != strlen(application) + 1u ||
         strcmp((const char *)declaration.base_vdm.application, application) != 0) {
         (void)base_vdm_local_unbind(&declaration.base_vdm);
@@ -227,7 +227,7 @@ static int verify_explicit_command_child_record(void)
     /* CmdGetNextCmd builds executed text from AppName plus CmdLine.  The
      * explicit interactive COMMAND.COM target has the mandatory empty CR/LF
      * record, allowing the resident shell to EXEC one ordinary child. */
-    if (declaration.base_vdm.terminal_on_command_exhaustion != 1u ||
+    if (declaration.base_vdm.terminal_on_command_exhaustion != 0u ||
         declaration.base_vdm.command_owner != BASE_VDM_COMMAND_DOS ||
         declaration.base_vdm.pif_bytes != strlen(pif) + 1u ||
         strcmp((const char *)declaration.base_vdm.pif, pif) != 0 ||
@@ -306,7 +306,7 @@ int main(void)
     if (launch_declaration_result != 0) return launch_declaration_result;
     launch_declaration_result = verify_empty_launch_declaration();
     if (launch_declaration_result != 0) return launch_declaration_result;
-    launch_declaration_result = verify_interactive_initial_launch_record();
+    launch_declaration_result = verify_empty_one_shot_launch_record();
     if (launch_declaration_result != 0) return launch_declaration_result;
     launch_declaration_result = verify_explicit_command_child_record();
     if (launch_declaration_result != 0) return launch_declaration_result;

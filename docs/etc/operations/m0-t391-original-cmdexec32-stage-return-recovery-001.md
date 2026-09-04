@@ -45,14 +45,26 @@ source-shaped binding.  Preserve original failure and completion ordering;
 the session worker owns only the modern public-Win32 replacement for the NT4
 worker/broker seam.
 
-### S4 — Formal link and local lifecycle proof
+### S4 — No-argument COMMAND startup diagnosis and recovery
+
+Reproduce the current no-argument `ntvdm64.exe` stop in the established
+console-owning, non-debug container. Trace only far enough to name the first
+complete source owner boundary: the original empty launch declaration, Base
+VDM `GetNextVDMCommand` no-command disposition, COMMAND first/second-shell
+transition, or a SoftPC/CPU40 owner. Recover the selected source-shaped
+empty-launch behavior only when its complete owner package is bounded and
+already in this packet's source/adapter perimeter. Do not change guest
+`COMMAND.COM`, invent an app command parser or make an empty invocation mean
+an implicit host command.
+
+### S5 — Formal link and local non-zero-exit lifecycle proof
 
 Build the affected formal CPU40/x86 libraries and final product.  Add focused
 tests for request validation, worker start, pending/re-entry, cancellation,
 completion and the `exit 37` result without treating a direct host launch as
 guest evidence.
 
-### S5 — One fixed-container observation
+### S6 — One fixed-container observation
 
 Use the established console-owning container once to observe the frozen
 DOS-initiated workload and its original visible completion/return boundary.
@@ -61,8 +73,9 @@ patching a trace-selected leaf.
 
 ## Completion
 
-T391 can close only when the original command chain is formally linked and a
-frozen DOS-initiated native-child workload proves the stage-to-return result,
-or when a source-owned boundary is demonstrated with the complete owner,
-original contract and a separately queued recovery package.  A successful
-app-side `CreateProcess` alone never satisfies this plan.
+T391 can close only when its no-argument launch has a source-shaped terminal
+or interactive disposition, the original command chain is formally linked,
+and a frozen DOS-initiated native-child workload proves the stage-to-return
+result. A successful app-side `CreateProcess` alone never satisfies this
+plan. If no-argument startup stops at a complete owner outside this packet,
+the evidence must identify and queue that owner before T391 can close.

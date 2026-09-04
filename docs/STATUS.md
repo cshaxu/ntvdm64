@@ -2,10 +2,10 @@
 
 ## Current Work
 
-**M0 T391 S4 is active.** S2 rebuilt the formal x86 COMMAND archive and S3
-confirmed that the current published product already executes the original
-`cmdExec32` worker and returns to its guest prompt. S4 now proves the frozen
-non-zero-exit lifecycle workload.
+**M0 T391 S5 is active.** S4 closed the no-argument product hang: a bare
+launch now publishes the original guest `/C` empty-command shape and exits
+through the existing BaseVDM one-shot disposition. S5 now resumes the
+non-zero native-child lifecycle proof; S6 remains the frozen-container repeat.
 
 ## Latest Closure
 
@@ -13,23 +13,23 @@ non-zero-exit lifecycle workload.
 
 ## Active Packet
 
-**Active: M0 T391 S4 — original COMMAND non-zero-exit lifecycle proof.**
+**Active: M0 T391 S5 — original COMMAND non-zero-exit lifecycle proof.**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T391 S4; ordinary single-person dual-role implementation, review and closure. |
-| Admission And Approval | T391/S3 closed against an exact current-product identity and existing fixed-console native-child observation. The owner-established priority is pure DOS and DOS-initiated native children before Win16; [the re-admitted T391 plan](etc/operations/m0-t391-original-cmdexec32-stage-return-recovery-001.md) supplies S4–S5. |
+| Identifier Mode | M0 T391 S5; ordinary single-person dual-role implementation, review and closure. |
+| Admission And Approval | T391/S4 closed against a formal CPU40/x86 rebuild and fixed-console observation. The owner-established priority is pure DOS and DOS-initiated native children before Win16; [the re-admitted T391 plan](etc/operations/m0-t391-original-cmdexec32-stage-return-recovery-001.md) supplies S5–S6. |
 | Objective | Prove the current product carries a DOS-initiated `cmd.exe /c exit 37` native child through original `54:08 → cmdExec32 → worker → completion` and observes its non-zero result without an app launcher. |
 | Non-goals | No guest `COMMAND.COM` change; no app-owned launch/parser or synthetic completion; no DOS EXEC/PSP return recovery; no WOW, Redirector, CSRSS/BaseSrv broker or console-input product-shell recovery. |
-| Reference Baseline | M0 T390 console proof; T391/S1 DOSX bootstrap audit; original COMMAND `cmdexec.c`, `cmdmisc.c`, `cmdenv.c` and prior T370/T380/T381 lifecycle evidence. |
+| Reference Baseline | M0 T391/S4 no-argument closure; M0 T390 console proof; original COMMAND `cmdexec.c`, `cmdmisc.c`, `cmdenv.c` and prior T370/T380/T381 lifecycle evidence. |
 | Files And ABI Surface | Original COMMAND sources; existing Base VDM/session/Win32/SoftPC same-shaped bindings; S2 evidence, focused lifecycle tests and the formal CPU40/x86 build manifests. |
 | Applicable Rules | `docs/rules/EXECUTION.md`, source policy, architecture/coding rules, mapping-manager rule and mirror/overlay discipline. |
-| Verification | Focused lifecycle test using the formal CPU40/x86 product path; product and media identity check; one frozen console-owning observation in S5; `git diff --check`; documentation gate subject to the recorded inventory exception. |
+| Verification | Focused lifecycle test using the formal CPU40/x86 product path; product and media identity check; one frozen console-owning observation in S6; `git diff --check`; documentation gate subject to the recorded inventory exception. |
 | Expected Markers | Original `54:08` call order, worker ownership, pending/re-entry, completion, `exit 37` result/CF contract and first complete owner stop boundary. |
 | Asset Needs | Existing selected DOS media and `cmd.exe /c exit 37` workload, original MVDM source union, current formal build manifests and fixed runtime container. |
 | Reporting Requirements | Record every original import, existing adapter binding, changed mirror reference, failure/completion result and any remaining whole-owner boundary. |
 | Stop Conditions | Stop only at an identified complete original owner boundary. Do not replace it with a direct host launch, trace-selected BOP patch or guest rewrite. |
-| Exit Criteria | S4 proves a DOS-originated non-zero native child reaches the original worker completion and exposes `37` through the original COMMAND result contract; S5 repeats it once in the frozen console-owning container. |
+| Exit Criteria | S5 proves a DOS-originated non-zero native child reaches the original worker completion and exposes `37` through the original COMMAND result contract; S6 repeats it once in the frozen console-owning container. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。”；“先让纯dos和dos调用32位程序跑通；16位支持先放放。” |
 | Similar-Issue Sweep | `54:08`/`54:0A`/`54:0B`, `cmdExec*`, `cmdCreateProcess`, `cmdReturnExitCode`, Base VDM completion/re-entry, session worker, stream handles and cancellation. |
 
@@ -40,6 +40,8 @@ non-zero-exit lifecycle workload.
 **S2 closure:** the same evidence records the successful formal x86 rebuild of all twelve COMMAND translation units and the focused BaseVDM/child-stream fixture results. S3 is active; it may not substitute app-side launch behavior for the original COMMAND worker.
 
 **S3 closure:** [current COMMAND worker binding confirmation](etc/evidence/m0-t391-s3-current-command-worker-binding-001.md) ties the prior source-shaped guest `VER` worker/return observation to the exact current published binary. It does not prove the required non-zero exit result.
+
+**S4 closure:** [no-argument COMMAND startup recovery](etc/evidence/m0-t391-s4-no-argument-command-startup-recovery-001.md) identifies the missing standalone CSRSS/BaseSrv producer, restores the original guest `/C` empty-command shape, and proves the fixed product exits `0` in the formal non-debug container. Explicit positional `COMMAND.COM` remains interactive.
 
 **S1 closure:** [pure-DOS configuration-carrier audit](etc/evidence/m0-t390-s1-pure-dos-configuration-carrier-audit-001.md). Original PIF fields already carry the needed configuration pair; the currently admitted local Base VDM adapter omits that capture, so S2 must restore only the original `PifFile`/`PifLen` binding before a pure-DOS profile can be selected.
 

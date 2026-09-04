@@ -151,14 +151,15 @@ int app_launch_declaration_bind(app_launch_declaration *declaration,
     if (declaration == NULL || declaration->bound != 0u ||
         !base_vdm_local_valid(&declaration->base_vdm)) return 0;
     if (!base_vdm_local_bind(&declaration->base_vdm, owner)) return 0;
-    /* A declared non-COMMAND CLI target is a one-shot product request.  The
+    /* DIVERGENCE(APP-DIV-017): a standalone CLI has no NT4 CSRSS command
+     * producer for a bare launch. A noninteractive declaration, including
+     * the owner-defined empty CLI form, is therefore a one-shot request. The
      * explicit COMMAND.COM case deliberately remains a normal second DOS
-     * shell: its original prompt loop must be able to request and execute
-     * more commands, rather than having app terminate the session after its
-     * first host-execution return.  Keep the COMMAND/BaseVDM exchange itself
-     * unchanged in both cases. */
-    if (declaration->command_declared != 0u &&
-        !is_interactive_command_target(declaration) &&
+     * shell: its original prompt
+     * loop must be able to request and execute more commands, rather than
+     * having app terminate the session after its first host-execution return.
+     * Keep the COMMAND/BaseVDM exchange itself unchanged in both cases. */
+    if (!is_interactive_command_target(declaration) &&
         !base_vdm_local_set_terminal_on_command_exhaustion(
             &declaration->base_vdm, 1)) {
         (void)base_vdm_local_unbind(&declaration->base_vdm);
@@ -221,13 +222,19 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     drive_letter = (unsigned char)toupper((unsigned char)root[0]);
     if (drive_letter < 'A' || drive_letter > 'Z') return 0;
     interactive_command = is_interactive_command_target(declaration);
+    /* DIVERGENCE(APP-DIV-017): publish the original COMMAND /C switch and
+     * its empty CR/LF body for a bare CLI invocation.  It is a source-shaped
+     * command line, not an app parser or a guest-memory write. */
     if (!make_path(declaration->application, sizeof(declaration->application),
             root, "system32\\COMMAND.COM") ||
-        (declaration->command_declared != 0u && interactive_command == 0 &&
+        (interactive_command == 0 &&
          (!append_text(declaration->command, sizeof(declaration->command),
-             &command_length, "/C ") ||
-          !append_text(declaration->command, sizeof(declaration->command),
-             &command_length, declaration->requested_command))) ||
+             &command_length, "/C") ||
+          (declaration->command_declared != 0u &&
+           (!append_text(declaration->command, sizeof(declaration->command),
+               &command_length, " ") ||
+            !append_text(declaration->command, sizeof(declaration->command),
+               &command_length, declaration->requested_command))))) ||
         !append_text(declaration->command, sizeof(declaration->command),
             &command_length, "\r\n") ||
         !append_text(declaration->environment, sizeof(declaration->environment),
