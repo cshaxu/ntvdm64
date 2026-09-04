@@ -2,9 +2,10 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T389 is closed at its permitted
-source-owned predecessor boundary; the next candidate is the pure-DOS
-first-shell/profile prerequisite for an interactive second `COMMAND.COM`.
+**Active: M0 T390 S1.** The admitted package is the pure-DOS first-shell
+profile prerequisite for an interactive second `COMMAND.COM`. S1 is a
+source/ABI/staging audit only: it must select the original configuration
+carrier and product-media identity before any runtime binding is changed.
 
 ## Latest Closure
 
@@ -12,8 +13,19 @@ first-shell/profile prerequisite for an interactive second `COMMAND.COM`.
 
 ## Active Packet
 
-No active M/T/S packet. The queue candidate named above requires a fresh
-owner admission before implementation resumes.
+**Active: M0 T390 S1 — pure-DOS first-shell configuration-carrier audit.**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T390 S1; ordinary single-person dual-role implementation/review. |
+| Objective | Prove the original OpenNT owner and selection path for the `config.nt`/`autoexec.nt` pair needed to avoid the staged `AUTOEXEC.NT -> DOSX.EXE` DPMI/WOW predecessor before the explicit second `COMMAND.COM` proof resumes. |
+| Reference Baseline | T389 S8 closure; `softpc.new/host/src/nt_pif.c:GetPIFConfigFiles`; `dos/command/cmdconf.c:ExpandConfigFiles`; current `O:\\ntvdm64` stage. |
+| Scope | Original PIF/config carrier, app-owned profile selection boundary, immutable named pure-DOS stage assets and their manifest/provenance. |
+| Non-goals | No `COMMAND.COM`, NTDOS, NTIO, BOP, CPU, keyboard, DPMI/WOW, synthetic prompt, or host command-parser change. No overwrite of the default stage configuration during audit. |
+| Exit Criteria | Record one source-shaped configuration selection contract; classify whether an existing PIF field can carry it for the selected launch profile; identify exact pure-DOS assets and their provenance; define the minimal next binding and fixed-observation proof. |
+| Stop Conditions | If selection requires private CSRSS/PIF product machinery, a guest-media modification, or a new parser, stop and record that source-owned boundary rather than substitute behavior. |
+
+**S1 closure:** [pure-DOS configuration-carrier audit](etc/evidence/m0-t390-s1-pure-dos-configuration-carrier-audit-001.md). Original PIF fields already carry the needed configuration pair; the currently admitted local Base VDM adapter omits that capture, so S2 must restore only the original `PifFile`/`PifLen` binding before a pure-DOS profile can be selected.
 
 **S1 closure:** [explicit COMMAND child static contract](etc/evidence/m0-t389-s1-explicit-command-child-static-contract-001.md).
 
