@@ -35,6 +35,8 @@ priority, S2 now begins an original COMMAND `cmdExec32` source/ABI rebaseline.
 
 **S1 closure:** [reached DOSX dependency closure](etc/evidence/m0-t391-s1-dosx-dependency-closure-001.md). The default DOSX route is a combined DPMI/WOW bootstrap, not a standalone pure-DOS extender client; it is retained as the next complete bootstrap package after COMMAND native-child recovery.
 
+**S2 progress:** [COMMAND stage-to-return source/ABI map](etc/evidence/m0-t391-s2-command-stage-return-abi-map-001.md) establishes the original owner chain and the four direct same-shaped adapter boundaries. It is not a runtime closure: S3 must now verify those bindings against the selected formal COMMAND archive and its direct lifecycle tests.
+
 **S1 closure:** [pure-DOS configuration-carrier audit](etc/evidence/m0-t390-s1-pure-dos-configuration-carrier-audit-001.md). Original PIF fields already carry the needed configuration pair; the currently admitted local Base VDM adapter omits that capture, so S2 must restore only the original `PifFile`/`PifLen` binding before a pure-DOS profile can be selected.
 
 **S2 admission:** copy a bounded PIF pathname through the existing local
