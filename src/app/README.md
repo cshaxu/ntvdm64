@@ -58,14 +58,14 @@ prepends the application name and lets `COMMAND.COM` select its interactive
 mode.  The later Console/keyboard package owns delivery of prompt input; this
 initial-record binding neither writes guest input nor changes guest media.
 
-`ntvdm.exe command.com` deliberately remains the ordinary positional form:
-the first resident `COMMAND.COM` receives `/C command.com` through the same
-Base VDM record as every other declared target. In the immutable guest, that
-outer `/C` instance owns `SingleCom`, executes the second `COMMAND.COM`, then
-exits. The second child does not inherit `/C`; it retains its original
-non-first shell-out path (`DoReEnter -> Do16BitPrompt`) and therefore owns its
-banner/prompt/DOS-CON behavior. App does not print a prompt, read a Console
-line, write guest input or resubmit the record after child exit.
+`ntvdm.exe command.com` is the one explicit interactive declaration form: app
+publishes the usual `COMMAND.COM` application path with the mandatory empty
+`CR/LF/NUL` tail, rather than the positional `/C <target>` tail. The first
+resident shell then uses its ordinary guest EXEC path to launch one non-first,
+no-`/C` `COMMAND.COM` child. That child has no app/session/BOP-specific path:
+it retains the same `DoReEnter -> Do16BitPrompt` route, banner, prompt and
+DOS-CON behavior as any ordinary guest shell. App does not print a prompt,
+read a Console line, write guest input or resubmit a record after child exit.
 
 ## M0 T310 S3 selected backend composition
 

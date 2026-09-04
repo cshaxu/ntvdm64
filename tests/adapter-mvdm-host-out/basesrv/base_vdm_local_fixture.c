@@ -223,14 +223,14 @@ static int verify_explicit_command_child_record(void)
         !session_activate(&instance) ||
         !app_launch_declaration_bind(&declaration, &instance) ||
         !app_launch_declaration_publish(&declaration, &instance)) return 57;
-    /* `/C` is consumed by the first resident COMMAND.COM.  The second
-     * COMMAND.COM is its original executable child, so app must publish no
-     * second record and no special child-tail format. */
+    /* CmdGetNextCmd builds executed text from AppName plus CmdLine.  The
+     * explicit interactive COMMAND.COM target has the mandatory empty CR/LF
+     * record, allowing the resident shell to EXEC one ordinary child. */
     if (declaration.base_vdm.terminal_on_command_exhaustion != 1u ||
         declaration.base_vdm.command_owner != BASE_VDM_COMMAND_DOS ||
         strcmp((const char *)declaration.base_vdm.command,
-            "/C command.com\r\n") != 0 ||
-        declaration.base_vdm.command_bytes != sizeof("/C command.com\r\n")) {
+            "\r\n") != 0 ||
+        declaration.base_vdm.command_bytes != sizeof("\r\n")) {
         (void)base_vdm_local_unbind(&declaration.base_vdm);
         (void)session_dispose(&instance);
         return 58;

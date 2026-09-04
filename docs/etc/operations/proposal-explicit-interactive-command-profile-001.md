@@ -6,9 +6,10 @@ Define a small, source-shaped product composition for the OpenNT-modified
 `COMMAND.COM` without changing guest media.  The profile makes an explicit
 interactive shell request (`ntvdm.exe command.com`, with `-f` as a future
 compatible spelling) distinct from a no-argument bootstrap and from a
-one-target invocation.  The original guest's second-`COMMAND.COM` shell-out
-path, rather than a host command-line producer, is the selected interaction
-path.
+one-target invocation.  The selected interaction path sends the original
+resident shell a `COMMAND.COM` application with its mandatory empty CR/LF
+tail. Its original guest EXEC path then creates the one non-first interactive
+shell; no host command-line producer is involved.
 
 The purpose is not to recreate a second DOS parser or the NT4 private
 BaseSrv/CSRSS transport.  It is to send one original-shaped target record for
@@ -26,9 +27,10 @@ path print the prompt and consume DOS Console input itself.
   exits, the session exits.
 * `ntvdm.exe command.com` requests the explicit interactive COMMAND profile.
   The bootstrap command path submits one original-shaped `COMMAND.COM` target
-  record.  That child is the original non-first `COMMAND.COM` instance: it
-  displays its original copyright header where its original flags permit and
-  enters `Do16BitPrompt`.  The host must not recursively resubmit the record
+  record with `AppName=COMMAND.COM` and the required empty CR/LF `CmdLine`.
+  The first resident shell guest-EXECs one non-first `COMMAND.COM` without
+  `/C`. That child displays its original copyright header where its original
+  flags permit and enters `Do16BitPrompt`. The host must not resubmit a record
   after the child exits.
 * `ntvdm.exe -f` is a future compatible spelling for the same explicit
   interactive profile.  Its exact historical PIF/fullscreen interaction is an
@@ -42,15 +44,17 @@ The following are source-established conclusions, not product guesses:
   `SCS_FIRSTCOM=1`, suppresses its own copyright header, and normally requests
   declared work through `SVC_CMDGETNEXTCMD` / `BOP 54:01`.
 * A positional DOS target is delivered to that first shell through the Base VDM
-  record contract as the literal source-shaped `/C <target>` command tail.
-  The first resident shell consumes `/C`; it is not passed as an argument to
-  the target executable.
-* A declared `COMMAND.COM` target is delivered as `/C command.com` to the
-  first resident shell. It creates a second, non-first command shell, and the
-  outer shell's `SingleCom` state is not inherited by that child. It is not a
-  recursively resubmitted bootstrap. Subject to its original flags, the child
-  prints `CopyrightMsg`; with `SCS_CMDPROMPT != 1` it follows
-  `DoReEnter → Do16BitPrompt`, prints the guest prompt and reads DOS `CON`.
+  record contract as the literal source-shaped `/C <target>` command tail. The
+  first resident shell uses its normal parser and guest EXEC path; `/C` remains
+  the process-tail contract of a target that is itself `COMMAND.COM`.
+* An explicit interactive `COMMAND.COM` target is the deliberate exception to
+  the positional `/C <target>` record form: it is delivered with an empty
+  CR/LF `CmdLine`. The first resident shell executes one non-first
+  `COMMAND.COM` with no `/C` tail. That child has its own zero-initialized
+  `SingleCom`, and no nesting edge resubmits a Base VDM record. Subject to its
+  original flags, the child prints `CopyrightMsg`; with
+  `SCS_CMDPROMPT != 1` it follows `DoReEnter → Do16BitPrompt`, prints the
+  guest prompt and reads DOS `CON`.
 * `NTCMDPROMPT` is an original `CONFIG.NT`/SCS setting for shell-out and TSR
   prompt disposition.  If enabled, the original child path requests the
   32-bit COMSPEC route instead of `Do16BitPrompt`; it is not a generic switch
@@ -69,9 +73,10 @@ ntvdm.exe dosprog.exe
   → original parent recovery → product session end
 
 ntvdm.exe command.com
-  first resident COMMAND.COM → one Base VDM COMMAND.COM target record
-  → second COMMAND.COM → original banner + Do16BitPrompt / DOS CON
-  → child exit → original parent recovery → product session end
+  first resident COMMAND.COM → one Base VDM `COMMAND.COM + CR/LF` target record
+  → second COMMAND.COM
+  → original banner + Do16BitPrompt / DOS CON
+  → nested child/parent return → product session end
 ```
 
 ### Input and execution ownership
@@ -80,10 +85,10 @@ There is exactly one Console-input owner at a time:
 
 1. The initial permanent OpenNT `COMMAND.COM` requests the single declared
    child target through its normal `BOP 54:01`/Base VDM route.
-2. The non-first child `COMMAND.COM` follows original `DoReEnter` behavior.
-   With `NTCMDPROMPT` disabled, it calls `Do16BitPrompt`, prints its own
-   prompt and consumes input with DOS `CON`; it is therefore the Console-input
-   owner.
+2. The second, non-first `COMMAND.COM` has no `/C`/`SingleCom` tail. With
+   `NTCMDPROMPT` disabled, it follows original `DoReEnter`, calls
+   `Do16BitPrompt`, prints its own prompt and consumes input with DOS `CON`;
+   it is therefore the Console-input owner.
 3. SoftPC delivers those keys through its original Console event worker,
    keyboard controller, IRQ1, BIOS and DOS `CON` route.  The same ownership
    model covers `EDIT.COM`, QBASIC and every guest program launched from that
@@ -144,10 +149,11 @@ marker alone is not sufficient.
 
 1. **Static original-control-flow proof.** Record the selected guest-binary
    identity and source-to-binary provenance.  Trace the first permanent
-   `COMMAND.COM` through its one Base VDM record, then prove the child has
-   `SCS_FIRSTCOM != 1`, has no inherited `SingleCom`, and has the selected
-   `SCS_CMDPROMPT` disposition. The proof must distinguish the outer literal
-   `/C command.com` record from the child process's no-`/C` argument state. The retained source path must show
+   `COMMAND.COM` through its one Base VDM record, then prove the non-first
+   child has `SCS_FIRSTCOM != 1`, no `SingleCom`, and the selected
+   `SCS_CMDPROMPT` disposition. The proof must distinguish this explicit
+   `COMMAND.COM + CR/LF` record from the usual positional `/C <target>` form.
+   The retained source path must show
    `DoReEnter → Do16BitPrompt → PRINT_PROMPT → INT 21h/AH=0Ah`; it must also
    show the exact original `CopyrightMsg` condition.
 2. **Focused local boundary proof.** With the real record layout, assert that

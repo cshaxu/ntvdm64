@@ -18,7 +18,7 @@ post-`54:01` parent/child COMMAND lifecycle cohort; ordinary mode
 | Files And ABI Surface | Original guest `COMMAND.COM` execution path, mirrored COMMAND/DEM provider lifecycle and necessary same-shaped SoftPC/Win32/Base-VDM bindings; no guest layout changes. |
 | Applicable Rules | Execution, source, architecture, coding, document, mapping-manager, mirror/overlay and CPU40-only rules. |
 | Verification | Static full-lifecycle/owner audit, focused selected-provider test, then one unchanged fixed-container rerun only if a source-shaped recovery is selected. |
-| Expected Markers | Exact outer `/C command.com` record versus child no-`/C` state, original parent/child transition, a precise first missing transition, and no invented shell behavior. |
+| Expected Markers | One explicit `COMMAND.COM` record with an empty CR/LF tail (distinct from positional `/C <target>`), an original first-to-second-shell guest EXEC transition, a no-`/C`/no-`SingleCom` second shell, a precise first missing transition, and no invented shell behavior. |
 | Asset Needs | T389 S1--S5 evidence, current formal x86 product, immutable staged package and selected original source union. |
 | Reporting Requirements | Record each original transition, source owner, provider provenance, retained ABI and relation to child banner/prompt/DOS-CON. |
 | Stop Conditions | Any need to alter guest media, write a host DOS parser, inject guest input, alter Base VDM/guest structures, or expand into PIF/WOW/BaseSrv transport pauses for a revised package decision. |
@@ -37,6 +37,8 @@ post-`54:01` parent/child COMMAND lifecycle cohort; ordinary mode
 **S4 closure:** [SoftPC activity/timeslice source recovery](etc/evidence/m0-t389-s4-softpc-activity-timeslice-source-recovery-001.md). The source-selected patch body removes the prior `0x78` controlled stop; the fixed observation still does not claim an interactive child shell.
 
 **S5 closure:** [Console worker and guest keyboard source cohort](etc/evidence/m0-t389-s5-console-worker-source-cohort-001.md). Original `54:05` starts the source-owned worker; it is not the missing child-shell transition.
+
+**S6 recovery:** [original COMMAND nesting static correction](etc/evidence/m0-t389-s6-command-nesting-static-correction-001.md). `ntvdm.exe command.com` now publishes the source-shaped normal-child record (`AppName=COMMAND.COM`, empty CR/LF `CmdLine`), so the special first resident shell guest-EXECs one ordinary second shell; it alone owns prompt and DOS `CON` input.
 
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 

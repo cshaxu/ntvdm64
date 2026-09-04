@@ -8,6 +8,17 @@
 static int append_text(char *destination, size_t capacity, size_t *length,
     const char *source);
 
+/* The initial resident COMMAND.COM is the sole BOP/54:01 control shell.
+ * An explicit interactive COMMAND target must be delivered to it as a normal
+ * DOS executable, with the required empty CR/LF tail rather than `/C` text.
+ * That makes the resident shell guest-EXEC one non-first, ordinary
+ * COMMAND.COM; it does not make app a DOS input or command provider. */
+static int is_interactive_command_target(const app_launch_declaration *declaration)
+{
+    return declaration != NULL && declaration->command_declared != 0u &&
+        _stricmp(declaration->requested_command, "command.com") == 0;
+}
+
 void app_launch_declaration_initialize(app_launch_declaration *declaration)
 {
     if (declaration == NULL) return;
@@ -196,6 +207,7 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     size_t environment_length = 0u;
     size_t directory_length;
     unsigned char drive_letter;
+    int interactive_command;
 
     if (declaration == NULL || declaration->bound == 0u || owner == NULL ||
         !session_valid(owner) || owner->state != SESSION_STATE_ACTIVE ||
@@ -204,9 +216,10 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     if (root == NULL || root[0] == '\0' || root[1] != ':') return 0;
     drive_letter = (unsigned char)toupper((unsigned char)root[0]);
     if (drive_letter < 'A' || drive_letter > 'Z') return 0;
+    interactive_command = is_interactive_command_target(declaration);
     if (!make_path(declaration->application, sizeof(declaration->application),
             root, "system32\\COMMAND.COM") ||
-        (declaration->command_declared != 0u &&
+        (declaration->command_declared != 0u && interactive_command == 0 &&
          (!append_text(declaration->command, sizeof(declaration->command),
              &command_length, "/C ") ||
           !append_text(declaration->command, sizeof(declaration->command),
