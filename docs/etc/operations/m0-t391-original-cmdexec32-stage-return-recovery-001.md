@@ -89,10 +89,17 @@ not a valid product observation.
 
 ### S6 — Formal link and local non-zero-exit lifecycle proof
 
-Build the affected formal CPU40/x86 libraries and final product.  Add focused
-tests for request validation, worker start, pending/re-entry, cancellation,
-completion and the `exit 37` result without treating a direct host launch as
-guest evidence.
+Build the affected formal CPU40/x86 libraries and final product.  First drive
+an unclassified target from an already-running DOS program's original
+`INT 21h EXEC` route: an app-declared BaseVDM target is intentionally marked
+as an already-known DOS binary by original `cmdGetNextCmd` and cannot be used
+to prove `54:07`/`54:08`.  Audit the actual PIF/VDMINFO/SCS policy only at that
+guest-originated trigger.  Then add focused tests for request validation,
+worker start, pending/re-entry, cancellation, completion and the `exit 37`
+result.  A direct host launch is never guest evidence.
+
+The initial admission evidence is [S6 native-child profile admission]
+(../evidence/m0-t391-s6-native-child-profile-admission-001.md).
 
 ### S7 — One fixed-container observation
 

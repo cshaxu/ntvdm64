@@ -20,13 +20,13 @@ initial-record contract before native-child result proof resumes as S6.
 | --- | --- |
 | Identifier Mode | M0 T391 S6; ordinary single-person dual-role implementation, review and closure. |
 | Admission And Approval | T391/S4 closed against a formal CPU40/x86 rebuild and fixed-console observation. The owner-established priority is pure DOS and DOS-initiated native children before Win16; [the re-admitted T391 plan](etc/operations/m0-t391-original-cmdexec32-stage-return-recovery-001.md) supplies S5–S6. |
-| Objective | Prove a DOS-originated non-zero native child reaches the original `cmdExec32` worker completion and exposes its result through the original COMMAND return path. |
+| Objective | Prove a guest-originated, non-zero native child reaches the original `cmdExec32` worker completion and exposes its result through the original COMMAND return path. |
 | Non-goals | No guest `COMMAND.COM` change; no app-owned command parser or direct guest launch; no keyboard/BOP lifecycle change; no DOS EXEC/PSP return recovery; no WOW, Redirector, CSRSS/BaseSrv broker or fullscreen product-shell recovery. |
-| Reference Baseline | [T391/S5 PermCom initial-record recovery](etc/evidence/m0-t391-s5-permcom-initial-record-recovery-001.md); original `cmdexec.c` / `cmdCreateProcess` / `cmdReturnExitCode`; current source-shaped BaseVDM local broker. |
+| Reference Baseline | [T391/S5 PermCom initial-record recovery](etc/evidence/m0-t391-s5-permcom-initial-record-recovery-001.md); [S6 native-child profile admission](etc/evidence/m0-t391-s6-native-child-profile-admission-001.md); original `cmdexec.c` / `cmdCreateProcess` / `cmdReturnExitCode`; current source-shaped BaseVDM local broker. |
 | Files And ABI Surface | Original COMMAND `cmdExec*`, `cmdCreateProcess`, `cmdReturnExitCode`, BaseVDM local broker, native-child adapter and formal CPU40/x86 build manifests. |
 | Applicable Rules | `docs/rules/EXECUTION.md`, source policy, architecture/coding rules, mapping-manager rule and mirror/overlay discipline. |
-| Verification | Focused worker/result tests; formal CPU40/x86 product build and identity check; a DOS-originated `exit 37` observation from the sole short `O:\\ntvdm64` runtime container; `git diff --check`; documentation gate subject to the recorded inventory exception. |
-| Expected Markers | Original `54:08` worker start, pending/re-entry, native-child completion, original `54:0B` / result return, and guest-visible `37`. |
+| Verification | Initial-record/PIF/SCS classification audit; reached guest-originated `54:07` before worker/result tests; formal CPU40/x86 product build and identity check; a DOS-originated `exit 37` observation from the sole short `O:\\ntvdm64` runtime container; `git diff --check`; documentation gate subject to the recorded inventory exception. |
+| Expected Markers | Guest-originated original classification at `54:07`, then original `54:08` worker start, pending/re-entry, native-child completion, original `54:0B` / result return, and guest-visible `37`. |
 | Asset Needs | Existing selected DOS media and `cmd.exe /c exit 37` workload, original MVDM source union, current formal build manifests and the sole `O:\\ntvdm64` runtime container. |
 | Reporting Requirements | Record every original import, existing adapter binding, changed mirror reference, failure/completion result and any remaining whole-owner boundary. |
 | Stop Conditions | Stop only at an identified complete original owner boundary. Do not replace it with an app text parser, direct guest write, trace-selected BOP patch or guest rewrite. |

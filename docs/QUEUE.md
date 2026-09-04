@@ -61,7 +61,7 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Next order | Candidate implementation package |
 | --- | --- |
-| 1 | Original COMMAND `cmdExec32` stage-to-return recovery — recover the original `54:08` worker, Base VDM re-entry, child completion and original return for a DOS-initiated native child. This is the established pure-DOS/native-child priority and precedes WOW bootstrap work. See [the T391 plan](etc/operations/m0-t391-original-cmdexec32-stage-return-recovery-001.md). |
+| 1 | Original COMMAND `cmdExec32` stage-to-return recovery — recover the original `54:08` worker, Base VDM re-entry, child completion and original return for a DOS-initiated native child. This is the established pure-DOS/native-child priority and precedes WOW bootstrap work. The active packet is recorded only in `STATUS.md`. |
 | 2 | DOSX/DPMI/WOW bootstrap activation — recover the original `AUTOEXEC.NT → DOSX.EXE → SYSTEM.INI → KRNL?86.EXE` bootstrap as one complete owner chain. It is not a generic pure-DOS extender route. See [the DOSX/DPMI/WOW proposal](etc/operations/proposal-dosx-dpmi-runtime-activation-001.md). |
 | 3 | Single-process NTVDM compatibility matrix — run selected DOS, extender, Redirector and COMMAND-native-child workloads against completed original-owner contracts; add Win16 rows only after the two WOW packages below complete. Reopen only the immediate original owner proven by a failure. |
 | 4 | WOW16 bootstrap, callback and NE lifecycle activation — prove one-process WOWEXEC command routing, callback/re-entry, task lifetime and original Win16 NE start/exit. |
