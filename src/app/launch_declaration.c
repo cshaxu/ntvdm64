@@ -8,17 +8,6 @@
 static int append_text(char *destination, size_t capacity, size_t *length,
     const char *source);
 
-/* The initial resident COMMAND.COM is the sole BOP/54:01 control shell.
- * An explicit interactive COMMAND target must be delivered to it as a normal
- * DOS executable, with the required empty CR/LF tail rather than `/C` text.
- * That makes the resident shell guest-EXEC one non-first, ordinary
- * COMMAND.COM; it does not make app a DOS input or command provider. */
-static int is_interactive_command_target(const app_launch_declaration *declaration)
-{
-    return declaration != NULL && declaration->command_declared != 0u &&
-        _stricmp(declaration->requested_command, "command.com") == 0;
-}
-
 void app_launch_declaration_initialize(app_launch_declaration *declaration)
 {
     if (declaration == NULL) return;
@@ -152,15 +141,11 @@ int app_launch_declaration_bind(app_launch_declaration *declaration,
         !base_vdm_local_valid(&declaration->base_vdm)) return 0;
     if (!base_vdm_local_bind(&declaration->base_vdm, owner)) return 0;
     /* DIVERGENCE(APP-DIV-017): a standalone CLI has no NT4 CSRSS command
-     * producer for a bare launch. A noninteractive declaration, including
-     * the owner-defined empty CLI form, is therefore a one-shot request. The
-     * explicit COMMAND.COM case deliberately remains a normal second DOS
-     * shell: its original prompt
-     * loop must be able to request and execute more commands, rather than
-     * having app terminate the session after its first host-execution return.
-     * Keep the COMMAND/BaseVDM exchange itself unchanged in both cases. */
-    if (!is_interactive_command_target(declaration) &&
-        !base_vdm_local_set_terminal_on_command_exhaustion(
+     * producer for a bare launch. Every initial COMMAND record is therefore
+     * a one-shot request. An explicit `command.com` is not special here:
+     * the resident COMMAND consumes `/C command.com`, then guest-EXECs the
+     * ordinary child without forwarding `/C` to it. */
+    if (!base_vdm_local_set_terminal_on_command_exhaustion(
             &declaration->base_vdm, 1)) {
         (void)base_vdm_local_unbind(&declaration->base_vdm);
         return 0;
@@ -212,7 +197,6 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     size_t environment_length = 0u;
     size_t directory_length;
     unsigned char drive_letter;
-    int interactive_command;
 
     if (declaration == NULL || declaration->bound == 0u || owner == NULL ||
         !session_valid(owner) || owner->state != SESSION_STATE_ACTIVE ||
@@ -221,29 +205,25 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     if (root == NULL || root[0] == '\0' || root[1] != ':') return 0;
     drive_letter = (unsigned char)toupper((unsigned char)root[0]);
     if (drive_letter < 'A' || drive_letter > 'Z') return 0;
-    interactive_command = is_interactive_command_target(declaration);
-    /* DIVERGENCE(APP-DIV-017): publish the original COMMAND /C switch and
-     * its empty CR/LF body for a bare CLI invocation.  It is a source-shaped
-     * command line, not an app parser or a guest-memory write. */
+    /* DIVERGENCE(APP-DIV-017): every app declaration enters the initial
+     * resident COMMAND through its original `/C` switch. A bare CLI has an
+     * empty CR/LF body; an explicit target is the `/C` body. The target is
+     * not itself given `/C` by app. */
     if (!make_path(declaration->application, sizeof(declaration->application),
             root, "system32\\COMMAND.COM") ||
-        (interactive_command == 0 &&
-         (!append_text(declaration->command, sizeof(declaration->command),
+        (!append_text(declaration->command, sizeof(declaration->command),
              &command_length, "/C") ||
-          (declaration->command_declared != 0u &&
-           (!append_text(declaration->command, sizeof(declaration->command),
-               &command_length, " ") ||
-            !append_text(declaration->command, sizeof(declaration->command),
-               &command_length, declaration->requested_command))))) ||
+         (declaration->command_declared != 0u &&
+          (!append_text(declaration->command, sizeof(declaration->command),
+              &command_length, " ") ||
+           !append_text(declaration->command, sizeof(declaration->command),
+              &command_length, declaration->requested_command)))) ||
         !append_text(declaration->command, sizeof(declaration->command),
             &command_length, "\r\n") ||
         !append_text(declaration->environment, sizeof(declaration->environment),
             &environment_length, "COMSPEC=") ||
          !append_text(declaration->environment, sizeof(declaration->environment),
              &environment_length, declaration->application)) return 0;
-    if (interactive_command != 0 &&
-        !make_path(declaration->pif, sizeof(declaration->pif), root,
-            "profiles\\pure-dos\\pure-dos.pif")) return 0;
     if (environment_length + 1u >= sizeof(declaration->environment)) return 0;
     declaration->environment[environment_length++] = '\0';
     declaration->environment[environment_length] = '\0';
@@ -275,10 +255,8 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     command.command_bytes = (uint16_t)(command_length + 1u);
     command.application = (const uint8_t *)declaration->application;
     command.application_bytes = (uint16_t)(strlen(declaration->application) + 1u);
-    command.pif = interactive_command != 0 ?
-        (const uint8_t *)declaration->pif : NULL;
-    command.pif_bytes = interactive_command != 0 ?
-        (uint16_t)(strlen(declaration->pif) + 1u) : 0u;
+    command.pif = NULL;
+    command.pif_bytes = 0u;
     command.environment = (const uint8_t *)declaration->environment;
     command.environment_bytes = (uint32_t)environment_length;
     command.current_directory = (const uint8_t *)declaration->current_directory;

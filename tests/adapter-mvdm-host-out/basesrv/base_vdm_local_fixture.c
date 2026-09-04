@@ -210,7 +210,6 @@ static int verify_explicit_command_child_record(void)
     static char command_name[] = "command.com";
     char *argv[] = { program, command_name, NULL };
     const char *root = "C:\\MVDM";
-    const char *pif = "C:\\MVDM\\profiles\\pure-dos\\pure-dos.pif";
     int argc = 2;
     session instance;
     app_launch_declaration declaration;
@@ -224,16 +223,15 @@ static int verify_explicit_command_child_record(void)
         !session_activate(&instance) ||
         !app_launch_declaration_bind(&declaration, &instance) ||
         !app_launch_declaration_publish(&declaration, &instance)) return 57;
-    /* CmdGetNextCmd builds executed text from AppName plus CmdLine.  The
-     * explicit interactive COMMAND.COM target has the mandatory empty CR/LF
-     * record, allowing the resident shell to EXEC one ordinary child. */
-    if (declaration.base_vdm.terminal_on_command_exhaustion != 0u ||
+    /* COMMAND.COM is an ordinary positional target. The resident first
+     * shell consumes `/C command.com`; its DOS EXEC does not forward `/C`
+     * into the external child. */
+    if (declaration.base_vdm.terminal_on_command_exhaustion != 1u ||
         declaration.base_vdm.command_owner != BASE_VDM_COMMAND_DOS ||
-        declaration.base_vdm.pif_bytes != strlen(pif) + 1u ||
-        strcmp((const char *)declaration.base_vdm.pif, pif) != 0 ||
+        declaration.base_vdm.pif_bytes != 0u ||
         strcmp((const char *)declaration.base_vdm.command,
-            "\r\n") != 0 ||
-        declaration.base_vdm.command_bytes != sizeof("\r\n")) {
+            "/C command.com\r\n") != 0 ||
+        declaration.base_vdm.command_bytes != sizeof("/C command.com\r\n")) {
         (void)base_vdm_local_unbind(&declaration.base_vdm);
         (void)session_dispose(&instance);
         return 58;

@@ -41,7 +41,7 @@ non-zero native-child lifecycle proof; S6 remains the frozen-container repeat.
 
 **S3 closure:** [current COMMAND worker binding confirmation](etc/evidence/m0-t391-s3-current-command-worker-binding-001.md) ties the prior source-shaped guest `VER` worker/return observation to the exact current published binary. It does not prove the required non-zero exit result.
 
-**S4 closure:** [no-argument COMMAND startup recovery](etc/evidence/m0-t391-s4-no-argument-command-startup-recovery-001.md) identifies the missing standalone CSRSS/BaseSrv producer, restores the original guest `/C` empty-command shape, and proves the fixed product exits `0` in the formal non-debug container. Explicit positional `COMMAND.COM` remains interactive.
+**S4 closure:** [no-argument COMMAND startup recovery](etc/evidence/m0-t391-s4-no-argument-command-startup-recovery-001.md) identifies the missing standalone CSRSS/BaseSrv producer, restores the original guest `/C` empty-command shape, and proves the fixed product exits `0` in the formal non-debug container. Every explicit target uses the same first-shell `/C` route; app has no `COMMAND.COM` special case.
 
 **S1 closure:** [pure-DOS configuration-carrier audit](etc/evidence/m0-t390-s1-pure-dos-configuration-carrier-audit-001.md). Original PIF fields already carry the needed configuration pair; the currently admitted local Base VDM adapter omits that capture, so S2 must restore only the original `PifFile`/`PifLen` binding before a pure-DOS profile can be selected.
 

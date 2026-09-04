@@ -20,9 +20,9 @@ OpenNT's unchanged guest parser already owns the single-command contract:
 - `mvdm-guest/dos/v86/cmd/command/init.asm` parses `/C` and sets `SingleCom`.
 - `mvdm-guest/dos/v86/cmd/command/command2.asm` terminates the command path
   when that state is set.
-- The explicit positional `COMMAND.COM` declaration remains a normal child
-  shell, with its empty `CR/LF/NUL` command line and non-terminal broker
-  disposition.
+- Every positional target, including `COMMAND.COM`, is the body of the first
+  shell's `/C` command line.  The original first shell then uses DOS `EXEC`
+  to launch that target, so an external `COMMAND.COM` does not receive `/C`.
 
 Therefore the app now publishes `/C\r\n\0` only for a bare invocation and
 uses the pre-existing local BaseVDM command-exhaustion terminal disposition.
@@ -62,14 +62,14 @@ normal original startup chain, including `54:05`, `54:01`, and COMMAND
 services; no app-side direct process launch marker is involved.
 
 The verified formal binary has SHA-256
-`a2eb75c5856a40489081a28369e072ab1f32bb76661f15128a716b9de50dffbc` and was
+`c2e87bff06d74e431b7a410afb7ad53716a3ac20bb48951088dadfbdd72153ca` and was
 published unchanged as `build/output/ntvdm64-0245.exe` plus
 `O:\ntvdm64\ntvdm.exe` and `O:\ntvdm64\ntvdm64.exe`.
 
 ## Outcome
 
-S4 is closed.  Bare invocation is now a source-shaped empty `/C` COMMAND
-transaction which terminates instead of hanging.  The distinct interactive
-`ntvdm64.exe command.com` product path remains untouched.  T391 next resumes
-its original S5 non-zero native-child lifecycle proof, followed by the frozen
-S6 observation.
+S4 is closed. Bare invocation is now a source-shaped empty `/C` COMMAND
+transaction which terminates instead of hanging. Every explicit target uses
+the same first-shell `/C` route; no target-specific app branch exists. T391
+next resumes its original S5 non-zero native-child lifecycle proof, followed
+by the frozen S6 observation.

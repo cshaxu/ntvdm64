@@ -61,11 +61,11 @@ been consumed.  This prevents a standalone no-argument CLI from entering the
 normal interactive COMMAND/Console wait for which this product has supplied no
 command producer.
 
-`ntvdm.exe command.com` is the one explicit interactive declaration form: app
-publishes the usual `COMMAND.COM` application path with the mandatory empty
-`CR/LF/NUL` tail, rather than the positional `/C <target>` tail. The first
-resident shell then uses its ordinary guest EXEC path to launch one non-first,
-no-`/C` `COMMAND.COM` child. That child has no app/session/BOP-specific path:
+Every positional target, including `ntvdm.exe command.com`, is published as
+the original `/C <target>\r\n\0` form. The first resident shell consumes that
+switch and uses its ordinary guest EXEC path to launch the target. Therefore a
+second `COMMAND.COM` is an ordinary external DOS program and receives no
+app/session/BOP-specific handling:
 it retains the same `DoReEnter -> Do16BitPrompt` route, banner, prompt and
 DOS-CON behavior as any ordinary guest shell. App does not print a prompt,
 read a Console line, write guest input or resubmit a record after child exit.
@@ -109,7 +109,7 @@ neither creates a DOS-device alias nor changes guest/firmware bytes.
 | --- | --- | --- | --- | --- |
 | `APP-DIV-014` | Original NT installations supplied a short `%SystemRoot%` to `cmdconf.c`; NTDOS stored the generated shell value in `commnd`. | Modern portable package roots can exceed the original 63-visible-byte shell-value capacity and otherwise overflow the unchanged guest contract. | App computes the unchanged original generated-value length, rejects an invalid package before startup, and shows an app-owned explanatory dialog. | `package_layout.c`, `package_layout.h`, `entry.c` |
 | `APP-DIV-015` | Original COMMAND environment initialization enumerates its inherited host environment. | A host-only continuation-observer path must not enter the original guest environment/allocation input. | App captures the explicitly optional path before original startup, deletes that one inherited variable, and the adapter uses only its private bounded copy. | `entry.c`; `../adapter-mvdm-host-out/softpc/{include/mvdm_softpc_termination.h,mvdm_softpc_termination.c}` |
-| `APP-DIV-017` | NT4's ordinary bare VDM can wait for a CSRSS/BaseSrv command producer after startup. | The unpack-and-run one-session CLI has no CSRSS command producer; leaving its no-argument record as an ordinary `COMMAND.COM` launch enters an unbounded Console/BaseVDM wait. | App publishes the unchanged guest parser's `/C\r\n\0` command-line shape and enables the existing one-shot exhaustion disposition. Explicit `ntvdm64.exe command.com` remains the distinct normal interactive child-shell form. | `launch_declaration.c`; `../adapter-mvdm-host-out/basesrv/source/base_vdm_local.c` |
+| `APP-DIV-017` | NT4's ordinary bare VDM can wait for a CSRSS/BaseSrv command producer after startup. | The unpack-and-run one-session CLI has no CSRSS command producer. | App always publishes the unchanged guest parser's `/C` shape, with either an empty body or the requested target, and enables the existing one-shot exhaustion disposition. No target name, including `COMMAND.COM`, selects an app-specific branch. | `launch_declaration.c`; `../adapter-mvdm-host-out/basesrv/source/base_vdm_local.c` |
 
 ## M0 T346 S3 presentation window
 
