@@ -57,14 +57,33 @@ already in this packet's source/adapter perimeter. Do not change guest
 `COMMAND.COM`, invent an app command parser or make an empty invocation mean
 an implicit host command.
 
-### S5 — Formal link and local non-zero-exit lifecycle proof
+### S5 — Original PermCom initial-record recovery
+
+The first `COMMAND.COM` is the original permanent shell (PermCom), not a
+one-shot `/C` shell. Recover the BaseVDM startup record as one original
+contract:
+
+```
+app declaration -> BaseVDM AppName/CmdLine record -> PermCom BOP 54:01
+    -> DOS EXEC target -> target-owned Console behavior -> next BaseVDM request
+```
+
+`AppName` must name the target image and `CmdLine` must contain only its
+argument tail with the original CR/LF termination. Explicit `command.com` is
+therefore an ordinary second guest child, never a special app route or a `/C`
+wrapper. A bare invocation may use a bounded child `/C` tail solely to end the
+otherwise commandless session after PermCom's next original request. No guest
+change, app command parser, keyboard change, synthetic BOP or direct
+guest-memory write is allowed.
+
+### S6 — Formal link and local non-zero-exit lifecycle proof
 
 Build the affected formal CPU40/x86 libraries and final product.  Add focused
 tests for request validation, worker start, pending/re-entry, cancellation,
 completion and the `exit 37` result without treating a direct host launch as
 guest evidence.
 
-### S6 — One fixed-container observation
+### S7 — One fixed-container observation
 
 Use the established console-owning container once to observe the frozen
 DOS-initiated workload and its original visible completion/return boundary.
@@ -74,8 +93,9 @@ patching a trace-selected leaf.
 ## Completion
 
 T391 can close only when its no-argument launch has a source-shaped terminal
-or interactive disposition, the original command chain is formally linked,
-and a frozen DOS-initiated native-child workload proves the stage-to-return
-result. A successful app-side `CreateProcess` alone never satisfies this
-plan. If no-argument startup stops at a complete owner outside this packet,
-the evidence must identify and queue that owner before T391 can close.
+disposition, its explicit target has the original PermCom/AppName/CmdLine
+shape, the original command chain is formally linked, and a frozen
+DOS-initiated native-child workload proves the stage-to-return result. A
+successful app-side `CreateProcess` alone never satisfies this plan. If a
+stage stops at a complete owner outside this packet, the evidence must identify
+and queue that owner before T391 can close.

@@ -11,6 +11,36 @@
 #include "presentation_surface.h"
 #include "session/session.h"
 
+/* DIVERGENCE(ADAPTER-WIN32-048): a default-off observation retains the
+ * original Console invalidation boundary while diagnosing a modern public
+ * Console presentation failure.  It never changes the source call's result,
+ * buffer, rectangle or selected output handle. */
+static void trace_text_presentation(const char *stage, HANDLE output,
+    const SMALL_RECT *rect, uint32_t nonblank, DWORD error)
+{
+    char path[MAX_PATH];
+    char line[256];
+    HANDLE file;
+    DWORD written;
+    DWORD length;
+
+    if (GetEnvironmentVariableA("MVDM_CONSOLE_PRESENTATION_REPORT_PATH",
+            path, sizeof(path)) == 0u) return;
+    file = CreateFileA(path, FILE_APPEND_DATA,
+        FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_ALWAYS,
+        FILE_ATTRIBUTE_NORMAL, NULL);
+    if (file == INVALID_HANDLE_VALUE) return;
+    length = (DWORD)wsprintfA(line,
+        "MVDM-CONSOLE-PRESENT stage=%s output=%08lX std=%08lX rect=%d,%d,%d,%d nonblank=%lu error=%08lX\r\n",
+        stage, (unsigned long)(uintptr_t)output,
+        (unsigned long)(uintptr_t)GetStdHandle(STD_OUTPUT_HANDLE),
+        rect == NULL ? -1 : rect->Left, rect == NULL ? -1 : rect->Top,
+        rect == NULL ? -1 : rect->Right, rect == NULL ? -1 : rect->Bottom,
+        (unsigned long)nonblank, (unsigned long)error);
+    (void)WriteFile(file, line, length, &written, NULL);
+    CloseHandle(file);
+}
+
 /*
  * The historical Console Server owned the allocation and lifetime of the VDM
  * registration buffers.  The selected windowed CPU40 profile needs only the
@@ -78,14 +108,19 @@ static int present_text_invalidation(HANDLE output, const SMALL_RECT *rect)
     uint32_t columns = 0u, rows = 0u, text_bytes = 0u;
     uint8_t *text = NULL;
     CHAR_INFO *cells = NULL;
-    uint32_t row, column;
+    uint32_t row, column, nonblank = 0u;
     int width, height;
     COORD source_size;
     COORD source_origin = { 0, 0 };
     SMALL_RECT destination;
     BOOL wrote;
 
-    if (output != GetStdHandle(STD_OUTPUT_HANDLE)) return 0;
+    trace_text_presentation("enter", output, rect, 0u, ERROR_SUCCESS);
+    if (output != GetStdHandle(STD_OUTPUT_HANDLE)) {
+        trace_text_presentation("different-output", output, rect, 0u,
+            ERROR_SUCCESS);
+        return 0;
+    }
     if (owner == NULL || rect == NULL ||
         !session_presentation_text_describe(owner, &columns, &rows,
                                             &text_bytes)) return 0;
@@ -121,6 +156,8 @@ static int present_text_invalidation(HANDLE output, const SMALL_RECT *rect)
             CHAR_INFO *destination_cell = &cells[row * (uint32_t)width + column];
             destination_cell->Char.AsciiChar = text[source_cell * 2u];
             destination_cell->Attributes = text[source_cell * 2u + 1u];
+            if (destination_cell->Char.AsciiChar != '\0' &&
+                destination_cell->Char.AsciiChar != ' ') ++nonblank;
         }
     }
     source_size.X = (SHORT)width;
@@ -128,6 +165,8 @@ static int present_text_invalidation(HANDLE output, const SMALL_RECT *rect)
     destination = *rect;
     wrote = WriteConsoleOutputA(output, cells, source_size, source_origin,
                                 &destination);
+    trace_text_presentation(wrote ? "written" : "write-failed", output,
+        rect, nonblank, wrote ? ERROR_SUCCESS : GetLastError());
     free(cells);
     free(text);
     return wrote ? 1 : -1;
@@ -250,6 +289,8 @@ BOOL WINAPI RegisterConsoleVDM(DWORD flags, HANDLE start_event,
     *state_length = 0u;
     *state = NULL;
     *buffer = text_buffer;
+    trace_text_presentation("registered", GetStdHandle(STD_OUTPUT_HANDLE),
+        NULL, 0u, ERROR_SUCCESS);
     return TRUE;
 }
 

@@ -58,8 +58,7 @@ static int verify_long_package_launch_declaration(void)
     char *argv[] = { program, command_option, command_text, NULL };
     const char *root =
         "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r37-command-ingress-after-complete-host-path-fix\\mvdm";
-    const char *application =
-        "O:\\repos.hobby\\ntvdm64\\build\\M0-T318\\S2\\runtime-r37-command-ingress-after-complete-host-path-fix\\mvdm\\system32\\COMMAND.COM";
+    const char *application = "T365TEST.COM";
     int argc = 3;
     session instance;
     app_launch_declaration declaration;
@@ -75,8 +74,8 @@ static int verify_long_package_launch_declaration(void)
     if (declaration.base_vdm.current_directory_bytes != strlen(root) + 1u) return 31;
     if (declaration.base_vdm.application_bytes != strlen(application) + 1u) return 32;
     if (declaration.base_vdm.command_owner != BASE_VDM_COMMAND_DOS) return 36;
-    if (strcmp((const char *)declaration.base_vdm.command,
-            "/C T365TEST.COM\r\n") != 0) return 41;
+    if (strcmp((const char *)declaration.base_vdm.command, "\r\n") != 0)
+        return 41;
     if (declaration.base_vdm.command_bytes < 3u ||
         declaration.base_vdm.command[declaration.base_vdm.command_bytes - 3u] != '\r' ||
         declaration.base_vdm.command[declaration.base_vdm.command_bytes - 2u] != '\n' ||
@@ -190,10 +189,14 @@ static int verify_empty_one_shot_launch_record(void)
         !app_launch_declaration_bind(&declaration, &instance) ||
         !app_launch_declaration_publish(&declaration, &instance)) return 54;
     if (declaration.base_vdm.terminal_on_command_exhaustion != 1u ||
-        declaration.base_vdm.command_owner != BASE_VDM_COMMAND_DOS ||
-        declaration.base_vdm.command_bytes != sizeof("/C\r\n") ||
-        memcmp(declaration.base_vdm.command, "/C\r\n\0", sizeof("/C\r\n")) != 0 ||
-        declaration.base_vdm.application_bytes != strlen(application) + 1u ||
+         declaration.base_vdm.command_owner != BASE_VDM_COMMAND_DOS ||
+         declaration.base_vdm.command_bytes != sizeof("/C\r\n") ||
+         memcmp(declaration.base_vdm.command, "/C\r\n\0", sizeof("/C\r\n")) != 0 ||
+         declaration.base_vdm.pif_bytes !=
+             sizeof("C:\\MVDM\\profiles\\pure-dos\\pure-dos.pif") ||
+         strcmp((const char *)declaration.base_vdm.pif,
+             "C:\\MVDM\\profiles\\pure-dos\\pure-dos.pif") != 0 ||
+         declaration.base_vdm.application_bytes != strlen(application) + 1u ||
         strcmp((const char *)declaration.base_vdm.application, application) != 0) {
         (void)base_vdm_local_unbind(&declaration.base_vdm);
         (void)session_dispose(&instance);
@@ -223,21 +226,54 @@ static int verify_explicit_command_child_record(void)
         !session_activate(&instance) ||
         !app_launch_declaration_bind(&declaration, &instance) ||
         !app_launch_declaration_publish(&declaration, &instance)) return 57;
-    /* COMMAND.COM is an ordinary positional target. The resident first
-     * shell consumes `/C command.com`; its DOS EXEC does not forward `/C`
-     * into the external child. */
+    /* COMMAND.COM is an ordinary positional target. PermCom receives its
+     * name through AppName and guest-EXECs it with an empty tail. */
     if (declaration.base_vdm.terminal_on_command_exhaustion != 1u ||
-        declaration.base_vdm.command_owner != BASE_VDM_COMMAND_DOS ||
-        declaration.base_vdm.pif_bytes != 0u ||
-        strcmp((const char *)declaration.base_vdm.command,
-            "/C command.com\r\n") != 0 ||
-        declaration.base_vdm.command_bytes != sizeof("/C command.com\r\n")) {
+         declaration.base_vdm.command_owner != BASE_VDM_COMMAND_DOS ||
+         declaration.base_vdm.pif_bytes !=
+            sizeof("C:\\MVDM\\profiles\\pure-dos\\pure-dos.pif") ||
+         strcmp((const char *)declaration.base_vdm.pif,
+            "C:\\MVDM\\profiles\\pure-dos\\pure-dos.pif") != 0 ||
+        strcmp((const char *)declaration.base_vdm.application,
+            "command.com") != 0 ||
+        declaration.base_vdm.application_bytes != sizeof("command.com") ||
+        strcmp((const char *)declaration.base_vdm.command, "\r\n") != 0 ||
+        declaration.base_vdm.command_bytes != sizeof("\r\n")) {
         (void)base_vdm_local_unbind(&declaration.base_vdm);
         (void)session_dispose(&instance);
         return 58;
     }
     if (!base_vdm_local_unbind(&declaration.base_vdm) ||
         !session_dispose(&instance)) return 59;
+    return 0;
+}
+
+static int verify_target_argument_record(void)
+{
+    static char program[] = "fixture";
+    static char target[] = "EDIT.COM";
+    static char argument[] = "read me.txt";
+    char *argv[] = { program, target, argument, NULL };
+    int argc = 3;
+    session instance;
+    app_launch_declaration declaration;
+
+    session_initialize(&instance, 11u);
+    app_launch_declaration_initialize(&declaration);
+    if (!app_launch_declaration_consume_options(&declaration, &argc, argv) ||
+        !session_set_mvdm_system_root(&instance, "C:\\MVDM") ||
+        !session_activate(&instance) ||
+        !app_launch_declaration_bind(&declaration, &instance) ||
+        !app_launch_declaration_publish(&declaration, &instance)) return 60;
+    if (strcmp((const char *)declaration.base_vdm.application, "EDIT.COM") != 0 ||
+        strcmp((const char *)declaration.base_vdm.command,
+            "\"read me.txt\"\r\n") != 0) {
+        (void)base_vdm_local_unbind(&declaration.base_vdm);
+        (void)session_dispose(&instance);
+        return 61;
+    }
+    if (!base_vdm_local_unbind(&declaration.base_vdm) ||
+        !session_dispose(&instance)) return 62;
     return 0;
 }
 
@@ -307,6 +343,8 @@ int main(void)
     launch_declaration_result = verify_empty_one_shot_launch_record();
     if (launch_declaration_result != 0) return launch_declaration_result;
     launch_declaration_result = verify_explicit_command_child_record();
+    if (launch_declaration_result != 0) return launch_declaration_result;
+    launch_declaration_result = verify_target_argument_record();
     if (launch_declaration_result != 0) return launch_declaration_result;
     launch_declaration_result = verify_explicit_softpc_and_command_options();
     if (launch_declaration_result != 0) return launch_declaration_result;

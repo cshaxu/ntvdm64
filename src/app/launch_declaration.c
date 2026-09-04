@@ -7,6 +7,8 @@
 
 static int append_text(char *destination, size_t capacity, size_t *length,
     const char *source);
+static int split_target_command(app_launch_declaration *declaration,
+    size_t *command_length);
 
 void app_launch_declaration_initialize(app_launch_declaration *declaration)
 {
@@ -141,10 +143,10 @@ int app_launch_declaration_bind(app_launch_declaration *declaration,
         !base_vdm_local_valid(&declaration->base_vdm)) return 0;
     if (!base_vdm_local_bind(&declaration->base_vdm, owner)) return 0;
     /* DIVERGENCE(APP-DIV-017): a standalone CLI has no NT4 CSRSS command
-     * producer for a bare launch. Every initial COMMAND record is therefore
-     * a one-shot request. An explicit `command.com` is not special here:
-     * the resident COMMAND consumes `/C command.com`, then guest-EXECs the
-     * ordinary child without forwarding `/C` to it. */
+     * producer after its declared launch has returned. The local broker
+     * therefore ends only at the next original BaseVDM request after the
+     * copied DOS record was consumed. The first COMMAND remains PermCom;
+     * it is never started with `/C`. */
     if (!base_vdm_local_set_terminal_on_command_exhaustion(
             &declaration->base_vdm, 1)) {
         (void)base_vdm_local_unbind(&declaration->base_vdm);
@@ -188,6 +190,53 @@ static int make_path(char *destination, size_t capacity, const char *root,
     return append_text(destination, capacity, &length, tail);
 }
 
+/* `cmdGetNextCmd` copies VDMINFO.AppName to COMMAND's EXEC path and appends
+ * VDMINFO.CmdLine as that target's tail. Preserve that division instead of
+ * inventing `COMMAND.COM /C <target>` in the app composition layer. */
+static int split_target_command(app_launch_declaration *declaration,
+    size_t *command_length)
+{
+    const char *source;
+    size_t image_length = 0u;
+    size_t index = 0u;
+    int quoted = 0;
+
+    if (declaration == NULL || command_length == NULL) return 0;
+    declaration->target_application[0] = '\0';
+    declaration->command[0] = '\0';
+    *command_length = 0u;
+    if (declaration->command_declared == 0u) {
+        /* A bare executable remains a bounded one-shot child of PermCom.
+         * This is not a wrapper for an application supplied by the user. */
+        if (!append_text(declaration->target_application,
+                sizeof(declaration->target_application), &image_length,
+                declaration->application) ||
+            !append_text(declaration->command, sizeof(declaration->command),
+                command_length, "/C")) return 0;
+    } else {
+        source = declaration->requested_command;
+        if (source[0] == '\"') { quoted = 1; ++index; }
+        while (source[index] != '\0') {
+            if ((quoted && source[index] == '\"') ||
+                (!quoted && (source[index] == ' ' || source[index] == '\t')))
+                break;
+            if (image_length + 1u >= sizeof(declaration->target_application)) return 0;
+            declaration->target_application[image_length++] = source[index++];
+        }
+        if (quoted) {
+            if (source[index] != '\"') return 0;
+            ++index;
+        }
+        if (image_length == 0u) return 0;
+        declaration->target_application[image_length] = '\0';
+        while (source[index] == ' ' || source[index] == '\t') ++index;
+        if (!append_text(declaration->command, sizeof(declaration->command),
+                command_length, source + index)) return 0;
+    }
+    return append_text(declaration->command, sizeof(declaration->command),
+        command_length, "\r\n");
+}
+
 int app_launch_declaration_publish(app_launch_declaration *declaration,
     const session *owner)
 {
@@ -205,25 +254,15 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     if (root == NULL || root[0] == '\0' || root[1] != ':') return 0;
     drive_letter = (unsigned char)toupper((unsigned char)root[0]);
     if (drive_letter < 'A' || drive_letter > 'Z') return 0;
-    /* DIVERGENCE(APP-DIV-017): every app declaration enters the initial
-     * resident COMMAND through its original `/C` switch. A bare CLI has an
-     * empty CR/LF body; an explicit target is the `/C` body. The target is
-     * not itself given `/C` by app. */
     if (!make_path(declaration->application, sizeof(declaration->application),
             root, "system32\\COMMAND.COM") ||
-        (!append_text(declaration->command, sizeof(declaration->command),
-             &command_length, "/C") ||
-         (declaration->command_declared != 0u &&
-          (!append_text(declaration->command, sizeof(declaration->command),
-              &command_length, " ") ||
-           !append_text(declaration->command, sizeof(declaration->command),
-              &command_length, declaration->requested_command)))) ||
-        !append_text(declaration->command, sizeof(declaration->command),
-            &command_length, "\r\n") ||
+        !make_path(declaration->pif, sizeof(declaration->pif), root,
+            "profiles\\pure-dos\\pure-dos.pif") ||
         !append_text(declaration->environment, sizeof(declaration->environment),
             &environment_length, "COMSPEC=") ||
          !append_text(declaration->environment, sizeof(declaration->environment),
              &environment_length, declaration->application)) return 0;
+    if (!split_target_command(declaration, &command_length)) return 0;
     if (environment_length + 1u >= sizeof(declaration->environment)) return 0;
     declaration->environment[environment_length++] = '\0';
     declaration->environment[environment_length] = '\0';
@@ -253,10 +292,14 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
      * BaseSrv/BaseClient contract at the app composition boundary rather
      * than making the original COMMAND body accept a new string shape. */
     command.command_bytes = (uint16_t)(command_length + 1u);
-    command.application = (const uint8_t *)declaration->application;
-    command.application_bytes = (uint16_t)(strlen(declaration->application) + 1u);
-    command.pif = NULL;
-    command.pif_bytes = 0u;
+    command.application = (const uint8_t *)declaration->target_application;
+    command.application_bytes = (uint16_t)(strlen(declaration->target_application) + 1u);
+    /* DIVERGENCE(APP-DIV-017): the standalone product has one selected
+     * source-shaped pure-DOS profile for every initial PermCom record. It
+     * leaves the target identity and its argument tail in the original
+     * AppName/CmdLine carriers, instead of selecting a target-name route. */
+    command.pif = (const uint8_t *)declaration->pif;
+    command.pif_bytes = (uint16_t)(strlen(declaration->pif) + 1u);
     command.environment = (const uint8_t *)declaration->environment;
     command.environment_bytes = (uint32_t)environment_length;
     command.current_directory = (const uint8_t *)declaration->current_directory;

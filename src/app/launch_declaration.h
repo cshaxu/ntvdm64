@@ -11,6 +11,10 @@ typedef struct app_launch_declaration {
     uint32_t bound;
     uint32_t command_declared;
     char requested_command[MAXIMUM_VDM_COMMAND_LENGTH];
+    /* The original BaseVDM AppName carrier identifies the program which the
+     * resident COMMAND asks DOS to EXEC.  It is deliberately distinct from
+     * COMSPEC below: a declared target is not wrapped in `COMMAND.COM /C`. */
+    char target_application[MAX_PATH];
     char command[MAXIMUM_VDM_COMMAND_LENGTH];
     char application[MAX_PATH];
     /* Original BaseSrv PifFile form for a declared launch profile. */
