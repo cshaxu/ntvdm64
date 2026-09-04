@@ -50,6 +50,8 @@ controller, ICA or CPU frame with a host parser or direct guest write.
 
 **S7 static audit:** [CPU40/SoftPC keyboard-delivery static audit](etc/evidence/m0-t389-s7-keyboard-delivery-static-audit-001.md). The selected machine chain is source-intact through the deferred CPU `GET_IF()` predicate; the sampled guest offsets classify as NTDOS startup/file work, not a proved second-shell prompt. S7 therefore continues at source-owned post-`54:04` IF provenance rather than changing keyboard or CPU state.
 
+**S7 INT 16 owner audit:** [INT 16 idle BOP and IRQ1 owner audit](etc/evidence/m0-t389-s7-int16-idle-and-irq-owner-audit-002.md). Original `BOP 16h` is BIOS idle accounting, while port-60 drain belongs to the distinct IRQ1 source path. The current `AH=1` marker is consequently not a prompt-ready contract; the unresolved prerequisite remains post-`54:04` NTDOS/CPU40 continuity.
+
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 
 **Plan:** [M0 T375 pure DOS CPU40/SoftPC boot and COMMAND baseline](etc/operations/m0-t375-pure-dos-cpu40-softpc-command-baseline-001.md).
