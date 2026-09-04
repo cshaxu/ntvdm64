@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T389 S6** — Explicit interactive COMMAND profile, original
-post-`54:01` parent/child COMMAND lifecycle cohort; ordinary mode
+**Active: M0 T389 S7** — Explicit interactive COMMAND profile, original
+CPU40/SoftPC keyboard-controller and IRQ-delivery cohort; ordinary mode
 (single-person dual-role implementation and review).
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T389 S6; ordinary mode. |
-| Admission And Approval | S5 proved the original Console worker is created and resumed through an actual `54:05`; its later waitio marker is not reached because the guest has not yet entered the child shell prompt path. |
-| Objective | Audit the complete original `54:01` post-record parent/child COMMAND lifecycle—record consumption, EXEC, child first/non-first state, `DoReEnter`, `SCS_FIRSTCOM`, `SingleCom`, return/termination and its host dependencies—then identify and recover the first source-owned missing transition before the child DOS-CON path. |
-| Non-goals | No guest-media change, app prompt reader, synthetic BOP record, direct guest-input injection, BaseSrv/CSRSS transport, PIF implementation, WOW or `cmdExec32` expansion. |
-| Reference Baseline | T389 S1--S5, selected CPU40 source/media and fixed trace showing successful `54:01`, `54:0E`, `54:04` and `54:05`. The current formal-link priority is x64; x86 product execution is deferred, not removed. |
-| Files And ABI Surface | Original guest `COMMAND.COM` execution path, mirrored COMMAND/DEM provider lifecycle and necessary same-shaped SoftPC/Win32/Base-VDM bindings; no guest layout changes. |
+| Identifier Mode | M0 T389 S7; ordinary mode. |
+| Admission And Approval | S6 recovered the source-shaped normal-child COMMAND declaration and then proved an ordinary Console key reaches the original worker/8042 offer/ICA-request chain, but not port-60 drain. Owner directs continuation (“可以，继续”). |
+| Objective | Recover the first original CPU40/SoftPC keyboard-delivery transition preventing the explicit child `COMMAND.COM` from consuming an ordinary Console key: Console worker event -> keyboard controller offer/port-60 drain -> ICA IRQ1 request/service -> CPU interrupt-frame continuation. |
+| Non-goals | No guest-media change, `COMMAND.COM` modification, app prompt reader, synthetic BOP record, direct guest-memory input, BaseSrv/CSRSS transport, PIF/WOW/`cmdExec32` expansion, unrelated timer/device repair, or new keyboard semantics. |
+| Reference Baseline | T389 S1--S6; current formal x86 CPU40 graph and immutable `O:\ntvdm64` package; 002 proves `AH=1` status polling, accepted normal Console key, 8042 offer and ICA request, with no port-60 drain. x64 compile/link remains non-gating for the selected x86 CPU40 runtime sequence. |
+| Files And ABI Surface | Original SoftPC keyboard worker/controller, ICA and CPU40 interrupt/event code plus the smallest same-shaped adapter bindings and default-off observer only; retain original Console, IRQ and guest-state contracts. |
 | Applicable Rules | Execution, source, architecture, coding, document, mapping-manager, mirror/overlay and CPU40-only rules. |
-| Verification | Static full-lifecycle/owner audit, focused selected-provider test and fresh x64 formal CPU40 source build. A fixed-container execution rerun remains x86-only and is deferred until its Ninja execution path is available. |
-| Expected Markers | One explicit `COMMAND.COM` record with an empty CR/LF tail (distinct from positional `/C <target>`), an original first-to-second-shell guest EXEC transition, a no-`/C`/no-`SingleCom` second shell, a precise first missing transition, and no invented shell behavior. |
-| Asset Needs | T389 S1--S5 evidence, current formal x64 graph, immutable staged package and selected original source union. |
-| Reporting Requirements | Record each original transition, source owner, provider provenance, retained ABI and relation to child banner/prompt/DOS-CON. |
-| Stop Conditions | Any need to alter guest media, write a host DOS parser, inject guest input, alter Base VDM/guest structures, or expand into PIF/WOW/BaseSrv transport pauses for a revised package decision. |
-| Exit Criteria | The first source-owned post-record parent/child lifecycle blocker has one owner-package disposition and focused evidence. No interactive completion claim without banner/prompt/DOS-CON evidence. |
-| Original Owner Request | “好的，准入下一个任务。” |
-| Similar-Issue Sweep | `cmdGetNextCmd`, `cmdSetInfo`, `cmdCheckBinary`, `cmdExec`, `cmdReturnExitCode`, guest `EXEC`, `SCS_FIRSTCOM`, `SingleCom`, `SCS_REENTERED`, `SCS_CMDPROMPT`, `DoReEnter`, parent return and DOS `CON`. |
+| Verification | Static source/control-flow audit of the full delivery chain; focused source-shaped local checks; formal x86 CPU40 link; fixed non-debug Console-owning declared-`command.com` observation. |
+| Expected Markers | An accepted Console key, original offer, port-60 drain, original IRQ1 request/service and source-shaped guest continuation; any failure must identify its first original owner/condition. |
+| Asset Needs | T389 S6 evidence, selected CPU40 source union, current x86 formal graph, immutable staged media and existing default-off observer reports. |
+| Reporting Requirements | Record definitions/callers and retained original ordering for worker, controller, ICA and CPU-frame transitions; distinguish a source invariant from a missing binding; retain the exact input/IRQ/IF/EOI evidence. |
+| Stop Conditions | Any need to modify guest media, invent a keyboard/controller protocol, bypass SoftPC with direct guest writes, change generic CPU instruction semantics, or expand into another device/profile pauses for revised package decision. |
+| Exit Criteria | One complete original keyboard-delivery cohort either reaches port-60/IRQ1/source continuation under the fixed declared-`command.com` row or has its first non-composable original dependency and owner disposition recorded. No claim of prompt, `ver`, line editing, Ctrl+C or child return without direct evidence. |
+| Original Owner Request | “可以，继续。” |
+| Similar-Issue Sweep | `nt_event`, Console worker, `KeyMsgToKeyCode`, `keyboard_io`, `idetect`, keyboard controller status/port 60, `TryKbdInt`, ICA request/ack/EOI, CPU40 event latch, IF, interrupt-frame entry/return and guest keyboard buffer. |
 
 **Predecessor:** [M0 T388 fixed interactive runtime matrix and corrected shell boundary](history/m0-t388-fixed-interactive-runtime-matrix-closure-20260903.md).
 
@@ -43,6 +43,10 @@ post-`54:01` parent/child COMMAND lifecycle cohort; ordinary mode
 **S6 current observation:** [formal x86 explicit COMMAND child observation](etc/evidence/m0-t389-s6-current-x86-command-child-observation-001.md). The current product consumes exactly one normal-child record and returns through `54:01`, `54:0E` and `54:04`, but does not yet reach the second shell's banner, `Do16BitPrompt`, BIOS `INT 16h` wait, or DOS `CON`; a gated `ver` row was therefore not injected. The remaining boundary is guest/CPU40 continuity after the successful `54:04` return.
 
 **S6 keyboard probe:** [source-owned keyboard-status Console probe](etc/evidence/m0-t389-s6-keyboard-status-console-probe-002.md). The corrected `AH=0/1/2` gate reaches the actual original `AH=1` status poll and accepts one ordinary Console key into the original worker/8042/ICA path, but no port-60 drain follows. The remaining owner cohort is CPU40/SoftPC keyboard delivery, not Base VDM, COMMAND record production, or a BOP leaf.
+
+**S7 admission:** source-shaped CPU40/SoftPC keyboard delivery begins from the
+S6 accepted-key/absent-drain boundary. It may not bypass the original worker,
+controller, ICA or CPU frame with a host parser or direct guest write.
 
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 
