@@ -58,6 +58,8 @@ controller, ICA or CPU frame with a host parser or direct guest write.
 
 **S8 admission:** recover and observe the original child `COMMAND.COM` `REGCOM -> DoReEnter -> Do16BitPrompt` path up to the source-defined DOS `CON` wait.  The source excludes a second AUTOEXEC run: that batch belongs to the already-started resident shell.  The prior `AH=1` status marker remains unsuitable as a prompt trigger.
 
+**S8 P1:** [second COMMAND re-entry boundary](etc/evidence/m0-t389-s8-child-command-reentry-boundary-001.md) compares identical input and no-input fixed runs.  Both reach the final original `50:36` handoff but neither reaches the child's next `54:0F` or `54:09`; the keyboard event is not causal.  The remaining owner interval is original CPU/guest child initialization before the first `54:0F` environment request.
+
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 
 **Plan:** [M0 T375 pure DOS CPU40/SoftPC boot and COMMAND baseline](etc/operations/m0-t375-pure-dos-cpu40-softpc-command-baseline-001.md).
