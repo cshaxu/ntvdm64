@@ -2,10 +2,10 @@
 
 ## Current Work
 
-**M0 T391 S1 remains active but paused after its audit closure.** The source audit proves that the
-default `AUTOEXEC.NT → DOSX.EXE` route enters a DPMI/WOW bootstrap and its
-missing `SYSTEM.INI`/`KRNL386.EXE` media cohort; it cannot be treated as a
-pure-DOS extender task without a material re-admission decision.
+**M0 T391 S2 is active.** S1 proved that the default
+`AUTOEXEC.NT → DOSX.EXE` route is a DPMI/WOW bootstrap, not a pure-DOS
+extender route. Under the established pure-DOS and DOS-initiated native-child
+priority, S2 now begins an original COMMAND `cmdExec32` source/ABI rebaseline.
 
 ## Latest Closure
 
@@ -13,27 +13,27 @@ pure-DOS extender task without a material re-admission decision.
 
 ## Active Packet
 
-**Active: M0 T391 S1 — reached DOSX dependency closure (paused for re-admission).**
+**Active: M0 T391 S2 — original COMMAND stage-to-return source/ABI rebaseline.**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T391 S1; ordinary single-person dual-role audit/implementation/review. |
-| Admission And Approval | The owner directed continuous queue execution. Queue candidate 1 and [DOSX/DPMI proposal](etc/operations/proposal-dosx-dpmi-runtime-activation-001.md) are admitted after M0 T390 closure. |
-| Objective | Establish the complete original `AUTOEXEC.NT → DOSX.EXE` startup dependency cohort, selected media identities and first DOS-extender workload before any source binding is changed. |
-| Non-goals | No guest rewrite, app-owned DOS/DPMI parser, trace-leaf BOP patch, CPU workaround, Win16/WOW recovery, native-child lifecycle recovery, or synthetic extender. |
-| Reference Baseline | M0 T390 closure; original `AUTOEXEC.NT`, DOSX/DPMI sources and current SoftPC CCPU40/x86 product route. |
-| Files And ABI Surface | Read-only original MVDM/DOSX/DPMI sources, stage media/configuration manifests, formal build manifests and an S1 evidence record only unless a source ownership correction is separately admitted. |
+| Identifier Mode | M0 T391 S2; ordinary single-person dual-role source/ABI audit, implementation, review and closure. |
+| Admission And Approval | T391/S1 closed its DOSX dependency audit. The owner-established priority is pure DOS and DOS-initiated native children before Win16; [the re-admitted T391 plan](etc/operations/m0-t391-original-cmdexec32-stage-return-recovery-001.md) supplies S2–S5. |
+| Objective | Map and restore the original `54:08 → cmdExec → cmdExec32 → cmdCreateProcess → Base VDM re-entry → cmdReturnExitCode` chain for a DOS-initiated native child. |
+| Non-goals | No guest `COMMAND.COM` change; no app-owned launch/parser or synthetic completion; no DOS EXEC/PSP return recovery; no WOW, Redirector, CSRSS/BaseSrv broker or console-input product-shell recovery. |
+| Reference Baseline | M0 T390 console proof; T391/S1 DOSX bootstrap audit; original COMMAND `cmdexec.c`, `cmdmisc.c`, `cmdenv.c` and prior T370/T380/T381 lifecycle evidence. |
+| Files And ABI Surface | Original COMMAND sources; existing Base VDM/session/Win32/SoftPC same-shaped bindings; S2 evidence and the formal CPU40/x86 build manifests. |
 | Applicable Rules | `docs/rules/EXECUTION.md`, source policy, architecture/coding rules, mapping-manager rule and mirror/overlay discipline. |
-| Verification | Static source-to-media and call/dependency audit; selected-product configuration observation; `git diff --check`; documentation gate subject to the recorded inventory exception. |
-| Expected Markers | Original DOSX launch/configuration selection, each required executable/configuration identity, caller/owner chain, and a single source-shaped first workload disposition. |
-| Asset Needs | Selected guest DOS media, `SYSTEM.INI`, `KRNL386.EXE`, DOSX/DPMI MVDM source union, current product/stage manifests and source policy. |
-| Reporting Requirements | Record original owner/path, dependency class, exact asset identity, formal-build disposition, recovery-ladder result and any whole-owner stop boundary. |
-| Stop Conditions | Met: the selected DOSX source path is a Windows/DPMI/WOW bootstrap whose `SYSTEM.INI`/`KRNL386.EXE` cohort is not staged. The packet is paused rather than substituting a DPMI leaf or app-owned extender. |
-| Exit Criteria | Met for S1: the evidence maps the reached DOSX startup cohort, immutable stage identities, host/guest owners and the first whole-owner boundary. It disproves the former pure-DOS workload premise and requires re-admission before S2. |
-| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。” |
-| Similar-Issue Sweep | `AUTOEXEC.NT`, PIF/config selection, DOSX/DPMI loader, `SYSTEM.INI`/`KRNL386.EXE`, XMS/DPMI BOP ingress, mapping leases, SoftPC CCPU40 and build/media manifest inputs. |
+| Verification | Static source/ABI map; source-shaped recovery ladder; focused local lifecycle tests in S4; one frozen console-owning observation in S5; `git diff --check`; documentation gate subject to the recorded inventory exception. |
+| Expected Markers | Original call order, request validation, worker ownership, pending/re-entry, completion, `exit 37` result/CF contract and first complete owner stop boundary. |
+| Asset Needs | Existing selected DOS media and `cmd.exe /c exit 37` workload, original MVDM source union, current formal build manifests and fixed runtime container. |
+| Reporting Requirements | Record every original import, existing adapter binding, changed mirror reference, failure/completion result and any remaining whole-owner boundary. |
+| Stop Conditions | Stop only at an identified complete original owner boundary. Do not replace it with a direct host launch, trace-selected BOP patch or guest rewrite. |
+| Exit Criteria | S2 maps the whole original chain and classifies every boundary as direct, same-shaped adapter, explicit unavailable or later owner package; S3–S5 then prove formal link, local lifecycle and frozen DOS-initiated observation. |
+| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。”；“先让纯dos和dos调用32位程序跑通；16位支持先放放。” |
+| Similar-Issue Sweep | `54:08`/`54:0A`/`54:0B`, `cmdExec*`, `cmdCreateProcess`, `cmdReturnExitCode`, Base VDM completion/re-entry, session worker, stream handles and cancellation. |
 
-**S1 closure:** [reached DOSX dependency closure](etc/evidence/m0-t391-s1-dosx-dependency-closure-001.md). The default DOSX route is a combined DPMI/WOW bootstrap, not a standalone pure-DOS extender client; M0 T391 is paused pending an owner decision to prioritize COMMAND native-child recovery or re-admit the complete bootstrap/media cohort.
+**S1 closure:** [reached DOSX dependency closure](etc/evidence/m0-t391-s1-dosx-dependency-closure-001.md). The default DOSX route is a combined DPMI/WOW bootstrap, not a standalone pure-DOS extender client; it is retained as the next complete bootstrap package after COMMAND native-child recovery.
 
 **S1 closure:** [pure-DOS configuration-carrier audit](etc/evidence/m0-t390-s1-pure-dos-configuration-carrier-audit-001.md). Original PIF fields already carry the needed configuration pair; the currently admitted local Base VDM adapter omits that capture, so S2 must restore only the original `PifFile`/`PifLen` binding before a pure-DOS profile can be selected.
 
