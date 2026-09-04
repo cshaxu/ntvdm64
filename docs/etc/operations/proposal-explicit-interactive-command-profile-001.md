@@ -16,6 +16,25 @@ BaseSrv/CSRSS transport.  It is to send one original-shaped target record for
 the explicitly requested child `COMMAND.COM`, then let its original shell-out
 path print the prompt and consume DOS Console input itself.
 
+## T389 predecessor correction
+
+T389 proves that the selected record reaches the original NTDOS `$Exec`
+transfer and CPU40 completes its `RETF` into the loaded child.  It also proves
+that the currently staged resident first-shell configuration runs the original
+`AUTOEXEC.NT` `DOSX.EXE` command, whose DPMI/WOW bootstrap then searches for
+`SYSTEM.INI` and `KRNL386.EXE`.  The resulting 30-second observation therefore
+does not establish either a second-COMMAND prompt or a COMMAND/CPU failure.
+
+The next admission must choose one of two complete, source-shaped
+predecessors before resuming this proposal's prompt proof:
+
+1. a pure-DOS first-shell configuration disposition that does not launch
+   DOSX; or
+2. a DPMI/WOW bootstrap package that composes the reached original DOSX path.
+
+It may not solve the predecessor by modifying `COMMAND.COM`, inventing a host
+prompt reader, synthesizing a BOP/keyboard event, or changing CPU semantics.
+
 ## Product contract
 
 ### Launch forms

@@ -510,6 +510,11 @@ LPSTR   lpFileName;
 DWORD   dwAttr;
 
     lpFileName = (LPSTR) GetVDMAddr (getDS(),getDX());
+    /* DIVERGENCE(MVDM-HOST-DIV-217): the fixed COMMAND-child observation
+       needs the original attribute path/result to distinguish a normal
+       child startup from a source-owned file-service loop.  The helper takes
+       only a short synchronous copy of DS:DX and cannot affect the service. */
+    mvdm_softpc_record_dem_chmod(getDS(), getDX(), 0u, 0u, getAX(), getCF());
 
 #if DBG
     if(fShowSVCMsg & DEMFILIO){
@@ -533,6 +538,7 @@ DWORD   dwAttr;
 
         setCX((USHORT)dwAttr);
         setCF(0);
+        mvdm_softpc_record_dem_chmod(getDS(), getDX(), 1u, 0u, getAX(), getCF());
         return;
     }
 
@@ -544,10 +550,13 @@ DWORD   dwAttr;
         goto dcerr;
 
     setCF(0);
+    mvdm_softpc_record_dem_chmod(getDS(), getDX(), 1u, 0u, getAX(), getCF());
     return;
 
 dcerr:
     demClientError(INVALID_HANDLE_VALUE, *lpFileName);
+    mvdm_softpc_record_dem_chmod(getDS(), getDX(), 2u,
+        (unsigned int)GetLastError(), getAX(), getCF());
     return;
 }
 

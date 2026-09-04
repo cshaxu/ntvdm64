@@ -60,6 +60,14 @@ void mvdm_softpc_record_cpu_unsimulate(unsigned int guest_cs,
 void mvdm_softpc_record_cpu_simulate_return(unsigned int guest_cs,
                                             unsigned int guest_ip);
 
+/* Default-off CPU40 far-return witness.  It records the original scalar
+ * source and completed destination only; it cannot select a destination,
+ * inspect guest data, or alter CPU/stack/guest state. */
+void mvdm_softpc_record_cpu_far_return(unsigned int source_cs,
+                                       unsigned int source_ip,
+                                       unsigned int target_cs,
+                                       unsigned int target_ip);
+
 /* Default-off fixed-container observation at the original host text-output
  * boundary.  `count` is the already selected byte count; no guest text or
  * buffer pointer crosses the observation boundary. */
@@ -197,6 +205,13 @@ void mvdm_softpc_record_dem_open(uint16_t guest_ds, uint16_t guest_si,
     unsigned int guest_cf);
 
 void mvdm_softpc_record_dem_create(uint16_t guest_ds, uint16_t guest_si,
+    unsigned int phase, unsigned int status, unsigned int guest_ax,
+    unsigned int guest_cf);
+
+/* Default-off original DEM attribute-service observation.  The source caller
+ * retains its normal DS:DX path lifetime; this helper copies it only during
+ * the active call. */
+void mvdm_softpc_record_dem_chmod(uint16_t guest_ds, uint16_t guest_dx,
     unsigned int phase, unsigned int status, unsigned int guest_ax,
     unsigned int guest_cf);
 

@@ -20,10 +20,10 @@ The selected guest sources establish the following distinction.
   `DoReEnter::exec_comspec` calls `Do16BitPrompt(Start16, FOR_SHELLOUT)`.
   That original routine emits CR/LF and the prompt, then invokes DOS buffered
   Console input (`INT 21h`, `AH=0Ah`).
-* Before the first child `54:0F`, the loaded `COMMAND.COM` does original
-  resident/transient initialization and allocation.  `54:0F` is its original
-  environment request; `54:09` is the later original console-initialization
-  service.  Neither is an app-created substitute.
+* `54:0F` and `54:09` are original COMMAND-side services, but they are not a
+  required marker for the second-COMMAND `DoReEnter` path.  They cannot be
+  used as a proxy for whether the CPU completed NTDOS `$Exec` or whether the
+  child reached `REGCOM`.
 
 ## Fixed observations
 
@@ -39,11 +39,19 @@ Both runs show the same final original lifecycle prefix:
 54:01 -> 54:0E -> 54:04 -> 50:12/50:42/50:02 -> 50:36
 ```
 
-Both runs also have the same aggregate results after that final `50:36`:
+The default-off CPU40 far-return witness now establishes that the unchanged
+`$Exec` return actually completes:
 
-* no additional `54:0F` environment dispatch;
-* no `54:09` console-initialization dispatch;
-* no `Do16BitPrompt`, BIOS `INT 16h` wait or DOS `CON` evidence.
+```text
+MVDM-CPU-RETF source=00A7:1113 target=0713:0100
+```
+
+This is the original transfer into the loaded child image, so the old
+interpretation (that the interval ended before the child could start) is
+incorrect.  Neither run reaches a later observed `54:0F`, `54:09`,
+`Do16BitPrompt`, BIOS `INT 16h` wait or DOS `CON` marker in the fixed
+30-second window; those absences are observations, not a child-start
+criterion.
 
 The earlier `54:0D` and `54:0F` records occur before the one `54:01` target
 record and belong to the first resident command's startup.  They cannot be
@@ -54,16 +62,29 @@ The no-input observation finished at the same boundary.  Therefore the
 previous accepted Console key/8042/ICA event is not the cause of the missing
 second-command progress.
 
-## Current disposition
+## Source-owned predecessor found
 
-The first unresolved interval is now precise but not yet attributed to a
-missing provider: original NTDOS `$Exec` has called `50:36`, and the next
-second-COMMAND host service (`54:0F`) has not been observed.  This is the
-CPU/guest initialization interval between the original handoff and the first
-child environment request.  It is not an AUTOEXEC, BaseSrv, BOP-record,
-Console-worker or keyboard-controller issue.
+The simultaneous, default-off original `demChMod` witness records the active
+file-service sequence after the child transfer.  It first finds
+`C:\\WINDOWS\\SYSTEM.INI`, then applies the unchanged DOS executable search
+contract to `KRNL386.EXE` through the staged system directory and the inherited
+host `PATH`; every `KRNL386.EXE` attempt fails with the original DOS error.
+The accompanying original DEM-open record also shows the same startup cohort
+loading `O:\\NTVDM64\\SYSTEM32\\DOSX.EXE` before that search.
 
-S8 must next audit that original interval as one CPU/guest startup cohort and
-identify either the first failed original instruction/contract or the first
-arrival at `54:0F`.  It must not force IF, synthesize IRQ1, patch
-`COMMAND.COM`, or treat the old `AH=1` idle marker as a prompt.
+The immutable staged `AUTOEXEC.NT` contains its original NTVDM command
+`lh %SystemRoot%\\system32\\dosx`.  `DOSX.EXE` is a DPMI/WOW bootstrap input,
+not DOS `CON`; its `SYSTEM.INI`/`KRNL386.EXE` discovery is therefore a
+source-owned predecessor that consumes the fixed observation interval.  It is
+not attributable to BaseVDM record delivery, `$Exec`/CPU40 `RETF`, a BOP
+return, Console input, or an app prompt reader.
+
+## S8 disposition
+
+S8 has reached its allowed evidence exit: the desired second-COMMAND
+`DoReEnter -> Do16BitPrompt -> DOS CON` path is not yet observable because the
+selected immutable first-shell AUTOEXEC profile enters original DOSX/DPMI/WOW
+bootstrap first.  Resolving that predecessor requires an explicitly admitted
+pure-DOS media/profile decision or a DPMI/WOW bootstrap recovery package;
+neither may be smuggled into this COMMAND-only cohort.  S8 makes no claim that
+the prompt itself, line editing, BIOS input or child return works.

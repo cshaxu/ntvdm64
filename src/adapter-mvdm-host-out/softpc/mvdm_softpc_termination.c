@@ -458,6 +458,30 @@ void mvdm_softpc_record_cpu_simulate_return(unsigned int guest_cs,
             message, (DWORD)formatted);
 }
 
+void mvdm_softpc_record_cpu_far_return(unsigned int source_cs,
+    unsigned int source_ip, unsigned int target_cs, unsigned int target_ip)
+{
+    static LONG reported;
+    char message[112];
+    int formatted;
+
+    /* A bounded default-off observer is sufficient to attribute an original
+     * guest far-return without turning CPU execution into an instruction
+     * trace. */
+    /* Startup performs many source-owned far returns before NTDOS transfers
+     * control to the explicit child.  Keep this bounded, but retain enough
+     * of one fixed 30-second observation to include that later handoff. */
+    if (InterlockedIncrement(&reported) > 4096)
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CPU-RETF source=%04X:%04X target=%04X:%04X\r\n",
+        source_cs & 0xffffu, source_ip & 0xffffu,
+        target_cs & 0xffffu, target_ip & 0xffffu);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            message, (DWORD)formatted);
+}
+
 void mvdm_softpc_record_stream_io_update(const uint8_t *buffer,
     unsigned int count)
 {
@@ -1277,6 +1301,14 @@ void mvdm_softpc_record_dem_create(uint16_t guest_ds, uint16_t guest_si,
 {
     mvdm_softpc_record_dem_path("MVDM_DEM_CREATE_REPORT_PATH", "MVDM-DEM-CREATE",
         guest_ds, guest_si, phase, status, guest_ax, guest_cf);
+}
+
+void mvdm_softpc_record_dem_chmod(uint16_t guest_ds, uint16_t guest_dx,
+    unsigned int phase, unsigned int status, unsigned int guest_ax,
+    unsigned int guest_cf)
+{
+    mvdm_softpc_record_dem_path("MVDM_DEM_CHMOD_REPORT_PATH", "MVDM-DEM-CHMOD",
+        guest_ds, guest_dx, phase, status, guest_ax, guest_cf);
 }
 
 void mvdm_softpc_record_dem_read(uint16_t guest_ds, uint16_t guest_dx,

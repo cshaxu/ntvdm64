@@ -2,31 +2,18 @@
 
 ## Current Work
 
-**Active: M0 T389 S8** — Explicit interactive COMMAND profile, original
-second-`COMMAND.COM` `DoReEnter`-to-`DOS CON` cohort; ordinary mode
-(single-person dual-role implementation and review).
+**No active M/T/S packet.** M0 T389 is closed at its permitted
+source-owned predecessor boundary; the next candidate is the pure-DOS
+first-shell/profile prerequisite for an interactive second `COMMAND.COM`.
+
+## Latest Closure
+
+[M0 T389 explicit interactive COMMAND profile boundary](history/m0-t389-explicit-interactive-command-profile-boundary-closure-20260903.md).
 
 ## Active Packet
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T389 S8; ordinary mode. |
-| Admission And Approval | S7 proved the source-shaped child EXEC transfer (`50:36`) after the normal-child record and excludes the BOP-return/keyboard cohort as its first missing owner. Owner directs continuation (“可以，继续”). |
-| Objective | Recover the first original second-`COMMAND.COM` continuation from `REGCOM` through `DoReEnter -> Do16BitPrompt -> DOS CON` before an ordinary Console key may be used as interactive evidence.  The already-started resident shell, not this child, owns CONFIG/AUTOEXEC. |
-| Non-goals | No guest-media change, `COMMAND.COM` modification, app prompt reader, synthetic BOP record, direct guest-memory input, BaseSrv/CSRSS transport, PIF/WOW/`cmdExec32` expansion, unrelated timer/device repair, or new keyboard semantics. |
-| Reference Baseline | T389 S1--S7; formal x86 CPU40 graph and immutable `O:\ntvdm64` package; S7 proves NTDOS reaches `SVC_DEMENTRYDOSAPP (50:36)` in original `$Exec`, immediately before original `DOCLI -> STI -> retf`. x64 compile/link remains non-gating for the selected x86 CPU40 runtime sequence. |
-| Files And ABI Surface | Original NTDOS `$Exec`, original COMMAND `REGCOM`/`DoReEnter`/`Do16BitPrompt` path, existing DEM/COMMAND file/current-directory providers, and only the smallest same-shaped default-off observer if a source-defined transition cannot otherwise be attributed. |
-| Applicable Rules | Execution, source, architecture, coding, document, mapping-manager, mirror/overlay and CPU40-only rules. |
-| Verification | Static source/control-flow audit of the full delivery chain; focused source-shaped local checks; formal x86 CPU40 link; fixed non-debug Console-owning declared-`command.com` observation. |
-| Expected Markers | Original `50:36` child transfer, second COMMAND `REGCOM`, `DoReEnter`, `Do16BitPrompt`, and then a source-proven BIOS/DOS `CON` wait; any failure must identify its first original owner/condition. |
-| Asset Needs | T389 S6 evidence, selected CPU40 source union, current x86 formal graph, immutable staged media and existing default-off observer reports. |
-| Reporting Requirements | Record original definitions/callers and retained order across `$Exec`, `REGCOM`, `DoReEnter` and the input transition; distinguish a source invariant from a missing binding; retain exact BOP/file/CPU/Console evidence. |
-| Stop Conditions | Any need to modify guest media, invent a command parser or keyboard/controller protocol, bypass SoftPC with direct guest writes, change generic CPU instruction semantics, or expand into another device/profile pauses for revised package decision. |
-| Exit Criteria | The fixed declared-`command.com` row reaches the original `Do16BitPrompt`/DOS `CON` wait, or its first non-composable original `REGCOM`/`DoReEnter` dependency and owner disposition is recorded. No claim of prompt text, `ver`, line editing, Ctrl+C or child return without direct evidence. |
-| Original Owner Request | “可以，继续。” |
-| Similar-Issue Sweep | NTDOS `$Exec`/`Xfer_To_User`, `demEntryDosApp`, COMMAND `REGCOM`, `SCS_FIRSTCOM`, `SCS_REENTERED`, `SCS_CMDPROMPT`, `DoReEnter`, `Do16BitPrompt`, BIOS INT 16 and DOS CON.  First-shell CONFIG/AUTOEXEC is retained only as a predecessor check, not as child startup work. |
-
-**Predecessor:** [M0 T388 fixed interactive runtime matrix and corrected shell boundary](history/m0-t388-fixed-interactive-runtime-matrix-closure-20260903.md).
+No active M/T/S packet. The queue candidate named above requires a fresh
+owner admission before implementation resumes.
 
 **S1 closure:** [explicit COMMAND child static contract](etc/evidence/m0-t389-s1-explicit-command-child-static-contract-001.md).
 
@@ -58,7 +45,7 @@ controller, ICA or CPU frame with a host parser or direct guest write.
 
 **S8 admission:** recover and observe the original child `COMMAND.COM` `REGCOM -> DoReEnter -> Do16BitPrompt` path up to the source-defined DOS `CON` wait.  The source excludes a second AUTOEXEC run: that batch belongs to the already-started resident shell.  The prior `AH=1` status marker remains unsuitable as a prompt trigger.
 
-**S8 P1:** [second COMMAND re-entry boundary](etc/evidence/m0-t389-s8-child-command-reentry-boundary-001.md) compares identical input and no-input fixed runs.  Both reach the final original `50:36` handoff but neither reaches the child's next `54:0F` or `54:09`; the keyboard event is not causal.  The remaining owner interval is original CPU/guest child initialization before the first `54:0F` environment request.
+**S8 closure:** [second COMMAND re-entry boundary](etc/evidence/m0-t389-s8-child-command-reentry-boundary-001.md) corrects the former `54:0F` inference.  The fixed run completes original NTDOS `$Exec` `RETF` into the child image, then enters the resident first shell's original `AUTOEXEC.NT` `DOSX.EXE` DPMI/WOW bootstrap and its `SYSTEM.INI`/`KRNL386.EXE` discovery.  A pure-DOS profile decision or a DPMI/WOW package is required before the second COMMAND DOS-CON claim can resume; no COMMAND, keyboard, BOP or CPU workaround is admitted.
 
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 

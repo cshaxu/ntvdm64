@@ -25,6 +25,9 @@ RET CPU Functions.
 #include <ret.h>
 #include <c_xfer.h>
 #include <fault.h>
+#ifdef NTVDM
+#include <mvdm_softpc_termination.h>
+#endif
 
 
 /*
@@ -50,6 +53,10 @@ IFN1(
    {
    IU16  new_cs;	/* The return destination */
    IU32 new_ip;
+#ifdef NTVDM
+   IU16 source_cs = GET_CS_SELECTOR();
+   IU32 source_ip = GET_EIP();
+#endif
 
    IU32 cs_descr_addr;	/* code segment descriptor address */
    CPU_DESCR cs_entry;	/* code segment descriptor entry */
@@ -223,6 +230,15 @@ IFN1(
    /* finally increment stack pointer */
    change_SP(stk_inc);
    byte_change_SP((IS32)op1);
+#ifdef NTVDM
+   /* DIVERGENCE(MVDM-HOST-DIV-216): fixed-container diagnosis needs the
+    * completed, original CPU40 far-return contract immediately after the
+    * unchanged destination and stack updates.  This default-off scalar
+    * observer neither changes the decoded RETF nor retains guest state. */
+   mvdm_softpc_record_cpu_far_return((unsigned int)source_cs,
+      (unsigned int)source_ip, (unsigned int)GET_CS_SELECTOR(),
+      (unsigned int)GET_EIP());
+#endif
    }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
