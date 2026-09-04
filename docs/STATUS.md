@@ -3,9 +3,10 @@
 ## Current Work
 
 **M0 T391 S6 is active.** S4 closed the no-argument product hang. Source
-review now distinguishes the two original execution planes: the direct product
-entry classifies one host image before any VDM exists, while a DOS program
-started by guest `COMMAND.COM` remains a same-VDM DOS `EXEC` child.
+review distinguishes direct guest DOS `EXEC` from the later original
+`COMMAND.COM` `54:08` COMSPEC worker path: the former remains same-VDM, while
+one resolved DOS/Win16 image on the latter receives a same-architecture child
+product disposition.
 
 ## Latest Closure
 
@@ -19,17 +20,17 @@ started by guest `COMMAND.COM` remains a same-VDM DOS `EXEC` child.
 | --- | --- |
 | Identifier Mode | M0 T391 S6; ordinary single-person dual-role implementation, review and closure. |
 | Admission And Approval | The owner approved original owner separation: direct native PE is a Windows product-entry request; DOS COM/MZ stays in the current VDM; Win16 stays on the original WOW route. This S6 correction is governed by [the disposition proposal](etc/operations/proposal-command-child-vdm-launch-recovery-001.md). |
-| Objective | Preserve the first-PermCom `IsFirstCall → GetNextVDMCommand` record path for DOS only; classify one direct CLI image before VDM creation; DOS enters VDM, Win16 remains WOW-gated, and every other direct image is handed to Windows; retain original guest DOS `get_binary_type` / `SVC_CMDCHECKBINARY` / `cmdCheckBinary` behavior without a product-child DOS launcher. |
+| Objective | Preserve the first-PermCom `IsFirstCall → GetNextVDMCommand` record path for direct DOS entry; classify one direct CLI image before VDM creation; DOS enters VDM, Win16 remains WOW-gated, and every other direct image is handed to Windows. For the original later `BOP 54:08` `COMSPEC /c` route, use the same classifier to redirect only one resolved DOS/Win16 image to the matching current product child; retain native/compound command behavior and the original `cmdExec32` wait/return chain. |
 | Non-goals | No guest `COMMAND.COM` change; no app-owned shell parser, direct guest-memory launch or synthetic completion; no DOS EXEC/PSP rewrite; no WOW bootstrap, Redirector, CSRSS/BaseSrv broker or fullscreen product-shell recovery. |
 | Reference Baseline | [T391/S5 PermCom initial-record recovery](etc/evidence/m0-t391-s5-permcom-initial-record-recovery-001.md); [same-VDM EXEC evidence](etc/evidence/m0-t391-s6-image-disposition-and-same-vdm-exec-001.md); original `msproc.asm` `$EXEC`, `cmdCheckBinary`, `cmdExec32`; current source-shaped BaseVDM local broker; [the disposition proposal](etc/operations/proposal-command-child-vdm-launch-recovery-001.md). |
-| Files And ABI Surface | Original guest `$EXEC`, COMMAND `cmdCheckBinary`/`cmdExec*`; app launch declaration; BaseVDM local broker and direct-image adapter; formal CPU40 build manifests and `StageProductExecutable.mjs`. |
+| Files And ABI Surface | Original guest `$EXEC`, COMMAND `cmdCheckBinary`/`cmdExec*`; app launch declaration; BaseVDM local broker; shared image-classification helper; COMMAND Win32 process adapter; formal CPU40 build manifests and `StageProductExecutable.mjs`. |
 | Applicable Rules | `docs/rules/EXECUTION.md`, source policy, architecture/coding rules, mapping-manager rule and mirror/overlay discipline. |
-| Verification | Formal CPU40/x86 product build and identity check; direct native `cmd.exe /c exit 37`; original DOS COM/MZ recognition and same-VDM parent return; Win16 explicit bootstrap-gated result; one fixed runtime observation; stage only matching architecture links; `git diff --check`. |
-| Expected Markers | Native direct entry returns `37` without creating a VDM. DOS reaches original `$EXEC` and returns to its parent PSP in the same VDM. Win16 reaches the original WOW disposition and never host unsupported-16-bit launch. |
+| Verification | Formal CPU40/x86 product build and identity check; direct native `cmd.exe /c exit 37`; shared-helper DOS/Win16/native classification; one `54:08` DOS child and original `54:0B` return; Win16 explicit bootstrap-gated result; one fixed runtime observation; stage only matching architecture links; `git diff --check`. |
+| Expected Markers | Native direct entry returns `37` without creating a VDM. A direct DOS target enters the first-PermCom record path. A later simple DOS command follows `54:08 → current-architecture product child → first-PermCom DOS record`, then returns through original `54:0B`; native/compound tails remain on original `cmdExec32`. Win16 reaches the explicit WOW-gated disposition and never the host unsupported-16-bit launch. |
 | Asset Needs | Existing selected DOS media and `cmd.exe /c exit 37` workload, original MVDM source union, current formal build manifests and the sole `O:\\ntvdm64` runtime container. The retained product pair is `ntvdm32.exe` and `ntvdm64.exe` at both the repository `build/output` root and that runtime root. |
 | Reporting Requirements | Record every original import, existing adapter binding, changed mirror reference, failure/completion result and any remaining whole-owner boundary. |
 | Stop Conditions | Stop at a complete original owner boundary, ambiguous command grammar or an unrecorded process/stream ABI. Do not replace it with an app shell parser, direct guest write, trace-selected BOP patch, guest rewrite or a cross-process pointer/HANDLE transfer. |
-| Exit Criteria | Direct native `exit 37` remains proven without VDM startup; a DOS target is proven as same-VDM `EXEC`/parent return; Win16 is bootstrap-gated with an explicit result; S7 repeats selected paths in the frozen Console-owning container. |
+| Exit Criteria | Direct native `exit 37` remains proven without VDM startup; a simple `54:08` DOS target is proven to launch a same-architecture product child and return through the original worker; native/compound tails remain unchanged; Win16 is bootstrap-gated with an explicit result; S7 repeats selected paths in the frozen Console-owning container. |
 | Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。”；“先让纯dos和dos调用32位程序跑通；16位支持先放放。”；“如果是32位程序，按照原来设计方案走；win16和dos程序需要自己按照最合适的语义自己来处理。” |
 | Similar-Issue Sweep | guest `$EXEC`, `SCS_Is_Dos_Binary`, `SCS_DOSONLY`, `54:07`, `cmdCheckBinary`, `cmdExec*`, BaseVDM record production and direct app image disposition. |
 

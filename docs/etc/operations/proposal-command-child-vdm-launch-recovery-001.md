@@ -2,12 +2,13 @@
 
 ## Corrected decision
 
-This proposal supersedes its earlier product-child-DOS hypothesis.  Source
-review of original `msproc.asm::$EXEC` proves that an already-running guest
-`COMMAND.COM` executes recognized DOS COM/MZ targets inside the current VDM;
-they do not create another `ntvdm.exe`.  Earlier text in this file describing
-a COMMAND-side product-child launcher is retained only as rejected planning
-history and must not be implemented or linked.
+Source review of original `msproc.asm::$EXEC` proves that an already-running
+guest `COMMAND.COM` executes recognized DOS COM/MZ targets inside the current
+VDM; that direct DOS `EXEC` route does not create another `ntvdm.exe`. This
+does not cover the distinct original later `BOP 54:08` `COMSPEC /c` route
+selected by normal NT COMMAND prompt processing. For that host-process route,
+the modern adapter replaces only unavailable NT4 automatic VDM spawn for one
+resolved DOS/Win16 image with a same-architecture product child.
 
 ## Purpose
 
@@ -100,10 +101,13 @@ the executables.
    redirection, batch syntax or a non-resolvable first image. Preserve the
    native COMSPEC branch unless a simple legacy image is positively resolved.
 
-Classification first retains the reached `GetBinaryType` contract. A bounded
-adapter header fallback may distinguish DOS COM/MZ, Win16 NE and native PE
-only when public Win32 cannot do so. It operates on a resolved host file and
-copied command text, never on guest pointers and never as a guest parser.
+Classification first retains the reached `GetBinaryType` contract. The single
+`mvdm_image_classify_command_line` helper is shared by direct app entry and
+the `54:08` child-launch adapter, so DOS COM/MZ, Win16 NE and native PE have
+one resolved-file result at both product boundaries. A bounded adapter-header
+fallback may distinguish those formats only when public Win32 cannot. It
+operates on a resolved host file and copied command text, never on guest
+pointers and never as a guest parser.
 
 ## Work Sequence
 
