@@ -23,9 +23,10 @@ mvdm_image_kind mvdm_image_classify_path(const char *path);
  * at the direct product-entry boundary. */
 mvdm_image_kind mvdm_image_classify_command_line(const char *command_line);
 
-/* A direct CLI native image is not an MVDM request.  Preserve inherited
- * console, environment and current directory and return its process exit
- * code.  Shell syntax is deliberately not interpreted here. */
+/* A direct CLI image which is neither DOS nor Win16 is not an MVDM request.
+ * Let public Windows process creation provide the authoritative native or
+ * invalid-image result. Preserve inherited console, environment and current
+ * directory; shell syntax is deliberately not interpreted here. */
 int mvdm_image_launch_native(char *command_line, DWORD *exit_code_out,
     DWORD *failure_out);
 

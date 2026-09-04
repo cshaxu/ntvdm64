@@ -29,9 +29,10 @@ the Base VDM adapter.
 
 `--command <text>` declares one concrete product-entry target. Before a VDM
 exists, app's BaseVDM-facing adapter classifies it without shell parsing:
-native PE starts directly through public Windows process creation, DOS uses the
-original Base VDM split (`AppName` image plus `CmdLine` argument tail), and NE
-is held at the explicit WOW-bootstrap gate. The first resident `COMMAND.COM`
+DOS uses the original Base VDM split (`AppName` image plus `CmdLine` argument
+tail), NE is held at the explicit WOW-bootstrap gate, and every other direct
+image is handed to public Windows process creation for its authoritative
+native/invalid-image outcome. The first resident `COMMAND.COM`
 receives a DOS record through its original BOP and performs the original DOS
 `EXEC`; app does not wrap it in `COMMAND.COM /C`.
 

@@ -39,6 +39,9 @@ The product has two source-distinct image boundaries.
   and linked `original-softpc-process.exe` after the adapter removal.
 - The staged `ntvdm32.exe C:\Windows\System32\cmd.exe /c exit 37` direct
   native test returned `37`, without starting SoftPC/VDM initialization.
+- The staged nonexistent direct target returned product failure `69` promptly,
+  proving it was handed to Windows process creation rather than entering a
+  BaseVDM/PermCom session.
 - A pipe is not valid evidence for guest Console input: a bounded piped
   `COMMAND.COM` smoke test remained in the original Console wait and was
   stopped. Interactive COMMAND/DOS-CON evidence remains a separate runtime

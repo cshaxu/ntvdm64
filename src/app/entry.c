@@ -117,11 +117,12 @@ int main(int argc, char **argv)
         goto finish;
     }
     /* The Windows product boundary classifies a declared image before an
-     * MVDM process exists.  Native PE never becomes a BaseVDM/PermCom record;
-     * DOS remains the original first-PermCom route and Win16 is explicitly
-     * bootstrap-gated until the source-shaped WOW composition is admitted. */
+     * MVDM process exists. DOS remains the original first-PermCom route;
+     * Win16 is bootstrap-gated; every other image belongs to Windows process
+     * creation rather than a BaseVDM/PermCom record. */
     requested_image = app_launch_declaration_requested_image(&declaration);
-    if (requested_image == MVDM_IMAGE_NATIVE) {
+    if (requested_image != MVDM_IMAGE_DOS &&
+        requested_image != MVDM_IMAGE_WIN16) {
         if (!mvdm_image_launch_native(declaration.requested_command,
                 &native_exit_code, NULL)) {
             result = APP_STARTUP_COMMAND_REJECTED;
