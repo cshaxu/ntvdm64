@@ -47,6 +47,10 @@ key through the original worker/8042/ICA/BIOS/DOS route. Do not introduce a
 host command parser, synthetic BOP, direct guest-memory write, guest change or
 CPU workaround.
 
+**S5 P1 evidence:** [pure-DOS normal Console key observation](etc/evidence/m0-t390-s5-p1-pure-dos-normal-console-key-observation-001.md). The original worker accepts the ordinary `v` key and queues it through 8042/ICA, but CPU40 records the pending hardware interrupt with `IF=0`; no port-60 read, DOS `CON` consumption, `VER` output or prompt is claimed. S5 continues with the original CLI/STI/IRET and CPU40 continuity audit.
+
+**S5 P1 evidence:** [pure-DOS normal Console key observation](etc/evidence/m0-t390-s5-p1-pure-dos-normal-console-key-observation-001.md). The original worker accepts the ordinary `v` key and queues it through 8042/ICA, but CPU40 records the pending hardware interrupt with `IF=0`; no port-60 read, DOS `CON` consumption, `VER` output or prompt is claimed. S5 continues with the original CLI/STI/IRET and CPU40 continuity audit.
+
 **S1 closure:** [explicit COMMAND child static contract](etc/evidence/m0-t389-s1-explicit-command-child-static-contract-001.md).
 
 **S2 closure:** [explicit COMMAND record contract](etc/evidence/m0-t389-s2-explicit-command-record-contract-001.md).
