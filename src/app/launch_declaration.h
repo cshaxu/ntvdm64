@@ -11,6 +11,7 @@ typedef struct app_launch_declaration {
     base_vdm_broker broker;
     uint32_t bound;
     uint32_t command_declared;
+    uint32_t command_resolved;
     char requested_command[MAXIMUM_VDM_COMMAND_LENGTH];
     /* The original BaseVDM AppName carrier identifies the program which the
      * resident COMMAND asks DOS to EXEC.  It is deliberately distinct from
@@ -32,6 +33,8 @@ int app_launch_declaration_consume_options(app_launch_declaration *declaration,
     int *argc, char **argv);
 mvdm_image_kind app_launch_declaration_requested_image(
     const app_launch_declaration *declaration);
+int app_launch_declaration_resolve_requested_command(
+    app_launch_declaration *declaration);
 int app_launch_declaration_prepare_softpc_arguments(int argc, char **argv,
     int *softpc_argc, char ***softpc_argv);
 void app_launch_declaration_release_softpc_arguments(char **softpc_argv);

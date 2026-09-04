@@ -40,8 +40,11 @@ generic host-service shortcut.
   guest; original `GetPIFData` remains its parser/owner.
 - `ADAPTER-BASESRV-011` — `basesrv/source/mvdm_image_classification.c` is the
   direct product-entry counterpart of the Windows loader's pre-VDM image
-  selection. It recognizes one concrete DOS, Win16 or native image without
-  parsing shell syntax. Native PE is launched by public `CreateProcessA`
-  before any VDM exists; DOS proceeds through the unchanged BaseVDM record and
-  first PermCom; Win16 is explicitly bootstrap-gated. No classification bit
-  enters `VDMINFO`, guest memory or original `cmdmisc.c`.
+  selection. It resolves one token in DOS `.COM`/`.EXE`/`.BAT` order first
+  beside the product, then through the ordinary current-directory/PATH search,
+  and recognizes a resolved DOS, Win16 or native image without parsing shell
+  syntax. Native PE is launched by public `CreateProcessA` before any VDM
+  exists; DOS proceeds through the unchanged BaseVDM record and first PermCom;
+  Win16 is explicitly bootstrap-gated. An unresolvable token remains a public
+  `COMSPEC /c` host-shell request. No classification bit enters `VDMINFO`,
+  guest memory or original `cmdmisc.c`.

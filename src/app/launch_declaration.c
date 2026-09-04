@@ -116,6 +116,20 @@ mvdm_image_kind app_launch_declaration_requested_image(
     return mvdm_image_classify_command_line(declaration->requested_command);
 }
 
+int app_launch_declaration_resolve_requested_command(
+    app_launch_declaration *declaration)
+{
+    char resolved[MAXIMUM_VDM_COMMAND_LENGTH];
+    mvdm_image_kind image_kind;
+
+    if (declaration == NULL || declaration->command_declared == 0u) return 0;
+    if (!mvdm_image_resolve_command_line(declaration->requested_command,
+            resolved, sizeof(resolved), &image_kind)) return 0;
+    memcpy(declaration->requested_command, resolved, strlen(resolved) + 1u);
+    declaration->command_resolved = 1u;
+    return 1;
+}
+
 int app_launch_declaration_prepare_softpc_arguments(int argc, char **argv,
     int *softpc_argc, char ***softpc_argv)
 {

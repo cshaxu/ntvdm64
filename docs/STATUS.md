@@ -6,7 +6,9 @@
 review distinguishes direct guest DOS `EXEC` from the later original
 `COMMAND.COM` `54:08` COMSPEC worker path: the former remains same-VDM, while
 one resolved DOS/Win16 image on the latter receives a same-architecture child
-product disposition.
+product disposition. Direct app entry now resolves `.COM`/`.EXE`/`.BAT` first
+beside the product and then through current-directory/PATH; an unresolved
+token retains the public `COMSPEC /c` host-shell route.
 
 ## Latest Closure
 
@@ -20,7 +22,7 @@ product disposition.
 | --- | --- |
 | Identifier Mode | M0 T391 S6; ordinary single-person dual-role implementation, review and closure. |
 | Admission And Approval | The owner approved original owner separation: direct native PE is a Windows product-entry request; DOS COM/MZ stays in the current VDM; Win16 stays on the original WOW route. This S6 correction is governed by [the disposition proposal](etc/operations/proposal-command-child-vdm-launch-recovery-001.md). |
-| Objective | Preserve the first-PermCom `IsFirstCall → GetNextVDMCommand` record path for direct DOS entry; classify one direct CLI image before VDM creation; DOS enters VDM, Win16 remains WOW-gated, and every other direct image is handed to Windows. For the original later `BOP 54:08` `COMSPEC /c` route, use the same classifier to redirect only one resolved DOS/Win16 image to the matching current product child; retain native/compound command behavior and the original `cmdExec32` wait/return chain. |
+| Objective | Preserve the first-PermCom `IsFirstCall → GetNextVDMCommand` record path for direct DOS entry; resolve one direct CLI token with DOS `.COM`/`.EXE`/`.BAT` precedence beside the product then through current-directory/PATH, classify it before VDM creation, route DOS into VDM and Win16 to its WOW gate, and retain public `COMSPEC /c` for an unresolved host-shell token. For the original later `BOP 54:08` `COMSPEC /c` route, use the same classifier to redirect only one resolved DOS/Win16 image to the matching current product child; retain native/compound command behavior and the original `cmdExec32` wait/return chain. |
 | Non-goals | No guest `COMMAND.COM` change; no app-owned shell parser, direct guest-memory launch or synthetic completion; no DOS EXEC/PSP rewrite; no WOW bootstrap, Redirector, CSRSS/BaseSrv broker or fullscreen product-shell recovery. |
 | Reference Baseline | [T391/S5 PermCom initial-record recovery](etc/evidence/m0-t391-s5-permcom-initial-record-recovery-001.md); [same-VDM EXEC evidence](etc/evidence/m0-t391-s6-image-disposition-and-same-vdm-exec-001.md); original `msproc.asm` `$EXEC`, `cmdCheckBinary`, `cmdExec32`; current source-shaped BaseVDM local broker; [the disposition proposal](etc/operations/proposal-command-child-vdm-launch-recovery-001.md). |
 | Files And ABI Surface | Original guest `$EXEC`, COMMAND `cmdCheckBinary`/`cmdExec*`; app launch declaration; BaseVDM local broker; shared image-classification helper; COMMAND Win32 process adapter; formal CPU40 build manifests and `StageProductExecutable.mjs`. |

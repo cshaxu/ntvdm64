@@ -28,11 +28,14 @@ whether this is the first DOS VDM. A declared command payload remains owned by
 the Base VDM adapter.
 
 `--command <text>` declares one concrete product-entry target. Before a VDM
-exists, app's BaseVDM-facing adapter classifies it without shell parsing:
-DOS uses the original Base VDM split (`AppName` image plus `CmdLine` argument
-tail), NE is held at the explicit WOW-bootstrap gate, and every other direct
-image is handed to public Windows process creation for its authoritative
-native/invalid-image outcome. The first resident `COMMAND.COM`
+exists, app's BaseVDM-facing adapter resolves one executable token in DOS
+`.COM`, `.EXE`, `.BAT` order, first beside the product and then through the
+ordinary current-directory/PATH search. A resolved DOS image uses the original
+Base VDM split (`AppName` image plus `CmdLine` argument tail), NE is held at
+the explicit WOW-bootstrap gate, and a resolved native image is handed to
+public Windows process creation. An unresolved token is forwarded unchanged to
+`COMSPEC /c`, preserving host built-ins and shell syntax without an app parser.
+The first resident `COMMAND.COM`
 receives a DOS record through its original BOP and performs the original DOS
 `EXEC`; app does not wrap it in `COMMAND.COM /C`.
 
@@ -114,7 +117,7 @@ neither creates a DOS-device alias nor changes guest/firmware bytes.
 | --- | --- | --- | --- | --- |
 | `APP-DIV-014` | Original NT installations supplied a short `%SystemRoot%` to `cmdconf.c`; NTDOS stored the generated shell value in `commnd`. | Modern portable package roots can exceed the original 63-visible-byte shell-value capacity and otherwise overflow the unchanged guest contract. | App computes the unchanged original generated-value length, rejects an invalid package before startup, and shows an app-owned explanatory dialog. | `package_layout.c`, `package_layout.h`, `entry.c` |
 | `APP-DIV-015` | Original COMMAND environment initialization enumerates its inherited host environment. | A host-only continuation-observer path must not enter the original guest environment/allocation input. | App captures the explicitly optional path before original startup, deletes that one inherited variable, and the adapter uses only its private bounded copy. | `entry.c`; `../adapter-mvdm-host-out/softpc/{include/mvdm_softpc_termination.h,mvdm_softpc_termination.c}` |
-| `APP-DIV-017` | NT4's ordinary bare VDM can wait for a CSRSS/BaseSrv command producer after startup and ordinarily selects configuration through the original BaseVDM PIF carrier. | The unpack-and-run one-session CLI has no CSRSS producer and must not silently fall back to the DOSX/WOW default when its declared product scope is pure DOS. | App keeps the first `COMMAND.COM` as PermCom. It supplies a declared target through the original `AppName`/`CmdLine` split, enables the existing exhaustion disposition only after that record is consumed, and supplies the same packaged `pure-dos.pif` path through `PifFile`. A bare launch uses only a bounded child `/C` tail; explicit targets, including `COMMAND.COM`, are never wrapped in `/C`. | `launch_declaration.c`; `../adapter-mvdm-host-out/basesrv/source/base_vdm_local.c` |
+| `APP-DIV-017` | NT4's ordinary bare VDM can wait for a CSRSS/BaseSrv command producer after startup and ordinarily selects configuration through the original BaseVDM PIF carrier. | The unpack-and-run one-session CLI has no CSRSS producer and must not silently fall back to the DOSX/WOW default when its declared product scope is pure DOS. | App keeps the first `COMMAND.COM` as PermCom. It supplies a declared target through the original `AppName`/`CmdLine` split, enables the existing exhaustion disposition only after that record is consumed, and supplies the same packaged `pure-dos.pif` path through `PifFile`. Before copying a declared image it asks the adapter to resolve `.COM`/`.EXE`/`.BAT` beside the product then through current-directory/PATH; an unresolved token remains a public `COMSPEC /c` request. A bare launch uses only a bounded child `/C` tail; explicit targets, including `COMMAND.COM`, are never wrapped in `/C`. | `launch_declaration.c`; `../adapter-mvdm-host-out/basesrv/{source/base_vdm_local.c,source/mvdm_image_classification.c}` |
 
 ## M0 T346 S3 presentation window
 

@@ -1,5 +1,7 @@
 #include "adapter-mvdm-host-out/basesrv/include/mvdm_image_classification.h"
+#include "vdmapi.h"
 
+#include <stdio.h>
 #include <string.h>
 
 static int has_extension(const char *path)
@@ -38,6 +40,62 @@ static int copy_image_token(const char *text, char *image,
     if (count == 0u) return 0;
     image[count] = '\0';
     return 1;
+}
+
+static const char *image_argument_tail(const char *text)
+{
+    const char *cursor;
+    int quoted = 0;
+
+    if (text == NULL) return NULL;
+    cursor = text;
+    while (*cursor == ' ' || *cursor == '\t') ++cursor;
+    if (*cursor == '"') {
+        quoted = 1;
+        ++cursor;
+    }
+    while (*cursor != '\0') {
+        if ((quoted && *cursor == '"') ||
+            (!quoted && (*cursor == ' ' || *cursor == '\t'))) break;
+        ++cursor;
+    }
+    if (quoted && *cursor == '"') ++cursor;
+    while (*cursor == ' ' || *cursor == '\t') ++cursor;
+    return cursor;
+}
+
+static int resolve_image_token(const char *image, char *resolved,
+    size_t resolved_bytes)
+{
+    static const char *const dos_extensions[] = { ".COM", ".EXE", ".BAT" };
+    char product[MAX_PATH];
+    char *last_slash;
+    size_t index;
+    DWORD result;
+
+    if (image == NULL || resolved == NULL || resolved_bytes == 0u) return 0;
+    product[0] = '\0';
+    if (strchr(image, '\\') == NULL && strchr(image, '/') == NULL &&
+        GetModuleFileNameA(NULL, product, (DWORD)sizeof(product)) != 0u) {
+        last_slash = strrchr(product, '\\');
+        if (last_slash == NULL) last_slash = strrchr(product, '/');
+        if (last_slash != NULL) *last_slash = '\0';
+    }
+    for (index = 0u; index < sizeof(dos_extensions) / sizeof(dos_extensions[0]);
+            ++index) {
+        const char *extension = has_extension(image) ? NULL : dos_extensions[index];
+
+        if (product[0] != '\0') {
+            result = SearchPathA(product, image, extension,
+                (DWORD)resolved_bytes, resolved, NULL);
+            if (result != 0u && result < resolved_bytes) return 1;
+        }
+        result = SearchPathA(NULL, image, extension, (DWORD)resolved_bytes,
+            resolved, NULL);
+        if (result != 0u && result < resolved_bytes) return 1;
+        if (has_extension(image)) break;
+    }
+    return 0;
 }
 
 mvdm_image_kind mvdm_image_classify_path(const char *path)
@@ -88,16 +146,35 @@ system_type:
 
 mvdm_image_kind mvdm_image_classify_command_line(const char *command_line)
 {
+    mvdm_image_kind image_kind;
+    char resolved_command_line[MAX_PATH + MAXIMUM_VDM_COMMAND_LENGTH + 4u];
+
+    if (!mvdm_image_resolve_command_line(command_line, resolved_command_line,
+            sizeof(resolved_command_line), &image_kind))
+        return MVDM_IMAGE_UNKNOWN;
+    return image_kind;
+}
+
+int mvdm_image_resolve_command_line(const char *command_line,
+    char *resolved_command_line, size_t resolved_command_line_bytes,
+    mvdm_image_kind *image_kind_out)
+{
     char image[MAX_PATH];
     char resolved[MAX_PATH];
-    DWORD result;
+    const char *tail;
+    int formatted;
 
-    if (!copy_image_token(command_line, image, sizeof(image)))
-        return MVDM_IMAGE_UNKNOWN;
-    result = SearchPathA(NULL, image, has_extension(image) ? NULL : ".EXE",
-        (DWORD)sizeof(resolved), resolved, NULL);
-    if (result == 0u || result >= sizeof(resolved)) return MVDM_IMAGE_UNKNOWN;
-    return mvdm_image_classify_path(resolved);
+    if (image_kind_out != NULL) *image_kind_out = MVDM_IMAGE_UNKNOWN;
+    if (!copy_image_token(command_line, image, sizeof(image)) ||
+        !resolve_image_token(image, resolved, sizeof(resolved))) return 0;
+    tail = image_argument_tail(command_line);
+    if (tail == NULL) return 0;
+    formatted = snprintf(resolved_command_line, resolved_command_line_bytes,
+        "\"%s\"%s%s", resolved, *tail != '\0' ? " " : "", tail);
+    if (formatted < 0 || (size_t)formatted >= resolved_command_line_bytes)
+        return 0;
+    if (image_kind_out != NULL) *image_kind_out = mvdm_image_classify_path(resolved);
+    return 1;
 }
 
 int mvdm_image_launch_native(char *command_line, DWORD *exit_code_out,
@@ -132,4 +209,32 @@ int mvdm_image_launch_native(char *command_line, DWORD *exit_code_out,
     }
     CloseHandle(process.hProcess);
     return 1;
+}
+
+int mvdm_image_launch_shell_command(const char *command_line,
+    DWORD *exit_code_out, DWORD *failure_out)
+{
+    char comspec[MAX_PATH];
+    char shell_command[MAX_PATH + MAXIMUM_VDM_COMMAND_LENGTH + 8u];
+    DWORD bytes;
+    int formatted;
+
+    if (exit_code_out != NULL) *exit_code_out = 0u;
+    if (failure_out != NULL) *failure_out = ERROR_SUCCESS;
+    if (command_line == NULL || command_line[0] == '\0') {
+        if (failure_out != NULL) *failure_out = ERROR_INVALID_PARAMETER;
+        return 0;
+    }
+    bytes = GetEnvironmentVariableA("COMSPEC", comspec, (DWORD)sizeof(comspec));
+    if (bytes == 0u || bytes >= sizeof(comspec)) {
+        if (failure_out != NULL) *failure_out = GetLastError();
+        return 0;
+    }
+    formatted = snprintf(shell_command, sizeof(shell_command), "\"%s\" /c %s",
+        comspec, command_line);
+    if (formatted < 0 || (size_t)formatted >= sizeof(shell_command)) {
+        if (failure_out != NULL) *failure_out = ERROR_FILENAME_EXCED_RANGE;
+        return 0;
+    }
+    return mvdm_image_launch_native(shell_command, exit_code_out, failure_out);
 }

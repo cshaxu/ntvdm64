@@ -120,11 +120,21 @@ int main(int argc, char **argv)
      * MVDM process exists. DOS remains the original first-PermCom route;
      * Win16 is bootstrap-gated; every other image belongs to Windows process
      * creation rather than a BaseVDM/PermCom record. */
+    if (declaration.command_declared != 0u)
+        (void)app_launch_declaration_resolve_requested_command(&declaration);
     requested_image = app_launch_declaration_requested_image(&declaration);
     if (requested_image != MVDM_IMAGE_DOS &&
         requested_image != MVDM_IMAGE_WIN16) {
-        if (!mvdm_image_launch_native(declaration.requested_command,
-                &native_exit_code, NULL)) {
+        /* An unresolved token can be an ordinary host shell builtin (VER,
+         * DIR, SET, ...).  Do not reject it at the product boundary: preserve
+         * the original COMSPEC /c owner.  A resolved native image remains a
+         * direct public CreateProcess request. */
+        if ((declaration.command_resolved != 0u &&
+                !mvdm_image_launch_native(declaration.requested_command,
+                    &native_exit_code, NULL)) ||
+            (declaration.command_resolved == 0u &&
+                !mvdm_image_launch_shell_command(declaration.requested_command,
+                    &native_exit_code, NULL))) {
             result = APP_STARTUP_COMMAND_REJECTED;
         } else {
             result = (int)native_exit_code;

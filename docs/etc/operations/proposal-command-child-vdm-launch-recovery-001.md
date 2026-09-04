@@ -13,10 +13,14 @@ resolved DOS/Win16 image with a same-architecture product child.
 ## Purpose
 
 Recover the original execution boundary without replacing guest DOS `EXEC`.
-At direct product entry, classify exactly one concrete target before any VDM
-exists: DOS opens the ordinary BaseVDM/PermCom route, native PE starts through
-public Windows process creation, and Win16 is held at the WOW bootstrap gate.
-Inside an existing guest `COMMAND.COM`, retain the original DOS format check,
+At direct product entry, first resolve one concrete executable token in DOS
+name order (`.COM`, `.EXE`, `.BAT`) beside the product and then through the
+ordinary current-directory/PATH search. Only a resolved file is classified
+before any VDM exists: DOS opens the ordinary BaseVDM/PermCom route, native PE
+starts through public Windows process creation, and Win16 is held at the WOW
+bootstrap gate. An unresolved token retains the original host-shell
+`COMSPEC /c` disposition, so built-ins such as `ver` remain with their normal
+owner. Inside an existing guest `COMMAND.COM`, retain the original DOS format check,
 `cmdCheckBinary`, `cmdExec32`, parent PSP and DOS `CON` paths.
 
 This is the admitted final S6 scope of T391, not a replacement COMMAND
@@ -125,6 +129,12 @@ one resolved-file result at both product boundaries. A bounded adapter-header
 fallback may distinguish those formats only when public Win32 cannot. It
 operates on a resolved host file and copied command text, never on guest
 pointers and never as a guest parser.
+
+At direct product entry, the same helper returns the resolved executable path
+and copied argument tail. App replaces only its private declaration with that
+resolved path before producing the original `AppName`/`CmdLine` record; it
+does not search or rewrite a guest command line. If resolution fails, app
+forwards the untouched declared text to `COMSPEC /c`.
 
 ## Work Sequence
 
