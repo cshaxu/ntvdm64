@@ -228,8 +228,11 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
             &command_length, "\r\n") ||
         !append_text(declaration->environment, sizeof(declaration->environment),
             &environment_length, "COMSPEC=") ||
-        !append_text(declaration->environment, sizeof(declaration->environment),
-            &environment_length, declaration->application)) return 0;
+         !append_text(declaration->environment, sizeof(declaration->environment),
+             &environment_length, declaration->application)) return 0;
+    if (interactive_command != 0 &&
+        !make_path(declaration->pif, sizeof(declaration->pif), root,
+            "profiles\\pure-dos\\pure-dos.pif")) return 0;
     if (environment_length + 1u >= sizeof(declaration->environment)) return 0;
     declaration->environment[environment_length++] = '\0';
     declaration->environment[environment_length] = '\0';
@@ -261,6 +264,10 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     command.command_bytes = (uint16_t)(command_length + 1u);
     command.application = (const uint8_t *)declaration->application;
     command.application_bytes = (uint16_t)(strlen(declaration->application) + 1u);
+    command.pif = interactive_command != 0 ?
+        (const uint8_t *)declaration->pif : NULL;
+    command.pif_bytes = interactive_command != 0 ?
+        (uint16_t)(strlen(declaration->pif) + 1u) : 0u;
     command.environment = (const uint8_t *)declaration->environment;
     command.environment_bytes = (uint32_t)environment_length;
     command.current_directory = (const uint8_t *)declaration->current_directory;

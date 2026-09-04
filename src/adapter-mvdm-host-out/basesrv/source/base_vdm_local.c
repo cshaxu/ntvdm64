@@ -15,7 +15,7 @@ static void base_vdm_local_record_request(const base_vdm_local *record,
     USHORT state, NTSTATUS status)
 {
     char path[MAX_PATH];
-    char line[192];
+    char line[224];
     DWORD path_bytes;
     HANDLE file;
     DWORD written;
@@ -26,11 +26,12 @@ static void base_vdm_local_record_request(const base_vdm_local *record,
     if (path_bytes == 0u || path_bytes >= sizeof(path) || record == NULL)
         return;
     formatted = snprintf(line, sizeof(line),
-        "MVDM-BASEVDM state=%04X available=%lu owner=%lu dos-state=%lu pending=%lu status=%08lX\\r\\n",
+        "MVDM-BASEVDM state=%04X available=%lu owner=%lu dos-state=%lu pending=%lu pif-bytes=%u status=%08lX\\r\\n",
         (unsigned int)state, (unsigned long)record->available,
         (unsigned long)record->command_owner,
         (unsigned long)record->dos_record_state,
-        (unsigned long)record->pending_request, (unsigned long)status);
+        (unsigned long)record->pending_request,
+        (unsigned int)record->pif_bytes, (unsigned long)status);
     if (formatted <= 0 || (size_t)formatted >= sizeof(line)) return;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
@@ -89,8 +90,9 @@ int base_vdm_local_valid(const base_vdm_local *record)
         record->reserved1 == 0u &&
         (record->command_owner == BASE_VDM_COMMAND_DOS ||
          record->command_owner == BASE_VDM_COMMAND_WOW) &&
-        record->command_bytes <= MAXIMUM_VDM_COMMAND_LENGTH &&
-        record->application_bytes <= MAX_PATH &&
+         record->command_bytes <= MAXIMUM_VDM_COMMAND_LENGTH &&
+         record->application_bytes <= MAX_PATH &&
+         record->pif_bytes <= MAX_PATH &&
         record->environment_bytes <= MAXIMUM_VDM_ENVIORNMENT &&
         record->current_directory_bytes <= MAX_PATH + 1u &&
         record->lock_initialized == 1u && record->wake_event != NULL &&
@@ -111,7 +113,10 @@ int base_vdm_local_publish(base_vdm_local *record, const base_vdm_command *comma
          command->command_owner != BASE_VDM_COMMAND_WOW) ||
         command->command_bytes == 0u ||
         !valid_bytes(command->command, command->command_bytes, MAXIMUM_VDM_COMMAND_LENGTH) ||
-        !valid_bytes(command->application, command->application_bytes, MAX_PATH) ||
+         !valid_bytes(command->application, command->application_bytes, MAX_PATH) ||
+         !valid_bytes(command->pif, command->pif_bytes, MAX_PATH) ||
+         (command->pif_bytes != 0u &&
+          command->pif[command->pif_bytes - 1u] != '\0') ||
         !valid_bytes(command->environment, command->environment_bytes, MAXIMUM_VDM_ENVIORNMENT) ||
         /* CurDirectory is a host path carried to the original BaseClient
          * caller.  Original COMMAND advertises MAX_PATH + 1 bytes, not the
@@ -121,7 +126,8 @@ int base_vdm_local_publish(base_vdm_local *record, const base_vdm_command *comma
     EnterCriticalSection(&record->lock);
     if (record->available != 0u) goto done;
     if (!copy_bytes(record->command, command->command, command->command_bytes) ||
-        !copy_bytes(record->application, command->application, command->application_bytes) ||
+         !copy_bytes(record->application, command->application, command->application_bytes) ||
+         !copy_bytes(record->pif, command->pif, command->pif_bytes) ||
         !copy_bytes(record->environment, command->environment, command->environment_bytes) ||
         !copy_bytes(record->current_directory, command->current_directory, command->current_directory_bytes)) goto done;
     record->task = command->task;
@@ -133,6 +139,7 @@ int base_vdm_local_publish(base_vdm_local *record, const base_vdm_command *comma
     record->command_owner = command->command_owner;
     record->command_bytes = command->command_bytes;
     record->application_bytes = command->application_bytes;
+    record->pif_bytes = command->pif_bytes;
     record->environment_bytes = command->environment_bytes;
     record->current_directory_bytes = command->current_directory_bytes;
     record->available = 1u;
@@ -179,13 +186,15 @@ static int is_wow_request(USHORT state)
  * BaseSrvFillPifInfo in base/win32/server/srvvdm.c.  The original server
  * serves this query from the DOS record without consuming that record.  This
  * product has no CSRSS console-record list, but its copied record retains the
- * same host-side PIF/title/current-directory fields.  There is no PIF payload
- * in the admitted launch declaration, so PifFile and Reserved are reported as
- * empty; Title follows the original AppName fallback. */
+ * same host-side PIF/title/current-directory fields.  The bounded app
+ * declaration now retains PifFile as the original ANSI capture; it is copied
+ * only to the caller-provided VDMINFO buffer and never becomes guest state.
+ * Reserved remains unavailable; Title follows the original AppName fallback. */
 static NTSTATUS fill_pif_info(const base_vdm_local *record,
     PVDMINFO information)
 {
     uint32_t title_bytes = record->application_bytes;
+    uint32_t pif_bytes = record->pif_bytes;
     uint32_t directory_bytes = record->current_directory_bytes;
 
     if (information->PifLen != 0u && information->PifFile == NULL)
@@ -196,12 +205,19 @@ static NTSTATUS fill_pif_info(const base_vdm_local *record,
         return STATUS_INVALID_PARAMETER;
     if (information->ReservedLen != 0u && information->Reserved == NULL)
         return STATUS_INVALID_PARAMETER;
-    if ((information->TitleLen != 0u && title_bytes > information->TitleLen) ||
+    if ((information->PifLen != 0u && pif_bytes > information->PifLen) ||
+        (information->TitleLen != 0u && title_bytes > information->TitleLen) ||
         (information->CurDirectoryLen != 0u &&
             directory_bytes > information->CurDirectoryLen))
         return STATUS_INVALID_PARAMETER;
 
-    if (information->PifLen != 0u) ((CHAR *)information->PifFile)[0] = '\0';
+    if (information->PifLen != 0u) {
+        if (pif_bytes != 0u)
+            (void)copy_bytes((uint8_t *)information->PifFile, record->pif,
+                pif_bytes);
+        else
+            ((CHAR *)information->PifFile)[0] = '\0';
+    }
     if (information->ReservedLen != 0u) ((CHAR *)information->Reserved)[0] = '\0';
     if (information->TitleLen != 0u) {
         if (title_bytes != 0u)
@@ -218,7 +234,7 @@ static NTSTATUS fill_pif_info(const base_vdm_local *record,
             ((CHAR *)information->CurDirectory)[0] = '\0';
     }
 
-    information->PifLen = 0u;
+    information->PifLen = (USHORT)pif_bytes;
     information->TitleLen = (USHORT)title_bytes;
     information->CurDirectoryLen = (USHORT)directory_bytes;
     information->ReservedLen = 0u;

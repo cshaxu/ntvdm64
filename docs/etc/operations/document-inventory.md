@@ -12,9 +12,9 @@ content-divergent entries.
 
 ## Snapshot
 
-| Documentation records | 3995 |
+| Documentation records | 3999 |
 | --- | --- |
-| Generated UTC | 2026-09-04T05:10:50Z |
+| Generated UTC | 2026-09-04T05:38:45Z |
 
 ## Entries
 
@@ -200,7 +200,7 @@ content-divergent entries.
 | OWNED-MONITOR-M2-ORACLE-ADAPTER-WORK-ORDER.md | retained pre-governance evidence | 814ac7b68b9bc7da557b4e038d99ca80be03af875e76de47912d574e90d07fd1 |
 | OWNED-MONITOR-M3-EXECUTION-BACKEND-WORK-ORDER.md | retained pre-governance evidence | 3d8961c8a043180ef2bc1acbae6d37572117bd82e625398b0c489a143625ec9e |
 | OWNED-USERMODE-MONITOR-ORACLE-PLAN.md | retained pre-governance evidence | db5c10552d5c025b729c89f509e5c6b6980c63022317e43339fbf41413c6616a |
-| QUEUE.md | principal control document | b0fc35ad94f350227788ad6216e8054012edcf2b7be70b3edbc13e46b0a2dafa |
+| QUEUE.md | principal control document | 081eefd7019e082fc80658dc29175b588f65b499a3c322de9f8deb06ae78e3d4 |
 | R1-CCPU-CVIDC-ABI-MATRIX.md | retained pre-governance evidence | 70fe20b7c9deff5c3047be5c19e9bf05d694cfceb0029868c7f50b0a1b220c80 |
 | R1-CCPU-CVIDC-COMPOSITION-RECOVERY-SPEC.md | retained pre-governance evidence | da0b0c7d2ce85cc12821c1e13c2137106233e420fe6a002d0ec22cb778c021f5 |
 | R1-CCPU-CVIDC-INPUT-ACQUISITION-CONTRACT.md | retained pre-governance evidence | f2208c7c8331b2fe0af859317b5ba4b11b461934ff1f7aee98759b1a626bd56e |
@@ -252,7 +252,7 @@ content-divergent entries.
 | SOFTPC-RECONSTRUCTION-GOVERNANCE.md | retained pre-governance evidence | b0b437128f0663bb74172d3db4d61a47d0baf701df2786e882048a9221b20b36 |
 | SOFTPC-RECONSTRUCTION-ROADMAP.md | retained pre-governance evidence | 77ccb0dfca3b36dd26ea98dff59818ec812d53ccda5b8fd3436cb41c164ead05 |
 | SOFTPC-STARTUP-HOST-CLOSURE.md | retained pre-governance evidence | dfbd0327de34a07ca6614a20a46a9931492c8115f59a05f8cfee83121419c0a2 |
-| STATUS.md | principal control document | 9ddaedd3ad9580724dc2ee49c078e26ff19fb1b2694c46e05a622c08ae34657c |
+| STATUS.md | principal control document | aa5adbd392333bf91762a49d2d9c616b23db5e87807925a677dc06746c1cc41e |
 | SVC-DEMLOADDOS-HISTORICAL-CONTRACT.md | retained pre-governance evidence | adebd9699f25a0ec2c500f212ef84b0c2a59f3d63bc733e6ab0ec12097721632 |
 | SYSINIT-COMMAND-HANDOFF-DEPENDENCY-LEDGER.md | retained pre-governance evidence | 4f2c657d5077ed85a71a48096c7318fb2d2dc754ab028db384cb6d87bb4355b4 |
 | TODO.md | principal control document | 4a077aefee71b04d1fa421aa30148e98dab40c96d76c31d5026354449427498c |
@@ -1332,6 +1332,9 @@ content-divergent entries.
 | etc/evidence/m0-t389-s7-post-bop-if-provenance-003.md | indexed supporting material | 2d6bb7fa01f8e3e61fc097e5c712e7aa3043ca0442c2f7a85d2c8c9a7554d761 |
 | etc/evidence/m0-t389-s8-child-command-reentry-boundary-001.md | indexed supporting material | 0b3e026c95b73a9b2a1235623d326e048750af236aed214f88c94f7ae0a48a60 |
 | etc/evidence/m0-t390-s1-pure-dos-configuration-carrier-audit-001.md | indexed supporting material | 7e0367bd1a20ba624e3451290a506eda6a989899db74fe1b9b0e221131129eba |
+| etc/evidence/m0-t390-s2-original-pif-capture-and-stage-binding-001.md | indexed supporting material | 3f7460ce25d20393f532f74b12f2db09a19ce8dbbc6216938633b21d1875bc5f |
+| etc/evidence/m0-t390-s3-original-pif-fallback-and-predecessor-001.md | indexed supporting material | 7d82dc06074523fe5ec4ed4293763dcd36275535761c3f119611b789cba34ac5 |
+| etc/evidence/m0-t390-s4-pure-dos-normal-child-predecessor-001.md | indexed supporting material | 0ec0adf9d7c589dfb3658fd2188e96a5435e78c1e35224a20cb9e39d04c23313 |
 | etc/evidence/m0-t95-status-ledger-20260811.md | indexed supporting material | ea346ff2bbee10724ac1c9155cb498c93f82a9a74d4db51c0483c75fdd2f4588 |
 | etc/evidence/m0-td-s3-p1-ten-component-owner-ratification-001.md | indexed supporting material | bb49ad335260de862e37bc7653ab5d050474b7cdff6eb624cfdb95dec4b554e3 |
 | etc/evidence/opennt-kernel-vdm-contract-package-audit-001.md | indexed supporting material | 1a1bc7ddc41196f62a9d4dead2b44ad52684acf8fc451f4030ee0cf9ea5ed19f |
@@ -2219,6 +2222,7 @@ content-divergent entries.
 | etc/operations/proposal-cpu40-recursive-frame-guest-reentry-closure-001.md | indexed supporting material | d25d052c69494729b58ea8b30835a2e68ef057a0ff6d64bcd9b2c5c58399d33c |
 | etc/operations/proposal-current-naming-convergence-001.md | indexed supporting material | 214c6356a2a52f218e4d128d1598f7b6956e6bddc397db8b597d56bff63d7e23 |
 | etc/operations/proposal-dos-wow16-complete-source-build-closure-001.md | indexed supporting material | 3da5ac3935fbee1542946e0dfedf75d841836e0e0c7151536e88f5c44854f862 |
+| etc/operations/proposal-dosx-dpmi-runtime-activation-001.md | indexed supporting material | c96ec80c499e9b07015ac38d8cf34583475d1987bbcec5c1a7b63279bb1a51df |
 | etc/operations/proposal-executable-relative-mvdm-path-capacity-001.md | indexed supporting material | 784693aac2355b21998698d1bf8368079278b271e15e61a0f34b8374a85b12d5 |
 | etc/operations/proposal-explicit-interactive-command-profile-001.md | indexed supporting material | 27a5f9102441488d0dcdcd06ad79e3ee1b75a18cfa4bc3a8ec7bb3c81658db69 |
 | etc/operations/proposal-formal-build-entrypoint-and-reconstructed-monitor-fixture-repair-001.md | indexed supporting material | 8c20c430a033b448bf3de92e21f8ba32760c80fae225b5c0fa14ab4cc0814b8f |
@@ -2257,7 +2261,7 @@ content-divergent entries.
 | etc/operations/proposal-packaged-guest-system-file-root-drive-root-composition-001.md | indexed supporting material | b6705194674be9b89aa2dd304874337e572adc1d1559ca0f152137e5a2f5d416 |
 | etc/operations/proposal-project-code-filename-normalization-001.md | indexed supporting material | 8a42536533fd68114f575dc49f3d02213778a8ecb6e80e8cc797d2f70df2382a |
 | etc/operations/proposal-public-win32-crt-source-shaped-binding-recovery-001.md | indexed supporting material | 87a7cc8c3d415bb1df012ec4a5be8d2d005c31bb4085133236cf52847baffb3e |
-| etc/operations/proposal-pure-dos-first-shell-profile-001.md | indexed supporting material | 657cb647b3b914769034c7568a78218d21f3c04b9f8e0637ecc72f3208dad038 |
+| etc/operations/proposal-pure-dos-first-shell-profile-001.md | indexed supporting material | 0e0f9c9801fcedc4757743f15c802383413539e64ff6eeff8824531353c5183f |
 | etc/operations/proposal-rebootstrap-bochs-machine-foundation-001.md | indexed supporting material | 8b9960658a8a271b7d5b0ebac3c435cccf9f3a136e0332266b7159a720d49be5 |
 | etc/operations/proposal-rebootstrap-dual-architecture-product-composition-001.md | indexed supporting material | 7242d95aaa9d1e1c875e3fe318d8606a95a315fb842a92cac40ef45ef9edfba4 |
 | etc/operations/proposal-rebootstrap-historical-interface-adapter-recovery-001.md | indexed supporting material | b327ca9d7a7189d58c9cd6fd0f4805c2498d7da90d08ec45df9ce6036a8e92b1 |

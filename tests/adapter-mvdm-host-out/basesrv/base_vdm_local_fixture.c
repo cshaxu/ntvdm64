@@ -210,6 +210,7 @@ static int verify_explicit_command_child_record(void)
     static char command_name[] = "command.com";
     char *argv[] = { program, command_name, NULL };
     const char *root = "C:\\MVDM";
+    const char *pif = "C:\\MVDM\\profiles\\pure-dos\\pure-dos.pif";
     int argc = 2;
     session instance;
     app_launch_declaration declaration;
@@ -228,6 +229,8 @@ static int verify_explicit_command_child_record(void)
      * record, allowing the resident shell to EXEC one ordinary child. */
     if (declaration.base_vdm.terminal_on_command_exhaustion != 1u ||
         declaration.base_vdm.command_owner != BASE_VDM_COMMAND_DOS ||
+        declaration.base_vdm.pif_bytes != strlen(pif) + 1u ||
+        strcmp((const char *)declaration.base_vdm.pif, pif) != 0 ||
         strcmp((const char *)declaration.base_vdm.command,
             "\r\n") != 0 ||
         declaration.base_vdm.command_bytes != sizeof("\r\n")) {
@@ -275,6 +278,7 @@ int main(void)
 {
     static const uint8_t command[] = "C:\\DOS\\COMMAND.COM /C VER\r\n";
     static const uint8_t application[] = "C:\\DOS\\COMMAND.COM";
+    static const uint8_t pif[] = "C:\\DOS\\PROFILE.PIF";
     static const uint8_t environment[] = "COMSPEC=C:\\DOS\\COMMAND.COM\0PATH=C:\\DOS\0\0";
     static const uint8_t directory[] = "C:\\DOS\0";
     base_vdm_command payload;
@@ -325,6 +329,8 @@ int main(void)
     payload.command_bytes = (uint16_t)sizeof(command);
     payload.application = application;
     payload.application_bytes = (uint16_t)sizeof(application);
+    payload.pif = pif;
+    payload.pif_bytes = (uint16_t)sizeof(pif);
     payload.environment = environment;
     payload.environment_bytes = (uint32_t)sizeof(environment);
     payload.current_directory = directory;
@@ -362,11 +368,11 @@ int main(void)
     information.CurDirectoryLen = sizeof(directory_buffer);
     information.Reserved = reserved_buffer;
     information.ReservedLen = sizeof(reserved_buffer);
-    if (!GetNextVDMCommand(&information) || information.PifLen != 0u ||
+    if (!GetNextVDMCommand(&information) || information.PifLen != sizeof(pif) ||
         information.ReservedLen != 0u ||
         information.TitleLen != sizeof(application) ||
         information.CurDirectoryLen != sizeof(directory) ||
-        command_buffer[0] != '\0' || reserved_buffer[0] != '\0' ||
+        memcmp(command_buffer, pif, sizeof(pif)) != 0 || reserved_buffer[0] != '\0' ||
         memcmp(application_buffer, application, sizeof(application)) != 0 ||
         memcmp(directory_buffer, directory, sizeof(directory)) != 0 ||
         source.available != 1u ||

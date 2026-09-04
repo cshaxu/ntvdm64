@@ -13,6 +13,8 @@ typedef struct app_launch_declaration {
     char requested_command[MAXIMUM_VDM_COMMAND_LENGTH];
     char command[MAXIMUM_VDM_COMMAND_LENGTH];
     char application[MAX_PATH];
+    /* Original BaseSrv PifFile form for a declared launch profile. */
+    char pif[MAX_PATH];
     char environment[MAXIMUM_VDM_ENVIORNMENT];
     /* The original BaseClient current-directory carrier is a host path, not a
      * guest drive-relative component.  It must match the MAX_PATH + 1 buffer

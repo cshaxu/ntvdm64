@@ -2,10 +2,10 @@
 
 ## Current Work
 
-**Active: M0 T390 S1.** The admitted package is the pure-DOS first-shell
-profile prerequisite for an interactive second `COMMAND.COM`. S1 is a
-source/ABI/staging audit only: it must select the original configuration
-carrier and product-media identity before any runtime binding is changed.
+**Active: M0 T390 S5.** The pure-DOS first-shell profile has reached the
+source-shaped normal child `COMMAND.COM` record without DOSX/DPMI bootstrap.
+T390 remains active until the second shell's original banner/prompt/DOS `CON`
+path is observed; it does not change guest code.
 
 ## Latest Closure
 
@@ -13,7 +13,7 @@ carrier and product-media identity before any runtime binding is changed.
 
 ## Active Packet
 
-**Active: M0 T390 S1 — pure-DOS first-shell configuration-carrier audit.**
+**Active: M0 T390 S5 — original second-COMMAND console proof.**
 
 | Field | Record |
 | --- | --- |
@@ -26,6 +26,26 @@ carrier and product-media identity before any runtime binding is changed.
 | Stop Conditions | If selection requires private CSRSS/PIF product machinery, a guest-media modification, or a new parser, stop and record that source-owned boundary rather than substitute behavior. |
 
 **S1 closure:** [pure-DOS configuration-carrier audit](etc/evidence/m0-t390-s1-pure-dos-configuration-carrier-audit-001.md). Original PIF fields already carry the needed configuration pair; the currently admitted local Base VDM adapter omits that capture, so S2 must restore only the original `PifFile`/`PifLen` binding before a pure-DOS profile can be selected.
+
+**S2 admission:** copy a bounded PIF pathname through the existing local
+BaseSrv record into the caller-provided original `VDMINFO.PifFile` buffer, and
+make only the explicit interactive `COMMAND.COM` declaration select the named
+pure-DOS profile. Stage the profile PIF/configuration inputs without changing
+the current default pair or guest media. Preserve original capacity/failure
+semantics; no new PIF or DOS parser is admitted.
+
+**S2 closure:** [original PIF capture and stage binding](etc/evidence/m0-t390-s2-original-pif-capture-and-stage-binding-001.md). The fixed-width broker record was the initially omitted hop; the restored complete record reaches original `VDMINFO.PifFile/PifLen` and prevents `DOSX.EXE` selection for the exact explicit `command.com` launch.
+
+**S3 closure:** [original PIF fallback and predecessor proof](etc/evidence/m0-t390-s3-original-pif-fallback-and-predecessor-001.md). With only the selected profile PIF temporarily withheld and then restored, the original `GetPIFData` fallback reopened the default `REDIR.EXE` and `DOSX.EXE` path. The unmodified PIF subsequently retained `pif-bytes=42`, selected the pure-DOS configuration and did not open either file.
+
+**S4 closure:** [pure-DOS normal-child predecessor observation](etc/evidence/m0-t390-s4-pure-dos-normal-child-predecessor-001.md). The fixed pure-DOS run completes original configuration and `54:01` record delivery for normal `COMMAND.COM`, without `REDIR.EXE`/`DOSX.EXE`. It does not prove a visible banner, prompt, DOS `CON` read or Console-key drain.
+
+**S5 admission:** retain the exact S2 PIF/media and fixed container. Trace the
+source-defined normal child `COMMAND.COM` re-entry until its original
+banner/prompt and DOS `CON` wait are observed, then submit one normal Console
+key through the original worker/8042/ICA/BIOS/DOS route. Do not introduce a
+host command parser, synthetic BOP, direct guest-memory write, guest change or
+CPU workaround.
 
 **S1 closure:** [explicit COMMAND child static contract](etc/evidence/m0-t389-s1-explicit-command-child-static-contract-001.md).
 

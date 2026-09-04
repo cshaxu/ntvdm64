@@ -72,6 +72,9 @@ int base_vdm_broker_publish(base_vdm_broker *binding,
             MAXIMUM_VDM_COMMAND_LENGTH) ||
         !bytes_valid(command->application, command->application_bytes,
             BROKER_BASE_VDM_APPLICATION_BYTES) ||
+        !bytes_valid(command->pif, command->pif_bytes,
+            BROKER_BASE_VDM_PIF_BYTES) ||
+        (command->pif_bytes != 0u && command->pif[command->pif_bytes - 1u] != '\0') ||
         !bytes_valid(command->environment, command->environment_bytes,
             MAXIMUM_VDM_ENVIORNMENT) ||
         !bytes_valid(command->current_directory, command->current_directory_bytes,
@@ -91,12 +94,15 @@ int base_vdm_broker_publish(base_vdm_broker *binding,
     record.current_drive = command->current_drive;
     record.command_bytes = command->command_bytes;
     record.application_bytes = command->application_bytes;
+    record.pif_bytes = command->pif_bytes;
     record.environment_bytes = command->environment_bytes;
     record.current_directory_bytes = command->current_directory_bytes;
     record.coming_from_bat = command->coming_from_bat;
     memcpy(record.command, command->command, command->command_bytes);
     if (command->application_bytes != 0u)
         memcpy(record.application, command->application, command->application_bytes);
+    if (command->pif_bytes != 0u)
+        memcpy(record.pif, command->pif, command->pif_bytes);
     if (command->environment_bytes != 0u)
         memcpy(record.environment, command->environment, command->environment_bytes);
     if (command->current_directory_bytes != 0u)
@@ -135,6 +141,8 @@ int base_vdm_broker_deliver(base_vdm_broker *binding,
     command.command_bytes = record.command_bytes;
     command.application = record.application;
     command.application_bytes = record.application_bytes;
+    command.pif = record.pif;
+    command.pif_bytes = record.pif_bytes;
     command.environment = record.environment;
     command.environment_bytes = record.environment_bytes;
     command.current_directory = record.current_directory;

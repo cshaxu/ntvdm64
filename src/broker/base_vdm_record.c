@@ -20,6 +20,7 @@ static int record_valid(const broker_base_vdm_record *record)
         record->command_bytes != 0u &&
         record->command_bytes <= MAXIMUM_VDM_COMMAND_LENGTH &&
         record->application_bytes <= sizeof(record->application) &&
+        record->pif_bytes <= sizeof(record->pif) &&
         record->environment_bytes <= MAXIMUM_VDM_ENVIORNMENT &&
         record->current_directory_bytes <= sizeof(record->current_directory);
 }

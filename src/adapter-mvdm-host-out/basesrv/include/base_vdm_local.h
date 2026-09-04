@@ -8,7 +8,7 @@
 
 typedef struct session session;
 
-#define BASE_VDM_LOCAL_VERSION UINT32_C(6)
+#define BASE_VDM_LOCAL_VERSION UINT32_C(7)
 
 /* These identify which original BaseSrv command queue owns a copied record.
  * They are not guest values and never enter VDMINFO: the original client
@@ -41,6 +41,10 @@ typedef struct base_vdm_command {
     uint16_t command_bytes;
     const uint8_t *application;
     uint16_t application_bytes;
+    /* This is the original BaseSrv PifFile capture: an ANSI host pathname,
+     * not a guest value or opaque host identity. */
+    const uint8_t *pif;
+    uint16_t pif_bytes;
     const uint8_t *environment;
     uint32_t environment_bytes;
     const uint8_t *current_directory;
@@ -65,6 +69,7 @@ typedef struct base_vdm_local {
     uint16_t reserved1;
     uint16_t command_bytes;
     uint16_t application_bytes;
+    uint16_t pif_bytes;
     uint32_t environment_bytes;
     uint16_t current_directory_bytes;
     uint32_t current_directories_bytes;
@@ -88,6 +93,9 @@ typedef struct base_vdm_local {
      * the DOS-shaped guest path fields.  The original client uses MAX_PATH
      * path storage for this host-side value. */
     uint8_t application[MAX_PATH];
+    /* Retained only long enough to fill the caller-owned original
+     * VDMINFO.PifFile buffer during ASKING_FOR_PIF. */
+    uint8_t pif[MAX_PATH];
     uint8_t environment[MAXIMUM_VDM_ENVIORNMENT];
     /* `VDMINFO.CurDirectory` is a host-side BaseClient/BaseSrv carrier.
      * Original COMMAND advertises MAX_PATH + 1 bytes for it, independently of

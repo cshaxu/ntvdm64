@@ -31,4 +31,10 @@ generic host-service shortcut.
 
 ## Registered divergences
 
-None. This root contains no recovered implementation at admission.
+- `ADAPTER-BASESRV-010` — `basesrv/source/base_vdm_local.c` is the bounded,
+  one-session counterpart of the original BaseSrv copied-record service. It
+  retains the original `VDMINFO` PIF/title/current-directory capture order,
+  including the `PifFile`/`PifLen` payload needed by original SoftPC PIF
+  selection, while replacing private CSRSS storage and wait handles with
+  session-owned state. It neither parses PIF data nor exposes host data to the
+  guest; original `GetPIFData` remains its parser/owner.

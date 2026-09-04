@@ -64,14 +64,23 @@ failure semantics.
 
 Use one stable non-debug console-owning container and immutable media to show
 that the first resident shell reaches the one normal `COMMAND.COM` child
-record without entering the DPMI/WOW bootstrap. This is only predecessor
-evidence; the later explicit interactive proposal owns banner/prompt/DOS-CON
-proof.
+record without entering the DPMI/WOW bootstrap.
+
+### S5 — Second COMMAND console proof
+
+The earlier explicit-interactive packet established the original second-shell
+contract but did not prove it at runtime.  Keep this prerequisite package open
+through one source-shaped completion step: prove the selected child reaches
+the original banner/prompt and DOS `CON` wait in the same fixed container, and
+that a normal Console key follows the original Console worker, 8042/ICA,
+BIOS and DOS path.  This is not permission for an app line parser, synthetic
+BOP, direct guest-buffer write, guest-binary change, or CPU workaround.
 
 ## Acceptance and exclusions
 
-Completion requires source/ABI proof, formal-link evidence and fixed-container
-predecessor observation. It does not claim that a second shell is interactive,
-that DOSX/WOW works, or that a PIF implementation is complete. Any need for an
-invented PIF reader, a host prompt loop, a guest binary change, synthetic
-BOP/keyboard input, or a CPU workaround is outside this package.
+Completion requires source/ABI proof, formal-link evidence, fixed-container
+predecessor observation, and source-shaped second-shell banner/prompt/DOS-CON
+input evidence. It does not claim DOSX/WOW completion or general PIF product
+compatibility. Any need for an invented PIF reader, a host prompt loop, a
+guest binary change, synthetic BOP/keyboard input, or a CPU workaround is
+outside this package.

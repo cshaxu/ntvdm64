@@ -7,9 +7,10 @@
 
 #include <vdmapi.h>
 
-#define BROKER_BASE_VDM_RECORD_VERSION UINT32_C(1)
+#define BROKER_BASE_VDM_RECORD_VERSION UINT32_C(2)
 #define BROKER_BASE_VDM_MAXIMUM_RECORDS 16u
 #define BROKER_BASE_VDM_APPLICATION_BYTES 260u
+#define BROKER_BASE_VDM_PIF_BYTES 260u
 #define BROKER_BASE_VDM_CURRENT_DIRECTORY_BYTES 261u
 
 enum broker_base_vdm_status {
@@ -42,11 +43,15 @@ typedef struct broker_base_vdm_record {
     uint16_t current_drive;
     uint16_t command_bytes;
     uint16_t application_bytes;
+    uint16_t pif_bytes;
     uint16_t current_directory_bytes;
     uint8_t coming_from_bat;
     uint8_t reserved0;
     uint8_t command[MAXIMUM_VDM_COMMAND_LENGTH];
     uint8_t application[BROKER_BASE_VDM_APPLICATION_BYTES];
+    /* Copied original VDMINFO.PifFile text. It is an ANSI host path, never a
+     * guest pointer, a HANDLE or an opaque identity. */
+    uint8_t pif[BROKER_BASE_VDM_PIF_BYTES];
     uint8_t environment[MAXIMUM_VDM_ENVIORNMENT];
     uint8_t current_directory[BROKER_BASE_VDM_CURRENT_DIRECTORY_BYTES];
 } broker_base_vdm_record;
