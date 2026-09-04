@@ -24,6 +24,15 @@ VOID EDL_fast_bop(ULONG immed)
 	/* Whatever this it... Better break on it and see if it gets used */
 	__debugbreak();
 }
+#elif defined(MVDM_SOFTPC_PATCH_ACTIVITY_CHECK_ONLY)
+/* DIVERGENCE(MVDM-SOFTPC-PATCH-006): select precisely the imported patch's
+ * ActivityCheckAfterTimeSlice body for the original CPU40 idle/timeslice
+ * caller cohort.  The full patch body contains unrelated placeholders, so
+ * the formal product must not link it wholesale merely to obtain this
+ * source-shaped empty callback. */
+VOID ActivityCheckAfterTimeSlice(VOID)
+{
+}
 #elif defined(MVDM_SOFTPC_PATCH_CCPU_VECTOR_DEFAULTS_ONLY)
 /* DIVERGENCE(MVDM-SOFTPC-PATCH-005): the selected CCPU's generic SasVector
  * retains two MIPS/PPC vector tail slots even though no selected x86 CCPU

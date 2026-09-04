@@ -2,28 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T389 S3** — Explicit interactive COMMAND profile, fixed-container
-second-shell observation; ordinary mode (single-person dual-role implementation and review).
+**Active: M0 T389 S5** — Explicit interactive COMMAND profile, original
+SoftPC Console-input and guest-keyboard delivery cohort; ordinary mode
+(single-person dual-role implementation and review).
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T389 S3; ordinary mode. |
-| Admission And Approval | Owner approved the next queue package after T388 closure: [explicit interactive COMMAND profile](etc/operations/proposal-explicit-interactive-command-profile-001.md). |
-| Objective | Run one fixed CPU40/x86 product with the S2-proven `/C command.com` record and immutable media; identify the first original owner reached after the outer shell consumes `/C`, without changing guest input or record shape. |
+| Identifier Mode | M0 T389 S5; ordinary mode. |
+| Admission And Approval | Immediate dependency-first continuation after S4 source-recovered the reached activity/timeslice callback and the unchanged fixed observation no longer produces its `0x78` controlled stop. |
+| Objective | Audit the complete original SoftPC Console-input and guest-keyboard delivery cohort—Console event worker, keyboard controller, IRQ1/BIOS/DOS `CON` path, wait/readiness observation and presentation ownership—then recover the first missing source-owned transition without an app/session input parser. |
 | Non-goals | No guest-media change, app prompt reader, synthetic BOP record, direct guest-input injection, BaseSrv/CSRSS transport, PIF implementation, WOW or `cmdExec32` expansion. |
-| Reference Baseline | T389 S1 static child contract, T389 S2 record proof, T388 closure, selected CPU40/x86 product/media. |
-| Files And ABI Surface | Formal x86 product, fixed runtime package, bounded observer and reports only; existing Base VDM, SCS and `VDMINFO` layouts remain unchanged. |
+| Reference Baseline | T389 S1--S4, selected CPU40/x86 product/media and the unchanged S4 timeout at `keyboard-bop-16-waitio` with no activity termination report. |
+| Files And ABI Surface | Original SoftPC Console/event/keyboard/ICA/BIOS/DOS-CON callers and their same-shaped host bindings; Base VDM, SCS and `VDMINFO` layouts remain unchanged. |
 | Applicable Rules | Execution, source, architecture, coding, document, mapping-manager, mirror/overlay and CPU40-only rules. |
-| Verification | One bounded non-debug observation with recorded product/media identity and fixed Console/container state; classify the earliest original transition after the S2 record is consumed. |
-| Expected Markers | One Base VDM record; outer `SingleCom` execute/exit evidence; child initialization, `DoReEnter`/DOS-CON marker, or the exact earlier original owner; no host DOS line parser. |
-| Asset Needs | T389 S1/S2 evidence, current formal x86 product, immutable staged package and fixed observer. |
-| Reporting Requirements | Record exact launch command, identities, earliest marker and whether the result proves or blocks the second-shell path. |
-| Stop Conditions | Any need to alter guest media, implement host input, change Base VDM/guest structures, or expand into PIF/WOW/BaseSrv transport pauses for a new S. |
-| Exit Criteria | One fixed observation is classified with a source owner and all product/media identities; no claim of interactive completion without banner/prompt/CON evidence. |
+| Verification | Static whole-cohort call/contract audit, focused original-provider test, then one unchanged fixed-container rerun only if a source-shaped provider is selected. |
+| Expected Markers | One Console-input owner, original event/IRQ/BIOS/DOS-CON ordering, a precise first missing transition, and no newly invented BOP or Console-line behavior. |
+| Asset Needs | T389 S1--S4 evidence, current formal x86 product, immutable staged package and selected original source union. |
+| Reporting Requirements | Record every reached Console/event/keyboard caller, provider provenance, retained ABI, proposed behavior and the relation to the second-shell continuation. |
+| Stop Conditions | Any need to alter guest media, write a host line parser, inject guest input, alter Base VDM/guest structures, or expand into PIF/WOW/BaseSrv transport pauses for a revised package decision. |
+| Exit Criteria | The first source-owned Console/keyboard delivery blocker has one owner-package disposition and focused evidence. No interactive completion claim without banner/prompt/DOS-CON evidence. |
 | Original Owner Request | “好的，准入下一个任务。” |
-| Similar-Issue Sweep | no-target, positional, `--command`, case-insensitive child token, `SCS_FIRSTCOM`, `SCS_REENTERED`, `SCS_CMDPROMPT`, `SCS_PROMPT16`, `SingleCom`, copyright/header, DOS `CON`, child exit, EOF/cancellation and terminal-on-return state. |
+| Similar-Issue Sweep | Console event worker, keyboard host input, keyboard controller, IRQ1, BIOS INT 16h, DOS `CON`, `SCS_PROMPT16`, text/window ownership, Ctrl+C and EOF. |
 
 **Predecessor:** [M0 T388 fixed interactive runtime matrix and corrected shell boundary](history/m0-t388-fixed-interactive-runtime-matrix-closure-20260903.md).
 
@@ -31,7 +32,9 @@ second-shell observation; ordinary mode (single-person dual-role implementation 
 
 **S2 closure:** [explicit COMMAND record contract](etc/evidence/m0-t389-s2-explicit-command-record-contract-001.md).
 
-**S3 current observation:** [positional `command.com` fixed observation](etc/evidence/m0-t389-s3-positional-command-fixed-observation-001.md). It is a classified negative result, not S3 closure.
+**S3 closure:** [positional `command.com` fixed observation](etc/evidence/m0-t389-s3-positional-command-fixed-observation-001.md). The fixed observation attributes the first post-record stop to the source-unavailable SoftPC `ActivityCheckAfterTimeSlice` callback; it does not claim an interactive child shell.
+
+**S4 closure:** [SoftPC activity/timeslice source recovery](etc/evidence/m0-t389-s4-softpc-activity-timeslice-source-recovery-001.md). The source-selected patch body removes the prior `0x78` controlled stop; the fixed observation still does not claim an interactive child shell.
 
 ### M0 T375 — Closed pure DOS CPU40/SoftPC COMMAND baseline
 

@@ -50,9 +50,47 @@ flag. The next repair investigation must begin in the original post-`54:01`
 COMMAND/SoftPC startup and child-EXEC chain before `DoReEnter`, not by adding
 a host command reader or changing guest media.
 
+## Supplemental termination attribution
+
+The same fixed product, stage, command line, Console-owning container and
+30-second bound were then repeated with only the pre-existing default-off
+`MVDM_SESSION_TERMINATION_REPORT_PATH` observer channel enabled.  It does not
+alter the product, guest media, Base VDM record, guest memory or Console input.
+Its report is:
+
+```text
+MVDM-SESSION-TERMINATION origin=ccpu:ActivityCheckAfterTimeSlice code=0x00000078
+```
+
+The captured primary-thread stack independently resolves its return address
+inside `mvdm_softpc_execution_run_original_entry` to the `setjmp` controlled-
+termination branch, immediately after its call to
+`mvdm_softpc_execution_close_original_host`.  It is not the ordinary original
+`ntvdm.c` return branch.  The close helper is waiting below the source-owned
+host close cohort; that wait is a consequence of the controlled session
+termination, not evidence of a second shell or a DOS CON wait.
+
+The exact selected callback has four original non-WOW callers:
+`WaitIfIdle`, `host_release_timeslice` and `PrioWaitIfIdle` in
+`softpc.new/host/src/nt_unix.c`, plus `BlockWOWIdle` in
+`softpc.new/host/src/nt_eoi.c`.  The approved OpenNT, OpenNT-4.5 and
+OpenNT-src-2 source unions contain those callers and the CCPU declaration but
+no provider body.  The currently selected adapter therefore reports its
+already-documented `ERROR_CALL_NOT_IMPLEMENTED` disposition.  This is the
+first actual runtime blocker after the command record handoff: an original
+SoftPC idle/activity callback, not a COMMAND BOP, child command record, or
+guest input issue.
+
+S3 is consequently closed as a classified negative observation.  Restoring
+the complete same-shaped activity/timeslice contract requires a separate
+source/ABI package review before any provider is changed; a no-op, synthetic
+yield or timer policy is not justified by this observation alone.
+
 ## Exact retained reports
 
 * `O:\ntvdm64\observation-t389-s3-command-com-console.txt`
 * `O:\ntvdm64\observation-t389-s3-command-com-console.txt.base-vdm.txt`
 * `O:\ntvdm64\observation-t389-s3-command-com-console.txt.bop-return.txt`
 * `O:\ntvdm64\observation-t389-s3-command-com-console.txt.console-ready.txt`
+* `O:\ntvdm64\observation-t389-s3-command-com-console-rerun.txt`
+* `O:\ntvdm64\observation-t389-s3-command-com-console.txt.session-termination.txt`

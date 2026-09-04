@@ -242,7 +242,7 @@ $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20
                         'mvdm_vdd_sft_shadow.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
                         'mvdm_softpc_event_thread.c',
                         'mvdm_softpc_presentation_font.c',
-                        'mvdm_softpc_descriptor_fields.c', 'mvdm_softpc_activity_unavailable.c',
+                        'mvdm_softpc_descriptor_fields.c',
                         'mvdm_softpc_vdd_unavailable.c', 'mvdm_softpc_vdd_configuration.c')
 $appNames = @('machine_shell.c', 'package_layout.c', 'launch_declaration.c', 'presentation_window.c', 'entry.c')
 $effectiveAddressSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_effective_address.c'
@@ -512,6 +512,7 @@ $cvidcRuleFlags = $cvidcFirstFlags + ' /DCVIDC_RULE_WORD'
 # retains the same original vector call shape without claiming CCPU ownership.
 $cvidcAccessFlags = $cvidcRuleFlags.Replace('/DCCPU ', '').Replace('/DPROD ', '')
 $patchVectorDefaultsFlags = $baseFlags + ' /DMVDM_SOFTPC_PATCH_CCPU_VECTOR_DEFAULTS_ONLY'
+$patchActivityCheckFlags = $baseFlags + ' /DMVDM_SOFTPC_PATCH_ACTIVITY_CHECK_ONLY'
 
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
@@ -523,6 +524,7 @@ $graph.Add('cvidc_first_cflags = ' + $cvidcFirstFlags)
 $graph.Add('cvidc_rule_cflags = ' + $cvidcRuleFlags)
 $graph.Add('cvidc_access_cflags = ' + $cvidcAccessFlags)
 $graph.Add('patch_vector_defaults_cflags = ' + $patchVectorDefaultsFlags)
+$graph.Add('patch_activity_check_cflags = ' + $patchActivityCheckFlags)
 $graph.Add('rcflags = ' + ($includeRoots -join ' '))
 $graph.Add('')
 $graph.Add('rule cc')
@@ -557,6 +559,11 @@ $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('rule cc_patch_vector_defaults')
 $graph.Add('  command = cl.exe $patch_vector_defaults_cflags /Fo$out $in')
+$graph.Add('  description = CC-PATCH $in')
+$graph.Add('  deps = msvc')
+$graph.Add('  msvc_deps_prefix = Note: including file:')
+$graph.Add('rule cc_patch_activity_check')
+$graph.Add('  command = cl.exe $patch_activity_check_cflags /Fo$out $in')
 $graph.Add('  description = CC-PATCH $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file:')
@@ -844,6 +851,8 @@ $patchBodyObjects = @(foreach ($name in $patchBodyNames) {
 })
 $patchVectorDefaultsObject = 'obj/patch/fmstubs_ccpu_vector_defaults.obj'
 $graph.Add('build ' + $patchVectorDefaultsObject + ': cc_patch_vector_defaults ' + (NinjaPath (Join-Path $patchBodyRoot 'fmstubs.c')))
+$patchActivityCheckObject = 'obj/patch/fmstubs_activity_check.obj'
+$graph.Add('build ' + $patchActivityCheckObject + ': cc_patch_activity_check ' + (NinjaPath (Join-Path $patchBodyRoot 'fmstubs.c')))
 $redirResourceObject = 'obj/redir/vdmredir.res'
 $graph.Add('build ' + $redirResourceObject + ': rc ' + (NinjaPath $redirResourceSource))
 $graph.Add('build original-ccpu386.lib: lib ' + ($ccpuObjects -join ' '))
@@ -882,8 +891,9 @@ $graph.Add('build monitor-bindings.lib: lib ' + ($adapterMonitorObjects -join ' 
 $graph.Add('build debugger-bindings.lib: lib ' + ($adapterDebuggerObjects -join ' '))
 $graph.Add('build ntvdmx64-softpc-patch-evidence.lib: lib ' + ($patchBodyObjects -join ' '))
 $graph.Add('build ntvdmx64-softpc-ccpu-vector-defaults.lib: lib ' + $patchVectorDefaultsObject)
-$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib softpc-bindings.lib redirector-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib')
-$graph.Add('build original-softpc-process.exe | original-softpc-process-import.lib: process_link obj/app/entry.obj app-machine-shell.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib softpc-bindings.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-ccpu-vector-defaults.lib original-ccpu386.lib obj/host/softpc-resource.res')
+$graph.Add('build ntvdmx64-softpc-activity-check.lib: lib ' + $patchActivityCheckObject)
+$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib softpc-bindings.lib redirector-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib ntvdmx64-softpc-activity-check.lib')
+$graph.Add('build original-softpc-process.exe | original-softpc-process-import.lib: process_link obj/app/entry.obj app-machine-shell.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib softpc-bindings.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-ccpu-vector-defaults.lib ntvdmx64-softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res')
 $graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' original-softpc-process-import.lib redirector-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib softpc-bindings.lib softpc-win32-bindings.lib session.lib broker.lib')
 $graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib')
 $graph.Add('default original-softpc-candidate')
@@ -949,12 +959,20 @@ $graph.Add('default original-softpc-candidate')
             buildDisposition = 'compile-and-archive-debugbreak-evidence-only'
         }
     })
-    patchSelectedRuntimeBodies = @([ordered]@{
-        path = 'src/mvdm-softpc-patch/patches/common/fmstubs.c'
-        selector = 'MVDM_SOFTPC_PATCH_CCPU_VECTOR_DEFAULTS_ONLY'
-        symbols = @('EDL_fast_bop', 'c_sas_touch', 'c_VirtualiseInstruction')
-        buildDisposition = 'compile-and-force-link-original-debugbreak-vector-defaults-only'
-    })
+    patchSelectedRuntimeBodies = @(
+        [ordered]@{
+            path = 'src/mvdm-softpc-patch/patches/common/fmstubs.c'
+            selector = 'MVDM_SOFTPC_PATCH_CCPU_VECTOR_DEFAULTS_ONLY'
+            symbols = @('EDL_fast_bop', 'c_sas_touch', 'c_VirtualiseInstruction')
+            buildDisposition = 'compile-and-force-link-original-debugbreak-vector-defaults-only'
+        },
+        [ordered]@{
+            path = 'src/mvdm-softpc-patch/patches/common/fmstubs.c'
+            selector = 'MVDM_SOFTPC_PATCH_ACTIVITY_CHECK_ONLY'
+            symbols = @('ActivityCheckAfterTimeSlice')
+            buildDisposition = 'compile-and-normal-link-imported-original-empty-activity-callback-only'
+        }
+    )
     patchEvidence = @($patchEvidenceNames | ForEach-Object {
         [ordered]@{
             path = 'src/mvdm-softpc-patch/patches/' + $_
