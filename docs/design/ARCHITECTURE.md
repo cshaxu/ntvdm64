@@ -90,9 +90,11 @@ prevents permanent parallel providers.
 - `mvdm-host`: the canonical original MVDM host-runtime mirror. It owns
   selected DEM, COMMAND, XMS, DPMI32, VDMREDIR, WOW32, VDD/debugger,
   executable `softpc.new` packages—including `base/bios` reset/BIOS services
-  and `base/keymouse` controller sources—SIM/monitor providers, and original
-  package-internal `inc`, `oemuni` and `suballoc` support paths. It does not
-  own standalone tools or immutable firmware media inputs.
+  and `base/keymouse` controller sources—SIM/monitor providers, original
+  package-internal `inc`, `oemuni` and `suballoc` support paths, and the
+  upstream-relative `softpc.new/roms` subtree. It does not own standalone
+  tools. Its build embeds ROM/profile/CMOS defaults as immutable PE resources;
+  they are never linked as a host code library or deployed as peer files.
 - `opennt-host`: the canonical original non-MVDM OpenNT host-service mirror.
   It owns every complete, source-audited OpenNT host package accepted for use
   by `mvdm-host`; BaseSrv/client VDM is merely its first accepted service
@@ -103,7 +105,9 @@ prevents permanent parallel providers.
   Tools may be independently built but never enter the main `ntvdm.exe` link
   graph merely because their source is available.
 - `mvdm-softpc-firmware`: the canonical original MVDM firmware-input mirror:
-  selected `softpc.new/bios`, `softpc.new/roms` and `softpc.new/data` paths.
+  selected `softpc.new/bios` and `softpc.new/data` paths. The complete
+  `softpc.new/roms` subtree remains under `mvdm-host` so the original SoftPC
+  machine package retains its upstream-relative ROM layout.
   It preserves immutable ROM and data inputs but is neither a host-runtime
   library nor a second machine executor. Executable `softpc.new/base/*`
   packages remain in `mvdm-host`.
@@ -206,7 +210,8 @@ opennt-host -> mvdm-platform-abi
 opennt-host -> adapter-opennt-host                 (only source-audited package-private bindings)
 opennt-host -> broker                              (only after package closure admits fixed-width transport)
 mvdm-tools -> mvdm-host / mvdm-platform-abi       (independent tool builds only)
-app -> mvdm-softpc-firmware                       (manifest-selected immutable input only)
+app -> mvdm-host/softpc.new/roms                   (build-time PE resource input only)
+app -> mvdm-softpc-firmware                        (manifest-selected immutable BIOS/data input only)
 ```
 
 `session` never calls a component-specific provider. No
@@ -228,9 +233,10 @@ not a second generic Win32 shim and is consumed only by its owning
 `opennt-host` package.
 
 `mvdm-tools` has no inbound production-runtime edge at all.
-`mvdm-softpc-firmware` has no host
-compile or link edge; `app` stages an explicitly admitted, manifest-selected
-immutable firmware input to the selected backend's source-shaped binding.
+`mvdm-softpc-firmware` has no host compile or link edge. `app` stages its
+explicitly admitted immutable BIOS/data inputs; the build embeds the selected
+`mvdm-host/softpc.new/roms` defaults as named PE resources for the
+source-shaped SoftPC resource binding.
 
 ## Guest and host width model
 

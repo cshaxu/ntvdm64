@@ -1,8 +1,10 @@
 # mvdm-softpc-firmware
 
 Canonical original MVDM firmware-input mirror. Its retained
-upstream-relative package set is `softpc.new/bios`, `softpc.new/roms` and
-`softpc.new/data`.
+upstream-relative package set is `softpc.new/bios` and `softpc.new/data`.
+`softpc.new/roms` is deliberately rooted in `mvdm-host` alongside the
+original SoftPC host tree, preserving that package's upstream layout for the
+selected original machine build.
 
 This is a separate original mirror component, not an executable DOS/WOW16
 guest image and not a parallel SoftPC machine. ROM/BIOS code inputs remain

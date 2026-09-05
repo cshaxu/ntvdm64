@@ -14,9 +14,12 @@ Selected host-runtime packages remain together in the canonical `mvdm-host`
 mirror; conceptual BOP, host and SoftPC-control categories
 do not create parallel source roots. Independent historical tools belong to
 `mvdm-tools`; shared support carriers/libraries remain at their
-original-relative paths beneath `mvdm-host`; and selected immutable
-`softpc.new` BIOS/ROM/data inputs belong to
-`mvdm-softpc-firmware`. Executable `softpc.new/base/*` packages, including
+original-relative paths beneath `mvdm-host`; selected immutable
+`softpc.new` BIOS/data inputs belong to `mvdm-softpc-firmware`, while the
+complete original `softpc.new/roms` subtree remains beneath `mvdm-host`.
+For the selected product, these named original ROM/profile/CMOS defaults are
+build-time PE-resource inputs, not deployable peer media files.
+Executable `softpc.new/base/*` packages, including
 `base/bios` and `base/keymouse`, remain in `mvdm-host` even when they
 initialize firmware state. Exact declarations required from outside MVDM
 belong to `mvdm-platform-abi`.

@@ -66,6 +66,16 @@ long host_read_resource(int type, char *name, byte *addr, int maxsize, int displ
         char full_path[MAXPATHLEN];
         extern char *host_find_file(char *name, char *path, int disp_err);
 
+#ifdef MVDM_EMBED_SOFTPC_MEDIA
+        /* DIVERGENCE(MVDM-HOST-DIV-222): the selected fixed-container product
+         * embeds immutable ROM/profile/CMOS defaults in its PE resource table
+         * rather than deploying mutable peer files.  Preserve this original
+         * interface; the same-shaped Win32 binding owns resource lookup and
+         * per-user persistence for writes. */
+        extern long mvdm_embedded_resource_read(int, char *, byte *, int, int);
+        return mvdm_embedded_resource_read(type, name, addr, maxsize, display_error);
+#endif
+
 #ifdef DELTA            //STF - make change to 8.3 compatible name
         if (strcmp(name, ".spcprofile") == 0)
             name = "profile.spc";
@@ -106,6 +116,22 @@ long size;              /* Quantity of data to write */
         extern char *host_find_file(char *name, char *path, int disp_err);
 
         host_block_timer ();
+
+#ifdef MVDM_EMBED_SOFTPC_MEDIA
+        /* DIVERGENCE(MVDM-HOST-DIV-222): retain the original timer bracket
+         * and write entrypoint while the Win32 binding persists mutable CMOS/
+         * profile state below the current user's resource key, never beside
+         * the fixed executable. */
+        extern int mvdm_embedded_resource_write(int, char *, byte *, long);
+        if (!mvdm_embedded_resource_write(type, name, addr, size))
+        {
+#ifndef HUNTER
+                host_error(EG_NO_REZ_UPDATE, ERR_CONT, CMOS_FILE_NAME);
+#endif
+        }
+        host_release_timer ();
+        return;
+#endif
 
 #ifdef DELTA            //STF - make change to 8.3 compatible name
         if (strcmp(name, ".spcprofile") == 0)

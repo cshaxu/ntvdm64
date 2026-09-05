@@ -71,6 +71,7 @@ $supportRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/support'
 $videoRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/video'
 $cvidcRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/cvidc'
 $gdpGenerator = Join-Path $root 'tools/build/Generate-T310GdpSlots.mjs'
+$embeddedMediaGenerator = Join-Path $root 'tools/build/Generate-EmbeddedSoftpcMediaRc.mjs'
 $gdpOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/base/cvidc'
 $umbOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/host/src'
 $commandOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/dos/command'
@@ -218,7 +219,7 @@ if (!(Test-Path -LiteralPath $redirResourceSource)) { throw "Original Redirector
 if (!(Test-Path -LiteralPath $redirExportDefinition)) { throw "Original Redirector export definition missing: $redirExportDefinition" }
 $adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_compat.c',
                           'nt_thread_alert_compat.c', 'nt_wait_compat.c',
-                          'opennt_support_rtl.c', 'console_compat.c', 'crt_compat.c',
+                          'opennt_support_rtl.c', 'console_compat.c', 'crt_compat.c', 'embedded_softpc_media.c',
                            'command_process_compat.c', 'wow_private_unavailable.c',
                            'mvdm_base_vdm_environment.c')
 # ExitVDM is an original Base client call reached by selected SoftPC teardown
@@ -363,6 +364,7 @@ foreach ($name in $patchEvidenceNames) {
 
 New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/gdp'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/dpmi'), (Join-Path $build 'obj/suballoc'), (Join-Path $build 'obj/session'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/adapter-redir'), (Join-Path $build 'obj/opennt-netlib'), (Join-Path $build 'obj/opennt-base-vdm'), (Join-Path $build 'obj/patch') | Out-Null
 if (!(Test-Path -LiteralPath $gdpGenerator -PathType Leaf)) { throw "GDP slot generator missing: $gdpGenerator" }
+if (!(Test-Path -LiteralPath $embeddedMediaGenerator -PathType Leaf)) { throw "Embedded SoftPC media generator missing: $embeddedMediaGenerator" }
 if (!(Test-Path -LiteralPath $gdpOverlayRoot -PathType Container)) { throw "GDP overlay root missing: $gdpOverlayRoot" }
 if (!(Test-Path -LiteralPath $umbOverlayRoot -PathType Container)) { throw "UMB overlay root missing: $umbOverlayRoot" }
 if ([string]::IsNullOrWhiteSpace($NodeExecutable)) { $NodeExecutable = $env:MVDM_NODE22 }
@@ -381,6 +383,9 @@ function Get-NodeSha256([string]$Path) {
 }
 $gdpGeneratedRoot = Join-Path $build 'generated/gdp'
 & $NodeExecutable $gdpGenerator $root $gdpGeneratedRoot | Out-Null
+$embeddedMediaRc = Join-Path $build 'generated/softpc-media/embedded-softpc-media.rc'
+& $NodeExecutable $embeddedMediaGenerator $root $embeddedMediaRc | Out-Null
+if ($LASTEXITCODE -ne 0) { throw 'Embedded SoftPC media resource generation failed.' }
 # Ninja schedules translation units itself.  The runner initializes the Visual
 # Studio environment exactly once before Ninja starts, so rules invoke the MSVC
 # tools directly.  Do not add /MP: nesting it below Ninja's job scheduler would
@@ -491,7 +496,7 @@ $cvidcFirstIncludeRoots = $cvidcFirstRootPaths | ForEach-Object { '/I "' + (Ninj
 # original carriers on both host-width rows. This selects the byte-exact
 # `v7vga.rom` package already retained by mvdm-softpc-firmware rather than
 # fabricating an unavailable `vga.rom` alias.
-$baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' +
+$baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DMVDM_EMBED_SOFTPC_MEDIA /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' +
     ''
 $baseFlags = $baseCommonFlags + ($softpcIncludeRoots -join ' ') + ' ' + $gdpGeneratedInclude
@@ -778,6 +783,7 @@ $graph.Add('build ' + $hostEntryObject + ': cc_host ' + (NinjaPath $hostEntrySou
 # startup implementation.
 $graph.Add('  host_cflags = ' + $hostFlags + ' /Dmain=mvdm_softpc_original_entry')
 $graph.Add('build obj/host/softpc-resource.res: rc ' + (NinjaPath $hostEntryResourceSource))
+$graph.Add('build obj/host/softpc-media.res: rc ' + (NinjaPath $embeddedMediaRc))
 $hostObjects += $hostEntryObject
 $commandWriteLengthOverlaySource = Join-Path $commandOverlayRoot 'mvdm_command_write_length.c'
 $graph.Add('build obj/host/mvdm_command_write_length.obj: cc ' + (NinjaPath $commandWriteLengthOverlaySource))
@@ -894,7 +900,7 @@ $graph.Add('build ntvdmx64-softpc-patch-evidence.lib: lib ' + ($patchBodyObjects
 $graph.Add('build ntvdmx64-softpc-ccpu-vector-defaults.lib: lib ' + $patchVectorDefaultsObject)
 $graph.Add('build ntvdmx64-softpc-activity-check.lib: lib ' + $patchActivityCheckObject)
 $graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib softpc-bindings.lib redirector-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib ntvdmx64-softpc-activity-check.lib')
-$graph.Add('build original-softpc-process.exe | original-softpc-process-import.lib: process_link obj/app/entry.obj app-machine-shell.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib softpc-bindings.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-ccpu-vector-defaults.lib ntvdmx64-softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res')
+$graph.Add('build original-softpc-process.exe | original-softpc-process-import.lib: process_link obj/app/entry.obj app-machine-shell.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib softpc-bindings.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-ccpu-vector-defaults.lib ntvdmx64-softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res obj/host/softpc-media.res')
 $graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' original-softpc-process-import.lib redirector-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib softpc-bindings.lib softpc-win32-bindings.lib session.lib broker.lib')
 $graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib')
 $graph.Add('default original-softpc-candidate')

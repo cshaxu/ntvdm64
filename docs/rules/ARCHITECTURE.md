@@ -22,9 +22,12 @@
    their original-relative `mvdm-host` paths; independent historical tools
    belong to `mvdm-tools`. A tool is never a host
    runtime dependency merely because it is independently buildable.
-   `mvdm-softpc-firmware` owns only selected original immutable firmware/ROM/
-   data inputs; it is neither a host-runtime library nor a machine executor.
-   `app` stages an admitted immutable input through the selected backend
+   `mvdm-softpc-firmware` owns only selected original immutable firmware/data
+   inputs; it is neither a host-runtime library nor a machine executor. The
+   complete original `softpc.new/roms` subtree stays with `mvdm-host` to retain
+   the original SoftPC source layout. The selected product embeds its named
+   ROM/profile/CMOS defaults as PE resources, rather than deploying peer
+   media files. `app` stages an admitted immutable input through the selected backend
    binding. Executable `softpc.new/base/*` packages belong to `mvdm-host`.
    `mvdm-platform-abi` contains declarations only.
    For source-function BFS, zero-degree is all original definitions in

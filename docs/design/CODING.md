@@ -58,7 +58,11 @@ historical record is evidence, not a selectable configuration.
   resources (`vdmutils`). It is a production mirror with optional independent
   tool builds, never a main-program library.
 - `mvdm-softpc-firmware` contains only selected immutable original MVDM
-  firmware and machine-input paths (`softpc.new/bios`, `roms`, and `data`).
+  firmware and machine-input paths (`softpc.new/bios` and `data`). The
+  complete original `softpc.new/roms` subtree remains in `mvdm-host` to retain
+  the original SoftPC package layout.
+  The selected product embeds its named ROM/profile/CMOS defaults as PE
+  resources; those defaults are not peer runtime files.
   It is never a host-runtime library or a second machine implementation. The
   executable `softpc.new/base/bios` and `base/keymouse` packages stay in
   `mvdm-host`; `app` selects immutable inputs for the chosen backend through

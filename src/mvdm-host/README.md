@@ -2,7 +2,7 @@
 
 Original-relative MVDM host mirror. M0 T311 re-rooted original support
 carriers (`dirs`, `makefil0`, `inc`, `oemuni`, `suballoc`) here, beside their
-original MVDM host consumers. Standalone tools and selected firmware inputs
+original MVDM host consumers. Standalone tools and selected BIOS/data inputs
 remain in their own mirror components. This root has no locally authored
 provider replacement.
 
@@ -29,6 +29,12 @@ source-root counterpart and are retained as byte-identical project evidence.
 Reset, BIOS services and controller algorithms are original SoftPC runtime
 code. This physical layout is not by itself a runtime-enablement claim.
 
+The complete byte-exact `softpc.new/roms` subtree is retained under this root,
+rather than in the separate firmware/data-input mirror, so the selected SoftPC
+machine package remains directly comparable with its upstream layout. The
+product build embeds the immutable ROM/profile/CMOS defaults into its PE
+resource table; they are not deployed as peer runtime files.
+
 T301 S1 P21 additionally preserves missing byte-exact historical build
 products from `opennt-src-2` under their original-relative host paths.  These
 files are source/product evidence only: they are not host build, link or
@@ -40,6 +46,7 @@ runtime-discovery inputs.  The complete per-file provenance is in
 ### Re-rooted MVDM support declarations
 
 | ID | Original purpose | Reason | Implementation | Files |
+| MVDM-HOST-DIV-222 | Load and update the original named SoftPC ROM, profile and CMOS resource files through `host_read_resource`/`host_write_resource`. | The fixed-container product must carry immutable original defaults inside its executable rather than deploy peer ROM/CMOS/profile files; attempting to write the executable itself would violate its immutable product identity. | Keep the original API and timer/error order. Under the selected build flag, the same-shaped Win32 binding reads named `RCDATA` resources and persists a changed user resource as an HKCU binary value. | `softpc.new/host/src/nt_rez.c`; `../adapter-mvdm-host-out/win32/source/embedded_softpc_media.c`; build-local `embedded-softpc-media.rc` |
 | --- | --- | --- | --- | --- |
 | MVDM-SUPPORT-DIV-001 | Model `DEMEXTERR.ExtendedErrorPointer` as a 32-bit field in the packed DOS data record. | The original x86 `PUCHAR` happens to be 32 bits; on x64 it widens and changes the guest ABI. | Preserve the source record's nine-byte packed layout by storing the guest pointer numerically as `ULONG`. | `inc/dossvc.h` |
 | MVDM-SUPPORT-DIV-002 | Model the packed `DOS_CALL_NAMED_PIPE_STRUCT` 16:16 pointer fields as native pointer typedefs. | The original x86 typedefs happen to be 32 bits; on x64 they widen and move every subsequent guest field. | Preserve the original four-byte physical 16:16 values as `DWORD`; unchanged `READ_FAR_POINTER` source decoding retains the original name, parameter and result semantics through the bounded Redirector pointer scope. | `inc/vrnmpipe.h` |

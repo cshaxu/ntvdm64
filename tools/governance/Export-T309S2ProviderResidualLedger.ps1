@@ -18,7 +18,7 @@ if (!(Test-Path -LiteralPath $log -PathType Leaf)) { throw "Missing audit log: $
 
 function Classify([string]$symbol) {
     if ($symbol -match '^(diskette_io|nt_floppy_|nt_fdisk_|HostFloppyReset|HostFdiskReset|int13h_)') {
-        return @('bochs-firmware-boundary', 'mvdm-host/softpc.new/host/src/nt_rflop.c; mvdm-softpc-firmware/softpc.new/roms/bios4.asm', 'not-host-runtime; Bochs owns FDC/DMA/IRQ and firmware mechanics')
+        return @('softpc-firmware-boundary', 'mvdm-host/softpc.new/host/src/nt_rflop.c; mvdm-host/softpc.new/roms/bios4.asm', 'not-host-runtime; selected SoftPC owns FDC/DMA/IRQ and firmware mechanics')
     }
     if ($symbol -match '^(host_direct_access_error|RcErrorDialogBox|RcMessageBox)$') {
         return @('original-source-candidate', 'mvdm-host/softpc.new/host/src/nt_error.c', 'adapter-backed through adapter-win32 and session controlled stop')
