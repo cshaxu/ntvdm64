@@ -72,7 +72,11 @@ void *softpc_gdp_slot(const void *value, unsigned int original_offset,
     for (index = 0u; index < state->count; ++index) {
         slot = &state->slots[index];
         if (slot->original_offset != original_offset) continue;
-        return slot->native_width == native_width ? slot->storage : NULL;
+        /* The selected NTVDM C-VID objects can reach one historical 32-bit
+         * slot through both scalar and native-pointer C typedefs.  They name
+         * the same source field, not two adjacent fields: preserve that alias
+         * rather than treating the native-width spelling as a new identity. */
+        return slot->storage;
     }
     if (state->count == state->capacity) {
         unsigned int new_capacity = state->capacity == 0u
@@ -85,10 +89,11 @@ void *softpc_gdp_slot(const void *value, unsigned int original_offset,
         state->capacity = new_capacity;
     }
     slot = &state->slots[state->count];
-    slot->storage = calloc(1u, native_width);
+    slot->native_width = native_width < sizeof(uintptr_t) ?
+        sizeof(uintptr_t) : native_width;
+    slot->storage = calloc(1u, slot->native_width);
     if (slot->storage == NULL) return NULL;
     slot->original_offset = original_offset;
-    slot->native_width = native_width;
     ++state->count;
     return slot->storage;
 #endif
