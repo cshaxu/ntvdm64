@@ -10,6 +10,22 @@ selected by normal NT COMMAND prompt processing. For that host-process route,
 the modern adapter replaces only unavailable NT4 automatic VDM spawn for one
 resolved DOS/Win16 image with a same-architecture product child.
 
+## S7 supersession
+
+The completed S6 implementation refined this older proposal's tentative
+`54:08` language. Wherever the remainder says that the `54:08` adapter
+classifies native/DOS/Win16 itself, or shares a classifier with app entry, it
+is superseded: the adapter recognizes only the original `COMSPEC /c` boundary
+and starts the current architecture's product with the copied tail unchanged.
+
+The child product app entry is the sole resolver/classifier. It resolves a
+file beside the product then through current-directory/PATH: a resolved
+DOS/Win16 image enters VDM (Win16 remains bootstrap-gated), another resolved
+image uses public `CreateProcess`, and an unresolved token retains
+`COMSPEC /c`. Thus quoting, compound syntax and host-shell ownership are
+never reconstructed at `54:08`. See the current [S7 flow plan]
+(m0-t391-s7-app-entry-command-flow-and-regression-001.md) and its clean
+Console nested-COMMAND evidence.
 ## Purpose
 
 Recover the original execution boundary without replacing guest DOS `EXEC`.
