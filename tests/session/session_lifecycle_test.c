@@ -33,7 +33,7 @@ int main(void)
         session_dispose(&first) != 0 || session_thread_unbind(&first) == 0)
         return 2;
     if (session_presentation_text_acquire_writable(&first, 2u, 2u,
-            &text_writer) == 0 || text_writer == NULL)
+            2u, &text_writer) == 0 || text_writer == NULL)
         return 7;
     text_writer[0] = 'N';
     text_writer[1] = 7u;

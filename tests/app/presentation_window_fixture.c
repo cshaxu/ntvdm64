@@ -17,7 +17,7 @@ int main(void)
         session_machine_backend(&owner) != SESSION_MACHINE_BACKEND_SOFTPC)
         return 1;
     if (!session_activate(&owner) || !session_presentation_text_acquire_writable(
-            &owner, 2u, 1u, &text)) return 2;
+            &owner, 2u, 1u, 2u, &text)) return 2;
     text[0] = 'O';
     text[1] = 7u;
     text[2] = 'K';

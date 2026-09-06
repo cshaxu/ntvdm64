@@ -199,7 +199,7 @@ int session_notify_video_event(session *instance,
     const session_video_event *event);
 uint32_t session_video_event_active(const session *instance);
 int session_presentation_text_acquire_writable(session *instance,
-    uint32_t columns, uint32_t rows, uint8_t **bytes_out);
+    uint32_t columns, uint32_t rows, uint32_t cell_bytes, uint8_t **bytes_out);
 int session_presentation_text_describe(const session *instance,
     uint32_t *columns_out, uint32_t *rows_out, uint32_t *bytes_out);
 int session_presentation_text_snapshot(const session *instance,

@@ -105,7 +105,7 @@ static BOOL console_video_event(uint32_t kind, HANDLE output, HPALETTE palette,
 static int present_text_invalidation(HANDLE output, const SMALL_RECT *rect)
 {
     session *owner = session_thread_current();
-    uint32_t columns = 0u, rows = 0u, text_bytes = 0u;
+    uint32_t columns = 0u, rows = 0u, text_bytes = 0u, cell_bytes;
     uint8_t *text = NULL;
     CHAR_INFO *cells = NULL;
     uint32_t row, column, nonblank = 0u;
@@ -133,11 +133,13 @@ static int present_text_invalidation(HANDLE output, const SMALL_RECT *rect)
     width = rect->Right - rect->Left + 1;
     height = rect->Bottom - rect->Top + 1;
     if (width <= 0 || height <= 0 || width > SHRT_MAX || height > SHRT_MAX ||
-        text_bytes == 0u || (size_t)width > SIZE_MAX / (size_t)height ||
+        text_bytes == 0u || columns == 0u || rows == 0u ||
+        text_bytes / columns / rows < 2u || (size_t)width > SIZE_MAX / (size_t)height ||
         (size_t)width * (size_t)height > SIZE_MAX / sizeof(*cells)) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return -1;
     }
+    cell_bytes = text_bytes / columns / rows;
     text = (uint8_t *)malloc(text_bytes);
     cells = (CHAR_INFO *)calloc((size_t)width * (size_t)height, sizeof(*cells));
     if (text == NULL || cells == NULL ||
@@ -154,8 +156,8 @@ static int present_text_invalidation(HANDLE output, const SMALL_RECT *rect)
                 ((uint32_t)rect->Top + row) * columns +
                 (uint32_t)rect->Left + column;
             CHAR_INFO *destination_cell = &cells[row * (uint32_t)width + column];
-            destination_cell->Char.AsciiChar = text[source_cell * 2u];
-            destination_cell->Attributes = text[source_cell * 2u + 1u];
+            destination_cell->Char.AsciiChar = text[source_cell * cell_bytes];
+            destination_cell->Attributes = text[source_cell * cell_bytes + 1u];
             if (destination_cell->Char.AsciiChar != '\0' &&
                 destination_cell->Char.AsciiChar != ' ') ++nonblank;
         }
@@ -282,7 +284,13 @@ BOOL WINAPI RegisterConsoleVDM(DWORD flags, HANDLE start_event,
         return FALSE;
     }
     if (!session_presentation_text_acquire_writable(owner,
-            (uint32_t)buffer_size.X, (uint32_t)buffer_size.Y, &text_buffer)) {
+            (uint32_t)buffer_size.X, (uint32_t)buffer_size.Y,
+#ifdef MONITOR
+            2u,
+#else
+            4u,
+#endif
+            &text_buffer)) {
         SetLastError(ERROR_NOT_ENOUGH_MEMORY);
         return FALSE;
     }
