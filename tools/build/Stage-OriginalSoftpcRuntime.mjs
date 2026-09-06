@@ -32,10 +32,6 @@ const requiredAssets = [
   ['src/mvdm-guest/dos/v86/dev/himem/HIMEM.SYS', 'system32/HIMEM.SYS'],
   ['build/output/dos/REDIR.EXE', 'system32/REDIR.EXE'],
   ['build/output/dos/DOSX.EXE', 'system32/DOSX.EXE'],
-  ['src/mvdm-softpc-firmware/softpc.new/roms/bios1.rom', 'softpc/bios1.rom'],
-  ['src/mvdm-softpc-firmware/softpc.new/roms/bios2.rom', 'softpc/bios2.rom'],
-  ['src/mvdm-softpc-firmware/softpc.new/roms/bios4.rom', 'softpc/bios4.rom'],
-  ['src/mvdm-softpc-firmware/softpc.new/roms/v7vga.rom', 'softpc/v7vga.rom'],
   ['src/mvdm-softpc-firmware/softpc.new/roms/profile.spc', 'softpc/profile.spc'],
   ['src/mvdm-softpc-firmware/softpc.new/roms/cmos.ram', 'softpc/cmos.ram']
 ];

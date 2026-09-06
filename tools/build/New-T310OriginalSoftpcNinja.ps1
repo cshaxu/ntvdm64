@@ -125,6 +125,12 @@ $oemuniManifest = Join-Path $oemuniRoot 'sources'
 $hostManifest = Join-Path $hostRoot 'sources'
 $hostEntrySource = Join-Path $hostEntryRoot 'ntvdm.c'
 $hostEntryResourceSource = Join-Path $hostEntryRoot 'resource.rc'
+$embeddedRomResourceSource = Join-Path $build 'generated/softpc-embedded-roms.rc'
+$embeddedRomSources = @(
+    (Join-Path $root 'src/mvdm-softpc-firmware/softpc.new/roms/bios1.rom'),
+    (Join-Path $root 'src/mvdm-softpc-firmware/softpc.new/roms/bios4.rom'),
+    (Join-Path $root 'src/mvdm-softpc-firmware/softpc.new/roms/v7vga.rom')
+)
 $hostExportDefinition = Join-Path $hostEntryRoot 'obj/i386/ntvdm.def'
 $redirResourceSource = Join-Path $redirRoot 'vdmredir.rc'
 $redirExportDefinition = Join-Path $redirRoot 'vdmredir.def'
@@ -362,6 +368,26 @@ foreach ($name in $patchEvidenceNames) {
 }
 
 New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/gdp'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/dpmi'), (Join-Path $build 'obj/suballoc'), (Join-Path $build 'obj/session'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/adapter-redir'), (Join-Path $build 'obj/opennt-netlib'), (Join-Path $build 'obj/opennt-base-vdm'), (Join-Path $build 'obj/patch') | Out-Null
+$embeddedRomResource = Get-Content -LiteralPath $hostEntryResourceSource -Raw
+foreach ($romSource in $embeddedRomSources) {
+    if (!(Test-Path -LiteralPath $romSource -PathType Leaf)) {
+        throw "Required embedded SoftPC ROM missing: $romSource"
+    }
+    $romName = [IO.Path]::GetFileName($romSource)
+    $romPath = $romSource.Replace('\', '/')
+    $romResourceName = switch ($romName) {
+        'bios1.rom' { 'SOFTPC_BIOS1'; break }
+        'bios4.rom' { 'SOFTPC_BIOS4'; break }
+        'v7vga.rom' { 'SOFTPC_V7VGA'; break }
+        default { throw "Unexpected embedded SoftPC ROM: $romName" }
+    }
+    # ROMS_REZ_ID remains SoftPC's internal API selector.  RCDATA is the
+    # Win32 resource class; only the active CPU40 firmware triplet is emitted:
+    # profile.spc, cmos.ram and bios2.rom do not belong to the EXE contract.
+    $embeddedRomResource += "`r`n$romResourceName RCDATA `"$romPath`"`r`n"
+}
+[IO.File]::WriteAllText($embeddedRomResourceSource, $embeddedRomResource,
+    [Text.Encoding]::ASCII)
 if (!(Test-Path -LiteralPath $gdpGenerator -PathType Leaf)) { throw "GDP slot generator missing: $gdpGenerator" }
 if (!(Test-Path -LiteralPath $gdpOverlayRoot -PathType Container)) { throw "GDP overlay root missing: $gdpOverlayRoot" }
 if (!(Test-Path -LiteralPath $umbOverlayRoot -PathType Container)) { throw "UMB overlay root missing: $umbOverlayRoot" }
@@ -777,7 +803,7 @@ $graph.Add('build ' + $hostEntryObject + ': cc_host ' + (NinjaPath $hostEntrySou
 # point for app.  This is a build binding only, not a source edit or a second
 # startup implementation.
 $graph.Add('  host_cflags = ' + $hostFlags + ' /Dmain=mvdm_softpc_original_entry')
-$graph.Add('build obj/host/softpc-resource.res: rc ' + (NinjaPath $hostEntryResourceSource))
+$graph.Add('build obj/host/softpc-resource.res: rc ' + (NinjaPath $embeddedRomResourceSource))
 $hostObjects += $hostEntryObject
 $commandWriteLengthOverlaySource = Join-Path $commandOverlayRoot 'mvdm_command_write_length.c'
 $graph.Add('build obj/host/mvdm_command_write_length.obj: cc ' + (NinjaPath $commandWriteLengthOverlaySource))

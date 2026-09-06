@@ -44,6 +44,37 @@ AMENDMENTS      :
 #include "spcfile.h"
 #include "timer.h"
 
+/* CPU40 starts with exactly bios1.rom, bios4.rom and v7vga.rom.  They are
+ * immutable executable resources of the product, not SoftPC profile data.
+ * Keep every other resource type on the historical file path: in particular
+ * profile.spc and writable cmos.ram must never be taken from the EXE. */
+static long host_read_embedded_rom(char *name, byte *addr, int maxsize)
+{
+        HMODULE module;
+        HRSRC resource;
+        HGLOBAL loaded;
+        DWORD size;
+        void *bytes;
+        char *resource_name = NULL;
+
+        if (strcmp(name, "bios1.rom") == 0) resource_name = "SOFTPC_BIOS1";
+        else if (strcmp(name, "bios4.rom") == 0) resource_name = "SOFTPC_BIOS4";
+        else if (strcmp(name, "v7vga.rom") == 0) resource_name = "SOFTPC_V7VGA";
+        else return 0;
+
+        module = GetModuleHandleA(NULL);
+        resource = module == NULL ? NULL : FindResourceA(module, resource_name,
+            RT_RCDATA);
+        if (resource == NULL) return 0;
+        size = SizeofResource(module, resource);
+        if (size == 0u || size > (DWORD)maxsize) return 0;
+        loaded = LoadResource(module, resource);
+        bytes = loaded == NULL ? NULL : LockResource(loaded);
+        if (bytes == NULL) return 0;
+        memcpy(addr, bytes, size);
+        return (long)size;
+}
+
 
 /*
  * Allow a suitable default for the CMOS file name.
@@ -65,6 +96,9 @@ long host_read_resource(int type, char *name, byte *addr, int maxsize, int displ
         long size=0;
         char full_path[MAXPATHLEN];
         extern char *host_find_file(char *name, char *path, int disp_err);
+
+        if (type == ROMS_REZ_ID)
+            return host_read_embedded_rom(name, addr, maxsize);
 
 #ifdef DELTA            //STF - make change to 8.3 compatible name
         if (strcmp(name, ".spcprofile") == 0)
