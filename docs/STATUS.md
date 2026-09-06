@@ -18,21 +18,21 @@ other images use public `CreateProcess`, and an unresolved token retains
 **Active: M0 T391 S7 — app-entry and nested COMMAND flow/regression.**
 
 | Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T391 S7; ordinary single-person dual-role implementation, review and closure. |
-| Admission And Approval | Owner approved closing S6 and opening S7 to explain app entry and second-`COMMAND.COM` execution, then repair a normal-console regression within that path. |
-| Objective | Verify the single app-entry classifier, initial PermCom record, same-VDM guest EXEC, later `54:08` self-product child and original `54:0B` parent return; repair only a normal-console regression reproduced in the published package. |
-| Non-goals | No guest `COMMAND.COM` change; no app shell parser, direct guest-memory write, registry mutation, CPU/SoftPC workaround, WOW bootstrap, Redirector or broker work. |
-| Reference Baseline | [S6 closure](etc/evidence/m0-t391-s6-command-child-app-entry-closure-001.md), [S7 flow plan](etc/operations/m0-t391-s7-app-entry-command-flow-and-regression-001.md), current `a67dea29c4fc` x86 publication. |
-| Files And ABI Surface | Original guest `$EXEC`, COMMAND `cmdCheckBinary`/`cmdExec*`; app launch declaration; BaseVDM local broker; shared image-classification helper; COMMAND Win32 process adapter; formal CPU40 build manifests and `StageProductExecutable.mjs`. |
-| Applicable Rules | `docs/rules/EXECUTION.md`, source policy, architecture/coding rules, mapping-manager rule and mirror/overlay discipline. |
-| Verification | Formal CPU40/x86 product build and identity check; direct native `cmd.exe /c exit 37`; shared-helper DOS/Win16/native classification; clean-Console `command.com /c ver` and nested `command.com /c command.com /c ver`, both requiring the DOS version marker; one `54:08` child and original `54:0B` return; Win16 explicit bootstrap-gated result; stage only matching architecture links; `git diff --check`. |
-| Expected Markers | Native direct entry returns `37` without creating a VDM. A direct DOS target enters the first-PermCom record path. Every later `54:08` `COMSPEC /c` tail follows `54:08 → current-architecture product child → child app entry`; the child then resolves DOS/Win16, native, or unresolved COMSPEC as appropriate. The one- and two-level `COMMAND.COM /c VER` controls print `MS-DOS Version 5.00.500`. Win16 reaches the explicit WOW-gated disposition and never the host unsupported-16-bit launch. |
-| Asset Needs | Existing selected DOS media and `cmd.exe /c exit 37` workload, original MVDM source union, current formal build manifests and the sole `O:\\ntvdm64` runtime container. The retained product pair is `ntvdm32.exe` and `ntvdm64.exe` at both the repository `build/output` root and that runtime root. |
-| Reporting Requirements | Record every original import, existing adapter binding, changed mirror reference, failure/completion result and any remaining whole-owner boundary. |
-| Stop Conditions | Stop at a complete original owner boundary, ambiguous command grammar or an unrecorded process/stream ABI. Do not replace it with an app shell parser, direct guest write, trace-selected BOP patch, guest rewrite or a cross-process pointer/HANDLE transfer. |
-| Exit Criteria | Direct native `exit 37` remains proven without VDM startup; every `54:08` tail is proven to launch a same-architecture product child without adapter-side classification; the child app-entry result governs DOS/Win16, native, or unresolved COMSPEC; both nested COMMAND `VER` controls pass in the clean Console fixture; Win16 is bootstrap-gated with an explicit result. |
-| Original Owner Request | “单人双角色模式执行构建NTVDM64的队列任务。执行过程中，注意要保持镜像组件的最小修改复通，保持overlay最小，自主逻辑尽量放入adapter-*。”；“先让纯dos和dos调用32位程序跑通；16位支持先放放。”；“如果是32位程序，按照原来设计方案走；win16和dos程序需要自己按照最合适的语义自己来处理。” |
+| Identifier Mode | M0 T392 S1; ordinary single-person dual-role admission and direct-source-diff recovery. |
+| Admission And Approval | Owner requires T391 S9 formal closure before T392 work. The rejected bulk source rewrite remains removed; only checked-in original-path diffs are admitted. |
+| Objective | Recover the x64 SoftPC carrier so ntvdm64.exe passes the same clean Console COMMAND matrix as ntvdm32.exe, while retaining the S8 three-ROM executable-resource contract. |
+| Non-goals | No build-time source transform, app-entry/54:08 redesign, guest COMMAND change, ROM behavior change, registry mutation, parser, direct guest write or CPU workaround. |
+| Reference Baseline | T391 S9 closure; S8 resource evidence; clean x64 T392 baseline where all four COMMAND cases time out before configuration completion. |
+| Files And ABI Surface | Original C-VID rules under `softpc.new/base/cvidc`; existing external GDP carrier; formal T310 source graph and unchanged clean-Console fixture. |
+| Applicable Rules | Source policy, mirror/overlay discipline, direct-source-diff boundary, S8 resource contract and execution rules. |
+| Verification | Same checked-in source selection on x86/x64; x64 reaches config completion; all four Console COMMAND cases pass; resource probe retains exactly three embedded ROMs; `git diff --check`. |
+| Expected Markers | `command/c ver`, ordinary/nested `COMMAND.COM /c ver`, and interactive `exit` return zero and show the DOS version where required. |
+| Asset Needs | Existing formal build, clean Console fixture, S8 ROM resource probe and runtime package; no new guest media or registry state. |
+| Reporting Requirements | Record each direct source diff, its ABI rationale, x86/x64 build evidence, and the first failing runtime boundary. |
+| Stop Conditions | A proposed change alters C-VID/controller/BIOS/BOP/guest behavior or needs an unreviewed transform; stop at that owner boundary. |
+| Exit Criteria | x64 executable passes the full clean Console matrix and S8 resource contract using only direct reviewed source diffs. |
+| Original Owner Request | “不要使用softpc的脚本批量替换字符串的方式编译，而是在原始镜像代码中产生窄diff的方式修复64位编译问题。” |
+| Similar-Issue Sweep | `gdpvar.h`, `SINIT*`, `SEVID*`, C-VID `r1` fixed-offset access, native-width `IUH`, CCPU GDP consumers and formal x86/x64 source selection. |
 | Similar-Issue Sweep | guest `$EXEC`, `SCS_Is_Dos_Binary`, `SCS_DOSONLY`, `54:07`, `cmdCheckBinary`, `cmdExec*`, BaseVDM record production and direct app image disposition. |
 
 **S1 closure:** [reached DOSX dependency closure](etc/evidence/m0-t391-s1-dosx-dependency-closure-001.md). The default DOSX route is a combined DPMI/WOW bootstrap, not a standalone pure-DOS extender client; it is retained as the next complete bootstrap package after COMMAND native-child recovery.
