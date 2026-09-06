@@ -165,7 +165,7 @@ void *softpc_gdp_rule_slot(void *state, unsigned int original_offset,
 #endif
 }
 
-void *softpc_gdp_rule_address(void *state, size_t original_address,
+void *softpc_gdp_rule_address(void *state, uintptr_t original_address,
     size_t native_width)
 {
 #if defined(_M_IX86)

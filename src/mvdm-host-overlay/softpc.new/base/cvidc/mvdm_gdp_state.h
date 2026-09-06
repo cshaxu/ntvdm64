@@ -2,6 +2,7 @@
 #define MVDM_HOST_OVERLAY_GDP_STATE_H
 
 #include <stddef.h>
+#include <stdint.h>
 
 /*
  * Private to the selected CCPU/CVIDC mirror.  GDP fields are native SoftPC
@@ -15,7 +16,7 @@ void *softpc_gdp_slot(const void *state, unsigned int original_offset,
  * translate only the private GDP carrier on x64; x86 stays byte-contiguous. */
 void *softpc_gdp_rule_slot(void *state, unsigned int original_offset,
     size_t native_width);
-void *softpc_gdp_rule_address(void *state, size_t original_address,
+void *softpc_gdp_rule_address(void *state, uintptr_t original_address,
     size_t native_width);
 
 #endif
