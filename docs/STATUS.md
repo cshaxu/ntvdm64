@@ -2,38 +2,49 @@
 
 ## Current Work
 
-**M0 T391 S7 is active.** S6 closed the command-child app-entry disposition:
-the `54:08` worker restarts the current product without classifying its tail;
-the child app entry alone resolves `.COM`/`.EXE`/`.BAT` beside the product and
-then through current-directory/PATH. Resolved DOS/Win16 enters VDM, resolved
-other images use public `CreateProcess`, and an unresolved token retains
-`COMSPEC /c`.
+**No active M/T/S packet.** M0 T393 is closed as a DPMI32 design-only audit.
+The next admitted work must be the complete adapter ownership migration.
 
 ## Latest Closure
 
-[M0 T391 S6 command child / app-entry closure](etc/evidence/m0-t391-s6-command-child-app-entry-closure-001.md).
+[M0 T393 DPMI32 design closure](history/m0-t393-dpmi32-design-closure-20260906.md).
 
 ## Active Packet
 
-**Active: M0 T391 S7 — app-entry and nested COMMAND flow/regression.**
+**Closed packet: M0 T393 S1 — DPMI32 source and dependency audit.**
 
 | Field | Record |
-| Identifier Mode | M0 T392 S1; ordinary single-person dual-role admission and direct-source-diff recovery. |
-| Admission And Approval | Owner requires T391 S9 formal closure before T392 work. The rejected bulk source rewrite remains removed; only checked-in original-path diffs are admitted. |
-| Objective | Recover the x64 SoftPC carrier so ntvdm64.exe passes the same clean Console COMMAND matrix as ntvdm32.exe, while retaining the S8 three-ROM executable-resource contract. |
-| Non-goals | No build-time source transform, app-entry/54:08 redesign, guest COMMAND change, ROM behavior change, registry mutation, parser, direct guest write or CPU workaround. |
-| Reference Baseline | T391 S9 closure; S8 resource evidence; clean x64 T392 baseline where all four COMMAND cases time out before configuration completion. |
-| Files And ABI Surface | Original C-VID rules under `softpc.new/base/cvidc`; existing external GDP carrier; formal T310 source graph and unchanged clean-Console fixture. |
-| Applicable Rules | Source policy, mirror/overlay discipline, direct-source-diff boundary, S8 resource contract and execution rules. |
-| Verification | Same checked-in source selection on x86/x64; x64 reaches config completion; all four Console COMMAND cases pass; resource probe retains exactly three embedded ROMs; `git diff --check`. |
-| Expected Markers | `command/c ver`, ordinary/nested `COMMAND.COM /c ver`, and interactive `exit` return zero and show the DOS version where required. |
-| Asset Needs | Existing formal build, clean Console fixture, S8 ROM resource probe and runtime package; no new guest media or registry state. |
-| Reporting Requirements | Record each direct source diff, its ABI rationale, x86/x64 build evidence, and the first failing runtime boundary. |
-| Stop Conditions | A proposed change alters C-VID/controller/BIOS/BOP/guest behavior or needs an unreviewed transform; stop at that owner boundary. |
-| Exit Criteria | x64 executable passes the full clean Console matrix and S8 resource contract using only direct reviewed source diffs. |
-| Original Owner Request | “不要使用softpc的脚本批量替换字符串的方式编译，而是在原始镜像代码中产生窄diff的方式修复64位编译问题。” |
-| Similar-Issue Sweep | `gdpvar.h`, `SINIT*`, `SEVID*`, C-VID `r1` fixed-offset access, native-width `IUH`, CCPU GDP consumers and formal x86/x64 source selection. |
-| Similar-Issue Sweep | guest `$EXEC`, `SCS_Is_Dos_Binary`, `SCS_DOSONLY`, `54:07`, `cmdCheckBinary`, `cmdExec*`, BaseVDM record production and direct app image disposition. |
+| Identifier Mode | M0 T393 S1; ordinary single-person dual-role source/dependency audit. |
+| Admission And Approval | Owner approved Queue candidate 1 and directed a careful S1 audit. |
+| Objective | Audit the complete DPMI32 original owner package, its formal-graph presence and adjacent adapter/overlay diff; identify WOW32 as the successor owner boundary. |
+| Non-goals | No source import, graph admission, product behavior change, media replacement, DPMI synthesis, parser work, CPU workaround, or broad diff reduction. |
+| Reference Baseline | Owner-approved DOSX/DPMI32 proposal; closed T391/T392 records; selected OpenNT union and published package. |
+| Files And ABI Surface | `docs/etc/evidence/m0-t393-s1-*`, current source/dependency manifests, and audit reports only. No runtime source owner changes. |
+| Applicable Rules | Execution, architecture, coding, documentation, and process/console ownership rules. |
+| Verification | Review source/media identities and formal manifests; trace only the reached bootstrap boundary; produce four-rung recovery and current-diff ledgers; run `git diff --check`. |
+| Expected Markers | Frozen asset identities; original owner paths; formal/absent disposition; immediate missing cohort; and migrate/retain/delete diff disposition. |
+| Asset Needs | Current sources, source-policy-approved OpenNT union references, current formal manifests, selected guest-media hashes, and the published package; no mutation. |
+| Reporting Requirements | Record exact paths and hashes, source-owner/four-rung disposition, formal-graph status, immediate dependency cohort, and every retained or reducible divergence separately from a possible future import. |
+| Stop Conditions | Any need to import source, stage guest media, edit a graph, replace a BOP, patch CPU behavior, or make a runtime claim pauses this S for S2 admission. |
+| Exit Criteria | Evidence proves the reached chain, identifies original owners and graph dispositions, distinguishes mirror availability from composition, and leaves a bounded S2 recommendation without changing product inputs. |
+| Original Owner Request | “这个任务可以复通一大批源代码，并且减小diff，对吗？S1请做好审计。” |
+| Similar-Issue Sweep | DOSX loader/bootstrap, DPMI32 dispatch, `53:00`–`53:18`, `MS_bop_1` owner handoff, formal manifests, and registered MVDM divergences. |
+
+**T393 closure:** [DPMI32 design closure](history/m0-t393-dpmi32-design-closure-20260906.md) records the complete 16-body DPMI32 cohort and the next `MS_bop_1`/WOW32 owner boundary. It closes without S2: the newly first Queue candidate owns complete adapter ownership migration before a later complete DPMI32/WOW32 admission.
+
+**S13 closure:** [direct command matrix](etc/evidence/m0-t392-s13-direct-command-matrix-001.md) removes every untestable interactive `COMMAND.COM` path and records the six owner-specified direct commands on both products, including automatic child cleanup.
+
+**S12 closure:** [Console-owning acceptance repair](etc/evidence/m0-t392-s12-console-owning-acceptance-repair-001.md) repairs the per-row timeout/input-failure cleanup and records the current detached-Console boundary on both published products. It does not attribute that boundary to product behavior or claim the five requested product-output rows.
+
+## Current Technical Baseline
+
+- [M0 T391 closure](history/m0-t391-command-lifecycle-closure-20260906.md)
+  records the completed x86 COMMAND/app-entry lifecycle and executable-ROM
+  contract.
+- T392 is closed. Its direct non-interactive command matrix remains the
+  recorded acceptance boundary; unsupported interactive automation was removed.
+- T393 is closed as design-only work. Adapter ownership migration precedes a
+  new complete DPMI32/WOW32 provider-admission task.
 
 **S1 closure:** [reached DOSX dependency closure](etc/evidence/m0-t391-s1-dosx-dependency-closure-001.md). The default DOSX route is a combined DPMI/WOW bootstrap, not a standalone pure-DOS extender client; it is retained as the next complete bootstrap package after COMMAND native-child recovery.
 
