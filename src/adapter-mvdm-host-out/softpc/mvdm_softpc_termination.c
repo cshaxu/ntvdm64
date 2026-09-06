@@ -706,9 +706,12 @@ void mvdm_softpc_record_cpu_hw_interrupt(void)
     static const char hex[] = "0123456789ABCDEF";
     LONG ordinal;
 
-    /* This remains a bounded, default-off observer.  Recording the first
-     * request alone cannot distinguish a lost request from one that reached
-     * CPU40 while IF was clear later in the same startup. */
+    /* This remains a bounded, default-off observer.  Its epoch is diagnostic
+     * state, so do not alter it (or the later deferred-observation branch)
+     * unless one of this observer's report sinks was explicitly requested. */
+    if (mvdm_softpc_stream_io_report_path[0] == '\0' &&
+        GetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH", NULL, 0u) == 0u)
+        return;
     (void)InterlockedIncrement(&mvdm_softpc_cpu_hwirq_epoch);
     ordinal = InterlockedIncrement(&reported);
     if (ordinal > 64)
@@ -737,6 +740,13 @@ void mvdm_softpc_record_cpu_hw_interrupt_deferred(unsigned int interrupts_enable
     mvdm_guest_location current_code;
     mvdm_guest_location_lease current_code_lease;
 
+    /* This observer reads several live guest locations.  Unlike the scalar
+     * epoch bookkeeping below, those reads are not a valid part of normal
+     * CPU40 execution: do not enter the observation path unless one of its
+     * two report sinks was explicitly requested. */
+    if (mvdm_softpc_stream_io_report_path[0] == '\0' &&
+        GetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH", NULL, 0u) == 0u)
+        return;
     (void)interrupts_enabled;
     epoch = InterlockedCompareExchange(&mvdm_softpc_cpu_hwirq_epoch, 0, 0);
     observed = InterlockedCompareExchange(
