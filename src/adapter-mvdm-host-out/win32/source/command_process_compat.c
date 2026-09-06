@@ -140,7 +140,6 @@ BOOL opennt_command_create_process_a(
     STARTUPINFOA local_startup;
     LPSTARTUPINFOA effective_startup;
     const char *comspec_tail;
-    mvdm_image_kind image_kind;
     int use_child_streams;
 
     if (startup_info == NULL) {
@@ -161,26 +160,15 @@ BOOL opennt_command_create_process_a(
         effective_startup = &local_startup;
     }
     comspec_tail = opennt_command_comspec_tail(command_line);
-    if (opennt_command_simple_shell_tail(comspec_tail)) {
-        /* DIVERGENCE(ADAPTER-WIN32-049): modern Windows has no NT4 VDM
-         * disposition behind COMSPEC. Reuse the direct-entry classifier for
-         * exactly one resolved tail; compound/native tails remain the
-         * original CreateProcess path below. */
-        image_kind = mvdm_image_classify_command_line(comspec_tail);
-        if (image_kind == MVDM_IMAGE_DOS) {
-            return opennt_command_launch_vdm_child(comspec_tail,
-                process_attributes, thread_attributes, inherit_handles,
-                creation_flags, environment, current_directory, effective_startup,
-                process_information);
-        }
-        if (image_kind == MVDM_IMAGE_WIN16) {
-            /* DIVERGENCE(ADAPTER-WIN32-049): NT4's COMSPEC could hand this
-             * image to WOW.  Its bootstrap is not admitted yet; retain an
-             * explicit worker-visible failure instead of invoking the modern
-             * host's unsupported-16-bit dialog. */
-            SetLastError(ERROR_NOT_SUPPORTED);
-            return FALSE;
-        }
+    if (comspec_tail != NULL) {
+        /* BOP 54:08's COMMAND worker has already selected its COMSPEC /c
+         * execution boundary.  It must not classify the child: relaunch this
+         * product and let its single app-entry disposition resolve DOS/Win16,
+         * native PE, and an unresolved shell token in one place. */
+        return opennt_command_launch_vdm_child(comspec_tail,
+            process_attributes, thread_attributes, inherit_handles,
+            creation_flags, environment, current_directory, effective_startup,
+            process_information);
     }
     return CreateProcessA(application_name, command_line,
         process_attributes, thread_attributes, inherit_handles,

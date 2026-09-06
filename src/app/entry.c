@@ -141,10 +141,6 @@ int main(int argc, char **argv)
         }
         goto finish;
     }
-    if (requested_image == MVDM_IMAGE_WIN16) {
-        result = APP_STARTUP_COMMAND_REJECTED;
-        goto finish;
-    }
     if (!app_launch_declaration_prepare_softpc_arguments(argc, argv,
             &softpc_argc, &softpc_argv)) {
         result = APP_STARTUP_OPTIONS_REJECTED;
