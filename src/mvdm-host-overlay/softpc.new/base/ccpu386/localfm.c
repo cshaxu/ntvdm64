@@ -15,6 +15,9 @@ typedef enum CPU_INT_TYPE CPU_INT_TYPE;
 #include "../../../../mvdm-host/softpc.new/base/cvidc/cpu4gen.h"
 #include "../../../../mvdm-host/softpc.new/base/cvidc/evidgen.h"
 
-IHP Gdp;
+/* C-VID ev_glue.c owns the one session GDP carrier.  CCPU's local facade
+ * observes that same state; defining it here makes the forced historical
+ * archive link select an arbitrary duplicate on x64. */
+extern IHP Gdp;
 struct CpuVector Cpu;
 struct VideoVector Video;
