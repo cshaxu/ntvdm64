@@ -12,20 +12,20 @@
 #define MVDM_GDP_INITIAL_SLOT_CAPACITY 128u
 #define MVDM_GDP_MAGIC 0x47504453u
 
-typedef struct mvdm_gdp_slot_record {
+typedef struct softpc_gdp_slot_record {
     unsigned int original_offset;
     size_t native_width;
     void *storage;
-} mvdm_gdp_slot_record;
+} softpc_gdp_slot_record;
 
 typedef struct mvdm_gdp_state {
     uint32_t magic;
     unsigned int count;
     unsigned int capacity;
-    mvdm_gdp_slot_record *slots;
+    softpc_gdp_slot_record *slots;
 } mvdm_gdp_state;
 
-void *mvdm_gdp_create(void)
+void *softpc_gdp_create(void)
 {
 #if defined(_M_IX86)
     /* The selected runtime is the original 32-bit CCPU carrier.  Its generated
@@ -40,7 +40,7 @@ void *mvdm_gdp_create(void)
 #endif
 }
 
-void mvdm_gdp_destroy(void *value)
+void softpc_gdp_destroy(void *value)
 {
 #if defined(_M_IX86)
     free(value);
@@ -56,7 +56,7 @@ void mvdm_gdp_destroy(void *value)
 #endif
 }
 
-void *mvdm_gdp_slot(const void *value, unsigned int original_offset,
+void *softpc_gdp_slot(const void *value, unsigned int original_offset,
     size_t native_width)
 {
 #if defined(_M_IX86)
@@ -64,7 +64,7 @@ void *mvdm_gdp_slot(const void *value, unsigned int original_offset,
     return (unsigned char *)value + original_offset;
 #else
     mvdm_gdp_state *state = (mvdm_gdp_state *)value;
-    mvdm_gdp_slot_record *slot;
+    softpc_gdp_slot_record *slot;
     unsigned int index;
 
     if (state == NULL || state->magic != MVDM_GDP_MAGIC || native_width == 0u)
@@ -77,7 +77,7 @@ void *mvdm_gdp_slot(const void *value, unsigned int original_offset,
     if (state->count == state->capacity) {
         unsigned int new_capacity = state->capacity == 0u
             ? MVDM_GDP_INITIAL_SLOT_CAPACITY : state->capacity * 2u;
-        mvdm_gdp_slot_record *new_slots = (mvdm_gdp_slot_record *)realloc(
+        softpc_gdp_slot_record *new_slots = (softpc_gdp_slot_record *)realloc(
             state->slots, new_capacity * sizeof(*new_slots));
 
         if (new_slots == NULL) return NULL;
@@ -95,7 +95,7 @@ void *mvdm_gdp_slot(const void *value, unsigned int original_offset,
 }
 
 #if !defined(_M_IX86)
-static size_t mvdm_gdp_vga_native_offset(unsigned int original_offset)
+static size_t softpc_gdp_vga_native_offset(unsigned int original_offset)
 {
     switch (original_offset) {
     case 1280u: return offsetof(struct VGAGLOBALSETTINGS, latches);
@@ -148,24 +148,24 @@ static size_t mvdm_gdp_vga_native_offset(unsigned int original_offset)
 }
 #endif
 
-void *mvdm_gdp_rule_slot(void *state, unsigned int original_offset,
+void *softpc_gdp_rule_slot(void *state, unsigned int original_offset,
     size_t native_width)
 {
 #if defined(_M_IX86)
     (void)native_width;
     return (unsigned char *)state + original_offset;
 #else
-    size_t member_offset = mvdm_gdp_vga_native_offset(original_offset);
+    size_t member_offset = softpc_gdp_vga_native_offset(original_offset);
     if (member_offset != (size_t)-1) {
-        void *vga = mvdm_gdp_slot(state, 1280u,
+        void *vga = softpc_gdp_slot(state, 1280u,
             sizeof(struct VGAGLOBALSETTINGS));
         return vga == NULL ? NULL : (unsigned char *)vga + member_offset;
     }
-    return mvdm_gdp_slot(state, original_offset, native_width);
+    return softpc_gdp_slot(state, original_offset, native_width);
 #endif
 }
 
-void *mvdm_gdp_rule_address(void *state, size_t original_address,
+void *softpc_gdp_rule_address(void *state, size_t original_address,
     size_t native_width)
 {
 #if defined(_M_IX86)
@@ -174,7 +174,7 @@ void *mvdm_gdp_rule_address(void *state, size_t original_address,
     return (void *)original_address;
 #else
     return original_address < 4096u
-        ? mvdm_gdp_slot(state, (unsigned int)original_address, native_width)
+        ? softpc_gdp_slot(state, (unsigned int)original_address, native_width)
         : (void *)original_address;
 #endif
 }
