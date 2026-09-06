@@ -82,8 +82,32 @@ static void restore_diagnostics(const char values[][MAX_PATH], const BOOL presen
             present[index] ? values[index] : NULL);
 }
 
+static BOOL write_console_input_text(HANDLE input, const char *text)
+{
+    const char *cursor;
+    for (cursor = text; *cursor != '\0'; ++cursor) {
+        INPUT_RECORD records[2] = { 0 };
+        DWORD written;
+        SHORT translated = VkKeyScanA(*cursor);
+        WORD virtual_key = translated == -1 ? 0u : (WORD)(translated & 0xff);
+        records[0].EventType = KEY_EVENT;
+        records[0].Event.KeyEvent.bKeyDown = TRUE;
+        records[0].Event.KeyEvent.wRepeatCount = 1u;
+        records[0].Event.KeyEvent.wVirtualKeyCode = virtual_key;
+        records[0].Event.KeyEvent.wVirtualScanCode = (WORD)MapVirtualKeyA(
+            virtual_key, MAPVK_VK_TO_VSC);
+        records[0].Event.KeyEvent.uChar.AsciiChar = *cursor;
+        records[1] = records[0];
+        records[1].Event.KeyEvent.bKeyDown = FALSE;
+        if (!WriteConsoleInputA(input, records, ARRAYSIZE(records), &written) ||
+            written != ARRAYSIZE(records)) return FALSE;
+    }
+    return TRUE;
+}
+
 static int run_case(const char *product, const char *working_directory,
-                    const char *command, HANDLE input, HANDLE output,
+                    const char *command, const char *input_text,
+                    const char *expected, HANDLE input, HANDLE output,
                     char *screen, DWORD screen_capacity)
 {
     STARTUPINFOA startup = { sizeof(startup) };
@@ -110,6 +134,8 @@ static int run_case(const char *product, const char *working_directory,
         return 11;
     }
     restore_diagnostics(values, present);
+    if (input_text != NULL && !write_console_input_text(input, input_text))
+        return 16;
     wait_status = WaitForSingleObject(child.hProcess, RUN_TIMEOUT_MS);
     if (wait_status == WAIT_OBJECT_0) GetExitCodeProcess(child.hProcess, &exit_code);
     CloseHandle(child.hThread);
@@ -117,7 +143,7 @@ static int run_case(const char *product, const char *working_directory,
     if (wait_status != WAIT_OBJECT_0) return 12;
     if (exit_code != 0u) return 13;
     if (!read_console(output, screen, screen_capacity)) return 14;
-    return strstr(screen, "MS-DOS Version 5.00.500") != NULL ? 0 : 15;
+    return expected == NULL || strstr(screen, expected) != NULL ? 0 : 15;
 }
 
 int main(int argc, char **argv)
@@ -130,6 +156,7 @@ int main(int argc, char **argv)
     int first;
     int nested;
 
+    int interactive;
     if (argc != 3) return 64;
     /* A pseudoconsole has no Console window but is already attached; only
      * allocate when CONIN$ proves that there is no Console at all. */
@@ -146,17 +173,22 @@ int main(int argc, char **argv)
                          FILE_SHARE_READ | FILE_SHARE_WRITE, &inherit,
                          OPEN_EXISTING, 0, NULL);
     if (input == INVALID_HANDLE_VALUE || output == INVALID_HANDLE_VALUE) return 66;
-    first = run_case(argv[1], ".", "command.com /c ver", input, output,
-                     screen, sizeof(screen));
-    nested = run_case(argv[1], ".", "command.com /c command.com /c ver",
-                      input, output, screen, sizeof(screen));
+    first = run_case(argv[1], ".", "command.com /c ver", NULL,
+                     "MS-DOS Version 5.00.500", input, output, screen,
+                     sizeof(screen));
+    nested = run_case(argv[1], ".", "command.com /c command.com /c ver", NULL,
+                      "MS-DOS Version 5.00.500", input, output, screen,
+                      sizeof(screen));
+    interactive = run_case(argv[1], ".", "command.com", "exit\r", NULL,
+                           input, output, screen, sizeof(screen));
     if (fopen_s(&report, argv[2], "wb") == 0 && report != NULL) {
         fprintf(report, "container=clean-console-no-mvdm-diagnostics\n");
         fprintf(report, "case=command.com /c ver\nresult=%d\n", first);
         fprintf(report, "case=command.com /c command.com /c ver\nresult=%d\n", nested);
+        fprintf(report, "case=command.com [Console exit]\nresult=%d\n", interactive);
         fclose(report);
     }
     CloseHandle(input);
     CloseHandle(output);
-    return first != 0 ? first : nested;
+    return first != 0 ? first : nested != 0 ? nested : interactive;
 }

@@ -15,7 +15,7 @@ writeFileSync(resolve(build, 'build.ninja'), [
   '  deps = msvc',
   '  msvc_deps_prefix = Note: including file:',
   'rule link',
-  '  command = link.exe /nologo /OUT:$out $in kernel32.lib',
+  '  command = link.exe /nologo /OUT:$out $in kernel32.lib user32.lib',
   `build clean-console-command-integration.obj: cc ${root}/tests/observation/clean_console_command_integration.c`,
   'build clean-console-command-integration.exe: link clean-console-command-integration.obj',
   'default clean-console-command-integration.exe',

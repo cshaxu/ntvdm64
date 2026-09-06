@@ -30,6 +30,8 @@ case=command.com /c ver
 result=0
 case=command.com /c command.com /c ver
 result=0
+case=command.com [Console exit]
+result=0
 ```
 
 For each row the fixture clears the Console, starts the product in
@@ -39,6 +41,11 @@ Therefore both the single and two-level child app-entry paths reached the DOS
 `COMMAND.COM` `VER` implementation; this is not merely a successful host
 `cmd.exe` handoff.
 
+The third row starts an ordinary second guest `COMMAND.COM`, writes normal
+Console `exit` key events, and requires its parent product process to return
+with exit `0`; it proves the interactive child can leave its prompt rather
+
+than hanging.
 ## Disposition
 
 This supersedes the earlier agent-runner failure as product evidence.  That
