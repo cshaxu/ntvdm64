@@ -2,29 +2,28 @@
 
 ## Current Work
 
-**M0 T391 S6 is active.** S4 closed the no-argument product hang. Source
-review distinguishes direct guest DOS `EXEC` from the later original
-`COMMAND.COM` `54:08` COMSPEC worker path: the former remains same-VDM, while
-one resolved DOS/Win16 image on the latter receives a same-architecture child
-product disposition. Direct app entry now resolves `.COM`/`.EXE`/`.BAT` first
-beside the product and then through current-directory/PATH; an unresolved
-token retains the public `COMSPEC /c` host-shell route.
+**M0 T391 S7 is active.** S6 closed the command-child app-entry disposition:
+the `54:08` worker restarts the current product without classifying its tail;
+the child app entry alone resolves `.COM`/`.EXE`/`.BAT` beside the product and
+then through current-directory/PATH. Resolved DOS/Win16 enters VDM, resolved
+other images use public `CreateProcess`, and an unresolved token retains
+`COMSPEC /c`.
 
 ## Latest Closure
 
-[M0 T390 pure-DOS first-shell profile](history/m0-t390-pure-dos-first-shell-profile-closure-20260904.md).
+[M0 T391 S6 command child / app-entry closure](etc/evidence/m0-t391-s6-command-child-app-entry-closure-001.md).
 
 ## Active Packet
 
-**Active: M0 T391 S6 — original image-disposition and COMMAND execution recovery.**
+**Active: M0 T391 S7 — app-entry and nested COMMAND flow/regression.**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T391 S6; ordinary single-person dual-role implementation, review and closure. |
-| Admission And Approval | The owner approved original owner separation: direct native PE is a Windows product-entry request; DOS COM/MZ stays in the current VDM; Win16 stays on the original WOW route. This S6 correction is governed by [the disposition proposal](etc/operations/proposal-command-child-vdm-launch-recovery-001.md). |
-| Objective | Preserve the first-PermCom `IsFirstCall → GetNextVDMCommand` record path for direct DOS entry; resolve one direct CLI token with DOS `.COM`/`.EXE`/`.BAT` precedence beside the product then through current-directory/PATH, classify it before VDM creation, route DOS into VDM and Win16 to its WOW gate, and retain public `COMSPEC /c` for an unresolved host-shell token. For the original later `BOP 54:08` `COMSPEC /c` route, use the same classifier to redirect only one resolved DOS/Win16 image to the matching current product child; retain native/compound command behavior and the original `cmdExec32` wait/return chain. |
-| Non-goals | No guest `COMMAND.COM` change; no app-owned shell parser, direct guest-memory launch or synthetic completion; no DOS EXEC/PSP rewrite; no WOW bootstrap, Redirector, CSRSS/BaseSrv broker or fullscreen product-shell recovery. |
-| Reference Baseline | [T391/S5 PermCom initial-record recovery](etc/evidence/m0-t391-s5-permcom-initial-record-recovery-001.md); [same-VDM EXEC evidence](etc/evidence/m0-t391-s6-image-disposition-and-same-vdm-exec-001.md); original `msproc.asm` `$EXEC`, `cmdCheckBinary`, `cmdExec32`; current source-shaped BaseVDM local broker; [the disposition proposal](etc/operations/proposal-command-child-vdm-launch-recovery-001.md). |
+| Identifier Mode | M0 T391 S7; ordinary single-person dual-role implementation, review and closure. |
+| Admission And Approval | Owner approved closing S6 and opening S7 to explain app entry and second-`COMMAND.COM` execution, then repair a normal-console regression within that path. |
+| Objective | Verify the single app-entry classifier, initial PermCom record, same-VDM guest EXEC, later `54:08` self-product child and original `54:0B` parent return; repair only a normal-console regression reproduced in the published package. |
+| Non-goals | No guest `COMMAND.COM` change; no app shell parser, direct guest-memory write, registry mutation, CPU/SoftPC workaround, WOW bootstrap, Redirector or broker work. |
+| Reference Baseline | [S6 closure](etc/evidence/m0-t391-s6-command-child-app-entry-closure-001.md), [S7 flow plan](etc/operations/m0-t391-s7-app-entry-command-flow-and-regression-001.md), current `a67dea29c4fc` x86 publication. |
 | Files And ABI Surface | Original guest `$EXEC`, COMMAND `cmdCheckBinary`/`cmdExec*`; app launch declaration; BaseVDM local broker; shared image-classification helper; COMMAND Win32 process adapter; formal CPU40 build manifests and `StageProductExecutable.mjs`. |
 | Applicable Rules | `docs/rules/EXECUTION.md`, source policy, architecture/coding rules, mapping-manager rule and mirror/overlay discipline. |
 | Verification | Formal CPU40/x86 product build and identity check; direct native `cmd.exe /c exit 37`; shared-helper DOS/Win16/native classification; one `54:08` DOS child and original `54:0B` return; Win16 explicit bootstrap-gated result; one fixed runtime observation; stage only matching architecture links; `git diff --check`. |
