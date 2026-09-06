@@ -131,6 +131,107 @@ void nt_process_menu(PMENU_EVENT_RECORD MenuEvent);
 void nt_process_suspend_event();
 void nt_process_screen_scale(void);
 
+/* DIVERGENCE(MVDM-HOST-DIV-211): current Console/RDP may report a virtual
+ * key or UTF-16 character without the PC Scan-1 byte that the original
+ * SoftPC input worker passes to KeyMsgToKeyCode. Normalize only at that
+ * host boundary: the original table still selects the SoftPC key number and
+ * keyba.c remains the only guest keyboard-controller owner. */
+static WORD nt_rdp_decode_scan(WORD raw_scan)
+{
+    return (raw_scan & 0xff00u) == 0xe000u ?
+        (WORD)(0x0100u | (raw_scan & 0x00ffu)) :
+        (WORD)(raw_scan & 0x00ffu);
+}
+
+static WORD nt_rdp_resolve_scan(WORD virtual_key)
+{
+    return nt_rdp_decode_scan((WORD)MapVirtualKeyExW(virtual_key,
+        MAPVK_VK_TO_VSC_EX, GetKeyboardLayout(0u)));
+}
+
+static DWORD nt_rdp_emit_transition(PINPUT_RECORD records, DWORD capacity,
+    DWORD count, WORD scan, WORD virtual_key, BOOL down)
+{
+    KEY_EVENT_RECORD *key;
+    if (count >= capacity || scan == 0u || virtual_key == 0u) return 0u;
+    records[count].EventType = KEY_EVENT;
+    key = &records[count].Event.KeyEvent;
+    ZeroMemory(key, sizeof(*key));
+    key->bKeyDown = down;
+    key->wRepeatCount = 1u;
+    key->wVirtualKeyCode = virtual_key;
+    key->wVirtualScanCode = (WORD)(scan & 0xffu);
+    if ((scan & 0x0100u) != 0u) key->dwControlKeyState = ENHANCED_KEY;
+    return count + 1u;
+}
+
+static DWORD nt_rdp_normalize_key(const KEY_EVENT_RECORD *input,
+    PINPUT_RECORD output, DWORD capacity)
+{
+    static WORD pending_high_surrogate;
+    KEY_EVENT_RECORD key;
+    WORD scan;
+    WORD virtual_key;
+    SHORT mapped;
+    BYTE modifiers;
+    DWORD count = 0u;
+
+    if (input == NULL || output == NULL || capacity == 0u) return 0u;
+    key = *input;
+    if (key.wVirtualScanCode != 0u) {
+        output[0].EventType = KEY_EVENT;
+        output[0].Event.KeyEvent = key;
+        return 1u;
+    }
+    if (key.wVirtualKeyCode != 0u && key.wVirtualKeyCode != VK_PACKET) {
+        scan = nt_rdp_resolve_scan(key.wVirtualKeyCode);
+        if (scan == 0u) return 0u;
+        key.wVirtualScanCode = (WORD)(scan & 0xffu);
+        if ((scan & 0x0100u) != 0u) key.dwControlKeyState |= ENHANCED_KEY;
+        output[0].EventType = KEY_EVENT;
+        output[0].Event.KeyEvent = key;
+        return 1u;
+    }
+    if (!key.bKeyDown || key.uChar.UnicodeChar == 0u) return 0u;
+    if (key.uChar.UnicodeChar >= 0xd800u && key.uChar.UnicodeChar <= 0xdbffu) {
+        pending_high_surrogate = key.uChar.UnicodeChar;
+        return 0u;
+    }
+    if (key.uChar.UnicodeChar >= 0xdc00u && key.uChar.UnicodeChar <= 0xdfffu) {
+        pending_high_surrogate = 0u;
+        return 0u;
+    }
+    pending_high_surrogate = 0u;
+    mapped = VkKeyScanExW(key.uChar.UnicodeChar, GetKeyboardLayout(0u));
+    if (mapped == -1) return 0u;
+    virtual_key = (WORD)(mapped & 0xffu);
+    scan = nt_rdp_resolve_scan(virtual_key);
+    if (scan == 0u) return 0u;
+    modifiers = (BYTE)((mapped >> 8u) & 0xffu);
+    if ((modifiers & 2u) != 0u &&
+        (count = nt_rdp_emit_transition(output, capacity, count,
+            0x1du, VK_CONTROL, TRUE)) == 0u) return 0u;
+    if ((modifiers & 4u) != 0u &&
+        (count = nt_rdp_emit_transition(output, capacity, count,
+            0x38u, VK_MENU, TRUE)) == 0u) return 0u;
+    if ((modifiers & 1u) != 0u &&
+        (count = nt_rdp_emit_transition(output, capacity, count,
+            0x2au, VK_SHIFT, TRUE)) == 0u) return 0u;
+    if ((count = nt_rdp_emit_transition(output, capacity, count, scan,
+            virtual_key, TRUE)) == 0u ||
+        (count = nt_rdp_emit_transition(output, capacity, count, scan,
+            virtual_key, FALSE)) == 0u) return 0u;
+    if ((modifiers & 1u) != 0u &&
+        (count = nt_rdp_emit_transition(output, capacity, count,
+            0x2au, VK_SHIFT, FALSE)) == 0u) return 0u;
+    if ((modifiers & 4u) != 0u &&
+        (count = nt_rdp_emit_transition(output, capacity, count,
+            0x38u, VK_MENU, FALSE)) == 0u) return 0u;
+    if ((modifiers & 2u) != 0u &&
+        (count = nt_rdp_emit_transition(output, capacity, count,
+            0x1du, VK_CONTROL, FALSE)) == 0u) return 0u;
+    return count;
+}
 
 //
 // keyboard control state syncronization
@@ -351,7 +452,10 @@ DWORD nt_event_loop(void)
      * con server as Five records. See ntcon\client\iostubs.c.
      */
 
-    INPUT_RECORD InputRecord[5];
+    /* A scan-less UTF-16 packet can become Ctrl/Alt/Shift plus a key
+     * make/break sequence. Read one raw record so that this fixed local
+     * expansion preserves console ordering without a second queue. */
+    INPUT_RECORD InputRecord[8];
 
 
     /* the console input handle shouldn't get changed during the lifetime
@@ -381,11 +485,19 @@ DWORD nt_event_loop(void)
         if (!status) {
             if (ReadConsoleInputExW(sc.InputHandle,
                                     &InputRecord[0],
-                                    sizeof(InputRecord)/sizeof(INPUT_RECORD),
+                                    1u,
                                     &RecordsRead,
                                     CONSOLE_READ_NOWAIT
                                     ))
               {
+                if (!RecordsRead) {
+                    continue;
+                    }
+
+                if (InputRecord[0].EventType == KEY_EVENT)
+                    RecordsRead = nt_rdp_normalize_key(
+                        &InputRecord[0].Event.KeyEvent, &InputRecord[0],
+                        sizeof(InputRecord)/sizeof(INPUT_RECORD));
                 if (!RecordsRead) {
                     continue;
                     }
