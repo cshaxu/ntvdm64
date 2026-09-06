@@ -34,6 +34,8 @@ remains the one decision boundary.
 - In that second shell, a DOS program and a native 32-bit program both return
   to the prompt; `exit` terminates normally.
 - `command.com /c ver` from the second shell prints `MS-DOS Version 5.00.500`.
+- Direct `command/c ver` normalizes only the exact DOS `COMMAND` tight `/c`
+  spelling before ordinary app-entry resolution, then prints the DOS version.
 - `ver` in the second shell follows its source-selected host-command path and
   prints the Windows version.
 - Direct entry preserves resolved-native and unresolved-token controls.

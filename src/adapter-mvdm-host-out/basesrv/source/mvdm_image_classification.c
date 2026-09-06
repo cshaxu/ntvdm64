@@ -162,13 +162,37 @@ int mvdm_image_resolve_command_line(const char *command_line,
     char image[MAX_PATH];
     char resolved[MAX_PATH];
     const char *tail;
+    char normalized_tail[MAXIMUM_VDM_COMMAND_LENGTH + 4u];
+    char *command_switch;
+    int command_c_switch = 0;
     int formatted;
 
     if (image_kind_out != NULL) *image_kind_out = MVDM_IMAGE_UNKNOWN;
-    if (!copy_image_token(command_line, image, sizeof(image)) ||
-        !resolve_image_token(image, resolved, sizeof(resolved))) return 0;
+    if (!copy_image_token(command_line, image, sizeof(image))) return 0;
     tail = image_argument_tail(command_line);
     if (tail == NULL) return 0;
+    /* DOS COMMAND accepts its /C switch immediately after its name.  A
+     * Windows path resolver instead treats that slash as a separator, so
+     * normalize only this exact legacy spelling before ordinary resolution.
+     * Do not generalize this to application switches or slash-containing
+     * paths: app entry is not a shell parser. */
+    command_switch = strchr(image, '/');
+    if (command_switch != NULL && _stricmp(command_switch, "/c") == 0) {
+        *command_switch = '\0';
+        if (_stricmp(image, "command") == 0 ||
+            _stricmp(image, "command.com") == 0)
+            command_c_switch = 1;
+        else
+            *command_switch = '/';
+    }
+    if (!resolve_image_token(image, resolved, sizeof(resolved))) return 0;
+    if (command_c_switch) {
+        formatted = snprintf(normalized_tail, sizeof(normalized_tail), "/c%s%s",
+            *tail != '\0' ? " " : "", tail);
+        if (formatted < 0 || (size_t)formatted >= sizeof(normalized_tail)) return 0;
+        tail = normalized_tail;
+    }
+
     formatted = snprintf(resolved_command_line, resolved_command_line_bytes,
         "\"%s\"%s%s", resolved, *tail != '\0' ? " " : "", tail);
     if (formatted < 0 || (size_t)formatted >= resolved_command_line_bytes)

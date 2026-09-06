@@ -155,6 +155,7 @@ int main(int argc, char **argv)
     FILE *report;
     int first;
     int nested;
+    int tight_c;
 
     int interactive;
     if (argc != 3) return 64;
@@ -179,10 +180,14 @@ int main(int argc, char **argv)
     nested = run_case(argv[1], ".", "command.com /c command.com /c ver", NULL,
                       "MS-DOS Version 5.00.500", input, output, screen,
                       sizeof(screen));
+    tight_c = run_case(argv[1], ".", "command/c ver", NULL,
+                       "MS-DOS Version 5.00.500", input, output, screen,
+                       sizeof(screen));
     interactive = run_case(argv[1], ".", "command.com", "exit\r", NULL,
                            input, output, screen, sizeof(screen));
     if (fopen_s(&report, argv[2], "wb") == 0 && report != NULL) {
         fprintf(report, "container=clean-console-no-mvdm-diagnostics\n");
+        fprintf(report, "case=command/c ver\nresult=%d\n", tight_c);
         fprintf(report, "case=command.com /c ver\nresult=%d\n", first);
         fprintf(report, "case=command.com /c command.com /c ver\nresult=%d\n", nested);
         fprintf(report, "case=command.com [Console exit]\nresult=%d\n", interactive);
@@ -190,5 +195,6 @@ int main(int argc, char **argv)
     }
     CloseHandle(input);
     CloseHandle(output);
-    return first != 0 ? first : nested != 0 ? nested : interactive;
+    return first != 0 ? first : tight_c != 0 ? tight_c :
+        nested != 0 ? nested : interactive;
 }
