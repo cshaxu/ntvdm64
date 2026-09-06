@@ -67,11 +67,11 @@ for (const record of records) {
   generated.push(`#undef ${record.name}`);
   if (record.form === 'lvalue') {
     generated.push(`#define ${record.name} (*((` +
-      `${record.type} *)mvdm_gdp_slot((const void *)Gdp, ${record.offset}u, ` +
+      `${record.type} *)softpc_gdp_slot((const void *)Gdp, ${record.offset}u, ` +
       `sizeof(${record.type}))))`);
   } else {
     generated.push(`#define ${record.name} ((` +
-      `${record.type})mvdm_gdp_slot((const void *)Gdp, ${record.offset}u, ` +
+      `${record.type})softpc_gdp_slot((const void *)Gdp, ${record.offset}u, ` +
       `${record.name}Size))`);
   }
 }

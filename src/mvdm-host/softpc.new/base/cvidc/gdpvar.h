@@ -700,6 +700,6 @@ extern IHP Gdp;
  * the existing private native-width slot carrier here, rather than relying
  * on individual generated-rule translation units to remember the overlay.
  * The x86 CCPU40 build keeps the byte-identical contiguous GDP layout. */
-#include <softpc_gdp_slots.h>
+#include <mvdm_gdp_slots.h>
 
 #endif /* _gdpvar_h */
