@@ -2,9 +2,28 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 Td S3 P2 completed governance automation
-convergence; the runtime recovery queue remains owner-held until a candidate is
-explicitly admitted.
+**Active: Td S4 P1** — governance state-machine parity. The runtime recovery
+queue remains owner-held; no numeric implementation packet is admitted.
+
+## Active Packet
+
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | Governance — M0 Td S4 P1. |
+| Admission And Approval | Continuing owner objective: match NXVM governance level. |
+| Objective | Add NXVM-equivalent active packet, identifier, closure-retention and fixture validation. |
+| Non-goals | No product/runtime/source/ABI or queue ordering change. |
+| Reference Baseline | Td S3 P2 `b968bf688`; audit found unimplemented NXVM state-machine controls. |
+| Files And ABI Surface | Governance documents and verifier only. |
+| Applicable Rules | Documentation and execution authorities. |
+| Verification | Full positive/negative fixture self-test, governance gate, links, whitespace, review, commit and push. |
+| Expected Markers | Numeric and Td identifiers, closure rows/caps, required schemas and fixture rejection match policy. |
+| Asset Needs | Read-only NXVM governance reference. |
+| Reporting Requirements | Record parity audit and remaining deliberate differences. |
+| Stop Conditions | Required product behavior change or incompatible project policy. |
+| Exit Criteria | Every identified state-machine gap has executable coverage and the closure checks pass. |
+| Original Owner Request | "匹配nxvm治理水平" |
+| Similar-Issue Sweep | Status, Queue, TODO, proposals, history, root pointers and all verifier branches. |
 
 ## Latest Packet Closure
 
@@ -29,6 +48,18 @@ references; no product, ABI, build, runtime or queue behavior changed.
 M0 Td S3 P1 added governance self-test and CI execution, explicit one-candidate
 one-proposal Queue rows, and mechanical Queue/TODO schema checks. No product,
 ABI, build, runtime or queue ordering changed.
+
+## Recent M0 Closures
+
+| Task | Compact result |
+| --- | --- |
+| T403 | x64 mapping and overlay residue retired; formal x86 build and owner test passed. |
+
+## Recent Governance
+
+- **M0 Td S2 P1:** fixed topology, links, index, encoding, and compact status controls.
+- **M0 Td S3 P1:** CI, self-test, and one-candidate/one-proposal queue controls.
+- **M0 Td S3 P2:** identifier, authority schema, path allowlist, and queue/TODO checks.
 
 ## Current Technical Baseline
 

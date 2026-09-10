@@ -167,6 +167,15 @@ foreach ($heading in @('## Current Work', '## Current Technical Baseline')) {
         throw "states/CURRENT.md is missing '$heading'"
     }
 }
+foreach ($heading in @('## Recent M0 Closures', '## Recent Governance')) {
+    if ($status -notmatch [regex]::Escape($heading)) { throw "states/CURRENT.md is missing '$heading'" }
+}
+$closureSection = [regex]::Match($status, '(?ms)^## Recent M0 Closures\r?\n(?<body>.*?)(?=^## |\z)')
+$closureRows = @([regex]::Matches($closureSection.Groups['body'].Value, '(?m)^\|\s*T\d+\s*\|'))
+if ($closureRows.Count -gt 8) { throw 'CURRENT.md may retain at most eight numeric task closure rows.' }
+$governanceSection = [regex]::Match($status, '(?ms)^## Recent Governance\r?\n(?<body>.*?)(?=^## |\z)')
+$governanceRows = @([regex]::Matches($governanceSection.Groups['body'].Value, '(?m)^- \*\*M\d+ Td S\d+ P\d+:'))
+if ($governanceRows.Count -gt 8) { throw 'CURRENT.md may retain at most eight governance closure rows.' }
 $hasActivePacket = $status -match '\*\*Active:\s+(M\d+\s+T\d+\s+S\d+|Td\s+S\d+\s+P\d+)\b'
 $hasExplicitIntermission = $status -match '\*\*No active (?:numeric )?M/T/S packet\.'
 if (-not $hasActivePacket -and -not $hasExplicitIntermission) {
