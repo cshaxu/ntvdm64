@@ -77,6 +77,23 @@ if ($SelfTest) {
     $rejected = $false
     try { Assert-ExactNames @('unexpected.md') @('README.md') 'self-test' } catch { $rejected = $true }
     if (-not $rejected) { throw 'Documentation governance self-test failed: invalid topology was accepted.' }
+    $fixture = Join-Path ([System.IO.Path]::GetTempPath()) ("ntvdm64-governance-" + [guid]::NewGuid().ToString('N'))
+    try {
+        New-Item -ItemType Directory -Force -Path $fixture | Out-Null
+        foreach ($name in @('docs', 'README.md', 'AGENTS.md', 'CONTRIBUTING.md')) { Copy-Item -Recurse -Force (Join-Path $RepositoryRoot $name) (Join-Path $fixture $name) }
+        New-Item -ItemType Directory -Force -Path (Join-Path $fixture 'tools/governance'), (Join-Path $fixture 'artifacts/documentation-archive/20260910/etc/evidence') | Out-Null
+        Copy-Item -Force $PSCommandPath (Join-Path $fixture 'tools/governance/Verify-DocumentationGovernance.ps1')
+        Copy-Item -Force (Join-Path $RepositoryRoot 'artifacts/documentation-archive/20260910/etc/evidence/m0-t95-status-ledger-20260811.md') (Join-Path $fixture 'artifacts/documentation-archive/20260910/etc/evidence/m0-t95-status-ledger-20260811.md')
+        $fixtureStatus = Join-Path $fixture 'docs/states/CURRENT.md'
+        (Get-Content -Raw $fixtureStatus).Replace('Td S4 P2', 'Td S1 P1') | Set-Content -NoNewline $fixtureStatus
+        $fixtureDoc = Join-Path $fixture 'docs/selftest.md'
+        [System.IO.File]::WriteAllText($fixtureDoc, "# Self-test`n`n[valid](README.md)")
+        Assert-RelativeLinks @($fixtureDoc)
+        [System.IO.File]::WriteAllText($fixtureDoc, "# Self-test`n`n[bad](missing.md)")
+        $rejected = $false
+        try { Assert-RelativeLinks @($fixtureDoc) } catch { $rejected = $true }
+        if (-not $rejected) { throw 'Documentation governance self-test failed: broken link was accepted.' }
+    } finally { if (Test-Path -LiteralPath $fixture) { Remove-Item -LiteralPath $fixture -Recurse -Force } }
     Write-Host 'Documentation governance self-test passed.'
 }
 

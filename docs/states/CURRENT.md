@@ -2,18 +2,18 @@
 
 ## Current Work
 
-**Active: Td S4 P1** — governance state-machine parity. The runtime recovery
+**Active: Td S4 P2** — governance fixture parity. The runtime recovery
 queue remains owner-held; no numeric implementation packet is admitted.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | Governance — M0 Td S4 P1. |
+| Identifier Mode | Governance — M0 Td S4 P2. |
 | Admission And Approval | Continuing owner objective: match NXVM governance level. |
-| Objective | Add NXVM-equivalent active packet, identifier, closure-retention and fixture validation. |
+| Objective | Add NXVM-equivalent isolated negative fixture validation for the governance gate. |
 | Non-goals | No product/runtime/source/ABI or queue ordering change. |
-| Reference Baseline | Td S3 P2 `b968bf688`; audit found unimplemented NXVM state-machine controls. |
+| Reference Baseline | Td S4 P1 `1305d97d2` added structured closure retention; fixture-level negative validation remains. |
 | Files And ABI Surface | Governance documents and verifier only. |
 | Applicable Rules | Documentation and execution authorities. |
 | Verification | Full positive/negative fixture self-test, governance gate, links, whitespace, review, commit and push. |
