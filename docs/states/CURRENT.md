@@ -2,74 +2,82 @@
 
 ## Current Work
 
-**No active numeric M/T/S packet. M0 T402 is closed.**
+**Active: M0 T403 S1, Ordinary Mode.**
 
-## Latest Packet Closure
+## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T402 S1, Ordinary Mode; closed. |
-| Admission And Approval | Owner approved x64-only residue removal, x86 product verification, and permanent commit/push authority. |
-| Objective | Remove non-mapping-manager x64-only residue and deliver a verified x86 product. |
-| Non-goals | No mapping-manager, native-x64, recovered-behavior, WOW/guest semantic, or preserved-WIP change. |
-| Reference Baseline | T399 retired x64 product paths; T392 added the GDP width projection now under removal. |
-| Files And ABI Surface | GDP overlay/generator and C-VID callers; staging, CRT/context, affected owner-path build inputs. |
+| Identifier Mode | M0 T403 S1, Ordinary Mode. |
+| Admission And Approval | Owner directed admission of the first authoritative queue candidate after T402 closure; the candidate proposal is now the binding S1 scope. |
+| Objective | Remove active native-x64/cross-width mirror differences, including mapping-manager identity tokenization, where original x86 carriers compose in the selected product graph. |
+| Non-goals | No native-x64 product, no multi-session claim, no new guest behavior, no private replacement for an unrecoverable original owner, and no cross-process broker work. |
+| Reference Baseline | T402 closed the non-mapping GDP/CRT/context/staging residue and its tested x86 product; the queue candidate and its proposal identify the remaining mapping-manager and cross-width surface. |
+| Files And ABI Surface | `src/session/mapping_manager.*`, session instances and token consumers; reached DEM, DPMI32, Redirector, VDD, SoftPC physical-memory, CCPU and presentation paths; their selected x86 build/test inputs and governing records. |
 | Applicable Rules | Execution, Architecture, Coding, Document, and x86 CCPU40 product rules. |
 | Verification | x86 compile/archive/link, PE staging, x64 rejection, diff and governance checks. |
-| Expected Markers | No GDP slot generator/state or active native-x64 product staging path. |
-| Asset Needs | Existing source and local MSVC x86 toolchain only. |
-| Reporting Requirements | Removed surfaces, staged path/hash, verification, limitations, and deferred historical evidence. |
-| Stop Conditions | Mapping-manager dependency, x86 ABI/behavior regression, or a required new overlay. |
-| Exit Criteria | Met: audited removal, passing x86 link/staging, governance/diff validation, and owner real-package test. |
-| Original Owner Request | 清除所有非映射管理器负责的、x64编译产生的diff，要求通过文档、代码质量审计并通过测试。 |
-| Similar-Issue Sweep | Product staging, x64 preprocessor branches, GDP consumers, and owner-path build references. |
+| Expected Markers | No active mapping manager, session token identity, or native-x64/cross-width-only carrier remains without a recorded x86 reason. |
+| Asset Needs | Selected original OpenNT/SoftPC x86 source, current repository source, local MSVC Win32/x86 toolchain, and the owner runtime package. |
+| Reporting Requirements | Per-difference source comparison/disposition, removed/retained surface, ABI consequences, build/test result, staged hash, owner-test limitation, and deferred historical evidence. |
+| Stop Conditions | An original x86 carrier does not compose safely, an interface crosses process boundaries, a real x86 regression needs a substitute mechanism, or scope reaches broker/WOW recovery. |
+| Exit Criteria | Every active divergence is classified and either removed or retained with an independent x86 reason; selected x86 graph, PE check, staging and focused boundary tests pass; owner runtime result and P delivery are recorded. |
+| Original Owner Request | 完成后准入下一项。 |
+| Similar-Issue Sweep | Mapping-manager core/instances, token callbacks, host identity carriers, physical mapping, and every active generator/fixture linked into the selected x86 graph. |
 
 ### Admission and approval
 
-The owner approved admission to remove native-x64-only product residue, reduce
-the SoftPC overlay footprint, and provide a newly verified `ntvdm32.exe` for
-testing at `O:\ntvdm64\ntvdm32.exe`.
+The owner directed admission of the first candidate in `docs/states/QUEUE.md`
+after T402 passed owner runtime testing and was pushed. The candidate is
+`proposal-x86-mirror-diff-and-mapping-retirement-001.md`; its former
+unadmitted state is superseded by this explicit T403 S1 admission.
 
 ### Objective
 
-Restore the original x86 C-VID GDP carrier in place of the x64-only
-native-width GDP projection; remove obsolete Win64 CRT/context branches; make
-product staging x86-only; then build, verify, and stage the Win32/x86 CCPU40
-product.
+Compare every active x64/cross-width mirror divergence against its selected
+original x86 source. Remove the mapping manager, its session instances and
+unneeded token paths only where the original x86 pointer/HANDLE carrier is
+directly composable. Preserve a bounded guest-memory lease/copy mechanism only
+where the selected x86 graph independently requires it. Then build, link,
+verify and stage the sole Win32/x86 product.
 
 ### Non-goals
 
-No mapping-manager change, native-x64 build/repair, recovered-behavior work,
-WOW/guest semantic change, or adoption of the preserved WIP branch is in
-scope.
+No native-x64 build/repair/product claim, in-process multi-session claim,
+cross-process broker closure, new guest/WOW behavior, or ad-hoc substitute for
+an unrecoverable original owner is in scope.
 
 ### Baseline, files, and ABI surface
 
-T399 closed the x64 product-retirement decision, but this audit found four
-residual x64-only surfaces: GDP projection (40 source/generator files), the
-Win64 CRT private-name block, the x64 termination-context branch, and a
-stager that still accepted x64. GDP is private SoftPC state, not a session
-mapping-manager identity. Expected owned paths are the GDP overlay and C-VID
-mirror set, `mvdm_crt_redirect.h`, `mvdm_softpc_termination.c`,
-`StageProductExecutable.mjs`, their registers/readmes, and this packet.
+T402 removed the GDP, CRT, termination-context and staging residue, and the
+owner confirmed the staged `ntvdm32.exe` works. T403 begins with the proposal
+inventory rather than assuming every historical x64 mention is active. It owns
+only reached current x86 product paths outside historical evidence; source
+recovery and the architecture/coding rules constrain each removal.
 
 ### Rules, verification, and exit
 
-Apply `docs/rules/{EXECUTION,ARCHITECTURE,CODING,DOCUMENT}.md`: one x86
-CCPU40 product row; no x64-only preservation; all build results under
-`build/M0-T402-S1/<run>/`; only a verified `ntvdm32.exe` may be copied to the
-runtime package; logs belong in `O:\ntvdm64\logs`. Verify the source sweep,
-the x86-only staging rejection/acceptance behavior, selected x86 build/link,
-`git diff --check`, governance validation, and final diff. Close only after
-recording the staged-file hash and any unavailable runtime limitation.
+Apply `docs/rules/{EXECUTION,ARCHITECTURE,CODING,DOCUMENT}.md`, including the
+source-recovery audit gate: one x86 CCPU40 product row, results below
+`build/M0-T403-S1/<run>/`, and only a verified `ntvdm32.exe` at the package
+root. Verify each classified surface with source comparison, focused positive
+and negative lifecycle/physical-memory tests, selected x86 build/link, PE
+I386 staging, `git diff --check`, governance validation, and owner runtime
+test. Logs belong in `O:\ntvdm64\logs`.
 
 ### Stop conditions and reporting
 
-Pause for a mapping-manager dependency, an x86 behavior/ABI regression, a
-required new overlay, or any scope beyond removal. Report removed surfaces,
-verification, staged path/hash, limitations, and remaining deferred x64
-historical evidence. Similar-issue sweep covers active product staging,
-private x64 preprocessor branches, and GDP consumers.
+Pause and re-admit if original-width composition fails, an interface crosses a
+process boundary, a real x86 regression requires a substitute mechanism, or
+work reaches broker/WOW recovery. Report every removed or retained surface,
+verification, staged path/hash, owner result, limitations, and historical-only
+disposition. Similar-issue sweep covers all active mapping/token, identity and
+physical-memory consumers and their selected build inputs.
+
+## Latest Packet Closure
+
+[M0 T402 x64-only residue removal and x86 source restoration](../history/m0-t402-consolidated-history.md)
+removed the GDP projection, Win64 CRT/context branches and x64 stager route;
+the formal x86 build and the owner real-package test passed.
 
 ## Latest Td Closure
 
