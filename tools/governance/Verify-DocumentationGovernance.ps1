@@ -142,6 +142,20 @@ foreach ($relativePath in $requiredTitles.Keys) {
         throw "docs/$relativePath must contain exactly one level-one title."
     }
 }
+$requiredH2 = @{
+    'README.md' = @('Task Reading Set','Daily Operation','Governance Gate')
+    'rules/DOCUMENT.md' = @('Fixed Topology','Authority Roles','Governance Gate')
+    'rules/EXECUTION.md' = @('Request Lifecycle','MTSP And Td','Evidence, Verification, And Closure')
+    'states/CURRENT.md' = @('Current Work','Current Technical Baseline')
+    'states/QUEUE.md' = @()
+    'states/TODO.md' = @()
+}
+foreach ($relativePath in $requiredH2.Keys) {
+    $h2 = @(Get-MarkdownHeadings (Get-Content -Raw -LiteralPath (Join-Path $docs $relativePath)) | Where-Object Level -eq 2 | ForEach-Object Text)
+    foreach ($required in $requiredH2[$relativePath]) {
+        if ($h2 -notcontains $required) { throw "docs/$relativePath is missing required section '$required'." }
+    }
+}
 
 $statusPath = Join-Path $docs 'states/CURRENT.md'
 if ((Get-Item -LiteralPath $statusPath).Length -gt 32768) {
@@ -176,6 +190,15 @@ if ($hasActivePacket) {
         if ($status -notmatch ('(?m)^\|\s*' + [regex]::Escape($field) + '\s*\|\s*\S.+?\|\s*$')) {
             throw "states/CURRENT.md active packet is missing a non-empty '$field' row."
         }
+    }
+    $tdMatch = [regex]::Match($status, '\*\*Active:\s+Td\s+S(?<subtask>\d+)\s+P(?<part>\d+)\*\*')
+    if ($tdMatch.Success) {
+        $prior = @(git -C $RepositoryRoot log --format=%s | ForEach-Object { [regex]::Match($_, '^M\d+ Td S(?<subtask>\d+) P(?<part>\d+):') } | Where-Object Success)
+        $activeS = [int]$tdMatch.Groups['subtask'].Value; $activeP = [int]$tdMatch.Groups['part'].Value
+        $maxS = if ($prior.Count -eq 0) { 0 } else { (($prior | ForEach-Object { [int]$_.Groups['subtask'].Value } | Measure-Object -Maximum).Maximum) }
+        $sameS = @($prior | Where-Object { [int]$_.Groups['subtask'].Value -eq $activeS })
+        $expectedP = if ($sameS.Count -eq 0) { 1 } else { (($sameS | ForEach-Object { [int]$_.Groups['part'].Value } | Measure-Object -Maximum).Maximum + 1) }
+        if (-not (($activeS -eq $maxS -and $activeP -eq $expectedP) -or ($activeS -eq ($maxS + 1) -and $activeP -eq 1))) { throw 'Active Td identifier is not the next valid S/P allocation.' }
     }
 } elseif ([regex]::Matches($status, '(?m)^## Active Packet\s*$').Count -ne 0) {
     throw 'states/CURRENT.md must not retain an Active Packet section during an explicit intermission.'
@@ -240,6 +263,13 @@ foreach ($markdownPath in $markdownPaths) {
     }
     if ($utf8Text -match '\u00E2|\u00C3|\uFFFD') {
         throw "Documentation contains encoding corruption: $($markdownPath.FullName)"
+    }
+}
+foreach ($currentPath in @($markdownPaths | Where-Object { $_.FullName -notmatch '\\(history|proposals)\\' })) {
+    $currentText = [System.IO.File]::ReadAllText($currentPath.FullName, [System.Text.UTF8Encoding]::new($false, $true))
+    foreach ($pathMatch in [regex]::Matches($currentText, '(?i)\b[a-z]:\\[^\s`"'']+')) {
+        $value = $pathMatch.Value
+        if ($value -notmatch '^(?i:O:\\ntvdm64(?:\\|$)|O:\\repos\.external(?:\\|$))') { throw "Unapproved local path in current authority: $($currentPath.FullName): $value" }
     }
 }
 Assert-RelativeLinks @($markdownPaths | ForEach-Object FullName)

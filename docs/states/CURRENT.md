@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 Td S3 P1 completed governance automation
+**No active M/T/S packet.** M0 Td S3 P2 completed governance automation
 convergence; the runtime recovery queue remains owner-held until a candidate is
 explicitly admitted.
 
