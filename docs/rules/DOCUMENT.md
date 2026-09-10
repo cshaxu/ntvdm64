@@ -43,6 +43,21 @@ question, inputs, procedure, observations, interpretation/confidence, and
 follow-up. When a record becomes stale, retain it and link the successor rather
 than silently rewriting or deleting material conclusions.
 
+## Governance Gate
+
+The documentation-governance gate is mandatory for every P and Td closure. It
+rejects an extra or missing principal path, an unindexed `etc/` Markdown
+record, a broken relative path or heading anchor, encoding corruption, an
+invalid active/intermission state, or a `CURRENT.md` control document over 32
+KiB. The size limit is a control-plane limit, not permission to discard
+history: move detailed closed chronology to indexed evidence or history.
+
+The gate validates structure, not the truth of free prose. Closure review must
+still compare each changed authority with the owner request, applicable rules,
+evidence, and actual repository state. Project-approved `O:\` runtime and
+read-only comparison paths remain permitted where an authority explicitly
+requires them; a portability check must not erase that product contract.
+
 ## Identifier Authority
 
 The project task hierarchy is `M<milestone> T<task> S<subtask> P<part>` and is

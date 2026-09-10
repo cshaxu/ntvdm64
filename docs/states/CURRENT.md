@@ -2,8 +2,9 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T403 is closed; implementation remains paused
-until the owner admits a queue candidate.
+**No active M/T/S packet.** M0 Td S2 P1 completed governance-quality audit
+and cleanup; the runtime recovery queue remains owner-held until a candidate is
+explicitly admitted.
 
 ## Latest Packet Closure
 
@@ -19,7 +20,11 @@ passed.
 
 ## Latest Governance Closure
 
-[M0 Td status governance compaction](../../artifacts/documentation-archive/20260910/strict-topology/history/raw/m0-td-status-governance-compaction-20260910.md).
+M0 Td S2 P1 strengthened the governance gate with fixed-topology, compact
+state, supporting-index, encoding, relative-link and anchor checks; it also
+reconciled the public README, product UX, closed-evidence lifecycle and a
+historical encoding defect. NXVM governance materials were read-only quality
+references; no product, ABI, build, runtime or queue behavior changed.
 
 ## Current Technical Baseline
 

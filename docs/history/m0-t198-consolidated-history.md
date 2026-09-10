@@ -572,7 +572,7 @@ Primary evidence: [S17 witness](../../artifacts/documentation-archive/20260910/e
 
 ## m0-t198-s18-closure-20260813.md
 
-# M0 T198 S18 Closure â€” 2026-08-13
+# M0 T198 S18 Closure — 2026-08-13
 
 S18 is complete.  Every endpoint implemented by the existing immutable
 boot-namespace plane now has a native MSVC x64 `/MT` witness: COMMAND
@@ -592,7 +592,7 @@ and [S18 DTA/search witness](../../artifacts/documentation-archive/20260910/etc/
 
 ## m0-t198-s19-closure-20260813.md
 
-# M0 T198 S19 Closure â€” 2026-08-13
+# M0 T198 S19 Closure — 2026-08-13
 
 S19 is complete.  It proves that `50:11` is the first live NTDOS guest-entry
 request after NTIO execution, with destination derived from current `DI:0000`.
@@ -1410,4 +1410,3 @@ checked provider with valid namespace state, while `50:43` remains unopened.
 
 S100 must map the S97 call's actual handle/token lifecycle; no guest run or
 provider change is admitted yet.
-

@@ -7,8 +7,8 @@ topology; retained pre-governance records are indexed supporting evidence.
 
 Read the documents required by your role before changing the repository:
 
-1. Everyone: [this guide](README.md), the active [Status](states/CURRENT.md), and
-   [Execution Rules](rules/EXECUTION.md).
+1. Everyone: [this guide](README.md), the active [Status](states/CURRENT.md),
+   [Execution Rules](rules/EXECUTION.md), and [CONTRIBUTING.md](../CONTRIBUTING.md).
 2. Planning or coordination: [Queue](states/QUEUE.md), [Roadmap](design/ROADMAP.md),
    and [Documentation Rules](rules/DOCUMENT.md).
 3. Product or implementation work: [Goal](design/GOAL.md),
@@ -43,3 +43,13 @@ allocate work. Do not use one file to substitute for another.
 [etc/README.md](etc/README.md) indexes evidence, research, provenance,
 fixtures, operational material, migration records, and active-task supporting
 plans. These records cannot override the authorities above.
+
+## Governance Gate
+
+Every delivery runs
+`powershell -NoProfile -ExecutionPolicy Bypass -File tools/governance/Verify-DocumentationGovernance.ps1`
+and the relative-link check named by the active packet. The gate enforces the
+fixed topology, authority/state separation, current-status size limit,
+supporting-record index, Markdown paths and anchors, and encoding integrity.
+It is structural; delivery review still decides whether retained authorities
+truthfully match the owner request and repository state.
