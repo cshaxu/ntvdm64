@@ -30,8 +30,8 @@ equipment interfaces. It is neither a BOP leaf nor a missing `config.nt`,
 
 ## Evidence
 
-- [S1 original guest-predecessor contract](../etc/evidence/m0-t339-s1-original-guest-predecessor-contract-001.md)
-- [S2 passive terminal observation](../etc/evidence/m0-t339-s2-passive-terminal-discriminator-001.md)
+- [S1 original guest-predecessor contract](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t339-s1-original-guest-predecessor-contract-001.md)
+- [S2 passive terminal observation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t339-s2-passive-terminal-discriminator-001.md)
 - [T339 plan](../etc/operations/m0-t339-minimal-vertical-slice-integration-closure-plan-001.md)
 
 The T339 S2 source locations are:

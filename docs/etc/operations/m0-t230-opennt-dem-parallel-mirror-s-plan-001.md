@@ -84,7 +84,7 @@ common-foundation rewrites were deleted after reference audit.  The
 source-derived CWD `13/18/1A` experiment is
 excluded from the formal module and retained only under `bop-v1/`; its
 original owner replacements are `demdir.c` and `demgset.c`.  See
-[S10 matrix evidence](../evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md).
+[S10 matrix evidence](../../../artifacts/documentation-archive/20260910/etc/evidence/t230-s10-dem-direct-matrix-and-legacy-exclusion-001.md).
 The remaining S10 work is the exact reference-deletion audit and the bounded
 native observation; neither is implied by this local fixture result.
 
@@ -97,7 +97,7 @@ former partial v2 file is comparison-only material under `bop/reference-v2/`.
 The neutral `demhndl_shim` supplies scoped CPU, checked guest-memory and
 opaque-handle mechanics, and the formal MSVC x64 `/MT` Ninja fixture runs all
 eight functions. See
-[S2 direct-import map](../evidence/t230-s2-demhndl-direct-import-map-001.md).
+[S2 direct-import map](../../../artifacts/documentation-archive/20260910/etc/evidence/t230-s2-demhndl-direct-import-map-001.md).
 This closes only the source-shaped local Direct package: it does not claim
 selector routing, Redirector/COMMAND pipe composition, `demerror.c` INT 24,
 or native guest integration.
@@ -108,7 +108,7 @@ The original owner files are mirrored directly under `bop/opennt/dem/`.
 Their only new composition is the fixed VHE/SYSDEV retained guest-layout seam,
 the pointer-width-neutral Direct handle token, and an explicit failure for an
 as-yet-unbound historical retry slot.  The formal fixture reaches all three
-owned bodies; see [S8 direct-import map](../evidence/t230-s8-demerror-demlock-direct-import-map-001.md).
+owned bodies; see [S8 direct-import map](../../../artifacts/documentation-archive/20260910/etc/evidence/t230-s8-demerror-demlock-direct-import-map-001.md).
 This is local Direct source parity, not an INT 24, full dispatcher or native
 guest claim.
 
@@ -120,7 +120,7 @@ the original `ULONG` loader-pointer truncation; the loader loop, lifecycle,
 debug gates and error ordering remain source-owned.  The formal fixture
 exercises all thirteen service bodies, including a 20,000-byte real
 `ntdos.sys` load and typed non-returning termination.  See the
-[S9 direct-import map](../evidence/t230-s9-demmisc-direct-import-map-001.md).
+[S9 direct-import map](../../../artifacts/documentation-archive/20260910/etc/evidence/t230-s9-demmisc-direct-import-map-001.md).
 This is local Direct source parity, not whole DEM or native guest closure.
 
 ## Dependency order

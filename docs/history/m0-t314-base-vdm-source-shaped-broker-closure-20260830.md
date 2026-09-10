@@ -18,8 +18,8 @@ original BaseClient/BaseSrv VDM command broker.
 
 ## Evidence
 
-- [S1 immediate-boundary audit](../etc/evidence/m0-t314-s1-base-vdm-immediate-boundary-audit-001.md)
-- [S2 local wake/retry closure](../etc/evidence/m0-t314-s2-local-base-vdm-wake-retry-closure-001.md)
+- [S1 immediate-boundary audit](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t314-s1-base-vdm-immediate-boundary-audit-001.md)
+- [S2 local wake/retry closure](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t314-s2-local-base-vdm-wake-retry-closure-001.md)
 
 ## Explicit limits
 

@@ -16,7 +16,7 @@ function Read-Tsv([string]$Name) {
 function Write-Tsv([object[]]$Rows, [string]$Name) {
     $path = Join-Path $ops $Name
     @($Rows) | Export-Csv -LiteralPath $path -Delimiter "`t" -NoTypeInformation -Encoding utf8
-    Write-Host "Wrote $($Rows.Count) rows: docs/etc/operations/$Name"
+    Write-Host "Wrote $($Rows.Count) rows: artifacts/documentation-archive/20260910/etc/operations/ledgers/$Name"
 }
 function Short-Text([string]$Text, [int]$Limit = 220) {
     if ([string]::IsNullOrWhiteSpace($Text)) { return '' }

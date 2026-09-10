@@ -6,9 +6,9 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 }
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$plan = Join-Path $root 'docs/etc/operations/m0-t280-s8-dem-platform-declaration-import-plan-001.md'
-$ledger = Join-Path $root 'docs/etc/operations/m0-t280-s8-platform-declaration-import-ledger.tsv'
-$manifest = Join-Path $root 'docs/etc/operations/m0-t280-s8-platform-declaration-import-manifest.tsv'
+$plan = Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s8-dem-platform-declaration-import-plan-001.md'
+$ledger = Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s8-platform-declaration-import-ledger.tsv'
+$manifest = Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s8-platform-declaration-import-manifest.tsv'
 foreach ($path in @($plan, $ledger, $manifest)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing T280 S8 artifact: $path" }
 }

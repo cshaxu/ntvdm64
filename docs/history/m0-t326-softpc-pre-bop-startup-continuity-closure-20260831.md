@@ -15,4 +15,4 @@ is observed after the original `demLoadDos` crossing, it transfers to the
 minimal DOS guest execution and controlled-return package; it is not a
 pre-BOP defect and does not establish guest-program execution.
 
-Evidence: [fixed SoftPC pre-BOP startup cut](../etc/evidence/m0-t326-s1-fixed-softpc-pre-bop-startup-cut-001.md).
+Evidence: [fixed SoftPC pre-BOP startup cut](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t326-s1-fixed-softpc-pre-bop-startup-cut-001.md).

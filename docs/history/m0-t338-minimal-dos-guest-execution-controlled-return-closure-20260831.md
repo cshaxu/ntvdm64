@@ -17,5 +17,5 @@ using the short-root fixed container. It must not replace COMMAND, skip
 patch queue. Long executable-relative package-path disposition remains a
 separate release/package concern.
 
-Evidence: [S2 continuation attribution](../etc/evidence/m0-t338-s2-post-configuration-continuation-attribution-001.md)
-and [S3 path-capacity transfer](../etc/evidence/m0-t338-s3-original-configuration-path-capacity-transfer-001.md).
+Evidence: [S2 continuation attribution](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t338-s2-post-configuration-continuation-attribution-001.md)
+and [S3 path-capacity transfer](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t338-s3-original-configuration-path-capacity-transfer-001.md).

@@ -2,7 +2,7 @@
 param([Parameter(Mandatory=$true)][string]$RepositoryRoot)
 
 $ErrorActionPreference = 'Stop'
-$path = Join-Path (Resolve-Path $RepositoryRoot).Path 'docs/etc/operations/m0-t276-final-integration-disposition-ledger.tsv'
+$path = Join-Path (Resolve-Path $RepositoryRoot).Path 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-final-integration-disposition-ledger.tsv'
 $rows = @(Import-Csv $path -Delimiter "`t" | Where-Object {$_.source_path -like 'dpmi/*'})
 if ($rows.Count -ne 59) { throw "Expected 59 DPMI rows, found $($rows.Count)." }
 if (@($rows | Where-Object {$_.final_disposition -ne 'guest-only'}).Count) { throw 'Every DPMI path must remain guest-only.' }

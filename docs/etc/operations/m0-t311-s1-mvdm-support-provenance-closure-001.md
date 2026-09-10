@@ -6,7 +6,7 @@
 `src/mvdm-support`, computes its SHA-256, and compares the same original-
 relative path against the selected `OpenNT/base/mvdm` and OpenNT-src-2
 `nt/private/mvdm` baselines.  Its complete, reproducible output is
-[`m0-t311-s1-mvdm-support-provenance.tsv`](m0-t311-s1-mvdm-support-provenance.tsv).
+[`m0-t311-s1-mvdm-support-provenance.tsv`](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t311-s1-mvdm-support-provenance.tsv).
 
 The audit excludes neither source nor retained historical build products.  A
 file's source identity is therefore distinct from whether it is a selected

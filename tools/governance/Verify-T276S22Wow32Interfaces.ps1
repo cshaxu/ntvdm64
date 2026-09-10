@@ -2,7 +2,7 @@
 param([Parameter(Mandatory=$true)][string]$RepositoryRoot)
 
 $ErrorActionPreference = 'Stop'
-$path = Join-Path (Resolve-Path $RepositoryRoot).Path 'docs/etc/operations/m0-t276-s22-wow32-interface-family-ledger.tsv'
+$path = Join-Path (Resolve-Path $RepositoryRoot).Path 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-s22-wow32-interface-family-ledger.tsv'
 $rows = @(Import-Csv $path -Delimiter "`t")
 if ($rows.Count -ne 9) { throw "Expected 9 WOW32 interface-family rows, found $($rows.Count)." }
 if (@($rows | Group-Object family_id | Where-Object Count -ne 1).Count) { throw 'Every WOW32 interface family needs one row.' }

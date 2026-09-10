@@ -77,8 +77,8 @@ process unless a separate reentrancy audit admits in-process multiple contexts.
 ## Phase 5 — Integrated verification and packaging
 
 Reconcile all BOP/dependency trackers, run original and source-built guest
-image matrices, classify remaining defects by owner, and package x86/x64 host
-products with immutable guest-image manifests. Trace-guided leaf repair begins
+image matrices, classify remaining defects by owner, and package the x86 host
+product with immutable guest-image manifests. Trace-guided leaf repair begins
 only after planned package code/ABI closure.
 
 ## Explicitly deferred

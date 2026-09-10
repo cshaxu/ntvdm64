@@ -3,7 +3,7 @@ param([Parameter(Mandatory=$true)][string]$RepositoryRoot)
 
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path $RepositoryRoot).Path
-$path = Join-Path $root 'docs/etc/operations/m0-t276-s22-wow32-active-subdomain-ledger.tsv'
+$path = Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-s22-wow32-active-subdomain-ledger.tsv'
 $rows = @(Import-Csv $path -Delimiter "`t")
 if ($rows.Count -ne 77) { throw "Expected 77 active WOW32 C-body rows, found $($rows.Count)." }
 if (@($rows | Group-Object source_path | Where-Object Count -ne 1).Count) { throw 'Every active WOW32 source needs exactly one subdomain row.' }

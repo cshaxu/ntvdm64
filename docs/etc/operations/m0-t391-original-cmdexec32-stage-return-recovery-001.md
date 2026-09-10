@@ -83,7 +83,7 @@ change, app command parser, keyboard change, synthetic BOP or direct
 guest-memory write is allowed.
 
 **S5 closure:** the record/EXEC path is proven in
-[the S5 evidence](../evidence/m0-t391-s5-permcom-initial-record-recovery-001.md).
+[the S5 evidence](../../../artifacts/documentation-archive/20260910/etc/evidence/m0-t391-s5-permcom-initial-record-recovery-001.md).
 The sole product container is `O:\ntvdm64`; a nested build runtime path is
 not a valid product observation.
 

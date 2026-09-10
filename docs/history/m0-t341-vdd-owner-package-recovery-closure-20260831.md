@@ -6,8 +6,8 @@ T341 recovered the VDD **host-service owner package** as a complete selected
 original source and formal-build surface, while preserving the current
 profile's explicit selection of no external installable VDD.
 
-The source/ABI/failure audit is [S1's VDD ledger](../etc/operations/m0-t341-s1-vdd-owner-contract-ledger.tsv).
-The selected formal closure is [S2's evidence](../etc/evidence/m0-t341-s2-vdd-no-provider-formal-closure-001.md).
+The source/ABI/failure audit is [S1's VDD ledger](../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t341-s1-vdd-owner-contract-ledger.tsv).
+The selected formal closure is [S2's evidence](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t341-s2-vdd-no-provider-formal-closure-001.md).
 
 ## What is closed
 

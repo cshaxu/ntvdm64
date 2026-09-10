@@ -9,8 +9,8 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 
 $ErrorActionPreference = 'Stop'
 $docs = (Resolve-Path -LiteralPath (Join-Path $RepositoryRoot 'docs')).Path
-$requiredFiles = @('README.md', 'STATUS.md', 'QUEUE.md', 'TODO.md')
-$requiredDirectories = @('rules', 'design', 'history', 'etc')
+$requiredFiles = @('README.md', 'states/CURRENT.md', 'states/QUEUE.md', 'states/TODO.md')
+$requiredDirectories = @('rules', 'design', 'proposals', 'history', 'states', 'etc')
 $requiredRules = @('DOCUMENT.md', 'EXECUTION.md', 'ARCHITECTURE.md', 'CODING.md')
 $requiredDesign = @('GOAL.md', 'ARCHITECTURE.md', 'CODING.md', 'UI.md', 'ROADMAP.md')
 
@@ -43,23 +43,23 @@ foreach ($name in $requiredDesign) {
     }
 }
 
-$status = Get-Content -LiteralPath (Join-Path $docs 'STATUS.md') -Raw
+$status = Get-Content -LiteralPath (Join-Path $docs 'states/CURRENT.md') -Raw
 foreach ($heading in @('## Current Work', '## Active Packet', '## Current Technical Baseline')) {
     if ($status -notmatch [regex]::Escape($heading)) {
-        throw "STATUS.md is missing '$heading'"
+        throw "states/CURRENT.md is missing '$heading'"
     }
 }
-$hasActivePacket = $status -match '\*\*Active:\s+M\d+\s+T\d+\s+S\d+\b'
+$hasActivePacket = $status -match '\*\*Active:\s+(M\d+\s+T\d+\s+S\d+|Td\s+S\d+\s+P\d+)\b'
 $hasExplicitIntermission = $status -match '\*\*No active M/T/S packet\.\*\*'
 if (-not $hasActivePacket -and -not $hasExplicitIntermission) {
-    throw 'STATUS.md must identify an active M<milestone> T<task> S<subtask> packet or explicitly state that no M/T/S packet is active.'
+    throw 'states/CURRENT.md must identify an active M<milestone> T<task> S<subtask> packet, an active Td S<subtask> P<part> packet, or explicitly state that no M/T/S packet is active.'
 }
 if ($hasActivePacket -and $hasExplicitIntermission) {
-    throw 'STATUS.md cannot identify an active packet and a no-active-packet intermission simultaneously.'
+    throw 'states/CURRENT.md cannot identify an active packet and a no-active-packet intermission simultaneously.'
 }
 $activePacketCount = [regex]::Matches($status, '(?m)^## Active Packet\s*$').Count
 if ($activePacketCount -ne 1) {
-    throw "STATUS.md must contain exactly one active packet; found $activePacketCount."
+    throw "states/CURRENT.md must contain exactly one active packet; found $activePacketCount."
 }
 foreach ($field in @(
     'Identifier Mode', 'Admission And Approval', 'Objective', 'Non-goals',
@@ -69,11 +69,11 @@ foreach ($field in @(
     'Original Owner Request', 'Similar-Issue Sweep'
 )) {
     if ($status -notmatch [regex]::Escape("| $field |")) {
-        throw "STATUS.md active packet is missing '$field'."
+        throw "states/CURRENT.md active packet is missing '$field'."
     }
 }
 
-$queue = Get-Content -LiteralPath (Join-Path $docs 'QUEUE.md') -Raw
+$queue = Get-Content -LiteralPath (Join-Path $docs 'states/QUEUE.md') -Raw
 if ($queue -match '\bT\d+\b') {
     throw 'QUEUE.md must contain only unnumbered candidate T packages; numeric T identifiers belong in STATUS.md at admission.'
 }
@@ -88,64 +88,16 @@ if ($documentRules -notmatch 'Migration Exception') {
 foreach ($record in @(
     'etc/operations/governance-migration.md',
     'etc/operations/task-identifier-governance.md',
-    'etc/operations/m0-t95-subtask-plan.md',
-    'etc/evidence/m0-t95-status-ledger-20260811.md'
+    'etc/operations/m0-t95-subtask-plan.md'
 )) {
     if (-not (Test-Path -LiteralPath (Join-Path $docs $record) -PathType Leaf)) {
         throw "Missing governance record: docs/$record"
     }
 }
 
-$inventoryPath = Join-Path $docs 'etc/operations/document-inventory.md'
-if (-not (Test-Path -LiteralPath $inventoryPath -PathType Leaf)) {
-    throw 'Missing exact-file documentation inventory.'
-}
-$inventory = Get-Content -LiteralPath $inventoryPath -Raw
-$inventoryEntries = @{}
-foreach ($match in [regex]::Matches(
-    $inventory,
-    '(?m)^\| (?<path>[^|]+) \| (?<classification>[^|]+) \| (?<hash>[a-f0-9]{64}) \|\s*$'
-)) {
-    $path = $match.Groups['path'].Value.Trim().Replace('/', '\')
-    if ($inventoryEntries.ContainsKey($path)) {
-        throw "Documentation inventory has a duplicate path: $path"
-    }
-    $inventoryEntries[$path] = $match.Groups['hash'].Value
-}
-
-$inventoryRelativePath = 'etc\operations\document-inventory.md'
-$actualDocuments = @{}
-foreach ($document in Get-ChildItem -LiteralPath $docs -Recurse -File |
-    Where-Object { $_.Extension -in @('.md', '.json', '.tsv') }) {
-    $relativePath = $document.FullName.Substring($docs.Length).TrimStart('\')
-    if ($relativePath -eq $inventoryRelativePath) {
-        continue
-    }
-    if ($actualDocuments.ContainsKey($relativePath)) {
-        throw "Duplicate documentation path after normalization: $relativePath"
-    }
-    $actualDocuments[$relativePath] = (Get-FileHash -LiteralPath $document.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
-}
-
-$missingInventoryEntries = [System.Collections.Generic.List[string]]::new()
-foreach ($entryPath in $actualDocuments.Keys) {
-    if (-not $inventoryEntries.ContainsKey([string]$entryPath)) {
-        $missingInventoryEntries.Add([string]$entryPath)
-    }
-}
-$staleInventoryEntries = [System.Collections.Generic.List[string]]::new()
-foreach ($entryPath in $inventoryEntries.Keys) {
-    if (-not $actualDocuments.ContainsKey([string]$entryPath)) {
-        $staleInventoryEntries.Add([string]$entryPath)
-    }
-}
-if ($missingInventoryEntries.Count -gt 0 -or $staleInventoryEntries.Count -gt 0) {
-    throw 'Documentation inventory does not exactly match the documentation file set. Regenerate it with tools/governance/Export-DocumentationInventory.ps1.'
-}
-foreach ($path in $actualDocuments.Keys) {
-    if ($inventoryEntries[$path] -ne $actualDocuments[$path]) {
-        throw "Documentation inventory hash is stale for: $path. Regenerate it with tools/governance/Export-DocumentationInventory.ps1."
-    }
+$archivedStatusLedger = Join-Path $RepositoryRoot 'artifacts/documentation-archive/20260910/etc/evidence/m0-t95-status-ledger-20260811.md'
+if (-not (Test-Path -LiteralPath $archivedStatusLedger -PathType Leaf)) {
+    throw 'Missing archived M0 T95 status ledger.'
 }
 
 Write-Host 'Documentation governance verification passed.'

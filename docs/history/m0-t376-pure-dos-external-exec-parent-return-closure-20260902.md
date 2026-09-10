@@ -28,9 +28,9 @@ WOW/Win16 and graphics/device work to their separately ordered owner packages.
 
 ## Evidence
 
-- [S1 owner and media admission](../etc/evidence/m0-t376-s1-external-dos-exec-owner-admission-001.md)
-- [S2 file-lifecycle binding](../etc/evidence/m0-t376-s2-external-dos-file-lifecycle-binding-001.md)
-- [S3 `.COM` observation](../etc/evidence/m0-t376-s3-immutable-com-exec-observation-001.md)
-- [S4 alternate-root disposition](../etc/evidence/m0-t376-s4-alternate-root-mz-container-disposition-001.md)
-- [S5 fixed-root extension](../etc/evidence/m0-t376-s5-fixed-root-immutable-media-extension-001.md)
-- [S6 MZ observation](../etc/evidence/m0-t376-s6-fixed-root-mz-exec-observation-001.md)
+- [S1 owner and media admission](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t376-s1-external-dos-exec-owner-admission-001.md)
+- [S2 file-lifecycle binding](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t376-s2-external-dos-file-lifecycle-binding-001.md)
+- [S3 `.COM` observation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t376-s3-immutable-com-exec-observation-001.md)
+- [S4 alternate-root disposition](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t376-s4-alternate-root-mz-container-disposition-001.md)
+- [S5 fixed-root extension](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t376-s5-fixed-root-immutable-media-extension-001.md)
+- [S6 MZ observation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t376-s6-fixed-root-mz-exec-observation-001.md)

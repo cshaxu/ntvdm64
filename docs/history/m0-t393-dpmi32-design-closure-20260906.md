@@ -28,4 +28,4 @@ may a new task admit the complete DPMI32/WOW32 owner packages.
 
 ## Evidence
 
-[T393 S1 DPMI32 source and dependency audit](../etc/evidence/m0-t393-s1-dosx-source-dependency-audit-001.md).
+[T393 S1 DPMI32 source and dependency audit](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t393-s1-dosx-source-dependency-audit-001.md).

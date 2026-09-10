@@ -14,4 +14,4 @@ package at source/product-route level.
   not claimed.
 
 The closure evidence is
-[M0 T332 S4 original DPMI package disposition](../etc/evidence/m0-t332-s4-original-dpmi-package-disposition-001.md).
+[M0 T332 S4 original DPMI package disposition](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t332-s4-original-dpmi-package-disposition-001.md).

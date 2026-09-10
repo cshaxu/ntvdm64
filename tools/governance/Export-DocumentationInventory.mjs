@@ -7,10 +7,11 @@ const docsRoot = join(root, "docs");
 const output = join(docsRoot, "etc", "operations", "document-inventory.md");
 
 function classification(file) {
-  if (["README.md", "STATUS.md", "QUEUE.md", "TODO.md"].includes(file)) return "principal control document";
+  if (["README.md", "states/CURRENT.md", "states/QUEUE.md", "states/TODO.md"].includes(file)) return "principal control document";
   if (file.startsWith("rules/")) return "current rule authority";
   if (/^design\/(GOAL|ARCHITECTURE|CODING|UI|ROADMAP)\.md$/.test(file)) return "current design authority";
   if (file.startsWith("history/")) return "closed task history";
+  if (file.startsWith("proposals/")) return "unadmitted task proposal";
   if (file.startsWith("etc/")) return "indexed supporting material";
   return "retained pre-governance evidence";
 }

@@ -18,4 +18,4 @@ backlog or pretend the declared command executed.
 Paired x86/x64 formal product links remain a required successor verification;
 x64 link is never a guest-runtime claim.
 
-Evidence: [S3 configuration-package and owner-transfer result](../etc/evidence/m0-t327-s3-command-configuration-owner-transfer-001.md).
+Evidence: [S3 configuration-package and owner-transfer result](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t327-s3-command-configuration-owner-transfer-001.md).

@@ -46,7 +46,7 @@ P1 has centralized the active COMMAND declarations in
 `opennt_rtl_compat.h`, added layout assertions, and recovered
 `RtlNtStatusToDosError` through the same-named current `ntdll` export plus a
 bounded source-relevant fallback. Its formal build and fixture evidence is
-[`m0-t259-s2-p1-rtl-contract-status-recovery-001.md`](../evidence/m0-t259-s2-p1-rtl-contract-status-recovery-001.md).
+[`m0-t259-s2-p1-rtl-contract-status-recovery-001.md`](../../../artifacts/documentation-archive/20260910/etc/evidence/m0-t259-s2-p1-rtl-contract-status-recovery-001.md).
 P2 will reconcile remaining allocation/conversion ownership across COMMAND
 and DEM without modifying imported bodies.
 

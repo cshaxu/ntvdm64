@@ -1,12 +1,12 @@
-﻿# Execution Rules
+# Execution Rules
 
 ## Request Lifecycle
 
 1. Read the task reading set in [docs/README.md](../README.md) and re-read the
    owner request.
-2. Keep unapproved candidate packages in [QUEUE.md](../QUEUE.md). A candidate
+2. Keep unapproved candidate packages in [QUEUE.md](../states/QUEUE.md). A candidate
    becomes a numeric T only after owner approval and admission to the one
-   active [STATUS.md](../STATUS.md) packet.
+   active [STATUS.md](../states/CURRENT.md) packet.
 3. Record one bounded S brief in Status, select Ordinary or Coordinated
    Dual-Session Mode, and implement only its admitted scope.
 4. Gather the stated evidence and run the packet verification.
@@ -99,36 +99,34 @@ report or `artifacts/build/<task-id>-<version>/`, which is reserved for an
   explicitly approved versioned executable publication and its manifest, not for
   a configure tree, retry root, object cache, or probe.
 
-### Product Executable Pair
+### Product Executable
 
-The product publication contract has exactly two architecture-named executable
-slots:
+The current product publication contract has one executable:
 
-- `build/output/ntvdm32.exe` — the formal Win32/x86 product link;
-- `build/output/ntvdm64.exe` — the formal Win64/x64 product link.
+- `build/output/ntvdm32.exe` — the formal Win32/x86 product link.
 
-The deployable local package mirrors those exact names at its root. The
+The deployable local package mirrors that exact name at its root. The
 currently selected owner test root is `O:\ntvdm64`, so its required executable
-paths are `O:\ntvdm64\ntvdm32.exe` and `O:\ntvdm64\ntvdm64.exe`.
+path is `O:\ntvdm64\ntvdm32.exe`. Native x64 is retired as a product,
+staging, runtime and acceptance target. It is not a source-closure criterion;
+an x64-only issue is left untouched unless it demonstrates an
+architecture-neutral mapping-manager correctness defect.
 
 `O:\ntvdm64` is a runtime-package root, not a diagnostic workspace. JSON, TXT,
 LOG, MAP, PDB and other observation/debug records must be written below
 `O:\ntvdm64\logs\` (or the disposable admitted build root), never beside the
-two product executables or guest media at the package root.
+product executable or guest media at the package root.
 
 A build run may use a descriptive temporary executable name inside its
 disposable `build/<task-id>/<run-id>/` root, but that name is never a product
-publication name. A staging step may replace only the matching architecture
-slot after that architecture's formal final link succeeds. It must never copy
-an x86 binary into `ntvdm64.exe`, an x64 binary into `ntvdm32.exe`, or publish a
-generic `ntvdm.exe` / task-specific diagnostic executable in place of either
-slot. The publication record names the source run, architecture and hashes of
-both staged files.
+publication name. A staging step may replace `ntvdm32.exe` only after the x86
+formal final link succeeds. It must never publish a generic `ntvdm.exe` or a
+task-specific diagnostic executable in its place. The publication record names
+the source run, x86 architecture and staged-file hash.
 
-Use `node tools/build/StageProductExecutable.mjs --architecture <x86|x64>
---input <formal-final-link.exe>` for the architecture-specific staging action.
-The tool reads the PE machine field before it writes either destination and
-therefore rejects a mislabeled or cross-architecture input.
+Use `node tools/build/StageProductExecutable.mjs --architecture x86
+--input <formal-final-link.exe>` for staging. The tool reads the PE machine
+field before it writes the destination and rejects a mislabeled input.
 
 ### Historical Recovery Audit Gate
 
@@ -249,7 +247,7 @@ or CRT graph.
 
 | Island | Required toolchain | Permitted responsibility |
 | --- | --- | --- |
-| Host runtime components and in-process fixtures | MSVC Win32/x86 `/MT` and MSVC x64 `/MT`, as two independent graphs | Each architecture links app, session, broker client, adapters, selected `mvdm-host` units and Bochs machine with one ABI/CRT. Objects never cross architectures. |
+| Host runtime components and in-process fixtures | MSVC Win32/x86 `/MT` | The selected x86 graph links app, session, broker client, adapters and selected `mvdm-host` units with one ABI/CRT. Native x64 is not built, linked or accepted. |
 | DOS/WOW16 guest source and products | Matching historical Microsoft toolchain or explicitly evidenced compatible island | Load-only guest images and provenance; guest objects/libraries never satisfy a host symbol. |
 | Broker process and IPC fixtures | Same MSVC architecture/CRT policy as its selected host target; wire ABI is fixed-width and architecture-neutral | Cross-process registration, identity, queues, notifications, leases and cleanup only. |
 | PowerShell tools and retained cross-toolchain evidence | Their recorded host/toolchain | Inspection, historical evidence and non-runtime probes only; they never supply an object to a host runtime process. |

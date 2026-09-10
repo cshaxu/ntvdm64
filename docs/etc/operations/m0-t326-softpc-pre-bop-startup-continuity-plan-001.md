@@ -60,4 +60,4 @@ S1 reached the first original `50h:11h` crossing, rather than a pre-BOP
 terminal. The planned S2--S4 were consequently not admitted: they are
 conditional recovery packets for a pre-BOP owner gap and would be trace-driven
 work after the achieved boundary. The evidence and successor transfer are in
-[the fixed startup-cut record](../evidence/m0-t326-s1-fixed-softpc-pre-bop-startup-cut-001.md).
+[the fixed startup-cut record](../../../artifacts/documentation-archive/20260910/etc/evidence/m0-t326-s1-fixed-softpc-pre-bop-startup-cut-001.md).

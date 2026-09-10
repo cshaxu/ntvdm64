@@ -14,4 +14,4 @@ edges, and the existing x86 VDD shadow fixture completed successfully.  S30
 does not enable arbitrary VDD products, MONITOR/kernel VDM, Bochs fallback, or
 integrated device behavior.
 
-Evidence: [S30 P1](../etc/evidence/m0-t310-s30-p1-host-vdd-binding-closure-001.md).
+Evidence: [S30 P1](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s30-p1-host-vdd-binding-closure-001.md).

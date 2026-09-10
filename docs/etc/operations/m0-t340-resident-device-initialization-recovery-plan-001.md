@@ -33,8 +33,8 @@ or non-reached. Include the first post-chain `SVC_DEMGETDPBLIST` transfer.
 **Closed.** The complete initial resident chain is source-proven to be an
 original function-00 no-op-success cohort. Its first selected non-trivial
 successor is the configuration-loaded original `HIMEM.SYS` package; see the
-[S1 evidence](../evidence/m0-t340-s1-resident-device-initialization-contract-001.md)
-and [ledger](m0-t340-s1-resident-device-initialization-contract-ledger.tsv).
+[S1 evidence](../../../artifacts/documentation-archive/20260910/etc/evidence/m0-t340-s1-resident-device-initialization-contract-001.md)
+and [ledger](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t340-s1-resident-device-initialization-contract-ledger.tsv).
 
 ### S2 — Complete original cohort recovery
 

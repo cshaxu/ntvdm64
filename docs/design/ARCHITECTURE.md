@@ -151,7 +151,37 @@ prevents permanent parallel providers.
   BaseSrv-style coordination contracts through public IPC without recreating
   CSRSS or inspecting arbitrary processes.
 - `app`: CLI and final composition. It creates session instances, selects guest
-  images, binds adapters and connects to or starts the broker.
+  images, binds adapters and connects to or starts the broker.  It also owns
+  every product error-dialog presentation through the one custom public-Win32
+  dialog surface; an original mirror or adapter may report a structured
+  source-shaped fault and permitted responses, but may not own final product
+  dialog UI.
+
+## Interactive failure policy
+
+All user-facing error-dialog interaction uses one app-owned custom Win32
+presentation contract.  This applies equally to an error reached through an
+original `ERRORPANEL`, a direct `MessageBox`, a WOW private hard-error form,
+or another source family: those forms remain evidence for source text,
+available actions, default action and return representation, but are not
+separate product dialog owners.
+
+The lower owner reports copied structured fault data and the finite actions it
+permits.  `app` renders the dialog and returns the selected action without
+inventing a source result; `session` owns the consequent lifecycle operation
+(retry, continue, or terminate the current session).  Where an original ABI
+uses a result ordinal or an `RMB_*` value, the boundary maps only the selected
+action to that proven representation.  It does not turn an unavailable,
+malformed, noninteractive, or unsupported source contract into a fabricated
+success.
+
+This is a presentation/lifecycle boundary, not a new generic error provider:
+the original/adapter owner still classifies the failure and retains its
+source-defined post-response control flow.  Non-dialog failures continue to
+use their declared deterministic report/exit contract.  A future implementation
+packet must audit every current direct dialog call and private presentation
+transport before moving it to this boundary; no blanket `MessageBox` rewrite
+is authorized without that per-family result-contract review.
 
 ## Runtime cardinality
 
@@ -165,10 +195,11 @@ is no fallback or simultaneous executor. `CPU_30_STYLE` is excluded because
 its original `v86/monitor` body delegates guest execution to NT4 kernel VDM;
 it is not a CCPU profile and cannot enter this non-invasive product. Current
 functional machine, guest and MVDM-host acceptance records its selected
-Win32/x86 or x64 CCPU40 row; a host-runnable x64 behavior also records the
-paired row. Pure source, static-analysis and documentation work need not
-create a machine session, but every selected translation unit must compile and
-link under both independent host graphs.
+Win32/x86 CCPU40 row only. Native x64 compile/link output is not an acceptance
+input or a reason to create, preserve, or repair x64-only differences, except
+for a demonstrated architecture-neutral mapping-manager correctness defect.
+Pure source, static-analysis and documentation work need not create a machine
+session.
 
 All project-owned session and adapter APIs are multi-instance-safe: no hidden
 process-global current machine, mapping table or resource registry is allowed.

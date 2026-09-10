@@ -23,7 +23,7 @@ and creates no new runtime-owner conclusion.
 
 ## Evidence
 
-- [S1 audit](../etc/evidence/m0-t337-s1-packaged-system-file-root-contract-audit-001.md)
-- [S2 rebaseline](../etc/evidence/m0-t337-s2-original-system-root-binding-rebaseline-001.md)
-- [S3 composition](../etc/evidence/m0-t337-s3-unified-mvdm-system-root-composition-001.md)
-- [S4 observation](../etc/evidence/m0-t337-s4-fixed-mvdm-system-root-observation-001.md)
+- [S1 audit](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t337-s1-packaged-system-file-root-contract-audit-001.md)
+- [S2 rebaseline](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t337-s2-original-system-root-binding-rebaseline-001.md)
+- [S3 composition](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t337-s3-unified-mvdm-system-root-composition-001.md)
+- [S4 observation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t337-s4-fixed-mvdm-system-root-observation-001.md)

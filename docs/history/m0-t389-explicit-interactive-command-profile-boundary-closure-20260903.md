@@ -18,7 +18,7 @@ be proved.
 
 ## Accepted evidence
 
-* [S8 boundary evidence](../etc/evidence/m0-t389-s8-child-command-reentry-boundary-001.md)
+* [S8 boundary evidence](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t389-s8-child-command-reentry-boundary-001.md)
   records the original source contract, fixed observations, the completed
   `RETF`, and the DOSX/DPMI/WOW predecessor.
 * The formal x86 CPU40 Ninja product links with the registered, default-off

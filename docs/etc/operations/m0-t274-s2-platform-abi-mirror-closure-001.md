@@ -2,7 +2,7 @@
 
 ## Inputs
 
-- [S1 non-guest union ledger](m0-t274-s1-non-guest-mvdm-union-ledger.tsv),
+- [S1 non-guest union ledger](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t274-s1-non-guest-mvdm-union-ledger.tsv),
   generated from `O:\repos.external\OpenNT\base\mvdm` and
   `O:\repos.external\OpenNT-4.5\nt\private\mvdm`;
 - the same two pinned source trees, searched only for declarations outside the

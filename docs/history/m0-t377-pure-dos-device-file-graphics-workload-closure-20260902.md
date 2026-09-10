@@ -32,8 +32,8 @@ presentation or universal DOS-device compatibility.
 
 ## Evidence
 
-- [S1 workload admission](../etc/evidence/m0-t377-s1-dos-device-workload-owner-admission-001.md)
-- [S2 keyboard/file/IOCTL owner recovery](../etc/evidence/m0-t377-s2-console-keyboard-file-ioctl-owner-recovery-001.md)
-- [S3 timer/IRQ/video recovery](../etc/evidence/m0-t377-s3-timer-irq-video-owner-recovery-001.md)
-- [S4 formal matrix closure](../etc/evidence/m0-t377-s4-formal-workload-matrix-closure-001.md)
-- [S5 frozen observation](../etc/evidence/m0-t377-s5-frozen-dos-device-workload-observation-001.md)
+- [S1 workload admission](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t377-s1-dos-device-workload-owner-admission-001.md)
+- [S2 keyboard/file/IOCTL owner recovery](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t377-s2-console-keyboard-file-ioctl-owner-recovery-001.md)
+- [S3 timer/IRQ/video recovery](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t377-s3-timer-irq-video-owner-recovery-001.md)
+- [S4 formal matrix closure](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t377-s4-formal-workload-matrix-closure-001.md)
+- [S5 frozen observation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t377-s5-frozen-dos-device-workload-observation-001.md)

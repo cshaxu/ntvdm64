@@ -28,8 +28,8 @@ trace-derived repair is admitted by this closure.
 
 ## Evidence
 
-- [S1 admission](../etc/evidence/m0-t379-s1-original-vdmredir-product-admission-001.md)
-- [S2 original DLL and parent loader](../etc/evidence/m0-t379-s2-original-vdmredir-dll-parent-loader-closure-001.md)
-- [S3 local resource lifecycle](../etc/evidence/m0-t379-s3-local-resource-lifecycle-closure-001.md)
-- [S4 formal activation matrix](../etc/evidence/m0-t379-s4-formal-vdmredir-activation-matrix-001.md)
-- [S5 frozen observation](../etc/evidence/m0-t379-s5-frozen-original-redir-observation-001.md)
+- [S1 admission](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t379-s1-original-vdmredir-product-admission-001.md)
+- [S2 original DLL and parent loader](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t379-s2-original-vdmredir-dll-parent-loader-closure-001.md)
+- [S3 local resource lifecycle](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t379-s3-local-resource-lifecycle-closure-001.md)
+- [S4 formal activation matrix](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t379-s4-formal-vdmredir-activation-matrix-001.md)
+- [S5 frozen observation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t379-s5-frozen-original-redir-observation-001.md)

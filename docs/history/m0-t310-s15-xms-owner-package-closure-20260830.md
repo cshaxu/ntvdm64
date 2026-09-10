@@ -10,11 +10,11 @@ Bochs production route.
 
 ## Accepted evidence
 
-- [P1 source closure](../etc/evidence/m0-t310-s15-p1-xms-source-closure-001.md)
-- [P2 CCPU40 profile boundary](../etc/evidence/m0-t310-s15-p2-x86-profile-boundary-001.md)
-- [P3 original-owner assembly](../etc/evidence/m0-t310-s15-p3-xms-original-owner-assembly-001.md)
-- [P4 contract dispositions](../etc/evidence/m0-t310-s15-p4-xms-contract-disposition-001.md)
-- [P5 package closure](../etc/evidence/m0-t310-s15-p5-xms-package-closure-001.md)
+- [P1 source closure](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s15-p1-xms-source-closure-001.md)
+- [P2 CCPU40 profile boundary](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s15-p2-x86-profile-boundary-001.md)
+- [P3 original-owner assembly](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s15-p3-xms-original-owner-assembly-001.md)
+- [P4 contract dispositions](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s15-p4-xms-contract-disposition-001.md)
+- [P5 package closure](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s15-p5-xms-package-closure-001.md)
 
 ## Deferred integration condition
 

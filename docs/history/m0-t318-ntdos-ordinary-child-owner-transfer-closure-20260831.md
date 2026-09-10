@@ -15,9 +15,9 @@ the declared child, `EXEC`, or parent return can be observed.
 
 ## Closed evidence
 
-- [S1 guest/host contract freeze](../etc/evidence/m0-t318-s1-ntdos-exec-parent-return-contract-freeze-001.md)
-- [P75 post-command guest-bootstrap owner cohort](../etc/evidence/m0-t318-s2-p75-post-cmdsetinfo-guest-device-bootstrap-owner-cohort-001.md)
-- [P76 floppy recursive-simulation transfer](../etc/evidence/m0-t318-s2-p76-floppy-recursive-simulation-owner-transfer-001.md)
+- [S1 guest/host contract freeze](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t318-s1-ntdos-exec-parent-return-contract-freeze-001.md)
+- [P75 post-command guest-bootstrap owner cohort](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t318-s2-p75-post-cmdsetinfo-guest-device-bootstrap-owner-cohort-001.md)
+- [P76 floppy recursive-simulation transfer](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t318-s2-p76-floppy-recursive-simulation-owner-transfer-001.md)
 
 ## Transfer
 

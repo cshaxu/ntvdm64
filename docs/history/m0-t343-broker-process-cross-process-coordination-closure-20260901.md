@@ -7,8 +7,8 @@ pretending that the NT4 BaseSrv/CSRSS product shell exists in the modern
 process.
 
 - The original BaseClient/BaseSrv record, wait/retry and source-consume facts
-  are recorded in the [S1 boundary evidence](../etc/evidence/m0-t343-s1-broker-process-boundary-001.md)
-  and [S2 record ledger](../etc/operations/m0-t343-s2-basesrv-record-message-contract-ledger.tsv).
+  are recorded in the [S1 boundary evidence](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t343-s1-broker-process-boundary-001.md)
+  and [S2 record ledger](../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t343-s2-basesrv-record-message-contract-ledger.tsv).
 - `broker` now owns a fixed-width copied DOS record with deterministic
   pending/second-empty-call, peek/copy/consume and close-once behavior.
 - The app's declared DOS command goes through the only permitted
@@ -16,7 +16,7 @@ process.
   `GetNextVDMCommand` caller sees its local copied result.
 - Both x86 and x64 focused record/bridge tests and formal CPU40 candidate
   graphs pass. The selected S3 formal result is recorded in
-  [its closure evidence](../etc/evidence/m0-t343-s3-p3-copied-record-formal-closure-001.md).
+  [its closure evidence](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t343-s3-p3-copied-record-formal-closure-001.md).
 
 ## Explicit transfers
 

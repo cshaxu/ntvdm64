@@ -6,7 +6,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$path = Join-Path $root 'docs/etc/operations/m0-t276-s12-host-src-disposition-ledger.tsv'
+$path = Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-s12-host-src-disposition-ledger.tsv'
 if (-not (Test-Path -LiteralPath $path)) { throw "Missing S12 host/src ledger: $path" }
 $rows = @(Import-Csv -LiteralPath $path -Delimiter "`t")
 if ($rows.Count -ne 56) { throw "Expected 56 host/src source rows, found $($rows.Count)." }

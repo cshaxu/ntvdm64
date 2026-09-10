@@ -2,7 +2,7 @@
 
 The five `GetVDMAddr` expressions in `demSetDTALocation` do not all create
 the same kind of state. The complete source sweep is the adjacent
-[ledger](m0-t280-s20-dem-persistent-guest-location-ledger-001.tsv).
+[ledger](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s20-dem-persistent-guest-location-ledger-001.tsv).
 
 Four native pointers persist after the setter returns: `pulDTALocation`,
 `pusCurrentPDB`, `pExtendedError`, and `pSFTHead`. `pDosWowData` is only a

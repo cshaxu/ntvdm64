@@ -17,11 +17,11 @@ profile:
 
 ## Evidence
 
-- [S1 boundary ledger](../etc/evidence/m0-t317-s1-dem-command-softpc-boundary-ledger-001.md)
-- [S2 closure](../etc/evidence/m0-t317-s2-command-bootstrap-cohort-closure-001.md)
-- [S3 P1 child streams](../etc/evidence/m0-t317-s3-p1-command-child-stream-boundary-001.md)
-- [S3 P2 worker context](../etc/evidence/m0-t317-s3-p2-command-worker-base-vdm-context-001.md)
-- [S3 P3 exit/redirection](../etc/evidence/m0-t317-s3-p3-command-exit-redirection-disposition-001.md)
+- [S1 boundary ledger](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t317-s1-dem-command-softpc-boundary-ledger-001.md)
+- [S2 closure](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t317-s2-command-bootstrap-cohort-closure-001.md)
+- [S3 P1 child streams](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t317-s3-p1-command-child-stream-boundary-001.md)
+- [S3 P2 worker context](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t317-s3-p2-command-worker-base-vdm-context-001.md)
+- [S3 P3 exit/redirection](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t317-s3-p3-command-exit-redirection-disposition-001.md)
 
 ## Deliberate limits and transfers
 

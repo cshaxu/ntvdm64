@@ -8,7 +8,7 @@ wave. The waves are derived from original package/build structure and the S8/S9
 interface evidence; they do not authorize builds or select providers.
 
 The detailed ledger is
-[`m0-t276-s10-package-profile-wave-ledger.tsv`](m0-t276-s10-package-profile-wave-ledger.tsv).
+[`m0-t276-s10-package-profile-wave-ledger.tsv`](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-s10-package-profile-wave-ledger.tsv).
 
 ## Candidate waves
 

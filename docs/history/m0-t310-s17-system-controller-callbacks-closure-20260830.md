@@ -9,10 +9,10 @@ Every adjacent source has a single S17, later-owner or unselected disposition.
 
 ## Accepted evidence
 
-- [P1 source boundary](../etc/evidence/m0-t310-s17-p1-system-controller-source-boundary-001.md)
-- [P1 owner ledger](../etc/evidence/m0-t310-s17-p1-system-controller-owner-ledger-001.tsv)
-- [P2 contract dispositions](../etc/evidence/m0-t310-s17-p2-system-controller-contract-disposition-001.tsv)
-- [P2 formal assembly](../etc/evidence/m0-t310-s17-p2-system-controller-formal-assembly-001.md)
+- [P1 source boundary](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s17-p1-system-controller-source-boundary-001.md)
+- [P1 owner ledger](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s17-p1-system-controller-owner-ledger-001.tsv)
+- [P2 contract dispositions](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s17-p2-system-controller-contract-disposition-001.tsv)
+- [P2 formal assembly](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s17-p2-system-controller-formal-assembly-001.md)
 
 ## Deferred integration condition
 

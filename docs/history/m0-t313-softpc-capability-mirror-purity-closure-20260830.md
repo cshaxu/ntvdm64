@@ -19,14 +19,14 @@ original SoftPC profile.
 
 ## Evidence
 
-- [S1 capability and purity closure](../etc/evidence/m0-t313-s1-softpc-capability-purity-closure-001.md)
+- [S1 capability and purity closure](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s1-softpc-capability-purity-closure-001.md)
 - [S2 CPU, memory, firmware and reset closure](m0-t313-s2-cpu-memory-firmware-reset-closure-20260830.md)
 - [S3 controller lifecycle closure](m0-t313-s3-controller-lifecycle-closure-20260830.md)
 - [S4 device lifecycle closure](m0-t313-s4-device-lifecycle-closure-20260830.md)
-- [S5 controlled terminal](../etc/evidence/m0-t313-s5-p1-source-shaped-controlled-termination-001.md)
-- [S5 original debugger startup binding](../etc/evidence/m0-t313-s5-p3-debugger-startup-binding-001.md)
-- [S5 original EMS writeback](../etc/evidence/m0-t313-s5-p4-original-ems-writeback-closure-001.md)
-- [S5 final reread](../etc/evidence/m0-t313-s5-p5-bounded-execution-and-purity-reread-001.md)
+- [S5 controlled terminal](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s5-p1-source-shaped-controlled-termination-001.md)
+- [S5 original debugger startup binding](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s5-p3-debugger-startup-binding-001.md)
+- [S5 original EMS writeback](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s5-p4-original-ems-writeback-closure-001.md)
+- [S5 final reread](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s5-p5-bounded-execution-and-purity-reread-001.md)
 
 ## Explicit limits
 

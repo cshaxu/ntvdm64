@@ -27,7 +27,7 @@ server, RPC implementation or Redirector service route.
 
 ## Reproducibility
 
-The companion [per-file manifest](m0-t290-s5-ds-declaration-package-manifest-001.tsv)
+The companion [per-file manifest](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t290-s5-ds-declaration-package-manifest-001.tsv)
 records all 95 logical paths, the exact selected OpenNT source paths and
 SHA-256 values. It is an import/provenance record, not a build manifest.
 

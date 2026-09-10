@@ -8,8 +8,8 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$inputPath = Join-Path $root 'docs/etc/operations/m0-t276-s12-host-src-disposition-ledger.tsv'
-$outputPath = Join-Path $root 'docs/etc/operations/m0-t281-s5-host-control-disposition-ledger.tsv'
+$inputPath = Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-s12-host-src-disposition-ledger.tsv'
+$outputPath = Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t281-s5-host-control-disposition-ledger.tsv'
 $rows = Import-Csv -LiteralPath $inputPath -Delimiter "`t"
 
 $map = @{

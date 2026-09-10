@@ -4,8 +4,8 @@ import path from "node:path";
 
 const root = path.resolve(process.argv[2] ?? process.cwd());
 const canonicalRoot = process.env.OPENNT45_MVDM_ROOT ?? "O:/repos.external/opennt-4.5/nt/private/mvdm";
-const output = path.join(root, "docs/etc/operations/m0-t335-s1-wow-source-profile-ledger.tsv");
-const oldLedger = path.join(root, "docs/etc/operations/m0-t291-s1-wow-file-subdomain-disposition-ledger.tsv");
+const output = path.join(root, "artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t335-s1-wow-source-profile-ledger.tsv");
+const oldLedger = path.join(root, "artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t291-s1-wow-file-subdomain-disposition-ledger.tsv");
 const packageRoots = ["wow32", "fax"];
 
 function hash(file) {

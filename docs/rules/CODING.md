@@ -145,11 +145,12 @@
   evidence, an immutable external name or prose describing a historical API.
 
 ## Build and evidence hygiene
-- The current recovery build has MSVC `/MT` Win32/x86 and Win32/x64 compile
-  rows. Every reached SoftPC source/package must compile and normally link
-  under selected original `CPU_40_STYLE` / CCPU40 in both rows. The x86 row is
-  the only current guest-runtime/functional-observation row; x64 compile/link
-  closure must not be misreported as x64 guest execution. `CPU_30_STYLE` is an
+- The current recovery build and product acceptance have one MSVC `/MT`
+  Win32/x86 row, producing `ntvdm32.exe` with the selected original
+  `CPU_40_STYLE` / CCPU40 executor. Native x64 compilation and linking are
+  not a closure criterion: do not repair, preserve, or create an x64-only
+  difference unless it is a demonstrated architecture-neutral
+  mapping-manager correctness defect. `CPU_30_STYLE` is an
   NT4 kernel-VDM V86-monitor contract, not a CCPU execution profile; it is
   retired and prohibited from every project-owned production or fixture
   compilation, linking, runtime and acceptance input. Its remaining

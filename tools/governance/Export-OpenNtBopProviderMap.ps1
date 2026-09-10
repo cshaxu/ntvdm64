@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$RepositoryRoot = '',
+    [string]$OpenNtRoot = 'O:\repos.external\OpenNT',
     [Parameter(Mandatory = $true)]
     [string]$InventoryJson,
     [Parameter(Mandatory = $true)]
@@ -12,16 +13,23 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 }
 $repository = [IO.Path]::GetFullPath($RepositoryRoot)
+$openNt = [IO.Path]::GetFullPath($OpenNtRoot)
 $inventoryPath = [IO.Path]::GetFullPath($InventoryJson)
 $output = [IO.Path]::GetFullPath($OutputRoot)
 if (-not (Test-Path -LiteralPath $inventoryPath -PathType Leaf)) { throw "Missing inventory JSON: $inventoryPath" }
+if (-not (Test-Path -LiteralPath $openNt -PathType Container)) { throw "Missing external OpenNT reference root: $openNt" }
 if (Test-Path -LiteralPath $output) { throw "Refusing to overwrite existing provider-map root: $output" }
 
 function Get-Sha256([string]$Path) { (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant() }
-function Get-Relative([string]$Path) { $Path.Substring($repository.Length + 1).Replace('\', '/') }
+function Get-SourceReference([string]$Path) {
+    if ($Path.StartsWith($openNt, [System.StringComparison]::OrdinalIgnoreCase)) {
+        return ('external/OpenNT/' + $Path.Substring($openNt.Length + 1).Replace('\', '/'))
+    }
+    return $Path.Substring($repository.Length + 1).Replace('\', '/')
+}
 
-function Read-DispatchTable([string]$RelativePath, [string]$StartPattern) {
-    $path = Join-Path $repository $RelativePath
+function Read-DispatchTable([string]$OpenNtRelativePath, [string]$StartPattern) {
+    $path = Join-Path $openNt $OpenNtRelativePath
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing dispatcher source: $path" }
     $rows = @(); $inside = $false; $lineNumber = 0
     foreach ($line in Get-Content -LiteralPath $path) {
@@ -29,10 +37,10 @@ function Read-DispatchTable([string]$RelativePath, [string]$StartPattern) {
         if (-not $inside) { if ($line -match $StartPattern) { $inside = $true }; continue }
         if ($line -match '^\s*};') { break }
         if ($line -match '^\s*([A-Za-z_][A-Za-z0-9_]*)\s*,?\s*(?://\s*(.*))?$') {
-            $rows += [ordered]@{ index = $rows.Count; handler = $Matches[1]; annotation = $Matches[2]; source = (Get-Relative $path); line = $lineNumber }
+            $rows += [ordered]@{ index = $rows.Count; handler = $Matches[1]; annotation = $Matches[2]; source = (Get-SourceReference $path); line = $lineNumber }
         }
     }
-    if ($rows.Count -eq 0) { throw "No rows parsed from $RelativePath" }
+    if ($rows.Count -eq 0) { throw "No rows parsed from $OpenNtRelativePath" }
     return $rows
 }
 
@@ -40,11 +48,11 @@ $inventory = Get-Content -Raw -LiteralPath $inventoryPath | ConvertFrom-Json
 if ($inventory.schema -ne 'runner.opennt-bop-inventory.v1') { throw "Unexpected inventory schema: $($inventory.schema)" }
 
 $tables = [ordered]@{
-    BOP_DOS = Read-DispatchTable 'docs\etc\legacy_code\opennt-bop\original\dos\dem\demdisp.c' '^\s*PFNSVC\s+apfnSVC\s*\[\]\s*='
-    BOP_CMD = Read-DispatchTable 'docs\etc\legacy_code\opennt-bop\original\dos\command\cmddisp.c' '^\s*PFNSVC\s+apfnSVCCmd\s*\[\]\s*='
-    BOP_XMS = Read-DispatchTable 'docs\etc\legacy_code\opennt-bop\original\xms.486\xmsdisp.c' '^\s*PFNSVC\s+apfnXMSSvc\s*\[\]\s*='
-    BOP_DPMI = Read-DispatchTable 'docs\etc\legacy_code\opennt-bop\original\dpmi32\dpmi32.c' '^\s*VOID\s*\(\*DpmiDispatchTable\['
-    BOP_REDIR = Read-DispatchTable 'docs\etc\legacy_code\opennt-bop\original\vdmredir\vrdisp.c' '^\s*VOID\s*\(\*VrDispatchTable\[\]\)\(VOID\)\s*='
+    BOP_DOS = Read-DispatchTable 'base\mvdm\dos\dem\demdisp.c' '^\s*PFNSVC\s+apfnSVC\s*\[\]\s*='
+    BOP_CMD = Read-DispatchTable 'base\mvdm\dos\command\cmddisp.c' '^\s*PFNSVC\s+apfnSVCCmd\s*\[\]\s*='
+    BOP_XMS = Read-DispatchTable 'base\mvdm\xms.486\xmsdisp.c' '^\s*PFNSVC\s+apfnXMSSvc\s*\[\]\s*='
+    BOP_DPMI = Read-DispatchTable 'base\mvdm\dpmi32\dpmi32.c' '^\s*VOID\s*\(\*DpmiDispatchTable\['
+    BOP_REDIR = Read-DispatchTable 'base\mvdm\vdmredir\vrdisp.c' '^\s*VOID\s*\(\*VrDispatchTable\[\]\)\(VOID\)\s*='
 }
 
 $bindings = @{

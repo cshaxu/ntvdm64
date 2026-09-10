@@ -5,8 +5,8 @@
 T342 establishes that the one original debugger form required by normal MVDM
 startup is `DBGInit`. Its same-shaped, bounded adapter is selected and links
 in both formal CPU40 build rows. The source/ABI/failure evidence is recorded
-in the [S1 ledger](../etc/operations/m0-t342-s1-debugger-bde-fax-owner-contract-ledger.tsv)
-and [S2 verification](../etc/evidence/m0-t342-s2-debugger-startup-formal-closure-001.md).
+in the [S1 ledger](../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t342-s1-debugger-bde-fax-owner-contract-ledger.tsv)
+and [S2 verification](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t342-s2-debugger-startup-formal-closure-001.md).
 
 ## Explicit non-runtime dispositions
 

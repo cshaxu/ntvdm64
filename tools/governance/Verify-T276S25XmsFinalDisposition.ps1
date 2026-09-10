@@ -2,7 +2,7 @@
 param([Parameter(Mandatory=$true)][string]$RepositoryRoot)
 
 $ErrorActionPreference = 'Stop'
-$path = Join-Path (Resolve-Path $RepositoryRoot).Path 'docs/etc/operations/m0-t276-final-integration-disposition-ledger.tsv'
+$path = Join-Path (Resolve-Path $RepositoryRoot).Path 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-final-integration-disposition-ledger.tsv'
 $rows = @(Import-Csv $path -Delimiter "`t" | Where-Object {$_.source_path -like 'xms.486/*'})
 if ($rows.Count -ne 15) { throw "Expected 15 XMS rows, found $($rows.Count)." }
 if (@($rows | Where-Object {$_.final_disposition -eq 'unresolved'}).Count) { throw 'No XMS row may remain unresolved after the final package audit.' }

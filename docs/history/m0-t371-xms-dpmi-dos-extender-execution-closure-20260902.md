@@ -26,7 +26,7 @@ recover that owner package rather than add a DPMI leaf workaround.
 
 ## Evidence
 
-- [S1 original execution topology](../etc/evidence/m0-t371-s1-original-xms-dpmi-execution-topology-001.md)
-- [S2 original XMS startup cohort](../etc/evidence/m0-t371-s2-original-xms-startup-cohort-001.md)
-- [S3 original DPMI/DOSX current closure](../etc/evidence/m0-t371-s3-original-dpmi-dosx-current-closure-001.md)
-- [S4 fixed integration observation](../etc/evidence/m0-t371-s4-fixed-xms-dpmi-integration-observation-001.md)
+- [S1 original execution topology](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t371-s1-original-xms-dpmi-execution-topology-001.md)
+- [S2 original XMS startup cohort](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t371-s2-original-xms-startup-cohort-001.md)
+- [S3 original DPMI/DOSX current closure](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t371-s3-original-dpmi-dosx-current-closure-001.md)
+- [S4 fixed integration observation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t371-s4-fixed-xms-dpmi-integration-observation-001.md)

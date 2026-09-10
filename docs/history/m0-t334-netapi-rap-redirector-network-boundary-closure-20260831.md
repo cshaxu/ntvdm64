@@ -17,4 +17,4 @@ next queued owner package is WOW32/Win16, whose broker and callback work must
 start from its own original source/ABI boundary rather than treating this
 Redirector closure as a transport implementation.
 
-The detailed result is [M0 T334 S4 package reconciliation](../etc/evidence/m0-t334-s4-netapi-rap-package-reconciliation-001.md).
+The detailed result is [M0 T334 S4 package reconciliation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t334-s4-netapi-rap-package-reconciliation-001.md).

@@ -33,10 +33,10 @@ run; those belong to S3--S5.
 
 ## Evidence
 
-- [P7](../etc/evidence/m0-t313-s2-p7-original-lifecycle-witness-001.md)
-- [P8](../etc/evidence/m0-t313-s2-p8-memory-a20-and-umb-boundary-001.md)
-- [P9](../etc/evidence/m0-t313-s2-p9-firmware-resource-mirror-cleanup-001.md)
-- [S1 ledger](../etc/evidence/m0-t313-s1-softpc-capability-purity-ledger-001.tsv)
+- [P7](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s2-p7-original-lifecycle-witness-001.md)
+- [P8](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s2-p8-memory-a20-and-umb-boundary-001.md)
+- [P9](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s2-p9-firmware-resource-mirror-cleanup-001.md)
+- [S1 ledger](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s1-softpc-capability-purity-ledger-001.tsv)
 
 ## Transfer
 

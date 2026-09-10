@@ -15,8 +15,8 @@ $required = @(
     'src/mvdm-support-overlay/README.md',
     'src/mvdm-support-overlay/source/oemuni_pointer_width.c',
     'tests/mvdm-support/oemuni_pointer_width_fixture.c',
-    'docs/etc/operations/m0-t279-s3-support-library-build-plan-001.md',
-    'docs/etc/operations/m0-t279-s3-support-library-build-evidence-001.md'
+    'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t279-s3-support-library-build-plan-001.md',
+    'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t279-s3-support-library-build-evidence-001.md'
 )
 foreach ($relative in $required) {
     if (-not (Test-Path -LiteralPath (Join-Path $root $relative) -PathType Leaf)) {

@@ -16,7 +16,7 @@ COMMAND built-in, batch file, DOS child, native child or Win16 program ran.
   survives the Base VDM call.
 - The selected original COMMAND library and full CPU40/x86 product graph link
   successfully.  The source/build result is recorded in
-  [T362 S2](../etc/evidence/m0-t362-s2-first-call-guest-memory-cohort-closure-001.md).
+  [T362 S2](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t362-s2-first-call-guest-memory-cohort-closure-001.md).
 
 ## Frozen runtime result
 
@@ -24,7 +24,7 @@ The one permitted fixed-container `/C EXIT` observation returned normally
 from original `54:05`, then continued through the original configuration and
 environment service path, but did not reach `54:01` or `54:00`.  The initial
 console-only marker summary is superseded by the same-run
-[S3 correction](../etc/evidence/m0-t362-s3-frozen-command-observation-correction-002.md).
+[S3 correction](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t362-s3-frozen-command-observation-correction-002.md).
 The complete map/source attribution still shows the stopped execution stack as
 the original CCPU40
 `c_IOVirtualised -> inb -> printer_io` conventional-device path.

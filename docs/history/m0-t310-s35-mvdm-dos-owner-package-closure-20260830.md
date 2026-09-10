@@ -12,4 +12,4 @@ than replaced. Formal 381-edge composition and the two current source-shaped
 x86 checks pass. Monitor and debugger residuals are explicitly transferred to
 S36 and S42; integrated guest behavior remains S49.
 
-Evidence: [S35 P1](../etc/evidence/m0-t310-s35-mvdm-dos-owner-package-closure-001.md).
+Evidence: [S35 P1](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s35-mvdm-dos-owner-package-closure-001.md).

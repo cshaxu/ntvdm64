@@ -2,7 +2,7 @@
 param([Parameter(Mandatory = $true)][string]$RepositoryRoot)
 
 $ErrorActionPreference = 'Stop'
-$path = Join-Path (Resolve-Path -LiteralPath $RepositoryRoot).Path 'docs/etc/operations/m0-t276-s18-ieuvddex-file-disposition-ledger.tsv'
+$path = Join-Path (Resolve-Path -LiteralPath $RepositoryRoot).Path 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-s18-ieuvddex-file-disposition-ledger.tsv'
 if (-not (Test-Path -LiteralPath $path)) { throw "Missing output: $path" }
 $rows = @(Import-Csv -LiteralPath $path -Delimiter "`t")
 if ($rows.Count -ne 23) { throw "Expected 23 IEUVDDEx paths, found $($rows.Count)." }

@@ -8,7 +8,7 @@ $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 & (Join-Path $root 'tools/governance/Verify-T276S13DosDisposition.ps1') -RepositoryRoot $root
 & (Join-Path $root 'tools/governance/Verify-T276S13DosInterfaces.ps1') -RepositoryRoot $root
-$path = Join-Path $root 'docs/etc/operations/m0-t276-s13-dos-file-disposition-ledger.tsv'
+$path = Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-s13-dos-file-disposition-ledger.tsv'
 $rows = @(Import-Csv -LiteralPath $path -Delimiter "`t")
 if (@($rows | Where-Object { $_.source_path -like 'dos/dem/*' -and $_.file_kind -eq 'source' }).Count -ne 16) { throw 'Expected 16 DEM source units.' }
 if (@($rows | Where-Object { $_.source_path -like 'dos/command/*' -and $_.file_kind -eq 'source' }).Count -ne 11) { throw 'Expected 11 COMMAND source units.' }

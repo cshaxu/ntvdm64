@@ -13,7 +13,7 @@ UCRT. One unchanged fixed-container x86 observation exits `0xc0000005`, the
 already-classified CPU40/worker integration boundary; it does not identify a
 new XMS repair.
 
-Evidence: [T331 S1](../etc/evidence/m0-t331-s1-current-original-xms-owner-abi-rebaseline-001.md),
-[S2](../etc/evidence/m0-t331-s2-original-xms-cpu40-session-binding-001.md),
-[S3](../etc/evidence/m0-t331-s3-original-xms-package-contract-matrix-001.md),
-and [S4](../etc/evidence/m0-t331-s4-original-xms-formal-product-closure-001.md).
+Evidence: [T331 S1](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t331-s1-current-original-xms-owner-abi-rebaseline-001.md),
+[S2](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t331-s2-original-xms-cpu40-session-binding-001.md),
+[S3](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t331-s3-original-xms-package-contract-matrix-001.md),
+and [S4](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t331-s4-original-xms-formal-product-closure-001.md).

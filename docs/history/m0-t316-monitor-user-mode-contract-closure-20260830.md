@@ -39,5 +39,5 @@ does not claim DOS/WOW execution or a kernel-VDM substitute.
 
 ## Evidence
 
-- [S1 reconciliation](../etc/evidence/m0-t316-s1-monitor-contract-reconciliation-001.md)
-- [S2 ABI import](../etc/evidence/m0-t316-s2-original-vdm-abi-import-001.md)
+- [S1 reconciliation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t316-s1-monitor-contract-reconciliation-001.md)
+- [S2 ABI import](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t316-s2-original-vdm-abi-import-001.md)

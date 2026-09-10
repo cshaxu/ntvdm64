@@ -39,9 +39,9 @@ not reintroduce a fixture-local timer, controller shim or parallel executor.
 
 ## Evidence
 
-- [S3 P1](../etc/evidence/m0-t313-s3-p1-controller-source-assembly-001.md)
-- [S3 P2](../etc/evidence/m0-t313-s3-p2-controller-chain-and-input-binding-001.md)
-- [S3 P3](../etc/evidence/m0-t313-s3-p3-original-dma-ios-witness-001.md)
-- [S3 P4](../etc/evidence/m0-t313-s3-p4-original-pic-irq-witness-001.md)
-- [S3 P5](../etc/evidence/m0-t313-s3-p5-original-timer-package-formal-closure-001.md)
-- [S3 P6](../etc/evidence/m0-t313-s3-p6-original-timer-device-boundary-001.md)
+- [S3 P1](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s3-p1-controller-source-assembly-001.md)
+- [S3 P2](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s3-p2-controller-chain-and-input-binding-001.md)
+- [S3 P3](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s3-p3-original-dma-ios-witness-001.md)
+- [S3 P4](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s3-p4-original-pic-irq-witness-001.md)
+- [S3 P5](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s3-p5-original-timer-package-formal-closure-001.md)
+- [S3 P6](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s3-p6-original-timer-device-boundary-001.md)

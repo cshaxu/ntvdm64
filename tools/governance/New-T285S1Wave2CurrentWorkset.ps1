@@ -6,8 +6,8 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$priorPath = Join-Path $root 'docs/etc/operations/m0-t280-s1-host-control-dem-workset-ledger.tsv'
-$outPath = Join-Path $root 'docs/etc/operations/m0-t285-s1-wave2-current-workset.tsv'
+$priorPath = Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s1-host-control-dem-workset-ledger.tsv'
+$outPath = Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t285-s1-wave2-current-workset.tsv'
 
 if (-not (Test-Path -LiteralPath $priorPath -PathType Leaf)) {
     throw "Missing prior Wave 2 workset: $priorPath"

@@ -12,7 +12,7 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 & (Join-Path $root 'tools/governance/Verify-T279S2AdapterWin32Binding.ps1') -RepositoryRoot $root
 & (Join-Path $root 'tools/governance/Verify-T279S3SupportLibraryBuild.ps1') -RepositoryRoot $root -RequireArtifacts
 
-$ledger = @(Import-Csv (Join-Path $root 'docs/etc/operations/m0-t278-destination-source-identity-ledger.tsv') -Delimiter "`t" |
+$ledger = @(Import-Csv (Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t278-destination-source-identity-ledger.tsv') -Delimiter "`t" |
     Where-Object destination_component -eq 'mvdm-support')
 if ($ledger.Count -ne 112) { throw "Expected 112 exact support paths; found $($ledger.Count)." }
 

@@ -1,9 +1,8 @@
 # Project Goal
 
-Deliver a self-contained, non-invasive NTVDM CLI for modern 32-bit and
-64-bit Windows hosts. Its architecture-specific product executables are
-`ntvdm32.exe` and `ntvdm64.exe`; they are published together, never by
-cross-architecture substitution. It directly launches admitted DOS `.com`, `.exe`, `.bat`
+Deliver a self-contained, non-invasive NTVDM CLI for modern Windows hosts.
+The current product executable is the x86 `ntvdm32.exe`; native x64 compilation
+is not a product or acceptance target. It directly launches admitted DOS `.com`, `.exe`, `.bat`
 and `.pif` targets and later bounded WOW16 workloads. It may use public Win32
 APIs and ordinary host resources, but never requires replacement Windows
 files, a rebuilt kernel/private subsystem, or installation-time host mutation.
@@ -40,11 +39,11 @@ Session-owned typed mapping-manager instances
 associate 32-bit surrogate identities with native HANDLE/pointer-sized
 resources, while guest pointers use checked synchronous memory leases. This
 keeps 64-bit implementation details out of original MVDM control flow and
-prevents either host architecture from relying on accidental native-value
-identity. Every admitted recovery package builds and links its reached closure
-under both Win32/x86 and x64; a host-runnable repaired path receives paired
-architecture evidence unless the package records an exact source-shaped
-unavailable result.
+prevents the x86 product, and any future host architecture, from relying on
+accidental native-value identity. Every admitted recovery package builds and
+links its reached closure under Win32/x86. Native x64 compile/link is not
+current product evidence or a source-repair obligation, except for a
+demonstrated architecture-neutral mapping-manager correctness defect.
 
 The broker recovers only required cross-process VDM registration, identity,
 command-queue, notification and cleanup contracts using public IPC. It does
@@ -52,14 +51,13 @@ not recreate CSRSS or the NT4 kernel and never transports local native
 resources or guest pointers.
 
 Success for the current recovery phase means reproducible source and artifact
-provenance, manifest-driven Win32/x86 and x64 builds for the original CCPU40 profile,
+provenance, a manifest-driven Win32/x86 build for the original CCPU40 profile,
 auditable package selection, minimal imported-source diffs,
 bounded one-session execution, explicit unsupported behavior, and a stable
 path to original multi-process and intra-session semantics. Original SoftPC/
 CCPU40 is the sole supported original SoftPC machine profile. Any functional
 acceptance that exercises a machine, guest, or MVDM host behavior must record
-the selected CCPU40 architecture row and the paired x64 row whenever that
-reached behavior is x64-runnable. `CPU_30_STYLE` is an NT4
+the selected x86 CCPU40 row. `CPU_30_STYLE` is an NT4
 kernel-VDM V86 monitor contract, not a CCPU interpreter profile; it is
 historical source evidence only and is prohibited from production build, link,
 runtime and acceptance inputs. Historical Bochs material is retired comparison

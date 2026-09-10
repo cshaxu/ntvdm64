@@ -8,11 +8,11 @@ the production table owners; no per-slot typed-wrapper implementation remains.
 
 ## Evidence and result
 
-- The [source-boundary record](../etc/evidence/m0-t310-s25-p1-cvidc-generated-dispatch-source-boundary-001.md)
+- The [source-boundary record](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s25-p1-cvidc-generated-dispatch-source-boundary-001.md)
   identifies all 156 `VideoVector` entries and all 692 entries across the 14
   EVID tables, their original definition/caller headers, and the two minimal
   live declaration corrections.
-- The [formal-assembly record](../etc/evidence/m0-t310-s25-p2-cvidc-generated-dispatch-formal-assembly-001.md)
+- The [formal-assembly record](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s25-p2-cvidc-generated-dispatch-formal-assembly-001.md)
   records the direct original C-VID archive and complete 369-edge forced-link
   audit, with no selected C-VID table unresolved symbol.
 - The x64-only generated wrapper tool and its obsolete overlay registration

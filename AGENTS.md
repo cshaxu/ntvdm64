@@ -3,9 +3,9 @@
 Read these documents before changing the repository:
 
 1. `docs/README.md`
-2. `docs/STATUS.md`
+2. `docs/states/CURRENT.md`
 3. `docs/rules/EXECUTION.md`
-4. `docs/QUEUE.md`
+4. `docs/states/QUEUE.md`
 5. `docs/design/GOAL.md`
 6. `docs/design/ARCHITECTURE.md`
 7. `docs/design/CODING.md`
@@ -26,7 +26,7 @@ Read these documents before changing the repository:
 
 ## Execution
 
-- `docs/STATUS.md` contains the only active packet. Apply
+- `docs/states/CURRENT.md` contains the only active packet. Apply
   `docs/rules/EXECUTION.md` for task admission, evidence, and closure.
 - Preserve unrelated changes. Do not use destructive Git operations.
 - The pre-governance document tree is retained as indexed evidence during the

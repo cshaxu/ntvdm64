@@ -10,7 +10,7 @@ cannot be a production machine configuration.
 
 ## Evidence
 
-[T315 S1 source-contract audit](../etc/evidence/m0-t315-s1-cpu30-style-v86-monitor-contract-audit-001.md)
+[T315 S1 source-contract audit](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t315-s1-cpu30-style-v86-monitor-contract-audit-001.md)
 establishes that `base/mvdm/v86/monitor/i386/monitor.c` implements
 `cpu_simulate()` by calling `NtVdmControl(VdmStartExecution, NULL)` for V86
 execution, while `int.c` calls `VdmQueueInterrupt` and `fastpm.asm` performs

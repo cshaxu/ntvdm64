@@ -14,6 +14,6 @@ No provider, media, CPU or command-execution behavior was changed.  The
 dependency-first successor is the CPU40 illegal-operation/error-path package;
 T381 `cmdExec32` remains blocked until pure-DOS startup clears that owner.
 
-Evidence: [S1/S2 owner ledger](../etc/evidence/m0-t383-s1-original-command-startup-owner-ledger-001.md),
-[S3 formal proof](../etc/evidence/m0-t383-s3-original-command-delivery-formal-closure-001.md), and
-[S4 fixed observation](../etc/evidence/m0-t383-s4-fixed-pure-dos-startup-observation-001.md).
+Evidence: [S1/S2 owner ledger](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t383-s1-original-command-startup-owner-ledger-001.md),
+[S3 formal proof](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t383-s3-original-command-delivery-formal-closure-001.md), and
+[S4 fixed observation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t383-s4-fixed-pure-dos-startup-observation-001.md).

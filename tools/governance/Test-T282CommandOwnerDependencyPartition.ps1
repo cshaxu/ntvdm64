@@ -7,7 +7,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 }
 $ErrorActionPreference = 'Stop'
-$ledger = Join-Path $RepositoryRoot 'docs/etc/operations/m0-t282-s8-command-owner-dependency-ledger-001.tsv'
+$ledger = Join-Path $RepositoryRoot 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t282-s8-command-owner-dependency-ledger-001.tsv'
 $rows = Import-Csv -LiteralPath $ledger -Delimiter "`t"
 $required = @(
     'CMD-54-00','CMD-54-01','CMD-54-02','CMD-54-03','CMD-54-04','CMD-54-05',

@@ -6,7 +6,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$path = Join-Path $root 'docs/etc/operations/m0-t276-s12-win32-capability-interface-ledger.tsv'
+$path = Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-s12-win32-capability-interface-ledger.tsv'
 if (-not (Test-Path -LiteralPath $path)) { throw "Missing T276 Win32/NTDLL capability ledger: $path" }
 
 $rows = @(Import-Csv -LiteralPath $path -Delimiter "`t")

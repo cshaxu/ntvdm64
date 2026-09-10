@@ -29,6 +29,6 @@ Base VDM command producer, Console input and SoftPC keyboard/IRQ recovery.
 
 ## Evidence
 
-- [S1 positional declaration](../etc/evidence/m0-t387-s1-positional-command-declaration-001.md)
-- [S2 installed package publication](../etc/evidence/m0-t387-s2-runnable-package-publication-001.md)
+- [S1 positional declaration](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t387-s1-positional-command-declaration-001.md)
+- [S2 installed package publication](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t387-s2-runnable-package-publication-001.md)
 - [T387 operational plan](../etc/operations/m0-t387-positional-command-cli-001.md)

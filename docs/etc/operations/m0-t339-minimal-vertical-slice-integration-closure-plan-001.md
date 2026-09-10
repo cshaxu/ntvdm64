@@ -48,7 +48,7 @@ source contract; it may not be inferred from the terminal service alone.
 **Current observation limit.** The one allowed fixed-container run recorded
 original BOP ingress through `54:05` and then timed out; it did not reach
 `50:3D`, so its copied register discriminator was not emitted. The resulting
-[S2 evidence](../evidence/m0-t339-s2-passive-terminal-discriminator-001.md)
+[S2 evidence](../../../artifacts/documentation-archive/20260910/etc/evidence/m0-t339-s2-passive-terminal-discriminator-001.md)
 selects no `demExitVDM` recovery cohort. Static source review establishes the
 post-`54:05` continuation as original resident DOS-BIOS device initialization:
 `charinit -> DEVIOCALL2 -> strategy/interrupt` runs before the next

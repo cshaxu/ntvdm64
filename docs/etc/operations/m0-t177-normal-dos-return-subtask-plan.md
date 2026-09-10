@@ -16,7 +16,7 @@ The package ends at one of two evidence-backed results:
    gap), with no adapter workaround inferred from a trace.
 
 This supporting plan does not replace the sole active S packet in
-[`STATUS.md`](../../STATUS.md), reserve another T number, or turn trace hits
+[`STATUS.md`](../../states/CURRENT.md), reserve another T number, or turn trace hits
 into implementation authority.
 
 ## S-task breakdown

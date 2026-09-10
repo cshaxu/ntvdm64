@@ -12,4 +12,4 @@ Fresh formal assembly has no remaining selected OEM, PIF configuration,
 shortcut, or console-menu unresolved symbol.  Integrated configuration
 behaviour remains part of later machine validation.
 
-Evidence: [S29 P1](../etc/evidence/m0-t310-s29-p1-host-configuration-source-assembly-001.md).
+Evidence: [S29 P1](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s29-p1-host-configuration-source-assembly-001.md).

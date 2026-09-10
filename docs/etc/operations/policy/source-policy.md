@@ -73,8 +73,10 @@ generated SoftPC build carrier may be copied only into
 `src/mvdm-softpc-patch`. Each imported file must have a register row naming
 the exact NTVDMx64 path and hash, the original SoftPC caller/interface it
 serves, the original-source alternative, the reason that alternative lacks a
-usable x86/x64 build carrier, mapping-manager handling if applicable, and
-focused x86/x64 evidence. This exception does not admit NTVDMx64's injector,
+usable x86 build carrier, mapping-manager handling if applicable, and focused
+x86 evidence. Native x64 compile/link is not an import admission or source
+repair criterion unless it exposes a demonstrated architecture-neutral
+mapping-manager correctness defect. This exception does not admit NTVDMx64's injector,
 loader, HAXM path, driver, CSRSS stubs, registry policy, host mutation, or its
 product composition. `src.old` remains evidence only. Original SoftPC callers
 remain in the `mvdm-host` mirror and may use only a minimal registered

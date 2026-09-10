@@ -6,7 +6,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 }
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$ledger = @(Import-Csv -LiteralPath (Join-Path $root 'docs/etc/operations/m0-t280-s4-dem-include-abi-ledger.tsv') -Delimiter "`t")
+$ledger = @(Import-Csv -LiteralPath (Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s4-dem-include-abi-ledger.tsv') -Delimiter "`t")
 $expectedBodies = @('dem.c','demfcb.c','demdata.c','demdir.c','demdisp.c','demerror.c','demfile.c','demgset.c','demhndl.c','demioctl.c','demlock.c','demmisc.c','demmsg.c','demsrch.c','demdasd.c','demlabel.c')
 if (@($ledger | Select-Object -ExpandProperty dem_source -Unique).Count -ne 16) { throw 'Expected exactly 16 DEM source bodies.' }
 foreach ($body in $expectedBodies) {

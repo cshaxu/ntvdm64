@@ -23,9 +23,9 @@ Closed for the selected original Win32/x86 CCPU40 SoftPC profile.
 
 ## Evidence
 
-- [P1 package assembly](../etc/evidence/m0-t313-s4-p1-device-package-assembly-001.md)
-- [P2 reset order and mirror cleanup](../etc/evidence/m0-t313-s4-p2-device-reset-order-and-mirror-cleanup-001.md)
-- [P3 endpoint reconciliation](../etc/evidence/m0-t313-s4-p3-device-endpoint-reconciliation-001.md)
+- [P1 package assembly](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s4-p1-device-package-assembly-001.md)
+- [P2 reset order and mirror cleanup](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s4-p2-device-reset-order-and-mirror-cleanup-001.md)
+- [P3 endpoint reconciliation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t313-s4-p3-device-endpoint-reconciliation-001.md)
 - [T313 S3 controller closure](m0-t313-s3-controller-lifecycle-closure-20260830.md)
 
 ## Deliberate non-claims

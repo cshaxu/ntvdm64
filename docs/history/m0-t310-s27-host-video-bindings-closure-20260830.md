@@ -11,5 +11,5 @@ when one is bound.  It owns neither a video controller nor a UI.  Formal
 forced-link evidence has no S27 unresolved edge, and the focused contract test
 passes.  Guest-visible graphics and display presentation remain S49 work.
 
-Evidence: [S27 P1](../etc/evidence/m0-t310-s27-p1-host-video-source-boundary-001.md)
-and [S27 P2](../etc/evidence/m0-t310-s27-p2-host-video-formal-assembly-001.md).
+Evidence: [S27 P1](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s27-p1-host-video-source-boundary-001.md)
+and [S27 P2](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s27-p2-host-video-formal-assembly-001.md).

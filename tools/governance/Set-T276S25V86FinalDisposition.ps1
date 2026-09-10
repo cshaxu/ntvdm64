@@ -3,7 +3,7 @@ param([Parameter(Mandatory=$true)][string]$RepositoryRoot)
 
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path $RepositoryRoot).Path
-$path = Join-Path $root 'docs/etc/operations/m0-t276-final-integration-disposition-ledger.tsv'
+$path = Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-final-integration-disposition-ledger.tsv'
 $rows = @(Import-Csv $path -Delimiter "`t")
 $v86 = @($rows | Where-Object {$_.source_path -like 'v86/*'})
 if ($v86.Count -ne 35) { throw "Expected 35 V86 rows, found $($v86.Count)." }

@@ -2,7 +2,7 @@
 param([Parameter(Mandatory=$true)][string]$RepositoryRoot)
 
 $ErrorActionPreference = 'Stop'
-$path = Join-Path (Resolve-Path $RepositoryRoot).Path 'docs/etc/operations/m0-t276-final-integration-disposition-ledger.tsv'
+$path = Join-Path (Resolve-Path $RepositoryRoot).Path 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-final-integration-disposition-ledger.tsv'
 $rows = @(Import-Csv $path -Delimiter "`t")
 $allowed = 'direct','binding-only','adapter-backed','overlay-required','not-host-runtime','guest-only','firmware-only','tool-only','unresolved'
 if ($rows.Count -ne 1689) { throw "Expected 1689 final-disposition rows, found $($rows.Count)." }

@@ -25,8 +25,8 @@ must be independently admitted and retain the package-first rule.
 
 ## Evidence
 
-- [S1 admission](../etc/evidence/m0-t378-s1-dos-extender-workload-owner-admission-001.md)
-- [S2 XMS boot closure](../etc/evidence/m0-t378-s2-original-xms-boot-hma-umb-lifecycle-closure-001.md)
-- [S3 DOSX/DPMI handoff closure](../etc/evidence/m0-t378-s3-original-dosx-dpmi-handoff-closure-001.md)
-- [S4 formal matrix](../etc/evidence/m0-t378-s4-formal-dos-extender-workload-matrix-001.md)
-- [S5 frozen observation](../etc/evidence/m0-t378-s5-frozen-original-dosx-observation-001.md)
+- [S1 admission](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t378-s1-dos-extender-workload-owner-admission-001.md)
+- [S2 XMS boot closure](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t378-s2-original-xms-boot-hma-umb-lifecycle-closure-001.md)
+- [S3 DOSX/DPMI handoff closure](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t378-s3-original-dosx-dpmi-handoff-closure-001.md)
+- [S4 formal matrix](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t378-s4-formal-dos-extender-workload-matrix-001.md)
+- [S5 frozen observation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t378-s5-frozen-original-dosx-observation-001.md)

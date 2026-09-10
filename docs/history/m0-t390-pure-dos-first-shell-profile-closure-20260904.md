@@ -17,7 +17,7 @@ interactive `COMMAND.COM` product form.
   to the original prompt.
 
 The final runtime proof is
-[S5 P2 original second-COMMAND Console proof](../etc/evidence/m0-t390-s5-original-second-command-console-proof-002.md).
+[S5 P2 original second-COMMAND Console proof](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t390-s5-original-second-command-console-proof-002.md).
 
 ## Corrections retained
 

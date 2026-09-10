@@ -15,8 +15,8 @@ $required = @(
     'src/adapter-mvdm-host-out/monitor/source/vdm_control.c',
     'tests/adapter-mvdm-host-out/monitor/vdm_control_fixture.c',
     'tools/build/New-T280VdmControlNinja.ps1',
-    'docs/etc/operations/m0-t280-s5-vdm-control-plan-001.md',
-    'docs/etc/operations/m0-t280-s5-vdm-control-evidence-001.md'
+    'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s5-vdm-control-plan-001.md',
+    'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s5-vdm-control-evidence-001.md'
 )
 foreach ($relative in $required) {
     if (-not (Test-Path -LiteralPath (Join-Path $root $relative) -PathType Leaf)) { throw "Missing T280 S5 artifact: $relative" }

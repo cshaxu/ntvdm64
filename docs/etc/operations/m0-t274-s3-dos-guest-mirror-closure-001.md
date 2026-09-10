@@ -3,7 +3,7 @@
 ## Inputs
 
 - `src.old/opennt-guest/dos-v86`, the owner-authorized direct recovery source;
-- [S1 union ledger](m0-t274-s1-non-guest-mvdm-union-ledger.tsv);
+- [S1 union ledger](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t274-s1-non-guest-mvdm-union-ledger.tsv);
 - [source policy](policy/source-policy.md) and the admitted S3 Status brief.
 
 ## Procedure

@@ -7,7 +7,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $demRoot = Join-Path $root 'src/mvdm-host/dos/dem'
-$target = Join-Path $root 'docs/etc/operations/m0-t280-s4-dem-include-abi-ledger.tsv'
+$target = Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s4-dem-include-abi-ledger.tsv'
 $sourceNames = @('dem.c','demfcb.c','demdata.c','demdir.c','demdisp.c','demerror.c','demfile.c','demgset.c','demhndl.c','demioctl.c','demlock.c','demmisc.c','demmsg.c','demsrch.c','demdasd.c','demlabel.c')
 
 function Get-Disposition([string]$Header) {

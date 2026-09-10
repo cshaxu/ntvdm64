@@ -28,7 +28,7 @@ instance—if any—applies to each value?
 
 ## Observations
 
-- The full result is the eight-row [boundary ledger](m0-t280-s17-demsrch-x64-boundary-ledger-001.tsv).
+- The full result is the eight-row [boundary ledger](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s17-demsrch-x64-boundary-ledger-001.tsv).
 - S16 is the only persisted host-identity change: `PFFINDLIST` uses the
   `host_resource` mapper. None of the remaining pointer/HANDLE warnings is a
   candidate for that mapper.

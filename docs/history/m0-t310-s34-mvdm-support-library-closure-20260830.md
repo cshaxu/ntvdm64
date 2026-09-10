@@ -11,4 +11,4 @@ machine-memory and Win32 bindings are reused; no generic support shim or
 second mapping manager is introduced. The fresh 381-edge formal graph and
 forced-link audit expose no S34-owner unresolved symbol.
 
-Evidence: [S34 P1](../etc/evidence/m0-t310-s34-mvdm-support-library-closure-001.md).
+Evidence: [S34 P1](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s34-mvdm-support-library-closure-001.md).

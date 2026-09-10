@@ -6,7 +6,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 }
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$ledgerPath = Join-Path $root 'docs/etc/operations/m0-t280-s2-ingress-machine-facade-ledger.tsv'
+$ledgerPath = Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s2-ingress-machine-facade-ledger.tsv'
 $ledger = @(Import-Csv -LiteralPath $ledgerPath -Delimiter "`t")
 $expected = @('T280-S2-001','T280-S2-002','T280-S2-003','T280-S2-004','T280-S2-005','T280-S2-006','T280-S2-007','T280-S2-008','T280-S2-009','T280-S2-010','T280-S2-011','T280-S2-012','T280-S2-013')
 

@@ -10,7 +10,7 @@ The reproducible generator
 - the owner-designated carried guest inventory `src.old/opennt-guest`.
 
 It writes the complete path-level ledger
-[`m0-t274-s1-non-guest-mvdm-union-ledger.tsv`](m0-t274-s1-non-guest-mvdm-union-ledger.tsv).
+[`m0-t274-s1-non-guest-mvdm-union-ledger.tsv`](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t274-s1-non-guest-mvdm-union-ledger.tsv).
 Each row holds both source paths/hashes, selection, owner root, transfer rule
 and local guest identity when applicable.
 

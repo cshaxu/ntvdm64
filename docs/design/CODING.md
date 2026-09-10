@@ -25,8 +25,9 @@ src/
 The eight original mirror roots preserve selected upstream-relative paths after
 re-rooting and maintain component README exception registers. One source
 component may generate several libraries. Production roots contain production
-inputs only; tests, examples, reference copies and historical experiments stay
-under `tests/` or `docs/etc/legacy_code/`. `src.old/` is quarantined comparison
+inputs only; tests and examples stay under `tests/`; historical source
+comparison stays in the explicitly read-only external reference roots under
+`O:\repos.external`. `src.old/` is quarantined comparison
 material and never a source, build, link or runtime input.
 
 ## Machine-profile selection
@@ -110,11 +111,11 @@ identity, never by a bare same-spelled function name.
 
 ## Host-width coding model
 
-The current recovery build has two MSVC `/MT` compilation rows: Win32/x86 and
-Win32/x64. Both select only `CPU_40_STYLE` with the original CCPU40 executor.
-The x86 row is the sole current guest-runtime observation row; x64 must reach
-the same selected source/build closure before a change is accepted, but does
-not imply x64 guest-runtime equivalence. `CPU_30_STYLE` is an NT4 kernel-VDM
+The current recovery build has one MSVC `/MT` Win32/x86 compilation and
+acceptance row, producing `ntvdm32.exe` with the original CCPU40 executor.
+Native x64 compile/link output is outside the product target and must not
+drive a source change unless it exposes a demonstrated architecture-neutral
+mapping-manager correctness defect. `CPU_30_STYLE` is an NT4 kernel-VDM
 V86-monitor contract. It is retired and prohibited from every project-owned
 compile, link, runtime, fixture and acceptance input. Cross-component and
 broker wire records use fixed-width

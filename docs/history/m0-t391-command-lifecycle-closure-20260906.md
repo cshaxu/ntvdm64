@@ -10,13 +10,13 @@ restarts the current product without classifying its tail.
 
 ## Evidence
 
-- [S7 final matrix](../etc/evidence/m0-t391-s7-app-entry-command-final-matrix-001.md)
+- [S7 final matrix](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t391-s7-app-entry-command-final-matrix-001.md)
   records the real Console `command/c ver`, ordinary and nested
   `COMMAND.COM /c ver`, and interactive `COMMAND.COM`/`exit` rows.
-- [S8 resource evidence](../etc/evidence/m0-t391-s8-three-rom-executable-resource-001.md)
+- [S8 resource evidence](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t391-s8-three-rom-executable-resource-001.md)
   records exactly `bios1.rom`, `bios4.rom`, and `v7vga.rom` as executable
   resources, with `bios2.rom`, `profile.spc`, and `cmos.ram` excluded.
-- [S9 final audit](../etc/evidence/m0-t391-s9-final-audit-closure-001.md)
+- [S9 final audit](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t391-s9-final-audit-closure-001.md)
   states that all T391 exit criteria are satisfied and explicitly transfers
   x64 recovery to T392.
 

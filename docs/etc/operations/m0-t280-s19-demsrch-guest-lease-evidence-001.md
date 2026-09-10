@@ -19,7 +19,7 @@ native guest pointers across calls?
 ## Findings
 
 The complete five-row result is the
-[guest lease ledger](m0-t280-s19-demsrch-guest-lease-ledger-001.tsv).
+[guest lease ledger](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s19-demsrch-guest-lease-ledger-001.tsv).
 
 `demsrch.c` itself has four direct access forms: two DOS wildcard strings,
 one DTA, one FCB search buffer, plus current-PDB reads in helper paths. DTA

@@ -18,4 +18,4 @@ planned later LPT recovery, formal rebuild, or second observation because
 they would validate a premise already contradicted by the selected original
 source.  T381 resumes as the active original COMMAND `cmdExec32` package.
 
-Evidence: [T382 S1 ledger](../etc/evidence/m0-t382-s1-current-softpc-lpt-owner-ledger-001.md).
+Evidence: [T382 S1 ledger](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t382-s1-current-softpc-lpt-owner-ledger-001.md).

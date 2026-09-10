@@ -56,5 +56,5 @@ boundary; it does not claim child execution.
 S1 proved that the admission snapshot was a single original ready-status read,
 not evidence of a blocking LPT cohort.  No recovery is justified, so S2--S4
 are intentionally not executed.  See
-[the S1 ledger](../evidence/m0-t382-s1-current-softpc-lpt-owner-ledger-001.md)
+[the S1 ledger](../../../artifacts/documentation-archive/20260910/etc/evidence/m0-t382-s1-current-softpc-lpt-owner-ledger-001.md)
 and [closure](../../history/m0-t382-softpc-lpt-false-predecessor-closure-20260902.md).

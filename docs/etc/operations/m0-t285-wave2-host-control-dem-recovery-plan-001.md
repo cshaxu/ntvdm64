@@ -10,7 +10,7 @@ not absorb monitor, COMMAND, XMS, Redirector, WOW, VDD or debugger product
 owners.
 
 The current workset is
-[`m0-t285-s1-wave2-current-workset.tsv`](m0-t285-s1-wave2-current-workset.tsv):
+[`m0-t285-s1-wave2-current-workset.tsv`](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t285-s1-wave2-current-workset.tsv):
 81 source paths, comprising 22 DEM paths and 59 host-control paths.  The
 ledger's disposition counts are 49 `adapter-backed`, five `binding-only`, six
 `overlay-required`, and 21 `not-host-runtime`.

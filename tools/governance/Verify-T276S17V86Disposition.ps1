@@ -2,7 +2,7 @@
 param([Parameter(Mandatory = $true)][string]$RepositoryRoot)
 
 $ErrorActionPreference = 'Stop'
-$path = Join-Path (Resolve-Path -LiteralPath $RepositoryRoot).Path 'docs/etc/operations/m0-t276-s17-v86-file-disposition-ledger.tsv'
+$path = Join-Path (Resolve-Path -LiteralPath $RepositoryRoot).Path 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-s17-v86-file-disposition-ledger.tsv'
 if (-not (Test-Path -LiteralPath $path)) { throw "Missing output: $path" }
 $rows = @(Import-Csv -LiteralPath $path -Delimiter "`t")
 if ($rows.Count -ne 35) { throw "Expected 35 V86 paths, found $($rows.Count)." }

@@ -17,4 +17,4 @@ The persistent fixed-container failure therefore needs actual exception
 context, not a speculative frame guard. T330 owns copied, report-gated context
 attribution at the original exception boundary.
 
-Evidence: [T329 S1 lifecycle contract](../etc/evidence/m0-t329-s1-original-cpu40-recursive-frame-lifecycle-contract-001.md).
+Evidence: [T329 S1 lifecycle contract](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t329-s1-original-cpu40-recursive-frame-lifecycle-contract-001.md).

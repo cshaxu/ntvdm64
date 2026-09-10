@@ -28,5 +28,5 @@ original COMMAND `cmdExec32` stage-to-return package.
 
 ## Evidence
 
-- [T385 S1–S4 environment/transient recovery ledger](../etc/evidence/m0-t385-s1-s4-command-environment-transient-recovery-001.md)
+- [T385 S1–S4 environment/transient recovery ledger](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t385-s1-s4-command-environment-transient-recovery-001.md)
 - [T384 predecessor closure](m0-t384-cpu40-illegal-operation-startup-recovery-closure-20260902.md)

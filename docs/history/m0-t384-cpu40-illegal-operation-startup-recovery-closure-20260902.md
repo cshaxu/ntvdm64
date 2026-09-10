@@ -24,4 +24,4 @@ native 32-bit execution. WOW16/Win16 activation remains deferred.
 
 ## Evidence
 
-- [COMMAND environment/resident-overwrite ledger](../etc/evidence/m0-t384-s1-command-environment-resident-overwrite-ledger-001.md)
+- [COMMAND environment/resident-overwrite ledger](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t384-s1-command-environment-resident-overwrite-ledger-001.md)

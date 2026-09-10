@@ -12,4 +12,4 @@ console marker nor the observer exception report. This is the source-defined
 boundary of the selected filter contract, not evidence for a CPU, FDC, ROM,
 vector or BOP repair.
 
-Evidence: [T330 S1–S3 exception-context attribution](../etc/evidence/m0-t330-s1-s3-original-exception-context-attribution-001.md).
+Evidence: [T330 S1–S3 exception-context attribution](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t330-s1-s3-original-exception-context-attribution-001.md).

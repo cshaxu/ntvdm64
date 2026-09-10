@@ -1,7 +1,7 @@
 ﻿# Contributing
 
 Read the [Documentation Guide](docs/README.md) and current
-[Project Status](docs/STATUS.md) before proposing or changing work. The
+[Project Status](docs/states/CURRENT.md) before proposing or changing work. The
 authorities linked there control this repository; this file is a submission
 guide only.
 
@@ -43,8 +43,8 @@ Do not invoke a compiler from the repository root without an explicit output
 path under `build/<task-id>/<run-id>/`; do not use `artifacts/` as a temporary build
 directory.
 
-After a product EXE has passed its admitted architecture-specific verification
-and makes a recorded improvement over the preceding published candidate, copy
-that tested x86 or x64 EXE and its required runnable package inputs to
+After `ntvdm32.exe` has passed its admitted x86 verification and makes a
+recorded improvement over the preceding published candidate, copy that tested
+EXE and its required runnable package inputs to
 `build/output/` for owner testing. Record any known limitation beside it; do
 not publish an unverified candidate or one with a clear regression.

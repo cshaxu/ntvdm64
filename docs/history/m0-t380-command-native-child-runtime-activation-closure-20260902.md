@@ -28,7 +28,7 @@ as one owner package, rather than derive a patch from this trace.
 
 ## Evidence
 
-- [S1 owner and predecessor rebaseline](../etc/evidence/m0-t380-s1-command-native-child-owner-predecessor-rebaseline-001.md)
-- [S2 lifecycle confirmation](../etc/evidence/m0-t380-s2-command-native-child-lifecycle-confirmation-001.md)
-- [S3 formal product confirmation](../etc/evidence/m0-t380-s3-command-native-child-formal-product-001.md)
-- [S4 frozen observation](../etc/evidence/m0-t380-s4-frozen-native-child-observation-001.md)
+- [S1 owner and predecessor rebaseline](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t380-s1-command-native-child-owner-predecessor-rebaseline-001.md)
+- [S2 lifecycle confirmation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t380-s2-command-native-child-lifecycle-confirmation-001.md)
+- [S3 formal product confirmation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t380-s3-command-native-child-formal-product-001.md)
+- [S4 frozen observation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t380-s4-frozen-native-child-observation-001.md)

@@ -7,7 +7,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 }
 $ErrorActionPreference = 'Stop'
-$ledger = Join-Path $RepositoryRoot 'docs/etc/operations/m0-t282-s9-command-environment-guest-seam-ledger-001.tsv'
+$ledger = Join-Path $RepositoryRoot 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t282-s9-command-environment-guest-seam-ledger-001.tsv'
 $rows = Import-Csv -LiteralPath $ledger -Delimiter "`t"
 $required = @('CMD-SEAM-001','CMD-SEAM-002','CMD-SEAM-003','CMD-SEAM-004')
 foreach ($id in $required) {

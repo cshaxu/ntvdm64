@@ -17,4 +17,4 @@ contract and its guest re-entry lifecycle.
 The unchanged selected-source x86 and x64 formal Ninja product links both
 passed. The x64 link remains a build closure only, not a runtime claim.
 
-Evidence: [T328 S1 original FDC/INT15 contract](../etc/evidence/m0-t328-s1-original-fdc-int15-wait-continuation-contract-001.md).
+Evidence: [T328 S1 original FDC/INT15 contract](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t328-s1-original-fdc-int15-wait-continuation-contract-001.md).

@@ -9,9 +9,9 @@ provider, original body, machine operation, or guest trace becomes enabled by
 this document.
 
 The generated
-[`workset ledger`](m0-t280-s1-host-control-dem-workset-ledger.tsv) is the
+[`workset ledger`](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s1-host-control-dem-workset-ledger.tsv) is the
 machine-readable source of truth.  It is derived only from
-[`T276's final integration disposition ledger`](m0-t276-final-integration-disposition-ledger.tsv),
+[`T276's final integration disposition ledger`](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-final-integration-disposition-ledger.tsv),
 selecting `dos/dem/*` and `softpc.new/host/src/*`.
 
 ## Reconciled population

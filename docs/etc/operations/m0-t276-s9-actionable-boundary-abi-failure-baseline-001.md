@@ -8,7 +8,7 @@ caller shape, profile guard or availability condition, source-proven result
 evidence, and package prerequisite.
 
 The detail is in
-[`m0-t276-s9-actionable-boundary-abi-failure-ledger.tsv`](m0-t276-s9-actionable-boundary-abi-failure-ledger.tsv).
+[`m0-t276-s9-actionable-boundary-abi-failure-ledger.tsv`](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-s9-actionable-boundary-abi-failure-ledger.tsv).
 
 ## Consequences for wave planning
 

@@ -11,8 +11,8 @@ foreach ($relative in @(
     'src/adapter-mvdm-host-out/win32/README.md',
     'tests/adapter-mvdm-host-out/win32/t280_s9_dem_declaration_fixture.c',
     'tools/build/New-T280S9DemDeclarationNinja.ps1',
-    'docs/etc/operations/m0-t280-s9-dem-declaration-binding-plan-001.md',
-    'docs/etc/operations/m0-t280-s9-dem-declaration-binding-evidence-001.md'
+    'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s9-dem-declaration-binding-plan-001.md',
+    'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s9-dem-declaration-binding-evidence-001.md'
 )) {
     if (-not (Test-Path -LiteralPath (Join-Path $root $relative) -PathType Leaf)) { throw "Missing T280 S9 artifact: $relative" }
 }

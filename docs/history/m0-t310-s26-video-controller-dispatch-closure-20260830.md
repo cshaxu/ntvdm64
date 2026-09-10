@@ -13,5 +13,5 @@ or effective-address edge.
 
 This is not a host display or guest-video claim.  The unresolved original
 `InvalidateConsoleDIBits` endpoint belongs to S27; end-to-end machine behavior
-remains mandatory S49 work.  Evidence: [S26 P1](../etc/evidence/m0-t310-s26-p1-video-controller-direct-source-boundary-001.md)
-and [S26 P2](../etc/evidence/m0-t310-s26-p2-video-controller-formal-assembly-001.md).
+remains mandatory S49 work.  Evidence: [S26 P1](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s26-p1-video-controller-direct-source-boundary-001.md)
+and [S26 P2](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s26-p2-video-controller-formal-assembly-001.md).

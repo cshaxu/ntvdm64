@@ -13,7 +13,7 @@ different**; zero has no upstream counterpart. The baseline has 672 files, so
 this is an audited minimal closure candidate, not a claim to mirror all of
 Bochs. The independently recorded 2026-08-25 ledger confirms the same 177/28
 result and that no retained delta exceeds the 50-percent mirror limit:
-[`m0-t270-s1-p2-bochs-mirror-disposition-ledger-001.md`](../evidence/m0-t270-s1-p2-bochs-mirror-disposition-ledger-001.md).
+[`m0-t270-s1-p2-bochs-mirror-disposition-ledger-001.md`](../../../artifacts/documentation-archive/20260910/etc/evidence/m0-t270-s1-p2-bochs-mirror-disposition-ledger-001.md).
 
 ## Difference inventory and disposition
 
@@ -34,7 +34,7 @@ classified as private overlay candidates. The future `bochs-core-overlay`
 implementation is compiled only as part of `bochs-core`, has no public ABI,
 and may be called only from registered minimal boundaries in its parent
 mirror. The relevant predecessor audits are
-[`m0-t265-s4-bochs-core-overlay-audit-001.md`](../evidence/m0-t265-s4-bochs-core-overlay-audit-001.md)
+[`m0-t265-s4-bochs-core-overlay-audit-001.md`](../../../artifacts/documentation-archive/20260910/etc/evidence/m0-t265-s4-bochs-core-overlay-audit-001.md)
 and the T270 ledger above; their identifiers are evidence, not an automatic
 admission of old code.
 
@@ -45,7 +45,7 @@ admission of old code.
 `machine_facade`, and `headless_8042`, each with its header where applicable.
 The prior adapter provenance ledger confirms that no imported Bochs body
 remains there; it is assembly-only:
-[`m0-t265-s3-adapter-bochs-provenance-ledger-001.md`](../evidence/m0-t265-s3-adapter-bochs-provenance-ledger-001.md).
+[`m0-t265-s3-adapter-bochs-provenance-ledger-001.md`](../../../artifacts/documentation-archive/20260910/etc/evidence/m0-t265-s3-adapter-bochs-provenance-ledger-001.md).
 Their later admission requires a fresh dependency scan and vocabulary review.
 
 ## S1 conclusion

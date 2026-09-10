@@ -14,4 +14,4 @@ The formal selected CCPU40 graph compiles the complete carrier set.  Its
 remaining `DpmiDispatch` and `DBGDispatch` unresolved references are correctly
 owned by S37 and S42, rather than hidden by S31.
 
-Evidence: [S31 P1](../etc/evidence/m0-t310-s31-host-bop-source-boundary-001.md).
+Evidence: [S31 P1](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s31-host-bop-source-boundary-001.md).

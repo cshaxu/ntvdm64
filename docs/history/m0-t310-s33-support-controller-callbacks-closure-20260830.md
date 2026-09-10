@@ -9,4 +9,4 @@ pointers remain private machine state.
 tail is explicitly a later S49 app/session lifecycle proof.  S33 did not hide
 that behavior behind a controller shim or falsely claim a runnable teardown.
 
-Evidence: [S33 P1](../etc/evidence/m0-t310-s33-support-controller-callbacks-closure-001.md).
+Evidence: [S33 P1](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s33-support-controller-callbacks-closure-001.md).

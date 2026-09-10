@@ -14,7 +14,7 @@ T352 closes P06B's bounded continuation objective.  The selected original
 The closure is intentionally narrow.  It does not claim a DOS workload,
 NTDOS `EXEC`, a child program, graphics output, or parent return.  The durable
 return records and the invalid preliminary report-path observations are
-recorded in [T352 S5 evidence](../etc/evidence/m0-t352-s5-command-call-cohort-attribution-001.md).
+recorded in [T352 S5 evidence](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t352-s5-command-call-cohort-attribution-001.md).
 
 The successor is the queue-head complete post-`54:0C` COMMAND/NTDOS
 continuation package (P06C).  It must begin with source ownership and the

@@ -9,9 +9,9 @@ the existing host-local ioctl transport divergence.
 
 ## Evidence and result
 
-- The [source boundary](../etc/evidence/m0-t310-s23-p1-comms-controller-source-boundary-001.md)
+- The [source boundary](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s23-p1-comms-controller-source-boundary-001.md)
   records every selected controller and endpoint direction.
-- The [formal assembly evidence](../etc/evidence/m0-t310-s23-p2-comms-controller-formal-assembly-001.md)
+- The [formal assembly evidence](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s23-p2-comms-controller-formal-assembly-001.md)
   records a fresh 369-edge x86 CCPU40 graph, all five original communications
   objects in `original-softpc-comms.lib`, and no communications-owner
   unresolved forced-link symbol.

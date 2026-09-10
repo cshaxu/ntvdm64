@@ -5,5 +5,5 @@ heartbeat, public thread/event/wait/timing calls, local CCPU registration and
 the sole same-shaped thread-alert binding have one disposition. Runtime IRQ
 delivery remains S49 integration work.
 
-- [boundary ledger](../etc/evidence/m0-t310-s18-p1-host-system-interrupt-boundary-001.tsv)
-- [formal assembly](../etc/evidence/m0-t310-s18-p1-host-system-interrupt-formal-assembly-001.md)
+- [boundary ledger](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s18-p1-host-system-interrupt-boundary-001.tsv)
+- [formal assembly](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s18-p1-host-system-interrupt-formal-assembly-001.md)

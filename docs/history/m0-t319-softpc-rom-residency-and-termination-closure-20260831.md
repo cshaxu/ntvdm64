@@ -15,7 +15,7 @@ claim.
   the selected original known-thread exception filter.
 
 The complete final evidence is
-[S3 termination attribution](../etc/evidence/m0-t319-s3-post-rom-termination-attribution-001.md).
+[S3 termination attribution](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t319-s3-post-rom-termination-attribution-001.md).
 
 ## Exact transfer
 

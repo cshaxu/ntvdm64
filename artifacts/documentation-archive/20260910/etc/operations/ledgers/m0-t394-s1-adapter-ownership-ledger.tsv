@@ -1,0 +1,39 @@
+source_path	file_kind	current_family	final_owner	semantic_group	operation	consumer_surface	dependency_direction	verification
+softpc/README.md	family-policy	softpc	softpc	machine-family-policy	update-after-move	all softpc-family users	owner policy -> consumers	T394 S2 tree audit
+softpc/include/error_abi.h	declaration	softpc	opennt-abi-candidate	original SoftPC host error ABI declaration bridge	audit-before-move	original host control bodies and force-include island	mvdm-host -> opennt-abi candidate	S5 source/include/build audit
+softpc/include/mvdm_a20.h	declaration	softpc	softpc	CCPU A20 mechanism	retain	XMS and SoftPC callers	mvdm-host -> softpc -> CCPU40	machine facade fixture
+softpc/mvdm_a20.c	implementation	softpc	softpc	CCPU A20 mechanism	retain	XMS A20 calls	mvdm-host -> softpc -> CCPU40	machine facade fixture
+basesrv/include/mvdm_command_guest_state.h	declaration	basesrv	basesrv	COMMAND/BaseVDM guest record state	moved-S4	COMMAND and DEM SCS consumers	mvdm-host -> basesrv -> session	BaseVDM record ABI fixture
+basesrv/source/mvdm_command_guest_state.c	implementation	basesrv	basesrv	COMMAND/BaseVDM guest record state	moved-S4	COMMAND/DEM SCS state registration	mvdm-host -> basesrv -> session	BaseVDM record ABI fixture
+basesrv/include/mvdm_command_native_child.h	declaration	basesrv	basesrv	COMMAND native-child snapshot	moved-S4	COMMAND cmdExec worker	mvdm-host -> basesrv -> session	child snapshot ABI fixture
+basesrv/source/mvdm_command_native_child.c	implementation	basesrv	basesrv	COMMAND native-child snapshot	moved-S4	COMMAND cmdExec worker	mvdm-host -> basesrv -> session	child snapshot ABI fixture
+redir/include/mvdm_command_redirection.h	declaration	redir	redir	COMMAND stream redirection	moved-S3	COMMAND cmdredir/cmdexec	mvdm-host -> redir -> session	redirection ABI fixture
+redir/mvdm_command_redirection.c	implementation	redir	redir	COMMAND stream redirection	moved-S3	COMMAND cmdredir/cmdexec	mvdm-host -> redir -> session	redirection ABI fixture
+softpc/include/mvdm_guest_location.h	declaration	softpc	softpc	bounded machine guest-location lease	retain	COMMAND/DEM/XMS/WOW machine callers	mvdm-host -> softpc -> session	guest lease positive/negative fixture
+softpc/mvdm_guest_location.c	implementation	softpc	softpc	bounded machine guest-location lease	retain	COMMAND/DEM/XMS/WOW machine callers	mvdm-host -> softpc -> session	guest lease positive/negative fixture
+softpc/include/mvdm_host_identity.h	declaration	softpc	softpc	machine-host identity surrogate	retain	DPMI/SoftPC host identity callers	mvdm-host -> softpc -> session	identity fixture
+softpc/mvdm_host_identity.c	implementation	softpc	softpc	machine-host identity surrogate	retain	DPMI/SoftPC host identity callers	mvdm-host -> softpc -> session	identity fixture
+softpc/mvdm_softpc_descriptor_fields.c	implementation	softpc	softpc	CCPU descriptor mechanism	retain	BIOS INT15 descriptor caller	mvdm-host -> softpc -> CCPU40	descriptor fixture
+softpc/include/mvdm_softpc_effective_address.h	declaration	softpc	softpc	CCPU effective-address mechanism	retain	SIM32/WOW/DPMI callers	mvdm-host -> softpc -> CCPU40	effective-address fixture
+softpc/mvdm_softpc_effective_address.c	implementation	softpc	softpc	CCPU effective-address mechanism	retain	SIM32/WOW/DPMI callers	mvdm-host -> softpc -> CCPU40	effective-address fixture
+softpc/include/mvdm_softpc_event_thread.h	declaration	softpc	softpc	SoftPC event-worker mechanism	retain	SoftPC nt_event worker	mvdm-host -> softpc -> Win32	worker cancellation fixture
+softpc/mvdm_softpc_event_thread.c	implementation	softpc	softpc	SoftPC event-worker mechanism	retain	SoftPC nt_event worker	mvdm-host -> softpc -> Win32	worker cancellation fixture
+softpc/include/mvdm_softpc_execution.h	declaration	softpc	softpc	SoftPC entry/return composition	retain	app machine shell and original host entry	app -> softpc -> mvdm-host	entry/return lifecycle fixture
+softpc/mvdm_softpc_execution.c	implementation	softpc	softpc	SoftPC entry/return composition	retain	app machine shell and original host entry	app -> softpc -> mvdm-host	entry/return lifecycle fixture
+softpc/include/mvdm_softpc_firmware.h	declaration	softpc	softpc	SoftPC host-resource bridge to selected firmware root	retain	original SoftPC ROM initialization and DEM/COMMAND media queries	app -> softpc -> selected resource root	firmware-root and package-layout fixture
+softpc/mvdm_softpc_firmware.c	implementation	softpc	softpc	SoftPC host-resource bridge to selected firmware root	retain	original SoftPC ROM initialization and DEM/COMMAND media queries	app -> softpc -> selected resource root	firmware-root and package-layout fixture
+softpc/include/mvdm_softpc_guest_memory.h	declaration	softpc	softpc	CCPU-backed guest-memory mechanism	retain	XMS/DPMI/WOW machine callers	mvdm-host -> softpc -> session -> CCPU40	guest-memory fixture
+softpc/mvdm_softpc_guest_memory.c	implementation	softpc	softpc	CCPU-backed guest-memory mechanism	retain	XMS/DPMI/WOW machine callers	mvdm-host -> softpc -> session -> CCPU40	guest-memory fixture
+softpc/include/mvdm_softpc_physical_mapping.h	declaration	softpc	softpc	CCPU physical-memory mechanism	retain	SoftPC physical-memory callers	mvdm-host -> softpc -> session -> CCPU40	physical mapping fixture
+softpc/mvdm_softpc_physical_mapping.c	implementation	softpc	softpc	CCPU physical-memory mechanism	retain	SoftPC physical-memory callers	mvdm-host -> softpc -> session -> CCPU40	physical mapping fixture
+softpc/include/mvdm_softpc_presentation_font.h	declaration	softpc	softpc	SoftPC-to-app V7 VGA ROM read bridge	retain	app presentation surface	app -> softpc -> loaded V7 VGA ROM	presentation-font fixture
+softpc/mvdm_softpc_presentation_font.c	implementation	softpc	softpc	SoftPC-to-app V7 VGA ROM read bridge	retain	app presentation surface	app -> softpc -> loaded V7 VGA ROM	presentation-font fixture
+softpc/include/mvdm_softpc_termination.h	declaration	softpc	function-split-required	mixed session/app/machine/service/product observation surface	split-before-owner	VDD/session termination; app startup; CCPU; COMMAND/DEM/BOP; product container	multiple, pending S5 function map	S5 symbol/caller/ABI audit
+softpc/mvdm_softpc_termination.c	implementation	softpc	function-split-required	mixed session/app/machine/service/product observation body	split-before-owner	VDD/session termination; app startup; CCPU; COMMAND/DEM/BOP; product container	multiple, pending S5 function map	S5 symbol/caller/ABI audit
+vdd/include/mvdm_softpc_vdd_configuration.h	declaration	softpc	vdd	VDD configuration boundary	moved-S2	SoftPC VDD configuration caller	mvdm-host -> vdd -> Win32/session	VDD configuration fixture
+vdd/mvdm_softpc_vdd_configuration.c	implementation	softpc	vdd	VDD configuration boundary	moved-S2	SoftPC VDD configuration caller	mvdm-host -> vdd -> Win32/session	VDD configuration fixture
+vdd/mvdm_softpc_vdd_unavailable.c	implementation	softpc	vdd	VDD unavailable boundary	moved-S2	SoftPC VDD exit caller	mvdm-host -> vdd -> session	VDD negative fixture
+vdd/include/mvdm_vdd_sft_shadow.h	declaration	softpc	vdd	VDD SFT/JFT shadow	moved-S2	VDD and WOW SFT/JFT callers	mvdm-host -> vdd -> session	VDD shadow fixture
+vdd/mvdm_vdd_sft_shadow.c	implementation	softpc	vdd	VDD SFT/JFT shadow	moved-S2	VDD and WOW SFT/JFT callers	mvdm-host -> vdd -> session	VDD shadow fixture
+softpc/include/mvdm_xms_memory.h	declaration	softpc	softpc	XMS machine memory callbacks	retain	original XMS provider	mvdm-host -> softpc -> session -> CCPU40	XMS memory fixture
+softpc/mvdm_xms_memory.c	implementation	softpc	softpc	XMS machine memory callbacks	retain	original XMS provider	mvdm-host -> softpc -> session -> CCPU40	XMS memory fixture

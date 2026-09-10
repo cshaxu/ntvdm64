@@ -65,11 +65,11 @@ function Get-FaxDisposition([psobject]$file) {
     return 'adapter-backed; future FAX UI package'
 }
 
-$wowInput = @(Import-Csv (Join-Path $root 'docs/etc/operations/m0-t276-s22-wow32-file-disposition-ledger.tsv') -Delimiter "`t")
-$faxInput = @(Import-Csv (Join-Path $root 'docs/etc/operations/m0-t276-s23-fax-file-disposition-ledger.tsv') -Delimiter "`t")
-$subdomainInput = @(Import-Csv (Join-Path $root 'docs/etc/operations/m0-t276-s22-wow32-active-subdomain-ledger.tsv') -Delimiter "`t")
-$wowInterfaces = @(Import-Csv (Join-Path $root 'docs/etc/operations/m0-t276-s22-wow32-interface-family-ledger.tsv') -Delimiter "`t")
-$faxInterfaces = @(Import-Csv (Join-Path $root 'docs/etc/operations/m0-t276-s23-fax-interface-family-ledger.tsv') -Delimiter "`t")
+$wowInput = @(Import-Csv (Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-s22-wow32-file-disposition-ledger.tsv') -Delimiter "`t")
+$faxInput = @(Import-Csv (Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-s23-fax-file-disposition-ledger.tsv') -Delimiter "`t")
+$subdomainInput = @(Import-Csv (Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-s22-wow32-active-subdomain-ledger.tsv') -Delimiter "`t")
+$wowInterfaces = @(Import-Csv (Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-s22-wow32-interface-family-ledger.tsv') -Delimiter "`t")
+$faxInterfaces = @(Import-Csv (Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-s23-fax-interface-family-ledger.tsv') -Delimiter "`t")
 
 $subdomains = @{}
 foreach ($entry in $subdomainInput) {

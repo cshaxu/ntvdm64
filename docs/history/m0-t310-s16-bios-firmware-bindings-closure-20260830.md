@@ -9,13 +9,13 @@ and first-session system-file policy have one recorded disposition.
 
 ## Accepted evidence
 
-- [P1 firmware owner audit](../etc/evidence/m0-t310-s16-p1-bios-firmware-owner-audit-001.md)
-- [P2 formal assembly](../etc/evidence/m0-t310-s16-p2-bios-firmware-formal-assembly-001.md)
-- [P3 manifest owner ledger](../etc/evidence/m0-t310-s16-p3-bios-manifest-owner-ledger-001.tsv)
-- [P3 reset/dispatch boundary](../etc/evidence/m0-t310-s16-p3-bios-reset-dispatch-boundary-001.md)
-- [P4 resource-write root](../etc/evidence/m0-t310-s16-p4-firmware-resource-write-root-001.md)
-- [P5 startup system-file disposition](../etc/evidence/m0-t310-s16-p5-startup-system-file-disposition-001.md)
-- [P6 final disposition](../etc/evidence/m0-t310-s16-p6-bios-firmware-final-disposition-001.md)
+- [P1 firmware owner audit](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s16-p1-bios-firmware-owner-audit-001.md)
+- [P2 formal assembly](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s16-p2-bios-firmware-formal-assembly-001.md)
+- [P3 manifest owner ledger](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s16-p3-bios-manifest-owner-ledger-001.tsv)
+- [P3 reset/dispatch boundary](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s16-p3-bios-reset-dispatch-boundary-001.md)
+- [P4 resource-write root](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s16-p4-firmware-resource-write-root-001.md)
+- [P5 startup system-file disposition](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s16-p5-startup-system-file-disposition-001.md)
+- [P6 final disposition](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s16-p6-bios-firmware-final-disposition-001.md)
 
 ## Deferred integration condition
 

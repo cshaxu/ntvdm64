@@ -9,7 +9,7 @@ service can become active?
 
 ## Inputs
 
-- T257 S1 [owner/ABI/failure map](../evidence/m0-t257-s1-dpmi-dosx-owner-abi-failure-map-001.md).
+- T257 S1 [owner/ABI/failure map](../../../artifacts/documentation-archive/20260910/etc/evidence/m0-t257-s1-dpmi-dosx-owner-abi-failure-map-001.md).
 - OpenNT host source: `src/opennt/base/mvdm/dpmi32/` and its `i386/` child.
 - OpenNT guest source: `src/opennt/base/mvdm/dpmi/486/`.
 - Current formal source-membership authority:

@@ -41,7 +41,7 @@ the invalid first-shell premise and transfer to the next profile.
 
 ## Transfer and exclusions
 
-The queue's first candidate, [explicit interactive COMMAND profile](../etc/operations/proposal-explicit-interactive-command-profile-001.md), owns the
+The queue's first candidate, [explicit interactive COMMAND profile](../proposals/proposal-explicit-interactive-command-profile-001.md), owns the
 second-`COMMAND.COM` record, original copyright/header, DOS-CON prompt,
 guest-owned keyboard, Ctrl+C, `exit`, parent return, Console/window/PIF
 disposition and fixed-container proof.

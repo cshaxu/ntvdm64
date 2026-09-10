@@ -10,6 +10,6 @@ All remaining forced-link edges have a non-S28 owner.  The closure does not
 claim integrated execution, private Console Server recovery, or an idle-policy
 implementation.
 
-Evidence: [P1](../etc/evidence/m0-t310-s28-p1-host-platform-source-boundary-001.md),
-[P2](../etc/evidence/m0-t310-s28-p2-host-platform-trace-and-idle-assembly-001.md),
-and [P3](../etc/evidence/m0-t310-s28-p3-host-platform-owner-disposition-001.md).
+Evidence: [P1](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s28-p1-host-platform-source-boundary-001.md),
+[P2](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s28-p2-host-platform-trace-and-idle-assembly-001.md),
+and [P3](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s28-p3-host-platform-owner-disposition-001.md).

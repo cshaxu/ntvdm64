@@ -1,7 +1,7 @@
-﻿[CmdletBinding()]
+[CmdletBinding()]
 param(
     [string]$RepositoryRoot = '',
-    [string]$OutputPath = 'docs/etc/operations/document-inventory.md'
+    [string]$OutputPath = 'artifacts/documentation-archive/20260910/etc/operations/ledgers/document-inventory.md'
 )
 
 if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
@@ -14,7 +14,7 @@ $docsRoot = Join-Path $repositoryRoot 'docs'
 $outputFullPath = [System.IO.Path]::GetFullPath((Join-Path $repositoryRoot $OutputPath))
 
 function Get-Classification([string]$relativePath) {
-    if ($relativePath -in @('README.md', 'STATUS.md', 'QUEUE.md', 'TODO.md')) {
+    if ($relativePath -in @('README.md', 'states/CURRENT.md', 'states/QUEUE.md', 'states/TODO.md')) {
         return 'principal control document'
     }
     if ($relativePath -match '^rules/') {
@@ -25,6 +25,9 @@ function Get-Classification([string]$relativePath) {
     }
     if ($relativePath -match '^history/') {
         return 'closed task history'
+    }
+    if ($relativePath -match '^proposals/') {
+        return 'unadmitted task proposal'
     }
     if ($relativePath -match '^etc/') {
         return 'indexed supporting material'

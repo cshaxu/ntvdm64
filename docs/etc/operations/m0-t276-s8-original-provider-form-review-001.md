@@ -16,7 +16,7 @@ non-final forms:
   later package/ABI decision rather than an invented replacement.
 
 The detail ledger is
-[`m0-t276-s8-original-provider-form-ledger.tsv`](m0-t276-s8-original-provider-form-ledger.tsv).
+[`m0-t276-s8-original-provider-form-ledger.tsv`](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-s8-original-provider-form-ledger.tsv).
 It preserves the S6 identity and declaration evidence for every row.
 
 ## Important corrections

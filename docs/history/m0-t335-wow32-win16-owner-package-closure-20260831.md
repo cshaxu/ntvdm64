@@ -8,7 +8,7 @@ WOWEXEC, or GUI/WOW product shells execute.
 
 ## Closed evidence
 
-- S1's [source/profile ledger](../etc/operations/m0-t335-s1-wow-source-profile-ledger.tsv)
+- S1's [source/profile ledger](../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t335-s1-wow-source-profile-ledger.tsv)
   gives every selected WOW32 path one disposition.
 - S2 through S3/P7 preserve the original callback-frame shape, task binding,
   bounded guest leases and CPU40 selector conversion.
@@ -20,7 +20,7 @@ WOWEXEC, or GUI/WOW product shells execute.
 - S3/P12 executes the original `CallBack16` transaction through original
   CCPU40 return ordering on x86, without claiming the Win16 callback
   trampoline.
-- S4's [package reconciliation](../etc/evidence/m0-t335-s4-wow-package-reconciliation-001.md)
+- S4's [package reconciliation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t335-s4-wow-package-reconciliation-001.md)
   records fresh x86 and x64 formal product links and the one fixed-container
   x86 observation.
 

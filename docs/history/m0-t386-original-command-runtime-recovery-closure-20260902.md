@@ -43,5 +43,5 @@ stage-to-return recovery package in `docs/QUEUE.md`.
 ## Evidence
 
 - [T386 plan](../etc/operations/m0-t386-original-command-runtime-recovery-001.md)
-- [Base VDM environment recovery](../etc/evidence/m0-t386-s3-original-base-vdm-environment-recovery-001.md)
-- [COMMAND runtime observation](../etc/evidence/m0-t386-s3-original-command-continuation-disposition-001.md)
+- [Base VDM environment recovery](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t386-s3-original-base-vdm-environment-recovery-001.md)
+- [COMMAND runtime observation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t386-s3-original-command-continuation-disposition-001.md)

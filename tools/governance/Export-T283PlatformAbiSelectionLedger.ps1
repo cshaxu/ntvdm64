@@ -1,9 +1,9 @@
 [CmdletBinding()]
 param(
     [string]$RepositoryRoot = '',
-    [string]$InventoryPath = 'docs/etc/operations/m0-t283-s1-platform-abi-candidate-inventory-001.tsv',
-    [string]$OutputPath = 'docs/etc/operations/m0-t283-s1-platform-abi-selection-ledger-001.tsv',
-    [string]$CanonicalManifestPath = 'docs/etc/operations/m0-t283-s2-platform-abi-canonical-import-manifest-001.tsv'
+    [string]$InventoryPath = 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t283-s1-platform-abi-candidate-inventory-001.tsv',
+    [string]$OutputPath = 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t283-s1-platform-abi-selection-ledger-001.tsv',
+    [string]$CanonicalManifestPath = 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t283-s2-platform-abi-canonical-import-manifest-001.tsv'
 )
 
 $ErrorActionPreference = 'Stop'

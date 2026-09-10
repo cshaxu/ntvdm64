@@ -12,17 +12,17 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $required = @(
     'src/mvdm-host/softpc.new/host/src/nt_ertbl.c',
     'src/mvdm-host/softpc.new/host/src/nt_mess.c',
-    'src/adapter-mvdm-host-out/softpc/include/error_abi.h',
+    'src/opennt-abi/source/public/internal/base/inc/error_abi.h',
     'tools/build/New-T280HostStaticDataNinja.ps1',
-    'docs/etc/operations/m0-t280-s3-host-static-data-build-plan-001.md',
-    'docs/etc/operations/m0-t280-s3-host-static-data-build-evidence-001.md'
+    'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s3-host-static-data-build-plan-001.md',
+    'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s3-host-static-data-build-evidence-001.md'
 )
 foreach ($relative in $required) {
     if (-not (Test-Path -LiteralPath (Join-Path $root $relative) -PathType Leaf)) {
         throw "Missing T280 S3 artifact: $relative"
     }
 }
-$bridge = Get-Content -LiteralPath (Join-Path $root 'src/adapter-mvdm-host-out/softpc/include/error_abi.h') -Raw
+$bridge = Get-Content -LiteralPath (Join-Path $root 'src/opennt-abi/source/public/internal/base/inc/error_abi.h') -Raw
 foreach ($token in @('ERROR_STRUCT', 'EH_ERROR', 'EV_EXTRA_CHAR', 'DIVERGENCE:')) {
     if ($bridge -notmatch [regex]::Escape($token)) { throw "Missing bridge token: $token" }
 }

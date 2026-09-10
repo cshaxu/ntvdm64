@@ -6,19 +6,20 @@ from history, and supporting records are indexed rather than deleted.
 
 ## Fixed Topology
 
-`docs/` has four direct control documents—`README.md`, `STATUS.md`,
-`QUEUE.md`, and `TODO.md`—and four authority directories: `rules/`, `design/`,
-`history/`, and `etc/`. `rules/` contains enforceable constraints; `design/`
-contains current product decisions; `history/` contains closed task facts; and
-`etc/` contains indexed supporting material only.
+`docs/README.md` is the sole direct control document. Current task controls
+live in `docs/states/` as `CURRENT.md`, `QUEUE.md`, and `TODO.md`; current
+rules live in `rules/`; current design lives in `design/`; unadmitted work
+belongs in `proposals/`; closed task facts live in `history/`; and `etc/`
+contains indexed supporting material only.
 
 ## Authority Roles
 
 | Record | Sole role | Must not contain |
 | --- | --- | --- |
-| `STATUS.md` | Zero or one active M/T/S packet, current technical baseline, and compact active-task progress. A task-intermission state must explicitly say that no packet is active and link the latest closure/debt record. | A backlog, multiple active S packets, or exhaustive run logs. |
-| `QUEUE.md` | Ordered, unnumbered candidate T packages. | Numeric T allocations, S/P entries, an active packet, or baseline. |
-| `TODO.md` | Unplanned debt, follow-ups, and deferred concerns. | Approved work or task identifiers. |
+| `states/CURRENT.md` | Zero or one active M/T/S packet, current technical baseline, and compact active-task progress. A task-intermission state must explicitly say that no packet is active and link the latest closure/debt record. | A backlog, multiple active S packets, or exhaustive run logs. |
+| `states/QUEUE.md` | Ordered, unnumbered candidate T packages. | Numeric T allocations, S/P entries, an active packet, or baseline. |
+| `states/TODO.md` | Unplanned debt, follow-ups, and deferred concerns. | Approved work or task identifiers. |
+| `proposals/` | Unadmitted candidate-package proposals. | Active packets or numbered task closure records. |
 | `history/` | Closed numeric-task facts and closure evidence. | Live plans or mutable current policy. |
 | `etc/` | Indexed evidence, detailed ledgers, research, and operational plans. | A competing status, queue, or architecture authority. |
 
@@ -29,14 +30,11 @@ brief belongs in the fixed Status packet; a multi-S working plan belongs under
 
 ## Migration Exception
 
-The existing direct evidence documents and `architecture/`, `governance/`,
-`planning/`, and `research/` directories predate this topology. They are
-read-only retained evidence during the incremental migration defined in
-`etc/operations/governance-migration.md`. Every Markdown file, including
-these retained records and non-principal design detail, must appear with its
-SHA-256 in `etc/operations/document-inventory.md`; the gate verifies this
-exact-file snapshot. New current policy, status, queue, or design content must
-use the fixed topology. Do not mass-move evidence or break inbound links.
+Pre-governance records are retained only while they have a declared migration
+or archival purpose. A content inventory or SHA-256 manifest may accompany an
+external archive, but is not a required current-document control or a
+condition for changing governed documents. New current policy, state, queue,
+or design content must use the fixed topology.
 
 ## Records
 

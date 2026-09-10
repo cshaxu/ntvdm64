@@ -13,6 +13,6 @@ input is deliberately S20 work and display/fullscreen behavior remains S27.
 Integrated keyboard/mouse delivery is mandatory S49 validation, not claimed
 by this source-boundary closure.
 
-- [boundary audit](../etc/evidence/m0-t310-s19-p1-input-controller-contract-boundary-001.md)
-- [x86 assembly](../etc/evidence/m0-t310-s19-p2-input-controller-x86-assembly-001.md)
-- [contract disposition](../etc/evidence/m0-t310-s19-p3-input-controller-contract-disposition-001.tsv)
+- [boundary audit](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s19-p1-input-controller-contract-boundary-001.md)
+- [x86 assembly](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s19-p2-input-controller-x86-assembly-001.md)
+- [contract disposition](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s19-p3-input-controller-contract-disposition-001.tsv)

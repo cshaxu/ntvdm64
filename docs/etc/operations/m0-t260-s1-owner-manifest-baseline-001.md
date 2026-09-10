@@ -4,7 +4,7 @@
 
 This is the first reproducible inventory pass for T260 S1. It changes no
 product source and does not authorize a move. The generated TSV is
-[`m0-t260-s1-owner-provenance-build-manifest.tsv`](m0-t260-s1-owner-provenance-build-manifest.tsv).
+[`m0-t260-s1-owner-provenance-build-manifest.tsv`](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t260-s1-owner-provenance-build-manifest.tsv).
 
 ## Generator and input
 

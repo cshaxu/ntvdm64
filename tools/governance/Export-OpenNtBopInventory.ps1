@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$RepositoryRoot = '',
+    [string]$OpenNtRoot = 'O:\repos.external\OpenNT',
     [Parameter(Mandatory = $true)]
     [string]$OutputRoot
 )
@@ -10,13 +11,22 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 }
 $repository = [IO.Path]::GetFullPath($RepositoryRoot)
+$openNt = [IO.Path]::GetFullPath($OpenNtRoot)
 $output = [IO.Path]::GetFullPath($OutputRoot)
+if (-not (Test-Path -LiteralPath $openNt -PathType Container)) { throw "Missing external OpenNT reference root: $openNt" }
 if (Test-Path -LiteralPath $output) {
     throw "Refusing to overwrite existing BOP inventory root: $output"
 }
 
 function Get-Sha256([string]$Path) {
     return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
+}
+
+function Get-SourceReference([string]$Path) {
+    if ($Path.StartsWith($openNt, [System.StringComparison]::OrdinalIgnoreCase)) {
+        return ('external/OpenNT/' + $Path.Substring($openNt.Length + 1).Replace('\', '/'))
+    }
+    return $Path.Substring($repository.Length + 1).Replace('\', '/')
 }
 
 function Convert-BopLiteral([string]$Text) {
@@ -39,7 +49,7 @@ function Parse-CDefines([string]$Path, [scriptblock]$Include) {
             if (& $Include $name) {
                 $entries += [ordered]@{
                     name = $name; value = Convert-BopLiteral $Matches[2]
-                    source = $Path.Substring($repository.Length + 1).Replace('\', '/')
+                    source = Get-SourceReference $Path
                     line = $lineNumber; source_text = $line.Trim()
                 }
             }
@@ -58,7 +68,7 @@ function Parse-DpmiSubfunctions([string]$Path) {
         if ($line -match '^\s*#define\s+([A-Za-z_][A-Za-z0-9_]*)\s+(0x[0-9A-Fa-f]+|[0-9]+)\b') {
             $entries += [ordered]@{
                 name = $Matches[1]; value = Convert-BopLiteral $Matches[2]
-                source = $Path.Substring($repository.Length + 1).Replace('\', '/')
+                source = Get-SourceReference $Path
                 line = $lineNumber; source_text = $line.Trim()
             }
         }
@@ -76,7 +86,7 @@ function Parse-BiosBopDefinitions([string]$Path) {
         if ($inside -and ($line -match '^\s*#define\s+(BIOS_[A-Z0-9_]+)\s+(0x[0-9A-Fa-f]+|[0-9]+)\b')) {
             $entries += [ordered]@{
                 name = $Matches[1]; value = Convert-BopLiteral $Matches[2]
-                source = $Path.Substring($repository.Length + 1).Replace('\', '/')
+                source = Get-SourceReference $Path
                 line = $lineNumber; source_text = $line.Trim()
             }
         }
@@ -92,7 +102,7 @@ function Parse-BiosTable([string]$Path) {
         if ($line -match '^\s*([A-Za-z_][A-Za-z0-9_]*)\s*,?\s*/\*\s*BOP\s+([0-9A-Fa-f]{1,2})\s*\*/') {
             $entries += [ordered]@{
                 selector = [Convert]::ToInt32($Matches[2], 16); owner_symbol = $Matches[1]
-                source = $Path.Substring($repository.Length + 1).Replace('\', '/')
+                source = Get-SourceReference $Path
                 line = $lineNumber; source_text = $line.Trim()
             }
         }
@@ -102,16 +112,16 @@ function Parse-BiosTable([string]$Path) {
 }
 
 $sourcePaths = [ordered]@{
-    selector_c = Join-Path $repository 'src\opennt-bop\inc\bop.h'
-    selector_asm = Join-Path $repository 'src\opennt-bop\inc\BOP.INC'
-    dos = Join-Path $repository 'src\opennt-bop\inc\dossvc.h'
-    command = Join-Path $repository 'src\opennt-bop\inc\cmdsvc.h'
-    xms = Join-Path $repository 'src\opennt-bop\inc\xmssvc.h'
-    dpmi = Join-Path $repository 'src\opennt-bop\inc\dpmi.h'
-    redir = Join-Path $repository 'src\opennt-bop\inc\rdrsvc.h'
-    debugger = Join-Path $repository 'src\opennt-bop\inc\dbgsvc.h'
-    bios_definitions = Join-Path $repository 'src\opennt-softpc\bios\bios.h'
-    bios_table = Join-Path $repository 'src\opennt-softpc\bios\bios.c'
+    selector_c = Join-Path $openNt 'base\mvdm\inc\bop.h'
+    selector_asm = Join-Path $openNt 'base\mvdm\inc\BOP.INC'
+    dos = Join-Path $openNt 'base\mvdm\inc\dossvc.h'
+    command = Join-Path $openNt 'base\mvdm\inc\cmdsvc.h'
+    xms = Join-Path $openNt 'base\mvdm\inc\xmssvc.h'
+    dpmi = Join-Path $openNt 'base\mvdm\inc\dpmi.h'
+    redir = Join-Path $openNt 'base\mvdm\inc\rdrsvc.h'
+    debugger = Join-Path $openNt 'base\mvdm\inc\dbgsvc.h'
+    bios_definitions = Join-Path $openNt 'base\mvdm\softpc.new\base\inc\bios.h'
+    bios_table = Join-Path $openNt 'base\mvdm\softpc.new\base\bios\bios.c'
 }
 foreach ($path in $sourcePaths.Values) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing pinned BOP source: $path" }
@@ -150,7 +160,7 @@ $biosTable = Parse-BiosTable $sourcePaths.bios_table
 
 New-Item -ItemType Directory -Path $output -Force | Out-Null
 $sourceManifest = @($sourcePaths.GetEnumerator() | ForEach-Object {
-    [ordered]@{ role = $_.Key; path = $_.Value.Substring($repository.Length + 1).Replace('\', '/'); sha256 = Get-Sha256 $_.Value }
+    [ordered]@{ role = $_.Key; path = Get-SourceReference $_.Value; sha256 = Get-Sha256 $_.Value }
 })
 $record = [ordered]@{
     schema = 'runner.opennt-bop-inventory.v1'

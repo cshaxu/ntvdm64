@@ -22,14 +22,14 @@ machine executor.
 
 ## Evidence and verification
 
-- S1: [current source/state re-admission](../etc/evidence/m0-t350-s1-post-cmdsetinfo-current-source-state-readmission-001.md)
+- S1: [current source/state re-admission](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t350-s1-post-cmdsetinfo-current-source-state-readmission-001.md)
   and its cohort ledger set the bounded original owner surface.
-- S2: [CPU40/SAS/BIOS bootstrap recovery](../etc/evidence/m0-t350-s2-cpu40-sas-bios-bootstrap-recovery-001.md)
+- S2: [CPU40/SAS/BIOS bootstrap recovery](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t350-s2-cpu40-sas-bios-bootstrap-recovery-001.md)
   proves the original ownership and rejects duplicate mechanics.
-- S3: [formal closure](../etc/evidence/m0-t350-s3-cpu40-sas-bootstrap-formal-closure-001.md)
+- S3: [formal closure](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t350-s3-cpu40-sas-bootstrap-formal-closure-001.md)
   records the passed focused CPU40/SAS lifecycle fixture and fresh 425-action
   CPU40/x86 product link.
-- S4: [fixed observation](../etc/evidence/m0-t350-s4-fixed-bootstrap-observation-001.md)
+- S4: [fixed observation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t350-s4-fixed-bootstrap-observation-001.md)
   records the sole unchanged console-owning launch.  It reaches original
   `54:05` ingress and ends only in the approved eight-second timeout.
 

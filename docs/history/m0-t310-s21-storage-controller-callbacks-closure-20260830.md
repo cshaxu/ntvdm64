@@ -18,6 +18,6 @@ This is source and formal-assembly closure only. It does not claim that a
 guest disk, floppy or EMS workload has executed. S22 owns host-media binding;
 S49 remains the mandatory integrated machine verification.
 
-Evidence: [source boundary](../etc/evidence/m0-t310-s21-p1-storage-controller-source-boundary-001.md),
-[call contract](../etc/evidence/m0-t310-s21-p2-storage-controller-call-contract-001.md), and
-[formal assembly](../etc/evidence/m0-t310-s21-p3-storage-controller-formal-assembly-001.md).
+Evidence: [source boundary](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s21-p1-storage-controller-source-boundary-001.md),
+[call contract](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s21-p2-storage-controller-call-contract-001.md), and
+[formal assembly](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t310-s21-p3-storage-controller-formal-assembly-001.md).

@@ -2,8 +2,8 @@
 param([string]$RepositoryRoot = '')
 if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) { $RepositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot) }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$ledgerPath = Join-Path $root 'docs/etc/operations/m0-t280-s12-dem-object-surface-ledger.tsv'
-$evidencePath = Join-Path $root 'docs/etc/operations/m0-t280-s12-dem-object-surface-evidence-001.md'
+$ledgerPath = Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s12-dem-object-surface-ledger.tsv'
+$evidencePath = Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s12-dem-object-surface-evidence-001.md'
 if (!(Test-Path $ledgerPath) -or !(Test-Path $evidencePath)) { throw 'Missing T280 S12 evidence.' }
 $rows = Import-Csv $ledgerPath -Delimiter "`t"
 if ($rows.Count -ne 3) { throw 'T280 S12 must cover exactly three reached DEM consumers.' }

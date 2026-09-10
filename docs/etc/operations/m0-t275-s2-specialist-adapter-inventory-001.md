@@ -22,7 +22,7 @@ interface is added here before it changes a mirror source. No generic
 compatibility layer is permitted.
 
 The machine-readable debt ledger is
-[`m0-t275-s2-missing-interface-ledger.tsv`](m0-t275-s2-missing-interface-ledger.tsv).
+[`m0-t275-s2-missing-interface-ledger.tsv`](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t275-s2-missing-interface-ledger.tsv).
 It freezes twelve current boundary families. Before a package is linked, its
 family row is expanded into one record per actually reached declaration.
 

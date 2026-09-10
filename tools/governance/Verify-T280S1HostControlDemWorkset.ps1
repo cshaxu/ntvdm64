@@ -6,8 +6,8 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 }
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$ledger = @(Import-Csv -LiteralPath (Join-Path $root 'docs/etc/operations/m0-t280-s1-host-control-dem-workset-ledger.tsv') -Delimiter "`t")
-$source = @(Import-Csv -LiteralPath (Join-Path $root 'docs/etc/operations/m0-t276-final-integration-disposition-ledger.tsv') -Delimiter "`t" |
+$ledger = @(Import-Csv -LiteralPath (Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s1-host-control-dem-workset-ledger.tsv') -Delimiter "`t")
+$source = @(Import-Csv -LiteralPath (Join-Path $root 'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t276-final-integration-disposition-ledger.tsv') -Delimiter "`t" |
     Where-Object { $_.source_path -like 'dos/dem/*' -or $_.source_path -like 'softpc.new/host/src/*' })
 if ($ledger.Count -ne 81) { throw "Expected 81 T280 workset rows; found $($ledger.Count)." }
 if ($source.Count -ne 81) { throw "Expected 81 selected final-ledger rows; found $($source.Count)." }

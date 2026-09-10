@@ -87,8 +87,10 @@
     records. Instances do not share a numeric namespace. Candidate allocation
     begins at zero, skips source-proven reserved values, is monotonic, and does
     not reuse IDs within a session.
-15. Both x86 and x64 builds map opaque native resources; x86 may not use
-    identity pass-through. A surrogate is restored to a native resource only
+15. The x86 product maps opaque native resources and may not use identity
+    pass-through. The same rule constrains any future host architecture, but
+    native x64 compilation is not a current closure requirement. A surrogate
+    is restored to a native resource only
     by its owning adapter. A native resource never enters MVDM or guest state.
 16. Numeric data is not an opaque identity. Lengths, offsets, times, flags,
     errors, registers and guest addresses retain original semantics and must
@@ -126,20 +128,19 @@
     console, IPC and registry APIs under ordinary permissions. The product
     must not modify/rebuild Windows system components or require installation
     mutations to start or sustain itself.
-25. The current host build profiles are independent MSVC Win32/x86 `/MT` and
-    x64 `/MT` graphs, with the original SoftPC CCPU40 executor selected by
-    `CPU_40_STYLE`. `CPU_30_STYLE` is the
+25. The current host build profile is MSVC Win32/x86 `/MT`, with the original
+    SoftPC CCPU40 executor selected by `CPU_40_STYLE`. Native x64 is not a
+    current compilation, linking, runtime or acceptance profile; x64-only
+    issues do not authorize a diff unless they demonstrate an
+    architecture-neutral mapping-manager correctness defect. `CPU_30_STYLE` is the
     retired NT4 kernel-VDM V86-monitor contract and must not enter any
     project-owned compilation, linking, runtime, fixture or acceptance input.
-    Different architectures never satisfy
-    symbols in one process; any later cross-process interaction uses only an
+    Any later cross-process interaction uses only an
     admitted fixed wire ABI.
 26. Original SoftPC CCPU40 is the sole session machine backend. A session has
     no fallback or simultaneous executor. Every functional test records its
-    selected CCPU40 architecture row and, when the reached behavior is
-    x64-runnable, a paired x64 row. Pure source/build-audit work may state why
-    it has no machine row; every selected translation unit still compiles and
-    links on both profiles.
+    x86 CCPU40 row. Pure source/build-audit work may state why it has no
+    machine row; selected translation units compile and link on that profile.
 27. `src.old/` and comparison repositories are evidence only and must not
     enter source, build, link, runtime or acceptance manifests.
 29. The `mvdm-host` support paths may be linked only after the package/symbol

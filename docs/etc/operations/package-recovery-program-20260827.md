@@ -130,7 +130,7 @@ complete `inc`, `oemuni`, and `suballoc` package members out of the obsolete
 top-level `mvdm-support` component and back under `mvdm-host`; move the
 corresponding overlay material to `mvdm-host-overlay`; then remove both old
 component roots. The detailed source, consumer, divergence and build closure
-plan is [the support-reintegration proposal](proposal-mvdm-host-support-reintegration-001.md).
+plan is [the support-reintegration proposal](../../proposals/proposal-mvdm-host-support-reintegration-001.md).
 
 **Delivery:** a mirror-preserving `git mv` migration, one current owner and
 divergence register for every moved path, updated formal build paths, and
@@ -322,7 +322,7 @@ owner sequence. Paired x86/x64 source graphs compile and link; x64 runtime
 is claimed only if it is actually observed. A source-shaped unavailable
 result is acceptable only if it occurs after the crossing and has an exact
 owner transfer. The detailed admission and evidence requirements are in
-[the pre-BOP startup continuity proposal](proposal-softpc-pre-bop-startup-continuity-001.md).
+[the pre-BOP startup continuity proposal](../../proposals/proposal-softpc-pre-bop-startup-continuity-001.md).
 
 ## P06B — CPU40/NTDOS post-`54:05` startup continuity
 
@@ -356,7 +356,7 @@ bounded observation of original CPU/frame and owner sequence. The selected
 CPU40/x86 formal graph compiles and links. x64 is not a current acceptance
 row; architecture-neutral mapping-manager rules remain mandatory wherever an
 identity crosses a MVDM boundary. The detailed admission requirements are in
-[the post-cmdSetInfo startup continuity proposal](proposal-cpu40-ntdos-post-cmdsetinfo-continuity-001.md).
+[the post-cmdSetInfo startup continuity proposal](../../proposals/proposal-cpu40-ntdos-post-cmdsetinfo-continuity-001.md).
 
 ## P06C — CPU40/NTDOS post-`54:0C` startup continuity
 
@@ -370,7 +370,7 @@ repair or claim DOS workload execution.
 **Exit:** selected CPU40/x86 formal graph compiles/links and one fixed,
 durable observation reaches the next original guest ingress or exact
 source-owned terminal result.  The detailed boundary is in
-[the P06C proposal](proposal-cpu40-ntdos-post-cmdgetconfigsys-continuity-001.md).
+[the P06C proposal](../../proposals/proposal-cpu40-ntdos-post-cmdgetconfigsys-continuity-001.md).
 
 ## P06D — CPU40/NTDOS permanent COMMAND bootstrap recovery
 
@@ -384,7 +384,7 @@ providers or invent a successful file result.
 **Exit:** selected CPU40/x86 formal graph compiles/links and one fixed durable
 observation proves either original permanent-command image handoff or a later
 exact source-owned terminal. The detailed boundary is in
-[the P06D proposal](proposal-cpu40-ntdos-permanent-command-bootstrap-001.md).
+[the P06D proposal](../../proposals/proposal-cpu40-ntdos-permanent-command-bootstrap-001.md).
 
 ## P07 — Minimal DOS guest execution and controlled return
 
@@ -468,7 +468,7 @@ the package records explicit VDD/NetBIOS/DLC transfers. It does not claim a
 networked guest integration run merely from host-side link closure.
 
 The detailed owner plan is [the NetAPI/RAP Redirector network-boundary
-proposal](proposal-netapi-rap-redirector-network-boundary-recovery-001.md).
+proposal](../../proposals/proposal-netapi-rap-redirector-network-boundary-recovery-001.md).
 
 ## P12 — WOW32/Win16 owner package
 

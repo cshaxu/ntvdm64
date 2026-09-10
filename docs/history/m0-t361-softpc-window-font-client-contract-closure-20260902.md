@@ -19,7 +19,7 @@ T361 closes the original-font and exact-client presentation package.
 ## Source and divergence disposition
 
 The provenance ledger is
-[M0 T361 S1 original font/client contract](../etc/evidence/m0-t361-s1-original-font-client-contract-001.md).
+[M0 T361 S1 original font/client contract](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t361-s1-original-font-client-contract-001.md).
 It follows original `sas.h`, `rom.c`, and `v7_video.c`; the selected V7 ROM
 hash is recorded there. `ADAPTER-SOFTPC-042` is the sole new bounded seam:
 historical Console Server presentation did not expose a safe app font copy,

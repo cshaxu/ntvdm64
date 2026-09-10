@@ -6,7 +6,7 @@ T344 audited the reached BaseSrv/BaseClient, COMMAND, monitor, WOW, CCPU and
 SoftPC state carriers before any multi-session enablement. The result is an
 explicit one-active-SoftPC-machine/session-per-process profile.
 
-- The [state-owner ledger](../etc/operations/m0-t344-s1-state-owner-ledger.tsv)
+- The [state-owner ledger](../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t344-s1-state-owner-ledger.tsv)
   separates per-session mapping managers and per-thread caller bindings from
   original CCPU, SAS, controller, video and monitor globals.
 - CCPU's `ThreadSimBuf` is thread-local only after process-wide TLS-slot and
@@ -14,7 +14,7 @@ explicit one-active-SoftPC-machine/session-per-process profile.
 - Original `CurrentMonitorTeb`, SAS/M-area and device/controller state prove
   that enabling a second active machine would require a complete lifecycle
   owner package, not a scheduler-local copy.
-- The [formal closure evidence](../etc/evidence/m0-t344-s3-single-session-formal-closure-001.md)
+- The [formal closure evidence](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t344-s3-single-session-formal-closure-001.md)
   records unchanged paired CPU40 graph verification.
 
 ## Explicit non-claims

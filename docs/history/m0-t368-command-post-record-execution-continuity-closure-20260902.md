@@ -33,7 +33,7 @@ host DOS loader, or synthesizing an empty-record terminal.
 
 ## Evidence
 
-- [S1 original topology ledger](../etc/evidence/m0-t368-s1-original-command-post-record-topology-001.md)
-- [S2 record-binding closure](../etc/evidence/m0-t368-s2-command-record-binding-closure-001.md)
-- [S3 formal boundary closure](../etc/evidence/m0-t368-s3-formal-command-boundary-closure-001.md)
-- [S4 identical-observation disposition](../etc/evidence/m0-t368-s4-identical-fixed-observation-disposition-001.md)
+- [S1 original topology ledger](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t368-s1-original-command-post-record-topology-001.md)
+- [S2 record-binding closure](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t368-s2-command-record-binding-closure-001.md)
+- [S3 formal boundary closure](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t368-s3-formal-command-boundary-closure-001.md)
+- [S4 identical-observation disposition](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t368-s4-identical-fixed-observation-disposition-001.md)
