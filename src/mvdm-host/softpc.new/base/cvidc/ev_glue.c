@@ -808,7 +808,7 @@ setup_global_data_ptr IFN0()
 	/* DIVERGENCE(MVDM-HOST-DIV-048): the original fixed 32-bit GDP byte layout
 	 * cannot contain native x64 pointers.  Preserve its one allocation point
 	 * and returned IHP shape, but allocate the source-derived slot carrier. */
-	Gdp = (IHP)softpc_gdp_create();
+	Gdp = (IHP)mvdm_gdp_create();
 	/* Gdp holds the correct value so in jcode an lea wants the value not
          * the adrress of the data 
 	 */
