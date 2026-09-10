@@ -2,28 +2,9 @@
 
 ## Current Work
 
-**Active: Td S4 P2** — governance fixture parity. The runtime recovery
-queue remains owner-held; no numeric implementation packet is admitted.
-
-## Active Packet
-
-| Field | Required record |
-| --- | --- |
-| Identifier Mode | Governance — M0 Td S4 P2. |
-| Admission And Approval | Continuing owner objective: match NXVM governance level. |
-| Objective | Add NXVM-equivalent isolated negative fixture validation for the governance gate. |
-| Non-goals | No product/runtime/source/ABI or queue ordering change. |
-| Reference Baseline | Td S4 P1 `1305d97d2` added structured closure retention; fixture-level negative validation remains. |
-| Files And ABI Surface | Governance documents and verifier only. |
-| Applicable Rules | Documentation and execution authorities. |
-| Verification | Full positive/negative fixture self-test, governance gate, links, whitespace, review, commit and push. |
-| Expected Markers | Numeric and Td identifiers, closure rows/caps, required schemas and fixture rejection match policy. |
-| Asset Needs | Read-only NXVM governance reference. |
-| Reporting Requirements | Record parity audit and remaining deliberate differences. |
-| Stop Conditions | Required product behavior change or incompatible project policy. |
-| Exit Criteria | Every identified state-machine gap has executable coverage and the closure checks pass. |
-| Original Owner Request | "匹配nxvm治理水平" |
-| Similar-Issue Sweep | Status, Queue, TODO, proposals, history, root pointers and all verifier branches. |
+**No active M/T/S packet.** M0 Td S4 P3 completed the remaining admission
+and retention controls; the runtime recovery queue remains owner-held until a
+candidate is explicitly admitted.
 
 ## Latest Packet Closure
 

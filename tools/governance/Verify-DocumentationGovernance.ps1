@@ -226,6 +226,13 @@ if ($hasActivePacket) {
         $expectedP = if ($sameS.Count -eq 0) { 1 } else { (($sameS | ForEach-Object { [int]$_.Groups['part'].Value } | Measure-Object -Maximum).Maximum + 1) }
         if (-not (($activeS -eq $maxS -and $activeP -eq $expectedP) -or ($activeS -eq ($maxS + 1) -and $activeP -eq 1))) { throw 'Active Td identifier is not the next valid S/P allocation.' }
     }
+    $numericMatch = [regex]::Match($status, '\*\*Active:\s+M\d+ T(?<task>\d+) S(?<subtask>\d+)\*\*')
+    if ($numericMatch.Success) {
+        $historyTasks = @(Get-ChildItem -LiteralPath (Join-Path $docs 'history') -File | ForEach-Object { [regex]::Match($_.Name, '^m\d+-t(?<task>\d+)-') } | Where-Object Success | ForEach-Object { [int]$_.Groups['task'].Value })
+        $expectedTask = (($historyTasks | Measure-Object -Maximum).Maximum + 1)
+        if ([int]$numericMatch.Groups['task'].Value -ne $expectedTask -or [int]$numericMatch.Groups['subtask'].Value -ne 1) { throw "New numeric packet must allocate T$expectedTask S1." }
+        if ($status -notmatch '(?m)^\|\s*Candidate Proposal\s*\|[^|]*\]\(\.\./proposals/[^)]+\.md\)[^|]*\|\s*$') { throw 'New numeric packet must link its candidate proposal.' }
+    }
 } elseif ([regex]::Matches($status, '(?m)^## Active Packet\s*$').Count -ne 0) {
     throw 'states/CURRENT.md must not retain an Active Packet section during an explicit intermission.'
 }
