@@ -1,0 +1,20 @@
+name: Governance
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  documentation:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Governance self-test and gate
+        shell: pwsh
+        run: |
+          ./tools/governance/Verify-DocumentationGovernance.ps1 -SelfTest
+          ./tools/governance/Verify-DocumentationGovernance.ps1
+          ./tools/governance/Test-DocumentationRelativeLinks.ps1
+      - name: Whitespace check
+        shell: pwsh
+        run: git diff --check HEAD~1 HEAD

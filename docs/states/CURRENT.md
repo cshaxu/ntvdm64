@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 Td S2 P1 completed governance-quality audit
-and cleanup; the runtime recovery queue remains owner-held until a candidate is
+**No active M/T/S packet.** M0 Td S3 P1 completed governance automation
+convergence; the runtime recovery queue remains owner-held until a candidate is
 explicitly admitted.
 
 ## Latest Packet Closure
@@ -25,6 +25,10 @@ state, supporting-index, encoding, relative-link and anchor checks; it also
 reconciled the public README, product UX, closed-evidence lifecycle and a
 historical encoding defect. NXVM governance materials were read-only quality
 references; no product, ABI, build, runtime or queue behavior changed.
+
+M0 Td S3 P1 added governance self-test and CI execution, explicit one-candidate
+one-proposal Queue rows, and mechanical Queue/TODO schema checks. No product,
+ABI, build, runtime or queue ordering changed.
 
 ## Current Technical Baseline
 

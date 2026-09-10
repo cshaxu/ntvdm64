@@ -63,11 +63,11 @@ complete source/binding/formal-link/runtime closure immediately before all
 later candidates. Resume the blocked candidate afterward. Do not continue a
 later package merely because an earlier linked component has no runtime proof.
 
-| Next order | Candidate implementation package |
-| --- | --- |
-| 1 | Single-process WOW16 application lifecycle recovery — before broker work, recover the immediate original owner that keeps the selected `WRITE.EXE` workload at its source-owned low-memory dialog. Prove a bounded Win16 workload's original start/return path in one x86 worker, or record the exact source-proven unavailable boundary. It cannot substitute guest/UI failure policy, a private USER/CSRSS shell, CPU tracing, or cross-process transport. |
-| 2 | Cross-process broker closure — only after candidate 1's applicable single-process owner contract closes, recover required BaseSrv-style registration, command-queue, notification and disconnect-cleanup semantics through public IPC, and prove the selected brokered lifecycle rows. It cannot own guest, COMMAND, SoftPC or WOW behavior. |
-| 3 | Multi-process matrix and product release — prove the brokered multi-process x86-worker profile, the cross-owner DOS/Win16 compatibility matrix, portable media layout and release packaging. Host x64 Windows is an x86-worker acceptance platform, not a native-x64 worker requirement. |
+| Next order | Candidate implementation package | Proposal |
+| --- | --- | --- |
+| 1 | Single-process WOW16 application lifecycle recovery — before broker work, recover the immediate original owner that keeps the selected `WRITE.EXE` workload at its source-owned low-memory dialog. Prove a bounded Win16 workload's original start/return path in one x86 worker, or record the exact source-proven unavailable boundary. It cannot substitute guest/UI failure policy, a private USER/CSRSS shell, CPU tracing, or cross-process transport. | [Proposal](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md) |
+| 2 | Cross-process broker closure — only after candidate 1's applicable single-process owner contract closes, recover required BaseSrv-style registration, command-queue, notification and disconnect-cleanup semantics through public IPC, and prove the selected brokered lifecycle rows. It cannot own guest, COMMAND, SoftPC or WOW behavior. | [Proposal](../proposals/proposal-cross-process-broker-closure-001.md) |
+| 3 | Multi-process matrix and product release — prove the brokered multi-process x86-worker profile, the cross-owner DOS/Win16 compatibility matrix, portable media layout and release packaging. Host x64 Windows is an x86-worker acceptance platform, not a native-x64 worker requirement. | [Proposal](../proposals/proposal-multiprocess-release-matrix-001.md) |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](../../artifacts/documentation-archive/20260910/etc/archive/2026-08-27-pre-package-roadmap/README.md).

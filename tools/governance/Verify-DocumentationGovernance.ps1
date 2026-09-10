@@ -1,6 +1,7 @@
 ﻿[CmdletBinding()]
 param(
-    [string]$RepositoryRoot = ''
+    [string]$RepositoryRoot = '',
+    [switch]$SelfTest
 )
 
 if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
@@ -66,6 +67,17 @@ function Assert-RelativeLinks([string[]]$MarkdownPaths) {
             }
         }
     }
+}
+
+if ($SelfTest) {
+    $sample = "# Title`n`n## Kept"
+    if (@(Get-MarkdownHeadings $sample).Count -ne 2 -or (Get-MarkdownAnchor 'A / B') -ne 'a-b') {
+        throw 'Documentation governance self-test failed: Markdown parser contract.'
+    }
+    $rejected = $false
+    try { Assert-ExactNames @('unexpected.md') @('README.md') 'self-test' } catch { $rejected = $true }
+    if (-not $rejected) { throw 'Documentation governance self-test failed: invalid topology was accepted.' }
+    Write-Host 'Documentation governance self-test passed.'
 }
 
 if (-not (Test-Path -LiteralPath $docs -PathType Container)) {
@@ -176,6 +188,15 @@ if ($queue -match '\bT\d+\b') {
 if ($queue -match '\bS\d+\b|\bP\d+\b') {
     throw 'QUEUE.md must not contain S or P identifiers.'
 }
+$queueRows = @([regex]::Matches($queue, '(?m)^\|\s*\d+\s*\|.+\|\s*\[[^\]]+\]\(\.\./proposals/[^)]+\.md\)\s*\|\s*$'))
+if ($queueRows.Count -ne 3) { throw 'Every Queue candidate row must link one proposal file.' }
+foreach ($proposal in @(Get-ChildItem -LiteralPath (Join-Path $docs 'proposals') -File -Filter '*.md')) {
+    if ($proposal.Name -match 'proposal-(?:wow16-single-process-lifecycle-recovery|cross-process-broker-closure|multiprocess-release-matrix)-001\.md' -and $queue -notmatch [regex]::Escape($proposal.Name)) {
+        throw "Current proposal is not linked by Queue: $($proposal.Name)"
+    }
+}
+$todo = Get-Content -Raw -LiteralPath (Join-Path $docs 'states/TODO.md')
+if ($todo -notmatch '(?m)^\|\s*Priority\s*\|\s*Debt\s*\|\s*Admission path\s*\|\s*$') { throw 'TODO.md must retain the priority, debt, and admission-path table.' }
 
 $documentRules = Get-Content -LiteralPath (Join-Path $docs 'rules/DOCUMENT.md') -Raw
 if ($documentRules -notmatch 'Migration Exception') {

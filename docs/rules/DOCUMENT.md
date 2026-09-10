@@ -58,6 +58,10 @@ evidence, and actual repository state. Project-approved `O:\` runtime and
 read-only comparison paths remain permitted where an authority explicitly
 requires them; a portability check must not erase that product contract.
 
+Every Queue candidate links exactly one proposal file; a shared program may
+provide background but cannot replace a candidate proposal. `TODO.md` retains
+its fixed priority, debt and admission-path table.
+
 ## Identifier Authority
 
 The project task hierarchy is `M<milestone> T<task> S<subtask> P<part>` and is
