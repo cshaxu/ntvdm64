@@ -88,21 +88,14 @@
 - Use `uint16_t`, `uint32_t` and `uint64_t` for fixed ABI fields. Use
   `uintptr_t`, `size_t`, `HANDLE` and platform-native structures only inside
   process-local implementation.
-- Never cast a native pointer or HANDLE into a 32-bit MVDM field. Register
-  opaque native identity in the appropriate session mapping-manager instance
-  and expose only its surrogate32.
-- Use the same mapping path for every active x86 cross-boundary identity. Do
-  not identity-map native x86 resources. x64-specific adaptation remains
-  deferred, but that deferral never permits native identity pass-through.
-- The single manager implementation is instantiated separately for
-  `guest_memory`, `host_resource` and `completion_callback`. A typed wrapper
-  must select the instance; a bare numeric token is insufficient.
-- Allocation tests candidate IDs from zero, skips original ABI sentinels,
-  advances monotonically, maintains forward/reverse lookup and retains stale
-  tombstones. Do not reuse an ID during the owning session.
-- Tokenize identity only. Validate numeric sizes, offsets and address arithmetic
-  in a wider temporary type before narrowing; reproduce original overflow and
-  failure behavior.
+- In the sole Win32/x86 product, retain a directly composable original native
+  pointer or HANDLE carrier at its original 32-bit process-local boundary.
+  Never move that value across broker IPC or retain it in guest memory.
+- When a fixed-width original ABI cannot carry a pointer, use the smallest
+  source-shaped table owned by that ABI; do not create a generic mapping or
+  token service.
+- Validate numeric sizes, offsets and address arithmetic in a wider temporary
+  type before narrowing; reproduce original overflow and failure behavior.
 - A guest-memory native pointer exists only under a synchronous checked lease.
   It cannot be serialized, stored in a durable record, passed to broker IPC or
   retained by a worker.
@@ -114,7 +107,7 @@
 
 - Project-owned stateful APIs take an explicit session or use a bounded
   thread binding established at entry. Do not create a process-global current
-  machine, current session, mapping table or resource registry.
+  machine, current session or generic resource registry.
 - Every worker that calls imported MVDM code binds the owning monitor/session
   context and unbinds it on exit. An asynchronous record contains stable
   session-owned IDs, not a stack/guest/native pointer.
@@ -125,8 +118,8 @@
 - Broker IPC uses copied versioned records, explicit sizes, per-user access
   control, stable broker IDs, leases and deterministic disconnect cleanup.
   Never enumerate/control unrelated processes as a discovery mechanism.
-- Local surrogate IDs and native resources are process-local and never appear
-  in broker messages.
+- Native resources and any source-shaped narrow handle IDs are process-local
+  and never appear in broker messages.
 
 ## Guest inputs
 

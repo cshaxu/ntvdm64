@@ -34,16 +34,13 @@ project-owned interfaces are multi-instance-safe so future in-process multiple
 sessions do not require an ABI redesign; imported MVDM process-global state is
 made reentrant only after a dedicated original-source audit.
 
-Imported MVDM code observes a controlled 32-bit compatibility object space.
-Session-owned typed mapping-manager instances
-associate 32-bit surrogate identities with native HANDLE/pointer-sized
-resources, while guest pointers use checked synchronous memory leases. This
-keeps 64-bit implementation details out of original MVDM control flow and
-prevents the x86 product, and any future host architecture, from relying on
-accidental native-value identity. Every admitted recovery package builds and
-links its reached closure under Win32/x86. Native x64 compile/link is not
-current product evidence or a source-repair obligation, except for a
-demonstrated architecture-neutral mapping-manager correctness defect.
+Imported MVDM code uses its original Win32/x86 process-local 32-bit carriers
+where they are directly composable. Guest pointers remain checked synchronous
+memory leases. A fixed-width original ABI that cannot carry a pointer may use
+only its own source-shaped narrow table; no generic identity-token manager is
+part of the product. Every admitted recovery package builds and links its
+reached closure under Win32/x86. Native x64 compile/link is neither product
+evidence nor a source-repair obligation.
 
 The broker recovers only required cross-process VDM registration, identity,
 command-queue, notification and cleanup contracts using public IPC. It does

@@ -4,11 +4,10 @@
 #include <setjmp.h>
 #include <stdint.h>
 
-#include "mapping_manager.h"
 #include "guest_memory_lease.h"
 
 #define SESSION_MAGIC UINT32_C(0x53455353)
-#define SESSION_ABI_VERSION UINT32_C(6)
+#define SESSION_ABI_VERSION UINT32_C(7)
 #define SESSION_MAX_TEARDOWNS 8u
 #define SESSION_MAX_THREAD_HOOKS 8u
 #define SESSION_PRESENTATION_PALETTE_ENTRIES 256u
@@ -108,9 +107,6 @@ typedef struct session_thread_hook {
 } session_thread_hook;
 
 typedef struct session {
-    /* `jmp_buf` has a stricter x64 alignment than scalar session state.
-     * Keeping it first expresses that requirement in the ABI rather than
-     * relying on compiler-inserted interior padding. */
     jmp_buf termination_escape;
     uint32_t magic;
     uint32_t abi_version;
@@ -134,9 +130,6 @@ typedef struct session {
     char original_worker_source[SESSION_WORKER_SOURCE_MAX];
     session_teardown teardowns[SESSION_MAX_TEARDOWNS];
     session_thread_hook thread_hooks[SESSION_MAX_THREAD_HOOKS];
-    mapping_manager guest_memory_mappings;
-    mapping_manager host_resource_mappings;
-    mapping_manager completion_callback_mappings;
     /* Private storage owned by the source-shaped COMMAND native-child
      * adapter.  It never holds guest data or a cross-component ABI value;
      * the adapter registers teardown and clears it before session disposal. */
@@ -166,7 +159,7 @@ typedef struct session {
     /* RGB values copied from the source palette.  These are values, never a
      * host HPALETTE, so app presentation has no host-handle dependency. */
     uint32_t presentation_graphics_palette_entries;
-    uint32_t presentation_graphics_mutex_identifier;
+    uintptr_t presentation_graphics_mutex;
     uint32_t presentation_graphics_palette_rgb[
         SESSION_PRESENTATION_PALETTE_ENTRIES];
 } session;
@@ -221,17 +214,12 @@ int session_presentation_graphics_set_palette(session *instance,
     const uint32_t *rgb, uint32_t entries);
 int session_presentation_graphics_palette_snapshot(const session *instance,
     uint32_t *rgb, uint32_t capacity, uint32_t *entries_out);
-int session_presentation_graphics_set_mutex_identifier(session *instance,
-    uint32_t identifier);
-uint32_t session_presentation_graphics_mutex_identifier(const session *instance);
+int session_presentation_graphics_set_mutex(session *instance, uintptr_t mutex);
+uintptr_t session_presentation_graphics_mutex(const session *instance);
 int session_dispose(session *instance);
 /* Same dispose operation with an optional fixed-width failure explanation.
  * `reason_out` is written before any teardown and is `NONE` on success. */
 int session_dispose_with_reason(session *instance, uint32_t *reason_out);
-mapping_manager *session_guest_memory_mappings(session *instance);
-mapping_manager *session_host_resource_mappings(session *instance);
-mapping_manager *session_completion_callback_mappings(session *instance);
-
 int session_set_firmware_root(session *instance, const char *path);
 const char *session_firmware_root(const session *instance);
 /* Immutable MVDM system root selected by app for imported COMMAND, DOS and

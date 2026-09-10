@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "mvdm_host_identity.h"
 #include "session/session.h"
 
 #define MVDM_VDD_SFT_SHADOW_MAGIC UINT32_C(0x53465453)
@@ -20,8 +19,6 @@ typedef struct mvdm_vdd_sft_shadow {
     /* This must remain first: original callers receive &sft as PDOSSFT. */
     DOSSFT sft;
     uint32_t magic;
-    uint32_t pointer_identity;
-    uint32_t host_handle_identity;
     uint32_t sft_entry_offset;
     uint32_t jft_length;
     mvdm_guest_location sft_location;
@@ -92,26 +89,12 @@ static int copy_to_guest(const mvdm_guest_location *location,
 
 static mvdm_vdd_sft_shadow *shadow_from_sft(PDOSSFT sft)
 {
-    uintptr_t value;
-    uint32_t identity;
     mvdm_vdd_sft_shadow *shadow;
 
-    if (sft == NULL || !mvdm_host_identity_lookup((uintptr_t)sft, &identity) ||
-        !mvdm_host_identity_resolve(identity, &value) ||
-        value != (uintptr_t)sft) return NULL;
+    if (sft == NULL) return NULL;
     shadow = (mvdm_vdd_sft_shadow *)sft;
-    if (shadow->magic != MVDM_VDD_SFT_SHADOW_MAGIC ||
-        shadow->pointer_identity != identity) return NULL;
+    if (shadow->magic != MVDM_VDD_SFT_SHADOW_MAGIC) return NULL;
     return shadow;
-}
-
-static void release_identity(session *instance, uint32_t identity)
-{
-    mapping_manager *resources;
-
-    if (instance == NULL || identity == 0u) return;
-    resources = session_host_resource_mappings(instance);
-    if (resources != NULL) (void)mapping_manager_release(resources, identity);
 }
 
 static void registry_remove_shadow(mvdm_vdd_sft_shadow *shadow)
@@ -144,8 +127,6 @@ static void registry_teardown(void *context)
     ReleaseSRWLockExclusive(&mvdm_vdd_sft_registry_lock);
     while (shadow != NULL) {
         mvdm_vdd_sft_shadow *next = shadow->next;
-        release_identity(registry->instance, shadow->pointer_identity);
-        release_identity(registry->instance, shadow->host_handle_identity);
         free(shadow->jft_bytes);
         memset(shadow, 0, sizeof(*shadow));
         free(shadow);
@@ -198,14 +179,9 @@ static int registry_add_shadow(mvdm_vdd_sft_shadow *shadow)
 
 static void shadow_free(mvdm_vdd_sft_shadow *shadow, int release_handle)
 {
-    session *instance;
-
     if (shadow == NULL) return;
-    instance = shadow->registry == NULL ? session_thread_current() :
-        shadow->registry->instance;
     registry_remove_shadow(shadow);
-    release_identity(instance, shadow->pointer_identity);
-    if (release_handle) release_identity(instance, shadow->host_handle_identity);
+    (void)release_handle;
     free(shadow->jft_bytes);
     memset(shadow, 0, sizeof(*shadow));
     free(shadow);
@@ -336,8 +312,7 @@ static mvdm_vdd_sft_shadow *shadow_create(ULONG pdb_far,
         if (shadow->sft.SFT_Ref_Count == 0u) goto failure;
     }
     shadow->magic = MVDM_VDD_SFT_SHADOW_MAGIC;
-    if (!mvdm_host_identity_publish((uintptr_t)&shadow->sft,
-        &shadow->pointer_identity) || !registry_add_shadow(shadow)) goto failure;
+    if (!registry_add_shadow(shadow)) goto failure;
     if (sfn_out != NULL) *sfn_out = sfn;
     return shadow;
 
@@ -370,7 +345,6 @@ HANDLE mvdm_vdd_sft_shadow_retrieve(ULONG pdb_far,
     PDOSSFT *sft_out, PBYTE *jft_out)
 {
     mvdm_vdd_sft_shadow *shadow;
-    uint32_t handle_identity;
     uintptr_t native_handle;
 
     if (sft_out != NULL) *sft_out = NULL;
@@ -401,15 +375,12 @@ HANDLE mvdm_vdd_sft_shadow_retrieve(ULONG pdb_far,
             shadow_free(shadow, 0); return NULL;
         }
         shadow->magic = MVDM_VDD_SFT_SHADOW_MAGIC;
-        if (!mvdm_host_identity_publish((uintptr_t)&shadow->sft,
-            &shadow->pointer_identity) || !registry_add_shadow(shadow)) {
+        if (!registry_add_shadow(shadow)) {
             shadow_free(shadow, 0); return NULL;
         }
     }
-    handle_identity = shadow->sft.SFT_NTHandle;
-    if (handle_identity == 0u || !mvdm_host_identity_resolve(handle_identity,
-        &native_handle)) { shadow_free(shadow, 0); return NULL; }
-    shadow->host_handle_identity = handle_identity;
+    native_handle = (uintptr_t)shadow->sft.SFT_NTHandle;
+    if (native_handle == (uintptr_t)0u) { shadow_free(shadow, 0); return NULL; }
     if (sft_out == NULL) {
         shadow_free(shadow, 0);
         return (HANDLE)native_handle;
@@ -423,16 +394,12 @@ int mvdm_vdd_sft_shadow_associate(PDOSSFT sft, HANDLE file_handle,
     WORD access)
 {
     mvdm_vdd_sft_shadow *shadow = shadow_from_sft(sft);
-    uint32_t identity;
-
-    if (shadow == NULL || !mvdm_host_identity_publish((uintptr_t)file_handle,
-        &identity)) return 0;
-    shadow->host_handle_identity = identity;
+    if (shadow == NULL || file_handle == NULL) return 0;
     shadow->sft.SFT_Mode = access & 0x7fu;
     shadow->sft.SFT_Attr = 0u;
     shadow->sft.SFT_Flags = (access & 0x80u) ? 0x1000u : 0u;
     shadow->sft.SFT_Devptr = (ULONG)-1;
-    shadow->sft.SFT_NTHandle = identity;
+    shadow->sft.SFT_NTHandle = (ULONG)(uintptr_t)file_handle;
     /* The original caller may still write SFT fields after Associate.  It
      * commits at its final source-visible write boundary. */
     return 1;

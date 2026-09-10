@@ -49,7 +49,7 @@ $includes = @(
     'src/mvdm-host-overlay/softpc.new/base/cvidc',
     'src/mvdm-host/softpc.new/base/inc',
     'src/adapter-mvdm-host-out/softpc/include',
-    'src/adapter-mvdm-host-out/monitor/include',
+    'src/adapter-mvdm-host-out/monitor/include'
 ) | ForEach-Object {
     $includePath = if ([IO.Path]::IsPathRooted($_)) { $_ } else { Join-Path $root $_ }
     '/I "' + (NinjaPath $includePath) + '"'

@@ -17,12 +17,11 @@ rule link
   command = link /nologo /out:`$out `$in
 rule run
   command = `$in
-build obj/mapping_manager.obj: cc `$root/src/session/mapping_manager.c
 build obj/guest_memory_lease.obj: cc `$root/src/session/guest_memory_lease.c
 build obj/session.obj: cc `$root/src/session/session.c
 build obj/location.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_guest_location.c
 build obj/fixture.obj: cc `$root/tests/adapter-mvdm-host-out/softpc/t280_s20_mvdm_guest_location_fixture.c
-build bounded_copy_fixture.exe: link obj/mapping_manager.obj obj/guest_memory_lease.obj obj/session.obj obj/location.obj obj/fixture.obj
+build bounded_copy_fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/location.obj obj/fixture.obj
 build test: run bounded_copy_fixture.exe
 default bounded_copy_fixture.exe
 "@

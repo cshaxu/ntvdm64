@@ -79,7 +79,6 @@ Revision History:
 #include <softpc.h>     // x86 virtual machine definitions
 #include <vrdlctab.h>
 #include <vdmredir.h>   // common Vdm Redir stuff
-#include "adapter-mvdm-host-out/redir/include/mvdm_redirector_mailslot.h"
 #include <vrmslot.h>
 #include <string.h>     // Dos still dealing with ASCII
 #include <lmcons.h>     // LM20_PATHLEN
@@ -97,10 +96,15 @@ Revision History:
 #define LOCAL_MAILSLOT_PREFIX           "\\\\."
 #define LOCAL_MAILSLOT_NAMELEN          LM20_PATHLEN
 
-/* DIVERGENCE(MVDM-HOST-DIV-170): CreateMailslot/CreateFile use the public
- * invalid-handle sentinel.  Preserve the original comparison without the
- * x86-only DWORD-to-HANDLE cast. */
-#define HANDLE_FUNCTION_FAILED          INVALID_HANDLE_VALUE
+//
+// MAX_16BIT_HANDLES is used as the array allocator count for Handle16Bitmap
+// which is stored as DWORDs. Hence, this value should be a multiple of 32,
+// or BITSIN(DWORD)
+//
+
+#define MAX_16BIT_HANDLES               (1 * BITSIN(DWORD))
+
+#define HANDLE_FUNCTION_FAILED          ((HANDLE)0xffffffff)
 
 //
 // local macros
@@ -165,7 +169,7 @@ VrpRemoveProcessMailslots(
 PRIVATE
 WORD
 VrpAllocateHandle16(
-    IN PVR_MAILSLOT_INFO MailslotInfo
+    VOID
     );
 
 PRIVATE
@@ -367,7 +371,7 @@ Return Value:
     PVR_MAILSLOT_INFO   ptr;
     WORD    Handle16;
     HANDLE  Handle32;
-    size_t  NameLength;
+    DWORD   NameLength;
     LPSTR   lpName;
     CHAR    LocalMailslot[LOCAL_MAILSLOT_NAMELEN+1];
     BOOL    Ok;
@@ -379,6 +383,15 @@ Return Value:
 //    VR_BREAKPOINT();
     }
 #endif
+
+    //
+    // grab the next free 16-bit handle before allocating this record
+    //
+
+    if ((Handle16 = VrpAllocateHandle16()) == 0) {
+        SET_ERROR(ERROR_PATH_NOT_FOUND);
+        return;
+    }
 
     //
     // get the pointer to the mailslot name from the VDM registers then
@@ -401,6 +414,7 @@ Return Value:
 
     if (NameLength <= MAILSLOT_PREFIX_LENGTH) {
         SET_ERROR(ERROR_PATH_NOT_FOUND);
+        VrpFreeHandle16(Handle16);
         return;
     }
 
@@ -411,12 +425,6 @@ Return Value:
     //
 
     NameLength -= MAILSLOT_PREFIX_LENGTH;
-    /* DIVERGENCE(MVDM-HOST-DIV-170): this is a native string measurement.
-     * Do not narrow it before the original DWORD record/allocation boundary. */
-    if (NameLength > MAXDWORD) {
-        SET_ERROR(ERROR_PATH_NOT_FOUND);
-        return;
-    }
 
     //
     // grab a structure in which to store the info. If we can't get one(!)
@@ -427,16 +435,7 @@ Return Value:
 
     if ((ptr = VrpAllocateMailslotStructure(NameLength)) == NULL) {
         SET_ERROR(ERROR_PATH_NOT_FOUND);    // mon dieu! sacre fromage! etc...
-        return;
-    }
-
-    /* DIVERGENCE(MVDM-HOST-DIV-021): OpenNT preallocates a private bitmap
-     * handle before allocating this record.  Preserve the WORD ABI and source
-     * failure direction, but publish the allocated record through the
-     * session's only host-resource mapping manager. */
-    if ((Handle16 = VrpAllocateHandle16(ptr)) == 0) {
-        SET_ERROR(ERROR_PATH_NOT_FOUND);
-        VrpFreeMailslotStructure(ptr);
+        VrpFreeHandle16(Handle16);
         return;
     }
 
@@ -1165,14 +1164,10 @@ Return Value:
 --*/
 
 {
-    PVR_MAILSLOT_INFO ptr;
-    PVR_MAILSLOT_INFO mapped;
-
-    mapped = (PVR_MAILSLOT_INFO)mvdm_redirector_mailslot_resolve(Handle16);
-    if (mapped == NULL) return NULL;
+    PVR_MAILSLOT_INFO   ptr;
 
     for (ptr = MailslotInfoList; ptr; ptr = ptr->Next) {
-        if (ptr == mapped && ptr->Handle16 == Handle16) {
+        if (ptr->Handle16 == Handle16) {
             break;
         }
     }
@@ -1360,9 +1355,12 @@ Return Value:
 //
 
 PRIVATE
+DWORD   Handle16Bitmap[MAX_16BIT_HANDLES/BITSIN(DWORD)];
+
+PRIVATE
 WORD
 VrpAllocateHandle16(
-    IN PVR_MAILSLOT_INFO MailslotInfo
+    VOID
     )
 
 /*++
@@ -1399,10 +1397,21 @@ Return Value:
 --*/
 
 {
-    WORD Handle16 = 0;
+    int     i;
+    DWORD   map;
+    WORD    Handle16 = 1;
 
-    if (mvdm_redirector_mailslot_publish(MailslotInfo, &Handle16)) {
-        return Handle16;
+    for (i=0; i<sizeof(Handle16Bitmap)/sizeof(Handle16Bitmap[0]); ++i) {
+        map = Handle16Bitmap[i];
+        if (map == -1) {
+            Handle16 += BITSIN(DWORD);
+            continue;
+        } else {
+            int j;
+            for (j=1, Handle16=1; map & j; ++Handle16, j <<= 1);
+            Handle16Bitmap[i] |= j;
+            return Handle16;
+        }
     }
 
     //
@@ -1448,6 +1457,7 @@ Return Value:
 --*/
 
 {
-    (void)mvdm_redirector_mailslot_release(Handle16);
+    --Handle16;
+    Handle16Bitmap[Handle16/BITSIN(DWORD)] &= ~(1 << Handle16 % BITSIN(DWORD));
 
 }

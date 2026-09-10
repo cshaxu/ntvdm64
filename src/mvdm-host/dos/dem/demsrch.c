@@ -19,7 +19,6 @@
 #include <mvdm.h>
 #include <memory.h>
 #include <nt_vdd.h>
-#include "mvdm_host_identity.h"
 
 extern BOOL IsFirstCall;
 
@@ -299,7 +298,6 @@ DWORD demFileFindFirst (
 {
     PSRCHDTA       pDta = (PSRCHDTA)pvDTA;
     PFFINDLIST     pFFindEntry;
-    uint32_t       HostIdentity;
     FFINDDOSDATA   FFindDD;
     UNICODE_STRING FileUni;
     WCHAR          wcFile[MAX_PATH + sizeof(WCHAR)];
@@ -339,18 +337,8 @@ DWORD demFileFindFirst (
             if (SearchAttr != ATTR_VOLUME_ID) {
                 pFFindEntry = SearchFile(wcFile, SearchAttr, NULL, NULL);
                 if (pFFindEntry) {
-                    /* DIVERGENCE(MVDM-HOST-DIV-002): persist an opaque
-                     * surrogate, never the native x86/x64 pointer. */
-                    if (mvdm_host_identity_publish((uintptr_t)pFFindEntry,
-                                                   &HostIdentity) == 0) {
-                        FreeFFindEntry(pFFindEntry);
-                        STOREDWORD(pDta->pFFindEntry,0);
-                        STOREDWORD(pDta->FFindId,0);
-                        }
-                    else {
-                        STOREDWORD(pDta->pFFindEntry,HostIdentity);
-                        STOREDWORD(pDta->FFindId,pFFindEntry->FFindId);
-                        }
+                    STOREDWORD(pDta->pFFindEntry,(ULONG)(uintptr_t)pFFindEntry);
+                    STOREDWORD(pDta->FFindId,pFFindEntry->FFindId);
                     }
                 }
             return 0;
@@ -387,17 +375,7 @@ DWORD demFileFindFirst (
     FillSrchDta(&FFindDD, pDta);
 
     if (pFFindEntry) {
-        /* DIVERGENCE(MVDM-HOST-DIV-002): preserve source failure form when
-         * a source-shaped 32-bit host identity cannot be published. */
-        if (mvdm_host_identity_publish((uintptr_t)pFFindEntry,
-                                       &HostIdentity) == 0) {
-            FreeFFindEntry(pFFindEntry);
-            STOREDWORD(pDta->pFFindEntry,0);
-            STOREDWORD(pDta->FFindId,0);
-            SetLastError(RtlNtStatusToDosError(STATUS_NO_MEMORY));
-            return (DWORD)-1;
-            }
-        STOREDWORD(pDta->pFFindEntry,HostIdentity);
+        STOREDWORD(pDta->pFFindEntry,(ULONG)(uintptr_t)pFFindEntry);
         STOREDWORD(pDta->FFindId,pFFindEntry->FFindId);
         }
 
@@ -485,16 +463,11 @@ DWORD demFileFindNext (
     PSRCHDTA pDta = (PSRCHDTA)pvDta;
     USHORT   SearchAttr;
     PFFINDLIST   pFFindEntry;
-    uintptr_t    HostIdentity;
     FFINDDOSDATA FFindDD;
 
     pFFindEntry = GetFFindEntryByFindId(FETCHDWORD(pDta->FFindId));
-    /* DIVERGENCE(MVDM-HOST-DIV-002): compare the source's native list entry
-     * through its checked surrogate rather than a truncated pointer. */
     if (!pFFindEntry ||
-        !mvdm_host_identity_resolve(FETCHDWORD(pDta->pFFindEntry),
-                                    &HostIdentity) ||
-        HostIdentity != (uintptr_t)pFFindEntry )
+        FETCHDWORD(pDta->pFFindEntry) != (DWORD)(uintptr_t)pFFindEntry )
       {
         STOREDWORD(pDta->FFindId,0);
         STOREDWORD(pDta->pFFindEntry,0);
@@ -569,7 +542,6 @@ VOID demFindFirstFCB (VOID)
     PSRCHBUF        pFCBSrchBuf;
     PDIRENT         pDirEnt;
     PFFINDLIST      pFFindEntry;
-    uint32_t        HostIdentity;
     FFINDDOSDATA    FFindDD;
     UNICODE_STRING  FileUni;
     WCHAR           wcFile[MAX_PATH];
@@ -614,18 +586,7 @@ VOID demFindFirstFCB (VOID)
     FillFCBSrchBuf(&FFindDD, pFCBSrchBuf);
 
     if (pFFindEntry) {
-        /* DIVERGENCE(MVDM-HOST-DIV-002): retain the 32-bit FCB format with a
-         * session-owned opaque identity, not a host pointer. */
-        if (mvdm_host_identity_publish((uintptr_t)pFFindEntry,
-                                       &HostIdentity) == 0) {
-            FreeFFindEntry(pFFindEntry);
-            STOREDWORD(pDirEnt->pFFindEntry,0);
-            STOREDWORD(pDirEnt->FFindId,0);
-            SetLastError(RtlNtStatusToDosError(STATUS_NO_MEMORY));
-            demClientError(INVALID_HANDLE_VALUE, *lpFile);
-            return;
-            }
-        STOREDWORD(pDirEnt->pFFindEntry,HostIdentity);
+        STOREDWORD(pDirEnt->pFFindEntry,(ULONG)(uintptr_t)pFFindEntry);
         STOREDWORD(pDirEnt->FFindId,pFFindEntry->FFindId);
         }
 
@@ -663,7 +624,6 @@ VOID demFindNextFCB (VOID)
     PSRCHBUF        pSrchBuf;
     PDIRENT         pDirEnt;
     PFFINDLIST      pFFindEntry;
-    uintptr_t       HostIdentity;
     FFINDDOSDATA    FFindDD;
 
 
@@ -671,18 +631,12 @@ VOID demFindNextFCB (VOID)
     pDirEnt  = &pSrchBuf->DirEnt;
 
     pFFindEntry = GetFFindEntryByFindId(FETCHDWORD(pDirEnt->FFindId));
-    /* DIVERGENCE(MVDM-HOST-DIV-002): validate the FCB identity via the
-     * session host-resource mapper before using the native list entry. */
     if (!pFFindEntry ||
-        !mvdm_host_identity_resolve(FETCHDWORD(pDirEnt->pFFindEntry),
-                                    &HostIdentity) ||
-        HostIdentity != (uintptr_t)pFFindEntry ||
+        FETCHDWORD(pDirEnt->pFFindEntry) != (DWORD)(uintptr_t)pFFindEntry ||
         getDL() == ATTR_VOLUME_ID )
       {
-        if (pFFindEntry &&
-            (!mvdm_host_identity_resolve(FETCHDWORD(pDirEnt->pFFindEntry),
-                                         &HostIdentity) ||
-             HostIdentity != (uintptr_t)pFFindEntry))
+        if (pFFindEntry && FETCHDWORD(pDirEnt->pFFindEntry) !=
+            (DWORD)(uintptr_t)pFFindEntry)
           {
             FreeFFindEntry(pFFindEntry);
             }
@@ -2476,13 +2430,6 @@ AddFFindEntry(
  */
 VOID FreeFFindEntry(PFFINDLIST pFFindEntry)
 {
-    uint32_t HostIdentity;
-
-    /* DIVERGENCE(MVDM-HOST-DIV-002): retire the opaque identity before the
-     * original native allocation is freed. No token is fabricated on miss. */
-    if (mvdm_host_identity_lookup((uintptr_t)pFFindEntry, &HostIdentity)) {
-        (void)mvdm_host_identity_release(HostIdentity);
-        }
     RemoveEntryList(&pFFindEntry->FFindEntry);
     FileFindClose(pFFindEntry);
     RtlFreeUnicodeString(&pFFindEntry->FileName);

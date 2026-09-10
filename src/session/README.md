@@ -18,13 +18,9 @@ M0 T272 S2 disposition register:
 
 M0 T272 S3 disposition register:
 
-- `mapping_manager.c` and `mapping_manager.h`: `new neutral replacement`.
-  They provide the one generic mapping implementation required by the
-  rebootstrap architecture.  A session owns three separate instances:
-  `guest_memory_mappings`, `host_resource_mappings`, and
-  `completion_callback_mappings`.  The manager stores opaque native-sized
-  values only; it does not acquire guest memory, close host resources, or
-  attach callback semantics.
+- The former generic mapping manager is removed. The sole Win32/x86 product
+  uses the original direct process-local pointer/HANDLE carriers; guest-memory
+  leasing remains a separate bounded-copy concern.
 - Historical `guest_pointer_manager` and `host_handle_manager` records remain
   in `src.old/` as reference-only material.  They combined process-global
   registries with guest-memory lease and host-resource ownership semantics, so

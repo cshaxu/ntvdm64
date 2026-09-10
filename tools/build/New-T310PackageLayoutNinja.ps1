@@ -29,7 +29,7 @@ $environment = Join-Path $build 'msvc-mt.cmd'
   'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T310_CALLER_CWD%"', '%*') |
     Set-Content -LiteralPath $environment -Encoding ascii
 
-$sources = @('src/session/mapping_manager.c', 'src/session/guest_memory_lease.c',
+$sources = @('src/session/guest_memory_lease.c',
     'src/session/session.c', 'src/app/package_layout.c',
     'tests/app/package_layout_fixture.c')
 $graph = [Collections.Generic.List[string]]::new()

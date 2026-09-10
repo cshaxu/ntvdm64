@@ -40,7 +40,6 @@ Comments:
 #include <softpc.h>
 #include <dpmiint.h>
 #include <intapi.h>
-#include "mvdm_host_identity.h"
 
 
 VOID
@@ -385,19 +384,9 @@ Notes:
 
 #ifdef i386
     {
-        uint32_t pPmStackInfo = 0;
+        uint32_t pPmStackInfo;
         VdmTib.PmStackInfo.Flags = CurrentAppFlags;
-        /* DIVERGENCE(MVDM-HOST-DIV-018): the original x86 address was a
-         * process pointer exposed through CX:DX. Preserve that 32-bit
-         * interface shape as a session-owned opaque identity; a future VDM
-         * TIB projection may resolve it, but no host pointer enters guest
-         * registers. */
-        if (!mvdm_host_identity_publish((uintptr_t)&VdmTib.PmStackInfo,
-            &pPmStackInfo)) {
-            setCX(0);
-            setDX(0);
-            return;
-        }
+        pPmStackInfo = (uint32_t)(uintptr_t)&VdmTib.PmStackInfo;
 
         setCX(HIWORD(pPmStackInfo));
         setDX(LOWORD(pPmStackInfo));

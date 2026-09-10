@@ -3198,8 +3198,7 @@ GLOBAL VOID AT_kbd_init IFN0()
 	}
 #endif	/* macintosh */
 
-	/* DIVERGENCE MVDM-HOST-DIV-075: config scalar is pointer-sized on x86/x64. */
-	videoAdapt = (ULONG)(ULONG_PTR) config_inquire(C_GFX_ADAPTER, NULL);
+	videoAdapt = (ULONG) config_inquire(C_GFX_ADAPTER, NULL);
 
 	buff_6805_out_ptr=0;
 	clear_buff_6805 ();

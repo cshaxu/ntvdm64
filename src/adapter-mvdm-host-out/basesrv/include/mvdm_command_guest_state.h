@@ -12,7 +12,7 @@ extern "C" {
 /*
  * Retains the original COMMAND SCS/DOS-data locations as real-mode numeric
  * addresses.  No host pointer leaves a call; all dereferences use the
- * thread-bound session guest-memory mapping manager through a short lease.
+ * thread-bound session guest-memory lease through a short lease.
  */
 int mvdm_command_guest_state_set_scs(uint16_t segment, uint16_t offset,
     uint32_t scs_bytes, uint32_t to_sync_offset);

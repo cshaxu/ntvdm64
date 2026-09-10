@@ -27,7 +27,6 @@ fs.writeFileSync(path.join(build, 'build.ninja'), [
   '  description = CC $in',
   'rule link', '  command = link /nologo /out:$out $in kernel32.lib',
   '  description = LINK $out', '',
-  'build obj/mapping_manager.obj: cc $root/src/session/mapping_manager.c',
   'build obj/guest_memory_lease.obj: cc $root/src/session/guest_memory_lease.c',
   'build obj/session.obj: cc $root/src/session/session.c',
   'build obj/location.obj: cc $root/src/adapter-mvdm-host-out/softpc/mvdm_guest_location.c',
@@ -35,7 +34,7 @@ fs.writeFileSync(path.join(build, 'build.ninja'), [
   'build obj/base_vdm_client.obj: cc $root/src/adapter-mvdm-host-out/basesrv/source/base_vdm_client.c',
   'build obj/base_vdm_local.obj: cc $root/src/adapter-mvdm-host-out/basesrv/source/base_vdm_local.c',
   'build obj/fixture.obj: cc $root/tests/adapter-mvdm-host-out/basesrv/t370_native_child_lifecycle_fixture.c',
-  'build command_native_child_fixture.exe: link obj/mapping_manager.obj obj/guest_memory_lease.obj obj/session.obj obj/location.obj obj/native_child.obj obj/base_vdm_client.obj obj/base_vdm_local.obj obj/fixture.obj',
+  'build command_native_child_fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/location.obj obj/native_child.obj obj/base_vdm_client.obj obj/base_vdm_local.obj obj/fixture.obj',
   'default command_native_child_fixture.exe', ''
 ].join('\n'), { encoding: 'utf8' });
 console.log(`Wrote T370 native-child lifecycle Ninja graph: ${path.join(build, 'build.ninja')}`);

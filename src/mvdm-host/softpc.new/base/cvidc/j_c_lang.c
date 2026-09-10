@@ -2,9 +2,6 @@
 #include "host_def.h"
 /* DIVERGENCE(MVDM-HOST-DIV-076): preserve the native C varargs ABI. */
 #include <stdio.h>
-/* DIVERGENCE(MVDM-HOST-DIV-122): C-video generated rules make IUH a native
- * host word.  Keep diagnostic-only rule values width-safe on x86 and x64. */
-#include <inttypes.h>
 
 /*[
  *      Name:           j_c_lang.c
@@ -56,14 +53,13 @@ mask IFN2(IUH, bitpos, IUH, len)
 
     if (bitpos > MAX_BITPOS || bitpos < 0)
     {
-	printf("mask: bitpos %" PRIuPTR " out of range\n", (uintptr_t)bitpos);
+	printf("mask: bitpos %d out of range\n", bitpos);
 	return(0);
     }
 
     if (len > NUM_HBITS - bitpos)
     {
-	printf("mask: len %" PRIuPTR " too great for starting bitpos %" PRIuPTR "\n",
-	       (uintptr_t)len, (uintptr_t)bitpos);
+	printf("mask: len %d too great for starting bitpos %d\n", len, bitpos);
 	return(0);
     }
 

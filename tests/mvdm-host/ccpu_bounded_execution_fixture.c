@@ -225,7 +225,6 @@ int main(void)
             VdmUnmapDosMemory(UINT32_C(0x100), UINT32_C(1)) !=
                 (NTSTATUS)UINT32_C(0xc0000225) ||
             VdmRemoveVirtualMemory(intel_address) != STATUS_SUCCESS ||
-            session_guest_memory_mappings(&physical_owner)->active_count != 0u ||
             mvdm_softpc_physical_mapping_prepare(mapping_identifier,
                 UINT32_C(4096), NULL) ||
             mvdm_softpc_physical_mapping_resolve(intel_address,

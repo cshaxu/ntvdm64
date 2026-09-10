@@ -314,7 +314,6 @@ BOOL WINAPI MvdmPresentationGraphicsBuffer(HANDLE output,
     uint8_t *pixels;
     HANDLE duplicate;
     HANDLE mutex;
-    uint32_t mutex_identifier = 0u;
 
     if (screen_buffer != NULL) *screen_buffer = NULL;
     if (owner == NULL || !session_valid(owner) ||
@@ -353,13 +352,7 @@ BOOL WINAPI MvdmPresentationGraphicsBuffer(HANDLE output,
         session_presentation_graphics_clear(owner);
         return FALSE;
     }
-    if (!mapping_manager_publish(session_host_resource_mappings(owner),
-            (uintptr_t)mutex, &mutex_identifier) ||
-        !session_presentation_graphics_set_mutex_identifier(owner,
-            mutex_identifier)) {
-        if (mutex_identifier != 0u)
-            (void)mapping_manager_release(session_host_resource_mappings(owner),
-                mutex_identifier);
+    if (!session_presentation_graphics_set_mutex(owner, (uintptr_t)mutex)) {
         CloseHandle(mutex);
         CloseHandle(duplicate);
         session_presentation_graphics_clear(owner);
@@ -383,24 +376,20 @@ BOOL WINAPI MvdmPresentationGraphicsBuffer(HANDLE output,
 VOID WINAPI MvdmPresentationGraphicsClear(VOID)
 {
     session *owner = session_thread_current();
-    uint32_t mutex_identifier;
+    uintptr_t mutex;
     if (owner == NULL) return;
-    mutex_identifier = session_presentation_graphics_mutex_identifier(owner);
-    if (mutex_identifier != 0u)
-        (void)mapping_manager_release(session_host_resource_mappings(owner),
-            mutex_identifier);
+    mutex = session_presentation_graphics_mutex(owner);
+    if (mutex != (uintptr_t)0u) CloseHandle((HANDLE)mutex);
     session_presentation_graphics_clear(owner);
 }
 
 static HANDLE presentation_mutex(session *owner)
 {
-    uintptr_t native_value;
-    uint32_t identifier;
+    uintptr_t mutex;
     if (owner == NULL || !session_valid(owner) ||
-        (identifier = session_presentation_graphics_mutex_identifier(owner)) == 0u ||
-        !mapping_manager_lookup_value(session_host_resource_mappings(owner),
-            identifier, &native_value)) return NULL;
-    return (HANDLE)native_value;
+        (mutex = session_presentation_graphics_mutex(owner)) == (uintptr_t)0u)
+        return NULL;
+    return (HANDLE)mutex;
 }
 
 int mvdm_presentation_graphics_describe(session *owner, uint32_t *width_out,

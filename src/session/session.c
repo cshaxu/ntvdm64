@@ -22,15 +22,6 @@ void session_initialize(session *instance, uint32_t identity)
     instance->struct_bytes = (uint32_t)sizeof(*instance);
     instance->identity = identity;
     instance->mechanical_resume_status = SESSION_MECHANICAL_STATUS_NONE;
-    mapping_manager_initialize(&instance->guest_memory_mappings,
-        MAPPING_MANAGER_GUEST_MEMORY,
-        MAPPING_MANAGER_RESERVE_ZERO | MAPPING_MANAGER_RESERVE_MAXIMUM);
-    mapping_manager_initialize(&instance->host_resource_mappings,
-        MAPPING_MANAGER_HOST_RESOURCE,
-        MAPPING_MANAGER_RESERVE_ZERO | MAPPING_MANAGER_RESERVE_MAXIMUM);
-    mapping_manager_initialize(&instance->completion_callback_mappings,
-        MAPPING_MANAGER_COMPLETION_CALLBACK,
-        MAPPING_MANAGER_RESERVE_ZERO | MAPPING_MANAGER_RESERVE_MAXIMUM);
 }
 
 int session_valid(const session *instance)
@@ -44,12 +35,6 @@ int session_valid(const session *instance)
         instance->thread_hook_count <= SESSION_MAX_THREAD_HOOKS &&
         instance->termination_armed <= 1u &&
         session_binding_count(instance) <= INT32_MAX &&
-        mapping_manager_valid(&instance->guest_memory_mappings,
-            MAPPING_MANAGER_GUEST_MEMORY) &&
-        mapping_manager_valid(&instance->host_resource_mappings,
-            MAPPING_MANAGER_HOST_RESOURCE) &&
-        mapping_manager_valid(&instance->completion_callback_mappings,
-            MAPPING_MANAGER_COMPLETION_CALLBACK) &&
         guest_memory_lease_context_valid(&instance->guest_memory_lease);
 }
 
@@ -369,7 +354,7 @@ void session_presentation_graphics_clear(session *instance)
     instance->presentation_graphics_stride = 0u;
     instance->presentation_graphics_bytes = 0u;
     instance->presentation_graphics_palette_entries = 0u;
-    instance->presentation_graphics_mutex_identifier = 0u;
+    instance->presentation_graphics_mutex = (uintptr_t)0u;
     memset(instance->presentation_graphics_palette_rgb, 0,
         sizeof(instance->presentation_graphics_palette_rgb));
 }
@@ -400,19 +385,18 @@ int session_presentation_graphics_palette_snapshot(const session *instance,
     return 1;
 }
 
-int session_presentation_graphics_set_mutex_identifier(session *instance,
-    uint32_t identifier)
+int session_presentation_graphics_set_mutex(session *instance, uintptr_t mutex)
 {
     if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
         return 0;
-    instance->presentation_graphics_mutex_identifier = identifier;
+    instance->presentation_graphics_mutex = mutex;
     return 1;
 }
 
-uint32_t session_presentation_graphics_mutex_identifier(const session *instance)
+uintptr_t session_presentation_graphics_mutex(const session *instance)
 {
-    return session_valid(instance) ?
-        instance->presentation_graphics_mutex_identifier : 0u;
+    return session_valid(instance) ? instance->presentation_graphics_mutex :
+        (uintptr_t)0u;
 }
 
 static uint32_t session_dispose_reason(const session *instance)
@@ -439,9 +423,6 @@ int session_dispose_with_reason(session *instance, uint32_t *reason_out)
     session_presentation_text_clear(instance);
     session_presentation_graphics_clear(instance);
     session_guest_memory_end(instance);
-    mapping_manager_dispose(&instance->guest_memory_mappings);
-    mapping_manager_dispose(&instance->host_resource_mappings);
-    mapping_manager_dispose(&instance->completion_callback_mappings);
     memset(instance, 0, sizeof(*instance));
     return 1;
 }
@@ -589,21 +570,6 @@ int session_terminate_current(uint32_t completion_code)
     instance->completion_code = completion_code;
     instance->state = SESSION_STATE_COMPLETED;
     longjmp(instance->termination_escape, 1);
-}
-
-mapping_manager *session_guest_memory_mappings(session *instance)
-{
-    return session_valid(instance) ? &instance->guest_memory_mappings : NULL;
-}
-
-mapping_manager *session_host_resource_mappings(session *instance)
-{
-    return session_valid(instance) ? &instance->host_resource_mappings : NULL;
-}
-
-mapping_manager *session_completion_callback_mappings(session *instance)
-{
-    return session_valid(instance) ? &instance->completion_callback_mappings : NULL;
 }
 
 static int session_set_root(session *instance, char *destination,

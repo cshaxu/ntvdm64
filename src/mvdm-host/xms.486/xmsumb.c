@@ -30,8 +30,6 @@ Revision History:
 #include    <xms.h>
 #include    "umb.h"
 #include    "softpc.h"
-#include    "mvdm-host-overlay/xms.486/xms_a20_state.h"
-#include    "mvdm_umb_address.h"
 
 
 
@@ -49,22 +47,14 @@ VOID  xmsInitUMB(VOID)
 {
     PVOID   Address;
     ULONG   Size;
-    DWORD   LinearAddress;
     PXMSUMB xmsUMB, xmsUMBNew;
     xmsUMBHead = NULL;
     while (ReserveUMB(UMB_OWNER_XMS, &Address, &Size) &&
 	   (xmsUMBNew = (PXMSUMB) malloc(sizeof(XMSUMB))) != NULL) {
-	    /* DIVERGENCE MVDM-HOST-DIV-078: ReserveUMB preserves the historical
-	       PVOID spelling, but the selected user-mode contract carries an Intel
-	       physical number, never a host pointer. */
-	    if (!mvdm_umb_address_decode(Address, &LinearAddress)) {
-		free(xmsUMBNew);
-		return;
-	    }
 	    // convert size in bytes to paragraphs
 	    xmsUMBNew->Size = (WORD) (Size >> 4);
 	    // convert linear address to paragraphs segment
-	    xmsUMBNew->Segment = (WORD)(LinearAddress >> 4);
+	    xmsUMBNew->Segment = (WORD)((DWORD)Address >> 4);
 	    xmsUMBNew->Owner = 0;
 	    if (xmsUMBHead == NULL) {
 		xmsUMBHead = xmsUMBNew;
@@ -77,9 +67,7 @@ VOID  xmsInitUMB(VOID)
 	    xmsUMB = xmsUMBNew;
     }
     xmsIsON = TRUE;
-    /* DIVERGENCE MVDM-HOST-DIV-010: retain the source AX:BX location as
-       numeric data; the private overlay obtains a new bounded lease later. */
-    (void)mvdm_xms_himem_a20_state_bind(getAX(), getBX());
+    pHimemA20State = (PBYTE) GetVDMAddr(getAX(), getBX());
     xmsEnableA20Wrapping();
 
 
@@ -117,13 +105,8 @@ ULONG	Size
 {
     PXMSUMB xmsUMB, xmsUMBNew;
     WORD    Segment;
-    DWORD   LinearAddress;
 
-    /* DIVERGENCE MVDM-HOST-DIV-078: retain the original PVOID API shape but
-       decode only its selected numeric physical-address carrier. */
-    if (!mvdm_umb_address_decode(Address, &LinearAddress))
-	return;
-    Segment = (WORD) (LinearAddress >> 4);
+    Segment = (WORD) ((DWORD)Address >> 4);
     Size >>= 4;
 
     xmsUMB = xmsUMBNew = xmsUMBHead;

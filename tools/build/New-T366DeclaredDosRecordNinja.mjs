@@ -42,7 +42,6 @@ const objects = [
   ['launch_declaration', 'src/app/launch_declaration.c'],
   ['thread_start_compat', 'src/adapter-mvdm-host-out/win32/source/thread_start_compat.c'],
   ['session', 'src/session/session.c'],
-  ['mapping_manager', 'src/session/mapping_manager.c'],
   ['guest_memory_lease', 'src/session/guest_memory_lease.c']
 ];
 const rules = [

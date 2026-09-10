@@ -120,9 +120,8 @@ The current product publication contract has one executable:
 The deployable local package mirrors that exact name at its root. The
 currently selected owner test root is `O:\ntvdm64`, so its required executable
 path is `O:\ntvdm64\ntvdm32.exe`. Native x64 is retired as a product,
-staging, runtime and acceptance target. It is not a source-closure criterion;
-an x64-only issue is left untouched unless it demonstrates an
-architecture-neutral mapping-manager correctness defect.
+staging, runtime and acceptance target. Native-x64/cross-width-only source
+differences are removed when the selected original Win32/x86 form composes.
 
 `O:\ntvdm64` is a runtime-package root, not a build or diagnostic workspace.
 JSON, TXT, LOG, MAP, PDB and other observation/debug records must be written
@@ -176,13 +175,12 @@ non-mirror provider must have an explicit migrate/replace/retain-as-generic-
 mechanics/delete disposition.
 
 When the reached source uses `GetVDMAddr`, `Sim32GetVDMPointer`,
-`Sim32FlushVDMPointer`, or `Sim32FreeVDMPointer`, provider closure additionally
-records the shared `adapter-mvdm-host-out/softpc` mapping-manager disposition: direct synchronous
-lease, copied/bounce lease, explicit refusal, address/span, access direction,
-epoch/teardown, and focused positive and negative proof. A provider may not
-introduce a family-private guest-pointer mapper. Native pointers are local
-implementation state only and never cross the bx↔machine ABI, enter guest
-state, or survive the admitted call.
+`Sim32FlushVDMPointer`, or `Sim32FreeVDMPointer`, provider closure records the
+selected direct synchronous lease, copied/bounce lease, or explicit refusal;
+address/span, access direction, epoch/teardown, and focused positive and
+negative proof are mandatory. A provider may not introduce a generic guest
+pointer manager. Native pointers are local implementation state only and never
+cross the bx↔machine ABI, enter guest state, or survive the admitted call.
 
 Any project-defined replacement interface or logic additionally needs a
 registered recovery exception before implementation. That exception names the

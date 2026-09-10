@@ -34,7 +34,8 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 # resource graph is architecture-neutral; source-local exceptions, if ever
 # required, must be separately audited and registered.
 $sources = @(
-    'src/session/mapping_manager.c',
+    ,
+    ,
     'src/session/guest_memory_lease.c',
     'src/session/session.c',
     'src/adapter-mvdm-host-out/softpc/mvdm_softpc_firmware.c',
@@ -62,8 +63,8 @@ for ($index = 0; $index -lt $sources.Count; ++$index) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $sources[$index])))
     $objects += $object
 }
-$graph.Add('build softpc-firmware-resource-fixture.exe: link obj/0-mapping_manager.obj obj/1-guest_memory_lease.obj obj/2-session.obj obj/3-mvdm_softpc_firmware.obj obj/4-softpc_firmware_resource_fixture.obj')
-$graph.Add('build softpc-media-resource-fixture.exe: link obj/0-mapping_manager.obj obj/1-guest_memory_lease.obj obj/2-session.obj obj/3-mvdm_softpc_firmware.obj obj/5-softpc_media_resource_fixture.obj')
+$graph.Add('build softpc-firmware-resource-fixture.exe: link obj/1-guest_memory_lease.obj obj/2-session.obj obj/3-mvdm_softpc_firmware.obj obj/4-softpc_firmware_resource_fixture.obj')
+$graph.Add('build softpc-media-resource-fixture.exe: link obj/1-guest_memory_lease.obj obj/2-session.obj obj/3-mvdm_softpc_firmware.obj obj/5-softpc_media_resource_fixture.obj')
 $graph.Add('build verify: run softpc-firmware-resource-fixture.exe')
 $graph.Add('build verify-media: run_dos softpc-media-resource-fixture.exe')
 $graph.Add('build all-verify: phony verify verify-media')

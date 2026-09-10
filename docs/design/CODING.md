@@ -114,8 +114,7 @@ identity, never by a bare same-spelled function name.
 The current recovery build has one MSVC `/MT` Win32/x86 compilation and
 acceptance row, producing `ntvdm32.exe` with the original CCPU40 executor.
 Native x64 compile/link output is outside the product target and must not
-drive a source change unless it exposes a demonstrated architecture-neutral
-mapping-manager correctness defect. `CPU_30_STYLE` is an NT4 kernel-VDM
+drive a source change. `CPU_30_STYLE` is an NT4 kernel-VDM
 V86-monitor contract. It is retired and prohibited from every project-owned
 compile, link, runtime, fixture and acceptance input. Cross-component and
 broker wire records use fixed-width
@@ -123,31 +122,27 @@ integer fields.
 Native process-local implementation uses `uintptr_t`, `size_t`, `HANDLE` and
 other pointer-sized platform types.
 
-Opaque native resources never enter imported MVDM state. They are registered
-in a session-owned `host_resource` or `completion_callback` mapping-manager
-instance and represented to MVDM by a 32-bit surrogate. The allocator begins
-with candidate zero, skips source-proven reserved sentinels, advances
-monotonically, keeps reverse lookup and stale tombstones, and does not reuse an
-ID during the session lifetime. The x86 build follows the same mapping path
-and does not identity-map native 32-bit values.
-
-Guest 16:16 and linear32 addresses use the separate `guest_memory` instance.
+Directly composable original Win32/x86 process-local pointer/HANDLE carriers
+retain their 32-bit value. A fixed-width original ABI that cannot carry a
+pointer owns a source-shaped narrow table; it must not be generalized into a
+session identity service. Guest 16:16 and linear32 addresses use a bounded
+lease rather than a durable pointer.
 A synchronous historical pointer API may receive a native pointer only through
 a checked address/span/access/epoch lease. The pointer is not serialized,
 retained by asynchronous work or passed across a component ABI.
 
-Only identities are tokenized. Numeric length, offset, flag, time, error,
-register and guest-address fields keep their original meaning. Arithmetic is
-validated in a wider temporary type before narrowing. Native structures that
-contain pointers or HANDLEs are materialized and translated in the owning
-adapter.
+Numeric length, offset, flag, time, error, register and guest-address fields
+keep their original meaning. Arithmetic is validated in a wider temporary type
+before narrowing. Native structures that contain pointers or HANDLEs are
+materialized and translated in the owning adapter.
 
 ## Session and broker code
 
 Every project-owned stateful API takes or is bound to an explicit session
 instance. Thread entry to imported MVDM code binds the current monitor context
-and unbinds it on exit. No project-global current machine, mapping manager or
-resource table is allowed.
+and unbinds it on exit. No project-global current machine or generic resource
+table is allowed; a source-shaped process-local table is permitted only where
+its fixed-width original ABI requires it.
 
 Broker messages contain only versioned copied fields and broker-owned IDs.
 They never contain local surrogate IDs, native HANDLEs/pointers, guest

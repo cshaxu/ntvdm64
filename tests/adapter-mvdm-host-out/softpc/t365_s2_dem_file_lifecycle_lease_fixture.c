@@ -5,7 +5,6 @@
 #include <string.h>
 
 #include "mvdm_guest_location.h"
-#include "mvdm_host_identity.h"
 #include "session/session.h"
 
 typedef struct fixture_memory {
@@ -53,7 +52,6 @@ int main(void)
     uint32_t copiedBytes;
     DWORD bytesWritten;
     DWORD bytesRead;
-    uint32_t identity;
     int result = 1;
 
     memset(&memory, 0, sizeof(memory));
@@ -83,11 +81,10 @@ int main(void)
         goto dispose_session;
     }
 
-    if (!mvdm_host_identity_publish_words((uintptr_t)file, &handleHigh,
-        &handleLow) || (identity = ((uint32_t)handleHigh << 16u) |
-        handleLow) == 0u ||
-        (nativeFile = mvdm_host_identity_resolve_words(handleHigh, handleLow))
-        != (uintptr_t)file) {
+    handleHigh = (uint16_t)((uintptr_t)file >> 16u);
+    handleLow = (uint16_t)(uintptr_t)file;
+    nativeFile = ((uintptr_t)handleHigh << 16u) | handleLow;
+    if (nativeFile != (uintptr_t)file) {
         result = 3;
         goto dispose_session;
     }
@@ -99,7 +96,7 @@ int main(void)
         bytesRead != sizeof(payload) || !mvdm_guest_location_release(&lease, 1) ||
         memcmp(memory.bytes + 0x1000u, payload, sizeof(payload)) != 0) {
         result = 4;
-        goto release_identity;
+        goto close_file;
     }
 
     if (!mvdm_guest_location_set_real_mode(&invalidLocation, 0xffffu, 0xffffu)
@@ -107,14 +104,13 @@ int main(void)
             GUEST_MEMORY_ACCESS_WRITE, &lease) ||
         memcmp(memory.bytes + 0x1000u, payload, sizeof(payload)) != 0) {
         result = 5;
-        goto release_identity;
+        goto close_file;
     }
     result = 0;
 
-release_identity:
+close_file:
     if (!CloseHandle(file) && result == 0) result = 6;
     file = INVALID_HANDLE_VALUE;
-    if (!mvdm_host_identity_release(identity) && result == 0) result = 7;
 dispose_session:
     if (!session_thread_unbind(&instance) && result == 0) result = 8;
     session_guest_memory_end(&instance);

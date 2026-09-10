@@ -61,8 +61,8 @@
    boundaries. A missing interface is assigned to one named family before a
    mirror source is modified to bypass it.
 8. `session` is dependency-neutral and owns one independent VDM instance's
-   lifecycle, mapping-manager instances, resources, completions/events and
-   teardown. It has no BOP, DOS, WOW, VDD, Redirector or Win32 service
+   lifecycle, resources, completions/events and teardown. It has no BOP, DOS,
+   WOW, VDD, Redirector or Win32 service
    vocabulary.
 9. `app` creates and wires session instances. The current product binds one
    active imported MVDM host context per process and permits multiple
@@ -80,18 +80,13 @@
     a native pointer/HANDLE, local mapping token, guest pointer, Bochs object,
     CRT-owned object or cross-process callback.
 13. Guest width and host width are orthogonal. Imported MVDM code observes
-    original 16/32-bit ABI values and a session-owned 32-bit compatibility
-    object space; native x86/x64 resources remain behind adapters.
-14. One mapping-manager implementation has separate per-session typed
-    instances for guest memory, host resources and completion/callback
-    records. Instances do not share a numeric namespace. Candidate allocation
-    begins at zero, skips source-proven reserved values, is monotonic, and does
-    not reuse IDs within a session.
-15. The x86 product maps opaque native resources and may not use identity
-    pass-through. The same rule constrains any future host architecture, but
-    native x64 compilation is not a current closure requirement. A surrogate
-    is restored to a native resource only
-    by its owning adapter. A native resource never enters MVDM or guest state.
+    original 16/32-bit ABI values; directly composable native x86 resources
+    retain their original process-local carrier.
+14. A fixed-width original ABI that cannot carry a native value may own the
+    smallest source-shaped table required by that ABI. It must not become a
+    shared session mapping/token service.
+15. A native resource never enters guest state or broker IPC. Native x64 is
+    not a product, build, runtime or acceptance target.
 16. Numeric data is not an opaque identity. Lengths, offsets, times, flags,
     errors, registers and guest addresses retain original semantics and must
     receive explicit range and overflow validation.

@@ -129,8 +129,7 @@ from this window returns to Console; it does not select `X86GFX`, fabricate a
 Console Server fullscreen mapping, or change original SoftPC fullscreen state.
 
 The app never receives a source DIB pointer, `HPALETTE`, or source mutex.
-The source-facing adapter resolves the original DIB mutex through the
-session's existing host-resource mapping manager, waits and copies the
+The source-facing adapter uses the original DIB mutex value directly, waits and copies the
 graphics/palette snapshot before app paints.  User close requests a typed
 session cancellation; normal app teardown posts a distinct shutdown message
 and waits for the UI thread before session disposal.

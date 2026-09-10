@@ -13,7 +13,7 @@ $build = Join-Path $root ("build/M0-T308/S1/{0}" -f $Architecture)
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path $vs) -or !(Get-Command ninja -ErrorAction SilentlyContinue)) { throw 'Missing MSVC Build Tools or Ninja.' }
 $sources = @(
-    'src/session/mapping_manager.c', 'src/session/guest_memory_lease.c', 'src/session/session.c',
+    'src/session/guest_memory_lease.c', 'src/session/session.c',
     'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c',
     'src/adapter-mvdm-host-out/monitor/source/vdm_control.c',
     'src/adapter-mvdm-host-out/monitor/mvdm_vdm_tib.c')

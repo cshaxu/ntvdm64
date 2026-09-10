@@ -1,6 +1,5 @@
 #include "cmd.h"
 
-#include "adapter-mvdm-host-out/softpc/include/mvdm_host_identity.h"
 #include "session/session.h"
 
 PREDIRCOMPLETE_INFO cmdCheckStandardHandles(PVDMINFO info,
@@ -51,9 +50,7 @@ int main(void)
     USHORT standard_handles;
     PREDIRCOMPLETE_INFO redirection;
     session instance;
-    uint32_t redirection_identity;
     uint32_t handle_identity;
-    uintptr_t native_value;
 
     RtlZeroMemory(&information, sizeof(information));
     standard_handles = 0xffffu;
@@ -77,25 +74,17 @@ int main(void)
         redirection->ri_hStdOut != information.StdOut ||
         redirection->ri_hStdErr != information.StdErr)
         return 3;
-    if (!mvdm_host_identity_publish((uintptr_t)redirection,
-        &redirection_identity))
-        return 4;
-    fixture_ax = (USHORT)(redirection_identity >> 16);
-    fixture_bx = (USHORT)redirection_identity;
+    fixture_ax = (USHORT)((ULONG)(uintptr_t)redirection >> 16);
+    fixture_bx = (USHORT)(ULONG)(uintptr_t)redirection;
     fixture_cx = 0u; /* HANDLE_STDIN from the original cmdsvc.h */
     fixture_dx = 0xffffu;
     fixture_carry = 1u;
     cmdGetStdHandle();
     handle_identity = ((uint32_t)fixture_bx << 16) | fixture_cx;
     if (fixture_carry != 0u || fixture_ax != 0u || fixture_dx != 0u ||
-        !mvdm_host_identity_resolve(handle_identity, &native_value) ||
-        native_value != (uintptr_t)information.StdIn)
+        handle_identity != (uint32_t)(uintptr_t)information.StdIn)
         return 5;
-    if (!mvdm_host_identity_release(handle_identity))
-        return 6;
     if (!cmdCheckCopyForRedirection(redirection))
-        return 7;
-    if (mvdm_host_identity_resolve(redirection_identity, &native_value))
         return 8;
     if (!session_thread_unbind(&instance) || !session_dispose(&instance))
         return 9;

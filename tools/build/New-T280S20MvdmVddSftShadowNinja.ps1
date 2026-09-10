@@ -28,14 +28,12 @@ rule link
   command = link /nologo /out:`$out `$in
   description = LINK `$out
 
-build obj/mapping_manager.obj: cc `$root/src/session/mapping_manager.c
 build obj/guest_memory_lease.obj: cc `$root/src/session/guest_memory_lease.c
 build obj/session.obj: cc `$root/src/session/session.c
-build obj/mvdm_host_identity.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_host_identity.c
 build obj/mvdm_guest_location.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_guest_location.c
 build obj/mvdm_vdd_sft_shadow.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_vdd_sft_shadow.c
 build obj/fixture.obj: cc `$root/tests/adapter-mvdm-host-out/softpc/t280_s20_mvdm_vdd_sft_shadow_fixture.c
-build mvdm_vdd_sft_shadow_fixture.exe: link obj/mapping_manager.obj obj/guest_memory_lease.obj obj/session.obj obj/mvdm_host_identity.obj obj/mvdm_guest_location.obj obj/mvdm_vdd_sft_shadow.obj obj/fixture.obj
+build mvdm_vdd_sft_shadow_fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/mvdm_guest_location.obj obj/mvdm_vdd_sft_shadow.obj obj/fixture.obj
 default mvdm_vdd_sft_shadow_fixture.exe
 "@
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))

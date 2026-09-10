@@ -351,18 +351,8 @@ errorReturn:
         setDX(0);
     }
 
-    {
-        USHORT handleHigh, handleLow;
-        if (!mvdm_host_identity_publish_words((uintptr_t)hFile, &handleHigh,
-            &handleLow)) {
-            CloseHandle(hFile);
-            SetLastError(ERROR_NOT_ENOUGH_MEMORY);
-            demClientError(INVALID_HANDLE_VALUE, *lpFileName);
-            return;
-        }
-        setBP(handleLow);
-        setAX(handleHigh);
-    }
+    setBP((USHORT)(ULONG)(uintptr_t)hFile);
+    setAX((USHORT)((ULONG)(uintptr_t)hFile >> 16));
     setCF(0);
     if (dupFileName) {
         free(dupFileName);
@@ -779,18 +769,8 @@ DWORD   dwLastError;
     }
     setCX ((USHORT)dwFileSize);
     setBX ((USHORT)(dwFileSize >> 16 ));
-    {
-        USHORT handleHigh, handleLow;
-        if (!mvdm_host_identity_publish_words((uintptr_t)hFile, &handleHigh,
-            &handleLow)) {
-            CloseHandle(hFile);
-            SetLastError(ERROR_NOT_ENOUGH_MEMORY);
-            demClientError(INVALID_HANDLE_VALUE, *lpFileName);
-            return;
-        }
-        setBP(handleLow);
-        setAX(handleHigh);
-    }
+    setBP((USHORT)(ULONG)(uintptr_t)hFile);
+    setAX((USHORT)((ULONG)(uintptr_t)hFile >> 16));
     setCF(0);
     mvdm_softpc_record_dem_create(getDS(), getSI(), 1u, 0u, getAX(), getCF());
     return;

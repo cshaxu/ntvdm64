@@ -270,38 +270,19 @@ Guest width and host pointer width are orthogonal:
 ```text
 guest 16:16 / linear32 / opaque16-or-32
         -> original MVDM logic
-        -> session-owned 32-bit compatibility object space
-        -> native x86 or x64 HANDLE/pointer/resource
+        -> original Win32/x86 process-local carrier or bounded lease
+        -> native x86 HANDLE/pointer/resource
 ```
 
-Both x86 and x64 builds use the same mapping path. Native x86 values are not
-identity-passed merely because they fit in 32 bits. Imported MVDM code observes
-historical 32-bit surrogate identities; native resources remain in adapters
-and session state.
-
-One mapping-manager implementation is instantiated separately per session and
-resource class:
-
-- `guest_memory`: guest 16:16/linear32 ranges to checked synchronous native
-  memory leases;
-- `host_resource`: MVDM surrogate32 identities to native HANDLE/pointer-sized
-  resources;
-- `completion_callback`: MVDM surrogate32 identities to asynchronous
-  completion, child, event or callback records.
-
-Each instance owns a monotonic allocator, forward and reverse lookup, reserved
-ABI sentinels, stale tombstones and teardown. Candidate allocation begins at
-zero and skips values reserved by that original ABI. Instances do not share a
-numeric namespace, and IDs are not reused during the session lifetime.
-
-Only opaque identity is tokenized. Lengths, offsets, flags, times, error codes
-and guest addresses retain numeric meaning and receive explicit range/overflow
-checks. A directly dereferenced guest pointer is a bounded epoch-scoped lease,
-not a durable token. Structures containing pointers/HANDLEs are materialized
-as native x86/x64 structures in the owning adapter and translated back.
-
-Local surrogate IDs never cross the broker boundary. Broker session/request
-identities use their own fixed-width wire contract.
+The product has one Win32/x86 MVDM context per process, so directly composable
+original 32-bit host carriers retain their native x86 value. Lengths, offsets,
+flags, times, error codes and guest addresses retain numeric meaning and
+receive explicit range/overflow checks. A directly dereferenced guest pointer
+is a bounded epoch-scoped lease, not durable state. When an original narrow
+ABI cannot carry a pointer (for example a Redirector WORD handle), its owner
+maintains the smallest source-shaped private table. Native pointers, handles
+and private tables never cross the broker boundary; broker identities use their
+own fixed-width wire contract.
 
 ## Source union and mirror rules
 

@@ -70,7 +70,6 @@ HANDLE  hFile;
 LONG    lLoc;
 USHORT  usDX,usCX;
 
-    DWORD handleIdentity = GETULONG(getAX(), getBP());
 
     hFile = GETHANDLE(getAX(), getBP());
 
@@ -109,7 +108,6 @@ USHORT  usDX,usCX;
         VrRemoveOpenNamedPipeInfo(hFile);
     }
 
-    (void)mvdm_host_identity_release(handleIdentity);
     setCF(0);
     return;
 }

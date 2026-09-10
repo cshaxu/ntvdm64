@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <conapi.h>
-#include <dialog_context.h>
 #include "insignia.h"
 #include "host_def.h"
 /*
@@ -789,16 +788,14 @@ INT_PTR CALLBACK ErrorDialogEvents(HWND hDlg, UINT wMsg, WPARAM wParam,
 
             SwpDosDialogs(hDlg, pedgi->hWndCon, HWND_TOPMOST, 0);
 
-            /* DIVERGENCE MVDM-HOST-DIV-022: retain the original dialog
-             * context lifetime without truncating its host-only pointer. */
-            opennt_dialog_set_context(hDlg, pedgi);
+            SetWindowLong(hDlg, DWL_USER, (LONG)pedgi);
 
             break;
 
 
         /*:::::::::::::::::::::::::::::::: Trap and process button messages */
         case WM_COMMAND:
-            pedgi = (PERRORDIALOGINFO)opennt_dialog_get_context(hDlg);
+            pedgi = (PERRORDIALOGINFO)GetWindowLong(hDlg,DWL_USER);
             i = (int) LOWORD(wParam);
             switch (i) {
                  case IDB_QUIT:

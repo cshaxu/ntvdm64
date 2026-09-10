@@ -36,9 +36,8 @@ rule run
 build obj/vdm_control_fixture.obj: cc `$root/tests/adapter-mvdm-host-out/monitor/vdm_control_fixture.c
 build obj/vdm_control.obj: cc `$root/src/adapter-mvdm-host-out/monitor/source/vdm_control.c
 build obj/session.obj: cc `$root/src/session/session.c
-build obj/mapping_manager.obj: cc `$root/src/session/mapping_manager.c
 build obj/guest_memory_lease.obj: cc `$root/src/session/guest_memory_lease.c
-build vdm_control_fixture.exe: link obj/vdm_control_fixture.obj obj/vdm_control.obj obj/session.obj obj/mapping_manager.obj obj/guest_memory_lease.obj
+build vdm_control_fixture.exe: link obj/vdm_control_fixture.obj obj/vdm_control.obj obj/session.obj obj/guest_memory_lease.obj
 build test: run vdm_control_fixture.exe
 default vdm_control_fixture.exe
 "@

@@ -26,14 +26,13 @@ rule cc
 rule link
   command = cmd /c "`$environment link /nologo /out:`$out `$in"
   description = LINK `$out
-build obj/mapping_manager.obj: cc `$root/src/session/mapping_manager.c
 build obj/guest_memory_lease.obj: cc `$root/src/session/guest_memory_lease.c
 build obj/session.obj: cc `$root/src/session/session.c
 build obj/task_frame.obj: cc `$root/src/adapter-mvdm-host-out/monitor/mvdm_wow_task_frame.c
 build obj/pointer_scope.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_wow_pointer_scope.c
 build obj/callback_transaction.obj: cc `$root/src/adapter-mvdm-host-out/wow/mvdm_wow_callback_transaction.c
 build obj/fixture.obj: cc `$root/tests/adapter-mvdm-host-out/wow/t291_s3_wow_callback_transaction_fixture.c
-build bin/t291-s3-wow-callback-transaction-fixture.exe: link obj/mapping_manager.obj obj/guest_memory_lease.obj obj/session.obj obj/task_frame.obj obj/pointer_scope.obj obj/callback_transaction.obj obj/fixture.obj
+build bin/t291-s3-wow-callback-transaction-fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/task_frame.obj obj/pointer_scope.obj obj/callback_transaction.obj obj/fixture.obj
 default bin/t291-s3-wow-callback-transaction-fixture.exe
 "@
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))

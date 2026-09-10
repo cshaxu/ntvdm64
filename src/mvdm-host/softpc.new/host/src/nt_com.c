@@ -378,7 +378,7 @@ GLOBAL CPU int host_com_open(int adapter)
     }
     current->rxwindow_size = DEFAULT_RXWINDOW_SIZE;
     current->bytes_in_rxwindow = 0;
-    current->SyncWrite = (BOOL)(ULONG_PTR)config_inquire(C_COM_SYNCWRITE, NULL);
+    current->SyncWrite = (BOOL)config_inquire(C_COM_SYNCWRITE, NULL);
     /*:: Find out which ICA controller and line are used by this comms port */
 
     com_int_data(adapter, &current->controller, &current->line);
@@ -418,7 +418,7 @@ GLOBAL CPU int host_com_open(int adapter)
     current->SignalRXThread = (DWORD) 0;
     /*:::::::::::::::::::::::::::::::::::::::::::: Get TX buffer thresholds */
 
-    current->max_tx_threshold = (short)(ULONG_PTR)config_inquire(C_COM_TXBUFFER_SIZE, NULL);
+    current->max_tx_threshold = (short)config_inquire(C_COM_TXBUFFER_SIZE, NULL);
     if (!current->max_tx_threshold || current->max_tx_threshold > TX_MAX_BUFFER)
 	current->max_tx_threshold = TX_MAX_BUFFER;
 

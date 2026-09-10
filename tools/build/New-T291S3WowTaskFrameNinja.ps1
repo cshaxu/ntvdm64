@@ -26,12 +26,11 @@ rule cc
 rule link
   command = cmd /c "`$environment link /nologo /out:`$out `$in"
   description = LINK `$out
-build obj/mapping_manager.obj: cc `$root/src/session/mapping_manager.c
 build obj/guest_memory_lease.obj: cc `$root/src/session/guest_memory_lease.c
 build obj/session.obj: cc `$root/src/session/session.c
 build obj/task_frame.obj: cc `$root/src/adapter-mvdm-host-out/monitor/mvdm_wow_task_frame.c
 build obj/fixture.obj: cc `$root/tests/adapter-mvdm-host-out/monitor/t291_s3_wow_task_frame_fixture.c
-build bin/t291-s3-wow-task-frame-fixture.exe: link obj/mapping_manager.obj obj/guest_memory_lease.obj obj/session.obj obj/task_frame.obj obj/fixture.obj
+build bin/t291-s3-wow-task-frame-fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/task_frame.obj obj/fixture.obj
 default bin/t291-s3-wow-task-frame-fixture.exe
 "@
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))

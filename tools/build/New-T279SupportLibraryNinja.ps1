@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('x86', 'x64')]
+    [ValidateSet('x86')]
     [string]$Architecture,
     [string]$RepositoryRoot = ''
 )
@@ -14,33 +14,15 @@ $build = Join-Path $root ("build/M0-T279/{0}" -f $Architecture)
 New-Item -ItemType Directory -Force $build | Out-Null
 
 $common = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src/adapter-mvdm-host-out/win32/include /I ' + $root + '/src/mvdm-host/inc /I ' + $root + '/src/mvdm-host/oemuni'
-$unsafeFileDefines = ''
-$unsafeProcessDefines = ''
-$overlayObject = ''
-if ($Architecture -eq 'x64') {
-    $unsafeFileDefines = ' /DFindFirstFileOem=opennt_original_FindFirstFileOem /DFindNextFileOem=opennt_original_FindNextFileOem /DGetFullPathNameOem=opennt_original_GetFullPathNameOem'
-    $unsafeProcessDefines = ' /DSearchPathOem=opennt_original_SearchPathOem'
-    $overlayObject = ' obj/oemuni_pointer_width.obj'
-}
 
 $content = @"
 ninja_required_version = 1.10
 root = $root
 cflags = $common
-file_defines = $unsafeFileDefines
-process_defines = $unsafeProcessDefines
-suballoc_defines = $(if ($Architecture -eq 'x86') { '/Di386' } else { '' })
+suballoc_defines = /Di386
 
 rule cc
   command = cl `$cflags `$defines /Fo`$out /c `$in
-  deps = msvc
-  description = CC `$out
-rule cc_file
-  command = cl `$cflags `$file_defines /Fo`$out /c `$in
-  deps = msvc
-  description = CC `$out
-rule cc_process
-  command = cl `$cflags `$process_defines /Fo`$out /c `$in
   deps = msvc
   description = CC `$out
 rule cc_suballoc
@@ -59,26 +41,16 @@ rule run
 
 build obj/opennt_support_rtl.obj: cc `$root/src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c
 build adapter-mvdm-host-out-win32.lib: lib obj/opennt_support_rtl.obj
-build obj/file.obj: cc_file `$root/src/mvdm-host/oemuni/file.c
-build obj/process.obj: cc_process `$root/src/mvdm-host/oemuni/process.c
+build obj/file.obj: cc `$root/src/mvdm-host/oemuni/file.c
+build obj/process.obj: cc `$root/src/mvdm-host/oemuni/process.c
 build obj/suballoc.obj: cc_suballoc `$root/src/mvdm-host/suballoc/suballoc.c
 "@
 $content += "`n"
-if ($Architecture -eq 'x64') {
-    $content += @"
-build obj/oemuni_pointer_width.obj: cc `$root/src/mvdm-host-overlay/oemuni/oemuni_pointer_width.c
-build oemuni.lib: lib obj/file.obj obj/process.obj obj/oemuni_pointer_width.obj
-build obj/oemuni_pointer_width_fixture.obj: cc `$root/tests/mvdm-host/oemuni_pointer_width_fixture.c
-build oemuni_pointer_width_fixture.exe: link obj/oemuni_pointer_width_fixture.obj oemuni.lib adapter-mvdm-host-out-win32.lib
-build test: run oemuni_pointer_width_fixture.exe
-"@
-} else {
-    $content += "`nbuild oemuni.lib: lib obj/file.obj obj/process.obj`n"
-}
+$content += "`nbuild oemuni.lib: lib obj/file.obj obj/process.obj`n"
 $content += "`n"
 $content += @"
 build suballoc.lib: lib obj/suballoc.obj
-build all: phony adapter-mvdm-host-out-win32.lib oemuni.lib suballoc.lib$(if ($Architecture -eq 'x64') { ' oemuni_pointer_width_fixture.exe' } else { '' })
+build all: phony adapter-mvdm-host-out-win32.lib oemuni.lib suballoc.lib
 default all
 "@
 $content += "`n"

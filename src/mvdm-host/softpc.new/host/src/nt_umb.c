@@ -42,10 +42,6 @@ Revision History:
 #include <nt_vdd.h>
 #include <nt_vddp.h>
 #include <emm.h>
-/* DIVERGENCE(MVDM-HOST-DIV-049): legacy UMB APIs use PVOID only as a
- * fixed-width guest physical-address carrier; use the matching private
- * native-width codec instead of truncating a host-width integer. */
-#include <mvdm_umb_address.h>
 
 PUMBNODE
 SpliceUMB(
@@ -108,10 +104,7 @@ DWORD	*Size
 
     DWORD dwBase;
 
-    if (!mvdm_umb_address_decode(*Address, &dwBase)) {
-        SetLastError(ERROR_INVALID_ADDRESS);
-        return FALSE;
-    }
+    dwBase = (DWORD)*Address;
 
     // get the UMB list header
     UMB = UMBList;
@@ -191,7 +184,7 @@ DWORD	*Size
 	    }
 #endif
 	    // return the block address
-	    *Address = mvdm_umb_address_encode(UMB->Base);
+            *Address = (PVOID)UMB->Base;
 	    break;
 
 	case UMB_OWNER_XMS:
@@ -205,7 +198,7 @@ DWORD	*Size
 	    }
 	    else {
 		UMB->Owner = UMB_OWNER_XMS;
-		*Address = mvdm_umb_address_encode(UMB->Base);
+        *Address = (PVOID)UMB->Base;
 		*Size = UMB->Size;
 	    }
 	    break;
@@ -334,10 +327,7 @@ DWORD	Size
 
 
 
-    if (!mvdm_umb_address_decode(Address, &dwBase)) {
-        SetLastError(ERROR_INVALID_ADDRESS);
-        return FALSE;
-    }
+    dwBase = (DWORD)Address;
 
     UMB = UMBList;
     // size, address and owner must match before releasing
@@ -373,7 +363,7 @@ DWORD	Size
 	    }
 #endif
 	    UMB->Owner = UMB_OWNER_RAM;
-	    xmsReleaseUMBNotify(mvdm_umb_address_encode(UMB->Base), UMB->Size);
+        xmsReleaseUMBNotify((PVOID)UMB->Base, UMB->Size);
 	    break;
 
 	case UMB_OWNER_VDD:
@@ -413,7 +403,7 @@ DWORD	Size
 	    }
 #endif
 	    UMB->Owner = UMB_OWNER_RAM;
-	    xmsReleaseUMBNotify(mvdm_umb_address_encode(UMB->Base), UMB->Size);
+        xmsReleaseUMBNotify((PVOID)UMB->Base, UMB->Size);
 	    break;
 
 	default:
@@ -444,10 +434,7 @@ DWORD	Size
 
     UMB = UMBList;
 
-    if (!mvdm_umb_address_decode(Address, &dwBase)) {
-        SetLastError(ERROR_INVALID_ADDRESS);
-        return FALSE;
-    }
+    dwBase = (DWORD)Address;
     while(UMB != NULL && (UMB->Owner != UMB_OWNER_VDD ||
 			  UMB->Base + UMB->Size < dwBase + Size ||
 			  UMB->Base > dwBase + Size)) {
@@ -539,10 +526,7 @@ DWORD	Size
 
 
 
-    if (!mvdm_umb_address_decode(Address, &dwBase)) {
-        SetLastError(ERROR_INVALID_ADDRESS);
-        return FALSE;
-    }
+    dwBase = (DWORD)Address;
     UMB = UMBList;
     while(UMB != NULL && (UMB->Owner != UMB_OWNER_VDD ||
 			  UMB->Base + UMB->Size < dwBase + Size ||

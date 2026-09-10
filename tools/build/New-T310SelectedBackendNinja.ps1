@@ -33,7 +33,8 @@ $environment = Join-Path $build 'msvc-mt.cmd'
     Set-Content -LiteralPath $environment -Encoding ascii
 
 $sources = @(
-    'src/session/mapping_manager.c',
+    ,
+    ,
     'src/session/guest_memory_lease.c',
     'src/session/session.c',
     'src/app/machine_shell.c',
@@ -60,9 +61,9 @@ for ($index = 0; $index -lt $sources.Count; ++$index) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $source)))
     $objects += $object
 }
-$graph.Add('build session-backend-selection-test.exe: link obj/0-mapping_manager.obj obj/1-guest_memory_lease.obj obj/2-session.obj obj/4-backend_selection_test.obj')
-$graph.Add('build app-backend-selection-test.exe: link obj/0-mapping_manager.obj obj/1-guest_memory_lease.obj obj/2-session.obj obj/3-machine_shell.obj obj/5-backend_selection_test.obj')
-$graph.Add('build softpc-backend-selection-test.exe: link obj/0-mapping_manager.obj obj/1-guest_memory_lease.obj obj/2-session.obj obj/6-mvdm_vdm_stack.obj obj/7-softpc_backend_selection_test.obj')
+$graph.Add('build session-backend-selection-test.exe: link obj/1-guest_memory_lease.obj obj/2-session.obj obj/4-backend_selection_test.obj')
+$graph.Add('build app-backend-selection-test.exe: link obj/1-guest_memory_lease.obj obj/2-session.obj obj/3-machine_shell.obj obj/5-backend_selection_test.obj')
+$graph.Add('build softpc-backend-selection-test.exe: link obj/1-guest_memory_lease.obj obj/2-session.obj obj/6-mvdm_vdm_stack.obj obj/7-softpc_backend_selection_test.obj')
 $graph.Add('build verify: run session-backend-selection-test.exe')
 $graph.Add('build verify-app: run app-backend-selection-test.exe')
 $graph.Add('build verify-softpc: run softpc-backend-selection-test.exe')

@@ -38,7 +38,6 @@
 #include "emm.h"
 #include <demexp.h>
 #include <vint.h>
-#include <mvdm_umb_address.h>
 
 #include "mvdm_softpc_firmware.h"
 #include "mvdm_softpc_vdd_configuration.h"
@@ -595,7 +594,6 @@ unsigned short get_lim_page_frames(USHORT * page_table,
     USHORT  total_phys_pages, base_segment, i;
     BOOL reserve_umb_status;
     ULONG page_frame, size;
-    PVOID encoded_page_frame;
 
     /* we search for the primary EMM page frame first from 0xE0000.
      * if we can not find it there, then look for anywhere in UMB area.
@@ -609,26 +607,16 @@ unsigned short get_lim_page_frames(USHORT * page_table,
 
     /* specificaly ask for 0xE0000 */
     page_frame = 0xE0000;
-    encoded_page_frame = mvdm_umb_address_encode(page_frame);
     /* primary page frames are always EMM_PAGE_SIZE * 4 */
     size = EMM_PAGE_SIZE * 4;
-    reserve_umb_status = ReserveUMB(UMB_OWNER_EMM, &encoded_page_frame, &size);
-    if (reserve_umb_status &&
-        !mvdm_umb_address_decode(encoded_page_frame, &page_frame)) {
-        reserve_umb_status = FALSE;
-    }
+    reserve_umb_status = ReserveUMB(UMB_OWNER_EMM, (PVOID *)&page_frame, &size);
     /* if failed to find the primary page frame at 0xE0000, search for anywhere
      * available in the UMB area
      */
     if (!reserve_umb_status) {
 	page_frame = 0;
-	encoded_page_frame = mvdm_umb_address_encode(page_frame);
 	size  = 0x10000;
-	reserve_umb_status = ReserveUMB(UMB_OWNER_EMM, &encoded_page_frame, &size);
-	if (reserve_umb_status &&
-	    !mvdm_umb_address_decode(encoded_page_frame, &page_frame)) {
-	    reserve_umb_status = FALSE;
-	}
+	reserve_umb_status = ReserveUMB(UMB_OWNER_EMM, (PVOID *)&page_frame, &size);
     }
     if (!reserve_umb_status) {
 #ifdef EMM_DEBUG
@@ -656,10 +644,8 @@ unsigned short get_lim_page_frames(USHORT * page_table,
     if (lim_data->use_all_umb) {
 	while (TRUE) {
 	    page_frame = 0;
-	    encoded_page_frame = mvdm_umb_address_encode(page_frame);
 	    size = EMM_PAGE_SIZE;
-	    if (ReserveUMB(UMB_OWNER_EMM, &encoded_page_frame, &size) &&
-		mvdm_umb_address_decode(encoded_page_frame, &page_frame))
+	    if (ReserveUMB(UMB_OWNER_EMM, (PVOID *)&page_frame, &size))
 	       page_table[total_phys_pages++] = (short)(page_frame / 16);
 	    else
 		break;
@@ -818,7 +804,6 @@ BOOL VDDInstallMemoryHook (
 PMEM_HOOK_DATA pmh = MemHookHead,pmhNew,pmhLast=NULL;
 
     DWORD dwStart;
-    PVOID encodedStart;
 
 
     if (count == 0 || pStart == (PVOID)NULL || count > 0x20000) {
@@ -827,16 +812,8 @@ PMEM_HOOK_DATA pmh = MemHookHead,pmhNew,pmhLast=NULL;
     }
        // round addr down to next page boundary
        // round count up to next page boundary
-    /* DIVERGENCE(MVDM-HOST-DIV-063): this VDD ABI spells a guest physical
-     * address as PVOID.  Retain that public shape, but decode the numeric
-     * guest carrier before page arithmetic instead of narrowing a host
-     * pointer on x64. */
-    if (!mvdm_umb_address_decode(pStart, &dwStart)) {
-        SetLastError(ERROR_INVALID_PARAMETER);
-        return FALSE;
-    }
-    dwStart &= ~(HOST_PAGE_SIZE-1);
-    count  += (DWORD)(ULONG_PTR)pStart - dwStart;
+    dwStart = (DWORD)pStart & ~(HOST_PAGE_SIZE-1);
+    count  += (DWORD)pStart - dwStart;
     count   = (count + HOST_PAGE_SIZE - 1) & ~(HOST_PAGE_SIZE-1);
 
     if (dwStart < 0xC0000) {
@@ -864,9 +841,7 @@ PMEM_HOOK_DATA pmh = MemHookHead,pmhNew,pmhLast=NULL;
     }
     // the request block is not overlapped with existing blocks,
     // request the UMB managing function to allocate the block
-    encodedStart = mvdm_umb_address_encode(dwStart);
-    if (!ReserveUMB(UMB_OWNER_VDD, &encodedStart, &count) ||
-        !mvdm_umb_address_decode(encodedStart, &dwStart)) {
+    if (!ReserveUMB(UMB_OWNER_VDD, (PVOID *)&dwStart, &count)) {
 	free(pmhNew);
 	SetLastError(ERROR_ACCESS_DENIED);
 	return FALSE;
@@ -922,12 +897,8 @@ PMEM_HOOK_DATA pmh = MemHookHead,pmhLast=NULL;
 
        // round addr down to next page boundary
        // round count up to next page boundary
-    if (!mvdm_umb_address_decode(pStart, &dwStart)) {
-        SetLastError(ERROR_INVALID_PARAMETER);
-        return FALSE;
-    }
-    dwStart &= ~(HOST_PAGE_SIZE-1);
-    count  += (DWORD)(ULONG_PTR)pStart - dwStart;
+    dwStart = (DWORD)pStart & ~(HOST_PAGE_SIZE-1);
+    count  += (DWORD)pStart - dwStart;
     count   = (count + HOST_PAGE_SIZE - 1) & ~(HOST_PAGE_SIZE-1);
     while (pmh) {
 	if (pmh->hvdd == hVDD &&
@@ -945,7 +916,7 @@ PMEM_HOOK_DATA pmh = MemHookHead,pmhLast=NULL;
 	    // care of this. It is because we want to maintain a single
 	    // version of VDD support routines while move platform depedend
 	    // routines into the other module.
-    if (ReleaseUMB(UMB_OWNER_VDD,mvdm_umb_address_encode(dwStart), count)) {
+	    if (ReleaseUMB(UMB_OWNER_VDD,(PVOID)dwStart, count)) {
 	       // free the node.
 	       free(pmh);
 	       return TRUE;
@@ -979,19 +950,15 @@ DWORD	count
     }
     // round addr down to next page boundary
     // round count up to next page boundary
-    if (!mvdm_umb_address_decode(pStart, &dwStart)) {
-        SetLastError(ERROR_INVALID_ADDRESS);
-        return FALSE;
-    }
-    dwStart &= ~(HOST_PAGE_SIZE-1);
-    count  += (DWORD)(ULONG_PTR)pStart - dwStart;
+    dwStart = (DWORD)pStart & ~(HOST_PAGE_SIZE-1);
+    count  += (DWORD)pStart - dwStart;
     count   = (count + HOST_PAGE_SIZE - 1) & ~(HOST_PAGE_SIZE-1);
 
     while(pmh) {
 	if (pmh->hvdd == hVDD &&
 	    pmh->StartAddr <= dwStart &&
 	    pmh->StartAddr + pmh->Count >= dwStart + count)
-	    return(VDDCommitUMB(mvdm_umb_address_encode(dwStart), count));
+	    return(VDDCommitUMB((PVOID)dwStart, count));
 	pmh = pmh->next;
     }
     SetLastError(ERROR_INVALID_ADDRESS);
@@ -1016,19 +983,15 @@ DWORD	count
     }
     // round addr down to next page boundary
     // round count up to next page boundary
-    if (!mvdm_umb_address_decode(pStart, &dwStart)) {
-        SetLastError(ERROR_INVALID_ADDRESS);
-        return FALSE;
-    }
-    dwStart &= ~(HOST_PAGE_SIZE-1);
-    count  += (DWORD)(ULONG_PTR)pStart - dwStart;
+    dwStart = (DWORD)pStart & ~(HOST_PAGE_SIZE-1);
+    count  += (DWORD)pStart - dwStart;
     count   = (count + HOST_PAGE_SIZE - 1) & ~(HOST_PAGE_SIZE-1);
 
     while(pmh) {
 	if (pmh->hvdd == hVDD &&
 	    pmh->StartAddr <= dwStart &&
 	    pmh->StartAddr + pmh->Count >= dwStart + count)
-	    return(VDDDeCommitUMB(mvdm_umb_address_encode(dwStart), count));
+	    return(VDDDeCommitUMB((PVOID)dwStart, count));
 	pmh = pmh->next;
     }
     SetLastError(ERROR_INVALID_ADDRESS);
@@ -1047,7 +1010,6 @@ DWORD	count
 )
 {
     DWORD   dwStart;
-    PVOID encodedStart;
 
     if (count == 0 || pStart == NULL){
 	SetLastError(ERROR_INVALID_ADDRESS);
@@ -1055,15 +1017,10 @@ DWORD	count
     }
        // round addr down to next page boundary
        // round count up to next page boundary
-    if (!mvdm_umb_address_decode(pStart, &dwStart)) {
-        SetLastError(ERROR_INVALID_ADDRESS);
-        return FALSE;
-    }
-    dwStart &= ~(HOST_PAGE_SIZE-1);
-    count  += (DWORD)(ULONG_PTR)pStart - dwStart;
+    dwStart = (DWORD)pStart & ~(HOST_PAGE_SIZE-1);
+    count  += (DWORD)pStart - dwStart;
     count   = (count + HOST_PAGE_SIZE - 1) & ~(HOST_PAGE_SIZE-1);
-    encodedStart = mvdm_umb_address_encode(dwStart);
-    return(ReserveUMB(UMB_OWNER_NONE, &encodedStart, &count));
+    return(ReserveUMB(UMB_OWNER_NONE, (PVOID *) &dwStart, &count));
 }
 
 BOOL
@@ -1075,7 +1032,6 @@ DWORD	count
 {
 
     DWORD dwStart;
-    PVOID encodedStart;
 
     if (count == 0 || pStart == NULL) {
 	SetLastError(ERROR_INVALID_ADDRESS);
@@ -1083,15 +1039,10 @@ DWORD	count
     }
        // round addr down to next page boundary
        // round count up to next page boundary
-    if (!mvdm_umb_address_decode(pStart, &dwStart)) {
-        SetLastError(ERROR_INVALID_ADDRESS);
-        return FALSE;
-    }
-    dwStart &= ~(HOST_PAGE_SIZE-1);
-    count  += (DWORD)(ULONG_PTR)pStart - dwStart;
+    dwStart = (DWORD)pStart & ~(HOST_PAGE_SIZE-1);
+    count  += (DWORD)pStart - dwStart;
     count   = (count + HOST_PAGE_SIZE - 1) & ~(HOST_PAGE_SIZE-1);
-    encodedStart = mvdm_umb_address_encode(dwStart);
-    return(ReserveUMB(UMB_OWNER_ROM, &encodedStart, &count));
+    return(ReserveUMB(UMB_OWNER_ROM, (PVOID *) &dwStart, &count));
 }
 
 
@@ -1109,17 +1060,15 @@ VOID DispatchPageFault (
 {
 PMEM_HOOK_DATA pmh = MemHookHead;
 
-    /* DIVERGENCE(MVDM-HOST-DIV-063): kernel VDM no longer delivers a host
-     * virtual fault pointer.  The selected user-mode SoftPC boundary passes
-     * the original Intel linear address directly, so do not recover that
-     * number by truncating Sim32GetVDMPointer() on x64. */
+    // dispatch intel linear address always
+    FaultAddr -= (ULONG)Sim32GetVDMPointer(0, 0, FALSE);
     // Find the VDD and its handler which is to be called for this fault
     while (pmh) {
 	if (pmh->StartAddr <= FaultAddr &&
             FaultAddr <= (pmh->StartAddr + pmh->Count)) {
 
             // Call the VDD's memory hook handler
-            (*pmh->MemHandler) (mvdm_umb_address_encode(FaultAddr), RWMode);
+            (*pmh->MemHandler) ((PVOID)FaultAddr, RWMode);
             return;
         }
 	else {
