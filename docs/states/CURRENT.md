@@ -10,7 +10,7 @@ remains preserved locally on `codex/product-wip-preserved-20260910`.
 
 ## Latest Td Closure
 
-[Td S2 P1 strict documentation-topology convergence](../history/m0-td.md) archived 1,001 non-authority files with hashes, retained five current design authorities, consolidated task history, and reduced `etc` to its approved source policy and index.
+[Td S2 P1 strict documentation-topology convergence](../history/m0-td-consolidated-history.md) archived 1,001 non-authority files with hashes, retained five current design authorities, consolidated and task-introduction-named history records, and reduced `etc` to explicitly owned supporting material.
 
 ## Latest Product Closure
 

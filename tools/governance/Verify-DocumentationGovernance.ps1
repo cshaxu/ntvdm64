@@ -43,6 +43,12 @@ foreach ($name in $requiredDesign) {
     }
 }
 
+Get-ChildItem -LiteralPath (Join-Path $docs 'history') -File -Filter '*.md' | ForEach-Object {
+    if ($_.Name -notmatch '^m\d+-(?:t\d+|td)-.+\.md$') {
+        throw "History record must use task-id and introduction naming: docs/history/$($_.Name)"
+    }
+}
+
 $status = Get-Content -LiteralPath (Join-Path $docs 'states/CURRENT.md') -Raw
 foreach ($heading in @('## Current Work', '## Current Technical Baseline')) {
     if ($status -notmatch [regex]::Escape($heading)) {
