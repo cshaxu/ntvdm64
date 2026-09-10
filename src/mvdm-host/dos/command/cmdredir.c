@@ -13,7 +13,7 @@
 #include <mvdm.h>
 #include <ctype.h>
 
-#include "adapter-mvdm-host-out/softpc/include/mvdm_command_redirection.h"
+#include "adapter-mvdm-host-out/redir/include/mvdm_command_redirection.h"
 /* DIVERGENCE(MVDM-HOST-DIV-120): the two original pipe workers are cdecl
  * void(LPVOID) forms.  Bind their original calls to the same session-aware
  * WINAPI boundary used by the selected COMMAND child worker.  The bridge also

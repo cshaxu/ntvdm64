@@ -41,10 +41,8 @@ receives a DOS record through its original BOP and performs the original DOS
 
 ## M0 T387 positional command declaration
 
-The ordinary product spelling is either
-`ntvdm32.exe <command> [argument ...]` or
-`ntvdm64.exe <command> [argument ...]`, matching the published host
-architecture. The command contract is otherwise identical.
+The ordinary product spelling is
+`ntvdm32.exe <command> [argument ...]`.
 The first non-SoftPC option and the remainder form one app-declared DOS command
 that travels through the existing Base VDM record. Earlier original SoftPC
 options remain untouched. A one-token command preserves that token verbatim;
@@ -65,8 +63,7 @@ resident PermCom; an explicit positional target is copied into the original
 boundary ends the session only after its copied record has been consumed and
 PermCom makes its next original request.
 
-Every DOS positional target, including `ntvdm32.exe command.com` or
-`ntvdm64.exe command.com`, is therefore an
+Every DOS positional target, including `ntvdm32.exe command.com`, is therefore an
 ordinary guest EXEC target. A second `COMMAND.COM` receives no app/session/BOP
 specific handling:
 it retains the same `DoReEnter -> Do16BitPrompt` route, banner, prompt and

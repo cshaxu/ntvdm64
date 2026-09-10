@@ -2,7 +2,7 @@
 #include "app/launch_declaration.h"
 #include "app/package_layout.h"
 #include "app/presentation_window.h"
-#include "adapter-mvdm-host-out/softpc/include/mvdm_command_native_child.h"
+#include "adapter-mvdm-host-out/basesrv/include/mvdm_command_native_child.h"
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_termination.h"
 #include "adapter-mvdm-host-out/win32/include/mvdm_base_vdm_environment.h"
 

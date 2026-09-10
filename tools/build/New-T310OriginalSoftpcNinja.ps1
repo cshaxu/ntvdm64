@@ -70,7 +70,6 @@ $disksRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/disks'
 $supportRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/support'
 $videoRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/video'
 $cvidcRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/cvidc'
-$gdpGenerator = Join-Path $root 'tools/build/Generate-T310GdpSlots.mjs'
 $gdpOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/base/cvidc'
 $umbOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/host/src'
 $commandOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/dos/command'
@@ -102,6 +101,7 @@ $appRoot = Join-Path $root 'src/app'
 $adapterBaseSrvRoot = Join-Path $root 'src/adapter-mvdm-host-out/basesrv/source'
 $adapterMonitorRoot = Join-Path $root 'src/adapter-mvdm-host-out/monitor/source'
 $adapterRedirRoot = Join-Path $root 'src/adapter-mvdm-host-out/redir'
+$adapterVddRoot = Join-Path $root 'src/adapter-mvdm-host-out/vdd'
 $patchRoot = Join-Path $root 'src/mvdm-softpc-patch/x86/prod'
 $patchBodyRoot = Join-Path $root 'src/mvdm-softpc-patch/patches/common'
 $patchEvidenceRoot = Join-Path $root 'src/mvdm-softpc-patch/patches'
@@ -231,12 +231,16 @@ $adapterWin32Names = @('dialog_context.c', 'ntioapi_facade.c', 'thread_start_com
 # sources.  It already has one same-shaped session-owned implementation; keep
 # it in the formal closure instead of accepting an unresolved external edge.
 $adapterBaseSrvNames = @('base_vdm_client.c', 'base_vdm_local.c', 'base_vdm_broker.c',
-                          'mvdm_image_classification.c')
+                          'mvdm_image_classification.c', 'mvdm_command_guest_state.c',
+                          'mvdm_command_native_child.c')
+$adapterVddNames = @('mvdm_vdd_sft_shadow.c', 'mvdm_softpc_vdd_unavailable.c',
+                     'mvdm_softpc_vdd_configuration.c')
 $adapterMonitorNames = @('vdm_control.c', '../mvdm_vdm_tib.c')
 $adapterDebuggerNames = @('dbg_init.c', 'dbg_state.c', 'dbg_dispatch.c', 'dbg_unavailable.c')
 $adapterRedirNames = @('mvdm_redirector_handle.c', 'mvdm_redirector_mailslot.c',
                        'mvdm_redirector_guest_copy.c', 'mvdm_redirector_async.c',
-                       'mvdm_redirector_remote_unavailable.c')
+                       'mvdm_redirector_remote_unavailable.c',
+                       'mvdm_command_redirection.c')
 # `vrnetapi.c` directly consumes this original OpenNT status-to-LAN-Manager
 # conversion algorithm.  Keep it in its separately mirrored non-MVDM owner
 # rather than duplicating a status table in Redirector or an adapter.
@@ -244,13 +248,10 @@ $openntNetlibNames = @('ntstatus.c', 'copystr.c', 'allocstr.c', 'initoem.c')
 $openntNetapiNames = @('apibuff.c')
 $openntBaseVdmNames = @('vdm.c')
 $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c', 'mvdm_host_identity.c',
-                        'mvdm_guest_location.c', 'mvdm_command_redirection.c', 'mvdm_command_guest_state.c',
-                        'mvdm_command_native_child.c',
-                        'mvdm_vdd_sft_shadow.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
+                        'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
                         'mvdm_softpc_event_thread.c',
                         'mvdm_softpc_presentation_font.c',
-                        'mvdm_softpc_descriptor_fields.c',
-                        'mvdm_softpc_vdd_unavailable.c', 'mvdm_softpc_vdd_configuration.c')
+                        'mvdm_softpc_descriptor_fields.c')
 $appNames = @('machine_shell.c', 'package_layout.c', 'launch_declaration.c', 'presentation_window.c', 'entry.c')
 $effectiveAddressSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_effective_address.c'
 $effectiveAddressObject = 'obj/adapter-softpc/mvdm_softpc_effective_address.obj'
@@ -342,6 +343,9 @@ foreach ($name in $adapterSoftpcNames) {
 foreach ($name in $adapterRedirNames) {
     if (!(Test-Path -LiteralPath (Join-Path $adapterRedirRoot $name))) { throw "Required Redirector adapter source missing: $name" }
 }
+foreach ($name in $adapterVddNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $adapterVddRoot $name))) { throw "Required VDD adapter source missing: $name" }
+}
 foreach ($name in $openntNetlibNames) {
     if (!(Test-Path -LiteralPath (Join-Path $openntNetlibRoot $name))) { throw "Original OpenNT netlib source missing: $name" }
 }
@@ -367,7 +371,7 @@ foreach ($name in $patchEvidenceNames) {
     if (!(Test-Path -LiteralPath (Join-Path $patchEvidenceRoot $name))) { throw "Registered SoftPC patch evidence missing: $name" }
 }
 
-New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/gdp'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/dpmi'), (Join-Path $build 'obj/suballoc'), (Join-Path $build 'obj/session'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/adapter-redir'), (Join-Path $build 'obj/opennt-netlib'), (Join-Path $build 'obj/opennt-base-vdm'), (Join-Path $build 'obj/patch') | Out-Null
+New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/dpmi'), (Join-Path $build 'obj/suballoc'), (Join-Path $build 'obj/session'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/adapter-redir'), (Join-Path $build 'obj/adapter-vdd'), (Join-Path $build 'obj/opennt-netlib'), (Join-Path $build 'obj/opennt-base-vdm'), (Join-Path $build 'obj/patch') | Out-Null
 $embeddedRomResource = Get-Content -LiteralPath $hostEntryResourceSource -Raw
 foreach ($romSource in $embeddedRomSources) {
     if (!(Test-Path -LiteralPath $romSource -PathType Leaf)) {
@@ -388,7 +392,6 @@ foreach ($romSource in $embeddedRomSources) {
 }
 [IO.File]::WriteAllText($embeddedRomResourceSource, $embeddedRomResource,
     [Text.Encoding]::ASCII)
-if (!(Test-Path -LiteralPath $gdpGenerator -PathType Leaf)) { throw "GDP slot generator missing: $gdpGenerator" }
 if (!(Test-Path -LiteralPath $gdpOverlayRoot -PathType Container)) { throw "GDP overlay root missing: $gdpOverlayRoot" }
 if (!(Test-Path -LiteralPath $umbOverlayRoot -PathType Container)) { throw "UMB overlay root missing: $umbOverlayRoot" }
 if ([string]::IsNullOrWhiteSpace($NodeExecutable)) { $NodeExecutable = $env:MVDM_NODE22 }
@@ -405,8 +408,6 @@ function Get-NodeSha256([string]$Path) {
     }
     return $hash
 }
-$gdpGeneratedRoot = Join-Path $build 'generated/gdp'
-& $NodeExecutable $gdpGenerator $root $gdpGeneratedRoot | Out-Null
 # Ninja schedules translation units itself.  The runner initializes the Visual
 # Studio environment exactly once before Ninja starts, so rules invoke the MSVC
 # tools directly.  Do not add /MP: nesting it below Ninja's job scheduler would
@@ -426,6 +427,7 @@ $includeRootPaths = @(
     # facade.  This must precede mvdm-host/inc so the selected original
     # Redirector bodies never cast a guest-visible DWORD to a native HANDLE.
     'src/adapter-mvdm-host-out/redir/include',
+    'src/adapter-mvdm-host-out/vdd/include',
     # The adapter owns the modern `nt.h` type binding. Original reached NT
     # public-header subsets are restored under opennt-host below, so source
     # files still resolve historical short names without an adapter copy.
@@ -489,7 +491,6 @@ foreach ($path in $includeRootPaths) {
     }
 }
 $softpcIncludeRoots = $softpcIncludeRootPaths | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
-$gdpGeneratedInclude = '/I "' + (NinjaPath $gdpGeneratedRoot) + '"'
 $cvidcGeneratedRoot = Join-Path $build 'generated'
 $cvidcGeneratedInclude = '/I "' + (NinjaPath $cvidcGeneratedRoot) + '"'
 
@@ -520,7 +521,7 @@ $cvidcFirstIncludeRoots = $cvidcFirstRootPaths | ForEach-Object { '/I "' + (Ninj
 $baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' +
     ''
-$baseFlags = $baseCommonFlags + ($softpcIncludeRoots -join ' ') + ' ' + $gdpGeneratedInclude
+$baseFlags = $baseCommonFlags + ($softpcIncludeRoots -join ' ')
 $hostFlags = $baseFlags + ' /FI "' + (NinjaPath $hostCrtRedirect) + '"'
 # The original OpenNT ABI header exposes its user-mode VDM TIB under _X86_.
 # This is a declaration gate for the selected Win32/x86 build, not the retired
@@ -529,8 +530,8 @@ $hostFlags = $baseFlags + ' /FI "' + (NinjaPath $hostCrtRedirect) + '"'
 # adapter boundary.  DPMI receives the original header from opennt-abi; the
 # adapter supplies only session TLS storage.
 $dpmiArchitectureFlags = if ($Architecture -eq 'x86') { ' /D_X86_ ' } else { ' ' }
-$dpmiFlags = $baseCommonFlags + $dpmiArchitectureFlags + ($includeRoots -join ' ') + ' ' + $gdpGeneratedInclude
-$cvidcFirstFlags = $baseCommonFlags + ($cvidcFirstIncludeRoots -join ' ') + ' ' + $gdpGeneratedInclude + ' ' + $cvidcGeneratedInclude
+$dpmiFlags = $baseCommonFlags + $dpmiArchitectureFlags + ($includeRoots -join ' ')
+$cvidcFirstFlags = $baseCommonFlags + ($cvidcFirstIncludeRoots -join ' ') + ' ' + $cvidcGeneratedInclude
 $cvidcRuleFlags = $cvidcFirstFlags + ' /DCVIDC_RULE_WORD'
 # `accessfn.c` is selected by the original C-VID manifest as the non-CCPU
 # vector facade for host/DPMI callers.  It must keep its original non-PROD
@@ -677,9 +678,6 @@ $cvidcObjects = foreach ($name in $cvidcNames) {
     $graph.Add('build ' + $object + ': ' + $rule + ' ' + (NinjaPath (Join-Path $cvidcRoot $name)))
     $object
 }
-$gdpOverlaySource = Join-Path $gdpOverlayRoot 'mvdm_gdp_state.c'
-$graph.Add('build obj/cvidc/mvdm_gdp_state.obj: cc ' + (NinjaPath $gdpOverlaySource))
-$cvidcObjects += 'obj/cvidc/mvdm_gdp_state.obj'
 $cvidcVectorBindingSource = Join-Path $gdpOverlayRoot 'mvdm_cvidc_vector_binding.c'
 $cvidcCpuBindingInclude = Join-Path $build 'generated/cvidc_cpu_binding.inc'
 $cvidcCpuBindingGenerator = Join-Path $root 'tools/build/GenerateCvidcCpuBinding.mjs'
@@ -842,6 +840,11 @@ $adapterRedirObjects = foreach ($name in $adapterRedirNames) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterRedirRoot $name)))
     $object
 }
+$adapterVddObjects = foreach ($name in $adapterVddNames) {
+    $object = 'obj/adapter-vdd/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterVddRoot $name)))
+    $object
+}
 $openntNetlibObjects = foreach ($name in $openntNetlibNames) {
     $object = 'obj/opennt-netlib/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $openntNetlibRoot $name)))
@@ -903,6 +906,7 @@ $graph.Add('build original-softpc-base-trace.lib: lib ' + ($baseDebugObjects -jo
 $graph.Add('build original-softpc-host-roots.lib: lib ' + ($hostObjects -join ' '))
 $graph.Add('build softpc-bindings.lib: lib ' + ($adapterSoftpcObjects -join ' '))
 $graph.Add('build redirector-bindings.lib: lib ' + ($adapterRedirObjects -join ' '))
+$graph.Add('build vdd-bindings.lib: lib ' + ($adapterVddObjects -join ' '))
 $graph.Add('build original-opennt-netlib.lib: lib ' + ($openntNetlibObjects -join ' '))
 $graph.Add('build original-opennt-netapi-api.lib: lib ' + ($openntNetapiObjects -join ' '))
 $graph.Add('build original-opennt-base-vdm.lib: lib ' + ($openntBaseVdmObjects -join ' '))
@@ -920,7 +924,7 @@ $graph.Add('build ntvdmx64-softpc-patch-evidence.lib: lib ' + ($patchBodyObjects
 $graph.Add('build ntvdmx64-softpc-ccpu-vector-defaults.lib: lib ' + $patchVectorDefaultsObject)
 $graph.Add('build ntvdmx64-softpc-activity-check.lib: lib ' + $patchActivityCheckObject)
 $graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib softpc-bindings.lib redirector-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib ntvdmx64-softpc-activity-check.lib')
-$graph.Add('build original-softpc-process.exe | original-softpc-process-import.lib: process_link obj/app/entry.obj app-machine-shell.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib softpc-bindings.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-ccpu-vector-defaults.lib ntvdmx64-softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res')
+$graph.Add('build original-softpc-process.exe | original-softpc-process-import.lib: process_link obj/app/entry.obj app-machine-shell.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib softpc-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-ccpu-vector-defaults.lib ntvdmx64-softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res')
 $graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' original-softpc-process-import.lib redirector-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib softpc-bindings.lib softpc-win32-bindings.lib session.lib broker.lib')
 $graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib ntvdmx64-softpc-patch-evidence.lib ntvdmx64-softpc-ccpu-vector-defaults.lib')
 $graph.Add('default original-softpc-candidate')

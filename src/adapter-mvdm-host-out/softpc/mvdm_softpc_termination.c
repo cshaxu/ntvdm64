@@ -224,11 +224,6 @@ void mvdm_softpc_record_unhandled_exception(
         stack_pointer = context->Esp;
         frame_pointer = context->Ebp;
         code_segment = context->SegCs;
-#elif defined(_M_X64)
-        instruction_pointer = context->Rip;
-        stack_pointer = context->Rsp;
-        frame_pointer = context->Rbp;
-        code_segment = context->SegCs;
 #endif
     }
     if (record->NumberParameters >= 2u) {

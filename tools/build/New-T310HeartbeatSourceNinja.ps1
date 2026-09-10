@@ -21,13 +21,10 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $build = Join-Path $root ("build/M0-T310/S8/p2-heartbeat-source/{0}" -f $Architecture)
-$gdpGenerator = Join-Path $root 'tools/build/Generate-T310GdpSlots.mjs'
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path -LiteralPath $vs -PathType Leaf)) { throw 'MSVC Build Tools are required.' }
-New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj'), (Join-Path $build 'generated/gdp') | Out-Null
-if (!(Test-Path -LiteralPath $gdpGenerator -PathType Leaf)) { throw "GDP slot generator missing: $gdpGenerator" }
+New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj') | Out-Null
 if (!(Test-Path -LiteralPath $NodeExecutable -PathType Leaf)) { throw "Node executable missing: $NodeExecutable" }
-& $NodeExecutable $gdpGenerator $root (Join-Path $build 'generated/gdp') | Out-Null
 
 $environment = Join-Path $build 'msvc-mt.cmd'
 @('@echo off', 'set "MVDM_T310_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready',
@@ -53,7 +50,6 @@ $includes = @(
     'src/mvdm-host/softpc.new/base/inc',
     'src/adapter-mvdm-host-out/softpc/include',
     'src/adapter-mvdm-host-out/monitor/include',
-    (Join-Path $build 'generated/gdp')
 ) | ForEach-Object {
     $includePath = if ([IO.Path]::IsPathRooted($_)) { $_ } else { Join-Path $root $_ }
     '/I "' + (NinjaPath $includePath) + '"'

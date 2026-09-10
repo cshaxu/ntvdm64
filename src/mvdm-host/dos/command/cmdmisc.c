@@ -13,7 +13,7 @@
 /* DIVERGENCE(MVDM-HOST-DIV-111): SCSINFO and SCS_ToSync were retained as
  * process-address aliases in NT4.  Preserve their 16:16 source positions and
  * obtain session-mapped guest leases only at the original access points. */
-#include "adapter-mvdm-host-out/softpc/include/mvdm_command_guest_state.h"
+#include "adapter-mvdm-host-out/basesrv/include/mvdm_command_guest_state.h"
 /* DIVERGENCE(MVDM-HOST-DIV-177): diagnostic-only COMMAND call recorder. */
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_termination.h"
 
@@ -34,7 +34,7 @@
  * host redirection-record pointer in a fixed DWORD.  Publish the same
  * source record through the session host-resource mapping instead; the
  * original record allocation, use and free ordering remain in cmdredir.c. */
-#include "adapter-mvdm-host-out/softpc/include/mvdm_command_redirection.h"
+#include "adapter-mvdm-host-out/redir/include/mvdm_command_redirection.h"
 
 
 VOID GetWowKernelCmdLine(VOID);

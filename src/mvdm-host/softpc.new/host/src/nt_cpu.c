@@ -35,13 +35,11 @@ static char SccsID[]="@(#)sun4_a3cpu.c	1.2 5/24/91 Copyright Insignia Solutions 
 
 #ifdef CPU_40_STYLE
 #include "cpu_c.h"
-/* DIVERGENCE(MVDM-HOST-DIV-048): retain the source-defined CCPU GDP field
- * names while the private overlay supplies native-width storage.  fm_c.h is
+/* DIVERGENCE(MVDM-HOST-DIV-048): fm_c.h is
  * the selected generated definition of CleanedREC, which this host carrier
  * needs to name the original EIP member rather than treating the record as
  * an untyped 32-bit word. */
 #include "fm_c.h"
-#include <mvdm_gdp_slots.h>
 #endif
 
 /* The original CCPU40 disk/FDC controller uses this independent timing

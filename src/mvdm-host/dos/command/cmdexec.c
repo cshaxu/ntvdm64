@@ -20,17 +20,17 @@
  * records crossed the original x86 guest ABI as process addresses.  Resolve
  * the same session-owned identities through the adapter, never by widening
  * their guest values into native HANDLEs or pointers. */
-#include "adapter-mvdm-host-out/softpc/include/mvdm_command_redirection.h"
+#include "adapter-mvdm-host-out/redir/include/mvdm_command_redirection.h"
 /* DIVERGENCE(MVDM-HOST-DIV-111): retain the original SCSINFO layout and
  * field order, but lease its saved 16:16 guest position for this synchronous
  * operation instead of subtracting a native GetVDMAddr process pointer. */
-#include "adapter-mvdm-host-out/softpc/include/mvdm_command_guest_state.h"
+#include "adapter-mvdm-host-out/basesrv/include/mvdm_command_guest_state.h"
 /* DIVERGENCE(MVDM-HOST-DIV-196): original cmdExec32 leaves guest command,
  * environment and STD_HANDLES aliases in globals until its detached worker
  * runs.  Snapshot those same bounded inputs in the session adapter before
  * the worker starts; the original COMMAND worker remains the owner of every
  * conversion, process, wait, exit-code and re-entry decision. */
-#include "adapter-mvdm-host-out/softpc/include/mvdm_command_native_child.h"
+#include "adapter-mvdm-host-out/basesrv/include/mvdm_command_native_child.h"
 /* DIVERGENCE(MVDM-HOST-DIV-197): original BaseSrv holds RETURN_ON_NO_COMMAND
  * during the narrow CreateThread-to-INCREMENT_REENTER_COUNT interval.  The
  * one-session Base VDM seam records only that source-shaped pending interval;

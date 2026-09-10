@@ -49,7 +49,7 @@ const lines = [
   `build ${local('opennt-support-rtl.obj')}: cc ${source('src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c')}`,
   `build ${local('wcall16.obj')}: cc ${source('src/mvdm-host/wow32/wcall16.c')}`,
   `build ${local('original-wcall16.lib')}: lib ${local('wcall16.obj')}`,
-  `build ${local('original-callback-ccpu-x86.exe')}: link ${local('fixture.obj')} ${local('seams.obj')} ${local('lease.obj')} ${local('nt-aorc.obj')} ${local('opennt-support-rtl.obj')} ${local('original-wcall16.lib')} ${baseFile('obj/test/ccpu_bounded_execution_fixture_seams.obj')} ${baseFile('obj/overlay/mvdm_gdp_state.obj')} ${baseFile('obj/controller/at_dma.obj')} ${baseFile('obj/controller/ica.obj')} ${baseFile('obj/support/ios.obj')} ${baseFile('obj/patch/fmstubs_edl_fast_bop.obj')} ${baseFile('original-ccpu40.lib')} ${baseFile('original-host-lifecycle.lib')} ${baseFile('lifecycle-adapter.lib')}`,
+  `build ${local('original-callback-ccpu-x86.exe')}: link ${local('fixture.obj')} ${local('seams.obj')} ${local('lease.obj')} ${local('nt-aorc.obj')} ${local('opennt-support-rtl.obj')} ${local('original-wcall16.lib')} ${baseFile('obj/test/ccpu_bounded_execution_fixture_seams.obj')} ${baseFile('obj/controller/at_dma.obj')} ${baseFile('obj/controller/ica.obj')} ${baseFile('obj/support/ios.obj')} ${baseFile('obj/patch/fmstubs_edl_fast_bop.obj')} ${baseFile('original-ccpu40.lib')} ${baseFile('original-host-lifecycle.lib')} ${baseFile('lifecycle-adapter.lib')}`,
   `build original-callback-ccpu: phony ${local('original-callback-ccpu-x86.exe')}`,
   'default original-callback-ccpu',
   ''

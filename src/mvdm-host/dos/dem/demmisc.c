@@ -17,7 +17,7 @@
 #include <mvdm.h>
 #include <dbgsvc.h>
 #include <nt_vdd.h>
-#include "adapter-mvdm-host-out/softpc/include/mvdm_command_guest_state.h"
+#include "adapter-mvdm-host-out/basesrv/include/mvdm_command_guest_state.h"
 
 
 #if DEVL
