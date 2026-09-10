@@ -89,11 +89,7 @@ $documentRules = Get-Content -LiteralPath (Join-Path $docs 'rules/DOCUMENT.md') 
 if ($documentRules -notmatch 'Migration Exception') {
     throw 'DOCUMENT.md must define the controlled migration exception.'
 }
-foreach ($record in @(
-    'etc/operations/governance-migration.md',
-    'etc/operations/task-identifier-governance.md',
-    'etc/operations/m0-t95-subtask-plan.md'
-)) {
+foreach ($record in @('etc/operations/policy/source-policy.md')) {
     if (-not (Test-Path -LiteralPath (Join-Path $docs $record) -PathType Leaf)) {
         throw "Missing governance record: docs/$record"
     }

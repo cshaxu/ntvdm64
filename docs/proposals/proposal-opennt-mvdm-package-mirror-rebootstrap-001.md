@@ -49,7 +49,7 @@ original file, final owner/link boundary, whether the mirror needs no change,
 only a binding change, or a private overlay, any named same-shaped adapter, and
 the x86/x64 mapping consequence. A package cannot be called dispositioned
 until every selected path has one such conclusion. The classification and its
-required evidence are defined in the [final disposition taxonomy](../etc/operations/m0-t276-final-integration-disposition-taxonomy-001.md).
+required evidence are defined in the [final disposition taxonomy](../../artifacts/documentation-archive/20260910/strict-topology/etc/operations/m0-t276-final-integration-disposition-taxonomy-001.md).
 
 The current profile binds one active imported MVDM host context to each
 `ntvdm.exe` process and permits multiple processes. DOS child programs,
@@ -190,7 +190,7 @@ is the [MVDM package dependency and interface-closure tracker](proposal-mvdm-pac
 It must close before an original host provider or adapter ABI is enabled.
 
 Thereafter the queue admits complete owner packages in the dependency order
-defined by the [MVDM recovery-wave plan](../etc/operations/mvdm-package-recovery-wave-plan-001.md):
+defined by the [MVDM recovery-wave plan](../../artifacts/documentation-archive/20260910/strict-topology/etc/operations/mvdm-package-recovery-wave-plan-001.md):
 low-dependency support; host control/DEM; COMMAND; XMS; monitor; DPMI;
 Redirector/brokered COMMAND; WOW; VDD/debugger; then product composition.
 

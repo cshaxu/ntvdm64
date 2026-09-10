@@ -3,7 +3,7 @@
 ## Closed package
 
 **MVDM host mirror-topology recovery** closed as `M0 T311`; its closure is
-[recorded in history](../history/m0-t311-mvdm-host-support-reintegration-closure-20260830.md).
+[recorded in history](../../artifacts/documentation-archive/20260910/strict-topology/history/raw/m0-t311-mvdm-host-support-reintegration-closure-20260830.md).
 This retained proposal is source-of-truth evidence for that completed move;
 it is not a current candidate.
 

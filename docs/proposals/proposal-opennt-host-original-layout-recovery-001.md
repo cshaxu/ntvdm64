@@ -29,7 +29,7 @@ No new BOP behavior is authorized by this layout-recovery task.
 ## Source of truth
 
 The file-by-file baseline is
-[T261 S1 host source-truth audit](../etc/operations/m0-t261-s1-opennt-host-source-truth-audit-001.md).
+[T261 S1 host source-truth audit](../../artifacts/documentation-archive/20260910/strict-topology/etc/operations/m0-t261-s1-opennt-host-source-truth-audit-001.md).
 It is the only permitted inventory for the migration.  A later discovered
 source or dependency must be added to that audit before it enters an S.
 

@@ -46,7 +46,7 @@ The former S3--S9 implementation outline is superseded. Each named boundary is
 now recovered only alongside its original MVDM owner package, after
 [`proposal-mvdm-package-interface-closure-tracker-001.md`](proposal-mvdm-package-interface-closure-tracker-001.md)
 closes and according to
-[`mvdm-package-recovery-wave-plan-001.md`](../etc/operations/mvdm-package-recovery-wave-plan-001.md).
+[`mvdm-package-recovery-wave-plan-001.md`](../../artifacts/documentation-archive/20260910/strict-topology/etc/operations/mvdm-package-recovery-wave-plan-001.md).
 
 ## Closure criteria
 

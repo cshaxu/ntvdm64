@@ -16,7 +16,7 @@ needed to preserve their original call shape. It establishes sources,
 interface owners, finite stopping boundaries and reversion targets, not
 provider execution.
 
-The program authority is the [package-recovery proposal set](../etc/operations/package-recovery-program-20260827.md).
+The program authority is the [package-recovery proposal set](../../artifacts/documentation-archive/20260910/strict-topology/etc/operations/package-recovery-program-20260827.md).
 The active `M0 T301` is its first package; each subsequent candidate is
 ordered in Queue and can be admitted only after its stated predecessor closes.
 

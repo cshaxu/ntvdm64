@@ -38,7 +38,7 @@ link the latest closure/debt disposition; implementation must not proceed in
 that state. T95's legacy r1--r23 labels remain
 run/evidence iterations, not T, S, or P identifiers. Their classification and
 the Td exception are in
-[task-identifier governance](../etc/operations/task-identifier-governance.md).
+[task-identifier governance](../../artifacts/documentation-archive/20260910/strict-topology/etc/operations/task-identifier-governance.md).
 
 ## Active S Packet
 

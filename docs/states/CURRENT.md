@@ -2,17 +2,15 @@
 
 ## Current Work
 
-**No active numeric M/T/S packet. Td S1 P3 is closed.**
+**No active numeric M/T/S packet. Td S2 P1 is closed.**
 
-M0 T401 remains closed as a bounded single-process WRITE diagnostic
-reconciliation. Td S1 P3 closes documentation declutter and output hygiene;
-it does not close or alter any product T work. Pending product implementation
-is preserved locally on `codex/product-wip-preserved-20260910` and requires
-its own admitted packet before continuation.
+M0 T401 remains closed. Td S2 P1 has converged the documentation tree to the
+strict topology; no product T was closed or changed. Pending product work
+remains preserved locally on `codex/product-wip-preserved-20260910`.
 
 ## Latest Td Closure
 
-[Td S1 P3 documentation declutter and output hygiene](../history/td-documentation-repository-declutter-20260910.md) records the governed build, deployment, and observation locations; the preserved WIP boundary; and the verification result.
+[Td S2 P1 strict documentation-topology convergence](../history/m0-td.md) archived 1,001 non-authority files with hashes, retained five current design authorities, consolidated task history, and reduced `etc` to its approved source policy and index.
 
 ## Latest Product Closure
 
@@ -20,7 +18,7 @@ its own admitted packet before continuation.
 
 ## Latest Governance Closure
 
-[M0 Td status governance compaction](../history/m0-td-status-governance-compaction-20260910.md).
+[M0 Td status governance compaction](../../artifacts/documentation-archive/20260910/strict-topology/history/raw/m0-td-status-governance-compaction-20260910.md).
 
 ## Current Technical Baseline
 

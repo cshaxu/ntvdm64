@@ -46,7 +46,7 @@ than silently rewriting or deleting material conclusions.
 ## Identifier Authority
 
 The project task hierarchy is `M<milestone> T<task> S<subtask> P<part>` and is
-defined by [task-identifier governance](../etc/operations/task-identifier-governance.md).
+defined by [task-identifier governance](../../artifacts/documentation-archive/20260910/strict-topology/etc/operations/task-identifier-governance.md).
 Legacy `M`, `G`, `R`, `r`, and pre-policy `S` labels are evidence
 aliases; they do not allocate or redefine current T tasks. `STATUS.md` owns
 the sole active numeric T/S packet, `QUEUE.md` owns only unnumbered candidate
