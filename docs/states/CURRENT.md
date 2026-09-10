@@ -2,9 +2,9 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 Td S4 P3 completed the remaining admission
-and retention controls; the runtime recovery queue remains owner-held until a
-candidate is explicitly admitted.
+**No active M/T/S packet.** M0 Td S5 P1 recorded the candidate-2
+three-program broker split and its proposed cleanup policy; the runtime
+recovery queue remains owner-held until a candidate is explicitly admitted.
 
 ## Latest Packet Closure
 
@@ -19,6 +19,12 @@ passed.
 [M0 T401 WRITE diagnostic reconciliation](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t401-s4-write-compatible-dc-non-equivalence-001.md).
 
 ## Latest Governance Closure
+
+M0 Td S5 P1 clarified the unadmitted cross-process-broker proposal: `run16`
+is the standalone BaseClient/CLI entry, `basesrv` owns broker selection and
+cleanup, and `ntvdm` returns to the worker role.  It records a one-minute
+idle-worker policy as a future product policy, not as an OpenNT fact.  No
+product source, runtime, ABI, Queue order, or candidate admission changed.
 
 M0 Td S2 P1 strengthened the governance gate with fixed-topology, compact
 state, supporting-index, encoding, relative-link and anchor checks; it also
@@ -38,6 +44,7 @@ ABI, build, runtime or queue ordering changed.
 
 ## Recent Governance
 
+- **M0 Td S5 P1:** clarified the candidate-2 standalone broker split and proposed cleanup policy; no product behavior changed.
 - **M0 Td S2 P1:** fixed topology, links, index, encoding, and compact status controls.
 - **M0 Td S3 P1:** CI, self-test, and one-candidate/one-proposal queue controls.
 - **M0 Td S3 P2:** identifier, authority schema, path allowlist, and queue/TODO checks.
