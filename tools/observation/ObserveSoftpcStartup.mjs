@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
-import { copyFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { isAbsolute, relative, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 function usage() {
@@ -9,6 +9,14 @@ function usage() {
 
 function sha256(path) {
   return createHash('sha256').update(readFileSync(path)).digest('hex');
+}
+
+const runtimeLogsRoot = resolve('O:/ntvdm64/logs');
+
+function isRuntimeLogPath(value) {
+  const candidate = resolve(value);
+  const relation = relative(runtimeLogsRoot, candidate);
+  return relation !== '' && !isAbsolute(relation) && relation !== '..' && !relation.startsWith('..\\') && !relation.startsWith('../');
 }
 
 function normalizeManifest(manifest) {
@@ -72,6 +80,10 @@ for (const key of ['launcher', 'product', 'stage', 'report']) {
   if (!options[key]) usage();
   options[key] = resolve(options[key]);
 }
+if (!isRuntimeLogPath(options.report)) {
+  throw new Error(`observation report must be below ${runtimeLogsRoot}`);
+}
+mkdirSync(runtimeLogsRoot, { recursive: true });
 let childEnvironment = undefined;
 if (options['child-environment'] !== undefined) {
   const names = [
@@ -91,6 +103,9 @@ if (options['child-environment'] !== undefined) {
   }
   if (!resolve(reportPath) || resolve(reportPath) !== reportPath) {
     throw new Error('child diagnostic report path must be absolute');
+  }
+  if (!isRuntimeLogPath(reportPath)) {
+    throw new Error(`child diagnostic report path must be below ${runtimeLogsRoot}`);
   }
   childEnvironment = { name, value: reportPath };
 }

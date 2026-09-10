@@ -163,9 +163,15 @@
   source-shaped unavailable outcome; it may not be silently omitted.
 - Generate the Ninja graph from audited owner/package manifests and dependency
   files. A configuration hash change invalidates the relevant graph/objects.
-- Put all disposable compiler, linker, generated and debug output under
-  `build/<task-id>/<run-id>/`. Do not emit it into the repository root, `src/`,
-  `tests/`, `tools/` or `artifacts/`.
+- Put all disposable compiler, linker, generated, intermediate, fixture and
+  build-result output under `build/<task-id>/<run-id>/` (or formal
+  `build/output/`). Do not emit it into the repository root, `src/`, `tests/`,
+  `tools/`, `artifacts/`, or `O:\ntvdm64`.
+- A real-package run may copy only the selected formal `ntvdm32.exe` to
+  `O:\ntvdm64\ntvdm32.exe`. Every observation, diagnostic and runtime log for
+  that run, including stdout/stderr captures, belongs below
+  `O:\ntvdm64\logs\`; no build product or log belongs beside the package-root
+  executable or guest media.
 - Put concise tracked evidence, inventories and manifests in `docs/etc/`.
   `artifacts/` is reserved for owner-requested reports and formally manifested
   deliverables.

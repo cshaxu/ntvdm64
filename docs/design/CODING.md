@@ -168,9 +168,13 @@ mirror may call or link its overlay.
 ## Build layout
 
 Ninja is generated from the source-owner and package-selection manifests.
-Disposable objects, libraries, executables and logs belong under
-`build/<task-id>/<run-id>/`. Guest objects and libraries are packaging/loading
-inputs only and never enter the host link. Formal verification currently
-covers accepted x86 CCPU40 compilation plus architecture-neutral token
+Disposable objects, libraries, generated files, fixture executables and build
+results belong under `build/<task-id>/<run-id>/`; the selected formal product
+may be published at `build/output/ntvdm32.exe`. A real-package run copies only
+that selected executable to `O:\ntvdm64\ntvdm32.exe`; its observations and all
+runtime logs belong in `O:\ntvdm64\logs\`, never in the repository or beside
+the package-root executable. Guest objects and libraries are
+packaging/loading inputs only and never enter the host link. Formal verification
+currently covers accepted x86 CCPU40 compilation plus architecture-neutral token
 behavior; `CPU_30_STYLE` is retired and historical-only; x64 compatibility
 verification is deferred until the SoftPC/MVDM execution path is connected.

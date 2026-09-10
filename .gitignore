@@ -2,3 +2,11 @@
 # repository root.  artifacts/ is deliberately not ignored: anything retained
 # there is an admitted, reviewable repository artifact.
 /build/
+
+# Disposable output accidentally emitted by legacy local commands.  New build
+# and observation tools must use the governed roots instead.
+/*.obj
+/stdout.txt
+/stderr.txt
+/report
+/report.console.txt

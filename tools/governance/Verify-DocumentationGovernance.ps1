@@ -44,33 +44,37 @@ foreach ($name in $requiredDesign) {
 }
 
 $status = Get-Content -LiteralPath (Join-Path $docs 'states/CURRENT.md') -Raw
-foreach ($heading in @('## Current Work', '## Active Packet', '## Current Technical Baseline')) {
+foreach ($heading in @('## Current Work', '## Current Technical Baseline')) {
     if ($status -notmatch [regex]::Escape($heading)) {
         throw "states/CURRENT.md is missing '$heading'"
     }
 }
 $hasActivePacket = $status -match '\*\*Active:\s+(M\d+\s+T\d+\s+S\d+|Td\s+S\d+\s+P\d+)\b'
-$hasExplicitIntermission = $status -match '\*\*No active M/T/S packet\.\*\*'
+$hasExplicitIntermission = $status -match '\*\*No active (?:numeric )?M/T/S packet\.'
 if (-not $hasActivePacket -and -not $hasExplicitIntermission) {
     throw 'states/CURRENT.md must identify an active M<milestone> T<task> S<subtask> packet, an active Td S<subtask> P<part> packet, or explicitly state that no M/T/S packet is active.'
 }
 if ($hasActivePacket -and $hasExplicitIntermission) {
     throw 'states/CURRENT.md cannot identify an active packet and a no-active-packet intermission simultaneously.'
 }
-$activePacketCount = [regex]::Matches($status, '(?m)^## Active Packet\s*$').Count
-if ($activePacketCount -ne 1) {
-    throw "states/CURRENT.md must contain exactly one active packet; found $activePacketCount."
-}
-foreach ($field in @(
-    'Identifier Mode', 'Admission And Approval', 'Objective', 'Non-goals',
-    'Reference Baseline', 'Files And ABI Surface', 'Applicable Rules',
-    'Verification', 'Expected Markers', 'Asset Needs',
-    'Reporting Requirements', 'Stop Conditions', 'Exit Criteria',
-    'Original Owner Request', 'Similar-Issue Sweep'
-)) {
-    if ($status -notmatch [regex]::Escape("| $field |")) {
-        throw "states/CURRENT.md active packet is missing '$field'."
+if ($hasActivePacket) {
+    $activePacketCount = [regex]::Matches($status, '(?m)^## Active Packet\s*$').Count
+    if ($activePacketCount -ne 1) {
+        throw "states/CURRENT.md must contain exactly one active packet; found $activePacketCount."
     }
+    foreach ($field in @(
+        'Identifier Mode', 'Admission And Approval', 'Objective', 'Non-goals',
+        'Reference Baseline', 'Files And ABI Surface', 'Applicable Rules',
+        'Verification', 'Expected Markers', 'Asset Needs',
+        'Reporting Requirements', 'Stop Conditions', 'Exit Criteria',
+        'Original Owner Request', 'Similar-Issue Sweep'
+    )) {
+        if ($status -notmatch [regex]::Escape("| $field |")) {
+            throw "states/CURRENT.md active packet is missing '$field'."
+        }
+    }
+} elseif ([regex]::Matches($status, '(?m)^## Active Packet\s*$').Count -ne 0) {
+    throw 'states/CURRENT.md must not retain an Active Packet section during an explicit intermission.'
 }
 
 $queue = Get-Content -LiteralPath (Join-Path $docs 'states/QUEUE.md') -Raw

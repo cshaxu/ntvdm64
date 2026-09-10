@@ -89,15 +89,27 @@ never a passing result.
 ## Build And Debug Output Hygiene
 
 An admitted build records its `build/<task-id>/<run-id>/` working root before
-execution. The run root is disposable: the next build must remove the previous
-run's non-reusable products before it begins, unless a recorded manifest proves
-their source/toolchain/input identity and reuse is intentional. Runtime and
-debug logs remain in that disposable root. Once a diagnosis is closed, retain
-only a concise reviewed excerpt, hash, manifest, or conclusion in `docs/etc/`;
-remove the raw debug log. `artifacts/` may receive only an owner-requested
+execution. All compiler, linker, generated, intermediate, fixture, and build
+result files, including every locally built `.exe`, remain below that root (or
+the formal `build/output/` publication path). The run root is disposable: the
+next build must remove the previous run's non-reusable products before it
+begins, unless a recorded manifest proves their source/toolchain/input identity
+and reuse is intentional. Do not emit build products into the repository root,
+`src/`, `tests/`, `tools/`, or `artifacts/`.
+
+The only permitted deployment exception is a deliberate copy of the selected
+formal product executable to `O:\ntvdm64\ntvdm32.exe` for real-package runtime
+execution. `O:\ntvdm64` is not a build root: no object, library, generated
+source, intermediate, fixture executable, or other build result may be written
+there. Every observation, diagnostic, stdout/stderr capture, trace, report,
+and runtime log from that execution must be written below
+`O:\ntvdm64\logs\`, never beside the executable or guest media. A closed
+diagnosis retains only a concise reviewed excerpt, hash, manifest, or conclusion
+in its admitted evidence record; raw logs stay in `O:\ntvdm64\logs\` until the
+owner's retention decision. `artifacts/` may receive only an owner-requested
 report or `artifacts/build/<task-id>-<version>/`, which is reserved for an
-  explicitly approved versioned executable publication and its manifest, not for
-  a configure tree, retry root, object cache, or probe.
+explicitly approved versioned executable publication and its manifest, not for
+a configure tree, retry root, object cache, probe, or raw observation log.
 
 ### Product Executable
 
@@ -112,10 +124,10 @@ staging, runtime and acceptance target. It is not a source-closure criterion;
 an x64-only issue is left untouched unless it demonstrates an
 architecture-neutral mapping-manager correctness defect.
 
-`O:\ntvdm64` is a runtime-package root, not a diagnostic workspace. JSON, TXT,
-LOG, MAP, PDB and other observation/debug records must be written below
-`O:\ntvdm64\logs\` (or the disposable admitted build root), never beside the
-product executable or guest media at the package root.
+`O:\ntvdm64` is a runtime-package root, not a build or diagnostic workspace.
+JSON, TXT, LOG, MAP, PDB and other observation/debug records must be written
+below `O:\ntvdm64\logs\`, never beside the product executable or guest media at
+the package root.
 
 A build run may use a descriptive temporary executable name inside its
 disposable `build/<task-id>/<run-id>/` root, but that name is never a product

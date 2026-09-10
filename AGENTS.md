@@ -29,5 +29,5 @@ Read these documents before changing the repository:
 - `docs/states/CURRENT.md` contains the only active packet. Apply
   `docs/rules/EXECUTION.md` for task admission, evidence, and closure.
 - Preserve unrelated changes. Do not use destructive Git operations.
-- The pre-governance document tree is retained as indexed evidence during the
-  incremental migration described in `docs/etc/operations/governance-migration.md`.
+- Historical material is retained only as indexed external archive evidence;
+  use `docs/README.md` for the current document topology.
