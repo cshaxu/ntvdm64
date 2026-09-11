@@ -2,11 +2,38 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T404 S2 is closed pending the owner's next
-admission. Its source recovery, evidence, limits and deferred next boundary
-are recorded in [the T404 S2 closure](../history/m0-t404-s2-dosx-wow-startup-contract-recovery.md).
+**Active: M0 T404 S3**
 
-## Latest Packet Closure
+## Active Packet
+
+### M0 T404 S3 P1 — presentation-window mouse input recovery
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T404 S3 P1, Ordinary Mode. |
+| Admission And Approval | Owner approved admission and direct, bounded reuse of the independently implemented mouse support. |
+| Candidate Proposal | [Presentation-window mouse input recovery](../proposals/proposal-presentation-window-mouse-input-recovery-001.md) |
+| Reference Baseline | The selected x86 `ntvdm32.exe` and its unchanged original `nt_event.c` → `nt_mouse.c` → `base/keymouse/mouse_io.c` route. |
+| Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), [document](../rules/DOCUMENT.md), and the [source policy](../etc/operations/policy/source-policy.md). |
+| Objective | Recover text-mode DOS mouse input through the existing Console-to-SoftPC-to-INT 33h path. |
+| Non-goals | Guest mouse driver/media, mouse BOP, SoftPC/OpenNT mouse algorithm changes, graphics input, generic input broker, or cross-process broker work. |
+| Files And ABI Surface | `src/app/presentation_window.[ch]`, its focused fixture/build selection, and indexed evidence only. The sole new behavior is Win32 mouse messages becoming bounded `MOUSE_EVENT_RECORD`s on the existing `CONIN$` handle. |
+| Verification | Source-path audit; focused x86 build/link; pixel/grid and button/capture tests; owner `EDIT.COM` presentation-window run; governance and diff checks. |
+| Expected Markers | Bounded `MOUSE_EVENT_RECORD`s on `CONIN$`, unchanged original mouse sources, focused fixture exit zero, and the staged x86 executable. |
+| Asset Needs | Existing text-mode `EDIT.COM` media only; no new guest binary, driver, firmware, or Microsoft component. |
+| Reporting Requirements | Record source boundary, focused build/fixture result, staged executable identity, owner-runtime limitation, and Queue disposition in indexed evidence. |
+| Similar-Issue Sweep | Inspect only the existing presentation-window keyboard input bridge and sibling mouse handoff as design references; do not sweep or alter original mouse providers. |
+| Stop Conditions | Any need to modify original mouse code, guest media, graphics coordinate semantics, or a source file outside the named boundary requires renewed admission. |
+| Exit Criteria | The selected text-mode route has focused and owner-runtime evidence; the reviewed result is committed and pushed. The proposal leaves Queue on admission because Queue contains candidates only. |
+| Original Owner Request | “在该T任务中准入一个月S任务支持鼠标；这个鼠标支持已经在另一个工作树中可直接导入；完成提交推送后，可清除队列中相应的鼠标任务。” |
+
+## S1 Closure Record
+
+[T404 S1 WOW hard-error recovery evidence](../etc/evidence/m0-t404-s1-wow-hard-error-recovery-001.md).
+
+## S2 Closure Record
+
+[T404 S2 DOSX BOP FD contract audit](../etc/evidence/m0-t404-s2-dosx-bop-fd-contract-audit-001.md).
 
 [M0 T403 x64 mirror and mapping retirement](../history/m0-t403-x64-mirror-retirement.md)
 removed the mapping manager, identity/token paths, and active x64-only

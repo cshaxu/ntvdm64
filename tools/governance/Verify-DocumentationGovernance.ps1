@@ -229,11 +229,26 @@ if ($hasActivePacket) {
     $numericMatch = [regex]::Match($status, '\*\*Active:\s+M\d+ T(?<task>\d+) S(?<subtask>\d+)\*\*')
     if ($numericMatch.Success) {
         $historyTasks = @(Get-ChildItem -LiteralPath (Join-Path $docs 'history') -File | ForEach-Object { [regex]::Match($_.Name, '^m\d+-t(?<task>\d+)-') } | Where-Object Success | ForEach-Object { [int]$_.Groups['task'].Value })
-        $expectedTask = (($historyTasks | Measure-Object -Maximum).Maximum + 1)
+        $latestClosedTask = ($historyTasks | Measure-Object -Maximum).Maximum
+        $expectedTask = $latestClosedTask + 1
         $activeTask = [int]$numericMatch.Groups['task'].Value
         $activeS = [int]$numericMatch.Groups['subtask'].Value
-        if ($activeTask -ne $expectedTask -or $activeS -lt 1) {
-            throw "New numeric packet must allocate T$expectedTask S1."
+        $reopenedTask = $activeTask -eq $latestClosedTask
+        $latestClosedS = 0
+        if ($reopenedTask) {
+            $taskHistory = @(Get-ChildItem -LiteralPath (Join-Path $docs 'history') -File |
+                Where-Object { $_.Name -match ('^m\d+-t' + $activeTask + '-') } |
+                ForEach-Object { Get-Content -LiteralPath $_.FullName -Raw })
+            $closedS = @($taskHistory | ForEach-Object {
+                [regex]::Matches($_, '\bS(?<subtask>\d+)\b')
+            } | ForEach-Object { [int]$_.Groups['subtask'].Value })
+            if ($closedS.Count -gt 0) {
+                $latestClosedS = ($closedS | Measure-Object -Maximum).Maximum
+            }
+        }
+        if ((-not $reopenedTask -and ($activeTask -ne $expectedTask -or $activeS -ne 1)) -or
+            ($reopenedTask -and $activeS -ne ($latestClosedS + 1))) {
+            throw "New numeric packet must allocate T$expectedTask S1, or reopen T$latestClosedTask at its next S."
         }
         if ($activeS -gt 1) {
             foreach ($priorS in 1..($activeS - 1)) {

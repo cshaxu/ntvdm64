@@ -51,13 +51,17 @@ int main(void)
     session owner;
     app_presentation_window window;
     RECT client;
+    uint32_t columns, rows, text_bytes;
+    uint8_t *text;
 
     session_initialize(&owner, 361u);
     app_presentation_window_initialize(&window);
     if (!session_valid(&owner) || !session_select_machine_backend(&owner,
             SESSION_MACHINE_BACKEND_SOFTPC) ||
         !app_presentation_window_prepare(&window, &owner)) return 1;
-    if (!session_activate(&owner)) return 2;
+    if (!session_activate(&owner) ||
+        !session_presentation_text_acquire_writable(&owner, 80u, 25u, 2u,
+            &text)) return 2;
     {
         session_video_event event;
         ZeroMemory(&event, sizeof(event));
@@ -66,8 +70,42 @@ int main(void)
     }
     if (!app_presentation_window_active(&window) || window.window == NULL)
         return 4;
-    if (!GetClientRect(window.window, &client) || client.right != 640 ||
-        client.bottom != 400) return 5;
+    if (!GetClientRect(window.window, &client)) return 51;
+    if (client.right <= 0 || client.bottom <= 0) return 52;
+    if (!session_presentation_text_describe(&owner, &columns, &rows,
+            &text_bytes)) return 53;
+    if (columns == 0u || rows == 0u) return 54;
+    {
+        INPUT_RECORD record;
+        DWORD read;
+        if (!FlushConsoleInputBuffer(window.input) ||
+            SendMessageW(window.window, WM_MOUSEMOVE, 0,
+                MAKELPARAM(client.right / 2, client.bottom / 2)) != 0 ||
+            !ReadConsoleInputW(window.input, &record, 1u, &read) || read != 1u ||
+            record.EventType != MOUSE_EVENT ||
+            record.Event.MouseEvent.dwMousePosition.X != (SHORT)(columns / 2u) ||
+            record.Event.MouseEvent.dwMousePosition.Y != (SHORT)(rows / 2u) ||
+            record.Event.MouseEvent.dwEventFlags != MOUSE_MOVED ||
+            record.Event.MouseEvent.dwButtonState != 0u)
+            return 6;
+        if (SendMessageW(window.window, WM_LBUTTONDOWN, MK_LBUTTON,
+                MAKELPARAM(client.right - 1, client.bottom - 1)) != 0 ||
+            !ReadConsoleInputW(window.input, &record, 1u, &read) || read != 1u ||
+            record.EventType != MOUSE_EVENT ||
+            record.Event.MouseEvent.dwMousePosition.X != (SHORT)(columns - 1u) ||
+            record.Event.MouseEvent.dwMousePosition.Y != (SHORT)(rows - 1u) ||
+            record.Event.MouseEvent.dwButtonState != FROM_LEFT_1ST_BUTTON_PRESSED ||
+            record.Event.MouseEvent.dwEventFlags != 0u)
+            return 7;
+        if (SendMessageW(window.window, WM_LBUTTONUP, 0,
+                MAKELPARAM(client.right + 60, client.bottom + 50)) != 0 ||
+            !ReadConsoleInputW(window.input, &record, 1u, &read) || read != 1u ||
+            record.EventType != MOUSE_EVENT ||
+            record.Event.MouseEvent.dwMousePosition.X != (SHORT)(columns - 1u) ||
+            record.Event.MouseEvent.dwMousePosition.Y != (SHORT)(rows - 1u) ||
+            record.Event.MouseEvent.dwButtonState != 0u)
+            return 8;
+    }
     if (!app_presentation_window_close(&window)) return 6;
     if (!session_dispose(&owner)) return 7;
     return 0;

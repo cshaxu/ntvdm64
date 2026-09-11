@@ -162,6 +162,40 @@ static void presentation_input_key(app_presentation_window *window,
     (void)WriteConsoleInputW(window->input, &record, 1u, &written);
 }
 
+static void presentation_input_mouse(app_presentation_window *window,
+    UINT message, WPARAM wparam, LPARAM lparam)
+{
+    INPUT_RECORD record;
+    DWORD written;
+    uint32_t columns, rows, text_bytes;
+    RECT client;
+    LONG x, y;
+
+    if (window == NULL || window->input == NULL || window->window == NULL ||
+        !session_presentation_text_describe(window->owner, &columns, &rows,
+            &text_bytes) || columns == 0u || rows == 0u ||
+        !GetClientRect(window->window, &client) || client.right <= client.left ||
+        client.bottom <= client.top) return;
+    UNREFERENCED_PARAMETER(wparam);
+    x = (LONG)(short)LOWORD(lparam);
+    y = (LONG)(short)HIWORD(lparam);
+    x = x < 0 ? 0 : x >= client.right ? client.right - 1 : x;
+    y = y < 0 ? 0 : y >= client.bottom ? client.bottom - 1 : y;
+    if (message == WM_LBUTTONDOWN) window->mouse_buttons |= FROM_LEFT_1ST_BUTTON_PRESSED;
+    if (message == WM_LBUTTONUP) window->mouse_buttons &= ~FROM_LEFT_1ST_BUTTON_PRESSED;
+    if (message == WM_RBUTTONDOWN) window->mouse_buttons |= RIGHTMOST_BUTTON_PRESSED;
+    if (message == WM_RBUTTONUP) window->mouse_buttons &= ~RIGHTMOST_BUTTON_PRESSED;
+    ZeroMemory(&record, sizeof(record));
+    record.EventType = MOUSE_EVENT;
+    record.Event.MouseEvent.dwMousePosition.X = (SHORT)((uint64_t)x * columns / client.right);
+    record.Event.MouseEvent.dwMousePosition.Y = (SHORT)((uint64_t)y * rows / client.bottom);
+    record.Event.MouseEvent.dwButtonState = window->mouse_buttons;
+    record.Event.MouseEvent.dwEventFlags = message == WM_MOUSEMOVE ? MOUSE_MOVED : 0u;
+    (void)WriteConsoleInputW(window->input, &record, 1u, &written);
+    if (window->mouse_buttons != 0u) SetCapture(window->window);
+    else if (GetCapture() == window->window) ReleaseCapture();
+}
+
 static void presentation_paint_text(app_presentation_window *window, HDC target)
 {
     uint32_t columns, rows, text_bytes, row, column, glyph_row;
@@ -390,6 +424,14 @@ static LRESULT CALLBACK presentation_window_proc(HWND handle, UINT message,
     case WM_KEYUP:
     case WM_SYSKEYUP:
         if (window != NULL) presentation_input_key(window, message, wparam,
+            lparam);
+        return 0;
+    case WM_MOUSEMOVE:
+    case WM_LBUTTONDOWN:
+    case WM_LBUTTONUP:
+    case WM_RBUTTONDOWN:
+    case WM_RBUTTONUP:
+        if (window != NULL) presentation_input_mouse(window, message, wparam,
             lparam);
         return 0;
     case WM_CLOSE:
