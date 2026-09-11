@@ -6,28 +6,28 @@
 
 ## Active Packet
 
-### M0 T404 S3 P13 — CPU40 BOP entry-contract audit (delivered)
+### M0 T404 S3 P14 — CPU40 DOSX direct-continuation recovery (delivered; runtime coverage limited)
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T404 S3 P13, Ordinary Mode, delivered read-only audit. P12's accepted CPU40 direct INT33 callback repair is the reference case. |
-| Admission And Approval | Owner directed on 2026-09-11: “对，你来审计。” This follows the P12 discussion of whether BOP entry bytes should be recovered or the stale assumption removed. |
-| Candidate Proposal | [CPU40 BOP entry-contract audit](../proposals/proposal-cpu40-bop-entry-contract-audit-001.md); delivered [P13 evidence](../etc/evidence/m0-t404-s3-p13-cpu40-bop-entry-contract-audit-001.md); preceding delivery: [P12 audit](../etc/evidence/m0-t404-s3-p12-native-console-mouse-interaction-audit-001.md). |
-| Reference Baseline | Selected x86 CPU40 source and composition, including `HOST_BOP_IP_FUDGE = -2`; P12 proves one guest-registered mouse callback is direct guest code rather than a BOP entry. |
+| Identifier Mode | M0 T404 S3 P14, Ordinary Mode, delivered with a recorded standalone WOW/DOSX runtime-coverage limitation. |
+| Admission And Approval | Owner approved on 2026-09-11: “批准修复，准入一个P提交”. |
+| Candidate Proposal | [CPU40 DOSX direct-continuation recovery](../proposals/proposal-cpu40-dosx-direct-continuation-recovery-001.md); source basis: [P13 audit](../etc/evidence/m0-t404-s3-p13-cpu40-bop-entry-contract-audit-001.md); delivered [P14 evidence](../etc/evidence/m0-t404-s3-p14-cpu40-dosx-direct-continuation-recovery-001.md). |
+| Reference Baseline | Selected x86 CPU40 source retains `HOST_BOP_IP_FUDGE = -2`. P13 proves the two `reset.c` inputs originate in original DOSX `enrm45`/`enrm50` continuations, not BOP stubs. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), [document](../rules/DOCUMENT.md), and the [source policy](../etc/operations/policy/source-policy.md). |
-| Objective | Classify every selected production `HOST_BOP_IP_FUDGE` route as a demonstrated BOP/trampoline, a direct guest entry, or unresolved; propose no code change. |
-| Non-goals | Changing CCPU decoding/execution, `HOST_BOP_IP_FUDGE`, CPU30, any BOP route, guest media, callbacks, coordinate semantics, Console modes, or runtime package behavior. |
-| Files And ABI Surface | Read-only selected CCPU40/SoftPC source and build manifests; new proposal and indexed audit evidence only. |
-| Verification | Exhaustive text/call-site inventory; original-source and CPU40 entry-shape review for every occurrence; diff and documentation governance checks. |
-| Expected Markers | Every occurrence has a source owner, operand provenance, entry classification, evidence, and retain/direct/unresolved disposition. |
-| Asset Needs | Existing selected source, build manifests, and P12 logs only; no new source, guest binary, firmware, or Microsoft component. |
-| Reporting Requirements | Record exact inventory, proof level, direct-entry versus host-stub distinction, and explicitly deferred routes in indexed evidence. |
-| Similar-Issue Sweep | Search definitions, additions/subtractions, address setters, BOP stub constructors, and CPU40 fetch entry only; do not widen to unrelated BOP services. |
-| Stop Conditions | Any proposed behavioral change, runtime instrumentation, guest-memory modification, CPU30 activation, or CCPU/BOP decoder change requires renewed admission. |
-| Exit Criteria | Met: the indexed audit covers every selected production occurrence and gives a justified per-route disposition; no product code changed. |
-| Original Owner Request | “对，你来审计。” |
+| Objective | Under `CPU_40_STYLE`, enter the two original DOSX continuation addresses in `reset.c` directly, without changing their historical non-CPU40 behavior; establish focused DOSX/WOW startup evidence. |
+| Non-goals | Changing CCPU decoding/execution, global `HOST_BOP_IP_FUDGE`, CPU30, any actual BOP route, guest media, callback ABI, Console behavior, adapters, or broker architecture. |
+| Files And ABI Surface | `src/mvdm-host/softpc.new/base/bios/reset.c`; selected x86 build/publication records; indexed P14 evidence. No ABI signature changes. |
+| Verification | Fresh Win32/x86 CPU40 build under `build/M0-T404/S3/`; source inspection that CPU40 alone bypasses `-2`; bounded DOSX/WOW startup run; staging only after a non-regressive result; diff and documentation governance checks. |
+| Expected Markers | Both shutdown code 9 and 0Ah select their original `enrm` target offsets exactly under CPU40; no new BOP bytes, no changed non-CPU40 expression, and a recorded startup result. |
+| Asset Needs | Existing selected source, build tooling, and existing owner runtime package only; no new source, guest binary, firmware, or Microsoft component. |
+| Reporting Requirements | Record original-source provenance, exact two-site diff, x86 build identity, runtime outcome/limitation, staging hash if published, and deferred global-BOP disposition. |
+| Similar-Issue Sweep | Reconfirm all `HOST_BOP_IP_FUDGE` consumers and direct BOP constructors; do not alter consumers outside the two P13-proven DOSX routes. |
+| Stop Conditions | A failed/regressive DOSX/WOW result, a need to touch CCPU/global BOP/CPU30, runtime instrumentation, guest modifications, or another route requires stopping and renewed admission. |
+| Exit Criteria | Met with publication limitation: both CPU40 sites are direct while non-CPU40 remains unchanged; fresh x86 build and bounded WOW/DOSX result are recorded; the new executable was not published because the run did not reach DOSX and left test workers, so the accepted P12 package was restored. |
+| Original Owner Request | “批准修复，准入一个P提交” |
 
-P12's [button-state, callback-entry, and acceptance record](../etc/evidence/m0-t404-s3-p12-native-console-mouse-interaction-audit-001.md) is delivered. P13 establishes that neither remaining CPU40 `reset.c` consumer targets a BOP: both target DOSX `enrm` continuations. A separate admission is required to make those two CPU40 entries direct and test DOSX/WOW; P13 is read-only and does not reopen P12 behavior.
+P12's [mouse acceptance record](../etc/evidence/m0-t404-s3-p12-native-console-mouse-interaction-audit-001.md) and P13's [BOP entry audit](../etc/evidence/m0-t404-s3-p13-cpu40-bop-entry-contract-audit-001.md) are delivered. P14 delivered the two CPU40-only direct continuation selections and x86 link. Its standalone WOW launch did not reach DOSX and left bounded test workers, so the product package is restored to P12 and any lifecycle/DOSX observation follow-up requires renewed admission.
 
 ## S1 Closure Record
 
