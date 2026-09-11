@@ -99,6 +99,13 @@ void mvdm_softpc_record_stream_io_update(const uint8_t *buffer,
 void mvdm_softpc_record_stream_io_result(unsigned int count,
     unsigned int wrote, unsigned int bytes_written, unsigned long error_code);
 
+/* Default-off scalar witness for the original Console mouse chain. `stage`
+ * is source-owned: 1 Console record consumed, 2 IRQ queued, 3 guest IRQ
+ * handler entered. It neither retains an input record nor changes any host,
+ * PIC, CPU, or guest state. */
+void mvdm_softpc_record_mouse_chain(unsigned int stage, int x, int y,
+    unsigned int buttons, unsigned int flags);
+
 /* Default-off fixed-container observation of the original Console-to-8042
  * keyboard route.  Arguments are source-owned scalar state only. */
 void mvdm_softpc_record_console_key(unsigned int scan_code,

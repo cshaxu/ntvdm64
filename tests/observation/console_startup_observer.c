@@ -405,6 +405,26 @@ static BOOL write_console_input_text(HANDLE input, const char *text,
     return TRUE;
 }
 
+/* This observer-only host gesture exercises the same public Console adapter
+ * branch as physical Alt+Enter. The adapter consumes it before the guest
+ * keyboard worker, so it cannot manufacture a DOS key or alter guest state. */
+static BOOL write_console_alt_enter(HANDLE input)
+{
+    INPUT_RECORD record;
+    DWORD written = 0u;
+
+    if (input == NULL || input == INVALID_HANDLE_VALUE) return FALSE;
+    memset(&record, 0, sizeof(record));
+    record.EventType = KEY_EVENT;
+    record.Event.KeyEvent.bKeyDown = TRUE;
+    record.Event.KeyEvent.wRepeatCount = 1u;
+    record.Event.KeyEvent.wVirtualKeyCode = VK_RETURN;
+    record.Event.KeyEvent.wVirtualScanCode = 0x1cu;
+    record.Event.KeyEvent.uChar.AsciiChar = '\r';
+    record.Event.KeyEvent.dwControlKeyState = LEFT_ALT_PRESSED | NUMLOCK_ON;
+    return WriteConsoleInputA(input, &record, 1u, &written) && written == 1u;
+}
+
 /* The command row must not use a wall-clock guess for initial COMMAND setup.
  * The product's default-off source marker records an original BIOS keyboard
  * read/status edge (BOP 16, AH=0/1/2).  This is the source-owned point at
@@ -463,6 +483,10 @@ int main(int argc, char **argv)
     char timed_fault_text[256] = { 0 };
     BOOL have_timed_fault_text = FALSE;
     BOOL scripted_console_input = FALSE;
+    BOOL scripted_presentation_toggle = FALSE;
+    BOOL scripted_presentation_toggle_delivered = FALSE;
+    BOOL scripted_presentation_toggle_ready = FALSE;
+    char presentation_report_path[MAX_PATH];
     const char *scripted_console_input_text = "ver\rexit\r";
     const char *scripted_console_input_sequence = "ver+exit";
     BOOL scripted_console_input_ready = FALSE;
@@ -586,6 +610,11 @@ int main(int argc, char **argv)
                     scripted_console_input = TRUE;
                     scripted_console_input_text = "ver\r";
                     scripted_console_input_sequence = "ver";
+                    continue;
+                }
+                if (strcmp(argv[argument_index],
+                           "--observe-presentation-toggle") == 0) {
+                    scripted_presentation_toggle = TRUE;
                     continue;
                 }
                 /* An explicit observer-only extension is permitted solely
@@ -825,6 +854,18 @@ int main(int argc, char **argv)
                 scripted_console_input_text, console_input_ready_report_path);
         }
     }
+    if (scripted_presentation_toggle) {
+        DWORD presentation_report_length = GetEnvironmentVariableA(
+            "MVDM_CONSOLE_PRESENTATION_REPORT_PATH", presentation_report_path,
+            (DWORD)sizeof(presentation_report_path));
+        if (presentation_report_length != 0u &&
+            presentation_report_length < sizeof(presentation_report_path))
+            scripted_presentation_toggle_ready = wait_for_report_marker(
+                presentation_report_path, "MVDM-MOUSE stage=3",
+                OBSERVATION_INPUT_READY_TIMEOUT_MS);
+        if (scripted_presentation_toggle_ready)
+            scripted_presentation_toggle_delivered = write_console_alt_enter(input);
+    }
     observation_elapsed_ms = (DWORD)(GetTickCount() - observation_started_at);
     observation_wait_ms = observation_elapsed_ms >= observation_timeout_ms ? 0u :
         observation_timeout_ms - observation_elapsed_ms;
@@ -876,6 +917,13 @@ int main(int argc, char **argv)
                 scripted_console_input ?
                     (scripted_console_input_delivered ? "delivered" : "failed") :
                     "none");
+        fprintf(report, "scripted-presentation-toggle=%s\n",
+                scripted_presentation_toggle ?
+                    (scripted_presentation_toggle_delivered ? "delivered" : "failed") :
+                    "none");
+        if (scripted_presentation_toggle)
+            fprintf(report, "scripted-presentation-toggle-ready=%s\n",
+                    scripted_presentation_toggle_ready ? "yes" : "no");
         if (scripted_console_input) {
             fprintf(report, "scripted-console-input-trigger=dos-int21-buffered-console-input\n");
             fprintf(report, "scripted-console-input-sequence=%s\n",

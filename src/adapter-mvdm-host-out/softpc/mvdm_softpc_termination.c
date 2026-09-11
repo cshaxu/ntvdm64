@@ -1036,6 +1036,19 @@ void mvdm_softpc_record_cpu_hw_interrupt_service(unsigned int vector)
         message, (DWORD)(sizeof(message) - 1));
 }
 
+void mvdm_softpc_record_mouse_chain(unsigned int stage, int x, int y,
+    unsigned int buttons, unsigned int flags)
+{
+    char message[128];
+    DWORD bytes;
+
+    bytes = (DWORD)wsprintfA(message,
+        "MVDM-MOUSE stage=%u x=%d y=%d buttons=%08lX flags=%08lX\r\n",
+        stage, x, y, (unsigned long)buttons, (unsigned long)flags);
+    mvdm_softpc_write_optional_report("MVDM_CONSOLE_PRESENTATION_REPORT_PATH",
+        message, bytes);
+}
+
 void mvdm_softpc_record_cpu_low_fault_ivt_target(unsigned int vector,
     unsigned int target_offset, unsigned int target_segment,
     unsigned int source_cs, unsigned int source_ip)

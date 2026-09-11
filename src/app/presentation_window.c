@@ -191,7 +191,29 @@ static void presentation_input_mouse(app_presentation_window *window,
     record.Event.MouseEvent.dwMousePosition.Y = (SHORT)((uint64_t)y * rows / client.bottom);
     record.Event.MouseEvent.dwButtonState = window->mouse_buttons;
     record.Event.MouseEvent.dwEventFlags = message == WM_MOUSEMOVE ? MOUSE_MOVED : 0u;
-    (void)WriteConsoleInputW(window->input, &record, 1u, &written);
+    {
+        BOOL delivered = WriteConsoleInputW(window->input, &record, 1u, &written);
+        char path[MAX_PATH];
+        char line[160];
+        HANDLE report;
+        DWORD report_written;
+        DWORD error = delivered ? ERROR_SUCCESS : GetLastError();
+        if (GetEnvironmentVariableA("MVDM_CONSOLE_PRESENTATION_REPORT_PATH",
+            path, (DWORD)sizeof(path)) != 0u &&
+            (report = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ |
+            FILE_SHARE_WRITE, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL,
+            NULL)) != INVALID_HANDLE_VALUE) {
+            DWORD length = (DWORD)wsprintfA(line,
+                "MVDM-PRESENT-MOUSE write=%u count=%lu error=%08lX x=%d y=%d buttons=%08lX flags=%08lX\r\n",
+                delivered ? 1u : 0u, (unsigned long)written,
+                (unsigned long)error, record.Event.MouseEvent.dwMousePosition.X,
+                record.Event.MouseEvent.dwMousePosition.Y,
+                (unsigned long)record.Event.MouseEvent.dwButtonState,
+                (unsigned long)record.Event.MouseEvent.dwEventFlags);
+            (void)WriteFile(report, line, length, &report_written, NULL);
+            CloseHandle(report);
+        }
+    }
     if (window->mouse_buttons != 0u) SetCapture(window->window);
     else if (GetCapture() == window->window) ReleaseCapture();
 }
@@ -353,7 +375,43 @@ static DWORD WINAPI presentation_thread(void *context)
     if (handle == NULL) goto failed;
     window->input = CreateFileW(L"CONIN$", GENERIC_READ | GENERIC_WRITE,
         FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0u, NULL);
-    if (window->input == INVALID_HANDLE_VALUE) window->input = NULL;
+    if (window->input == INVALID_HANDLE_VALUE) {
+        char path[MAX_PATH];
+        DWORD error = GetLastError();
+        window->input = NULL;
+        if (GetEnvironmentVariableA("MVDM_CONSOLE_PRESENTATION_REPORT_PATH",
+            path, (DWORD)sizeof(path)) != 0u) {
+            char line[96];
+            DWORD written;
+            HANDLE report = CreateFileA(path, FILE_APPEND_DATA,
+                FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_ALWAYS,
+                FILE_ATTRIBUTE_NORMAL, NULL);
+            if (report != INVALID_HANDLE_VALUE) {
+                DWORD length = (DWORD)wsprintfA(line,
+                    "MVDM-PRESENT-INPUT open=0 error=%08lX\r\n",
+                    (unsigned long)error);
+                (void)WriteFile(report, line, length, &written, NULL);
+                CloseHandle(report);
+            }
+        }
+    }
+    {
+        char path[MAX_PATH];
+        if (window->input != NULL && GetEnvironmentVariableA(
+            "MVDM_CONSOLE_PRESENTATION_REPORT_PATH", path, (DWORD)sizeof(path)) != 0u) {
+        char line[64];
+        DWORD written;
+        HANDLE report = CreateFileA(path, FILE_APPEND_DATA,
+            FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_ALWAYS,
+            FILE_ATTRIBUTE_NORMAL, NULL);
+            if (report != INVALID_HANDLE_VALUE) {
+            DWORD length = (DWORD)wsprintfA(line,
+                "MVDM-PRESENT-INPUT open=1\r\n");
+            (void)WriteFile(report, line, length, &written, NULL);
+                CloseHandle(report);
+            }
+        }
+    }
     if (window->input != NULL && GetConsoleMode(window->input,
         &window->input_mode)) {
         window->input_mode_saved = 1;

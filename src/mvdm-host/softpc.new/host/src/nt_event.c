@@ -1101,6 +1101,10 @@ void nt_process_mouse(PMOUSE_EVENT_RECORD MouseEvent)
     POINT mouse_pos;
     UCHAR mouse_button_left, mouse_button_right;
 
+    mvdm_softpc_record_mouse_chain(1u, MouseEvent->dwMousePosition.X,
+        MouseEvent->dwMousePosition.Y, MouseEvent->dwButtonState,
+        MouseEvent->dwEventFlags);
+
     host_ica_lock();
 
     if (NoMouseTics) {
@@ -1218,6 +1222,8 @@ void nt_process_mouse(PMOUSE_EVENT_RECORD MouseEvent)
     MouseEventBuffer[LastMouseInx].mouse_button_right = mouse_button_right;
 
     DoMouseInterrupt();
+    mvdm_softpc_record_mouse_chain(2u, mouse_pos.x, mouse_pos.y,
+        MouseEvent->dwButtonState, MouseEvent->dwEventFlags);
 
     host_ica_unlock();
 }

@@ -4,7 +4,7 @@ import { isAbsolute, relative, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 function usage() {
-  throw new Error('usage: node tools/observation/ObserveSoftpcStartup.mjs --launcher <observer.exe> --product <product.exe> --stage <runtime-dir> --report <result.txt> [--interactive | --interactive-script | --interactive-script-ver-only] [--product-command <declared-DOS-command>] [--observation-timeout-ms 10000..30000] [--minimal-host-environment] [--child-environment MVDM_SESSION_DISPOSE_REPORT_PATH=<absolute-path>|MVDM_COMMAND_CONTINUATION_REPORT_PATH=<absolute-path>|MVDM_DEM_OPEN_REPORT_PATH=<absolute-path>|MVDM_CONSOLE_PRESENTATION_REPORT_PATH=<absolute-path>]');
+  throw new Error('usage: node tools/observation/ObserveSoftpcStartup.mjs --launcher <observer.exe> --product <product.exe> --stage <runtime-dir> --report <result.txt> [--interactive | --interactive-script | --interactive-script-ver-only | --presentation-toggle] [--product-command <declared-DOS-command>] [--observation-timeout-ms 10000..30000] [--minimal-host-environment] [--child-environment MVDM_SESSION_DISPOSE_REPORT_PATH=<absolute-path>|MVDM_COMMAND_CONTINUATION_REPORT_PATH=<absolute-path>|MVDM_DEM_OPEN_REPORT_PATH=<absolute-path>|MVDM_CONSOLE_PRESENTATION_REPORT_PATH=<absolute-path>]');
 }
 
 function sha256(path) {
@@ -51,6 +51,11 @@ for (let index = 2; index < process.argv.length; index += 1) {
     options.interactiveScriptVerOnly = true;
     continue;
   }
+  if (key === '--presentation-toggle') {
+    if (options.presentationToggle !== undefined) usage();
+    options.presentationToggle = true;
+    continue;
+  }
   if (key === '--minimal-host-environment') {
     if (options.minimalHostEnvironment !== undefined) usage();
     options.minimalHostEnvironment = true;
@@ -62,7 +67,7 @@ for (let index = 2; index < process.argv.length; index += 1) {
   index += 1;
 }
 for (const key of Object.keys(options)) {
-  if (!['launcher', 'product', 'stage', 'report', 'interactive', 'interactiveScript', 'interactiveScriptVerOnly', 'minimalHostEnvironment', 'product-command', 'observation-timeout-ms', 'child-environment'].includes(key)) {
+  if (!['launcher', 'product', 'stage', 'report', 'interactive', 'interactiveScript', 'interactiveScriptVerOnly', 'presentationToggle', 'minimalHostEnvironment', 'product-command', 'observation-timeout-ms', 'child-environment'].includes(key)) {
     throw new Error(`unsupported observer option: --${key}`);
   }
 }
@@ -160,6 +165,8 @@ if (options.interactiveScript !== undefined)
   launcherArguments.push('--observe-console-input');
 else if (options.interactiveScriptVerOnly !== undefined)
   launcherArguments.push('--observe-console-input-ver-only');
+if (options.presentationToggle !== undefined)
+  launcherArguments.push('--observe-presentation-toggle');
 if (options['observation-timeout-ms'] !== undefined)
   launcherArguments.push('--observation-timeout-ms', options['observation-timeout-ms']);
 const result = spawnSync(options.launcher, launcherArguments, {

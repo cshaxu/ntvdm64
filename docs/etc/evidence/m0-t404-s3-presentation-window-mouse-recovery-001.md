@@ -74,13 +74,40 @@ The formal x86 composition linked
 candidate is `O:\ntvdm64\ntvdm32.exe` with SHA-256
 `b6a3d1c82e11dc3df061b396b1d0081bf6efee18d94d1e9312cb873ec823e0b8`.
 
-## Remaining acceptance
+## Automated `EDIT.COM` acceptance
 
-The owner must run text-mode `EDIT.COM` in the presentation window and verify
-movement, click/release, and a drag outside then back into the client area.
-Until that result is recorded, S3 stays active. The proposal left Queue at
-admission because Queue contains unadmitted candidates only; this evidence is
-not a claim of end-to-end mouse acceptance.
+P6 removes the manual-window dependency from this packet. The bounded
+`console_startup_observer` now has an observer-only
+`--observe-presentation-toggle` option: after the existing default-off
+`MVDM-MOUSE stage=3` initialization marker, it writes the public Console
+Alt+Enter gesture. The Console adapter consumes that gesture before guest
+keyboard delivery and opens the existing text presentation window. A
+no-argument GUI launcher exists solely so the standard Windows application
+launcher can run this Console-owning test without an operator using a terminal.
+
+On 2026-09-11, the launcher started deployed `O:\ntvdm64\ntvdm32.exe` with
+`-f -o --command EDIT.COM`. The observer reported
+`scripted-presentation-toggle=delivered` and
+`scripted-presentation-toggle-ready=yes`, then kept the selected worker alive
+for its bounded 30-second observation. The deployed executable SHA-256 was
+`A1B7FBD2E0D02640E49113BA6386292ECBBEA02D9778F96C3B21F8BD1C7F413B`.
+
+Windows UI automation targeted the sole resulting `ntvdm32.exe` presentation
+window and sent a left click plus a left-button drag from client grid `(26,11)`
+to `(54,21)`. The default-off report records successful `WriteConsoleInputW`
+calls (`write=1 count=1 error=00000000`), then original host stages 1 and 2
+for left down (`buttons=00000001`), drag
+(`buttons=00000001 flags=00000001`), and release
+(`buttons=00000000 flags=00000000`). Each observed record was followed by
+the unchanged original `mouse_int1` stage 3. The reports are retained at
+`O:\ntvdm64\logs\t404-mouse-auto-p6.txt` and
+`O:\ntvdm64\logs\t404-mouse-auto-observer.txt`.
+
+This proves the selected text presentation path delivers move, press, drag,
+and release through `CONIN$` and the original SoftPC INT 33h entry without
+manual input. It does not claim a visual cursor policy: that remains guest
+application behavior. The proposal left Queue at admission because Queue
+contains unadmitted candidates only.
 
 ## Bounded `EDIT.COM` startup observation
 

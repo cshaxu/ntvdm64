@@ -19,10 +19,15 @@ writeFileSync(resolve(build, 'build.ninja'), [
   '  msvc_deps_prefix = Note: including file:',
   'rule link',
   '  command = link.exe /nologo /OUT:$out $in kernel32.lib user32.lib dbghelp.lib',
+  'rule link_gui',
+  '  command = link.exe /nologo /SUBSYSTEM:WINDOWS /OUT:$out $in kernel32.lib user32.lib',
   'build console-startup-observer.obj: cc ' +
     source('tests/observation/console_startup_observer.c'),
   'build console-startup-observer.exe: link console-startup-observer.obj',
-  'default console-startup-observer.exe',
+  'build presentation-mouse-automation-launcher.obj: cc ' +
+    source('tests/observation/presentation_mouse_automation_launcher.c'),
+  'build presentation-mouse-automation-launcher.exe: link_gui presentation-mouse-automation-launcher.obj',
+  'default console-startup-observer.exe presentation-mouse-automation-launcher.exe',
   ''
 ].join('\n'));
 writeFileSync(resolve(build, 'msvc-x86.cmd'), [

@@ -106,6 +106,7 @@
 #ifdef NTVDM
 #include "nt_event.h"
 #include "nt_mouse.h"
+#include "mvdm_softpc_termination.h"
 
 #ifdef MONITOR
 /*
@@ -2360,6 +2361,7 @@ void mouse_int1()
 
 
 	note_trace0(MOUSE_VERBOSE, "mouse_int1:");
+	mvdm_softpc_record_mouse_chain(3u, 0, 0, 0u, 0u);
 
 #ifdef NTVDM
 
