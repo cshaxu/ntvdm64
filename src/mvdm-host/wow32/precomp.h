@@ -25,10 +25,12 @@
 #define _WOWNT32_
 #endif
 #include <nt.h>
+#include "mvdm-platform-abi/thread-abi.h"
 /* DIVERGENCE(MVDM-HOST-DIV-179): the original build's private include-root
  * made these declaration carriers implicit.  The split mirror uses the
  * byte-identical opennt-abi carriers; this selects no USER/GDI behavior. */
 #include <winuserp.h>
+#include "mvdm-platform-abi/wow32-user-abi.h"
 /* DIVERGENCE(MVDM-HOST-DIV-181): the SDK's host-architecture `_X86_` marker
  * selects a native-VDM register alias in original WOW32. The selected
  * CPU40 SoftPC path is emulated on both host widths and must retain the

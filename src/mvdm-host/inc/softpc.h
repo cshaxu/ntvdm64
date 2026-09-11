@@ -192,6 +192,7 @@ host_simulate(
     );
 
 HANDLE
+WINAPI
 host_CreateThread(
     LPSECURITY_ATTRIBUTES lpThreadAttributes,
     DWORD dwStackSize,
@@ -207,6 +208,7 @@ cpu_createthread(
     );
 
 VOID
+WINAPI
 host_ExitThread(
     DWORD dwExitCode
     );

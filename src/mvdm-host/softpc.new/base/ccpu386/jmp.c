@@ -26,6 +26,9 @@ JMP CPU Functions.
 #include <c_xfer.h>
 #include <c_tsksw.h>
 #include <fault.h>
+#ifdef NTVDM
+#include <mvdm_softpc_termination.h>
+#endif
 
 #define TAKE_PROT_MODE_LIMIT_FAULT
 
@@ -87,6 +90,9 @@ JMPF
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
 
+      mvdm_softpc_record_cpu_low_fault_transfer("JMPF",
+         (unsigned int)GET_CS_SELECTOR(), (unsigned int)GET_EIP(),
+         (unsigned int)new_cs, (unsigned int)new_ip);
       load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);
       SET_EIP(new_ip);
       }
@@ -179,6 +185,9 @@ IFN1(
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
 
+   mvdm_softpc_record_cpu_low_fault_transfer("JMPN",
+      (unsigned int)GET_CS_SELECTOR(), (unsigned int)GET_EIP(),
+      (unsigned int)GET_CS_SELECTOR(), (unsigned int)offset);
    SET_EIP(offset);
    }
 

@@ -26,6 +26,9 @@ CALL CPU Functions.
 #include <c_xfer.h>
 #include <c_tsksw.h>
 #include <fault.h>
+#ifdef NTVDM
+#include <mvdm_softpc_termination.h>
+#endif
 
 /*
    =====================================================================
@@ -107,6 +110,12 @@ CALLF
       /* push return address */
       spush16((IU32)GET_CS_SELECTOR());
       spush((IU32)GET_EIP());
+
+#ifdef NTVDM
+      mvdm_softpc_record_cpu_low_fault_transfer("CALLF",
+         (unsigned int)GET_CS_SELECTOR(), (unsigned int)GET_EIP(),
+         (unsigned int)new_cs, (unsigned int)new_ip);
+#endif
       
       load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);
       SET_EIP(new_ip);
@@ -290,6 +299,11 @@ IFN1(
 
    /* all systems go */
    spush((IU32)GET_EIP());
+#ifdef NTVDM
+   mvdm_softpc_record_cpu_low_fault_transfer("CALLN",
+      (unsigned int)GET_CS_SELECTOR(), (unsigned int)GET_EIP(),
+      (unsigned int)GET_CS_SELECTOR(), (unsigned int)offset);
+#endif
    SET_EIP(offset);
    }
 
@@ -353,5 +367,10 @@ IFN1(
 
    /* all systems go */
    spush((IU32)GET_EIP());
+#ifdef NTVDM
+   mvdm_softpc_record_cpu_low_fault_transfer("CALLR",
+      (unsigned int)GET_CS_SELECTOR(), (unsigned int)GET_EIP(),
+      (unsigned int)GET_CS_SELECTOR(), (unsigned int)new_dest);
+#endif
    SET_EIP(new_dest);
    }

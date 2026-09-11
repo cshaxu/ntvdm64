@@ -54,11 +54,11 @@ ULONG FASTCALL WK32WowReserveHtask(PVDMFRAME pFrame);
 
 
 BOOL    WK32InitializeHungAppSupport(VOID);
-DWORD   W32HungAppNotifyThread(UINT hKillUniqueID);
+DWORD WINAPI W32HungAppNotifyThread(UINT hKillUniqueID);
 DWORD   W32RemoteThread(VOID);
-DWORD   W32Thread(LPVOID vpInitialSSSP);
+DWORD WINAPI W32Thread(LPVOID vpInitialSSSP);
 VOID    W32DestroyTask( PTD ptd);
-VOID    W32EndTask(VOID);
+VOID WINAPI W32EndTask(VOID);
 ULONG   W32GetAppCompatFlags(HTASK16 hTask16);
 ULONG   W32ReadWOWCompatFlags(HTASK16 htask16, DWORD *pdwWOWXCompatFlagsEx);
 VOID    WK32DeleteTask(PTD ptdDelete);

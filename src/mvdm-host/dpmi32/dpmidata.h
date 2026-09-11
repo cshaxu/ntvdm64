@@ -43,7 +43,13 @@ Revision History:
 
 #else
 
+#if defined(CPU_40_STYLE)
+/* CPU40 owns the DOSX 53:01 transition in modesw.c.  The i386 body also
+ * mutates kernel-VDM state which does not exist in this profile. */
+#define switch_to_protected_mode        DpmiCpu40SwitchToProtectedMode
+#else
 #define switch_to_protected_mode        DpmiIllegalFunction
+#endif
 #define DpmiSetDebugRegisters           DpmiIllegalFunction
 
 //
@@ -175,6 +181,12 @@ extern USHORT CurrentAppFlags;
 // Address of Bop fe for ending interrupt simulation
 //
 extern ULONG RmBopFe;
+
+#if defined(CPU_40_STYLE)
+extern ULONG Cpu40PmStackInfoAddress;
+extern ULONG Cpu40LdtShadowAddress;
+extern ULONG Cpu40NativeTaskStateAddress;
+#endif
 
 //
 // Address of buffer for DTA in Dosx

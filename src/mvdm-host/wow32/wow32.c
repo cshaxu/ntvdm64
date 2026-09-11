@@ -30,7 +30,8 @@
 #include "wsocktbl.h"
 #include "wthtbl.h"
 #include <stdarg.h>
-#include <ntcsrdll.h>
+#include <mvdm-platform-abi/ntcsrdll.h>
+#include "adapter-mvdm-host-out/wow/include/wow_user_callback_callconv.h"
 #define SHAREWOW_MAIN
 #include <sharewow.h>
 
@@ -530,7 +531,7 @@ BOOL W32Init(VOID)
     pfnIn.pfnInitDlgCb = W32InitDlg;
     pfnIn.pfn16GlobalAlloc = W32GlobalAlloc16;
     pfnIn.pfn16GlobalFree = W32GlobalFree16;
-    pfnIn.pfnEmptyCB = W32EmptyClipboard;
+    pfnIn.pfnEmptyCB = mvdm_wow_user_empty_clipboard;
     pfnIn.pfnFindResourceEx = W32FindResource;
     pfnIn.pfnLoadResource = W32LoadResource;
     pfnIn.pfnFreeResource = W32FreeResource;
@@ -539,12 +540,12 @@ BOOL W32Init(VOID)
     pfnIn.pfnSizeofResource = W32SizeofResource;
     pfnIn.pfnWowWndProcEx = (PFNWOWWNDPROCEX)W32Win16WndProcEx;
     pfnIn.pfnWowEditNextWord = W32EditNextWord;
-    pfnIn.pfnWowSetFakeDialogClass = SetFakeDialogClass;
-    pfnIn.pfnWowCBStoreHandle = WU32ICBStoreHandle;
+    pfnIn.pfnWowSetFakeDialogClass = mvdm_wow_user_set_fake_dialog_class;
+    pfnIn.pfnWowCBStoreHandle = mvdm_wow_user_cb_store_handle;
 
     gpsi = UserRegisterWowHandlers(&pfnIn, &pfnOut);
 
-    RegisterWowBaseHandlers(W32DDEFreeGlobalMem32);
+    RegisterWowBaseHandlers(mvdm_wow_user_global_free_hook);
 
     // Prepare us to be in the shared memory process list
 

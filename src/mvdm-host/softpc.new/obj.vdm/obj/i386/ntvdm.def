@@ -161,6 +161,7 @@ EXPORTS
     host_CreateThread
     host_ExitThread
     Sim32pGetVDMPointer                        ; for internal use
+    Sim32FlushVDMPointer
     getIntelRegistersPointer
 
     RegisterWOWIdle

@@ -2,30 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T404 S1**
-
-## Active Packet
-
-### M0 T404 S1 P1 — single-process WOW16 lifecycle recovery
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T404 S1 P1, Ordinary Mode. |
-| Admission And Approval | Owner directed resumption of admission with Queue candidate 1, “Single-process WOW16 application lifecycle recovery.” |
-| Candidate Proposal | [Single-process WOW16 application lifecycle recovery](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md) |
-| Objective | Recover or precisely bound the immediate original owner that prevents the selected `WRITE.EXE` workload from starting, running, and returning in one Win32/x86 MVDM worker. |
-| Non-goals | Broker/BaseSrv work, multi-process reuse, a private USER/CSRSS shell, replacement guest/UI failure policy, CPU tracing policy, x64 build work, and release-matrix claims. |
-| Reference Baseline | Candidate-1 proposal; closed T396 first WOW32 dispatch frontier, T397 UI/service boundary, T400/T401 WRITE observations, and T403 x86 baseline. |
-| Files And ABI Surface | Initial audit may update only current packet and indexed evidence. Any later source change must name its original MVDM/WOW owner, exact public or same-shaped ABI, and binding path before implementation. |
-| Applicable Rules | `docs/design/GOAL.md`, architecture/coding rules, source policy, execution rules, and the candidate-1 proposal. |
-| Verification | Audit the selected original start/return path and present runtime boundary; run focused x86 build/runtime checks only after their source and run root are recorded; run diff and governance checks at delivery. |
-| Expected Markers | A source-owned low-memory dialog/start/return chain, or an exact unavailable original boundary and receiver; no broker or private USER/CSRSS substitute. |
-| Asset Needs | Existing canonical OpenNT/WOW16 mirrors, selected `WRITE.EXE` workload, and current x86 runtime package; no new source or guest-media acquisition. |
-| Reporting Requirements | Record source provenance, four-rung disposition, reached ABI/failure contract, focused evidence, limitations, and next owner boundary. |
-| Stop Conditions | A required dependency outside the selected immediate owner, any need for broker/CSRSS/USER replacement, an unrecorded guest asset, or an architecture/boundary expansion pauses work for renewed admission. |
-| Exit Criteria | One bounded Win16 workload has original-path start/return evidence, or the exact source-proven unavailable boundary and its receiver are recorded; every changed source path and runtime result is reviewed. |
-| Original Owner Request | “好了好了。接下来我们恢复准入做WOW16吧。” |
-| Similar-Issue Sweep | Inspect adjacent WOW32/WOWEXEC/low-memory-dialog and return-path ownership, but do not broaden beyond the first immediate owner. |
+**No active M/T/S packet.** M0 T404 S2 is closed pending the owner's next
+admission. Its source recovery, evidence, limits and deferred next boundary
+are recorded in [the T404 S2 closure](../history/m0-t404-s2-dosx-wow-startup-contract-recovery.md).
 
 ## Latest Packet Closure
 

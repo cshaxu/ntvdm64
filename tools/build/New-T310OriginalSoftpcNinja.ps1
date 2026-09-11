@@ -226,6 +226,7 @@ $adapterWin32Names = @('ntioapi_facade.c', 'thread_start_compat.c',
                           'nt_thread_alert_compat.c', 'nt_wait_compat.c',
                           'opennt_support_rtl.c', 'console_compat.c', 'crt_compat.c',
                            'command_process_compat.c', 'wow_private_unavailable.c',
+                           'wow_hard_error_dialog.c',
                            'mvdm_base_vdm_environment.c')
 # ExitVDM is an original Base client call reached by selected SoftPC teardown
 # sources.  It already has one same-shaped session-owned implementation; keep
@@ -634,6 +635,12 @@ $ccpuObjects += $ccpuSasFacadeObject
 $biosObjects = foreach ($name in $biosNames) {
     $object = 'obj/bios/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $biosRoot $name)))
+    if ($name -eq 'bios.c' -and $Architecture -eq 'x86') {
+        # The original BIOS BOP table publishes FD only in its monitor
+        # product profile.  CPU40 uses the same original DOSX continuation
+        # frame through dpmi32/modesw.c's bounded counterpart.
+        $graph.Add('  cflags = ' + $baseFlags + ' /DMONITOR')
+    }
     $object
 }
 $keymouseObjects = foreach ($name in $keymouseNames) {

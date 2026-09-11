@@ -24,6 +24,17 @@ static int is_softpc_option(const char *argument)
         argument[1] != '\0';
 }
 
+/* The original WOW worker obtains its KRNL386 bootstrap token from its own
+ * command line in the exact `-a <path>` form.  App must retain that two-token
+ * worker option while it removes the app-only `--command` declaration; the
+ * path is not a second application command. */
+static int is_softpc_option_with_value(const char *argument)
+{
+    return argument != NULL &&
+        (argument[0] == '-' || argument[0] == '/') &&
+        (argument[1] == 'a' || argument[1] == 'A') && argument[2] == '\0';
+}
+
 static int append_dos_argument(char *destination, size_t capacity,
     size_t *length, const char *argument)
 {
@@ -96,6 +107,11 @@ int app_launch_declaration_consume_options(app_launch_declaration *declaration,
         if (positional_start >= 0) continue;
         if (is_softpc_option(argv[read_index])) {
             argv[write_index++] = argv[read_index];
+            if (is_softpc_option_with_value(argv[read_index])) {
+                if (++read_index >= original_argc || argv[read_index] == NULL ||
+                    argv[read_index][0] == '\0') return 0;
+                argv[write_index++] = argv[read_index];
+            }
             continue;
         }
         if (declaration->command_declared != 0u) return 0;

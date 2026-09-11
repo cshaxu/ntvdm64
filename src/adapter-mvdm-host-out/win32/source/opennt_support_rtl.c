@@ -19,6 +19,7 @@ typedef struct _OPENNT_SUPPORT_THREAD_STATE {
     OPENNT_SUPPORT_TEB Teb;
     OPENNT_SUPPORT_PROCESS_PARAMETERS Parameters;
     OPENNT_SUPPORT_PEB Peb;
+    CRITICAL_SECTION PebLock;
     WCHAR CurrentDirectory[MAX_PATH + 2];
 } OPENNT_SUPPORT_THREAD_STATE;
 
@@ -46,6 +47,10 @@ static OPENNT_SUPPORT_THREAD_STATE *opennt_support_thread(void)
         state->Parameters.ConsoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
         state->Peb.ProcessParameters = &state->Parameters;
         state->Peb.ProcessHeap = GetProcessHeap();
+        InitializeCriticalSection(&state->PebLock);
+        state->Peb.FastPebLock = &state->PebLock;
+        state->Teb.ClientId.UniqueProcess = (HANDLE)(ULONG_PTR)GetCurrentProcessId();
+        state->Teb.ClientId.UniqueThread = (HANDLE)(ULONG_PTR)GetCurrentThreadId();
     }
     return state;
 }

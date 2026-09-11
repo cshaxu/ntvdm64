@@ -1041,7 +1041,7 @@ HRGN ghrgnVis = NULL;
 ULONG FASTCALL WG32InquireVisRgn(PVDMFRAME pFrame)
 {
     register PINQUIREVISRGN16 parg16;
-    extern int GetRandomRgn(HDC hdc, HRGN hrgn, int cmd);
+    extern int WINAPI GetRandomRgn(HDC hdc, HRGN hrgn, int cmd);
 
     GETARGPTR(pFrame, sizeof(INQUIREVISRGN16), parg16);
 

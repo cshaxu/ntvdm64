@@ -14,6 +14,9 @@
 #ifndef _NTDEF_
 #define _NTDEF_
 #endif
+#ifndef NOTHING
+#define NOTHING
+#endif
 
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
@@ -177,6 +180,21 @@ NTSTATUS NTAPI opennt_NtWaitForMultipleObjects(
 #ifndef STATUS_MEMORY_NOT_ALLOCATED
 #define STATUS_MEMORY_NOT_ALLOCATED ((NTSTATUS)0xC00000A0L)
 #endif
+#ifndef STATUS_VDM_HARD_ERROR
+/* The selected original WOW caller uses this native status as the exact
+ * private-CSRSS request selector. Modern winternl.h omits the historical
+ * spelling; retain only the fixed ABI value, not a hard-error service. */
+#define STATUS_VDM_HARD_ERROR ((NTSTATUS)0xC000021DL)
+#endif
+#ifndef STATUS_HANDLE_NOT_CLOSABLE
+#define STATUS_HANDLE_NOT_CLOSABLE ((NTSTATUS)0xC0000235L)
+#endif
+#ifndef STATUS_NO_TOKEN
+#define STATUS_NO_TOKEN ((NTSTATUS)0xC000007CL)
+#endif
+#ifndef MAXULONG
+#define MAXULONG ((ULONG)0xFFFFFFFFUL)
+#endif
 
 typedef STRING OEM_STRING, *POEM_STRING;
 typedef const OEM_STRING *PCOEM_STRING;
@@ -195,10 +213,13 @@ typedef struct _OPENNT_SUPPORT_PROCESS_PARAMETERS {
 typedef struct _OPENNT_SUPPORT_PEB {
     POPENNT_SUPPORT_PROCESS_PARAMETERS ProcessParameters;
     PVOID ProcessHeap;
+    PRTL_CRITICAL_SECTION FastPebLock;
 } OPENNT_SUPPORT_PEB, *POPENNT_SUPPORT_PEB;
 
 typedef struct _OPENNT_SUPPORT_TEB {
+    NT_TIB NtTib;
     UNICODE_STRING StaticUnicodeString;
+    CLIENT_ID ClientId;
     /* Reached historical TEB field: imported x86 DPMI sources locate their
      * per-thread VDM TIB through this spelling. The value is assigned only
      * by the monitor's bound-thread carrier and is never a guest value. */

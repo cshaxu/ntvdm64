@@ -22,7 +22,12 @@ Revision History:
 --*/
 #include "precomp.h"
 #pragma hdrstop
+#include "mvdm_softpc_termination.h"
 #include "softpc.h"
+#if defined(CPU_40_STYLE)
+extern void setLDT_SELECTOR(USHORT val);
+extern int setLDT_BASE_LIMIT(ULONG base, ULONG limit);
+#endif
 //
 // Information about the current PSP
 //
@@ -205,6 +210,9 @@ Return Value:
     DosxIret             = *(PDWORD16)(SharedData + 50);
     DosxIretd            = *(PDWORD16)(SharedData + 54);
 
+    mvdm_softpc_record_dosx_init(getDS(), getSI(), DosxStackSegment,
+        DosxRmCodeSegment, DosxRmCodeSelector, DosxPmDataSelector, RmBopFe);
+
 }
 
 VOID
@@ -295,5 +303,30 @@ Return Value:
         );
 
     IntelBase = (ULONG_PTR) Sim32GetVDMPointer((ULONG)0, 1, FALSE);
+
+#if defined(CPU_40_STYLE)
+    /* DOSX publishes the descriptor table at 53:00.  Native NT installs it
+     * in the worker LDT; retain a distinct CCPU guest-linear image because
+     * DOSX can subsequently reuse the source table. */
+    if (getAX() >= (256u * sizeof(LDT_ENTRY)) / 16u)
+        DpmiCpu40SetNativeIdtSourceAddress(((ULONG)getAX() << 4) -
+            (256u * sizeof(LDT_ENTRY)));
+
+    if (Cpu40LdtShadowAddress == 0u) {
+        ULONG Address = 0u;
+        ULONG Size = LDT_SIZE * sizeof(LDT_ENTRY);
+        NTSTATUS Status = DpmiAllocateVirtualMemory((PVOID)&Address, &Size);
+
+        if (!NT_SUCCESS(Status)) {
+            setLDT_SELECTOR(0);
+            return;
+        }
+        Cpu40LdtShadowAddress = Address;
+        RtlCopyMemory((PVOID)(IntelBase + Address), Ldt, Size);
+    }
+    setLDT_SELECTOR(4);
+    setLDT_BASE_LIMIT(Cpu40LdtShadowAddress,
+        (ULONG)(LDT_SIZE * sizeof(LDT_ENTRY) - 1u));
+#endif
 
 }

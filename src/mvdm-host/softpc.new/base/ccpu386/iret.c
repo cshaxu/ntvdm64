@@ -28,6 +28,9 @@ IRET CPU Functions.
 #include <c_tsksw.h>
 #include <c_page.h>
 #include <fault.h>
+#ifdef NTVDM
+#include <mvdm_softpc_termination.h>
+#endif
 
 
 
@@ -119,6 +122,11 @@ IRET()
 
       /* ALL SYSTEMS GO */
 
+#ifdef NTVDM
+      mvdm_softpc_record_cpu_low_fault_transfer("IRET",
+         (unsigned int)GET_CS_SELECTOR(), (unsigned int)GET_EIP(),
+         (unsigned int)new_cs, (unsigned int)new_ip);
+#endif
       load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);
       SET_EIP(new_ip);
 

@@ -138,6 +138,13 @@ ULONG DosxFaultHandlerIret;
 ULONG DosxFaultHandlerIretd;
 ULONG DosxIntHandlerIret;
 ULONG DosxIntHandlerIretd;
+#if defined(CPU_40_STYLE)
+/* CPU40 has no kernel VDM process LDT or task register.  These guest-linear
+ * carriers retain the source provider's descriptor and task separation. */
+ULONG Cpu40PmStackInfoAddress;
+ULONG Cpu40LdtShadowAddress;
+ULONG Cpu40NativeTaskStateAddress;
+#endif
 #endif
 
 ULONG DosxIret;

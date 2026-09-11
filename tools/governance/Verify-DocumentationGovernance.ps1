@@ -230,7 +230,20 @@ if ($hasActivePacket) {
     if ($numericMatch.Success) {
         $historyTasks = @(Get-ChildItem -LiteralPath (Join-Path $docs 'history') -File | ForEach-Object { [regex]::Match($_.Name, '^m\d+-t(?<task>\d+)-') } | Where-Object Success | ForEach-Object { [int]$_.Groups['task'].Value })
         $expectedTask = (($historyTasks | Measure-Object -Maximum).Maximum + 1)
-        if ([int]$numericMatch.Groups['task'].Value -ne $expectedTask -or [int]$numericMatch.Groups['subtask'].Value -ne 1) { throw "New numeric packet must allocate T$expectedTask S1." }
+        $activeTask = [int]$numericMatch.Groups['task'].Value
+        $activeS = [int]$numericMatch.Groups['subtask'].Value
+        if ($activeTask -ne $expectedTask -or $activeS -lt 1) {
+            throw "New numeric packet must allocate T$expectedTask S1."
+        }
+        if ($activeS -gt 1) {
+            foreach ($priorS in 1..($activeS - 1)) {
+                $closureHeading = '(?ms)^## S' + $priorS + ' Closure Record\r?\n(?<body>.*?)(?=^## |\z)'
+                $closure = [regex]::Match($status, $closureHeading)
+                if (-not $closure.Success -or $closure.Groups['body'].Value -notmatch '\]\(\.\./etc/evidence/[^)]+\.md\)') {
+                    throw "Active T$activeTask S$activeS requires a linked S$priorS closure record."
+                }
+            }
+        }
         if ($status -notmatch '(?m)^\|\s*Candidate Proposal\s*\|[^|]*\]\(\.\./proposals/[^)]+\.md\)[^|]*\|\s*$') { throw 'New numeric packet must link its candidate proposal.' }
     }
 } elseif ([regex]::Matches($status, '(?m)^## Active Packet\s*$').Count -ne 0) {

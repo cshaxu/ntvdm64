@@ -48,7 +48,7 @@ WORD     Baud32toBaud16(DWORD BaudRate);
 void     DCB16toDCB32(PWOWPORT pWOWPort, LPDCB lpdcb32, PDCB16 pdcb16);
 void     DCB32toDCB16(PDCB16 pdcb16,  LPDCB lpdcb32,  UINT idComDev,  BOOL fChEvt);
 BOOL     DeletePortTabEntry(PWOWPORT pWOWPort);
-ULONG    WOWCommWriterThread(LPVOID pWOWPortStruct);
+DWORD WINAPI WOWCommWriterThread(LPVOID pWOWPortStruct);
 USHORT   EnqueueCommWrite(PWOWPORT pwp, PUCHAR pch, USHORT cb);
 UINT     GetModePortTabIndex(PSZ pszModeStr);
 BOOL     GetPortName(LPSTR pszMode, LPSTR pszPort);
@@ -2404,7 +2404,7 @@ USHORT EnqueueCommWrite(PWOWPORT pwp, PUCHAR pch, USHORT cb)
 //      again.
 //
 
-ULONG WOWCommWriterThread(LPVOID pWOWPortStruct)
+DWORD WINAPI WOWCommWriterThread(LPVOID pWOWPortStruct)
 {
     PWOWPORT   pwp = (PWOWPORT)pWOWPortStruct;
     HANDLE     ah[2];

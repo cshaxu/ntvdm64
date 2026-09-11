@@ -25,8 +25,8 @@
 #pragma hdrstop
 #include <ntexapi.h>
 #include <sharewow.h>
-#include <vdmdbg.h>
-#include <ntseapi.h>
+#include "mvdm-platform-abi/vdmdbg.h"
+#include "mvdm-platform-abi/security-abi.h"
 #include "wowfax.h"
 
 extern void UnloadNetworkFonts( UINT id );
@@ -811,7 +811,7 @@ ULONG FASTCALL WK32WowSetIdleHook(PVDMFRAME pFrame)
 
 --*/
 
-DWORD W32Thread(LPVOID vpInitialSSSP)
+DWORD WINAPI W32Thread(LPVOID vpInitialSSSP)
 {
     TD td;
     UNICODE_STRING  uImageName;
@@ -2662,7 +2662,7 @@ ULONG FASTCALL WK32WowWaitForMsgAndEvent(PVDMFRAME pFrame)
   VOID
 
 --*/
-DWORD WowMsgBoxThread(VOID *pv)
+DWORD WINAPI WowMsgBoxThread(VOID *pv)
 {
     PWOWMSGBOX16 pWowMsgBox16 = (PWOWMSGBOX16)pv;
     PSZ   pszMsg, pszTitle;
@@ -2772,7 +2772,7 @@ VOID FASTCALL WK32WowMsgBox(PVDMFRAME pFrame)
   NEVER RETURNS - Goes away when WOW is killed
 
 --*/
-DWORD W32HungAppNotifyThread(UINT htaskKill)
+DWORD WINAPI W32HungAppNotifyThread(UINT htaskKill)
 {
     PTD ptd;
     LPWORD pLockTDB;

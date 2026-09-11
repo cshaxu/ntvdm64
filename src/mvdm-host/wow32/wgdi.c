@@ -33,7 +33,7 @@
 #include "wdib.h"
 
 #include "stddef.h"    // these three are needed to include the
-#include "wingdip.h"
+#include "mvdm-platform-abi/wingdip.h"
                        // definition of EXTTEXTMETRICS in wingdip.h
                        // [bodind]
 

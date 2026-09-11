@@ -165,6 +165,11 @@ Return Value:
 #if DBG
             SelectorLimit[(registerAX >> 3) + i] = Limit;
 #endif
+#if defined(CPU_40_STYLE)
+            if (Cpu40LdtShadowAddress != 0u)
+                ((PLDT_ENTRY)(IntelBase + Cpu40LdtShadowAddress))[
+                    (registerAX >> 3) + i] = Descriptors[i];
+#endif
         }
     }
 

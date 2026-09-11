@@ -382,6 +382,40 @@ Notes:
     LockedPMStackSel = getES();
     LockedPMStackCount = 0;
 
+#if defined(CPU_40_STYLE)
+    {
+        ULONG Size = sizeof(VDM_DPMIINFO);
+        NTSTATUS Status;
+        PVDM_DPMIINFO PmStackInfo;
+
+        /* Native NT published this worker-owned VDM_TIB address in CX:DX.
+         * CPU40 must instead expose the identical structure in its guest
+         * linear space; no host pointer crosses the DPMI ABI. */
+        if (Cpu40PmStackInfoAddress == 0u) {
+            ULONG Address = 0u;
+            Status = DpmiAllocateVirtualMemory((PVOID)&Address, &Size);
+            if (!NT_SUCCESS(Status)) {
+                setCX(0);
+                setDX(0);
+                return;
+            }
+            Cpu40PmStackInfoAddress = Address;
+        }
+
+        PmStackInfo = (PVDM_DPMIINFO)(IntelBase + Cpu40PmStackInfoAddress);
+        RtlZeroMemory(PmStackInfo, sizeof(*PmStackInfo));
+        PmStackInfo->Flags = CurrentAppFlags;
+        PmStackInfo->SsSelector = LockedPMStackSel;
+        PmStackInfo->DosxFaultIret = DosxFaultHandlerIret;
+        PmStackInfo->DosxFaultIretD = DosxFaultHandlerIretd;
+        PmStackInfo->DosxIntIret = DosxIntHandlerIret;
+        PmStackInfo->DosxIntIretD = DosxIntHandlerIretd;
+        setCX(HIWORD(Cpu40PmStackInfoAddress));
+        setDX(LOWORD(Cpu40PmStackInfoAddress));
+        return;
+    }
+#endif
+
 #ifdef i386
     {
         uint32_t pPmStackInfo;
@@ -758,7 +792,7 @@ Routine Description:
         setEIP((ULONG)LOWORD(DosxIret));
 
     }
-#endif // i386
+#endif // !i386 || CPU_40_STYLE
 
     DBGTRACE(DPMI_INT_IRET16, 0, 0, 0);
 }
@@ -856,7 +890,7 @@ Routine Description:
     DBGTRACE(DPMI_INT_IRET32, 0, 0, 0);
 }
 
-#ifndef i386
+#if !defined(i386) || defined(CPU_40_STYLE)
 
 BOOL
 DpmiFaultHandler(
@@ -974,7 +1008,7 @@ Return Value:
     return TRUE;
 }
 
-#endif // i386
+#endif // !i386 || CPU_40_STYLE
 
 VOID
 DpmiFaultHandlerIret16(
@@ -1164,14 +1198,14 @@ Return Value:
 --*/
 
 {
-#ifndef i386
+#if !defined(i386) || defined(CPU_40_STYLE)
     if (fDpmiHookInts) {
         VdmInstallHardwareIntHandler(DpmiHwIntHandler);
         VdmInstallSoftwareIntHandler(DpmiSwIntHandler);
         VdmInstallFaultHandler(DpmiFaultHandler);
         fDpmiIntsHaveBeenHooked = TRUE;
     }
-#endif // i386
+#endif // !i386 || CPU_40_STYLE
 }
 
 
@@ -1198,7 +1232,7 @@ Return Value:
 --*/
 
 {
-#ifndef i386
+#if !defined(i386) || defined(CPU_40_STYLE)
     if (fDpmiIntsHaveBeenHooked) {
         VdmInstallHardwareIntHandler(NULL);
         VdmInstallSoftwareIntHandler(NULL);
@@ -1234,7 +1268,7 @@ Return Value:
     return TRUE;
 }
 
-#ifndef i386
+#if !defined(i386) || defined(CPU_40_STYLE)
 BOOL
 DpmiEmulateInstruction(
     VOID
@@ -1263,11 +1297,21 @@ Return Value:
     UCHAR Opcode;
     ULONG SegCS;
     BOOL bReturn = FALSE;
+#if defined(CPU_40_STYLE)
+    PLDT_ENTRY DescriptorTable;
+#endif
 
     SegCS = getCS();
     pCode = Sim32GetVDMPointer(SegCS<<16, 1, TRUE);
 
+#if defined(CPU_40_STYLE)
+    if (pCode == NULL || Cpu40LdtShadowAddress == 0u)
+        return FALSE;
+    DescriptorTable = (PLDT_ENTRY)(IntelBase + Cpu40LdtShadowAddress);
+    if (DescriptorTable[(SegCS & ~0x7) / sizeof(LDT_ENTRY)].HighWord.Bits.Default_Big) {
+#else
     if (Ldt[(SegCS & ~0x7)/sizeof(LDT_ENTRY)].HighWord.Bits.Default_Big) {
+#endif
         pCode += getEIP();
     } else {
         pCode += getIP();

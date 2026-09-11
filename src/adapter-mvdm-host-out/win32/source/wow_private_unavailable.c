@@ -10,6 +10,7 @@
 #include "nt.h"
 #include "mvdm_softpc_termination.h"
 #include "session/session.h"
+#include "wow_hard_error_dialog.h"
 
 static void mvdm_wow_private_product_unavailable(void)
 {
@@ -44,12 +45,15 @@ NTSTATUS NtRaiseHardError(NTSTATUS error_status,
     ULONG number_of_parameters, ULONG unicode_string_parameter_mask,
     PULONG_PTR parameters, ULONG valid_response_options, PULONG response)
 {
-    (void)error_status;
-    (void)number_of_parameters;
-    (void)unicode_string_parameter_mask;
-    (void)parameters;
-    (void)valid_response_options;
-    if (response != NULL) *response = 0;
+    NTSTATUS status;
+    int recognized = 0;
+
+    if (session_thread_current() != NULL) {
+        status = mvdm_wow_hard_error_present(error_status,
+            number_of_parameters, unicode_string_parameter_mask, parameters,
+            valid_response_options, response, &recognized);
+        if (recognized) return status;
+    }
     mvdm_wow_private_product_unavailable();
     return (NTSTATUS)0xC0000002L; /* STATUS_NOT_IMPLEMENTED */
 }

@@ -238,6 +238,9 @@ IFN1(
    mvdm_softpc_record_cpu_far_return((unsigned int)source_cs,
       (unsigned int)source_ip, (unsigned int)GET_CS_SELECTOR(),
       (unsigned int)GET_EIP());
+   mvdm_softpc_record_cpu_low_fault_transfer("RETF",
+      (unsigned int)source_cs, (unsigned int)source_ip,
+      (unsigned int)GET_CS_SELECTOR(), (unsigned int)GET_EIP());
 #endif
    }
 

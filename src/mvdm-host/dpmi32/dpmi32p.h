@@ -227,6 +227,18 @@ VOID switch_to_protected_mode(
     VOID
     );
 
+VOID DpmiCpu40SwitchToProtectedMode(
+    VOID
+    );
+
+VOID DpmiCpu40RestoreNativeIdt(
+    VOID
+    );
+
+VOID DpmiCpu40SetNativeIdtSourceAddress(
+    ULONG Address
+    );
+
 VOID DpmiSetProtectedmodeInterrupt(
     VOID
     );

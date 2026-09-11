@@ -20,7 +20,7 @@ Revision History:
 --*/
 
 
-#ifndef i386
+#if !defined(i386) || defined(CPU_40_STYLE)
 
 GETREGISTERFUNCTION GetRegisterByIndex[8] = {getEAX, getECX, getEDX, getECX,
                                              getESP, getEBP, getESI, getEDI};
@@ -42,7 +42,7 @@ BOOL fDpmiIntsHaveBeenHooked = FALSE;
 #define DpmiFaultHandlers ((PVDM_TIB)(NtCurrentTeb()->Vdm))->VdmFaultHandlers
 
 
-#endif // i386
+#endif // !i386 || CPU_40_STYLE
 
 #define EFLAGS_INTERRUPT_MASK 0x200
 #define LockedPMStackOffset 0x1000

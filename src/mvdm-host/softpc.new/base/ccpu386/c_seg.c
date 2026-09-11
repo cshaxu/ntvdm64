@@ -25,6 +25,9 @@ Segment Register Support.
 #include <c_reg.h>
 #include <c_page.h>
 #include <fault.h>
+#ifdef NTVDM
+#include <mvdm_softpc_termination.h>
+#endif
 
 
 /*
@@ -48,6 +51,10 @@ IFN3(
 
 
    {
+#ifdef NTVDM
+   mvdm_softpc_record_cpu_low_cs_load((unsigned int)GET_CS_SELECTOR(),
+      (unsigned int)GET_EIP(), (unsigned int)selector);
+#endif
    if ( GET_PE() == 0 || GET_VM() == 1 )
       {
       /* Real Mode or V86 Mode */

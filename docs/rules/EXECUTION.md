@@ -14,6 +14,12 @@
 6. Make a sequential P delivery: update authorities/evidence, commit, push,
    and record any acceptance limitation.
 
+An active numeric T may reopen for its next sequential S after the preceding
+S has reached its bounded conclusion.  Status must link the preceding S
+evidence and state any deferred P delivery and its limitation; that deferral
+does not make the P delivered or authorize a scope expansion.  The reopening
+must retain one active S and be verified mechanically before work proceeds.
+
 A material scope expansion, changed boundary, or failed stop condition pauses
 work. Revise the S brief and obtain renewed owner approval before proceeding.
 

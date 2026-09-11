@@ -60,6 +60,29 @@ void mvdm_softpc_record_cpu_unsimulate(unsigned int guest_cs,
 void mvdm_softpc_record_cpu_simulate_return(unsigned int guest_cs,
                                             unsigned int guest_ip);
 
+/* Default-off observation after the original CCPU illegal-instruction path
+ * has selected its fault frame. It copies scalar fault/live CPU state only;
+ * it neither decodes, skips, dispatches, nor changes the fault. */
+void mvdm_softpc_record_cpu_illegal_instruction(unsigned int fault_cs,
+    unsigned int fault_ip, unsigned int fault_linear, unsigned int opcode0,
+    unsigned int opcode1, unsigned int opcode2, unsigned int opcode3,
+    unsigned int opcode4, unsigned int live_cs, unsigned int live_ip,
+    unsigned int machine_status);
+
+/* Default-off scalar observation of the original DOSX initialization BOP's
+ * already-decoded shared-data fields and a later original real-mode switch. */
+void mvdm_softpc_record_dosx_init(unsigned int shared_ds,
+    unsigned int shared_si, unsigned int stack_segment,
+    unsigned int real_mode_code_segment, unsigned int real_mode_code_selector,
+    unsigned int protected_mode_data_selector, unsigned long real_mode_bop_fe);
+void mvdm_softpc_record_dosx_real_mode_switch(unsigned int source_cs,
+    unsigned int source_ip, unsigned int target_cs,
+    unsigned int machine_status);
+void mvdm_softpc_record_dosx_real_mode_frame(unsigned int source_cs,
+    unsigned int source_ip, unsigned int frame_ds, unsigned int frame_sp,
+    unsigned int frame_ss, unsigned int frame_ip, unsigned int frame_cs,
+    unsigned int machine_status);
+
 /* Default-off CPU40 far-return witness.  It records the original scalar
  * source and completed destination only; it cannot select a destination,
  * inspect guest data, or alter CPU/stack/guest state. */
@@ -112,6 +135,22 @@ void mvdm_softpc_record_cpu_hw_interrupt_deferred(unsigned int interrupts_enable
  * `vector` is the original PIC result; this function cannot alter the CPU,
  * PIC, BIOS or guest state. */
 void mvdm_softpc_record_cpu_hw_interrupt_service(unsigned int vector);
+/* Default-off, target-latched observation at the original real-mode interrupt
+ * transfer. It receives the IVT words already read by CCPU and cannot read or
+ * write guest memory, or alter the selected interrupt target. */
+void mvdm_softpc_record_cpu_low_fault_ivt_target(unsigned int vector,
+    unsigned int target_offset, unsigned int target_segment,
+    unsigned int source_cs, unsigned int source_ip);
+/* Default-off, target-latched witness for an original completed RETF or an
+ * original real-mode IRET. It receives decoded scalars only and cannot alter
+ * the target, stack, interrupt state, or dispatch. */
+void mvdm_softpc_record_cpu_low_fault_transfer(const char *kind,
+    unsigned int source_cs, unsigned int source_ip,
+    unsigned int target_cs, unsigned int target_ip);
+/* Default-off witness at the original code-segment cache loader. It latches
+ * only a CS-zero selection and neither loads nor changes any CPU field. */
+void mvdm_softpc_record_cpu_low_cs_load(unsigned int source_cs,
+    unsigned int source_ip, unsigned int selector);
 /* Default-off observation at the original BIOS keyboard `AH == 2` waitio
  * edge.  It does not queue, read, or alter a key. */
 void mvdm_softpc_record_keyboard_waitio(void);

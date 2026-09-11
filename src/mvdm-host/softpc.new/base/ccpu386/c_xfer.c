@@ -25,6 +25,9 @@ Transfer of Control Support.
 #include <c_xfer.h>
 #include <c_page.h>
 #include <fault.h>
+#ifdef NTVDM
+#include <mvdm_softpc_termination.h>
+#endif
 
 /*
    Prototype our internal functions.
@@ -174,6 +177,11 @@ IFN1(
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
 
+#ifdef NTVDM
+   mvdm_softpc_record_cpu_low_fault_transfer("REL",
+      (unsigned int)GET_CS_SELECTOR(), (unsigned int)GET_EIP(),
+      (unsigned int)GET_CS_SELECTOR(), (unsigned int)new_dest);
+#endif
    SET_EIP(new_dest);
    took_relative_jump = TRUE;
    }

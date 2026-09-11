@@ -20,7 +20,7 @@
 ** a hardware interrupt callback and to use the same handle mapping that
 ** WOW uses.
 */
-LPVOID
+LPVOID APIENTRY
 WOW32ResolveMemory(
     VPVOID  vp
     );
