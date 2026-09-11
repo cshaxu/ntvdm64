@@ -18,8 +18,12 @@
   original file/interface slice, record all outbound interfaces, the
   finite adapter/public-API closure, final file disposition, and any current
   project-owned implementation that it would supersede. Do not recurse into
-  CSR/CSRSS, NTDLL CSR transport, kernel VDM, full BaseClient/Kernel32,
-  Win32k, or USER/GDI server merely to satisfy an import.
+  CSR/CSRSS, NTDLL CSR transport, full BaseClient/Kernel32, Win32k, or
+  USER/GDI server merely to satisfy an import. A Kernel VDM function may be
+  admitted only under the source policy's semantic-carrier rule: retain it
+  under `mvdm-host/kernel-vdm/<original-relative-path>`, document its direct
+  MVDM consumer and every excluded kernel dependency, and confine any adapter
+  to the finite unavailable-kernel ABI rather than its state machine.
 - Every project-defined replacement interface records the unavailable
   dependency, rejected earlier rungs, smallest new ABI, failure contract,
   focused test and disposition.

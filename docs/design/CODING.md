@@ -41,8 +41,11 @@ historical record is evidence, not a selectable configuration.
 
 ## Owner placement
 
-- `mvdm-host` contains only canonical selected MVDM host-runtime
-  packages, retaining package-internal paths and filenames.
+- `mvdm-host` contains canonical selected MVDM host-runtime packages,
+  retaining package-internal paths and filenames, plus individually admitted
+  Kernel VDM semantic carriers under `kernel-vdm/<original-relative-path>`.
+  A carrier preserves the original upstream shape and is owned by its direct
+  MVDM consumer; an adapter may expose only its finite unavailable-kernel ABI.
 - `opennt-host` contains every complete selected original OpenNT host-service
   package outside MVDM, each retaining upstream-relative paths and filenames.
   Base VDM is its first accepted slice, not a limit on future admitted owner

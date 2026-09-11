@@ -34,15 +34,46 @@ source package, direct MVDM caller, complete outgoing boundary, file/interface
 and build disposition, reason for acceptance/rejection, and superseded current
 project implementation in the same host tracker that covers the 1,689 MVDM
 paths. The audit never authorizes importing unrelated files from an accepted
-source directory. CSR/CSRSS, NTDLL CSR transport, kernel VDM, full BaseClient/Kernel32,
+source directory. CSR/CSRSS, NTDLL CSR transport, full BaseClient/Kernel32,
 Win32k and USER/GDI server are explicit stopping boundaries: their source may
-be cited as evidence but is not recursively imported for host runtime.
+be cited as evidence but is not recursively imported for host runtime. Kernel
+VDM follows the narrower semantic-carrier admission below; it is not a
+recursive host-runtime import.
 A package-specific subfamily below `adapter-opennt-host` supplies a
 same-shaped modern binding only for private host interfaces identified in its
 accepted imported package; it must not become a generic compatibility layer.
 The
 shared declaration-only `mvdm-platform-abi` remains separate unless a tracked
 declaration is proved private to one admitted `opennt-host` package.
+
+### Kernel VDM semantic-carrier admission
+
+Kernel VDM source is eligible only as a file- and function-scoped semantic
+carrier for a directly reached selected `mvdm-host` caller. Its origin in the
+kernel is not itself a prohibition; an admission must instead prove that the
+selected state transition, structure/layout, validation, ordering or failure
+rule can execute through a finite standalone ABI. The imported source remains
+in `mvdm-host/kernel-vdm/<original-relative-path>` with its upstream filename,
+not in an adapter or a project-owned replacement root. The consuming MVDM
+owner remains its only production caller.
+
+Each admission records the exact original file, revision/hash and function
+range; the direct MVDM consumer; retained structures and observable ordering;
+every unavailable kernel dependency; the smallest replacement ABI and its
+owner; x86 build selection; positive and negative boundary evidence; and the
+disposition of any existing adapter implementation it supersedes. An adapter
+may marshal the finite unavailable operation, but may not own the imported
+Kernel VDM state machine or provider policy. Any material non-original
+mechanism belongs only in the paired private `mvdm-host` overlay behind a
+registered `DIVERGENCE:` hook.
+
+The admission excludes kernel scheduling, process/thread-object internals,
+APC delivery, IDT/trap or fault installation, ring-0 V86 context switching,
+private CSR transport, and any `CPU_30_STYLE` monitor path. Those dependencies
+are named stopping boundaries for the selected carrier; they are never
+recreated wholesale. A candidate must demonstrate that excluding them leaves
+a finite caller-owned contract. No directory-wide import, kernel product
+shell, second executor, or architecture-profile revival is authorized.
 
 For source-function dependency audit, zero-degree starts with every original
 definition in `mvdm-host` and expands through its transitive resolved calls

@@ -14,9 +14,14 @@
    direct selected-MVDM caller; a retained original algorithm/state-machine
    benefit; a finite outgoing closure through public modern APIs, existing
    bounded adapters or a specifically admitted small adapter; and no need to
-   import an NT4 system/product shell. CSR/CSRSS, NTDLL CSR transport, kernel
-   VDM, the full BaseClient/Kernel32 product, Win32k and USER/GDI server are
-   stopping boundaries, not recursive import candidates. Every accepted and
+   import an NT4 system/product shell. CSR/CSRSS, NTDLL CSR transport, the
+   full BaseClient/Kernel32 product, Win32k and USER/GDI server are stopping
+   boundaries, not recursive import candidates. Kernel VDM may enter only as
+   an individually admitted `mvdm-host/kernel-vdm` semantic carrier for a
+   direct MVDM consumer: it preserves original shape and has a finite
+   standalone ABI, while an adapter owns only that ABI binding. Kernel
+   scheduling, trap/fault installation, ring-0 V86 switching, private CSR
+   transport and `CPU_30_STYLE` remain stopping boundaries. Every accepted and
    rejected candidate has a complete source/ABI/final-disposition record in
    the shared host tracker. Original MVDM support carriers/libraries remain in
    their original-relative `mvdm-host` paths; independent historical tools
