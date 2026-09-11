@@ -354,6 +354,12 @@ static DWORD WINAPI presentation_thread(void *context)
     window->input = CreateFileW(L"CONIN$", GENERIC_READ | GENERIC_WRITE,
         FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0u, NULL);
     if (window->input == INVALID_HANDLE_VALUE) window->input = NULL;
+    if (window->input != NULL && GetConsoleMode(window->input,
+        &window->input_mode)) {
+        window->input_mode_saved = 1;
+        (void)SetConsoleMode(window->input,
+            window->input_mode | ENABLE_MOUSE_INPUT);
+    }
     InterlockedExchangePointer((PVOID volatile *)&window->window, handle);
     InterlockedExchange(&window->state, APP_PRESENTATION_WINDOW_OPEN);
     ShowWindow(handle, SW_SHOW);
@@ -365,7 +371,13 @@ static DWORD WINAPI presentation_thread(void *context)
         TranslateMessage(&message);
         DispatchMessageW(&message);
     }
-    if (window->input != NULL) CloseHandle(window->input);
+    if (window->input != NULL) {
+        if (window->input_mode_saved)
+            (void)SetConsoleMode(window->input, window->input_mode);
+        CloseHandle(window->input);
+    }
+    window->input = NULL;
+    window->input_mode_saved = 0;
     InterlockedExchangePointer((PVOID volatile *)&window->window, NULL);
     InterlockedExchange(&window->state, APP_PRESENTATION_WINDOW_CLOSED);
     SetEvent(window->closed_event);

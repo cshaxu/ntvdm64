@@ -37,6 +37,8 @@ typedef struct app_presentation_window {
     RECT windowed_rect;
     LONG_PTR windowed_style;
     HANDLE input;
+    DWORD input_mode;
+    int input_mode_saved;
     DWORD mouse_buttons;
     /* A copied snapshot supplied by the SoftPC presentation boundary. App
      * never aliases a ROM, VGA aperture, or source-owned font pointer. */

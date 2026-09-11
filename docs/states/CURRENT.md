@@ -6,20 +6,20 @@
 
 ## Active Packet
 
-### M0 T404 S3 P3 — presentation-window mouse input recovery
+### M0 T404 S3 P4 — presentation-window mouse input recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T404 S3 P3, Ordinary Mode. P1 (`510d74b76`) delivered the bounded mouse binding; P2 (`c6aa2dd5a`) verified the text-mode display-transfer entry; P3 records the bounded `EDIT.COM` startup prerequisite. |
-| Admission And Approval | Owner approved admission and direct, bounded reuse of the independently implemented mouse support. |
+| Identifier Mode | M0 T404 S3 P4, Ordinary Mode. P1 (`510d74b76`) delivered the bounded mouse binding; P2 (`c6aa2dd5a`) verified the text-mode display-transfer entry; P3 records the bounded `EDIT.COM` startup prerequisite; P4 corrects the reported no-response Console-mode gap. |
+| Admission And Approval | Owner approved admission and direct, bounded reuse of the independently implemented mouse support, then reported that the first staged `EDIT.COM` presentation run had no mouse response. |
 | Candidate Proposal | [Presentation-window mouse input recovery](../proposals/proposal-presentation-window-mouse-input-recovery-001.md) |
 | Reference Baseline | The selected x86 `ntvdm32.exe` and its unchanged original `nt_event.c` → `nt_mouse.c` → `base/keymouse/mouse_io.c` route. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), [document](../rules/DOCUMENT.md), and the [source policy](../etc/operations/policy/source-policy.md). |
 | Objective | Recover text-mode DOS mouse input through the existing Console-to-SoftPC-to-INT 33h path. |
 | Non-goals | Guest mouse driver/media, mouse BOP, SoftPC/OpenNT mouse algorithm changes, graphics input, generic input broker, or cross-process broker work. |
-| Files And ABI Surface | `src/app/presentation_window.[ch]`, its focused fixture/build selection, and indexed evidence only. The sole new behavior is Win32 mouse messages becoming bounded `MOUSE_EVENT_RECORD`s on the existing `CONIN$` handle. |
+| Files And ABI Surface | `src/app/presentation_window.[ch]`, its focused fixture/build selection, and indexed evidence only. The sole new behavior is Win32 mouse messages becoming bounded `MOUSE_EVENT_RECORD`s on the existing `CONIN$` handle, with the window temporarily enabling and then restoring that handle's mouse-input mode. |
 | Verification | Source-path audit; focused x86 build/link; pixel/grid and button/capture tests; owner `EDIT.COM` presentation-window run; governance and diff checks. |
-| Expected Markers | Bounded `MOUSE_EVENT_RECORD`s on `CONIN$`, unchanged original mouse sources, focused fixture exit zero, and the staged x86 executable. |
+| Expected Markers | Bounded `MOUSE_EVENT_RECORD`s on `CONIN$`, a temporary `ENABLE_MOUSE_INPUT` mode bit, unchanged original mouse sources, focused fixture exit zero, and the staged x86 executable. |
 | Asset Needs | Existing text-mode `EDIT.COM` and its original `QBASIC.EXE` companion only; no new guest binary, driver, firmware, or Microsoft component. |
 | Reporting Requirements | Record source boundary, focused build/fixture result, staged executable identity, owner-runtime limitation, and Queue disposition in indexed evidence. |
 | Similar-Issue Sweep | Inspect only the existing presentation-window keyboard input bridge and sibling mouse handoff as design references; do not sweep or alter original mouse providers. |

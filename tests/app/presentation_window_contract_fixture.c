@@ -51,6 +51,10 @@ int main(void)
     session owner;
     app_presentation_window window;
     RECT client;
+    HANDLE input;
+    DWORD original_input_mode;
+    DWORD initial_input_mode;
+    DWORD active_input_mode;
     uint32_t columns, rows, text_bytes;
     uint8_t *text;
 
@@ -62,6 +66,11 @@ int main(void)
     if (!session_activate(&owner) ||
         !session_presentation_text_acquire_writable(&owner, 80u, 25u, 2u,
             &text)) return 2;
+    input = CreateFileW(L"CONIN$", GENERIC_READ | GENERIC_WRITE,
+        FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0u, NULL);
+    if (input == INVALID_HANDLE_VALUE || !GetConsoleMode(input,
+        &original_input_mode)) return 56;
+    CloseHandle(input);
     {
         session_video_event event;
         ZeroMemory(&event, sizeof(event));
@@ -77,6 +86,8 @@ int main(void)
     if (!session_presentation_text_describe(&owner, &columns, &rows,
             &text_bytes)) return 53;
     if (columns == 0u || rows == 0u) return 54;
+    if (!GetConsoleMode(window.input, &initial_input_mode) ||
+        (initial_input_mode & ENABLE_MOUSE_INPUT) == 0u) return 55;
     {
         INPUT_RECORD record;
         DWORD read;
@@ -109,6 +120,15 @@ int main(void)
             return 8;
     }
     if (!app_presentation_window_close(&window)) return 6;
+    {
+        HANDLE restored_input = CreateFileW(L"CONIN$", GENERIC_READ | GENERIC_WRITE,
+            FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0u,
+            NULL);
+        if (restored_input == INVALID_HANDLE_VALUE || !GetConsoleMode(restored_input,
+            &active_input_mode)) return 9;
+        CloseHandle(restored_input);
+    }
+    if (active_input_mode != original_input_mode) return 10;
     if (!session_dispose(&owner)) return 7;
     return 0;
 }

@@ -15,6 +15,16 @@ right-button transitions into bounded `MOUSE_EVENT_RECORD`s on its existing
 conversion; coordinates clamp to the last valid cell; button state is held by
 the window; normal Win32 capture remains active only while a button is held.
 
+P4 follows the owner's first `EDIT.COM` presentation run, which produced no
+mouse response. The standalone Alt+Enter adapter opens the presentation window
+without taking the original NTVDM `host_disable_stream_io` path. That original
+path is where OpenNT turns on `ENABLE_MOUSE_INPUT`; its initial
+`SetupConsoleMode` intentionally leaves the bit clear while stream-I/O is
+active. The presentation window therefore now saves its existing `CONIN$` mode,
+temporarily adds only `ENABLE_MOUSE_INPUT`, and restores the exact prior mode
+when it closes. This is a standalone window-to-Console handoff correction, not
+a change to OpenNT mouse ownership or guest semantics.
+
 The unchanged downstream path is the selected original OpenNT/SoftPC route:
 `nt_event.c`, `nt_mouse.c`, then `base/keymouse/mouse_io.c`, ending at INT 33h.
 The sibling `softpc` worktree commits `f127560` and `fe67bde` were examined as
@@ -53,10 +63,16 @@ inspect `GetCapture()`:
 the fixture invokes the window procedure from a different thread, whereas
 Win32 capture is owned and observable on the presentation window's UI thread.
 
+The P4 focused x86 fixture was rebuilt and run from
+`build/M0-T404/S3/r004-mouse-mode-fixture`; it exited zero. In addition to the
+existing record checks, it proves that the window enables
+`ENABLE_MOUSE_INPUT` while open and restores the exact pre-window Console mode
+after close.
+
 The formal x86 composition linked
 `build/M0-T404/S3/r001-mouse-x86/original-softpc-process.exe`. The staged
 candidate is `O:\ntvdm64\ntvdm32.exe` with SHA-256
-`96196413AD7C0A4B6050A02EA1D7DBEEE60E58C849006E6EC58A5C568082A4ED`.
+`b6a3d1c82e11dc3df061b396b1d0081bf6efee18d94d1e9312cb873ec823e0b8`.
 
 ## Remaining acceptance
 
@@ -95,5 +111,7 @@ Alt+Enter presentation window or synthesize mouse input. The deployable
 
 P1 (`510d74b76`) delivered the mouse binding and formal x86 staging. P2
 (`c6aa2dd5a`) adds the focused text-mode display-transfer proof. P3 records
-the bounded `EDIT.COM` startup prerequisite. None replaces the remaining
-owner interactive `EDIT.COM` mouse acceptance.
+the bounded `EDIT.COM` startup prerequisite. P4 corrects the observed
+stream-I/O Console-mode omission, then formally relinks and stages the x86
+product. None replaces the remaining owner interactive `EDIT.COM` mouse
+acceptance.

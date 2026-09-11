@@ -2,13 +2,15 @@
 
 Recover mouse input for text-mode `EDIT.COM` without replacing the existing
 OpenNT/SoftPC route. The app presentation window translates focused `WM_MOUSE*`
-messages into bounded `MOUSE_EVENT_RECORD`s on its existing `CONIN$` handle;
+messages into bounded `MOUSE_EVENT_RECORD`s on its existing `CONIN$` handle
+and temporarily enables that handle's standard mouse-input mode;
 the selected original `nt_event.c`, `nt_mouse.c` and `base/keymouse/mouse_io.c`
 remain unchanged.
 
 The admitted implementation may change only `src/app/presentation_window.[ch]`
 and focused tests/build/evidence. It uses current text dimensions, clamps the
-client coordinate to that grid, preserves button state, and holds normal Win32
+client coordinate to that grid, preserves button state, temporarily saves and
+restores the existing Console input mode around `ENABLE_MOUSE_INPUT`, and holds normal Win32
 capture only while a button is pressed. It excludes guest drivers/media, BOPs,
 SoftPC or original OpenNT mouse changes, graphics input and input brokering.
 
