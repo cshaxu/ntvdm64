@@ -35,8 +35,9 @@ closure and a reached BOP are not evidence that COMMAND, a DOS child, a DOS
 extender, a native child or a Win16 program executed.  The final release
 package alone owns the cross-owner compatibility matrix.
 
-The detailed proposal, predecessor, delivery and exclusions for every queue
-item are in the [runtime recovery program](../proposals/proposal-ntvdm-runtime-recovery-program-20260901.md).
+The detailed boundary, predecessor, delivery and exclusions for each queue
+item are in that row's linked proposal.  The [runtime recovery program](../proposals/proposal-ntvdm-runtime-recovery-program-20260901.md)
+remains shared background and does not replace a candidate proposal.
 
 The owner-directed product sequence is: first restore one process's original
 MVDM functionality as closely as public modern Win32 and non-invasive host
@@ -66,8 +67,9 @@ later package merely because an earlier linked component has no runtime proof.
 | Next order | Candidate implementation package | Proposal |
 | --- | --- | --- |
 | 1 | Single-process WOW16 application lifecycle recovery — before broker work, recover the immediate original owner that keeps the selected `WRITE.EXE` workload at its source-owned low-memory dialog. Prove a bounded Win16 workload's original start/return path in one x86 worker, or record the exact source-proven unavailable boundary. It cannot substitute guest/UI failure policy, a private USER/CSRSS shell, CPU tracing, or cross-process transport. | [Proposal](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md) |
-| 2 | Cross-process broker closure — only after candidate 1's applicable single-process owner contract closes, recover required BaseSrv-style registration, command-queue, notification and disconnect-cleanup semantics through public IPC, and prove the selected brokered lifecycle rows. It cannot own guest, COMMAND, SoftPC or WOW behavior. | [Proposal](../proposals/proposal-cross-process-broker-closure-001.md) |
-| 3 | Multi-process matrix and product release — prove the brokered multi-process x86-worker profile, the cross-owner DOS/Win16 compatibility matrix, portable media layout and release packaging. Host x64 Windows is an x86-worker acceptance platform, not a native-x64 worker requirement. | [Proposal](../proposals/proposal-multiprocess-release-matrix-001.md) |
+| 2 | Presentation-window mouse input recovery — reconnect the existing original Console-to-SoftPC-to-INT 33h path for text-mode DOS applications by translating the product presentation window's Win32 mouse messages into bounded console input records. The selected `EDIT.COM` workload is the focused acceptance case; it cannot introduce a guest mouse driver, a BOP mouse protocol, or a new SoftPC mouse implementation. | [Proposal](../proposals/proposal-presentation-window-mouse-input-recovery-001.md) |
+| 3 | Cross-process broker closure — only after candidate 1's applicable single-process owner contract closes, recover required BaseSrv-style registration, command-queue, notification and disconnect-cleanup semantics through public IPC, and prove the selected brokered lifecycle rows. It cannot own guest, COMMAND, SoftPC or WOW behavior. | [Proposal](../proposals/proposal-cross-process-broker-closure-001.md) |
+| 4 | Multi-process matrix and product release — prove the brokered multi-process x86-worker profile, the cross-owner DOS/Win16 compatibility matrix, portable media layout and release packaging. Host x64 Windows is an x86-worker acceptance platform, not a native-x64 worker requirement. | [Proposal](../proposals/proposal-multiprocess-release-matrix-001.md) |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](../../artifacts/documentation-archive/20260910/etc/archive/2026-08-27-pre-package-roadmap/README.md).

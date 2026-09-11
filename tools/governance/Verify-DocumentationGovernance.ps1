@@ -245,9 +245,9 @@ if ($queue -match '\bS\d+\b|\bP\d+\b') {
     throw 'QUEUE.md must not contain S or P identifiers.'
 }
 $queueRows = @([regex]::Matches($queue, '(?m)^\|\s*\d+\s*\|.+\|\s*\[[^\]]+\]\(\.\./proposals/[^)]+\.md\)\s*\|\s*$'))
-if ($queueRows.Count -ne 3) { throw 'Every Queue candidate row must link one proposal file.' }
+if ($queueRows.Count -ne 4) { throw 'Every Queue candidate row must link one proposal file.' }
 foreach ($proposal in @(Get-ChildItem -LiteralPath (Join-Path $docs 'proposals') -File -Filter '*.md')) {
-    if ($proposal.Name -match 'proposal-(?:wow16-single-process-lifecycle-recovery|cross-process-broker-closure|multiprocess-release-matrix)-001\.md' -and $queue -notmatch [regex]::Escape($proposal.Name)) {
+    if ($proposal.Name -match 'proposal-(?:wow16-single-process-lifecycle-recovery|presentation-window-mouse-input-recovery|cross-process-broker-closure|multiprocess-release-matrix)-001\.md' -and $queue -notmatch [regex]::Escape($proposal.Name)) {
         throw "Current proposal is not linked by Queue: $($proposal.Name)"
     }
 }
