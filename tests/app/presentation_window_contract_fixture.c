@@ -65,7 +65,9 @@ int main(void)
     {
         session_video_event event;
         ZeroMemory(&event, sizeof(event));
-        event.kind = SESSION_VIDEO_EVENT_GRAPHICS_READY;
+        /* Text-mode EDIT.COM reaches this surface through the Console-owned
+         * Alt+Enter display transfer, not through graphicsResize. */
+        event.kind = SESSION_VIDEO_EVENT_DISPLAY_TOGGLE;
         if (!session_notify_video_event(&owner, &event)) return 3;
     }
     if (!app_presentation_window_active(&window) || window.window == NULL)

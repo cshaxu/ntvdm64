@@ -6,11 +6,11 @@
 
 ## Active Packet
 
-### M0 T404 S3 P1 — presentation-window mouse input recovery
+### M0 T404 S3 P2 — presentation-window mouse input recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T404 S3 P1, Ordinary Mode. |
+| Identifier Mode | M0 T404 S3 P2, Ordinary Mode. P1 (`510d74b76`) delivered the bounded mouse binding; P2 verifies the text-mode display-transfer entry. |
 | Admission And Approval | Owner approved admission and direct, bounded reuse of the independently implemented mouse support. |
 | Candidate Proposal | [Presentation-window mouse input recovery](../proposals/proposal-presentation-window-mouse-input-recovery-001.md) |
 | Reference Baseline | The selected x86 `ntvdm32.exe` and its unchanged original `nt_event.c` → `nt_mouse.c` → `base/keymouse/mouse_io.c` route. |

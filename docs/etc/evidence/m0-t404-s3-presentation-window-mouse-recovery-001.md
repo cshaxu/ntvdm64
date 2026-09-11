@@ -46,7 +46,10 @@ On 2026-09-11, the x86 focused fixture was rebuilt and run from
 `build/M0-T404/S3/r002-mouse-fixture` with the Visual Studio x86 environment.
 It exited zero. The fixture proves mouse-move, left-button down, and
 out-of-client left-button up records with grid conversion, edge clamping and
-button-state transitions. It intentionally does not inspect `GetCapture()`:
+button-state transitions. Its window opens through
+`SESSION_VIDEO_EVENT_DISPLAY_TOGGLE`, the text-mode Console Alt+Enter route;
+it does not use the separate `graphicsResize` path. It intentionally does not
+inspect `GetCapture()`:
 the fixture invokes the window procedure from a different thread, whereas
 Win32 capture is owned and observable on the presentation window's UI thread.
 
@@ -62,3 +65,9 @@ movement, click/release, and a drag outside then back into the client area.
 Until that result is recorded, S3 stays active. The proposal left Queue at
 admission because Queue contains unadmitted candidates only; this evidence is
 not a claim of end-to-end mouse acceptance.
+
+## P delivery status
+
+P1 (`510d74b76`) delivered the mouse binding and formal x86 staging. P2 adds
+the focused text-mode display-transfer proof above. It does not replace the
+remaining owner interactive `EDIT.COM` acceptance.
