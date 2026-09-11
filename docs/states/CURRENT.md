@@ -6,11 +6,11 @@
 
 ## Active Packet
 
-### M0 T404 S3 P2 — presentation-window mouse input recovery
+### M0 T404 S3 P3 — presentation-window mouse input recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T404 S3 P2, Ordinary Mode. P1 (`510d74b76`) delivered the bounded mouse binding; P2 verifies the text-mode display-transfer entry. |
+| Identifier Mode | M0 T404 S3 P3, Ordinary Mode. P1 (`510d74b76`) delivered the bounded mouse binding; P2 (`c6aa2dd5a`) verified the text-mode display-transfer entry; P3 records the bounded `EDIT.COM` startup prerequisite. |
 | Admission And Approval | Owner approved admission and direct, bounded reuse of the independently implemented mouse support. |
 | Candidate Proposal | [Presentation-window mouse input recovery](../proposals/proposal-presentation-window-mouse-input-recovery-001.md) |
 | Reference Baseline | The selected x86 `ntvdm32.exe` and its unchanged original `nt_event.c` → `nt_mouse.c` → `base/keymouse/mouse_io.c` route. |
@@ -20,7 +20,7 @@
 | Files And ABI Surface | `src/app/presentation_window.[ch]`, its focused fixture/build selection, and indexed evidence only. The sole new behavior is Win32 mouse messages becoming bounded `MOUSE_EVENT_RECORD`s on the existing `CONIN$` handle. |
 | Verification | Source-path audit; focused x86 build/link; pixel/grid and button/capture tests; owner `EDIT.COM` presentation-window run; governance and diff checks. |
 | Expected Markers | Bounded `MOUSE_EVENT_RECORD`s on `CONIN$`, unchanged original mouse sources, focused fixture exit zero, and the staged x86 executable. |
-| Asset Needs | Existing text-mode `EDIT.COM` media only; no new guest binary, driver, firmware, or Microsoft component. |
+| Asset Needs | Existing text-mode `EDIT.COM` and its original `QBASIC.EXE` companion only; no new guest binary, driver, firmware, or Microsoft component. |
 | Reporting Requirements | Record source boundary, focused build/fixture result, staged executable identity, owner-runtime limitation, and Queue disposition in indexed evidence. |
 | Similar-Issue Sweep | Inspect only the existing presentation-window keyboard input bridge and sibling mouse handoff as design references; do not sweep or alter original mouse providers. |
 | Stop Conditions | Any need to modify original mouse code, guest media, graphics coordinate semantics, or a source file outside the named boundary requires renewed admission. |
