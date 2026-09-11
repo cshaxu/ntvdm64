@@ -66,7 +66,9 @@ int base_vdm_broker_publish(base_vdm_broker *binding,
     broker_base_vdm_record record;
     if (!binding_valid(binding) || command == NULL ||
         command->struct_bytes != sizeof(*command) || command->reserved0 != 0u ||
-        command->reserved1 != 0u || command->command_owner != BASE_VDM_COMMAND_DOS ||
+        command->reserved1 != 0u ||
+        (command->command_owner != BASE_VDM_COMMAND_DOS &&
+            command->command_owner != BASE_VDM_COMMAND_WOW) ||
         command->command_bytes == 0u ||
         !bytes_valid(command->command, command->command_bytes,
             MAXIMUM_VDM_COMMAND_LENGTH) ||
@@ -90,7 +92,9 @@ int base_vdm_broker_publish(base_vdm_broker *binding,
     record.creation_flags = command->creation_flags;
     record.error_code = command->error_code;
     record.code_page = command->code_page;
-    record.vdm_state = ASKING_FOR_DOS_BINARY;
+    record.vdm_state = command->command_owner == BASE_VDM_COMMAND_WOW ?
+        ASKING_FOR_WOW_BINARY : ASKING_FOR_DOS_BINARY;
+    record.command_owner = command->command_owner;
     record.current_drive = command->current_drive;
     record.command_bytes = command->command_bytes;
     record.application_bytes = command->application_bytes;
@@ -122,7 +126,8 @@ int base_vdm_broker_deliver(base_vdm_broker *binding,
         destination->available != 0u)
         return BASE_VDM_BROKER_DELIVERY_ERROR;
     status = broker_base_vdm_peek_next(&binding->records, binding->broker_id,
-        binding->session_id, ASKING_FOR_DOS_BINARY, &record);
+        binding->session_id, ASKING_FOR_DOS_BINARY | ASKING_FOR_WOW_BINARY,
+        &record);
     if (status == BROKER_BASE_VDM_STATUS_PENDING ||
         status == BROKER_BASE_VDM_STATUS_NO_COMMAND)
         return BASE_VDM_BROKER_DELIVERY_PENDING;
@@ -136,7 +141,7 @@ int base_vdm_broker_deliver(base_vdm_broker *binding,
     command.code_page = record.code_page;
     command.current_drive = record.current_drive;
     command.coming_from_bat = record.coming_from_bat;
-    command.command_owner = BASE_VDM_COMMAND_DOS;
+    command.command_owner = record.command_owner;
     command.command = record.command;
     command.command_bytes = record.command_bytes;
     command.application = record.application;

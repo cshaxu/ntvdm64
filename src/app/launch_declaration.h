@@ -12,6 +12,7 @@ typedef struct app_launch_declaration {
     uint32_t bound;
     uint32_t command_declared;
     uint32_t command_resolved;
+    mvdm_image_kind requested_image;
     char requested_command[MAXIMUM_VDM_COMMAND_LENGTH];
     /* The original BaseVDM AppName carrier identifies the program which the
      * resident COMMAND asks DOS to EXEC.  It is deliberately distinct from
@@ -19,6 +20,9 @@ typedef struct app_launch_declaration {
     char target_application[MAX_PATH];
     char command[MAXIMUM_VDM_COMMAND_LENGTH];
     char application[MAX_PATH];
+    /* Source-shaped `-a` bootstrap token for an internally selected WOW
+     * worker. It is executable-relative package media, never user input. */
+    char wow_kernel[MAX_PATH];
     /* Original BaseSrv PifFile form for a declared launch profile. */
     char pif[MAX_PATH];
     char environment[MAXIMUM_VDM_ENVIORNMENT];
@@ -35,7 +39,10 @@ mvdm_image_kind app_launch_declaration_requested_image(
     const app_launch_declaration *declaration);
 int app_launch_declaration_resolve_requested_command(
     app_launch_declaration *declaration);
-int app_launch_declaration_prepare_softpc_arguments(int argc, char **argv,
+int app_launch_declaration_select_requested_image(
+    app_launch_declaration *declaration, mvdm_image_kind image);
+int app_launch_declaration_prepare_softpc_arguments(
+    app_launch_declaration *declaration, const session *owner, int argc, char **argv,
     int *softpc_argc, char ***softpc_argv);
 void app_launch_declaration_release_softpc_arguments(char **softpc_argv);
 int app_launch_declaration_bind(app_launch_declaration *declaration,

@@ -14,9 +14,11 @@ static int record_valid(const broker_base_vdm_record *record)
         record->struct_bytes == sizeof(*record) && record->broker_id != 0u &&
         record->session_id != 0u && record->request_id != 0u &&
         record->reserved0 == 0u &&
-        (record->vdm_state & ASKING_FOR_DOS_BINARY) != 0u &&
-        (record->vdm_state & (ASKING_FOR_WOW_BINARY |
-            ASKING_FOR_PIF | ASKING_FOR_SEPWOW_BINARY)) == 0u &&
+        (record->command_owner == BROKER_BASE_VDM_COMMAND_DOS ||
+            record->command_owner == BROKER_BASE_VDM_COMMAND_WOW) &&
+        record->vdm_state == (record->command_owner ==
+            BROKER_BASE_VDM_COMMAND_WOW ? ASKING_FOR_WOW_BINARY :
+            ASKING_FOR_DOS_BINARY) &&
         record->command_bytes != 0u &&
         record->command_bytes <= MAXIMUM_VDM_COMMAND_LENGTH &&
         record->application_bytes <= sizeof(record->application) &&
@@ -92,13 +94,25 @@ static uint32_t broker_base_vdm_select_next(broker_base_vdm_state *state,
     broker_base_vdm_record *result, int consume)
 {
     broker_base_vdm_slot *slot;
+    uint16_t command_owner;
+    if ((request_vdm_state & (ASKING_FOR_DOS_BINARY | ASKING_FOR_WOW_BINARY)) ==
+            (ASKING_FOR_DOS_BINARY | ASKING_FOR_WOW_BINARY))
+        command_owner = UINT16_MAX;
+    else if ((request_vdm_state & ASKING_FOR_WOW_BINARY) != 0u)
+        command_owner = BROKER_BASE_VDM_COMMAND_WOW;
+    else if ((request_vdm_state & ASKING_FOR_DOS_BINARY) != 0u)
+        command_owner = BROKER_BASE_VDM_COMMAND_DOS;
+    else
+        return BROKER_BASE_VDM_STATUS_INVALID;
     if (!state_valid(state) || broker_id == 0u || session_id == 0u ||
-        result == NULL || (request_vdm_state & ASKING_FOR_DOS_BINARY) == 0u ||
-        (request_vdm_state & (ASKING_FOR_WOW_BINARY | ASKING_FOR_PIF |
-            ASKING_FOR_SEPWOW_BINARY)) != 0u)
+        result == NULL ||
+        (request_vdm_state & ASKING_FOR_SEPWOW_BINARY) != 0u)
         return BROKER_BASE_VDM_STATUS_INVALID;
     slot = find_slot(state, broker_id, session_id);
     if (slot == NULL) return BROKER_BASE_VDM_STATUS_UNKNOWN;
+    if (slot->available != 0u && command_owner != UINT16_MAX &&
+        slot->record.command_owner != command_owner)
+        return BROKER_BASE_VDM_STATUS_NO_COMMAND;
     if (slot->available == 0u) {
         slot->pending = 1u;
         if ((request_vdm_state & RETURN_ON_NO_COMMAND) != 0u &&

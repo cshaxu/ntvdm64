@@ -52,8 +52,15 @@ int main(void)
         local.command_bytes != command.command_bytes ||
         memcmp(local.command, command.command, command.command_bytes) != 0)
         return 5;
+    local.available = 0u;
+    command.command_owner = BASE_VDM_COMMAND_WOW;
+    if (!base_vdm_broker_publish(&broker, &command) ||
+        base_vdm_broker_deliver(&broker, &local) !=
+            BASE_VDM_BROKER_DELIVERY_COMPLETE ||
+        local.command_owner != BASE_VDM_COMMAND_WOW)
+        return 6;
     if (!base_vdm_broker_unbind(&broker) ||
         !base_vdm_local_unbind(&local) || !session_dispose(&owner))
-        return 6;
+        return 7;
     return 0;
 }

@@ -9,6 +9,8 @@ static int append_text(char *destination, size_t capacity, size_t *length,
     const char *source);
 static int split_target_command(app_launch_declaration *declaration,
     size_t *command_length);
+static int make_path(char *destination, size_t capacity, const char *root,
+    const char *tail);
 
 void app_launch_declaration_initialize(app_launch_declaration *declaration)
 {
@@ -33,6 +35,13 @@ static int is_softpc_option_with_value(const char *argument)
     return argument != NULL &&
         (argument[0] == '-' || argument[0] == '/') &&
         (argument[1] == 'a' || argument[1] == 'A') && argument[2] == '\0';
+}
+
+static int is_worker_bootstrap_option(const char *argument)
+{
+    return argument != NULL && (argument[0] == '-' || argument[0] == '/') &&
+        (argument[1] == 'w' || argument[1] == 'W' || argument[1] == 'a' ||
+            argument[1] == 'A') && argument[2] == '\0';
 }
 
 static int append_dos_argument(char *destination, size_t capacity,
@@ -106,6 +115,10 @@ int app_launch_declaration_consume_options(app_launch_declaration *declaration,
         }
         if (positional_start >= 0) continue;
         if (is_softpc_option(argv[read_index])) {
+            /* `-w -a` identifies an NT4-created WOW worker. This standalone
+             * app derives those two tokens only after it has classified a
+             * positional NE image and selected package KRNL386 media. */
+            if (is_worker_bootstrap_option(argv[read_index])) return 0;
             argv[write_index++] = argv[read_index];
             if (is_softpc_option_with_value(argv[read_index])) {
                 if (++read_index >= original_argc || argv[read_index] == NULL ||
@@ -146,17 +159,46 @@ int app_launch_declaration_resolve_requested_command(
     return 1;
 }
 
-int app_launch_declaration_prepare_softpc_arguments(int argc, char **argv,
+int app_launch_declaration_select_requested_image(
+    app_launch_declaration *declaration, mvdm_image_kind image)
+{
+    if (declaration == NULL ||
+        (image != MVDM_IMAGE_DOS && image != MVDM_IMAGE_WIN16)) return 0;
+    declaration->requested_image = image;
+    return 1;
+}
+
+int app_launch_declaration_prepare_softpc_arguments(
+    app_launch_declaration *declaration, const session *owner, int argc,
+    char **argv,
     int *softpc_argc, char ***softpc_argv)
 {
     static char foreground_option[] = "-f";
+    static char wow_option[] = "-w";
+    static char application_option[] = "-a";
     char **forwarded;
+    char kernel_path[MAX_PATH];
+    const char *root;
+    DWORD kernel_path_bytes;
     int index;
     int has_foreground = 0;
 
-    if (argc < 1 || argv == NULL || softpc_argc == NULL ||
+    if (declaration == NULL || owner == NULL || !session_valid(owner) ||
+        argc < 1 || argv == NULL || softpc_argc == NULL ||
         softpc_argv == NULL) return 0;
-    forwarded = (char **)calloc((size_t)argc + 2u, sizeof(*forwarded));
+    if (declaration->requested_image != MVDM_IMAGE_DOS &&
+        declaration->requested_image != MVDM_IMAGE_WIN16) return 0;
+    if (declaration->requested_image == MVDM_IMAGE_WIN16) {
+        root = session_mvdm_system_root(owner);
+        if (root == NULL || !make_path(kernel_path, sizeof(kernel_path), root,
+                "system32\\KRNL386.EXE")) return 0;
+        kernel_path_bytes = GetShortPathNameA(kernel_path,
+            declaration->wow_kernel, (DWORD)sizeof(declaration->wow_kernel));
+        if (kernel_path_bytes == 0u ||
+            kernel_path_bytes >= sizeof(declaration->wow_kernel) ||
+            strchr(declaration->wow_kernel, ' ') != NULL) return 0;
+    }
+    forwarded = (char **)calloc((size_t)argc + 5u, sizeof(*forwarded));
     if (forwarded == NULL) return 0;
     for (index = 0; index < argc; ++index) {
         forwarded[index] = argv[index];
@@ -164,6 +206,11 @@ int app_launch_declaration_prepare_softpc_arguments(int argc, char **argv,
             has_foreground = 1;
     }
     if (!has_foreground) forwarded[argc++] = foreground_option;
+    if (declaration->requested_image == MVDM_IMAGE_WIN16) {
+        forwarded[argc++] = wow_option;
+        forwarded[argc++] = application_option;
+        forwarded[argc++] = declaration->wow_kernel;
+    }
     *softpc_argc = argc;
     *softpc_argv = forwarded;
     return 1;
@@ -323,7 +370,8 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     /* The original BaseSrv chooses a DOS record independently from a WOW
      * record before it copies VDMINFO.  Preserve that existing discriminant
      * at the sole app-owned initial declaration boundary. */
-    command.command_owner = BASE_VDM_COMMAND_DOS;
+    command.command_owner = declaration->requested_image == MVDM_IMAGE_WIN16 ?
+        BASE_VDM_COMMAND_WOW : BASE_VDM_COMMAND_DOS;
     command.command = (const uint8_t *)declaration->command;
     /* Original cmdGetNextCmd treats VDMINFO.CmdLine as a command line with
      * a mandatory CR/LF tail, followed by this transport NUL.  Keep that

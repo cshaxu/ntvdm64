@@ -6,28 +6,30 @@
 
 ## Active Packet
 
-### M0 T404 S3 P14 — CPU40 DOSX direct-continuation recovery (delivered; runtime coverage limited)
+### M0 T404 S3 P15 — positional NE-to-WOW record-entry recovery (delivered; actual-worker limitation)
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T404 S3 P14, Ordinary Mode, delivered with a recorded standalone WOW/DOSX runtime-coverage limitation. |
-| Admission And Approval | Owner approved on 2026-09-11: “批准修复，准入一个P提交”. |
-| Candidate Proposal | [CPU40 DOSX direct-continuation recovery](../proposals/proposal-cpu40-dosx-direct-continuation-recovery-001.md); source basis: [P13 audit](../etc/evidence/m0-t404-s3-p13-cpu40-bop-entry-contract-audit-001.md); delivered [P14 evidence](../etc/evidence/m0-t404-s3-p14-cpu40-dosx-direct-continuation-recovery-001.md). |
-| Reference Baseline | Selected x86 CPU40 source retains `HOST_BOP_IP_FUDGE = -2`. P13 proves the two `reset.c` inputs originate in original DOSX `enrm45`/`enrm50` continuations, not BOP stubs. |
+| Identifier Mode | M0 T404 S3 P15, Ordinary Mode, delivered with an explicit actual-worker command-line limitation. |
+| Admission And Approval | Owner approved on 2026-09-11: “批准！”. |
+| Candidate Proposal | [Positional NE-to-WOW entry recovery](../proposals/proposal-positional-ne-wow-entry-recovery-001.md); source basis: OpenNT [`BaseSrvCheckVDM`/`BaseSrvCheckWOW`](../../src/opennt-host/base/win32/server/srvvdm.c), original MVDM [`GetWowKernelCmdLine`](../../src/mvdm-host/dos/command/cmdmisc.c), and P14's [limited-coverage evidence](../etc/evidence/m0-t404-s3-p14-cpu40-dosx-direct-continuation-recovery-001.md). |
+| Reference Baseline | Positional `ntvdm32.exe system32\\WRITE.EXE` is correctly classified as Win16/NE, but the current app publishes it as a DOS-only BaseVDM record and starts no WOW worker bootstrap. Original `BaseSrvCheckVDM` directs Win16 to `BaseSrvCheckWOW`; original `GetWowKernelCmdLine` reads the worker's `-a <KRNL386.EXE>` bootstrap path. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), [document](../rules/DOCUMENT.md), and the [source policy](../etc/operations/policy/source-policy.md). |
-| Objective | Under `CPU_40_STYLE`, enter the two original DOSX continuation addresses in `reset.c` directly, without changing their historical non-CPU40 behavior; establish focused DOSX/WOW startup evidence. |
-| Non-goals | Changing CCPU decoding/execution, global `HOST_BOP_IP_FUDGE`, CPU30, any actual BOP route, guest media, callback ABI, Console behavior, adapters, or broker architecture. |
-| Files And ABI Surface | `src/mvdm-host/softpc.new/base/bios/reset.c`; selected x86 build/publication records; indexed P14 evidence. No ABI signature changes. |
-| Verification | Fresh Win32/x86 CPU40 build under `build/M0-T404/S3/`; source inspection that CPU40 alone bypasses `-2`; bounded DOSX/WOW startup run; staging only after a non-regressive result; diff and documentation governance checks. |
-| Expected Markers | Both shutdown code 9 and 0Ah select their original `enrm` target offsets exactly under CPU40; no new BOP bytes, no changed non-CPU40 expression, and a recorded startup result. |
-| Asset Needs | Existing selected source, build tooling, and existing owner runtime package only; no new source, guest binary, firmware, or Microsoft component. |
-| Reporting Requirements | Record original-source provenance, exact two-site diff, x86 build identity, runtime outcome/limitation, staging hash if published, and deferred global-BOP disposition. |
-| Similar-Issue Sweep | Reconfirm all `HOST_BOP_IP_FUDGE` consumers and direct BOP constructors; do not alter consumers outside the two P13-proven DOSX routes. |
-| Stop Conditions | A failed/regressive DOSX/WOW result, a need to touch CCPU/global BOP/CPU30, runtime instrumentation, guest modifications, or another route requires stopping and renewed admission. |
-| Exit Criteria | Met with publication limitation: both CPU40 sites are direct while non-CPU40 remains unchanged; fresh x86 build and bounded WOW/DOSX result are recorded; the new executable was not published because the run did not reach DOSX and left test workers, so the accepted P12 package was restored. |
-| Original Owner Request | “批准修复，准入一个P提交” |
+| Objective | Recover the positional NE-to-WOW copied-record selection and derive the original worker bootstrap argv, while determining whether the current one-process composition can satisfy original `GetWowKernelCmdLine`. |
+| Non-goals | Changing CCPU execution, BOP bytes or CPU profiles; changing guest media; accepting user-supplied worker bootstrap parameters; a cross-process broker split; shared-WOW pooling; Console behavior; or implementing a new WOW/DOSX loader. |
+| Files And ABI Surface | Expected: `src/app/entry.c`, `src/app/launch_declaration.[ch]`, `src/broker/base_vdm_record.[ch]`, `src/adapter-mvdm-host-out/basesrv/source/base_vdm_broker.c`, focused fixture(s), and indexed evidence. Broker's fixed-width copied record version may advance; no guest ABI changes. |
+| Verification | Fresh Win32/x86 CPU40 build under `build/M0-T404/S3/`; focused classification/broker tests proving DOS and WOW selection; source recovery ledger; formal x86 link; positional `WRITE.EXE` run with default-off BaseVDM and DEM-open observers; documentation governance and diff review. |
+| Expected Markers | `WRITE.EXE` produces a WOW-owned request, original `GetWowKernelCmdLine` receives a package-relative `KRNL386.EXE` path, and runtime observers show `KRNL386.EXE` then `DOSX.EXE` before any claimed WRITE result. |
+| Asset Needs | Existing selected OpenNT and MVDM source, existing package `system32\\KRNL386.EXE`, build tooling and owner runtime package only; no new source, guest binary, firmware, or Microsoft component. |
+| Reporting Requirements | Record four-rung recovery audit, exact source paths/ordering, changed wire version and compatibility boundary, focused positive/negative test results, x86 build identity, positional runtime result, staged hash if eligible, and any remaining frontier. |
+| Similar-Issue Sweep | Audit every local broker rejection/serialization of `command_owner`, every app command-classification caller, and all current positional Win16 handling; preserve DOS and native-image behavior. |
+| Stop Conditions | Need for CCPU/BOP/guest-media/Console changes, shared-WOW reuse, a new broker process, a new historical source import, a worker bootstrap path not expressible through the current bounded declaration, or a regression of DOS positional launch requires pausing and renewed admission. |
+| Exit Criteria | Met with publication limitation: positional NE derives the source-shaped worker argv and matching copied WOW record; DOS remains DOS; focused tests and formal x86 build pass; positional runtime proves the WOW record. Original `GetCommandLine()` still cannot observe the in-memory argv, so KRNL386/DOSX is not reached and the candidate is not published. |
+| Original Owner Request | “批准！” following the identified app/broker NE-to-WOW recovery boundary. |
 
-P12's [mouse acceptance record](../etc/evidence/m0-t404-s3-p12-native-console-mouse-interaction-audit-001.md) and P13's [BOP entry audit](../etc/evidence/m0-t404-s3-p13-cpu40-bop-entry-contract-audit-001.md) are delivered. P14 delivered the two CPU40-only direct continuation selections and x86 link. Its standalone WOW launch did not reach DOSX and left bounded test workers, so the product package is restored to P12 and any lifecycle/DOSX observation follow-up requires renewed admission.
+P12's [mouse acceptance record](../etc/evidence/m0-t404-s3-p12-native-console-mouse-interaction-audit-001.md), P13's [BOP entry audit](../etc/evidence/m0-t404-s3-p13-cpu40-bop-entry-contract-audit-001.md), and P14's direct CPU40 continuation repair are delivered. P14's test result did not reach DOSX; after the owner approved this renewed, bounded app/broker recovery, P15 is the sole active packet. The package remains restored to P12 until P15 proves a non-regressive positional launch.
+
+P15's [entry-recovery evidence](../etc/evidence/m0-t404-s3-p15-positional-ne-wow-entry-recovery-001.md) proves the positional NE request now reaches the WOW record (`state=0102`, owner `2`) and records focused x86 build/fixture success. It also reaches P15's stop condition: original `GetWowKernelCmdLine` reads the real worker `GetCommandLine()`, while the current one-process composition has only an in-memory SoftPC argv. No KRNL386/DOSX result was reached; P12 remains staged and any actual-worker/bootstrap bridge needs renewed admission.
 
 ## S1 Closure Record
 

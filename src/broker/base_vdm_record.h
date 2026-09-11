@@ -7,11 +7,13 @@
 
 #include <vdmapi.h>
 
-#define BROKER_BASE_VDM_RECORD_VERSION UINT32_C(2)
+#define BROKER_BASE_VDM_RECORD_VERSION UINT32_C(3)
 #define BROKER_BASE_VDM_MAXIMUM_RECORDS 16u
 #define BROKER_BASE_VDM_APPLICATION_BYTES 260u
 #define BROKER_BASE_VDM_PIF_BYTES 260u
 #define BROKER_BASE_VDM_CURRENT_DIRECTORY_BYTES 261u
+#define BROKER_BASE_VDM_COMMAND_DOS UINT16_C(0)
+#define BROKER_BASE_VDM_COMMAND_WOW ASKING_FOR_WOW_BINARY
 
 enum broker_base_vdm_status {
     BROKER_BASE_VDM_STATUS_OK = 0u,
@@ -40,6 +42,11 @@ typedef struct broker_base_vdm_record {
     /* Preserve the original VDMINFO field's role: this is VDMState, not a
      * native request object nor a host-process state. */
     uint16_t vdm_state;
+    /* Adapter-private selection of the source BaseSrv DOS or WOW record.
+     * This fixed-width discriminator is copied between the app-owned
+     * declaration and the local BaseClient facade; it never enters VDMINFO
+     * or guest memory. */
+    uint16_t command_owner;
     uint16_t current_drive;
     uint16_t command_bytes;
     uint16_t application_bytes;

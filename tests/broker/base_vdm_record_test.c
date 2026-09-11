@@ -12,6 +12,7 @@ static void initialize_record(broker_base_vdm_record *record,
     record->session_id = session_id;
     record->request_id = 7u;
     record->vdm_state = ASKING_FOR_DOS_BINARY;
+    record->command_owner = BROKER_BASE_VDM_COMMAND_DOS;
     record->command[0] = '/';
     record->command[1] = 'C';
     record->command[2] = '\0';
@@ -40,25 +41,40 @@ int main(void)
     initialize_record(&source, broker_id, session_id);
     if (broker_base_vdm_publish(&state, &source) != BROKER_BASE_VDM_STATUS_OK)
         return 4;
+    if (broker_base_vdm_peek_next(&state, broker_id, session_id,
+        ASKING_FOR_WOW_BINARY, &result) != BROKER_BASE_VDM_STATUS_NO_COMMAND)
+        return 5;
     memset(&result, 0, sizeof(result));
     if (broker_base_vdm_peek_next(&state, broker_id, session_id,
         ASKING_FOR_DOS_BINARY, &result) != BROKER_BASE_VDM_STATUS_OK ||
         memcmp(&source, &result, sizeof(source)) != 0)
-        return 5;
+        return 6;
     if (broker_base_vdm_consume(&state, &result) != BROKER_BASE_VDM_STATUS_OK ||
         broker_base_vdm_consume(&state, &result) != BROKER_BASE_VDM_STATUS_BUSY)
-        return 6;
+        return 7;
+    source.request_id = 8u;
+    source.vdm_state = ASKING_FOR_WOW_BINARY;
+    source.command_owner = BROKER_BASE_VDM_COMMAND_WOW;
+    if (broker_base_vdm_publish(&state, &source) != BROKER_BASE_VDM_STATUS_OK)
+        return 8;
+    if (broker_base_vdm_peek_next(&state, broker_id, session_id,
+        ASKING_FOR_DOS_BINARY, &result) != BROKER_BASE_VDM_STATUS_NO_COMMAND)
+        return 9;
+    if (broker_base_vdm_get_next(&state, broker_id, session_id,
+        ASKING_FOR_WOW_BINARY, &result) != BROKER_BASE_VDM_STATUS_OK ||
+        result.command_owner != BROKER_BASE_VDM_COMMAND_WOW)
+        return 10;
     if (broker_base_vdm_get_next(&state, broker_id, session_id,
         ASKING_FOR_DOS_BINARY | ASKING_FOR_WOW_BINARY, &result) !=
-        BROKER_BASE_VDM_STATUS_INVALID)
-        return 7;
+        BROKER_BASE_VDM_STATUS_PENDING)
+        return 11;
     if (broker_base_vdm_get_next(&state, broker_id, session_id + 1u,
         ASKING_FOR_DOS_BINARY, &result) != BROKER_BASE_VDM_STATUS_UNKNOWN)
-        return 8;
+        return 12;
     if (broker_base_vdm_disconnect(&state, broker_id, session_id) !=
         BROKER_BASE_VDM_STATUS_OK ||
         broker_base_vdm_disconnect(&state, broker_id, session_id) !=
         BROKER_BASE_VDM_STATUS_UNKNOWN)
-        return 9;
+        return 13;
     return 0;
 }

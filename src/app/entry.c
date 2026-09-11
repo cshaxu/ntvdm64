@@ -141,9 +141,9 @@ int main(int argc, char **argv)
         }
         goto finish;
     }
-    if (!app_launch_declaration_prepare_softpc_arguments(argc, argv,
-            &softpc_argc, &softpc_argv)) {
-        result = APP_STARTUP_OPTIONS_REJECTED;
+    if (!app_launch_declaration_select_requested_image(&declaration,
+            requested_image)) {
+        result = APP_STARTUP_DECLARATION_REJECTED;
         goto finish;
     }
     if (!app_package_layout_set_process_media_roots(&owner)) {
@@ -153,6 +153,11 @@ int main(int argc, char **argv)
     if (!app_package_layout_validate_command_configuration_root(&owner)) {
         app_report_media_root_rejected();
         result = APP_STARTUP_MEDIA_REJECTED;
+        goto finish;
+    }
+    if (!app_launch_declaration_prepare_softpc_arguments(&declaration, &owner,
+            argc, argv, &softpc_argc, &softpc_argv)) {
+        result = APP_STARTUP_OPTIONS_REJECTED;
         goto finish;
     }
     /* Original BaseCheckVDM supplies this exact BaseCreateVDMEnvironment
