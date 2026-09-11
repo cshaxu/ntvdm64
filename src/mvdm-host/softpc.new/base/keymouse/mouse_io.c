@@ -6629,17 +6629,18 @@ LOCAL void jump_to_user_subroutine IFN3(MOUSE_CALL_MASK,condition_mask,word,segm
 	setSP(getSP() - 2);
 	sas_storew(effective_addr(getSS(), getSP()), MOUSE_INT2_OFFSET);
 
-	/*
-	 *	Set CS:IP to point to the user subroutine. Adjust the IP by
-	 *	 HOST_BOP_IP_FUDGE, since the CPU emulator will increment IP by
-	 *	 HOST_BOP_IP_FUDGE for the BOP instruction before proceeding
-	 */
+	/* Set CS:IP to the registered user subroutine. */
 	setCS(segment);
-#ifdef CPU_30_STYLE
+#if defined(CPU_30_STYLE) || defined(CPU_40_STYLE)
+	/* DIVERGENCE(MVDM-HOST-DIV-222): CPU40's CCPU starts at live EIP.
+	 * An INT 33h callback registered by EDIT points at ordinary guest code,
+	 * not at a BOP marker: its two preceding bytes decode as ADD, while its
+	 * registered entry begins PUSH ES; PUSH DS.  Enter the direct callback at
+	 * that entry.  Keep HOST_BOP_IP_FUDGE for its other, actual BOP callers. */
 	setIP(offset);
-#else /* !CPU_30_STYLE */
+#else
 	setIP(offset + HOST_BOP_IP_FUDGE);
-#endif /* !CPU_30_STYLE */
+#endif
 
 	/*
 	 *	Put parameters into the registers, saving the previous contents

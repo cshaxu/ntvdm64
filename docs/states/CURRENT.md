@@ -6,28 +6,28 @@
 
 ## Active Packet
 
-### M0 T404 S3 P11 — native Console OpenNT mouse-contract recovery
+### M0 T404 S3 P12 — native Console mouse interaction-contract recovery (delivered)
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T404 S3 P11, Ordinary Mode. P10's raw-Console movement suppression is withdrawn: it changed original OpenNT guest delivery and reused an observer readiness marker absent from the P8 source. |
-| Admission And Approval | Owner approved on 2026-09-11: “目标是参照opennt的mvdm实现同样功能，本来唯一区别应该只是如何和现代terminal/conhost去集成。” and “帮我恢复状态并正确修复！” |
-| Candidate Proposal | [Native Console OpenNT mouse-contract recovery](../proposals/proposal-native-console-opennt-mouse-contract-recovery-001.md) |
-| Reference Baseline | The selected x86 `ntvdm32.exe`; OpenNT `mouse_io_interrupt()` exits stream I/O before any INT 33h mouse service, then `host_disable_stream_io()` performs the original Console/window transition and enables mouse input. P8 forced input records before that transition. |
+| Identifier Mode | M0 T404 S3 P12, Ordinary Mode, delivered. P11's Console-mode timing experiment is withdrawn after owner runtime rejection; P7 is the restored input baseline. |
+| Admission And Approval | Owner approved on 2026-09-11: “目标是参照opennt的mvdm实现同样功能，本来唯一区别应该只是如何和现代terminal/conhost去集成。” and “帮我恢复状态并正确修复！”。 After the callback-entry audit, owner expressly approved the single-point CPU40 repair: “ok 那你实施吧”. |
+| Candidate Proposal | [Native Console mouse interaction contract](../proposals/proposal-native-console-mouse-coordinate-normalization-001.md); delivered evidence: [P12 audit](../etc/evidence/m0-t404-s3-p12-native-console-mouse-interaction-audit-001.md). |
+| Reference Baseline | The selected x86 `ntvdm32.exe`; OpenNT `nt_event.c` consumes visible VDM display cells before `nt_mouse.c` maps them to the INT 33h callback. Public modern Console input reports screen-buffer cells. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), [document](../rules/DOCUMENT.md), and the [source policy](../etc/operations/policy/source-policy.md). |
-| Objective | Restore the original OpenNT mouse event and INT 33h delivery shape. Establish a truthful modern `conhost`/Terminal adapter readiness boundary at the original stream-to-window transition while retaining `CX/DX` as the authoritative absolute guest hit-test coordinate. |
-| Non-goals | Filtering guest movement, modifying guest media, BOP routing, callback mask/button/absolute-position semantics, treating relative motion as the coordinate source, the self-painted presentation window, a new generic input broker, or cross-process broker work. |
-| Files And ABI Surface | P10 removal in `softpc.new/host/src/nt_event.c`; original Console transition owners `softpc.new/{base/keymouse/mouse_io.c,host/src/{nt_fulsc.c,nt_hosts.c}}`; and the observer only if it needs a truthful default-off host witness. The pre-existing INT 33h callback ABI remains `AX` reason, `BX` buttons, `CX/DX` absolute position and `SI/DI` relative motion. |
-| Verification | Source-contract audit; focused x86 compile/link; bounded real-Console observation anchored at original INT 33h stream-to-window transition rather than an invented stage; mode and event-path proof; owner-visible EDIT.COM acceptance after Escape; governance and diff checks. |
-| Expected Markers | No P10 gate or stage 8 reuse; original mouse movement/press/release delivery remains intact; a no-button Console move yields `AX=1`, `BX=0`, and mapped absolute `CX/DX`; observed Console mode changes only after original mouse activation; staged x86 executable. |
+| Objective | Recover CPU40's direct INT33 guest-callback entry from the demonstrated stale `-2` BOP adjustment, while retaining the original event queue and callback ABI; continue the separate Console input/output association audit without an unproven coordinate repair. |
+| Non-goals | Changing CCPU decoding/execution, the global `HOST_BOP_IP_FUDGE`, CPU30, any other BOP route, guest media, callback mask/button/absolute-position semantics, coordinate translation, Console-mode timing experiments, a self-painted window, a generic input broker, or cross-process broker work. |
+| Files And ABI Surface | `softpc.new/base/keymouse/mouse_io.c` for the selected CPU40 callback-entry seam; `host/src/{nt_hosts.c,nt_fulsc.c}` restores the P7 modern-Console mode boundary after P11 withdrawal. The callback ABI remains `AX` reason, `BX` buttons, `CX/DX` absolute position and `SI/DI` relative motion. |
+| Verification | Focused x86 build; automatic after-modal-dismissal zero-button document-area move and press/drag/release sequences; verify callback entry is the registered offset and callback return remains intact; owner test in ordinary `cmd/conhost` EDIT.COM. |
+| Expected Markers | CPU40 enters `371A:0223` rather than `371A:0221` for the observed EDIT handler; no-button movement no longer renders Help; press/drag/release preserve their original masks and return. |
 | Asset Needs | Existing text-mode `EDIT.COM` and its original `QBASIC.EXE` companion only; no new guest binary, driver, firmware, or Microsoft component. |
-| Reporting Requirements | Record P10 withdrawal, the P8 observer limitation, source-first recovery classification, focused build result, truthful mode/event evidence, staged executable identity, and owner acceptance limitation in indexed evidence. |
-| Similar-Issue Sweep | Inspect the original stream-to-window activation, Console mode ownership, pointer lifecycle and observer readiness only; do not alter guest mouse providers or presentation rendering. |
-| Stop Conditions | Any need to change guest mouse logic/media, BOP routing, callback masks/button/absolute-position semantics, graphics semantics, or introduce a non-OpenNT host behavior requires renewed admission. |
-| Exit Criteria | P10 is removed; the original event route is intact; a modern Console readiness observation corresponds to a real original transition; any retained adapter change is source-first justified; the reviewed product is staged and owner-accepted in ordinary `cmd/conhost` EDIT.COM. |
+| Reporting Requirements | Record P11 withdrawal, the withdrawn P12 coordinate shortcut, source/Console association evidence, formal x86 product identity, and owner acceptance in indexed evidence. |
+| Similar-Issue Sweep | Inspect only CPU40 callers that use this direct registered callback form; do not alter guest providers, BOP decoding, or presentation rendering. |
+| Stop Conditions | Any need beyond the selected CPU40 direct registered callback entry—especially CCPU, global BOP, guest mouse, callback ABI, coordinate, graphics, or presentation changes—requires renewed admission. |
+| Exit Criteria | Met: the selected callback enters its registered first instruction; automatic controls show correct no-button and button-transition behaviour; the input/output association remains documented as separate; x86 build and owner `cmd/conhost` EDIT.COM acceptance passed. Any new BOP architecture work requires a new admission. |
 | Original Owner Request | “在该T任务中准入一个月S任务支持鼠标；这个鼠标支持已经在另一个工作树中可直接导入；完成提交推送后，可清除队列中相应的鼠标任务。” |
 
-P8 evidence: [native Console mouse-input recovery](../etc/evidence/m0-t404-s3-p8-native-console-mouse-recovery-001.md), superseded for the stream-transition/readiness claim by [P11 native Console OpenNT mouse-contract recovery](../etc/evidence/m0-t404-s3-p11-native-console-opennt-mouse-contract-recovery-001.md). P9 withdrawal: [native Console mouse-vector hypothesis withdrawal](../etc/evidence/m0-t404-s3-p9-native-console-mouse-vector-recovery-001.md). P10 withdrawal: [native Console mouse-delivery policy](../proposals/proposal-native-console-mouse-delivery-policy-001.md). Final owner-visible Console acceptance remains pending.
+P8 evidence: [native Console mouse-input recovery](../etc/evidence/m0-t404-s3-p8-native-console-mouse-recovery-001.md). P9 withdrawal: [native Console mouse-vector hypothesis withdrawal](../etc/evidence/m0-t404-s3-p9-native-console-mouse-vector-recovery-001.md). P10 withdrawal: [native Console mouse-delivery policy](../proposals/proposal-native-console-mouse-delivery-policy-001.md). P11 is withdrawn by P12. P12's [button-state, callback-entry, and acceptance record](../etc/evidence/m0-t404-s3-p12-native-console-mouse-interaction-audit-001.md) rejects the synthetic-held-button hypothesis, records the CPU40 direct-entry repair, and retains Console input/output association as a separate question. Owner accepted ordinary `cmd/conhost` EDIT.COM mouse use on 2026-09-11. The next T404 S requires new admission.
 
 ## S1 Closure Record
 

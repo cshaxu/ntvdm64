@@ -2374,13 +2374,6 @@ void host_disable_stream_io(void)
 	DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
 
     mode |= (ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT);
-    /* DIVERGENCE(MVDM-HOST-DIV-263): this is the original transition made
-     * by the first INT 33h service. Modern Console QuickEdit consumes a
-     * physical click before the original event worker can read it; preserve
-     * the original mouse/window record route and disable only that modern
-     * host-side interception at the same transition boundary. */
-    mode |= ENABLE_EXTENDED_FLAGS;
-    mode &= ~ENABLE_QUICK_EDIT_MODE;
     if(!SetConsoleMode(sc.InputHandle,mode))
 	  DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
 
