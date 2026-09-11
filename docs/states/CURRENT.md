@@ -6,30 +6,30 @@
 
 ## Active Packet
 
-### M0 T404 S3 P15 — positional NE-to-WOW record-entry recovery (delivered; actual-worker limitation)
+### M0 T404 S4 — productized single-process WOW bootstrap recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T404 S3 P15, Ordinary Mode, delivered with an explicit actual-worker command-line limitation. |
-| Admission And Approval | Owner approved on 2026-09-11: “批准！”. |
-| Candidate Proposal | [Positional NE-to-WOW entry recovery](../proposals/proposal-positional-ne-wow-entry-recovery-001.md); source basis: OpenNT [`BaseSrvCheckVDM`/`BaseSrvCheckWOW`](../../src/opennt-host/base/win32/server/srvvdm.c), original MVDM [`GetWowKernelCmdLine`](../../src/mvdm-host/dos/command/cmdmisc.c), and P14's [limited-coverage evidence](../etc/evidence/m0-t404-s3-p14-cpu40-dosx-direct-continuation-recovery-001.md). |
-| Reference Baseline | Positional `ntvdm32.exe system32\\WRITE.EXE` is correctly classified as Win16/NE, but the current app publishes it as a DOS-only BaseVDM record and starts no WOW worker bootstrap. Original `BaseSrvCheckVDM` directs Win16 to `BaseSrvCheckWOW`; original `GetWowKernelCmdLine` reads the worker's `-a <KRNL386.EXE>` bootstrap path. |
+| Identifier Mode | M0 T404 S4, Ordinary Mode. S3's mouse-usability packet is closed; this is the next sequential bounded recovery packet. |
+| Admission And Approval | Owner directed on 2026-09-11: “你将S3收口。当前T任务是跑通write.exe，启动链任务交给S4”. |
+| Candidate Proposal | S4 follows the delivered [P15 positional NE-to-WOW recovery](../proposals/proposal-positional-ne-wow-entry-recovery-001.md) and its [entry evidence](../etc/evidence/m0-t404-s3-p15-positional-ne-wow-entry-recovery-001.md). The newly audited A200 baseline is evidence only, not a source import or binary dependency. |
+| Reference Baseline | P15 preserves a positional NE as a copied WOW record (`state=0102`, owner `2`) but cannot provide original `GetWowKernelCmdLine` with a real `-a` process token in the present one-process composition. A200 demonstrates the valid alternate single-process closure: internal `-w/-a` selects WOW and a package-root-limited fallback supplies `KRNL386.EXE`; its record is implicit v2 metadata and its public `--command` CLI is retired. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), [document](../rules/DOCUMENT.md), and the [source policy](../etc/operations/policy/source-policy.md). |
-| Objective | Recover the positional NE-to-WOW copied-record selection and derive the original worker bootstrap argv, while determining whether the current one-process composition can satisfy original `GetWowKernelCmdLine`. |
-| Non-goals | Changing CCPU execution, BOP bytes or CPU profiles; changing guest media; accepting user-supplied worker bootstrap parameters; a cross-process broker split; shared-WOW pooling; Console behavior; or implementing a new WOW/DOSX loader. |
-| Files And ABI Surface | Expected: `src/app/entry.c`, `src/app/launch_declaration.[ch]`, `src/broker/base_vdm_record.[ch]`, `src/adapter-mvdm-host-out/basesrv/source/base_vdm_broker.c`, focused fixture(s), and indexed evidence. Broker's fixed-width copied record version may advance; no guest ABI changes. |
-| Verification | Fresh Win32/x86 CPU40 build under `build/M0-T404/S3/`; focused classification/broker tests proving DOS and WOW selection; source recovery ledger; formal x86 link; positional `WRITE.EXE` run with default-off BaseVDM and DEM-open observers; documentation governance and diff review. |
-| Expected Markers | `WRITE.EXE` produces a WOW-owned request, original `GetWowKernelCmdLine` receives a package-relative `KRNL386.EXE` path, and runtime observers show `KRNL386.EXE` then `DOSX.EXE` before any claimed WRITE result. |
-| Asset Needs | Existing selected OpenNT and MVDM source, existing package `system32\\KRNL386.EXE`, build tooling and owner runtime package only; no new source, guest binary, firmware, or Microsoft component. |
-| Reporting Requirements | Record four-rung recovery audit, exact source paths/ordering, changed wire version and compatibility boundary, focused positive/negative test results, x86 build identity, positional runtime result, staged hash if eligible, and any remaining frontier. |
-| Similar-Issue Sweep | Audit every local broker rejection/serialization of `command_owner`, every app command-classification caller, and all current positional Win16 handling; preserve DOS and native-image behavior. |
-| Stop Conditions | Need for CCPU/BOP/guest-media/Console changes, shared-WOW reuse, a new broker process, a new historical source import, a worker bootstrap path not expressible through the current bounded declaration, or a regression of DOS positional launch requires pausing and renewed admission. |
-| Exit Criteria | Met with publication limitation: positional NE derives the source-shaped worker argv and matching copied WOW record; DOS remains DOS; focused tests and formal x86 build pass; positional runtime proves the WOW record. Original `GetCommandLine()` still cannot observe the in-memory argv, so KRNL386/DOSX is not reached and the candidate is not published. |
-| Original Owner Request | “批准！” following the identified app/broker NE-to-WOW recovery boundary. |
+| Objective | Productize the single-process Win16 bootstrap behind only `ntvdm32.exe <binary>`, retaining P15's explicit WOW record and recovering the original `KRNL386.EXE → DOSX.EXE → WOW32.DLL` path toward WRITE. |
+| Non-goals | Public worker/bootstrap flags; a new process, BaseSrv executable, cross-process broker, WOW pooling, CCPU/BOP/guest-media/Console changes, a new WOW/DOSX loader, or using A200 binaries/source snapshot as a production dependency. |
+| Files And ABI Surface | Expected narrow surfaces: `src/app/launch_declaration.[ch]`, `src/mvdm-host/dos/command/cmdmisc.c`, a bounded existing/new `adapter-mvdm-host-out` declaration provider, focused fixtures, build graph and indexed evidence. P15 broker record v3 remains fixed-width and explicit; no guest ABI changes. |
+| Verification | Fresh Win32/x86 CPU40 build under `build/M0-T404/S4/`; focused tests for real `-a` precedence, session-bound fallback success and unavailable fallback failure; DOS positional non-regression; formal x86 link; public positional WRITE run with default-off DEM-open/module observers; governance and diff review. |
+| Expected Markers | No public `-w`, `-a`, `-o` or `--command` is accepted; a classified NE receives an explicit WOW record, a verified package `KRNL386.EXE` carrier, empty WOW PIF/default bootstrap, then runtime opens `KRNL386.EXE`, `DOSX.EXE`, loads `WOW32.DLL`, and advances WRITE beyond the current entry frontier. |
+| Asset Needs | Existing selected OpenNT/MVDM source, packaged KRNL386/DOSX/WRITE media, build tooling and owner runtime package only; no new source, guest binary, firmware or Microsoft component. |
+| Reporting Requirements | Record the four-rung recovery audit; exact original parser/fallback ordering; session/path lifetime and failure result; DOS/WOW profile disposition; focused test/build identities; public runtime observations; staged hash only if non-regressive; and remaining WRITE frontier. |
+| Similar-Issue Sweep | Audit all direct `GetCommandLine` WOW bootstrap consumers, every app-created initial PIF profile, every `command_owner` serialization/consumer, and every public option parser; preserve DOS and native-image behavior. |
+| Stop Conditions | Need for a cross-process service/worker, a new historical source import, CCPU/BOP/guest-media/Console changes, a non-session-bound path search, a guest-visible host pointer, or DOS positional regression pauses work for renewed admission. |
+| Exit Criteria | The sole public positional WRITE command demonstrably reaches `KRNL386.EXE`, `DOSX.EXE`, and `WOW32.DLL` through the retained original owners, with focused checks and formal x86 build passing. A WRITE UI/document/lifecycle claim requires its own direct evidence. |
+| Original Owner Request | “当前T任务是跑通write.exe，启动链任务交给S4”. |
 
-P12's [mouse acceptance record](../etc/evidence/m0-t404-s3-p12-native-console-mouse-interaction-audit-001.md), P13's [BOP entry audit](../etc/evidence/m0-t404-s3-p13-cpu40-bop-entry-contract-audit-001.md), and P14's direct CPU40 continuation repair are delivered. P14's test result did not reach DOSX; after the owner approved this renewed, bounded app/broker recovery, P15 is the sole active packet. The package remains restored to P12 until P15 proves a non-regressive positional launch.
+## S3 Closure Record
 
-P15's [entry-recovery evidence](../etc/evidence/m0-t404-s3-p15-positional-ne-wow-entry-recovery-001.md) proves the positional NE request now reaches the WOW record (`state=0102`, owner `2`) and records focused x86 build/fixture success. It also reaches P15's stop condition: original `GetWowKernelCmdLine` reads the real worker `GetCommandLine()`, while the current one-process composition has only an in-memory SoftPC argv. No KRNL386/DOSX result was reached; P12 remains staged and any actual-worker/bootstrap bridge needs renewed admission.
+S3 is closed as the native Console mouse-usability packet. Its delivered acceptance is the owner-verified [P12 mouse record](../etc/evidence/m0-t404-s3-p12-native-console-mouse-interaction-audit-001.md): host mouse movement and button transitions reach the original guest mouse path without the prior false-click/help-modal behavior. P13--P15 are retained startup-chain investigations and entry recovery evidence, not part of S3's mouse closure. They establish S4's baseline only; they do not claim KRNL386, DOSX, WOW32 or WRITE execution.
 
 ## S1 Closure Record
 
