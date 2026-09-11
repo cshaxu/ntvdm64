@@ -11,5 +11,6 @@ This directory contains only the following owner-approved supporting records.
 | [T404 S2 DOSX BOP FD contract audit](evidence/m0-t404-s2-dosx-bop-fd-contract-audit-001.md) | M0 T404 S2 | Source/build/runtime audit for the required DOSX real-mode continuation provider. | Retain while T404 or its history links it. |
 | [T404 S2 MONITOR semantic ledger](evidence/m0-t404-s2-monitor-semantic-ledger-001.md) | M0 T404 S2 | Exhaustive source-level classification of `MONITOR`-conditioned semantics against the selected formal x86 graph. | Retain while T404 or its history links it. |
 | [T404 S3 presentation-window mouse recovery](evidence/m0-t404-s3-presentation-window-mouse-recovery-001.md) | M0 T404 S3 | Bounded text-mode mouse binding, focused verification, and owner-runtime handoff. | Retain while T404 remains active or its closure links it. |
+| [T404 S3 P8 native Console mouse recovery](evidence/m0-t404-s3-p8-native-console-mouse-recovery-001.md) | M0 T404 S3 P8 | Original-owner Console-mode recovery and bounded `EDIT.COM` Console-to-callback proof. | Retain while T404 remains active or its closure links it. |
 
 All other historical supporting material is in the [external documentation archive](../../artifacts/documentation-archive/20260910/strict-topology/).

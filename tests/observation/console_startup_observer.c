@@ -425,6 +425,41 @@ static BOOL write_console_alt_enter(HANDLE input)
     return WriteConsoleInputA(input, &record, 1u, &written) && written == 1u;
 }
 
+/* Feed one ordinary public Console mouse sequence only after the selected
+ * guest has installed its original INT 33 callback and its source-owned
+ * startup mouse-suppression interval (DelayMouseEvents(2), 330 ms) has
+ * expired. The sequence uses the same CONIN$ queue and original event worker
+ * as physical conhost input. */
+static BOOL write_console_mouse_sequence(HANDLE input, const char *report_path)
+{
+    const DWORD buttons[] = { 0u, FROM_LEFT_1ST_BUTTON_PRESSED,
+        FROM_LEFT_1ST_BUTTON_PRESSED, 0u };
+    const DWORD flags[] = { MOUSE_MOVED, 0u, MOUSE_MOVED, 0u };
+    const SHORT x[] = { 26, 26, 54, 54 };
+    const SHORT y[] = { 11, 11, 21, 21 };
+    DWORD index;
+
+    if (input == NULL || input == INVALID_HANDLE_VALUE || report_path == NULL)
+        return FALSE;
+    Sleep(500u);
+    for (index = 0u; index < ARRAYSIZE(buttons); ++index) {
+        INPUT_RECORD record;
+        DWORD written = 0u;
+        DWORD report_offset = report_size_bytes(report_path);
+
+        memset(&record, 0, sizeof(record));
+        record.EventType = MOUSE_EVENT;
+        record.Event.MouseEvent.dwMousePosition.X = x[index];
+        record.Event.MouseEvent.dwMousePosition.Y = y[index];
+        record.Event.MouseEvent.dwButtonState = buttons[index];
+        record.Event.MouseEvent.dwEventFlags = flags[index];
+        if (!WriteConsoleInputA(input, &record, 1u, &written) || written != 1u ||
+            !wait_for_report_marker_after(report_path, "MVDM-MOUSE stage=7",
+                report_offset, OBSERVATION_KEY_DRAIN_TIMEOUT_MS)) return FALSE;
+    }
+    return TRUE;
+}
+
 /* The command row must not use a wall-clock guess for initial COMMAND setup.
  * The product's default-off source marker records an original BIOS keyboard
  * read/status edge (BOP 16, AH=0/1/2).  This is the source-owned point at
@@ -486,6 +521,12 @@ int main(int argc, char **argv)
     BOOL scripted_presentation_toggle = FALSE;
     BOOL scripted_presentation_toggle_delivered = FALSE;
     BOOL scripted_presentation_toggle_ready = FALSE;
+    BOOL observe_console_mouse_mode = FALSE;
+    BOOL observed_console_mouse_mode = FALSE;
+    DWORD observed_console_input_mode = 0u;
+    BOOL observe_console_mouse_input = FALSE;
+    BOOL observed_console_mouse_input_ready = FALSE;
+    BOOL observed_console_mouse_input_delivered = FALSE;
     char presentation_report_path[MAX_PATH];
     const char *scripted_console_input_text = "ver\rexit\r";
     const char *scripted_console_input_sequence = "ver+exit";
@@ -615,6 +656,16 @@ int main(int argc, char **argv)
                 if (strcmp(argv[argument_index],
                            "--observe-presentation-toggle") == 0) {
                     scripted_presentation_toggle = TRUE;
+                    continue;
+                }
+                if (strcmp(argv[argument_index],
+                           "--observe-console-mouse-mode") == 0) {
+                    observe_console_mouse_mode = TRUE;
+                    continue;
+                }
+                if (strcmp(argv[argument_index],
+                           "--observe-console-mouse-input") == 0) {
+                    observe_console_mouse_input = TRUE;
                     continue;
                 }
                 /* An explicit observer-only extension is permitted solely
@@ -866,6 +917,32 @@ int main(int argc, char **argv)
         if (scripted_presentation_toggle_ready)
             scripted_presentation_toggle_delivered = write_console_alt_enter(input);
     }
+    if (observe_console_mouse_mode) {
+        DWORD presentation_report_length = GetEnvironmentVariableA(
+            "MVDM_CONSOLE_PRESENTATION_REPORT_PATH", presentation_report_path,
+            (DWORD)sizeof(presentation_report_path));
+        if (presentation_report_length != 0u &&
+            presentation_report_length < sizeof(presentation_report_path))
+            observed_console_mouse_mode = wait_for_report_marker(
+                presentation_report_path, "MVDM-MOUSE stage=3",
+                OBSERVATION_INPUT_READY_TIMEOUT_MS);
+        if (observed_console_mouse_mode)
+            observed_console_mouse_mode = GetConsoleMode(input,
+                &observed_console_input_mode);
+    }
+    if (observe_console_mouse_input) {
+        DWORD presentation_report_length = GetEnvironmentVariableA(
+            "MVDM_CONSOLE_PRESENTATION_REPORT_PATH", presentation_report_path,
+            (DWORD)sizeof(presentation_report_path));
+        if (presentation_report_length != 0u &&
+            presentation_report_length < sizeof(presentation_report_path))
+            observed_console_mouse_input_ready = wait_for_report_marker(
+                presentation_report_path, "MVDM-MOUSE stage=8",
+                OBSERVATION_INPUT_READY_TIMEOUT_MS);
+        if (observed_console_mouse_input_ready)
+            observed_console_mouse_input_delivered = write_console_mouse_sequence(
+                input, presentation_report_path);
+    }
     observation_elapsed_ms = (DWORD)(GetTickCount() - observation_started_at);
     observation_wait_ms = observation_elapsed_ms >= observation_timeout_ms ? 0u :
         observation_timeout_ms - observation_elapsed_ms;
@@ -924,6 +1001,17 @@ int main(int argc, char **argv)
         if (scripted_presentation_toggle)
             fprintf(report, "scripted-presentation-toggle-ready=%s\n",
                     scripted_presentation_toggle_ready ? "yes" : "no");
+        fprintf(report, "console-mouse-mode-observed=%s\n",
+                observed_console_mouse_mode ? "yes" : "no");
+        if (observe_console_mouse_mode && observed_console_mouse_mode)
+            fprintf(report, "console-input-mode=0x%08lx\n",
+                    (unsigned long)observed_console_input_mode);
+        fprintf(report, "console-mouse-input=%s\n", observe_console_mouse_input ?
+                (observed_console_mouse_input_delivered ? "delivered" : "failed") :
+                "none");
+        if (observe_console_mouse_input)
+            fprintf(report, "console-mouse-input-ready=%s\n",
+                    observed_console_mouse_input_ready ? "yes" : "no");
         if (scripted_console_input) {
             fprintf(report, "scripted-console-input-trigger=dos-int21-buffered-console-input\n");
             fprintf(report, "scripted-console-input-sequence=%s\n",

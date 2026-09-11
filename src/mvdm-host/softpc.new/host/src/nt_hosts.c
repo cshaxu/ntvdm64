@@ -107,7 +107,13 @@ void SetupConsoleMode(void)
     mode = sc.OrgInConsoleMode &
 	   ~(ENABLE_PROCESSED_INPUT | ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT);
     if (!host_stream_io_enabled)
-	mode |= (ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT);
+	mode |= ENABLE_WINDOW_INPUT;
+    /* DIVERGENCE(MVDM-HOST-DIV-263): standalone text mode remains in
+       STREAM_IO, unlike the original Console Server transition that enabled
+       mouse input later. Public Console QuickEdit otherwise consumes physical
+       clicks before this unchanged original event worker can read them. */
+    mode |= (ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
+    mode &= ~ENABLE_QUICK_EDIT_MODE;
 
     /*.............................................. Set new console mode */
 
