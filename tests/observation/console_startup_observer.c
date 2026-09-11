@@ -405,6 +405,48 @@ static BOOL write_console_input_text(HANDLE input, const char *text,
     return TRUE;
 }
 
+/* A callback installation (stage 8) can itself cause an older mouse callback
+ * to return.  Attribute an observation record only when its source-owned IRQ
+ * queue stage precedes its callback-return stage in the report tail. */
+static BOOL wait_for_mouse_roundtrip_after(const char *path,
+                                           DWORD start_offset,
+                                           DWORD timeout_ms)
+{
+    DWORD started_at = GetTickCount();
+    char buffer[65537];
+
+    if (path == NULL) return FALSE;
+    for (;;) {
+        HANDLE file = CreateFileA(path, GENERIC_READ,
+                                  FILE_SHARE_READ | FILE_SHARE_WRITE,
+                                  NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL,
+                                  NULL);
+        if (file != INVALID_HANDLE_VALUE) {
+            DWORD size = GetFileSize(file, NULL);
+            if (size != INVALID_FILE_SIZE && size > start_offset) {
+                DWORD remaining = size - start_offset;
+                DWORD to_read = remaining < (DWORD)(sizeof(buffer) - 1u) ?
+                    remaining : (DWORD)(sizeof(buffer) - 1u);
+                DWORD read = 0;
+                SetFilePointer(file, (LONG)start_offset, NULL, FILE_BEGIN);
+                if (ReadFile(file, buffer, to_read, &read, NULL)) {
+                    char *queued;
+                    buffer[read] = '\0';
+                    queued = strstr(buffer, "MVDM-MOUSE stage=2");
+                    if (queued != NULL && strstr(queued,
+                            "MVDM-MOUSE stage=7") != NULL) {
+                        CloseHandle(file);
+                        return TRUE;
+                    }
+                }
+            }
+            CloseHandle(file);
+        }
+        if ((DWORD)(GetTickCount() - started_at) >= timeout_ms) return FALSE;
+        Sleep(25u);
+    }
+}
+
 /* This observer-only host gesture exercises the same public Console adapter
  * branch as physical Alt+Enter. The adapter consumes it before the guest
  * keyboard worker, so it cannot manufacture a DOS key or alter guest state. */
@@ -425,11 +467,10 @@ static BOOL write_console_alt_enter(HANDLE input)
     return WriteConsoleInputA(input, &record, 1u, &written) && written == 1u;
 }
 
-/* Feed one ordinary public Console mouse sequence only after the selected
- * guest has installed its original INT 33 callback and its source-owned
- * startup mouse-suppression interval (DelayMouseEvents(2), 330 ms) has
- * expired. The sequence uses the same CONIN$ queue and original event worker
- * as physical conhost input. */
+/* Feed an ordinary public Console mouse sequence through the same CONIN$
+ * queue and original event worker as physical conhost input. The observer
+ * accepts a record only after the original queue and callback-return stages
+ * prove it was delivered; it does not assume a wall-clock startup boundary. */
 static BOOL write_console_mouse_sequence(HANDLE input, const char *report_path)
 {
     const DWORD buttons[] = { 0u, FROM_LEFT_1ST_BUTTON_PRESSED,
@@ -443,19 +484,29 @@ static BOOL write_console_mouse_sequence(HANDLE input, const char *report_path)
         return FALSE;
     Sleep(500u);
     for (index = 0u; index < ARRAYSIZE(buttons); ++index) {
-        INPUT_RECORD record;
-        DWORD written = 0u;
-        DWORD report_offset = report_size_bytes(report_path);
+        DWORD attempt;
+        for (attempt = 0u; attempt != 3u; ++attempt) {
+            INPUT_RECORD record;
+            DWORD written = 0u;
+            DWORD report_offset = report_size_bytes(report_path);
 
-        memset(&record, 0, sizeof(record));
-        record.EventType = MOUSE_EVENT;
-        record.Event.MouseEvent.dwMousePosition.X = x[index];
-        record.Event.MouseEvent.dwMousePosition.Y = y[index];
-        record.Event.MouseEvent.dwButtonState = buttons[index];
-        record.Event.MouseEvent.dwEventFlags = flags[index];
-        if (!WriteConsoleInputA(input, &record, 1u, &written) || written != 1u ||
-            !wait_for_report_marker_after(report_path, "MVDM-MOUSE stage=7",
-                report_offset, OBSERVATION_KEY_DRAIN_TIMEOUT_MS)) return FALSE;
+            memset(&record, 0, sizeof(record));
+            record.EventType = MOUSE_EVENT;
+            record.Event.MouseEvent.dwMousePosition.X = x[index];
+            record.Event.MouseEvent.dwMousePosition.Y = y[index];
+            record.Event.MouseEvent.dwButtonState = buttons[index];
+            record.Event.MouseEvent.dwEventFlags = flags[index];
+            if (!WriteConsoleInputA(input, &record, 1u, &written) || written != 1u)
+                return FALSE;
+            if (wait_for_mouse_roundtrip_after(report_path, report_offset,
+                    OBSERVATION_KEY_DRAIN_TIMEOUT_MS))
+                break;
+            /* OpenNT itself may discard records during its short render-mode
+             * transition.  Do not alter that policy: retry only this external
+             * observation record after its bounded source-owned interval. */
+            Sleep(500u);
+        }
+        if (attempt == 3u) return FALSE;
     }
     return TRUE;
 }
@@ -497,6 +548,31 @@ static BOOL wait_for_report_marker(const char *path, const char *marker,
         if ((DWORD)(GetTickCount() - started_at) >= timeout_ms) return FALSE;
         Sleep(25u);
     }
+}
+
+/* The original INT 33h entry turns off stream I/O and the host transition
+ * enables mouse/window Console records. Observe that public handle state
+ * directly: a synthetic diagnostic stage is neither an activation boundary
+ * nor a substitute for it. */
+static BOOL wait_for_console_mouse_mode(HANDLE input, DWORD *mode_out,
+                                        DWORD timeout_ms)
+{
+    DWORD started_at = GetTickCount();
+    DWORD mode;
+
+    if (input == NULL || input == INVALID_HANDLE_VALUE || mode_out == NULL)
+        return FALSE;
+    do {
+        if (GetConsoleMode(input, &mode) &&
+            (mode & (ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS)) ==
+                (ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS) &&
+            (mode & ENABLE_QUICK_EDIT_MODE) == 0u) {
+            *mode_out = mode;
+            return TRUE;
+        }
+        Sleep(20u);
+    } while ((DWORD)(GetTickCount() - started_at) < timeout_ms);
+    return FALSE;
 }
 
 int main(int argc, char **argv)
@@ -553,6 +629,7 @@ int main(int argc, char **argv)
     char previous_bop_return_report_path[MAX_PATH];
     char console_input_ready_report_path[MAX_PATH];
     char console_input_preinput_snapshot_path[MAX_PATH];
+    char console_mouse_postinput_snapshot_path[MAX_PATH];
     char previous_console_input_ready_report_path[MAX_PATH];
     char dem_open_report_path[MAX_PATH];
     char previous_dem_open_report_path[MAX_PATH];
@@ -704,6 +781,9 @@ int main(int argc, char **argv)
     snprintf(console_input_preinput_snapshot_path,
              sizeof(console_input_preinput_snapshot_path),
              "%s.pre-input-console.txt", report_base_path);
+    snprintf(console_mouse_postinput_snapshot_path,
+             sizeof(console_mouse_postinput_snapshot_path),
+             "%s.mouse-post-input-console.txt", report_base_path);
     snprintf(base_vdm_report_path, sizeof(base_vdm_report_path), "%s.base-vdm.txt",
              report_base_path);
     snprintf(dem_open_report_path, sizeof(dem_open_report_path), "%s.dem-open.txt",
@@ -918,17 +998,8 @@ int main(int argc, char **argv)
             scripted_presentation_toggle_delivered = write_console_alt_enter(input);
     }
     if (observe_console_mouse_mode) {
-        DWORD presentation_report_length = GetEnvironmentVariableA(
-            "MVDM_CONSOLE_PRESENTATION_REPORT_PATH", presentation_report_path,
-            (DWORD)sizeof(presentation_report_path));
-        if (presentation_report_length != 0u &&
-            presentation_report_length < sizeof(presentation_report_path))
-            observed_console_mouse_mode = wait_for_report_marker(
-                presentation_report_path, "MVDM-MOUSE stage=3",
-                OBSERVATION_INPUT_READY_TIMEOUT_MS);
-        if (observed_console_mouse_mode)
-            observed_console_mouse_mode = GetConsoleMode(input,
-                &observed_console_input_mode);
+        observed_console_mouse_mode = wait_for_console_mouse_mode(input,
+            &observed_console_input_mode, OBSERVATION_INPUT_READY_TIMEOUT_MS);
     }
     if (observe_console_mouse_input) {
         DWORD presentation_report_length = GetEnvironmentVariableA(
@@ -936,12 +1007,14 @@ int main(int argc, char **argv)
             (DWORD)sizeof(presentation_report_path));
         if (presentation_report_length != 0u &&
             presentation_report_length < sizeof(presentation_report_path))
-            observed_console_mouse_input_ready = wait_for_report_marker(
-                presentation_report_path, "MVDM-MOUSE stage=8",
+            observed_console_mouse_input_ready = wait_for_console_mouse_mode(input,
+                &observed_console_input_mode,
                 OBSERVATION_INPUT_READY_TIMEOUT_MS);
         if (observed_console_mouse_input_ready)
             observed_console_mouse_input_delivered = write_console_mouse_sequence(
                 input, presentation_report_path);
+        if (observed_console_mouse_input_delivered)
+            write_console_snapshot(output, console_mouse_postinput_snapshot_path);
     }
     observation_elapsed_ms = (DWORD)(GetTickCount() - observation_started_at);
     observation_wait_ms = observation_elapsed_ms >= observation_timeout_ms ? 0u :
