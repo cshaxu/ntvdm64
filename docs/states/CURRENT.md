@@ -6,28 +6,28 @@
 
 ## Active Packet
 
-### M0 T404 S3 P12 — native Console mouse interaction-contract recovery (delivered)
+### M0 T404 S3 P13 — CPU40 BOP entry-contract audit (delivered)
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T404 S3 P12, Ordinary Mode, delivered. P11's Console-mode timing experiment is withdrawn after owner runtime rejection; P7 is the restored input baseline. |
-| Admission And Approval | Owner approved on 2026-09-11: “目标是参照opennt的mvdm实现同样功能，本来唯一区别应该只是如何和现代terminal/conhost去集成。” and “帮我恢复状态并正确修复！”。 After the callback-entry audit, owner expressly approved the single-point CPU40 repair: “ok 那你实施吧”. |
-| Candidate Proposal | [Native Console mouse interaction contract](../proposals/proposal-native-console-mouse-coordinate-normalization-001.md); delivered evidence: [P12 audit](../etc/evidence/m0-t404-s3-p12-native-console-mouse-interaction-audit-001.md). |
-| Reference Baseline | The selected x86 `ntvdm32.exe`; OpenNT `nt_event.c` consumes visible VDM display cells before `nt_mouse.c` maps them to the INT 33h callback. Public modern Console input reports screen-buffer cells. |
+| Identifier Mode | M0 T404 S3 P13, Ordinary Mode, delivered read-only audit. P12's accepted CPU40 direct INT33 callback repair is the reference case. |
+| Admission And Approval | Owner directed on 2026-09-11: “对，你来审计。” This follows the P12 discussion of whether BOP entry bytes should be recovered or the stale assumption removed. |
+| Candidate Proposal | [CPU40 BOP entry-contract audit](../proposals/proposal-cpu40-bop-entry-contract-audit-001.md); delivered [P13 evidence](../etc/evidence/m0-t404-s3-p13-cpu40-bop-entry-contract-audit-001.md); preceding delivery: [P12 audit](../etc/evidence/m0-t404-s3-p12-native-console-mouse-interaction-audit-001.md). |
+| Reference Baseline | Selected x86 CPU40 source and composition, including `HOST_BOP_IP_FUDGE = -2`; P12 proves one guest-registered mouse callback is direct guest code rather than a BOP entry. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), [document](../rules/DOCUMENT.md), and the [source policy](../etc/operations/policy/source-policy.md). |
-| Objective | Recover CPU40's direct INT33 guest-callback entry from the demonstrated stale `-2` BOP adjustment, while retaining the original event queue and callback ABI; continue the separate Console input/output association audit without an unproven coordinate repair. |
-| Non-goals | Changing CCPU decoding/execution, the global `HOST_BOP_IP_FUDGE`, CPU30, any other BOP route, guest media, callback mask/button/absolute-position semantics, coordinate translation, Console-mode timing experiments, a self-painted window, a generic input broker, or cross-process broker work. |
-| Files And ABI Surface | `softpc.new/base/keymouse/mouse_io.c` for the selected CPU40 callback-entry seam; `host/src/{nt_hosts.c,nt_fulsc.c}` restores the P7 modern-Console mode boundary after P11 withdrawal. The callback ABI remains `AX` reason, `BX` buttons, `CX/DX` absolute position and `SI/DI` relative motion. |
-| Verification | Focused x86 build; automatic after-modal-dismissal zero-button document-area move and press/drag/release sequences; verify callback entry is the registered offset and callback return remains intact; owner test in ordinary `cmd/conhost` EDIT.COM. |
-| Expected Markers | CPU40 enters `371A:0223` rather than `371A:0221` for the observed EDIT handler; no-button movement no longer renders Help; press/drag/release preserve their original masks and return. |
-| Asset Needs | Existing text-mode `EDIT.COM` and its original `QBASIC.EXE` companion only; no new guest binary, driver, firmware, or Microsoft component. |
-| Reporting Requirements | Record P11 withdrawal, the withdrawn P12 coordinate shortcut, source/Console association evidence, formal x86 product identity, and owner acceptance in indexed evidence. |
-| Similar-Issue Sweep | Inspect only CPU40 callers that use this direct registered callback form; do not alter guest providers, BOP decoding, or presentation rendering. |
-| Stop Conditions | Any need beyond the selected CPU40 direct registered callback entry—especially CCPU, global BOP, guest mouse, callback ABI, coordinate, graphics, or presentation changes—requires renewed admission. |
-| Exit Criteria | Met: the selected callback enters its registered first instruction; automatic controls show correct no-button and button-transition behaviour; the input/output association remains documented as separate; x86 build and owner `cmd/conhost` EDIT.COM acceptance passed. Any new BOP architecture work requires a new admission. |
-| Original Owner Request | “在该T任务中准入一个月S任务支持鼠标；这个鼠标支持已经在另一个工作树中可直接导入；完成提交推送后，可清除队列中相应的鼠标任务。” |
+| Objective | Classify every selected production `HOST_BOP_IP_FUDGE` route as a demonstrated BOP/trampoline, a direct guest entry, or unresolved; propose no code change. |
+| Non-goals | Changing CCPU decoding/execution, `HOST_BOP_IP_FUDGE`, CPU30, any BOP route, guest media, callbacks, coordinate semantics, Console modes, or runtime package behavior. |
+| Files And ABI Surface | Read-only selected CCPU40/SoftPC source and build manifests; new proposal and indexed audit evidence only. |
+| Verification | Exhaustive text/call-site inventory; original-source and CPU40 entry-shape review for every occurrence; diff and documentation governance checks. |
+| Expected Markers | Every occurrence has a source owner, operand provenance, entry classification, evidence, and retain/direct/unresolved disposition. |
+| Asset Needs | Existing selected source, build manifests, and P12 logs only; no new source, guest binary, firmware, or Microsoft component. |
+| Reporting Requirements | Record exact inventory, proof level, direct-entry versus host-stub distinction, and explicitly deferred routes in indexed evidence. |
+| Similar-Issue Sweep | Search definitions, additions/subtractions, address setters, BOP stub constructors, and CPU40 fetch entry only; do not widen to unrelated BOP services. |
+| Stop Conditions | Any proposed behavioral change, runtime instrumentation, guest-memory modification, CPU30 activation, or CCPU/BOP decoder change requires renewed admission. |
+| Exit Criteria | Met: the indexed audit covers every selected production occurrence and gives a justified per-route disposition; no product code changed. |
+| Original Owner Request | “对，你来审计。” |
 
-P8 evidence: [native Console mouse-input recovery](../etc/evidence/m0-t404-s3-p8-native-console-mouse-recovery-001.md). P9 withdrawal: [native Console mouse-vector hypothesis withdrawal](../etc/evidence/m0-t404-s3-p9-native-console-mouse-vector-recovery-001.md). P10 withdrawal: [native Console mouse-delivery policy](../proposals/proposal-native-console-mouse-delivery-policy-001.md). P11 is withdrawn by P12. P12's [button-state, callback-entry, and acceptance record](../etc/evidence/m0-t404-s3-p12-native-console-mouse-interaction-audit-001.md) rejects the synthetic-held-button hypothesis, records the CPU40 direct-entry repair, and retains Console input/output association as a separate question. Owner accepted ordinary `cmd/conhost` EDIT.COM mouse use on 2026-09-11. The next T404 S requires new admission.
+P12's [button-state, callback-entry, and acceptance record](../etc/evidence/m0-t404-s3-p12-native-console-mouse-interaction-audit-001.md) is delivered. P13 establishes that neither remaining CPU40 `reset.c` consumer targets a BOP: both target DOSX `enrm` continuations. A separate admission is required to make those two CPU40 entries direct and test DOSX/WOW; P13 is read-only and does not reopen P12 behavior.
 
 ## S1 Closure Record
 
