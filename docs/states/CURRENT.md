@@ -6,11 +6,11 @@
 
 ## Active Packet
 
-### M0 T404 S3 P4 — presentation-window mouse input recovery
+### M0 T404 S3 P5 — presentation-window mouse input recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T404 S3 P4, Ordinary Mode. P1 (`510d74b76`) delivered the bounded mouse binding; P2 (`c6aa2dd5a`) verified the text-mode display-transfer entry; P3 records the bounded `EDIT.COM` startup prerequisite; P4 corrects the reported no-response Console-mode gap. |
+| Identifier Mode | M0 T404 S3 P5, Ordinary Mode. P1 (`510d74b76`) delivered the bounded mouse binding; P2 (`c6aa2dd5a`) verified the text-mode display-transfer entry; P3 records the bounded `EDIT.COM` startup prerequisite; P4 corrects the reported no-response Console-mode gap; P5 verifies the selected guest does issue INT 33h. |
 | Admission And Approval | Owner approved admission and direct, bounded reuse of the independently implemented mouse support, then reported that the first staged `EDIT.COM` presentation run had no mouse response. |
 | Candidate Proposal | [Presentation-window mouse input recovery](../proposals/proposal-presentation-window-mouse-input-recovery-001.md) |
 | Reference Baseline | The selected x86 `ntvdm32.exe` and its unchanged original `nt_event.c` → `nt_mouse.c` → `base/keymouse/mouse_io.c` route. |

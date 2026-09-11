@@ -107,11 +107,25 @@ Alt+Enter presentation window or synthesize mouse input. The deployable
 `O:\ntvdm64` package already contains the same original `EDIT.COM` and
 `QBASIC.EXE` media for the owner-visible test.
 
+## Guest mouse-use audit
+
+P5 confirms that the selected target actually uses the DOS mouse interface.
+The deployed `EDIT.COM` is the 413-byte original QBASIC launcher and contains
+the `QBASIC` token. The deployed `QBASIC.EXE` has 25 `CD 33h` instruction
+occurrences; its SHA-256 is
+`ECCA463F1820749A1408FC8EF3799D23FB232C188669CA9D5DB3769CE628746B`.
+The guest source also retains the original NTVDM internal INT 33h driver in
+`src/mvdm-guest/dos/v86/doskrnl/bios/spcmse_4.asm`. The source-tree QBASIC
+binary differs in package size and hash, so it was used only as a structural
+comparison, never deployed or substituted. Therefore a non-responsive EDIT
+run cannot be dismissed as an editor that lacks mouse calls; the remaining
+question is delivery through the selected host Console-to-INT-33h route.
+
 ## P delivery status
 
 P1 (`510d74b76`) delivered the mouse binding and formal x86 staging. P2
 (`c6aa2dd5a`) adds the focused text-mode display-transfer proof. P3 records
 the bounded `EDIT.COM` startup prerequisite. P4 corrects the observed
 stream-I/O Console-mode omission, then formally relinks and stages the x86
-product. None replaces the remaining owner interactive `EDIT.COM` mouse
-acceptance.
+product. P5 proves the selected original guest actively calls INT 33h. None
+replaces the remaining owner interactive `EDIT.COM` mouse acceptance.
