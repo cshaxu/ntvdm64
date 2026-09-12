@@ -532,7 +532,37 @@ algorithms and excluded removed DBG lines from autonomous-code counts.
 All six direct diffs are covered; async/copy adapter semantic closure remains
 open. No production change or network execution was performed.
 
-## Whole-project completion remains open
+## T405 async pipe adapter ownership verification
+
+Read complete redir/mvdm_redirector_async.c. It allocates a staging buffer
+used by the original overlapped I/O submission, retains numeric destination
+locations and frees that same staging allocation in async_release. This
+confirms that the prior cancellation/free concern involves actual I/O buffer
+ownership, not merely diagnostic storage. Outstanding-I/O completion still
+needs proof; cancellation request alone is not recorded as completion here.
+
+Additional source-proven differences from original direct aliases:
+
+- Completion writes error and byte-count words first, then validates and
+  copies read payload. A failed payload acquisition leaves completion words
+  published without the data. Original OS I/O writes the direct buffer before
+  the completion routine publishes those words. ANR/ICA delivery is still
+  controlled by the retained mirror and is suppressed on helper failure.
+- Preparation copies a fixed 24-byte request even for older non-Type2 forms;
+  original code accessed the optional semaphore only for Type2. Verify guest
+  packet readable extent before treating the fixed capture as equivalent.
+- Write payload is snapshotted before submission; read payload copies only
+  the actual byte_count on completion, unlike ordinary DEM's full-request
+  lease commit. Do not carry DEM's tail-write risk over to this helper.
+- Worker stop state is a process-global static atomic, not per-request or
+  per-session. It is reset by worker_begin after CreateThread in the caller.
+  Reinitialization and session teardown need a combined state audit.
+
+Reviewer traced the returned staging pointer into ReadFile/WriteFile and
+verified release frees it. The documented risk is not a claim of a runtime
+crash already reproduced. No source repair or live network operation.
+
+## Remaining full audit
 
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
