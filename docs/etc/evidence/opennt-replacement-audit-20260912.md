@@ -499,7 +499,40 @@ requirements of the complete allocator. These checks narrow the earlier
 unknowns without asserting a safe whole-file deletion. No runtime or source
 repair was performed.
 
-## Remaining project audit
+## T405 Redirector direct diff coverage
+
+Read complete diffs for all six text-different vdmredir files. Original
+network bodies are largely retained; replacements are concentrated at guest
+copy and asynchronous lifecycle boundaries, not wholesale network stubs.
+
+| File | Classification |
+| --- | --- |
+| vrmslot.c | Removes comments/DBG diagnostics and changes string-length types. Original bitmap allocation loop remains, including its per-word Handle16 reset; do not attribute that inherited logic to the local diff. No new mailslot algorithm found. |
+| vrdlcpst.c | Adds thread ABI adapter header; inspect macro expansion/worker ownership separately. |
+| vrinit.c | Replaces null-structure field-address expression with FIELD_OFFSET, not a new initialization algorithm. |
+| vrremote.c | Replaces direct wide-name strcpy with WideCharToMultiByte(CP_OEMCP), adding conversion failure handling. Deliberate encoding behavior change, not transport forwarding. Compare original NetAPI character contract before deciding restoration. |
+| vrnetapi.c | Reimplements CD-name output preparation into three local buffers then adapter composite guest writes, replacing conditional direct destination writes. Computer/user-name APIs similarly use copy adapters and new failure results. Original NetAPI queries remain. Distinguish conversion policy from guest destination ownership; composite partial failure remains to inspect. |
+| vrnmpipe.c | Original request queue, worker and ICA flow remain, but request capture/completion now use adapter snapshots. Adds worker-stop/join and request cancellation/free to originally empty VrTerminateNamedPipes, plus release calls throughout. This is autonomous lifecycle policy, not an original implemented cleanup body. |
+
+In added VrTerminateNamedPipes, after worker join the loop calls CancelIoEx,
+closes the request event and frees its adapter/request storage without a local
+completion wait. Joining the application completion worker is not itself
+evidence of OS I/O completion. The adapter's actual buffer ownership and
+cancellation completion contract must be checked before judging safety;
+static reading has not established an observed use-after-free.
+
+Worker stop initialization also follows CreateThread, and termination invoked
+on the worker thread skips joining it. These are review questions requiring
+call-site/thread-state evidence, not proof of a race merely from ordering.
+The original empty cleanup may have relied on process termination; restoring
+it blindly would not satisfy a session teardown contract.
+
+Reviewer kept these new lifecycle mechanisms distinct from original queue
+algorithms and excluded removed DBG lines from autonomous-code counts.
+All six direct diffs are covered; async/copy adapter semantic closure remains
+open. No production change or network execution was performed.
+
+## Whole-project completion remains open
 
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
