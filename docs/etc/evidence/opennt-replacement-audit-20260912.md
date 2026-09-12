@@ -158,7 +158,31 @@ the local filter was checked for Ctrl and peek behavior. These findings are
 not evidence that the historically fixed mouse false-click defect has returned.
 No product code, public entry point or runtime binary was changed.
 
-## Remaining full-audit requirements
+## T405 CCPU executor diff follow-up
+
+Compared the complete `softpc.new/base/ccpu386/c_main.c` diff against
+`O:/repos.external/OpenNT/base/mvdm/softpc.new/base/ccpu386/c_main.c`, then
+followed the affected HLT/reset path and the EIP setter. This is a mirror
+internal audit: successful COMMAND/EDIT operation does not exempt these changes.
+
+| Local change | Original behavior and verified delta | Proposed discussion item |
+| --- | --- | --- |
+| DIV-125, UPDATE_INTEL_IP_USE_OP_SIZE, current line 648 | Original USE16 expression masks the sum `(EIP + delta) & WORD_MASK` by C operator precedence. Local expression is `EIP + (delta & WORD_MASK)`. `c_reg.h:135` assigns CCPU_IP without an implicit 16-bit mask. For EIP=65535 and delta=2, original result is 1, local result is 65537; independently evaluated as integer expressions. | Confirmed altered arithmetic, not a harmless x64 cast. Restore original mask scope after owner approval and test 16-bit boundary crossing at actual macro consumers. The expression counterexample is not an executed guest reproduction. |
+| DIV-214, RESET in HLT, current line 4087 | Original HLT tests RESET without consuming it, leaving the following external-event block to clear it and call c_cpu_reset. Local HLT uses c_cpu_take_event, which clears it before breaking. The later reset block at 4436 calls the same take helper and therefore sees no bit unless a new RESET arrives. | Confirmed lost-reset path introduced by local atomic conversion. A peek and a consume are not interchangeable. Proposed repair preserves original observation/consumption sites; atomicity itself requires a separate producer-thread analysis. No claim this causes current WRITE failure. |
+| DIV-214 hardware event handling | Original acknowledges PIC then clears CPU_HW_INT_MASK; local consumes the bit before acknowledgment. Producers now use InterlockedOr and consumers CAS rather than plain read/modify/write. | Reimplemented synchronization policy inside the executor. Review producers and PIC notification/acknowledgment ordering before retaining or reverting the complete change. The valid motivation to avoid lost updates does not prove every converted site equivalent. |
+| DIV-221 signed PIC rejection | Local keeps ica_intack result signed and skips delivery on -1 instead of narrowing immediately to IU16. | Guard changes original behavior; verify original PIC caller contract and synchronization owner. Do not assume the comment's historical-monitor explanation is established evidence. |
+| Hardware interrupt hook | Local executor invokes existing `nt_inthk.c:host_hwint_hook` before original do_intrupt fallback; the original host source exposes VdmInstallHardwareIntHandler and invokes the registered handler. | Added composition of an original provider, not an independently invented DPMI dispatch algorithm in this hunk. Still requires full selected-path/return-contract audit. |
+| Declaration/setjmp changes and observations | Added original declarations, explicit jmp_buf dereference, BOP FE/decode/retirement diagnostic calls. | Keep ABI corrections and diagnostics separate from execution-policy findings; x64 wording alone does not justify removing declarations. Diagnostic providers and overhead need their own review. |
+
+Reviewer checked that HLT sets quick_mode=FALSE after the wait and that the
+subsequent reset handler actually requires a still-set bit. The proof is
+conditional on one RESET waking that HLT and no intervening new RESET; it
+does not rely on a scheduler race. The IP-mask counterexample follows the
+actual SET_EIP definition, not an assumption about register truncation.
+No CPU or product code has been edited. These are new mirror-internal
+restoration candidates, distinct from the previously counted service groups.
+
+## Full-audit work still required
 
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
