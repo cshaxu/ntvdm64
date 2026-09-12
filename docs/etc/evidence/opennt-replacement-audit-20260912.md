@@ -594,6 +594,289 @@ ABI verification or full-task completion.
 
 ## Full audit still pending
 
+### Mirror-local copy and heartbeat semantic changes
+
+Recompared copy_fnc.c and nt_timer.c against the exact upstream paths in the
+paired-diff inventory, reading their complete changed hunks and current
+surrounding branches. copy_fnc.c::fwd_word_fill changes more than pointer
+width: the selected #else branch now fills a DWORD count with its own loop
+and advances l_addr4, replacing the original RtlFillMemoryUlong call and
+byte-pointer advance. Group this with the RTL fill owner discussion. It is
+not justified merely by the nearby x64 address-alignment comment. The original
+call's count/unit usage itself requires interpretation; restoring it blindly
+is not an approved repair. No runtime correctness claim for either branch.
+
+nt_timer.c broadens heartbeat termination from STATUS_ALERTED to also include
+any STATUS_USER_APC. Re-read nt_thread_alert_compat.c: it prefers native
+NtAlertThread and uses QueueUserAPC only when that export is unavailable.
+Consequently the mirror treats APC completion as terminal even on its native
+alert path; it does not identify whether the APC was this fallback's request.
+This is a changed lifecycle decision inside the mirror, not an ABI cast or
+proof of an observed unwanted exit. Retain as a restoration-review point with
+the native-alert binding and session teardown family. The tv_usec temporary
+conversion is separately bounded by the positive divisor and is not the same
+kind of semantic change. No product edits or timer executions.
+
+### SoftPC patch carrier follow-up
+
+Completed a subsequent full sas4gen.h read and full no-index comparison with
+OpenNT/base/mvdm/softpc.new/base/cvidc/sas4gen.h. The current x86 carrier
+retains that original file except for the sas_touch, VirtualiseInstruction
+and IsPageInstanceData types/vector fields/dispatch declarations added by the
+retained NTVDMx64 sas4gen.patch. The macro bodies select original c_* or Sas
+vector calls; they do not implement another memory-access algorithm. This
+provides a concrete original carrier counterpart despite the missing original
+host/inc/x86/prod path. It does not justify deleting added vector slots:
+sasCdef.c's composition and its selected provider ABI still require them.
+The CCPU no-check scalar aliases and empty overwrite/instance-data declaration
+branches are present in the original counterpart, not newly authored behavior.
+The earlier partial-read limitation below is superseded for sas4gen.h only.
+
+Read callconv.patch completely and verified its SHA-256 equals the retained
+NTVDMx64 minnt patch (1D3FA424A9C3337AE54E1BD5C8490BBC8FDA2F8E0A1D39E2275D7FB412823D78).
+It is calling-convention/cast evidence, not a second worker algorithm; do not
+assume every supplied hunk is applied merely because the patch is present.
+Read PigReg_c.h completely: CPU/NPX state record declarations, no function body.
+
+The large gdpvar.h output was truncated and is not claimed as a full manual
+read. A whole-file line-pattern check instead classified every nonblank line:
+fixed-offset typed GDP dereference macros, guards, CurrentUniverse setter,
+TraceVector expression/size, GDP_SIZE/CHECKSUM, Gdp declaration and GDP_PTR
+alias. The setter and four-byte TraceVector displacement are explicitly in
+the retained upstream gdpvar.patch. There is no independent control-flow
+algorithm in this carrier; correct offset/layout composition still needs
+separate evidence. sas4gen.h was only partially read in this follow-up and
+is not marked complete. Patch README statements about mapping-manager leases
+and dual-host support are historical, not proof of current product selection.
+
+### App, broker and session header coverage
+
+Fully read all nine headers in src/app, src/broker and src/session. They
+contain no inline execution bodies. The broker 16-client and 16-record
+capacities, record v3 command_owner, session eight-lease/eight-teardown limits,
+and single termination_escape are explicit autonomous composition contracts;
+they are not original OpenNT ABI simply because their records copy VDMINFO
+fields. Group them with the previously audited broker queue, memory leases
+and worker lifetime, not additional function counts. The wire user_key field
+alone does not establish authentication. App headers preserve a separate
+target application and WOW bootstrap kernel and do not resolve the previously
+recorded internal-argv versus OS-command-line split. These declarations were
+checked against the existing implementation-family findings; no product edit.
+
+### Native I/O facade classification refinement
+
+Fully read the remaining win32/include ntioapi.h, wow_user_declarations.h,
+presentation_surface.h and wow_hard_error_dialog.h; reread the complete
+win32/source/ntioapi_facade.c. The latter resolves ten native NTDLL APIs,
+forwarding three directly and translating IO_STATUS_BLOCK through stack
+temporaries in seven. It does not reimplement directory enumeration,
+filesystem control or device control algorithms. Classify it as a native
+binding/marshalling layer with an asynchronous-lifetime risk, not ten
+duplicated kernel algorithms.
+
+The header justifies the private status layout by x64 pointer width. With the
+current x86-only target, reassess that conversion before retaining it. The
+wrapper returns without waiting and copies native_status even when completion
+may be pending; an asynchronous completion could outlive the temporary. But
+demsrch.c's directory open explicitly uses FILE_SYNCHRONOUS_IO_NONALERT at
+line 1075, so do not present its normal directory query as demonstrated use
+of this failure. All other caller classes still require their own lifetime
+proof. This narrows the earlier generic suspicion without erasing the wrapper
+contract issue. No native API was invoked and no product behavior changed.
+
+### Remaining provider-family header pass
+
+Read all headers in adapter softpc/include (except termination and the
+separately read symbol-compat header), vdd/include and redir/include; then
+read all basesrv/include, debugger/include, wow/include and monitor/include
+headers not covered by prior passes. These contain records, constants,
+prototypes and the following already-accounted dispatch binding, rather than
+additional inline service algorithms: redir/vdmredir.h replaces
+HANDLE_FROM_WORDS with mvdm_redirector_handle_from_words. Its comment still
+describes a session mapping instance; actual provider behavior, not this
+comment, determines whether the retired mapping-manager model remains.
+
+The SFT/JFT header explicitly requires synchronous commit/discard of returned
+host shadows. The native-child header exposes capture/activate/finish rather
+than replacing the original cmdCreateProcess worker. BaseSrv headers expose
+the separate command-owner and DOS record state machine already counted in
+the BaseSrv replacement family. The inactive WOW task-frame header is a
+second TD-shaped carrier, not evidence of a second active task scheduler.
+No new confirmed duplicate functional unit is added merely for these
+declarations. Their implementation and caller findings remain controlling.
+
+error_abi.h locally repeats error-table types/enumerators and the physical
+mapping header declares original-shaped EMS services; declaration duplication
+is distinct from algorithm duplication. This header pass does not resolve
+the previously explicit physical-mapping implementation-owner uncertainty.
+
+### Additional adapter-header dispatch coverage
+
+Fully read the following twelve headers: win32/include/winbasep.h,
+winconp.h, conapi.h, vdmapi.h, command_process_compat.h,
+thread_start_compat.h, nt_thread_alert_compat.h, mvdm_redirector_thread.h,
+mvdm_base_vdm_environment.h, wow32_provider_private.h, winuserp.h, and
+monitor/include/monitor_context.h (all under adapter-mvdm-host-out).
+
+Dispatch reconciliation: command_process_compat.h replaces SetStdHandle and
+the generic CreateProcess spelling with the previously audited child-local
+provider; thread_start_compat.h replaces CreateThread/ExitThread with named
+cdecl/session thunks; mvdm_redirector_thread.h redirects CreateThread to its
+separate provider. These macros change the effective owner even though the
+mirror call text is retained. They belong to the already recorded command,
+worker-lifetime and Redirector families, not three new duplicate counts.
+
+monitor_context.h maps pNtVDMState to process-global host storage, not the
+original guest low-memory address; this is the binding point for the existing
+monitor-state finding. Its temporary _X86_ declaration gate is not evidence
+of selecting the kernel monitor implementation. winconp.h suppresses the
+original import name for the ANSI keyboard-layout query before declaring the
+local provider; conapi.h exposes the previously audited Console replacements.
+
+The other listed files primarily carry declarations, constants, empty include
+compatibility or imports. wow32_provider_private.h's MBToWCS macro routes to
+the already audited MBToWCSEx conversion; it is not a second converter. The
+nt_thread_alert_compat.h comment describes APC-only behavior, but the previously
+read implementation prefers native NtAlertThread: record stale explanation,
+not an additional runtime implementation. No new confirmed duplicate family
+was discovered in these headers. Header reads do not replace call-site and
+selected-build verification for their providers.
+
+### ABI WOW subset reconciliation
+
+The supplementary pairing check is now reconciled for all 209 files under
+opennt-abi/source: 194 same-path byte-equal files; four relocated/cohort
+byte-equal files; seven terminal-blank-line-only differences; one guarded
+vdmapi.h; three WOW subset carriers read below. This exhausts this directory's
+file denominator, not the complete project or transitive runtime ABI proof.
+Full diffs verified the seven additions are blank lines at EOF, not logic.
+The relocated apiworke.h equals OpenNT/ds/netapi/rpcxlate/apiworke.h. dlcio.h,
+pmvdm.h and jpeg1/x.h equal their respective OpenNT-4.5/nt/private paths.
+These four were checked by SHA-256 after locating actual reference files;
+do not call them unproven autonomous implementations merely because the
+OpenNT same-path lookup failed.
+
+The canonical and two cohort manifests were located in
+artifacts/documentation-archive/20260910/etc/operations/ledgers. The README
+problem is a stale current-path link, not evidence that the manifests were
+lost. No source import or dependency selection was changed by locating them.
+
+Rechecked every file under opennt-abi/source against its same relative path
+in the current external OpenNT checkout. This supplementary check is not a
+replacement for edition-aware provenance: four private-path files have no
+same-path counterpart, and the three named WOW subsets intentionally have
+different filenames. Eight same-path files differ by hash. vdmapi.h contains
+an added include guard/comment and closing-declaration indentation, with no
+new provider body. Seven other pairs each have a one-line addition by numstat;
+that count alone is not a semantic classification.
+
+Fully read ntpsapi_wow32.h, ntrtl_wow32.h and nturtl_wow32.h. The first two
+contain selected types/declarations and a current-thread pseudo-handle macro,
+not independently implemented thread or conversion services. The last contains
+RtlAssociatePerThreadCurdir: comparison with original nturtl.h lines 511--515
+shows the same four field assignments. Its effective storage owner changes
+through the previously recorded NtCurrentTeb binding, not a new association
+algorithm. Do not count it as a second environment implementation.
+
+The ABI README still describes byte-identical declarations and links an
+operations manifest that is absent at that current path. Its summary is not
+sufficient evidence for present coverage or provenance. This is a documentation
+reconciliation item, not authority to remove these files or import replacements.
+
+### RTL arithmetic duplicate and declaration carriers
+
+Follow-up comparison completed the original x86 RtlExtendedIntegerMultiply
+body (largeint.asm 484--529) and RtlFillMemoryUlong body (movemem.asm
+508--563). Both adjacent adapter routines duplicate available original owners.
+Multiply agrees on representable signed products; original assembly retains
+the low 64 bits on overflow, whereas the replacement's signed C multiplication
+has no portable overflow guarantee. This is a source-language contract risk,
+not a demonstrated mismatch in the current compiler output. Mirror nt_timer.c
+uses it at line 889 with multiplier 1000.
+
+Fill has a definite length-contract difference: original shifts byte length
+right by two and ignores the last zero to three bytes; replacement copies
+those trailing bytes too. Current copy_fnc.c passes count shifted left by two,
+so this caller does not expose that difference. WOW wkmem.c passes cbSize and
+asserts DWORD divisibility before calling; that assertion expresses the
+intended input, not proof of every release caller. Do not claim this difference
+caused a current WOW failure. These two functional units join the division
+unit as original-owner restoration candidates, not three independently
+proven runtime regressions.
+
+Also fully read adapter nt.h, vint.h, mvdm_crt_redirect.h,
+mvdm_softpc_symbol_compat.h and wow_user_callback_callconv.h. The latter
+is declarations only; CRT/shutdown headers rename existing owners. nt.h
+redirects NtCurrentTeb to synthetic TLS and NtWaitForMultipleObjects to the
+previously audited wait adapter; vint.h substitutes monitor_context storage
+for fixed-low-address VDM state. These are binding points of existing audit
+families, not new independent duplicate-service counts. The nt.h fallback
+InsertTailList retains the original cached ListHead form, unlike the separate
+ntrtl.h InsertHeadList rewrite discussed below.
+
+Read the complete current opennt-host ntexapi.h, ntpsapi.h, nturtl.h and
+ntrtl.h subsets. Most content is declarations, not service implementations.
+The ntrtl.h list macros retain ordinary list-link operations but are locally
+rewritten: InsertHeadList repeatedly evaluates ListHead where the original
+caches it. This matters for side-effecting arguments; no such active caller
+is established here. Count these macros separately from declaration-only
+deletions and from the downstream RTL service providers.
+
+Confirmed another duplicate functional unit in
+`src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c:392`:
+RtlExtendedLargeIntegerDivide replaces original OpenNT
+`base/ntos/rtl/x86/largeint.asm:235`. Read the complete original routine.
+Original divides an unsigned 64-bit dividend by an unsigned 32-bit divisor;
+the replacement casts the dividend and divisor to signed LONGLONG. Original
+normal (non-BLDR_KERNEL_RUNTIME) divide-by-zero raises
+STATUS_INTEGER_DIVIDE_BY_ZERO; the replacement returns zero quotient and
+remainder. These are source-proven contract differences, not merely different
+instruction selection. For dividend FFFFFFFFFFFFFFFFh and divisor 2, unsigned
+quotient is 7FFFFFFFFFFFFFFFh, while replacement signed division yields zero.
+
+Mirror nt_timer.c calls this API at lines 349, 366, 368 and 525. That establishes
+call sites, not proof that ordinary timer values exercise the differing input
+range. The adapter justification still cites x64 import-library availability;
+that is not sufficient justification for the present x86 product. Discuss
+restoring the original owner or a verified same-contract native binding rather
+than retaining an independently authored arithmetic policy. No repair or
+runtime failure attribution is made. RtlExtendedIntegerMultiply and
+RtlFillMemoryUlong are adjacent independently implemented routines; their
+complete original-contract comparison is not claimed by this row.
+
+Sequential reviewer checked signedness, the explicit zero-divisor branches,
+the original build conditional, and mirror call sites. No product files changed.
+
+### Diagnostic-provider coverage reconciliation
+
+Completed the remaining bounded reads of
+`src/adapter-mvdm-host-out/softpc/mvdm_softpc_termination.c`, including lines
+1050 through EOF, and rechecked its report writers and environment capture.
+This is autonomous instrumentation, not another confirmed replacement of an
+OpenNT functional owner. Count it separately from duplicate services.
+
+The report writers call environment/file APIs without saving and restoring
+Win32 last-error state. Thus non-fatal logging is not evidence of transparent
+error-state preservation. Whether a caller subsequently consumes that state
+still requires a call-site proof; no observed product failure is attributed
+to this finding. Several IRQ/keyboard observers increment static counters
+before sink checks, whereas the low-fault and command-environment observers
+explicitly gate their guest reads. Do not describe every observer as having
+identical default-off behavior.
+
+Environment capture removes twelve named selectors from the host process;
+restore_child_report_paths restores only five captured paths. This is an
+explicit environment/lifecycle policy, not a read-only observer. The command
+and config observers use selected-media offsets (including COMMAND 203Ch,
+0592h, 011Ch/0120h/0124h and NTIO 03D8h/3466h); those reads are not general
+DOS interfaces. In the newly inspected tail, guest leases are READ leases
+and release uses commit=0: no guest-memory write was found there. This does
+not establish transparency of all transitive helper calls.
+
+Sequential review distinguished source-visible host state changes from
+unproved runtime effects and did not add these observations to the confirmed
+OpenNT-duplicate count. Product source, build and runtime were unchanged.
+
 ### BaseClient retained environment bodies
 
 Compared all three current opennt-host/base/win32/client/vdm.c environment
