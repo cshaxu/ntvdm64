@@ -1,6 +1,8 @@
 # Queue
 
 This is the authoritative ordered queue of **unnumbered candidate T packages**.
+Implementation activation is on hold by owner direction pending the
+original-owner replacement audit; the candidate order below is unchanged.
 A candidate receives its next global `T` number only when the owner admits it
 to [STATUS.md](CURRENT.md). The active SoftPC package is deliberately
 absent: its live scope and progress belong only to Status.

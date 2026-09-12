@@ -2,6 +2,8 @@
 
 | Priority | Debt | Admission path |
 | --- | --- | --- |
+| P1 | Full WRITE lifecycle remains unproved; preserve the malformed-arena/environment evidence and unaccepted provider/transition WIP without promoting it to a product baseline. | Owner review of the original-owner audit, followed by an active recovery packet. |
+| P1 | Complete COMMAND/EDIT original-owner replacement coverage, including mirror special cases; reconcile kernel-source placement wording in coding authorities. | Read-only owner-requested audit, then separately scoped replacement/governance delivery. |
 | P1 | Preserve a reproducible Bochs 2.6 source/notice/patch manifest after T95 imports the local baseline. | Source-policy review and manifest verification. |
 | P1 | Keep the Bochs build surface minimal as later guest callers request features. | Per-feature OpenNT caller evidence, boundary rationale and negative test. |
 | P2 | Produce a neutral Bochs/OpenNT hard-boundary report for later `ntvdm64` architecture work. | First admitted bridge slice with no runtime dependency on `ntvdm64`. |

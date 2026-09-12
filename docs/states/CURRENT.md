@@ -2,35 +2,26 @@
 
 ## Current Work
 
-**Active: M0 T404 S4**
+**No active M/T/S packet.**
 
-## Active Packet
-
-### M0 T404 S4 — productized single-process WOW bootstrap recovery
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T404 S4, Ordinary Mode. S3's mouse-usability packet is closed; this is the next sequential bounded recovery packet. |
-| Admission And Approval | Owner directed on 2026-09-11: “你将S3收口。当前T任务是跑通write.exe，启动链任务交给S4”. |
-| Candidate Proposal | S4 follows the delivered [P15 positional NE-to-WOW recovery](../proposals/proposal-positional-ne-wow-entry-recovery-001.md) and its [entry evidence](../etc/evidence/m0-t404-s3-p15-positional-ne-wow-entry-recovery-001.md). The newly audited A200 baseline is evidence only, not a source import or binary dependency. |
-| Reference Baseline | P15 preserves a positional NE as a copied WOW record (`state=0102`, owner `2`) but cannot provide original `GetWowKernelCmdLine` with a real `-a` process token in the present one-process composition. A200 demonstrates the valid alternate single-process closure: internal `-w/-a` selects WOW and a package-root-limited fallback supplies `KRNL386.EXE`; its record is implicit v2 metadata and its public `--command` CLI is retired. |
-| Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), [document](../rules/DOCUMENT.md), and the [source policy](../etc/operations/policy/source-policy.md). |
-| Objective | Productize the single-process Win16 bootstrap behind only `ntvdm32.exe <binary>`, retaining P15's explicit WOW record and recovering the original `KRNL386.EXE → DOSX.EXE → WOW32.DLL` path toward WRITE. |
-| Non-goals | Public worker/bootstrap flags; a new process, BaseSrv executable, cross-process broker, WOW pooling, CCPU/BOP/guest-media/Console changes, a new WOW/DOSX loader, or using A200 binaries/source snapshot as a production dependency. |
-| Files And ABI Surface | Expected narrow surfaces: `src/app/launch_declaration.[ch]`, `src/mvdm-host/dos/command/cmdmisc.c`, a bounded existing/new `adapter-mvdm-host-out` declaration provider, focused fixtures, build graph and indexed evidence. P15 broker record v3 remains fixed-width and explicit; no guest ABI changes. |
-| Verification | Fresh Win32/x86 CPU40 build under `build/M0-T404/S4/`; focused tests for real `-a` precedence, session-bound fallback success and unavailable fallback failure; DOS positional non-regression; formal x86 link; public positional WRITE run with default-off DEM-open/module observers; governance and diff review. |
-| Expected Markers | No public `-w`, `-a`, `-o` or `--command` is accepted; a classified NE receives an explicit WOW record, a verified package `KRNL386.EXE` carrier, empty WOW PIF/default bootstrap, then runtime opens `KRNL386.EXE`, `DOSX.EXE`, loads `WOW32.DLL`, and advances WRITE beyond the current entry frontier. |
-| Asset Needs | Existing selected OpenNT/MVDM source, packaged KRNL386/DOSX/WRITE media, build tooling and owner runtime package only; no new source, guest binary, firmware or Microsoft component. |
-| Reporting Requirements | Record the four-rung recovery audit; exact original parser/fallback ordering; session/path lifetime and failure result; DOS/WOW profile disposition; focused test/build identities; public runtime observations; staged hash only if non-regressive; and remaining WRITE frontier. |
-| Current Evidence | [Run 001](../etc/evidence/m0-t404-s4-positional-wow-bootstrap-run-001.md) proves positional WRITE reaches the original DOSX bootstrap and then repeats at original WOW BOP `50:01`, without an illegal-instruction or host-exception report. The parent formal graph has no same-version WOW32 provider target; current deployed `WOW32.DLL` is an independent stale artifact. |
-| Similar-Issue Sweep | Audit all direct `GetCommandLine` WOW bootstrap consumers, every app-created initial PIF profile, every `command_owner` serialization/consumer, and every public option parser; preserve DOS and native-image behavior. |
-| Stop Conditions | Need for a cross-process service/worker, a new historical source import, CCPU/BOP/guest-media/Console changes, a non-session-bound path search, a guest-visible host pointer, or DOS positional regression pauses work for renewed admission. |
-| Exit Criteria | The sole public positional WRITE command demonstrably reaches `KRNL386.EXE`, `DOSX.EXE`, and `WOW32.DLL` through the retained original owners, with focused checks and formal x86 build passing. A WRITE UI/document/lifecycle claim requires its own direct evidence. |
-| Original Owner Request | “当前T任务是跑通write.exe，启动链任务交给S4”. |
+The owner closed M0 T404 S5 and T404 on 2026-09-12 to stop recovery
+implementation and audit original-source replacement boundaries first.
+This is an owner-directed stop, not successful WRITE acceptance.
+See [closure and retained debt](../history/m0-t404-owner-directed-closure.md).
+Unaccepted source/build WIP remains in the worktree; its P delivery is pending.
+Read-only audit is authorized; no replacement implementation is admitted.
 
 ## S3 Closure Record
 
 S3 is closed as the native Console mouse-usability packet. Its delivered acceptance is the owner-verified [P12 mouse record](../etc/evidence/m0-t404-s3-p12-native-console-mouse-interaction-audit-001.md): host mouse movement and button transitions reach the original guest mouse path without the prior false-click/help-modal behavior. P13--P15 are retained startup-chain investigations and entry recovery evidence, not part of S3's mouse closure. They establish S4's baseline only; they do not claim KRNL386, DOSX, WOW32 or WRITE execution.
+
+## S4 Closure Record
+
+S4 is closed as the bounded positional-bootstrap recovery: the sole public
+positional command reaches DOSX and opens KRNL386, while same-version WOW32
+provider composition transfers to S5. Its former characterization of DEM
+`50:01` as the WOW BOP is withdrawn by the [S5 ingress correction](../etc/evidence/m0-t404-s5-dem-chmod-ingress-correction-001.md); it does not claim a
+WOW32 load or a runnable WRITE window.
 
 ## S1 Closure Record
 

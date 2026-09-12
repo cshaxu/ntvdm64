@@ -4,6 +4,7 @@ This directory contains only the following owner-approved supporting records.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [Original-owner replacement audit](evidence/opennt-replacement-audit-20260912.md) | Owner-requested read-only audit | Rechecked COMMAND/EDIT replacement findings and remaining coverage. | Retain until superseded by a complete source-owner audit. |
 | [source policy](operations/policy/source-policy.md) | Project owner | Source, firmware, guest-media, and Microsoft-component admission boundary. | Superseded only by a current policy authority. |
 | [pre-governance overview](architecture/pre-governance/overview.md) | Td documentation governance | Minimal provenance note for the replaced topology. | Move to the external archive when no retained record links it. |
 | [T403 x86 mirror-retirement inventory](evidence/m0-t403-s1-x86-mirror-retirement-inventory-001.md) | M0 T403 S1 | Retained detailed source-comparison dispositions and selected-x86 build evidence for the closed task. | Retain while linked by the [T403 history record](../history/m0-t403-x64-mirror-retirement.md). |
@@ -18,5 +19,8 @@ This directory contains only the following owner-approved supporting records.
 | [T404 S3 P13 CPU40 BOP entry-contract audit](evidence/m0-t404-s3-p13-cpu40-bop-entry-contract-audit-001.md) | M0 T404 S3 P13 | Exhaustive selected-CPU40 classification of the historical two-byte BOP adjustment; proposes, but does not implement, two DOSX direct-entry repairs. | Retain while T404 remains active or its closure links it. |
 | [T404 S3 P14 CPU40 DOSX direct-continuation recovery](evidence/m0-t404-s3-p14-cpu40-dosx-direct-continuation-recovery-001.md) | M0 T404 S3 P14 | Two CPU40-only DOSX continuation entries recovered from original source, with fresh x86 build evidence and an explicit standalone WOW runtime-coverage limitation. | Retain while T404 remains active or its closure links it. |
 | [T404 S3 P15 positional NE-to-WOW entry recovery](evidence/m0-t404-s3-p15-positional-ne-wow-entry-recovery-001.md) | M0 T404 S3 P15 | Source-first app/broker recovery of the positional NE-to-WOW record boundary, focused x86 proof, and the discovered actual-worker command-line limitation. | Retain while T404 remains active or its closure links it. |
+| [T404 S4 positional WOW bootstrap run](evidence/m0-t404-s4-positional-wow-bootstrap-run-001.md) | M0 T404 S4 | Bounded public positional WRITE launch evidence; its former `50:01` interpretation is superseded by the S5 correction. | Retain while T404 remains active or its closure links it. |
+| [T404 S5 DEM chmod ingress correction](evidence/m0-t404-s5-dem-chmod-ingress-correction-001.md) | M0 T404 S5 | Corrects the S4 `50:01` selector/service misclassification with source, map, and bounded public-run evidence. | Retain while T404 remains active or its closure links it. |
+| [T404 S5 matching WOW32 provider build](evidence/m0-t404-s5-wow32-matching-provider-build-001.md) | M0 T404 S5 | Same-version x86 WOW32 build, parent import closure, staged hash, and public runtime frontier. | Retain while T404 remains active or its closure links it. |
 
 All other historical supporting material is in the [external documentation archive](../../artifacts/documentation-archive/20260910/strict-topology/).
