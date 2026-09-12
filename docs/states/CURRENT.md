@@ -2,19 +2,19 @@
 
 ## Current Work
 
-**Active: M0 T405 S2**
+**Active: M0 T405 S3**
 
 ## Active Packet
 
-### M0 T405 S2 — MVDM diff, overlay and patch audit
+### M0 T405 S3 — Non-MVDM owner and replacement audit consolidation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T405 S2, Ordinary Mode with one agent acting sequentially as executor and reviewer. Only S2 is active. |
+| Identifier Mode | M0 T405 S3, Ordinary Mode with one agent acting sequentially as executor and reviewer. Only S3 is active. |
 | Admission And Approval | Owner on 2026-09-12 admitted the audit-and-restoration T and subsequently required owner approval of audit findings before repairs. Audit proceeds now; restoration remains in this T but is gated on that approval. |
 | Candidate Proposal | [OpenNT source-diff audit and restoration](../proposals/proposal-opennt-source-diff-audit-001.md). |
-| Objective | Reconcile every MVDM internal diff, overlay and adopted patch with its original owner, current selection, changed semantics and proposed disposition; include working COMMAND/EDIT paths and inactive carriers. |
-| Non-goals | No product behavior, build-selection or guest-media change; no source restoration, broker implementation or WRITE recovery claim. S3 will consolidate non-MVDM findings, then stop for owner discussion before repairs. |
+| Objective | Reconcile non-MVDM original owners and autonomous providers wherever located, joining S2 without double counting. Produce the combined diff/overlay/replacement discussion ledger, including COMMAND/EDIT paths and inactive carriers. |
+| Non-goals | No product behavior, build-selection or guest-media change; no source restoration, broker implementation or WRITE recovery claim. Stop after the combined audit for owner discussion before repairs. |
 | Reference Baseline | Repository `3d127962c82133cb6adad50f52733250bac5f11a`, including the explicitly unaccepted snapshot `1daff0ace`; [T404 closure](../history/m0-t404-owner-directed-closure.md). Runtime identity must be observed separately, not inferred from HEAD. |
 | Files And ABI Surface | Status, indexed [S-stage plan](../etc/operations/m0-t405-audit-restoration-plan.md), [S1 conclusion](../etc/evidence/m0-t405-s1-audit-baseline-001.md#s1-bounded-conclusion-and-reviewer-handoff), [semantic audit](../etc/evidence/opennt-replacement-audit-20260912.md), provenance/build ledgers and bounded audit tooling. Source and external comparisons are read-only; no production ABI change. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), [documents](../rules/DOCUMENT.md), and [source policy](../etc/operations/policy/source-policy.md). |
@@ -23,9 +23,18 @@
 | Asset Needs | Existing selected OpenNT/OpenNT-4.5 sources, retained mirrors, ledgers, build graphs and runtime hashes; external inputs are read-only. No new media or runtime dependency. |
 | Reporting Requirements | Separate MVDM/non-MVDM and accepted/WIP identities; report functional units, files and physical added/deleted lines separately; document unknown provenance and coverage rather than estimating a hack total. |
 | Stop Conditions | Ambiguous provenance is recorded as unresolved and independent audit continues. A destructive baseline change, new external source/runtime, or expanded architecture boundary needs owner direction; missing evidence never authorizes a speculative repair. |
-| Exit Criteria | Every in-scope MVDM diff/overlay/patch family has reviewed coverage and disposition, with original-owner and limitation evidence ready to join S3. No repair before owner approval of the combined audit. |
+| Exit Criteria | Non-MVDM owners and replacement families have original-source, selection and disposition evidence joined to S2; confirmed overlap, necessary bindings, diagnostics and unresolved cases are separately reported. Stop for owner approval before repairs. |
 | Original Owner Request | “准入该T任务，开始进行审计。先作任务切分：S”; the task includes audit followed by implementation. |
 | Similar-Issue Sweep | Mirror-internal special cases, overlays, adapters, app/session replacements, SoftPC patches, declarations, diagnostics and inactive providers, including successful COMMAND/EDIT paths. |
+
+## S2 Closure Record
+
+S2 reached its [bounded MVDM coverage conclusion](../etc/evidence/opennt-replacement-audit-20260912.md)
+in the S2 conclusion and S3 handoff section:
+174 text-different paths, seven overlay carriers and five patch carriers have
+reviewed dispositions. Source hashes and retained graph membership were
+revalidated; unresolved semantics transfer explicitly to S3, not to repairs.
+Documentation delivery remains pending. The complete audit is not yet closed.
 
 ## S1 Closure Record
 
@@ -34,7 +43,7 @@ T405 S1 reached its bounded inventory conclusion in the
 5043 tracked inputs, separate source/body counts, resolved unpaired identities
 and reproducible retained-graph membership. Its documentation delivery remains
 pending; prior push was unavailable, and no fully delivered P is claimed.
-S2 continues within the already admitted T, without broadening repair authority.
+S3 continues within the already admitted T, without broadening repair authority.
 
 ## Predecessor
 

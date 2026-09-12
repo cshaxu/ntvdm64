@@ -4,7 +4,7 @@
 
 The owner admitted the complete audit-and-repair task on 2026-09-12.
 CURRENT alone activates a packet. S1 has reached its bounded inventory
-conclusion; CURRENT now activates only S2. The remaining rows are
+conclusion and S2 its MVDM disposition conclusion; CURRENT now activates only S3. The remaining rows are
 a sequential plan. Record each bounded S conclusion before advancing within
 this authorized T. One agent first executes and then rechecks the evidence
 as reviewer; no parallel agent is implied. The updated owner objective
