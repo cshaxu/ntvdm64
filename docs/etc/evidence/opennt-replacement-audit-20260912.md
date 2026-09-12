@@ -129,7 +129,36 @@ original body. The original capture/CSR/security environment is not available
 unchanged; original source reuse still needs an explicit interface boundary.
 These findings do not prove the reported DOSX/WRITE failure's root cause.
 
-## Completion checklist
+## T405 Console contract follow-up
+
+Read the complete current `win32/source/console_compat.c` and original
+Console client/server implementations. The following are additional distinct
+functional contracts; the cursor finding was already counted above.
+
+| Current API | Original owner and evidence | Finding |
+| --- | --- | --- |
+| `WriteConsoleInputVDMW` | `windows/core/ntcon/client/private.c:761` calls WriteConsoleInputInternal with Unicode=TRUE, Append=FALSE; ordinary `client/iostubs.c:425` passes Append=TRUE. `server/directio.c:386` dispatches FALSE to PrependInputBuffer. | Confirmed unequal forwarding: current wrapper uses ordinary WriteConsoleInputW and therefore appends rather than prepends. Reached source consumers include `nt_event.c:ReturnUnusedKeyEvents` and other return-input paths. Returned older events can follow newer queued events. Test existing queue B plus returned events A: original contract is A,B, not B,A. No CPU modification is implicated. |
+| `ReadConsoleInputExW` | `server/directio.c` passes NOREMOVE and NOWAIT independently to ReadInputBuffer under the Console lock. `server/input.c:1769` consumes the unreserved Alt+Enter path, excluding Ctrl; key-down controls the display transition but key-up also returns without input delivery. | Current replacement checks queue size separately before a potentially blocking read, so NOWAIT is not atomic against another reader. NOREMOVE goes directly to Peek and bypasses the local filter. Local Alt+Enter filter consumes only key-down, does not exclude Ctrl, and has no reserve-key policy. These are verified contract differences; exercising a NOWAIT race requires a concurrent reader, not assumed from syntax alone. |
+| `GetConsoleKeyboardLayoutNameA` | `server/getset.c:1209` first activates Console->hklActive, then queries the layout name. | Current GetKeyboardLayoutNameA queries the caller thread's layout without selecting Console state. Similar output shape does not prove identical layout ownership. Confirmed replacement with different state source; test distinct caller/Console layouts before attributing guest keyboard symptoms. |
+| `GetConsoleInputWaitHandle` | `client/stream.c:28` returns dedicated InputWaitHandle. | Current returns STD_INPUT_HANDLE. This is a changed wait endpoint, not original event ownership. Redirection may make stdin differ from the Console input endpoint. Establish product handle setup and the original event initialization before deciding safe reuse; not yet counted as a proved faulty runtime path. |
+| `VDMConsoleOperation` | `server/srvvdm.c:23` checks registered VDM process ownership and dispatches window operations. | Current implements only IsIconic, client rectangle and client-to-screen using GetConsoleWindow. Hide, screen-to-client, hidden-state and fullscreen-nopaint operations are rejected. The three leaf User32 operations are reused, not autonomous coordinate algorithms. Registration/security checks and missing operations require separate disposition. |
+| `SetConsolePalette` | `server/private.c:406` selects and retains a graphics-buffer palette, manages usage/realization and old-palette lifetime. | Current snapshots RGB entries into session storage and emits an event. That is a restricted alternate presentation path, not restoration of the original palette lifecycle. Inspect the event consumer before concluding what flags/lifetime behavior the complete path implements. |
+
+Registration, text invalidation and graphics-buffer creation in this adapter
+also replace Console-server facilities with session backing storage and
+presentation events. Their transitive session/app implementations still need
+comparison before assigning removable original-owner slices. ConsoleMenuControl
+and SetConsoleKeyShortcuts explicitly fail, so they are missing facilities,
+not functioning duplicated algorithms. Default-off tracing is counted separately.
+
+Reviewer cross-check: the prepend/append difference was verified through both
+original client wrappers and the server branch, not inferred from API names.
+Alt+Enter key-up suppression was checked in the original input handler, while
+the local filter was checked for Ctrl and peek behavior. These findings are
+not evidence that the historically fixed mouse false-click defect has returned.
+No product code, public entry point or runtime binary was changed.
+
+## Remaining full-audit requirements
 
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
