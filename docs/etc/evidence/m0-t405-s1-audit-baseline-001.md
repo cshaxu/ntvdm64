@@ -40,3 +40,49 @@ file, separate declarations/generated/data inputs and map actual providers
 before computing upstream diffs and replacement totals. Record runtime
 hashes independently. The initial seven findings are leads, not exhaustive
 coverage. S1 remains active: admission and this initial record do not close it.
+
+## Executor pass: archived topology reconciliation
+
+The source README and old Audit-T276S1MvdmFileIdentity.ps1 refer to removed
+docs/etc/operations ledger paths. Located the retained inputs under
+artifacts/documentation-archive/20260910/etc/operations/ledgers instead:
+m0-t274-s5-mvdm-host-topology-manifest.tsv and
+m0-t301-s1-opennt-src-2-mvdm-extra-import-manifest.tsv. No old audit script
+was executed: it writes historical records and assumes a fixed denominator.
+
+Procedure: Import-Csv with tab delimiter; index topology by target_path under
+src/mvdm-host; index supplement by its full target_path; compare git ls-files
+membership. For each topology pair, Test-Path the selected_source_path and
+Get-FileHash both source and mirror, comparing the source to the manifest's
+selected_source_sha256. Results on the frozen product-source baseline:
+
+| Classification | Count |
+| --- | --- |
+| Old topology rows | 1689 |
+| Current tracked host paths | 1977 |
+| Current paths paired to topology | 1585 |
+| Paired source missing / source hash changed | 0 / 0 |
+| Paired mirror byte-identical / byte-different | 1395 / 190 |
+| Additional paths listed in supplement | 385 |
+| Additional paths unpaired to both inputs | 7 |
+| Old topology paths absent at current host location | 104 |
+
+The seven unpaired paths are README.md, kernel-vdm/v86/monitor/i386/
+monitor_printer.c, oemuni/obj/_objects.mac, oemuni/obj/i386/file.obj,
+oemuni/obj/i386/process.obj, suballoc/obj/_objects.mac, and
+suballoc/obj/i386/suballoc.obj. They need their own provenance classification.
+
+## Reviewer pass: limits and next action
+
+Arithmetic reconciles: 1395 + 190 = 1585; 1585 + 385 + 7 = 1977;
+1585 + 104 = 1689. However byte difference is not semantic difference:
+190 is not a count of hacks or executable diff files. Line endings, cropped
+source and true behavioral changes must be separated. Supplement membership
+does not select opennt-src-2 as a replacement primary baseline; its hashes
+and historical-only disposition remain to be checked. The 104 absent paths
+are not established deletions until re-rooting and ownership are reconciled.
+The archived union uses owner_root opennt-mvdm-host, whereas the old script
+filters mvdm-host; fixing just its input directory would still be unsound.
+These findings require a current inventory rather than running the old gate
+and reporting its result as present coverage. Non-MVDM coverage and actual
+build selection remain outstanding. No product behavior was changed.

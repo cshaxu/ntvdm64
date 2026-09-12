@@ -5,7 +5,10 @@
 The owner admitted the complete audit-and-repair task on 2026-09-12.
 CURRENT alone activates a packet. Only S1 is active; the remaining rows are
 a sequential plan. Record each bounded S conclusion before advancing within
-this authorized T. Source-proven in-scope repairs need no second T admission.
+this authorized T. One agent first executes and then rechecks the evidence
+as reviewer; no parallel agent is implied. The updated owner objective
+requires approval of audit findings before any repair. S4/S5 remain within
+this T, but do not activate before that approval.
 Refine dependency order from original-owner evidence, not the next trace hit.
 
 | S | Bounded objective | Exit deliverable |

@@ -10,8 +10,8 @@
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T405 S1, Ordinary Mode. Only S1 is active. |
-| Admission And Approval | Owner on 2026-09-12: admit the queued OpenNT source-diff audit-and-restoration task, start audit, and first split the work into S stages. The full T includes source-proven repairs after audit without a second T admission. |
+| Identifier Mode | M0 T405 S1, Ordinary Mode with one agent acting sequentially as executor and reviewer. Only S1 is active. |
+| Admission And Approval | Owner on 2026-09-12 admitted the audit-and-restoration T and subsequently required owner approval of audit findings before repairs. Audit proceeds now; restoration remains in this T but is gated on that approval. |
 | Candidate Proposal | [OpenNT source-diff audit and restoration](../proposals/proposal-opennt-source-diff-audit-001.md). |
 | Objective | Freeze source and runtime identities, establish reproducible audit coverage and counting rules, and assign every in-scope provider family to the MVDM or non-MVDM audit. |
 | Non-goals | S1 does not change product behavior, build selection or guest media; no source restoration, broker implementation or claim of WRITE recovery. |

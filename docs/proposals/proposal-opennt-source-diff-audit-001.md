@@ -47,12 +47,14 @@ source policy and place accepted non-MVDM owners in `opennt-host`.
 
 ## Implementation and verification
 
-After the source-owner and outgoing-boundary audit, implement each justified
+After the source-owner and outgoing-boundary audit and owner approval of its
+findings, implement each justified
 restoration in its original mirror, bind only unavailable interfaces, and
 delete the superseded replacement and obsolete build selection. Do not leave
 parallel providers or relabel autonomous code as original source. Once this
 candidate is admitted, in-scope source-proven repairs do not require a second
-task admission merely because the audit phase has finished.
+task admission merely because the audit phase has finished, but the owner's
+explicit audit-result approval is required before repair begins.
 
 Verify fresh Win32/x86 CCPU40 builds, focused positive/negative boundary
 tests, COMMAND/EDIT keyboard and mouse regressions, and the recorded WRITE
