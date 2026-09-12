@@ -152,3 +152,49 @@ for bbe4b0ec0, the T310 S6 V86-monitor retirement. Together with the 71 verified
 relocations this accounts for all 104 absent topology paths. The separately
 reintroduced monitor_printer.c slice remains subject to its own provenance
 and boundary review; retirement does not prove all original functions unusable.
+
+## All-root denominator and added-body footprint
+
+Export-OpenNtAuditInventory.ps1 enumerates every tracked src path, rejects an
+unknown root, records SHA-256 and assigns a review category without pretending
+to resolve build selection. Output is build/M0-T405/S1/all-roots-001/
+inventory.csv: 5043 rows and 5043 distinct paths. Guest, firmware and tools
+are separately labelled load-only/independent evidence, not lost from the
+inventory or assumed to be host runtime inputs.
+
+Physical source-line counts include comments and blanks for the explicit
+C/header/assembly/include/definition/resource/patch extension list. Other
+files remain inventoried but are not silently counted as source lines.
+
+| Root | Source-text files | Physical lines |
+| --- | --- | --- |
+| mvdm-host-overlay | 7 | 245 |
+| mvdm-softpc-patch | 5 | 1868 |
+| adapter-mvdm-host-out | 103 | 11654 |
+| adapter-opennt-host | 0 | 0 |
+| app | 9 | 1594 |
+| session | 4 | 1065 |
+| broker | 6 | 433 |
+| opennt-abi | 199 | 80463 |
+
+These are added-body/declaration review denominators, not net upstream diffs
+or autonomous-code totals. The overlay 245 lines independently agree with
+ReadAllLines counts: demfastio.c 95, localfm.c 20, sas_overwrite_memory.c 16,
+C-VID binder C/header 77/9, EOI bridge C/header 20/8. Its SAS wrapper retains
+the original ntstubs.c call body; its localfm carrier omits the duplicate Sas
+global. Neither whole file can be classified as an invented algorithm solely
+because it sits in an overlay.
+
+The C-VID binder additionally owns mvdm_cvidc_jump_restart and calibration
+getters/setters, not only vector assignments. Compare that state against
+the original qevnt.c/host accessors during S2. The current generator selects
+all five overlay C bodies and compiles fmstubs.c separately with vector-default
+and activity-check predicates: selected source membership is not selection of
+the entire patch translation unit. adapter-opennt-host contains only README,
+while BaseSrv behavior is selected from adapter-mvdm-host-out/basesrv.
+These distinctions must survive the function-level classification.
+
+Remaining S1 work includes exact ABI/source provenance, generated-header
+dependencies and current graph linkage per inventoried provider. The raw
+inventory explicitly labels build selection unestablished; physical coverage
+alone is not final S1 acceptance or the requested full semantic audit.
