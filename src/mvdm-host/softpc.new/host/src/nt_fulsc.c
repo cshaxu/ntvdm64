@@ -1401,16 +1401,26 @@ GLOBAL VOID CheckForFullscreenSwitch(VOID)
     }
 }
 
+#endif /* X86GFX */
+
 /*
 ***************************************************************************
 ** getNtScreenState() - return 0 for windowed, 1 for full-screen.
 ***************************************************************************
 ** Tim July 92.
+**
+** DIVERGENCE(MVDM-NTIO-WINDOWED-STATE): this original, state-only query is
+** required by the original NTIO.SYS BOP-5F vector handoff in the selected
+** CPU40 worker.  Its original surrounding X86GFX block also owns the retired
+** private-console fullscreen transition path.  Keep the original function
+** body and publish it outside that unavailable product shell.
 */
 GLOBAL UTINY getNtScreenState IFN0()
 {
 	return( (UTINY) sc.ScreenState );
 }
+
+#ifdef X86GFX
 
 /*
 ***************************************************************************

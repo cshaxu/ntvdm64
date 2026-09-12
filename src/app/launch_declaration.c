@@ -329,11 +329,15 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     command.task = 1u;
     command.code_page = 437u;
     command.current_drive = (uint16_t)(drive_letter - 'A');
-    /* The original BaseSrv chooses a DOS record independently from a WOW
-     * record before it copies VDMINFO.  Preserve that existing discriminant
-     * at the sole app-owned initial declaration boundary. */
-    command.command_owner = declaration->requested_image == MVDM_IMAGE_WIN16 ?
-        BASE_VDM_COMMAND_WOW : BASE_VDM_COMMAND_DOS;
+    /* COMMAND.COM is the first consumer of every positional declaration,
+     * including a Win16 target.  Its initial `cmdGetNextCmd` request is the
+     * DOS BaseSrv queue form; `-w -a KRNL386` selects the worker bootstrap,
+     * not a pre-existing WOWEXEC task queue.  A WOW-owned record belongs
+     * only to the later, separately registered WOWEXEC acquisition boundary.
+     * Publishing this initial COMMAND record as WOW makes BaseSrv correctly
+     * reject COMMAND's DOS request and causes the source-owned no-command
+     * exit before DOSX can reach MS_bop_1. */
+    command.command_owner = BASE_VDM_COMMAND_DOS;
     command.command = (const uint8_t *)declaration->command;
     /* Original cmdGetNextCmd treats VDMINFO.CmdLine as a command line with
      * a mandatory CR/LF tail, followed by this transport NUL.  Keep that

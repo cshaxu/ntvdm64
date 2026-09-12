@@ -25,8 +25,9 @@ Revision History:
 #include "softpc.h"
 #include "mvdm_softpc_termination.h"
 
-/* CCPU keeps the generated register-index names private.  This CPU40 DPMI
- * counterpart needs only the existing real-mode cache reload operation. */
+/* CCPU's internal segment-register indices and pseudo-descriptor routine
+ * are deliberately kept private to its generated headers.  CPU40's DPMI
+ * provider needs only this source-defined real-mode cache refresh. */
 extern void load_pseudo_descr(int index);
 extern void c_setGDT_BASE_LIMIT(ULONG base, USHORT limit);
 extern void c_setIDT_BASE_LIMIT(ULONG base, USHORT limit);
@@ -36,10 +37,17 @@ extern void c_setTR_BASE_LIMIT_AR(ULONG base, ULONG limit, USHORT ar);
 #define CPU40_SS_REG 2
 #define CPU40_DS_REG 3
 
+/* WOW_x86 deliberately omits LTR: native NT's VDM already has a busy task
+ * whose backlink reaches a V86 task. CPU40 retains that hardware contract in
+ * two private GDT slots instead of special-casing the original IRET. */
 #define CPU40_NATIVE_PM_TSS_SELECTOR 0x1f0u
 #define CPU40_NATIVE_V86_TSS_SELECTOR 0x1f8u
 #define CPU40_TSS386_BYTES 0x68u
 #define CPU40_TSS386_IOMAP_BASE 0x66u
+/* A 386 task's I/O bitmap has one bit per port.  The native VDM task that
+ * WOW_x86 assumes permits the virtual machine's port traffic; retain that
+ * property explicitly rather than letting CCPU reject the first IN/OUT
+ * because its reconstructed TSS ends at the bitmap-base field. */
 #define CPU40_TSS386_IOMAP_BYTES 0x2000u
 #define CPU40_TSS386_TOTAL_BYTES \
     (CPU40_TSS386_BYTES + CPU40_TSS386_IOMAP_BYTES)
@@ -64,6 +72,9 @@ extern void c_setTR_BASE_LIMIT_AR(ULONG base, ULONG limit, USHORT ar);
 #define CPU40_TSS386_NT 0x00004000u
 #define CPU40_XTND_BUSY_TSS 0x0bu
 
+/* This is session-local transition-provider state, not a DOSX descriptor.
+ * It stays private so CCPU context marshaling cannot serialize it as a CPU
+ * register field. */
 static ULONG cpu40_native_idt_source_address;
 
 static void cpu40_write_tss_descriptor(PLDT_ENTRY entry, ULONG base)
@@ -137,22 +148,59 @@ static int cpu40_install_native_task_carrier(void)
 }
 
 VOID
-DpmiCpu40SetNativeIdtSourceAddress(ULONG Address)
+DpmiCpu40SetNativeIdtSourceAddress(
+    ULONG Address
+    )
 {
+    /* 53:00 is also used later for ordinary descriptor publication.  Only
+     * DOSX's first table publication establishes the adjacent IDT layout;
+     * later callers may legitimately carry unrelated small real-mode
+     * segments (for example 00D7h), which must not replace that carrier. */
     if (cpu40_native_idt_source_address == 0u)
         cpu40_native_idt_source_address = Address;
 }
 
 VOID
-DpmiCpu40RestoreNativeIdt(VOID)
+DpmiCpu40RestoreNativeIdt(
+    VOID
+    )
+/*++
+
+Routine Description:
+
+    Restores the protected-mode IDTR carrier which WOW_x86 inherits from
+    native NT VDM.  Some CPU40 accelerated-context resumes restore the
+    real-mode IVT-shaped IDTR even though the guest has already returned to
+    PE.  The native VDM never exposed that transient state to a protected
+    software interrupt, so retain the source-published DOSX table at the
+    common pre-dispatch boundary.
+
+--*/
 {
     if (cpu40_native_idt_source_address != 0u)
-        c_setIDT_BASE_LIMIT(cpu40_native_idt_source_address,
+    {
+        ULONG source_address = cpu40_native_idt_source_address;
+
+        c_setIDT_BASE_LIMIT(source_address,
             (USHORT)(256u * sizeof(LDT_ENTRY) - 1u));
+    }
 }
 
 VOID
-DpmiCpu40SwitchToProtectedMode(VOID)
+DpmiCpu40SwitchToProtectedMode(
+    VOID
+    )
+/*++
+
+Routine Description:
+
+    DIVERGENCE(MVDM-HOST-DIV-222): performs the `53:01` DPMI protected-mode entry for the CPU40 profile.
+    The original i386 owner restores the DOSX-supplied register frame before
+    setting PE.  Its remaining VDM-state-bit writes belong to the NT kernel
+    VDM and have no CPU40 carrier; CPU40 instead retains its existing CPL-3
+    transition rule.
+
+--*/
 {
     PCHAR StackPointer;
     USHORT CsSelector;
@@ -161,18 +209,33 @@ DpmiCpu40SwitchToProtectedMode(VOID)
     ULONG Eip;
     ULONG Esp;
 
-    StackPointer = Sim32GetVDMPointer(((getSS() << 16) | getSP()), 0,
-        (UCHAR)(getMSW() & MSW_PE));
+    StackPointer = Sim32GetVDMPointer(((getSS() << 16) | getSP()),
+        0, (UCHAR)(getMSW() & MSW_PE));
+
+    /* Capture the exact original frame while its real-mode SS cache is
+     * valid.  Unlike the kernel VDM's passive CONTEXT fields, CCPU loads a
+     * segment cache when each setter runs. */
     CsSelector = *(PUSHORT)(StackPointer + 12);
     Eip = *(PULONG)(StackPointer + 8);
     SsSelector = *(PUSHORT)(StackPointer + 6);
     Esp = *(PULONG)(StackPointer + 2);
     DsSelector = *(PUSHORT)(StackPointer);
 
-    if (Cpu40LdtShadowAddress == 0u) return;
-    c_setGDT_BASE_LIMIT(Cpu40LdtShadowAddress,
-        (USHORT)(LDT_SIZE * sizeof(LDT_ENTRY) - 1u));
+    /* WOW DOSX intentionally does not execute the ordinary LGDT path.  Its
+     * preceding 53:00/53:02 publications have populated the CPU40 shadow
+     * from the source-built descriptor table; install that image at the
+     * actual 53:01 transition boundary, immediately before PE makes the
+     * source-supplied selectors architecturally live. */
+    if (Cpu40LdtShadowAddress != 0)
+        c_setGDT_BASE_LIMIT(Cpu40LdtShadowAddress,
+            (USHORT)(LDT_SIZE * sizeof(LDT_ENTRY) - 1));
+
+    /* WOW_x86 omits LIDT because the native VDM already retains DOSX's live
+     * 256-entry table.  53:00 recorded the source address and DOSX filled
+     * the gates in place before this 53:01 entry.  Project that exact table
+     * into CCPU's IDTR; do not synthesize gates or replace the DPMI hooks. */
     DpmiCpu40RestoreNativeIdt();
+
     if (!cpu40_install_native_task_carrier()) return;
 
     setMSW(getMSW() | MSW_PE);
@@ -182,6 +245,8 @@ DpmiCpu40SwitchToProtectedMode(VOID)
     setSS(SsSelector);
     setESP(Esp);
     setDS(DsSelector);
+    /* The source-defined protected entry invalidates these inherited
+     * real-mode selectors before the first protected instruction. */
     setES(0);
     setGS(0);
     setFS(0);
@@ -195,10 +260,15 @@ switch_to_real_mode(
 
 Routine Description:
 
-    CPU40 counterpart of the original i386 `switch_to_real_mode` BOP FD
-    provider.  WOW DOSX pushes the five-word real-mode continuation frame
-    (DS, SP, SS, IP, CS).  Capture it in the original order, leave protected
-    mode, then load the same values through CCPU's real-mode cache path.
+    DIVERGENCE(MVDM-HOST-DIV-229): CPU40 counterpart of the original
+    i386 `switch_to_real_mode` BOP FD provider.  DOSX pushes the five-word
+    real-mode continuation frame (DS, SP, SS, IP, CS).  Capture that exact
+    frame in the original order, clear PE, then load the captured values.
+    The original host stored passive CONTEXT selectors before V86 resumed;
+    CCPU must load them after PE changes so its descriptor caches become the
+    required real-mode caches.  The omitted fixed NTVDM-state-page writes are
+    kernel-VDM bookkeeping with no CCPU40 carrier; they do not define the
+    guest transition.
 
 --*/
 {
@@ -212,14 +282,18 @@ Routine Description:
     StackPointer = Sim32GetVDMPointer(((getSS() << 16) | getSP()),
         0, (UCHAR)(getMSW() & MSW_PE));
 
+    /* Capture before changing mode: the original passive CONTEXT leaves the
+     * five real-mode values in this exact order. */
     DsSelector = *(PUSHORT)(StackPointer);
     Sp = *(PUSHORT)(StackPointer + 2);
     SsSelector = *(PUSHORT)(StackPointer + 4);
     Ip = *(PUSHORT)(StackPointer + 6);
     CsSelector = *(PUSHORT)(StackPointer + 8);
 
-    mvdm_softpc_record_dosx_real_mode_frame(getCS(), getIP(), DsSelector,
-        Sp, SsSelector, Ip, CsSelector, getMSW());
+    mvdm_softpc_record_dosx_real_mode_frame((unsigned int)getCS(),
+        (unsigned int)getIP(), (unsigned int)DsSelector, (unsigned int)Sp,
+        (unsigned int)SsSelector, (unsigned int)Ip,
+        (unsigned int)CsSelector, (unsigned int)getMSW());
 
     setMSW(getMSW() & ~MSW_PE);
     setDS(DsSelector);
@@ -269,17 +343,30 @@ Return Value:
     *(Data) = DosxStackSegment;
 #endif
 
-    mvdm_softpc_record_dosx_real_mode_switch(getCS(), getIP(),
-        DosxRmCodeSegment, getMSW());
+    /* DIVERGENCE(MVDM-HOST-DIV-242): the original kernel-VDM setCS
+     * operation only populated a passive CONTEXT field, so it could retain
+     * the real-mode DOSX segment until the following PE clear took effect.
+     * CPU40's setCS immediately invokes the protected-mode descriptor
+     * loader; validating the real-mode segment (for example D1CDh) as an
+     * LDT selector rejects the source-defined transition before PE changes.
+     * Clear PE first, then load the identical source-supplied CS through the
+     * CCPU real-mode cache path. */
+    setMSW(getMSW() & ~MSW_PE);
     setCS(DosxRmCodeSegment);
 
-    setMSW(getMSW() & ~MSW_PE);
-
 #ifndef i386
-    //BUGBUG This is a workaround to reload a 64k limit into SS for the
-    // emulator, now that we are in real mode.
-    // Not doing this would cause the emulator to do a hardware reset
-    setSS_BASE_LIMIT_AR(getSS_BASE(), 0xffff, getSS_AR());
+    /* DIVERGENCE(MVDM-HOST-DIV-230): the kernel VDM obtains the real-mode
+     * hidden segment caches from hardware.  CPU40 retains its protected-mode
+     * caches after PE is cleared, so reload the original CCPU pseudo
+     * descriptors for every live segment before DOSX resumes real-mode code.
+     * This is the same cache contract used by CCPU's real/V86 IRET paths; it
+     * changes neither DOSX's frame nor its visible segment values. */
+    load_pseudo_descr(CPU40_CS_REG);
+    load_pseudo_descr(CPU40_SS_REG);
+    load_pseudo_descr(CPU40_DS_REG);
+    load_pseudo_descr(4); /* ES_REG */
+    load_pseudo_descr(5); /* FS_REG */
+    load_pseudo_descr(6); /* GS_REG */
 #endif
 }
 
@@ -326,5 +413,19 @@ Return Value:
     // to privilege level 3 now that we are in protect mode.
     // Not doing this would cause an access violation in dpmi32.
     setCPL(3);
+    /* DIVERGENCE(MVDM-HOST-DIV-243): x86's kernel VDM can retain the
+     * real-mode visible CS in its passive CONTEXT until the caller restores
+     * the protected register frame.  CPU40 executes the intervening DPMI
+     * helper immediately (notably DpmiSegmentToSelector), so PE=1 with the
+     * real-mode DOSX segment would be interpreted as an LDT selector.  DOSX
+     * supplies its matching protected code selector in the shared layout;
+     * use it solely as the transition carrier until the original caller
+     * restores its saved CS/IP frame. */
+    setCS(DosxRmCodeSelector);
+    /* The same passive-CONTEXT gap applies to SS.  DPMI may enter a nested
+     * protected helper before its caller restores the complete frame; give
+     * that helper DOSX's source-provided protected stack/data selector rather
+     * than preserving the real-mode stack segment in PE=1 state. */
+    setSS(DosxPmDataSelector);
 #endif
 }

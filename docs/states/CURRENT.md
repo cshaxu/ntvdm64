@@ -8,7 +8,9 @@ The owner closed M0 T404 S5 and T404 on 2026-09-12 to stop recovery
 implementation and audit original-source replacement boundaries first.
 This is an owner-directed stop, not successful WRITE acceptance.
 See [closure and retained debt](../history/m0-t404-owner-directed-closure.md).
-Unaccepted source/build WIP remains in the worktree; its P delivery is pending.
+The owner authorized committing the retained source/build WIP as an audit
+snapshot to clear the worktree. Preservation is not product acceptance;
+WRITE recovery and original-source fidelity remain unproved.
 Read-only audit is authorized; no replacement implementation is admitted.
 
 ## S3 Closure Record

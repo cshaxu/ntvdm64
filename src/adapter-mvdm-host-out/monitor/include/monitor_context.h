@@ -25,12 +25,16 @@
 #undef ADAPTER_MVDM_MONITOR_UNDEF_X86_GATE
 #endif
 
-extern __declspec(thread) VDM_TIB VdmTib;
-extern __declspec(thread) ULONG mvdm_monitor_ntvdm_state;
+/* One standalone ntvdm worker owns exactly one VDM.  Keep this as the
+ * original monitor's process-global storage, rather than a per-host-thread
+ * replacement: original NTIO initialization can enter from a host worker
+ * before the CPU-owning thread resumes. */
+extern VDM_TIB VdmTib;
+extern ULONG mvdm_monitor_ntvdm_state;
 
 /* The historical low-address state macro is unavailable outside the NT4
- * monitor.  This TLS value has the same source-facing scalar form and stays
- * inside the bound session worker. */
+ * monitor.  This process-local value has the same source-facing scalar form
+ * and shares the one-worker lifetime of the original VDM TIB. */
 #ifdef pNtVDMState
 #undef pNtVDMState
 #endif

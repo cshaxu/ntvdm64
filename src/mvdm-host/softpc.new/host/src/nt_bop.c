@@ -178,6 +178,13 @@ static BOOL WowModeInitialized = FALSE;
 
 void MS_bop_1(void) {
 
+    /* Default-off evidence only: this is the original KRNL386-to-WOW
+     * ingress.  The report path is captured before COMMAND constructs the
+     * guest environment, and the observation neither changes registers nor
+     * affects the loader/dispatch result. */
+    mvdm_softpc_record_wow_bop_entry((unsigned int)getCS(),
+        (unsigned int)getIP());
+
     if (!WowModeInitialized) {
     //Load the WOW DLL
     if ((hWOWDll = SafeLoadLibrary("WOW32")) == NULL)
@@ -753,8 +760,17 @@ void MS_bop_F(void)
 {
     extern void kb_setup_vectors(void);
 
-
+    /* Default-off evidence for the original NTIO.SYS registration boundary.
+     * BOP 5F hands the selected KIO and IRET-BOP tables to the original C
+     * BIOS; observing its already-live register inputs does not participate
+     * in vector setup or alter its return state. */
+    mvdm_softpc_record_bop_dispatch(0x5fu, (unsigned int)getAX(),
+        (unsigned int)getCS(), (unsigned int)getIP(),
+        (unsigned int)getDS(), (unsigned int)getSI());
     kb_setup_vectors();
+    mvdm_softpc_record_bop_return(0x5fu, (unsigned int)getAX(),
+        (unsigned int)getCS(), (unsigned int)getIP(),
+        (unsigned int)getAX(), (unsigned int)getCF(), (unsigned int)getIF());
 
 
 #ifdef MONITOR

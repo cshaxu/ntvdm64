@@ -139,10 +139,22 @@ ULONG DosxFaultHandlerIretd;
 ULONG DosxIntHandlerIret;
 ULONG DosxIntHandlerIretd;
 #if defined(CPU_40_STYLE)
-/* CPU40 has no kernel VDM process LDT or task register.  These guest-linear
- * carriers retain the source provider's descriptor and task separation. */
+//
+// Linear address of the guest-resident VDM_DPMIINFO projection used by
+// DOSX's SEL_VDMTIB descriptor.  It is deliberately a guest address, not a
+// host pointer.
+//
 ULONG Cpu40PmStackInfoAddress;
+/* Guest-linear shadow of the process LDT consumed by CCPU.  The original
+ * x86 host installed 53:00 publications into a distinct process LDT rather
+ * than binding CPU execution to DOSX's mutable descriptor source table. */
 ULONG Cpu40LdtShadowAddress;
+/* Guest-linear TEB/TD prefix consumed only by the original FastWOW machine
+ * bridge.  It is deliberately a guest projection, not a host TEB pointer. */
+ULONG Cpu40WowFastTebAddress;
+/* Guest-linear pair of synthetic hardware TSS records.  CPU40 owns their
+ * storage because modern Windows no longer supplies the NT kernel VDM task
+ * register assumed by WOW DOSX. */
 ULONG Cpu40NativeTaskStateAddress;
 #endif
 #endif

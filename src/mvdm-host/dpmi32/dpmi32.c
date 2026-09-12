@@ -22,12 +22,15 @@ Revision History:
 --*/
 #include "precomp.h"
 #pragma hdrstop
-#include "mvdm_softpc_termination.h"
 #include "softpc.h"
-#if defined(CPU_40_STYLE)
+/* DIVERGENCE(MVDM-HOST-DIV-164): default-off observation of the already
+ * decoded DPMI selector.  It does not alter the original table, IP advance,
+ * or provider call. */
+#include "mvdm_softpc_termination.h"
+/* CPU40 exposes these generated CCPU accessors through cpu4gen.h, which is
+ * intentionally not part of the DPMI provider's public include surface. */
 extern void setLDT_SELECTOR(USHORT val);
 extern int setLDT_BASE_LIMIT(ULONG base, ULONG limit);
-#endif
 //
 // Information about the current PSP
 //
@@ -106,6 +109,13 @@ Return Value:
 
     DBGTRACE(DPMI_DISPATCH_ENTRY, Index, 0, 0);
 
+    /* The original dispatcher has already consumed the one-byte subfunction
+     * into `Index`; record that existing scalar rather than reading guest
+     * memory again at the BOP ingress. */
+    mvdm_softpc_record_bop_dispatch(0x53u, (unsigned int)Index,
+        (unsigned int)getCS(), (unsigned int)getIP(),
+        (unsigned int)getDS(), (unsigned int)getDX());
+
     if (Index >= MAX_DPMI_BOP_FUNC) {
 #if DBG
         DbgPrint("NtVdm: Invalid DPMI BOP %lx\n", Index);
@@ -114,6 +124,15 @@ Return Value:
     }
 
     (*DpmiDispatchTable[Index])();
+
+    /* The original provider may transfer directly into protected guest code
+     * (notably 53:01), so record the state it has established rather than
+     * assuming that every DPMI service has ordinary call/return semantics. */
+    mvdm_softpc_record_bop_return(0x53u, (unsigned int)Index,
+        (unsigned int)getCS(), (unsigned int)getIP(),
+        (unsigned int)getAX(), (unsigned int)getCF(),
+        (unsigned int)getIF());
+
 }
 
 VOID
@@ -210,9 +229,6 @@ Return Value:
     DosxIret             = *(PDWORD16)(SharedData + 50);
     DosxIretd            = *(PDWORD16)(SharedData + 54);
 
-    mvdm_softpc_record_dosx_init(getDS(), getSI(), DosxStackSegment,
-        DosxRmCodeSegment, DosxRmCodeSelector, DosxPmDataSelector, RmBopFe);
-
 }
 
 VOID
@@ -295,7 +311,6 @@ Return Value:
 
 --*/
 {
-
     Ldt = (PVOID)Sim32GetVDMPointer(
         (getAX() << 16),
         0,
@@ -305,15 +320,23 @@ Return Value:
     IntelBase = (ULONG_PTR) Sim32GetVDMPointer((ULONG)0, 1, FALSE);
 
 #if defined(CPU_40_STYLE)
-    /* DOSX publishes the descriptor table at 53:00.  Native NT installs it
-     * in the worker LDT; retain a distinct CCPU guest-linear image because
-     * DOSX can subsequently reuse the source table. */
+    /* The 486 DOSX allocator publishes the GDT segment through 53:00, but
+     * allocates the 256-entry IDT immediately before it (see dxboot.asm:
+     * CBIDTOFF/CBGDTOFF).  WOW_x86 deliberately relies on native NT VDM to
+     * have installed that same live table when it enters protected mode.
+     * Preserve the source address here; the table is filled after this BOP
+     * and must not be copied into a stale private image. */
     if (getAX() >= (256u * sizeof(LDT_ENTRY)) / 16u)
         DpmiCpu40SetNativeIdtSourceAddress(((ULONG)getAX() << 4) -
             (256u * sizeof(LDT_ENTRY)));
 
-    if (Cpu40LdtShadowAddress == 0u) {
-        ULONG Address = 0u;
+    /* DIVERGENCE(MVDM-HOST-DIV-231): x86's 53:00 publication installed
+     * descriptors into an NT process LDT distinct from DOSX's writable
+     * guest source table.  CCPU must retain the same separation: DOSX may
+     * legally reuse its table slots after the BOP returns, while CPU selector
+     * loads continue to consume the published descriptor image. */
+    if (!Cpu40LdtShadowAddress) {
+        ULONG Address = 0;
         ULONG Size = LDT_SIZE * sizeof(LDT_ENTRY);
         NTSTATUS Status = DpmiAllocateVirtualMemory((PVOID)&Address, &Size);
 
@@ -322,11 +345,32 @@ Return Value:
             return;
         }
         Cpu40LdtShadowAddress = Address;
-        RtlCopyMemory((PVOID)(IntelBase + Address), Ldt, Size);
+        RtlCopyMemory((PVOID)(IntelBase + Cpu40LdtShadowAddress), Ldt, Size);
     }
+    /* DIVERGENCE(MVDM-HOST-DIV-248): FastWOW loads the inherited NT TEB
+     * selector (003Bh) while still executing in CCPU guest-linear space.
+     * Modern Windows cannot publish NT4's TEB/WOW32Reserved carrier there.
+     * Give that one bridge a bounded guest projection: NtTib.Self at 18h,
+     * then a three-DWORD TD prefix at 100h (vpStack, vpCBStack, FastWowEsp).
+     * FastWOW itself owns every write to that prefix; no host TEB address or
+     * native TD pointer crosses into guest memory. */
+    if (!Cpu40WowFastTebAddress) {
+        ULONG Address = 0;
+        ULONG TebSize = 0x1000;
+        NTSTATUS Status = DpmiAllocateVirtualMemory((PVOID)&Address, &TebSize);
+
+        if (NT_SUCCESS(Status)) {
+            Cpu40WowFastTebAddress = Address;
+            RtlZeroMemory((PVOID)(IntelBase + Address), TebSize);
+            *(PULONG)(IntelBase + Address + 0x18u) = Address;
+            *(PULONG)(IntelBase + Address + 0xc0u) = Address + 0x100u;
+        }
+    }
+    /* The LDTR selector is an internal-validity token; DOSX neither sees nor
+     * consumes it. */
     setLDT_SELECTOR(4);
     setLDT_BASE_LIMIT(Cpu40LdtShadowAddress,
-        (ULONG)(LDT_SIZE * sizeof(LDT_ENTRY) - 1u));
+        (ULONG)(LDT_SIZE * sizeof(LDT_ENTRY) - 1));
 #endif
 
 }

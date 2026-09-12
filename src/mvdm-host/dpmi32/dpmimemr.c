@@ -61,6 +61,16 @@ Return Value:
     BOOL Success;
     NTSTATUS Status;
 
+#if defined(CPU_40_STYLE)
+    /* DIVERGENCE(MVDM-HOST-DIV-224): CPU40's XMS initializer reserves the
+     * complete extended linear range, so the generic VDM allocator correctly
+     * has no free extent by the time DOSX reaches 53:07.  Use the original
+     * RISC shared-XMS allocator directly; it owns that reserved range and
+     * preserves the same DPMI allocation ABI. */
+    Success = SAAllocate(ExtMemSA, *Size, (PULONG)Address);
+    return Success ? STATUS_SUCCESS : (NTSTATUS)-1;
+#endif
+
     Status = VdmAllocateVirtualMemory((PULONG)Address, *Size, TRUE);
 
     if (Status == STATUS_NOT_IMPLEMENTED) {
@@ -109,6 +119,12 @@ Return Value:
 {
     BOOL Success;
     NTSTATUS Status;
+
+#if defined(CPU_40_STYLE)
+    /* See MVDM-HOST-DIV-224: allocations come from the shared XMS pool. */
+    Success = SAFree(ExtMemSA, *Size, (ULONG)*Address);
+    return Success ? STATUS_SUCCESS : (NTSTATUS)-1;
+#endif
 
     Status = VdmFreeVirtualMemory(*(PULONG)Address);
 
@@ -161,6 +177,13 @@ Return Value:
 {
     NTSTATUS Status;
     BOOL Success;
+
+#if defined(CPU_40_STYLE)
+    /* See MVDM-HOST-DIV-224: retain allocation/free/reallocation ownership
+     * in the same XMS suballocator. */
+    return SAReallocate(ExtMemSA, OldSize, (ULONG)OldAddress, *NewSize,
+        (PULONG)NewAddress);
+#endif
 
     Status = VdmReallocateVirtualMemory((ULONG)OldAddress,
                                         (PULONG)NewAddress,
@@ -234,11 +257,12 @@ Return Value:
     //
     // Get the information on memory
     //
-    Status = VdmQueryFreeVirtualMemory(
-                &TotalFree,
-                &LargestFree
-                );
+    Status = VdmQueryFreeVirtualMemory(&TotalFree, &LargestFree);
 
+#if defined(CPU_40_STYLE)
+    /* See MVDM-HOST-DIV-224: report the actual shared XMS pool. */
+    SAQueryFree(ExtMemSA, &TotalFree, &LargestFree);
+#else
     if (Status == STATUS_NOT_IMPLEMENTED) {
         SAQueryFree(
             ExtMemSA,
@@ -246,6 +270,7 @@ Return Value:
             &LargestFree
             );
     }
+#endif
     
     //
     // Return the information.

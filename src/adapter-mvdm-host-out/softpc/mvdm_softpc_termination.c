@@ -21,6 +21,8 @@ static __declspec(thread) const char *mvdm_softpc_termination_origin =
     "unattributed";
 static char mvdm_softpc_command_continuation_report_path[MAX_PATH];
 static char mvdm_softpc_bop_return_report_path[MAX_PATH];
+static char mvdm_softpc_cpu_return_report_path[MAX_PATH];
+static char mvdm_softpc_wow_bop_report_path[MAX_PATH];
 static char mvdm_softpc_retf_target_report_path[MAX_PATH];
 static char mvdm_softpc_cpu_ivt08_report_path[MAX_PATH];
 static char mvdm_softpc_cpu_low_fault_transfer_report_path[MAX_PATH];
@@ -30,6 +32,9 @@ static char mvdm_softpc_sas_store_report_path[MAX_PATH];
 static char mvdm_softpc_sas_store_linear[16];
 static char mvdm_softpc_sas_store_length[16];
 static volatile LONG mvdm_softpc_dos_console_line_input_seen;
+
+static void mvdm_softpc_write_captured_report(const char *report_path,
+    const char *message, DWORD message_bytes);
 
 static char *mvdm_softpc_append_hex(char *output, ULONG_PTR value,
     unsigned int digits)
@@ -41,9 +46,6 @@ static char *mvdm_softpc_append_hex(char *output, ULONG_PTR value,
         *output++ = hex[(value >> ((index - 1) * 4)) & 0x0f];
     return output;
 }
-
-static void mvdm_softpc_write_captured_report(const char *report_path,
-    const char *message, DWORD message_bytes);
 
 static void mvdm_softpc_write_optional_report(const char *environment_name,
     const char *message, DWORD message_bytes)
@@ -115,6 +117,26 @@ void mvdm_softpc_capture_command_continuation_report_path(void)
     if (bytes == 0u || bytes >= sizeof(mvdm_softpc_bop_return_report_path))
         mvdm_softpc_bop_return_report_path[0] = '\0';
 
+    /* CPU simulation-return evidence is likewise host-only.  It must be
+     * captured before cmdenv.c copies inherited variables into the guest. */
+    mvdm_softpc_cpu_return_report_path[0] = '\0';
+    bytes = GetEnvironmentVariableA("MVDM_CPU_RETURN_REPORT_PATH",
+        mvdm_softpc_cpu_return_report_path,
+        (DWORD)sizeof(mvdm_softpc_cpu_return_report_path));
+    (void)SetEnvironmentVariableA("MVDM_CPU_RETURN_REPORT_PATH", NULL);
+    if (bytes == 0u || bytes >= sizeof(mvdm_softpc_cpu_return_report_path))
+        mvdm_softpc_cpu_return_report_path[0] = '\0';
+
+    /* This single WOW ingress witness avoids the high-frequency BOP trace
+     * and remains absent from the guest environment. */
+    mvdm_softpc_wow_bop_report_path[0] = '\0';
+    bytes = GetEnvironmentVariableA("MVDM_WOW_BOP_REPORT_PATH",
+        mvdm_softpc_wow_bop_report_path,
+        (DWORD)sizeof(mvdm_softpc_wow_bop_report_path));
+    (void)SetEnvironmentVariableA("MVDM_WOW_BOP_REPORT_PATH", NULL);
+    if (bytes == 0u || bytes >= sizeof(mvdm_softpc_wow_bop_report_path))
+        mvdm_softpc_wow_bop_report_path[0] = '\0';
+
     /* Unlike the broad BOP report, the target-only RETF witness must not
      * enable any other startup observation.  Capture its private selector
      * before COMMAND obtains the inherited guest environment. */
@@ -163,6 +185,7 @@ void mvdm_softpc_capture_command_continuation_report_path(void)
     if (bytes == 0u || bytes >= sizeof(mvdm_softpc_cpu_illegal_report_path))
         mvdm_softpc_cpu_illegal_report_path[0] = '\0';
 
+
     /* The SAS write observer is host-only as well.  Capture all of its
      * selectors before cmdenv.c snapshots the inherited environment so the
      * watched address cannot perturb DOSX's allocation or relocation. */
@@ -190,6 +213,30 @@ void mvdm_softpc_capture_command_continuation_report_path(void)
     if (bytes == 0u || bytes >= sizeof(mvdm_softpc_sas_store_length))
         mvdm_softpc_sas_store_length[0] = '\0';
 
+}
+
+void mvdm_softpc_restore_child_report_paths(void)
+{
+    /* DIVERGENCE(MVDM-HOST-DIV-263): COMMAND's 54:0F provider has finished
+     * copying the inherited environment into the first guest.  Restore only
+     * previously captured observer selectors so an original cmdExec32 native
+     * child can capture and scrub them before creating its own guest.  No
+     * selector is restored before that copy or read by the guest. */
+    if (mvdm_softpc_bop_return_report_path[0] != '\0')
+        (void)SetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH",
+            mvdm_softpc_bop_return_report_path);
+    if (mvdm_softpc_retf_target_report_path[0] != '\0')
+        (void)SetEnvironmentVariableA("MVDM_RETF_TARGET_REPORT_PATH",
+            mvdm_softpc_retf_target_report_path);
+    if (mvdm_softpc_cpu_ivt08_report_path[0] != '\0')
+        (void)SetEnvironmentVariableA("MVDM_CPU_IVT08_REPORT_PATH",
+            mvdm_softpc_cpu_ivt08_report_path);
+    if (mvdm_softpc_cpu_low_fault_transfer_report_path[0] != '\0')
+        (void)SetEnvironmentVariableA("MVDM_CPU_LOW_FAULT_TRANSFER_REPORT_PATH",
+            mvdm_softpc_cpu_low_fault_transfer_report_path);
+    if (mvdm_softpc_cpu_illegal_report_path[0] != '\0')
+        (void)SetEnvironmentVariableA("MVDM_CPU_ILLEGAL_REPORT_PATH",
+            mvdm_softpc_cpu_illegal_report_path);
 }
 
 static void mvdm_softpc_write_exception_report(const char *message,
@@ -426,6 +473,7 @@ void mvdm_softpc_record_bop_dispatch(unsigned int selector,
                                      unsigned int guest_dx)
 {
     static const char hex[] = "0123456789ABCDEF";
+    static LONG chmod_reports;
     char message[] = "MVDM-BOP-DISPATCH 00:00\r\n";
 
     /* DIVERGENCE(ADAPTER-SOFTPC-046): this is an observer-only copy of an
@@ -458,6 +506,34 @@ void mvdm_softpc_record_bop_dispatch(unsigned int selector,
         terminal_message[54] = hex[guest_dx & 0x0fu];
         mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
             terminal_message, (DWORD)(sizeof(terminal_message) - 1));
+        return;
+    }
+    /* `50:01` is the original DEM chmod service, not BOP 51/WOW.  The
+     * startup trace can contain many such calls, so keep this source-owned
+     * ingress witness finite while preserving the dispatcher and service
+     * result exactly as they are. */
+    if (selector == 0x50u && service == 0x01u &&
+        InterlockedIncrement(&chmod_reports) <= 16) {
+        char chmod_message[] =
+            "MVDM-BOP-DISPATCH 50:01 cs=0000 ip=0000 ds=0000 dx=0000\r\n";
+        chmod_message[27] = hex[(guest_cs >> 12) & 0x0fu];
+        chmod_message[28] = hex[(guest_cs >> 8) & 0x0fu];
+        chmod_message[29] = hex[(guest_cs >> 4) & 0x0fu];
+        chmod_message[30] = hex[guest_cs & 0x0fu];
+        chmod_message[35] = hex[(guest_ip >> 12) & 0x0fu];
+        chmod_message[36] = hex[(guest_ip >> 8) & 0x0fu];
+        chmod_message[37] = hex[(guest_ip >> 4) & 0x0fu];
+        chmod_message[38] = hex[guest_ip & 0x0fu];
+        chmod_message[43] = hex[(guest_ds >> 12) & 0x0fu];
+        chmod_message[44] = hex[(guest_ds >> 8) & 0x0fu];
+        chmod_message[45] = hex[(guest_ds >> 4) & 0x0fu];
+        chmod_message[46] = hex[guest_ds & 0x0fu];
+        chmod_message[51] = hex[(guest_dx >> 12) & 0x0fu];
+        chmod_message[52] = hex[(guest_dx >> 8) & 0x0fu];
+        chmod_message[53] = hex[(guest_dx >> 4) & 0x0fu];
+        chmod_message[54] = hex[guest_dx & 0x0fu];
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            chmod_message, (DWORD)(sizeof(chmod_message) - 1));
         return;
     }
     mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH", message,
@@ -497,6 +573,44 @@ void mvdm_softpc_record_bop_return(unsigned int selector,
         (DWORD)(sizeof(message) - 1));
     if (selector == 0x54u && service == 0x0fu)
         mvdm_softpc_record_command_environment_return_code(guest_cs, guest_ip);
+}
+
+void mvdm_softpc_record_dpmi_unhandled_exception(unsigned int vector,
+                                                  unsigned int guest_cs,
+                                                  uint32_t guest_ip,
+                                                  unsigned int guest_ss,
+                                                  uint32_t guest_sp,
+                                                  unsigned int frame_32,
+                                                  const uint16_t frame_words[8])
+{
+    char message[256];
+    int formatted;
+
+    if (frame_words == NULL) return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-DPMI-UNHANDLED vector=%02X cs=%04X ip=%08lX ss=%04X sp=%08lX frame32=%u words=%04X,%04X,%04X,%04X,%04X,%04X,%04X,%04X\r\n",
+        vector & 0xffu, guest_cs & 0xffffu, (unsigned long)guest_ip,
+        guest_ss & 0xffffu, (unsigned long)guest_sp, frame_32 != 0u ? 1u : 0u,
+        frame_words[0], frame_words[1], frame_words[2], frame_words[3],
+        frame_words[4], frame_words[5], frame_words[6], frame_words[7]);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
+            message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_wow_bop_entry(unsigned int guest_cs,
+                                      unsigned int guest_ip)
+{
+    char message[80];
+    int formatted;
+
+    if (mvdm_softpc_wow_bop_report_path[0] == '\0') return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-WOW-BOP-ENTRY cs=%04X ip=%04X\r\n",
+        guest_cs & 0xffffu, guest_ip & 0xffffu);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_wow_bop_report_path,
+            message, (DWORD)formatted);
 }
 
 void mvdm_softpc_record_keyboard_waitio(void)
@@ -580,6 +694,9 @@ void mvdm_softpc_record_cpu_unsimulate(unsigned int guest_cs,
     if (formatted > 0 && (size_t)formatted < sizeof(message))
         mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
             message, (DWORD)formatted);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_cpu_return_report_path,
+            message, (DWORD)formatted);
 }
 
 void mvdm_softpc_record_cpu_simulate_return(unsigned int guest_cs,
@@ -594,21 +711,44 @@ void mvdm_softpc_record_cpu_simulate_return(unsigned int guest_cs,
     if (formatted > 0 && (size_t)formatted < sizeof(message))
         mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
             message, (DWORD)formatted);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_cpu_return_report_path,
+            message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_ntio_vector_handoff(unsigned int kio_segment,
+                                             unsigned int int10_caller,
+                                             unsigned int int10_vector)
+{
+    char message[112];
+    int formatted;
+
+    if (mvdm_softpc_bop_return_report_path[0] == '\0')
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-NTIO-VECTORS kio-seg=%04X int10-caller=%04X int10-vector=%04X\r\n",
+        kio_segment & 0xffffu, int10_caller & 0xffffu,
+        int10_vector & 0xffffu);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(mvdm_softpc_bop_return_report_path,
+            message, (DWORD)formatted);
 }
 
 void mvdm_softpc_record_cpu_illegal_instruction(unsigned int fault_cs,
     unsigned int fault_ip, unsigned int fault_linear, unsigned int opcode0,
     unsigned int opcode1, unsigned int opcode2, unsigned int opcode3,
-    unsigned int opcode4, unsigned int live_cs, unsigned int live_ip,
-    unsigned int machine_status)
+    unsigned int opcode4, unsigned int preceding0, unsigned int preceding1,
+    unsigned int ivt06_offset, unsigned int ivt06_segment,
+    unsigned int live_cs, unsigned int live_ip, unsigned int machine_status)
 {
     char message[192];
     int formatted;
 
     formatted = snprintf(message, sizeof(message),
-        "MVDM-CPU-ILLEGAL fault=%04X:%04X linear=%08X op=%02X%02X%02X%02X%02X live=%04X:%04X msw=%04X\r\n",
-        fault_cs, fault_ip, fault_linear, opcode0, opcode1, opcode2,
-        opcode3, opcode4, live_cs, live_ip, machine_status);
+        "MVDM-CPU-ILLEGAL fault=%04X:%04X linear=%08X before=%02X%02X op=%02X%02X%02X%02X%02X ivt06=%04X:%04X live=%04X:%04X msw=%04X\r\n",
+        fault_cs, fault_ip, fault_linear, preceding0, preceding1, opcode0,
+        opcode1, opcode2, opcode3, opcode4, ivt06_segment, ivt06_offset,
+        live_cs, live_ip, machine_status);
     if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
     mvdm_softpc_write_captured_report(mvdm_softpc_cpu_illegal_report_path,
         message, (DWORD)formatted);
@@ -1061,7 +1201,7 @@ void mvdm_softpc_record_cpu_low_fault_ivt_target(unsigned int vector,
      * Record only the unresolved target, then return to the unchanged
      * load_CS_cache/SET_EIP transfer. */
     if (mvdm_softpc_cpu_ivt08_report_path[0] == '\0' ||
-        (target_offset & 0xffffu) != 0x0036u ||
+        (target_offset & 0xffffu) != 0x0034u ||
         (target_segment & 0xffffu) != 0u ||
         InterlockedIncrement(&reported) != 1)
         return;
@@ -1084,8 +1224,8 @@ void mvdm_softpc_record_cpu_low_fault_transfer(const char *kind,
 
     if (mvdm_softpc_cpu_low_fault_transfer_report_path[0] == '\0' ||
         kind == NULL || (target_cs & 0xffffu) != 0u ||
-        (target_ip & 0xffffu) != 0x0036u ||
-        InterlockedIncrement(&reported) != 1)
+        (target_ip & 0xffffu) >= 0x0040u ||
+        InterlockedIncrement(&reported) > 16)
         return;
     formatted = snprintf(message, sizeof(message),
         "MVDM-CPU-LOW-TRANSFER kind=%s source=%04X:%04X target=%04X:%04X\\r\\n",
@@ -1098,18 +1238,29 @@ void mvdm_softpc_record_cpu_low_fault_transfer(const char *kind,
 }
 
 void mvdm_softpc_record_cpu_low_cs_load(unsigned int source_cs,
-    unsigned int source_ip, unsigned int selector)
+    unsigned int source_ip, unsigned int selector, unsigned int opcode0,
+    unsigned int opcode1, unsigned int opcode2, unsigned int opcode3,
+    unsigned int opcode4, uintptr_t caller_return_address,
+    unsigned int stack_ss, uint32_t stack_sp, unsigned int stack_ip,
+    unsigned int stack_cs)
 {
     static LONG reported;
-    char message[112];
+    char message[224];
     int formatted;
+    uintptr_t image_base;
 
     if (mvdm_softpc_cpu_low_fault_transfer_report_path[0] == '\0' ||
         (selector & 0xffffu) != 0u || InterlockedIncrement(&reported) != 1)
         return;
+    image_base = (uintptr_t)GetModuleHandleA(NULL);
     formatted = snprintf(message, sizeof(message),
-        "MVDM-CPU-CS-LOAD source=%04X:%04X selector=%04X\\r\\n",
-        source_cs & 0xffffu, source_ip & 0xffffu, selector & 0xffffu);
+        "MVDM-CPU-CS-LOAD source=%04X:%04X selector=%04X op=%02X%02X%02X%02X%02X caller-rva=%08lX stack=%04X:%04lX words=%04X,%04X\\r\\n",
+        source_cs & 0xffffu, source_ip & 0xffffu, selector & 0xffffu,
+        opcode0 & 0xffu, opcode1 & 0xffu, opcode2 & 0xffu,
+        opcode3 & 0xffu, opcode4 & 0xffu,
+        (unsigned long)(caller_return_address - image_base),
+        stack_ss & 0xffffu, (unsigned long)stack_sp,
+        stack_ip & 0xffffu, stack_cs & 0xffffu);
     if (formatted > 0 && (size_t)formatted < sizeof(message))
         mvdm_softpc_write_captured_report(
             mvdm_softpc_cpu_low_fault_transfer_report_path,
@@ -1270,6 +1421,25 @@ void mvdm_softpc_record_command_call(unsigned int service,
     mvdm_softpc_write_captured_report(mvdm_softpc_command_continuation_report_path,
         message, (DWORD)(sizeof(message) - 1));
 }
+
+void mvdm_softpc_record_dpmi_interrupt_registration(unsigned int vector,
+    unsigned int flags, unsigned int selector, uint32_t eip)
+{
+    char message[128];
+    int formatted;
+
+    if (vector != 0x08u && vector != 0x10u && vector != 0x21u &&
+        vector != 0x31u)
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-DPMI-INT vector=%02X flags=%04X cs=%04X eip=%08lX\\r\\n",
+        vector, flags & 0xffffu, selector & 0xffffu, (unsigned long)eip);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message))
+        return;
+    mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH", message,
+        (DWORD)formatted);
+}
+
 
 void mvdm_softpc_record_command_continuation(unsigned int stage,
     unsigned int guest_cs, unsigned int guest_ip, unsigned int guest_ax,

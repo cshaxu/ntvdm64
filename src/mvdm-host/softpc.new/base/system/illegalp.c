@@ -104,8 +104,10 @@ void illegal_op_int()
         ea = effective_addr(cs, ip);
         mvdm_softpc_record_cpu_illegal_instruction(cs, ip, ea,
             sas_hw_at(ea), sas_hw_at(ea + 1), sas_hw_at(ea + 2),
-            sas_hw_at(ea + 3), sas_hw_at(ea + 4), getCS(), getIP(),
-            getMSW());
+            sas_hw_at(ea + 3), sas_hw_at(ea + 4),
+            ea >= 2 ? sas_hw_at(ea - 2) : 0, ea >= 1 ? sas_hw_at(ea - 1) : 0,
+            sas_hw_at(0x6u * 4u), sas_hw_at((0x6u * 4u) + 2u),
+            getCS(), getIP(), getMSW());
 #endif
 
 #ifndef NTVDM

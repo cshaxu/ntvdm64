@@ -47,6 +47,29 @@ void mvdm_softpc_record_bop_return(unsigned int selector,
                                    unsigned int guest_cf,
                                    unsigned int guest_if);
 
+/* Default-off observation at the original DPMI unhandled-fault ingress.
+ * The caller has already decoded this finite frame; the observer neither
+ * owns the frame nor changes the DPMI exception path. */
+void mvdm_softpc_record_dpmi_unhandled_exception(unsigned int vector,
+                                                  unsigned int guest_cs,
+                                                  uint32_t guest_ip,
+                                                  unsigned int guest_ss,
+                                                  uint32_t guest_sp,
+                                                  unsigned int frame_32,
+                                                  const uint16_t frame_words[8]);
+
+/* Default-off, host-only observation of the original KRNL386 WOW BOP
+ * ingress.  This deliberately has a private selector rather than enabling
+ * the broad BOP trace, whose per-service I/O changes timing. */
+void mvdm_softpc_record_wow_bop_entry(unsigned int guest_cs,
+                                      unsigned int guest_ip);
+/* Default-off observation of the original NTIO.SYS BOP 5F vector handoff.
+ * The values were already decoded by kb_setup_vectors; observation cannot
+ * alter the original vector, BOP, CPU, or guest-memory path. */
+void mvdm_softpc_record_ntio_vector_handoff(unsigned int kio_segment,
+                                            unsigned int int10_caller,
+                                            unsigned int int10_vector);
+
 /* Default-off fixed-container observation of the original CCPU BOP FE
  * unwind.  The CPU has already decoded and advanced past the instruction;
  * this copies only its live CS:IP immediately before the unchanged original
@@ -66,8 +89,9 @@ void mvdm_softpc_record_cpu_simulate_return(unsigned int guest_cs,
 void mvdm_softpc_record_cpu_illegal_instruction(unsigned int fault_cs,
     unsigned int fault_ip, unsigned int fault_linear, unsigned int opcode0,
     unsigned int opcode1, unsigned int opcode2, unsigned int opcode3,
-    unsigned int opcode4, unsigned int live_cs, unsigned int live_ip,
-    unsigned int machine_status);
+    unsigned int opcode4, unsigned int preceding0, unsigned int preceding1,
+    unsigned int ivt06_offset, unsigned int ivt06_segment,
+    unsigned int live_cs, unsigned int live_ip, unsigned int machine_status);
 
 /* Default-off scalar observation of the original DOSX initialization BOP's
  * already-decoded shared-data fields and a later original real-mode switch. */
@@ -82,6 +106,7 @@ void mvdm_softpc_record_dosx_real_mode_frame(unsigned int source_cs,
     unsigned int source_ip, unsigned int frame_ds, unsigned int frame_sp,
     unsigned int frame_ss, unsigned int frame_ip, unsigned int frame_cs,
     unsigned int machine_status);
+
 
 /* Default-off CPU40 far-return witness.  It records the original scalar
  * source and completed destination only; it cannot select a destination,
@@ -157,7 +182,11 @@ void mvdm_softpc_record_cpu_low_fault_transfer(const char *kind,
 /* Default-off witness at the original code-segment cache loader. It latches
  * only a CS-zero selection and neither loads nor changes any CPU field. */
 void mvdm_softpc_record_cpu_low_cs_load(unsigned int source_cs,
-    unsigned int source_ip, unsigned int selector);
+    unsigned int source_ip, unsigned int selector, unsigned int opcode0,
+    unsigned int opcode1, unsigned int opcode2, unsigned int opcode3,
+    unsigned int opcode4, uintptr_t caller_return_address,
+    unsigned int stack_ss, uint32_t stack_sp, unsigned int stack_ip,
+    unsigned int stack_cs);
 /* Default-off observation at the original BIOS keyboard `AH == 2` waitio
  * edge.  It does not queue, read, or alter a key. */
 void mvdm_softpc_record_keyboard_waitio(void);
@@ -210,6 +239,11 @@ void mvdm_softpc_record_command_call(unsigned int service,
                                     unsigned int guest_ax,
                                     unsigned int guest_cf);
 
+/* Default-off scalar observation of the original DPMI 53:02 registration.
+ * The caller has already decoded the registration frame. */
+void mvdm_softpc_record_dpmi_interrupt_registration(unsigned int vector,
+    unsigned int flags, unsigned int selector, uint32_t eip);
+
 /* Default-off, fixed-container continuation observation for the original
  * COMMAND GetNextCmd table entry.  All arguments are copied scalars at the
  * existing table boundary; no command bytes, record pointer or guest/native
@@ -257,6 +291,11 @@ void mvdm_softpc_record_command_environment_return_code(unsigned int guest_cs,
  * diagnostic variables. The retained paths are adapter-private and are never
  * made guest-visible. */
 void mvdm_softpc_capture_command_continuation_report_path(void);
+
+/* After COMMAND has finished its one inherited-environment copy, restore the
+ * captured host-only selectors only for a native child.  A child executable
+ * captures and removes them again before its own guest environment exists. */
+void mvdm_softpc_restore_child_report_paths(void);
 
 /* Default-off, fixed-container DEM observation.  The caller passes only the
  * original numeric DS:SI form; this helper takes and releases its own bounded

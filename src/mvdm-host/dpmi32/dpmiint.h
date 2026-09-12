@@ -20,6 +20,9 @@ Revision History:
 --*/
 
 
+/* The original i386 branch delegates these carriers to the kernel VDM
+ * monitor. CPU40 is a software executor even when hosted by an x86 build,
+ * so it retains the original non-monitor carrier ownership. */
 #if !defined(i386) || defined(CPU_40_STYLE)
 
 GETREGISTERFUNCTION GetRegisterByIndex[8] = {getEAX, getECX, getEDX, getECX,

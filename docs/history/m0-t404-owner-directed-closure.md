@@ -32,6 +32,25 @@ Research builds stay under `build/M0-T404/S5/`; runtime logs stay under
 
 ## Audit handoff
 
+### Owner-authorized snapshot delivery
+
+The owner subsequently authorized commit/push and a clean worktree, with an
+OpenNT MVDM/non-MVDM source-diff audit placed first in Queue. The retained
+source, declarations and build-tool changes are committed as an explicit
+unaccepted research snapshot, superseding the pending-save state above.
+They are audit inputs, not certified repairs or a new runtime publication.
+No source is discarded and no guest test is claimed by this preservation
+delivery. Ignored build products and runtime logs remain local.
+The queued audit has one dedicated proposal and no numeric task admission.
+T404/S5 remain closed by owner direction; complete WRITE recovery remains debt.
+
+Preservation checks: documentation governance, relative links and queue
+valid/missing-link cases pass. The staged default whitespace check reports
+only extra terminal blank lines in seven retained original ABI headers;
+these bytes are preserved for provenance, not reformatted as a source fix.
+The whitespace check excluding only `blank-at-eof` is required for this
+snapshot. No fresh product build or runtime acceptance is claimed.
+
 The [initial replacement audit](../etc/evidence/opennt-replacement-audit-20260912.md)
 separates confirmed substitutions, unequal contracts and unresolved suspects.
 Working COMMAND/EDIT are regression baselines, not exemptions. Full source

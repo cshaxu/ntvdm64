@@ -98,9 +98,11 @@ $hostEntryRoot = Join-Path $root 'src/mvdm-host/softpc.new/obj.vdm'
 $adapterSoftpcRoot = Join-Path $root 'src/adapter-mvdm-host-out/softpc'
 $adapterWin32Root = Join-Path $root 'src/adapter-mvdm-host-out/win32/source'
 $hostCrtRedirect = Join-Path $root 'src/adapter-mvdm-host-out/win32/include/mvdm_crt_redirect.h'
+$softpcSymbolCompat = Join-Path $root 'src/adapter-mvdm-host-out/softpc/include/mvdm_softpc_symbol_compat.h'
 $appRoot = Join-Path $root 'src/app'
 $adapterBaseSrvRoot = Join-Path $root 'src/adapter-mvdm-host-out/basesrv/source'
 $adapterMonitorRoot = Join-Path $root 'src/adapter-mvdm-host-out/monitor/source'
+$kernelVdmPrinterSource = Join-Path $root 'src/mvdm-host/kernel-vdm/v86/monitor/i386/monitor_printer.c'
 $adapterRedirRoot = Join-Path $root 'src/adapter-mvdm-host-out/redir'
 $adapterVddRoot = Join-Path $root 'src/adapter-mvdm-host-out/vdd'
 $patchRoot = Join-Path $root 'src/mvdm-softpc-patch/x86/prod'
@@ -362,6 +364,7 @@ foreach ($name in $appNames) {
 foreach ($name in $adapterMonitorNames) {
     if (!(Test-Path -LiteralPath (Join-Path $adapterMonitorRoot $name))) { throw "Required monitor adapter source missing: $name" }
 }
+if (!(Test-Path -LiteralPath $kernelVdmPrinterSource)) { throw "Required kernel VDM printer carrier missing: $kernelVdmPrinterSource" }
 foreach ($name in $patchNames) {
     if (!(Test-Path -LiteralPath (Join-Path $patchRoot $name))) { throw "Registered SoftPC patch carrier missing: $name" }
 }
@@ -373,6 +376,56 @@ foreach ($name in $patchEvidenceNames) {
 }
 
 New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/dpmi'), (Join-Path $build 'obj/suballoc'), (Join-Path $build 'obj/session'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/adapter-redir'), (Join-Path $build 'obj/adapter-vdd'), (Join-Path $build 'obj/opennt-netlib'), (Join-Path $build 'obj/opennt-base-vdm'), (Join-Path $build 'obj/patch') | Out-Null
+
+# OpenNT's WOW32 build imports the running NTVDM and OEMUNI owners rather
+# than linking a second machine into WOW32.DLL.  Keep the original NTVDM
+# export list intact and derive this additional, private provider-import
+# surface only for the standalone composition.  Every entry below already has
+# one selected source owner in the parent; this file introduces no body.
+$wow32ProviderExportDefinition = Join-Path $build 'generated/ntvdm-wow32-provider.def'
+$wow32ProviderExportLines = [Collections.Generic.List[string]]::new()
+foreach ($line in Get-Content -LiteralPath $hostExportDefinition) {
+    if ($line -match '^\s*NAME\s+') {
+        # The original image is named ntvdm.exe.  The standalone product's
+        # public executable is ntvdm32.exe, so the late-loaded provider must
+        # import that actual loader module name while retaining every original
+        # export spelling below.
+        $wow32ProviderExportLines.Add('NAME ntvdm32.exe')
+    } else {
+        $wow32ProviderExportLines.Add($line)
+    }
+}
+$wow32ProviderExportLines.Add('')
+$wow32ProviderExportLines.Add('; private imports for the selected original WOW32 provider')
+foreach ($entry in @(
+    'opennt_support_current_teb=_opennt_support_current_teb@0',
+    'NtCurrentPeb=_NtCurrentPeb@0', 'ExitVDM=_ExitVDM@8',
+    'VdmAllocateVirtualMemory', 'VdmFreeVirtualMemory',
+    'VdmAddVirtualMemory', 'VdmRemoveVirtualMemory',
+    'VdmAddDescriptorMapping', 'SetWOWforceIncrAlloc',
+    'GetNextVDMCommand=_GetNextVDMCommand@4',
+    'GetCurrentDirectoryOem=_GetCurrentDirectoryOem@8',
+    'SetCurrentDirectoryOem=_SetCurrentDirectoryOem@4',
+    'GetEnvironmentVariableOem=_GetEnvironmentVariableOem@12',
+    'SetEnvironmentVariableOem=_SetEnvironmentVariableOem@8',
+    'SetFileAttributesOem=_SetFileAttributesOem@8',
+    'GetFileAttributesOem=_GetFileAttributesOem@4',
+    'DeleteFileOem=_DeleteFileOem@4',
+    'MoveFileOem=_MoveFileOem@8', 'MoveFileExOem=_MoveFileExOem@12',
+    'GetFullPathNameOem=_GetFullPathNameOem@16',
+    'GetTempFileNameOem=_GetTempFileNameOem@16',
+    'RemoveFontResourceOem=_RemoveFontResourceOem@4',
+    'CreateFileOem=_CreateFileOem@28',
+    'GetVolumeInformationOem=_GetVolumeInformationOem@32',
+    'mvdm_softpc_guest_memory_acquire',
+    'mvdm_softpc_guest_memory_release',
+    'mvdm_softpc_effective_address',
+    'mvdm_vdd_sft_shadow_commit', 'mvdm_vdd_sft_shadow_discard'
+)) {
+    $wow32ProviderExportLines.Add('    ' + $entry)
+}
+[IO.File]::WriteAllLines($wow32ProviderExportDefinition,
+    $wow32ProviderExportLines, [Text.UTF8Encoding]::new($false))
 $embeddedRomResource = Get-Content -LiteralPath $hostEntryResourceSource -Raw
 foreach ($romSource in $embeddedRomSources) {
     if (!(Test-Path -LiteralPath $romSource -PathType Leaf)) {
@@ -521,9 +574,18 @@ $cvidcFirstIncludeRoots = $cvidcFirstRootPaths | ForEach-Object { '/I "' + (Ninj
 # fabricating an unavailable `vga.rom` alias.
 $baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' +
+    '/FI "' + (NinjaPath $softpcSymbolCompat) + '" ' +
     ''
 $baseFlags = $baseCommonFlags + ($softpcIncludeRoots -join ' ')
 $hostFlags = $baseFlags + ' /FI "' + (NinjaPath $hostCrtRedirect) + '"'
+# The selected original x86 OpenNT composition is not the generic CCPU40
+# profile above.  `softpc.new/obj.vdm/cdefine.inc` selects MONITOR, C_VID and
+# X86GFX together on 386.  CPU40 is nevertheless a distinct executor profile:
+# applying MONITOR to its generic host units selects retired CPU30 monitor
+# state.  The selected closure therefore applies these defines only to the
+# source-proven NTIO/video consumers below; CPU_40_STYLE/CCPU remains the sole
+# executor.  In particular, this restores the original NTIO.SYS BOP vector
+# handoff used by video instead of the non-MONITOR host_simulate path.
 # The original OpenNT ABI header exposes its user-mode VDM TIB under _X86_.
 # This is a declaration gate for the selected Win32/x86 build, not the retired
 # CPU_30_STYLE V86 monitor selection.  The x64 row must not impersonate that
@@ -612,7 +674,7 @@ $graph.Add('rule process_link')
 # late-loaded owner DLLs such as VDMREDIR.  Retain the original export surface
 # in the parent process so a DLL imports the one already-running machine rather
 # than linking a second SoftPC instance into itself.
-$graph.Add('  command = link.exe /nologo /map:$out.map /def:' + (NinjaPath $hostExportDefinition) + ' /implib:original-softpc-process-import.lib /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
+$graph.Add('  command = link.exe /nologo /map:$out.map /def:' + (NinjaPath $wow32ProviderExportDefinition) + ' /implib:original-softpc-process-import.lib /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $graph.Add('rule redir_dll_link')
 # Keep the original VDMREDIR DLL boundary.  The parent import library is an
 # implicit output of the original process link, so this rule cannot create a
@@ -627,7 +689,7 @@ $ccpuObjects = foreach ($name in $ccpuNames) {
     # it.  The narrow overlay retains only this profile's original Gdp/Cpu/
     # Video state declarations and avoids a second SAS owner.
     $source = if ($name -in $ccpuOverlayNames) { Join-Path $ccpuOverlayRoot $name } else { Join-Path $ccpuRoot $name }
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath $source))
+$graph.Add('build ' + $object + ': cc ' + (NinjaPath $source))
     $object
 }
 $ccpuSasFacadeObject = 'obj/ccpu/sas_overwrite_memory.obj'
@@ -635,7 +697,7 @@ $graph.Add('build ' + $ccpuSasFacadeObject + ': cc ' + (NinjaPath $ccpuSasFacade
 $ccpuObjects += $ccpuSasFacadeObject
 $biosObjects = foreach ($name in $biosNames) {
     $object = 'obj/bios/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $biosRoot $name)))
+$graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $biosRoot $name)))
     if ($name -eq 'bios.c' -and $Architecture -eq 'x86') {
         # The original BIOS BOP table publishes FD only in its monitor
         # product profile.  CPU40 uses the same original DOSX continuation
@@ -647,28 +709,33 @@ $biosObjects = foreach ($name in $biosNames) {
 $keymouseObjects = foreach ($name in $keymouseNames) {
     $object = 'obj/keymouse/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $keymouseRoot $name)))
+    if ($name -eq 'keybd_io.c') {
+        $graph.Add('  cflags = ' + $baseFlags + ' /DMONITOR')
+    }
     $object
 }
 $systemObjects = foreach ($name in $systemNames) {
     $object = 'obj/system/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $systemRoot $name)))
+$graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $systemRoot $name)))
     if ($name -eq 'rom.c') {
-        # The original generic ROM-loader body is selected only for this
-        # translation unit.  NT4 kernel VDM used a pre-resident-ROM product
-        # shell for NTVDM+X86GFX; the current product instead retains the
-        # original host resource and SAS copy contract (DIV-165).
+        # `rom.c` is the explicit kernel-product boundary within the original
+        # x86 profile: X86GFX excludes its generic ROM scratch implementation
+        # in favour of the kernel VDM's pre-resident-ROM shell.  That shell is
+        # not a finite standalone ABI, so retain the selected original
+        # resource/SAS-copy route.  The NTIO handoff is selected only in its
+        # direct consumers, not by reviving the retired monitor product shell.
         $graph.Add('  cflags = ' + $baseFlags + ' /DMVDM_SOFTPC_RECOVER_ROM_RESIDENCY')
     }
     $object
 }
 $disksObjects = foreach ($name in $disksNames) {
     $object = 'obj/disks/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $disksRoot $name)))
+$graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $disksRoot $name)))
     $object
 }
 $supportObjects = foreach ($name in $supportNames) {
     $object = 'obj/support/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $supportRoot $name)))
+$graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $supportRoot $name)))
     $object
 }
 $videoObjects = foreach ($name in $videoNames) {
@@ -677,6 +744,17 @@ $videoObjects = foreach ($name in $videoNames) {
     # The removed generated source carrier existed only for deferred x64 ABI
     # repair and must not define x86 controller behavior.
     $graph.Add('build ' + $object + ': cc_cvidc_rule ' + (NinjaPath (Join-Path $videoRoot $name)))
+    if ($name -eq 'video.c') {
+        # The original x86 NTIO path is confined to this controller: it
+        # performs INT 10 through the caller recorded by BOP 5F.  Applying
+        # MONITOR/X86GFX to the other controller TUs would instead select NT4 native
+        # ROM/fullscreen providers, outside the standalone Console boundary.
+        # NT4's MONITOR profile directly writes the kernel-provided low
+        # B8000 alias.  A standalone worker has no such alias: select the
+        # original SAS write branch while retaining the MONITOR-only NTIO
+        # vector setup above.
+        $graph.Add('  cvidc_rule_cflags = ' + $cvidcRuleFlags + ' /DMONITOR /DX86GFX /DMVDM_STANDALONE_SAS_VIDEO')
+    }
     $object
 }
 $cvidcObjects = foreach ($name in $cvidcNames) {
@@ -694,12 +772,18 @@ $graph.Add('build obj/cvidc/mvdm_cvidc_vector_binding.obj: cc_cvidc_rule ' + (Ni
 $cvidcObjects += 'obj/cvidc/mvdm_cvidc_vector_binding.obj'
 $commsObjects = foreach ($name in $commsNames) {
     $object = 'obj/comms/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $commsRoot $name)))
+$graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $commsRoot $name)))
+    if ($name -eq 'printer.c') {
+        # Original NTIO.SYS vector setup initializes this original printer
+        # status-table provider.  The function is gated independently of the
+        # retired CPU30 execution shell.
+        $graph.Add('  cflags = ' + $baseFlags + ' /DMONITOR')
+    }
     $object
 }
 $dosObjects = foreach ($name in $dosNames) {
     $object = 'obj/dos/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $dosRoot $name)))
+$graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $dosRoot $name)))
     if ($name -eq 'emm_mngr.c') {
         # The CCPU40 source and its selected `LIM` profile call the exact
         # original writeback bodies which the historical NTVDM gate excludes.
@@ -786,8 +870,13 @@ $baseDebugObjects = foreach ($name in $baseDebugNames) {
 }
 $hostObjects = foreach ($name in $hostNames) {
     $object = 'obj/host/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc_host ' + (NinjaPath (Join-Path $hostRoot $name)))
-    if ($name -in @('nt_timer.c', 'nt_thred.c', 'nt_com.c', 'nt_event.c', 'nt_error.c')) {
+$graph.Add('build ' + $object + ': cc_host ' + (NinjaPath (Join-Path $hostRoot $name)))
+    if ($name -eq 'nt_lpt.c') {
+        # The original NTIO printer-table handoff is a finite VDM_TIB data
+        # registration path.  Its selected kernel semantic carrier is linked
+        # separately; this does not select the CPU30 monitor executor.
+        $graph.Add('  host_cflags = ' + $hostFlags + ' /DMONITOR')
+    } elseif ($name -in @('nt_timer.c', 'nt_thred.c', 'nt_com.c', 'nt_event.c', 'nt_error.c')) {
         $threadCompat = NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/thread_start_compat.h')
         # `nt.h` from the modern SDK can predefine the historical include
         # guard before the original source reaches <ntexapi.h>.  Force the
@@ -840,6 +929,8 @@ $adapterRedirObjects = foreach ($name in $adapterRedirNames) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterRedirRoot $name)))
     $object
 }
+$kernelVdmPrinterObject = 'obj/kernel-vdm/monitor_printer.obj'
+$graph.Add('build ' + $kernelVdmPrinterObject + ': cc ' + (NinjaPath $kernelVdmPrinterSource))
 $adapterVddObjects = foreach ($name in $adapterVddNames) {
     $object = 'obj/adapter-vdd/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterVddRoot $name)))
@@ -920,14 +1011,15 @@ $graph.Add('build mvdm-softpc-effective-address.lib: lib ' + $effectiveAddressOb
 $graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' '))
 $graph.Add('build basesrv-bindings.lib: lib ' + ($adapterBaseSrvObjects -join ' '))
 $graph.Add('build monitor-bindings.lib: lib ' + ($adapterMonitorObjects -join ' '))
+$graph.Add('build kernel-vdm-printer.lib: lib ' + $kernelVdmPrinterObject)
 $graph.Add('build debugger-bindings.lib: lib ' + ($adapterDebuggerObjects -join ' '))
 $graph.Add('build softpc-patch-evidence.lib: lib ' + ($patchBodyObjects -join ' '))
 $graph.Add('build softpc-ccpu-vector-defaults.lib: lib ' + $patchVectorDefaultsObject)
 $graph.Add('build softpc-activity-check.lib: lib ' + $patchActivityCheckObject)
-$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib softpc-bindings.lib redirector-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-patch-evidence.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib')
-$graph.Add('build original-softpc-process.exe | original-softpc-process-import.lib: process_link obj/app/entry.obj app-machine-shell.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib softpc-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res')
+$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib softpc-bindings.lib redirector-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-patch-evidence.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib')
+$graph.Add('build original-softpc-process.exe | original-softpc-process-import.lib: process_link obj/app/entry.obj app-machine-shell.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib softpc-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res')
 $graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' original-softpc-process-import.lib redirector-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib softpc-bindings.lib softpc-win32-bindings.lib session.lib broker.lib')
-$graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-patch-evidence.lib softpc-ccpu-vector-defaults.lib')
+$graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-patch-evidence.lib softpc-ccpu-vector-defaults.lib')
 $graph.Add('default original-softpc-candidate')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 

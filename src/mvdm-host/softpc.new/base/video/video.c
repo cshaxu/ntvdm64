@@ -1511,7 +1511,7 @@ GLOBAL void vd_write_char_attrib IFN0()
 #else
 		for(i = 0; i < getCX(); i++)
 		{
-#if ( defined(NTVDM) && defined(MONITOR) ) || defined(GISP_SVGA)/* No Ega planes... */
+#if ( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined(GISP_SVGA)/* No Ega planes... */
                         *((unsigned short *)( video_pc_low_regen + cpos)) = (getBL() << 8) | getAL();
 #else
 #ifdef	EGG
@@ -1579,7 +1579,7 @@ GLOBAL void vd_write_char IFN0()
 
 		for(i = 0; i < getCX(); i++)
 		{
-#if ( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA )
+#if ( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined( GISP_SVGA )
                         *((unsigned char *)( video_pc_low_regen + cpos)) =  getAL();
 #else
 #ifdef	EGG
@@ -2042,7 +2042,7 @@ GLOBAL void vd_write_teletype IFN0()
 		 *	around in SAS.
 		 */
 
-#if ( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA )
+#if ( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined( GISP_SVGA )
                 *((unsigned char *)( video_pc_low_regen + ch_addr)) = ch;
 #else
 #ifdef	EGG

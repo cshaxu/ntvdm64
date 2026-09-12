@@ -1972,6 +1972,9 @@ void kb_setup_vectors(void)
    int10_seg    = KbdSeg;
    int10_caller = *pkio_table++;
    int10_vector = *pkio_table++;
+   /* Default-off witness of the original NTIO.SYS BOP 5F table decode. */
+   mvdm_softpc_record_ntio_vector_handoff((unsigned int)int10_seg,
+       (unsigned int)int10_caller, (unsigned int)int10_vector);
 
    /*
    ** Address of data in keyboard.sys, Tim August 92.

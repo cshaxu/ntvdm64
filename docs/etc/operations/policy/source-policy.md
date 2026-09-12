@@ -53,8 +53,11 @@ carrier for a directly reached selected `mvdm-host` caller. Its origin in the
 kernel is not itself a prohibition; an admission must instead prove that the
 selected state transition, structure/layout, validation, ordering or failure
 rule can execute through a finite standalone ABI. The imported source remains
-in `mvdm-host/kernel-vdm/<original-relative-path>` with its upstream filename,
-not in an adapter or a project-owned replacement root. The consuming MVDM
+under `opennt-host/<original-relative-path>` when its upstream owner is
+outside MVDM (including `base/ntos/vdm`), with its upstream filename and
+source shape. Original `base/mvdm` owners remain in `mvdm-host`; a kernel or
+monitor label does not change provenance. Neither belongs in an adapter or
+a project-owned replacement root. The consuming MVDM
 owner remains its only production caller.
 
 Each admission records the exact original file, revision/hash and function
@@ -63,9 +66,12 @@ every unavailable kernel dependency; the smallest replacement ABI and its
 owner; x86 build selection; positive and negative boundary evidence; and the
 disposition of any existing adapter implementation it supersedes. An adapter
 may marshal the finite unavailable operation, but may not own the imported
-Kernel VDM state machine or provider policy. Any material non-original
-mechanism belongs only in the paired private `mvdm-host` overlay behind a
-registered `DIVERGENCE:` hook.
+Kernel VDM state machine or provider policy. A missing interface must first
+be traced to its original owner and audited for reuse, not replaced by an
+invented state machine. Any unavoidable non-original binding requires a
+documented unavailable boundary and the smallest registered divergence;
+moving autonomous replacement logic into a mirror or overlay does not make
+it an original implementation.
 
 The admission excludes kernel scheduling, process/thread-object internals,
 APC delivery, IDT/trap or fault installation, ring-0 V86 context switching,

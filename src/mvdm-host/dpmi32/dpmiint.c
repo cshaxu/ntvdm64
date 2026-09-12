@@ -40,6 +40,7 @@ Comments:
 #include <softpc.h>
 #include <dpmiint.h>
 #include <intapi.h>
+#include "mvdm_softpc_termination.h"
 
 
 VOID
@@ -79,6 +80,11 @@ Routine Description:
     Handlers[IntNumber].Flags = *(PWORD16)(StackPointer + 8);
     Handlers[IntNumber].CsSelector = *(PWORD16)(StackPointer + 4);
     Handlers[IntNumber].Eip = *(PDWORD16)(StackPointer);
+
+    mvdm_softpc_record_dpmi_interrupt_registration((unsigned int)IntNumber,
+        (unsigned int)Handlers[IntNumber].Flags,
+        (unsigned int)Handlers[IntNumber].CsSelector,
+        (uint32_t)Handlers[IntNumber].Eip);
 
     DBGTRACE(DPMI_SET_PMODE_INT_HANDLER, IntNumber,
                                          Handlers[IntNumber].CsSelector,
@@ -199,6 +205,20 @@ Arguments:
     XNumber = *(VdmCodePointer);
 
     if ((XNumber > 7) || (XNumber == 6)) {
+        USHORT FaultCS;
+        ULONG FaultIP;
+
+        if (Frame32) {
+            FaultCS = (USHORT)*(PDWORD16)(VdmStackPointer + 16);
+            FaultIP = *(PDWORD16)(VdmStackPointer + 12);
+        } else {
+            FaultCS = *(PWORD16)(VdmStackPointer + 8);
+            FaultIP = (ULONG)*(PWORD16)(VdmStackPointer + 6);
+        }
+        mvdm_softpc_record_dpmi_unhandled_exception((unsigned int)XNumber,
+            (unsigned int)FaultCS, (uint32_t)FaultIP, (unsigned int)SegSs,
+            (uint32_t)(SEGMENT_IS_BIG(SegSs) ? getESP() : getSP()),
+            Frame32 ? 1u : 0u, (const uint16_t *)VdmStackPointer);
         DpmiFatalExceptionHandler(XNumber, VdmStackPointer);
         return;
     }
@@ -388,17 +408,22 @@ Notes:
         NTSTATUS Status;
         PVDM_DPMIINFO PmStackInfo;
 
-        /* Native NT published this worker-owned VDM_TIB address in CX:DX.
-         * CPU40 must instead expose the identical structure in its guest
-         * linear space; no host pointer crosses the DPMI ABI. */
-        if (Cpu40PmStackInfoAddress == 0u) {
-            ULONG Address = 0u;
+
+        /* DIVERGENCE(MVDM-HOST-DIV-226): x86 published the kernel-owned
+         * VDM_TIB pointer here.  CCPU executes DOSX itself, which immediately
+         * installs CX:DX as SEL_VDMTIB and accesses its fields in guest mode.
+         * Project the same ABI layout into shared XMS guest memory instead of
+         * leaking a host address or publishing an opaque identity. */
+        if (!Cpu40PmStackInfoAddress) {
+            ULONG Address = 0;
+
             Status = DpmiAllocateVirtualMemory((PVOID)&Address, &Size);
             if (!NT_SUCCESS(Status)) {
                 setCX(0);
                 setDX(0);
                 return;
             }
+
             Cpu40PmStackInfoAddress = Address;
         }
 
@@ -410,6 +435,7 @@ Notes:
         PmStackInfo->DosxFaultIretD = DosxFaultHandlerIretd;
         PmStackInfo->DosxIntIret = DosxIntHandlerIret;
         PmStackInfo->DosxIntIretD = DosxIntHandlerIretd;
+
         setCX(HIWORD(Cpu40PmStackInfoAddress));
         setDX(LOWORD(Cpu40PmStackInfoAddress));
         return;
@@ -418,12 +444,9 @@ Notes:
 
 #ifdef i386
     {
-        uint32_t pPmStackInfo;
         VdmTib.PmStackInfo.Flags = CurrentAppFlags;
-        pPmStackInfo = (uint32_t)(uintptr_t)&VdmTib.PmStackInfo;
-
-        setCX(HIWORD(pPmStackInfo));
-        setDX(LOWORD(pPmStackInfo));
+        setCX(HIWORD((ULONG)&VdmTib.PmStackInfo));
+        setDX(LOWORD((ULONG)&VdmTib.PmStackInfo));
     }
 #endif
 }
@@ -639,6 +662,14 @@ Return Value:
 
     DBGTRACE(DPMI_HW_INT, IntNumber, 0, 0);
 
+    /* DIVERGENCE(MVDM-HOST-DIV-229): the kernel-VDM ordering guaranteed that
+     * an installed hardware carrier saw only published vectors.  CCPU can
+     * accept a real IRQ while DOSX is still publishing its table.  Preserve
+     * the original no-hook route in that case; do not construct a frame for
+     * an absent selector. */
+    if (!SEGMENT_IS_PRESENT(Handlers[IntNumber].CsSelector))
+        return FALSE;
+
     SaveEFLAGS = getEFLAGS();
     //BUGBUG turn off task bits
     SaveEFLAGS &= ~0x4000;
@@ -792,7 +823,7 @@ Routine Description:
         setEIP((ULONG)LOWORD(DosxIret));
 
     }
-#endif // !i386 || CPU_40_STYLE
+#endif // i386
 
     DBGTRACE(DPMI_INT_IRET16, 0, 0, 0);
 }
@@ -1008,7 +1039,7 @@ Return Value:
     return TRUE;
 }
 
-#endif // !i386 || CPU_40_STYLE
+#endif // i386
 
 VOID
 DpmiFaultHandlerIret16(
@@ -1239,7 +1270,7 @@ Return Value:
         VdmInstallFaultHandler(NULL);
         fDpmiIntsHaveBeenHooked = FALSE;
     }
-#endif // i386
+#endif // !i386 || CPU_40_STYLE
 }
 
 
@@ -1268,7 +1299,7 @@ Return Value:
     return TRUE;
 }
 
-#if !defined(i386) || defined(CPU_40_STYLE)
+#ifndef i386
 BOOL
 DpmiEmulateInstruction(
     VOID
@@ -1297,6 +1328,8 @@ Return Value:
     UCHAR Opcode;
     ULONG SegCS;
     BOOL bReturn = FALSE;
+    unsigned int CodeSegmentIsBig;
+
 #if defined(CPU_40_STYLE)
     PLDT_ENTRY DescriptorTable;
 #endif
@@ -1304,13 +1337,29 @@ Return Value:
     SegCS = getCS();
     pCode = Sim32GetVDMPointer(SegCS<<16, 1, TRUE);
 
+    /* The original x86 monitor always exposed an alias for an active
+     * protected-mode selector.  CPU40's checked SIM32 bridge can reject a
+     * transient selector instead.  This helper's documented result is
+     * whether it emulated the instruction, so retain the existing fault
+     * dispatch route rather than dereferencing an absent alias. */
+    if (pCode == NULL) {
+        return FALSE;
+    }
+
 #if defined(CPU_40_STYLE)
-    if (pCode == NULL || Cpu40LdtShadowAddress == 0u)
+    /* The native x86 path reads the kernel-published VDM_TIB LDT.  CCPU
+     * runs DOSX in this process and has no kernel VDM_TIB at that address;
+     * 53:00 has already projected the same source descriptor image into the
+     * session-owned shadow used by CCPU's GDT.  Keep the original selector
+     * interpretation, but select its actual CPU40 carrier. */
+    if (Cpu40LdtShadowAddress == 0u)
         return FALSE;
     DescriptorTable = (PLDT_ENTRY)(IntelBase + Cpu40LdtShadowAddress);
-    if (DescriptorTable[(SegCS & ~0x7) / sizeof(LDT_ENTRY)].HighWord.Bits.Default_Big) {
+    CodeSegmentIsBig = DescriptorTable[(SegCS & ~0x7)/sizeof(LDT_ENTRY)].HighWord.Bits.Default_Big ? 1u : 0u;
+    if (CodeSegmentIsBig) {
 #else
-    if (Ldt[(SegCS & ~0x7)/sizeof(LDT_ENTRY)].HighWord.Bits.Default_Big) {
+    CodeSegmentIsBig = Ldt[(SegCS & ~0x7)/sizeof(LDT_ENTRY)].HighWord.Bits.Default_Big ? 1u : 0u;
+    if (CodeSegmentIsBig) {
 #endif
         pCode += getEIP();
     } else {

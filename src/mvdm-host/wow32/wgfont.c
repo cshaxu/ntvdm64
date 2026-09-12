@@ -14,7 +14,7 @@
 
 #include "precomp.h"
 #pragma hdrstop
-#include "mvdm-platform-abi/wingdip.h"
+#include "wingdip.h"
 
 MODNAME(wgfont.c);
 

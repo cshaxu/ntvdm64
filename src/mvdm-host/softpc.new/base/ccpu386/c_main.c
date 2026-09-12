@@ -244,6 +244,14 @@ typedef union
 #endif	/* SFELLOW */
 
 LOCAL IU16 cpu_hw_interrupt_number;
+#ifdef NTVDM
+/* This is a default-off attribution latch only.  `NEXT_INST` observes the
+ * post-instruction CPU position, while `DECODE` is the last source-owned
+ * point at which the preceding instruction address is known. */
+LOCAL IU16 mvdm_cpu_decode_origin_cs;
+LOCAL IU32 mvdm_cpu_decode_origin_ip;
+LOCAL IBOOL mvdm_cpu_decode_origin_valid = FALSE;
+#endif
 #if defined(SFELLOW)
 extern IU32	cpu_interrupt_map ;
 #else
@@ -887,6 +895,24 @@ DO_INST:
     */
 DECODE:
 
+#ifdef NTVDM
+   /* The one observed #UD frame names 0000:0036, inside the IVT.  Keep a
+    * bounded preceding-origin ladder only while decoding that impossible
+    * first 64-byte region, so its first record identifies the actual entry.
+    * It arrives at DECODE without a completed CALL/RETF/IRET/INT witness.
+    * Before replacing the prior decode origin, retain that immediately
+    * preceding instruction address for the existing default-off, target-
+    * latched observer.  This does not participate in instruction execution
+    * or retain any guest state beyond the next decode iteration. */
+   if (mvdm_cpu_decode_origin_valid && getCS() == 0u && getEIP() < 0x0040u)
+      mvdm_softpc_record_cpu_low_fault_transfer("DECODE",
+         (unsigned int)mvdm_cpu_decode_origin_cs,
+         (unsigned int)mvdm_cpu_decode_origin_ip,
+         (unsigned int)getCS(), (unsigned int)getEIP());
+   mvdm_cpu_decode_origin_cs = getCS();
+   mvdm_cpu_decode_origin_ip = getEIP();
+   mvdm_cpu_decode_origin_valid = TRUE;
+#endif
    opcode = GET_INST_BYTE(p);	/* get next byte */
    /*
       NB. Each opcode is categorised by a type, instruction name
@@ -4503,7 +4529,18 @@ TYPEFF_3:
 	     mvdm_softpc_record_cpu_hw_interrupt_service(cpu_hw_interrupt_number);
 	     EXT = EXTERNAL;
 	     SYNCH_TICK();
+	     /* DPMI registered a source-owned hardware handler through the original
+	      * VdmInstallHardwareIntHandler API.  CCPU owns acknowledge/delivery in
+	      * this product, therefore consult it before the original BIOS fallback. */
+#ifdef NTVDM
+	     {
+	     extern BOOL host_hwint_hook IPT1(IS32, int_no);
+	     if (!host_hwint_hook((IS32)cpu_hw_interrupt_number))
+	         do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);
+	     }
+#else
 	     do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);
+#endif
 	     CCPU_save_EIP = GET_EIP();   /* to reflect IP change */
 	 }
       }
@@ -4577,6 +4614,13 @@ TYPEFF_3:
 
 NEXT_INST:
 
+#ifdef NTVDM
+   if (mvdm_cpu_decode_origin_valid)
+      mvdm_softpc_record_cpu_low_fault_transfer("RETIRE",
+         (unsigned int)mvdm_cpu_decode_origin_cs,
+         (unsigned int)mvdm_cpu_decode_origin_ip,
+         (unsigned int)getCS(), (unsigned int)getEIP());
+#endif
    CCPU_save_EIP = GET_EIP();   /* to reflect IP change */
 
 #if defined(SFELLOW) && !defined(PROD)

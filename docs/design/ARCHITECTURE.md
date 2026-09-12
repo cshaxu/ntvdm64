@@ -91,18 +91,20 @@ prevents permanent parallel providers.
   selected DEM, COMMAND, XMS, DPMI32, VDMREDIR, WOW32, VDD/debugger,
   executable `softpc.new` packages—including `base/bios` reset/BIOS services
   and `base/keymouse` controller sources—SIM/monitor providers, and original
-  package-internal `inc`, `oemuni` and `suballoc` support paths. It also owns
-  an individually admitted `kernel-vdm/` semantic-carrier slice: original
-  kernel VDM logic required by a direct MVDM caller whose remaining kernel
-  dependencies reduce to a finite standalone ABI. That slice retains
-  upstream-relative names and source shape, never becomes a kernel product
-  shell or a second executor, and is not an adapter. It does not own standalone
+  package-internal `inc`, `oemuni` and `suballoc` support paths. Original
+  MVDM monitor routines remain MVDM-owned even when they expose a kernel
+  boundary. Non-MVDM kernel VDM semantic carriers belong to `opennt-host`,
+  not this mirror. It does not own standalone
   tools or immutable firmware media inputs.
 - `opennt-host`: the canonical original non-MVDM OpenNT host-service mirror.
   It owns every complete, source-audited OpenNT host package accepted for use
   by `mvdm-host`; BaseSrv/client VDM is merely its first accepted service
   slice, not this component's boundary. It is neither a replacement MVDM
-  provider nor a generic compatibility layer.
+  provider nor a generic compatibility layer. Individually audited original
+  kernel VDM slices from outside MVDM also belong here, retaining source
+  paths and algorithm shape behind a finite standalone ABI; this does not
+  admit a kernel product shell or a second executor. Adapters bind missing
+  interfaces rather than reimplementing original provider policy.
 - `mvdm-tools`: the canonical original standalone MVDM tool mirror,
   including `vdmutils/forcedos`, `graftabl`, `pifedit` and `win` resources.
   Tools may be independently built but never enter the main `ntvdm.exe` link

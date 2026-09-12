@@ -166,7 +166,12 @@ Return Value:
             SelectorLimit[(registerAX >> 3) + i] = Limit;
 #endif
 #if defined(CPU_40_STYLE)
-            if (Cpu40LdtShadowAddress != 0u)
+            /* DIVERGENCE(MVDM-HOST-DIV-225): i386 installs this source
+             * descriptor into its separate process LDT.  Keep CCPU's
+             * guest-linear shadow separate from DOSX's mutable source table;
+             * binding the CPU directly to `Ldt` lets later source-table reuse
+             * rewrite already-published selectors. */
+            if (Cpu40LdtShadowAddress != 0)
                 ((PLDT_ENTRY)(IntelBase + Cpu40LdtShadowAddress))[
                     (registerAX >> 3) + i] = Descriptors[i];
 #endif

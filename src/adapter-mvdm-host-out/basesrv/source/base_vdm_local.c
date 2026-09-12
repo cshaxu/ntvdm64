@@ -256,9 +256,17 @@ static NTSTATUS get_next_command(base_vdm_local *record, PVDMINFO information)
     EnterCriticalSection(&record->lock);
     if (state & ASKING_FOR_PIF) {
         NTSTATUS status;
-        if (record->available == 0u ||
-            (wow_request && record->command_owner != BASE_VDM_COMMAND_WOW) ||
-            (!wow_request && record->command_owner != BASE_VDM_COMMAND_DOS)) {
+        /* config.c asks the PIF question before COMMAND consumes its first
+         * DOS record.  A Win16 bootstrap sets VDMForWOW for that metadata
+         * query (ASKING_FOR_PIF|ASKING_FOR_WOW_BINARY), although the very
+         * same worker subsequently starts COMMAND and obtains the declared
+         * application through ASKING_FOR_DOS_BINARY.  The original BaseSrv
+         * resolves PIF metadata from its selected record without consuming
+         * it.  This one-session composition has one copied initial record,
+         * so PIF ownership must not reject that pre-consumption query; queue
+         * ownership remains enforced for an actual command acquisition
+         * below. */
+        if (record->available == 0u) {
             LeaveCriticalSection(&record->lock);
             return STATUS_INVALID_PARAMETER;
         }

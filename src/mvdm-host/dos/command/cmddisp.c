@@ -76,6 +76,8 @@ BOOL CmdDispatch (ULONG iSvc)
             (unsigned int)getCF(), (unsigned int)getDS(), (unsigned int)getSS(),
             (unsigned int)getSP());
     (apfnSVCCmd [iSvc])();
+    if (iSvc == SVC_GETINITENVIRONMENT)
+        mvdm_softpc_restore_child_report_paths();
     /* DIVERGENCE(MVDM-HOST-DIV-177): state-neutral table-return attribution. */
     mvdm_softpc_record_command_call((unsigned int)iSvc, 1u,
         (unsigned int)getAX(), (unsigned int)getCF());

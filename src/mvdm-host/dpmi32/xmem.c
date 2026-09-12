@@ -30,6 +30,7 @@ Revision History:
 #pragma hdrstop
 #include "softpc.h"
 #include <malloc.h>
+#include "mvdm_softpc_termination.h"
 
 //
 // Xmem structure
@@ -103,7 +104,7 @@ Return Value:
             );
         return;
     }
-    XmemBlock->Address = (PVOID)(uintptr_t)BlockAddress;
+    XmemBlock->Address = (PVOID)BlockAddress;
     XmemBlock->Length = BlockSize;
     XmemBlock->Owner = getDX();
     INSERT_BLOCK(XmemBlock);
@@ -116,8 +117,8 @@ Return Value:
     //
     // Use xmem block addresss as handle
     //
-    setSI((USHORT)((ULONG)(uintptr_t)XmemBlock >> 16));
-    setDI((USHORT)((ULONG)(uintptr_t)XmemBlock & 0x0000FFFF));
+    setSI((USHORT)((ULONG)XmemBlock >> 16));
+    setDI((USHORT)((ULONG)XmemBlock & 0x0000FFFF));
     setCF(0);
 }
 
@@ -146,7 +147,7 @@ Return Value:
     PVOID BlockAddress;
     ULONG BlockSize;
 
-    XmemBlock = (PXMEM_BLOCK)(uintptr_t)(((ULONG)getSI() << 16) | getDI());
+    XmemBlock = (PVOID)(((ULONG)getSI() << 16) | getDI());
 
     BlockAddress = XmemBlock->Address;
     BlockSize = XmemBlock->Length;
@@ -196,7 +197,7 @@ Return Value:
     ULONG BlockAddress, NewSize;
     NTSTATUS Status;
 
-    OldBlock = (PXMEM_BLOCK)(uintptr_t)(((ULONG)getSI() << 16) | getDI());
+    OldBlock = (PVOID)(((ULONG)getSI() << 16) | getDI());
     NewSize = (((ULONG)getBX() << 16) | getCX());
 
     BlockAddress = 0;
@@ -215,7 +216,7 @@ Return Value:
         return;
     }
 
-    OldBlock->Address = (PVOID)(uintptr_t)BlockAddress;
+    OldBlock->Address = (PVOID)BlockAddress;
     OldBlock->Length = NewSize;
     
     //

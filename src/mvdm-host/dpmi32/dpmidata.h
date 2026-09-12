@@ -44,8 +44,9 @@ Revision History:
 #else
 
 #if defined(CPU_40_STYLE)
-/* CPU40 owns the DOSX 53:01 transition in modesw.c.  The i386 body also
- * mutates kernel-VDM state which does not exist in this profile. */
+/* CPU40 owns the same DPMI BOP frame transition in `modesw.c`.  The
+ * i386 implementation also changes kernel-VDM state bits, which do not
+ * exist in this software-emulation profile. */
 #define switch_to_protected_mode        DpmiCpu40SwitchToProtectedMode
 #else
 #define switch_to_protected_mode        DpmiIllegalFunction
@@ -182,12 +183,6 @@ extern USHORT CurrentAppFlags;
 //
 extern ULONG RmBopFe;
 
-#if defined(CPU_40_STYLE)
-extern ULONG Cpu40PmStackInfoAddress;
-extern ULONG Cpu40LdtShadowAddress;
-extern ULONG Cpu40NativeTaskStateAddress;
-#endif
-
 //
 // Address of buffer for DTA in Dosx
 //
@@ -258,6 +253,21 @@ DpmiXlatInt21Call(
 VOID
 DpmiSwitchToProtectedMode(
     VOID
+    );
+
+VOID
+DpmiCpu40SwitchToProtectedMode(
+    VOID
+    );
+
+VOID
+DpmiCpu40RestoreNativeIdt(
+    VOID
+    );
+
+VOID
+DpmiCpu40SetNativeIdtSourceAddress(
+    ULONG Address
     );
 
 VOID

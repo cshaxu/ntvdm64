@@ -32,6 +32,10 @@ Interrupt Support.
 #include <ccpupig.h>
 #include <fault.h>
 #include "mvdm_softpc_termination.h"
+#if defined(NTVDM) && defined(CPU_40_STYLE)
+extern VOID DpmiCpu40RestoreNativeIdt(VOID);
+extern BOOL host_swint_hook IPT1(IS32, int_no);
+#endif
 
 #ifdef PIG
 #include <gdpvar.h>
@@ -211,6 +215,16 @@ IFN4(
 
    IU32 old_ss;        /* Variables used while making stack */
    IU32 old_sp;
+
+#if defined(NTVDM) && defined(CPU_40_STYLE)
+   if (GET_PE())
+      DpmiCpu40RestoreNativeIdt();
+
+   /* Generated execution paths enter this common dispatcher without INTx.
+    * Retain the same original protected software-interrupt carrier. */
+   if (GET_PE() && priv_check && host_swint_hook((IS32)vector))
+      return;
+#endif
 
    if ( GET_PE() == 0 )
       {

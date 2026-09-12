@@ -246,8 +246,13 @@ if ($hasActivePacket) {
                 $latestClosedS = ($closedS | Measure-Object -Maximum).Maximum
             }
         }
-        if ((-not $reopenedTask -and ($activeTask -ne $expectedTask -or $activeS -ne 1)) -or
-            ($reopenedTask -and $activeS -ne ($latestClosedS + 1))) {
+        # A not-yet-closed T may proceed sequentially from one bounded S to
+        # the next.  Its prior S closure records are checked below.  History
+        # is reserved for closed T packages, so requiring it here would make
+        # the execution rule's in-place S continuation impossible.
+        if ((-not $reopenedTask -and
+             ($activeTask -ne $expectedTask -or $activeS -lt 1)) -or
+            ($reopenedTask -and $activeS -lt ($latestClosedS + 1))) {
             throw "New numeric packet must allocate T$expectedTask S1, or reopen T$latestClosedTask at its next S."
         }
         if ($activeS -gt 1) {
@@ -273,7 +278,18 @@ if ($queue -match '\bS\d+\b|\bP\d+\b') {
     throw 'QUEUE.md must not contain S or P identifiers.'
 }
 $queueRows = @([regex]::Matches($queue, '(?m)^\|\s*\d+\s*\|.+\|\s*\[[^\]]+\]\(\.\./proposals/[^)]+\.md\)\s*\|\s*$'))
-if ($queueRows.Count -ne 3) { throw 'Every Queue candidate row must link one proposal file.' }
+$candidateRows = @([regex]::Matches($queue, '(?m)^\|\s*\d+\s*\|.*$'))
+if ($queueRows.Count -ne $candidateRows.Count) { throw 'Every Queue candidate row must link one proposal file.' }
+$queueOrder = 1
+foreach ($row in $candidateRows) {
+    if ($row.Value -notmatch ('^\|\s*' + $queueOrder + '\s*\|')) {
+        throw 'Queue candidate order must be consecutive and start at one.'
+    }
+    if (($row.Value.Split('|')).Count -ne 5) {
+        throw 'Every Queue candidate row must have exactly three columns.'
+    }
+    $queueOrder++
+}
 foreach ($proposal in @(Get-ChildItem -LiteralPath (Join-Path $docs 'proposals') -File -Filter '*.md')) {
     if ($proposal.Name -match 'proposal-(?:wow16-single-process-lifecycle-recovery|cross-process-broker-closure|multiprocess-release-matrix)-001\.md' -and $queue -notmatch [regex]::Escape($proposal.Name)) {
         throw "Current proposal is not linked by Queue: $($proposal.Name)"

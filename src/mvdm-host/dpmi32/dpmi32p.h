@@ -120,6 +120,12 @@ extern ULONG DosxFaultHandlerIret;
 extern ULONG DosxFaultHandlerIretd;
 extern ULONG DosxIntHandlerIret;
 extern ULONG DosxIntHandlerIretd;
+#if defined(CPU_40_STYLE)
+extern ULONG Cpu40PmStackInfoAddress;
+extern ULONG Cpu40LdtShadowAddress;
+extern ULONG Cpu40WowFastTebAddress;
+extern ULONG Cpu40NativeTaskStateAddress;
+#endif
 #endif
 extern ULONG DosxIret;
 extern ULONG DosxIretd;
@@ -225,18 +231,6 @@ DpmiVcdPmSvcCall32(
 
 VOID switch_to_protected_mode(
     VOID
-    );
-
-VOID DpmiCpu40SwitchToProtectedMode(
-    VOID
-    );
-
-VOID DpmiCpu40RestoreNativeIdt(
-    VOID
-    );
-
-VOID DpmiCpu40SetNativeIdtSourceAddress(
-    ULONG Address
     );
 
 VOID DpmiSetProtectedmodeInterrupt(

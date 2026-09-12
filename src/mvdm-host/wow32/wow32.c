@@ -30,7 +30,8 @@
 #include "wsocktbl.h"
 #include "wthtbl.h"
 #include <stdarg.h>
-#include <mvdm-platform-abi/ntcsrdll.h>
+#include <ntlpcapi.h>
+#include <ntcsrdll.h>
 #include "adapter-mvdm-host-out/wow/include/wow_user_callback_callconv.h"
 #define SHAREWOW_MAIN
 #include <sharewow.h>

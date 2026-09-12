@@ -25,9 +25,17 @@
 #pragma hdrstop
 #include <ntexapi.h>
 #include <sharewow.h>
-#include "mvdm-platform-abi/vdmdbg.h"
-#include "mvdm-platform-abi/security-abi.h"
+#if !defined(_X86_)
+#define MVDM_WOW32_RESTORE_X86_FOR_VDMDBG
+#define _X86_
+#endif
+#include <vdmdbg.h>
+#ifdef MVDM_WOW32_RESTORE_X86_FOR_VDMDBG
+#undef _X86_
+#undef MVDM_WOW32_RESTORE_X86_FOR_VDMDBG
+#endif
 #include "wowfax.h"
+#include "adapter-mvdm-host-out/wow/include/wow_private_user_compat.h"
 
 extern void UnloadNetworkFonts( UINT id );
 
