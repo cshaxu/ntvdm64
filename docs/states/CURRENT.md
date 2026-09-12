@@ -88,6 +88,14 @@ passed.
 
 ## Latest Governance Closure
 
+M0 Td S7 P1 consolidates the owner-approved RTL, Console/resource and
+[WOW/debugger proposals](../proposals/proposal-wow-debugger-original-owner-restoration-001.md)
+with the broker proposal and revised Queue. Candidate order is RTL, DOS file
+services, Console/resources, broker, WOW/debugger, WOW16 workload, then release.
+This supersedes the S6 sequencing hold; T405 S3 remains the sole active numeric
+packet and no source implementation is admitted. Documentation governance/link
+and diff checks are required; this record does not itself prove remote delivery.
+
 M0 Td S6 P1 consolidates the owner-requested candidate planning documents:
 the [broker proposal](../proposals/proposal-cross-process-broker-closure-001.md)
 includes D01-D07/D10, staged source-first recovery and the non-mutating D03

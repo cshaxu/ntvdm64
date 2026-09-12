@@ -45,12 +45,13 @@ requested a separate file-service restoration package at the queue head,
 carrying D31-D33 and D08 from the current source audit for future implementation. This
 does not activate another packet or require broker architecture first.
 
-The owner-directed product sequence is: first restore one process's original
-MVDM functionality as closely as public modern Win32 and non-invasive host
-constraints permit; only after its DOS, DOS-extender, COMMAND and WOW
-contracts have real workload evidence may the project add cross-process
-coordination.  A broker is never a prerequisite or a substitute for a
-single-process provider, guest lifecycle or machine behavior.  Every selected
+On 2026-09-12 the owner approved the revised candidate sequence: RTL,
+DOS file services, Console/resources, broker with original BaseSrv/entry,
+WOW/debugger owner restoration, then full WOW16 workload verification.
+This supersedes the earlier requirement to complete WOW16 before broker.
+It does not admit a second active packet. Broker coordination must not
+substitute for a single-worker provider, guest lifecycle or machine behavior.
+Promote a source-proven direct dependency explicitly when necessary. Every selected
 mirror retains its original owner source where composable, then the smallest
 same-shaped adapter, then a registered private overlay; newly authored
 behavior remains last resort.
@@ -72,10 +73,13 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Next order | Candidate implementation package | Proposal |
 | --- | --- | --- |
-| 1 | Original DOS file-service restoration — restore original DEM/VDD handle ownership and fast-read semantics, replacing duplicated shadow and overlay policy through bounded guest-memory and user-mode bindings. Independent of broker implementation; preserves the current CLI and worker profile. | [Proposal](../proposals/proposal-dos-file-service-restoration-001.md) |
-| 2 | Single-process WOW16 application lifecycle recovery — before broker work, recover the immediate original owner that keeps the selected `WRITE.EXE` workload at its source-owned low-memory dialog. Prove a bounded Win16 workload's original start/return path in one x86 worker, or record the exact source-proven unavailable boundary. It cannot substitute guest/UI failure policy, a private USER/CSRSS shell, CPU tracing, or cross-process transport. | [Proposal](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md) |
-| 3 | Cross-process broker closure — only after the WOW16 candidate's applicable single-process owner contract closes, recover required BaseSrv-style registration, command-queue, notification and disconnect-cleanup semantics through public IPC, and prove the selected brokered lifecycle rows. It cannot own guest, COMMAND, SoftPC or WOW behavior. | [Proposal](../proposals/proposal-cross-process-broker-closure-001.md) |
-| 4 | Multi-process matrix and product release — prove the brokered multi-process x86-worker profile, the cross-owner DOS/Win16 compatibility matrix, portable media layout and release packaging. Host x64 Windows is an x86-worker acceptance platform, not a native-x64 worker requirement. | [Proposal](../proposals/proposal-multiprocess-release-matrix-001.md) |
+| 1 | Original RTL and character-conversion restoration — recover D11-D16 and D26 through original environment, status, arithmetic, fill and encoding owners with finite modern bindings; no broker prerequisite or new generic runtime replacement. | [Proposal](../proposals/proposal-rtl-character-conversion-restoration-001.md) |
+| 2 | Original DOS file-service restoration — restore original DEM/VDD handle ownership and fast-read semantics, replacing duplicated shadow and overlay policy through bounded guest-memory and user-mode bindings. Independent of broker implementation; preserves the current CLI and worker profile. | [Proposal](../proposals/proposal-dos-file-service-restoration-001.md) |
+| 3 | Console input, display and resource restoration — remove the independent-window route; restore D09, D23-D25, D28-D30 and D34 through source-shaped Console boundaries while preserving native mouse/keyboard UX, embedded ROMs and package-relative configuration. Audit RDP normalization separately from paste. | [Proposal](../proposals/proposal-console-input-display-resource-restoration-001.md) |
+| 4 | Cross-process broker closure — restore D01-D07/D10 as one original BaseSrv/BaseClient lifecycle with three-program composition and finite IPC. Prove selected coordination rows without acquiring guest, COMMAND, SoftPC or WOW provider behavior. | [Proposal](../proposals/proposal-cross-process-broker-closure-001.md) |
+| 5 | WOW and debugger original-owner restoration — resolve D17-D22 and D27 through original font, glyph, scheduling, cursor/icon, error-response, debugger and callback owners; remove proved inactive duplicates and preserve finite modern bindings. | [Proposal](../proposals/proposal-wow-debugger-original-owner-restoration-001.md) |
+| 6 | Single-process WOW16 application lifecycle recovery — after broker and WOW/debugger restoration, prove the selected WRITE workload's original start/run/return within one x86 worker, or record the exact source-proven unavailable boundary. No substitute guest/UI failure policy, private USER/CSRSS shell or transport-based workaround. | [Proposal](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md) |
+| 7 | Multi-process matrix and product release — prove the brokered multi-process x86-worker profile, the cross-owner DOS/Win16 compatibility matrix, portable media layout and release packaging. Host x64 Windows is an x86-worker acceptance platform, not a native-x64 worker requirement. | [Proposal](../proposals/proposal-multiprocess-release-matrix-001.md) |
 
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](../../artifacts/documentation-archive/20260910/etc/archive/2026-08-27-pre-package-roadmap/README.md).

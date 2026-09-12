@@ -2,8 +2,9 @@
 
 ## Status and objective
 
-This is the unadmitted proposal for Queue candidate 2.  It may begin only
-after the applicable single-process WOW16 owner contract has closed.  Its
+This is the unadmitted broker proposal linked from Queue. The owner approved
+broker-before-WOW-restoration sequencing on 2026-09-12; implementation still
+requires admission after the preceding queued restoration packages. Its
 objective is to recover the required BaseSrv-style registration, command
 queue, notification, and disconnect-cleanup behavior through public IPC while
 returning the MVDM process to a source-shaped worker role.
@@ -29,10 +30,10 @@ the affected BaseSrv replacement work, establishing the real service-process
 owner while restoring original source, rather than building an autonomous
 broker first and replacing its policy later.
 
-This is a proposed change to the existing WOW16-before-broker predecessor,
-not an admission or an implicit Queue reorder. Until the owner explicitly
-adopts the change in Queue and Status, the current predecessor remains in
-force. If adopted, preserve the open audit/restoration task and its findings
+The owner approved this sequencing change on 2026-09-12; Queue now places
+broker before the WOW/debugger restoration and final WOW16 workload packages.
+This is candidate ordering, not implementation admission. At admission,
+preserve the open audit/restoration task and its findings
 at an explicit handoff; do not mark it complete or run two active S packets.
 Broker transport is not a substitute for missing single-worker DOSX, DPMI or
 WOW behavior. Resume the remaining owner recovery after the bounded broker
@@ -308,7 +309,7 @@ explicit status, lease, cancellation, notification, and disconnect rules.
 The broker owns no guest, COMMAND, SoftPC, WOW provider, USER, CSRSS, kernel
 VDM, or generic process-pool behavior.  It does not make x64 a build target,
 does not introduce host mutation, and does not substitute cross-process
-transport for the prerequisite single-process WOW16 lifecycle closure.
+transport for original single-worker WOW16 behavior or its later workload acceptance.
 
 ## Admission and exit evidence
 
