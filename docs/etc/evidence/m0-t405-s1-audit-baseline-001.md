@@ -115,3 +115,40 @@ Additional tracked membership: app 10, session 5, broker 7, opennt-abi 210.
 No tracked files were returned for mvdm-platform-abi or adapter-mvdm-host-in
 in this checkout. Reconcile declared topology with physical inputs; do not
 drop the actual opennt-abi root from the coverage denominator.
+
+## Paired physical-line baseline
+
+Measure-OpenNtPairedDiff.ps1 verifies that coverage-input source/current
+hashes still match, then runs git diff --no-index --no-ext-diff --no-textconv
+--ignore-cr-at-eol --numstat with core.autocrlf=false. It also compares the
+19 non-README opennt-host files to OpenNT: same relative paths except netapi
+maps to upstream ds/netapi, as established by the source package registers.
+Output: build/M0-T405/S1/paired-diff-001/paired-diff.csv.
+
+| Comparison group | Text-different files | Added lines | Deleted lines |
+| --- | --- | --- | --- |
+| Selected MVDM topology pairs | 173 | 4378 | 1273 |
+| Supplement-only pair with changed bytes | 1 | 1 | 0 |
+| Non-MVDM OpenNT-host reference | 7 | 316 | 14011 |
+
+The 190 byte-different topology pairs split into 173 text differences and
+17 CR-only differences. All 1395 byte-equal topology pairs and 384 byte-equal
+supplement pairs remain equal. Non-MVDM has 12 byte-equal files; its seven
+text differences are client/vdm.c (+135/-3242), netapi/api/apibuff.c
+(+10/-215), ntexapi.h (+20/-1832), ntpsapi.h (+25/-1280), ntrtl.h
+(+117/-6337), nturtl.h (+9/-1103), and ptypes32.h (+0/-2).
+
+Reviewer checks: ptypes32.h's two deletions are blank lines, although its
+README row calls it byte-exact. Non-MVDM deletion totals largely describe
+registered source subsets, not deleted hacks. The selected MVDM largest
+physical deltas include modesw.c (+317/-6), cmdmisc.c (+273/-40), cmdexec.c
+(+234/-52) and c_main.c (+175/-38); size prioritizes review but proves no bug.
+These totals exclude overlays, patches, autonomous adapter bodies, seven
+unpaired host files and other ABI/project roots. They must not be reported
+as a whole-project footprint or completed semantic audit.
+
+All 33 remaining V86 old paths are present in git diff-tree's deletion list
+for bbe4b0ec0, the T310 S6 V86-monitor retirement. Together with the 71 verified
+relocations this accounts for all 104 absent topology paths. The separately
+reintroduced monitor_printer.c slice remains subject to its own provenance
+and boundary review; retirement does not prove all original functions unusable.
