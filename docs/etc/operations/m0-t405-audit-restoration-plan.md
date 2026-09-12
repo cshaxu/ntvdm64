@@ -11,6 +11,12 @@ requires approval of audit findings before any repair. S4/S5 remain within
 this T, but do not activate before that approval.
 Refine dependency order from original-owner evidence, not the next trace hit.
 
+The owner explicitly requires a stop after the complete S2/S3 audit. Present
+the combined mirror-diff, overlay and replacement ledger for individual
+discussion, separating confirmed duplicated functionality from necessary
+bindings and unproven changes. Do not automatically start repairs or treat
+standing commit/push permission as approval of a semantic restoration.
+
 | S | Bounded objective | Exit deliverable |
 | --- | --- | --- |
 | S1 | Freeze baseline, provenance, counting rules and audit coverage. Separate unaccepted snapshot, selected source, build selection and actual runtime identity. | Reproducible inventory, coverage denominator, source mapping and unresolved-input list. |

@@ -43,7 +43,57 @@ total has been established.
   kernel-vdm placement text. Record this governance inconsistency; no source
   move is justified solely by the directory label.
 
-## Required completion
+## T405 overlay follow-up: source contracts, not removal approval
+
+Rechecked against the unchanged product-source baseline on 2026-09-12.
+This adds bounded findings to the initial pass; it is not whole-project
+audit completion. No product code or build selection changed.
+
+| Overlay unit | Original counterpart | Current finding and remaining proof |
+| --- | --- | --- |
+| `dos/dem/demfastio.c:demFastRead` | OpenNT `base/ntos/vdm/x86/rdwr.c:NTFastDOSIO` | Confirmed duplicated seek/read service. The original uses trap-frame registers, VDM TIB scratch, native file APIs and pending-I/O completion; the overlay uses CPU accessors, a guest-memory lease and synchronous Win32 file APIs. These are substantial implementation substitutions, not a symbol alias. |
+| `dos/dem/demfastio.c:demFastWrite` | Same original handler plus NTDOS slow-write fallback | Carry-only refusal, not a second write implementation. Do not count this as duplicated file-write logic or delete the fallback contract. |
+| `softpc.new/base/ccpu386/localfm.c` | Original same-named global carrier; selected `ccpusas4.c` SAS owner | Retains Gdp/Cpu/Video and avoids a second Sas definition, with explicit C-VID type selection. Composition difference; no newly implemented execution algorithm found in this body. |
+| `softpc.new/base/ccpu386/sas_overwrite_memory.c` | Original `ntstubs.c:sas_overwrite_memory` | Direct call to `c_sas_overwrite_memory`; extracted wrapper, not a replacement invalidation algorithm. Whole-file restoration must avoid alternate global/provider collisions. |
+| `softpc.new/base/cvidc/mvdm_cvidc_vector_binding.c` timing accessors | Original `base/cvidc/accessfn.c` CPU-vector accessors and `base/system/qevnt.c` consumers | Autonomous timing state requires priority review. `GetJumpCalibrateVal` and `GetJumpInitialVal` both return one local value initialized to 100; `SetJumpInitialVal` changes it. Separate original accessor slots do not prove these values interchangeable. No equivalent original backing provider has yet been established. |
+| Same C-VID file, vector assignments | Original Cpu/Sas/Video vectors and generated binding inputs | Composition repair distinct from the timing policy. Requires generated-slot audit; neither the whole file nor every binding is established as removable. |
+| `softpc.new/host/src/mvdm_ica_eoi_bridge.c` | Original `ica_eoi` PIC leaf | Typed forwarding with a LONG temporary, null guard and rotate=0. No PIC arbitration algorithm is duplicated in this wrapper. Call-site contract still needs review. |
+
+The C-VID header and EOI header supply declarations, not separate functional
+findings. Together the rows cover the five overlay C bodies and their two
+headers, but do not close their transitive/generated dependencies.
+
+### Fast-read contract details needing end-to-end checks
+
+The original handler sets VDM_IDLEACTIVITY, advances EIP past its kernel BOP,
+rejects encoded console/pseudo-standard handles, and converts the file offset
+as unsigned. The overlay rejects current standard handles and non-disk files,
+passes an explicitly zero high word to SetFilePointer, and delegates BOP
+dispatch and guest-memory ownership elsewhere. Do not transplant kernel EIP
+advancement into the CPU40 callback: it could double-advance the instruction.
+The original rejects a successful seek whose low position equals 0xffffffff;
+the overlay accepts that position when GetLastError is NO_ERROR.
+
+The overlay can return carry after a successful ReadFile if lease release
+fails. Whether a subsequent slow read can then observe an advanced file
+position depends on the caller's ZF/seek behavior and lease failure contract;
+this is an investigation target, not a demonstrated DOSX corruption.
+Likewise the absent local idle-activity assignment is not proof that the
+surrounding dispatch omits it. Original pending-status/EOF handling and these
+side effects must be compared before proposing a replacement.
+
+### Reviewer limits
+
+Source bodies and generator binding names were re-read separately from their
+divergence comments. The comments are provenance hints, not equivalence
+proof. Searching the original ccpu386 and host C sources for the three timing
+accessor names produced no backing implementation; that bounded negative
+search does not prove one is absent from other generated/source packages.
+The timing row is therefore unproven autonomous behavior, not yet a confirmed
+duplicate original algorithm. The existing seven grouped replacement
+findings must not be inflated by counting this candidate as proven.
+
+## Full-audit completion requirements
 
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
