@@ -88,6 +88,16 @@ passed.
 
 ## Latest Governance Closure
 
+M0 Td S6 P1 consolidates the owner-requested candidate planning documents:
+the [broker proposal](../proposals/proposal-cross-process-broker-closure-001.md)
+includes D01-D07/D10, staged source-first recovery and the non-mutating D03
+boundary; the [DOS file-service proposal](../proposals/proposal-dos-file-service-restoration-001.md)
+defines two sequential stages for D31-D33 and D08 and occupies the Queue
+head. Broker-first sequencing remains a proposal, not an adopted reorder.
+This documentation-only change leaves T405 S3 active and admits no product
+implementation. Governance/link and diff checks apply; remote delivery is
+not established by the local commit alone.
+
 M0 Td S5 P1 clarified the unadmitted cross-process-broker proposal: `run16`
 is the standalone BaseClient/CLI entry, `basesrv` owns broker selection and
 cleanup, and `ntvdm` returns to the worker role.  It records a one-minute
