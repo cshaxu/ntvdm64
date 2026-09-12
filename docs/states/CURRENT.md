@@ -88,6 +88,14 @@ passed.
 
 ## Latest Governance Closure
 
+M0 Td S8 P1 records the owner-requested
+[DPMI/XMS restoration candidate](../proposals/proposal-dpmi-xms-contract-restoration-001.md)
+at the Queue head: D36-D37 shared memory ownership first, then D35 transition
+frames with explicit U04/U07 boundaries. Other candidates retain their relative
+order. This is documentation only; T405 S3 remains active and no source repair
+is admitted. Governance/link and diff verification apply; a local commit alone
+does not establish remote delivery.
+
 M0 Td S7 P1 consolidates the owner-approved RTL, Console/resource and
 [WOW/debugger proposals](../proposals/proposal-wow-debugger-original-owner-restoration-001.md)
 with the broker proposal and revised Queue. Candidate order is RTL, DOS file
