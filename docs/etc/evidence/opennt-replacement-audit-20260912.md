@@ -182,7 +182,43 @@ actual SET_EIP definition, not an assumption about register truncation.
 No CPU or product code has been edited. These are new mirror-internal
 restoration candidates, distinct from the previously counted service groups.
 
-## Full-audit work still required
+## T405 ccpu386 changed-file coverage
+
+The paired inventory lists 24 non-byte-equal ccpu386 files: 23 text diffs
+and c_getset.c with CR-only changes. All 23 complete diffs have now been
+read against their original same-path OpenNT sources; c_getset.c was checked
+with a CR-normalized diff and produces no hunks. This closes direct diff
+reading for this directory, not transitive provider/ABI or runtime verification.
+
+| Files | Classification after direct diff review |
+| --- | --- |
+| c_main.c | Arithmetic/reset findings above; event synchronization, PIC rejection and original-hook composition need full boundary review. |
+| c_seg.c | New CPU_40_STYLE special case for protected-mode selector 0040h writes base=0400h, limit=ffffh and writable/readable DPL3 cache directly. It bypasses original GDT/LDT bounds, descriptor read, type/access/present validation and accessed-bit update. This is a source-internal semantic replacement, not just an API binding. Recover descriptor establishment at its original initialization owner rather than infer permission to bypass generic CPU checks. The comment's DOSX provenance still requires tracing. |
+| c_intr.c | Calls local DpmiCpu40RestoreNativeIdt on every protected-mode entry to do_intrupt, and invokes host_swint_hook for privileged-checked protected software interrupts. The first provider lives in modified dpmi32/modesw.c; original INTx already has a software hook. Audit descriptor ownership and possible duplicated hook entry rather than label this an original interrupt body. |
+| ccpusas4.c | c_GetPhyAdd adds physical-mapping translation and external resolution before original RAM lookup. This delegates an alternate memory service; its semantic owner lies in the mapping provider and kernel VDM comparison. Added store/direct-access observations are separate. |
+| c_xfer.c, call.c, intx.c, iret.c, jmp.c, ret.c, sti.c | Added observation calls; original instruction bodies otherwise unchanged in the diffs. Default-off provider labels do not establish zero overhead or side-effect freedom. |
+| c_bsic.h, c_reg.c, c_xcptn.c, ntstubs.c, popf.c, zfrsrvd.c | Declaration/include/explicit callable-type changes, not new instruction algorithms. Verify against selected definitions before reverting for footprint. |
+| c_page.c | Added yoda.h selects the PROD check_D macro; compilation selection rather than a new paging algorithm. |
+| cpu4gen.h, evid_c.h | Generated declaration and pointer-carrier changes; ABI/layout consistency across consumers must be verified. Not independent execution implementations. |
+| fpu.c | stdio declaration and explicit bounded pointer-difference cast in register trace formatting; no FPU arithmetic replacement in the diff. |
+| ntthread.c | Diagnostic format and explicit null returns replacing bare returns in pointer-returning failure paths. Not original thread scheduling duplication; null-frame callers still need failure-path review. |
+| sascdef.c | Typed null vector-slot cast, not a new SAS invalidation body. Runtime binding is separately covered by the overlay ledger. |
+
+One diagnostic caveat is source-proven in c_seg.c: when selector is zero,
+effective_addr and nine sas_hw_at byte reads are evaluated as function
+arguments before mvdm_softpc_record_cpu_low_cs_load is called. A runtime
+enable check inside that observer cannot prevent those reads. Therefore it
+is inaccurate to call this entire caller-side addition default-off work;
+whether these reads have guest-visible effects requires SAS address-type
+and provider inspection. Do not assert a demonstrated fault from the reads
+alone.
+
+Reviewer re-read the original descriptor-validation block following the
+0040h special case and verified that it is bypassed by the new else chain.
+No descriptor or CPU fix was applied. The inherited full audit scope and
+owner approval gate remain unchanged.
+
+## Full-audit remaining work
 
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
