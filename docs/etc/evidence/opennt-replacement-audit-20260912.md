@@ -1,4 +1,41 @@
-# Original-owner replacement audit, initial pass
+# Original-owner replacement audit and T405 discussion handoff
+
+## T405 combined static-audit conclusion
+
+The S1-S3 inventory and disposition audit is ready for owner discussion.
+This conclusion supersedes the incremental statements below that the combined
+report or file-disposition join is still pending; it does not erase their
+specific unresolved semantic findings. Historical initial-pass baseline text
+below is retained as chronology, not the current T405 input identity.
+
+Current audited product source is the frozen 3d127962c baseline, including
+unaccepted 1daff0ace WIP, not an accepted WRITE implementation. All 5043 tracked
+inputs are accounted for by the S1 inventory. Direct changes, overlays,
+patches, adapters, app/session/broker and declaration carriers have the
+dispositions recorded here. Retained compile graphs are selection evidence
+only; no new build, guest test or product repair was performed.
+
+The confirmed original-function overlap discussion set is D01-D37 below.
+It includes partial overlap, inactive providers and changed selection of an
+original algorithm; it is NOT 37 proven bugs, 37 independent replacement
+implementations, or an estimate of safe deletions. Unknown source matches
+remain explicitly unknown, so no assertion that these are all possible
+semantic duplicates is made. The eight unresolved families have named holds
+and comparison requirements in their table, rather than invented matches.
+
+Proposed discussion order is Base command policy (D01-D07/D10), DEM/VDD and
+fast I/O (D08/D31-D33), Console/input/presentation (D09/D23-D25/D28-D30/D34),
+RTL/NetLib (D11-D16/D26), WOW/debugger (D17-D22/D27), then DPMI/XMS
+(D35-D37) and unresolved internal-state changes. This is not repair approval.
+Original MVDM owners stay in mvdm-host; eligible non-MVDM original bodies
+belong in opennt-host; adapters retain only demonstrated missing mechanics.
+
+No whole provider is declared safely deletable solely from name, size or
+successful COMMAND/EDIT runs. Pure casts/blank lines, thin original forwarding,
+inactive duplicates and diagnostics are footprint candidates subject to
+paired ABI/build and affected regression checks during approved restoration.
+The requested next step is individual owner discussion. Stop implementation
+here; standing commit/push permission does not approve source restoration.
 
 ## Question and method
 
@@ -647,6 +684,358 @@ these findings, resolve or explicitly bound outstanding owner matches, and
 produce the combined discussion ledger. The 37 D rows below remain a verified
 subset until that reconciliation; S2 closure is not the requested final audit
 report and does not authorize repairs. Documentation delivery is pending.
+
+### S3 declaration and cross-root count reconciliation
+
+Completed the previously excepted mvdm_softpc_termination.h read. It contains
+declarations/comments, not additional inline behavior. Its observer promises
+remain subject to the already reviewed implementation and call-site reads;
+for example stream_io_update takes a pointer despite its older scalar-only
+comment. This closes that header-read exception without adding functionality
+to the duplicate count. The earlier nine composition headers and 209-file
+ABI provenance reconciliation remain the declaration evidence.
+
+Recomputed inventory root totals with documentation/binary files included:
+adapter 112, adapter-opennt-host 1 (README only), app 10, broker 7, guest 2597,
+MVDM host 1977, overlay 8, firmware 42, patch 6, tools 48, opennt-abi 210,
+opennt-host 20 and session 5: 5043 tracked paths. Source-bearing file counts
+exclude README/metadata: overlay 7/245 lines, patch 5/1868, adapter 103/11654,
+app 9/1594, broker 6/433, session 4/1065, opennt-abi 199/80463. These source
+line totals are physical footprint, not changed or duplicated code totals;
+209 ABI source-directory files additionally include non-source carriers.
+
+Paired MVDM changes remain 174 text-different files, +4379/-1273. Paired
+opennt-host changes remain seven files, +316/-14011; large subset removals
+must not be presented as deleted hacks. Overlay/adapter additions are counted
+separately because a no-file baseline is not an original function comparison.
+Guest, tools and firmware retain their separate provenance/no-host-link
+dispositions and are not silently dropped from the all-root inventory.
+
+### S3 independent presentation completion
+
+Completed presentation_window.c in bounded reads, joining D23 input synthesis
+and D34 palette findings. The file implements a separate User32 window and
+text rasterizer, not the native Console text path. Its text renderer assumes
+two-byte cells, fixed glyph dimensions/font source and a fixed EGA palette;
+it ignores blink behavior and does not draw an independent text cursor in the
+inspected painting loop. These limitations are not attributed to original
+SoftPC rendering or the accepted native Console mouse route.
+
+The window creates its own thread, changes Console input mode, writes synthetic
+events to CONIN$ and restores its saved mode on exit. Mouse state accumulates
+down/up messages and the window procedure has no capture-loss reset branch.
+Closing requests session cancellation; Alt+Enter destroys only this surface.
+Startup waits five seconds, but close can then wait indefinitely even if a
+window handle was not yet published and no shutdown message was posted.
+Record this as a conditional lifecycle risk, not an observed hang.
+
+Proposed disposition: keep this optional presentation boundary distinct from
+native Console restoration. Recover proved original input/palette policy
+through minimal bindings, and discuss the custom rasterizer/media assumptions
+explicitly rather than silently substitute it for the requested Console.
+No window was opened, no input injected and no product code changed.
+All five app C files and both session C files now have explicit composition
+dispositions, completing the implementation-file join with the three broker C
+files. Declaration and final cross-root count reconciliation remains separate.
+
+### S3 session lifecycle and storage disposition
+
+Completed session.c's lifecycle, binding, presentation and root sections in
+bounded reads, joining the previously read memory wrappers. This is local
+composition infrastructure, not an original OpenNT state machine under a new
+filename. Its lifecycle replacement remains a distinct source-recovery concern.
+
+Disposal rejects nonzero binding count or an armed escape, then runs void
+teardowns in reverse registration order, clears presentation/leases and zeroes
+the instance. Teardown failures cannot be propagated through those void slots.
+Cancellation/completion change state without themselves performing process-wide
+termination. Binding counters are atomic, but that does not prove atomicity of
+state transitions, hook lists, borrowed context ownership or presentation data.
+Restore original process-lifetime guarantees through a minimal composition
+boundary; do not infer thread safety solely from the counters.
+
+The single session escape has no recorded arming-thread identity check on
+termination, matching the earlier cross-thread longjmp risk. Presentation
+storage allocates/copies buffers and palette values; it is not the original
+Console Server object/ownership model and joins D34 and the independent-window
+boundary. Root setters and backend validation are app assembly mechanics,
+not additional DOS loading algorithms. Diagnostics and unused budget metadata
+remain separate footprint candidates. No new confirmed D count is introduced.
+
+### S3 copied guest-memory lease disposition
+
+Read guest_memory_lease.c completely and session.c's begin/end/acquire/release
+wrappers. Every nonempty acquisition reads a full bounce buffer, including
+WRITE-only requests. Commit writes the full recorded range; end discards all
+outstanding buffers without commit. Release frees and clears its record even
+when the backing write fails. These are local transaction semantics, not the
+original live GetVDMAddr alias contract, and explain why SFT/callback/DEM
+restoration must review the shared layer as well as each caller.
+
+Release checks active/epoch fields but not membership of the supplied record
+in this context's array. Epoch changes on begin, not on reuse of a slot within
+the same context. Thus the API alone does not distinguish an old record pointer
+from a later allocation in that same slot. This is a conditional ownership
+limitation, not evidence that a current caller retains such a pointer or that
+an exploit exists. The session wrappers add active-session checks but no
+additional record-membership or per-allocation identity check.
+
+Proposed disposition: retain only required finite guest-memory mechanics and
+restore each original caller's field/range/ordering contract. Do not introduce
+a generic pointer manager or count this transport as another DOS file system.
+Required regressions include overlapping writes, write-only access, failed
+commit, teardown with outstanding leases and stale-slot reuse. No guest memory
+was read or modified by this audit.
+
+### S3 app entry and machine-shell disposition
+
+Read entry.c and machine_shell.c completely. entry classifies before session
+activation; resolved non-DOS/non-Win16 targets go to native process launch,
+unresolved commands to host shell launch. Resolution failure is intentionally
+not an immediate error. That fallback belongs with D10 and public CLI policy,
+not an original DOS loader replacement.
+
+For guest execution the order is package validation, synthetic SoftPC argv,
+process environment projection, backend/presentation preparation, session
+activation, Base record bind/publish, then original-entry execution. Cleanup
+frees argv and restores the process environment before presentation close and
+session disposal. A disposal failure replaces the prior result with 72;
+presentation-close failure replaces only a zero result. Preserve these as
+explicit app lifetime/error-policy differences from original process exit,
+and review them with outstanding worker bindings before assuming cleanup
+is equivalent. No observed race is claimed from ordering alone.
+
+machine_shell.c validates a SoftPC session and forwards to
+mvdm_softpc_execution_run_original_entry; it contains no CPU loop or guest
+loader. Its nonzero ips/memory parameters are explicitly unused. They are
+obsolete interface-footprint candidates, not working capacity controls or
+proof that a second emulator is present. Proposed disposition: retain original
+execution ownership, minimize shell ceremony, and preserve the positional CLI
+while restoring source-owned launch/exit policies where applicable.
+
+### S3 app launch and package policy disposition
+
+Read launch_declaration.c and package_layout.c completely. The CLI grammar,
+executable-relative package root and historical buffer-fit admission are app
+policy, not original MVDM implementations to copy wholesale into a mirror.
+Image classification delegates to D10; one-shot exhaustion and command record
+publication join D01-D07 rather than introduce new duplicate counts.
+
+Launch declaration also builds a restricted COMSPEC/PATH environment, uses
+code page 437, assigns task/broker identity 1, supplies pure-DOS PIF only for
+DOS, and constructs -f/-w/-a in the in-memory SoftPC argv. These explicit
+composition choices are not original BaseClient behavior merely because the
+record shape matches. Preserve positional product entry while reconciling
+original environment, startup metadata and PIF ownership. The generated argv
+does not itself change the process GetCommandLine value.
+
+Argument handling is asymmetric: a sole argument is copied as a command-line
+string, while multiple argv entries are individually quoted; a quoted path
+containing spaces arrives from CRT without its quotes. Later target splitting
+therefore needs end-to-end resolution evidence before claiming uniform path
+support. This is a static grammar concern, not a reproduced launch failure.
+The package validator enforces the original short-path/SHELL capacity and does
+not create a shortened path; keep that explicit admission restriction separate
+from the resource-lookup algorithm D25. No executable or guest was started.
+
+### S3 broker composition disposition
+
+Re-enumerated composition roots: app has five C files, broker three and session
+two, with their paired headers and READMEs separately inventoried. Read all
+three broker implementations completely for this join.
+
+- broker.c owns a finite client registry, monotonically assigned IDs and
+  equality checks on supplied user keys. It contains no authentication or IPC;
+  equality is not proof of an authenticated caller. Keep this project contract
+  distinct from original BaseSrv process registration and any future transport.
+- wire.c validates fixed fields and a nonzero key. has_native_value always
+  returns zero based on record design; it does not inspect integer payloads for
+  native values. This is not a runtime security guarantee or an OpenNT provider.
+- base_vdm_record.c owns the restricted one-pending-record-per-slot model,
+  DOS/WOW owner filtering, capacity and disconnect clearing. It is autonomous
+  Base-protocol policy and joins D01-D07, not neutral serialization alone.
+  consume compares request_id after locating broker/session but not full record
+  contents; the publishing adapter uses request_id 1. Do not infer robust
+  stale-request protection from this field without a sequencing contract.
+
+Proposed disposition: restore original Base command policy as an owner package
+with the local adapter and record layer considered together; preserve only the
+required finite copied-record mechanics. The independent registry/wire fixture
+does not prove a resident broker exists and does not authorize implementing
+one in this audit. Header shapes were reviewed in the earlier declaration pass.
+No registry state, process or product source was changed.
+
+### S3 unresolved findings and counting boundary
+
+The following consolidates the current unresolved findings instead of turning
+each new observation into another duplicate count. These remain inside the
+audit scope; a hold is a disposition, not proof of equivalence or a repair.
+
+| Family | What is established | What remains unproved / next decision |
+| --- | --- | --- |
+| C-VID binder timing | Local calibration/restart state and generator slot substitutions exist. | Exact original backing and selected slot contracts; retain provisionally, not as verified original timing. |
+| Physical mapping | Local record/alias ordering, exact-span unmap and byte resolution are fully visible. | Original matching implementation and required overlap/deferred-backing contract. Not a confirmed duplicate count. |
+| Effective-address cache selection | Original descriptor decoding is reused, with local cache preference. | Original choice rule for equal selectors with distinct caches and required failure contract. |
+| DPMI platform setup | Transition-frame overlap D35 and allocator selection D37 are established separately. | Ownership of TSS slots, IDT construction, GDT/LDT sharing and TEB/stack projection. Do not label all of this original kernel reuse. |
+| Keyboard normalization | Local synthesis plus partial original paste overlap D24. | Complete modern Console packet contract and surrogate/modifier behavior; original paste policy alone is not a drop-in replacement. |
+| WOW private callbacks | D19/D20 source-owner overlap is established. | Helper runtime reachability and full cursor/icon format/error equivalence. Link selection is not execution proof. |
+| Session lifetime and memory transactions | Concrete changed failure/cleanup paths are recorded in callbacks, environment, disk, thread and leases. | Which are exercised by selected workloads and which original process-lifetime guarantees must be restored; no wholesale second session framework is prescribed. |
+| Native wait/Console capabilities | Explicit unsupported services and observable wrapper differences are recorded. | Selected caller reachability, source-owned policy versus unavailable server mechanics; do not count missing implementation as duplicated implementation. |
+
+The 37 D rows remain the established functional-overlap set, with carrier
+files, subcases and shared helpers not counted again. Declared source reuse,
+ABI forwarding, diagnostics, unsupported returns and unresolved provenance
+are separate from those rows. Before the final combined report, reconcile
+app/session/broker composition and declaration inventories against this set;
+do not promote the count to an exhaustive total from filename coverage alone.
+
+### S3 remaining named carrier reconciliation
+
+The final filename-presence pass found five carriers whose functions were
+already discussed without exact filenames. This check locates indexing gaps,
+not proof of semantic completeness. Their explicit dispositions are:
+
+| File | Evidence and disposition |
+| --- | --- |
+| mvdm_softpc_vdd_configuration.c | Complete read recorded in the small-carrier pass: registry-read binding and missing-key policy; group with nt_msscs. |
+| mvdm_softpc_vdd_unavailable.c | Complete read recorded there: ClearInstanceDataMarking controlled failure, not original VDD recovery. |
+| wow_callback_frame_lease.c | Complete read in WOW32 pass: finite guest-memory lease wrapper; transaction failure changes are recorded against original CallBack16. |
+| wow_user_callback_callconv.c | Complete read in WOW32 pass: four WINAPI thunks into original bodies, not four new USER policies. |
+| mvdm_base_vdm_environment.c | Complete reread: calls original BaseCreate/DestroyVDMEnvironment, but installs projection into the current process rather than passing it to a newly created child. Retain original projection owner; review temporary process-wide mutation separately. |
+
+Environment restore ignores SetEnvironmentStringsW failure, then frees saved
+blocks and clears its state, leaving no retry information if restoration
+fails. This is a source-level lifetime/failure difference, not evidence of
+observed environment loss. Recovery should preserve failure reporting and
+process ownership, without replacing the original projection algorithm or
+conflating it with D11's downstream RTL environment implementation.
+
+All 52 adapter C filenames now have an explicit carrier or family disposition
+in this record. This closes that indexing gap only; S3's combined functional
+ledger and unresolved-original-owner conclusions remain required before the
+requested final audit report. No product code was changed.
+
+### S3 physical-mapping policy disposition
+
+Completed the remaining mvdm_softpc_physical_mapping.c read, including
+prepare/set, alias map/unmap, translate/resolve and cancel. Unlike the SAS
+forwarders, this file owns an autonomous record/alias policy. Exact original
+implementation matching remains unresolved; original names do not make it a
+verified recovered kernel-VDM service.
+
+Map updates only an exact destination-base/size match; otherwise it prepends
+a record without rejecting partial overlaps. Translation selects the first
+matching alias and performs one translation, not recursive alias resolution.
+Unmap removes only an exact span and otherwise returns STATUS_NOT_FOUND.
+The source range is checked for arithmetic overflow but not for the existence
+of backing storage at map time. These are concrete current policies to compare
+with original ownership, not claims that overlap or deferred backing is
+necessarily invalid. Resolve checks the individual byte against source_size;
+prepared page padding is not exposed as valid source bytes by that check.
+
+Disposition: hold for source-owner reconciliation and preserve current
+regression baseline; do not classify as a confirmed duplicate or delete it
+because the generic x64 identity manager was retired. Required comparisons
+include overlapping spans, exact versus partial unmap, alias chains, backing
+retirement, mapping publication failure and owner teardown. The earlier
+prepare/set transaction and list ownership observations remain applicable.
+No mapping was created, changed or exercised during this audit.
+
+### S3 debugger four-file disposition
+
+Read dbg_dispatch.c, dbg_init.c, dbg_state.c and dbg_unavailable.c completely
+and rechecked original dbg.c SendVDMEvent/DBGNotifyRemoteThreadAddress bodies.
+All four belong to D22, not four additional duplicated-function counts.
+
+| Carrier | Disposition |
+| --- | --- |
+| dbg_init.c | Rehosts debug-port query and original success/failure policy with native export resolution. Restore original DBGInit ownership with a narrow query binding where necessary. |
+| dbg_dispatch.c | Reimplements the ordinary-profile switch, including TOOLHELP metadata and mode-specific AX behavior; attached-debugger paths become unavailable. Restore original dispatch with bounded stack reads rather than maintaining parallel mode constants and reduced branches. |
+| dbg_state.c | Separate process-global debug/toolhelp state duplicates original dbg.c ownership. Migrate with the dispatcher; helper names alone do not establish original consumer integration. |
+| dbg_unavailable.c | Mixed no-event and controlled-stop substitutes. DBGNotifyRemoteThreadAddress drops state even when not debugged, unlike the original unconditional stores. Retain genuinely unavailable operations only after a precise outgoing-interface audit. |
+
+The original SendVDMEvent uses RaiseException with STATUS_VDM_EVENT and catches
+unhandled delivery to return FALSE. This directly contradicts a blanket claim
+that every event requires private CSR transport; it does not prove complete
+debugger recovery, because context acquisition and consumers remain separate
+dependencies. Proposed source-first restoration must retain that failure
+direction and original state stores, naming each genuinely unavailable edge.
+No debugger attachment, exception delivery or product edit was performed.
+
+### S3 event-thread and guest-memory binding disposition
+
+Read mvdm_softpc_event_thread.c and mvdm_softpc_guest_memory.c completely,
+plus nt_remove_event_thread and ConsoleEventThread cleanup. Event handling
+remains in the original worker; the adapter duplicates a synchronization
+handle, alerts the original handle and waits indefinitely on the duplicate.
+The retained handle protects the join from the worker's own CloseHandle, but
+the alert still uses the original handle. The caller discards the helper's
+failure result. Therefore this is a lifecycle binding with a failure/close
+race to review, not proof of guaranteed teardown or a new input dispatcher.
+Do not fix it by changing original mouse/button processing.
+
+Guest-memory callbacks perform overflow-safe RAM-size bounds checks and call
+original c_sas_loads/c_sas_stores. Allocation, copied lease ownership and
+commit semantics belong to session; SAS remains the memory-operation owner.
+The callbacks return success after a void SAS call, so bounds validation alone
+does not establish equivalent behavior for every ROM/device/mapped span.
+Keep memory-type semantics and error propagation in the regression boundary,
+without inventing a second memory manager from these forwarding functions.
+
+The physical-mapping implementation remains separately classified as local
+record/alias policy with unresolved exact original owner. Reading its record
+publication confirms process-global lists and session-pointer ownership, not
+an epoch-tagged generic identity manager. This observation does not resolve
+its original semantic equivalence or authorize removal. No worker was run,
+signaled or killed in this audit.
+
+### S3 descriptor and effective-address carrier disposition
+
+Read mvdm_softpc_descriptor_fields.c and mvdm_softpc_effective_address.c
+completely. retrieve_descr_fields delegates descriptor reading/decoding to
+original read_descriptor_linear and narrows outputs to the historical helper
+types. It is source reuse through a binding, not an independently implemented
+descriptor decoder.
+
+The effective-address provider is mixed: it calls original descriptor helpers,
+but independently chooses real/v86 calculation or protected-mode cache lookup,
+preferring CS, SS, DS, ES, FS, GS in that order before walking GDT/LDT. Equal
+selector values do not by themselves prove equal cached bases, so selecting
+the first matching cache is a policy requiring original-owner justification.
+Its base-plus-offset result does not check segment limit or access rights;
+do not advertise it as validation of an entire guest span. Conversely, that
+omission is not proof an address-calculation-only historical API required those
+checks. The scalar c_effective_addr facade maps failure to zero, which must
+not be confused with a distinct success status for guest address zero.
+
+A focused search of original ccpu386 found the cpu4gen declaration/macro,
+not a matching C implementation; original host sim32 supplies a different
+sim32_effective_addr entry. This bounded negative search does not prove no
+original implementation exists elsewhere. Keep cache-selection ownership
+unresolved, as already recorded, rather than labeling this entire file either
+pure forwarding or a confirmed removable duplicate. Required review includes
+same-selector/different-cache states and caller-specific failure handling.
+No CPU instruction or product source was changed.
+
+### S3 redirection identity carrier disposition
+
+Read mvdm_redirector_handle.c and mvdm_command_redirection.c completely,
+then current cmdredir call/free sites and original cmdredir.c's AX:BX record
+decode and BX:CX handle publication. The original x86 path already passes
+32-bit native values in guest registers. Current helpers recombine/split those
+values and reject zero; they do not maintain an identity table, lease, epoch
+or independent pipe implementation. The retire helper is empty and original
+free still owns the record. Its mirror comment claiming session-identity
+retirement is stale after identity-manager removal.
+
+Proposed disposition is source-shape simplification, with explicit treatment
+of added zero rejection and error returns, not introduction of a replacement
+manager. Preserve original pipe/resource lifetime and the sole x86 contract.
+A nonzero value is not validated as a live pointer or handle by these helpers;
+do not describe them as safety validation. mvdm_redirector_handle_from_words
+has no direct caller in the inspected MVDM-source search; selected object
+membership alone does not establish its runtime use. This thin-carrier set
+does not add another confirmed duplicated redirection algorithm.
 
 ### S3 CRT and explicit-unavailable carrier disposition
 

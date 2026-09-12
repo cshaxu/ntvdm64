@@ -4,6 +4,12 @@
 
 **Active: M0 T405 S3**
 
+S3 static-audit findings are ready for owner discussion in the
+[combined audit conclusion](../etc/evidence/opennt-replacement-audit-20260912.md).
+The 37 confirmed overlap rows and eight unresolved families are separate.
+Audit-source implementation is paused at the owner's requested discussion
+gate; no S4/S5 repair is admitted. T405 remains open. Delivery is pending.
+
 ## Active Packet
 
 ### M0 T405 S3 — Non-MVDM owner and replacement audit consolidation
