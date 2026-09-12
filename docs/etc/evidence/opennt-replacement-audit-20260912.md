@@ -65,6 +65,30 @@ headers, but do not close their transitive/generated dependencies.
 
 ### Fast-read contract details needing end-to-end checks
 
+#### Overlay-wide proposed disposition and regression boundary
+
+Re-read all five C bodies and both headers against the above original-owner
+findings. The following completes the physical overlay list's proposed
+dispositions, not approval to implement them:
+
+| Carrier | Proposed disposition | Required proof before delivery |
+| --- | --- | --- |
+| demfastio.c | Replace duplicated fast-read policy using the finite original NTFastDOSIO slice, or disable only the optimization through original CF fallback after owner choice. Retain explicit fast-write refusal unless that original service is separately recovered. | Ordinary DEM fallback, seek/no-seek, EOF/short read, standard/pseudo handles, failure after read and guest commit; DOSX/COMMAND file workloads. Keep CPU40 BOP advancement outside the imported kernel trap prologue. |
+| localfm.c | Retain bounded global/vector-layout composition until an original carrier with the selected single Sas owner composes. Do not introduce a second global just to remove an overlay file. | Exactly one Gdp/Cpu/Sas/Video owner and matching layouts across original CCPU/C-VID consumers; selected x86 link and video regression. |
+| sas_overwrite_memory.c | Original wrapper reuse, not autonomous implementation. Prefer an original-path registered source subset if feasible; otherwise retain this exact forwarding body with its collision rationale. | One exported provider, original c_sas_overwrite_memory selected, no alternate state providers; SIM32/EMS memory call regression. |
+| mvdm_cvidc_vector_binding.c/.h | Retain necessary vector assembly provisionally; separately resolve unproven timing-state substitution and generator null/overridden slots. Do not classify the whole binder as a duplicate algorithm. | Complete public/private slot signatures and selected targets, initialization ordering, separate calibration/restart semantics, video and timer/PIC workloads. Missing original timing backing remains an explicit unresolved finding. |
+| mvdm_ica_eoi_bridge.c/.h | Retain or inline the smallest same-shaped typed boundary after owner review; no PIC arbitration algorithm is replaced. | Original rotate=0, input/output line propagation, x86 int/LONG representation, Redirector/PIC EOI regression. Null guard is extra boundary behavior, not proof of a normal call difference. |
+
+The only current mirror caller found for mvdm_ica_eoi_bridge is
+nt_eoi.c:SoftPcEoi; original SoftPcEoi passes the same adapter/line with
+rotate=0. The overlay README's plural caller description also names nt_timer,
+but that timer uses its own scalar remainder change, not this EOI bridge.
+The README register omits demfastio.c/DIV-188 despite that body being selected.
+Record both as source-register cleanup items; comments are not authoritative
+proof of implementation coverage. These findings add no duplicate D row:
+fast read is D08, original wrappers/declarations are not additional algorithms,
+and timing remains unproven rather than a fabricated confirmed duplicate.
+
 The original handler sets VDM_IDLEACTIVITY, advances EIP past its kernel BOP,
 rejects encoded console/pseudo-standard handles, and converts the file offset
 as unsigned. The overlay rejects current standard handles and non-disk files,
@@ -593,6 +617,486 @@ transitive audit. No product edits; eight-header diff reading is not overall
 ABI verification or full-task completion.
 
 ## Full audit still pending
+
+### S2 numerical coverage reconciliation
+
+Recomputed all text-different MVDM rows from paired-diff-001/paired-diff.csv,
+including the one supplement export change. These are physical changed-file
+counts and added/deleted lines, not autonomous-function counts:
+
+| Original owner group | Files | Added | Deleted |
+| --- | --- | --- | --- |
+| dos/command | 10 | 663 | 130 |
+| dos/dem | 12 | 414 | 103 |
+| dpmi32 | 13 | 652 | 53 |
+| inc | 8 | 64 | 29 |
+| softpc.new/obj.vdm | 3 | 17 | 2 |
+| softpc.new/base/bios | 3 | 19 | 4 |
+| softpc.new/base/ccpu386 | 23 | 469 | 68 |
+| softpc.new/base/comms | 1 | 8 | 6 |
+| softpc.new/base/cvidc | 8 | 63 | 30 |
+| softpc.new/base/dos | 1 | 32 | 24 |
+| softpc.new/base/inc | 11 | 86 | 15 |
+| softpc.new/base/keymouse | 3 | 127 | 25 |
+| softpc.new/base/support | 2 | 44 | 5 |
+| softpc.new/base/system | 5 | 63 | 10 |
+| softpc.new/base/video | 10 | 178 | 78 |
+| softpc.new/host/inc | 7 | 99 | 47 |
+| softpc.new/host/src | 34 | 1067 | 382 |
+| vdmredir | 6 | 180 | 200 |
+| wow32 | 10 | 112 | 26 |
+| xms.486 | 4 | 22 | 36 |
+| Total | 174 | 4379 | 1273 |
+
+Joining these 174 paths with canonical graph-coverage-002 yields 124 selected
+compile inputs, 48 non-direct-translation-unit entries and two unselected C
+files: base/ccpu386/ntstubs.c (+14/-1) and host/src/nt_aorc.c (+46/-71).
+All remain within semantic review. In particular, ntstubs has an overlay
+carrier, so not compiling that original translation unit does not prove its
+functionality is unused. The 48 other entries include declarations and build
+controls; their category does not mean unused. Supplement export selection is
+documented separately above. Byte-equal, CR-only and unpaired source-fragment
+categories remain in S1's denominator, not lost or counted as text diffs.
+
+This matrix verifies arithmetic and selection coverage only. The per-owner
+semantic dispositions and cross-family restoration requirements must still be
+reviewed against the findings below before S2 closes; table completeness is
+not proof that every changed behavior has a restoration decision.
+
+### Unselected nt_aorc carrier disposition
+
+Re-read the complete +46/-71 diff of host/src/nt_aorc.c against its selected
+OpenNT counterpart. Most edits replace K&R/default-int register setters with
+IU8/IU16/IU32/IBOOL/ISM32 prototypes; register assignments and dispatch bodies
+are retained. Two added setIP/setCS hooks collect current register values
+before dispatch and report low transfers. The report provider returns early
+when disabled; argument reads still occur. These are diagnostic/ABI changes,
+not a newly authored register emulator.
+
+The retained product graphs omit this file, but
+tools/build/Generate-T335S3WowCallbackCcpuNinja.mjs explicitly compiles and
+links it into the historical callback fixture. Thus it is not globally dead
+code and cannot be deleted just from the product-union result. The current
+product generator instead names original accessfn.c as the complete register
+bridge; review the selected profile rather than adding both providers.
+
+One concrete declaration hazard needs profile-level reconciliation:
+setSS_BASE_LIMIT_AR changed from void to IBOOL without returning a value.
+The c_reg.c implementation it calls is VOID, while original cpu4gen.h already
+declares that CCPU operation IBOOL and original accessfn.c expects an IBOOL
+vector result. This is an original carrier/profile mismatch plus a local
+signature change, not evidence that CCPU segment operations are incorrect.
+Do not invent a TRUE return or alter segment semantics without identifying
+the selected declaration/provider/caller contract. Proposed disposition:
+retire unnecessary mirror prototype/diagnostic footprint only together with
+the fixture binding decision, retaining original register operations. Any
+replacement must check callback fixtures and the product register-vector ABI;
+no runtime failure or successful repair is claimed by this static finding.
+
+### Base video ten-file review and disposition
+
+Re-read all ten base/video diffs (+178/-78); the truncated combined output's
+egwrtm12 portion was re-read separately in full with zero context. Classify:
+
+| Files | Changed responsibility and proposed disposition |
+| --- | --- |
+| cga.c, ega_prts.c, ega_read.c, ega_writ.c, vga_prts.c | Primarily original-provider declarations and typed callback signatures, including word-fill IU16 rather than IU8. Retain the selected provider's actual contract; remove only redundant declaration footprint after compilation proof. These hunks do not introduce replacement raster algorithms. |
+| ega_vide.c | Two memset4 destination casts change ULONG* to unsigned int*. Resolve the selected function signature; do not label this as new scrolling logic. |
+| egawrtm0.c, egwrtm12.c | CPU40-specific conditional selection excludes legacy string movers and zero-initializes legacy handler storage. It changes composition, not the retained byte/word writer bodies. Pointer-width spelling in fill_both_bytes is separately a footprint candidate on x86. Duplicate divergence comments are cleanup debt. |
+| gfx_updt.c | Dirty-mark callbacks change boolean-to-void declarations/assignments and remove simple_update's unused FALSE result; excludes legacy vid_handlers in CPU40/C_VID. Verify consumer signatures with gfx_upd.h; original dirty increment and marking policy remain. |
+| video.c | Adds a declaration and MVDM_STANDALONE_SAS_VIDEO exclusions to three MONITOR-only direct writes. With MONITOR absent, these added predicates do not change those branch outcomes; do not infer a new text renderer from them. |
+
+Reviewed original selection at ega_write_init and ega_write_routines_update:
+CPU_40_STYLE calls SetWritePointers, and Glue_set_vid_wrt_ptrs excludes the
+legacy handler dereferences under that profile. Consequently zero-initialized
+legacy tables alone are not proof of a selected null callback. The C-VID
+provider table itself still needs the separately recorded slot/profile review.
+Do not restore dormant ULONG-native-pointer movers solely because x64 was
+retired; prove the single selected video provider and avoid duplicate routes.
+
+Required package regression: EGA mode/chain changes, byte/word/fill/move
+dispatch, dirty marking and BIOS text output, then native Console COMMAND/EDIT.
+Console presentation alternatives remain D09/D23/D28--D30/D34, outside these
+original raster bodies. No additional confirmed duplicate algorithm was found
+in this ten-file direct-diff pass; no rendering or compile test was run.
+
+### C-VID eight-file direct-diff disposition
+
+Re-read all eight base/cvidc differences (+63/-30). gdpvar.h adds one blank
+line; sevid019.c and sevid020.c remove trailing whitespace only. Their
+physical numstat rows are not generated-rule algorithm changes. j_c_lang.c
+adds stdio and j_c_lang.h declares the original CrulesRuntimeError provider.
+evidfunc.h replaces implicit declarations with four-IUH rule signatures;
+sevid001.c's SimpleMark and CGAMarkString bodies confirm that actual generated
+calling shape. evidgen.h types four callback forms formerly carried as IHP;
+cross-definition layout/signature consistency remains a profile requirement.
+
+ev_glue.c has the overlay binder call, stdio/stdlib declarations, wider outer
+BIOS-write arguments and host_malloc-to-malloc spelling. Selected host_def.h
+already defines host_malloc as malloc, so that last edit is redundant source
+footprint under this binding, not a second allocator or a proved allocator
+policy change. The binder is the already-accounted overlay family, not another
+duplicate counted at its mirror call site.
+
+The BIOS callback width change must not be declared wholly harmless from its
+type alone: former IU8/IU16 arguments narrowed before assigning jccc_parm2;
+new ULONG arguments assign that global before entering the chain2_evid rule.
+Do not infer narrowing from the function-pointer type. Check consumers of the argument carrier
+and actual caller values before restoring/narrowing this boundary. This is a
+specific unresolved ABI/dataflow check, not a newly found raster algorithm.
+
+Proposed disposition: remove whitespace/redundant spelling footprint in a
+coherent approved source cleanup; retain proven generated ABI declarations or
+move them to the smallest source-shaped declaration seam after compile proof;
+review binder/timing/slot semantics as one CCPU40/C-VID composition package.
+No speculative rule-body edits and no additional D count arise from this pass.
+
+#### BIOS argument-carrier follow-up
+
+The complete src reference search finds three callback invocation sites in
+video.c: word character/attribute assembled from BL/AL, byte AL, and teletype
+char ch assigned from AL. Other references are declarations or assignments.
+The teletype char can be signed depending on compiler configuration, so a
+blanket statement that every ULONG input has no high bits would be wrong.
+
+Followed the actual data carrier instead: j_c_lang.h maps jccc_parm2 to r3;
+chain2_evid[4] selects S_2696_Chain2ByteWrite_Copy and
+S_2699_Chain2WordWrite_Copy. Their sevid019.c rule entries read r3 as IU8 and
+IU16 respectively into local value storage. This supplies the missing
+low-byte/word extraction evidence for the selected copy-rule value, including
+a sign-extended teletype input. It is not a rendering test or proof about
+unrelated vector providers. The earlier suggestion that the call's C type
+necessarily narrows the value is withdrawn: cpu_vid.h's legacy EVID write
+declarations put the narrow type on the first argument, while these generated
+rules consume the register globals. Preserve the separately tracked generated
+ABI consistency check rather than inventing another CPU/raster repair.
+
+### Consolidated discussion index: confirmed owner overlap
+
+Stable discussion identifiers below consolidate verified findings in this
+document; they are not a claim that whole-project coverage is closed. A row
+may cover partial functionality, and is not a promise that its entire current
+file can be deleted. Detailed evidence and reachability limits in the named
+sections above/below remain controlling. All dispositions await owner approval.
+
+| ID | Functional unit and current carrier | Original owner | Discussion disposition |
+| --- | --- | --- | --- |
+| D01 | BaseSrv next-command policy, base_vdm_local.c | srvvdm.c:BaseSrvGetNextVDMCommand | Restore original queue/response policy; bind transport separately. |
+| D02 | PIF response, same | srvvdm.c:BaseSrvFillPifInfo | Restore capacity, title and output-field policy. |
+| D03 | First-VDM query, same | srvvdm.c:BaseSrvIsFirstVDM | Resolve global versus per-session cardinality explicitly. |
+| D04 | Current-directory set/get, same | srvvdm.c:BaseSrvSetVDMCurDirs/BaseSrvGetVDMCurDirs | Preserve consume-on-get and define locking/failure ownership. |
+| D05 | DOS task exit, same | srvvdm.c:BaseSrvExitDOSTask | Recover original lifecycle slice; ignored WOW exit is missing capability. |
+| D06 | Reentry accounting, same | srvvdm.c:BaseSrvSetReenterCount | Separate original accounting from local native-child scheduling. |
+| D07 | Client wait/retry/capture, base_vdm_client.c | BaseClient vdm.c:GetNextVDMCommand | Restore client result/copy semantics with bounded transport. |
+| D08 | Fast read, demfastio.c overlay | kernel vdm/x86/rdwr.c:NTFastDOSIO | Compare finite original service versus original slow fallback. |
+| D09 | Mouse-pointer visibility, console_compat.c | ntcon/server/private.c:SrvShowConsoleCursor | Current text-cursor substitution is not equivalent. |
+| D10 | Executable classification, mvdm_image_classification.c | BaseClient vdm.c:GetBinaryTypeW | Restore format classification, keep CLI search policy separate. |
+| D11 | Mutable environment blocks, opennt_support_rtl.c | ntos/rtl/environ.c | Restore original validation and block ownership. |
+| D12 | Status translation, same | ntos/rtl/error.c and tables | Restore complete mapping or verified native binding. |
+| D13 | Extended integer division, same | rtl/x86/largeint.asm | Remove signed/zero-divisor contract substitution. |
+| D14 | Extended integer multiplication, same | rtl/x86/largeint.asm | Preserve original overflow semantics; verify compiled binding. |
+| D15 | ULONG fill, same plus copy_fnc.c local loop | rtl/x86/movemem.asm | Resolve length units/tail contract without blind rollback. |
+| D16 | USER multibyte conversion, wow_public_user_facade.c | ntuser/rtl/chartran.c:MBToWCSEx | Restore ACP partial-conversion and allocation policy. |
+| D17 | Network font tracking, same | ntgdi/client/font.c | Restore original path/list policy through public allocation/GDI bindings. |
+| D18 | WOW glyph outline, same | ntgdi/client/dcquery.c, gre/ttgdi.cxx | Recover ignore-rotation compatibility, not public-A substitution alone. |
+| D19 | WOW cooperative scheduling, wow_private_user_compat.c | ntuser/kernel/taskman.c | Linked helper reachability unproven; avoid treating it as recovered scheduler. |
+| D20 | Cursor/icon DIB construction, same | ntuser/client/clres.c | Restore conversion/size/share policy without importing the USER server wholesale. |
+| D21 | VDM hard-error dialog, wow_hard_error_dialog.c | ntuser/server/harderr.c:DisplayVDMHardError | Restore decoding/default/cancel policy; isolate desktop/CSR mechanics. |
+| D22 | Debugger startup/dispatch/state, dbg_*.c | mvdm/dbg/dbg.c | Recover original finite policy; establish unavailable outgoing calls. |
+| D23 | Independent-window input records, presentation_window.c | ntcon/server/input.c | Preserve event-time modifiers/buttons; not native Console input. |
+| D24 | Character-to-key sequence, nt_event.c | ntcon/server/clipbrd.c:DoStringPaste | Partial overlap only; exclude clipboard-specific policy from packet adapter. |
+| D25 | Resource lookup/read, nt_unix.c/nt_rez.c and firmware adapter | original same-named MVDM resource owners | Move packaging boundary out of original algorithm where feasible. |
+| D26 | Redirector OEM copy, mvdm_redirector_guest_copy.c | netlib/copystr.c:NetpCopyWStrToStr | Original already mirrored; preserve byte-capacity contract. |
+| D27 | Inactive WOW callback stack carrier, mvdm_wow_task_frame.c | WOW CallBack16 TD stack branch | Inactive duplicate; removal must verify no non-fixture consumers. |
+| D28 | Return queued input, console_compat.c:WriteConsoleInputVDMW | ntcon/client/private.c and server/directio.c | Restore prepend ordering; public WriteConsoleInputW appends instead. |
+| D29 | Input read flags and reserved-key filtering, console_compat.c:ReadConsoleInputExW | ntcon/server/directio.c and input.c | Separate atomic NOWAIT/NOREMOVE behavior from Alt+Enter policy; preserve paired key events and Ctrl exclusion. |
+| D30 | Console keyboard-layout query, console_compat.c:GetConsoleKeyboardLayoutNameA | ntcon/server/getset.c | Caller-thread layout is not necessarily Console layout; resolve state ownership before replacement. |
+| D31 | DOS handle allocation, mvdm_vdd_sft_shadow.c and demfile.c wrappers | mvdm/dos/dem/demfile.c:GetFreeSftEntry/VDDAllocateDosHandle | Restore original selection/reservation and optional-output contract through bounded guest access. |
+| D32 | NT handle association, same | demfile.c:VDDAssociateNtHandle | Current shadow-only update changes exported API visibility; include modified WOW32 commit callers in restoration. |
+| D33 | DOS handle retrieval/release, same | demfile.c:VDDRetrieveNtHandle/VDDReleaseDosHandle | Restore field-scoped ownership; full snapshot writeback and partial commit are not original live-alias semantics. |
+| D34 | Graphics palette state, console_compat.c plus session/app presentation | ntcon/server/private.c:SrvSetConsolePalette | Partial replacement: RGB snapshot rendering does not retain original per-buffer palette ownership, usage or realization policy. Private desktop/system-palette operations remain a named boundary, not an import mandate. |
+| D35 | Protected/real transition frame interpretation, dpmi32/modesw.c | dpmi32/i386/dpmi386.c:switch_to_protected_mode/switch_to_real_mode | Source-derived repeated frame logic; retain original owner/layout while binding active CCPU state separately. Autonomous TSS/IDT construction is not established as this same original implementation. |
+| D36 | XMS block/memory movement, mvdm_xms_memory.c and xms.c | xmsMoveBlock plus xmsmemr.c/i386/xmsmem86.c move callbacks | Replace duplicated chunk-copy policy through source-shaped guest access; distinguish original copy and overlap-safe move contracts. |
+| D37 | DPMI allocator selection, dpmimemr.c | Original Vdm allocation call and SA fallback branches in the same file | Restore or explicitly justify changed provider-selection order. Original SA allocator remains reused; do not count a new allocation algorithm. |
+
+These 37 discussion rows are a verified subset, not the requested final total.
+D28--D33 consolidate the Console and DEM/VDD follow-ups above; optional output
+and commit failure are subcases, not extra duplicate algorithms. Console wait
+endpoints, registration facilities and internal memory/control changes
+still need disposition reconciliation. Public User32 leaf forwarding, explicitly
+unsupported operations and a changed wait handle are not automatically an
+independent reimplementation of the Console server. Pure diagnostics,
+unresolved-owner C-VID timing/physical mapping, same-body source carriers and
+necessary ABI declarations stay separate rather than inflating this table.
+
+### MVDM restoration-package boundaries for discussion
+
+These proposals consolidate existing direct-source findings; they authorize
+neither repairs nor new imports. Overlapping entries refer to the same D IDs,
+not extra duplicate counts.
+
+| Original owner package | Proposed source-first disposition | Required regression and unresolved boundary |
+| --- | --- | --- |
+| DEM/VDD | Restore original SFT/JFT selection, association and release policy (D31--D33) in DEM. Bind bounded guest memory underneath, and remove shadow-specific WOW caller changes together. | Allocation visibility, NULL optional outputs, retrieve/associate/release, full-JFT overwrite avoidance, partial commit failure, COMMAND/EDIT file operations and WOW file calls. A raw alias is not automatically safe merely because upstream used it. |
+| COMMAND native execution | Keep original cmdCreateProcess/task execution body. Isolate asynchronous input lifetime and native thread ABI, preserving original command terminators, environment, standard streams and failure order. | Native-child launch/wait/failure, BOP 54:08 reentry, environment/tail limits, three standard streams and parent/child return. Broker architecture is not this repair's prerequisite. |
+| DPMI transitions and allocation | Recover original transition frame policy (D35) with active CPU state binding; reconcile allocator selection (D37). Do not bless hard-coded TSS slots, inferred IDT, shared GDT/LDT backing, or guest TEB/PM-stack projections as original reuse. | Mode-entry/return, descriptors, interrupt stacks, allocation/free/reallocate, DOSX and WOW bootstrap. Kernel/guest initialization owner for the autonomous projections remains unresolved and must be discussed separately. |
+| XMS | Recover original move/copy policy (D36), choosing the correct original backend callback contract rather than keeping unconditional zeroing by default. | Overlap versus non-overlap, partial failures, commit/decommit meaning and memory retention, XMS consumers; original CCPU overwrite no-op is not a missing cache implementation. |
+| CCPU execution | Restore demonstrated mask-scope and reset-observation semantics after approval; keep atomic producer requirements separate from consumer ordering. Move selector-specific establishment to its proper owner rather than bypass generic checks in c_seg.c. | USE16 wrap, HLT/RESET consumption, PIC producer/acknowledgment ordering, descriptor validation and callbacks. These are mirror semantic changes, not proof that the original CCPU is broken. |
+| Redirector | Retain original network queue and service bodies; isolate encoding/copy changes (including D26) and replace or prove asynchronous buffer/teardown policy. | Actual completion before freeing I/O buffers, cancellation, guest copy publication, worker self-exit, native thread ABI, named pipes and OEM names. Original empty teardown cannot be restored without accounting for current session lifetime. |
+
+These rows intentionally preserve unresolved provenance as unresolved. They
+cannot be used as approval-ready kernel import lists or claims that every
+affected original translation unit has already been composed. Diagnostics,
+declaration casts and inactive fixtures remain distinct review categories.
+
+### Console palette consumer reconciliation
+
+Re-read console_compat.c:SetConsolePalette/console_video_event, session.c
+palette set/snapshot, app/presentation_window.c:presentation_event and
+presentation_paint, and original ntcon/server/private.c:SrvSetConsolePalette.
+The app event consumer only schedules repaint for palette events; it does not
+consume event flags or select/realize the supplied palette. Painting rebuilds
+an RGBQUAD table and calls SetDIBitsToDevice with DIB_RGB_COLORS. Thus the
+earlier unresolved question about downstream usage/lifetime policy is answered:
+this path retains copied RGB values, not original palette policy. The original
+owns per-screen-buffer hPalette/dwUsage, deletes a replaced palette, and performs
+desktop-sensitive selection and realization. Modern RGB presentation may need
+a different binding, but is not proof those original semantics were recovered.
+
+The event also carries palette_handle despite comments claiming the app never
+receives HPALETTE. The current app ignores that field; distinguish a stale or
+overbroad contract from demonstrated dereference or cross-process transport.
+The palette setter writes the session array without acquiring the graphics
+mutex used by snapshot readers. This is a synchronization gap if calls overlap,
+not evidence of an observed race in this read-only audit.
+
+Do not add a spurious orientation regression: the adapter accepts either sign
+of DIB height and the app paints top-down, but the reached original nt_graph.c
+graphicsResize caller itself supplies negative height and one plane. General
+positive-height support remains unproved; that does not show this caller paints
+upside down. No product or runtime changes were made for these findings.
+
+### Retained graph denominator reconciliation
+
+#### Unpaired printer carrier resolved
+
+The seven-path unpaired inventory is a manifest-coverage classification, not
+seven unknown algorithms. Read the complete kernel-vdm/v86/monitor/i386/
+monitor_printer.c and matched its three BOOLEAN function bodies to original
+OpenNT/base/mvdm/v86/monitor/i386/monitor.c. Upstream SHA-256 is
+80E97A535AE7760089B2EE9FAD8F6AE8202936240F7BC47C17227611AA0268B6,
+matching the carrier comment. Extraction from each BOOLEAN signature through
+its column-zero closing brace, normalizing CR only, yielded equal bodies:
+MonitorInitializePrinterInfo 1465 characters, MonitorEnablePrinterDirectAccess
+952, MonitorPrinterWriteData 334. The original intervening
+MonitorVddConnectPrinter function is not part of this carrier.
+
+Disposition: retained original MVDM fragments, not duplicated autonomous
+algorithms and not three new D rows. The new filename and kernel-vdm prefix
+do not preserve the original relative file shape; propose source-path/fragment
+registration reconciliation, not migration to non-MVDM opennt-host merely
+because the directory says kernel. The current build generator compiles the
+carrier and includes kernel-vdm-printer.lib in the process link rule. This
+establishes selection, not runtime printer acceptance.
+
+Read the included monitor_context.h and local NtVdmControl provider too:
+VdmTib is process-global, not a thread-local replacement. Direct-I/O close is
+rejected by the local provider (only VdmQueryDir is admitted there); the
+original caller ignores that result before clearing printer bookkeeping.
+The commented-out direct-I/O open call is already in upstream and must not
+be blamed on this import. Missing kernel service behavior is separate from
+the exactness of these retained bodies. No printer test or repair occurred.
+
+#### Canonical-path and inactive-adapter cross-check
+
+Comparing tracked adapter C paths with retained graph inputs requires resolving
+dot segments. r014 selects monitor/source/../mvdm_vdm_tib.c. A literal path
+comparison incorrectly listed it as unselected; GetFullPath relative to the
+repository root removes that false negative. Canonical union remains 505,
+so the numerical total alone would not reveal the membership mistake.
+
+The resulting unselected adapter C set has exactly four members for these
+two graphs: monitor/mvdm_wow_task_frame.c, monitor/source/host_idle.c,
+win32/source/mvdm_redirector_thread.c and win32/source/
+wow32_public_api_adapters.c. These are still in audit scope; unselected does
+not mean deletable without checking other supported targets. Task-frame
+fixture generators explicitly compile the first; the public USER duplicate
+and idle stub retain their previously recorded dispositions.
+
+Read the complete redirector-thread stub and its header. It discards all
+thread inputs, zeros an optional thread id and returns NULL with
+ERROR_CALL_NOT_IMPLEMENTED. The only include found under src/tools/tests is
+its own translation unit; no current caller there selects its CreateThread
+macro. Classify it as an inactive refusal scaffold, not an original threading
+algorithm or proof that active Redirector workers cannot start. Proposed
+cleanup may remove this obsolete source/header pair after supported build
+entrypoints are checked. No files were deleted or product selections changed.
+
+Re-extracted unique src inputs from cc/cc_* and rc rules in retained r014
+and r015 Ninja graphs: 505 total, comprising adapter 48, app 5, broker 3,
+MVDM 435, overlay 5, patch 1, opennt-host 6 and session 2. The six opennt-host
+inputs are client/vdm.c and NetAPI apibuff.c, allocstr.c, copystr.c, initoem.c,
+ntstatus.c. srvvdm.c is absent from these compile-input sets. This confirms
+the BaseSrv original-owner/selected-replacement distinction without counting
+the entire mirrored server as restored. Graph presence is not successful
+linkage, export use or runtime reachability; these are retained WIP graphs,
+not proof that the frozen accepted executable uses all 505 inputs.
+
+Coverage closure still requires joining the per-family findings to every
+inventoried provider and a consolidated disposition ledger. ABI directory
+pairing is complete; patch/header follow-ups above remove specific prior
+read gaps. They do not close CURRENT/S1 automatically or authorize S4/S5.
+Guest/firmware/tools retain their separately labelled load-only/independent
+scope from the all-root inventory; no silent expansion into guest rebuilding
+or exclusion of overlay bodies is made.
+
+### C-VID binding generator semantic reconciliation
+
+Re-read GenerateCvidcCpuBinding.mjs and the overlay vector-binding C body.
+The generator derives slot names from original metadata, but provider choices
+are locally authored. Duplicate object keys deliberately or accidentally
+overwrite earlier choices: ClearHwInt, InitIOS and six port-registration
+entries end as zero, as do private InitNanoCpu/PrepareBlocksToCompile.
+Other explicitly zeroed slots include status/control accessors. Thus the
+generated-file label does not mean original provider selection was recovered.
+Null slots still require per-profile reachability evidence; do not infer a
+current null-call crash solely from their presence.
+
+The overlay also supplies GetJumpCalibrateVal and GetJumpInitialVal from the
+same mutable value initially 100. Original accessfn.c forwards those as
+separate queries; qevnt.c accumulates CalibCount from the former at line 542.
+This is a locally authored timing approximation, not merely vector wiring.
+An available original calibration-provider body has not been established, so
+classify it as unproven replacement semantics rather than a confirmed
+deletable duplicate. Actual video binding remains Video = C_Video and the
+SAS overwrite slot uses the separately audited CPU40 provider. No generator
+was run, no build selection changed, and no timing acceptance was claimed.
+
+### Session termination thread-ownership check
+
+Checked session.c::session_arm_termination_escape/session_terminate_current,
+the two setjmp sites in mvdm_softpc_execution.c, and all three original-worker
+thunks in thread_start_compat.c. The session has one shared jmp_buf; worker
+thunks bind the same owner into their TLS. terminate_current checks active
+state and armed status but does not check that the calling thread established
+that setjmp. Therefore a bound secondary thread reaching this endpoint can
+attempt a cross-thread longjmp rather than the original process-wide exit.
+This is an ownership hole in the autonomous lifetime replacement; a concrete
+normal-workload path into that hole is not proven by the interface inspection.
+Do not claim the error-dialog worker or Console callback does so without
+checking its particular binding and branch. Unbound threads instead fail the
+session check and return, another reason this is not an ExitProcess-equivalent
+API. Group with the existing lifecycle restoration item; no new count for
+each thunk and no runtime failure attribution.
+
+### WOW cursor/icon original-owner follow-up
+
+Read current wow_private_user_create_legacy_dib_cursor_icon and its public
+wrapper, original clres.c::WowServerLoadCreateCursorIcon, and the complete
+ConvertDIBIcon body. Original WOW selects LR_SHARED and default system
+dimensions, adds LR_MONOCHROME for cursors, passes module/name identity into
+conversion and scales cursor hotspots to the chosen dimensions. The current
+legacy helper creates at resource dimensions with the original unscaled
+hotspot, using its own DIB parsing/GDI assembly; its successful resource path
+does not retain original shared-resource identity. Its parser only accepts a
+40-byte BITMAPINFOHEADER, one plane, uncompressed positive-height data and
+1--8 bits per pixel; icon fallback is distinct from the cursor failure path.
+
+This confirms substantial duplicate conversion/assembly policy rather than
+a pure public-API rename. Restoring policy does not imply importing private
+CreateIcoCur object management wholesale. Original ConvertDIBBitmap's complete
+format coverage is not proven by this follow-up, and the previously recorded
+unproven callback reachability remains: a linked helper is not necessarily an
+active current WOW path. No cursor, icon, window or guest was created.
+
+### WOW MBToWCSEx original contract follow-up
+
+Read original ntuser/rtl/chartran.c::MBToWCSEx completely and the full
+ntos/rtl/nlsxlat.c::RtlMultiByteToUnicodeN body, alongside the current facade.
+Original ACP conversion deliberately stops at output capacity and returns the
+actual converted count: the RTL routine caps its loop and returns SUCCESS.
+Current facade routes ACP through MultiByteToWideChar with the full input
+length instead, losing that source-visible partial-conversion policy. Keep
+this as a concrete difference within the already counted conversion family,
+not another duplicate count. Non-ACP user-mode original conversion already
+uses MultiByteToWideChar and should not be described as newly invented.
+
+Original allocation failure assigns NULL to the caller output before return;
+the replacement allocates into a temporary and leaves the prior output
+unchanged on allocation failure. Conversely, freeing an allocated buffer after
+conversion failure without clearing the published pointer occurs in both
+versions: do not attribute that behavior solely to the adapter. Restoration
+can retain original branching and allocation ownership through a bounded
+binding; no build or runtime equivalence has yet been demonstrated.
+
+### Mirror keyboard normalization and control-event boundary
+
+Original-owner follow-up: fully read OpenNT
+windows/core/ntcon/server/clipbrd.c::DoStringPaste and input.c::GetControlKeyState.
+DoStringPaste already converts Unicode characters to console key sequences
+using VkKeyScan, modifier transitions and paired key records. It handles AltGr
+with enhanced right-Alt/control state and unmappable characters with an OEM
+numeric-keypad sequence. Current nt_rdp_normalize_key has a different modern
+packet entry but independently implements the overlapping character-to-key
+algorithm; its all-left modifier synthesis and dropping unmappable input do
+not preserve those policies. Classify this portion as confirmed functional
+overlap with an original owner, not an exact duplicate of the whole paste
+operation. Clipboard chunking, CR/LF filtering and Console output-code-page
+ownership are not automatically appropriate for the modern packet adapter.
+No wholesale replacement is proposed without separating those boundaries.
+
+GetControlKeyState explicitly reads left/right modifier and toggle states,
+supporting the previously recorded independent-window input gap. It is not
+proof that polling current key state after a queued event preserves the event's
+original state; a restoration must retain the event-time contract. No runtime
+test or keyboard repair was performed.
+
+Re-read the complete nt_event.c diff. DIV-211 adds four static functions that
+map missing scan codes from virtual keys or UTF-16, synthesize modifier/key
+make-break sequences, and change raw reads from five records to one with an
+eight-record expansion buffer. Existing scan-bearing records pass through.
+The packet synthesis zeroes control state except ENHANCED_KEY and forces
+repeat count one; surrogate input and characters unmappable by VkKeyScanExW
+are dropped. pending_high_surrogate is stored/reset but never combined into
+a codepoint. This is an autonomous keyboard-normalization policy inside the
+mirror, not just an API declaration. Original KeyMsgToKeyCode and keyba.c
+still own subsequent translation/controller behavior. Do not count the new
+normalizer as replacement of the whole original keyboard or as proof of the
+historical mouse false-click cause. Its corresponding original Console input
+owner remains a required comparison before a restoration decision.
+
+Separately, CntrlHandler replaces ExitProcess with session termination and
+returns FALSE. This joins the existing lifetime audit, not the keyboard
+normalizer count. Added scalar mouse/key observers and event-thread join
+bindings are likewise separate from input semantics. All findings are static;
+no Console input, guest run or product edit was performed.
+
+### Resource, media and idle mirror reconciliation
+
+Re-read all paired hunks for nt_rez.c, nt_unix.c and nt_msscs.c. In nt_rez.c,
+host_read_resource now returns the embedded-ROM helper result immediately for
+ROMS_REZ_ID, bypassing the original file route even when the helper fails or
+the name is not one of its three recognized ROM names. The helper implements
+FindResource/LoadResource/copy locally inside the mirror. This is a packaging
+boundary replacement of the original resource-read route, not an additional
+CPU implementation; group it with resource lookup. The write retry also uses
+the resolved path instead of the original bare filename, a separate path
+policy change that must not be hidden under declaration-only edits.
+
+nt_unix.c replaces the original GetSystemDirectory/FindFirstFile policy with
+the firmware adapter while retaining the failure switch. Its HostIdleNoActivity
+also changes a NowWaiting-conditional PulseEvent into an IdleEvent-nonnull
+SetEvent. A pending wake can therefore survive until a later wait; this is an
+intentional semantic change, not proof that the old and new event contracts
+are identical. Record it with worker-idle behavior, without asserting a fault.
+
+nt_msscs.c's suppression of real-host IO.SYS/MSDOS.SYS marker creation is an
+explicit standalone non-intrusion policy, not a missing guest DOS algorithm
+to restore blindly. Missing installable-VDD registry state becomes NONE;
+other failures retain the error route. CPU_40_STYLE selects the original
+software-CPU virtual-interrupt bit branch instead of using host i386 as the
+machine selector. Separate that CCPU profile binding from the autonomous
+resource and idle policies. No product edits or runtime acceptance claims.
 
 ### Mirror-local copy and heartbeat semantic changes
 

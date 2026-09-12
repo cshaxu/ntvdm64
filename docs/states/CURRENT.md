@@ -2,30 +2,39 @@
 
 ## Current Work
 
-**Active: M0 T405 S1**
+**Active: M0 T405 S2**
 
 ## Active Packet
 
-### M0 T405 S1 — audit baseline and coverage inventory
+### M0 T405 S2 — MVDM diff, overlay and patch audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T405 S1, Ordinary Mode with one agent acting sequentially as executor and reviewer. Only S1 is active. |
+| Identifier Mode | M0 T405 S2, Ordinary Mode with one agent acting sequentially as executor and reviewer. Only S2 is active. |
 | Admission And Approval | Owner on 2026-09-12 admitted the audit-and-restoration T and subsequently required owner approval of audit findings before repairs. Audit proceeds now; restoration remains in this T but is gated on that approval. |
 | Candidate Proposal | [OpenNT source-diff audit and restoration](../proposals/proposal-opennt-source-diff-audit-001.md). |
-| Objective | Freeze source and runtime identities, establish reproducible audit coverage and counting rules, and assign every in-scope provider family to the MVDM or non-MVDM audit. |
-| Non-goals | S1 does not change product behavior, build selection or guest media; no source restoration, broker implementation or claim of WRITE recovery. |
+| Objective | Reconcile every MVDM internal diff, overlay and adopted patch with its original owner, current selection, changed semantics and proposed disposition; include working COMMAND/EDIT paths and inactive carriers. |
+| Non-goals | No product behavior, build-selection or guest-media change; no source restoration, broker implementation or WRITE recovery claim. S3 will consolidate non-MVDM findings, then stop for owner discussion before repairs. |
 | Reference Baseline | Repository `3d127962c82133cb6adad50f52733250bac5f11a`, including the explicitly unaccepted snapshot `1daff0ace`; [T404 closure](../history/m0-t404-owner-directed-closure.md). Runtime identity must be observed separately, not inferred from HEAD. |
-| Files And ABI Surface | Status/Queue, indexed [S-stage plan](../etc/operations/m0-t405-audit-restoration-plan.md), [S1 evidence](../etc/evidence/m0-t405-s1-audit-baseline-001.md), existing source/provenance/build ledgers and bounded audit tooling if needed. No production ABI change. |
+| Files And ABI Surface | Status, indexed [S-stage plan](../etc/operations/m0-t405-audit-restoration-plan.md), [S1 conclusion](../etc/evidence/m0-t405-s1-audit-baseline-001.md#s1-bounded-conclusion-and-reviewer-handoff), [semantic audit](../etc/evidence/opennt-replacement-audit-20260912.md), provenance/build ledgers and bounded audit tooling. Source and external comparisons are read-only; no production ABI change. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), [documents](../rules/DOCUMENT.md), and [source policy](../etc/operations/policy/source-policy.md). |
 | Verification | Git identity/status; selected upstream provenance and hashes; manifest-to-build coverage checks; separate source/overlay/replacement counts; documentation governance, relative links and diff checks. This static S has no machine-execution acceptance row. |
-| Expected Markers | Frozen comparison inputs, explicit unpaired/inactive entries, a reproducible coverage denominator, counting definitions and original-owner audit assignments. |
+| Expected Markers | Per-owner coverage and original paths, explicit duplicate/binding/diagnostic/inactive distinctions, missing interfaces, semantic risks and affected regression requirements. |
 | Asset Needs | Existing selected OpenNT/OpenNT-4.5 sources, retained mirrors, ledgers, build graphs and runtime hashes; external inputs are read-only. No new media or runtime dependency. |
 | Reporting Requirements | Separate MVDM/non-MVDM and accepted/WIP identities; report functional units, files and physical added/deleted lines separately; document unknown provenance and coverage rather than estimating a hack total. |
 | Stop Conditions | Ambiguous provenance is recorded as unresolved and independent audit continues. A destructive baseline change, new external source/runtime, or expanded architecture boundary needs owner direction; missing evidence never authorizes a speculative repair. |
-| Exit Criteria | Auditable complete in-scope inventory and baseline/measurement rules ready for S2/S3, with governance and link checks passing. Admission/plan delivery alone does not close S1. |
+| Exit Criteria | Every in-scope MVDM diff/overlay/patch family has reviewed coverage and disposition, with original-owner and limitation evidence ready to join S3. No repair before owner approval of the combined audit. |
 | Original Owner Request | “准入该T任务，开始进行审计。先作任务切分：S”; the task includes audit followed by implementation. |
 | Similar-Issue Sweep | Mirror-internal special cases, overlays, adapters, app/session replacements, SoftPC patches, declarations, diagnostics and inactive providers, including successful COMMAND/EDIT paths. |
+
+## S1 Closure Record
+
+T405 S1 reached its bounded inventory conclusion in the
+[reviewed baseline evidence](../etc/evidence/m0-t405-s1-audit-baseline-001.md):
+5043 tracked inputs, separate source/body counts, resolved unpaired identities
+and reproducible retained-graph membership. Its documentation delivery remains
+pending; prior push was unavailable, and no fully delivered P is claimed.
+S2 continues within the already admitted T, without broadening repair authority.
 
 ## Predecessor
 

@@ -198,3 +198,82 @@ Remaining S1 work includes exact ABI/source provenance, generated-header
 dependencies and current graph linkage per inventoried provider. The raw
 inventory explicitly labels build selection unestablished; physical coverage
 alone is not final S1 acceptance or the requested full semantic audit.
+
+## Unpaired-path reconciliation update
+
+Resolved all seven paths previously unpaired to the two selected manifests:
+README.md is project documentation; monitor_printer.c is a three-function
+original-source extraction, with matching upstream hash and body comparisons
+recorded in the [semantic audit](opennt-replacement-audit-20260912.md#unpaired-printer-carrier-resolved).
+The other five paths are byte-identical to the corresponding paths beneath
+O:/repos.external/opennt-src-2/nt/private/mvdm:
+
+| Host-relative path | Bytes | Source and current SHA-256 |
+| --- | --- | --- |
+| oemuni/obj/_objects.mac | 434 | C5E265B9B66971949E40567D55727EB923A2C53DE9AACB529DF24C03D563F79F |
+| oemuni/obj/i386/file.obj | 44649 | CB04F400411340CD0FF44719D4EEDAB4E550522D8412A89FA92A79F0F61DC3F2 |
+| oemuni/obj/i386/process.obj | 35587 | B2704B0AF5387F717011E90E592957FF6061219C392260957EBC842BBD5B870E |
+| suballoc/obj/_objects.mac | 306 | D4BB0B4F285AA32979F67755665BE35DCC17C7BDD7A0CCAA968A5CA72DC89D9D |
+| suballoc/obj/i386/suballoc.obj | 23800 | 92B4E62C7AB84E413B4590EA3148B87804CD675D8D6CBC85DFFB74EDBD2801B9 |
+
+Procedure: compare each explicit path with Get-FileHash; inspect Git path
+history (d0a9204c7 re-root), original sources files, generator object/library
+rules and retained r014/r015 graphs. The generator compiles file.c/process.c
+and suballoc.c to build-local objects; neither retained graph references
+these historical obj-directory paths. They are retained historical build
+carriers, not selected object-code replacements. Hash equality proves source
+identity, not independently the original import authorization or runtime
+acceptance. This resolves the unpaired identity list without changing the
+raw manifest-based inventory or promoting supplementary objects to inputs.
+
+Reviewer result: do not count these five exact historical files or the three
+exact printer bodies as autonomous duplicate algorithms. Remaining S1 closure
+work is provider-selection/coverage reconciliation, not rediscovery of these
+seven paths. Detailed semantic findings still require the combined S2/S3
+owner review before any repair.
+
+## Reproducible retained-graph membership join
+
+Added tools/audit/Join-OpenNtRetainedGraphCoverage.ps1. It verifies all 5043
+inventory hashes and tracked membership before joining the two retained
+r014/r015 graphs. Absolute paths are canonicalized, including source/../
+segments and Ninja's escaped drive colon. Unsupported compile-input syntax
+fails rather than silently dropping a row. Graph hashes and each matched
+compile rule/line are retained beside the joined coverage CSV under
+build/M0-T405/S1/graph-coverage-002. The inventory itself is not overwritten.
+
+Two runs produced byte-identical coverage.csv: 508 compile edges, 505 unique
+selected paths (adapter 48, app 5, broker 3, MVDM 435, overlay 5, patch 1,
+opennt-host 6, session 2). The source/../mvdm_vdm_tib.c path is correctly
+selected. Four adapter C files remain unselected in this graph union, as
+recorded in the semantic audit. Out-of-build and existing-output rejection
+checks both passed without creating or overwriting output.
+
+This closes reproducibility of retained compile membership, not present-day
+link reachability: these graphs are historical observations, and headers,
+generated carriers, link-time extraction and runtime identities are separate
+evidence. The output explicitly labels non-translation-unit rows rather than
+claiming unselected headers are unused. No compiler or guest was executed.
+
+## S1 bounded conclusion and reviewer handoff
+
+S1's inventory/baseline objective is concluded. Its original pending statements
+above describe intermediate evidence, not the remaining S1 state. Requirements
+are reconciled as follows:
+
+| S1 requirement | Evidence and limitation |
+| --- | --- |
+| Frozen source and runtime | Source remains identical to 3d127962c under src (git diff --name-only empty); deployed SHA-256 rechecked and unchanged. WIP is explicitly unaccepted. |
+| Complete membership and measurement rules | 5043 unique tracked paths, source hashes, root assignments and separate paired diff/body counts; current membership/hash verification passes. |
+| Selected-source mapping and exceptions | Topology/supplement hashes and 104 absent-path dispositions accounted for; seven unpaired identities resolved above. ABI directory pairing covers all 209 files in the linked semantic audit. |
+| Build-selection distinction | Reproducible canonical-path join: 505 selected paths, 508 edges. Non-selected and non-translation-unit labels explicit. Actual link/runtime reachability is not inferred from retained graphs. |
+| Overlay/patch/generated carriers | All physical files inventoried and source/body counts separated. Detailed ABI-layout and generated-provider correctness are S2/S3 semantic review, not presumed from this inventory. |
+| Audit assignments and unresolved inputs | Every root has an assignment. MVDM versus non-MVDM ownership is resolved per behavior during S2/S3, including mixed adapters and inactive bodies; unknown semantic provenance is retained explicitly, not excluded. |
+
+The remaining per-provider original-owner, outgoing-boundary, link-reachability
+and restoration-disposition reconciliation belongs to the already planned S2/S3
+audit. No source or runtime acceptance is claimed by closing this inventory
+stage. Documentation governance and diff checks passed. Local review/delivery
+is still pending; prior push was unavailable, so no fully delivered P is claimed.
+The existing detailed findings are preliminary audit evidence to review in
+sequence, not evidence that S2/S3 were silently activated or closed.
