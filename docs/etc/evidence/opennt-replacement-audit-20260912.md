@@ -407,7 +407,38 @@ array reads on that path. This is negative evidence alongside the confirmed
 parser-contract change. No product code was modified and cmdexec.c direct
 diff coverage does not close the command adapter family.
 
-## Full-project work remaining
+## T405 command process adapter follow-up
+
+Read complete win32/source/command_process_compat.c. Its implementation is
+not limited to standard-handle forwarding:
+
+- A local parser recognizes an exact environment COMSPEC path followed by
+  /c and extracts the tail. Quoted executable names and whitespace are parsed
+  autonomously. Every recognized tail is relaunched as the current product
+  executable, not handed to the original shell process.
+- This is an app/shell launch-routing policy embedded in the Win32 adapter.
+  Compare original COMMAND-to-shell and BaseClient process classification
+  as distinct owners; no direct replacement body has yet been established
+  for the complete local routing policy.
+- The static simple_shell_tail helper checks metacharacters but has no call
+  site in this translation unit. It therefore does not restrict actual
+  interception of pipes, redirection or compound commands. App-entry fallback
+  must be examined before claiming those commands work or recurse.
+- On the intercepted path, application_name is not passed onward: launch
+  constructs a new command line and calls CreateProcessA with NULL application.
+  The observed original cmdCreateProcess call uses NULL, so this is a broader
+  adapter-contract limitation, not proof of a currently reached failure.
+- TLS handle overrides force STARTF_USESTDHANDLES for all three streams if
+  any one is overridden. The flags are never cleared in this file; restoring
+  a handle value also marks it overridden. Compare per-worker thread lifetime
+  and original process-stream inheritance before deciding equivalence.
+
+Reviewer confirmed the apparent simple-tail gate is unused and that standard
+handle restoration does not reset override flags. These source facts do not
+prove a product launch loop. The routing and stream policies should be
+discussed separately from the justified cdecl thread ABI bridge. No repair.
+
+## Remaining full-scope audit
 
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
