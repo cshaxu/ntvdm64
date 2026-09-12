@@ -242,7 +242,31 @@ Reviewer checked actual table-base assignments and frame offsets rather than
 accepting comments about what native NT allegedly inherited. No repair or
 additional OpenNT import was performed.
 
-## Remaining audit scope
+## T405 dpmi32 changed-file coverage
+
+All 13 text-different dpmi32 files in the paired inventory have now had their
+complete diffs read. This is direct-hunk coverage, not full closure of the
+called kernel/adapter providers. modesw.c findings are above; remaining files:
+
+| Files / unit | Source-level classification and follow-up |
+| --- | --- |
+| dpmiint.c hardware interrupt guard | New SEGMENT_IS_PRESENT check precedes even the real-mode reflection branch. dpmi32p.h defines this macro against mutable Ldt, whereas CPU tables and DpmiEmulateInstruction use Cpu40LdtShadowAddress. Therefore the new guard's present decision can disagree with the executed descriptor image. Test publication followed by source-table reuse; do not claim that scenario has already been observed. |
+| dpmiint.c PM stack publication | Allocates and zeros a guest VDM_DPMIINFO projection and publishes its address instead of original VdmTib.PmStackInfo. This is another autonomous state carrier. DPMI's LockedPMStackCount and related host state remain separate; shared field synchronization and DOSX writes must be traced before asserting lifecycle equivalence. |
+| dpmiint.c instruction emulation | Adds null-alias rejection and selects shadow-table Default_Big instead of original Ldt. Original emulation body remains; the table-selection policy differs from the new IRQ guard in the same file. |
+| dpmiint.c / dpmiint.h hook selection | Broadens original non-i386 fault/software/hardware-hook composition to CPU_40_STYLE. This reuses original handlers, not a newly invented handler algorithm. Additional fault-frame/registration observations are diagnostics. |
+| dpmimemr.c | CPU40 allocation/free/reallocation directly invoke existing SAAllocate/SAFree/SAReallocate, bypassing original Vdm* calls and STATUS_NOT_IMPLEMENTED fallback decision. Query still calls VdmQueryFreeVirtualMemory before overwriting results with SAQueryFree. Confirmed duplicated provider-selection policy, but not a rewritten allocation algorithm. Compare the actual Vdm allocator owner before choosing restoration. |
+| dpmi32.c / dpmiselr.c | Shadow allocation/publication, IDT inference and TEB projection described above; remaining deltas are observations and native-pointer carriers. Publication writes copied descriptors to the shadow in addition to original FlatAddress bookkeeping. |
+| data.c / dpmi32p.h / dpmidata.h | Storage/declarations for the new guest projections, native-width host addresses, CPU40 transition dispatch and conditional LDT declaration. Not separate counted functional duplicates. |
+| buffer.c / int21map.c / xlathlp.h | Pointer-width/range-conversion changes, with original DOS/DPMI behavior bodies retained. Audit selected x86 type equivalence and compilation before deciding footprint-only restoration. |
+| xmem.c | Only an added diagnostic header in the paired diff; no new XMS algorithm in this file. |
+
+Reviewer distinguished the original SA fallback body from the added early
+selection branches, and checked SEGMENT_IS_PRESENT's actual macro rather
+than inferring it used the current CPU shadow. No product changes or guest
+execution were performed. None of these bounded conclusions constitutes the
+requested all-MVDM/non-MVDM audit completion.
+
+## Remaining full-project audit scope
 
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
