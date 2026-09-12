@@ -470,7 +470,36 @@ the original block-copy entry from the allocator's move callback. No original
 overlap guarantee is invented and no observed XMS failure is claimed. No
 product changes; downstream callback equivalence remains open.
 
-## Remaining full-project scope
+## T405 XMS callback original-owner verification
+
+Read complete original xmsmemr.c and i386/xmsmem86.c. Original x86 commit
+and decommit call NtAllocateVirtualMemory(MEM_COMMIT) and
+NtFreeVirtualMemory(MEM_DECOMMIT), respectively. Original RISC callbacks
+delegate to sas_manage_xms with operation 1/2. Both original move callbacks
+use RtlMoveMemory; the RISC one additionally notifies sas_overwrite_memory.
+
+Followed the selected CPU40 providers: host/src/stubs.c:sas_manage_xms
+prints a diagnostic and returns TRUE without allocation/zeroing; the original
+CCPU c_sas_overwrite_memory body explicitly does nothing. Therefore:
+
+- The missing explicit overwrite notification is not evidence of a CCPU
+  compiled-cache defect. Preserve the API boundary if restoring original
+  source, but do not invent a missing functional cache operation.
+- The adapter's unconditional range-zeroing is not equivalent to the RISC
+  CPU40 stub and cannot be justified simply as restoring that source body.
+  Whether allocator clients require stronger guarantees needs a separate
+  contract decision. Native x86 commit/decommit uses a different backend.
+- Current main generator names the adapter implementation. The
+  MVDM_XMS_SESSION_BACKEND macro is explicitly defined in the older bounded
+  New-T287OriginalXmsStaticNinja script; its presence must not be inferred in
+  the main build merely from the new xms.c conditional.
+
+Reviewer distinguishes original callback implementation from the semantic
+requirements of the complete allocator. These checks narrow the earlier
+unknowns without asserting a safe whole-file deletion. No runtime or source
+repair was performed.
+
+## Remaining project audit
 
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
