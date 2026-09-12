@@ -2,7 +2,8 @@
 
 This is the authoritative ordered queue of **unnumbered candidate T packages**.
 Implementation activation is on hold by owner direction pending the
-original-owner replacement audit; the candidate order below is unchanged.
+admission of the original-owner audit-and-restoration candidate; its scope
+includes implementing the source-proven repairs after audit.
 A candidate receives its next global `T` number only when the owner admits it
 to [STATUS.md](CURRENT.md). The active SoftPC package is deliberately
 absent: its live scope and progress belong only to Status.
@@ -58,7 +59,7 @@ architecture-neutral source constraints, but x64 compile/link is not a gate for
 this current SoftPC recovery sequence. Bochs is retired and is neither a
 production route nor an acceptance row.
 
-**Dependency-first activation rule:** after the source-diff audit, execute the earliest runtime candidate's frozen
+**Dependency-first activation rule:** after source-diff audit and restoration, execute the earliest runtime candidate's frozen
 runtime workload. If evidence proves that a named original owner component is
 not in the formal graph and is the immediate blocker, insert that component's
 complete source/binding/formal-link/runtime closure immediately before all
@@ -67,7 +68,7 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Next order | Candidate implementation package | Proposal |
 | --- | --- | --- |
-| 1 | OpenNT MVDM and non-MVDM source-diff audit — include mirror, overlay and autonomous replacements across COMMAND/EDIT/WOW paths; count functional units, files and added/deleted lines separately and produce an original-owner restoration ledger. Read-only; no repair admission. | [Proposal](../proposals/proposal-opennt-source-diff-audit-001.md) |
+| 1 | OpenNT MVDM and non-MVDM source-diff audit and restoration — audit mirror, overlay and autonomous replacements across COMMAND/EDIT/WOW paths, then restore source-proven original implementations and remove superseded code. Report before/after functional-unit, file and added/deleted-line counts; verify builds and runtime regressions, commit/push and leave a clean worktree. | [Proposal](../proposals/proposal-opennt-source-diff-audit-001.md) |
 | 2 | Single-process WOW16 application lifecycle recovery — before broker work, recover the immediate original owner that keeps the selected `WRITE.EXE` workload at its source-owned low-memory dialog. Prove a bounded Win16 workload's original start/return path in one x86 worker, or record the exact source-proven unavailable boundary. It cannot substitute guest/UI failure policy, a private USER/CSRSS shell, CPU tracing, or cross-process transport. | [Proposal](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md) |
 | 3 | Cross-process broker closure — only after the WOW16 candidate's applicable single-process owner contract closes, recover required BaseSrv-style registration, command-queue, notification and disconnect-cleanup semantics through public IPC, and prove the selected brokered lifecycle rows. It cannot own guest, COMMAND, SoftPC or WOW behavior. | [Proposal](../proposals/proposal-cross-process-broker-closure-001.md) |
 | 4 | Multi-process matrix and product release — prove the brokered multi-process x86-worker profile, the cross-owner DOS/Win16 compatibility matrix, portable media layout and release packaging. Host x64 Windows is an x86-worker acceptance platform, not a native-x64 worker requirement. | [Proposal](../proposals/proposal-multiprocess-release-matrix-001.md) |

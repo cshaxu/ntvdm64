@@ -1,11 +1,14 @@
-# OpenNT MVDM and non-MVDM source-diff audit
+# OpenNT MVDM and non-MVDM source-diff audit and restoration
 
 ## Objective
 
 Audit all current OpenNT-derived host behavior and autonomous replacements,
-including working COMMAND and EDIT paths. Identify where original OpenNT
-implementation can replace project code without changing its observable
-contract. This candidate is first in the queue; it is not implementation
+including working COMMAND and EDIT paths, then implement source-proven
+restoration of original OpenNT behavior and remove superseded autonomous
+implementations. Audit and repair are phases of this same candidate, not
+separate optional tasks. Preserve original observable contracts through the
+smallest necessary modern bindings. This candidate is first in the queue;
+its registration is not implementation
 admission and has no allocated numeric task.
 
 ## Scope and baselines
@@ -42,10 +45,28 @@ superseded code, and COMMAND/EDIT/WRITE regression requirements. Kernel-origin
 logic is not automatically excluded: assess finite semantic reuse under the
 source policy and place accepted non-MVDM owners in `opennt-host`.
 
+## Implementation and verification
+
+After the source-owner and outgoing-boundary audit, implement each justified
+restoration in its original mirror, bind only unavailable interfaces, and
+delete the superseded replacement and obsolete build selection. Do not leave
+parallel providers or relabel autonomous code as original source. Once this
+candidate is admitted, in-scope source-proven repairs do not require a second
+task admission merely because the audit phase has finished.
+
+Verify fresh Win32/x86 CCPU40 builds, focused positive/negative boundary
+tests, COMMAND/EDIT keyboard and mouse regressions, and the recorded WRITE
+frontier. Report before/after MVDM and non-MVDM diff/overlay counts, actual
+restorations, retained bindings and exact unresolved boundaries. Preserve
+provenance and original error behavior; a successful build alone is not
+runtime acceptance. Commit/push reviewed deliveries and finish with a clean
+Git worktree. Builds and logs follow the existing output-location rules.
+
 ## Non-goals and exit evidence
 
-No source repair, guest modification, new compatibility provider or broker
-implementation during this audit. Existing successful runs are regression
-baselines, not source-fidelity exemptions. Completion requires a reproducible
-coverage inventory and owner-by-owner findings, not only the initial seven
-grouped findings. Replacement implementation follows owner review.
+No new broker architecture, speculative guest/CPU patch, or invented
+compatibility provider. Existing successful runs are regression baselines,
+not source-fidelity exemptions. Completion requires reproducible coverage,
+implemented source-proven restorations and regression evidence, not merely
+an audit report or the initial seven findings. Any unrestorable boundary
+must carry explicit evidence and disposition rather than silent omission.
