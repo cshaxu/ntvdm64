@@ -369,7 +369,45 @@ require coherent original memory-boundary review. Neither text-diff coverage
 nor absence of a newly spotted algorithm proves complete semantic equivalence.
 No production file was modified.
 
-## Full-project completion still pending
+## T405 COMMAND native-child follow-up
+
+Read complete cmdexec.c diff and targeted native-child capture/activation
+helpers plus command_process_compat.h. Original cmdCreateProcess still owns
+conversion, process creation, wait, exit and reentry flow, but macros redirect
+CreateThread, SetStdHandle and CreateProcess to adapters. Familiar source
+spelling is therefore not proof the original endpoints execute.
+
+- DIV-196 copies command/environment/standard handles into session state
+  before the detached worker. This is a new ownership mechanism around the
+  original worker, not a new worker body. Yet copy_guest_command duplicates
+  parsing policy: it accepts NUL as well as CR, while original cmdExec scans
+  specifically for CR within 124 bytes and otherwise returns BAD_FORMAT.
+  Capture failure now returns INVALID_ADDRESS for multiple failure causes.
+- The helper preserves the original CR-to-NUL guest write; it is not a
+  read-only snapshot. Environment capture and activation lifetime remain
+  transitive audit work. activate returns the stored command/environment
+  after checking non-null inputs rather than using their contents.
+- DIV-197 calls local BaseSrv child-begin/cancel around thread creation.
+  This is the pending/reentry policy already counted in the BaseSrv family,
+  not a second independent scheduler finding.
+- DIV-149 substitutes child-local STARTUPINFO standard-handle state for the
+  original process-global SetStdHandle sequence. Compare complete adapter
+  implementation and inherited-handle behavior before judging equivalence.
+- cmdCheckBinary retains original classification and command.com /z rewrite,
+  but rewrites SCS fields through a snapshot with explicit commit. Registers
+  are updated before final commit succeeds; failure consistency must be
+  examined with the caller, not inferred from preserved copy order.
+- cmdReturnExitCode resolves redirection state through the adapter instead
+  of casting the original BX:CX process address. Follow identity lifetime
+  and final copy ownership together with redirection implementation.
+
+Reviewer checked std_handles helper zeroes all three outputs even on failure;
+the local worker's subsequent accesses must not be reported as uninitialized
+array reads on that path. This is negative evidence alongside the confirmed
+parser-contract change. No product code was modified and cmdexec.c direct
+diff coverage does not close the command adapter family.
+
+## Full-project work remaining
 
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
