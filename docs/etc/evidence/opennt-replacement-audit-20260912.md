@@ -594,6 +594,175 @@ ABI verification or full-task completion.
 
 ## Full audit still pending
 
+### BaseClient retained environment bodies
+
+Compared all three current opennt-host/base/win32/client/vdm.c environment
+functions with original OpenNT base/win32/client/vdm.c lines 3022--3286.
+BaseCreateVDMEnvironment, BaseDestroyVDMEnvironment and BaseGetEnvNameType_U
+retain the inspected original branches, path-shortening policy, arithmetic,
+conversion order and cleanup. The large deletion count is mostly removal of
+other functions and comments, not a newly authored replacement environment
+algorithm. Local header/type/tag and BaseSetLastNTError bindings are separate
+composition differences. The downstream RTL replacements previously recorded
+still change the composed behavior; original caller-body retention does not
+prove whole-call-chain equivalence. No build or runtime acceptance claimed.
+
+### Consolidated additional replacement candidates
+
+This table consolidates source comparisons performed after the initial seven
+rows. It is a discussion index, not a final total or repair authorization.
+Paths below are relative to src unless explicitly identified as upstream.
+Product-source files remained unchanged during these comparisons.
+
+| Functional family | Current provider | Original OpenNT owner | Classification and evidence limit |
+| --- | --- | --- | --- |
+| Image classification | adapter-mvdm-host-out/basesrv/source/mvdm_image_classification.c | base/win32/client/vdm.c:GetBinaryTypeW, plus image-section validation | Own MZ/NE/PE probe precedes the system query: all NE becomes Win16, two-byte PE becomes native. Original distinguishes OS/2 and Win16 and rejects DLL images. Restore classification contract, retaining separately justified CLI search policy. |
+| RTL environment blocks | win32/source/opennt_support_rtl.c | base/ntos/rtl/environ.c | Reimplemented mutation, allocation and validation. See detailed comparison below. |
+| RTL error translation | same | base/ntos/rtl/error.c and translation tables | Three special cases replace table-driven mapping and special status handling. Original owner restoration candidate. |
+| USER string conversion | win32/source/wow_public_user_facade.c:MBToWCSEx | windows/core/ntuser/rtl/chartran.c | Rehost of original conversion/allocation contract; original ACP RTL branch is bypassed. Buffer-short behavior needs focused comparison. |
+| Network font tracking | same:AddFontResourceTracking/RemoveFontResourceTracking/UnloadNetworkFonts | windows/core/ntgdi/client/font.c | Duplicate task/path/count list, with changed path classification; detailed comparison below. |
+| WOW glyph outline | same:GetGlyphOutlineWow | windows/core/ntgdi/client/dcquery.c and gre/ttgdi.cxx | Lost bIgnoreRotation compatibility policy; detailed comparison below. |
+| WOW cooperative scheduling | wow/wow_private_user_compat.c | windows/core/ntuser/kernel/taskman.c | Autonomous 16-slot thread/event scheduler, not original priority/event-count scheduling. r015 links the object, but imports UserRegisterWowHandlers from system USER32 and no current callback assignment to these helpers was found. Classify as linked, unproven reachable, not a demonstrated live scheduler. Cleanup returns success without removing its slots/events. |
+| WOW cursor/icon construction | same:legacy DIB cursor/icon helper | windows/core/ntuser/client/clres.c cursor/icon conversion route | Autonomous DIB interpretation and GDI construction; original counterpart located but full format/error comparison remains open. Same callback-binding limitation as above. |
+| VDM hard-error dialog | win32/source/wow_hard_error_dialog.c | windows/core/ntuser/server/harderr.c:DisplayVDMHardError | Recreates button decoding/default policy and modal presentation. Original allows no explicit default and takes the last default marker; replacement rejects both cases, hardcodes English labels and omits original CancelId handling. Private desktop/CSR orchestration remains a separate boundary. |
+| Debugger startup/dispatch/state | debugger/source/dbg_*.c | base/mvdm/dbg/dbg.c | Rehosted ordinary-profile dispatch and state. Original DBGNotifyRemoteThreadAddress saves state unconditionally; replacement discards it when not debugged. Original SendVDMEvent uses RaiseException, so generic claims that all event delivery requires private CSR are insufficient. Exact outgoing closure remains to be established. |
+| App window input conversion | app/presentation_window.c | windows/core/ntcon/server/input.c:GetControlKeyState/ConvertMouseButtonState | Independent window synthesizes Console records; loses modifier-side, toggle and enhanced-key information, accumulates mouse buttons instead of using current message state. This is not the native Console input path. |
+| Worker lifecycle | softpc/mvdm_softpc_execution.c, session/session.c and mirror nt_reset.c | base/mvdm/softpc.new/host/src/nt_reset.c and original entry | Original CPU entry retained; ExitVDM/ExitProcess lifetime replaced with explicit teardown and session longjmp. Group with existing thread/termination changes, not a second emulator. |
+| Resource lookup | softpc/mvdm_softpc_firmware.c and mirror nt_unix.c | base/mvdm/softpc.new/host/src/nt_unix.c:host_find_file | Rewrites path/existence lookup. Package-relative root is product policy; preserving original lookup/error owner remains a separate decision. |
+| Redirector OEM guest copy | redir/mvdm_redirector_guest_copy.c | ds/netapi/netlib/copystr.c:NetpCopyWStrToStr | Original already mirrored; adapter converts independently. VrGetUserName checks character count while replacement copies OEM byte count, requiring DBCS-capacity proof. Group conversion logic with RTL without double-counting shared helper code. |
+
+The win32/source and softpc/ etc. provider paths in this table are under
+adapter-mvdm-host-out unless explicitly prefixed app/session. The separate
+physical mapping and effective-address cache-selection algorithms remain
+source-owner-unresolved: matching original declarations/callers are not proof
+of an available matching implementation. Do not classify them as confirmed
+duplicates or safe deletions on this evidence alone.
+
+Mechanical waiting also needs a distinct semantic finding: nt_wait_compat.c
+maps sufficiently large finite timeouts to MAXDWORD, the Win32 INFINITE
+sentinel. NtAlertThread instead prefers the native NTDLL entry and only falls
+back to APC; do not label its native path an autonomous alert implementation.
+
+Duplicate source carriers and inactive helpers are tracked separately below.
+No family count in this table supersedes the all-root inventory or establishes
+full transitive closure. Reviewer checked the classification against observed
+source calls/build rules, separated missing capability from duplicate behavior,
+and retained uncertain reachability rather than assigning speculative faults.
+
+### Mirror build-carrier direct-diff reconciliation
+
+Re-read paired-diff-001/paired-diff.csv grouped by parent path and compared
+the remaining obj.vdm/sources and obj.vdm/obj/i386/ntvdm.def rows using
+git diff --no-index --ignore-cr-at-eol against each recorded source.
+The former removes monitor.lib with a profile explanation; it adds no runtime
+algorithm. The latter adds the Sim32FlushVDMPointer export to the supplemented
+definition file. Its concrete CPU40 no-op provider was separately read in
+wow_sim32_pointer_compat.c and must not be counted as a second pointer manager.
+These two carrier hunks do not prove every generated build selection correct.
+The semantic audit still needs its all-root coverage reconciliation and final
+per-functional-unit disposition; direct hunk reading is not that closure.
+
+### WOW glyph-outline compatibility loss
+
+Current wow_public_user_facade.c::GetGlyphOutlineWow directly calls
+GetGlyphOutlineA; wgdi31.c:303 is its mirror caller. Original OpenNT
+windows/core/ntgdi/client/dcquery.c::GetGlyphOutlineWow passes TRUE for
+bIgnoreRotation to GetGlyphOutlineInternalA; the public A form passes FALSE.
+Tracing that flag to gre/ttgdi.cxx proves it suppresses LOGFONT escapement and
+orientation when recomputing the font transform for Win3.1 compatibility.
+The original comment identifies rotated-text printing as a consumer. Thus
+the replacement loses a specific source-visible compatibility policy; its
+comment claiming equivalence is not sufficient evidence. No rotated-text
+runtime test or WRITE-causality claim was made. Recovery must locate a bounded
+way to retain this policy without importing the full GDI server.
+
+Also compared wow32_public_api_adapters.c against wow_public_user_facade.c:
+only the two include lines differ, with identical function bodies. The r015
+graph selects the latter. Count functionality once and the former as a
+duplicate source carrier, not a second active GDI implementation.
+
+### Additional inactive monitor replacements
+
+Read monitor/source/vdm_control.c, monitor/source/host_idle.c and
+monitor/mvdm_wow_task_frame.c completely. The task-frame helper duplicates
+CallBack16's selection of vpStack/vpCBStack, word alignment and initialized
+flag in a separate TLS record. Current wcall16.c retains the original TD-based
+branch and does not call that helper. Searches of src/tests/tools found task
+frame binding and begin-callback consumers only in fixtures. Neither retained
+r014/r015 graph contains its compile rule. Count it as an inactive duplicate,
+not as evidence of two simultaneously executing WOW stack owners.
+
+The empty HostIdleNoActivity is likewise not selected by those graphs; the
+selected original nt_unix.c retains its own implementation. NtVdmControl is
+selected in r014, but its VdmQueryDir callback binding has only a test caller
+in the searched source set. Without that binding its code explicitly returns
+STATUS_NOT_IMPLEMENTED. This is an unavailable capability, not a recovered
+directory-query algorithm. Original kernel-owner dependency tracing remains
+necessary before proposing restoration. No source edit or runtime execution.
+
+### Additional WOW font-tracking comparison
+
+Read current `wow_public_user_facade.c` and original OpenNT
+`windows/core/ntgdi/client/font.c` functions AddFontResourceTracking,
+RemoveFontResourceTracking, RemoveFontResourceEntry, UnloadNetworkFonts and
+bFileIsOnTheHardDrive. Current wgfont.c calls the add/remove providers and
+wkman.c calls unload with CURRENTPTD as owner identity. The retained r015
+WOW32 graph selects the facade. This is a duplicated task-owned font list and
+load-count algorithm, not only a public GDI binding.
+
+Original code stores Unicode paths; the replacement stores MAX_PATH ANSI
+paths and adds a critical section. Original treats every UNC path as remote
+and classifies drive types other than removable/fixed/CDROM/RAMDISK as
+non-local. Replacement tracks only paths for which GetDriveTypeA reports
+DRIVE_REMOTE, including an extra UNC-root query. Classification is therefore
+not identical for unknown/unavailable drives or shares.
+
+Both implementations load the font before allocating its tracking node and
+return the successful load result if tracking allocation fails. Both discard
+the tracking entry after the requested number of unload attempts regardless
+of individual removal failure. These are retained behaviors, not newly
+introduced defects; do not attribute them uniquely to the replacement.
+
+Executor comparison and sequential reviewer used full function reads and rg
+of mirror callers. No font was installed or removed. Restore the original
+list/policy through bounded allocation, path and public GDI bindings if the
+owner approves; composability has not yet been demonstrated by a build.
+
+### Additional RTL environment comparison
+
+Read the complete current `opennt_support_rtl.c` and compared the validation,
+deletion and return paths of original OpenNT `base/ntos/rtl/environ.c`
+`RtlSetEnvironmentVariable` (starting at line 458). This is a duplicated
+environment-block algorithm, not only a heap/API binding. Original allocation
+uses virtual-memory services; current allocation uses the process heap.
+
+Source-proven differences: the original rejects an equals sign after the first
+name character, supports an omitted Environment argument through the process
+PEB, and retains STATUS_VARIABLE_NOT_FOUND for an absent-name deletion. The
+replacement does not perform that equals-sign validation, rejects a NULL
+Environment argument, and returns success after rebuilding even when deletion
+found no matching name. These differences are not claims that current normal
+COMMAND input exercises those cases. Current cmdenv.c calls the replacement
+with an explicit NewEnv pointer.
+
+The replacement also allocates just one WCHAR when deletion leaves no entries,
+but its own environment-size scanner subsequently reads two WCHARs to identify
+the empty block. That is an internal allocation/reader contract mismatch;
+runtime reachability and a focused fixture remain unverified. Do not infer
+WRITE's failure from this static finding.
+
+Separately compared original `base/ntos/rtl/error.c` with the current
+RtlNtStatusToDosError replacement. Original table lookup, customer/HRESULT and
+OS/2 cases, unknown-code result and TEB LastStatusValue update are not retained
+by the replacement's three special cases and ERROR_INVALID_PARAMETER default.
+Restoration discussion must consider the original table-driven owner and a
+same-shaped native binding before accepting this reduced algorithm.
+
+Procedure: Get-Content for current provider and bounded original function
+ranges; rg for current cmdenv callers. Sequential reviewer checked the concrete
+return and allocation paths. No product modification, build or runtime test.
+These are additional verified points, not completion of all-root coverage.
+
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
 differences, retain/replace/delete decision and regression workload. Count
