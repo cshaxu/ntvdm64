@@ -438,7 +438,39 @@ handle restoration does not reset override flags. These source facts do not
 prove a product launch loop. The routing and stream policies should be
 discussed separately from the justified cdecl thread ABI bridge. No repair.
 
-## Remaining full-scope audit
+## T405 XMS direct diff and replacement coverage
+
+Read all four xms.486 text diffs and the complete adapter
+softpc/mvdm_xms_memory.c. xmsa20.c changes only a blank line; xms.h changes
+parameter names/order in a same-typed declaration, not a move algorithm.
+xms.c adds a backend selection condition; actual selected macro composition
+must be checked before interpreting its historical comment.
+
+The xmsblock.c original xmsMoveBlock body is replaced by an adapter call.
+The adapter independently parses the same 12-byte destination/source/word-count
+frame, implements chunked copying and adds cancellation on failure. This is
+a confirmed original-function replacement, not merely address translation.
+Original xmsMoveBlock explicitly distinguishes its RtlCopyMemory operation
+from overlap-safe moving; the new helper chooses backward chunks for overlap
+and is shared with xmsMoveMemory. Do not claim the original specified a
+particular result for overlapping input, but do not call these two original
+contracts interchangeable either. The original non-i386 explicit
+sas_overwrite_memory notification is absent at this call site; whether the
+selected SAS write provider already satisfies it needs separate verification.
+
+The same adapter implements xmsCommitBlock/xmsDecommitBlock by zeroing guest
+ranges, with decommit calling commit, and xmsMoveMemory using the chunked
+copier. These callbacks require comparison with both original backend
+implementations; reserve/commit/decommit and zeroing are not equivalent merely
+because subsequent reads may see zeros. Partial chunk failure can leave a
+partially changed destination before cancellation is requested.
+
+Reviewer checked actual copy direction and shared callers, distinguishing
+the original block-copy entry from the allocator's move callback. No original
+overlap guarantee is invented and no observed XMS failure is claimed. No
+product changes; downstream callback equivalence remains open.
+
+## Remaining full-project scope
 
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
