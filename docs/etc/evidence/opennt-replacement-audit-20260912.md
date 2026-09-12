@@ -93,7 +93,43 @@ The timing row is therefore unproven autonomous behavior, not yet a confirmed
 duplicate original algorithm. The existing seven grouped replacement
 findings must not be inflated by counting this candidate as proven.
 
-## Full-audit completion requirements
+## T405 BaseClient and BaseSrv contract follow-up
+
+Read the complete current `base_vdm_client.c` and `base_vdm_local.c`, then
+rechecked corresponding original client and mirrored server bodies. These
+are selected replacement policies, not merely CSR transport substitutions.
+The following refines the five initial server findings and adds two distinct
+functional units: client command acquisition and server reentry management.
+Thus this ledger now identifies nine grouped replacement findings including
+the original fast-read and cursor rows; this remains a lower bound, not the
+complete project result. Subcases below are not extra counted units.
+
+| Unit | Source-proven difference | Disposition before repair |
+| --- | --- | --- |
+| PIF query, `fill_pif_info` versus `srvvdm.c:BaseSrvFillPifInfo` | Original clears selected output strings before capacity checks and always publishes required lengths after them. Local code returns immediately on insufficient capacity, leaving supplied lengths unchanged. Original prefers StartupInfo title, then AppName, and explicitly terminates the copied title; local record only supplies AppName and no Reserved payload. | Confirmed partial replacement and unequal failure contract. Restore original field/capacity policy through a bounded record binding; first test insufficient PIF/title/directory capacity, title precedence and non-consumption. |
+| Reentry, `base_vdm_local_dispatch` versus `srvvdm.c:BaseSrvSetReenterCount` | Original decrements and signals an existing VDM wait event on each decrement. Local code rejects decrement at zero and increment at UINT32_MAX, clears a new native-child pending flag on increment, and signals only when count reaches zero and no native launch is pending. | Newly confirmed repeated function with added scheduling policy. Compare nested child begin/cancel/increment/decrement traces before deciding which local lifecycle binding remains necessary. No claim the source's unchecked arithmetic should blindly replace bounds checks. |
+| Client command acquisition, `base_vdm_client.c:GetNextVDMCommand` versus original `base/win32/client/vdm.c` | Both wait, set ASKING_FOR_SECOND_TIME, clear exit code and retry. Original owns CSR capture buffers, copies successful fields under exception handling, and zeros all size fields on errors other than STATUS_INVALID_PARAMETER. Local capture is a shallow VDMINFO copy; dispatch writes caller buffers directly and the client copies captured lengths on every error. An early ERROR_NOT_READY can therefore leave original requested lengths visible instead of zeros. | Newly confirmed client-policy replacement separate from the server queue. Preserve original result/error/copy policy; replace only capture/transport dependencies after establishing the local synchronous pointer lifetime contract. |
+| Command response, initial next-command finding | Original server/client preserve STARTUP_INFO_RETURNED and startup metadata, plus supplied standard handles. Local normal response sets VDMState=0, StdIn/StdOut/StdErr=NULL and Desktop/Title/Reserved lengths=0. Separate WOW requests are not implemented; an empty shared-WOW query succeeds, while DOS may wait or terminate the session under the local one-shot policy. | Confirmed restricted service model, not full original BaseSrv behavior. Audit actual app producers and consumers before attributing observable failures or replacing the model. |
+| First-VDM query | Original `fIsFirstVDM` is server-global; local first_vdm_available belongs to the session record. Query-and-clear syntax is similar but scope is different. | Original policy duplicated with changed cardinality; multiple-worker/session behavior must be an explicit decision, not hidden in an adapter. |
+| Current-directory set/get | Original set frees the old value before allocation; local set allocates before replacing, so allocation failure preserves old state. Original server holds its DOS critical section through set/get; local directory operations have no corresponding lock. Successful get consumes and frees the record in both. | Preserve one-shot semantics; review failure behavior and thread reachability. The lock difference alone is not proof of an exercised race. Client zero-length no-op and server mutation must not be confused. |
+| Exit | Original client routes DOS and WOW exits to BasepExitVDM and closes a returned wait handle. Local client forwards to a helper which ignores WOW exits and completes only the DOS session. | Partial lifecycle replacement/missing WOW service. Do not count the ignored WOW branch as a working alternate implementation or infer complete WOW cleanup from DOS success. |
+
+Original evidence locations: client `vdm.c` GetNextVDMCommand at line 340,
+retry/error handling around 582-650 and ExitVDM at 731; mirrored `srvvdm.c`
+BaseSrvIsFirstVDM at 472, Set/GetVDMCurDirs at 486/706,
+BaseSrvSetReenterCount at 2529 and BaseSrvFillPifInfo at 2722.
+The compared upstream is read-only `O:/repos.external/OpenNT`; local paths
+are relative to this repository. No product repair or runtime experiment was
+performed for these findings.
+
+Reviewer cross-check: buffer-capacity failure was followed through both local
+server and local client, rather than relying on the server comment claiming
+the same copy order. Reentry signaling was compared against the actual
+original body. The original capture/CSR/security environment is not available
+unchanged; original source reuse still needs an explicit interface boundary.
+These findings do not prove the reported DOSX/WRITE failure's root cause.
+
+## Completion checklist
 
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
