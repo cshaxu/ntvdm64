@@ -7,7 +7,7 @@
 #include "guest_memory_lease.h"
 
 #define SESSION_MAGIC UINT32_C(0x53455353)
-#define SESSION_ABI_VERSION UINT32_C(7)
+#define SESSION_ABI_VERSION UINT32_C(8)
 #define SESSION_MAX_TEARDOWNS 8u
 #define SESSION_MAX_THREAD_HOOKS 8u
 #define SESSION_PRESENTATION_PALETTE_ENTRIES 256u
@@ -137,6 +137,10 @@ typedef struct session {
     guest_memory_lease_context guest_memory_lease;
     char firmware_root[SESSION_FIRMWARE_ROOT_BYTES];
     char mvdm_system_root[SESSION_FIRMWARE_ROOT_BYTES];
+    /* App freezes this package-local bootstrap path only for a classified
+     * Win16 declaration before the session activates.  It is copied host
+     * text, never a guest string, native handle or general file-search root. */
+    char mvdm_wow_bootstrap_kernel[SESSION_FIRMWARE_ROOT_BYTES];
     session_video_event_fn video_event_sink;
     void *video_event_context;
     /* Internal storage for the original SoftPC 80x50 character/attribute
@@ -226,6 +230,8 @@ const char *session_firmware_root(const session *instance);
  * WOW media.  It is not a guest-drive or a replacement for host SystemRoot. */
 int session_set_mvdm_system_root(session *instance, const char *path);
 const char *session_mvdm_system_root(const session *instance);
+int session_set_mvdm_wow_bootstrap_kernel(session *instance, const char *path);
+const char *session_mvdm_wow_bootstrap_kernel(const session *instance);
 
 int session_guest_memory_begin(session *instance, void *context,
     guest_memory_read_fn read, guest_memory_write_fn write);

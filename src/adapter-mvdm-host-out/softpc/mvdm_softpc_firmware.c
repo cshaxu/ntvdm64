@@ -64,6 +64,22 @@ int mvdm_softpc_system_copy_root(char *path_out, uint32_t path_out_bytes)
     return 1;
 }
 
+int mvdm_softpc_wow_bootstrap_kernel_copy(char *path_out,
+    uint32_t path_out_bytes)
+{
+    session *instance = session_thread_current();
+    const char *path = instance != NULL ?
+        session_mvdm_wow_bootstrap_kernel(instance) : NULL;
+    size_t path_bytes;
+
+    if (path_out != NULL && path_out_bytes != 0u) path_out[0] = '\0';
+    if (path == NULL || path_out == NULL || path_out_bytes == 0u) return 0;
+    path_bytes = strlen(path) + 1u;
+    if (path_bytes > path_out_bytes) return 0;
+    memcpy(path_out, path, path_bytes);
+    return 1;
+}
+
 void mvdm_softpc_prepare_system_file_compatibility(void)
 {
     /* The historical routine has no observable result other than the two

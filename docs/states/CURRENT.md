@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T404 S3**
+**Active: M0 T404 S4**
 
 ## Active Packet
 
@@ -22,6 +22,7 @@
 | Expected Markers | No public `-w`, `-a`, `-o` or `--command` is accepted; a classified NE receives an explicit WOW record, a verified package `KRNL386.EXE` carrier, empty WOW PIF/default bootstrap, then runtime opens `KRNL386.EXE`, `DOSX.EXE`, loads `WOW32.DLL`, and advances WRITE beyond the current entry frontier. |
 | Asset Needs | Existing selected OpenNT/MVDM source, packaged KRNL386/DOSX/WRITE media, build tooling and owner runtime package only; no new source, guest binary, firmware or Microsoft component. |
 | Reporting Requirements | Record the four-rung recovery audit; exact original parser/fallback ordering; session/path lifetime and failure result; DOS/WOW profile disposition; focused test/build identities; public runtime observations; staged hash only if non-regressive; and remaining WRITE frontier. |
+| Current Evidence | [Run 001](../etc/evidence/m0-t404-s4-positional-wow-bootstrap-run-001.md) proves positional WRITE reaches the original DOSX bootstrap and then repeats at original WOW BOP `50:01`, without an illegal-instruction or host-exception report. The parent formal graph has no same-version WOW32 provider target; current deployed `WOW32.DLL` is an independent stale artifact. |
 | Similar-Issue Sweep | Audit all direct `GetCommandLine` WOW bootstrap consumers, every app-created initial PIF profile, every `command_owner` serialization/consumer, and every public option parser; preserve DOS and native-image behavior. |
 | Stop Conditions | Need for a cross-process service/worker, a new historical source import, CCPU/BOP/guest-media/Console changes, a non-session-bound path search, a guest-visible host pointer, or DOS positional regression pauses work for renewed admission. |
 | Exit Criteria | The sole public positional WRITE command demonstrably reaches `KRNL386.EXE`, `DOSX.EXE`, and `WOW32.DLL` through the retained original owners, with focused checks and formal x86 build passing. A WRITE UI/document/lifecycle claim requires its own direct evidence. |

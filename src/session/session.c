@@ -614,6 +614,18 @@ const char *session_mvdm_system_root(const session *instance)
         instance != NULL ? instance->mvdm_system_root : NULL);
 }
 
+int session_set_mvdm_wow_bootstrap_kernel(session *instance, const char *path)
+{
+    return session_set_root(instance,
+        instance != NULL ? instance->mvdm_wow_bootstrap_kernel : NULL, path);
+}
+
+const char *session_mvdm_wow_bootstrap_kernel(const session *instance)
+{
+    return session_root(instance, instance != NULL ?
+        instance->mvdm_wow_bootstrap_kernel : NULL);
+}
+
 int session_guest_memory_begin(session *instance, void *context,
     guest_memory_read_fn read, guest_memory_write_fn write)
 {

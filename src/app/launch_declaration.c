@@ -26,24 +26,6 @@ static int is_softpc_option(const char *argument)
         argument[1] != '\0';
 }
 
-/* The original WOW worker obtains its KRNL386 bootstrap token from its own
- * command line in the exact `-a <path>` form.  App must retain that two-token
- * worker option while it removes the app-only `--command` declaration; the
- * path is not a second application command. */
-static int is_softpc_option_with_value(const char *argument)
-{
-    return argument != NULL &&
-        (argument[0] == '-' || argument[0] == '/') &&
-        (argument[1] == 'a' || argument[1] == 'A') && argument[2] == '\0';
-}
-
-static int is_worker_bootstrap_option(const char *argument)
-{
-    return argument != NULL && (argument[0] == '-' || argument[0] == '/') &&
-        (argument[1] == 'w' || argument[1] == 'W' || argument[1] == 'a' ||
-            argument[1] == 'A') && argument[2] == '\0';
-}
-
 static int append_dos_argument(char *destination, size_t capacity,
     size_t *length, const char *argument)
 {
@@ -99,33 +81,12 @@ int app_launch_declaration_consume_options(app_launch_declaration *declaration,
     original_argc = *argc;
     write_index = 1;
     for (read_index = 1; read_index < original_argc; ++read_index) {
-        if (strcmp(argv[read_index], "--command") == 0) {
-            size_t command_bytes;
-            if (declaration->command_declared != 0u ||
-                positional_start >= 0 || read_index + 1 >= original_argc) return 0;
-            command_bytes = strlen(argv[read_index + 1]);
-            if (command_bytes == 0u || command_bytes >=
-                    sizeof(declaration->requested_command) ||
-                strpbrk(argv[read_index + 1], "\r\n") != NULL) return 0;
-            memcpy(declaration->requested_command, argv[read_index + 1],
-                command_bytes + 1u);
-            declaration->command_declared = 1u;
-            ++read_index;
-            continue;
-        }
+        /* Product entry has exactly one positional declaration.  Historic
+         * observer/worker switches are not a second public launch grammar. */
+        if (strcmp(argv[read_index], "--command") == 0) return 0;
         if (positional_start >= 0) continue;
         if (is_softpc_option(argv[read_index])) {
-            /* `-w -a` identifies an NT4-created WOW worker. This standalone
-             * app derives those two tokens only after it has classified a
-             * positional NE image and selected package KRNL386 media. */
-            if (is_worker_bootstrap_option(argv[read_index])) return 0;
-            argv[write_index++] = argv[read_index];
-            if (is_softpc_option_with_value(argv[read_index])) {
-                if (++read_index >= original_argc || argv[read_index] == NULL ||
-                    argv[read_index][0] == '\0') return 0;
-                argv[write_index++] = argv[read_index];
-            }
-            continue;
+            return 0;
         }
         if (declaration->command_declared != 0u) return 0;
         positional_start = read_index;
@@ -196,7 +157,9 @@ int app_launch_declaration_prepare_softpc_arguments(
             declaration->wow_kernel, (DWORD)sizeof(declaration->wow_kernel));
         if (kernel_path_bytes == 0u ||
             kernel_path_bytes >= sizeof(declaration->wow_kernel) ||
-            strchr(declaration->wow_kernel, ' ') != NULL) return 0;
+            strchr(declaration->wow_kernel, ' ') != NULL ||
+            !session_set_mvdm_wow_bootstrap_kernel(owner,
+                declaration->wow_kernel)) return 0;
     }
     forwarded = (char **)calloc((size_t)argc + 5u, sizeof(*forwarded));
     if (forwarded == NULL) return 0;
@@ -232,7 +195,8 @@ int app_launch_declaration_bind(app_launch_declaration *declaration,
      * therefore ends only at the next original BaseVDM request after the
      * copied DOS record was consumed. The first COMMAND remains PermCom;
      * it is never started with `/C`. */
-    if (!base_vdm_local_set_terminal_on_command_exhaustion(
+    if (declaration->requested_image != MVDM_IMAGE_WIN16 &&
+        !base_vdm_local_set_terminal_on_command_exhaustion(
             &declaration->base_vdm, 1)) {
         (void)base_vdm_local_unbind(&declaration->base_vdm);
         return 0;
@@ -341,8 +305,6 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     if (drive_letter < 'A' || drive_letter > 'Z') return 0;
     if (!make_path(declaration->application, sizeof(declaration->application),
             root, "system32\\COMMAND.COM") ||
-        !make_path(declaration->pif, sizeof(declaration->pif), root,
-            "profiles\\pure-dos\\pure-dos.pif") ||
         !append_text(declaration->environment, sizeof(declaration->environment),
             &environment_length, "COMSPEC=") ||
          !append_text(declaration->environment, sizeof(declaration->environment),
@@ -380,12 +342,15 @@ int app_launch_declaration_publish(app_launch_declaration *declaration,
     command.command_bytes = (uint16_t)(command_length + 1u);
     command.application = (const uint8_t *)declaration->target_application;
     command.application_bytes = (uint16_t)(strlen(declaration->target_application) + 1u);
-    /* DIVERGENCE(APP-DIV-017): the standalone product has one selected
-     * source-shaped pure-DOS profile for every initial PermCom record. It
-     * leaves the target identity and its argument tail in the original
-     * AppName/CmdLine carriers, instead of selecting a target-name route. */
-    command.pif = (const uint8_t *)declaration->pif;
-    command.pif_bytes = (uint16_t)(strlen(declaration->pif) + 1u);
+    /* The selected pure-DOS PIF deliberately suppresses DOSX.  A classified
+     * Win16 launch instead keeps the original empty PIF carrier so the
+     * packaged default AUTOEXEC/DOSX bootstrap remains the owner. */
+    if (declaration->requested_image == MVDM_IMAGE_DOS) {
+        if (!make_path(declaration->pif, sizeof(declaration->pif), root,
+                "profiles\\pure-dos\\pure-dos.pif")) return 0;
+        command.pif = (const uint8_t *)declaration->pif;
+        command.pif_bytes = (uint16_t)(strlen(declaration->pif) + 1u);
+    }
     command.environment = (const uint8_t *)declaration->environment;
     command.environment_bytes = (uint32_t)environment_length;
     command.current_directory = (const uint8_t *)declaration->current_directory;
