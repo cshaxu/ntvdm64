@@ -340,7 +340,36 @@ SIM32 mapping/flush and alias lifetime before deciding how much can be removed.
 Reviewer followed allocation, initial copy and complete write-back, rather
 than deriving behavior from access flags alone. No product repair performed.
 
-## Remaining whole-project requirements
+## T405 DEM changed-file coverage
+
+All 12 text-different dos/dem files in the paired inventory have now had
+their complete diffs read. demfile.c and demhndl.c findings are above.
+The remaining ten classify as follows; this does not close downstream adapters.
+
+| Files | Direct-diff result |
+| --- | --- |
+| dem.c | Initial system directory comes from the session media-root binding instead of GetSystemDirectory. Product-environment substitution, not a second DOS initialization algorithm. Verify root-provider policy separately. |
+| dem.h / demdata.c | Replace durable DTA/current-PDB/extended-error/SFT pointers with numeric guest locations. These support the already-recorded lease/shadow replacements, not four new independent algorithms. |
+| demgset.c | Registration records original DS:offset locations and reads DOSWOWDATA through a lease; failed SFT discovery clears the location. DOS drive-list logic is otherwise retained, with DWORD far-link spelling. |
+| demdasd.h / dosdef.h | Fixed-width guest-field spelling and handle/search-identity casts. In selected x86 these are footprint/ABI candidates, not proof of a newly implemented file system. |
+| demdisp.c | Replaces two unimplemented dispatch slots with fast-read overlay and carry-only fast-write refusal; already counted in the fast-I/O family. Do not count dispatch and provider as separate duplicated services. |
+| demmisc.c | Original disk reset still calls HostFloppyReset/HostFdiskReset, but writing the guest access word now goes through the command-state adapter and failure calls TerminateVDM. Added failure policy beyond a pointer substitution; verify registration/lifetime and whether failure can occur. |
+| demfcb.c | Original FCB file I/O retained around a DTA snapshot lease. Failed reads commit the lease; ordinary demRead's failed path discards it. This is an explicit inconsistency in local partial-result handling, requiring original flush semantics and named/regular-file failure tests, not an assumed bug. Handle casts are separate. |
+| demsrch.c | Original search/list/enumeration algorithms remain. FindFirst/Next now copy and commit DTA after advancing host search state; failed commit can leave host search progressed but guest DTA stale. Current-PDB lookup adds lease-failure exits. Most other hunks retain byte-offset arithmetic at native pointer width. |
+
+Reviewer checked that demsrch.c's native list pointer is still narrowed into
+the original 32-bit guest identity field and compared against a host-list
+lookup. It is not a newly introduced token-table implementation merely because
+the declaration became ULONG. In an x86-only product, claims of x64 pointer
+safety in historical comments do not establish continued necessity.
+
+Confirmed restoration families remain source-owned SFT/JFT policy and the
+fast-I/O replacement; the lease-based DTA/error/input changes additionally
+require coherent original memory-boundary review. Neither text-diff coverage
+nor absence of a newly spotted algorithm proves complete semantic equivalence.
+No production file was modified.
+
+## Full-project completion still pending
 
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
