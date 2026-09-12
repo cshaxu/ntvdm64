@@ -562,7 +562,37 @@ Reviewer traced the returned staging pointer into ReadFile/WriteFile and
 verified release frees it. The documented risk is not a claim of a runtime
 crash already reproduced. No source repair or live network operation.
 
-## Remaining full audit
+## T405 common MVDM header coverage
+
+Read all eight text-different inc headers against original same-path files:
+apistruc.h, dossvc.h, intapi.h, mvdm.h, softpc.h, suballoc.h, vdmtib.h and
+vrnmpipe.h. Direct-diff classification:
+
+- apistruc/dossvc and guest records in vrnmpipe replace pointer spellings
+  with four-byte integers. These are layout/representation changes, not
+  independent duplicated algorithms; selected x86 layout tests are needed
+  before footprint restoration.
+- vrnmpipe's host request also changes flat pointer fields into numeric far
+  locations and adds PrivateAsyncState. This is part of the already-counted
+  asynchronous replacement, not a guest record field or a separate service.
+- intapi types callback pointers explicitly; softpc adds WINAPI to host
+  thread entry declarations and widens IntelBase. Cross-definition ABI
+  consistency must be verified, not presumed unnecessary after x64 removal.
+- mvdm unconditionally selects the original i386 fetch/store macros instead
+  of conditional RISC forms. suballoc unconditionally selects 4096-byte
+  commitment instead of the non-i386 65536-byte branch. These are composition
+  choices with behavioral consequences, not simple include cleanup. CPU40
+  build intentionally lacking i386 makes this distinction material.
+- vdmtib replaces an absolute source-tree include with the mirrored ABI
+  include. No new VDM_TIB declaration or lifecycle implementation in this hunk.
+
+Reviewer separated guest layout from host request layout and identified
+allocation granularity as policy rather than a mere type alias. Original
+allocator call sites and actual compiler definitions remain part of the
+transitive audit. No product edits; eight-header diff reading is not overall
+ABI verification or full-task completion.
+
+## Full audit still pending
 
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
