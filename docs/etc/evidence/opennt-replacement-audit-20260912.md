@@ -266,7 +266,45 @@ than inferring it used the current CPU shadow. No product changes or guest
 execution were performed. None of these bounded conclusions constitutes the
 requested all-MVDM/non-MVDM audit completion.
 
-## Remaining full-project audit scope
+## T405 DEM/VDD SFT ownership follow-up
+
+Read the full demfile.c diff, complete adapter vdd/mvdm_vdd_sft_shadow.c
+and original allocation/association/release bodies. This exposes another
+confirmed original-owner replacement family, not just an overlay concern.
+
+Original demfile.c GetFreeSftEntry and VDD handle bodies are retained under
+`#if 0`; active exported wrappers invoke the adapter's independent SFT/JFT
+search, allocation, retrieval and mutation lifecycle. Original source owner
+is `base/mvdm/dos/dem/demfile.c`, so restoring this logic should keep that
+MVDM owner rather than relocate it to opennt-host.
+
+| Functional point | Original versus replacement |
+| --- | --- |
+| SFT/JFT allocation | Original finds the free JFT/SFT and immediately writes guest alias state. Replacement copies tables, repeats free-entry search, and returns an uncommitted host shadow. It imposes a 256-group traversal cap. This duplicates original selection policy and changes reservation visibility. |
+| Handle association | Original writes the returned live SFT fields immediately. The adapter repeats the same mode/attribute/flags/devptr/NT-handle assignments but changes only a shadow. Exported VDDAssociateNtHandle does not commit it. Existing WOW32 callers now explicitly commit, but an unchanged external VDD API caller has no equivalent original commit operation. |
+| Retrieve/release | Original returns live SFT/JFT aliases and release changes one JFT entry/refcount. Replacement creates snapshots and release writes back the complete SFT and complete captured JFT, then frees the shadow. Concurrent or intervening unrelated JFT mutations can be overwritten; actual overlap must be tested before claiming an exercised race. |
+| Optional allocation output | Original allocation permits ppSFT=NULL and still allocates. Active wrapper rejects it with ERROR_INVALID_ADDRESS. Confirmed changed public API behavior, not a necessary consequence of typed pointers. |
+| Commit failure | Replacement writes SFT first and JFT second; failure of the latter leaves a partially published update. Registry locking protects the shadow list, not a transaction spanning these guest writes. Failure recovery must be compared with original direct ownership. |
+
+Source search confirms modified wow32/wkfileio.c adds explicit commit calls
+after allocation/association and release-related writes. Thus this replacement
+has propagated into another original mirror component; merely deleting the
+adapter would not restore its callers safely. A coherent restoration must
+cover DEM, its memory binding and all affected WOW/VDD call sites together.
+Runtime export reachability for third-party VDDs remains to be verified.
+
+Separately demfile.c copies open-path input into a bounded MAX_PATH buffer
+instead of using the original guest alias; create/attribute paths still use
+aliases. Treat this as memory-lifetime/error-policy adaptation, not a second
+CreateFile algorithm. The rest of this diff contains diagnostics, handle casts
+and original pathname-offset arithmetic with explicit types.
+
+Reviewer verified original optional outputs and immediate field writes against
+the actual original bodies, and inspected both commit writes and registry lock
+scope. No product changes were made; no corruption or WRITE root cause is
+claimed from static replacement evidence alone.
+
+## Remaining audit requirements
 
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
