@@ -86,3 +86,32 @@ filters mvdm-host; fixing just its input directory would still be unsound.
 These findings require a current inventory rather than running the old gate
 and reporting its result as present coverage. Non-MVDM coverage and actual
 build selection remain outstanding. No product behavior was changed.
+
+## Reproducible coverage tool and second review
+
+Added tools/audit/Measure-OpenNtMirrorCoverage.ps1. It reads Git membership
+and the two archived manifests, validates source hashes and writes only to a
+new directory beneath build. Raw CSVs and summary remain at
+build/M0-T405/S1/source-coverage-002; invoke the script with a new
+OutputDirectory to reproduce. It does not rewrite source or old ledgers.
+
+The first run's relocation result was invalid: a PowerShell array-expression
+precedence mistake concatenated two candidate paths. Explicit parentheses
+fixed it. Re-running all comparisons retained the same host identity counts
+and established 71 byte-equal relocations: 41 to mvdm-softpc-firmware and 30
+to mvdm-tools. The remaining 33 old paths are in v86. Their association with
+retired CPU30 monitor/scaffold is supported by the T315 history, but their
+per-file deletion/source-carrier disposition remains to be finished.
+
+All 385 supplement source hashes match the recorded source identity; 384
+current files match those bytes. The exception is softpc.new/obj.vdm/obj/
+i386/ntvdm.def: git diff --no-index shows one added export,
+Sim32FlushVDMPointer. The current New-T310OriginalSoftpcNinja.ps1 selects
+that .def via hostExportDefinition. Thus a historical-looking obj path is
+not automatically inactive: this is a concrete source-selection exception
+requiring audit. The old evidence-only label cannot establish current use.
+
+Additional tracked membership: app 10, session 5, broker 7, opennt-abi 210.
+No tracked files were returned for mvdm-platform-abi or adapter-mvdm-host-in
+in this checkout. Reconcile declared topology with physical inputs; do not
+drop the actual opennt-abi root from the coverage denominator.
