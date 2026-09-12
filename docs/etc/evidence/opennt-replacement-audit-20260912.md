@@ -218,7 +218,31 @@ Reviewer re-read the original descriptor-validation block following the
 No descriptor or CPU fix was applied. The inherited full audit scope and
 owner approval gate remain unchanged.
 
-## Full-audit remaining work
+## T405 DPMI transition ownership follow-up
+
+Read the full modesw.c diff and the original i386/dpmi386.c transition
+bodies, then followed the shadow-table publication in dpmi32.c/dpmiselr.c.
+This is not yet full diff coverage of those latter files.
+
+| Functional unit | Original counterpart / local implementation | Audit disposition |
+| --- | --- | --- |
+| Protected/real transition frames | Original i386/dpmi386.c:switch_to_protected_mode and switch_to_real_mode use the same stack offsets as the new CPU40 bodies in modesw.c. Local code captures the frame before changing PE and applies segment setters afterwards. | Source-derived duplicate transition bodies. Frame interpretation has direct original evidence; passive CONTEXT versus active CCPU cache ordering requires a binding, not necessarily deletion. Original fixed VDM state RI/RM bit updates are omitted and must receive an explicit owner disposition. |
+| Native task carrier | cpu40_install_native_task_carrier creates two TSS images, sets backlink and port bitmap, writes busy-TSS descriptors into slots 01f0h/01f8h, and sets TR. | Autonomous platform-state construction absent from the compared original DPMI bodies. Kernel/processor initialization provenance and guest ownership of those slots are unproved. Original task-state logic, if reused, belongs to its genuine source owner; a familiar x86 layout is not proof of original implementation. |
+| IDT reconstruction/forced restore | dpmi32.c infers IDT address as published AX segment minus 2048 bytes. modesw.c latches the first nonzero address and sets IDTR to 256 entries; c_intr.c invokes restore on protected interrupt dispatch. | Autonomous reconstruction with a guest-layout assumption. It may override later IDTR state, so compare DOSX publication, accelerated context restore and original interrupt ownership. The latch is a file-static ULONG with no reset assignment in this file, despite its comment calling it session-local; session lifetime elsewhere remains to be checked. |
+| GDT/LDT shadow | dpmi32.c installs Cpu40LdtShadowAddress as LDT; modesw.c installs that same address as GDT and writes the two TSS slots there. dpmiselr.c publishes descriptor updates into this shadow. | Distinct guest GDT/LDT selectors alias the same table backing in the local model. This is a substantial table-ownership decision, not merely copying an original descriptor. Slot collisions and original table roles require proof before restoring/removing it. |
+| FastWOW TEB projection | dpmi32.c allocates a page, writes Self at 18h and a TD-prefix pointer at c0h targeting offset 100h. | Autonomous guest projection of original TEB/WOW state. The offsets alone do not establish complete original thread/TD lifecycle. Follow FastWOW and original WOW32 owner before calling it an adequate closure. |
+| Generic DPMI mode helpers | Local DpmiSwitchToRealMode refreshes six caches instead of the original non-i386 SS-limit adjustment. DpmiSwitchToProtectedMode additionally loads DOSX CS and SS whereas original explicitly leaves segment setup to its caller. | Changed integration semantics; inspect every caller's saved-frame ownership. Do not describe these as byte-equivalent original implementations. |
+
+The copied transition frames and the new TSS/IDT/TEB constructions are
+separate review items. No original kernel body has yet been identified as an
+exact replacement for the complete local construction; that is unresolved
+provenance, not authorization to retain a made-up implementation. Likewise
+the current evidence does not prove these mechanisms caused DOSX failure.
+Reviewer checked actual table-base assignments and frame offsets rather than
+accepting comments about what native NT allegedly inherited. No repair or
+additional OpenNT import was performed.
+
+## Remaining audit scope
 
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
