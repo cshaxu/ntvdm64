@@ -304,7 +304,43 @@ the actual original bodies, and inspected both commit writes and registry lock
 scope. No product changes were made; no corruption or WRITE root cause is
 claimed from static replacement evidence alone.
 
-## Remaining audit requirements
+## T405 DEM read and lease boundary follow-up
+
+Read the complete demhndl.c diff and both adapter guest-memory forwarding
+bodies, then the complete session/guest_memory_lease.c implementation.
+Original owner remains demhndl.c:demRead; host ReadFile/named-pipe/seek policy
+is retained, but original alias plus Sim32Flush/Free is replaced by a copied
+lease and new failure exits. The same lease mechanism backs the fast-read
+overlay already recorded above; do not double-count it as another file reader.
+
+- Acquire always invokes the read provider for nonzero length, even when
+  access is WRITE only. Thus an ordinary short read preserves the snapshotted
+  tail; a claim that an uninitialized tail is blindly committed is disproved
+  by the actual implementation.
+- Commit writes the complete requested byte_count, not dwBytesRead. A
+  concurrent or nested change to the untouched tail can be overwritten by
+  its old snapshot. This requires an overlapping writer; no such occurrence
+  is established here. Direct aliases do not add this snapshot rewrite.
+- Successful I/O followed by failed commit reports an invalid-address error
+  after the host file pointer has advanced. Guest result and host I/O effects
+  can diverge. This is a new failure boundary, not proof of DOSX corruption.
+- demStoreExtendedError repeats original field assignments through another
+  lease. It adds allocation/acquisition/commit failure inside named-pipe error
+  handling. Exact GetLastError preservation must be checked through called
+  providers, not assumed from the wrapper comment.
+- demWrite retains its original alias path; its direct diff adds diagnostics
+  and the signed SetFilePointer high-word type. The read/write memory models
+  are therefore not uniformly replaced.
+
+The session lease is autonomous generic snapshot/lifetime infrastructure,
+while c_sas_loads/c_sas_stores are original providers. This separation is
+important for restoration: keeping original SAS access does not establish
+equivalence of the new transaction semantics around it. Review original
+SIM32 mapping/flush and alias lifetime before deciding how much can be removed.
+Reviewer followed allocation, initial copy and complete write-back, rather
+than deriving behavior from access flags alone. No product repair performed.
+
+## Remaining whole-project requirements
 
 For every selected functional unit, record original path/function, current
 provider, actual build selection, unavailable outgoing interface, semantic
