@@ -1,14 +1,15 @@
 # Original RTL and character-conversion restoration
 
-## Owner request and status
+## Owner request and execution status
 
-On 2026-09-12 the owner requested a separate candidate T at the head of
-[Queue](../states/QUEUE.md), covering D11-D16 and D26 from the
+On 2026-09-12 the owner requested the RTL restoration package, covering
+D11-D16 and D26 from the
 [original-owner audit](../etc/evidence/opennt-replacement-audit-20260912.md).
-This is proposal/queue authorization, not implementation admission or a
-numeric T allocation. The current [Status](../states/CURRENT.md) is unchanged.
-Reconcile these rows with the existing audit/restoration task at admission
-to avoid duplicate implementation ownership. Preserve other candidate order.
+It is now admitted as M0 T408.  [Status](../states/CURRENT.md) remains the
+sole authority for the one active S packet; this proposal is the dependency
+ordered execution design.  S1--S3 are delivered, S4 is active, and S5--S7
+remain planned work within the admitted T.  They are not separate T candidates
+and may not run concurrently with the active packet.
 
 ## Objective and ownership
 
@@ -20,13 +21,12 @@ and [architecture rules](../rules/ARCHITECTURE.md). Broker deployment, CLI
 changes, CPU instruction changes and complete WRITE recovery are non-goals.
 The selected runtime remains Win32/x86 CCPU40 with `ntvdm32.exe <binary>`.
 
-## Proposed sequential S plan
+## Sequential S plan
 
-These are candidate S scopes, not active briefs or numeric allocations.  They
-are intentionally grouped by original owner and failure/ownership contract,
-rather than by every individual function.  At admission, establish only S1 in
-Status; each later S opens only after the predecessor's committed evidence
-proves its exit condition.
+The packets are grouped by original owner and failure/ownership contract, not
+by individual symbols.  Each packet closes with committed evidence before the
+next opens in Status.  A failed original-source composition is a stop and
+design finding: it does not authorize a replacement algorithm.
 
 | Candidate S | Scope and source owner | Required exit before the next S |
 | --- | --- | --- |
@@ -34,8 +34,9 @@ proves its exit condition.
 | S2 — arithmetic and fill cohort | D13–D15: recover `base/ntos/rtl/x86/largeint.asm`, `movemem.asm`, corresponding declarations and any duplicate `copy_fnc.c` loops. | Original or same-contract provider compiles and links in x86; division/multiply/fill positive and failure/edge fixtures pass; selected timer/memory consumers regress; measured deleted/retained diff. |
 | S3 — private environment algorithm and U07-E lifetime | D11 plus the environment part of U07: recover `base/ntos/rtl/environ.c` as one create/query/mutate/destroy ownership unit.  Keep the original algorithm in its OpenNT mirror and bind only its finite allocation/query/free boundary. | Create/clone/set/replace/delete/destroy, malformed names, empty blocks, allocation failure and release ordering are proven; snapshot/install/restore succeeds and fails deterministically on launch/teardown; COMMAND environment regression passes. |
 | S4 — status conversion cohort | D12: recover `base/ntos/rtl/error.c`, required tables and reached LastStatusValue behavior; do not bury reduced mappings inside the environment adapter. | Known/unknown/special status encodings, LastStatusValue and no-silent-success failure rows pass; x86 link and S3 environment regression remain green. |
-| S5 — USER/Redirector encoding cohort | D16/D26: recover `windows/core/ntuser/rtl/chartran.c:MBToWCSEx`, `netapi/netlib/copystr.c:NetpCopyWStrToStr` and the reached RTL Unicode/OEM provider chain.  Guest-copy is a bounded consumer binding, never the conversion algorithm. | ACP/non-ACP, DBCS/unrepresentable input, partial result, zero/short/exact capacity, terminator, allocation/caller-buffer and guest-copy-failure tests pass; selected WOW/Redirector callers regress. |
-| S6 — package integration and closure | Rebuild the selected full x86 worker composition from S2–S5; run source/diff review, selected DOS/COMMAND/EDIT regression and the bounded WRITE frontier observation. | Every D11–D16/D26 and U07-E row has a final disposition, runtime evidence and remaining-binding ledger; governance, link checks, commit/push and clean worktree complete. |
+| S5 — USER multibyte/Unicode cohort | D16: recover `windows/core/ntuser/rtl/chartran.c:MBToWCSEx` and its directly reached RTL Unicode provider chain.  Its consumer-side guest copy remains a finite binding and cannot absorb conversion policy. | ACP/non-ACP, DBCS/unrepresentable input, partial-result and zero/short/exact-capacity rows pass; terminator and failure behavior are source-proven; selected WOW consumer regression passes. |
+| S6 — Redirector OEM-copy cohort | D26: recover `netapi/netlib/copystr.c:NetpCopyWStrToStr` and only the reached OEM provider chain.  Do not couple this packet to USER's allocation or guest publication policy. | OEM byte capacity, DBCS/unrepresentable input, terminator, allocation/caller-buffer and guest-copy-failure rows pass; selected Redirector caller regression passes. |
+| S7 — package integration and closure | Rebuild the selected full x86 worker composition from S2–S6; run source/diff review, selected DOS/COMMAND/EDIT regression and the bounded WRITE frontier observation. | Every D11–D16/D26 and U07-E row has a final disposition, runtime evidence and remaining-binding ledger; governance, link checks, commit/push and clean worktree complete. |
 
 ### S1 — recovery map and frozen baseline
 
@@ -72,19 +73,32 @@ ownership, overwrite the host PEB, or replace its lock with unrelated TLS.
 
 Recover the original status mapping separately from environment ownership.
 No missing operation may silently succeed, and no convenience Win32 error
-mapping may become a hidden substitute for original tables.
+mapping may become a hidden substitute for original tables.  Import the
+selected `error.c` together with its generated table as one source-owned
+cohort.  The only modern carrier may expose the original TEB-observable
+`LastStatusValue` through the existing private TEB binding; it may not select,
+truncate or supplement a mapping.
 
-### S5 — USER and Redirector encoding (D16/D26)
+### S5 — USER multibyte/Unicode conversion (D16)
 
 Preserve ACP versus non-ACP branching, partial-conversion results, allocation
-and caller-pointer failure behavior.  For OEM conversion prove byte capacity,
-terminators, DBCS/unrepresentable input and original error handling rather
-than assuming Unicode character count equals encoded byte length.  Keep safe
-guest writes distinct from the conversion algorithm; no durable guest pointer.
+and caller-pointer failure behavior from the selected USER owner.  Its import
+is independently buildable and testable before any Redirector change.  Keep
+safe guest writes distinct from the conversion algorithm; no durable guest
+pointer.
 
-### S6 — integration and closure
+### S6 — Redirector OEM copy (D26)
 
-S6 cannot use a passing fixture as a substitute for the selected worker
+Prove byte capacity, terminators, DBCS/unrepresentable input and original OEM
+error handling rather than assuming Unicode character count equals encoded
+byte length.  `NetpCopyWStrToStr` remains owned by its NetAPI source package;
+it does not borrow USER conversion policy merely because both process text.
+The only permitted guest-memory code publishes an already-produced bounded
+byte result under an existing finite lease.
+
+### S7 — integration and closure
+
+S7 cannot use a passing fixture as a substitute for the selected worker
 composition.  It publishes a compact final ledger that separates original
 code restored, mirror diff removed, independent implementation deleted and
 irreducible modern bindings retained.  WRITE remains a bounded frontier here;
