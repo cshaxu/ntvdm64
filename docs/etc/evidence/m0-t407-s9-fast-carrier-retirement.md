@@ -14,7 +14,7 @@ and FastStack mechanism. It retains the original non-fast WOW callback path
 | `dpmi32/dpmi32.c` | 19 lines | The 4 KiB guest FastWOW TEB/TD projection had no selected reader. |
 | `dpmi32/{data.c,dpmi32p.h}` | 9 lines | Sole state declarations for the removed carriers. |
 
-Net selected product diff: **147 lines deleted**, with no new behavior.
+Net selected product diff: **137 lines deleted**, with no new behavior.
 
 ## Retained original non-fast behavior
 
