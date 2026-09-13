@@ -7,13 +7,6 @@
 #include "host_def.h"
 #include "insignia.h"
 #include "xt.h"
-#include <stdint.h>
-
-/* DIVERGENCE(MVDM-HOST-DIV-081): the selected modern NT headers do not
- * publish this historical NTDLL routine.  Keep its original NTAPI import
- * shape so the private host-buffer fill call is checked on both x86 and x64;
- * this does not transport a guest address or an opaque resource identity. */
-VOID NTAPI RtlFillMemoryUlong(PVOID Destination, ULONG Length, ULONG Pattern);
 
 void
 bwdcopy(
@@ -58,7 +51,7 @@ memfill(
     unsigned char *h_addr_in
     )
 {
-     size_t len;
+     unsigned int len;
 
      len = h_addr_in + 1 - l_addr_in;
      memset(l_addr_in, data, len);
@@ -93,19 +86,13 @@ fwd_word_fill(
    int len
    )
 {
-        unsigned int data4;
-        size_t count;
+        unsigned int data4, count;
 	unsigned char *l_addr = l_addr_in;
 	unsigned char *h_addr = l_addr_in+(len<<1);
 	unsigned int *l_addr4,*h_addr4;
 
-	/* DIVERGENCE(MVDM-HOST-DIV-064): the original 32-bit product used
-	 * `unsigned int` both for the four-byte fill value and for native address
-	 * alignment.  Keep the data unit unchanged, but perform only the private
-	 * host-address arithmetic through uintptr_t so x64 does not truncate the
-	 * SoftPC backing pointer. */
-	l_addr4 = (unsigned int *)(((uintptr_t)l_addr + 3u) & ~(uintptr_t)3u);
-	h_addr4 = (unsigned int *)((uintptr_t)h_addr & ~(uintptr_t)3u);
+	l_addr4 = (unsigned int *)(((unsigned int)l_addr+3) & (~3));
+	h_addr4 = (unsigned int *)(((unsigned int)h_addr) & (~3));
 #ifdef	LITTLEND
         data = ((data >> 8) & 0xff) | ((data << 8) & 0xff00);
 #endif
@@ -125,15 +112,15 @@ fwd_word_fill(
 		}
                 data4 = data+(data<<16);
 
-#if 0
+/* DIVERGENCE(MVDM-HOST-DIV-064): select the original in-source fill loop. */
+#if 1
                 do *l_addr4++ = data4; while (h_addr4 > l_addr4);
                 l_addr = (unsigned char *)l_addr4;
 #else
-                count = (size_t)(h_addr4 - l_addr4);
-                while (count-- != 0u) {
-                    *l_addr4++ = data4;
-                }
+                count = h_addr4 - l_addr4;
+                RtlFillMemoryUlong(l_addr4, count, data4);
                 l_addr = (unsigned char *)l_addr4;
+                l_addr += count;
 #endif
 
 	}

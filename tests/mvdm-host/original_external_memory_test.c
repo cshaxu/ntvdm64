@@ -18,6 +18,7 @@ extern LONG VdmRemoveVirtualMemory(ULONG);
 extern LONG VdmAllocateVirtualMemory(PULONG, ULONG, BOOL);
 extern LONG VdmFreeVirtualMemory(ULONG);
 extern LONG VdmReallocateVirtualMemory(ULONG, PULONG, ULONG);
+extern void fwd_word_fill(unsigned short, unsigned char *, int);
 
 static void report(const char *message)
 {
@@ -48,6 +49,27 @@ int main(void)
     ULONG guest = 0, normal;
     void *gdp;
     SetUnhandledExceptionFilter(report_exception);
+    {
+        uint8_t buffer[96];
+        uint32_t digest = 2166136261u;
+        unsigned offset, words, i;
+        char message[80];
+        for (offset = 4; offset < 8; ++offset) {
+            for (words = 0; words <= 32; ++words) {
+                for (i = 0; i < sizeof(buffer); ++i) buffer[i] = 0xcc;
+                fwd_word_fill(0x1234, buffer + offset, words);
+                for (i = 0; i < sizeof(buffer); ++i) {
+                    if (i < offset || i >= offset + words * 2)
+                        CHECK(buffer[i] == 0xcc);
+                    digest = (digest ^ buffer[i]) * 16777619u;
+                }
+            }
+        }
+        wsprintfA(message, "word-fill 132 alignment/length cases digest=%08lx\n",
+            (ULONG)digest);
+        report(message);
+        CHECK(digest == 0x91153575u);
+    }
     session_initialize(&owner, 406);
     CHECK(external && session_activate(&owner) && session_thread_bind(&owner));
     gdp = setup_global_data_ptr();

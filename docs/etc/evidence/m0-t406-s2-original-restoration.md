@@ -382,3 +382,49 @@ Deployed x86 EXE: 3,235,328 bytes, SHA-256
 94f29e71f6a47cc21638bf1df1138dc94741cb3ec4ca49b4cf197e47d0a3d010.
 Review retained the original algorithms and failure branches, not a new
 pointer manager. Wider width and mapping-edge audit remains active.
+
+### Host fill-loop source recovery, pending group integration
+
+copy_fnc.c already contains a directly usable DWORD fill loop under #if 0.
+The local implementation had instead authored a count-down loop in its other
+branch, alongside width changes. Restored original types/alignment and chose
+the original loop by #if 1, without rewriting its body. Removed stdint and
+the now-unused RtlFillMemoryUlong declaration; DIV-081 retired, DIV-064 narrowed
+to source-branch selection. The original NTDLL branch is preserved inactive,
+not claimed tested or repaired. Its count contract is not part of this proof.
+
+Before restoration, the formal-library test exercised four start alignments
+and 0..32 word lengths (132 cases), checking guard bytes and hashing every
+output byte. Baseline digest 91153575. Restored source yields the same digest
+and passes the guard checks plus existing SAS/allocator/DIB tests, exit 0.
+Logs t406-s2-fill-baseline.txt and t406-s2-fill-original.txt are under runtime
+logs. Build logs fill-baseline-build.log and fill-original-build.log are in
+r002, using its intentional dependency-tracked formal library reuse.
+
+This verifies bounded output equivalence, not every data value or graphics
+mode. No product deployment yet; current runtime identity remains the prior
+DOS-pointer batch. Config tagged values and platform selection remain under
+review; complete group integration before publishing this working batch.
+
+### Config/fill group verified
+
+Restored config_inquire's original tagged-pointer return expressions and the
+complete original memory-size conditional bodies. The sole platform seam
+recognizes _M_IX86 alongside historical i386 locally, so selected x86 behavior
+does not change and no global CPU macro is introduced. DIV-117 retired;
+DIV-056 narrowed. Retained %p varargs correction and bounded observations.
+Config delta +26/-20 restores previously deleted original lines; copy_fnc
+delta +9/-22 removes the replacement loop and width scaffolding. Combined
+source delta +35/-42 (net seven fewer lines), not a count of algorithms.
+
+Formal config-fill-build.log succeeds. Memory regression includes the 132
+fill cases and prior SAS/allocator/DIB tests, exit 0. Deployed x86 EXE:
+3,235,328 bytes, SHA-256
+6fd33cecbf1e40c8eef907306d2e4cef0bf1cae4bcebd9b7ee51da08ff126bb4.
+
+Actual integration logs t406-s2-config-fill-{dir,mem,command,edit,write,ems}.txt
+are under runtime logs: DIR 37136, MEM 41192, COMMAND 23636 exit 0; EDIT
+40404 reaches editor then bounded timeout; WRITE 44640 exits 255; EMS 23176
+passes mapping and cross-page move/exchange, exit 0. Refreshed the isolated
+package product from this link and removed Q:. No all-graphics or full WRITE
+claim. This closes this restoration group; the remaining audit stays open.

@@ -512,15 +512,24 @@ GLOBAL VOID config( VOID )
         // dpmi memory. We get this size from the registry.
         //
 
-	 /*
-	  * DIVERGENCE(MVDM-HOST-DIV-056): the historical condition selected
-	  * the i386 guest path only when the host build defined i386; its other
-	  * branch was for the NT RISC VDM product.  This product always models an
-	  * x86 guest on both supported host architectures, so retain the original
-	  * x86 calculation without deriving guest semantics from the host ABI.
-	  */
+/* DIVERGENCE(MVDM-HOST-DIV-056): recognize the selected MSVC x86 macro. */
+#if defined(i386) || defined(_M_IX86)
 	 // adding 1024 below is for conventional memory
 	 vdmMemorySize = xmsMemorySize + emsMemorySize + 1024;
+#else
+	 vdmMemorySize = GetVDMSize(VDMForWOW);
+
+	 // Extend the vdm size if the user asks for it through a .PIF.
+	 // Also make sure we have at least appropriate size of dpmi
+	 // memory.
+	 //
+	 if ((xmsMemorySize + emsMemorySize +  1024 + dpmiMemorySize) >
+	      vdmMemorySize)
+	 {
+	    vdmMemorySize = xmsMemorySize + emsMemorySize + 1024 +
+			    dpmiMemorySize;
+	 }
+#endif
 
 #ifndef PROD
 	dpmiMemorySize = vdmMemorySize - (xmsMemorySize + emsMemorySize + 1024);
@@ -587,9 +596,6 @@ GLOBAL VOID config( VOID )
 GLOBAL VOID *
 config_inquire(UTINY hostID, ConfigValues *values)
 {
-	/* DIVERGENCE(MVDM-HOST-DIV-117): the original NT4 ABI tags SHORT
-	 * configuration values in a VOID * return.  Preserve that private
-	 * tagged-value contract through INT_PTR on both host widths. */
         /* Must be a static because returned to called */
         // BUGBUG should be change (caller provides buffer!!!)
         static ConfigValues tmp_vals;
@@ -626,23 +632,23 @@ config_inquire(UTINY hostID, ConfigValues *values)
 
                 case C_GFX_ADAPTER:
                         values->index = VGA;
-                        return ((VOID *)(INT_PTR)VGA);
+                        return ((VOID *)VGA);
 
                 case C_WIN_SIZE:
                         values->index = 2;     /* 2, 3 or 4. */
-                        return ((VOID *)(INT_PTR)values->index);
+                        return ((VOID *) values->index);
 
                 case C_EXTENDED_MEM_SIZE:
 			values->index = (SHORT)(xmsMemorySize/1024);
-                        return ((VOID *)(INT_PTR)values->index);
+                        return ((VOID *)values->index);
 
                 case C_LIM_SIZE:
 			values->index = (SHORT)(emsMemorySize/1024);
-			return ((VOID *)(INT_PTR)values->index);
+			return ((VOID *)values->index);
 
                 case C_MEM_LIMIT:
                         values->index = 640;
-                        return ((VOID *)(INT_PTR)values->index);
+                        return ((VOID *)values->index);
 
                 case C_COM1_NAME:
                         strcpy (values->string, "COM1");
@@ -684,11 +690,11 @@ config_inquire(UTINY hostID, ConfigValues *values)
 
                 case C_AUTOFLUSH:
 			values->index = TRUE;
-                        return ((VOID *)(INT_PTR)values->index);
+                        return ((VOID *)values->index);
 
                 case C_AUTOFLUSH_DELAY:
 			values->index = read_profile_int(PROFILE_LPT_AUTOFLUSH_DELAY); //Delay in secs
-                        return((VOID *)(INT_PTR)values->index);
+                        return((VOID *)values->index);
 
 //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -732,7 +738,7 @@ config_inquire(UTINY hostID, ConfigValues *values)
                     case C_NAME_RECORD:
                     case C_NUMBER_RECORD:
                         values->index = conf_tab[hostID].data->index;
-                        return ((VOID *)(INT_PTR)values->index);
+                        return ((VOID *) values->index);
                     default:
                         break;
                     }
@@ -742,11 +748,11 @@ config_inquire(UTINY hostID, ConfigValues *values)
 
 		case C_COM_SYNCWRITE:
 		    values->index = (short)read_profile_int(PROFILE_COM_SYNCWRITE);
-		    return ((VOID *)(INT_PTR)values->index);
+		    return ((VOID *)values->index);
 
 		case C_COM_TXBUFFER_SIZE:
 		    values->index = (short)read_profile_int(PROFILE_COM_TXBUFFER_SIZE);
-		    return ((VOID *)(INT_PTR)values->index);
+		    return ((VOID *)values->index);
 
                 default:        /* ie everything else */
                         /* fail */
