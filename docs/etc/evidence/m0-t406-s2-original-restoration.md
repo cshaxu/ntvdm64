@@ -942,3 +942,42 @@ the four ordinary deployed programs do not select it. No available real
 program in `O:\ntvdm64` currently reaches external DIB registration/resolution
 or the DIV-267 load/store variants. Those rows retain formal regression
 coverage but remain explicitly unverified by a deployed real-program hit.
+
+## Post-restoration x86-width re-screen
+
+The original/current scan was repeated after the above trace delivery. It
+compares all 181 `text-different` rows retained in
+`build/M0-T405/S1/paired-diff-001/paired-diff.csv` with `git diff --no-index
+--ignore-cr-at-eol -U0`, selecting added lines matching x64/pointer-width
+spelling (`uintptr_t`, `ULONG_PTR`, `SIZE_T`, `size_t`, `IHP`/`IHPE`, and `%p`).
+It finds 43 added-line matches in 28 paired paths. This is a bounded mirror
+screen, not a claim about unpaired adapters or an estimate of removable code.
+
+Twenty-four matches are explanatory comments. Of the remaining 19 code lines,
+the retained categories are: required bounded tracing at the CCPU segment and
+RAM-access seams (two lines), generated C-VID function-pointer declarations
+(two), an original restored `IHPE` typedef (one), and public OpenNT RTL
+`SIZE_T` declarations (two). The `host_malloc` spelling in `ev_glue.c` is one
+redundant source-footprint line because the selected original `host_def.h`
+already defines it as `malloc`; the three `%p` diagnostics and their argument
+casts are x86-textual candidates only after an x86 warning/build check. They
+are not semantic repairs and have no runtime-hit requirement.
+
+The only semantic-footprint candidate established by the screen is the
+COMMAND standard-handle carrier. Original `cmdredir.c` publishes the 32-bit
+native HANDLE directly in BX:CX and original `cmdexec.c` casts the retrieved
+DWORD directly to HANDLE. The current `mvdm_command_redirection`
+`publish_handle`/`resolve_handle` pair merely splits/recombines that same
+nonzero 32-bit value: it has no identity table, lease, epoch, validation or
+lifetime ownership. A source-shaped x86 recovery may therefore remove the two
+adapter APIs, their declarations, the eight `cmdredir.c` call sites and
+`cmdexec.c`'s resolver helper, while retaining the separate record-address
+lease/identity seam. This is deliberately **not implemented**: it changes
+error behavior for zero handles and requires the original COMMAND redirection
+fixture plus a real child-output-redirection regression before approval.
+
+No other current matched line is classified as a direct x86 rollback solely
+because it mentions a pointer-width type. C-VID provider signatures,
+diagnostic formatting, guest-pointer lifetime and public SDK declarations need
+their own paired ABI/consumer proof. This leaves the T's zero-autonomous-code
+goal open rather than treating the 43 lexical matches as solved.
