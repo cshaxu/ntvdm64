@@ -2,17 +2,32 @@
 
 ## Current Work
 
-**No active M/T/S packet.**
+**Active: M0 T407 S8.**
 
-## T407 Closure Record
+## Active Packet
 
-T407 is closed after S1–S6. S1–S4 established the source-first ledger and
-restored XMS/frame boundaries; S5 delivered descriptor-domain separation and
-removed the cache/`0040h` policy at `e8e41ab7f`; S6 completed the remaining
-platform-carrier disposition. The [S6 record](../etc/evidence/m0-t407-s6-platform-carrier-disposition.md)
-names the TSS/TR and FastWOW receiver packages and the unproven BOP 53:11/WOW
-frontier. This closure does not claim full WRITE, task-switch, FastWOW, or
-multi-session-IDT acceptance.
+### M0 T407 S8 — source-shaped carrier recovery design
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T407 S8, Ordinary Mode, one agent designs source-shaped recovery then independently re-reviews the evidence. |
+| Admission And Approval | The owner rejects T407 closure until the TSS/TR, table-register and FastWOW carrier claims are explained and source-proven. The existing automatic approval for all remaining T407 S packages admits this follow-on design after delivered S7. |
+| Candidate Proposal | [Original DPMI and XMS contract restoration](../proposals/proposal-dpmi-xms-contract-restoration-001.md). |
+| Objective | Turn S7's owner matrix into a bounded implementation design: exact original field/caller inventory, selected WOW provider proof and a smallest-facade plan for only kernel-uncomposable mechanics. |
+| Non-goals | No claim that kernel source is absent merely because it is kernel code; no new carrier, CPU semantic change, broker work or premature transfer to a later package. |
+| Reference Baseline | [S7 original-carrier audit](../etc/evidence/m0-t407-s7-original-carrier-implementation-audit.md), S4–S6 evidence, original `dpmi386.c`, `dpmiint.c`, `dxboot.asm`, `fastwow.asm`, kernel VDM sources and current selected build/link graph. |
+| Files And ABI Surface | Read-only original/current source and build records; Status and indexed evidence. Product change only after a four-rung design verdict. |
+| Applicable Rules | Goal, architecture, coding, execution, document and source-policy authorities; mandatory source-recovery audit. |
+| Verification | Exact source/caller/build searches; field/layout and lifecycle matrices; selected WOW link/load proof; proposed runtime hit points; governance, diff review, commit and push. |
+| Expected Markers | Every carrier has an exact source-shaped recovery design and concrete test; no compatibility carrier is called original without proof. |
+| Asset Needs | Existing pinned OpenNT/OpenNT-4.5 trees and local mirrors only; no new source/media. |
+| Reporting Requirements | Explain original location, why code is split, current equivalence status, user-mode recovery feasibility, test plan and code/diff consequence for every carrier. |
+| Stop Conditions | An unlocated source, non-composable kernel primitive or unproven selected WOW provider is evidence—not authority to close or transfer without naming a recovery experiment. |
+| Exit Criteria | A reviewable recovery design and admitted implementation grouping exist for all three carrier families; no unsupported closure assertion remains. |
+| Original Owner Request | “这是哪个任务啊？我们如何验证？为何原始opennt代码没有实现这些？这么重要的功能怎么就不能有原始代码呢？”以及“当前的实现，符合原始语义吗？是不是其实还是可以使用原始opennt代码复刻用户态下能跑的语义？” |
+| Similar-Issue Sweep | VDM_TIB publication, TEB/TD construction, process LDT/GDT/IDT setup, TSS/TR initialization, WOW provider build/load and worker reuse/teardown. |
+
+S1–S5 are delivered at `13fc0fd4b`, `d36c9e611`, `d16e3a72e`, `9234a98de` and `e8e41ab7f`. S6's previous closure was an incomplete disposition. S7 is delivered in the indexed original-carrier audit; S8 remains active for the recovery design.
 
 T406 is closed by its final delivery; [S2 closure evidence](../etc/evidence/m0-t406-s2-original-restoration.md#s2-final-x86-width-and-access-boundary-disposition)
 records its restored cohorts, remaining registered seams, trace hit/no-hit results,
