@@ -8,6 +8,15 @@ reduction design before approving repairs. See the
 [S1 research/design](../etc/evidence/m0-t406-s1-physical-mapping-design.md).
 Earlier candidate language below is retained as proposal history.
 
+Owner amendment after S1 reporting: T406 also audits and cleans unnecessary
+x64 pointer-width patterns across current mirrors, overlays and autonomous
+bindings, with original-paired x86 ABI/build/runtime proof. Research first:
+classify pure width residue separately from guest layout, calling convention,
+lifetime and genuine platform integration. Do not transfer this width-only
+sweep to another candidate or broaden it into their functional repairs.
+The first paired-diff screening is not complete semantic clearance; unpaired
+providers and per-hunk dispositions remain required before implementation.
+
 On 2026-09-12 the owner approved arranging an independent candidate T for
 U02 at the head of [Queue](../states/QUEUE.md), before DPMI/XMS restoration.
 This registers the package, not a second active task or numeric T allocation.

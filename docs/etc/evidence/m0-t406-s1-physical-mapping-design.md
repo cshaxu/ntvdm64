@@ -203,6 +203,83 @@ CCPU remap model are absent from searched inputs. Necessary capabilities are
 not proof that the current linked-list implementation is necessary. Original
 sources may specify caller behavior without providing executable lower bodies.
 
+## Owner questions: provenance, necessity and wider width-pattern sweep
+
+The owner requested same-pattern x64 cleanup within T406 and research first
+on whether the mapping capability is actually needed. This expands the T's
+width-only cleanup scope, not authority to implement unreviewed replacements.
+
+Historical evidence, read directly with git show:
+
+- ef28fa339:docs/etc/evidence/m0-t310-s7-physical-page-source-recovery-audit-001.md
+  explicitly required a surrogate on both x86 and x64 before passing the
+  original fixed-width HostAddress. It already knew CCPU PhysicalPageREC
+  did not provide the presumed translation layout. Its test manually
+  published a nonaligned range and tested direct physical access/removal;
+  it expressly did not establish WOW DIB operation.
+- c9705a57c:docs/etc/evidence/m0-t310-s8-p4-ems-page-alias-contract-closure-001.md
+  added numeric EMS aliases. Its stated verification compiled the three
+  affected units on x86/x64; this is not a real EMS application workload.
+  Its categorical claim that the missing functions were kernel-VDM services
+  is not established by an original defining body and must not be repeated
+  as proved provenance.
+- 2a68762cc removed mapping_manager calls and changed identifier to the x86
+  pointer, but retained publish/prepare/set/cancel and the upper protocol.
+  The T403 inventory explicitly retained the physical-page adapter and
+  described further width-candidate review. It does not prove all x64-derived
+  expressions or the original raw-pointer caller contract were restored.
+
+Original upper functions were not omitted wholesale: ef28fa339 edits the
+existing nt_mem body rather than introducing its allocator; current wdib is
+text-equal; EMS and CCPU loops retain original algorithms. Distinguish that
+reuse from added width substitutions and the autonomous lower mapping body.
+
+Original obj.vdm/cdefine.inc selects MONITOR for 386, whereas the RISC branch
+selects CPU_40_STYLE and optionally CCPU. nt_emm.c excludes MONITOR;
+x86_emm.c requires it. Our x86 executable selects the emulated CPU40 branch,
+not original native-x86 monitor behavior. That explains a platform-integration
+difference but cannot identify missing lower bodies as kernel code. The
+NTVDMx64 TODO stub proves only that that file lacks an implementation: no
+tested feature/profile coverage was established for it. A stub is harmless
+only when the call is absent, its effect is already provided elsewhere, or
+the relevant feature is explicitly unsupported. None follows from its name.
+
+Capability meanings and present mechanisms:
+
+| Capability | Purpose and current mechanism | What COMMAND/EDIT success proves |
+| --- | --- | --- |
+| EMS alias | A small conventional-memory window exposes a selected expanded-memory page; multiple windows may share it. Current destination/source numeric list is queried in c_GetPhyAdd. | Not proof of map/switch/share/unmap. Allocation or EMS presence alone is not a window workload. |
+| External DIB | Guest and host GDI access the same pixel storage. Current published-pointer record maps a reserved guest address to host bytes. | DOS text EDIT is not a WOW DIB consumer; no coverage of this contract was established. |
+| Restore backing | Removing a mapping returns the address to ordinary storage and retires borrowed bytes before their owner frees them. Current code removes exact-span records and falls back to RAM. | No proof without an add/use/remove/reuse workload. |
+| Cross-boundary access | One operation may span windows backed by different physical ranges. Scalar SAS re-resolves bytes; original EMS direct memcpy resolves only the first address. | Ordinary text editing cannot establish correctness for discontinuous mapped spans. |
+
+Do not infer either unused or correct from successful COMMAND/EDIT: the
+existing reviewed acceptance lacks mapping-specific runtime evidence. A real
+usage study should distinguish definition, link selection, initialization,
+actual map calls, guest accesses, remapping and teardown for each frozen
+workload. Then test a deliberate EMS consumer and an original WOW DIB caller;
+no user-driven manual retest or stub replacement was performed in this turn.
+
+Width screening used the existing paired-diff.csv original/current mapping,
+recomputed zero-context diffs and filtered added lines for x64/64-bit,
+uintptr_t/intptr_t, ULONG_PTR/UINT_PTR/LONG_PTR/INT_PTR, IHPE/IHP, size_t,
+ptrdiff_t and %p. It found 69 files and 215 matching added lines. These are
+screening hits, not 69 bugs or 215 deletable lines; ordinary declarations,
+guest-layout safety, native pointer use and diagnostics also match. The
+paired-input sweep covers mirror pairs, not unpaired adapters/overlays, which
+remain a separate required pass. Width-only hunk classification and paired
+x86 tests remain unfinished, so the earlier 159-line mapping-cohort estimate
+must not be silently expanded by this count.
+
+Additional families include DPMI IntelBase/FlatAddress widening (DIV-140),
+DEM pointer traversal/sentinels (DIV-003), COM/LPT ioctl carriers (DIV-068),
+TLS masks (DIV-065), SoftPC IHPE (DIV-025), C-VID pointer types (DIV-051),
+COMMAND string lengths and packed guest declarations. T406 owns width-only
+restoration across these families; substantive DPMI/Console/Base behavior
+retains its already assigned candidate. Classify each as width-only revert,
+necessary x86 ABI/guest-layout binding, mixed behavior needing original-owner
+review, or inactive/diagnostic footprint before any blanket cleanup.
+
 ## Reviewer conclusion and limits
 
 S1 establishes a bounded restoration design and measured gross candidates,

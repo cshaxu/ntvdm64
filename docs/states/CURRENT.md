@@ -18,7 +18,16 @@ S1 findings are ready in the [research/design report](../etc/evidence/m0-t406-s1
 (128 x86-width cohort, 31 conditional remap protocol), plus 85 gross
 adapter/header protocol-retirement lines. These are not tested net savings.
 Lower original mapping bodies remain unlocated in searched inputs; no repair
-or new runtime acceptance is claimed. Await owner decision before S2.
+or new runtime acceptance is claimed. S1 follow-up research continues under
+the owner amendment below; S2 has not started.
+
+Owner amendment: extend this T to audit and subsequently remove unnecessary
+x64-width patterns beyond the U02 files, with paired original/current evidence
+and x86 ABI/regression proof. First research the original-vs-local history,
+MONITOR/CCPU branch differences, empty-stub significance and COMMAND/EDIT
+runtime coverage. This extends S1 research now, not permission to implement
+an unreviewed lower mapping substitute. Width-only cleanup stays in this T;
+unrelated functional repairs retain their existing candidate owners.
 
 ## Active Packet
 
