@@ -482,3 +482,35 @@ future attribution. Final t406-s2-com-redir-memory-final.txt exits 0 with all
 prior memory/fill/DIB tests. No replacement function or test stub was added.
 Direct DLL path-normalization execution remains unverified, explicitly not
 covered by these regressions. The wider T remains open.
+
+## Conventional EMS window span: reproduced failure
+
+The preceding logical-page MOVE/EXCHANGE PASS does not cover conventional
+addresses crossing independently mapped EMS windows. Original
+softpc.new/base/bios/emm_fncs.c:2141 explicitly assumes Intel memory is
+contiguous; its loop splits expanded operands at 16 KiB, not conventional
+operands. host_copy_con_to_con in host/src/nt_emm.c uses EM_moves, which
+resolves each starting address once before MoveMemory.
+
+Extended the existing guest probe without changing production code: map
+logical page 1 into window 0 and page 0 into window 1, write 5b6c/7d8e to
+the last/first words, then request an INT 67h/57h four-byte conventional
+copy from frame:3ffe to ordinary guest RAM. This reverse mapping avoids
+accidentally passing through contiguous logical backing.
+
+Built with `nasm -f bin tests/observation/ems_mapping_probe.asm -o
+build/M0-T406/S2/r002-dib-restoration/emsprobe-window.com`;
+probe SHA-256 bd1916921a4cccf7c7b3c1c5d77fb609cfc89029d8f7627e34f8dbddab05cd0c.
+The isolated Q: package EXE hash is the published
+8f6e90a7425575007b967ea0fc28d28c924c671b4381dcbd6cbd0371b88457ec.
+Observer invocation: `mapping-workload-observer.exe ems
+O:\ntvdm64\logs\t406-s2-ems-window.txt Q:\`.
+
+Result: PID 38344 exits c0000005, not PASS. Fault address 00756c87,
+image base 00700000, read target 03468000; recorded stack includes source
+03467ffe and length 4. Q: is removed and the test job is closed. The
+normal runtime EXE was not changed. This is concrete missing integration
+coverage, consistent with a host copy running past a translated page; it
+does not implicate CCPU instruction semantics. Preserve this failing test
+while completing original-source/binding analysis. No mapping closure or
+production repair is claimed by this evidence delivery.

@@ -104,6 +104,33 @@ org 100h
     jne mismatch
     cmp word [transfer_result+2],48adh
     jne mismatch
+    ; Conventional addresses may cross independently mapped EMS windows.
+    ; Map page 1 before page 0 so host-contiguous copying cannot accidentally
+    ; satisfy the test by following the logical backing allocation order.
+    mov byte [phase],'W'
+    mov bx,1
+    xor al,al
+    call map
+    xor bx,bx
+    mov al,1
+    call map
+    mov es,[frame]
+    mov word [es:3ffeh],5b6ch
+    mov ax,[frame]
+    add ax,400h
+    mov es,ax
+    mov word [es:0],7d8eh
+    mov ax,[frame]
+    mov [window_source_segment],ax
+    mov ax,cs
+    mov [window_dest_segment],ax
+    mov si,window_request
+    xor al,al
+    call transfer
+    cmp word [transfer_result],5b6ch
+    jne mismatch
+    cmp word [transfer_result+2],7d8eh
+    jne mismatch
     mov byte [phase],'D'
     mov dx,[handle]
     mov ah,45h
@@ -188,9 +215,17 @@ read_source_handle dw 0
     db 0
     dw 0,transfer_result
 read_dest_segment dw 0
+window_request:
+    dd 4
+    db 0
+    dw 0,3ffeh
+window_source_segment dw 0
+    db 0
+    dw 0,transfer_result
+window_dest_segment dw 0
 transfer_source dw 1357h,2468h
 transfer_result dw 0,0
-passed db 'EMS MAP SWITCH ALIAS UNMAP MOVE EXCHANGE FREE PASS',13,10,'$'
+passed db 'EMS MAP SWITCH ALIAS UNMAP MOVE EXCHANGE WINDOW FREE PASS',13,10,'$'
 noems db 'EMS NOT INSTALLED',13,10,'$'
 failmsg db 'EMS FAIL phase/status: $'
 newline db 13,10,'$'
