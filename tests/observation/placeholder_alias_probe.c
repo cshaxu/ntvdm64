@@ -70,6 +70,12 @@ int main(void)
         page, MEM_REPLACE_PLACEHOLDER, PAGE_READWRITE, NULL, 0) == window + page);
     second_mapped = 1;
     CHECK(window[page] == 0x8e && window[page + 1] == 0x7d);
+    /* nt_mem's original decommit cannot be applied to section views. */
+    SetLastError(ERROR_SUCCESS);
+    CHECK(!VirtualFree(backing, page, MEM_DECOMMIT));
+    printf("section-decommit-rejected error=%lu\n", GetLastError());
+    CHECK(VirtualQuery(backing, &region, sizeof(region)) != 0);
+    CHECK(region.State == MEM_COMMIT && backing[0] == 0x8e);
     status = 0;
 cleanup:
     if (second_mapped && !UnmapViewOfFile2(GetCurrentProcess(),

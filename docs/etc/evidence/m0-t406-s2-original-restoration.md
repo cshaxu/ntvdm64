@@ -588,3 +588,27 @@ or guest acceptance. No production source, formal EXE or deployed EXE changes.
 The committed guest window regression still fails on the product baseline.
 Before integrating, audit original nt_mem commit/decommit/resize/free and
 external backing lifetime; do not substitute this experiment for that closure.
+
+Lifecycle follow-up: nt_mem.c uses private-memory decommit in
+VdmDeCommitVirtualMemory, VdmFreeVirtualMemory and in-place shrink; separate
+header-table commit/decommit must remain private. A moved allocation copies
+bytes and then calls the original free path. Therefore globally substituting
+a section for intelMem cannot preserve these callers unchanged.
+
+Extended the native experiment to attempt VirtualFree(MEM_DECOMMIT) on its
+canonical section view. Same x86 /MT /W4 /WX build succeeds; log
+O:\ntvdm64\logs\t406-s2-placeholder-lifetime.txt records
+`section-decommit-rejected error=87`, then the previous PASS. VirtualQuery
+still reports MEM_COMMIT and the sentinel survives. Updated probe EXE hash:
+f0330fdf5ef31e901d7b623cb54cf37295d53db32bc6f4345a0e4fbd2a62b86e.
+This negative result is consistent with the documented
+[section commitment restriction](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createfilemappinga):
+SEC_RESERVE permits later commitment but not VirtualFree decommit afterward.
+Neither replacing decommit with a success no-op nor retaining all committed
+storage indefinitely would restore the original lifecycle.
+
+Retain the native-alias route as feasible but not yet composable: it needs a
+bounded backing-granularity and reclamation design, or a different proven
+same-shaped binding. Production code is unchanged. This finding rules out
+the simple single-section replacement; it does not prove that every native
+alias design is impossible.
