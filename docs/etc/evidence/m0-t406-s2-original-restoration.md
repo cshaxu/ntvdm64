@@ -688,3 +688,23 @@ Known EMS failure and pending access-binding approval remain unchanged.
 This is source/declaration classification only, no product-source change,
 new runtime test or complete remaining-width count. Existing function and
 overlay bodies keep their separate unresolved owners and evidence.
+
+### Current bounded width re-screen
+
+At 9301f97fc, re-ran original/current diff for historical `text-different`
+rows in build/M0-T405/S1/paired-diff-001/paired-diff.csv (1,989 total rows).
+Command uses git diff --no-index --ignore-cr-at-eol -U0, examines added
+non-header lines for x64, 64-bit, uintptr_t/intptr_t, Windows pointer-sized
+integer types, IHPE/IHP, size_t/ptrdiff_t and %p. Result: 41 files, 72
+matching added lines. This is a screening count, not remaining deletable
+code or complete new-file/overlay coverage; it includes comments and proved
+necessary declarations. Historical row classification is not regenerated
+here, so this does not establish a whole-repository completion claim.
+
+Next reviewed cohort is DEM guest-handle serialization and search-record
+casts: dem.h GETHANDLE, demfcb.c two casts, demfile.c four casts, demsrch.c
+six pointer-carrier casts. Examine only removable width intermediates;
+guest identity policy and lifetime changes remain separately owned. Other
+screened families still include generated callback declarations, diagnostics,
+packed guest layouts, CCPU/event bindings and selected-platform macros.
+All require explicit dispositions before declaring the width sweep complete.
