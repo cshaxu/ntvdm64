@@ -421,6 +421,8 @@ Notes:
             if (!NT_SUCCESS(Status)) {
                 setCX(0);
                 setDX(0);
+                mvdm_softpc_record_dpmi_pm_stack_info(LockedPMStackSel,
+                    (unsigned int)getCX(), (unsigned int)getDX(), 0u);
                 return;
             }
 
@@ -438,6 +440,8 @@ Notes:
 
         setCX(HIWORD(Cpu40PmStackInfoAddress));
         setDX(LOWORD(Cpu40PmStackInfoAddress));
+        mvdm_softpc_record_dpmi_pm_stack_info(LockedPMStackSel,
+            (unsigned int)getCX(), (unsigned int)getDX(), 1u);
         return;
     }
 #endif

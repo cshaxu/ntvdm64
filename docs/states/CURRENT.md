@@ -2,32 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T407 S11.**
+**Active: M0 T407 S12.**
 
 ## Active Packet
 
-### M0 T407 S11 — Non-fast DOSX publication trace
+### M0 T407 S12 — Post-53:11 DOSX BOP continuation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T407 S11, Ordinary Mode, one agent implements bounded instrumentation then independently re-reviews the evidence. |
-| Admission And Approval | The existing automatic approval for remaining T407 S packages admits the next recovery experiment after S10. |
+| Identifier Mode | M0 T407 S12, Ordinary Mode, one agent implements bounded instrumentation then independently re-reviews the evidence. |
+| Admission And Approval | The existing automatic approval for remaining T407 S packages admits the next recovery experiment after S11. |
 | Candidate Proposal | [Original DPMI and XMS contract restoration](../proposals/proposal-dpmi-xms-contract-restoration-001.md). |
-| Objective | Observe the selected non-fast DOSX BOP `53:00/01/02/11` publication and transition order, including `SEL_IDT` descriptor availability, and use that evidence to identify the next source-owned missing contract behind the WRITE frontier. |
-| Non-goals | No Fast carrier restoration, CPU instruction change, broker work, WOW/provider policy change or WRITE acceptance claim. |
-| Reference Baseline | [S10 IDT lifecycle recovery](../etc/evidence/m0-t407-s10-idt-lifecycle-recovery.md), original `dxboot.asm`/`dxutil.asm` ordering, selected non-fast `GetFastBopAddress` provider. |
-| Files And ABI Surface | Bounded default-off DPMI trace binding, test/observation harness only if needed, Status and indexed evidence. |
+| Objective | Observe the source-owned CPU40 return from the completed DOSX `53:11` BOP through the immediate DOSX continuation, and establish whether the required next `NSetSegmentDscr(SEL_VDMTIB, ...)` reaches `53:00` or identify the first original CPU terminal. |
+| Non-goals | No Fast carrier restoration, provider-result change, CPU instruction semantics change, broker work, WOW/provider policy change or WRITE acceptance claim. |
+| Reference Baseline | [S11 DOSX publication trace](../etc/evidence/m0-t407-s11-dosx-publication-trace.md), original `dxboot.asm` post-`InitializePmStackInfo` order, selected CPU40 BOP return path. |
+| Files And ABI Surface | Bounded default-off CPU continuation witness, test/observation harness only if needed, Status and indexed evidence. |
 | Applicable Rules | Goal, architecture, coding, execution, document and source-policy authorities; mandatory source-recovery audit. |
-| Verification | Original/current BOP ordering matrix; exact scalar trace with no host pointers; formal x86 build; MEM/COMMAND regression and bounded WRITE observation; governance, diff review, commit/push. |
-| Expected Markers | A PID-correlated record says whether `SEL_IDT` was published before `53:01`, and names the first missing source contract if the transition fails. |
+| Verification | Original/current post-`53:11` continuation matrix; exact scalar trace with no host pointers; formal x86 build; MEM/COMMAND regression and bounded WRITE observation; governance, diff review, commit/push. |
+| Expected Markers | A PID-correlated record says whether the source-required `SEL_VDMTIB` publication is reached, or identifies the first source-owned CPU terminal before it. |
 | Asset Needs | Existing pinned OpenNT/OpenNT-4.5 trees and local mirrors only; no new source/media. |
-| Reporting Requirements | Explain the original location and selected profile, trace hit/no-hit, source owner of every missing result, and the exact code/diff consequence. |
-| Stop Conditions | An unlocated source, non-composable kernel primitive or unproven selected provider is evidence—not authority to claim a repair; record the next recovery experiment. |
-| Exit Criteria | Bounded trace evidence, formal build and regression result, and a named next source-first repair or a source-proven no-op. |
+| Reporting Requirements | Explain the original next instruction/descriptor publication, trace hit/no-hit, source owner of every terminal, and the exact code/diff consequence. |
+| Stop Conditions | An unlocated source, non-composable kernel primitive or unproven selected return path is evidence—not authority to claim a repair; record the next recovery experiment. |
+| Exit Criteria | Bounded trace evidence, formal build and regression result, and a named source-first repair or source-proven no-op. |
 | Original Owner Request | “我在等着你证明呢！”以及随后授权自动准入余下 S。 |
-| Similar-Issue Sweep | `53:00/01/02/11`, descriptor publication, FastBOP zero contract, IDTR entry, DPMI-info projection and worker teardown. |
+| Similar-Issue Sweep | `53:11` provider return, `SEL_VDMTIB` descriptor publication, BOP service-byte/IP advance, far return and CPU terminal attribution. |
 
-S1–S5 are delivered at `13fc0fd4b`, `d36c9e611`, `d16e3a72e`, `9234a98de` and `e8e41ab7f`. S6's previous closure was an incomplete disposition. S7/S8 delivered the indexed original-carrier audit and corrected FastWOW selection; [S9 retirement](../etc/evidence/m0-t407-s9-fast-carrier-retirement.md) and [S10 IDT recovery](../etc/evidence/m0-t407-s10-idt-lifecycle-recovery.md) are delivered. S11 is active for bounded non-fast DOSX publication evidence.
+S1–S5 are delivered at `13fc0fd4b`, `d36c9e611`, `d16e3a72e`, `9234a98de` and `e8e41ab7f`. S6's previous closure was an incomplete disposition. S7/S8 delivered the indexed original-carrier audit and corrected FastWOW selection; [S9 retirement](../etc/evidence/m0-t407-s9-fast-carrier-retirement.md), [S10 IDT recovery](../etc/evidence/m0-t407-s10-idt-lifecycle-recovery.md), and [S11 publication trace](../etc/evidence/m0-t407-s11-dosx-publication-trace.md) are delivered. S12 is active for the post-`53:11` continuation boundary.
 
 T406 is closed by its final delivery; [S2 closure evidence](../etc/evidence/m0-t406-s2-original-restoration.md#s2-final-x86-width-and-access-boundary-disposition)
 records its restored cohorts, remaining registered seams, trace hit/no-hit results,

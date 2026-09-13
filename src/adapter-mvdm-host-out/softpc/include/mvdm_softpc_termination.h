@@ -58,6 +58,14 @@ void mvdm_softpc_record_dpmi_unhandled_exception(unsigned int vector,
                                                   unsigned int frame_32,
                                                   const uint16_t frame_words[8]);
 
+/* Default-off observation of the completed original 53:11 DPMI-info
+ * publication. It copies only already-live guest selector and CX:DX values;
+ * it cannot allocate, retain an alias, or influence the service result. */
+void mvdm_softpc_record_dpmi_pm_stack_info(unsigned int stack_selector,
+                                           unsigned int guest_cx,
+                                           unsigned int guest_dx,
+                                           unsigned int succeeded);
+
 /* Default-off, host-only observation of the original KRNL386 WOW BOP
  * ingress.  This deliberately has a private selector rather than enabling
  * the broad BOP trace, whose per-service I/O changes timing. */

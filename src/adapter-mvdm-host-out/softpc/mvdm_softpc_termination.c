@@ -22,6 +22,7 @@ static __declspec(thread) const char *mvdm_softpc_termination_origin =
     "unattributed";
 static char mvdm_softpc_command_continuation_report_path[MAX_PATH];
 static char mvdm_softpc_bop_return_report_path[MAX_PATH];
+static char mvdm_softpc_dpmi_publication_report_path[MAX_PATH];
 static char mvdm_softpc_cpu_return_report_path[MAX_PATH];
 static char mvdm_softpc_wow_bop_report_path[MAX_PATH];
 static char mvdm_softpc_retf_target_report_path[MAX_PATH];
@@ -117,6 +118,18 @@ void mvdm_softpc_capture_command_continuation_report_path(void)
     (void)SetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH", NULL);
     if (bytes == 0u || bytes >= sizeof(mvdm_softpc_bop_return_report_path))
         mvdm_softpc_bop_return_report_path[0] = '\0';
+
+    /* The DOSX publication witness is deliberately narrower than the broad
+     * BOP report: retain only 53:00/01/02/11 and keep this host-only path out
+     * of the inherited guest environment. */
+    mvdm_softpc_dpmi_publication_report_path[0] = '\0';
+    bytes = GetEnvironmentVariableA("MVDM_DPMI_PUBLICATION_REPORT_PATH",
+        mvdm_softpc_dpmi_publication_report_path,
+        (DWORD)sizeof(mvdm_softpc_dpmi_publication_report_path));
+    (void)SetEnvironmentVariableA("MVDM_DPMI_PUBLICATION_REPORT_PATH", NULL);
+    if (bytes == 0u ||
+        bytes >= sizeof(mvdm_softpc_dpmi_publication_report_path))
+        mvdm_softpc_dpmi_publication_report_path[0] = '\0';
 
     /* CPU simulation-return evidence is likewise host-only.  It must be
      * captured before cmdenv.c copies inherited variables into the guest. */
@@ -226,6 +239,9 @@ void mvdm_softpc_restore_child_report_paths(void)
     if (mvdm_softpc_bop_return_report_path[0] != '\0')
         (void)SetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH",
             mvdm_softpc_bop_return_report_path);
+    if (mvdm_softpc_dpmi_publication_report_path[0] != '\0')
+        (void)SetEnvironmentVariableA("MVDM_DPMI_PUBLICATION_REPORT_PATH",
+            mvdm_softpc_dpmi_publication_report_path);
     if (mvdm_softpc_retf_target_report_path[0] != '\0')
         (void)SetEnvironmentVariableA("MVDM_RETF_TARGET_REPORT_PATH",
             mvdm_softpc_retf_target_report_path);
@@ -481,7 +497,25 @@ void mvdm_softpc_record_bop_dispatch(unsigned int selector,
 {
     static const char hex[] = "0123456789ABCDEF";
     static LONG chmod_reports;
+    static LONG dpmi_02_enters;
     char message[] = "MVDM-BOP-DISPATCH 00:00\r\n";
+
+    if (mvdm_softpc_dpmi_publication_report_path[0] != '\0' &&
+        selector == 0x53u && (service == 0x00u || service == 0x01u ||
+        service == 0x11u || (service == 0x02u &&
+        InterlockedIncrement(&dpmi_02_enters) <= 32))) {
+        char publication_message[112];
+        int formatted;
+
+        formatted = snprintf(publication_message, sizeof(publication_message),
+            "MVDM-DPMI-PUBLICATION enter=53:%02X cs=%04X ip=%04X ds=%04X dx=%04X\r\n",
+            service & 0xffu, guest_cs & 0xffffu, guest_ip & 0xffffu,
+            guest_ds & 0xffffu, guest_dx & 0xffffu);
+        if (formatted > 0 && (size_t)formatted < sizeof(publication_message))
+            mvdm_softpc_write_captured_report(
+                mvdm_softpc_dpmi_publication_report_path,
+                publication_message, (DWORD)formatted);
+    }
 
     /* DIVERGENCE(ADAPTER-SOFTPC-046): this is an observer-only copy of an
      * already-decoded original ingress.  It must never use the guest-facing
@@ -559,6 +593,7 @@ void mvdm_softpc_record_bop_return(unsigned int selector,
                                    unsigned int guest_if)
 {
     static const char hex[] = "0123456789ABCDEF";
+    static LONG dpmi_02_leaves;
     char message[] =
         "MVDM-BOP-RETURN 00:00 cs=0000 ip=0000 ax=0000 cf=0 if=0\r\n";
     message[16] = hex[(selector >> 4) & 0x0fu];
@@ -579,6 +614,23 @@ void mvdm_softpc_record_bop_return(unsigned int selector,
     message[44] = hex[guest_ax & 0x0fu];
     message[49] = guest_cf ? '1' : '0';
     message[54] = guest_if ? '1' : '0';
+    if (mvdm_softpc_dpmi_publication_report_path[0] != '\0' &&
+        selector == 0x53u && (service == 0x00u || service == 0x01u ||
+        service == 0x11u || (service == 0x02u &&
+        InterlockedIncrement(&dpmi_02_leaves) <= 32))) {
+        char publication_message[112];
+        int formatted;
+
+        formatted = snprintf(publication_message, sizeof(publication_message),
+            "MVDM-DPMI-PUBLICATION leave=53:%02X cs=%04X ip=%04X ax=%04X cf=%u if=%u\r\n",
+            service & 0xffu, guest_cs & 0xffffu, guest_ip & 0xffffu,
+            guest_ax & 0xffffu, guest_cf != 0u ? 1u : 0u,
+            guest_if != 0u ? 1u : 0u);
+        if (formatted > 0 && (size_t)formatted < sizeof(publication_message))
+            mvdm_softpc_write_captured_report(
+                mvdm_softpc_dpmi_publication_report_path,
+                publication_message, (DWORD)formatted);
+    }
     mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH", message,
         (DWORD)(sizeof(message) - 1));
     if (selector == 0x54u && service == 0x0fu)
@@ -606,6 +658,26 @@ void mvdm_softpc_record_dpmi_unhandled_exception(unsigned int vector,
     if (formatted > 0 && (size_t)formatted < sizeof(message))
         mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH",
             message, (DWORD)formatted);
+}
+
+void mvdm_softpc_record_dpmi_pm_stack_info(unsigned int stack_selector,
+                                           unsigned int guest_cx,
+                                           unsigned int guest_dx,
+                                           unsigned int succeeded)
+{
+    char message[112];
+    int formatted;
+
+    if (mvdm_softpc_dpmi_publication_report_path[0] == '\0')
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-DPMI-PMSTACK es=%04X cx=%04X dx=%04X success=%u\r\n",
+        stack_selector & 0xffffu, guest_cx & 0xffffu,
+        guest_dx & 0xffffu, succeeded != 0u ? 1u : 0u);
+    if (formatted > 0 && (size_t)formatted < sizeof(message))
+        mvdm_softpc_write_captured_report(
+            mvdm_softpc_dpmi_publication_report_path, message,
+            (DWORD)formatted);
 }
 
 void mvdm_softpc_record_wow_bop_entry(unsigned int guest_cs,

@@ -9,6 +9,10 @@ The follow-on [S10 IDT lifecycle recovery](evidence/m0-t407-s10-idt-lifecycle-re
 replaces the stale `53:00` IDTR latch with the original final `SEL_IDT`
 descriptor publication contract.
 
+[S11's non-fast DOSX publication trace](evidence/m0-t407-s11-dosx-publication-trace.md)
+proves that `53:01` and the `53:11` guest projection complete; the current
+frontier is the immediate original DOSX continuation after that BOP return.
+
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
 | [T407 original-carrier audit](evidence/m0-t407-s7-original-carrier-implementation-audit.md) | M0 T407 S7 | Corrective original-owner audit for DPMI tables/TIB, TSS/TR and FastWOW TEB/TD; separates recoverable user-mode source from kernel-only mechanics. | Retain through T407 closure and carrier acceptance. |
