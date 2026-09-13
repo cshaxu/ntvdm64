@@ -144,6 +144,13 @@ open; the current deployed identity is in Current Technical Baseline below.
 | Original Owner Request | Full request retained in Admission And Approval above. |
 | Similar-Issue Sweep | EMS, external DIB, CPU/SAS byte and bulk/cross-page accesses, backing lifetime and fixture-only publication bypasses. |
 
+Owner verification amendment: every T406 semantic binding retained because an
+original implementation is unavailable must have its registered divergence,
+a bounded first-hit trace at its semantic boundary, and a PID-correlated
+real-program run that records whether it hit. A formal fixture proves its
+contract but does not substitute for this runtime-hit evidence. No-hit rows
+remain explicitly unverified rather than inferred correct from compilation.
+
 ## Current Technical Baseline
 
 - Sole product: Win32/x86 ntvdm32.exe with original CCPU40; native x64 and
@@ -155,8 +162,9 @@ open; the current deployed identity is in Current Technical Baseline below.
 - Latest deployed executable: O:\ntvdm64\ntvdm32.exe, T406 S2 external
   memory restoration plus working EMS/allocator/host-word and C-VID x86
   carrier cohorts, original current-process pseudo-handle spelling and the
-  approved EMS cross-window lease binding, 3,236,352 bytes; SHA-256
-  517e12ae276bce5b443b339aa6c47b71ca69e52f20eac79be036b445d206fe39.
+  approved EMS cross-window lease binding and its bounded trace, 3,237,376
+  bytes; SHA-256
+  2cbc0624235ea4006c5e7ccfd0b818af657fddcfda8c27a475859c9a19015de1.
   Formal build, native DIB sharing and isolated EMS guest tests pass. MEM and
   COMMAND exit normally; EDIT reaches its editor after Esc and bounded cleanup.
   WRITE still reaches W32Init FALSE, exit 255; no full WRITE acceptance.

@@ -904,3 +904,41 @@ Final staged x86 EXE: 3,236,352 bytes, SHA-256
 `517e12ae276bce5b443b339aa6c47b71ca69e52f20eac79be036b445d206fe39`.
 This accepts the EMS cross-window repair only. COMMAND/EDIT retain their
 earlier frontier and WRITE remains unaccepted at W32Init FALSE/exit 255.
+
+## Semantic-binding trace audit (deployed product)
+
+The retained semantic bindings caused by unavailable kernel-VDM lower bodies
+are DIV-035 (PhysicalPageREC lifecycle), DIV-036 (external physical-byte
+resolution), DIV-096 (EMS map/unmap ABI), DIV-097 (EMS alias translation), and
+DIV-267 (cross-alias host copy). Each has a bounded first-site-hit trace in the
+PID-named `O:\ntvdm64\logs\physical-mapping-<pid>-*.log`; it records no guest
+data and is emitted only at the admitted seam. DIV-267 additionally records
+the original `nt_emm` branch selected (`ems-lease.load`, `.store`, or `.move`)
+and its original-style success/failure result.
+
+The traced x86 product was rebuilt with the exact generated commands, passed
+`original-external-memory-test.exe` (including original `nt_emm` reversed
+window, SAS, allocation, and DIB cases;
+`O:\ntvdm64\logs\t406-s2-semantic-trace-memory-final.txt`), and was staged as
+`O:\ntvdm64\ntvdm32.exe`: 3,237,376 bytes, SHA-256
+`2cbc0624235ea4006c5e7ccfd0b818af657fddcfda8c27a475859c9a19015de1`.
+
+Real-program observations used that deployed executable and guest media
+already in `O:\ntvdm64`, with a bounded console observer solely to supply a
+Console and collect the child PID. MEM (PID 4604), COMMAND (PID 53712), and
+EDIT (PID 11280) respectively exit 0, exit 0 after scripted `exit`, and reach
+the editor before bounded cleanup. WRITE (PID 15340) retains its known
+`W32Init FALSE`/255 frontier. Their matching files
+`t406-s2-deployed-semantic-{mem,command,edit,write}.txt` and
+`physical-mapping-{4604,53712,11280,15340}-*.log` all hit DIV-035
+`pages.initialized`; none hit DIV-036 external lookup, DIV-096 map/unmap,
+DIV-097 alias translation, or DIV-267 lease copy. This is a real-program
+**no-hit**, not evidence that those seams are unnecessary.
+
+The targeted EMS guest regression previously exercised the same built product
+through INT 67h/57h and recorded map, alias-translation, and `ems-lease.move`
+with result 0. It remains the runtime coverage for the reversed-window seam;
+the four ordinary deployed programs do not select it. No available real
+program in `O:\ntvdm64` currently reaches external DIB registration/resolution
+or the DIV-267 load/store variants. Those rows retain formal regression
+coverage but remain explicitly unverified by a deployed real-program hit.

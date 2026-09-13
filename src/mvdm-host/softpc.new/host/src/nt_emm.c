@@ -139,6 +139,7 @@ static int em_loads(sys_addr from, unsigned char *to, int length)
 {
     uint32_t count;
     sys_addr guest_from;
+    int result;
 
     if (length < 0) return FAILURE;
     count = (uint32_t)length;
@@ -150,13 +151,20 @@ static int em_loads(sys_addr from, unsigned char *to, int length)
         EM_loads(from, to, length);
         return SUCCESS;
     }
-    return mvdm_softpc_guest_memory_copy_from(guest_from, to, count) ? SUCCESS : FAILURE;
+    mvdm_softpc_mapping_observe(MVDM_MAPPING_EMS_LEASE_LOAD,
+        "ems-lease.load", guest_from, count, 0);
+    result = mvdm_softpc_guest_memory_copy_from(guest_from, to, count) ?
+        SUCCESS : FAILURE;
+    mvdm_softpc_mapping_observe(MVDM_MAPPING_EMS_LEASE_LOAD_RESULT,
+        "ems-lease.load-result", guest_from, count, (uint32_t)result);
+    return result;
 }
 
 static int em_stores(sys_addr to, unsigned char *from, int length)
 {
     uint32_t count;
     sys_addr guest_to;
+    int result;
 
     if (length < 0) return FAILURE;
     count = (uint32_t)length;
@@ -169,7 +177,13 @@ static int em_stores(sys_addr to, unsigned char *from, int length)
         return SUCCESS;
     }
     sas_overwrite_memory(guest_to, count);
-    return mvdm_softpc_guest_memory_copy_to(guest_to, from, count) ? SUCCESS : FAILURE;
+    mvdm_softpc_mapping_observe(MVDM_MAPPING_EMS_LEASE_STORE,
+        "ems-lease.store", guest_to, count, 0);
+    result = mvdm_softpc_guest_memory_copy_to(guest_to, from, count) ?
+        SUCCESS : FAILURE;
+    mvdm_softpc_mapping_observe(MVDM_MAPPING_EMS_LEASE_STORE_RESULT,
+        "ems-lease.store-result", guest_to, count, (uint32_t)result);
+    return result;
 }
 
 static int em_moves(sys_addr from, sys_addr to, int length)
@@ -177,6 +191,7 @@ static int em_moves(sys_addr from, sys_addr to, int length)
     uint32_t count;
     sys_addr guest_from;
     sys_addr guest_to;
+    int result;
 
     if (length < 0) return FAILURE;
     count = (uint32_t)length;
@@ -192,7 +207,13 @@ static int em_moves(sys_addr from, sys_addr to, int length)
         return SUCCESS;
     }
     sas_overwrite_memory(guest_to, count);
-    return mvdm_softpc_guest_memory_move(guest_to, guest_from, count) ? SUCCESS : FAILURE;
+    mvdm_softpc_mapping_observe(MVDM_MAPPING_EMS_LEASE_MOVE,
+        "ems-lease.move", guest_from, guest_to, count);
+    result = mvdm_softpc_guest_memory_move(guest_to, guest_from, count) ?
+        SUCCESS : FAILURE;
+    mvdm_softpc_mapping_observe(MVDM_MAPPING_EMS_LEASE_MOVE_RESULT,
+        "ems-lease.move-result", guest_from, guest_to, (uint32_t)result);
+    return result;
 }
 
 
