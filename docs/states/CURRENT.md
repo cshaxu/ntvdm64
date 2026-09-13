@@ -2,32 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T407 S3.**
+**Active: M0 T407 S4.**
 
 ## Active Packet
 
-### M0 T407 S3 — original DPMI mode-transition frames
+### M0 T407 S4 — U03/U04 platform and cache-owner audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T407 S3, Ordinary Mode, one agent executing then reviewing. |
-| Admission And Approval | Owner first admitted this T for the current-state audit, then approved: “准入修复，直到 S4审计完成。S4审计好了，告诉我接下来怎么走，我们设计再实现。” S2 delivered at `d36c9e611`; this opens the already approved S3 repair. S4 remains audit/design only. |
+| Identifier Mode | M0 T407 S4, Ordinary Mode, one agent executing then reviewing. |
+| Admission And Approval | Owner first admitted this T for the current-state audit, then approved: “准入修复，直到 S4审计完成。S4审计好了，告诉我接下来怎么走，我们设计再实现。” S2/S3 delivered at `d36c9e611`/`d16e3a72e`; this opens the expressly audit/design-only S4. |
 | Candidate Proposal | [Original DPMI and XMS contract restoration](../proposals/proposal-dpmi-xms-contract-restoration-001.md). |
-| Objective | Restore the original DOSX protected- and real-mode frame interpretation, field order and continuation ownership in the D35 CPU40 provider, retaining only the minimal active-CCPU cache/setter seam. |
-| Non-goals | No U03/U04 platform-projection change; no TSS/IDT/GDT/LDT/TEB redesign; no CPU-execution, broker, kernel/product-shell, D36/D37 or product-acceptance claim. |
-| Reference Baseline | S1 audit, [S2 restoration evidence](../etc/evidence/m0-t407-s2-xms-dpmi-memory-contract-restoration.md) at `d36c9e611`, original `base/mvdm/dpmi32/i386/dpmi386.c`, and the admitted proposal. |
-| Files And ABI Surface | `mvdm-host/dpmi32/{modesw.c,dpmidata.h,dpmi32p.h}`, original paired source, bounded CCPU/DOSX fixtures/build records, Status and indexed evidence. |
+| Objective | Exhaustively classify U03 effective-address cache choice and U04 TSS/IDT/GDT/LDT/TEB/protected-stack projections by original owner, selected consumer, lifecycle, remove/retain/migrate disposition and implementation design. |
+| Non-goals | No product-source implementation, runtime behavior change, CPU-execution change, broker work, kernel/product-shell import, D35/D36/D37 change, deployment or product-acceptance claim. |
+| Reference Baseline | S1 audit, [S2 restoration](../etc/evidence/m0-t407-s2-xms-dpmi-memory-contract-restoration.md), [S3 restoration](../etc/evidence/m0-t407-s3-dpmi-mode-frame-restoration.md), original MVDM/kernel owner trees and admitted proposal. |
+| Files And ABI Surface | `mvdm-host/dpmi32/{modesw.c,dpmi32.c,dpmiselr.c,data.c}`, `softpc.new/base/ccpu386/c_seg.c`, effective-address adapter, original paired source, build-selection records, Status and indexed evidence. No ABI change. |
 | Applicable Rules | Goal, architecture, coding, execution, document and source-policy authorities; four-rung source-recovery audit and mirror/overlay ownership rules. |
-| Verification | Paired source/frame-layout review; focused protected/real mode frame positive/negative tests, register/cache ordering and BOP continuation checks; formal x86 link; COMMAND/EDIT regression where safely available; governance, diff review, commit and push. |
-| Expected Markers | The original five-word real-mode and 16-byte protected-mode frames retain their offsets and values; the mode bit changes at the documented CCPU boundary; active setters establish only the required caches; kernel fixed-state writes are explicitly excluded. |
+| Verification | Exhaustive in-scope original/current/caller/selected-build/overlay searches; per-row four-rung ledger; lifecycle/reset/teardown and negative-rule analysis; line/hunk accounting; governance, links, diff review, commit and push. |
+| Expected Markers | Each U03/U04 mechanism has a source owner or exact unavailable dependency, consumers and lifecycle; removability is quantified without pretending unproven kernel behavior is directly composable. |
 | Asset Needs | Existing pinned OpenNT/OpenNT-4.5 source trees, selected local mirrors, adapter/overlay registers and retained formal-build manifests; all comparison inputs are read-only. No new source or media. |
-| Reporting Requirements | Record original frame owner/path, every retained CCPU seam, exact tests/build result and any runtime frontier. Report U03/U04 findings without modifying them. |
-| Stop Conditions | A required U04 platform change, uncertain CCPU cache ordering, missing frame source, failed transition test, or a required CPU-execution change pauses the group; do not invent a replacement. |
-| Exit Criteria | Both frame contracts are restored or a source-proven finite blocker is documented; checks pass; evidence and authorities are reviewed, committed and pushed. S4 then opens solely for U03/U04 audit/design. |
+| Reporting Requirements | Report grouped implementation options, code/diff reduction estimate, exact necessary seams, blockers and recommended next task. Stop after the audit/design report for owner decision. |
+| Stop Conditions | Any request to alter product source, a missing/ambiguous original owner, a required kernel dependency, or a conclusion needing new behavior pauses implementation; record it rather than inventing a replacement. |
+| Exit Criteria | Indexed audit/design evidence is complete, authorities pass governance, no product source is modified, the documentation P is reviewed/committed/pushed, and the owner receives the next-step design choices. |
 | Original Owner Request | “准入下一个包。先进行当前状态审计，本T任务范畴内的diff都有哪些，给出应该如何清理的方案。” |
-| Similar-Issue Sweep | BOP FD table routing, `switch_to_real_mode`, protected DPMI service 53:01, visible registers, hidden caches, PE/CPL ordering, frame malformed/unavailable behavior, and the separate U04 projections. |
+| Similar-Issue Sweep | All selected callers of effective-address resolution, selector-cache reloads, 53:00/53:01/53:02 publication, TSS slots, IDT/GDT/LDT backing, TEB and PM-stack projections, overlays and historical kernel owner candidates. |
 
-S1 is delivered at `13fc0fd4b`; S2 is delivered at `d36c9e611`: [S2 restoration evidence](../etc/evidence/m0-t407-s2-xms-dpmi-memory-contract-restoration.md) records the D36 recovery and D37 ownership disposition. S3 begins from those frozen results. No S4 source change is active.
+S1 is delivered at `13fc0fd4b`; S2/S3 are delivered at `d36c9e611`/`d16e3a72e`. S4 is documentation-only by owner direction: it must report a design and stop before source implementation.
 
 T406 is closed by its final delivery; [S2 closure evidence](../etc/evidence/m0-t406-s2-original-restoration.md#s2-final-x86-width-and-access-boundary-disposition)
 records its restored cohorts, remaining registered seams, trace hit/no-hit results,

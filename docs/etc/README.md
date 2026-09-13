@@ -4,6 +4,7 @@ This directory contains only the following owner-approved supporting records.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T407 U03/U04 audit and design](evidence/m0-t407-s4-u03-u04-audit-and-design.md) | M0 T407 S4 | Effective-address and platform-projection ledger, source-owner dispositions, and owner-stop implementation design. | Retain through T407 closure. |
 | [T407 DPMI mode-frame restoration](evidence/m0-t407-s3-dpmi-mode-frame-restoration.md) | M0 T407 S3 | Original D35 frame ledger, removal of the non-semantic FD report, retained CCPU cache seam and U04 exclusion. | Retain through T407 closure. |
 | [T407 XMS/DPMI memory-contract restoration](evidence/m0-t407-s2-xms-dpmi-memory-contract-restoration.md) | M0 T407 S2 | Restored original XMS move ownership, retained bounded lease transport, D37 provider disposition, and x86 verification. | Retain through T407 closure. |
 | [T407 DPMI/XMS current-state audit](evidence/m0-t407-s1-dpmi-xms-current-state-audit.md) | M0 T407 S1 | Exact in-scope D35–D37/U03/U04/U07 diff ledger and source-first restoration grouping. | Retain through T407 closure. |
