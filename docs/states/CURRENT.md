@@ -2,22 +2,22 @@
 
 ## Current Work
 
-**Active: M0 T408 S7.**
+**Active: none — M0 T408 closed.**
 
 ## Active Packet
 
-### M0 T408 S7 — RTL restoration integration and closure
+### M0 T408 — closed RTL restoration package
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T408 S7, Ordinary Mode, one agent implements the bounded recovery, then independently reviews source, build and runtime evidence. |
+| Identifier Mode | M0 T408, closed after S1--S7 source/binding recovery and evidence review. |
 | Admission And Approval | Owner admitted the queued RTL package with: “单人双角色模式执行当前T任务：`Plan RTL restoration subtask sequence` 恢复原始opennt源代码接入 减少overlay和diff并跑通测试。” |
 | Candidate Proposal | [Original RTL and character-conversion restoration](../proposals/proposal-rtl-character-conversion-restoration-001.md). |
-| Objective | Rebuild and audit the selected x86 composition for D11--D16/D26, publish the final remaining-binding ledger, and close M0 T408. |
+| Objective | Completed: restore original D11--D16/D26 owners where composable, remove duplicate providers, and publish final binding dispositions. |
 | Non-goals | No broker/CLI/CPU architecture change, new NetAPI transport, or WRITE lifecycle repair. |
 | Files And ABI Surface | Selected USER source slice under `opennt-host`, finite modern conversion/publication bindings only where original dependencies cannot compose, focused fixtures, Status and indexed S5 evidence; no guest ABI change. |
 | Verification | Full selected x86 rebuild, focused fixtures, MEM/COMMAND/EDIT regression, bounded WRITE frontier observation, source/diff review, commit/push. |
-| Exit Criteria | Original USER algorithm owns reached conversion policy; every retained binding is finite and source-shaped; focused and short-root runtime regressions pass. |
+| Exit Criteria | Met for source-owner recovery and focused x86 proof. The Console-redirection observation is recorded and transferred, not a T408 source-owner blocker. |
 | Stop Conditions | An unavailable direct USER dependency, a required private server behavior without finite public closure, or a failed owner fixture is recorded and stops replacement rather than adding a substitute converter. |
 | Original Owner Request | “恢复原始opennt源代码接入 减少overlay和diff并跑通测试。” |
 | Similar-Issue Sweep | All reduced `RtlNtStatusToDosError` callers, LastStatusValue accessors, Base/COMMAND failures, USER/NetAPI conversion surfaces, x86-width residue, overlays and current project-defined duplicate providers. |
