@@ -9,12 +9,9 @@
 
 typedef struct physical_mapping_record {
     session *owner;
-    uint32_t identifier;
-    uint32_t source_size;
-    uint32_t prepared_size;
-    uint32_t guest_base;
-    uint32_t active;
-    uintptr_t host_address;
+    uintptr_t normal_base;
+    uint32_t page_count;
+    uint32_t *pages;
     struct physical_mapping_record *next;
 } physical_mapping_record;
 
@@ -74,13 +71,6 @@ static void mapping_observe(const char *event, uint32_t a, uint32_t b,
         mapping_observe(event, (a), (b), (c)); \
 } while (0)
 
-static int add_overflow(uint32_t left, uint32_t right, uint32_t *sum)
-{
-    if (left > UINT32_MAX - right) return 1;
-    *sum = left + right;
-    return 0;
-}
-
 void mvdm_softpc_mapping_observe(unsigned slot, const char *event,
     uint32_t a, uint32_t b, uint32_t c)
 {
@@ -90,14 +80,11 @@ void mvdm_softpc_mapping_observe(unsigned slot, const char *event,
         mapping_observe(event, a, b, c);
 }
 
-static physical_mapping_record *find_identifier(session *owner,
-    uint32_t identifier)
+static physical_mapping_record *find_owner(session *owner)
 {
     physical_mapping_record *record;
-    for (record = records; record != NULL; record = record->next) {
-        if (record->owner == owner && record->identifier == identifier)
-            return record;
-    }
+    for (record = records; record != NULL; record = record->next)
+        if (record->owner == owner) return record;
     return NULL;
 }
 
@@ -106,6 +93,7 @@ static void remove_record(physical_mapping_record *target)
     physical_mapping_record **cursor = &records;
     while (*cursor != NULL && *cursor != target) cursor = &(*cursor)->next;
     if (*cursor == target) *cursor = target->next;
+    free(target->pages);
     free(target);
 }
 
@@ -153,109 +141,39 @@ static void release_owner(void *context)
     }
 }
 
-int mvdm_softpc_physical_mapping_publish(void *host_bytes,
-    uint32_t byte_count, uint32_t *identifier_out)
+/* The original void setter cannot report allocation failure. Allocate all
+ * translation slots before InitIntelMemory publishes success. This is the
+ * bounded substitute for the unavailable PhysicalPageREC implementation,
+ * not an extra protocol imposed on VdmAddVirtualMemory callers. */
+int mvdm_softpc_physical_mapping_initialize(void *normal_base, uint32_t size)
 {
     session *owner = session_thread_current();
     physical_mapping_record *record;
-    uint32_t identifier;
-    int teardown_registered = 0;
-
-    MAPPING_OBSERVE("publish.call", (uint32_t)(uintptr_t)host_bytes, byte_count, 0);
-    if (identifier_out != NULL) *identifier_out = 0u;
-    if (owner == NULL || !session_valid(owner) || host_bytes == NULL ||
-        byte_count == 0u) return 0;
-    if ((uintptr_t)host_bytes > UINT32_MAX) return 0;
-    identifier = (uint32_t)(uintptr_t)host_bytes;
-    record = find_identifier(owner, identifier);
-    if (record != NULL) {
-        if (record->source_size != byte_count || record->active != 0u) return 0;
-        if (identifier_out != NULL) *identifier_out = identifier;
-        return 1;
-    }
-    for (record = records; record != NULL; record = record->next) {
-        if (record->owner == owner) {
-            teardown_registered = 1;
-            break;
-        }
-    }
-    if (!teardown_registered) {
-        physical_alias_record *alias;
-        for (alias = aliases; alias != NULL; alias = alias->next) {
-            if (alias->owner == owner) {
-                teardown_registered = 1;
-                break;
-            }
-        }
-    }
-    record = (physical_mapping_record *)calloc(1u, sizeof(*record));
-    if (record == NULL) {
+    if (owner == NULL || !session_valid(owner) || normal_base == NULL ||
+        size == 0 || (size & 4095u) != 0 || find_owner(owner) != NULL)
+        return 0;
+    record = (physical_mapping_record *)calloc(1, sizeof(*record));
+    if (record == NULL) return 0;
+    record->pages = (uint32_t *)calloc(size >> 12, sizeof(*record->pages));
+    if (record->pages == NULL) { free(record); return 0; }
+    record->owner = owner;
+    record->normal_base = (uintptr_t)normal_base;
+    record->page_count = size >> 12;
+    if (!session_register_teardown(owner, release_owner, owner)) {
+        free(record->pages);
+        free(record);
         return 0;
     }
-    record->owner = owner;
-    record->identifier = identifier;
-    record->host_address = (uintptr_t)host_bytes;
-    record->source_size = byte_count;
     record->next = records;
     records = record;
-    if (!teardown_registered &&
-        !session_register_teardown(owner, release_owner, owner)) {
-        remove_record(record);
-        return 0;
-    }
-    if (identifier_out != NULL) *identifier_out = identifier;
+    MAPPING_OBSERVE("pages.initialized", size, record->page_count, 0);
     return 1;
 }
 
-int mvdm_softpc_physical_mapping_prepare(uint32_t identifier,
-    uint32_t byte_count, uint32_t *alignment_out)
+void mvdm_softpc_physical_mapping_release(void)
 {
     session *owner = session_thread_current();
-    physical_mapping_record *record;
-    uint32_t alignment;
-    uint32_t total;
-
-    MAPPING_OBSERVE("prepare.call", identifier, byte_count, 0);
-    if (alignment_out != NULL) *alignment_out = 0u;
-    if (owner == NULL || !session_valid(owner) || byte_count == 0u ||
-        (record = find_identifier(owner, identifier)) == NULL ||
-        record->active != 0u || record->source_size != byte_count) {
-        MAPPING_OBSERVE("prepare.rejected", identifier, byte_count, 0);
-        return 0;
-    }
-    alignment = (uint32_t)(record->host_address & 3u);
-    if (add_overflow(byte_count, alignment, &total)) return 0;
-    if (add_overflow(total, UINT32_C(4095), &total)) return 0;
-    record->prepared_size = total & ~UINT32_C(4095);
-    MAPPING_OBSERVE("prepare.ready", identifier, record->prepared_size, alignment);
-    if (alignment_out != NULL) *alignment_out = alignment;
-    return 1;
-}
-
-void mvdm_softpc_physical_mapping_set(uint32_t identifier,
-    uint32_t intel_address, uint32_t byte_count)
-{
-    session *owner = session_thread_current();
-    physical_mapping_record *record;
-
-    if (owner == NULL || !session_valid(owner)) return;
-    record = find_identifier(owner, identifier);
-    if (record != NULL && record->active == 0u &&
-        record->prepared_size == byte_count) {
-        record->guest_base = intel_address;
-        record->active = 1u;
-        MAPPING_OBSERVE("set.activated", identifier, intel_address, byte_count);
-        return;
-    }
-    for (record = records; record != NULL; record = record->next) {
-        if (record->owner == owner && record->active != 0u &&
-            record->guest_base == intel_address && record->prepared_size == byte_count) {
-            remove_record(record);
-            MAPPING_OBSERVE("set.removed", identifier, intel_address, byte_count);
-            return;
-        }
-    }
-    MAPPING_OBSERVE("set.no-match", identifier, intel_address, byte_count);
+    if (owner != NULL) release_owner(owner);
 }
 
 int32_t VdmMapDosMemory(uint32_t dos_intel_page, uint32_t vdm_intel_page,
@@ -360,43 +278,38 @@ int mvdm_softpc_physical_mapping_translate(uint32_t intel_address,
 int mvdm_softpc_physical_mapping_resolve(uint32_t intel_address,
     uint8_t **host_byte_out)
 {
-    session *owner = session_thread_current();
-    physical_mapping_record *record;
-
+    physical_mapping_record *record = find_owner(session_thread_current());
+    uint32_t host;
     if (host_byte_out != NULL) *host_byte_out = NULL;
-    if (owner == NULL || !session_valid(owner) || host_byte_out == NULL) return 0;
-    for (record = records; record != NULL; record = record->next) {
-        uint32_t offset;
-        uint32_t alignment;
-        if (record->owner != owner || record->active == 0u ||
-            intel_address < record->guest_base) continue;
-        offset = intel_address - record->guest_base;
-        alignment = (uint32_t)(record->host_address & (uintptr_t)3u);
-        if (offset < alignment || offset - alignment >= record->source_size)
-            continue;
-        *host_byte_out = (uint8_t *)(record->host_address -
-            (record->host_address & (uintptr_t)3u) + offset);
-        MAPPING_OBSERVE("resolve.external-hit", intel_address, record->guest_base, 0);
-        return 1;
-    }
-    return 0;
+    if (record == NULL || host_byte_out == NULL ||
+        (intel_address >> 12) >= record->page_count) return 0;
+    host = record->pages[intel_address >> 12];
+    if (host == 0) return 0;
+    *host_byte_out = (uint8_t *)((uintptr_t)host + (intel_address & 4095u));
+    MAPPING_OBSERVE("resolve.external-hit", intel_address, host, 0);
+    return 1;
 }
 
-void mvdm_softpc_physical_mapping_cancel(uint32_t identifier)
-{
-    session *owner = session_thread_current();
-    physical_mapping_record *record;
-    if (owner == NULL || !session_valid(owner) ||
-        (record = find_identifier(owner, identifier)) == NULL ||
-        record->active != 0u) return;
-    remove_record(record);
-}
-
-/* Historical SoftPC spelling retained at the original call sites. The
- * adapter owns the source-derived CCPU page-binding behavior. */
+/* Original nt_mem passes a DWORD-aligned host start and a page-rounded span.
+ * Removal supplies the ordinary backing address, not a magic zero identity.
+ * All slots already exist: this operation cannot fail from heap exhaustion. */
 void VdmSetPhysRecStructs(uint32_t host_address, uint32_t intel_address,
     uint32_t byte_count)
 {
+    physical_mapping_record *record = find_owner(session_thread_current());
+    uint32_t first = intel_address >> 12, count = byte_count >> 12, i;
+    int normal;
     MAPPING_OBSERVE("VdmSetPhysRecStructs.call", host_address, intel_address, byte_count);
-    mvdm_softpc_physical_mapping_set(host_address, intel_address, byte_count);
+    if (record == NULL || host_address == 0 || (intel_address & 4095u) ||
+        (byte_count & 4095u) || count == 0 || first >= record->page_count ||
+        count > record->page_count - first ||
+        byte_count - 1u > UINT32_MAX - host_address) return;
+    normal = (uintptr_t)host_address == record->normal_base + intel_address;
+    for (i = 0; i < count; ++i)
+        record->pages[first + i] = normal ? 0 : host_address + (i << 12);
+    if (normal) {
+        MAPPING_OBSERVE("set.normal-restored", intel_address, byte_count, 0);
+    } else {
+        MAPPING_OBSERVE("set.activated", host_address, intel_address, byte_count);
+    }
 }

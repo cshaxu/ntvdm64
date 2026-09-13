@@ -69,10 +69,100 @@ build/output/ntvdm32.exe and O:\ntvdm64\ntvdm32.exe:
 6cddfd9e917e892a04df877d8b6d69c3e561cf31d933d8a4980325deb6a77947.
 The prior tested EXE is retained as prior-ntvdm32.exe in the run root.
 
-## Remaining work
+## P2 external-memory group result
 
-S2/T406 remain open. Restore the external-memory add/remove protocol as a
-complete group with original-shaped callers, prove alignment/backing/failure
-semantics and preserve EMS; resolve source-proven access-boundary cases and
-remaining width cohorts. No missing mapping body, DIB integration result or
-full WRITE behavior is claimed by this P.
+Implemented against P1 80a10dac8. The complete VdmAddVirtualMemory and
+VdmRemoveVirtualMemory function region now matches the paired OpenNT text
+exactly after newline normalization. Original DWORD alignment, page rounding,
+allocation, overwrite, remap flag and removal order remain source-owned.
+The InitIntelMemory/FreeIntelMemory lifecycle seam is registered as DIV-035.
+The unavailable lower setter uses preallocated per-session page slots, not
+the deleted publication/prepare/cancel protocol. The source/test search has
+no remaining calls to those four retired mapping helpers, including the
+former private set wrapper.
+
+Production source/header change is +75/-177 (excluding README): 102 fewer
+physical lines. This is net line reduction, not 102 original algorithms
+recovered. The adapter still supplies missing lower page bindings; its
+55 added lines are not labelled imported source.
+
+### Verification and rejected test paths
+
+Fresh r002-dib-restoration formal x86 build completed 437 steps. The adapter
+test compiled /MT /W4 /WX and passed normal plus denied-log cases: invalid
+initialization size, duplicate initialization refusal, full two-page lookup,
+outside-span miss, original normal-backing reset, EMS replace/unmap and
+LastError/errno preservation at the observed mapping operations.
+
+The historical New-T313CcpuLifecycleNinja graph compiled its updated fixture
+but could not link nine current dependencies (including host_hwint_hook,
+DpmiCpu40RestoreNativeIdt, host_applClose and guest-location services).
+It is NOT counted as passing; no stubs were added. Its fixture no longer
+preregisters external memory, but that entire historical lifecycle workload
+remains unverified in this delivery.
+
+Instead, original_external_memory_test links the same formal production
+libraries through the new non-default original-external-memory-test.exe
+target. The initial test omitted the original C-VID setup needed by the
+overwrite vector and faulted at a null call. It was corrected to call
+setup_global_data_ptr/setup_vga_globals, not an overlay entry or replacement.
+Private SoftPC fwrite conflicted with test stdio; test reporting now uses
+Win32 WriteFile. These were test-composition corrections, not CPU changes.
+
+The final test passes with the real nt_mem/CCPU bodies:
+
+- oversized reservation failure followed by successful allocation;
+- raw host pointer plus one byte, no preregistration, original alignment;
+- bidirectional external-byte access and page-rounded end address;
+- two-page EMS alias to that memory and explicit unmap;
+- removal, reallocation at the same address and independent normal backing;
+- real CreateDIBSection: SetPixelV/GdiFlush visible through c_GetPhyAdd,
+  guest write visible through GetPixel, removal before bitmap deletion.
+
+This proves native DIB storage sharing, not Win16 WRITE/GDI thunk acceptance.
+Heap exhaustion during the new initialization allocation was not injected;
+its failure cleanup has source review and invalid/duplicate-init tests,
+not a claimed forced-OOM execution result.
+
+| Integration | PID | Result |
+| --- | --- | --- |
+| MEM | 12852 | Exit 0; prior anomalous size output persists. |
+| COMMAND | 49604 | Prompt and injected exit, exit 0. |
+| EDIT | 51044 | Welcome dismissed with Esc; editor then bounded cleanup. |
+| WRITE | 28004 | Same WOW ingress and W32Init FALSE, exit 255. |
+| Isolated EMS guest | 19800 | MAP SWITCH ALIAS UNMAP FREE PASS; exit 0. |
+
+Logs are t406-s2-r002-{mem,command,edit,write,ems}.txt,
+t406-s2-r002-binding.txt, t406-s2-r002-binding-denied.txt and
+t406-s2-r002-original-memory-verified.txt under O:\ntvdm64\logs\.
+Prior failed test logs are retained there. Build logs remain in r002.
+The unchanged r001 integration observer is intentionally reused; its source
+and toolchain are unchanged. Formal libraries are reused only within r002's
+dependency-tracked rebuild of the additional test target. Q: was removed.
+
+Published EXE: 3,235,328 bytes, SHA-256
+2f4d823e1ef823c7f1253c3fd2b3de09b240359dcd364ad11b79126737389587.
+StageProductExecutable verified both build/output/ntvdm32.exe and the runtime
+copy. No guest media/default configuration was changed.
+
+## Remaining work after P2
+
+Retained group 2 design rationale: original nt_mem.c initializes/reserves the complete
+Intel address space and its allocation metadata before setting memInit.
+Its VdmSetPhysRecStructs call cannot report a late metadata allocation failure.
+The chosen finite binding therefore allocates translation slots at that
+initialization boundary, with failure propagated as failed initialization,
+not a late false-success mapping. Slots cover the original reserved address
+space, not an invented handle capacity. Normal backing is represented by no
+override; restoring the original HostAddress = intelMem + IntelAddress clears
+the override. Original add/remove own alignment, reservation, cache invalidation,
+flags and free ordering. The missing lower bodies prohibit claiming direct
+reuse there; the adapter is the minimal page-translation mechanism justified
+by the original PhysicalPageREC.translation comments. No generic identity
+namespace or new external registration contract is retained. Implementation
+and bounded verification are recorded in P2 above.
+
+S2/T406 remain open. Resolve source-proven remaining access-boundary cases and
+width cohorts. P2's native DIB test does not prove Win16 thunk integration;
+missing original lower bodies remain an explicit limitation. Full WRITE
+behavior is not claimed.

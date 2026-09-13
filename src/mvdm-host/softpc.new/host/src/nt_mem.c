@@ -263,6 +263,13 @@ GLOBAL IU8 *InitIntelMemory IFN1(IU32, MaxIntelMemorySize)
         return((IU8 *) NULL);
     }
 
+    /* DIVERGENCE(MVDM-HOST-DIV-035): prepare the unavailable CCPU page
+     * binding storage before success; original add/remove need no protocol. */
+    if (!mvdm_softpc_physical_mapping_initialize(intelMem, MaxIntelMemorySize)) {
+        FreeIntelMemory();
+        return((IU8 *) NULL);
+    }
+
     /*
      * Initialise linked list with pointers to initial 1M and remaining free
      * space and store initial size of free space.
@@ -297,6 +304,9 @@ GLOBAL	VOID FreeIntelMemory IFN0()
 #ifdef DEBUG_MEM
     printf("NTVDM:FreeIntelMemory\n");
 #endif
+
+    /* DIVERGENCE(MVDM-HOST-DIV-035): retire bindings before their backing. */
+    mvdm_softpc_physical_mapping_release();
 
     /* Free Intel memory */
     VirtualFree (intelMem, 0, MEM_RELEASE);
@@ -947,17 +957,6 @@ GLOBAL NTSTATUS VdmAddVirtualMemory IFN3(ULONG, HostAddress,
                                          PULONG, IntelAddress)
 {
     IU32 alignfix;
-    uint32_t mapping_alignment;
-
-    /* DIVERGENCE MVDM-HOST-DIV-035: HostAddress retains the original
-     * fixed-width parameter and call order, but is now a session-owned
-     * mapping-manager surrogate rather than a narrowed native pointer. The
-     * adapter recovers the original host-pointer alignment before any Intel
-     * allocation, and rejects stale/foreign identities. */
-    if (!mvdm_softpc_physical_mapping_prepare(HostAddress, Size,
-        &mapping_alignment))
-        return STATUS_INVALID_PARAMETER;
-    alignfix = (IU32)mapping_alignment;
 
 #ifdef DEBUG_MEM
     printf("NTVDM:VdmAddVirtualMemory (%lx [%dK]) at %lx)\n",
@@ -967,13 +966,10 @@ GLOBAL NTSTATUS VdmAddVirtualMemory IFN3(ULONG, HostAddress,
     /* Make sure memory system is initialised. */
     assert0(memInit, "Called VdmAddVirtualMemory before initialisation");
 
-    /* Apply the source host-pointer alignment recovered by the adapter. */
-    if (alignfix != 0) {
-        if (Size > ULONG_MAX - alignfix) {
-            mvdm_softpc_physical_mapping_cancel(HostAddress);
-            return STATUS_NO_MEMORY;
-        }
+    /* Calculate shift required to DWORD align HostAddress */
+    if ((alignfix = HostAddress & 0x3) != 0) {
         Size += alignfix;
+        HostAddress -= alignfix;
     }
 
     /* Round Size up to a multiple of 4K. */
@@ -983,16 +979,14 @@ GLOBAL NTSTATUS VdmAddVirtualMemory IFN3(ULONG, HostAddress,
 
     /* step 1 - reserve the intel address space */
 
-    if (VdmAllocateVirtualMemory(IntelAddress,Size,FALSE) != STATUS_SUCCESS) {
-        mvdm_softpc_physical_mapping_cancel(HostAddress);
+    if (VdmAllocateVirtualMemory(IntelAddress,Size,FALSE) != STATUS_SUCCESS)
         return (STATUS_NO_MEMORY);
-    }
 
     /* step 2 - flush the caches */
 
     sas_overwrite_memory(*IntelAddress, Size);
 
-    /* step 3 - replace the source-shaped physical page bindings */
+    /* step 3 - replace the PhysicalPageREC.translation entries */
 
     VdmSetPhysRecStructs(HostAddress, *IntelAddress, Size);
     ADDRESS_TO_HEADER(*IntelAddress+intelMem)->flags |= HDR_REMAP_FLAG;
@@ -1023,8 +1017,7 @@ INPUT:
 GLOBAL NTSTATUS VdmRemoveVirtualMemory IFN1(ULONG, IntelAddress)
 {
     SECTION_HEADER * headerPtr;
-    IHPE    HostAddress;
-    ULONG   Size;
+    ULONG   HostAddress,Size;
     NTSTATUS status;
 
 #ifdef DEBUG_MEM
@@ -1040,7 +1033,7 @@ GLOBAL NTSTATUS VdmRemoveVirtualMemory IFN1(ULONG, IntelAddress)
     /* Make sure IntelAddress is page aligned */
     IntelAddress &= ~PAGE_MASK;
 
-    HostAddress = HOST_ADDRESS_FROM_INTEL(IntelAddress);
+    HostAddress = IntelAddress + (ULONG)intelMem;
 
     /* Get header table entry for address. */
     headerPtr = ADDRESS_TO_HEADER((IU8 *) HostAddress);
@@ -1058,10 +1051,7 @@ GLOBAL NTSTATUS VdmRemoveVirtualMemory IFN1(ULONG, IntelAddress)
         printf("NTVDM:VdmRemoveVirtualMemory WARNING, Size==0\n");
     }
 #endif
-    /* DIVERGENCE MVDM-HOST-DIV-035: the adapter finds the mapping by its
-     * original Intel span during removal; HostAddress is no longer a raw
-     * pointer-shaped token and must not be reconstructed from intelMem. */
-    VdmSetPhysRecStructs(0, IntelAddress, Size);
+    VdmSetPhysRecStructs(HostAddress, IntelAddress, Size);
     ADDRESS_TO_HEADER(IntelAddress+intelMem)->flags &= ~HDR_REMAP_FLAG;
 
     /* step 3 - free the reserved intel address space */

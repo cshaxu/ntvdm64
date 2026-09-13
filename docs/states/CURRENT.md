@@ -91,6 +91,32 @@ This admission does not declare S1's unverified candidates already correct.
 
 ## Active Packet
 
+Group 2 implemented and verified: original add/remove function bodies match
+OpenNT; extra publication protocol removed. Real native DIB/CCPU shared
+storage, alignment, allocation failure and ordinary-backing restoration
+tests pass, as does the EMS guest regression. See
+[P2 evidence](../etc/evidence/m0-t406-s2-original-restoration.md).
+Latest published EXE: 3,235,328 bytes; SHA-256
+2f4d823e1ef823c7f1253c3fd2b3de09b240359dcd364ad11b79126737389587.
+Earlier artifact identities below are historical. Group 3 and remaining
+width disposition are still open; full WRITE is not accepted.
+
+Group 2 working root: build/M0-T406/S2/r002-dib-restoration. Approved lower
+binding design: allocate the finite per-session physical-page translation
+storage during InitIntelMemory, before publishing successful initialization.
+VdmSetPhysRecStructs then performs no allocation, matching its original void
+call contract. Restore original VdmAddVirtualMemory/VdmRemoveVirtualMemory
+bodies and remove publish/prepare/cancel. This lower table is explicitly an
+unavailable-implementation adapter, not an imported original function body.
+
+Group 2 working root: build/M0-T406/S2/r002-dib-restoration. Approved lower
+binding design: allocate the finite per-session physical-page translation
+storage during InitIntelMemory, before publishing successful initialization.
+VdmSetPhysRecStructs then performs no allocation, matching its original void
+call contract. Restore original VdmAddVirtualMemory/VdmRemoveVirtualMemory
+bodies and remove publish/prepare/cancel. This lower table is explicitly an
+unavailable-implementation adapter, not an imported original function body.
+
 S2 progress: the first 14-file width cohort is restored and formal x86 build
 plus baseline integration completed. [Group evidence](../etc/evidence/m0-t406-s2-original-restoration.md)
 records exact results and limits. Mapping protocol and further width/access

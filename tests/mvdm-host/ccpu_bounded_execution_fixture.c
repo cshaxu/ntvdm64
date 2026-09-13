@@ -81,6 +81,7 @@ extern unsigned fixture_wow_idle_calls;
 
 int main(void)
 {
+    session physical_owner;
     /* The program uses ordinary original CCPU decode and SAS RAM access
      * before its `D6 FE` exit.  `c_main.c` advances IP before calling
      * c_cpu_unsimulate(), which returns through the original CCPU TLS
@@ -94,6 +95,9 @@ int main(void)
         return 1;
     }
     fputs("sas-init\n", stderr);
+    session_initialize(&physical_owner, 2u);
+    if (!session_activate(&physical_owner) ||
+        !session_thread_bind(&physical_owner)) return 1;
     sas_init(UINT32_C(0x00200000));
     if (Sas.Sas_hw_at != cSasPtrs.Sas_hw_at ||
         Sas.Sas_store != cSasPtrs.Sas_store ||
@@ -173,27 +177,20 @@ int main(void)
             SAS_RAM);
     }
     {
-        session physical_owner;
         uint8_t *external_page = (uint8_t *)VirtualAlloc(NULL,
             UINT32_C(4096), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
         uint8_t *resolved_page = NULL;
-        uint32_t mapping_identifier;
         ULONG intel_address = 0u;
 
-        session_initialize(&physical_owner, 2u);
-        if (external_page == NULL || !session_activate(&physical_owner) ||
-            !session_thread_bind(&physical_owner) ||
-            !mvdm_softpc_physical_mapping_publish(external_page,
-                UINT32_C(4096), &mapping_identifier) ||
-            VdmAddVirtualMemory(mapping_identifier, UINT32_C(4096),
+        if (external_page == NULL ||
+            VdmAddVirtualMemory((ULONG)(uintptr_t)external_page, UINT32_C(4096),
                 &intel_address) != STATUS_SUCCESS) {
             fputs("external physical-page binding setup failed\n", stderr);
             sas_term();
             if (external_page != NULL) (void)VirtualFree(external_page, 0u, MEM_RELEASE);
             return 1;
         }
-        if (mvdm_softpc_physical_mapping_prepare(mapping_identifier, 0u,
-                NULL) || mvdm_softpc_physical_mapping_resolve(
+        if (mvdm_softpc_physical_mapping_resolve(
                 UINT32_C(0xffffffff), &resolved_page)) {
             fputs("external physical-page binding accepted invalid span\n", stderr);
             (void)session_thread_unbind(&physical_owner);
@@ -225,8 +222,6 @@ int main(void)
             VdmUnmapDosMemory(UINT32_C(0x100), UINT32_C(1)) !=
                 (NTSTATUS)UINT32_C(0xc0000225) ||
             VdmRemoveVirtualMemory(intel_address) != STATUS_SUCCESS ||
-            mvdm_softpc_physical_mapping_prepare(mapping_identifier,
-                UINT32_C(4096), NULL) ||
             mvdm_softpc_physical_mapping_resolve(intel_address,
                 &resolved_page)) {
             fputs("external physical-page binding did not remain live and release\n",

@@ -5,17 +5,13 @@
 
 /* Source-shaped replacement for the NT4 PhysicalPageREC remap seam. The
  * original Win32/x86 ABI carries its process-local HostAddress directly. */
-int mvdm_softpc_physical_mapping_publish(void *host_bytes,
-    uint32_t byte_count, uint32_t *identifier_out);
-int mvdm_softpc_physical_mapping_prepare(uint32_t identifier,
-    uint32_t byte_count, uint32_t *alignment_out);
+int mvdm_softpc_physical_mapping_initialize(void *normal_base, uint32_t size);
+void mvdm_softpc_physical_mapping_release(void);
 /* Keep the historical external seam spelling and fixed-width argument ABI.
  * The selected SoftPC host calls it after its original SAS reservation; the
  * adapter binds or retires the session-owned physical-page mapping. */
 void VdmSetPhysRecStructs(uint32_t host_address, uint32_t intel_address,
     uint32_t byte_count);
-void mvdm_softpc_physical_mapping_set(uint32_t identifier,
-    uint32_t intel_address, uint32_t byte_count);
 /* Source-shaped replacement for the NT4 kernel-VDM EMS page alias services.
  * These page numbers always name guest physical 4 KiB pages; they are not
  * host pointers and therefore do not use an identity service. */
@@ -26,7 +22,6 @@ int mvdm_softpc_physical_mapping_translate(uint32_t intel_address,
     uint32_t *translated_address_out);
 int mvdm_softpc_physical_mapping_resolve(uint32_t intel_address,
     uint8_t **host_byte_out);
-void mvdm_softpc_physical_mapping_cancel(uint32_t identifier);
 
 /* Temporary scalar-only observation. EMS request/result slots correspond
  * to service numbers 40h..5fh. Not a mapping or dispatch interface. */
