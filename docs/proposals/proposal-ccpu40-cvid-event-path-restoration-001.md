@@ -149,6 +149,16 @@ No source-only claim of full timing correctness or promise to delete the whole
 overlay. If the candidate cannot close, name the precise missing dependency
 and earlier recovery rungs before proposing any alternative.
 
+### T407 platform-carrier receiver
+
+T407 S6 transfers CPU40 TR/TSS and table-register lifecycle here. Before
+changing that carrier, prove original kernel ownership and why its task
+initializer cannot compose in the standalone worker. Test valid TR and I/O
+bitmap behavior, failure, reset and worker teardown using only guest values;
+a no-hit source scan or successful MEM run is not acceptance. Do not introduce
+a kernel scheduler, trap layer, generic guest-pointer manager or task policy.
+See [T407 S6 evidence](../etc/evidence/m0-t407-s6-platform-carrier-disposition.md).
+
 Builds/intermediates stay in build/, current approved publication follows
 ntvdm32.exe and runtime observations stay in `O:\ntvdm64\logs\`. Run
 documentation governance, link and diff checks. Unresolved mandatory behavior

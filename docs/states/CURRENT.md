@@ -2,32 +2,17 @@
 
 ## Current Work
 
-**Active: M0 T407 S5.**
+**No active M/T/S packet.**
 
-## Active Packet
+## T407 Closure Record
 
-### M0 T407 S5 — descriptor-domain separation
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T407 S5, Ordinary Mode, one agent implements then independently re-reviews the completed diff. |
-| Admission And Approval | Owner approved: “准入，按照最小diff的原则执行。本T任务剩下的S任务都自动准入，按照该原则的设计执行，直到T任务收口为止。” This admits S5 and the remaining bounded S packets under the approved S4 design. |
-| Candidate Proposal | [Original DPMI and XMS contract restoration](../proposals/proposal-dpmi-xms-contract-restoration-001.md). |
-| Objective | Restore separate original-shaped descriptor domains for DOSX GDT/IDT and process-LDT publication, eliminate the U03 selector-cache guess and `0040h` CPU bypass, and retain only finite CCPU table-register bindings. |
-| Non-goals | No TSS/TEB/VDM_DPMIINFO lifecycle redesign (next S), no CPU instruction behavior change, broker work, D35/D36/D37 change, or premature WOW/WRITE acceptance. |
-| Reference Baseline | [S4 audit/design](../etc/evidence/m0-t407-s4-u03-u04-audit-and-design.md) at `9234a98de`, original `dpmi386.c`, `dxboot.asm`, CCPU table-register interfaces, and all prior T407 evidence. |
-| Files And ABI Surface | `mvdm-host/dpmi32/{dpmi32.c,dpmiselr.c,modesw.c,data.c,dpmi32p.h,dpmidata.h}`, `softpc.new/base/ccpu386/c_seg.c`, effective-address adapter, bounded fixtures/build records, Status and indexed evidence. |
-| Applicable Rules | Goal, architecture, coding, execution, document and source-policy authorities; four-rung source-recovery audit and mirror/overlay ownership rules. |
-| Verification | Descriptor-domain fixture, original-source review, fresh formal x86 link, deployed MEM regression, governance, diff review, commit and push. Full platform reset/teardown and WOW acceptance transfer to S6. |
-| Expected Markers | GDT, IDT and LDT have distinct backing/registration; original descriptor publication order is foreground; no `0040h` CCPU special case or register-order cache choice remains. |
-| Asset Needs | Existing pinned OpenNT/OpenNT-4.5 source trees, selected local mirrors, adapter/overlay registers and retained formal-build manifests; all comparison inputs are read-only. No new source or media. |
-| Reporting Requirements | Record removals, retained table-register seams, original owner/path, test results and residual TSS/TEB/stack receiver. |
-| Stop Conditions | A required TSS/TEB/stack behavior, unavailable descriptor source, failed domain fixture or any necessary CPU-core change pauses this S and opens the next bounded design rather than inventing policy. |
-| Exit Criteria | Source-shaped table domains and U03 resolution are proven; all stated checks pass; evidence/authorities are reviewed, committed and pushed. |
-| Original Owner Request | “准入下一个包。先进行当前状态审计，本T任务范畴内的diff都有哪些，给出应该如何清理的方案。” |
-| Similar-Issue Sweep | 53:00/53:01/53:02 ordering, NSetSegmentDscr updates, all CCPU table register consumers, cache reloads, c_seg diagnostics, descriptor source reuse, reset and selected overlay paths. |
-
-S1–S4 are delivered at `13fc0fd4b`, `d36c9e611`, `d16e3a72e` and `9234a98de`. The owner has now authorized S5 and remaining minimal-diff repairs through T407 closure.
+T407 is closed after S1–S6. S1–S4 established the source-first ledger and
+restored XMS/frame boundaries; S5 delivered descriptor-domain separation and
+removed the cache/`0040h` policy at `e8e41ab7f`; S6 completed the remaining
+platform-carrier disposition. The [S6 record](../etc/evidence/m0-t407-s6-platform-carrier-disposition.md)
+names the TSS/TR and FastWOW receiver packages and the unproven BOP 53:11/WOW
+frontier. This closure does not claim full WRITE, task-switch, FastWOW, or
+multi-session-IDT acceptance.
 
 T406 is closed by its final delivery; [S2 closure evidence](../etc/evidence/m0-t406-s2-original-restoration.md#s2-final-x86-width-and-access-boundary-disposition)
 records its restored cohorts, remaining registered seams, trace hit/no-hit results,

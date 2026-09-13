@@ -88,3 +88,13 @@ Builds stay under `build/`, runtime observations under `O:\ntvdm64\logs\`;
 publication follows the executable contract admitted at implementation time.
 Run governance, relative-link and diff checks. Candidate documentation is not
 runtime repair or authorization to install fonts or attach a debugger now.
+
+### T407 platform-carrier receiver
+
+T407 S6 transfers FastWOW's guest TEB/TD-prefix projection here. First prove
+whether the selected WOW provider reaches `fastwow.asm`; then verify original
+`WOW32Reserved`, `vpStack`, `vpCBStack` and `FastWowEsp` ordering at first
+entry, callback return, task exit and worker reuse. A modern host TEB must
+never enter guest memory. If private TEB lifecycle cannot compose, retain only
+the documented finite guest projection and prove failure/reset/teardown. See
+[T407 S6 evidence](../etc/evidence/m0-t407-s6-platform-carrier-disposition.md).
