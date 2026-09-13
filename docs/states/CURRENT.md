@@ -2,9 +2,25 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T407 closed with the
-[DPMI/XMS closure record](../history/m0-t407-dpmi-xms-contract-restoration.md)
-and [S14 source/runtime evidence](../etc/evidence/m0-t407-s14-fsti-fixed-selector-recovery.md).
+**Active: M0 T408 S1.**
+
+## Active Packet
+
+### M0 T408 S1 — RTL recovery map and frozen baseline
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T408 S1, Ordinary Mode, one agent implements the bounded audit, then independently reviews its evidence and diff. |
+| Admission And Approval | Owner admitted the queued RTL package with: “单人双角色模式执行当前T任务：`Plan RTL restoration subtask sequence` 恢复原始opennt源代码接入 减少overlay和diff并跑通测试。” |
+| Candidate Proposal | [Original RTL and character-conversion restoration](../proposals/proposal-rtl-character-conversion-restoration-001.md). |
+| Objective | Freeze the selected x86 source/build baseline and reconcile D11–D16/D26 with original owner paths, current mirror/overlay/adapter providers, direct callers, ABI/failure contracts and measured removable footprint. |
+| Non-goals | No bulk import, product behavior change, broker/CLI/CPU work, kernel-shell recreation, or unreviewed replacement implementation. |
+| Files And ABI Surface | Source/build manifests, owner ledgers, Status and indexed S1 evidence only; no public ABI change. |
+| Verification | Original/current path and selected-build search; per-cohort line/path count; four-rung recovery ledger; independent review; governance, diff review, commit/push. |
+| Exit Criteria | An indexed matrix assigns every D11–D16/D26 target an original owner, current provider, reachable consumer, proposed final placement and source-first disposition; it defines a source-proven S2 cohort without code changes. |
+| Stop Conditions | Missing source, non-composable kernel dependency, unselected current provider or broader component boundary is recorded as a decision point, never replaced speculatively. |
+| Original Owner Request | “恢复原始opennt源代码接入 减少overlay和diff并跑通测试。” |
+| Similar-Issue Sweep | RTL arithmetic/fill, environment, status, USER conversion, NetAPI conversion, x86-width residue, overlays and current project-defined duplicate providers. |
 
 T406 is closed by its final delivery; [S2 closure evidence](../etc/evidence/m0-t406-s2-original-restoration.md#s2-final-x86-width-and-access-boundary-disposition)
 records its restored cohorts, remaining registered seams, trace hit/no-hit results,
