@@ -2,7 +2,30 @@
 
 ## Current Work
 
-**No active M/T/S packet.**
+**Active: M0 T411 S1.**
+
+## Active Packet
+
+### M0 T411 S1 — CCPU40 C-VID/event diff audit and restoration proposal
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T411 S1, Ordinary Mode. |
+| Admission And Approval | Owner admitted the next queue package: “准入下一个任务；S1审计当前所有CCPU40 CVID相关diff并给我proposal”. |
+| Candidate Proposal | [CCPU40 C-VID and event-path research and restoration](../proposals/proposal-ccpu40-cvid-event-path-restoration-001.md). |
+| Objective | Produce a complete, reviewable ledger of all selected CCPU40 C-VID and event-path mirror diffs, overlays, generated bindings and autonomous providers; map each to its original owner, formal build selection and call reachability, then propose grouped source-first restoration with estimated removable footprint. |
+| Non-goals | No product semantic repair, CPU instruction change, CPU30/MONITOR selection, broker work, guest execution claim, new timing policy, or deletion of a provider before the ledger and proposal are reviewed. |
+| Reference Baseline | T405 U01 audit; T406/T407 recovery evidence; T410 Console closure; selected Win32/x86 CCPU40 is the sole product profile. The candidate proposal's source observations are hypotheses to revalidate, not completed restoration. |
+| Files And ABI Surface | Selected `mvdm-host/softpc.new` C-VID/event/CCPU sources, `mvdm-host-overlay`, C-VID binding generator and manifests, selected adapter seams, x86 Ninja graph and source/evidence indexes. No public ABI change in S1. |
+| Applicable Rules | Goal, architecture, coding, execution, documentation and source-policy authorities; historical-recovery and CPU compatibility-profile gates. |
+| Verification | Reproducible source/current and build-graph inventory; original/current hunk and symbol comparison; macro/provider/caller reachability review; overlay and generated-output provenance checks; `git diff --check` and documentation governance. No build is required unless needed to establish the selected graph. |
+| Expected Markers | One row per C-VID/event divergence with owner, four-rung recovery disposition, selected caller, reachability confidence, and removable/retained line count; one grouped proposal that names prerequisites, boundaries, tests and stop conditions. |
+| Asset Needs | Existing read-only selected OpenNT/OpenNT-4.5 trees, current mirrors/overlays, local x86 build generators and retained audit evidence. No imported source, guest media or host component. |
+| Reporting Requirements | Report every current CCPU40 C-VID/event diff and overlay, distinguishing original-source recovery, bounded adapter mechanics, external-patch carrier and autonomous behavior. State exact removal estimates and unresolved source gaps; do not represent an unreachable symbol as unnecessary. |
+| Stop Conditions | A purported C-VID/event change reaches CPU instruction semantics, requires CPU30/MONITOR/kernel-VDM/private CSR behavior, lacks provenance, or requires an unapproved provider. Pause, document the boundary and name the proper receiver. |
+| Exit Criteria | Indexed S1 evidence and a source-first grouped restoration proposal cover the complete selected cohort, including generated and overlay surfaces; governance passes; report findings to owner before any S2 implementation. |
+| Original Owner Request | “准入下一个任务；S1审计当前所有CCPU40 CVID相关diff并给我proposal”. |
+| Similar-Issue Sweep | `cpu4gen.h`, C-VID vectors and generated binders; `quick_ev.c`/`qevnt.c`; CCPU heartbeat/calibration; `ntstubs.c`; video/global initialization; null/duplicate vector slots; event callback/wait/reset lifecycle. |
 
 ## M0 T410 S1 Closure Record
 
