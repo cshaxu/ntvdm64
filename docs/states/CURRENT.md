@@ -2,30 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T410 S3.**
-
-## Active Packet
-
-### M0 T410 S3 — native Console palette and buffer capability recovery
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T410 S3, Ordinary Mode. |
-| Admission And Approval | Owner approved continuation: “准入”. This is the remaining D34 slice of the already admitted T410 candidate. |
-| Candidate Proposal | [Console input, display and resource restoration](../proposals/proposal-console-input-display-resource-restoration-001.md). |
-| Objective | Recover D34's useful original per-buffer palette/state policy through supported native Console capability, or establish the exact unavailable Console-Server boundary and source-shaped caller failure behavior. Retire any independent presentation fallback and avoid changing guest video semantics. |
-| Non-goals | No replacement GUI backend, Console Server/CSRSS reconstruction, broker/CLI/DPMI/WOW repair, host mutation, fake-success capability stub, guest video emulation rewrite, or general CPU change. |
-| Reference Baseline | S1 retired the isolated app window. S2 completed D09/D24/D25/D28--D30 source/build recovery through P1--P5: pointer/text-cursor separation, returned-input prepend/NOWAIT/NOREMOVE, Alt+Enter pairing, character normalization, and embedded-ROM ownership. S3 P6 restores D34's original graphics-buffer call, removes the unpresented DIB/palette substitute, and restores the original x86 two-byte VDM text-cell layout. Automated real-conhost input/text acceptance and the layout-ownership limitation are recorded in the indexed evidence. |
-| Files And ABI Surface | Original SoftPC graphics callers, the private Console palette adapter and presentation capability boundary, focused tests and indexed evidence; public CLI, accepted mouse model and guest video ABI remain unchanged. |
-| Applicable Rules | Source policy; goal, architecture, coding, execution and documentation authorities; the source-first historical-recovery gate. |
-| Verification | Original/current palette-call and buffer-state ledger; focused capability/failure fixtures; formal x86 build/link; conhost and Terminal observations separately if a reachable graphics workload exists; governance, links and diff review. |
-| Expected Markers | Original palette callers retain their order and guest semantics; supported host behavior is bounded and observable, or unsupported behavior fails rather than pretending success; no independent-window fallback. |
-| Asset Needs | Existing selected OpenNT mirrors and build graph; local formal x86 toolchain; existing `O:\ntvdm64` package and `O:\ntvdm64\logs\` observation location. No new source or host component. |
-| Reporting Requirements | Name original caller, Console Server owner and modern binding; distinguish conhost, Terminal and unavailable graphical capability evidence; report any exact unavailable boundary without treating a fixture as graphics acceptance. |
-| Stop Conditions | Required behavior requires Console Server/private GUI mechanics, a proposed repair changes guest palette semantics without source support, or a different provider is required. Pause and name the receiver rather than invent one. |
-| Exit Criteria | D34 has original/current disposition, focused positive/negative evidence and an explicit supported or unavailable host capability; no independent window route is restored. T410 then reconciles all eight rows and either closes or records a source-proven receiver. |
-| Original Owner Request | “准入”. |
-| Similar-Issue Sweep | `SetConsolePalette`, palette allocation/realization, active/output buffer identity, presentation snapshots/events, buffer close/reset and any private-window fallback. |
+**No active M/T/S packet.**
 
 ## M0 T410 S1 Closure Record
 
