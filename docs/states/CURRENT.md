@@ -2,25 +2,30 @@
 
 ## Current Work
 
-**Active: none — M0 T408 closed.**
+**Active: M0 T409 S2.**
 
 ## Active Packet
 
-### M0 T408 — closed RTL restoration package
+### M0 T409 S2 — original DEM/VDD handle lifecycle recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T408, closed after S1--S7 source/binding recovery and evidence review. |
-| Admission And Approval | Owner admitted the queued RTL package with: “单人双角色模式执行当前T任务：`Plan RTL restoration subtask sequence` 恢复原始opennt源代码接入 减少overlay和diff并跑通测试。” |
-| Candidate Proposal | [Original RTL and character-conversion restoration](../proposals/proposal-rtl-character-conversion-restoration-001.md). |
-| Objective | Completed: restore original D11--D16/D26 owners where composable, remove duplicate providers, and publish final binding dispositions. |
-| Non-goals | No broker/CLI/CPU architecture change, new NetAPI transport, or WRITE lifecycle repair. |
-| Files And ABI Surface | Selected USER source slice under `opennt-host`, finite modern conversion/publication bindings only where original dependencies cannot compose, focused fixtures, Status and indexed S5 evidence; no guest ABI change. |
-| Verification | Full selected x86 rebuild, focused fixtures, MEM/COMMAND/EDIT regression, bounded WRITE frontier observation, source/diff review, commit/push. |
-| Exit Criteria | Met for source-owner recovery and focused x86 proof. The Console-redirection observation is recorded and transferred, not a T408 source-owner blocker. |
-| Stop Conditions | An unavailable direct USER dependency, a required private server behavior without finite public closure, or a failed owner fixture is recorded and stops replacement rather than adding a substitute converter. |
-| Original Owner Request | “恢复原始opennt源代码接入 减少overlay和diff并跑通测试。” |
-| Similar-Issue Sweep | All reduced `RtlNtStatusToDosError` callers, LastStatusValue accessors, Base/COMMAND failures, USER/NetAPI conversion surfaces, x86-width residue, overlays and current project-defined duplicate providers. |
+| Identifier Mode | M0 T409 S2, Ordinary Mode. |
+| Admission And Approval | Owner approved: “准入第一个队列任务并开始执行”。 |
+| Candidate Proposal | [DOS file-service restoration](../proposals/proposal-dos-file-service-restoration-001.md). |
+| Objective | Restore the original D31--D33 algorithm in `demfile.c` through scoped guest-memory views and reduce the shadow provider to finite lease mechanics. |
+| Non-goals | No fast-read implementation, broker/CLI/CPU change, generic guest-pointer manager, or unreviewed persistent guest alias. |
+| Reference Baseline | T409 S1 audit: `m0-t409-s1-vdd-handle-lifecycle-audit.md`; original bodies are frozen at `demfile.c:891--1211`. |
+| Files And ABI Surface | `mvdm-host/dos/dem/demfile.c`, VDD/WOW callers, `mvdm_vdd_sft_shadow` and checked guest-memory lease carriers. |
+| Applicable Rules | Source policy, architecture/coding rules and Execution historical-recovery gate. |
+| Verification | Focused handle lifecycle fixture, x86 formal graph, original/source diff review, selected file caller regression and governance gate. |
+| Expected Markers | Original allocation/association/retrieve/release ordering, scoped lease lifetime, exact rollback publication, and reduced shadow footprint. |
+| Asset Needs | Existing OpenNT external source, selected x86 build graph and existing guest-memory fixture surface. |
+| Reporting Requirements | Record retained binding lines, removed duplicate algorithm, fixture/build evidence and any unavailable original dependency. |
+| Stop Conditions | A lifecycle operation requiring a durable guest alias or a caller whose write ordering cannot be represented by scoped commit pauses recovery. |
+| Exit Criteria | Original algorithm owns D31--D33; duplicate shadow traversal/mutation is removed; focused tests and selected x86 composition pass. |
+| Original Owner Request | “准入第一个队列任务并开始执行”。 |
+| Similar-Issue Sweep | DEM handles, VDD SFT/JFT helpers, WOW32 file callers, `demRead` publication and existing fast-read overlay. |
 
 S6 closed: original D26 `copystr.c` was already selected; the only retained
 OEM conversion is the necessary Unicode-to-guest lease seam.  See
