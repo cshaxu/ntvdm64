@@ -2,23 +2,23 @@
 
 ## Current Work
 
-**Active: M0 T408 S2.**
+**Active: M0 T408 S3.**
 
 ## Active Packet
 
-### M0 T408 S2 — x86 RTL arithmetic and fill restoration
+### M0 T408 S3 — original RTL environment recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T408 S2, Ordinary Mode, one agent implements the bounded recovery, then independently reviews source, build and runtime evidence. |
+| Identifier Mode | M0 T408 S3, Ordinary Mode, one agent implements the bounded recovery, then independently reviews source, build and runtime evidence. |
 | Admission And Approval | Owner admitted the queued RTL package with: “单人双角色模式执行当前T任务：`Plan RTL restoration subtask sequence` 恢复原始opennt源代码接入 减少overlay和diff并跑通测试。” |
 | Candidate Proposal | [Original RTL and character-conversion restoration](../proposals/proposal-rtl-character-conversion-restoration-001.md). |
-| Objective | Restore D13--D15 from their original x86 RTL owners, retire the three C replacements where source/build evidence permits, and prove arithmetic/fill contracts through their reached consumers. |
-| Non-goals | No environment/status/USER/redirector recovery, broker/CLI/CPU work, kernel-shell recreation, or unreviewed replacement implementation. |
-| Files And ABI Surface | Original RTL source under `opennt-host`, x86 build composition, focused fixtures, Status and indexed S2 evidence; no guest ABI change. |
-| Verification | Reproducible x86 source/build gate; divide/multiply/fill edge fixtures; `nt_timer`, `copy_fnc` and `wkmem` consumer regression; formal build, diff review, commit/push. |
-| Exit Criteria | The original owner or a source-proven exact-build form replaces the 33-line C provider, original local `copy_fnc` semantics remain preserved, and focused plus selected runtime regressions pass. |
-| Stop Conditions | An unavailable original toolchain, unresolved original dependency, or failed contract fixture is recorded and stops replacement rather than retaining a new substitute silently. |
+| Objective | Restore D11's original environment ownership into `opennt-host`, retire the independent mutable-MULTI_SZ implementation, and bind only finite VM/PEB mechanics required by the original body. |
+| Non-goals | No status/USER/redirector recovery, broker/CLI/CPU work, kernel-shell recreation, or unreviewed replacement implementation. |
+| Files And ABI Surface | Original RTL environment source under `opennt-host`, finite VM/PEB binding, focused fixtures, Status and indexed S3 evidence; no guest ABI change. |
+| Verification | Create/clone/set/replace/delete/destroy and failure fixtures; Base VDM environment lifetime; selected x86 build and COMMAND regression; formal build, diff review, commit/push. |
+| Exit Criteria | Original environment algorithms own mutation and lifetime; the remaining adapter is only a same-shaped VM/PEB boundary; normal and failure cleanup are proven. |
+| Stop Conditions | An unavailable original dependency, exception/PEB semantic that cannot be finitely bound, or failed ownership fixture is recorded and stops replacement rather than adding a substitute algorithm. |
 | Original Owner Request | “恢复原始opennt源代码接入 减少overlay和diff并跑通测试。” |
 | Similar-Issue Sweep | RTL arithmetic/fill, environment, status, USER conversion, NetAPI conversion, x86-width residue, overlays and current project-defined duplicate providers. |
 
