@@ -27,6 +27,7 @@ int main(void)
     HANDLE saved_output;
     HANDLE text_output;
     HANDLE input;
+    DWORD input_mode;
     CONSOLE_CURSOR_INFO cursor_before;
     CONSOLE_CURSOR_INFO cursor_after;
     DWORD text_state_length = 0u;
@@ -48,7 +49,6 @@ int main(void)
     if (VDMConsoleOperation(0xffffffffu, &state) ||
         GetLastError() != ERROR_CALL_NOT_IMPLEMENTED) return 2;
     if (ShowConsoleCursor(INVALID_HANDLE_VALUE, TRUE) != -1) return 3;
-    if (GetConsoleInputWaitHandle() == NULL) return 4;
     /* This private NT4 graphics-buffer operation must not claim a public
      * Console palette implementation.  Keep it before the interactive-input
      * guard so a pipe-hosted run still proves this exact negative contract. */
@@ -56,7 +56,23 @@ int main(void)
         GetLastError() != ERROR_CALL_NOT_IMPLEMENTED) return 8;
     input = GetStdHandle(STD_INPUT_HANDLE);
     if (input == NULL || input == INVALID_HANDLE_VALUE ||
-        !FlushConsoleInputBuffer(input)) return 18;
+        !GetConsoleMode(input, &input_mode)) {
+        input = CreateFileA("CONIN$", GENERIC_READ | GENERIC_WRITE,
+            FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0u,
+            NULL);
+        if (input == INVALID_HANDLE_VALUE) {
+            (void)FreeConsole();
+            if (!AllocConsole()) return 18;
+            input = CreateFileA("CONIN$", GENERIC_READ | GENERIC_WRITE,
+                FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0u,
+                NULL);
+        }
+        if (input == INVALID_HANDLE_VALUE ||
+            !SetStdHandle(STD_INPUT_HANDLE, input) ||
+            !GetConsoleMode(input, &input_mode)) return 18;
+    }
+    if (GetConsoleInputWaitHandle() != input || !FlushConsoleInputBuffer(input))
+        return 18;
     tail.EventType = KEY_EVENT;
     tail.Event.KeyEvent.bKeyDown = TRUE;
     tail.Event.KeyEvent.uChar.UnicodeChar = L'T';
@@ -119,6 +135,7 @@ int main(void)
         FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, CONSOLE_TEXTMODE_BUFFER,
         NULL);
     if (text_output == INVALID_HANDLE_VALUE ||
+        !SetConsoleActiveScreenBuffer(text_output) ||
         !SetStdHandle(STD_OUTPUT_HANDLE, text_output) ||
         !GetConsoleCursorInfo(text_output, &cursor_before) ||
         ShowConsoleCursor(text_output, FALSE) != -1 ||
@@ -133,10 +150,12 @@ int main(void)
     ((uint8_t *)text_buffer)[1] = 0x07u;
     ((uint8_t *)text_buffer)[2] = 'K';
     ((uint8_t *)text_buffer)[3] = 0x07u;
-    if (!InvalidateConsoleDIBits(text_output, &text_rect) ||
-        !ReadConsoleOutputCharacterA(text_output, text_result, 2u,
-            (COORD){ 0, 0 }, &text_read) || text_read != 2u ||
-        memcmp(text_result, "OK", 2u) != 0 || observed_count != 2u) return 16;
+    if (!InvalidateConsoleDIBits(text_output, &text_rect)) return 16;
+    if (!ReadConsoleOutputCharacterA(text_output, text_result, 2u,
+            (COORD){ 0, 0 }, &text_read)) return 17;
+    if (text_read != 2u) return 21;
+    if (memcmp(text_result, "OK", 2u) != 0) return 22;
+    if (observed_count != 2u) return 23;
     (void)RegisterConsoleVDM(CONSOLE_UNREGISTER_VDM, NULL, NULL, NULL, 0u,
         &text_state_length, &text_state, NULL, 0u, text_size, &text_buffer);
     (void)SetStdHandle(STD_OUTPUT_HANDLE, saved_output);

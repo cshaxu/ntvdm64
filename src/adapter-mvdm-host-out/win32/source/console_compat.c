@@ -265,11 +265,10 @@ BOOL WINAPI RegisterConsoleVDM(DWORD flags, HANDLE start_event,
     }
     if (!session_presentation_text_acquire_writable(owner,
             (uint32_t)buffer_size.X, (uint32_t)buffer_size.Y,
-#ifdef MONITOR
+            /* OpenNT Console Server maps x86 VDM cells as char/attribute
+             * pairs.  MONITOR is retired and must not select a different
+             * layout in the sole Win32/x86 CCPU40 product. */
             2u,
-#else
-            4u,
-#endif
             &text_buffer)) {
         SetLastError(ERROR_NOT_ENOUGH_MEMORY);
         return FALSE;

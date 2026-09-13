@@ -113,6 +113,16 @@ fixture exits `18` here because `CONIN$` is a pipe; its palette-negative
 assertion precedes that guard, so this result also proves no palette success
 was fabricated. It is not graphical conhost or Terminal acceptance.
 
+The first automatic conhost run exposed a real text-path defect: the adapter
+allocated non-`MONITOR` VDM cells as four bytes, while the original x86
+`SrvRegisterConsoleVDM` maps `VDMBufferSize.X * VDMBufferSize.Y * 2` bytes.
+The source-facing host writes character/attribute pairs, so the incorrect
+four-byte stride made the second text cell disappear on the public Console.
+S3 now fixes the sole x86 CCPU40 layout at two bytes per cell. The fixture
+then allocates or opens a genuine `CONIN$` endpoint when its harness inherited
+a pipe and passes end-to-end (`PASS`, exit `0`), including the `OK` text
+rectangle readback. The formal worker was relinked again after this repair.
+
 The fixture and adapter compiled and linked as x86 from
 `build/M0-T388/S7/console-contract-x86`. The noninteractive automation
 environment supplies a pipe rather than `CONIN$`; the executable exits `18`
