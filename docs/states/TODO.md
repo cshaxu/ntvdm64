@@ -3,6 +3,7 @@
 | Priority | Debt | Admission path |
 | --- | --- | --- |
 | P1 | Full WRITE lifecycle remains unproved; preserve the malformed-arena/environment evidence and unaccepted provider/transition WIP without promoting it to a product baseline. | Owner review of the original-owner audit, followed by an active recovery packet. |
+| P2 | MEM.EXE reports 4294939856 as largest executable program size alongside 655360 conventional bytes. Cause and impact remain unproved; see [integration evidence](../etc/evidence/m0-t406-s1-physical-mapping-design.md#p4-ordinary-program-integration-mapping-coverage). | Original DOS allocation/query and memory-provider owner audit, preferably assessed with the DPMI/XMS candidate; no repair admitted by the mapping observation. |
 | P1 | Preserve a reproducible Bochs 2.6 source/notice/patch manifest after T95 imports the local baseline. | Source-policy review and manifest verification. |
 | P1 | Keep the Bochs build surface minimal as later guest callers request features. | Per-feature OpenNT caller evidence, boundary rationale and negative test. |
 | P2 | Produce a neutral Bochs/OpenNT hard-boundary report for later `ntvdm64` architecture work. | First admitted bridge slice with no runtime dependency on `ntvdm64`. |

@@ -391,3 +391,77 @@ Review: only observation and its adapter test change product/test source;
 original conditions, return values and mapping mutations are retained. No
 autonomous mapping implementation was removed or declared source-equivalent.
 Broader width-pattern audit and mapping consumer coverage remain open in S1.
+
+## P4 ordinary program integration mapping coverage
+
+Owner request: “我要的是咱们跑集成测试 比如mem.exe command.com edit.com
+还有write.exe 看看是否有过命中”. Tests now run the deployed product and guest
+programs, not the adapter fixture. No product source, EXE or guest media changed.
+Execution/document governance keeps this within the active S1 observation brief.
+
+The test-only tests/observation/mapping_workload_observer.c was compiled with
+MSVC x86 /TC /MT /W4 /WX and kernel32.lib/user32.lib into
+build/M0-T406/S1/r002-workload-observation/mapping-workload-observer.exe.
+It creates a dedicated real Console, preserves ordinary product arguments and
+environment, captures public Console text and child-owned window captions,
+and bounds each product to approximately 20 seconds. It injects paired Esc
+for EDIT's welcome dialog and paired exit/Enter for COMMAND. A private Job
+owns the suspended-created child before it starts, records new-process events,
+and cleans only that test's processes. No debugger, guest inspection, BOP
+selector, product option, broad diagnostic environment or semantic provider is
+involved. Host launch uses Start-Process -WindowStyle Hidden; each observer has
+an outer 35-second watchdog. The observer's zero exit is not product acceptance.
+
+Initial host Console was 39 columns; the first MEM run is retained separately.
+Early harness sizing attempts returned ERROR_INVALID_PARAMETER (87) before
+product launch and are not counted as integration runs. The final harness
+successfully expands the backing buffer to 80 columns, records the remaining
+window-rectangle failure without changing the product, and retains actual
+dimensions in each snapshot. EDIT itself selects an 80x25 screen. OEM border
+glyphs in the byte-text report are not a rendering-fidelity judgment.
+
+Frozen input SHA-256:
+
+| Input under O:\ntvdm64\ | SHA-256 |
+| --- | --- |
+| ntvdm32.exe | e952e78f1202ed1f95427bd7d6178b722d8b64bf839edf14c5717d489e612e6d |
+| MEM.EXE | c4582b1e0738f3aaf89e17de0f940caa7e4b3d77a21fccd6ff91b7e075bdf6eb |
+| COMMAND.COM | 908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43 |
+| EDIT.COM | e0a0b24fee4037cb050670661c30ad7ecc0ea9483938152fca3d807c443e8a46 |
+| system32/WRITE.EXE | 08ee1659788880fb593815ff9609bfe76743c1182d05e6702764bf3dff68b30b |
+
+Final repeated suite, working directory O:\ntvdm64\, command prefix
+O:\ntvdm64\ntvdm32.exe (one binary argument, no extra product options):
+
+| Binary argument | Product PID | Reached behavior | Mapping call/hit evidence |
+| --- | --- | --- | --- |
+| mem.exe | 12020 | Prints conventional/extended/XMS totals; exits 0. | Observer-active only. |
+| command.com | 33516 | Shows DOS banner and package-directory prompt; consumes injected exit and returns 0. | Observer-active only. |
+| edit.com | 48312 | Shows original welcome and editor; paired Esc dismisses welcome, editor remains responsive to that input. Observation ends at timeout and Job cleanup; not a normal guest exit. | Observer-active only. |
+| system32\\write.exe | 8444 | Blank Console, early exit 255; no visible WRITE window observed. | Observer-active only; no claim WRITE initialization completed. |
+
+Each final Job reported only its root PID: no additional child process was
+observed through Job new-process notifications. For each listed PID the
+corresponding physical-mapping log has exactly one record:
+translate.observer-active, a=000c0000. Neither any of the three public mapping
+call markers nor publish/prepare/activation/removal/alias-hit/external-hit was
+observed. This agrees with the preceding full suite (17128/12696/19000/50460).
+The consumer calls remain statically linked; no trace absence authorizes their
+removal or replacement with success stubs. In particular, early WRITE exit
+provides no DIB-use coverage, and opening EDIT does not exercise every EMS mode.
+
+Raw final reports are O:\ntvdm64\logs\t406-r002-mem-job.txt,
+t406-r002-command-job.txt, t406-r002-edit-job.txt and t406-r002-write-job.txt
+in the same directory. Exact mapping files there are:
+
+- physical-mapping-12020-01dd43211eee8b0d.log
+- physical-mapping-33516-01dd43211f48e913.log
+- physical-mapping-48312-01dd4321231a1295.log
+- physical-mapping-8444-01dd43212f47cb04.log
+
+Additional finding: MEM prints 4294939856 as largest executable program size,
+despite 655360 conventional bytes. This is an observed anomalous report, not
+proof of a mapping fault or a successful memory semantic test. Its original
+DOS allocation/query and memory-provider cause is unassigned research debt;
+do not fix it as part of logging. WRITE's exit 255 is likewise an execution
+limit here, not a newly established cause. Full WRITE remains existing debt.

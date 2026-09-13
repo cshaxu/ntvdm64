@@ -38,6 +38,17 @@ Observation is implemented and verified: fresh x86 link, baseline/observed
 adapter tests and denied-log test pass; command.com /c exit returns 0 and
 records observer-active only. See the linked S1 evidence P3 section for log
 events, limitations and build identity. Actual EDIT/EMS/DIB coverage remains open.
+Owner follow-up: “我要的是咱们跑集成测试 比如mem.exe command.com edit.com
+还有write.exe 看看是否有过命中”. Run these four deployed ordinary CLI
+workloads with bounded real-Console observation, automated welcome dismissal
+and command exit, PID-correlated mapping logs and test-owned process cleanup.
+Only a test harness may be added under tests/observation; its fresh build root
+is build/M0-T406/S1/r002-workload-observation. No product change is needed.
+Four-program integration completed and repeated with Job PID tracking: MEM
+and COMMAND exit 0; EDIT reaches welcome/editor and accepts Esc before timed
+cleanup; WRITE exits 255 before visible UI. All four logs contain observer-active
+only, no mapping call/hit. See S1 evidence P4; this does not prove mapping
+unnecessary or WRITE/DIB correctness. MEM's anomalous size output is debt.
 
 ## Active Packet
 
